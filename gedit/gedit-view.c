@@ -40,7 +40,7 @@
 #include "gedit-view.h"
 #include "gedit-debug.h"
 #include "gedit-menus.h"
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 
 #include "gedit-marshal.h"
 

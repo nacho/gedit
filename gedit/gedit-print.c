@@ -50,7 +50,7 @@
 #include "gedit-print.h"
 #include "gedit-debug.h"
 #include "gedit-document.h"
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 
 #define CM(v) ((v) * 72.0 / 2.54)
 #define A4_WIDTH (210.0 * 72 / 25.4)

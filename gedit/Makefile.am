@@ -3,9 +3,6 @@ SUBDIRS= dialogs recent-files
 
 bin_PROGRAMS = gedit
 
-uidir = $(datadir)/gedit-2/ui/
-
-
 INCLUDES =							\
 	-I$(top_srcdir)						\
 	-I$(top_builddir)					\
@@ -24,27 +21,29 @@ INCLUDES =							\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED
 
+noinst_LIBRARIES = libgedit.a
+
 gedit_LDFLAGS = -export-dynamic
 
-gedit_LDADD = 				\
+gedit_LDADD =				\
+	libgedit.a			\
 	dialogs/libdialogs.a		\
 	recent-files/librecent.a	\
 	$(GEDIT_LIBS)			
 
 IDL_FILE = GNOME_Gedit.idl
 
-IDL_SOURCES = \
-	GNOME_Gedit-stubs.c			\
-	GNOME_Gedit-common.c			\
-	GNOME_Gedit-skels.c			\
+IDL_SOURCES = 				\
+	GNOME_Gedit-stubs.c		\
+	GNOME_Gedit-common.c		\
+	GNOME_Gedit-skels.c		\
 	GNOME_Gedit.h		
 
 BUILT_SOURCES = 			\
 	gedit-marshal.c			\
 	gedit-marshal.h	
 
-headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
-header_DATA = 				\
+APP_H_FILES =				\
 	gedit2.h			\
 	gedit-utils.h 			\
 	gedit-mdi.h			\
@@ -52,7 +51,6 @@ header_DATA = 				\
 	gedit-document.h 		\
 	gedit-view.h 			\
 	gedit-menus.h			\
-	gedit-debug.h 			\
 	gedit-file.h			\
 	gedit-commands.h		\
 	gedit-undo-manager.h		\
@@ -64,11 +62,23 @@ header_DATA = 				\
 	gedit-file-selector-util.h 	\
 	gedit-plugins-engine.h		\
 	gedit-plugin.h			\
-	gedit-prefs-manager.h		\
+	gedit-prefs-manager-app.h	\
 	gedit-recent.h			\
 	gedit-application-server.h	\
-	gedit-encodings.h		\
 	gedit-output-window.h
+
+LIB_H_FILES =				\
+	gedit-encodings.h		\
+	gedit-convert.h			\
+	gedit-debug.h			\
+	gedit-prefs-manager.h		
+
+
+headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
+
+header_DATA = 				\
+	$(APP_H_FILES)			\
+	$(LIB_H_FILES)
 
 gedit_SOURCES = 			\
 	$(IDL_SOURCES)			\
@@ -78,7 +88,6 @@ gedit_SOURCES = 			\
 	gedit-document.c 		\
 	gedit-view.c 			\
 	gedit-menus.c			\
-	gedit-debug.c 			\
 	gedit-utils.c 			\
 	gedit-commands.c		\
 	gedit-file.c			\
@@ -91,17 +100,24 @@ gedit_SOURCES = 			\
 	gedit-file-selector-util.c 	\
 	gedit-plugins-engine.c		\
 	gedit-plugin.c			\
-	gedit-prefs-manager.c		\
+	gedit-prefs-manager-app.c	\
 	gedit-recent.c			\
 	gedit-application-server.c	\
 	gedit-document-server.c		\
 	gedit-document-server.h		\
 	gedit-window-server.c		\
 	gedit-window-server.h		\
-	gedit-encodings.c		\
 	gedit-output-window.c		\
-	$(header_DATA)			\
+	$(APP_H_FILES)			\
 	$(BUILT_SOURCES)
+
+libgedit_a_SOURCES = 			\
+	gedit-debug.c			\
+	gedit-convert.c			\
+	gedit-encodings.c		\
+	gedit-prefs-manager.c		\
+	gedit-prefs-manager-private.h	\
+	$(LIB_H_FILES)
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
@@ -114,6 +130,7 @@ $(IDL_SOURCES): $(IDL_FILE)
 	$(ORBIT_IDL) -I $(LIBBONOBO_IDL) -I $(BONOBO_ACTIVATION_IDL) $(IDL_FILE)
 
 ui_DATA = gedit-ui.xml
+uidir = $(datadir)/gedit-2/ui/
 
 idl_DATA = $(IDL_FILE)
 idldir = $(datadir)/idl

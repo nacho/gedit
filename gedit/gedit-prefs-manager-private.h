@@ -1,9 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-recent.c
+ * gedit-prefs-manager-private.h
  * This file is part of gedit
  *
- * Copyright (C) 2002 James Willcox
+ * Copyright (C) 2002  Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,37 +20,26 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, 
  * Boston, MA 02111-1307, USA. 
  */
-
+ 
 /*
- * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
 
+#ifndef __GEDIT_PREFS_MANAGER_PRIVATE_H__
+#define __GEDIT_PREFS_MANAGER_PRIVATE_H__
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
+#include <gconf/gconf-client.h>
 
-#include "gedit-recent.h"
-#include "gedit-prefs-manager-app.h"
+typedef struct _GeditPrefsManager 	GeditPrefsManager;
+
+struct _GeditPrefsManager {
+	GConfClient *gconf_client;
+};
+
+extern GeditPrefsManager *gedit_prefs_manager;
+
+#endif /* __GEDIT_PREFS_MANAGER_PRIVATE_H__ */
 
 
-static EggRecentModel *model;
-
-
-EggRecentModel *
-gedit_recent_get_model (void)
-{
-	return model;
-}
-
-void
-gedit_recent_init (void)
-{
-	model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU);
-	egg_recent_model_set_limit (model,
-				gedit_prefs_manager_get_max_recents ());
-
-	egg_recent_model_set_filter_groups (model, "gedit", NULL);
-}

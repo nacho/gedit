@@ -38,7 +38,7 @@
 
 #include "gedit-undo-manager.h"
 #include "gedit-debug.h"
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 #include "gedit-marshal.h"
 
 typedef struct _GeditUndoAction  		GeditUndoAction;

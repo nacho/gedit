@@ -44,11 +44,12 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <eel/eel-vfs-extensions.h>
 
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 #include "gedit-document.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-undo-manager.h"
+#include "gedit-convert.h"
 
 #include "gedit-marshal.h"
 
@@ -690,7 +691,7 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 			file_contents = NULL;
 		}
 		else
-			converted_text = gedit_utils_convert_to_utf8 (file_contents,
+			converted_text = gedit_convert_to_utf8 (file_contents,
 							file_size,
 							&doc->priv->encoding);
 
@@ -774,7 +775,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 			stdin_data = NULL;
 		}
 		else
-			converted_text = gedit_utils_convert_to_utf8 (stdin_data,
+			converted_text = gedit_convert_to_utf8 (stdin_data,
 							-1,
 							&doc->priv->encoding);
 

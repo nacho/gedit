@@ -1,4 +1,42 @@
-2003-03-09  Paolo Maggi <paolo.maggi@polito.it>
+2003-04-09  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* Makefile.am: create a non-installed libgedit.a lib (it will be used
+	 by the nautilus viewer by Jeroen)
+
+	* gedit-prefs-manager-app.[ch]
+	* gedit-prefs-manager-private.h: new files
+
+	* gedit-prefs-manager.[ch]: moved all the functions calling functions
+	outside libgedit.a to gedit-prefs-manager-app.[ch]. Moved the definition
+	of GeditPrefsManager to gedit-prefs-manager-private.h
+
+	* gedit-convert.[ch]: new files
+
+	* gedit-utils.[ch] (gedit_utils_convert_to_utf8)
+	(gedit_utils_convert_to_utf8_from_charset): moved to gedit-convert.[ch]
+
+	* gedit-document.c: include gedit-convert.h and use gedit-prefs-manager-app.h 
+	instead of gedit-prefs-manager.h
+
+	* gedit-file.c: include gedit-prefs-manager-app.h instead of gedit-prefs-manager.h
+	(gedit_file_exit): call gedit_prefs_manager_app_shutdown instead of 
+	gedit_prefs_manager_shutdown
+
+	* gedit-mdi.c: include gedit-prefs-manager-app.h instead of gedit-prefs-manager.h
+	* gedit-view.c: ditto
+
+	* gedit2.c: include gedit-convert.h and use gedit-prefs-manager-app.h 
+	instead of gedit-prefs-manager.h
+	(gedit_handle_automation_cmdline): call gedit_convert_to_utf8 instead of
+	gedit_utils_convert_to_utf8
+	(main): gedit_prefs_manager_app_init instead of gedit_prefs_manager_init
+
+	* dialogs/gedit-preferences-dialog.c: include gedit-prefs-manager-app.h instead 
+	of gedit-prefs-manager.h
+
+	* recent-files/egg-recent-model.c: Update to latest libegg recent-files code
+
+2003-03-09  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-undo-manager.c (gedit_undo_manager_get_type): fixed a 
 	cut and paste bug (s/GeditDocument/GeditUndoManager/)

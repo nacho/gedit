@@ -40,7 +40,7 @@
 #include "bonobo-mdi.h"
 #include "gedit-preferences-dialog.h"
 #include "gedit-debug.h"
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 #include "gedit-view.h"
 #include "gedit-utils.h"
 #include "gedit2.h"

@@ -41,13 +41,14 @@
 
 #include "gedit2.h"
 #include "gedit-mdi.h"
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 #include "gedit-debug.h"
 #include "gedit-file.h"
 #include "gedit-utils.h"
 #include "gedit-session.h"
 #include "gedit-plugins-engine.h"
 #include "gedit-application-server.h"
+#include "gedit-convert.h"
 
 #ifndef GNOME_ICONDIR
 #define GNOME_ICONDIR "" 
@@ -288,7 +289,7 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 			stdin_data = NULL;
 		}
 		else
-			converted_text = gedit_utils_convert_to_utf8 (stdin_data,
+			converted_text = gedit_convert_to_utf8 (stdin_data,
 							-1,
 							NULL);
 
@@ -364,7 +365,7 @@ main (int argc, char **argv)
 	gedit_set_default_icon ();
 	
 	/* Load user preferences */
-	gedit_prefs_manager_init ();
+	gedit_prefs_manager_app_init ();
 	gedit_recent_init ();
 
 	/* Init plugins engine */

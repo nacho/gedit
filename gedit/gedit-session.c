@@ -40,7 +40,7 @@
 #include "gedit-file.h"
 #include "gedit-debug.h"
 #include "gedit-plugins-engine.h"
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 
 /* The master client we use for SM */
 static GnomeClient *master_client = NULL;
@@ -146,7 +146,7 @@ client_die_cb (GnomeClient *client, gpointer data)
 
 	gedit_debug (DEBUG_FILE, "Unref gedit_app_server: DONE");
 
-	gedit_prefs_manager_shutdown ();
+	gedit_prefs_manager_app_shutdown ();
 
 	gedit_plugins_engine_shutdown ();
 

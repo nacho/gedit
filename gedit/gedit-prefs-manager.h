@@ -34,9 +34,137 @@
 #include <gtk/gtkenums.h>
 #include <glib/gslist.h>
 
-#include <bonobo/bonobo-window.h>
-
 #define GEDIT_BASE_KEY	"/apps/gedit-2"
+
+#define GPM_PREFS_DIR			GEDIT_BASE_KEY "/preferences"
+
+/* Editor */
+#define GPM_FONT_DIR			GPM_PREFS_DIR "/editor/font"
+#define GPM_USE_DEFAULT_FONT		GPM_FONT_DIR "/use_default_font"
+#define GPM_EDITOR_FONT			GPM_FONT_DIR "/editor_font"
+
+#define GPM_COLORS_DIR			GPM_PREFS_DIR  "/editor/colors"
+#define GPM_USE_DEFAULT_COLORS		GPM_COLORS_DIR "/use_default_colors"
+#define GPM_BACKGROUND_COLOR		GPM_COLORS_DIR "/background_color"
+#define GPM_TEXT_COLOR			GPM_COLORS_DIR "/text_color"
+#define GPM_SELECTED_TEXT_COLOR		GPM_COLORS_DIR "/selected_text_color"
+#define GPM_SELECTION_COLOR		GPM_COLORS_DIR "/selection_color"
+
+#define GPM_SAVE_DIR			GPM_PREFS_DIR  "/editor/save"
+#define GPM_CREATE_BACKUP_COPY  	GPM_SAVE_DIR "/create_backup_copy"
+#define GPM_BACKUP_COPY_EXTENSION	GPM_SAVE_DIR "/backup_copy_extension"
+
+#define GPM_AUTO_SAVE			GPM_SAVE_DIR "/auto_save"
+#define GPM_AUTO_SAVE_INTERVAL		GPM_SAVE_DIR "/auto_save_interval"
+
+#define GPM_SAVE_ENCODING		GPM_SAVE_DIR "/save_encoding"
+
+#define GPM_UNDO_DIR			GPM_PREFS_DIR  "/editor/undo"
+#define GPM_UNDO_ACTIONS_LIMIT		GPM_UNDO_DIR "/undo_actions_limit"
+
+#define GPM_WRAP_MODE_DIR		GPM_PREFS_DIR "/editor/wrap_mode"
+#define GPM_WRAP_MODE			GPM_WRAP_MODE_DIR "/wrap_mode"
+
+#define GPM_TABS_DIR			GPM_PREFS_DIR "/editor/tabs"
+#define GPM_TABS_SIZE			GPM_TABS_DIR "/tabs_size"
+#define GPM_INSERT_SPACES		GPM_TABS_DIR "/insert_spaces"
+
+#define GPM_AUTO_INDENT_DIR		GPM_PREFS_DIR "/editor/auto_indent"
+#define GPM_AUTO_INDENT			GPM_AUTO_INDENT_DIR "/auto_indent"
+
+#define GPM_LINE_NUMBERS_DIR		GPM_PREFS_DIR "/editor/line_numbers"
+#define GPM_DISPLAY_LINE_NUMBERS 	GPM_LINE_NUMBERS_DIR "/display_line_numbers"
+
+#define GPM_LOAD_DIR			GPM_PREFS_DIR "/editor/load"
+#define GPM_ENCODINGS			GPM_LOAD_DIR "/encodings"
+
+/* UI */
+#define GPM_TOOLBAR_DIR			GPM_PREFS_DIR "/ui/toolbar"
+#define GPM_TOOLBAR_VISIBLE	 	GPM_TOOLBAR_DIR "/toolbar_visible"
+#define GPM_TOOLBAR_BUTTONS_STYLE 	GPM_TOOLBAR_DIR "/toolbar_buttons_style"
+
+#define GPM_STATUSBAR_DIR		GPM_PREFS_DIR "/ui/statusbar"
+#define GPM_STATUSBAR_VISIBLE		GPM_STATUSBAR_DIR "/statusbar_visible"
+#define GPM_STATUSBAR_SHOW_CURSOR_POSITION GPM_STATUSBAR_DIR "/statusbar_show_cursor_position"
+#define GPM_STATUSBAR_SHOW_OVERWRITE_MODE  GPM_STATUSBAR_DIR "/statusbar_show_overwrite_mode"
+
+#define GRM_RECENTS_DIR			GPM_PREFS_DIR "/ui/recents"
+#define GPM_MAX_RECENTS			GRM_RECENTS_DIR "/max_recents"
+
+/* Print*/
+#define GPM_PRINT_PAGE_DIR		GPM_PREFS_DIR "/print/page"
+#define GPM_PRINT_HEADER		GPM_PRINT_PAGE_DIR "/print_header"
+#define GPM_PRINT_WRAP_MODE		GPM_PRINT_PAGE_DIR "/print_wrap_mode"
+#define GPM_PRINT_LINE_NUMBERS		GPM_PRINT_PAGE_DIR "/print_line_numbers"
+
+#define GPM_PRINT_FONT_DIR		GPM_PREFS_DIR "/print/fonts"
+#define GPM_PRINT_FONT_BODY		GPM_PRINT_FONT_DIR "/print_font_body"
+#define GPM_PRINT_FONT_HEADER		GPM_PRINT_FONT_DIR "/print_font_header"
+#define GPM_PRINT_FONT_NUMBERS		GPM_PRINT_FONT_DIR "/print_font_numbers"
+
+#define GPM_WINDOW_DIR			"/gedit-2/window"
+#define GPM_WINDOW_STATE		GPM_WINDOW_DIR "/state"
+#define GPM_WINDOW_WIDTH		GPM_WINDOW_DIR "/width"
+#define GPM_WINDOW_HEIGHT		GPM_WINDOW_DIR "/height"
+
+/* Fallback default values. Keep in sync with gedit.schemas */
+
+#define GPM_DEFAULT_USE_DEFAULT_FONT 	0 /* FALSE */
+#define GPM_DEFAULT_EDITOR_FONT 	(const gchar*) "Monospace 12"
+
+#define GPM_DEFAULT_USE_DEFAULT_COLORS 	1 /* TRUE */
+#define GPM_DEFAULT_BACKGROUND_COLOR	(const gchar*) "#ffffffffffff"
+#define GPM_DEFAULT_TEXT_COLOR		(const gchar*) "#000000000000"
+#define GPM_DEFAULT_SELECTED_TEXT_COLOR	(const gchar*) "#ffffffffffff"
+#define GPM_DEFAULT_SELECTION_COLOR	(const gchar*) "#000000009c9c"
+
+#define GPM_DEFAULT_CREATE_BACKUP_COPY	1 /* TRUE */
+#define GPM_DEFAULT_BACKUP_COPY_EXTENSION (const gchar*) "~"
+
+#define GPM_DEFAULT_AUTO_SAVE		0 /* FALSE */
+#define GPM_DEFAULT_AUTO_SAVE_INTERVAL	10 /* minutes */
+
+#define GPM_DEFAULT_SAVE_ENCODING	(const gchar*) "GEDIT_SAVE_ALWAYS_UTF8"
+
+#define GPM_DEFAULT_UNDO_ACTIONS_LIMIT	25 /* actions */
+
+#define GPM_DEFAULT_WRAP_MODE		"GTK_WRAP_WORD"
+
+#define GPM_DEFAULT_TABS_SIZE		8
+#define GPM_DEFAULT_INSERT_SPACES	0 /* FALSE */
+
+#define GPM_DEFAULT_AUTO_INDENT		0 /* FALSE */
+
+#define GPM_DEFAULT_DISPLAY_LINE_NUMBERS 0 /* FALSE */
+
+#define GPM_DEFAULT_ENCODINGS		{"ISO-8859-15", NULL}
+       	
+#define GPM_DEFAULT_TOOLBAR_VISIBLE	1 /* TRUE */
+#define GPM_DEFAULT_TOOLBAR_BUTTONS_STYLE "GEDIT_TOOLBAR_SYSTEM"
+#define GPM_DEFAULT_TOOLBAR_SHOW_TOOLTIPS 1 /* TRUE */
+
+#define GPM_DEFAULT_STATUSBAR_VISIBLE	1 /* TRUE */
+#define GPM_DEFAULT_STATUSBAR_SHOW_CURSOR_POSITION 1 /* TRUE */
+#define GPM_DEFAULT_STATUSBAR_SHOW_OVERWRITE_MODE 1 /* TRUE */
+
+#define GPM_DEFAULT_PRINT_HEADER	1 /* TRUE */
+#define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_CHAR"
+#define GPM_DEFAULT_PRINT_LINE_NUMBERS	0 /* No numbers */
+
+#define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Monospace Regular 9"
+#define GPM_DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Sans Regular 11"
+#define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Sans Regular 8"
+
+#define GPM_DEFAULT_MAX_RECENTS		5
+
+#define GPM_DEFAULT_WINDOW_STATE	0
+#define GPM_DEFAULT_WINDOW_WIDTH	650
+#define GPM_DEFAULT_WINDOW_HEIGHT	500
+
+#define GPM_DEFAULT_WINDOW_STATE_STR	"0"
+#define GPM_DEFAULT_WINDOW_WIDTH_STR	"650"
+#define GPM_DEFAULT_WINDOW_HEIGHT_STR	"500"
+
 
 typedef enum {
 	GEDIT_TOOLBAR_SYSTEM = 0,
@@ -213,25 +341,6 @@ const gchar		*gedit_prefs_manager_get_default_print_font_numbers (void);
  * This is configurable only using gconftool or gconf-editor 
  */
 gint		 	 gedit_prefs_manager_get_max_recents		(void);
-
-/* Window state */
-gint		 	 gedit_prefs_manager_get_window_state		(void);
-void 			 gedit_prefs_manager_set_window_state		(gint ws);
-gboolean		 gedit_prefs_manager_window_state_can_set	(void);
-
-/* Window height */
-gint		 	 gedit_prefs_manager_get_window_height		(void);
-gint		 	 gedit_prefs_manager_get_default_window_height	(void);
-void 			 gedit_prefs_manager_set_window_height		(gint wh);
-gboolean		 gedit_prefs_manager_window_height_can_set	(void);
-
-/* Window width */
-gint		 	 gedit_prefs_manager_get_window_width		(void);
-gint		 	 gedit_prefs_manager_get_default_window_width	(void);
-void 			 gedit_prefs_manager_set_window_width		(gint ww);
-gboolean		 gedit_prefs_manager_window_width_can_set	(void);
-
-void			 gedit_prefs_manager_save_window_size_and_state (BonoboWindow *window);
 
 /* Encodings */
 GSList 			*gedit_prefs_manager_get_encodings		(void);

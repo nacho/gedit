@@ -44,7 +44,7 @@
 #include "gedit2.h"
 #include "gedit-menus.h"
 #include "gedit-debug.h"
-#include "gedit-prefs-manager.h"
+#include "gedit-prefs-manager-app.h"
 #include "gedit-recent.h" 
 #include "gedit-file.h"
 #include "gedit-view.h"
