@@ -171,6 +171,12 @@ create_model (TimeConfigureDialog *dialog)
 	/* create list store */
 	store = gtk_list_store_new (NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
 
+	/* Set tree view model*/
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->list), 
+				 GTK_TREE_MODEL (store));
+
+	g_object_unref (G_OBJECT (store));
+
 	/* add data to the list store */
 	while (formats[i] != NULL)
 	{
@@ -197,7 +203,7 @@ create_model (TimeConfigureDialog *dialog)
 
 		++i;
 	}
-	
+		
 	return GTK_TREE_MODEL (store);
 }
 
@@ -235,18 +241,13 @@ create_formats_list (TimeConfigureDialog *dialog)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
-	GtkTreeModel *model;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (dialog != NULL);
 
-	model = create_model (dialog);
-
-	/* Set tree view model*/
-	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->list), model);
-
-	g_object_unref (G_OBJECT (model));
+	/* Create model, it also add model to the tree view */
+	create_model (dialog);
 	
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (dialog->list), TRUE);
 	

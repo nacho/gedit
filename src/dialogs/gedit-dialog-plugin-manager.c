@@ -330,26 +330,24 @@ dialog_plugin_manager_update_info (GeditDialogPluginManager *dialog, GeditPlugin
 static GeditPluginInfo *
 dialog_plugin_manager_get_selected_plugin (GeditDialogPluginManager *dialog)
 {
-	GeditPluginInfo *info;
+	GeditPluginInfo *info = NULL;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GtkTreeViewColumn *column;
-	GtkTreePath *path;
+	GtkTreeSelection *selection;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->tree));
+	g_return_val_if_fail (model != NULL, NULL);
 
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (dialog->tree), &path, &column);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->tree));
+	g_return_val_if_fail (selection != NULL, NULL);
 
-	g_return_val_if_fail ((path != NULL) && (column != NULL), NULL);
+	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+	{
+		gtk_tree_model_get (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+	}
 	
-	gtk_tree_model_get_iter (model, &iter, path);
-
-	gtk_tree_model_get (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
-
-	gtk_tree_path_free (path);
-
 	return info;
 }
 
