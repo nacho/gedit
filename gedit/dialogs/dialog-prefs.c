@@ -39,9 +39,6 @@ static GtkWidget *statusbar;
 static GtkWidget *splitscreen;
 #endif
 static GtkWidget *autoindent;
-#if 0
-static GtkWidget *wordwrap;
-#endif
 static GtkWidget *toolbar_radio_button_1;
 static GtkWidget *toolbar_radio_button_2;
 static GtkWidget *toolbar_radio_button_3;
@@ -148,9 +145,6 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 #ifdef ENABLE_SPLIT_SCREEN
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
 #endif
-#if 0	
-	settings->word_wrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (wordwrap));
-#endif	
 
 #if 0 /* We are leaking memory here but it is crashing, I will continue tomorrow. */
 	g_print("Font : %s\n:", settings->font);
@@ -222,14 +216,6 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	gedit_prefs_save_settings ();
 
-#if 0	/* This is not working !! because it takes a while to
-	   set the new mdi windows and redraw them, so the raise
-	   or redraw take place before the mdi windows are drawn.
-	   Chema */
-	/* Raise the property box */
-	gtk_widget_queue_resize (GTK_WIDGET(pbox));
-	gtk_widget_queue_draw (GTK_WIDGET(pbox));
-#endif
 }
 
 
@@ -281,10 +267,6 @@ prepare_general_page (GladeXML *gui)
 	toolbar_radio_button_1 = glade_xml_get_widget (gui, "toolbar_radio_button_1");
 	toolbar_radio_button_2 = glade_xml_get_widget (gui, "toolbar_radio_button_2");
 	toolbar_radio_button_3 = glade_xml_get_widget (gui, "toolbar_radio_button_3");
-#if 0	
-	wordwrap = glade_xml_get_widget (gui, "wordwrap");
-#endif
-
 
 	if ( !statusbar ||
 #ifdef ENABLE_SPLIT_SCREEN
@@ -293,11 +275,7 @@ prepare_general_page (GladeXML *gui)
 	     !autoindent ||
 	     !toolbar_radio_button_1 ||
 	     !toolbar_radio_button_2 ||
-	     !toolbar_radio_button_3 ||
-#if 0
-	     !wordwrap ||
-#endif
-		FALSE)
+	     !toolbar_radio_button_3 )
 	{
 		g_warning ("Could not load widgets from prefs.glade correctly\n");
 		return;
@@ -313,10 +291,7 @@ prepare_general_page (GladeXML *gui)
 #endif
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (autoindent),
 				     settings->auto_indent);
-#if 0	
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (toolbar_labels),
-				     settings->toolbar_labels);
-#else
+
 	switch (settings->toolbar_labels)
 	{
 	case GEDIT_TOOLBAR_SYSTEM:
@@ -329,7 +304,6 @@ prepare_general_page (GladeXML *gui)
 		gtk_radio_button_select (GTK_RADIO_BUTTON(toolbar_radio_button_1)->group, 2);
 		break;
 	}
-#endif
 
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (statusbar), "toggled",
@@ -340,10 +314,7 @@ prepare_general_page (GladeXML *gui)
 #endif
 	gtk_signal_connect (GTK_OBJECT (autoindent), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
-#if 0	
-	gtk_signal_connect (GTK_OBJECT (wordwrap), "toggled",
-			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
-#endif	
+
 	gtk_signal_connect (GTK_OBJECT(toolbar_radio_button_1), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 	gtk_signal_connect (GTK_OBJECT(toolbar_radio_button_2), "toggled",
@@ -437,8 +408,8 @@ prepare_fontscolors_page (GladeXML *gui)
 
 	gedit_debug (DEBUG_PREFS, "");
 	
-	foreground = glade_xml_get_widget (gui, "foreground");
-	background = glade_xml_get_widget (gui, "background");
+	foreground  = glade_xml_get_widget (gui, "foreground");
+	background  = glade_xml_get_widget (gui, "background");
 	defaultfont = glade_xml_get_widget (gui, "defaultfont");
 
 	/* setup the initial states */
@@ -496,10 +467,10 @@ prepare_printing_page (GladeXML *gui)
 	gedit_debug (DEBUG_PREFS, "");
 
 	print_header = glade_xml_get_widget (gui, "printheader");
-	print_lines = glade_xml_get_widget (gui, "printlines");
+	print_lines  = glade_xml_get_widget (gui, "printlines");
 	print_lines_spin_button = glade_xml_get_widget (gui, "printlinesspin");
-	lines_label = glade_xml_get_widget (gui, "lineslabel");
-	print_wrap = glade_xml_get_widget (gui, "printwrap");
+	lines_label  = glade_xml_get_widget (gui, "lineslabel");
+	print_wrap   = glade_xml_get_widget (gui, "printwrap");
 	print_orientation_portrait_radio_button = glade_xml_get_widget (gui,
 									"print_orientation_portrait_radio_button");
 
@@ -566,12 +537,24 @@ prepare_pagesize_page (GladeXML *gui)
 }
 
 static void
+gedit_prefs_notebook_switch_page (GtkWidget *widget, gpointer data)
+{
+	g_print ("Page switched\n");
+}
+
+static void
 dialog_prefs_impl (GladeXML *gui)
 {
+	GtkWidget *notebook;
+	
 	gedit_debug (DEBUG_PREFS, "");
 	
 	propertybox = glade_xml_get_widget (gui, "propertybox");
+	notebook    = glade_xml_get_widget (gui, "page_1");
 
+	g_return_if_fail (propertybox != NULL);
+	g_return_if_fail (notebook    != NULL);
+	
 	/* glade won't let me set the title of the propertybox */
 	gtk_window_set_title (GTK_WINDOW (propertybox), _("gedit: Preferences"));
 
@@ -582,22 +565,20 @@ dialog_prefs_impl (GladeXML *gui)
 	prepare_pagesize_page (gui);
 
 	/* connect signals */
-	gtk_signal_connect (GTK_OBJECT (propertybox),
-			    "apply",
+	gtk_signal_connect (GTK_OBJECT (propertybox),"apply",
 			    GTK_SIGNAL_FUNC (apply_cb), NULL);
-
-	gtk_signal_connect (GTK_OBJECT (propertybox),
-			    "destroy",
+	gtk_signal_connect (GTK_OBJECT (propertybox),"destroy",
 			    GTK_SIGNAL_FUNC (destroy_cb), NULL);
-
-	gtk_signal_connect (GTK_OBJECT (propertybox),
-			    "delete_event",
+	gtk_signal_connect (GTK_OBJECT (propertybox),"delete_event",
 			    GTK_SIGNAL_FUNC (gtk_false), NULL);
-
-	gtk_signal_connect (GTK_OBJECT (propertybox),
-			    "help",
+	gtk_signal_connect (GTK_OBJECT (propertybox),"help",
 			    GTK_SIGNAL_FUNC (help_cb), NULL);
 
+	gtk_signal_connect (GTK_OBJECT (notebook),"switch_page",
+			    GTK_SIGNAL_FUNC (gedit_prefs_notebook_switch_page), NULL);
+
+
+	
 	gnome_dialog_set_parent (GNOME_DIALOG (propertybox),
 				 gedit_window_active());
 
@@ -612,6 +593,7 @@ dialog_prefs (void)
 
 	gedit_debug (DEBUG_PREFS, "");
 
+	
 	if (!propertybox)
 	{
 		gui = glade_xml_new (GEDIT_GLADEDIR "prefs.glade", NULL);

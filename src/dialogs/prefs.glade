@@ -18,17 +18,17 @@
   <class>GnomePropertyBox</class>
   <name>propertybox</name>
   <visible>False</visible>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>False</allow_grow>
-  <auto_shrink>False</auto_shrink>
 
   <widget>
     <class>GtkNotebook</class>
     <child_name>GnomePropertyBox:notebook</child_name>
     <name>notebook1</name>
     <can_focus>True</can_focus>
+    <signal>
+      <name>switch_page</name>
+      <handler>gedit_prefs_notebook_switch_page</handler>
+      <last_modification_time>Fri, 30 Jun 2000 15:41:41 GMT</last_modification_time>
+    </signal>
     <show_tabs>True</show_tabs>
     <show_border>True</show_border>
     <tab_pos>GTK_POS_TOP</tab_pos>
@@ -44,7 +44,7 @@
 
     <widget>
       <class>GtkVBox</class>
-      <name>vbox3</name>
+      <name>page_1</name>
       <border_width>2</border_width>
       <homogeneous>False</homogeneous>
       <spacing>2</spacing>
@@ -192,7 +192,7 @@
 
     <widget>
       <class>GtkVBox</class>
-      <name>vbox2</name>
+      <name>page_2</name>
       <border_width>2</border_width>
       <homogeneous>False</homogeneous>
       <spacing>0</spacing>
@@ -415,7 +415,7 @@ Default
 
     <widget>
       <class>GtkVBox</class>
-      <name>vbox1</name>
+      <name>page_3</name>
       <border_width>2</border_width>
       <homogeneous>False</homogeneous>
       <spacing>2</spacing>
@@ -640,7 +640,7 @@ Default
 
       <widget>
 	<class>GtkFrame</class>
-	<name>frame6</name>
+	<name>page_4</name>
 	<border_width>2</border_width>
 	<label>Printing</label>
 	<label_xalign>0</label_xalign>
