@@ -126,6 +126,7 @@ void 		gedit_document_delete_text 	(GeditDocument *doc,
 gchar*		gedit_document_get_chars 	(GeditDocument *doc, 
 					         gint start, gint end);
 
+gchar*		gedit_document_get_selected_text (GeditDocument *doc);
 
 /* Multi-level Undo/Redo operations */
 gboolean	gedit_document_can_undo		(const GeditDocument *doc);
@@ -137,12 +138,25 @@ void		gedit_document_redo 		(GeditDocument *doc);
 void		gedit_document_begin_not_undoable_action 	(GeditDocument *doc);
 void		gedit_document_end_not_undoable_action		(GeditDocument *doc);
 
+void		gedit_document_begin_user_action (GeditDocument *doc);
+void		gedit_document_end_user_action	 (GeditDocument *doc);
+
 void		gedit_document_goto_line 	(GeditDocument* doc, guint line);
+
 gchar* 		gedit_document_get_last_searched_text (GeditDocument* doc);
+gchar* 		gedit_document_get_last_replace_text  (GeditDocument* doc);
+
 gboolean	gedit_document_find 		(GeditDocument* doc, const gchar* str, 
 						 gboolean from_cursor, 
 						 gboolean case_sensitive);
 gboolean	gedit_document_find_again	(GeditDocument* doc);
+
+void		gedit_document_replace_selected_text (GeditDocument *doc, 
+						      const gchar *replace);
+gboolean	gedit_document_replace_all (GeditDocument *doc,
+				            const gchar *find, const gchar *replace, 
+					    gboolean case_sensitive);
+
 #endif /* __GEDIT_DOCUMENT_H__ */
 
 

@@ -1,8 +1,35 @@
+2001-12-17  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-commands.c (gedit_cmd_search_replace): call gedit_dialog_replace ()
+
+	* gedit-document.c: added last_replace_text and last_search_was_case_sensitive
+	fields to GeditDocumentPrivate
+	(gedit_document_finalize): free last_replace_text
+	(gedit_document_get_short_name): return the right value when  doc->priv->uri != NULL
+	(gedit_document_begin_user_action): new public function
+	(gedit_document_end_user_action): ditto
+	(gedit_document_get_last_searched_text): call gedit_debug
+	(gedit_document_get_last_replace_text): new public function
+	(gedit_document_find): cleaned
+	(gedit_document_get_selected_text): new public function
+	(gedit_document_replace_selected_text): ditto
+	(gedit_document_replace_all): ditto
+
+	* gedit-document.h: added prototypes for new public functions (see gedit-document.c log)
+	
+	* dialogs/gedit-dialog-replace.c: added support for replace; find and replace dialog are no more
+	modal
+
+	Thanks to snorp (James Willcox  <jwillcox@cs.indiana.edu>) for his
+	help in implementing find and replace.
+	
 2001-12-14  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* gedit-marshal.list: added this file with one marshaller, which
 	previously was in libgnome.
+
 	* Makefile.am: generate, use, and dist gedit-marshal.*
+
 	* bonobo-mdi.c: replace gnome_marshal with gedit_marshal
 
 2001-12-12  Paolo Maggi  <maggi@athena.polito.it>

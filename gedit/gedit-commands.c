@@ -141,7 +141,7 @@ gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 {
 
 	TO_BE_IMPLEMENTED
-/*		
+/*	
 	GeditMDIChild *active_child;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
@@ -332,7 +332,7 @@ gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const g
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
-				_("The searched string has not been found."));
+				_("The string \"%s\" has not been found."), last_searched_text);
 
 			gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
@@ -356,10 +356,7 @@ gedit_cmd_search_replace (BonoboUIComponent *uic, gpointer user_data, const gcha
 {
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	TO_BE_IMPLEMENTED
-/*
 	gedit_dialog_replace ();
-*/
 }
 
 void 
@@ -453,8 +450,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 
 	if (about != NULL)
 	{
-		gdk_window_show(about->window);
-		gdk_window_raise(about->window);
+		gdk_window_show (about->window);
+		gdk_window_raise (about->window);
 		return;
 	}
 	
@@ -467,8 +464,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 				(const char *)translator_credits,
 				NULL);
 	
-	gtk_signal_connect(GTK_OBJECT(about), "destroy",
-			   GTK_SIGNAL_FUNC(gtk_widget_destroyed), &about);
+	gtk_signal_connect (GTK_OBJECT (about), "destroy",
+			   GTK_SIGNAL_FUNC (gtk_widget_destroyed), &about);
 	
 	gtk_widget_show (about);
 }

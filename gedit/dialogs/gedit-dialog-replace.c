@@ -66,6 +66,10 @@ struct _GeditDialogFind {
 	GtkWidget *cursor;
 };
 
+static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
+
+static void dialog_find_response_handler (GtkDialog *dlg, gint res_id,  GeditDialogFind *find_dialog);
+
 static void find_dlg_find_button_pressed (GeditDialogFind * dialog);
 
 static void replace_dlg_find_button_pressed (GeditDialogReplace * dialog);
@@ -74,6 +78,55 @@ static void replace_dlg_replace_all_button_pressed (GeditDialogReplace * dialog)
 
 static GeditDialogReplace *dialog_replace_get_dialog 	(void);
 static GeditDialogFind    *dialog_find_get_dialog 	(void);
+
+static void
+dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
+{
+	gedit_debug (DEBUG_SEARCH, "");
+
+	if (dialog_pointer != NULL)
+	{
+		g_free (*dialog_pointer);
+		*dialog_pointer = NULL;
+	}	
+}
+
+static void
+dialog_replace_response_handler (GtkDialog *dlg, gint res_id,  GeditDialogReplace *replace_dialog)
+{
+	gedit_debug (DEBUG_SEARCH, "");
+
+	switch (res_id) {
+		case GEDIT_RESPONSE_FIND:
+			replace_dlg_find_button_pressed (replace_dialog);
+			break;
+			
+		case GEDIT_RESPONSE_REPLACE:
+			replace_dlg_replace_button_pressed (replace_dialog);
+			break;
+			
+		case GEDIT_RESPONSE_REPLACE_ALL:
+			replace_dlg_replace_all_button_pressed (replace_dialog);
+			break;
+		default:
+			gtk_widget_destroy (replace_dialog->dialog);
+	}
+}
+
+static void
+dialog_find_response_handler (GtkDialog *dlg, gint res_id,  GeditDialogFind *find_dialog)
+{
+	gedit_debug (DEBUG_SEARCH, "");
+
+	switch (res_id) {
+		case GEDIT_RESPONSE_FIND:
+			find_dlg_find_button_pressed (find_dialog);
+			break;
+
+		default:
+			gtk_widget_destroy (find_dialog->dialog);
+	}
+}
 
 static GeditDialogReplace *
 dialog_replace_get_dialog (void)
@@ -87,6 +140,10 @@ dialog_replace_get_dialog (void)
 	
 	if (dialog != NULL)
 	{
+		gdk_window_show (dialog->dialog->window);
+		gdk_window_raise (dialog->dialog->window);
+		gtk_widget_grab_focus (dialog->dialog);
+
 		return dialog;
 	}
 
@@ -105,8 +162,8 @@ dialog_replace_get_dialog (void)
 	dialog = g_new0 (GeditDialogReplace, 1);
 
 	dialog->dialog = gtk_dialog_new_with_buttons ("Replace",
-						      window,
-						      GTK_DIALOG_MODAL,
+						      window,						      
+						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
 						      GTK_RESPONSE_CLOSE,						      
 						      "Replace _All",
@@ -151,11 +208,16 @@ dialog_replace_get_dialog (void)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GEDIT_RESPONSE_FIND);
 
+	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
+			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
+
+	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "response",
+			   GTK_SIGNAL_FUNC (dialog_replace_response_handler), dialog);
+
 	g_object_unref (G_OBJECT (gui));
 	
 	return dialog;
 }
-
 
 static GeditDialogFind *
 dialog_find_get_dialog (void)
@@ -170,6 +232,9 @@ dialog_find_get_dialog (void)
 
 	if (dialog != NULL)
 	{
+		gdk_window_show (dialog->dialog->window);
+		gdk_window_raise (dialog->dialog->window);
+		gtk_widget_grab_focus (dialog->dialog);
 		return dialog;
 	}
 
@@ -189,7 +254,7 @@ dialog_find_get_dialog (void)
 
 	dialog->dialog = gtk_dialog_new_with_buttons ("Find",
 						      window,
-						      GTK_DIALOG_MODAL,
+						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
 						      GTK_RESPONSE_CLOSE,
 						      GTK_STOCK_FIND,
@@ -199,6 +264,7 @@ dialog_find_get_dialog (void)
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
 	content = glade_xml_get_widget (gui, "replace_dialog_content");
+
 	dialog->search_entry       = glade_xml_get_widget (gui, "search_for_text_entry");
 	
 	replace_hbox       	   = glade_xml_get_widget (gui, "hbox_replace_with");
@@ -206,8 +272,6 @@ dialog_find_get_dialog (void)
 	dialog->case_sensitive     = glade_xml_get_widget (gui, "case_sensitive");
 	dialog->beginning          = glade_xml_get_widget (gui, "beginning_radio_button");
 	dialog->cursor		   = glade_xml_get_widget (gui, "cursor_radio_button");
-
-
 
 	if (!content			||
 	    !dialog->search_entry 	||
@@ -226,12 +290,17 @@ dialog_find_get_dialog (void)
 	
 	gtk_widget_hide (replace_hbox);
 
-
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GEDIT_RESPONSE_FIND);
+
+	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
+			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
+
+	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "response",
+			   GTK_SIGNAL_FUNC (dialog_find_response_handler), dialog);
 
 	g_object_unref (G_OBJECT (gui));
 	
@@ -251,7 +320,7 @@ gedit_dialog_find (void)
 
 	dialog = dialog_find_get_dialog ();
 	if (dialog == NULL) {
-		g_warning ("Could not create the Find dialog");
+		g_warning ("Cannot create the Find dialog");
 		return;
 	}
 
@@ -274,22 +343,11 @@ gedit_dialog_find (void)
 	}
 
 	gtk_widget_grab_focus (dialog->search_entry);
+	
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);
-		
-	do
-	{
-		response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
-
-		switch (response) {
-			case GEDIT_RESPONSE_FIND:
-				find_dlg_find_button_pressed (dialog);
-				break;
-
-			default:
-				gtk_widget_hide (dialog->dialog);
-		}
-
-	} while (GTK_WIDGET_VISIBLE (dialog->dialog));
+	
+	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
+		gtk_widget_show (dialog->dialog);
 }
 
 void
@@ -297,12 +355,16 @@ gedit_dialog_replace (void)
 {
 	GeditDialogReplace *dialog;
 	gint response;
+	GeditMDIChild *active_child;
+	GeditDocument *doc;
+	gchar* last_searched_text;
+	gchar* last_replace_text;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
 	dialog = dialog_replace_get_dialog ();
 	if (dialog == NULL) {
-		g_warning ("Could not create the Replace dialog");
+		g_warning ("Cannot create the Replace dialog");
 		return;
 	}
 
@@ -311,40 +373,40 @@ gedit_dialog_replace (void)
 				      (bonobo_mdi_get_active_window
 				       (BONOBO_MDI (gedit_mdi))));
 
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_child != NULL);
+
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+
+	last_searched_text = gedit_document_get_last_searched_text (doc);
+	if (last_searched_text != NULL)
+	{
+		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
+		g_free (last_searched_text);	
+	}
+
+	last_replace_text = gedit_document_get_last_replace_text (doc);
+	if (last_replace_text != NULL)
+	{
+		gtk_entry_set_text (GTK_ENTRY (dialog->replace_entry), last_replace_text);
+		g_free (last_replace_text);	
+	}
+
 	gtk_widget_grab_focus (dialog->search_entry);
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
 			GEDIT_RESPONSE_REPLACE, FALSE);
 	
-	do
-	{
-		response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
-
-		switch (response) {
-			case GEDIT_RESPONSE_FIND:
-				replace_dlg_find_button_pressed (dialog);
-				break;
-
-			case GEDIT_RESPONSE_REPLACE:
-				replace_dlg_replace_button_pressed (dialog);
-				break;
-
-			case GEDIT_RESPONSE_REPLACE_ALL:
-				replace_dlg_replace_all_button_pressed (dialog);
-				break;
-
-			default:
-				gtk_widget_hide (dialog->dialog);
-		}
-				
-	} while (GTK_WIDGET_VISIBLE (dialog->dialog));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);
+	
+	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
+		gtk_widget_show (dialog->dialog);
 }
 
 static void
 find_dlg_find_button_pressed (GeditDialogFind *dialog)
 {
-	/* FIXME : there is no case sensitive */
-
 	GeditMDIChild *active_child;
 	GeditView* active_view;
 	GeditDocument *doc;
@@ -354,6 +416,9 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 	
 	gedit_debug (DEBUG_SEARCH, "");
 
+	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
+		return;
+	
 	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
 	g_return_if_fail (active_child != NULL);
 
@@ -373,8 +438,14 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 		from_cursor = FALSE;
 	else
 		from_cursor = TRUE;
+
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
+		case_sensitive = FALSE;
+	else
+		case_sensitive = TRUE;
 			
-	if (!gedit_document_find (doc, search_string, from_cursor, TRUE))
+	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive))
 	{	
 		GtkWidget *message_dlg;
 
@@ -383,7 +454,7 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
-				_("The searched string has not been found."));
+				_("The string \"%s\" has not been found."), search_string);
 		
 		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 	
@@ -403,25 +474,225 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 static void
 replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 {
-	/* FIXME */
+	/* This is basically the same as find_dlg_find_button_pressed */
+
+	GeditMDIChild *active_child;
+	GeditView* active_view;
+	GeditDocument *doc;
+	const gchar* search_string = NULL;
+	gboolean from_cursor;
+	gboolean case_sensitive;
+	
 	gedit_debug (DEBUG_SEARCH, "");
 
+	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
+		return;
+	
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_child != NULL);
+
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_view != NULL);
+	
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+			
+	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	g_return_if_fail (search_string != NULL);
+
+	if (strlen (search_string) <= 0)
+		return;
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->beginning)))
+		from_cursor = FALSE;
+	else
+		from_cursor = TRUE;
+
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
+		case_sensitive = FALSE;
+	else
+		case_sensitive = TRUE;
+			
+	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive))
+	{	
+		GtkWidget *message_dlg;
+
+		message_dlg = gtk_message_dialog_new (
+				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_INFO,
+				GTK_BUTTONS_OK,
+				_("The string \"%s\" has not been found."), search_string);
+		
+		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+	
+		gtk_dialog_run (GTK_DIALOG (message_dlg));
+  		gtk_widget_destroy (message_dlg);
+
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);	
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							GEDIT_RESPONSE_REPLACE, FALSE);
+	
+	}
+	else
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->cursor), TRUE);
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							GEDIT_RESPONSE_REPLACE, TRUE);
+		
+		gedit_view_scroll_to_cursor (active_view);
+	}
 }
 
 static void
 replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 {
-	/* FIXME */
+	GeditMDIChild *active_child;
+	GeditView* active_view;
+	GeditDocument *doc;
+	const gchar* search_string = NULL;
+	const gchar* replace_string = NULL;
+	gchar* selected_text = NULL;
+	gboolean from_cursor;
+	gboolean case_sensitive;
+
 	gedit_debug (DEBUG_SEARCH, "");
 
+	g_return_if_fail (dialog != NULL);
+	
+	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
+	{
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							GEDIT_RESPONSE_REPLACE, FALSE);
+		return;
+	}
+
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_child != NULL);
+
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_view != NULL);
+	
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+
+	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));
+	replace_string = gtk_entry_get_text (GTK_ENTRY (dialog->replace_entry));
+
+	g_return_if_fail (search_string);
+	g_return_if_fail (replace_string);
+
+	if (strlen (search_string) <= 0)
+		return;
+	
+	if (strlen (replace_string) <= 0)
+		return;
+
+	selected_text = gedit_document_get_selected_text (doc);
+
+	if (strcmp (selected_text, search_string) != 0)
+	{
+		gedit_debug (DEBUG_SEARCH, "selected_text (%s) != search_string (%s)", 
+				selected_text, search_string);
+
+		g_free (selected_text);
+
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+			GEDIT_RESPONSE_REPLACE, FALSE);
+		
+		replace_dlg_find_button_pressed (dialog);
+
+		return;
+	}
+				
+	g_free (selected_text);
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
+		case_sensitive = TRUE;
+	else
+		case_sensitive = FALSE;
+
+	gedit_document_replace_selected_text (doc, replace_string);
+
+	/* go ahead and find the next one */
+	if (!gedit_document_find (doc, search_string, TRUE, case_sensitive))
+	{	
+	
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);	
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							GEDIT_RESPONSE_REPLACE, FALSE);	
+	}
+	else
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->cursor), TRUE);
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+							GEDIT_RESPONSE_REPLACE, TRUE);
+		
+		gedit_view_scroll_to_cursor (active_view);
+	}
 }
+
 
 static void
 replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 {
-	/* FIXME */
-	gedit_debug (DEBUG_SEARCH, "");
+	GeditMDIChild *active_child;
+	GeditView* active_view;
+	GeditDocument *doc;
+	const gchar* search_string = NULL;
+	const gchar* replace_string = NULL;
+	gboolean from_cursor;
+	gboolean case_sensitive;
+	gint replaced_items;
+	GtkWidget *message_dlg;
+	
+ 	gedit_debug (DEBUG_SEARCH, "");
 
-	gtk_widget_hide (dialog->dialog);
+	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
+		return;
+
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_child != NULL);
+
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_view != NULL);
+	
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+
+	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	replace_string = gtk_entry_get_text (GTK_ENTRY (dialog->replace_entry));		
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
+		case_sensitive = TRUE;
+	else
+		case_sensitive = FALSE;
+	
+	replaced_items = gedit_document_replace_all (doc, search_string, replace_string, case_sensitive);
+		
+	if (replaced_items <= 0)
+	{
+		message_dlg = gtk_message_dialog_new (
+			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_INFO,
+			GTK_BUTTONS_OK,
+			_("The string \"%s\" has not been found."), search_string);
+	}
+	else
+	{	
+		message_dlg = gtk_message_dialog_new (
+			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_INFO,
+			GTK_BUTTONS_OK,
+			_("Found and replaced %d occurences."), replaced_items);
+	}
+	
+	gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+	
+	gtk_dialog_run (GTK_DIALOG (message_dlg));
+  	gtk_widget_destroy (message_dlg);
 }
 

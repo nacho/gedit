@@ -33,6 +33,7 @@
 
 #include <unistd.h>  
 #include <stdio.h>
+#include <string.h>
 
 #include "gnome-vfs-helpers.h"
 #include "gedit-document.h"
@@ -49,6 +50,8 @@ struct _GeditDocumentPrivate
 	gint 	untitled_number;	
 
 	gchar*  last_searched_text;
+	gchar*  last_replace_text;
+	gboolean  last_search_was_case_sensitive;
 	
 	gboolean readonly;
 
@@ -281,6 +284,9 @@ gedit_document_finalize (GObject *object)
 	if (document->priv->last_searched_text)
 		g_free (document->priv->last_searched_text);
 
+	if (document->priv->last_replace_text)
+		g_free (document->priv->last_replace_text);
+
 	g_object_unref (G_OBJECT (document->priv->undo_manager));
 	
 	g_free (document->priv);
@@ -458,7 +464,7 @@ gedit_document_get_short_name (const GeditDocument* doc)
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
 	else
-		gnome_vfs_x_uri_get_basename (doc->priv->uri);
+		return gnome_vfs_x_uri_get_basename (doc->priv->uri);
 }
 
 GQuark 
@@ -1036,6 +1042,25 @@ gedit_document_end_not_undoable_action	(GeditDocument *doc)
 	gedit_undo_manager_end_not_undoable_action (doc->priv->undo_manager);
 }
 
+void		
+gedit_document_begin_user_action (GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (doc));
+}	
+
+void		
+gedit_document_end_user_action (GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (doc));
+}
 
 
 static void
@@ -1088,12 +1113,24 @@ gedit_document_goto_line (GeditDocument* doc, guint line)
 gchar* 
 gedit_document_get_last_searched_text (GeditDocument* doc)
 {
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+	
+	return doc->priv->last_searched_text != NULL ? 
+		g_strdup (doc->priv->last_searched_text) : NULL;	
+}
+
+gchar*
+gedit_document_get_last_replace_text (GeditDocument* doc)
+{
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 
-	return doc->priv->last_searched_text != NULL ? 
-		g_strdup (doc->priv->last_searched_text) : NULL;	
-}	
+	return doc->priv->last_replace_text != NULL ? 
+		g_strdup (doc->priv->last_replace_text) : NULL;	
+}
 
 gboolean
 gedit_document_find (GeditDocument* doc, const gchar* str, 
@@ -1101,6 +1138,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 {
 	GtkTextIter iter;
 	gboolean found = FALSE;
+	GtkTextSearchFlags search_flags;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -1108,8 +1146,16 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (str != NULL, FALSE);
 
-	/* FIXME: write support for case_sensitive */
+	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 	
+	/* FIXME: enable support for case sensitice -- Paolo */
+	/*
+	if (!case_sensitive)
+	{
+		search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
+	}
+	*/
+
 	if (from_cursor)
 	{
 		GtkTextIter sel_bound;
@@ -1133,11 +1179,9 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
     	{
       		GtkTextIter match_start, match_end;
 
-          	found = gtk_text_iter_forward_search (&iter, str,
-                                               GTK_TEXT_SEARCH_VISIBLE_ONLY |
-                                               GTK_TEXT_SEARCH_TEXT_ONLY,
-                                               &match_start, &match_end,
-                                               NULL);
+          	found = gtk_text_iter_forward_search (&iter, str, search_flags,
+                                        	&match_start, &match_end,
+                                               	NULL);
 		if (found)
 		{
 			gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),
@@ -1151,6 +1195,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 			g_free (doc->priv->last_searched_text);
 
 		doc->priv->last_searched_text = g_strdup (str);
+		doc->priv->last_search_was_case_sensitive = case_sensitive;
 	}
 
 	return found;
@@ -1172,8 +1217,103 @@ gedit_document_find_again (GeditDocument* doc)
 	if (last_searched_text == NULL)
 		return FALSE;
 	
-	found = gedit_document_find (doc, last_searched_text, TRUE, /* FIXME */FALSE);
+	found = gedit_document_find (doc, last_searched_text, TRUE, 
+				doc->priv->last_search_was_case_sensitive);
 	g_free (last_searched_text);
 
 	return found;
 }
+
+gchar*
+gedit_document_get_selected_text (GeditDocument *doc)
+{
+	GtkTextIter iter;
+	GtkTextIter sel_bound;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &iter,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "insert"));
+		
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &sel_bound,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "selection_bound"));
+	gtk_text_iter_order (&sel_bound, &iter);	
+
+	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &iter, &sel_bound, TRUE);
+}
+
+void
+gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
+{
+	GtkTextIter iter;
+	GtkTextIter sel_bound;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (replace != NULL);
+
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &iter,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "insert"));
+		
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &sel_bound,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "selection_bound"));
+		
+	gtk_text_iter_order (&sel_bound, &iter);		
+
+	gedit_document_begin_user_action (doc);
+
+	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc),
+				&iter,
+				&sel_bound);
+
+	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
+				&iter,
+				replace, strlen (replace));
+
+	if (doc->priv->last_replace_text)
+		g_free (doc->priv->last_replace_text);
+
+	doc->priv->last_replace_text = g_strdup (replace);
+
+	gedit_document_end_user_action (doc);
+}
+
+gboolean
+gedit_document_replace_all (GeditDocument *doc,
+	      	const gchar *find, const gchar *replace, gboolean case_sensitive)
+{
+	gboolean from_cursor = FALSE;
+	gboolean cont = 0;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (find != NULL, FALSE);
+	g_return_val_if_fail (replace != NULL, FALSE);
+
+	gedit_document_begin_user_action (doc);
+
+	while (gedit_document_find (doc, find, from_cursor, case_sensitive)) 
+	{
+		gedit_document_replace_selected_text (doc, replace);
+		
+		from_cursor = TRUE;
+		++cont;
+	}
+
+	gedit_document_end_user_action (doc);
+
+	return cont;
+}
+
