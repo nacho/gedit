@@ -35,7 +35,7 @@
 #include "gE_prefs_box.h"
 #include "commands.h"
 #include "gE_mdi.h"
-#include "gE_print.h"
+#include "gedit-print.h"
 #include "menus.h"
 #include "gE_prefs.h"
 #include "search.h"

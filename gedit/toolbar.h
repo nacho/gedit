@@ -23,7 +23,7 @@
 
 #include <gtk/gtk.h>
 #include "main.h"
-#include "gE_print.h"
+#include "gedit-print.h"
 #include "search.h"
 #include "gE_undo.h"
 

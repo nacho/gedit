@@ -27,7 +27,7 @@
 #include "gedit-about.h"
 #include "gE_files.h"
 #include "gE_mdi.h"
-#include "gE_print.h"
+#include "gedit-print.h"
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
 #include "gE_view.h"

@@ -31,7 +31,7 @@
 #include "commands.h"
 #include "search.h"
 #include "gE_mdi.h"
-#include "gE_print.h"
+#include "gedit-print.h"
 #include "menus.h"
 
 /*

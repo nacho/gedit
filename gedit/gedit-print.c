@@ -33,7 +33,7 @@
 #include <gtk/gtk.h>
 #include <time.h>
 #include "main.h"
-#include "gE_print.h"
+#include "gedit-print.h"
 #include "gE_files.h"
 #include "gE_window.h"
 #include "gE_view.h"

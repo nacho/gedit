@@ -27,7 +27,7 @@
 #include "commands.h"
 #include "gE_prefs.h"
 #include "gE_window.h"
-#include "gE_print.h"
+#include "gedit-print.h"
 
 #define GE_DATA		1
 

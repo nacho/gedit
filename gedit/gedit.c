@@ -27,13 +27,13 @@
 
 #include "main.h"
 #include "commands.h"
-#include "gE_window.h"
 #include "gE_mdi.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
 #include "menus.h"
 #include "toolbar.h"
 #include "gE_plugin.h"
+#include "gE_window.h"
 
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>
