@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-29 15:40+0100\n"
-"PO-Revision-Date: 2004-11-04 16:53+0900\n"
+"POT-Creation-Date: 2004-12-05 17:40+0900\n"
+"PO-Revision-Date: 2004-12-05 17:39+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -211,9 +211,8 @@ msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #: data/gedit.schemas.in.h:31
-#, fuzzy
 msgid "Monospace 9"
-msgstr "Monospace 12"
+msgstr "Monospace 9"
 
 #: data/gedit.schemas.in.h:32
 msgid "Monospace Regular 9"
@@ -248,14 +247,12 @@ msgid "Right Margin Position"
 msgstr "右マージンの位置"
 
 #: data/gedit.schemas.in.h:39
-#, fuzzy
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
 #: data/gedit.schemas.in.h:40
-#, fuzzy
 msgid "Sans 8"
-msgstr "スペイン語"
+msgstr "Sans 8"
 
 #: data/gedit.schemas.in.h:41
 msgid "Sans Regular 11"
@@ -317,11 +314,12 @@ msgid ""
 msgstr "ドキュメントを印刷する際の本文に使用するフォントを指定します。"
 
 #: data/gedit.schemas.in.h:49
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "ドキュメントを印刷する際の本文に使用するフォントを指定します。"
+msgstr ""
+"ドキュメントを印刷する際の本文に使用するフォントを指定します。これは gnome-"
+"print 用のフォント名で print_font_body_pango に置き換わります。"
 
 #: data/gedit.schemas.in.h:50
 msgid ""
@@ -332,14 +330,14 @@ msgstr ""
 "プションが 0 以外の場合のみ効果があります。"
 
 #: data/gedit.schemas.in.h:51
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
 "印刷する際の行番号に使用するフォントを指定します。これは \"行番号の印刷\" オ"
-"プションが 0 以外の場合のみ効果があります。"
+"プションが 0 以外の場合のみ効果があります。これは gnome-print 用のフォント名"
+"で print_font_numbers_pango に置き換わります。"
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -350,14 +348,14 @@ msgstr ""
 "は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。"
 
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "ドキュメントを印刷する際のページ・ヘッダに使用するフォントを指定します。これ"
-"は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。"
+"は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。これは gnome-"
+"print 用のフォント名で print_font_header_pango に置き換わります。"
 
 #: data/gedit.schemas.in.h:54
 msgid ""
@@ -1536,9 +1534,9 @@ msgstr[0] "%d 個のファイルを読み込みました"
 msgstr[1] "%d 個のファイルを読み込みました"
 
 #: gedit/gedit-file.c:1262
-#, fuzzy, c-format
+#, c-format
 msgid "Created file \"%s\""
-msgstr "ファイル '%s' を読み込みました"
+msgstr "ファイル '%s' を作成しました"
 
 #: gedit/gedit-file.c:1280
 #, c-format
@@ -1579,29 +1577,28 @@ msgid "Encoding:"
 msgstr "エンコーディング:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:293 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' を開きます"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:529
 msgid "Open a recently used file"
 msgstr "最近使用したファイルを開きます"
 
-#: gedit/gedit-mdi.c:1444 gedit/gedit-mdi.c:1446
-#, fuzzy
+#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
 msgid "Read Only"
-msgstr "(書き込み禁止)"
+msgstr "書き込み禁止"
 
-#: gedit/gedit-mdi.c:2071
+#: gedit/gedit-mdi.c:2072
 msgid "Normal"
 msgstr "通常"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2073
 msgid "Use Normal highlight mode"
 msgstr "通常の強調表示モードにします"
 
-#: gedit/gedit-mdi.c:2148
+#: gedit/gedit-mdi.c:2149
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s 用の強調表示モードにします"
@@ -2485,65 +2482,59 @@ msgstr "指定したエンコーディング \"%s\" は正しくありません\
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "開こうとしているファイルに不正なバイト列が含まれています。"
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
+"gEdit で開こうとしているファイルのエンコーディングを自動的に検出できませんで"
+"した。"
 
 #: plugins/changecase/changecase.c:43
-#, fuzzy
 msgid "C_hange Case"
-msgstr "変更(_N)"
+msgstr "大/小文字の変更(_H)"
 
 #: plugins/changecase/changecase.c:49
 msgid "All _Upper Case"
-msgstr ""
+msgstr "全て大文字にする(_U)"
 
 #: plugins/changecase/changecase.c:50
 msgid "All _Lower Case"
-msgstr ""
+msgstr "全て小文字にする(_L)"
 
 #: plugins/changecase/changecase.c:51
-#, fuzzy
 msgid "_Invert Case"
-msgstr "大/小文字を区別する(_I)"
+msgstr "大/小文字を逆にする(_I)"
 
 #: plugins/changecase/changecase.c:52
-#, fuzzy
 msgid "_Title Case"
-msgstr "タイトル"
+msgstr "先頭文字を大文字にする(_T)"
 
 #: plugins/changecase/changecase.c:54
-#, fuzzy
 msgid "Change selected text to upper case"
-msgstr "選択したテキストの色の取得"
+msgstr "選択したテキストを大文字に変更します"
 
 #: plugins/changecase/changecase.c:55
-#, fuzzy
 msgid "Change selected text to lower case"
-msgstr "選択したテキストの色の取得"
+msgstr "選択したテキストを小文字に変更します"
 
 #: plugins/changecase/changecase.c:56
-#, fuzzy
 msgid "Invert the case of selected text"
-msgstr "選択したテキストを削除します"
+msgstr "選択したテキストの大/小文字を逆にします"
 
 #: plugins/changecase/changecase.c:57
 msgid "Capitalize the first letter of each selected word"
-msgstr ""
+msgstr "選択した単語の先頭文字を大文字にします"
 
 #: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Change Case"
-msgstr "変更(_N)"
+msgstr "大/小文字の変更"
 
 #: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Changes the case of selected text."
-msgstr "選択したテキストを削除します"
+msgstr "選択したテキストの大/小文字を変更します。"
 
 #: plugins/docinfo/docinfo.c:45
 msgid "_Document Statistics"
@@ -3153,76 +3144,3 @@ msgstr "フォーマットのためのプロンプト(_P)"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "フォーマットをカスタマイズする(_U)"
-
-#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-#~ msgstr ""
-#~ "'plugin-manager.glade2' が見つかりませんでした。gedit を再インストールして"
-#~ "下さい。\n"
-
-#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-#~ msgstr ""
-#~ "プラグイン・マネージャの glade ファイルが無効です。一部のウィジットが見つ"
-#~ "かりませんでした。\n"
-
-#~ msgid "_Insert a new preview phrase."
-#~ msgstr "新しいプレビューの挿入(_I)"
-
-#~ msgid "Modify preview phrase..."
-#~ msgstr "プレビュー・フレーズの変更..."
-
-#~ msgid "Preview"
-#~ msgstr "プレビュー"
-
-#~ msgid "_Modify preview phrase..."
-#~ msgstr "プレビュー・フレーズの変更(_M)..."
-
-#~ msgid "Font Selection"
-#~ msgstr "フォントの選択"
-
-#~ msgid "Sans Regular 12"
-#~ msgstr "Sans Regular 12"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaBbCcDd XxYyZz これはサンプルです"
-
-#~ msgid "Pick a Font"
-#~ msgstr "フォントの取得"
-
-#~ msgid "The title of the selection dialog box"
-#~ msgstr "選択ダイアログ・ボックスのタイトル"
-
-#~ msgid "Font name"
-#~ msgstr "フォント名"
-
-#~ msgid "Name of the selected font"
-#~ msgstr "選択したフォントの名前"
-
-#~ msgid "Preview text"
-#~ msgstr "テキストのプレビュー"
-
-#~ msgid "Preview text shown in the dialog"
-#~ msgstr "ダイアログに表示したテキストをプレビューします"
-
-#~ msgid "Use font in label"
-#~ msgstr "ラベル内のフォントを使う"
-
-#~ msgid "Use font in the label in font info mode"
-#~ msgstr "フォント情報モードでラベルのフォントを使います"
-
-#~ msgid "Font size for label"
-#~ msgstr "ラベルのフォント・サイズ"
-
-#~ msgid "Font size for label in font info mode"
-#~ msgstr "フォント情報モードでラベルのフォント・サイズを指定します"
-
-#~ msgid "Show size"
-#~ msgstr "サイズの表示"
-
-#~ msgid "Show size in font info mode"
-#~ msgstr "フォント情報モードでサイズを表示します"
-
-#~ msgid "Font"
-#~ msgstr "フォント"
-
-#~ msgid "(modified)"
-#~ msgstr "(変更しました)"
