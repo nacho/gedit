@@ -343,7 +343,6 @@ doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos,
 		gedit_undo_add (text_to_delete, start_pos, end_pos, GEDIT_UNDO_ACTION_DELETE, doc, view);
 	g_free (text_to_delete);
 
-	g_print ("delete text\n");
 	if (!exclude_this_view)
 		gedit_views_delete (doc, start_pos, end_pos, NULL);
 	else
