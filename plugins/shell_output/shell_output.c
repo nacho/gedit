@@ -345,20 +345,20 @@ destroy (GeditPlugin *plugin)
 G_MODULE_EXPORT GeditPluginState
 update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
-	BonoboUIEngine *ui_engine;
+	BonoboUIComponent *uic;
 	GeditDocument *doc;
 	
 	gedit_debug (DEBUG_PLUGINS, "");	
 	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
 
-	ui_engine = bonobo_window_get_ui_engine (window);
+	uic = gedit_get_ui_component_from_window (window);
 
 	doc = gedit_get_active_document ();
 
 	if ((doc == NULL) || gedit_document_is_readonly (doc))		
-		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, FALSE);
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
 	else
-		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, TRUE);
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
 
 	return PLUGIN_OK;
 }

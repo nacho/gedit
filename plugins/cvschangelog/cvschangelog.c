@@ -151,7 +151,7 @@ destroy (GeditPlugin *plugin)
 G_MODULE_EXPORT GeditPluginState
 update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
-	BonoboUIEngine *ui_engine;
+	BonoboUIComponent *uic;
 	GeditDocument *doc;
 	gchar *buf;
 	GList *list;
@@ -159,7 +159,7 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 	gedit_debug (DEBUG_PLUGINS, "");	
 	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
 
-	ui_engine = bonobo_window_get_ui_engine (window);
+	uic = gedit_get_ui_component_from_window (window);
 
 	doc = gedit_get_active_document ();
 
@@ -168,15 +168,15 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 		list = get_changelogs (buf);
 
 		if (list != NULL)
-			gedit_menus_set_verb_sensitive (ui_engine,
+			gedit_menus_set_verb_sensitive (uic,
 							"/commands/" MENU_ITEM_NAME, TRUE);
 		else
-			gedit_menus_set_verb_sensitive (ui_engine,
+			gedit_menus_set_verb_sensitive (uic,
 							"/commands/" MENU_ITEM_NAME, FALSE);
 
 	}
 	else {
-		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, FALSE);
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
 	}
 
 	return PLUGIN_OK;
