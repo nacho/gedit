@@ -84,6 +84,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 			printf ("gE_prefs_open_file: Couldn't create preferences directory.\n");
 			return NULL;
 		}
+		stat (gedit_dir, &gedit_stats);
 	}
 
 	if (!S_ISDIR (gedit_stats.st_mode))
@@ -165,7 +166,7 @@ int gE_prefs_open ()
 		new = g_malloc0(sizeof(gE_pref));
 		ptr = ptr2 = g_strdup (line);
 
-		while (*ptr2 != '\0' && *ptr2 != '=')
+		while (*ptr2 != '\0' && *ptr2 != '=' && *ptr2 != '\n')
 			ptr2++;
 
 		if (*ptr2 == '\0')
@@ -182,7 +183,7 @@ int gE_prefs_open ()
 			new->name = g_malloc0 (strlen(ptr));
 			new->value = g_malloc0 (strlen(ptr2));
 			strcpy(new->name, ptr);
-			strcpy(new->value, ptr2);
+			strncpy(new->value, ptr2, strlen (ptr2) - 1);
 		}
          	
 		gE_prefs = g_list_append (gE_prefs, new);
