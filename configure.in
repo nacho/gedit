@@ -1,7 +1,7 @@
 AC_INIT(src/gedit.c)
 
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gedit, 0.9.6cvs)
+AM_INIT_AUTOMAKE(gedit, 0.9.6)
 
 AM_MAINTAINER_MODE
 AM_ACLOCAL_INCLUDE(macros)
@@ -107,16 +107,22 @@ else
    AC_MSG_ERROR(Did not find gnome-libs installed)
 fi
 
+dnl  verstxt=`xml-config --version`
+dnl    vers=`echo "$verstxt" | sed -e "s/libxml //" | \
+dnl	awk -F. '{ printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+dnl    if test "$vers" -ge 1008010; then
+dnl	if test "$vers" -lt 2000000; then
+
 dnl ******************************
 dnl gnome-vfs checking
 dnl ******************************
 AC_MSG_CHECKING(for gnome-vfs >= 0.6.2)
 if gnome-config --libs vfs > /dev/null 2>&1; then
-   vers=`gnome-config --modversion vfs | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-   if test "$vers" -ge 6002; then
+   vers=`gnome-config --modversion vfs | sed -e "s/gnome-vfs-//" | awk -F. '{printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+   if test "$vers" -ge 1000000; then
       AC_MSG_RESULT(found)
    else
-      AC_MSG_ERROR(You need at least gnome-vfs 0.6.2 for this version of gedit)
+      AC_MSG_ERROR(You need at least gnome-vfs 1.0 for this version of gedit.)
    fi
 else
    AC_MSG_ERROR(Did not find gnome-vfs installed)
