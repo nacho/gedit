@@ -36,9 +36,6 @@
 #include <glib/gunicode.h>
 #include <libgnome/gnome-i18n.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <eel/eel-gtk-extensions.h>
-#include <eel/eel-vfs-extensions.h>
-#include <eel/eel-string.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -249,7 +246,7 @@ gedit_utils_uri_has_file_scheme (const gchar *uri)
 	canonical_uri = gnome_vfs_make_uri_canonical (uri);
 	g_return_val_if_fail (canonical_uri != NULL, FALSE);
 
-	res = eel_istr_has_prefix (canonical_uri, "file:");
+	res = g_str_has_prefix (canonical_uri, "file:");
 
 	g_free (canonical_uri);
 
@@ -544,7 +541,7 @@ gedit_utils_error_reporting_loading_file (
 						}
 						else
 						{
-							gchar *host_name = eel_make_valid_utf8 (hn);
+							gchar *host_name = gedit_utils_make_valid_utf8 (hn);
 
 							error_message = g_strdup_printf (
 							_("Could not open the file \"%s\" because no host \"%s\" " 
@@ -906,7 +903,7 @@ gedit_utils_error_reporting_reverting_file (
 					}
 					else
 					{
-						gchar *host_name = eel_make_valid_utf8 (hn);
+						gchar *host_name = gedit_utils_make_valid_utf8 (hn);
 
 						error_message = g_strdup_printf (
 						_("Could not revert the file \"%s\" because no host \"%s\" " 
@@ -1381,5 +1378,44 @@ gedit_utils_str_middle_truncate (const char *string,
 	strncpy (truncated + num_left_chars + delimter_length, string + length - num_right_chars + 1, num_right_chars);
 	
 	return truncated;
+}
+
+/* pinched from eel too */
+gchar *
+gedit_utils_make_valid_utf8 (const char *name)
+{
+	GString *string;
+	const char *remainder, *invalid;
+	int remaining_bytes, valid_bytes;
+
+	string = NULL;
+	remainder = name;
+	remaining_bytes = strlen (name);
+
+	while (remaining_bytes != 0) {
+		if (g_utf8_validate (remainder, remaining_bytes, &invalid)) {
+			break;
+		}
+		valid_bytes = invalid - remainder;
+
+		if (string == NULL) {
+			string = g_string_sized_new (remaining_bytes);
+		}
+		g_string_append_len (string, remainder, valid_bytes);
+		g_string_append_c (string, '?');
+
+		remaining_bytes -= valid_bytes + 1;
+		remainder = invalid + 1;
+	}
+
+	if (string == NULL) {
+		return g_strdup (name);
+	}
+
+	g_string_append (string, remainder);
+	g_string_append (string, _(" (invalid Unicode)"));
+	g_assert (g_utf8_validate (string->str, -1, NULL));
+
+	return g_string_free (string, FALSE);
 }
 

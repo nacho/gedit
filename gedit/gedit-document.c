@@ -690,7 +690,7 @@ gedit_document_get_short_name (const GeditDocument* doc)
 			}
 			
 			/* there are problems */
-			utf8_basename = eel_make_valid_utf8 (basename);
+			utf8_basename = gedit_utils_make_valid_utf8 (basename);
 			g_free (basename);
 			return utf8_basename;
 		}
@@ -1814,7 +1814,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 		gchar *scheme_string;
 
 		gchar *temp = gnome_vfs_get_uri_scheme (uri);
-                scheme_string = eel_make_valid_utf8 (temp);
+		scheme_string = gedit_utils_make_valid_utf8 (temp);
 		g_free (temp);
 
 		if (scheme_string != NULL)
