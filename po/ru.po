@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-01 17:07-0400\n"
-"PO-Revision-Date: 2000-05-25 17:52+00:00\n"
+"POT-Creation-Date: 2000-06-03 18:26+0000\n"
+"PO-Revision-Date: 2000-06-03 18:27+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -141,7 +141,7 @@ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:447
+#: src/dialogs/dialog-prefs.c:511
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
@@ -242,67 +242,79 @@ msgstr "Режим:"
 msgid "Notebook Tab Position: "
 msgstr "Положение ярлыков блокнота:"
 
-#: src/dialogs/prefs.glade.h:27
+#: src/dialogs/prefs.glade.h:27 src/menus.c:343
+msgid "Undo"
+msgstr "Откат"
+
+#: src/dialogs/prefs.glade.h:28
+msgid "Set limit on undo levels to :"
+msgstr "Установить предел уровней отката:"
+
+#: src/dialogs/prefs.glade.h:29
+msgid "level(s)"
+msgstr "уровень(и)"
+
+#: src/dialogs/prefs.glade.h:30
 msgid "Documents"
 msgstr "Документы"
 
-#: src/dialogs/prefs.glade.h:28
+#: src/dialogs/prefs.glade.h:31
 msgid "Fonts"
 msgstr "Шрифты"
 
-#: src/dialogs/prefs.glade.h:29
+#: src/dialogs/prefs.glade.h:32
 msgid "Pick a Font"
 msgstr "Выбрать шрифт"
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:33
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМм"
 
-#: src/dialogs/prefs.glade.h:31
+#: src/dialogs/prefs.glade.h:34
 msgid "Default Font: "
 msgstr "Шрифт по умолчанию:"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:35
 msgid "Colors"
 msgstr "Цвета"
 
-#: src/dialogs/prefs.glade.h:33 src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:36 src/dialogs/prefs.glade.h:37
 msgid "Pick a color"
 msgstr "Выбрать цвет"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:38
 msgid "Background: "
 msgstr "Цвет фона:"
 
-#: src/dialogs/prefs.glade.h:36
+#: src/dialogs/prefs.glade.h:39
 msgid "Foreground: "
 msgstr "Цвет текста:"
 
-#: src/dialogs/prefs.glade.h:37
+#: src/dialogs/prefs.glade.h:40
 msgid "Fonts/Colors"
 msgstr "Шрифты/Цвета"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:43
+#: src/dialogs/prefs.glade.h:41 src/dialogs/prefs.glade.h:46
 msgid "Printing"
 msgstr "Печать"
 
-#: src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:42
 msgid "Add header"
 msgstr "Добавить заголовок"
 
-#: src/dialogs/prefs.glade.h:40
+#: src/dialogs/prefs.glade.h:43
 msgid "Enable word wrapping"
 msgstr "Включить перевод строк"
 
-#: src/dialogs/prefs.glade.h:41
+#: src/dialogs/prefs.glade.h:44
 msgid "Print line numbers every:"
 msgstr "Печатать номера строк каждые:"
 
-#: src/dialogs/prefs.glade.h:42
+#: src/dialogs/prefs.glade.h:45
 msgid "line(s)"
 msgstr "строк(и)"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:47
 msgid "Paper"
 msgstr "Бумага"
 
@@ -687,10 +699,6 @@ msgid "Print the current file"
 msgstr "Напечатать текущий файл"
 
 #: src/menus.c:343
-msgid "Undo"
-msgstr "Откат"
-
-#: src/menus.c:343
 msgid "Undo last operation"
 msgstr "Отмена последнего действия"
 
@@ -825,15 +833,3 @@ msgstr "Имя файла"
 #: src/window.c:64
 msgid "Contents"
 msgstr "Содержание"
-
-#~ msgid "Ask before replacing"
-#~ msgstr "Спрашивать перед заменой"
-
-#~ msgid "Find In Files"
-#~ msgstr "Поиск в файлах"
-
-#~ msgid "Search"
-#~ msgstr "Поиск"
-
-#~ msgid "Search for:"
-#~ msgstr "Поиск:"
