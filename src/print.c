@@ -71,6 +71,7 @@ typedef struct _PrintJobInfo {
 	gint   lines_per_page;
 	gint   chars_per_line;
 	guchar* temp;
+	gint   orientation;
 
 	/* Range stuff */
 	gint range;
@@ -97,7 +98,7 @@ static void print_line (PrintJobInfo *pji, int line);
 static void print_ps_line(PrintJobInfo * pji, gint line, gint first_line);
 static int  print_determine_lines (PrintJobInfo *pji, int real);
 static void print_header (PrintJobInfo *pji, unsigned int page);
-static void start_job (GnomePrintContext *pc);
+static void start_job (PrintJobInfo *pji);
 static void print_header (PrintJobInfo *pji, unsigned int page);
 static void print_setfont (PrintJobInfo *pji);
 static void end_page (PrintJobInfo *pji);
@@ -133,6 +134,8 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	pji = g_new0 (PrintJobInfo, 1);
 	pji->paper = gnome_paper_with_name (settings->papersize);
 	g_return_if_fail (pji->paper != NULL);
+	/* Do we need to call master new with orientation ???
+	   I guess so, but it is printing fine now. Chema*/
 	pji->master = gnome_print_master_new();
 	gnome_print_master_set_paper( pji->master, pji->paper);
 	pji->pc = gnome_print_master_get_context(pji->master);
@@ -189,7 +192,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 
 		print_document (doc, pji, NULL);
 		title = g_strdup_printf (_("gedit (%s): Print Preview"), pji->filename);
-		preview = gnome_print_master_preview_new (pji->master, title);
+		preview = gnome_print_master_preview_new_with_orientation (pji->master, title, !pji->orientation);
 		g_free (title);
 		gtk_signal_connect (GTK_OBJECT(preview), "destroy",
 				    GTK_SIGNAL_FUNC(preview_destroy_cb), pji);
@@ -255,7 +258,7 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 
 	current_line = 0;
 	
-	start_job (pji->pc);
+	start_job (pji);
 	
 	for (current_page = 1; current_page <= pji->pages; current_page++)
 	{
@@ -473,8 +476,18 @@ set_pji (PrintJobInfo * pji, Document *doc)
 	else
 		pji->filename = g_strdup (doc->filename);
 
-	pji->page_width  = gnome_paper_pswidth (pji->paper);
-	pji->page_height = gnome_paper_psheight (pji->paper);
+	pji->orientation = PRINT_ORIENT_PORTRAIT;
+	if (pji->orientation == PRINT_ORIENT_LANDSCAPE)
+	{
+		pji->page_width  = gnome_paper_psheight (pji->paper);
+		pji->page_height = gnome_paper_pswidth (pji->paper);
+	}
+	else
+	{
+		pji->page_width  = gnome_paper_pswidth (pji->paper);
+		pji->page_height = gnome_paper_psheight (pji->paper);
+	}
+
 	pji->margin_numbers = .25 * 72;
 	pji->margin_top = .75 * 72;       /* Printer margins, not page margins */
 	pji->margin_bottom = .75 * 72;    /* We should "pull" this from gnome-print when */
@@ -688,9 +701,22 @@ print_determine_lines (PrintJobInfo *pji, int real)
 }
 
 static void
-start_job (GnomePrintContext *pc)
+start_job (PrintJobInfo *pji)
 {
+	double affine [6];
+
 	gedit_debug ("", DEBUG_PRINT);
+
+	if (pji->orientation == PRINT_ORIENT_PORTRAIT)
+		return;
+
+	art_affine_rotate (affine, 90.0);
+	gnome_print_concat (pji->pc, affine);
+
+	art_affine_translate (affine, 0, -pji->page_height);
+	gnome_print_concat (pji->pc, affine);
+
+
 }
 
 static void
@@ -744,9 +770,20 @@ print_setfont (PrintJobInfo *pji)
 static void
 end_page (PrintJobInfo *pji)
 {
+	double affine [6];
+
 	gedit_debug ("", DEBUG_PRINT);
 
 	gnome_print_showpage (pji->pc);
+
+	if (pji->orientation == PRINT_ORIENT_PORTRAIT)
+		return;
+
+	art_affine_rotate (affine, 90.0);
+	gnome_print_concat (pji->pc, affine);
+
+	art_affine_translate (affine, 0, -pji->page_height);
+	gnome_print_concat (pji->pc, affine);
 }
 
 static void

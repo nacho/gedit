@@ -67,6 +67,8 @@ GtkWidget * gedit_view_new (Document *doc);
       guint gedit_view_get_position (View *view);
        void gedit_view_set_selection (View *view, guint  start, guint  end);
        gint gedit_view_get_selection (View *view, guint *start, guint *end);
+       void gedit_view_add_cb (GtkWidget *widget, gpointer data);
+       void gedit_view_remove_cb (GtkWidget *widget, gpointer data);
 
 static void line_pos_cb (GtkWidget *widget, gedit_data *data);
 static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
@@ -377,7 +379,6 @@ gedit_view_class_init (ViewClass *klass)
 static void
 gedit_view_init (View *view)
 {
-/*	GtkWidget *vpaned; */
 	GtkWidget *menu;
 	GtkStyle *style;
 	GdkColor *bg;
@@ -397,36 +398,21 @@ gedit_view_init (View *view)
 	gtk_widget_show (view->pane);
 	
 	/* Create the upper split screen */
-	view->scrwindow[0] = gtk_scrolled_window_new (NULL, NULL);
-	gtk_paned_pack1 (GTK_PANED (view->pane), view->scrwindow[0], TRUE, TRUE);
+	view->window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_paned_pack1 (GTK_PANED (view->pane), view->window, TRUE, TRUE);
 	
-	/*gtk_box_pack_start (GTK_BOX (view->vbox), view->scrwindow[0], TRUE, TRUE, 0);*/
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->scrwindow[0]),
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->window),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
-      	gtk_widget_show (view->scrwindow[0]);
+      	gtk_widget_show (view->window);
 
-	view->line_wrap = 1; /* FIXME use settings->line_wrap and add scroll bars. Chema*/
+        /* FIXME use settings->line_wrap and add scroll bars. Chema*/
+	view->line_wrap = 1;
 
 	view->text = gtk_text_new (NULL, NULL);
 	gtk_text_set_editable (GTK_TEXT(view->text), !view->readonly);
 	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
-	
-	/* - Signals - */
-/*	By chema :
-	gtk_signal_connect_after(GTK_OBJECT (view->text), "button_press_event",
-				 GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
-	gtk_signal_connect_after (GTK_OBJECT (view->text), "key_press_event",
-	GTK_SIGNAL_FUNC (gedit_event_key_press), 0);
-
-	I dont know why this are connected "after".
-	This is causing a bug when you click CTRL+W it will call doc_delete_text_cb
-	before calling key_press_event, since for the text widwet Ctrl+W
-	is delete word ( or something like that ) I will comment this lines
-	to see if there are no side effects because of this change ...
-	Same thing fot the split window ..
-*/
 	
 	gtk_signal_connect (GTK_OBJECT (view->text), "button_press_event",
 			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
@@ -435,32 +421,18 @@ gedit_view_init (View *view)
 
 
 	/* Handle Auto Indent */
-	view->indent = gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
-						 GTK_SIGNAL_FUNC (auto_indent_cb), view);
+	gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
+				  GTK_SIGNAL_FUNC (auto_indent_cb), view);
+	gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
+			    GTK_SIGNAL_FUNC (doc_insert_text_cb), view);
+	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
+			    GTK_SIGNAL_FUNC (doc_delete_text_cb),
+			    (gpointer) view);
 
-	/* I'm not even sure why these are here.. i'm sure there are
-	   much easier ways of implementing undo/redo...  */
-	view->insert = gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
-		                           GTK_SIGNAL_FUNC (doc_insert_text_cb), view);
-	view->delete = gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
-		                           GTK_SIGNAL_FUNC (doc_delete_text_cb),
-		                           (gpointer) view);
+	gtk_container_add (GTK_CONTAINER (view->window), view->text);
 
-/*	gtk_signal_connect_after (GTK_OBJECT(view->text), "key_press_event",
-		GTK_SIGNAL_FUNC(gedit_event_button_press), NULL);*/
-	gtk_container_add (GTK_CONTAINER (view->scrwindow[0]), view->text);
-
-/*	style = gtk_style_new();
-	gtk_widget_set_style(GTK_WIDGET(view->text), style);
-
-	gtk_widget_set_rc_style(GTK_WIDGET(view->text));
-	gtk_widget_ensure_style(GTK_WIDGET(view->text));
-	g_free (style);
-	*/	
-/*	doc->changed = FALSE; */
-
-	view->changed_id = gtk_signal_connect (GTK_OBJECT(view->text), "changed",
-					       GTK_SIGNAL_FUNC (gedit_view_changed_cb), view);
+	gtk_signal_connect (GTK_OBJECT(view->text), "changed",
+			    GTK_SIGNAL_FUNC (gedit_view_changed_cb), view);
 
 	gtk_widget_show (view->text);
 	gtk_text_set_point (GTK_TEXT(view->text), 0);
@@ -537,38 +509,30 @@ gedit_view_init (View *view)
 
 	}
 	
-#ifdef ENABLE_SPLIT_SCREEN    
-	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
-#endif
    	gtk_widget_set_style (GTK_WIDGET(view->text), style);
 	gtk_style_unref (style);
 
-#ifdef ENABLE_SPLIT_SCREEN    
-	gtk_widget_show (view->split_screen);
-	gtk_text_set_point (GTK_TEXT(view->split_screen), 0);
-#endif
 
 	/* Popup Menu */
 	menu = gnome_popup_menu_new (popup_menu);
 	gnome_popup_menu_attach (menu, view->text, view);
-#ifdef ENABLE_SPLIT_SCREEN    	
-	gnome_popup_menu_attach (menu, view->split_screen, view);
-#endif	
 	
         gnome_config_push_prefix ("/gedit/Global/");
-#ifdef ENABLE_SPLIT_SCREEN    	
-	view->splitscreen = gnome_config_get_int ("splitscreen");
-#endif	
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 	
-	/*if (!view->splitscreen)
-	  gtk_widget_hide (GTK_WIDGET (view->split_screen)->parent);*/
 	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
-	/*gtk_fixed_put (GTK_FIXED (view), view->vbox, 0, 0);
-	gtk_widget_show (view->vbox);*/
 
 	gtk_widget_grab_focus (view->text);
+	
+#ifdef ENABLE_SPLIT_SCREEN    
+	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
+	gtk_widget_show (view->split_screen);
+	gtk_text_set_point (GTK_TEXT(view->split_screen), 0);
+	gnome_popup_menu_attach (menu, view->split_screen, view);
+	view->splitscreen = gnome_config_get_int ("splitscreen");
+#endif
+
 }
 
 guint
@@ -795,9 +759,8 @@ gedit_view_get_selection (View *view, guint *start, guint *end)
 }
 
 
-/* Called from the View menu */
 void
-gedit_add_view (GtkWidget *widget, gpointer data)
+gedit_view_add_cb (GtkWidget *widget, gpointer data)
 {
 	GnomeMDIChild *child;
 	View *view;
@@ -823,9 +786,8 @@ gedit_add_view (GtkWidget *widget, gpointer data)
 	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
-/* Called from the View menu */
 void
-gedit_remove_view (GtkWidget *widget, gpointer data)
+gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc = DOCUMENT (data);
 
@@ -894,7 +856,6 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		file_print_cb (w, NULL, FALSE);
 	    		break;
 		case 'n':
-/*			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event"); */
 			return FALSE;
 			break;
 		case 'w':
@@ -911,10 +872,6 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		gedit_undo_redo (w, NULL);
 			*/
 	    		break;
-			/* WTF: ??? chema 
-		case 'k':
-	    		gedit_undo_redo (w, NULL);
-	    		break;*/
 		case 'q':
 			file_quit_cb (w, NULL);
 	    		break;

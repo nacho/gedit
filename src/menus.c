@@ -133,10 +133,10 @@ GnomeUIInfo view_menu[] =
 {
 	GNOMEUIINFO_ITEM_NONE (N_("_Add View"),
 			       N_("Add a new view of the document"),
-			       gedit_add_view),
+			       gedit_view_add_cb),
 	GNOMEUIINFO_ITEM_NONE (N_("_Remove View"),
 			       N_("Remove view of the document"),
-			       gedit_remove_view),
+			       gedit_view_remove_cb),
 	GNOMEUIINFO_END
 };
 

@@ -33,7 +33,6 @@ typedef struct _ViewClass ViewClass;
 
 struct _View
 {
-	/*GtkFixed fixed;*/
 	GtkVBox box;
 	
 	Document *document;
@@ -41,36 +40,22 @@ struct _View
 	gchar *font;
 	
 	GtkWidget *vbox;
-	
 	GtkWidget *text;
 	GtkWidget *viewport;
 	GtkWidget *pane;
-	GtkWidget *scrwindow[2];
+	GtkWidget *window;
 	
+#ifdef ENABLE_SPLIT_SCREEN	
 	gint split;
 	gint splitscreen;
 	GtkWidget *split_parent;
 	GtkWidget *split_viewport;
-#ifdef ENABLE_SPLIT_SCREEN	
 	GtkWidget *split_screen;
 #endif	
-	
-	gint changed_id;
-	gint changed;
-	
-	/* GtkText Signal id's */
-	gint insert, delete, indent;
-	gint s_insert, s_delete, s_indent;
-	
-	gpointer flag;
-	
-	gint word_wrap;
-	gint line_wrap;
-	gint readonly;
-	
-	/* Temporary flags */
-	gpointer temp1;
-	gpointer temp2;
+	guint changed : 1;
+	guint word_wrap : 1;
+	guint line_wrap : 1;
+	guint readonly : 1;
 	
 };
 
@@ -81,8 +66,10 @@ struct _ViewClass
 	void (*cursor_moved)(View *view);
 };
 
-/* view changed callback */
-void	gedit_view_changed_cb		(GtkWidget *w, gpointer cbdata);
+/* callback */
+void	gedit_view_changed_cb	(GtkWidget *w, gpointer cbdata);
+void	gedit_view_add_cb (GtkWidget *widget, gpointer data);
+void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
 
 /* General utils */
 guint	   	gedit_view_get_type	(void);

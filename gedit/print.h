@@ -25,7 +25,11 @@
 #ifndef __PRINT_H__
 #define __PRINT_H__
 
-/*void file_print_cb (GtkWidget *widget, gpointer cbdata);*/
+typedef enum {
+	PRINT_ORIENT_LANDSCAPE,
+	PRINT_ORIENT_PORTRAIT
+} PrintOrientation;
+
 void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
 void file_print_preview_cb (GtkWidget *widget, gpointer data);
  

@@ -74,6 +74,8 @@ Document * gedit_document_new_with_title (gchar *title);
 Document * gedit_document_new_with_file (gchar *filename);
 Document * gedit_document_current (void);
 
+GtkType gedit_document_get_type (void);
+
 void gedit_mdi_init (void);
 void gedit_document_load ( GList *file_list);
 

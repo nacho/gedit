@@ -129,7 +129,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
 	doc->changed = FALSE;
-	doc->untitled = 0;
+	doc->untitled_number = 0;
 	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
@@ -210,13 +210,12 @@ gedit_file_save (Document *doc, gchar *fname)
 	}
 	
 	doc->changed = FALSE;
-	doc->untitled = 0;
+	doc->untitled_number = 0;
 	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 	gedit_set_title (doc);
 
-	if (!view->changed_id)
-		view->changed_id = gtk_signal_connect (GTK_OBJECT(view->text), "changed",
-						       GTK_SIGNAL_FUNC(gedit_view_changed_cb), view);
+	gtk_signal_connect (GTK_OBJECT(view->text), "changed",
+			    GTK_SIGNAL_FUNC(gedit_view_changed_cb), view);
 
 	gedit_flash (_(MSGBAR_FILE_SAVED));
 	return 0;

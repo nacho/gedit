@@ -1,8 +1,17 @@
 2000-06-05  Chema Celorio  <chema@celorio.com>
 
+	* print.c : implement orientation. Harcoded for now.
+	We now need to hook it up to the gui. Yak!
+
+	* view.h (struct _View): clean the struct and optimize it.
+
+	* menus.c (view_menu): call the new functions
+
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
 	* file.c (gedit_file_create_popup): rename
 
-	* document.c (gedit_get_document_tab_name): rewrite. This is the only function
+	* document.c (gedit_get_document_tab_name): rewrite.
 
 2000-06-04  Chema Celorio  <chema@celorio.com>
 
