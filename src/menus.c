@@ -4,6 +4,11 @@
 #include <gtk/gtk.h>
 #include <strings.h>
 
+#ifndef WITHOUT_GNOME
+#include <config.h>
+#include <gnome.h>
+#endif
+
 #include "main.h"
 #include "toolbar.h"
 
@@ -12,79 +17,237 @@ static gint menus_install_accel(GtkWidget * widget, gchar * signal_name, gchar k
 void menus_init(void);
 void menus_create(GtkMenuEntry * entries, int nmenu_entries);
 
-static GtkMenuEntry menu_items[] =
-{
-     {"<Main>/File/New", "<control>N", file_new_cmd_callback, NULL},
-     {"<Main>/File/Open", "<control>O", file_open_cmd_callback, NULL},
-     {"<Main>/File/Save", "<control>S", file_save_cmd_callback, NULL},
-     {"<Main>/File/Save As...", NULL, file_save_as_cmd_callback, NULL},
-     {"<Main>/File/Close", "<control>W", file_close_cmd_callback, NULL,NULL},
-     {"<Main>/File/<separator>", NULL, NULL, NULL},
-     {"<Main>/File/Print", NULL, file_print_cmd_callback, NULL,NULL},     
-     {"<Main>/File/<separator>", NULL, NULL, NULL},
-     {"<Main>/File/Quit", "<control>Q", file_quit_cmd_callback, NULL},
-     {"<Main>/Edit/Cut", "<control>X", edit_cut_cmd_callback, NULL},
-     {"<Main>/Edit/Copy", "<control>C", edit_copy_cmd_callback, NULL},
-     {"<Main>/Edit/Paste", "<control>V", edit_paste_cmd_callback, NULL},
-     {"<Main>/Edit/<separator>", NULL, NULL, NULL},
-     {"<Main>/Edit/Select All", "<control>A", edit_selall_cmd_callback, NULL},
-     {"<Main>/Search/Search...", NULL, search_search_cmd_callback, NULL},
-     {"<Main>/Search/Search and Replace...", NULL, search_replace_cmd_callback, NULL},
-     {"<Main>/Search/Search Again", NULL, search_again_cmd_callback, NULL},
-     {"<Main>/Options/Text Font...", NULL, prefs_callback, NULL},
-     {"<Main>/Options/<separator>", NULL, NULL, NULL},
-     {"<Main>/Options/Toggle Autoindent", NULL, auto_indent_toggle_callback, NULL},
-     {"<Main>/Options/Toggle Statusbar", NULL, gE_window_toggle_statusbar, NULL},
-     {"<Main>/Options/Toggle Wordwrap", NULL, gE_document_toggle_wordwrap, NULL},
-     {"<Main>/Options/<separator>", NULL, NULL, NULL},
-     {"<Main>/Options/Document Tabs", NULL, NULL, NULL},
-     {"<Main>/Options/Document Tabs/Top", NULL, tab_top_cback, NULL},
-     {"<Main>/Options/Document Tabs/Bottom", NULL, tab_bot_cback, NULL},
-     {"<Main>/Options/Document Tabs/Left", NULL, tab_lef_cback, NULL},
-     {"<Main>/Options/Document Tabs/Right", NULL, tab_rgt_cback, NULL},
-     {"<Main>/Options/Document Tabs/<separator>", NULL, NULL, NULL},
-     {"<Main>/Options/Document Tabs/Toggle", NULL, tab_toggle_cback, NULL},
-	 {"<Main>/Options/Toolbar/Show Toolbar", NULL, tb_on_cb, NULL},
-	 {"<Main>/Options/Toolbar/Hide Toolbar", NULL, tb_off_cb, NULL},
-	 {"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
-	 {"<Main>/Options/Toolbar/Pictures and Text", NULL, tb_pic_text_cb, NULL},
-	 {"<Main>/Options/Toolbar/Pictures only", NULL, tb_pic_only_cb, NULL},
-	 {"<Main>/Options/Toolbar/Text only", NULL, tb_text_only_cb, NULL},
-	 {"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
-	 {"<Main>/Options/Toolbar/Tooltips On", NULL, tb_tooltips_on_cb, NULL},
-	 {"<Main>/Options/Toolbar/Tooltips Off", NULL, tb_tooltips_off_cb, NULL},
-     {"<Main>/Help/About", "<control>H", gE_about_box, NULL}
-};
-
-static int nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
-
 static int initialize = TRUE;
 static GtkMenuFactory *factory = NULL;
 static GtkMenuFactory *subfactory[1];
 static GHashTable *entry_ht = NULL;
 
-#ifdef GTK_HAVE_ACCEL_GROUP
-void get_main_menu(GtkWidget ** menubar, GtkAccelGroup ** group)
-#else
-void get_main_menu(GtkWidget ** menubar, GtkAcceleratorTable ** table)
-#endif
+void gE_menus_init (gE_window *window, gE_data *data)
 {
+
+
+#ifndef WITHOUT_GNOME
+GnomeUIInfo gedit_file_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
+          'N', GDK_CONTROL_MASK, NULL },
+        { GNOME_APP_UI_ITEM, N_("New Window"), NULL, file_newwindow_cmd_callback, data, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW },
+	{ GNOME_APP_UI_ITEM, N_("Open"),  NULL, file_open_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
+	  'O', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
+	  'S', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS },
+	{ GNOME_APP_UI_ITEM, N_("Print"),  NULL, file_print_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },	
+	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
+	  'W', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Close Window"), NULL, file_close_window_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
+	  'Q', GDK_CONTROL_MASK, NULL },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_edit_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
+	  'X', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Copy"),  NULL, edit_copy_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
+	  'C', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Paste"),  NULL, edit_paste_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
+	  'V', GDK_CONTROL_MASK, NULL },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
+	GNOMEUIINFO_END
+};	
+
+GnomeUIInfo gedit_search_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("Search"),  NULL, search_search_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cmd_callback, data, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_tab_menu []= {
+	{ GNOME_APP_UI_ITEM, N_("Top"),     NULL, tab_top_cback, window, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Bottom"),  NULL, tab_bot_cback, window, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cback, window, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cback, window, NULL },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Toggle"),   NULL, tab_toggle_cback, window, NULL },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_toolbar_menu []= {
+	{GNOME_APP_UI_ITEM, N_("Show Toolbar"), NULL, tb_on_cb, window, NULL },
+	{GNOME_APP_UI_ITEM, N_("Hide Toolbar"), NULL, tb_off_cb, window, NULL },
+	{GNOME_APP_UI_SEPARATOR},
+	{GNOME_APP_UI_ITEM, N_("Pictures and Text"), NULL, tb_pic_text_cb, window, NULL },
+	{GNOME_APP_UI_ITEM, N_("Pictures only"), NULL, tb_pic_only_cb, window, NULL },
+	{GNOME_APP_UI_ITEM, N_("Text only"), NULL, tb_text_only_cb, window, NULL },
+	{GNOME_APP_UI_SEPARATOR},
+	{GNOME_APP_UI_ITEM, N_("Tooltips On"), NULL, tb_tooltips_on_cb, window, NULL },
+	{GNOME_APP_UI_ITEM, N_("Tooltips Off"), NULL, tb_tooltips_off_cb, window, NULL },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_options_menu []= {
+	{ GNOME_APP_UI_ITEM, N_("Text Font..."),  NULL, prefs_callback, window, NULL },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_callback, data, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, window, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, window, NULL },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"), NULL, &gedit_toolbar_menu },
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings },
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gedit_help_menu []= {
+	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
+	
+	{GNOME_APP_UI_ITEM, N_("About..."), NULL, gE_about_box, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT, 0, 0, NULL},
+	
+	{GNOME_APP_UI_ENDOFINFO}
+	
+	/*
+	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
+		
+	{ GNOME_APP_UI_ITEM, N_("About"), NULL, gE_about_box, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
+	{ GNOME_APP_UI_SEPARATOR },
+	GNOMEUIINFO_HELP ("gedit"),
+	GNOMEUIINFO_END */
+};
+
+#if PLUGIN_TEST
+GnomeUIInfo gedit_plugins_menu []= {
+  { GNOME_APP_UI_ITEM, N_("Diff"), NULL, start_diff, data, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ITEM, N_("CVS Diff"), NULL, start_cvsdiff, data, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ENDOFINFO}
+};
+#endif
+
+GnomeUIInfo gedit_menu [] = {
+	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, N_("Edit"), NULL, &gedit_edit_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, N_("Search"), NULL, &gedit_search_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	{ GNOME_APP_UI_SUBTREE, N_("Options"), NULL, &gedit_options_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+#if PLUGIN_TEST
+	{ GNOME_APP_UI_SUBTREE, N_("Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+#endif
+	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	GNOMEUIINFO_END
+};
+
+#else
+
+GtkMenuEntry menu_items[] =
+{
+	{"<Main>/File/New", "<control>N", file_new_cmd_callback, data},
+	{"<Main>/File/New Window", NULL, file_newwindow_cmd_callback, data},
+	{"<Main>/File/Open", "<control>O", file_open_cmd_callback, data},
+	{"<Main>/File/Save", "<control>S", file_save_cmd_callback, data},
+	{"<Main>/File/Save As...", NULL, file_save_as_cmd_callback, data},
+	{"<Main>/File/Close", "<control>W", file_close_cmd_callback, data},
+	{"<Main>/File/Close Window", NULL, file_close_window_cmd_callback, data},
+	{"<Main>/File/<separator>", NULL, NULL, NULL},
+	{"<Main>/File/Print", NULL, file_print_cmd_callback, data,NULL},     
+	{"<Main>/File/<separator>", NULL, NULL, NULL},
+	{"<Main>/File/Quit", "<control>Q", file_quit_cmd_callback, data},
+	{"<Main>/Edit/Cut", "<control>X", edit_cut_cmd_callback, NULL},
+	{"<Main>/Edit/Copy", "<control>C", edit_copy_cmd_callback, NULL},
+	{"<Main>/Edit/Paste", "<control>V", edit_paste_cmd_callback, NULL},
+	{"<Main>/Edit/<separator>", NULL, NULL, NULL},
+	{"<Main>/Edit/Select All", "<control>A", edit_selall_cmd_callback, NULL},
+	{"<Main>/Search/Search...", NULL, search_search_cmd_callback, NULL},
+	{"<Main>/Search/Search and Replace...", NULL, search_replace_cmd_callback, NULL},
+	{"<Main>/Search/Search Again", NULL, search_again_cmd_callback, NULL},
+	{"<Main>/Options/Text Font...", NULL, prefs_callback, window},
+	{"<Main>/Options/<separator>", NULL, NULL, NULL},
+	{"<Main>/Options/Toggle Autoindent", NULL, auto_indent_toggle_callback, data},
+	{"<Main>/Options/Toggle Statusbar", NULL, gE_window_toggle_statusbar, window},
+	{"<Main>/Options/Toggle Wordwrap", NULL, gE_document_toggle_wordwrap, window},
+	{"<Main>/Options/<separator>", NULL, NULL, NULL},
+	{"<Main>/Options/Document Tabs", NULL, NULL, NULL},
+	{"<Main>/Options/Document Tabs/Top", NULL, tab_top_cback, window},
+	{"<Main>/Options/Document Tabs/Bottom", NULL, tab_bot_cback, window},
+	{"<Main>/Options/Document Tabs/Left", NULL, tab_lef_cback, window},
+	{"<Main>/Options/Document Tabs/Right", NULL, tab_rgt_cback, window},
+	{"<Main>/Options/Document Tabs/<separator>", NULL, NULL, NULL},
+	{"<Main>/Options/Document Tabs/Toggle", NULL, tab_toggle_cback, window},
+	{"<Main>/Options/Toolbar/Show Toolbar", NULL, tb_on_cb, window},
+	{"<Main>/Options/Toolbar/Hide Toolbar", NULL, tb_off_cb, window},
+	{"<Main>/Options/Toolbar/<separator>", NULL, NULL, window},
+	{"<Main>/Options/Toolbar/Pictures and Text", NULL, tb_pic_text_cb, windowL},
+	{"<Main>/Options/Toolbar/Pictures only", NULL, tb_pic_only_cb, window},
+	{"<Main>/Options/Toolbar/Text only", NULL, tb_text_only_cb, window},
+	{"<Main>/Options/Toolbar/<separator>", NULL, NULL, NULL},
+	{"<Main>/Options/Toolbar/Tooltips On", NULL, tb_tooltips_on_cb, window},
+	{"<Main>/Options/Toolbar/Tooltips Off", NULL, tb_tooltips_off_cb, window},
+	#if PLUGINS_TEST
+	{"<Main>/Plugins/Diff", NULL, start_diff, data},
+	{"<Main>/Plugins/CVS Diff", NULL, start_cvsdiff, data},
+	#endif
+	{"<Main>/Help/About", "<control>H", gE_about_box, NULL}
+};
+
+int nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
+#endif
+
+#ifndef WITHOUT_GNOME
+	gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
+
+#else
+
     if (initialize)
     	    menus_init();
     
     if (menubar)
             *menubar = subfactory[0]->widget;
 #ifdef GTK_HAVE_ACCEL_GROUP
-    if(group)
-       	    *group = subfactory[0]->accel_group;
+    if(window->accel)
+       	    *window->accel = subfactory[0]->accel_group;
 #else
-    if(table)
-       	    *table = subfactory[0]->table;
+    if(window->accel)
+       	    *accel = subfactory[0]->table;
+#endif
+
 #endif
 }
 
+#ifdef WITHOUT_GNOME
+
 void menus_init(void)
 {
+
     if (initialize) {
         initialize = FALSE;
 	
@@ -182,3 +345,4 @@ void menus_set_sensitive(char *path, int sensitive)
      g_warning("Unable to set sensitivity for menu which doesn't exist: %s", path);
 }
 	      
+#endif

@@ -32,47 +32,32 @@
 #include "plugin.h"
 #endif
 
-gE_window *main_window;
+GList *window_list;
 char home[STRING_LENGTH_MAX];
 char *homea;
 char rc[STRING_LENGTH_MAX];
 char fname[STRING_LENGTH_MAX];
 
-void  destroy_window (GtkWidget *widget, GtkWidget **window)
+void destroy_window (GtkWidget *widget, gE_data *data)
 {
- /*  *window = NULL;
-   gtk_exit(0);*/
-  file_close_cmd_callback (widget, main_window);
+  file_close_window_cmd_callback (widget, data);
 #if PLUGIN_TEST
-  if( main_window->hello )
+  if( data->window->hello )
     {
-      plugin_finish( main_window->hello );
-      main_window->hello = 0;
+      plugin_finish( data->window->hello );
+      data->window->hello = 0;
     }
 #endif
 }
 
-
-void file_quit_cmd_callback (GtkWidget *widget, gpointer data)
-{
-   /* g_print ("%s\n", (char *) data);
-   gtk_exit(0);
-  */
-  file_close_cmd_callback (widget, main_window);
-}
 
 void gE_quit ()
 {
 	gtk_exit (0);
 }	
 
-/*
-void file_newwindow_cmd_callback (GtkWidget *widget, gpointer data)
-{
-  gE_window_new();
-}
 
-*/
+
 
 #ifdef WITHOUT_GNOME
 int
@@ -121,14 +106,12 @@ main (int argc, char **argv)
 	signal(SIGTERM, SIG_DFL);
 #endif
 
+	window_list = NULL;
 	gE_get_rc_file();
 	gE_rc_parse();
 
 	prog_init(argv + 1);
-
-	/*  gtk_idle_add ((GtkFunction) linepos, NULL); */
-	/*	gtk_timeout_add (5, (GtkFunction) linepos, NULL); */
-
+	
 	gtk_main ();
 
 	return 0;
@@ -157,6 +140,8 @@ static struct argp parser =
 int main (int argc, char **argv)
 {
 
+	gE_window *window;
+	gE_data *data;
 	argp_program_version = VERSION;
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
@@ -165,25 +150,31 @@ int main (int argc, char **argv)
 
 	gE_rc_parse();
 
-
-	main_window = gE_window_new ();
-	main_window->show_status = 1;
-	gE_get_settings();
+	data = g_malloc0 (sizeof (gE_data));
+	window_list = g_list_alloc ();
+	window = gE_window_new();
+	g_list_append (window_list, window);
+	data->window = window;
+	window->show_status = 1;
+	gE_get_settings(window);
 
 	g_print("...\n");
 	if (file_list){
 		gE_document *doc;
 
-		doc = gE_document_current(main_window);
-		gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),
-					 gtk_notebook_current_page (GTK_NOTEBOOK(main_window->notebook)));
-		g_list_remove(main_window->documents, doc);
+		doc = gE_document_current(window);
+		gtk_notebook_remove_page(GTK_NOTEBOOK(window->notebook),
+					 gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)));
+		g_list_remove(window->documents, doc);
 		if (doc->filename != NULL)
 			g_free (doc->filename);
 		g_free (doc);
 
 		for (;file_list; file_list = file_list->next)
-			gtk_idle_add ((GtkFunction) file_open_wrapper, file_list->data);
+		{
+			data->temp1 = file_list->data;
+			gtk_idle_add ((GtkFunction) file_open_wrapper, data);
+		}
 	}
 
 	gtk_main ();

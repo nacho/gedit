@@ -1,3 +1,11 @@
+1998-06-26 and 27  Evan Lawrence  <evan@worldpath.net>
+
+	Sifted through all the code and removed all instances of the global main_window
+	variable, replacing them with either a gE_window pointer or a gE_data pointer.
+	Also added functions to open and close other windows, so you don't have to run
+	a separate copy of gedit - still to be added are functions to move documents between
+	windows, etc.
+	
 1998-06-26  Chris Lahey  <clahey@umich.edu>
 
 	* Makefile.am : 

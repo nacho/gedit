@@ -34,14 +34,14 @@ typedef struct {
 	GtkSignalFunc callback;
 } toolbar_data_t;
 
-extern void gE_create_toolbar(gE_window *gw);
-extern void tb_on_cb(GtkWidget *w, gpointer data);
-extern void tb_off_cb(GtkWidget *w, gpointer data);
-extern void tb_pic_text_cb(GtkWidget *w, gpointer data);
-extern void tb_pic_only_cb(GtkWidget *w, gpointer data);
-extern void tb_text_only_cb(GtkWidget *w, gpointer data);
-extern void tb_tooltips_on_cb(GtkWidget *w, gpointer data);
-extern void tb_tooltips_off_cb(GtkWidget *w, gpointer data);
+extern void gE_create_toolbar(gE_window *gw, gE_data *data);
+extern void tb_on_cb(GtkWidget *w, gE_window *window);
+extern void tb_off_cb(GtkWidget *w, gE_window *window);
+extern void tb_pic_text_cb(GtkWidget *w, gE_window *window);
+extern void tb_pic_only_cb(GtkWidget *w, gE_window *window);
+extern void tb_text_only_cb(GtkWidget *w, gE_window *window);
+extern void tb_tooltips_on_cb(GtkWidget *w, gE_window *window);
+extern void tb_tooltips_off_cb(GtkWidget *w, gE_window *window);
 
 #endif
 

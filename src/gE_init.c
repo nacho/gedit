@@ -20,41 +20,48 @@
 #include <string.h>
 #include "main.h"
 
-gint file_open_wrapper (char *name)
+gint file_open_wrapper (gE_data *data)
 {
-char *nfile;
+	char *nfile, *name;
 
-	gE_document_new(main_window);
-    nfile = g_malloc(strlen(name)+1);
-    strcpy(nfile, name);
-    gE_file_open (gE_document_current(main_window), nfile);
-	
+	name = data->temp1;
+	gE_document_new(data->window);
+	nfile = g_malloc(strlen(name)+1);
+	strcpy(nfile, name);
+	gE_file_open (data->window, gE_document_current(data->window), nfile);
+
 	return FALSE;
 }
 
 void prog_init(char **file)
 {
+	gE_window *window;
 	gE_document *doc;
-
+	gE_data *data;
+	data = g_malloc0 (sizeof (gE_data));
 #ifdef DEBUG
 	g_print("Initialising gEdit...\n");
 
 	g_print("%s\n",*file);
 #endif
-	main_window = gE_window_new();
+	window_list = g_list_alloc ();
+	window = gE_window_new();
+	g_list_append (window_list, window);
+	data->window = window;
 	if (*file != NULL) {
 		g_print("Opening files...\n");
 
-		doc = gE_document_current(main_window);
-		gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),
-			gtk_notebook_current_page (GTK_NOTEBOOK(main_window->notebook)));
-		g_list_remove(main_window->documents, doc);
+		doc = gE_document_current(window);
+		gtk_notebook_remove_page(GTK_NOTEBOOK(window->notebook),
+			gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)));
+		g_list_remove(window->documents, doc);
 		if (doc->filename != NULL)
 			g_free (doc->filename);
 		g_free (doc);
 
 		while (*file) {
-			gtk_idle_add ((GtkFunction) file_open_wrapper, *file);
+			data->temp1 = *file;
+			gtk_idle_add ((GtkFunction) file_open_wrapper, data);
 			file++;
 		}
 	}

@@ -16,6 +16,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#define PLUGIN_TEST 1
 #include <stdio.h>
 #ifndef WITHOUT_GNOME
 #include <config.h>
@@ -33,147 +34,10 @@
 #include "toolbar.h"
 
 
-#ifndef WITHOUT_GNOME
-GnomeUIInfo gedit_file_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
-          'N', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Open"),  NULL, file_open_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
-	  'O', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
-	  'S', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS },
-	{ GNOME_APP_UI_ITEM, N_("Print"),  NULL, file_print_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },	
-	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
-	  'W', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
-	  'Q', GDK_CONTROL_MASK, NULL },
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo gedit_edit_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
-	  'X', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Copy"),  NULL, edit_copy_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
-	  'C', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Paste"),  NULL, edit_paste_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
-	  'V', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
-	GNOMEUIINFO_END
-};	
-
-GnomeUIInfo gedit_search_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Search"),  NULL, search_search_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cmd_callback, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo gedit_tab_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Top"),     NULL, tab_top_cback, NULL, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Bottom"),  NULL, tab_bot_cback, NULL, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Left"),    NULL, tab_lef_cback, NULL, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Right"),   NULL, tab_rgt_cback, NULL, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Toggle"),   NULL, tab_toggle_cback, NULL, NULL },
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo gedit_toolbar_menu []= {
-	{GNOME_APP_UI_ITEM, N_("Show Toolbar"), NULL, tb_on_cb, NULL, NULL },
-	{GNOME_APP_UI_ITEM, N_("Hide Toolbar"), NULL, tb_off_cb, NULL, NULL },
-	{GNOME_APP_UI_SEPARATOR},
-	{GNOME_APP_UI_ITEM, N_("Pictures and Text"), NULL, tb_pic_text_cb, NULL, NULL },
-	{GNOME_APP_UI_ITEM, N_("Pictures only"), NULL, tb_pic_only_cb, NULL, NULL },
-	{GNOME_APP_UI_ITEM, N_("Text only"), NULL, tb_text_only_cb, NULL, NULL },
-	{GNOME_APP_UI_SEPARATOR},
-	{GNOME_APP_UI_ITEM, N_("Tooltips On"), NULL, tb_tooltips_on_cb, NULL, NULL },
-	{GNOME_APP_UI_ITEM, N_("Tooltips Off"), NULL, tb_tooltips_off_cb, NULL, NULL },
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo gedit_options_menu []= {
-	{ GNOME_APP_UI_ITEM, N_("Text Font..."),  NULL, prefs_callback, NULL, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_callback, NULL, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, NULL, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, NULL, NULL },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"), NULL, &gedit_toolbar_menu },
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Save Settings"),  NULL, gE_save_settings },
-	GNOMEUIINFO_END
-};
-
-GnomeUIInfo gedit_help_menu []= {
-	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
-	
-	{GNOME_APP_UI_ITEM, N_("About..."), NULL, gE_about_box, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT, 0, 0, NULL},
-	
-	{GNOME_APP_UI_ENDOFINFO}
-	
-	/*
-	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
-		
-	{ GNOME_APP_UI_ITEM, N_("About"), NULL, gE_about_box, NULL, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
-	{ GNOME_APP_UI_SEPARATOR },
-	GNOMEUIINFO_HELP ("gedit"),
-	GNOMEUIINFO_END */
-};
-
-#if PLUGIN_TEST
-GnomeUIInfo gedit_plugins_menu []= {
-  { GNOME_APP_UI_ITEM, N_("Diff"), NULL, start_diff, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
-  { GNOME_APP_UI_ITEM, N_("CVS Diff"), NULL, start_cvsdiff, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
-  { GNOME_APP_UI_ENDOFINFO}
-};
-#endif
-
-GnomeUIInfo gedit_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("Edit"), NULL, &gedit_edit_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("Search"), NULL, &gedit_search_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("Options"), NULL, &gedit_options_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#if PLUGIN_TEST
-	{ GNOME_APP_UI_SUBTREE, N_("Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
-	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#endif
-	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu, NULL, NULL,
-		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	GNOMEUIINFO_END
-};
-#endif
-
 gE_window *gE_window_new()
 {
   gE_window *window;
+  gE_data *data;
   GtkWidget *box1;
   GtkWidget *box2;
   GtkWidget *line_button, *col_button;
@@ -187,19 +51,23 @@ gE_window *gE_window_new()
   window->search->window = NULL;
   window->auto_indent = 1;
   window->show_tabs = 1;
-
+  
+  data = g_malloc0 (sizeof (gE_data));
+  data->window = window;
+  
 #ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window->window, "gedit window");
 #else
   window->window = gnome_app_new ("gEdit", GEDIT_ID );
 #endif
-  gtk_signal_connect (GTK_OBJECT (window->window), "destroy",
+/*  gtk_signal_connect (GTK_OBJECT (window->window), "destroy",
   		      GTK_SIGNAL_FUNC(destroy_window),
-		      &window->window);
+		      data);
+*/
   gtk_signal_connect (GTK_OBJECT (window->window), "delete_event",
-     		      GTK_SIGNAL_FUNC(destroy_window),
-		      &window->window);
+     		      GTK_SIGNAL_FUNC(file_close_window_cmd_callback),
+		      data);
      
   gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
 #ifdef WITHOUT_GNOME
@@ -211,9 +79,13 @@ gE_window *gE_window_new()
       
   box1 = gtk_vbox_new (FALSE, 0);
 
+  
 #ifdef WITHOUT_GNOME
   gtk_container_add (GTK_CONTAINER (window->window), box1);
-  get_main_menu(&window->menubar, &window->accel);
+#endif
+  gE_menus_init (window, data);
+  
+#ifdef WITHOUT_GNOME
 #ifdef GTK_HAVE_ACCEL_GROUP
   gtk_window_add_accel_group(GTK_WINDOW(window->window), window->accel);
 #else
@@ -223,10 +95,9 @@ gE_window *gE_window_new()
   gtk_widget_show(window->menubar);
 #else
   gnome_app_set_contents (GNOME_APP(window->window), box1);
-  gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
 #endif
 
-  gE_create_toolbar(window);
+  gE_create_toolbar(window, data);
   
 #ifdef WITHOUT_GNOME
   gtk_box_pack_start(GTK_BOX(box1), window->toolbar, FALSE, TRUE, 0);
@@ -255,7 +126,7 @@ gE_window *gE_window_new()
       
       line_button = gtk_button_new_with_label ("Line");
       gtk_signal_connect (GTK_OBJECT (line_button), "clicked",
-                                   GTK_SIGNAL_FUNC (search_goto_line_callback), NULL);
+                                   GTK_SIGNAL_FUNC (search_goto_line_callback), window);
       window->line_label = gtk_label_new ("1");
       col_button = gtk_label_new ("Column");
       window->col_label = gtk_label_new ("0");
@@ -281,18 +152,17 @@ gE_window *gE_window_new()
   return window;
 }
 
-void gE_window_toggle_statusbar (GtkWidget *w, gpointer data)
+void gE_window_toggle_statusbar (GtkWidget *w, gE_window *window)
 {
-	/* if (GTK_WIDGET_VISIBLE(main_window->statusbox))*/
-	if (main_window->show_status == 1)
+	if (window->show_status == 1)
 	{
-		gtk_widget_hide (main_window->statusbox);
-		main_window->show_status = 0;
+		gtk_widget_hide (window->statusbox);
+		window->show_status = 0;
 	}
 	else
 	{
-		gtk_widget_show (main_window->statusbox);
-		main_window->show_status = 1;
+		gtk_widget_show (window->statusbox);
+		window->show_status = 1;
 	}
 }
 
@@ -301,7 +171,7 @@ void gE_window_new_with_file(gE_window *window, char *filename)
 
 	window = gE_window_new();
 	
-	gE_file_open(gE_document_current(window), filename);
+	gE_file_open(window, gE_document_current(window), filename);
 }
 
 
@@ -337,10 +207,10 @@ gE_document *gE_document_new(gE_window *window)
 	gtk_text_set_word_wrap (GTK_TEXT (document->text), TRUE);
 
 	gtk_signal_connect_after (GTK_OBJECT (document->text), "button_press_event",
-	                    GTK_SIGNAL_FUNC (gE_event_button_press), document->text);
+	                    GTK_SIGNAL_FUNC (gE_event_button_press), window);
 
 	gtk_signal_connect_after (GTK_OBJECT(document->text), "key_press_event",
-	                                                  GTK_SIGNAL_FUNC(auto_indent_callback), document->text);
+	                                                  GTK_SIGNAL_FUNC(auto_indent_callback), window);
 
 
 	gtk_table_attach_defaults (GTK_TABLE (table), document->text, 0, 1, 0, 1);
@@ -411,10 +281,10 @@ gE_document *gE_document_current(gE_window *window)
 	return current_document;
 }
 
-void gE_document_toggle_wordwrap (GtkWidget *w, gpointer data)
+void gE_document_toggle_wordwrap (GtkWidget *w, gE_window *window)
 {
 	gE_document *doc;
-	doc = gE_document_current (main_window);
+	doc = gE_document_current (window);
 	doc->word_wrap = !doc->word_wrap;
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
@@ -426,7 +296,7 @@ void gE_show_version()
 }
 
 #if PLUGIN_TEST
-void start_diff( GtkWidget *widget, gpointer data )
+void start_diff( GtkWidget *widget, gE_data *data )
 {
   plugin_callback_struct callbacks;
   plugin *plug = plugin_new( "/usr/local/bin/diff-plugin" );
@@ -437,10 +307,10 @@ void start_diff( GtkWidget *widget, gpointer data )
   callbacks.document.current = gE_plugin_current;
   callbacks.document.filename = gE_plugin_filename;
   
-  plugin_register( plug, &callbacks, GPOINTER_TO_INT( main_window ) );
+  plugin_register( plug, &callbacks, GPOINTER_TO_INT( data->window ) );
 }
 
-void start_cvsdiff( GtkWidget *widget, gpointer data )
+void start_cvsdiff( GtkWidget *widget, gE_data *data )
 {
   plugin_callback_struct callbacks;
   plugin *plug = plugin_new( "/usr/local/bin/cvsdiff-plugin" );
@@ -451,6 +321,6 @@ void start_cvsdiff( GtkWidget *widget, gpointer data )
   callbacks.document.current = gE_plugin_current;
   callbacks.document.filename = gE_plugin_filename;
 
-  plugin_register( plug, &callbacks, GPOINTER_TO_INT( main_window ) );
+  plugin_register( plug, &callbacks, GPOINTER_TO_INT( data->window ) );
 }
 #endif

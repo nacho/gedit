@@ -116,7 +116,7 @@ gE_prefs *prefs_window;
 #endif*/
  }
  
- void ok_prefs(GtkWidget *widget, gpointer *data)
+ void ok_prefs(GtkWidget *widget, gE_window *window)
  {
     FILE *file;
     char stamp[50];
@@ -156,14 +156,14 @@ gE_prefs *prefs_window;
  
     /*style = gtk_style_new();
     style->font = gtk_entry_get_text(GTK_ENTRY(GTK_COMBO(prefs_window->tfont)->entry));
-    gtk_widget_set_style (main_window->text, style);
+    gtk_widget_set_style (window->text, style);
     		Argh! It doesn't work, dunno if it is possible to do tho...
 					- Alex */
 	
 
 	#ifndef WITHOUT_GNOME
 	 cmd2 = gtk_entry_get_text(GTK_ENTRY (prefs->pcmd));
-	 gE_save_settings(cmd2);
+	 gE_save_settings(window, cmd2);
 	#endif
 
     gtk_widget_destroy(prefs_window->window);
@@ -176,7 +176,7 @@ gE_prefs *prefs_window;
     prefs_window->window = NULL;
  }
  
- gE_prefs *gE_prefs_window()
+ gE_prefs *gE_prefs_window(gE_window *window)
  {
 
 
@@ -310,7 +310,7 @@ gE_prefs *prefs_window;
 	gtk_widget_show (prefs->label);
 	
 	prefs->pcmd = gtk_entry_new();
-	gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), main_window->print_cmd);
+	gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), window->print_cmd);
 	gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->pcmd, TRUE, TRUE, 0);
 	gtk_widget_show (prefs->pcmd);
       
@@ -340,7 +340,7 @@ gE_prefs *prefs_window;
 #endif
 	
    gtk_signal_connect (GTK_OBJECT (prefs->button), "clicked",
-		       GTK_SIGNAL_FUNC (ok_prefs), (gpointer) "button");
+		       GTK_SIGNAL_FUNC (ok_prefs), window);
    gtk_box_pack_start (GTK_BOX (prefs->bbox), prefs->button, TRUE, TRUE, 0);
    GTK_WIDGET_SET_FLAGS (prefs->button, GTK_CAN_DEFAULT);
    gtk_widget_grab_default (prefs->button);
@@ -361,21 +361,21 @@ gE_prefs *prefs_window;
 
 #ifndef WITHOUT_GNOME
 
-void gE_save_settings(gchar *cmd)
+void gE_save_settings(gE_window *window, gchar *cmd)
 {
   /*char cmd[256];*/
 
   gnome_config_push_prefix ("/gEdit/Global/");
 
-  gnome_config_set_int ("tab pos", (gint) main_window->tab_pos);
-  gnome_config_set_int ("auto indent", (gint) main_window->auto_indent);
-  gnome_config_set_int ("show statusbar", (gint) main_window->show_status);
-  gnome_config_set_int ("toolbar", (gint) main_window->have_toolbar);
+  gnome_config_set_int ("tab pos", (gint) window->tab_pos);
+  gnome_config_set_int ("auto indent", (gint) window->auto_indent);
+  gnome_config_set_int ("show statusbar", (gint) window->show_status);
+  gnome_config_set_int ("toolbar", (gint) window->have_toolbar);
 
-  if (main_window->print_cmd == "")
+  if (window->print_cmd == "")
     gnome_config_set_string ("print command", "lpr -rs ");
   else
-    /*gnome_config_set_string ("print command", main_window->print_cmd);*/
+    /*gnome_config_set_string ("print command", window->print_cmd);*/
     gnome_config_set_string ("print command", cmd);
 
 
@@ -384,39 +384,39 @@ void gE_save_settings(gchar *cmd)
 
 }
 
-void gE_get_settings()
+void gE_get_settings(gE_window *window)
 {
   gnome_config_push_prefix ("/gEdit/Global/");
   
-  main_window->tab_pos = gnome_config_get_int ("tab pos");
-  main_window->show_status = gnome_config_get_int ("show statusbar");
-  main_window->have_toolbar = gnome_config_get_int ("toolbar");
+  window->tab_pos = gnome_config_get_int ("tab pos");
+  window->show_status = gnome_config_get_int ("show statusbar");
+  window->have_toolbar = gnome_config_get_int ("toolbar");
   
- main_window->print_cmd = gnome_config_get_string("print command");
+ window->print_cmd = gnome_config_get_string("print command");
 
 
 
   gnome_config_pop_prefix ();
   gnome_config_sync ();
  
-  if (main_window->tab_pos == 0) main_window->tab_pos = 2;
-  gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), main_window->tab_pos);
+  if (window->tab_pos == 0) window->tab_pos = 2;
+  gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), window->tab_pos);
   
-  if (main_window->show_status != 1)
+  if (window->show_status != 1)
   {
-    gtk_widget_hide (main_window->statusbox);
-    main_window->show_status = 0;
+    gtk_widget_hide (window->statusbox);
+    window->show_status = 0;
   }
  
-  if (main_window->have_toolbar == 1)
+  if (window->have_toolbar == 1)
     {
-     tb_on_cb(NULL,NULL);
-     main_window->have_toolbar = 1;
+     tb_on_cb(NULL,window);
+     window->have_toolbar = 1;
     }
-  if (main_window->have_toolbar == 0)
+  if (window->have_toolbar == 0)
     {
-     tb_off_cb(NULL, NULL);
-     main_window->have_toolbar = 0;
+     tb_off_cb(NULL, window);
+     window->have_toolbar = 0;
     }
   
 }

@@ -27,9 +27,9 @@ gedit_SOURCES = 	\
 	toolbar.h	\
 	plugin.h        \
 	gE_plugin_api.h	\
-	menus.h
+	menus.h		\
 
-#	menus.c		\
+	menus.c
 
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 

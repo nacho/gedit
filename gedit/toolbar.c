@@ -105,7 +105,7 @@ static GtkWidget *new_pixmap(char *fname, GtkWidget *w);
  * creates toolbar
  */
 void
-gE_create_toolbar(gE_window *gw)
+gE_create_toolbar(gE_window *gw, gE_data *data)
 {
 	GtkWidget *toolbar;
 
@@ -128,7 +128,7 @@ gE_create_toolbar(gE_window *gw)
 			new_pixmap(tbdp->icon, toolbar),
 #endif
 			(GtkSignalFunc)tbdp->callback,
-			NULL);
+			data);
 
 		tbdp++;
 
@@ -156,16 +156,16 @@ gE_create_toolbar(gE_window *gw)
  * unhides toolbar
  */
 void
-tb_on_cb(GtkWidget *w, gpointer data)
+tb_on_cb(GtkWidget *w, gE_window *window)
 {
-	if (!GTK_WIDGET_VISIBLE(main_window->toolbar))
-		gtk_widget_show (main_window->toolbar);
+	if (!GTK_WIDGET_VISIBLE(window->toolbar))
+		gtk_widget_show (window->toolbar);
 
 #ifndef WITHOUT_GNOME
-	if (!GTK_WIDGET_VISIBLE (GNOME_APP (main_window->window)->toolbar->parent))
-		gtk_widget_show (GNOME_APP(main_window->window)->toolbar->parent);
+	if (!GTK_WIDGET_VISIBLE (GNOME_APP (window->window)->toolbar->parent))
+		gtk_widget_show (GNOME_APP(window->window)->toolbar->parent);
 #endif
-	main_window->have_toolbar = 1;
+	window->have_toolbar = 1;
 }
 
 
@@ -175,20 +175,20 @@ tb_on_cb(GtkWidget *w, gpointer data)
  * hides toolbar
  */
 void
-tb_off_cb(GtkWidget *w, gpointer data)
+tb_off_cb(GtkWidget *w, gE_window *window)
 {
-	if (GTK_WIDGET_VISIBLE(main_window->toolbar))
-		gtk_widget_hide (main_window->toolbar);
+	if (GTK_WIDGET_VISIBLE(window->toolbar))
+		gtk_widget_hide (window->toolbar);
 		
 #ifndef WITHOUT_GNOME
 	/*
 	 * This is a bit of a hack to get the entire toolbar to disappear
 	 * instead of just the buttons
 	 */
-	if (GTK_WIDGET_VISIBLE (GNOME_APP(main_window->window)->toolbar->parent))
-		gtk_widget_hide (GNOME_APP(main_window->window)->toolbar->parent);
+	if (GTK_WIDGET_VISIBLE (GNOME_APP(window->window)->toolbar->parent))
+		gtk_widget_hide (GNOME_APP(window->window)->toolbar->parent);
 #endif
-	main_window->have_toolbar = 0;
+	window->have_toolbar = 0;
 }
 
 
@@ -198,9 +198,9 @@ tb_off_cb(GtkWidget *w, gpointer data)
  * updates toolbar to show buttons with icons and text
  */
 void
-tb_pic_text_cb(GtkWidget *w, gpointer data)
+tb_pic_text_cb(GtkWidget *w, gE_window *window)
 {
-	gtk_toolbar_set_style(GTK_TOOLBAR(main_window->toolbar), GTK_TOOLBAR_BOTH);
+	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_BOTH);
 }
 
 
@@ -210,17 +210,17 @@ tb_pic_text_cb(GtkWidget *w, gpointer data)
  * updates toolbar to show buttons with icons only
  */
 void
-tb_pic_only_cb(GtkWidget *w, gpointer data)
+tb_pic_only_cb(GtkWidget *w, gE_window *window)
 {
-	gtk_toolbar_set_style(GTK_TOOLBAR(main_window->toolbar), GTK_TOOLBAR_ICONS);
+	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_ICONS);
 
 #ifndef WITHOUT_GNOME
 	/*
 	 * forces the gnome toolbar to resize itself.. slows it down some,
 	 * but not much..
 	 */
-	gtk_widget_hide (main_window->toolbar);
-	gtk_widget_show (main_window->toolbar);
+	gtk_widget_hide (window->toolbar);
+	gtk_widget_show (window->toolbar);
 #endif
 }
 
@@ -231,12 +231,12 @@ tb_pic_only_cb(GtkWidget *w, gpointer data)
  * updates toolbar to show buttons with text only
  */
 void
-tb_text_only_cb(GtkWidget *w, gpointer data)
+tb_text_only_cb(GtkWidget *w, gE_window *window)
 {
-	gtk_toolbar_set_style(GTK_TOOLBAR(main_window->toolbar), GTK_TOOLBAR_TEXT);
+	gtk_toolbar_set_style(GTK_TOOLBAR(window->toolbar), GTK_TOOLBAR_TEXT);
 #ifndef WITHOUT_GNOME
-	gtk_widget_hide (main_window->toolbar);
-	gtk_widget_show (main_window->toolbar);
+	gtk_widget_hide (window->toolbar);
+	gtk_widget_show (window->toolbar);
 #endif
 }
 
@@ -247,9 +247,9 @@ tb_text_only_cb(GtkWidget *w, gpointer data)
  * turns off tooltips
  */
 void
-tb_tooltips_on_cb(GtkWidget *w, gpointer data)
+tb_tooltips_on_cb(GtkWidget *w, gE_window *window)
 {
-	gtk_toolbar_set_tooltips(GTK_TOOLBAR(main_window->toolbar), TRUE);
+	gtk_toolbar_set_tooltips(GTK_TOOLBAR(window->toolbar), TRUE);
 }
 
 
@@ -259,9 +259,9 @@ tb_tooltips_on_cb(GtkWidget *w, gpointer data)
  * turns on tooltips
  */
 void
-tb_tooltips_off_cb(GtkWidget *w, gpointer data)
+tb_tooltips_off_cb(GtkWidget *w, gE_window *window)
 {
-	gtk_toolbar_set_tooltips(GTK_TOOLBAR(main_window->toolbar), FALSE);
+	gtk_toolbar_set_tooltips(GTK_TOOLBAR(window->toolbar), FALSE);
 }
 
 

@@ -16,9 +16,9 @@
 
 /* ---- Misc callbacks ---- */
 
-void save_no_sel (GtkWidget *w, gpointer data);
-void save_yes_sel (GtkWidget *w, gpointer data);
-void popup_close_verify (gE_document *doc, gE_window *quitting);
+void save_no_sel (GtkWidget *w, gE_data *data);
+void save_yes_sel (GtkWidget *w, gE_data *data);
+void popup_close_verify (gE_document *doc, gE_data *data);
 
 /* handles changes in the text widget... */
 void document_changed_callback (GtkWidget *w, gpointer doc)
@@ -31,33 +31,36 @@ void document_changed_callback (GtkWidget *w, gpointer doc)
 	document->changed_id = FALSE;
 }
 
-void save_yes_sel (GtkWidget *w, gpointer data)
+void save_yes_sel (GtkWidget *w, gE_data *data)
 {
 	gE_document *doc;
-	gE_window *quitting;
-	quitting = gtk_object_get_data (GTK_OBJECT (w), "quitting");
-	doc = (gE_document *) data;
-	file_save_cmd_callback (NULL, NULL);
+	doc = data->document;
+	file_save_cmd_callback (NULL, data);
 	if (doc->filename == NULL)
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(main_window->save_fileselector)->ok_button), "clicked",
-		(GtkSignalFunc) file_close_cmd_callback, quitting);
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(data->window->save_fileselector)->ok_button), "clicked",
+		(GtkSignalFunc) file_close_cmd_callback, data);
 	else
-		file_close_cmd_callback (NULL, quitting);
+		file_close_cmd_callback (NULL, data);
 }
 
-void save_no_sel (GtkWidget *w, gpointer data)
+void save_no_sel (GtkWidget *w, gE_data *data)
 {
 	gE_document *doc;
-	gE_window *quitting;
-	quitting = gtk_object_get_data (GTK_OBJECT (w), "quitting");
-	doc = (gE_document *) data;
+	doc = data->document;
 	doc->changed = FALSE;
-	file_close_cmd_callback (NULL, quitting);
+	file_close_cmd_callback (NULL, data);
 }
 
-void popup_close_verify(gE_document *doc, gE_window *quitting)
+void save_cancel_sel (GtkWidget *w, gE_data *data)
+{
+	data->temp1 = NULL; /* In case we're quitting, make sure cancelling it clears the quitting flag.. */
+	data->temp2 = NULL;
+}
+
+void popup_close_verify(gE_document *doc, gE_data *data)
 {
 	GtkWidget *verify_window, *yes, *no, *cancel, *label;
+
 	verify_window = gtk_dialog_new();
 	
 	gtk_window_set_title (GTK_WINDOW(verify_window), ("Save File?"));
@@ -82,10 +85,10 @@ void popup_close_verify(gE_document *doc, gE_window *quitting)
 	gtk_widget_show (no);
 	gtk_widget_show (cancel);
 	gtk_widget_show (verify_window);
-	gtk_object_set_data (GTK_OBJECT (yes), "quitting", quitting);
-	gtk_object_set_data (GTK_OBJECT (no), "quitting", quitting);
-	gtk_signal_connect (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(save_yes_sel), doc);
-	gtk_signal_connect (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(save_no_sel), doc);
+	data->document = doc;
+	gtk_signal_connect (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(save_yes_sel), data);
+	gtk_signal_connect (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(save_no_sel), data);
+	gtk_signal_connect (GTK_OBJECT(cancel), "clicked", GTK_SIGNAL_FUNC (save_cancel_sel), data);
 	gtk_signal_connect_object (GTK_OBJECT(yes), "clicked", 
 	                                       GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) verify_window);
 	gtk_signal_connect_object (GTK_OBJECT(no), "clicked", 
@@ -97,34 +100,37 @@ void popup_close_verify(gE_document *doc, gE_window *quitting)
 
 
 
-void file_open_ok_sel (GtkWidget *w, GtkFileSelection *fs)
+void file_open_ok_sel (GtkWidget *w, gE_data *data)
 {
   char *filename;
   char *nfile;
-  if ((gE_document_current (main_window)->filename) || 
-      (gE_document_current (main_window)->changed))
-  	gE_document_new(main_window);
+  GtkFileSelection *fs = (GtkFileSelection *) data->window->open_fileselector;
+  
+  if ((gE_document_current (data->window)->filename) || 
+      (gE_document_current (data->window)->changed))
+  	gE_document_new(data->window);
    
    filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
    
   if (filename != NULL) {
     nfile = g_malloc(strlen(filename)+1);
     strcpy(nfile, filename);
-    gE_file_open (gE_document_current(main_window), nfile);
+    gE_file_open (data->window, gE_document_current(data->window), nfile);
   }
   if (GTK_WIDGET_VISIBLE(fs))
     gtk_widget_hide (GTK_WIDGET(fs));
 }
 
-void file_save_ok_sel (GtkWidget *w, GtkFileSelection *fs)
+void file_save_ok_sel (GtkWidget *w, gE_data *data)
 {
   char *filename, *nfile;
+  GtkFileSelection *fs = (GtkFileSelection *) data->window->save_fileselector;
   filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
   if (filename != NULL)
   {
     nfile = g_malloc(strlen(filename)+1);
     strcpy(nfile, filename);
-    gE_file_save (gE_document_current(main_window), nfile);
+    gE_file_save (data->window, gE_document_current(data->window), nfile);
   }
   
   if (GTK_WIDGET_VISIBLE(fs))
@@ -142,65 +148,69 @@ void destroy (GtkWidget *w, GtkFileSelection *fs)
 	fs = NULL;
 }
 
-void prefs_callback (GtkWidget *widget, gpointer data)
+void prefs_callback (GtkWidget *widget, gE_window *window)
 {
-	prefs_window = gE_prefs_window();
+	prefs_window = gE_prefs_window(window);
 }
 
 /* --- Notebook Tab Stuff --- */
 
-void tab_top_cback (GtkWidget *widget, gpointer data)
+void tab_top_cback (GtkWidget *widget, gE_window *window)
 {
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 2);
-	main_window->tab_pos = 2;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 2);
+	window->tab_pos = 2;
 }
 
 
-void tab_bot_cback (GtkWidget *widget, gpointer data)
+void tab_bot_cback (GtkWidget *widget, gE_window *window)
 {
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 3);
-	main_window->tab_pos = 3;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 3);
+	window->tab_pos = 3;
 }
 
-void tab_lef_cback (GtkWidget *widget, gpointer data)
+void tab_lef_cback (GtkWidget *widget, gE_window *window)
 {
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 4);
-	main_window->tab_pos = 4;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 4);
+	window->tab_pos = 4;
 }
 
-void tab_rgt_cback (GtkWidget *widget, gpointer data)
+void tab_rgt_cback (GtkWidget *widget, gE_window *window)
 {
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(main_window->notebook), 1);
-	main_window->tab_pos = 1;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 1);
+	window->tab_pos = 1;
 }
 
-void tab_toggle_cback (GtkWidget *widget, gpointer data)
+void tab_toggle_cback (GtkWidget *widget, gE_window *window)
 {
-	main_window->show_tabs = !main_window->show_tabs;
-	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (main_window->notebook), main_window->show_tabs);
+	window->show_tabs = !window->show_tabs;
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (window->notebook), window->show_tabs);
 }
 
 
 
 /* ---- Auto-indent Callback(s) --- */
 
-void auto_indent_toggle_callback (GtkWidget *w, gpointer data)
+void auto_indent_toggle_callback (GtkWidget *w, gE_data *data)
 {
-	main_window->auto_indent = !main_window->auto_indent;
+	data->window->auto_indent = !data->window->auto_indent;
 }
 
-void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
+void auto_indent_callback (GtkWidget *text, GdkEventKey *event, gE_window *window)
 {
 	int i, newlines, newline_1 = 0;
 	gchar *buffer, *whitespace;
-
-	line_pos_callback (NULL, text);
+	gE_data *data;
+	
+	data = g_malloc0 (sizeof (gE_data));
+	data->temp2 = text;
+	data->window = window;
+	line_pos_callback (NULL, data);
 
 	if (event->keyval != GDK_Return)
 		return;
 	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
 		return;
-	if (!main_window->auto_indent)
+	if (!data->window->auto_indent)
 		return;
 
 	newlines = 0;
@@ -242,65 +252,84 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 	}
 	
 	g_free (whitespace);
-	line_pos_callback (NULL, text); /* <-- this is so the statusbar updates when it auto-indents */
+	data->temp2 = text;
+	line_pos_callback (NULL, data); /* <-- this is so the statusbar updates when it auto-indents */
 }
 
 
-void line_pos_callback(GtkWidget *w, GtkWidget *text)
+void line_pos_callback(GtkWidget *w, gE_data *data)
 {
 	static char line [32];
 	static char col [32];
-
-	if (main_window->documents)
-	{
-
-		sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);
-		sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
+	GtkWidget *text = data->temp2;
 	
-		gtk_label_set (GTK_LABEL(main_window->line_label), line);
-		gtk_label_set (GTK_LABEL(main_window->col_label), col);
-	}
+	sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);
+	sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
+	
+	gtk_label_set (GTK_LABEL(data->window->line_label), line);
+	gtk_label_set (GTK_LABEL(data->window->col_label), col);
+
 }
 
 
-void gE_event_button_press (GtkWidget *w, GdkEventButton *event)
+void gE_event_button_press (GtkWidget *w, GdkEventButton *event, gE_window *window)
 {
-	line_pos_callback (NULL, w);
+	gE_data *data;
+	data = g_malloc0 (sizeof (gE_data));
+	data->temp2 = w;
+	data->window = window;
+	line_pos_callback (NULL, data);
 }
 
 
 /* ---- File Menu Callbacks ---- */
 
-void file_new_cmd_callback (GtkWidget *widget, gpointer data)
+void file_new_cmd_callback (GtkWidget *widget, gE_data *data)
 {
-	gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("New File..."));
-  gE_document_new(main_window);
+	gtk_statusbar_push (GTK_STATUSBAR(data->window->statusbar), 1, ("New File..."));
+	gE_document_new(data->window);
 }
 
-void file_open_cmd_callback (GtkWidget *widget, gpointer data)
+
+void file_newwindow_cmd_callback (GtkWidget *widget, gE_data *data)
 {
-  if (main_window->open_fileselector == NULL) {
-	main_window->open_fileselector = gtk_file_selection_new(("Open File..."));
-	gtk_signal_connect (GTK_OBJECT (main_window->open_fileselector), 
-		"destroy", (GtkSignalFunc) destroy, main_window->open_fileselector);
-	gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (main_window->open_fileselector)->ok_button), 
-		"clicked", (GtkSignalFunc) file_open_ok_sel, main_window->open_fileselector);
-	gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (main_window->open_fileselector)->cancel_button),
-		"clicked", (GtkSignalFunc) file_cancel_sel, main_window->open_fileselector);
+	gE_window *window;
+	window = gE_window_new();
+	window->auto_indent = data->window->auto_indent;
+	window->show_tabs = data->window->show_tabs;
+	window->show_status = data->window->show_status;
+	window->tab_pos = data->window->tab_pos;
+	window->have_toolbar = data->window->have_toolbar;
+	#ifndef WITHOUT_GNOME
+	gE_get_settings (window);
+	#endif
+	g_list_append (window_list, window);
+}
+
+
+void file_open_cmd_callback (GtkWidget *widget, gE_data *data)
+{
+  if (data->window->open_fileselector == NULL) {
+	data->window->open_fileselector = gtk_file_selection_new(("Open File..."));
+	gtk_signal_connect (GTK_OBJECT (data->window->open_fileselector), 
+		"destroy", (GtkSignalFunc) destroy, data->window->open_fileselector);
+	gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->open_fileselector)->ok_button), 
+		"clicked", (GtkSignalFunc) file_open_ok_sel, data);
+	gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->open_fileselector)->cancel_button),
+		"clicked", (GtkSignalFunc) file_cancel_sel, data->window->open_fileselector);
   }
 
-  if (GTK_WIDGET_VISIBLE(main_window->open_fileselector))
+  if (GTK_WIDGET_VISIBLE(data->window->open_fileselector))
     return;
   else {
-/*    gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->open_fileselector), "./");
-*/    gtk_widget_show (main_window->open_fileselector);
+	gtk_widget_show (data->window->open_fileselector);
   }
 }
 
-void file_save_cmd_callback (GtkWidget *widget, gpointer data)
+void file_save_cmd_callback (GtkWidget *widget, gE_data *data)
 {
 	gchar *fname;
- 	fname =   gE_document_current(main_window)->filename;
+ 	fname =   gE_document_current(data->window)->filename;
  /*	g_print("%s\n",fname);*/
 	if (fname == NULL)
 	{	g_print("..\n");
@@ -310,150 +339,179 @@ void file_save_cmd_callback (GtkWidget *widget, gpointer data)
 		file_save_as_cmd_callback(NULL, NULL);
 	}
 	else
-		gE_file_save (gE_document_current(main_window),
-							gE_document_current(main_window)->filename);
+		gE_file_save (data->window,
+							gE_document_current(data->window),
+							gE_document_current(data->window)->filename);
 }
 
-void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
+void file_save_as_cmd_callback (GtkWidget *widget, gE_data *data)
 {
-	if (main_window->save_fileselector == NULL) {
-		main_window->save_fileselector = gtk_file_selection_new(("Save As..."));
-		gtk_signal_connect (GTK_OBJECT (main_window->save_fileselector), 
-			"destroy", (GtkSignalFunc) destroy, main_window->save_fileselector);
-		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (main_window->save_fileselector)->ok_button), 
-			"clicked", (GtkSignalFunc) file_save_ok_sel, main_window->save_fileselector);
-		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (main_window->save_fileselector)->cancel_button),
-			"clicked", (GtkSignalFunc) file_cancel_sel, main_window->save_fileselector);
+	if (data->window->save_fileselector == NULL) {
+		data->window->save_fileselector = gtk_file_selection_new(("Save As..."));
+		gtk_signal_connect (GTK_OBJECT (data->window->save_fileselector), 
+			"destroy", (GtkSignalFunc) destroy, data->window->save_fileselector);
+		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->save_fileselector)->ok_button), 
+			"clicked", (GtkSignalFunc) file_save_ok_sel, data);
+		gtk_signal_connect(GTK_OBJECT (GTK_FILE_SELECTION (data->window->save_fileselector)->cancel_button),
+			"clicked", (GtkSignalFunc) file_cancel_sel, data->window->save_fileselector);
  	}
-	if (GTK_WIDGET_VISIBLE(main_window->save_fileselector))
+	if (GTK_WIDGET_VISIBLE(data->window->save_fileselector))
     		return;
   	else {
-  		/*gtk_file_selection_set_filename (GTK_FILE_SELECTION (main_window->save_fileselector), "./");*/
-   		gtk_widget_show (main_window->save_fileselector);
+   		gtk_widget_show (data->window->save_fileselector);
 	}
 }
 
-void file_close_cmd_callback (GtkWidget *widget, gpointer data)
+void file_close_cmd_callback (GtkWidget *widget, gE_data *data)
 {
-	gE_window *quitting = (gE_window *)data;
-  /* This works, but sometimes  segfaults! need someway to check if file has been edited....
-  				- Alex */
- /* OK, pretty sure I've fixed the segfaults, will need to test it more though... 
-                        -Evan */
-/* Checks if the file has been edited or not now too...
-				-Evan */
 
 	gE_document *doc;
 
-	doc = gE_document_current(main_window);
+	doc = gE_document_current(data->window);
 	if (doc->changed != TRUE) {
-		if (g_list_length(((GtkNotebook *)(main_window->notebook))->first_tab) > 1) {
-			gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),
-				gtk_notebook_current_page (GTK_NOTEBOOK(main_window->notebook)));
-			g_list_remove(main_window->documents, doc);
+		if (g_list_length(((GtkNotebook *)(data->window->notebook))->first_tab) > 1) {
+			gtk_notebook_remove_page(GTK_NOTEBOOK(data->window->notebook),
+				gtk_notebook_current_page (GTK_NOTEBOOK(data->window->notebook)));
+			g_list_remove(data->window->documents, doc);
 			if (doc->filename != NULL)
 				g_free (doc->filename);
 			g_free (doc);
-			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Closed..."));
-			if (quitting)
-				file_close_cmd_callback (widget, quitting);
+			gtk_statusbar_push (GTK_STATUSBAR(data->window->statusbar), 1, ("File Closed..."));
+			if (data->temp1)
+				file_close_cmd_callback (widget, data);
 		}
 		else {
-			gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),
-						 gtk_notebook_current_page (GTK_NOTEBOOK(main_window->notebook)));
+			gtk_notebook_remove_page(GTK_NOTEBOOK(data->window->notebook),
+						 gtk_notebook_current_page (GTK_NOTEBOOK(data->window->notebook)));
 			if (doc->filename != NULL)
 				g_free (doc->filename);
 			g_free (doc);
-			g_list_free (main_window->documents);
-			main_window->documents = NULL;
-			if (!quitting)
-				gE_document_new (main_window);
+			g_list_free (data->window->documents);
+			data->window->documents = NULL;
+			if (!data->temp1)
+				gE_document_new (data->window);
 			else
 			{
-#ifndef WITHOUT_GNOME
-				gE_save_settings(main_window->print_cmd);
-#endif
-				gE_quit();
+				#ifndef WITHOUT_GNOME
+				gE_save_settings(data->window, data->window->print_cmd);
+				#endif
+				file_close_window_cmd_callback (NULL, data);
+				return;
 			}
 		}
 	}
 	else
-		popup_close_verify(doc, quitting);
+		popup_close_verify(doc, data);
 
-		gtk_statusbar_pop (GTK_STATUSBAR(main_window->statusbar), 1);
+		gtk_statusbar_pop (GTK_STATUSBAR(data->window->statusbar), 1);
 
 }
 
+void file_close_window_cmd_callback (GtkWidget *widget, gE_data *data)
+{
+	data->temp1 = data->window;
+	if (data->window->documents) {
+		file_close_cmd_callback (NULL, data);
+		return;
+	}
+	if (g_list_length (window_list) > 2)
+	{
+		g_free (data->window->search);
+		gtk_widget_destroy (data->window->window);
+		g_list_remove (window_list, data->window);
+		g_free (data->window);
+		if (data->temp2)
+		{
+			data->window = g_list_nth_data (window_list, 1);
+			file_close_window_cmd_callback (NULL, data);
+		}
+	}
+	else {
+		g_free (data->window->search);
+		gtk_widget_destroy (data->window->window);
+		g_list_free (window_list);
+		g_free (data->window);
+		g_free (data);
+		gtk_exit (0);
+	}
+}
+
+void file_quit_cmd_callback (GtkWidget *widget, gE_data *data)
+{
+  data->temp2 = data->window;
+  file_close_window_cmd_callback (NULL, data);
+}
+
+
 /* ---- Print Function ---- */
 
-void file_print_cmd_callback (GtkWidget *widget, gpointer data)
+void file_print_cmd_callback (GtkWidget *widget, gE_data *data)
 {
 char print[256];
 
- /*if (gE_document_current(main_window)->filename == NULL)
-  {*/
      file_save_cmd_callback(NULL,NULL);
-   /*}*/
 
 	strcpy(print, "");
-	strcpy(print, main_window->print_cmd);
+	strcpy(print, data->window->print_cmd);
 
                       
-	strcat(print, gE_document_current(main_window)->filename);
+	strcat(print, gE_document_current(data->window)->filename);
 	system (print);   
 	
-   			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, ("File Printed..."));
+   			gtk_statusbar_push (GTK_STATUSBAR(data->window->statusbar), 1, ("File Printed..."));
    /*system("rm -f temp001");*/
 
 }
 
 /* ---- Clipboard Callbacks ---- */
 
-void edit_cut_cmd_callback (GtkWidget *widget, gpointer data)
+void edit_cut_cmd_callback (GtkWidget *widget, gE_data *data)
 {
 #if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
-   gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text));
+   gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
-   gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text), Ctime);
+   gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text), Ctime);
 #endif
 }
 
-void edit_copy_cmd_callback (GtkWidget *widget, gpointer data)
+void edit_copy_cmd_callback (GtkWidget *widget, gE_data *data)
 {
 #if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
-   gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text));
+   gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
-   gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text), Ctime);
+   gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text), Ctime);
 #endif
 }
 	
-void edit_paste_cmd_callback (GtkWidget *widget, gpointer data)
+void edit_paste_cmd_callback (GtkWidget *widget, gE_data *data)
 {
 #if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
-   gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text));
+   gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
-   gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text), Ctime);
+   gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text), Ctime);
 #endif
 }
 
-void edit_selall_cmd_callback (GtkWidget *widget, gpointer data)
+void edit_selall_cmd_callback (GtkWidget *widget, gE_data *data)
 {
-   gtk_editable_select_region (GTK_EDITABLE(gE_document_current(main_window)->text),
+   gtk_editable_select_region (GTK_EDITABLE(gE_document_current(data->window)->text),
    			       0,
-			      (gtk_text_get_length(GTK_TEXT(gE_document_current(main_window)->text))));
+			      (gtk_text_get_length(GTK_TEXT(gE_document_current(data->window)->text))));
 }
 
 
 /* ---- Search and Replace functions ---- */
-void popup_replace_window();
+void popup_replace_window(gE_data *data);
 
-void search_start (GtkWidget *w, gE_search *options)
+void search_start (GtkWidget *w, gE_data *data)
 {
+	gE_search *options;
 	gE_document *doc;
 	gchar *search_for, *buffer, *replace_with;
 	gchar bla[] = " ";
 	gint len, start_pos, text_len, match, i, search_for_line, cur_line, end_line, replace_diff = 0;
-	doc = gE_document_current (main_window);
+	options = data->temp2;
+	doc = gE_document_current (data->window);
 	search_for = gtk_entry_get_text (GTK_ENTRY(options->search_entry));
 	replace_with = gtk_entry_get_text (GTK_ENTRY(options->replace_entry));
 	buffer = g_malloc0 (sizeof(search_for));
@@ -531,7 +589,7 @@ void search_start (GtkWidget *w, gE_search *options)
 			{
 				if (GTK_TOGGLE_BUTTON(options->prompt_before_replacing)->active) {
 					gtk_text_set_point (GTK_TEXT(doc->text), i+2);
-					popup_replace_window();
+					popup_replace_window(data);
 					return;
 				}
 				else {
@@ -581,22 +639,23 @@ void search_for_line (GtkWidget *w, gE_search *options)
 
 }
 
-void search_goto_line_callback (GtkWidget *w, gpointer data)
+void search_goto_line_callback (GtkWidget *w, gE_window *window)
 {
-	if (!main_window->search->window)
-		search_create (main_window->search, 0);
-	gtk_check_menu_item_set_state (GTK_CHECK_MENU_ITEM (main_window->search->line_item), 1);
-	gtk_option_menu_set_history (GTK_OPTION_MENU (main_window->search->search_for), 1);
-	search_for_line (NULL, main_window->search);
-	gtk_widget_show (main_window->search->window);
+	if (!window->search->window)
+		search_create (window, window->search, 0);
+	gtk_check_menu_item_set_state (GTK_CHECK_MENU_ITEM (window->search->line_item), 1);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (window->search->search_for), 1);
+	search_for_line (NULL, window->search);
+	gtk_widget_show (window->search->window);
 
 }
 
 
-void search_create (gE_search *options, gint replace)
+void search_create (gE_window *window, gE_search *options, gint replace)
 {
 	GtkWidget *search_label, *replace_label, *ok, *cancel, *search_hbox, *replace_hbox, *hbox;
 	GtkWidget *search_for_menu_items, *search_for_label;
+	gE_data *data;
 	options->window = gtk_dialog_new();
 	gtk_window_set_policy (GTK_WINDOW(options->window), TRUE, TRUE, TRUE);
 
@@ -694,7 +753,11 @@ void search_create (gE_search *options, gint replace)
 	gtk_widget_show (ok);
 	gtk_widget_show (cancel);
 	/*gtk_widget_show (options->window);*/
-	gtk_signal_connect (GTK_OBJECT(ok), "clicked", GTK_SIGNAL_FUNC(search_start), options);
+	
+	data = g_malloc0 (sizeof (gE_data));
+	data->window = window;
+	data->temp2 = options;
+	gtk_signal_connect (GTK_OBJECT(ok), "clicked", GTK_SIGNAL_FUNC(search_start), data);
 	gtk_signal_connect_object (GTK_OBJECT(ok), "clicked", 
 	                                       GTK_SIGNAL_FUNC(gtk_widget_hide), (gpointer) options->window);
 	/*GTK_WIDGET_SET_FLAGS (ok, GTK_CAN_DEFAULT);
@@ -705,67 +768,70 @@ void search_create (gE_search *options, gint replace)
 
 
 
-void search_search_cmd_callback (GtkWidget *w, gpointer data)
+void search_search_cmd_callback (GtkWidget *w, gE_data *data)
 {
-	if (!main_window->search->window)
-		search_create (main_window->search, 0);
+	if (!data->window->search->window)
+		search_create (data->window, data->window->search, 0);
 
-	main_window->search->replace = 0;
-	main_window->search->again = 0;
-	search_for_text (NULL, main_window->search);
-	gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search"));
-	gtk_widget_hide (main_window->search->replace_box);
-	gtk_widget_show (main_window->search->window);
+	data->window->search->replace = 0;
+	data->window->search->again = 0;
+	search_for_text (NULL, data->window->search);
+	gtk_window_set_title (GTK_WINDOW (data->window->search->window), ("Search"));
+	gtk_widget_hide (data->window->search->replace_box);
+	gtk_widget_show (data->window->search->window);
 
 }
 
-void search_replace_cmd_callback (GtkWidget *w, gpointer data)
+void search_replace_cmd_callback (GtkWidget *w, gE_data *data)
 {
-	if (!main_window->search->window)
-		search_create (main_window->search, 1);
+	if (!data->window->search->window)
+		search_create (data->window, data->window->search, 1);
 
-	main_window->search->replace = 1;
-	main_window->search->again = 0;
-	search_for_text (NULL, main_window->search);
-	gtk_window_set_title (GTK_WINDOW (main_window->search->window), ("Search and Replace"));
-	gtk_widget_show (main_window->search->replace_box);
-	gtk_widget_show (main_window->search->window);
+	data->window->search->replace = 1;
+	data->window->search->again = 0;
+	search_for_text (NULL, data->window->search);
+	gtk_window_set_title (GTK_WINDOW (data->window->search->window), ("Search and Replace"));
+	gtk_widget_show (data->window->search->replace_box);
+	gtk_widget_show (data->window->search->window);
 
 	
 }
 
-void search_again_cmd_callback (GtkWidget *w, gpointer data)
+void search_again_cmd_callback (GtkWidget *w, gE_data *data)
 {
-	if (main_window->search->window) {
-		main_window->search->replace = 0;
-		main_window->search->again = 1;
-		search_start (w, main_window->search);
+	if (data->window->search->window) {
+		data->temp2 = data->window->search;
+		data->window->search->replace = 0;
+		data->window->search->again = 1;
+		search_start (w, data);
 	}
 }
 
-void search_replace_yes_sel (GtkWidget *w, gpointer data)
+void search_replace_yes_sel (GtkWidget *w, gE_data *data)
 {
 	gchar *replace_with;
 	gE_document *doc;
 	gint i;
-	doc = gE_document_current (main_window);
-	replace_with = gtk_entry_get_text (GTK_ENTRY(main_window->search->replace_entry));
+	doc = gE_document_current (data->window);
+	replace_with = gtk_entry_get_text (GTK_ENTRY(data->window->search->replace_entry));
 	i = gtk_text_get_point (GTK_TEXT (doc->text)) - 2;
 	gtk_editable_delete_selection (GTK_EDITABLE(doc->text));
 	gtk_editable_insert_text (GTK_EDITABLE(doc->text), replace_with, strlen(replace_with), &i);
 	gtk_text_set_point (GTK_TEXT(doc->text), i+strlen(replace_with));
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON(main_window->search->start_at_cursor), TRUE);
-	search_start (w, main_window->search);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON(data->window->search->start_at_cursor), TRUE);
+	data->temp2 = data->window->search;
+	search_start (w, data);
 }
 
-void search_replace_no_sel (GtkWidget *w, gpointer data)
+void search_replace_no_sel (GtkWidget *w, gE_data *data)
 {
-	/*gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON(main_window->search->start_at_cursor), TRUE);*/
-	main_window->search->again = 1;
-	search_start (w, main_window->search);
+	/*gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON(data->window->search->start_at_cursor), TRUE);*/
+	data->window->search->again = 1;
+	data->temp2 = data->window->search;
+	search_start (w, data);
 }
 
-void popup_replace_window()
+void popup_replace_window(gE_data *data)
 {
 	GtkWidget *window, *yes, *no, *cancel, *label;
 	window = gtk_dialog_new();
@@ -791,8 +857,8 @@ void popup_replace_window()
 	gtk_widget_show (no);
 	gtk_widget_show (cancel);
 	gtk_widget_show (window);
-	gtk_signal_connect (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(search_replace_yes_sel), NULL);
-	gtk_signal_connect (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(search_replace_no_sel), NULL);
+	gtk_signal_connect (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(search_replace_yes_sel), data);
+	gtk_signal_connect (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(search_replace_no_sel), data);
 	gtk_signal_connect_object (GTK_OBJECT(yes), "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) window);
 	gtk_signal_connect_object (GTK_OBJECT(no), "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) window);
 	gtk_signal_connect_object (GTK_OBJECT(cancel), "clicked", GTK_SIGNAL_FUNC(gtk_widget_destroy), (gpointer) window);
