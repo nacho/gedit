@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2001-02-28 13:55+0100\n"
+"POT-Creation-Date: 2001-06-27 12:08+0900\n"
 "PO-Revision-Date: 2000-10-15 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -15,11 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:251
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/browse/browse.c:38 plugins/browse/browse.c:250
 msgid "Browse"
 msgstr "•÷•È•¶•∫"
 
-#: plugins/browse/browse.c:252 plugins/browse/browse.c:253
+#: plugins/browse/browse.c:251 plugins/browse/browse.c:252
 msgid "Web browse plugin"
 msgstr "Web•÷•È•¶•∂•◊•È•∞•§•Û"
 
@@ -29,36 +31,32 @@ msgstr "Web•÷•È•¶•∂•◊•È•∞•§•Û"
 #. * DO NOT compile it as part of your application.
 #.
 #: plugins/browse/browse.glade.h:7
-#, fuzzy
 msgid "gedit: Web Browse plugin"
-msgstr "gedit•¶•ß•÷•÷•È•¶•∂•◊•È•∞•§•Û"
+msgstr "gedit: •¶•ß•÷•÷•È•¶•∂•◊•È•∞•§•Û"
 
 #: plugins/browse/browse.glade.h:8
-#, fuzzy
 msgid "Enter the _URL to browse for:"
-msgstr "•÷•È•¶•∂§π§ÎURL§Ú∆˛Œœ§∑§∆≤º§µ§§ :"
+msgstr "•÷•È•¶•∫§π§ÎURL§Ú∆˛Œœ§∑§∆≤º§µ§§(_U) :"
 
 #: plugins/browse/browse.glade.h:9
-#, fuzzy
 msgid "Lynx found at: "
 msgstr "lynx§¨∏´§ƒ§´§Í§ﬁ§∑§ø : "
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "∞Ã√÷"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
-#, fuzzy
 msgid " _Change... "
-msgstr " —ππ..."
+msgstr " —ππ(_C)..."
 
-#: plugins/convert/convert.c:180
+#: plugins/convert/convert.c:179
 msgid "Convert"
 msgstr " —¥π"
 
-#: plugins/convert/convert.c:181 plugins/convert/convert.c:182
+#: plugins/convert/convert.c:180 plugins/convert/convert.c:181
 msgid "Number Converter"
 msgstr "øÙ√Õ —¥π"
 
@@ -68,74 +66,73 @@ msgstr "øÙ√Õ —¥π"
 #. * DO NOT compile it as part of your application.
 #.
 #: plugins/convert/convert.glade.h:7
-#, fuzzy
 msgid "gedit: Number Converter plugin"
-msgstr "øÙ√Õ —¥π"
+msgstr "gedit: øÙ√Õ —¥π•◊•È•∞•§•Û"
 
 #: plugins/convert/convert.glade.h:8
-#, fuzzy
 msgid "_Value to be converted:"
-msgstr " —¥π§π§Î√Õ:"
+msgstr " —¥π§π§Î√Õ(_V):"
 
 #: plugins/convert/convert.glade.h:9
-#, fuzzy
 msgid "_Converted value:"
-msgstr " —¥π"
+msgstr " —¥π∏Â§Œ√Õ(_C):"
 
 #: plugins/convert/convert.glade.h:10
-#, fuzzy
 msgid " Decimal to _Hex "
-msgstr "10ø §´§È16ø "
+msgstr "10ø §´§È16ø (_H)"
 
 #: plugins/convert/convert.glade.h:11
-#, fuzzy
 msgid " Decimal to _Octal "
-msgstr "10ø §´§È8ø "
+msgstr "10ø §´§È8ø (_O)"
 
 #: plugins/convert/convert.glade.h:12
-#, fuzzy
 msgid " Hex to Decima_l "
-msgstr "16ø §´§È10ø "
+msgstr "16ø §´§È10ø (_L)"
 
-#: plugins/diff/diff.c:121
-#, fuzzy
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/diff/diff.c:36
+msgid "diff"
+msgstr "»Ê≥”"
+
+#: plugins/diff/diff.c:126
 msgid "The two documents you selected are the same."
-msgstr "¡™¬Ú§µ§Ï§ø2§ƒ§Œ•…•≠•Â•·•Û•»§œ∞Ï√◊§∑§∆§§§ﬁ§π"
+msgstr "¡™¬Ú§µ§Ï§ø2§ƒ§Œ•…•≠•Â•·•Û•»§œ∞Ï√◊§∑§∆§§§ﬁ§π°£"
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:132
 #, fuzzy
 msgid ""
-"The \"first\" file you selected does not exists.\n"
+"The \"first\" file you selected does not exist.\n"
 "\n"
-"Please, provide a valid file."
+"Please provide a valid file."
 msgstr ""
 "¡™¬Ú§µ§Ï§ø•’•°•§•Î§œ¬∏∫ﬂ§∑§ﬁ§ª§Û\n"
 "\n"
 "¿µ§∑§§•’•°•§•ÎÃæ§Ú∆˛Œœ§∑§∆§Ø§¿§µ§§"
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:139
 #, fuzzy
 msgid ""
-"The \"second\" file you selected does not exists.\n"
+"The \"second\" file you selected does not exist.\n"
 "\n"
-"Please, provide a valid file."
+"Please provide a valid file."
 msgstr ""
 "¡™¬Ú§µ§Ï§ø•’•°•§•Î§œ¬∏∫ﬂ§∑§ﬁ§ª§Û\n"
 "\n"
 "¿µ§∑§§•’•°•§•ÎÃæ§Ú∆˛Œœ§∑§∆§Ø§¿§µ§§"
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:150
 #, fuzzy
 msgid "The \"first\" document contains no text."
 msgstr "§≥§Œ•…•≠•Â•·•Û•»§œ•∆•≠•π•»§Ú¥ﬁ§Û§«§§§ﬁ§ª§Û"
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:162
 #, fuzzy
 msgid "The \"second\" document contains no text."
 msgstr "§≥§Œ•…•≠•Â•·•Û•»§œ•∆•≠•π•»§Ú¥ﬁ§Û§«§§§ﬁ§ª§Û"
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:171
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -143,21 +140,21 @@ msgstr ""
 "geditÕ—§Œ∞Ïª˛•’•°•§•Î§Ú¿∏¿Æ§«§≠§ﬁ§ª§Û°£\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:295 plugins/email/email.c:229 src/document.c:669
 #, c-format
 msgid "Untitled %i"
 msgstr "Ãµ¬Í %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:496
 msgid "Diff"
 msgstr "»Ê≥”"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:497
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
 msgstr "2§ƒ§Œ•…•≠•Â•·•Û•»§ﬁ§ø§œ•’•°•§•Î§Ú»Ê≥”§∑§ﬁ§π"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:498
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
@@ -208,24 +205,35 @@ msgid "Select the \"second\" file..."
 msgstr ""
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr ""
+
+#: plugins/diff/diff.glade.h:18
 #, fuzzy
 msgid "Diff found at: "
 msgstr "diff§¨∏´§ƒ§´§Í§ﬁ§∑§ø : "
 
-#: plugins/email/email.c:76
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/email/email.c:22
+#, fuzzy
+msgid "email"
+msgstr "≈≈ª“•·°º•Î"
+
+#: plugins/email/email.c:75
 #, fuzzy, c-format
 msgid "Executing command: %s"
 msgstr "º¬π‘§π§Î•≥•ﬁ•Û•…: %s"
 
-#: plugins/email/email.c:276
+#: plugins/email/email.c:275
 msgid "Email"
 msgstr "≈≈ª“•·°º•Î"
 
-#: plugins/email/email.c:277
+#: plugins/email/email.c:276
 msgid "Email the current document"
 msgstr "∏Ω∫ﬂ ‘Ω∏√Ê§Œ•’•°•§•Î§Ú•·°º•Î§«¡˜øÆ"
 
-#: plugins/email/email.c:278
+#: plugins/email/email.c:277
 msgid ""
 "Email the current document to a specified email address\n"
 "gedit searches for sendmail to use this plugin."
@@ -300,35 +308,35 @@ msgstr "∞∏¿Ë:"
 msgid "filename"
 msgstr ""
 
-#: plugins/reverse/reverse.c:70
+#: plugins/reverse/reverse.c:69
 msgid "Reverse"
 msgstr "•Í•–°º•π"
 
-#: plugins/reverse/reverse.c:71 plugins/reverse/reverse.c:72
+#: plugins/reverse/reverse.c:70 plugins/reverse/reverse.c:71
 msgid "Reverse text"
 msgstr "•∆•≠•π•»§Ú•Í•–°º•π§∑§ﬁ§π"
 
-#: plugins/sample/sample.c:55
+#: plugins/sample/sample.c:53
 msgid "Hello World"
 msgstr "Hello World"
 
-#: plugins/sample/sample.c:56 plugins/sample/sample.c:57
+#: plugins/sample/sample.c:54 plugins/sample/sample.c:55
 msgid "Sample 'hello world' plugin."
 msgstr "'hello world'§ÚΩ–Œœ§π§Î•µ•Û•◊•Î•◊•È•∞•§•Û§«§π°£"
 
-#: plugins/shell_output/shell_output.c:65
+#: plugins/shell_output/shell_output.c:64
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
 
-#: plugins/shell_output/shell_output.c:214
+#: plugins/shell_output/shell_output.c:213
 msgid "Shell Output"
 msgstr "•∑•ß•ÎΩ–Œœ"
 
+#: plugins/shell_output/shell_output.c:214
 #: plugins/shell_output/shell_output.c:215
-#: plugins/shell_output/shell_output.c:216
 msgid "Insert the shell output in the document"
 msgstr "•∑•ß•Î§ŒΩ–Œœ§Ú•…•≠•Â•·•Û•»§À¡ﬁ∆˛§∑§ﬁ§π"
 
@@ -359,11 +367,11 @@ msgstr "•∑•ß•Î•≥•ﬁ•Û•…§Œ∆˛Œœ "
 msgid "Select the working directory..."
 msgstr ""
 
-#: plugins/time/time.c:84
+#: plugins/time/time.c:83
 msgid "Insert Time"
 msgstr "∏Ω∫ﬂª˛πÔ"
 
-#: plugins/time/time.c:85 plugins/time/time.c:86
+#: plugins/time/time.c:84 plugins/time/time.c:85
 msgid "Inserts the current date and time"
 msgstr "∏Ω∫ﬂ§Œª˛¥÷§Ú•’•°•§•Î§À¡ﬁ∆˛"
 
@@ -380,23 +388,12 @@ msgstr "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
 msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit§œGNOME/Gtk+Õ—§À∫Ó§È§Ï§øæÆ∑ø∑⁄ŒÃ§Œ•∆•≠•π•»•®•«•£•ø§«§π"
 
-#: src/dialogs/dialog-plugins.c:90
+#: src/dialogs/dialog-plugins.c:87
 #, fuzzy, c-format
 msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 msgstr ""
 "%s %s•◊•È•∞•§•Û§œ°¢%sÃµ§∑§«§œª»§®§ﬁ§ª§Û°£\n"
 " %s§ŒæÏΩÍ§Ú§‚§¶∞Ï≈ŸªÿƒÍ§∑§ﬁ§π§´?"
-
-#: src/dialogs/dialog-plugins.c:455
-#, fuzzy, c-format
-msgid ""
-"Plugin Name: %s\n"
-"Author: %s\n"
-"Description: %s\n"
-msgstr ""
-"•◊•È•∞•§•ÛÃæ : %s\n"
-"∫Óº‘ : %s\n"
-"¿‚Ã¿ : %s\n"
 
 #. glade won't let me set the title of the propertybox
 #: src/dialogs/dialog-prefs.c:578
@@ -413,16 +410,18 @@ msgstr "gedit: ¿ﬂƒÍ"
 msgid "Replace"
 msgstr "√÷¥π"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "∏°∫˜"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
+#, fuzzy
+msgid "Search string not found"
 msgstr "•∆•≠•π•»§¨∏´§ƒ§´§Í§ﬁ§ª§Û"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
+#, fuzzy
+msgid "Search string not found."
 msgstr "•∆•≠•π•»§¨∏´§ƒ§´§Í§ﬁ§ª§Û°£"
 
 #: src/dialogs/dialog-replace.c:362
@@ -434,6 +433,11 @@ msgstr "%i∏ƒ§¨∏´§ƒ§´§√§∆√÷¥π§∑§ﬁ§∑§ø°£"
 #, fuzzy
 msgid "Could not allocate the memory for the Replace all request."
 msgstr "Õ◊µ·§µ§Ï§ø•·•‚•Í§Ú≥‰§Í≈ˆ§∆§Î§≥§»§¨§«§≠§ﬁ§ª§Û°£"
+
+#: src/dialogs/dialog-uri.c:143 src/file.c:823 src/file.c:830
+#, c-format
+msgid "Loaded file %s"
+msgstr "∆…§ﬂπ˛§ﬂ¥∞Œª: %s"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -454,47 +458,57 @@ msgstr "π‘»÷πÊ:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+#, fuzzy
+msgid "Preferences"
+msgstr "gedit: ¿ﬂƒÍ"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "≥∞∏´"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
+#: src/dialogs/prefs.glade.h:9
+#, fuzzy
+msgid "S_how statusbar"
 msgstr "•π•∆°º•ø•π•–°º§Ú…Ωº®"
 
-#: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
+#: src/dialogs/prefs.glade.h:10
+#, fuzzy
+msgid "Set toolbar according to _system settings"
 msgstr "•ƒ°º•Î•–°º§œ•∑•π•∆•‡¿ﬂƒÍƒÃ§Í§À§π§Î"
 
-#: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
+#: src/dialogs/prefs.glade.h:11
+#, fuzzy
+msgid "Set toolbar to _icons only"
 msgstr "•ƒ°º•Î•–°º§œ•¢•§•≥•Û§Œ§ﬂ§À§π§Î"
 
-#: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
+#: src/dialogs/prefs.glade.h:12
+#, fuzzy
+msgid "Set toolbar to icons with _text"
 msgstr "•ƒ°º•Î•–°º§œ•¢•§•≥•Û§»•∆•≠•π•»§À§π§Î"
 
-#: src/dialogs/prefs.glade.h:12
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "•®•«•£•ø§Œ∆∞∫Ó"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
-msgstr "º´∆∞ª˙≤º§≤"
-
 #: src/dialogs/prefs.glade.h:14
 #, fuzzy
-msgid "Tab width: "
-msgstr "√÷¥π(_R): "
+msgid "Enable _Auto-indent"
+msgstr "º´∆∞ª˙≤º§≤"
 
 #: src/dialogs/prefs.glade.h:15
+#, fuzzy
+msgid "Tab _width: "
+msgstr "√÷¥π(_R): "
+
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "∞Ï»Ã"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (•ﬁ•Î•¡°¶•…•≠•Â•·•Û•»°¶•§•Û•ø°º•’•ß°º•π)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -506,7 +520,7 @@ msgstr ""
 "æÂ\n"
 "≤º\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -518,96 +532,109 @@ msgstr ""
 "•‚°º•¿•Î\n"
 "•«•’•©•Î•»\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
+#: src/dialogs/prefs.glade.h:28
+#, fuzzy
+msgid "_Mode: "
 msgstr "•‚°º•…: "
 
-#: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
+#: src/dialogs/prefs.glade.h:29
+#, fuzzy
+msgid "Notebook _tab position: "
 msgstr "•ø•÷§Œ∞Ã√÷: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "∏µ§ÀÃ·§π"
 
-#: src/dialogs/prefs.glade.h:30
+#: src/dialogs/prefs.glade.h:31
 #, fuzzy
-msgid "Set limit on undo levels to:"
+msgid "Set limit on _undo levels to:"
 msgstr "∏µ§ÀÃ·§ª§Î≤ÛøÙ :"
 
-#: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
+#: src/dialogs/prefs.glade.h:32
+#, fuzzy
+msgid "_level(s)"
 msgstr "•Ï•Ÿ•Î"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "•…•≠•Â•·•Û•»"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "•’•©•Û•»"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "•’•©•Û•»§Ú¡™¬Ú"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
-#: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
+#: src/dialogs/prefs.glade.h:37
+#, fuzzy
+msgid "_Default font: "
 msgstr "•«•’•©•Î•»: "
 
-#: src/dialogs/prefs.glade.h:37
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "øß"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "øß§Ú¡™¬Ú"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
+#: src/dialogs/prefs.glade.h:41
+#, fuzzy
+msgid "_Background: "
 msgstr "«ÿ∑ øß: "
 
-#: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
+#: src/dialogs/prefs.glade.h:42
+#, fuzzy
+msgid "_Foreground: "
 msgstr " ∏ª˙øß: "
 
-#: src/dialogs/prefs.glade.h:42
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "•’•©•Û•»/øß"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "∞ı∫˛"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "•ÿ•√•¿§Œƒ…≤√(_H)"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr " ∏ª˙§Ú¿ﬁ§Í ÷§π(_W)"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
+#: src/dialogs/prefs.glade.h:47
+#, fuzzy
+msgid "Print line _numbers every:"
 msgstr "π‘øÙ§Œ…Ωº®(_L):"
 
-#: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
+#: src/dialogs/prefs.glade.h:48
+#, fuzzy
+msgid "l_ine(s)"
 msgstr "π‘ÀË§À…Ωº®"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
+#, fuzzy
+msgid "Orientation"
+msgstr "∞ı∫˛"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "Ωƒ(_P)"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "≤£(_L)"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Õ—ªÊ"
 
@@ -671,85 +698,100 @@ msgstr "¬ÁæÆ ∏ª˙§Ú∂Ë Ã§π§Î(_N)"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/plugin-manager.glade.h:7
-msgid "gedit Plugin Manager"
+#, fuzzy
+msgid "Plugins manager..."
 msgstr "gedit•◊•È•∞•§•Û•ﬁ•Õ°º•∏•„"
 
 #: src/dialogs/plugin-manager.glade.h:8
-msgid "Select the plugins to install"
+#, fuzzy
+msgid "Select the plugins to activate:"
 msgstr "•§•Û•π•»°º•Î§π§Î•◊•È•∞•§•Û§Ú¡™¬Ú§∑§∆§Ø§¿§µ§§"
 
-#: src/dialogs/plugin-manager.glade.h:9 src/dialogs/plugin-manager.glade.h:10
-msgid "Available Plugins"
-msgstr "Õ¯Õ—≤ƒ«Ω§ •◊•È•∞•§•Û"
+#: src/dialogs/plugin-manager.glade.h:9
+msgid "_Activate all"
+msgstr ""
+
+#: src/dialogs/plugin-manager.glade.h:10
+msgid "_Deactivate all"
+msgstr ""
 
 #: src/dialogs/plugin-manager.glade.h:11
-msgid "Add >"
-msgstr "ƒ…≤√ >"
+#, fuzzy
+msgid "De_scription"
+msgstr "•◊•È•∞•§•Û§Œ¿‚Ã¿"
 
 #: src/dialogs/plugin-manager.glade.h:12
-msgid "< Remove"
-msgstr "< ∫ÔΩ¸"
+#, fuzzy
+msgid "File name:"
+msgstr "π‘»÷πÊ:"
 
 #: src/dialogs/plugin-manager.glade.h:13
-msgid "Add All >>"
-msgstr "§π§Ÿ§∆ƒ…≤√ >>"
+msgid "Author(s):"
+msgstr ""
 
 #: src/dialogs/plugin-manager.glade.h:14
-msgid "<< Remove All"
-msgstr "<< §π§Ÿ§∆∫ÔΩ¸"
+msgid "De_tails"
+msgstr ""
 
-#: src/dialogs/plugin-manager.glade.h:15 src/dialogs/plugin-manager.glade.h:16
-msgid "Installed Plugins"
-msgstr "•§•Û•π•»°º•Î∫—•◊•È•∞•§•Û"
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/uri.glade.h:7
+#, fuzzy
+msgid "Open from URI"
+msgstr "≥´§Ø..."
 
-#: src/dialogs/plugin-manager.glade.h:17
-msgid "Plugin description"
-msgstr "•◊•È•∞•§•Û§Œ¿‚Ã¿"
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
+msgid "Open"
+msgstr "≥´§Ø"
+
+#: src/dialogs/uri.glade.h:9
+msgid "enter the location (URI) of the file you would like to open:"
+msgstr ""
 
 #: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr "RO - "
 
+#: src/document.c:295
+#, c-format
+msgid "%s %d"
+msgstr ""
+
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Ãæ¡∞Ãµ§∑"
 
-#: src/document.c:479
+#: src/document.c:299
+#, c-format
+msgid "%s %d*"
+msgstr ""
+
+#: src/document.c:477
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' §œ —ππ§µ§Ï§∆§§§ﬁ§π°£ ›¬∏§∑§ﬁ§π§´°©"
 
-#. If you try to open a non existant remote file
-#: src/document.c:710
-#, fuzzy, c-format
-msgid ""
-"An error was encountered while opening the file: \n"
-"\n"
-"%s\n"
-"\n"
-"Please make sure the file exists."
-msgstr ""
-"•’•°•§•Î \"%s\"§Ú≥´§Ø§»§≠§À•®•È°º§¨µØ§≠§ﬁ§∑§ø°£\n"
-"•’•°•§•Î§¨¬∏∫ﬂ§π§Î§´°¢≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
-
-#: src/document.c:763 src/document.c:771
+#: src/document.c:679 src/document.c:687
 msgid "(modified)"
 msgstr "(Ω§¿µ§µ§Ï§ﬁ§∑§ø)"
 
-#: src/document.c:765 src/document.c:773
+#: src/document.c:681 src/document.c:689
 msgid "(readonly)"
 msgstr "(ΩÒ§≠π˛§ﬂ∂ÿªﬂ)"
 
-#: src/document.c:824 src/document.c:864
+#: src/document.c:740 src/document.c:780
 msgid "This file does not end with a valid extension\n"
 msgstr "§≥§Œ•’•°•§•Î§œ¿µ§∑§§≥»ƒ•ª“§«Ω™Œª§∑§∆§§§ﬁ§ª§Û\n"
 
-#: src/document.c:872
+#: src/document.c:788
 #, c-format
 msgid "The file %s was not found."
 msgstr "•’•°•§•Î %s §¨∏´§ƒ§´§Í§ﬁ§ª§Û°£"
 
-#: src/file.c:197
+#: src/file.c:226
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -758,7 +800,7 @@ msgstr ""
 "•’•°•§•Î \"%s\"§Ú≥´§Ø§»§≠§À•®•È°º§¨µØ§≠§ﬁ§∑§ø°£\n"
 "•’•°•§•Î§¨¬∏∫ﬂ§π§Î§´°¢≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:219
+#: src/file.c:245
 #, fuzzy, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -767,7 +809,7 @@ msgstr ""
 "•’•°•§•Î \"%s\"§Ú≥´§Ø§»§≠§À•®•È°º§¨µØ§≠§ﬁ§∑§ø°£\n"
 "•’•°•§•Î§¨¬∏∫ﬂ§π§Î§´°¢≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:232
+#: src/file.c:257
 #, fuzzy, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -782,7 +824,7 @@ msgstr ""
 "\n"
 "•’•°•§•Î§Œ•—°º•ﬂ•√•∑•Á•Û§Ú≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:252
+#: src/file.c:277
 #, fuzzy, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -792,7 +834,7 @@ msgstr ""
 "•’•°•§•Î \"%s\"§Ú≥´§Ø§»§≠§À•®•È°º§¨µØ§≠§ﬁ§∑§ø°£\n"
 "•’•°•§•Î§¨¬∏∫ﬂ§π§Î§´°¢≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:273
+#: src/file.c:298
 #, fuzzy, c-format
 msgid ""
 "Internal error reading the file: \n"
@@ -808,7 +850,7 @@ msgstr ""
 "…‘Ã¿§ •®•È°º§«§π (1)°£\n"
 "Ã‰¬Í§Ú submit@bugs.gnome.org §À Ûπ§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:290
+#: src/file.c:314
 #, fuzzy, c-format
 msgid ""
 "An error was encountered while closing the file: \n"
@@ -818,15 +860,15 @@ msgstr ""
 "•’•°•§•Î \"%s\"§Ú≥´§Ø§»§≠§À•®•È°º§¨µØ§≠§ﬁ§∑§ø°£\n"
 "•’•°•§•Î§¨¬∏∫ﬂ§π§Î§´°¢≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:482
+#: src/file.c:477
 msgid "Save As..."
 msgstr "Ãæ¡∞§Ú§ƒ§±§∆ ›¬∏..."
 
-#: src/file.c:552
+#: src/file.c:547
 msgid "The document contains no data."
 msgstr "§≥§Œ•…•≠•Â•·•Û•»§À§œ•«°º•ø§¨§¢§Í§ﬁ§ª§Û°£"
 
-#: src/file.c:563
+#: src/file.c:558
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -842,15 +884,15 @@ msgstr ""
 "\n"
 "•’•°•§•Î§Œ•—°º•ﬂ•√•∑•Á•Û§Ú≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:577
+#: src/file.c:572
 #, fuzzy, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (1). Please report this Problem to "
-"submit@bugs.gnome.org"
+"Because of an unknown reason (1). Please report this Problem to submit@bugs."
+"gnome.org"
 msgstr ""
 "•’•°•§•Î§Ú ›¬∏§«§≠§ﬁ§ª§Û: \n"
 "\n"
@@ -859,15 +901,15 @@ msgstr ""
 "…‘Ã¿§ •®•È°º§«§π (1)°£\n"
 "Ã‰¬Í§Ú submit@bugs.gnome.org §À Ûπ§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:595
+#: src/file.c:590
 #, fuzzy, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (2). Please report this Problem to "
-"submit@bugs.gnome.org"
+"Because of an unknown reason (2). Please report this Problem to submit@bugs."
+"gnome.org"
 msgstr ""
 "•’•°•§•Î§Ú ›¬∏§«§≠§ﬁ§ª§Û: \n"
 "\n"
@@ -876,47 +918,42 @@ msgstr ""
 "…‘Ã¿§ •®•È°º§«§π (1)°£\n"
 "Ã‰¬Í§Ú submit@bugs.gnome.org §À Ûπ§∑§∆§Ø§¿§µ§§°£"
 
-#: src/file.c:697
+#: src/file.c:692
 msgid "Could not allocate the required memory."
 msgstr "Õ◊µ·§µ§Ï§ø•·•‚•Í§Ú≥‰§Í≈ˆ§∆§Î§≥§»§¨§«§≠§ﬁ§ª§Û°£"
 
-#: src/file.c:717
+#: src/file.c:712
 #, fuzzy
 msgid "Error in the pipe."
 msgstr "•—•§•◊§Œ•®•È°º§«§π°£"
 
-#: src/file.c:828 src/file.c:835
-#, c-format
-msgid "Loaded file %s"
-msgstr "∆…§ﬂπ˛§ﬂ¥∞Œª: %s"
-
-#: src/file.c:842
+#: src/file.c:837
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i •’•°•§•Î§Ú∆…§ﬂπ˛§ﬂ§ﬁ§∑§ø"
 
-#: src/file.c:908
+#: src/file.c:903
 msgid "Open File ..."
 msgstr "≥´§Ø..."
 
-#: src/file.c:1041
+#: src/file.c:1036
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' §ÚæÂΩÒ§≠§∑§Ë§¶§»§∑§∆§§§ﬁ§π°£æÂΩÒ§≠§∑§∆§‚§Ë§Ì§∑§§§«§π§´?"
 
-#: src/file.c:1053
+#: src/file.c:1048
 msgid "Document has not been saved."
 msgstr "§≥§Œ ∏ΩÒ§œ ›¬∏§µ§Ï§∆§§§ﬁ§ª§Û°£"
 
-#: src/file.c:1063
+#: src/file.c:1058
 msgid "Error saving file!"
 msgstr " ›¬∏√Ê§À•®•È°º§¨µØ§≠§ﬁ§∑§ø°™"
 
-#: src/file.c:1192
+#: src/file.c:1187
 msgid "You can't revert an Untitled document\n"
 msgstr "Ãµ¬Í§Œ•…•≠•Â•·•Û•»§Ú∏µ§À§œÃ·§ª§ﬁ§ª§Û°£\n"
 
-#: src/file.c:1205
+#: src/file.c:1200
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -925,10 +962,62 @@ msgstr ""
 " —ππ§Ú¡¥§∆ºË§Íæ√§∑§∆§§§§§«§π§´°©\n"
 "(%s)"
 
-#: src/file.c:1236
+#: src/file.c:1231
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "``%s'' §œ¬∏∫ﬂ§∑§ﬁ§ª§Û°£ø∑§ø§À∫Ó¿Æ§∑§ﬁ§π§´?"
+
+#: src/gedit.c:47
+msgid "Show window debugging messages."
+msgstr "•¶•£•Û•…•¶§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:50
+msgid "Show commands debugging messages."
+msgstr "•≥•ﬁ•Û•…§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:53
+msgid "Show document debugging messages."
+msgstr "•…•≠•Â•·•Û•»§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:56
+msgid "Show file debugging messages."
+msgstr "•’•°•§•Î§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:59
+msgid "Show plugin debugging messages."
+msgstr "•◊•È•∞•§•Û§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:62
+msgid "Show prefs debugging messages."
+msgstr "Show prefs debugging messages."
+
+#: src/gedit.c:65
+msgid "Show printing debugging messages."
+msgstr "∞ı∫˛§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:68
+msgid "Show search debugging messages."
+msgstr "∏°∫˜§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:71
+msgid "Show undo debugging messages."
+msgstr "∏µ§ÀÃ·§π§»§≠§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:74
+msgid "Show view debugging messages."
+msgstr "…Ωº®§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:77
+msgid "Show recent debugging messages."
+msgstr "∫«∂·ª»§√§ø•’•°•§•Î§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
+
+#: src/gedit.c:80
+msgid "Turn on all debugging messages."
+msgstr "§π§Ÿ§∆§Œ•«•–•√•∞•·•√•ª°º•∏§Ú…Ωº®°£"
+
+#: src/gedit.c:159
+msgid "Cannot initialize gnome-vfs."
+msgstr ""
 
 #: src/menus.c:54
 msgid "Open (swap) .c/.h file"
@@ -938,12 +1027,13 @@ msgstr "¬–±˛§π§Î .c/.h •’•°•§•Î§Ú≥´§Ø"
 msgid "_New"
 msgstr "ø∑µ¨(_N)"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "ø∑µ¨ ∏ΩÒ§Ú∫Ó§Î"
 
 #: src/menus.c:68
-msgid "Save All"
+#, fuzzy
+msgid "Sav_e All"
 msgstr "§π§Ÿ§∆ ›¬∏"
 
 #: src/menus.c:69
@@ -951,7 +1041,8 @@ msgid "Save All Open Files"
 msgstr "§π§Ÿ§∆§Œ•’•°•§•Î§Ú ›¬∏"
 
 #: src/menus.c:74
-msgid "Revert"
+#, fuzzy
+msgid "_Revert"
 msgstr "∫ÔΩ¸"
 
 #: src/menus.c:83
@@ -972,7 +1063,8 @@ msgid "Print preview"
 msgstr "∞ı∫˛•◊•Ï•”•Â°º"
 
 #: src/menus.c:102
-msgid "Print preview..."
+#, fuzzy
+msgid "Print pre_view..."
 msgstr "∞ı∫˛§Œ•◊•Ï•”•Â°º..."
 
 #: src/menus.c:103
@@ -980,144 +1072,141 @@ msgid "Preview data to be printed"
 msgstr "∞ı∫˛§π§Î•«°º•ø§Œ•◊•Ï•”•Â°º"
 
 #: src/menus.c:110
-msgid "Close All"
+#, fuzzy
+msgid "C_lose All"
 msgstr "§π§Ÿ§∆ ƒ§∏§Î"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "§π§Ÿ§∆§Œ•’•°•§•Î§Ú ƒ§∏§Î"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "ªÿƒÍπ‘§ÿ∞‹∆∞(_L)..."
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "ªÿƒÍ§∑§øπ‘§À•´°º•Ω•Î§Ú∞‹∆∞"
 
-#: src/menus.c:154
-msgid "File _Info"
-msgstr ""
-
-#: src/menus.c:155
-msgid "Get the basic file info"
-msgstr ""
-
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "•”•Â°º§Úƒ…≤√(_A)"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr " ∏ΩÒ§Àø∑§∑§§•”•Â°º§Úƒ…≤√"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "•”•Â°º§Ú∫ÔΩ¸"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr " ∏ΩÒ§Œ•”•Â°º§Ú∫ÔΩ¸§π§Î"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402
+#: src/menus.c:220
+#, fuzzy
+msgid "Se_arch"
+msgstr "∏°∫˜(_S): "
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/window.c:677
 msgid "_Plugins"
 msgstr "•◊•È•∞•§•Û(_P)"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "•…•≠•Â•·•Û•»(_D)"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "ø∑µ¨"
 
-#: src/menus.c:244
-msgid "Open"
-msgstr "≥´§Ø"
-
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "•’•°•§•Î§Ú≥´§Ø"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr " ›¬∏"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "∏Ω∫ﬂ ‘Ω∏√Ê§Œ•’•°•§•Î§Ú ›¬∏"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr " ƒ§∏§Î"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "∏Ω∫ﬂ ‘Ω∏√Ê§Œ•’•°•§•Î§Ú ƒ§∏§Î"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "∞ı∫˛"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "∏Ω∫ﬂ ‘Ω∏√Ê§Œ•’•°•§•Î§Ú∞ı∫˛"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "∫«∏Â§À§‰§√§ø§≥§»§Ú∏µ§ÀÃ·§π"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
 msgstr "§‰§Íƒæ§π"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "∫«∏Â§À§‰§√§ø§≥§»§Ú§‰§Íƒæ§π"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "¿⁄§ÍºË§Í"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "¡™¬ÚŒŒ∞Ë§Ú¿⁄§ÍºË§Í"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "•≥•‘°º"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "¡™¬ÚŒŒ∞Ë§Ú•≥•‘°º"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "≈Ω§Í…’§±"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "•Ø•Í•√•◊•‹°º•…§Úƒ•§Í…’§±"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr " ∏ª˙ŒÛ§Ú∏°∫˜"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit"
 msgstr "Ω™Œª"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit the program"
 msgstr "•®•«•£•ø§ÚΩ™Œª§π§Î"
 
 #: src/plugin.c:107
-msgid "Manager ..."
+#, fuzzy
+msgid "_Manager ..."
 msgstr "•ﬁ•Õ°º•∏•„ ..."
 
 #: src/plugin.c:108
-msgid "Add/Remove installed plugins"
-msgstr "•§•Û•π•»°º•Î§µ§Ï§ø•◊•È•∞•§•Û§Œƒ…≤√/∫ÔΩ¸"
+#, fuzzy
+msgid "Manage available plugin modules"
+msgstr "Õ¯Õ—≤ƒ«Ω§ •◊•È•∞•§•Û"
 
 #: src/plugin.c:195
 #, c-format
@@ -1180,19 +1269,39 @@ msgstr "•®•È°º: •◊•È•∞•§•Û§ÚΩÈ¥¸≤Ω§«§≠§ﬁ§ª§Û"
 msgid "Error, plugin is still in use"
 msgstr "•®•È°º: •◊•È•∞•§•Û§¨º¬π‘√Ê§«§π"
 
-#: src/print.c:229
-#, fuzzy
+#: src/print.c:230
 msgid "Print Document"
-msgstr "•…•≠•Â•·•Û•»"
+msgstr "•…•≠•Â•·•Û•»§Œ∞ı∫˛"
 
-#: src/print.c:237
+#: src/print.c:238
 msgid "Pages"
 msgstr "•⁄°º•∏"
 
-#: src/print.c:285
-#, fuzzy
+#: src/print.c:286
 msgid "gedit: Print Preview\n"
-msgstr "gedit (%s): ∞ı∫˛§Œ•◊•Ï•”•Â°º"
+msgstr "gedit ∞ı∫˛•◊•Ï•”•Â°º\n"
+
+#: src/print-doc.c:505
+#, c-format
+msgid "Page: %i/%i"
+msgstr "•⁄°º•∏: %i/%i"
+
+#: src/print-util.c:222 src/print-util.c:237
+#, c-format
+msgid ""
+"gedit could not find the font \"%s\".\n"
+"gedit is unable to print without this font installed."
+msgstr ""
+"•’•©•Û•»\"%s\"§œ∏´§ƒ§±§È§Ï§ﬁ§ª§Û§«§∑§ø°£\n"
+"§≥§Œ•’•©•Û•»§¨•§•Û•π•»°º•Î§µ§Ï§∆§§§ §§§»∞ı∫˛§«§≠§ﬁ§ª§Û°£"
+
+#: src/print-util.c:278
+msgid "Printing .."
+msgstr "∞ı∫˛ .."
+
+#: src/print-util.c:289
+msgid "Printing ..."
+msgstr "∞ı∫˛ ..."
 
 #. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
@@ -1208,7 +1317,6 @@ msgid "_File"
 msgstr "•’•°•§•Î(_F)"
 
 #: src/recent.c:283
-#, fuzzy, c-format
 msgid "Unable to open recent file: %s"
 msgstr "∫«∂·ª»§√§ø•’•°•§•Î§Ú≥´§±§ﬁ§ª§Û: %s"
 
@@ -1217,8 +1325,8 @@ msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
 msgstr ""
-"¬æ§Œ∏°∫˜¡‡∫Ó§¨•¢•Ø•∆•£•÷§ §»§≠§Àπ‘øÙ§Ú•´•¶•Û•»§«§≠§ﬁ§ª§Û°£∏°∫˜•¿•§•¢•Ì•∞§Ú ƒ"
-")B§∏§∆§Ø§¿§µ§§è¢¬)B°Ú"
+"¬æ§Œ∏°∫˜¡‡∫Ó§¨•¢•Ø•∆•£•÷§ §»§≠§Àπ‘øÙ§Ú•´•¶•Û•»§«§≠§ﬁ§ª§Û°£∏°∫˜•¿•§•¢•Ì•∞§Ú"
+" ƒ§∏§∆§Ø§¿§µ§§°£"
 
 #: src/search.c:410
 #, c-format
@@ -1245,102 +1353,9 @@ msgstr ""
 "∏Ω∫ﬂ§Œπ‘»÷πÊ: %i\n"
 "∏Ω∫ﬂ§Œ•´•È•‡»÷πÊ: %i"
 
-#: src/view.c:994
+#: src/view.c:908
 msgid "You can't remove the last view of a document."
 msgstr "•…•≠•Â•·•Û•»§Œ∫«∏Â§Œ•”•Â°º§œ∫ÔΩ¸§«§≠§ﬁ§ª§Û°£"
 
-#~ msgid "File to use as body of message : "
-#~ msgstr "•·•√•ª°º•∏§ŒÀ‹ ∏§À§π§Î•’•°•§•Î : "
-
-#~ msgid "Sendmail found at :"
-#~ msgstr "Sendmail§¨∏´§ƒ§´§Í§ﬁ§∑§ø :"
-
-#~ msgid "browse"
-#~ msgstr "•÷•È•¶•∫"
-
-#~ msgid "Change"
-#~ msgstr " —ππ"
-
-#~ msgid "don't translate this\n"
-#~ msgstr "§≥§Ï§œÀ›Ãı§∑§ §§§«\n"
-
-#~ msgid "Directory  "
-#~ msgstr "•«•£•Ï•Ø•»•Í "
-
-#~ msgid ""
-#~ "gedit could not find the font \"%s\".\n"
-#~ "gedit is unable to print without this font installed."
-#~ msgstr ""
-#~ "•’•©•Û•»\"%s\"§œ∏´§ƒ§±§È§Ï§ﬁ§ª§Û§«§∑§ø°£\n"
-#~ "§≥§Œ•’•©•Û•»§¨•§•Û•π•»°º•Î§µ§Ï§∆§§§ §§§»∞ı∫˛§«§≠§ﬁ§ª§Û°£"
-
-#~ msgid "Page: %i/%i"
-#~ msgstr "•⁄°º•∏: %i/%i"
-
-#~ msgid ""
-#~ "An error was encountered while opening the file:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "Please make sure the file is not being used by another application\n"
-#~ "and that the file is not empty."
-#~ msgstr ""
-#~ "•’•°•§•Î§Ú≥´§§§∆§§§Î§»§≠§À•®•È°º§¨»Ø¿∏§∑§ﬁ§∑§ø:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "•’•°•§•Î§¨¬æ§Œ•¢•◊•Í•±°º•∑•Á•Û§Àª»§Ô§Ï§∆§§§ §§§´°¢§ﬁ§ø§œ•’•°•§•Î§¨\n"
-#~ "∂ı§«§ §§§´§Ú≥Œ«ß§∑§∆§Ø§¿§µ§§°£"
-
-#~ msgid "Text found at line :%i"
-#~ msgstr "•∆•≠•π•»§¨%iπ‘Ã‹§À∏´§ƒ§´§Í§ﬁ§∑§ø"
-
-#~ msgid "Line"
-#~ msgstr "π‘"
-
-#~ msgid "Get file info like characters, lines, words & paragraphs count."
-#~ msgstr "•’•°•§•Î§Œ ∏ª˙øÙ°¢π‘øÙ°¢√±∏ÏøÙ°¢√ ÕÓøÙ§Ú…Ωº®§∑§ﬁ§π°£"
-
-#~ msgid "Can't find again. There is not a text string to search for."
-#~ msgstr "∏´§ƒ§´§Í§ﬁ§ª§Û°£∏°∫˜§π§Î•∆•≠•π•» ∏ª˙ŒÛ§¨∏´§¢§ø§Í§ﬁ§ª§Û°£"
-
-#~ msgid "Show window debugging messages."
-#~ msgstr "•¶•£•Û•…•¶§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show commands debugging messages."
-#~ msgstr "•≥•ﬁ•Û•…§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show document debugging messages."
-#~ msgstr "•…•≠•Â•·•Û•»§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show file debugging messages."
-#~ msgstr "•’•°•§•Î§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show plugin debugging messages."
-#~ msgstr "•◊•È•∞•§•Û§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show prefs debugging messages."
-#~ msgstr "Show prefs debugging messages."
-
-#~ msgid "Show printing debugging messages."
-#~ msgstr "∞ı∫˛§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show search debugging messages."
-#~ msgstr "∏°∫˜§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show undo debugging messages."
-#~ msgstr "∏µ§ÀÃ·§π§»§≠§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show view debugging messages."
-#~ msgstr "…Ωº®§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Show recent debugging messages."
-#~ msgstr "∫«∂·ª»§√§ø•’•°•§•Î§Œ•«•–•√•∞•·•√•ª°º•∏§Œ…Ωº®°£"
-
-#~ msgid "Turn on all debugging messages."
-#~ msgstr "§π§Ÿ§∆§Œ•«•–•√•∞•·•√•ª°º•∏§Ú…Ωº®°£"
-
-#~ msgid "Enter the line number you wish to go to."
-#~ msgstr "∞‹∆∞§∑§ø§§π‘§Œ»÷πÊ§Ú∆˛Œœ§∑§ﬁ§π."
+msgid "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
+msgstr "-misc-fixed-medium-r-normal--14-*-*-*-*-*-*-*"
