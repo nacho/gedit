@@ -90,8 +90,7 @@ dialog_response_handler (GtkDialog * dlg, gint res_id, SortDialog * dialog)
 		break;
 
 	case GTK_RESPONSE_HELP:
-		/* FIXME */
-		gnome_help_display ("gedit.xml", "gedit-use-plugins",
+		gnome_help_display ("gedit.xml", "gedit-sort-plugin",
 				    &error);
 
 		if (error != NULL) {
