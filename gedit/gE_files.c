@@ -308,6 +308,7 @@ files_list_popup(GtkWidget *widget, gpointer cbdata)
 	int num;
 	GList *dp;
 	GtkWidget *tmp, *vbox, *flw;
+	GtkWidget *scrolled;
 
 	char *titles[] = { " # ", " Size (bytes) ", " File name " };
 	gE_window *window = ((gE_data *)cbdata)->window;
@@ -336,9 +337,15 @@ files_list_popup(GtkWidget *widget, gpointer cbdata)
 	gtk_clist_set_column_width(GTK_CLIST(tmp), FlwFsizeColumn, 90);
 	gtk_clist_column_title_passive(GTK_CLIST(tmp), FlwFsizeColumn);
 	gtk_clist_column_title_passive(GTK_CLIST(tmp), FlwFnameColumn);
-	gtk_clist_set_policy(
-		GTK_CLIST(tmp), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	gtk_box_pack_start(GTK_BOX(vbox), tmp, TRUE, TRUE, 0);
+	/* --- CLIST API changed.. Now need to stuff the clist in a scrolled 
+	   window --- */
+	scrolled = gtk_scrolled_window_new (NULL, NULL);
+	
+	gtk_scrolled_window_set_policy(
+		GTK_SCROLLED_WINDOW(scrolled), GTK_POLICY_AUTOMATIC, 
+		                          GTK_POLICY_AUTOMATIC);
+	gtk_container_add (GTK_CONTAINER (scrolled), tmp);
+	gtk_box_pack_start(GTK_BOX(vbox), scrolled, TRUE, TRUE, 0);
 
 	num = 0;
 	dp = window->documents;
