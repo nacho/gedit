@@ -360,7 +360,7 @@ gE_document *gE_document_new ()
 	if ((doc = gtk_type_new (gE_document_get_type ())))
 	  {
 	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), _(UNTITLED));
-	    gE_documents = g_list_append(gE_documents, doc);
+	    /* gE_documents = g_list_append(gE_documents, doc); */
 	    
 	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
@@ -524,7 +524,7 @@ gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc)
 	g_hash_table_remove(doc_pointer_to_int, doc);
 	g_free (ptr);
 	
-	gE_documents = g_list_remove (gE_documents, doc);
+	/*gE_documents = g_list_remove (gE_documents, doc);*/
 	return TRUE;
 }
 
