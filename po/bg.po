@@ -3,21 +3,23 @@
 # Copyright (C) 2004 Free Software Foundation
 # This file is distributed under the same license as the gedit package.
 # Evgeni Boevski <linkej@yahoo.com>, 2003.
-# Rostislav Raykov <zbrox@i-space.org>, 2004,
+# Rostislav Raykov <zbrox@i-space.org>, 2004, 2005,
 # Vladimir Petkov <vpetkov@i-space.org> 2004.
+# Vladimir Petkov <vpetkov@i-space.org>, 2005.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.10 branch gnome 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 00:20+0100\n"
-"PO-Revision-Date: 2004-11-08 07:38+0200\n"
-"Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
+"POT-Creation-Date: 2005-01-25 16:16+0200\n"
+"PO-Revision-Date: 2005-01-25 16:15+0200\n"
+"Last-Translator: Rostislav Raykov <zbrox@i-space.org>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -217,7 +219,6 @@ msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #: data/gedit.schemas.in.h:33
-#, fuzzy
 msgid "Monospace 9"
 msgstr "Monospace 12"
 
@@ -254,14 +255,12 @@ msgid "Right Margin Position"
 msgstr "Позиция на дясната граница"
 
 #: data/gedit.schemas.in.h:41
-#, fuzzy
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
 #: data/gedit.schemas.in.h:42
-#, fuzzy
 msgid "Sans 8"
-msgstr "Испански"
+msgstr "Sans 8"
 
 #: data/gedit.schemas.in.h:43
 msgid "Sans Regular 11"
@@ -324,12 +323,12 @@ msgstr ""
 "Указване на шрифта, който да се използва за тялото на документа при печат."
 
 #: data/gedit.schemas.in.h:51
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
-"Указване на шрифта, който да се използва за тялото на документа при печат."
+"Указване на шрифта, който да се използва за тялото на документа при печат. "
+"Това е име на шрифт от gnome-print и е заменен от print_font_body_pango."
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -341,15 +340,15 @@ msgstr ""
 "нула."
 
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
 "Указване на шрифта, който да се използва за номерата на редове при печат. "
-"Има ефект само, когато опцията \"Печатай номера на редове\" е различна от "
-"нула."
+"Има ефект само, когато опцията \"Печатане номера на редове\" е различна от "
+"нула. Това е име на фонт от gnome-print и е заменен от "
+"print_font_numbers_pango."
 
 #: data/gedit.schemas.in.h:54
 msgid ""
@@ -360,14 +359,14 @@ msgstr ""
 "само при включена опция \"Печатане на горен колонтитул\"."
 
 #: data/gedit.schemas.in.h:55
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "Указване на шрифта, който да се използва за главницата при печат.Има ефект "
-"само при включена опция \"Печатане на горен колонтитул\"."
+"само при включена опция \"Печатане на горен колонтитул\". "
+"Това·е·име·на·фонт·от·gnome-print·и·е·заменен·от·print_font_header_pango."
 
 #: data/gedit.schemas.in.h:56
 msgid ""
@@ -473,17 +472,12 @@ msgstr ""
 "например."
 
 #: data/gedit.schemas.in.h:74
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr ""
-"Дали gedit трябва да отбелязва с различен цвят синтакс като програмед код "
-"например."
+msgstr "Дали gedit трябва да отбелязва отваряне и затваряне на скоби"
 
 #: data/gedit.schemas.in.h:75
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr ""
-"Дали gedit да печата синтактично оцветен текст или да пренебрегва цветовете."
+msgstr "Дали gedit да отбелязва текущия ред"
 
 #: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
@@ -550,9 +544,8 @@ msgid "Activate %s"
 msgstr "Активиране на %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Затваряне на изходния прозорец"
+msgstr "Затваряне без да се запазват промените"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -566,9 +559,11 @@ msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
 msgstr[0] ""
-"Ако·не·запишете,·промените·от·последния час·ще·бъдат·загубени·безвъзвратно."
+"Ако не запишете, промените от последната минута ще бъдат загубени "
+"безвъзвратно."
 msgstr[1] ""
-"Ако·не·запишете,·промените·от·последния час·ще·бъдат·загубени·безвъзвратно."
+"Ако не запишете, промените от последната минута ще бъдат загубени "
+"безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
 msgid ""
@@ -613,9 +608,11 @@ msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] ""
-"Ако·не·запишете,·промените·от·последния час·ще·бъдат·загубени·безвъзвратно."
+"Ако не запишете, промените от последната минута ще бъдат загубени "
+"безвъзвратно."
 msgstr[1] ""
-"Ако·не·запишете,·промените·от·последния час·ще·бъдат·загубени·безвъзвратно."
+"Ако не запишете, промените от последната минута ще бъдат загубени "
+"безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, fuzzy, c-format
@@ -799,19 +796,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Автоматичен отстъп</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Режим с пренасяне</b>"
+msgstr ""
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Режим с пренасяне</b>"
+msgstr "<b>Текущ ред</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -835,9 +829,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Дясна граница</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>Табове</b>"
+msgstr ""
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -988,7 +981,6 @@ msgid "_Display line numbers"
 msgstr "Показване на номера на редовете"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "Включване на автоматичния отстъп"
 
@@ -1013,9 +1005,8 @@ msgid "_Right margin at column:"
 msgstr "Дясна граница за колонка:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
-msgstr "Ширина на табовете:"
+msgstr "Ширина на табулацията:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:54
 msgid "_Unlimited undo"
@@ -1200,11 +1191,10 @@ msgstr "gedit е малък и лек текстов редактор за Gnome
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "Евгени Боевски <e_boevski@abv.bg>\n"
-"Ростислав Райков <zbrox@i-space.org>\n"
+"Ростислав \"zbrox\" Райков <zbrox@i-space.org>\n"
 "Владимир \"Kaladan\" Петков <vpetkov@i-space.org>"
 
 #: gedit/gedit-commands.c:579
@@ -1419,15 +1409,15 @@ msgstr "Файлът \"%s\" е само за четене.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Желаете ли да се опитате да го замените с този, който записвате сега?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:374
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:385
 msgid "All Files"
 msgstr "Всички файлове"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:382
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:393
 msgid "All Text Files"
 msgstr "Всички текстови файлове"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:404
 msgid "_Character Coding:"
 msgstr "Кодиране на си_мволите:"
 
@@ -1479,10 +1469,10 @@ msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 msgstr[0] ""
-"Промените направени по документа в последният·час ще бъдат загубени "
+"Промените направени по документа в последната минута ще бъдат загубени "
 "безвъзвратно."
 msgstr[1] ""
-"Промените направени по документа в последният·час ще бъдат загубени "
+"Промените направени по документа в последната минута ще бъдат загубени "
 "безвъзвратно."
 
 #: gedit/gedit-file.c:543
@@ -1527,10 +1517,10 @@ msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] ""
-"Промените направени по документа в последният·час ще бъдат загубени "
+"Промените направени по документа в последната минута ще бъдат загубени "
 "безвъзвратно."
 msgstr[1] ""
-"Промените направени по документа в последният·час ще бъдат загубени "
+"Промените направени по документа в последната минута ще бъдат загубени "
 "безвъзвратно."
 
 #: gedit/gedit-file.c:580
@@ -1602,9 +1592,9 @@ msgstr[0] "Зареден е файлът %d"
 msgstr[1] "Зареден е файлът %d"
 
 #: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#, c-format
 msgid "Created file \"%s\""
-msgstr "Зареден е файлът \"%s\""
+msgstr "Създаден е файлът \"%s\""
 
 #: gedit/gedit-file.c:1284
 #, c-format
@@ -1619,18 +1609,14 @@ msgstr[0] "Зарежда се файлът %d ..."
 msgstr[1] "Зарежда се файлът %d ..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Грешка при отваряне на файл \"%s\""
+msgstr "Не може да бъде открит файла \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" е директория. \n"
-"\n"
-"Моля, проверете дали е коректно местоположението и пробвайте пак."
+msgstr "Проверете дали сте написали местоположението правилно и пробвайте пак."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1646,157 +1632,134 @@ msgid "Could not open the file \"%s\""
 msgstr "Грешка при отваряне на файл \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Грешка при отваряне на файл \"%s\" защото съдържа некоректни данни."
+msgstr "Файлът съдържа повредени данни."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit не може да използва  %s: местоположения в режим запис."
+msgstr "gedit не може да използва %s: местоположения"
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit не може да използва  %s: местоположения в режим запис."
+msgstr "gedit не може да използва това местоположение"
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr ""
-"Грешка при отваряне на файл \"%s\" защото съдържа данни с грешен формат."
+msgstr "Файлът съдържа данни с грешен формат."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Файлът има прекалено много символични връзки."
+msgstr "Файлът е прекалено голям."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "\"%s\" не е валидно местонахождение."
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "Достъпът беше отказан."
 
 #: gedit/gedit-io-error-dialogs.c:143
 #, fuzzy
 msgid ""
-"there are too many open files. Please, close some open file and try again."
+"there are too many open files. Please, close some open files and try again."
 msgstr ""
-"Грешка при отваряне на файл \"%s\". Има прекалено много отворени файлове. \n"
-"\n"
-"Моля, затворете няколко файла и опитайте отново."
+"Има прекалено много отворени файлове. Затворете няколко файла и опитайте "
+"отново."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" е папка"
 
 #: gedit/gedit-io-error-dialogs.c:157
 #, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
-"application and try again."
+"applications and try again."
 msgstr ""
-"Няма достатъчно памет за отворяне на файл \"%s\". Моля, затворете ненужни "
-"приложения и пробвайте пак."
+"Няма достатъчно памет за отворяне на файла. Затворете ненужни програми и "
+"пробвайте пак."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"Грешка при възстановяване на файл \"%s\". Не е намерен хост\"%s\" \n"
-"\n"
-"Моля, проверете прокси настройките и пробвайте пак."
+"Не е намерен хоста \"%s\" Проверете прокси настройките и пробвайте пак."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"\"%s\" не е валидно местоположение. \n"
-"\n"
-"Моля, проверете дали е коректно местоположението и пробвайте пак."
+"Името на хоста е невалидно. Уверете се, че сте наисали правилното "
+"местоположение и опитайте отново."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"Грешка при отваряне на файл \"%s\". Не е посочено име на хост. \n"
-"\n"
-"Моля, проверете прокси настройките и пробвайте пак."
+"Не е посочено име на хост. Проверете прокси настройките и пробвайте пак."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"Не е намерен файл \"%s\".\n"
-"\n"
-"Моля, проверете дали е коректно местоположението и опитайте пак."
+"Опита за влизане пропадна. Уверете се, че сте написали местоположението "
+"правилно и опитайте отново."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
 msgstr ""
-"Грешка при отваряне на файл \"%s\" защото съдържа невалидни данни.\n"
-"\n"
-"Вероятно се опитвате да отворите двоичен файл."
+"Файлът съдържа невалидни данни. Вероятно се опитвате да отворите двоичен "
+"файл."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "Файлът, който се опитвате да отворите не е нормален файл."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"Грешка при отваряне на файл \"%s\"  - gedit не може автоматично да определи "
-"кодирането на символите.\n"
-"\n"
-"Моля, уверете се, че не отваряте двоичен файл и опитайте отново да изберете "
-"кодиране на сиволите в прозореца за избор на файл (местоположение)."
+"gedit не може автоматично да определи кодирането на символите. Уверете се, "
+"че не отваряте двоичен файл и опитайте отново да изберете кодиране на "
+"сиволите в прозореца за избор на файл (местоположение)."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Грешка при отваряне на файл \"%s\" защото е прекалено голям."
+msgstr "Не може да се отвори файлът \"%s\", използвайки се %s кодова таблица."
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
 #, fuzzy
 msgid ""
-"Please, check that you are not tryingto open a binary file and that you "
+"Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Грешка при отваряне на файл \"%s\" използвайки %s кодова таблица . \n"
-"\n"
-"Моля, проверете дали не отваряте двоичен файл и дали сте избрали точната "
-"кодова таблица в прозореца за избор на файл (местоположение)."
+"Проверете дали не отваряте двоичен файл и дали сте избрали точната кодова "
+"таблица в прозореца за избор на файл (местоположение)."
 
 #: gedit/gedit-io-error-dialogs.c:315
 #, fuzzy
 msgid ""
-"The file contains data in an invalid data. Probably, you are trying to open "
-"a binary file."
+"The file contains data in an invalid format. Probably, you are trying to "
+"open a binary file."
 msgstr ""
-"Грешка при отваряне на файл \"%s\" защото съдържа невалидни данни.\n"
-"\n"
-"Вероятно се опитвате да отворите двоичен файл."
+"Файлът съдържа невалидни данни. Вероятно се опитвате да отворите двоичен "
+"файл."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1805,125 +1768,94 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Грешка при възстановяване на файл \"%s\"."
+msgstr "Не може да се възстановяви файла \"%s\"."
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"Грешка при възстановяване на файл \"%s\". gedit не го намира. \n"
-"\n"
-"Вероятно е бил изтрит."
+msgstr "gedit не го намира. Вероятно е бил изтрит наскоро."
 
 #: gedit/gedit-io-error-dialogs.c:449
 #, fuzzy
 msgid ""
-"There are too many open files. Please, close some open file and try again."
+"There are too many open files. Please, close some open files and try again."
 msgstr ""
-"Грешка при отваряне на файл \"%s\". Има прекалено много отворени файлове. \n"
-"\n"
-"Моля, затворете няколко файла и опитайте отново."
+"Има прекалено много отворени файлове. Затворете няколко файла и опитайте "
+"отново."
 
 #: gedit/gedit-io-error-dialogs.c:456
 #, fuzzy
 msgid ""
-"Not enough available memory. Please, close some running application and try "
+"Not enough available memory. Please, close some running applications and try "
 "again."
-msgstr ""
-"Няма достатъчно памет за отворяне на файл \"%s\". Моля, затворете ненужни "
-"приложения и пробвайте пак."
+msgstr "Няма достатъчно памет. Затворете ненужни програми и пробвайте пак."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"Грешка при отваряне на файл \"%s\". Не е посочено име на хост. \n"
-"\n"
-"Моля, проверете прокси настройките и пробвайте пак."
+"Името на хоста е непопълнено. Проверете прокси настройките и пробвайте пак."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "Опита за влизане пропадна."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"Грешка при възстановяване на файл \"%s\", защото съдържа невалидни UTF-8 "
-"данни.\n"
-"\n"
-"Вероятно се опитвайте да възстановите двоичен файл."
+"Файлът съдържа невалидни UTF-8 данни. Вероятно се опитвайте да възстановите "
+"двоичен файл."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "Невъзможно възстановяването на неозаглавен документ."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Грешка при запис на файл \"%s\"."
+msgstr "Не може да се запише файла \"%s\"."
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
 msgstr "Файлът \"%s\" вече съществува."
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" е директория. \n"
-"\n"
-"Моля, проверете дали сте въвели коректното местоположение."
+msgstr "Проверете дали сте въвели коректното местоположение."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
 msgstr "Файлът \"%s\" не може да бъде създаден."
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Файлът \"%s\" не може да бъде създаден.\n"
-"\n"
-"Моля, проверете дали имате нужните права за запис."
+msgstr "Уверете се, че имате нужните права за запис."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"Файлът \"%s\" не може да бъде създаден.\n"
-"\n"
-"Името на файла е прекалено дълго."
+msgstr "Файловото име е прекалено дълго."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
 msgstr ""
-"Файлът \"%s\" не може да бъде създаден.\n"
-"\n"
-"Част от името на файла е директоря, която не съществува или е висяща връзка."
+"Част от името на файла е директория, която не съществува или е висяща връзка."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"Няма достатъчно място на диска за запис на файла \"%s\".\n"
-"\n"
-"Моля, освободете място и опитайте пак."
+"Няма достатъчно място за запис на файла. Освободете място и опитайте пак."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1962,7 +1894,6 @@ msgid "Open a recently used file"
 msgstr "Отваряне на скоро използван файл"
 
 #: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
-#, fuzzy
 msgid "Read Only"
 msgstr "(само за четене)"
 
@@ -2436,16 +2367,16 @@ msgstr "(невалиден Уникод)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:663
+#: gedit/gedit-view.c:843
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ред %d, Кол. %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:881
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:883
 msgid "  INS"
 msgstr "  INS"
 
@@ -2470,7 +2401,7 @@ msgstr "Създаване на нов документ в работещ gedit"
 #: gedit/gedit2.c:183
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
-msgstr ""
+msgstr "Избраната кодова таблица \"%s\" не е валидна\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
@@ -2623,37 +2554,34 @@ msgstr "Име на потребител"
 
 #: plugins/savecopy/savecopy.c:49
 #, fuzzy
-msgid "Sa_ve Copy"
-msgstr "_Копиране"
+msgid "Sa_ve Copy..."
+msgstr "Запазване на копие"
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "Задаване на езика на текущия документ"
+msgstr "Запазване на копие на текущия документ"
 
 #: plugins/savecopy/savecopy.c:212
 #, fuzzy, c-format
-msgid "Could not save a copy the file to \"%s\""
-msgstr "Грешка при запис на файл \"%s\"."
+msgid "Could not save a copy of the file to \"%s\""
+msgstr "Не може да се запази копие на файла в \"%s\""
 
 #: plugins/savecopy/savecopy.c:311
 msgid "You are trying to overwrite the original file"
-msgstr ""
+msgstr "Опитвате се да презапишете оригиналния файл."
 
-#: plugins/savecopy/savecopy.c:362
+#: plugins/savecopy/savecopy.c:363
 #, fuzzy
-msgid "Save Copy"
-msgstr "Запазване като"
+msgid "Save Copy..."
+msgstr "Запазване на копие"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "Запазване на всички отворени файлове"
+msgstr "Запазване на копие"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Сортира текущия документ или избран текст."
+msgstr "Запазва копие на текущия документ на локално или отдалечено място."
 
 #: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
@@ -2784,26 +2712,26 @@ msgstr "Обратен _ред"
 msgid "_Sort"
 msgstr "_Подреждане"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:351
+#: plugins/spell/gedit-automatic-spell-checker.c:350
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(няма предположения)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:375
+#: plugins/spell/gedit-automatic-spell-checker.c:374
 msgid "_More..."
 msgstr "_Още"
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:428
+#: plugins/spell/gedit-automatic-spell-checker.c:427
 msgid "_Ignore All"
 msgstr "_Игнориране на всички"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:441
+#: plugins/spell/gedit-automatic-spell-checker.c:440
 msgid "_Add"
 msgstr "_Добавяне"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:478
+#: plugins/spell/gedit-automatic-spell-checker.c:477
 msgid "_Spelling Suggestions..."
 msgstr "_Предложения за правопис..."
 
@@ -3053,12 +2981,10 @@ msgid "The document is empty."
 msgstr "Документът не съдържа текст."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
-msgstr "Избрания текст не съдържа сгрешени думи."
+msgstr "Избраният текст не съдържа сгрешени думи."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
 msgstr "Документа не съдържа сгрешени думи."
 
@@ -3071,18 +2997,16 @@ msgid "Spell checker"
 msgstr "Проверка на правописа"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "Налични формати"
+msgstr "Съкратена форма"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "Американски"
+msgstr "Съкращение"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "Отгоре"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
@@ -3093,9 +3017,8 @@ msgid "Acronym"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "реда"
+msgstr "Подравняване"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
@@ -3114,9 +3037,8 @@ msgid "Anchor URI"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "Избор на файл за отваряне"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
@@ -3127,37 +3049,33 @@ msgid "Associated information"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "Автоматичен отстъп"
+msgstr "Информация за автора"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "_Печатане на колон титулите"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
 msgstr "Фонов цвят:"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "Цвят на фона"
+msgstr "Текстурна плочка за фон"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "Базов адрес"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
 #, fuzzy
-msgid "Base font size"
-msgstr "Използване на шрифта за етикет"
+msgid "Base font"
+msgstr "Базов размер на шрифта"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
@@ -3168,28 +3086,24 @@ msgid "Blinking text"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "Удебелено"
+msgstr "Граница"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "Фонов цвят:"
+msgstr "Цвят на границата"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Централно европейски"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "Главни"
+msgstr "Център"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Char enconding of linked resource"
@@ -3200,9 +3114,8 @@ msgid "Checked(state)"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "_действия"
+msgstr "Цитат"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3213,9 +3126,8 @@ msgid "Class implementation ID"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "Списък с тагове"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
@@ -3226,9 +3138,8 @@ msgid "Code content type"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "Копиране на избраните редове"
+msgstr "Цвят на избраните препратки"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
@@ -3236,31 +3147,27 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
-msgstr ""
+msgstr "Колони"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "_Потребителско ръководство"
+msgstr "Коментар"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "_Потребителско ръководство"
+msgstr "Схема на съдържанието"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "_Потребителско ръководство"
+msgstr "Вид на съдържанието"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "_Потребителско ръководство"
+msgstr "Координати"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3272,34 +3179,31 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "Дата и време на промяна"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "_Описание"
+msgstr "Описание на определение"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
-msgstr ""
+msgstr "Списък с определения"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition term"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
 msgid "Deleted text"
-msgstr "Изтриване на избрания текст"
+msgstr "Изтрит текст"
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Direction"
-msgstr "Британски"
+msgstr "Посока"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Directionality"
@@ -3307,178 +3211,164 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directory list"
-msgstr ""
+msgstr "Списък с папки"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Disabled"
-msgstr "Разрешено"
+msgstr "Изключено"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
 #, fuzzy
-msgid "Document ID"
-msgstr "_Документи"
+msgid "Document base"
+msgstr "Базов адрес на документа"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
-msgid "Document base URI"
-msgstr "_Документи"
+msgid "Document body"
+msgstr "Тялото на документа"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
-msgid "Document body"
-msgstr "_Документи"
+msgid "Document head"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
-msgid "Document head"
-msgstr "_Документи"
+msgid "Document title"
+msgstr "Заглавие на документа"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
-msgid "Document title"
-msgstr "Статистика за документа"
+msgid "Document type"
+msgstr "Вид на документа"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
 #, fuzzy
-msgid "Document type"
-msgstr "_Документи"
+msgid "Element ID"
+msgstr "Елементи"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
-#, fuzzy
-msgid "Document version"
-msgstr "_Документи"
-
-#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Encode type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Figure"
-msgstr ""
+msgstr "Фигура"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Font face"
 msgstr "Име на шрифт"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "For label"
-msgstr "етикет"
+msgstr "За етикет"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Forced line break"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Form"
-msgstr "Нормален"
+msgstr "Формуляр"
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form action handler"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form control group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form field label text"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form input"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form method"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Forward link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Frame"
-msgstr "Име:"
+msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame render parts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame source"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame target"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frameborder"
-msgstr "Режим нареждане"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:83
+msgid "Frameset"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
-msgid "Frameset"
-msgstr "Фаройски"
+msgid "Frameset columns"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
-#, fuzzy
-msgid "Frameset columns"
-msgstr "_Започване от колона:"
-
-#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Framespacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic span"
-msgstr "Главни"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:90
+msgid "HREF URI"
+msgstr "HREF URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
-msgid "HREF URI"
-msgstr ""
+msgid "HTML - Special Characters"
+msgstr "HTML - Специални символи"
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
-msgid "HTML - Special Characters"
-msgstr ""
-
-#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML root element"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:94
+msgid "HTML version"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
@@ -3491,35 +3381,35 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Heading"
-msgstr ""
+msgstr "Глава"
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading 1"
-msgstr ""
+msgstr "Поразделение 1"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 2"
-msgstr ""
+msgstr "Подразделение 2"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 3"
-msgstr ""
+msgstr "Подразделение 3"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 4"
-msgstr ""
+msgstr "Подразделение 4"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 5"
-msgstr ""
+msgstr "Подразделение 5"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 6"
-msgstr ""
+msgstr "Подразделение 6"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Height"
-msgstr ""
+msgstr "Височина"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Horizontal rule"
@@ -3534,79 +3424,73 @@ msgid "I18N BiDi over-ride"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
-#, fuzzy
 msgid "Image"
-msgstr "Страница"
+msgstr "Изображение"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image map"
-msgstr ""
+msgstr "Разграфено изображение"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map area"
-msgstr ""
+msgstr "Район на разграфеното изображение"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map name"
-msgstr ""
+msgstr "Име на разграфеното изображение"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image source"
-msgstr ""
+msgstr "Източник на изображението"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "Невалидно име на файл"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Inserted text"
-msgstr "Вмъкване дата/време"
+msgstr "Вмъкнат текст"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Italic text"
-msgstr "Наклонено"
+msgstr "Наклонен текст"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Java applet"
-msgstr ""
+msgstr "Java аплет"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Label"
-msgstr "етикет"
+msgstr "Етикет"
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
 msgid "Language code"
-msgstr "Езици"
+msgstr "Езиков код"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Large text style"
-msgstr ""
+msgstr "Едър текст"
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Layer"
-msgstr ""
+msgstr "Слой"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
 #, fuzzy
-msgid "Link"
-msgstr "Редове"
+msgid "Link color"
+msgstr "Избор на цвят"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
-msgstr ""
+msgstr "Елемент от списък"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List of MIME types for file upload"
@@ -3614,37 +3498,35 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of supported character sets"
-msgstr ""
+msgstr "Списък с поддържаните кодови таблици."
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Listing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "Избор на шрифт за редактора"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
 msgid "Long description link"
-msgstr "_Описание"
+msgstr "Връзка с дълго описание"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long quotation"
-msgstr ""
+msgstr "Дълъг цитат"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Mail link"
-msgstr ""
+msgstr "Препратка към ел. поща"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Margin pixel height"
-msgstr ""
+msgstr "Височина на границата в пиксели"
 
 #: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel width"
-msgstr ""
+msgstr "Ширина на границата в пиксели"
 
 #: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Marquee"
@@ -3655,203 +3537,197 @@ msgid "Max text field chars"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-#, fuzzy
-msgid "Media"
-msgstr "gedit"
-
-#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Multi-line text field"
-msgstr ""
+msgstr "Текстово поле с много редове"
+
+#: plugins/taglist/HTML.tags.xml.in.h:139
+msgid "Multicolumn"
+msgstr "Многоколонно"
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
-msgid "Multicolumn"
-msgstr ""
+msgid "Multiple"
+msgstr "Множество"
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
-msgid "Multiple"
-msgstr ""
+msgid "Name"
+msgstr "Име"
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
-#, fuzzy
-msgid "Name"
-msgstr "Име:"
+msgid "Named property value"
+msgstr "Именувана стойност на свойство"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
-msgid "Named property value"
-msgstr ""
-
-#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "No URI"
-msgstr ""
+msgstr "Без адрес"
+
+#: plugins/taglist/HTML.tags.xml.in.h:145
+msgid "No embedded objects"
+msgstr "Няма вградени обекти"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
-msgid "No embedded objects"
-msgstr ""
-
-#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No layers"
-msgstr ""
+msgstr "Няма слоеве"
+
+#: plugins/taglist/HTML.tags.xml.in.h:148
+msgid "No line break"
+msgstr "Няма нов ред"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
-msgid "No line break"
-msgstr ""
+msgid "No resize"
+msgstr "Без оразмеряване"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
-#, fuzzy
-msgid "No resize"
-msgstr "Показване на размера"
+msgid "No script"
+msgstr "Няма скрипт"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
-msgid "No script"
-msgstr ""
+msgid "No shade"
+msgstr "Няма сянка"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
-msgid "No shade"
-msgstr ""
-
-#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "Note"
+msgstr "Бележка"
+
+#: plugins/taglist/HTML.tags.xml.in.h:154
+msgid "Object applet file"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
-#, fuzzy
-msgid "Object applet file"
-msgstr "Отваряне на файл"
-
-#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnChange event"
-msgstr "Сменяне на капитализацията"
+msgstr "Събитие при промяна"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnDblClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnFocus event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnKeyDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyPress event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnLoad event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnMouseDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseMove event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseOut event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOver event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnReset event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnSelect event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSubmit event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnUnload event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Option group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
-#, fuzzy
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option selector"
-msgstr "Избор на шрифт"
+msgstr "Избор на опция"
+
+#: plugins/taglist/HTML.tags.xml.in.h:177
+msgid "Ordered list"
+msgstr "Подреден списък"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-msgid "Ordered list"
-msgstr ""
+#, fuzzy
+msgid "Output media"
+msgstr "Извеждане на редове"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
-msgstr ""
+msgstr "Параграф"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph class"
-msgstr ""
+msgstr "Параграфен клас"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph style"
-msgstr ""
+msgstr "Стил на параграф"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Preformatted listing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
-#, fuzzy
 msgid "Preformatted text"
-msgstr "Представяне на текста"
+msgstr "Преформатиран текст"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Profile metainfo dictionary"
@@ -3862,32 +3738,28 @@ msgid "Prompt message"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "бутон1"
+msgstr "Бутон"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Quote"
-msgstr "Спиране на програмата"
+msgstr "Цитат"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
 msgid "Range"
-msgstr "Страница"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
-msgstr ""
+msgstr "Текст и парола само за четене"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Reduced spacing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
 msgid "Reverse link"
-msgstr "Обратен _ред"
+msgstr "Обратна връзка"
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Root"
@@ -3895,7 +3767,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Rows"
-msgstr ""
+msgstr "Редове"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rulings between rows and columns"
@@ -3903,7 +3775,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Sample program output, scripts"
-msgstr ""
+msgstr "Примерен изход на програмата, скриптове"
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Scope covered by header cells"
@@ -3914,9 +3786,8 @@ msgid "Script execution defer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "Избери език"
+msgstr "Име на скрипт езика"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
@@ -3927,23 +3798,20 @@ msgid "Scrollbar"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "Избор на файл за отваряне"
+msgstr "Опция с възможност за избор"
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "_Запазване на избраното"
+msgstr "Избрано"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "Запазване"
+msgstr "Форма"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -3954,14 +3822,12 @@ msgid "Single line prompt"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "Размер на етикета на страница"
+msgstr "Размер"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "Всички текстови файлове"
+msgstr "Малък текст"
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
@@ -3969,34 +3835,31 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
-msgstr ""
+msgstr "Звук"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "Запазване"
+msgstr "Интервал"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "Заменяне"
+msgstr "Отстояние"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
-msgstr ""
+msgstr "Разстояние между клетките"
 
 #: plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Spacing within cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "Испански"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
@@ -4007,19 +3870,16 @@ msgid "Standby load msg"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "Печатане на номера на _редове"
+msgstr "Начално число на поредицата"
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "Зачеркнато"
+msgstr "Зачеркнат текстов стил"
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "Зачеркнато"
+msgstr "Зачертан текстов стил"
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
@@ -4027,55 +3887,52 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Style info"
-msgstr ""
+msgstr "Информация за стила"
 
 #: plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Subscript"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "_Описание"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "Определения."
+msgstr "Таблица"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
-msgstr ""
+msgstr "Тяло на таблица"
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
-#, fuzzy
 msgid "Table caption"
-msgstr "Отваряне на местоположение"
+msgstr "Заглавие на таблицата"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
-msgid "Table column"
+msgid "Table column group properties"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
-msgid "Table column group"
-msgstr ""
+#, fuzzy
+msgid "Table column properties"
+msgstr "Таблична колона"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table data cell"
-msgstr ""
+msgstr "Таблична клетка с информация"
 
 #: plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table footer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:235
-#, fuzzy
 msgid "Table header"
-msgstr " _Колон титули:"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table header cell"
@@ -4083,11 +3940,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table row"
-msgstr ""
+msgstr "Ред на таблица"
 
 #: plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table summary"
-msgstr ""
+msgstr "Обобщение на таблицата"
 
 #: plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Target - Blank"
@@ -4111,16 +3968,15 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
 msgstr "Цвят на текста"
 
 #: plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Text entered by user"
-msgstr ""
+msgstr "Текст въведен от потребителя"
 
 #: plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Title"
@@ -4128,63 +3984,59 @@ msgstr "Заглавие"
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "Горната граница в пиксели"
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
-#, fuzzy
 msgid "Underlined text style"
-msgstr "Подчертаване"
+msgstr "Подчертан текстов стил"
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "Подчертаване"
+msgstr "Неподреден списък"
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
-msgstr ""
+msgstr "Използване на разграфено изображение"
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
-msgstr ""
+msgstr "Стойност"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
-msgstr ""
+msgstr "Интерпретация на стойности"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
-msgstr ""
+msgstr "Аргумент на променлива или програма"
 
 #: plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "Вертикално подравняване на клетките"
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "Вмъкване на интервали"
+msgstr "Вертикално пространство"
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "Избор на цвят за селекциите"
+msgstr "Цвят на посетените препратки"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
-msgstr ""
+msgstr "Ширина"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
-msgstr ""
+msgstr "Цитат от библиография"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography item"
-msgstr ""
+msgstr "Елемент от библиография"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
@@ -4212,12 +4064,11 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "Въвеждане на файл"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "Шрифт"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
@@ -4244,73 +4095,68 @@ msgid "Function sine"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "Гръцки"
+msgstr "Гръцката буква алфа"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "Гръцки"
+msgstr "Гръцката буква бета"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "Гръцки"
+msgstr "Гръцката буква гама"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "Гръцки"
+msgstr "Гръцката буква ро"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "Гръцки"
+msgstr "Гръцката буква тау"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "Подразделение 0 (глава)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "Подразделение 0 (глава*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "Подразделение 1 (подразделение на глава)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "Подразделение 1 (подразделение на глава*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "Подразделение 2 (подразделение на глава)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "Подразделение 2 (подразделение на глава*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "Подразделение 3 (подразделение на глава)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "Подразделение 3 (подразделение на глава*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "Подразделение 4 (параграф)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
@@ -4318,7 +4164,7 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "Елемент"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
@@ -4329,14 +4175,12 @@ msgid "Latex - Tags"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "_Описание"
+msgstr "Описание на списъка"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
-#, fuzzy
 msgid "List enumerate"
-msgstr "Номера на редовете"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
@@ -4351,9 +4195,8 @@ msgid "Maths (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "Отваряне на местоположение"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
@@ -4372,14 +4215,12 @@ msgid "Operator sum (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "Предпочитани настройки"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "Предпочитани настройки"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
@@ -4486,13 +4327,12 @@ msgid "XSLT - Axes"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "Елементи"
+msgstr "XSLT - Елементи"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - Функции"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
@@ -4527,14 +4367,12 @@ msgid "following-sibling"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "Вмъкване на интервали"
+msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "Отваряне"
+msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
@@ -4648,183 +4486,14 @@ msgstr "_Посочване на формат"
 msgid "_Use custom format"
 msgstr "_Използвване на потребителски формат"
 
-#~ msgid "Do_n't save"
-#~ msgstr "Без запазване"
-
-#, fuzzy
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] ""
-#~ "Ако·не·запишете,·промените·от·последния "
-#~ "час·ще·бъдат·загубени·безвъзвратно."
-#~ msgstr[1] ""
-#~ "Ако·не·запишете,·промените·от·последния "
-#~ "час·ще·бъдат·загубени·безвъзвратно."
-
-#~ msgid "Body font picker"
-#~ msgstr "Избор на шрифт за тялото на текста"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the body of the "
-#~ "document"
-#~ msgstr ""
-#~ "Натиснете бутона за да изберете шрифта, използван при печат на тялото"
-
-#~ msgid "Page headers font picker"
-#~ msgstr "Избор на шрифт за колон-титулите"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the page headers"
-#~ msgstr ""
-#~ "Натиснете бутона за да изберете шрифта, използван при печат на колон-"
-#~ "тилулите"
-
-#~ msgid "Line numbers font picker"
-#~ msgstr "Избор на шрифт за номерата на редовете"
-
-#~ msgid "Push this button to select the font to be used to print line numbers"
-#~ msgstr ""
-#~ "Натиснете бутона за да изберете шрифта, използван за печат на номерата на "
-#~ "редовете"
-
-#, fuzzy
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] ""
-#~ "Промените направени по документа в последният·час ще бъдат загубени "
-#~ "безвъзвратно."
-#~ msgstr[1] ""
-#~ "Промените направени по документа в последният·час ще бъдат загубени "
-#~ "безвъзвратно."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-#~ msgstr ""
-#~ "Грешка при отваряне на файл \"%s\" . gedit не може да се справи с %s: "
-#~ "местоположения."
-
-#~ msgid "Could not open the file \"%s\" because access was denied."
-#~ msgstr "Грешка при отваряне на файл \"%s\" поради забранен достъп."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the host name was invalid.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "Грешка при отваряне на файл \"%s\". Името на хоста не е валидно.\n"
-#~ "\n"
-#~ "Моля, проверете дали е коректно местоположението и пробвайте пак."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and that your proxy "
-#~ "settings are correct and then try again."
-#~ msgstr ""
-#~ "Грешка при отваряне на файл \"%s\" Не е намерен хост \"%s\" . \n"
-#~ "\n"
-#~ "Моля, проверете дали е коректно местоположението и прокси настройките са "
-#~ "правилни, и пробвайте пак."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "Грешка при отваряне на файл \"%s\" . Опитът за логване неуспешен. \n"
-#~ "\n"
-#~ "Моля, проверете дали е коректно местоположението и опитайте пак."
-
-#~ msgid "Could not open the file \"%s\"."
-#~ msgstr "Грешка при отваряне на файл \"%s\"."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "Не може да се отвари файла \"%s\".\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "Could not save the file \"%s\".\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Грешка при запис на файл \"%s\".\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
-#~ msgstr ""
-#~ "Грешка при възстановяване на файл \"%s\" защото съдържа некоректни данни."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
-#~ "locations."
-#~ msgstr ""
-#~ "Грешка при възстановяване на файл \"%s\". gedit не може да се справи с %"
-#~ "s: местоположения."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because it contains data in an invalid "
-#~ "format."
-#~ msgstr ""
-#~ "Грешка при възстановяване на файл \"%s\", защото съдържа данни в "
-#~ "невалиден формат."
-
-#~ msgid "Could not revert the file \"%s\" because it is too big."
-#~ msgstr "Грешка при възстановяване на файл \"%s\". Файла е прекалено голям."
-
-#~ msgid "Could not revert the file \"%s\" because access was denied."
-#~ msgstr "Грешка при възстановяване на файл \"%s\". Достъпа е отказан."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because there are too many open files.\n"
-#~ "\n"
-#~ "Please, close some open file and try again."
-#~ msgstr ""
-#~ "Грешка при възстановяване на файл \"%s\". Има прекалено много отворено "
-#~ "файлове. \n"
-#~ "\n"
-#~ "Моля, затворете някои файлове и пробвайте пак."
-
-#~ msgid ""
-#~ "Not enough available memory to revert the file \"%s\". Please, close some "
-#~ "running application and try again."
-#~ msgstr ""
-#~ "Няма достатъчно памет за възстановяване на файл \"%s\". Моля, затворете "
-#~ "ненужните приложения и пробвайте пак."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the host name was empty.\n"
-#~ "\n"
-#~ "Please, check that your proxy settings are correct and try again."
-#~ msgstr ""
-#~ "Грешка при възстановяване на файл \"%s\". Не е въведено име на хост. \n"
-#~ "\n"
-#~ "Моля, проверете настройките за прокси и пробвайте пак."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the attempt to log in failed."
-#~ msgstr ""
-#~ "Грешка при възстановяване на файл \"%s\". Опита за логване неуспешен."
-
 #~ msgid ""
 #~ "If you don't save, changes from the last %ld second will be permanently "
 #~ "lost.If you don't save, changes from the last %ld seconds will be "
 #~ "permanently lost."
 #~ msgstr ""
-#~ "Ако не запишете, промените от последнaта %ld секунда ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последните %ld секунди ще "
-#~ "бъдат загубени безвъзвратно."
+#~ "Ако·не·запишете,·промените·от·последната %ld "
+#~ "секунда·ще·бъдат·загубени·безвъзвратно.Ако·не·запишете,"
+#~ "·промените·от·последните %ld секунди·ще·бъдат·загубени·безвъзвратно."
 
 #~ msgid ""
 #~ "If you don't save, changes from the last minute and %ld second will be "
@@ -4845,73 +4514,21 @@ msgstr "_Използвване на потребителски формат"
 #~ "загубени безвъзвратно."
 
 #~ msgid ""
+#~ "If you don't save, changes from the last hour will be permanently lost.If "
+#~ "you don't save, changes from the last %d hours will be permanently lost."
+#~ msgstr ""
+#~ "Ако·не·запишете,·промените·от·последния "
+#~ "час·ще·бъдат·загубени·безвъзвратно.Ако·не·запишете,"
+#~ "·промените·от·последните %ld часа·ще·бъдат·загубени·безвъзвратно."
+
+#~ msgid ""
 #~ "If you don't save, changes from the last hour and %d minute will be "
 #~ "permanently lost.If you don't save, changes from the last hour and %d "
 #~ "minutes will be permanently lost."
 #~ msgstr ""
-#~ "Ако не запишете, промените от последния час и %d минута ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последния час и %d минути ще "
-#~ "бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr ""
-#~ "Ако не запишете, промените от последния %d час ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последните %d часа ще бъдат "
-#~ "загубени безвъзвратно."
-
-#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-#~ msgstr ""
-#~ "Не може да бъде намерен plugin-manager.glade2, моля, преинсталирайте "
-#~ "gedit.\n"
-
-#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-#~ msgstr ""
-#~ "Невалиден glade файл за управление на модули - липсват инструменти.\n"
-
-#~ msgid "_Insert a new preview phrase."
-#~ msgstr "_Вмъкване на фраза за преглед."
-
-#~ msgid "Modify preview phrase..."
-#~ msgstr "Промяна на фраза за преглед..."
-
-#~ msgid "Preview"
-#~ msgstr "Предварителен преглед"
-
-#~ msgid "_Modify preview phrase..."
-#~ msgstr "Промяна на фраза за преглед..."
-
-#~ msgid "Sans Regular 12"
-#~ msgstr "Sans Regular 12"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "АаБбВвГгДдЕеЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЬьЮюЯя"
-
-#~ msgid "Pick a Font"
-#~ msgstr "Избор на шрифт"
-
-#~ msgid "The title of the selection dialog box"
-#~ msgstr "Заглавието на прозорец \"Селектиране\""
-
-#~ msgid "Name of the selected font"
-#~ msgstr "Име на избрания шрифт"
-
-#~ msgid "Preview text shown in the dialog"
-#~ msgstr "Представяне на текста показван в прозореца"
-
-#~ msgid "Use font in the label in font info mode"
-#~ msgstr "Използване на шрифта за етикет в режим \"Информация за шрифта\""
-
-#~ msgid "Font size for label"
-#~ msgstr "Размер на фонта за етикети"
-
-#~ msgid "Font size for label in font info mode"
-#~ msgstr "Размер на шрифта в режим \"Информация за шрифта\""
-
-#~ msgid "Show size in font info mode"
-#~ msgstr "Показване на размера в режим \"Информация за шрифта\""
+#~ "Ако не запишете, промените от последният час и %d минута ще бъдат "
+#~ "загубени безвъзвратно.Ако не запишете, промените от последният час и %d "
+#~ "минути ще бъдат загубени безвъзвратно."
 
 #~ msgid ""
 #~ "Changes made to the document in the last %ld second will be permanently "
@@ -4919,8 +4536,8 @@ msgstr "_Използвване на потребителски формат"
 #~ "permanently lost."
 #~ msgstr ""
 #~ "Промените направени по документа в последната %ld секунда ще бъдат "
-#~ "загубени безвъзвратно.Промените направени по документа в последните %ld "
-#~ "секунди ще бъдат загубени безвъзвратно."
+#~ "загубени безвъзвратно.Промените направени по документа в последните %"
+#~ "ld·секунди ще бъдат загубени безвъзвратно."
 
 #~ msgid ""
 #~ "Changes made to the document in the last minute and %ld second will be "
@@ -4929,7 +4546,7 @@ msgstr "_Използвване на потребителски формат"
 #~ msgstr ""
 #~ "Промените направени по документа в последната минута и %ld секунда ще "
 #~ "бъдат загубени безвъзвратно.Промените направени по документа в последната "
-#~ "минута и %ld секунди бъдат загубени безвъзвратно."
+#~ "минута и %ld секунди ще бъдат загубени безвъзвратно."
 
 #~ msgid ""
 #~ "Changes made to the document in the last %ld minute will be permanently "
@@ -4941,348 +4558,28 @@ msgstr "_Използвване на потребителски формат"
 #~ "минути ще бъдат загубени безвъзвратно."
 
 #~ msgid ""
+#~ "Changes made to the document in the last hour will be permanently lost."
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr ""
+#~ "Промените направени по документа в последният·час ще бъдат загубени "
+#~ "безвъзвратно.Промените направени по документа в последните %ld·часа ще "
+#~ "бъдат загубени безвъзвратно."
+
+#~ msgid ""
 #~ "Changes made to the document in the last hour and %d minute will be "
 #~ "permanently lost.Changes made to the document in the last hour and %d "
 #~ "minutes will be permanently lost."
 #~ msgstr ""
-#~ "Промените направени по документа в последния час и %d минута ще бъдат "
-#~ "загубени безвъзвратно.Промените направени по документа в последния час и %"
-#~ "d минути ще бъдат загубени безвъзвратно."
+#~ "Промените направени по документа в последният час и %d минута ще бъдат "
+#~ "загубени безвъзвратно.Промените направени по документа в последният час и "
+#~ "%d минути ще бъдат загубени безвъзвратно."
 
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr ""
-#~ "Промените направени по документа в последния %d час ще бъдат загубени "
-#~ "безвъзвратно.Промените направени по документа в последните %d часа ще "
-#~ "бъдат загубени безвъзвратно."
+#~ msgid "Document ID"
+#~ msgstr "ID на документа"
 
-#~ msgid "(modified)"
-#~ msgstr "(променен)"
+#~ msgid "Document version"
+#~ msgstr "Версия на документа"
 
-#~ msgid "Untitled"
-#~ msgstr "Неозаглавено"
-
-#~ msgid "Error, unable to open module file '%s'\n"
-#~ msgstr "Грешка, неуспех при отваряне на файл за модул \"%s\"\n"
-
-#~ msgid "Error, plugin '%s' does not contain init function."
-#~ msgstr "Грешка, модул \"%s\" не съдържа функция за инициализация."
-
-#~ msgid "Error, plugin '%s' does not contain activate function."
-#~ msgstr "Грешка, модул \"%s\" не съдържа функция за активиране."
-
-#~ msgid "Error, plugin '%s' does not contain deactivate function."
-#~ msgstr "Грешка, модул \"%s\" не съдържа функция за деактивиране."
-
-#~ msgid "Error, impossible to initialize plugin '%s'"
-#~ msgstr "Грешка, неуспех при инициализация на модул \"%s\""
-
-#~ msgid "Error, impossible to destroy plugin '%s'"
-#~ msgstr "Грешка, неуспех при унищожаване на модул \"%s\""
-
-#~ msgid "Error, impossible to activate plugin '%s'"
-#~ msgstr "Грешка, неуспех при активиране на модул \"%s\""
-
-#~ msgid "Error, impossible to deactivate plugin '%s'"
-#~ msgstr "Грешка, неуспех при деактивиране на модул \"%s\""
-
-#~ msgid "Error, impossible to update ui of the plugin '%s'"
-#~ msgstr "Грешка, неуспех при подновяване на ПИ на модул \"%s\""
-
-#~ msgid "Save method not implemented for gedit viewer"
-#~ msgstr "Метода за запис не е приложим в програмата за преглед на gedit"
-
-#~ msgid "Copy the selected text to the clipboard"
-#~ msgstr "Копиране на избрания текст в системния буфер"
-
-#~ msgid "_Copy Text"
-#~ msgstr "_Копиране на текст"
-
-#~ msgid ""
-#~ "If you don't save, changes from the last hour and %d minute will be "
-#~ "definitively lost.If you don't save, changes from the last hour and %d "
-#~ "minutes will be definitively lost."
-#~ msgstr ""
-#~ "Ако не запишете, промените от последния час и %d минута ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последния час и %d минути ще "
-#~ "бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be definitively "
-#~ "lost.If you don't save, changes from the last %d hours will be "
-#~ "definitively lost."
-#~ msgstr ""
-#~ "Ако·не·запишете,·промените·от·последния %d "
-#~ "час·ще·бъдат·загубени·безвъзвратно.Ако·не·запишете,"
-#~ "·промените·от·последните %d часове·ще·бъдат·загубени·безвъзвратно."
-
-#~ msgid "The file \"%s\" does not exist. Would you like to create it?"
-#~ msgstr "Файлът \"%s\" не съществува. Искате ли да го създадете?"
-
-#~ msgid "Show utility debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки при инструменти."
-
-#~ msgid "Show metadata debugging messages."
-#~ msgstr "Показвай съобщения за отстраняване на грешки."
-
-#~ msgid "Show mdi debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки в mdi"
-
-#~ msgid "Show commands debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки при командите."
-
-#~ msgid "Show document debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки при документите."
-
-#~ msgid "Show file debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки при файловете."
-
-#~ msgid "Show plugin debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки в модулите."
-
-#~ msgid "Show prefs debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки в настройките."
-
-#~ msgid "Show printing debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки при печат."
-
-#~ msgid "Show search debugging messages."
-#~ msgstr ""
-#~ "Покажи съобщения за отстраняване на грешки в инструмента за търсене."
-
-#~ msgid "Show undo debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки в команда \"Отмени\"."
-
-#~ msgid "Show view debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на грешки при изгледа."
-
-#~ msgid "Show recent debugging messages."
-#~ msgstr "Покажи съобщения за отстраняване на текущите грешки."
-
-#~ msgid "Show session management debugging messages."
-#~ msgstr ""
-#~ "Покажи съобщения за отстраняване на грешки при управление на сесията."
-
-#~ msgid "Turn on all debugging messages."
-#~ msgstr "Включи всички съобщения за отстраняване на грешки."
-
-#~ msgid "Encoding for Saving"
-#~ msgstr "Кодиране на символите при запис"
-
-#~ msgid ""
-#~ "The encoding method to use for saving files. Possible values are "
-#~ "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
-#~ "\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to "
-#~ "convert the document it is saving to your current locale's encoding, "
-#~ "\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to "
-#~ "try to use the original file encoding (new files in UTF8) and "
-#~ "\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit "
-#~ "to try to use the original file encoding (new files in current locale's "
-#~ "encoding). If the conversion is successful, it will be used. Otherwise, "
-#~ "UTF-8 will be used. Note that the values are case-sensitive, so make sure "
-#~ "they appear exactly as mentioned here."
-#~ msgstr ""
-#~ "Метода за кодиране при запис на файловете. Възможни стойности са "
-#~ "\"GEDIT_SAVE_ALWAYS_UTF8\" за задължителен запис в UTF-8, "
-#~ "\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" ако искате gedit да опита да "
-#~ "конвертира документа към кодирането на Вашия текущ локал, "
-#~ "\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" ако искате gedit да "
-#~ "опита да използва оригиналното кодирнае на файла (новите файлове в UTF-8) "
-#~ "и \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" ако искате gedit "
-#~ "да опита да използва оригиналното кодирнае на файла (новите файлове в "
-#~ "кодирането на текущия локал). Ако преобразуването е успешно ще бъде "
-#~ "използван зададения метод. Иначе ще бъде използвано UTF-8. Имайте "
-#~ "предвид, че стойностите са зависими от регистъра на буквите, така че се "
-#~ "уверете, че са изписани точно, както ги виждате тук."
-
-#~ msgid "_Debug"
-#~ msgstr "_Debug"
-
-#~ msgid "Could not find '"
-#~ msgstr "Грешка при намиране на '"
-
-#~ msgid ""
-#~ "page-setup-dialog.glade2'.\n"
-#~ "\n"
-#~ "Reinstall gedit."
-#~ msgstr ""
-#~ "page-setup-dialog.glade2'.\n"
-#~ "\n"
-#~ "Преинсталирайте gedit."
-
-#~ msgid "Could not find the required widgets inside '"
-#~ msgstr "Необходим инструмент не може да бъде намерен в '"
-
-#~ msgid "Wrap Mode"
-#~ msgstr "Режим с пренасяне"
-
-#~ msgid "Line Numbers"
-#~ msgstr "Номера на редовете"
-
-#~ msgid "Manager"
-#~ msgstr "Управление"
-
-#~ msgid "Cat_egories:"
-#~ msgstr "_Категории:"
-
-#~ msgid "Categories"
-#~ msgstr "Категории"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Автоматичен отстъп</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"x-large\">Шрифт &големина; Цветове</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Номера на редовете</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Запис</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Табове</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Отмени</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Режим с пренасяне</span>"
-
-#~ msgid "Fonts & Colors"
-#~ msgstr "Шрифтове & Цветове"
-
-#~ msgid "LOGO"
-#~ msgstr "ЛОГО"
-
-#~ msgid "Plugin manager"
-#~ msgstr "Управление на модули"
-
-#~ msgid "Set _tabs width equivalent to"
-#~ msgstr "_Табулацията е равна на:"
-
-#~ msgid "Set limit on _undo actions to"
-#~ msgstr "Брой изпълнения на команда _отмени"
-
-#~ msgid "character(s)"
-#~ msgstr "символ(и)"
-
-#~ msgid "About selected plugin"
-#~ msgstr "Относно избрания модул"
-
-#~ msgid "Configure the selected plugin"
-#~ msgstr "Конфигурирай избрания модул"
-
-#~ msgid "It is not possible to revert an Untitled document"
-#~ msgstr "Не е възможно за се възстановите неозаглавен документ"
-
-#~ msgid "File '%s' saved."
-#~ msgstr "Файл '%s' е записан."
-
-#~ msgid ""
-#~ "Do you want to revert to saved the document '%s'?\n"
-#~ "\n"
-#~ "You will not be able to undo this operation."
-#~ msgstr ""
-#~ "Желаете ли да върнете съдържанието на записания документ \"%s\"? \n"
-#~ "\n"
-#~ "Отмяната на тази операция няма да е възможна. "
-
-#~ msgid "File '%s' reverted."
-#~ msgstr "Файл '%s' възстановен."
-
-#~ msgid ""
-#~ "Do you want to save the changes you made to the document \"%s\"? \n"
-#~ "\n"
-#~ "Your changes will be lost if you don't save them."
-#~ msgstr ""
-#~ "Желаете ли да запишете промените по документ \"%s\"? \n"
-#~ "\n"
-#~ "Промените няма да са валидни ако не ги запишете."
-
-#~ msgid "_Don't quit"
-#~ msgstr "Не и_злизай"
-
-#~ msgid "_Don't close"
-#~ msgstr "Не затваряй"
-
-#~ msgid "Replace a string"
-#~ msgstr "Замести стринг"
-
-#~ msgid "Search again for the same string"
-#~ msgstr "Търси отново за същия стринг"
-
-#~ msgid "Tag Groups Combo"
-#~ msgstr "Комбинатор на групите с етикети"
-
-#~ msgid "Tags Name List"
-#~ msgstr "Списък с имена на етикети"
-
-#~ msgid "Push this button to select the font to be used to print the body"
-#~ msgstr ""
-#~ "Натиснете бутона за да изберете шрифта, използван за печат на тялото"
-
-#~ msgid "Push this button to select the font to be used to print the headers"
-#~ msgstr ""
-#~ "Натиснете бутона за да изберете шрифта, използван за печат на колон-"
-#~ "титулите"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Шрифтове</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Отвори</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Страница</span>"
-
-#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
-#~ msgstr "<span weight=\"bold\">При запис в нов файл...</span>"
-
-#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
-#~ msgstr "<span weight=\"bold\">При запис в съществуващ файл...</span>"
-
-#~ msgid "Add new encodings"
-#~ msgstr "Добави нова кодова таблица"
-
-#~ msgid "Always use U_TF-8 encoding (faster)"
-#~ msgstr "Винаги използвай U_TF-8 кодиране (по-бързо)"
-
-#~ msgid "Always use _UTF-8 encoding (faster)"
-#~ msgstr "Винаги използвай _UTF-8 кодиране (по-бързо)"
-
-#~ msgid "Line _numbers:"
-#~ msgstr "_Номера на редовете:"
-
-#~ msgid "Move down"
-#~ msgstr "Премести надолу"
-
-#~ msgid "Move up"
-#~ msgstr "Премести нагоре"
-
-#~ msgid "Print _line numbers every"
-#~ msgstr "Печатай _номерата на редовете всеки"
-
-#~ msgid "Print fonts"
-#~ msgstr "Печатай шрифтовете"
-
-#~ msgid "Remove an encoding"
-#~ msgstr "Премахни кодова таблица"
-
-#~ msgid "U_se original file encoding if possible"
-#~ msgstr "Използвай _оригиналното кодиране на файла, когато е възможно"
-
-#~ msgid "Use cu_rrent locale's encoding if possible"
-#~ msgstr "Използвай кодирането на _текущия локал, когато е възможно"
-
-#~ msgid "Use current _locale's encoding if possible"
-#~ msgstr "Използвай кодирането на тек_ущия локал, когато е възможно"
-
-#~ msgid "_Supported encodings:"
-#~ msgstr "Под_държани кодови таблици:"
-
-#~ msgid "li_ne(s)"
-#~ msgstr "_ред(ове)"
+#~ msgid "Link"
+#~ msgstr "Пепратка"
