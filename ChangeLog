@@ -1,5 +1,16 @@
 1998-10-13  Martin Baulig  <martin@home-of-linux.org>
 
+	* src/plugin.h (plugin_document_callbacks): Added
+	`set_auto_indent', `set_status_bar', `set_word_wrap',
+	`set_read_only', `set_split_screen' and `set_scroll_ball'.
+
+	* src/gE_plugin_api.c: Added new functions
+	`gE_plugin_set_auto_indent', `gE_plugin_set_status_bar',
+	`gE_plugin_set_word_wrap', `gE_plugin_set_read_only',
+	`gE_plugin_set_split_screen' and `gE_plugin_set_scroll_ball'.
+
+1998-10-13  Martin Baulig  <martin@home-of-linux.org>
+
 	* src/gE_document.c (gE_window_set_auto_indent): New function taking
 	a gE_document * and a gint indicating whether to enable auto indent.
 

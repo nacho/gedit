@@ -48,6 +48,12 @@ typedef struct
   gboolean (*close) ( gint id );
   gint (*get_position) ( gint id );
   selection_range (*get_selection) ( gint id );
+  void (*set_auto_indent) ( gint id, gint auto_indent );
+  void (*set_status_bar) ( gint id, gint status_bar );
+  void (*set_word_wrap) ( gint id, gint word_wrap );
+  void (*set_read_only) ( gint id, gint read_only );
+  void (*set_split_screen) ( gint id, gint split_screen );
+  void (*set_scroll_ball) ( gint id, gint scroll_ball );
   /*
     void (*set_position) ( gint id, gint position );
     void (*set_selection) ( gint id, selection_range selection );

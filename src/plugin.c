@@ -691,6 +691,20 @@ process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 	      break;
 	    }
 	  break;
+	case 't':
+	  switch( state->command[1] )
+	    {
+	    case 'i': /* Fall through. */
+	    case 'b': /* Fall through. */
+	    case 'w': /* Fall through. */
+	    case 'r': /* Fall through. */
+	    case 't': /* Fall through. */
+	    case 'c': /* Fall through. */
+	      state->int_count = 2;
+	      state->char_count = 0;
+	      break;
+	    }
+	  break;
 	case 0:
 	  g_warning("Go: Bad read.  Plugin died?");
 	  plugin_finish( plug );
@@ -775,6 +789,35 @@ process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 		  plugin_send_data_with_length( plug, "", 0 );
 		break;
 	      }
+	    }
+	  break;
+	case 't':
+	  switch(state->command[1])
+	    {
+	    case 'i':
+	      if ( plug->callbacks.document.set_auto_indent )
+		plug->callbacks.document.set_auto_indent( state->ints[0], state->ints[1]);
+	      break;
+	    case 'b':
+	      if ( plug->callbacks.document.set_status_bar )
+		plug->callbacks.document.set_status_bar( state->ints[0], state->ints[1]);
+	      break;
+	    case 'w':
+	      if ( plug->callbacks.document.set_word_wrap )
+		plug->callbacks.document.set_word_wrap( state->ints[0], state->ints[1]);
+	      break;
+	    case 'r':
+	      if ( plug->callbacks.document.set_read_only )
+		plug->callbacks.document.set_read_only( state->ints[0], state->ints[1]);
+	      break;
+	    case 't':
+	      if ( plug->callbacks.document.set_split_screen )
+		plug->callbacks.document.set_split_screen( state->ints[0], state->ints[1]);
+	      break;
+	    case 'c':
+	      if ( plug->callbacks.document.set_scroll_ball )
+		plug->callbacks.document.set_scroll_ball( state->ints[0], state->ints[1]);
+	      break;
 	    }
 	  break;
 	case 'f':
@@ -920,7 +963,8 @@ process_command( plugin *plug, gchar *buffer, int length, gpointer data )
       int_count = 0;
       char_count = 0;
       break;
-    case 'e':
+    case 'e': /* Fall through. */
+    case 't':
       command_count = 2;
       break;
     case 0:

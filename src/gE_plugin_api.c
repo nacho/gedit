@@ -40,6 +40,8 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   plugin_callback_struct callbacks;
   plugin *plug = plugin_new( data->temp1 );
 
+  memset (&callbacks, 0, sizeof (plugin_callback_struct));
+
   callbacks.document.create = gE_plugin_document_create;
   callbacks.text.append = gE_plugin_text_append;
   callbacks.text.insert = gE_plugin_text_insert;
@@ -48,6 +50,12 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.document.filename = gE_plugin_document_filename;
   callbacks.document.open = gE_plugin_document_open;
   callbacks.document.close = gE_plugin_document_close;
+  callbacks.document.set_auto_indent = gE_plugin_set_auto_indent;
+  callbacks.document.set_status_bar = gE_plugin_set_status_bar;
+  callbacks.document.set_word_wrap = gE_plugin_set_word_wrap;
+  callbacks.document.set_read_only = gE_plugin_set_read_only;
+  callbacks.document.set_split_screen = gE_plugin_set_split_screen;
+  callbacks.document.set_scroll_ball = gE_plugin_set_scroll_ball;
   callbacks.text.get = gE_plugin_text_get;
   callbacks.program.quit = gE_plugin_program_quit;
 
@@ -190,6 +198,48 @@ gboolean gE_plugin_document_close (gint docid)
 	g_free (data);
 
 	return flag;	
+}
+
+void gE_plugin_set_auto_indent (gint docid, gint auto_indent)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+
+	gE_window_set_auto_indent (document->window, auto_indent);
+}
+
+void gE_plugin_set_status_bar (gint docid, gint status_bar)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+
+	gE_window_set_status_bar (document->window, status_bar);
+}
+
+void gE_plugin_set_word_wrap (gint docid, gint word_wrap)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+
+	gE_document_set_word_wrap (document, word_wrap);
+}
+
+void gE_plugin_set_read_only (gint docid, gint read_only)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+
+	gE_document_set_read_only (document, read_only);
+}
+
+void gE_plugin_set_split_screen (gint docid, gint split_screen)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+
+	gE_document_set_split_screen (document, split_screen);
+}
+
+void gE_plugin_set_scroll_ball (gint docid, gint scroll_ball)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+
+	gE_document_set_scroll_ball (document, scroll_ball);
 }
 
 char *gE_plugin_text_get( gint docid )
