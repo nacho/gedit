@@ -45,7 +45,7 @@
 
   <!-- this is version of manual, not application --> 
   <releaseinfo>
-  This is version 0.1 of the gedit manual.
+  This is version 1.0 of the gedit manual.
   </releaseinfo>
 
   </artheader>
@@ -59,15 +59,15 @@
       <application>gedit</application> has a native graphic user interface (GUI).  
       <application>Gedit</application> also has commandline arguments available to 
       users to quickly and easily view and edit files from a <systemitem>terminal</systemitem>.  
-      Overall, <application>gedit</application> is an easy to use text editor while 
-      utilizing the powerful capabilities the <systemitem>GNOME desktop</systemitem> 
-      provides.
+      Overall, <application>gedit</application> is an easy to use text editor with 
+      utilizing the powerful capabilities of the <systemitem>GNOME desktop</systemitem>.
     </para>
 
     <para>
       <application>Gedit</application> has a verastile plug-in architecture to extend its
-      capablilties.  This allows you to perform functions, you don't normally except from a text 
-      editor, like outputing a shell command to the screen.  The plug-in architecture also lets you email people, 
+      capablilties.  This allows you to perform functions you don't normally except from a text 
+      editor, such as piping the outputing of a shell command to the screen.  
+      The plug-in architecture also lets you email people, 
       browse the internet, or produce a <command>diff</command> from <application>gedit</application>.
     </para>
 
@@ -104,13 +104,13 @@
 
     <para>
       A text editor is essential to everything you want to accomplish 
-      in your Linux environment.  Whether it's looking at logs to find 
+      in your Linux environment.  From looking at logs to find 
       a problem with a program or editing a configuration file like 
       <filename>.bash_profile</filename> to writing a script in perl or 
       composing a webpage, <application>gedit</application> will fill your 
-      need.  Another useful feature is <application>gedit's</application> 
+      need.  <!--Another useful feature is <application>gedit's</application> 
       <link linkend="plugins">plug-ins</link>.  They extend the functionality 
-      of the basic text editor.
+      of the basic text editor.-->
     </para>
 
     <para>
@@ -137,10 +137,8 @@
     </para>
 
     <para>
-      The <link linkend="plugins">plug-ins</link> for 
-      <application>gedit</application> are still developing,
-      so except to see more in future versions.  <application>Gedit</application> 
-      has plug-ins so you can send a quick email to a friend, lookup a 
+      <application>Gedit</application> has <link linkend="plugins">plug-ins</link> 
+      so you can send a quick email to a friend, lookup a 
       webpage if you need help with your work, or produce a file that tells 
       the difference between two other files, using the <command>diff</command> command.  
       The shell output plugin inserts the output of any shell command into 
@@ -174,7 +172,7 @@
 	name, separated by a space, after the command <command>gedit</command>.  
 	So, to open the three files <filename>file1.txt</filename>, 
 	<filename>file2.txt</filename>, and <filename>file3.txt</filename>, you 
-	need to type <command>gedit</command> <filename>file1.txt</filename>, 
+	need to type <command>gedit</command> <filename>file1.txt</filename> 
 	<filename>file2.txt</filename> <filename>file3.txt</filename> in a terminal 
 	and <application>gedit</application> will open the three file listed above.  
 	This feature is very handy to quickly edit a configuration file or script 
@@ -209,7 +207,7 @@
 	directory using the <command>ls</command> command, you will type <command>ls</command> 
 	<command>|</command> <command>gedit</command>.  The output of <command>ls</command>, 
 	that is normally displayed on the <systemitem>console</systemitem> or 
-	<systemitem>X terminal</systemitem> will be displayed in 
+	<systemitem>X terminal</systemitem>, will be displayed in 
 	<application>gedit</application> as a new text file.  This option is very useful 
 	for commands that display their output too fast or if you want to use the output 
 	in a text file.
@@ -243,8 +241,29 @@
       only adding the capabilities and size to <application>gedit</application> that you want.
     </para>
 
+      <figure id="manager-fig">
+	<title>Plugin Manager</title>
+	<screenshot>
+	  <screeninfo>plugin manager</screeninfo>
+	  <graphic fileref="figures/manager" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
+
     <para>
-      The plugins provide a variety of extended capabilities to <application>gedit</application> which are:
+      When <application>gedit</application> starts, there are no plugins in the <guimenu>Plugins</guimenu> 
+      menu.  You need to open the <guimenuitem>Manager&hellip;</guimenuitem> to choose which plugins 
+      you want to enable in <application>gedit</application>.  The plugin manager lets you choose 
+      only the plugins you want to use.  You will notice only the plugins you install will be shown 
+      in the <guimenu>Plugin</guimenu> menu.  Click on which plugin you want to install, 
+      in the left window, and then press the <guibutton>Add</guibutton> button.  This will install one plugin in 
+      <application>gedit</application> and put the plugin in the <guimenu>Plugin</guimenu> menu, so 
+      you can run the plugin.  If you want to install all the plugins, just press the 
+      <guibutton>Add All</guibutton> button.  To uninstall a plugin in <application>gedit</application>, 
+      click on the plugin you want to uninstall, in the right window, and press the <guibutton>Remove</guibutton> 
+      button.  If you want to disable all the plugins, just press the <guibutton>Remove All</guibutton> 
+      button.
     </para>
 
     <sect2 id="browse">
@@ -263,7 +282,22 @@
       <para>
 	The <guimenuitem>browse</guimenuitem> plugin has a text window to enter the url of the webpage 
 	you want to visit.  When you enter the url, <application>gedit</application> displays the 
-	webpage in the <systemitem>main window</systemitem>.
+	webpage in the <systemitem>main window</systemitem>.  If <application>Lynx</application> does 
+	not have the correct path, at the bottom 
+	of the dialog, you can change it by clicking the <guibutton>Change</guibutton> button.
+	<figure id="mlynx-fig">
+	  <title>Change Lynx Path</title>
+	  <screenshot>
+	    <screeninfo>change lynx path</screeninfo>
+	    <graphic fileref="figures/lynx" format="png"
+		   srccredit="Eric Baudais">
+	    </graphic>
+	  </screenshot>
+	</figure>
+	You then need to enter the correct path for your system in the text window or click the 
+	<guibutton>Browse</guibutton> button to find <filename>lynx</filename> on your system.
+	After you have all the correct fields filled in, press the <guibutton>OK</guibutton> to 
+	display the webpage.
       </para>
     </sect2>
 
@@ -281,9 +315,12 @@
       </figure>
 
       <para>
-	The <guimenuitem>diff</guimenuitem> plugin has two text windows.  You enter the original file in 
+	The <guimenuitem>diff</guimenuitem> plugin has two ways to select the file you want to 
+	determine its difference. You can select the original file from the list of files you have opened 
+	in <application>gedit</application>.  You can also enter the original file in 
 	the first text window (the one on the left).  You then enter the revised file in the second text 
-	window (the one on the right).  The difference of the files will then be seen in the 
+	window (the one on the right) or by selecting the file from the list of opened files in 
+	<application>gedit</application> (on the right).  The difference of the files will then be seen in the 
 	<systemitem>Main Window</systemitem>.
 
 	<note>
