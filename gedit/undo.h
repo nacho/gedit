@@ -29,9 +29,9 @@
 #define	GEDIT_UNDO_INSERT	0
 #define	GEDIT_UNDO_DELETE	1
 
-typedef struct _gedit_undo gedit_undo;
+typedef struct _GeditUndoInfo  GeditUndoInfo;
 
-struct _gedit_undo
+struct _GeditUndoInfo
 {
 	gchar *text;	/* The text data */
 	gint start_pos;	/* The position in the document */
@@ -43,9 +43,8 @@ struct _gedit_undo
 };
 
 extern void gedit_undo_add      (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
-extern void gedit_undo_reset	(GList*);
 extern void gedit_undo_do	(GtkWidget*, gpointer);
 extern void gedit_undo_redo	(GtkWidget*, gpointer);
-extern void gedit_undo_history	(GtkWidget*, gpointer*);
+extern void gedit_undo_free_list (GList **list_pointer);
 
 #endif /* __UNDO_H__ */

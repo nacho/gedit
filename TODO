@@ -15,15 +15,20 @@
     [X] pop a message or find a better way of letting the user know
 	that the text was not found
     [ ] some dialogs are going under the main window. Very annoying.
-    [ ] replace is not setting the file as modified=TRUE (neither the pluggins)    
+    [X] replace is not setting the file as modified=TRUE
     [X] rewrote count lines
     [X] rewrote goto lines
-[ ] use gedit_document_get_buffer in all the functions that are getting
+    [ ] replace is not undoable anymore.
+[ ] when undoing/redoing test to see if there is a selection active
+    if there is, unselect it so that the cursor repositions where the
+    undo/redo happened
+[X] use gedit_document_get_buffer in all the functions that are getting
     the buffer by themselves. This will add an abstraction layer and will help
     with the migration to the new text widget.
 [X] Fix the "Untitled" mess
 [X] Move the scrollbars before undo operations to speed up undo/redo
 [X] Add todo levels and free the memory used by deep levels
+[X] we need to merge when deleting delete key too.
 [X] Fix the speed problems !!!
 [X] There is still some problems with the "Untitled" docs when opening
     multiple views.
@@ -52,7 +57,7 @@
 [~] First shoot at the documentation
 
 ** Roberto Majadas
-[ ] Piped input, such as doing "df | gedit" and getting a new document
+[X] Piped input, such as doing "df | gedit" and getting a new document
     with the output of df
 
 ** Unclaimed **
@@ -81,6 +86,7 @@ solution for this, since it affects the search funcitons too. Chema.
 [ ] Fix the bug in which gedit exitst when a file is modified. After
 the user hits "YES" to save the file, gedit does not exits.
 [ ] When creating a new file "gedit file_a.txt" we need to set the title
+[ ] Set view->linewrapp from settings->linewrap. We need to add horz scroll bars too
 
 ----------------------------------------------------------------------
   gedit 1.0

@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 1998, 1999, 2000  Alex Roberts, Evan Lawrence, Jason Leach, Jose M Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,22 +36,63 @@
 #include "document.h"
 
 
-static void 	  gedit_document_class_init (DocumentClass *);
-static void 	  gedit_document_init (Document *);
-static GtkWidget* gedit_document_create_view (GnomeMDIChild *);
-static void	  gedit_document_destroy (GtkObject *);
-/*static void	  gedit_document_real_changed (Document *, gpointer); */
-static gchar* gedit_document_get_config_string (GnomeMDIChild *child);
-
-gchar  * gedit_get_document_tab_name (Document *doc);
-guchar * gedit_document_get_buffer (Document * doc);
-
 GnomeMDI *mdi;
-
 typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
-
 static GnomeMDIChildClass *parent_class = NULL;
 
+void gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable);
+GtkType gedit_document_get_type (void);
+static GtkWidget * gedit_document_create_view (GnomeMDIChild *child);
+static void gedit_document_destroy (GtkObject *obj);
+static void gedit_document_class_init (DocumentClass *class);
+void gedit_document_init (Document *doc);
+gchar* gedit_get_document_tab_name (Document *doc);
+guchar * gedit_document_get_buffer (Document * doc);
+Document * gedit_document_new (void);
+Document * gedit_document_new_with_title (gchar *title);
+Document * gedit_document_new_with_file (gchar *filename);
+Document * gedit_document_stdin (void);
+Document * gedit_document_current (void);
+static gchar * gedit_document_get_config_string (GnomeMDIChild *child);
+void gedit_add_view (GtkWidget *widget, gpointer data);
+void gedit_remove_view (GtkWidget *widget, gpointer data);
+static void child_changed_cb (GnomeMDI *mdi, Document *doc);
+static gint remove_child_cb (GnomeMDI *mdi, Document *doc);
+void gedit_mdi_init (void);
+void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
+void gedit_document_load ( GList *file_list);
+
+/**
+ * gedit_document_insert_text: Inserts text to a document and hadles all the details like
+ *                             adding the data to the undo stack and adding it to multiple views
+ *                             Provides an abstraction layer between gedit and the text widget.
+ * @doc: document to insert text
+ * @text: null terminated text to insert
+ * @position: position to insert the text at
+ * @undoable: if this insertion gets added to the undo stack or not.
+ * 
+ *
+ **/
+void
+gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable)
+{
+	View *view;
+	GtkText *text_widget;
+	GtkWidget *editable;
+	gint length;
+	gint exclude_this_view;
+
+	view = g_list_nth_data (doc->views, 0);
+	g_return_if_fail (view!=NULL);
+	text_widget = GTK_TEXT (view->text);
+	g_return_if_fail (text_widget!=NULL);
+	editable = GTK_WIDGET (text_widget);
+	g_return_if_fail (editable!=NULL);
+	length = strlen (text);
+	exclude_this_view = FALSE;
+
+	doc_insert_text_cb (editable, text, length, &position, view, exclude_this_view, undoable);
+}
 
 GtkType
 gedit_document_get_type (void)
@@ -83,7 +124,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 {
 	View  *new_view;
 
-	gedit_debug ("\n", DEBUG_FILE);
+	gedit_debug ("", DEBUG_FILE);
 
 	g_return_val_if_fail (child != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MDI_CHILD (child), NULL);
@@ -101,16 +142,19 @@ gedit_document_destroy (GtkObject *obj)
 {
 	Document *doc = DOCUMENT (obj);
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 	
 	g_free (doc->filename);
+	/* dont have a buffer anymore
 	g_string_free (doc->buffer, TRUE);
-
-	g_list_free (doc->undo);
-	g_list_free (doc->redo);
+	*/
+	gedit_undo_free_list (&doc->undo);
+	gedit_undo_free_list (&doc->redo);
 	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
+
+	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 static void
@@ -122,10 +166,9 @@ gedit_document_class_init (DocumentClass *class)
 	object_class = (GtkObjectClass*)class;
 	child_class = GNOME_MDI_CHILD_CLASS (class);
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 	
 	/* blarg.. signals stuff.. doc_changed? FIXME 
-	
 	gtk_object_class_add_signals (object_class, gedit_document_signals, LAST_SIGNAL);
 	*/
 	
@@ -133,21 +176,22 @@ gedit_document_class_init (DocumentClass *class)
 	
 	child_class->create_view = (GnomeMDIChildViewCreator)(gedit_document_create_view);
 	child_class->get_config_string = (GnomeMDIChildConfigFunc)(gedit_document_get_config_string);
-	
-	/*class->document_changed = gedit_document_real_changed;*/
-	
+
 	parent_class = gtk_type_class (gnome_mdi_child_get_type ());
+
+	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 void
 gedit_document_init (Document *doc)
 {
-	/* FIXME: This prolly needs work.. */
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	doc->filename = NULL;
 	doc->changed = FALSE;
 	doc->views = NULL;
+	doc->undo = NULL;
+	doc->redo = NULL;
 		
 	gnome_mdi_child_set_menu_template (GNOME_MDI_CHILD (doc), doc_menu);
 }
@@ -160,7 +204,7 @@ gedit_get_document_tab_name (Document *doc)
 	int i;
 	const char *UNTITLED = N_("Untitled");
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	if (doc->untitled_number == 0)
 	{
@@ -180,6 +224,14 @@ gedit_get_document_tab_name (Document *doc)
 	   
 }
 
+/**
+ * gedit_document_get_buffer:
+ * @doc: 
+ * 
+ * returns a newly allocated buffer containg the text inside doc
+ * 
+ * Return Value: 
+ **/
 guchar *
 gedit_document_get_buffer (Document * doc)
 {
@@ -188,11 +240,13 @@ gedit_document_get_buffer (Document * doc)
 	GtkText * text;
 	View * view;
 
+	gedit_debug ("", DEBUG_DOCUMENT);
+
 	g_return_val_if_fail (doc!=NULL, NULL);
 	view = g_list_nth_data (doc->views, 0);
 	g_return_val_if_fail (view!=NULL, NULL);
 
-	text = GTK_TEXT ( view->text );
+	text = GTK_TEXT (view->text);
 
 	length = gtk_text_get_length (text);
 	buffer = gtk_editable_get_chars ( GTK_EDITABLE ( text ),
@@ -207,25 +261,23 @@ gedit_document_new (void)
 	Document *doc;
 	gchar *doc_name;
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	doc = gtk_type_new (gedit_document_get_type ());
-	if (doc)
-	{
-		doc->untitled_number = 0;
-		doc_name = gedit_get_document_tab_name(doc);
-		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
-					  doc_name);
 
-		doc->buffer = g_string_sized_new (256);
-		g_free (doc_name);
-		return doc;
-	}
+	g_return_val_if_fail (doc != NULL, NULL);
 
-	g_assert_not_reached ();
-	gtk_object_destroy (GTK_OBJECT (doc));
-	
-	return NULL;
+	doc_name = gedit_get_document_tab_name(doc);
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
+				  doc_name);
+	g_free (doc_name);
+	/*
+	doc->buffer = g_string_sized_new (256);
+	*/
+
+	gedit_debug ("end", DEBUG_DOCUMENT);
+
+	return doc;
 }
 
 Document *
@@ -233,25 +285,21 @@ gedit_document_new_with_title (gchar *title)
 {
 	Document *doc;
 	
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	g_return_val_if_fail (title != NULL, NULL);
-
 	doc = gtk_type_new (gedit_document_get_type ());
-	if (doc)
-	{
-		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
-					  title);
+	g_return_val_if_fail (doc != NULL, NULL);
 
-		doc->buffer = g_string_sized_new (256);
-	
-		return doc;
-        }
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
+				  title);
 
-	g_assert_not_reached ();
-	gtk_object_destroy (GTK_OBJECT (doc));
-	
-	return NULL;
+	doc->filename = g_strdup (title);
+	/*
+	doc->buffer = g_string_sized_new (256);
+	*/
+
+	return doc;
 }
 
 Document *
@@ -259,46 +307,18 @@ gedit_document_new_with_file (gchar *filename)
 {
 	Document *doc;
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
-	doc = gtk_type_new (gedit_document_get_type ());
+	doc = gedit_document_current();
 
-	if (doc)
-	{
-		if (!gedit_file_open (doc, filename))
-			return doc;
-		else
-			return NULL;
-	}
+	if (doc!=NULL)
+		if (doc->changed || doc->filename)
+			doc = NULL;
 
-	g_assert_not_reached ();
-	gtk_object_destroy (GTK_OBJECT(doc));
+	gedit_file_open (doc, filename);
 
-	return NULL;
+	return doc;
 }
-
-Document *
-gedit_document_stdin (void) 
-{
-	Document *doc;
-
-	gedit_debug ("\n", DEBUG_DOCUMENT);
-
-	doc = gtk_type_new (gedit_document_get_type ());
-
-	if (doc)
-	{
-		if (!gedit_file_stdin (doc))
-			return doc;
-		else
-			return NULL;
-	}
-
-	g_assert_not_reached ();
-	gtk_object_destroy (GTK_OBJECT(doc));
-
-	return NULL;
-}       
 
 Document *
 gedit_document_current (void)
@@ -314,51 +334,10 @@ gedit_document_current (void)
 static gchar *
 gedit_document_get_config_string (GnomeMDIChild *child)
 {
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 	/* FIXME: Is this correct? */
 	/*return g_strdup (GE_DOCUMENT(child)->filename);*/
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
-}
-
-/* Called from the View menu */
-void
-gedit_add_view (GtkWidget *widget, gpointer data)
-{
-	GnomeMDIChild *child;
-	View *view;
-
-	gedit_debug ("\n", DEBUG_DOCUMENT);
-
-	if (mdi->active_view)
-	{
-		view = VIEW (mdi->active_view);
-/*		g_print ("contents: %d\n", GTK_TEXT(VIEW(mdi->active_view)->text)->first_line_start_index);*/
-	   
-		/* sync the buffer before adding the view */
-		gedit_view_buffer_sync (view);
-	   
-		child = gnome_mdi_get_child_from_view (mdi->active_view);
-	   
-		gnome_mdi_add_view (mdi, child);
-	}
-}
-
-/* Called from the View menu */
-void
-gedit_remove_view (GtkWidget *widget, gpointer data)
-{
-	Document *doc = DOCUMENT (data);
-
-	gedit_debug ("\n", DEBUG_DOCUMENT);
-	
-	if (mdi->active_view == NULL)
-		return;
-
-	/* First, we remove the view from the document's list */
-	doc->views = g_list_remove (doc->views, VIEW (mdi->active_view));
-	  
-	/* Now, we can remove the view proper */
-	gnome_mdi_remove_view (mdi, mdi->active_view, FALSE);
 }
 
 /* Callback for the "child_changed" signal */
@@ -367,7 +346,7 @@ child_changed_cb (GnomeMDI *mdi, Document *doc)
 {
 	Document *doc2 = gedit_document_current();
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	if (doc2)
 	{
@@ -384,7 +363,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 	char *fname, *msg;
 	/*gedit_data *data = g_malloc (sizeof(gedit_data));*/
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 	
 	fname = GNOME_MDI_CHILD(doc)->name;
 
@@ -411,7 +390,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 			/* FIXME : If the user selects YES
 			   treat as if he had selected CANCEL
 			   because we don't want him to loose his
-			   data */
+			   data. This is anoying, I know. Chema*/
 			file_save_cb (NULL);
 			return FALSE;
 		case 1:
@@ -432,7 +411,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 void
 gedit_mdi_init (void)
 {
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 	
 	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VERSION));
 
@@ -470,7 +449,7 @@ mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 /*	gint group_item, pos, i; */
 /*	gchar *p, *label; */
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	if (mdi->active_view == NULL)
 	  return;
@@ -494,12 +473,13 @@ mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 
 */	
 }
+
 #if 0 /* Looks like this are not beeing used. Chema
 	 there are also gedit_add_view */
 void
 add_view_cb (GnomeMDI *mdi, Document *doc)
 {
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 /*      if (doc != NULL)
 	gtk_object_set_data (GTK_OBJECT(GE_DOCUMENT(mdi->active_view)),
 	                     "TEST",
@@ -514,7 +494,7 @@ add_child_cb (GnomeMDI *mdi, Document *doc)
 	/* Add child stuff.. we need to make sure that it is safe to
 	   add a child, or something, i'm not quite sure about the
 	   syntax for this function */
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 
 	return TRUE;
 }
@@ -527,7 +507,7 @@ gedit_document_new_from_config (gchar *file)
 {
 	Document *doc;
 
-	gedit_debug ("\n", DEBUG_DOCUMENT);
+	gedit_debug ("", DEBUG_DOCUMENT);
 	
 	doc = gedit_document_new_with_file (file);
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
@@ -536,3 +516,53 @@ gedit_document_new_from_config (gchar *file)
 	return GNOME_MDI_CHILD (doc);
 }
 #endif
+
+void
+gedit_document_load ( GList *file_list)
+{
+	Document *doc;
+	gint empty;
+
+        /* create a file for each document in the parameter list */
+	for (;file_list; file_list = file_list->next)
+	{
+		if (g_file_exists (file_list->data))
+		{
+			doc = gedit_document_new_with_title (file_list->data);
+			if (doc != NULL)
+			{
+				gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+				gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+				gedit_file_open (doc, file_list->data);
+			}
+		}
+		else
+		{
+			popup_create_new_file (NULL, file_list->data);
+		}
+	}
+
+	/* Create document from pipes, if pipes are not used this document becomes
+	   the Untitled default one. Chema */
+	doc = gedit_document_new ();
+	if (doc != NULL)
+	{
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+		empty = gedit_file_stdin (doc);
+		if (empty)
+			gnome_mdi_remove_child (mdi, GNOME_MDI_CHILD (doc), FALSE);
+	}
+
+	if (gedit_document_current() == NULL)
+	{
+		doc = gedit_document_new ();
+		if (doc != NULL)
+		{
+			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+		}
+	}
+}
+
+

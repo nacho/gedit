@@ -41,8 +41,8 @@ GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
 
 gint gedit_file_open (Document *doc, gchar *fname);
-gint gedit_file_stdin (Document *doc);
 gint gedit_file_save (Document *doc, gchar *fname);
+gint gedit_file_stdin (Document *doc);
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_cb (GtkWidget *widget);
@@ -54,8 +54,8 @@ void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 
    gboolean popup_create_new_file (GtkWidget *w, gchar *title);
-static void file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
-static void file_save_as_ok_sel (GtkWidget *w, gedit_data *data);
+static void gedit_file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
+static void gedit_file_save_as_ok_sel (GtkWidget *w, gedit_data *data);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
 static void cancel_cb (GtkWidget *w, gpointer data);
 
@@ -80,12 +80,9 @@ gedit_file_open (Document *doc, gchar *fname)
 	struct stat stats;
 	FILE *fp;
 	Document *currentdoc;
-	gint i;
-	View *nth_view;
 	
-	gedit_debug ("\n", DEBUG_FILE);
+	gedit_debug ("", DEBUG_FILE);
 	g_return_val_if_fail (fname != NULL, 1);
-	g_return_val_if_fail (doc != NULL, 1);
 
 	currentdoc = gedit_document_current();
 
@@ -106,9 +103,7 @@ gedit_file_open (Document *doc, gchar *fname)
 		return 1;
 	}
 	
-	doc->buffer_size = stats.st_size;
-
-	if ((tmp_buf = g_new0 (gchar, doc->buffer_size + 1)) == NULL)
+	if ((tmp_buf = g_new0 (gchar, stats.st_size + 1)) == NULL)
 	{
 		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
 		return 1;
@@ -123,94 +118,29 @@ gedit_file_open (Document *doc, gchar *fname)
 		return 1;
 	}
 
-	if (currentdoc != NULL && currentdoc->filename == NULL && !currentdoc->changed )
+	fread (tmp_buf, 1, stats.st_size, fp);
+	fclose (fp);
+
+	if (doc==NULL)
 	{
-		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
+		doc = gedit_document_new ();
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename (fname));
 	}
 
-	doc->buffer_size = fread (tmp_buf, 1, doc->buffer_size, fp);
-	doc->buffer = g_string_new (tmp_buf);
-	g_free (tmp_buf);
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
-				  g_basename (fname));
-	fclose (fp);
-	
 	doc->filename = g_strdup (fname);
 	doc->readonly = access (fname, W_OK) ? TRUE : FALSE;
 
-	for (i = 0; i < g_list_length (doc->views); i++) 
-	{
-		nth_view = g_list_nth_data (doc->views, i);
-		gedit_view_refresh (nth_view);
-		gedit_view_set_read_only (nth_view, access (fname, W_OK)  != 0);
-		if (!nth_view->changed_id)
-			nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
-								   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
-		gedit_set_title (nth_view->document);
+	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
+	doc->changed = FALSE;
 
-
-	}
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename (doc->filename));
+	
+	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	recent_add (fname);
-	recent_update (GNOME_APP (mdi->active_window));
-
-	return 0;
-}
-
-/**
- * gedit_file_stdin:
- * @doc: Document window to fill with text
- *
- * Open stdin and read it into the text widget.
- *
- * Return value: 0 on success, 1 on error.
- */
-gint
-gedit_file_stdin (Document *doc)
-{
-	gchar *tmp_buf;
-	struct stat stats;
-	View *nth_view;
-	gint i;
-	gint stdin_buffer_size=100000;
-	
-	gedit_debug ("\n", DEBUG_FILE);
-	g_return_val_if_fail (doc != NULL, 1);
-
-	fstat(STDIN_FILENO, &stats);
-	
-	if (stats.st_size  == 0)
-	{
-		return 1;
-	}
-	
-	doc->buffer_size = stdin_buffer_size;
-        
-	if ((tmp_buf = g_new0 (gchar,doc->buffer_size + 1)) == NULL)
-	{
-		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
-		return 1;
-	}
-        
-	gedit_debug ("\n", DEBUG_FILE);
-	doc->buffer_size = fread (tmp_buf,1,doc->buffer_size,stdin) ;
-        doc->buffer = g_string_new (tmp_buf);
-	g_free (tmp_buf);
-        fclose(stdin);
-	
-	for (i = 0; i < g_list_length (doc->views); i++) 
-	{
-		nth_view = g_list_nth_data (doc->views, i);
-		gedit_view_refresh (nth_view);
-		gedit_view_set_read_only (nth_view,TRUE);
-		if (!nth_view->changed_id)
-			nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
-								   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
-		gedit_set_title (nth_view->document);
-	}
-	
-	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), "STDIN");
 	recent_update (GNOME_APP (mdi->active_window));
 
 	return 0;
@@ -233,7 +163,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	gchar *tmpstr;
 	View *view = VIEW ( g_list_nth_data(doc->views, 0) );
 
-	gedit_debug ("\n", DEBUG_FILE);
+	gedit_debug ("", DEBUG_FILE);
 
 	if (fname == NULL)
 		fname = doc->filename;
@@ -252,8 +182,7 @@ gedit_file_save (Document *doc, gchar *fname)
 		return 1;
 	}
 	
-	tmpstr = gtk_editable_get_chars (GTK_EDITABLE (view->text), 0,
-					 gtk_text_get_length (GTK_TEXT (view->text)));
+	tmpstr = gedit_document_get_buffer (view->document);
 
 	if (fputs (tmpstr, fp) == EOF)
 	{
@@ -288,10 +217,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	}
 	
 	doc->changed = FALSE;
-	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename (doc->filename));
-
-	/* Set the title to indicate the document is no longer modified */
 	gedit_set_title (doc);
 
 	if (!view->changed_id)
@@ -302,13 +228,75 @@ gedit_file_save (Document *doc, gchar *fname)
 	return 0;
 }
 
+/**
+ * gedit_file_stdin:
+ * @doc: Document window to fill with text
+ *
+ * Open stdin and read it into the text widget.
+ *
+ * Return value: 0 on success, 1 on error.
+ */
+gint
+gedit_file_stdin (Document *doc)
+{
+	gchar *tmp_buf;
+	struct stat stats;
+	gint stdin_buffer_size=100000;
+	guint buffer_length;
+	View *view;
+	
+	gedit_debug ("", DEBUG_FILE);
+	g_return_val_if_fail (doc != NULL, 1);
+
+	fstat(STDIN_FILENO, &stats);
+	
+	if (stats.st_size  == 0)
+	{
+		return 1;
+	}
+	
+	if ((tmp_buf = g_new0 (gchar, stdin_buffer_size + 1)) == NULL)
+	{
+		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
+		return 1;
+	}
+        
+	buffer_length = fread (tmp_buf, 1, stdin_buffer_size+1, stdin);
+	tmp_buf [buffer_length + 1] = '\0';
+	fclose(stdin);
+
+	if (doc==NULL)
+	{
+		doc = gedit_document_new ();
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	}
+
+	view = g_list_nth_data (doc->views, 0);
+
+	g_return_val_if_fail (view!=NULL, 1);
+		
+	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
+
+	doc->changed = TRUE;
+	gedit_set_title (doc);
+
+	/* Move the window to the top after inserting */
+	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj), 0);
+
+	g_free (tmp_buf);
+	
+	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), "STDIN");
+
+	return 0;
+}
 
 void
 file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
 	Document *doc;
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	gedit_flash (_(MSGBAR_FILE_NEW));
 	doc = gedit_document_new ();
@@ -321,7 +309,7 @@ void
 file_open_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	if (open_file_selector && GTK_WIDGET_VISIBLE (open_file_selector))
 		return;
@@ -332,7 +320,7 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 		gtk_signal_connect(GTK_OBJECT(open_file_selector), "delete_event",
 				   GTK_SIGNAL_FUNC(delete_event_cb), open_file_selector);
 		gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(open_file_selector)->ok_button),
-				   "clicked", GTK_SIGNAL_FUNC(file_open_ok_sel), open_file_selector);
+				   "clicked", GTK_SIGNAL_FUNC(gedit_file_open_ok_sel), open_file_selector);
 		gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(open_file_selector)->cancel_button),
 				   "clicked", GTK_SIGNAL_FUNC(cancel_cb), open_file_selector);
 	}
@@ -351,8 +339,7 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
-
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	if (!gedit_document_current())
 		return;
@@ -370,7 +357,7 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
 				    "clicked",
-				    GTK_SIGNAL_FUNC (file_save_as_ok_sel),
+				    GTK_SIGNAL_FUNC (gedit_file_save_as_ok_sel),
 				    NULL);
 
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
@@ -392,7 +379,7 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 static gint
 delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 {
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	gtk_widget_hide (widget);
 	return TRUE;
@@ -401,17 +388,17 @@ delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 static void
 cancel_cb (GtkWidget *w, gpointer data)
 {
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	gtk_widget_hide (data);
 }
 
 static void
-file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
+gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	Document *doc;
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 
 	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
 	{
@@ -429,7 +416,7 @@ file_save_cb (GtkWidget *widget)
 {
 	Document *doc;
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 
 	if (gnome_mdi_get_active_child(mdi) == NULL)
 		return;
@@ -449,7 +436,7 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 	int i;
 	Document *doc;
 
-	gedit_debug ("\n", DEBUG_FILE);
+	gedit_debug ("", DEBUG_FILE);
 	
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
@@ -460,7 +447,7 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 
 
 static void
-file_save_as_ok_sel (GtkWidget *w, gedit_data *data)
+gedit_file_save_as_ok_sel (GtkWidget *w, gedit_data *data)
 {
 
 	Document *doc;
@@ -468,7 +455,7 @@ file_save_as_ok_sel (GtkWidget *w, gedit_data *data)
 	gint i;
 	View *nth_view;
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	doc = gedit_document_current();
 	if (!doc)
@@ -518,7 +505,7 @@ void
 file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	if (mdi->active_child == NULL)
 		return;
@@ -528,7 +515,7 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	if (mdi->active_child == NULL)
 		return;
@@ -538,7 +525,7 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	gedit_save_settings ();
 
@@ -557,7 +544,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	gchar * msg;
 	Document *doc = gedit_document_current ();
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	if (!doc)
 		return;
@@ -604,7 +591,7 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	int ret;
 	char *msg;
 
-	gedit_debug("\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	msg = g_strdup_printf (_("The file ``%s'' does not exist.  Would you like to create it?"),
 			       title);
@@ -632,20 +619,3 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	g_assert_not_reached ();
 	return FALSE;
 }
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

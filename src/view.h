@@ -119,7 +119,10 @@ void 	   view_changed_cb		(GtkWidget *w, gpointer cbdata);
 
 void	   gedit_view_set_group_type	(View *view, guint type);
 
+/*
 void	   gedit_view_refresh		(View *view);
+*/
+
 
 /*void gedit_view_set_color (View *view , teh Gdk colour thngies we need for a
 								func like this..  ); */
@@ -138,9 +141,9 @@ void	   gedit_view_set_selection	(View *view, gint start, gint end);
 
 
 void views_insert (Document *doc, gint position, gchar * text, gint length, View * view_exclude);
-void views_delete (Document *doc, gint start_pos, gint end_pos);
+void views_delete (Document *doc, gint start_pos, gint end_pos, View * view_exclude);
 
-void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
-void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
+void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
+void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
 
 #endif /* __VIEW_H__ */

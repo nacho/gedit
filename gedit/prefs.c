@@ -41,7 +41,7 @@ Preferences *settings = NULL;
 void 
 gedit_save_settings (void)
 {
-	gedit_debug ("Saving preferences\n", DEBUG_PREFS);
+	gedit_debug ("Saving preferences", DEBUG_PREFS);
 	
 	gnome_config_push_prefix ("/gedit/Global/");
 

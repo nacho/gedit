@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,44 +47,6 @@ gint debug_file = 0;
 gint debug_document = 0;
 gint debug_commands = 0;
 gint debug_recent = 0;
-
-static const struct poptOption options[] =
-{
-	{ "debug-commands", '\0', 0, &debug_commands, 0,
-	  N_("Show commands debugging messages."), NULL },
-
-	{ "debug-document", '\0', 0, &debug_document, 0,
-	  N_("Show document debugging messages."), NULL },
-
-	{ "debug-file", '\0', 0, &debug_file, 0,
-	  N_("Show file debugging messages."), NULL },
-
-	{ "debug-plugins", '\0', 0, &debug_plugins, 0,
-	  N_("Show plugin debugging messages."), NULL },
-
-	{ "debug-prefs", '\0', 0, &debug_prefs, 0,
-	  N_("Show prefs debugging messages."), NULL },
-
-	{ "debug-print", '\0', 0, &debug_print, 0,
-	  N_("Show printing debugging messages."), NULL },
-
-	{ "debug-search", '\0', 0, &debug_search, 0,
-	  N_("Show search debugging messages."), NULL },
-
-	{ "debug-undo", '\0', 0, &debug_undo, 0,
-	  N_("Show undo debugging messages."), NULL },
-
-	{ "debug-view", '\0', 0, &debug_view, 0,
-	  N_("Show view debugging messages."), NULL },
-
-	{ "debug-recent", '\0', 0, &debug_recent, 0,
-	  N_("Show recent debugging messages."), NULL },
-
-	{ "debug", '\0', 0, &debug, 0,
-	  N_("Turn on all debugging messages."), NULL },
-
-	{NULL, '\0', 0, NULL, 0}
-};
 
 #ifdef HAVE_LIBGNORBA
 
@@ -135,7 +97,6 @@ main (int argc, char **argv)
 	int i;
 	
 	GList *file_list = NULL;
-	Document *doc;
 
 	/* Initialize i18n */
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
@@ -175,43 +136,7 @@ main (int argc, char **argv)
 
 	gnome_mdi_open_toplevel (mdi);
 
-	
-	if (file_list)
-	{
-		
-                for (;file_list; file_list = file_list->next)
-		{
-			if (g_file_exists (file_list->data))
-			{
-				doc = gedit_document_new_with_file (file_list->data);
-				if (doc != NULL)
-				{
-					gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-					gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-				}
-			}
-			else
-			{
-				popup_create_new_file (NULL, file_list->data);
-			}
-		}
-         
-	}
-
-	doc = gedit_document_stdin ();
-	if (doc != NULL)
-	{
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	}
-
-	if (gedit_document_current() == NULL)
-	{
-		doc = gedit_document_new ();
-		
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-        }
+	gedit_document_load (file_list);
 
 	gtk_main();
 

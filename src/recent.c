@@ -52,7 +52,7 @@ history_get_list (void)
         gint max_entries, i;
         gboolean do_set = FALSE;
 
-	gedit_debug ("\n", DEBUG_RECENT);
+	gedit_debug ("", DEBUG_RECENT);
 	
 	if (history_list)
 		return history_list;
@@ -103,7 +103,7 @@ history_update_list (gchar *filename)
         gboolean do_set = FALSE;
         gboolean found = FALSE;
 
-	gedit_debug ("\n", DEBUG_RECENT);
+	gedit_debug ("", DEBUG_RECENT);
 
         g_return_val_if_fail (filename != NULL, NULL);
 
@@ -148,7 +148,7 @@ history_write_config (void)
         GList *l;
         gint max_entries, i = 0;
 
-	gedit_debug ("\n", DEBUG_RECENT);
+	gedit_debug ("", DEBUG_RECENT);
 
         if (history_list == NULL)
 		return;
@@ -180,7 +180,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	gchar *path;
 	int i;
 
-	gedit_debug ("\n", DEBUG_RECENT);
+	gedit_debug ("", DEBUG_RECENT);
 
 	g_return_if_fail (app != NULL);
 
@@ -241,11 +241,12 @@ recent_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc;
 	
-	gedit_debug ("\n", DEBUG_RECENT);
+	gedit_debug ("", DEBUG_RECENT);
 
 	g_return_if_fail (data != NULL);
 
 	doc = gedit_document_new_with_file (data);
+	/*
 	if (doc)
 	{
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
@@ -255,9 +256,9 @@ recent_cb (GtkWidget *widget, gpointer data)
 	{
 		g_print ("recent_cb(): file unable to open\n");
 		g_print ("*%s*\n", (gchar *) data);
-		/* FIXME: If an error was encountered the delete the
-		   entry from the menu */
-	}
+		FIXME: If an error was encountered the delete the
+		   entry from the menu 
+	}*/
 }
 
 /**
@@ -273,7 +274,7 @@ recent_update (GnomeApp *app)
 {
 	GList *filelist = NULL;
 
-	gedit_debug ("\n", DEBUG_RECENT);
+	gedit_debug ("", DEBUG_RECENT);
 
 	filelist = history_get_list ();
 
@@ -291,7 +292,7 @@ recent_add (char *filename)
 {
 	gchar *del_name;
 
-	gedit_debug ("\n", DEBUG_RECENT);
+	gedit_debug ("", DEBUG_RECENT);
 
 	g_return_if_fail (filename != NULL);
 

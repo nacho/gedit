@@ -104,10 +104,18 @@ void
 search_start (void)
 {
 	GtkText *text_buffer;
+	Document *doc;
+	View *view;
 
-	gedit_debug("\n", DEBUG_SEARCH);
-	
-	text_buffer = GTK_TEXT ( VIEW (mdi->active_view)->text );
+	gedit_debug("", DEBUG_SEARCH);
+
+	view = gedit_view_current();
+	doc = view->document;
+	text_buffer = GTK_TEXT (view->text);
+
+	g_return_if_fail ( view!= NULL &&
+			   doc != NULL &&
+			   text_buffer != NULL);
 
 	gedit_search_info.view = VIEW (mdi->active_view);
 	gedit_search_info.doc = gedit_document_current();
@@ -119,11 +127,7 @@ search_start (void)
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
 		gedit_search_info.buffer_length = gtk_text_get_length (text_buffer);
-		gedit_search_info.buffer = gtk_editable_get_chars (
-			GTK_EDITABLE ( text_buffer ),
-			0,
-			gedit_search_info.buffer_length
-			);
+		gedit_search_info.buffer = gedit_document_get_buffer (doc);
 		gedit_search_info.state = SEARCH_IN_PROGRESS_YES;
 		break;
 	case SEARCH_IN_PROGRESS_YES :
@@ -147,7 +151,7 @@ search_start (void)
 void
 search_end (void)
 {
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug("", DEBUG_SEARCH);
 
 #if 0 /* Speed problems when using large files. Chema */
 	if (mdi->active_child != NULL)
@@ -208,7 +212,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	gchar *msg;
 	Document *doc;
 
-	gedit_debug ("\n", DEBUG_SEARCH);
+	gedit_debug ("", DEBUG_SEARCH);
 
 	if (gedit_search_info.state != SEARCH_IN_PROGRESS_NO)
 	{
@@ -242,14 +246,14 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 void
 find_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("\n", DEBUG_SEARCH);
+	gedit_debug ("", DEBUG_SEARCH);
 	dialog_replace (FALSE);
 }
 
 void
 replace_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("\n", DEBUG_SEARCH);
+	gedit_debug ("", DEBUG_SEARCH);
 	dialog_replace(TRUE);
 }
 
@@ -257,7 +261,7 @@ replace_cb (GtkWidget *widget, gpointer data)
 void
 goto_line_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("\n", DEBUG_SEARCH);
+	gedit_debug ("", DEBUG_SEARCH);
 
 	if (!gedit_document_current())
 		return;
@@ -281,7 +285,7 @@ search_text_execute ( gulong starting_position,
 	gint text_length;
 	gint case_sensitive_mask;
 
-	gedit_debug ("\n", DEBUG_SEARCH);
+	gedit_debug ("", DEBUG_SEARCH);
 
 	if (gedit_search_info.state !=  SEARCH_IN_PROGRESS_YES)
 		g_warning ("Search not started, watch out dude !\n");
@@ -321,7 +325,7 @@ pos_to_line (gint pos, gint *numlines)
 {
 	gulong lines = 1, i, current_line = 0;
 
-	gedit_debug ("\n", DEBUG_SEARCH);
+	gedit_debug ("", DEBUG_SEARCH);
 
 	if (gedit_search_info.state !=  SEARCH_IN_PROGRESS_YES)
 		g_warning ("Search not started, watch out dude !\n");
@@ -347,7 +351,7 @@ line_to_pos (Document *doc, gint line, gint *lines)
 	gint current_line = 0, i;
 	gulong pos;
 	
-	gedit_debug ("\n", DEBUG_SEARCH);
+	gedit_debug ("", DEBUG_SEARCH);
 
 	pos = (gulong) gedit_search_info.buffer_length;
 

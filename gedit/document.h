@@ -47,8 +47,8 @@ struct _Document
 	gchar *filename;
 
 	/* guchar *buf; */
-	GString *buffer;
-	guint buffer_size;
+	/*GString buffer;*/
+	/*guint buffer_size;*/
 
 	gint changed_id;
 	gint changed;
@@ -68,6 +68,8 @@ struct _Document
 extern guint mdi_type [NUM_MDI_MODES];
 extern GnomeMDI *mdi;
 
+void gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable);
+
 GtkType gedit_document_get_type (void);
 Document* gedit_document_new (void);
 Document* gedit_document_new_with_title (gchar *title);
@@ -86,5 +88,7 @@ gint add_child_cb        (GnomeMDI *mdi, Document *doc);
 gchar  * gedit_get_document_tab_name (Document *doc);
 guchar * gedit_document_get_buffer (Document * doc);
 void gedit_mdi_init (void);
+
+void gedit_document_load ( GList *file_list);
 
 #endif /* __DOCUMENT_H__ */

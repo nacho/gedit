@@ -77,6 +77,44 @@ extern gint debug_recent;
 	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     }
 
+static const struct poptOption options[] =
+{
+	{ "debug-commands", '\0', 0, &debug_commands, 0,
+	  N_("Show commands debugging messages."), NULL },
+
+	{ "debug-document", '\0', 0, &debug_document, 0,
+	  N_("Show document debugging messages."), NULL },
+
+	{ "debug-file", '\0', 0, &debug_file, 0,
+	  N_("Show file debugging messages."), NULL },
+
+	{ "debug-plugins", '\0', 0, &debug_plugins, 0,
+	  N_("Show plugin debugging messages."), NULL },
+
+	{ "debug-prefs", '\0', 0, &debug_prefs, 0,
+	  N_("Show prefs debugging messages."), NULL },
+
+	{ "debug-print", '\0', 0, &debug_print, 0,
+	  N_("Show printing debugging messages."), NULL },
+
+	{ "debug-search", '\0', 0, &debug_search, 0,
+	  N_("Show search debugging messages."), NULL },
+
+	{ "debug-undo", '\0', 0, &debug_undo, 0,
+	  N_("Show undo debugging messages."), NULL },
+
+	{ "debug-view", '\0', 0, &debug_view, 0,
+	  N_("Show view debugging messages."), NULL },
+
+	{ "debug-recent", '\0', 0, &debug_recent, 0,
+	  N_("Show recent debugging messages."), NULL },
+
+	{ "debug", '\0', 0, &debug, 0,
+	  N_("Turn on all debugging messages."), NULL },
+
+	{NULL, '\0', 0, NULL, 0}
+};
+
 void gedit_set_title (Document *doc);
 void gedit_flash     (gchar *msg);
 void gedit_flash_va  (gchar *format, ...);

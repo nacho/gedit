@@ -1,3 +1,52 @@
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_insert): don't freeze and thaw the view.
+	(views_delete): ditto.
+
+	* file.c (gedit_file_stdin): insert to view with the new method.
+	(gedit_file_save): ditto
+	(gedit_file_open): if doc = null create one.
+
+	* document.h: add new functions
+
+	* view.c (gedit_add_view): fix . use gedit_document_get_buffer
+	(gedit_view_buffer_sync): delete
+	(gedit_view_refresh): delete
+
+	* document.c (gedit_document_new_with_title): set doc->filename
+	(gedit_document_load): implement.
+
+	* gedit.c (main): call gedit_document_load.
+
+	* view.c (gedit_view_buffer_sync): dont need it anymore
+	(gedit_view_refresh): don't need it anymore
+	(gedit_view_insert): new function
+	(views_insert): call gedit_view_insert
+
+	* document.c (gedit_document_destroy): we don't keep an
+	internal buffer of the file. So remove all references to it.
+	(gedit_document_new): ditto
+	(gedit_document_new_with_title): ditto
+
+	* file.c: renamed the functios to gedit_file_[function]
+
+2000-06-03  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_event_key_press): undo/redo was beeing
+	called twice when pressing the shortcut key.
+
+	* view.c: remove \n from gedit_debug
+	* document.c: ditto
+	* print.c: ditto
+	* file.c: ditto
+	* recent.c: ditto
+	* search.c : ditto
+
+2000-06-02  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_merge): consider deleting
+	text with the backspace and the delete key.
+
 2000-06-04 Roberto Majadas <phoenix@nova.es>
 
 	* gedit.c (main): added a call to gedit_file_stdin

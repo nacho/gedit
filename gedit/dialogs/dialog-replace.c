@@ -42,7 +42,7 @@ static void replace_text_clicked_cb (GtkWidget *widget, gint button);
 static void
 replace_text_destroyed_cb (GtkWidget *widget, gint button)
 {
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug("", DEBUG_SEARCH);
 	search_end();
 	widget = NULL;
 }
@@ -52,7 +52,7 @@ static void
 replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
 	/* behave as if the user clicked Find/Find next button */
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug("", DEBUG_SEARCH);
 	replace_text_clicked_cb (dialog, 0);
 }
 
@@ -62,7 +62,7 @@ search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 	GtkWidget *replace_entry;
 	
 	/* behave as if the user clicked Find/Find next button */
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug("", DEBUG_SEARCH);
 
 	/* We do a normal search, but we also need to move the cursor
 	   to the next field */
@@ -85,7 +85,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	View *view;
 	GtkText *text;
 
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug("", DEBUG_SEARCH);
 
 	if (!search_verify_document())
 	{
@@ -154,12 +154,16 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			/*
 			doc_delete_text_cb (GTK_WIDGET(text), start, end, view);
 			*/
+			/*
 			views_delete (view->document, start, end);
+			*/
 
 			/*
 			doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view);
 			*/
+			/*
 			views_insert (view->document, start, text_to_replace_with, replace_text_length, NULL);
+			*/
 
 			start_pos = pos_found + search_text_length;
 
@@ -195,22 +199,24 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 
 		if (!GTK_EDITABLE(text)->selection_end_pos)
 			g_warning("This should not happen !!!!. There should be some text selected");
-
+ 
 		start = GTK_EDITABLE(text)->selection_start_pos;
 		end   = GTK_EDITABLE(text)->selection_end_pos;
 		
 		/* Diselect the text and set the point after this occurence*/
 
+		doc_delete_text_cb (GTK_WIDGET(text), start, end, view, FALSE, TRUE);
 		/*
-		doc_delete_text_cb (GTK_WIDGET(text), start, end, view);
-		*/
 		views_delete (view->document, start, end);
+		*/
 
 		/*
-		doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view);
+		doc_insert_text_cb (GTK_WIDGET(text), text_to_replace_with, replace_text_length, &start, view, FALSE, TRUE);
 		*/
-		views_insert (view->document, start, text_to_replace_with, replace_text_length, NULL);
-
+		gedit_document_insert_text (view->document, text_to_replace_with, start, TRUE);
+		/*
+		views_insert (view->document, start, text_to_replace_with, replace_text_length, view);
+		*/
 
 		/*
 		gtk_text_set_point (text, end);
@@ -285,7 +291,7 @@ dialog_replace (gint full)
 	*/
 	GladeXML  *gui;
 
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug("", DEBUG_SEARCH);
 	
 	if (replace_text_dialog!=NULL)
 	{
