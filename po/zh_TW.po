@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 1.117.0\n"
-"POT-Creation-Date: 2002-04-26 04:39+0800\n"
-"PO-Revision-Date: 2002-04-26 05:16+0800\n"
+"Project-Id-Version: gedit 1.118.0\n"
+"POT-Creation-Date: 2002-05-14 17:09+0800\n"
+"PO-Revision-Date: 2002-05-14 17:42+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: traditional Chinese <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,7 @@ msgid ""
 "\n"
 "Please provide a valid file."
 msgstr ""
-"選取的‘第一’個檔案不存在。\n"
+"選取的「第一」個檔案不存在。\n"
 "\n"
 "請提供有效的檔案。"
 
@@ -140,7 +140,7 @@ msgid ""
 "\n"
 "Please provide a valid file."
 msgstr ""
-"選取的‘第二’個檔案不存在。\n"
+"選取的「第二」個檔案不存在。\n"
 "\n"
 "請提供有效的檔案。"
 
@@ -150,11 +150,11 @@ msgstr "已選取的兩個檔案是相同的。"
 
 #: plugins/diff/diff.c:544
 msgid "The \"first\" document contains no text."
-msgstr "‘第一’份文件沒有文字。"
+msgstr "「第一」份文件沒有文字。"
 
 #: plugins/diff/diff.c:573
 msgid "The \"second\" document contains no text."
-msgstr "‘第二’份文件沒有文字。"
+msgstr "「第二」份文件沒有文字。"
 
 #. FIXME: do better error reporting ... . Chema
 #: plugins/diff/diff.c:594
@@ -199,7 +199,7 @@ msgid ""
 msgstr ""
 "由兩份文件或檔案產生 diff 檔。\n"
 "\n"
-"如果想獲得“diff”程式的其它資訊，請在命令殼提示號中輸入“man diff”。\n"
+"如果想獲得“diff”程式的其它資訊，請在指令提示號中輸入“man diff”。\n"
 
 #: plugins/diff/diff.c:915
 msgid ""
@@ -275,8 +275,8 @@ msgid ""
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
-"‘字數’增效模組可分析目前文件並計算字數、行數、字元數目及非空格的字元數目，並"
-"顯示結果。"
+"「字數」增效模組可分析目前文件並計算字數、行數、字元數目及非空格的字元數目，"
+"並顯示結果。"
 
 #: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
 #: plugins/shell_output/shell_output.c:436
@@ -304,7 +304,7 @@ msgstr "字元 (包括空格)"
 msgid "File Name"
 msgstr "檔案名稱"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
 msgid "Lines"
 msgstr "行"
 
@@ -359,9 +359,9 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"命令殼指令一欄是空的。\n"
+"指令一欄是空的。\n"
 "\n"
-"請使用有效的命令殼指令。"
+"請使用有效的指令。"
 
 #: plugins/shell_output/shell_output.c:293
 msgid ""
@@ -369,13 +369,13 @@ msgid ""
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"分析命令殼指令時出現錯誤。\n"
+"分析指令時出現錯誤。\n"
 "\n"
-"請使用有效的命令殼指令。"
+"請使用有效的指令。"
 
 #: plugins/shell_output/shell_output.c:346
 msgid "An error occurs while running the selected command."
-msgstr "執行所選的指令時出現錯誤。"
+msgstr "執行已選取的指令時出現錯誤。"
 
 #: plugins/shell_output/shell_output.c:433
 msgid ""
@@ -534,8 +534,8 @@ msgid "Replace _All"
 msgstr "全部取代(_A)"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:105
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
+#: src/gedit-ui.xml.h:104
 msgid "_Replace"
 msgstr "取代(_R)"
 
@@ -545,12 +545,12 @@ msgstr "搜尋"
 
 #: src/dialogs/gedit-dialog-replace.c:473
 #: src/dialogs/gedit-dialog-replace.c:544
-#: src/dialogs/gedit-dialog-replace.c:714
+#: src/dialogs/gedit-dialog-replace.c:715
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "找不到文字“%s”。"
 
-#: src/dialogs/gedit-dialog-replace.c:723
+#: src/dialogs/gedit-dialog-replace.c:724
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "找到並取代了 %d 個字串。"
@@ -640,7 +640,8 @@ msgid "Editor"
 msgstr "編輯器"
 
 #: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:47
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
+#: src/gedit-ui.xml.h:47
 msgid "Print"
 msgstr "列印"
 
@@ -950,7 +951,7 @@ msgstr "編輯器所用的字型(_F)："
 msgid "_Font used to print headers:"
 msgstr "列印標頭所使用的字型(_F)："
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:98
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:97
 msgid "_Icon"
 msgstr "圖示(_I)"
 
@@ -1169,60 +1170,42 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit 是 GNOME 的小型文字編輯器"
 
-#: src/gedit-document.c:524 src/gedit-document.c:535
+#: src/gedit-document.c:533 src/gedit-document.c:544
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:524 src/gedit-document.c:535
+#: src/gedit-document.c:533 src/gedit-document.c:544
 msgid "Untitled"
 msgstr "未命名"
 
-#: src/gedit-document.c:651 src/gedit-document.c:757
+#: src/gedit-document.c:660 src/gedit-document.c:766
 msgid "Invalid UTF-8 data"
 msgstr "無效的 UTF-8 資料"
 
-#: src/gedit-document.c:952
+#: src/gedit-document.c:966
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "無法讀取 %s 的符號連結資訊"
+
+#: src/gedit-document.c:1012
+msgid "The file has too many symbolic links."
+msgstr "跟隨符號連結的層數太多。"
+
+#: src/gedit-document.c:1061
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "在寫入模式中 gedit 無法處理 %s: 位置。"
 
-#: src/gedit-document.c:959
+#: src/gedit-document.c:1068
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "在寫入模式中 gedit 無法處理這種位置。"
 
-#: src/gedit-document.c:970
+#: src/gedit-document.c:1080
 msgid "Invalid filename."
 msgstr "檔案名稱無效。"
 
-#: src/gedit-document.c:998
-#, c-format
-msgid "Could not open backup file %s."
-msgstr "無法開啟備份檔 %s。"
-
-#: src/gedit-document.c:1009
-#, c-format
-msgid "Could not open file %s."
-msgstr "無法開啟檔案 %s。"
-
-#: src/gedit-document.c:1029 src/gedit-document.c:1058
-msgid "Could not create backup file."
-msgstr "無法建立備份檔。"
-
-#: src/gedit-document.c:1042
-msgid "Could not write backup file."
-msgstr "無法寫入備份檔。"
-
-#: src/gedit-document.c:1051
-msgid "Error when creating backup file."
-msgstr "建立備份檔時發生錯誤。"
-
-#: src/gedit-document.c:1069 src/gedit-document.c:1112
-#: src/gedit-document.c:1124
-msgid "Could not save the file."
-msgstr "無法儲存檔案。"
-
-#: src/gedit-document.c:1102
+#: src/gedit-document.c:1158
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1230,19 +1213,24 @@ msgstr ""
 "剩餘的磁碟空間不足以儲存檔案。\n"
 "請先騰空一部份磁碟空間並再嘗試。"
 
-#: src/gedit-document.c:1107
+#: src/gedit-document.c:1163
 msgid ""
-"The file is too big.\n"
-"Please try saving a smaller file."
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
 msgstr ""
-"檔案太大。\n"
-"請嘗試儲存一個較小的檔案。"
+"準備用來儲存檔案的磁碟加上了有關檔案大小的限制。請嘗試儲存較小的檔案或儲存至"
+"另一個沒有檔案大小限制的磁碟。"
 
-#: src/gedit-document.c:1241
+#: src/gedit-document.c:1200
+msgid "Could not create a backup file."
+msgstr "無法建立備份檔。"
+
+#: src/gedit-document.c:1348
 msgid "It is not possible to revert an Untitled document"
 msgstr "不可能還原未命名的文件"
 
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:96
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1251,70 +1239,70 @@ msgstr ""
 "另一個名稱為“%s”的檔案已經存在。\n"
 "是否要用準備儲存的版本覆寫該檔案？"
 
-#: src/gedit-file-selector-util.c:105
+#: src/gedit-file-selector-util.c:104
 msgid "Do_n't replace"
 msgstr "不要取代(_N)"
 
-#: src/gedit-file-selector-util.c:459
+#: src/gedit-file-selector-util.c:481
 msgid "Select a filename to save"
 msgstr "請選擇準備儲存的檔案的名稱"
 
-#: src/gedit-file.c:123
+#: src/gedit-file.c:124
 msgid "Open File ..."
 msgstr "開啟檔案..."
 
-#: src/gedit-file.c:133 src/gedit-file.c:634
+#: src/gedit-file.c:134 src/gedit-file.c:636
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "已載入檔案‘%s’"
 
-#: src/gedit-file.c:243 src/gedit-file.c:317
+#: src/gedit-file.c:242 src/gedit-file.c:314
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "正在儲存檔案‘%s’..."
 
-#: src/gedit-file.c:264 src/gedit-file.c:324
+#: src/gedit-file.c:263 src/gedit-file.c:321
 msgid "The document has not been saved."
 msgstr "此文件並未儲存。"
 
-#: src/gedit-file.c:277 src/gedit-file.c:322
+#: src/gedit-file.c:275 src/gedit-file.c:319
 #, c-format
 msgid "File '%s' saved."
 msgstr "檔案‘%s’已儲存。"
 
-#: src/gedit-file.c:309
+#: src/gedit-file.c:306
 msgid "Save as ..."
 msgstr "另存新檔 ..."
 
-#: src/gedit-file.c:469
+#: src/gedit-file.c:464
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "正在還原檔案‘%s’..."
 
-#: src/gedit-file.c:482
+#: src/gedit-file.c:477
 msgid "The document has not been reverted."
 msgstr "此文件並未還原。"
 
-#: src/gedit-file.c:492
+#: src/gedit-file.c:487
 #, c-format
 msgid "File '%s' reverted."
 msgstr "檔案‘%s’已還原。"
 
-#: src/gedit-file.c:535
+#: src/gedit-file.c:530
 #, c-format
 msgid "Loading %d file..."
 msgstr "正在載入 %d 個檔案..."
 
-#: src/gedit-file.c:571
+#: src/gedit-file.c:566
 #, c-format
 msgid "Loaded %i files"
 msgstr "已載入 %i 個檔案"
 
-#: src/gedit-file.c:688
+#: src/gedit-file.c:690
 msgid "Could not read data from stdin."
 msgstr "無法由標準輸入讀取資料。"
 
-#: src/gedit-mdi.c:758
+#: src/gedit-mdi.c:763
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1325,23 +1313,23 @@ msgstr ""
 "\n"
 "如果不儲存，將會失去修改後的資料。"
 
-#: src/gedit-mdi.c:763
+#: src/gedit-mdi.c:768
 msgid "Do_n't save"
 msgstr "不要儲存(_N)"
 
-#: src/gedit-mdi.c:782
+#: src/gedit-mdi.c:787
 msgid "_Don't quit"
 msgstr "不要離開(_D)"
 
-#: src/gedit-mdi.c:786
+#: src/gedit-mdi.c:791
 msgid "_Don't close"
 msgstr "不要關閉(_D)"
 
-#: src/gedit-mdi.c:873
+#: src/gedit-mdi.c:878
 msgid "(modified)"
 msgstr "(已變更)"
 
-#: src/gedit-mdi.c:879
+#: src/gedit-mdi.c:884
 msgid "(readonly)"
 msgstr "(唯讀)"
 
@@ -1395,32 +1383,28 @@ msgstr "錯誤，無法停用增效模組‘%s’"
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "錯誤，無法更新增效模組‘%s’的使用者介面"
 
-#: src/gedit-print.c:166
+#: src/gedit-print.c:178
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr "gedit 無法列印，因為它找不到其中一款必須使用的字型。"
 
-#: src/gedit-print.c:273
-msgid "gedit - Print Document"
-msgstr "gedit ─ 列印文件"
-
-#: src/gedit-print.c:338
+#: src/gedit-print.c:354
 #, c-format
 msgid "File: %s"
 msgstr "檔案：%s"
 
 #. Print right text
-#: src/gedit-print.c:343
+#: src/gedit-print.c:359
 #, c-format
 msgid "Page: %d"
 msgstr "頁數：%d"
 
-#: src/gedit-print.c:476
+#: src/gedit-print.c:492
 msgid "gedit - Print Preview"
 msgstr "gedit ─ 預覽列印"
 
-#: src/gedit-print.c:552
+#: src/gedit-print.c:566
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1430,11 +1414,6 @@ msgstr ""
 "當列印時發生錯誤。\n"
 "\n"
 "%s，"
-
-#: src/gedit-recent.c:496
-#, c-format
-msgid "Open %s"
-msgstr "開啟 %s"
 
 #: src/gedit-ui.xml.h:1
 msgid "About this application"
@@ -1757,102 +1736,98 @@ msgid "_Close"
 msgstr "關閉(_C)"
 
 #: src/gedit-ui.xml.h:87
-msgid "_Contents"
-msgstr "內容(_C)"
-
-#: src/gedit-ui.xml.h:88
 msgid "_Copy"
 msgstr "複製(_C)"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:88
 msgid "_Customize Toolbar"
 msgstr "自訂工具列(_C)"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:89
 msgid "_Debug"
 msgstr "偵錯(_D)"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:90
 msgid "_Delete"
 msgstr "刪除(_D)"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:91
 msgid "_Desktop Default"
 msgstr "桌面預設佈置(_D)"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:92
 msgid "_Documents"
 msgstr "文件(_D)"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:93
 msgid "_Edit"
 msgstr "編輯(_E)"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:94
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:95
 msgid "_Find"
 msgstr "搜尋(_F)"
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:96
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:98
 msgid "_New"
 msgstr "新增(_N)"
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:99
 msgid "_Open..."
 msgstr "開啟(_O)..."
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:100
 msgid "_Paste"
 msgstr "貼上(_P)..."
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:101
 msgid "_Print..."
 msgstr "列印(_P)..."
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:102
 msgid "_Quit"
 msgstr "離開(_Q)"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:103
 msgid "_Redo"
 msgstr "取消復原(_R)"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:105
 msgid "_Revert"
 msgstr "還原(_R)"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:106
 msgid "_Save"
 msgstr "儲存(_S)"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:107
 msgid "_Search"
 msgstr "搜尋(_S)"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:108
 msgid "_Statusbar"
 msgstr "狀態列(_S)"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:109
 msgid "_Toolbar"
 msgstr "工具列(_T)"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:110
 msgid "_Tools"
 msgstr "工具(_T)"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:111
 msgid "_Undo"
 msgstr "復原(_U)"
 
-#: src/gedit-ui.xml.h:113
+#: src/gedit-ui.xml.h:112
 msgid "_View"
 msgstr "檢視(_V)"
 
@@ -2187,13 +2162,43 @@ msgstr "顯示所有的偵錯訊息。"
 msgid "The GNOME text editor"
 msgstr "Gnome 文字編輯器"
 
+#: src/gnome-recent-view-bonobo.c:189
+#, c-format
+msgid "Open %s"
+msgstr "開啟 %s"
+
+#~ msgid "Could not open backup file %s."
+#~ msgstr "無法開啟備份檔 %s。"
+
+#~ msgid "Could not open file %s."
+#~ msgstr "無法開啟檔案 %s。"
+
+#~ msgid "Could not write backup file."
+#~ msgstr "無法寫入備份檔。"
+
+#~ msgid "Error when creating backup file."
+#~ msgstr "建立備份檔時發生錯誤。"
+
+#~ msgid "Could not save the file."
+#~ msgstr "無法儲存檔案。"
+
+#~ msgid ""
+#~ "The file is too big.\n"
+#~ "Please try saving a smaller file."
+#~ msgstr ""
+#~ "檔案太大。\n"
+#~ "請嘗試儲存一個較小的檔案。"
+
+#~ msgid "gedit - Print Document"
+#~ msgstr "gedit ─ 列印文件"
+
+#~ msgid "_Contents"
+#~ msgstr "內容(_C)"
+
 #~ msgid ""
 #~ "Make sure that the path you provided exists, and that you have the "
 #~ "appropriate write permissions."
 #~ msgstr "請確定所提供的路徑確實存在，而且有正確權限寫入檔案。"
-
-#~ msgid "The file is too big."
-#~ msgstr "檔案太大。"
 
 #~ msgid "_Plugin Manager"
 #~ msgstr "增效模組管理程式(_P)"
@@ -2203,178 +2208,3 @@ msgstr "Gnome 文字編輯器"
 
 #~ msgid "_Status Bar"
 #~ msgstr "狀態列(_S)"
-
-#~ msgid "gtk-cancel"
-#~ msgstr "gtk-cancel"
-
-#~ msgid "gtk-help"
-#~ msgstr "gtk-help"
-
-#~ msgid "gtk-ok"
-#~ msgstr "gtk-ok"
-
-#~ msgid "gtk-close"
-#~ msgstr "gtk-close"
-
-#~ msgid "Find Next"
-#~ msgstr "繼續搜尋"
-
-#~ msgid "Replace All"
-#~ msgstr "全部取代"
-
-#~ msgid "gtk-open"
-#~ msgstr "gtk-open"
-
-#~ msgid "Unable to open recent file: %s"
-#~ msgstr "無法開啟最近開啟的檔案：%s"
-
-#~ msgid "Invalid UTF-8 data encountered reading file"
-#~ msgstr "讀入檔案時遇到無效的 UTF-8 資料"
-
-#~ msgid ""
-#~ "An error occurred while opening the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "開啟檔案‘%s’時發生錯誤。\n"
-#~ "\n"
-#~ "%s。"
-
-#~ msgid "Unknown error"
-#~ msgstr "不明的錯誤"
-
-#~ msgid "C_lose All"
-#~ msgstr "關閉所有文件(_L)"
-
-#~ msgid "Exit"
-#~ msgstr "離開"
-
-#~ msgid "Sav_e All"
-#~ msgstr "全部儲存(_E)"
-
-#~ msgid "Save As..."
-#~ msgstr "另存新檔..."
-
-# plugins/browse/browse.c:246
-#~ msgid "Browse"
-#~ msgstr "瀏覽"
-
-#~ msgid "email"
-#~ msgstr "電子郵件"
-
-#~ msgid "Executing command: %s"
-#~ msgstr "執行指令：%s"
-
-#~ msgid "Email"
-#~ msgstr "電子郵件"
-
-#~ msgid "Email the current document"
-#~ msgstr "郵寄目前的文件"
-
-#~ msgid "Enter the _URL to browse for:"
-#~ msgstr "輸入要瀏覽的 URL(_U)："
-
-#~ msgid "location"
-#~ msgstr "位址"
-
-#~ msgid "F_rom:"
-#~ msgstr "發信人(_R)："
-
-#~ msgid "From:"
-#~ msgstr "發信人："
-
-#~ msgid "Subject:"
-#~ msgstr "主題："
-
-#~ msgid "_Subject:"
-#~ msgstr "主題(_S)："
-
-#~ msgid "Select the working directory..."
-#~ msgstr "選擇執行指令的目錄..."
-
-#~ msgid "gedit: Preferences"
-#~ msgstr "gedit：偏好設定"
-
-#~ msgid "Search string not found"
-#~ msgstr "找不到文字"
-
-#~ msgid "Appearance"
-#~ msgstr "外觀"
-
-#~ msgid "Editor Behavior"
-#~ msgstr "編輯器特性"
-
-#~ msgid "Enable _Auto-indent"
-#~ msgstr "啟用自動縮排(_A)"
-
-#~ msgid "Enable word _wrapping"
-#~ msgstr "啟用自動換行(_W)"
-
-#~ msgid "General"
-#~ msgstr "一般"
-
-#~ msgid "MDI (Multiple Document Interface)"
-#~ msgstr "MDI（多重文件介面）"
-
-#~ msgid "Orientation"
-#~ msgstr "方向"
-
-#~ msgid "Paper"
-#~ msgstr "紙張大小"
-
-#~ msgid "Printing"
-#~ msgstr "列印中"
-
-#~ msgid "_Landscape"
-#~ msgstr "橫向(_L)"
-
-#~ msgid "gedit: Browse for program location..."
-#~ msgstr "gedit：瀏覽程式的位置..."
-
-#~ msgid "This file does not end with a valid extension\n"
-#~ msgstr "這個檔案沒有有效的延伸檔名\n"
-
-#~ msgid ""
-#~ "An error was encountered while opening the file \"%s\".\n"
-#~ "Please make sure the file exists."
-#~ msgstr ""
-#~ "開啟檔案 \"%s\" 時發生錯誤.\n"
-#~ "請確定檔案存在。"
-
-#~ msgid ""
-#~ "An error was encountered while opening the file \"%s\".\n"
-#~ "Could not allocate the required memory."
-#~ msgstr ""
-#~ "開啟檔案 \"%s\" 時發生錯誤.\n"
-#~ "無法配置所需的記憶體。"
-
-#~ msgid ""
-#~ "An error was encountered while reading the file: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Make sure that you have permissions for opening the file. "
-#~ msgstr ""
-#~ "讀取以下檔案時發生錯誤：\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "請確定您有權限開啟這個檔案。"
-
-#~ msgid "Show window debugging messages."
-#~ msgstr "顯示視窗的除錯訊息。"
-
-#~ msgid "Cannot initialize gnome-vfs."
-#~ msgstr "無法初始化 gnome-vfs。"
-
-#~ msgid "Print pre_view..."
-#~ msgstr "預覽列印(_V)..."
-
-#~ msgid "Preview data to be printed"
-#~ msgstr "預覽要列印的資料"
-
-#~ msgid "Printing ..."
-#~ msgstr "列印中 ..."
-
-#~ msgid "Get the basic file info"
-#~ msgstr "取得基本的檔案資訊。"
