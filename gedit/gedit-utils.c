@@ -293,17 +293,39 @@ gedit_utils_is_uri_read_only (const gchar* uri)
 	return res;	
 }
 
+/* lifted from eel */
+static GtkWidget *
+gedit_gtk_button_new_with_stock_icon (const gchar *label, const gchar *stock_id)
+{
+	GtkWidget *button, *l, *image, *hbox, *align;
+
+	/* This is mainly copied from gtk_button_construct_child(). */
+	button = gtk_button_new ();
+	l = gtk_label_new_with_mnemonic (label);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (l), GTK_WIDGET (button));
+	image = gtk_image_new_from_stock (stock_id, GTK_ICON_SIZE_BUTTON);
+	hbox = gtk_hbox_new (FALSE, 2);
+	align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), l, FALSE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (button), align);
+	gtk_container_add (GTK_CONTAINER (align), hbox);
+	gtk_widget_show_all (align);
+
+	return button;
+}
+
 GtkWidget*
 gedit_dialog_add_button (GtkDialog *dialog, const gchar* text, const gchar* stock_id,
 			 gint response_id)
 {
 	GtkWidget *button;
-	
+
 	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
 	g_return_val_if_fail (text != NULL, NULL);
 	g_return_val_if_fail (stock_id != NULL, NULL);
 
-	button = eel_gtk_button_new_with_stock_icon (text, stock_id);
+	button = gedit_gtk_button_new_with_stock_icon (text, stock_id);
 	g_return_val_if_fail (button != NULL, NULL);
 
 	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
