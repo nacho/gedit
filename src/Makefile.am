@@ -9,7 +9,7 @@ plugindir = $(prefix)/share/go/plugins
 
 SUBDIRS = plugins
 
-EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins INSTALL gedit.1 gE_icon.xpm gedit.desktop xpm/*
+EXTRA_DIST = KNOWNBUGS ChangeLog README README.plugins INSTALL gedit.1 gE_icon.xpm gedit.desktop 
 
 man_MANS = gedit.1
 
