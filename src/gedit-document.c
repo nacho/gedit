@@ -38,6 +38,9 @@
 #include <unistd.h>  
 #include <stdio.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #include "gedit-prefs.h"
 #include "gnome-vfs-helpers.h"
@@ -921,21 +924,22 @@ gedit_document_save_a_copy_as (GeditDocument* doc, const gchar *uri, GError **er
 
 static gboolean	
 gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
-	       gboolean create_backup_copy, GError **error)
+			     gboolean create_backup_copy, GError **error)
 {
-	FILE  *file;
-	gchar *chars;
-	gchar *fname;
-	gchar *bak_fname = NULL;
-	gchar *temp_fname = NULL;
-	gboolean have_backup = FALSE;
-	gboolean res = FALSE;
-	
+	char *filename;
+	struct stat st;
+	char *chars;
+	int chars_len;
+	int fd;
+	int retval;
+
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
+
+	retval = FALSE;
 
 	if (!gedit_utils_uri_has_file_scheme (uri))
 	{
@@ -955,45 +959,115 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 				_("gedit cannot handle this kind of location in write mode."));
 
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, EROFS, error_message);
-		return FALSE;	
+		return FALSE;
 	}
-	
-	fname = gnome_vfs_x_format_uri_for_display (uri);
 
-	if (fname != NULL)
+	filename = gnome_vfs_x_format_uri_for_display (uri);
+
+	if (!filename)
 	{
-		temp_fname = g_strconcat (fname, gedit_settings->backup_extension, BAK_EXTENSION_PLUS, NULL);
-		
-		if ((temp_fname == NULL) || (rename (fname, temp_fname) != 0))
-    		{
-      			if (errno != ENOENT)
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 0,
+			     _("Invalid filename."));
+		return FALSE;
+	}
+
+	if (stat (filename, &st) != 0)
+	{
+		/* File does not exist? */
+		create_backup_copy = FALSE;
+
+		/* Use default permissions */
+		st.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	}
+
+	/* Copy to a temporary file if needed */
+
+	if (create_backup_copy)
+	{
+		char *backup_filename;
+		int read_fd, write_fd;
+
+		backup_filename = g_strconcat (filename,
+					       gedit_settings->backup_extension,
+					       BAK_EXTENSION_PLUS,
+					       NULL);
+		write_fd = open (backup_filename, O_CREAT | O_WRONLY | O_TRUNC, st.st_mode);
+		if (write_fd == -1)
+		{
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+				     _("Could not open backup file %s."),
+				     backup_filename);
+			g_free (backup_filename);
+			goto out;
+		}
+
+		read_fd = open (filename, O_RDONLY);
+		if (read_fd == -1)
+		{
+			close (write_fd);
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+				     _("Could not open file %s."),
+				     filename);
+			g_free (backup_filename);
+			goto out;
+		}
+
+		g_free (backup_filename);
+
+		while (1)
+		{
+#define COPY_BUF_SIZE 65536
+			char buf[COPY_BUF_SIZE];
+			int len;
+
+			len = read (read_fd, buf, COPY_BUF_SIZE);
+			if (len == -1 && errno != EINTR)
 			{
+				close (read_fd);
+				close (write_fd);
 				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-					_("Could not create the backup copy of the file."));
-		
-				if (fname != NULL) 
-					g_free (fname);
-
-				if (temp_fname != NULL) 
-					g_free (temp_fname);
-
-				return FALSE;
-
+					     _("Could not create backup file."));
+				goto out;
 			}
-    		}
-  		else
-    			have_backup = TRUE;
-	}	
+			else if (len == -1)
+				continue;
+			else if (len == 0)
+				break;
 
-	if ((fname == NULL) || ((file = fopen (fname, "w")) == NULL))
+			if (write (write_fd, buf, len) != len)
+			{
+				close (read_fd);
+				close (write_fd);
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+					     _("Could not write backup file."));
+				goto out;
+			}
+		}
+
+		if (close (read_fd) != 0)
+		{
+			close (write_fd);
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+				     _("Error when creating backup file."));
+			goto out;
+		}
+
+		if (close (write_fd) != 0)
+		{
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+				     _("Could not create backup file."));
+			goto out;
+		}
+	}
+
+	/* Save! */
+
+	if ((fd = open (filename,
+			O_CREAT | O_WRONLY | O_TRUNC, st.st_mode)) == -1)
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-			_("Make sure that the path you provided exists, "
-			  "and that you have the appropriate write permissions."));
-						
-		res = FALSE;
-
-		goto finally;
+			     _("Could not save the file."));
+		goto out;
 	}
 
       	chars = gedit_document_get_buffer (doc);
@@ -1003,8 +1077,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 		GError *conv_error = NULL;
 		gchar* converted_file_contents = NULL;
 
-		converted_file_contents = g_locale_from_utf8 (chars, -1, NULL, NULL, 
-				&conv_error);
+		converted_file_contents = g_locale_from_utf8 (chars, -1, NULL, NULL, &conv_error);
 
 		if (conv_error != NULL)
 		{
@@ -1017,67 +1090,51 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 			chars = converted_file_contents;
 		}
 	}
-	
-	if (fputs (chars, file) == EOF || fclose (file) == EOF)
+
+	chars_len = strlen (chars);
+	if (write (fd, chars, chars_len) != chars_len)
 	{
-		gchar *errmsg;
+		char *msg;
 
 		switch (errno)
 		{
-			case ENOSPC: 
-				errmsg = g_strdup_printf (
-					_("There is no enough disk space to save the file.\n"
-					  "Please, free some space on the disk and try again."));
+			case ENOSPC:
+				msg = _("There is not enough disk space to save the file.\n"
+					"Please free some disk space and try again.");
 				break;
+
 			case EFBIG:
-				errmsg = g_strdup_printf (
-					_("The file is too big."));
+				msg = _("The file is too big.\n"
+					"Please try saving a smaller file.");
 				break;
+
 			default:
-				errmsg = g_strdup_printf (" "); 
+				msg = _("Could not save the file.");
+				break;
 		}
-
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, errmsg);
-		g_free (chars);
-
-		res = FALSE;
-
-		goto finally;
+		
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, msg);
+		close (fd);
+		goto out;
 	}
 
-	g_free (chars);
-
-	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);	  
-
-	res = TRUE;
-	
-finally:
-
-	if (have_backup)
+	if (close (fd) != 0)
 	{
-		/* FIXME: should the I/O errors be managed ? - Paolo */
-		if (!res)
-      			rename (temp_fname, fname);
-		else 
-			if (create_backup_copy)
-			{
-				bak_fname = g_strconcat (fname, gedit_settings->backup_extension, NULL);
-				rename (temp_fname, bak_fname);
-			}
-			else
-				unlink (temp_fname);			
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+			     _("Could not save the file."));
+		goto out;
 	}
-	
-	if (fname != NULL) 
-		g_free (fname);
 
-	if (temp_fname != NULL) 
-		g_free (temp_fname);
+	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
 
-	if (bak_fname != NULL) 
-		g_free (bak_fname);
+	retval = TRUE;
 
-  	return res;
+	/* Done */
+
+ out:
+
+	g_free (filename);
+	return retval;
 }
 
 gchar* 
