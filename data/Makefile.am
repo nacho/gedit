@@ -20,6 +20,10 @@ server_DATA = $(server_in_files:.server.in=.server)
 
 man_MANS = gedit.1
 
+app_DATA = gedit.applications
+appdir = $(datadir)/application-registry
+
+
 EXTRA_DIST = $(desktop_in_files)	\
 	$(desktop_DATA)			\
 	$(keys_in_files)		\
@@ -28,7 +32,8 @@ EXTRA_DIST = $(desktop_in_files)	\
 	$(schemas_DATA)			\
 	$(server_in_files)		\
 	$(server_DATA)			\
-	$(man_MANS)
+	$(man_MANS)			\
+	$(app_DATA)
 	
 install-data-local:
 	        if test -z "$(DESTDIR)" ; then \
