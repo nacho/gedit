@@ -233,10 +233,6 @@ gedit_handle_automation (GnomeProgram *program)
 						data->encoding ? encoding_charset : "",
 						data->line_pos,
 						&env);
-
-		g_slist_foreach (data->file_list, (GFunc)g_free, NULL);
-		g_slist_free (data->file_list);
-		g_free (data);
 	}
 
 	stdin_data = gedit_utils_get_stdin ();
@@ -288,6 +284,13 @@ gedit_handle_automation (GnomeProgram *program)
 	    (data != NULL && data->file_list == NULL && strlen (stdin_data) == 0))
 	{
 		GNOME_Gedit_Window_newDocument (window, new_document_option, &env);
+	}
+
+	if (data != NULL)
+	{
+		g_slist_foreach (data->file_list, (GFunc)g_free, NULL);
+		g_slist_free (data->file_list);
+		g_free (data);
 	}
 
 	g_free (stdin_data);
