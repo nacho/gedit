@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "2.5.90">
-  <!ENTITY manrevision "2.7">
-  <!ENTITY date "March 2004">
+  <!ENTITY appversion "2.7.91">
+  <!ENTITY manrevision "2.8">
+  <!ENTITY date "August 2004">
   <!ENTITY app "gedit">
 ]>
 <!-- 
@@ -92,6 +92,14 @@
    		<revision> 
 		  <revnumber>&app; Manual V&manrevision;</revnumber>
 		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Sun Java Desktop System Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.7</revnumber>
+		  <date>March 2004</date> 
 		  <revdescription> 
 			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
@@ -243,7 +251,7 @@
 		  </varlistentry>
 		  <varlistentry> <term>Output window</term> 
 			 <listitem> 
-				<para>The output window displays the output returned by the Shell command plugin and the Compare files plugin. </para>
+				<para>The output window displays the output returned by the Shell command plugin. </para>
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry> <term>Statusbar</term> 
@@ -783,25 +791,25 @@
 		    <varlistentry>
 		      <term><guisubmenu>Sources</guisubmenu></term>
 		      <listitem>
-		        <para>Display syntax highlighting to edit source code. Use the <guisubmenu>Sources</guisubmenu> submenu to select one of the following source code types: <guimenuitem>Verilog</guimenuitem>, <guimenuitem>PHP</guimenuitem>, <guimenuitem>SQL</guimenuitem>, <guimenuitem>IDL</guimenuitem>, <guimenuitem>C</guimenuitem>, <guimenuitem>Ada</guimenuitem>, <guimenuitem>C++</guimenuitem>, <guimenuitem>C#</guimenuitem>, or <guimenuitem>Java</guimenuitem>.</para>
+		        <para>Display syntax highlighting to edit source code. Use the <guisubmenu>Sources</guisubmenu> submenu to select the source code type.</para>
 		      </listitem>
 		    </varlistentry>
 		    <varlistentry>
 		      <term><guisubmenu>Markup</guisubmenu></term>
 		      <listitem>
-		        <para>Display syntax highlighting to edit markup code. Use the <guisubmenu>Markup</guisubmenu> submenu to select one of the following markup code types: <guimenuitem>HTML</guimenuitem>, <guimenuitem>LaTeX</guimenuitem>, or <guimenuitem>XML</guimenuitem>.</para>
+		        <para>Display syntax highlighting to edit markup code. Use the <guisubmenu>Markup</guisubmenu> submenu to select the markup code type.</para>
 		      </listitem>
 		    </varlistentry>
 		    <varlistentry>
 		      <term><guisubmenu>Scripts</guisubmenu></term>
 		      <listitem>
-		        <para>Display syntax highlighting to edit script code. Use the <guisubmenu>Scripts</guisubmenu> submenu to select one of the following script code types: <guimenuitem>Python</guimenuitem> or <guimenuitem>Perl</guimenuitem>.</para>
+		        <para>Display syntax highlighting to edit script code. Use the <guisubmenu>Scripts</guisubmenu> submenu to select the script code type.</para>
 		      </listitem>
 		    </varlistentry>
 		    <varlistentry>
 		      <term><guisubmenu>Others</guisubmenu></term>
 		      <listitem>
-		        <para>Display syntax highlighting to edit other types of code. Use the <guisubmenu>Others</guisubmenu> submenu to select one of the following code types: <guimenuitem>MSIL</guimenuitem>, <guimenuitem>gettext translation</guimenuitem>, <guimenuitem>.desktop</guimenuitem>, or <guimenuitem>Diff</guimenuitem>.</para>
+		        <para>Display syntax highlighting to edit other types of code. Use the <guisubmenu>Others</guisubmenu> submenu to select the code type.</para>
 		      </listitem>
 		    </varlistentry>
 		  </variablelist>
@@ -1050,16 +1058,8 @@
 		</thead>
 		<tbody> 
 		<row valign="top"> 
-			<entry><para>ASCII table</para></entry> 
-			<entry><para>Displays a dialog that contains an ASCII table. You can use the ASCII table to insert characters into a file.</para></entry> 
-		</row>  
-		<row valign="top"> 
-			<entry><para>Compare files</para></entry> 
-			<entry><para>Compares two files and displays the differences between the files in the output window. This plugin uses the <command>diff</command> command to compare the files.</para></entry> 
-		</row>
-		<row valign="top"> 
-			<entry><para>CVS ChangeLog</para></entry> 
-			<entry><para>Opens the log messages associated with CVS commit commands.</para></entry> 
+			<entry><para>ChangeCase</para></entry> 
+			<entry><para>Changes the case of the selected text.</para></entry> 
 		</row> 
 		<row valign="top"> 
 			<entry><para>Document Statistics</para></entry> 
@@ -1117,7 +1117,7 @@
 		  </listitem>
 		  <listitem><para>An <guibutton>About Plugin</guibutton> button: use this button to display a brief description of the selected plugin, including details about the author of the plugin. </para>
 		  </listitem>
-		  <listitem><para>A <guibutton>Configure Plugin</guibutton> button: use this button to open a configuration dialog for the selected plugin, if that plugin is configurable. For example, see <xref linkend="gedit-compare-files-configure"/> and <xref linkend="gedit-date-time-configure"/>.</para>
+		  <listitem><para>A <guibutton>Configure Plugin</guibutton> button: use this button to open a configuration dialog for the selected plugin, if that plugin is configurable. For example, see <xref linkend="gedit-date-time-configure"/>.</para>
 		  </listitem>
 		</itemizedlist>
 		<para>When you load a plugin, <application>&app;</application> adds the plugin to the appropriate <application>&app;</application> menu, as described in the following table.</para>
@@ -1133,19 +1133,19 @@
 		</thead>
 		<tbody> 
 		<row valign="top"> 
-			<entry><para>ASCII table</para></entry> 
-			<entry><para><menuchoice><guimenu>View</guimenu>
-			<guimenuitem>ASCII Table</guimenuitem></menuchoice></para></entry> 
-		</row>  
-		<row valign="top"> 
-			<entry><para>Compare files</para></entry> 
-			<entry><para><menuchoice><guimenu>Tools</guimenu> 
-			<guimenuitem>Compare Files</guimenuitem></menuchoice></para></entry> 
-		</row>
-		<row valign="top"> 
-			<entry><para>CVS ChangeLog</para></entry> 
-			<entry><para><menuchoice><guimenu>File</guimenu> 
-			<guimenuitem>Open CVS ChangeLogs</guimenuitem></menuchoice></para></entry> 
+			<entry><para>ChangeCase</para></entry> 
+			<entry><para><menuchoice><guimenu>Edit</guimenu> 
+			<guisubmenu>Change Case</guisubmenu>
+			<guimenuitem>All Upper Case</guimenuitem></menuchoice></para>
+			<para><menuchoice><guimenu>Edit</guimenu> 
+			<guisubmenu>Change Case</guisubmenu>
+			<guimenuitem>All Lower Case</guimenuitem></menuchoice></para>
+			<para><menuchoice><guimenu>Edit</guimenu> 
+			<guisubmenu>Change Case</guisubmenu>
+			<guimenuitem>Invert Case</guimenuitem></menuchoice></para>
+			<para><menuchoice><guimenu>Edit</guimenu> 
+			<guisubmenu>Change Case</guisubmenu>
+			<guimenuitem>Title Case</guimenuitem></menuchoice></para></entry> 
 		</row>
 		<row valign="top"> 
 			<entry><para>Document Statistics</para></entry> 
@@ -1239,103 +1239,56 @@
                 </orderedlist>
 	 </sect2>
 
-
-<sect2 id="gedit-ascii-table-plugin">
-<title>To Use the ASCII Table Plugin</title>
-	<para>The ASCII table plugin displays a dialog that contains an ASCII table. You can use the ASCII table to insert characters into a file. To use the ASCII table plugin, perform the following steps:</para>
+<sect2 id="gedit-change-case-plugin">
+<title>To Use the ChangeCase Plugin</title>
+	<para>The ChangeCase plugin changes the case of the selected text. To use the ChangeCase plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the ASCII table plugin. </para>
+		  <listitem><para>Load the ChangeCase plugin.</para>
 		  </listitem>
-		  <listitem><para>Choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>ASCII Table</guimenuitem> </menuchoice> to display the <guilabel>ASCII Table</guilabel> dialog.  </para>
-		  </listitem>
-		  <listitem><para>Scroll through the list to find the character that you require, then select the character with a single click.
-                           </para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Insert char</guibutton> to insert the character at the cursor position in the current file.
-                           </para>
-		  </listitem>
-		  <listitem><para>When you finish entering ASCII characters, click <guibutton>Close</guibutton> to close the <guilabel>ASCII Table</guilabel> dialog.
-				</para>
-		  </listitem>
-		</orderedlist> 
-</sect2>
-
-
-
-<sect2 id="gedit-compare-files-plugin">
-<title>To Use the Compare Files Plugin</title>
-	<para>The Compare files plugin compares two files and displays the differences between the files in the output window. This plugin uses the <command>diff</command> command to compare the files. To use the Compare files plugin, perform the following steps:</para>
-		<orderedlist> 
-		  <listitem><para>Load the Compare files plugin. </para>
-		  </listitem>
-		  <listitem><para>Choose <menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Compare Files</guimenuitem> </menuchoice>. When you choose this option for the first time, you are prompted to confirm the location of the <command>diff</command> command. You are not prompted for this location again. See <xref linkend="gedit-compare-files-configure"/> for information about how to change this location later.</para>
-                           <para> Click <guibutton>OK</guibutton> to display the <guilabel>Compare Files</guilabel> dialog.  </para>
-		  </listitem>
-		  <listitem><para>Specify the files that you want to compare. To specify an open file, select the <guilabel>From document</guilabel> option then select the file from the drop-down list. To specify a closed file, select the <guilabel>From a file on disk</guilabel> option then enter the location of the file in the text box.  </para>
-		  </listitem>
-		  <listitem><para>To ignore changes in the amount of white space, select the <guilabel>Ignore blanks (-b option)</guilabel> option.  </para>
-		  </listitem>
-		  <listitem><para>To use the unified output format, showing three lines of context, select the <guilabel>Use the unified output format (-u option)</guilabel> option.
-                           </para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Compare</guibutton> to compare the contents of the specified files. The command output is displayed in the output window.  </para>
-		  </listitem>
-		</orderedlist> 
-		<para>For more information, see <ulink url="man:diff" type="man"><citerefentry><refentrytitle>diff</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.  </para>
-
-<sect3 id="gedit-compare-files-configure">
-<title>To Configure the Compare Files Plugin</title>
-<para>To change the location of the command that the Compare files plugin uses, perform the following steps:</para>
-		<orderedlist> 
-		  <listitem> <para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</guimenuitem> </menuchoice>. 
-                    </para>
-		  </listitem> 
-		  <listitem> <para>Select the <guilabel>Plugins</guilabel> tab.
-                    </para>
-		  </listitem> 
-		  <listitem> <para>Select the <guilabel>Compare Files</guilabel> plugin.
-                    </para>
-		  </listitem> 
-		  <listitem> <para>Click <guibutton>Configure Plugin</guibutton> to display the <guilabel>Set program location</guilabel> dialog.
-                    </para>
-		  </listitem> 
-		  <listitem> <para>Specify the location of the <command>diff</command> command in the <guilabel>Location to search for</guilabel> text box.
-                    </para>
-		  </listitem> 
-		  <listitem> <para>Click <guibutton>OK</guibutton> to close the <guilabel>Set program location</guilabel> dialog.
-                    </para>
-		  </listitem> 
-		  <listitem> <para>To close the <guilabel>Preferences</guilabel> dialog, click <guibutton>Close</guibutton>.</para>
-		  </listitem> 
-		</orderedlist> 
-</sect3>
-</sect2>
-
-<sect2 id="gedit-cvs-changelog-plugin">
-<title>To Use the CVS ChangeLog Plugin</title>
-	<para>The CVS ChangeLog plugin opens the log messages associated with CVS commit commands. This plugin enables you to easily paste text into the commit message from the ChangeLog file. To use the CVS ChangeLog plugin, perform the following steps:</para>
-		<orderedlist> 
-		  <listitem><para>Set the environment variable CVSEDITOR to <application>&app;</application>. For example, if you are using the <command>bash</command> shell, run the following command at the operating system prompt:
-                           <screen> <userinput>export CVSEDITOR=&app;</userinput> </screen>
-                           </para>
-		  </listitem>
-		  <listitem><para>Commit a file to CVS in the usual way. A <application>&app;</application> window opens, to enable you to enter the commit message.
-                           </para>
-		  </listitem>
-		  <listitem><para>Load the CVS ChangeLog plugin.</para>
-		  </listitem>
-                  <listitem><para>Choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Open CVS ChangeLogs</guimenuitem> </menuchoice> to open all of the ChangeLog files referenced in the commit message. <application>&app;</application> opens each ChangeLog file in a new tab.</para>
-		  </listitem>
-		  <listitem><para>Copy the ChangeLog entries that you want to add to the commit message from the <application>&app;</application> ChangeLog files. 
-                           </para>
-		  </listitem>
-		  <listitem><para>Insert the copied ChangeLog entries in the <application>&app;</application> commit message tab.
-                           </para>
-		  </listitem>
-		  <listitem><para>Save your changes to the commit message, then close all files.
-                           </para>
-		  </listitem>
-		  <listitem><para>Quit <application>&app;</application>. </para>
+                  <listitem><para>Choose one of the following menu items:</para>
+                  <informaltable frame="all">
+                    <tgroup cols="3" colsep="1" rowsep="1">
+                      <colspec colname="COLSPEC0" colwidth="33*"/>
+                      <colspec colname="COLSPEC1" colwidth="33*"/>
+                      <colspec colname="COLSPEC2" colwidth="33*"/>
+                      <thead>
+                        <row valign="top">
+                          <entry colname="COLSPEC0">
+                            <para>Menu Item</para></entry>
+                          <entry colname="COLSPEC1"> 
+                            <para>Action</para></entry>
+                          <entry colname="COLSPEC2"> 
+                            <para>Example</para></entry>
+                        </row>
+                      </thead>
+                      <tbody>
+                        <row valign="top">               
+                          <entry><para><menuchoice><guimenu>Edit</guimenu>
+<guisubmenu>Change Case</guisubmenu><guimenuitem>All Upper Case</guimenuitem></menuchoice></para></entry>
+                          <entry><para>Change each character to uppercase. </para></entry>
+                          <entry><para><literal>This text</literal> becomes <literal>THIS TEXT</literal> </para></entry>
+                        </row>
+                        <row valign="top">               
+                          <entry><para><menuchoice><guimenu>Edit</guimenu>
+<guisubmenu>Change Case</guisubmenu><guimenuitem>All Lower Case</guimenuitem></menuchoice></para></entry>
+                          <entry><para>Change each character to lowercase. </para></entry>
+                          <entry><para><literal>This Text</literal> becomes <literal>this text</literal> </para></entry>
+                        </row>
+                        <row valign="top">               
+                          <entry><para><menuchoice><guimenu>Edit</guimenu>
+<guisubmenu>Change Case</guisubmenu><guimenuitem>Invert Case</guimenuitem></menuchoice></para></entry>
+                          <entry><para>Change each lowercase character to uppercase, and change each uppercase character to lowercase. </para></entry>
+                          <entry><para><literal>This Text</literal> becomes <literal>tHIS tEXT</literal> </para></entry>
+                        </row>
+                        <row valign="top">               
+                          <entry><para><menuchoice><guimenu>Edit</guimenu>
+<guisubmenu>Change Case</guisubmenu><guimenuitem>Title Case</guimenuitem></menuchoice></para></entry>
+                          <entry><para>Change the first character of each word to uppercase. </para></entry>
+                          <entry><para><literal>this text</literal> becomes <literal>This Text</literal> </para></entry>
+                        </row>
+                      </tbody>
+                    </tgroup>
+                  </informaltable>
 		  </listitem>
 		</orderedlist> 
 </sect2>
