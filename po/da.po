@@ -1,9 +1,9 @@
 # Danish translations of gedit.
-# Copyright (C) 1999, 2000, 01, 02 Free Software Foundation, Inc.
+# Copyright (C) 1999, 2000, 01, 02, 03 Free Software Foundation, Inc.
 # Birger Langkjer <birger.langkjer@image.dk>, 1999.
 # Kenneth Christiansen <kenneth@gnome.org>, 1999, 2000.
 # Keld Simonsen <keld@dkuug.dk>, 2000, 01.
-# Ole Laursen <olau@hardworking.dk>, 2002.
+# Ole Laursen <olau@hardworking.dk>, 2002, 03.
 #
 # Konventioner:
 #
@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2002-12-26 13:51+0100\n"
-"PO-Revision-Date: 2002-12-26 14:31+0100\n"
+"POT-Creation-Date: 2003-01-03 12:54+0100\n"
+"PO-Revision-Date: 2003-01-03 12:54+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -459,8 +459,26 @@ msgid "_Insert char"
 msgstr "_Indsæt tegn"
 
 #: plugins/ASCII/asciitable.glade2.h:1
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:1
 msgid "ASCII table"
 msgstr "ASCII-tabel"
+
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:2
+msgid "Copyright (C) 2001-2002 Paolo Maggi"
+msgstr "Copyright © 2001-2002 Paolo Maggi"
+
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:3
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:3
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:3
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:4
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:3
+msgid "Paolo Maggi <maggi@athena.polito.it>"
+msgstr "Paolo Maggi <maggi@athena.polito.it>"
+
+#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:4
+msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+msgstr "Dette udvidelsesmodul viser et vindue med ASCII-tabellen."
 
 #. AFAIK, all cvs commit messages start with this
 #: plugins/cvschangelog/cvschangelog.c:49
@@ -470,6 +488,23 @@ msgstr "Åbn CVS-Chan_geLog"
 #: plugins/cvschangelog/cvschangelog.c:52
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr "Søger efter ChangeLog-filer i det aktuelle dokument og åbner dem"
+
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:1
+msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+msgstr ""
+"Et udvidelsesmodul der åbner ChangeLog-filer fundet i CVS-commitmeddelelser."
+
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:2
+msgid "CVS ChangeLog"
+msgstr "CVS-ChangeLog"
+
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:3
+msgid "Copyright (C) 2002 James Willcox"
+msgstr "Copyright © 2002 James Willcox"
+
+#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:4
+msgid "James Willcox <jwillcox@cs.indiana.edu>"
+msgstr "James Willcox <jwillcox@cs.indiana.edu>"
 
 #: plugins/diff/diff.c:65
 msgid "Co_mpare Files..."
@@ -481,7 +516,7 @@ msgstr ""
 "Laver en fil som indeholder forskellene mellem to dokumenter eller filer"
 
 #. Create the dialog
-#: plugins/diff/diff.c:271
+#: plugins/diff/diff.c:271 plugins/diff/diff.gedit-plugin.desktop.in.h:2
 msgid "Compare Files"
 msgstr "Sammenlign filer"
 
@@ -654,6 +689,33 @@ msgstr "Vælg det andet dokument der skal sammenlignes"
 msgid "Use the _unified output format (-u option)"
 msgstr "Brug det _forenede udskriftsformat (tilvalget -u)"
 
+#: plugins/diff/diff.gedit-plugin.desktop.in.h:1
+msgid ""
+"Chema Celorio <chema@celorio.com> and Paolo Maggi <maggi@athena.polito.it>"
+msgstr ""
+"Chema Celorio <chema@celorio.com> og Paolo Maggi <maggi@athena.polito.it>"
+
+#: plugins/diff/diff.gedit-plugin.desktop.in.h:3
+msgid ""
+"Copyright (C) 2000 - 2001 Chema Celorio\n"
+"Copyright (C) 2002 Paolo Maggi"
+msgstr ""
+"Copyright © 2000-2001 Chema Celorio\n"
+"Copyright © 2002 Paolo Maggi"
+
+#: plugins/diff/diff.gedit-plugin.desktop.in.h:4
+msgid ""
+"The Compare Files plugin uses the <tt>diff</tt> program to compare two "
+"documents or files on disk.\n"
+"\n"
+"For more info on <tt>diff</tt> program, type <tt>man diff</tt> in a shell "
+"prompt."
+msgstr ""
+"Benytter <tt>diff</tt>-programmet til at sammenligne to dokumenter eller "
+"filer på disken.\n"
+"\n"
+"Skriv <tt>man diff</tt> i en terminal for flere oplysninger om <tt>diff</tt>."
+
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
 msgstr "_Dokumentstatistik"
@@ -663,6 +725,7 @@ msgid "Get statistic info on current document"
 msgstr "Generér statistiske oplysninger om det aktuelle dokument"
 
 #: plugins/docinfo/docinfo.c:142
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid "Document Statistics"
 msgstr "Dokumenterstatistik"
 
@@ -690,7 +753,7 @@ msgstr "Tegn (med mellemrum)"
 msgid "File Name"
 msgstr "Filnavn"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:315
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:373
 msgid "Lines"
 msgstr "Linjer"
 
@@ -706,6 +769,29 @@ msgstr "Ord"
 msgid "gedit: Document Info plugin"
 msgstr "Dokumentoplysningsmodul"
 
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:1
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:2
+msgid "Copyright (C) 2002 Paolo Maggi"
+msgstr "Copyright © 2002 Paolo Maggi"
+
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:3
+msgid "Paolo Maggi <paolo.maggi@polito.it>"
+msgstr "Paolo Maggi <paolo.maggi@polito.it>"
+
+# "and display the result" giver vist sig selv, det udelader vi
+#: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:4
+msgid ""
+"The Document Statistics plugin analyzes the current document and determines "
+"the number of words, lines, characters and non-space characters in it and "
+"displays the result."
+msgstr ""
+"Dokumentstatistikmodulet analyserer det aktuelle dokument og finder antallet "
+"af ord, linjer, tegn og ikke-mellemrum."
+
 #: plugins/sample/sample.c:43
 msgid "Insert User Na_me"
 msgstr "Indsæt bruger_navn"
@@ -715,10 +801,12 @@ msgid "Insert the user name at the cursor position"
 msgstr "Indsæt brugernavnet ved markørpositionen"
 
 #: plugins/sample/sample.c:172
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:4
 msgid "User name"
 msgstr "Brugernavn"
 
 #: plugins/sample/sample.c:173
+#: plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "Inserts the user name at the cursor position."
 msgstr "Indsætter brugernavnet ved markørpositionen."
 
@@ -799,6 +887,16 @@ msgstr "_Arbejdsmappe:"
 msgid "gedit: Shell Output plugin"
 msgstr "Terminaluddatamodul"
 
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid ""
+"Execute an external program and eventually grabs its output in the output "
+"window."
+msgstr "Kør et eksternt program og indsæt dets uddata i uddatavinduet."
+
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:4
+msgid "Shell command"
+msgstr "Kommando"
+
 #: plugins/taglist/gedit-taglist-plugin-window.c:136
 msgid "Tag list plugin"
 msgstr "Mærkelistemodul"
@@ -833,6 +931,18 @@ msgstr "Mærke_liste"
 #: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
 msgstr "Vis mærkelistevinduet"
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:3
+msgid "Tag list"
+msgstr "Mærkeliste"
+
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:4
+msgid ""
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tags/strings without having to type them."
+msgstr ""
+"Mærkelistemodulet gør det muligt hurtigt at indsætte ofte benyttet tekst i "
+"et dokument uden at indtaste det hver gang."
 
 #: plugins/time/time.c:48
 msgid "In_sert Date and Time..."
@@ -886,6 +996,25 @@ msgstr "_Spørg efter et format"
 msgid "_Use custom format"
 msgstr "Benyt _brugerdefineret format"
 
+#: plugins/time/time.gedit-plugin.desktop.in.h:1
+msgid "Copyright (C) 2002 - Paolo Maggi"
+msgstr "Copyright © 2002 Paolo Maggi"
+
+#: plugins/time/time.gedit-plugin.desktop.in.h:2
+msgid "Insert Date/Time"
+msgstr "Indsæt dato/tid"
+
+#: plugins/time/time.gedit-plugin.desktop.in.h:3
+msgid "Inserts current date and time at the cursor position."
+msgstr "Indsætter den aktuelle dato og tid ved markørpositionen."
+
+#: plugins/time/time.gedit-plugin.desktop.in.h:4
+msgid ""
+"Paolo Maggi <maggi@athena.polito.it> and Lee Mallabone <gnome@fonicmonkey."
+"net>"
+msgstr ""
+"Paolo Maggi <maggi@athena.polito.it> og Lee Mallabone <gnome@fonicmonkey.net>"
+
 #: plugins/indent/indent.c:45
 msgid "_Indent"
 msgstr "_Indryk"
@@ -902,6 +1031,14 @@ msgstr "_Afindryk"
 msgid "Unindent selected lines"
 msgstr "Fjerner indrykningen fra de markerede linjer"
 
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
+msgid "Indent lines"
+msgstr "Indryk linjer"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:3
+msgid "Indent or un-indent selected lines."
+msgstr "Tilføj eller fjern indrykning fra de markerede linjer."
+
 #: plugins/sort/sort.glade2.h:1
 msgid "R_emove duplicates"
 msgstr "_Fjern dubletter"
@@ -910,7 +1047,7 @@ msgstr "_Fjern dubletter"
 msgid "S_tart at column:"
 msgstr "_Begynd ved kolonne:"
 
-#: plugins/sort/sort.glade2.h:3
+#: plugins/sort/sort.glade2.h:3 plugins/sort/sort.gedit-plugin.desktop.in.h:3
 msgid "Sort"
 msgstr "Sortér"
 
@@ -929,6 +1066,26 @@ msgstr "_Omvendt orden"
 #: plugins/sort/sort.glade2.h:7
 msgid "_Sort"
 msgstr "_Sortér"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:1
+msgid ""
+"Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> "
+"and Paolo Maggi <maggi@athena.polito.it>"
+msgstr ""
+"Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> og "
+"Paolo Maggi <maggi@athena.polito.it>"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
+msgid ""
+"Copyright (C) 2001 Carlo Borreo\n"
+"Copyright (C) 2002 Lee Mallabone and Paolo Maggi"
+msgstr ""
+"Copyright (C) 2001 Carlo Borreo\n"
+"Copyright (C) 2002 Lee Mallabone og Paolo Maggi"
+
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:4
+msgid "Sorts a document or selected text."
+msgstr "Sortér et dokument eller det markerede tekst."
 
 #: plugins/spell/gedit-automatic-spell-checker.c:318
 #: plugins/spell/gedit-spell-checker-dialog.c:504
@@ -1072,6 +1229,14 @@ msgstr "Kunne ikke finde de påkrævede kontroller i %s."
 #: plugins/spell/gedit-spell-language-dialog.c:249
 msgid "Languages"
 msgstr "Sprog"
+
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:1
+msgid "Checks the spelling of the current document."
+msgstr "Kontrollér stavningen i det aktuelle dokument."
+
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:4
+msgid "Spell checker"
+msgstr "Stavekontrol"
 
 #: plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -1327,7 +1492,7 @@ msgid "Editor"
 msgstr "Redigeringsprogram"
 
 #: src/dialogs/gedit-preferences-dialog.c:267
-#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:306
+#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:364
 #: src/gedit-ui.xml.h:41
 msgid "Print"
 msgstr "Udskriv"
@@ -1658,8 +1823,8 @@ msgid "Font Selection"
 msgstr "Skrifttypevælger"
 
 #: src/dialogs/gnome-print-font-picker.c:89
-msgid "sans 12"
-msgstr "sans 12"
+msgid "Sans Regular 12"
+msgstr "Sans Regular 12"
 
 #: src/dialogs/gnome-print-font-picker.c:90
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
@@ -1717,7 +1882,7 @@ msgstr "Vis størrelse"
 msgid "Show size in font info mode"
 msgstr "Vis størrelse i skrifttypeinfotilstand"
 
-#: src/dialogs/gnome-print-font-picker.c:1014
+#: src/dialogs/gnome-print-font-picker.c:1015
 msgid "Font"
 msgstr "Skrifttype"
 
@@ -2014,47 +2179,48 @@ msgstr "(ændret)"
 msgid "(readonly)"
 msgstr "(skrivebeskyttet)"
 
-#: src/gedit-plugins-engine.c:352
+#: src/gedit-plugins-engine.c:362
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "Fejl: kunne ikke åbne modulfilen '%s'\n"
 
-#: src/gedit-plugins-engine.c:362
+#: src/gedit-plugins-engine.c:372
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "Fejl: modulet '%s' indeholder ikke en klargøringsfunktion."
 
-#: src/gedit-plugins-engine.c:372
+#: src/gedit-plugins-engine.c:382
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "Fejl: modulet '%s' indeholder ikke en aktiveringsfunktion."
 
-#: src/gedit-plugins-engine.c:382
+#: src/gedit-plugins-engine.c:392
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "Fejl: modulet '%s' indeholder ikke en deaktiveringsfunktion."
 
-#: src/gedit-plugins-engine.c:407
+#: src/gedit-plugins-engine.c:417
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "Fejl: kunne ikke klargøre modulet '%s'"
 
-#: src/gedit-plugins-engine.c:458
+#: src/gedit-plugins-engine.c:468
 #, c-format
 msgid "Error, impossible to destroy plugin '%s'"
 msgstr "Fejl: kunne ikke nedlægge modulet '%s'"
 
-#: src/gedit-plugins-engine.c:541 src/gedit-plugins-engine.c:629
+#: src/gedit-plugins-engine.c:551 src/gedit-plugins-engine.c:639
+#: src/gedit-plugins-engine.c:764
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "Fejl: kunne ikke aktivere modulet '%s'"
 
-#: src/gedit-plugins-engine.c:580
+#: src/gedit-plugins-engine.c:590 src/gedit-plugins-engine.c:782
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "Fejl: kunne ikke deaktivere modulet '%s'"
 
-#: src/gedit-plugins-engine.c:673
+#: src/gedit-plugins-engine.c:683
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Fejl: kunne ikke opdatere grænsefladen for modulet '%s'"
@@ -2068,29 +2234,29 @@ msgstr "Kan ikke klargøre indstillingshåndteringen."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Forventede '%s', modtog '%s' for nøglen %s"
 
-#: src/gedit-print.c:188
+#: src/gedit-print.c:254
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr ""
 "Kan ikke udskrive fordi en af de påkrævede skrifttyper ikke kan findes."
 
-#: src/gedit-print.c:374
+#: src/gedit-print.c:432
 #, c-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
 #. Print right text
-#: src/gedit-print.c:381
+#: src/gedit-print.c:439
 #, c-format
 msgid "Page: %d"
 msgstr "Side: %d"
 
-#: src/gedit-print.c:522
+#: src/gedit-print.c:580
 msgid "gedit - Print Preview"
 msgstr "Vis udskrift - tekstredigering"
 
-#: src/gedit-print.c:600
+#: src/gedit-print.c:658
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -2850,16 +3016,16 @@ msgstr "Kan ikke oprette filen '%s'."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: src/gedit-view.c:1045
+#: src/gedit-view.c:1072
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  lnj. %d, kol. %d"
 
-#: src/gedit-view.c:1083
+#: src/gedit-view.c:1110
 msgid "  OVR"
 msgstr "  OVR"
 
-#: src/gedit-view.c:1085
+#: src/gedit-view.c:1112
 msgid "  INS"
 msgstr "  INS"
 
@@ -2931,19 +3097,19 @@ msgstr "Opret et nyt vindue i en eksisterende instans"
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Opret et nyt dokument i en eksisterende instans"
 
-#: src/gedit-output-window.c:278
+#: src/gedit-output-window.c:329
 msgid "Close the output window"
 msgstr "Luk uddatavinduet"
 
-#: src/gedit-output-window.c:316
+#: src/gedit-output-window.c:367
 msgid "Copy selected lines"
 msgstr "Kopiér markerede linjer"
 
-#: src/gedit-output-window.c:336
+#: src/gedit-output-window.c:387
 msgid "Clear the output window"
 msgstr "Ryd uddatavinduet"
 
-#: src/gedit-output-window.c:374
+#: src/gedit-output-window.c:427
 msgid "Output Lines"
 msgstr "Uddatalinjer"
 
@@ -2951,139 +3117,139 @@ msgstr "Uddatalinjer"
 msgid "Choose one or more e_ncodings:"
 msgstr "Vælg en eller flere _kodninger:"
 
-#: src/gedit-encodings.c:142 src/gedit-encodings.c:166
-#: src/gedit-encodings.c:207 src/gedit-encodings.c:257
-#: src/gedit-encodings.c:282
+#: src/gedit-encodings.c:143 src/gedit-encodings.c:169
+#: src/gedit-encodings.c:210 src/gedit-encodings.c:260
+#: src/gedit-encodings.c:285
 msgid "Western"
 msgstr "Vestligt"
 
-#: src/gedit-encodings.c:144
-msgid "South European"
-msgstr "Sydeuropa"
-
-#: src/gedit-encodings.c:146 src/gedit-encodings.c:162
-#: src/gedit-encodings.c:292
-msgid "Baltic"
-msgstr "Baltisk"
-
-#: src/gedit-encodings.c:148 src/gedit-encodings.c:211
-#: src/gedit-encodings.c:224 src/gedit-encodings.c:228
-#: src/gedit-encodings.c:241 src/gedit-encodings.c:280
-msgid "Cyrillic"
-msgstr "Kyrillisk"
-
-#: src/gedit-encodings.c:150 src/gedit-encodings.c:217
-#: src/gedit-encodings.c:235 src/gedit-encodings.c:290
-msgid "Arabic"
-msgstr "Arabisk"
-
-#: src/gedit-encodings.c:152 src/gedit-encodings.c:247
-#: src/gedit-encodings.c:284
-msgid "Greek"
-msgstr "Græsk"
-
-#: src/gedit-encodings.c:154
-msgid "Hebrew Visual"
-msgstr "Hebraisk, visuel"
-
-#: src/gedit-encodings.c:156 src/gedit-encodings.c:215
-#: src/gedit-encodings.c:253 src/gedit-encodings.c:288
-msgid "Hebrew"
-msgstr "Hebraisk"
-
-#: src/gedit-encodings.c:158 src/gedit-encodings.c:213
-#: src/gedit-encodings.c:261 src/gedit-encodings.c:286
-msgid "Turkish"
-msgstr "Tyrkisk"
-
-#: src/gedit-encodings.c:160
-msgid "Nordic"
-msgstr "Nordisk"
-
-#: src/gedit-encodings.c:164
-msgid "Celtic"
-msgstr "Keltisk"
-
-#: src/gedit-encodings.c:168 src/gedit-encodings.c:259
-msgid "Romanian"
-msgstr "Romansk"
-
-#: src/gedit-encodings.c:171 src/gedit-encodings.c:173
-#: src/gedit-encodings.c:175 src/gedit-encodings.c:177
-msgid "Unicode"
-msgstr "ISO-10646"
-
-#: src/gedit-encodings.c:180
-msgid "Armenian"
-msgstr "Armensk"
-
-#: src/gedit-encodings.c:182 src/gedit-encodings.c:184
-#: src/gedit-encodings.c:193
-msgid "Chinese Traditional"
-msgstr "Kinesisk, traditionel"
-
-#: src/gedit-encodings.c:186
-msgid "Cyrillic/Russian"
-msgstr "Kyrillisk/russisk"
-
-#: src/gedit-encodings.c:189 src/gedit-encodings.c:220
-#: src/gedit-encodings.c:267
-msgid "Japanese"
-msgstr "Japansk"
-
-#: src/gedit-encodings.c:191 src/gedit-encodings.c:222
-#: src/gedit-encodings.c:226 src/gedit-encodings.c:273
-msgid "Korean"
-msgstr "Koreansk"
-
-#: src/gedit-encodings.c:196 src/gedit-encodings.c:198
-#: src/gedit-encodings.c:200 src/gedit-encodings.c:204
-msgid "Chinese Simplified"
-msgstr "Kinesisk, forenklet"
-
-#: src/gedit-encodings.c:202
-msgid "Georgian"
-msgstr "Geogiansk"
-
-#: src/gedit-encodings.c:209 src/gedit-encodings.c:237
-#: src/gedit-encodings.c:278
+#: src/gedit-encodings.c:145 src/gedit-encodings.c:212
+#: src/gedit-encodings.c:240 src/gedit-encodings.c:281
 msgid "Central European"
 msgstr "Centraleuropæisk"
 
-#: src/gedit-encodings.c:230 src/gedit-encodings.c:263
+#: src/gedit-encodings.c:147
+msgid "South European"
+msgstr "Sydeuropa"
+
+#: src/gedit-encodings.c:149 src/gedit-encodings.c:165
+#: src/gedit-encodings.c:295
+msgid "Baltic"
+msgstr "Baltisk"
+
+#: src/gedit-encodings.c:151 src/gedit-encodings.c:214
+#: src/gedit-encodings.c:227 src/gedit-encodings.c:231
+#: src/gedit-encodings.c:244 src/gedit-encodings.c:283
+msgid "Cyrillic"
+msgstr "Kyrillisk"
+
+#: src/gedit-encodings.c:153 src/gedit-encodings.c:220
+#: src/gedit-encodings.c:238 src/gedit-encodings.c:293
+msgid "Arabic"
+msgstr "Arabisk"
+
+#: src/gedit-encodings.c:155 src/gedit-encodings.c:250
+#: src/gedit-encodings.c:287
+msgid "Greek"
+msgstr "Græsk"
+
+#: src/gedit-encodings.c:157
+msgid "Hebrew Visual"
+msgstr "Hebraisk, visuel"
+
+#: src/gedit-encodings.c:159 src/gedit-encodings.c:218
+#: src/gedit-encodings.c:256 src/gedit-encodings.c:291
+msgid "Hebrew"
+msgstr "Hebraisk"
+
+#: src/gedit-encodings.c:161 src/gedit-encodings.c:216
+#: src/gedit-encodings.c:264 src/gedit-encodings.c:289
+msgid "Turkish"
+msgstr "Tyrkisk"
+
+#: src/gedit-encodings.c:163
+msgid "Nordic"
+msgstr "Nordisk"
+
+#: src/gedit-encodings.c:167
+msgid "Celtic"
+msgstr "Keltisk"
+
+#: src/gedit-encodings.c:171 src/gedit-encodings.c:262
+msgid "Romanian"
+msgstr "Romansk"
+
+#: src/gedit-encodings.c:174 src/gedit-encodings.c:176
+#: src/gedit-encodings.c:178 src/gedit-encodings.c:180
+msgid "Unicode"
+msgstr "ISO-10646"
+
+#: src/gedit-encodings.c:183
+msgid "Armenian"
+msgstr "Armensk"
+
+#: src/gedit-encodings.c:185 src/gedit-encodings.c:187
+#: src/gedit-encodings.c:196
+msgid "Chinese Traditional"
+msgstr "Kinesisk, traditionel"
+
+#: src/gedit-encodings.c:189
+msgid "Cyrillic/Russian"
+msgstr "Kyrillisk/russisk"
+
+#: src/gedit-encodings.c:192 src/gedit-encodings.c:223
+#: src/gedit-encodings.c:270
+msgid "Japanese"
+msgstr "Japansk"
+
+#: src/gedit-encodings.c:194 src/gedit-encodings.c:225
+#: src/gedit-encodings.c:229 src/gedit-encodings.c:276
+msgid "Korean"
+msgstr "Koreansk"
+
+#: src/gedit-encodings.c:199 src/gedit-encodings.c:201
+#: src/gedit-encodings.c:203 src/gedit-encodings.c:207
+msgid "Chinese Simplified"
+msgstr "Kinesisk, forenklet"
+
+#: src/gedit-encodings.c:205
+msgid "Georgian"
+msgstr "Geogiansk"
+
+#: src/gedit-encodings.c:233 src/gedit-encodings.c:266
 msgid "Cyrillic/Ukrainian"
 msgstr "Kyrillisk/ukrainsk"
 
-#: src/gedit-encodings.c:239
+#: src/gedit-encodings.c:242
 msgid "Croatian"
 msgstr "Kroatisk"
 
-#: src/gedit-encodings.c:243
+#: src/gedit-encodings.c:246
 msgid "Hindi"
 msgstr "Hindi"
 
-#: src/gedit-encodings.c:245
+#: src/gedit-encodings.c:248
 msgid "Farsi"
 msgstr "Farsi"
 
-#: src/gedit-encodings.c:249
+#: src/gedit-encodings.c:252
 msgid "Gujarati"
 msgstr "Gujarati"
 
-#: src/gedit-encodings.c:251
+#: src/gedit-encodings.c:254
 msgid "Gurmukhi"
 msgstr "Gurmukhi"
 
-#: src/gedit-encodings.c:255
+#: src/gedit-encodings.c:258
 msgid "Icelandic"
 msgstr "Islandsk"
 
-#: src/gedit-encodings.c:269 src/gedit-encodings.c:275
-#: src/gedit-encodings.c:294
+#: src/gedit-encodings.c:272 src/gedit-encodings.c:278
+#: src/gedit-encodings.c:297
 msgid "Vietnamese"
 msgstr "Vietnamesisk"
 
-#: src/gedit-encodings.c:271
+#: src/gedit-encodings.c:274
 msgid "Thai"
 msgstr "Thai"
 
@@ -3091,8 +3257,8 @@ msgstr "Thai"
 msgid " (invalid Unicode)"
 msgstr " (ugyldig Unicode)"
 
-#~ msgid "Copyright (C) 2002 - Paolo Maggi"
-#~ msgstr "Copyright © 2002 Paolo Maggi"
+#~ msgid "sans 12"
+#~ msgstr "sans 12"
 
 #~ msgid "_Wrap lines (at character boundaries)"
 #~ msgstr "_Ombryd linjer (ved tegngrænser)"
@@ -3125,9 +3291,6 @@ msgstr " (ugyldig Unicode)"
 #~ msgid "Specify the working directory and the command you want to run."
 #~ msgstr "Angiv arbejdsmappen og den kommando du vil køre."
 
-#~ msgid "_Shell command:"
-#~ msgstr "_Kommando:"
-
 #~ msgid "Select a format"
 #~ msgstr "Vælg et format"
 
@@ -3148,9 +3311,6 @@ msgstr " (ugyldig Unicode)"
 
 #~ msgid "_Check Spelling..."
 #~ msgstr "_Kontrollér stavning..."
-
-#~ msgid "_Auto Spellcheck"
-#~ msgstr "_Automatisk stavekontrol"
 
 #~ msgid "_Goto line"
 #~ msgstr "_Gå til linje"
@@ -3179,9 +3339,6 @@ msgstr " (ugyldig Unicode)"
 #~ msgid "Pr_eferences..."
 #~ msgstr "_Indstillinger..."
 
-#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-#~ msgstr "Dette udvidelsesmodul viser et vindue med ASCII-tabellen."
-
 #~ msgid ""
 #~ "If you wish to insert any of the characters in to the active \n"
 #~ "document, select the character and click the \"Insert Char\" \n"
@@ -3197,50 +3354,8 @@ msgstr " (ugyldig Unicode)"
 #~ msgid "gedit: ASCII table"
 #~ msgstr "ASCII-tabel"
 
-#~ msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-#~ msgstr ""
-#~ "Et udvidelsesmodul der åbner ChangeLog-filer fundet i CVS-"
-#~ "commitmeddelelser."
-
-#~ msgid ""
-#~ "Makes a diff file from two documents or files on disk.\n"
-#~ "\n"
-#~ "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
-#~ msgstr ""
-#~ "Laver en fil med forskellene mellem to dokumenter eller filer på disken.\n"
-#~ "\n"
-#~ "Skriv \"man diff\" i en terminal for flere oplysninger om diff.\n"
-
-# "and display the result" giver vist sig selv, det udelader vi
-#~ msgid ""
-#~ "The word count plugin analyzes the current document and determines the "
-#~ "number of words, lines, characters and non-space characters in it and "
-#~ "display the result."
-#~ msgstr ""
-#~ "Ordoptællingsmodulet analyserer det aktuelle dokument og finder antallet "
-#~ "af ord, linjer, tegn og ikke-mellemrum."
-
 #~ msgid "Insert Shell _Output"
 #~ msgstr "Indsæt terminal_uddata"
-
-#~ msgid "Execute an external program and insert its output in a new document."
-#~ msgstr "Kør et program og indsæt dets uddata i et nyt dokument."
-
-#~ msgid "Tag list"
-#~ msgstr "Mærkeliste"
-
-#~ msgid ""
-#~ "The tag list plugin provides a method to easily insert into a document "
-#~ "commonly used tabs/strings without having to type them."
-#~ msgstr ""
-#~ "Mærkelistemodulet gør det muligt hurtigt at indsætte ofte benyttet tekst "
-#~ "i et dokument uden at indtaste det hver gang."
-
-#~ msgid "_Insert Date/Time"
-#~ msgstr "_Indsæt tidspunkt"
-
-#~ msgid "Inserts current date and time at the cursor position."
-#~ msgstr "Indsætter den aktuelle dato og tid ved markørpositionen."
 
 #~ msgid "Select the format to use when inserting date/time."
 #~ msgstr "Vælg det format der skal bruges ved indsætning af tidspunkt."
