@@ -27,10 +27,12 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
-
-#include <config.h>
 
 #include <glade/glade-xml.h>
 
@@ -428,7 +430,7 @@ gedit_preferences_dialog_create_categories_tree_model ()
 			  CATEGORY_COLUMN, gettext (category->category),
 			  PAGE_NUM_COLUMN, category->notebook_page,
 			  -1);
-		
+
 		/* add children */
 		while (sub_category->category)
 		{
@@ -440,7 +442,7 @@ gedit_preferences_dialog_create_categories_tree_model ()
 				CATEGORY_COLUMN, gettext (sub_category->category),
 				PAGE_NUM_COLUMN, sub_category->notebook_page,
 			      -1);
-			      
+
 	  		sub_category++;
 		}
       
