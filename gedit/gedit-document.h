@@ -165,9 +165,6 @@ void 		gedit_document_delete_text 	(GeditDocument *doc,
 gchar*		gedit_document_get_chars 	(GeditDocument *doc, 
 					         gint start, gint end);
 
-gboolean	gedit_document_get_selection 	(GeditDocument *doc,
-						 gint* start, gint* end);
-
 /* Multi-level Undo/Redo operations */
 void		gedit_document_set_max_undo_levels (GeditDocument *doc, 
 						    gint max_undo_levels);
@@ -204,9 +201,6 @@ gboolean	gedit_document_replace_all 	(GeditDocument *doc,
 				            	 const gchar *find, 
 						 const gchar *replace, 
 					    	 gint flags);
-void		gedit_document_set_selection 	(GeditDocument *doc, 
-						 gint start, 
-						 gint end);
 
 void 		gedit_document_set_language 	(GeditDocument *doc,
 						 GtkSourceLanguage *lang);

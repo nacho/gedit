@@ -2508,32 +2508,6 @@ gedit_document_find_prev (GeditDocument* doc, gint flags)
 	return gedit_document_find_again (doc, flags);
 }
 
-gboolean 
-gedit_document_get_selection (GeditDocument *doc, gint *start, gint *end)
-{
-	gboolean ret;
-	GtkTextIter iter;
-	GtkTextIter sel_bound;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-
-	ret = gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),			
-						    &iter,
-						    &sel_bound);
-
-	gtk_text_iter_order (&iter, &sel_bound);	
-
-	if (start != NULL)
-		*start = gtk_text_iter_get_offset (&iter); 
-
-	if (end != NULL)
-		*end = gtk_text_iter_get_offset (&sel_bound); 
-
-	return ret;
-}
-
 void
 gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 {
@@ -2607,31 +2581,6 @@ gedit_document_replace_all (GeditDocument *doc,
 	gedit_document_end_user_action (doc);
 
 	return cont;
-}
-
-void
-gedit_document_set_selection (GeditDocument *doc, gint start, gint end)
-{
- 	GtkTextIter start_iter;
-	GtkTextIter end_iter;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (start >= 0);
-	g_return_if_fail ((end > start) || (end < 0));
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
-
-	if (end < 0)
-		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
-	else
-		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
-
-	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &end_iter);
-
-	gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
-					"selection_bound", &start_iter);
 }
 
 void 

@@ -555,15 +555,39 @@ insert_text_handler (GtkEditable *editable, const gchar *text, gint length, gint
 	g_free (escaped_text);
 }
 
+static gboolean
+get_selected_text (GtkTextBuffer *doc, gchar **selected_text, gint *len)
+{
+	GtkTextIter start, end;
+
+	g_return_val_if_fail (selected_text != NULL, FALSE);
+	g_return_val_if_fail (*selected_text == NULL, FALSE);
+
+	if (!gtk_text_buffer_get_selection_bounds (doc, &start, &end))
+	{
+		if (len != NULL)
+			len = 0;
+
+		return FALSE;
+	}
+
+	*selected_text = gtk_text_buffer_get_slice (doc, &start, &end, TRUE);
+
+	if (len != NULL)
+		*len = g_utf8_strlen (*selected_text, -1);
+
+	return TRUE;
+}
+
 void
 gedit_dialog_find (void)
 {
 	GeditDialogFind *dialog;
 	GeditMDIChild *active_child;
 	GeditDocument *doc;
-	gchar* last_searched_text;
-	gint selection_start, selection_end;
 	gboolean selection_exists;
+	gchar *find_text = NULL;
+	gint sel_len = 0;
 	gboolean was_wrap_around;
 	gboolean was_entire_word;
 	gboolean was_case_sensitive;
@@ -588,24 +612,20 @@ gedit_dialog_find (void)
 	doc = active_child->document;
 	g_return_if_fail (doc != NULL);
 
-	selection_exists = gedit_document_get_selection (doc, &selection_start, &selection_end);
-	if (selection_exists && (selection_end - selection_start < 80)) 
+	selection_exists = get_selected_text (GTK_TEXT_BUFFER (doc), &find_text, &sel_len);
+	if (selection_exists && find_text && sel_len < 80)
 	{
-		gchar *selection_text;
-		
-		selection_text = gedit_document_get_chars (doc, selection_start, selection_end);
-		
-		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), selection_text);
-		
-		g_free (selection_text);
-	} 
-	else 
+		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), find_text);
+		g_free (find_text);
+	}
+	else
 	{
-		last_searched_text = gedit_document_get_last_searched_text (doc);
-		if (last_searched_text != NULL)
+		g_free (find_text);
+		find_text = gedit_document_get_last_searched_text (doc);
+		if (find_text != NULL)
 		{
-			gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
-			g_free (last_searched_text);	
+			gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), find_text);
+			g_free (find_text);	
 		}
 	}
 
@@ -665,10 +685,10 @@ gedit_dialog_replace (void)
 	GeditDialogReplace *dialog;
 	GeditMDIChild *active_child;
 	GeditDocument *doc;
-	gchar* last_searched_text;
-	gchar* last_replace_text;
-	gint selection_start, selection_end;
 	gboolean selection_exists;
+	gchar *find_text = NULL;
+	gint sel_len = 0;
+	gchar *replace_text;
 	gboolean was_wrap_around;
 	gboolean was_entire_word;
 	gboolean was_case_sensitive;
@@ -697,32 +717,28 @@ gedit_dialog_replace (void)
 	doc = active_child->document;
 	g_return_if_fail (doc != NULL);
 
-	selection_exists = gedit_document_get_selection (doc, &selection_start, &selection_end);
-	if (selection_exists && (selection_end - selection_start < 80)) 
+	selection_exists = get_selected_text (GTK_TEXT_BUFFER (doc), &find_text, &sel_len);
+	if (selection_exists && find_text && sel_len < 80)
 	{
-		gchar *selection_text;
-		
-		selection_text = gedit_document_get_chars (doc, selection_start, selection_end);
-		
-		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), selection_text);
-		
-		g_free (selection_text);
-	} 
-	else 
+		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), find_text);
+		g_free (find_text);
+	}
+	else
 	{
-		last_searched_text = gedit_document_get_last_searched_text (doc);
-		if (last_searched_text != NULL)
+		g_free (find_text);
+		find_text = gedit_document_get_last_searched_text (doc);
+		if (find_text != NULL)
 		{
-			gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
-			g_free (last_searched_text);	
+			gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), find_text);
+			g_free (find_text);	
 		}
 	}
-	
-	last_replace_text = gedit_document_get_last_replace_text (doc);
-	if (last_replace_text != NULL)
+
+	replace_text = gedit_document_get_last_replace_text (doc);
+	if (replace_text != NULL)
 	{
-		gtk_entry_set_text (GTK_ENTRY (dialog->replace_entry), last_replace_text);
-		g_free (last_replace_text);	
+		gtk_entry_set_text (GTK_ENTRY (dialog->replace_entry), replace_text);
+		g_free (replace_text);
 	}
 
 	if (!was_search_backwards_id)
@@ -848,7 +864,6 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 	update_menu_items_sensitivity ();
 }
 
-
 static void
 replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 {
@@ -937,7 +952,6 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	const gchar* replace_string = NULL;
 	gchar* selected_text = NULL;
 	gchar *converted_search_string = NULL;
-	gint start, end;
 	gboolean found;
 
 	gboolean case_sensitive;
@@ -972,6 +986,9 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	g_return_if_fail (search_string);
 	g_return_if_fail (replace_string);
 
+	gedit_debug (DEBUG_SEARCH, "Search string: %s", search_string);
+	gedit_debug (DEBUG_SEARCH, "Replace string: %s", replace_string);
+
 	if (strlen (search_string) <= 0)
 		return;
 	
@@ -982,12 +999,6 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 					     TRUE, 
 					     replace_string);
 
-	if (gedit_document_get_selection (doc, &start, &end))
-		selected_text = gedit_document_get_chars (doc, start, end);
-	
-	gedit_debug (DEBUG_SEARCH, "Sel text: %s", selected_text ? selected_text : "NULL");
-	gedit_debug (DEBUG_SEARCH, "Search string: %s", search_string ? search_string : "NULL");
-
 	/* retrieve search settings from the dialog */
 	case_sensitive = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->match_case_checkbutton));
 	entire_word = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton));
@@ -995,6 +1006,10 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	search_backwards = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->search_backwards_checkbutton));
 
 	converted_search_string = gedit_utils_convert_search_text (search_string);
+
+	get_selected_text (GTK_TEXT_BUFFER (doc), &selected_text, NULL);
+
+	gedit_debug (DEBUG_SEARCH, "Sel text: %s", selected_text ? selected_text : "NULL");
 
 	if ((selected_text == NULL) ||
 	    (case_sensitive && (strcmp (selected_text, converted_search_string) != 0)) || 
