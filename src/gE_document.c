@@ -97,7 +97,7 @@ gE_window_new(void)
 	w->tab_pos = GTK_POS_TOP;
 	w->files_list_window = NULL;
 	w->files_list_window_data = NULL;
-	w->toolbar = NULL;
+	w->toolbar = TRUE;
 
 	w->show_status = TRUE;
 	w->have_toolbar = TRUE;
@@ -346,7 +346,7 @@ gE_document
   	 {
   	 style->font = gdk_font_load ("-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1");
   	 	w->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";
-  	 }
+  	 } 
   	 
  	 gtk_widget_push_style (style);     
    	 gtk_widget_set_style(GTK_WIDGET(doc->split_screen), style);

@@ -327,7 +327,7 @@ char *gE_prefs_get_default (char *name)
 
 	static gE_pref gE_prefs_defaults [] = {
 		{ "tab pos", "2" },
-		{ "auto indent", "1" },
+		{ "auto indent", "0" },
 		{ "toolbar", "1" },
 		{ "tb pix", "1" },
 		{ "tb text", "1" },
@@ -340,6 +340,7 @@ char *gE_prefs_get_default (char *name)
 	{
 		if (strcmp (name, gE_prefs_defaults[i].name) == 0)
 		{
+			value = malloc (sizeof(gE_prefs_defaults[i].name));
 			value = g_strdup (gE_prefs_defaults[i].value);
 			return value;
 		}
@@ -378,10 +379,18 @@ int gE_prefs_get_int(char *name)
 #else
 
 	int i;
+	char *value;
 	gnome_config_push_prefix ("/gEdit/Global/");
 	i = gnome_config_get_int (name);
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
+	if (i == NULL)
+	  {
+		value = gE_prefs_get_data (name);
+		i = atoi (value);
+		g_free(value);
+	  }
+
 	return i;
 	
 #endif

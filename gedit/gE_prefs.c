@@ -317,8 +317,21 @@ void gE_get_settings(gE_window *w)
 	 w->have_tb_text = gE_prefs_get_int("tb text");
 	 w->have_tb_pix = gE_prefs_get_int("tb pix");
 	 w->font = gE_prefs_get_char("font");
+	 if (w->font == NULL)
+	   w->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";
 	 w->print_cmd = gE_prefs_get_char("print command"); 
-	
+	 if (w->print_cmd == NULL)
+	   w->print_cmd = "lpr %s";
+
+
+	mbprintf("window->tab_pos = %d", w->tab_pos);
+	mbprintf("window->auto_indent = %d", w->auto_indent);
+	mbprintf("window->show_status = %d", w->show_status);
+	mbprintf("window->have_toolbar = %d", w->have_toolbar);
+	mbprintf("window->have_tb_text = %d", w->have_tb_text);
+	mbprintf("window->have_tb_pix = %d", w->have_tb_pix);
+	mbprintf("window->font = %s", w->font);
+	mbprintf("window->print_cmd = %s", w->print_cmd);	
 	
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);
 

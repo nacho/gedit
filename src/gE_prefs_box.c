@@ -213,7 +213,9 @@ static GtkWidget *general_page_new()
 {
   GtkWidget *vbox, *hbox;
 
+#ifdef DEBUG
 printf("gpn...\n");
+#endif
 
   vbox = gtk_vbox_new(FALSE, 0);
   gtk_container_border_width (GTK_CONTAINER (vbox), 10);
@@ -221,20 +223,30 @@ printf("gpn...\n");
   gtk_box_pack_start (GTK_BOX(pbox->gen_vbox), vbox, TRUE, TRUE, 0);
   #endif
   gtk_widget_show (vbox);
+  #ifdef DEBUG
   printf("gpn..2.\n");
+  #endif
 
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
   
+  #ifdef DEBUG
   printf("gpn..3.\n");
+  #endif
   prefs->autoindent = gtk_check_button_new_with_label ("Autoindent");
+  #ifdef DEBUG
   printf("gpn..3.1.\n");
+  #endif
   gtk_box_pack_start(GTK_BOX(hbox), prefs->autoindent, TRUE, TRUE, 0);
+    #ifdef DEBUG
     printf("gpn..3.2.\n");
+    #endif
   gtk_widget_show (prefs->autoindent);
+  #ifdef DEBUG
   printf("gpn..4.\n");
+  #endif
   
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);

@@ -35,6 +35,7 @@
 #include "search.h"
 #include "msgbox.h"
 #include "toolbar.h"
+#include "gE_prefs_box.h"
 
 #ifdef WITHOUT_GNOME
 #include "xpm/tb_new.xpm"
@@ -47,6 +48,7 @@
 #include "xpm/tb_paste.xpm"
 #include "xpm/tb_search.xpm"
 #include "xpm/tb_exit.xpm"
+#include "xpm/tb_prefs.xpm"
 #endif
 
 
@@ -72,6 +74,10 @@ static toolbar_data_t toolbar_data[] = {
 		(GtkSignalFunc)edit_paste_cb },
 	{ " Search ", "Search for text", "Toolbar/Search", tb_search_xpm,
 		(GtkSignalFunc)search_cb },
+	{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ " Prefs ", "Preferences", "Toolbar/Prefs", tb_prefs_xpm,
+		(GtkSignalFunc)gE_prefs_dialog },
+
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
@@ -97,6 +103,9 @@ static toolbar_data_t toolbar_data[] = {
 		GNOME_STOCK_PIXMAP_PASTE, (GtkSignalFunc)edit_paste_cb },
 	{ N_(" Search "), N_("Search for text"), "Toolbar/Search",
 		GNOME_STOCK_PIXMAP_SEARCH, (GtkSignalFunc)search_cb },
+		{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ N_(" Prefs "), N_("Preferences"), "Toolbar/Prefs",
+		GNOME_STOCK_PIXMAP_PREFERENCES, (GtkSignalFunc)gE_prefs_dialog },
 	{ NULL, NULL, NULL, NULL, NULL }
 };
 
