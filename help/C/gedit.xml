@@ -3,8 +3,8 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY appversion "1.121.0">
-  <!ENTITY manrevision "2.1">
-  <!ENTITY date "June 2002">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "August 2002">
   <!ENTITY app "gedit">
 ]>
 <!-- 
@@ -13,6 +13,7 @@
   http://developer.GNOME.org/projects/gdp
   Template version: 2.0 beta
   Template last modified Jan 30, 2002
+  
 -->
 <!-- =============Document Header ============================= -->
 <article id="index" lang="en">
@@ -79,6 +80,15 @@
    		<revision> 
 		  <revnumber>&app; Manual V&manrevision;</revnumber>
 		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.1</revnumber>
+		  <date>June 2002</date> 
 		  <revdescription> 
 			 <para role="author">Sun GNOME Documentation Team
 				<email>gdocteam@sun.com</email> </para>
@@ -167,7 +177,7 @@
 				<imageobject> 
 				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
 					 </imageobject>
-				<textobject> <phrase>Screenshot of the gedit main window.</phrase>
+				<textobject> <phrase>Shows gedit main window.</phrase>
 				</textobject> 
 			</mediaobject>
 		  </screenshot>
@@ -220,7 +230,7 @@
 		  application adds a tab for each open file to the window. To display another
 		  open file, click on the tab that corresponds to the file. To create a new
 		  <application> &app;</application> window for each file that is open, drag the
-		  tab corresponding to each file to the desktop. You can also use the
+		  tab corresponding to each file to the desktop background. You can also use the
 		  <guimenu>Documents</guimenu> menu to move between the open files.</para>
 		<para>The application records the paths and filenames of the last
 		  four files that you edited and displays the files as menu items on the <menuchoice>
@@ -441,9 +451,8 @@
 		<title>To Pipe the Output of a Command to a File</title>
 		<para>You can use <application>&app;</application> to pipe the output of
 		  a command to a text file. For example, to pipe the output of an <command>ls
-		  </command> command to a text file, type the following command, then press
-		  <keycap> Return</keycap>:</para>
-		<para><command>ls | gedit</command></para>
+		  </command> command to a text file, type <command>ls | gedit</command>, then press
+		  <keycap>Return</keycap>.</para>
 		<para>The output of the <command>ls</command> command is displayed in a
 		  new text file in the <application>&app;</application> window.</para>
 		<para>Alternatively, you can use the Shell Output plugin to pipe command
@@ -778,13 +787,16 @@
 		  menu items:</para>
 		  <itemizedlist>
 		  <listitem>
-		  <para><guimenuitem>Desktop Default</guimenuitem>: display the default toolbar.</para>
+		  <para><guimenuitem>Desktop Default</guimenuitem></para>
+		  <para>Sisplay the default toolbar.</para>
 		  </listitem>
 		  <listitem>
-		  <para><guimenuitem>Icon</guimenuitem>: display icons only.</para>
+		  <para><guimenuitem>Icon</guimenuitem></para>
+		  <para>Display icons only.</para>
 		  </listitem>
 		  <listitem>
-		  <para><guimenuitem>Icon and Text</guimenuitem>: display icons and text.</para>
+		  <para><guimenuitem>Icon and Text</guimenuitem></para>
+		  <para>Display icons and text.</para>
 		  </listitem>
 		  </itemizedlist>
 	 <para>To display or hide the statusbar, choose <menuchoice> <guimenu>View</guimenu>
@@ -794,13 +806,13 @@
 		  menu items:</para>
 		  <itemizedlist>
 		  <listitem>
-		  <para><guimenuitem>Show Cursor Position</guimenuitem>: display the line number
-		  and column number where the cursor is located.</para>
+		  <para><guimenuitem>Show Cursor Position</guimenuitem></para>
+		  <para>Display the line number and column number where the cursor is located.</para>
 		  <para>Default: selected.</para>
 		  </listitem>
 		  <listitem>
-		  <para><guimenuitem>Show Overwrite Mode</guimenuitem>: display the editing mode.
-		  If the editor is in insert mode, the statusbar contains the word INS. If the editor is in 
+		  <para><guimenuitem>Show Overwrite Mode</guimenuitem></para>
+		  <para>Display the editing mode. If the editor is in insert mode, the statusbar contains the word INS. If the editor is in 
 		  overwrite mode, the statusbar contains the word OVR.</para>
 		  <para>Default: selected.</para>
 		  </listitem>
@@ -808,14 +820,15 @@
 	 
 	 </sect2>
   </sect1>
-<!-- ============= Customization ============================= -->
+<!-- ============= Preferences ============================= -->
   <sect1 id="gedit-prefs"> 
-	 <title>Settings</title>
+	 <title>Preferences</title>
 	   
 	 <para>To configure <application>&app;</application>, choose 
-		<menuchoice> <guimenu>Edit</guimenu>
-		  <guimenuitem>Preferences</guimenuitem> </menuchoice>.</para>
-	 <para>The <guilabel>Preferences</guilabel> dialog contains the following
+		<menuchoice> 
+		<guimenu>Edit</guimenu>
+		<guimenuitem>Preferences</guimenuitem> 
+		</menuchoice>. The <guilabel>Preferences</guilabel> dialog contains the following
 		categories:</para>
 	 <itemizedlist> 
 		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
@@ -948,7 +961,7 @@
 	 		<variablelist>
 	 		<varlistentry> <term><guilabel>Create a backup copy of files before saving</guilabel> </term> 
 			 <listitem> 
-				<para>Select this option create a backup copy of a file each time you save the file. The backup 
+				<para>Select this option to create a backup copy of a file each time you save the file. The backup 
 				copy of the file has a <filename>.bak</filename> extension.</para>
 				<para>Default: unselected.</para>
 			 </listitem>
@@ -1013,7 +1026,7 @@
 		  <varlistentry> <term><guilabel>Print page headers</guilabel> </term> 
 			 <listitem> 
 				<para>Select this option to include a header on each page that you
-				  print. You can not configure the header. </para>
+				  print. You cannot configure the header. </para>
 				<para>Default: selected.</para>
 			 </listitem>
 		  </varlistentry>
