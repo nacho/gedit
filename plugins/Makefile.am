@@ -8,7 +8,7 @@ if HAVE_GNOME
 spell = spell
 prm = prm
 ctag = ctag
-endf
+endif
 
 if WITH_GMODULE_PLUGINS
 
