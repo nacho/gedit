@@ -270,7 +270,7 @@ gedit_print_run_dialog (GeditPrintJobInfo *pji)
 	else
 		selection_flag = GNOME_PRINT_RANGE_SELECTION;
 		
-	dialog = gnome_print_dialog_new ((const char *) _("gedit - Print Document"),
+	dialog = gnome_print_dialog_new ((const char *) _("Print"),
 			          GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
 	
 	lines = gedit_document_get_line_count (pji->doc);
