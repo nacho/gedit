@@ -201,6 +201,11 @@ gE_window_new(void)
 	return w;
 } /* gE_window_new */
 
+void gE_window_set_auto_indent (gE_window *window, gint auto_indent)
+{
+	window->auto_indent = auto_indent;
+}
+
 void gE_window_set_status_bar (gE_window *window, gint show_status)
 {
 	window->show_status = show_status;

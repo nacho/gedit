@@ -327,7 +327,7 @@ auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
-	data->window->auto_indent = !data->window->auto_indent;
+	gE_window_set_auto_indent (data->window, !data->window->auto_indent);
 }
 
 void

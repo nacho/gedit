@@ -1,5 +1,11 @@
 1998-10-13  Martin Baulig  <martin@home-of-linux.org>
 
+	* src/gE_document.c (gE_window_set_auto_indent): New function taking
+	a gE_document * and a gint indicating whether to enable auto indent.
+
+	* src/command.c (auto_indent_toggle_cb): Call the new
+	`gE_window_set_auto_indent' function.
+
 	Moved callback functions from the `Options' menu into command.c
 	and called them `options_toggle_*_cb'. They call `gE_document_set_*'
 	functions in gE_document.c which provide the functionality the

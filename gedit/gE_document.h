@@ -35,6 +35,7 @@ extern "C" {
 #define MSGBAR_PASTE			"Selection Pasted..."
 #define MSGBAR_SELECT_ALL		"All Text Selected..."
 
+extern void gE_window_set_auto_indent (gE_window *window, gint auto_indent);
 extern void gE_window_set_status_bar (gE_window *window, gint show_status);
 extern gE_window *gE_window_new();
 extern gE_document *gE_document_new(gE_window *window);
