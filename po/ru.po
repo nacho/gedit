@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-15 22:07+0000\n"
-"PO-Revision-Date: 2000-06-15 22:10+00:00\n"
+"POT-Creation-Date: 2000-06-16 14:15+0000\n"
+"PO-Revision-Date: 2000-06-16 14:16+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,6 +53,26 @@ msgstr "Десятичное в восьмеричное"
 msgid "Hex to Decimal"
 msgstr "Шестнадцатиричное в десятичное"
 
+#: plugins/diff/diff.c:59
+msgid "Choose a file"
+msgstr "Выбрыть файл"
+
+#: plugins/diff/diff.c:150
+msgid "Choose files to diff"
+msgstr "Выбор файлов для diff"
+
+#: plugins/diff/diff.c:155
+msgid "Choose files to diff:"
+msgstr "Выбор файлов для diff:"
+
+#: plugins/diff/diff.c:164 plugins/diff/diff.c:172
+msgid "Browse..."
+msgstr "Просмотр..."
+
+#: plugins/diff/diff.c:177
+msgid "Calculate Diff"
+msgstr "Вычислить различия"
+
 #: plugins/diff/diff.c:199
 msgid "Diff"
 msgstr "Diff"
@@ -61,8 +81,8 @@ msgstr "Diff"
 msgid "Diff plugin."
 msgstr "Дополнение diff"
 
-#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:262
-#: src/print.c:551
+#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:261
+#: src/print.c:575
 msgid "Untitled"
 msgstr "Безымянное"
 
@@ -115,11 +135,11 @@ msgstr "Здравствуй, Мир!"
 msgid "Sample 'hello world' plugin."
 msgstr "Пример дополнения \"Здравствуй, Мир!\"."
 
-#: plugins/shell_output/shell_output.c:160
+#: plugins/shell_output/shell_output.c:170
 msgid "Shell Output"
 msgstr "Вывод оболочки"
 
-#: plugins/shell_output/shell_output.c:161
+#: plugins/shell_output/shell_output.c:171
 msgid "Insert the shell output in the document"
 msgstr "Вставить вывод оболочки в документ"
 
@@ -162,7 +182,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME."
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:543
+#: src/dialogs/dialog-prefs.c:546
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
@@ -383,7 +403,7 @@ msgstr "позиция курсора"
 msgid "Case se_nsitive"
 msgstr "Чувствительный к регистру"
 
-#: src/document.c:244
+#: src/document.c:243
 msgid "RO - "
 msgstr "Только чтение - "
 
@@ -392,15 +412,15 @@ msgstr "Только чтение - "
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
 
-#: src/document.c:637
+#: src/document.c:639
 msgid "(modified)"
 msgstr "(изменено)"
 
-#: src/document.c:714
+#: src/document.c:716
 msgid "This file does not end with a valid extension\n"
 msgstr "Этот файл заканчивается недопустимым расширением\n"
 
-#: src/document.c:722
+#: src/document.c:724
 #, c-format
 msgid "The file %s was not found."
 msgstr "Файл %s не был найден."
@@ -533,11 +553,11 @@ msgstr "Документ не был сохранен."
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/file.c:725
+#: src/file.c:739
 msgid "You can't revert an Untitled document\n"
 msgstr "Вы не можете восстановить неозаглавленный документ\n"
 
-#: src/file.c:738
+#: src/file.c:752
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -546,7 +566,7 @@ msgstr ""
 "Вы уверены в том что хотите отменить все изменения?\n"
 "(%s)"
 
-#: src/file.c:767
+#: src/file.c:781
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Файл '%s' не существует. Хотите создать его?"
@@ -732,16 +752,16 @@ msgstr "Ошибка, init_plugin вернула ошибку"
 msgid "Error, plugin is still in use"
 msgstr "Ошибка, дополнение еще используется"
 
-#: src/print.c:163
+#: src/print.c:173
 msgid "Pages"
 msgstr "Страницы"
 
-#: src/print.c:207
+#: src/print.c:231
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gEdit (%s): Просмотр печати"
 
-#: src/print.c:500 src/print.c:515
+#: src/print.c:524 src/print.c:539
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -750,7 +770,7 @@ msgstr ""
 "gedit: невозможно найти шрифт \"%s\".\n"
 "gedit: невозможно напечатать без установленного шрифта."
 
-#: src/print.c:808
+#: src/print.c:832
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
@@ -849,6 +869,6 @@ msgstr "Показать последние отладочные сообщения."
 msgid "Turn on all debugging messages."
 msgstr "Включить все отладочные сообщения."
 
-#: src/view.c:850
+#: src/view.c:856
 msgid "You can't remove the last view of a document."
 msgstr "Вы не можете удалить последнее окно документа."
