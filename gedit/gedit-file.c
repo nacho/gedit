@@ -771,28 +771,29 @@ gedit_file_revert (GeditMDIChild *child)
 	gedit_debug (DEBUG_FILE, "");
 
 	g_return_if_fail (child != NULL);
-	
+
 	doc = child->document;
 	g_return_if_fail (doc != NULL);
-	
+
 	if (!gedit_file_revert_dialog (doc))
 		return;
-	
+
 	uri = gedit_document_get_uri (doc);
 	g_return_if_fail (uri != NULL);
-	
+
 	gedit_utils_flash_va (_("Reverting the document \"%s\"..."), uri);	
-	
+	g_free (uri);
+
 	g_signal_connect (G_OBJECT (doc),
 			  "loading",
 			  G_CALLBACK (document_loading_cb),
 			  (gpointer)TRUE);
-				  
+			  
 	g_signal_connect (G_OBJECT (doc),
 			  "loaded",
 			  G_CALLBACK (document_reverted_cb),
 			  NULL);
-	
+
 	gedit_document_revert (doc);
 }
 
