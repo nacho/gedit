@@ -373,7 +373,7 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 static gint
 gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 {
-	gedit_debug ("F:gedit_event_button_press\n", DEBUG_VIEW);
+	gedit_debug ("A mouse button was pressed\n", DEBUG_VIEW);
 	
 	line_pos_cb (NULL, NULL);
 
@@ -383,14 +383,9 @@ gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 static gint
 gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
-	gint mask;
-
-	gedit_debug ("F:gedit_event_key_press\n", DEBUG_VIEW);
+	gedit_debug ("A keyboard button was pressed\n", DEBUG_VIEW);
 
 	line_pos_cb (NULL, NULL);
-
-	mask = GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD2_MASK |
-	       GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK;
 
 	if (event->state & GDK_MOD1_MASK)
 	{
@@ -398,12 +393,9 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		return FALSE;
 	}
 
-	gedit_debug ("F:     entering if..\n", DEBUG_VIEW);
-
 	/* Control key related */
 	if (event->state & GDK_CONTROL_MASK)
 	{
-		gedit_debug ("F:If successfull \n", DEBUG_VIEW);
 		switch (event->keyval)
 		{
 		case 's':
@@ -436,8 +428,6 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		break;
 		}
 	}
-
-	gedit_debug ("F:      returning, gedit_event_key_press\n", DEBUG_VIEW);
 
 	return TRUE;
 }

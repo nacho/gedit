@@ -61,8 +61,7 @@ dialog_find_line (void)
 	GtkWidget *spinb;
 	GtkAdjustment *adj;
 	Document *doc = gedit_document_current ();
-	GladeXML *gui = glade_xml_new (GEDIT_GLADEDIR
-				       "/find-line.glade",
+	GladeXML *gui = glade_xml_new (GEDIT_GLADEDIR "find-line.glade",
 				       NULL);
 
 	if (!gui)

@@ -1,4 +1,4 @@
-gladedir = $(datadir)/gedit/glade
+gladedir = $(datadir)/gedit/glade/
 
 INCLUDES = 						\
 	-I$(top_srcdir)/src				\

@@ -484,7 +484,7 @@ dialog_prefs (void)
 
 	gedit_debug("F:dialog_prefs\n", DEBUG_PREFS);
 
-	gui = glade_xml_new (GEDIT_GLADEDIR "/prefs.glade", NULL);
+	gui = glade_xml_new (GEDIT_GLADEDIR "prefs.glade", NULL);
 
 	if (!gui)
 	{
