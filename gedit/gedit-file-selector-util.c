@@ -180,24 +180,6 @@ is_read_only (const gchar *name)
 	return ret;	
 }
 
-static gboolean 
-file_exists (gchar *name)
-{
-	GnomeVFSURI *uri;
-	gboolean ret;
-	
-	g_return_val_if_fail (name != NULL, FALSE);
-
-	uri = gnome_vfs_uri_new (name);
-	g_return_val_if_fail (uri != NULL, FALSE);
-
-	ret = gnome_vfs_uri_exists (uri);
-
-	gnome_vfs_uri_unref (uri);
-
-	return ret;
-}
-
 static gpointer
 analyze_response (GtkFileChooser *chooser, gint response)
 {
@@ -278,7 +260,7 @@ analyze_response (GtkFileChooser *chooser, gint response)
 	{	
 		if (GET_MODE (chooser) == FILESEL_SAVE)
 		{
-			if (file_exists (uri))
+			if (gedit_utils_uri_exists (uri))
 			{
 				if (is_read_only (uri))
 				{

@@ -41,20 +41,20 @@ BUILT_SOURCES = 			\
 
 NON_INST_H_FILS =			\
 	gedit-application-server.h	\
+	gedit-file-selector-util.h 	\
+	gedit-io-error-dialogs.h	\
 	bonobo-mdi-session.h		\
 	gedit-commands.h		\
 	gedit-plugins-engine.h		\
 	gedit-session.h			\
 	gedit-languages-manager.h	\
 	gedit-window-server.h		\
-	gedit-encodings-option-menu.h	\
 	gedit-tooltips.h
 
 INST_H_FILES =				\
 	gedit2.h			\
 	gedit-file.h			\
-	gedit-file-selector-util.h 	\
-	gedit-io-error-dialogs.h	\
+	gedit-encodings-option-menu.h	\
 	gedit-utils.h 			\
 	gedit-mdi.h			\
 	gedit-mdi-child.h		\

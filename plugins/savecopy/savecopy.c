@@ -41,15 +41,15 @@
 #include <gedit/gedit-debug.h>
 #include <gedit/gedit-convert.h>
 #include <gedit/gedit-encodings.h>
-#include <gedit/gedit-file-selector-util.h>
-#include <gedit/gedit-io-error-dialogs.h>
+#include <gedit/gedit-encodings-option-menu.h>
 #include <gedit/gedit-menus.h>
+#include <gedit/gedit-utils.h>
 
 
-#define MENU_ITEM_LABEL	N_("Save _Copy") //fixme accel clash
+#define MENU_ITEM_LABEL	N_("Sa_ve Copy")
 #define MENU_ITEM_NAME	"SaveCopy"
 #define MENU_ITEM_PATH	"/menu/File/FileOps_0/"
-#define MENU_ITEM_TIP	N_("  blah ")
+#define MENU_ITEM_TIP	N_("Save a copy of the current document")
 
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
@@ -58,13 +58,12 @@ G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 
+
 static gchar *
 get_contents (GeditDocument *doc, const GeditEncoding *encoding, GError **error)
 {
 	gchar *chars;
 	GtkTextIter start, end;
-
-	// TODO make sure \n at the end
 
 	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc), &start, &end);
 	chars = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
@@ -102,6 +101,7 @@ write_to_file (GnomeVFSHandle *handle, gchar *data, GnomeVFSFileSize len)
 {
 	GnomeVFSFileSize written;
 	GnomeVFSResult res = GNOME_VFS_OK;
+	gboolean add_cr;
 
 	while (len > 0)
 	{
@@ -113,6 +113,12 @@ write_to_file (GnomeVFSHandle *handle, gchar *data, GnomeVFSFileSize len)
 		if (res != GNOME_VFS_OK)
 			break;
 	}
+
+	/* Add \n if needed */
+	add_cr = (*(data + len - 1) != '\n');
+
+	if (res == GNOME_VFS_OK && add_cr)
+		res = gnome_vfs_write (handle, "\n", 1, &written);
 
 	return res;
 }
@@ -178,6 +184,246 @@ real_save_copy (GeditDocument *doc,
 	return TRUE;
 }
 
+#define MAX_URI_IN_DIALOG_LENGTH 50
+
+static void
+run_copy_error_dialog (GtkWindow *parent,
+		       const gchar *dest_uri,
+		       const gchar *details)
+{
+	GtkWidget *dialog;
+	gchar *formatted_dest_uri;
+	gchar *dest_uri_for_display;
+
+	formatted_dest_uri = gnome_vfs_format_uri_for_display (dest_uri);
+
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+	dest_uri_for_display = gedit_utils_str_middle_truncate (formatted_dest_uri, 
+							   MAX_URI_IN_DIALOG_LENGTH);
+	g_free (formatted_dest_uri);
+
+	dialog = gtk_message_dialog_new (parent,
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_OK,
+					 _("Could not save a copy the file to \"%s\""),
+					 dest_uri_for_display);
+
+	if (details != NULL && strcmp (details, " ") != 0)
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  details);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	g_free (dest_uri_for_display);
+}
+
+#undef MAX_URI_IN_DIALOG_LENGTH
+
+static gboolean
+replace_existing_file (GtkWindow *parent, const gchar *uri)
+{
+	GtkWidget *dialog;
+	gint ret;
+	gchar *full_formatted_uri;
+       	gchar *uri_for_display	;
+
+	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
+
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 50);
+	g_return_val_if_fail (uri_for_display != NULL, FALSE);
+	g_free (full_formatted_uri);
+
+	dialog = gtk_message_dialog_new (parent,
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_NONE,
+					 _("A file named \"%s\" already exists.\n"),
+					 uri_for_display);
+
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						 _("Do you want to replace it with the "
+						   "one you are saving?"));
+
+	g_free (uri_for_display);
+
+	gtk_dialog_add_button (GTK_DIALOG (dialog), 
+			       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+
+	gedit_dialog_add_button (GTK_DIALOG (dialog), 
+			_("_Replace"), GTK_STOCK_REFRESH, GTK_RESPONSE_YES);
+
+	gtk_dialog_set_default_response	(GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	ret = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
+
+	return (ret == GTK_RESPONSE_YES);
+}
+
+static gpointer
+analyze_response (GtkFileChooser *chooser, gint response, const gchar *orig_uri)
+{
+	gchar *uri;
+
+	if (response == GTK_RESPONSE_CANCEL ||
+	    response == GTK_RESPONSE_DELETE_EVENT) 
+	{
+		gtk_widget_hide (GTK_WIDGET (chooser));
+		
+		return NULL;
+	}
+
+	uri = gtk_file_chooser_get_uri (chooser);
+
+	if ((uri == NULL) || (strlen (uri) == 0)) 
+	{
+		g_free (uri);
+
+		return NULL;
+	}
+
+	if (gedit_utils_uri_exists (uri))
+	{
+		gchar *canonical_uri = gnome_vfs_make_uri_canonical (uri);
+		g_return_val_if_fail (canonical_uri != NULL, NULL);
+
+		/* we don't allow the copy to overwrite the original */
+		if (orig_uri != NULL && gnome_vfs_uris_match (orig_uri, canonical_uri))
+		{
+			run_copy_error_dialog (GTK_WINDOW (chooser),
+					       uri,
+					      _("You are trying to overwrite the original file"));
+
+			g_free (uri);
+
+			return NULL;
+		}
+		else if (!replace_existing_file (GTK_WINDOW (chooser), uri)) 
+		{
+			g_free (uri);
+
+			return NULL;
+		}
+	}
+
+	gtk_widget_hide (GTK_WIDGET (chooser));
+
+	return uri;
+}
+
+static gboolean
+all_text_files_filter (const GtkFileFilterInfo *filter_info,
+		       gpointer                 data)
+{
+	if (filter_info->mime_type == NULL)
+		return TRUE;
+	
+	if ((strncmp (filter_info->mime_type, "text/", 5) == 0) ||
+            (strcmp (filter_info->mime_type, "application/x-desktop") == 0) ||
+	    (strcmp (filter_info->mime_type, "application/x-perl") == 0) ||
+            (strcmp (filter_info->mime_type, "application/x-python") == 0) ||
+	    (strcmp (filter_info->mime_type, "application/x-php") == 0))
+	{
+	    return TRUE;
+	}
+
+	return FALSE;
+}
+
+static gchar *
+run_copy_file_chooser (GtkWindow *parent,
+		       GeditDocument *orig,
+		       const GeditEncoding **encoding)
+{
+	GtkWidget *chooser;
+	GtkFileFilter *filter;
+	GtkWidget *hbox;
+	GtkWidget *label;
+	GtkWidget *menu;
+	gint res;
+	gpointer retval;
+
+	chooser = gtk_file_chooser_dialog_new (_("Save Copy"),
+					       parent,
+					       GTK_FILE_CHOOSER_ACTION_SAVE,
+					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					       GTK_STOCK_SAVE, GTK_RESPONSE_OK,
+					       NULL);
+
+	gtk_window_set_modal (GTK_WINDOW (chooser), TRUE);
+	gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
+
+	/* Filters */
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("All Files"));
+	gtk_file_filter_add_pattern (filter, "*");
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+	/* Make this filter the default */
+	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, _("All Text Files"));
+	gtk_file_filter_add_custom (filter, 
+				    GTK_FILE_FILTER_MIME_TYPE,
+				    all_text_files_filter, 
+				    NULL, 
+				    NULL);
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+	/* encoding option menu */
+	hbox = gtk_hbox_new (FALSE, 6);
+
+	label = gtk_label_new_with_mnemonic (_("_Character Coding:"));
+	menu = gedit_encodings_option_menu_new (TRUE);
+
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), menu);				       		
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	gtk_box_pack_end (GTK_BOX (hbox), menu, TRUE, TRUE, 0);
+	gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (chooser), hbox);
+	gtk_widget_show_all (hbox);
+
+	if (*encoding != NULL)
+		gedit_encodings_option_menu_set_selected_encoding (
+				GEDIT_ENCODINGS_OPTION_MENU (menu),
+				*encoding);
+
+	do 
+	{
+		gchar *orig_uri = gedit_document_get_raw_uri (orig);
+
+		res = gtk_dialog_run (GTK_DIALOG (chooser));
+
+		retval = analyze_response (GTK_FILE_CHOOSER (chooser), res, orig_uri);
+
+		g_free (orig_uri);
+	}
+	while (GTK_WIDGET_VISIBLE (chooser));
+
+	if ((retval != NULL) && (encoding != NULL))
+		*encoding = gedit_encodings_option_menu_get_selected_encoding (GEDIT_ENCODINGS_OPTION_MENU (menu));
+
+	gtk_widget_destroy (chooser);
+
+	return retval;
+}
+
 static void
 save_copy_cb (BonoboUIComponent *uic,
 	      gpointer user_data,
@@ -185,7 +431,6 @@ save_copy_cb (BonoboUIComponent *uic,
 {
 	GeditDocument *doc;
 	gchar *file_uri;
-	gchar *untitled_name = NULL;
 	const GeditEncoding *encoding;
 
 	gedit_debug (DEBUG_PLUGINS, "");
@@ -195,28 +440,10 @@ save_copy_cb (BonoboUIComponent *uic,
 
 	encoding = gedit_document_get_encoding (doc);
 
-	if (gedit_document_is_untitled (doc))
-	{
-		untitled_name = gedit_document_get_uri (doc);
-		if (untitled_name == NULL)
-			untitled_name = g_strdup ("Untitled");
-	}
-	else
-	{
-		untitled_name = gedit_document_get_short_name (doc);
-	}
-	g_return_if_fail (untitled_name != NULL);
-
-	file_uri = gedit_file_selector_save (
+	file_uri = run_copy_file_chooser (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
-			TRUE,
-		        _("Save a Copy..."), 
-			NULL,
-			NULL,
-			untitled_name,
+			doc,
 			&encoding);
-
-	g_free (untitled_name);
 
 	if (file_uri != NULL) 
 	{
@@ -232,9 +459,9 @@ save_copy_cb (BonoboUIComponent *uic,
 		{
 			g_return_if_fail (error != NULL);
 
-			gedit_error_reporting_saving_file (uri,
-							   error,
-							   GTK_WINDOW (gedit_get_active_window ()));
+			run_copy_error_dialog (
+				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				uri, error->message);
 
 			g_error_free (error);
 		}
