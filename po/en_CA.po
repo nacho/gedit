@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-12 01:44-0500\n"
-"PO-Revision-Date: 2005-02-12 23:18-0500\n"
+"POT-Creation-Date: 2005-02-17 18:32-0500\n"
+"PO-Revision-Date: 2005-02-17 23:18-0500\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -211,19 +211,26 @@ msgstr "Maximum Recent Files"
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maximum number of actions that gedit will be able to undo or redo."
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:33
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -231,208 +238,218 @@ msgstr ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "Print Header"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "Print Line Numbers"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "Print Syntax Highlighting"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "Printing Line Wrapping Mode"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "Right Margin Position"
 
-#: data/gedit.schemas.in.h:41
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
 msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "Selected Text Colour"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "Selection Colour"
 
-#: data/gedit.schemas.in.h:47
-msgid ""
-"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
-msgstr ""
-"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
-
-#: data/gedit.schemas.in.h:48
-msgid ""
-"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
-"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-msgstr ""
-"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
-"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-
-#: data/gedit.schemas.in.h:49
-msgid ""
-"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
-"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-msgstr ""
-"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
-"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
-"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
-"the values are case-sensitive, so make sure they appear exactly as mentioned "
-"here."
-
-#: data/gedit.schemas.in.h:50
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
-msgstr ""
-"Specifies the font to use for a document's body when printing documents."
-
-#: data/gedit.schemas.in.h:51
-msgid ""
-"Specifies the font to use for a document's body when printing documents. "
-"This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr ""
-"Specifies the font to use for a document's body when printing documents. "
-"This is a gnome-print font name and replaced by print_font_body_pango."
-
-#: data/gedit.schemas.in.h:52
-msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero."
-msgstr ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero."
-
-#: data/gedit.schemas.in.h:53
-msgid ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
-"gnome-print font name and replaced by print_font_numbers_pango."
-msgstr ""
-"Specifies the font to use for line numbers when printing. This will only "
-"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
-"gnome-print font name and replaced by print_font_numbers_pango."
-
-#: data/gedit.schemas.in.h:54
-msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on."
-msgstr ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on."
-
-#: data/gedit.schemas.in.h:55
-msgid ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on. This is a "
-"gnome-print font name and replaced by print_font_header_pango."
-msgstr ""
-"Specifies the font to use for page headers when printing a document. This "
-"will only take effect if the \"Print Header\" option is turned on. This is a "
-"gnome-print font name and replaced by print_font_header_pango."
-
-#: data/gedit.schemas.in.h:56
-msgid ""
-"Specifies the maximum number of recently opened files that will be displayed "
-"in the \"Recent Files\" submenu."
-msgstr ""
-"Specifies the maximum number of recently opened files that will be displayed "
-"in the \"Recent Files\" submenu."
-
-#: data/gedit.schemas.in.h:57
-msgid ""
-"Specifies the number of spaces that should be displayed instead of Tab "
-"characters."
-msgstr ""
-"Specifies the number of spaces that should be displayed instead of Tab "
-"characters."
-
-#: data/gedit.schemas.in.h:58
-msgid "Specifies the position of the right margin."
-msgstr "Specifies the position of the right margin."
-
-#: data/gedit.schemas.in.h:59
-msgid "Status Bar is Visible"
-msgstr "Status Bar is Visible"
-
-#: data/gedit.schemas.in.h:60
-msgid ""
-"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
-"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
-"only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
-"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
-"Note that the values are case-sensitive, so make sure they appear exactly as "
-"mentioned here."
-msgstr ""
-"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
-"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
-"only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
-"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
-"Note that the values are case-sensitive, so make sure they appear exactly as "
-"mentioned here."
-
-#: data/gedit.schemas.in.h:61
-msgid "Tab Size"
-msgstr "Tab Size"
-
-#: data/gedit.schemas.in.h:62
-msgid "Text Color"
-msgstr "Text Colour"
-
-#: data/gedit.schemas.in.h:63
-msgid "Toolbar Buttons Style"
-msgstr "Toolbar Buttons Style"
-
 #: data/gedit.schemas.in.h:64
-msgid "Toolbar is Visible"
-msgstr "Toolbar is Visible"
+msgid ""
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
+msgstr ""
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
 
 #: data/gedit.schemas.in.h:65
-msgid "Undo Actions Limit"
-msgstr "Undo Actions Limit"
+msgid ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 
 #: data/gedit.schemas.in.h:66
-msgid "Use Default Colors"
-msgstr "Use Default Colours"
+msgid ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
 
 #: data/gedit.schemas.in.h:67
-msgid "Use Default Font"
-msgstr "Use Default Font"
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
+msgstr ""
+"Specifies the font to use for a document's body when printing documents."
 
 #: data/gedit.schemas.in.h:68
 msgid ""
+"Specifies the font to use for a document's body when printing documents. "
+"This is a gnome-print font name and replaced by print_font_body_pango."
+msgstr ""
+"Specifies the font to use for a document's body when printing documents. "
+"This is a gnome-print font name and replaced by print_font_body_pango."
+
+#: data/gedit.schemas.in.h:69
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+
+#: data/gedit.schemas.in.h:70
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
+"gnome-print font name and replaced by print_font_numbers_pango."
+msgstr ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero. This is a "
+"gnome-print font name and replaced by print_font_numbers_pango."
+
+#: data/gedit.schemas.in.h:71
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+
+#: data/gedit.schemas.in.h:72
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on. This is a "
+"gnome-print font name and replaced by print_font_header_pango."
+msgstr ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on. This is a "
+"gnome-print font name and replaced by print_font_header_pango."
+
+#: data/gedit.schemas.in.h:73
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+
+#: data/gedit.schemas.in.h:74
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+
+#: data/gedit.schemas.in.h:75
+msgid "Specifies the position of the right margin."
+msgstr "Specifies the position of the right margin."
+
+#: data/gedit.schemas.in.h:76
+msgid "Status Bar is Visible"
+msgstr "Status Bar is Visible"
+
+#: data/gedit.schemas.in.h:77
+msgid ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
+"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+msgstr ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text, and "
+"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" to display prioritized text beside icons. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+
+#: data/gedit.schemas.in.h:78
+msgid "Tab Size"
+msgstr "Tab Size"
+
+#: data/gedit.schemas.in.h:79
+msgid "Text Color"
+msgstr "Text Colour"
+
+#: data/gedit.schemas.in.h:80
+msgid "Toolbar Buttons Style"
+msgstr "Toolbar Buttons Style"
+
+#: data/gedit.schemas.in.h:81
+msgid "Toolbar is Visible"
+msgstr "Toolbar is Visible"
+
+#: data/gedit.schemas.in.h:82
+msgid "Undo Actions Limit"
+msgstr "Undo Actions Limit"
+
+#: data/gedit.schemas.in.h:83
+msgid "Use Default Colors"
+msgstr "Use Default Colours"
+
+#: data/gedit.schemas.in.h:84
+msgid "Use Default Font"
+msgstr "Use Default Font"
+
+#: data/gedit.schemas.in.h:85
+msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
@@ -441,7 +458,7 @@ msgstr ""
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -449,55 +466,55 @@ msgstr ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Whether gedit should display line numbers in the editing area."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Whether gedit should display the right margin in the editing area."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "Whether gedit should enable auto indentation."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Whether gedit should enable syntax highlighting."
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Whether gedit should highlight matching bracket."
 
-#: data/gedit.schemas.in.h:75
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
 msgstr "Whether gedit should highlight the current line."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 "Whether gedit should include a document header when printing documents."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Whether gedit should insert spaces instead of tabs."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Whether gedit should print syntax highlighting when printing documents."
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Whether the status bar at the bottom of editing windows should be visible."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Whether the toolbar should be visible in editing windows."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -509,7 +526,7 @@ msgstr ""
 "specified in the \"Background Colour\", \"Text Colour\", \"Selected Text "
 "Colour\", and \"Selection Colour\" options."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -521,14 +538,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -634,7 +651,6 @@ msgstr[1] ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "S_elect the documents you want to save:"
 
@@ -1143,26 +1159,6 @@ msgstr "Enter the _location (URI) of the file you would like to open:"
 #: gedit/dialogs/uri.glade2.h:4
 msgid "Open from URI"
 msgstr "Open from URI"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr "If you don't save your documents, all your changes will be lost."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "Save _None"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "_Save Selected"
 
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
@@ -2342,16 +2338,16 @@ msgstr " (invalid Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:841
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln %d, Col %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:877
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:879
 msgid "  INS"
 msgstr "  INS"
 
@@ -3334,600 +3330,600 @@ msgid "Declare flag"
 msgstr "Declare flag"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
+msgid "Defer attribute"
+msgstr "Defer attribute"
+
+#: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
 msgstr "Definition description"
 
-#: plugins/taglist/HTML.tags.xml.in.h:50
+#: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr "Definition list"
 
-#: plugins/taglist/HTML.tags.xml.in.h:51
+#: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr "Definition term"
 
-#: plugins/taglist/HTML.tags.xml.in.h:52
+#: plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Deleted text"
 msgstr "Deleted text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:53
+#: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Direction"
 msgstr "Direction"
 
-#: plugins/taglist/HTML.tags.xml.in.h:54
+#: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr "Directionality"
 
-#: plugins/taglist/HTML.tags.xml.in.h:55
+#: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr "Directory list"
 
-#: plugins/taglist/HTML.tags.xml.in.h:56
+#: plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Disabled"
 msgstr "Disabled"
 
-#: plugins/taglist/HTML.tags.xml.in.h:57
+#: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document base"
 msgstr "Document base"
 
-#: plugins/taglist/HTML.tags.xml.in.h:58
+#: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document body"
 msgstr "Document body"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document head"
 msgstr "Document head"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document title"
 msgstr "Document title"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document type"
 msgstr "Document type"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Element ID"
 msgstr "Element ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr "Embedded object"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Emphasis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:65
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr "Encode type"
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr "Figure"
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "Font face"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "For label"
 msgstr "For label"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "Forced line break"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form"
 msgstr "Form"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr "Form action handler"
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr "Form control group"
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr "Form field label text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr "Form input"
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr "Form input type"
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr "Form method"
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr "Forward link"
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame"
 msgstr "Frame"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr "Frame render parts"
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr "Frame source"
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr "Frame target"
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameborder"
 msgstr "Frameborder"
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset"
 msgstr "Frameset"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
 msgstr "Frameset columns"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr "Frameset rows"
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr "Framespacing"
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr "Generic embedded object"
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr "Generic metainformation"
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Generic span"
 msgstr "Generic span"
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr "HTML - Special Characters"
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr "HTML - Tags"
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr "HTML root element"
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr "HTML version"
 
-#: plugins/taglist/HTML.tags.xml.in.h:95
+#: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr "HTTP header name"
 
-#: plugins/taglist/HTML.tags.xml.in.h:96
+#: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr "Header cell IDs"
 
-#: plugins/taglist/HTML.tags.xml.in.h:97
+#: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr "Heading"
 
-#: plugins/taglist/HTML.tags.xml.in.h:98
+#: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr "Heading 1"
 
-#: plugins/taglist/HTML.tags.xml.in.h:99
+#: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr "Heading 2"
 
-#: plugins/taglist/HTML.tags.xml.in.h:100
+#: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr "Heading 3"
 
-#: plugins/taglist/HTML.tags.xml.in.h:101
+#: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr "Heading 4"
 
-#: plugins/taglist/HTML.tags.xml.in.h:102
+#: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr "Heading 5"
 
-#: plugins/taglist/HTML.tags.xml.in.h:103
+#: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr "Heading 6"
 
-#: plugins/taglist/HTML.tags.xml.in.h:104
+#: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr "Height"
 
-#: plugins/taglist/HTML.tags.xml.in.h:105
+#: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr "Horizontal rule"
 
-#: plugins/taglist/HTML.tags.xml.in.h:106
+#: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr "Horizontal space"
 
-#: plugins/taglist/HTML.tags.xml.in.h:107
+#: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr "I18N BiDi over-ride"
 
-#: plugins/taglist/HTML.tags.xml.in.h:108
+#: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
 msgstr "Image"
 
-#: plugins/taglist/HTML.tags.xml.in.h:109
+#: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr "Image map"
 
-#: plugins/taglist/HTML.tags.xml.in.h:110
+#: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr "Image map area"
 
-#: plugins/taglist/HTML.tags.xml.in.h:111
+#: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr "Image map name"
 
-#: plugins/taglist/HTML.tags.xml.in.h:112
+#: plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr "Image source"
 
-#: plugins/taglist/HTML.tags.xml.in.h:113
+#: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline frame"
 msgstr "Inline frame"
 
-#: plugins/taglist/HTML.tags.xml.in.h:114
+#: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr "Inline layer"
 
-#: plugins/taglist/HTML.tags.xml.in.h:115
+#: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Inserted text"
 msgstr "Inserted text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:116
+#: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr "Instance definition"
 
-#: plugins/taglist/HTML.tags.xml.in.h:117
+#: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Italic text"
 msgstr "Italic text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:118
+#: plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr "Java applet"
 
-#: plugins/taglist/HTML.tags.xml.in.h:119
+#: plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "Label"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
+#: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
 msgstr "Language code"
 
-#: plugins/taglist/HTML.tags.xml.in.h:121
+#: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr "Large text style"
 
-#: plugins/taglist/HTML.tags.xml.in.h:122
+#: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr "Layer"
 
-#: plugins/taglist/HTML.tags.xml.in.h:123
+#: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Link color"
 msgstr "Link colour"
 
-#: plugins/taglist/HTML.tags.xml.in.h:124
+#: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr "List item"
 
-#: plugins/taglist/HTML.tags.xml.in.h:125
+#: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
 msgstr "List of MIME types for file upload"
 
-#: plugins/taglist/HTML.tags.xml.in.h:126
+#: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr "List of supported character sets"
 
-#: plugins/taglist/HTML.tags.xml.in.h:127
+#: plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr "Listing"
 
-#: plugins/taglist/HTML.tags.xml.in.h:128
+#: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Local change to font"
 msgstr "Local change to font"
 
-#: plugins/taglist/HTML.tags.xml.in.h:129
+#: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long description link"
 msgstr "Long description link"
 
-#: plugins/taglist/HTML.tags.xml.in.h:130
+#: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr "Long quotation"
 
-#: plugins/taglist/HTML.tags.xml.in.h:131
+#: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
 msgstr "Mail link"
 
-#: plugins/taglist/HTML.tags.xml.in.h:132
+#: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr "Margin pixel height"
 
-#: plugins/taglist/HTML.tags.xml.in.h:133
+#: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr "Margin pixel width"
 
-#: plugins/taglist/HTML.tags.xml.in.h:134
+#: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr "Marquee"
 
-#: plugins/taglist/HTML.tags.xml.in.h:135
+#: plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Maximum length of text field"
 msgstr "Maximum length of text field"
 
-#: plugins/taglist/HTML.tags.xml.in.h:136
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr "Media-independent link"
 
-#: plugins/taglist/HTML.tags.xml.in.h:137
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
 msgstr "Menu list"
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
 msgstr "Multi-line text field"
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
 msgstr "Multicolumn"
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
 msgstr "Multiple"
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Name"
 msgstr "Name"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr "Named property value"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr "Next ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr "No URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr "No embedded objects"
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr "No frames"
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr "No layers"
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr "No line break"
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No resize"
 msgstr "No resize"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr "No script"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr "No shade"
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr "No word wrap"
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr "Note"
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object applet file"
 msgstr "Object applet file"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr "Object data reference"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr "Offset for alignment character"
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr "OnBlur event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnChange event"
 msgstr "OnChange event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr "OnClick event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr "OnDblClick event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr "OnFocus event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr "OnKeyDown event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr "OnKeyPress event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr "OnKeyUp event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr "OnLoad event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr "OnMouseDown event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr "OnMouseMove event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr "OnMouseOut event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr "OnMouseOver event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr "OnMouseUp event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr "OnReset event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr "OnSelect event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr "OnSubmit event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr "OnUnload event"
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr "Option group"
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Option selector"
 msgstr "Option selector"
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr "Ordered list"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Output media"
 msgstr "Output media"
 
-#: plugins/taglist/HTML.tags.xml.in.h:179
+#: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr "Paragraph"
 
-#: plugins/taglist/HTML.tags.xml.in.h:180
+#: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr "Paragraph class"
 
-#: plugins/taglist/HTML.tags.xml.in.h:181
+#: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr "Paragraph style"
 
-#: plugins/taglist/HTML.tags.xml.in.h:182
+#: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr "Preformatted listing"
 
-#: plugins/taglist/HTML.tags.xml.in.h:183
+#: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Preformatted text"
 msgstr "Preformatted text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:184
+#: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr "Profile metainfo dictionary"
 
-#: plugins/taglist/HTML.tags.xml.in.h:185
+#: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr "Prompt message"
 
-#: plugins/taglist/HTML.tags.xml.in.h:186
+#: plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Push button"
 msgstr "Push button"
 
-#: plugins/taglist/HTML.tags.xml.in.h:187
+#: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Quote"
 msgstr "Quote"
 
-#: plugins/taglist/HTML.tags.xml.in.h:188
+#: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Range"
 msgstr "Range"
 
-#: plugins/taglist/HTML.tags.xml.in.h:189
+#: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr "Read-Only text and password"
 
-#: plugins/taglist/HTML.tags.xml.in.h:190
+#: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr "Reduced spacing"
 
-#: plugins/taglist/HTML.tags.xml.in.h:191
+#: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Reverse link"
 msgstr "Reverse link"
 
-#: plugins/taglist/HTML.tags.xml.in.h:192
+#: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr "Root"
 
-#: plugins/taglist/HTML.tags.xml.in.h:193
+#: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr "Rows"
 
-#: plugins/taglist/HTML.tags.xml.in.h:194
+#: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr "Rulings between rows and columns"
 
-#: plugins/taglist/HTML.tags.xml.in.h:195
+#: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr "Sample program output, scripts"
 
-#: plugins/taglist/HTML.tags.xml.in.h:196
+#: plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Scope covered by header cells"
 msgstr "Scope covered by header cells"
-
-#: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
-msgstr "Script execution defer"
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Script language name"
