@@ -216,44 +216,47 @@ gE_show_version(void)
  *  GNOME CODE BEGINS
  */
 
+GSList *launch_plugins = NULL;
 
-static struct argp_option argp_options [] = {
-  { "launch-plugin", 'p', N_("Plugin Name"), 0, N_("Launch a plugin at startup"), 1 },
-  { NULL, 0, NULL, 0, NULL, 0 },
+static void
+add_launch_plugin(poptContext ctx,
+		  enum poptCallbackReason reason,
+		  const struct poptOption *opt,
+		  char *arg, void *data)
+{
+  if(opt->shortName == 'p') {
+    launch_plugins = g_slist_append(launch_plugins, arg);
+  } /* else something's weird :) */
+}
+
+static void
+launch_plugin(char *name, gpointer userdata)
+{
+  GString *fullname;
+  plugin_callback_struct callbacks;
+  plugin *plug;
+
+  fullname = g_string_new(NULL);
+  g_string_sprintf( fullname, "%s/%s%s", PLUGINDIR, name, "-plugin" );
+	      
+  plug = plugin_new( fullname->str );
+
+  setup_callbacks( &callbacks );
+	      
+  plugin_register( plug, &callbacks, 0 );
+
+  g_string_free( fullname, TRUE );
+}
+
+static const struct poptOption options[] = {
+      /* We want to use a callback for this launch-plugin thing so we
+         can get multiple opts */
+    {NULL, '\0', POPT_ARG_CALLBACK, &add_launch_plugin, 0 },
+    {"launch-plugin", 'p', POPT_ARG_STRING, NULL, 0, N_("Launch a plugin at startup"), N_("PLUGIN-NAME")},
+    {NULL, '\0', 0, NULL, 0}
 };
 
 static GList *file_list;
-
-static error_t
-parse_an_arg (int key, char *arg, struct argp_state *state)
-{
-  if (key == 'p')
-    {
-      gchar *fullname;
-      plugin_callback_struct callbacks;
-      plugin *plug;
-  
-      fullname = g_new( gchar, strlen( PLUGINDIR ) + strlen( arg ) + 2 + strlen( "-plugin" ) );
-      sprintf( fullname, "%s/%s%s", PLUGINDIR, arg, "-plugin" );
-      
-      plug = plugin_new( fullname );
-      
-      setup_callbacks (&callbacks);
-      
-      plugin_register( plug, &callbacks, 0 );
-      
-      g_free( fullname );
-      return 0;
-    }
-  if (key == ARGP_KEY_ARG)
-    file_list = g_list_append (file_list, arg);
-  return 0;
-}
-
-static struct argp parser =
-{
-	argp_options, parse_an_arg, NULL, NULL, NULL, NULL, NULL
-};
 
 #ifdef HAVE_LIBGNORBA
 
@@ -290,10 +293,13 @@ int main (int argc, char **argv)
 	gE_window *window;
 	gE_data *data;
 	plugin_callback_struct callbacks;
+	char **args;
+	poptContext ctx;
+	int i;
 
-	argp_program_version = VERSION;
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
+
 
 #ifdef HAVE_LIBGNORBA
 
@@ -301,7 +307,7 @@ int main (int argc, char **argv)
 
 	CORBA_exception_init (global_ev);
 	global_orb = gnome_CORBA_init
-		("gedit", &parser, &argc, argv, 0, NULL, global_ev);
+		("gEdit", VERSION, &argc, argv, options, 0, &ctx, global_ev);
 	corba_exception (global_ev);
 	
 	root_poa = CORBA_ORB_resolve_initial_references
@@ -319,10 +325,21 @@ int main (int argc, char **argv)
 
 #else
 
-	gnome_init ("gEdit", &parser, argc, argv, 0, NULL);
-
+	gnome_init_with_popt_table ("gEdit", VERSION, argc, argv, options, 0, &ctx);
+	
 #endif /* HAVE_LIBGNORBA */
 
+	g_slist_foreach(launch_plugins, launch_plugin, NULL);
+	g_slist_free(launch_plugins);
+
+	args = poptGetArgs(ctx);
+
+	for(i = 0; args && args[i]; i++) {
+	  file_list = g_list_append (file_list, args[i]);
+	}
+	
+	poptFreeContext(ctx);
+	
 	gE_rc_parse();
 
 	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
