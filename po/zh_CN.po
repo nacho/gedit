@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-11 12:12+0200\n"
+"POT-Creation-Date: 2004-10-10 13:49+0200\n"
 "PO-Revision-Date: 2004-08-19 12:57+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -454,7 +454,7 @@ msgid "Do_n't save"
 msgstr "不保存(_N)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+#: gedit/gedit-file-selector-util.c:139 gedit/gedit-file.c:704
 msgid "Question"
 msgstr "问题"
 
@@ -539,7 +539,7 @@ msgid "_Go to Line"
 msgstr "跳到行(_G)"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1125 gedit/gedit-commands.c:392
+#: gedit/dialogs/gedit-dialog-replace.c:1125 gedit/gedit-commands.c:379
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "找不到文字“%s” 。"
@@ -554,7 +554,7 @@ msgid "Replace _All"
 msgstr "全部替换(_A)"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:134
+#: gedit/gedit-file-selector-util.c:133
 msgid "_Replace"
 msgstr "替换(_R)"
 
@@ -1128,7 +1128,7 @@ msgstr "输入您想打开文件的位置(URI)(_L)："
 msgid "Open from URI"
 msgstr "从 URI 打开"
 
-#: gedit/gedit-commands.c:544
+#: gedit/gedit-commands.c:536
 msgid "translator_credits"
 msgstr ""
 "Dillion Chen <dillon.chen@turbolinux.com.cn>\n"
@@ -1138,11 +1138,11 @@ msgstr ""
 "Miles Hoo <MilesHoo@sohu.com>, 2002\n"
 "Funda Wang <fundawang@linux.net.cn>, 2003,2004"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:549
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:561
+#: gedit/gedit-commands.c:553
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit 是 GNOME 桌面的小型文本编辑器"
 
@@ -1159,34 +1159,34 @@ msgstr "无标题"
 msgid "Invalid file name"
 msgstr "无效文件名"
 
-#: gedit/gedit-document.c:838 gedit/gedit-document.c:1314
+#: gedit/gedit-document.c:838 gedit/gedit-document.c:1399
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "UTF-8 数据无效"
 
-#: gedit/gedit-document.c:1640
+#: gedit/gedit-document.c:1725
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "无法读入 %s 的符号链接信息"
 
-#: gedit/gedit-document.c:1686
+#: gedit/gedit-document.c:1771
 msgid "The file has too many symbolic links."
 msgstr "该文件有太多的符号链接。"
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1827
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit 无法在写入模式下处理 %s: 位置。"
 
-#: gedit/gedit-document.c:1749
+#: gedit/gedit-document.c:1834
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit 无法在写入模式下处理此类位置。"
 
-#: gedit/gedit-document.c:1762
+#: gedit/gedit-document.c:1847
 msgid "Invalid filename."
 msgstr "无效的文件名。"
 
-#: gedit/gedit-document.c:1874
+#: gedit/gedit-document.c:1959
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1194,7 +1194,7 @@ msgstr ""
 "没有足够的磁盘空间用于保存文件。\n"
 "请释放一些磁盘空间，然后重试。"
 
-#: gedit/gedit-document.c:1879
+#: gedit/gedit-document.c:1964
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1202,7 +1202,7 @@ msgid ""
 msgstr ""
 "磁盘有文件大小的限制，请保存较小的文件或者将文件保存到没有此限制的磁盘上。"
 
-#: gedit/gedit-document.c:1923
+#: gedit/gedit-document.c:2008
 msgid "Could not create a backup file."
 msgstr "gedit 无法创建一个临时文件。"
 
@@ -1332,77 +1332,77 @@ msgstr "越南语"
 msgid "Thai"
 msgstr "泰语"
 
-#: gedit/gedit-file-selector-util.c:153
+#: gedit/gedit-file-selector-util.c:152
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "名为“%s”的文件已经存在。\n"
 
-#: gedit/gedit-file-selector-util.c:154
+#: gedit/gedit-file-selector-util.c:153
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "您想要将其替换为您正在保存的文件吗？"
 
-#: gedit/gedit-file-selector-util.c:163
+#: gedit/gedit-file-selector-util.c:162
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "文件“%s”为只读。\n"
 
-#: gedit/gedit-file-selector-util.c:164
+#: gedit/gedit-file-selector-util.c:163
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "您想要试着将其替换为您正在保存的文件吗？"
 
-#: gedit/gedit-file-selector-util.c:362
+#: gedit/gedit-file-selector-util.c:361
 msgid "All Files"
 msgstr "全部文件"
 
-#: gedit/gedit-file-selector-util.c:370
+#: gedit/gedit-file-selector-util.c:369
 msgid "All Text Files"
 msgstr "全部文本文件"
 
-#: gedit/gedit-file-selector-util.c:388
+#: gedit/gedit-file-selector-util.c:387
 msgid "Ch_aracter Coding:"
 msgstr "字符编码(_A)："
 
-#: gedit/gedit-file-selector-util.c:534
+#: gedit/gedit-file-selector-util.c:533
 msgid "Select a file to open"
 msgstr "选择要打开的文件"
 
-#: gedit/gedit-file-selector-util.c:560
+#: gedit/gedit-file-selector-util.c:559
 msgid "Select files to open"
 msgstr "选择要打开的文件"
 
-#: gedit/gedit-file-selector-util.c:592
+#: gedit/gedit-file-selector-util.c:591
 msgid "Select a filename to save"
 msgstr "选择要保存的文件名"
 
-#: gedit/gedit-file.c:213
+#: gedit/gedit-file.c:215
 msgid "Open File..."
 msgstr "打开文件..."
 
-#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
+#: gedit/gedit-file.c:271 gedit/gedit-file.c:424
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "正在保存文档“%s”..."
 
-#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
+#: gedit/gedit-file.c:299 gedit/gedit-file.c:445
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "文档“%s”尚未保存。"
 
-#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
+#: gedit/gedit-file.c:313 gedit/gedit-file.c:437
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "文档“%s”已保存。"
 
-#: gedit/gedit-file.c:402
+#: gedit/gedit-file.c:404
 msgid "Save as..."
 msgstr "另存为..."
 
-#: gedit/gedit-file.c:603
+#: gedit/gedit-file.c:605
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "还原对文档“%s”未保存的更改吗？"
 
-#: gedit/gedit-file.c:612
+#: gedit/gedit-file.c:614
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1411,12 +1411,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:621
+#: gedit/gedit-file.c:623
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "上一分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:627
+#: gedit/gedit-file.c:629
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1426,7 +1426,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一分钟零 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:637
+#: gedit/gedit-file.c:639
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1435,11 +1435,11 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:652
+#: gedit/gedit-file.c:654
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "上一小时内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:660
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1449,7 +1449,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一小时零 %d 分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:675
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1457,64 +1457,64 @@ msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "前 %d 小时内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "还原(_R)"
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:747
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "还原文档“%s”出错。"
 
-#: gedit/gedit-file.c:752
+#: gedit/gedit-file.c:754
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "文档“%s”未还原。"
 
-#: gedit/gedit-file.c:756
+#: gedit/gedit-file.c:758
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "文档“%s”已还原。"
 
-#: gedit/gedit-file.c:784
+#: gedit/gedit-file.c:786
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "正在还原文档“%s”..."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:913
 msgid "Could not read data from stdin."
 msgstr "无法从标准输入中读数据。"
 
-#: gedit/gedit-file.c:1059
+#: gedit/gedit-file.c:1060
 msgid "Reverting file:"
 msgstr "正在还原文件："
 
-#: gedit/gedit-file.c:1063
+#: gedit/gedit-file.c:1060
 msgid "Loading file:"
 msgstr "装入文件："
 
-#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1233 gedit/gedit-file.c:1392
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "装入文件“%s”出错"
 
-#: gedit/gedit-file.c:1252
+#: gedit/gedit-file.c:1254
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "已载入文件“%s”"
 
-#: gedit/gedit-file.c:1329
+#: gedit/gedit-file.c:1331
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "已载入 %d 个文件"
 
-#: gedit/gedit-file.c:1363
+#: gedit/gedit-file.c:1365
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "正在文件“%s”..."
 
-#: gedit/gedit-file.c:1510
+#: gedit/gedit-file.c:1512
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1526,57 +1526,57 @@ msgid "RO"
 msgstr "只读"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:636 gedit/gedit-ui.xml.h:85
+#: gedit/gedit-mdi-child.c:649 gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
 msgstr "移动到新窗口(_M)"
 
-#: gedit/gedit-mdi-child.c:755
+#: gedit/gedit-mdi-child.c:768
 msgid "Unknown"
 msgstr "未知"
 
-#: gedit/gedit-mdi-child.c:766
+#: gedit/gedit-mdi-child.c:779
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:773
+#: gedit/gedit-mdi-child.c:786
 msgid "Name:"
 msgstr "名称："
 
-#: gedit/gedit-mdi-child.c:774
+#: gedit/gedit-mdi-child.c:787
 msgid "MIME Type:"
 msgstr "MIME 类型："
 
-#: gedit/gedit-mdi-child.c:775
+#: gedit/gedit-mdi-child.c:788
 msgid "Encoding:"
 msgstr "编码："
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
+#: gedit/gedit-mdi.c:291 gedit/gedit-mdi.c:451
 #, c-format
 msgid "Open '%s'"
 msgstr "打开“%s”"
 
-#: gedit/gedit-mdi.c:519
+#: gedit/gedit-mdi.c:526
 msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
-#: gedit/gedit-mdi.c:1278
+#: gedit/gedit-mdi.c:1394
 msgid "(modified)"
 msgstr "(已修改)"
 
-#: gedit/gedit-mdi.c:1284
+#: gedit/gedit-mdi.c:1400
 msgid "(readonly)"
 msgstr "(只读)"
 
-#: gedit/gedit-mdi.c:1912
+#: gedit/gedit-mdi.c:2028
 msgid "Normal"
 msgstr "普通"
 
-#: gedit/gedit-mdi.c:1913
+#: gedit/gedit-mdi.c:2029
 msgid "Use Normal highlight mode"
 msgstr "使用普通突出显示模式"
 
-#: gedit/gedit-mdi.c:1989
+#: gedit/gedit-mdi.c:2105
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
@@ -2072,7 +2072,7 @@ msgstr "撤消(_U)"
 msgid "_View"
 msgstr "查看(_V)"
 
-#: gedit/gedit-utils.c:428
+#: gedit/gedit-utils.c:425
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2083,34 +2083,34 @@ msgstr ""
 "\n"
 "请检查键入的位置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:436
+#: gedit/gedit-utils.c:433
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "无法打开文件“%s”，因为它包含损坏的数据。"
 
-#: gedit/gedit-utils.c:447
+#: gedit/gedit-utils.c:444
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr "无法打开文件“%s”，因为 gedit 不能处理 %s: 位置。"
 
-#: gedit/gedit-utils.c:453
+#: gedit/gedit-utils.c:450
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "无法打开文件“%s”"
 
-#: gedit/gedit-utils.c:463
+#: gedit/gedit-utils.c:460
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "无法打开文件“%s”，因为它包含格式无效的数据。"
 
-#: gedit/gedit-utils.c:470
+#: gedit/gedit-utils.c:467
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "无法打开文件“%s”，因为它太大。"
 
-#: gedit/gedit-utils.c:477
+#: gedit/gedit-utils.c:474
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2121,12 +2121,12 @@ msgstr ""
 "\n"
 "请检查键入的位置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:485
+#: gedit/gedit-utils.c:482
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "无法打开文件“%s”，因为访问被拒绝。"
 
-#: gedit/gedit-utils.c:492
+#: gedit/gedit-utils.c:489
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2137,7 +2137,7 @@ msgstr ""
 "\n"
 "请关闭一些已打开的文件，然后重试。"
 
-#: gedit/gedit-utils.c:500
+#: gedit/gedit-utils.c:497
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2148,14 +2148,25 @@ msgstr ""
 "\n"
 "请检查键入的位置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:508
+#: gedit/gedit-utils.c:505
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
 msgstr "内存不足，无法打开文件“%s”。请关闭一些正在运行的程序，然后重试。"
 
-#: gedit/gedit-utils.c:534
+#: gedit/gedit-utils.c:525 gedit/gedit-utils.c:539 gedit/gedit-utils.c:566
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was invalid.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"无法打开文件“%s”，因为主机名无效。\n"
+"\n"
+"请检查键入的位置是否正确，然后重试。"
+
+#: gedit/gedit-utils.c:550
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2167,18 +2178,7 @@ msgstr ""
 "\n"
 "请检查键入的位置和代理服务器设置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:549
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"无法打开文件“%s”，因为主机名无效。\n"
-"\n"
-"请检查键入的位置是否正确，然后重试。"
-
-#: gedit/gedit-utils.c:558
+#: gedit/gedit-utils.c:575
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2189,7 +2189,7 @@ msgstr ""
 "\n"
 "请检查代理服务器设置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:567
+#: gedit/gedit-utils.c:584
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2200,7 +2200,7 @@ msgstr ""
 "\n"
 "请检查键入的位置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:576 gedit/gedit-utils.c:649
+#: gedit/gedit-utils.c:593 gedit/gedit-utils.c:666
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2211,12 +2211,12 @@ msgstr ""
 "\n"
 "可能您正在尝试打开一个二进制文件。"
 
-#: gedit/gedit-utils.c:585 gedit/gedit-utils.c:683
+#: gedit/gedit-utils.c:602 gedit/gedit-utils.c:700
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "无法打开文件“%s”。"
 
-#: gedit/gedit-utils.c:625
+#: gedit/gedit-utils.c:642
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2231,7 +2231,7 @@ msgstr ""
 "请检查您是否正试图打开一个二进制文件，并在“打开文件...”(或“打开位置”)对话框中"
 "选择一种字符编码。"
 
-#: gedit/gedit-utils.c:637 gedit/gedit-utils.c:667
+#: gedit/gedit-utils.c:654 gedit/gedit-utils.c:684
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2245,7 +2245,7 @@ msgstr ""
 "请检查您是否正试图打开一个二进制文件，以及您在“打开文件...”(或“打开位置”)对话"
 "框中是否选择了正确的字符编码。然后重试。"
 
-#: gedit/gedit-utils.c:687
+#: gedit/gedit-utils.c:704
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2256,12 +2256,12 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:739
+#: gedit/gedit-utils.c:756
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "无法保存文件“%s”。"
 
-#: gedit/gedit-utils.c:743
+#: gedit/gedit-utils.c:760
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2272,7 +2272,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:796
+#: gedit/gedit-utils.c:810
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2283,40 +2283,41 @@ msgstr ""
 "\n"
 "可能它已被删除。"
 
-#: gedit/gedit-utils.c:803
+#: gedit/gedit-utils.c:817
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "无法还原文件“%s”，因为它包含损坏的数据。"
 
-#: gedit/gedit-utils.c:814
+#: gedit/gedit-utils.c:828
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr "无法还原文件“%s”，因为 gedit 不能处理 %s: 位置。"
 
-#: gedit/gedit-utils.c:820 gedit/gedit-utils.c:960
+#: gedit/gedit-utils.c:834 gedit/gedit-utils.c:893 gedit/gedit-utils.c:904
+#: gedit/gedit-utils.c:988
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "无法还原文件“%s”。"
 
-#: gedit/gedit-utils.c:830
+#: gedit/gedit-utils.c:844
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr "无法还原文件“%s”，因为它包含格式无效的数据。"
 
-#: gedit/gedit-utils.c:837
+#: gedit/gedit-utils.c:851
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "无法还原文件“%s”，因为它太大。"
 
-#: gedit/gedit-utils.c:844
+#: gedit/gedit-utils.c:858
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "无法还原文件“%s”，因为访问被拒绝。"
 
-#: gedit/gedit-utils.c:851
+#: gedit/gedit-utils.c:865
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2327,14 +2328,14 @@ msgstr ""
 "\n"
 "请关闭一些已打开的文件，然后重试。"
 
-#: gedit/gedit-utils.c:859
+#: gedit/gedit-utils.c:873
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr "没有足够的内存可用于还原文件“%s”。请关闭一些正在运行的程序，然后重试。"
 
-#: gedit/gedit-utils.c:885
+#: gedit/gedit-utils.c:912
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2345,7 +2346,7 @@ msgstr ""
 "\n"
 "请检查您的代理服务器设置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:899
+#: gedit/gedit-utils.c:927
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2356,12 +2357,12 @@ msgstr ""
 "\n"
 "请检查代理服务器设置是否正确，然后重试。"
 
-#: gedit/gedit-utils.c:906
+#: gedit/gedit-utils.c:934
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "无法还原文件“%s”，因为登录尝试失败。"
 
-#: gedit/gedit-utils.c:913
+#: gedit/gedit-utils.c:941
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2372,16 +2373,16 @@ msgstr ""
 "\n"
 "可能您正在尝试还原一个二进制文件。"
 
-#: gedit/gedit-utils.c:922
+#: gedit/gedit-utils.c:950
 msgid "It is not possible to revert an Untitled document."
 msgstr "您不能还原一个未命名文档的内容。"
 
-#: gedit/gedit-utils.c:1011
+#: gedit/gedit-utils.c:1039
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "文件“%s”已经存在。"
 
-#: gedit/gedit-utils.c:1017
+#: gedit/gedit-utils.c:1045
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2392,7 +2393,7 @@ msgstr ""
 "\n"
 "请检查您是否键入了正确的位置。"
 
-#: gedit/gedit-utils.c:1026
+#: gedit/gedit-utils.c:1054
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2403,7 +2404,7 @@ msgstr ""
 "\n"
 "请确保您有写入的权限。"
 
-#: gedit/gedit-utils.c:1033
+#: gedit/gedit-utils.c:1061
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2414,7 +2415,7 @@ msgstr ""
 "\n"
 "文件名太长。"
 
-#: gedit/gedit-utils.c:1040
+#: gedit/gedit-utils.c:1068
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2426,7 +2427,7 @@ msgstr ""
 "\n"
 "文件名中的某一级目录不存在或者是个目标不存在的符号链接。"
 
-#: gedit/gedit-utils.c:1049
+#: gedit/gedit-utils.c:1077
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2437,7 +2438,7 @@ msgstr ""
 "\n"
 "请释放一些磁盘空间，然后重试。"
 
-#: gedit/gedit-utils.c:1055
+#: gedit/gedit-utils.c:1083
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "无法创建文件“%s”。"
@@ -3014,15 +3015,15 @@ msgstr "设置语言(_L)"
 msgid "Set the language of the current document"
 msgstr "设置当前文档的语言"
 
-#: plugins/spell/spell.c:553
+#: plugins/spell/spell.c:557
 msgid "The document is empty."
 msgstr "文档为空。"
 
-#: plugins/spell/spell.c:571
+#: plugins/spell/spell.c:575
 msgid "The selected text does not contain mispelled words."
 msgstr "选中的文字不包含拼错的单词。"
 
-#: plugins/spell/spell.c:572
+#: plugins/spell/spell.c:576
 msgid "The document does not contain mispelled words."
 msgstr "这个文档不包含拼错的单词。"
 

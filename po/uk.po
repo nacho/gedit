@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-11 12:12+0200\n"
+"POT-Creation-Date: 2004-10-10 13:49+0200\n"
 "PO-Revision-Date: 2004-08-20 11:28+0300\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
@@ -492,7 +492,7 @@ msgid "Do_n't save"
 msgstr "_Не зберігати"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:702
+#: gedit/gedit-file-selector-util.c:139 gedit/gedit-file.c:704
 msgid "Question"
 msgstr "Запитання"
 
@@ -615,7 +615,7 @@ msgid "_Go to Line"
 msgstr "_Перейти на рядок"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1125 gedit/gedit-commands.c:392
+#: gedit/dialogs/gedit-dialog-replace.c:1125 gedit/gedit-commands.c:379
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Текст \"%s\" не знайдено."
@@ -630,7 +630,7 @@ msgid "Replace _All"
 msgstr "Замінити _все"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:134
+#: gedit/gedit-file-selector-util.c:133
 msgid "_Replace"
 msgstr "За_мінити"
 
@@ -1210,17 +1210,17 @@ msgstr "Введіть _адресу (URI) файла, який потрібно
 msgid "Open from URI"
 msgstr "Відкрити з URI"
 
-#: gedit/gedit-commands.c:544
+#: gedit/gedit-commands.c:536
 msgid "translator_credits"
 msgstr ""
 "Юрій Сирота <ysyrota@softservecom.com>\n"
 "Максим Дзюманенко <mvd@mylinux.com.ua>"
 
-#: gedit/gedit-commands.c:557
+#: gedit/gedit-commands.c:549
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-commands.c:561
+#: gedit/gedit-commands.c:553
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit -- це малий і легкий текстовий редактор для GNOME"
 
@@ -1237,34 +1237,34 @@ msgstr "Неназваний"
 msgid "Invalid file name"
 msgstr "Неправильна назва файлу"
 
-#: gedit/gedit-document.c:838 gedit/gedit-document.c:1314
+#: gedit/gedit-document.c:838 gedit/gedit-document.c:1399
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Неправильні дані UTF-8"
 
-#: gedit/gedit-document.c:1640
+#: gedit/gedit-document.c:1725
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Не вдається прочитати інформацію про символьне посилання для %s"
 
-#: gedit/gedit-document.c:1686
+#: gedit/gedit-document.c:1771
 msgid "The file has too many symbolic links."
 msgstr "Файл має надто багато символьних посилань."
 
-#: gedit/gedit-document.c:1742
+#: gedit/gedit-document.c:1827
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit не може працювати з %s: адресами в режимі запису."
 
-#: gedit/gedit-document.c:1749
+#: gedit/gedit-document.c:1834
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit не може працювати з цим типом адрес в режимі запису."
 
-#: gedit/gedit-document.c:1762
+#: gedit/gedit-document.c:1847
 msgid "Invalid filename."
 msgstr "Неправильна назва файла."
 
-#: gedit/gedit-document.c:1874
+#: gedit/gedit-document.c:1959
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1272,7 +1272,7 @@ msgstr ""
 "Недостатньо дискового простору для збереження файла.\n"
 "Звільніть, місце на диску та спробуйте знову."
 
-#: gedit/gedit-document.c:1879
+#: gedit/gedit-document.c:1964
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1282,7 +1282,7 @@ msgstr ""
 "Спробуйте зберегти файл меншого розміру, чи скористуйтесь диском, що не має "
 "такого обмеження."
 
-#: gedit/gedit-document.c:1923
+#: gedit/gedit-document.c:2008
 msgid "Could not create a backup file."
 msgstr "Не вдається створити резервну копію файлу."
 
@@ -1412,77 +1412,77 @@ msgstr "В'єтнамське"
 msgid "Thai"
 msgstr "Таїландське"
 
-#: gedit/gedit-file-selector-util.c:153
+#: gedit/gedit-file-selector-util.c:152
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Файл з назвою \"%s\" вже існує.\n"
 
-#: gedit/gedit-file-selector-util.c:154
+#: gedit/gedit-file-selector-util.c:153
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Замінити його тим, що ви записуєте?"
 
-#: gedit/gedit-file-selector-util.c:163
+#: gedit/gedit-file-selector-util.c:162
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "Файл \"%s\" лише для читання.\n"
 
-#: gedit/gedit-file-selector-util.c:164
+#: gedit/gedit-file-selector-util.c:163
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Спробувати замінити його файлом, що ви записуєте?"
 
-#: gedit/gedit-file-selector-util.c:362
+#: gedit/gedit-file-selector-util.c:361
 msgid "All Files"
 msgstr "Всі файли"
 
-#: gedit/gedit-file-selector-util.c:370
+#: gedit/gedit-file-selector-util.c:369
 msgid "All Text Files"
 msgstr "Всі текстові файли"
 
-#: gedit/gedit-file-selector-util.c:388
+#: gedit/gedit-file-selector-util.c:387
 msgid "Ch_aracter Coding:"
 msgstr "_Кодування символів:"
 
-#: gedit/gedit-file-selector-util.c:534
+#: gedit/gedit-file-selector-util.c:533
 msgid "Select a file to open"
 msgstr "Виберіть файл"
 
-#: gedit/gedit-file-selector-util.c:560
+#: gedit/gedit-file-selector-util.c:559
 msgid "Select files to open"
 msgstr "Виберіть файл"
 
-#: gedit/gedit-file-selector-util.c:592
+#: gedit/gedit-file-selector-util.c:591
 msgid "Select a filename to save"
 msgstr "Оберіть назву файлу для збереження"
 
-#: gedit/gedit-file.c:213
+#: gedit/gedit-file.c:215
 msgid "Open File..."
 msgstr "Відкрити файл..."
 
-#: gedit/gedit-file.c:269 gedit/gedit-file.c:422
+#: gedit/gedit-file.c:271 gedit/gedit-file.c:424
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Збереження документу \"%s\"..."
 
-#: gedit/gedit-file.c:297 gedit/gedit-file.c:443
+#: gedit/gedit-file.c:299 gedit/gedit-file.c:445
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Документ \"%s\" не було збережено."
 
-#: gedit/gedit-file.c:311 gedit/gedit-file.c:435
+#: gedit/gedit-file.c:313 gedit/gedit-file.c:437
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Документ \"%s\" було збережено."
 
-#: gedit/gedit-file.c:402
+#: gedit/gedit-file.c:404
 msgid "Save as..."
 msgstr "Зберегти як..."
 
-#: gedit/gedit-file.c:603
+#: gedit/gedit-file.c:605
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Відновити не збережені зміни в документі \"%s\"?"
 
-#: gedit/gedit-file.c:612
+#: gedit/gedit-file.c:614
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1496,13 +1496,13 @@ msgstr[1] ""
 msgstr[2] ""
 "Зміни, внесені в документ за останні %ld секунд, будуть остаточно втрачені."
 
-#: gedit/gedit-file.c:621
+#: gedit/gedit-file.c:623
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Зміни, внесені в документ за останню хвилину, будуть остаточно втрачені."
 
-#: gedit/gedit-file.c:627
+#: gedit/gedit-file.c:629
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1520,7 +1520,7 @@ msgstr[2] ""
 "Зміни, внесені в документ за останню хвилину та %ld секунд, будуть остаточно "
 "втрачені."
 
-#: gedit/gedit-file.c:637
+#: gedit/gedit-file.c:639
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1534,12 +1534,12 @@ msgstr[1] ""
 msgstr[2] ""
 "Зміни, внесені в документ за останні %ld хвилини, будуть остаточно втрачені."
 
-#: gedit/gedit-file.c:652
+#: gedit/gedit-file.c:654
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Зміни, внесені в документ за останню годину, будуть остаточно втрачені."
 
-#: gedit/gedit-file.c:658
+#: gedit/gedit-file.c:660
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1557,7 +1557,7 @@ msgstr[2] ""
 "Зміни, внесені в документ за останню годину та %d хвилин, будуть остаточно "
 "втрачені."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:675
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1570,53 +1570,53 @@ msgstr[1] ""
 msgstr[2] ""
 "Зміни, внесені в документ за останні %d години, будуть остаточно втрачені."
 
-#: gedit/gedit-file.c:696 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Від_новити"
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:747
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Помилка відновлення документу \"%s\"."
 
-#: gedit/gedit-file.c:752
+#: gedit/gedit-file.c:754
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Документ \"%s\" не було відновлено."
 
-#: gedit/gedit-file.c:756
+#: gedit/gedit-file.c:758
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Документ \"%s\" було відновлено."
 
-#: gedit/gedit-file.c:784
+#: gedit/gedit-file.c:786
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Відновлення документу \"%s\"..."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:913
 msgid "Could not read data from stdin."
 msgstr "Не вдається зчитати дані з стандартного вводу."
 
-#: gedit/gedit-file.c:1059
+#: gedit/gedit-file.c:1060
 msgid "Reverting file:"
 msgstr "Відновлюється файлу:"
 
-#: gedit/gedit-file.c:1063
+#: gedit/gedit-file.c:1060
 msgid "Loading file:"
 msgstr "Завантажується файл:"
 
-#: gedit/gedit-file.c:1231 gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1233 gedit/gedit-file.c:1392
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Помилка завантаження файлу \"%s\""
 
-#: gedit/gedit-file.c:1252
+#: gedit/gedit-file.c:1254
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Завантажено файл \"%s\""
 
-#: gedit/gedit-file.c:1329
+#: gedit/gedit-file.c:1331
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1624,12 +1624,12 @@ msgstr[0] "Завантажено %d файл"
 msgstr[1] "Завантажено %d файли"
 msgstr[2] "Завантажено %d файлів"
 
-#: gedit/gedit-file.c:1363
+#: gedit/gedit-file.c:1365
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Завантажується файл \"%s\"..."
 
-#: gedit/gedit-file.c:1510
+#: gedit/gedit-file.c:1512
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1643,57 +1643,57 @@ msgid "RO"
 msgstr "ЛЧ"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:636 gedit/gedit-ui.xml.h:85
+#: gedit/gedit-mdi-child.c:649 gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
 msgstr "Пере_містити у нове вікно"
 
-#: gedit/gedit-mdi-child.c:755
+#: gedit/gedit-mdi-child.c:768
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: gedit/gedit-mdi-child.c:766
+#: gedit/gedit-mdi-child.c:779
 msgid "Unicode (UTF-8)"
 msgstr "Юнікод (UTF-8)"
 
-#: gedit/gedit-mdi-child.c:773
+#: gedit/gedit-mdi-child.c:786
 msgid "Name:"
 msgstr "Назва:"
 
-#: gedit/gedit-mdi-child.c:774
+#: gedit/gedit-mdi-child.c:787
 msgid "MIME Type:"
 msgstr "MIME тип:"
 
-#: gedit/gedit-mdi-child.c:775
+#: gedit/gedit-mdi-child.c:788
 msgid "Encoding:"
 msgstr "Кодування:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
+#: gedit/gedit-mdi.c:291 gedit/gedit-mdi.c:451
 #, c-format
 msgid "Open '%s'"
 msgstr "Відкрити '%s'"
 
-#: gedit/gedit-mdi.c:519
+#: gedit/gedit-mdi.c:526
 msgid "Open a recently used file"
 msgstr "Відкрити файл, що нещодавно редагувався"
 
-#: gedit/gedit-mdi.c:1278
+#: gedit/gedit-mdi.c:1394
 msgid "(modified)"
 msgstr "(модифіковано)"
 
-#: gedit/gedit-mdi.c:1284
+#: gedit/gedit-mdi.c:1400
 msgid "(readonly)"
 msgstr "(лише зчитування)"
 
-#: gedit/gedit-mdi.c:1912
+#: gedit/gedit-mdi.c:2028
 msgid "Normal"
 msgstr "Звичайне"
 
-#: gedit/gedit-mdi.c:1913
+#: gedit/gedit-mdi.c:2029
 msgid "Use Normal highlight mode"
 msgstr "Використовувати звичайний режим підсвічення синтаксису"
 
-#: gedit/gedit-mdi.c:1989
+#: gedit/gedit-mdi.c:2105
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Використовувати режим підсвічення синтаксису \"%s\""
@@ -2191,7 +2191,7 @@ msgstr "В_ернути"
 msgid "_View"
 msgstr "_Вигляд"
 
-#: gedit/gedit-utils.c:428
+#: gedit/gedit-utils.c:425
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2202,13 +2202,13 @@ msgstr ""
 "\n"
 "Переконайтесь, що шлях введено правильно і спробуйте ще раз."
 
-#: gedit/gedit-utils.c:436
+#: gedit/gedit-utils.c:433
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Не вдається відкрити файл \"%s\" через те, що він містить зіпсовані дані."
 
-#: gedit/gedit-utils.c:447
+#: gedit/gedit-utils.c:444
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -2216,12 +2216,12 @@ msgstr ""
 "Не вдається відкрити файл \"%s\" тому, що програма gedit не може опрацювати "
 "шлях %s."
 
-#: gedit/gedit-utils.c:453
+#: gedit/gedit-utils.c:450
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Не вдається відкрити файл: \"%s\"."
 
-#: gedit/gedit-utils.c:463
+#: gedit/gedit-utils.c:460
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -2229,12 +2229,12 @@ msgstr ""
 "Не вдається відкрити файл \"%s\" через те, що він містить дані у "
 "неправильному форматі."
 
-#: gedit/gedit-utils.c:470
+#: gedit/gedit-utils.c:467
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Не вдається відкрити файл \"%s\" через те, що він надто великий."
 
-#: gedit/gedit-utils.c:477
+#: gedit/gedit-utils.c:474
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2245,12 +2245,12 @@ msgstr ""
 "\n"
 "Переконайтесь, що шлях введено правильно і спробуйте знову."
 
-#: gedit/gedit-utils.c:485
+#: gedit/gedit-utils.c:482
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Не вдається відкрити файл \"%s\" через відмову в доступі."
 
-#: gedit/gedit-utils.c:492
+#: gedit/gedit-utils.c:489
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2262,7 +2262,7 @@ msgstr ""
 "\n"
 "Закрийте декілька файлів і спробуйте знову."
 
-#: gedit/gedit-utils.c:500
+#: gedit/gedit-utils.c:497
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2273,7 +2273,7 @@ msgstr ""
 "\n"
 "Переконайтеся, що ви ввели правильний шлях і спробуйте знову."
 
-#: gedit/gedit-utils.c:508
+#: gedit/gedit-utils.c:505
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2282,7 +2282,18 @@ msgstr ""
 "Недостатньо доступної пам'яті для відкриття файлу \"%s\". Закрийте кілька "
 "запущених програм і спробуйте знову."
 
-#: gedit/gedit-utils.c:534
+#: gedit/gedit-utils.c:525 gedit/gedit-utils.c:539 gedit/gedit-utils.c:566
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was invalid.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Не вдається відкрити файл \"%s\", через неправильну назву вузла.\n"
+"\n"
+"Переконайтесь, що шлях введено правильно і спробуйте ще раз."
+
+#: gedit/gedit-utils.c:550
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2295,18 +2306,7 @@ msgstr ""
 "Переконайтесь, що введений шлях і параметри проксі правильні, та спробуйте "
 "ще раз."
 
-#: gedit/gedit-utils.c:549
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Не вдається відкрити файл \"%s\", через неправильну назву вузла.\n"
-"\n"
-"Переконайтесь, що шлях введено правильно і спробуйте ще раз."
-
-#: gedit/gedit-utils.c:558
+#: gedit/gedit-utils.c:575
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2317,7 +2317,7 @@ msgstr ""
 "\n"
 "Переконайтесь, що шлях введено правильно і спробуйте ще раз."
 
-#: gedit/gedit-utils.c:567
+#: gedit/gedit-utils.c:584
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2328,7 +2328,7 @@ msgstr ""
 "\n"
 "Переконайтесь, що шлях введено правильно і спробуйте ще раз."
 
-#: gedit/gedit-utils.c:576 gedit/gedit-utils.c:649
+#: gedit/gedit-utils.c:593 gedit/gedit-utils.c:666
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2340,12 +2340,12 @@ msgstr ""
 "\n"
 "Напевно, ви намагаєтесь відкрити двійковий файл."
 
-#: gedit/gedit-utils.c:585 gedit/gedit-utils.c:683
+#: gedit/gedit-utils.c:602 gedit/gedit-utils.c:700
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Не вдається відкрити файл \"%s\"."
 
-#: gedit/gedit-utils.c:625
+#: gedit/gedit-utils.c:642
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2361,7 +2361,7 @@ msgstr ""
 "Переконайтесь, що ви не намагаєтесь відкрити двійковий файл і вибрали "
 "правильне кодування символів в діалоговому вікні \"Відкрити файл\"."
 
-#: gedit/gedit-utils.c:637 gedit/gedit-utils.c:667
+#: gedit/gedit-utils.c:654 gedit/gedit-utils.c:684
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2375,7 +2375,7 @@ msgstr ""
 "Переконайтесь, що ви не намагаєтесь відкрити двійковий файл і вибрали "
 "правильне кодування символів в діалоговому вікні \"Відкрити файл\"."
 
-#: gedit/gedit-utils.c:687
+#: gedit/gedit-utils.c:704
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2386,12 +2386,12 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:739
+#: gedit/gedit-utils.c:756
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Не вдається зберегти файл \"%s\"."
 
-#: gedit/gedit-utils.c:743
+#: gedit/gedit-utils.c:760
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2402,7 +2402,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:796
+#: gedit/gedit-utils.c:810
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2413,25 +2413,26 @@ msgstr ""
 "\n"
 "Напевно, він нещодавно був видалений."
 
-#: gedit/gedit-utils.c:803
+#: gedit/gedit-utils.c:817
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Не вдається відновити файл \"%s\" через те, що він містить зіпсовані дані."
 
-#: gedit/gedit-utils.c:814
+#: gedit/gedit-utils.c:828
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Не вдається відновити файл \"%s\" тому, що gedit не може опрацювати %s."
 
-#: gedit/gedit-utils.c:820 gedit/gedit-utils.c:960
+#: gedit/gedit-utils.c:834 gedit/gedit-utils.c:893 gedit/gedit-utils.c:904
+#: gedit/gedit-utils.c:988
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Не вдається відновити файл \"%s\"."
 
-#: gedit/gedit-utils.c:830
+#: gedit/gedit-utils.c:844
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2440,17 +2441,17 @@ msgstr ""
 "Не вдається відновити файл \"%s\" через те, що він містить дані у "
 "неправильному форматі."
 
-#: gedit/gedit-utils.c:837
+#: gedit/gedit-utils.c:851
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Не вдається відновити файл \"%s\" через те, що він надто великий."
 
-#: gedit/gedit-utils.c:844
+#: gedit/gedit-utils.c:858
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Не вдається відновити файл \"%s\" через відмову в доступі."
 
-#: gedit/gedit-utils.c:851
+#: gedit/gedit-utils.c:865
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2462,7 +2463,7 @@ msgstr ""
 "\n"
 "Закрийте якийсь відкритий файл і спробуйте ще раз."
 
-#: gedit/gedit-utils.c:859
+#: gedit/gedit-utils.c:873
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2471,7 +2472,7 @@ msgstr ""
 "Не вистачає пам'яті, щоб відновити файл \"%s\". Закрийте кілька запущених "
 "програм та спробуйте ще раз."
 
-#: gedit/gedit-utils.c:885
+#: gedit/gedit-utils.c:912
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2483,7 +2484,7 @@ msgstr ""
 "\n"
 "Переконайтесь, що параметри проксі вказано правильно та спробуйте ще раз."
 
-#: gedit/gedit-utils.c:899
+#: gedit/gedit-utils.c:927
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2494,12 +2495,12 @@ msgstr ""
 "\n"
 "Переконайтесь, що параметри проксі вказано правильно і спробуйте ще раз."
 
-#: gedit/gedit-utils.c:906
+#: gedit/gedit-utils.c:934
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "Не вдається відновити файл \"%s\" через збій запису в журнал."
 
-#: gedit/gedit-utils.c:913
+#: gedit/gedit-utils.c:941
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2511,16 +2512,16 @@ msgstr ""
 "\n"
 "Напевно ви намагаєтесь відновити двійковий файл."
 
-#: gedit/gedit-utils.c:922
+#: gedit/gedit-utils.c:950
 msgid "It is not possible to revert an Untitled document."
 msgstr "Не вдається відновити неназваний документ."
 
-#: gedit/gedit-utils.c:1011
+#: gedit/gedit-utils.c:1039
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "Файл \"%s\" вже існує."
 
-#: gedit/gedit-utils.c:1017
+#: gedit/gedit-utils.c:1045
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2531,7 +2532,7 @@ msgstr ""
 "\n"
 "Переконайтесь, що ви ввели правильний шлях."
 
-#: gedit/gedit-utils.c:1026
+#: gedit/gedit-utils.c:1054
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2542,7 +2543,7 @@ msgstr ""
 "\n"
 "Переконайтесь, що у вас є достатньо прав для запису."
 
-#: gedit/gedit-utils.c:1033
+#: gedit/gedit-utils.c:1061
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2553,7 +2554,7 @@ msgstr ""
 "\n"
 "Назва файлу надто довга."
 
-#: gedit/gedit-utils.c:1040
+#: gedit/gedit-utils.c:1068
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2566,7 +2567,7 @@ msgstr ""
 "Каталогу, вказаного в назві файла не існує або це порушене символьне "
 "посилання."
 
-#: gedit/gedit-utils.c:1049
+#: gedit/gedit-utils.c:1077
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2577,7 +2578,7 @@ msgstr ""
 "\n"
 "Звільніть місце на диску і спробуйте знову."
 
-#: gedit/gedit-utils.c:1055
+#: gedit/gedit-utils.c:1083
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "Не вдається створити файл \"%s\"."
@@ -3158,15 +3159,15 @@ msgstr "Встановити _мову"
 msgid "Set the language of the current document"
 msgstr "Встановити мову поточного документа"
 
-#: plugins/spell/spell.c:553
+#: plugins/spell/spell.c:557
 msgid "The document is empty."
 msgstr "Документ порожній."
 
-#: plugins/spell/spell.c:571
+#: plugins/spell/spell.c:575
 msgid "The selected text does not contain mispelled words."
 msgstr "Виділений текст не містить слів з помилками."
 
-#: plugins/spell/spell.c:572
+#: plugins/spell/spell.c:576
 msgid "The document does not contain mispelled words."
 msgstr "Документ не містить слів з помилками."
 
