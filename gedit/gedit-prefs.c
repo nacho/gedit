@@ -94,9 +94,9 @@ static GConfClient 	*gedit_gconf_client 	= NULL;
 
 #define DEFAULT_EDITOR_FONT 		(const gchar*) "Courier Medium 12"
 
-#define DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Courier 10"
-#define DEFAULT_PRINT_FONT_H_AND_F	(const gchar*) "Helvetica 12"
-#define DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Courier 8"
+#define DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Courier 9"
+#define DEFAULT_PRINT_FONT_H_AND_F	(const gchar*) "Helvetica 11"
+#define DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Helvetica 9"
 
 static gchar* 
 gedit_prefs_gdk_color_to_string (GdkColor color)
@@ -484,6 +484,9 @@ gedit_prefs_load_settings (void)
 		g_free (gedit_settings->print_font_numbers);
 	
 	gedit_settings->print_font_numbers = g_strdup (DEFAULT_PRINT_FONT_NUMBERS);
+
+	gedit_settings->wrap_line_while_printing = TRUE;
+	gedit_settings->line_numbers = 0;
 
 	gedit_debug (DEBUG_PREFS, "END");
 }

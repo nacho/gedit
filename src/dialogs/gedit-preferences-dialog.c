@@ -49,7 +49,7 @@
 #define TABS_SETTINGS		3
 #define UNDO_SETTINGS		4
 #define WRAP_MODE_SETTINGS	8
-
+#define PRINT_SETTINGS		9
 /*
 #define DEBUG_MDI_PREFS
 */
@@ -199,8 +199,7 @@ static CategoriesTreeItem editor_behavior [] =
 
 static CategoriesTreeItem print [] =
 {
-	{_("Page"), NULL, LOGO},
-	{_("Paper"), NULL, LOGO},
+	{_("Page"), NULL, PRINT_SETTINGS},
 
 	NULL
 };

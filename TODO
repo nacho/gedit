@@ -1,20 +1,22 @@
-TODO (last update: December 17, 2001)
+TODO (last update: January 4, 2002)
 ===================================
 
 - General 
 
-[ ] Implementing Print and print preview
-[ ] Implementing Find (snorp is working on it)
-[ ] Implementing Replace (snorp is working on it)
+[X] Implementing Print and Print Preview
+[X] Implementing Find 
+[X] Implementing Replace 
 [ ] Adding a MDI Mode page to Preferences dialog (already implemented, to be debugged)
-[ ] Adding a Tabs page to Preferences dialog (already implemented, but gedit_view_set_tab_size is broken, 
-    see pango-layout.c function ensure_tab_width) 
+[ ] Adding a Tabs page to Preferences dialog (already implemented, 
+    but gedit_view_set_tab_size is broken,  see pango-layout.c function ensure_tab_width) 
 		
-[ ] Debugging About Box
-[ ] Debugging Open from URI (It will be removed when we will use the new file selector. The Open button is not
-                             activated when the ENTER button is pressed)
+[ ] Finishing About Box
+[X] Debugging Open from URI (It will be removed when we will use the new file selector.
+    The Open button is not activated when the ENTER button is pressed)
 [ ] Fixing bug with UTF8 text in undo actions merge code
 [X] Reading non UTF8 files
+[ ] Saving files in locale encoding when needed
+
 
 - Plugins
 
@@ -27,9 +29,10 @@ TODO (last update: December 17, 2001)
 [ ] Writing new user docs
 
 
-- Future improvement
+- Future improvements
 
-[ ] Backup file before saving and every x minutes
+[X] Backup file before saving 
+[ ] Backup file every x minutes
 [ ] The remote files should be read in an async way
 [ ] Backup files before crashing, like AbiWord (I hope this code will never be used)
 [ ] Save menubar and toolbar layout 

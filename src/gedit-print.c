@@ -233,6 +233,7 @@ gedit_print_run_dialog (GeditPrintJobInfo *pji)
 	GtkWidget *dialog;
 	gint selection_flag;
 	gint res;
+	gint lines;
 
 	gedit_debug (DEBUG_PRINT, "");
 
@@ -246,12 +247,13 @@ gedit_print_run_dialog (GeditPrintJobInfo *pji)
 	dialog = gnome_print_dialog_new ((const char *) _("gedit - Print Document"),
 			          GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
 	
+	lines = gedit_document_get_line_count (pji->doc);
+	
 	gnome_print_dialog_construct_range_page ( GNOME_PRINT_DIALOG (dialog),
 						  GNOME_PRINT_RANGE_ALL |
 						  /*GNOME_PRINT_RANGE_RANGE |*/
 						  selection_flag,
-						  1, /*pji->pages*/5, "A",
-							  _("Pages"));
+						  1, lines, "A", _("Lines"));
 
 	gtk_window_set_transient_for (GTK_WINDOW (dialog),
 				      GTK_WINDOW
@@ -345,16 +347,31 @@ gedit_print_document (GeditPrintJobInfo *pji)
 	gint next_paragraph_start;
 	gedit_debug (DEBUG_PRINT, "");	
 	
-	text_to_print = gedit_document_get_buffer (pji->doc);
-	text_end = text_to_print + strlen (text_to_print);
+	switch (pji->range_type)
+	{
+		case GNOME_PRINT_RANGE_ALL:
+			text_to_print = gedit_document_get_buffer (pji->doc);
+			text_end = text_to_print + strlen (text_to_print);
+			break;
+		case GNOME_PRINT_RANGE_SELECTION:
+			text_to_print = gedit_document_get_selected_text (pji->doc);
+			text_end = text_to_print + strlen (text_to_print);
+			break;
+		default:
+			g_return_if_fail (FALSE);
+	}
 	
 	gnome_print_beginpage (pji->print_ctx, "1");
 	
 	pji->page_num = 1;
-	
-	gedit_print_header (pji, 1);
 
-	y = pji->page_height - pji->margin_top - pji->header_height;
+	if (gedit_settings->print_header)
+	{
+		gedit_print_header (pji, 1);
+		y = pji->page_height - pji->margin_top - pji->header_height;
+	}
+	else
+		y = pji->page_height - pji->margin_top;
 	
 	pango_find_paragraph_boundary (text_to_print, -1, 
 			&paragraph_delimiter_index, &next_paragraph_start);
@@ -613,7 +630,9 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 			if (glyph == space)
 				line_width += space_advance.x;
 			else
+			/*
 			if ((glyph < 0) || (glyph >= 256))
+			*/
 			{
 				ArtPoint adv;
 				gnome_font_get_glyph_stdadvance (pji->font_body, glyph, &adv);
@@ -624,8 +643,11 @@ gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji,
 					line_width += (2 * space_advance.x);
 
 			}
+			/*
+			}
 			else
-				line_width += gnome_font_get_glyph_width (pji->font_body, glyph);
+			line_width += gnome_font_get_glyph_width (pji->font_body, glyph);
+			*/
 		}
 
 		if (line_width > printable_page_width)
@@ -744,13 +766,19 @@ gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, const gchar *
 
 			g_free (pn_str);
 
-			gedit_print_header (pji, +pji->page_num);
-
-			y = pji->page_height - pji->margin_top - pji->header_height;
+			if (gedit_settings->print_header)
+			{	
+				gedit_print_header (pji, +pji->page_num);
+				y = pji->page_height - pji->margin_top - pji->header_height;
+			}
+			else
+				y = pji->page_height - pji->margin_top;
 		}
+
+		if (!gedit_settings->wrap_line_while_printing)
+			return y;
 
 	}
 	
 	return y;
 }
-

@@ -139,9 +139,6 @@ gedit_cmd_file_open_uri (BonoboUIComponent *uic, gpointer user_data, const gchar
 void
 gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-/*
-	TO_BE_IMPLEMENTED
-*/	
 	GeditMDIChild *active_child;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
@@ -150,7 +147,6 @@ gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	if (active_child == NULL)
 		return;
 	
-	g_print ("***** Printing in gedit2 is completely broken. Please don't report bugs about it.\n");
 	gedit_print (active_child);
 
 }
@@ -158,8 +154,6 @@ gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 void
 gedit_cmd_file_print_preview (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	TO_BE_IMPLEMENTED
-/*
 	GeditMDIChild *active_child;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
@@ -168,9 +162,7 @@ gedit_cmd_file_print_preview (BonoboUIComponent *uic, gpointer user_data, const 
 	if (active_child == NULL)
 		return;
 	
-	g_print ("***** Printing in gedit2 is completely broken. Please don't report bugs about it.\n");
 	gedit_print_preview (active_child);
-*/
 }
 
 void 
@@ -397,13 +389,15 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 					GtkWidget *message_dlg;
 
 					message_dlg = gtk_message_dialog_new (
-						GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+						GTK_WINDOW (bonobo_mdi_get_active_window (
+								BONOBO_MDI (gedit_mdi))),
 						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 						GTK_MESSAGE_ERROR,
 						GTK_BUTTONS_OK,
 						_("Impossible to update gedit settings."));
 
-					gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+					gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), 
+							GTK_RESPONSE_OK);
 
 					gtk_dialog_run (GTK_DIALOG (message_dlg));
   					gtk_widget_destroy (message_dlg);

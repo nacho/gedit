@@ -108,6 +108,9 @@ struct _GeditPreferences
 	gchar		*print_font_body;
 	gchar		*print_font_header_and_footer;
 	gchar		*print_font_numbers;
+
+	gboolean	 wrap_line_while_printing;
+	gint		 line_numbers;
 };
 
 extern GeditPreferences *gedit_settings;
