@@ -12,6 +12,6 @@ plugin_LTLIBRARIES = libdocinfo.la
 libdocinfo_la_SOURCES = docinfo.c
 
 gladedir = $(datadir)/gedit2/glade
-glade_DATA = docinfo.glade
+glade_DATA = docinfo.glade2
 
 EXTRA_DIST = $(glade_DATA)
