@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-11 19:23+0200\n"
+"POT-Creation-Date: 2004-08-30 19:38+0200\n"
 "PO-Revision-Date: 2004-08-13 03:23+0330\n"
 "Last-Translator: Gurban Mühemmet Tewekgeli <gmtavakkoli@yahoo.com>\n"
 "Language-Team: Turkmen <kakilikgroup@yahoo.com>\n"
@@ -540,8 +540,9 @@ msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr ""
 "Eger siz gaýd edilmedik bolsoňiz, soňky sagatdaky işleriňiz ymykly ýiter."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 # c-format
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
+#, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
 "permanently lost."
@@ -1320,6 +1321,7 @@ msgid "Arabic"
 msgstr "Arabça"
 
 #: gedit/gedit-encodings.c:157 gedit/gedit-encodings.c:257
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Greek"
 msgstr "Ýunança"
 
@@ -1464,8 +1466,9 @@ msgstr "Aýry gaýd et..."
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Gaýd edilmedik üýtgewleri \"%s\" senedine ewirilsin mi?"
 
-#: gedit/gedit-file.c:612
 # c-format
+#: gedit/gedit-file.c:612
+#, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1479,8 +1482,9 @@ msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Soňki minutda senediň üýtgewleri ymykly ýiter."
 
-#: gedit/gedit-file.c:627
 # c-format
+#: gedit/gedit-file.c:627
+#, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
 "permanently lost."
@@ -2832,147 +2836,181 @@ msgstr "_Ters tertibine"
 msgid "_Sort"
 msgstr "_Tertible"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:351
-#: plugins/spell/gedit-spell-checker-dialog.c:504
+#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(maslahat edilen soz yök)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:375
+#: plugins/spell/gedit-automatic-spell-checker.c:374
 msgid "_More..."
 msgstr "_Kop..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:428
+#: plugins/spell/gedit-automatic-spell-checker.c:427
 msgid "_Ignore All"
 msgstr "_Ehlisini red et"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:441
+#: plugins/spell/gedit-automatic-spell-checker.c:440
 msgid "_Add"
 msgstr "_Ekle"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:478
+#: plugins/spell/gedit-automatic-spell-checker.c:477
 msgid "_Spelling Suggestions..."
 msgstr "_Ymla maslahatlary..."
 
-#: plugins/spell/gedit-spell-checker-dialog.c:285
+#: plugins/spell/gedit-spell-checker-dialog.c:289
 msgid "Check Spelling"
 msgstr "_Ymlany barla"
 
-#: plugins/spell/gedit-spell-checker-dialog.c:296
+#: plugins/spell/gedit-spell-checker-dialog.c:300
 msgid "Suggestions"
 msgstr "Maslahatlar"
 
-#: plugins/spell/gedit-spell-checker-dialog.c:608
+#: plugins/spell/gedit-spell-checker-dialog.c:615
 msgid "(correct spelling)"
 msgstr "(ymlany dogryla)"
 
-#: plugins/spell/gedit-spell-checker-dialog.c:785
+#: plugins/spell/gedit-spell-checker-dialog.c:800
 msgid "Completed spell checking"
 msgstr "Ymlany barlamgyny soňlady"
 
 #: plugins/spell/gedit-spell-checker.c:80
+msgid "Bulgarian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:81
+#, fuzzy
+msgid "Bengali"
+msgstr "Baltik"
+
+#: plugins/spell/gedit-spell-checker.c:82
 msgid "Breton"
 msgstr "Britonça"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Catalan"
 msgstr "Katalança"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Czech"
 msgstr "Çekçe"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:85
+msgid "Welsh"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Danish"
 msgstr "Danmarkça"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "German (Germany)"
 msgstr "Almança (Almanýa)"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "German (Swiss)"
 msgstr "Almança (Isveçre)"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:90
 msgid "English (American)"
 msgstr "Ingilisçä (Amerika)"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "English (British)"
 msgstr "Ingilisçä (Britiş)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "English (Canadian)"
 msgstr "Ingilisçä (Kanada)"
 
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "Spanish"
 msgstr "Ispanýolça"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
+#, fuzzy
+msgid "Finnish"
+msgstr "Danmarkça"
+
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "Faroese"
 msgstr "Faroese Dili"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "French (France)"
 msgstr "Fransizçe (Fransiýa)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "French (Swiss)"
 msgstr "Fransizçe (Isveçre)"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:99
+msgid "Irish (Gaeilge)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:100
+msgid "Icelandic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Italian"
 msgstr "Italýança"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Dutch"
 msgstr "Höländçe"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "Norwegian"
 msgstr "Nörveççe"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "Polish"
 msgstr "Polonýaça"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:105
 msgid "Portuguese (Portugal)"
 msgstr "Portugalça (Portugaliýa)"
 
-#: plugins/spell/gedit-spell-checker.c:99
+#: plugins/spell/gedit-spell-checker.c:106
 msgid "Portuguese (Brazilian)"
 msgstr "Portugalça (Braziliýa)"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:107
 msgid "Russian"
 msgstr "Orsça"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Slovak"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:109
+msgid "Slovenian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:110
 msgid "Swedish"
 msgstr "Iswetçe"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:111
 msgid "Ukrainian"
 msgstr "Ukraýnça"
 
-#: plugins/spell/gedit-spell-checker.c:735
+#: plugins/spell/gedit-spell-checker.c:744
 msgid "Default"
 msgstr "Ön Bellenen"
 
-#: plugins/spell/gedit-spell-language-dialog.c:233
+#: plugins/spell/gedit-spell-language-dialog.c:241
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "%s içinde gerek widget tapilmady."
 
-#: plugins/spell/gedit-spell-language-dialog.c:253
+#: plugins/spell/gedit-spell-language-dialog.c:261
 msgid "Languages"
 msgstr "Diller"
 
@@ -3121,8 +3159,8 @@ msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
 msgstr ""
-"Tiz tiz işledilýan tägleri/düzmekleri senede aňsatjag girdirmek üçin bir "
-"tär üpjün edýär."
+"Tiz tiz işledilýan tägleri/düzmekleri senede aňsatjag girdirmek üçin bir tär "
+"üpjün edýär."
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
