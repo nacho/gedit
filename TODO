@@ -3,6 +3,10 @@ Features to add, bugs to fix:
 	* Keep track of the recently accessed documents, and display
 	  them in the file menu, immediately above Quit...
 
+	^^ NOTE: this one is currently functional in the gnome version,
+	         but needs some additons to the prefs system to work in
+	         the gtk-only version..
+
 	* Add split-screen support for people with gtk 1.1...
 
 	* Fix it so font changes take affect immediately, and you don't
@@ -10,6 +14,8 @@ Features to add, bugs to fix:
 
 	* Add a menu that would popup on a right click in the text widget -
 	  should include options like Close, Save, etc..
+
+	^^ This one's covered, and on cvs thanks to Mikael Hermansson
 
 	* Add DND support between multiple windows, and between other gnome
 	  apps such as gmc - also add an "Open in New window option that 
@@ -28,4 +34,79 @@ Features to add, bugs to fix:
 
 
 						-Evan
+
+
+Added by andy:
+
+	* Fix menu accelerators for gtk-only version.  they work if the
+	  accelerator just has a trivial callback (prints "hello world"),
+	  but doesn't otherwise.  probably has something to do with the
+	  multiple windows feature, since that's when accelerators stopped
+	  working.
+
+	* Fix plugin code to be 64-bit clean.  the plugin code poorly
+	  assumes that sizeof(int) == sizeof(void *) all over the place,
+	  and this breaks on true 64-bit platforms (e.g., Digital Unix).
+
+	* Fix plugin code to handle errors (e.g., error from read() or
+	  write()).  currently, the code is totally sloppy, and has next
+	  to no error handling.
+
+	* Fix preferences to save and restore for gtk-only version.
+
+	* Fix/improve/rewrite search and replace routine.  it is really
+	  really slow right now and doesn't work on larger files (e.g., on
+	  a 1MB file, i get malloc errors).  i am working on this.
+
+	* Add file locking/unlocking before/after opening/saving a file.
+	  i will probably end up doing this because no one else cares.
+
+	* Add more search features: replace all, and search (and replace)
+	  across all open documents.
+
+	* Add preferences popup window similar to Netscape's.  currently,
+	  everything is under one menu.  make this a nice popup with a
+	  tree view, or with notebook tabs, etc.  i am working on this.
+
+	* Add preferences setting for location of temp directory.
+
+	* Add print file preferences.  allow user to specify choice of
+	  commands: lpr, lp, or custom.  for lpr and lp, allow user to
+	  specify default print options to use.  store everything in the
+	  preferences file.
+
+	* Add preferences for msgbox: whether or not to log msgs at all,
+	  max msgs limit, and how much to auto-truncate.
+
+	* Add interface/plugin for calling "ctags -x" on the current
+	  document (maybe all open documents?).  build a tree of the output,
+	  and when clicked on, will go to the selected location.  i'm not
+	  sure if this should be code in gedit that simply does fork and
+	  exec, or if it should be its own plugin.  one i know for certain
+	  is that gedit shouldn't contain any C parsing code.  this is how
+	  gIDE does it, and this is unnecessary.
+
+	* Add interface/plugin for spell-checker (spell or ispell).
+
+	* Add auto-save options.  timeout configurable via preferences.
+
+	* Add file info option for line count, word count, and byte count.
+	  don't be a bonehead like GXedit and do "system(wc)".
+
+	* Add plugin to allow posting a document to a newsgroup.
+
+	* Add user-configurable toolbar.  allow user to specify the exact
+	  toolbar wanted, including icon name, and even what to execute
+	  (basically, not limit the user to what's already available).
+	  store settings in preferences.
+
+	* Add configurable location for toolbar (e.g., top, bottom, left
+	  right).  store settings in preferences.
+
+	* Do something about read-only files.  should the text widget be
+	  editable?  should we allow edit and do something (Save As?) when
+	  trying to save?  haven't given this much thought right now...
+	  we should probably allow opening and editing, but flash a message
+	  saying it's read-only, and then when saving, tell the user to
+	  select save-as.
 

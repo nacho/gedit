@@ -184,7 +184,7 @@ msgbox_create(void)
 	gtk_widget_grab_default(button);
 	gtk_widget_show(button);
 
-	mbprintf("%s %s", "Welcome to", GEDIT_ID);
+	mbprintf("Welcome to %s", GEDIT_ID);
 
 } /* msgbox_create */
 

@@ -1,6 +1,20 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit Menus Definition
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 #include <gtk/gtk.h>
 #include <strings.h>
@@ -8,6 +22,8 @@
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#define WITH_FOOT
+#include "xpm/foot.xpm"
 #endif
 #define PLUGIN_TEST 1
 #include "main.h"
@@ -19,9 +35,8 @@
 #include "gE_about.h"
 #include "gE_print.h"
 #include "msgbox.h"
-#include "xpm/foot.xpm"
+#include "search.h"
 
-#define WITH_FOOT
 
 #define GE_DATA		1
 #define GE_WINDOW	2

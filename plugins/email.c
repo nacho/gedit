@@ -1,11 +1,12 @@
 #include <gtk/gtk.h>
 
-#include "client.h"
 #include <stdio.h>
-#include <glib.h>
+#include <string.h>
 #include <pwd.h>
 #include <sys/types.h>
 #include <stdlib.h>
+#include <glib.h>
+#include "client.h"
 
 #ifndef MAILER
 #define MAILER "/usr/lib/sendmail"

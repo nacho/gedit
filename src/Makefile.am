@@ -43,7 +43,11 @@ gedit_SOURCES = 	\
 	msgbox.h	\
 	msgbox.c	\
 	gtkscrollball.h	\
-	gtkscrollball.c
+	gtkscrollball.c	\
+	search.h	\
+	search.c	\
+	dialog.h	\
+	dialog.c
 
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 

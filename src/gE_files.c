@@ -1,4 +1,4 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
  *
@@ -228,7 +228,7 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 	fflush(fp);
 	fclose(fp);
 
-	if (doc->filename)
+	if (doc->filename && doc->filename != fname)
 		g_free(doc->filename);
 	doc->filename = g_strdup(fname);
 	doc->changed = FALSE;
@@ -324,7 +324,8 @@ files_list_popup(GtkWidget *widget, gpointer cbdata)
 	gtk_box_pack_start(GTK_BOX(vbox), tmp, FALSE, TRUE, 0);
 	gtk_widget_show(tmp);
 
-	tmp = gE_create_toolbar_flw(cbdata);
+	window->files_list_window_toolbar = gE_create_toolbar_flw(cbdata);
+	tmp = window->files_list_window_toolbar;
 	gtk_box_pack_start(GTK_BOX(vbox), tmp, FALSE, FALSE, 0);
 	gtk_widget_show(tmp);
 

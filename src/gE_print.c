@@ -1,10 +1,8 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
- * Copyright (C) 1998 Alex Roberts and Evan Lawrence
  *
  * gE_print.c - Print Functions.
- * Code borrowed from gIDE (http://www.pn.org/gIDE)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,126 +19,57 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
+#include <sys/stat.h>
+#include <unistd.h>
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
-#else
-#include <time.h>
-#include <stdlib.h>
 #endif
-#include <stdio.h>
-#include <string.h>
 #include <gtk/gtk.h>
-#include <glib.h>
 #include "main.h"
 #include "gE_print.h"
+#include "gE_files.h"
 #include "gE_document.h"
+#include "commands.h"
+#include "dialog.h"
 
 static void print_destroy(GtkWidget *widget, gpointer data);
 static void file_print_execute(GtkWidget *w, gpointer cbdata);
+static char *generate_temp_file(gE_document *doc);
+static char *get_filename(gE_data *data);
 
-static GtkWidget *print_dialog;
-static GtkWidget *print_cmd_entry;
-
-
-static void
-print_destroy(GtkWidget *widget, gpointer data)
-{
-    gtk_widget_destroy( print_dialog );
-    print_dialog = NULL;
-}
+/* these should probably go into gE_window */
+static GtkWidget *print_dialog = NULL;
+static GtkWidget *print_cmd_entry = NULL;
 
 
 /*
- * heavily modified from _file_print() in gIDE.
+ * PUBLIC: file_print_cmd_callback
  *
- * TODO: currently, this routine always creates a temporary file and
- * then operates on it.  we can improve on this!
- * 1. if the file to be printed has not been updated and exists on disk,
- * then print the file on disk immediately.
- * 2. if the file has been updated, or if it is "Untitled", we should
- * prompt the user whether or not to save the file, and then print it.
- * 2a.  if the user does not want to save it, then this is the only time
- * we actually need to create a temporary file.
+ * creates print dialog box.  this should be the only routine global to
+ * the world.
  */
-static void
-file_print_execute(GtkWidget *w, gpointer cbdata)
-{
-	FILE *fp;
-	gE_document *current;
-	gchar fname[STRING_LENGTH_MAX];
-	gchar *scmd, *pcmd, *tmp;
-	gE_data *data = (gE_data *) cbdata;
-
-	current = gE_document_current(data->window);
-#ifndef WITHOUT_GNOME
-	strcpy(data->window->print_cmd,
-		   gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
-#endif
-
-	/* print using specified command */
-	if ((pcmd = gtk_entry_get_text(GTK_ENTRY(print_cmd_entry))) == NULL)
-		return;
-
-	/* look for "file variable" and place marker */
-	if ((tmp = strstr(pcmd, "%s")) == NULL)
-		return;
-	*tmp = '\0';
-	tmp += 2;
-
-	/*
-	 * create and write to temp file.  TODO: define and use system wide
-	 * temporary directory (saved in preferences).
-	 */
-	sprintf(fname, "/tmp/.gedit_print.%d%d", time(NULL), getpid());
-	if ((fp = fopen(fname, "w")) == NULL) {
-		g_error("\n    Unable to Open '%s'    \n", fname);
-		return;
-	}
-	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(current->text), 0,
-		gtk_text_get_length(GTK_TEXT(current->text))), fp) == EOF) {
-
-		perror("file_print_execute: can't write to tmp file");
-		fclose(fp);
-		return;
-	}
-	fflush(fp);
-	fclose(fp);
-
-	/* build command and execute; g_malloc handles memory alloc errors */
-	scmd = g_malloc(strlen(pcmd) + strlen(fname) + 1);
-	sprintf(scmd, "%s%s%s", pcmd, fname, tmp);
-#ifdef DEBUG
-	g_print("%s\n", scmd);
-#endif
-	if (system(scmd) == -1)
-		perror("file_print_execute: system() error");
-	gE_msgbar_set(data->window, MSGBAR_FILE_PRINTED);
-
-	g_free(scmd);
-
-	/* delete temporary file - not done in gIDE (duh!  totally braindead) */
-	if (unlink(fname))
-		perror("file_print_execute: unlink() error");
-
-	print_destroy(NULL, NULL);
-} /* file_print_execute */
-
-
-/* ---- Print Function ---- */
-
-void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata)
+void
+file_print_cmd_callback(GtkWidget *widget, gpointer cbdata)
 {
 	GtkWidget *hbox;
 	GtkWidget *vbox;
 	GtkWidget *tmp;
-	gE_data *data = (gE_data *) cbdata;
+	gE_data *data = (gE_data *)cbdata;
+
+	g_assert(data != NULL);
+
+	if (print_dialog)
+		return;
 
 	print_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
 	gtk_window_set_title(GTK_WINDOW(print_dialog), "Print");
 	gtk_signal_connect(GTK_OBJECT(print_dialog), "destroy",
-			   GTK_SIGNAL_FUNC(print_destroy), NULL);
+		GTK_SIGNAL_FUNC(print_destroy), NULL);
 
 	vbox = gtk_vbox_new(FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(print_dialog), vbox);
@@ -164,9 +93,9 @@ void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show(tmp);
 
 	print_cmd_entry = gtk_entry_new_with_max_length(255);
-#ifndef WITHOUT_GNOME
-	gtk_entry_set_text(GTK_ENTRY(print_cmd_entry), data->window->print_cmd);
-#endif
+	if (data->window->print_cmd)
+		gtk_entry_set_text(GTK_ENTRY(print_cmd_entry),
+			data->window->print_cmd);
 	gtk_box_pack_start(GTK_BOX(hbox), print_cmd_entry, FALSE, TRUE, 10);
 	gtk_widget_show(print_cmd_entry);
 
@@ -185,7 +114,7 @@ void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata)
 #endif
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 15);
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-			   GTK_SIGNAL_FUNC(file_print_execute), data);
+		GTK_SIGNAL_FUNC(file_print_execute), data);
 	gtk_widget_show(tmp);
 
 #ifdef WITHOUT_GNOME
@@ -195,9 +124,202 @@ void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata)
 #endif
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 15);
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-			   GTK_SIGNAL_FUNC(print_destroy), data->window);
+		GTK_SIGNAL_FUNC(print_destroy), data->window);
 	gtk_widget_show(tmp);
 
 	gtk_widget_show(print_dialog);
-}
+} /* file_print_cmd_callback */
 
+
+/*
+ * PRIVATE: print_destroy
+ *
+ * destroy the print dialog box
+ */
+static void
+print_destroy(GtkWidget *widget, gpointer data)
+{
+	if (print_dialog) {
+		gtk_widget_destroy(print_dialog);
+		print_dialog = NULL;
+	}
+} /* print_destroy */
+
+
+/*
+ * PRIVATE: file_print_execute
+ *
+ * actually execute the print command
+ */
+static void
+file_print_execute(GtkWidget *w, gpointer cbdata)
+{
+	gchar *scmd, *pcmd, *tmp, *fname;
+	gE_data *data = (gE_data *)cbdata;
+
+	g_assert(data != NULL);
+
+	if (data->window->print_cmd)
+		strcpy(data->window->print_cmd,
+			gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
+
+	/* print using specified command */
+	if ((pcmd = gtk_entry_get_text(GTK_ENTRY(print_cmd_entry))) == NULL)
+		return;
+
+	/* look for "file variable" and place marker */
+	if ((tmp = strstr(pcmd, "%s")) == NULL)
+		return;
+	*tmp = '\0';
+	tmp += 2;
+
+	if ((fname = get_filename(data)) == NULL) {
+		print_destroy(NULL, NULL);
+		return;	/* canceled */
+	}
+
+	/* build command and execute; g_malloc handles memory alloc errors */
+	scmd = g_malloc(strlen(pcmd) + strlen(fname) + 1);
+	sprintf(scmd, "%s%s%s", pcmd, fname, tmp);
+#ifdef DEBUG
+	g_print("%s\n", scmd);
+#endif
+	if (system(scmd) == -1)
+		perror("file_print_execute: system() error");
+	gE_msgbar_set(data->window, MSGBAR_FILE_PRINTED);
+
+	g_free(scmd);
+
+	/* delete temporary file.  TODO: allow temp dir to be customizable */
+	if (strncmp(fname, "/tmp", 4) == 0)
+		if (unlink(fname))
+			perror("file_print_execute: unlink() error");
+
+	g_free(fname);
+
+	print_destroy(NULL, NULL);
+} /* file_print_execute */
+
+
+/*
+ * PRIVATE: get_filename
+ *
+ * returns the filename to be printed in a newly allocated buffer.
+ * the filename is determined by this algorithm:
+ *
+ * 1. if the file to be printed has not been updated and exists on disk,
+ * then print the file on disk immediately.
+ * 2. if the file has been updated, or if it is "Untitled", we should
+ * prompt the user whether or not to save the file, and then print it.
+ * 2a.  if the user does not want to save it, then this is the only time
+ * we actually need to create a temporary file.
+ */
+#define PRINT_TITLE	"Save before printing?"
+#define PRINT_MSG	"has not been saved!"
+static char *
+get_filename(gE_data *data)
+{
+	gE_document *doc;
+	char *fname = NULL;
+	char *buttons[] =
+		{ "Print anyway", " Save, then print ", GE_BUTTON_CANCEL };
+	char *title, *msg;
+
+	g_assert(data != NULL);
+	g_assert(data->window != NULL);
+	doc = gE_document_current(data->window);
+
+	if (!doc->changed && doc->filename) {
+		if (doc->sb == NULL)
+			doc->sb = g_malloc(sizeof(struct stat));
+		if (stat(doc->filename, doc->sb) == -1) {
+			/* print warning */
+			g_free(doc->sb);
+			doc->sb = NULL;
+			fname = generate_temp_file(doc);
+		} else
+			fname = g_strdup(doc->filename);
+	} else { /* doc changed or no filename */
+		int ret;
+
+		title = g_strdup(PRINT_TITLE);
+		if (doc->filename)
+			msg = (char *)g_malloc(strlen(PRINT_MSG) +
+						strlen(doc->filename) + 6);
+		else
+			msg = (char *)g_malloc(strlen(PRINT_MSG) +
+						strlen(UNTITLED) + 6);
+		sprintf(msg, " '%s' %s ", 
+			(doc->filename) ? doc->filename : UNTITLED, PRINT_MSG);
+
+		ret = ge_dialog(title, msg, 3, buttons, 3, NULL, NULL, TRUE);
+
+		g_free(msg);
+		g_free(title);
+
+		switch (ret) {
+		case 1 :
+			fname = generate_temp_file(doc);
+			break;
+		case 2 :
+			if (doc->filename == NULL) {
+				data->temp1 = (gpointer)TRUE;	/* non-zero */
+				file_save_as_cmd_callback(NULL, data);
+				while (data->temp1 != NULL)
+					gtk_main_iteration_do(TRUE);
+			} else
+				gE_file_save(data->window, doc, doc->filename);
+
+			fname = g_strdup(doc->filename);
+			break;
+		case 3 :
+			fname = NULL;
+			break;
+		default:
+			printf("get_filename: ge_dialog returned %d\n", ret);
+			exit(-1);
+		} /* switch */
+	} /* doc changed or no filename */
+
+	return fname;
+} /* get_filename */
+
+
+/*
+ * PRIVATE: generate_temp_file
+ *
+ * create and write to temp file.  returns name of temp file in malloc'd
+ * buffer (needs to be freed afterwards).
+ *
+ * TODO: define and use system wide temp directory (saved in preferences).
+ */
+static char *
+generate_temp_file(gE_document *doc)
+{
+	FILE *fp;
+	char *fname;
+
+	fname = (char *)g_malloc(STRING_LENGTH_MAX);
+
+	sprintf(fname, "/tmp/.gedit_print.%d%d", (int)time(NULL), getpid());
+	if ((fp = fopen(fname, "w")) == NULL) {
+		g_error("generate_temp_file: unable to open '%s'\n", fname);
+		g_free(fname);
+		return NULL;
+	}
+
+	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(doc->text), 0,
+		gtk_text_get_length(GTK_TEXT(doc->text))), fp) == EOF) {
+
+		perror("generate_temp_file: can't write to tmp file");
+		g_free(fname);
+		fclose(fp);
+		return NULL;
+	}
+	fflush(fp);
+	fclose(fp);
+
+	return fname;
+} /* generate_temp_file */
+
+/* the end */

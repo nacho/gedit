@@ -45,6 +45,9 @@ extern void gE_msgbar_clear(gpointer data);
 extern void gE_msgbar_timeout_add(gE_window *window);
 extern void notebook_switch_page(GtkWidget *w, GtkNotebookPage *page,
     gint num, gE_window *window);
+void gE_window_create_popupmenu(gE_data *);
+void gE_document_cmd_callback_swaphc(GtkWidget *w,gE_window *window);
+gint gE_document_callback_showpopup(GtkWidget *widget,GdkEvent *ev); 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

@@ -146,7 +146,7 @@ int gE_plugin_document_open(gint context,gchar *fname)
       return GPOINTER_TO_INT(doc);
 }
 
-int gE_plugin_document_close (gint docid)
+gboolean gE_plugin_document_close (gint docid)
 {
 	gE_document *document = (gE_document *) GINT_TO_POINTER (docid);
 	gE_data *data = g_malloc (sizeof (gE_data));

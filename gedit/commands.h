@@ -1,4 +1,4 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
  *
@@ -48,12 +48,6 @@ extern void edit_paste_cmd_callback (GtkWidget *widget, gpointer cbdata);
 extern void edit_selall_cmd_callback (GtkWidget *widget, gpointer cbdata);
 
 extern void doc_changed_callback (GtkWidget *widget, gpointer);
-
-/* Search and Replace */
-extern void search_search_cmd_callback (GtkWidget *w, gpointer cbdata);
-extern void search_replace_cmd_callback (GtkWidget *w, gpointer cbdata);
-extern void search_again_cmd_callback (GtkWidget *w, gpointer cbdata);
-extern void search_goto_line_callback (GtkWidget *w, gpointer cbwindow);
 
 /* Tab positioning */
 extern void tab_top_cback (GtkWidget *widget, gpointer cbwindow);

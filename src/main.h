@@ -40,7 +40,8 @@ typedef struct _gE_search {
 	GtkWidget *start_at_beginning;
 	GtkWidget *case_sensitive;
 	GtkWidget *search_entry;
-	gint replace, again, line;
+	gint       line;
+	gboolean   replace, again;
 	GtkWidget *replace_box;
 	GtkWidget *replace_entry;
 	GtkWidget *prompt_before_replacing;
@@ -48,9 +49,21 @@ typedef struct _gE_search {
 	GtkWidget *line_item, *text_item;
 } gE_search;
 
+typedef struct _gE_text_popupmenu{
+	GtkWidget *menu;
+	GtkWidget *menu_swaphc;
+	GtkWidget *menu_separator1;
+	GtkWidget *menu_cut;
+	GtkWidget *menu_copy;
+	GtkWidget *menu_paste;
+	GtkWidget *menu_separator2;
+	GtkWidget *menu_close;
+	GtkWidget *menu_save;
+	GtkWidget *menu_print;
+}gE_text_popupmenu;
+
 typedef struct _gE_window {
 	GtkWidget *window;
-	GtkWidget *text;
 	GtkWidget *statusbox;
 	GtkWidget *statusbar;
 	GtkWidget *menubar;
@@ -63,26 +76,31 @@ typedef struct _gE_window {
 	GtkWidget *line_label, *col_label;
 	GtkWidget *files_list_window;
 	GtkWidget *files_list_window_data;
+	GtkWidget *files_list_window_toolbar;
 #ifdef GTK_HAVE_FEATURES_1_1_0
 	GtkAccelGroup *accel;
 #else
 	GtkAcceleratorTable *accel;
 #endif
 	GList *documents;
+	gE_text_popupmenu *popup;
 	gE_search *search;
 	int num_recent; /* Number of recently accessed documents in the 
 	                         Recent Documents menu */
 #ifdef WITHOUT_GNOME
+	GtkWidget *menubar_handle;	/* holds the menubar */
 	gboolean auto_indent;
 	gboolean show_tabs;
 	gboolean show_status;
-	gint have_toolbar;
-	gint have_tb_pix;
-	gint have_tb_text;
+	gboolean have_toolbar;
+	gboolean have_tb_pix;
+	gboolean have_tb_text;
+	gboolean show_tooltips;
 #else
 	gint auto_indent;
 	gint show_tabs;
 	gint show_status;
+	gint show_tooltips;
 	gint have_toolbar;
 	gint have_tb_pix;
 	gint have_tb_text;
@@ -90,9 +108,6 @@ typedef struct _gE_window {
 	gchar *print_cmd;
 	GtkPositionType tab_pos;
 
-#if PLUGIN_TEST
-	plugin *hello;
-#endif
 } gE_window;
 
 typedef struct _gE_document {
@@ -128,7 +143,6 @@ typedef struct _gE_data {
 	gpointer temp2;
 	gboolean flag;	/* general purpose flag to indicate if action completed */
 } gE_data;
-
 
 extern GList *window_list;
 

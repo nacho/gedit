@@ -1,4 +1,4 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
  * Copyright (C) 1998 Alex Roberts and Evan Lawrence
@@ -20,7 +20,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <assert.h>
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
@@ -36,9 +35,12 @@
 #include "gE_plugin_api.h"
 #endif
 #include "commands.h"
+#include "gE_print.h"
 #include "menus.h"
 #include "toolbar.h"
 #include "gtkscrollball.h"
+#include "search.h"
+
 static void gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);
 
 static char *lastmsg = NULL;
@@ -56,6 +58,7 @@ gE_window *gE_window_new()
   GtkWidget *line_button, *col_button;
  
   window = g_malloc(sizeof(gE_window));
+  window->popup=g_malloc(sizeof(gE_text_popupmenu));
   window->notebook = NULL;
   window->save_fileselector = NULL;
   window->open_fileselector = NULL;
@@ -69,7 +72,7 @@ gE_window *gE_window_new()
   window->files_list_window_data = NULL;
   window->toolbar = NULL;
   
-  data = g_malloc0 (sizeof (gE_data));
+ 	  data = g_malloc0 (sizeof (gE_data));
 
 #ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -84,7 +87,10 @@ gE_window *gE_window_new()
 
   data->window = window;
 
-  gtk_signal_connect (GTK_OBJECT (window->window), "delete_event",
+	gE_window_create_popupmenu(data);
+
+  
+   gtk_signal_connect (GTK_OBJECT (window->window), "delete_event",
      		      GTK_SIGNAL_FUNC(gE_destroy_window),
 		      data);
      
@@ -111,8 +117,12 @@ gE_window *gE_window_new()
   gtk_window_add_accelerator_table(GTK_WINDOW(window->window), window->accel);
 #endif
 */
-  gtk_box_pack_start(GTK_BOX(box1), window->menubar, FALSE, TRUE, 0);
+
   gtk_widget_show(window->menubar);
+  window->menubar_handle = gtk_handle_box_new();
+  gtk_container_add(GTK_CONTAINER(window->menubar_handle), window->menubar);
+  gtk_widget_show(window->menubar_handle);
+  gtk_box_pack_start(GTK_BOX(box1), window->menubar_handle, FALSE, TRUE, 0);
 #else
   gnome_app_set_contents (GNOME_APP(window->window), box1);
 #endif
@@ -127,6 +137,7 @@ gE_window *gE_window_new()
   gtk_widget_show (box1);
 
   gE_document_new(window);
+
 
   gtk_box_pack_start(GTK_BOX(box1), window->notebook, TRUE, TRUE, 0);
 
@@ -193,7 +204,10 @@ gE_document
 *gE_document_new(gE_window *w)
 {
 	gE_document *doc;
-	GtkWidget *table, *vscrollbar, *scrollball;
+	GtkWidget *table, *vscrollbar;
+#ifndef WITHOUT_GNOME
+	GtkWidget *scrollball;
+#endif
 	GtkStyle *style;
 
 	doc = g_malloc0(sizeof(gE_document));
@@ -211,7 +225,7 @@ gE_document
 	doc->tab_label = gtk_label_new(UNTITLED);
 	GTK_WIDGET_UNSET_FLAGS(doc->tab_label, GTK_CAN_FOCUS);
 	doc->filename = NULL;
-	doc->word_wrap = 1;
+	doc->word_wrap = TRUE;
 	gtk_widget_show(doc->tab_label);
 
 	table = gtk_table_new(2, 2, FALSE);
@@ -229,7 +243,11 @@ gE_document
 	gtk_signal_connect_after(GTK_OBJECT(doc->text), "key_press_event",
 		GTK_SIGNAL_FUNC(auto_indent_callback), w);
 
+#ifdef WITHOUT_GNOME
+	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 1);
+#else
 	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 2);
+#endif
 	style = gtk_style_new();
 	/*
 	 * style->bg[GTK_STATE_NORMAL] = style->white;
@@ -241,6 +259,8 @@ gE_document
 	gtk_widget_set_rc_style(GTK_WIDGET(doc->text));
 	gtk_widget_ensure_style(GTK_WIDGET(doc->text));
 
+	gtk_signal_connect_object(GTK_OBJECT(doc->text),"event",
+			GTK_SIGNAL_FUNC(gE_document_callback_showpopup),GTK_OBJECT(doc->window->popup->menu));
 
 	doc->changed = FALSE;
 	doc->changed_id = gtk_signal_connect(GTK_OBJECT(doc->text), "changed",
@@ -248,23 +268,24 @@ gE_document
 	gtk_widget_show(doc->text);
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
-	/*hscrollbar = gtk_hscrollbar_new(GTK_TEXT(doc->text)->hadj);
-	gtk_table_attach(GTK_TABLE(table), hscrollbar, 0, 1, 1, 2,
-		GTK_EXPAND | GTK_FILL, GTK_FILL, 0, 0);*/
-	/* gtk_widget_show (hscrollbar); */
-
 	vscrollbar = gtk_vscrollbar_new(GTK_TEXT(doc->text)->vadj);
+#ifdef WITHOUT_GNOME
+	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 0, 1,
+		GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
+#else
 	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 1, 2,
 		GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
+#endif
 
 	GTK_WIDGET_UNSET_FLAGS(vscrollbar, GTK_CAN_FOCUS);
 	gtk_widget_show(vscrollbar);
 
+#ifndef WITHOUT_GNOME
 	scrollball = gtk_scrollball_new (NULL, GTK_TEXT(doc->text)->vadj);
 	gtk_table_attach (GTK_TABLE (table), scrollball, 1, 2, 0, 1,
 	                  0, GTK_FILL, 0, 0);
 	gtk_widget_show (scrollball);
-
+#endif
 	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), table,
 		doc->tab_label);
 
@@ -298,8 +319,8 @@ gE_document *gE_document_current(gE_window *window)
 	gE_document *current_document;
 	current_document = NULL;
 
-	assert(window != NULL);
-	assert(window->notebook != NULL);
+	g_assert(window != NULL);
+	g_assert(window->notebook != NULL);
 	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook));
 	/*g_print("%d\n",cur);*/
 	current_document = g_list_nth_data (window->documents, cur);
@@ -325,8 +346,8 @@ notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 	gE_document *doc;
 	gchar *title;
 
-	assert(window != NULL);
-	assert(window->window != NULL);
+	g_assert(window != NULL);
+	g_assert(window->window != NULL);
 
 	if (window->documents == NULL)
 		return;	
@@ -404,5 +425,139 @@ gE_msgbar_clear(gpointer data)
 	gE_msgbar_set(window, MSGBAR_CLEAR);
 	gtk_timeout_remove(msgbar_timeout_id);
 }
+/*
+-----------------------------------------------------------------
+	Creates the popupmenu for the editor 
+----------------------------------------------------------
+*/
+void gE_window_create_popupmenu(gE_data *data)
+{
+	gE_window *window=data->window;
+	window->popup->menu=gtk_menu_new();
 
+#ifdef WITHOUT_GNOME
+	window->popup->menu_cut=gtk_menu_item_new_with_label("Cut");
+	window->popup->menu_copy=gtk_menu_item_new_with_label("Copy");
+	window->popup->menu_paste=gtk_menu_item_new_with_label("Paste");
+	window->popup->menu_separator1=gtk_menu_item_new();
+	window->popup->menu_save=gtk_menu_item_new_with_label ("Save");
+	window->popup->menu_close=gtk_menu_item_new_with_label("Close");
+	window->popup->menu_print=gtk_menu_item_new_with_label ("Print");
+	window->popup->menu_separator2=gtk_menu_item_new();
+	window->popup->menu_swaphc=gtk_menu_item_new_with_label("Open (swap) .c/.h file");
+#else
+	window->popup->menu_cut=gtk_menu_item_new_with_label(N_("Cut"));
+	window->popup->menu_copy=gtk_menu_item_new_with_label(N_("Copy"));
+	window->popup->menu_paste=gtk_menu_item_new_with_label(N_("Paste"));
+	window->popup->menu_separator1=gtk_menu_item_new();
+	window->popup->menu_save=gtk_menu_item_new_with_label (N_("Save"));
+	window->popup->menu_close=gtk_menu_item_new_with_label(N_("Close"));
+	window->popup->menu_print=gtk_menu_item_new_with_label (N_("Print"));
+	window->popup->menu_separator2=gtk_menu_item_new();
+	window->popup->menu_swaphc=gtk_menu_item_new_with_label(N_("Open (swap) .c/.h file"));
+	
+#endif	/* WITHOUT_GNOME */
+
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_cut );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_copy );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_paste );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_separator1 );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_save );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_close );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_print );
+	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_separator2 );
+   	gtk_menu_append( GTK_MENU(window->popup->menu), window->popup->menu_swaphc );
+ 
+
+
+  	gtk_widget_show(window->popup->menu_cut);
+  	gtk_widget_show(window->popup->menu_copy);
+  	gtk_widget_show(window->popup->menu_paste);
+  	gtk_widget_show(window->popup->menu_separator1);
+	gtk_widget_show(window->popup->menu_save);
+  	gtk_widget_show(window->popup->menu_close);
+  	gtk_widget_show(window->popup->menu_print);
+  	gtk_widget_show(window->popup->menu_separator2);
+  	gtk_widget_show(window->popup->menu_swaphc);
+
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_swaphc),"activate",
+  				GTK_SIGNAL_FUNC(gE_document_cmd_callback_swaphc),window);
+    
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_cut),"activate",
+  				GTK_SIGNAL_FUNC(edit_cut_cmd_callback),data);
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_copy),"activate",
+  				GTK_SIGNAL_FUNC(edit_copy_cmd_callback),data);
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_paste),"activate",
+  				GTK_SIGNAL_FUNC(edit_paste_cmd_callback),data);
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_save), "activate",
+   				GTK_SIGNAL_FUNC(file_save_cmd_callback), data);
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_close), "activate",
+  				GTK_SIGNAL_FUNC(file_close_cmd_callback), data);
+   gtk_signal_connect(GTK_OBJECT(window->popup->menu_print), "activate",
+   				GTK_SIGNAL_FUNC(file_print_cmd_callback), data);
+
+}
+
+/*
+----------------------------------------------------------------------
+	shows popup when user clicks on 3 button on mouse
+----------------------------------------------------------------------
+*/
+gint gE_document_callback_showpopup(GtkWidget *widget,GdkEvent *ev)
+{
+	if(ev->type==GDK_BUTTON_PRESS)
+	{
+		GdkEventButton *event=(GdkEventButton*)ev;
+		if(event->button==3)	
+		{   gtk_menu_popup (GTK_MENU(widget), NULL, NULL, NULL, NULL,
+			    event->button, event->time);
+					return TRUE;
+		}
+	}
+	return FALSE;
+}
+/*
+-----------------------------------------------------------------------
+	if .c file is open open .h file 
+-----------------------------------------------------------------------
+*/
+void gE_document_cmd_callback_swaphc(GtkWidget *widget,gE_window *win)
+{
+	size_t len;
+	gchar *newfname;
+	gE_document *doc;
+	newfname=0;
+	doc=gE_document_current(win);
+	if(!doc || !doc->filename)
+		return;
+	    
+	len=strlen(doc->filename);
+	while(len){
+		if(doc->filename[len]=='.')
+			break; 
+		
+		len--;
+	};
+	if(strcasecmp(&doc->filename[len],".h")==0) {
+		len++;
+		newfname=g_strdup(doc->filename);
+		newfname[len]='c';
+	}
+	else if(strncasecmp(&doc->filename[len],".c",2)==0 ) {   
+		len++;
+		newfname=g_strdup(doc->filename);
+		newfname[len]='h';
+	}
+	if(newfname){
+		/* hmm maybe whe should check if the file exist before we try to open */
+				 /* this will be fixed later.... */
+		
+		doc=gE_document_new(win);
+		gE_file_open(win,doc,newfname);		
+		if (win->files_list_window)
+			flw_append_entry(win, doc,
+			g_list_length(GTK_NOTEBOOK(win->notebook)->children) - 1,
+			doc->filename);	
+	}
+}
 /* the end */
