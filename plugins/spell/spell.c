@@ -76,7 +76,7 @@ struct _CheckRange
 	GtkTextMark *start_mark;
 	GtkTextMark *end_mark;
 
-	gint mw_start; /* mispelled word start */
+	gint mw_start; /* misspelled word start */
 	gint mw_end;   /* end */
 
 	GtkTextMark *current_mark;
@@ -396,7 +396,7 @@ goto_next_word (GeditDocument *doc)
 }
 
 static gchar *
-get_next_mispelled_word (GeditDocument *doc)
+get_next_misspelled_word (GeditDocument *doc)
 {
 	CheckRange *range;
 	gint start, end;
@@ -472,7 +472,7 @@ ignore_cb (GeditSpellCheckerDialog *dlg,
 	g_return_if_fail (doc != NULL);
 	g_return_if_fail (w != NULL);
 
-	word = get_next_mispelled_word (doc);
+	word = get_next_misspelled_word (doc);
 	if (word == NULL)
 	{
 		gedit_spell_checker_dialog_set_completed (dlg);
@@ -480,7 +480,7 @@ ignore_cb (GeditSpellCheckerDialog *dlg,
 		return;
 	}
 
-	gedit_spell_checker_dialog_set_mispelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
+	gedit_spell_checker_dialog_set_misspelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
 			word, -1);
 	g_free (word);
 
@@ -531,7 +531,7 @@ change_cb (GeditSpellCheckerDialog *dlg,
 
 	update_current (doc, range->mw_start + g_utf8_strlen (change, -1));
 
-	/* go to next mispelled word */
+	/* go to next misspelled word */
 	ignore_cb (dlg, word, doc);
 }
 
@@ -598,7 +598,7 @@ change_all_cb (GeditSpellCheckerDialog *dlg,
 		g_free (last_replaced_text);
 	}
 
-	/* go to next mispelled word */
+	/* go to next misspelled word */
 	ignore_cb (dlg, word, doc);
 }
 
@@ -608,7 +608,7 @@ add_word_cb (GeditSpellCheckerDialog *dlg, const gchar *word, GeditDocument *doc
 	g_return_if_fail (doc != NULL);
 	g_return_if_fail (word != NULL);
 
-	/* go to next mispelled word */
+	/* go to next misspelled word */
 	ignore_cb (dlg, word, doc);
 }
 
@@ -631,7 +631,7 @@ show_empty_document_dialog ()
 }
 
 static void
-show_no_mispelled_words_dialog (gboolean sel)
+show_no_misspelled_words_dialog (gboolean sel)
 {
 	 GtkWidget *message_dlg; 
 	
@@ -640,8 +640,8 @@ show_no_mispelled_words_dialog (gboolean sel)
 			                       GTK_MESSAGE_INFO,
 			                       GTK_BUTTONS_OK,
 					       sel ? 
-					       _("The selected text does not contain mispelled words.") :
-					       _("The document does not contain mispelled words."));
+					       _("The selected text does not contain misspelled words.") :
+					       _("The document does not contain misspelled words."));
 
 	 gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 	 
@@ -703,10 +703,10 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	else	
 		set_check_range (doc, 0, -1);
 
-	word = get_next_mispelled_word (doc);
+	word = get_next_misspelled_word (doc);
 	if (word == NULL)
 	{
-		show_no_mispelled_words_dialog (sel);
+		show_no_misspelled_words_dialog (sel);
 		return;
 	}
 
@@ -723,7 +723,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 
 	g_signal_connect (G_OBJECT (dlg), "add_word_to_personal", G_CALLBACK (add_word_cb), doc);
 
-	gedit_spell_checker_dialog_set_mispelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
+	gedit_spell_checker_dialog_set_misspelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
 			word, -1);
 
 	g_free (word);

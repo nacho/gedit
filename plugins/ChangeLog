@@ -1,3 +1,26 @@
+2004-12-05  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #160411: Misspelled word in spellchecker dialog
+
+	* spell/gedit-spell-checker-dialog.c
+	(gedit_spell_checker_dialog_init)
+	(gedit_spell_checker_dialog_destroy)
+	(gedit_spell_checker_dialog_set_spell_checker)
+	(gedit_spell_checker_dialog_set_misspelled_word)
+	(add_word_button_clicked_handler) (ignore_button_clicked_handler)
+	(ignore_all_button_clicked_handler) (change_button_clicked_handler)
+	(change_all_button_clicked_handler)
+	(gedit_spell_checker_dialog_set_completed): s/mispelled/misspelled
+
+	* spell/gedit-spell-checker-dialog.h: s/mispelled/misspelled
+
+	* spell/spell-checker.glade2: s/mispelled/misspelled
+
+	* spell/spell.c (get_next_misspelled_word) (ignore_cb) (change_cb)
+	(change_all_cb) (add_word_cb) (show_no_misspelled_words_dialog)
+	(spell_cb): s/mispelled/misspelled
+
+
 2004-11-25  Paolo Borelli  <pborelli@katamail.com>
 
 	* taglist/gedit-taglist-plugin-window.c: do not leak tooltips.
