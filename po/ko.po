@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit 0.4.5\n"
-"POT-Creation-Date: 1998-12-21 23:31+0000\n"
+"POT-Creation-Date: 1999-02-04 18:05-0500\n"
 "PO-Revision-Date: 1998-10-18 03:07:11+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -13,239 +13,460 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-kr\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/commands.c:1056 src/commands.c:1057 src/menus.c:376
+#: editor-plugins/email.c:86
+msgid "The gEdit Email Plugin"
+msgstr ""
+
+#: gmodule-plugins/launcher/main.c:57
+#, c-format
+msgid "Docid is %ld.\n"
+msgstr ""
+
+#: gmodule-plugins/shell/main.c:63
+msgid "Shell"
+msgstr ""
+
+#: src/commands.c:1048 src/commands.c:1049
 #, fuzzy
 msgid "_File"
 msgstr "파일"
 
-#: src/gE_about.c:159
+#: src/gE_about.c:45
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEidt은 그놈/Gtk+를 위한 작고 가변운 텍스트 에디터입니다."
 
-#: src/gedit.c:233
-msgid "Launch a plugin at startup"
-msgstr "시작시 플러그인 실행"
-
-#: src/gedit.c:233
-msgid "PLUGIN-NAME"
-msgstr ""
-
-#: src/menus.c:234
-msgid "New"
-msgstr "새 것"
-
-#: src/menus.c:237
-#, fuzzy
-msgid "Open..."
-msgstr "열기"
-
-#: src/menus.c:240
-msgid "Save"
-msgstr "저장"
-
-#: src/menus.c:243
-#, fuzzy
-msgid "Save As..."
-msgstr "다른 이름으로 저장"
-
-#: src/menus.c:245
-#, fuzzy
-msgid "Print..."
-msgstr "인쇄"
-
-#: src/menus.c:247
-msgid "Close"
-msgstr "닫기"
-
-#: src/menus.c:250
-msgid "Close All"
-msgstr "전부 닫기"
-
-#: src/menus.c:255
-#, fuzzy
-msgid "Exit"
-msgstr "편집"
-
-#: src/menus.c:264
+#: src/gE_document.c:61 src/toolbar.c:51
 msgid "Cut"
 msgstr "자르기"
 
-#: src/menus.c:267
+#: src/gE_document.c:62 src/toolbar.c:53
 msgid "Copy"
 msgstr "복사"
 
-#: src/menus.c:270
+#: src/gE_document.c:63 src/toolbar.c:55
 msgid "Paste"
 msgstr "붙이기"
 
-#: src/menus.c:274
-msgid "Select All"
-msgstr "전부 선택"
-
-#: src/menus.c:280
-msgid "Search for Text..."
+#: src/gE_document.c:65
+msgid "Open in new window"
 msgstr ""
 
-#: src/menus.c:282
+#: src/gE_document.c:66 src/toolbar.c:42
+msgid "Save"
+msgstr "저장"
+
+#: src/gE_document.c:67 src/toolbar.c:44
+msgid "Close"
+msgstr "닫기"
+
+#. Print Settings
+#: src/gE_document.c:68 src/gE_prefs_box.c:406 src/gE_print.c:69
+#: src/toolbar.c:46
 #, fuzzy
-msgid "Search for Line..."
-msgstr "다시 찾기"
+msgid "Print"
+msgstr "인쇄"
 
-#: src/menus.c:284
-#, fuzzy
-msgid "Search and Replace..."
-msgstr "찾아서 바꾸기"
-
-#: src/menus.c:287
-msgid "Search Again"
-msgstr "다시 찾기"
-
-#: src/menus.c:293
-msgid "Top"
-msgstr "위"
-
-#: src/menus.c:294
-msgid "Bottom"
-msgstr "아래"
-
-#: src/menus.c:295
-msgid "Left"
-msgstr "왼쪽"
-
-#: src/menus.c:296
-msgid "Right"
-msgstr "오른쪽"
-
-#: src/menus.c:298
-msgid "Toggle"
-msgstr "토글"
-
-#. {GNOME_APP_UI_ITEM, N_("Show Toolbar"), NULL, tb_on_cb, (gpointer) GE_WINDOW, NULL },
-#. {GNOME_APP_UI_ITEM, N_("Hide Toolbar"), NULL, tb_off_cb, (gpointer) GE_WINDOW, NULL },
-#. {GNOME_APP_UI_SEPARATOR},
-#.
-#: src/menus.c:307
-msgid "Pictures and Text"
-msgstr "그림과 글자"
-
-#: src/menus.c:308
-msgid "Pictures only"
-msgstr "그림만"
-
-#: src/menus.c:309
-msgid "Text only"
-msgstr "글자만"
-
-#: src/menus.c:312
-msgid "Toolbar Relief On"
+#: src/gE_document.c:70
+msgid "Open (swap) .c/.h file"
 msgstr ""
 
-#: src/menus.c:313
-#, fuzzy
-msgid "Toolbar Relief Off"
-msgstr "툴팁 숨기기"
-
-#: src/menus.c:316
-msgid "Tooltips On"
-msgstr "툴팁 보이기"
-
-#: src/menus.c:317
-msgid "Tooltips Off"
-msgstr "툴팁 숨기기"
-
-#: src/menus.c:322
-msgid "Preferences..."
-msgstr "속성..."
-
-#: src/menus.c:324
-msgid "Toggle Autoindent"
-msgstr "Autoindent 토글"
-
-#: src/menus.c:325
-msgid "Toggle Statusbar"
-msgstr "상태막대 토글"
-
-#: src/menus.c:326
-msgid "Toggle Wordwrap"
-msgstr "Wordwrap 토글"
-
-#: src/menus.c:327
-msgid "Toggle Linewrap"
+#. line and column indicators
+#: src/gE_document.c:148
+msgid "Column:"
 msgstr ""
 
-#: src/menus.c:328
-msgid "Toggle Readonly"
+#: src/gE_document.c:157
+msgid "Line"
 msgstr ""
 
-#: src/menus.c:329
-msgid "Toggle Split Screen"
+#: src/gE_files.c:305
+msgid "Currently Open Files"
 msgstr ""
 
-#: src/menus.c:331
-msgid "Toggle Scrollball"
-msgstr ""
-
-#: src/menus.c:334
-msgid "Document Tabs"
-msgstr "문서 탭"
-
-#: src/menus.c:335
-msgid "Toolbar"
-msgstr "툴바"
-
-#: src/menus.c:337
-msgid "Save Settings"
-msgstr "설정 저장"
-
-#: src/menus.c:342
-msgid "New Window"
-msgstr "새 창"
-
-#: src/menus.c:344
-msgid "Close Window"
-msgstr "창 닫기"
-
-#: src/menus.c:347
-msgid "Document List"
-msgstr "문서 리스트"
-
-#: src/menus.c:350
-msgid "Message Box"
-msgstr "메시지 박스"
-
-#: src/menus.c:361
-msgid "About..."
-msgstr "이 프로그램은..."
-
-#: src/menus.c:378
-#, fuzzy
-msgid "_Edit"
-msgstr "편집"
-
-#: src/menus.c:380
-#, fuzzy
-msgid "_Search"
-msgstr "찾기"
-
-#: src/menus.c:382
-#, fuzzy
-msgid "_Options"
-msgstr "옵션"
-
-#: src/menus.c:385
+#: src/gE_plugin_api.c:117 src/gE_plugin_api.c:118 src/menus.c:237
 #, fuzzy
 msgid "_Plugins"
 msgstr "플러그인"
 
-#: src/menus.c:388
-#, fuzzy
-msgid "_Window"
-msgstr "창"
+#: src/gE_prefs_box.c:163
+msgid "Appearance"
+msgstr ""
 
-#: src/menus.c:390
+#: src/gE_prefs_box.c:176
 #, fuzzy
-msgid "_Help"
-msgstr "도움말"
+msgid "Show Statusbar"
+msgstr "상태막대 토글"
+
+#: src/gE_prefs_box.c:185
+msgid "Show Splitscreen"
+msgstr ""
+
+#: src/gE_prefs_box.c:194
+msgid "Editor Behavior"
+msgstr ""
+
+#: src/gE_prefs_box.c:207
+#, fuzzy
+msgid "Enable Autoindent"
+msgstr "Autoindent 토글"
+
+#: src/gE_prefs_box.c:216
+#, fuzzy
+msgid "Enable Wordwrap"
+msgstr "Wordwrap 토글"
+
+#: src/gE_prefs_box.c:232
+msgid "Print Command"
+msgstr ""
+
+#: src/gE_prefs_box.c:318
+msgid "Current Font"
+msgstr ""
+
+#: src/gE_prefs_box.c:335
+#, fuzzy
+msgid "Select..."
+msgstr "전부 선택"
+
+#. General Settings
+#: src/gE_prefs_box.c:401
+msgid "General"
+msgstr ""
+
+#. Font Settings
+#: src/gE_prefs_box.c:411
+msgid "Font"
+msgstr ""
+
+#: src/gE_print.c:90
+msgid "Print Command:"
+msgstr ""
+
+#: src/gE_print.c:216
+msgid "Print anyway"
+msgstr ""
+
+#: src/gE_print.c:216
+msgid " Save, then print "
+msgstr ""
+
+#: src/gedit.c:116
+msgid "Launch a plugin at startup"
+msgstr "시작시 플러그인 실행"
+
+#: src/gedit.c:116
+msgid "PLUGIN-NAME"
+msgstr ""
+
+#: src/menus.c:66
+#, fuzzy
+msgid "_New"
+msgstr "새 것"
+
+#: src/menus.c:66 src/toolbar.c:38
+msgid "Create a new document"
+msgstr ""
+
+#: src/menus.c:83
+msgid "Close All"
+msgstr "전부 닫기"
+
+#: src/menus.c:83
+msgid "Close all open files"
+msgstr ""
+
+#: src/menus.c:105
+msgid "Find _Line..."
+msgstr ""
+
+#: src/menus.c:106
+#, fuzzy
+msgid "Search for a line"
+msgstr "다시 찾기"
+
+#: src/menus.c:120
+#, fuzzy
+msgid "_Top"
+msgstr "위"
+
+#: src/menus.c:121
+msgid "Put the document tabs at the top"
+msgstr ""
+
+#: src/menus.c:124
+#, fuzzy
+msgid "_Bottom"
+msgstr "아래"
+
+#: src/menus.c:125
+msgid "Put the document tabs at the bottom"
+msgstr ""
+
+#: src/menus.c:128
+#, fuzzy
+msgid "_Left"
+msgstr "왼쪽"
+
+#: src/menus.c:129
+msgid "Put the document tabs on the left"
+msgstr ""
+
+#: src/menus.c:132
+#, fuzzy
+msgid "_Right"
+msgstr "오른쪽"
+
+#: src/menus.c:133
+msgid "Put the document tabs on the right"
+msgstr ""
+
+#: src/menus.c:139
+msgid "Toggle the presence of the document tabs"
+msgstr ""
+
+#: src/menus.c:150
+#, fuzzy
+msgid "Toggle autoindent"
+msgstr "Autoindent 토글"
+
+#: src/menus.c:155
+#, fuzzy
+msgid "Toggle statusbar"
+msgstr "상태막대 토글"
+
+#: src/menus.c:160
+msgid "Toggle Wordwrap"
+msgstr "Wordwrap 토글"
+
+#: src/menus.c:165
+msgid "Toggle Linewrap"
+msgstr ""
+
+#: src/menus.c:170
+msgid "Toggle Readonly"
+msgstr ""
+
+#: src/menus.c:175
+msgid "Toggle Split Screen"
+msgstr ""
+
+#: src/menus.c:181
+#, fuzzy
+msgid "_Document Tabs"
+msgstr "문서 탭"
+
+#: src/menus.c:182
+msgid "Change the placement of the document tabs"
+msgstr ""
+
+#: src/menus.c:186
+#, fuzzy
+msgid "Sa_ve Settings"
+msgstr "설정 저장"
+
+#: src/menus.c:187
+msgid "Save the current settings for future sessions"
+msgstr ""
+
+#: src/menus.c:205
+#, fuzzy
+msgid "_Document List"
+msgstr "문서 리스트"
+
+#: src/menus.c:206
+#, fuzzy
+msgid "Display the document list"
+msgstr "문서 리스트"
+
+#: src/search.c:149
+#, c-format
+msgid ""
+"Total Lines: %i\n"
+"Current Line: %i"
+msgstr ""
+
+#: src/search.c:363 src/search.c:581
+#, fuzzy
+msgid "Search and Replace"
+msgstr "찾아서 바꾸기"
+
+#: src/search.c:363 src/search.c:581
+#, fuzzy
+msgid "Search"
+msgstr "찾기"
+
+#: src/search.c:366
+#, fuzzy
+msgid "Search For:"
+msgstr "찾기"
+
+#: src/search.c:370
+#, fuzzy
+msgid "Text"
+msgstr "글자만"
+
+#: src/search.c:377
+msgid "Line Number"
+msgstr ""
+
+#: src/search.c:396
+#, fuzzy
+msgid "Search:"
+msgstr "찾기"
+
+#: src/search.c:399
+msgid "Start searching at cursor position"
+msgstr ""
+
+#: src/search.c:404
+msgid "Start searching at beginning of the document"
+msgstr ""
+
+#: src/search.c:406
+msgid "Case sensitive"
+msgstr ""
+
+#: src/search.c:410
+msgid "Replace:"
+msgstr ""
+
+#: src/search.c:413
+msgid "Prompt before replacing"
+msgstr ""
+
+#: src/toolbar.c:38
+msgid "New"
+msgstr "새 것"
+
+#: src/toolbar.c:40
+#, fuzzy
+msgid "Open"
+msgstr "열기"
+
+#: src/toolbar.c:40
+msgid "Open a file"
+msgstr ""
+
+#: src/toolbar.c:42
+msgid "Save the current file"
+msgstr ""
+
+#: src/toolbar.c:44
+msgid "Close the current file"
+msgstr ""
+
+#: src/toolbar.c:46
+msgid "Print the current file"
+msgstr ""
+
+#: src/toolbar.c:51
+msgid "Cut the selection"
+msgstr ""
+
+#: src/toolbar.c:53
+msgid "Copy the selection"
+msgstr ""
+
+#: src/toolbar.c:55
+msgid "Paste the clipboard"
+msgstr ""
+
+#: src/toolbar.c:57
+msgid "Find"
+msgstr ""
+
+#: src/toolbar.c:57
+#, fuzzy
+msgid "Search for a string"
+msgstr "다시 찾기"
+
+#: src/toolbar.c:62
+#, fuzzy
+msgid "Exit"
+msgstr "편집"
+
+#: src/toolbar.c:62
+msgid "Exit the program"
+msgstr ""
+
+#: src/toolbar.c:70
+#, fuzzy
+msgid " Save "
+msgstr "저장"
+
+#: src/toolbar.c:72
+#, fuzzy
+msgid " Close "
+msgstr "닫기"
+
+#: src/toolbar.c:74
+#, fuzzy
+msgid " Print "
+msgstr "인쇄"
+
+#: src/toolbar.c:77
+msgid " OK "
+msgstr ""
+
+#, fuzzy
+#~ msgid "Save As..."
+#~ msgstr "다른 이름으로 저장"
+
+#~ msgid "Search Again"
+#~ msgstr "다시 찾기"
+
+#~ msgid "Toggle"
+#~ msgstr "토글"
+
+#~ msgid "Pictures and Text"
+#~ msgstr "그림과 글자"
+
+#~ msgid "Pictures only"
+#~ msgstr "그림만"
+
+#, fuzzy
+#~ msgid "Toolbar Relief Off"
+#~ msgstr "툴팁 숨기기"
+
+#~ msgid "Tooltips On"
+#~ msgstr "툴팁 보이기"
+
+#~ msgid "Tooltips Off"
+#~ msgstr "툴팁 숨기기"
+
+#~ msgid "Preferences..."
+#~ msgstr "속성..."
+
+#~ msgid "Toolbar"
+#~ msgstr "툴바"
+
+#~ msgid "New Window"
+#~ msgstr "새 창"
+
+#~ msgid "Close Window"
+#~ msgstr "창 닫기"
+
+#~ msgid "Message Box"
+#~ msgstr "메시지 박스"
+
+#~ msgid "About..."
+#~ msgstr "이 프로그램은..."
+
+#, fuzzy
+#~ msgid "_Edit"
+#~ msgstr "편집"
+
+#, fuzzy
+#~ msgid "_Options"
+#~ msgstr "옵션"
+
+#, fuzzy
+#~ msgid "_Window"
+#~ msgstr "창"
+
+#, fuzzy
+#~ msgid "_Help"
+#~ msgstr "도움말"
 
 #~ msgid "File"
 #~ msgstr "파일"

@@ -18,7 +18,14 @@ Requires: gnome-libs
 #Docdir: %{prefix}/doc
 
 %description
-gEdit is a small but powerful text editor for GTK+ and/or GNOME.  
+gEdit is a small but powerful text editor for GTK+ and/or GNOME.
+
+%package devel
+Summary: gEdit is a small but powerful text editor for GTK+ and/or GNOME.
+Group: Editors
+
+%description devel
+gEdit is a small but powerful text editor for GTK+ and/or GNOME.
  
 %prep
 %setup
@@ -45,13 +52,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-, root, root)
+
 %doc README COPYING ChangeLog NEWS TODO AUTHORS INSTALL THANKS
 %{prefix}/bin/gedit
-%{prefix}/include/*
-%{prefix}/share/*
-%{prefix}/man/*
-%{prefix}/libexec/*
+%{prefix}/share/locale/*/*/*
+%{prefix}/share/apps/*/*
+%{prefix}/share/pixmaps/*
+%{prefix}/share/mime-info/*
+%{prefix}/share/geditrc
+%{prefix}/man/*/*
+%{prefix}/libexec/*/*/*
 
+
+%files devel
+%defattr(-, root, root)
+%{prefix}/include/*/*
+%{prefix}/lib/*
 
 %changelog
 
