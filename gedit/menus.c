@@ -231,20 +231,20 @@ void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
 GnomeUIInfo gedit_file_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("_New"),  NULL, file_new_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
           'N', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Open..."),  NULL, file_open_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("_Open..."),  NULL, file_open_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
 	  'O', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("_Save"),  NULL, file_save_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
 	  'S', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save As..."),  NULL, file_save_as_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Save _As..."),  NULL, file_save_as_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS },
-	{ GNOME_APP_UI_ITEM, N_("Print..."),  NULL, file_print_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("_Print..."),  NULL, file_print_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },	
-	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("_Close"),  NULL, file_close_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
 	  'W', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
@@ -252,7 +252,7 @@ GnomeUIInfo gedit_file_menu [] = {
 
 	{ GNOME_APP_UI_SEPARATOR },
 
-	{ GNOME_APP_UI_ITEM, N_("Exit"),  NULL, file_quit_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("E_xit"),  NULL, file_quit_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
 	  'Q', GDK_CONTROL_MASK, NULL },
 
