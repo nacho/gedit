@@ -1,6 +1,17 @@
+2002-02-23  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-utils.[ch](gedit_utils_error_reporting_loading_file)
+	(gedit_utils_error_reporting_saving_file)
+	(gedit_utils_error_reporting_reverting_file): new functions
+
+	* gedit-file.c: use the new functions to report errors
+
+	* gedit-document.c (gedit_document_save_as_real): better
+	error reporting
+
 2002-02-22  Federico Mena Quintero  <federico@ximian.com>
 
-	* bonobo-mdi.c: Replace gtk_object_* and gtk_signal_* with the new
+	* bonobo-mdi.c: Replace gtk_object_*  with the new
 	GObject calls.
 	* gedit-mdi.c: Likewise.
 

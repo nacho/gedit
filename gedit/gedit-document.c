@@ -643,8 +643,9 @@ gedit_document_load (GeditDocument* doc, const gchar *uri, GError **error)
 				if (conv_error != NULL)
 					g_error_free (conv_error);
 
-				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_WRONG_FORMAT,
-				_("Invalid UTF-8 data encountered reading file"));
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, 
+					     GEDIT_ERROR_INVALID_UTF8_DATA,
+					     _("Invalid UTF-8 data"));
 				
 				if (converted_file_contents != NULL)
 					g_free (converted_file_contents);
@@ -749,8 +750,8 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	{
 		if (!g_utf8_validate (file_contents->str, file_contents->len, NULL))
 		{
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_WRONG_FORMAT,
-				_("Invalid UTF-8 data encountered reading file"));
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GEDIT_ERROR_INVALID_UTF8_DATA,
+				_("Invalid UTF-8 data"));
 			g_string_free (file_contents, TRUE);
 			return FALSE;
 		}
@@ -913,6 +914,9 @@ gedit_document_save_a_copy_as (GeditDocument* doc, const gchar *uri, GError **er
 	return ret;
 }
 
+/* FIXME: define new ERROR_CODE and remove the error 
+ * strings from here -- Paolo
+ */
 static gboolean	
 gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	       gboolean create_backup_copy, GError **error)
@@ -932,9 +936,23 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 
 	if (!gedit_utils_uri_has_file_scheme (uri))
 	{
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, EROFS, g_strerror (EROFS));
-		return FALSE;
-	
+		gchar *error_message;
+		gchar *scheme_string = gnome_vfs_x_uri_get_scheme (uri);
+                
+		if (scheme_string != NULL)
+		{
+			error_message = g_strdup_printf (
+				_("gedit cannot handle %s: locations in write mode."),
+                               	scheme_string);
+
+			g_free (scheme_string);
+		}
+		else
+			error_message = g_strdup_printf (
+				_("gedit cannot handle this kind of location in write mode."));
+
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, EROFS, error_message);
+		return FALSE;	
 	}
 	
 	fname = gnome_vfs_x_format_uri_for_display (uri);
@@ -948,8 +966,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
       			if (errno != ENOENT)
 			{
 				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-					"Cannot create the backup copy of the file.\n"
-					"The file has not been saved.");
+					_("Could not create the backup copy of the file."));
 		
 				if (fname != NULL) 
 					g_free (fname);
@@ -968,8 +985,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	if ((fname == NULL) || ((file = fopen (fname, "w")) == NULL))
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
-			"Make sure that the path you provided exists,\n"
-			"and that you have the appropriate write permissions.");
+			_("Make sure that the path you provided exists, "
+			  "and that you have the appropriate write permissions."));
 						
 		res = FALSE;
 
@@ -1000,7 +1017,24 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	
 	if (fputs (chars, file) == EOF || fclose (file) == EOF)
 	{
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, g_strerror (errno));
+		gchar *errmsg;
+
+		switch (errno)
+		{
+			case ENOSPC: 
+				errmsg = g_strdup_printf (
+					_("There is no enough disk space to save the file.\n"
+					  "Please, free some space on the disk and try again."));
+				break;
+			case EFBIG:
+				errmsg = g_strdup_printf (
+					_("The file is too big."));
+				break;
+			default:
+				errmsg = g_strdup_printf (" "); 
+		}
+
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, errmsg);
 		g_free (chars);
 
 		res = FALSE;
@@ -1128,7 +1162,7 @@ gedit_document_revert (GeditDocument *doc,  GError **error)
 
 	if (gedit_document_is_untitled (doc))
 	{
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GNOME_VFS_ERROR_GENERIC,
+		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GEDIT_ERROR_UNTITLED,
 			_("It is not possible to revert an Untitled document"));
 		return FALSE;
 	}

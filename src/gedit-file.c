@@ -159,36 +159,14 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 		if (error)
 		{
-			GtkWidget *dialog;
-			/* FIXME: do a more user friendly error reporting */
-			gchar *errstr;
-			gchar *formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
-		       	
-			errstr = g_strdup_printf (_("Could not open the file \"%s\":\n\n%s."),
-						  formatted_uri, error->message);
-		
-			dialog = gtk_message_dialog_new (
-					GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				   	GTK_MESSAGE_ERROR,
-				   	GTK_BUTTONS_OK,
-					errstr);
+			gedit_utils_error_reporting_loading_file (uri, error,
+					GTK_WINDOW (gedit_get_active_window ()));
 			
-			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
-			gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-			gtk_dialog_run (GTK_DIALOG (dialog));
-  			gtk_widget_destroy (dialog);
-			
-			g_free (formatted_uri);
-			g_free (errstr);
-
 			g_error_free (error);
 			g_free (uri);
 			return FALSE;
-		}
-
+		}	
+			
 		g_return_val_if_fail (new_child != NULL, FALSE);
 		g_return_val_if_fail (gedit_mdi != NULL, FALSE);
 
@@ -206,31 +184,9 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 		if (error)
 		{
-			GtkWidget *dialog;
-			/* FIXME: do a more user friendly error reporting */
-			gchar *errstr;
-			gchar *formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
-		       	
-			errstr = g_strdup_printf (_("Could not open the file \"%s\":\n\n%s."),
-						  formatted_uri, error->message);
-		
-			dialog = gtk_message_dialog_new (
-					GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				   	GTK_MESSAGE_ERROR,
-				   	GTK_BUTTONS_OK,
-					errstr);
+			gedit_utils_error_reporting_loading_file (uri, error,
+					GTK_WINDOW (gedit_get_active_window ()));
 			
-			gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
-			gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-			gtk_dialog_run (GTK_DIALOG (dialog));
-  			gtk_widget_destroy (dialog);
-
-			g_free (formatted_uri);
-			g_free (errstr);
-
 			g_error_free (error);
 			g_free (uri);
 			return FALSE;
@@ -285,48 +241,20 @@ gedit_file_save (GeditMDIChild* child)
 
 	if (!ret)
 	{
+		GtkWidget *view;
 		
-		gchar *error_message;
-		gchar *errstr;
-		GtkWidget *view, *dialog;
-
+		g_return_val_if_fail (error != NULL, FALSE);
 		gedit_debug (DEBUG_FILE, "FAILED");
-	       	
-		if (error == NULL)
-		{
-			error_message = _("Unknown error");
-		}
-		else
-		{
-			error_message = error->message;
-		}
-		
-		errstr = g_strdup_printf (_("Could not save the file \"%s\":\n\n%s."),
-					    uri, error_message);
-		
+
 		view = GTK_WIDGET (g_list_nth_data (
 					bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (child)), 0));
 		if (view != NULL)
 			bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
-			
-		dialog = gtk_message_dialog_new (
-				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
-				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_ERROR,
-				GTK_BUTTONS_OK,
-				errstr);
-			
-		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+		
+		gedit_utils_error_reporting_saving_file (uri, error,
+					GTK_WINDOW (gedit_get_active_window ()));
 
-		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-		gtk_dialog_run (GTK_DIALOG (dialog));
-  		gtk_widget_destroy (dialog);
-
-		g_free (errstr);
-
-		if (error != NULL)
-			g_error_free (error);
+		g_error_free (error);
 
 		gedit_utils_flash_va (_("The document has not been saved."));
 
@@ -415,42 +343,12 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 
 	if (!ret)
 	{
-		GtkWidget *dialog;
-		gchar *error_message;
-		gchar *errstr;
+		g_return_val_if_fail (error != NULL, FALSE);
 
-		gedit_debug (DEBUG_FILE, "FAILED");
-	       	
-		if (error == NULL)
-		{
-			error_message = _("Unknown error");
-		}
-		else
-		{
-			error_message = error->message;
-		}
-		
-		errstr = g_strdup_printf (_("Could not save the file \"%s\":\n\n%s."),
-					    file_name, error_message);
-		
-		dialog = gtk_message_dialog_new (
-					GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				   	GTK_MESSAGE_ERROR,
-				   	GTK_BUTTONS_OK,
-					errstr);
+		gedit_utils_error_reporting_saving_file (uri, error,
+					GTK_WINDOW (gedit_get_active_window ()));
 
-		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
-		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-		gtk_dialog_run (GTK_DIALOG (dialog));
-  		gtk_widget_destroy (dialog);
-
-		g_free (errstr);
-
-		if (error != NULL)
-			g_error_free (error);
+		g_error_free (error);
 		
 		g_free (uri);
 
@@ -569,48 +467,13 @@ gedit_file_revert (GeditMDIChild *child)
 
 	if (!ret)
 	{
-		gchar *error_message;
-		gchar *errstr;
-		GtkWidget *view, *dialog;
+		g_return_val_if_fail (error != NULL, FALSE);
 
-		gedit_debug (DEBUG_FILE, "FAILED");
-	       	
-		if (error == NULL)
-		{
-			error_message = _("Unknown error");
-		}
-		else
-		{
-			error_message = error->message;
-		}
+		gedit_utils_error_reporting_reverting_file (uri, error,
+					GTK_WINDOW (gedit_get_active_window ()));
+
+		g_error_free (error);
 		
-		errstr = g_strdup_printf (_("Could not revert the file \"%s\".\n\n%s."),
-					    uri, error_message);
-		
-		view = GTK_WIDGET (g_list_nth_data (
-					bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (child)), 0));
-		if (view != NULL)
-			bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
-		
-		dialog = gtk_message_dialog_new (
-					GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
-					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				   	GTK_MESSAGE_ERROR,
-				   	GTK_BUTTONS_OK,
-					errstr);
-		
-		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-
-		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-		gtk_dialog_run (GTK_DIALOG (dialog));
-  		gtk_widget_destroy (dialog);
-
-		g_free (errstr);
-
-		if (error != NULL)
-			g_error_free (error);
-
 		gedit_utils_flash_va (_("The document has not been reverted."));
 
 		g_free (uri);
@@ -822,8 +685,7 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 		/* FIXME: do a more user friendly error reporting */
 		gchar *errstr;
 	       	
-		errstr = g_strdup_printf (_("Could not read data from stdin.\n\n%s."),
-						   error->message);
+		errstr = g_strdup_printf (_("Could not read data from stdin."));
 		
 		dialog = gtk_message_dialog_new (
 				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),

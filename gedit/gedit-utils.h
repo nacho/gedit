@@ -44,16 +44,34 @@ void	gedit_utils_flash_va  (gchar *format, ...);
 gboolean gedit_utils_is_uri_read_only (const gchar* uri);
 gboolean gedit_utils_uri_has_file_scheme (const gchar *uri);
 
-GtkWidget* gedit_button_new_with_stock_image (const gchar* text, const gchar* stock_id);
-GtkWidget* gedit_dialog_add_button (GtkDialog *dialog, const gchar* text, 
-		const gchar* stock_id, gint response_id);
+GtkWidget* gedit_button_new_with_stock_image (const gchar* text, 
+					      const gchar* stock_id);
+
+GtkWidget* gedit_dialog_add_button (GtkDialog *dialog, 
+				    const gchar* text, 
+				    const gchar* stock_id, 
+				    gint response_id);
 
 gboolean gedit_text_iter_forward_search  (const GtkTextIter *iter,
-                                        const gchar       *str,
-                                        GtkTextSearchFlags flags,
-                                        GtkTextIter       *match_start,
-                                        GtkTextIter       *match_end,
-                                        const GtkTextIter *limit);
+					  const gchar       *str,
+					  GtkTextSearchFlags flags,
+					  GtkTextIter       *match_start,
+					  GtkTextIter       *match_end,
+					  const GtkTextIter *limit);
+
+gchar *gedit_utils_str_middle_truncate (const gchar *string, 
+					guint truncate_length);
+
+void gedit_utils_error_reporting_loading_file (const gchar *uri, 
+					       GError *error,
+					       GtkWindow *parent);
+void gedit_utils_error_reporting_saving_file  (const gchar *uri, 
+					       GError *error,
+					       GtkWindow *parent);
+void gedit_utils_error_reporting_reverting_file (const gchar *uri, 
+					       GError *error,
+					       GtkWindow *parent);
+
 
 #endif /* __GEDIT_UTILS_H__ */
 

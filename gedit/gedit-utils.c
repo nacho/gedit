@@ -30,6 +30,9 @@
 
 #include <libgnomeui/libgnomeui.h>
 #include <glib/gunicode.h>
+#include <libgnome/gnome-i18n.h>
+#include <libgnomevfs/gnome-vfs-uri.h>
+
 
 #include <string.h>
 
@@ -37,7 +40,7 @@
 #include "gedit2.h"
 #include "bonobo-mdi.h"
 #include "gnome-vfs-helpers.h"
-
+#include "gedit-document.h"
 
 /* =================================================== */
 /* Flash */
@@ -746,5 +749,551 @@ gedit_text_iter_forward_search (const GtkTextIter *iter,
   return retval;
 }
 
+/*************************************************************
+ * ERROR REPORTING CODE
+ ************************************************************/
 
- 
+/* Note: eel_string_ellipsize_* that use a length in pixels
+ * rather than characters can be found in eel_gdk_extensions.h
+ * 
+ */
+gchar *
+gedit_utils_str_middle_truncate (const gchar *string, guint truncate_length)
+{
+	gchar *truncated;
+	guint length;
+	guint num_left_chars;
+	guint num_right_chars;
+
+	const gchar delimter[] = "...";
+	const guint delimter_length = strlen (delimter);
+	const guint min_truncate_length = delimter_length + 2;
+
+	if (string == NULL) {
+		return NULL;
+	}
+
+	/* It doesn't make sense to truncate strings to less than
+	 * the size of the delimiter plus 2 characters (one on each
+	 * side)
+	 */
+	if (truncate_length < min_truncate_length) {
+		return g_strdup (string);
+	}
+
+	length = strlen (string);
+
+	/* Make sure the string is not already small enough. */
+	if (length <= truncate_length) {
+		return g_strdup (string);
+	}
+
+	/* Find the 'middle' where the truncation will occur. */
+	num_left_chars = (truncate_length - delimter_length) / 2;
+	num_right_chars = truncate_length - num_left_chars - delimter_length + 1;
+
+	truncated = g_new (char, truncate_length + 1);
+
+	strncpy (truncated, string, num_left_chars);
+	strncpy (truncated + num_left_chars, delimter, delimter_length);
+	strncpy (truncated + num_left_chars + delimter_length, string + length - num_right_chars + 1, 
+		 num_right_chars);
+	
+	return truncated;
+}
+
+#define MAX_URI_IN_DIALOG_LENGTH 50
+
+void
+gedit_utils_error_reporting_loading_file (
+		const gchar *uri,
+		GError *error,
+		GtkWindow *parent)
+{
+	gchar *scheme_string;
+	gchar *error_message;
+	gchar *full_formatted_uri;
+       	gchar *uri_for_display	;
+	
+	GnomeVFSURI *vfs_uri;
+	
+	GtkWidget *dialog;
+
+	g_return_if_fail (uri != NULL);
+	g_return_if_fail (error != NULL);
+	
+	full_formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
+
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+			MAX_URI_IN_DIALOG_LENGTH);
+	g_free (full_formatted_uri);
+
+	switch (error->code)
+	{
+		case GNOME_VFS_ERROR_NOT_FOUND:
+			error_message = g_strdup_printf (
+                        	_("Could not find the file \"%s\".\n\n"
+			   	  "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+			break;
+
+		case GNOME_VFS_ERROR_CORRUPTED_DATA:
+			error_message = g_strdup_printf (
+                        	_("Could not open the file \"%s\" because "
+			   	   "it contains corrupted data."),
+			 	uri_for_display);
+			break;			 
+
+		case GNOME_VFS_ERROR_NOT_SUPPORTED:
+			scheme_string = gnome_vfs_x_uri_get_scheme (uri);
+                
+			if (scheme_string != NULL)
+			{
+				error_message = g_strdup_printf (
+					_("Could not open the file \"%s\" because "
+					  "gedit cannot handle %s: locations."),
+                                	uri_for_display, scheme_string);
+
+				g_free (scheme_string);
+			}
+			else
+				error_message = g_strdup_printf (
+					_("Could not open the file \"%s\""),
+                                	uri_for_display);
+	
+        	        break;
+				
+		case GNOME_VFS_ERROR_WRONG_FORMAT:
+			error_message = g_strdup_printf (
+                        	_("Could not open the file \"%s\" because "
+			   	  "it contains data in an invalid format."),
+			 	uri_for_display);
+			break;	
+
+		case GNOME_VFS_ERROR_TOO_BIG:
+			error_message = g_strdup_printf (
+                        	_("Could not open the file \"%s\" because "
+			   	   "it is too big."),
+			 	uri_for_display);
+			break;	
+
+		case GNOME_VFS_ERROR_INVALID_URI:
+			error_message = g_strdup_printf (
+                        	_("\"%s\" is not a valid location.\n\n"
+				   "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+                	break;
+	
+		case GNOME_VFS_ERROR_ACCESS_DENIED:
+			error_message = g_strdup_printf (
+				_("Could not open the file \"%s\" because "
+				  "access was denied."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
+			error_message = g_strdup_printf (
+				_("Could not open the file \"%s\" because "
+				  "there are too many open files\n\n."
+				  "Please, close some open file and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_IS_DIRECTORY:
+			error_message = g_strdup_printf (
+				_("\"%s\" is a directory.\n\n"
+				  "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_NO_MEMORY:
+			error_message = g_strdup_printf (
+				_("Not enough available memory to open the file \"%s\"."
+				  "Please, close some running application and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
+			/* This case can be hit for user-typed strings like "foo" due to
+		 	* the code that guesses web addresses when there's no initial "/".
+		 	* But this case is also hit for legitimate web addresses when
+		 	* the proxy is set up wrong.
+		 	*/
+			vfs_uri = gnome_vfs_uri_new (uri);
+                	error_message = g_strdup_printf (
+				_("Could not open the file \"%s\" because no host \"%s\" " 
+				  "could be found. \n\n"
+                		  "Please, check that you typed the location correctly "
+				  "and that your proxy settings are correct and then "
+				  "try again"),
+				uri_for_display,
+				gnome_vfs_uri_get_host_name (vfs_uri));
+
+			gnome_vfs_uri_unref (vfs_uri);
+			break;
+
+		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
+			error_message = g_strdup_printf (
+                        	_("Could not open the file \"%s\" because the host name was invalid.\n\n"
+				   "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
+			error_message = g_strdup_printf (
+				_("Could not open the file \"%s\" because the host name was empty.\n\n"
+				  "Please, check that your proxy settings are correct and try again."),
+				uri_for_display);
+			break;
+		
+		case GNOME_VFS_ERROR_LOGIN_FAILED:
+			error_message = g_strdup_printf (
+				_("Could not open the file \"%s\" because the attempt to "
+				  "log in failed.\n\n"
+				  "Please, check that you typed the location correctly and try again."),
+				uri_for_display);		
+			break;
+
+		case GEDIT_ERROR_INVALID_UTF8_DATA:
+			error_message = g_strdup_printf (
+                        	_("Could not open the file \"%s\" because "
+			   	  "it contains invalid UTF-8 data.\n\n"
+				  "Probably, you are trying to open a binary file."),
+			 	uri_for_display);
+
+			break;
+
+		/*
+		case GNOME_VFS_ERROR_GENERIC:
+		case GNOME_VFS_ERROR_INTERNAL:
+		case GNOME_VFS_ERROR_BAD_PARAMETERS:
+		case GNOME_VFS_ERROR_IO:
+		case GNOME_VFS_ERROR_BAD_FILE:
+		case GNOME_VFS_ERROR_NO_SPACE:
+		case GNOME_VFS_ERROR_READ_ONLY:
+		case GNOME_VFS_ERROR_NOT_OPEN:
+		case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
+		case GNOME_VFS_ERROR_EOF:
+		case GNOME_VFS_ERROR_NOT_A_DIRECTORY:
+		case GNOME_VFS_ERROR_IN_PROGRESS:
+		case GNOME_VFS_ERROR_INTERRUPTED:
+		case GNOME_VFS_ERROR_FILE_EXISTS:
+		case GNOME_VFS_ERROR_LOOP:
+		case GNOME_VFS_ERROR_NOT_PERMITTED:
+		case GNOME_VFS_ERROR_CANCELLED:
+		case GNOME_VFS_ERROR_DIRECTORY_BUSY:
+		case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
+		case GNOME_VFS_ERROR_TOO_MANY_LINKS:
+		case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
+		case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
+		case GNOME_VFS_ERROR_NAME_TOO_LONG:
+		case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE:
+		case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
+		case GNOME_VFS_ERROR_PROTOCOL_ERROR,
+		case GNOME_VFS_NUM_ERRORS:
+		*/
+		default:
+			error_message = g_strdup_printf (
+                        	_("Could not open the file \"%s\"."),
+			 	uri_for_display);
+
+			break;
+	}
+	
+	dialog = gtk_message_dialog_new (
+			parent,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		   	GTK_MESSAGE_ERROR,
+		   	GTK_BUTTONS_OK,
+			error_message);
+			
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	g_free (uri_for_display);
+	g_free (error_message);
+}
+
+void
+gedit_utils_error_reporting_saving_file (
+		const gchar *uri,
+		GError *error,
+		GtkWindow *parent)
+{
+	gchar *error_message;
+	gchar *full_formatted_uri;
+       	gchar *uri_for_display	;
+	
+	GtkWidget *dialog;
+
+	g_return_if_fail (uri != NULL);
+	g_return_if_fail (error != NULL);
+	
+	full_formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
+
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+			MAX_URI_IN_DIALOG_LENGTH);
+	g_free (full_formatted_uri);
+
+	if (strcmp (error->message, " ") == 0)
+		error_message = g_strdup_printf (
+					_("Could not save the file \"%s\"."),
+				  	uri_for_display);
+	else
+		error_message = g_strdup_printf (
+					_("Could not save the file \"%s\".\n\n%s"),
+				 	uri_for_display, error->message);
+		
+	dialog = gtk_message_dialog_new (
+			parent,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		   	GTK_MESSAGE_ERROR,
+		   	GTK_BUTTONS_OK,
+			error_message);
+			
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	g_free (uri_for_display);
+	g_free (error_message);
+}
+
+void
+gedit_utils_error_reporting_reverting_file (
+		const gchar *uri,
+		GError *error,
+		GtkWindow *parent)
+{
+	gchar *scheme_string;
+	gchar *error_message;
+	gchar *full_formatted_uri;
+       	gchar *uri_for_display	;
+	
+	GnomeVFSURI *vfs_uri;
+	
+	GtkWidget *dialog;
+
+	g_return_if_fail (uri != NULL);
+	g_return_if_fail (error != NULL);
+	
+	full_formatted_uri = gnome_vfs_x_format_uri_for_display (uri);
+
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+        uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+			MAX_URI_IN_DIALOG_LENGTH);
+	g_free (full_formatted_uri);
+
+	switch (error->code)
+	{
+		case GNOME_VFS_ERROR_NOT_FOUND:
+			error_message = g_strdup_printf (
+                        	_("Could not find the file \"%s\".\n\n"
+			   	  "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+			break;
+
+		case GNOME_VFS_ERROR_CORRUPTED_DATA:
+			error_message = g_strdup_printf (
+                        	_("Could not revert the file \"%s\" because "
+			   	   "it contains corrupted data."),
+			 	uri_for_display);
+			break;			 
+
+		case GNOME_VFS_ERROR_NOT_SUPPORTED:
+			scheme_string = gnome_vfs_x_uri_get_scheme (uri);
+                
+			if (scheme_string != NULL)
+			{
+				error_message = g_strdup_printf (
+					_("Could not revert the file \"%s\" because "
+					  "gedit cannot handle %s: locations."),
+                                	uri_for_display, scheme_string);
+
+				g_free (scheme_string);
+			}
+			else
+				error_message = g_strdup_printf (
+					_("Could not revert the file \"%s\""),
+                                	uri_for_display);
+	
+        	        break;
+				
+		case GNOME_VFS_ERROR_WRONG_FORMAT:
+			error_message = g_strdup_printf (
+                        	_("Could not revert the file \"%s\" because "
+			   	  "it contains data in an invalid format."),
+			 	uri_for_display);
+			break;	
+
+		case GNOME_VFS_ERROR_TOO_BIG:
+			error_message = g_strdup_printf (
+                        	_("Could not revert the file \"%s\" because "
+			   	   "it is too big."),
+			 	uri_for_display);
+			break;	
+
+		case GNOME_VFS_ERROR_INVALID_URI:
+			error_message = g_strdup_printf (
+                        	_("\"%s\" is not a valid location.\n\n"
+				   "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+                	break;
+	
+		case GNOME_VFS_ERROR_ACCESS_DENIED:
+			error_message = g_strdup_printf (
+				_("Could not revert the file \"%s\" because "
+				  "access was denied."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
+			error_message = g_strdup_printf (
+				_("Could not revert the file \"%s\" because "
+				  "there are too many open files\n\n."
+				  "Please, close some open file and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_IS_DIRECTORY:
+			error_message = g_strdup_printf (
+				_("\"%s\" is a directory.\n\n"
+				  "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_NO_MEMORY:
+			error_message = g_strdup_printf (
+				_("Not enough available memory to revert the file \"%s\"."
+				  "Please, close some running application and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
+			/* This case can be hit for user-typed strings like "foo" due to
+		 	* the code that guesses web addresses when there's no initial "/".
+		 	* But this case is also hit for legitimate web addresses when
+		 	* the proxy is set up wrong.
+		 	*/
+			vfs_uri = gnome_vfs_uri_new (uri);
+                	error_message = g_strdup_printf (
+				_("Could not revert the file \"%s\" because no host \"%s\" " 
+				  "could be found. \n\n"
+                		  "Please, check that you typed the location correctly "
+				  "and that your proxy settings are correct and then "
+				  "try again"),
+				uri_for_display,
+				gnome_vfs_uri_get_host_name (vfs_uri));
+
+			gnome_vfs_uri_unref (vfs_uri);
+			break;
+
+		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
+			error_message = g_strdup_printf (
+                        	_("Could not revert the file \"%s\" because the host name was invalid.\n\n"
+				   "Please, check that you typed the location correctly and try again."),
+                         	uri_for_display);
+                	break;
+
+		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
+			error_message = g_strdup_printf (
+				_("Could not revert the file \"%s\" because the host name was empty.\n\n"
+				  "Please, check that your proxy settings are correct and try again."),
+				uri_for_display);
+			break;
+		
+		case GNOME_VFS_ERROR_LOGIN_FAILED:
+			error_message = g_strdup_printf (
+				_("Could not revert the file \"%s\" because the attempt to "
+				  "log in failed.\n\n"
+				  "Please, check that you typed the location correctly and try again."),
+				uri_for_display);		
+			break;
+
+		case GEDIT_ERROR_INVALID_UTF8_DATA:
+			error_message = g_strdup_printf (
+                        	_("Could not revert the file \"%s\" because "
+			   	  "it contains invalid UTF-8 data.\n\n"
+				  "Probably, you are trying to revert a binary file."),
+			 	uri_for_display);
+
+			break;
+			
+		case GEDIT_ERROR_UNTITLED:
+			error_message = g_strdup_printf (
+				_("It is not possible to revert an Untitled document."));
+			break;
+
+		/*
+		case GNOME_VFS_ERROR_GENERIC:
+		case GNOME_VFS_ERROR_INTERNAL:
+		case GNOME_VFS_ERROR_BAD_PARAMETERS:
+		case GNOME_VFS_ERROR_IO:
+		case GNOME_VFS_ERROR_BAD_FILE:
+		case GNOME_VFS_ERROR_NO_SPACE:
+		case GNOME_VFS_ERROR_READ_ONLY:
+		case GNOME_VFS_ERROR_NOT_OPEN:
+		case GNOME_VFS_ERROR_INVALID_OPEN_MODE:
+		case GNOME_VFS_ERROR_EOF:
+		case GNOME_VFS_ERROR_NOT_A_DIRECTORY:
+		case GNOME_VFS_ERROR_IN_PROGRESS:
+		case GNOME_VFS_ERROR_INTERRUPTED:
+		case GNOME_VFS_ERROR_FILE_EXISTS:
+		case GNOME_VFS_ERROR_LOOP:
+		case GNOME_VFS_ERROR_NOT_PERMITTED:
+		case GNOME_VFS_ERROR_CANCELLED:
+		case GNOME_VFS_ERROR_DIRECTORY_BUSY:
+		case GNOME_VFS_ERROR_DIRECTORY_NOT_EMPTY:
+		case GNOME_VFS_ERROR_TOO_MANY_LINKS:
+		case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:
+		case GNOME_VFS_ERROR_NOT_SAME_FILE_SYSTEM:
+		case GNOME_VFS_ERROR_NAME_TOO_LONG:
+		case GNOME_VFS_ERROR_SERVICE_NOT_AVAILABLE:
+		case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
+		case GNOME_VFS_ERROR_PROTOCOL_ERROR,
+		case GNOME_VFS_NUM_ERRORS:
+		*/
+		default:
+			error_message = g_strdup_printf (
+                        	_("Could not revert the file \"%s\"."),
+			 	uri_for_display);
+
+			break;
+	}
+	
+	dialog = gtk_message_dialog_new (
+			parent,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		   	GTK_MESSAGE_ERROR,
+		   	GTK_BUTTONS_OK,
+			error_message);
+			
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	g_free (uri_for_display);
+	g_free (error_message);
+}
+

@@ -80,7 +80,8 @@ struct _GeditDocumentClass
 					 gboolean can_redo);
 
 };
-
+#define GEDIT_ERROR_INVALID_UTF8_DATA 	1024
+#define GEDIT_ERROR_UNTITLED		1025	
 #define GEDIT_DOCUMENT_IO_ERROR gedit_document_io_error_quark ()
 GQuark 		gedit_document_io_error_quark (void);
 
