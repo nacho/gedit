@@ -87,34 +87,37 @@ static toolbar_data_t toolbar_data[] = {
 
 #else	/* USING GNOME */
 
-static toolbar_data_t toolbar_data[] = {
-	{ N_(" New "), N_("Start a new file"), "Toolbar/New",
-		GNOME_STOCK_PIXMAP_NEW, (GtkSignalFunc)file_new_cb },
-	{ N_(" Open "), N_("Open a file"), "Toolbar/Open",
-		GNOME_STOCK_PIXMAP_OPEN, (GtkSignalFunc)file_open_cb },
-	{ N_(" Save "), N_("Save file"), "Toolbar/Save",
-		GNOME_STOCK_PIXMAP_SAVE, (GtkSignalFunc)file_save_cb },
-	{ N_(" Close "), N_("Close the current file"), "Toolbar/Close",
-		GNOME_STOCK_PIXMAP_CLOSE, (GtkSignalFunc)file_close_cb },
-	{ N_(" Print "), N_("Print file"), "Toolbar/Print",
-		GNOME_STOCK_PIXMAP_PRINT, (GtkSignalFunc)file_print_cb },
-	{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ N_(" Cut "), N_("Cut text"), "Toolbar/Cut",
-		GNOME_STOCK_PIXMAP_CUT, (GtkSignalFunc)edit_cut_cb },
-	{ N_(" Copy "), N_("Copy text"), "Toolbar/Copy",
-		GNOME_STOCK_PIXMAP_COPY, (GtkSignalFunc)edit_copy_cb },
-	{ N_(" Paste "), N_("Paste text"), "Toolbar/Paste",
-		GNOME_STOCK_PIXMAP_PASTE, (GtkSignalFunc)edit_paste_cb },
-	{ N_(" Search "), N_("Search for text"), "Toolbar/Search",
-		GNOME_STOCK_PIXMAP_SEARCH, (GtkSignalFunc)search_cb },
-		{ " SPACE ", NULL, NULL, NULL, NULL },
-/*	{ N_(" Prefs "), N_("Preferences"), "Toolbar/Prefs",
-		GNOME_STOCK_PIXMAP_PREFERENCES, (GtkSignalFunc)gE_prefs_dialog },
-	{ " SPACE ", NULL, NULL, NULL, NULL },*/
-	{ N_(" Quit "), N_("Quit"), "Toolbar/Quit",
-		GNOME_STOCK_PIXMAP_EXIT, (GtkSignalFunc)file_quit_cb },
-	{ NULL, NULL, NULL, NULL, NULL }
+GnomeUIInfo toolbar_data[] = {
+	{ GNOME_APP_UI_ITEM, N_("New"), N_("Create a new document"), file_new_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_NEW },
+	{ GNOME_APP_UI_ITEM, N_("Open"), N_("Open a file"), file_open_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_OPEN },
+	{ GNOME_APP_UI_ITEM, N_("Save"), N_("Save the current file"), file_save_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SAVE },
+	{ GNOME_APP_UI_ITEM, N_("Close"), N_("Close the current file"), file_close_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CLOSE },
+	{ GNOME_APP_UI_ITEM, N_("Print"), N_("Print the current file"), file_print_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PRINT },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, N_("Cut"), N_("Cut the selection"), edit_cut_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CUT },
+	{ GNOME_APP_UI_ITEM, N_("Copy"), N_("Copy the selection"), edit_copy_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_COPY },
+	{ GNOME_APP_UI_ITEM, N_("Paste"), N_("Paste the clipboard"), edit_paste_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PASTE },
+	{ GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), search_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH },
+
+	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, N_("Exit"), N_("Exit the program"), file_quit_cb,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_QUIT },
+
+	GNOMEUIINFO_END
 };
+
 
 #endif	/* #ifdef WITHOUT_GNOME */
 
@@ -167,7 +170,6 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 
 #ifdef WITHOUT_GNOME
 	gtk_widget_realize(gw->window);
-#endif
 
 	toolbar = toolbar_create_common(toolbar_data, data);
 
@@ -186,14 +188,16 @@ gw->use_relief_toolbar = gE_prefs_get_int("tb relief");
       
 	GTK_WIDGET_UNSET_FLAGS (toolbar, GTK_CAN_FOCUS);
 	gw->toolbar = toolbar;
-#ifdef WITHOUT_GNOME	
 	gw->toolbar_handle = gtk_handle_box_new();
 	gtk_container_add(GTK_CONTAINER(gw->toolbar_handle), toolbar);
-#endif
 	gtk_widget_show(toolbar);
 
-#ifndef WITHOUT_GNOME
-	gnome_app_set_toolbar (GNOME_APP (gw->window), GTK_TOOLBAR(toolbar));
+#else /* WITHOUT_GNOME */
+
+gnome_app_create_toolbar_with_data (GNOME_APP (gw->window),
+                                    toolbar_data,
+                                    data );
+
 #endif
 
 	gw->have_toolbar = TRUE;

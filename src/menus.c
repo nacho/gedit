@@ -396,10 +396,10 @@ GnomeUIInfo gedit_settings_menu []= {
 
 	{ GNOME_APP_UI_SUBTREE, N_("_Document Tabs"),
 	  N_("Change the placement of the document tabs"), &gedit_tab_menu },
-
+/*
 	{ GNOME_APP_UI_SUBTREE, N_("_Toolbar"),
 	  N_("Customize the toolbar"), &gedit_toolbar_menu },
-
+*/
 	GNOMEUIINFO_SEPARATOR,
 
 	{ GNOME_APP_UI_ITEM, N_("Sa_ve Settings"),
@@ -526,7 +526,7 @@ gE_set_menu_toggle_states(gE_window *w)
   /*
    * The toolbar menu..
    */
-  for (i = 0; gedit_toolbar_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++)
+/*  for (i = 0; gedit_toolbar_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++)
     {
       if (gedit_toolbar_menu[i].label)
 	{
@@ -546,7 +546,7 @@ gE_set_menu_toggle_states(gE_window *w)
 			      w->have_tb_pix);
 	}
     }
-
+*/
   /*
    * The settings menu...
    */

@@ -355,7 +355,7 @@ void gE_get_settings(gE_window *w)
 
 	if (w->show_status == FALSE)
 		gtk_widget_hide(w->statusbox);
-
+/*
 	if (w->have_toolbar == TRUE) {
 		tb_on_cb(NULL, w);
 
@@ -370,4 +370,5 @@ void gE_get_settings(gE_window *w)
 	} else {
 		tb_off_cb(NULL, w);
 	}
+*/
 }

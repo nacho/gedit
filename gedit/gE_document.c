@@ -348,7 +348,7 @@ gE_document
 		GTK_SIGNAL_FUNC(gE_event_button_press), w);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
-		"key_press_event", GTK_SIGNAL_FUNC(auto_indent_cb), w);
+		"insert_text", GTK_SIGNAL_FUNC(auto_indent_cb), w);
 
 	gtk_table_attach_defaults(GTK_TABLE(table),
 		doc->split_screen, 0, 1, 0, 1);

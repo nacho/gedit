@@ -414,7 +414,10 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 	if (strlen(whitespace) > 0)
 	{
 		i = *pos;
-		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace, strlen(whitespace), &i);
+/*		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace, strlen(whitespace), &i);*/
+		gtk_text_set_point (GTK_TEXT (text), i);
+		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
+			whitespace, strlen (whitespace));
 	}
 	
 	g_free (whitespace);
