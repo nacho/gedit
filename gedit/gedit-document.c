@@ -70,6 +70,7 @@ struct _GeditDocumentPrivate
 	gchar		*last_searched_text;
 	gchar		*last_replace_text;
 	gboolean  	 last_search_was_case_sensitive;
+	gboolean  	 last_search_was_entire_word;
 
 	guint		 auto_save_timeout;
 	gboolean	 last_save_was_manually; 
@@ -1728,7 +1729,7 @@ gedit_document_set_last_replace_text (GeditDocument* doc, const gchar *text)
 
 gboolean
 gedit_document_find (GeditDocument* doc, const gchar* str, 
-		gboolean from_cursor, gboolean case_sensitive)
+		gboolean from_cursor, gboolean case_sensitive, gboolean entire_word)
 {
 	GtkTextIter iter;
 	gboolean found = FALSE;
@@ -1780,6 +1781,13 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
           	found = gedit_text_iter_forward_search (&iter, converted_str, search_flags,
                                         	&match_start, &match_end,
                                                	NULL);	
+
+		if (found && entire_word)
+		{
+			found = gtk_text_iter_starts_word (&match_start) && 
+				gtk_text_iter_ends_word (&match_end);
+		}
+		
 		if (found)
 		{
 			gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),
@@ -1794,6 +1802,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 
 		doc->priv->last_searched_text = g_strdup (str);
 		doc->priv->last_search_was_case_sensitive = case_sensitive;
+		doc->priv->last_search_was_entire_word = entire_word;
 	}
 
 	g_free (converted_str);
@@ -1818,7 +1827,7 @@ gedit_document_find_again (GeditDocument* doc)
 		return FALSE;
 	
 	found = gedit_document_find (doc, last_searched_text, TRUE, 
-				doc->priv->last_search_was_case_sensitive);
+				doc->priv->last_search_was_case_sensitive, doc->priv->last_search_was_entire_word);
 	g_free (last_searched_text);
 
 	return found;
@@ -1913,7 +1922,7 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 
 gboolean
 gedit_document_replace_all (GeditDocument *doc,
-	      	const gchar *find, const gchar *replace, gboolean case_sensitive)
+	      	const gchar *find, const gchar *replace, gboolean case_sensitive, gboolean entire_word)
 {
 	gboolean from_cursor = FALSE;
 	gboolean cont = 0;
@@ -1926,7 +1935,7 @@ gedit_document_replace_all (GeditDocument *doc,
 
 	gedit_document_begin_user_action (doc);
 
-	while (gedit_document_find (doc, find, from_cursor, case_sensitive)) 
+	while (gedit_document_find (doc, find, from_cursor, case_sensitive, entire_word)) 
 	{
 		gedit_document_replace_selected_text (doc, replace);
 		

@@ -58,8 +58,8 @@ struct _GeditDialogReplace {
 
 	GtkWidget *search_entry;
 	GtkWidget *replace_entry;
-	GtkWidget *replace_hbox;
 	GtkWidget *case_sensitive;
+	GtkWidget *entire_word_checkbutton;
 	GtkWidget *beginning;
 	GtkWidget *cursor;
 };
@@ -69,6 +69,7 @@ struct _GeditDialogFind {
 
 	GtkWidget *search_entry;
 	GtkWidget *case_sensitive;
+	GtkWidget *entire_word_checkbutton;
 	GtkWidget *beginning;
 	GtkWidget *cursor;
 };
@@ -143,6 +144,7 @@ dialog_replace_get_dialog (void)
 	GtkWindow *window;
 	GtkWidget *content;
 	GtkWidget *button;
+	GtkWidget *replace_with_label;
 	
 	gedit_debug (DEBUG_SEARCH, "");
 	
@@ -200,16 +202,18 @@ dialog_replace_get_dialog (void)
 	content = glade_xml_get_widget (gui, "replace_dialog_content");
 	dialog->search_entry       = glade_xml_get_widget (gui, "search_for_text_entry");
 	dialog->replace_entry      = glade_xml_get_widget (gui, "replace_with_text_entry");
-	dialog->replace_hbox       = glade_xml_get_widget (gui, "hbox_replace_with");
+	replace_with_label         = glade_xml_get_widget (gui, "replace_with_label");
 	dialog->case_sensitive     = glade_xml_get_widget (gui, "case_sensitive");
 	dialog->beginning          = glade_xml_get_widget (gui, "beginning_radio_button");
 	dialog->cursor		   = glade_xml_get_widget (gui, "cursor_radio_button");
+	dialog->entire_word_checkbutton = glade_xml_get_widget (gui, "entire_word_checkbutton");
 
 	if (!content			||
 	    !dialog->search_entry 	||
 	    !dialog->replace_entry  	|| 
-	    !dialog->replace_hbox 	||
+	    !replace_with_label 	||
 	    !dialog->case_sensitive 	||
+	    !dialog->entire_word_checkbutton ||
 	    !dialog->cursor	 	||
 	    !dialog->beginning 	) 
 	{
@@ -218,8 +222,9 @@ dialog_replace_get_dialog (void)
 		return NULL;
 	}
 
-	gtk_widget_show (dialog->replace_hbox);
-
+	gtk_widget_show (replace_with_label);
+	gtk_widget_show (dialog->replace_entry );
+	
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
 
@@ -246,7 +251,9 @@ dialog_find_get_dialog (void)
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-	GtkWidget *replace_hbox;
+	GtkWidget *replace_with_label;
+	GtkWidget *replace_entry;
+	GtkWidget *table;
 	
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -286,26 +293,37 @@ dialog_find_get_dialog (void)
 	content = glade_xml_get_widget (gui, "replace_dialog_content");
 
 	dialog->search_entry       = glade_xml_get_widget (gui, "search_for_text_entry");
-	
-	replace_hbox       	   = glade_xml_get_widget (gui, "hbox_replace_with");
+	replace_entry      	   = glade_xml_get_widget (gui, "replace_with_text_entry");
+
+	replace_with_label         = glade_xml_get_widget (gui, "replace_with_label");
 	
 	dialog->case_sensitive     = glade_xml_get_widget (gui, "case_sensitive");
 	dialog->beginning          = glade_xml_get_widget (gui, "beginning_radio_button");
 	dialog->cursor		   = glade_xml_get_widget (gui, "cursor_radio_button");
+	dialog->entire_word_checkbutton = glade_xml_get_widget (gui, "entire_word_checkbutton");
+
+
+	table                      = glade_xml_get_widget (gui, "table");
 
 	if (!content			||
 	    !dialog->search_entry 	||
-	    !replace_hbox 		||
+	    !replace_entry		||
+	    !replace_with_label 	||
 	    !dialog->case_sensitive 	||
             !dialog->cursor	 	||
-	    !dialog->beginning 	) 
+	    !dialog->beginning 		||
+	    !dialog->entire_word_checkbutton ||
+	    !table) 
 	{
 		g_print
 		    ("Could not find the required widgets inside replace.glade2.\n");
 		return NULL;
 	}
 	
-	gtk_widget_hide (replace_hbox);
+	gtk_widget_hide (replace_with_label);
+	gtk_widget_hide (replace_entry );
+
+	gtk_table_set_row_spacings (GTK_TABLE (table), 0);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
@@ -430,6 +448,7 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 	const gchar* search_string = NULL;
 	gboolean from_cursor;
 	gboolean case_sensitive;
+	gboolean entire_word;
 	
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -461,8 +480,13 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 		case_sensitive = TRUE;
 	else
 		case_sensitive = FALSE;
-			
-	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive))
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton)))
+		entire_word = TRUE;
+	else
+		entire_word = FALSE;
+
+	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive, entire_word))
 	{	
 		GtkWidget *message_dlg;
 
@@ -501,6 +525,7 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 	const gchar* search_string = NULL;
 	gboolean from_cursor;
 	gboolean case_sensitive;
+	gboolean entire_word;
 	
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -532,8 +557,13 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 		case_sensitive = TRUE;
 	else
 		case_sensitive = FALSE;
-			
-	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive))
+		
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton)))
+		entire_word = TRUE;
+	else
+		entire_word = FALSE;
+	
+	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive, entire_word))
 	{	
 		GtkWidget *message_dlg;
 
@@ -577,6 +607,7 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	gchar* selected_text = NULL;
 	gchar *converted_search_string = NULL;
 	gboolean case_sensitive;
+	gboolean entire_word;
 	gint start, end;
 
 	gedit_debug (DEBUG_SEARCH, "");
@@ -619,6 +650,11 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	else
 		case_sensitive = FALSE;
 
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton)))
+		entire_word = TRUE;
+	else
+		entire_word = FALSE;
+
 	converted_search_string = gedit_utils_convert_search_text (search_string);
 
 	if ((selected_text == NULL) ||
@@ -652,7 +688,7 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	gedit_debug (DEBUG_SEARCH, "Replaced");
 
 	/* go ahead and find the next one */
-	if (!gedit_document_find (doc, search_string, TRUE, case_sensitive))
+	if (!gedit_document_find (doc, search_string, TRUE, case_sensitive, entire_word))
 	{	
 	
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);	
@@ -681,6 +717,7 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	const gchar* search_string = NULL;
 	const gchar* replace_string = NULL;
 	gboolean case_sensitive;
+	gboolean entire_word;
 	gint replaced_items;
 	GtkWidget *message_dlg;
 	
@@ -711,8 +748,13 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 		case_sensitive = TRUE;
 	else
 		case_sensitive = FALSE;
-	
-	replaced_items = gedit_document_replace_all (doc, search_string, replace_string, case_sensitive);
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton)))
+		entire_word = TRUE;
+	else
+		entire_word = FALSE;
+
+	replaced_items = gedit_document_replace_all (doc, search_string, replace_string, case_sensitive, entire_word);
 		
 	if (replaced_items <= 0)
 	{

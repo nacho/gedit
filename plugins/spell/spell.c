@@ -508,7 +508,7 @@ change_all_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *cha
 	last_searched_text = gedit_document_get_last_searched_text (doc);
 	last_replaced_text = gedit_document_get_last_replace_text (doc);
        	
-	gedit_document_replace_all (doc, word, change, TRUE);
+	gedit_document_replace_all (doc, word, change, TRUE, TRUE);
 
 	update_current (doc, range->mw_start + g_utf8_strlen (change, -1));
 

@@ -160,7 +160,8 @@ void 		gedit_document_set_last_replace_text  (GeditDocument* doc, const gchar *t
 
 gboolean	gedit_document_find 		(GeditDocument* doc, const gchar* str, 
 						 gboolean from_cursor, 
-						 gboolean case_sensitive);
+						 gboolean case_sensitive,
+						 gboolean entire_word);
 gboolean	gedit_document_find_again	(GeditDocument* doc);
 
 void		gedit_document_replace_selected_text (GeditDocument *doc, 
@@ -168,7 +169,8 @@ void		gedit_document_replace_selected_text (GeditDocument *doc,
 gboolean	gedit_document_replace_all 	(GeditDocument *doc,
 				            	 const gchar *find, 
 						 const gchar *replace, 
-					    	 gboolean case_sensitive);
+					    	 gboolean case_sensitive,
+						 gboolean entire_word);
 guint		gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset);
 
 void		gedit_document_set_selection 	(GeditDocument *doc, 
