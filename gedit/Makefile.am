@@ -9,7 +9,7 @@ EXTRA_DIST = KNOWNBUGS ChangeLog README INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.
 
 man_MANS = gedit.1
 
-bin_PROGRAMS = gedit
+bin_PROGRAMS = gedit diff-plugin cvsdiff-plugin
 
 gedit_SOURCES = 	\
 	gedit.c		\
@@ -20,13 +20,13 @@ gedit_SOURCES = 	\
 	gE_prefs.c	\
 	gE_init.c	\
 	toolbar.c	\
-#	plugin.c        \
-#	gE_plugin_api.c	\
+	plugin.c        \
+	gE_plugin_api.c	\
 	gE_prefs.h	\
 	main.h		\
 	toolbar.h	\
-#	plugin.h        \
-#	gE_plugin_api.h	\
+	plugin.h        \
+	gE_plugin_api.h	\
 	menus.h
 
 #	menus.c		\
@@ -34,6 +34,20 @@ gedit_SOURCES = 	\
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
+
+diff_plugin_SOURCES =	\
+	diff.c		\
+	client.c	\
+	client.h
+
+diff_plugin_LDFLAGS = `gtk-config --libs`
+
+cvsdiff_plugin_SOURCES=	\
+	cvsdiff.c	\
+	client.c	\
+	client.h
+
+cvsdiff_plugin_LDFLAGS = `gtk-config --libs`
 
 sysdir   = $(datadir)/apps/Applications
 sys_DATA = gedit.desktop

@@ -1,5 +1,19 @@
 1998-06-26  Chris Lahey  <clahey@umich.edu>
 
+	* Makefile.am : 
+	* main.h :
+	* gedit.c : 
+	* gE_document.c (gE_window_new): Plugins are now compiled in by
+	default.  Dropped the hello-plugin.
+
+	* configure.in: Checks for gedit.c instead of menus.c.  More unique.
+
+	* plugin.c (process_command): 
+	(plugin_finish): File descriptors for plugins are now freed and gedit doesn't
+	leave zombie processes.
+
+1998-06-26  Chris Lahey  <clahey@umich.edu>
+
 	* plugin.h: 
 	* plugin.c (process_command, plugin_register, process_next): 
 	A bit of plugin API expansion.  Broke up the structs a bit.

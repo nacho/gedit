@@ -17,6 +17,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include <stdio.h>
+#include <sys/wait.h>
 
 plugin *plugin_new( gchar *plugin_name )
 {
@@ -76,6 +77,7 @@ void plugin_finish( plugin *the_plugin )
   close( the_plugin->pipe_to );
   close( the_plugin->pipe_from );
   close( the_plugin->pipe_data );
+  waitpid( the_plugin->pid, NULL, WNOHANG );
 }
 
 void plugin_send(plugin *the_plugin, gchar *buffer, gint length)
@@ -244,6 +246,7 @@ static void process_command( plugin *plug, gchar *buffer, int length, gpointer d
       plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 8 ) );
       break;
     case 'd':
+      plugin_finish( plug );
       g_free( plug );
       break;
     }

@@ -27,6 +27,7 @@
 #include "main.h"
 #include "gE_prefs.h"
 #include "menus.h"
+#define PLUGIN_TEST 1
 #if PLUGIN_TEST
 #include "plugin.h"
 #endif

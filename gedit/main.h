@@ -7,6 +7,7 @@ extern "C" {
 
 /* For size_t */
 #include <stdio.h>
+#define PLUGIN_TEST 1
 #if PLUGIN_TEST
 #include "plugin.h"
 #endif
@@ -56,7 +57,6 @@ void tab_toggle_cback (GtkWidget *widget, gpointer data);
 
 #if PLUGIN_TEST
   /* Plugins */
-  void send_hello (GtkWidget *widget, gpointer data);
   void start_diff (GtkWidget *widget, gpointer data);
   void start_cvsdiff (GtkWidget *widget, gpointer data);
 #endif

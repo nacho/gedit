@@ -24,6 +24,7 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
+#define PLUGIN_TEST 1
 #if PLUGIN_TEST
 #include "plugin.h"
 #include "gE_plugin_api.h"
@@ -143,8 +144,6 @@ GnomeUIInfo gedit_help_menu []= {
 
 #if PLUGIN_TEST
 GnomeUIInfo gedit_plugins_menu []= {
-  { GNOME_APP_UI_ITEM, N_("Hello World"), NULL, send_hello, NULL, NULL,
-    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
   { GNOME_APP_UI_ITEM, N_("Diff"), NULL, start_diff, NULL, NULL,
     GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
   { GNOME_APP_UI_ITEM, N_("CVS Diff"), NULL, start_cvsdiff, NULL, NULL,
@@ -188,11 +187,6 @@ gE_window *gE_window_new()
   window->search->window = NULL;
   window->auto_indent = 1;
   window->show_tabs = 1;
-  
-#if PLUGIN_TEST
-  window->hello = plugin_new( "/usr/local/bin/hello-plugin" );
-  g_print( "Starting plugin with pid #%d\n", window->hello->pid );
-#endif
 
 #ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -432,11 +426,6 @@ void gE_show_version()
 }
 
 #if PLUGIN_TEST
-void send_hello( GtkWidget *widget, gpointer data )
-{
-  plugin_send( main_window->hello, N_( "Hello World\n" ), 12 );
-}
-
 void start_diff( GtkWidget *widget, gpointer data )
 {
   plugin_callback_struct callbacks;
