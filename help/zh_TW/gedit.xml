@@ -1,0 +1,855 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "August 2002">
+  <!ENTITY app "gedit">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="zh_tw">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+	 <title>&app; 手冊 V&manrevision;</title>
+	 <copyright> 
+		<year>2002</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright> 
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+	 <publisher> 
+		<publishername> GNOME 文件專案 </publishername>
+	 </publisher>
+	 &legal; 
+	 <authorgroup>
+		<author> 
+		  <firstname>Sun </firstname>
+		  <surname>GNOME 文件小組</surname> 
+		  <affiliation> 
+			 <orgname>Sun Microsystems</orgname>
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author> 
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname> 
+		  <affiliation> 
+			 <orgname>GNOME 文件專案</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+	  <orgname>Latin Translation Team</orgname> 
+	  <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision> 
+		  <revnumber>&app; 手冊 V&manrevision;</revnumber>
+		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME 文件小組
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME 文件專案</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit 手冊 V2.1</revnumber>
+		  <date>2002 年 6 月</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME 文件小組
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME 文件專案</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit 手冊 V2.0</revnumber>
+		  <date>2002 年 3 月</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME 文件小組
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME 文件專案</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit V1.0</revnumber>
+		  <date>2000</date> 
+		  <revdescription> 
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">GNOME 文件專案</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>本手冊的內容是說明 &appversion; 版的 &app;。
+		</releaseinfo>
+	 <legalnotice><title>回饋</title>
+		<para>關於 &app; 應用程式或本手冊，如果要報告錯誤或是提出建議，請遵照 <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink> 的指示。 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm><!-- ============= Document Body ============================= --><!-- ============= Introduction ============================== --><sect1 id="gedit-intro"><title>介紹</title>
+	 <para><application>&app;</application> 應用程式是一個簡單的文字
+編輯程式。您可以使用 <application>&app;</application> 來建立並編輯文字
+檔案。您可以使用 <application>&app;</application> 外掛程式，在 <application>&app;</application> 視窗內，執行多種有關於文字編輯的工作。</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started"><title>入門</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start"><title>啟動 &app;</title>
+		<para>您可以使用下列方式啟動 <application>&app;</application>：</para>
+		<variablelist>
+    		<varlistentry><term><guimenu>Applications</guimenu> 功能表</term>
+    		<listitem>
+    		<para>選擇<menuchoice><guisubmenu>周邊裝置</guisubmenu>
+<guimenuitem>文字編輯程式</guimenuitem></menuchoice>。</para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry><term>指令行</term>
+    		<listitem>
+    		<para>鍵入 <command>gedit</command>, 然後按一下 <keycap>Return</keycap> 鍵。</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+	
+	<sect2 id="gedit-when-you-start"><title>當您啟動 &app;</title>	
+		<para>當您啟動 <application>&app;</application> 後，會顯示下面的視窗：</para>
+	
+		<figure id="gedit-window"><title>&app; 視窗</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>顯示 gedit 主視窗。</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+	
+		<para><application>&app;</application> 視窗含有以下
+元素：   </para>
+		<variablelist>
+		  <varlistentry> <term>功能表列</term> 
+			 <listitem>
+				<para>功能表列上的功能表，包含了與 <application>&app;</application> 工作所需要的所有指令。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term>工具列</term> 
+			 <listitem>
+				<para> 工具列包含了您可以由功能表所存取的指令子集。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term>顯示區域</term> 
+			 <listitem>
+				<para> 顯示區域包含了您正在編輯的檔案文字。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term>狀態列</term> 
+			 <listitem>
+				<para>狀態列顯示了有關目前 <application>&app;</application> 活動的資訊，以及有關功能表項目的上下文資訊。</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>當您在 <application>&app;</application> 視窗上按滑鼠右鍵時，應用程式即會顯示即現式功能表。即現式功能表包含了最常用的文字編輯指令。</para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"><title>開啟檔案</title>
+		<para>如果要開啟檔案，請選擇<menuchoice><guimenu>檔案</guimenu><guimenuitem>開啟</guimenuitem></menuchoice>，顯示<guilabel>開啟檔案</guilabel>對話方塊。選取您要開啟的檔案，然後按一下 <guibutton>OK</guibutton>。這個檔案
+會顯示在 <application>&app;</application> 視窗中。</para>
+		<para>您可以在 <application>&app;</application> 中，開啟多個檔案。
+		本應用程式在應用程式視窗中，一次只會顯示一個檔案。 應用程式會為每個開啟的檔案，在視窗中增加一個標籤。如果要顯示另一個
+開啟的檔案，請按一下該檔案的標籤。如果為每一個開啟的檔案，建立一個新的
+ <application> &app;</application> 視窗，請將檔案的標籤一個個地拖曳至
+至桌面背景上。您也可以使用<guimenu>文件</guimenu>功能表，在開啟的檔案之間移動。</para>
+		<para>應用程式會記錄您所編輯的最後 4 個檔案，並以功能表項目的方式，顯示在<menuchoice><guimenu>檔案</guimenu><guisubmenu>最近使用檔案</guisubmenu></menuchoice>的功能表中。
+		  </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"><title>從指令行開啟多個檔案</title>
+		<para>您可以從指令行執行 <application>&app;</application>，並開啟一個或多個檔案。如果要從指令行開啟多個檔案，請鍵入下列指令，然後按一下 <keycap>Return</keycap> 鍵：</para>
+		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
+		<para>當應用程式啟動時，您所指定的檔案會顯示在 <application>&app;</application> 視窗內。</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage"><title>使用</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file"><title>建立新檔案</title>
+		<para>如果要建立新檔案，請選擇<menuchoice><guimenu>檔案</guimenu><guimenuitem>開新檔案</guimenuitem></menuchoice>。應用程式會在
+<application>&app;</application> 視窗內顯示新檔案。</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file"><title>儲存檔案</title>
+		<para>您可以用下列方式儲存檔案：</para>
+		<itemizedlist>
+		  <listitem><para>如果要將變更儲存到目前的檔案，請選擇<menuchoice><guimenu>檔案</guimenu><guimenuitem>儲存</guimenuitem></menuchoice>，或按一下工具列上的<guibutton>儲存</guibutton>。		   如果檔案沒有檔名，<application>&app;</application> 會顯示<guilabel>另存新檔</guilabel>對話方塊。請將檔案名稱輸入<guilabel>另存新檔</guilabel>對話方塊中，然後按一下<guibutton>確定</guibutton>。</para>
+		  </listitem>
+		  <listitem><para>如果要儲存新檔案，或以新的檔案名稱儲存目前的檔案，請選擇<menuchoice><guimenu>檔案</guimenu><guimenuitem>另存新檔</guimenuitem></menuchoice>。請將檔案名稱輸入<guilabel>另存新檔</guilabel>對話方塊中，然後按一下<guibutton>確定</guibutton>。</para>
+		  </listitem>
+		  <listitem><para>如果要儲存目前在
+ <application>&app;</application> 中開啟的全部檔案，請選擇<menuchoice><guimenu>檔案</guimenu> <guimenuitem>儲存全部
+</guimenuitem></menuchoice>。</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"><title>編輯文字</title>
+		<para>您可以使用下列方式編輯檔案文字：</para>
+		<itemizedlist>
+		  <listitem><para>由鍵盤輸入新的文字。</para>
+		  </listitem>
+		  <listitem><para>使用<keycap>刪除</keycap>鍵刪除文字。
+				</para>
+		  </listitem>
+		  <listitem><para>請使用<guimenuitem>剪下</guimenuitem>、
+<guimenuitem>複製</guimenuitem>、<guimenuitem>貼上</guimenuitem>以及<guimenuitem>刪除</guimenuitem>功能表項目，編輯文字。</para>
+		  </listitem>
+		</itemizedlist>
+		<para>當您以滑鼠選取文字時，
+<application>&app;</application> 會自動將選取的文字複製至
+緩衝區。您可以在所選取的文字上執行下列任何一個動作：
+		  </para>
+		<itemizedlist>
+		  <listitem><para>如果要從檔案中刪除選取的文字，並
+將選取的文字移動至緩衝區，請選擇<menuchoice> <guimenu>編輯</guimenu><guimenuitem>剪下</guimenuitem>
+</menuchoice>。</para>
+		  </listitem>
+		  <listitem><para>如果要從檔案中永遠刪除選取的文字，請選擇<menuchoice><guimenu>編輯</guimenu> <guimenuitem>刪除</guimenuitem></menuchoice>。</para>
+		  </listitem>
+		  <listitem><para>如果要在游標位置上插入緩衝區的內容，
+請按滑鼠中鍵，或選擇
+<menuchoice><guimenu>編輯</guimenu><guimenuitem>貼上</guimenuitem></menuchoice>。您必須先剪下或複製文字，才能將文字貼上檔案內。</para>
+		  </listitem>
+		  <listitem><para>如果要選取檔案中所有的文字，請選擇<menuchoice><guimenu>編輯</guimenu><guimenuitem>選取
+全部</guimenuitem></menuchoice>。</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits"><title>還原或重做編輯</title>
+		<para>如果要還原編輯，請選擇<menuchoice><guimenu>編輯</guimenu><guimenuitem>還原</guimenuitem></menuchoice>。如果要重做編輯，請選擇<menuchoice> <guimenu>編輯</guimenu><guimenuitem>重做</guimenuitem></menuchoice>。您所能還原之前編輯的次數，是取決於
+<guilabel>個人喜好</guilabel>對話方塊中，<xref linkend="gedit-prefs-undo"/>標籤區段的<guilabel>限制還原次數為</guilabel> 之設定。依預設值，您可以還原動作的次數為 25。</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"><title>尋找文字</title>
+		<para>如果要搜尋檔案中的字串，請執行下列步驟：</para>
+		<orderedlist>
+		  <listitem><para>請選擇<menuchoice><guimenu>搜尋</guimenu>
+<guimenuitem>尋找</guimenuitem></menuchoice>，顯示<guilabel>尋找</guilabel>對話方塊。</para>
+		  </listitem>
+		  <listitem><para>將您要尋找的字串，鍵入<guilabel>搜尋</guilabel>欄位中。</para>
+		  </listitem>
+		  <listitem><para>選取下列任一項選項：</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>由文件的開始處搜尋</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>由游標位置處開始搜尋</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>選取<guilabel>區分大小寫</guilabel>選項，以尋找只符合您所鍵入文字狀況的字串。
+ </para>
+		  </listitem>
+		  <listitem><para>按一下<guibutton>尋找</guibutton>，搜尋檔案中符合的第一個字串。如果 <application>&app;</application> 找到字串，應用程式會將游標移動到字串上，並選取字串。</para>
+		  </listitem>
+		  <listitem><para>如果要尋找下一個符合的字串，請按一下<guibutton>尋找下一個</guibutton>。</para>
+		  </listitem>
+		  <listitem><para>如果要結束搜尋，按一下<guibutton>關閉</guibutton>。</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text"><title>尋找並取代文字</title>
+		<para>如果要搜尋檔案中的字串，並以另外一個字串取代之，請執行下列步驟：</para>
+		<orderedlist>
+		  <listitem><para>請選擇 <menuchoice><guimenu>搜尋</guimenu><guimenuitem>取代</guimenuitem></menuchoice>，顯示<guilabel>取代</guilabel>對話方塊。</para>
+		  </listitem>
+		  <listitem><para>將您要尋找的字串，鍵入<guilabel>搜尋</guilabel>欄位中。</para>
+		  </listitem>
+		  <listitem><para>將您要用來取代尋找字串的字串，鍵入<guilabel>取代為</guilabel>欄位中。</para>
+		  </listitem>
+		  <listitem><para>選取下列任一項選項：</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>由文件的開始處搜尋</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>由游標位置處開始搜尋</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>選取<guilabel>區分大小寫</guilabel>選項，以尋找只符合您所輸入文字狀況的字串。</para>
+		  </listitem>
+		  <listitem><para>按一下<guibutton>尋找</guibutton>，搜尋檔案中第一個符合的字串。如果 <application>&app;</application> 找到字串，應用程式會將游標移動到字串上，並選取字串。</para>
+		  </listitem>
+		  <listitem><para>按一下<guibutton>取代</guibutton>，以您鍵入於<guilabel>取代為</guilabel>欄位中的文字，來取代字串。 按一下<guibutton>取代全部l</guibutton>，取代所有符合的字串。</para>
+		  </listitem>
+		  <listitem><para>如果要尋找符合的下一個字串，請按一下<guibutton>尋找下一個</guibutton>。</para>
+		  </listitem>
+		  <listitem><para>如果要結束搜尋，請按一下<guibutton>關閉</guibutton>。</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"><title>從 URI 開啟檔案</title>
+		<para>如果要從資源識別統一描述器 (Uniform Resource Identifier，URI) 開啟檔案，請執行下列任一項步驟：</para>
+		<itemizedlist>
+		<listitem>
+		<para>請選擇<menuchoice><guimenu>檔案</guimenu><guimenuitem>開啟位置</guimenuitem></menuchoice>，顯示<guilabel>從 UR I 開啟</guilabel>對話方塊。輸入您要開啟檔案的 URI，然後按一下<guibutton>開啟</guibutton>。</para>
+		</listitem>
+		<listitem>
+		<para>在指令行中鍵入 <command>gedit <replaceable>http://...</replaceable></command> (此處的 	<replaceable>http://...</replaceable> 是指所要開啟檔案的 URI)，然後按一下 <keycap>Return</keycap> 鍵。</para>
+		</listitem>
+		</itemizedlist>
+		<para>應用程式會以唯讀模式開啟位於 URI 的檔案。</para>
+	 </sect2>	 
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"><title>輸出指令到檔案</title>
+		<para>您可以使用 <application>&app;</application>，將指令行的輸出傳送到文字檔案。例如，如果要將 <command>ls
+</command> 指令的輸出傳送到文字檔案，請鍵入 <command>ls | gedit</command>，然後按一下 <keycap>Return</keycap> 鍵。</para>
+		<para><command>ls</command> 指令的輸出，會以新文字檔案的形式，顯示在  <application>&app;</application> 視窗中。</para>
+		<para>或者，您可以使用 Shell 輸出外掛程式，將指令輸出傳送到目前的檔案中。如果要使用 Shell 輸出外掛程式，請執行下列步驟：</para>
+		<orderedlist>
+		  <listitem><para>載入 Shell 輸出外掛程式。請參閱 <xref linkend="gedit-install-plugins"/>，取得如何載入外掛程式的相關資訊。</para>
+		  </listitem>
+
+		  <listitem><para>請選擇<menuchoice><guimenu>編輯</guimenu><guimenuitem>插入 Shell 輸出</guimenuitem></menuchoice>，顯示 <guilabel>Shell 輸出</guilabel>對話方塊。</para>
+		  </listitem>
+		  <listitem><para>將您想執行的 shell 指令，鍵入 <guilabel>Shell 指令</guilabel>欄位中。</para>
+		  </listitem>
+		  <listitem><para>有必要的話，請編輯<guilabel>工作目錄</guilabel>欄位。依預設值，Shell 輸出外掛程式會執行您在目前目錄中指定的指令。</para>
+		  </listitem>
+		  <listitem><para>按一下<guibutton>執行</guibutton>。Shell 輸出外掛程式會執行該指令，並將文字輸出插入目前的檔案。</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line"><title>移至指定行</title>
+		<para>如果要移動到目前檔案中的指定的行數，請執行下列步驟：</para>
+		<orderedlist>
+		  <listitem><para>請選擇<menuchoice><guimenu>搜尋</guimenu><guimenuitem>移至行</guimenuitem></menuchoice>，顯示<guilabel>移至行</guilabel>對話方塊。</para>
+		  </listitem>
+		  <listitem><para>如果您想把游標移動到某一行，請將行數鍵入<guilabel>行數</guilabel>欄位中。</para>
+		  </listitem>
+		  <listitem><para>按一下<guibutton>移至行</guibutton>。應用程式會將游標移動至您所指定的行數。</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode"><title>變更輸入模式</title>
+		<para>如果要變更輸入模式，請在文字視窗上按滑鼠右鍵，然後選取<guimenuitem>輸入方法</guimenuitem>。
+		<guimenuitem>插入 Unicode 控制字元</guimenuitem>功能表項目會提供字元配置選項，這對使用非拉丁語系的字元集很有幫助。</para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file"><title>列印檔案</title>
+		<para>您可以使用 <application>&app;</application>，執行下列列印作業：</para>
+		<itemizedlist>
+		  <listitem><para>由印表機列印檔案。</para>
+		  </listitem>
+		  <listitem><para>將列印指令的輸出列印到檔案。</para>
+		  </listitem>
+		</itemizedlist>
+		<para>如果您是列印至檔案，<application>&app;</application> 會先將檔案輸出傳送到某個印前格式檔案。最常見的印前格式為 PostScript 與 Portable Document Format (PDF)。</para>
+		  
+		<para>如果要預覽您想列印的頁面，請選擇<menuchoice><guimenu>檔案</guimenu><guimenuitem>預覽列印</guimenuitem></menuchoice>，顯示 <guilabel>gedit - 預覽列印</guilabel>對話方塊。</para>
+		  
+		<para>如果要將目前的檔案列印至印表機或檔案，請選擇<menuchoice><guimenu>檔案</guimenu><guimenuitem>列印</guimenuitem></menuchoice>，顯示<guilabel>列印</guilabel>對話方塊。</para>
+				
+		<para><guilabel>列印</guilabel>對話方塊可以讓您指定下列列印選項：</para>
+		
+		<sect3 id="print-dialog-job"><title>工作標籤區段</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>列印範圍</guilabel></term> 
+			 <listitem>
+				<para>請選取下列任一個選項，以決定列印頁數：</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>全部</guilabel></para>
+				<para>選取這個選項，會列印檔案中的所有頁面。</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>選取部分</guilabel></para>
+				<para>選取這個選項，只會列印所選取的文字。這個選項只有在您已選取文字才適用。</para>
+				</listitem>
+								
+				</itemizedlist>
+				<para>預設值： <guilabel>全部</guilabel>。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>份數</guilabel></term> 
+			 <listitem>
+				<para>請使用這個旋轉方塊，指定您要列印的檔案份數。</para>
+				<para>預設值：1。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>理序</guilabel> </term> 
+			 <listitem>
+				<para>如果您要將檔案列印多份副本，請選取這個選項，以理序已列印的副本。</para>
+				<para>預設值：未選取。</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-printer"><title>印表機標籤區段</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>印表機</guilabel></term> 
+			 <listitem>
+				<para>請使用這個下拉式清單方塊，選取您要列印檔案的印表機。</para>
+				<para>預設值： <guilabel>Gnome 預設印表機</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>設定</guilabel></term> 
+			 <listitem>
+				<para>請使用這個下拉式清單方塊，選取印表機設定。如果要配置	印表機，請按一下<guibutton>配置</guibutton>。</para>
+				<para>預設值：預設值。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>位置</guilabel></term> 
+			 <listitem>
+				<para>請使用這個下拉式清單方塊，選取印表機目標。如果要將檔案列印至印表機，請選擇 <guilabel>lpr</guilabel>。如果要將檔案列印至列印檔案，請選擇<guilabel>檔案</guilabel>。如果選取<guilabel>檔案</guilabel>，請在文字方塊中鍵入輸出檔案的名稱。</para>
+				<para>預設值： <guilabel>lpr</guilabel>。</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-paper"><title>紙張標籤區段</title>
+		<variablelist>
+	 		<varlistentry><term><guilabel>紙張大小</guilabel> </term> 
+			 <listitem>
+				<para>請使用這個下拉式清單方塊，選取列印檔案用的紙張大小。</para>
+				<para>預設值： <guilabel>A4</guilabel>。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>寬度</guilabel> </term> 
+			 <listitem>
+				<para>請使用這個旋轉方塊，指定紙張寬度。請使用<guilabel>公分</guilabel>下拉式清單方塊，變更指定紙張大小用的度量單位。</para>
+				<para>預設值： 21.00 公分。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>高度</guilabel></term> 
+			 <listitem>
+				<para>請使用這個選轉方塊，指定紙張高度。</para>
+				<para>預設值： 29.70 公分。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>紙張方向</guilabel></term> 
+			 <listitem>
+				<para>請使用這個下拉式清單方塊，選取紙張方向。</para>
+				<para>預設值： <guilabel>直向</guilabel>。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>版面配置</guilabel></term>
+			 <listitem>
+				<para>請使用這個下拉式清單方塊，選取頁面的版面配置。您選取的每個版面配置，其預覽會顯示在<guilabel>預覽</guilabel>區域中。</para>
+				<para>預設值： <guilabel>一般</guilabel>。</para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+		
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins"><title>使用 &app; 外掛程式</title>
+		<para>外掛程式是一種以可增強應用程式功能的補強性程式。<application>&app;</application> 外掛程式可以讓您在
+   <application> &app;</application> 視窗中，執行與文字編輯相關的各個不同功能。下表所列的，便是可用的外掛程式。</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>外掛程式名稱</para></entry>
+			<entry colname="col2" valign="top"><para>用途</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII 表</para></entry>
+			<entry><para>顯示包含 ASCII 表的對話方塊。您可以使用 ASCII 表，在檔案中插入字元。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>比較檔案</para></entry>
+			<entry><para>比較兩個檔案，並將檔案的不同處，顯示在新的 <application>&app;</application> 視窗中。這個外掛程式使用 <application>diff</application> 程式來比較檔案。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para>開啟與 CVS 確定指令相關的日誌記錄訊息。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>插入日期/時間</para></entry>
+			<entry><para>在檔案中插入目前的日期及時間。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Shell 輸出</para></entry>
+			<entry><para>將 Shell 指令的文字輸出插入到檔案中。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>標記清單</para></entry>
+			<entry><para>顯示包含一般標記清單的對話方塊。您可以使用對話方塊將標記插入檔案。 </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>使用者名稱</para></entry>
+			<entry><para>將目前的使用者名稱插入到檔案中。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>字數統計</para></entry>
+			<entry><para>統計目前的檔案文字資料，包括：行數、字數、含空格字元數、無空格字元數，及位元數。本外掛程式會將結果顯示在<guilabel>字數</guilabel>視窗中。</para></entry>
+		</row>
+ 
+	
+		</tbody>
+		</tgroup>
+		</informaltable>
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"><title>載入 &app; 外掛程式</title>
+		<para>如果要載入 <application>&app;</application> 外掛程式，請選擇<menuchoice><guimenu>編輯</guimenu><guimenuitem>外掛程式管理員</guimenuitem></menuchoice>。
+		<guilabel>外掛程式管理員</guilabel>對話方塊，會顯示下列資訊：</para>
+		<itemizedlist>
+		  <listitem><para>可使用的外掛程式清單。</para>
+		  </listitem>
+		  <listitem><para><guibutton>配置外掛程式</guibutton> 按鈕。您可以使用這個按鈕，開啟配置對話方塊，以配置可用的外掛程式。</para>
+		  </listitem>
+		  <listitem><para>每一個外掛程式的簡短說明。如果要顯示說明，請在外掛程式清單中選取外掛程式。</para>
+		  </listitem>	
+		  <listitem><para>外掛程式作者及模組名稱之詳細資訊。</para>
+		  </listitem>	  
+		</itemizedlist>
+		<para>如果要載入外掛程式，請選取外掛程式名稱旁的核取方塊。<application>&app;</application> 應用程式會如下表所述，將外掛程式加入適當的 <application>&app;</application> 功能表中。</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>外掛程式名稱</para></entry>
+			<entry colname="col2" valign="top"><para>加入至功能表</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII 表 (ASCII Table)</para></entry>
+			<entry><para><menuchoice><guimenu>檢視</guimenu><guimenuitem>ASCII 表格</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>比較檔案 (Compare files)</para></entry>
+			<entry><para><menuchoice><guimenu>檔案</guimenu><guimenuitem>比較檔案</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para><menuchoice><guimenu>檔案</guimenu><guimenuitem>開啟 CVS ChangeLogs</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>字數統計 (Word count)</para></entry>
+			<entry><para><menuchoice><guimenu>搜尋</guimenu><guimenuitem>字數</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Shell 輸出 (Shell Output)</para></entry>
+			<entry><para><menuchoice><guimenu>編輯</guimenu><guimenuitem>插入 Shell 輸出</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para> 標記清單 (Tag list)</para></entry>
+			<entry><para><menuchoice><guimenu>檢視</guimenu><guimenuitem>標記清單</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>插入日期/時間 (Insert Date/Time)</para></entry>
+			<entry><para><menuchoice><guimenu>編輯</guimenu><guimenuitem>插入日期/時間</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>使用者名稱 (User name)</para></entry>
+			<entry><para><menuchoice><guimenu>編輯</guimenu><guimenuitem>插入使用者名稱</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+
+		<para>如果要移除外掛程式，請取消選取外掛程式名稱旁的核取方塊。</para>
+		<para>如果要關閉<guilabel>外掛程式管理員</guilabel>對話方塊，請按一下<guibutton>關閉</guibutton>。</para>
+	 </sect2>
+	 
+	 <sect2 id="gedit-customize-bars"><title>自訂工具列與狀態列</title>
+	 
+	 <para>如果要顯示或隱藏工具列，請選擇<menuchoice><guimenu>檢視</guimenu><guimenuitem>工具列</guimenuitem></menuchoice>。如果要自訂 <application>&app;</application> 顯示工具列的方式，請選擇<menuchoice><guimenu>檢視</guimenu> <guisubmenu>自訂工具列</guisubmenu></menuchoice>，然後選取下列任一個功能表項目：</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>桌面預設值</guimenuitem>：</para>
+		  <para>顯示預設的工具列。</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>圖示</guimenuitem></para>
+		  <para>僅顯示圖示。</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>圖示與文字</guimenuitem>：</para>
+		  <para>顯示圖示與文字。</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>如果要顯示或隱藏狀態列，請選擇<menuchoice><guimenu>檢視</guimenu><guimenuitem>狀態列</guimenuitem></menuchoice>。如果要自訂 <application>&app;</application> 顯示狀態列的方式，請選擇<menuchoice><guimenu>檢視</guimenu> <guisubmenu>自訂狀態列</guisubmenu></menuchoice>，然後選取下列任一個功能表項目：</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>顯示游標位置</guimenuitem>：</para>
+		  <para>顯示游標所在的行數與欄數。</para>
+		  <para>預設值：已選取。</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>顯示覆寫模式</guimenuitem>：</para>
+		  <para>顯示編輯模式。 如果編輯器是處於插入模式，狀態列便會出現 INS 字樣。如果編輯器是處於覆寫模式，狀態列便會出現 OVR 字樣。</para>
+		  <para>預設值：已選取。</para>
+		  </listitem>
+		  </itemizedlist>
+	 
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs"><title>個人喜好</title>
+	   
+	 <para>如果要配置 <application>&app;</application>，請選擇<menuchoice><guimenu>編輯</guimenu><guimenuitem>個人喜好</guimenuitem></menuchoice>。<guilabel>個人喜好</guilabel>對話方塊含有下列種類：</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+	 
+	 
+	 <sect2 id="gedit-prefs-editor"><title>編輯程式</title>
+	 <para><guilabel>編輯程式</guilabel>的種類又可分為下列幾種子類：</para>
+	 
+	 	<sect3 id="gedit-prefs-fontsandcolors"><title>字型與色彩</title>
+	 		<variablelist>
+		   <varlistentry><term><guilabel>使用預設主題字型</guilabel></term> 
+			 <listitem>
+				<para>選取這個選項，在 <application>&app;</application> 文字視窗的文字中，會使用系統預設的字型。</para>
+				<para>預設值：未選取。</para>
+			 </listitem>
+		  	</varlistentry>			
+		   <varlistentry><term><guilabel>編輯程式使用的字型</guilabel></term> 
+			 <listitem>
+				<para>這個欄位會顯示 <application>&app;</application> 用來顯示文字的字型。按一下按鈕，指定文字所使用的字體類型、樣式與大小。</para>
+				<para>預設值： Courier 中等，12 點。</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry><term><guilabel>使用預設的主題色彩</guilabel></term> 
+			 <listitem>
+				<para>選取這個選項，會在 <application>&app;</application> 文字視窗中，使用預設的主題色彩。</para>
+				<para>預設值：已選取。</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry><term><guilabel>文字色彩</guilabel></term> 
+			 <listitem>
+				<para>按一下<guibutton>文字色彩</guibutton>按鈕，
+可以顯示顏色選擇器對話方塊。請選取顏色，程式會在 <application>&app;</application> 文字視窗中，以該顏色顯示文字。</para>
+				<para>預設值：黑色。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>背景色彩</guilabel></term> 
+			 <listitem>
+				<para>按一下<guibutton>背景色彩</guibutton>按鈕，顯示顏色選擇器對話方塊。請為 <application>&app;</application> 文字視窗選取背景色彩。</para>
+				<para>預設值：白色。</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry><term><guilabel>選定的文字色彩</guilabel></term> 
+			 <listitem>
+				<para>按一下<guibutton>選定的文字色彩</guibutton>按鈕，顯示顏色選擇器對話方塊。請選取用來顯示選取文字的色彩。
+				</para>
+				<para>預設值：白色。</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>選項色彩</guilabel></term> 
+			 <listitem>
+				<para>按一下<guibutton>選項色彩</guibutton>按鈕，顯示顏色選擇器對話方塊。請選取背景色彩，用來反白顯示選取的文字。
+				  </para>
+				<para>預設值：藍色。</para>
+			 </listitem>
+		  	</varlistentry>			
+			</variablelist>
+		</sect3>
+	
+	 	<sect3 id="gedit-prefs-tabs"><title>跳格鍵</title>
+			<variablelist>
+	 		<varlistentry><term><guilabel>設定跳格寬度為</guilabel></term> 
+			 <listitem>
+				<para>請使用這個旋轉方塊，指定當您按下 <keycap>Tab</keycap> 鍵時，<application> &app;</application> 插入的空格寬度。</para>
+				<para>預設值： 8 字元。</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+				
+	 	<sect3 id="gedit-prefs-wrapmode"><title>換行模式</title>
+			<variablelist>
+	 		<varlistentry><term><guilabel>換行模式</guilabel></term>			 <listitem>
+				<para>選取下列任一個選項，以決定 <application>&app;</application> 在 <application>&app;</application> 視窗中的換行模式。
+</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>永不換行</guilabel></para>
+				<para>選取這個選項，會永不換行。鍵入的文字會顯示於一行內，直到您按下 <keycap>Return</keycap> 鍵為止。</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>在文字界線換行 </guilabel></para>
+				<para>選取這個選項，當您到達文字視窗的界限時，會以字為單位，換行至下一行。</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>在字元界線換行</guilabel>。</para>
+				<para>選取這個選項，當您到達文字視窗的界限時，為以字元為單位，換行至下一行。</para>
+				</listitem>								
+				</itemizedlist>
+				<para>預設值： <guilabel>在字元界線換行</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-linenumbers"><title>行數</title>
+			<variablelist>
+	 		<varlistentry><term><guilabel>顯示行數</guilabel></term> 
+			 <listitem>
+				<para>選取這個選項，會在 
+<application>&app;</application> 視窗左側顯示行數。</para>
+				<para>預設值：未選取。</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+		
+	 	<sect3 id="gedit-prefs-save"><title>儲存</title>
+	 		<variablelist>
+	 		<varlistentry><term><guilabel>在儲存之前，建立檔案備份副本</guilabel></term> <listitem>
+				<para>選取這個選項，可以在每次儲存檔案時，建立備份副本。檔案的備份副本其副檔名為 <filename>.bak</filename>。</para>
+				<para>預設值：未選取。</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry><term><guilabel>自動儲存目前檔案時間間隔</guilabel></term><listitem>
+				<para>選取這個選項，會自動地在固定的時間間隔，儲存目前的檔案。請使用這個旋轉方塊，指定儲存檔案的時間間隔。</para>
+				<para>預設值：未選取，10 分鐘。</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry><term><guilabel>當儲存時</guilabel></term> 
+			 <listitem>
+				<para>請選取下列任一項儲存選項：</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>總是使用 UTF-8 編碼 (較快)</guilabel></para>
+				<para>選取這個選項，會使用 UTF-8 位元編碼儲存檔案。</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>如果可以的話，使用目前的語言</guilabel></para>
+				<para>選取這個選項，會使用目前的語言儲存檔案。 您可以為不同的輸入法設定語言。</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>只有當檔案已經使用目前語言時才使用</guilabel></para>
+				<para>選取這個選項，如果檔案已經是使用目前的區性儲存過，程式會使用目前區性來儲存檔案 。</para>
+				</listitem>								
+				</itemizedlist>
+				<para>預設值： <guilabel>總是使用 UTF-8 編碼 (較快)</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-undo"><title>還原</title>
+	 		<variablelist>
+	 		<varlistentry><term><guilabel>限制還原次數為</guilabel></term> 
+			 <listitem>
+				<para>選取這個選項，可以限制編輯動作的可還原次數。請使用旋轉方塊，指定可還原動作的最多次數。</para>
+				<para>預設值：已選取，25 個動作。</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 		
+	 </sect2>	 
+	 
+	<sect2 id="gedit-prefs-print"><title>列印</title>
+	 <para><guilabel>Print</guilabel> 種類又可分為下列幾種子類：</para>
+	 
+	 	<sect3 id="gedit-prefs-page"><title>頁面</title>
+	 	<variablelist>
+		  <varlistentry><term><guilabel>列印頁面標頭</guilabel></term> 
+			 <listitem>
+				<para>選取這個選項，會在列印的每一頁上面加上標頭。您無法配置標頭。 </para>
+				<para>預設值：已選取。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term><guilabel>換行 (在字元界線)</guilabel></term> 
+			 <listitem>
+				<para>選取這個選項，在列印檔案時，可以自動以字元為單位換行。應用程式每換行一次計為一行。
+				  </para>
+				<para>預設值：已選取。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term><guilabel>列印行號之間隔</guilabel></term> 
+			 <listitem>
+				<para>選取這個選項，會在列印檔案時加上行數。請使用旋轉方塊，指定列印行數的間隔。例如，每 5 行或每 10 行等。</para>
+				<para>預設值：未選取，一行。</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+		
+		<sect3 id="gedit-prefs-fonts"><title>字型</title>
+	 	<variablelist>
+		  <varlistentry><term><guilabel>列印內文的字型</guilabel></term> 
+			 <listitem>
+				<para>按一下這個按鈕，可以選取列印檔案文字時所用的字型。</para>
+				<para>預設值：Courier 9.0。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term><guilabel>列印標頭的字型</guilabel></term><listitem>
+				<para>按一下這個按鈕，可以選取列印檔案標頭時所用的字型。</para>
+				<para>預設值：Helvetica 11.0。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term><guilabel>列印行數的字型</guilabel></term> <listitem>
+				<para>按一下這個按鈕，可以選取列印行數時的字型。</para>
+				<para>預設值：Helvetica 8.0。</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>從 <application>&app;</application> 列印檔案時，如果要將字型重設為預設字型，請按一下<guibutton>回復預設字型</guibutton>按鈕。</para>
+		</sect3>
+		
+	 </sect2>	 
+	 	 	 
+	 
+ </sect1>
+</article>

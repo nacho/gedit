@@ -1,0 +1,872 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "Agosto 2002">
+  <!ENTITY app "Editor de texto">
+]>
+<!--
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="es">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+	 <title>Manual del &app; V&manrevision;</title>
+	 <copyright>
+		<year>2003</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright>
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+	 <publisher>
+		<publishername> Proyecto de documentaci&oacute;n de GNOME </publishername>
+	 </publisher>
+	 &legal;
+	 <authorgroup>
+		<author>
+		<firstname>Sun</firstname>
+		<surname>Equipo de documentaci&oacute;n GNOME</surname>
+		  <affiliation>
+			 <orgname>Sun Microsystems</orgname>
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author>
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname>
+		  <affiliation>
+			 <orgname>Proyecto de documentaci&oacute;n de GNOME</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname>
+	<surname>Translator 1</surname>
+	<affiliation>
+	  <orgname>Latin Translation Team</orgname>
+	  <address> <email>translator@gnome.org</email> </address>
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision>
+		  <revnumber>Manual del aplique &app; V&manrevision;</revnumber>
+		  <date>&date;</date>
+		  <revdescription>
+			 <para role="author">Equipo de documentaci&oacute;n de Sun GNOME				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Proyecto de documentaci&oacute;n de GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision>
+		  <revnumber>Manual de gedit V2.1</revnumber>
+		  <date>Junio 2002</date>
+		  <revdescription>
+			 <para role="author">Equipo de documentaci&oacute;n de Sun GNOME				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Proyecto de documentaci&oacute;n de GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision>
+		  <revnumber>Manual de gedit  V2.0</revnumber>
+		  <date>Marzo 2002</date>
+		  <revdescription>
+			 <para role="author">Equipo de documentaci&oacute;n de Sun GNOME				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Proyecto de documentaci&oacute;n de GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision>
+		  <revnumber>gedit V1.0</revnumber>
+		  <date>2000</date>
+		  <revdescription>
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">Proyecto de documentaci&oacute;n de GNOME</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Este manual describe la versi&oacute;n &appversion; de &app;.
+		</releaseinfo>
+	 <legalnotice>
+		<title>Comentarios</title>
+		<para>Para informar de un defecto o hacer una sugerencia sobre la aplicaci&oacute;n &app; o el presente manual, siga las indicaciones que aparecen en la <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>.
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gedit-intro">
+	 <title>Introducci&oacute;n</title>
+	 <para>La aplicaci&oacute;n <application>&app;</application> es un editor de texto sencillo. Se puede usar <application>&app;</application> para crear y editar archivos de texto. Con m&oacute;dulos adicionales de <application>&app;</application> se pueden realizar diversas tareas relacionadas con la edici&oacute;n de texto desde dentro de la ventana de <application>&app;</application>.</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started">
+	 <title>Procedimientos iniciales</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start">
+		<title>Iniciar &app;</title>
+		<para>Es posible iniciar <application>&app;</application>, mediante estas dos opciones:</para>
+		<variablelist>
+    		<varlistentry>
+    		<term>Men&uacute;<guimenu>Aplicaciones</guimenu> </term>
+    		<listitem>
+    		<para>Seleccione <menuchoice><guisubmenu>Accesorios</guisubmenu><guimenuitem>Editor de texto</guimenuitem></menuchoice>. </para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry>
+    		<term>L&iacute;nea de comandos</term>
+    		<listitem>
+    		<para>Escriba <command>gedit</command> y despu&eacute;s pulse <keycap>Intro</keycap>.</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+
+	<sect2 id="gedit-when-you-start"><title>Al iniciar &app;</title>
+		<para>Cuando inicia <application>&app;</application>, aparece la ventana siguiente.</para>
+
+		<figure id="gedit-window">
+		  <title>Ventana de &app;</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>Muestra la ventana principal de gedit</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+
+		<para>La ventana de <application>&app;</application> contiene los elementos siguientes: </para>
+		<variablelist>
+		  <varlistentry> <term>Barra de men&uacute;s</term>
+			 <listitem>
+				<para>Los men&uacute;s de esta barra contienen todos los comandos necesarios para trabajar con archivos de <application>&app;</application>.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Barra de herramientas</term>
+			 <listitem>
+				<para>La barra de herramientas contiene un subconjunto de comandos a los que puede acceder desde la barra de men&uacute;s.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>&Aacute;rea de visualizaci&oacute;n</term>
+			 <listitem>
+				<para>El &aacute;rea de visualizaci&oacute;n contiene el texto del archivo que se est&aacute; editando. </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Barra de estado</term>
+			 <listitem>
+				<para>La barra de estado muestra informaci&oacute;n sobre la actividad de <application>&app;</application> e informaci&oacute;n contextual sobre los elementos del men&uacute;. </para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Cuando se hace clic con el bot&oacute;n derecho del rat&oacute;n en la ventana de <application>&app;</application>, la aplicaci&oacute;n muestra un men&uacute; emergente. El men&uacute; emergente contiene los comandos de edici&oacute;n de texto m&aacute;s habituales. </para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file">
+		<title>Abrir un archivo</title>
+		<para>Para abrir un archivo, seleccione <menuchoice> <guimenu>Archivo</guimenu> <guimenuitem>Abrir</guimenuitem></menuchoice> para que se muestre el cuadro de di&aacute;logo <guilabel>Abrir un archivo</guilabel>. Seleccione el archivo que desea abrir y, a continuaci&oacute;n, haga clic en <guibutton>Aceptar</guibutton>. El archivo se muestra en la ventana <application>&app;</application>. </para>
+		<para>Se pueden abrir varios archivos simult&aacute;neamente en <application>&app;</application>.
+		La aplicaci&oacute;n muestra s&oacute;lo un archivo en la ventana y a&ntilde;ade una pesta&ntilde;a por cada archivo abierto. Para ver otro de los archivos abiertos, haga clic en la pesta&ntilde;a que corresponda a ese archivo. Para crear una ventana de <application> &app;</application> nueva para cada archivo abierto, arrastre la pesta&ntilde;a de cada archivo al fondo del escritorio. Tambi&eacute;n puede usar el men&uacute; <guimenu>Documentos</guimenu> para pasar de un archivo a otro.</para>
+		<para>La aplicaci&oacute;n registra las rutas de acceso y los nombres de los &uacute;ltimos cuatro archivos que se han editado y los muestra como elementos de men&uacute; en el men&uacute; <menuchoice><guimenu>Archivo</guimenu> <guisubmenu>Archivos recientes</guisubmenu> </menuchoice>.
+		  </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"><title>Abrir varios archivos desde una l&iacute;nea de comandos</title>
+		<para>Puede ejecutar <application>&app;</application> desde una l&iacute;nea de comandos y abrir varios archivos. Para abrir varios archivos desde una l&iacute;nea de comandos, escriba este comando seguido de la tecla <keycap>Intro</keycap>:</para>
+		<para><command>gedit <replaceable>archivo1.txt archivo2.txt archivo3.txt</replaceable></command></para>
+		<para>Cuando la aplicaci&oacute;n se inicia, los archivos que se han especificado se muestran en la ventana de  <application>&app;</application> .</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage">
+	 <title>Uso</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file"><title>Crear un archivo nuevo</title>
+		<para>Para crear un archivo nuevo, seleccione <menuchoice> <guimenu>Archivo</guimenu> <guimenuitem>Nuevo</guimenuitem>
+			 </menuchoice>. La aplicaci&oacute;n muestra un archivo nuevo en la ventana <application>&app;</application> .</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file"><title>Guardar un archivo</title>
+		<para>Puede guardar archivos de cualquiera de estas maneras:</para>
+		<itemizedlist>
+		  <listitem><para>Para guardar cambios en el archivo abierto, seleccione <menuchoice> <guimenu>Archivo</guimenu><guimenuitem>Guardar</guimenuitem> </menuchoice> o haga clic en <guibutton>Guardar</guibutton> desde la barra de herramientas. Si el archivo no tiene nombre, <application>&app;</application> muestra el cuadro de di&aacute;logo <guilabel>Guardar como</guilabel>. Escriba un nombre para el archivo en el cuadro de di&aacute;logo <guilabel>Guardar como</guilabel> y haga clic en <guibutton>Aceptar</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Para guardar un archivo nuevo o para guardar un archivo existente con un nombre nuevo, seleccione <menuchoice> <guimenu>Archivo</guimenu> <guimenuitem>Guardar como</guimenuitem> </menuchoice>. Escriba un nombre para el archivo en el cuadro de di&aacute;logo <guilabel>Guardar como</guilabel> y despu&eacute;s haga clic en <guibutton>Aceptar</guibutton>. </para>
+		  </listitem>
+		  <listitem><para>Para guardar todos los archivos abiertos en <application>&app;</application>, seleccione <menuchoice> <guimenu>Archivo</guimenu> <guimenuitem>Guardar todo</guimenuitem> </menuchoice>.</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"><title>Editar texto</title>
+		<para>El texto de un archivo se puede editar de las siguientes maneras:</para>
+		<itemizedlist>
+		  <listitem><para>Escribiendo texto nuevo desde el teclado. </para>
+		  </listitem>
+		  <listitem><para>Usando la tecla <keycap>Suprimir</keycap> para borrar texto.
+				</para>
+		  </listitem>
+		  <listitem><para>Usando los comandos <guimenuitem>Cortar</guimenuitem>, <guimenuitem>Copiar</guimenuitem>, <guimenuitem>Pegar</guimenuitem> y <guimenuitem>Borrar</guimenuitem> para editar el texto. </para>
+		  </listitem>
+		</itemizedlist>
+		<para>Cuando se selecciona texto con el rat&oacute;n, <application>&app;</application> copia autom&aacute;ticamente el texto seleccionado en un buffer. Puede efectuar cualquiera de las acciones siguientes en el texto seleccionado:
+		  </para>
+		<itemizedlist>
+		  <listitem><para>Para borrar el texto seleccionado del archivo y trasladarlo a un buffer, seleccione <menuchoice> <guimenu>Editar</guimenu> <guimenuitem>Cortar</guimenuitem>
+				  </menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Para eliminar el texto seleccionado del archivo, seleccione <menuchoice> <guimenu>Editar</guimenu> <guimenuitem>Borrar</guimenuitem>
+				  </menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Para insertar el contenido del buffer en la posici&oacute;n del cursor, haga clic con el bot&oacute;n central del rat&oacute;n o seleccione <menuchoice> <guimenu>Editar</guimenu> <guimenuitem>Pegar</guimenuitem> </menuchoice>. Antes de poder pegar texto, es necesario haberlo cortado o copiado.</para>
+		  </listitem>
+		  <listitem><para>Para seleccionar todo el texto de un archivo, seleccione <menuchoice> <guimenu>Editar</guimenu> <guimenuitem>Seleccionar todo</guimenuitem> </menuchoice>. </para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits"><title>Deshacer o rehacer cambios</title>
+		<para>Para deshacer un cambio, seleccione <menuchoice> <guimenu>Editar</guimenu> <guimenuitem>Deshacer</guimenuitem>
+			 </menuchoice>. Para rehacer un cambio, seleccione <menuchoice> <guimenu>Editar</guimenu> <guimenuitem>Rehacer</guimenuitem>
+			 </menuchoice>. El n&uacute;mero de cambios previos que pueden deshacerse viene determinado por el valor de configuraci&oacute;n de <guilabel>Establecer l&iacute;mite de deshacer acciones en</guilabel> de la pesta&ntilde;a <xref linkend="gedit-prefs-undo"/> del cuadro de di&aacute;logo <guilabel>Preferencias</guilabel>. De forma predeterminada, el n&uacute;mero de acciones que pueden deshacerse es 25.</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"><title>Buscar texto</title>
+		<para>Para buscar cadenas de texto en un archivo, lleve a cabo estos pasos:</para>
+		<orderedlist>
+		  <listitem><para>Seleccione <menuchoice> <guimenu>Buscar</guimenu><guimenuitem>Buscar</guimenuitem> </menuchoice>
+				para ver el cuadro de di&aacute;logo <guilabel>Buscar</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Escriba la cadena de texto que desea encontrar en el campo <guilabel>Buscar</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Seleccione una de las opciones siguientes:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Buscar a partir del principio del documento</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Buscar desde la posici&oacute;n actual del cursor</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>Seleccione la opci&oacute;n <guilabel>Distinguir may&uacute;sculas y min&uacute;sculas</guilabel> para buscar solamente los casos en que el texto coincida exactamente con las may&uacute;sculas y min&uacute;sculas que se hayan escrito. </para>
+		  </listitem>
+		  <listitem><para>Haga clic en <guibutton>Buscar</guibutton> para buscar en el archivo la primera aparici&oacute;n de la cadena. Si <application>&app;</application> encuentra la cadena, la aplicaci&oacute;n traslada el cursor hasta ella y la selecciona.</para>
+		  </listitem>
+		  <listitem><para>Para encontrar la siguiente aparici&oacute;n de la cadena, haga clic en <guibutton>Buscar siguiente</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Para finalizar la b&uacute;squeda, haga clic en <guibutton>Cerrar</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text"><title>Buscar y sustituir texto</title>
+		<para>Para buscar en un archivo una cadena y sustituirla por por otra, lleve a cabo los pasos siguientes:</para>
+		<orderedlist>
+		  <listitem><para>Seleccione <menuchoice> <guimenu>Buscar</guimenu>
+				  <guimenuitem>Reemplazar</guimenuitem> </menuchoice> para ver el cuadro de di&aacute;logo <guilabel>Reemplazar</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Escriba la cadena que desea encontrar en el campo <guilabel>Buscar</guilabel>. </para>
+		  </listitem>
+		  <listitem><para>Escriba la cadena que desea usar para reemplazar a la que se ha encontrado en el campo <guilabel>Reemplazar con</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Seleccione una de las opciones siguientes:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Buscar a partir del principio del documento</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Buscar desde la posici&oacute;n actual del cursor</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>Seleccione la opci&oacute;n <guilabel>Distinguir may&uacute;sculas y min&uacute;sculas</guilabel> para buscar solamente los casos en que el texto coincida exactamente con las may&uacute;sculas y min&uacute;sculas que se hayan escrito. </para>
+		  </listitem>
+		  <listitem><para>Haga clic en <guibutton>Buscar</guibutton> para buscar en el archivo la primera aparici&oacute;n de la cadena. Si <application>&app;</application> encuentra la cadena, la aplicaci&oacute;n traslada el cursor hasta ella y la selecciona. </para>
+		  </listitem>
+		  <listitem><para>Haga clic en <guibutton>Reemplazar</guibutton> para sustituir esa aparici&oacute;n de la cadena por el texto escrito en el campo <guilabel>Reemplazar con</guilabel>. Haga clic en <guibutton>Reemplazar todo</guibutton> para sustituir todas las apariciones de la cadena.</para>
+		  </listitem>
+		  <listitem><para>Para encontrar la siguiente aparici&oacute;n de la cadena, haga clic en <guibutton>Buscar siguiente</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Para terminar la b&uacute;squeda, haga clic en <guibutton>Cerrar</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"><title>Abrir un archivo desde un URI</title>
+		<para>Para abrir un archivo desde un identificador de recursos universal (URI), lleve a cabo los pasos siguientes:</para>
+		<itemizedlist>
+		<listitem>
+		<para>Seleccione <menuchoice> <guimenu>Archivo</guimenu> <guimenuitem>Abrir direcci&oacute;n</guimenuitem></menuchoice> para que se muestre el cuadro de di&aacute;logo <guilabel>Abrir desde un URI</guilabel>. Escriba el URI del archivo que desea abrir y a continuaci&oacute;n haga clic en <guibutton>Abrir</guibutton>.</para>
+		</listitem>
+		<listitem>
+		<para>Escriba <command>gedit <replaceable>http://...</replaceable></command> en una l&iacute;nea de comandos, donde <replaceable>http://...</replaceable> es el URI del archivo que desea abrir, y, a continuaci&oacute;n, pulse <keycap>Intro</keycap>.</para>
+		</listitem>
+		</itemizedlist>
+		<para>La aplicaci&oacute;n abre el archivo situado en el URI en modo de s&oacute;lo lectura.</para>
+	 </sect2>
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"><title>Redirigir la salida de un comando a un archivo</title>
+		<para>La aplicaci&oacute;n <application>&app;</application> se puede usar para redirigir la salida de un comando a un archivo de texto. Por ejemplo, para redirigir la salida de un comando <command>ls</command> a un archivo de texto, escriba <command>ls | gedit</command> y, a continuaci&oacute;n, pulse <keycap>Intro</keycap>.</para>
+		<para>La salida del comando <command>ls</command> se muestra en un archivo de texto nuevo de la ventana <application>&app;</application>.</para>
+		<para>Tambi&eacute;n puede usar el m&oacute;dulo Salida del int&eacute;rprete de comandos para redirigir la salida de un comando al archivo abierto. Para usar el m&oacute;dulo Salida del int&eacute;rprete de comandos, lleve a cabo los pasos siguientes:</para>
+		<orderedlist>
+		  <listitem><para>Cargue el m&oacute;dulo Salida del int&eacute;rprete de comandos. Consulte <xref linkend="gedit-install-plugins"/> para obtener informaci&oacute;n sobre c&oacute;mo cargar un m&oacute;dulo.</para>
+		  </listitem>
+
+		  <listitem><para>Seleccione <menuchoice> <guimenu>Editar</guimenu> <guimenuitem>Insertar la salida del int&eacute;rprete de comandos</guimenuitem> </menuchoice> para ver el cuadro de di&aacute;logo <guilabel>Salida del int&eacute;rprete de comandos</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Escriba el comando que desea ejecutar en el campo <guilabel>Comando que ejecutar</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Edite el campo <guilabel>Directorio de trabajo</guilabel> si fuera necesario. De forma predeterminada, el m&oacute;dulo Salida del int&eacute;rprete de comandos ejecuta el comando que se haya especificado en el directorio actual.</para>
+		  </listitem>
+		  <listitem><para>Haga clic en <guibutton>Ejecutar</guibutton>. El m&oacute;dulo Salida del int&eacute;rprete de comandos ejecuta el comando e inserta el texto que resulta en el archivo actual.
+				</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line"><title>Ir a una l&iacute;nea espec&iacute;fica</title>
+		<para>Para ir a una l&iacute;nea espec&iacute;fica del archivo actual, lleve a cabo los pasos siguientes:</para>
+		<orderedlist>
+		  <listitem><para>Seleccione <menuchoice> <guimenu>Buscar</guimenu> <guimenuitem>Ir a la l&iacute;nea</guimenuitem> </menuchoice> para ver el cuadro de di&aacute;logo <guilabel>Ir a la l&iacute;nea</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Escriba el n&uacute;mero de la l&iacute;nea a la que desea desplazar el cursor en el campo <guilabel>N&uacute;mero de l&iacute;nea</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Haga clic en <guibutton>Ir a la l&iacute;nea</guibutton>. La aplicaci&oacute;n traslada el cursor al n&uacute;mero de l&iacute;nea que especifique.</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode"><title>Cambiar el modo de entrada</title>
+		<para>Para cambiar el modo de entrada, haga clic con el bot&oacute;n derecho del rat&oacute;n en la ventana de texto y seleccione <guimenuitem>M&eacute;todos de entrada</guimenuitem>.
+		El elemento de men&uacute; <guimenuitem>Insertar car&aacute;cter de control Unicode</guimenuitem> incluye opciones de disposici&oacute;n de caracteres que son &uacute;tiles para trabajar con alfabetos no latinos. </para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file">
+		<title>Imprimir un archivo</title>
+		<para>Es posible usar la aplicaci&oacute;n <application>&app;</application> para realizar las operaciones de impresi&oacute;n siguientes:</para>
+		<itemizedlist>
+		  <listitem><para>Imprimir un archivo en la impresora. </para>
+		  </listitem>
+		  <listitem><para>Imprimir la salida del comando print en un archivo.</para>
+		  </listitem>
+		</itemizedlist>
+		<para>Si imprime en un archivo, <application>&app;</application> env&iacute;a la salida a un documento con formato de preimpresi&oacute;n. Los formatos de preimpresi&oacute;n m&aacute;s comunes son PostScript y Portable Document Format (PDF).</para>
+
+		<para>Para obtener una vista previa de las p&aacute;ginas que desea imprimir, seleccione <menuchoice> <guimenu>Archivo</guimenu><guimenuitem>Vista preliminar de la impresi&oacute;n</guimenuitem> </menuchoice> para ver el cuadro de di&aacute;logo <guilabel>gedit - Vista preliminar</guilabel>.</para>
+
+		<para>Para imprimir el archivo en una impresora o archivo, seleccione <menuchoice> <guimenu>Archivo</guimenu> <guimenuitem>Imprimir</guimenuitem> </menuchoice> para que se muestre el cuadro de di&aacute;logo <guilabel>Imprimir</guilabel>.</para>
+
+		<para>El cuadro de di&aacute;logo <guilabel>Imprimir</guilabel> permite especificar las opciones de impresi&oacute;n siguientes:</para>
+
+		<sect3 id="print-dialog-job"><title>Pesta&ntilde;a Trabajo</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Rango de impresi&oacute;n</guilabel> </term>
+			 <listitem>
+				<para>Seleccione una de las opciones siguientes para determinar cu&aacute;ntas p&aacute;ginas desea imprimir:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Todo</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para imprimir todas las p&aacute;ginas del archivo.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Seleccionado</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para imprimir s&oacute;lo el texto seleccionado. Esta opci&oacute;n s&oacute;lo est&aacute; disponible si previamente se ha seleccionado texto.</para>
+				</listitem>
+
+				</itemizedlist>
+				<para>Valor predeterminado:   <guilabel>Todo</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Copias</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de incremento para especificar el n&uacute;mero de copias del archivo que desea imprimir.</para>
+				<para>Valor predeterminado:   1.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Ordenar</guilabel> </term>
+			 <listitem>
+				<para>Si va a imprimir varias copias del archivo, seleccione esta opci&oacute;n para ordenar las copias impresas.</para>
+				<para>Valor predeterminado:  no seleccionado.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+		<sect3 id="print-dialog-printer"><title>Pesta&ntilde;a Impresora</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Impresora</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de lista desplegable para seleccionar la impresora en la que desea imprimir el archivo.</para>
+				<para>Valor predeterminado:   <guilabel>Impresora predeterminada de Gnome</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Configuraci&oacute;n</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de lista desplegable para seleccionar los valores de configuraci&oacute;n de la impresora. Para configurar la impresora, haga clic en <guibutton>Configurar</guibutton>.</para>
+				<para>Valor predeterminado:  Predeterminado.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Ubicaci&oacute;n</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de lista desplegable para seleccionar el destino de la impresi&oacute;n. Para imprimir el archivo en una impresora, seleccione <guilabel>lpr</guilabel>. Para imprimir el documento en un archivo de impresi&oacute;n, seleccione <guilabel>Archivo</guilabel>. Si selecciona <guilabel>Archivo</guilabel>, escriba el nombre del documento de salida en el cuadro de texto que aparece.</para>
+				<para>Valor predeterminado:   <guilabel>lpr</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+		<sect3 id="print-dialog-paper"><title>Pesta&ntilde;a Papel</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Tama&ntilde;o del papel</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de lista desplegable para seleccionar el tama&ntilde;o del papel en el que desea imprimir el archivo.</para>
+				<para>Valor predeterminado:   <guilabel>A4</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Ancho</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de incremento para especificar el ancho del papel. Use el cuadro de lista desplegable <guilabel>Cent&iacute;metros</guilabel> con el fin de cambiar la unidad de medida para especificar el tama&ntilde;o del papel.</para>
+				<para>Valor predeterminado:   21 cent&iacute;metros.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Altura</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de incremento para especificar la altura del papel. </para>
+				<para>Valor predeterminado:   29,7 cent&iacute;metros.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Orientaci&oacute;n de la p&aacute;gina</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de lista desplegable para determinar la orientaci&oacute;n de la p&aacute;gina. </para>
+				<para>Valor predeterminado:   <guilabel>Vertical</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Disposici&oacute;n</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de lista desplegable para determinar la disposici&oacute;n de la p&aacute;gina. En el &aacute;rea de <guilabel>Previsualizaci&oacute;n</guilabel> se muestra una vista previa de la disposici&oacute;n de las p&aacute;ginas que haya seleccionado.</para>
+				<para>Valor predeterminado:   <guilabel>Normal</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins"><title>Usar los m&oacute;dulos de &app;</title>
+		<para>Un m&oacute;dulo;n es un programa suplementario que mejora las prestaciones de una aplicaci&oacute;n. Los m&oacute;dulos de <application>&app;</application> permiten realizar varias funciones relacionadas con la edici&oacute;n de texto desde la propia ventana de <application> &app;</application>. Esta tabla muestra los m&oacute;dulos disponibles.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/>
+			<colspec colname="col2"/>
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nombre del m&oacute;dulo</para></entry>
+			<entry colname="col2" valign="top"><para>Funci&oacute;n</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>Tabla ASCII</para></entry>
+			<entry><para>Muestra un cuadro de di&aacute;logo que contiene una tabla ASCII. Puede usar la tabla ASCII para insertar caracteres en un archivo.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Comparar archivos</para></entry>
+			<entry><para>Compara dos archivos y muestra las diferencias entre ellos en una ventana nueva de <application>&app;</application>.
+			Este m&oacute;dulo usa el programa <application>diff</application> para comparar los archivos.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Registro de cambios del CVS</para></entry>
+			<entry><para>Abre los mensajes de registro cronol&oacute;gico asociados a comandos de ejecuci&oacute;n CVS.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Insertar Fecha/Hora</para></entry>
+			<entry><para>Inserta la fecha y la hora actuales en un archivo.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Salida del int&eacute;rprete de comandos</para></entry>
+			<entry><para>Inserta la salida de texto de un comando que ejecutar en un archivo. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Lista de marca</para></entry>
+			<entry><para>Muestra un cuadro de di&aacute;logo que contiene una lista de marcas comunes. Puede usar el cuadro de di&aacute;logo para insertar una marca en un archivo. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nombre de usuario</para></entry>
+			<entry><para>Inserta el nombre de usuario actual en el archivo. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Contar palabras</para></entry>
+			<entry><para>Cuenta el n&uacute;mero de l&iacute;neas, palabras, caracteres con espacios, caracteres sin espacios y bytes del archivo actual. El m&oacute;dulo muestra el resultado en la ventana <guilabel>Contar palabras</guilabel>. </para></entry>
+		</row>
+
+		</tbody>
+		</tgroup>
+		</informaltable>
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"><title>Cargar m&oacute;dulos de &app;</title>
+		<para>Para cargar m&oacute;dulos de<application> &app;</application>, seleccione <menuchoice><guimenu>Editar</guimenu> <guimenuitem>Gestor de m&oacute;dulos</guimenuitem>
+		  </menuchoice>.
+		El cuadro de di&aacute;logo del <guilabel>Gestor de m&oacute;dulos</guilabel> muestra la informaci&oacute;n siguiente:</para>
+		<itemizedlist>
+		  <listitem><para>Una lista de los m&oacute;dulos disponibles.</para>
+		  </listitem>
+		  <listitem><para>El bot&oacute;n <guibutton>Configurar m&oacute;dulo</guibutton>. Puede usar este bot&oacute;n para abrir un cuadro de di&aacute;logo de configuraci&oacute;n en los m&oacute;dulos que pueden configurarse.</para>
+		  </listitem>
+		  <listitem><para>Una descripci&oacute;n breve de cada m&oacute;dulo. Para visualizar una descripci&oacute;n, seleccione un m&oacute;dulo de la lista.</para>
+		  </listitem>
+		  <listitem><para>Detalles sobre el autor y el nombre del m&oacute;dulo.</para>
+		  </listitem>
+		</itemizedlist>
+		<para>Para cargar un m&oacute;dulo, seleccione la casilla que hay junto a su nombre. La aplicaci&oacute;n <application>&app;</application> a&ntilde;ade el m&oacute;dulo al men&uacute; adecuado de <application>&app;</application>, tal como se describe en la tabla siguiente.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/>
+		<colspec colname="col2"/>
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nombre del m&oacute;dulo</para></entry>
+			<entry colname="col2" valign="top"><para>Agregado al men&uacute;</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>Tabla ASCII</para></entry>
+			<entry><para><menuchoice><guimenu>Ver</guimenu> <guimenuitem>Tabla ASCII</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Comparar archivos</para></entry>
+			<entry><para><menuchoice><guimenu>Archivo</guimenu> <guimenuitem>Comparar archivos
+</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Registro de cambios del CVS</para></entry>
+			<entry><para><menuchoice><guimenu>Archivo</guimenu> <guimenuitem>Abrir Registro de cambios del CVS</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Contar palabras</para></entry>
+			<entry><para><menuchoice><guimenu>Buscar</guimenu> <guimenuitem>Contar palabras</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Salida del int&eacute;rprete de comandos</para></entry>
+			<entry><para><menuchoice><guimenu>Editar</guimenu> <guimenuitem>Insertar salida del int&eacute;rprete de comandos</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Lista de marca</para></entry>
+			<entry><para><menuchoice><guimenu>Ver</guimenu> <guimenuitem>Lista de marca</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Insertar Fecha/Hora</para></entry>
+			<entry><para><menuchoice><guimenu>Editar</guimenu> <guimenuitem>Insertar fecha/hora</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nombre de usuario</para></entry>
+			<entry><para><menuchoice><guimenu>Editar</guimenu> <guimenuitem>Insertar nombre de usuario</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+
+		<para>Para eliminar un m&oacute;dulo, deseleccione la casilla que hay junto a su nombre. </para>
+		<para>Para cerrar el cuadro de di&aacute;logo <guilabel>Gestor de m&oacute;dulos</guilabel>,
+ haga clic en <guibutton>Cerrar</guibutton>.</para>
+	 </sect2>
+
+	 <sect2 id="gedit-customize-bars"><title>Personalizar la barra de herramientas y la barra de estado</title>
+
+	 <para>Para visualizar u ocultar la barra de herramientas, seleccione <menuchoice> <guimenu>Ver</guimenu>
+<guimenuitem>Barra de herramientas</guimenuitem> </menuchoice>. Para personalizar la forma en que <application>&app;</application> muestra la barra de herramientas, seleccione <menuchoice> <guimenu>Ver</guimenu>
+<guisubmenu>Personalizar barra de herramientas</guisubmenu> </menuchoice> y a continuaci&oacute;n elija uno de los elementos de men&uacute; siguientes:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Escritorio por omisi&oacute;n</guimenuitem>: </para>
+		  <para>Muestra la barra de herramientas predeterminada.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Icono</guimenuitem>:</para>
+		  <para>Muestra s&oacute;lo los iconos.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Icono y texto</guimenuitem>: </para>
+		  <para>Muestra iconos y texto.</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>Para visualizar u ocultar la barra de estado, seleccione <menuchoice> <guimenu>Ver</guimenu>	  <guimenuitem>Barra de estado</guimenuitem> </menuchoice>. Para personalizar la forma en que <application>&app;</application> muestra la barra de estado, seleccione <menuchoice> <guimenu>Ver</guimenu> <guisubmenu>Personalizar barra de estado</guisubmenu> </menuchoice> y, a continuaci&oacute;n, elija uno de los elementos de men&uacute; siguientes:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Mostrar la posici&oacute;n del cursor</guimenuitem>:</para>
+		  <para>Muestra el n&uacute;mero de l&iacute;nea y columna en que se encuentra el cursor.</para>
+		  <para>Valor predeterminado:  seleccionado.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Mostrar modo de sobreescritura</guimenuitem>:</para>
+		  <para>Muestra la modalidad de edici&oacute;n. Si el editor est&aacute; en modalidad de inserci&oacute;n, la barra de estado contiene la palabra INS. Si el editor est&aacute; en modalidad de sobreescritura, la barra de estado contiene la palabra OVR.</para>
+		  <para>Valor predeterminado:  seleccionado.</para>
+		  </listitem>
+		  </itemizedlist>
+
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs">
+	 <title>Preferencias</title>
+
+	 <para>Para configurar <application>&app;</application>, seleccione
+		<menuchoice>
+		<guimenu>Editar</guimenu>
+		<guimenuitem>Preferencias</guimenuitem>
+		</menuchoice>. El cuadro de di&aacute;logo <guilabel>Preferencias</guilabel> contiene las categor&iacute;as siguientes:</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+
+
+	 <sect2 id="gedit-prefs-editor"><title>Editor</title>
+	 <para>La categor&iacute;a <guilabel>Editor</guilabel> se subdivide en las subcategor&iacute;as siguientes:</para>
+
+	 	<sect3 id="gedit-prefs-fontsandcolors"><title>Fuentes y colores</title>
+	 		<variablelist>
+		   <varlistentry> <term><guilabel>Usar fuente del tema por omisi&oacute;n</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para usar la fuente de sistema predeterminada para el texto de la ventana de <application>&app;</application>. </para>
+				<para>Valor predeterminado:  no seleccionado.</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>Fuente utilizada por el editor</guilabel> </term>
+			 <listitem>
+				<para>Este campo muestra la fuente que <application>&app;</application> usa para mostrar texto.
+				Haga clic en el bot&oacute;n para especificar el tipo, estilo y tama&ntilde;o de fuente que desea usar para el texto. </para>
+				<para>Valor predeterminado:   Courier Medium 12 puntos.</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>Usar los colores del tema por omisi&oacute;n</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para usar los colores predeterminados del tema en la ventana de texto de <application>&app;</application>. </para>
+				<para>Valor predeterminado:  seleccionado.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Color del texto</guilabel> </term>
+			 <listitem>
+				<para>Haga clic en el bot&oacute;n <guibutton>Color del texto</guibutton> para que se muestre el cuadro de di&aacute;logo del selector de colores. Seleccione el color que desea usar para la visualizaci&oacute;n del texto en la ventana de <application>&app;</application>. </para>
+				<para>Valor predeterminado:  negro.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Color del fondo</guilabel> </term>
+			 <listitem>
+				<para>Haga clic en el bot&oacute;n <guibutton>Color del fondo</guibutton> para que se muestre el cuadro de di&aacute;logo del selector de colores. Seleccione un color de fondo para la ventana de texto de <application>&app;</application>. </para>
+				<para>Valor predeterminado:  blanco.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Color de texto seleccionado</guilabel> </term>
+			 <listitem>
+				<para>Haga clic en el bot&oacute;n <guibutton>Color de texto seleccionado</guibutton> para que se muestre el cuadro de di&aacute;logo del selector de colores. Seleccione el color que desea usar en la visualizaci&oacute;n del texto seleccionado.
+				</para>
+				<para>Valor predeterminado:  blanco.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Color de selecci&oacute;n</guilabel> </term>
+			 <listitem>
+				<para>Haga clic en el bot&oacute;n <guibutton>Color de selecci&oacute;n</guibutton> para que se muestre el cuadro de di&aacute;logo del selector de colores. Seleccione el color de fondo que desea usar para resaltar una selecci&oacute;n de texto.
+				  </para>
+				<para>Valor predeterminado:  azul.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+	 	<sect3 id="gedit-prefs-tabs">
+	 		<title>Tabulaciones</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Configurar ancho de tabuladores equivalente a</guilabel> </term>
+			 <listitem>
+				<para>Use este cuadro de incremento para especificar el espacio que <application> &app;</application> inserta cuando se pulsa la tecla <keycap>Tab</keycap>. </para>
+				<para>Valor predeterminado:   8 caracteres.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+	 	<sect3 id="gedit-prefs-wrapmode">
+	 		<title>Modo ajuste</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Modalidad de ajuste</guilabel> </term>
+			 <listitem>
+				<para>Seleccione una de las opciones siguientes para determinar la forma en que <application>&app;</application> ajusta el texto en la ventana de <application>&app;</application>:
+</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Nunca ajustar l&iacute;neas</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para no ajustar las l&iacute;neas nunca. El texto que escribe se muestra en una sola l&iacute;nea hasta que pulsa <keycap>Intro</keycap>.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Ajustar l&iacute;neas a los l&iacute;mites de la palabra</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para que se cambie de l&iacute;nea al final de la palabra que est&aacute; en el l&iacute;mite de la ventana de texto. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Ajustar l&iacute;neas a los l&iacute;mites del car&aacute;cter</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para que se cambie de l&iacute;nea por caracteres, cuando se llega al l&iacute;mite de la ventana de texto. </para>
+				</listitem>
+				</itemizedlist>
+				<para>Valor predeterminado:   <guilabel>Ajustar l&iacute;neas a los l&iacute;mites del car&aacute;cter</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+	 	<sect3 id="gedit-prefs-linenumbers"><title>N&uacute;meros de l&iacute;nea</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Mostrar n&uacute;meros de l&iacute;nea</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para que se muestren n&uacute;meros de l&iacute;nea en la parte izquierda de la ventana de <application>&app;</application>. </para>
+				<para>Valor predeterminado:  no seleccionado.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+	 	<sect3 id="gedit-prefs-save">
+	 		<title>Guardar</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Crear una copia de seguridad de los archivos antes de guardarlos</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para crear una copia de seguridad  de los archivos cada vez que se procede a guardarlos. La copia de seguridad del archivo tiene la extensi&oacute;n <filename>.bak</filename>.</para>
+				<para>Valor predeterminado:  no seleccionado.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Guardar autom&aacute;ticamente el archivo actual cada</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para guardar autom&aacute;ticamente el archivo actual a intervalos regulares. Use el cuadro de incremento para especificar cada cu&aacute;nto tiempo se debe guardar el archivo.</para>
+				<para>Valor predeterminado:  no seleccionado, 10 minutos.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Al guardar</guilabel> </term>
+			 <listitem>
+				<para>Seleccione una de las opciones siguientes:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Usar siempre codificaci&oacute;n UTF-8 (m&aacute;s r&aacute;pido)</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para guardar los archivos usando la codificaci&oacute;n UTF-8 bit.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Usar la localizaci&oacute;n actual cuando sea posible</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para guardar archivos usando la localizaci&oacute;n actual. Puede configurar localizaciones para distintos m&eacute;todos de entrada. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Usar la localizaci&oacute;n actual s&oacute;lo si el archivo ya la est&aacute; utilizando</guilabel></para>
+				<para>Seleccione esta opci&oacute;n para guardar un archivo usando la localizaci&oacute;n actual s&oacute;lo si el archivo ya se hab&iacute;a guardado en ella.</para>
+				</listitem>
+				</itemizedlist>
+				<para>Valor predeterminado:   <guilabel>Usar siempre codificaci&oacute;n UTF-8 (m&aacute;s r&aacute;pido)</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>
+
+	 	<sect3 id="gedit-prefs-undo">
+	 		<title>Deshacer</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Establecer l&iacute;mite de deshacer acciones en</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para establecer un l&iacute;mite en el n&uacute;mero de acciones de edici&oacute;n que se pueden deshacer. Use el cuadro de incremento para especificar el n&uacute;mero m&aacute;ximo de acciones que se pueden deshacer. </para>
+				<para>Valor predeterminado:  seleccionado, 25 acciones.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+	 </sect2>
+
+	<sect2 id="gedit-prefs-print"><title>Imprimir</title>
+	 <para>La categor&iacute;a <guilabel>Imprimir</guilabel> se subdivide en las subcategor&iacute;as siguientes:</para>
+
+	 	<sect3 id="gedit-prefs-page">
+	 		<title>P&aacute;gina</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Imprimir cabeceras de p&aacute;gina</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para que se incluya una cabecera en todas las p&aacute;ginas que se impriman. La cabecera no se puede configurar. </para>
+				<para>Valor predeterminado:  seleccionado.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Ajustar l&iacute;neas (a los bordes del car&aacute;cter)</guilabel> </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para ajustar el texto autom&aacute;ticamente al nivel de los caracteres cuando se imprime un archivo. La aplicaci&oacute;n considera las l&iacute;neas ajustadas como si fueran una sola en lo que respecta a la numeraci&oacute;n.
+				  </para>
+				<para>Valor predeterminado:  seleccionado.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Imprimir n&uacute;meros de l&iacute;nea cada</guilabel>
+			 </term>
+			 <listitem>
+				<para>Seleccione esta opci&oacute;n para que se incluyan n&uacute;meros de l&iacute;nea cuando se imprima un archivo. Use el cuadro de incremento para especificar la frecuencia con la que desea que se impriman los n&uacute;meros de l&iacute;nea, por ejemplo cada 5 l&iacute;neas, cada 10, etc. </para>
+				<para>Valor predeterminado:  no seleccionado, 1 l&iacute;nea.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+
+		<sect3 id="gedit-prefs-fonts">
+	 		<title>Fuentes</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Fuente utilizada para imprimir el cuerpo del documento</guilabel> </term>
+			 <listitem>
+				<para>Haga clic en este bot&oacute;n con el fin de seleccionar la fuente que desea usar para imprimir el cuerpo del texto de un archivo.</para>
+				<para>Valor predeterminado:   Courier 9.0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Fuente utilizada para imprimir cabeceras</guilabel> </term>
+			 <listitem>
+				<para>Haga clic en este bot&oacute;n con el fin de seleccionar la fuente que desea usar para imprimir las cabeceras en un archivo.  </para>
+				<para>Valor predeterminado:   Helvetica 11.0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Fuente utilizada para imprimir n&uacute;meros de l&iacute;nea</guilabel></term>
+			 <listitem>
+				<para>Haga clic en este bot&oacute;n para seleccionar la fuente que desea usar para imprimir los n&uacute;meros de l&iacute;nea.</para>
+				<para>Valor predeterminado:   Helvetica 8.0.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Para restablecer las fuentes a los valores predeterminados con el fin de imprimir un archivo desde <application>&app;</application> haga clic en el bot&oacute;n <guibutton>Restablecer las fuentes predeterminadas</guibutton>.</para>
+		</sect3>
+
+	 </sect2>
+
+
+ </sect1>
+</article>

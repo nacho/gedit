@@ -1,0 +1,988 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "August 2002">
+  <!ENTITY app "gedit">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="ko">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+	 <title>&app; 설명서 V&manrevision;</title>
+	 <copyright> 
+		<year>2002</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright> 
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+	 <publisher> 
+		<publishername> 그놈 문서 프로젝트 </publishername>
+	 </publisher>
+	 &legal; 
+	 <authorgroup>
+		<author> 
+		  <firstname>Sun </firstname>
+		  <surname>그놈 문서 팀
+</surname> 
+		  <affiliation> 
+			 <orgname>Sun Microsystems</orgname>
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author> 
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname> 
+		  <affiliation> 
+			 <orgname>그놈 문서 프로젝트</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+	  <orgname>Latin Translation Team</orgname> 
+	  <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision> 
+		  <revnumber>&app; 설명서 V&manrevision;</revnumber>
+		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Sun 그놈 문서 팀
+
+<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">그놈 문서 프로젝트</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit 설명서 V2.1</revnumber> 
+		  <date>2002년 6월</date> 
+		  <revdescription> 
+			 <para role="author">Sun 그놈 문서 팀
+
+<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">그놈 문서 프로젝트</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit 설명서 V2.0</revnumber>
+		  <date>2002년 3월</date> 
+		  <revdescription> 
+			 <para role="author">Sun 그놈 문서 팀
+
+<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">그놈 문서 프로젝트</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit V1.0</revnumber>
+		  <date>2000년</date> 
+		  <revdescription> 
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">그놈 문서 프로젝트</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo> 이 설명서에서는 &app;의 버전 &appversion;에 대해 설명합니다.
+		</releaseinfo>
+	 <legalnotice> 
+		<title>피드백</title>
+		<para>&app; 응용프로그램 또는 이 설명서에 대한 버그를 보고하거나
+		의견을 제시하려면
+		<ulink url="ghelp:gnome-feedback" type="help">그놈 피드백 페이지</ulink>에 있는 지시 사항을 따르십시오. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gedit-intro">
+	 <title>소개</title>
+	 <para><application>&app;</application> 응용프로그램은 간단한 텍스트 편집기입니다. <application>&app;</application>을(를) 사용하면 텍스트 파일을 만들고 편집할 수 있습니다. <application>&app;</application> 플러그인을 사용하면 <application>&app;</application> 창에서 다양한 텍스트 편집 관련 작업을 수행할 수 있습니다.</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started">
+	 <title>시작하기</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start"> 
+		<title>&app;을(를) 시작하려면</title>
+		<para>다음과 같은 방법으로 <application>&app;</application>을(를) 시작할 수 있습니다.</para>
+		<variablelist>
+    		<varlistentry>
+    		<term><guimenu>응용프로그램</guimenu> 메뉴</term>
+    		<listitem>
+    		<para>   
+    		<menuchoice>
+    		<guisubmenu>액세서리</guisubmenu>
+    		<guimenuitem>텍스트 편집기</guimenuitem>
+    		</menuchoice>를 선택합니다. </para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry>
+    		<term>명령줄</term>
+    		<listitem>
+    		<para><command>gedit</command>를 입력한 다음 
+<keycap>Return</keycap> 키를 누릅니다.</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+	
+	<sect2 id="gedit-when-you-start">
+	
+		<title>&app; 시작</title>	
+		<para><application>&app;</application>을(를) 시작하면 다음 창이 표시됩니다.</para>
+	
+		<figure id="gedit-window"> 
+		  <title>&app; 창</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>gedit 주 창을 표시합니다.</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+	
+		<para><application>&app;</application> 창은 다음 요소로 구성되어 있습니다. </para>
+		<variablelist>
+		  <varlistentry> <term>메뉴 모음</term> 
+			 <listitem>
+				<para>메뉴 모음의 메뉴에는 <application>&app;</application>에서 파일 작업을 수행하는 데 필요한 명령이 모두 들어 있습니다.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>도구 모음</term> 
+			 <listitem>
+				<para> 도구 모음에는 메뉴 모음에서 액세스할 수 있는 명령의 부분 집합이 들어 있습니다.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>표시 영역</term> 
+			 <listitem>
+				<para> 표시 영역에는 편집 중인 파일의 텍스트가 들어 있습니다. </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>상태 표시줄</term> 
+			 <listitem>
+				<para>상태 표시줄에는 현재 <application>&app;</application> 동작 정보 및 메뉴 항목의 컨텍스트 정보가 표시됩니다. </para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para><application>&app;</application> 창을 마우스 오른쪽 버튼으로 클릭하면 팝업 메뉴가 표시됩니다. 팝업 메뉴에는 가장 일반적인 텍스트 편집 명령이 포함되어 있습니다. </para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"> 
+		<title>파일을 열려면</title>
+		<para>파일을 열려면 
+		  <menuchoice> <guimenu>파일</guimenu> <guimenuitem>열기</guimenuitem>
+			 </menuchoice>를 선택하여 <guilabel>파일 열기</guilabel> 대화 상자를 표시합니다. 
+열려는 파일을 선택하고
+		  <guibutton>확인</guibutton>을 클릭합니다. 해당 파일이 <application>&app;</application> 창에 표시됩니다. </para>
+		<para><application>&app;</application>에서는 파일을 여러 개 열 수 있습니다.
+		  하지만 응용프로그램 창에는 파일이 한 번에 하나씩 표시됩니다. 응용프로그램은 열려 있는 각 파일의 탭을 창에 추가합니다. 열려 있는 다른 파일을 표시하려면 그 파일에 해당하는 탭을 클릭합니다. 열려 있는 각 파일에 대해 새 
+		  <application> &app;</application> 창을 만들려면 각 파일에 해당하는 탭을 바탕 화면 배경으로 끌어 줍니다. <guimenu>문서</guimenu> 메뉴를 사용하여 열려 있는 파일 사이를 이동할 수도 있습니다.</para>
+		<para>응용프로그램은 사용자가 마지막으로 편집한 네 개의 파일에 대한 파일 이름과 경로를 기록하며 
+	이 파일들을 <menuchoice>
+		  <guimenu>파일</guimenu> 
+<guisubmenu>최근에 사용한 파일</guisubmenu></menuchoice> 메뉴에 메뉴 항목으로 표시합니다. 
+		  </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"> 
+		<title>명령줄에서 여러 개의 파일을 열려면
+</title>
+		<para>명령줄에서 <application>&app;</application>을(를) 실행하여 파일을 하나 또는 여러 개 열 수 있습니다. 명령줄에서 파일을 여러 개 열려면
+		  다음 명령을 입력한 다음 <keycap>Return</keycap> 키를 누릅니다.</para>
+		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
+		<para>응용프로그램이 시작되면 사용자가 지정한 파일이 <application>&app;</application> 창에 표시됩니다.</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage"> 
+	 <title>사용</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file"> 
+		<title>새 파일을 만들려면</title>
+		<para>새 파일을 만들려면 
+		  <menuchoice> <guimenu>파일</guimenu> <guimenuitem>새로 만들기</guimenuitem>
+			 </menuchoice>를 선택합니다. <application>&app;</application> 창에 새 파일이 표시됩니다.</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file"> 
+		<title>파일을 저장하려면</title>
+		<para>다음과 같은 방법으로 파일을 저장할 수 있습니다.</para>
+		<itemizedlist>
+		  <listitem><para>현재 파일에 대한 변경 내용을 저장하려면 
+				<menuchoice> <guimenu>파일</guimenu>
+				  <guimenuitem>저장</guimenuitem></menuchoice>을 선택하거나 도구 모음에서 <guibutton>저장</guibutton>을 클릭합니다. 파일에 이름이 지정되지 않은 경우 <application>&app;</application>은(는) 
+	<guilabel>다른 이름으로 저장</guilabel> 대화 상자를 표시합니다. 
+<guilabel>다른 이름으로 저장</guilabel> 대화 상자에 파일 이름을 입력한 다음 <guibutton>확인</guibutton>을 클릭합니다.</para>
+		  </listitem>
+		  <listitem><para>새 파일을 저장하거나 기존 파일을 새 이름으로 저장하려면 
+				<menuchoice> <guimenu>파일</guimenu> <guimenuitem>다른 이름으로 저장</guimenuitem> </menuchoice>을 선택합니다. <guilabel>다른 이름으로 저장</guilabel> 대화 상자에서 파일 이름을 입력한 다음 <guibutton>확인</guibutton>을 클릭합니다. </para>
+		  </listitem>
+		  <listitem><para>
+				<application>&app;</application>에 현재 열려 있는 파일을 모두 저장하려면 
+				<menuchoice> <guimenu>파일</guimenu> <guimenuitem>모두 저장</guimenuitem> </menuchoice>을 선택합니다.</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"> 
+		<title>텍스트를 편집하려면</title>
+		<para>다음과 같은 방법으로 파일의 텍스트를 편집할 수 있습니다.</para>
+		<itemizedlist>
+		  <listitem><para>키보드를 사용하여 새 텍스트를 입력합니다. </para>
+		  </listitem>
+		  <listitem><para><keycap>Delete</keycap> 키를 사용하여 텍스트를 삭제합니다.
+				</para>
+		  </listitem>
+		  <listitem><para><guimenuitem>잘라내기</guimenuitem>,
+				<guimenuitem>복사</guimenuitem>, <guimenuitem>붙여넣기</guimenuitem> 및
+				<guimenuitem>삭제</guimenuitem> 메뉴 항목을 사용하여 텍스트를 편집합니다. </para>
+		  </listitem>
+		</itemizedlist>
+		<para>마우스로 텍스트를 선택하면 
+		  <application>&app;</application>이(가) 선택된 텍스트를 자동으로 버퍼에 복사합니다. 선택된 텍스트에 대해 다음 작업을 수행할 수 있습니다.
+		  </para>
+		<itemizedlist>
+		  <listitem><para>선택된 텍스트를 파일에서 삭제한 후
+				버퍼로 옮기려면 
+				<menuchoice> <guimenu>편집</guimenu> <guimenuitem>잘라내기</guimenuitem>
+				  </menuchoice>를 선택합니다.</para>
+		  </listitem>
+		  <listitem><para>선택된 텍스트를 파일에서 영구적으로 삭제하려면 
+				<menuchoice> <guimenu>편집</guimenu> <guimenuitem>삭제</guimenuitem>
+				  </menuchoice>를 선택합니다.</para>
+		  </listitem>
+		  <listitem><para>커서가 위치한 곳에 버퍼의 내용을 삽입하려면
+				마우스 가운데 버튼을 클릭하거나
+				<menuchoice> <guimenu>편집</guimenu>
+				  <guimenuitem>붙여넣기</guimenuitem> </menuchoice>를 선택합니다. 텍스트를 파일에 붙여넣기 전에 텍스트를 잘라내거나 복사해야 합니다.</para>
+		  </listitem>
+		  <listitem><para>파일에 있는 텍스트를 모두 선택하려면 
+				<menuchoice> <guimenu>편집</guimenu> <guimenuitem>모두 선택</guimenuitem> </menuchoice>을 선택합니다. </para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits"> 
+		<title>편집한 내용을 취소하거나 다시 실행하려면</title>
+		<para>편집한 내용을 취소하려면 
+		  <menuchoice> <guimenu>편집</guimenu> <guimenuitem>실행 취소</guimenuitem>
+			 </menuchoice>를 선택합니다. 편집한 내용을 다시 실행하려면 
+		  <menuchoice> <guimenu>편집</guimenu> <guimenuitem>다시 실행</guimenuitem>
+			 </menuchoice>을 선택합니다. 실행 취소할 수 있는 이전 편집 내용의 개수는 
+			<guilabel>환경 설정</guilabel> 대화 상자의 
+			<xref linkend="gedit-prefs-undo"/> 탭 섹션에 있는 
+	<guilabel>실행 취소 작업에 제한 설정</guilabel>의 설정값에 의해 결정됩니다. 기본적으로 실행 취소할 수 있는 작업의 개수는 25개입니다.</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"> 
+		<title>텍스트를 찾으려면</title>
+		<para>파일에서 문자열을 찾으려면 다음 단계를 수행합니다.</para>
+		<orderedlist>
+		  <listitem><para> 
+				<menuchoice> <guimenu>검색</guimenu>
+				  <guimenuitem>찾기</guimenuitem> </menuchoice>를						 선택하여 
+<guilabel>찾기</guilabel> 대화 상자를 표시합니다.</para>
+		  </listitem>
+		  <listitem><para>찾으려는 문자열을 
+				<guilabel>찾을 문자열</guilabel> 필드에 입력합니다.</para>
+		  </listitem>
+		  <listitem><para>다음 옵션 중 하나를 선택합니다.</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>문서의 처음부터 검색</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>커서 위치에서 검색</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para><guilabel>대소문자 구분</guilabel> 옵션을 선택하면 사용자가 입력한 텍스트와 대소문자가 일치하는 문자열만 찾습니다. </para>
+		  </listitem>
+		  <listitem><para><guibutton>찾기</guibutton>를 클릭하여 파일에서 해당 문자열과 일치하는 첫 항목을 검색합니다. <application>&app;</application>이(가) 문자열을 찾으면 커서가 해당 문자열로 이동되며 문자열이 선택됩니다.</para>
+		  </listitem>
+		  <listitem><para>해당 문자열과 일치하는 다음 항목을 찾으려면 
+				<guibutton>다음 찾기</guibutton>를 클릭합니다.</para>
+		  </listitem>
+		  <listitem><para>검색을 마치려면
+				<guibutton>닫기</guibutton>를 클릭합니다. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text"> 
+		<title>텍스트 찾아서 바꾸려면</title>
+		<para>파일에서 문자열을 검색하여 이 문자열을 다른 문자열로 바꾸려면 다음 단계를 수행합니다.</para>
+		<orderedlist>
+		  <listitem><para> 
+				<menuchoice> <guimenu>검색</guimenu>
+				  <guimenuitem>바꾸기</guimenuitem> </menuchoice>를
+				선택하여 <guilabel>바꾸기</guilabel> 대화 상자를 표시합니다.</para>
+		  </listitem>
+		  <listitem><para>찾으려는 문자열을 
+				<guilabel>찾을 문자열</guilabel> 필드에 입력합니다. </para>
+		  </listitem>
+		  <listitem><para>찾은 문자열을 바꾸는 데 사용할 문자열을 <guilabel>바꿀 문자열</guilabel> 필드에 입력합니다.</para>
+		  </listitem>
+		  <listitem><para>다음 옵션 중 하나를 선택합니다.</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>문서의 처음부터 검색</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>커서 위치에서 검색</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para><guilabel>대소문자 구분</guilabel> 옵션을 선택하면 사용자가 입력한 텍스트와 대소문자가 일치하는 문자열만 찾습니다. </para>
+		  </listitem>
+		  <listitem><para><guibutton>찾기</guibutton>를 클릭하여 파일에서 해당 문자열과 일치하는 첫 항목을 검색합니다. <application>&app;</application>이(가) 문자열을 찾으면 커서가 해당 문자열로 이동되며 문자열이 선택됩니다. </para>
+		  </listitem>
+		  <listitem><para><guibutton>바꾸기</guibutton>를 클릭하여
+				해당 문자열을 사용자가 <guilabel>바꿀 문자열</guilabel> 필드에 입력한 텍스트로 바꿉니다. <guibutton>모두 바꾸기</guibutton>을 클릭하면 해당하는 문자열을 모두 바꿉니다.</para>
+		  </listitem>
+		  <listitem><para>해당 문자열과 일치하는 다음 항목을 찾으려면 
+				<guibutton>다음 찾기</guibutton>를 클릭합니다.</para>
+		  </listitem>
+		  <listitem><para>검색을 마치려면
+				<guibutton>닫기</guibutton>를 클릭합니다. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"> 
+		<title>URI에서 파일을 열려면</title>
+		<para>URI(Uniform Resource Identifier)에서 파일을 열려면 다음 단계 중 하나를 수행합니다.</para>
+		<itemizedlist>
+		<listitem>
+		<para><menuchoice> <guimenu>파일</guimenu> <guimenuitem>위치 열기</guimenuitem> 
+		</menuchoice>을 선택하여 <guilabel>URI에서 열기</guilabel> 대화 상자를 표시합니다. 열려는 
+		파일의 URI를 입력한 다음 <guibutton>열기</guibutton>를 클릭합니다.</para>
+		</listitem>
+		<listitem>
+		<para>명령줄에 <command>gedit <replaceable>http://...</replaceable></command>를 입력
+(여기에서 
+		<replaceable>http://...</replaceable>는 열려는 파일의 URI임)한 다음 
+		<keycap>Return</keycap> 키를 누릅니다.</para>
+		</listitem>
+		</itemizedlist>
+		<para>해당 URI에 있는 파일이 읽기 전용 모드로 열립니다.</para>
+	 </sect2>	 
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"> 
+		<title>명령의 결과를 파일로 내보내려면</title>
+		<para><application>&app;</application>을(를) 사용하면 명령의 결과를 텍스트 파일로 내보낼 수 있습니다. 예를 들어, <command>ls
+		  </command> 명령의 결과를 텍스트 파일로 내보내려면 <command>ls | gedit</command>를 입력한 다음 <keycap>Return</keycap> 키를 누릅니다.</para>
+		<para><command>ls</command> 명령의 결과가
+		   <application>&app;</application> 창에 새 텍스트 파일로 표시됩니다.</para>
+		<para>쉘 출력 플러그인을 사용하여 명령 결과를 현재 파일로 내보낼 수도 있습니다. 쉘 출력 플러그인을 사용하려면 다음 단계를 수행합니다.</para>
+		<orderedlist>
+		  <listitem><para>쉘 출력 플러그인을 읽어들입니다. 플러그인을 읽어들이는 방법에 대한 자세한 내용은 <xref linkend="gedit-install-plugins"/>을(를) 참조하십시오.</para>
+		  </listitem>
+
+		  <listitem><para> 
+				<menuchoice> <guimenu>편집</guimenu> <guimenuitem>쉘 출력 삽입</guimenuitem> </menuchoice>을
+				  선택하여 
+<guilabel>쉘 출력</guilabel> 대화 상자를 표시합니다.
+				</para>
+		  </listitem>
+		  <listitem><para>실행할 쉘 명령을
+				 <guilabel>쉘 명령</guilabel> 필드에 입력합니다.</para>
+		  </listitem>
+		  <listitem><para>필요한 경우 <guilabel>작업 디렉토리</guilabel> 필드를 편집합니다. 기본적으로, 쉘 출력 플러그인은 사용자가 현재 디렉토리에서 지정한 명령을 실행합니다.</para>
+		  </listitem>
+		  <listitem><para><guibutton>실행</guibutton>을 클릭합니다. 쉘 출력 플러그인은 명령을 실행하고 현재 파일에 텍스트 출력을 삽입합니다.
+				</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line"> 
+		<title>특정 행으로 이동하려면</title>
+		<para>현재 파일에서 특정 행으로 이동하려면 다음 단계를 수행합니다.</para>
+		<orderedlist>
+		  <listitem><para> 
+				<menuchoice> <guimenu>검색</guimenu> <guimenuitem>행 이동</guimenuitem>
+</menuchoice>을
+				선택하여 
+<guilabel>행 이동</guilabel> 대화 상자를 표시합니다.</para>
+		  </listitem>
+		  <listitem><para>커서를 이동하려는 
+				행 번호를
+<guilabel>행 번호</guilabel> 필드에 입력합니다.</para>
+		  </listitem>
+		  <listitem><para><guibutton>행 이동</guibutton>을 클릭합니다. 사용자가 지정한 행 번호로 커서가 이동됩니다.</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode">
+		<title>입력 모드를 변경하려면</title>
+		<para>입력 모드를 변경하려면 텍스트 창을 마우스 오른쪽 버튼으로 클릭한 다음 <guimenuitem>입력 방법</guimenuitem>을 선택합니다. 
+		<guimenuitem>유니코드 제어 문자 삽입</guimenuitem> 메뉴 항목은 Latin 이외의 문자 세트를 사용하여 작업할 때 유용한 문자 레이아웃 옵션을 제공합니다.</para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file"> 
+		<title>파일을 인쇄하려면</title>
+		<para><application>&app;</application>을(를) 사용하여 다음 인쇄 작업을 수행할 수 있습니다.</para>
+		<itemizedlist>
+		  <listitem><para>파일을 프린터로 인쇄합니다. </para>
+		  </listitem>
+		  <listitem><para>인쇄 명령의 결과를 파일로 인쇄합니다.</para>
+		  </listitem>
+		</itemizedlist>
+		<para>파일로 인쇄하는 경우 <application>&app;</application>은(는) 파일의 출력을 사전 인쇄 형식 파일로 보냅니다. 가장 일반적인 사전 인쇄 형식은 PostScript와 PDF(Portable Document Format)입니다.</para>
+		  
+		<para>인쇄할 페이지를 미리 보려면 
+		<menuchoice> <guimenu>파일</guimenu>
+		<guimenuitem>인쇄 미리 보기</guimenuitem> </menuchoice>를 선택하여 <guilabel>gedit - 인쇄 미리 보기</guilabel> 대화 상자를 표시합니다.</para>
+		  
+		<para>현재 파일을 프린터나 파일로 인쇄하려면 
+		<menuchoice> <guimenu>파일</guimenu>
+		<guimenuitem>인쇄</guimenuitem> </menuchoice>를 
+		선택하여 <guilabel>인쇄</guilabel> 대화 상자를 표시합니다.</para>
+				
+		<para><guilabel>인쇄</guilabel> 대화 상자를 사용하면 다음 인쇄 옵션을 지정할 수 있습니다.</para>
+		
+		<sect3 id="print-dialog-job">
+		<title>작업 탭 섹션</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>인쇄 범위</guilabel> </term> 
+			 <listitem>
+				<para>다음 옵션 중 하나를 선택하여 인쇄할 페이지 수를 결정합니다.</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>모두</guilabel></para>
+				<para>파일의 모든 페이지를 인쇄하려면 이 옵션을 선택합니다.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>선택</guilabel></para>
+				<para>선택된 텍스트만 인쇄하려면 이 옵션을 선택합니다. 이 옵션은 사용자가 텍스트를 선택한 경우에만 사용할 수 있습니다.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>기본값: <guilabel>모두</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>인쇄 매수</guilabel> </term> 
+			 <listitem>
+				<para>이 스핀 상자를 사용하여 인쇄할 파일의 매수를 지정합니다.</para>
+				<para>기본값: 1</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>페이지 순서 맞추기</guilabel> </term> 
+			 <listitem>
+				<para>파일의 복사본을 여러 개 인쇄하는 경우에는 이 옵션을 선택하여 복사본을 한 부씩 인쇄합니다.</para>
+				<para>기본값: 선택되지 않음</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-printer">
+		<title>프린터 탭 섹션</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>프린터</guilabel> </term> 
+			 <listitem>
+				<para>이 드롭다운 목록 상자를 사용하여 파일을 인쇄할 프린터를 선택합니다.</para>
+				<para>기본값: <guilabel>그놈 기본 프린터</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>설정</guilabel> </term> 
+			 <listitem>
+				<para>이 드롭다운 목록 상자를 사용하여 프린터 설정을 선택합니다. 프린터를 구성하려면
+				 <guibutton>구성</guibutton>을 클릭합니다.</para>
+				<para>기본값: 기본 프린터</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>위치</guilabel> </term> 
+			 <listitem>
+				<para>이 드롭다운 목록 상자를 사용하여 인쇄 대상을 선택합니다. 파일을 프린터로 인쇄하려면
+				 <guilabel>lpr</guilabel>를 선택합니다. 파일을 인쇄 파일로 인쇄하려면
+				 <guilabel>파일</guilabel>을 선택합니다. <guilabel>파일</guilabel>을 선택한 경우에는 제공된 텍스트 상자에 출력 파일의 이름을 입력합니다.</para>
+				<para>기본값: <guilabel>lpr</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-paper">
+		<title>용지 탭 섹션</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>용지 크기</guilabel> </term> 
+			 <listitem>
+				<para>이 드롭다운 목록 상자를 사용하여 파일을 인쇄할 용지의 크기를 선택합니다.</para>
+				<para>기본값: <guilabel>A4</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>너비</guilabel> </term> 
+			 <listitem>
+				<para>이 스핀 상자를 사용하여 용지 너비를 지정합니다. 
+				<guilabel>센티미터</guilabel> 드롭다운 목록 상자를 사용하여 용지 크기를 지정할 측정 단위를 변경합니다.</para>
+				<para>기본값: 21.00cm</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>높이</guilabel> </term> 
+			 <listitem>
+				<para>이 스핀 상자를 사용하여 용지의 높이를 지정합니다.</para>
+				<para>기본값: 29.70cm</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>용지 방향</guilabel> </term> 
+			 <listitem>
+				<para>이 드롭다운 목록 상자를 사용하여 용지 방향을 선택합니다.</para>
+				<para>기본값: <guilabel>세로</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>레이아웃</guilabel> </term> 
+			 <listitem>
+				<para>이 드롭다운 목록 상자를 사용하여 페이지 레이아웃을 선택합니다. 사용자가 선택한
+				각 레이아웃의 미리 보기는 <guilabel>미리 보기</guilabel> 영역에 표시됩니다.</para>
+				<para>기본값: <guilabel>일반</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+		
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins"> 
+		<title>&app; 플러그인을 사용하려면</title>
+		<para>플러그인은 응용프로그램의 기능을 향상시켜 주는 보조 프로그램입니다. <application>&app;</application> 플러그인을 사용하면 <application> &app;</application> 창에서 다양한 텍스트 편집 관련 기능을 수행할 수 있습니다. 다음 표에는 사용 가능한 플러그인이 나와 있습니다.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>플러그인 이름</para></entry>
+			<entry colname="col2" valign="top"><para>용도</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII 테이블</para></entry>
+			<entry><para>ASCII 테이블을 포함하는 대화 상자를 표시합니다. ASCII 테이블을 사용하여 문자를 파일에 삽입할 수 있습니다.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>파일 비교</para></entry>
+			<entry><para>두 파일을 비교하여 차이점을 새 <application>&app;</application> 창에 표시합니다.
+			이 플러그인은 <application>diff</application> 프로그램을 사용하여 파일을 비교합니다.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para>CVS 커밋 명령과 관련된 로그 메시지를 엽니다.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>날짜/시간 입력</para></entry>
+			<entry><para>현재 날짜와 시간을 파일에 삽입합니다.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>쉘 출력</para></entry>
+			<entry><para>쉘 명령의 텍스트 출력을 파일에 삽입합니다. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>태그 목록</para></entry>
+			<entry><para>일반 태그의 목록을 포함하는 대화 상자를 표시합니다. 대화 상자를 사용하여 파일에 태그를 삽입할 수 있습니다. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>사용자 이름</para></entry>
+			<entry><para>현재 사용자의 사용자 이름을 파일에 삽입합니다. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>단어 개수</para></entry>
+			<entry><para>현재 파일에 있는 행, 단어, 공백 포함 문자, 공백 없는 문자 및 바이트의 수를 계산합니다. 플러그인은
+			 <guilabel>단어 개수</guilabel> 창에 결과를 표시합니다. </para></entry>
+		</row> 	
+		</tbody>
+		</tgroup>
+		</informaltable>
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"> 
+		<title>&app; 플러그인을 읽어들이려면</title>
+		<para><application>&app;</application> 플러그인을 읽어들이려면 
+		  <menuchoice> 
+		  <guimenu>편집</guimenu>
+		  <guimenuitem>플러그인 관리자</guimenuitem> 
+		  </menuchoice>를 선택합니다. 
+		  <guilabel>플러그인 관리자</guilabel> 대화 상자에는 다음 정보가 표시됩니다.</para>
+		<itemizedlist>
+		  <listitem><para>사용 가능한 플러그인 목록</para>
+		  </listitem>
+		  <listitem><para><guibutton>플러그인 구성</guibutton> 버튼 이 버튼을 사용하면 구성 가능한 플러그인의 구성 대화 상자를 열 수 있습니다.</para>
+		  </listitem>
+		  <listitem><para>각 플러그인에 대한 간략한 설명 설명을 표시하려면 플러그인 목록에서 플러그인을 선택합니다.</para>
+		  </listitem>	
+		  <listitem><para>플러그인의 저자와 모듈 이름에 대한 상세한 정보</para>
+		  </listitem>	  
+		</itemizedlist>
+		<para>플러그인을 읽어들이려면 플러그인 이름 옆에 있는 체크 상자를 선택합니다. <application>&app;</application> 응용프로그램은 다음 표에 설명된 것처럼 해당 <application>&app;</application> 메뉴에 플러그인을 추가합니다.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>플러그인 이름</para></entry>
+			<entry colname="col2" valign="top"><para>다음 메뉴에 추가</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII 테이블</para></entry>
+			<entry><para><menuchoice><guimenu>보기</guimenu> <guimenuitem>ASCII 테이블</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>파일 비교</para></entry>
+			<entry><para><menuchoice><guimenu>파일</guimenu> <guimenuitem>파일 비교</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para><menuchoice><guimenu>파일</guimenu> <guimenuitem>CVS ChangeLogs 열기</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>단어 개수</para></entry>
+			<entry><para><menuchoice><guimenu>검색</guimenu> <guimenuitem>단어 개수</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>쉘 출력</para></entry>
+			<entry><para><menuchoice><guimenu>편집</guimenu> <guimenuitem>쉘 출력 삽입</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>태그 목록</para></entry>
+			<entry><para><menuchoice><guimenu>보기</guimenu> <guimenuitem>태그 목록</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>날짜/시간 입력</para></entry>
+			<entry><para><menuchoice><guimenu>편집</guimenu> <guimenuitem>날짜/시간 삽입</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>사용자 이름</para></entry>
+			<entry><para><menuchoice><guimenu>편집</guimenu> <guimenuitem>사용자 이름 삽입</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+
+		<para>플러그인을 제거하려면 플러그인 이름 옆에 있는 체크 상자의 선택을 해제합니다.</para>
+		<para><guilabel>플러그인 관리자</guilabel> 대화 상자를 닫으려면
+		  <guibutton>닫기</guibutton>를 클릭합니다.</para>
+	 </sect2>
+	 
+	 <sect2 id="gedit-customize-bars">
+	 <title>도구 모음과 상태 표시줄을 사용자 정의하려면</title>
+	 
+	 <para>도구 모음을 표시하거나 숨기려면 <menuchoice> <guimenu>보기</guimenu>
+		  <guimenuitem>도구 모음</guimenuitem></menuchoice>을 선택합니다. <application>&app;</application>이(가)
+ 도구 모음을 표시하는 방식을 사용자 정의하려면<menuchoice>
+ <guimenu>보기</guimenu>
+		  <guisubmenu>도구 모음 사용자 정의</guisubmenu></menuchoice>를 선택한 후 다음 메뉴 항목 중 하나를 선택합니다.</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>데스크탑 기본값</guimenuitem>:</para>
+		  <para>기본 도구 모음을 표시합니다.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>아이콘</guimenuitem></para>
+		  <para>아이콘만 표시합니다.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>아이콘 및 텍스트</guimenuitem>:</para>
+		  <para>아이콘과 텍스트를 표시합니다.</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>상태 표시줄을 표시하거나 숨기려면 <menuchoice> <guimenu>보기</guimenu>
+		  <guimenuitem>상태 표시줄</guimenuitem> </menuchoice>을 선택합니다. <application>&app;</application>이(가)
+상태 표시줄을 표시하는 방식을 사용자 정의하려면 <menuchoice> <guimenu>보기</guimenu>
+		  <guisubmenu>상태 표시줄 사용자 정의</guisubmenu> </menuchoice>를 선택한 후 다음 메뉴 항목 중 하나를 선택합니다.</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>커서 위치 표시</guimenuitem>:</para>
+		  <para>커서가 위치한 지점의 행 번호 및 열 번호를 표시합니다.</para>
+		  <para>기본값: 선택됨</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>겹쳐쓰기 모드 표시</guimenuitem></para>
+		  <para>편집 모드를 표시합니다. 편집기가 삽입 모드인 경우에는 상태 표시줄에 INS라는 단어가 포함됩니다. 편집기가 겹쳐쓰기 모드인 경우에는 상태 표시줄에 OVR라는 단어가 포함됩니다.</para>
+		  <para>기본값: 선택됨</para>
+		  </listitem>
+		  </itemizedlist>
+	 
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs"> 
+	 <title>환경 설정</title>
+	   
+	 <para><application>&app;</application>을(를) 구성하려면 
+		<menuchoice> 
+		<guimenu>편집</guimenu>
+		<guimenuitem>환경 설정</guimenuitem> 
+		</menuchoice>을 선택합니다. <guilabel>환경 설정</guilabel> 대화 상자는 다음 범주로 구성되어 있습니다.</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+	 
+	 
+	 <sect2 id="gedit-prefs-editor">
+	 <title>편집기</title>
+	 <para><guilabel>편집기</guilabel> 범주는 다음과 같은 하위 범주로 다시 나누어집니다.</para>
+	 
+	 	<sect3 id="gedit-prefs-fontsandcolors">
+	 		<title>글꼴 및 색상</title>
+	 		<variablelist>
+		   <varlistentry> <term><guilabel>기본 테마 글꼴 사용</guilabel> </term> 
+			 <listitem>
+				<para><application>&app;</application> 텍스트 창의 텍스트에 기본 시스템 글꼴을 사용하려면 이 옵션을 선택합니다. </para>
+				<para>기본값: 선택되지 않음</para>
+			 </listitem>
+		  	</varlistentry>			
+		   <varlistentry> <term><guilabel>편집기에 사용하는 글꼴</guilabel> </term> 
+			 <listitem>
+				<para>이 필드에는 <application>&app;</application>이(가) 텍스트를 표시하는 데 사용하는 글꼴이 표시됩니다. 
+				버튼을 클릭하여 텍스트에 사용할 글꼴 유형, 스타일 및 크기를 지정합니다. </para>
+				<para>기본값: Courier Medium 12 포인트</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>기본 테마 색상 사용</guilabel> </term> 
+			 <listitem>
+				<para><application>&app;</application> 텍스트 창에 기본 테마 색상을 사용하려면 이 옵션을 선택합니다. </para>
+				<para>기본값: 선택됨</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>텍스트 색상</guilabel> </term> 
+			 <listitem>
+				<para><guibutton>텍스트 색상</guibutton> 버튼을 클릭하여 색상 선택기 대화 상자를 표시합니다. <application>&app;</application> 텍스트 창에 텍스트를 표시하는 데 사용할 색상을 선택합니다. </para>
+				<para>기본값: 검정색</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>배경색</guilabel> </term> 
+			 <listitem>
+				<para><guibutton>배경색</guibutton> 버튼을 클릭하여 색상 선택 대화 상자를 표시합니다. <application>&app;</application> 텍스트 창의 배경색을 선택합니다. </para>
+				<para>기본값: 흰색</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>선택한 텍스트 색상</guilabel> </term> 
+			 <listitem>
+				<para><guibutton>선택한 텍스트 색상</guibutton> 버튼을 클릭하여 색상 선택 대화 상자를 표시합니다. 선택한 텍스트를 표시하는 데 사용할 색상을 선택합니다.
+				</para>
+				<para>기본값: 흰색</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>선택 색상</guilabel> </term> 
+			 <listitem>
+				<para><guibutton>선택 색상</guibutton> 버튼을 클릭하여 색상 선택기 대화 상자를 표시합니다. 선택한 텍스트를 강조 표시하는 데 사용할 배경색을 선택합니다.
+				  </para>
+				<para>기본값: 파랑</para>
+			 </listitem>
+		  	</varlistentry>			
+			</variablelist>
+		</sect3>
+	
+	 	<sect3 id="gedit-prefs-tabs">
+	 		<title>탭</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>탭 너비 설정</guilabel> </term> 
+			 <listitem>
+				<para>이 스핀 상자를 사용하면 사용자가 <keycap>Tab</keycap> 키를 누를 때 <application> &app;</application>이(가) 삽입하는 공백의 너비를 지정할 수 있습니다. </para>
+				<para>기본값: 8자</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+				
+	 	<sect3 id="gedit-prefs-wrapmode">
+	 		<title>줄 바꿈 모드</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>줄 바꿈 모드</guilabel> </term> 
+			 <listitem>
+				<para>다음 옵션 중 하나를 선택하여 <application>&app;</application>이(가) <application>&app;</application> 창에서 텍스트의 줄을 바꾸는 방식을 결정합니다.</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>줄 바꿈하지 않음</guilabel></para>
+				<para>줄 바꿈되지 않도록 하려면 이 옵션을 선택합니다. 사용자가 입력한 텍스트는 <keycap>Return</keycap> 키를 누를 때까지 한 줄로 표시됩니다.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>단어 경계에서 줄 바꾸기</guilabel></para>
+				<para>텍스트 창 경계에 도달했을 때 텍스트가 단어 단위로 줄 바꿈되도록 하려면 이 옵션을 선택합니다. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>문자 경계에서 줄 바꾸기</guilabel></para>
+				<para>텍스트 창 경계에 도달했을 때 텍스트가 문자 단위로 줄 바꿈되도록 하려면 이 옵션을 선택합니다.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>기본값: <guilabel>문자 경계에서 줄 바꾸기</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-linenumbers">
+	 		<title>행 번호</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>행 번호 표시</guilabel> </term> 
+			 <listitem>
+				<para><application>&app;</application> 창 왼쪽에 행 번호를 표시하려면 이 옵션을 선택합니다. </para>
+				<para>기본값: 선택되지 않음</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+		
+	 	<sect3 id="gedit-prefs-save">
+	 		<title>저장</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>저장하기 전에 파일의 백업 복사본 만들기</guilabel> </term> 
+			 <listitem>
+				<para>파일을 저장할 때마다 파일의 백업 복사본을 만들려면 이 옵션을 선택합니다. 파일의 백업
+				복사본 확장자는 <filename>.bak</filename>입니다.</para>
+				<para>기본값: 선택되지 않음</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>현재 파일 자동 저장 간격</guilabel> </term> 
+			 <listitem>
+				<para>현재 파일을 일정한 간격으로 자동 저장하려면 이 옵션을 선택합니다. 이 스핀 상자를 사용하여 파일을 저장할 간격을 지정합니다.</para>
+				<para>기본값: 선택되지 않음, 10분</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>저장 시</guilabel> </term> 
+			 <listitem>
+				<para>다음 저장 옵션 중 하나를 선택합니다.</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>저장할 때 UTF-8 코드화 항상 사용(더 빠름)</guilabel></para>
+				<para>UTF-8 비트 코드화를 사용하여 파일을 저장하려면 이 옵션을 선택합니다.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>가능한 경우 현재 로케일 사용</guilabel></para>
+				<para>현재 로케일을 사용하여 파일을 저장하려면 이 옵션을 선택합니다. 다양한 입력 방법에 대한 로케일을 설정할 수 있습니다. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>파일에서 이미 사용하는 경우에만 현재 로케일 사용</guilabel></para>
+				<para>파일이 이미 현재 로케일로 저장된 경우에 해당 로케일을 사용하여 파일을 저장하려면 이 옵션을 선택합니다.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>기본값: <guilabel>UTF-8 코드화 항상 사용(더 빠름)</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-undo">
+	 		<title>실행 취소</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>실행 취소 제한 설정</guilabel> </term> 
+			 <listitem>
+				<para>실행 취소할 수 있는 편집 작업의 개수에 대한 제한을 설정하려면 이 옵션을 선택합니다. 이 스핀 상자를 사용하여 실행 취소할 수 있는 최대 작업 개수를 지정합니다. </para>
+				<para>기본값: 선택됨, 25개 작업</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 		
+	 </sect2>	 
+	 
+	<sect2 id="gedit-prefs-print">
+	 <title>인쇄</title>
+	 <para><guilabel>인쇄</guilabel> 범주는 다음과 같은 하위 범주로 나누어집니다.</para>
+	 
+	 	<sect3 id="gedit-prefs-page">
+	 		<title>페이지</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>페이지 머리글 인쇄</guilabel> </term> 
+			 <listitem>
+				<para>인쇄하는 각 페이지에 머리글을 포함시키려면 이 옵션을 선택합니다. 머리글을 구성할 수는 없습니다. </para>
+				<para>기본값: 선택됨</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>줄 바꾸기(문자 경계에서)</guilabel> </term> 
+			 <listitem>
+				<para>파일을 인쇄할 때 텍스트를 문자 단위로 자동으로 줄 바꿈하려면 이 옵션을 선택합니다. 응용프로그램은 행 번호를 매길 때 줄 바꿈된 행을 한 행으로 계산합니다.
+				  </para>
+				<para>기본값: 선택됨</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>행 번호 인쇄 간격</guilabel>
+			 </term> 
+			 <listitem>
+				<para>파일을 인쇄할 때 행 번호를 포함시키려면 이 옵션을 선택합니다. 이 스핀 상자를 사용하여 행 번호의 인쇄 간격을 지정합니다(예: 5행마다, 10행마다). </para>
+				<para>기본값: 선택되지 않음, 1행</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+		
+		<sect3 id="gedit-prefs-fonts">
+	 		<title>글꼴</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>본문을 인쇄하는 데 사용할 글꼴</guilabel> </term> 
+			 <listitem>
+				<para>파일의 본문 텍스트 인쇄에 사용할 글꼴을 선택하려면 이 버튼을 클릭합니다.</para>
+				<para>기본값: Courier 9.0</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>머리글을 인쇄하는 데 사용할 글꼴</guilabel> </term> 
+			 <listitem>
+				<para>파일의 머리글 인쇄에 사용할 글꼴을 선택하려면 이 버튼을 클릭합니다.  </para>
+				<para>기본값: Helvetica 11.0</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>행 번호를 인쇄하는 데 사용할 글꼴</guilabel>
+			 </term> 
+			 <listitem>
+				<para>행 번호 인쇄에 사용할 글꼴을 선택하려면 이 버튼을 클릭합니다.</para>
+				<para>기본값: Helvetica 8.0</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>이 글꼴을 <application>&app;</application>에서 파일을 인쇄하는 기본 글꼴로 재설정하려면
+		 <guibutton>기본 글꼴 복원</guibutton> 버튼을 클릭합니다.</para>
+		</sect3>
+		
+	 </sect2>	 
+	 	 	 
+	 
+ </sect1>
+</article>

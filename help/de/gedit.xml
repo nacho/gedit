@@ -1,0 +1,920 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "August 2003">
+  <!ENTITY app "gedit">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="de">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+	 <title>&app; Handbuch V&manrevision;</title>
+	 <copyright> 
+		<year>2003</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright> 
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2003</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+	 <publisher> 
+		<publishername> GNOME-Dokumentationsprojekt </publishername>
+	 </publisher>
+	 &legal; 
+	 <authorgroup>
+		<author> 
+		  <firstname>Sun </firstname>
+		  <surname>GNOME-Dokumentationsteam</surname> 
+		  <affiliation> 
+			 <orgname>Sun Microsystems</orgname>
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author> 
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname> 
+		  <affiliation> 
+			 <orgname>GNOME-Dokumentationsprojekt</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+	  <orgname>Latin Translation Team</orgname> 
+	  <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision> 
+		  <revnumber>&app; Handbuch V&manrevision;</revnumber>
+		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME-Dokumentationsteam
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME-Dokumentationsprojekt</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit-Handbuch Version 2.1</revnumber>
+		  <date>Juni 2003</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME-Dokumentationsteam
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME-Dokumentationsprojekt</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit-Handbuch Version 2.0</revnumber>
+		  <date>M&auml;rz 2003</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME-Dokumentationsteam
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME-Dokumentationsprojekt</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Version 1.0</revnumber>
+		  <date>2000</date> 
+		  <revdescription> 
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">GNOME-Dokumentationsprojekt</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo> In diesem Handbuch wird Version &appversion; von &app; beschrieben.
+		</releaseinfo>
+	 <legalnotice> 
+		<title>Feedback</title>
+		<para>Wenn Sie Fehler finden oder Vorschl&auml;ge zur &app;-Anwendung oder diesem Handbuch haben, folgen Sie den Anweisungen auf der 
+		<ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gedit-intro"> 
+	 <title>Einf&uuml;hrung</title>
+	 <para>Die Anwendung <application>&app;</application> ist ein einfacher Texteditor. Mit <application>&app;</application> k&ouml;nnen Sie Textdateien erstellen und bearbeiten. Verwenden Sie <application>&app;</application>-Plug-Ins, um im Fenster <application>&app;</application> verschiedene Textbearbeitungsfunktionen auszuf&uuml;hren.</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started"> 
+	 <title>Erste Schritte</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start"> 
+		<title>So starten Sie &app;</title>
+		<para>Sie k&ouml;nnen die <application>&app;</application>-Anwendung auf eine der folgenden Arten starten:</para>
+		<variablelist>
+    		<varlistentry>
+    		<term>Men&uuml; <guimenu>Anwendungen</guimenu></term>
+    		<listitem>
+    		<para>W&auml;hlen Sie 
+    		<menuchoice>
+    		<guisubmenu>Zubeh&ouml;r</guisubmenu>
+    		<guimenuitem>Texteditor</guimenuitem>
+    		</menuchoice>. </para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry>
+    		<term>Befehlszeile</term>
+    		<listitem>
+    		<para>Geben Sie <command>gedit</command> ein, und dr&uuml;cken Sie die <keycap>Eingabetaste</keycap>.</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+	
+	<sect2 id="gedit-when-you-start">
+	
+		<title>Beim Start von &app;</title>	
+		<para>Wenn Sie <application>&app;</application> starten, wird folgendes Fenster angezeigt:</para>
+	
+		<figure id="gedit-window"> 
+		  <title>&app;-Fenster</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>Zeigt das gedit-Hauptfenster an.</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+	
+		<para>Das <application>&app;</application>-Fenster enth&auml;lt folgende Elemente: </para>
+		<variablelist>
+		  <varlistentry> <term>Men&uuml;leiste</term> 
+			 <listitem>
+				<para>Die Men&uuml;s in der Men&uuml;leiste enthalten alle Befehle, die Sie zum Arbeiten mit Dateien in <application>&app;</application> ben&ouml;tigen.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Symbolleiste</term> 
+			 <listitem>
+				<para> Die Symbolleiste enth&auml;lt einen Teil der Befehle, die Sie &uuml;ber die Men&uuml;leiste aufrufen k&ouml;nnen.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Anzeigebereich</term> 
+			 <listitem>
+				<para> Der Anzeigebereich enth&auml;lt den Text der Datei, die Sie bearbeiten. </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Statusleiste</term> 
+			 <listitem>
+				<para>In der Statusleiste werden Informationen &uuml;ber die aktuelle <application>&app;</application>-Aktivit&auml;t und Kontextinformationen &uuml;ber die Men&uuml;punkte angezeigt. </para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Wenn Sie mit der rechten Maustaste auf das <application>&app;</application>-Fenster klicken, wird ein Kontextmen&uuml; angezeigt. Das Kontextmen&uuml; enth&auml;lt die g&auml;ngigsten Textbearbeitungsbefehle. </para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"> 
+		<title>So &ouml;ffnen Sie eine Datei</title>
+		<para>Wenn Sie eine Datei &ouml;ffnen m&ouml;chten, w&auml;hlen Sie 
+		  <menuchoice> <guimenu>Datei</guimenu> <guimenuitem>&Ouml;ffnen</guimenuitem>
+			 </menuchoice>, um das Dialogfeld <guilabel>Datei &ouml;ffnen</guilabel> anzuzeigen. W&auml;hlen Sie die zu &ouml;ffnende Datei aus, und klicken Sie auf <guibutton>OK</guibutton>. Die Datei wird im <application>&app;</application>-Fenster angezeigt. </para>
+		<para>Sie k&ouml;nnen mehrere Dateien in <application>&app;</application> &ouml;ffnen.
+		Im Anwendungsfenster wird jeweils eine Datei angezeigt. F&uuml;r jede ge&ouml;ffnete Datei wird im Fenster eine Registerkarte angezeigt. Zum Anzeigen einer anderen ge&ouml;ffneten Datei klicken Sie auf die entsprechende Registerkarte. Wenn Sie f&uuml;r jede ge&ouml;ffnete Datei ein neues <application> &app;</application>-Fenster erstellen m&ouml;chten, ziehen Sie die Registerkarte f&uuml;r die entsprechende Datei auf den Desktop-Hintergrund. Sie k&ouml;nnen mit Hilfe des Men&uuml;s <guimenu>Dokumente</guimenu> zwischen den ge&ouml;ffneten Dateien wechseln.</para>
+		<para>Die Anwendung zeichnet die Pfade und Dateinamen der letzten vier Dateien auf, die Sie bearbeitet haben, und zeigt die Dateien als Men&uuml;punkte im Men&uuml; <menuchoice>
+		  <guimenu>Datei</guimenu> <guisubmenu>Zuletzt ge&ouml;ffnete Dateien</guisubmenu> </menuchoice> an. 
+		  </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"> 
+		<title>So &ouml;ffnen Sie mehrere Dateien &uuml;ber die Befehlszeile</title>
+		<para>Sie k&ouml;nnen <application>&app;</application> &uuml;ber eine Befehlszeile ausf&uuml;hren und eine oder mehrere Dateien &ouml;ffnen. Zum &Ouml;ffnen mehrerer Dateien &uuml;ber eine Befehlszeile geben Sie den folgenden Befehl ein und dr&uuml;cken anschlie&szlig;end die <keycap>Eingabetaste</keycap>:</para>
+		<para><command>gedit <replaceable>Datei1.txt Datei2.txt Datei3.txt</replaceable></command></para>
+		<para>Wenn die Anwendung gestartet wird, werden die angegebenen Dateien im <application>&app;</application>-Fenster angezeigt.</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage"> 
+	 <title>Verwendung</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file"> 
+		<title>So erstellen Sie eine neue Datei</title>
+		<para>Um eine neue Datei zu erstellen, w&auml;hlen Sie 
+		  <menuchoice> <guimenu>Datei</guimenu> <guimenuitem>Neu</guimenuitem>
+			 </menuchoice>. Die neue Datei wird im <application>&app;</application>-Fenster angezeigt.</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file"> 
+		<title>So speichern Sie eine Datei</title>
+		<para>Sie k&ouml;nnen Dateien in einer der folgenden Weisen speichern:</para>
+		<itemizedlist>
+		  <listitem><para>Um &Auml;nderungen an der aktuellen Datei zu speichern, w&auml;hlen Sie <menuchoice> <guimenu>Datei</guimenu>
+ <guimenuitem>Speichern</guimenuitem></menuchoice>, oder klicken Sie in der Symbolleiste auf <guibutton>Speichern</guibutton>. Falls die Datei noch keinen Dateinamen hat, wird das Dialogfeld <guilabel>Speichern unter</guilabel> angezeigt. Geben Sie im Dialogfeld <guilabel>Speichern unter</guilabel> einen Namen f&uuml;r die Datei ein, und klicken Sie auf <guibutton>OK</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Um eine neue Datei zu speichern oder eine vorhandene Datei unter einem neuen Dateinamen zu speichern, w&auml;hlen Sie <menuchoice> <guimenu>Datei</guimenu> <guimenuitem>Speichern
+  unter</guimenuitem> </menuchoice>. Geben Sie im Dialogfeld <guilabel>Speichern unter</guilabel> einen Namen f&uuml;r die Datei ein, und klicken Sie auf <guibutton>OK</guibutton>. </para>
+		  </listitem>
+		  <listitem><para>Wenn Sie alle Dateien speichern m&ouml;chten, die zurzeit in 
+<application>&app;</application> ge&ouml;ffnet sind, w&auml;hlen
+ 
+Sie <menuchoice> <guimenu>Datei</guimenu> <guimenuitem>Alle speichern
+
+ </guimenuitem> </menuchoice>.</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"> 
+		<title>So bearbeiten Sie Text</title>
+		<para>Sie k&ouml;nnen den Text einer Datei auf eine der folgenden Weisen bearbeiten:</para>
+		<itemizedlist>
+		  <listitem><para>Geben Sie mit der Tastatur neuen Text ein. </para>
+		  </listitem>
+		  <listitem><para>Verwenden Sie die Taste <keycap>L&ouml;schen</keycap>, um Text zu l&ouml;schen.
+				</para>
+		  </listitem>
+		  <listitem><para>Verwenden Sie die Men&uuml;punkte <guimenuitem>Ausschneiden</guimenuitem>,
+<guimenuitem>Kopieren</guimenuitem>, <guimenuitem>Einf&uuml;gen</guimenuitem> und
+<guimenuitem>L&ouml;schen</guimenuitem>, um den Text zu bearbeiten. </para>
+		  </listitem>
+		</itemizedlist>
+		<para>Wenn Sie Text mit der Maus markieren, kopiert 
+<application>&app;</application> den markierten Text automatisch in einen Puffer. Markierten Text k&ouml;nnen Sie in einer der folgenden Weisen bearbeiten:
+		  </para>
+		<itemizedlist>
+		  <listitem><para>Wenn Sie den markierten Text aus der Datei l&ouml;schen und in einen Puffer verschieben m&ouml;chten, w&auml;hlen Sie 	<menuchoice> <guimenu>Bearbeiten</guimenu> <guimenuitem>Ausschneiden</guimenuitem></menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Um den markierten Text dauerhaft aus der Datei zu l&ouml;schen, w&auml;hlen Sie <menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem>L&ouml;schen</guimenuitem></menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Um den Inhalt des Puffers an der Cursorposition einzuf&uuml;gen, klicken Sie mit der mittleren Maustaste, oder w&auml;hlen Sie <menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem>Einf&uuml;gen</guimenuitem></menuchoice>. Sie m&uuml;ssen zun&auml;chst Text ausschneiden oder kopieren, bevor Sie ihn in die Datei einf&uuml;gen k&ouml;nnen.</para>
+		  </listitem>
+		  <listitem><para>Um den gesamten Text einer Datei zu markieren, w&auml;hlen Sie 
+<menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem> Alle ausw&auml;hlen</guimenuitem></menuchoice>. </para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits"> 
+		<title>So machen Sie Bearbeitungsschritte r&uuml;ckg&auml;ngig oder wiederholen diese</title>
+		<para>Um einen Bearbeitungsschritt r&uuml;ckg&auml;ngig zu machen, w&auml;hlen Sie <menuchoice> <guimenu>Bearbeiten</guimenu> <guimenuitem>R&uuml;ckg&auml;ngig</guimenuitem></menuchoice>. Um einen Bearbeitungsschritt zu wiederholen, w&auml;hlen Sie <menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem>Wiederholen</guimenuitem></menuchoice>. Die Anzahl der Bearbeitungsschritte, die Sie r&uuml;ckg&auml;ngig machen k&ouml;nnen, wird durch die Einstellung <guilabel>Anzahl der Vorg&auml;nge f&uuml;r R&uuml;ckg&auml;ngig machen begrenzen auf</guilabel> im Registerkartenbereich <xref linkend="gedit-prefs-undo"/> des Dialogfelds <guilabel>Einstellungen</guilabel> bestimmt. Standardm&auml;&szlig;ig k&ouml;nnen Sie 25 Aktionen r&uuml;ckg&auml;ngig machen.</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"> 
+		<title>So suchen Sie Text</title>
+		<para>F&uuml;hren Sie zum Suchen einer Datei oder einer Zeichenkette folgende Schritte aus:</para>
+		<orderedlist>
+		  <listitem><para>W&auml;hlen Sie <menuchoice><guimenu>Suchen</guimenu> 
+
+<guimenuitem>Suchen</guimenuitem></menuchoice>, 			um das Dialogfeld <guilabel>Suchen</guilabel> anzuzeigen.</para>
+		  </listitem>
+		  <listitem><para>Geben Sie die Zeichenkette, nach der Sie suchen m&ouml;chten, in das Feld
+
+<guilabel>Suchen nach</guilabel> ein.</para>
+		  </listitem>
+		  <listitem><para>W&auml;hlen Sie eine der folgenden Optionen:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Vom Dokumentanfang an suchen
+					 </guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Von der Cursorposition an suchen
+					 </guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>W&auml;hlen Sie die Option <guilabel>Gro&szlig;-/Kleinschreibung beachten</guilabel>, 
+				um nur nach Zeichenketten zu suchen, die in Gro&szlig;- und Kleinschreibung mit dem eingegebenen Text &uuml;bereinstimmen. </para>
+		  </listitem>
+		  <listitem><para>Klicken Sie auf <guibutton>Suchen</guibutton>, um nach dem ersten Auftreten der Zeichenkette zu suchen. Wenn <application>&app;</application> die Zeichenkette findet, wird der Cursor zu der Zeichenkette verschoben, und die Zeichenkette wird markiert.</para>
+		  </listitem>
+		  <listitem><para>Um das n&auml;chste Auftreten der Zeichenkette zu suchen, klicken Sie auf <guibutton>Weitersuchen</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Wenn Sie die Suche beenden m&ouml;chten, klicken Sie auf 	
+<guibutton>Schlie&szlig;en</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text"> 
+		<title>So suchen und ersetzen Sie Text</title>
+		<para>Wenn Sie nach einer Zeichenkette suchen und diese durch eine andere Zeichenkette ersetzen m&ouml;chten, gehen Sie folgenderma&szlig;en vor:</para>
+		<orderedlist>
+		  <listitem><para>W&auml;hlen Sie <menuchoice><guimenu>Suchen</guimenu>
+ <guimenuitem>Ersetzen</guimenuitem></menuchoice>, um das Dialogfeld <guilabel>Ersetzen</guilabel> anzuzeigen.</para>
+		  </listitem>
+		  <listitem><para>Geben Sie die Zeichenkette, nach der Sie suchen m&ouml;chten, in das Feld <guilabel>Suchen nach</guilabel> ein. </para>
+		  </listitem>
+		  <listitem><para>Geben Sie die Zeichenkette, durch die die gefundene Zeichenkette ersetzt werden soll, in das Feld <guilabel>Ersetzen durch</guilabel> ein.</para>
+		  </listitem>
+		  <listitem><para>W&auml;hlen Sie eine der folgenden Optionen:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Vom Dokumentanfang an suchen
+					 </guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Von der Cursorposition an suchen
+					 </guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>W&auml;hlen Sie die Option <guilabel>Gro&szlig;-/Kleinschreibung beachten</guilabel>, um nur nach Zeichenketten zu suchen, die in Gro&szlig;- und Kleinschreibung mit dem eingegebenen Text &uuml;bereinstimmen. </para>
+		  </listitem>
+		  <listitem><para>Klicken Sie auf <guibutton>Suchen</guibutton>, um nach dem ersten Auftreten der Zeichenkette zu suchen. Wenn <application>&app;</application> die Zeichenkette findet, wird der Cursor zu der Zeichenkette verschoben, und die Zeichenkette wird markiert. </para>
+		  </listitem>
+		  <listitem><para>Klicken Sie auf <guibutton>Ersetzen</guibutton>, um die Zeichenkette durch den Text zu ersetzen, den Sie in das Feld <guilabel>Ersetzen durch </guilabel> eingegeben haben. Klicken Sie auf <guibutton>Alle ersetzen</guibutton>, um die Zeichenkette global zu ersetzen.</para>
+		  </listitem>
+		  <listitem><para>Um das n&auml;chste Auftreten der Zeichenkette zu suchen, klicken Sie auf <guibutton>Weitersuchen</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Wenn Sie die Suche beenden m&ouml;chten, klicken Sie auf 	<guibutton>Schlie&szlig;en</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"> 
+		<title>So &ouml;ffnen Sie eine Datei &uuml;ber einen URI</title>
+		<para>F&uuml;hren Sie zum &Ouml;ffnen einer Datei &uuml;ber einen URI (Uniform Resource Identifier) die folgenden Schritte aus:</para>
+		<itemizedlist>
+		<listitem>
+		<para>W&auml;hlen Sie <menuchoice><guimenu>Datei</guimenu> <guimenuitem>Speicherort &ouml;ffnen</guimenuitem></menuchoice>, um das Dialogfeld <guilabel>Von URI &ouml;ffnen</guilabel> anzuzeigen. Geben Sie den URI der zu &ouml;ffnenden Datei ein, und klicken Sie auf <guibutton>Öffnen</guibutton>.</para>
+		</listitem>
+		<listitem>
+		<para>Geben Sie in der Befehlszeile <command>gedit <replaceable>http://...</replaceable></command> ein. Dabei steht <replaceable>http://...</replaceable> f&uuml;r den URI der Datei, die ge&ouml;ffnet werden soll. Dr&uuml;cken Sie anschlie&szlig;end die 
+<keycap>Eingabetaste</keycap>.</para>
+		</listitem>
+		</itemizedlist>
+		<para>Die unter dem URI gespeicherte Datei wird von der Anwendung schreibgesch&uuml;tzt ge&ouml;ffnet.</para>
+	 </sect2>	 
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"> 
+		<title>So leiten Sie die Ausgabe eines Befehls in eine Datei</title>
+		<para>Mit <application>&app;</application> k&ouml;nnen Sie die Ausgabe eines Befehls in eine Textdatei leiten. Wenn Sie z. B. die Ausgabe eines <command>ls</command>-Befehls in eine Textdatei umleiten m&ouml;chten, geben Sie <command>ls | gedit</command> ein, und dr&uuml;cken Sie die <keycap>Eingabetaste</keycap>.</para>
+		<para>Die Ausgabe des Befehls <command>ls</command> wird im <application>&app;</application>-Fenster in einer neuen Textdatei angezeigt.</para>
+		<para>Sie haben auch die M&ouml;glichkeit, die Ausgabe des Befehls mit dem Shell-Ausgabe-Plugin in die aktuelle Datei zu lenken. F&uuml;hren Sie zur Verwendung des Shell-Ausgabe-Plugins die folgenden Schritte aus:</para>
+		<orderedlist>
+		  <listitem><para>Laden Sie das Shell-Ausgabe-Plugin. Informationen zum Laden eines Plugins finden Sie unter <xref linkend="gedit-install-plugins"/>.</para>
+		  </listitem>
+
+		  <listitem><para>W&auml;hlen Sie <menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem>Shell-Ausgabe einf&uuml;gen</guimenuitem></menuchoice>, um das Dialogfeld  <guilabel>Shell-Ausgabe</guilabel> anzuzeigen.
+				</para>
+		  </listitem>
+		  <listitem><para>Geben Sie den auszuf&uuml;hrenden Shell-Befehl in das Feld 
+<guilabel>Shell-Befehl</guilabel> ein.</para>
+		  </listitem>
+		  <listitem><para>Bearbeiten Sie bei Bedarf das Feld <guilabel>Arbeitsverzeichnis</guilabel>. Standardm&auml;&szlig;ig f&uuml;hrt das Shell-Ausgabe-Plugin den angegebenen Befehl im aktuellen Verzeichnis aus.</para>
+		  </listitem>
+		  <listitem><para>Klicken Sie auf <guibutton>Ausf&uuml;hren</guibutton>. Das Shell-Ausgabe-Plugin f&uuml;hrt den Befehl aus und f&uuml;gt die Textausgabe in die aktuelle Datei ein.
+				</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line"> 
+		<title>So gehen Sie zu einer bestimmten Zeile</title>
+		<para>Gehen Sie folgenderma&szlig;en vor, um in der aktuellen Datei zu einer bestimmten Zeile zu gelangen:</para>
+		<orderedlist>
+		  <listitem><para>W&auml;hlen Sie <menuchoice><guimenu>Suchen</guimenu> <guimenuitem>Gehe zu Zeile</guimenuitem></menuchoice>, um das Dialogfeld <guilabel>Gehe zu Zeile</guilabel> anzuzeigen.</para>
+		  </listitem>
+		  <listitem><para>Geben Sie in das Feld <guilabel>Zeilennummer</guilabel> die Nummer der Zeile ein, in die der Cursor verschoben werden soll.</para>
+		  </listitem>
+		  <listitem><para>Klicken Sie auf <guibutton>Gehe zu Zeile</guibutton>. Die Anwendung verschiebt den Cursor in die Zeile mit der angegebenen Nummer.</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode">
+		<title>So &auml;ndern Sie den Eingabemodus</title>
+		<para>Klicken Sie zum &Auml;ndern des Eingabemodus im Textfenster mit der rechten Maustaste, und w&auml;hlen Sie <guimenuitem>Eingabemethoden</guimenuitem>. 
+		Das Men&uuml; <guimenuitem>Unicode-Kontrollzeichen einf&uuml;gen</guimenuitem> bietet Optionen f&uuml;r die Zeichendarstellung, die beim Arbeiten mit nicht-lateinischen Zeichens&auml;tzen sinnvoll sind.</para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file"> 
+		<title>So drucken Sie eine Datei</title>
+		<para>Mit <application>&app;</application> k&ouml;nnen Sie die folgenden Druckvorg&auml;nge ausf&uuml;hren:</para>
+		<itemizedlist>
+		  <listitem><para>Eine Datei auf einem Drucker ausdrucken </para>
+		  </listitem>
+		  <listitem><para>Den Druckbefehl an eine Datei ausgeben</para>
+		  </listitem>
+		</itemizedlist>
+		<para>Wenn Sie in eine Datei drucken, sendet <application>&app;</application> die Ausgabe der Datei in eine Datei mit Druckvorstufenformat. Die am meisten verbreiteten Formate der Druckvorstufe sind PostScript und PDF (Portable Document Format).</para>
+		  
+		<para>Um die zu druckenden Seiten anzuzeigen, w&auml;hlen Sie 	<menuchoice><guimenu>Datei</guimenu> 
+<guimenuitem>Druckvorschau</guimenuitem></menuchoice>. Daraufhin wird das Dialogfeld <guilabel>gedit - Druckvorschau</guilabel> ge&ouml;ffnet.</para>
+		  
+		<para>Wenn Sie die aktuelle Datei auf einem Drucker oder in einer Datei ausgeben m&ouml;chten, w&auml;hlen Sie <menuchoice><guimenu>Datei</guimenu> <guimenuitem>Drucken</guimenuitem></menuchoice>, um das Dialogfeld <guilabel>Drucken</guilabel> zu &ouml;ffnen.</para>
+				
+		<para>Im Dialogfeld <guilabel>Drucken</guilabel> k&ouml;nnen Sie die folgenden Druckoptionen festlegen:</para>
+		
+		<sect3 id="print-dialog-job">
+		<title>Registerkartenbereich "Job"</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Druckbereich</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie eine der folgenden Optionen, um die Anzahl der zu druckenden Seiten festzulegen:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Alle</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, um s&auml;mtliche Seiten der Datei zu drucken.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Markierung</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, um nur den markierten Text auszudrucken. Diese Option ist nur verf&uuml;gbar, wenn Sie Text markiert haben.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Standard:  <guilabel>Alle</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Kopien</guilabel> </term> 
+			 <listitem>
+				<para>Geben Sie mit diesem Drehfeld die Anzahl der Kopien an, die von dieser Datei gedruckt werden sollen.</para>
+				<para>Standard:  1</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Sortieren</guilabel> </term> 
+			 <listitem>
+				<para>Wenn Sie mehrere Kopien der Datei drucken, w&auml;hlen Sie diese Option, um die gedruckten Kopien zu sortieren.</para>
+				<para>Standard:  Nicht aktiviert</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-printer">
+		<title>Registerkartenbereich "Drucker"</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Drucker</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie mit diesem Dropdown-Listenfeld den Drucker aus, auf dem die Datei gedruckt werden soll.</para>
+				<para>Standard:  <guilabel>Gnome-Standarddrucker</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Einstellungen</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie mithilfe dieses Dropdown-Listenfelds die Druckereinstellungen aus. Um den Drucker zu konfigurieren, klicken Sie auf <guibutton>Konfigurieren</guibutton>.</para>
+				<para>Standard: Standard</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Ort</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie mithilfe dieses Dropdown-Listenfelds den Zieldrucker aus. Um die Datei auf einem Drucker zu drucken, w&auml;hlen Sie <guilabel>lpr</guilabel>. Wenn die Datei in eine Datei gedruckt werden soll, w&auml;hlen Sie <guilabel>Datei</guilabel>. Wenn Sie <guilabel>Datei</guilabel> w&auml;hlen, geben Sie den Namen der Ausgabedatei in das entsprechende Textfeld ein.</para>
+				<para>Standard:  <guilabel>lpr</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-paper">
+		<title>Registerkartenbereich "Papier"</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Papiergr&ouml;&szlig;e</guilabel> </term> 
+			 <listitem>
+				<para>Legen Sie mit diesem Dropdown-Listenfeld das Format des Papiers fest, auf dem die Datei gedruckt werden soll.</para>
+				<para>Standard:  <guilabel>A4</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Breite</guilabel> </term> 
+			 <listitem>
+				<para>Legen Sie mithilfe des Drehfeldes die Papierbreite fest. &Auml;ndern Sie mit dem Dropdown-Listenfeld <guilabel>Zentimeter</guilabel> die Ma&szlig;einheit f&uuml;r die Angabe des Papierformats.</para>
+				<para>Standard:  21,00 cm</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>H&ouml;he</guilabel> </term> 
+			 <listitem>
+				<para>Legen Sie mithilfe dieses Drehfeldes die H&ouml;he des Papiers fest.</para>
+				<para>Standard:  29,70 cm</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Papierausrichtung</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie mithilfe dieses Dropdown-Listenfeldes die Seitenausrichtung aus.</para>
+				<para>Standard:  <guilabel>Hochformat</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Layout</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie mithilfe dieses Dropdown-Listenfeldes das Seitenlayout aus. Eine Vorschau des Layouts, das Sie ausw&auml;hlen, wird im Bereich <guilabel>Vorschau</guilabel> angezeigt.</para>
+				<para>Standard:  <guilabel>Einfach</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+		
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins"> 
+		<title>So verwenden Sie die &app;-Plugins</title>
+		<para>Ein Plugin ist ein Zusatzprogramm, das den Funktionsumfang einer Anwendung erweitert. Mit den <application>&app;</application>-Plugins k&ouml;nnen Sie im <application> &app;</application>-Fenster verschiedene Textbearbeitungsfunktionen ausf&uuml;hren. In der folgenden Tabelle sind die erh&auml;ltlichen Plugins aufgef&uuml;hrt.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Name des Plugins</para></entry>
+			<entry colname="col2" valign="top"><para>Funktion</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII-Tabelle</para></entry>
+			<entry><para>Zeigt ein Dialogfeld mit einer ASCII-Tabelle an. Die ASCII-Tabelle dient zum Einf&uuml;gen von Zeichen in eine Datei.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Dateien vergleichen</para></entry>
+			<entry><para>Vergleicht zwei Dateien und zeigt die Unterschiede 
+in einem neuen Fenster <application>&app;</application> an.
+			Das Plugin verwendet zum Vergleichen der Dateien das <application>diff</application>-Programm.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para>&Ouml;ffnet die Protokollmeldungen der CVS commit-Befehle</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Datum/Uhrzeit einf&uuml;gen</para></entry>
+			<entry><para>F&uuml;gt aktuelles Datum und Uhrzeit in eine Datei ein</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Shell-Ausgabe</para></entry>
+			<entry><para>F&uuml;gt die Textausgabe eines Shell-Befehls in eine Datei ein </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Tagliste</para></entry>
+			<entry><para>Zeigt ein Dialogfeld mit einer Liste h&auml;ufiger Tags an Mit dem Dialogfeld k&ouml;nnen Sie ein Tag in eine Datei einf&uuml;gen. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Benutzername</para></entry>
+			<entry><para>F&uuml;gt den Benutzernamen des aktuellen Benutzers in die Datei ein </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>W&ouml;rter z&auml;hlen</para></entry>
+			<entry><para>Z&auml;hlt die Zeilen, W&ouml;rter, Zeichen mit Leerzeichen, Zeichen ohne Leerzeichen und Bytes in der aktuellen Datei Das Plugin zeigt die Ergebnisse in einem <guilabel>Wortanzahl</guilabel>-Fenster an. </para></entry>
+		</row> 	
+		</tbody>
+		</tgroup>
+		</informaltable>
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"> 
+		<title>So laden Sie &app;-Plugins</title>
+		<para>Um <application>&app;</application>-Plugins zu laden, w&auml;hlen Sie <menuchoice><guimenu>Bearbeiten</guimenu> 	  <guimenuitem>Plugin-Manager</guimenuitem></menuchoice>. 
+		Im Dialogfeld <guilabel>Plugin-Manager</guilabel> werden folgende Informationen angezeigt:</para>
+		<itemizedlist>
+		  <listitem><para>Eine Liste der verf&uuml;gbaren Plugins</para>
+		  </listitem>
+		  <listitem><para>Eine Schaltfl&auml;che <guibutton>Plugin konfigurieren</guibutton> Mit dieser Schaltfl&auml;che k&ouml;nnen Sie ein Konfigurationsdialogfeld f&uuml;r die Plugins &ouml;ffnen, die Sie konfigurieren k&ouml;nnen.</para>
+		  </listitem>
+		  <listitem><para>Eine kurze Beschreibung jedes einzelnen Plugins Um eine Beschreibung anzuzeigen, markieren Sie das Plugin in der Liste der Plugins.</para>
+		  </listitem>	
+		  <listitem><para>Einzelheiten zum Autor des Plugins und zum Namen des Moduls</para>
+		  </listitem>	  
+		</itemizedlist>
+		<para>Aktivieren Sie zum Laden eines Plugins das Kontrollk&auml;stchen neben dessen Namen. Die Anwendung <application>&app;</application> f&uuml;gt das Plugin in das entsprechende  <application>&app;</application>-Men&uuml;, wie in der folgenden Tabelle beschrieben wird.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Name des Plugins</para></entry>
+			<entry colname="col2" valign="top"><para>Hinzugef&uuml;gt zum Men&uuml;</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII-Tabelle</para></entry>
+			<entry><para><menuchoice><guimenu>Ansicht</guimenu> <guimenuitem>ASCII-Tabelle</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Dateien vergleichen</para></entry>
+			<entry><para><menuchoice><guimenu>Datei</guimenu> <guimenuitem>Dateien vergleichen</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para><menuchoice><guimenu>Datei</guimenu> <guimenuitem>CVS ChangeLogs &ouml;ffnen</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>W&ouml;rter z&auml;hlen</para></entry>
+			<entry><para><menuchoice><guimenu>Suche</guimenu> <guimenuitem>W&ouml;rter z&auml;hlen</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Shell-Ausgabe</para></entry>
+			<entry><para><menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem>Shell-Ausgabe einf&uuml;gen</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Tagliste</para></entry>
+			<entry><para><menuchoice><guimenu>Ansicht</guimenu> <guimenuitem>Tagliste</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Datum/Uhrzeit einf&uuml;gen</para></entry>
+			<entry><para><menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem>Datum/Uhrzeit einf&uuml;gen</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Benutzername</para></entry>
+			<entry><para><menuchoice><guimenu>Bearbeiten</guimenu> <guimenuitem>Benutzername einf&uuml;gen</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+
+		<para>Deaktivieren Sie zum Entfernen eines Plugins das Kontrollk&auml;stchen neben dessen Namen.</para>
+		<para>Um das Dialogfeld <guilabel>Plugin-Manager</guilabel> zu schlie&szlig;en, klicken Sie auf <guibutton>Schlie&szlig;en</guibutton>.</para>
+	 </sect2>
+	 
+	 <sect2 id="gedit-customize-bars">
+	 <title>So passen Sie die Symbolleiste und die Statusleiste an</title>
+	 
+	 <para>Um die Symbolleiste ein- oder auszublenden, w&auml;hlen Sie <menuchoice><guimenu>Ansicht</guimenu> 
+<guimenuitem>Symbolleiste</guimenuitem> </menuchoice>. Wenn Sie festlegen m&ouml;chten, wie die Symbolleiste in <application>&app;</application> dargestellt wird, w&auml;hlen Sie <menuchoice><guimenu>Ansicht</guimenu> <guisubmenu>Symbolleiste anpassen</guisubmenu></menuchoice>, und w&auml;hlen Sie anschlie&szlig;end einen der folgenden Men&uuml;punkte:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Desktopstandard</guimenuitem></para>
+		  <para>Anzeige der Standard-Symbolleiste</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Symbol</guimenuitem></para>
+		  <para>Nur Symbole werden angezeigt.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Symbol und Text</guimenuitem></para>
+		  <para>Symbole und Text werden angezeigt.</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>Um die Statusleiste ein- oder auszublenden, w&auml;hlen Sie <menuchoice><guimenu>Ansicht</guimenu>
+ 
+<guimenuitem>Statusleiste</guimenuitem> </menuchoice>. Wenn Sie festlegen m&ouml;chten, wie die Statusleiste in <application>&app;</application> dargestellt wird, w&auml;hlen Sie <menuchoice><guimenu>Ansicht</guimenu> <guisubmenu>Statusleiste anpassen</guisubmenu></menuchoice>, und w&auml;hlen Sie anschlie&szlig;end einen der folgenden Men&uuml;punkte:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Cursorposition anzeigen</guimenuitem></para>
+		  <para>Zeigt die Nummer der Zeile und Spalte an, in der sich der Cursor befindet.</para>
+		  <para>Standard: Aktiviert</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>&Uuml;berschreibmodus anzeigen</guimenuitem></para>
+		  <para>Zeigt den Bearbeitungsmodus an. Wenn der Einf&uuml;gemodus aktiviert ist, wird in der Statusleiste EINF angezeigt. Ist der &Uuml;berschreibmodus aktiviert, wird in der Statusleiste ÜBS angezeigt.</para>
+		  <para>Standard: Aktiviert</para>
+		  </listitem>
+		  </itemizedlist>
+	 
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs"> 
+	 <title>Einstellungen</title>
+	   
+	 <para>Um <application>&app;</application> zu konfigurieren, w&auml;hlen Sie <menuchoice><guimenu>Bearbeiten</guimenu>
+		<guimenuitem>Einstellungen</guimenuitem> 
+		</menuchoice>. Das Dialogfeld <guilabel>Einstellungen</guilabel> enth&auml;lt die folgenden Kategorien:</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+	 
+	 
+	 <sect2 id="gedit-prefs-editor">
+	 <title>Editor</title>
+	 <para>Die Kategorie <guilabel>Editor</guilabel> gliedert sich in die folgenden Unterkategorien:</para>
+	 
+	 	<sect3 id="gedit-prefs-fontsandcolors">
+	 		<title>Schriftarten und Farben</title>
+	 		<variablelist>
+		   <varlistentry> <term><guilabel>Im Thema vorgegebene Farbe verwenden</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option aus, um die Standard-Systemschrift f&uuml;r den Text im Textfenster <application>&app;</application> zu verwenden. </para>
+				<para>Standard:  Nicht aktiviert</para>
+			 </listitem>
+		  	</varlistentry>			
+		   <varlistentry> <term><guilabel>Vom Editor verwendete Schriftart</guilabel> </term> 
+			 <listitem>
+				<para>In diesem Feld wird die Schriftart angezeigt, in der in <application>&app;</application> Text angezeigt wird. 
+				Klicken Sie auf die Schaltfl&auml;che, um Schriftart, -stil und -gr&ouml;&szlig;e f&uuml;r den Text festzulegen. </para>
+				<para>Standard:  Courier Medium 12 pt.</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>Farben des Standardthemas verwenden</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option aus, um die Farben des Standardthemas im Textfenster von <application>&app;</application> festzulegen. </para>
+				<para>Standard: Aktiviert</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>Textfarbe</guilabel> </term> 
+			 <listitem>
+				<para>Klicken Sie auf die Schaltfl&auml;che <guibutton>Textfarbe</guibutton>, um das Dialogfeld zum Ausw&auml;hlen der Farbe zu &ouml;ffnen. W&auml;hlen Sie eine Farbe aus, in der der Text im Textfenster von <application>&app;</application> dargestellt werden soll. </para>
+				<para>Standard: Schwarz</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Hintergrundfarbe</guilabel> </term> 
+			 <listitem>
+				<para>Klicken Sie auf die Schaltfl&auml;che <guibutton>Hintergrundfarbe</guibutton>, um das Dialogfeld zum Ausw&auml;hlen der Farbe zu &ouml;ffnen. W&auml;hlen Sie eine Hintergrundfarbe f&uuml;r das Textfenster von <application>&app;</application>. </para>
+				<para>Standard: Weiss</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>Farbe f&uuml;r markierten Text</guilabel> </term> 
+			 <listitem>
+				<para>Klicken Sie auf die Schaltfl&auml;che <guibutton>Farbe f&uuml;r markierten Text</guibutton>, um das Dialogfeld zum Ausw&auml;hlen der Farbe zu &ouml;ffnen. W&auml;hlen Sie eine Farbe aus, in der markierter Text angezeigt werden soll.
+				</para>
+				<para>Standard: Weiss</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Markierungsfarbe</guilabel> </term> 
+			 <listitem>
+				<para>Klicken Sie auf die Schaltfl&auml;che <guibutton>Markierungsfarbe</guibutton>, um das Dialogfeld zum Ausw&auml;hlen der Farbe zu &ouml;ffnen. W&auml;hlen Sie eine Hintergrundfarbe, in der eine Textauswahl markiert werden soll.
+				  </para>
+				<para>Standard: Blau</para>
+			 </listitem>
+		  	</varlistentry>			
+			</variablelist>
+		</sect3>
+	
+	 	<sect3 id="gedit-prefs-tabs">
+	 		<title>Tabulatoren</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Tabulatorabstand einstellen entsprechend</guilabel> </term> 
+			 <listitem>
+				<para>Legen Sie mit diesem Drehfeld fest, wie viel Platz von <application>&app;</application> eingef&uuml;gt wird, wenn Sie die <keycap>Tabulatortaste</keycap> dr&uuml;cken. </para>
+				<para>Standard:  8 Zeichen</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+				
+	 	<sect3 id="gedit-prefs-wrapmode">
+	 		<title>Umbruchmodus</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Umbruchmodus</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie eine der folgenden Optionen, um zu bestimmen, wie <application>&app;</application> Text im <application>&app;</application>-Fenster umbricht:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Kein Zeilenumbruch</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, wenn Zeilen nicht umbrochen werden sollen. Der eingegebene Text wird in einer Zeile angezeigt, bis Sie die <keycap>Eingabetaste</keycap> dr&uuml;cken.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Zeilen an Wortgrenzen umbrechen</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, um bei Erreichen des Fensterrandes den Text auf Wortebene auf die n&auml;chste Zeile umzubrechen. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Zeilen auf Zeichenebene umbrechen</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, um bei Erreichen des Fensterrandes den Text auf Zeichenebene auf die n&auml;chste Zeile umzubrechen.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Standard:  <guilabel>Zeilen auf Zeichenebene umbrechen</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-linenumbers">
+	 		<title>Zeilennummern</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Zeilennummern anzeigen</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option, um links im 	<application>&app;</application>-Fenster Zeilennummern anzuzeigen. </para>
+				<para>Standard:  Nicht aktiviert</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+		
+	 	<sect3 id="gedit-prefs-save">	 					<title>Speichern</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Vor dem Speichern eine Sicherungskopie der Dateien erstellen</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option, um bei jedem Speichern von Dateien eine Sicherungskopie erstellen zu lassen. Die Sicherungskopie der Datei hat die Erweiterung <filename>.bak</filename>.</para>
+				<para>Standard:  Nicht aktiviert</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Aktuelle Datei automatisch speichern alle</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option, um die aktuelle Datei in regelm&auml;&szlig;igen Abst&auml;nden zu speichern. Legen Sie mit dem Drehfeld das Intervall fest, in dem die Datei gespeichert werden soll.</para>
+				<para>Standard: Nicht aktiviert, 10 Minuten</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Beim Speichern</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie eine der folgenden Speicheroptionen:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Immer UTF-8-Kodierung verwenden (schneller)</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, wenn Dateien mit UTF-8-Kodierung gespeichert werden sollen.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Aktuelle L&auml;ndereinstellungen verwenden, wenn m&ouml;glich</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, wenn die Dateien mit den aktuellen L&auml;ndereinstellungen gespeichert werden sollen. Sie k&ouml;nnen L&auml;ndereinstellungen f&uuml;r verschiedene Eingabeverfahren einrichten. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Aktuelle L&auml;ndereinstellungen nur dann verwenden, wenn die Datei sie bereits verwendet</guilabel></para>
+				<para>W&auml;hlen Sie diese Option, wenn Dateien nur dann mit den aktuellen L&auml;ndereinstellungen gespeichert werden sollen, wenn sie bereits zuvor mit diesen gespeichert wurden.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Standard:  <guilabel>Immer UTF-8-Kodierung verwenden (schneller)</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-undo">
+	 		<title>R&uuml;ckg&auml;ngig</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Anzahl der Vorg&auml;nge f&uuml;r R&uuml;ckg&auml;ngig machen begrenzen auf</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option, um die Anzahl der Bearbeitungsschritte zu begrenzen, die r&uuml;ckg&auml;ngig gemacht werden k&ouml;nnen. Legen Sie mit dem Drehfeld die maximale Anzahl von r&uuml;ckg&auml;ngig zu machenden Aktionen fest. </para>
+				<para>Standard:  Aktiviert, 25 Aktionen</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 		
+	 </sect2>	 
+	 
+	<sect2 id="gedit-prefs-print">
+	 <title>Drucken</title>
+	 <para>Die Kategorie <guilabel>Drucken</guilabel> gliedert sich in die folgenden Unterkategorien:</para>
+	 
+	 	<sect3 id="gedit-prefs-page">
+	 		<title>Seite</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Seitenkopfzeilen drucken</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option, um auf jeder gedruckten Seite eine Kopfzeile einzuf&uuml;gen. Die Kopfzeile kann nicht konfiguriert werden. </para>
+				<para>Standard: Aktiviert</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Zeilen auf Zeichenebene umbrechen</guilabel> </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option, um den Text beim Drucken einer Datei automatisch auf Zeichenebene umzubrechen. Umbrochene Zeilen werden aus Gr&uuml;nden der Zeilennummerierung als eine Zeile gez&auml;hlt.
+				  </para>
+				<para>Standard: Aktiviert</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Zeilennummern drucken alle</guilabel>
+			 </term> 
+			 <listitem>
+				<para>W&auml;hlen Sie diese Option, um eine Datei mit Zeilennummern zu drucken. Geben Sie mit dem Drehfeld an, wie oft die Zeilennummern gedruckt werden sollen, z. B. alle 5 Zeilen, alle 10 Zeilen. </para>
+				<para>Standard: Nicht aktiviert, 1 Zeile</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+		
+		<sect3 id="gedit-prefs-fonts">
+	 		<title>Schriftarten</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Schriftart zum Drucken des Textes</guilabel> </term> 
+			 <listitem>
+				<para>Klicken Sie auf diese Schaltfl&auml;che, um die Schriftart f&uuml;r den Flie&szlig;text einer Datei auszuw&auml;hlen.</para>
+				<para>Standard:  Courier 9.0</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Schriftart zum Drucken der Kopfzeilen</guilabel> </term> 
+			 <listitem>
+				<para>Klicken Sie auf diese Schaltfl&auml;che, um die Schriftart f&uuml;r &Uuml;berschriften in einer Datei auszuw&auml;hlen.  </para>
+				<para>Standard:  Helvetica 11.0</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Schriftart zum Drucken der Zeilennummern</guilabel>
+			 </term> 
+			 <listitem>
+				<para>Klicken Sie auf diese Schaltfl&auml;che, um die Schriftart zum Drucken der Zeilennummern auszuw&auml;hlen.</para>
+				<para>Standard:  Helvetica 8.0</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Um die Standardschriftart einzustellen, die in <application>&app;</application> zum Drucken einer Datei verwendet wird, klicken Sie auf die Schaltfl&auml;che <guibutton>Standardschriftarten wiederherstellen</guibutton>.</para>
+		</sect3>
+		
+	 </sect2>	 
+	 	 	 
+	 
+ </sect1>
+</article>

@@ -1,0 +1,893 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "August 2002">
+  <!ENTITY app "gedit">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="fr">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+	 <title>Manuel &app;  V&manrevision;</title>
+	 <copyright> 
+		<year>2003</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright> 
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+	 <publisher> 
+		<publishername>Projet de documentation GNOME</publishername>
+	 </publisher>
+	 &legal; 
+	 <authorgroup>
+		<author> 
+		  <firstname>Sun </firstname>
+		  <surname>&Eacute;quipe de documentation GNOME</surname> 
+		  <affiliation> 
+			 <orgname>Sun Microsystems</orgname>
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author> 
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname> 
+		  <affiliation> 
+			 <orgname>Projet de documentation GNOME</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+	  <orgname>Latin Translation Team</orgname> 
+	  <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision> 
+		  <revnumber>Manuel &app; V&manrevision;</revnumber> 
+		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">&Eacute;quipe de documentation Sun GNOME
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Projet de documentation GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manuel gedit V2.0</revnumber>
+		  <date>Juin 2002</date> 
+		  <revdescription> 
+			 <para role="author">&Eacute;quipe de documentation Sun GNOME
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Projet de documentation GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manuel gedit V2.0</revnumber>
+		  <date>Mars 2002</date> 
+		  <revdescription> 
+			 <para role="author">&Eacute;quipe de documentation Sun GNOME
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Projet de documentation GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit V1.0</revnumber>
+		  <date>2000</date> 
+		  <revdescription> 
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">Projet de documentation GNOME</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Le pr&eacute;sent manuel d&eacute;crit la version &appversion; de &app;.
+		</releaseinfo>
+	 <legalnotice> 
+		<title>Votre avis</title>
+		<para>Pour signaler un probl&egrave;me ou faire une suggestion concernant l'application &app; ou le pr&eacute;sent manuel, proc&eacute;dez comme indiqu&eacute; &agrave; la <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gedit-intro"> 
+	 <title>Introduction</title>
+	 <para>L'application <application>&app;</application> est un &eacute;diteur de texte simple. <application>&app;</application> vous permet de cr&eacute;er et d'&eacute;diter des fichiers texte. Vous pouvez utiliser des greffons <application>&app;</application> pour ex&eacute;cuter diff&eacute;rentes t&acirc;ches associ&eacute;es &agrave; l'&eacute;dition de texte depuis la fen&ecirc;tre <application>&app;</application>.</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started"> 
+     <title>D&eacute;marrage</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start"> 
+		<title>D&eacute;marrage de &app;</title>
+		<para>Vous pouvez d&eacute;marrer <application>&app;</application> en recourant &agrave; l'une des m&eacute;thodes suivantes :</para>
+		<variablelist>
+    		<varlistentry>
+    		<term>Menu <guimenu>Applications</guimenu></term>
+    		<listitem>
+    		<para>S&eacute;lectionnez 
+    		<menuchoice>
+    		<guisubmenu>Accessoires</guisubmenu>
+    		<guimenuitem>&Eacute;diteur de texte</guimenuitem>
+    		</menuchoice>. </para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry>
+    		<term>Ligne de commande</term>
+    		<listitem>
+    		<para>Entrez <command>gedit</command>, puis appuyez sur <keycap>Entr&eacute;e</keycap>.</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+	
+	<sect2 id="gedit-when-you-start">
+	
+		<title>Lancement de &app;</title>	
+		<para>Lorsque vous lancez <application>&app;</application>, la fen&ecirc;tre suivante appara&icirc;t :</para>
+	
+		<figure id="gedit-window"> 
+		  <title>Fen&ecirc;tre &app;</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>Affiche la fen&ecirc;tre principale gedit. </phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+	
+		<para>La fen&ecirc;tre <application>&app;</application> contient les &eacute;l&eacute;ments suivants : </para>
+		<variablelist>
+		  <varlistentry> <term>Barre de menus</term> 
+			 <listitem>
+				<para>Les menus contiennent toutes les commandes dont vous avez besoin pour traiter des fichiers dans <application>&app;</application>. </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Barre d'outils</term> 
+			 <listitem>
+				<para>La barre d'outils contient un sous-ensemble des commandes accessibles depuis la barre de menus. </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Zone d'affichage</term> 
+			 <listitem>
+				<para>La zone d'affichage contient le texte du fichier &eacute;dit&eacute;. </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Barre d'&eacute;tat</term> 
+			 <listitem>
+				<para>La barre d'&eacute;tat affiche des informations concernant l'activit&eacute; de <application>&app;</application> ainsi que des informations contextuelles relatives aux &eacute;l&eacute;ments de menu. </para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Lorsque vous cliquez avec le bouton droit dans la fen&ecirc;tre <application>&app;</application>, l'application affiche un menu contextuel. Celui-ci contient les commandes d'&eacute;dition de texte les plus courantes. </para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"> 
+		<title>Ouverture d'un fichier</title>
+		<para>Pour ouvrir un fichier, s&eacute;lectionnez
+		  <menuchoice> <guimenu>Fichier</guimenu> <guimenuitem>Ouvrir</guimenuitem>
+			 </menuchoice>
+		  afin d'afficher la bo&icirc;te de dialogue <guilabel>Ouvrir le fichier</guilabel>. S&eacute;lectionnez le fichier &agrave; ouvrir, puis cliquez sur <guibutton>OK</guibutton>. Le fichier s'affiche dans la fen&ecirc;tre <application>&app;</application>. </para>
+		<para>Il est possible d'ouvrir plusieurs fichiers dans <application>&app;</application>. 
+		Toutefois, la fen&ecirc;tre d'application n'affiche qu'un seul fichier &agrave; la fois. Un nouvel onglet appara&icirc;t dans la fen&ecirc;tre pour chaque fichier ouvert. Pour visualiser un autre fichier ouvert, cliquez sur l'onglet qui lui correspond. Si vous souhaitez cr&eacute;er une fen&ecirc;tre <application>&app;</application> pour tous les fichiers ouverts, faites glisser l'onglet correspondant &agrave; chacun des fichiers sur le bureau. Vous pouvez &eacute;galement utiliser le menu <guimenu>Documents</guimenu> pour passer d'un fichier &agrave; l'autre.</para>
+		<para>L'application enregistre les chemins et les noms des quatre derniers fichiers &eacute;dit&eacute;s et les affiche sous la forme d'&eacute;l&eacute;ments de menu <menuchoice>
+		  <guimenu>Fichier</guimenu> <guisubmenu>Fichiers r&eacute;cents</guisubmenu> </menuchoice>. 
+		  </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"> 
+		<title>Ouverture de plusieurs fichiers depuis une ligne de commande</title>
+		<para>Vous pouvez ex&eacute;cuter <application>&app;</application> depuis une ligne de commande et ouvrir un ou plusieurs fichiers. Pour ouvrir plusieurs fichiers depuis une ligne de commande, indiquez la commande suivante, puis appuyez sur <keycap>Entr&eacute;e</keycap>:</para>
+		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
+		<para>Lorsque l'application d&eacute;marre, les fichiers s&eacute;lectionn&eacute;s s'affichent dans la fen&ecirc;tre <application>&app;</application>.</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage"> 
+	 <title>Utilisation</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file"> 
+		<title>Cr&eacute;ation d'un fichier</title>
+		<para>Pour cr&eacute;er un nouveau fichier, s&eacute;lectionnez		  <menuchoice> <guimenu>Fichier</guimenu> <guimenuitem>Nouveau</guimenuitem>
+			 </menuchoice>. L'application affiche un nouveau fichier dans la fen&ecirc;tre <application>&app;</application>.</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file"> 
+		<title>Enregistrement d'un fichier</title>
+		<para>Vous pouvez enregistrer les fichiers en recourant &agrave; l'une des m&eacute;thodes suivantes :</para>
+		<itemizedlist>
+		  <listitem><para>Pour enregistrer les modifications apport&eacute;es au fichier courant, s&eacute;lectionnez <menuchoice> <guimenu>Fichier</guimenu>			  <guimenuitem>Enregistrer</guimenuitem> </menuchoice> ou cliquez sur <guibutton>Enregistrer</guibutton>dans la barre d'outils. Si le fichier ne poss&egrave;de pas de nom, <application>&app;</application> affiche la bo&icirc;te de dialogue <guilabel>Enregistrer sous</guilabel>. Donnez un nom au fichier dans la bo&icirc;te de dialogue <guilabel>Enregistrer sous</guilabel>, puis cliquez sur <guibutton>OK</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Pour enregistrer un nouveau fichier ou enregistrer un fichier existant sous un nouveau nom, s&eacute;lectionnez <menuchoice> <guimenu>Fichier</guimenu> <guimenuitem>Enregistrer sous</guimenuitem> </menuchoice>. Nommez le fichier dans la bo&icirc;te de dialogue <guilabel>Enregistrer sous</guilabel>, puis cliquez sur <guibutton>OK</guibutton>. </para>
+		  </listitem>
+		  <listitem><para>Pour enregistrer tous les fichiers ouverts dans <application>&app;</application>, s&eacute;lectionnez <menuchoice> <guimenu>Fichier</guimenu> <guimenuitem>Tout enregistrer</guimenuitem> </menuchoice>.</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"> 
+		<title>&Eacute;dition de texte</title>
+		<para>Vous pouvez &eacute;diter le texte d'un fichier en recourant &agrave; l'une des m&eacute;thodes suivantes :</para>
+		<itemizedlist>
+		  <listitem><para>Entrez un nouveau texte &agrave; l'aide du clavier. </para>
+		  </listitem>
+		  <listitem><para>La touche <keycap>Supprimer</keycap> permet d'effacer du texte.
+				</para>
+		  </listitem>
+		  <listitem><para>Les &eacute;l&eacute;ments de menu <guimenuitem>Couper</guimenuitem>, <guimenuitem>Copier</guimenuitem>, <guimenuitem>Coller</guimenuitem> et <guimenuitem>Supprimer</guimenuitem> permettent de modifier le texte. </para>
+		  </listitem>
+		</itemizedlist>
+		<para>Lorsque vous s&eacute;lectionnez  du texte &agrave; l'aide de la souris, <application>&app;</application> copie automatiquement celui-ci dans un tampon. Vous pouvez appliquer les actions suivantes au texte s&eacute;lectionn&eacute; :
+		  </para>
+		<itemizedlist>
+		  <listitem><para>Pour supprimer le texte s&eacute;lectionn&eacute; du fichier et le d&eacute;placer dans un tampon, s&eacute;lectionnez <menuchoice> <guimenu>&Eacute;dition</guimenu> <guimenuitem>Couper</guimenuitem></menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Pour supprimer d&eacute;finitivement le texte s&eacute;lectionn&eacute; du fichier, s&eacute;lectionnez <menuchoice> <guimenu>&Eacute;dition</guimenu> <guimenuitem>Supprimer</guimenuitem></menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Pour ins&eacute;rer le contenu du tampon &agrave; l'emplacement du pointeur, appuyez sur le bouton du milieu de la souris ou s&eacute;lectionnez <menuchoice> <guimenu>&Eacute;dition</guimenu> <guimenuitem>Coller</guimenuitem> </menuchoice>. Vous devez copier ou couper le texte avant de pouvoir le coller dans le fichier.</para>
+		  </listitem>
+		  <listitem><para>Pour s&eacute;lectionner tout le texte d'un fichier, s&eacute;lectionnez <menuchoice> <guimenu>&Eacute;dition</guimenu> <guimenuitem>Tout s&eacute;lectionner</guimenuitem> </menuchoice>. </para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits"> 
+		<title>Annulation ou restauration des modifications</title>
+		<para>Pour d&eacute;faire une modification, s&eacute;lectionnez <menuchoice> <guimenu>&Eacute;dition</guimenu> <guimenuitem>Annuler</guimenuitem></menuchoice>. Pour refaire une modification, s&eacute;lectionnez <menuchoice> <guimenu>&Eacute;dition</guimenu> <guimenuitem>Refaire</guimenuitem></menuchoice>. Le nombre maximum d'op&eacute;rations r&eacute;versibles est d&eacute;termin&eacute; par le param&egrave;tre <guilabel>D&eacute;finir la limite d'annulation d'op&eacute;rations &eacute;</guilabel> de l'onglet <xref linkend="gedit-prefs-undo"/> de la bo&icirc;te de dialogue <guilabel>Pr&eacute;f&eacute;rences</guilabel>. Par d&eacute;faut, il s'&eacute;l&egrave;ve &agrave; 25.</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"> 
+		<title>Recherche de texte</title>
+		<para>Pour rechercher une cha&icirc;ne dans un fichier, proc&eacute;dez comme suit :</para>
+		<orderedlist>
+		  <listitem><para>S&eacute;lectionnez			 	<menuchoice> <guimenu>Rechercher</guimenu>	  <guimenuitem>Rechercher</guimenuitem> </menuchoice>
+pour afficher la bo&icirc;te de dialogue<guilabel>Recherche</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Entrez la cha&icirc;ne requise dans le champ <guilabel>Rechercher</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>S&eacute;lectionnez l'une des options suivantes :</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Rechercher &eacute;partir du d&eacute;but du document</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Rechercher &eacute;partir de la position du curseur</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>S&eacute;lectionnez l'option <guilabel>Sensible &eacute; la casse</guilabel> pour ne rechercher que les occurrences de la cha&icirc;ne respectant la casse du texte saisi. </para>
+		  </listitem>
+		  <listitem><para>Cliquez sur <guibutton>Rechercher</guibutton> pour rechercher la premi&egrave;re occurrence de la cha&icirc;ne. Si <application>&app;</application> trouve la cha&icirc;ne, elle d&eacute;place le pointeur jusqu'&agrave; celle-ci et la s&eacute;lectionne.</para>
+		  </listitem>
+		  <listitem><para>Pour rechercher l'occurrence suivante, cliquez sur le bouton <guibutton>Rechercher le suivant</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Pour terminer la recherche, cliquez sur <guibutton>Fermer</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text"><title>Recherche et remplacement de texte</title>
+		<para>Pour rechercher une cha&icirc;ne dans un fichier et la remplacer par une autre, proc&eacute;dez comme suit :</para>
+		<orderedlist>
+		  <listitem><para>S&eacute;lectionnez <menuchoice> <guimenu>Rechercher</guimenu>
+<guimenuitem>Remplacer</guimenuitem> </menuchoice> pour afficher la bo&icirc;te de dialogue <guilabel>Remplacer</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Entrez la cha&icirc;ne &agrave; rechercher dans le champ <guilabel>Rechercher</guilabel>. </para>
+		  </listitem>
+		  <listitem><para>Tapez la cha&icirc;ne qui doit remplacer le texte recherch&eacute; dans le champ <guilabel>Remplacer avec</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>S&eacute;lectionnez l'une des options suivantes :</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Rechercher &eacute; partir du d&eacute;but du document</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Rechercher &eacute; partir de la position du curseur</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>S&eacute;lectionnez l'option <guilabel>Sensible &eacute; a casse</guilabel> pour ne rechercher que les occurrences de la cha&icirc;ne respectant la casse du texte saisi. </para>
+		  </listitem>
+		  <listitem><para>Cliquez sur <guibutton>Rechercher</guibutton> pour rechercher la premi&egrave;re occurrence de la cha&icirc;ne. Si <application>&app;</application> trouve la cha&icirc;ne, elle d&eacute;place le pointeur jusqu'&agrave; celle-ci et la s&eacute;lectionne. </para>
+		  </listitem>
+		  <listitem><para>Cliquez sur <guibutton>Remplacer</guibutton> pour remplacer l'occurrence de la cha&icirc;ne par le texte saisi dans le champ <guilabel>Remplacer avec</guilabel>. Cliquez sur <guibutton>Tout remplacer</guibutton> pour remplacer toutes les occurrences de la cha&icirc;ne.</para>
+		  </listitem>
+		  <listitem><para>Pour rechercher l'occurrence suivante, cliquez sur le bouton <guibutton>Rechercher le suivant</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Pour terminer la recherche, cliquez sur <guibutton>Fermer</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"> 
+		<title>Ouverture d'un fichier depuis une URI</title>
+		<para>Pour ouvrir un fichier depuis une URI (Uniform Resource Identifier), proc&eacute;dez comme suit :</para>
+		<itemizedlist>
+		<listitem>
+		<para>S&eacute;lectionnez <menuchoice> <guimenu>Fichier</guimenu> <guimenuitem>Ouvrir l'emplacement</guimenuitem> 
+		</menuchoice>pour afficher la bo&icirc;te de dialogue <guilabel>Ouvrir depuis une URI</guilabel>. Indiquez l'URI du fichier &agrave; ouvrir, puis cliquez sur <guibutton>Ouvrir</guibutton>.</para>
+		</listitem>
+		<listitem>
+		<para>Entrez <command>gedit <replaceable>http://...</replaceable></command> dans la ligne de commande, o&ugrave; <replaceable>http://...</replaceable> repr&eacute;sente l'URI du fichier &agrave; ouvrir, puis appuyez sur <keycap>Entr&eacute;e</keycap>.</para>
+		</listitem>
+		</itemizedlist>
+		<para>L'application ouvre le fichier situ&eacute; &agrave; l'URI en mode lecture seule.</para>
+	 </sect2>	 
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"> 
+		<title>Envoi de la sortie d'une commande dans un fichier</title>
+		<para>Vous pouvez utiliser <application>&app;</application> pour envoyer la sortie d'une commande dans un fichier texte. Par exemple, pour envoyer la sortie d'une commande <command>ls</command> dans un fichier texte, entrez <command>ls | gedit</command>, puis appuyez sur <keycap>Entr&eacute;e</keycap>.</para>
+		<para>La sortie de la commande <command>ls</command> s'affiche dans un nouveau fichier texte dans la fen&ecirc;tre <application>&app;</application>.</para>
+		<para>Vous pouvez &eacute;galement utiliser le greffon de sortie du shell pour envoyer la sortie de la commande dans le fichier courant. Pour utiliser le greffon de sortie du shell, proc&eacute;dez comme suit :</para>
+		<orderedlist>
+		  <listitem><para>Chargez le greffon de sortie du shell. Consultez <xref linkend="gedit-install-plugins"/> pour plus d'informations sur le chargement d'un greffon.</para>
+		  </listitem>
+
+		  <listitem><para>S&eacute;lectionnez <menuchoice> <guimenu>&Eacute;dition</guimenu> <guimenuitem>Ins&eacute;rer la sortie du shell</guimenuitem> </menuchoice> pour afficher la bo&icirc;te de dialogue <guilabel>Sortie du shell</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Entrez la commande shell &agrave; ex&eacute;cuter dans le champ <guilabel>Commande shell</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Modifiez le champ <guilabel>R&eacute;pertoire de travail</guilabel>, le cas &eacute;ch&eacute;ant. Par d&eacute;faut, le greffon de sortie du shell ex&eacute;cute la commande sp&eacute;cifi&eacute;e dans le r&eacute;pertoire courant.</para>
+		  </listitem>
+		  <listitem><para>Cliquez sur <guibutton>Ex&eacute;cuter</guibutton>. Le greffon de sortie du shell ex&eacute;cute la commande et ins&egrave;re le texte de sortie dans le fichier courant. 
+				</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line"> 
+		<title>Saut vers une ligne sp&eacute;cifique</title>
+		<para>Pour passer &agrave; une ligne sp&eacute;cifique du fichier courant, proc&eacute;dez comme suit : </para>
+		<orderedlist>
+		  <listitem><para>S&eacute;lectionnez <menuchoice> <guimenu>Rechercher</guimenu> <guimenuitem>Aller &eacute; la ligne</guimenuitem> </menuchoice> pour afficher la bo&icirc;te de dialogue <guilabel>Aller &eacute; la ligne</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Entrez le num&eacute;ro de la ligne dans laquelle d&eacute;placer le pointeur dans le champ <guilabel>Num&eacute;ro de ligne</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Cliquez sur le bouton <guibutton>Aller &eacute; la ligne</guibutton>. L'application d&eacute;place le pointeur &agrave; la ligne sp&eacute;cifi&eacute;e.</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode"><title>Modification du mode de saisie</title>
+		<para>Pour modifier le mode d'entr&eacute;e, cliquez avec le bouton droit dans la fen&ecirc;tre de texte, puis s&eacute;lectionnez <guimenuitem>M&eacute;thodes d'entr&eacute;e</guimenuitem>. 
+		L'&eacute;l&eacute;ment de menu <guimenuitem>Ins&eacute;rer un caract&egrave;re de contr&ocirc;le Unicode</guimenuitem> propose des options de format de caract&egrave;res utiles pour l'emploi de jeux de caract&egrave;res non latin.</para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file"> 
+		<title>Impression d'un fichier</title>
+		<para>Vous pouvez utiliser <application>&app;</application> pour ex&eacute;cuter les op&eacute;rations d'impression suivantes :</para>
+		<itemizedlist>
+		  <listitem><para>envoyer un fichier &agrave; une imprimante ; </para>
+		  </listitem>
+		  <listitem><para>envoyer la sortie de la commande d'impression &agrave; un fichier.</para>
+		  </listitem>
+		</itemizedlist>
+		<para>Si vous choisissez la seconde option, <application>&app;</application> envoie la sortie &agrave; un fichier dans un format de pr&eacute;traitement. Les formats de pr&eacute;traitement les plus courants sont PostScript et PDF (Portable Document Format).</para>
+		  
+		<para>Pour visualiser un aper&ccedil;u des pages &agrave; imprimer, s&eacute;lectionnez <menuchoice> <guimenu>Fichier</guimenu> <guimenuitem>Aper&ccedil;u avant impression</guimenuitem> </menuchoice> pour afficher la bo&icirc;te de dialogue <guilabel>gedit : Aper&ccedil;u avant impression</guilabel>.</para>
+		  
+		<para>Pour envoyer le fichier courant &agrave; une imprimante ou dans un fichier, s&eacute;lectionnez <menuchoice> <guimenu>Fichier</guimenu> <guimenuitem>Imprimer</guimenuitem> </menuchoice> pour afficher la bo&icirc;te de dialogue <guilabel>Imprimer</guilabel>.</para>
+				
+		<para>La bo&icirc;te de dialogue <guilabel>Imprimer</guilabel> vous permet de sp&eacute;cifier les options d'impression suivantes :</para>
+		
+		<sect3 id="print-dialog-job">
+		<title>Onglet Travail</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Plage d'impression</guilabel> </term> 
+			 <listitem>
+				<para>Les options suivantes vous permettent de d&eacute;terminer le nombre de pages &agrave; imprimer.</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Toutes</guilabel></para>
+				<para>Cette option vous permet d'imprimer toutes les pages du fichier.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>S&eacute;lection</guilabel></para>
+				<para>Cette option permet de n'imprimer que le texte s&eacute;lectionn&eacute;. Elle n'est disponible que si vous avez s&eacute;lectionn&eacute; du texte.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Par d&eacute;faut : <guilabel>Toutes</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Copies</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de s&eacute;lection num&eacute;rique permet de sp&eacute;cifier le nombre d'exemplaires du fichier &agrave; imprimer.</para>
+				<para>Par d&eacute;faut : 1.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Interclasser</guilabel> </term> 
+			 <listitem>
+				<para>Si vous imprimez plusieurs copies du fichier, s&eacute;lectionnez cette option pour les classer.</para>
+				<para>Par d&eacute;faut :d&eacute;s&eacute;lectionn&eacute;e.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-printer">
+		<title>Onglet Imprimante</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Imprimante</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de liste d&eacute;roulante permet de s&eacute;lectionner l'imprimante sur laquelle imprimer le fichier.</para>
+				<para>Par d&eacute;faut : <guilabel>Imprimante Gnome par d&eacute;faut</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Param&egrave;tres</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de liste d&eacute;roulante permet de s&eacute;lectionner les param&egrave;tres de l'imprimante. Pour configurer l'imprimante, cliquez sur <guibutton>Configurer</guibutton>.</para>
+				<para>Par d&eacute;faut :D&eacute;faut. </para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>Emplacement</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de liste d&eacute;roulante permet de s&eacute;lectionner la destination d'impression. Pour envoyer le fichier &agrave; une imprimante, s&eacute;lectionnez <guilabel>lpr</guilabel>. Pour envoyer le fichier &agrave; un fichier d'impression, s&eacute;lectionnez <guilabel>Fichier</guilabel>. Dans ce cas, entrez le nom du fichier dans la zone de texte pr&eacute;vue &agrave; cet effet.</para>
+				<para>Par d&eacute;faut : <guilabel>lpr</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-paper">
+		<title>Onglet Papier</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Taille papier</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de liste d&eacute;roulante permet de s&eacute;lectionner le format de papier sur lequel imprimer le fichier.</para>
+				<para>Par d&eacute;faut : <guilabel>A4</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Largeur</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de s&eacute;lection num&eacute;rique permet de sp&eacute;cifier la largeur du papier. La zone de liste d&eacute;roulante <guilabel>Centim&egrave;tres</guilabel> permet de modifier l'unit&eacute; de mesure du format de papier.</para>
+				<para>Par d&eacute;faut : 21,00 centim&egrave;tres.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Hauteur</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de s&eacute;lection num&eacute;rique permet de sp&eacute;cifier la hauteur du papier.</para>
+				<para>Par d&eacute;faut : 29,70 centim&egrave;tres.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Orientation</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de liste d&eacute;roulante permet de s&eacute;lectionner l'orientation du papier.</para>
+				<para>Par d&eacute;faut : <guilabel>Portrait</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Mise en page</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de liste d&eacute;roulante permet de s&eacute;lectionner la mise en page. Un aper&ccedil;u de chaque mise en page s&eacute;lectionn&eacute;e est affich&eacute; dans la zone <guilabel>Aper&ccedil;u</guilabel>.</para>
+				<para>Par d&eacute;faut : <guilabel>Simple</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+		
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins"> 
+		<title>Utilisation des greffons &app;</title>
+		<para>Un greffon est un programme compl&eacute;mentaire qui optimise la fonctionnalit&eacute; d'une application. Les greffons <application>&app;</application> vous permettent d'ex&eacute;cuter diff&eacute;rentes fonctions associ&eacute;es &agrave; l'&eacute;dition de texte depuis la fen&ecirc;tre <application> &app;</application>. Le tableau suivante r&eacute;pertorie les greffons disponibles.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nom du greffon</para></entry>
+			<entry colname="col2" valign="top"><para>Objet</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>Table ASCII</para></entry>
+			<entry><para>Affiche une bo&icirc;te de dialogue contenant une table ASCII. La table ASCII vous permet d'ins&eacute;rer des caract&egrave;res dans un fichier.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Comparer des fichiers</para></entry>
+			<entry><para>Compare deux fichiers et affiche les diff&eacute;rences entre eux dans une nouvelle fen&ecirc;tre <application>&app;</application>.
+			Ce greffon utilise le programme <application>diff</application> pour comparer les fichiers.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Journal de changements CVS</para></entry>
+			<entry><para>Ouvre les journaux associ&eacute;s aux commandes de validation CVS.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Ins&eacute;rer la date/heure</para></entry>
+			<entry><para>Ins&egrave;re la date et l'heure courantes dans un fichier.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Sortie du shell</para></entry>
+			<entry><para>Ins&egrave;re le texte de la sortie d'une commande shell dans un fichier. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Liste d'&eacute;tiquettes</para></entry>
+			<entry><para>Affiche une bo&icirc;te de dialogue contenant une liste des &eacute;tiquettes courantes. Cette bo&icirc;te de dialogue vous permet d'ins&eacute;rer une &eacute;tiquette dans un fichier. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nom d'utilisateur</para></entry>
+			<entry><para>Ins&egrave;re le nom de l'utilisateur courant dans le fichier. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nombre de mots</para></entry>
+			<entry><para>Compte le nombre de lignes, de mots, de caract&egrave;res avec espaces, de caract&egrave;res sans espace et d'octets dans le fichier courant. Il affiche les r&eacute;sultats dans une fen&ecirc;tre <guilabel>Nombre de mots</guilabel>. </para></entry>
+		</row> 	
+		</tbody>
+		</tgroup>
+		</informaltable>
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"> <title>Chargement des greffons &app;</title>
+		<para>Pour charger les greffons <application>&app;</application>, s&eacute;lectionnez <menuchoice><guimenu>&Eacute;dition</guimenu> <guimenuitem>Gestionnaire de greffons</guimenuitem></menuchoice>. 
+		La bo&icirc;te de dialogue <guilabel>Gestionnaire de greffons</guilabel> pr&eacute;sente les informations suivantes :</para>
+		<itemizedlist>
+		  <listitem><para>une liste des greffons disponibles.</para>
+		  </listitem>
+		  <listitem><para>un bouton <guibutton>Configurer le greffon</guibutton>. Ce bouton vous permet d'ouvrir une bo&icirc;te de dialogue de configuration pour les greffons personnalisables.</para>
+		  </listitem>
+		  <listitem><para>une br&egrave;ve description de tous les greffons. Pour afficher une description, s&eacute;lectionnez le greffon dans la liste.</para>
+		  </listitem>	
+		  <listitem><para>des d&eacute;tails concernant l'auteur du greffon et le nom du module.</para>
+		  </listitem>	  
+		</itemizedlist>
+		<para>Pour charger un greffon, cochez la case situ&eacute;e en regard de son nom. L'application <application>&app;</application> ajoute le greffon au menu de <application>&app;</application> appropri&eacute;, comme indiqu&eacute; dans le tableau suivant.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nom du greffon</para></entry>
+			<entry colname="col2" valign="top"><para>Ajout&eacute; au menu</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>Table ASCII</para></entry>
+			<entry><para><menuchoice><guimenu>Afficher</guimenu> <guimenuitem>Table ASCII</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Comparer des fichiers</para></entry>
+			<entry><para><menuchoice><guimenu>Fichier</guimenu> <guimenuitem>Comparer des fichiers</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Journal de changements CVS</para></entry>
+			<entry><para><menuchoice><guimenu>Fichier</guimenu> <guimenuitem>Ouvrir les journaux de changements</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nombre de mots</para></entry>
+			<entry><para><menuchoice><guimenu>Rechercher</guimenu> <guimenuitem>Nombre de mots</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Sortie du shell</para></entry>
+			<entry><para><menuchoice><guimenu>&Eacute;dition</guimenu> <guimenuitem>Ins&eacute;rer la sortie du shell</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Liste d'&eacute;tiquettes</para></entry>
+			<entry><para><menuchoice><guimenu>Afficher</guimenu> <guimenuitem>Liste d'&eacute;tiquettes</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Ins&eacute;rer la date/heure</para></entry>
+			<entry><para><menuchoice><guimenu>&Eacute;dition</guimenu> <guimenuitem>Ins&eacute;rer la date/heure</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nom d'utilisateur</para></entry>
+			<entry><para><menuchoice><guimenu>&Eacute;dition</guimenu> <guimenuitem>Ins&eacute;rer le nom d'utilisateur</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+
+		<para>Pour supprimer un greffon, d&eacute;s&eacute;lectionnez la case &agrave; cocher situ&eacute;e en regard de son nom.</para>
+		<para>Pour fermer la bo&icirc;te de dialogue <guilabel>Gestionnaire de greffons</guilabel>, cliquez sur <guibutton>Fermer</guibutton>.</para>
+	 </sect2>
+	 
+	 <sect2 id="gedit-customize-bars">
+	 <title>Personnalisation de la barre d'outils et de la barre d'&eacute;tat</title>
+	 
+	 <para>Pour afficher ou masquer la barre d'outils, s&eacute;lectionnez <menuchoice> <guimenu>Afficher</guimenu> <guimenuitem>Barre d'outils</guimenuitem></menuchoice>. Pour personnaliser l'affichage de la barre d'outils, s&eacute;lectionnez <menuchoice> <guimenu>Afficher</guimenu> <guisubmenu>Personnaliser la barre d'&eacute;tat</guisubmenu> </menuchoice>, puis s&eacute;lectionnez l'un des &eacute;l&eacute;ments de menu suivants :</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Valeurs par d&eacute;faut du bureau</guimenuitem></para>
+		  <para>Affiche la barre d'outils par d&eacute;faut.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Ic&ocirc;ne</guimenuitem></para>
+		  <para>N'affiche que des ic&ocirc;nes.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Ic&ocirc;ne et texte</guimenuitem></para>
+		  <para>Affiche des ic&ocirc;nes et du texte.</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>Pour afficher ou masquer la barre d'&eacute;tat, s&eacute;lectionnez <menuchoice> <guimenu>Afficher</guimenu>  <guimenuitem>Barre d'&eacute;tat</guimenuitem> </menuchoice>. Pour personnaliser l'affichage de la barre d'&eacute;tat, s&eacute;lectionnez <menuchoice> <guimenu>Afficher</guimenu> <guisubmenu>Personnaliser la barre d'&eacute;tat</guisubmenu> </menuchoice>, puis choisissez l'un des &eacute;l&eacute;ments de menu suivants :</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Afficher la position du curseur</guimenuitem></para>
+		  <para>Affiche le num&eacute;ro de la ligne et de la colonne o&ugrave; se trouve le pointeur.</para>
+		  <para>Par d&eacute;faut : s&eacute;lectionn&eacute;e.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Afficher le mode d'&eacute;crasement</guimenuitem></para>
+		  <para>Affiche le mode d'&eacute;dition. Si l'&eacute;diteur est en mode d'insertion, la barre d'&eacute;tat contient le mot INS. Par contre, si l'&eacute;diteur est mode d'&eacute;crasement, la barre d'&eacute;tat contient le mot RFP.</para>
+		  <para>Par d&eacute;faut : s&eacute;lectionn&eacute;e.</para>
+		  </listitem>
+		  </itemizedlist>
+	 
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs"> 
+	 <title>Pr&eacute;f&eacute;rences</title>
+	   
+	 <para>Pour configurer <application>&app;</application>, s&eacute;lectionnez
+		<menuchoice> 
+		<guimenu>&Eacute;dition</guimenu>
+		<guimenuitem>Pr&eacute;f&eacute;rences</guimenuitem> 
+		</menuchoice>. La bo&icirc;te dialogue <guilabel>Pr&eacute;f&eacute;rences</guilabel> contient les cat&eacute;gories suivantes :</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+	 
+	 
+	 <sect2 id="gedit-prefs-editor">
+	 <title>&Eacute;diteur</title>
+	 <para>La cat&eacute;gorie <guilabel>&Eacute;dition</guilabel> se subdivise dans les sous-cat&eacute;gories suivantes :</para>
+	 
+	 	<sect3 id="gedit-prefs-fontsandcolors"><title>Polices et couleurs</title>
+	 		<variablelist>
+		   <varlistentry> <term><guilabel>Utiliser la police du th&egrave;me par d&eacute;faut</guilabel> </term> 
+			 <listitem>
+				<para>Cette option permet d'utiliser la police syst&egrave;me par d&eacute;faut pour le texte de la fen&ecirc;tre <application>&app;</application>. </para>
+				<para>Par d&eacute;faut :d&eacute;s&eacute;lectionn&eacute;e.</para>
+			 </listitem>
+		  	</varlistentry>			
+		   <varlistentry> <term><guilabel>Police utilis&eacute;e par l'&eacute;diteur</guilabel> </term> 
+			 <listitem>
+				<para>Ce champ indique la police utilis&eacute;e par <application>&app;</application> pour afficher du texte. 
+				Le bouton vous permet de sp&eacute;cifier le type, le style et la taille de police &agrave; utiliser pour le texte. </para>
+				<para>Par d&eacute;faut : Courier Medium 12 points.</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>Utiliser les couleurs du th&egrave;me par d&eacute;faut</guilabel> </term> 
+			 <listitem>
+				<para>Cette option pemet d'utiliser les couleurs du th&egrave;me par d&eacute;faut dans la fen&ecirc;tre <application>&app;</application>. </para>
+				<para>Par d&eacute;faut : s&eacute;lectionn&eacute;e.</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>Couleur du texte</guilabel> </term> 
+			 <listitem>
+				<para>Ce bouton permet d'afficher la bo&icirc;te de dialogue de s&eacute;lection de couleur. S&eacute;lectionnez une couleur &agrave; utiliser pour afficher du texte dans la fen&ecirc;tre <application>&app;</application>. </para>
+				<para>Par d&eacute;faut :noir.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Couleur d'arri&egrave;re-plan</guilabel> </term> 
+			 <listitem>
+				<para>Ce bouton permet d'afficher la bo&icirc;te de dialogue de s&eacute;lection de couleur. S&eacute;lectionnez une couleur d'arri&egrave;re-plan pour la fen&ecirc;tre de texte <application>&app;</application>. </para>
+				<para>Par d&eacute;faut :blanc.</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>Couleur du texte s&eacute;lectionn&eacute;</guilabel> </term> 
+			 <listitem>
+				<para>Ce bouton permet d'afficher la bo&icirc;te de dialogue de s&eacute;lection de couleur. S&eacute;lectionnez une couleur &agrave; utiliser pour afficher le texte s&eacute;lectionn&eacute;.
+				</para>
+				<para>Par d&eacute;faut :blanc.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Couleur de la s&eacute;lection</guilabel> </term> 
+			 <listitem>
+				<para>Ce bouton permet d'afficher la bo&icirc;te de dialogue de s&eacute;lection de couleur. S&eacute;lectionnez une couleur d'arri&egrave;re-plan &agrave; utiliser pour mettre en surbrillance une s&eacute;lection de texte.
+				  </para>
+				<para>Par d&eacute;faut :bleu.</para>
+			 </listitem>
+		  	</varlistentry>			
+			</variablelist>
+		</sect3>
+	
+	 	<sect3 id="gedit-prefs-tabs">
+	 		<title>Onglets</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>D&eacute;finir la largeur des onglets &eacute;gale &egrave;</guilabel> </term> 
+			 <listitem>
+				<para>Cette zone de s&eacute;lection num&eacute;rique vous permet de sp&eacute;cifier la largeur de l'onglet ins&eacute;r&eacute; lorsque vous appuyez sur la touche <keycap>Tab</keycap>. </para>
+				<para>Par d&eacute;faut : 8 caract&egrave;res.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+				
+	 	<sect3 id="gedit-prefs-wrapmode">
+	 		<title>Mode de retour ligne</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Mode de retour ligne</guilabel> </term> 
+			 <listitem>
+				<para>S&eacute;lectionnez l'une des options suivantes pour d&eacute;terminer comment <application>&app;</application> envoie du texte &agrave; la ligne dans la fen&ecirc;tre <application>&app;</application> :</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Jamais de retour ligne</guilabel></para>
+				<para>Cette option permet de ne jamais cr&eacute;er de retour &agrave; la ligne. Le texte tap&eacute; est affich&eacute; sur une ligne jusqu'&agrave; ce que vous appuyiez sur <keycap>Entr&eacute;e</keycap>.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Retour lignes aux limites des mots</guilabel></para>
+				<para>Cette option permet d'envoyer le texte &agrave; la ligne suivante, au niveau du mot, lorsque vous atteignez le bord de la fen&ecirc;tre de texte. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Retour lignes aux limites des caract&egrave;res</guilabel></para>
+				<para>Cette option permet d'envoyer le texte &agrave; la ligne suivante, au niveau du caract&egrave;re, lorsque vous atteignez le bord de la fen&ecirc;tre de texte. </para>
+				</listitem>								
+				</itemizedlist>
+				<para>Par d&eacute;faut : <guilabel>Retour lignes aux limites des caract&egrave;res</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-linenumbers">
+	 		<title>Num&eacute;ros des lignes</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Afficher des num&eacute;ros de lignes</guilabel> </term> 
+			 <listitem>
+				<para>Cette option permet d'afficher des num&eacute;ros de lignes du c&ocirc;t&eacute; gauche de la fen&ecirc;tre <application>&app;</application>. </para>
+				<para>Par d&eacute;faut :d&eacute;s&eacute;lectionn&eacute;e.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+		
+	 	<sect3 id="gedit-prefs-save">
+	 		<title>Enregistrement</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Cr&eacute;er une copie de sauvegarde des fichiers avant d'enregistrer</guilabel> </term> 
+			 <listitem>
+				<para>Cette option permet de cr&eacute;er une copie de sauvegarde du fichier &agrave; chaque fois que vous l'enregistrez. Celle-ci poss&egrave;de une extension <filename>.bak</filename>.</para>
+				<para>Par d&eacute;faut :d&eacute;s&eacute;lectionn&eacute;e.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Enregistrer automatiquement le fichier courant toutes les</guilabel> </term> 
+			 <listitem>
+				<para>Cette option permet d'enregistrer automatiquement le fichier courant &agrave; intervalle r&eacute;gulier. La zone de s&eacute;lection num&eacute;rique vous permet de sp&eacute;cifier l'intervalle entre les enregistrements.</para>
+				<para>Par d&eacute;faut :d&eacute;s&eacute;lectionn&eacute;e, 10 minutes.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Lors de l'enregistrement</guilabel> </term> 
+			 <listitem>
+				<para>S&eacute;lectionnez l'une des options d'enregistrement suivantes :</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Toujours utiliser l'encodage UTF-8 (plus rapide)</guilabel></para>
+				<para>Cette option permet d'enregistrer les fichiers &agrave; l'aide de l'encodage UTF-8 bits.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Utiliser si possible la langue courante</guilabel></para>
+				<para>Cette option permet d'enregistrer les fichiers &agrave; l'aide de la langue courante. Vous pouvez configurer des langues courantes pour diff&eacute;rentes m&eacute;thodes d'entr&eacute;e. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Utiliser la langue courante uniquement si le fichier l'utilise d&eacute;j&egrave;</guilabel></para>
+				<para>Cette option permet d'enregister un fichier &agrave; l'aide de la langue courante si le fichier a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute; avec celle-ci.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Par d&eacute;faut : <guilabel>Toujours utiliser l'encodage UTF-8 (plus rapide)</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-undo">
+	 		<title>Annulation</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>D&eacute;finir la limite d'annulation d'op&eacute;rations &egrave;</guilabel> </term> 
+			 <listitem>
+				<para>Cette option permet de d&eacute;finir une limite pour le nombre d'&eacute;ditions r&eacute;versibles. La zone de s&eacute;lection num&eacute;rique permet de sp&eacute;cifier le nombre maximum d'actions qu'il est possible de d&eacute;faire. </para>
+				<para>Par d&eacute;faut :s&eacute;lectionn&eacute;e, 25 op&eacute;rations.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 		
+	 </sect2>	 
+	 
+	<sect2 id="gedit-prefs-print">
+	 <title>Impression</title>
+	 <para>La cat&eacute;gorie <guilabel>Imprimer</guilabel> se subdivise dans les sous-cat&eacute;gories suivantes :</para>
+	 
+	 	<sect3 id="gedit-prefs-page">
+	 		<title>Page</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Imprimer des en-t&ecirc;tes de page</guilabel> </term> 
+			 <listitem>
+				<para>Cette option permet d'inclure un en-t&ecirc;te sur chaque page imprim&eacute;e. Il est impossible de configurer celui-ci. </para>
+				<para>Par d&eacute;faut : s&eacute;lectionn&eacute;e.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Retour lignes (aux limites des caract&egrave;res)</guilabel> </term> 
+			 <listitem>
+				<para>Cette option permet d'envoyer automatiquement le texte &agrave; la ligne au niveau du caract&egrave;re lors de l'impression. Les nouvelles lignes ainsi cr&eacute;&eacute;es sont comptabilis&eacute;es comme lignes dans le nombre de mots.
+				  </para>
+				<para>Par d&eacute;faut : s&eacute;lectionn&eacute;e.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Imprimer des num&eacute;ros de ligne toutes les</guilabel>
+			 </term> 
+			 <listitem>
+				<para>Cette option permet d'inclure des num&eacute;ros de ligne lors de l'impression d'un fichier. La zone de s&eacute;lection num&eacute;rique vous permet de sp&eacute;cifier la fr&eacute;quence des num&eacute;ros de ligne, par exemple toutes les 5 lignes, les 10 lignes, etc. </para>
+				<para>Par d&eacute;faut :d&eacute;s&eacute;lectionn&eacute;e, 1 ligne.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+		
+		<sect3 id="gedit-prefs-fonts">
+	 		<title>Polices</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Police utilis&eacute;e pour imprimer le corps</guilabel> </term> 
+			 <listitem>
+				<para>Ce bouton permet de s&eacute;lectionner la police &agrave; utiliser pour imprimer le corps du texte d'un fichier.</para>
+				<para>Par d&eacute;faut : Courier 9.0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Police utilis&eacute;e pour imprimer les en-t&ecirc;tes</guilabel> </term> 
+			 <listitem>
+				<para>Ce bouton permet de s&eacute;lectionner la police &agrave; utiliser pour imprimer les en-t&ecirc;tes dans un fichier : </para>
+				<para>Par d&eacute;faut : Helvetica 11.0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Police utilis&eacute;e pour imprimer les num&eacute;ros de ligne</guilabel>
+			 </term> 
+			 <listitem>
+				<para>Ce bouton permet de s&eacute;lectionner une police &agrave; utiliser pour imprimer les num&eacute;ros de ligne.</para>
+				<para>Par d&eacute;faut : Helvetica 8.0.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Pour r&eacute;initialiser les polices par d&eacute;faut pour l'impression d'un fichier depuis <application>&app;</application>, cliquez sur le bouton <guibutton>Restaurer les polices par d&eacute;faut</guibutton>.</para>
+		</sect3>
+		
+	 </sect2>	 
+	 	 	 
+	 
+ </sect1>
+</article>
+

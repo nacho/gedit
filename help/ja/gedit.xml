@@ -1,0 +1,1075 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "2002 年 8 月">
+  <!ENTITY app "gedit">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="ja">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+	 <title>&app; のマニュアル V&manrevision;</title>
+	 <copyright> 
+		<year>2002</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright> 
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+	 <publisher> 
+		<publishername> GNOME ドキュメンテーションプロジェクト</publishername>
+	 </publisher>
+	 &legal; 
+	 <authorgroup>
+		<author> 
+		  <firstname>Sun </firstname>
+		  <surname>GNOME ドキュメンテーションチーム</surname> 
+		  <affiliation> 
+			 <orgname>Sun Microsystems</orgname>
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author> 
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname> 
+		  <affiliation> 
+			 <orgname>GNOME ドキュメンテーションプロジェクト</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+	  <orgname>Latin Translation Team</orgname> 
+	  <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision> 
+		  <revnumber>&app; のマニュアル V&manrevision;</revnumber>
+		  <date>2002 年 8 月</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME ドキュメンテーションチーム
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME ドキュメンテーションプロジェクト</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit のマニュアル V2.1</revnumber>
+		  <date>2002 年 6 月</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME ドキュメンテーションチーム
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME ドキュメンテーションプロジェクト</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit のマニュアル V2.0</revnumber>
+		  <date>2002 年 3 月</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME ドキュメンテーションチーム
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">GNOME ドキュメンテーションプロジェクト</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit V1.0</revnumber>
+		  <date>2000 年</date> 
+		  <revdescription> 
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">GNOME ドキュメンテーションプロジェクト</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>このマニュアルは &app; のバージョン &appversion; について説明します。
+		</releaseinfo>
+	 <legalnotice> 
+		<title>フィードバック</title>
+		<para>&app; アプリケーションまたはこのマニュアルに関してバグやご意見をご報告いただく場合は、<ulink 
+url="ghelp:gnome-feedback" type="help">『GNOME フィードバックページ』</ulink> を参照してください。 
+</para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gedit-intro"> 
+	 <title>概要</title>
+	 <para><application>&app;</application> は、シンプルなテキストエディタです。 
+<application>&app;</application> でテキストファイルを作成、編集することができます。 
+<application>&app;</application> プラグインにより、<application>&app;</application> 
+ウィンドウ内でさまざまなテキスト編集作業を実行することができます。</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started"> 
+	 <title>基本的な使用方法</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start"> 
+		<title>&app; を起動する</title>
+		<para>以下の方法で <application>&app;</application> を起動してください。</para>
+		<variablelist>
+    		<varlistentry><term><guimenu>「アプリケーション」</guimenu>メニュー</term><listitem>
+    		<para><menuchoice>
+    		<guisubmenu>「アクセサリ」</guisubmenu>
+    		<guimenuitem>「テキストエディタ」</guimenuitem>
+    		</menuchoice>を選択します。</para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry>
+    		<term>コマンドライン</term>
+    		<listitem>
+    		<para><command>gedit</command> と入力し、<keycap>リターン</keycap> キーを押します。</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+	
+	<sect2 id="gedit-when-you-start">
+	
+		<title>&app; の起動時</title>	
+		<para><application>&app;</application> の起動時には、次のウィンドウが表示されます。</para>
+	
+		<figure id="gedit-window"> 
+		  <title>&app; ウィンドウ</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>gedit のメインウィンドウを表示。</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+	
+		<para><application>&app;</application> ウィンドウの構成要素は次のとおりです。 </para>
+		<variablelist>
+		  <varlistentry><term>メニューバー</term> 
+			 <listitem>
+				<para>メニューバー上のメニューには、<application>&app;</application> 
+でファイルを操作するために必要なコマンドがすべて含まれています。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry><term>ツールバー</term> 
+			 <listitem>
+				<para> 
+ツールバーには、メニューバーからアクセスできるコマンドのサブセットが含まれています。</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>表示領域</term> 
+			 <listitem>
+				<para>表示領域には、編集中のファイルのテキストが表示されます。 </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>ステータスバー</term> 
+			 <listitem>
+				<para>ステータスバーには、<application>&app;</application> 
+で実行中の操作に関する情報やメニュー項目に関するコンテキスト情報が表示されます。 </para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para><application>&app;</application> 
+ウィンドウ内を右クリックすると、ポップアップメニューが表示されます。 
+ポップアップメニューから、使用頻度の高いテキスト編集コマンドにアクセスできます。 </para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"> 
+		<title>ファイルを開く</title>
+		<para>ファイルを開くには、<menuchoice> <guimenu>「ファイル」</guimenu> 
+<guimenuitem>「開く」</guimenuitem>
+			 
+</menuchoice>を選択して<guilabel>「ファイルを開く」</guilabel>ダイアログを表示させます。開きたいファイルを選択して
+、<guibutton>「了解」</guibutton>をクリックします。選択したファイルが <application>&app;</application> 
+ウィンドウに表示されます。 </para>
+		<para><application>&app;</application> では、複数のファイルを開くこともできます。
+		ファイルは、アプリケーションウィンドウ内に 1 つずつ表示されます。 
+ウィンドウには、個々の開いたファイルごとに、該当するタブが追加されます。表示するファイルを切り替えるには、該当する
+ファイルのタブをクリックします。1 つ 1 つのファイルを独立した <application> &app;</application> 
+ウィンドウに表示したいときは、そのファイルを表すタブをデスクトップの背景にドラッグします。 
+<guimenu>「ドキュメント」</guimenu>メニューからも、現在開いている別のファイルにアクセスすることができます。</para>
+		<para>最後に編集したファイルのパスとファイル名は 4 つまで記憶され、<menuchoice>
+		  <guimenu>「ファイル」</guimenu> <guisubmenu>「最近開いたファイル」</guisubmenu> 
+</menuchoice>メニューの項目として表示されます。 
+		 </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"> 
+		<title>コマンドラインから複数のファイルを開く</title>
+		<para>コマンドラインから <application>&app;</application> 
+を起動し、単一のファイル、もしくは複数のファイルを開くことができます。 
+コマンドラインから複数のファイルを開くには、次のコマンドを入力して <keycap>リターン</keycap> 
+キーを押します。</para>
+		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
+		<para>アプリケーションが起動し、<application>&app;</application> 
+ウィンドウ内に指定のファイルが表示されます。</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage"> 
+	 <title>使用方法</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file"> 
+		<title>新しいファイルを作成する</title>
+		<para>新しいファイルを作成するには、
+		  <menuchoice> <guimenu>「ファイル」</guimenu> <guimenuitem>「新規」</guimenuitem>
+			 </menuchoice>を選択します。<application>&app;</application> 
+ウィンドウに新しいファイルが表示されます。</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file"> 
+		<title>ファイルを保存する</title>
+		<para>ファイルの保存方法は次のとおりです。</para>
+		<itemizedlist>
+		  <listitem><para>現在のファイルに対する変更内容を保存するには、<menuchoice> 
+<guimenu>「ファイル」</guimenu>
+				  <guimenuitem>「保存」</guimenuitem> 
+</menuchoice>を選択します。または、ツールバー上の<guibutton>「保存」</guibutton>をクリックします。 
+ファイル名を指定しなかった場合は、<guilabel>「名前を付けて保存」</guilabel>ダイアログが表示されます。 
+<guilabel>「名前をつけて保存」</guilabel>ダイアログにファイル名を入力し、<guibutton>「了解」</guibutton>をクリック
+します。</para>
+		  </listitem>
+		  
+<listitem><para>新しいファイルを保存する場合、または既存のファイルを新しい名前で保存する場合は、<menuchoice> 
+<guimenu>「ファイル」</guimenu> <guimenuitem>「名前を付けて保存」</guimenuitem> </menuchoice>を選択します。 
+<guilabel>「名前を付けて保存」</guilabel> 
+ダイアログにファイル名を入力し、<guibutton>「了解」</guibutton>をクリックします。 </para>
+		  </listitem>
+		  <listitem><para><application>&app;</application> 
+で現在開いている全ファイルを保存するには、<menuchoice> <guimenu>「ファイル」</guimenu> 
+<guimenuitem>「すべてを保存」</guimenuitem> </menuchoice>を選択します。</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"> 
+		<title>テキストを編集する</title>
+		<para>ファイルのテキストを編集する方法は次のとおりです。</para>
+		<itemizedlist>
+		  <listitem><para>キーボードから新しいテキストを入力 </para>
+		  </listitem>
+		  <listitem><para><keycap>削除</keycap> キーを使ってテキストを削除
+				</para>
+		  </listitem>
+		  
+<listitem><para>メニューから<guimenuitem>「切り取り」</guimenuitem>、<guimenuitem>「コピー」</guimenuitem>、<guimenuitem>「貼り付け」</guimenuitem>、<guimenuitem>「削除」</guimenuitem>などを選択してテキストを編集 </para>
+		  </listitem>
+		</itemizedlist>
+		<para>テキストをマウスで選択すると、選択した内容が自動的にバッファにコピーされます。 
+テキストの選択後、次の操作を行うことができます。
+		 </para>
+		<itemizedlist>
+		  <listitem><para>選択したテキストをファイルから削除し、バッファに移動するには、<menuchoice> 
+<guimenu>「編集」</guimenu> <guimenuitem>「切り取り」</guimenuitem>
+				  </menuchoice>を選択します。</para>
+		  </listitem>
+		  <listitem><para>選択したテキストをファイルから永久に削除するには、<menuchoice> 
+<guimenu>「編集」</guimenu> <guimenuitem>「削除」</guimenuitem>
+				  </menuchoice>を選択します。</para>
+		  </listitem>
+		  
+<listitem><para>バッファの内容をカーソル位置に挿入するには、マウスの中央ボタンをクリックするか、<menuchoice> 
+<guimenu>「編集」</guimenu>
+				  <guimenuitem>「貼り付け」</guimenuitem> 
+</menuchoice>を選択します。ファイルにテキストを貼り付けるには、事前にテキストの切り取りまたはコピーを行う必要があ
+ります。</para>
+		  </listitem>
+		  <listitem><para>ファイル内のすべてのテキストを選択するには、<menuchoice> 
+<guimenu>「編集」</guimenu> <guimenuitem>「すべて選択」</guimenuitem> </menuchoice>を選択します。</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits"> 
+		<title>編集内容を元に戻す、または繰り返し実行する</title>
+		<para>編集内容を元に戻すには、<menuchoice> <guimenu>「編集」</guimenu> 
+<guimenuitem>「元に戻す」</guimenuitem>
+			 </menuchoice>を選択します。編集内容を繰り返し実行するには、<menuchoice> 
+<guimenu>「編集」</guimenu> <guimenuitem>「やり直す」</guimenuitem>
+			 
+</menuchoice>を選択します。元に戻せる回数は、<guilabel>「設定」</guilabel>ダイアログのタブ付きセクション<xref 
+linkend="gedit-prefs-undo"/>の<guilabel>「元に戻せる回数」</guilabel>で設定できます。 
+元に戻せる回数は、デフォルトでは 25 回です。</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"> 
+		<title>テキストを検索する</title>
+		<para>ファイル内の特定の文字列を検索するには、次のようにします。</para>
+		<orderedlist>
+		  <listitem><para><menuchoice> <guimenu>「検索」</guimenu>
+				  <guimenuitem>「検索」</guimenuitem> 
+</menuchoice>を選択して<guilabel>「検索」</guilabel> ダイアログを表示します。</para>
+		  </listitem>
+		  <listitem><para><guilabel>「検索」</guilabel>フィールドに検索文字列を入力します。</para>
+		  </listitem>
+		  <listitem><para>次のオプションから 1 つを選択します。</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>「ドキュメントの先頭から検索」</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>「現在のカーソル位置から検索」
+					 </guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  
+<listitem><para>英文の大文字と小文字を区別して、入力した文字列と一致する文字列だけを検索する場合は、<guilabel>「大
+小文字を区別する」</guilabel>オプションを選択します。 </para>
+		  </listitem>
+		  
+<listitem><para><guibutton>「検索」</guibutton>をクリックすると、入力した文字列と一致する最初の文字列が検索されま
+す。 文字列が見つかった場合は、カーソルが該当位置に移動し、その文字列が反転表示されます。</para>
+		  </listitem>
+		  
+<listitem><para>次の一致文字列を検索するには、<guibutton>「次を検索」</guibutton>をクリックします。</para>
+		  </listitem>
+		  <listitem><para>検索を終了するには、<guibutton>「閉じる」</guibutton>をクリックします。 </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text"> 
+		<title>テキストを検索して置換する</title>
+		<para>ファイル内の特定の文字列を検索して別の文字列に置換するには、次のようにします。</para>
+		<orderedlist>
+		  <listitem><para><menuchoice> <guimenu>「検索」</guimenu>
+				  <guimenuitem>「置換」</guimenuitem> 
+</menuchoice>を選択して<guilabel>「置換」</guilabel>ダイアログを表示します。</para>
+		  </listitem>
+		  <listitem><para><guilabel>「検索」</guilabel>フィールドに検索文字列を入力します。</para>
+		  </listitem>
+		  <listitem><para><guilabel>「置換」</guilabel>フィールドに置換後の文字列を入力します。</para>
+		  </listitem>
+		  <listitem><para>次のオプションから 1 つを選択します。</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>「ドキュメントの先頭から検索」</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>「現在のカーソル位置から検索」</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  
+<listitem><para>英文の大文字と小文字を区別して、入力した文字列と一致する文字列だけを検索する場合は、<guilabel>「大
+小文字を区別する」</guilabel>オプションを選択します。 </para>
+		  </listitem>
+		  
+<listitem><para><guibutton>「検索」</guibutton>をクリックすると、入力した文字列と一致する最初の文字列が検索されま
+す。 文字列が見つかった場合は、カーソルが該当位置に移動し、その文字列が反転表示されます。</para>
+		  </listitem>
+		  
+<listitem><para><guibutton>「置換」</guibutton>をクリックすると、検索文字列が<guilabel>「置換」</guilabel>フィール
+ドに入力した文字列で置き換えられます。 
+<guibutton>「すべて置換」</guibutton>をクリックすると、検索文字列に一致するすべての文字列が指定の文字列で置き換え
+られます。</para>
+		  </listitem>
+		  
+<listitem><para>次の一致文字列を検索するには、<guibutton>「次を検索」</guibutton>をクリックします。</para>
+		  </listitem>
+		  <listitem><para>検索を終了するには、<guibutton>「閉じる」</guibutton>をクリックします。 </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"> 
+		<title>URI からファイルを開く</title>
+		<para>URI (Uniform Resource Identifier) 
+からファイルを開くには、次のいずれかの操作を行います。</para>
+		<itemizedlist>
+		<listitem>
+		<para><menuchoice> <guimenu>「ファイル」</guimenu> <guimenuitem>「場所を開く」</guimenuitem> 
+		</menuchoice>を選択して<guilabel>「場所を開く」</guilabel>ダイアログを表示します。 
+開きたいファイルの URI を入力し、<guibutton>「開く」</guibutton>をクリックします。</para>
+		</listitem>
+		<listitem>
+		<para>コマンドラインに <command>gedit <replaceable>http://...</replaceable></command> 
+と入力し、<keycap>リターン</keycap> キーを押します。<replaceable>http://...</replaceable> は、開きたいファイルの 
+URI です。</para>
+		</listitem>
+		</itemizedlist>
+		<para>指定の URI のファイルが読み取り専用モードで開きます。</para>
+	 </sect2>	 
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"> 
+		<title>コマンド出力をファイルにパイプする</title>
+		<para><application>&app;</application> 
+を使って、コマンド出力をテキストファイルにパイプすることができます。 たとえば、<command>ls
+		  </command> コマンドの出力をテキストファイルにパイプするには、「<command>ls | 
+gedit</command>」と入力して、<keycap>リターン</keycap> キーを押します。</para>
+		<para><command>ls</command> 
+コマンドの結果が新しいテキストファイルに出力され、<application>&app;</application> 
+ウィンドウに表示されます。</para>
+		<para>シェル出力プラグインを使って、コマンド出力を現在のファイルにパイプすることもできます。 
+シェル出力プラグインの使用手順は次のとおりです。</para>
+		<orderedlist>
+		  <listitem><para>シェル出力プラグインを読み込みます。 プラグインを読み込む方法については、<xref 
+linkend="gedit-install-plugins"/>を参照してください。</para>
+		  </listitem>
+
+		  <listitem><para><menuchoice> <guimenu>「編集」</guimenu> 
+<guimenuitem>「シェル出力を挿入」</guimenuitem> </menuchoice>
+				を選択して<guilabel>「シェル出力」</guilabel>ダイアログを表示します。
+				</para>
+		  </listitem>
+		  
+<listitem><para><guilabel>「シェルコマンド」</guilabel>フィールドに実行したいシェルコマンドを入力します。</para>
+		  </listitem>
+		  
+<listitem><para>必要に応じて<guilabel>「ワーキングディレクトリ」</guilabel>フィールドの内容を編集します。 
+デフォルトでは、シェル出力プラグインは、ユーザーが指定したコマンドを現在のディレクトリで実行します。</para>
+		  </listitem>
+		  <listitem><para><guibutton>「実行」</guibutton>をクリックします。 
+指定のコマンドが実行され、現在のファイルにテキスト出力が挿入されます。
+				</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line"> 
+		<title>特定の行に移動する</title>
+		<para>現在のファイル内の特定の行に移動するには、次のようにします。</para>
+		<orderedlist>
+		  <listitem><para><menuchoice> <guimenu>「検索」</guimenu> <guimenuitem>「指定行へ移動」</guimenuitem> 
+</menuchoice>を選択して<guilabel>「指定行へ移動」</guilabel>ダイアログを表示します。</para>
+		  </listitem>
+		  
+<listitem><para><guilabel>「行番号」</guilabel>フィールドにカーソルの移動先の行番号を入力します。</para>
+		  </listitem>
+		  <listitem><para><guibutton>「指定行へ移動」</guibutton>をクリックします。 
+指定の行にカーソルが移動します。</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode">
+		<title>入力モードを変更する</title>
+		
+<para>入力モードを変更するには、テキストウィンドウ内を右クリックし、<guimenuitem>「入力方法」</guimenuitem>を選択
+します。 
+		<guimenuitem>「Unicode 
+制御文字を挿入」</guimenuitem>メニュー項目から、非ラテン文字セットの操作に役立つ文字レイアウトオプションを
+選択できます。</para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file"> 
+		<title>ファイルを印刷する</title>
+		<para><application>&app;</application> を使って、次の印刷処理を実行できます。</para>
+		<itemizedlist>
+		  <listitem><para>ファイルをプリンタに出力 </para>
+		  </listitem>
+		  <listitem><para>印刷コマンドの実行結果をファイルに出力</para>
+		  </listitem>
+		</itemizedlist>
+		<para>ファイルに出力する場合、その内容は印刷用のフォーマットで送信されます。 
+最も一般的なフォーマットは PostScript と PDF (Portable Document Format) です。</para>
+		  
+		<para>出力するページをプレビューするには、<menuchoice> <guimenu>「ファイル」</guimenu>
+		<guimenuitem>「印刷プレビュー」</guimenuitem> </menuchoice>を選択して<guilabel>「gedit - 
+印刷プレビュー」</guilabel>ダイアログを表示します。</para>
+		  
+		<para>現在のファイルをプリンタまたはファイルに出力するには、<menuchoice> 
+<guimenu>「ファイル」</guimenu>
+		<guimenuitem>「印刷」</guimenuitem> 
+</menuchoice>を選択して<guilabel>「印刷」</guilabel>ダイアログを表示します。</para>
+				
+		<para><guilabel>「印刷」</guilabel>ダイアログでは、次の印刷オプションを指定できます。</para>
+		
+		<sect3 id="print-dialog-job">
+		<title>「ジョブ」タブ付きセクション</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>「印刷範囲」</guilabel> </term> 
+			 <listitem>
+				<para>次のいずれかのオプションを選択して、出力するページ数を指定します。</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>「全て」</guilabel></para>
+				<para>ファイルの全ページを出力します。</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>「選択」</guilabel></para>
+				<para>選択したテキストだけを出力します。 
+このオプションは、テキストを選択している場合にかぎり有効です。</para>
+				</listitem>
+								
+				</itemizedlist>
+				<para>初期値: <guilabel>「全て」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>「部数」</guilabel> </term> 
+			 <listitem>
+				<para>出力するファイルのコピー数を指定します。</para>
+				<para>初期値: 1</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>「並べかえ」</guilabel> </term> 
+			 <listitem>
+				
+<para>ファイルを複数の部数出力する場合は、このオプションを選択すると各部ごとにソートされます。</para>
+				<para>初期値:未選択</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-printer">
+		<title>「プリンタ」タブ付きセクション</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>「プリンタ」</guilabel> </term> 
+			 <listitem>
+				
+<para>ドロップダウンリストボックスからファイルの出力先プリンタを選択します。</para>
+				<para>初期値: <guilabel>「Gnome default printer (PS/lpr)」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>「設定」</guilabel> </term> 
+			 <listitem>
+				<para>ドロップダウンリストボックスからプリンタ設定を選択します。 
+プリンタを設定するには、<guibutton>「設定編集」</guibutton>をクリックします。</para>
+				<para>初期値:default</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>「場所」</guilabel> </term> 
+			 <listitem>
+				<para>ドロップダウンリストボックスから出力先を選択します。 
+ファイルをプリンタに出力する場合は<guilabel>「lpr」</guilabel>を選択します。 
+ファイルを出力ファイルに出力する場合は<guilabel>「ファイル」</guilabel>を選択します。 
+<guilabel>「ファイル」</guilabel>を選択した場合は、テキストボックス内に出力ファイル名を入力します。</para>
+				<para>初期値: <guilabel>「lpr」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-paper">
+		<title>「用紙」タブ付きセクション</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>「用紙サイズ」</guilabel> </term> 
+			 <listitem>
+				<para>ドロップダウンリストからファイルを出力する用紙のサイズを選択します。</para>
+				<para>初期値: <guilabel>「A4」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>「幅」</guilabel> </term> 
+			 <listitem>
+				<para>用紙の幅を指定します。 
+<guilabel>「センチメートル」</guilabel>ドロップダウンリストボックスでは、用紙サイズの単位を変更できます。</para>
+				<para>初期値: 21.00 センチメートル</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>「高さ」</guilabel> </term> 
+			 <listitem>
+				<para>用紙の高さを指定します。</para>
+				<para>初期値: 29.70 センチメートル</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>「ページ方向」</guilabel> </term> 
+			 <listitem>
+				<para>ドロップダウンリストボックスから用紙の向きを選択します。</para>
+				<para>初期値: <guilabel>「縦長」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry><term><guilabel>「レイアウト」</guilabel> </term> 
+			 <listitem>
+				
+<para>ドロップダウンリストボックスからページレイアウトを選択します。<guilabel>「プレビュー」</guilabel>領域には、
+選択した各レイアウトのプレビューが表示されます。</para>
+				<para>初期値: <guilabel>「プレーン」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+		
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins"> 
+		<title>&app; プラグインの使用方法</title>
+		<para>プラグインは、アプリケーションの機能を拡張する追加プログラムです。 
+<application>&app;</application> プラグインを使って、<application> &app;</application> 
+ウィンドウ内でテキスト編集関連のさまざまな機能を実行することができます。 
+次の表に、使用可能なプラグインを一覧表示します。</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>プラグイン名</para></entry>
+			<entry colname="col2" valign="top"><para>目的</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII テーブル</para></entry>
+			<entry><para>ASCII テーブルを含むダイアログを表示します。 ASCII 
+テーブルを使って、ファイル内に文字を挿入できます。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>ファイルを比較</para></entry>
+			<entry><para>2 つのファイルを比較し、それらの差分を新しい <application>&app;</application> 
+ウィンドウに表示します。
+			このプラグインは、<application>diff</application> 
+プログラムを使ってファイルを比較します。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para>CVS コミットコマンド関連のログメッセージを開きます。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>日付/時間を挿入</para></entry>
+			<entry><para>ファイルに現在日時を挿入します。</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>シェル出力</para></entry>
+			<entry><para>ファイルにシェルコマンドの出力内容を挿入します。 </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>タグリスト</para></entry>
+			<entry><para>共通タグのリストを含むダイアログを表示します。 
+このダイアログを使って、ファイルにタグを挿入できます。 </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>ユーザー名</para></entry>
+			<entry><para>ファイルに現在のユーザーのユーザー名を挿入します。 </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>ワードカウント</para></entry>
+			
+<entry><para>現在のファイルの行数、ワード数、空白文字を含めた文字数、空白文字を含めない文字数、バイト数をカウント
+します。 結果は<guilabel>「ワードカウント」</guilabel>ウィンドウに表示されます。 </para></entry>
+		</row>
+ 
+	
+		</tbody>
+		</tgroup>
+		</informaltable>
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"> 
+		<title>&app; プラグインを読み込む</title>
+		<para><application>&app;</application> プラグインを読み込むには、<menuchoice> 
+		  <guimenu>「編集」</guimenu>
+		  <guimenuitem>「プラグインマネージャ」</guimenuitem> 
+		  </menuchoice>を選択します。 
+		<guilabel>「プラグインマネージャ」</guilabel>ダイアログには、次の情報が表示されます。</para>
+		<itemizedlist>
+		  <listitem><para>使用可能なプラグインの一覧。</para>
+		  </listitem>
+		  
+<listitem><para><guibutton>「プラグインを設定」</guibutton>ボタン。このボタンを使って、設定可能なプラグインの設定
+ダイアログを開くことができます。</para>
+		  </listitem>
+		  
+<listitem><para>各プラグインの簡単な説明。説明を表示するには、一覧からプラグインを選択します。</para>
+		  </listitem>	
+		  <listitem><para>プラグインの作成者とモジュール名に関する詳細情報。</para>
+		  </listitem>	  
+		</itemizedlist>
+		<para>プラグインを読み込むには、そのプラグインの名前の横のチェックボックスを選択します。 
+プラグインは、次の表のように、適切な <application>&app;</application> メニューに追加されます。</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>プラグイン名</para></entry>
+			<entry colname="col2" valign="top"><para>追加先メニュー</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII テーブル</para></entry>
+			<entry><para><menuchoice><guimenu>「表示」</guimenu> <guimenuitem>「ASCII 
+テーブル」</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>ファイルを比較</para></entry>
+			<entry><para><menuchoice><guimenu>「ファイル」</guimenu> <guimenuitem>「
+ファイルを比較」</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para><menuchoice><guimenu>「ファイル」</guimenu> <guimenuitem>「CVS ChangeLog 
+を開く」</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>ワードカウント</para></entry>
+			<entry><para><menuchoice><guimenu>「検索」</guimenu> 
+<guimenuitem>「ワードカウント」</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>シェル出力</para></entry>
+			<entry><para><menuchoice><guimenu>「編集」</guimenu> 
+<guimenuitem>「シェル出力を挿入」</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>タグリスト</para></entry>
+			<entry><para><menuchoice><guimenu>「表示」</guimenu> 
+<guimenuitem>「タグリスト」</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>日付/時間を挿入</para></entry>
+			<entry><para><menuchoice><guimenu>「編集」</guimenu> 
+<guimenuitem>「日付/時間を挿入」</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>ユーザー名</para></entry>
+			<entry><para><menuchoice><guimenu>「編集」</guimenu> 
+<guimenuitem>「ユーザー名を挿入」</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+
+		
+<para>プラグインを削除するには、そのプラグインの名前の横のチェックボックスの選択を解除します。</para>
+		
+<para><guilabel>「プラグインマネージャ」</guilabel>ダイアログを閉じるには、<guibutton>「閉じる」</guibutton>をクリ
+ックします。</para>
+	 </sect2>
+	 
+	 <sect2 id="gedit-customize-bars">
+	 <title>ツールバーとステータスバーをカスタマイズする</title>
+	 
+	 <para>ツールバーの表示または非表示を切り替えるには、<menuchoice> <guimenu>「表示」</guimenu>
+		  <guimenuitem>「ツールバー」</guimenuitem> </menuchoice>を選択します。 
+ツールバーの表示方式をカスタマイズするには、<menuchoice> <guimenu>「表示」</guimenu>
+		  <guisubmenu>「ツールバーをカスタマイズ」</guisubmenu> 
+</menuchoice>を選択し、次のいずれかのメニュー項目を選択します。</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>「デスクトップのデフォルト」</guimenuitem>:</para>
+		  <para>デフォルトのツールバーを表示します。</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>「アイコン」</guimenuitem></para>
+		  <para>アイコンのみを表示します。</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>「アイコンとテキスト」</guimenuitem>:</para>
+		  <para>アイコンとテキストを表示します。</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>ステータスバーの表示または非表示を切り替えるには、<menuchoice> <guimenu>「表示」</guimenu>
+		  <guimenuitem>「ステータスバー」</guimenuitem> </menuchoice>を選択します。 
+ステータスバーの表示方式をカスタマイズするには、<menuchoice> <guimenu>「表示」</guimenu>
+		  <guisubmenu>「ステータスバーのカスタマイズ」</guisubmenu> 
+</menuchoice>を選択し、次のいずれかのメニュー項目を選択します。</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>「カーソル位置を表示」</guimenuitem>:</para>
+		  <para>カーソル位置の行番号および列番号を表示します。</para>
+		  <para>初期値:選択</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>「編集モードを表示」</guimenuitem>:</para>
+		  <para>編集モードを表示します。エディタが挿入モードになっている場合は、ステータスバーに INS 
+と表示されます。 編集きモードになっている場合は OVR と表示されます。</para>
+		  <para>初期値:選択</para>
+		  </listitem>
+		  </itemizedlist>
+	 
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs"> 
+<title>設定</title>
+	   
+	 <para><application>&app;</application> の設定を行うには、<menuchoice> 
+		<guimenu>「編集」</guimenu>
+		<guimenuitem>「設定」</guimenuitem> 
+		
+</menuchoice>を選択します。<guilabel>「設定」</guilabel>ダイアログには次のカテゴリがあります。</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+	 
+	 
+	 <sect2 id="gedit-prefs-editor">
+	 <title>「エディタ」</title>
+	 <para><guilabel>「エディタ」</guilabel>カテゴリには次のサブカテゴリがあります。</para>
+	 
+	 	<sect3 id="gedit-prefs-fontsandcolors">
+	 		<title>「フォントと色」</title>
+	 		<variablelist>
+		   <varlistentry> <term><guilabel>「デフォルトテーマのフォントを使用」</guilabel> </term> 
+			 <listitem>
+				<para><application>&app;</application> 
+テキストウィンドウ内でデフォルトのシステムフォントを使用する場合に選択します。 </para>
+				<para>初期値:未選択</para>
+			 </listitem>
+		  	</varlistentry>			
+		   <varlistentry> <term><guilabel>「エディタが使用するフォント」</guilabel> </term> 
+			 <listitem>
+				<para><application>&app;</application> 
+でテキストの表示に使用されるフォントを表示します。 
+				
+ボタンをクリックして、テキストの表示に使用するフォントの種類、スタイル、サイズを指定します。 </para>
+				<para>初期値: 「Courier」、「Medium」、12 ポイント</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>「デフォルトテーマの色を使用」</guilabel> </term> 
+			 <listitem>
+				<para><application>&app;</application> 
+テキストウィンドウ内でデフォルトのテーマカラーを使用する場合に選択します。 </para>
+				<para>初期値:選択</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>「テキストの色」</guilabel> </term> 
+			 <listitem>
+				
+<para><guibutton>「テキストの色」</guibutton>ボタンをクリックして、色選択ダイアログを表示します。 
+<application>&app;</application> テキストウィンドウ内のテキストの色を選択します。 </para>
+				<para>初期値:黒</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>「背景色」</guilabel> </term> 
+			 <listitem>
+				
+<para><guibutton>「背景色」</guibutton>ボタンをクリックして、色選択ダイアログを表示します。 
+<application>&app;</application> テキストウィンドウの背景色を選択します。 </para>
+				<para>初期値:白</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>「選択したテキスト色」</guilabel> </term> 
+			 <listitem>
+				
+<para><guibutton>「選択したテキスト色」</guibutton>ボタンをクリックして、色選択ダイアログを表示します。 
+選択したテキストの表示に使用する色を選択します。
+				</para>
+				<para>初期値:白</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>「色選択」</guilabel> </term> 
+			 <listitem>
+				
+<para><guibutton>「色選択」</guibutton>ボタンをクリックして、色選択ダイアログを表示します。 
+選択したテキストの強調表示に使用する背景色を選択します。
+				 </para>
+				<para>初期値:青</para>
+			 </listitem>
+		  	</varlistentry>			
+			</variablelist>
+		</sect3>
+	
+	 	<sect3 id="gedit-prefs-tabs">
+	 		<title>「タブ」</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>タブの幅を設定します。</guilabel> </term> 
+			 <listitem>
+				<para>このボックスを使って、<keycap>タブ</keycap> 
+キーを押したときに挿入される空白の幅を指定します。 </para>
+				<para>初期値: 8 文字</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+				
+	 	<sect3 id="gedit-prefs-wrapmode">
+	 		<title>「折り返しモード」</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>「折り返しモード」</guilabel> </term> 
+			 <listitem>
+				<para>次のいずれかのオプションを選択して、<application>&app;</application> 
+ウィンドウ内のテキストの折り返しモードを指定します。
+</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>「行を折り返さない」</guilabel></para>
+				<para>行を折り返さない場合に選択します。 
+入力したテキストは、<keycap>リターン</keycap> キーを押すまで 1 行で表示されます。</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>「単語の境界で行を折り返す」</guilabel></para>
+				
+<para>ウィンドウの端に達したとき、テキストを単語単位で次の行に折り返す場合に選択します。 </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>「文字の境界で行を折り返す」</guilabel></para>
+				
+<para>ウィンドウの端に達したとき、テキストを文字単位で次の行に折り返す場合に選択します。 </para>
+				</listitem>								
+				</itemizedlist>
+				<para>初期値: <guilabel>「単語の境界で行を折り返す」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-linenumbers">
+	 		<title>「行番号」</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>「行番号を表示」</guilabel> </term> 
+			 <listitem>
+				<para><application>&app;</application> 
+ウィンドウの左端に行番号を表示したい場合に選択します。 </para>
+				<para>初期値:未選択</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+		
+	 	<sect3 id="gedit-prefs-save">
+	 		<title>「保存」</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>「保存前にバックアップコピーファイルを作成」</guilabel> 
+</term> 
+			 <listitem>
+				<para>ファイルを保存するたびにバックアップコピーを作成したい場合に選択します。 
+ファイルのバックアップコピーには、<filename>.bak</filename> という拡張子が付けられます。</para>
+				<para>初期値:選択</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>「現在編集中のファイルを自動保存」</guilabel> </term> 
+			 <listitem>
+				<para>現在のファイルを定期的に自動保存したい場合に選択します。 
+このボックスを使って、ファイルの保存間隔を指定します。</para>
+				<para>初期値:未選択、10 分</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>「保存時」</guilabel> </term> 
+			 <listitem>
+				<para>次のいずれかの保存オプションを選択します。</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>「常に UTF-8 を使用(速い)」</guilabel></para>
+				<para>UTF-8 符号化方式を使ってファイルを保存する場合に選択します。</para>
+				</listitem>
+				<listitem>
+				
+<para><guilabel>「可能な場合は現在のロケールのエンコーディングを使用」</guilabel></para>
+				<para>現在のロケールを使ってファイルを保存する場合に選択します。 </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>「可能な場合は元のエンコーディングを使用」</guilabel></para>
+				
+<para>ファイルがすでに現在のロケールに保存されている場合、現在のロケールを使ってこのファイルを保存します。</para>
+				</listitem>								
+				</itemizedlist>
+				<para>初期値: <guilabel>「常に UTF-8 を使用 (速い)」</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-undo">
+	 		<title>「元に戻す」</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>「元に戻せる回数」</guilabel> </term> 
+			 <listitem>
+				<para>元に戻すことができる編集アクションの回数を設定する場合に選択します。 
+このボックスを使って、元に戻すことができるアクション回数の最大値を指定します。 </para>
+				<para>初期値:選択、25 回</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 		
+	 </sect2>	 
+	 
+	<sect2 id="gedit-prefs-print">
+	 <title>「印刷」</title>
+	 <para><guilabel>「印刷」</guilabel>カテゴリには次のサブカテゴリがあります。</para>
+	 
+	 	<sect3 id="gedit-prefs-page">
+	 		<title>「ページ」</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>「ページヘッダーを印刷」</guilabel> </term> 
+			 <listitem>
+				<para>印刷するページごとにヘッダーを追加したい場合に選択します。 
+ヘッダーを設定することはできません。 </para>
+				<para>初期値:選択</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>「行を折り返す（文字境界にて）」</guilabel> </term> 
+			 <listitem>
+				<para>ファイルの印刷時にテキストを文字単位で自動的に折り返します。 
+行番号を付ける際には、折り返し行は 1 行と認識されます。
+				 </para>
+				<para>初期値:選択</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>「行番号を印刷」</guilabel>
+			 </term> 
+			 <listitem>
+				<para>ファイルを印刷する時に行番号を印刷したい場合に選択します。 
+このボックスを使って、行番号の印刷頻度 (5 行おき、10 行おきなど) を指定します。 </para>
+				<para>初期値:未選択、1行</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+		
+		<sect3 id="gedit-prefs-fonts">
+	 		<title>「フォント」</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>「本文を出力するときに使用するフォント」</guilabel> </term> 
+			 <listitem>
+				
+<para>このボタンをクリックして、ファイルの本体テキストの印刷に使用するフォントを選択します。</para>
+				<para>初期値:HGゴシックB 9.0</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>「ヘッダーを印刷するときに使用するフォント」</guilabel> </term> 
+			 <listitem>
+				
+<para>このボタンをクリックして、ファイルのヘッダーの印刷に使用するフォントを選択します。</para>
+				<para>初期値:HGゴシックB 11.0</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>「行番号を印刷するときに使用するフォント」</guilabel>
+			 </term> 
+			 <listitem>
+				
+<para>このボタンをクリックして、行番号の印刷に使用するフォントを選択します。</para>
+				<para>初期値:HGゴシックB 8.0</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para><application>&app;</application> 
+からファイルを印刷するときに使用するフォントをデフォルトのフォントに戻したい場合は、<guibutton>「デフォルトのフォ
+ントを復元」</guibutton>ボタンをクリックします。</para>
+		</sect3>
+		
+	 </sect2>	 
+	 	 	 
+	 
+ </sect1>
+</article>

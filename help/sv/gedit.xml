@@ -1,0 +1,1075 @@
+<?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "August 2002">
+  <!ENTITY app "gedit">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="sv">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo>
+	 <title>Manual f&ouml;r &app;, version&nbsp;&manrevision;</title>
+	 <copyright> 
+		<year>2003</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright> 
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+	 <publisher> 
+		<publishername> Dokumentationsprojekt f&ouml;r GNOME </publishername>
+	 </publisher>
+	 &legal; 
+	 <authorgroup>
+		<author> 
+		  <firstname>Suns</firstname> 
+		  <surname>GNOME-dokumentationsteam</surname> 
+		  <affiliation> 
+			 <orgname>Sun Microsystems</orgname> 
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author> 
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname> 
+		  <affiliation> 
+			 <orgname>Dokumentationsprojekt f&ouml;r GNOME</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+	  <orgname>Latin Translation Team</orgname> 
+	  <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision> 
+		  <revnumber>Manual f&ouml;r &app;, version &manrevision;</revnumber>
+		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Suns GNOME-dokumentationsteam
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Dokumentationsprojekt f&ouml;r GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manual f&ouml;r gedit, version 2.1</revnumber>
+		  <date>Juni 2002</date> 
+		  <revdescription> 
+			 <para role="author">Suns GNOME-dokumentationsteam
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Dokumentationsprojekt f&ouml;r GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manual f&ouml;r gedit, version 2.0</revnumber>
+		  <date>Mars 2002</date> 
+		  <revdescription> 
+			 <para role="author">Suns GNOME-dokumentationsteam
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Dokumentationsprojekt f&ouml;r GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit, version 1.0</revnumber>
+		  <date>2000</date> 
+		  <revdescription> 
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">Dokumentationsprojekt f&ouml;r GNOME</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo> I den h&auml;r manualen beskrivs version &appversion; av &app;.
+		</releaseinfo>
+	 <legalnotice> 
+		<title>Feedback</title>
+		<para>Om du vill rapportera ett fel eller ge f&ouml;rslag om programmet &app;
+		  eller den h&auml;r manualen f&ouml;ljer du instruktionerna p&aring;
+		  <ulink url="ghelp:gnome-feedback" type="help">GNOME:s feedbacksida</ulink>. 
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gedit-intro"> 
+
+	 <title>Introduktion</title>
+	 <para>Programmet <application>&app;</application> &auml;r ett enkelt
+		textredigeringsprogram. Du kan anv&auml;nda <application>&app;</application> f&ouml;r att skapa och
+		redigera textfiler. Om du anv&auml;nder <application>&app;</application> med till&auml;ggsprogram
+		kan du utf&ouml;ra en m&auml;ngd textredigeringsrelaterade uppgifter i
+		<application>&app;</application>-f&ouml;nstret.</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started"> 
+	 <title>Komma ig&aring;ng</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start"> 
+		<title>S&aring; h&auml;r startar du &app;</title>
+		<para>Du kan starta <application>&app;</application> p&aring; f&ouml;ljande s&auml;tt:</para>
+		<variablelist>
+    		<varlistentry>
+    		<term><guimenu>Program</guimenu>-menyn</term>
+    		<listitem>
+    		<para>V&auml;lj 
+    		<menuchoice>
+    		<guisubmenu>Tillbeh&ouml;r</guisubmenu>
+    		<guimenuitem>Textredigerare</guimenuitem>
+    		</menuchoice>. </para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry>
+    		<term>Kommandoraden</term>
+    		<listitem>
+    		<para>Skriv <command>gedit</command> och tryck sedan p&aring; <keycap>Retur</keycap>.</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+	
+	<sect2 id="gedit-when-you-start">
+	
+		<title>N&auml;r du startar &app;</title>	
+		<para>N&auml;r du startar <application>&app;</application> visas f&ouml;ljande f&ouml;nster:</para>
+	
+		<figure id="gedit-window"> 
+		  <title>&app;-f&ouml;nstret</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject><phrase>Visar huvudf&ouml;nstret f&ouml;r gedit. </phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+	
+		<para><application>&app;</application>-f&ouml;nstret inneh&aring;ller f&ouml;ljande
+		  element: </para>
+		<variablelist>
+		  <varlistentry> <term>Menyrad</term> 
+			 <listitem>
+				<para>Menyerna i menyraden inneh&aring;ller alla de kommandon som du beh&ouml;ver
+				  f&ouml;r att arbeta med filer i <application>&app;</application>.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Verktygsrad</term> 
+			 <listitem>
+				<para> Verktygsraden inneh&aring;ller en del av de kommandon som du kommer
+				  &aring;t fr&aring;n menyraden.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Visningsomr&aring;de</term> 
+			 <listitem>
+				<para> Visningsomr&aring;det inneh&aring;ller texten i den fil som du redigerar. </para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Statusrad</term> 
+			 <listitem>
+				<para>I statusraden visas information om aktuell
+				  <application>&app;</application>-aktivitet och dessutom information om
+				  menyalternativen. </para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>N&auml;r du h&ouml;gerklickar i <application>&app;</application>-f&ouml;nstret
+		  visas en popupmeny. Popupmenyn inneh&aring;ller
+		  de vanligaste textredigeringskommandona. </para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"> 
+		<title>S&aring; h&auml;r &ouml;ppnar du en fil</title>
+		<para>Om du vill &ouml;ppna en fil v&auml;ljer du 
+		  <menuchoice> <guimenu>Arkiv</guimenu> <guimenuitem>&Ouml;ppna</guimenuitem>
+			 </menuchoice>
+		  f&ouml;r att visa dialogrutan <guilabel>&Ouml;ppna fil</guilabel>. Markera den fil som
+		  du vill &ouml;ppna och klicka sedan p&aring; <guibutton>OK</guibutton>. Filen
+		  visas i  <application>&app;</application>-f&ouml;nstret. </para>
+		<para>Du kan &ouml;ppna flera filer i <application>&app;</application>.
+		  Programmet visar en fil i taget i programf&ouml;nstret. F&ouml;r
+		  varje &ouml;ppen fil l&auml;ggs en flik till i f&ouml;nstret. Om du vill visa en annan
+		  &ouml;ppen fil klickar du p&aring; motsvarande flik. Om du vill skapa ett nytt
+		  <application> &app;</application>-f&ouml;nster f&ouml;r varje fil du &ouml;ppnar drar du
+		  motsvarande flik till skrivbordsbakgrunden. Du kan ocks&aring; anv&auml;nda menyn
+		  <guimenu>Dokument</guimenu> f&ouml;r att g&aring; mellan &ouml;ppna filer.</para>
+		<para>Programmet registrerar s&ouml;kv&auml;garna och filnamnen f&ouml;r de senaste
+		  fyra filerna som du har redigerat och visar filerna som menyalternativ under <menuchoice>
+		  <guimenu>Arkiv</guimenu> <guisubmenu>Senaste filer</guisubmenu> </menuchoice>. 
+		  </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"> 
+		<title>S&aring; h&auml;r &ouml;ppnar du flera filer fr&aring;n en kommandorad</title>
+		<para>Du kan k&ouml;ra <application>&app;</application> fr&aring;n en kommandorad
+		  och &ouml;ppna enstaka filer eller flera filer p&aring; en g&aring;ng. Om du vill &ouml;ppna flera filer fr&aring;n en kommandorad
+		  skriver du f&ouml;ljande kommando och trycker p&aring; <keycap>Retur</keycap>:</para>
+		<para><command>gedit <replaceable>fil1.txt fil2.txt fil3.txt</replaceable></command></para>
+		<para>N&auml;r programmet startar visas de filer som du har angett i <application>&app;</application>-f&ouml;nstret.</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage"> 
+	 <title>Anv&auml;ndning</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file"> 
+		<title>S&aring; h&auml;r skapar du en ny fil</title>
+		<para>Om du vill skapa en ny fil v&auml;ljer du 
+		  <menuchoice> <guimenu>Arkiv</guimenu> <guimenuitem>Ny</guimenuitem>
+			 </menuchoice>. En ny fil visas i
+		  <application>&app;</application>-f&ouml;nstret.</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file"> 
+		<title>S&aring; h&auml;r sparar du en fil</title>
+		<para>Du kan spara filer p&aring; n&aring;got av f&ouml;ljande s&auml;tt:</para>
+		<itemizedlist>
+		  <listitem><para>Om du vill spara &auml;ndringar i den aktuella filen v&auml;ljer du 
+				<menuchoice> <guimenu>Arkiv</guimenu>
+				  <guimenuitem>Spara</guimenuitem> </menuchoice> eller klickar p&aring; <guibutton>Spara</guibutton>
+				  i verktygsraden. Om filen inte har n&aring;got filnamn visar <application>&app;</application> 
+					 dialogrutan <guilabel>Spara som</guilabel>. Ange ett filnamn i dialogrutan 
+<guilabel>Spara
+				som</guilabel> och klicka sedan p&aring; <guibutton>OK</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Om du vill spara en ny eller befintlig fil med ett nytt filnamn v&auml;ljer du  
+				<menuchoice> <guimenu>Arkiv</guimenu> <guimenuitem>Spara
+				  som</guimenuitem> </menuchoice>. Ange ett filnamn i dialogrutan <guilabel>Spara
+				som</guilabel> och klicka sedan p&aring; <guibutton>OK</guibutton>. </para>
+		  </listitem>
+		  <listitem><para>Om du vill spara alla filer som &auml;r &ouml;ppna i
+				<application>&app;</application> v&auml;ljer du 
+				<menuchoice> <guimenu>Arkiv</guimenu> <guimenuitem>Spara
+				  	 alla</guimenuitem> </menuchoice>.</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"> 
+		<title>S&aring; h&auml;r redigerar du text</title>
+		<para>Du kan redigera texten i en fil p&aring; n&aring;got av f&ouml;ljande s&auml;tt:</para>
+		<itemizedlist>
+		  <listitem><para>Infoga ny text med hj&auml;lp av tangentbordet. </para>
+		  </listitem>
+		  <listitem><para>Anv&auml;nd tangenten <keycap>Delete</keycap> f&ouml;r att ta bort text.
+				</para>
+		  </listitem>
+		  <listitem><para>Anv&auml;nd menyalternativen <guimenuitem>Klipp ut</guimenuitem>,
+				<guimenuitem>Kopiera</guimenuitem>, <guimenuitem>Klistra in</guimenuitem> och 
+				<guimenuitem>Ta bort</guimenuitem> f&ouml;r att redigera text. </para>
+		  </listitem>
+		</itemizedlist>
+		<para>N&auml;r du markerar text med musen kopierar
+		  <application>&app;</application> automatiskt den markerade texten till en
+		  buffert. N&auml;r du har markerat texten kan du g&ouml;ra n&aring;got av f&ouml;ljande:
+		  </para>
+		<itemizedlist>
+		  <listitem><para>Om du vill ta bort den markerade texten fr&aring;n filen och flytta
+				 den till en buffert v&auml;ljer du 
+				<menuchoice> <guimenu>Redigera</guimenu> <guimenuitem>Klipp ut</guimenuitem>
+				  </menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Om du vill ta bort den markerade texten permanent fr&aring;n filen v&auml;ljer du 
+				<menuchoice> <guimenu>Redigera</guimenu> <guimenuitem>Ta bort</guimenuitem>
+				  </menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Om du vill infoga inneh&aring;llet i bufferten vid mark&ouml;rens
+				position klickar du med mellersta musknappen eller v&auml;ljer 
+				<menuchoice> <guimenu>Redigera</guimenu>
+				  <guimenuitem>Klistra in</guimenuitem> </menuchoice>. Du m&aring;ste klippa ut eller kopiera texten
+				innan du kan klistra in den i filen.</para>
+		  </listitem>
+		  <listitem><para>Om du vill markera all text i filen v&auml;ljer du 
+				<menuchoice> <guimenu>Redigera</guimenu> <guimenuitem>Markera
+				  allt</guimenuitem> </menuchoice>. </para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits"> 
+		<title>S&aring; h&auml;r &aring;ngrar eller upprepar du redigeringar</title>
+		<para>Om du vill &aring;ngra en redigering v&auml;ljer du 
+		  <menuchoice> <guimenu>Redigera</guimenu> <guimenuitem>&Aring;ngra</guimenuitem>
+			 </menuchoice>. Om du vill upprepa en redigering v&auml;ljer du 
+		  <menuchoice> <guimenu>Redigera</guimenu> <guimenuitem>G&ouml;r om</guimenuitem>
+			 </menuchoice>. Antalet redigeringar som du kan &aring;ngra best&auml;ms av inst&auml;llningen
+		  <guilabel>Begr&auml;nsa antalet &aring;ngrade &auml;ndringar till</guilabel>, som finns p&aring;
+		  fliken <xref linkend="gedit-prefs-undo"/> i dialogrutan
+		  <guilabel>Inst&auml;llningar</guilabel>. Som standard kan du &aring;ngra 
+		  25 redigeringar.</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"> 
+		<title>S&aring; h&auml;r s&ouml;ker du efter text</title>
+		<para>Om du vill s&ouml;ka efter en str&auml;ng i en fil f&ouml;ljer du stegen nedan:</para>
+		<orderedlist>
+		  <listitem><para>V&auml;lj 
+				<menuchoice> <guimenu>S&ouml;k</guimenu>
+				  <guimenuitem>S&ouml;k</guimenuitem> </menuchoice>
+				f&ouml;r att visa dialogrutan <guilabel>S&ouml;k</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Ange vilken str&auml;ng du vill s&ouml;ka efter i f&auml;ltet
+				<guilabel>S&ouml;k efter</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Markera n&aring;got av f&ouml;ljande alternativ:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>S&ouml;k fr&aring;n b&ouml;rjan av
+					 dokumentet</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>S&ouml;k fr&aring;n mark&ouml;rens position
+					 </guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>Markera alternativet <guilabel>G&ouml;r skillnad p&aring; gemener/VERSALER</guilabel>
+				om du bara vill s&ouml;ka efter f&ouml;rekomster av str&auml;ngen som matchar gemener och versaler i den 
+				angivna str&auml;ngen. </para>
+		  </listitem>
+		  <listitem><para>Klicka p&aring; <guibutton>S&ouml;k</guibutton> f&ouml;r att s&ouml;ka igenom filen
+				efter f&ouml;rsta f&ouml;rekomsten av str&auml;ngen. Om <application>&app;</application>
+				hittar str&auml;ngen flyttas mark&ouml;ren till str&auml;ngen och str&auml;ngen
+				markeras.</para>
+		  </listitem>
+		  <listitem><para>Om du vill s&ouml;ka efter n&auml;sta f&ouml;rekomst av str&auml;ngen klickar du p&aring;
+				<guibutton>S&ouml;k n&auml;sta</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Om du vill avsluta s&ouml;kningen klickar du p&aring;
+				<guibutton>St&auml;ng</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text"> 
+		<title>S&aring; h&auml;r s&ouml;ker du efter och ers&auml;tter text</title>
+		<para>Om du vill s&ouml;ka efter en str&auml;ng och ers&auml;tta den med en
+		  annan str&auml;ng f&ouml;ljer du stegen nedan:</para>
+		<orderedlist>
+		  <listitem><para>V&auml;lj 
+				<menuchoice> <guimenu>S&ouml;k</guimenu>
+				  <guimenuitem>Ers&auml;tt</guimenuitem> </menuchoice>
+				f&ouml;r att visa dialogrutan <guilabel>Ers&auml;tt</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Ange vilken str&auml;ng du vill s&ouml;ka efter i f&auml;ltet
+				<guilabel>S&ouml;k efter</guilabel>. </para>
+		  </listitem>
+		  <listitem><para>Ange vilken str&auml;ng du vill ers&auml;tta den hittade str&auml;ngen med
+				i f&auml;ltet <guilabel>Ers&auml;tt med</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Markera n&aring;got av f&ouml;ljande alternativ:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>S&ouml;k fr&aring;n b&ouml;rjan av
+					 dokumentet</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>S&ouml;k fr&aring;n mark&ouml;rens position</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>Markera alternativet <guilabel>G&ouml;r skillnad p&aring; gemener/VERSALER</guilabel>
+				om du bara vill s&ouml;ka efter f&ouml;rekomster av str&auml;ngen som matchar gemener och versaler i den 
+				angivna str&auml;ngen. </para>
+		  </listitem>
+		  <listitem><para>Klicka p&aring; <guibutton>S&ouml;k</guibutton> f&ouml;r att s&ouml;ka igenom filen
+				efter f&ouml;rsta f&ouml;rekomsten av str&auml;ngen. Om <application>&app;</application>
+				hittar str&auml;ngen flyttas mark&ouml;ren till str&auml;ngen och str&auml;ngen 
+				markeras. </para>
+		  </listitem>
+		  <listitem><para>Klicka p&aring; <guibutton>Ers&auml;tt</guibutton> om du vill ers&auml;tta
+				str&auml;ngen med den text du har angett i f&auml;ltet <guilabel>Ers&auml;tt
+				med</guilabel>. Klicka p&aring; <guibutton>Ers&auml;tt alla</guibutton> om du vill ers&auml;tta alla
+				f&ouml;rekomster av str&auml;ngen.</para>
+		  </listitem>
+		  <listitem><para>Om du vill s&ouml;ka efter n&auml;sta f&ouml;rekomst av str&auml;ngen klickar du p&aring;
+				<guibutton>S&ouml;k n&auml;sta</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Om du vill avsluta s&ouml;kningen klickar du p&aring;
+				<guibutton>St&auml;ng</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"> 
+		<title>S&aring; h&auml;r &ouml;ppnar du en fil fr&aring;n en URI</title>
+		<para>Om du vill &ouml;ppna en fil fr&aring;n en URI (Uniform Resource Identifier) utf&ouml;r du n&aring;got av f&ouml;ljande steg:</para>
+		<itemizedlist>
+		<listitem>
+		<para>V&auml;lj <menuchoice> <guimenu>Arkiv</guimenu> <guimenuitem>&Ouml;ppna plats</guimenuitem> 
+		</menuchoice>om du vill visa dialogrutan <guilabel>&Ouml;ppna fr&aring;n URI</guilabel>. Ange URI:n f&ouml;r den 
+		fil du vill &ouml;ppna och klicka sedan p&aring; <guibutton>&Ouml;ppna</guibutton>.</para>
+		</listitem>
+		<listitem>
+		<para>Skriv <command>gedit <replaceable>http://...</replaceable></command> p&aring; kommandoraden, d&auml;r
+		<replaceable>http://...</replaceable> &auml;r URI:n f&ouml;r den fil som du vill &ouml;ppna, och tryck sedan p&aring;
+		<keycap>Retur</keycap>.</para>
+		</listitem>
+		</itemizedlist>
+		<para>Programmet &ouml;ppnar filen i skrivskyddat l&auml;ge.</para>
+	 </sect2>	 
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"> 
+		<title>S&aring; h&auml;r kopplar du utdata f&ouml;r ett kommando till en fil</title>
+		<para>Du kan anv&auml;nda <application>&app;</application> f&ouml;r att koppla utdata
+		  f&ouml;r ett kommando till en textfil. Om du till exempel vill koppla utdata f&ouml;r ett <command>ls
+		  </command>-kommando till en textfil skriver du <command>ls | gedit</command> och trycker p&aring;
+		  <keycap>Retur</keycap>.</para>
+		<para>Utdata f&ouml;r kommandot <command>ls</command> visas i en
+		  ny textfil i 
+<application>&app;</application>-f&ouml;nstret.</para>
+		<para>Du kan ocks&aring; anv&auml;nda till&auml;ggsprogrammet Shell Output f&ouml;r att koppla
+		  utdata f&ouml;r kommandot till aktuell fil. Om du vill anv&auml;nda till&auml;ggsprogrammet Shell Output utf&ouml;r du 
+			f&ouml;ljande steg:</para>
+		<orderedlist>
+		  <listitem><para>L&auml;s in till&auml;ggsprogrammet Shell Output. Mer information om hur du l&auml;ser in till&auml;ggsprogram finns i 
+			<xref linkend="gedit-install-plugins"/>.</para>
+		  </listitem>
+
+		  <listitem><para>V&auml;lj 
+				<menuchoice> <guimenu>Redigera</guimenu> <guimenuitem>Infoga 					Shell Output</guimenuitem> </menuchoice>
+				f&ouml;r att visa dialogrutan <guilabel>Shell Output</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Ange det skalkommando som du vill k&ouml;ra i f&auml;ltet
+				<guilabel>Skalkommando</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Redigera f&auml;ltet <guilabel>Arbetskatalog</guilabel>
+				om det beh&ouml;vs. Som standard k&ouml;r till&auml;ggsprogrammet Shell Output det kommando
+				som du anger i den aktuella katalogen.</para>
+		  </listitem>
+		  <listitem><para>Klicka p&aring; <guibutton>K&ouml;r</guibutton>. Till&auml;ggsprogrammet Shell Output k&ouml;r kommandot och infogar texten i den aktuella filen.
+				</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line">
+		<title>S&aring; h&auml;r g&aring;r du till en viss rad</title>
+		<para>Om du vill g&aring; till en viss rad i den aktuella filen f&ouml;ljer du stegen
+		  nedan:</para>
+		<orderedlist>
+		  <listitem><para>V&auml;lj 
+				<menuchoice> <guimenu>S&ouml;k</guimenu> <guimenuitem>G&aring; till
+				  rad</guimenuitem> </menuchoice>
+				f&ouml;r att visa dialogrutan <guilabel>G&aring; till rad</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Ange numret p&aring; den rad som du vill flytta
+				mark&ouml;ren till i f&auml;ltet <guilabel>Radnummer</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Klicka p&aring; <guibutton>G&aring; till rad</guibutton>. Mark&ouml;ren flyttas
+				till det angivna radnumret.</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode">
+		<title>S&aring; h&auml;r &auml;ndrar du inmatningsl&auml;ge</title>
+		<para>Om du vill &auml;ndra inmatningsl&auml;ge h&ouml;gerklickar du i textf&ouml;nstret och v&auml;ljer sedan <guimenuitem>Inmatningsmetoder</guimenuitem>. 
+		Med menyalternativet <guimenuitem>Infoga Unicode-kontrolltecken</guimenuitem> f&aring;r du tillg&aring;ng till alternativ f&ouml;r teckenlayout, 
+		 som kan vara anv&auml;ndbara n&auml;r du arbetar med icke-latinska teckenupps&auml;ttningar.</para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file"> 
+		<title>S&aring; h&auml;r skriver du ut en fil</title>
+		<para>Du kan anv&auml;nda <application>&app;</application> f&ouml;r att utf&ouml;ra
+		  f&ouml;ljande utskriftsoperationer:</para>
+		<itemizedlist>
+		  <listitem><para>Skriva ut en fil p&aring; en skrivare. </para>
+		  </listitem>
+		  <listitem><para>Skriva ut utdata f&ouml;r utskriftskommandot till en fil.</para>
+		  </listitem>
+		</itemizedlist>
+		<para>Om du skriver ut till en fil skickar <application>&app;</application>
+		  filens utdata till ett sidbeskrivningsspr&aring;k. De vanligaste sidbeskrivningsspr&aring;ken
+		  &auml;r PostScript och PDF (Portable Document Format).</para>
+		  
+		<para>Om du vill f&ouml;rhandsgranska sidorna som du ska skriva ut v&auml;ljer du
+		<menuchoice> <guimenu>Arkiv</guimenu>
+		<guimenuitem>F&ouml;rhandsgranska</guimenuitem> </menuchoice>f&ouml;r att visa dialogrutan <guilabel>gedit - F&ouml;rhandsgranskning
+		</guilabel>.</para>
+		  
+		<para>Om du vill skriva ut den aktuella filen till en skrivare eller en fil v&auml;ljer du 
+		<menuchoice> <guimenu>Arkiv</guimenu>
+		<guimenuitem>Skriv ut</guimenuitem> </menuchoice>
+		f&ouml;r att visa dialogrutan <guilabel>Skriv ut</guilabel>.</para>
+				
+		<para>I dialogrutan <guilabel>Skriv ut</guilabel> kan du ange f&ouml;ljande
+		utskriftsalternativ:</para>
+		
+		<sect3 id="print-dialog-job">
+		<title>Fliken Jobb</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Sidintervall</guilabel> </term> 
+			 <listitem>
+				<para>V&auml;lj n&aring;got av f&ouml;ljande alternativ f&ouml;r att ange det antal
+				sidor som ska skrivas ut:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Alla</guilabel></para>
+				<para>Markera det h&auml;r alternativet om du vill skriva ut alla sidor i filen.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Markering</guilabel></para>
+				<para>Markera det h&auml;r alternativet om du endast vill skriva ut markerad text. Alternativet
+				&auml;r bara tillg&auml;ngligt om du har markerat text.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Standard: <guilabel>Alla</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Kopior</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r rutan f&ouml;r att ange hur m&aring;nga kopior av filen du
+				vill skriva ut.</para>
+				<para>Standard: 1.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Kollationera</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill sortera de utskrivna kopiorna
+				n&auml;r du skriver ut flera kopior av en fil.</para>
+				<para>Standard: ej markerat.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-printer">
+		<title>Fliken Skrivare</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Skrivare</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r listrutan f&ouml;r att ange vilken skrivare du
+				vill anv&auml;nda.</para>
+				<para>Standard: <guilabel>Standardskrivaren i GNOME</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Inst&auml;llningar</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r listrutan f&ouml;r att ange skrivarinst&auml;llningar. Om du vill konfigurera
+				skrivaren klickar du p&aring; <guibutton>Konfigurera</guibutton>.</para>
+				<para>Standard: Standard.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Plats</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r listrutan f&ouml;r att ange utskriftsm&aring;l. Om du vill skriva ut
+				till en skrivare v&auml;ljer du <guilabel>lpr</guilabel>. Om du vill skriva ut till
+				en utskriftsfil v&auml;ljer du <guilabel>Fil</guilabel>. Om du v&auml;ljer <guilabel>Fil</guilabel>
+				anger du namnet p&aring; utdatafilen i textrutan.</para>
+				<para>Standard: <guilabel>lpr</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+		
+		<sect3 id="print-dialog-paper">
+		<title>Fliken Papper</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Pappersstorlek</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r listrutan om du vill 
+				ange pappersformat f&ouml;r utskriften.</para>
+				<para>Standard: <guilabel>A4</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Bredd</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r rotationsrutan om du vill ange pappersbredd. Anv&auml;nd listrutan
+				<guilabel>Centimeter</guilabel> om du vill &auml;ndra 
+				m&aring;ttenhet f&ouml;r pappersstorleken.</para>
+				<para>Standard: 21,00 centimeter.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>H&ouml;jd</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r rutan om du vill ange pappersh&ouml;jd.</para>
+				<para>Standard: 29,70 centimeter.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Sidorientering</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r listrutan om du vill ange sidorientering.</para>
+				<para>Standard: <guilabel>St&aring;ende</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Layout</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r listrutan om du vill ange sidlayout. En f&ouml;rhandsgranskning av
+				de valda layouterna visas i omr&aring;det <guilabel>F&ouml;rhandsgranska</guilabel>.</para>
+				<para>Standard: <guilabel>Enkel</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+		
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins"> 
+		<title>S&aring; h&auml;r anv&auml;nder du till&auml;ggsprogrammen i &app;</title>
+		<para>Till&auml;ggsprogram ut&ouml;kar funktionaliteten
+		  i ett program. Med till&auml;ggsprogrammen i <application>&app;</application> kan du 
+		  utf&ouml;ra en m&auml;ngd olika textrelaterade uppgifter fr&aring;n
+		  <application> &app;</application>-f&ouml;nstret. F&ouml;ljande tabell visar tillg&auml;ngliga till&auml;ggsprogram.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Namn p&aring; till&auml;ggsprogram</para></entry>
+			<entry colname="col2" valign="top"><para>Anv&auml;ndning</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII-tabell</para></entry>
+			<entry><para>Visar en dialogruta som inneh&aring;ller en ASCII-tabell. Du kan anv&auml;nda ASCII-tabellen f&ouml;r att infoga tecken i en fil.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>J&auml;mf&ouml;r filer</para></entry>
+			<entry><para>J&auml;mf&ouml;r tv&aring; filer och visar skillnaderna mellan filerna i ett nytt <application>&app;</application>-f&ouml;nster.
+			Det h&auml;r till&auml;ggsprogrammet anv&auml;nder <application>diff</application>-programmet f&ouml;r att j&auml;mf&ouml;ra filerna.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS-ChangeLog</para></entry>
+			<entry><para>&Ouml;ppnar loggmeddelanden som &auml;r associerade med CVS commit-kommandon.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Infoga datum/tid</para></entry>
+			<entry><para>Infogar aktuellt datum och aktuell tid i en fil.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Shell Output</para></entry>
+			<entry><para>Infogar textutdata f&ouml;r ett skalkommando i en fil. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Tagglista</para></entry>
+			<entry><para>Visar en dialogruta med en lista &ouml;ver vanliga taggar. Du kan anv&auml;nda dialogrutan om du vill 
+			infoga en tagg i en fil. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Anv&auml;ndarnamn</para></entry>
+			<entry><para>Infogar anv&auml;ndarnamnet p&aring; aktuell anv&auml;ndare i filen. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Ordr&auml;kning</para></entry>
+			<entry><para>R&auml;knar antalet rader, ord, tecken med blanksteg, tecken utan blanksteg och byte i aktuell fil. Till&auml;ggsprogrammet
+			visar resultaten i f&ouml;nstret <guilabel>R&auml;kna ord</guilabel>. </para></entry>
+		</row> 	
+		</tbody>
+		</tgroup>
+		</informaltable>
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"> 
+		<title>S&aring; h&auml;r l&auml;ser du in till&auml;ggsprogram till &app;</title>
+		<para>Om du vill l&auml;sa in till&auml;ggsprogram till <application>&app;</application> v&auml;ljer du 
+		  <menuchoice> 
+		  <guimenu>Redigera</guimenu>
+		  <guimenuitem>Till&auml;ggsprogramhanteraren</guimenuitem> 
+		  </menuchoice>. 
+		  Dialogrutan <guilabel>Till&auml;ggsprogramhanteraren</guilabel> visar f&ouml;ljande information:</para>
+		<itemizedlist>
+		  <listitem><para>En lista med tillg&auml;ngliga till&auml;ggsprogram.</para>
+		  </listitem>
+		  <listitem><para>Knappen <guibutton>Konfigurera till&auml;ggsprogarm</guibutton>. Du kan anv&auml;nda den h&auml;r knappen om du vill &ouml;ppna
+		  en konfigurationsdialogruta f&ouml;r de till&auml;ggsprogram som g&aring;r att konfigurera.</para>
+		  </listitem>
+		  <listitem><para>En kort beskrivning av varje till&auml;ggsprogram. Om du vill visa en beskrivning
+		  markerar du ett till&auml;ggsprogram i listan med till&auml;ggsprogram.</para>
+		  </listitem>	
+		  <listitem><para>Detaljer om f&ouml;rfattaren av till&auml;ggsprogrammet och namnet p&aring; modulen.</para>
+		  </listitem>	  
+		</itemizedlist>
+		<para>Om du vill l&auml;sa in ett till&auml;ggsprogram markerar du kryssrutan bredvid namnet p&aring; till&auml;ggsprogrammet. Programmet <application>&app;</application>
+		l&auml;gger till till&auml;ggsprogrammet i r&auml;tt <application>&app;</application>-meny, enligt f&ouml;ljande tabell.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Namn p&aring; till&auml;ggsprogram</para></entry>
+			<entry colname="col2" valign="top"><para>Tillagd i menyn</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>ASCII-tabell</para></entry>
+			<entry><para><menuchoice><guimenu>Visa</guimenu> <guimenuitem>ASCII-tabell</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>J&auml;mf&ouml;r filer</para></entry>
+			<entry><para><menuchoice><guimenu>Arkiv</guimenu> <guimenuitem>J&auml;mf&ouml;r filer</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS-ChangeLog</para></entry>
+			<entry><para><menuchoice><guimenu>Arkiv</guimenu> <guimenuitem>&Ouml;ppna CVS ChangeLog-filer</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Ordr&auml;kning</para></entry>
+			<entry><para><menuchoice><guimenu>S&ouml;k</guimenu> <guimenuitem>Ordr&auml;kning</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Shell Output</para></entry>
+			<entry><para><menuchoice><guimenu>Redigera</guimenu> <guimenuitem>Infoga Shell Output</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Tagglista</para></entry>
+			<entry><para><menuchoice><guimenu>Visa</guimenu> <guimenuitem>Tagglista</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Infoga datum/tid</para></entry>
+			<entry><para><menuchoice><guimenu>Redigera</guimenu> <guimenuitem>Infoga datum/tid</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Anv&auml;ndarnamn</para></entry>
+			<entry><para><menuchoice><guimenu>Redigera</guimenu> <guimenuitem>Infoga anv&auml;ndarnamn</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+
+		<para>Om du vill ta bort ett till&auml;ggsprogram avmarkerar du kryssrutan bredvid till&auml;ggsprogrammets namn.</para>
+		<para>Om du vill st&auml;nga dialogrutan <guilabel>Till&auml;ggsprogramhanteraren</guilabel>
+		  klickar du p&aring; <guibutton>St&auml;ng</guibutton>.</para>
+	 </sect2>
+	 
+	 <sect2 id="gedit-customize-bars">
+	 <title>S&aring; h&auml;r anpassar du verktygsraden och statusraden</title>
+	 
+	 <para>Om du vill visa eller d&ouml;lja verktygsraden v&auml;ljer du <menuchoice> <guimenu>Visa</guimenu>
+		  <guimenuitem>Verktygsrad</guimenuitem> </menuchoice>. Om du vill anpassa hur verktygsraden visas i 					<application>&app;</application> v&auml;ljer du <menuchoice> <guimenu>Visa</guimenu>
+		  <guisubmenu>Anpassa verktygsrad</guisubmenu> </menuchoice>och sedan n&aring;got av f&ouml;ljande  
+		  menyalternativ:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Systemstandard</guimenuitem></para>
+		  <para> Visar standardverktygsraden.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Ikon</guimenuitem></para>
+		  <para>Visar endast ikoner.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Ikon och text</guimenuitem>:</para>
+		  <para>Visar ikoner och text.</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>Om du vill visa eller d&ouml;lja statusraden v&auml;ljer du <menuchoice> <guimenu>Visa</guimenu>
+		  <guimenuitem>Statusrad</guimenuitem> </menuchoice>. Om du vill anpassa hur statusraden visas i 					<application>&app;</application> v&auml;ljer du <menuchoice> <guimenu>Visa</guimenu>
+		  <guisubmenu>Anpassa statusrad</guisubmenu> </menuchoice>och sedan ett av f&ouml;ljande  
+		  menyalternativ:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Visa mark&ouml;rposition</guimenuitem></para>
+		  <para>Visar rad- och kolumnnummer f&ouml;r mark&ouml;rens position.</para>
+		  <para>Standard: markerat.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Visa &ouml;verskrivningsl&auml;ge</guimenuitem></para>
+		  <para>Visa redigeringsl&auml;ge. Om redigeraren &auml;r i ins&auml;ttningsl&auml;ge visar statusraden ordet INS. Om redigeraren &auml;r i 
+		&ouml;verskrivningsl&auml;ge visar statusraden ordet  
+OVR.</para>
+		  <para>Standard: markerat.</para>
+		  </listitem>
+		  </itemizedlist>
+	 
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs"> 
+	 <title>Inst&auml;llningar</title>
+	   
+	 <para>Om du vill konfigurera <application>&app;</application> v&auml;ljer du
+		<menuchoice> 
+		<guimenu>Redigera</guimenu>
+		<guimenuitem>Inst&auml;llningar</guimenuitem> 
+		</menuchoice>. Dialogrutan <guilabel>Inst&auml;llningar</guilabel> inneh&aring;ller f&ouml;ljande
+		kategorier:</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+	 
+	 
+	 <sect2 id="gedit-prefs-editor">
+	 <title>Redigeringsprogram</title>
+	 <para>Kategorin <guilabel>Redigeringsprogram</guilabel> &auml;r uppdelad i f&ouml;ljande 
+	 underkategorier:</para>
+	 
+	 	<sect3 id="gedit-prefs-fontsandcolors">
+	 		<title>Typsnitt och f&auml;rger</title>
+	 		<variablelist>
+		   <varlistentry> <term><guilabel>Anv&auml;nd standardtypsnitt i tema</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill anv&auml;nda systemets standardtypsnitt f&ouml;r texten i <application>&app;</application>-textf&ouml;nstret. </para>
+				<para>Standard: ej markerat.</para>
+			 </listitem>
+		  	</varlistentry>			
+		   <varlistentry> <term><guilabel>Typsnitt som anv&auml;nds i redigeringsprogrammet</guilabel> </term> 
+			 <listitem>
+				<para>I detta f&auml;lt visas det typsnitt som anv&auml;nds i <application>&app;</application> f&ouml;r att visa text. 
+				Klicka p&aring; knappen om du vill ange typsnitt, stil och storlek. </para>
+				<para>Standard: Courier Medium, 12 punkter.</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>Anv&auml;nd temats standardf&auml;rger</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill anv&auml;nda standardtemaf&auml;rger i <application>&app;</application>-textf&ouml;nstret. </para>
+				<para>Standard: markerat.</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>Textf&auml;rg</guilabel> </term> 
+			 <listitem>
+				<para>Klicka p&aring; knappen <guibutton>Textf&auml;rg</guibutton> om du vill
+				  visa dialogrutan F&auml;rgv&auml;ljare. Markera den f&auml;rg som du vill anv&auml;nda f&ouml;r att visa text i <application>&app;</application>-textf&ouml;nstret. </para>
+				<para>Standard: svart.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Bakgrundsf&auml;rg</guilabel> </term> 
+			 <listitem>
+				<para>Klicka p&aring; knappen <guibutton>Bakgrundsf&auml;rg</guibutton> om du vill visa
+				  dialogrutan F&auml;rgv&auml;ljare. Markera en bakgrundsf&auml;rg f&ouml;r <application>&app;</application>-textf&ouml;nstret. </para>
+				<para>Standard: vit.</para>
+			 </listitem>
+		  	</varlistentry>			
+		  	<varlistentry> <term><guilabel>Markerad textf&auml;rg</guilabel> </term> 
+			 <listitem>
+				<para>Klicka p&aring; knappen <guibutton>Markerad textf&auml;rg</guibutton> om du vill visa
+				  dialogrutan F&auml;rgv&auml;ljare. Markera den f&auml;rg som du vill visa markerad text med.
+				</para>
+				<para>Standard: vit.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Markeringsf&auml;rg</guilabel> </term> 
+			 <listitem>
+				<para>Klicka p&aring; knappen <guibutton>Markeringsf&auml;rg</guibutton> om du vill visa
+				  dialogrutan F&auml;rgv&auml;ljare. Markera den bakgrundsf&auml;rg som du vill anv&auml;nda f&ouml;r markerade textomr&aring;den.
+				  </para>
+				<para>Standard: bl&aring;.</para>
+			 </listitem>
+		  	</varlistentry>			
+			</variablelist>
+		</sect3>
+	
+	 	<sect3 id="gedit-prefs-tabs">
+	 		<title>Tabbar</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>St&auml;ll in flikbreddar lika med</guilabel> </term> 
+			 <listitem>
+				<para>Anv&auml;nd den h&auml;r rutan om du vill ange bredden p&aring; det omr&aring;det som infogas av
+				  <application> &app;</application> n&auml;r du trycker p&aring;
+				  <keycap>Tabb</keycap>-tangenten. </para>
+				<para>Standard: 8 tecken.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+				
+	 	<sect3 id="gedit-prefs-wrapmode">
+	 		<title>Radbrytningsl&auml;ge</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Radbrytningsl&auml;ge</guilabel> </term> 
+			 <listitem>
+				<para>V&auml;lj n&aring;got av f&ouml;ljande alternativ om du vill ange hur text radbryts i  
+				<application>&app;</application>-f&ouml;nstret:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Radbryt aldrig rader</guilabel></para>
+				<para>Markera det h&auml;r alternativet om du inte vill anv&auml;nda radbrytningar. Texten visas p&aring; en enda rad tills du trycker p&aring; 
+				<keycap>Retur</keycap>.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Radbryt rader vid ordgr&auml;nser</guilabel></para>
+				<para>Markera det h&auml;r alternativet om du vill radbryta texten p&aring; ordniv&aring; n&auml;r raden inte f&aring;r plats i f&ouml;nstret. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Radbryt rader vid teckengr&auml;nser</guilabel></para>
+				<para>Markera det h&auml;r alternativet om du vill radbryta texten p&aring; teckenniv&aring; n&auml;r raden inte f&aring;r plats i f&ouml;nstret.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Standard: <guilabel>Radbryt rader vid teckengr&auml;nser</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-linenumbers">
+	 		<title>Radnummer</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Visa radnummer</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill visa radnummer till v&auml;nster om 
+				<application>&app;</application>-f&ouml;nstret. </para>
+				<para>Standard: ej markerat.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+		
+	 	<sect3 id="gedit-prefs-save">
+	 		<title>Spara</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Skapa s&auml;kerhetskopior av filer innan de sparas</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill skapa en s&auml;kerhetskopia av filen innan du sparar. S&auml;kerhetskopian 
+				f&aring;r filtill&auml;gget <filename>.bak</filename>.</para>
+				<para>Standard: ej markerat.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Spara aktuell fil automatisk var</guilabel> </term> 
+			 <listitem>
+				<para>Markera detta alternativ om du med j&auml;mna mellanrum vill spara den aktiva filen automatiskt. Anv&auml;nd den h&auml;r rotationsrutan
+				f&ouml;r att ange hur ofta filen ska sparas.</para>
+				<para>Standard: ej vald, 10 minuter.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>N&auml;r filer sparas</guilabel> </term> 
+			 <listitem>
+				<para>V&auml;lj n&aring;got av f&ouml;ljande alternativ f&ouml;r att spara:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Anv&auml;nd alltid UTF-8-kodning (snabbare)</guilabel></para>
+				<para>Markera detta alternativ om du vill spara filer i formatet UTF-8.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Anv&auml;nd aktuell spr&aring;kversion n&auml;r det &auml;r m&ouml;jligt</guilabel></para>
+				<para>Markera det h&auml;r alternativet om du vill spara filer genom att anv&auml;nda aktuell spr&aring;kversion. Du kan ange olika spr&aring;kversioner f&ouml;r
+				olika indatametoder. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Anv&auml;nd aktuell spr&aring;kversion endast om filen redan anv&auml;nder den</guilabel></para>
+				<para>Markera det h&auml;r alternativet om du vill spara en fil med aktuell spr&aring;kversion om filen redan har sparats i aktuell spr&aring;kversion.</para>
+				</listitem>								
+				</itemizedlist>
+				<para>Standard: <guilabel>Anv&auml;nd alltid UTF-8-kodning (snabbare)</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-undo">
+	 		<title>&Aring;ngra</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Begr&auml;nsa antalet &aring;ngrade &auml;ndringar till</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill ange en gr&auml;ns f&ouml;r antalet redigeringssteg 
+				som du kan &aring;ngra. Anv&auml;nd den h&auml;r rotationsrutan om du vill ange maximalt antal steg som du kan &aring;ngra. </para>
+				<para>Standard: vald, 25 steg.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 		
+	 </sect2>	 
+	 
+	<sect2 id="gedit-prefs-print">
+	 <title>Skriv ut</title>
+	 <para>Kategorin <guilabel>Skriv ut</guilabel> &auml;r uppdelad i f&ouml;ljande 
+	 underkategorier:</para>
+	 
+	 	<sect3 id="gedit-prefs-page">
+	 		<title>Sida</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Skriv ut sidhuvuden</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill infoga ett sidhuvud p&aring; de sidor du
+				  skriver ut. Sidhuvudet g&aring;r inte att konfigurera. </para>
+				<para>Standard: markerat.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Bryt rader (vid teckengr&auml;nser)</guilabel> </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du automatiskt vill radbryta text p&aring; teckenniv&aring; n&auml;r du skriver ut
+				  en fil. En radbruten rad r&auml;knas som en rad.
+				  </para>
+				<para>Standard: markerat.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Skriv ut radnummer var</guilabel>
+			 </term> 
+			 <listitem>
+				<para>Markera det h&auml;r alternativet om du vill infoga radnummer n&auml;r du skriver ut
+				  en fil. Anv&auml;nd den h&auml;r rotationsrutan om du vill ange hur ofta du vill skriva ut radnumren,
+				  till exempel var 5:e rad, var 10:e rad och s&aring; vidare. </para>
+				<para>Standard: ej vald, 1 rad.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+		
+		<sect3 id="gedit-prefs-fonts">
+	 		<title>Typsnitt</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Typsnitt som anv&auml;nds f&ouml;r utskrift av br&ouml;dtexten</guilabel> </term> 
+			 <listitem>
+				<para>Klicka p&aring; den h&auml;r knappen om du vill ange vilket typsnitt som ska anv&auml;ndas f&ouml;r att skriva ut br&ouml;dtexten i 
+				en fil.</para>
+				<para>Standard: Courier 9,0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Typsnitt som anv&auml;nds f&ouml;r att skriva ut huvuden</guilabel> </term> 
+			 <listitem>
+				<para>Klicka p&aring; den h&auml;r knappen om du vill ange vilket typsnitt som ska anv&auml;ndas f&ouml;r att skriva ut huvud i  
+				en fil.  </para>
+				<para>Standard: Helvetica 11,0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Typsnitt som anv&auml;nds f&ouml;r radnummer</guilabel>
+			 </term> 
+			 <listitem>
+				<para>Klicka p&aring; den h&auml;r knappen om du vill ange vilket typsnitt som ska anv&auml;ndas f&ouml;r att skriva ut radnummer.</para>
+				<para>Standard: Helvetica 8,0.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Om du vill &aring;terst&auml;lla standardtypsnitten som anv&auml;nds vid utskrift i <application>&app;</application>
+		klickar du p&aring; knappen <guibutton>&Aring;terst&auml;ll standardtypsnitt</guibutton>.</para>
+		</sect3>
+		
+	 </sect2>	 
+	 	 	 
+	 
+ </sect1>
+</article>
