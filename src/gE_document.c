@@ -49,6 +49,7 @@ gE_window *gE_window_new()
      		      GTK_SIGNAL_FUNC(destroy_window),
 		      &window->window);
      
+  gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
   gtk_window_set_title (GTK_WINDOW (window->window), gEdit_ID);
   gtk_widget_set_usize(GTK_WIDGET(window->window), 595, 390);
   gtk_container_border_width (GTK_CONTAINER (window->window), 0);
