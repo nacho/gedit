@@ -22,6 +22,7 @@
 typedef struct
 {
   gint (*create) ( gint context, gchar *title );
+  gint (*open) ( gint context, gchar *title );
   void (*show) ( gint id );
   gchar* (*filename) ( gint id );
   gint (*current) ( gint context );

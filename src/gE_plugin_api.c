@@ -53,3 +53,9 @@ gchar *gE_plugin_filename( gint docid )
   else
   	return document->filename;
 }
+
+char *gE_plugin_text_get( gint docid )
+{
+  gE_document *document = (gE_document *) GINT_TO_POINTER( docid );
+  return gtk_editable_get_chars( GTK_EDITABLE( document->text ), 0, -1 );
+}

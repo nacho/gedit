@@ -62,9 +62,9 @@ void tab_toggle_cback (GtkWidget *widget, gE_window *window);
 
 #if PLUGIN_TEST
   /* Plugins */
-  
   void start_diff (GtkWidget *widget, gE_data *data);
   void start_cvsdiff (GtkWidget *widget, gE_data *data);
+  void start_reverse (GtkWidget *widget, gE_data *data);
 #endif
 
 /* Auto indent */

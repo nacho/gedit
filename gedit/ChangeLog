@@ -1,3 +1,24 @@
+1998-06-30  Chris Lahey  <clahey@umich.edu>
+
+	* main.h:
+	* reverse.c (main): New file
+	* Makefile.am (reverse_plugin_SOURCES): 
+	* gE_document.c (start_reverse): 
+	(start_plugin): 
+	(start_cvsdiff): 
+	(start_reverse): Added reverse plugin.  Also simplified the code
+	at the end of gE_document.c a bit.
+	Made gedit aware of where plugins are installed.
+
+	* plugin.c :
+	* plugin.h :
+	* client.c :
+	* client.h :
+	* reverse.c :
+	* diff.c :
+	* cvsdiff.c :
+	A few new plugin functions.
+
 1998-06-28  Evan Lawrence <evan@worldpath.net>
 
 	* Fixed bug I added in my last change that caused gedit to sigsegv when

@@ -1,4 +1,4 @@
-/* client.h - libraries for acting as a plugin.
+/* diff.c - diff plugin.
  *
  * Copyright (C) 1998 Chris Lahey.
  *
@@ -17,19 +17,35 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __CLIENT_H__
-#define __CLIENT_H__
+#include <gtk/gtk.h>
 
+#include "client.h"
 #include <glib.h>
 
-gint client_init( gint *argc, gchar **argv[] );
-gint client_document_current( gint context );
-gchar *client_document_filename( gint docid );
-gint client_document_new( gint context, gchar *title );
-gint client_document_open( gint context, gchar *title );
-void client_text_append( gint docid, gchar *buff, gint length );
-void client_document_show( gint docid );
-void client_finish( gint context );
-gchar *client_text_get( gint docid );
+int main( int argc, char *argv[] )
+{
+  int docid;
+  int length;
+  int context;
+  int i;
+  gchar *buff;
 
-#endif
+  context = client_init( &argc, &argv );
+
+  docid = client_document_current( context );
+  length = strlen( buff = client_text_get( docid ) );
+
+  for( i=0; i < ( length / 2 ); i++ )
+    {
+      char temp = buff[i];
+      buff[i] = buff[length - i - 1];
+      buff[length - i - 1] = temp;
+    }
+  docid = client_document_new( context, "reversed file" );
+  client_text_append( docid, buff, length );
+  
+  client_document_show( docid );
+  client_finish( context );
+  
+  exit(0);
+}

@@ -138,7 +138,7 @@ void call_diff( GtkWidget *widget, gpointer data )
     }
   close( fdpipe[1] );
 
-  docid = client_document_new( context );
+  docid = client_document_new( context, "difference" );
   
   length = 1;
   while( length > 0 )

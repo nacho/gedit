@@ -9,6 +9,7 @@
 #include <gnome.h>
 #endif
 
+#define PLUGIN_TEST
 #include "main.h"
 #include "toolbar.h"
 
@@ -144,6 +145,8 @@ GnomeUIInfo gedit_plugins_menu []= {
   { GNOME_APP_UI_ITEM, N_("Diff"), NULL, start_diff, data, NULL,
     GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
   { GNOME_APP_UI_ITEM, N_("CVS Diff"), NULL, start_cvsdiff, data, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ITEM, N_("Reverse"), NULL, start_reverse, data, NULL,
     GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
   { GNOME_APP_UI_ENDOFINFO}
 };

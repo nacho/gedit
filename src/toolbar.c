@@ -119,8 +119,13 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 	while (tbdp->callback != NULL) {
 		gtk_toolbar_append_item(
 			GTK_TOOLBAR(toolbar),
+#ifdef WITHOUT_GNOME
 			tbdp->text,
 			tbdp->tooltip_text,
+#else
+			_(tbdp->text),
+			_(tbdp->tooltip_text),
+#endif
 			tbdp->tooltip_private_text,
 #ifdef WITHOUT_GNOME
 			new_pixmap(tbdp->icon, gw->window, toolbar),

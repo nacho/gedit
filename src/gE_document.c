@@ -298,31 +298,32 @@ void gE_show_version()
 }
 
 #if PLUGIN_TEST
-void start_diff( GtkWidget *widget, gE_data *data )
+
+void start_plugin( GtkWidget *widget, gchar *name, gE_data *data )
 {
   plugin_callback_struct callbacks;
-  plugin *plug = plugin_new( "/usr/local/bin/diff-plugin" );
+  plugin *plug = plugin_new( name );
 
   callbacks.document.create = gE_plugin_create;
   callbacks.text.append = gE_plugin_append;
   callbacks.document.show = gE_plugin_show;
   callbacks.document.current = gE_plugin_current;
   callbacks.document.filename = gE_plugin_filename;
+  callbacks.text.get = gE_plugin_text_get;
   
   plugin_register( plug, &callbacks, GPOINTER_TO_INT( data->window ) );
 }
 
+void start_diff( GtkWidget *widget, gE_data *data )
+{
+  start_plugin( widget, BINDIR "/diff-plugin", data );
+}
 void start_cvsdiff( GtkWidget *widget, gE_data *data )
 {
-  plugin_callback_struct callbacks;
-  plugin *plug = plugin_new( "/usr/local/bin/cvsdiff-plugin" );
-
-  callbacks.document.create = gE_plugin_create;
-  callbacks.text.append = gE_plugin_append;
-  callbacks.document.show = gE_plugin_show;
-  callbacks.document.current = gE_plugin_current;
-  callbacks.document.filename = gE_plugin_filename;
-
-  plugin_register( plug, &callbacks, GPOINTER_TO_INT( data->window ) );
+  start_plugin( widget, BINDIR "/cvsdiff-plugin", data );
+}
+void start_reverse( GtkWidget *widget, gE_data *data )
+{
+  start_plugin( widget, BINDIR "/reverse-plugin", data );
 }
 #endif

@@ -27,6 +27,7 @@ extern "C" {
   void gE_plugin_show( gint docid );
   int gE_plugin_current( gint context );
   char *gE_plugin_filename( gint docid );
+  char *gE_plugin_text_get( gint docid );
 
 #ifdef __cplusplus
 }

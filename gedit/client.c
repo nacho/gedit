@@ -31,14 +31,18 @@ static int getnumber( int fd )
   buff += sizeof( int );
   while( length -= read( fd, buff - length, length ) )
     /* Empty statement */;
-  /*  printf( "To: %d\n", number );*/
+#ifdef DEBUG
+  printf( "To: %d\n", number );
+#endif
   return number;
 }
 
 static void putnumber( int fd, int number )
 {
   write( fd, &number, sizeof( number ) );
-  /*  printf( "From: %d\n", number );*/
+#ifdef DEBUG
+  printf( "From: %d\n", number );
+#endif
 }
 
 static int fd;
@@ -54,6 +58,11 @@ gint client_init( gint *argc, gchar **argv[] )
       _exit(1);
     }
 
+  if( *argc > 5 && ! strcmp( (*argv)[5], "-query" ) )
+    {
+      
+    }
+
   fd = atoi( (*argv)[2] );
   fdsend = atoi( (*argv)[3] );
   fddata = atoi( (*argv)[4] );
@@ -63,7 +72,9 @@ gint client_init( gint *argc, gchar **argv[] )
 
 gint client_document_current( gint context )
 {
-  /*  printf( "From: c\n" );*/
+#ifdef DEBUG
+  printf( "From: c\n" );
+#endif
   write( fdsend, "c", 1 );
   putnumber( fdsend, context );
   return getnumber( fddata );
@@ -73,31 +84,61 @@ gchar *client_document_filename( gint docid )
 {
   gchar *filename;
   gint length;
-  /*  printf( "From: f\n" );*/
+#ifdef DEBUG
+  printf( "From: f\n" );
+#endif
   write( fdsend, "f", 1 );
   putnumber( fdsend, docid );
   length = getnumber( fddata );
   filename = g_malloc0( length + 1 );
   filename[ read( fddata, filename, length ) ] = 0;
-  /*  printf( "To: %s\n", filename );*/
+#ifdef DEBUG
+  printf( "To: %s\n", filename );
+#endif
   return filename;
 }
 
-gint client_document_new( gint context )
+gint client_document_new( gint context, gchar *title )
 {
-  /*  printf( "From: n\n" );*/
+#ifdef DEBUG
+  printf( "From: n\n" );
+#endif
   write( fdsend, "n", 1 );
   putnumber( fdsend, context );
+  putnumber( fdsend, strlen( title ) );
+  write( fdsend, title, strlen( title ) );
+#ifdef DEBUG
+  printf( "From: %s\n", title );
+#endif
+  return getnumber( fddata );
+}
+
+gint client_document_open( gint context, gchar *title )
+{
+#ifdef DEBUG
+  printf( "From: o\n" );
+#endif
+  write( fdsend, "o", 1 );
+  putnumber( fdsend, context );
+  putnumber( fdsend, strlen( title ) );
+  write( fdsend, title, strlen( title ) );
+#ifdef DEBUG
+  printf( "From: %s\n", title );
+#endif
   return getnumber( fddata );
 }
 
 void client_text_append( gint docid, gchar *buff, gint length )
 {
-  /*  printf( "From: a\n" );*/
+#ifdef DEBUG
+  printf( "From: a\n" );
+#endif
   write( fdsend, "a", 1 );
   putnumber( fdsend, docid );
   putnumber( fdsend, length );
-  /*  printf( "From: %s\n", buff );*/
+#ifdef DEBUG
+  printf( "From: %s\n", buff );
+#endif
   write( fdsend, buff, length );
 }
 
@@ -105,25 +146,34 @@ gchar *client_text_get( gint docid )
 {
   gchar *buffer;
   gint length;
-  /*  printf( "From: g\n" );*/
+#ifdef DEBUG
+  printf( "From: g\n" );
+#endif
   write( fdsend, "g", 1 );
   putnumber( fdsend, docid );
   length = getnumber( fddata );
   buffer = g_malloc0( length + 1 );
   buffer[ read( fddata, buffer, length ) ] = 0;
-  /*  printf( "To: %s\n", buffer );*/
+#ifdef DEBUG
+  printf( "To: %s\n", buffer );
+#endif
   return buffer;
 }
 
 void client_document_show( gint docid )
 {
-  /*  printf( "From: s\n" );*/
+#ifdef DEBUG
+  printf( "From: s\n" );
+#endif
   write( fdsend, "s", 1 );
   putnumber( fdsend, docid );
 }
 
 void client_finish( gint context )
 {
-  /*  printf( "From: d\n" );*/
+#ifdef DEBUG
+  printf( "From: d\n" );
+#endif
   write( fdsend, "d", 1 );
 }
+

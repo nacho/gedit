@@ -75,7 +75,7 @@ int main( int argc, char *argv[] )
     }
   close( fdpipe[1] );
 
-  docid = client_document_new( context );
+  docid = client_document_new( context, "CVS difference" );
 
   length = 1;
   while( length > 0 )
