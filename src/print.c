@@ -22,10 +22,6 @@
  *   Chema Celorio <chema@celorio.com>
  */ 
 
-/*
-#define GEDIT_PRINT_SELECTION
-*/
-
 #include <config.h>
 #include <gnome.h>
 
@@ -145,8 +141,8 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	/* Do we need to call master new with orientation ???
 	   I guess so, but it is printing fine now. Chema*/
 	pji->master = gnome_print_master_new();
-	gnome_print_master_set_paper( pji->master, pji->paper);
-	pji->pc = gnome_print_master_get_context(pji->master);
+	gnome_print_master_set_paper (pji->master, pji->paper);
+	pji->pc = gnome_print_master_get_context (pji->master);
 	g_return_if_fail(pji->pc != NULL);
 	
 	/* We need to calculate the number of pages before running
@@ -160,16 +156,13 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	if (file_printpreview)
 	{
 		gint selection_flag;
-#ifdef GEDIT_PRINT_SELECTION		
 		guint start_pos, end_pos;
 
 		if (!gedit_view_get_selection (pji->view, &start_pos, &end_pos))
 			selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
 		else
-#endif
 			selection_flag = GNOME_PRINT_RANGE_SELECTION;
 		
-
 		dialog = gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
 		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
 							  GNOME_PRINT_RANGE_ALL |
@@ -177,7 +170,6 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 							  selection_flag,
 							  1, pji->pages, "A",
 							  _("Pages")/* Translators: As in [Range] Pages from:[x]  to*/);
-
 		switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 		case GNOME_PRINT_PRINT:
 			break;
@@ -200,7 +192,6 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 
 		pji->range = gnome_print_dialog_get_range_page ( GNOME_PRINT_DIALOG (dialog), &pji->print_first, &pji->print_last);
 
-#ifdef GEDIT_PRINT_SELECTION		
 		if (pji->range == GNOME_PRINT_RANGE_SELECTION)
 		{
 			g_free (pji->buffer);
@@ -220,7 +211,6 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 				 pji->pages);
 			*/
 		}
-#endif		
 		gnome_dialog_close (GNOME_DIALOG (dialog));
 	}
 	else
@@ -238,7 +228,10 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 
 		print_document (doc, pji, NULL);
 		title = g_strdup_printf (_("gedit (%s): Print Preview"), pji->filename);
-		preview = gnome_print_master_preview_new_with_orientation (pji->master, title, !pji->orientation);
+		preview = gnome_print_master_preview_new_with_orientation
+			(pji->master,
+			 title,
+			 !pji->orientation);
 		g_free (title);
 		gtk_signal_connect (GTK_OBJECT(preview), "destroy",
 				    GTK_SIGNAL_FUNC(preview_destroy_cb), pji);
@@ -247,11 +240,12 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	else
 	{
 		if (printer)
-			gnome_print_master_set_printer(pji->master, printer);
+			gnome_print_master_set_printer (pji->master, printer);
 		print_document (doc, pji, printer);
 		gnome_print_master_print (pji->master);
 	}
-	
+
+
 	print_pji_destroy (pji);
 	
 /*	FIXME : we need to set the parent of the dialog to be the active window,
@@ -351,9 +345,14 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 	}
 	print_end_job (pji->pc);
 	g_free (pji->temp);
-		
-	gnome_print_context_close (pji->pc);
+
+	
 	gnome_print_master_close (pji->master);
+
+
+	/*
+	gtk_object_unref (GTK_OBJECT (pji->pc));
+	*/
 
 }
 
