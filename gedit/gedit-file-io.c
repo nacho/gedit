@@ -32,7 +32,6 @@
 #include "gedit-file-io.h"
 #include "gedit-utils.h"
 
-
 GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
 
@@ -254,7 +253,7 @@ void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_all_as_cb (GtkWidget *widget, gpointer cbdata);
 
-void file_close_cb(GtkWidget *widget, gpointer cbdata);
+void file_close_cb (GtkWidget *widget, gpointer cbdata);
 void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
 
 
@@ -534,6 +533,7 @@ file_save_all_as_destroy (GtkWidget *w, GtkFileSelection *fs)
 /*
  * save all as callback
  */
+
 void 
 file_save_all_as_cb (GtkWidget *widget, gpointer cbdata)
 {
@@ -554,8 +554,6 @@ file_save_all_as_cb (GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show(fs);
 	g_free (title);	
 }
-
-
 
 /*
  * file close callback (used from menus.c)
@@ -708,3 +706,8 @@ clear_text (gedit_view *view)
 }
 
 #endif /* #if 0 */
+
+
+
+
+
