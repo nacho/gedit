@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AC_PACKAGE_NAME AC_PACKAGE_VERSION\n"
-"POT-Creation-Date: 2002-07-22 14:50+0900\n"
-"PO-Revision-Date: 2002-07-22 06:01+0900\n"
+"POT-Creation-Date: 2002-08-16 17:11+0900\n"
+"PO-Revision-Date: 2002-08-16 08:14+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
@@ -251,7 +251,7 @@ msgid ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
-"도구 막대 버튼의 스타일을 지정합니다. 시스템의 기본 스타일을 사용하려면 "
+"도구 막대 단추의 스타일을 지정합니다. 시스템의 기본 스타일을 사용하려면 "
 "\"GEDIT_TOOLBAR_SYSTEM\"을, 아이콘만 보이려면 \"GEDIT_TOOLBAR_ICONS\"를 아이"
 "콘과 글자를 모두 보이려면 \"GEDIT_TOOLBAR_ICONS_AND_TEXT\"를 값으로 사용할 "
 "수 있습니다.  대소문자를 가리기 때문에 여기에 적힌대로 완벽히 입력해야 합니"
@@ -290,7 +290,7 @@ msgstr ""
 
 #: data/gedit.schemas.in.h:42
 msgid "Toolbar Buttons Style"
-msgstr "도구 막대 버튼 스타일"
+msgstr "도구 막대 단추 스타일"
 
 #: data/gedit.schemas.in.h:43
 msgid "Toolbar is Visible"
@@ -427,7 +427,7 @@ msgid ""
 "button or double click the character in the table."
 msgstr ""
 "현재 문서에 어떤 문자를 넣으려면 문자를 선택하고 \"문자 삽입\" \n"
-"버튼을 누르거나 표의 문자를 두번 누르십시오."
+"단추를 누르거나 표의 문자를 두번 누르십시오."
 
 #: plugins/ASCII/asciitable.glade2.h:4
 msgid "Insert char"
@@ -639,7 +639,7 @@ msgstr ""
 
 #: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
 #: plugins/shell_output/shell_output.c:553
-#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:568
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:571
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
 
@@ -815,19 +815,19 @@ msgstr "날짜/시간을 입력(_I)"
 msgid "Insert current date and time at the cursor position"
 msgstr "커서 위치에 현재의 날짜와 시간을 끼워넣습니다"
 
-#: plugins/time/time.c:271
+#: plugins/time/time.c:274
 msgid "Available formats"
 msgstr "사용가능한 형식"
 
-#: plugins/time/time.c:312 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:315 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
 msgstr "날짜/시간 입력 플러그인 설정"
 
-#: plugins/time/time.c:565
+#: plugins/time/time.c:568
 msgid "Insert Date/Time"
 msgstr "날짜/시간을 입력"
 
-#: plugins/time/time.c:566
+#: plugins/time/time.c:569
 msgid "Inserts current date and time at the cursor position."
 msgstr "커서 위치에 현재의 날짜와 시간을 끼워넣습니다"
 
@@ -835,7 +835,7 @@ msgstr "커서 위치에 현재의 날짜와 시간을 끼워넣습니다"
 msgid "Select the format to use when inserting date/time."
 msgstr "날짜/시간 입력할 때 사용할 형식을 선택하십시오"
 
-#: src/bonobo-mdi.c:517 src/bonobo-mdi.c:600 src/bonobo-mdi.c:1837
+#: src/bonobo-mdi.c:522 src/bonobo-mdi.c:612 src/bonobo-mdi.c:1850
 #, c-format
 msgid "Activate %s"
 msgstr "%s 활성"
@@ -851,7 +851,7 @@ msgstr "라인 바로가기(_G)"
 
 #: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr "goto-line.glade2 에서 필요한 위젯을 찾을 수 없습니다.\n"
+msgstr "goto-line.glade2에서 필요한 위젯을 찾을 수 없습니다.\n"
 
 #: src/dialogs/gedit-dialog-replace.c:172 src/dialogs/replace.glade2.h:2
 #: src/gedit-ui.xml.h:53
@@ -863,7 +863,7 @@ msgid "Replace _All"
 msgstr "전부 바꾸기(_A)"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:121
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:129
 #: src/gedit-ui.xml.h:98
 msgid "_Replace"
 msgstr "바꾸기(_R)"
@@ -904,12 +904,12 @@ msgstr "모듈 파일 이름"
 msgid "Author(s)"
 msgstr "만든이"
 
-#: src/dialogs/gedit-plugin-manager.c:443
+#: src/dialogs/gedit-plugin-manager.c:488
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
-"plugin-manager.glade2 를 찾을 수 없습니다, gedit를 다시 설치하십시오.\n"
+"plugin-manager.glade2를 찾을 수 없습니다, gedit를 다시 설치하십시오.\n"
 
-#: src/dialogs/gedit-plugin-manager.c:466
+#: src/dialogs/gedit-plugin-manager.c:511
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "플러그인 관리자용 glade 파일이 잘못되었습니다 -- 모든 위젯을 찾을 수 없습니"
@@ -932,7 +932,8 @@ msgid ""
 "\n"
 "Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
-"플러그인 %s은(는) 작업을 하기위해 외부 프로그램 <tt>%s</tt>을(를) 실행합니다.\n"
+"플러그인 %s은(는) 작업을 하기위해 외부 프로그램 <tt>%s</tt>을(를) 실행합니"
+"다.\n"
 "\n"
 "프로그램 <tt>%s</tt>의 위치를 지정해 주십시오."
 
@@ -1009,27 +1010,27 @@ msgstr "분류"
 
 #: src/dialogs/gedit-preferences-dialog.c:800
 msgid "Push this button to select the font to be used by the editor"
-msgstr "버튼을 눌러서 편집기에서 사용할 글꼴을 선택하십시오"
+msgstr "단추를 눌러서 편집기에서 사용할 글꼴을 선택하십시오"
 
 #: src/dialogs/gedit-preferences-dialog.c:803
 msgid "Push this button to configure text color"
-msgstr "버튼을 눌러서 글자 색상을 선택하십시오"
+msgstr "단추를 눌러서 글자 색상을 선택하십시오"
 
 #: src/dialogs/gedit-preferences-dialog.c:805
 msgid "Push this button to configure background color"
-msgstr "버튼을 눌러서 배경 색상을 선택하십시오"
+msgstr "단추를 눌러서 배경 색상을 선택하십시오"
 
 #: src/dialogs/gedit-preferences-dialog.c:807
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
-msgstr "선택된 글자가 나타날 색상을 설정하려면 버튼을 누르십시오"
+msgstr "선택된 글자가 나타날 색상을 설정하려면 단추를 누르십시오"
 
 #: src/dialogs/gedit-preferences-dialog.c:810
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
-msgstr "선택된 글자의 배경 색상을 설정하려면 버튼을 누르십시오"
+msgstr "선택된 글자의 배경 색상을 설정하려면 단추를 누르십시오"
 
 #: src/dialogs/gedit-preferences-dialog.c:1592
 #: src/dialogs/gedit-preferences-dialog.c:1594
@@ -1048,15 +1049,15 @@ msgstr "Helvetica 8"
 
 #: src/dialogs/gedit-preferences-dialog.c:1733
 msgid "Push this button to select the font to be used to print the body"
-msgstr "이 버튼을 눌러서 본문 인쇄에 사용될 글꼴을 선택하십시오"
+msgstr "이 단추를 눌러서 본문 인쇄에 사용될 글꼴을 선택하십시오"
 
 #: src/dialogs/gedit-preferences-dialog.c:1735
 msgid "Push this button to select the font to be used to print the headers"
-msgstr "이 버튼을 눌러서 글머리 인쇄에 사용될 글꼴을 선택하십시오"
+msgstr "이 단추를 눌러서 글머리 인쇄에 사용될 글꼴을 선택하십시오"
 
 #: src/dialogs/gedit-preferences-dialog.c:1737
 msgid "Push this button to select the font to be used to print line numbers"
-msgstr "이 버튼을 눌러서 줄 번호 인쇄에 사용될 글꼴을 선택하십시오"
+msgstr "이 단추를 눌러서 줄 번호 인쇄에 사용될 글꼴을 선택하십시오"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
@@ -1093,11 +1094,11 @@ msgstr "글꼴"
 
 #: src/dialogs/gedit-preferences.glade2.h:9
 msgid "Font used to print line _numbers:"
-msgstr "줄 번호 인쇄할때 사용될 글꼴(_N):"
+msgstr "줄 번호 인쇄할 때 사용될 글꼴(_N):"
 
 #: src/dialogs/gedit-preferences.glade2.h:10
 msgid "Font used to print the _body:"
-msgstr "본문 인쇄할때 사용될 글꼴(_B):"
+msgstr "본문 인쇄할 때 사용될 글꼴(_B):"
 
 #: src/dialogs/gedit-preferences.glade2.h:11
 msgid "Fonts & Colors"
@@ -1195,7 +1196,7 @@ msgstr "탭 크기를 설정합니다."
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
-msgstr "gedit 에서 사용 할 수 있는 최대 실행 취소 단계를 설정합니다."
+msgstr "gedit에서 사용 할 수 있는 최대 실행 취소 단계를 설정합니다."
 
 #: src/dialogs/gedit-preferences.glade2.h:37
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
@@ -1251,7 +1252,7 @@ msgstr "편집기에서 사용할 글꼴(_F): "
 
 #: src/dialogs/gedit-preferences.glade2.h:52
 msgid "_Font used to print headers:"
-msgstr "인쇄할때 글머리에 사용될 글꼴(_F):"
+msgstr "인쇄할 때 글머리에 사용될 글꼴(_F):"
 
 #: src/dialogs/gedit-preferences.glade2.h:53
 msgid "_Never wrap lines"
@@ -1392,7 +1393,7 @@ msgstr "프로그램위치를 설정..."
 
 #: src/dialogs/program-location-dialog.glade2.h:2
 msgid "_Location to search for:"
-msgstr "검색할 위치(_L):"
+msgstr "찾을 위치(_L):"
 
 #: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
@@ -1471,29 +1472,29 @@ msgstr "잘못된 파일이름"
 msgid "Invalid UTF-8 data"
 msgstr "잘못된 UTF-8 데이터"
 
-#: src/gedit-document.c:1146
+#: src/gedit-document.c:1149
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s의 심벌릭 링크 정보를 읽을 수 없습니다"
 
-#: src/gedit-document.c:1192
+#: src/gedit-document.c:1195
 msgid "The file has too many symbolic links."
 msgstr "파일이 너무 많은 심벌릭 링크가 있습니다."
 
-#: src/gedit-document.c:1246
+#: src/gedit-document.c:1249
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit가 쓰기 모드에서 %s: 위치를 처리할 수 없습니다."
 
-#: src/gedit-document.c:1253
+#: src/gedit-document.c:1256
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit가 쓰기 모드에서 이런 종류의 위치를 처리할 수 없습니다."
 
-#: src/gedit-document.c:1274
+#: src/gedit-document.c:1269
 msgid "Invalid filename."
 msgstr "잘못된 파일이름."
 
-#: src/gedit-document.c:1387
+#: src/gedit-document.c:1382
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1501,7 +1502,7 @@ msgstr ""
 "파일을 저장하기 위한 디스크 공간이 부족합니다\n"
 "디스크 공간을 확보하고 다시 시도하십시오."
 
-#: src/gedit-document.c:1392
+#: src/gedit-document.c:1387
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1510,28 +1511,37 @@ msgstr ""
 "파일을 저장하려는 디스크에 파일 크기 제한이 걸려있습니다. 파일 크기를 줄이던"
 "지 크기 제한이 풀려있는 디스크에 저장하십시오."
 
-#: src/gedit-document.c:1431
+#: src/gedit-document.c:1426
 msgid "Could not create a backup file."
-msgstr "파일의 백업본을 만들수 없습니다."
+msgstr "파일의 백업본을 만들 수 없습니다."
 
-#: src/gedit-document.c:1579
+#: src/gedit-document.c:1574
 msgid "It is not possible to revert an Untitled document"
 msgstr "제목 없음 문서를 되돌릴 수는 없습니다"
 
-#: src/gedit-file-selector-util.c:109
-#, c-format
-msgid ""
-"A file named ''%s'' already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"파일 ''%s''가 이미 있습니다.\n"
-"파일을 바꾸시겠습니까?"
-
-#: src/gedit-file-selector-util.c:117
+#: src/gedit-file-selector-util.c:125
 msgid "Do_n't replace"
 msgstr "바꾸지 말기"
 
-#: src/gedit-file-selector-util.c:497
+#: src/gedit-file-selector-util.c:147
+#, c-format
+msgid ""
+"A file named \"%s\" already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"파일 \"%s\"이(가) 이미 있습니다.\n"
+"저장하려는 파일로 바꾸시겠습니까?"
+
+#: src/gedit-file-selector-util.c:158
+#, c-format
+msgid ""
+"The file \"%s\" is read-only.\n"
+"Do you want to try to replace it with the one you are saving?"
+msgstr ""
+"파일 \"%s\"이(가) 읽기 전용입니다.\n"
+"저장하려는 파일로 바꾸시겠습니까?"
+
+#: src/gedit-file-selector-util.c:544
 msgid "Select a filename to save"
 msgstr "저장할 파일이름 선택"
 
@@ -1539,59 +1549,59 @@ msgstr "저장할 파일이름 선택"
 msgid "Open File ..."
 msgstr "파일 열기..."
 
-#: src/gedit-file.c:168 src/gedit-file.c:858
+#: src/gedit-file.c:176 src/gedit-file.c:806
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "파일 '%s' 읽음"
 
-#: src/gedit-file.c:314 src/gedit-file.c:435
+#: src/gedit-file.c:304 src/gedit-file.c:420
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "파일 '%s' 저장..."
 
-#: src/gedit-file.c:335 src/gedit-file.c:450
+#: src/gedit-file.c:325 src/gedit-file.c:435
 msgid "The document has not been saved."
 msgstr "문서가 저장되지 않음"
 
-#: src/gedit-file.c:350 src/gedit-file.c:442
+#: src/gedit-file.c:338 src/gedit-file.c:432
 #, c-format
 msgid "File '%s' saved."
 msgstr "파일 '%s' 저장됨."
 
-#: src/gedit-file.c:417
+#: src/gedit-file.c:399
 msgid "Save as ..."
 msgstr "다른 이름으로 저장..."
 
-#: src/gedit-file.c:614
+#: src/gedit-file.c:606
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "파일 '%s' 되돌리는 중..."
 
-#: src/gedit-file.c:627
+#: src/gedit-file.c:619
 msgid "The document has not been reverted."
 msgstr "문서를 되돌리지 못함"
 
-#: src/gedit-file.c:637
+#: src/gedit-file.c:629
 #, c-format
 msgid "File '%s' reverted."
 msgstr "파일 '%s' 되돌렸음."
 
-#: src/gedit-file.c:684
+#: src/gedit-file.c:655
 #, c-format
-msgid "Loading %d file..."
-msgstr "%d개의 파일을 읽어드림..."
+msgid "Loading %d files..."
+msgstr "%d개의 파일을 읽어들임..."
 
-#: src/gedit-file.c:716
+#: src/gedit-file.c:691
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "파일 \"%s\"이(가) 없습니다. 만들까요?"
 
-#: src/gedit-file.c:775
+#: src/gedit-file.c:741
 #, c-format
 msgid "Loaded %i files"
-msgstr "%i개의 파일을 읽어드림"
+msgstr "%i개의 파일을 읽어들임"
 
-#: src/gedit-file.c:916
+#: src/gedit-file.c:864
 msgid "Could not read data from stdin."
 msgstr "표준 입력에서 데이터를 읽을 수 없습니다."
 
@@ -1708,7 +1718,7 @@ msgstr "페이지: %d"
 msgid "gedit - Print Preview"
 msgstr "gedit - 인쇄 미리보기"
 
-#: src/gedit-print.c:591
+#: src/gedit-print.c:595
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1769,7 +1779,7 @@ msgstr "선택 내용 복사하기"
 
 #: src/gedit-ui.xml.h:13
 msgid "Create a new document"
-msgstr "새 문서를 생성합니다"
+msgstr "새 문서를 만듭니다"
 
 #: src/gedit-ui.xml.h:14
 msgid "Cu_t"
@@ -1957,7 +1967,7 @@ msgstr "현재 파일을 다른 이름으로 저장합니다"
 
 #: src/gedit-ui.xml.h:65
 msgid "Search again for the same string"
-msgstr "같은 문자열로 다시 검색합니다"
+msgstr "같은 문자열로 다시 찾습니다"
 
 #: src/gedit-ui.xml.h:66
 msgid "Search for a string"
@@ -2115,7 +2125,7 @@ msgstr "실행 취소(_U)"
 msgid "_View"
 msgstr "보기(_V)"
 
-#: src/gedit-utils.c:778
+#: src/gedit-utils.c:792
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2126,35 +2136,35 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:785
+#: src/gedit-utils.c:799
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 깨진 데이터를 포함하고 있습니다."
 
-#: src/gedit-utils.c:796
+#: src/gedit-utils.c:810
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "파일 \"%s\"을(를) 열 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니다."
 
-#: src/gedit-utils.c:802
+#: src/gedit-utils.c:816
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "파일 \"%s\"을(를) 열 수 없습니다"
 
-#: src/gedit-utils.c:812
+#: src/gedit-utils.c:826
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 데이터에 잘못된 형식이 있습니다."
 
-#: src/gedit-utils.c:819
+#: src/gedit-utils.c:833
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 파일이 너무 큽니다."
 
-#: src/gedit-utils.c:826
+#: src/gedit-utils.c:840
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2165,12 +2175,12 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:833
+#: src/gedit-utils.c:847
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 접근이 거부되었습니다."
 
-#: src/gedit-utils.c:840
+#: src/gedit-utils.c:854
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2181,7 +2191,7 @@ msgstr ""
 "\n"
 "몇몇 파일을 닫은 후 다시 시도하십시오."
 
-#: src/gedit-utils.c:848
+#: src/gedit-utils.c:862
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2192,7 +2202,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:855
+#: src/gedit-utils.c:869
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2201,7 +2211,7 @@ msgstr ""
 "파일 \"%s\"을(를) 열기 위한 메모리가 부족합니다. 몇몇 응용 프로그램을 닫고 다"
 "시 시도하십시오."
 
-#: src/gedit-utils.c:881
+#: src/gedit-utils.c:895
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2209,11 +2219,11 @@ msgid ""
 "Please, check that you typed the location correctly and that your proxy "
 "settings are correct and then try again."
 msgstr ""
-"파일 \"%s\"을(를) 열 수 없습니다. 호스트 \"%s\"를 찾을 수 없습니다.\n"
+"파일 \"%s\"을(를) 열 수 없습니다. 호스트 \"%s\"을(를) 찾을 수 없습니다.\n"
 "\n"
 "입력한 위치와 프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:896
+#: src/gedit-utils.c:910
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2224,7 +2234,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:903
+#: src/gedit-utils.c:917
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2235,7 +2245,7 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:910
+#: src/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2246,7 +2256,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:918
+#: src/gedit-utils.c:932
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2257,17 +2267,17 @@ msgstr ""
 "\n"
 "이진 파일을 열려고 한 것 같습니다."
 
-#: src/gedit-utils.c:956
+#: src/gedit-utils.c:970
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다."
 
-#: src/gedit-utils.c:1007
+#: src/gedit-utils.c:1021
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 저장할 수 없습니다."
 
-#: src/gedit-utils.c:1011
+#: src/gedit-utils.c:1025
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2278,7 +2288,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1064
+#: src/gedit-utils.c:1078
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2289,24 +2299,24 @@ msgstr ""
 "\n"
 "최근에 지워졌을 것입니다."
 
-#: src/gedit-utils.c:1071
+#: src/gedit-utils.c:1085
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 깨진 데이터가 들어 있습니다."
 
-#: src/gedit-utils.c:1082
+#: src/gedit-utils.c:1096
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "파일 \"%s\"을(를) 되돌릴 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니다."
 
-#: src/gedit-utils.c:1088 src/gedit-utils.c:1228
+#: src/gedit-utils.c:1102 src/gedit-utils.c:1242
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다."
 
-#: src/gedit-utils.c:1098
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2314,17 +2324,17 @@ msgid ""
 msgstr ""
 "파일 \"%s\"을(를) 되돌릴 수 없습니다. 데이터에 잘못된 형식이 들어 있습니다."
 
-#: src/gedit-utils.c:1105
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 파일이 너무 큽니다."
 
-#: src/gedit-utils.c:1112
+#: src/gedit-utils.c:1126
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 접근이 거부되었습니다."
 
-#: src/gedit-utils.c:1119
+#: src/gedit-utils.c:1133
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2335,7 +2345,7 @@ msgstr ""
 "\n"
 "몇몇 파일을 닫은 후 다시 시도하십시오."
 
-#: src/gedit-utils.c:1127
+#: src/gedit-utils.c:1141
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2344,18 +2354,18 @@ msgstr ""
 "파일 \"%s\"을(를) 되돌리려는데 메모리가 부족합니다. 몇몇 응용 프로그램을 닫"
 "은 후 다시 시도하십시오."
 
-#: src/gedit-utils.c:1153
+#: src/gedit-utils.c:1167
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
-"파일 \"%s\"을(를) 되돌릴 수 없습니다. 호스트 \"%s\"를 찾을 수 없습니다.\n"
+"파일 \"%s\"을(를) 되돌릴 수 없습니다. 호스트 \"%s\"을(를) 찾을 수 없습니다.\n"
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:1167
+#: src/gedit-utils.c:1181
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2366,12 +2376,12 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:1174
+#: src/gedit-utils.c:1188
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 기록 준비가 실패하였습니다."
 
-#: src/gedit-utils.c:1181
+#: src/gedit-utils.c:1195
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2382,16 +2392,16 @@ msgstr ""
 "\n"
 "아마 이진 파일을 되돌릴려고 하는 것 같습니다."
 
-#: src/gedit-utils.c:1190
+#: src/gedit-utils.c:1204
 msgid "It is not possible to revert an Untitled document."
 msgstr "제목 없는 문서는 되돌릴 수 없습니다."
 
-#: src/gedit-utils.c:1279
+#: src/gedit-utils.c:1293
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "파일 \"%s\"이(가) 이미 있습니다."
 
-#: src/gedit-utils.c:1285
+#: src/gedit-utils.c:1299
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2402,7 +2412,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하십시오."
 
-#: src/gedit-utils.c:1294
+#: src/gedit-utils.c:1308
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2413,7 +2423,7 @@ msgstr ""
 "\n"
 "적절한 쓰기 권한이 있는지 확인하십시오."
 
-#: src/gedit-utils.c:1301
+#: src/gedit-utils.c:1315
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2424,7 +2434,7 @@ msgstr ""
 "\n"
 "파일 이름이 너무 깁니다."
 
-#: src/gedit-utils.c:1308
+#: src/gedit-utils.c:1322
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2436,18 +2446,18 @@ msgstr ""
 "\n"
 "파일 이름에 포함된 디렉토리가 없거나 깨진 심벌릭 링크가 있습니다."
 
-#: src/gedit-utils.c:1317
+#: src/gedit-utils.c:1331
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
 "\n"
 "Please free some disk space and try again."
 msgstr ""
-"파일 \"%s\"을(를) 저장하기 위한 디스크 공간이 부족합니다\n."
-"\n"
+"파일 \"%s\"을(를) 저장하기 위한 디스크 공간이 부족합니다\n"
+".\n"
 "디스크 공간을 확보하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:1323
+#: src/gedit-utils.c:1337
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 만들 수 없습니다."
@@ -2529,7 +2539,7 @@ msgstr "실행 중인 gedit의 인스턴스에서 새로운 최상위 창을 만
 msgid "Create a new document in an existing instance of gedit"
 msgstr "실행 중인 gedit의 인스턴스에서 새로운 문서를 만듭니다"
 
-#: src/gnome-recent-view-bonobo.c:189
+#: src/gnome-recent-view-bonobo.c:218
 #, c-format
 msgid "Open %s"
 msgstr "%s 열기"
