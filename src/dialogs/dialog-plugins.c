@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 2000 Jose M Celorio
+ * Copyright (C) 2001 Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,17 +32,14 @@
 #include "window.h"
 
 #include "dialogs/dialogs.h"
+#include "gtkchecklist.h"
 
-#define GEDIT_PLUGIN_MANAGER_GLADE_FILE "plugin-manager.glade"
+#define GEDIT_PLUGIN_MANAGER_GLADE_FILE "plugin-manager2.glade"
 
-GtkWidget *installed_list;
-GtkWidget *available_list;
-
-gint text_length = 0;
-
-/*
-#define OLD_CLEAR
-*/
+GtkWidget *list_of_plugins;
+GtkWidget *description_label;
+GtkWidget *authors_label;
+GtkWidget *file_label;
 
 /**
  * gedit_plugin_email_sendmail_location_dialog:
@@ -119,44 +116,85 @@ gedit_plugin_program_location_dialog (gchar *program_name, gchar *plugin_name)
 }
 
 static void
-gedit_plugin_manager_info_clear (GtkWidget *widget)
+gedit_plugin_manager_ok_clicked (GtkWidget *widget, GtkWidget* data)
 {
-	gedit_debug (DEBUG_PLUGINS, "");
+	gint i;
+	GnomeApp *nth_app;
+	PluginData *plugin_data;
 
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (GTK_IS_EDITABLE(widget));
+	for (i = 0; i < GTK_CHECK_LIST (list_of_plugins)->n_rows; ++i)
+	{
+		plugin_data = (PluginData*)gtk_check_list_get_row_data (
+						GTK_CHECK_LIST (list_of_plugins), i);
+
+		if (gtk_check_list_get_toggled (GTK_CHECK_LIST (list_of_plugins), i))
+		{
+			plugin_data->installed = TRUE;
+		}
+		else
+		{
+			plugin_data->installed = FALSE;
+		}
+	}
+
+	gnome_dialog_close (GNOME_DIALOG (data));
 	
-	if (text_length > 0)
-		gtk_editable_delete_text (GTK_EDITABLE(widget), 0, text_length);
-	text_length = 0;
+	for (i = 0; i < g_list_length (mdi->windows); ++i)
+	{
+		nth_app = g_list_nth_data (mdi->windows, i);
+		gedit_plugins_menu_add (nth_app);	
+	}
+	
+	if(gedit_document_current () == NULL) 
+		gedit_window_set_plugins_menu_sensitivity (FALSE);
+		
+	return;
 }
 
 static void
-gedit_plugin_manager_lists_thaw (GtkWidget *widget)
+gedit_plugin_manager_close (GtkWidget *widget, GtkWidget* data)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
-
-	gtk_clist_unselect_all (GTK_CLIST (installed_list));
-	gtk_clist_unselect_all (GTK_CLIST (available_list));
-
-#if 0
- 	g_print ("A:%i I:%i\n",
-		 GTK_CLIST (available_list)->rows,
-		 GTK_CLIST (installed_list)->rows);
-#endif
-	gtk_clist_thaw (GTK_CLIST (available_list));
-	gtk_clist_thaw (GTK_CLIST (installed_list));
-
-	gedit_plugin_manager_info_clear (widget);
+	gnome_dialog_close (GNOME_DIALOG (data));
 }
 
 static void
-gedit_plugin_manager_lists_freeze (void)
+gedit_plugin_manager_help_clicked (GtkWidget *widget, GtkWidget* data)
 {
-	gedit_debug (DEBUG_PLUGINS, "");
+	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
+	gnome_help_display (NULL, &help_entry);	
+		
+	return;
+}
 
-	gtk_clist_freeze (GTK_CLIST (installed_list));
-	gtk_clist_freeze (GTK_CLIST (available_list));
+static void
+gedit_plugin_manager_remove_all_clicked (GtkWidget *widget, GtkWidget* data)
+{
+	gint i;
+
+	gtk_clist_freeze (GTK_CLIST (list_of_plugins));
+
+	for (i=0; i < GTK_CHECK_LIST (list_of_plugins)->n_rows; ++i)
+	{
+		gtk_check_list_set_toggled (GTK_CHECK_LIST (list_of_plugins), i, FALSE);
+	}
+
+	gtk_clist_thaw (GTK_CLIST (list_of_plugins));	
+}
+
+static void
+gedit_plugin_manager_select_all_clicked (GtkWidget *widget, GtkWidget* data)
+{
+	gint i;
+
+	gtk_clist_freeze (GTK_CLIST (list_of_plugins));
+
+	for (i=0; i < GTK_CHECK_LIST (list_of_plugins)->n_rows; ++i)
+	{
+		gtk_check_list_set_toggled (GTK_CHECK_LIST (list_of_plugins), i, TRUE);
+	}
+
+	gtk_clist_thaw (GTK_CLIST (list_of_plugins));	
 }
 
 static gint 
@@ -174,355 +212,44 @@ gedit_plugin_manager_clist_compare_function (GtkCList *clist, GtkCListRow *row_1
 }
 
 static void
-gedit_plugin_manager_item_load (GtkWidget *widget)
+gedit_plugin_manager_item_load ()
 {
 	gint n;
-	gint row;
 	PluginData *nth_plugin_data;
-	gpointer row_data;
-	gchar * name[2];
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	gedit_plugin_manager_lists_freeze ();
 	
+	gtk_clist_freeze (GTK_CLIST (list_of_plugins));
+
 	for (n=0; n < g_list_length (plugins_list); n++)
 	{
 		nth_plugin_data = g_list_nth_data (plugins_list, n);
-		name[0] = g_strdup (nth_plugin_data->name);
-		name[1] = NULL;
 		
-		row_data = (gpointer) nth_plugin_data;
-		if (nth_plugin_data->installed)
-		{
-			row = gtk_clist_append (GTK_CLIST(installed_list),
-						name);
-			gtk_clist_set_row_data (GTK_CLIST(installed_list),
-						row, row_data);
-		}
-		else
-		{
-			row = gtk_clist_append (GTK_CLIST(available_list),
-						name);
-			gtk_clist_set_row_data (GTK_CLIST(available_list),
-						row, row_data);
-		}
-		if (name[0] != NULL)
-			g_free (name[0]);
+		gtk_check_list_append_row (GTK_CHECK_LIST (list_of_plugins),
+			nth_plugin_data->name, nth_plugin_data->installed, 
+			(gpointer) nth_plugin_data);
 	}
 
-	gtk_clist_set_compare_func (GTK_CLIST (installed_list),
-				    (GtkCListCompareFunc) gedit_plugin_manager_clist_compare_function);
-	gtk_clist_set_compare_func (GTK_CLIST (available_list),
+	gtk_clist_set_compare_func (GTK_CLIST (list_of_plugins),
 				    (GtkCListCompareFunc) gedit_plugin_manager_clist_compare_function);
 	
-	gtk_clist_set_sort_column (GTK_CLIST (installed_list), 0);
-	gtk_clist_set_sort_column (GTK_CLIST (available_list), 0);
-
-	gtk_clist_set_auto_sort (GTK_CLIST (installed_list), TRUE);
-	gtk_clist_set_auto_sort (GTK_CLIST (available_list), TRUE);
-
-	gedit_plugin_manager_lists_thaw (widget);
-}
-
-static void
-gedit_plugin_manager_item_add (GtkWidget *widget, gpointer data)
-{
-	gint n;
-	gint row;
-	gint selection_length;
-	gchar *name;
-	gchar *name_array[2];
-	gpointer item_data;
-	gint last_element_hack = FALSE;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	selection_length = g_list_length (GTK_CLIST (available_list)->selection);
-
-	gedit_plugin_manager_lists_freeze();
-
-	if (selection_length == 0 && GTK_CLIST (available_list)->rows == 0)
-		last_element_hack = TRUE;
-
-	for (n=0; n < selection_length; n++)
-	{
-		row = (gint) g_list_nth_data (GTK_CLIST (available_list)->selection, n);
-		gtk_clist_get_text (GTK_CLIST (available_list), row, 0, &name);
-		item_data = gtk_clist_get_row_data (GTK_CLIST(available_list), row);
-
-		name_array[0] = g_strdup(name);
-		name_array[1] = NULL;
-
-		if (!last_element_hack)
-			gtk_clist_remove (GTK_CLIST (available_list), row);
-		row = gtk_clist_append (GTK_CLIST (installed_list), name_array);
-		gtk_clist_set_row_data (GTK_CLIST (installed_list), row, item_data);
-
-		if (name_array[0] != NULL)
-			g_free (name_array[0]);
-	}
-
-	if (last_element_hack)
-		gtk_clist_clear (GTK_CLIST(available_list));
-			
-	gedit_plugin_manager_lists_thaw (GTK_WIDGET(data));
-}
-
-static void
-gedit_plugin_manager_item_remove (GtkWidget *widget, gpointer data)
-{
-	gint n;
-	gint row;
-	gint selection_length;
-	gchar *name;
-	gchar *name_array[2];
-	gpointer item_data;
-	gint last_element_hack = FALSE;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	selection_length = g_list_length (GTK_CLIST (installed_list)->selection);
-
-	gedit_plugin_manager_lists_freeze();
-
-	if (selection_length == 0 && GTK_CLIST (installed_list)->rows == 0)
-		last_element_hack = TRUE;
-
-	for (n=0; n < selection_length; n++)
-	{
-		row = (gint) g_list_nth_data (GTK_CLIST (installed_list)->selection, n);
-		gtk_clist_get_text (GTK_CLIST (installed_list), row, 0, &name);
-		item_data = gtk_clist_get_row_data (GTK_CLIST(installed_list), row);
-
-		name_array[0] = g_strdup(name);
-		name_array[1] = NULL;
-
-		if (!last_element_hack)
-			gtk_clist_remove (GTK_CLIST (installed_list), row);
-		
-		row = gtk_clist_append (GTK_CLIST (available_list), name_array);
-		gtk_clist_set_row_data (GTK_CLIST (available_list), row, item_data);
-
-		if (name_array[0] != NULL)
-			g_free (name_array [0]);
-	}
-
-	if (last_element_hack)
-		gtk_clist_clear (GTK_CLIST(installed_list));
+	gtk_clist_set_sort_column (GTK_CLIST (list_of_plugins), 1);
+	gtk_clist_set_auto_sort (GTK_CLIST (list_of_plugins), TRUE);
 	
-	gedit_plugin_manager_lists_thaw (GTK_WIDGET(data));
+	gtk_clist_thaw (GTK_CLIST (list_of_plugins));
 }
 
 static void
-gedit_plugin_manager_item_add_all (GtkWidget *widget, gpointer data)
+gedit_plugin_manager_select_row (GtkCList *clist,
+                                 gint row,
+                                 gint column,
+                                 GdkEventButton *event,
+                                 gpointer user_data)
 {
-	gint row, rows, new_row;
-	gchar *name;
-	gchar *name_array[2];
-	gpointer item_data;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	gedit_plugin_manager_lists_freeze();
-
-	rows = GTK_CLIST(available_list)->rows;
-
-	for (row = 0; row < rows; row++)
-	{
-#ifdef OLD_CLEAR
-		gtk_clist_get_text (GTK_CLIST (available_list), 0, 0, &name);
-		item_data = gtk_clist_get_row_data (GTK_CLIST(available_list), 0);
-#else
-		gtk_clist_get_text (GTK_CLIST (available_list), row, 0, &name);
-		item_data = gtk_clist_get_row_data (GTK_CLIST(available_list), row);
-#endif	
-
-		name_array[0] = g_strdup(name);
-		name_array[1] = NULL;
-#ifdef OLD_CLEAR		
-		gtk_clist_remove (GTK_CLIST (available_list), 0);
-#endif	
-		new_row = gtk_clist_append (GTK_CLIST (installed_list), name_array);
-		gtk_clist_set_row_data (GTK_CLIST (installed_list), new_row, item_data);
-
-		if (name_array[0] != NULL)
-			g_free (name_array[0]);
-	}
-#ifndef OLD_CLEAR
-	gtk_clist_clear (GTK_CLIST (available_list));
-#endif	
-	gedit_plugin_manager_lists_thaw (GTK_WIDGET(data));
-
-}
-
-static void
-gedit_plugin_manager_item_remove_all (GtkWidget *widget, gpointer data)
-{
-	gint row, rows, new_row;
-	gchar *name;
-	gchar *name_array [2];
-	gpointer item_data;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	gedit_plugin_manager_lists_freeze();
-
-	rows = GTK_CLIST(installed_list)->rows;
-
-	for (row = 0; row < rows; row++)
-	{
-#ifdef OLD_CLEAR
-		gtk_clist_get_text (GTK_CLIST (installed_list), 0, 0, &name);
-		item_data = gtk_clist_get_row_data (GTK_CLIST(installed_list), 0);
-#else
-		gtk_clist_get_text (GTK_CLIST (installed_list), row, 0, &name);
-		item_data = gtk_clist_get_row_data (GTK_CLIST(installed_list), row);
-#endif	
-
-		name_array[0] = g_strdup(name);
-		name_array[1] = NULL;
-#ifdef OLD_CLEAR
-		gtk_clist_remove (GTK_CLIST (installed_list), 0);
-#endif
-		new_row = gtk_clist_append (GTK_CLIST (available_list), name_array);
-		gtk_clist_set_row_data (GTK_CLIST (available_list), new_row, item_data);
-
-		if (name_array[0] != NULL)
-			g_free (name_array[0]);
-	}
-
-#ifndef OLD_CLEAR
-	gtk_clist_clear (GTK_CLIST (installed_list));
-#endif	
-	gedit_plugin_manager_lists_thaw (GTK_WIDGET(data));
-}
-
-static void
-gedit_plugin_manager_destroy (GtkWidget *widget, gpointer data)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	gnome_dialog_close (GNOME_DIALOG (widget));
-}
-
-/*
-static gboolean
-gtk_clist_row_selected (GtkCList *clist, gint row)
-{
-	gint selection_length;
-	gint n;
-	 
-	selection_length = g_list_length (clist->selection);
-
-	for (n=0; n < selection_length; n++)
-		if ((gint) g_list_nth_data (clist->selection, n) == row)
-			return TRUE;
-	return FALSE;
-}
-*/
-
-static void
-gedit_plugin_manager_item_clicked (GtkCList *clist, GdkEventButton *event, gpointer data)
-{
-	gint row;
-	gint column;
-	PluginData *plugin;
-	gint dummy_pos;
-	gchar *plugin_description;
-	GtkWidget *plugin_info_local;
-	/*
-	GtkWidget *plugin_info_window_local;
-	*/
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	if (event->button != 1)
-		return;
-
-	/* if this is a double click, do nothing */
-	if (event->type != GDK_BUTTON_PRESS)
-		return;
-
-	if (!gtk_clist_get_selection_info (clist, event->x, event->y, &row, &column))
-		return;
-
-	plugin_info_local = GTK_WIDGET (data);
-	
-	gedit_plugin_manager_info_clear (plugin_info_local);
-	
-	plugin = gtk_clist_get_row_data (clist, row);
-	plugin_description = g_strdup_printf (_("Plugin Name: %s\n"
-						"Author: %s\n"
-						"Description: %s\n"),
-					      plugin->name,
-					      plugin->author,
-					      plugin->long_desc);
-	text_length = strlen (plugin_description);
-	dummy_pos = 0;
-	gtk_editable_insert_text (GTK_EDITABLE(plugin_info_local), plugin_description, text_length, &dummy_pos);
-
-	dummy_pos = 0;
-	gtk_editable_insert_text (GTK_EDITABLE(plugin_info_local), " ", 1, &dummy_pos);
-	gtk_editable_delete_text (GTK_EDITABLE(plugin_info_local), 0, 1);
-
-	g_free (plugin_description);
-}
-
-static void
-gedit_plugin_manager_cancel_clicked (GtkWidget *widget, GtkWidget* data)
-{
-	gnome_dialog_close (GNOME_DIALOG(data));
-	return;
-}
-
-static void
-gedit_plugin_manager_help_clicked (GtkWidget *widget, GtkWidget* data)
-{
-	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
-	gnome_help_display (NULL, &help_entry);	
-		
-	return;
-}
-
-static void
-gedit_plugin_manager_ok_clicked (GtkWidget *widget, GtkWidget* data)
-{
-	gint n;
-	gint row;
-	gint rows;
-	GnomeApp *nth_app;
 	PluginData *plugin_data;
+	plugin_data = (PluginData*)gtk_check_list_get_row_data (GTK_CHECK_LIST (list_of_plugins), row);
 
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	rows = GTK_CLIST (available_list)->rows;
-	for (row = rows-1; row >= 0; row--)
-	{
-		plugin_data = gtk_clist_get_row_data (GTK_CLIST(available_list), row);
-		plugin_data->installed = FALSE;
-	}
-
-	rows = GTK_CLIST (installed_list)->rows;
-	for (row = rows-1; row >= 0; row--)
-	{
-		plugin_data = gtk_clist_get_row_data (GTK_CLIST(installed_list), row);
-		plugin_data->installed = TRUE;
-	}
-
-	gnome_dialog_close (GNOME_DIALOG(data));
-
-	for (n = 0; n < g_list_length (mdi->windows); n++)
-	{
-		nth_app = g_list_nth_data (mdi->windows, n);
-		gedit_plugins_menu_add (nth_app);	
-	}
-
-	if(gedit_document_current () == NULL) 
-		gedit_window_set_plugins_menu_sensitivity (FALSE);
-		
-	return;
-
+	gtk_label_set_text (GTK_LABEL (description_label), plugin_data->long_desc);
+	gtk_label_set_text (GTK_LABEL (authors_label), plugin_data->author);
+	gtk_label_set_text (GTK_LABEL (file_label), plugin_data->file);
 }
 
 void
@@ -530,25 +257,17 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 {
 	GladeXML *gui;
 	GtkWidget *dialog;
-	GtkWidget *add_button;
-	GtkWidget *remove_button;
-	GtkWidget *add_all_button;
-	GtkWidget *remove_all_button;
-	GtkWidget *plugin_info;
-	GtkWidget *plugin_info_window;
-
+	
 	GtkWidget *ok_button;
 	GtkWidget *cancel_button;
 	GtkWidget *help_button;
+	GtkWidget *scrolled_window;
+	
+	GtkWidget *select_all_button;
+	GtkWidget *remove_all_button;
 
 	gedit_debug (DEBUG_PLUGINS, "");
-
-	if (!g_file_exists (GEDIT_GLADEDIR GEDIT_PLUGIN_MANAGER_GLADE_FILE))
-	{
-		g_warning ("Could not find %s", GEDIT_GLADEDIR GEDIT_PLUGIN_MANAGER_GLADE_FILE);
-		return;
-	}
-
+	
 	gui = glade_xml_new (GEDIT_GLADEDIR GEDIT_PLUGIN_MANAGER_GLADE_FILE, NULL);
 
 	if (!gui)
@@ -557,71 +276,47 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 		return;
 	}
 
-	dialog             = glade_xml_get_widget (gui, "dialog");
-	add_button         = glade_xml_get_widget (gui, "add_button");
-	remove_button      = glade_xml_get_widget (gui, "remove_button");
-	add_all_button     = glade_xml_get_widget (gui, "add_all_button");
-	remove_all_button  = glade_xml_get_widget (gui, "remove_all_button");
-	available_list     = glade_xml_get_widget (gui, "available_list");
-	installed_list     = glade_xml_get_widget (gui, "installed_list");
-	plugin_info        = glade_xml_get_widget (gui, "plugin_info");
-	plugin_info_window = glade_xml_get_widget (gui, "plugin_info_window");
-
+	dialog             = glade_xml_get_widget (gui, "plugin_manager");
 	ok_button          = glade_xml_get_widget (gui, "ok_button");
 	cancel_button      = glade_xml_get_widget (gui, "cancel_button");
 	help_button        = glade_xml_get_widget (gui, "help_button");
+	scrolled_window    = glade_xml_get_widget (gui, "scrolled_window"); 
+	select_all_button  = glade_xml_get_widget (gui, "select_all_button");
+	remove_all_button  = glade_xml_get_widget (gui, "remove_all_button");
+	description_label  = glade_xml_get_widget (gui, "description_label");
+	authors_label      = glade_xml_get_widget (gui, "authors_label");
+        file_label         = glade_xml_get_widget (gui, "file_label");
 
 	g_return_if_fail (dialog             != NULL);
-	g_return_if_fail (add_button         != NULL);
-	g_return_if_fail (remove_button      != NULL);
-	g_return_if_fail (add_all_button     != NULL);
-	g_return_if_fail (remove_all_button  != NULL);
-	g_return_if_fail (available_list     != NULL);
-	g_return_if_fail (installed_list     != NULL);
-	g_return_if_fail (plugin_info        != NULL);
-	g_return_if_fail (plugin_info_window != NULL);
-
 	g_return_if_fail (ok_button          != NULL);
 	g_return_if_fail (cancel_button      != NULL);
 	g_return_if_fail (help_button        != NULL);
+	g_return_if_fail (scrolled_window    != NULL);
+	g_return_if_fail (select_all_button  != NULL);
+	g_return_if_fail (remove_all_button  != NULL);
+	g_return_if_fail (description_label  != NULL);
+	g_return_if_fail (authors_label      != NULL);
+	g_return_if_fail (file_label         != NULL);
 
-	/*
-	gtk_object_set_data (GTK_OBJECT (plugin_info), "plugin_info_window", plugin_info_window);
-	*/
-	
+    	/* Create the GtkCheckList. */
+	list_of_plugins = gtk_check_list_new ();
+	gtk_container_add(GTK_CONTAINER(scrolled_window), list_of_plugins);
+
 	/* connect the signals */
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_destroy), NULL);
-	
+			    GTK_SIGNAL_FUNC (gedit_plugin_manager_close), dialog);
+
 	gtk_signal_connect (GTK_OBJECT (ok_button), "clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_ok_clicked), dialog);
 	gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_cancel_clicked), dialog);
+			    GTK_SIGNAL_FUNC (gedit_plugin_manager_close), dialog);
 	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_manager_help_clicked), NULL);
 
-	/* now the buttons */
-	gtk_signal_connect (GTK_OBJECT (add_button), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_add),
-			    plugin_info);
-	gtk_signal_connect (GTK_OBJECT (remove_button), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_remove),
-			    plugin_info);
-	gtk_signal_connect (GTK_OBJECT (add_all_button), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_add_all),
-			    plugin_info);
 	gtk_signal_connect (GTK_OBJECT (remove_all_button), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_remove_all),
-			    plugin_info);
-	
-	gtk_signal_connect (GTK_OBJECT (available_list), "button_press_event",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_clicked),
-			    plugin_info);
-	gtk_signal_connect (GTK_OBJECT (installed_list), "button_press_event",
-			    GTK_SIGNAL_FUNC (gedit_plugin_manager_item_clicked),
-			    plugin_info);
-
-	gedit_plugin_manager_item_load (plugin_info);
+			    GTK_SIGNAL_FUNC (gedit_plugin_manager_remove_all_clicked), NULL);
+	gtk_signal_connect (GTK_OBJECT (select_all_button), "clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_manager_select_all_clicked), NULL);
 	
 	/* Set the dialog parent and modal type */
 	gnome_dialog_set_parent  (GNOME_DIALOG (dialog), gedit_window_active());
@@ -631,4 +326,12 @@ gedit_plugin_manager_create (GtkWidget *widget, gpointer data)
 	/* Show everything and free */
 	gtk_widget_show_all (dialog);
 	gtk_object_unref (GTK_OBJECT (gui));
+
+	gedit_plugin_manager_item_load ();
+
+	gtk_signal_connect (GTK_OBJECT (list_of_plugins), "select_row",
+		            GTK_SIGNAL_FUNC (gedit_plugin_manager_select_row), NULL);
+
+	gtk_clist_select_row (GTK_CLIST (list_of_plugins), 0, 1);
+
 }

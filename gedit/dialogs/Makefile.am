@@ -17,7 +17,9 @@ libdialogs_a_SOURCES = 		\
 	dialog-plugins.c	\
 	dialog-replace.c	\
 	dialog-uri.c		\
-	dialogs.h
+	dialogs.h		\
+	gtkchecklist.c		\
+	gtkchecklist.h
 
 glade_DATA =			\
 	about.glade		\

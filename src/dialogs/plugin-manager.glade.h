@@ -4,14 +4,11 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("gedit Plugin Manager");
-gchar *s = N_("Select the plugins to install");
-gchar *s = N_("Available Plugins");
-gchar *s = N_("Available Plugins");
-gchar *s = N_("Add >");
-gchar *s = N_("< Remove");
-gchar *s = N_("Add All >>");
-gchar *s = N_("<< Remove All");
-gchar *s = N_("Installed Plugins");
-gchar *s = N_("Installed Plugins");
-gchar *s = N_("Plugin description");
+gchar *s = N_("Plugins manager...");
+gchar *s = N_("Select the plugins to install:");
+gchar *s = N_("_Select all");
+gchar *s = N_("_Remove all");
+gchar *s = N_("_Description");
+gchar *s = N_("File name:");
+gchar *s = N_("Author(s):");
+gchar *s = N_("De_tails");
