@@ -1,10 +1,11 @@
 <?xml version="1.0"?><!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "1.121.0">
-  <!ENTITY manrevision "2.2">
-  <!ENTITY date "Agosto 2002">
+  <!ENTITY appversion "2.2.1">
+  <!ENTITY manrevision "2.5.1">
+  <!ENTITY date "Settembre 2003">
   <!ENTITY app "gedit">
+  <!ENTITY ug "Manuale utente del desktop GNOME">
 ]>
 <!-- 
       (Do not remove this comment block.)
@@ -24,6 +25,9 @@
 		<year>2003</year>
 		<holder>Sun Microsystems</holder> </copyright>
 	 <copyright> 
+		<year>2002</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright> 
 		<year>2000</year>
 		<holder>Eric Baudais</holder> </copyright>
 
@@ -39,13 +43,12 @@
 		<publishername> GNOME Documentation Project </publishername>
 	 </publisher>
 	 &legal; 
-	 <authorgroup>
+	 <authorgroup> 
 		<author> 
 		  <firstname>Sun </firstname>
 		  <surname>GNOME Documentation Team</surname> 
 		  <affiliation> 
 			 <orgname>Sun Microsystems</orgname>
-			 <address> <email>gdocteam@sun.com</email> </address>
 		  </affiliation>
 		</author>
 		<author> 
@@ -56,6 +59,17 @@
 			 <address> <email>baudais@okstate.edu</email> </address>
 		  </affiliation>
 		</author>
+                <othercredit role="reviewer">
+                <firstname>Baris</firstname>
+                <surname>Cicek ha fornito informazioni sulle revisioni precedenti dell'applicazione gedit.</surname>
+                        <contrib>Ringraziamenti</contrib>
+                </othercredit>
+                <othercredit role="reviewer">
+                <firstname>Ajit</firstname>
+                <surname>George ha fornito informazioni sui plugin. </surname>
+                        <contrib></contrib>
+                </othercredit>
+
 <!-- This is appropriate place for other contributors: translators,
       maintainers,  etc. Commented out by default.
        <othercredit role="translator">
@@ -80,8 +94,39 @@
 		  <revnumber>Manuale di &app; V&manrevision;</revnumber>
 		  <date>&date;</date> 
 		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team
-				<email>gdocteam@sun.com</email> </para>
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manuale di gedit V2.5</revnumber>
+		  <date>Marzo 2003</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manuale di gedit V2.4</revnumber>
+		  <date>Gennaio 2003</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manuale di gedit V2.3</revnumber>
+		  <date>Settembre 2002</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>Manuale di gedit V2.2</revnumber>
+		  <date>Agosto 2002</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -89,8 +134,7 @@
 		  <revnumber>Manuale di gedit V2.1</revnumber>
 		  <date>Giugno 2002</date> 
 		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team
-				<email>gdocteam@sun.com</email> </para>
+			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -98,8 +142,7 @@
 		  <revnumber>Manuale di gedit V2.0</revnumber>
 		  <date>Marzo 2002</date> 
 		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team
-				<email>gdocteam@sun.com</email> </para>
+			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -117,22 +160,23 @@
 		</releaseinfo>
 	 <legalnotice> 
 		<title>Commenti</title>
-		<para>Per segnalare un problema o inviare suggerimenti sull'applicazione &app; o su questo manuale, seguire le istruzioni presenti alla <ulink url="ghelp:gnome-feedback" type="help">Pagina di commenti su GNOME</ulink>. 
+		<para>Per segnalare un problema o inviare suggerimenti sull'applicazione <application>&app;</application> o su questo manuale, seguire le istruzioni presenti alla <ulink url="ghelp:gnome-feedback" type="help">Pagina di commenti su GNOME</ulink>. 
       </para>
 <!-- Translators may also add here feedback address for translations -->
 	 </legalnotice>
   </articleinfo>
   <indexterm><primary>gedit</primary></indexterm>
+  <indexterm><primary>editor di testo</primary></indexterm>
 
 <!-- ============= Document Body ============================= -->
 <!-- ============= Introduction ============================== -->
-  <sect1 id="gedit-intro">  
+  <sect1 id="gedit-intro"> 
 	 <title>Introduzione</title>
-	 <para>L'applicazione <application>&app;</application> &egrave; un semplice editor di testo  che pu&ograve; essere utilizzato per creare e modificare i file di testo. Sono inoltre disponibili una serie di plugin per <application>&app;</application> che consentono di eseguire varie attivit&agrave; legate alla modifica dei testi direttamente dalla finestra di <application>&app;</application>.</para>
+	 <para>L'applicazione <application>&app;</application> consente di creare e modificare i file di testo. Sono inoltre disponibili una serie di plugin per <application>&app;</application> che consentono di eseguire varie attivit&agrave; legate alla modifica dei testi direttamente dalla finestra di <application>&app;</application>.</para>
   </sect1>
 <!-- ============= Getting Started =========================== -->
   <sect1 id="gedit-getting-started"> 
-	 <title>Per iniziare</title>
+    <title>Per iniziare</title>
 
 <!-- ============= To Start gedit ============================ -->
 	 <sect2 id="gedit-to-start"> 
@@ -140,27 +184,22 @@
 		<para>Sono disponibili i seguenti metodi per avviare <application>&app;</application>:</para>
 		<variablelist>
     		<varlistentry>
-    		<term>Menu <guimenu>Programmi</guimenu></term>
+    		<term><guimenu>Menu</guimenu></term>
     		<listitem>
-    		<para>Scegliere 
-    		<menuchoice>
-    		<guisubmenu>Accessori</guisubmenu>
-    		<guimenuitem>Editor di testo</guimenuitem>
-    		</menuchoice>. </para>
+    		<para>Per informazioni sull'avvio di <application>&app;</application> da un menu, vedere la versione pi&ugrave; recente del &ug; per la propria piattaforma.</para>
     		</listitem>
     		</varlistentry>
     		<varlistentry>
     		<term>Riga di comando</term>
     		<listitem>
-    		<para>Digitare <command>gedit</command> e premere <keycap>Return</keycap>.</para>
+    		<para>Eseguire il comando seguente: <command>gedit</command></para>
     		</listitem>
     		</varlistentry>
     		</variablelist>
 	</sect2>
 	
 	<sect2 id="gedit-when-you-start">
-	
-		<title>Avvio di &app;</title>	
+	<title>Avvio di &app;</title>	
 		<para>All'avvio di <application>&app;</application> viene visualizzata la finestra seguente.</para>
 	
 		<figure id="gedit-window"> 
@@ -193,9 +232,14 @@
 				<para> L'area di visualizzazione contiene il testo del file che si sta modificando. </para>
 			 </listitem>
 		  </varlistentry>
+		  <varlistentry> <term>Finestra di output</term> 
+			 <listitem>
+				<para>La finestra di output mostra l'output restituito dai plugin Comando per la shell e Confronta file. </para>
+			 </listitem>
+		  </varlistentry>
 		  <varlistentry> <term>Barra di stato</term> 
 			 <listitem>
-				<para>La barra di stato visualizza informazioni sulle attivit&agrave; correnti di <application>&app;</application> e altre indicazioni contestuali relative alle voci di menu. </para>
+				<para>La barra di stato visualizza informazioni sulle attivit&agrave; di <application>&app;</application> attualmente in corso e altre indicazioni contestuali relative alle voci di menu. </para>
 			 </listitem>
 		  </varlistentry>
 		</variablelist>
@@ -206,17 +250,28 @@
 		<title>Aprire un file</title>
 		<para>Per aprire un file, scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Apri</guimenuitem></menuchoice> per visualizzare la finestra di dialogo <guilabel>Apri file</guilabel>. Selezionare il file da aprire e fare clic su <guibutton>OK</guibutton>. Il file viene visualizzato nella finestra di <application>&app;</application>. </para>
 		<para><application>&app;</application> consente di aprire contemporaneamente pi&ugrave; file.
-		  L'applicazione visualizza un file per volta nella sua finestra. Per ognuno dei file aperti viene aggiunta una scheda alla finestra. Per visualizzare un altro dei file aperti, fare clic sulla scheda che corrisponde al file desiderato. Per creare una nuova finestra di <application>&app;</application> per ogni file aperto, trascinare sullo sfondo del desktop le schede che corrispondono ai file &Egrave; anche possibile utilizzare il menu <guimenu>Documenti</guimenu>  per spostarsi da uno all'altro dei file aperti</para>
-		<para>L'applicazione memorizza inoltre il percorso e il nome degli ultimi quattro file che sono stati modificati, e li visualizza come voci del menu <menuchoice>
-		  <guimenu>File</guimenu> <guisubmenu>File recenti</guisubmenu> </menuchoice>. 
- 
-		  </para>
+		  L'applicazione visualizza un file per volta nella sua finestra. Per ognuno dei file aperti viene aggiunta una scheda alla finestra. Per visualizzare un altro dei file aperti, fare clic sulla scheda che corrisponde al file desiderato. Per creare una nuova finestra di <application>&app;</application> per ogni file aperto, trascinare sullo sfondo del desktop le schede che corrispondono ai file </para>
+                  <para>&Egrave; anche possibile utilizzare il menu <guimenu>Documenti</guimenu>  per spostarsi tra i file aperti. Per spostare un documento in una nuova finestra di <application> &app;</application>, scegliere <menuchoice> <guimenu>Documenti</guimenu> <guimenuitem>Sposta in una nuova finestra</guimenuitem> </menuchoice>.
+</para>
+		<para>L'applicazione memorizza il percorso e il nome degli ultimi cinque file che sono stati modificati e li visualizza come voci del menu <menuchoice>
+		  <guimenu>File</guimenu></menuchoice>. 
+ Questi file sono accessibili anche facendo clic sull'icona <inlinemediaobject>
+                         <imageobject>
+                            <imagedata fileref="figures/gedit_recent_files_menu_icon.png" format="PNG"/>
+                         </imageobject>
+                         <textobject>
+                         <phrase>Mostra l'icona del menu File recenti.</phrase>
+                         </textobject>
+                      </inlinemediaobject>
+                della barra degli strumenti che permette di accedere agli ultimi file utilizzati.  </para>
 	 </sect2>
 <!-- ============= To Open Multiple Files from the Command Line ========= -->
 	 <sect2 id="gedit-run-from-cmd-line"><title>Aprire pi&ugrave; di un file dalla riga di comando</title>
 		<para>&Egrave; possibile eseguire <application>&app;</application> dalla riga di comando ed aprire automaticamente uno o pi&ugrave; file. Per aprire pi&ugrave; file dalla riga di comando, digitare il comando seguente e premere <keycap>Return</keycap>:</para>
 		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
 		<para>All'avvio dell'applicazione, i file specificati vengono visualizzati nella finestra di <application>&app;</application></para>
+                <para>Per maggiori informazioni sull'esecuzione di <application>&app;</application> dalla riga di comando, 
+		vedere <ulink url="man:gedit" type="man"><citerefentry><refentrytitle>&app;</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.</para>
 	 </sect2>
   </sect1>
 <!-- ================ Usage ================================ -->
@@ -226,19 +281,18 @@
 <!-- ============= To Create a New File ======================== -->
 	 <sect2 id="gedit-create-new-file">
 <title>Creare un nuovo file</title>
-		<para>Per creare un nuovo file, scegliere <menuchoice><guimenu>File</guimenu> <guimenuitem>Nuovo</guimenuitem></menuchoice>. L'applicazione visualizza un file nuovo nella finestra di <application>&app;</application></para>
+		<para>Per creare un nuovo file, scegliere <menuchoice><guimenu>File</guimenu> <guimenuitem>Nuovo</guimenuitem></menuchoice>. L'applicazione visualizza un file nuovo nella finestra di <application>&app;</application>.</para>
 	 </sect2>
 <!-- ============= To Save a File ============================== -->
 	 <sect2 id="gedit-save-file"><title>Salvare un file</title>
 		<para>Sono disponibili i seguenti metodi per salvare un file:</para>
 		<itemizedlist>
-		  <listitem><para>Per salvare un file nuovo, scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Salva</guimenuitem></menuchoice> o fare clic sul pulsante  <guibutton>Salva</guibutton> nella barra degli strumenti. Se il file non possiede ancora un nome, <application>&app;</application> visualizza la finestra di dialogo <guilabel>Salva con nome</guilabel>. Inserire il nome da assegnare al file nella finestra di dialogo 
-<guilabel>Salva con nome</guilabel> e quindi fare clic su <guibutton>OK</guibutton>.</para>
+		  <listitem><para>Per salvare le modifiche apportate a un file esistente, scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Salva</guimenuitem></menuchoice> o fare clic sul pulsante  <guibutton>Salva</guibutton> nella barra degli strumenti. </para>
 		  </listitem>
-		  <listitem><para>Per salvare un file nuovo o per salvare un file esistente con un nuovo nome, scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Salva con nome</guimenuitem> </menuchoice>. Inserire il nome da assegnare al file nella finestra di dialogo 
-<guilabel>Salva con nome</guilabel> e quindi fare clic su <guibutton>OK</guibutton>. </para>
+		  <listitem><para>Per salvare un file nuovo, o per salvare un file esistente con un nuovo nome, scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Salva con nome</guimenuitem> </menuchoice>. Inserire il nome da assegnare al file nella finestra di dialogo 
+<guilabel>Salva con nome</guilabel> e fare clic su <guibutton>OK</guibutton>. </para>
 		  </listitem>
-		  <listitem><para>Per salvare tutti i file aperti in quel momento in <application>&app;</application>, scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Salva tutto</guimenuitem></menuchoice>.</para>
+		  <listitem><para>Per salvare tutti i file aperti in quel momento in <application>&app;</application>, scegliere <menuchoice> <guimenu>Documenti</guimenu> <guimenuitem>Salva tutto</guimenuitem></menuchoice>.</para>
 		  </listitem>
 		</itemizedlist>
 	 </sect2>
@@ -252,18 +306,22 @@
 		  <listitem><para>Usare il tasto <keycap>Delete</keycap> per eliminare il testo.
 				</para>
 		  </listitem>
-		  <listitem><para>Usare le voci di menu <guimenuitem>Taglia</guimenuitem>, <guimenuitem>Copia</guimenuitem>, <guimenuitem>Incolla</guimenuitem> e <guimenuitem>Cancella</guimenuitem> per modificare il testo. </para>
+		  <listitem><para>Per modificare il testo, usare le voci <guimenuitem>Taglia</guimenuitem>, <guimenuitem>Copia</guimenuitem>, <guimenuitem>Incolla</guimenuitem> ed <guimenuitem>Elimina</guimenuitem> del menu <guimenu>Modifica</guimenu>. </para>
 		  </listitem>
 		</itemizedlist>
-		<para>Quando si effettua una selezione con il mouse, <application>&app;</application> copia automaticamente il testo selezionato in un buffer. &Egrave; quindi possibile eseguire le seguenti operazioni sul testo selezionato:
+		<para>&Egrave; quindi possibile eseguire le seguenti operazioni sul testo selezionato:
 		  </para>
 		<itemizedlist>
+		  <listitem><para>Per copiare il testo selezionato in un buffer, scegliere 
+				<menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Copia</guimenuitem>
+				  </menuchoice>.</para>
+		  </listitem>
 		  <listitem><para>Per eliminare il testo selezionato dal file e spostarlo nel buffer, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Taglia</guimenuitem></menuchoice>.</para>
 		  </listitem>
 		  <listitem><para>Per eliminare in modo permanente il testo dal file, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Elimina</guimenuitem>
 				  </menuchoice>.</para>
 		  </listitem>
-		  <listitem><para>Per inserire il contenuto del buffer nella posizione corrente del cursore, fare clic con il pulsante centrale del mouse o scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Incolla</guimenuitem></menuchoice>. Prima di poter incollare il testo nel file &egrave; sempre necessario copiarlo o tagliarlo.</para>
+		  <listitem><para>Per inserire il contenuto del buffer nella posizione del cursore, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Incolla</guimenuitem></menuchoice>. Prima di incollare un testo in un file &egrave; sempre necessario copiarlo o tagliarlo.</para>
 		  </listitem>
 		  <listitem><para>Per selezionare tutto il testo incluso in un file, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Seleziona tutto</guimenuitem></menuchoice>. </para>
 		  </listitem>
@@ -272,7 +330,7 @@
 <!-- ============== To Undo or Redo Edits ====================== -->
 	 <sect2 id="gedit-undo-redo-edits"> 
 		<title>Annullare o ripetere le modifiche</title>
-		<para>Per annullare un'operazione di modifica, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Annulla</guimenuitem></menuchoice>. Per ripetere una operazione di modifica, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Ripeti</guimenuitem></menuchoice>. Il numero di modifiche che &egrave; possibile annullare &egrave; determinato dall'impostazione di <guilabel>Imposta limite delle operazioni annullabili a</guilabel> nella scheda <xref linkend="gedit-prefs-undo"/> della finestra di dialogo <guilabel>Preferenze</guilabel>. Nell'impostazione predefinita, il limite per le operazioni che &egrave; possibile annullare &egrave; di 25.</para>
+		<para>Per annullare un'operazione di modifica, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Annulla</guimenuitem></menuchoice>. Per ripetere un'operazione di modifica, scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Ripeti</guimenuitem></menuchoice>. Il numero di modifiche che &egrave; possibile annullare &egrave; determinato dall'impostazione di <guilabel>Imposta limite delle operazioni annullabili a</guilabel> nella scheda <xref linkend="gedit-prefs-undo"/> della finestra di dialogo <guilabel>Preferenze</guilabel>.   </para>
 	 </sect2>
 <!-- ============= To Find Text ================================ -->
 	 <sect2 id="gedit-find-text"> 
@@ -282,20 +340,31 @@
 		  <listitem><para>Scegliere <menuchoice> <guimenu>Cerca</guimenu> <guimenuitem>Trova</guimenuitem> </menuchoice> per visualizzare la finestra di dialogo <guilabel>Trova</guilabel>.</para>
 		  </listitem>
 		  <listitem><para>Digitare la stringa da trovare nel campo <guilabel>Cerca</guilabel>.</para>
-		  </listitem>
-		  <listitem><para>Selezionare una delle seguenti opzioni:</para>
+                  <para>&Egrave; possibile inserire le seguenti sequenze di escape:</para>
 			 <itemizedlist>
-				<listitem><para><guilabel>Inizia ricerca dall'inizio del documento</guilabel></para>
+				<listitem>
+                                   <para><literal>\n</literal></para>
+                                   <para>Usare questa sequenza di escape per indicare un ritorno a capo (newline)</para>
 				</listitem>
-				<listitem><para><guilabel>Inizia ricerca dalla posizione del cursore</guilabel></para>
+				<listitem>
+                                   <para><literal>\t</literal></para>
+                                   <para>Usare questa sequenza di escape per indicare una tabulazione</para>
+				</listitem>
+				<listitem>
+                                   <para><literal>\r</literal></para>
+                                   <para>Usare questa sequenza di escape per indicare un ritorno a capo</para>
 				</listitem>
 			 </itemizedlist>
 		  </listitem>
 		  <listitem><para>Selezionare l'opzione <guilabel>Maiuscole/minuscole</guilabel> per individuare solo le occorrenze della stringa che corrispondono esattamente al testo digitato. </para>
 		  </listitem>
-		  <listitem><para>Fare clic su <guibutton>Trova</guibutton> per cercare la prima occorrenza della stringa nel file. Se <application>&app;</application> trova la stringa, l'applicazione sposta il cursore in corrispondenza della stringa e la seleziona.</para>
+		  <listitem><para>Selezionare l'opzione <guilabel>Solo parole intere</guilabel> per individuare solo le occorrenze della stringa che corrispondono a parole intere del testo digitato. </para>
 		  </listitem>
-		  <listitem><para>Per trovare la successiva occorrenza, fare clic su <guibutton>Trova successivo</guibutton>.</para>
+		  <listitem><para>Selezionare l'opzione <guilabel>Ricomincia dall'inizio</guilabel> per eseguire la ricerca fino alla fine del file e continuare dall'inizio del file. </para>
+		  </listitem>
+		  <listitem><para>Fare clic su <guibutton>Trova</guibutton> per cercare la prima occorrenza della stringa nel file. Se <application>&app;</application> trova la stringa, il cursore viene posizionato in corrispondenza della stringa e questa viene selezionata.</para>
+		  </listitem>
+		  <listitem><para>Per trovare l'occorrenza successiva, fare clic su <guibutton>Trova</guibutton>.</para>
 		  </listitem>
 		  <listitem><para>Per terminare la ricerca, fare clic su <guibutton>Chiudi</guibutton>. </para>
 		  </listitem>
@@ -306,27 +375,40 @@
 <title>Trovare e sostituire un testo</title>
 		<para>Per ricercare una stringa all'interno di un file e sostituirla con un'altra, procedere come segue:</para>
 		<orderedlist>
-		  <listitem><para>Scegliere <menuchoice> <guimenu>Cerca</guimenu> <guimenuitem>Sostituisci</guimenuitem> </menuchoice> per visualizzare la finestra di dialogo <guilabel>Sostituisci</guilabel>.</para>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Cerca</guimenu>
+				  <guimenuitem>Sostituisci</guimenuitem> </menuchoice>
+				per aprire la finestra di dialogo <guilabel>Sostituisci</guilabel>.</para>
 		  </listitem>
 		  <listitem><para>Digitare la stringa da trovare nel campo <guilabel>Cerca</guilabel>. </para>
-		  </listitem>
-		  <listitem><para>Digitare la stringa con cui sostituire quella che si sta ricercando nel campo <guilabel>Sostituisci con</guilabel>.</para>
-		  </listitem>
-		  <listitem><para>Selezionare una delle seguenti opzioni:</para>
+                  <para>&Egrave; possibile inserire le seguenti sequenze di escape:</para>
 			 <itemizedlist>
-				<listitem><para><guilabel>Inizia ricerca dall'inizio del documento</guilabel></para>
+				<listitem>
+                                   <para><literal>\n</literal></para>
+                                   <para>Usare questa sequenza di escape per indicare un ritorno a capo (newline)</para>
 				</listitem>
-				<listitem><para><guilabel>Inizia ricerca dalla posizione del cursore</guilabel></para>
+				<listitem>
+                                   <para><literal>\t</literal></para>
+                                   <para>Usare questa sequenza di escape per indicare una tabulazione</para>
+				</listitem>
+				<listitem>
+                                   <para><literal>\r</literal></para>
+                                   <para>Usare questa sequenza di escape per indicare un ritorno a capo</para>
 				</listitem>
 			 </itemizedlist>
 		  </listitem>
+		  <listitem><para>Digitare la stringa con cui sostituire quella che si sta ricercando nel campo <guilabel>Sostituisci con</guilabel>.</para>
+		  </listitem>
 		  <listitem><para>Selezionare l'opzione <guilabel>Maiuscole/minuscole</guilabel> per individuare solo le occorrenze della stringa che corrispondono esattamente al testo digitato. </para>
 		  </listitem>
-		  <listitem><para>Fare clic su <guibutton>Trova</guibutton> per cercare la prima occorrenza della stringa nel file. Se <application>&app;</application> trova la stringa, l'applicazione sposta il cursore in corrispondenza della stringa e la seleziona. </para>
+		  <listitem><para>Selezionare l'opzione <guilabel>Solo parole intere</guilabel> per individuare solo le occorrenze della stringa che corrispondono a parole intere del testo digitato. </para>
 		  </listitem>
-		  <listitem><para>Fare clic su <guibutton>Sostituisci</guibutton> per sostituire l'occorrenza della stringa con il testo che era stato immesso nel campo <guilabel>Sostituisci con</guilabel>. Fare clic su <guibutton>Sostituisci tutto</guibutton> per sostituire tutte le occorrenze della stringa.</para>
+		  <listitem><para>Selezionare l'opzione <guilabel>Ricomincia dall'inizio</guilabel> per eseguire la ricerca fino alla fine del file e continuare dall'inizio del file. </para>
 		  </listitem>
-		  <listitem><para>Per trovare la successiva occorrenza, fare clic su <guibutton>Trova successivo</guibutton>.</para>
+		  <listitem><para>Fare clic su <guibutton>Trova</guibutton> per cercare la prima occorrenza della stringa nel file. Se <application>&app;</application> trova la stringa, il cursore viene posizionato in corrispondenza della stringa e questa viene selezionata. </para>
+		  </listitem>
+		  <listitem><para>Fare clic sul pulsante <guibutton>Sostituisci</guibutton> per sostituire l'occorrenza della stringa con il testo digitato nel campo <guilabel>Sostituisci con</guilabel>. Fare clic sul pulsante <guibutton>Sostituisci tutto</guibutton> per sostituire tutte le occorrenze della stringa.</para>
+		  </listitem>
+		  <listitem><para>Per trovare l'occorrenza successiva, fare clic su <guibutton>Trova</guibutton>.</para>
 		  </listitem>
 		  <listitem><para>Per terminare la ricerca, fare clic su <guibutton>Chiudi</guibutton>. </para>
 		  </listitem>
@@ -338,10 +420,10 @@
 		<para>Per aprire un file usando un URI (Uniform Resource Identifier), procedere come segue:</para>
 		<itemizedlist>
 		<listitem>
-		<para>Scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Apri da URI</guimenuitem> </menuchoice> per visualizzare la finestra di dialogo <guilabel>Apri da URI</guilabel>. Inserire l'URI del file da aprire e quindi fare clic su <guibutton>Apri</guibutton>.</para>
+		<para>Scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Apri posizione</guimenuitem> </menuchoice> per visualizzare la finestra di dialogo <guilabel>Apri posizione</guilabel>. Inserire l'URI del file che si desidera aprire e fare clic su <guibutton>Apri</guibutton>.</para>
 		</listitem>
 		<listitem>
-		<para>Digitare <command>gedit <replaceable>http://...</replaceable></command> dalla riga di comando, dove <replaceable>http://...</replaceable> indica l'URI del file da aprire, quindi premere <keycap>Return</keycap>.</para>
+		<para>Digitare <command>gedit <replaceable>URI</replaceable></command> nella riga di comando, dove <replaceable>URI</replaceable> indica l'URI del file da aprire, quindi premere <keycap>Return</keycap>. Sono accettati i tipi di <replaceable>URI</replaceable> nella forma <literal>http:</literal>, <literal>ftp:</literal>, <literal>file:</literal> e tutti gli altri metodi supportati da <literal>gnome-vfs</literal>.</para>
 		</listitem>
 		</itemizedlist>
 		<para>L'applicazione apre il file che si trova all'URI indicato in modalit&agrave; di sola lettura.</para>
@@ -351,27 +433,12 @@
 		<title>Inviare l'output di un comando in pipe a un file</title>
 		<para>&Egrave; possibile usare <application>&app;</application> per inviare con una pipe l'output di un comando a un file di testo. Ad esempio, per inviare in pipe l'output del comando <command>ls</command> a un file di testo, digitare <command>ls | gedit</command>, quindi premere <keycap>Return</keycap>.</para>
 		<para>L'output del comando <command>ls</command> viene visualizzato in un nuovo file di testo nella finestra di <application>&app;</application>.</para>
-		<para>In alternativa, &egrave; possibile usare il plugin Output shell per inviare l'output di un comando al file corrente. Per usare il plugin Output shell, procedere come segue:</para>
-		<orderedlist>
-		  <listitem><para>Caricare il plugin Output shell. Vedere <xref linkend="gedit-install-plugins"/> per informazioni su come caricare un plugin.</para>
-		  </listitem>
-
-		  <listitem><para>Scegliere <menuchoice><guimenu>Modifica</guimenu> <guimenuitem>Inserisci output shell</guimenuitem> </menuchoice> per visualizzare la finestra di dialogo <guilabel>Output shell</guilabel>.
-				</para>
-		  </listitem>
-		  <listitem><para>Digitare il comando della shell da eseguire nel campo <guilabel>Comando per la shell</guilabel>.</para>
-		  </listitem>
-		  <listitem><para>Modificare il campo <guilabel>Directory corrente</guilabel>, se necessario. Nell'impostazione predefinita, il plugin Output shell esegue il comando specificato nella directory corrente.</para>
-		  </listitem>
-		  <listitem><para>Fare clic su <guibutton>Esegui</guibutton>. Il plugin Output shell esegue il comando e inserisce l'output nel file corrente.
-				</para>
-		  </listitem>
-		</orderedlist>
+		<para>In alternativa, &egrave; possibile usare il plugin Comando per la shell per inviare l'output di un comando al file corrente. Per informazioni sull'utilizzo del plugin Output shell, vedere <xref linkend="gedit-shell-command-plugin"/>.</para>
 	 </sect2>
 <!-- ============= To Go to a Specific Line ======================= -->
 	 <sect2 id="gedit-goto-line"> 
-		<title>Passare a una riga specifica</title>
-		<para>Per spostarsi in corrispondenza di una riga specifica del file corrente, procedere come segue:</para>
+		<title>Posizionare il cursore su una riga specifica</title>
+		<para>Per posizionare il cursore su una riga specifica del file, procedere come segue:</para>
 		<orderedlist>
 		  <listitem><para>Scegliere <menuchoice><guimenu>Cerca</guimenu> <guimenuitem>Vai alla riga</guimenuitem></menuchoice> per visualizzare la finestra di dialogo <guilabel>Vai alla riga</guilabel>.</para>
 		  </listitem>
@@ -379,10 +446,12 @@
 		  </listitem>
 		  <listitem><para>Fare clic su <guibutton>Vai alla riga</guibutton>. L'applicazione sposta il cursore al numero di riga specificato.</para>
 		  </listitem>
+		  <listitem><para>Per chiudere la finestra di dialogo <guilabel>Vai alla riga</guilabel>, fare clic su <guibutton>Chiudi</guibutton>.</para>
+		  </listitem>
 		</orderedlist>
 	 </sect2>
 	 <sect2 id="gedit-input-mode">
-		<title>Modificare il metodo di input</title>
+		<title>Cambiare il metodo di input</title>
 		<para>Per modificare il metodo di input, fare clic con il pulsante destro del mouse nella finestra di testo, quindi selezionare <guimenuitem>Metodi di input</guimenuitem>. 
 		La voce di menu <guimenuitem>Inserisci carattere di controllo Unicode</guimenuitem> contiene alcune opzioni di layout utili per operare con i set di caratteri non latini.</para>
 	 </sect2>
@@ -395,20 +464,25 @@
 		  <listitem><para>Inviare l'output di un comando di stampa in un file.</para>
 		  </listitem>
 		</itemizedlist>
-		<para>Se si stampa su un file, <application>&app;</application> invia l'output al file in un formato di prestampa. I pi&ugrave; diffusi formati di prestampa sono PostScript e PDF (Portable Document Format).</para>
+		<para>Se si stampa su un file, <application>&app;</application> invia l'output al file in un formato di prestampa. I formati di prestampa pi&ugrave; diffusi sono PostScript e PDF (Portable Document Format).</para>
 		  
-		<para>Per visualizzare un'anteprima delle pagine che verranno stampate, fare clic su <menuchoice> <guimenu>File</guimenu>
-
-		<guimenuitem>Anteprima di stampa</guimenuitem> </menuchoice> per visualizzare la finestra di dialogo <guilabel>gedit - Anteprima di stampa</guilabel>.</para>
+		<para>Per visualizzare un'anteprima delle pagine da stampare, scegliere
+		<menuchoice> <guimenu>File</guimenu>
+		<guimenuitem>Anteprima di stampa</guimenuitem> </menuchoice>.</para>
 		  
-		<para>Per stampare il file corrente su una stampante o su un file, scegliere  
+		<para>Per stampare il file attivo su una stampante o su un file, scegliere  
 		<menuchoice><guimenu>File</guimenu> <guimenuitem>Stampa</guimenuitem></menuchoice> per visualizzare la finestra di dialogo <guilabel>Stampa</guilabel>.</para>
 				
 		<para>La finestra di dialogo <guilabel>Stampa</guilabel> consente di specificare le seguenti opzioni di stampa:</para>
 		
-		<sect3 id="print-dialog-job">
-		<title>Scheda Lavoro</title>
+		<sect3 id="print-dialog-printer">
+		<title>Scheda Stampante</title>
 		<variablelist>
+	 		<varlistentry> <term>Riquadro della stampante</term> 
+			 <listitem>
+				<para>Selezionare la stampante da utilizzare per stampare il file.</para>
+			 </listitem>
+		  	</varlistentry>
 	 		<varlistentry> <term><guilabel>Intervallo di stampa</guilabel> </term> 
 			 <listitem>
 				<para>Selezionare una delle opzioni seguenti per determinare quali pagine stampare:</para>
@@ -420,46 +494,24 @@
 				<listitem>
 				<para><guilabel>Selezione</guilabel></para>
 				<para>Selezionare questa opzione per stampare solo il testo selezionato. L'opzione &egrave; abilitata solo quando &egrave; stata effettuata una selezione.</para>
-				</listitem>								
+				</listitem>
+								
 				</itemizedlist>
-				<para>Impostazione predefinita:  <guilabel>Tutto</guilabel>.</para>
 			 </listitem>
 		  	</varlistentry>
-		  	<varlistentry> <term><guilabel>Copie</guilabel> </term> 
+		  	<varlistentry> <term><guilabel>Numero di copie</guilabel> </term> 
 			 <listitem>
 				<para>Usare questa casella di selezione per specificare il numero di copie del file da stampare.</para>
-				<para>Impostazione predefinita:  1.</para>
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Fascicola</guilabel> </term> 
 			 <listitem>
 				<para>Se si intendono stampare pi&ugrave; copie del file, selezionare questa opzione per fascicolare le copie stampate.</para>
-				<para>Impostazione predefinita:  non selezionato.</para>
 			 </listitem>
 		  	</varlistentry>
-			</variablelist>
-		</sect3>
-		
-		<sect3 id="print-dialog-printer">
-		<title>Scheda Stampante</title>
-		<variablelist>
-	 		<varlistentry> <term><guilabel>Stampante</guilabel> </term> 
+		  	<varlistentry> <term><guilabel>Nome del file</guilabel> </term> 
 			 <listitem>
-				<para>Usare questa casella di riepilogo per selezionare la stampante su cui stampare il file.</para>
-				<para>Impostazione predefinita:  <guilabel>Stampante predefinita di Gnome</guilabel>.</para>
-			 </listitem>
-		  	</varlistentry>
-		  	<varlistentry> <term><guilabel>Impostazioni</guilabel> </term> 
-			 <listitem>
-				<para>Usare questa casella di riepilogo per configurare le impostazioni della stampante. Per configurare
-				la stampante, fare clic su <guibutton>Configura</guibutton>.</para>
-				<para>Impostazione predefinita: Stampante predefinita</para>
-			 </listitem>
-		  	</varlistentry>
-		  	<varlistentry> <term><guilabel>Destinazione</guilabel> </term> 
-			 <listitem>
-				<para>Usare questa casella di riepilogo per selezionare la destinazione della stampa. Per stampare il file su una stampante, scegliere <guilabel>lpr</guilabel>. Per stampare su un file, scegliere <guilabel>File</guilabel>. Se si seleziona l'opzione <guilabel>File</guilabel>, digitare il nome del file di output nella casella di testo.</para>
-				<para>Impostazione predefinita:  <guilabel>lpr</guilabel>.</para>
+				<para>Per inviare la stampa ad un file, digitare nella casella di testo il nome del file di destinazione.</para>
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -470,154 +522,37 @@
 		<variablelist>
 	 		<varlistentry> <term><guilabel>Dimensione carta</guilabel> </term> 
 			 <listitem>
-				<para>Usare questa casella di riepilogo per selezionare la dimensione della carta su cui stampare il file.</para>
-				<para>Impostazione predefinita:  <guilabel>A4</guilabel>.</para>
+				<para>Usare questa casella di riepilogo a discesa per selezionare la dimensione della carta su cui stampare il file.</para>
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Larghezza</guilabel> </term> 
 			 <listitem>
-				<para>Usare questa casella di selezione per specificare la larghezza della carta. Usare la casella di riepilogo <guilabel>Centimetri</guilabel> per modificare l'unit&agrave; di misura per indicare la dimensione della carta.</para>
-				<para>Impostazione predefinita:  21,00 centimetri.</para>
+				<para>Usare questa casella di selezione per specificare la larghezza della carta. Usare la casella di riepilogo adiacente per modificare l'unit&agrave; di misura per la dimensione della carta.</para>
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Altezza</guilabel> </term> 
 			 <listitem>
 				<para>Usare questa casella di selezione per specificare l'altezza della carta. </para>
-				<para>Impostazione predefinita:  29,70 centimetri.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Orientamento alimentazione</guilabel> </term> 
+			 <listitem>
+				<para>Usare questa casella di riepilogo per selezionare l'orientamento della carta nella stampante.</para>
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Orientamento pagina</guilabel> </term> 
 			 <listitem>
-				<para>Usare questa casella di riepilogo per selezionare l'orientamento della pagina. </para>
-				<para>Impostazione predefinita:  <guilabel>Verticale</guilabel>.</para>
+				<para>Usare questa casella di riepilogo a discesa per selezionare l'orientamento della pagina. </para>
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Disposizione</guilabel> </term> 
 			 <listitem>
-				<para>Usare questa casella di riepilogo per selezionare la disposizione della pagina. Un'anteprima viene visualizzata nell'area <guilabel>Anteprima</guilabel>.</para>
-				<para>Impostazione predefinita:  <guilabel>Normale</guilabel>.</para>
+				<para>Usare questa casella di riepilogo a discesa per selezionare la disposizione della pagina. La disposizione prescelta viene visualizzata in anteprima nell'area <guilabel>Anteprima</guilabel>.</para>
 			 </listitem>
 		  	</varlistentry>
 		</variablelist>
 		</sect3>
 		
-	 </sect2>
-<!-- ============= To Use the gedit Plugins ========================= -->
-	 <sect2 id="gedit-use-plugins"> 
-		<title>Usare i plugin di &app;</title>
-		<para>Un plugin &egrave; un programma supplementare che aggiunge nuove funzionalit&agrave; a un'applicazione. I plugin disponibili per <application>&app;</application> consentono di eseguire varie attivit&agrave; direttamente dalla finestra di <application>&app;</application>. La tabella seguente elenca i plugin disponibili.</para>
-		<informaltable frame="topbot">
-		<tgroup cols="2">
-			<colspec colname="col1"/> 
-			<colspec colname="col2"/> 
-		<thead>
-		<row valign="top">
-			<entry colname="col1" colsep="0" valign="top"><para>Nome del plugin</para></entry>
-			<entry colname="col2" valign="top"><para>Funzione</para></entry>
-		</row>
-		</thead>
-		<tbody>
-		<row valign="top">
-			<entry><para>Tabella ASCII</para></entry>
-			<entry><para>Visualizza una finestra di dialogo che contiene la tabella dei caratteri ASCII. Questa tabella pu&ograve; essere usata per inserire i caratteri ASCII in un file.</para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Confronta file</para></entry>
-			<entry><para>Confronta due file e ne visualizza le differenze in una nuova finestra di <application>&app;</application>.
-			Questo plugin utilizza il programma <application>diff</application> per confrontare i file.</para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>CVS ChangeLog</para></entry>
-			<entry><para>Apre i messaggi di log associati con i comandi CVS commit.</para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Inserisci data/ora</para></entry>
-			<entry><para>Inserisce nel file la data e l'ora correnti.</para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Output shell</para></entry>
-			<entry><para>Inserisce l'output testuale di un comando della shell nel file corrente. </para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Elenco tag</para></entry>
-			<entry><para>Visualizza una finestra di dialogo con un elenco dei tag pi&ugrave; frequenti. Questa finestra di dialogo pu&ograve; essere usata per inserire i tag in un file. </para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>User name</para></entry>
-			<entry><para>Inserisce nel file il nome dell'utente corrente. </para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Conta parole</para></entry>
-			<entry><para>Conta il numero di righe, parole, caratteri con spazi, caratteri senza spazi e byte presenti nel file corrente. Il plugin visualizza i risultati nella finestra <guilabel>Conta parole</guilabel>. </para></entry>
-		</row> 	
-		</tbody>
-		</tgroup>
-		</informaltable>
-		</sect2>
-<!-- ============= To Load gedit Plugins ========================= -->
-	 <sect2 id="gedit-install-plugins">		<title>Caricare i plugin di &app;</title>
-		<para>Per caricare i plugin di <application>&app;</application>, scegliere <menuchoice><guimenu>Strumenti</guimenu> <guimenuitem>Gestione plugin</guimenuitem></menuchoice>. 
-		La finestra di dialogo <guilabel>Gestione plugin</guilabel> visualizza le seguenti informazioni:</para>
-		<itemizedlist>
-		  <listitem><para>Un elenco dei plugin disponibili.</para>
-		  </listitem>
-		  <listitem><para>Un pulsante <guibutton>Configura plugin</guibutton>. In alcuni plugin, questo pulsante pu&ograve; essere usato per aprire una finestra di configurazione.</para>
-		  </listitem>
-		  <listitem><para>Una breve descrizione dei plugin. Per visualizzare la descrizione, selezionare il plugin nell'elenco.</para>
-		  </listitem>	
-		  <listitem><para>Informazioni sull'autore del plugin e il nome del modulo.</para>
-		  </listitem>	  
-		</itemizedlist>
-		<para>Per caricare un plugin, selezionare la casella di controllo accanto al suo nome. <application>&app;</application> aggiunge il plugin al menu appropriato, come viene descritto nella tabella seguente.</para>
-		<informaltable frame="topbot">
-		<tgroup cols="2">
-		<colspec colname="col1"/> 
-		<colspec colname="col2"/> 
-		<thead>
-		<row valign="top">
-			<entry colname="col1" colsep="0" valign="top"><para>Nome del plugin</para></entry>
-			<entry colname="col2" valign="top"><para>Aggiunto al menu</para></entry>
-		</row>
-		</thead>
-		<tbody>
-		<row valign="top">
-			<entry><para>Tabella ASCII</para></entry>
-			<entry><para><menuchoice><guimenu>Modifica</guimenu> <guimenuitem>Tabella ASCII</guimenuitem></menuchoice></para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Confronta file</para></entry>
-			<entry><para><menuchoice><guimenu>File</guimenu> <guimenuitem>Confronta file</guimenuitem></menuchoice></para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>CVS ChangeLog</para></entry>
-			<entry><para><menuchoice><guimenu>File</guimenu> <guimenuitem>Apri CVS ChangeLogs</guimenuitem></menuchoice></para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Conta parole</para></entry>
-			<entry><para><menuchoice><guimenu>Cerca</guimenu> <guimenuitem>Conta parole</guimenuitem></menuchoice></para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Output shell</para></entry>
-			<entry><para><menuchoice><guimenu>Modifica</guimenu> <guimenuitem>Inserisci output shell</guimenuitem></menuchoice></para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Elenco tag</para></entry>
-			<entry><para><menuchoice><guimenu>Visualizza</guimenu> <guimenuitem>Elenco tag</guimenuitem></menuchoice></para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>Inserisci data/ora</para></entry>
-			<entry><para><menuchoice><guimenu>Modifica</guimenu> <guimenuitem>Inserisci data/ora</guimenuitem></menuchoice></para></entry>
-		</row>
-		<row valign="top">
-			<entry><para>User name</para></entry>
-			<entry><para><menuchoice><guimenu>Modifica</guimenu> <guimenuitem>Inserisci nome utente</guimenuitem></menuchoice></para></entry>
-		</row>
-		</tbody>
-		</tgroup>
-		</informaltable>
-
-		<para>Per rimuovere un plugin, deselezionare la casella di controllo accanto al suo nome.</para>
-		<para>Per chiudere la finestra di dialogo del <guilabel>Gestione plugin</guilabel>, fare clic su <guibutton>Chiudi</guibutton>.</para>
 	 </sect2>
 	 
 	 <sect2 id="gedit-customize-bars">
@@ -640,23 +575,27 @@
 		  <para><guimenuitem>Icona e testo</guimenuitem></para>
 		  <para> Visualizza le icone e il testo.</para>
 		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Testo prioritario accanto alle icone</guimenuitem></para>
+		  <para>Visualizza le icone con un testo in posizione affiancata.</para>
+		  </listitem>
 		  </itemizedlist>
 	 <para>Per visualizzare o nascondere la barra di stato, scegliere <menuchoice> <guimenu>Visualizza</guimenu>
 		  <guimenuitem>Barra di stato</guimenuitem> </menuchoice>. Per personalizzare il modo in cui <application>&app;</application>
 		  visualizza la barra di stato, scegliere <menuchoice> <guimenu>Visualizza</guimenu>
-		  <guisubmenu>Personalizza barra di stato</guisubmenu> </menuchoice>, quindi selezionare una delle seguenti voci del menu:</para>
+		  <guisubmenu>Personalizza barra di stato</guisubmenu></menuchoice>, quindi selezionare una delle seguenti voci del menu:</para>
 		  <itemizedlist>
 		  <listitem>
 		  <para><guimenuitem>Mostra posizione cursore</guimenuitem></para>
 		  <para>Visualizza il numero di riga e di colonna in cui &egrave; posizionato il cursore.</para>
-		  <para>Impostazione predefinita:  selezionato.</para>
 		  </listitem>
 		  <listitem>
 		  <para><guimenuitem>Mostra modalit&agrave; sovrascrittura</guimenuitem></para>
 		  <para> Visualizza la modalit&agrave; di modifica. Se l'editor &egrave; in modalit&agrave; di inserimento, la barra di stato contiene l'indicazione INS. Se l'editor &egrave; in modalit&agrave; di sovrascrittura, la barra di stato contiene l'indicazione SVR.</para>
-		  <para>Impostazione predefinita:  selezionato.</para>
 		  </listitem>
 		  </itemizedlist>
+	 <para>Per visualizzare o nascondere la finestra di output, scegliere <menuchoice> <guimenu>Visualizza</guimenu>
+		  <guimenuitem>Finestra di output</guimenuitem> </menuchoice>.</para>
 	 
 	 </sect2>
   </sect1>
@@ -674,6 +613,8 @@
 		</listitem>
 		<listitem><para><xref linkend="gedit-prefs-print"/></para>
 		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-plugins"/></para>
+		</listitem>
 	 </itemizedlist>
 	 
 	 
@@ -682,44 +623,38 @@
 	 <para>La categoria <guilabel>Editor</guilabel> &egrave; suddivisa nelle seguenti sottocategorie:</para>
 	 
 	 	<sect3 id="gedit-prefs-fontsandcolors">
-	 		<title>Font e colori</title>
+	 		<title>Tipi di carattere e colori</title>
 	 		<variablelist>
-		   <varlistentry><term><guilabel>Usa carattere del tema predefinito</guilabel> </term> <listitem>
+		   <varlistentry><term><guilabel>Usa carattere tema predefinito</guilabel> </term> <listitem>
 				<para>Selezionare questa opzione per usare il tipo di carattere predefinito del sistema nella finestra di testo di <application>&app;</application>. </para>
-				<para>Impostazione predefinita:  non selezionato.</para>
 			 </listitem>
 		  	</varlistentry>			
-		   <varlistentry><term><guilabel>Carattere usato dall'editor</guilabel> </term> <listitem>
+		   <varlistentry> <term><guilabel>Font dell'editor</guilabel> </term> 
+			 <listitem>
 				<para>Questo campo visualizza il tipo di carattere utilizzato da <application>&app;</application> per visualizzare il testo. 
 				Fare clic sul pulsante per specificare il tipo di carattere, lo stile e la dimensione da usare per il testo. </para>
-				<para>Impostazione predefinita:  Courier Medium 12 punti.</para>
 			 </listitem>
 		  	</varlistentry>
-		   <varlistentry><term><guilabel>Usa colori del tema predefinito</guilabel> </term> <listitem>
+		   <varlistentry><term><guilabel>Usa i colori predefiniti del tema</guilabel> </term> <listitem>
 				<para>Selezionare questa opzione per usare i colori del tema predefinito nella finestra di testo di <application>&app;</application>. </para>
-				<para>Impostazione predefinita:  selezionato.</para>
 			 </listitem>
 		  	</varlistentry>			
 		  	<varlistentry><term><guilabel>Colore del testo</guilabel> </term> <listitem>
 				<para>Fare clic sul pulsante <guibutton>Colore del testo</guibutton> per visualizzare la finestra di dialogo per la selezione dei colori. Scegliere un colore per il testo da visualizzare nella finestra di testo di <application>&app;</application>. </para>
-				<para>Impostazione predefinita:  nero.</para>
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry><term><guilabel>Colore di sfondo</guilabel> </term> <listitem>
 				<para>Fare clic sul pulsante <guibutton>Colore di sfondo</guibutton> per visualizzare la finestra di dialogo per la selezione dei colori. Selezionare un colore di sfondo per la finestra di testo di <application>&app;</application>. </para>
-				<para>Impostazione predefinita:  bianco.</para>
 			 </listitem>
 		  	</varlistentry>			
 		  	<varlistentry><term><guilabel>Colore del testo selezionato</guilabel> </term> <listitem>
 				<para>Fare clic sul pulsante <guibutton>Colore del testo selezionato</guibutton> per visualizzare la finestra di dialogo per la selezione dei colori. Selezionare un colore da usare per visualizzare il testo selezionato.
 				</para>
-				<para>Impostazione predefinita:  bianco.</para>
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry><term><guilabel>Colore della selezione</guilabel> </term> <listitem>
 				<para>Fare clic sul pulsante <guibutton>Colore della selezione</guibutton> per visualizzare la finestra di dialogo per la selezione dei colori. Selezionare un colore di sfondo da usare per evidenziare una selezione di testo.
 				  </para>
-				<para>Impostazione predefinita:  blu.</para>
 			 </listitem>
 		  	</varlistentry>			
 			</variablelist>
@@ -728,9 +663,13 @@
 	 	<sect3 id="gedit-prefs-tabs">
 	 		<title>Tabulazioni</title>
 			<variablelist>
-	 		<varlistentry><term><guilabel>Imposta larghezza tabulazioni su </guilabel> </term> <listitem>
-				<para>Usare questa casella di selezione per specificare la quantit&agrave; di spazi che viene inserita da <application>&app;</application> quando si preme il tasto <keycap>Tab</keycap>. </para>
-				<para>Impostazione predefinita:  8 caratteri.</para>
+	 		<varlistentry><term><guilabel>Imposta larghezza tabulazioni equivalente a</guilabel> </term> <listitem>
+				<para>Usare questa casella di selezione per specificare la larghezza dello spazio che <application>&app;</application> deve inserire quando si preme il tasto <keycap>Tab</keycap>. </para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Inserisci spazi invece di tab</guilabel> </term> 
+			 <listitem>
+				<para>Selezionare questa opzione per specificare che <application> &app;</application> deve inserire una sequenza di spazi anzich&eacute; un carattere di tabulazione quando si preme il tasto <keycap>Tab</keycap>. </para>
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -739,23 +678,23 @@
 	 	<sect3 id="gedit-prefs-wrapmode">
 	 		<title>A capo</title>
 			<variablelist>
-	 		<varlistentry><term><guilabel>A capo</guilabel> </term> <listitem>
-				<para>Selezionare una delle seguenti opzioni per determinare il modo con cui <application>&app;</application> deve mandare a capo il testo:</para>
-				<itemizedlist>
-				<listitem>
-				<para><guilabel>Nessun a capo automatico</guilabel></para>
-				<para>Selezionare questa opzione per non mandare mai a capo le righe. Il testo digitato viene visualizzato su una singola riga finch&eacute; non si preme il tasto <keycap>Return</keycap>.</para>
-				</listitem>
-				<listitem>
-				<para><guilabel>A capo automatico tra parole</guilabel></para>
-				<para>Selezionare questa opzione per mandare a capo il testo inserendo un'interruzione tra due parole quando si raggiunge il margine della finestra. </para>
-				</listitem>
-				<listitem>
-				<para><guilabel>A capo automatico tra caratteri</guilabel></para>
-				<para>Selezionare questa opzione per mandare a capo il testo inserendo un'interruzione tra due caratteri quando si raggiunge il margine della finestra.</para>
-				</listitem>								
-				</itemizedlist>
-				<para>Impostazione predefinita:  <guilabel>A capo automatico tra caratteri</guilabel></para>
+	 		<varlistentry> <term><guilabel>Abilita a capo automatico</guilabel> </term> 
+			 <listitem><para>Selezionare questa opzione per impostare il ritorno a capo del testo a livello di carattere quando si raggiunge il bordo della finestra. </para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Non dividere le parole su due righe</guilabel> </term> 
+			 <listitem><para>Selezionare questa opzione per impostare il ritorno a capo del testo a livello di parola quando si raggiunge il bordo della finestra. </para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+
+	 	<sect3 id="gedit-prefs-autoindent">
+	 		<title>Rientro automatico</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Abilita rientro automatico</guilabel> </term> 
+			 <listitem><para>Selezionare questa opzione per specificare che la riga successiva deve iniziare al livello di rientro di quella attuale.
+</para>
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -766,26 +705,74 @@
 			<variablelist>
 	 		<varlistentry><term><guilabel>Visualizza numeri di riga</guilabel> </term> <listitem>
 				<para>Selezionare questa opzione per visualizzare i numeri di riga nella parte sinistra della finestra di <application>&app;</application>. </para>
-				<para>Impostazione predefinita:  non selezionato.</para>
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
 		</sect3>	 
 		
+	 	<sect3 id="gedit-prefs-open">
+	 		<title>Apri</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Codifiche supportate</guilabel> </term> 
+			 <listitem><para>La codifica dei caratteri &egrave; un metodo per la conversione dei byte in caratteri. 
+			Codifiche differenti possono convertire la stessa sequenza di byte in caratteri diversi, oppure possono produrre un output non valido. 
+			Se si apre un file usando la stessa codifica usata per crearlo, tutti i caratteri vengono visualizzati nel modo previsto. 
+			Se viceversa si apre un file usando una codifica differente, &egrave; possibile che alcuni caratteri non vengano visualizzati correttamente o che vengano restituiti degli errori.
+			           </para>
+			           <para>La codifica predefinita di <application>&app;</application> per l'apertura dei file &egrave; UTF-8. La codifica UTF-8 pu&ograve; essere usata anche per testi multilingue, poich&eacute; comprende quasi tutti gli alfabeti e i set di caratteri noti. Se il file non utilizza una codifica valida per UTF-8, 
+				<application>&app;</application> cerca di aprirlo usando la codifica della versione locale corrente. In caso di esito negativo, <application>&app;</application> prova a usare uno dei metodi elencati in <guilabel>Codifiche supportate</guilabel>, iniziando dalla prima voce dell'elenco.
+			           </para>
+			           <para>
+Per modificare il contenuto dell'elenco Codifiche supportate, usare i pulsanti descritti nella tabella seguente:
+			           </para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Pulsante</para></entry>
+			<entry colname="col2" valign="top"><para>Descrizione</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para><guilabel>Aggiungi</guilabel></para></entry>
+			<entry><para>Aggiunge una codifica all'elenco.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para><guilabel>Rimuovi</guilabel></para></entry>
+			<entry><para>Rimuove una codifica dall'elenco.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Freccia su</para></entry>
+			<entry><para>Sposta la codifica pi&ugrave; in alto nell'elenco.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Freccia in gi&ugrave;</para></entry>
+			<entry><para>Sposta la codifica pi&ugrave; in basso nell'elenco.</para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+
 	 	<sect3 id="gedit-prefs-save">
-	 		<title>Salvataggio</title>
+	 		<title>Salva</title>
 	 		<variablelist>
 	 		<varlistentry><term><guilabel>Crea una copia di backup dei file prima del salvataggio</guilabel> </term> <listitem>
-				<para>Selezionare questa opzione per creare una copia di backup di un file ogni volta che viene salvato. La copia di backup ha l'estensione <filename>.bak</filename>.</para>
-				<para>Impostazione predefinita:  non selezionato.</para>
+				<para>Selezionare questa opzione per creare una copia di backup di un file ogni volta che viene salvato. La copia di backup del file presenta una tilde (&tilde;) alla fine del nome.</para>
 			 </listitem>
 		  	</varlistentry>
-	 		<varlistentry><term><guilabel>Salva automaticamente il file ogni</guilabel> </term> <listitem>
+	 		<varlistentry><term><guilabel>Salva il file corrente ogni</guilabel> </term> <listitem>
 				<para>Selezionare questa opzione per impostare il salvataggio automatico del file a intervalli regolari. Usare la casella di selezione per specificare l'intervallo per il salvataggio automatico del file.</para>
-				<para>Impostazione predefinita: non selezionato, 10 minuti.</para>
 			 </listitem>
 		  	</varlistentry>
-	 		<varlistentry><term><guilabel>Durante il salvataggio</guilabel> </term> <listitem>
+	 		<varlistentry> <term><guilabel>Quando viene salvato un file esistente</guilabel> </term> 
+			 <listitem>
 				<para>Selezionare una delle seguenti opzioni per il salvataggio:</para>
 				<itemizedlist>
 				<listitem>
@@ -801,7 +788,21 @@
 				<para>Selezionare questa opzione per salvare il file con la versione locale corrente solo se era gi&agrave; stato salvato in precedenza in questo modo.</para>
 				</listitem>								
 				</itemizedlist>
-				<para>Impostazione predefinita:  <guilabel>Usa sempre la codifica UTF-8</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Quando viene salvato un nuovo file</guilabel> </term> 
+			 <listitem>
+				<para>Selezionare una delle seguenti opzioni per il salvataggio dei file nuovi:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Usa sempre la codifica UTF-8</guilabel></para>
+				<para>Selezionare questa opzione per salvare i file nuovi con la codifica UTF-8.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Usa codifica della versione locale corrente, se possibile</guilabel></para>
+				<para>Selezionare questa opzione per salvare i file nuovi usando la versione locale corrente. &Egrave; possibile configurare diverse versioni locali per i vari metodi di input. </para>
+				</listitem>							
+				</itemizedlist>
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -810,11 +811,11 @@
 		</sect3>	 
 	 
 	 	<sect3 id="gedit-prefs-undo">
-	 		<title>Annullamento modifiche</title>
+	 		<title>Annulla</title>
 	 		<variablelist>
-	 		<varlistentry><term><guilabel>Imposta limite delle operazioni annullabili a</guilabel> </term> <listitem>
+	 		<varlistentry> <term><guilabel>Imposta limite delle operazioni annullabili a</guilabel> </term> 
+			 <listitem>
 				<para>Selezionare questa opzione per impostare un limite al numero di operazioni di modifica che &egrave; possibile annullare. Usare la casella di selezione per specificare il numero massimo di azioni annullabili. </para>
-				<para>Impostazione predefinita:  selezionato, 25 azioni.</para>
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -827,48 +828,43 @@
 	 <para>La categoria <guilabel>Stampa</guilabel> &egrave; suddivisa nelle seguenti sottocategorie:</para>
 	 
 	 	<sect3 id="gedit-prefs-page">
-	 		<title>Page</title>
+	 		<title>Pagina</title>
 	 	<variablelist>
 		  <varlistentry><term><guilabel>Stampa le intestazioni delle pagine</guilabel> </term> <listitem>
-				<para>Selezionare questa opzione per includere un'intestazione in ogni pagina che viene stampata. Non &egrave; possibile configurare l'intestazione. </para>
-				<para>Impostazione predefinita:  selezionato.</para>
+				<para>Selezionare questa opzione per includere un'intestazione in ogni pagina stampata. Non &egrave; possibile configurare l'intestazione. </para>
 			 </listitem>
 		  </varlistentry>
-		  <varlistentry><term><guilabel>A capo automatico (tra caratteri)</guilabel> </term> <listitem>
-				<para>Selezionare questa opzione per mandare a capo il testo automaticamente quando si stampa un file. L'applicazione conteggia le righe mandate a capo come una singola riga ai fini della numerazione.
+		  <varlistentry> <term><guilabel>Abilita a capo automatico</guilabel> </term> 
+			 <listitem>
+				<para>Selezionare questa opzione per mandare a capo il testo automaticamente a livello di parola durante la stampa del file. L'applicazione conteggia le righe mandate a capo come una singola riga ai fini della numerazione.
 				  </para>
-				<para>Impostazione predefinita:  selezionato.</para>
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry><term><guilabel>Stampa i numeri di riga ogni</guilabel>
 			 </term> <listitem>
-				<para>Selezionare questa opzione per includere i numeri di riga quando si stampa un file. Usare la casella di selezione per specificare la frequenza con cui stampare i numeri, ad esempio ogni 5 righe, ogni 10 righe e cos&igrave; via. </para>
-				<para>Impostazione predefinita:  non selezionato, 1 riga.</para>
+				<para>Selezionare questa opzione per includere i numeri di riga nella stampa del file. Usare la casella di selezione per specificare la frequenza con cui stampare i numeri, ad esempio ogni 5 righe, ogni 10 righe e cos&igrave; via. </para>
 			 </listitem>
 		  </varlistentry>
 		</variablelist>
 		</sect3>
 		
 		<sect3 id="gedit-prefs-fonts">
-	 		<title>Tipi di carattere</title>
+	 		<title>Font</title>
 	 	<variablelist>
-		  <varlistentry> <term><guilabel>Carattere usato per stampare il testo</guilabel> </term> 
+		  <varlistentry> <term><guilabel>Corpo del testo</guilabel> </term> 
 			 <listitem>
-				<para>Fare clic su questo pulsante per selezionare il tipo di carattere da usare per stampare il corpo del testo di un file.</para>
-				<para>Impostazione predefinita:  Courier 9.0.</para>
+				<para>Fare clic su questo pulsante per selezionare il tipo di carattere da usare per stampare il corpo del testo dei file.</para>
 			 </listitem>
 		  </varlistentry>
-		  <varlistentry> <term><guilabel>Carattere usato per la stampa dei titoli</guilabel> </term> 
+		  <varlistentry> <term><guilabel>Intestazioni di pagina</guilabel> </term> 
 			 <listitem>
-				<para>Fare clic su questo pulsante per selezionare il tipo di carattere da usare per stampare le intestazioni di un file. </para>
-				<para>Impostazione predefinita:  Helvetica 11.0.</para>
+				<para>Fare clic su questo pulsante per selezionare il tipo di carattere da usare per stampare le intestazioni dei file. </para>
 			 </listitem>
 		  </varlistentry>
-		  <varlistentry> <term><guilabel>Carattere usato per stampare i numeri di riga</guilabel>
+		  <varlistentry> <term><guilabel>Numeri di riga</guilabel>
 			 </term> 
 			 <listitem>
 				<para>Fare clic su questo pulsante per selezionare il tipo di carattere con cui stampare i numeri di riga.</para>
-				<para>Impostazione predefinita:  Helvetica 8.0.</para>
 			 </listitem>
 		  </varlistentry>
 		</variablelist>
@@ -876,7 +872,520 @@
 		</sect3>
 		
 	 </sect2>	 
-	 	 	 
+
+	 <sect2 id="gedit-prefs-plugins">
+	 <title>Plugin</title>
+	 <para>Per informazioni sull'uso della categoria <guilabel>Plugin</guilabel> della finestra di dialogo <guilabel>Preferenze</guilabel>, vedere <xref linkend="gedit-install-plugins"/>. </para>		
+	 </sect2>	 
 	 
  </sect1>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect1 id="gedit-plugins"> 
+<title>Uso dei plugin</title>
+		<para>Un plugin &egrave; un programma supplementare che aggiunge nuove funzionalit&agrave; a un'applicazione. I plugin disponibili per <application>&app;</application> consentono di eseguire varie attivit&agrave; direttamente dalla finestra di <application>&app;</application>. La tabella seguente elenca i plugin di <application>&app;</application>.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nome del plugin</para></entry>
+			<entry colname="col2" valign="top"><para>Funzione</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>Tabella ASCII</para></entry>
+			<entry><para>Visualizza una finestra di dialogo che contiene la tabella dei caratteri ASCII. Questa tabella pu&ograve; essere usata per inserire i caratteri ASCII in un file.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para>Apre i messaggi di log associati con i comandi CVS commit.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Confronta file</para></entry>
+			<entry><para>Confronta due file e ne visualizza le differenze nella finestra di output.
+			Il confronto dei file viene eseguito con il comando <command>diff</command>.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Statistiche sul documento</para></entry>
+			<entry><para>Conta il numero di righe, parole, caratteri e byte del file attivo. Il plugin visualizza i risultati nella finestra di dialogo <guilabel>Statistiche sul documento</guilabel>. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Applica un rientro alle righe</para></entry>
+			<entry><para>Applica un rientro alle righe selezionate o rimuove il rientro esistente.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Inserisci data/ora</para></entry>
+			<entry><para>Inserisce nel file la data e l'ora correnti.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Comando per la shell</para></entry>
+			<entry><para>Visualizza l'output di testo di un comando eseguito nella shell nella finestra di output. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Ordina</para></entry>
+			<entry><para>Ordina il testo selezionato. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Elenco tag</para></entry>
+			<entry><para>Visualizza una finestra con un elenco dei tag pi&ugrave; frequenti. Questa finestra pu&ograve; essere utilizzata per inserire un tag in un file. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>User name</para></entry>
+			<entry><para>Inserisce nel file il nome dell'utente corrente. </para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"> 
+		<title>Caricare i plugin di &app;</title>
+		<para>Per caricare i plugin di <application>&app;</application>, scegliere <menuchoice> 
+		  <guimenu>Modifica</guimenu>
+		  <guimenuitem>Preferenze</guimenuitem> 
+		  </menuchoice>. All'interno della categoria <guilabel>Plugin</guilabel>, fare clic sulla sottocategoria <guilabel>Gestione</guilabel>. 
+		 La sottocategoria <guilabel>Gestione</guilabel> mostra le seguenti informazioni:</para>
+		<itemizedlist>
+		  <listitem><para>L'elenco dei plugin che &egrave; possibile usare con <application>&app;</application>.</para>
+		  </listitem>
+		  <listitem><para>Un pulsante <guibutton>Configura plugin</guibutton>. In alcuni plugin, questo pulsante pu&ograve; essere usato per aprire una finestra di configurazione. Ad esempio, vedere 
+		  <xref linkend="gedit-compare-files-configure"/> e <xref linkend="gedit-date-time-configure"/>.</para>
+		  </listitem>
+		  <listitem><para>Una breve descrizione dei plugin. Per visualizzare la descrizione, selezionare il plugin nell'elenco.</para>
+		  </listitem>	
+		  <listitem><para>Informazioni sull'autore del plugin e il nome del modulo.</para>
+		  </listitem>	  
+		</itemizedlist>
+		<para>Per caricare un plugin, selezionare la casella di controllo accanto al suo nome. <application>&app;</application> aggiunge il plugin al menu appropriato, come viene descritto nella tabella seguente.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nome del plugin</para></entry>
+			<entry colname="col2" valign="top"><para>Aggiunto al menu</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>Tabella ASCII</para></entry>
+			<entry><para><menuchoice><guimenu>Visualizza</guimenu>
+			<guimenuitem>Tabella ASCII</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>CVS ChangeLog</para></entry>
+			<entry><para><menuchoice><guimenu>File</guimenu> <guimenuitem>Apri CVS ChangeLogs</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Confronta file</para></entry>
+			<entry><para><menuchoice><guimenu>Strumenti</guimenu> 
+			<guimenuitem>Confronta file</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Statistiche sul documento</para></entry>
+			<entry><para><menuchoice><guimenu>Strumenti</guimenu> 
+			<guimenuitem>Statistiche sul documento</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Applica un rientro alle righe</para></entry>
+			<entry><para><menuchoice><guimenu>Modifica</guimenu> 
+			<guimenuitem>Rientro</guimenuitem></menuchoice></para>
+                        <para><menuchoice><guimenu>Modifica</guimenu> 
+			<guimenuitem>Elimina rientro</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Inserisci data/ora</para></entry>
+			<entry><para><menuchoice><guimenu>Modifica</guimenu> 
+			<guimenuitem>Inserisci data e ora</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Comando per la shell</para></entry>
+			<entry><para><menuchoice><guimenu>Strumenti</guimenu> 
+			<guimenuitem>Esegui comando</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Ordina</para></entry>
+			<entry><para><menuchoice><guimenu>Modifica</guimenu> 
+			<guimenuitem>Ordina</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Elenco tag</para></entry>
+			<entry><para><menuchoice><guimenu>Visualizza</guimenu> 
+			<guimenuitem>Elenco tag</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>User name</para></entry>
+			<entry><para><menuchoice><guimenu>Modifica</guimenu> 
+			<guimenuitem>Inserisci nome utente</guimenuitem></menuchoice></para></entry>
+		</row>
+		</tbody>
+		</tgroup>
+		</informaltable>
+		<para>Per chiudere la finestra di dialogo <guilabel>Preferenze</guilabel>, fare clic su <guibutton>Chiudi</guibutton>.</para>
+	 </sect2>
+
+<!-- ============= To Remove gedit Plugins ========================= -->
+	 <sect2 id="gedit-remove-plugins"> 
+		<title>Rimuovere i plugin di &app;</title>
+		<para>Quando si esce da <application>&app;</application>, i plugin rimangono caricati. </para>
+		<para>Per rimuovere i plugin di <application>&app;</application>, scegliere <menuchoice> 
+		  <guimenu>Modifica</guimenu>
+		  <guimenuitem>Preferenze</guimenuitem> 
+		  </menuchoice>. All'interno della categoria <guilabel>Plugin</guilabel>, fare clic sulla sottocategoria <guilabel>Gestione</guilabel>. 
+		Per rimuovere un plugin, deselezionare la casella di controllo accanto al suo nome.</para>
+		<para>Per chiudere la finestra di dialogo <guilabel>Preferenze</guilabel>, fare clic su <guibutton>Chiudi</guibutton>.</para>
+	 </sect2>
+
+
+<sect2 id="gedit-ascii-table-plugin">
+	 <title>Plugin Tabella ASCII</title>
+	<para>Il plugin Tabella ASCII visualizza una finestra di dialogo che contiene una tabella ASCII. Questa tabella pu&ograve; essere usata per inserire i caratteri ASCII in un file.
+              Per usare il plugin Tabella ASCII, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Tabella ASCII. </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Visualizza</guimenu> <guimenuitem>Tabella ASCII</guimenuitem> </menuchoice>
+		                  per aprire la finestra di dialogo <guilabel>Tabella ASCII</guilabel>.  </para>
+		  </listitem>
+		  <listitem><para>Scorrere l'elenco per ricercare il carattere richiesto, quindi fare clic sul carattere per selezionarlo.
+                           </para>
+		  </listitem>
+		  <listitem><para>Fare clic sul pulsante <guibutton>Inserisci carattere</guibutton> per inserire il carattere nella posizione del cursore nel file attivo.
+                           </para>
+		  </listitem>
+		  <listitem><para>Dopo avere inserito i caratteri ASCII desiderati, fare clic su <guibutton>Chiudi</guibutton> 
+			per chiudere la finestra di dialogo <guilabel>Tabella ASCII</guilabel>.
+				</para>
+		  </listitem>
+		</orderedlist>
+</sect2>
+
+<sect2 id="gedit-cvs-changelog-plugin">
+	 <title>Plugin CVS ChangeLog</title>
+	<para>Il plugin CVS ChangeLog apre i messaggi di log associati ai comandi di conferma CVS. 
+	Questo plugin permette di incollare facilmente un testo nel messaggio di conferma dal file ChangeLog. 
+	Per usare il plugin CVS ChangeLog, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Impostare la variabile d'ambiente CVSEDITOR su <application>&app;</application>. 
+		Ad esempio, se si utilizza la shell <command>bash</command>, eseguire il comando seguente al prompt del sistema operativo:
+                           <screen> <userinput>export CVSEDITOR=<application>&app;</application> </userinput> </screen>
+                           </para>
+		  </listitem>
+		  <listitem><para>Conferma un file in CVS nel modo abituale. Viene aperta una finestra di <application>&app;</application> che permette di inserire il messaggio di conferma.
+                           </para>
+		  </listitem>
+		  <listitem><para>Caricare il plugin CVS ChangeLog. </para>
+		  </listitem>
+                  <listitem><para>Scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Apri CVS ChangeLogs</guimenuitem> </menuchoice> per aprire tutti i file di ChangeLog a cui fa riferimento il messaggio di conferma. <application>&app;</application> apre tutti i file ChangeLog in una nuova scheda.</para>
+		  </listitem>
+		  <listitem><para>Copiare le voci ChangeLog da aggiungere al messaggio di conferma dai file ChangeLog di <application>&app;</application>. 
+                           </para>
+		  </listitem>
+		  <listitem><para>Inserire le voci ChangeLog copiate nella scheda del messaggio di conferma di <application>&app;</application>.
+                           </para>
+		  </listitem>
+		  <listitem><para>Salvare le modifiche al messaggio di conferma e chiudere tutti i file.
+                           </para>
+		  </listitem>
+		  <listitem><para>Uscire da <application>&app;</application>. 
+                           </para>
+		  </listitem>
+		</orderedlist>
+</sect2>
+
+<sect2 id="gedit-compare-files-plugin">
+	 <title>Plugin Confronta file</title>
+	<para>Questo plugin confronta due file e ne visualizza le differenze nella finestra di output. 
+                        Il confronto tra i file viene eseguito con il comando <command>diff</command>.
+    Per usare il plugin Confronta file, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Confronta file. </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Strumenti</guimenu> <guimenuitem>Confronta file</guimenuitem> </menuchoice>.
+			 Quando si sceglie questa opzione per la prima volta, viene chiesto di confermare la posizione del comando <command>diff</command>. Questa richiesta non verr&agrave; ripresentata agli utilizzi successivi del plugin. Per informazioni su come modificare successivamente la posizione di questo file, vedere <xref linkend="gedit-compare-files-configure"/>.</para>
+                           <para> Fare clic su <guibutton>OK</guibutton> per aprire la finestra di dialogo <guilabel>Confronta file</guilabel>. 
+</para>
+		  </listitem>
+		  <listitem><para>Specificare i file da confrontare. Per specificare un file aperto, selezionarlo dalla casella di riepilogo a discesa. Per specificare un file chiuso, inserire la posizione del file nella casella di testo.
+                           </para>
+		  </listitem>
+		  <listitem><para>Per ignorare le modifiche nel numero di spazi vuoti, selezionare l'opzione <guilabel>Ignora spazi</guilabel>.
+                           </para>
+		  </listitem>
+		  <listitem><para>Per usare un formato di output che mostri tre righe di contesto, selezionare l'opzione <guilabel>Usa il formato unificato per l'output</guilabel>.
+                           </para>
+		  </listitem>
+		  <listitem><para>Fare clic sul pulsante <guibutton>Confronta</guibutton> per confrontare il contenuto dei file specificati. I risultati del confronto vengono visualizzati nella finestra di output. 
+                           </para>
+		  </listitem>
+		</orderedlist>
+		<para>Per maggiori informazioni, vedere <ulink url="man:diff" type="man"><citerefentry>
+		<refentrytitle>diff</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.
+			 </para>
+
+<sect3 id="gedit-compare-files-configure">
+		<title>Configurare il plugin Confronta file</title>
+<para>Per cambiare la posizione del comando utilizzato dal plugin Confronta file, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Modifica</guimenu> 
+			<guimenuitem>Preferenze</guimenuitem> </menuchoice>. 
+                    </para>
+		  </listitem>
+		  <listitem><para>All'interno della categoria <guilabel>Plugin</guilabel>, fare clic sulla sottocategoria <guilabel>Gestione</guilabel>. 
+                    </para>
+		  </listitem>
+		  <listitem><para>Selezionare il plugin <guilabel>Confronta file</guilabel>.
+                    </para>
+		  </listitem>
+		  <listitem><para>Fare clic sul pulsante <guibutton>Configura plugin</guibutton> per aprire la finestra di dialogo <guilabel>Imposta directory per il programma</guilabel>.
+                    </para>
+		  </listitem>
+		  <listitem><para>Specificare la posizione del comando <command>diff</command> nella casella di testo <guilabel>Directory da cercare</guilabel>.
+                    </para>
+		  </listitem>
+		  <listitem><para>Fare clic su <guibutton>OK</guibutton> per chiudere la finestra di dialogo <guilabel>Imposta directory per il programma</guilabel>.
+                    </para>
+		  </listitem>
+		  <listitem><para>Per chiudere la finestra di dialogo <guilabel>Preferenze</guilabel>, fare clic su <guibutton>Chiudi</guibutton>.</para>
+		  </listitem>
+		</orderedlist>
+</sect3>
+</sect2>
+
+<sect2 id="gedit-document-statistics-plugin">
+<title>Plugin Statistiche sul documento</title>
+	<para>Il plugin Statistiche sul documento conta il numero di righe, parole, caratteri e byte del file attivo. I risultati vengono visualizzati nella finestra di dialogo <guilabel>Statistiche sul documento</guilabel>.
+    Per usare il plugin Statistiche sul documento, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Statistiche sul documento. </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Strumenti</guimenu> <guimenuitem>Statistiche sul documento</guimenuitem> </menuchoice> per aprire la finestra di dialogo <guilabel>Statistiche sul documento</guilabel>. La finestra di dialogo <guilabel>Statistiche sul documento</guilabel> visualizza le seguenti informazioni sul file:
+				</para>
+		      <itemizedlist>
+		      <listitem><para>Numero di righe del documento.
+		                </para>
+		      </listitem>
+		      <listitem><para>Numero di parole del documento.
+		                </para>
+		      </listitem>
+		      <listitem><para>Numero di caratteri (con spazi) del documento.
+		                </para>
+		      </listitem>
+		      <listitem><para>Numero di caratteri (senza spazi) del documento.
+		                </para>
+		      </listitem>
+		      <listitem><para>Numero di byte del documento.
+		                </para>
+		      </listitem>
+		      </itemizedlist>
+		  </listitem>
+		  <listitem><para>&Egrave; possibile continuare ad aggiornare il file di <application>&app;</application> anche tenendo aperta la finestra di dialogo <guilabel>Statistiche sul documento</guilabel>. Per aggiornare il contenuto della finestra di dialogo <guilabel>Statistiche sul documento</guilabel>, fare clic sul pulsante <guibutton>Aggiorna</guibutton>.
+                           </para>
+		  </listitem>
+		  <listitem><para>Per chiudere la finestra di dialogo <guilabel>Statistiche sul documento</guilabel>, fare clic su <guibutton>Chiudi</guibutton>.
+                           </para>
+		  </listitem>
+		</orderedlist>
+</sect2>
+
+<sect2 id="gedit-indent-lines-plugin">
+<title>Plugin Applica un rientro alle righe</title>
+	<para>Questo plugin applica un rientro alle righe selezionate o rimuove il rientro esistente.
+    Per usare il plugin Applica un rientro alle righe, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Applica un rientro alle righe. </para>
+		  </listitem>
+		  <listitem><para>Selezionare le righe a cui si desidera applicare il rientro. Per applicare o rimuovere un rientro su una singola riga, posizionare il cursore all'interno di quella riga.
+                           </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice><guimenu>Modifica</guimenu> <guimenuitem>Rientro</guimenuitem></menuchoice>.
+				</para>
+		  </listitem>
+		  <listitem><para>Per rimuovere il rientro, selezionare le righe e scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Elimina rientro</guimenuitem> </menuchoice>.
+                           </para>
+		  </listitem>
+		</orderedlist>
+</sect2>
+
+<sect2 id="gedit-insert-date-time-plugin">
+	 <title>Plugin Inserisci data/ora</title>
+	<para>Il plugin Inserisci data/ora permette di inserire la data e l'ora corrente in un file.
+    Per usare il plugin Inserisci data/ora, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Inserisci data/ora. </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Inserisci data e ora</guimenuitem> </menuchoice>. </para>
+                                <para>Se il plugin non &egrave; stato configurato per inserire automaticamente la data e l'ora senza richiedere il formato all'utente, <application>&app;</application> visualizza la finestra di dialogo <guilabel>Inserisci data e ora</guilabel>. Selezionare dall'elenco il formato appropriato per la data e l'ora. Fare clic sul pulsante <guibutton>Inserisci</guibutton> per chiudere la finestra di dialogo <guilabel>Inserisci data e ora</guilabel>;<application>&app;</application> inserisce la data e l'ora nella posizione del cursore. </para>
+				<para>Se <application>&app;</application> &egrave; stato configurato per usare un determinato formato per la data e l'ora, la finestra di dialogo <guilabel>Inserisci data e ora</guilabel> non viene visualizzata; la data e l'ora vengono inserite automaticamente nella posizione del cursore. </para>
+                                <para> Per informazioni su come configurare il plugin Inserisci data/ora, vedere <xref linkend="gedit-date-time-configure"/>.</para>
+		  </listitem>
+		</orderedlist>
+
+<sect3 id="gedit-date-time-configure">
+		<title>Configurare il plugin Inserisci data/ora</title>
+<para>    Per configurare il plugin Inserisci data/ora, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Modifica</guimenu> 
+			<guimenuitem>Preferenze</guimenuitem> </menuchoice>. 
+                    </para>
+		  </listitem>
+		  <listitem><para>All'interno della categoria <guilabel>Plugin</guilabel>, fare clic sulla sottocategoria <guilabel>Gestione</guilabel>. 
+                    </para>
+		  </listitem>
+		  <listitem><para>Selezionare il plugin <guilabel>Inserisci data/ora</guilabel>.
+                    </para>
+		  </listitem>
+		  <listitem><para>Fare clic sul pulsante <guibutton>Configura plugin</guibutton> per aprire la finestra di dialogo <guilabel>Configura plugin 'Inserisci data/ora'</guilabel>.
+                    </para>
+		  </listitem>
+		  <listitem><para> Selezionare una delle seguenti opzioni: </para>
+		      <itemizedlist>
+		      <listitem><para>Per specificare il formato da utilizzare ogni volta che si inseriscono la data e l'ora, selezionare l'opzione <guilabel>Chiedi il formato</guilabel>.
+		                </para>
+		      </listitem>
+		      <listitem><para>Per usare lo stesso formato fornito da <application>&app;</application> ogni volta che si inseriscono la data e l'ora, selezionare l'opzione <guilabel>Usa il formato selezionato</guilabel> e scegliere il formato appropriato nell'elenco. Selezionando questa opzione, <application>&app;</application> non richiede il formato per la data e l'ora quando si sceglie <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Inserisci data e ora</guimenuitem></menuchoice>. 
+		                </para>
+		      </listitem>
+		      <listitem><para>Per usare lo stesso formato personalizzato ogni volta che si inseriscono la data e l'ora, selezionare l'opzione <guilabel>Usa un formato personalizzato</guilabel> e inserire il formato appropriato nella casella di testo. Per maggiori informazioni su come specificare un formato personalizzato, vedere <ulink url="man:strftime" type="man"><citerefentry><refentrytitle>strftime</refentrytitle><manvolnum>3</manvolnum></citerefentry></ulink>. Selezionando questa opzione, <application>&app;</application> non richiede il formato per la data e l'ora quando si sceglie <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Inserisci data e ora</guimenuitem></menuchoice>. 
+		                </para>
+		      </listitem>
+		      </itemizedlist>
+		  </listitem>
+		  <listitem><para>Fare clic su <guibutton>OK</guibutton> per chiudere la finestra di dialogo <guilabel>Configura plugin 'Inserisci data/ora'</guilabel>.
+                    </para>
+		  </listitem>
+		  <listitem><para>Per chiudere la finestra di dialogo <guilabel>Preferenze</guilabel>, fare clic su <guibutton>Chiudi</guibutton>.</para>
+		  </listitem>
+		</orderedlist>
+</sect3>
+</sect2>
+
+<sect2 id="gedit-shell-command-plugin">
+<title>Plugin Comando per la shell</title>
+
+	<para>Questo plugin permette di catturare l'output di un comando della shell in <application>&app;</application> visualizzandolo nella finestra di output. Per usare il plugin Comando per la shell, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Comando per la shell. </para>
+		  </listitem>
+
+		  <listitem><para>Scegliere <menuchoice><guimenu>Strumenti</guimenu> <guimenuitem>Esegui comando</guimenuitem></menuchoice>
+				per aprire la finestra di dialogo <guilabel>Esegui comando</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Digitare il comando della shell da eseguire nel campo <guilabel>Comando</guilabel>. </para>
+                             <para> &Egrave; possibile includere i seguenti caratteri speciali:</para>
+                                <itemizedlist>
+                                  <listitem>
+                                   <para><literal>%f</literal></para>
+                                   <para>Usare questi caratteri speciali per specificare il nome e il percorso del documento attivo. </para>
+                                  </listitem>
+                                  <listitem>
+                                   <para><literal>%n</literal></para>
+                                   <para>Usare questi caratteri speciali per specificare il nome, senza il percorso, del documento attivo.  In questo caso, <application>&app;</application> cerca il file nella directory di lavoro. </para>
+                                  </listitem>
+                                </itemizedlist>
+		  </listitem>
+		  <listitem><para>Se necessario, modificare il campo <guilabel>Directory corrente</guilabel>. Nell'impostazione predefinita, il plugin Comando per la shell esegue il comando specificato nella directory attiva. </para>
+		  </listitem>
+		  <listitem><para>Selezionare l'opzione <guilabel>Mostra i risultati nella finestra di output</guilabel> per visualizzare i risultati del comando nella finestra di output. Se questa opzione non viene selezionata, <application>&app;</application> elimina i risultati del comando. 
+				</para>
+		  </listitem>
+		  <listitem><para>Fare clic su <guibutton>Esegui</guibutton>. Il plugin Comando per la shell esegue il comando e inserisce l'output di testo nella finestra di output.
+				</para>
+		  </listitem>
+		  <listitem><para>Usare il tasto <keycap>Shift</keycap> per selezionare il testo nella finestra di output.
+				</para>
+		  </listitem>
+		  <listitem><para>Fare clic sul pulsante <guibutton>Copia le righe selezionate</guibutton> per copiare il testo selezionato nel buffer.
+				</para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Incolla</guimenuitem> </menuchoice>
+                                per incollare il testo selezionato nel file.
+				</para>
+		  </listitem>
+		  <listitem><para>Fare clic sul pulsante <guibutton>Chiudi la finestra di output</guibutton> per chiudere la finestra di output.
+				</para>
+		  </listitem>
+		</orderedlist>
+
+</sect2>
+<sect2 id="gedit-sort-plugin">
+<title>Plugin Ordina</title>
+	<para>Questo plugin ordina il testo selezionato.</para>
+		  <note><para>L'operazione Ordina non pu&ograve; essere annullata, perci&ograve; &egrave; consigliabile salvare il file prima di procedere. Per ripristinare la versione salvata del file dopo avere eseguito l'ordinamento, scegliere <menuchoice> <guimenu>File</guimenu> <guimenuitem>Ripristina</guimenuitem> </menuchoice>.
+				</para>
+		  </note>
+              <para>Per usare il plugin Ordina, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Ordina. </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Ordina</guimenuitem> </menuchoice> per aprire la finestra di dialogo <guilabel>Ordina</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Per disporre il testo in ordine inverso, selezionare l'opzione <guilabel>Ordine invertito</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Per eliminare le righe doppie, selezionare l'opzione <guilabel>Rimuovi i duplicati</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Per ignorare le differenze tra maiuscole e minuscole, selezionare l'opzione <guilabel>Ignora maiuscole/minuscole</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Per specificare il punto di partenza per l'operazione di ordinamento, selezionare la colonna appropriata dalla casella di selezione <guilabel>Incomincia dalla colonna</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Per iniziare l'ordinamento del testo, fare clic sul pulsante <guibutton>Ordina</guibutton>. 
+				</para>
+		  </listitem>
+		</orderedlist>
+</sect2>
+
+<sect2 id="gedit-tag-list-plugin">
+	 <title>Plugin Elenco tag</title>
+	<para>Il plugin Elenco tag visualizza una finestra contenente un elenco dei tag di uso pi&ugrave; comune. Questa finestra pu&ograve; essere utilizzata per inserire un tag in un file.
+              Per usare il plugin Elenco tag, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Elenco tag. </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Visualizza</guimenu> <guimenuitem>Elenco tag</guimenuitem> </menuchoice> per aprire la finestra <guilabel>Plugin Elenco tag</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Selezionare la categoria di tag appropriata dall'elenco; ad esempio, <literal>HTML - Tags</literal>.
+				</para>
+		  </listitem>
+		  <listitem><para>Se necessario, scorrere l'elenco per cercare il tag richiesto.
+				</para>
+		  </listitem>
+		  <listitem><para>Per inserire un tag nella posizione del cursore nel file corrente, fare doppio clic sul tag nell'elenco. Per inserire un tag &egrave; anche possibile procedere come segue:</para>
+		    <itemizedlist>
+		      <listitem><para>Per inserire un tag nel file corrente e spostare il punto attivo dalla finestra <guilabel>Plugin Elenco tag</guilabel> alla finestra dell'editor, premere <keycap>Enter</keycap>.
+				</para>
+		      </listitem>
+		      <listitem><para>Per inserire un tag nel file corrente e mantenere il punto attivo nella finestra <guilabel>Plugin Elenco tag</guilabel>, premere <keycombo><keycap>Shift</keycap><keycap>Enter</keycap></keycombo>.
+				</para>
+		      </listitem>
+		    </itemizedlist>
+		  </listitem>
+		  <listitem><para>Per chiudere la finestra <guilabel>Plugin Elenco tag</guilabel>, fare clic sul pulsante <guibutton>Chiudi la finestra</guibutton> nella cornice della finestra. In alternativa, premere <keycombo><keycap>Ctrl</keycap><keycap>W</keycap></keycombo> quando il punto attivo si trova nella finestra <guilabel>Plugin Elenco finestre</guilabel>.
+				</para>
+		  </listitem>
+		</orderedlist>
+</sect2>
+
+<sect2 id="gedit-user-name-plugin">
+ 	 <title>Plugin Nome utente</title>
+	<para>Il plugin Nome utente inserisce il nome dell'utente corrente nel file.
+              Per usare il plugin Nome utente, procedere come segue:</para>
+		<orderedlist>
+		  <listitem><para>Caricare il plugin Nome utente. </para>
+		  </listitem>
+		  <listitem><para>Scegliere <menuchoice> <guimenu>Modifica</guimenu> <guimenuitem>Inserisci nome utente</guimenuitem> </menuchoice> per inserire il proprio nome utente nella posizione del cursore nel file corrente.
+				</para>
+		  </listitem>
+		</orderedlist>
+</sect2>
+  </sect1>
+
 </article>

@@ -1,5 +1,4 @@
-figs = \
-	figures/gedit_window.png
+figdir = figures
 docname = gedit
 lang = ko
 omffile = gedit-ko.omf
