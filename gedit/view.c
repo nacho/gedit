@@ -95,13 +95,17 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 {
 	View *view;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug ("start", DEBUG_DOCUMENT);
 
 	view = gedit_view_current();
 	g_return_if_fail (view!=NULL);
 		
 	gtk_widget_grab_focus (view->text);
 	gedit_document_set_title (view->doc);
+	gnome_app_install_menu_hints (gedit_window_active_app(),
+				      gnome_mdi_get_child_menu_info(gedit_window_active_app()));
+
+	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 

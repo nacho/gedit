@@ -46,7 +46,7 @@ GnomeApp *	gedit_window_active_app (void);
 
 void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 void	gedit_window_set_auto_indent (gint auto_indent);
-void	gedit_window_set_status_bar (gint show_status);
+void	gedit_window_set_status_bar (void);
 void	gedit_window_refresh_toolbar (void);
 void	gedit_window_set_toolbar_labels (void);
 void	gedit_window_load_toolbar_widgets (void);
@@ -75,8 +75,6 @@ gedit_window_active_app (void)
 void
 gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 {
-	GtkWidget *statusbar;
-	
 	static GtkTargetEntry drag_types[] =
 	{
 		{ "text/uri-list", 0, 0 },
@@ -102,18 +100,28 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 	/*gedit_load_settings ();*/
-	gedit_plugins_window_add (app);
+	/*
+	*/
 	
 	settings->num_recent = 0;
 	gedit_recent_update (GNOME_APP (app));
 
-	/* statusbar */
+	gedit_window_set_status_bar ();
+
+	gedit_plugins_init ();
+	gedit_plugins_window_add (app);
+	
+/*
+	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
+	gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
+	gnome_app_install_menu_hints (app, gnome_mdi_get_menubar_info(app));
+*/
+	/*
 	if (settings->show_status)
 	{
-		statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-		gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
-		gnome_app_install_menu_hints (app, gnome_mdi_get_menubar_info(app));
+		gtk_widget_show (statusbar);
 	}
+	*/
 
 }
 
@@ -146,34 +154,37 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 }
 
 void
-gedit_window_set_status_bar (gint show_status)
+gedit_window_set_status_bar (void)
 {
+	static GtkWidget *statusbar;
+	static gint show_status;
+		
 	gedit_debug ("", DEBUG_WINDOW);
 
-	if (show_status && GTK_WIDGET_MAPPED (mdi->active_window->statusbar))
-		return;
-
-	settings->show_status = show_status;
-	
-	if (!mdi->active_window->statusbar)
+	if (!statusbar)
 	{
-		GtkWidget *statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-		
+		show_status = settings->show_status;
+		statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
 		gnome_app_set_statusbar (GNOME_APP (mdi->active_window),
 					 GTK_WIDGET (statusbar));
 		gnome_app_install_menu_hints (GNOME_APP (mdi->active_window),
 					      gnome_mdi_get_menubar_info (mdi->active_window));
-
 		mdi->active_window->statusbar = statusbar;
+
 	}
-	else if (mdi->active_window->statusbar->parent)
+
+	if (mdi->active_window->statusbar->parent)
 	{
+		if (settings->show_status)
+			return;
 		gtk_widget_ref (mdi->active_window->statusbar);
 		gtk_container_remove (GTK_CONTAINER (mdi->active_window->statusbar->parent),
 				      mdi->active_window->statusbar);
 	}
-	else
+	else 
 	{
+		if (!settings->show_status)
+			return;
 		gtk_box_pack_start (GTK_BOX (mdi->active_window->vbox),
 				    mdi->active_window->statusbar,
 				    FALSE, FALSE, 0);
@@ -186,8 +197,6 @@ gedit_window_set_status_bar (gint show_status)
 #define GNOME_MDI_TOOLBAR_INFO_KEY		"MDIToolbarUIInfo"
 /* FIXME : This is not nice. But we can't use the toolbar labels since
  */
-#define GEDIT_TOOLBAR_UNDO_BUTTON_POSITION	6
-#define GEDIT_TOOLBAR_REDO_BUTTON_POSITION	7
 void
 gedit_window_load_toolbar_widgets (void)
 {

@@ -168,7 +168,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			gedit_search_start();
 		}
 
-		if (new_buffer==NULL)
+		if (new_buffer!=NULL)
 			g_free (new_buffer);
 		
 		gnome_dialog_close (GNOME_DIALOG (widget));

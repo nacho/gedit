@@ -51,6 +51,7 @@ gedit_save_settings (void)
 	gnome_config_set_bool ("auto_indent", settings->auto_indent);
 	gnome_config_set_bool ("word_wrap", settings->word_wrap);
 	gnome_config_set_bool ("show_statusbar", settings->show_status);
+
 	gnome_config_set_bool ("toolbar_labels", settings->toolbar_labels);
 	gnome_config_set_int ("toolbar", (gint) settings->have_toolbar);
 	gnome_config_set_int ("tb_text", (gint) settings->have_tb_text);
@@ -134,7 +135,8 @@ gedit_load_settings (void)
 	settings->auto_indent = gnome_config_get_bool ("auto_indent");
 	settings->word_wrap = gnome_config_get_bool ("word_wrap");
 	settings->run = gnome_config_get_int ("run");
-	settings->show_status = gnome_config_get_bool ("show_statusbar");
+	
+	settings->show_status = gnome_config_get_bool ("show_statusbar=TRUE");
 	settings->toolbar_labels = gnome_config_get_bool ("toolbar_labels");
 	settings->have_toolbar = gnome_config_get_int ("toolbar");
 	settings->have_tb_text = gnome_config_get_int ("tb text");
@@ -181,7 +183,8 @@ gedit_load_settings (void)
 	if (mdi)
 		tab_pos (settings->tab_pos);
 
-	if (settings->run && mdi)
+	/*
+	if (mdi)
 	{
 		if (mdi->active_window && !settings->show_status)
 			gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
@@ -191,8 +194,8 @@ gedit_load_settings (void)
 		settings->show_status = TRUE;
 		gnome_config_set_int ("show_statusbar",
 				      (gboolean) settings->show_status);
-	}
-	
+				      }*/
+
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 }

@@ -94,7 +94,7 @@ GnomeUIInfo gedit_file_menu[] =
 };
 
 GnomeUIInfo gedit_edit_menu[] =
-{
+{	
 	GNOMEUIINFO_MENU_UNDO_ITEM (gedit_undo_undo, NULL),
 	GNOMEUIINFO_MENU_REDO_ITEM (gedit_undo_redo, NULL),
 
@@ -145,10 +145,12 @@ GnomeUIInfo doc_menu[] =
 
 GnomeUIInfo gedit_settings_menu[] =
 {
+	/* This is not working correctly . FIXME  Chema.
 	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Show Statusbar"),
 				    N_("Enable or disable the statusbar at the bottom of this application window."),
 				    options_toggle_status_bar_cb,
 				    NULL, NULL),
+	*/
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM (dialog_prefs, NULL),
 
 	GNOMEUIINFO_END
@@ -184,6 +186,7 @@ GnomeUIInfo gedit_menu[] =
 		GNOME_APP_PIXMAP_NONE, NULL,
 		0, 0, NULL
 	},
+
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
 	{
 		GNOME_APP_UI_SUBTREE,

@@ -122,10 +122,27 @@ main (int argc, char **argv)
 	glade_gnome_init ();
 
 	gedit_load_settings ();
-	gedit_plugins_init ();
+
 	gedit_mdi_init ();
 	gedit_document_load (file_list);
 	gedit_close_all_flag_clear ();
+	/*
+	g_print ("settings->show_status %i\n", settings->show_status);
+	gedit_window_set_status_bar (settings->show_status);
+	*/
+
+	if (FALSE)
+	{
+		GtkWidget *statusbar;
+		GnomeApp *app;
+		app = gedit_window_active_app();
+		statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
+		gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
+		gtk_widget_show (statusbar);
+		gnome_app_install_menu_hints (app, gnome_mdi_get_menubar_info(app));
+		gnome_app_install_menu_hints (gedit_window_active_app(),
+					      gnome_mdi_get_child_menu_info(gedit_window_active_app()));
+	}
 
 	gtk_main();
 

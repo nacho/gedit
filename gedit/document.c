@@ -581,7 +581,6 @@ gedit_mdi_init (void)
 			    GTK_SIGNAL_FUNC (gedit_window_new), NULL);
 
 	gnome_mdi_set_mode (mdi, settings->mdi_mode);
-
 	gnome_mdi_open_toplevel (mdi);
 
 	/* Loads the structure gedit_toolbar with the widgets */

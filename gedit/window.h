@@ -75,7 +75,7 @@ GnomeApp *	gedit_window_active_app (void);
 
 void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 void	gedit_window_set_auto_indent (gint auto_indent);
-void	gedit_window_set_status_bar (gint show_status);
+void	gedit_window_set_status_bar ();
 void	gedit_window_refresh_toolbar (void);
 void	gedit_window_set_toolbar_labels (void);
 void	gedit_window_load_toolbar_widgets (void);
@@ -83,11 +83,6 @@ void	gedit_window_load_toolbar_widgets (void);
 extern GeditToolbar *gedit_toolbar;
 
 #endif /* __WINDOW_H__ */
-
-
-
-
-
 
 /* disabled by Chema.
 typedef struct _Window Window;

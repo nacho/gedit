@@ -29,6 +29,7 @@
 #include "file.h"
 #include "plugin.h"
 #include "document.h"
+#include "utils.h"
 
 
 GSList	*plugin_list = NULL;
@@ -39,6 +40,8 @@ plugin_load (const gchar *file)
 {
 	PluginData *pd;
 	guint res;
+
+	gedit_debug ("", DEBUG_PLUGINS);
 	
 	g_return_val_if_fail (file != NULL, NULL);
 
@@ -65,7 +68,6 @@ plugin_load (const gchar *file)
 	{
 		
 		g_print (_("Error, plugin does not contain init_plugin function."));
-
 		goto error;
 	}
 	
@@ -73,7 +75,6 @@ plugin_load (const gchar *file)
 	if (res != PLUGIN_OK)
 	{
 		g_print (_("Error, init_plugin returned an error"));
-		
 		goto error;
 	}
 	
@@ -94,6 +95,8 @@ plugin_unload (PluginData *pd)
 	char *path;
 	GnomeApp *app;
 	
+	gedit_debug ("", DEBUG_PLUGINS);
+
 	g_return_if_fail (pd != NULL);
 	
 	if (pd->can_unload && !pd->can_unload (pd))
@@ -127,6 +130,8 @@ plugin_load_plugins_in_dir (char *dir)
 {
 	DIR *d;
 	struct dirent *e;
+
+	gedit_debug ("", DEBUG_PLUGINS);
 	
 	if ((d = opendir (dir)) == NULL)
 		return;
@@ -150,6 +155,8 @@ load_all_plugins (void)
 	char *pdir;
 	char const * const home = g_get_home_dir ();
 	
+	gedit_debug ("", DEBUG_PLUGINS);
+
 	/* load user plugins */
 	if (home != NULL)
 	{
@@ -170,6 +177,9 @@ load_all_plugins (void)
 void
 gedit_plugins_init (void)
 {
+
+	gedit_debug ("", DEBUG_PLUGINS);
+	
 	if (!g_module_supported ())
 		return;
 	
@@ -190,27 +200,37 @@ gedit_plugins_window_add (GnomeApp *app)
 	gchar       *path;
 	GnomeUIInfo *menu;
 
+	gedit_debug ("start", DEBUG_PLUGINS);
+	
 	g_return_if_fail (app != NULL);
 
-	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+	n = g_slist_length (plugin_list) + 1 ;
 
+	menu = g_malloc0 ( n * sizeof (GnomeUIInfo));
+	path = g_strdup_printf ("%s/", _("_Plugins"));
+	
 	for (n = 0; n < g_slist_length (plugin_list); n++)
 	{
 		pd = g_slist_nth_data (plugin_list, n);
 
-		path = g_strdup_printf ("%s/", _("_Plugins"));
-		
-		menu->label = g_strdup (pd->name);
-		menu->type = GNOME_APP_UI_ITEM;
-		menu->hint = NULL;
-		menu->moreinfo = pd->private_data;
-		
-		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
-		
-		gnome_app_insert_menus (app, path, menu);
-
-		g_free (menu->label);
-		g_free (path);
+		menu[n].type = GNOME_APP_UI_ITEM;
+		menu[n].label = g_strdup (pd->name);
+		menu[n].hint = g_strdup (pd->desc);
+		menu[n].moreinfo = pd->private_data;
+		menu[n].pixmap_type = GNOME_APP_PIXMAP_NONE;
+		menu[n+1].type = GNOME_APP_UI_ENDOFINFO;
 	}
+
+	gnome_app_insert_menus (app, path, menu);
+	g_free (path);
+	gnome_app_install_menu_hints (app, menu);
+
+	for (n = 0; n < g_slist_length (plugin_list); n++)
+	{
+		g_free (menu[n].label);
+	}
+	
 	g_free (menu);
+
+	gedit_debug ("end", DEBUG_PLUGINS);
 }
