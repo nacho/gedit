@@ -23,6 +23,11 @@ man_MANS = gedit.1
 app_DATA = gedit.applications
 appdir = $(datadir)/application-registry
 
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gedit-@GEDIT_MAJOR@.pc
+
+gedit-@GEDIT_MAJOR@.pc: gedit.pc
+	cp gedit.pc gedit-@GEDIT_MAJOR@.pc
 
 EXTRA_DIST = $(desktop_in_files)	\
 	$(desktop_DATA)			\
@@ -33,7 +38,8 @@ EXTRA_DIST = $(desktop_in_files)	\
 	$(server_in_files)		\
 	$(server_DATA)			\
 	$(man_MANS)			\
-	$(app_DATA)
+	$(app_DATA)			\
+	gedit.pc.in
 	
 install-data-local:
 	        if test -z "$(DESTDIR)" ; then \
