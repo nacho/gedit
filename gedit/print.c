@@ -223,7 +223,6 @@ print_document (Document *doc, GnomePrinter *printer)
 		end_page (pji);
 	}
 	end_job (pji->pc);
-	g_print("\nAbout to free temp :%s\n", pji->temp);
 	g_free (pji->temp);
 		
 	gnome_print_context_close (pji->pc);

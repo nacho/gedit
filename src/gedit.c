@@ -82,7 +82,6 @@ main (int argc, char **argv)
 	char **args;
 	poptContext ctx;
 	int i;
-	GtkWidget *dummy_widget;
 	GList *file_list = NULL;
 	Document *doc;
 
