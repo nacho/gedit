@@ -17,6 +17,7 @@
  */
 
 #include <gtk/gtk.h>
+#include <string.h>
 #include "main.h"
 
 gint file_open_wrapper (char *name)
@@ -31,48 +32,33 @@ char *nfile;
 	return FALSE;
 }
 
-void prog_init(int fnum, char **file)
+void prog_init(char **file)
 {
-int x;
-char nfile;
-char *filename;
 	gE_document *doc;
 
 #ifdef DEBUG
-g_print("Initialising gEdit...\n");
+	g_print("Initialising gEdit...\n");
 
-		g_print("%d\n",fnum);	
-
-		g_print("%s\n",*file);
+	g_print("%s\n",*file);
 #endif
-	if (*file != NULL)
-	{
-		main_window = gE_window_new();
+	main_window = gE_window_new();
+	if (*file != NULL) {
 		g_print("Opening files...\n");
-		
+
 		doc = gE_document_current(main_window);
 		gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),
-					 gtk_notebook_current_page (GTK_NOTEBOOK(main_window->notebook)));
+			gtk_notebook_current_page (GTK_NOTEBOOK(main_window->notebook)));
 		g_list_remove(main_window->documents, doc);
 		if (doc->filename != NULL)
 			g_free (doc->filename);
 		g_free (doc);
-		
-		if (fnum > 0)
-			while(fnum>0)
-			{
-				if (*file)
-					gtk_idle_add ((GtkFunction) file_open_wrapper, *file);
-				file++;
-				fnum--;
-				
-			}
-	}
-	else
-	{
-		main_window = gE_window_new();
+
+		while (*file) {
+			gtk_idle_add ((GtkFunction) file_open_wrapper, *file);
+			file++;
+		}
 	}
 }
 
+/* the end */
 
- 

@@ -191,7 +191,7 @@ void auto_indent_toggle_callback (GtkWidget *w, gpointer data)
 
 void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 {
-	int i, newlines, newline_1;
+	int i, newlines, newline_1 = 0;
 	gchar *buffer, *whitespace;
 
 	line_pos_callback (NULL, text);
@@ -250,9 +250,8 @@ void line_pos_callback(GtkWidget *w, GtkWidget *text)
 {
 	static char line [32];
 	static char col [32];
-	int timer = 0;	
 
-	if (main_window->documents > 0)
+	if (main_window->documents)
 	{
 
 		sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);
@@ -300,7 +299,7 @@ void file_open_cmd_callback (GtkWidget *widget, gpointer data)
 
 void file_save_cmd_callback (GtkWidget *widget, gpointer data)
 {
-	gchar *fname, **fname2;
+	gchar *fname;
  	fname =   gE_document_current(main_window)->filename;
  /*	g_print("%s\n",fname);*/
 	if (fname == NULL)
@@ -334,8 +333,9 @@ void file_save_as_cmd_callback (GtkWidget *widget, gpointer data)
 	}
 }
 
-void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
+void file_close_cmd_callback (GtkWidget *widget, gpointer data)
 {
+	gE_window *quitting = (gE_window *)data;
   /* This works, but sometimes  segfaults! need someway to check if file has been edited....
   				- Alex */
  /* OK, pretty sure I've fixed the segfaults, will need to test it more though... 
@@ -370,7 +370,9 @@ void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
 				gE_document_new (main_window);
 			else
 			{
+#ifndef WITHOUT_GNOME
 				gE_save_settings(main_window->print_cmd);
+#endif
 				gE_quit();
 			}
 		}
@@ -387,7 +389,6 @@ void file_close_cmd_callback (GtkWidget *widget, gE_window *quitting)
 void file_print_cmd_callback (GtkWidget *widget, gpointer data)
 {
 char print[256];
-FILE *temp;
 
  /*if (gE_document_current(main_window)->filename == NULL)
   {*/

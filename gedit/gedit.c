@@ -65,50 +65,63 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gpointer data)
 */
 
 #ifdef WITHOUT_GNOME
-int main (int argc, char **argv)
+int
+main (int argc, char **argv)
 {
- int x;
+	int x;
 
+	/* gtk_set_locale (); */
 
-  /* gtk_set_locale (); */
+	gtk_init (&argc, &argv);
 
-  gtk_init (&argc, &argv);
-  
-  for (x = 1; x < argc; x++)
-     {
-    if (strcmp (argv[x], "--help") == 0)
-      {
-       g_print("gEdit\nUsage: gedit [--help] [--version] [file...]\n");
-       
-       exit(0);
-      }
-   
-    else if (strcmp (argv[x], "--version") == 0)
-      {
- 	// g_print ("gEdit\n\n");
- 	gE_show_version();
- 	exit(0);
-      }
-     }
+	for (x = 1; x < argc; x++)
+	{
+		if (strcmp (argv[x], "--help") == 0)
+		{
+			g_print("gEdit\nUsage: gedit [--help] [--version] [file...]\n");
 
+			exit(0);
+		}
+
+		else if (strcmp (argv[x], "--version") == 0)
+		{
+			gE_show_version();
+			exit(0);
+		}
+	}
+
+	/*
+	 * gdk is so braindead in that it catches these "fatal" signals,
+	 * but does absolutely nothing with them unless you have compiled
+	 * it with a debugging flag (e.g., ./configure --enable-debug=yes).
+	 * we'll simply re-establish the signals to their default behavior.
+	 * this should produce a core dump in the normal case, which is a
+	 * lot more useful than what gdk does.
+	 *
+	 * if you've compiled GDK with debugging or simply don't care,
+	 * then you don't need this.
+	 */
+#ifdef GDK_IS_BRAINDEAD
+	signal(SIGHUP, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGBUS, SIG_DFL);
+	signal(SIGSEGV, SIG_DFL);
+	signal(SIGPIPE, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
+#endif
 
 	gE_get_rc_file();
 	gE_rc_parse();
-   
 
- argv++;
- prog_init(argc,argv);
-  
+	prog_init(argv + 1);
 
-		
-  		//  gtk_idle_add ((GtkFunction) linepos, NULL);
-		//	gtk_timeout_add (5, (GtkFunction) linepos, NULL);
+	/*  gtk_idle_add ((GtkFunction) linepos, NULL); */
+	/*	gtk_timeout_add (5, (GtkFunction) linepos, NULL); */
 
-  gtk_main ();
-  
+	gtk_main ();
 
-  
-  return 0;
+	return 0;
 }
 #else
 static struct argp_option argp_options [] = {

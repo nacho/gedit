@@ -30,13 +30,7 @@
 #include "menus.h"
 #include "toolbar.h"
 
-/*
-#ifdef WITHOUT_GNOME
-gchar gEdit_ID[] = "gEdit 0.3.2";
-#else
-gchar gEdit_ID[] = "gEdit 0.13";
-#endif
-*/
+gchar gEdit_ID[] = "gEdit 0.4.0";
 
 #ifndef WITHOUT_GNOME
 GnomeUIInfo gedit_file_menu [] = {
@@ -179,7 +173,6 @@ gE_window *gE_window_new()
   gE_window *window;
   GtkWidget *box1;
   GtkWidget *box2;
-  GtkWidget *separator;
   GtkWidget *line_button, *col_button;
  
   window = g_malloc(sizeof(gE_window));

@@ -1,3 +1,36 @@
+1998-06-xx  Andy Kahn <kahn@zk3.dec.com>
+ 
+       * fix new_pixmap() so that Gtk warning messages go away.
+ 
+       * massive code cleanup:
+              - remove all compiler warnings reported by using
+                 '-Wall -ansi -pedantic' with gcc v2.8.0
+               - simplified code logic in prog_init()
+               - fix bug in gE_about_box() where variable 'button' was
+                 being used before being initialized.  this caused
+                SEGV depending on compiler and compiler options used.
+                 basically, if you're lucky, you don't get the SEGV).
+               - in gE_about_box(), drop unnecessary calls to
+                 gtk_container_add().  were causing GTK warning messages
+                 to be printed.
+               - fix function prototype for file_close_cmd_callback()
+ 
+       * add ifdef to remap "fatal" signals to their default behavior
+         (which will likely cause a core dump).  this was done because
+         if you don't compile GDK with debugging enabled (e.g., you didn't
+         do "./configure --enable-debug=yes"), GDK automatically catches
+         the "fatal" signals and effectively does nothing with them.  gee,
+         that's not very helpful.  to get the signals back to their
+         regular behavior, define "GDK_IS_BRAINDEAD" in gedit.c.  this is
+         only present in main() when WITHOUT_GNOME is defined.
+ 
+       * main.h: drop unused variable gEdit_ID.  move to gE_document.c
+         (it's the only place where it's used).
+ 
+       * pretty print main (for WITHOUT_GNOME), gE_about_box() (also
+         for WITHOUT_GNOME)
+ 
+
 1998-06-22  Chris Lahey  <clahey@umich.edu>
 
 	* toolbar.c: Added internationalization code (N_ repeatedly) for

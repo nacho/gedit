@@ -13,18 +13,12 @@ extern "C" {
 
 #define STRING_LENGTH_MAX	256
 
-/*#ifdef WITHOUT_GNOME*/
-static gchar gEdit_ID[] = "gEdit 0.4.0";
-/*#else
-gchar gEdit_ID[] = "gEdit 0.13";
-#endif*/
-
 typedef struct _gE_search gE_search;
 typedef struct _gE_prefs gE_prefs;
 typedef struct _gE_window gE_window;
 typedef struct _gE_document gE_document;
 
-void prog_init(int fnum, char **file);
+void prog_init(char **file);
 void destroy_window (GtkWidget *widget, GtkWidget **window);
 
 /* File Ops */
@@ -33,7 +27,7 @@ void file_new_cmd_callback(GtkWidget *widget, gpointer data);
 void file_open_cmd_callback(GtkWidget *widget, gpointer data);
 void file_save_cmd_callback(GtkWidget *widget, gpointer data);
 void file_save_as_cmd_callback(GtkWidget *widget, gpointer data);
-void file_close_cmd_callback(GtkWidget *widget, gE_window *quitting);
+void file_close_cmd_callback(GtkWidget *widget, gpointer data);
 void file_print_cmd_callback (GtkWidget *widget, gpointer data);
 
 void prefs_callback(GtkWidget *widget, gpointer data);

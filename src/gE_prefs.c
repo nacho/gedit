@@ -81,8 +81,6 @@ gE_prefs *prefs_window;
 
  void gE_rc_parse()
  {
-GList *toplevels;
-   
 /*	gE_get_rc_file();*/
 
 /*#ifdef HAVE_GTK_RC_REPARSE_ALL*/
@@ -122,7 +120,7 @@ GList *toplevels;
  {
     FILE *file;
     char stamp[50];
-    char cmd[256], *cmd2;
+    gchar *cmd2;
     /* GtkStyle *style; */
 
  	
@@ -187,7 +185,6 @@ GList *toplevels;
 	GList *weight = NULL;
 	GList *slant = NULL;
 	
-	GtkWidget *frame;
 
 	
 	fonts = g_list_append(fonts, "courier");
