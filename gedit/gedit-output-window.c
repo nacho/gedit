@@ -35,6 +35,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <libgnome/gnome-i18n.h>
+#include <libgnomeui/gnome-popup-menu.h>
 
 #include "gedit-output-window.h"
 #include "gedit-debug.h"
@@ -44,6 +45,10 @@ struct _GeditOutputWindowPrivate
 	GtkWidget *close_button;
 	GtkWidget *copy_button;
 	GtkWidget *clear_button;
+
+	GtkWidget *close_menu_item;
+	GtkWidget *copy_menu_item;
+	GtkWidget *clear_menu_item;
 
 	GtkWidget *treeview;
 	GtkTreeModel *model;
@@ -210,31 +215,75 @@ static gboolean
 gedit_output_window_key_press_event_cb (GtkTreeView *widget, GdkEventKey *event, 
 		GeditOutputWindow *ow)
 {
-	if ((event->keyval == GDK_Delete) && (event->state & GDK_CONTROL_MASK))
+	if (event->keyval == GDK_Delete)
 	{
 		gedit_output_window_clear (ow);
 		return TRUE;
 	}
 
-	
-	if ((event->keyval == GDK_Delete))
-
-	{
-		g_signal_emit (ow, signals [CLOSE_REQUESTED], 0);
-		
-		return TRUE;
-	}
-
-	if ((event->keyval == 'c') && (event->state & GDK_CONTROL_MASK))
+	if (event->keyval == 'c')
 	{
 		gedit_output_window_copy_selection (ow);
 		return TRUE;
 	}
-
 	
 	return FALSE;
 }
 
+static GtkWidget *
+create_popup_menu (GeditOutputWindow  *output_window)
+{
+	GtkWidget *menu;
+	GtkWidget *menu_item;
+	
+	menu = gtk_menu_new ();
+
+	/* Add the clear button */
+	output_window->priv->clear_menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLEAR, NULL);
+	gtk_widget_show (output_window->priv->clear_menu_item);
+	g_signal_connect (G_OBJECT (output_window->priv->clear_menu_item), "activate",
+		      	  G_CALLBACK (clear_clicked_callback), output_window);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), output_window->priv->clear_menu_item);
+
+	/* Add the copy button */
+	output_window->priv->copy_menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_COPY, NULL);
+	gtk_widget_show (output_window->priv->copy_menu_item);
+	g_signal_connect (G_OBJECT (output_window->priv->copy_menu_item), "activate",
+		      	  G_CALLBACK (copy_clicked_callback), output_window);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), output_window->priv->copy_menu_item);
+
+	/* Add the separator */
+	menu_item = gtk_separator_menu_item_new ();
+	gtk_widget_show (menu_item);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the close button */
+	output_window->priv->close_menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_CLOSE, NULL);
+	gtk_widget_show (output_window->priv->close_menu_item);
+	g_signal_connect (G_OBJECT (output_window->priv->close_menu_item), "activate",
+		      	  G_CALLBACK (close_clicked_callback), output_window);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), output_window->priv->close_menu_item);
+	
+	gtk_widget_set_sensitive (output_window->priv->copy_menu_item, FALSE);
+	gtk_widget_set_sensitive (output_window->priv->clear_menu_item, FALSE);
+
+	return menu;
+}
+
+static void
+gedit_output_window_treeview_selection_changed (GtkTreeSelection *selection, 
+						GeditOutputWindow  *output_window)
+{
+	gboolean selected;
+	
+	g_return_if_fail (output_window != NULL);
+	g_return_if_fail (selection != NULL);
+
+	selected = (gtk_tree_selection_count_selected_rows (selection) > 0);
+	
+	gtk_widget_set_sensitive (output_window->priv->copy_menu_item, selected);
+	gtk_widget_set_sensitive (output_window->priv->copy_button, selected);
+}
 
 static void 
 gedit_output_window_init (GeditOutputWindow  *output_window)
@@ -251,6 +300,9 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 	GtkTreeViewColumn	*column;
 	GtkCellRenderer 	*cell;
 	GtkTreeSelection 	*selection;
+	GtkWidget 		*popup_menu;
+
+	GList			*focusable_widgets = NULL;
 
 	gedit_debug (DEBUG_MDI, "");
 
@@ -265,7 +317,6 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 					   &w, &h);
 
 	vbox1 = gtk_vbox_new (FALSE, 2);
-	gtk_box_pack_start (GTK_BOX (output_window), vbox1, FALSE, FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox1), 2);
 
 	/* Create the close button */
@@ -346,11 +397,13 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 			  G_CALLBACK (clear_clicked_callback),
 			  output_window);
 
+	gtk_widget_set_sensitive (output_window->priv->copy_button, FALSE);
+	gtk_widget_set_sensitive (output_window->priv->clear_button, FALSE);
+
   	/* Create the scrolled window */
 	scrolledwindow = gtk_scrolled_window_new (NULL, NULL);
-  	gtk_box_pack_start (GTK_BOX (output_window), scrolledwindow, TRUE, TRUE, 0);
-
-  	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), 
+  	
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolledwindow), 
 					GTK_POLICY_AUTOMATIC, 
 					GTK_POLICY_AUTOMATIC);
 	
@@ -384,11 +437,30 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 	
+	gtk_box_pack_end (GTK_BOX (output_window), scrolledwindow, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (output_window), vbox1, FALSE, FALSE, 0);
+
 	gtk_widget_set_size_request (GTK_WIDGET (output_window), 3 * w, 5 * (h + 2));
 
 	g_signal_connect (G_OBJECT (output_window->priv->treeview), "key_press_event",
 			  G_CALLBACK (gedit_output_window_key_press_event_cb), output_window);
 
+	g_signal_connect (G_OBJECT (selection), "changed", 
+			  G_CALLBACK (gedit_output_window_treeview_selection_changed), 
+			  output_window);
+
+	focusable_widgets = g_list_append (focusable_widgets, output_window->priv->treeview);
+	focusable_widgets = g_list_append (focusable_widgets, output_window->priv->close_button);
+	focusable_widgets = g_list_append (focusable_widgets, output_window->priv->copy_button);
+	focusable_widgets = g_list_append (focusable_widgets, output_window->priv->clear_button);
+
+	gtk_container_set_focus_chain (GTK_CONTAINER (output_window), focusable_widgets);
+
+	g_list_free (focusable_widgets);
+
+	popup_menu = create_popup_menu (output_window);
+		
+	gnome_popup_menu_attach (popup_menu, output_window->priv->treeview, NULL);
 }
 
 static void 
@@ -425,6 +497,8 @@ gedit_output_window_clear (GeditOutputWindow *ow)
 
 	gtk_list_store_clear (GTK_LIST_STORE (ow->priv->model));
 
+	gtk_widget_set_sensitive (ow->priv->clear_button, FALSE);
+	gtk_widget_set_sensitive (ow->priv->clear_menu_item, FALSE);
 }
 
 void
@@ -443,6 +517,9 @@ gedit_output_window_append_line	(GeditOutputWindow *ow, const gchar *line, gbool
 	gtk_list_store_append (store, &iter);
 
 	gtk_list_store_set (store, &iter, COLUMN_LINES, line, -1);
+
+	gtk_widget_set_sensitive (ow->priv->clear_button, TRUE);
+	gtk_widget_set_sensitive (ow->priv->clear_menu_item, TRUE);
 
 	if (!scroll)
 		return;

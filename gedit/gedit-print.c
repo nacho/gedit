@@ -32,6 +32,11 @@
 #include <config.h>
 #endif
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
+
 #include <libgnome/libgnome.h>
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>
@@ -51,8 +56,8 @@
 #define A4_WIDTH (210.0 * 72 / 25.4)
 #define A4_HEIGHT (297.0 * 72 / 25.4)
 
+#define GEDIT_PRINT_CONFIG_FILE "gedit-print-config"
 
-static GnomePrintConfig *gedit_print_config = NULL;
 
 typedef struct _GeditPrintJobInfo	GeditPrintJobInfo;
 
@@ -98,7 +103,7 @@ static GQuark gedit_print_error_quark (void);
 #define GEDIT_PRINT_ERROR gedit_print_error_quark ()	
 
 static GeditPrintJobInfo* gedit_print_job_info_new (GeditDocument* doc, GError **error);
-static void gedit_print_job_info_destroy (GeditPrintJobInfo *pji);
+static void gedit_print_job_info_destroy (GeditPrintJobInfo *pji, gboolean save_config);
 
 static void gedit_print_preview_real 	(GeditPrintJobInfo *pji);
 static void 	gedit_print_real 	(GeditDocument* doc, gboolean preview, GError **error);
@@ -129,6 +134,76 @@ gedit_print_error_quark ()
   return quark;
 }
 
+static GnomePrintConfig *
+load_gedit_print_config_from_file ()
+{
+	gchar *file_name;
+	gboolean res;
+	gchar *contents;
+	GnomePrintConfig *gedit_print_config;
+	
+	gedit_debug (DEBUG_PRINT, "");
+
+	file_name = gnome_util_home_file (GEDIT_PRINT_CONFIG_FILE);
+
+	res = g_file_get_contents (file_name, &contents, NULL, NULL);
+	g_free (file_name);
+
+	if (res)
+	{
+		gedit_print_config = gnome_print_config_from_string (contents, 0);
+		g_free (contents);
+	}
+	else
+		gedit_print_config = gnome_print_config_default ();
+
+	return gedit_print_config;
+}
+
+static void
+save_gedit_print_config_to_file (GnomePrintConfig *gedit_print_config)
+{
+	gint fd;
+	gchar *str;
+	gint bytes;
+	gchar *file_name;
+	gboolean res;
+
+	gedit_debug (DEBUG_PRINT, "");
+
+	g_return_if_fail (gedit_print_config != NULL);
+
+	str = gnome_print_config_to_string (gedit_print_config, 0);
+	g_return_if_fail (str != NULL);
+	
+	file_name = gnome_util_home_file (GEDIT_PRINT_CONFIG_FILE);
+
+	fd = open (file_name, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	g_free (file_name);
+
+	if (fd == -1)
+		goto save_error;
+	
+	bytes = strlen (str);
+
+	/* Save the file content */
+	res = (write (fd, str, bytes) == bytes);
+
+	if (!res)
+		goto save_error;
+	
+	close (fd);
+
+	g_free (str);
+	
+	return;
+	
+save_error:
+	
+	g_warning ("gedit cannot save print config file.");
+	
+	g_free (str);
+}
 
 static GeditPrintJobInfo* 
 gedit_print_job_info_new (GeditDocument* doc, GError **error)
@@ -142,15 +217,6 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	gedit_debug (DEBUG_PRINT, "");
 	
 	g_return_val_if_fail (doc != NULL, NULL);
-
-	if (gedit_print_config == NULL)
-	{
-		gedit_print_config = gnome_print_config_default ();
-		g_return_val_if_fail (gedit_print_config != NULL, NULL);
-
-		gnome_print_config_set (gedit_print_config, "Settings.Transport.Backend", "lpr");
-		gnome_print_config_set (gedit_print_config, "Printer", "GENERIC");
-	}
 
 	pji = g_new0 (GeditPrintJobInfo, 1);
 
@@ -188,7 +254,7 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 			_("gedit is unable to print since it cannot find\n"
 			  "one of the required fonts."));
 		
-		gedit_print_job_info_destroy (pji);
+		gedit_print_job_info_destroy (pji, FALSE);
 		
 		return NULL;
 	}
@@ -208,21 +274,26 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	pji->tabs_size = gedit_prefs_manager_get_tabs_size ();
 	pji->print_wrap_mode = gedit_prefs_manager_get_print_wrap_mode ();
 		
-	pji->config = gedit_print_config;
-	gnome_print_config_ref (pji->config);
-
+	pji->config = load_gedit_print_config_from_file ();
+	g_return_val_if_fail (pji->config != NULL, NULL);
+	
 	return pji;
 }	
 
 static void
-gedit_print_job_info_destroy (GeditPrintJobInfo *pji)
+gedit_print_job_info_destroy (GeditPrintJobInfo *pji, gboolean save_config)
 {
 	gedit_debug (DEBUG_PRINT, "");
 
 	g_return_if_fail (pji != NULL);
 	
 	if (pji->config != NULL)
+	{
+		if (save_config)
+			save_gedit_print_config_to_file (pji->config);
+	
 		gnome_print_config_unref (pji->config);
+	}
 
 	if (pji->print_ctx != NULL)
 		g_object_unref (pji->print_ctx);
@@ -236,35 +307,22 @@ gedit_print_job_info_destroy (GeditPrintJobInfo *pji)
 static void
 gedit_print_update_page_size_and_margins (GeditPrintJobInfo *pji)
 {
-	const GnomePrintUnit *unit;
-		
 	gedit_debug (DEBUG_PRINT, "");
 
 	gnome_print_job_get_page_size_from_config (pji->config, 
 			&pji->page_width, &pji->page_height);
 
-	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_LEFT, 
-				&pji->margin_left, &unit)) 
-	{
-		gnome_print_convert_distance (&pji->margin_left, unit, GNOME_PRINT_PS_UNIT);
-	}
+	gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_LEFT, 
+				&pji->margin_left, NULL);
 	
-	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_RIGHT, 
-				&pji->margin_right, &unit)) 
-	{
-		gnome_print_convert_distance (&pji->margin_right, unit, GNOME_PRINT_PS_UNIT);
-	}
+	gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_RIGHT, 
+				&pji->margin_right, NULL);
 	
-	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_TOP, 
-				&pji->margin_top, &unit)) 
-	{
-		gnome_print_convert_distance (&pji->margin_top, unit, GNOME_PRINT_PS_UNIT);
-	}
-	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_BOTTOM, 
-				&pji->margin_bottom, &unit)) 
-	{
-		gnome_print_convert_distance (&pji->margin_bottom, unit, GNOME_PRINT_PS_UNIT);
-	}
+	gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_TOP, 
+				&pji->margin_top, NULL);
+	
+	gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_BOTTOM, 
+				&pji->margin_bottom, NULL);
 
 	if (pji->print_line_numbers  > 0)
 	{
@@ -556,7 +614,7 @@ gedit_print_real (GeditDocument* doc, gboolean preview, GError **error)
 
 	/* The canceled button on the dialog was clicked */
 	if (cancel) {
-		gedit_print_job_info_destroy (pji);
+		gedit_print_job_info_destroy (pji, FALSE);
 		return;
 	}
 
@@ -573,7 +631,7 @@ gedit_print_real (GeditDocument* doc, gboolean preview, GError **error)
 #if 0
 	/* The printing was canceled while in progress */
 	if (pji->canceled) {
-		gedit_print_job_info_destroy (pji);
+		gedit_print_job_info_destroy (pji, TRUE);
 		return;
 	}
 #endif	
@@ -584,7 +642,7 @@ gedit_print_real (GeditDocument* doc, gboolean preview, GError **error)
 	else
 		gnome_print_job_print (pji->print_job);
 	
-	gedit_print_job_info_destroy (pji);
+	gedit_print_job_info_destroy (pji, TRUE);
 }
 
 static void 
