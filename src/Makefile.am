@@ -65,5 +65,5 @@ CPPFLAGS = \
 
 dist-hook:
 	mkdir $(distdir)/xpm
-	cp $(srcdir)/xpm/*.xpm $(destdir)/xpm
+	cp $(srcdir)/xpm/*.xpm $(distdir)/xpm
 
