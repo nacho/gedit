@@ -355,7 +355,7 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 
 	doc = gedit_get_active_document ();
 
-	if (doc == NULL)		
+	if ((doc == NULL) || gedit_document_is_readonly (doc))		
 		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, FALSE);
 	else
 		gedit_menus_set_verb_sensitive (ui_engine, "/commands/" MENU_ITEM_NAME, TRUE);
