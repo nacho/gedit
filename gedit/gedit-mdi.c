@@ -106,6 +106,7 @@ static void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old
 static void gedit_mdi_child_state_changed_handler (GeditMDIChild *child);
 
 static void gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi);
+static void gedit_mdi_set_active_window_find_verbs_sensitivity (BonoboMDI *mdi);
 
 static void gedit_mdi_app_destroy_handler (BonoboMDI *mdi, BonoboWindow *window);
 
@@ -845,6 +846,17 @@ gedit_mdi_child_undo_redo_state_changed_handler (GeditMDIChild *child)
 	gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
 }
 
+static void 
+gedit_mdi_child_find_state_changed_handler (GeditMDIChild *child)
+{
+	gedit_debug (DEBUG_MDI, "");
+
+	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) != BONOBO_MDI_CHILD (child))
+		return;
+	
+	gedit_mdi_set_active_window_find_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+}
+
 static gint 
 gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 {
@@ -855,6 +867,9 @@ gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 			  NULL);
 	g_signal_connect (G_OBJECT (child), "undo_redo_state_changed",
 			  G_CALLBACK (gedit_mdi_child_undo_redo_state_changed_handler), 
+			  NULL);
+	g_signal_connect (G_OBJECT (child), "find_state_changed",
+			  G_CALLBACK (gedit_mdi_child_find_state_changed_handler), 
 			  NULL);
 
 	return TRUE;
@@ -1016,6 +1031,9 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 		g_signal_handlers_disconnect_by_func (GTK_OBJECT (child), 
 						      G_CALLBACK (gedit_mdi_child_undo_redo_state_changed_handler),
 						      NULL);
+		g_signal_handlers_disconnect_by_func (child, 
+						      G_CALLBACK (gedit_mdi_child_find_state_changed_handler),
+						      NULL);
 	}
 	*/
 	
@@ -1154,7 +1172,6 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	BonoboMDIChild* active_child = NULL;
 	GeditDocument* doc = NULL;
 	BonoboUIComponent *ui_component;
-	gchar *lst;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
@@ -1198,10 +1215,10 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	doc = GEDIT_MDI_CHILD (active_child)->document;
 	g_return_if_fail (doc != NULL);
 	
-	lst = gedit_document_get_last_searched_text (doc);
-	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindNext", lst != NULL);	
-	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindPrev", lst != NULL);
-	g_free (lst);
+	if (!gedit_document_can_find_again (doc)) {
+		gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindNext", FALSE);
+		gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindPrev", FALSE);
+	}
 		
 	if (gedit_document_is_readonly (doc))
 	{
@@ -1238,20 +1255,18 @@ static void
 gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 {
 	BonoboWindow* active_window = NULL;
-	BonoboMDIChild* active_child = NULL;
 	GeditDocument* doc = NULL;
 	BonoboUIComponent *ui_component;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
-	active_window = bonobo_mdi_get_active_window (mdi);
+	active_window = gedit_get_active_window ();
 	g_return_if_fail (active_window != NULL);
 	
-	ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
+	ui_component = gedit_get_ui_component_from_window (active_window);
 	g_return_if_fail (ui_component != NULL);
 	
-	active_child = bonobo_mdi_get_active_child (mdi);
-	doc = GEDIT_MDI_CHILD (active_child)->document;
+	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
 	bonobo_ui_component_freeze (ui_component, NULL);
@@ -1264,6 +1279,39 @@ gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 
 	bonobo_ui_component_thaw (ui_component, NULL);
 }
+
+static void 
+gedit_mdi_set_active_window_find_verbs_sensitivity (BonoboMDI *mdi)
+{
+	BonoboWindow* active_window = NULL;
+	GeditDocument* doc = NULL;
+	BonoboUIComponent *ui_component;
+	gboolean sensitive;
+	
+	gedit_debug (DEBUG_MDI, "");
+	
+	active_window = gedit_get_active_window ();
+	g_return_if_fail (active_window != NULL);
+	
+	ui_component = gedit_get_ui_component_from_window (active_window);
+	g_return_if_fail (ui_component != NULL);
+	
+	doc = gedit_get_active_document ();
+	g_return_if_fail (doc != NULL);
+
+	sensitive = gedit_document_can_find_again (doc);
+
+	bonobo_ui_component_freeze (ui_component, NULL);
+
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindNext",
+					sensitive);
+
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindPrev",
+					sensitive);
+
+	bonobo_ui_component_thaw (ui_component, NULL);
+}
+
 
 EggRecentView *
 gedit_mdi_get_recent_view_from_window (BonoboWindow *win)
@@ -1717,6 +1765,7 @@ add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
 		g_free (name);
 		g_free (tip);
 		g_free (lang_name);
+		g_free (path);
 
 		l = g_slist_next (l);
 	}		

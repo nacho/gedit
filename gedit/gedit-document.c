@@ -88,6 +88,7 @@ enum {
 	SAVED,
 	LOADED,
 	READONLY_CHANGED,
+	CAN_FIND_AGAIN,
 	LAST_SIGNAL
 };
 
@@ -100,6 +101,7 @@ static void gedit_document_real_loaded			(GeditDocument *document);
 static void gedit_document_real_saved			(GeditDocument *document);
 static void gedit_document_real_readonly_changed	(GeditDocument *document,
 							 gboolean readonly);
+static void gedit_document_real_can_find_again		(GeditDocument *document);
 
 static gboolean	gedit_document_save_as_real (GeditDocument *doc, const gchar *uri,
 	       				     const GeditEncoding *encoding,	
@@ -204,6 +206,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 	klass->loaded 	    	= gedit_document_real_loaded;
 	klass->saved        	= gedit_document_real_saved;
 	klass->readonly_changed = gedit_document_real_readonly_changed;
+	klass->can_find_again	= gedit_document_real_can_find_again;
 
   	document_signals[NAME_CHANGED] =
    		g_signal_new ("name_changed",
@@ -245,6 +248,16 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_BOOLEAN);
+
+	document_signals[CAN_FIND_AGAIN] =
+   		g_signal_new ("can_find_again",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, can_find_again),
+			      NULL, NULL,
+			      gedit_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
 }
 
 static void
@@ -541,6 +554,14 @@ gedit_document_real_saved (GeditDocument *document)
 
 static void 
 gedit_document_real_readonly_changed (GeditDocument *document, gboolean readonly)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (document != NULL);
+}
+
+static void 
+gedit_document_real_can_find_again (GeditDocument *document)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -1722,6 +1743,20 @@ gedit_document_can_redo (const GeditDocument *doc)
 	return gtk_source_buffer_can_redo (GTK_SOURCE_BUFFER (doc));
 }
 
+/**
+ *  A function to determine whether or not the "FindNext/Prev"
+ *  functions are executable
+ */
+gboolean
+gedit_document_can_find_again (const GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+
+	return (doc->priv->last_searched_text != NULL);
+}
+
 void 
 gedit_document_undo (GeditDocument *doc)
 {
@@ -1924,10 +1959,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 		{
 			if (GEDIT_SEARCH_IS_BACKWARDS (flags))
 			{
-				/*gtk_text_iter_backward_word_start (&iter);*/
-				/*
-				gtk_text_iter_backward_char (&iter);
-				*/
+				/*gtk_text_iter_backward_char (&iter);*/
 				
 	          		found = gtk_source_iter_backward_search (&iter,
 							converted_str, search_flags,
@@ -1972,6 +2004,8 @@ gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 	}
 
 	g_free (converted_str);
+
+	g_signal_emit (G_OBJECT (doc), document_signals[CAN_FIND_AGAIN], 0);
 
 	return found;
 }

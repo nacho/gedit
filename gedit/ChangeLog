@@ -1,3 +1,34 @@
+2003-06-09  Paolo Maggi <paolo.maggi@polito.it>
+
+	* gedit-print.[ch]: rewritten
+
+2003-06-09  Eric Ritezel <eisenwulf@inductiveart.net>
+ 
+ 	* gedit-document.h: added can_find_again property and handler
+	(#114451: SearchFindNext/Prev sensitivity needs signal updates)
+
+ 	* gedit-document.c: added CAN_FIND_AGAIN signal (#114451)
+ 	(gedit_document_class_init): updated for CAN_FIND_AGAIN
+	(gedit_document_can_find_again):
+ 	(gedit_document_real_can_find_again): added
+ 	(gedit_document_find): emit CAN_FIND_AGAIN
+
+ 	* gedit-mdi-child.h: added find_state_changed property
+
+ 	* gedit-mdi-child.c: added FIND_STATE_CHANGED signal (#114451)
+ 	(gedit_document_class_init): updated for FIND_STATE_CHANGED
+ 	(gedit_mdi_child_can_find_again_handler): added
+ 	(gedit_mdi_child_connect_signals): handle CAN_FIND_AGAIN
+
+ 	* gedit-mdi.c: cleanup/update
+ 	(gedit_mdi_child_can_find_again_handler):
+ 	(gedit_mdi_child_find_state_changed_handler):
+ 	(gedit_mdi_set_active_window_find_verbs_sensitivity): added
+ 	(gedit_mdi_set_active_window_undo_redo_verbs_sensitivity): cleanup
+ 	(gedit_mdi_[add|remove]_child_handler): handle FIND_STATE_CHANGED
+ 	(gedit_mdi_set_active_window_verbs_sensitivity): updated to use
+ 	gedit_document_can_find_again ()
+
  2003-06-07 Eric Ritezel <eisenwulf@inductiveart.net>
  
  	* dialogs/replace.glade2: added checkbutton for backwards searching

@@ -60,6 +60,7 @@ struct _GeditMDIChildPrivate
 enum {
 	STATE_CHANGED,
 	UNDO_REDO_STATE_CHANGED,
+	FIND_STATE_CHANGED,
 	LAST_SIGNAL
 };
 
@@ -78,6 +79,9 @@ static void gedit_mdi_child_document_readonly_changed_handler (GeditDocument *do
 
 static void gedit_mdi_child_document_can_undo_redo_handler (GeditDocument *document, 
 						gboolean can, GeditMDIChild* child);
+
+static void gedit_mdi_child_document_can_find_again_handler (GeditDocument *document, 
+							     GeditMDIChild* child);
 
 static gchar* gedit_mdi_child_get_config_string (BonoboMDIChild *child, gpointer data);
 
@@ -131,6 +135,7 @@ gedit_mdi_child_class_init (GeditMDIChildClass *klass)
 
 	klass->state_changed 		= gedit_mdi_child_real_state_changed;
 	klass->undo_redo_state_changed  = NULL;
+	klass->find_state_changed	= NULL;
   		
 	mdi_child_signals [STATE_CHANGED] =
 		g_signal_new ("state_changed",
@@ -147,6 +152,16 @@ gedit_mdi_child_class_init (GeditMDIChildClass *klass)
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
 			      G_STRUCT_OFFSET (GeditMDIChildClass, undo_redo_state_changed),
+			      NULL, NULL,
+			      gedit_marshal_VOID__VOID,
+			      G_TYPE_NONE, 
+			      0);
+                    
+	mdi_child_signals [FIND_STATE_CHANGED] =
+		g_signal_new ("find_state_changed",
+			      G_OBJECT_CLASS_TYPE (gobject_class),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GeditMDIChildClass, find_state_changed),
 			      NULL, NULL,
 			      gedit_marshal_VOID__VOID,
 			      G_TYPE_NONE, 
@@ -266,6 +281,15 @@ gedit_mdi_child_document_can_undo_redo_handler (GeditDocument *document, gboolea
 	g_signal_emit (G_OBJECT (child), mdi_child_signals [UNDO_REDO_STATE_CHANGED], 0);
 }
 
+static void 
+gedit_mdi_child_document_can_find_again_handler (GeditDocument *document, GeditMDIChild* child)
+{
+	gedit_debug (DEBUG_MDI, "");
+	g_return_if_fail (child->document == document);
+
+	g_signal_emit (G_OBJECT (child), mdi_child_signals [FIND_STATE_CHANGED], 0);
+}
+
 
 static void
 gedit_mdi_child_connect_signals (GeditMDIChild *child)
@@ -284,6 +308,9 @@ gedit_mdi_child_connect_signals (GeditMDIChild *child)
 			  child);
 	g_signal_connect (G_OBJECT (child->document), "can_redo",
 			  G_CALLBACK (gedit_mdi_child_document_can_undo_redo_handler), 
+			  child);
+	g_signal_connect (G_OBJECT (child->document), "can_find_again",
+			  G_CALLBACK (gedit_mdi_child_document_can_find_again_handler), 
 			  child);
 }
 
@@ -431,7 +458,7 @@ gedit_mdi_child_tab_save_as_clicked (GtkWidget *button,  GtkWidget *view)
 static void
 gedit_mdi_child_tab_print_clicked (GtkWidget *button,  GtkWidget *view)
 {
-	BonoboMDIChild *child;
+	GeditDocument *doc;
 	
 	gedit_debug (DEBUG_MDI, "");
 
@@ -439,10 +466,10 @@ gedit_mdi_child_tab_print_clicked (GtkWidget *button,  GtkWidget *view)
 
 	bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
 	
-	child = bonobo_mdi_child_get_from_view (view);
-	g_return_if_fail (GEDIT_IS_MDI_CHILD (child));
-	
-	gedit_print (GEDIT_MDI_CHILD (child));
+	doc = gedit_view_get_document (GEDIT_VIEW (view));
+	g_return_if_fail (doc != NULL);
+		
+	gedit_print (doc);
 }
 
 static void

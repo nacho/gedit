@@ -95,6 +95,8 @@ struct _GeditDocumentClass
 	void (* readonly_changed)	(GeditDocument *document,
 					 gboolean readonly);
 
+	/* Find state udpated */
+	void (* can_find_again) 	(GeditDocument *document);
 };
 
 #define GEDIT_ERROR_INVALID_UTF8_DATA 	1024
@@ -175,6 +177,7 @@ void		gedit_document_set_max_undo_levels (GeditDocument *doc,
 
 gboolean	gedit_document_can_undo		(const GeditDocument *doc);
 gboolean	gedit_document_can_redo 	(const GeditDocument *doc);
+gboolean	gedit_document_can_find_again	(const GeditDocument *doc);
 
 void		gedit_document_undo 		(GeditDocument *doc);
 void		gedit_document_redo 		(GeditDocument *doc);

@@ -62,10 +62,12 @@ gedit_languages_manager_get_language_from_name (GtkSourceLanguagesManager *lm,
 		name = gtk_source_language_get_name (lang);
 
 		if (strcmp (name, lang_name) == 0)
-		{		
+		{	
+			g_free (name);	
 			return lang;
 		}
 		
+		g_free (name);
 		languages = g_slist_next (languages);
 	}
 

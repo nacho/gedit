@@ -97,7 +97,7 @@ impl_load (BonoboPersistStream       *ps,
 
 	if (text_buf->len > 0) {
 		gchar *converted_text;
-		int len;
+		gint len = 0;
 
 		if (g_utf8_validate (text_buf->str, text_buf->len, NULL)) {
 			converted_text = text_buf->str;
@@ -107,8 +107,13 @@ impl_load (BonoboPersistStream       *ps,
 								text_buf->len,
 								NULL,
 								NULL);
-			len = strlen (converted_text);
+			if (converted_text != NULL)
+			{
+				len = strlen (converted_text);
+			}	
+			
 			g_free (text_buf->str);
+			
 		}
 
 		if (converted_text == NULL) {

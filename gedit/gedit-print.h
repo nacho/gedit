@@ -30,9 +30,9 @@
 #ifndef __GEDIT_PRINT_H__
 #define __GEDIT_PRINT_H__
 
-#include <gedit/gedit-mdi-child.h>
+#include <gedit/gedit-document.h>
 
-void gedit_print 		(GeditMDIChild* active_child);
-void gedit_print_preview	(GeditMDIChild* active_child);
+void gedit_print 		(GeditDocument* doc);
+void gedit_print_preview	(GeditDocument* doc);
 
 #endif /* __GEDIT_PRINT_H__ */

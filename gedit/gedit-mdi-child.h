@@ -65,6 +65,7 @@ struct _GeditMDIChildClass
 	void (*state_changed)		(GeditMDIChild *child);
 
 	void (*undo_redo_state_changed)	(GeditMDIChild *child);
+	void (*find_state_changed)	(GeditMDIChild *child);
 };
 
 

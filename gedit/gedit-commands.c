@@ -142,13 +142,13 @@ gedit_cmd_file_open_uri (BonoboUIComponent *uic, gpointer user_data, const gchar
 void
 gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditMDIChild *active_child;
+	GeditDocument *doc;
 	GeditView *active_view;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
-	if (active_child == NULL)
+	doc = gedit_get_active_document ();
+	if (doc == NULL)	
 		return;
 	
 	active_view = gedit_get_active_view ();
@@ -156,21 +156,21 @@ gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	if (active_view != NULL)
 		gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
-	gedit_print (active_child);
+	gedit_print (doc);
 }
 
 void
 gedit_cmd_file_print_preview (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-	GeditMDIChild *active_child;
-	
+	GeditDocument *doc;
+
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
-	if (active_child == NULL)
+	doc = gedit_get_active_document ();
+	if (doc == NULL)	
 		return;
 	
-	gedit_print_preview (active_child);
+	gedit_print_preview (doc);
 }
 
 void 
