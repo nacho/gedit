@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2001-03-07 10:31-0500\n"
-"PO-Revision-Date: 2001-03-07 10:33-05:00\n"
+"POT-Creation-Date: 2001-03-12 00:32-0500\n"
+"PO-Revision-Date: 2001-03-12 00:35-05:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -38,12 +38,12 @@ msgstr "Skriv inn URL som skal vises:"
 msgid "Lynx found at: "
 msgstr "Lynx ble funnet i: "
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "plassering"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr " _Endre... "
@@ -85,11 +85,11 @@ msgstr " Desimal til _oktal "
 msgid " Hex to Decima_l "
 msgstr " Heksadesimal til desima_l "
 
-#: plugins/diff/diff.c:121
+#: plugins/diff/diff.c:127
 msgid "The two documents you selected are the same."
 msgstr "De to valgte dokumentene du valgte er like."
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:133
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -99,7 +99,7 @@ msgstr ""
 "\n"
 "Vennligst oppgi en gyldig fil."
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:140
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -109,16 +109,16 @@ msgstr ""
 "\n"
 "Vennligst oppgi en gyldig fil."
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:151
 msgid "The \"first\" document contains no text."
 msgstr "Det \"første\" dokumentet inneholder ingen tekst."
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:163
 msgid "The \"second\" document contains no text."
 msgstr "Det \"andre\" dokumentet inneholder ingen tekst."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:172
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -126,21 +126,21 @@ msgstr ""
 "gedit kunne ikke opprette en midlertidig til.\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Navnløs %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:497
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:498
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 "Lager en fil som inneholder forskjellene mellom to dokumenter eller filer"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:499
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -186,6 +186,10 @@ msgid "Select the \"second\" file..."
 msgstr "Velg den \"andre\" filen..."
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr "Bruk enhetlig utskriftsformat (-u flagg)"
+
+#: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "Diff funnet i: "
 
@@ -383,17 +387,17 @@ msgstr "gedit: Brukervalg"
 msgid "Replace"
 msgstr "Erstatt"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "Finn"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
-msgstr "Teksten ble ikke funnet"
+msgid "Search string not found"
+msgstr "Søketeksten ble ikke funnet"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
-msgstr "Teksten ble ikke funnet."
+msgid "Search string not found."
+msgstr "Søketeksten ble ikke funnet."
 
 #: src/dialogs/dialog-replace.c:362
 #, c-format
@@ -404,7 +408,7 @@ msgstr "fant og erstattet %i oppføringer."
 msgid "Could not allocate the memory for the Replace all request."
 msgstr "Kunne ikke allokere minne for \"Erstatt alle\" forespørselen."
 
-#: src/dialogs/dialog-uri.c:138 src/file.c:828 src/file.c:835
+#: src/dialogs/dialog-uri.c:138 src/file.c:827 src/file.c:834
 #, c-format
 msgid "Loaded file %s"
 msgstr "Lastet fil %s"
@@ -428,46 +432,50 @@ msgstr "Linjenummer:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+msgid "Preferences"
+msgstr "Brukervalg"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "Utseende"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
-msgstr "Vis statuslinje"
-
 #: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
-msgstr "Sett verktøylinjen i henhold til systeminnstillingene"
+msgid "S_how statusbar"
+msgstr "V_is statuslinje"
 
 #: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
-msgstr "Sett verktøylinjen til kun ikoner"
+msgid "Set toolbar according to _system settings"
+msgstr "Sett verktøylinjen i henhold til _systeminnstillingene"
 
 #: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
-msgstr "Sett verktøylinjen til ikoner med tekst"
+msgid "Set toolbar to _icons only"
+msgstr "Sett verktøylinjen til kun _ikoner"
 
 #: src/dialogs/prefs.glade.h:12
+msgid "Set toolbar to icons with _text"
+msgstr "Sett verktøylinjen til ikoner med _tekst"
+
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "Editorens oppførsel"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
-msgstr "Slå på autoindentering"
-
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width: "
-msgstr "Tab bredde: "
+msgid "Enable _Auto-indent"
+msgstr "Slå på _autoindentering"
 
 #: src/dialogs/prefs.glade.h:15
+msgid "Tab _width: "
+msgstr "Ta_b bredde: "
+
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "Generelt"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (Multiple Document Interface)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -479,7 +487,7 @@ msgstr ""
 "Topp\n"
 "Bunn\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -491,95 +499,99 @@ msgstr ""
 "Modal\n"
 "Standard\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
-msgstr "Modus: "
-
 #: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
-msgstr "Notisbok faneplassering: "
+msgid "_Mode: "
+msgstr "_Modus: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:29
+msgid "Notebook _tab position: "
+msgstr "No_tisbok faneplassering: "
+
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "Angre"
 
-#: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to:"
-msgstr "Sett grense for angrenivåer til:"
-
 #: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
-msgstr "nivå(er)"
+msgid "Set limit on _undo levels to:"
+msgstr "Sett grense for an_grenivåer til:"
 
 #: src/dialogs/prefs.glade.h:32
+msgid "_level(s)"
+msgstr "_nivå(er)"
+
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "Dokumenter"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "Skrifttyper"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "Velg en skrifttype"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
-#: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
-msgstr "Standard skrifttype: "
-
 #: src/dialogs/prefs.glade.h:37
+msgid "_Default font: "
+msgstr "Stan_dard skrifttype: "
+
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "Farger"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "Velg en farge"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
-msgstr "Bakgrunn: "
-
 #: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
-msgstr "Forgrunn: "
+msgid "_Background: "
+msgstr "_Bakgrunn: "
 
 #: src/dialogs/prefs.glade.h:42
+msgid "_Foreground: "
+msgstr "_Forgrunn: "
+
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "Skrifttyper/Farger"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "Utskrift"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "Legg til _header"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr "Slå på ordbr_yting"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
-msgstr "Skriv ut _linjenummer for hver:"
-
 #: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
-msgstr "linje(r)"
+msgid "Print line _numbers every:"
+msgstr "Skriv ut linje_nummer for hver:"
 
 #: src/dialogs/prefs.glade.h:48
+msgid "l_ine(s)"
+msgstr "l_inje(r)"
+
+#: src/dialogs/prefs.glade.h:49
+msgid "Orientation"
+msgstr "Orientering"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "_Portrett"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "_Landskap"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Papir"
 
@@ -682,7 +694,7 @@ msgstr "Beskrivelse av tillegg"
 msgid "Open as URI"
 msgstr "Åpne som URI"
 
-#: src/dialogs/uri.glade.h:8 src/menus.c:244
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
 msgid "Open"
 msgstr "Åpne"
 
@@ -806,15 +818,15 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/file.c:482
+#: src/file.c:481
 msgid "Save As..."
 msgstr "Lagre som..."
 
-#: src/file.c:552
+#: src/file.c:551
 msgid "The document contains no data."
 msgstr "Dokumentet inneholder ikke data."
 
-#: src/file.c:563
+#: src/file.c:562
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -831,7 +843,7 @@ msgstr ""
 "Forsikre deg om at stien du oppga eksisterer, og at du har tilstrekkelige "
 "skriverettigheter."
 
-#: src/file.c:577
+#: src/file.c:576
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -848,7 +860,7 @@ msgstr ""
 "På grunn av en ukjent feil (1). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:595
+#: src/file.c:594
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -865,41 +877,41 @@ msgstr ""
 "På grunn av en ukjent feil (2). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:697
+#: src/file.c:696
 msgid "Could not allocate the required memory."
 msgstr "Kunne ikke hente nødvendig minne."
 
-#: src/file.c:717
+#: src/file.c:716
 msgid "Error in the pipe."
 msgstr "Feil i røret."
 
-#: src/file.c:842
+#: src/file.c:841
 #, c-format
 msgid "Loaded %i files"
 msgstr "Lastet %i filer"
 
-#: src/file.c:908
+#: src/file.c:907
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/file.c:1041
+#: src/file.c:1040
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' er i ferd med å bli overskrevet. Vil du fortsette ?"
 
-#: src/file.c:1053
+#: src/file.c:1052
 msgid "Document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/file.c:1063
+#: src/file.c:1062
 msgid "Error saving file!"
 msgstr "Feil under lagring av fil!"
 
-#: src/file.c:1192
+#: src/file.c:1191
 msgid "You can't revert an Untitled document\n"
 msgstr "Du kan ikke forkaste et dokument uten tittel\n"
 
-#: src/file.c:1205
+#: src/file.c:1204
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -908,7 +920,7 @@ msgstr ""
 "Er du sikker på at du vil forkaste alle endringer?\n"
 "(%s)"
 
-#: src/file.c:1236
+#: src/file.c:1235
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen ``%s'' eksisterer ikke. Vil du opprette den?"
@@ -973,21 +985,21 @@ msgstr "Åpne (bytt) .c/.h fil"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "Opprett et nytt dokument"
 
 #: src/menus.c:68
-msgid "Save All"
-msgstr "Lagre alt"
+msgid "Sav_e All"
+msgstr "Lagr_e alt"
 
 #: src/menus.c:69
 msgid "Save All Open Files"
 msgstr "Lagre alle åpne filer"
 
 #: src/menus.c:74
-msgid "Revert"
-msgstr "Forkast"
+msgid "_Revert"
+msgstr "Fo_rkast"
 
 #: src/menus.c:83
 msgid "Open from _URI..."
@@ -1006,145 +1018,141 @@ msgid "Print preview"
 msgstr "Forhåndsvisning"
 
 #: src/menus.c:102
-msgid "Print preview..."
-msgstr "Forhåndsvisning..."
+msgid "Print pre_view..."
+msgstr "Forhånds_visning..."
 
 #: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Forhåndsvis data som skal skrives ut"
 
 #: src/menus.c:110
-msgid "Close All"
-msgstr "Lukk alt"
+msgid "C_lose All"
+msgstr "_Lukk alle"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Lukk alle åpne filer"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "Gå til _linje..."
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "Gå til en spesifikk linje"
 
-#: src/menus.c:154
+#: src/menus.c:160
 msgid "File _Info"
 msgstr "Fil_info"
 
-#: src/menus.c:155
+#: src/menus.c:161
 msgid "Get the basic file info"
 msgstr "Hent grunnleggende filinfo"
 
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "_Legg til visning"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr "Legg til en ny visning for dokumentet"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "Fje_rn visning"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr "Fjern visning for dokumentet"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/menus.c:220
+msgid "Se_arch"
+msgstr "S_øk"
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
 #: src/window.c:677
 msgid "_Plugins"
 msgstr "_Tillegg"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "_Dokumenter"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "Ny"
 
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "Åpne en fil"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr "Lagre"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "Lagre aktiv fil"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr "Lukk"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "Lukk aktiv fil"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "Skriv ut"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "Skriv ut aktiv fil"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "Angre forrige operasjon"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
 msgstr "Gjenopprett"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "Gjenopprett forrige operasjon"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "Klipp ut utvalget"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "Kopiér"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "Kopiér utvalget"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "Lim inn utklippstavlen"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr "Søk etter en streng"
 
-#: src/menus.c:288
-msgid "Exit"
-msgstr "Avslutt"
-
-#: src/menus.c:288
-msgid "Exit the program"
-msgstr "Avslutt programmet"
-
 #: src/plugin.c:107
-msgid "Manager ..."
-msgstr "Styrer..."
+msgid "_Manager ..."
+msgstr "_Håndterer..."
 
 #: src/plugin.c:108
 msgid "Add/Remove installed plugins"
