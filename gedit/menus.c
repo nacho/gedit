@@ -231,46 +231,36 @@ void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
 GnomeUIInfo gedit_file_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_New"),  NULL, file_new_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
-          GNOME_KEY_NAME_NEW, GNOME_KEY_MOD_NEW, NULL },
-	{ GNOME_APP_UI_ITEM, N_("_Open..."),  NULL, file_open_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
-	  GNOME_KEY_NAME_OPEN, GNOME_KEY_MOD_OPEN, NULL },
-	{ GNOME_APP_UI_ITEM, N_("_Save"),  NULL, file_save_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
-	  GNOME_KEY_NAME_SAVE, GNOME_KEY_MOD_SAVE, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save _As..."),  NULL, file_save_as_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS,
-	  GNOME_KEY_NAME_SAVE_AS, GNOME_KEY_MOD_SAVE_AS, NULL },
+        GNOMEUIINFO_MENU_NEW_ITEM(N_("_New"), file_new_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_MENU_OPEN_ITEM(file_open_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_MENU_SAVE_ITEM(file_save_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, (gpointer) GE_DATA),
+
 	{ GNOME_APP_UI_ITEM, N_("_Print..."),  NULL, file_print_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },	
-	{ GNOME_APP_UI_ITEM, N_("_Close"),  NULL, file_close_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
-	  GNOME_KEY_NAME_CLOSE, GNOME_KEY_MOD_CLOSE, NULL },
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },
+	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
+
 	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
 
 	{ GNOME_APP_UI_SEPARATOR },
 
-	{ GNOME_APP_UI_ITEM, N_("E_xit"),  NULL, file_quit_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
-	  GNOME_KEY_NAME_EXIT, GNOME_KEY_MOD_EXIT, NULL },
+	GNOMEUIINFO_MENU_EXIT_ITEM(file_quit_cb, (gpointer) GE_DATA),
 
 	GNOMEUIINFO_END
 };
 
 
 GnomeUIInfo gedit_edit_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT,
-	  GNOME_KEY_NAME_CUT, GNOME_KEY_MOD_CUT, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Copy"),  NULL, edit_copy_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY,
-	  GNOME_KEY_NAME_COPY, GNOME_KEY_MOD_COPY, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Paste"),  NULL, edit_paste_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE,
-	  GNOME_KEY_NAME_PASTE, GNOME_KEY_MOD_PASTE, NULL },
+        GNOMEUIINFO_MENU_CUT_ITEM(edit_cut_cb, (gpointer) GE_DATA),
+
+        GNOMEUIINFO_MENU_COPY_ITEM(edit_copy_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_MENU_PASTE_ITEM(edit_paste_cb, (gpointer) GE_DATA),
+
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Select All"),  NULL, edit_selall_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL },
