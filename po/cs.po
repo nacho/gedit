@@ -1,24 +1,389 @@
-#
-#
+# Czech translation for gedit.
+# Copyright (C) 2002 Free Software Foundation, Inc.
+# Michal Bukovjan <michal.bukovjan@openone.cz>, 2002.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2002-06-03 15:00-0700\n"
-"PO-Revision-Date: 1999-08-09 20:17+0100\n"
-"Last-Translator: Unknown :-(\n"
-"Language-Team: \n"
+"Project-Id-Version: gedit 2.0.2\n"
+"POT-Creation-Date: 2002-08-01 17:16+0200\n"
+"PO-Revision-Date: 2002-08-02 14:22GMT\n"
+"Last-Translator: Michal Bukovjan <michal.bukovjan@openone.cz>\n"
+"Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.5\n"
 
-#: gedit.desktop.in.h:1
+#: data/GNOME_Gedit.server.in.h:1
+msgid "gedit application"
+msgstr "aplikace gedit"
+
+#: data/GNOME_Gedit.server.in.h:2
+msgid "gedit automation factory"
+msgstr "gedit automation factory"
+
+#: data/gedit.desktop.in.h:1
 msgid "Edit text files"
-msgstr "�prava textov�ch soubor�"
+msgstr "Úprava textových souborů"
 
-#: gedit.desktop.in.h:2
+#: data/gedit.desktop.in.h:2 src/gedit2.c:297
 msgid "Text Editor"
-msgstr "Textov� editor"
+msgstr "Textový editor"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"A custom font that will be used for the editing area. This will only take "
+"effect if the \"Use Default Font\" option is turned off."
+msgstr ""
+"Uživatelské písmo, které bude použito pro editační oblast. Toto nastavení bude "
+"mít vliv pouze v případě, že je vypnuta volba \"Používat výchozí písmo\"."
+
+#: data/gedit.schemas.in.h:2
+msgid "Auto Save"
+msgstr "Automaticky ukládat"
+
+#: data/gedit.schemas.in.h:3
+msgid "Auto Save Interval"
+msgstr "Interval pro automatické ukládání"
+
+#: data/gedit.schemas.in.h:4
+msgid "Background Color"
+msgstr "Barva pozadí"
+
+#: data/gedit.schemas.in.h:5
+msgid ""
+"Background color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Barva pozadí pro text vybraný v editační oblasti. Toto nastavení bude mít "
+"vliv pouze v případě, že je vypnuta volba \"Používat výchozí barvy\"."
+
+#: data/gedit.schemas.in.h:6
+msgid ""
+"Background color for unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Barva pozadí pro text v editační oblasti, který není právě vybraný. Toto nastavení "
+"bude mít vliv pouze v případě, že je vypnuta volba \"Používat výchozí barvy\"."
+
+#: data/gedit.schemas.in.h:7
+msgid "Backup Copy Extension"
+msgstr "Přípona záložní kopie"
+
+#: data/gedit.schemas.in.h:8
+msgid "Body Font for Printing"
+msgstr "Písmo těla textu pro tisk"
+
+#: data/gedit.schemas.in.h:9
+msgid "Create Backup Copies"
+msgstr "Vytvářet záložní kopie"
+
+#: data/gedit.schemas.in.h:10
+msgid "Display Line Numbers"
+msgstr "Zobrazovat čísla řádků"
+
+#: data/gedit.schemas.in.h:11
+msgid "Editor Font"
+msgstr "Písmo editoru"
+
+#: data/gedit.schemas.in.h:12
+msgid "Encoding for Saving"
+msgstr "Kódování uloženého souboru"
+
+#: data/gedit.schemas.in.h:13
+msgid ""
+"Extension or suffix to use for backup file names. This will only take effect "
+"if the \"Create Backup Copies\" option is turned on."
+msgstr ""
+"Přípona, která bude použita pro jména souborů záložních kopií. Toto nastavení "
+"bude mít vliv pouze v případě, že je zapnuta volba \"Vytvářet záložní kopie\"."
+
+#: data/gedit.schemas.in.h:14
+msgid ""
+"Foreground color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Barva popředí vybraného textu v editační oblasti. Toto nastavení bude "
+"mít vliv pouze v případě, že je vypnuta volba \"Používat výchozí barvy\"."
+
+#: data/gedit.schemas.in.h:15
+msgid ""
+"Foreground color for the unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Barva popředí textu v editační oblasti, který není právě vybraný. Toto nastavení "
+"bude mít vliv pouze v případě, že je vypnuta volba \"Používat výchozí barvy\"."
+
+#: data/gedit.schemas.in.h:16
+msgid "Header Font for Printing"
+msgstr "Písmo záhlaví pro tisk"
+
+#: data/gedit.schemas.in.h:17
+msgid ""
+"If this value is 0, then no line numbers will be inserted when printing a "
+"document. Otherwise, gedit will print line numbers every such number of "
+"lines."
+msgstr ""
+"Je-li hodnota nastavena na 0, nebudou tištěna žádná čísla řádků. Jinak bude "
+"vytištěno číslo řádku vždy po tomto počtu řádků."
+
+#: data/gedit.schemas.in.h:18
+msgid "Line Number Font for Printing"
+msgstr "Písmo číslování řádků pro tisk"
+
+#: data/gedit.schemas.in.h:19
+msgid "Line Wrapping Mode"
+msgstr "Zalamování řádků"
+
+#: data/gedit.schemas.in.h:20
+msgid "Maximum Recent Files"
+msgstr "Maximální počet nedávno otevřených souborů"
+
+#: data/gedit.schemas.in.h:21
+msgid "Maximum number of actions that gedit will be able to undo or redo."
+msgstr "Maximální počet akcí, které bude možné vzít zpět nebo udělat znovu."
+
+#: data/gedit.schemas.in.h:22
+msgid ""
+"Number of minutes after which gedit will automatically save modified files. "
+"This will only take effect if the \"Auto Save\" option is turned on."
+msgstr ""
+"Čas v minutách, po kterém se automaticky uloží změněné soubory. Toto nastavení "
+"bude mít vliv pouze v případě, že je zapnuta volba \"Automatické ukládání\"."
+
+#: data/gedit.schemas.in.h:23
+msgid "Print Header"
+msgstr "Tisknout záhlaví"
+
+#: data/gedit.schemas.in.h:24
+msgid "Print Line Numbers"
+msgstr "Tisknout čísla řádků"
+
+#: data/gedit.schemas.in.h:25
+msgid "Printing Line Wrapping Mode"
+msgstr "Zalamovat řádky při tisku"
+
+#: data/gedit.schemas.in.h:26
+msgid "Selected Text Color"
+msgstr "Barva vybraného textu"
+
+#: data/gedit.schemas.in.h:27
+msgid "Selection Color"
+msgstr "Barva výběru"
+
+#: data/gedit.schemas.in.h:28
+msgid "Show Cursor Position"
+msgstr "Ukazovat pozici kurzoru"
+
+#: data/gedit.schemas.in.h:29
+msgid "Show Overwrite Mode"
+msgstr "Ukazovat režim přepisování"
+
+#: data/gedit.schemas.in.h:30
+msgid ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"Udává, jakým způsobem se budou při tisku zalamovat řádky. Hodnota \"GTK_WRAP_NONE\" "
+"řádky zalamovat nebude, hodnota \"GTK_WRAP_WORD\" bude zalamovat řádky na hranicích slov, "
+"a hodnota \"GTK_WRAP_CHAR\" bude zalamovat na hranicích znaků. Tyto hodnoty jsou citlivé "
+"na malá a velká písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde "
+"popsány."
+
+#: data/gedit.schemas.in.h:31
+msgid ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"Udává, jakým způsobem se budou zalamovat řádky v editační oblasti. Hodnota \"GTK_WRAP_NONE\" "
+"řádky zalamovat nebude, hodnota \"GTK_WRAP_WORD\" bude zalamovat řádky na hranicích slov, "
+"a hodnota \"GTK_WRAP_CHAR\" bude zalamovat na hranicích znaků. Tyto hodnoty jsou citlivé "
+"na malá a velká písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde "
+"popsány."
+
+#: data/gedit.schemas.in.h:32
+msgid "Specifies the font to use for a document's body when printing documents."
+msgstr "Udává písmo, které bude použito pro tělo dokumentu při jeho tisku."
+
+#: data/gedit.schemas.in.h:33
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+"Udává písmo, které bude použito pro čísla řádků při tisku. Toto nastavení "
+"bude mít vliv pouze v případě, že hodnota \"Tisknout čísla řádků\" je nenulová."
+
+#: data/gedit.schemas.in.h:34
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+"Udává písmo, které bude použito pro záhlaví dokumentu při tisku. Toto nastavení "
+"bude mít vliv pouze v případě, že je zapnuta hodnota \"Tisknout záhlaví\"."
+
+#: data/gedit.schemas.in.h:35
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+"Udává maximální počet nedávno otevřených souborů, které se budou "
+"zobrazovat v podmenu \"Otevřít nedávný\"."
+
+#: data/gedit.schemas.in.h:36
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr "Udává počet mezerníků, které by se měly zobrazovat místo znaků tabelátoru."
+
+#: data/gedit.schemas.in.h:37
+msgid "Status Bar is Visible"
+msgstr "Ukazovat stavovou lištu"
+
+#: data/gedit.schemas.in.h:38
+msgid ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+msgstr ""
+"Styl pro tlačítka nástrojové lišty. Možné hodnoty jsou \"GEDIT_TOOLBAR_SYSTEM\", která "
+"bude používat výchozí styl nastavený v systému, \"GEDIT_TOOLBAR_ICONS\", která bude ukazovat "
+"pouze ikony, a \"GEDIT_TOOLBAR_ICONS_AND_TEXT\". která bude ukazovat ikony i text. Tyto hodnoty "
+"jsou citlivé na malá a velká písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde "
+"popsány."
+
+#: data/gedit.schemas.in.h:39
+msgid "Tab Size"
+msgstr "Velikost tabelátoru"
+
+#: data/gedit.schemas.in.h:40
+msgid "Text Color"
+msgstr "Barva textu"
+
+#: data/gedit.schemas.in.h:41
+msgid ""
+"The encoding method to use for saving files. Possible values are "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to "
+"convert the document it is saving to your current locale's encoding, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to try "
+"to use the original file encoding (new files in UTF8) and "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit to "
+"try to use the original file encoding (new files in current locale's "
+"encoding). If the conversion is successful, it will be used. Otherwise, UTF-"
+"8 will be used. Note that the values are case-sensitive, so make sure they "
+"appear exactly as mentioned here."
+msgstr ""
+"Metoda kódování, která bude použita při ukládání souborů. Možné hodnoty jsou "
+"\"GEDIT_SAVE_ALWAYS_UTF8\", při které bude vždy použito kódování UTF-8, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\", pokud chcete převést ukládaný "
+"dokument dle vašeho aktuálního kódování, \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\", "
+"pokud mají být soubory uloženy v původním kódování (nové soubory budou používat UTF-8), a "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\", pokud mají být soubory uloženy "
+"v původním kódování a nové soubory dle vašeho aktuálního nastavení prostředí. Pokud je převod "
+"úspěšný, použije se, v opačném případě se použije kódování UTF-8. Tyto hodnoty "
+"jsou citlivé na malá a velká písmena, takže dejte pozor, aby odpovídaly přesně hodnotám, které jsou zde "
+"popsány."
+
+#: data/gedit.schemas.in.h:42
+msgid "Toolbar Buttons Style"
+msgstr "Styl tlačítek nástrojové lišty"
+
+#: data/gedit.schemas.in.h:43
+msgid "Toolbar is Visible"
+msgstr "Ukazovat nástrojovou lištu"
+
+#: data/gedit.schemas.in.h:44
+msgid "Undo Actions Limit"
+msgstr "Limit pro zpětné akce"
+
+#: data/gedit.schemas.in.h:45
+msgid "Use Default Colors"
+msgstr "Používat výchozí barvy"
+
+#: data/gedit.schemas.in.h:46
+msgid "Use Default Font"
+msgstr "Používat výchozí písmo"
+
+#: data/gedit.schemas.in.h:47
+msgid ""
+"Whether gedit should automatically save modified files after a time "
+"interval. You can set the time interval with the \"Auto Save Interval\" "
+"option."
+msgstr ""
+"Mají-li se automaticky ukládat změněné soubory po stanoveném "
+"časovém intervalu. Časový interval lze nastavit volbou "
+"\"Interval pro automatické ukládání\"."
+
+#: data/gedit.schemas.in.h:48
+msgid ""
+"Whether gedit should create backup copies for the files it saves. You can "
+"set the backup file extension with the \"Backup Copy Extension\" option."
+msgstr ""
+"Mají-li se vytvářet záložní kopie souborů při jejich uložení. Ve volbě "
+"\"Přípona záložní kopie\" můžete nastavit příponu těchto záložních souborů."
+
+#: data/gedit.schemas.in.h:49
+msgid "Whether gedit should display line numbers in the editing area."
+msgstr "Mají-li se zobrazovat čísla řádků v editační oblasti."
+
+#: data/gedit.schemas.in.h:50
+msgid "Whether gedit should include a document header when printing documents."
+msgstr "Má-li být vložena hlavička dokumentu při jeho tisku."
+
+#: data/gedit.schemas.in.h:51
+msgid "Whether the status bar at the bottom of editing windows should be visible."
+msgstr "Má-li být viditelná stavová lišta pod editační oblastí."
+
+#: data/gedit.schemas.in.h:52
+msgid ""
+"Whether the status bar should show the cursor position in editing windows. "
+"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
+"effect."
+msgstr ""
+"Má-li stavová lišta zobrazovat aktuální pozici kurzoru v editační oblasti. "
+"Toto nastavení bude mít vliv pouze v případě, že je zapnuta volba \"Ukazovat stavový řádek\"."
+
+#: data/gedit.schemas.in.h:53
+msgid ""
+"Whether the status bar should show the insert/overwrite mode in editing "
+"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
+"to take effect."
+msgstr ""
+"Má-li stavová lišta zobrazovat při editaci režim přepisu nebo vkládání. "
+"Toto nastavení bude mít vliv pouze v případě, že je zapnuta volba \"Ukazovat stavový řádek\"."
+
+#: data/gedit.schemas.in.h:54
+msgid "Whether the toolbar should be visible in editing windows."
+msgstr "Má-li se zobrazovat v editačních oknech stavový řádek."
+
+#: data/gedit.schemas.in.h:55
+msgid ""
+"Whether to use the system's default colors for the editing area. If this "
+"option is turned off, then the colors of the editing area will be those "
+"specified in the \"Background Color\", \"Text Color\", \"Selected Text Color"
+"\", and \"Selection Color\" options."
+msgstr ""
+"Mají-li být pro editační oblast použity výchozí barvy systému. Pokud je tato "
+"volba vypnuta, budou pro editační oblast použity barvy zvolené jako \"Barva pozadí\", "
+"\"Barva textu\". \"Barva vybraného textu\" a \"Barva výběru\"."
+
+#: data/gedit.schemas.in.h:56
+msgid ""
+"Whether to use the system's default font for editing text instead of a font "
+"specific to gedit. If this option is turned off, then the font named in the "
+"\"Editor Font\" option will be used instead of the system font."
+msgstr ""
+"Má-li být pro editovaný text použito výchozí písmo systému místo písma "
+"specifického pro aplikaci GEdit. Je-li tato volba vypnuta, bude místo systémového "
+"písma použito písmo z volby \"Písmo editoru\""
 
 #: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
@@ -26,24 +391,23 @@ msgstr "Tabulka _ASCII"
 
 #: plugins/ASCII/ascii.c:46
 msgid "Pop-up a dialog containing an ASCII Table"
-msgstr ""
+msgstr "Zobrazí dialog obsahující tabulku ASCII znaků"
 
 #: plugins/ASCII/ascii.c:336
-#, fuzzy
 msgid "Char"
-msgstr "Zav��t"
+msgstr "Znak"
 
 #: plugins/ASCII/ascii.c:343
 msgid "Dec#"
-msgstr ""
+msgstr "Dec#"
 
 #: plugins/ASCII/ascii.c:350
 msgid "Hex#"
-msgstr ""
+msgstr "Hex#"
 
 #: plugins/ASCII/ascii.c:357
 msgid "Name"
-msgstr "Jm�no"
+msgstr "Jméno"
 
 #: plugins/ASCII/ascii.c:402 plugins/ASCII/ascii.c:523
 msgid "ASCII table"
@@ -51,15 +415,15 @@ msgstr "Tabulka ASCII"
 
 #: plugins/ASCII/ascii.c:415
 msgid "_Insert char"
-msgstr ""
+msgstr "Vlož_it znak"
 
 #: plugins/ASCII/ascii.c:524
 msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr ""
+msgstr "Tento plugin zobrazuje dialog obsahující tabulku znaků ASCII."
 
 #: plugins/ASCII/ascii.c:526
 msgid "Copyright (C) 2001-2002 Paolo Maggi"
-msgstr ""
+msgstr "Copyright (C) 2001-2002 Paolo Maggi"
 
 #: plugins/ASCII/asciitable.glade2.h:1
 msgid ""
@@ -67,33 +431,36 @@ msgid ""
 "document, select the character and click the \"Insert Char\" \n"
 "button or double click the character in the table."
 msgstr ""
+"Přejete-li si vložit kterýkoli znak do aktivního dokumentu, "
+"vyberte tento znak a klepněte na tlačítko \"Vložit znak\" nebo "
+"dvakrát klepněte na znak v tabulce."
 
 #: plugins/ASCII/asciitable.glade2.h:4
 msgid "Insert char"
-msgstr ""
+msgstr "Vložit znak"
 
 #: plugins/ASCII/asciitable.glade2.h:5
 msgid "gedit: ASCII table"
-msgstr ""
+msgstr "gedit: Tabulka ASCII"
 
 #. AFAIK, all cvs commit messages start with this
-#: plugins/cvschangelog/cvschangelog.c:48
+#: plugins/cvschangelog/cvschangelog.c:49
 msgid "Open CVS Chan_geLogs"
-msgstr ""
+msgstr "Otevřít změnové soubory _CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:51
+#: plugins/cvschangelog/cvschangelog.c:52
 msgid "Searches for ChangeLogs in the current document and opens them"
-msgstr ""
+msgstr "Vyhledá změnové soubory v aktuálním dokumentu a otevře je"
 
-#: plugins/cvschangelog/cvschangelog.c:263
+#: plugins/cvschangelog/cvschangelog.c:269
 msgid "CVS ChangeLog"
-msgstr ""
+msgstr "Změnové soubory CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:264
+#: plugins/cvschangelog/cvschangelog.c:270
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr ""
+msgstr "Plugin, který otevře změnové soubory nalezené ve odesílacích zprávách CVS."
 
-#: plugins/cvschangelog/cvschangelog.c:266
+#: plugins/cvschangelog/cvschangelog.c:272
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright (C) 2002 - James Willcox"
 
@@ -103,7 +470,7 @@ msgstr "Po_rovnat soubory..."
 
 #: plugins/diff/diff.c:64
 msgid "Makes a diff file from two documents or files"
-msgstr ""
+msgstr "Vytvoří soubor s rozdíly \"diff\" ze dvou dokumentů nebo souborů"
 
 #: plugins/diff/diff.c:66
 msgid "Compare files"
@@ -119,9 +486,8 @@ msgid "C_ompare"
 msgstr "P_orovnat"
 
 #: plugins/diff/diff.c:502
-#, fuzzy
 msgid "The two documents you selected are the same."
-msgstr "Dokument nezaps�n..."
+msgstr "Dokumenty, které jste vybral, jsou stejné."
 
 #: plugins/diff/diff.c:510
 msgid ""
@@ -129,6 +495,9 @@ msgid ""
 "\n"
 "Please provide a valid file."
 msgstr ""
+"První soubor, který jste vybral, neexistuje.\n"
+"\n"
+"Prosím vyberte platný soubor."
 
 #: plugins/diff/diff.c:519
 msgid ""
@@ -136,21 +505,21 @@ msgid ""
 "\n"
 "Please provide a valid file."
 msgstr ""
+"Druhý soubor, který jste vybral, neexistuje.\n"
+"\n"
+"Prosím vyberte platný soubor."
 
 #: plugins/diff/diff.c:527
-#, fuzzy
 msgid "The two files you selected are the same."
-msgstr "Dokument nezaps�n..."
+msgstr "Soubory, které jste vybral, jsou stejné."
 
 #: plugins/diff/diff.c:544
-#, fuzzy
 msgid "The \"first\" document contains no text."
-msgstr "Dokument nezaps�n..."
+msgstr "První dokument neobsahuje žádný text."
 
 #: plugins/diff/diff.c:573
-#, fuzzy
 msgid "The \"second\" document contains no text."
-msgstr "Dokument nezaps�n..."
+msgstr "Druhý dokument neobsahuje žádný text."
 
 #. FIXME: do better error reporting ... . Chema
 #: plugins/diff/diff.c:594
@@ -159,6 +528,9 @@ msgid ""
 "\n"
 "gedit could not create a temporary file."
 msgstr ""
+"Nelze porovnat vybrané dokumenty.\n"
+"\n"
+"Nebylo možné vytvořit dočasný soubor."
 
 #: plugins/diff/diff.c:612 plugins/diff/diff.c:625
 msgid ""
@@ -166,10 +538,13 @@ msgid ""
 "\n"
 "Error executing the diff command."
 msgstr ""
+"Nelze porovnat vybrané dokumenty.\n"
+"\n"
+"Chyba při spuštění příkazu diff."
 
 #: plugins/diff/diff.c:647
 msgid "No differences were found between the selected documents."
-msgstr ""
+msgstr "Mezi vybranými dokumenty nebyly nalezeny žádné rozdíly."
 
 #: plugins/diff/diff.c:688
 msgid ""
@@ -177,6 +552,9 @@ msgid ""
 "\n"
 "The result contains invalid UTF-8 data."
 msgstr ""
+"Nelze porovnat vybrané dokumenty.\n"
+"\n"
+"Výsledek obsahuje neplatná data v UTF-8."
 
 #: plugins/diff/diff.c:912
 msgid ""
@@ -184,76 +562,77 @@ msgid ""
 "\n"
 "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
 msgstr ""
+"Vytvoří soubor s rozdíly diff ze dvou dokumentů nebo souborů na disku.\n"
+"\n"
+"Chcete-li více informací o programu \"diff\", zadejte na příkazové řádce \"man diff\".\n"
 
 #: plugins/diff/diff.c:915
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
 msgstr ""
+"Copyright (C) 2000 - 2001 Chema Celorio \n"
+"Copyright (C) 2002 Paolo Maggi"
 
 #: plugins/diff/diff.glade2.h:1
 msgid "Choose the files to compare."
-msgstr ""
+msgstr "Vyberte soubory pro porovnání."
 
 #: plugins/diff/diff.glade2.h:2
-#, fuzzy
 msgid "Compare files..."
-msgstr "Otev��t soubor..."
+msgstr "Porovnat soubory..."
 
 #: plugins/diff/diff.glade2.h:3
-#, fuzzy
 msgid "F_rom document"
-msgstr "Dokument"
+msgstr "_Z dokumentu"
 
 #: plugins/diff/diff.glade2.h:4
 msgid "First"
-msgstr ""
+msgstr "První"
 
 #: plugins/diff/diff.glade2.h:5
-#, fuzzy
 msgid "From _document"
-msgstr "Dokument"
+msgstr "Z _dokumentu"
 
 #: plugins/diff/diff.glade2.h:6
 msgid "From a _file on disk"
-msgstr ""
+msgstr "Ze _souboru na disku"
 
 #: plugins/diff/diff.glade2.h:7
 msgid "From a file o_n disk"
-msgstr ""
+msgstr "Ze s_ouboru na disku"
 
 #: plugins/diff/diff.glade2.h:8
 msgid "Ignore _blanks (-b option)"
-msgstr ""
+msgstr "Ignorovat _mezery (volba -b)"
 
 #: plugins/diff/diff.glade2.h:9
 msgid "Note that this option is only supported by GNU diff"
-msgstr ""
+msgstr "Tato volba je pouze podporovaná programem GNU diff."
 
 #: plugins/diff/diff.glade2.h:10
 msgid "Second"
-msgstr ""
+msgstr "Druhý"
 
 #: plugins/diff/diff.glade2.h:11
 msgid "Use the _unified output format (-u option)"
-msgstr ""
+msgstr "Použít výstupní formát _unified (volba -u)"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
-msgstr ""
+msgstr "_Počet slov"
 
 #: plugins/docinfo/docinfo.c:49
-#, fuzzy
 msgid "Get info on current document"
-msgstr "Vytvo�it nov� dokument"
+msgstr "Získá informace o aktuálním dokumentu"
 
 #: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
 msgid "Word count"
-msgstr ""
+msgstr "Počet slov"
 
 #: plugins/docinfo/docinfo.c:156
 msgid "_Update"
-msgstr ""
+msgstr "Akt_ualizovat"
 
 #: plugins/docinfo/docinfo.c:366
 msgid ""
@@ -261,10 +640,12 @@ msgid ""
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
+"Tento plugin pro počet slov analyzuje aktuální dokument a určí v něm počet slov, "
+"řádků, znaků a znaků bez mezer. Tyto výsledky následně zobrazí."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
-#: plugins/shell_output/shell_output.c:436
-#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
+#: plugins/shell_output/shell_output.c:553
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:571
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
 
@@ -274,293 +655,276 @@ msgstr "0"
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "Bytes"
-msgstr "Byt�"
+msgstr "Bytů"
 
 #: plugins/docinfo/docinfo.glade2.h:3
 msgid "Characters (no spaces)"
-msgstr ""
+msgstr "Znaků (bez mezer)"
 
 #: plugins/docinfo/docinfo.glade2.h:4
 msgid "Characters (with spaces)"
-msgstr ""
+msgstr "Znaků (s mezerami)"
 
 #: plugins/docinfo/docinfo.glade2.h:5
 msgid "File Name"
-msgstr "Jm�no souboru"
+msgstr "Jméno souboru"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
 msgid "Lines"
-msgstr "��dek"
+msgstr "Řádek"
 
 #: plugins/docinfo/docinfo.glade2.h:7
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 #: plugins/docinfo/docinfo.glade2.h:8
 msgid "Words"
 msgstr "Slov"
 
 #: plugins/docinfo/docinfo.glade2.h:9
-#, fuzzy
 msgid "gedit: Document Info plugin"
-msgstr "Email plugin gEditu"
+msgstr "gedit: plugin Informace o dokumentu"
 
 #: plugins/sample/sample.c:43
 msgid "Insert User _Name"
-msgstr ""
+msgstr "Vložit jmé_no uživatele"
 
 #: plugins/sample/sample.c:46
-#, fuzzy
 msgid "Insert the user name at the cursor position"
-msgstr "Zav��t v�echny otev�en� soubory"
+msgstr "Vloží jméno uživatele na aktuální pozici kurzoru"
 
-#: plugins/sample/sample.c:160
-#, fuzzy
+#: plugins/sample/sample.c:172
 msgid "User name"
-msgstr "Soubor"
+msgstr "Jméno uživatele"
 
-#: plugins/sample/sample.c:161
-#, fuzzy
+#: plugins/sample/sample.c:173
 msgid "Inserts the user name at the cursor position."
-msgstr "Zav��t v�echny otev�en� soubory"
+msgstr "Vloží jméno uživatele na pozici kurzoru"
 
-#: plugins/shell_output/shell_output.c:45
-#, fuzzy
+#: plugins/shell_output/shell_output.c:49
 msgid "Insert Shell _Output"
-msgstr "Email plugin gEditu"
+msgstr "Vl_ožit výstup shellu"
 
-#: plugins/shell_output/shell_output.c:48
-#, fuzzy
+#: plugins/shell_output/shell_output.c:52
 msgid "Insert the shell output in the current document"
-msgstr "Zav��t v�echny otev�en� soubory"
+msgstr "Vloží výstup shellu do aktuálního dokumentu"
 
-#: plugins/shell_output/shell_output.c:163
-#: plugins/shell_output/shell_output.c:432
-#, fuzzy
+#: plugins/shell_output/shell_output.c:137
+msgid "An error occurs while running the selected command."
+msgstr "Při provádění vybraného příkazu se vyskytla chyba."
+
+#: plugins/shell_output/shell_output.c:187
+#: plugins/shell_output/shell_output.c:550
 msgid "Shell output"
-msgstr "Email plugin gEditu"
+msgstr "Výstup shellu"
 
-#: plugins/shell_output/shell_output.c:176
+#: plugins/shell_output/shell_output.c:200
 msgid "_Run"
-msgstr ""
+msgstr "_Spustit"
 
-#: plugins/shell_output/shell_output.c:264
+#: plugins/shell_output/shell_output.c:360
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
+"Prostor pro příkaz shellu je prázdný.\n"
+"\n"
+"Prosím, zadejte platný příkaz pro shell."
 
-#: plugins/shell_output/shell_output.c:293
+#: plugins/shell_output/shell_output.c:389
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
+"Chyba při zpracování příkazu pro shell.\n"
+"\n"
+"Prosím, zadejte platný příkaz pro shell."
 
-#: plugins/shell_output/shell_output.c:346
-msgid "An error occurs while running the selected command."
-msgstr ""
-
-#: plugins/shell_output/shell_output.c:433
-#, fuzzy
-msgid ""
-"Execute a program and insert its output in the current document at the "
-"current cursor position"
-msgstr "Zav��t v�echny otev�en� soubory"
+#: plugins/shell_output/shell_output.c:551
+msgid "Execute an external program and insert its output in a new document."
+msgstr "Spustí externí program a vloží jeho výstup do nového dokumentu."
 
 #: plugins/shell_output/shell_output.glade2.h:1
-msgid "Specify the working directory and the command you want to run."
-msgstr ""
+msgid "Capture the command _output"
+msgstr "Získat výstup _příkazu"
 
 #: plugins/shell_output/shell_output.glade2.h:2
-msgid "_Shell command:"
-msgstr ""
+msgid "Specify the working directory and the command you want to run."
+msgstr "Zadejte pracovní adresář a příkaz, který chcete provést."
 
 #: plugins/shell_output/shell_output.glade2.h:3
-msgid "_Working directory:"
-msgstr ""
+msgid "_Shell command:"
+msgstr "Příkaz _shellu:"
 
 #: plugins/shell_output/shell_output.glade2.h:4
-#, fuzzy
+msgid "_Working directory:"
+msgstr "Pracovní _adresář:"
+
+#: plugins/shell_output/shell_output.glade2.h:5
 msgid "gedit: Shell Output plugin"
-msgstr "Email plugin gEditu"
+msgstr "gedit: Plugin Výstup shellu"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:136
-#, fuzzy
 msgid "Tag list plugin"
-msgstr "Email plugin gEditu"
+msgstr "Plugin Seznam značek"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:154
 msgid "Select the group of tab you want to use"
-msgstr ""
+msgstr "Vyberte skupinu značek, které chcete použít"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:176
 msgid "Tag Groups Combo"
-msgstr ""
+msgstr "Skupiny značek"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:178
 msgid "Tags Name List"
-msgstr ""
+msgstr "Seznam jmen značek"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:187
-#, fuzzy
 msgid "Double-click on a tag to insert it in the current document"
-msgstr "Zav��t v�echny otev�en� soubory"
+msgstr "Dvakrát poklepněte na značku pro vložení do aktuálního dokumentu"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:198
 msgid "Tags"
-msgstr ""
+msgstr "Značky"
 
 #: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
-msgstr ""
+msgstr "Seznam _značek"
 
 #.
 #. #define MENU_ITEM_NAME		"TagList"
 #.
 #: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
-msgstr ""
+msgstr "Ukázat okno se seznamem značek"
 
 #: plugins/taglist/gedit-taglist-plugin.c:160
 msgid "Tag list"
-msgstr ""
+msgstr "Seznam značek"
 
 #: plugins/taglist/gedit-taglist-plugin.c:161
 msgid ""
 "The tag list plugin provides a method to easily insert into a document "
 "commonly used tabs/strings without having to type them."
 msgstr ""
+"Plugin Seznam značek umožňuje jednoduché vložení často používaných "
+"značek nebo řetězců do dokumentu, aniž by bylo nutné je psát."
 
 #: plugins/time/time.c:45
 msgid "_Insert Date/Time"
-msgstr ""
+msgstr "Vlož_it datum a čas"
 
 #: plugins/time/time.c:48
-#, fuzzy
 msgid "Insert current date and time at the cursor position"
-msgstr "Zav��t v�echny otev�en� soubory"
+msgstr "Vloží aktuální datum a čas na aktuální pozici kurzoru"
 
-#: plugins/time/time.c:259
+#: plugins/time/time.c:274
 msgid "Available formats"
-msgstr ""
+msgstr "Dostupné formáty"
 
-#: plugins/time/time.c:300 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:315 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
-msgstr ""
+msgstr "Nastavit plugin pro vložení data a času"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:568
 msgid "Insert Date/Time"
-msgstr ""
+msgstr "Vložit datum a čas"
 
-#: plugins/time/time.c:554
-#, fuzzy
+#: plugins/time/time.c:569
 msgid "Inserts current date and time at the cursor position."
-msgstr "Zav��t v�echny otev�en� soubory"
+msgstr "Vloží aktuální datum a čas na pozici kurzoru"
 
 #: plugins/time/time.glade2.h:2
 msgid "Select the format to use when inserting date/time."
-msgstr ""
+msgstr "Vyberte formát, který se při vložení data a času použije."
 
-#: src/bonobo-mdi.c:489 src/bonobo-mdi.c:569 src/bonobo-mdi.c:1721
-#, fuzzy, c-format
+#: src/bonobo-mdi.c:522 src/bonobo-mdi.c:612 src/bonobo-mdi.c:1850
+#, c-format
 msgid "Activate %s"
-msgstr "Vym�nit v�e"
+msgstr "Aktivovat %s"
 
-#: src/dialogs/gedit-dialog-goto-line.c:114
-#, fuzzy
+#: src/dialogs/gedit-dialog-goto-line.c:139
 msgid "Goto line..."
-msgstr "J�t na linku"
+msgstr "Jít na řádek..."
 
 #. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:124
-#, fuzzy
+#: src/dialogs/gedit-dialog-goto-line.c:149
 msgid "_Goto line"
-msgstr "J�t na linku"
+msgstr "_Jít na řádek"
 
-#: src/dialogs/gedit-dialog-goto-line.c:140
+#: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr ""
+msgstr "Nemohl jsem nalézt potřebný prvek uvnitř goto-line.glade2.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:51
-#, fuzzy
-msgid "Plugin"
-msgstr "Pluginy"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:52
-msgid "Load"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:318
-#, fuzzy
-msgid "Module file name"
-msgstr "Soubor"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:319
-msgid "Author(s)"
-msgstr "Autor(�i)"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:450
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:458
-#, fuzzy
-msgid "Plugin Manager"
-msgstr "_Pluginy"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:485
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:582
-msgid "Could not create the Plugin Manager dialog"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:56
+#: src/dialogs/gedit-dialog-replace.c:172 src/dialogs/replace.glade2.h:2
+#: src/gedit-ui.xml.h:53
 msgid "Replace"
-msgstr "Vym�nit"
+msgstr "Nahradit"
 
-#: src/dialogs/gedit-dialog-replace.c:182
+#: src/dialogs/gedit-dialog-replace.c:183
 msgid "Replace _All"
-msgstr "Vym�nit v�_e"
+msgstr "Nahradit vš_e"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
-#: src/gedit-ui.xml.h:101
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:126
+#: src/gedit-ui.xml.h:98
 msgid "_Replace"
-msgstr "_Vym�nit"
+msgstr "Nah_radit"
 
-#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
+#: src/dialogs/gedit-dialog-replace.c:275 src/gedit-ui.xml.h:23
 msgid "Find"
-msgstr "Naj�t"
+msgstr "Najít"
 
-#: src/dialogs/gedit-dialog-replace.c:473
-#: src/dialogs/gedit-dialog-replace.c:544
-#: src/dialogs/gedit-dialog-replace.c:718
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:474
+#: src/dialogs/gedit-dialog-replace.c:545
+#: src/dialogs/gedit-dialog-replace.c:722
+#, c-format
 msgid "The text \"%s\" was not found."
-msgstr "Hledat specifickou linku"
+msgstr "Text \"%s\" nebyl nalezen."
 
-#: src/dialogs/gedit-dialog-replace.c:727
+#: src/dialogs/gedit-dialog-replace.c:731
 #, c-format
 msgid "Found and replaced %d occurences."
-msgstr ""
+msgstr "Bylo nalezeno a nahrazeno %d výskytů."
 
 #: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
 msgid "Open from URI"
-msgstr "Otev��t z URI"
+msgstr "Otevřít z URI"
+
+#: src/dialogs/gedit-plugin-manager.c:53
+msgid "Plugin"
+msgstr "Plugin"
+
+#: src/dialogs/gedit-plugin-manager.c:54
+msgid "Load"
+msgstr "Načíst"
+
+#: src/dialogs/gedit-plugin-manager.c:320
+msgid "Module file name"
+msgstr "Název souboru modulu"
+
+#: src/dialogs/gedit-plugin-manager.c:321
+msgid "Author(s)"
+msgstr "Autor(ři)"
+
+#: src/dialogs/gedit-plugin-manager.c:443
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "Nelze nalézt soubor plugin-manager.glade2, nainstalujte znovu GEdit.\n"
+
+#: src/dialogs/gedit-plugin-manager.c:466
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr "Chybný soubor glade pro správce pluginů -- ne všechny prvky byly nalezeny.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
-msgstr ""
+msgstr "Nastavit umístění programu ..."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
-msgid ""
-"Could not find the required widgets inside program-location-dialog.glade2.\n"
-msgstr ""
+msgid "Could not find the required widgets inside program-location-dialog.glade2.\n"
+msgstr "Nelze nalézt potřebné prvky uvnitř program-location-dialog.glade2.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
@@ -570,584 +934,502 @@ msgid ""
 "\n"
 "Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
+"Plugin %s používá ke své funkci externí program, zvaný <tt>%s</tt>\n"
+"\n"
+"Prosím zadejte umístění tohoto programu <tt>%s</tt>."
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:148
 msgid "The selected file is not executable."
-msgstr ""
+msgstr "Vybraný soubor není spustitelný."
 
-#: src/dialogs/gedit-preferences-dialog.c:226
-msgid "Toolbar"
-msgstr ""
+#: src/dialogs/gedit-preferences-dialog.c:207
+msgid "Font & Colors"
+msgstr "Písma a barvy"
 
-#: src/dialogs/gedit-preferences-dialog.c:227
-#: src/dialogs/gedit-preferences.glade2.h:38
-#, fuzzy
-msgid "Status bar"
-msgstr "Uk�zat linku stavu"
+#: src/dialogs/gedit-preferences-dialog.c:209
+#: src/dialogs/gedit-preferences.glade2.h:28
+msgid "Tabs"
+msgstr "Tabelátory"
 
-#: src/dialogs/gedit-preferences-dialog.c:230
-#: src/dialogs/gedit-preferences.glade2.h:17
-msgid "MDI"
-msgstr ""
+#: src/dialogs/gedit-preferences-dialog.c:210
+#: src/dialogs/gedit-preferences.glade2.h:47
+msgid "Wrap mode"
+msgstr "Zalamování"
+
+#: src/dialogs/gedit-preferences-dialog.c:211
+#: src/dialogs/gedit-preferences.glade2.h:13
+msgid "Line numbers"
+msgstr "Čísla řádek"
+
+#: src/dialogs/gedit-preferences-dialog.c:213
+#: src/dialogs/gedit-preferences.glade2.h:23 src/gedit-ui.xml.h:58
+msgid "Save"
+msgstr "Uložit"
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences.glade2.h:40 src/gedit-ui.xml.h:76
+msgid "Undo"
+msgstr "Zpět"
+
+#: src/dialogs/gedit-preferences-dialog.c:222
+msgid "Page"
+msgstr "Stránka"
+
+#: src/dialogs/gedit-preferences-dialog.c:224
+msgid "Fonts"
+msgstr "Písma"
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "Manager"
+msgstr "Správce"
 
 #: src/dialogs/gedit-preferences-dialog.c:239
-msgid "Font & Colors"
-msgstr "Fonty a barvy"
-
-#: src/dialogs/gedit-preferences-dialog.c:241
-#: src/dialogs/gedit-preferences.glade2.h:39
-msgid "Tabs"
-msgstr ""
-
-#: src/dialogs/gedit-preferences-dialog.c:242
-#: src/dialogs/gedit-preferences.glade2.h:62
-msgid "Wrap mode"
-msgstr ""
-
-#: src/dialogs/gedit-preferences-dialog.c:243
-#: src/dialogs/gedit-preferences.glade2.h:16
-#, fuzzy
-msgid "Line numbers"
-msgstr "��slo linky"
-
-#: src/dialogs/gedit-preferences-dialog.c:245
-#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
-msgid "Save"
-msgstr "Ulo�it"
-
-#: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:79
-#, fuzzy
-msgid "Undo"
-msgstr "Okno"
-
-#: src/dialogs/gedit-preferences-dialog.c:254
-msgid "Page"
-msgstr "Str�nka"
-
-#: src/dialogs/gedit-preferences-dialog.c:256
-msgid "Fonts"
-msgstr "Fonty"
-
-#: src/dialogs/gedit-preferences-dialog.c:263
 msgid "Editor"
 msgstr "Editor"
 
-#: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
-#: src/gedit-ui.xml.h:45
+#: src/dialogs/gedit-preferences-dialog.c:240
+#: src/dialogs/gedit-preferences.glade2.h:19 src/gedit-print.c:309
+#: src/gedit-ui.xml.h:42
 msgid "Print"
 msgstr "Tisk"
 
-#: src/dialogs/gedit-preferences-dialog.c:266
-msgid "User interface"
-msgstr ""
+#: src/dialogs/gedit-preferences-dialog.c:241
+#, fuzzy
+msgid "Plugins"
+msgstr "Pluginy"
 
-#: src/dialogs/gedit-preferences-dialog.c:333
+#: src/dialogs/gedit-preferences-dialog.c:308
 msgid "Cat_egories:"
 msgstr "Kat_egorie:"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
+#: src/dialogs/gedit-preferences-dialog.c:330 src/gedit-ui.xml.h:41
 msgid "Preferences"
-msgstr "Nastaven�"
+msgstr "Nastavení"
 
-#: src/dialogs/gedit-preferences-dialog.c:574
+#: src/dialogs/gedit-preferences-dialog.c:569
 msgid "Categories"
 msgstr "Kategorie"
 
-#: src/dialogs/gedit-preferences-dialog.c:906
+#: src/dialogs/gedit-preferences-dialog.c:800
 msgid "Push this button to select the font to be used by the editor"
-msgstr ""
+msgstr "Chcete-li vybrat písmo, které bude editor používat, zmáčkněte toto tlačítko."
 
-#: src/dialogs/gedit-preferences-dialog.c:909
+#: src/dialogs/gedit-preferences-dialog.c:803
 msgid "Push this button to configure text color"
-msgstr ""
+msgstr "Chcete-li nastavit barvu textu, zmáčkněte toto tlačítko."
 
-#: src/dialogs/gedit-preferences-dialog.c:911
+#: src/dialogs/gedit-preferences-dialog.c:805
 msgid "Push this button to configure background color"
-msgstr ""
+msgstr "Chcete-li nastavit barvu pozadí, zmáčkněte toto tlačítko."
 
-#: src/dialogs/gedit-preferences-dialog.c:913
+#: src/dialogs/gedit-preferences-dialog.c:807
 msgid ""
-"Push this button to configure color in which selected text should appear"
-msgstr ""
+"Push this button to configure the color in which the selected text should "
+"appear"
+msgstr "Chcete-li nastavit barvu pozadí vybraného textu, zmáčkněte toto tlačítko."
 
-#: src/dialogs/gedit-preferences-dialog.c:915
+#: src/dialogs/gedit-preferences-dialog.c:810
 msgid ""
-"Push this button to configure color in which selected text should be marked"
-msgstr ""
+"Push this button to configure the color in which the selected text should be "
+"marked"
+msgstr "Chcete-li nastavit barvu vybraného textu, zmáčkněte toto tlačítko."
 
-#: src/dialogs/gedit-preferences-dialog.c:1313
+#: src/dialogs/gedit-preferences-dialog.c:1592
+#: src/dialogs/gedit-preferences-dialog.c:1594
+msgid "Courier 9"
+msgstr "Courier 9"
+
+#: src/dialogs/gedit-preferences-dialog.c:1601
+#: src/dialogs/gedit-preferences-dialog.c:1603
+msgid "Helvetica 11"
+msgstr "Helvetica 11"
+
+#: src/dialogs/gedit-preferences-dialog.c:1610
+#: src/dialogs/gedit-preferences-dialog.c:1612
+msgid "Helvetica 8"
+msgstr "Helvetica 8"
+
+#: src/dialogs/gedit-preferences-dialog.c:1733
 msgid "Push this button to select the font to be used to print the body"
 msgstr ""
+"Chcete-li vybrat písmo, které se použije pro tisk těla dokumentu, zmáčkněte "
+"toto tlačítko."
 
-#: src/dialogs/gedit-preferences-dialog.c:1315
+#: src/dialogs/gedit-preferences-dialog.c:1735
 msgid "Push this button to select the font to be used to print the headers"
 msgstr ""
+"Chcete-li vybrat písmo, které se použije pro tisk záhlaví dokumentu, zmáčkněte "
+"toto tlačítko."
 
-#: src/dialogs/gedit-preferences-dialog.c:1317
+#: src/dialogs/gedit-preferences-dialog.c:1737
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
+"Chcete-li vybrat písmo, které se použije pro tisk čísel řádků, zmáčkněte "
+"toto tlačítko."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
-msgstr ""
+msgstr " _Zalamovat řádky (na hranicích znaků)"
 
 #: src/dialogs/gedit-preferences.glade2.h:2
 msgid " character(s)"
-msgstr ""
+msgstr " znak(ů)"
 
 #: src/dialogs/gedit-preferences.glade2.h:3
 msgid " line(s)"
-msgstr ""
+msgstr " řádek(ků)"
 
 #: src/dialogs/gedit-preferences.glade2.h:4
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr ""
+msgid "Always use U_TF-8 encoding (faster)"
+msgstr "Vždy používat kódování U_TF-8 (rychlejší)"
 
 #: src/dialogs/gedit-preferences.glade2.h:5
-msgid "Bottom"
-msgstr ""
+msgid "Always use _UTF-8 encoding (faster)"
+msgstr "Vždy používat kódování _UTF-8 (rychlejší)"
 
 #: src/dialogs/gedit-preferences.glade2.h:6
-msgid "Button style"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Colors"
 msgstr "Barvy"
 
-#: src/dialogs/gedit-preferences.glade2.h:8
+#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Create a _backup copy of files before saving"
-msgstr ""
+msgstr "Vytvářet záložní kopie sou_borů před jejich uložením"
 
-#: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gedit-preferences.glade2.h:8
 #: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
-msgstr ""
+msgstr "Písmo"
+
+#: src/dialogs/gedit-preferences.glade2.h:9
+msgid "Font used to print line _numbers:"
+msgstr "Písmo pro tisk čísel _řádků:"
 
 #: src/dialogs/gedit-preferences.glade2.h:10
-msgid "Font used to print line _numbers:"
-msgstr ""
+msgid "Font used to print the _body:"
+msgstr "Písmo pro tisk těla _dokumentu:"
 
 #: src/dialogs/gedit-preferences.glade2.h:11
-msgid "Font used to print the _body:"
-msgstr ""
+msgid "Fonts & Colors"
+msgstr "Písma a barvy"
 
 #: src/dialogs/gedit-preferences.glade2.h:12
-msgid "Fonts & Colors"
-msgstr "Fonty a barvy"
-
-#: src/dialogs/gedit-preferences.glade2.h:13
-msgid "Icon and _text"
-msgstr ""
+msgid "LOGO"
+msgstr "LOGO"
 
 #: src/dialogs/gedit-preferences.glade2.h:14
-msgid "LOGO"
-msgstr ""
+msgid "Pick the background color"
+msgstr "Zvolte barvu pozadí"
 
 #: src/dialogs/gedit-preferences.glade2.h:15
-msgid "Left"
-msgstr ""
+msgid "Pick the selected text color"
+msgstr "Zvolte barvu vybraného textu"
+
+#: src/dialogs/gedit-preferences.glade2.h:16
+msgid "Pick the selection color"
+msgstr "Zvolte barvu výběru"
+
+#: src/dialogs/gedit-preferences.glade2.h:17
+msgid "Pick the text color"
+msgstr "Zvolte barvu textu"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
-msgid "Modal"
-msgstr "Mod�ln�"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-msgid "Notebook"
-msgstr ""
+msgid "Plugin manager"
+msgstr "Správce _pluginů"
 
 #: src/dialogs/gedit-preferences.glade2.h:20
-msgid "Notebook _tab position:"
-msgstr ""
+msgid "Print _line numbers every"
+msgstr "Tisknout čís_la řádek každých"
 
 #: src/dialogs/gedit-preferences.glade2.h:21
-msgid "Pick the background color"
-msgstr ""
+msgid "Print _page headers"
+msgstr "Tisk _záhlaví stránek"
 
 #: src/dialogs/gedit-preferences.glade2.h:22
-#, fuzzy
-msgid "Pick the selected text color"
-msgstr "Vytvo�it nov� dokument"
-
-#: src/dialogs/gedit-preferences.glade2.h:23
-msgid "Pick the selection color"
-msgstr ""
+msgid "Print fonts"
+msgstr "Písma pro tisk"
 
 #: src/dialogs/gedit-preferences.glade2.h:24
-msgid "Pick the text color"
-msgstr ""
+msgid "Se_lection color:"
+msgstr "Barva _výběru:"
+
+#: src/dialogs/gedit-preferences.glade2.h:25
+msgid "Selecte_d text color:"
+msgstr "Barva vybraného t_extu:"
 
 #: src/dialogs/gedit-preferences.glade2.h:26
-msgid "Print _line numbers every"
-msgstr ""
+msgid "Set _tabs width equivalent to  "
+msgstr "Nastavit šířku _tabelátoru rovnou  "
 
 #: src/dialogs/gedit-preferences.glade2.h:27
-msgid "Print _page headers"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:28
-#, fuzzy
-msgid "Print fonts"
-msgstr "P��kaz tisk�rny"
+msgid "Set limit on _undo actions to"
+msgstr "Nastavit omezení pro zpětné a_kce na"
 
 #: src/dialogs/gedit-preferences.glade2.h:29
-msgid "Right"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:30
-msgid "S_elected text color:"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:32
-msgid "Se_lection color:"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:33
-msgid "Set _tabs width equivalent to  "
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:34
-msgid "Set limit on _undo actions to"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:35
-msgid "Sho_w tooltips"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:36
-#, fuzzy
-msgid "Show cursor _position"
-msgstr "Hledat od kurzoru"
-
-#: src/dialogs/gedit-preferences.glade2.h:37
-msgid "Show overwrite _mode"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:40
-msgid ""
-"The MDI (Multiple Document Interface) mode refers to the way more than one "
-"text document is displayed in gedit. \n"
-"If you choose the Notebook mode, you may then decide where you want the tabs "
-"to appear in the gedit window."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:42
 msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
 msgstr ""
+"Nastavení písma a barev vám umožní vybrat písmo a barvy, které budou použity "
+"v editačních oknech."
 
-#: src/dialogs/gedit-preferences.glade2.h:43
+#: src/dialogs/gedit-preferences.glade2.h:30
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
 msgstr ""
+"Nastavení čísel řádků vám umožní zobrazovat čísla řádků po levé "
+"straně editačního okna."
 
-#: src/dialogs/gedit-preferences.glade2.h:44
+#: src/dialogs/gedit-preferences.glade2.h:31
+msgid ""
+"The plugin manager settings let you choose which plugins you want to have "
+"loaded."
+msgstr "Nastavení správce pluginů vám umožní určit, které pluginy chcete používat."
+
+#: src/dialogs/gedit-preferences.glade2.h:32
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
 msgstr ""
+"Nastavení písma pro tisk vám umožní zvolit písma, které budou použity "
+"při tisku dokumentů."
 
-#: src/dialogs/gedit-preferences.glade2.h:45
+#: src/dialogs/gedit-preferences.glade2.h:33
 msgid "The print page settings let you customize how gedit prints documents."
-msgstr ""
+msgstr "Nastavením tisku stránky ovlivníte způsob, jakým budou dokumenty tištěny."
 
-#: src/dialogs/gedit-preferences.glade2.h:46
+#: src/dialogs/gedit-preferences.glade2.h:34
 msgid "The save settings let you customize how gedit saves files."
-msgstr ""
+msgstr "Nastavením ukládání souborů ovlivníte způsob jejich ukládání."
 
-#: src/dialogs/gedit-preferences.glade2.h:47
-msgid ""
-"The status bar settings let you show or hide status bar and customize its "
-"appearance."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:48
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid "The tabs settings let you customize the tabs width."
-msgstr ""
+msgstr "Nastavení tabelátorů umožňuje zvolit jejich šířku."
 
-#: src/dialogs/gedit-preferences.glade2.h:49
-msgid ""
-"The toolbar settings let you show or hide toolbar and customize its "
-"appearance."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:50
+#: src/dialogs/gedit-preferences.glade2.h:36
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
 msgstr ""
+"Nastavení zpětných akcí umožňuje omezit počet kroků, které lze vzít "
+"zpět nebo znovu provést."
+
+#: src/dialogs/gedit-preferences.glade2.h:37
+msgid "The wrap mode settings let you customize how lines have to be wrapped."
+msgstr "Nastavení zalamování stránek vám umožní stanovit, jakým způsobem se mají řádky zalamovat."
+
+#: src/dialogs/gedit-preferences.glade2.h:38
+msgid "U_se default theme colors"
+msgstr "Použít výcho_zí barvy tématu"
+
+#: src/dialogs/gedit-preferences.glade2.h:39
+msgid "U_se original file encoding if possible"
+msgstr "Použít _původní kódování souboru, pokud je to možné"
+
+#: src/dialogs/gedit-preferences.glade2.h:41
+msgid "Use cu_rrent locale's encoding if possible"
+msgstr "Použít kódování p_rostředí, pokud je to možné"
+
+#: src/dialogs/gedit-preferences.glade2.h:42
+msgid "Use current _locale's encoding if possible"
+msgstr "Použít kódování pr_ostředí, pokud je to možné"
+
+#: src/dialogs/gedit-preferences.glade2.h:43
+msgid "When creating a new file..."
+msgstr "Při vytváření nového souboru..."
+
+#: src/dialogs/gedit-preferences.glade2.h:44
+msgid "When saving..."
+msgstr "Při ukládání..."
+
+#: src/dialogs/gedit-preferences.glade2.h:45
+msgid "Wrap lines at _word boundaries"
+msgstr "Zalamovat řádky na hranicích _slov"
+
+#: src/dialogs/gedit-preferences.glade2.h:46
+msgid "Wrap lines at ch_aracter boundaries"
+msgstr "Zalamovat řádky na hranicích _znaků"
+
+#: src/dialogs/gedit-preferences.glade2.h:48
+msgid "_Autosave current file every"
+msgstr "_Automaticky ukládat aktuální soubor každých"
+
+#: src/dialogs/gedit-preferences.glade2.h:49
+msgid "_Background color:"
+msgstr "_Barva pozadí:"
+
+#: src/dialogs/gedit-preferences.glade2.h:50
+msgid "_Display line numbers"
+msgstr "Zobrazit čísla řá_dků"
 
 #: src/dialogs/gedit-preferences.glade2.h:51
-msgid "The wrap mode settings let you customize how lines have to be wrapped."
-msgstr ""
+msgid "_Font used by the editor: "
+msgstr "Písmo _editoru:"
 
 #: src/dialogs/gedit-preferences.glade2.h:52
-msgid "Toolbars"
-msgstr ""
+msgid "_Font used to print headers:"
+msgstr "_Písmo pro tisk záhlaví:"
 
 #: src/dialogs/gedit-preferences.glade2.h:53
-msgid "Top"
-msgstr ""
+msgid "_Never wrap lines"
+msgstr "_Nezalamovat řádky"
 
 #: src/dialogs/gedit-preferences.glade2.h:54
-msgid "Toplevel"
-msgstr ""
+msgid "_Restore default fonts"
+msgstr "_Obnovit původní písma"
 
 #: src/dialogs/gedit-preferences.glade2.h:55
-msgid "U_se current locale only if the file already use it"
-msgstr ""
+msgid "_Text color:"
+msgstr "Barva _textu:"
 
 #: src/dialogs/gedit-preferences.glade2.h:56
-msgid "U_se default theme colors"
-msgstr ""
+msgid "_Use default theme font"
+msgstr "Použít výchozí písmo témat_u"
+
+#: src/dialogs/gedit-preferences.glade2.h:57
+msgid "action(s)"
+msgstr "akce"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
-msgid "Use current _locale when possible"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:59
-#, fuzzy
-msgid "When saving..."
-msgstr "Otev��t soubor..."
-
-#: src/dialogs/gedit-preferences.glade2.h:60
-msgid "Wrap lines at _word boundaries"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:61
-msgid "Wrap lines at ch_aracter boundaries"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:63
-msgid "_According to system settings"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:64
-#, fuzzy
-msgid "_Autosave current file every"
-msgstr " Ulo�it, pak tisknout "
-
-#: src/dialogs/gedit-preferences.glade2.h:65
-msgid "_Background color:"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:66
-#, fuzzy
-msgid "_Display line numbers"
-msgstr "��slo linky"
-
-#: src/dialogs/gedit-preferences.glade2.h:67
-msgid "_Font used by the editor: "
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:68
-msgid "_Font used to print headers:"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:94
-#, fuzzy
-msgid "_Icon"
-msgstr "Nov�"
-
-#: src/dialogs/gedit-preferences.glade2.h:70
-#, fuzzy
-msgid "_MDI Mode:"
-msgstr "M�d MDI"
-
-#: src/dialogs/gedit-preferences.glade2.h:71
-msgid "_Never wrap lines"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:72
-#, fuzzy
-msgid "_Restore default fonts"
-msgstr "Standardn�"
-
-#: src/dialogs/gedit-preferences.glade2.h:73
-#, fuzzy
-msgid "_Show status bar"
-msgstr "Uk�zat linku stavu"
-
-#: src/dialogs/gedit-preferences.glade2.h:74
-msgid "_Show toolbar"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:75
-msgid "_Text color:"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:76
-#, fuzzy
-msgid "_Use default theme font"
-msgstr "Standardn�"
-
-#: src/dialogs/gedit-preferences.glade2.h:77
-msgid "action(s)"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:78
 msgid "minutes"
-msgstr ""
+msgstr "minuty"
 
 #: src/dialogs/gnome-print-font-dialog.c:107
 msgid "_Insert a new preview phrase."
-msgstr ""
+msgstr "Vložit novou fráz_i pro náhled."
 
 #: src/dialogs/gnome-print-font-dialog.c:113
 msgid "Modify preview phrase..."
-msgstr ""
+msgstr "Upravit frázi pro náhled..."
 
 #: src/dialogs/gnome-print-font-dialog.c:167
-#, fuzzy
 msgid "Preview"
-msgstr "Naj�t _linku..."
+msgstr "Náhled"
 
 #: src/dialogs/gnome-print-font-dialog.c:180
 msgid "_Modify preview phrase..."
-msgstr ""
+msgstr "Upravit frázi pro _náhled..."
 
 #: src/dialogs/gnome-print-font-dialog.c:243
 msgid "Font Selection"
-msgstr ""
+msgstr "Výběr písma"
 
 #: src/dialogs/gnome-print-font-picker.c:89
 msgid "sans 12"
-msgstr ""
+msgstr "sans 12"
 
 #: src/dialogs/gnome-print-font-picker.c:90
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 
 #: src/dialogs/gnome-print-font-picker.c:91
 msgid "Pick a Font"
-msgstr ""
+msgstr "Zvolte písmo"
 
 #: src/dialogs/gnome-print-font-picker.c:176
-#, fuzzy
 msgid "Title"
-msgstr "Nenazvan�"
+msgstr "Titulek"
 
 #: src/dialogs/gnome-print-font-picker.c:177
 msgid "The title of the selection dialog box"
-msgstr ""
+msgstr "Titulek dialogu pro výběr"
 
 #: src/dialogs/gnome-print-font-picker.c:197
 msgid "Font name"
-msgstr ""
+msgstr "Název písma"
 
 #: src/dialogs/gnome-print-font-picker.c:198
-#, fuzzy
 msgid "Name of the selected font"
-msgstr "Vytvo�it nov� dokument"
+msgstr "Název vybraného písma"
 
 #: src/dialogs/gnome-print-font-picker.c:206
-#, fuzzy
 msgid "Preview text"
-msgstr "Vr�tit"
+msgstr "Text pro náhled"
 
 #: src/dialogs/gnome-print-font-picker.c:207
 msgid "Preview text shown in the dialog"
-msgstr ""
+msgstr "Text pro náhled zobrazený v dialogu"
 
 #: src/dialogs/gnome-print-font-picker.c:215
 msgid "Use font in label"
-msgstr ""
+msgstr "Použít písmo v nadpisu"
 
 #: src/dialogs/gnome-print-font-picker.c:216
 msgid "Use font in the label in font info mode"
-msgstr ""
+msgstr "Použít písmo v nadpisu v režimu informací o písmu"
 
 #: src/dialogs/gnome-print-font-picker.c:224
 msgid "Font size for label"
-msgstr ""
+msgstr "Velikost písma pro nadpis"
 
 #: src/dialogs/gnome-print-font-picker.c:225
 msgid "Font size for label in font info mode"
-msgstr ""
+msgstr "Velikost písma pro nadpis v režimu informací o písmu"
 
 #: src/dialogs/gnome-print-font-picker.c:235
-#, fuzzy
 msgid "Show size"
-msgstr "Uk�zat rozd�len� pohled"
+msgstr "Ukázat velikost"
 
 #: src/dialogs/gnome-print-font-picker.c:236
 msgid "Show size in font info mode"
-msgstr ""
+msgstr "Ukázat velikost v režimu informací o písmu"
 
 #. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
-#, fuzzy
 msgid "Goto Line"
-msgstr "J�t na linku"
+msgstr "Jít na řádek"
 
 #: src/dialogs/goto-line.glade2.h:2
-#, fuzzy
 msgid "_Line number:"
-msgstr "��slo linky"
+msgstr "Čís_lo řádku"
 
 #: src/dialogs/plugin-manager.glade2.h:1
 msgid "C_onfigure plugin"
-msgstr ""
+msgstr "N_astavit plugin"
 
 #: src/dialogs/plugin-manager.glade2.h:2
 msgid "Configure the selected plugin"
-msgstr ""
+msgstr "Nastavit vybraný plugin"
 
 #: src/dialogs/plugin-manager.glade2.h:3
-msgid "D_etails"
-msgstr ""
+msgid "De_tails"
+msgstr "De_taily"
 
 #: src/dialogs/plugin-manager.glade2.h:4
-msgid ""
-"This is the Plugin Manager. Plugins are extra pieces of software that extend "
-"gedit capabilities. From here, you can choose which plugins you want to have "
-"loaded."
-msgstr ""
+msgid "_Description"
+msgstr "_Popis"
 
 #: src/dialogs/plugin-manager.glade2.h:5
-#, fuzzy
-msgid "_Description"
-msgstr "Vyb�ra� plugin�"
-
-#: src/dialogs/plugin-manager.glade2.h:6
 msgid "dialog1"
-msgstr ""
+msgstr "dialog1"
 
 #: src/dialogs/program-location-dialog.glade2.h:1
-#, fuzzy
 msgid "Set program location..."
-msgstr "Otev��t soubor..."
+msgstr "Nastavit umístění programu..."
 
 #: src/dialogs/program-location-dialog.glade2.h:2
 msgid "_Location to search for:"
-msgstr ""
+msgstr "Hledat _lokaci:"
 
 #: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
-msgstr ""
+msgstr "label"
 
 #: src/dialogs/replace.glade2.h:1
 msgid "Case sensi_tive"
-msgstr ""
+msgstr "Rozlišovat _malá a velká písmena"
 
 #: src/dialogs/replace.glade2.h:3
-#, fuzzy
 msgid "Replace _with: "
-msgstr "Vym�nit za:"
+msgstr "Nahradit _čím:"
 
 #: src/dialogs/replace.glade2.h:4
-#, fuzzy
 msgid "Search fro_m the beginning of the document"
-msgstr "Hledat od konce dokumentu"
+msgstr "Hledat od začátku doku_mentu"
 
 #: src/dialogs/replace.glade2.h:5
-#, fuzzy
 msgid "Search from the c_ursor position"
-msgstr "Zav��t v�echny otev�en� soubory"
+msgstr "Hledat od pozice k_urzoru"
 
 #: src/dialogs/replace.glade2.h:6
 msgid "_Search for: "
@@ -1155,780 +1437,784 @@ msgstr "_Hledat:"
 
 #: src/dialogs/uri.glade2.h:1
 msgid "Enter the location (URI) of the file you would like to open:"
-msgstr ""
+msgstr "Zadejte umístění (URI) souboru, který chcete otevřít:"
 
-#: src/gedit-commands.c:57
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
-msgstr ""
+msgstr "Není zatím implementováno."
 
-#: src/gedit-commands.c:340
-#, fuzzy, c-format
+#: src/gedit-commands.c:339
+#, c-format
 msgid "The string \"%s\" has not been found."
-msgstr "Hledat specifickou linku"
+msgstr "Řetězec \"%s\" nebyl nalezen."
 
-#: src/gedit-commands.c:422
-msgid "Impossible to update gedit settings."
-msgstr ""
-
-#: src/gedit-commands.c:491
+#: src/gedit-commands.c:437
 msgid "translator_credits"
-msgstr ""
+msgstr "translator_credits"
 
-#: src/gedit-commands.c:516
+#: src/gedit-commands.c:462
 msgid "gedit"
+msgstr "gedit"
+
+#: src/gedit-commands.c:463
+msgid ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
 msgstr ""
+"(C) 1998-2000 Evan Lawrence a Alex Robert\n"
+"(C) 2000-2002 Chema Celorio a Paolo Maggi"
 
-#: src/gedit-commands.c:519
-#, fuzzy
+#: src/gedit-commands.c:465
 msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gEdit je jednoduch� a mal� textov� editor pro GNOME/Gtk+"
+msgstr "GEdit je jednoduchý a malý textový editor pro GNOME"
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:573 src/gedit-document.c:591
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:573 src/gedit-document.c:591
 msgid "Untitled"
-msgstr "Nenazvan�"
+msgstr "Nenazvaný"
 
-#: src/gedit-document.c:556 src/gedit-document.c:579
-#, fuzzy
+#: src/gedit-document.c:579 src/gedit-document.c:626
 msgid "Invalid file name"
-msgstr "Soubor"
+msgstr "Chybný název souboru"
 
-#: src/gedit-document.c:700 src/gedit-document.c:806
+#: src/gedit-document.c:756 src/gedit-document.c:914
 msgid "Invalid UTF-8 data"
-msgstr "Nepovolen� UTF-8 data"
+msgstr "Nepovolená UTF-8 data"
 
-#: src/gedit-document.c:1006
+#: src/gedit-document.c:1149
 #, c-format
 msgid "Could not read symbolic link information for %s"
-msgstr ""
+msgstr "Nelze načíst informace o symbolickém odkazu pro %s"
 
-#: src/gedit-document.c:1052
+#: src/gedit-document.c:1195
 msgid "The file has too many symbolic links."
-msgstr ""
+msgstr "Soubor má příliš mnoho symbolických odkazů."
 
-#: src/gedit-document.c:1101
+#: src/gedit-document.c:1249
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr ""
+msgstr "GEdit nemůže zpracovat %s: umístění v režimu zápisu."
 
-#: src/gedit-document.c:1108
+#: src/gedit-document.c:1256
 msgid "gedit cannot handle this kind of location in write mode."
-msgstr ""
+msgstr "GEdit nemůže zpracovat tento typ umístění v režimu zápisu."
 
-#: src/gedit-document.c:1120
-#, fuzzy
+#: src/gedit-document.c:1269
 msgid "Invalid filename."
-msgstr "Soubor"
+msgstr "Chybný název souboru."
 
-#: src/gedit-document.c:1198
+#: src/gedit-document.c:1382
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
 msgstr ""
+"Pro uložení souboru není dostatek místa na disku.\n"
+"Uvolněte prosím nějaké místo a zkuste to znovu."
 
-#: src/gedit-document.c:1203
+#: src/gedit-document.c:1387
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
+"Disk, kam se snažíte uložit tento soubor, má nastaven limit velikosti "
+"souboru.  Zkuste prosím uložit menší soubor, nebo uložit tento soubor "
+"na disk, který nemá toto omezení."
 
-#: src/gedit-document.c:1240
-#, fuzzy
+#: src/gedit-document.c:1426
 msgid "Could not create a backup file."
-msgstr "Nelze ulo�it soubor!"
+msgstr "Nelze vytvořit záložní soubor."
 
-#: src/gedit-document.c:1388
+#: src/gedit-document.c:1574
 msgid "It is not possible to revert an Untitled document"
-msgstr ""
+msgstr "Není možné vrátit Nenazvaný dokument."
 
-#: src/gedit-file-selector-util.c:96
+#: src/gedit-file-selector-util.c:114
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
 "Do you want to replace it with the one you are saving?"
 msgstr ""
+"Soubor nazvaný \"%s\" již existuje.\n"
+"Přejete si jej nahradit tím, který právě ukládáte?"
 
-#: src/gedit-file-selector-util.c:104
+#: src/gedit-file-selector-util.c:122
 msgid "Do_n't replace"
-msgstr "_Nevym�nit"
+msgstr "_Nenahradit"
 
-#: src/gedit-file-selector-util.c:484
+#: src/gedit-file-selector-util.c:502
 msgid "Select a filename to save"
-msgstr ""
+msgstr "Vyberte název souboru pro uložení"
 
-#: src/gedit-file.c:128
+#: src/gedit-file.c:150
 msgid "Open File ..."
-msgstr "Otev��t soubor ..."
+msgstr "Otevřít soubor ..."
 
-#: src/gedit-file.c:148 src/gedit-file.c:763
+#: src/gedit-file.c:176 src/gedit-file.c:811
 #, c-format
 msgid "Loaded file '%s'"
-msgstr "Soubor '%s' otev�en"
+msgstr "Soubor '%s' načten"
 
-#: src/gedit-file.c:279 src/gedit-file.c:401
+#: src/gedit-file.c:304 src/gedit-file.c:420
 #, c-format
 msgid "Saving file '%s' ..."
-msgstr "Ukl�d�m soubor '%s' ..."
+msgstr "Ukládám soubor '%s' ..."
 
-#: src/gedit-file.c:300 src/gedit-file.c:416
+#: src/gedit-file.c:325 src/gedit-file.c:435
 msgid "The document has not been saved."
-msgstr "Dokument nebyl zaps�n..."
+msgstr "Dokument nebyl uložen."
 
-#: src/gedit-file.c:315 src/gedit-file.c:408
+#: src/gedit-file.c:338 src/gedit-file.c:432
 #, c-format
 msgid "File '%s' saved."
-msgstr "Soubor '%s' zaps�n."
+msgstr "Soubor '%s' byl uložen."
 
-#: src/gedit-file.c:383
+#: src/gedit-file.c:399
 msgid "Save as ..."
-msgstr "Ulo�it jako..."
+msgstr "Uložit jako ..."
 
-#: src/gedit-file.c:574
+#: src/gedit-file.c:606
 #, c-format
 msgid "Reverting file '%s' ..."
-msgstr ""
+msgstr "Vracím soubor '%s' ..."
 
-#: src/gedit-file.c:587
-#, fuzzy
+#: src/gedit-file.c:619
 msgid "The document has not been reverted."
-msgstr "Dokument nezaps�n..."
+msgstr "Dokument nebyl vrácen do původní podoby."
 
-#: src/gedit-file.c:597
+#: src/gedit-file.c:629
 #, c-format
 msgid "File '%s' reverted."
-msgstr ""
+msgstr "Soubor '%s' byl vrácen do původní podoby."
 
-#: src/gedit-file.c:644
-#, fuzzy, c-format
-msgid "Loading %d file..."
-msgstr "Ulo�it %s jako ..."
+#: src/gedit-file.c:655
+#, c-format
+msgid "Loading %d files..."
+msgstr "Načítám %d souborů ..."
 
-#: src/gedit-file.c:680
+#: src/gedit-file.c:687
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Soubor \"%s\" neexistuje. Chcete jej vytvořit?"
+
+#: src/gedit-file.c:746
 #, c-format
 msgid "Loaded %i files"
-msgstr ""
+msgstr "Načteno %i souborů."
 
-#: src/gedit-file.c:821
+#: src/gedit-file.c:869
 msgid "Could not read data from stdin."
-msgstr ""
+msgstr "Nebylo možné načíst data ze standardního vstupu."
 
-#: src/gedit-mdi.c:759
+#: src/gedit-mdi.c:840
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
+"Chcete uložit změny provedené v dokumentu \"%s\"?\n"
+"\n"
+"Pokud vaše změny neuložíte, budou ztraceny."
 
-#: src/gedit-mdi.c:764
+#: src/gedit-mdi.c:845
 msgid "Do_n't save"
-msgstr ""
+msgstr "_Neukládat"
 
-#: src/gedit-mdi.c:783
+#: src/gedit-mdi.c:864
 msgid "_Don't quit"
-msgstr ""
+msgstr "Ne_končit"
 
-#: src/gedit-mdi.c:787
+#: src/gedit-mdi.c:868
 msgid "_Don't close"
-msgstr ""
+msgstr "Ne_zavírat"
 
-#: src/gedit-mdi.c:874
+#: src/gedit-mdi.c:958
 msgid "(modified)"
-msgstr ""
+msgstr "(změněný)"
 
-#: src/gedit-mdi.c:880
+#: src/gedit-mdi.c:964
 msgid "(readonly)"
-msgstr ""
+msgstr "(pouze pro čtení)"
 
 #: src/gedit-plugins-engine.c:159
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
-msgstr ""
+msgstr "Chyba, není možné otevřít soubor s modulem '%s'\n"
 
 #: src/gedit-plugins-engine.c:174
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
-msgstr ""
+msgstr "Chyba, plugin '%s' neobsahuje inicializační funkci."
 
 #: src/gedit-plugins-engine.c:184
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr ""
+msgstr "Chyba, plugin '%s' neobsahuje aktivační funkci."
 
 #: src/gedit-plugins-engine.c:194
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr ""
+msgstr "Chyba, plugin '%s' neobsahuje deaktivační funkci."
 
 #: src/gedit-plugins-engine.c:224
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
-msgstr ""
+msgstr "Chyba, není možné inicializovat plugin '%s'."
 
 #: src/gedit-plugins-engine.c:232
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr ""
+msgstr "Chyba, plugin '%s' neuvedl jméno."
 
 #: src/gedit-plugins-engine.c:312
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr ""
+msgstr "Chyba, nelze uložit nastavení pro plugin '%s'."
 
 #: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
-msgstr ""
+msgstr "Chyba, nelze aktivovat plugin '%s'."
 
 #: src/gedit-plugins-engine.c:411
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
-msgstr ""
+msgstr "Chyba, nelze deaktivovat plugin '%s'."
 
 #: src/gedit-plugins-engine.c:486
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
+msgstr "Chyba, nelze aktualizovat UI pro plugin '%s'."
 
-#: src/gedit-print.c:178
+#: src/gedit-prefs-manager.c:323
+msgid "Cannot initialize preferences manager."
+msgstr "Nelze inicializovat správce nastavení."
+
+#: src/gedit-prefs-manager.c:1589
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr "Očekával jsem '%s', ale obdržel jsem '%s' pro klíč %s"
+
+#: src/gedit-print.c:191
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr ""
+"GEdit nemůže tisknout, jelikož nemůže nalézt\n"
+"jedno z potřebných písem."
 
-#: src/gedit-print.c:354
+#: src/gedit-print.c:377
 #, c-format
 msgid "File: %s"
 msgstr "Soubor: %s"
 
 #. Print right text
-#: src/gedit-print.c:359
+#: src/gedit-print.c:384
 #, c-format
 msgid "Page: %d"
-msgstr "Str�nka: %d"
+msgstr "Stránka: %d"
 
-#: src/gedit-print.c:492
-#, fuzzy
+#: src/gedit-print.c:517
 msgid "gedit - Print Preview"
-msgstr "Naj�t _linku..."
+msgstr "gedit - Náhled tisku"
 
-#: src/gedit-print.c:566
+#: src/gedit-print.c:591
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
 "\n"
 "%s,"
 msgstr ""
+"Při tisku nastala chyba.\n"
+"\n"
+"%s,"
 
 #: src/gedit-ui.xml.h:1
 msgid "About this application"
-msgstr ""
+msgstr "O této aplikaci"
 
 #: src/gedit-ui.xml.h:2
-#, fuzzy
-msgid "Add/Remove plugins"
-msgstr "Pou��t pluginy"
+msgid "C_ustomize Statusbar"
+msgstr "Nastavit stavovou lištu"
 
 #: src/gedit-ui.xml.h:3
-#, fuzzy
-msgid "C_ustomize Statusbar"
-msgstr "Uk�zat linku stavu"
+msgid "Change the visibility of the statusbar in the current window"
+msgstr "Změní viditelnost stavové lišty v aktuálním okně"
 
 #: src/gedit-ui.xml.h:4
-msgid "Change the visibility of the statusbar in the current window"
-msgstr ""
+msgid "Change the visibility of the toolbar in the current window"
+msgstr "Změní viditelnost nástrojové lišty v aktuálním okně"
 
 #: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the toolbar in the current window"
-msgstr ""
+msgid "Clos_e All"
+msgstr "Zavřít vš_e"
 
 #: src/gedit-ui.xml.h:6
-msgid "Clos_e All"
-msgstr "Zav��t v�_e"
+msgid "Close"
+msgstr "Zavřít"
 
 #: src/gedit-ui.xml.h:7
-msgid "Close"
-msgstr "Zav��t"
+msgid "Close All"
+msgstr "Zavřít vše"
 
 #: src/gedit-ui.xml.h:8
-msgid "Close All"
-msgstr "Zav��t v�e"
+msgid "Close all open files"
+msgstr "Zavřít všechny otevřené soubory"
 
 #: src/gedit-ui.xml.h:9
-msgid "Close all open files"
-msgstr "Zav��t v�echny otev�en� soubory"
+msgid "Close the current file"
+msgstr "Zavřít tento soubor"
 
 #: src/gedit-ui.xml.h:10
-msgid "Close the current file"
-msgstr "Zav��t tento soubor"
-
-#: src/gedit-ui.xml.h:11
 msgid "Configure the application"
 msgstr "Nastavit aplikaci"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Copy"
-msgstr "Kop�rovat"
+msgstr "Kopírovat"
+
+#: src/gedit-ui.xml.h:12
+msgid "Copy the selection"
+msgstr "Kopírovat výběr"
 
 #: src/gedit-ui.xml.h:13
-msgid "Copy the selection"
-msgstr "Kop�rovat v�b�r"
+msgid "Create a new document"
+msgstr "Vytvořit nový dokument"
 
 #: src/gedit-ui.xml.h:14
-msgid "Create a new document"
-msgstr "Vytvo�it nov� dokument"
+msgid "Cu_t"
+msgstr "Vyjmou_t"
 
 #: src/gedit-ui.xml.h:15
-msgid "Cu_t"
-msgstr ""
+msgid "Customize"
+msgstr "Nastavit"
 
 #: src/gedit-ui.xml.h:16
-msgid "Customize"
-msgstr ""
+msgid "Customize toolbars"
+msgstr "Nastavit nástrojové lišty"
 
 #: src/gedit-ui.xml.h:17
-msgid "Customize toolbars"
-msgstr ""
-
-#: src/gedit-ui.xml.h:18
 msgid "Cut"
 msgstr "Vyjmout"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:18
 msgid "Cut the selection"
-msgstr "Vyjmout v�b�r"
+msgstr "Vyjmout výběr"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:19
 msgid "Delete"
 msgstr "Smazat"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:20
 msgid "Delete the selected text"
-msgstr "Smazat vybran� text"
+msgstr "Smazat vybraný text"
+
+#: src/gedit-ui.xml.h:21
+msgid "Dump XML"
+msgstr "Vypsat XML"
 
 #: src/gedit-ui.xml.h:22
-msgid "Dump XML"
-msgstr ""
-
-#: src/gedit-ui.xml.h:23
 msgid "Dump the UI Xml description"
-msgstr ""
+msgstr "Vypsat popis UI v XML"
+
+#: src/gedit-ui.xml.h:24
+msgid "Find Again"
+msgstr "Najít znovu"
 
 #: src/gedit-ui.xml.h:25
-msgid "Find Again"
-msgstr "Naj�t znovu"
+msgid "Find Ne_xt"
+msgstr "Najít d_alší"
 
 #: src/gedit-ui.xml.h:26
-msgid "Find Ne_xt"
-msgstr "Naj�t d_al��"
+msgid "Go to a specific line number"
+msgstr "Přechod na zadané číslo řádku."
 
 #: src/gedit-ui.xml.h:27
-msgid "Go to a specific line number"
-msgstr ""
+msgid "Goto _Line"
+msgstr "Jít na _řádek"
 
 #: src/gedit-ui.xml.h:28
-msgid "Goto _Line"
-msgstr "J�t na _linku"
+msgid "Icon and _Text"
+msgstr "Ikona a _text"
 
 #: src/gedit-ui.xml.h:29
-msgid "Icon and _Text"
-msgstr "Ikon a _text"
+msgid "Main toolbar"
+msgstr "Hlavní nástrojová lišta"
 
 #: src/gedit-ui.xml.h:30
-msgid "Main toolbar"
-msgstr ""
+msgid "New"
+msgstr "Nový"
 
 #: src/gedit-ui.xml.h:31
-msgid "New"
-msgstr "Nov�"
+msgid "Only show icons in the toolbar"
+msgstr "Zobrazit v nástrojové liště pouze ikony"
 
 #: src/gedit-ui.xml.h:32
-msgid "Only show icons in the toolbar"
-msgstr ""
+msgid "Open"
+msgstr "Otevřít"
 
 #: src/gedit-ui.xml.h:33
-msgid "Open"
-msgstr "Otev��t"
+msgid "Open Location..."
+msgstr "Otevřít lokaci..."
 
 #: src/gedit-ui.xml.h:34
-msgid "Open Location..."
-msgstr "Otev��t polohu..."
+msgid "Open _Location..."
+msgstr "Otevřít _lokaci..."
 
 #: src/gedit-ui.xml.h:35
-msgid "Open _Location..."
-msgstr "Otev��t po_lohu..."
+msgid "Open a file"
+msgstr "Otevřít soubor"
 
 #: src/gedit-ui.xml.h:36
-msgid "Open a file"
-msgstr "Otev��t soubor"
+msgid "Open a file from a specified location"
+msgstr "Otevřít soubor ze zadané lokace."
 
 #: src/gedit-ui.xml.h:37
-msgid "Open a file from a specified location"
-msgstr ""
+msgid "Open the gedit manual"
+msgstr "Otevřít příručku aplikace GEdit"
 
 #: src/gedit-ui.xml.h:38
-msgid "Open the gedit manual"
-msgstr ""
+msgid "Paste"
+msgstr "Vložit"
 
 #: src/gedit-ui.xml.h:39
-msgid "Paste"
-msgstr ""
+msgid "Paste the clipboard"
+msgstr "Vložit ze schránky"
 
 #: src/gedit-ui.xml.h:40
-msgid "Paste the clipboard"
-msgstr ""
-
-#: src/gedit-ui.xml.h:41
-#, fuzzy
-msgid "Plugin _Manager"
-msgstr "_Pluginy"
-
-#: src/gedit-ui.xml.h:42
-#, fuzzy
-msgid "Plugin _Manager..."
-msgstr "_Pluginy"
+msgid "Pr_eferences..."
+msgstr "Nastav_ení..."
 
 #: src/gedit-ui.xml.h:43
-msgid "Pr_eferences..."
-msgstr "Nastav_n�..."
+msgid "Print Previe_w"
+msgstr "Náhled t_isku"
+
+#: src/gedit-ui.xml.h:44
+msgid "Print Preview"
+msgstr "Náhled tisku"
+
+#: src/gedit-ui.xml.h:45
+msgid "Print Setup"
+msgstr "Nastavení tisku"
 
 #: src/gedit-ui.xml.h:46
-#, fuzzy
-msgid "Print Previe_w"
-msgstr "Naj�t _linku..."
+msgid "Print preview"
+msgstr "Náhled tisku"
 
 #: src/gedit-ui.xml.h:47
-#, fuzzy
-msgid "Print Preview"
-msgstr "Naj�t _linku..."
+msgid "Print the current file"
+msgstr "Tisknout tento soubor"
 
 #: src/gedit-ui.xml.h:48
-#, fuzzy
-msgid "Print Setup"
-msgstr "Dokument"
-
-#: src/gedit-ui.xml.h:49
-#, fuzzy
-msgid "Print preview"
-msgstr "Naj�t _linku..."
-
-#: src/gedit-ui.xml.h:50
-#, fuzzy
-msgid "Print the current file"
-msgstr " Ulo�it, pak tisknout "
-
-#: src/gedit-ui.xml.h:51
 msgid "Quit"
 msgstr "Konec"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:49
 msgid "Quit the program"
-msgstr "Skon�it program"
+msgstr "Skončit program"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:50
 msgid "Recent _Files"
-msgstr ""
+msgstr "Nedávno otevřené _soubory"
+
+#: src/gedit-ui.xml.h:51
+msgid "Redo"
+msgstr "Znovu"
+
+#: src/gedit-ui.xml.h:52
+msgid "Redo the undone action"
+msgstr "Provést znovu akci vzatou zpět"
 
 #: src/gedit-ui.xml.h:54
-#, fuzzy
-msgid "Redo"
-msgstr "Zru�it"
+msgid "Replace a string"
+msgstr "Nahradit řetězec"
 
 #: src/gedit-ui.xml.h:55
-msgid "Redo the undone action"
-msgstr ""
-
-#: src/gedit-ui.xml.h:57
-#, fuzzy
-msgid "Replace a string"
-msgstr "Hledat specifickou linku"
-
-#: src/gedit-ui.xml.h:58
 #, fuzzy
 msgid "Revert"
-msgstr "Vr�tit"
+msgstr "Vrátit"
+
+#: src/gedit-ui.xml.h:56
+msgid "Revert to a saved version of the file"
+msgstr "Návrat k uložené verzi souboru"
+
+#: src/gedit-ui.xml.h:57
+msgid "Sa_ve All"
+msgstr "Uložit _vše"
 
 #: src/gedit-ui.xml.h:59
-msgid "Revert to a saved version of the file"
-msgstr ""
+msgid "Save All"
+msgstr "Uložit vše"
 
 #: src/gedit-ui.xml.h:60
-msgid "Sa_ve All"
-msgstr "Ulo�it _v�e"
+msgid "Save As"
+msgstr "Uložit jako"
+
+#: src/gedit-ui.xml.h:61
+msgid "Save _As..."
+msgstr "Uložit _jako..."
 
 #: src/gedit-ui.xml.h:62
-msgid "Save All"
-msgstr "Ulo�it v�e"
+msgid "Save all open files"
+msgstr "Uložit všechny otevřené soubory"
 
 #: src/gedit-ui.xml.h:63
-msgid "Save As"
-msgstr "Ulo�it jako"
+msgid "Save the current file"
+msgstr "Uložit tento soubor"
 
 #: src/gedit-ui.xml.h:64
-msgid "Save _As..."
-msgstr "Ulo�it _jako..."
+msgid "Save the current file with a different name"
+msgstr "Uložit tento soubor pod jiným jménem"
 
 #: src/gedit-ui.xml.h:65
-msgid "Save all open files"
-msgstr "Ulo�it v�echny otev�en� soubory"
+msgid "Search again for the same string"
+msgstr "Vyhledat znovu tentýž řetězec"
 
 #: src/gedit-ui.xml.h:66
-#, fuzzy
-msgid "Save the current file"
-msgstr " Ulo�it, pak tisknout "
+msgid "Search for a string"
+msgstr "Najít řetězec"
 
 #: src/gedit-ui.xml.h:67
-#, fuzzy
-msgid "Save the current file with a different name"
-msgstr " Ulo�it, pak tisknout "
+msgid "Select All"
+msgstr "Vybrat vše"
 
 #: src/gedit-ui.xml.h:68
-#, fuzzy
-msgid "Search again for the same string"
-msgstr "Hledat specifickou linku"
+msgid "Select _All"
+msgstr "Vybrat _vše"
 
 #: src/gedit-ui.xml.h:69
-#, fuzzy
-msgid "Search for a string"
-msgstr "Hledat specifickou linku"
+msgid "Select the entire document"
+msgstr "Vybere celý dokument"
 
 #: src/gedit-ui.xml.h:70
-msgid "Select All"
-msgstr "Vybrat v�e"
+msgid "Set toolbar button style according to desktop default"
+msgstr "Nastaví styl nástrojové lišty podle výchozího stylu"
 
 #: src/gedit-ui.xml.h:71
-msgid "Select _All"
-msgstr "Vybrat _v�e"
+msgid "Setup the page settings for your current printer"
+msgstr "Nastaví stránku pro vaši tiskárnu"
 
 #: src/gedit-ui.xml.h:72
-#, fuzzy
-msgid "Select the entire document"
-msgstr "Vytvo�it nov� dokument"
+msgid "Show _Cursor Position"
+msgstr "Zobrazit aktuální pozi_ci"
 
 #: src/gedit-ui.xml.h:73
-msgid "Set toolbar button style according to desktop default"
-msgstr ""
+msgid "Show _Overwrite Mode"
+msgstr "Zobrazit režim přepis_ování"
 
 #: src/gedit-ui.xml.h:74
-#, fuzzy
-msgid "Setup the page settings for your current printer"
-msgstr "Ulo�it nastaven� pro p���� sezen�"
+msgid "Show cursor position in the statusbar"
+msgstr "Zobrazí pozici kurzoru ve stavové liště"
 
 #: src/gedit-ui.xml.h:75
-#, fuzzy
-msgid "Show _Cursor Position"
-msgstr "Hledat od kurzoru"
-
-#: src/gedit-ui.xml.h:76
-msgid "Show _Overwrite Mode"
-msgstr ""
+msgid "Show overwrite mode in the statusbar"
+msgstr "Zobrazí režim přepisování ve stavové liště"
 
 #: src/gedit-ui.xml.h:77
-msgid "Show cursor position in the statusbar"
-msgstr ""
+msgid "Undo the last action"
+msgstr "Vrátí zpět poslední akci"
 
 #: src/gedit-ui.xml.h:78
-msgid "Show overwrite mode in the statusbar"
-msgstr ""
-
-#: src/gedit-ui.xml.h:80
-msgid "Undo the last action"
-msgstr ""
-
-#: src/gedit-ui.xml.h:81
 msgid "_About"
 msgstr "_O programu"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:79
 msgid "_Close"
-msgstr "_Zav��t"
+msgstr "_Zavřít"
+
+#: src/gedit-ui.xml.h:80
+msgid "_Contents"
+msgstr "O_bsah"
+
+#: src/gedit-ui.xml.h:81
+msgid "_Copy"
+msgstr "_Kopírovat"
+
+#: src/gedit-ui.xml.h:82
+msgid "_Customize Toolbar"
+msgstr "_Upravit nástrojovou lištu"
 
 #: src/gedit-ui.xml.h:83
-#, fuzzy
-msgid "_Contents"
-msgstr "Dokument"
+msgid "_Debug"
+msgstr "_Ladění"
 
 #: src/gedit-ui.xml.h:84
-msgid "_Copy"
-msgstr ""
+msgid "_Delete"
+msgstr "_Smazat"
 
 #: src/gedit-ui.xml.h:85
-msgid "_Customize Toolbar"
-msgstr ""
+msgid "_Desktop Default"
+msgstr "_Výchozí nastavení"
 
 #: src/gedit-ui.xml.h:86
-msgid "_Debug"
-msgstr ""
-
-#: src/gedit-ui.xml.h:87
-msgid "_Delete"
-msgstr ""
-
-#: src/gedit-ui.xml.h:88
-#, fuzzy
-msgid "_Desktop Default"
-msgstr "Standardn�"
-
-#: src/gedit-ui.xml.h:89
 msgid "_Documents"
 msgstr "_Dokumenty"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:87
 msgid "_Edit"
-msgstr "�_pravy"
+msgstr "Ú_pravy"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:88
 msgid "_File"
 msgstr "_Soubor"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:89
 msgid "_Find"
-msgstr "_Naj�t"
+msgstr "_Najít"
+
+#: src/gedit-ui.xml.h:90
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: src/gedit-ui.xml.h:91
+msgid "_Icon"
+msgstr "_Ikona"
+
+#: src/gedit-ui.xml.h:92
+msgid "_New"
+msgstr "_Nový"
 
 #: src/gedit-ui.xml.h:93
-msgid "_Help"
-msgstr "_N�pov�da"
+msgid "_Open..."
+msgstr "_Otevřít..."
+
+#: src/gedit-ui.xml.h:94
+msgid "_Paste"
+msgstr "V_ložit"
 
 #: src/gedit-ui.xml.h:95
-msgid "_New"
-msgstr "_Nov�"
-
-#: src/gedit-ui.xml.h:96
-msgid "_Open..."
-msgstr "_Otev��t..."
-
-#: src/gedit-ui.xml.h:97
-msgid "_Paste"
-msgstr ""
-
-#: src/gedit-ui.xml.h:98
 msgid "_Print..."
 msgstr "_Tisk..."
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:96
 msgid "_Quit"
 msgstr "_Konec"
 
-#: src/gedit-ui.xml.h:100
-#, fuzzy
+#: src/gedit-ui.xml.h:97
 msgid "_Redo"
-msgstr "Zru�it"
+msgstr "Zn_ovu"
+
+#: src/gedit-ui.xml.h:99
+msgid "_Revert"
+msgstr "V_rátit"
+
+#: src/gedit-ui.xml.h:100
+msgid "_Save"
+msgstr "_Uložit"
+
+#: src/gedit-ui.xml.h:101
+msgid "_Search"
+msgstr "_Najít"
 
 #: src/gedit-ui.xml.h:102
-#, fuzzy
-msgid "_Revert"
-msgstr "Vr�tit"
+msgid "_Statusbar"
+msgstr "_Stavová lišta"
 
 #: src/gedit-ui.xml.h:103
-#, fuzzy
-msgid "_Save"
-msgstr "Ulo�it"
+msgid "_Toolbar"
+msgstr "Nástrojová liš_ta"
 
 #: src/gedit-ui.xml.h:104
-#, fuzzy
-msgid "_Search"
-msgstr "Hledat"
+msgid "_Tools"
+msgstr "Nás_troje"
 
 #: src/gedit-ui.xml.h:105
-#, fuzzy
-msgid "_Statusbar"
-msgstr "Uk�zat linku stavu"
+msgid "_Undo"
+msgstr "_Zpět"
 
 #: src/gedit-ui.xml.h:106
-msgid "_Toolbar"
-msgstr ""
-
-#: src/gedit-ui.xml.h:107
-msgid "_Tools"
-msgstr ""
-
-#: src/gedit-ui.xml.h:108
-#, fuzzy
-msgid "_Undo"
-msgstr "Okno"
-
-#: src/gedit-ui.xml.h:109
-#, fuzzy
 msgid "_View"
-msgstr "_P�idat pohled"
+msgstr "_Zobrazit"
 
-#: src/gedit-utils.c:842
+#: src/gedit-utils.c:792
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nelze nalézt soubor \"%s\".\n"
+"\n"
+"Prosím, ověřte zda-li jste napsali lokaci správně a zkuste to znovu."
 
-#: src/gedit-utils.c:849
+#: src/gedit-utils.c:799
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr ""
+msgstr "Nelze otevřít soubor \"%s\", protože obsahuje poškozená data."
 
-#: src/gedit-utils.c:860
+#: src/gedit-utils.c:810
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
+msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgstr "Nelze otevřít soubor \"%s\", protože aplikace GEdit neumí zpracovat lokace %s."
 
-#: src/gedit-utils.c:868
-#, fuzzy, c-format
+#: src/gedit-utils.c:816
+#, c-format
 msgid "Could not open the file \"%s\""
-msgstr "Nelze ulo�it soubor!"
+msgstr "Nelze otevřít soubor \"%s\"."
 
-#: src/gedit-utils.c:875
+#: src/gedit-utils.c:826
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr ""
+msgid "Could not open the file \"%s\" because it contains data in an invalid format."
+msgstr "Nelze otevřít soubor \"%s\", protože obsahuje data v nesprávném formátu."
 
-#: src/gedit-utils.c:882
+#: src/gedit-utils.c:833
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Nelze otevřít soubor \"%s\", protože je příliš velký."
 
-#: src/gedit-utils.c:889
+#: src/gedit-utils.c:840
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"\"%s\" není správná lokace.\n"
+"\n"
+"Prosím, ověřte, zda-li jste zadali lokaci správně a zkuste to znovu."
 
-#: src/gedit-utils.c:896
+#: src/gedit-utils.c:847
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
-msgstr ""
+msgstr "Nelze otevřít soubor \"%s\", protože byl zamezen přístup."
 
-#: src/gedit-utils.c:903
+#: src/gedit-utils.c:854
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
 "\n"
 "Please, close some open file and try again."
 msgstr ""
+"Nelze otevřít soubor \"%s\", protože je už otevřeno příliš mnoho souborů.\n"
+"\n"
+"Zavřete prosím některé otevřené soubory a zkuste to znovu."
 
-#: src/gedit-utils.c:911
+#: src/gedit-utils.c:862
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"\"%s\" je adresář.\n"
+"\n"
+"Prosím, ověřte, zda-li jste zadali lokaci správně a zkuste to znovu."
 
-#: src/gedit-utils.c:918
+#: src/gedit-utils.c:869
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Nedostatek paměti pro otevření souboru \"%s\". Zavřete prosím "
+"některé běžící aplikace a zkuste to znovu."
 
-#: src/gedit-utils.c:931
+#: src/gedit-utils.c:895
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1936,536 +2222,330 @@ msgid ""
 "Please, check that you typed the location correctly and that your proxy "
 "settings are correct and then try again."
 msgstr ""
+"Nelze otevřít soubor \"%s\", protože nelze nalézt počítač \"%s\".\n"
+"\n"
+"Prosím, ověřte, zda-li jste zadali lokaci správně, a zda-li je vaše nastavení "
+"proxy správné, a pak to zkuste znovu."
 
-#: src/gedit-utils.c:944
+#: src/gedit-utils.c:910
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nelze otevřít soubor \"%s\", protože jméno počítače není platné.\n"
+"\n"
+"Prosím, ověřte, zda-li jste zadali lokaci správně, a zkuste to znovu."
 
-#: src/gedit-utils.c:951
+#: src/gedit-utils.c:917
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Nelze otevřít soubor \"%s\", protože jméno počítače je prázdné.\n"
+"\n"
+"Prosím, ověřte, zda-li je nastavení vaší proxy správné a zkuste to znovu."
 
-#: src/gedit-utils.c:958
+#: src/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Nelze otevřít soubor \"%s\", protože pokus o přihlášení se nezdařil.\n"
+"\n"
+"Prosím, ověřte, zda-li jste zadali lokaci správně, a zkuste to znovu."
 
-#: src/gedit-utils.c:966
+#: src/gedit-utils.c:932
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
+"Nelze otevřít soubor \"%s\", protože obsahuje neplatná data ve formátu UTF-8.\n"
+"\n"
+"Pravděpodobně se pokoušíte otevřít binární soubor."
 
-#: src/gedit-utils.c:1004
-#, fuzzy, c-format
+#: src/gedit-utils.c:970
+#, c-format
 msgid "Could not open the file \"%s\"."
-msgstr "Nelze ulo�it soubor!"
+msgstr "Nelze otevřít soubor \"%s\"."
 
-#: src/gedit-utils.c:1055
-#, fuzzy, c-format
+#: src/gedit-utils.c:1021
+#, c-format
 msgid "Could not save the file \"%s\"."
-msgstr "Nelze ulo�it soubor!"
+msgstr "Nelze uložit soubor \"%s\"."
 
-#: src/gedit-utils.c:1059
-#, fuzzy, c-format
+#: src/gedit-utils.c:1025
+#, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
 "\n"
 "%s"
-msgstr "Nelze ulo�it soubor!"
+msgstr ""
+"Nelze uložit soubor \"%s\".\n"
+"\n"
+"%s"
 
-#: src/gedit-utils.c:1112
+#: src/gedit-utils.c:1078
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
 "\n"
 "Perhaps, it has recently been deleted."
 msgstr ""
+"Soubor \"%s\" nelze vrátit do původního stavu, protože nebyl nalezen původní soubor.\n"
+"\n"
+"Původní soubor byl asi nedávno smazán."
 
-#: src/gedit-utils.c:1119
+#: src/gedit-utils.c:1085
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr ""
+msgstr "Soubor \"%s\" nelze vrátit do původního stavu, protože původní soubor obsahuje poškozené data."
 
-#: src/gedit-utils.c:1130
+#: src/gedit-utils.c:1096
 #, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
+msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgstr "Soubor \"%s\" nelze vrátit do původního stavu, protože aplikace GEdit neumí zpracovat lokaci %s."
 
-#: src/gedit-utils.c:1138 src/gedit-utils.c:1260
-#, fuzzy, c-format
+#: src/gedit-utils.c:1102 src/gedit-utils.c:1242
+#, c-format
 msgid "Could not revert the file \"%s\"."
-msgstr "Nelze ulo�it soubor!"
+msgstr "Soubor \"%s\" nelze vrátit do původního stavu."
 
-#: src/gedit-utils.c:1145
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr ""
+"Soubor \"%s\" nelze vrátit do původního stavu, protože původní soubor obsahuje data "
+"v neplatném formátu."
 
-#: src/gedit-utils.c:1152
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Soubor \"%s\" nelze vrátit do původního stavu, protože je příliš velký."
 
-#: src/gedit-utils.c:1159
+#: src/gedit-utils.c:1126
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
-msgstr ""
+msgstr "Soubor \"%s\" nelze vrátit do původního stavu, protože přístup k původnímu souboru byl odepřen."
 
-#: src/gedit-utils.c:1166
+#: src/gedit-utils.c:1133
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
 "\n"
 "Please, close some open file and try again."
 msgstr ""
+"Soubor \"%s\" nelze vrátit do původního stavu, protože je již otevřeno příliš mnoho souborů.\n"
+"\n"
+"Zavřete prosím některé soubory a zkuste to znovu."
 
-#: src/gedit-utils.c:1174
+#: src/gedit-utils.c:1141
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Pro vrácení souboru \"%s\" do původního stavu není dostatek paměti. Zavřete prosím "
+"některé běžící aplikace a zkuste to znovu."
 
-#: src/gedit-utils.c:1187
+#: src/gedit-utils.c:1167
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Soubor \"%s\" nelze vrátit do původního stavu, protože počítač \"%s\" nebyl nalezen.\n"
+"\n"
+"Ověřte prosím, zda-li je vaše nastavení proxy správné a zkuste to znovu."
 
-#: src/gedit-utils.c:1199
+#: src/gedit-utils.c:1181
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Soubor \"%s\" nelze vrátit do původního stavu, protože název počítače je prázdný.\n"
+"\n"
+"\n"
+"Zkontrolujte prosím nastavení vaší proxy a zkuste to znovu."
 
-#: src/gedit-utils.c:1206
+#: src/gedit-utils.c:1188
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr ""
+msgstr "Soubor \"%s\" nelze vrátit do původního stavu, protože pokus o přihlášení selhal."
 
-#: src/gedit-utils.c:1213
+#: src/gedit-utils.c:1195
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to revert a binary file."
 msgstr ""
+"Soubor \"%s\" nelze vrátit do původního stavu, protože původní soubor obsahuje neplatné data v kódování UTF-8.\n"
+"\n"
+"Pravděpodobně se pokoušíte o návrat do původního stavu z binárního souboru."
 
-#: src/gedit-utils.c:1222
+#: src/gedit-utils.c:1204
 msgid "It is not possible to revert an Untitled document."
-msgstr ""
+msgstr "Není možné vrátit do původního stavu Nenazvaný dokument."
 
-#: src/gedit-view.c:896
+#: src/gedit-utils.c:1293
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "Soubor \"%s\" již existuje."
+
+#: src/gedit-utils.c:1299
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" je adresář.\n"
+"\n"
+"Prosím, ověřte, zda-li jste zadali lokaci správně."
+
+#: src/gedit-utils.c:1308
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Nelze vytvořit soubor \"%s\".\n"
+"\n"
+"Ověřte prosím, zda-li máte odpovídající práva zápisu."
+
+#: src/gedit-utils.c:1315
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Nelze vytvořit soubor \"%s\".\n"
+"\n"
+"Jméno souboru je příliš dlouhé."
+
+#: src/gedit-utils.c:1322
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Nelze vytvořit soubor \"%s\".\n"
+"\n"
+"Adresářová část názvu souboru neexistuje nebo to je porušený "
+"symbolický odkaz."
+
+#: src/gedit-utils.c:1331
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Na disku není dostatek místa pro vytvoření souboru \"%s\".\n"
+"\n"
+"Uvolněte prosím nějaké místo a zkuste to znova."
+
+#: src/gedit-utils.c:1337
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Nelze vytvořit soubor \"%s\"."
+
+#: src/gedit-view.c:904
 #, c-format
 msgid "  Ln %d, Col. %d"
-msgstr "  �. %d, Slo. %d"
+msgstr "  Ř. %d, Slo. %d"
 
-#: src/gedit-view.c:934
+#: src/gedit-view.c:942
 msgid "  OVR"
-msgstr "  P�E"
+msgstr "  PŘE"
 
-#: src/gedit-view.c:936
+#: src/gedit-view.c:944
 msgid "  INS"
 msgstr "  VLO"
 
-#: src/gedit2.c:69
-msgid "Show mdi debugging messages."
-msgstr ""
-
-#: src/gedit2.c:72
-msgid "Show commands debugging messages."
-msgstr ""
-
 #: src/gedit2.c:75
-msgid "Show document debugging messages."
-msgstr ""
+msgid "Show mdi debugging messages."
+msgstr "Ukazovat ladící zprávy MDI"
 
 #: src/gedit2.c:78
-msgid "Show file debugging messages."
-msgstr ""
+msgid "Show commands debugging messages."
+msgstr "Ukazovat ladící zprávy příkazů."
 
 #: src/gedit2.c:81
-msgid "Show plugin debugging messages."
-msgstr ""
+msgid "Show document debugging messages."
+msgstr "Ukazovat ladící zprávy dokumentu."
 
 #: src/gedit2.c:84
-msgid "Show prefs debugging messages."
-msgstr ""
+msgid "Show file debugging messages."
+msgstr "Ukazovat ladící zprávy souboru."
 
 #: src/gedit2.c:87
-msgid "Show printing debugging messages."
-msgstr ""
+msgid "Show plugin debugging messages."
+msgstr "Ukazovat ladící zprávy pluginu."
 
 #: src/gedit2.c:90
-msgid "Show search debugging messages."
-msgstr ""
+msgid "Show prefs debugging messages."
+msgstr "Ukazovat ladící zprávy nastavení."
 
 #: src/gedit2.c:93
-msgid "Show undo debugging messages."
-msgstr ""
+msgid "Show printing debugging messages."
+msgstr "Ukazovat ladící zprávy tisku."
 
 #: src/gedit2.c:96
-msgid "Show view debugging messages."
-msgstr ""
+msgid "Show search debugging messages."
+msgstr "Ukazovat ladící zprávy vyhledávání."
 
 #: src/gedit2.c:99
-msgid "Show recent debugging messages."
-msgstr ""
+msgid "Show undo debugging messages."
+msgstr "Ukazovat ladící zprávy zpětných akcí."
 
 #: src/gedit2.c:102
-msgid "Show session management debugging messages."
-msgstr ""
+msgid "Show view debugging messages."
+msgstr "Ukazovat ladící zprávy zobrazení."
 
 #: src/gedit2.c:105
+msgid "Show recent debugging messages."
+msgstr "Ukazovat ladící zprávy nedávno otevřených souborů."
+
+#: src/gedit2.c:108
+msgid "Show session management debugging messages."
+msgstr "Ukazovat ladící zprávy pro správu sezení."
+
+#: src/gedit2.c:111
 msgid "Turn on all debugging messages."
-msgstr ""
+msgstr "Zapnout všechny ladící zprávy."
 
-#: src/gedit2.c:164
-msgid "The GNOME text editor"
-msgstr ""
+#: src/gedit2.c:114
+msgid "Quit an existing instance of gedit"
+msgstr "Ukončit existující instanci aplikace GEdit."
 
-#: src/gnome-recent-view-bonobo.c:189
+#: src/gedit2.c:117
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Vytvořit nové top-level okno v existující instanci aplikace GEdit."
+
+#: src/gedit2.c:120
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Vytvořit nový dokument v existující instanci aplikace GEdit."
+
+#: src/gnome-recent-view-bonobo.c:218
 #, c-format
 msgid "Open %s"
-msgstr "Otev��t %s"
+msgstr "Otevřít %s"
 
-#, fuzzy
-#~ msgid "Find Next"
-#~ msgstr "Okno"
-
-#, fuzzy
-#~ msgid "Replace All"
-#~ msgstr "Vym�nit v�e"
-
-#, fuzzy
-#~ msgid "gedit - Print Document"
-#~ msgstr "Dokument"
-
-#~ msgid "About..."
-#~ msgstr "O programu ..."
-
-#, fuzzy
-#~ msgid "_Plugin Manager"
-#~ msgstr "_Pluginy"
-
-#, fuzzy
-#~ msgid "_Status Bar"
-#~ msgstr "Uk�zat linku stavu"
-
-#, fuzzy
-#~ msgid "Could not revert the file \"%s\""
-#~ msgstr "Nelze ulo�it soubor!"
-
-#, fuzzy
-#~ msgid "Loaded file %s"
-#~ msgstr "Otev��t soubor..."
-
-#, fuzzy
-#~ msgid "C_lose All"
-#~ msgstr "Zav��t"
-
-#, fuzzy
-#~ msgid "Clear"
-#~ msgstr "Zav��t"
-
-#, fuzzy
-#~ msgid "Open from _URI..."
-#~ msgstr "Otev��t soubor..."
-
-#, fuzzy
-#~ msgid "Print Pre_view"
-#~ msgstr "Naj�t _linku..."
-
-#, fuzzy
-#~ msgid "Revert to saved"
-#~ msgstr "Vr�tit"
-
-#, fuzzy
-#~ msgid "Sav_e All"
-#~ msgstr "Ulo�it v�e"
-
-#, fuzzy
-#~ msgid "_Plugins manager"
-#~ msgstr "_Pluginy"
-
-#, fuzzy
-#~ msgid "_Settings"
-#~ msgstr "_Ulo�it nastaven�"
-
-#, fuzzy
-#~ msgid "Save As..."
-#~ msgstr "Ulo�it %s jako..."
-
-#, fuzzy
-#~ msgid "Manager"
-#~ msgstr "Zru�it"
-
-#, fuzzy
-#~ msgid "_Manager"
-#~ msgstr "Zru�it"
-
-#, fuzzy
-#~ msgid "Web browse plugin"
-#~ msgstr "gEdit plugin na prohl��en� webu"
-
-#, fuzzy
-#~ msgid "Number Converter"
-#~ msgstr "gEdit plugin na prohl��en� webu"
-
-#, fuzzy
-#~ msgid "Untitled %i"
-#~ msgstr "Nenazvan�"
-
-#, fuzzy
-#~ msgid "Document info"
-#~ msgstr "Nastaven� dokumentu"
-
-#, fuzzy
-#~ msgid "Email the current document"
-#~ msgstr "Vytvo�it nov� dokument"
-
-#, fuzzy
-#~ msgid "Reverse"
-#~ msgstr "Vr�tit"
-
-#, fuzzy
-#~ msgid "Sort a document."
-#~ msgstr "Vytvo�it nov� dokument"
-
-#, fuzzy
-#~ msgid "Sort a document or selected text."
-#~ msgstr "Vytvo�it nov� dokument"
-
-#, fuzzy
-#~ msgid " _Change... "
-#~ msgstr "Zru�it"
-
-#, fuzzy
-#~ msgid "gedit: Web Browse plugin"
-#~ msgstr "gEdit plugin na prohl��en� webu"
-
-#, fuzzy
-#~ msgid "location"
-#~ msgstr "M�sto"
-
-#, fuzzy
-#~ msgid "_Converted value:"
-#~ msgstr "Vr�tit"
-
-#, fuzzy
-#~ msgid "Current column"
-#~ msgstr "Sou�aV�b�r..."
-
-#, fuzzy
-#~ msgid "Current line"
-#~ msgstr "Sou�aV�b�r..."
-
-#, fuzzy
-#~ msgid "gedit: E-mail plugin"
-#~ msgstr "Email plugin gEditu"
-
-#, fuzzy
-#~ msgid "gedit: e-mail plugin"
-#~ msgstr "Email plugin gEditu"
-
-#, fuzzy
-#~ msgid "Sort starting at column:"
-#~ msgstr "Hledat specifickou linku"
-
-#, fuzzy
-#~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
-#~ msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-
-#, fuzzy
-#~ msgid "Search string not found"
-#~ msgstr "Hledat specifickou linku"
-
-#~ msgid "Appearance"
-#~ msgstr "Vzhled"
-
-#, fuzzy
-#~ msgid "Documents"
-#~ msgstr "Dokument"
-
-#~ msgid "Editor Behavior"
-#~ msgstr "Chov�n� editory"
-
-#~ msgid "General"
-#~ msgstr "V�eobecn�"
-
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Tisk"
-
-#, fuzzy
-#~ msgid "Printing"
-#~ msgstr "Tisk"
-
-#, fuzzy
-#~ msgid "Tab _width: "
-#~ msgstr "Vym�nit za:"
-
-#, fuzzy
-#~ msgid "``%s'' has been modified.  Do you want to save the changes?"
-#~ msgstr " '%s' byl zm�n�n.  Chcete jej ulo�it?"
-
-#, fuzzy
-#~ msgid "Error in the pipe."
-#~ msgstr "Chyba p�i ukl�d�n� souboru!"
-
-#~ msgid "Error saving file!"
-#~ msgstr "Chyba p�i ukl�d�n� souboru!"
-
-#, fuzzy
-#~ msgid ""
-#~ "Are you sure you want to revert all changes?\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Jste si jist(a) �e chcete zru�it v�echny zm�ny?\n"
-#~ "(%s)"
-
-#~ msgid "Add a new view of the document"
-#~ msgstr "P�idat pohled tohoto dokumentu"
-
-#~ msgid "_Remove View"
-#~ msgstr "_Zru�it pohled"
-
-#~ msgid "Remove view of the document"
-#~ msgstr "Zru�it pohled tohoto dokumentu"
-
-#, fuzzy
-#~ msgid "Manage available plugin modules"
-#~ msgstr "Pou��t pluginy"
-
-#, fuzzy
-#~ msgid "Printing .."
-#~ msgstr "Tisk"
-
-#, fuzzy
-#~ msgid "Printing ..."
-#~ msgstr "Tisk"
-
-#~ msgid "_File/"
-#~ msgstr "_Soubor/"
-
-#, fuzzy
-#~ msgid "You can't remove the last view of a document."
-#~ msgstr "Zru�it pohled tohoto dokumentu"
-
-#, fuzzy
-#~ msgid "Add >"
-#~ msgstr "P�idat"
-
-#, fuzzy
-#~ msgid "< Remove"
-#~ msgstr "_Zru�it pohled"
-
-#~ msgid "With special thanks to:"
-#~ msgstr "Speci�n� d�ky:"
-
-#~ msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-#~ msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-
-#, fuzzy
-#~ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
-#~ msgstr "gEdit je jednoduch� a mal� textov� editor pro GNOME/Gtk+"
-
-#, fuzzy
-#~ msgid "beginning of document"
-#~ msgstr "Hledat od za��tku dokumentu"
-
-#~ msgid "Find _In Files..."
-#~ msgstr "Naj�t v souborech..."
-
-#~ msgid "Find text in all open files"
-#~ msgstr "Naj�t text ve v�ech otev�en�ch souborech"
-
-#~ msgid ""
-#~ "Filename: %s\n"
-#~ "\n"
-#~ "Total Lines: %i\n"
-#~ "Current Line: %i"
-#~ msgstr ""
-#~ "Jm�no soubory: %s\n"
-#~ "\n"
-#~ "Celkem linek: %i\n"
-#~ "sou�asn� linka: %i"
-
-#~ msgid "Replace?"
-#~ msgstr "Vym�nit?"
-
-#~ msgid "Search for:"
-#~ msgstr "Hledat:"
-
-#, fuzzy
-#~ msgid "Replace with:"
-#~ msgstr "Vym�nit za:"
-
-#~ msgid "Ask before replacing"
-#~ msgstr "Zeptat se p�ed v�m�nou"
-
-#, fuzzy
-#~ msgid "Search from: "
-#~ msgstr "Hledat:"
-
-#~ msgid "Find In Files"
-#~ msgstr "Naj�t v souborech"
-
-#~ msgid "Read only file!"
-#~ msgstr "Soubor lze jen ��st!"
-
-#~ msgid "Document Unchanged..."
-#~ msgstr "Dokument nezm�n�n..."
-
-#, fuzzy
-#~ msgid "Can't open file!"
-#~ msgstr "Soubor lze jen ��st!"
-
-#~ msgid "Window Size"
-#~ msgstr "Velikost okna"
-
-#~ msgid "Current Width:"
-#~ msgstr "Sou�asn� ���ka:"
-
-#~ msgid "Startup Width:"
-#~ msgstr "Za��t se ���kou:"
-
-#~ msgid "Use Current"
-#~ msgstr "Pou��t sou�asnou"
-
-#~ msgid "Current Height:"
-#~ msgstr "Sou�asn� v��ka:"
-
-#~ msgid "Startup Height:"
-#~ msgstr "Za��t s v��kou:"
-
-#~ msgid ""
-#~ "Enter print command below\n"
-#~ "Remember to include '%s'"
-#~ msgstr ""
-#~ "Zadejte p��kaz tisk�rny\n"
-#~ "Pamatujte vlo�it '%s'"
-
-#~ msgid "Print Command:"
-#~ msgstr "P��kaz tisk�rny:"
