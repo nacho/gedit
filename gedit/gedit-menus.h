@@ -43,10 +43,12 @@ extern gchar* gedit_menus_not_modified_doc_sensible_verbs [];
 
 #define gedit_menus_all_sensible_verbs gedit_menus_no_docs_sensible_verbs
 
-void gedit_menus_set_verb_sensitive 		(BonoboUIEngine* ui_engine,
-					 	 gchar* cname, gboolean sensitive);
-void gedit_menus_set_verb_list_sensitive 	(BonoboUIEngine* ui_engine, 
-						 gchar** vlist, gboolean sensitive);
+void gedit_menus_set_verb_sensitive 		(BonoboUIComponent *ui_component,
+					 	 gchar             *cname,
+						 gboolean           sensitive);
+void gedit_menus_set_verb_list_sensitive 	(BonoboUIComponent *ui_component, 
+						 gchar            **vlist,
+						 gboolean           sensitive);
 
 /* convenience functions for plugins */
 

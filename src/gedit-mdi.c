@@ -129,7 +129,7 @@ gedit_mdi_init (GeditMDI  *mdi)
 	gedit_debug (DEBUG_MDI, "START");
 
 	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit2", "gedit", 
-			gedit_settings->mdi_tabs_position);
+			      gedit_settings->mdi_tabs_position);
 	
 	mdi->priv = g_new0 (GeditMDIPrivate, 1);
 
@@ -324,8 +324,7 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context
 static void
 gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 {
-	BonoboUIEngine *ui_engine;
-	BonoboUIError ret;
+	BonoboUIComponent *ui_component;
 	GConfClient *client;
 	gboolean labels;
 
@@ -333,31 +332,26 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	
 	g_return_if_fail (BONOBO_IS_WINDOW (win));
 			
-	ui_engine = bonobo_window_get_ui_engine (win);
-	g_return_if_fail (ui_engine != NULL);
+	ui_component = bonobo_mdi_get_ui_component_from_window (win);
+	g_return_if_fail (ui_component != NULL);
 	
 	if (!gedit_settings->toolbar_visible)
 	{
-		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-				"hidden", "1", "1");
-		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
-
+		bonobo_ui_component_set_prop (
+			ui_component, "/Toolbar",
+			"hidden", "1", NULL);
 		return;
 	}
 	
-	bonobo_ui_engine_freeze (ui_engine);
+	bonobo_ui_component_freeze (ui_component, NULL);
 
-	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-				"hidden", "0", "0");
-	if (ret != BONOBO_UI_ERROR_OK) 
-		goto error;
+	bonobo_ui_component_set_prop (
+		ui_component, "/Toolbar", "hidden", "0", NULL);
 
-	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-					"tips", gedit_settings->toolbar_view_tooltips ? "1" : "0", "0");
-
-	if (ret != BONOBO_UI_ERROR_OK) 
-		goto error;
-
+	bonobo_ui_component_set_prop (
+		ui_component, "/Toolbar",
+		"tips", gedit_settings->toolbar_view_tooltips ? "1" : "0",
+		NULL);
 
 	switch (gedit_settings->toolbar_buttons_style)
 	{
@@ -375,67 +369,54 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 			if (labels)
 			{			
 				gedit_debug (DEBUG_MDI, "SYSTEM: BOTH");
-				ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "both", "both");
-				if (ret != BONOBO_UI_ERROR_OK) 
-					goto error;
+				bonobo_ui_component_set_prop (
+					ui_component, "/Toolbar", "look", "both", NULL);
 			
 			}
 			else
 			{
 				gedit_debug (DEBUG_MDI, "SYSTEM: ICONS");
-				ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "icons", "icons");
-				if (ret != BONOBO_UI_ERROR_OK) 
-					goto error;
+				bonobo_ui_component_set_prop (
+					ui_component, "/Toolbar", "look", "icons", NULL);
 			}
 			break;
 		case GEDIT_TOOLBAR_ICONS:
 			gedit_debug (DEBUG_MDI, "GEDIT: ICONS");
-			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "icon", "icon");
-			if (ret != BONOBO_UI_ERROR_OK) 
-					goto error;
+			bonobo_ui_component_set_prop (
+				ui_component, "/Toolbar", "look", "icon", NULL);
 
 			break;
 		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
 			gedit_debug (DEBUG_MDI, "GEDIT: ICONS_AND_TEXT");
-			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "both", "both");
-			if (ret != BONOBO_UI_ERROR_OK) 
-					goto error;
+			bonobo_ui_component_set_prop (
+				ui_component, "/Toolbar", "look", "both", NULL);
 			break;
 		default:
 			goto error;
 		break;
 	}
 	
-	bonobo_ui_engine_thaw (ui_engine);
-	
-	return;
-	
-error:
-	g_warning ("Impossible to set toolbar style");
-	bonobo_ui_engine_thaw (ui_engine);
+ error:
+	bonobo_ui_component_thaw (ui_component, NULL);
 }
 
 static void
 gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 {
-	BonoboUIEngine *ui_engine;
-	BonoboUIError ret;
+	BonoboUIComponent *ui_component;
 	GtkWidget *cp, *om;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
 	g_return_if_fail (BONOBO_IS_WINDOW (win));
 			
-	ui_engine = bonobo_window_get_ui_engine (win);
-	g_return_if_fail (ui_engine != NULL);
+	ui_component = bonobo_mdi_get_ui_component_from_window (win);
+	g_return_if_fail (ui_component != NULL);
 
-	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status",
-				"hidden", gedit_settings->statusbar_visible ? "0" : "1", "0");
-	g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
+	bonobo_ui_component_set_prop (
+		ui_component, "/status",
+		"hidden", gedit_settings->statusbar_visible ? "0" : "1",
+		NULL);
 
 	cp = GTK_WIDGET (g_object_get_data (G_OBJECT (win), "CursorPosition"));
 	g_return_if_fail (cp != NULL);
@@ -460,17 +441,11 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 
 	if (!gedit_settings->statusbar_view_cursor_position &&
 	    !gedit_settings->statusbar_view_overwrite_mode)
-	{
-		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status/item",
-				"resize_grip", "1", "1");
-		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
-	}
+		bonobo_ui_component_set_prop (
+			ui_component, "/status/item", "resize_grip", "1", NULL);
 	else
-	{
-		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status/item",
-				"resize_grip", "0", "0");
-		g_return_if_fail (ret == BONOBO_UI_ERROR_OK);	
-	}	
+		bonobo_ui_component_set_prop (
+			ui_component, "/status/item", "resize_grip", "0", NULL);
 }
 
 static void 
@@ -749,7 +724,7 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	BonoboWindow* active_window = NULL;
 	BonoboMDIChild* active_child = NULL;
 	GeditDocument* doc = NULL;
-	BonoboUIEngine *ui_engine;
+	BonoboUIComponent *ui_component;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
@@ -758,23 +733,24 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	if (active_window == NULL)
 		return;
 	
-	ui_engine = bonobo_window_get_ui_engine (active_window);
+	ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
+	g_return_if_fail (ui_component != NULL);
 	
 	active_child = bonobo_mdi_get_active_child (mdi);
 	
-	bonobo_ui_engine_freeze (ui_engine);
+	bonobo_ui_component_freeze (ui_component, NULL);
 	
 	gedit_plugins_engine_update_plugins_ui (active_window, FALSE);
 
 	if (active_child == NULL)
 	{
-		gedit_menus_set_verb_list_sensitive (ui_engine, 
+		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_no_docs_sensible_verbs, FALSE);
 		goto end;
 	}
 	else
 	{
-		gedit_menus_set_verb_list_sensitive (ui_engine, 
+		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_all_sensible_verbs, TRUE);
 	}
 
@@ -783,32 +759,32 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	
 	if (gedit_document_is_readonly (doc))
 	{
-		gedit_menus_set_verb_list_sensitive (ui_engine, 
+		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_ro_sensible_verbs, FALSE);
 		goto end;
 	}
 
 	if (!gedit_document_can_undo (doc))
-		gedit_menus_set_verb_sensitive (ui_engine, "/commands/EditUndo", FALSE);	
+		gedit_menus_set_verb_sensitive (ui_component, "/commands/EditUndo", FALSE);	
 
 	if (!gedit_document_can_redo (doc))
-		gedit_menus_set_verb_sensitive (ui_engine, "/commands/EditRedo", FALSE);		
+		gedit_menus_set_verb_sensitive (ui_component, "/commands/EditRedo", FALSE);		
 
 	if (!gedit_document_get_modified (doc))
 	{
-		gedit_menus_set_verb_list_sensitive (ui_engine, 
+		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_not_modified_doc_sensible_verbs, FALSE);
 		goto end;
 	}
 
 	if (gedit_document_is_untitled (doc))
 	{
-		gedit_menus_set_verb_list_sensitive (ui_engine, 
+		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_untitled_doc_sensible_verbs, FALSE);
 	}
 
 end:
-	bonobo_ui_engine_thaw (ui_engine);
+	bonobo_ui_component_thaw (ui_component, NULL);
 }
 
 
@@ -818,28 +794,29 @@ gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 	BonoboWindow* active_window = NULL;
 	BonoboMDIChild* active_child = NULL;
 	GeditDocument* doc = NULL;
-	BonoboUIEngine *ui_engine;
+	BonoboUIComponent *ui_component;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
 	active_window = bonobo_mdi_get_active_window (mdi);
 	g_return_if_fail (active_window != NULL);
 	
-	ui_engine = bonobo_window_get_ui_engine (active_window);
+	ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
+	g_return_if_fail (ui_component != NULL);
 	
 	active_child = bonobo_mdi_get_active_child (mdi);
 	doc = GEDIT_MDI_CHILD (active_child)->document;
 	g_return_if_fail (doc != NULL);
 
-	bonobo_ui_engine_freeze (ui_engine);
+	bonobo_ui_component_freeze (ui_component, NULL);
 
-	gedit_menus_set_verb_sensitive (ui_engine, "/commands/EditUndo", 
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/EditUndo", 
 			gedit_document_can_undo (doc));	
 
-	gedit_menus_set_verb_sensitive (ui_engine, "/commands/EditRedo", 
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/EditRedo", 
 			gedit_document_can_redo (doc));	
 
-	bonobo_ui_engine_thaw (ui_engine);
+	bonobo_ui_component_thaw (ui_component, NULL);
 }
 
 void
@@ -859,19 +836,19 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 
 	while (windows != NULL)
 	{
-		BonoboUIEngine *ui_engine;
+		BonoboUIComponent *ui_component;
 		BonoboWindow *active_window = BONOBO_WINDOW (windows->data);
 		g_return_if_fail (active_window != NULL);
 		
-		ui_engine = bonobo_window_get_ui_engine (active_window);
-		g_return_if_fail (ui_engine != NULL);
+		ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
+		g_return_if_fail (ui_component != NULL);
 
-		bonobo_ui_engine_freeze (ui_engine);
+		bonobo_ui_component_freeze (ui_component, NULL);
 
 		gedit_mdi_set_app_statusbar_style (active_window);
 		gedit_mdi_set_app_toolbar_style (active_window);
 
-		bonobo_ui_engine_thaw (ui_engine);
+		bonobo_ui_component_thaw (ui_component, NULL);
 
 		windows = windows->next;
 	}

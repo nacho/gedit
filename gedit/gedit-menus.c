@@ -119,23 +119,25 @@ gchar* gedit_menus_not_modified_doc_sensible_verbs [] = {
 
 
 void
-gedit_menus_set_verb_sensitive (BonoboUIEngine* ui_engine, gchar* cname, gboolean sensitive)
+gedit_menus_set_verb_sensitive (BonoboUIComponent *ui_component, gchar* cname, gboolean sensitive)
 {
-	g_return_if_fail (BONOBO_IS_UI_ENGINE (ui_engine));
 	g_return_if_fail (cname != NULL);
+	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
 
-	bonobo_ui_engine_xml_set_prop (ui_engine, cname, "sensitive", sensitive ? "1" : "0", "1");
+	bonobo_ui_component_set_prop (
+		ui_component, cname, "sensitive", sensitive ? "1" : "0", NULL);
 }
 
 void
-gedit_menus_set_verb_list_sensitive (BonoboUIEngine* ui_engine, gchar** vlist, gboolean sensitive)
+gedit_menus_set_verb_list_sensitive (BonoboUIComponent *ui_component, gchar** vlist, gboolean sensitive)
 {
-	g_return_if_fail (BONOBO_IS_UI_ENGINE (ui_engine));
 	g_return_if_fail (vlist != NULL);
+	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
 
 	for ( ; *vlist; ++vlist)
 	{
-		bonobo_ui_engine_xml_set_prop (ui_engine, *vlist, "sensitive", sensitive ? "1" : "0", "1");
+		bonobo_ui_component_set_prop (
+			ui_component, *vlist, "sensitive", sensitive ? "1" : "0", NULL);
 	}
 }
 

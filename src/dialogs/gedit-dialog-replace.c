@@ -27,6 +27,8 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#include <string.h>
+
 #include <glade/glade-xml.h>
 #include <libgnome/libgnome.h>
 
@@ -323,7 +325,6 @@ void
 gedit_dialog_find (void)
 {
 	GeditDialogFind *dialog;
-	gint response;
 	GeditMDIChild *active_child;
 	GeditDocument *doc;
 	gchar* last_searched_text;
@@ -366,7 +367,6 @@ void
 gedit_dialog_replace (void)
 {
 	GeditDialogReplace *dialog;
-	gint response;
 	GeditMDIChild *active_child;
 	GeditDocument *doc;
 	gchar* last_searched_text;
@@ -570,7 +570,6 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	const gchar* search_string = NULL;
 	const gchar* replace_string = NULL;
 	gchar* selected_text = NULL;
-	gboolean from_cursor;
 	gboolean case_sensitive;
 
 	gedit_debug (DEBUG_SEARCH, "");
@@ -658,7 +657,6 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	GeditDocument *doc;
 	const gchar* search_string = NULL;
 	const gchar* replace_string = NULL;
-	gboolean from_cursor;
 	gboolean case_sensitive;
 	gint replaced_items;
 	GtkWidget *message_dlg;

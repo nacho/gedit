@@ -32,6 +32,7 @@
 #include "gedit2.h"
 #include "gedit-mdi.h"
 #include "gedit-utils.h"
+#include "gedit-file.h"
 #include "gedit-dialogs.h"
 
 typedef struct _GeditDialogOpenUri GeditDialogOpenUri;

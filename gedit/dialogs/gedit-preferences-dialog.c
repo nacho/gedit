@@ -201,7 +201,7 @@ static CategoriesTreeItem user_interface [] =
 	{_("MDI"), NULL, MDI_SETTINGS},
 #endif
 
-	NULL
+	{ NULL }
 };
 
 static CategoriesTreeItem editor_behavior [] =
@@ -216,14 +216,14 @@ static CategoriesTreeItem editor_behavior [] =
 	{_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
 	{_("Line numbers"), NULL , LINE_NUMBERS_SETTINGS},
 
-	NULL
+	{ NULL }
 };
 
 static CategoriesTreeItem print [] =
 {
 	{_("Page"), NULL, PRINT_SETTINGS},
 
-	NULL
+	{ NULL }
 };
 
 static CategoriesTreeItem toplevel [] =
@@ -231,7 +231,7 @@ static CategoriesTreeItem toplevel [] =
 	{_("Editor"), editor_behavior, LOGO},
 	{_("Print"), print, LOGO},
 	{_("User interface"), user_interface, LOGO},
-	NULL
+	{ NULL }
 };
 
 GtkType
@@ -594,7 +594,7 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 				GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_text_radiobutton), TRUE);
 			break;
 
-		dafult:
+		default:
 			g_return_val_if_fail (FALSE, FALSE);
 	}
 	
@@ -733,8 +733,7 @@ gedit_preferences_dialog_default_font_colors_checkbutton_toggled (GtkToggleButto
 static gboolean 
 gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
-	GeditView* active_view = NULL;
-	GtkWidget* font_label;
+	GtkWidget *font_label;
 	
 	gedit_debug (DEBUG_PREFS, "");
 	
@@ -1056,7 +1055,6 @@ gboolean
 gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 {
 	GeditPreferences old_prefs;
-	gint index;
 	const gchar* font;
 	guint16 dummy;
 

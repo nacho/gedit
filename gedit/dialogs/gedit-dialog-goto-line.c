@@ -166,7 +166,6 @@ void
 gedit_dialog_goto_line (void)
 {
 	GeditDialogGotoLine *dialog;
-	gint response;
 
 	gedit_debug (DEBUG_SEARCH, "");
 

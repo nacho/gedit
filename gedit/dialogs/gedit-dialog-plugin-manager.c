@@ -132,7 +132,6 @@ active_toggled_cb (GtkCellRendererToggle     *cell,
 	GtkTreeIter  iter;
 	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
 	GtkTreeModel *model;
-	GeditPluginInfo *info;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -283,14 +282,11 @@ dialog_plugin_manager_set_active (GtkTreeIter *iter, GtkTreeModel *model, gboole
 static void
 dialog_plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
 {
-	GeditPluginInfo *info;
 	gboolean active;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	gtk_tree_model_get (model, iter, PLUGIN_MANAGER_ACTIVE_COLUMN, &active, -1);
-
-	g_return_if_fail (info != NULL);
 
 	active ^= 1;
 
@@ -334,7 +330,6 @@ dialog_plugin_manager_get_selected_plugin (GeditDialogPluginManager *dialog)
 {
 	GeditPluginInfo *info;
 	GtkTreeModel *model;
-	GtkTreeSelection *selection;
 	GtkTreeIter iter;
 	GtkTreeViewColumn *column;
 	GtkTreePath *path;
@@ -385,7 +380,6 @@ dialog_plugin_manager_construct_tree (GeditDialogPluginManager *dialog)
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
 	GtkListStore *model;
-	GtkWidget *button;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -430,7 +424,6 @@ dialog_plugin_manager_get_dialog (void)
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-	GtkWidget *button;
 	GtkWidget *viewport;
 
 	gedit_debug (DEBUG_PLUGINS, "");
@@ -565,7 +558,6 @@ void
 gedit_dialog_plugin_manager (void)
 {
 	GeditDialogPluginManager *dialog;
-	gint response;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
