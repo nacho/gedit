@@ -1,76 +1,461 @@
 # GNOME gedit Greek translation.
-# Copyright (C) 2000-2001 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2001, 2002 Free Software Foundation, Inc.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 2000.
-# Simos Xenitellis <simos@hellug.gr>, 2000-2001.
+# Simos Xenitellis <simos@hellug.gr>, 2000, 2001, 2002.
+# Kostas Papadimas <pkst@gmx.net>, 2002.
 #
 # spyros:
 #   initial translation
-# simos: 
+# simos:
 #   updated: 37 translated messages, 52 fuzzy translations, 116 untranslated messages.
 # simos: 248 messages, 02Mar2001.
+# kostas: 523 messages, 30Oct2002, completed translation.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 0.9.5\n"
-"POT-Creation-Date: 2002-03-04 16:09+0100\n"
-"PO-Revision-Date: 2001-03-02 00:42:17+0900\n"
-"Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
+"Project-Id-Version: gedit 2.0.5\n"
+"POT-Creation-Date: 2002-11-17 04:59+0100\n"
+"PO-Revision-Date: 2002-11-17 14:01+0200\n"
+"Last-Translator: Kostas Papadimas <pkst@gmx.net>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-7\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.6\n"
 
-#: gedit.desktop.in.h:1
+#: data/GNOME_Gedit.server.in.h:1
+msgid "gedit application"
+msgstr "ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® gedit "
+
+#: data/GNOME_Gedit.server.in.h:2
+msgid "gedit automation factory"
+msgstr "Ξ‘Ο…Ο„ΞΏΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞ®ΟƒΞµΞΉΟ‚ gedit "
+
+#: data/gedit.desktop.in.h:1
 msgid "Edit text files"
-msgstr ""
+msgstr "Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ± Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
 
-#: gedit.desktop.in.h:2
-#, fuzzy
+#: data/gedit.desktop.in.h:2 src/gedit2.c:297
 msgid "Text Editor"
-msgstr "Ξ‘Ο€Ξ»ΟΟ‚ ΞΊΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ‚"
+msgstr "Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®Ο‚ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
 
-#: plugins/ASCII/ascii.c:42
+#: data/gedit.schemas.in.h:1
+msgid ""
+"A custom font that will be used for the editing area. This will only take "
+"effect if the \"Use Default Font\" option is turned off."
+msgstr ""
+"ΞΞ½Ξ± Ο€ΟΞΏΟƒΞ±ΟΞΌΞΏΟƒΞΌΞ­Ξ½ΞΏ Ο‡ΟΟΞΌΞ± Ξ³ΞΉΞ± Ο‡ΟΞ®ΟƒΞ· ΟƒΟ„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. Ξ‘Ο…Ο„Ο "
+"Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ ΟΟ„Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· \"Ξ§ΟΞ®ΟƒΞ· Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ "
+"Ξ§ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½\"."
+
+#: data/gedit.schemas.in.h:2
+msgid "Auto Save"
+msgstr "Ξ‘Ο…Ο„ΟΞΌΞ±Ο„Ξ· Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
+
+#: data/gedit.schemas.in.h:3
+msgid "Auto Save Interval"
+msgstr "ΞΞµΟƒΞΏΞ΄ΞΉΞ¬ΟƒΟ„Ξ·ΞΌΞ± Ξ±Ο…Ο„ΟΞΌΞ±Ο„Ξ·Ο‚ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚"
+
+#: data/gedit.schemas.in.h:4
+msgid "Background Color"
+msgstr "Ξ§ΟΟΞΌΞ± Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ… "
+
+#: data/gedit.schemas.in.h:5
+msgid ""
+"Background color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Ξ§ΟΟΞΌΞ± Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ ΟƒΟ„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. Ξ‘Ο…Ο„Ο "
+"Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ ΟΟ„Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· \"Ξ§ΟΞ®ΟƒΞ· Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ "
+"Ξ§ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½\"."
+
+#: data/gedit.schemas.in.h:6
+msgid ""
+"Background color for unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Ξ§ΟΟΞΌΞ± Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏ ΞΌΞ® ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ ΟƒΟ„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. "
+"Ξ‘Ο…Ο„Ο Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ ΟΟ„Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· \"Ξ§ΟΞ®ΟƒΞ· Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ "
+"Ξ§ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½\"."
+
+#: data/gedit.schemas.in.h:7
+msgid "Backup Copy Extension"
+msgstr "Ξ•Ο€Ξ­ΞΊΟ„Ξ±ΟƒΞ· Ξ±Ξ½Ο„ΞΉΞ³ΟΞ¬Ο†ΞΏΟ… Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚"
+
+#: data/gedit.schemas.in.h:8
+msgid "Body Font for Printing"
+msgstr "Ξ§ΟΟΞΌΞ± ΞΊΟ…ΟΞ―Ο‰Ο‚ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ… Ξ³ΞΉΞ± ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·"
+
+#: data/gedit.schemas.in.h:9
+msgid "Create Backup Copies"
+msgstr "Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ξ±Ξ½Ο„ΞΉΞ³ΟΞ¬Ο†Ο‰Ξ½ Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚"
+
+#: data/gedit.schemas.in.h:10
+msgid "Display Line Numbers"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® Ξ±ΟΞΉΞΈΞΌΟΞ½ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚"
+
+#: data/gedit.schemas.in.h:11
+msgid "Editor Font"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®"
+
+#: data/gedit.schemas.in.h:12
+msgid "Encoding for Saving"
+msgstr "ΞΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ³ΞΉΞ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
+
+#: data/gedit.schemas.in.h:13
+msgid ""
+"Extension or suffix to use for backup file names. This will only take effect "
+"if the \"Create Backup Copies\" option is turned on."
+msgstr ""
+"Ξ•Ο€Ξ­ΞΊΟ„Ξ±ΟƒΞ· Ξ® ΞµΟ€Ξ―ΞΈΞµΞΌΞ± Ξ³ΞΉΞ± Ο„Ξ± ΞΏΞ½ΟΞΌΞ±Ο„Ξ± Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½ Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚. Ξ‘Ο…Ο„Ο Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ "
+"ΞΌΟΞ½ΞΏ ΟΟ„Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· \"Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ξ‘Ξ½Ο„ΞΉΞ³ΟΞ¬Ο†Ο‰Ξ½ Ξ‘ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚\" ."
+
+#: data/gedit.schemas.in.h:14
+msgid ""
+"Foreground color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Ξ§ΟΟΞΌΞ± Ο€ΟΞΏΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ ΟƒΟ„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. Ξ‘Ο…Ο„Ο "
+"Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ ΟΟ„Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· \"Ξ§ΟΞ®ΟƒΞ· Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ "
+"Ξ§ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½\"."
+
+#: data/gedit.schemas.in.h:15
+msgid ""
+"Foreground color for the unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"Ξ§ΟΟΞΌΞ± Ο€ΟΞΏΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏ ΞΌΞ® ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ ΟƒΟ„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. "
+"Ξ‘Ο…Ο„Ο Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ ΟΟ„Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· \"Ξ§ΟΞ®ΟƒΞ· Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ "
+"Ξ§ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½\"."
+
+#: data/gedit.schemas.in.h:16
+msgid "Header Font for Printing"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ ΞΊΞµΟ†Ξ±Ξ»Ξ―Ξ΄Ξ±Ο‚ Ξ³ΞΉΞ± ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·"
+
+#: data/gedit.schemas.in.h:17
+msgid ""
+"If this value is 0, then no line numbers will be inserted when printing a "
+"document. Otherwise, gedit will print line numbers every such number of "
+"lines."
+msgstr ""
+"Ξ‘Ξ½ Ξ· Ο„ΞΉΞΌΞ® ΞµΞ―Ξ½Ξ±ΞΉ 0, Ξ΄ΞµΞ½ ΞΈΞ± ΞµΞΉΟƒΞ±Ο‡ΞΈΞΏΟΞ½ Ξ±ΟΞΉΞΈΞΌΞΏΞ― Ξ³ΟΞ±ΞΌΞΌΟΞ½ ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ· ΞµΞ½ΟΟ‚ "
+"ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ…. Ξ£Ο„Ξ·Ξ½ Ξ±Ξ½Ο„Ξ―ΞΈΞµΟ„Ξ· Ο€ΞµΟΞ―Ο€Ο„Ο‰ΟƒΞ·, Ο„ΞΏ gedit ΞΈΞ± ΞµΞΊΟ„Ο…Ο€ΟΞ½ΞµΞΉ Ξ±ΟΞΉΞΈΞΌΞΏΟΟ‚ Ξ³ΟΞ±ΞΌΞΌΟΞ½ "
+"Ξ³ΞΉΞ± ΞΊΞ¬ΞΈΞµ Ο„Ξ­Ο„ΞΏΞΉΞ± Ξ³ΟΞ±ΞΌΞΌΞ®."
+
+#: data/gedit.schemas.in.h:18
+msgid "Line Number Font for Printing"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ξ±ΟΞΉΞΈΞΌΞΏΟ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ Ξ³ΞΉΞ± ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·"
+
+#: data/gedit.schemas.in.h:19
+msgid "Line Wrapping Mode"
+msgstr "ΞΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΟΞ½"
+
+#: data/gedit.schemas.in.h:20
+msgid "Maximum Recent Files"
+msgstr "ΞΞ­Ξ³ΞΉΟƒΟ„ΞΏΟ‚ Ξ±ΟΞΉΞΈΞΌΟΟ‚ Ο€ΟΟΟƒΟ†Ξ±Ο„Ο‰Ξ½ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½"
+
+#: data/gedit.schemas.in.h:21
+msgid "Maximum number of actions that gedit will be able to undo or redo."
+msgstr "ΞΞ­Ξ³ΞΉΟƒΟ„ΞΏΟ‚ Ξ±ΟΞΉΞΈΞΌΟΟ‚ ΞµΞ½ΞµΟΞ³ΞµΞΉΟΞ½ Ξ³ΞΉΞ± Ξ±Ξ½Ξ±Ξ―ΟΞµΟƒΞ· Ξ® Ξ±ΞΊΟΟΟ‰ΟƒΞ· Ξ±Ξ½Ξ±Ξ―ΟΞµΟƒΞ·Ο‚."
+
+#: data/gedit.schemas.in.h:22
+msgid ""
+"Number of minutes after which gedit will automatically save modified files. "
+"This will only take effect if the \"Auto Save\" option is turned on."
+msgstr ""
+"Ξ‘ΟΞΉΞΈΞΌΟΟ‚ Ξ»ΞµΟ€Ο„ΟΞ½ Ο€ΞΏΟ… ΞΈΞ± ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²ΞµΞ― ΞΌΞ­Ο‡ΟΞΉ Ο„ΞΏ gedit Ξ½Ξ± Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΞµΞΉ Ξ±Ο…Ο„ΟΞΌΞ±Ο„Ξ± "
+"Ο„ΟΞΏΟ€ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ± Ξ±ΟΟ‡ΞµΞ―Ξ±.Ξ‘Ο…Ο„Ο Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ ΟΟ„Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· "
+"\"Ξ‘Ο…Ο„ΟΞΌΞ±Ο„Ξ· Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·\"."
+
+#: data/gedit.schemas.in.h:23
+msgid "Print Header"
+msgstr "Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ· ΞΊΞµΟ†Ξ±Ξ»Ξ―Ξ΄Ξ±Ο‚"
+
+#: data/gedit.schemas.in.h:24
+msgid "Print Line Numbers"
+msgstr "Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ξ±ΟΞΉΞΈΞΌΟΞ½ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚"
+
+#: data/gedit.schemas.in.h:25
+msgid "Printing Line Wrapping Mode"
+msgstr "ΞΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚"
+
+#: data/gedit.schemas.in.h:26
+msgid "Selected Text Color"
+msgstr "Ξ§ΟΟΞΌΞ± ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ… ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
+
+#: data/gedit.schemas.in.h:27
+msgid "Selection Color"
+msgstr "Ξ§ΟΟΞΌΞ± ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ®Ο‚"
+
+#: data/gedit.schemas.in.h:28
+msgid "Show Cursor Position"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® ΞΈΞ­ΟƒΞµΟ‰Ο‚ Ξ΄ΟΞΏΞΌΞ­Ξ±"
+
+#: data/gedit.schemas.in.h:29
+msgid "Show Overwrite Mode"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® Ξ›ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚"
+
+#: data/gedit.schemas.in.h:30
+msgid ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"ΞΞ±ΞΈΞΏΟΞ―Ξ¶ΞµΞΉ Ο„ΞΏΞ½ Ο„ΟΟΟ€ΞΏ Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·Ο‚ Ο„Ο‰Ξ½ Ξ³ΟΞ±ΞΌΞΌΟΞ½ Ξ³ΞΉΞ± ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·. Ξ§ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΟ„Ξµ Ο„ΞΏ "
+"\"GTK_WRAP_NONE\"  Ξ³ΞΉΞ± ΞΌΞ® Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·, Ο„ΞΏ \"GTK_WRAP_WORD\" ΟƒΟ„Ξ± ΟΟΞΉΞ± Ξ»Ξ­ΞΎΞµΟ‰Ξ½ "
+"ΞΊΞ±ΞΉ \"GTK_WRAP_CHAR\"  Ξ³ΞΉΞ± Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ· ΟƒΞµ ΟΟΞΉΞ± Ξ±Ξ½ΞµΞΎΞ¬ΟΟ„Ξ·Ο„Ο‰Ξ½ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΟ‰Ξ½. "
+"Ξ£Ξ·ΞΌΞµΞΉΟΟƒΟ„Ξµ ΟΟ„ΞΉ ΟƒΟ„ΞΉΟ‚ Ο„ΞΉΞΌΞ­Ο‚ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ΄ΞΉΞ¬ΞΊΟΞΉΟƒΞ· Ο€ΞµΞ¶ΟΞ½-ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ο‰Ξ½ ΞΊΞ±ΞΉ Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± "
+"ΞµΞΌΟ†Ξ±Ξ½ΞΉΟƒΟ„ΞΏΟΞ½ ΟΟ€Ο‰Ο‚ Ξ±ΞΊΟΞΉΞ²ΟΟ‚ Ξ±Ξ½Ξ±Ο†Ξ­ΟΞΏΞ½Ο„Ξ±ΞΉ ΞµΞ΄Ο."
+
+#: data/gedit.schemas.in.h:31
+msgid ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"ΞΞ±ΞΈΞΏΟΞ―Ξ¶ΞµΞΉ Ο„ΞΏΞ½ Ο„ΟΟΟ€ΞΏ Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·Ο‚ Ο„Ο‰Ξ½ Ξ³ΟΞ±ΞΌΞΌΟΞ½ ΟƒΟ„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. "
+"Ξ§ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΟ„Ξµ Ο„ΞΏ \"GTK_WRAP_NONE\" Ξ³ΞΉΞ± ΞΌΞ® Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·, Ο„ΞΏ \"GTK_WRAP_WORD\"  "
+"ΟƒΟ„Ξ± ΟΟΞΉΞ± Ξ»Ξ­ΞΎΞµΟ‰Ξ½ ΞΊΞ±ΞΉ \"GTK_WRAP_CHAR\"  Ξ³ΞΉΞ± Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ· ΟƒΞµ ΟΟΞΉΞ± Ξ±Ξ½ΞµΞΎΞ¬ΟΟ„Ξ·Ο„Ο‰Ξ½ "
+"Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΟ‰Ξ½. Ξ£Ξ·ΞΌΞµΞΉΟΟƒΟ„Ξµ ΟΟ„ΞΉ ΟƒΟ„ΞΉΟ‚ Ο„ΞΉΞΌΞ­Ο‚ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ΄ΞΉΞ¬ΞΊΟΞΉΟƒΞ· Ο€ΞµΞ¶ΟΞ½-ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ο‰Ξ½ ΞΊΞ±ΞΉ "
+"Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± ΞµΞΌΟ†Ξ±Ξ½ΞΉΟƒΟ„ΞΏΟΞ½ ΟΟ€Ο‰Ο‚ Ξ±ΞΊΟΞΉΞ²ΟΟ‚ Ξ±Ξ½Ξ±Ο†Ξ­ΟΞΏΞ½Ο„Ξ±ΞΉ ΞµΞ΄Ο."
+
+#: data/gedit.schemas.in.h:32
+msgid "Specifies the font to use for a document's body when printing documents."
+msgstr ""
+"ΞΞ±ΞΈΞΏΟΞ―Ξ¶ΞµΞΉ Ο„Ξ· Ο‡ΟΞ®ΟƒΞ· Ο„Ξ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ ΟƒΟ„ΞΏ ΟƒΟΞΌΞ± Ο„ΞΏΟ… ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ… ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ "
+"ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·. "
+
+#: data/gedit.schemas.in.h:33
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+"ΞΞ±ΞΈΞΏΟΞ―Ξ¶ΞµΞΉ Ο„ΞΏΞ½ Ο„ΟΟΟ€ΞΏ Ο‡ΟΞ®ΟƒΞ·Ο‚ Ο„Ξ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ ΟƒΟ„ΞΏΟ…Ο‚ Ξ±ΟΞΉΞΈΞΌΞΏΟΟ‚ Ξ³ΟΞ±ΞΌΞΌΟΞ½ ΞΊΞ±Ο„Ξ¬ "
+"Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·. Ξ‘Ο…Ο„Ο Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ Ξ±Ξ½ Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞ·Ξ΄ΞµΞ½ΞΉΞΊΞ® Ξ· Ο„ΞΉΞΌΞ® ΟƒΟ„Ξ·Ξ½ "
+"\"Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ξ‘ΟΞΉΞΈΞΌΟΞ½ Ξ“ΟΞ±ΞΌΞΌΟΞ½\"."
+
+#: data/gedit.schemas.in.h:34
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+"ΞΞ±ΞΈΞΏΟΞ―Ξ¶ΞµΞΉ Ο„Ξ· Ο‡ΟΞ®ΟƒΞ·Ο‚ Ο„Ξ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ ΟƒΟ„ΞΉΟ‚ ΞΊΞµΟ†Ξ±Ξ»Ξ―Ξ΄ΞµΟ‚ ΟƒΞµΞ»Ξ―Ξ΄Ξ±Ο‚ ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ "
+"ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·. Ξ‘Ο…Ο„Ο Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΌΟΞ½ΞΏ Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· \"Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ· "
+"ΞΞµΟ†Ξ±Ξ»Ξ―Ξ΄Ξ±Ο‚\" ."
+
+#: data/gedit.schemas.in.h:35
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+"ΞΞ±ΞΈΞΏΟΞ―Ξ¶ΞµΞΉ Ο„ΞΏ ΞΌΞ­Ξ³ΞΉΟƒΟ„ΞΏ Ξ±ΟΞΉΞΈΞΌΟ Ο„Ο‰Ξ½ Ο€ΟΟΟƒΟ†Ξ±Ο„Ξ± Ξ±Ξ½ΞΏΞΉΞ³ΞΌΞ­Ξ½Ο‰Ξ½ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½ Ο€ΞΏΟ… ΞΈΞ± "
+"ΞµΞΌΟ†Ξ±Ξ½Ξ―Ξ¶ΞΏΞ½Ο„Ξ±ΞΉ ΟƒΟ„ΞΏ Ο…Ο€ΞΏΞΌΞµΞ½ΞΏΟ  \"Ξ ΟΟΟƒΟ†Ξ±Ο„Ξ± ΞΞ³Ξ³ΟΞ±Ο†Ξ±\"."
+
+#: data/gedit.schemas.in.h:36
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr ""
+"ΞΞ±ΞΈΞΏΟΞ―Ξ¶ΞµΞΉ Ο„ΞΏΞ½ Ξ±ΟΞΉΞΈΞΌΟ Ο„Ο‰Ξ½ Ξ΄ΞΉΞ±ΟƒΟ„Ξ·ΞΌΞ¬Ο„Ο‰Ξ½ Ο€ΞΏΟ… ΞΈΞ± Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± ΞµΞΌΟ†Ξ±Ξ½Ξ―Ξ¶ΞΏΞ½Ο„Ξ±ΞΉ Ξ±Ξ½Ο„Ξ― Ξ³ΞΉΞ± "
+"Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚ Tab."
+
+#: data/gedit.schemas.in.h:37
+msgid "Status Bar is Visible"
+msgstr "Ξ— Ξ“ΟΞ±ΞΌΞΌΞ® ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΞµΞ―Ξ½Ξ±ΞΉ ΞΏΟΞ±Ο„Ξ®"
+
+#: data/gedit.schemas.in.h:38
+msgid ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+msgstr ""
+"Ξ£Ο„ΟΞ» Ξ³ΞΉΞ± ΞΊΞΏΟ…ΞΌΟ€ΞΉΞ¬ ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·Ο‚. ΞΞΉ Ο€ΞΉΞΈΞ±Ξ½Ξ­Ο‚ Ο„ΞΉΞΌΞ­Ο‚ ΞµΞ―Ξ½Ξ±ΞΉ \"GEDIT_TOOLBAR_SYSTEM"
+"\" Ξ³ΞΉΞ± Ο‡ΟΞ®ΟƒΞ· Ο„ΞΏΟ… ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ ΟƒΟ„ΟΞ» Ο„ΞΏΟ… ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚, \"GEDIT_TOOLBAR_ICONS\" Ξ³ΞΉΞ± "
+"Ο„Ξ·Ξ½ Ο€ΟΞΏΞ²ΞΏΞ»Ξ® ΞΌΟΞ½ΞΏ Ο„Ο‰Ξ½ ΞµΞΉΞΊΞΏΞ½ΞΉΞ΄Ξ―Ο‰Ξ½, ΞΊΞ±ΞΉ \"GEDIT_TOOLBAR_ICONS_AND_TEXT\"  Ξ³ΞΉΞ± "
+"Ο€ΟΞΏΞ²ΞΏΞ»Ξ® ΞµΞΉΞΊΞΏΞ½ΞΉΞ΄Ξ―Ο‰Ξ½ ΞΊΞ±ΞΉ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…. Ξ£Ξ·ΞΌΞµΞΉΟΟƒΟ„Ξµ ΟΟ„ΞΉ ΟƒΟ„ΞΉΟ‚ Ο„ΞΉΞΌΞ­Ο‚ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ΄ΞΉΞ¬ΞΊΟΞΉΟƒΞ· "
+"Ο€ΞµΞ¶ΟΞ½-ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ο‰Ξ½ ΞΊΞ±ΞΉ Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± ΞµΞΌΟ†Ξ±Ξ½ΞΉΟƒΟ„ΞΏΟΞ½ ΟΟ€Ο‰Ο‚ Ξ±ΞΊΟΞΉΞ²ΟΟ‚ Ξ±Ξ½Ξ±Ο†Ξ­ΟΞΏΞ½Ο„Ξ±ΞΉ ΞµΞ΄Ο."
+
+#: data/gedit.schemas.in.h:39
+msgid "Tab Size"
+msgstr "ΞΞ­Ξ³ΞµΞΈΞΏΟ‚ ΟƒΟ„Ξ®Ξ»Ξ·Ο‚"
+
+#: data/gedit.schemas.in.h:40
+msgid "Text Color"
+msgstr "Ξ§ΟΟΞΌΞ± ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
+
+#: data/gedit.schemas.in.h:41
+msgid ""
+"The encoding method to use for saving files. Possible values are "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to "
+"convert the document it is saving to your current locale's encoding, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to try "
+"to use the original file encoding (new files in UTF8) and "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit to "
+"try to use the original file encoding (new files in current locale's "
+"encoding). If the conversion is successful, it will be used. Otherwise, UTF-"
+"8 will be used. Note that the values are case-sensitive, so make sure they "
+"appear exactly as mentioned here."
+msgstr ""
+"Ξ— ΞΌΞ­ΞΈΞΏΞ΄ΞΏΟ‚ ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ Ο€ΞΏΟ… Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½. "
+"Ξ ΞΉΞΈΞ±Ξ½Ξ­Ο‚ Ο„ΞΉΞΌΞ­Ο‚ ΞµΞ―Ξ½Ξ±ΞΉ \"GEDIT_SAVE_ALWAYS_UTF8\" Ξ³ΞΉΞ± Ο…Ο€ΞΏΟ‡ΟΞµΟ‰Ο„ΞΉΞΊΞ® Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· "
+"ΟƒΞµ  UTF-8, \"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" Ξ±Ξ½ ΞΈΞ­Ξ»ΞµΟ„Ξµ Ο„ΞΏ gedit Ξ½Ξ± "
+"Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΞµΞΉ Ξ½Ξ± ΞΌΞµΟ„Ξ±Ο„ΟΞ­ΟΞµΞΉ Ο„ΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΞΏΞ½Ο„Ξ±Ο‚ Ο„ΞΏ ΞΌΞµ Ο„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ locale, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" Ξ±Ξ½ ΞΈΞ­Ξ»ΞµΟ„Ξµ Ο„ΞΏ gedit Ξ½Ξ± Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΞµΞΉ "
+"Ξ½Ξ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΞµΞΉ Ο„Ξ·Ξ½ Ξ±ΟΟ‡ΞΉΞΊΞ® ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… (Ξ½Ξ­Ξ± Ξ±ΟΟ‡ΞµΞ―Ξ± ΟƒΞµ UTF8) "
+"ΞΊΞ±ΞΉ \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" Ξ±Ξ½ ΞΈΞ­Ξ»ΞµΟ„Ξµ Ο„ΞΏ gedit "
+"Ξ½Ξ± Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΞµΞΉ Ξ½Ξ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΞµΞΉ Ο„Ξ·Ξ½ Ξ±ΟΟ‡ΞΉΞΊΞ® ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… (Ξ½Ξ­Ξ± "
+"Ξ±ΟΟ‡ΞµΞ―Ξ± ΟƒΞµ ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„ΟΞ­Ο‡ΞΏΞ½Ο„ΞΏΟ‚ locale) . Ξ‘Ξ½ Ξ· ΞΌΞµΟ„Ξ±Ο„ΟΞΏΟ€Ξ® ΞµΞ―Ξ½Ξ±ΞΉ ΞµΟ€ΞΉΟ„Ο…Ο‡Ξ·ΞΌΞ­Ξ½Ξ· "
+"ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ·ΞΈΞµΞ―. Ξ‘Ξ»Ξ»ΞΉΟΟ‚ ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ·ΞΈΞµΞ― UTF-8. Ξ£Ξ·ΞΌΞµΞΉΟΟƒΟ„Ξµ ΟΟ„ΞΉ ΟƒΟ„ΞΉΟ‚ Ο„ΞΉΞΌΞ­Ο‚ "
+"Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ΄ΞΉΞ¬ΞΊΟΞΉΟƒΞ· Ο€ΞµΞ¶ΟΞ½-ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ο‰Ξ½ ΞΊΞ±ΞΉ Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± ΞµΞΌΟ†Ξ±Ξ½ΞΉΟƒΟ„ΞΏΟΞ½ ΟΟ€Ο‰Ο‚ Ξ±ΞΊΟΞΉΞ²ΟΟ‚ "
+"Ξ±Ξ½Ξ±Ο†Ξ­ΟΞΏΞ½Ο„Ξ±ΞΉ ΞµΞ΄Ο."
+
+#: data/gedit.schemas.in.h:42
+msgid "Toolbar Buttons Style"
+msgstr "Ξ£Ο„ΟΞ» ΞΊΞΏΟ…ΞΌΟ€ΞΉΟΞ½ ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·Ο‚"
+
+#: data/gedit.schemas.in.h:43
+msgid "Toolbar is Visible"
+msgstr "Ξ— ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ· ΞµΞ―Ξ½Ξ±ΞΉ ΞΏΟΞ±Ο„Ξ®"
+
+#: data/gedit.schemas.in.h:44
+msgid "Undo Actions Limit"
+msgstr "ΞΟΞΉΞΏ ΞµΞ½ΞµΟΞ³ΞµΞΉΟΞ½ Ξ±Ξ½Ξ±Ξ―ΟΞµΟƒΞ·Ο‚"
+
+#: data/gedit.schemas.in.h:45
+msgid "Use Default Colors"
+msgstr "Ξ§ΟΞ®ΟƒΞ· Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ§ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½"
+
+#: data/gedit.schemas.in.h:46
+msgid "Use Default Font"
+msgstr "Ξ§ΟΞ®ΟƒΞ· Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚: "
+
+#: data/gedit.schemas.in.h:47
+msgid ""
+"Whether gedit should automatically save modified files after a time "
+"interval. You can set the time interval with the \"Auto Save Interval\" "
+"option."
+msgstr ""
+"Ξ‘Ξ½ Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® ΞΈΞ± Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΞµΞΉ Ξ±Ο…Ο„ΟΞΌΞ±Ο„Ξ± Ο„ΟΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ± Ξ±ΟΟ‡ΞµΞ―Ξ± ΞΌΞµΟ„Ξ¬ Ξ±Ο€Ο ΞΊΞ¬Ο€ΞΏΞΉΞΏ "
+"Ο‡ΟΞΏΞ½ΞΉΞΊΟ Ξ΄ΞΉΞ¬ΟƒΟ„Ξ·ΞΌΞ±. ΞΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± ΞΏΟΞ―ΟƒΞµΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ Ξ΄ΞΉΞ¬ΟƒΟ„Ξ·ΞΌΞ± ΟƒΟ„Ξ·Ξ½ ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® "
+"\"ΞΞµΟƒΞΏΞ΄ΞΉΞ¬ΟƒΟ„Ξ·ΞΌΞ± Ξ‘Ο…Ο„ΟΞΌΞ±Ο„Ξ·Ο‚ Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚\"."
+
+#: data/gedit.schemas.in.h:48
+msgid ""
+"Whether gedit should create backup copies for the files it saves. You can "
+"set the backup file extension with the \"Backup Copy Extension\" option."
+msgstr ""
+"Ξ‘Ξ½ Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® ΞΈΞ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³ΞµΞ― Ξ±Ξ½Ο„Ξ―Ξ³ΟΞ±Ο†Ξ± Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚ Ξ³ΞΉΞ± Ο„Ξ± Ξ±ΟΟ‡ΞµΞ―Ξ± Ο€ΞΏΟ… "
+"Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΞµΞΉ. ΞΟ€ΞΏΟΞµΞ»ΞΉΟ„Ξµ Ξ½Ξ± ΞΏΟΞ―ΟƒΞµΟ„Ξµ Ο„Ξ·Ξ½ ΞµΟ€Ξ­ΞΊΟ„Ξ±ΟƒΞ· Ο„Ο‰Ξ½ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½ Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚ ΟƒΟ„Ξ·Ξ½ "
+"ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® \"Ξ•Ο€Ξ­ΞΊΟ„Ξ±ΟƒΞ· Ξ‘ΟΟ‡ΞµΞ―ΞΏΟ… Ξ‘ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚\" "
+
+#: data/gedit.schemas.in.h:49
+msgid "Whether gedit should display line numbers in the editing area."
+msgstr "Ξ‘Ξ½ Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® ΞΈΞ± Ο€ΟΞΏΞ²Ξ¬Ξ»Ξ»ΞµΞΉ Ο„ΞΏΟ…Ο‚ Ξ±ΟΞΉΞΈΞΌΞΏΟΟ‚ Ξ³ΟΞ±ΞΌΞΌΟΞ½ ΟƒΟ„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚."
+
+#: data/gedit.schemas.in.h:50
+msgid "Whether gedit should include a document header when printing documents."
+msgstr "Ξ‘Ξ½ Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® ΞΈΞ± Ο€ΞµΟΞΉΞ»Ξ±ΞΌΞ²Ξ¬Ξ½ΞµΞΉ ΞΌΞΉΞ± ΞΊΞµΟ†Ξ±Ξ»Ξ―Ξ΄Ξ± ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ… ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·."
+
+#: data/gedit.schemas.in.h:51
+msgid "Whether the status bar at the bottom of editing windows should be visible."
+msgstr "Ξ‘Ξ½ Ξ· Ξ³ΟΞ±ΞΌΞΌΞ® ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ ΞΊΞ¬Ο„Ο‰ ΞΌΞ­ΟΞΏΟ‚ Ο„ΞΏΟ… ΞµΞ½ΞµΟΞ³ΞΏΟ Ο€Ξ±ΟΞ±ΞΈΟΟΞΏΟ… ΞΈΞ± ΞµΞ―Ξ½Ξ±ΞΉ ΞΏΟΞ±Ο„Ξ®."
+
+#: data/gedit.schemas.in.h:52
+msgid ""
+"Whether the status bar should show the cursor position in editing windows. "
+"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
+"effect."
+msgstr ""
+"Ξ‘Ξ½ Ξ· Ξ³ΟΞ±ΞΌΞΌΞ® ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΞΈΞ± Ξ΄ΞµΞ―Ο‡Ξ½ΞµΞΉ Ο„Ξ· ΞΈΞ­ΟƒΞ· Ο„ΞΏΟ… Ξ΄ΟΞΏΞΌΞ­Ξ± ΟƒΟ„Ξ± Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞ± "
+"ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ ΞµΞ―Ξ½Ξ±ΞΉ ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® \"Ξ— Ξ“ΟΞ±ΞΌΞΌΞ® "
+"ΞΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΞµΞ―Ξ½Ξ±ΞΉ ΞΟΞ±Ο„Ξ®\" Ξ³ΞΉΞ± Ξ½Ξ± Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞ·ΞΈΞµΞ―."
+
+#: data/gedit.schemas.in.h:53
+msgid ""
+"Whether the status bar should show the insert/overwrite mode in editing "
+"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
+"to take effect."
+msgstr ""
+"Ξ‘Ξ½ Ξ· Ξ³ΟΞ±ΞΌΞΌΞ® ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΞΈΞ± Ξ΄ΞµΞ―Ο‡Ξ½ΞµΞΉ Ο„Ξ· Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ®Ο‚/Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΟƒΟ„Ξ± "
+"Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞ± ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ ΞµΞ―Ξ½Ξ±ΞΉ ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ξ· Ξ· ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® \"Ξ— "
+"Ξ“ΟΞ±ΞΌΞΌΞ® ΞΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΞµΞ―Ξ½Ξ±ΞΉ ΞΟΞ±Ο„Ξ®\" Ξ³ΞΉΞ± Ξ½Ξ± Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞΉΞ·ΞΈΞµΞ―."
+
+#: data/gedit.schemas.in.h:54
+msgid "Whether the toolbar should be visible in editing windows."
+msgstr "Ξ‘Ξ½ Ξ· ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ· ΞΈΞ± ΞµΞ―Ξ½Ξ±ΞΉ ΞΏΟΞ±Ο„Ξ® ΟƒΟ„Ξ± Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞ± ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚."
+
+#: data/gedit.schemas.in.h:55
+msgid ""
+"Whether to use the system's default colors for the editing area. If this "
+"option is turned off, then the colors of the editing area will be those "
+"specified in the \"Background Color\", \"Text Color\", \"Selected Text Color"
+"\", and \"Selection Color\" options."
+msgstr ""
+"Ξ‘Ξ½ ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞΏΟΞ½Ο„Ξ±ΞΉ Ο„Ξ± ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ο‡ΟΟΞΌΞ±Ο„Ξ± Ο„ΞΏΟ… ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ο€ΞµΟΞΉΞΏΟ‡Ξ® "
+"ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚. Ξ‘Ξ½ Ξ±Ο…Ο„Ξ® Ξ· ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΈΞµΞ― Ο„ΟΟ„Ξµ Ο„Ξ± Ο‡ΟΟΞΌΞ±Ο„Ξ± Ο„Ξ·Ο‚ Ο€ΞµΟΞΉΞΏΟ‡Ξ®Ο‚ "
+"ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚ ΞΈΞ± ΞΊΞ±ΞΈΞΏΟΞ―Ξ¶ΞΏΞ½Ο„Ξ±ΞΉ Ξ±Ο€Ο Ο„ΞΉΟ‚ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ο„Ο‰Ξ½ ΞµΟ€ΞΉΞ»ΞΏΞ³ΟΞ½ \"Ξ§ΟΟΞΌΞ± "
+"Ξ Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…\", \"Ξ§ΟΟΞΌΞ± ΞΞµΞΉΞΌΞ­Ξ½ΞΏΟ…\", \"Ξ§ΟΟΞΌΞ± Ξ•Ο€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ… ΞΞµΞΉΞΌΞ­Ξ½ΞΏΟ…\", ΞΊΞ±ΞΉ "
+"\"Ξ§ΟΟΞΌΞ± Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ®Ο‚\"."
+
+#: data/gedit.schemas.in.h:56
+msgid ""
+"Whether to use the system's default font for editing text instead of a font "
+"specific to gedit. If this option is turned off, then the font named in the "
+"\"Editor Font\" option will be used instead of the system font."
+msgstr ""
+"Ξ‘Ξ½ ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞΏΟΞ½Ο„Ξ±ΞΉ ΞΏΞΉ ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ­Ο‚ Ο„ΞΏΟ… ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ "
+"ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ± ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ… Ξ±Ξ½Ο„Ξ― Ξ³ΞΉΞ± ΞΌΞΉΞ± ΟƒΟ…Ξ³ΞΊΞµΞΊΟΞΉΞΌΞ­Ξ½Ξ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬. Ξ‘Ξ½ Ξ±Ο…Ο„Ξ® Ξ· "
+"ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ·ΞΈΞµΞ― Ο„ΟΟ„Ξµ ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ·ΞΈΞµΞ― Ξ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… ΞΏΟΞ―Ξ¶ΞµΟ„Ξ±ΞΉ "
+"ΟƒΟ„Ξ·Ξ½ ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® \"Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®\"."
+
+#: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
-msgstr ""
+msgstr "_Ξ Ξ―Ξ½Ξ±ΞΊΞ±Ο‚ ASCII "
 
-#: plugins/ASCII/ascii.c:45
+#: plugins/ASCII/ascii.c:46
 msgid "Pop-up a dialog containing an ASCII Table"
-msgstr ""
+msgstr "Ξ‘Ξ½Ξ¬Ξ΄Ο…ΟƒΞ· Ξ΄ΞΉΞ±Ξ»ΟΞ³ΞΏΟ… Ο€ΞΏΟ… Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ Ο„ΞΏΞ½ Ξ Ξ―Ξ½Ξ±ΞΊΞ± ASCII "
 
-#: plugins/ASCII/ascii.c:325
-#, fuzzy
+#: plugins/ASCII/ascii.c:336
 msgid "Char"
-msgstr "Αλλαγή"
+msgstr "Ξ§Ξ±ΟΞ±ΞΊΟ„Ξ®Ο."
 
-#: plugins/ASCII/ascii.c:332
+#: plugins/ASCII/ascii.c:343
 msgid "Dec#"
-msgstr ""
+msgstr "Dec#"
 
-#: plugins/ASCII/ascii.c:339
+#: plugins/ASCII/ascii.c:350
 msgid "Hex#"
-msgstr ""
+msgstr "Hex#"
 
-#: plugins/ASCII/ascii.c:346
-#, fuzzy
+#: plugins/ASCII/ascii.c:357
 msgid "Name"
-msgstr "όνομα αρχείου"
+msgstr "ΞΞ½ΞΏΞΌΞ±"
 
-#: plugins/ASCII/ascii.c:391 plugins/ASCII/ascii.c:512
+#: plugins/ASCII/ascii.c:402 plugins/ASCII/ascii.c:523
 msgid "ASCII table"
-msgstr ""
+msgstr "Ξ Ξ―Ξ½Ξ±ΞΊΞ±Ο‚ ASCII "
 
-#: plugins/ASCII/ascii.c:404
-#, fuzzy
+#: plugins/ASCII/ascii.c:415
 msgid "_Insert char"
-msgstr "Εισαγωγή Ώρας"
+msgstr "_Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞ±"
 
-#: plugins/ASCII/ascii.c:513
+#: plugins/ASCII/ascii.c:524
 msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
 msgstr ""
+"Ξ— Ο€ΟΟΟƒΞΈΞµΟ„Ξ· Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± Ο€ΟΞΏΞ²Ξ¬Ξ»Ξ»ΞµΞΉ Ξ­Ξ½Ξ± Ξ±Ξ½Ξ±Ξ΄Ο…ΟΞΌΞµΞ½ΞΏ Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞΏ Ο€ΞΏΟ… Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ Ο„ΞΏΞ½ "
+"Ξ Ξ―Ξ½Ξ±ΞΊΞ± ASCII "
 
-#: plugins/ASCII/ascii.c:515
+#: plugins/ASCII/ascii.c:526
 msgid "Copyright (C) 2001-2002 Paolo Maggi"
-msgstr ""
+msgstr "Copyright (C) 2001-2002 Paolo Maggi"
 
 #: plugins/ASCII/asciitable.glade2.h:1
 msgid ""
@@ -78,225 +463,256 @@ msgid ""
 "document, select the character and click the \"Insert Char\" \n"
 "button or double click the character in the table."
 msgstr ""
+"Ξ‘Ξ½ ΞΈΞ­Ξ»ΞµΟ„Ξµ Ξ½Ξ± ΞµΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ ΞΊΞ¬Ο€ΞΏΞΉΞΏ Ξ±Ο€Ο Ο„ΞΏΟ…Ο‚ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚ ΟƒΟ„ΞΏ ΞµΞ½ΞµΟΞ³Ο \n"
+"Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ, ΞµΟ€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ο„ΞΏ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞ± ΞΊΞ±ΞΉ Ο€Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― \"Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ξ§Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞ±"
+"\" \n"
+"Ξ® ΞΊΞ¬Ξ½Ο„Ξµ Ξ΄ΞΉΟ€Ξ»Ο ΞΊΞ»Ξ―ΞΊ ΟƒΟ„ΞΏ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞ± Ο„ΞΏΟ… Ο€Ξ―Ξ½Ξ±ΞΊΞ±."
 
 #: plugins/ASCII/asciitable.glade2.h:4
-#, fuzzy
 msgid "Insert char"
-msgstr "Εισαγωγή Ώρας"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞ±"
 
 #: plugins/ASCII/asciitable.glade2.h:5
 msgid "gedit: ASCII table"
-msgstr ""
+msgstr "gedit:Ξ Ξ―Ξ½Ξ±ΞΊΞ±Ο‚ ASCII "
 
-#: plugins/cvschangelog/cvschangelog.c:44
+#. AFAIK, all cvs commit messages start with this
+#: plugins/cvschangelog/cvschangelog.c:49
 msgid "Open CVS Chan_geLogs"
-msgstr ""
+msgstr "'Ξ‘Ξ½ΞΏΞΉΞ³ΞΌΞ± CVS Chan_geLogs"
 
-#: plugins/cvschangelog/cvschangelog.c:47
+#: plugins/cvschangelog/cvschangelog.c:52
 msgid "Searches for ChangeLogs in the current document and opens them"
-msgstr ""
+msgstr "Ξ‘Ξ½Ξ±Ξ¶Ξ·Ο„Ξ¬ Ξ³ΞΉΞ±  ChangeLogs ΟƒΟ„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ ΞΊΞ±ΞΉ Ο„Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞµΞΉ"
 
-#: plugins/cvschangelog/cvschangelog.c:235
+#: plugins/cvschangelog/cvschangelog.c:269
 msgid "CVS ChangeLog"
-msgstr ""
+msgstr "CVS ChangeLog"
 
-#: plugins/cvschangelog/cvschangelog.c:236
+#: plugins/cvschangelog/cvschangelog.c:270
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr ""
+"ΞΞΉΞ± Ο€ΟΟΟƒΞΈΞµΟ„Ξ· Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± Ο€ΞΏΟ… Ξ±Ξ½ΞΏΞ―Ξ³ΞµΞΉ Ο„Ξ± ChangeLogs Ο€ΞΏΟ… Ξ²ΟΞ―ΟƒΞΊΞΏΞ½Ο„Ξ±ΞΉ ΟƒΟ„Ξ± "
+"ΞΌΞ·Ξ½ΟΞΌΞ±Ο„Ξ± CVS."
 
-#: plugins/cvschangelog/cvschangelog.c:238
+#: plugins/cvschangelog/cvschangelog.c:272
 msgid "Copyright (C) 2002 - James Willcox"
-msgstr ""
+msgstr "Copyright (C) 2002 - James Willcox"
 
-#: plugins/diff/diff.c:61
-#, fuzzy
+#: plugins/diff/diff.c:62
 msgid "Co_mpare Files..."
-msgstr "¶νοιγμα Αρχείου ..."
+msgstr "Ξ£Ο_Ξ³ΞΊΟΞΉΟƒΞ· Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½..."
 
-#: plugins/diff/diff.c:64
+#: plugins/diff/diff.c:65
 msgid "Makes a diff file from two documents or files"
-msgstr "Δημιουργεί ένα έγγραφο διαφορών μεταξύ δύο εγγράφων ή αρχείων"
+msgstr "Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³ΞµΞ― Ξ­Ξ½Ξ± Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ Ξ΄ΞΉΞ±Ο†ΞΏΟΟΞ½ ΞΌΞµΟ„Ξ±ΞΎΟ Ξ΄ΟΞΏ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½ Ξ® Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½"
 
-#: plugins/diff/diff.c:66
-#, fuzzy
+#: plugins/diff/diff.c:67
 msgid "Compare files"
-msgstr "Φόρτωση του αρχείου %s"
+msgstr "Ξ£ΟΞ³ΞΊΟΞΉΟƒΞ· Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½"
 
 #. Create the dialog
-#: plugins/diff/diff.c:267
+#: plugins/diff/diff.c:268
 msgid "Compare two files..."
-msgstr ""
+msgstr "Ξ£ΟΞ³ΞΊΟΞΉΟƒΞ· Ξ΄ΟΞΏ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½..."
 
-#: plugins/diff/diff.c:281
+#: plugins/diff/diff.c:282
 msgid "C_ompare"
-msgstr ""
+msgstr "Ξ£Ο_Ξ³ΞΊΟΞΉΟƒΞ·"
 
-#: plugins/diff/diff.c:491
+#: plugins/diff/diff.c:503
 msgid "The two documents you selected are the same."
-msgstr "Τα δύο έγγραφα που επιλέχθηκαν είναι τα ίδια."
+msgstr "Ξ¤Ξ± Ξ΄ΟΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†Ξ± Ο€ΞΏΟ… ΞµΟ€ΞΉΞ»Ξ­Ο‡ΞΈΞ·ΞΊΞ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ο„Ξ± Ξ―Ξ΄ΞΉΞ±."
 
-#: plugins/diff/diff.c:499
+#: plugins/diff/diff.c:511
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
 "Please provide a valid file."
 msgstr ""
-"Το \"πρώτο\" αρχείο που επιλέχθηκε δεν υπάρχει.\n"
+"Ξ¤ΞΏ \"Ο€ΟΟΟ„ΞΏ\" Ξ±ΟΟ‡ΞµΞ―ΞΏ Ο€ΞΏΟ… ΞµΟ€ΞΉΞ»Ξ­Ο‡ΞΈΞ·ΞΊΞµ Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ.\n"
 "\n"
-"Παρακαλώ επιλέξτε ένα έγκυρο αρχείο."
+"Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο ΞµΟ€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ξ­Ξ½Ξ± Ξ­Ξ³ΞΊΟ…ΟΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ."
 
-#: plugins/diff/diff.c:508
+#: plugins/diff/diff.c:520
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
 "Please provide a valid file."
 msgstr ""
-"Το \"δεύτερο\" αρχείο που επιλέχθηκε δεν υπάρχει\n"
+"Ξ¤ΞΏ \"Ξ΄ΞµΟΟ„ΞµΟΞΏ\" Ξ±ΟΟ‡ΞµΞ―ΞΏ Ο€ΞΏΟ… ΞµΟ€ΞΉΞ»Ξ­Ο‡ΞΈΞ·ΞΊΞµ Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 "\n"
-"Παρακαλώ επιλέξτε ένα έγκυρο αρχείο."
+"Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο ΞµΟ€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ξ­Ξ½Ξ± Ξ­Ξ³ΞΊΟ…ΟΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ."
 
-#: plugins/diff/diff.c:516
-#, fuzzy
+#: plugins/diff/diff.c:528
 msgid "The two files you selected are the same."
-msgstr "Τα δύο έγγραφα που επιλέχθηκαν είναι τα ίδια."
+msgstr "Ξ¤Ξ± Ξ΄ΟΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†Ξ± Ο€ΞΏΟ… ΞµΟ€ΞΉΞ»Ξ­Ο‡ΞΈΞ·ΞΊΞ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ο„Ξ± Ξ―Ξ΄ΞΉΞ±."
 
-#: plugins/diff/diff.c:533
+#: plugins/diff/diff.c:546
 msgid "The \"first\" document contains no text."
-msgstr "Το \"πρώτο\" έγγραφο δεν περιέχει κείμενο."
+msgstr "Ξ¤ΞΏ \"Ο€ΟΟΟ„ΞΏ\" Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ Ξ΄ΞµΞ½ Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ."
 
-#: plugins/diff/diff.c:562
+#: plugins/diff/diff.c:581
 msgid "The \"second\" document contains no text."
-msgstr "Το \"δεύτερο\" έγγραφο δεν περιέχει κείμενο."
+msgstr "Ξ¤ΞΏ \"Ξ΄ΞµΟΟ„ΞµΟΞΏ\" Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ Ξ΄ΞµΞ½ Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:583
+#: plugins/diff/diff.c:607
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "gedit could not create a temporary file."
 msgstr ""
+"Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΟƒΟΞ³ΞΊΟΞΉΟƒΞ·Ο‚ Ο„Ο‰Ξ½ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ο‰Ξ½ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½.\n"
+"\n"
+"Ξ¤ΞΏ gedit Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ®ΟƒΞµΞΉ Ξ­Ξ½Ξ± Ο€ΟΞΏΟƒΟ‰ΟΞΉΞ½Ο Ξ±ΟΟ‡ΞµΞ―ΞΏ."
 
-#: plugins/diff/diff.c:601 plugins/diff/diff.c:614
+#: plugins/diff/diff.c:625 plugins/diff/diff.c:638
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "Error executing the diff command."
 msgstr ""
+"Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΟƒΟΞ³ΞΊΟΞΉΟƒΞ·Ο‚ Ο„Ο‰Ξ½ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ο‰Ξ½ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½.\n"
+"\n"
+"Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ·Ο‚ Ο„Ξ·Ο‚ ΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ diff."
 
-#: plugins/diff/diff.c:636
+#: plugins/diff/diff.c:660
 msgid "No differences were found between the selected documents."
-msgstr ""
+msgstr "Ξ”Ξµ Ξ²ΟΞ­ΞΈΞ·ΞΊΞ±Ξ½ Ξ΄ΞΉΞ±Ο†ΞΏΟΞ­Ο‚ ΞΌΞµΟ„Ξ±ΞΎΟ Ο„Ο‰Ξ½ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ο‰Ξ½ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½."
 
-#: plugins/diff/diff.c:677
+#: plugins/diff/diff.c:701
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "The result contains invalid UTF-8 data."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΟƒΟΞ³ΞΊΟΞΉΟƒΞ· Ο„Ο‰Ξ½ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ο‰Ξ½ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½.\n"
+"\n"
+"Ξ¤ΞΏ Ξ±Ο€ΞΏΟ„Ξ­Ξ»ΞµΟƒΞΌΞ± Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΌΞ® Ξ­Ξ³ΞΊΟ…ΟΞ± Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ξ± UTF-8."
 
-#: plugins/diff/diff.c:901
-#, fuzzy
+#: plugins/diff/diff.c:925
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
 "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
 msgstr ""
-"Δημιουργεί ένα έγγραφο διαφορών μεταξύ δύο εγγράφων ή αρχείων του δίσκου\n"
-"Για περισσότερες πληροφορίες για την diff, γράψτε \"man diff\" στη γραμμή "
-"εντολών\n"
+"Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³ΞµΞ― Ξ­Ξ½Ξ± Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ Ξ΄ΞΉΞ±Ο†ΞΏΟΟΞ½ ΞΌΞµΟ„Ξ±ΞΎΟ Ξ΄ΟΞΏ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½ Ξ® Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½ Ο„ΞΏΟ… Ξ΄Ξ―ΟƒΞΊΞΏΟ…\n"
+"\n"
+"Ξ“ΞΉΞ± Ο€ΞµΟΞΉΟƒΟƒΟΟ„ΞµΟΞµΟ‚ Ο€Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞ―ΞµΟ‚ Ξ³ΞΉΞ± Ο„Ξ· diff, Ξ³ΟΞ¬ΟΟ„Ξµ \"man diff\" ΟƒΟ„Ξ· Ξ³ΟΞ±ΞΌΞΌΞ® "
+"ΞµΞ½Ο„ΞΏΞ»ΟΞ½\n"
 
-#: plugins/diff/diff.c:904
+#: plugins/diff/diff.c:928
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
 msgstr ""
+"Copyright (C) 2000 - 2001 Chema Celorio \n"
+"Copyright (C) 2002 Paolo Maggi"
 
 #: plugins/diff/diff.glade2.h:1
-#, fuzzy
-msgid "Choose the files to compare."
-msgstr "Επιλέξτε αρχεία προς σύγκριση"
+msgid "*"
+msgstr "*"
 
 #: plugins/diff/diff.glade2.h:2
-#, fuzzy
-msgid "Compare files..."
-msgstr "¶νοιγμα Αρχείου ..."
+msgid "Choose the files to compare."
+msgstr "Ξ•Ο€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ξ±ΟΟ‡ΞµΞ―Ξ± Ο€ΟΞΏΟ‚ ΟƒΟΞ³ΞΊΟΞΉΟƒΞ·."
 
 #: plugins/diff/diff.glade2.h:3
-#, fuzzy
-msgid "F_rom document"
-msgstr "Από έγγραφο"
+msgid "Compare files..."
+msgstr "Ξ£ΟΞ³ΞΊΟΞΉΟƒΞ· Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½..."
 
 #: plugins/diff/diff.glade2.h:4
-msgid "First"
-msgstr "Πρώτο"
+msgid "F_rom document"
+msgstr "Ξ‘_Ο€Ο Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
 
 #: plugins/diff/diff.glade2.h:5
-#, fuzzy
-msgid "From _document"
-msgstr "Από έγγραφο"
+msgid "First"
+msgstr "Ξ ΟΟΟ„ΞΏ"
 
 #: plugins/diff/diff.glade2.h:6
-#, fuzzy
-msgid "From a _file on disk"
-msgstr "Από αρχείου στο δίσκου"
+msgid "First file from disk"
+msgstr "Ξ ΟΟΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ±Ο€Ο Ξ΄Ξ―ΟƒΞΊΞΏ"
 
 #: plugins/diff/diff.glade2.h:7
-#, fuzzy
-msgid "From a file o_n disk"
-msgstr "Από αρχείου στο δίσκου"
+msgid "First file from open document"
+msgstr "Ξ ΟΟΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ±Ο€Ο Ξ±Ξ½ΞΏΞΉΞΊΟ„Ο Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
 
 #: plugins/diff/diff.glade2.h:8
-msgid "Ignore _blanks (-b option)"
-msgstr ""
+msgid "From _document"
+msgstr "Ξ‘Ο€Ο _Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
 
 #: plugins/diff/diff.glade2.h:9
-msgid "Note that this option is only supported by GNU diff"
-msgstr ""
+msgid "From a _file on disk"
+msgstr "Ξ‘Ο€Ο Ξ±Ο_Ο‡ΞµΞ―ΞΏ ΟƒΟ„ΞΏ Ξ΄Ξ―ΟƒΞΊΞΏ"
 
 #: plugins/diff/diff.glade2.h:10
-msgid "Second"
-msgstr "Δεύτερο"
+msgid "From a file o_n disk"
+msgstr "Ξ‘Ο€Ο Ξ±ΟΟ‡ΞµΞ―ΞΏ Οƒ_Ο„ΞΏ Ξ΄Ξ―ΟƒΞΊΞΏ"
 
 #: plugins/diff/diff.glade2.h:11
+msgid "Ignore _blanks (-b option)"
+msgstr "ΞΞ± Ξ±Ξ³Ξ½ΞΏΞΏΟΞ½Ο„Ξ±ΞΉ_ΞΊΞµΞ½Ξ¬ (-b ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ®)"
+
+#: plugins/diff/diff.glade2.h:12
+msgid "Note that this option is only supported by GNU diff"
+msgstr "Ξ£Ξ·ΞΌΞµΞΉΟΟƒΟ„Ξµ ΟΟ„ΞΉ Ξ±Ο…Ο„Ξ® Ξ· ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ® Ο…Ο€ΞΏΟƒΟ„Ξ·ΟΞ―Ξ¶ΞµΟ„Ξ±ΞΉ ΞΌΟΞ½ΞΏ Ξ±Ο€Ο Ο„ΞΏ GNU diff"
+
+#: plugins/diff/diff.glade2.h:13
+msgid "Second"
+msgstr "Ξ”ΞµΟΟ„ΞµΟΞΏ"
+
+#: plugins/diff/diff.glade2.h:14
+msgid "Second file from disk"
+msgstr "Ξ”ΞµΟΟ„ΞµΟΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ±Ο€Ο Ξ΄Ξ―ΟƒΞΊΞΏ"
+
+#: plugins/diff/diff.glade2.h:15
+msgid "Second file from open document"
+msgstr "Ξ”ΞµΟΟ„ΞµΟΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ±Ο€Ο Ξ±Ξ½ΞΏΞΉΞΊΟ„Ο Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
+
+#: plugins/diff/diff.glade2.h:16
+msgid "Select the \"first\" file..."
+msgstr "Ξ•Ο€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ο„ΞΏ \"Ο€ΟΟΟ„ΞΏ\" Ξ±ΟΟ‡ΞµΞ―ΞΏ..."
+
+#: plugins/diff/diff.glade2.h:17
+msgid "Select the \"second\" file..."
+msgstr "Ξ•Ο€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ο„ΞΏ \"Ξ΄ΞµΟΟ„ΞµΟΞΏ\" Ξ±ΟΟ‡ΞµΞ―ΞΏ..."
+
+#: plugins/diff/diff.glade2.h:18
+msgid "Select the first file to compare"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο„ΞΏΟ… Ο€ΟΟΟ„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ³ΞΉΞ± ΟƒΟΞ³ΞΊΟΞΉΟƒΞ·"
+
+#: plugins/diff/diff.glade2.h:19
+msgid "Select the first open document to compare"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο„ΞΏΟ… Ο€ΟΟΟ„ΞΏΟ… Ξ±Ξ½ΞΏΞΉΞΊΟ„ΞΏΟ ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ… Ξ³ΞΉΞ± ΟƒΟΞ³ΞΊΟΞΉΟƒΞ·"
+
+#: plugins/diff/diff.glade2.h:20
+msgid "Select the second file to compare"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο„ΞΏΟ… Ξ΄ΞµΟΟ„ΞµΟΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ³ΞΉΞ± ΟƒΟΞ³ΞΊΟΞΉΟƒΞ·"
+
+#: plugins/diff/diff.glade2.h:21
+msgid "Select the second open document to compare"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο„ΞΏΟ… Ξ΄ΞµΟΟ„ΞµΟΞΏΟ… Ξ±Ξ½ΞΏΞΉΞΊΟ„ΞΏΟ ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ… Ξ³ΞΉΞ± ΟƒΟΞ³ΞΊΟΞΉΟƒΞ·"
+
+#: plugins/diff/diff.glade2.h:22
 msgid "Use the _unified output format (-u option)"
-msgstr ""
-
-#: plugins/diff/diff.glade2.h:12 plugins/time/time.glade2.h:3
-#: src/dialogs/gedit-preferences.glade2.h:70 src/dialogs/goto-line.glade2.h:3
-#: src/dialogs/program-location-dialog.glade2.h:3 src/dialogs/uri.glade2.h:3
-msgid "gtk-cancel"
-msgstr ""
-
-#: plugins/diff/diff.glade2.h:13 plugins/shell_output/shell_output.glade2.h:6
-#: plugins/time/time.glade2.h:4 src/dialogs/gedit-preferences.glade2.h:71
-#: src/dialogs/uri.glade2.h:4
-msgid "gtk-help"
-msgstr ""
-
-#: plugins/diff/diff.glade2.h:14 plugins/shell_output/shell_output.glade2.h:7
-#: plugins/time/time.glade2.h:5 src/dialogs/gedit-preferences.glade2.h:72
-#: src/dialogs/goto-line.glade2.h:4
-#: src/dialogs/program-location-dialog.glade2.h:4
-msgid "gtk-ok"
-msgstr ""
+msgstr "Ξ§ΟΞ®ΟƒΞ· Ο„ΞΏΟ… _ΞµΞ½ΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½ΞΏΟ… Ο„ΟΟ€ΞΏΟ… Ξ±Ο€ΞΏΟ„ΞµΞ»Ξ­ΟƒΞΌΞ±Ο„ΞΏΟ‚ (-u ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ®)"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
-msgstr ""
+msgstr "_Ξ‘ΟΞ―ΞΈΞΌΞ·ΟƒΞ· Ξ›Ξ­ΞΎΞµΟ‰Ξ½"
 
 #: plugins/docinfo/docinfo.c:49
-#, fuzzy
 msgid "Get info on current document"
-msgstr "Αποστολή τρέχοντος εγγράφου μέσω ηλ. ταχυδρομείου"
+msgstr "Ξ›Ξ®ΟΞ· Ο€Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞΉΟΞ½ ΟƒΟ„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
 
 #: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
 msgid "Word count"
-msgstr ""
+msgstr "Ξ‘ΟΞ―ΞΈΞΌΞ·ΟƒΞ· Ξ›Ξ­ΞΎΞµΟ‰Ξ½"
 
 #: plugins/docinfo/docinfo.c:156
-#, fuzzy
 msgid "_Update"
-msgstr "Επικόλληση"
+msgstr "_Ξ•Ξ½Ξ·ΞΌΞ­ΟΟ‰ΟƒΞ·"
 
 #: plugins/docinfo/docinfo.c:366
 msgid ""
@@ -304,321 +720,305 @@ msgid ""
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
+"Ξ— Ο€ΟΟΟƒΞΈΞµΟ„Ξ· Ξ»ΞµΟ„ΞΏΟ…ΟΞ³Ξ»ΞΉΞ± Ξ±ΟΞ―ΞΈΞΌΞ·ΟƒΞ·Ο‚ Ξ»Ξ­ΞΎΞµΟ‰Ξ½ Ξ±Ξ½Ξ±Ξ»ΟΞµΞΉ Ο„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ ΞΊΞ±ΞΉ "
+"Ο…Ο€ΞΏΞ»ΞΏΞ³Ξ―Ξ¶ΞµΞΉ Ο„ΞΏΞ½ Ξ±ΟΞΉΞΈΞΌΟ Ο„Ο‰Ξ½ Ξ»Ξ­ΞΎΞµΟ‰Ξ½, Ξ³ΟΞ±ΞΌΞΌΟΞ½, Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΟ‰Ξ½ ΞΊΞ±ΞΉ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΟ‰Ξ½ Ο‡Ο‰ΟΞ―Ο‚ "
+"ΞΊΞµΞ½Ξ¬ ΟƒΞµ Ξ±Ο…Ο„Ο ΞΊΞ±ΞΉ Ο€ΟΞΏΞ²Ξ¬Ξ»Ξ»ΞµΞΉ Ο„ΞΏ Ξ±Ο€ΞΏΟ„Ξ­Ξ»ΞµΟƒΞΌΞ±."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
-#: plugins/shell_output/shell_output.c:424
-#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:540
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
+#: plugins/shell_output/shell_output.c:553
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:571
 msgid "Copyright (C) 2002 - Paolo Maggi"
-msgstr ""
+msgstr "Copyright (C) 2002 - Paolo Maggi"
 
 #: plugins/docinfo/docinfo.glade2.h:1
 msgid "0"
-msgstr ""
+msgstr "0"
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "Bytes"
-msgstr ""
+msgstr "Bytes"
 
 #: plugins/docinfo/docinfo.glade2.h:3
 msgid "Characters (no spaces)"
-msgstr ""
+msgstr "Ξ§Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚ (Ο‡Ο‰ΟΞ―Ο‚ ΞΊΞµΞ½Ξ¬)"
 
 #: plugins/docinfo/docinfo.glade2.h:4
 msgid "Characters (with spaces)"
-msgstr ""
+msgstr "Ξ§Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚ (ΞΌΞµ ΞΊΞµΞ½Ξ¬)"
 
 #: plugins/docinfo/docinfo.glade2.h:5
-#, fuzzy
 msgid "File Name"
-msgstr "όνομα αρχείου"
+msgstr "ΞΞ½ΞΏΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
-#, fuzzy
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
 msgid "Lines"
-msgstr "Γραμμή"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ­Ο‚"
 
 #: plugins/docinfo/docinfo.glade2.h:7
-#, fuzzy
 msgid "Update"
-msgstr "Επικόλληση"
+msgstr "Ξ•Ξ½Ξ·ΞΌΞ­ΟΟ‰ΟƒΞ·"
 
 #: plugins/docinfo/docinfo.glade2.h:8
 msgid "Words"
-msgstr ""
+msgstr "Ξ›Ξ­ΞΎΞµΞΉΟ‚"
 
 #: plugins/docinfo/docinfo.glade2.h:9
-#, fuzzy
 msgid "gedit: Document Info plugin"
-msgstr "gedit: ¶ρθρωμα διαφορών αρχείων"
+msgstr "gedit: Document Info plugin"
 
-#: plugins/docinfo/docinfo.glade2.h:10
-#: plugins/shell_output/shell_output.glade2.h:5 src/dialogs/replace.glade2.h:9
-msgid "gtk-close"
-msgstr ""
-
-#: plugins/sample/sample.c:41
-#, fuzzy
+#: plugins/sample/sample.c:43
 msgid "Insert User _Name"
-msgstr "Εισαγωγή Ώρας"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ®_ΞΏΞ½ΟΞΌΞ±Ο„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ· "
 
-#: plugins/sample/sample.c:44
-#, fuzzy
+#: plugins/sample/sample.c:46
 msgid "Insert the user name at the cursor position"
-msgstr "Εισαγωγή τρέχουσας ημ/νίας και ώρας"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο„ΞΏΟ… ΞΏΞ½ΟΞΌΞ±Ο„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ· ΟƒΟ„Ξ· ΞΈΞ­ΟƒΞ· Ξ΄ΟΞΏΞΌΞ­Ξ±"
 
-#: plugins/sample/sample.c:148
-#, fuzzy
+#: plugins/sample/sample.c:172
 msgid "User name"
-msgstr "όνομα αρχείου"
+msgstr "ΞΞ½ΞΏΞΌΞ± Ο‡ΟΞ®ΟƒΟ„Ξ·"
 
-#: plugins/sample/sample.c:149
-#, fuzzy
+#: plugins/sample/sample.c:173
 msgid "Inserts the user name at the cursor position."
-msgstr "Εισαγωγή τρέχουσας ημ/νίας και ώρας"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο„ΞΏΟ… ΞΏΞ½ΟΞΌΞ±Ο„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ· ΟƒΟ„Ξ· ΞΈΞ­ΟƒΞ· Ξ΄ΟΞΏΞΌΞ­Ξ±."
 
-#: plugins/shell_output/shell_output.c:44
-#, fuzzy
+#: plugins/shell_output/shell_output.c:49
 msgid "Insert Shell _Output"
-msgstr "Εισαγωγής του αποτελέσματος του φλοιού στο έγγραφο"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ®Ο‚ Ο„ΞΏΟ… Ξ±Ο€ΞΏΟ„ΞµΞ»Ξ­ΟƒΞΌΞ±Ο„ΞΏΟ‚_Ο†Ξ»ΞΏΞΉΞΏΟ"
 
-#: plugins/shell_output/shell_output.c:47
-#, fuzzy
+#: plugins/shell_output/shell_output.c:52
 msgid "Insert the shell output in the current document"
-msgstr "Εισαγωγής του αποτελέσματος του φλοιού στο έγγραφο"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ®Ο‚ Ο„ΞΏΟ… Ξ±Ο€ΞΏΟ„ΞµΞ»Ξ­ΟƒΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ο†Ξ»ΞΏΞΉΞΏΟ ΟƒΟ„ΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
 
-#: plugins/shell_output/shell_output.c:151
-#: plugins/shell_output/shell_output.c:420
-#, fuzzy
+#: plugins/shell_output/shell_output.c:137
+msgid "An error occurs while running the selected command."
+msgstr "Ξ Ξ±ΟΞΏΟ…ΟƒΞΉΞ¬ΟƒΟ„Ξ·ΞΊΞµ ΟƒΟ†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ο…Ξ½ ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· Ο„Ξ·Ο‚ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ξ·Ο‚ ΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚."
+
+#: plugins/shell_output/shell_output.c:187
+#: plugins/shell_output/shell_output.c:550
 msgid "Shell output"
-msgstr "Αποτέλεσμα Φλοιού"
+msgstr "Ξ‘Ο€ΞΏΟ„Ξ­Ξ»ΞµΟƒΞΌΞ± Ξ¦Ξ»ΞΏΞΉΞΏΟ"
 
-#: plugins/shell_output/shell_output.c:164
+#: plugins/shell_output/shell_output.c:200
 msgid "_Run"
-msgstr ""
+msgstr "_Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ·"
 
-#: plugins/shell_output/shell_output.c:252
+#: plugins/shell_output/shell_output.c:360
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"Η εισαγωγή εντολής φλοιού είναι κενή.\n"
+"Ξ— ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® ΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ Ο†Ξ»ΞΏΞΉΞΏΟ ΞµΞ―Ξ½Ξ±ΞΉ ΞΊΞµΞ½Ξ®.\n"
 "\n"
-"Παρακαλώ, εισάγετε μια έγκυρη εντολή φλοιού."
+"Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο, ΞµΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ ΞΌΞΉΞ± Ξ­Ξ³ΞΊΟ…ΟΞ· ΞµΞ½Ο„ΞΏΞ»Ξ® Ο†Ξ»ΞΏΞΉΞΏΟ."
 
-#: plugins/shell_output/shell_output.c:281
-#, fuzzy
+#: plugins/shell_output/shell_output.c:389
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"Η εισαγωγή εντολής φλοιού είναι κενή.\n"
+"Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· ΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚ Ο†Ξ»ΞΏΞΉΞΏΟ .\n"
 "\n"
-"Παρακαλώ, εισάγετε μια έγκυρη εντολή φλοιού."
+"Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο, ΞµΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ ΞΌΞΉΞ± Ξ­Ξ³ΞΊΟ…ΟΞ· ΞµΞ½Ο„ΞΏΞ»Ξ® Ο†Ξ»ΞΏΞΉΞΏΟ."
 
-#: plugins/shell_output/shell_output.c:334
-#, fuzzy
-msgid "An error occurs while running the selected command."
+#: plugins/shell_output/shell_output.c:551
+msgid "Execute an external program and insert its output in a new document."
 msgstr ""
-"Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου: \n"
-"\n"
-"%s"
-
-#: plugins/shell_output/shell_output.c:421
-#, fuzzy
-msgid ""
-"Execute a program and insert its output in the current document at the "
-"current cursor position"
-msgstr "Εισαγωγή τρέχουσας ημ/νίας και ώρας"
+"Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· ΞµΞ½ΟΟ‚ ΞµΞΎΟ‰Ο„ΞµΟΞΉΞΊΞΏΟ Ο€ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚ ΞΊΞ±ΞΉ ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο„ΞΏΟ… Ξ±Ο€ΞΏΟ„ΞµΞ»Ξ­ΟƒΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… ΟƒΞµ "
+"Ξ½Ξ­ΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
 
 #: plugins/shell_output/shell_output.glade2.h:1
-msgid "Specify the working directory and the command you want to run."
-msgstr ""
-"Καθορίστε τον κατάλογο εργασίας και την εντολή που θέλετε να εκτελέσετε."
+msgid "Capture the command _output"
+msgstr "Ξ£ΟΞ»Ξ»Ξ·ΟΞ· Ο„ΞΏΟ… Ξ±Ο€ΞΏΟ„ΞµΞ»Ξ­ΟƒΞΌΞ±Ο„ΞΏΟ‚_ΞµΞ½Ο„ΞΏΞ»Ξ®Ο‚"
 
 #: plugins/shell_output/shell_output.glade2.h:2
-#, fuzzy
-msgid "_Shell command:"
-msgstr "Εντολή _φλοιού:"
+msgid "Specify the working directory and the command you want to run."
+msgstr "ΞΞ±ΞΈΞΏΟΞ―ΟƒΟ„Ξµ Ο„ΞΏΞ½ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚ ΞΊΞ±ΞΉ Ο„Ξ·Ξ½ ΞµΞ½Ο„ΞΏΞ»Ξ® Ο€ΞΏΟ… ΞΈΞ­Ξ»ΞµΟ„Ξµ Ξ½Ξ± ΞµΞΊΟ„ΞµΞ»Ξ­ΟƒΞµΟ„Ξµ."
 
 #: plugins/shell_output/shell_output.glade2.h:3
-msgid "_Working directory:"
-msgstr "Κατάλογος _Εργασίας:"
+msgid "_Shell command:"
+msgstr "_Ξ•Ξ½Ο„ΞΏΞ»Ξ® Ο†Ξ»ΞΏΞΉΞΏΟ:"
 
 #: plugins/shell_output/shell_output.glade2.h:4
+msgid "_Working directory:"
+msgstr "ΞΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ _Ξ•ΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚:"
+
+#: plugins/shell_output/shell_output.glade2.h:5
 msgid "gedit: Shell Output plugin"
-msgstr "gedit: ¶ρθρωμα Αποτελέσματος Φλοιού"
+msgstr "gedit: Ξ†ΟΞΈΟΟ‰ΞΌΞ± Ξ‘Ο€ΞΏΟ„ΞµΞ»Ξ­ΟƒΞΌΞ±Ο„ΞΏΟ‚ Ξ¦Ξ»ΞΏΞΉΞΏΟ"
 
-#: plugins/taglist/gedit-taglist-plugin.c:44
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
+msgid "Tag list plugin"
+msgstr "Ξ›Ξ―ΟƒΟ„Ξ± Ο€ΟΞΏΟƒΞΈΞ­Ο„Ο‰Ξ½ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³ΞΉΟΞ½"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tab you want to use"
+msgstr "Ξ•Ο€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ο„Ξ·Ξ½ ΞΏΞΌΞ¬Ξ΄Ξ± ΟƒΟ„Ξ·Ξ»ΟΞ½ Ο€ΞΏΟ… ΞµΟ€ΞΉΞΈΟ…ΞΌΞµΞ―Ο„Ξµ Ξ½Ξ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΞµΟ„Ξµ"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
+msgstr "Ξ£Ο…Ξ½Ξ΄Ο…Ξ±ΟƒΞΌΟΟ‚ ΞΞΌΞ¬Ξ΄Ο‰Ξ½ Tag"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr "ΞΞ½ΞΏΞΌΞ±ΟƒΟ„ΞΉΞΊΞ® Ξ»Ξ―ΟƒΟ„Ξ± Tags "
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:187
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Ξ”ΞΉΟ€Ξ»Ο ΞΊΞ»Ξ―ΞΊ ΟƒΞµ tag Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο„Ξ·Ο‚ ΟƒΟ„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:198
+msgid "Tags"
+msgstr "Tags"
+
+#: plugins/taglist/gedit-taglist-plugin.c:46
 msgid "Tag _List"
-msgstr ""
+msgstr "Ξ›Ξ―ΟƒΟ„Ξ±_Tag "
 
-#: plugins/taglist/gedit-taglist-plugin.c:47
-#, fuzzy
+#.
+#. #define MENU_ITEM_NAME		"TagList"
+#.
+#: plugins/taglist/gedit-taglist-plugin.c:51
 msgid "Show the tag list window"
-msgstr "Εμ_φάνιση σελιδοδεικτών"
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· Ο€Ξ±ΟΞ±ΞΈΟΟΞΏΟ… Ξ»Ξ―ΟƒΟ„Ξ±Ο‚ tag "
 
-#: plugins/taglist/gedit-taglist-plugin.c:140
+#: plugins/taglist/gedit-taglist-plugin.c:160
 msgid "Tag list"
-msgstr ""
+msgstr "Ξ›Ξ―ΟƒΟ„Ξ± Tag "
 
-#: plugins/taglist/gedit-taglist-plugin.c:141
+#: plugins/taglist/gedit-taglist-plugin.c:161
 msgid ""
 "The tag list plugin provides a method to easily insert into a document "
 "commonly used tabs/strings without having to type them."
 msgstr ""
+"Ξ— Ο€ΟΟΟƒΞΈΞµΟ„Ξ· Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± Ξ»Ξ―ΟƒΟ„Ξ±Ο‚ tag Ο€Ξ±ΟΞ­Ο‡ΞµΞΉ ΞΌΞΉΞ± ΞΌΞ­ΞΈΞΏΞ΄ΞΏ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΟΞΊΞΏΞ»Ξ· ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® "
+"ΟƒΟ…Ο‡Ξ½Ξ¬ Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ·ΞΌΞ­Ξ½Ο‰Ξ½ tabs/Ξ±Ξ»Ο†Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΟΞ½ Ο‡Ο‰ΟΞ―Ο‚ Ξ½Ξ± Ο‡ΟΞµΞΉΞ¬Ξ¶ΞµΟ„Ξ±ΞΉ Ξ· "
+"Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΟΞ³Ξ·ΟƒΞ· Ο„ΞΏΟ…Ο‚."
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:116
-#, fuzzy
-msgid "Tag list plugin"
-msgstr "gedit: ¶ρθρωμα διαφορών αρχείων"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:134
-msgid "Select the group of tab you want to use."
-msgstr ""
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:158
-#, fuzzy
-msgid "Double-click on a tag to insert it in the current document."
-msgstr "Εισαγωγής του αποτελέσματος του φλοιού στο έγγραφο"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:169
-msgid "Tags"
-msgstr ""
-
-#: plugins/time/time.c:44
-#, fuzzy
+#: plugins/time/time.c:45
 msgid "_Insert Date/Time"
-msgstr "Εισαγωγή Ώρας"
+msgstr "_Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® ΞΟΞ±Ο‚/Ξ—ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ±Ο‚"
 
-#: plugins/time/time.c:47
-#, fuzzy
+#: plugins/time/time.c:48
 msgid "Insert current date and time at the cursor position"
-msgstr "Εισαγωγή τρέχουσας ημ/νίας και ώρας"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο„ΟΞ­Ο‡ΞΏΟ…ΟƒΞ±Ο‚ Ξ·ΞΌ/Ξ½Ξ―Ξ±Ο‚ ΞΊΞ±ΞΉ ΟΟΞ±Ο‚ ΟƒΟ„Ξ· ΞΈΞ­ΟƒΞ· Ο„ΞΏΟ… Ξ΄ΟΞΏΞΌΞ­Ξ±"
 
-#: plugins/time/time.c:256
+#: plugins/time/time.c:274
 msgid "Available formats"
-msgstr ""
+msgstr "Ξ”ΞΉΞ±ΞΈΞ­ΟƒΞΉΞΌΞΏΞΉ Ο„ΟΟ€ΞΏΞΉ"
 
-#: plugins/time/time.c:297 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:315 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
-msgstr ""
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ®Ο‚ Ξ·ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ±Ο‚/ΟΟΞ±Ο‚"
 
-#: plugins/time/time.c:537
-#, fuzzy
+#: plugins/time/time.c:568
 msgid "Insert Date/Time"
-msgstr "Εισαγωγή Ώρας"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® ΞΟΞ±Ο‚/Ξ—ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ±Ο‚"
 
-#: plugins/time/time.c:538
-#, fuzzy
+#: plugins/time/time.c:569
 msgid "Inserts current date and time at the cursor position."
-msgstr "Εισαγωγή τρέχουσας ημ/νίας και ώρας"
+msgstr "Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ο„ΟΞ­Ο‡ΞΏΟ…ΟƒΞ±Ο‚ Ξ·ΞΌ/Ξ½Ξ―Ξ±Ο‚ ΞΊΞ±ΞΉ ΟΟΞ±Ο‚ ΟƒΟ„Ξ· ΞΈΞ­ΟƒΞ· Ο„ΞΏΟ… Ξ΄ΟΞΏΞΌΞ­Ξ±."
 
 #: plugins/time/time.glade2.h:2
 msgid "Select the format to use when inserting date/time."
-msgstr ""
+msgstr "Ξ•Ο€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ο„ΞΏ Ο„ΟΟ€ΞΏ Ο€ΞΏΟ… ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® Ξ·ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ±Ο‚/ΟΟΞ±Ο‚."
 
-#: src/bonobo-mdi.c:525 src/bonobo-mdi.c:601 src/bonobo-mdi.c:1997
+#: src/bonobo-mdi.c:534 src/bonobo-mdi.c:1857
 #, c-format
 msgid "Activate %s"
-msgstr ""
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· %s"
 
-#: src/dialogs/gedit-dialog-goto-line.c:114
-#, fuzzy
+#: src/dialogs/gedit-dialog-goto-line.c:139
 msgid "Goto line..."
-msgstr "Επίσκεψη _Γραμμής..."
+msgstr "ΞΞµΟ„Ξ¬Ξ²Ξ±ΟƒΞ· ΟƒΞµ Ξ³ΟΞ±ΞΌΞΌΞ®..."
 
 #. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:124
-#, fuzzy
+#: src/dialogs/gedit-dialog-goto-line.c:149
 msgid "_Goto line"
-msgstr "Επίσκεψη Γραμμής"
+msgstr "_ΞΞµΟ„Ξ¬Ξ²Ξ±ΟƒΞ· ΟƒΞµ Ξ³ΟΞ±ΞΌΞΌΞ®"
 
-#: src/dialogs/gedit-dialog-goto-line.c:140
+#: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr ""
+"Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟΟΞµΟƒΞ·Ο‚ Ξ±Ο€Ξ±ΞΉΟ„ΞΏΟΞΌΞµΞ½Ο‰Ξ½ Ξ³ΟΞ±Ο†ΞΉΞΊΟΞ½ ΟƒΟ…ΟƒΟ„Ξ±Ο„ΞΉΞΊΟΞ½ ΞΌΞ­ΟƒΞ± ΟƒΟ„Ξ· ΞΌΞµΟ„Ξ¬Ξ²Ξ±ΟƒΞ· "
+"ΟƒΞµ_Ξ³ΟΞ±ΞΌΞΌΞ®.glade2.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:47
-#, fuzzy
-msgid "Plugin"
-msgstr "Αρ_θρώματα"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:48
-msgid "Load"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:314
-#, fuzzy
-msgid "Module file name"
-msgstr "όνομα αρχείου"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:315
-msgid "Author(s)"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:446
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:454
-#, fuzzy
-msgid "Plugin Manager"
-msgstr "Διαχειριστής Αρθρωμάτων Κειμενογράφου"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:481
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:571
-msgid "Could not create the Plugin Manager dialog"
-msgstr ""
-
-#: src/dialogs/gedit-dialog-replace.c:167 src/dialogs/replace.glade2.h:3
-#: src/gedit-ui.xml.h:56
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:172 src/dialogs/replace.glade2.h:2
+#: src/gedit-ui.xml.h:53
 msgid "Replace"
-msgstr "Αντικατάσταση"
+msgstr "Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
-#: src/dialogs/gedit-dialog-replace.c:178
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:183
 msgid "Replace _All"
-msgstr "Αντικατάσταση Όλων"
+msgstr "Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· _ΞΞ»Ο‰Ξ½"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:105
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:129
+#: src/gedit-ui.xml.h:98
 msgid "_Replace"
-msgstr "Αντικατάσταση"
+msgstr "_Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
-#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:275 src/gedit-ui.xml.h:23
 msgid "Find"
-msgstr "Αναζήτηση"
+msgstr "Ξ‘Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·"
 
-#: src/dialogs/gedit-dialog-replace.c:469
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:695
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:474
+#: src/dialogs/gedit-dialog-replace.c:545
+#: src/dialogs/gedit-dialog-replace.c:722
+#, c-format
 msgid "The text \"%s\" was not found."
-msgstr "Το αρχείο %s δε βρέθηκε."
+msgstr "Ξ¤ΞΏ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ \"%s\" Ξ΄Ξµ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ."
 
-#: src/dialogs/gedit-dialog-replace.c:704
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:731
+#, c-format
 msgid "Found and replaced %d occurences."
-msgstr "Βρέθηκαν και αντικαταστάθηκαν %i εμφανίσεις."
+msgstr "Ξ’ΟΞ­ΞΈΞ·ΞΊΞ±Ξ½ ΞΊΞ±ΞΉ Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ±ΟƒΟ„Ξ¬ΞΈΞ·ΞΊΞ±Ξ½ %d ΞµΞΌΟ†Ξ±Ξ½Ξ―ΟƒΞµΞΉΟ‚."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:73
-#, fuzzy
-msgid "Set program location ..."
-msgstr "gedit: Καθορισμός θέσης προγράμματος..."
+#: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
+msgid "Open from URI"
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±Ο€Ο URI"
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:95
-msgid ""
-"Could not find the required widgets inside program-location-dialog.glade2.\n"
+#: src/dialogs/gedit-plugin-manager.c:53
+msgid "Plugin"
+msgstr "Ξ ΟΟΟƒΞΈΞµΟ„Ξ· Ξ›ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±"
+
+#: src/dialogs/gedit-plugin-manager.c:54
+msgid "Load"
+msgstr "Ξ¦ΟΟΟ„Ο‰ΟƒΞ·"
+
+#: src/dialogs/gedit-plugin-manager.c:320
+msgid "Module file name"
+msgstr "ΞΞ½ΞΏΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³ΞΉΞΊΞ®Ο‚ ΞΌΞΏΞ½Ξ¬Ξ΄Ξ±Ο‚"
+
+#: src/dialogs/gedit-plugin-manager.c:321
+msgid "Author(s)"
+msgstr "Ξ£Ο…Ξ³Ξ³ΟΞ±Ο†Ξ­Ξ±Ο‚(ΞµΞ―Ο‚)"
+
+#: src/dialogs/gedit-plugin-manager.c:488
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
+"Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟΟΞµΟƒΞ·Ο‚ Ξ΄ΞΉΞ±Ο‡ΞµΞ―ΟΞΉΟƒΞ·Ο‚ Ο€ΟΟΟƒΞΈΞµΟ„Ο‰Ξ½ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³ΞΉΟΞ½.glade2,  ΞµΟ€Ξ±Ξ½ΞµΞ³ΞΊΞ±Ο„Ξ±ΟƒΟ„Ξ®ΟƒΟ„Ξµ "
+"Ο„ΞΏ gedit.\n"
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:101
+#: src/dialogs/gedit-plugin-manager.c:511
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+"ΞΞ® Ξ­Ξ³ΞΊΟ…ΟΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ glade  Ξ³ΞΉΞ± Ο„Ξ· Ξ΄ΞΉΞ±Ο‡ΞµΞ―ΟΞΉΟƒΞ· Ο€ΟΟΟƒΞΈΞµΟ„Ο‰Ξ½ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³ΞΉΟΞ½ -- Ξ΄ΞµΞ½ "
+"Ξ²ΟΞ­ΞΈΞ·ΞΊΞ±Ξ½ ΟΞ»Ξ± Ο„Ξ± Ξ³ΟΞ±Ο†ΞΉΞΊΞ¬ ΟƒΟ…ΟƒΟ„Ξ±Ο„ΞΉΞΊΞ¬.\n"
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:74
+msgid "Set program location ..."
+msgstr "ΞΞ±ΞΈΞΏΟΞΉΟƒΞΌΟΟ‚ ΞΈΞ­ΟƒΞ·Ο‚ Ο€ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚..."
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:96
+msgid "Could not find the required widgets inside program-location-dialog.glade2.\n"
+msgstr ""
+"Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟΟΞµΟƒΞ·Ο‚ Ξ±Ο€Ξ±ΞΉΟ„ΞΏΟΞΌΞµΞ½Ο‰Ξ½ Ξ³ΟΞ±Ο†ΞΉΞΊΟΞ½ ΟƒΟ…ΟƒΟ„Ξ±Ο„ΞΉΞΊΟΞ½ ΞΌΞ­ΟƒΞ± ΟƒΟ„ΞΏ Ξ΄ΞΉΞ¬Ξ»ΞΏΞ³ΞΏ-"
+"Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±Ο‚-Ο€ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚.glade2.\n"
+
+#: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
 msgid ""
 "The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
@@ -626,2367 +1026,1708 @@ msgid ""
 "\n"
 "Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
+"Ξ— Ο€ΟΟΟƒΞΈΞµΟ„Ξ· Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± %s Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ― Ξ­Ξ½Ξ± ΞµΞΎΟ‰Ο„ΞµΟΞΉΞΊΟ Ο€ΟΟΞ³ΟΞ±ΞΌΞΌΞ±, Ο„ΞΏ <tt>%s</"
+"tt>, Ξ³ΞΉΞ± Ξ½Ξ± ΞµΞΊΟ„ΞµΞ»Ξ­ΟƒΞµΞΉ Ο„Ξ·Ξ½ ΞµΟΞ³Ξ±ΟƒΞ―Ξ± Ο„Ξ·Ο‚.\n"
+"\n"
+"ΞΞ±ΞΈΞΏΟΞ―ΟƒΟ„Ξµ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ± Ο„ΞΏΟ… Ο€ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚ <tt>%s</tt>."
 
-#: src/dialogs/gedit-plugin-program-location-dialog.c:145
+#: src/dialogs/gedit-plugin-program-location-dialog.c:148
 msgid "The selected file is not executable."
-msgstr ""
+msgstr "Ξ¤ΞΏ ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞµΞΊΟ„ΞµΞ»Ξ­ΟƒΞΉΞΌΞΏ."
 
-#: src/dialogs/gedit-preferences-dialog.c:202
-#, fuzzy
-msgid "Toolbar"
-msgstr "Ανάγλυφη ε_ργαλειοθήκη"
-
-#: src/dialogs/gedit-preferences-dialog.c:203
-#: src/dialogs/gedit-preferences.glade2.h:34
-#, fuzzy
-msgid "Status bar"
-msgstr "Γράμμη κατά_στασης"
-
-#: src/dialogs/gedit-preferences-dialog.c:206
-#: src/dialogs/gedit-preferences.glade2.h:14
-msgid "MDI"
-msgstr ""
-
-#: src/dialogs/gedit-preferences-dialog.c:215
-#, fuzzy
+#: src/dialogs/gedit-preferences-dialog.c:207
 msgid "Font & Colors"
-msgstr "Γραμματοσειρές/Χρώματα"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ­Ο‚ & Ξ§ΟΟΞΌΞ±Ο„Ξ±"
 
-#: src/dialogs/gedit-preferences-dialog.c:217
-#: src/dialogs/gedit-preferences.glade2.h:35
+#: src/dialogs/gedit-preferences-dialog.c:209
+#: src/dialogs/gedit-preferences.glade2.h:34
 msgid "Tabs"
-msgstr ""
+msgstr "Ξ£Ο„Ξ®Ξ»ΞµΟ‚"
 
-#: src/dialogs/gedit-preferences-dialog.c:218
-#: src/dialogs/gedit-preferences.glade2.h:57
+#: src/dialogs/gedit-preferences-dialog.c:210
+#: src/dialogs/gedit-preferences.glade2.h:59
 msgid "Wrap mode"
-msgstr ""
+msgstr "ΞΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·Ο‚"
 
-#: src/dialogs/gedit-preferences-dialog.c:219
-#: src/dialogs/gedit-preferences.glade2.h:13
-#, fuzzy
+#: src/dialogs/gedit-preferences-dialog.c:211
+#: src/dialogs/gedit-preferences.glade2.h:19
 msgid "Line numbers"
-msgstr "Αριθμός γραμμής:"
+msgstr "Ξ‘ΟΞΉΞΈΞΌΞΏΞ― Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚"
 
-#: src/dialogs/gedit-preferences-dialog.c:221
-#: src/dialogs/gedit-preferences.glade2.h:27 src/gedit-ui.xml.h:61
+#: src/dialogs/gedit-preferences-dialog.c:213
+#: src/dialogs/gedit-preferences.glade2.h:29 src/gedit-ui.xml.h:58
 msgid "Save"
-msgstr "Αποθήκευση"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
+
+#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences.glade2.h:46 src/gedit-ui.xml.h:76
+msgid "Undo"
+msgstr "Ξ‘ΞΊΟΟΟ‰ΟƒΞ·"
 
 #: src/dialogs/gedit-preferences-dialog.c:222
-#: src/dialogs/gedit-preferences.glade2.h:52 src/gedit-ui.xml.h:81
-msgid "Undo"
-msgstr "Ακύρωση"
-
-#: src/dialogs/gedit-preferences-dialog.c:230
-#, fuzzy
 msgid "Page"
-msgstr "Σελίδες"
+msgstr "Ξ£ΞµΞ»Ξ―Ξ΄Ξ±"
 
-#: src/dialogs/gedit-preferences-dialog.c:237
-#, fuzzy
+#: src/dialogs/gedit-preferences-dialog.c:224
+msgid "Fonts"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ­Ο‚"
+
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "Manager"
+msgstr "Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚"
+
+#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Editor"
-msgstr "Έξοδος"
-
-#: src/dialogs/gedit-preferences-dialog.c:238
-#: src/dialogs/gedit-preferences.glade2.h:22 src/gedit-ui.xml.h:45
-msgid "Print"
-msgstr "Εκτύπωση"
+msgstr "Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®Ο‚"
 
 #: src/dialogs/gedit-preferences-dialog.c:240
-msgid "User interface"
-msgstr ""
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:309
+#: src/gedit-ui.xml.h:42
+msgid "Print"
+msgstr "Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ·"
 
-#: src/dialogs/gedit-preferences-dialog.c:307
+#: src/dialogs/gedit-preferences-dialog.c:241
+msgid "Plugins"
+msgstr "Ξ ΟΟΟƒΞΈΞµΟ„ΞµΟ‚ Ξ›ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―ΞµΟ‚"
+
+#: src/dialogs/gedit-preferences-dialog.c:308
 msgid "Cat_egories:"
-msgstr ""
+msgstr "ΞΞ±Ο„Ξ·_Ξ³ΞΏΟΞ―ΞµΟ‚:"
 
-#: src/dialogs/gedit-preferences-dialog.c:331 src/gedit-ui.xml.h:44
-#, fuzzy
+#: src/dialogs/gedit-preferences-dialog.c:330 src/gedit-ui.xml.h:41
 msgid "Preferences"
-msgstr "Κειμενογράφος: Προτιμίσεις"
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚"
 
-#: src/dialogs/gedit-preferences-dialog.c:498
+#: src/dialogs/gedit-preferences-dialog.c:569
 msgid "Categories"
+msgstr "ΞΞ±Ο„Ξ·Ξ³ΞΏΟΞ―ΞµΟ‚"
+
+#: src/dialogs/gedit-preferences-dialog.c:800
+msgid "Push this button to select the font to be used by the editor"
 msgstr ""
+"Ξ Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ Ο„Ξ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… ΞΈΞ± "
+"Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ±Ο€Ο Ο„ΞΏΞ½ ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®"
+
+#: src/dialogs/gedit-preferences-dialog.c:803
+msgid "Push this button to configure text color"
+msgstr "Ξ Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ξ½Ξ± ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ„Ξµ Ο„ΞΏ Ο‡ΟΟΞΌΞ± ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
+
+#: src/dialogs/gedit-preferences-dialog.c:805
+msgid "Push this button to configure background color"
+msgstr "Ξ ΞΉΞ­ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ο„Ξ· ΟΟΞΈΞΌΞΉΟƒΞ· Ο‡ΟΟΞΌΞ±Ο„ΞΏΟ‚ Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…"
+
+#: src/dialogs/gedit-preferences-dialog.c:807
+msgid ""
+"Push this button to configure the color in which the selected text should "
+"appear"
+msgstr ""
+"Ξ Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ξ½Ξ± ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ„Ξµ Ο„ΞΏ Ο‡ΟΟΞΌΞ± ΟƒΟ„ΞΏ ΞΏΟ€ΞΏΞ―ΞΏ ΞΈΞ± ΞµΞΌΟ†Ξ±Ξ½Ξ―Ξ¶ΞµΟ„Ξ±ΞΉ Ο„ΞΏ "
+"ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ"
+
+#: src/dialogs/gedit-preferences-dialog.c:810
+msgid ""
+"Push this button to configure the color in which the selected text should be "
+"marked"
+msgstr ""
+"Ξ Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ξ½Ξ± ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ„Ξµ Ο„ΞΏ Ο‡ΟΟΞΌΞ± ΟƒΟ„ΞΏ ΞΏΟ€ΞΏΞ―ΞΏ ΞΈΞ± ΟƒΞ·ΞΌΞµΞΉΟΞ½ΞµΟ„Ξ±ΞΉ Ο„ΞΏ "
+"ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏ ΞΊΞµΞ―ΞΌΞµΞ½ΞΏ"
+
+#: src/dialogs/gedit-preferences-dialog.c:1592
+#: src/dialogs/gedit-preferences-dialog.c:1594
+msgid "Courier 9"
+msgstr "Courier 9"
+
+#: src/dialogs/gedit-preferences-dialog.c:1601
+#: src/dialogs/gedit-preferences-dialog.c:1603
+msgid "Helvetica 11"
+msgstr "Helvetica 11"
+
+#: src/dialogs/gedit-preferences-dialog.c:1610
+#: src/dialogs/gedit-preferences-dialog.c:1612
+msgid "Helvetica 8"
+msgstr "Helvetica 8"
+
+#: src/dialogs/gedit-preferences-dialog.c:1733
+msgid "Push this button to select the font to be used to print the body"
+msgstr ""
+"Ξ Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ Ο„Ξ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… ΞΈΞ± "
+"Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ο„ΞΏΟ… ΟƒΟΞΌΞ±Ο„ΞΏΟ‚"
+
+#: src/dialogs/gedit-preferences-dialog.c:1735
+msgid "Push this button to select the font to be used to print the headers"
+msgstr ""
+"Ξ Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ Ο„Ξ·Ξ½ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… ΞΈΞ± "
+"Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ο„Ο‰Ξ½ ΞΊΞµΟ†Ξ±Ξ»Ξ―Ξ΄Ο‰Ξ½"
+
+#: src/dialogs/gedit-preferences-dialog.c:1737
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr ""
+"Ξ Ξ±Ο„Ξ®ΟƒΟ„Ξµ Ξ±Ο…Ο„Ο Ο„ΞΏ ΞΊΞΏΟ…ΞΌΟ€Ξ― Ξ³ΞΉΞ± Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ Ο„Ξ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… ΞΈΞ± "
+"Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ξ±ΟΞΉΞΈΞΌΟΞ½ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " _Wrap lines (at character boundaries)"
-msgstr ""
+msgstr "_Ξ‘Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ· Ξ³ΟΞ±ΞΌΞΌΟΞ½ (ΟƒΟ„Ξ± ΟΟΞΉΞ± Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΟ‰Ξ½)"
 
 #: src/dialogs/gedit-preferences.glade2.h:2
 msgid " character(s)"
-msgstr ""
+msgstr " Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚"
 
 #: src/dialogs/gedit-preferences.glade2.h:3
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr ""
+msgid " line(s)"
+msgstr " Ξ³ΟΞ±ΞΌΞΌΞ®(Ξ­Ο‚)"
 
 #: src/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
-msgid "Bottom"
-msgstr "_Κάτω"
-
-#: src/dialogs/gedit-preferences.glade2.h:5
-msgid "Button style"
+msgid ""
+"Always use UTF-8 encoding (faster) when creating a new file\n"
+"\n"
 msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:6
-msgid "Colors"
-msgstr "Χρώματα"
-
-#: src/dialogs/gedit-preferences.glade2.h:7
-#, fuzzy
-msgid "Create a _backup copy of files before saving"
-msgstr ""
-"Ο κειμενογράφος δεν μπόρεσε να δημιουργήσει προσωρινό αρχείο.\n"
+"ΞΞ± Ξ³Ξ―Ξ½ΞµΟ„Ξ±ΞΉ Ο€Ξ¬Ξ½Ο„Ξ± Ο‡ΟΞ®ΟƒΞ· ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ UTF-8 (Ξ³ΟΞ·Ξ³ΞΏΟΟΟ„ΞµΟΞΏ) ΞΊΞ±Ο„Ξ¬ Ο„Ξ· Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…\n"
 "\n"
 
-#: src/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
-msgid "Font"
-msgstr "Γραμματοσειρές"
-
-#: src/dialogs/gedit-preferences.glade2.h:9
-#, fuzzy
-msgid "Fonts & Colors"
-msgstr "Γραμματοσειρές/Χρώματα"
+#: src/dialogs/gedit-preferences.glade2.h:7
+msgid ""
+"Always use UTF-8 encoding (faster) when saving\n"
+"\n"
+msgstr ""
+"ΞΞ± Ξ³Ξ―Ξ½ΞµΟ„Ξ±ΞΉ Ο€Ξ¬Ξ½Ο„Ξ± Ο‡ΟΞ®ΟƒΞ· ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ UTF-8 (Ξ³ΟΞ·Ξ³ΞΏΟΟΟ„ΞµΟΞΏ) ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·\n"
+"\n"
 
 #: src/dialogs/gedit-preferences.glade2.h:10
-msgid "Icon and _text"
-msgstr ""
+msgid "Always use U_TF-8 encoding (faster)"
+msgstr "ΞΞ± Ξ³Ξ―Ξ½ΞµΟ„Ξ±ΞΉ Ο€Ξ¬Ξ½Ο„Ξ± Ο‡ΟΞ®ΟƒΞ· ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ U_TF-8 (Ξ³ΟΞ·Ξ³ΞΏΟΟΟ„ΞµΟΞΏ) "
 
 #: src/dialogs/gedit-preferences.glade2.h:11
-msgid "LOGO"
-msgstr ""
+msgid "Always use _UTF-8 encoding (faster)"
+msgstr "ΞΞ± Ξ³Ξ―Ξ½ΞµΟ„Ξ±ΞΉ Ο€Ξ¬Ξ½Ο„Ξ± Ο‡ΟΞ®ΟƒΞ· ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ _UTF-8 (Ξ³ΟΞ·Ξ³ΞΏΟΟΟ„ΞµΟΞΏ) "
 
 #: src/dialogs/gedit-preferences.glade2.h:12
-#, fuzzy
-msgid "Left"
-msgstr "Α_ριστερά"
+msgid "Colors"
+msgstr "Ξ§ΟΟΞΌΞ±Ο„Ξ±"
+
+#: src/dialogs/gedit-preferences.glade2.h:13
+msgid "Create a _backup copy of files before saving"
+msgstr "Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±_Ξ±Ξ½Ο„Ξ―Ξ³ΟΞ±Ο†ΞΏΟ… Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚ Ο€ΟΞΉΞ½ Ο„Ξ·Ξ½ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
+
+#: src/dialogs/gedit-preferences.glade2.h:14
+#: src/dialogs/gnome-print-font-picker.c:1014
+msgid "Font"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬"
 
 #: src/dialogs/gedit-preferences.glade2.h:15
-msgid "Modal"
-msgstr "Αποκλειστικό"
+msgid "Font used to print line _numbers:"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞµΞ―Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ξ±ΟΞΉΞΈΞΌΟΞ½_Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚"
 
 #: src/dialogs/gedit-preferences.glade2.h:16
-msgid "Notebook"
-msgstr "Τετράδιο"
+msgid "Font used to print the _body:"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ³ΞΉΞ± ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·_ΟƒΟΞΌΞ±Ο„ΞΏΟ‚"
 
 #: src/dialogs/gedit-preferences.glade2.h:17
-#, fuzzy
-msgid "Notebook _tab position:"
-msgstr "Θέση Στηλοθέτη Τετραδίου: "
+msgid "Fonts & Colors"
+msgstr "Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ­Ο‚ & Ξ§ΟΟΞΌΞ±Ο„Ξ±"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
-#, fuzzy
-msgid "Pick the background color"
-msgstr "Επιλογή χρώματος"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-#, fuzzy
-msgid "Pick the selected text color"
-msgstr "Αποκοπή επιλεγμένου"
+msgid "LOGO"
+msgstr "Ξ›ΞΞ“ΞΞ¤Ξ¥Ξ Ξ"
 
 #: src/dialogs/gedit-preferences.glade2.h:20
-#, fuzzy
-msgid "Pick the selection color"
-msgstr "Αποκοπή επιλεγμένου"
+msgid "Pick the background color"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο„ΞΏΟ… Ο‡ΟΟΞΌΞ±Ο„ΞΏΟ‚ Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…"
 
 #: src/dialogs/gedit-preferences.glade2.h:21
-#, fuzzy
-msgid "Pick the text color"
-msgstr "Επιλογή χρώματος"
+msgid "Pick the selected text color"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο„ΞΏΟ… ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ… Ο‡ΟΟΞΌΞ±Ο„ΞΏΟ‚ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
+
+#: src/dialogs/gedit-preferences.glade2.h:22
+msgid "Pick the selection color"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο‡ΟΟΞΌΞ±Ο„ΞΏΟ‚ Ο„Ξ·Ο‚ ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ®Ο‚"
 
 #: src/dialogs/gedit-preferences.glade2.h:23
-#, fuzzy
-msgid "Print _line numbers every"
-msgstr "Εκτύπωση αρι_θμών γραμμής κάθε:"
+msgid "Pick the text color"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ο‡ΟΟΞΌΞ±Ο„ΞΏΟ‚ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
 
 #: src/dialogs/gedit-preferences.glade2.h:24
-msgid "Print _page headers"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:25
-#, fuzzy
-msgid "Right"
-msgstr "_Δεξιά"
+msgid "Plugin manager"
+msgstr "Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ξ ΟΞΏΟƒΞΈΞ­Ο„Ο‰Ξ½ Ξ›ΞµΞΉΟ„ΞΏΟ…ΟΞ³ΞΉΟΞ½"
 
 #: src/dialogs/gedit-preferences.glade2.h:26
-msgid "S_elected text color:"
-msgstr ""
+msgid "Print _line numbers every"
+msgstr "Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ξ±ΟΞΉ_ΞΈΞΌΟΞ½ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ ΞΊΞ¬ΞΈΞµ"
+
+#: src/dialogs/gedit-preferences.glade2.h:27
+msgid "Print _page headers"
+msgstr "Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ·_ΞΊΞµΟ†Ξ±Ξ»Ξ―Ξ΄Ο‰Ξ½ ΟƒΞµΞ»Ξ―Ξ΄Ξ±Ο‚"
 
 #: src/dialogs/gedit-preferences.glade2.h:28
-msgid "Se_lection color:"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:29
-msgid "Set _tabs width equivalent to  "
-msgstr ""
+msgid "Print fonts"
+msgstr "Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΟΞ½"
 
 #: src/dialogs/gedit-preferences.glade2.h:30
-#, fuzzy
-msgid "Set limit on _undo levels to"
-msgstr "Καθορισμός ορίου των επιπέδων ακυρώσεων σε:"
+msgid "Se_lection color:"
+msgstr "Ξ§ΟΟΞΌΞ± ΞµΟ€_ΞΉΞ»ΞΏΞ³Ξ®Ο‚:"
 
 #: src/dialogs/gedit-preferences.glade2.h:31
-#, fuzzy
-msgid "Sho_w tooltips"
-msgstr "Εμφάνιση βοη_θημάτων"
+msgid "Selecte_d text color:"
+msgstr "Ξ•Ο€ΞΉΞ»ΞµΞ³ΞΌΞ­_Ξ½ΞΏ Ο‡ΟΟΞΌΞ± ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…:"
 
 #: src/dialogs/gedit-preferences.glade2.h:32
-#, fuzzy
-msgid "Show cursor _position"
-msgstr "_θέση δρομέα"
+msgid "Set _tabs width equivalent to  "
+msgstr "ΞΟΞΉΟƒΞΌΟΟ‚ Ο€Ξ»Ξ¬Ο„ΞΏΟ…Ο‚_ΟƒΟ„Ξ·Ξ»ΟΞ½ Ξ―ΟƒΞΏ ΞΌΞµ"
 
 #: src/dialogs/gedit-preferences.glade2.h:33
-msgid "Show overwrite _mode"
-msgstr ""
+msgid "Set limit on _undo actions to"
+msgstr "ΞΞ±ΞΈΞΏΟΞΉΟƒΞΌΟΟ‚ ΞΏΟΞ―ΞΏΟ… Ο„Ο‰Ξ½ ΞµΟ€ΞΉΟ€Ξ­Ξ΄Ο‰Ξ½_Ξ±Ξ½Ξ±ΞΉΟΞ­ΟƒΞµΟ‰Ξ½ ΟƒΞµ"
 
-#: src/dialogs/gedit-preferences.glade2.h:36
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid ""
-"The Font & Colors settings let you choose the font and the colors to be used "
+"The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
 msgstr ""
+"ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ & Ο‡ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ Ο„Ξ·Ξ½ "
+"Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ ΞΊΞ±ΞΉ Ο„Ξ± Ο‡ΟΟΞΌΞ±Ο„Ξ± Ο€ΞΏΟ… ΞΈΞ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞΏΟΞ½Ο„Ξ±ΞΉ ΟƒΟ„Ξ± Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞ± Ο„ΞΏΟ… "
+"ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®."
 
-#: src/dialogs/gedit-preferences.glade2.h:37
-msgid ""
-"The MDI (Multiple Document Interface) mode refers to the way more than one "
-"text document is displayed in gedit. \n"
-"If you choose the Notebook mode, you may then decide where you want the tabs "
-"to appear in the gedit window."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:39
+#: src/dialogs/gedit-preferences.glade2.h:36
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
 msgstr ""
+"Ξ— ΟΟΞΈΞΌΞΉΟƒΞ· Ξ±ΟΞΉΞΈΞΌΟΞ½ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ Ο„Ξ·Ξ½ Ο€ΟΞΏΞ²ΞΏΞ»Ξ® Ξ±ΟΞΉΞΈΞΌΟΞ½ "
+"Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΞΉΟƒΟ„ΞµΟΟ ΞΌΞ­ΟΞΏΟ‚ Ο„ΞΏΟ… Ο€Ξ±ΟΞ±ΞΈΟΟΞΏΟ…."
+
+#: src/dialogs/gedit-preferences.glade2.h:37
+msgid ""
+"The plugin manager settings let you choose which plugins you want to have "
+"loaded."
+msgstr ""
+"ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ΄ΞΉΞ±Ο‡ΞµΞ―ΟΞΉΟƒΞ·Ο‚ Ο€ΟΟΟƒΞΈΞµΟ„Ο‰Ξ½ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³ΞΉΟΞ½ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ "
+"Ο€ΞΏΞΉΞ­Ο‚ Ο€ΟΟΟƒΞΈΞµΟ„ΞµΟ‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―ΞµΟ‚ ΞµΟ€ΞΉΞΈΟ…ΞΌΞµΞ―Ο„Ξµ Ξ½Ξ± Ο†ΞΏΟΟ„Ο‰ΞΈΞΏΟΞ½."
+
+#: src/dialogs/gedit-preferences.glade2.h:38
+msgid ""
+"The print fonts settings let you choose the fonts to be used to print "
+"documents."
+msgstr ""
+"ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΟΞ½ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± ΞµΟ€ΞΉΞ»Ξ­ΞΎΞµΟ„Ξµ Ο„ΞΉΟ‚ "
+"Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ­Ο‚ Ο€ΞΏΟ… Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞΏΟΞ½Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ· ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½."
+
+#: src/dialogs/gedit-preferences.glade2.h:39
+msgid "The print page settings let you customize how gedit prints documents."
+msgstr ""
+"ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚ ΟƒΞµΞ»Ξ―Ξ΄Ξ±Ο‚ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± ΞΊΞ±ΞΈΞΏΟΞ―ΟƒΞµΟ„Ξµ Ο„ΞΏΞ½ Ο„ΟΟΟ€ΞΏ Ο€ΞΏΟ… Ο„ΞΏ "
+"gedit ΞµΞΊΟ„Ο…Ο€ΟΞ½ΞµΞΉ Ξ±ΟΟ‡ΞµΞ―Ξ±."
 
 #: src/dialogs/gedit-preferences.glade2.h:40
-msgid "The print settings let you customize how gedit prints documents."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:41
 msgid "The save settings let you customize how gedit saves files."
 msgstr ""
+"ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± ΞΊΞ±ΞΈΞΏΟΞ―ΟƒΞµΟ„Ξµ Ο„ΞΏΞ½ Ο„ΟΟΟ€ΞΏ Ο€ΞΏΟ… Ο„ΞΏ gedit "
+"Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΞµΞΉ Ξ±ΟΟ‡ΞµΞ―Ξ±."
+
+#: src/dialogs/gedit-preferences.glade2.h:41
+msgid "The tabs settings let you customize the tabs width."
+msgstr "ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ ΟƒΟ„Ξ·Ξ»ΟΞ½ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ…Ο„Ξ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± Ο€ΟΞΏΟƒΞ±ΟΞΌΟΟƒΞµΟ„Ξµ Ο„ΞΏ Ο€Ξ»Ξ¬Ο„ΞΏΟ‚ Ο„Ο‰Ξ½ ΟƒΟ„Ξ·Ξ»ΟΞ½."
 
 #: src/dialogs/gedit-preferences.glade2.h:42
-msgid ""
-"The status bar settings let you show or hide status bar and customize its "
-"appearance."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:43
-msgid "The tabs settings let you customize the tabs width."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:44
-msgid ""
-"The toolbar settings let you show or hide toolbar and customize its "
-"appearance."
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:45
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
 msgstr ""
+"ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ξ±Ξ½Ξ±Ξ―ΟΞµΟƒΞ·Ο‚ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ„Ξµ Ο„ΞΏ ΞΌΞ­Ξ³ΞΉΟƒΟ„ΞΏ "
+"Ξ±ΟΞΉΞΈΞΌΟ Ο„Ο‰Ξ½ ΞµΞ½ΞµΟΞ³ΞµΞΉΟΞ½ Ο€ΞΏΟ… Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ±Ξ½Ξ±ΞΉΟΞ­ΟƒΞµΞΉ."
 
-#: src/dialogs/gedit-preferences.glade2.h:46
+#: src/dialogs/gedit-preferences.glade2.h:43
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
 msgstr ""
+"ΞΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·Ο‚ ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­Ο€ΞΏΟ…Ξ½ Ξ½Ξ± Ο€ΟΞΏΟƒΞ±ΟΞΌΟΟƒΞµΟ„Ξµ Ο„ΞΏ Ο„ΟΟΟ€ΞΏ "
+"Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ·Ο‚ Ο„Ο‰Ξ½ Ξ³ΟΞ±ΞΌΞΌΟΞ½."
+
+#: src/dialogs/gedit-preferences.glade2.h:44
+msgid "U_se default theme colors"
+msgstr "Ξ§ΟΞ®_ΟƒΞ· ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ο‡ΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½ ΞΈΞ­ΞΌΞ±Ο„ΞΏΟ‚"
+
+#: src/dialogs/gedit-preferences.glade2.h:45
+msgid "U_se original file encoding if possible"
+msgstr "Ξ§ΟΞ®_ΟƒΞ· Ο„Ξ·Ο‚ Ξ±ΟΟ‡ΞΉΞΊΞ®Ο‚ ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½"
 
 #: src/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
-msgid "Toolbars"
-msgstr "Ανάγλυφη ε_ργαλειοθήκη"
+msgid "Use cu_rrent locale's encoding if possible"
+msgstr "Ξ§ΟΞ®ΟƒΞ· Ο„Ξ·Ο‚ Ο„ΟΞ­_Ο‡ΞΏΟ…ΟƒΞ±Ο‚ ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ locale Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½"
 
 #: src/dialogs/gedit-preferences.glade2.h:48
-#, fuzzy
-msgid "Top"
-msgstr "Ε_πάνω"
+msgid "Use current _locale's encoding if possible"
+msgstr "Ξ§ΟΞ®ΟƒΞ· Ο„Ξ·Ο‚ Ο„ΟΞ­Ο‡ΞΏΟ…ΟƒΞ±Ο‚_ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ locale Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½"
 
 #: src/dialogs/gedit-preferences.glade2.h:49
-msgid "Toplevel"
+msgid ""
+"Use current locale's encoding if possible when creating a new file\n"
+"\n"
 msgstr ""
+"Ξ§ΟΞ®ΟƒΞ· Ο„Ξ·Ο‚ Ο„ΟΞ­Ο‡ΞΏΟ…ΟƒΞ±Ο‚ ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ locale Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½ ΞΊΞ±Ο„Ξ¬ Ο„Ξ· Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…\n"
+"\n"
 
-#: src/dialogs/gedit-preferences.glade2.h:50
-msgid "U_se current locale only if the file already use it"
+#: src/dialogs/gedit-preferences.glade2.h:52
+msgid ""
+"Use current locale's encoding if possible when saving\n"
+"\n"
 msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:51
-msgid "U_se default theme colors"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:53
-msgid "Use current _locale when possible"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:54
-#, fuzzy
-msgid "When saving..."
-msgstr "Αλλαγή..."
+"Ξ§ΟΞ®ΟƒΞ· Ο„Ξ·Ο‚ Ο„ΟΞ­_Ο‡ΞΏΟ…ΟƒΞ±Ο‚ ΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ locale Ξ±Ξ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½ ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·\n"
+"\n"
 
 #: src/dialogs/gedit-preferences.glade2.h:55
-msgid "Wrap lines at _word boundaries"
-msgstr ""
+msgid "When creating a new file..."
+msgstr "ΞΞ±Ο„Ξ¬ Ο„Ξ· Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± ΞµΞ½ΟΟ‚ Ξ½Ξ­ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…..."
 
 #: src/dialogs/gedit-preferences.glade2.h:56
-msgid "Wrap lines at ch_aracter boundaries"
-msgstr ""
+msgid "When saving..."
+msgstr "ΞΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·..."
+
+#: src/dialogs/gedit-preferences.glade2.h:57
+msgid "Wrap lines at _word boundaries"
+msgstr "Ξ‘Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ· Ξ³ΟΞ±ΞΌΞΌΟΞ½ ΟƒΟ„Ξ± ΟΟΞΉΞ±_Ξ»Ξ­ΞΎΞ·Ο‚"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
-msgid "_According to system settings"
-msgstr ""
-
-#: src/dialogs/gedit-preferences.glade2.h:59
-#, fuzzy
-msgid "_Auto save current file every"
-msgstr "Αποθήκευση του τρέχοντος αρχείου"
+msgid "Wrap lines at ch_aracter boundaries"
+msgstr "Ξ‘Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ· Ξ³ΟΞ±ΞΌΞΌΟΞ½ ΟƒΟ„Ξ± ΟΟΞΉΞ± Ο‡Ξ±ΟΞ±_ΞΊΟ„Ξ®ΟΞ±"
 
 #: src/dialogs/gedit-preferences.glade2.h:60
-#, fuzzy
-msgid "_Background color:"
-msgstr "Παρασκήνιο: "
+msgid "_Autosave current file every"
+msgstr "_Ξ‘Ο…Ο„ΟΞΌΞ±Ο„Ξ· Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ο„ΟΞ­Ο‡ΞΏΞ½Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΊΞ¬ΞΈΞµ"
 
 #: src/dialogs/gedit-preferences.glade2.h:61
-#, fuzzy
-msgid "_Display line numbers"
-msgstr "Αριθμός γραμμής:"
+msgid "_Background color:"
+msgstr "_Ξ§ΟΟΞΌΞ± Ο€Ξ±ΟΞ±ΟƒΞΊΞ·Ξ½Ξ―ΞΏΟ…: "
 
 #: src/dialogs/gedit-preferences.glade2.h:62
-msgid "_Font used by the editor: "
-msgstr ""
+msgid "_Display line numbers"
+msgstr "_Ξ ΟΞΏΞ²ΞΏΞ»Ξ® Ξ±ΟΞΉΞΈΞΌΟΞ½ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚:"
 
-#: src/dialogs/gedit-preferences.glade2.h:63 src/gedit-ui.xml.h:96
-msgid "_Icon"
-msgstr ""
+#: src/dialogs/gedit-preferences.glade2.h:63
+msgid "_Font used by the editor: "
+msgstr "_Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ±Ο€Ο Ο„ΞΏΞ½ ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΟ„Ξ®: "
 
 #: src/dialogs/gedit-preferences.glade2.h:64
-#, fuzzy
-msgid "_MDI Mode:"
-msgstr "Ρυθμίσεις MDI"
+msgid "_Font used to print headers:"
+msgstr "_Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬ Ο€ΞΏΟ… Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞµΞ―Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ· ΞΊΞµΟ†Ξ±Ξ»Ξ―Ξ΄Ο‰Ξ½:"
 
 #: src/dialogs/gedit-preferences.glade2.h:65
 msgid "_Never wrap lines"
-msgstr ""
+msgstr "_ΞΞ± ΞΌΞ· Ξ³Ξ―Ξ½ΞµΟ„Ξ±ΞΉ Ο€ΞΏΟ„Ξ­ Ξ±Ξ½Ξ±Ξ΄Ξ―Ο€Ξ»Ο‰ΟƒΞ· Ξ³ΟΞ±ΞΌΞΌΟΞ½"
 
 #: src/dialogs/gedit-preferences.glade2.h:66
-#, fuzzy
-msgid "_Show status bar"
-msgstr "Εμφάνιση Γραμμής Κατάστασης"
+msgid "_Restore default fonts"
+msgstr "_Ξ•Ο€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΟΞ½: "
 
 #: src/dialogs/gedit-preferences.glade2.h:67
-#, fuzzy
-msgid "_Show toolbar"
-msgstr "_Κείμενο γραμμής εργαλείων"
+msgid "_Text color:"
+msgstr "_Ξ§ΟΟΞΌΞ± ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
 
 #: src/dialogs/gedit-preferences.glade2.h:68
-#, fuzzy
-msgid "_Text color:"
-msgstr "Ξ‘Ο€Ξ»ΟΟ‚ ΞΊΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ‚"
+msgid "_Use default theme font"
+msgstr "_Ξ§ΟΞ®ΟƒΞ· ΞµΞΎ ΞΏΟΞΉΟƒΞΌΞΏΟ ΞΈΞ­ΞΌΞ±Ο„ΞΏΟ‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚: "
 
 #: src/dialogs/gedit-preferences.glade2.h:69
-#, fuzzy
-msgid "_Use default theme font"
-msgstr "Εξ'ορισμού Γραμματοσειρά: "
+msgid "action(s)"
+msgstr "ΞµΞ½Ξ­ΟΞ³ΞµΞΉΞ±(ΞµΟ‚)"
 
-#: src/dialogs/gedit-preferences.glade2.h:73
-#, fuzzy
-msgid "level(s)"
-msgstr "επίπεδο(α)"
-
-#: src/dialogs/gedit-preferences.glade2.h:74
-#, fuzzy
-msgid "line(s)"
-msgstr "γραμμή(ές)"
-
-#: src/dialogs/gedit-preferences.glade2.h:75
-#, fuzzy
+#: src/dialogs/gedit-preferences.glade2.h:70
 msgid "minutes"
-msgstr "Γραμμή"
+msgstr "Ξ»ΞµΟ€Ο„Ξ¬"
 
+#: src/dialogs/gnome-print-font-dialog.c:107
+msgid "_Insert a new preview phrase."
+msgstr "_Ξ•ΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® ΞΌΞΉΞ± Ξ½Ξ­Ξ±Ο‚ Ο†ΟΞ¬ΟƒΞ·Ο‚ Ο€ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·Ο‚."
+
+#: src/dialogs/gnome-print-font-dialog.c:113
+msgid "Modify preview phrase..."
+msgstr "Ξ¤ΟΞΏΟ€ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο†ΟΞ¬ΟƒΞ·Ο‚ Ο€ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·Ο‚..."
+
+#: src/dialogs/gnome-print-font-dialog.c:167
+msgid "Preview"
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·"
+
+#: src/dialogs/gnome-print-font-dialog.c:180
+msgid "_Modify preview phrase..."
+msgstr "_Ξ¤ΟΞΏΟ€ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο†ΟΞ¬ΟƒΞ·Ο‚ Ο€ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ·Ο‚..."
+
+#: src/dialogs/gnome-print-font-dialog.c:243
+msgid "Font Selection"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚"
+
+#: src/dialogs/gnome-print-font-picker.c:89
+msgid "sans 12"
+msgstr "sans 12"
+
+#: src/dialogs/gnome-print-font-picker.c:90
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "Ξ‘Ξ±Ξ’Ξ²Ξ“Ξ³Ξ”Ξ΄Ξ•ΞµΞ–Ξ¶Ξ—Ξ·ΞΞΈΞ™ΞΉΞΞΊΞ›Ξ»ΞΞΌΞΞ½ΞΞΎΞΞΏΞ Ο€Ξ΅ΟΞ£ΟƒΞ¤Ο„Ξ¥Ο…Ξ¦Ο†Ξ§Ο‡Ξ¨ΟΞ©Ο‰"
+
+#: src/dialogs/gnome-print-font-picker.c:91
+msgid "Pick a Font"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® Ξ“ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚"
+
+#: src/dialogs/gnome-print-font-picker.c:176
+msgid "Title"
+msgstr "Ξ¤Ξ―Ο„Ξ»ΞΏΟ‚"
+
+#: src/dialogs/gnome-print-font-picker.c:177
+msgid "The title of the selection dialog box"
+msgstr "Ξ Ο„Ξ―Ο„Ξ»ΞΏΟ‚ Ο„ΞΏΟ… ΞΊΞΏΟ…Ο„ΞΉΞΏΟ Ξ΄ΞΉΞ±Ξ»ΟΞ³ΞΏΟ… ΞµΟ€ΞΉΞ»ΞΏΞ³Ξ®Ο‚"
+
+#: src/dialogs/gnome-print-font-picker.c:197
+msgid "Font name"
+msgstr "ΞΞ½ΞΏΞΌΞ± Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚"
+
+#: src/dialogs/gnome-print-font-picker.c:198
+msgid "Name of the selected font"
+msgstr "ΞΞ½ΞΏΞΌΞ± ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ξ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚"
+
+#: src/dialogs/gnome-print-font-picker.c:206
+msgid "Preview text"
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ· ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
+
+#: src/dialogs/gnome-print-font-picker.c:207
+msgid "Preview text shown in the dialog"
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ· ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ… Ο€ΞΏΟ… Ο€ΟΞΏΞ²Ξ¬Ξ»Ξ»ΞµΟ„Ξ±ΞΉ ΟƒΟ„ΞΏ ΞΊΞΏΟ…Ο„Ξ― Ξ΄ΞΉΞ±Ξ»ΟΞ³ΞΏΟ…"
+
+#: src/dialogs/gnome-print-font-picker.c:215
+msgid "Use font in label"
+msgstr "Ξ§ΟΞ®ΟƒΞ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ ΟƒΟ„Ξ·Ξ½ ΞµΟ„ΞΉΞΊΞ­Ο„Ξ±"
+
+#: src/dialogs/gnome-print-font-picker.c:216
+msgid "Use font in the label in font info mode"
+msgstr "Ξ§ΟΞ®ΟƒΞ· Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ ΟƒΟ„Ξ·Ξ½ ΞµΟ„ΞΉΞΊΞ­Ο„Ξ± ΟƒΞµ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± Ο€Ξ»Ξ·ΟΞΏΟ†. Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚."
+
+#: src/dialogs/gnome-print-font-picker.c:224
+msgid "Font size for label"
+msgstr "ΞΞ­Ξ³ΞµΞΈΞΏΟ‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ Ξ³ΞΉΞ± ΞµΟ„ΞΉΞΊΞ­Ο„Ξ±"
+
+#: src/dialogs/gnome-print-font-picker.c:225
+msgid "Font size for label in font info mode"
+msgstr "ΞΞ­Ξ³ΞµΞΈΞΏΟ‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚ Ξ³ΞΉΞ± ΞµΟ„ΞΉΞΊΞ­Ο„Ξ± ΟƒΞµ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± Ο€Ξ»Ξ·ΟΞΏΟ†. Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚."
+
+#: src/dialogs/gnome-print-font-picker.c:235
+msgid "Show size"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® ΞΌΞµΞ³Ξ­ΞΈΞΏΟ…Ο‚"
+
+#: src/dialogs/gnome-print-font-picker.c:236
+msgid "Show size in font info mode"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® ΞΌΞµΞ³Ξ­ΞΈΞΏΟ…Ο‚ ΟƒΞµ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± Ο€Ξ»Ξ·ΟΞΏΟ†. Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ¬Ο‚."
+
+#. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
-#, fuzzy
 msgid "Goto Line"
-msgstr "Επίσκεψη Γραμμής"
+msgstr "ΞΞµΟ„Ξ¬Ξ²Ξ±ΟƒΞ· ΟƒΞµ Ξ“ΟΞ±ΞΌΞΌΞ®"
 
 #: src/dialogs/goto-line.glade2.h:2
-#, fuzzy
 msgid "_Line number:"
-msgstr "Αριθμός γραμμής:"
+msgstr "_Ξ‘ΟΞΉΞΈΞΌΟΟ‚ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚:"
 
 #: src/dialogs/plugin-manager.glade2.h:1
-#, fuzzy
 msgid "C_onfigure plugin"
-msgstr "Αποκοπή επιλεγμένου"
+msgstr "Ξ΅ΟΞΈ_ΞΌΞΉΟƒΞ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚"
 
 #: src/dialogs/plugin-manager.glade2.h:2
-#, fuzzy
 msgid "Configure the selected plugin"
-msgstr "Αποκοπή επιλεγμένου"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½Ξ·Ο‚ Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚"
 
 #: src/dialogs/plugin-manager.glade2.h:3
-#, fuzzy
-msgid "D_etails"
-msgstr "Ηλεκτρονική Αλληλογραφία"
+msgid "De_tails"
+msgstr "Ξ›ΞµΟ€Ο„ΞΏ_ΞΌΞ­ΟΞµΞΉΞµΟ‚"
 
 #: src/dialogs/plugin-manager.glade2.h:4
-msgid ""
-"This is the Plugin Manager. Plugins are extra pieces of software that extend "
-"gedit capabilities. From here, you can choose which plugins you want to have "
-"loaded."
-msgstr ""
+msgid "_Description"
+msgstr "_Ξ ΞµΟΞΉΞ³ΟΞ±Ο†Ξ®"
 
 #: src/dialogs/plugin-manager.glade2.h:5
-#, fuzzy
-msgid "_Description"
-msgstr "Περιγραφή Αρθρώματος"
-
-#: src/dialogs/plugin-manager.glade2.h:6
 msgid "dialog1"
-msgstr ""
+msgstr "dialog1"
 
 #: src/dialogs/program-location-dialog.glade2.h:1
-#, fuzzy
 msgid "Set program location..."
-msgstr "gedit: Καθορισμός θέσης προγράμματος..."
+msgstr "ΞΞ±ΞΈΞΏΟΞΉΟƒΞΌΟΟ‚ ΞΈΞ­ΟƒΞ·Ο‚ Ο€ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚..."
 
 #: src/dialogs/program-location-dialog.glade2.h:2
 msgid "_Location to search for:"
-msgstr "_Θέση προς αναζήτηση:"
+msgstr "_ΞΞ­ΟƒΞ· Ο€ΟΞΏΟ‚ Ξ±Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·:"
 
-#: src/dialogs/program-location-dialog.glade2.h:5
+#: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
-msgstr "ετικέτα"
+msgstr "ΞµΟ„ΞΉΞΊΞ­Ο„Ξ±"
 
 #: src/dialogs/replace.glade2.h:1
-#, fuzzy
 msgid "Case sensi_tive"
-msgstr "_Διάκριση κεφαλαίων/πεζών"
+msgstr "Ξ”ΞΉΞ¬ΞΊ_ΟΞΉΟƒΞ· ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ο‰Ξ½/Ο€ΞµΞ¶ΟΞ½"
 
-#: src/dialogs/replace.glade2.h:2
-#, fuzzy
-msgid "Find Next"
-msgstr "Εύρεση Επόμενου"
+#: src/dialogs/replace.glade2.h:3
+msgid "Replace _with: "
+msgstr "Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·_ΞΌΞµ:"
 
 #: src/dialogs/replace.glade2.h:4
-#, fuzzy
-msgid "Replace All"
-msgstr "Αντικατάσταση Όλων"
+msgid "Search fro_m the beginning of the document"
+msgstr "Ξ‘Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ· Ξ±Ο€Ο Ξ±Ο_Ο‡Ξ® Ο„ΞΏΟ… ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ…"
 
 #: src/dialogs/replace.glade2.h:5
-#, fuzzy
-msgid "Replace _with: "
-msgstr "_Αντικατάσταση με:"
+msgid "Search from the c_ursor position"
+msgstr "Ξ‘Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ· Ξ±Ο€Ο Ο„Ξ· ΞΈΞ­ΟƒΞ· Ο„ΞΏΟ… _Ξ΄ΞµΞ―ΞΊΟ„Ξ·"
 
 #: src/dialogs/replace.glade2.h:6
-#, fuzzy
-msgid "Search fro_m the beginning of the document"
-msgstr "Αναζήτηση από αρ_χή του εγγράφου"
-
-#: src/dialogs/replace.glade2.h:7
-#, fuzzy
-msgid "Search from the c_ursor position"
-msgstr "Αναζήτηση από τη θέση του _δείκτη"
-
-#: src/dialogs/replace.glade2.h:8
 msgid "_Search for: "
-msgstr "_Εύρεση του: "
+msgstr "_Ξ•ΟΟΞµΟƒΞ· Ο„ΞΏΟ…: "
 
 #: src/dialogs/uri.glade2.h:1
 msgid "Enter the location (URI) of the file you would like to open:"
-msgstr "Εισάγετε την τοποθεσία (URI) του αρχείου που θέλετε να ανοίξετε:"
-
-#: src/dialogs/uri.glade2.h:2
-#, fuzzy
-msgid "Open from URI"
-msgstr "¶νοιγμα από _URI..."
-
-#: src/dialogs/uri.glade2.h:5
-msgid "gtk-open"
-msgstr ""
-
-#: src/gedit2.c:68
-#, fuzzy
-msgid "Show mdi debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης προβολών."
-
-#: src/gedit2.c:71
-msgid "Show commands debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης εντολών."
-
-#: src/gedit2.c:74
-msgid "Show document debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης εγγράφων."
-
-#: src/gedit2.c:77
-msgid "Show file debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης αρχείων."
-
-#: src/gedit2.c:80
-msgid "Show plugin debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης αρθρωμάτων."
-
-#: src/gedit2.c:83
-msgid "Show prefs debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης προτιμήσεων."
-
-#: src/gedit2.c:86
-msgid "Show printing debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης εκτυπώσεων."
-
-#: src/gedit2.c:89
-msgid "Show search debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης αναζήτησης."
-
-#: src/gedit2.c:92
-msgid "Show undo debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης ακυρώσεων."
-
-#: src/gedit2.c:95
-msgid "Show view debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης προβολών."
-
-#: src/gedit2.c:98
-msgid "Show recent debugging messages."
-msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης προσφάτων."
-
-#: src/gedit2.c:101
-msgid "Turn on all debugging messages."
-msgstr "Ενεργοποίηση όλων των μηνυμάτων εκσφαλμάτωσης."
-
-#: src/gedit2.c:159
-#, fuzzy
-msgid "The GNOME text editor"
-msgstr "Ξ‘Ο€Ξ»ΟΟ‚ ΞΊΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ‚"
+msgstr "Ξ•ΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ± (URI) Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο€ΞΏΟ… ΞΈΞ­Ξ»ΞµΟ„Ξµ Ξ½Ξ± Ξ±Ξ½ΞΏΞ―ΞΎΞµΟ„Ξµ:"
 
 #: src/gedit-commands.c:56
 msgid "Not yet implemented."
-msgstr ""
+msgstr "Ξ”ΞµΞ½ Ξ­Ο‡ΞµΞΉ Ξ±ΞΊΟΞΌΞ± ΞµΟ†Ξ±ΟΞΌΞΏΟƒΟ„ΞµΞ―."
 
 #: src/gedit-commands.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "The string \"%s\" has not been found."
-msgstr "Δε βρέθηκε το κείμενο."
+msgstr "Ξ¤ΞΏ Ξ±Ξ»Ο†Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΟ  \"%s\" Ξ΄ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ."
 
-#: src/gedit-commands.c:419
-msgid "Impossible to update gedit settings."
+#: src/gedit-commands.c:437
+msgid "translator_credits"
 msgstr ""
+"Ξ£Ο€ΟΟΞΏΟ‚ Ξ Ξ±Ο€Ξ±Ξ΄Ξ·ΞΌΞ·Ο„ΟΞ―ΞΏΟ… <spapadim+@cs.cmu.edu>\n"
+"Ξ£Ο…ΞΌΞµΟΞ½ (ΟƒΞ―ΞΌΞΏΟ‚) ΞΞµΞ½ΞΉΟ„Ξ­Ξ»Ξ»Ξ·Ο‚ <simos@hellug.gr>\n"
+"ΞΟΟƒΟ„Ξ±Ο‚ Ξ Ξ±Ο€Ξ±Ξ΄Ξ®ΞΌΞ±Ο‚ <pkst@gmx.net>"
 
-#: src/gedit-commands.c:508
+#: src/gedit-commands.c:462
 msgid "gedit"
-msgstr "ΞΞµΞΉΞΌΞµΞ½ΞΏΞ³ΟΞ¬Ο†ΞΏΟ‚"
+msgstr "gedit"
 
-#: src/gedit-commands.c:511
-#, fuzzy
-msgid "gedit is a small and lightweight text editor for Gnome"
+#: src/gedit-commands.c:463
+msgid ""
+"(C) 1998-2000 Evan Lawrence and Alex Robert\n"
+"(C) 2000-2002 Chema Celorio and Paolo Maggi"
 msgstr ""
-"O Κειμενογράφος είναι ένας μικρός και ελαφρύς διορθωτής κειμένου για το "
-"GNOME."
+"(C) 1998-2000 ΞΞ²Ξ±Ξ½ Ξ›ΟΟΞµΞ½Ο‚ ΞΊΞ±ΞΉ Ξ†Ξ»ΞµΞΎ Ξ΅ΟΞΌΟ€ΞµΟΟ„\n"
+"(C) 2000-2002 Ξ¤ΟƒΞ­ΞΌΞ± Ξ£ΞµΞ»ΟΟΞΉΞΏ ΞΊΞ±ΞΉ Ξ Ξ¬ΞΏΞ»ΞΏ ΞΞ¬Ξ³ΞΊΞΉ"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-commands.c:465
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "Ξ¤ΞΏ gedit ΞµΞ―Ξ½Ξ±ΞΉ Ξ­Ξ½Ξ±Ο‚ ΞΌΞΉΞΊΟΟΟ‚ ΞΊΞ±ΞΉ ΞµΞ»Ξ±Ο†ΟΟΟ‚ Ξ΄ΞΉΞΏΟΞΈΟ‰Ο„Ξ®Ο‚ ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏ GNOME."
+
+#: src/gedit-document.c:573 src/gedit-document.c:591
 #, c-format
 msgid "%s %d"
-msgstr ""
+msgstr "%s %d"
 
-#: src/gedit-document.c:521 src/gedit-document.c:532
+#: src/gedit-document.c:573 src/gedit-document.c:591
 msgid "Untitled"
-msgstr "Ανώνυμο"
+msgstr "Ξ‘Ξ½ΟΞ½Ο…ΞΌΞΏ"
 
-#: src/gedit-document.c:648 src/gedit-document.c:754
+#: src/gedit-document.c:579 src/gedit-document.c:626
+msgid "Invalid file name"
+msgstr "ΞΞ® Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…"
+
+#: src/gedit-document.c:756 src/gedit-document.c:914
 msgid "Invalid UTF-8 data"
-msgstr ""
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ± Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ξ± UTF-8 "
 
-#: src/gedit-document.c:948
+#: src/gedit-document.c:1149
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ· Ο€Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞΉΟΞ½ ΟƒΟ…ΞΌΞ²ΞΏΞ»ΞΉΞΊΞΏΟ Ξ΄ΞµΟƒΞΌΞΏΟ Ξ³ΞΉΞ± %s"
+
+#: src/gedit-document.c:1195
+msgid "The file has too many symbolic links."
+msgstr "Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ­Ο‡ΞµΞΉ Ο€Ξ¬ΟΞ± Ο€ΞΏΞ»Ξ»ΞΏΟΟ‚ ΟƒΟ…ΞΌΞ²ΞΏΞ»ΞΉΞΊΞΏΟΟ‚ Ξ΄ΞµΟƒΞΌΞΏΟΟ‚."
+
+#: src/gedit-document.c:1251
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr ""
+msgstr "Ξ— ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ο‡ΞµΞΉΟΞΉΟƒΟ„ΞµΞ― Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―ΞµΟ‚ %s: ΟƒΞµ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚."
 
-#: src/gedit-document.c:955
+#: src/gedit-document.c:1258
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
+"Ξ— ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ο‡ΞµΞΉΟΞΉΟƒΟ„ΞµΞ― Ξ±Ο…Ο„Ο Ο„ΞΏ ΞµΞ―Ξ΄ΞΏΟ‚ Ο„Ξ·Ο‚ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±Ο‚ ΟƒΞµ "
+"Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚."
 
-#: src/gedit-document.c:972
-#, fuzzy
-msgid "Could not create the backup copy of the file."
-msgstr ""
-"Ο κειμενογράφος δεν μπόρεσε να δημιουργήσει προσωρινό αρχείο.\n"
-"\n"
+#: src/gedit-document.c:1271
+msgid "Invalid filename."
+msgstr "ΞΞ® Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…."
 
-#: src/gedit-document.c:991
-#, fuzzy
+#: src/gedit-document.c:1411
 msgid ""
-"Make sure that the path you provided exists, and that you have the "
-"appropriate write permissions."
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
 msgstr ""
-"O Κειμενογράφος δε μπόρεσε να αποθηκεύσει το αρχείο: \n"
-"\n"
-" %s \n"
-"\n"
-"Παρακαλώ επιβεβαιώστε ότι το μονοπάτι που ορίσατε υπάρχει και ότι έχεται τα "
-"κατάλληλα δικαιώματα εγγραφής."
+"Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ±ΟΞΊΞµΟ„ΟΟ‚ Ο‡ΟΟΞΏΟ‚ ΟƒΟ„ΞΏ Ξ΄Ξ―ΟƒΞΊΞΏ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ….\n"
+"Ξ•Ξ»ΞµΟ…ΞΈΞµΟΟΟƒΟ„Ξµ ΞΊΞ¬Ο€ΞΏΞΉΞΏ Ο‡ΟΟΞΏ ΟƒΟ„ΞΏ Ξ΄Ξ―ΟƒΞΊΞΏ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-document.c:1029
+#: src/gedit-document.c:1416
 msgid ""
-"There is no enough disk space to save the file.\n"
-"Please, free some space on the disk and try again."
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
 msgstr ""
+"Ξ Ξ΄Ξ―ΟƒΞΊΞΏΟ‚ ΟƒΟ„ΞΏΞ½ ΞΏΟ€ΞΏΞ―ΞΏ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―Ο„Ξµ Ξ½Ξ± Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΟƒΞµΟ„Ξµ Ο„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ­Ο‡ΞµΞΉ Ο€ΞµΟΞΉΞΏΟΞΉΟƒΞΌΟ "
+"ΟƒΟ„Ξ± ΞΌΞµΞ³Ξ­ΞΈΞ· Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½. Ξ ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ Ξ½Ξ± Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΟƒΞµΟ„Ξµ Ξ­Ξ½Ξ± ΞΌΞΉΞΊΟΟΟ„ΞµΟΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ Ξ® "
+"Ξ΄ΞΉΞ±Ξ»Ξ­ΞΎΟ„Ξµ Ξ­Ξ½Ξ± Ξ΄Ξ―ΟƒΞΊΞΏ Ο‡Ο‰ΟΞ―Ο‚ Ο€ΞµΟΞΉΞΏΟΞΉΟƒΞΌΞΏΟΟ‚."
 
-#: src/gedit-document.c:1034
-msgid "The file is too big."
-msgstr ""
+#: src/gedit-document.c:1455
+msgid "Could not create a backup file."
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚."
 
-#: src/gedit-document.c:1184
-#, fuzzy
+#: src/gedit-document.c:1603
 msgid "It is not possible to revert an Untitled document"
-msgstr "Δε μπορείτε να επαναφέρετε ένα Ανώνυμο έγγραφο\n"
+msgstr "Ξ”Ξµ ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± ΞµΟ€Ξ±Ξ½Ξ±Ο†Ξ­ΟΞµΟ„Ξµ Ξ­Ξ½Ξ± Ξ‘Ξ½ΟΞ½Ο…ΞΌΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ"
 
-#: src/gedit-file.c:121
-msgid "Open File ..."
-msgstr "¶νοιγμα Αρχείου ..."
+#: src/gedit-file-selector-util.c:125
+msgid "Do_n't replace"
+msgstr "ΞΞ± _ΞΌΞ· Ξ³Ξ―Ξ½ΞµΞΉ Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·"
 
-#: src/gedit-file.c:131 src/gedit-file.c:638
-#, fuzzy, c-format
-msgid "Loaded file '%s'"
-msgstr "Φόρτωση του αρχείου %s"
-
-#: src/gedit-file.c:241 src/gedit-file.c:315
-#, fuzzy, c-format
-msgid "Saving file '%s' ..."
-msgstr "Αποθήκευση του %s Ως ..."
-
-#: src/gedit-file.c:262 src/gedit-file.c:322
-#, fuzzy
-msgid "The document has not been saved."
-msgstr "Το έγγραφο δεν αποθηκεύτηκε."
-
-#: src/gedit-file.c:275 src/gedit-file.c:320
-#, c-format
-msgid "File '%s' saved."
-msgstr ""
-
-#: src/gedit-file.c:307
-#, fuzzy
-msgid "Save as ..."
-msgstr "Αποθήκευση Ως..."
-
-#: src/gedit-file.c:473
-#, c-format
-msgid "Reverting file '%s' ..."
-msgstr ""
-
-#: src/gedit-file.c:486
-#, fuzzy
-msgid "The document has not been reverted."
-msgstr "Το έγγραφο δεν αποθηκεύτηκε."
-
-#: src/gedit-file.c:496
-#, c-format
-msgid "File '%s' reverted."
-msgstr ""
-
-#: src/gedit-file.c:539
-#, fuzzy, c-format
-msgid "Loading %d file..."
-msgstr "Φορτώθηκαν %i αρχεία"
-
-#: src/gedit-file.c:575
-#, c-format
-msgid "Loaded %i files"
-msgstr "Φορτώθηκαν %i αρχεία"
-
-#: src/gedit-file.c:692
-#, fuzzy
-msgid "Could not read data from stdin."
-msgstr ""
-"Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου: \n"
-"\n"
-"%s"
-
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:147
 #, c-format
 msgid ""
-"A file named ''%s'' already exists.\n"
+"A file named \"%s\" already exists.\n"
 "Do you want to replace it with the one you are saving?"
 msgstr ""
+"ΞΞ½Ξ± Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΌΞµ ΟΞ½ΞΏΞΌΞ± \"%s\" Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ®Ξ΄Ξ·.\n"
+"ΞΞ­Ξ»ΞµΟ„Ξµ Ξ½Ξ± Ξ³Ξ―Ξ½ΞµΞΉ Ο€ΟΞΏΟƒΟ€Ξ¬ΞΈΞµΞΉΞ± Ξ½Ξ± Ο„ΞΏ Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ±ΟƒΟ„Ξ®ΟƒΞµΟ„Ξµ ΞΌΞµ Ξ±Ο…Ο„Ο Ο€ΞΏΟ… Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΞµΟ„Ξµ?"
 
-#: src/gedit-file-selector-util.c:105
-#, fuzzy
-msgid "Do_n't replace"
-msgstr "Αντικατάσταση"
+#: src/gedit-file-selector-util.c:158
+#, c-format
+msgid ""
+"The file \"%s\" is read-only.\n"
+"Do you want to try to replace it with the one you are saving?"
+msgstr ""
+"Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ  \"%s\"  ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΟΞ½ΞΏ Ξ³ΞΉΞ± Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ·.\n"
+"ΞΞ­Ξ»ΞµΟ„Ξµ Ξ½Ξ± Ξ³Ξ―Ξ½ΞµΞΉ Ο€ΟΞΏΟƒΟ€Ξ¬ΞΈΞµΞΉΞ± Ξ½Ξ± Ο„ΞΏ Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ±ΟƒΟ„Ξ®ΟƒΞµΟ„Ξµ ΞΌΞµ Ξ±Ο…Ο„Ο Ο€ΞΏΟ… Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΞµΟ„Ξµ?"
 
-#: src/gedit-file-selector-util.c:459
-#, fuzzy
+#: src/gedit-file-selector-util.c:544
 msgid "Select a filename to save"
-msgstr "Επιλογή αρθρωμάτων για εγκατάσταση"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞµΞ½ΟΟ‚ ΞΏΞ½ΟΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ³ΞΉΞ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
 
-#: src/gedit-mdi.c:766
+#: src/gedit-file.c:150
+msgid "Open File ..."
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ‘ΟΟ‡ΞµΞ―ΞΏΟ… ..."
+
+#: src/gedit-file.c:176 src/gedit-file.c:831
+#, c-format
+msgid "Loaded file '%s'"
+msgstr "Ξ¦ΟΟΟ„Ο‰ΞΌΞ­Ξ½ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ '%s'"
+
+#: src/gedit-file.c:304 src/gedit-file.c:433
+#, c-format
+msgid "Saving file '%s' ..."
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… '%s' ... "
+
+#: src/gedit-file.c:332 src/gedit-file.c:448
+msgid "The document has not been saved."
+msgstr "Ξ¤ΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ Ξ΄ΞµΞ½ Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΟ„Ξ·ΞΊΞµ."
+
+#: src/gedit-file.c:345 src/gedit-file.c:445
+#, c-format
+msgid "File '%s' saved."
+msgstr "Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ '%s' Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΟ„Ξ·ΞΊΞµ."
+
+#: src/gedit-file.c:412
+msgid "Save as ..."
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ο‰Ο‚..."
+
+#: src/gedit-file.c:626
+#, c-format
+msgid "Reverting file '%s' ..."
+msgstr "Ξ“Ξ―Ξ½ΞµΟ„Ξ±ΞΉ ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… '%s' ..."
+
+#: src/gedit-file.c:639
+msgid "The document has not been reverted."
+msgstr "Ξ¤ΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ Ξ΄ΞµΞ½ ΞµΟ€Ξ±Ξ½Ξ±Ο†Ξ­ΟΞΈΞ·ΞΊΞµ."
+
+#: src/gedit-file.c:649
+#, c-format
+msgid "File '%s' reverted."
+msgstr "ΞΞ³ΞΉΞ½Ξµ ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… '%s' ."
+
+#: src/gedit-file.c:675
+#, c-format
+msgid "Loading %d files..."
+msgstr "Ξ¦ΟΟΟ„Ο‰ΟƒΞ· %d Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½..."
+
+#: src/gedit-file.c:711
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ \"%s\" Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ. ΞΞ­Ξ»ΞµΟ„Ξµ Ξ½Ξ± Ο„ΞΏ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ®ΟƒΞµΟ„Ξµ;"
+
+#: src/gedit-file.c:766
+#, c-format
+msgid "Loaded %i files"
+msgstr "Ξ¦ΞΏΟΟ„ΟΞΈΞ·ΞΊΞ±Ξ½ %i Ξ±ΟΟ‡ΞµΞ―Ξ±"
+
+#: src/gedit-file.c:889
+msgid "Could not read data from stdin."
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ·Ο‚ Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½ Ξ±Ο€Ο stdin."
+
+#: src/gedit-mdi.c:850
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
+"ΞΞ­Ξ»ΞµΟ„Ξµ Ξ½Ξ± Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΟƒΞµΟ„Ξµ Ο„ΞΉΟ‚ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ­Ο‚ Ο€ΞΏΟ… ΞΊΞ¬Ξ½Ξ±Ο„Ξµ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ \"%s\"? \n"
+"\n"
+"ΞΞΉ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ­Ο‚ ΞΈΞ± Ο‡Ξ±ΞΈΞΏΟΞ½ Ξ±Ξ½ Ξ΄ΞµΞ½ Ο„ΞΉΟ‚ Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟΟƒΞµΟ„Ξµ."
 
-#: src/gedit-mdi.c:771
+#: src/gedit-mdi.c:855
 msgid "Do_n't save"
-msgstr ""
+msgstr "Ξ_Ο‡ΞΉ Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
 
-#: src/gedit-mdi.c:790
+#: src/gedit-mdi.c:874
 msgid "_Don't quit"
-msgstr ""
+msgstr "_ΞΟ‡ΞΉ Ξ­ΞΎΞΏΞ΄ΞΏΟ‚"
 
-#: src/gedit-mdi.c:794
+#: src/gedit-mdi.c:878
 msgid "_Don't close"
-msgstr ""
+msgstr "_ΞΟ‡ΞΉ ΞΊΞ»ΞµΞ―ΟƒΞΉΞΌΞΏ"
 
-#: src/gedit-mdi.c:881
+#: src/gedit-mdi.c:968
 msgid "(modified)"
-msgstr "(τροποποιήθηκε)"
+msgstr "(Ο„ΟΞΏΟ€ΞΏΟ€ΞΏΞΉΞ®ΞΈΞ·ΞΊΞµ)"
 
-#: src/gedit-mdi.c:887
+#: src/gedit-mdi.c:974
 msgid "(readonly)"
-msgstr "(μόνο ανάγνωση)"
+msgstr "(ΞΌΟΞ½ΞΏ Ξ±Ξ½Ξ¬Ξ³Ξ½Ο‰ΟƒΞ·)"
 
-#: src/gedit-plugins-engine.c:159
-#, fuzzy, c-format
+#: src/gedit-plugins-engine.c:162
+#, c-format
 msgid "Error, unable to open module file '%s'\n"
-msgstr "Σφάλμα, άνοιγμα αρθρώματος αδύνατον, %s"
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΌΞΏΞ½Ξ¬Ξ΄Ξ±Ο‚ '%s'\n"
 
-#: src/gedit-plugins-engine.c:174
-#, fuzzy, c-format
+#: src/gedit-plugins-engine.c:177
+#, c-format
 msgid "Error, plugin '%s' does not contain init function."
-msgstr "Σφάλμα, το άρθρωμα δεν περιέχει τη συνάρτηση init_plugin."
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® '%s'  Ξ΄ΞµΞ½ Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ Ο„Ξ· ΟƒΟ…Ξ½Ξ¬ΟΟ„Ξ·ΟƒΞ· init."
 
-#: src/gedit-plugins-engine.c:184
-#, fuzzy, c-format
+#: src/gedit-plugins-engine.c:187
+#, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Σφάλμα, το άρθρωμα δεν περιέχει τη συνάρτηση init_plugin."
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® '%s'  Ξ΄ΞµΞ½ Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ Ο„Ξ· ΟƒΟ…Ξ½Ξ¬ΟΟ„Ξ·ΟƒΞ· ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚."
 
-#: src/gedit-plugins-engine.c:194
-#, fuzzy, c-format
+#: src/gedit-plugins-engine.c:197
+#, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Σφάλμα, το άρθρωμα δεν περιέχει τη συνάρτηση init_plugin."
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® '%s'  Ξ΄ΞµΞ½ Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ Ο„Ξ· ΟƒΟ…Ξ½Ξ¬ΟΟ„Ξ·ΟƒΞ· Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚."
 
-#: src/gedit-plugins-engine.c:224
+#: src/gedit-plugins-engine.c:227
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
-msgstr ""
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ±Ξ΄ΟΞ½Ξ±Ο„Ξ· Ξ· Ξ±ΟΟ‡ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ '%s' "
 
-#: src/gedit-plugins-engine.c:232
+#: src/gedit-plugins-engine.c:235
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr ""
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ· Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ± '%s' Ξ΄ΞµΞ½ ΞΊΞ±ΞΈΟΟΞΉΟƒΞµ Ξ­Ξ½Ξ± ΟΞ½ΞΏΞΌΞ±"
 
-#: src/gedit-plugins-engine.c:312
+#: src/gedit-plugins-engine.c:315
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr ""
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ±Ξ΄ΟΞ½Ξ±Ο„Ξ· Ξ· Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½ Ο„Ξ·Ο‚ Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ %s'"
 
-#: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
+#: src/gedit-plugins-engine.c:387 src/gedit-plugins-engine.c:445
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
-msgstr ""
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ±Ξ΄ΟΞ½Ξ±Ο„Ξ· Ξ· ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ %s'"
 
-#: src/gedit-plugins-engine.c:411
+#: src/gedit-plugins-engine.c:414
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
-msgstr ""
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ±Ξ΄ΟΞ½Ξ±Ο„Ξ· Ξ· Ξ±Ο€ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ '%s' "
 
-#: src/gedit-plugins-engine.c:483
+#: src/gedit-plugins-engine.c:489
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ±, Ξ±Ξ΄ΟΞ½Ξ±Ο„Ξ· Ξ· ΞµΞ½Ξ·ΞΌΞ­ΟΟ‰ΟƒΞ· ui Ο„Ξ·Ο‚ Ο€ΟΟΟƒΞΈΞµΟ„Ξ·Ο‚ Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ '%s' "
 
-#: src/gedit-print.c:166
+#: src/gedit-prefs-manager.c:323
+msgid "Cannot initialize preferences manager."
+msgstr "Ξ‘Ξ΄ΟΞ½Ξ±Ο„Ξ· Ξ· Ξ±ΟΟ‡ΞΉΞΊΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„Ξ·Ο‚ Ξ΄ΞΉΞ±Ο‡ΞµΞ―ΟΞΉΟƒΞ·Ο‚ Ο€ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΟ‰Ξ½."
+
+#: src/gedit-prefs-manager.c:1589
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr "Ξ¤ΞΏ Ξ±Ξ½Ξ±ΞΌΞµΞ½ΟΞΌΞµΞ½ΞΏ `%s' Ξ­Ξ»Ξ±Ξ²Ξµ `%s' Ξ³ΞΉΞ± Ο„ΞΏ ΞΊΞ»ΞµΞΉΞ΄Ξ― %s"
+
+#: src/gedit-print.c:191
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr ""
+"Ξ¤ΞΏ gedit  Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± ΞµΞΊΟ„Ο…Ο€ΟΟƒΞµΞΉ ΞµΟ€ΞµΞΉΞ΄Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ²ΟΞµΞ―\n"
+"ΞΌΞΉΞ± Ξ±Ο€Ο Ο„ΞΉΟ‚ Ξ±Ο€Ξ±ΞΉΟ„ΞΏΟΞΌΞµΞ½ΞµΟ‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΟƒΞµΞΉΟΞ­Ο‚."
 
-#: src/gedit-print.c:273
-#, fuzzy
-msgid "gedit - Print Document"
-msgstr "Εκτύπωση Εγγράφου"
-
-#: src/gedit-print.c:338
-#, fuzzy, c-format
+#: src/gedit-print.c:377
+#, c-format
 msgid "File: %s"
-msgstr "_Αρχείο"
+msgstr "Ξ‘ΟΟ‡ΞµΞ―ΞΏ: %s"
 
 #. Print right text
-#: src/gedit-print.c:343
-#, fuzzy, c-format
+#: src/gedit-print.c:384
+#, c-format
 msgid "Page: %d"
-msgstr "Σελίδα: %i/%i"
+msgstr "Ξ£ΞµΞ»Ξ―Ξ΄Ξ±: %d"
 
-#: src/gedit-print.c:476
-#, fuzzy
+#: src/gedit-print.c:517
 msgid "gedit - Print Preview"
-msgstr "Κειμενογράφος: Προεπισκόπιση Εκτύπωσης\n"
+msgstr "gedit: Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€ΞΉΟƒΞ· Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚"
 
-#: src/gedit-print.c:552
-#, fuzzy, c-format
+#: src/gedit-print.c:595
+#, c-format
 msgid ""
 "An error occurred while printing.\n"
 "\n"
 "%s,"
 msgstr ""
-"Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου: \n"
+"Ξ Ξ±ΟΞΏΟ…ΟƒΞΉΞ¬ΟƒΟ„Ξ·ΞΊΞµ ΟƒΟ†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·.\n"
 "\n"
 "%s"
 
-#: src/gedit-recent.c:486
-#, fuzzy, c-format
-msgid "Open %s"
-msgstr "¶νοιγμα αρχείου"
-
 #: src/gedit-ui.xml.h:1
-#, fuzzy
 msgid "About this application"
-msgstr "Αποκοπή επιλεγμένου"
+msgstr "Ξ ΞµΟΞ― Ο„Ξ·Ο‚ ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ®Ο‚"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr ""
+msgid "C_ustomize Statusbar"
+msgstr "Ξ ΟΞΏ_ΟƒΞ±ΟΞΌΞΏΞ³Ξ® Ξ“ΟΞ±ΞΌΞΌΞ®Ο‚ ΞΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:3
-#, fuzzy
-msgid "Add/Remove plugins"
-msgstr "Προσθήκη/Διαγραφή εγκατεστημένων αρθρωμάτων"
+msgid "Change the visibility of the statusbar in the current window"
+msgstr "Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® Ο„Ξ·Ο‚ ΞΏΟΞ±Ο„ΟΟ„Ξ·Ο„Ξ±Ο‚ Ο„Ξ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞΏ"
 
 #: src/gedit-ui.xml.h:4
-msgid "C_ustomize Status Bar"
-msgstr ""
+msgid "Change the visibility of the toolbar in the current window"
+msgstr "Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® Ο„Ξ·Ο‚ ΞΏΟΞ±Ο„ΟΟ„Ξ·Ο„Ξ±Ο‚ Ο„Ξ·Ο‚ ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·Ο‚ ΟƒΟ„ΞΏ Ο„ΟΞ­Ο‡ΞΏΞ½ Ο€Ξ±ΟΞ¬ΞΈΟ…ΟΞΏ"
 
 #: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the status bar in the current window"
-msgstr ""
+msgid "Clos_e All"
+msgstr "ΞΞ»ΞµΞ―_ΟƒΞΉΞΌΞΏ ΞΞ»Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:6
-msgid "Change the visibility of the toolbar in the current window"
-msgstr ""
+msgid "Close"
+msgstr "ΞΞ»ΞµΞ―ΟƒΞΉΞΌΞΏ"
 
 #: src/gedit-ui.xml.h:7
-#, fuzzy
-msgid "Clos_e All"
-msgstr "Κλείσιμο Όλων"
+msgid "Close All"
+msgstr "ΞΞ»ΞµΞ―ΟƒΞΉΞΌΞΏ ΞΞ»Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:8
-msgid "Close"
-msgstr "Κλείσιμο"
+msgid "Close all open files"
+msgstr "ΞΞ»ΞµΞ―ΟƒΞΉΞΌΞΏ ΟΞ»Ο‰Ξ½ Ο„Ο‰Ξ½ Ξ±Ξ½ΞΏΞΉΟ‡Ο„ΟΞ½ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:9
-#, fuzzy
-msgid "Close All"
-msgstr "Κλείσιμο Όλων"
+msgid "Close the current file"
+msgstr "ΞΞ»ΞµΞ―ΟƒΞΉΞΌΞΏ Ο„ΞΏΟ… Ο„ΟΞ­Ο‡ΞΏΞ½Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:10
-#, fuzzy
-msgid "Close all open files"
-msgstr "Κλείσιμο όλων των ανοιχτών εγγράφων"
+msgid "Configure the application"
+msgstr "Ξ΅ΟΞΈΞΌΞΉΟƒΞ· Ο„Ξ·Ο‚ ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ®Ο‚"
 
 #: src/gedit-ui.xml.h:11
-msgid "Close the current file"
-msgstr "Κλείσιμο του τρέχοντος αρχείου"
+msgid "Copy"
+msgstr "Ξ‘Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ®"
 
 #: src/gedit-ui.xml.h:12
-#, fuzzy
-msgid "Configure the application"
-msgstr "Αποκοπή επιλεγμένου"
+msgid "Copy the selection"
+msgstr "Ξ‘Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:13
-#, fuzzy
-msgid "Contents"
-msgstr "Μετατροπή"
+msgid "Create a new document"
+msgstr "Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:14
-msgid "Copy"
-msgstr "Αντιγραφή"
+msgid "Cu_t"
+msgstr "Ξ‘Ο€ΞΏ_ΞΊΞΏΟ€Ξ®"
 
 #: src/gedit-ui.xml.h:15
-msgid "Copy the selection"
-msgstr "Αντιγραφή επιλεγμένου"
+msgid "Customize"
+msgstr "Ξ ΟΞΏΟƒΞ±ΟΞΌΞΏΞ³Ξ®"
 
 #: src/gedit-ui.xml.h:16
-msgid "Create a new document"
-msgstr "Δημιουργία νέου εγγράφου"
+msgid "Customize toolbars"
+msgstr "Ξ ΟΞΏΟƒΞ±ΟΞΌΞΏΞ³Ξ® ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ·ΞΊΟΞ½"
 
 #: src/gedit-ui.xml.h:17
-#, fuzzy
-msgid "Cu_t"
-msgstr "Αποκοπή"
+msgid "Cut"
+msgstr "Ξ‘Ο€ΞΏΞΊΞΏΟ€Ξ®"
 
 #: src/gedit-ui.xml.h:18
-msgid "Customize"
-msgstr ""
+msgid "Cut the selection"
+msgstr "Ξ‘Ο€ΞΏΞΊΞΏΟ€Ξ® ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:19
-msgid "Customize toolbars"
-msgstr ""
+msgid "Delete"
+msgstr "Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ®"
 
 #: src/gedit-ui.xml.h:20
-msgid "Cut"
-msgstr "Αποκοπή"
+msgid "Delete the selected text"
+msgstr "Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞµΟ€ΞΉΞ»ΞµΞ³ΞΌΞ­Ξ½ΞΏΟ… ΞΊΞµΞΉΞΌΞ­Ξ½ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:21
-msgid "Cut the selection"
-msgstr "Αποκοπή επιλεγμένου"
+msgid "Dump XML"
+msgstr "Dump XML"
 
 #: src/gedit-ui.xml.h:22
-#, fuzzy
-msgid "Delete the selected text"
-msgstr "Αποκοπή επιλεγμένου"
-
-#: src/gedit-ui.xml.h:23
-msgid "Deleted"
-msgstr ""
+msgid "Dump the UI Xml description"
+msgstr "Dump the UI Xml description"
 
 #: src/gedit-ui.xml.h:24
-msgid "Dump XML"
-msgstr ""
+msgid "Find Again"
+msgstr "Ξ•Ο€Ξ±Ξ½Ξ¬Ξ»Ξ·ΟΞ· Ξ±Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:25
-msgid "Dump the UI Xml description"
-msgstr ""
+msgid "Find Ne_xt"
+msgstr "Ξ•ΟΟΞµΟƒΞ· Ξ•Ο€Ο_ΞΌΞµΞ½ΞΏΟ…"
+
+#: src/gedit-ui.xml.h:26
+msgid "Go to a specific line number"
+msgstr "Ξ•Ο€Ξ―ΟƒΞΊΞµΟΞ· Ο„ΞΏΟ… Ξ΄ΞΏΟƒΞΌΞ­Ξ½ΞΏΟ… Ξ±ΟΞΉΞΈΞΌΞΏΟ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚"
 
 #: src/gedit-ui.xml.h:27
-#, fuzzy
-msgid "Find Again"
-msgstr "Αναζήτηση _Γραμμής"
+msgid "Goto _Line"
+msgstr "ΞΞµΟ„Ξ¬Ξ²Ξ±ΟƒΞ· ΟƒΞµ_Ξ“ΟΞ±ΞΌΞΌΞ®"
 
 #: src/gedit-ui.xml.h:28
-#, fuzzy
-msgid "Find Ne_xt"
-msgstr "Εύρεση Επόμενου"
+msgid "Icon and _Text"
+msgstr "Ξ•ΞΉΞΊΞΏΞ½Ξ―Ξ΄ΞΉΞΏ ΞΊΞ±ΞΉ_ΞΞµΞ―ΞΌΞµΞ½ΞΏ"
 
 #: src/gedit-ui.xml.h:29
-msgid "Go to a specific line number"
-msgstr "Επίσκεψη του δοσμένου αριθμού γραμμής"
+msgid "Main toolbar"
+msgstr "ΞΟΟΞΉΞ± ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·"
 
 #: src/gedit-ui.xml.h:30
-#, fuzzy
-msgid "Goto _Line"
-msgstr "Επίσκεψη Γραμμής"
+msgid "New"
+msgstr "ΞΞ­ΞΏ"
 
 #: src/gedit-ui.xml.h:31
-msgid "Icon and _Text"
-msgstr ""
+msgid "Only show icons in the toolbar"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® ΞΌΟΞ½ΞΏ Ο„Ο‰Ξ½ ΞµΞΉΞΊΞΏΞ½ΞΉΞ΄Ξ―Ο‰Ξ½ ΟƒΟ„Ξ·Ξ½ ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΈΞ®ΞΊΞ·"
 
 #: src/gedit-ui.xml.h:32
-msgid "Main toolbar"
-msgstr ""
+msgid "Open"
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ±"
 
 #: src/gedit-ui.xml.h:33
-msgid "New"
-msgstr "Νέο"
+msgid "Open Location..."
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ¤ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±Ο‚..."
 
 #: src/gedit-ui.xml.h:34
-msgid "Only show icons in the toolbar"
-msgstr ""
+msgid "Open _Location..."
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ±_Ξ¤ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±Ο‚..."
 
 #: src/gedit-ui.xml.h:35
-msgid "Open"
-msgstr "¶νοιγμα"
+msgid "Open a file"
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:36
-#, fuzzy
-msgid "Open Location..."
-msgstr "¶νοιγμα Αρχείου ..."
+msgid "Open a file from a specified location"
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ±Ο€Ο  ΞΊΞ±ΞΈΞΏΟΞΉΟƒΞΌΞ­Ξ½Ξ· Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±"
 
 #: src/gedit-ui.xml.h:37
-#, fuzzy
-msgid "Open _Location..."
-msgstr "¶νοιγμα Αρχείου ..."
+msgid "Open the gedit manual"
+msgstr "'Ξ‘Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… ΞµΞ³Ο‡ΞµΞΉΟΞΉΞ΄Ξ―ΞΏΟ… Ο„ΞΏΟ… gedit"
 
 #: src/gedit-ui.xml.h:38
-#, fuzzy
-msgid "Open a file"
-msgstr "¶νοιγμα αρχείου"
+msgid "Paste"
+msgstr "Ξ•Ο€ΞΉΞΊΟΞ»Ξ»Ξ·ΟƒΞ·"
 
 #: src/gedit-ui.xml.h:39
-#, fuzzy
-msgid "Open a file from a specified location"
-msgstr "¶νοιγμα αρχείου από το καθορισμένο URI"
+msgid "Paste the clipboard"
+msgstr "Ξ•Ο€ΞΉΞΊΟΞ»Ξ»Ξ·ΟƒΞ· ΟƒΟ„ΞΏ Ο„ΞµΞΌΞ¬Ο‡ΞΉΞΏ"
 
 #: src/gedit-ui.xml.h:40
-msgid "Open the gedit manual"
-msgstr ""
-
-#: src/gedit-ui.xml.h:41
-msgid "Paste"
-msgstr "Επικόλληση"
-
-#: src/gedit-ui.xml.h:42
-msgid "Paste the clipboard"
-msgstr "Επικόλληση στο τεμάχιο"
+msgid "Pr_eferences..."
+msgstr "Ξ ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΞΉΟ‚"
 
 #: src/gedit-ui.xml.h:43
-#, fuzzy
-msgid "Pr_eferences..."
-msgstr "Κειμενογράφος: Προτιμίσεις"
+msgid "Print Previe_w"
+msgstr "Ξ ΟΞΏ_ΞµΟ€ΞΉΟƒΞΊΟΟ€ΞΉΟƒΞ· ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚"
+
+#: src/gedit-ui.xml.h:44
+msgid "Print Preview"
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€Ξ·ΟƒΞ· ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚"
+
+#: src/gedit-ui.xml.h:45
+msgid "Print Setup"
+msgstr "Ξ”ΞΉΞ±ΞΌΟΟΟ†Ο‰ΟƒΞ· Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:46
-#, fuzzy
-msgid "Print Previe_w"
-msgstr "Προεπισκόπιση εκτύπωσης"
+msgid "Print preview"
+msgstr "Ξ ΟΞΏΞµΟ€ΞΉΟƒΞΊΟΟ€ΞΉΟƒΞ· ΞµΞΊΟ„ΟΟ€Ο‰ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:47
-#, fuzzy
-msgid "Print Preview"
-msgstr "Προεπισκόπιση εκτύπωσης"
+msgid "Print the current file"
+msgstr "Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ· Ο„ΞΏΟ… Ο„ΟΞ­Ο‡ΞΏΞ½Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:48
-#, fuzzy
-msgid "Print Setup"
-msgstr "Εκτύπωση Εγγράφου"
+msgid "Quit"
+msgstr "ΞΞΎΞΏΞ΄ΞΏΟ‚"
 
 #: src/gedit-ui.xml.h:49
-msgid "Print preview"
-msgstr "Προεπισκόπιση εκτύπωσης"
+msgid "Quit the program"
+msgstr "ΞΞΎΞΏΞ΄ΞΏΟ‚ Ξ±Ο€Ο Ο„ΞΏ Ο€ΟΟΞ³ΟΞ±ΞΌΞΌΞ±"
 
 #: src/gedit-ui.xml.h:50
-msgid "Print the current file"
-msgstr "Εκτύπωση του τρέχοντος αρχείου"
+msgid "Recent _Files"
+msgstr "Ξ ΟΟΟƒΟ†Ξ±Ο„Ξ±_Ξ‘ΟΟ‡ΞµΞ―Ξ±"
 
 #: src/gedit-ui.xml.h:51
-msgid "Quit"
-msgstr ""
+msgid "Redo"
+msgstr "Ξ•Ο€Ξ±Ξ½ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ·"
 
 #: src/gedit-ui.xml.h:52
-#, fuzzy
-msgid "Quit the program"
-msgstr "Έξοδος από το πρόγραμμα"
-
-#: src/gedit-ui.xml.h:53
-msgid "Recent _Files"
-msgstr ""
+msgid "Redo the undone action"
+msgstr "Ξ‘ΞΊΟΟΟ‰ΟƒΞ· Ο„Ξ·Ο‚ Ξ±Ξ½Ξ·ΟΞ·ΞΌΞ­Ξ½Ξ·Ο‚ ΞµΞ½Ξ­ΟΞ³ΞµΞΉΞ±Ο‚"
 
 #: src/gedit-ui.xml.h:54
-msgid "Redo"
-msgstr "Επανεκτέλεση"
+msgid "Replace a string"
+msgstr "Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· Ξ±Ξ»Ο†Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΞΏΟ"
 
 #: src/gedit-ui.xml.h:55
-#, fuzzy
-msgid "Redo the undone action"
-msgstr "Επανεκτέλεση τελευταίας λειτουργίας"
+msgid "Revert"
+msgstr "Ξ•Ο€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬"
+
+#: src/gedit-ui.xml.h:56
+msgid "Revert to a saved version of the file"
+msgstr "Ξ•Ο€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ ΟƒΞµ ΞΌΞΉΞ± Ο€ΟΞΏΟƒΟ†Ξ¬Ο„Ο‰Ο‚ Ξ±Ο€ΞΏΞΈΞ·ΞΊΞµΟ…ΞΌΞ­Ξ½Ξ· Ξ­ΞΊΞ΄ΞΏΟƒΞ· Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:57
-#, fuzzy
-msgid "Replace a string"
-msgstr "Αναζήτηση αλφαριθμητικού"
-
-#: src/gedit-ui.xml.h:58
-#, fuzzy
-msgid "Revert"
-msgstr "Επαναφορά"
+msgid "Sa_ve All"
+msgstr "Ξ‘Ο€ΞΏ_ΞΈΞ®ΞΊΞµΟ…ΟƒΞ· ΞΞ»Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:59
-msgid "Revert to a saved version of the file"
-msgstr ""
+msgid "Save All"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· ΞΞ»Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:60
-#, fuzzy
-msgid "Sa_ve All"
-msgstr "Αποθήκευση Όλων"
+msgid "Save As"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ξ©Ο‚"
+
+#: src/gedit-ui.xml.h:61
+msgid "Save _As..."
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·_Ξ©Ο‚..."
 
 #: src/gedit-ui.xml.h:62
-#, fuzzy
-msgid "Save All"
-msgstr "Αποθήκευση Όλων"
+msgid "Save all open files"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· ΟΞ»Ο‰Ξ½ Ο„Ο‰Ξ½ Ξ±Ξ½ΞΏΞΉΟ‡Ο„ΟΞ½ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:63
-#, fuzzy
-msgid "Save As"
-msgstr "Αποθήκευση Ως..."
+msgid "Save the current file"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ο„ΞΏΟ… Ο„ΟΞ­Ο‡ΞΏΞ½Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:64
-#, fuzzy
-msgid "Save _As..."
-msgstr "Αποθήκευση Ως..."
+msgid "Save the current file with a different name"
+msgstr "Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ· Ο„ΞΏΟ… Ο„ΟΞ­Ο‡ΞΏΞ½Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΌΞµ Ξ΄ΞΉΞ±Ο†ΞΏΟΞµΟ„ΞΉΞΊΟ ΟΞ½ΞΏΞΌΞ±"
 
 #: src/gedit-ui.xml.h:65
-#, fuzzy
-msgid "Save all open files"
-msgstr "Αποθήκευση όλων των ανοιχτών εγγράφων"
+msgid "Search again for the same string"
+msgstr "Ξ•Ο€Ξ±Ξ½Ξ¬Ξ»Ξ·ΟΞ· Ξ±Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·Ο‚ Ξ³ΞΉΞ± Ο„ΞΏ Ξ―Ξ΄ΞΉΞΏ Ξ±Ξ»Ο†Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΟ"
 
 #: src/gedit-ui.xml.h:66
-msgid "Save the current file"
-msgstr "Αποθήκευση του τρέχοντος αρχείου"
+msgid "Search for a string"
+msgstr "Ξ‘Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ· Ξ±Ξ»Ο†Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΞΏΟ"
 
 #: src/gedit-ui.xml.h:67
-#, fuzzy
-msgid "Save the current file with a different name"
-msgstr "Αποθήκευση του τρέχοντος αρχείου"
+msgid "Select All"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞΞ»Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:68
-#, fuzzy
-msgid "Search again for the same string"
-msgstr "Αναζήτηση αλφαριθμητικού"
+msgid "Select _All"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ®_ΞΞ»Ο‰Ξ½"
 
 #: src/gedit-ui.xml.h:69
-msgid "Search for a string"
-msgstr "Αναζήτηση αλφαριθμητικού"
+msgid "Select the entire document"
+msgstr "Ξ•Ο€ΞΉΞ»ΞΏΞ³Ξ® ΞΏΞ»ΟΞΊΞ»Ξ·ΟΞΏΟ… Ο„ΞΏΟ… ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ…"
 
 #: src/gedit-ui.xml.h:70
-#, fuzzy
-msgid "Select All"
-msgstr "Αντικατάσταση Όλων"
+msgid "Set toolbar button style according to desktop default"
+msgstr "ΞΟΞΉΟƒΞΌΟΟ‚ ΞΊΞΏΟ…ΞΌΟ€Ξ― ΞµΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·Ο‚Ξ― Ξ²Ξ¬ΟƒΞµΞΉ Ο„Ο‰Ξ½ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½ Ο„Ξ·Ο‚ ΞµΟ€ΞΉΟ†Ξ¬Ξ½ΞµΞΉΞ±Ο‚"
 
 #: src/gedit-ui.xml.h:71
-#, fuzzy
-msgid "Select _All"
-msgstr "Αντικατάσταση Όλων"
+msgid "Setup the page settings for your current printer"
+msgstr "Ξ”ΞΉΞ±ΞΌΟΟΟ†Ο‰ΟƒΞ· ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½ ΟƒΞµΞ»Ξ―Ξ΄Ξ±Ο‚ Ξ³ΞΉΞ± Ο„ΞΏΞ½ Ο„ΟΞ­Ο‡ΞΏΞ½Ο„Ξ± ΞµΞΊΟ„Ο…Ο€Ο‰Ο„Ξ® ΟƒΞ±Ο‚."
 
 #: src/gedit-ui.xml.h:72
-#, fuzzy
-msgid "Select the entire document"
-msgstr "Αποστολή τρέχοντος εγγράφου μέσω ηλ. ταχυδρομείου"
+msgid "Show _Cursor Position"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® _ΞΈΞ­ΟƒΞ·Ο‚ Ξ΄ΟΞΏΞΌΞ­Ξ±"
 
 #: src/gedit-ui.xml.h:73
-#, fuzzy
-msgid "Set toolbar button style according to desktop default"
-msgstr "Η εργαλειοθήκη να ρυθμιστεί βάση ρυθμίσεων του συστήματος"
+msgid "Show _Overwrite Mode"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® Ξ›ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚_Ξ‘Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:74
-#, fuzzy
-msgid "Setup the page settings for your current printer"
-msgstr "Αποθήκευση τρέχοντων ρυθμίσεων για το μέλλον"
+msgid "Show cursor position in the statusbar"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® ΞµΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ·Ο‚ ΞΈΞ­ΟƒΞ·Ο‚ Ξ΄ΟΞΏΞΌΞ­Ξ± ΟƒΟ„Ξ· Ξ³ΟΞ±ΞΌΞΌΞ® ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:75
-#, fuzzy
-msgid "Show _Cursor Position"
-msgstr "_θέση δρομέα"
-
-#: src/gedit-ui.xml.h:76
-msgid "Show _Overwrite Mode"
-msgstr ""
+msgid "Show overwrite mode in the statusbar"
+msgstr "Ξ ΟΞΏΞ²ΞΏΞ»Ξ® Ξ»ΞµΞΉΟ„ΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ξ±Ξ½Ο„ΞΉΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ ΟƒΟ„Ξ· Ξ³ΟΞ±ΞΌΞΌΞ® ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:77
-#, fuzzy
-msgid "Show _Tooltips"
-msgstr "Εμφάνιση βοη_θημάτων"
+msgid "Undo the last action"
+msgstr "Ξ‘Ξ½Ξ±Ξ―ΟΞµΟƒΞ· Ο„Ξ·Ο‚ Ο„ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ±Ο‚ ΞµΞ½Ξ­ΟΞ³ΞµΞΉΞ±Ο‚"
 
 #: src/gedit-ui.xml.h:78
-msgid "Show cursor position in the statusbar"
-msgstr ""
+msgid "_About"
+msgstr "_Ξ ΞµΟΞ―"
 
 #: src/gedit-ui.xml.h:79
-msgid "Show overwrite mode in the statusbar"
-msgstr ""
+msgid "_Close"
+msgstr "_ΞΞ»ΞµΞ―ΟƒΞΉΞΌΞΏ"
 
 #: src/gedit-ui.xml.h:80
-#, fuzzy
-msgid "Show tooltips in the toolbar"
-msgstr "Εμφάνιση βοη_θημάτων"
+msgid "_Contents"
+msgstr "_Ξ ΞµΟΞΉΞµΟ‡ΟΞΌΞµΞ½Ξ±"
+
+#: src/gedit-ui.xml.h:81
+msgid "_Copy"
+msgstr "_Ξ‘Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ®"
 
 #: src/gedit-ui.xml.h:82
-#, fuzzy
-msgid "Undo the last action"
-msgstr "Ακύρωση τελευταίας λειτουργίας"
+msgid "_Customize Toolbar"
+msgstr "_Ξ ΟΞΏΟƒΞ±ΟΞΌΞΏΞ³Ξ® Ξ•ΟΞ³Ξ±Ξ»ΞµΞΉΞΈΞ®ΞΊΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:83
-msgid "_About..."
-msgstr ""
+msgid "_Debug"
+msgstr "_Ξ•ΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·"
 
 #: src/gedit-ui.xml.h:84
-#, fuzzy
-msgid "_Close"
-msgstr "Κλείσιμο"
+msgid "_Delete"
+msgstr "_Ξ”ΞΉΞ±Ξ³ΟΞ±Ο†Ξ®"
 
 #: src/gedit-ui.xml.h:85
-#, fuzzy
-msgid "_Contents"
-msgstr "_Έγγραφα"
+msgid "_Desktop Default"
+msgstr "_Ξ•ΞΎ'ΞΏΟΞΉΟƒΞΌΞΏΟ Ξ•Ο€ΞΉΟ†Ξ¬Ξ½ΞµΞΉΞ±Ο‚"
 
 #: src/gedit-ui.xml.h:86
-#, fuzzy
-msgid "_Copy"
-msgstr "Αντιγραφή"
+msgid "_Documents"
+msgstr "_ΞΞ³Ξ³ΟΞ±Ο†Ξ±"
 
 #: src/gedit-ui.xml.h:87
-msgid "_Customize Toolbar"
-msgstr ""
+msgid "_Edit"
+msgstr "_Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ±"
 
 #: src/gedit-ui.xml.h:88
-msgid "_Debug"
-msgstr ""
+msgid "_File"
+msgstr "_Ξ‘ΟΟ‡ΞµΞ―ΞΏ"
 
 #: src/gedit-ui.xml.h:89
-msgid "_Delete"
-msgstr ""
+msgid "_Find"
+msgstr "_Ξ•ΟΟΞµΟƒΞ·"
 
 #: src/gedit-ui.xml.h:90
-#, fuzzy
-msgid "_Desktop Default"
-msgstr "Εξ'ορισμού Γραμματοσειρά: "
+msgid "_Help"
+msgstr "_Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±"
 
 #: src/gedit-ui.xml.h:91
-msgid "_Documents"
-msgstr "_Έγγραφα"
+msgid "_Icon"
+msgstr "_Ξ•ΞΉΞΊΞΏΞ½Ξ―Ξ΄ΞΉΞΏ"
 
 #: src/gedit-ui.xml.h:92
-#, fuzzy
-msgid "_Edit"
-msgstr "Έξοδος"
+msgid "_New"
+msgstr "_ΞΞ­ΞΏ"
 
 #: src/gedit-ui.xml.h:93
-msgid "_File"
-msgstr "_Αρχείο"
+msgid "_Open..."
+msgstr "_Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ±..."
 
 #: src/gedit-ui.xml.h:94
-#, fuzzy
-msgid "_Find"
-msgstr "Αναζήτηση"
+msgid "_Paste"
+msgstr "_Ξ•Ο€ΞΉΞΊΟΞ»Ξ»Ξ·ΟƒΞ·"
 
 #: src/gedit-ui.xml.h:95
-msgid "_Help"
-msgstr ""
+msgid "_Print..."
+msgstr "_Ξ•ΞΊΟ„ΟΟ€Ο‰ΟƒΞ·"
+
+#: src/gedit-ui.xml.h:96
+msgid "_Quit"
+msgstr "_ΞΞΎΞΏΞ΄ΞΏΟ‚"
 
 #: src/gedit-ui.xml.h:97
-msgid "_New"
-msgstr "_Νέο"
-
-#: src/gedit-ui.xml.h:98
-#, fuzzy
-msgid "_Open..."
-msgstr "¶νοιγμα"
+msgid "_Redo"
+msgstr "_Ξ‘ΞΊΟΟΟ‰ΟƒΞ· Ξ±Ξ½Ξ±Ξ―ΟΞµΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:99
-#, fuzzy
-msgid "_Paste"
-msgstr "Επικόλληση"
+msgid "_Revert"
+msgstr "_Ξ•Ο€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬"
 
 #: src/gedit-ui.xml.h:100
-#, fuzzy
-msgid "_Plugin Manager"
-msgstr "Διαχειριστής Αρθρωμάτων Κειμενογράφου"
+msgid "_Save"
+msgstr "_Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·"
 
 #: src/gedit-ui.xml.h:101
-#, fuzzy
-msgid "_Plugin Manager..."
-msgstr "Διαχειριστής Αρθρωμάτων Κειμενογράφου"
+msgid "_Search"
+msgstr "_Ξ•ΟΟΞµΟƒΞ·"
 
 #: src/gedit-ui.xml.h:102
-#, fuzzy
-msgid "_Print..."
-msgstr "Εκτύπωση"
+msgid "_Statusbar"
+msgstr "_Ξ“ΟΞ±ΞΌΞΌΞ® ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚"
 
 #: src/gedit-ui.xml.h:103
-#, fuzzy
-msgid "_Quit"
-msgstr "Αποκοπή"
+msgid "_Toolbar"
+msgstr "_Ξ•ΟΞ³Ξ±Ξ»ΞµΞΉΞΏΞΈΞ®ΞΊΞ·"
 
 #: src/gedit-ui.xml.h:104
-#, fuzzy
-msgid "_Redo"
-msgstr "Επανεκτέλεση"
+msgid "_Tools"
+msgstr "_Ξ•ΟΞ³Ξ±Ξ»ΞµΞ―Ξ±"
+
+#: src/gedit-ui.xml.h:105
+msgid "_Undo"
+msgstr "_Ξ‘Ξ½Ξ±Ξ―ΟΞµΟƒΞ·"
 
 #: src/gedit-ui.xml.h:106
-#, fuzzy
-msgid "_Revert"
-msgstr "Επαναφορά"
-
-#: src/gedit-ui.xml.h:107
-#, fuzzy
-msgid "_Save"
-msgstr "Αποθήκευση"
-
-#: src/gedit-ui.xml.h:108
-#, fuzzy
-msgid "_Search"
-msgstr "Εύρεση"
-
-#: src/gedit-ui.xml.h:109
-#, fuzzy
-msgid "_Status Bar"
-msgstr "Γράμμη κατά_στασης"
-
-#: src/gedit-ui.xml.h:110
-#, fuzzy
-msgid "_Toolbar"
-msgstr "Ανάγλυφη ε_ργαλειοθήκη"
-
-#: src/gedit-ui.xml.h:111
-#, fuzzy
-msgid "_Tools"
-msgstr "Ανάγλυφη ε_ργαλειοθήκη"
-
-#: src/gedit-ui.xml.h:112
-#, fuzzy
-msgid "_Undo"
-msgstr "Ακύρωση"
-
-#: src/gedit-ui.xml.h:113
-#, fuzzy
 msgid "_View"
-msgstr "_Νέα Απεικόνιση"
+msgstr "_Ξ ΟΞΏΞ²ΞΏΞ»Ξ®"
 
-#: src/gedit-utils.c:840
+#: src/gedit-utils.c:792
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟΟΞµΟƒΞ· Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ Ξ­Ο‡ΞµΟ„Ξµ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΞµΞΉ ΟƒΟ‰ΟƒΟ„Ξ¬ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±."
 
-#: src/gedit-utils.c:847
+#: src/gedit-utils.c:799
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΊΞ±Ο„ΞµΟƒΟ„ΟΞ±ΞΌΞΌΞ­Ξ½Ξ± "
+"Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ξ±."
 
-#: src/gedit-utils.c:858
+#: src/gedit-utils.c:810
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± "
+"Ο‡ΞµΞΉΟΞΉΟƒΟ„ΞµΞ― Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―ΞµΟ‚ %s:."
 
-#: src/gedit-utils.c:866
-#, fuzzy, c-format
+#: src/gedit-utils.c:816
+#, c-format
 msgid "Could not open the file \"%s\""
-msgstr "Αποθήκευση αρχείο ανεπιτυχής!"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\""
 
-#: src/gedit-utils.c:873
+#: src/gedit-utils.c:826
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
+msgid "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΌΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ "
+"Ο„ΟΟ€ΞΏ Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½."
 
-#: src/gedit-utils.c:880
+#: src/gedit-utils.c:833
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® ΞµΞ―Ξ½Ξ±ΞΉ Ο€ΞΏΞ»Ο ΞΌΞµΞ³Ξ¬Ξ»ΞΏ."
 
-#: src/gedit-utils.c:887
+#: src/gedit-utils.c:840
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ξ¤ΞΏ \"%s\" Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ­Ξ³ΞΊΟ…ΟΞ· Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±.\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ Ξ­Ο‡ΞµΟ„Ξµ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΞµΞΉ ΟƒΟ‰ΟƒΟ„Ξ¬ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±."
 
-#: src/gedit-utils.c:894
+#: src/gedit-utils.c:847
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο…Ο€Ξ®ΟΞΎΞµ Ξ¬ΟΞ½Ξ·ΟƒΞ· "
+"Ο€ΟΟΟƒΞ²Ξ±ΟƒΞ·Ο‚."
 
-#: src/gedit-utils.c:901
+#: src/gedit-utils.c:854
 #, c-format
 msgid ""
-"Could not open the file \"%s\" because there are too many open files\n"
+"Could not open the file \"%s\" because there are too many open files.\n"
 "\n"
-".Please, close some open file and try again."
+"Please, close some open file and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ®  Ο…Ο€Ξ¬ΟΟ‡ΞΏΟ…Ξ½ Ο€ΞΏΞ»Ξ»Ξ¬ "
+"Ξ±Ξ½ΞΏΞΉΞΊΟ„Ξ¬ Ξ±ΟΟ‡ΞµΞ―Ξ±.\n"
+"\n"
+"ΞΞ»ΞµΞ―ΟƒΟ„Ξµ ΞΊΞ¬Ο€ΞΏΞΉΞ± Ξ±Ξ½ΞΏΞΉΞΊΟ„Ξ¬ Ξ±ΟΟ‡ΞµΞ―Ξ± ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:909
+#: src/gedit-utils.c:862
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ξ¤ΞΏ \"%s\" ΞµΞ―Ξ½Ξ±ΞΉ Ξ­Ξ½Ξ±Ο‚ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚.\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ Ξ­Ο‡ΞµΟ„Ξµ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΞµΞΉ ΟƒΟ‰ΟƒΟ„Ξ¬ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±."
 
-#: src/gedit-utils.c:916
+#: src/gedit-utils.c:869
 #, c-format
 msgid ""
-"Not enough available memory to open the file \"%s\".Please, close some "
+"Not enough available memory to open the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ±ΟΞΊΞµΟ„Ξ® Ξ΄ΞΉΞ±ΞΈΞ­ΟƒΞΉΞΌΞ· ΞΌΞ½Ξ®ΞΌΞ· Ξ³ΞΉΞ± Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".  "
+"ΞΞ»ΞµΞ―ΟƒΟ„Ξµ ΞΌΞµΟΞΉΞΊΞ­Ο‚ ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ­Ο‚ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:929
+#: src/gedit-utils.c:895
 #, c-format
 msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found. \n"
+"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
 "Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again"
+"settings are correct and then try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ²ΟΞµΞΈΞµΞ― "
+"Ο„ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ± \"%s\".\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΞ±Ο„Ξµ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ± ΟƒΟ‰ΟƒΟ„Ξ¬ ΞΊΞ±ΞΉ ΟΟ„ΞΉ ΞΏΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ "
+"Ξ΄ΞΉΞ±ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²Ξ·Ο„Ξ® ΞµΞ―Ξ½Ξ±ΞΉ ΟƒΟ‰ΟƒΟ„Ξ­Ο‚ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:942
+#: src/gedit-utils.c:910
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο„ΞΏ ΟΞ½ΞΏΞΌΞ± ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚ "
+"Ξ΄ΞµΞ½ Ξ®Ο„Ξ±Ξ½ Ξ­Ξ³ΞΊΟ…ΟΞΏ.\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ ΞΏΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ΄ΞΉΞ±ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²Ξ·Ο„Ξ® ΞµΞ―Ξ½Ξ±ΞΉ ΟƒΟ‰ΟƒΟ„Ξ­Ο‚ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ "
+"ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:949
+#: src/gedit-utils.c:917
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο„ΞΏ ΟΞ½ΞΏΞΌΞ± ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚ "
+"Ξ®Ο„Ξ±Ξ½ Ξ¬Ξ΄ΞµΞΉΞΏ.\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ ΞΏΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ΄ΞΉΞ±ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²Ξ·Ο„Ξ® ΞµΞ―Ξ½Ξ±ΞΉ ΟƒΟ‰ΟƒΟ„Ξ­Ο‚ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ "
+"ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:956
+#: src/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ®  Ξ±Ο€Ξ­Ο„Ο…Ο‡Ξµ Ξ· Ο€ΟΞΏΟƒΟ€Ξ¬ΞΈΞµΞΉΞ± "
+"ΞµΞΉΟƒΟΞ΄ΞΏΟ….\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΞ±Ο„Ξµ ΟƒΟ‰ΟƒΟ„Ξ¬ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ± ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:964
+#: src/gedit-utils.c:932
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ο Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΌΞ® Ξ­Ξ³ΞΊΟ…ΟΞ± "
+"Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ξ± UTF-8.\n"
+"\n"
+"Ξ ΞΉΞΈΞ±Ξ½ΟΞ½ Ξ½Ξ± Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―Ο„Ξµ Ξ½Ξ± ΞµΟ€Ξ±Ξ½Ξ±Ο†Ξ­ΟΞµΟ„Ξ±ΞΉ Ξ­Ξ½Ξ± Ξ±ΟΟ‡ΞµΞ―ΞΏ binary."
 
-#: src/gedit-utils.c:1002
-#, fuzzy, c-format
+#: src/gedit-utils.c:970
+#, c-format
 msgid "Could not open the file \"%s\"."
-msgstr "Αποθήκευση αρχείο ανεπιτυχής!"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\"."
 
-#: src/gedit-utils.c:1053
-#, fuzzy, c-format
+#: src/gedit-utils.c:1021
+#, c-format
 msgid "Could not save the file \"%s\"."
-msgstr "Αποθήκευση αρχείο ανεπιτυχής!"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\""
 
-#: src/gedit-utils.c:1057
-#, fuzzy, c-format
+#: src/gedit-utils.c:1025
+#, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
 "\n"
 "%s"
-msgstr "Αποθήκευση αρχείο ανεπιτυχής!"
+msgstr ""
+"Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ο€ΞΏΞΈΞ®ΞΊΞµΟ…ΟƒΞ·Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".\n"
+"\n"
+"%s"
 
-#: src/gedit-utils.c:1110
+#: src/gedit-utils.c:1078
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
 "\n"
 "Perhaps, it has recently been deleted."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ²ΟΞµΞΈΞµΞ― "
+"Ξ±Ο€Ο Ο„Ξ·Ξ½ ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ®.\n"
+"\n"
+"Ξ ΞΉΞΈΞ±Ξ½ΟΞ½ Ξ½Ξ± Ξ­Ο‡ΞµΞΉ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†ΞµΞ― Ο€ΟΟΟƒΟ†Ξ±Ο„Ξ±."
 
-#: src/gedit-utils.c:1117
+#: src/gedit-utils.c:1085
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ "
+"ΞΊΞ±Ο„ΞµΟƒΟ„ΟΞ±ΞΌΞΌΞ­Ξ½Ξ± Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ξ±."
 
-#: src/gedit-utils.c:1128
+#: src/gedit-utils.c:1096
 #, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ξ· ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― "
+"Ξ½Ξ± Ο‡ΞµΞΉΟΞΉΟƒΟ„ΞµΞ― Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―ΞµΟ‚%s:."
 
-#: src/gedit-utils.c:1136
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\""
-msgstr "Αποθήκευση αρχείο ανεπιτυχής!"
+#: src/gedit-utils.c:1102 src/gedit-utils.c:1242
+#, c-format
+msgid "Could not revert the file \"%s\"."
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\"."
 
-#: src/gedit-utils.c:1143
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
 "format."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΌΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ "
+"Ο„ΟΟ€ΞΏ Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½."
 
-#: src/gedit-utils.c:1150
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
-msgstr ""
+msgstr "Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® ΞµΞ―Ξ½Ξ±ΞΉ Ο€ΞΏΞ»Ο ΞΌΞµΞ³Ξ¬Ξ»ΞΏ."
 
-#: src/gedit-utils.c:1157
+#: src/gedit-utils.c:1126
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο…Ο€Ξ®ΟΞΎΞµ Ξ¬ΟΞ½Ξ·ΟƒΞ· "
+"Ο€ΟΟΟƒΞ²Ξ±ΟƒΞ·Ο‚."
 
-#: src/gedit-utils.c:1164
+#: src/gedit-utils.c:1133
 #, c-format
 msgid ""
-"Could not revert the file \"%s\" because there are too many open files\n"
+"Could not revert the file \"%s\" because there are too many open files.\n"
 "\n"
-".Please, close some open file and try again."
+"Please, close some open file and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ®  Ο…Ο€Ξ¬ΟΟ‡ΞΏΟ…Ξ½ Ο€ΞΏΞ»Ξ»Ξ¬ "
+"Ξ±Ξ½ΞΏΞΉΞΊΟ„Ξ¬ Ξ±ΟΟ‡ΞµΞ―Ξ±.\n"
+"\n"
+"ΞΞ»ΞµΞ―ΟƒΟ„Ξµ ΞΊΞ¬Ο€ΞΏΞΉΞ± Ξ±Ξ½ΞΏΞΉΞΊΟ„Ξ¬ Ξ±ΟΟ‡ΞµΞ―Ξ± ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:1172
+#: src/gedit-utils.c:1141
 #, c-format
 msgid ""
-"Not enough available memory to revert the file \"%s\".Please, close some "
+"Not enough available memory to revert the file \"%s\". Please, close some "
 "running application and try again."
 msgstr ""
+"Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ±ΟΞΊΞµΟ„Ξ® Ξ΄ΞΉΞ±ΞΈΞ­ΟƒΞΉΞΌΞ· ΞΌΞ½Ξ®ΞΌΞ· Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".  "
+"ΞΞ»ΞµΞ―ΟƒΟ„Ξµ ΞΌΞµΟΞΉΞΊΞ­Ο‚ ΞµΟ†Ξ±ΟΞΌΞΏΞ³Ξ­Ο‚ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:1185
+#: src/gedit-utils.c:1167
 #, c-format
 msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found. \n"
+"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
 "\n"
-"Please, check that your proxy settings are correct and try again"
+"Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ²ΟΞµΞΈΞµΞ― "
+"Ο„ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ± \"%s\".\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ ΞΏΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ΄ΞΉΞ±ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²Ξ·Ο„Ξ® ΞµΞ―Ξ½Ξ±ΞΉ ΟƒΟ‰ΟƒΟ„Ξ­Ο‚ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ "
+"ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:1197
+#: src/gedit-utils.c:1181
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
 "\n"
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο„ΞΏ ΟΞ½ΞΏΞΌΞ± ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚ "
+"Ξ®Ο„Ξ±Ξ½ Ξ¬Ξ΄ΞµΞΉΞΏ.\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ ΞΏΞΉ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΞΉΟ‚ Ξ΄ΞΉΞ±ΞΌΞµΟƒΞΏΞ»Ξ±Ξ²Ξ·Ο„Ξ® ΞµΞ―Ξ½Ξ±ΞΉ ΟƒΟ‰ΟƒΟ„Ξ­Ο‚ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―ΟƒΟ„Ξµ "
+"ΞΎΞ±Ξ½Ξ¬."
 
-#: src/gedit-utils.c:1204
+#: src/gedit-utils.c:1188
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ®  Ξ±Ο€Ξ­Ο„Ο…Ο‡Ξµ Ξ· Ο€ΟΞΏΟƒΟ€Ξ¬ΞΈΞµΞΉΞ± "
+"ΞµΞΉΟƒΟΞ΄ΞΏΟ…."
 
-#: src/gedit-utils.c:1211
+#: src/gedit-utils.c:1195
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
 "\n"
 "Probably, you are trying to revert a binary file."
 msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\" ΞµΟ€ΞµΞΉΞ΄Ξ® Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΌΞ® Ξ­Ξ³ΞΊΟ…ΟΞ± "
+"Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ξ± UTF-8.\n"
+"\n"
+"Ξ ΞΉΞΈΞ±Ξ½ΟΞ½ Ξ½Ξ± Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞµΞ―Ο„Ξµ Ξ½Ξ± ΞµΟ€Ξ±Ξ½Ξ±Ο†Ξ­ΟΞµΟ„Ξ±ΞΉ Ξ­Ξ½Ξ± Ξ±ΟΟ‡ΞµΞ―ΞΏ binary."
 
-#: src/gedit-utils.c:1220
-#, fuzzy
+#: src/gedit-utils.c:1204
 msgid "It is not possible to revert an Untitled document."
-msgstr "Δε μπορείτε να επαναφέρετε ένα Ανώνυμο έγγραφο\n"
+msgstr "Ξ”Ξµ ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± ΞµΟ€Ξ±Ξ½Ξ±Ο†Ξ­ΟΞµΟ„Ξµ Ξ­Ξ½Ξ± Ξ‘Ξ½ΟΞ½Ο…ΞΌΞΏ Ξ­Ξ³Ξ³ΟΞ±Ο†ΞΏ."
 
-#: src/gedit-utils.c:1258
-#, fuzzy, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Αποθήκευση αρχείο ανεπιτυχής!"
+#: src/gedit-utils.c:1293
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "Ξ¤ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ \"%s\" Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ®Ξ΄Ξ·."
 
-#: src/gedit-view.c:878
+#: src/gedit-utils.c:1299
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"Ξ¤ΞΏ \"%s\" ΞµΞ―Ξ½Ξ±ΞΉ Ξ­Ξ½Ξ±Ο‚ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚.\n"
+"\n"
+"Ξ’ΞµΞ²Ξ±ΞΉΟ‰ΞΈΞµΞ―Ο„Ξµ ΟΟ„ΞΉ Ξ­Ο‡ΞµΟ„Ξµ Ο€Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΞµΞΉ ΟƒΟ‰ΟƒΟ„Ξ¬ Ο„Ξ·Ξ½ Ο„ΞΏΟ€ΞΏΞΈΞµΟƒΞ―Ξ±."
+
+#: src/gedit-utils.c:1308
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".\n"
+"\n"
+"Ξ•Ο€ΞΉΞ²ΞµΞ²Ξ±ΞΉΟΟƒΟ„Ξµ ΟΟ„ΞΉ Ξ­Ο‡ΞµΟ„Ξµ Ο„Ξ± ΞΊΞ±Ο„Ξ¬Ξ»Ξ»Ξ·Ξ»Ξ± Ξ΄ΞΉΞΊΞ±ΞΉΟΞΌΞ±Ο„Ξ± ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚."
+
+#: src/gedit-utils.c:1315
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".\n"
+"\n"
+"Ξ¤ΞΏ ΟΞ½ΞΏΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞµΞ―Ξ½Ξ±ΞΉ Ο€ΞΏΞ»Ο ΞΌΞ±ΞΊΟΟ."
+
+#: src/gedit-utils.c:1322
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„Ξ® Ξ· Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".\n"
+"\n"
+"ΞΞ½Ξ± ΟƒΟ„ΞΏΞΉΟ‡ΞµΞ―ΞΏ ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… ΟƒΟ„ΞΏ ΟΞ½ΞΏΞΌΞ± Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ® Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ο€ΞΏΟΞΏΞ²Ξ»Ξ·ΞΌΞ± ΟƒΟ„ΞΏ "
+"symbolic link."
+
+#: src/gedit-utils.c:1331
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ±ΟΞΊΞµΟ„ΟΟ‚ ΞµΞ»ΞµΟΞΈΞµΟΞΏΟ‚ Ο‡ΟΟΞΏΟ‚ Ξ³ΞΉΞ± Ο„Ξ· Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\".\n"
+"\n"
+"Ξ•Ξ»ΞµΟ…ΞΈΞµΟΟΟƒΟ„Ξµ ΞΊΞ¬Ο€ΞΏΞΉΞΏ Ο‡ΟΟΞΏ ΟƒΟ„ΞΏ Ξ΄Ξ―ΟƒΞΊΞΏ ΞΊΞ±ΞΉ Ο€ΟΞΏΟƒΟ€Ξ±ΞΈΞ®ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬."
+
+#: src/gedit-utils.c:1337
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… \"%s\"."
+
+#: src/gedit-view.c:904
 #, c-format
 msgid "  Ln %d, Col. %d"
-msgstr ""
+msgstr "  Ξ“Ο %d, Ξ£Ο„Ξ·Ξ». %d"
 
-#: src/gedit-view.c:916
+#: src/gedit-view.c:942
 msgid "  OVR"
-msgstr ""
+msgstr "  OVR"
 
-#: src/gedit-view.c:918
+#: src/gedit-view.c:944
 msgid "  INS"
-msgstr ""
+msgstr "  INS"
 
-#, fuzzy
-#~ msgid "Loaded file %s"
-#~ msgstr "Φόρτωση του αρχείου %s"
+#: src/gedit2.c:75
+msgid "Show mdi debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ mdi."
 
-#~ msgid "Unable to open recent file: %s"
-#~ msgstr "Σφάλμα ανοίγματπς προσφάτου αρχείου: %s"
+#: src/gedit2.c:78
+msgid "Show commands debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ ΞµΞ½Ο„ΞΏΞ»ΟΞ½."
 
-#, fuzzy
-#~ msgid "_Hello World"
-#~ msgstr "Καλημέρα Κόσμε"
+#: src/gedit2.c:81
+msgid "Show document debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ ΞµΞ³Ξ³ΟΞ¬Ο†Ο‰Ξ½."
 
-#, fuzzy
-#~ msgid "Prints Hello World."
-#~ msgstr "Καλημέρα Κόσμε"
+#: src/gedit2.c:84
+msgid "Show file debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½."
 
-#, fuzzy
-#~ msgid "Hello World "
-#~ msgstr "Καλημέρα Κόσμε"
+#: src/gedit2.c:87
+msgid "Show plugin debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ξ±ΟΞΈΟΟ‰ΞΌΞ¬Ο„Ο‰Ξ½."
 
-#~ msgid "Hello World"
-#~ msgstr "Καλημέρα Κόσμε"
+#: src/gedit2.c:90
+msgid "Show prefs debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ο€ΟΞΏΟ„ΞΉΞΌΞ®ΟƒΞµΟ‰Ξ½."
 
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "Δείγμα αρθρώματος 'καλημέρα κόσμε'"
+#: src/gedit2.c:93
+msgid "Show printing debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ ΞµΞΊΟ„Ο…Ο€ΟΟƒΞµΟ‰Ξ½."
 
-#, fuzzy
-#~ msgid "Invalid UTF-8 data encountered reading file"
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου: \n"
-#~ "\n"
-#~ "%s"
+#: src/gedit2.c:96
+msgid "Show search debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ξ±Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·Ο‚."
 
-#, fuzzy
-#~ msgid ""
-#~ "An error occurred while opening the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου: \n"
-#~ "\n"
-#~ "%s"
+#: src/gedit2.c:99
+msgid "Show undo debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ξ±ΞΊΟ…ΟΟΟƒΞµΟ‰Ξ½."
 
-#, fuzzy
-#~ msgid ""
-#~ "An error occurred while saving the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο κλείσιμο του αρχείου: \n"
-#~ "\n"
-#~ "%s"
+#: src/gedit2.c:102
+msgid "Show view debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ο€ΟΞΏΞ²ΞΏΞ»ΟΞ½."
 
-#, fuzzy
-#~ msgid ""
-#~ "An error occurred while reverting the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου: \n"
-#~ "\n"
-#~ "%s"
+#: src/gedit2.c:105
+msgid "Show recent debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ο€ΟΞΏΟƒΟ†Ξ¬Ο„Ο‰Ξ½."
 
-#, fuzzy
-#~ msgid "C_lear"
-#~ msgstr "Αλλαγή"
+#: src/gedit2.c:108
+msgid "Show session management debugging messages."
+msgstr "Ξ•ΞΌΟ†Ξ¬Ξ½ΞΉΟƒΞ· ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚ Ξ΄ΞΉΞ±Ο‡ΞµΞ―ΟΞΉΟƒΞ·Ο‚ ΟƒΟ…Ξ½ΞµΞ΄ΟΞ―Ξ±Ο‚."
 
-#, fuzzy
-#~ msgid "C_lose All"
-#~ msgstr "Κλείσιμο Όλων"
+#: src/gedit2.c:111
+msgid "Turn on all debugging messages."
+msgstr "Ξ•Ξ½ΞµΟΞ³ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· ΟΞ»Ο‰Ξ½ Ο„Ο‰Ξ½ ΞΌΞ·Ξ½Ο…ΞΌΞ¬Ο„Ο‰Ξ½ ΞµΞΊΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰ΟƒΞ·Ο‚."
 
-#, fuzzy
-#~ msgid "Clear"
-#~ msgstr "Αλλαγή"
+#: src/gedit2.c:114
+msgid "Quit an existing instance of gedit"
+msgstr "ΞΞΎΞΏΞ΄ΞΏΟ‚ Ξ±Ο€Ο Ο…Ο€Ξ¬ΟΟ‡ΞΏΟ…ΟƒΞ± ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· Ο„ΞΏΟ… gedit"
 
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Έξοδος"
+#: src/gedit2.c:117
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… Ο€Ξ±ΟΞ±ΞΈΟΟΞΏΟ… ΟƒΞµ Ο…Ο€Ξ¬ΟΟ‡ΞΏΟ…ΟƒΞ± ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· Ο„ΞΏΟ… gedit"
 
-#~ msgid "Exit"
-#~ msgstr "Έξοδος"
+#: src/gedit2.c:120
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Ξ”Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ± Ξ½Ξ­ΞΏΟ… ΞµΞ³Ξ³ΟΞ¬Ο†ΞΏΟ… ΟƒΞµ Ο…Ο€Ξ¬ΟΟ‡ΞΏΟ…ΟƒΞ± ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· Ο„ΞΏΟ… gedit"
 
-#, fuzzy
-#~ msgid "Find _Again"
-#~ msgstr "Αναζήτηση _Γραμμής"
+#: src/gnome-recent-view-bonobo.c:218
+#, c-format
+msgid "Open %s"
+msgstr "Ξ†Ξ½ΞΏΞΉΞ³ΞΌΞ± %s"
 
-#~ msgid "Open from _URI..."
-#~ msgstr "¶νοιγμα από _URI..."
-
-#, fuzzy
-#~ msgid "Print Pre_view"
-#~ msgstr "Προεπισκόπιση εκ_τύπωσης"
-
-#, fuzzy
-#~ msgid "Revert to saved"
-#~ msgstr "Αντιστροφή"
-
-#, fuzzy
-#~ msgid "Sav_e All"
-#~ msgstr "Αποθήκευση Όλων"
-
-#, fuzzy
-#~ msgid "_Plugins manager"
-#~ msgstr "Διαχειριστής Αρθρωμάτων Κειμενογράφου"
-
-#, fuzzy
-#~ msgid "_Preferences"
-#~ msgstr "Κειμενογράφος: Προτιμίσεις"
-
-#, fuzzy
-#~ msgid "_Select all"
-#~ msgstr "Επιλογή..."
-
-#, fuzzy
-#~ msgid "_Settings"
-#~ msgstr "Απο_θήκευση Ρυθμίσεων"
-
-#~ msgid "Save As..."
-#~ msgstr "Αποθήκευση Ως..."
-
-#, fuzzy
-#~ msgid "Manager"
-#~ msgstr "Διαχειριστής..."
-
-#, fuzzy
-#~ msgid "_Manager"
-#~ msgstr "Διαχειριστής..."
-
-#~ msgid "Browse"
-#~ msgstr "Περιήγηση"
-
-#~ msgid "Web browse plugin"
-#~ msgstr "¶ρθρωμα περιήγησης δικτυακού ιστού"
-
-#~ msgid "Number Converter"
-#~ msgstr "Μετατροπέας Αριθμών"
-
-#, fuzzy
-#~ msgid "diff"
-#~ msgstr "Διαφορές"
-
-#~ msgid "Untitled %i"
-#~ msgstr "Ανώνυμο %i"
-
-#~ msgid "Diff"
-#~ msgstr "Διαφορές"
-
-#, fuzzy
-#~ msgid "Document info"
-#~ msgstr "Ρυθμίσεις Εγγράφου"
-
-#~ msgid "Executing command: %s"
-#~ msgstr "Εκτέλεση εντολής: %s"
-
-#~ msgid "Email"
-#~ msgstr "Ηλεκτρονική Αλληλογραφία"
-
-#~ msgid "Email the current document"
-#~ msgstr "Αποστολή τρέχοντος εγγράφου μέσω ηλ. ταχυδρομείου"
-
-#~ msgid ""
-#~ "Email the current document to a specified email address\n"
-#~ "gedit searches for sendmail to use this plugin."
-#~ msgstr ""
-#~ "Αποστολή του τρέχοντος εγγράφου μέσω αλληλογραφίας στη ορισμένη "
-#~ "διεύθυνση\n"
-#~ "Ο Κειμενογράφος αναζητεί το πρόγραμμα sendmail για αυτό το άρθρωμα."
-
-#~ msgid "Reverse"
-#~ msgstr "Αντιστροφή"
-
-#~ msgid "Reverse text"
-#~ msgstr "Αντιστροφή κειμένου"
-
-#, fuzzy
-#~ msgid "Sort a document."
-#~ msgstr "Δημιουργία νέου εγγράφου"
-
-#, fuzzy
-#~ msgid "Sort a document or selected text."
-#~ msgstr "Τα δύο έγγραφα που επιλέχθηκαν είναι τα ίδια."
-
-#~ msgid " _Change... "
-#~ msgstr "_Αλλαγή... "
-
-#~ msgid "Enter the _URL to browse for:"
-#~ msgstr "Εισάγετε το _URL για περιήγηση:"
-
-#~ msgid "Lynx found at: "
-#~ msgstr "Το πρόγραμμα lynx βρέθηκε στο: "
-
-#~ msgid "gedit: Web Browse plugin"
-#~ msgstr "gedit: ¶ρθρωμα περιήγησης δικτυακού ιστού"
-
-#~ msgid "location"
-#~ msgstr "τοποθεσία"
-
-#~ msgid " Decimal to _Hex "
-#~ msgstr " Δεκαδικό σε Δεκαε_ξαδικό "
-
-#~ msgid " Decimal to _Octal "
-#~ msgstr " Δεκαδικό σε _Οκταδικό "
-
-#~ msgid " Hex to Decima_l "
-#~ msgstr " Δεκαεξαδικό σε _Δεκαδικό"
-
-#~ msgid "_Converted value:"
-#~ msgstr "Τιμή που έχει _μετατραπεί:"
-
-#~ msgid "_Value to be converted:"
-#~ msgstr "_Τιμή για μετατροπή:"
-
-#~ msgid "gedit: Number Converter plugin"
-#~ msgstr "gedit: ¶ρθρωμα Μετατροπέα Αριθμών"
-
-#~ msgid "Diff found at: "
-#~ msgstr "Το πρόγραμμα diff βρέθηκε στο: "
-
-#~ msgid "Select the \"first\" file..."
-#~ msgstr "Επιλέξτε το \"πρώτο\" αρχείο..."
-
-#~ msgid "Select the \"second\" file..."
-#~ msgstr "Επιλέξτε το \"δεύτερο\" αρχείο..."
-
-#, fuzzy
-#~ msgid "Current column"
-#~ msgstr "Τρέχουσα γραμματοσειρά"
-
-#, fuzzy
-#~ msgid "Current line"
-#~ msgstr "Τρέχουσα γραμματοσειρά"
-
-#~ msgid "F_rom:"
-#~ msgstr "Α_πό:"
-
-#~ msgid "File to use as body of message: "
-#~ msgstr "Χρήση αρχείου ως το περιεχόμενο του γράμματος: "
-
-#~ msgid "From:"
-#~ msgstr "Από:"
-
-#~ msgid "Sendmail found at:"
-#~ msgstr "Το πρόγραμμα sendmail βρέθηκε στο:"
-
-#~ msgid "Subject:"
-#~ msgstr "Θέμα:"
-
-#~ msgid "To:"
-#~ msgstr "Προς:"
-
-#~ msgid "_Subject:"
-#~ msgstr "_Θέμα:"
-
-#~ msgid "_To:"
-#~ msgstr "Πρ_ος:"
-
-#~ msgid "gedit: E-mail plugin"
-#~ msgstr "gedit: ¶ρθρωμα ηλεκτρονικής αλληλογραφίας"
-
-#~ msgid "gedit: e-mail plugin"
-#~ msgstr "Κειμενογράφος: άρθρωμα ηλεκτρονικής αλληλογραφίας"
-
-#~ msgid "Select the working directory..."
-#~ msgstr "Επιλέξτε τον κατάλογο εργασίας..."
-
-#, fuzzy
-#~ msgid "Case Sensitive"
-#~ msgstr "_Διάκριση κεφαλαίων/πεζών"
-
-#, fuzzy
-#~ msgid "Sort starting at column:"
-#~ msgstr "Δε βρέθηκε το κείμενο"
-
-#, fuzzy
-#~ msgid "gedit: Sort plugin"
-#~ msgstr "gedit: ¶ρθρωμα διαφορών αρχείων"
-
-#~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
-#~ msgstr "(C) 1998, 1999, 2000 Alex Roberts και Evan Lawrence"
-
-#~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
-#~ msgstr ""
-#~ "Για να χρησιμοποιήσετε το άρθρωμα %s, πρέπει να καθορίσετε μια νέα "
-#~ "τοποθεσία για το \"%s\"."
-
-#~ msgid "gedit: Preferences"
-#~ msgstr "Κειμενογράφος: Προτιμίσεις"
-
-#, fuzzy
-#~ msgid "Search string not found"
-#~ msgstr "Δε βρέθηκε το κείμενο"
-
-#~ msgid "Could not allocate the memory for the Replace all request."
-#~ msgstr ""
-#~ "Αδύνατη η δέσμευση απαιτούμενης μνήμης για την αίτηση Αντικατάσταση Όλων."
-
-#~ msgid "Add _header"
-#~ msgstr "Προσθήκη _κεφαλίδας"
-
-#~ msgid "Appearance"
-#~ msgstr "Εμφάνιση"
-
-#~ msgid "Documents"
-#~ msgstr "Έγγραφα"
-
-#~ msgid "Editor Behavior"
-#~ msgstr "Συμπεριφορά Διορθωτή"
-
-#, fuzzy
-#~ msgid "Enable _Auto-indent"
-#~ msgstr "Ενεργοποίηση αυτόματης στοίχισης"
-
-#~ msgid "Enable word _wrapping"
-#~ msgstr "Ενεργοποίηση αυτόματης _αλλαγής γραμμής"
-
-#~ msgid "General"
-#~ msgstr "Γενικά"
-
-#~ msgid "MDI (Multiple Document Interface)"
-#~ msgstr "ΔΠΕ (Διασύνδεση Πολλαπλών Εγγράφων)"
-
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Σε εκτύπωση"
-
-#~ msgid "Paper"
-#~ msgstr "Χαρτί"
-
-#~ msgid "Pick a Font"
-#~ msgstr "Επιλογή Γραμματοσειράς"
-
-#~ msgid "Printing"
-#~ msgstr "Σε εκτύπωση"
-
-#, fuzzy
-#~ msgid "Set toolbar to _icons only"
-#~ msgstr "Η εργαλειοθήκη ρυθμιστεί σε Μόνο Εικονίδια"
-
-#, fuzzy
-#~ msgid "Set toolbar to icons with _text"
-#~ msgstr "Η εργαλειοθήκη να οριστεί σε Εικονίδια με κείμενο"
-
-#, fuzzy
-#~ msgid "Tab _width: "
-#~ msgstr "Πλάτος στοιλοθέτη: "
-
-#, fuzzy
-#~ msgid "_Foreground: "
-#~ msgstr "Φόντο: "
-
-#~ msgid "_Landscape"
-#~ msgstr "_Τοπίο"
-
-#, fuzzy
-#~ msgid "_Mode: "
-#~ msgstr "Κατάσταση:"
-
-#~ msgid "_Portrait"
-#~ msgstr "_Πορτραίτο"
-
-#~ msgid "gedit: Browse for program location..."
-#~ msgstr "gedit: Περιήγηση για τη θέση προγράμματος..."
-
-#~ msgid "RO - "
-#~ msgstr "RO - "
-
-#, fuzzy
-#~ msgid "``%s'' has been modified.  Do you want to save the changes?"
-#~ msgstr "Το ``%s'' έχει τροποποιηθεί. Θα θέλατε να το αποθηκεύσετε;"
-
-#~ msgid "This file does not end with a valid extension\n"
-#~ msgstr "Το αρχείο δεν έχει έγκυρη κατάληξη\n"
-
-#~ msgid ""
-#~ "An error was encountered while opening the file \"%s\".\n"
-#~ "Please make sure the file exists."
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου \"%s\".\n"
-#~ "Παρακαλώ επιβεβαιώστε ότι το αρχείο υπάρχει."
-
-#~ msgid ""
-#~ "An error was encountered while opening the file \"%s\".\n"
-#~ "Could not allocate the required memory."
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου \"%s\".\n"
-#~ "Δε μπόρεσε να δεσμευτεί η απαιτούμενη μνήμη."
-
-#~ msgid ""
-#~ "An error was encountered while reading the file: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Make sure that you have permissions for opening the file. "
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα κατά το άνοιγμα του αρχείου: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Επιβεβαιώστε ότι έχετε τα δικαιώματα να ανοίξετε το αρχείο."
-
-#~ msgid ""
-#~ "Internal error reading the file: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Please, report this error to submit@bugs.gnome.org."
-#~ msgstr ""
-#~ "Εσωτερικό σφάλμα στο άνοιγμα του αρχείου: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Παρακαλώ αναφέρατε αυτό το σφάλμα στο submit@bugs.gnome.org"
-
-#~ msgid "The document contains no data."
-#~ msgstr "Το έγγραφο δεν περιέχει δεδομένα."
-
-#~ msgid ""
-#~ "gedit was unable to save the file:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Because of an unknown reason (1). Please report this Problem to "
-#~ "submit@bugs.gnome.org"
-#~ msgstr ""
-#~ "Ο Κειμενογράφος δε μπόρεσε να αποθηκεύσει το αρχείο:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Λόγω αγνώστου σφάλματος (1). Παρακαλώ αναφέρατε αυτό το σφάλμα στο "
-#~ "submit@bugs.gnome.org"
-
-#~ msgid ""
-#~ "gedit was unable to save the file:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Because of an unknown reason (2). Please report this Problem to "
-#~ "submit@bugs.gnome.org"
-#~ msgstr ""
-#~ "Ο Κειμενογράφος δε μπόρεσε να αποθηκεύσει το αρχείο:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Λόγω αγνώστου σφάλματος (2). Παρακαλώ αναφέρατε αυτό το σφάλμα στο "
-#~ "submit@bugs.gnome.org"
-
-#~ msgid "Could not allocate the required memory."
-#~ msgstr "Αδύνατη η δέσμευση απαιτούμενης μνήμης."
-
-#~ msgid "Error in the pipe."
-#~ msgstr "Σφάλμα στη σωλήνωση."
-
-#~ msgid "``%s'' is about to be overwritten. Do you want to continue ?"
-#~ msgstr "Το ``%s'' πρόκειται να επικαλυφθεί. Θέλετε να συνεχίσετε;"
-
-#~ msgid "Error saving file!"
-#~ msgstr "Σφάλμα κατά την αποθήκευση του αρχείου!"
-
-#, fuzzy
-#~ msgid ""
-#~ "Are you sure you want to revert all changes?\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Είσαστε βέβαιοι ότι θέλετε να ακυρώσετε όλες τις αλλαγές;\n"
-#~ "(%s)"
-
-#~ msgid "The file ``%s'' does not exist.  Would you like to create it?"
-#~ msgstr "Το αρχείο ``%s'' δεν υπάρχει. Θέλετε να το δημιουργήσετε;"
-
-#~ msgid "Show window debugging messages."
-#~ msgstr "Εμφάνιση μηνυμάτων εκσφαλμάτωσης παραθύρου."
-
-#~ msgid "Cannot initialize gnome-vfs."
-#~ msgstr "Αδύνατη η αρχικοποίηση του gnome-vfs."
-
-#~ msgid "Open (swap) .c/.h file"
-#~ msgstr "¶νοιγμα .c/.h αρχείου"
-
-#, fuzzy
-#~ msgid "Print pre_view..."
-#~ msgstr "Προεπισκόπηση εκτύπωσης..."
-
-#~ msgid "Preview data to be printed"
-#~ msgstr "Προεπισκόπηση δεδομένων για εκτύπωση"
-
-#~ msgid "Add a new view of the document"
-#~ msgstr "Προσθήκη νέας απεικόνισης του εγγράφου"
-
-#~ msgid "_Remove View"
-#~ msgstr "Α_φαίρετη Απεικόνισης"
-
-#~ msgid "Remove view of the document"
-#~ msgstr "Αφαίρεση τρέχουσας απεικόνισης εγγράφου"
-
-#, fuzzy
-#~ msgid "Manage available plugin modules"
-#~ msgstr "Διαθέσιμα Αρθρώματα"
-
-#~ msgid ""
-#~ "The program %s could not be found.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Το πρόγραμμα %s δε βρέθηκε.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "'%s' doesn't seem to exist.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Το '%s' δε φαίνετε να υπάρχει.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "'%s' seems to be a directory.\n"
-#~ "but '%s' could not be found inside it.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Το '%s' φαίνετε να είναι κατάλογος.\n"
-#~ "αλλά το '%s' δε μπόρεσε να βρεθεί μέσα του.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "'%s' doesn't seem to be a program.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Το '%s' δε φαίνετε να είναι πρόγραμμα.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "%sYou won't be able to use the %s plugin without %s. \n"
-#~ " Do you want to specify a new location for %s?"
-#~ msgstr ""
-#~ "%sΔε θα μπορέσετε να χρησιμοποιήσετε το άρθρωμα %s χωρίς το %s. \n"
-#~ " Θέλετε να ορίσετε μια νέα τοποθεσία για το %s;"
-
-#~ msgid "Error, init_plugin returned an error"
-#~ msgstr "Σφάλμα, η init_plugin επέστρεψε σφάλμα"
-
-#~ msgid "Error, plugin is still in use"
-#~ msgstr "Σφάλμα, το άρθρωμα είναι ακόμα σε χρήση"
-
-#~ msgid ""
-#~ "gedit could not find the font \"%s\".\n"
-#~ "gedit is unable to print without this font installed."
-#~ msgstr ""
-#~ "Ο Κειμενογράφος δε μπόρεσε να βρεί την γραμματοσειρά \"%s\".\n"
-#~ "Ο Κειμενογράφος δεν μπορεί να εκτυπώσει χωρίς την εγκατάσταση\n"
-#~ "της γραμματοσειράς αυτής."
-
-#~ msgid "Printing .."
-#~ msgstr "Εκτυπώνεται .."
-
-#~ msgid "Printing ..."
-#~ msgstr "Εκτυπώνεται .."
-
-#~ msgid "_File/"
-#~ msgstr "_Αρχείο/"
-
-#~ msgid ""
-#~ "Can't count lines if another search operation is active, please close the "
-#~ "search dialog."
-#~ msgstr ""
-#~ "Δεν είναι δυνατό να μετρηθούν οι γραμμές αν μια άλλη λειτουργία "
-#~ "αναζήτησης είναι ενεργή. Παρακαλώ κλείστε το διάλογο αναζήτησης."
-
-#~ msgid ""
-#~ "Filename: %s\n"
-#~ "\n"
-#~ "Total Characters: %i\n"
-#~ "Total Words: %i\n"
-#~ "Total Lines: %i\n"
-#~ "Total Paragraphs: %i\n"
-#~ "Total Bytes: %i\n"
-#~ "\n"
-#~ "Current Line: %i\n"
-#~ "Current Column: %i"
-#~ msgstr ""
-#~ "Αρχείο: %s\n"
-#~ "\n"
-#~ "Συνολικοί Χαρακτήρες: %i\n"
-#~ "Συνολικές Λέξεις: %i\n"
-#~ "Συνολικές Γραμμές: %i\n"
-#~ "Συνολικοί Παράγραφοι: %i\n"
-#~ "Συνολικά Byte: %i\n"
-#~ "\n"
-#~ "Τρέχουσα Γραμμή: %i\n"
-#~ "Τρέχουσα Στήλη: %i"
-
-#~ msgid "You can't remove the last view of a document."
-#~ msgstr "Δε μπορείτε να διαγράψετε την τελευταία απεικόνιση ενός εγγράφου."
-
-#~ msgid "label12"
-#~ msgstr "label12"
-
-#~ msgid "label13"
-#~ msgstr "label13"
-
-#~ msgid ""
-#~ "Left\n"
-#~ "Right\n"
-#~ "Top\n"
-#~ "Bottom\n"
-#~ msgstr ""
-#~ "Αριστερά\n"
-#~ "Δεξιά\n"
-#~ "Επάνω\n"
-#~ "Κάτω\n"
-
-#~ msgid ""
-#~ "Notebook\n"
-#~ "Toplevel\n"
-#~ "Modal\n"
-#~ "Default\n"
-#~ msgstr ""
-#~ "Τετράδιο\n"
-#~ "Κορυφής\n"
-#~ "Μοναδικό\n"
-#~ "Εξ'ορισμού\n"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "ΑαΒβΓγΔδΕεΖζΗηΘθΙιΚκΛλΜμΝνΞξΟοΠπΡρΣσΤτΥυΦφΧχΨψΩω"
-
-#~ msgid ""
-#~ "Plugin Name: %s\n"
-#~ "Author: %s\n"
-#~ "Description: %s\n"
-#~ msgstr ""
-#~ "Όνομα Αρθρώματος: %s\n"
-#~ "Συγγραφέας: %s\n"
-#~ "Περιγραφή: %s\n"
-
-#~ msgid "Add >"
-#~ msgstr "Προσθήκη >"
-
-#~ msgid "< Remove"
-#~ msgstr "< Αφαίρεση"
-
-#~ msgid "Add All >>"
-#~ msgstr "Προσθήκη Όλων >>"
-
-#~ msgid "<< Remove All"
-#~ msgstr "<< Διαγραφή Όλων"
-
-#~ msgid "Installed Plugins"
-#~ msgstr "Εγκαταστημένα Αρθρώματα"
-
-#~ msgid "Open as URI"
-#~ msgstr "¶νοιγμα ως URI"
-
-#~ msgid ""
-#~ "An error was encountered while opening the file: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Please make sure the file exists."
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Παρακαλώ επιβεβαιώστε ότι το αρχείο υπάρχει."
-
-#~ msgid "File _Info"
-#~ msgstr "_Πληροφορίες Αρχείου"
-
-#~ msgid "Get the basic file info"
-#~ msgstr "Λήψη βασικών πληροφοριών αρχείου"
-
-#~ msgid "File to use as body of message : "
-#~ msgstr "Χρήση αρχείου ως το περιεχόμενο του γράμματος : "
-
-#~ msgid "Sendmail found at :"
-#~ msgstr "Το πρόγραμμα sendmail βρέθηκε στο :"
-
-#~ msgid "browse"
-#~ msgstr "περιήγηση"
-
-#~ msgid "don't translate this\n"
-#~ msgstr "να μη μεταφραστεί αυτό\n"
-
-#~ msgid "Directory  "
-#~ msgstr "Κατάλογος  "
-
-#~ msgid "Text found at line :%i"
-#~ msgstr "Το κείμενο βρέθηκε στη γραμμή: %i"
-
-#~ msgid "Enter the line number you wish to go to."
-#~ msgstr "Εισάγετε τον αριθμό γραμμής στον οποίο θέλετε να πάτε."
-
-#~ msgid "b_eginning of document"
-#~ msgstr "από αρ_χή εγγράφου"
-
-#~ msgid ""
-#~ "An error was encountered while opening the file:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "Please make sure the file is not being used by another application\n"
-#~ "and that the file is not empty."
-#~ msgstr ""
-#~ "Παρουσιάστηκε σφάλμα στο άνοιγμα του αρχείου:\n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "\n"
-#~ "Παρακαλώ επιβεβαιώστε ότι το αρχείο δεν βρίσκετε σε χρήση από άλλη\n"
-#~ "εφαρμογή και ότι το αρχείο δεν είναι κενό."
-
-#~ msgid "Get file info like characters, lines, words & paragraphs count."
-#~ msgstr ""
-#~ "Πληροφορίες αρχείου όπως αριθμός χαρακτήτων, γραμμών, λέξεων και "
-#~ "παραγράφων."
-
-#~ msgid "Can't find again. There is not a text string to search for."
-#~ msgstr "Δε μπορεί να βρεθεί ξανά. Δεν υπάρχει αλφαριθμητικό για εύρεση."
-
-#~ msgid "With special thanks to:"
-#~ msgstr "Ιδιαίτερες ευχαριστίες στους:"
-
-#~ msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-#~ msgstr "(C) 1998, 1999 Alex Roberts και Evan Lawrence"
-
-#~ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
-#~ msgstr ""
-#~ "Το gEdit είναι ένας μικρός και ελαφρύς διορθωτής κειμένου για το GNOME/Gtk"
-#~ "+"
-
-#~ msgid "Show splitscreen"
-#~ msgstr "Εμφάνιση Διαχωρισμού Οθόνης"
-
-#~ msgid "Enable Wordwrap"
-#~ msgstr "Αυτόματη αλλαγή γραμμής"
-
-#~ msgid "Find _In Files..."
-#~ msgstr "Αναζήτηση _Παντού"
-
-#~ msgid "Find text in all open files"
-#~ msgstr "Αναζήτηση κειμένου σε όλα τα ανοιχτά αρχεία"
-
-#~ msgid "Put the document tabs at the top"
-#~ msgstr "Τοποθέτηση σελιδοδεικτών εγγράφων επάνω"
-
-#~ msgid "Put the document tabs at the bottom"
-#~ msgstr "Τοποθέτηση σελιδοδεικτών εγγράφων κάτω"
-
-#~ msgid "Put the document tabs on the right"
-#~ msgstr "Τοποθέτηση σελιδοδεικτών εγγράφων δεξιά"
-
-#~ msgid "Toggle the presence of the document tabs"
-#~ msgstr "Αλλαγή θέσης σελιδοδεικτών"
-
-#~ msgid "Get the current and total lines"
-#~ msgstr "Εισαγωγή τρέχουσας ημ/νίας και ώρας"
-
-#~ msgid ""
-#~ "Filename: %s\n"
-#~ "\n"
-#~ "Total Lines: %i\n"
-#~ "Current Line: %i"
-#~ msgstr ""
-#~ "Όνομα αρχείου: %s\n"
-#~ "\n"
-#~ "Συνολικές γραμμές: %i\n"
-#~ "Τρέχουσα γραμμή: %i"
-
-#~ msgid "Read only file!"
-#~ msgstr "Αρχείο ανάγνωσης μόνο!"
-
-#~ msgid "Document Unchanged..."
-#~ msgstr "Το έγγραφο δε μεταβλήθηκε..."
-
-#~ msgid "Can't open file!"
-#~ msgstr "Αρχείο ανάγνωσης μόνο!"
-
-#~ msgid "New Document After Closing Last"
-#~ msgstr "Νέο εγγραφο μετά το κλείσιμο του τελευταίου"
-
-#~ msgid "Close Window After Closing Last"
-#~ msgstr "Κλείσιμο παραθύρου μετά το κλείσιμο τελευταίου εγγράφου"
-
-#~ msgid "Print Command"
-#~ msgstr "Εντολή Εκτύπωσης"
-
-#~ msgid "Window Size"
-#~ msgstr "Μέγεθος Παραθύρου"
-
-#~ msgid "Current Width:"
-#~ msgstr "Τρέχον Πλάτος:"
-
-#~ msgid "Startup Width:"
-#~ msgstr "Πλάτος έναρξης:"
-
-#~ msgid "Use Current"
-#~ msgstr "Χρήση τρέχοντος"
-
-#~ msgid "Current Height:"
-#~ msgstr "Τρέχον ύψος:"
-
-#~ msgid "Startup Height:"
-#~ msgstr "Ύψος έναρξης:"
-
-#~ msgid "_Autoindent"
-#~ msgstr "_Αυτόματη στοίχιση"
-
-# NOTE:  Since I was wondering and had to check the sources:
-#   "wordwrap" refers to automatic insertion of newlines
-#   "linewrap" refers to whether displayed lines will be wrapped
-#              or scrolled, if too long to fit in the widget
-#~ msgid "_Wordwrap"
-#~ msgstr "Αλλαγή γ_ραμμής"
-
-#~ msgid "_Splitscreen"
-#~ msgstr "Χωρισμός Οθό_νης"
-
-#~ msgid "Toggle Readonly"
-#~ msgstr "Ανάγνωση μόνο / Εγγραφή"
-
-#~ msgid "_Document Tabs"
-#~ msgstr "Σελι_δοδείκτες Εγγράφων"
-
-#~ msgid "Find In Files"
-#~ msgstr "Εύρεση Παντού"
-
-#~ msgid "Ask before replacing"
-#~ msgstr "Επιβεβαίωση αντικατάστασης"
-
-#~ msgid "Replace?"
-#~ msgstr "Αντικατάσταση;"
