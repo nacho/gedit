@@ -5,4 +5,5 @@
  */
 
 gchar *s = N_("Shell Output plugin");
+gchar *s = N_("Directory  ");
 gchar *s = N_("Enter shell command ");

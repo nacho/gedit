@@ -13,10 +13,15 @@
 #include "window.h"
 #include "document.h"
 #include "plugin.h"
+#include "view.h"
 
+#define BUFFER_SIZE 1024
 
+static GtkWidget *directory;
 static GtkWidget *command;
 static GtkWidget *dialog;
+
+static gchar *directory_entry_path ;
 
 static void
 destroy_plugin (PluginData *pd)
@@ -25,27 +30,32 @@ destroy_plugin (PluginData *pd)
 }
 
 static void
-close_shell_output (void)
+shell_output_finish (GtkWidget *w , gpointer data)
 {
 	gnome_dialog_close (GNOME_DIALOG (dialog));
 }
 
 static void
-scan_output_text (void){
+shell_output_scan_text (GtkWidget *w , gpointer data)
+{
 
-	Document *doc = gedit_document_current ();
-	gchar buffer [1025];
-	gchar *command_string=NULL ;
-	gchar **arg=NULL;
-	gint fdpipe [2];
-	gint pid ;
-	guint length , pos ;
+	Document *doc            = gedit_document_current ();
+	gchar    *buffer         = NULL ;
+	gchar    *command_string = NULL ;
+	gchar    **arg           = NULL;
+	gint     fdpipe [2];
+	gint     pid ;
+	gint     buffer_length_in , buffer_length_out ;
+	gint     position ;
 	
 	if ((command_string = gtk_entry_get_text (GTK_ENTRY (command)))==NULL)
 	{
 		return ;
 	}
 
+	directory_entry_path = gtk_entry_get_text (GTK_ENTRY (directory)) ;
+	printf ("%s\n",directory_entry_path);
+	
 	
 	if (pipe (fdpipe) == -1)
 	{
@@ -63,30 +73,41 @@ scan_output_text (void){
 		close (fdpipe[1]);
 
 		arg = g_strsplit (command_string," ",-1);
-		execvp (arg[0],arg);
+		execvp (*arg,arg);
 		_exit (1);
 	}
 	close (fdpipe[1]);
 	g_strfreev (arg);
-	length = 1;
-	pos = 0;
-	while (length > 0)
+
+	buffer_length_in = 1;
+	buffer_length_out = 0;
+	buffer = g_malloc (BUFFER_SIZE);
+
+	while (buffer_length_in > 0)
 	{
-		buffer [ length = read (fdpipe[0], buffer, 1024) ] = 0;
-		if (length > 0)
+		
+		if ( (buffer_length_in = read (fdpipe[0], buffer , BUFFER_SIZE)) == BUFFER_SIZE )
 		{
-		     	gedit_document_insert_text (doc, buffer, pos, FALSE);
-			pos += length;
+			
+			buffer_length_out += buffer_length_in;
+			buffer = g_realloc (buffer , buffer_length_out + BUFFER_SIZE );
 		}
+		else
+		{
+			buffer_length_out += buffer_length_in;
+			buffer [buffer_length_out] = 0 ;
+		}
+
 	}
+	
+	position = gedit_view_get_position (gedit_view_current ());
+	 
+	gedit_document_insert_text (doc, buffer, position , TRUE);
+			
+	gnome_dialog_close (GNOME_DIALOG (dialog));
+	g_free (buffer);
+	
 
-}
-
-static void
-scan_output_text_and_close (void){
-
-	scan_output_text ();
-	close_shell_output ();
 }
 
 
@@ -97,7 +118,6 @@ shell_output (void){
      GladeXML *gui;
 
      GtkWidget *ok;
-     GtkWidget *apply;
      GtkWidget *cancel;
     
      
@@ -109,17 +129,19 @@ shell_output (void){
 	     return;
      }
 
-     dialog = glade_xml_get_widget (gui,"shell_output_dialog");
-     ok = glade_xml_get_widget (gui,"ok_button");
-     apply = glade_xml_get_widget (gui,"apply_button");
-     cancel = glade_xml_get_widget (gui,"cancel_button");
-     command = glade_xml_get_widget (gui,"command_entry");
+     dialog     = glade_xml_get_widget (gui,"shell_output_dialog");
+     ok         = glade_xml_get_widget (gui,"ok_button");
+     cancel     = glade_xml_get_widget (gui,"cancel_button");
+     command    = glade_xml_get_widget (gui,"command_entry");
+     directory  = glade_xml_get_widget (gui,"directory_entry");
 
-     gtk_signal_connect (GTK_OBJECT ( ok ) , "clicked" , GTK_SIGNAL_FUNC(scan_output_text_and_close) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( apply ) , "clicked" , GTK_SIGNAL_FUNC(scan_output_text) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( cancel ) , "clicked" , GTK_SIGNAL_FUNC(close_shell_output) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( dialog ) , "delete_event" , GTK_SIGNAL_FUNC(close_shell_output) , NULL);
-
+     gtk_entry_set_text (GTK_ENTRY (directory) , directory_entry_path ) ;
+     
+     gtk_signal_connect (GTK_OBJECT ( ok ) , "clicked" , GTK_SIGNAL_FUNC(shell_output_scan_text) , NULL);
+     gtk_signal_connect (GTK_OBJECT ( command ) , "activate" , GTK_SIGNAL_FUNC(shell_output_scan_text) , NULL);
+     gtk_signal_connect (GTK_OBJECT ( cancel ) , "clicked" , GTK_SIGNAL_FUNC(shell_output_finish) , NULL);
+     gtk_signal_connect (GTK_OBJECT ( dialog ) , "delete_event" , GTK_SIGNAL_FUNC(shell_output_finish) , NULL);
+     
      gnome_dialog_set_parent (GNOME_DIALOG (dialog), gedit_window_active());
      gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
@@ -140,6 +162,7 @@ init_plugin (PluginData *pd)
 	pd->author = "Roberto Majadas <phoenix@nova.es>";
 	
 	pd->private_data = (gpointer)shell_output;
-	
+
+	directory_entry_path = g_get_current_dir ();
 	return PLUGIN_OK;
 }
