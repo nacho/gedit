@@ -133,6 +133,11 @@ void prefs_callback (GtkWidget *widget, gpointer data)
 
 /* ---- Auto-indent Callback(s) --- */
 
+void auto_indent_toggle_callback (GtkWidget *w, gpointer data)
+{
+	main_window->auto_indent = !main_window->auto_indent;
+}
+
 void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 {
 	int i, newlines, newline_1;
@@ -143,6 +148,8 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 	if (event->keyval != GDK_Return)
 		return;
 	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
+		return;
+	if (!main_window->auto_indent)
 		return;
 
 	newlines = 0;
@@ -183,6 +190,7 @@ void auto_indent_callback (GtkWidget *text, GdkEventKey *event)
 		gtk_editable_insert_text (GTK_EDITABLE (text), whitespace, strlen(whitespace), &i);
 	}
 	
+	g_free (whitespace);
 	line_pos_callback (NULL, text); /* <-- this is so the statusbar updates when it auto-indents */
 }
 
@@ -293,6 +301,7 @@ void file_close_cmd_callback (GtkWidget *widget, gpointer data)
 			if (doc->filename != NULL)
 				g_free (doc->filename);
 			g_free (doc);
+			gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, _("File Closed..."));
 		}
 		else {
 			gtk_notebook_remove_page(GTK_NOTEBOOK(main_window->notebook),

@@ -71,7 +71,7 @@ gint gE_file_open(gE_document *document, gchar *filename)
 	do {
 		if (fgets(str, sizeof(str)+1, file_handle) == NULL)
 			break;
-		else if ( ((int) str[0] > 31 && (int) str[0] < 126) || ((int) str[0] > 7 && (int)str[0] <14) || ((int)str[0] == 0))
+		else if ( ((int) str[0] > 31)  || ((int) str[0] > 7 && (int)str[0] <14) || ((int)str[0] == 0))
 			gtk_text_insert (GTK_TEXT(document->text), NULL, &document->text->style->black, NULL, str, strlen(str));
 	} while(!feof(file_handle));
 	fclose(file_handle);

@@ -61,6 +61,8 @@ GnomeUIInfo gedit_search_menu [] = {
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
 	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cmd_callback, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cmd_callback, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
 	GNOMEUIINFO_END
 };
 
@@ -74,6 +76,8 @@ GnomeUIInfo gedit_tab_menu []= {
 
 GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Text font..."),  NULL, prefs_callback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_callback, NULL, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, NULL, NULL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_SUBTREE, N_("Tab location"), NULL, &gedit_tab_menu },
 	GNOMEUIINFO_END
@@ -112,6 +116,7 @@ gE_window *gE_window_new()
   window->documents = NULL;
   window->search = g_malloc (sizeof(gE_search));
   window->search->window = NULL;
+  window->auto_indent = 0;
 
 #ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -163,7 +168,7 @@ gE_window *gE_window_new()
       window->statusbar = gtk_statusbar_new ();
       gtk_box_pack_start (GTK_BOX (box2), window->statusbar, TRUE, TRUE, 0);
       gtk_widget_show (window->statusbar);
-      gtk_widget_show (box2);
+
       
       line_button = gtk_button_new_with_label ("Line");
       window->line_label = gtk_label_new ("1");
@@ -179,12 +184,22 @@ gE_window *gE_window_new()
       gtk_widget_show (col_button);
       gtk_widget_show (window->col_label);
       gtk_widget_set_usize (window->col_label, 40, 0);
+      gtk_widget_show (box2);
+      window->statusbox = box2;
             
   gtk_widget_show(window->menubar);
   gtk_widget_show (window->notebook);
   gtk_widget_show (window->window);
           
   return window;
+}
+
+void gE_window_toggle_statusbar (GtkWidget *w, gpointer data)
+{
+	if (GTK_WIDGET_VISIBLE(main_window->statusbox))
+		gtk_widget_hide (main_window->statusbox);
+	else
+		gtk_widget_show (main_window->statusbox);
 }
 
 void gE_window_new_with_file(gE_window *window, char *filename)

@@ -33,7 +33,7 @@ static GtkMenuEntry menu_items[] =
      {"<Main>/Options/<separator>", NULL, NULL, NULL},
      {"<Main>/Options/Word Wrap", NULL, NULL, NULL},
      {"<Main>/Options/Syntax Highlighting", NULL, NULL, NULL},
-     {"<Main>/Options/Auto Indent", NULL, NULL, NULL},
+     {"<Main>/Options/Toggle Autoindentt", NULL, auto_indent_toggle_callback, NULL},
      {"<Main>/Options/<separator>", NULL, NULL, NULL},
      {"<Main>/Options/Tab Location", NULL, NULL, NULL},
      {"<Main>/Options/Tab Location/Top", NULL, tab_top_cback, NULL},

@@ -33,6 +33,7 @@ void tab_bot_cback (GtkWidget *widget, gpointer data);
 void tab_lef_cback (GtkWidget *widget, gpointer data);
 void tab_rgt_cback (GtkWidget *widget, gpointer data);
 void auto_indent_callback (GtkWidget *text, GdkEventKey *event);
+void auto_indent_toggle_callback (GtkWidget *w, gpointer data);
 void line_pos_callback (GtkWidget *w, GtkWidget *text);
 void gE_event_button_press (GtkWidget *w, GdkEventButton *event);
 
@@ -43,6 +44,7 @@ void gE_show_version();
 void gE_about_box();
 void gE_window_new_with_file(gE_window *window, char *filename);
 gE_window *gE_window_new();
+void gE_window_toggle_statusbar (GtkWidget *w, gpointer data);
 gE_document *gE_document_new(gE_window *window);
 gE_document *gE_document_current(gE_window *window);
 gint gE_file_open (gE_document *document, gchar *filename);
@@ -67,6 +69,7 @@ struct _gE_window {
 	GtkAcceleratorTable *accel;
 	GList *documents;
 	gE_search *search;
+	gint auto_indent;
 };
 
 struct _gE_document {
