@@ -298,7 +298,6 @@ ignore_all (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell)
 	g_free (word);
 }
 
-
 static void
 replace_word (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell) 
 {
@@ -537,22 +536,23 @@ clear_session_cb (GeditSpellChecker          *checker,
  * since that prevents the use of edit functions on the context menu. 
  */
 static gboolean
-button_press_event (GtkTextView *view, GdkEventButton *event, gpointer data) 
+button_press_event (GtkTextView *view,
+		    GdkEventButton *event,
+		    GeditAutomaticSpellChecker *spell) 
 {
 	if (event->button == 3) 
 	{
 		gint x, y;
 		GtkTextIter iter;
-		
+
 		GtkTextBuffer *buffer = gtk_text_view_get_buffer (view);
-		GeditAutomaticSpellChecker *spell = (GeditAutomaticSpellChecker*)data;
 
 		gtk_text_view_window_to_buffer_coords (view, 
 				GTK_TEXT_WINDOW_TEXT, 
 				event->x, event->y,
 				&x, &y);
 		
-		gtk_text_view_get_iter_at_location(view, &iter, x, y);
+		gtk_text_view_get_iter_at_location (view, &iter, x, y);
 
 		gtk_text_buffer_move_mark (buffer, spell->mark_click, &iter);
 	}
@@ -560,7 +560,25 @@ button_press_event (GtkTextView *view, GdkEventButton *event, gpointer data)
 	return FALSE; /* false: let gtk process this event, too.
 			 we don't want to eat any events. */
 }
-	
+
+/* Move the insert mark before popping up the menu, otherwise it
+ * will contain the wrong set of suggestions.
+ */
+static gboolean
+popup_menu_event (GtkTextView *view, GeditAutomaticSpellChecker *spell) 
+{
+	GtkTextIter iter;
+	GtkTextBuffer *buffer;
+
+	buffer = gtk_text_view_get_buffer (view);
+
+	gtk_text_buffer_get_iter_at_mark (buffer, &iter,
+					  gtk_text_buffer_get_insert (buffer));
+	gtk_text_buffer_move_mark (buffer, spell->mark_click, &iter);
+
+	return FALSE;
+}
+
 GeditAutomaticSpellChecker *
 gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checker)
 {
@@ -757,6 +775,11 @@ gedit_automatic_spell_checker_attach_view (
 			  G_CALLBACK (button_press_event), 
 			  spell);
 
+	g_signal_connect (G_OBJECT (gedit_view_get_gtk_text_view (view)), 
+			  "popup-menu",
+			  G_CALLBACK (popup_menu_event), 
+			  spell);
+
 	g_signal_connect (G_OBJECT (view), 
 			  "populate-popup",
 			  G_CALLBACK (populate_popup), 
@@ -787,6 +810,4 @@ gedit_automatic_spell_checker_detach_view (
 
 	spell->views = g_slist_remove (spell->views, view);
 }
-
-
 
