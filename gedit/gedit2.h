@@ -32,6 +32,8 @@
 #define __GEDIT2_H__
 
 #include <gmodule.h>
+#include <glib/glist.h>
+#include <bonobo/bonobo-window.h>
 
 #include "gedit-mdi.h"
 #include "gedit-document.h"
@@ -41,9 +43,11 @@ extern GeditMDI* gedit_mdi;
 extern gboolean gedit_close_x_button_pressed;
 extern gboolean gedit_exit_button_pressed;
 
-BonoboWindow* gedit_get_active_window ();
-GeditDocument* gedit_get_active_document ();
-GeditView* gedit_get_active_view ();
+BonoboWindow* 		gedit_get_active_window 		();
+GeditDocument* 		gedit_get_active_document 		();
+GeditView* 		gedit_get_active_view 			();
+GList* 			gedit_get_top_windows 			();
+BonoboUIComponent*	gedit_get_ui_component_from_window 	(BonoboWindow* win);
 
 #endif /* __GEDIT2_H__ */
 

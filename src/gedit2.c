@@ -241,4 +241,20 @@ gedit_get_active_view ()
 	return GEDIT_VIEW (active_view);
 }
 
+GList* 
+gedit_get_top_windows ()
+{
+	g_return_val_if_fail (gedit_mdi != NULL, NULL);
 
+	return	bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi));
+}
+
+BonoboUIComponent*
+gedit_get_ui_component_from_window (BonoboWindow* win)
+{
+	g_return_val_if_fail (win != NULL, NULL);
+
+	return bonobo_mdi_get_ui_component_from_window (win);
+}
+
+	

@@ -32,27 +32,116 @@
 #include "gedit-plugin.h"
 #include "gedit-debug.h"
 
-GeditPluginState
-destroy (GeditPlugin *plugin)
+
+static void
+hello_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
-}
+	GeditDocument *doc;
+	GeditView *view;
 	
-GeditPluginState
-activate (GeditPlugin *pd)
-{
-	/* activate */
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	view = gedit_get_active_view ();
+	g_return_if_fail (view != NULL);
+	
+	doc = gedit_view_get_document (view);
+	g_return_if_fail (doc != NULL);
+
+	gedit_document_begin_user_action (doc);
+	
+	gedit_document_insert_text_at_cursor (doc, _("Hello World"), -1);
+
+	gedit_document_end_user_action (doc);
 }
 
-GeditPluginState
+G_MODULE_EXPORT GeditPluginState
+destroy (GeditPlugin *plugin)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+}
+	
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList* top_windows;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	top_windows = gedit_get_top_windows ();
+	g_return_if_fail (top_windows != NULL);
+       
+	while (top_windows)
+	{
+		BonoboUIComponent* ui_component;
+		gchar *item_path;
+		ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+		
+		item_path = g_strdup ("/menu/Tools/ToolsOps/HelloWorld");
+
+		if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL))
+		{
+			gchar *xml;
+					
+			xml = g_strdup ("<menuitem name=\"HelloWorld\" verb=\"\""
+					" _label=\"_Hello World\""
+				        " _tip=\"Print Hello World\" hidden=\"0\" />");
+
+			bonobo_ui_component_set_translate (ui_component, 
+					"/menu/Tools/ToolsOps/", xml, NULL);
+
+			bonobo_ui_component_set_translate (ui_component, 
+					"/commands/", "<cmd name = \"HelloWorld\" />", NULL);
+
+			bonobo_ui_component_add_verb (ui_component, 
+					"HelloWorld", hello_world_cb, 
+					      NULL); 
+
+			g_free (xml);
+		}
+		
+		g_free (item_path);
+		
+		top_windows = g_list_next (top_windows);
+	}
+}
+
+G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
-	/* deactivate */
+	GList* top_windows;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	top_windows = gedit_get_top_windows ();
+	g_return_if_fail (top_windows != NULL);
+       
+	while (top_windows)
+	{
+		BonoboUIComponent* ui_component;
+		gchar *item_path;
+		ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+		
+		item_path = g_strdup ("/menu/Tools/ToolsOps/HelloWorld");
+
+		if (bonobo_ui_component_path_exists (ui_component, item_path, NULL))
+		{
+			bonobo_ui_component_rm (ui_component, item_path, NULL);
+			bonobo_ui_component_rm (ui_component, "/commands/HelloWorld", NULL);
+		}
+		
+		g_free (item_path);
+		
+		top_windows = g_list_next (top_windows);
+	}
 }
 
 G_MODULE_EXPORT GeditPluginState
 init (GeditPlugin *pd)
 {
 	/* initialize */
+	gedit_debug (DEBUG_PLUGINS, "");
      
 	pd->destroy = destroy;
 	

@@ -1000,6 +1000,19 @@ gedit_document_insert_text (GeditDocument *doc, gint pos, const gchar *text, gin
 }
 
 void 
+gedit_document_insert_text_at_cursor (GeditDocument *doc, const gchar *text, gint len)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (text != NULL);
+	g_return_if_fail (g_utf8_validate (text, len, NULL));
+
+	gtk_text_buffer_insert_at_cursor (GTK_TEXT_BUFFER (doc), text, len);
+}
+
+
+void 
 gedit_document_delete_text (GeditDocument *doc, gint start, gint end)
 {
 	GtkTextIter start_iter;

@@ -83,7 +83,7 @@
 
 
 
-	<cmd name="PluginsManager" _label="Manager" _tip="Add/Remove installed plugins"
+	<cmd name="PluginsManager" _label="_Plugins manager" _tip="Add/Remove plugins"
           pixtype="stock" pixname="gnome-stock-book-open" />
 
 
@@ -127,6 +127,8 @@
 	
 	<menuitem name="FilePrintPreview" verb="" _label="Print Pre_view"/>
 
+	<placeholder name="FileOps" delimit="top"/>
+
 	<separator/>
 	
         <menuitem name="FileClose" verb="" _label="_Close"/>
@@ -155,10 +157,16 @@
 	
         <menuitem name="EditClear" verb="" _label="C_lear"/>
 	
+	<placeholder name="EditOps_1" /> 
+	
 	<separator/>
 
+	<placeholder name="EditOps_2" /> 
+
         <menuitem name="EditSelectAll" verb="" _label="_Select all"/>
-	
+
+	<placeholder name="EditOps_3" delimit="top"/>
+
 </submenu>
 
 <submenu name="Search" _label="Se_arch">
@@ -169,17 +177,24 @@
 
 	<menuitem name="SearchReplace" verb="" _label="_Replace"/>
 
+	<placeholder name="SearchOps_1" delimit="top"/>
+
 	<separator/>
 
 	<menuitem name="SearchGoToLine" verb="" _label="Goto _Line"/>
 
+	<placeholder name="SearchOps_2" />
+
+	<placeholder name="SearchOps_3" delimit="top"/>
+
+
 </submenu>
 
-<submenu name="Plugins" _label="_Plugins" hidden="1">
+<submenu name="Tools" _label="_Tools" hidden="0">
 
-	<menuitem name="PluginsManager" verb="" _label="_Manager"/>
+	<menuitem name="PluginsManager" verb="" _label="_Plugins manager"/>
 
-	<placeholder name="Plugins" delimit="top"/>
+	<placeholder name="ToolsOps" delimit="top"/>
 
 </submenu>
 
@@ -187,11 +202,17 @@
 
         <menuitem name="SettingsPreferences" verb="" _label="_Preferences"/>
 
+	<placeholder name="SettingsOps" delimit="top"/>
+
 </submenu>
 
 <submenu name="Documents" _label="_Documents">
 
+	<placeholder name="DocumentsOps_1" delimit="bottom"/>
+
 	<placeholder name="OpenDocuments" />
+
+	<placeholder name="DocumentsOps_2" delimit="top"/>
 
 </submenu>
 

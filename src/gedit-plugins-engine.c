@@ -192,6 +192,17 @@ gedit_plugins_engine_load (const gchar *file)
 		goto error;
 	}
 
+	/* FIXME: remove when we will have a PluginManager */
+	res = plugin->activate (plugin);
+	if (res != PLUGIN_OK)
+	{
+		g_warning (_("Error, impossible to activate plugin '%s'"),
+			   file);
+		
+		goto error;
+	}
+
+
 	if (plugin->name == NULL)
 	{
 		g_warning (_("Error, the plugin '%s' did not specified a name"),

@@ -120,6 +120,11 @@ void		gedit_document_insert_text	(GeditDocument *doc,
 						 gint	        pos,
                                                  const gchar   *text,
                                                  gint           len);
+
+void		gedit_document_insert_text_at_cursor (GeditDocument *doc, 
+                                                 const gchar   *text,
+                                                 gint           len);
+
 void 		gedit_document_delete_text 	(GeditDocument *doc, 
 		                                 gint start, gint end);
 
