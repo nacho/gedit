@@ -12,14 +12,14 @@ Version:   %ver
 Release:   %rel
 Copyright: GPL
 Group: Applications/Editors
-Source: ftp://ftp.gnome.org/pub/sources/gedit-%{ver}.tar.gz
+Source: ftp://ftp.gnome.org/pub/GNOME/stable/sources/gedit/gedit-%{ver}.tar.gz
 URL: http://gedit.sourceforge.net
 BuildRoot: /var/tmp/gedit-%{PACKAGE_VERSION}-root
 Docdir: %{prefix}/help
 
 Requires: gtk+ >= 1.2.7
 Requires: gnome-libs >= 1.0.55
-Requires: gnome-print >= 0.22
+Requires: gnome-print >= 0.25
 
 %description
 gedit is a small text editor for the GNOME desktop.
@@ -58,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/gedit/plugins/*
 
 %changelog
+* Wed Mar 28 2001 Jason Leach <leach@wam.umd.edu>
+- updates to requirements and source url
+
 * Sun Oct 08 2000 Chema Celorio
 - clean & update
 
