@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
 "POT-Creation-Date: 2000-04-25 20:11+0200\n"
-"PO-Revision-Date: 2000-04-26 13:04+02:00\n"
+"PO-Revision-Date: 2000-04-29 13:04+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Dansk/Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgid "Diff plugin."
 msgstr "Diff-indstik."
 
 #: plugins/email/email.c:131 plugins/email/email.c:138 src/document.c:160
-#: src/print.c:415
+#: src/print.c:404
 msgid "Untitled"
 msgstr "Unavngivet"
 
@@ -166,7 +166,7 @@ msgstr "Udseende"
 #. auto_indent_toggle_cb, NULL,
 #. NULL),
 #.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:213
+#: src/dialogs/prefs.glade.h:8 src/menus.c:211
 msgid "Show Statusbar"
 msgstr "Vis statuslinje"
 
@@ -275,8 +275,8 @@ msgid "Add header"
 msgstr "Tilføj hoved"
 
 #: src/dialogs/prefs.glade.h:40
-msgid "Wrap long lines at the page width"
-msgstr "Ombryd lange linjer ved sidekant"
+msgid "Enable word wrapping"
+msgstr "Slå ordddeling til"
 
 #: src/dialogs/prefs.glade.h:41
 msgid "Print line numbers every:"
@@ -331,7 +331,7 @@ msgstr "Baglæns søgning"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:368
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:366
 msgid "Find"
 msgstr "Find"
 
@@ -478,7 +478,7 @@ msgstr "Åbn (ombyt) .c/.h fil"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:61 src/menus.c:327
+#: src/menus.c:61 src/menus.c:325
 msgid "Create a new document"
 msgstr "Opret et nyt dokument"
 
@@ -489,6 +489,11 @@ msgstr "Gem alle"
 #: src/menus.c:67
 msgid "Save All Open Files"
 msgstr "Gem alle åbne filer"
+
+#. GNOMEUIINFO_MENU_REVERT_ITEM (file_revert_cb, NULL),
+#: src/menus.c:74
+msgid "Revert"
+msgstr "Forkast"
 
 #: src/menus.c:82
 msgid "Print preview..."
@@ -505,6 +510,14 @@ msgstr "Luk alle"
 #: src/menus.c:90
 msgid "Close All Open Files"
 msgstr "Luk alle åbne filer"
+
+#: src/menus.c:114
+msgid "Find _In Files..."
+msgstr "Find _i filer..."
+
+#: src/menus.c:115
+msgid "Find text in all open files"
+msgstr "Find tekst i alle åbne filer"
 
 #: src/menus.c:127
 msgid "Goto _Line..."
@@ -530,109 +543,145 @@ msgstr "_Fjern visning"
 msgid "Remove view of the document"
 msgstr "Fjern visning af dokumentet"
 
-#: src/menus.c:214
+#: src/menus.c:163
+msgid "_Top"
+msgstr "_Øverst"
+
+#: src/menus.c:164
+msgid "Put the document tabs at the top"
+msgstr "Pladsér dokumentfanerne øverst"
+
+#: src/menus.c:169
+msgid "_Bottom"
+msgstr "_Nederst"
+
+#: src/menus.c:170
+msgid "Put the document tabs at the bottom"
+msgstr "Pladsér dokumentfanerne nederst"
+
+#: src/menus.c:175
+msgid "_Left"
+msgstr "_Venstre"
+
+#: src/menus.c:176
+msgid "Put the document tabs on the left"
+msgstr "Pladsér dokumentfanerne til venstre"
+
+#: src/menus.c:181
+msgid "_Right"
+msgstr "_Højre"
+
+#: src/menus.c:182
+msgid "Put the document tabs on the right"
+msgstr "Pladsér dokumentfanerne til højre"
+
+#: src/menus.c:190
+msgid "Toggle the presence of the document tabs"
+msgstr "Slå visning af dokumentfanerne fra eller til"
+
+#: src/menus.c:212
 msgid ""
 "Enable or disable the statusbar at the bottom of this application window."
 msgstr ""
 "Aktiverer eller deaktiverer statuslinien i bunden af dette programvindue."
 
-#: src/menus.c:310 src/plugin.c:111 src/plugin.c:201
+#: src/menus.c:308 src/plugin.c:111 src/plugin.c:201
 msgid "_Plugins"
 msgstr "_Indstik"
 
-#: src/menus.c:327
+#: src/menus.c:325
 msgid "New"
 msgstr "Ny"
 
-#: src/menus.c:331
+#: src/menus.c:329
 msgid "Open"
 msgstr "Åbn"
 
-#: src/menus.c:331
+#: src/menus.c:329
 msgid "Open a file"
 msgstr "Åbn en fil"
 
-#: src/menus.c:335
+#: src/menus.c:333
 msgid "Save"
 msgstr "Gem"
 
-#: src/menus.c:335
+#: src/menus.c:333
 msgid "Save the current file"
 msgstr "Gem den nuværende fil"
 
-#: src/menus.c:339
+#: src/menus.c:337
 msgid "Close"
 msgstr "Luk"
 
-#: src/menus.c:339
+#: src/menus.c:337
 msgid "Close the current file"
 msgstr "Luk den nuværende fil"
 
-#: src/menus.c:343
+#: src/menus.c:341
 msgid "Print"
 msgstr "Udskriv"
 
-#: src/menus.c:343
+#: src/menus.c:341
 msgid "Print the current file"
 msgstr "Udskriv den nuværende fil"
 
-#: src/menus.c:348
+#: src/menus.c:346
 msgid "Undo"
 msgstr "Fortryd"
 
-#: src/menus.c:348
+#: src/menus.c:346
 msgid "Undo last operation"
 msgstr "Fortryd sidste handling"
 
-#: src/menus.c:352
+#: src/menus.c:350
 msgid "Redo"
 msgstr "Gentag"
 
-#: src/menus.c:352
+#: src/menus.c:350
 msgid "Redo last operation"
 msgstr "Gentag sidste handling"
 
-#: src/menus.c:356
+#: src/menus.c:354
 msgid "Cut"
 msgstr "Klip"
 
-#: src/menus.c:356
+#: src/menus.c:354
 msgid "Cut the selection"
 msgstr "Udklip det markerede"
 
-#: src/menus.c:360
+#: src/menus.c:358
 msgid "Copy"
 msgstr "Kopiér"
 
-#: src/menus.c:360
+#: src/menus.c:358
 msgid "Copy the selection"
 msgstr "Kopiér det markerede"
 
-#: src/menus.c:364
+#: src/menus.c:362
 msgid "Paste"
 msgstr "Indsæt"
 
-#: src/menus.c:364
+#: src/menus.c:362
 msgid "Paste the clipboard"
 msgstr "Indsæt indhold af klipbord"
 
-#: src/menus.c:368
+#: src/menus.c:366
 msgid "Search for a string"
 msgstr "Søg efter en tekst"
 
-#: src/menus.c:372 src/window.c:55
+#: src/menus.c:370 src/window.c:55
 msgid "Line"
 msgstr "Linje"
 
-#: src/menus.c:372
+#: src/menus.c:370
 msgid "Get the current and total lines"
 msgstr "Få nuværende og alle linier"
 
-#: src/menus.c:377
+#: src/menus.c:375
 msgid "Exit"
 msgstr "Afslut"
 
-#: src/menus.c:377
+#: src/menus.c:375
 msgid "Exit the program"
 msgstr "Afslut programmet"
 
@@ -653,16 +702,16 @@ msgstr "Fejl, init_plugin returnerede fejl"
 msgid "Error, plugin is still in use"
 msgstr "Fejl, indstik er stadig i brug"
 
-#: src/print.c:156
+#: src/print.c:148
 msgid "Pages"
 msgstr "Papir"
 
-#: src/print.c:191
+#: src/print.c:187
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Vis udskrift"
 
-#: src/print.c:527
+#: src/print.c:520
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Side: %i/%i"
@@ -711,3 +760,6 @@ msgstr "Filnavn"
 #: src/window.c:56
 msgid "Contents"
 msgstr "Indhold"
+
+#~ msgid "Wrap long lines at the page width"
+#~ msgstr "Ombryd lange linjer ved sidekant"
