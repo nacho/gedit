@@ -17,7 +17,9 @@ INCLUDES = -I$(includedir) 				\
 
 LDADD = \
 	$(top_builddir)/plugins/client/libclient.a	\
-	$(GTK_LIBS)
+	$(GNOME_LIBDIR) \
+	$(GNOMEUI_LIBS) \
+	$(INTLLIBS)
 
 DEPS = \
 	$(top_builddir)/plugins/client/libclient.a

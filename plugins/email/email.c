@@ -1,4 +1,3 @@
-#include <gtk/gtk.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -6,6 +5,8 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <glib.h>
+#include <config.h>
+#include <gnome.h>
 #include "client.h"
 
 #ifndef MAILER
@@ -63,7 +64,11 @@ int main (int argc, char *argv[])
 	info.menu_location = "[Plugins]Email";
 	
 	context = client_init (&argc, &argv, &info);
-	gtk_init (&argc, &argv);
+/*	gtk_init (&argc, &argv);*/
+	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+  	textdomain(PACKAGE);
+
+  	gnome_init("email", VERSION, argc, argv);
 	
 	docid = client_document_current (context);
 	filename = client_document_filename (docid);
@@ -153,12 +158,12 @@ int main (int argc, char *argv[])
 	gtk_widget_show (file);
 	gtk_widget_show (hbox);
 	
-	ok = gtk_button_new_with_label ("OK");
+	ok = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (window)->action_area), ok, FALSE, TRUE, 0);
 	gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (send_mail), NULL);
 	gtk_widget_show (ok);
 	
-	cancel = gtk_button_new_with_label ("Cancel");
+	cancel = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (window)->action_area), cancel, FALSE, TRUE, 0);
 	gtk_signal_connect (GTK_OBJECT (cancel), "clicked", gtk_main_quit, NULL);
 	gtk_widget_show (cancel);

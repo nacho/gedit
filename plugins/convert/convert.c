@@ -20,7 +20,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <gtk/gtk.h>
+#include <config.h>
+#include <gnome.h>
 #include "client.h"
 
 static GtkWidget *entry1;
@@ -76,7 +77,12 @@ int main( int argc, char *argv[] )
 
   context = client_init( &argc, &argv, &info );
   
-  gtk_init( &argc, &argv );
+  bindtextdomain(PACKAGE, GNOMELOCALEDIR);
+  textdomain(PACKAGE);
+
+  gnome_init("convert", VERSION, argc, argv);
+
+  /* gtk_init( &argc, &argv );*/
 
   dialog = gtk_dialog_new();
   gtk_window_set_title( GTK_WINDOW( dialog ), "Number Converter" );
@@ -110,7 +116,7 @@ int main( int argc, char *argv[] )
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( conv_dec ), NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->vbox ), button, FALSE, TRUE, 0 );
 
-  button = gtk_button_new_with_label( "Close" );
+  button = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
   gtk_signal_connect( GTK_OBJECT( button ), "clicked", gtk_main_quit, NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->vbox), button, FALSE, TRUE, 0 );
 
