@@ -32,6 +32,7 @@
 #include "gE_print.h"
 #include "gE_files.h"
 #include "gE_document.h"
+#include "gE_mdi.h"
 #include "commands.h"
 #include "dialog.h"
 #include "gE_prefs.h"
@@ -96,7 +97,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	if (settings->print_cmd)
 		gtk_entry_set_text(GTK_ENTRY(print_cmd_entry),
 			settings->print_cmd);
-	gtk_box_pack_start(GTK_BOX(hbox), print_cmd_entry, FALSE, TRUE, 10);
+	gtk_box_pack_start(GTK_BOX(hbox), print_cmd_entry, TRUE, TRUE, 10);
 	gtk_widget_show(print_cmd_entry);
 
 	tmp = gtk_hseparator_new();

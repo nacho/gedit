@@ -58,6 +58,7 @@ static void recent_cb(GtkWidget *w, gE_data *data);
 static GtkWidget *open_fs, *save_fs;
 GtkWidget *ssel = NULL;
 GtkWidget *osel = NULL;
+GtkWidget *col_label;
 gchar *oname = NULL;
 
 /* handles changes in the text widget... */
@@ -307,7 +308,7 @@ auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
-	gE_window_set_auto_indent ((gint*)!settings->auto_indent);
+	gE_window_set_auto_indent (!settings->auto_indent);
 }
 
 gint
@@ -445,9 +446,6 @@ void file_new_cb (GtkWidget *widget, gpointer cbdata)
 
 	gnome_app_flash (mdi->active_window, MSGBAR_FILE_NEW);
 	doc = gE_document_new();
-
-	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD(doc));
-	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD(doc));
 }
 
 

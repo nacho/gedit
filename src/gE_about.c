@@ -36,6 +36,8 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 		N_("       Andy Kahn"),
 		N_("       Miguel de Icaza"),
 		N_("       Martin Baulig"),
+		N_("       Thomas Holmgren"),
+		N_("       Martijn van Beers"),
 		NULL
 	};
 /*

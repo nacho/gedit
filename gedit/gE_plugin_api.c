@@ -214,7 +214,7 @@ int
 gE_plugin_document_create(gint context, gchar * title)
 {
    /*return *(int *) g_hash_table_lookup(doc_pointer_to_int, gE_document_new());*/
-   return (int *) gE_document_new ();
+   return (int) gE_document_new ();
 }
 
 void 

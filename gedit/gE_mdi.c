@@ -243,13 +243,13 @@ GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT((gE_window *)(mdi->active_wind
 	gtk_text_set_word_wrap(GTK_TEXT(doc->split_screen), doc->word_wrap);
 	gtk_text_set_line_wrap(GTK_TEXT(doc->split_screen), doc->line_wrap);
 
-	/*gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
+	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
 		"button_press_event",
-		GTK_SIGNAL_FUNC(gE_event_button_press), window);
+		GTK_SIGNAL_FUNC(gE_event_button_press), NULL);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
-		"insert_text", GTK_SIGNAL_FUNC(auto_indent_cb), window);*/
-
+		"insert_text", GTK_SIGNAL_FUNC(auto_indent_cb), NULL);
+		
 	gtk_container_add (GTK_CONTAINER (doc->scrwindow[1]), doc->split_screen);
 
 	doc->split_parent = GTK_WIDGET (doc->split_screen)->parent;
@@ -360,6 +360,9 @@ gE_document *gE_document_new ()
 	  {
 	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), _(UNTITLED));
 	    gE_documents = g_list_append(gE_documents, doc);
+	    
+	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	
 	    return doc;
 	  }
@@ -537,7 +540,8 @@ void view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	  return;
 	  
 	app = gnome_mdi_get_app_from_view (mdi->active_view);
-	
+/*	
+	label = NULL;
 	p = g_strconcat (GNOME_MENU_VIEW_PATH, label, NULL);
 	shell = gnome_app_find_menu_pos (app->menubar, p, &pos);
 	if (shell)
@@ -549,6 +553,7 @@ void view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
    
 	  }
 	g_free (p);
+*/
 	
 }
 

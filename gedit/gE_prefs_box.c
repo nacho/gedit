@@ -58,7 +58,12 @@ typedef struct _gE_prefs_data {
 	/* MDI Settings */
 	GtkRadioButton *mdi_type [NUM_MDI_MODES];
 	GSList *mdi_list;
-
+	
+	/* Window Settings */
+	GtkWidget *cur;
+	GtkWidget *preW;
+	GtkWidget *preH;
+	
 	/* Toolbar Settings */
 	/* Hmm, dunno... */
 	
@@ -713,6 +718,105 @@ static GtkWidget *mdi_page_new()
 
 /* End of MDI Stuff */
 
+/* Window Stuff.. */
+
+static GtkWidget *window_page_new()
+{
+  GtkWidget *main_vbox, *vbox, *vbox2, *frame, *hbox;
+  GtkWidget *label, *button;
+  gint i;
+
+  main_vbox = gtk_vbox_new (FALSE, 0);
+  gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
+  gtk_widget_show (main_vbox);
+  
+  frame = gtk_frame_new (_("Window Size"));
+  gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
+  gtk_widget_show (frame);
+  
+  vbox = gtk_vbox_new(FALSE, 0);
+  gtk_container_add (GTK_CONTAINER (frame), vbox);
+  gtk_widget_show (vbox);
+  
+  	hbox = gtk_hbox_new (FALSE, 0);
+  	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, FALSE, 2);
+  	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
+  	gtk_widget_show (hbox);
+  
+  	label = gtk_label_new ("Current Width:");
+  	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  	gtk_widget_show (label);
+  	
+  	prefs->cur = gtk_entry_new ();
+  	gtk_widget_set_sensitive (prefs->cur, FALSE);
+  	gtk_box_pack_start (GTK_BOX (hbox), prefs->cur, FALSE, FALSE, 3);
+  	gtk_widget_show (prefs->cur);
+
+  	
+  	vbox2 = gtk_vbox_new (FALSE, 0);
+  	gtk_box_pack_start (GTK_BOX (hbox), vbox2, FALSE, FALSE, 0);
+  	gtk_container_border_width (GTK_CONTAINER (vbox2), 1);
+  	gtk_widget_show (vbox2);
+  	
+  	hbox = gtk_hbox_new (FALSE, 0);
+  	gtk_box_pack_start (GTK_BOX (vbox2), hbox, TRUE, FALSE, 2);
+  	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
+  	gtk_widget_show (hbox);
+
+  	label = gtk_label_new ("Startup Width:");
+  	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  	gtk_widget_show (label);
+  	
+  	prefs->preW = gtk_entry_new ();
+  	gtk_box_pack_start (GTK_BOX (hbox), prefs->preW, FALSE, FALSE, 3);
+  	gtk_widget_show (prefs->preW);
+  	
+  	button = gtk_button_new_with_label ("Use Current");
+  	gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 4);
+  	gtk_widget_show (button);
+
+  	
+  	hbox = gtk_hbox_new (FALSE, 0);
+  	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, FALSE, 2);
+  	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
+  	gtk_widget_show (hbox);
+  
+  	label = gtk_label_new ("Current Height:");
+  	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  	gtk_widget_show (label);
+  	
+  	prefs->cur = gtk_entry_new ();
+ 	gtk_widget_set_sensitive (prefs->cur, FALSE);
+  	gtk_box_pack_start (GTK_BOX (hbox), prefs->cur, FALSE, FALSE, 3);
+  	gtk_widget_show (prefs->cur);
+  	
+  	vbox2 = gtk_vbox_new (FALSE, 0);
+  	gtk_box_pack_start (GTK_BOX (hbox), vbox2, FALSE, FALSE, 0);
+  	gtk_container_border_width (GTK_CONTAINER (vbox2), 1);
+  	gtk_widget_show (vbox2);
+  	
+  	hbox = gtk_hbox_new (FALSE, 0);
+  	gtk_box_pack_start (GTK_BOX (vbox2), hbox, TRUE, FALSE, 2);
+  	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
+  	gtk_widget_show (hbox);
+  	  	
+  	label = gtk_label_new ("Startup Height:");
+  	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
+  	gtk_widget_show (label);
+  	
+  	prefs->preH = gtk_entry_new ();
+  	gtk_box_pack_start (GTK_BOX (hbox), prefs->preH, FALSE, FALSE, 3);
+  	gtk_widget_show (prefs->preH);
+
+  	button = gtk_button_new_with_label ("Use Current");
+  	gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 4);
+  	gtk_widget_show (button);  	
+  
+  return main_vbox;
+}
+
+/* End of Window Stuff */
+
 void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 {
   gnome_property_box_changed (pbox);
@@ -762,12 +866,12 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   /* Print Settings */
   label = gtk_label_new (_("Print"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
-                                           print_page_new(), label);
+                                           	print_page_new(), label);
 
   /* Font Settings */
   label = gtk_label_new (_("Font"));
   gtk_notebook_append_page ( GTK_NOTEBOOK( (prefs->pbox)->notebook),
-                                           font_page_new(), label);
+                                           	font_page_new(), label);
   
   /* Plugins Settings */
   label = gtk_label_new (_("Plugins"));
@@ -776,8 +880,13 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   
   /* MDI Settings */
   label = gtk_label_new (_("MDI"));
-  gtk_notebook_append_page (GTK_NOTEBOOK ((prefs->pbox)->notebook),
-  					mdi_page_new(), label);
+  gtk_notebook_append_page (GTK_NOTEBOOK ( (prefs->pbox)->notebook),
+  										mdi_page_new(), label);
+  
+  /* Window Settings */
+  label = gtk_label_new (_("Window"));
+  gtk_notebook_append_page (GTK_NOTEBOOK ( (prefs->pbox)->notebook),
+  									window_page_new(), label);
     
   get_prefs(data);
 

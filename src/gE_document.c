@@ -40,7 +40,7 @@
 
 extern GList *plugins;
 gE_window *window;
-GtkWidget  *col_label;
+extern GtkWidget  *col_label;
 
 /* local definitions */
 
@@ -100,11 +100,12 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 
 	ptr = g_new(int, 1);
 	*ptr = ++last_assigned_integer;
-	g_hash_table_insert(win_int_to_pointer, ptr, app);
-	g_hash_table_insert(win_pointer_to_int, app, ptr);
+	g_hash_table_insert (win_int_to_pointer, ptr, app);
+	g_hash_table_insert (win_pointer_to_int, app, ptr);
 	
 
-	gtk_widget_set_usize(GTK_WIDGET(app), 630, 390);
+	gtk_widget_set_usize (GTK_WIDGET(app), 630, 390);
+	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 
 	/* statusbar */

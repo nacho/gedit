@@ -1,3 +1,64 @@
+1999-05-20  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_prefs_box.c: Started to implement Window Size settings, so you
+	  can choose the geomtry of the gEdit window. Only the GUI is in place,
+	  none of it works yet - but doesn't it look nice? ;)
+
+1999-05-20  Alex Roberts  <bse@gedit.pn.org>
+	
+	* src/gE_mdi.c: (gE_document_create_view) DAMNIT!!!!! Aargh! Ok, I've
+	  fixed that irritating gtk_text_set_point critical error that sometimes
+	  appeared when you were using auto indent.. for some reason the 
+	  split-screen text widget had it's auto_indent signal connection
+	  commented out (it had a window pointer in it, instead of a NULL, a
+	  left over from when I was implementing GnomeMDI and removing the
+	  gE_window stuff). The button_press_event was also in the same state, 
+	  fixed that too. :)
+	
+	* src/gE_document.c: (gE_window_new) Added a window policy for the 
+	  main window, now it'll resize smaller and stick (i'm sure this was here
+	  before, no idea how or why it got taken out).
+
+1999-05-20  Alex Roberts  <bse@gedit.pn.org>
+	
+	* src/commands.c: (auto_indent_toggle_cb) Removed the (gint*) cast 
+	  (No more make warning)
+	
+	* src/gE_plugin_api.c: (gE_plugin_document_create) (int *) -> (int)
+	
+	* src/gE_prefs.h: (struct _gE_preference) DOH! should be gint mdi_mode;
+	  not *mdi_mode!
+	
+	* src/gE_prefs.c: (gE_get_settings) settings->mdi_mode and ->scrollbar are
+	  int's, we should  check if its 1 or 0; instead of NULL as done before.
+	  Also, if the mdi_mode setting is empty set it to GNOME_MDI_NOTEBOOK.
+	
+	* src/gedit.c: (main) People were having problems, so the default start-up
+	  MDI Mode is GNOME_MDI_NOTEBOOK - in case people didnt have taht as their
+	  default
+	  for some reason and are getting confused (e.g. "The document tabs seem to
+	  be gone." - Joonas Makkonen)
+
+1999-05-20  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_mdi.c: (gE_document_new) Do the add_child/view stuff here,
+	  instead of doing it after calling gE_document_new. This fixes the minor
+	  problem of plugins appending onto the end of the current doc.
+	  
+	  (view_changed_cb) Commented out most of this code, it
+	  was causing some weird problems, and I'm not even sure what this function
+	  should do.
+	
+	* src/commands.c: (file_new_cb) 
+	  src/gedit.c: (main) Removed the add_child and add_view calls after 
+	  calling gE_document_new.
+	
+	* src/gE_print.c: Cleaned up make warnings - added an include for gE_mdi.h
+
+	* src/gE_about.c: Added Thomas (Layman) and Martijn (LotR) to the
+	  "Special Thanks" list, because of their valued and continued assistance
+	  to the project.
+
 1999-05-17  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/menus.c: Added Revert option to File menu.

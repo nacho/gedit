@@ -77,8 +77,8 @@ void gE_get_settings()
 	 settings->use_relief_toolbar = gE_prefs_get_int("tb relief");
 	 settings->splitscreen = gE_prefs_get_int("splitscreen");
 	 settings->mdi_mode = gE_prefs_get_int ("mdi mode");
-	 if (settings->mdi_mode == NULL)
-	   settings->mdi_mode = mdi_type[0];
+	 if (!settings->mdi_mode)
+	   settings->mdi_mode = mdi_type[GNOME_MDI_NOTEBOOK];
 	   
 	 if (mdiMode != settings->mdi_mode)
 	   {
@@ -87,7 +87,7 @@ void gE_get_settings()
            }
 	 
 	 settings->scrollbar = gE_prefs_get_int ("scrollbar");
-	 if (settings->scrollbar == NULL)
+	 if (!settings->scrollbar)
 	   settings->scrollbar = GTK_POLICY_AUTOMATIC;
 	 
 	 

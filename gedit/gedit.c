@@ -50,6 +50,7 @@ gE_window *window;
 gE_preference *settings;
 
 gint mdiMode = GNOME_MDI_DEFAULT_MODE;
+/*gint mdiMode = GNOME_MDI_NOTEBOOK;*/
 
 void setup_callbacks( plugin_callback_struct *callbacks )
 {
@@ -234,9 +235,10 @@ int main (int argc, char **argv)
 	gnome_mdi_set_child_menu_path (mdi, GNOME_MENU_FILE_STRING);
 	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
 	
-	gnome_mdi_set_mode (mdi, mdiMode);	
+/*	gnome_mdi_set_mode (mdi, mdiMode);	*/
+	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	
 	/*window = gE_window_new();
-
+	
 	data->window = window;*/
 	window = g_malloc (sizeof (gE_window));
 
@@ -279,13 +281,8 @@ int main (int argc, char **argv)
 		}
 	}
 	else
-	{
-	  if ((doc = gE_document_new()))
-	    {
-	      gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	      gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	    }
-	}
+	  doc = gE_document_new();
+	
 	
 	g_free (data);
 
