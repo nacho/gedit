@@ -444,6 +444,15 @@ gedit_recent_monitor_cancel (GeditRecent *recent, const gchar *uri)
 }
 #endif
 
+static void
+gedit_menu_data_destroy_cb (gpointer data, GClosure *closure)
+{
+	GeditRecentMenuData *md = data;
+
+	g_free (md->uri);
+	g_free (md);
+}
+
 
 static void
 gedit_recent_update_menus (GeditRecent *recent, GSList *list)
@@ -458,6 +467,7 @@ gedit_recent_update_menus (GeditRecent *recent, GSList *list)
 	gchar *uri;
 	gchar* cmd;
 	GeditRecentMenuData *md;
+	GClosure *closure;
 
 	gedit_debug (DEBUG_RECENT, "");
 
@@ -488,8 +498,12 @@ gedit_recent_update_menus (GeditRecent *recent, GSList *list)
 		verb_name = g_strdup_printf ("%s%s%d", recent->appname,GEDIT_RECENT_VERB_NAME, i);
 		cmd = g_strdup_printf ("<cmd name = \"%s\" /> ", verb_name);
 		bonobo_ui_component_set_translate (ui_component, "/commands/", cmd, NULL);
-		bonobo_ui_component_add_verb (ui_component, verb_name,
-					      gedit_recent_menu_cb, md); 
+
+		closure = g_cclosure_new (G_CALLBACK (gedit_recent_menu_cb),
+					  md, gedit_menu_data_destroy_cb);
+					  
+		bonobo_ui_component_add_verb_full (ui_component, verb_name,
+						   closure); 
 	        
 		if (i < 10)
 			label = g_strdup_printf ("_%d. %s", i, escaped_name);
