@@ -1,9 +1,8 @@
-<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
-<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd" >
-
+<?xml version="1.0" standalone="no"?>
+<!--*- mode: xml -*-->
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
 <glade-interface>
-  <requires lib="gnome" />
-
+  <requires lib="gnome"/>
   <widget class="GtkDialog" id="dialog1">
     <property name="type">GTK_WINDOW_TOPLEVEL</property>
     <property name="modal">no</property>
@@ -13,19 +12,16 @@
     <property name="hide_on_close">no</property>
     <property name="visible">no</property>
     <property name="window-position">GTK_WIN_POS_NONE</property>
-
     <child internal-child="vbox">
       <widget class="GtkVBox" id="dialog-vbox1">
         <property name="homogeneous">no</property>
         <property name="spacing">8</property>
         <property name="visible">yes</property>
-
         <child internal-child="action_area">
           <widget class="GtkHButtonBox" id="dialog-action_area1">
             <property name="layout_style">GTK_BUTTONBOX_END</property>
             <property name="spacing">8</property>
             <property name="visible">yes</property>
-
             <child>
               <widget class="GtkButton" id="button1">
                 <property name="can_default">yes</property>
@@ -36,7 +32,6 @@
                 <property name="use_underline">yes</property>
               </widget>
             </child>
-
             <child>
               <widget class="GtkButton" id="button3">
                 <property name="can_default">yes</property>
@@ -47,7 +42,6 @@
                 <property name="use_underline">yes</property>
               </widget>
             </child>
-
             <child>
               <widget class="GtkButton" id="button4">
                 <property name="can_default">yes</property>
@@ -66,7 +60,6 @@
             <property name="pack_type">GTK_PACK_END</property>
           </packing>
         </child>
-
         <child>
           <widget class="GtkNotebook" id="prefs_notebook">
             <property name="show_tabs">no</property>
@@ -77,25 +70,21 @@
             <property name="tab_vborder">2</property>
             <property name="enable-popup">yes</property>
             <property name="visible">yes</property>
-
             <child>
               <widget class="GtkHBox" id="hbox1">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkVBox" id="vbox15">
                     <property name="homogeneous">no</property>
                     <property name="spacing">0</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkVBox" id="vbox16">
                         <property name="homogeneous">no</property>
                         <property name="spacing">8</property>
                         <property name="visible">yes</property>
-
                         <child>
                           <widget class="GtkLabel" id="label87">
                             <property name="label" translatable="yes">The toolbar settings let you show or hide toolbar and customize its appearance.</property>
@@ -113,8 +102,7 @@
                             <property name="fill">no</property>
                           </packing>
                         </child>
-
-		        <child>
+                        <child>
                           <widget class="GtkCheckButton" id="toolbar_show_checkbutton">
                             <property name="can_focus">yes</property>
                             <property name="label" translatable="yes">_Show toolbar</property>
@@ -129,21 +117,18 @@
                             <property name="fill">no</property>
                           </packing>
                         </child>
-		
                         <child>
                           <widget class="GtkFrame" id="toolbar_button_frame">
                             <property name="label" translatable="yes">Button style</property>
                             <property name="label_xalign">0</property>
                             <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                             <property name="visible">yes</property>
-
                             <child>
                               <widget class="GtkVBox" id="vbox18">
                                 <property name="border_width">5</property>
                                 <property name="homogeneous">no</property>
                                 <property name="spacing">0</property>
                                 <property name="visible">yes</property>
-
                                 <child>
                                   <widget class="GtkRadioButton" id="toolbar_system_radiobutton">
                                     <property name="can_focus">yes</property>
@@ -159,7 +144,6 @@
                                     <property name="fill">no</property>
                                   </packing>
                                 </child>
-
                                 <child>
                                   <widget class="GtkRadioButton" id="toolbar_icon_radiobutton">
                                     <property name="can_focus">yes</property>
@@ -176,7 +160,6 @@
                                     <property name="fill">yes</property>
                                   </packing>
                                 </child>
-
                                 <child>
                                   <widget class="GtkRadioButton" id="toolbar_icon_text_radiobutton">
                                     <property name="can_focus">yes</property>
@@ -202,7 +185,6 @@
                             <property name="fill">yes</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkCheckButton" id="toolbar_tooltips_checkbutton">
                             <property name="can_focus">yes</property>
@@ -234,7 +216,6 @@
                 </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label1">
                 <property name="label" translatable="yes">Toolbars</property>
@@ -250,13 +231,11 @@
                 <property name="type">tab</property>
               </packing>
             </child>
-
             <child>
               <widget class="GtkVBox" id="vbox4">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkLabel" id="label91">
                     <property name="label" translatable="yes">The status bar settings let you show or hide status bar and customize its appearance.</property>
@@ -274,60 +253,53 @@
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
-                
-		<child>
-                          <widget class="GtkCheckButton" id="statusbar_show_checkbutton">
-                            <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">_Show status bar</property>
-                            <property name="active">yes</property>
-                            <property name="draw_indicator">yes</property>
-                            <property name="visible">yes</property>
-                            <property name="use_underline">yes</property>
-                          </widget>
-                          <packing>
-                            <property name="padding">0</property>
-                            <property name="expand">no</property>
-                            <property name="fill">no</property>
-                          </packing>
-                </child>
-
                 <child>
-                          <widget class="GtkCheckButton" id="statusbar_cursor_position_checkbutton">
-                            <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">Show cursor _position</property>
-                            <property name="active">yes</property>
-                            <property name="draw_indicator">yes</property>
-                            <property name="visible">yes</property>
-                            <property name="use_underline">yes</property>
-                          </widget>
-                          <packing>
-                            <property name="padding">0</property>
-                            <property name="expand">no</property>
-                            <property name="fill">no</property>
-                          </packing>
+                  <widget class="GtkCheckButton" id="statusbar_show_checkbutton">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">_Show status bar</property>
+                    <property name="active">yes</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="use_underline">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
                 </child>
-
                 <child>
-                          <widget class="GtkCheckButton" id="statusbar_overwrite_mode_checkbutton">
-                            <property name="can_focus">yes</property>
-                            <property name="label" translatable="yes">Show overwrite _mode</property>
-                            <property name="active">yes</property>
-                            <property name="draw_indicator">yes</property>
-                            <property name="visible">yes</property>
-                            <property name="use_underline">yes</property>
-                          </widget>
-                          <packing>
-                            <property name="padding">0</property>
-                            <property name="expand">no</property>
-                            <property name="fill">no</property>
-                          </packing>
+                  <widget class="GtkCheckButton" id="statusbar_cursor_position_checkbutton">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Show cursor _position</property>
+                    <property name="active">yes</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="use_underline">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
                 </child>
-
-
+                <child>
+                  <widget class="GtkCheckButton" id="statusbar_overwrite_mode_checkbutton">
+                    <property name="can_focus">yes</property>
+                    <property name="label" translatable="yes">Show overwrite _mode</property>
+                    <property name="active">yes</property>
+                    <property name="draw_indicator">yes</property>
+                    <property name="visible">yes</property>
+                    <property name="use_underline">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label2">
                 <property name="label" translatable="yes">Status bar</property>
@@ -343,19 +315,16 @@
                 <property name="type">tab</property>
               </packing>
             </child>
-
             <child>
               <widget class="GtkVBox" id="vbox6">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkVBox" id="vbox79">
                     <property name="homogeneous">no</property>
                     <property name="spacing">16</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkLabel" id="label88">
                         <property name="label" translatable="yes">The MDI (Multiple Document Interface) mode refers to the way more than one text document is displayed in gedit. 
@@ -375,7 +344,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">yes</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkTable" id="table8">
                         <property name="homogeneous">no</property>
@@ -384,7 +352,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="n-rows">2</property>
                         <property name="n-columns">2</property>
                         <property name="visible">yes</property>
-
                         <child>
                           <widget class="GtkLabel" id="label89">
                             <property name="label" translatable="yes">_MDI Mode:</property>
@@ -406,10 +373,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="x_padding">0</property>
                             <property name="y_padding">0</property>
                             <property name="x_options">fill</property>
-                            <property name="y_options"></property>
+                            <property name="y_options"/>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkLabel" id="mdi_tab_pos_label">
                             <property name="label" translatable="yes">Notebook _tab position:</property>
@@ -431,10 +397,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="x_padding">0</property>
                             <property name="y_padding">0</property>
                             <property name="x_options">fill</property>
-                            <property name="y_options"></property>
+                            <property name="y_options"/>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkOptionMenu" id="mdi_tab_pos_optionmenu">
                             <property name="can_focus">yes</property>
@@ -442,11 +407,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <child internal-child="menu">
                               <widget class="GtkMenu" id="convertwidget1">
                                 <property name="visible">yes</property>
-
                                 <child>
                                   <widget class="GtkMenuItem" id="convertwidget2">
                                     <property name="visible">yes</property>
-
                                     <child>
                                       <widget class="GtkAccelLabel" id="convertwidget6">
                                         <property name="label" translatable="yes">Left</property>
@@ -457,11 +420,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                     </child>
                                   </widget>
                                 </child>
-
                                 <child>
                                   <widget class="GtkMenuItem" id="convertwidget3">
                                     <property name="visible">yes</property>
-
                                     <child>
                                       <widget class="GtkAccelLabel" id="convertwidget7">
                                         <property name="label" translatable="yes">Right</property>
@@ -472,11 +433,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                     </child>
                                   </widget>
                                 </child>
-
                                 <child>
                                   <widget class="GtkMenuItem" id="convertwidget4">
                                     <property name="visible">yes</property>
-
                                     <child>
                                       <widget class="GtkAccelLabel" id="convertwidget8">
                                         <property name="label" translatable="yes">Top</property>
@@ -487,11 +446,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                     </child>
                                   </widget>
                                 </child>
-
                                 <child>
                                   <widget class="GtkMenuItem" id="convertwidget5">
                                     <property name="visible">yes</property>
-
                                     <child>
                                       <widget class="GtkAccelLabel" id="convertwidget9">
                                         <property name="label" translatable="yes">Bottom</property>
@@ -516,20 +473,16 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="y_options">fill</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkOptionMenu" id="mdi_mode_optionmenu">
                             <property name="can_focus">yes</property>
                             <property name="visible">yes</property>
-
                             <child internal-child="menu">
                               <widget class="GtkMenu" id="convertwidget10">
                                 <property name="visible">yes</property>
-
                                 <child>
                                   <widget class="GtkMenuItem" id="convertwidget11">
                                     <property name="visible">yes</property>
-
                                     <child>
                                       <widget class="GtkAccelLabel" id="convertwidget14">
                                         <property name="label" translatable="yes">Notebook</property>
@@ -540,11 +493,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                     </child>
                                   </widget>
                                 </child>
-
                                 <child>
                                   <widget class="GtkMenuItem" id="convertwidget12">
                                     <property name="visible">yes</property>
-
                                     <child>
                                       <widget class="GtkAccelLabel" id="convertwidget15">
                                         <property name="label" translatable="yes">Toplevel</property>
@@ -555,11 +506,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                     </child>
                                   </widget>
                                 </child>
-
                                 <child>
                                   <widget class="GtkMenuItem" id="convertwidget13">
                                     <property name="visible">yes</property>
-
                                     <child>
                                       <widget class="GtkAccelLabel" id="convertwidget16">
                                         <property name="label" translatable="yes">Modal</property>
@@ -600,7 +549,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label3">
                 <property name="label" translatable="yes">MDI</property>
@@ -616,19 +564,16 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
             <child>
               <widget class="GtkVBox" id="vbox8">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkVBox" id="vbox81">
                     <property name="homogeneous">no</property>
                     <property name="spacing">8</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkLabel" id="label100">
                         <property name="label" translatable="yes">The tabs settings let you customize the tabs width.</property>
@@ -646,13 +591,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">no</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkHBox" id="hbox12">
                         <property name="homogeneous">no</property>
                         <property name="spacing">0</property>
                         <property name="visible">yes</property>
-
                         <child>
                           <widget class="GtkLabel" id="label98">
                             <property name="label" translatable="yes">Set _tabs width equivalent to  </property>
@@ -672,7 +615,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="fill">no</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkSpinButton" id="tabs_width_spinbutton">
                             <property name="can_focus">yes</property>
@@ -691,7 +633,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="fill">no</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkLabel" id="label99">
                             <property name="label" translatable="yes"> character(s)</property>
@@ -725,7 +666,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label8">
                 <property name="label" translatable="yes">Tabs</property>
@@ -741,13 +681,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
             <child>
               <widget class="GtkVBox" id="vbox10">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkLabel" id="label95">
                     <property name="label" translatable="yes">The undo settings let you set the maximum number of actions that gedit can undo.</property>
@@ -765,13 +703,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkHBox" id="hbox8">
                     <property name="homogeneous">no</property>
                     <property name="spacing">6</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkCheckButton" id="undo_checkbutton">
                         <property name="can_focus">yes</property>
@@ -787,7 +723,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">no</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkSpinButton" id="undo_levels_spinbutton">
                         <property name="can_focus">yes</property>
@@ -806,7 +741,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">no</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkLabel" id="undo_levels_label">
                         <property name="label" translatable="yes">level(s)</property>
@@ -833,7 +767,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label9">
                 <property name="label" translatable="yes">Undo</property>
@@ -849,13 +782,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
             <child>
               <widget class="GtkVBox" id="vbox12">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkLabel" id="label92">
                     <property name="label" translatable="yes">The Font &amp; Colors settings let you choose the font and the colors to be used in the editor windows.</property>
@@ -874,21 +805,18 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkFrame" id="frame11">
                     <property name="label" translatable="yes">Font</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkVBox" id="vbox13">
                         <property name="border_width">5</property>
                         <property name="homogeneous">no</property>
                         <property name="spacing">5</property>
                         <property name="visible">yes</property>
-
                         <child>
                           <widget class="GtkCheckButton" id="default_font_checkbutton">
                             <property name="can_focus">yes</property>
@@ -904,13 +832,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="fill">no</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkHBox" id="font_hbox">
                             <property name="homogeneous">no</property>
                             <property name="spacing">5</property>
                             <property name="visible">yes</property>
-
                             <child>
                               <widget class="GtkLabel" id="font_label">
                                 <property name="label" translatable="yes">_Font used by the editor: </property>
@@ -945,21 +871,18 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkFrame" id="frame12">
                     <property name="label" translatable="yes">Colors</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkVBox" id="vbox14">
                         <property name="border_width">5</property>
                         <property name="homogeneous">no</property>
                         <property name="spacing">5</property>
                         <property name="visible">yes</property>
-
                         <child>
                           <widget class="GtkCheckButton" id="default_colors_checkbutton">
                             <property name="can_focus">yes</property>
@@ -975,7 +898,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="fill">no</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkTable" id="colors_table">
                             <property name="homogeneous">no</property>
@@ -984,7 +906,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="n-rows">4</property>
                             <property name="n-columns">2</property>
                             <property name="visible">yes</property>
-
                             <child>
                               <widget class="GtkLabel" id="label24">
                                 <property name="label" translatable="yes">_Text color:</property>
@@ -1006,10 +927,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="x_padding">0</property>
                                 <property name="y_padding">0</property>
                                 <property name="x_options">fill</property>
-                                <property name="y_options"></property>
+                                <property name="y_options"/>
                               </packing>
                             </child>
-
                             <child>
                               <widget class="GtkLabel" id="label25">
                                 <property name="label" translatable="yes">_Background color:</property>
@@ -1031,10 +951,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="x_padding">0</property>
                                 <property name="y_padding">0</property>
                                 <property name="x_options">fill</property>
-                                <property name="y_options"></property>
+                                <property name="y_options"/>
                               </packing>
                             </child>
-                            
                             <child>
                               <widget class="GtkLabel" id="label24">
                                 <property name="label" translatable="yes">S_elected text color:</property>
@@ -1056,10 +975,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="x_padding">0</property>
                                 <property name="y_padding">0</property>
                                 <property name="x_options">fill</property>
-                                <property name="y_options"></property>
+                                <property name="y_options"/>
                               </packing>
                             </child>
-
                             <child>
                               <widget class="GtkLabel" id="label25">
                                 <property name="label" translatable="yes">Se_lection color:</property>
@@ -1081,10 +999,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="x_padding">0</property>
                                 <property name="y_padding">0</property>
                                 <property name="x_options">fill</property>
-                                <property name="y_options"></property>
+                                <property name="y_options"/>
                               </packing>
                             </child>
-
                             <child>
                               <widget class="GnomeColorPicker" id="background_colorpicker">
                                 <property name="can_focus">yes</property>
@@ -1104,7 +1021,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="y_options">expand|fill</property>
                               </packing>
                             </child>
-
                             <child>
                               <widget class="GnomeColorPicker" id="text_colorpicker">
                                 <property name="can_focus">yes</property>
@@ -1124,7 +1040,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="y_options">expand|fill</property>
                               </packing>
                             </child>
-
                             <child>
                               <widget class="GnomeColorPicker" id="sel_text_colorpicker">
                                 <property name="can_focus">yes</property>
@@ -1144,7 +1059,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="y_options">expand|fill</property>
                               </packing>
                             </child>
-
                             <child>
                               <widget class="GnomeColorPicker" id="selection_colorpicker">
                                 <property name="can_focus">yes</property>
@@ -1164,7 +1078,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="y_options">expand|fill</property>
                               </packing>
                             </child>
-
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -1183,7 +1096,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label19">
                 <property name="label" translatable="yes">Fonts &amp; Colors</property>
@@ -1199,7 +1111,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
             <child>
               <widget class="GtkTable" id="table9">
                 <property name="homogeneous">no</property>
@@ -1208,7 +1119,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="n-rows">3</property>
                 <property name="n-columns">3</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkImage" id="logo_pixmap">
                     <property name="file">gedit-logo.png</property>
@@ -1227,7 +1137,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label93">
                 <property name="label" translatable="yes">LOGO</property>
@@ -1243,20 +1152,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
-
-
-
-
-
-
-
             <child>
               <widget class="GtkVBox" id="vbox80">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-                
                 <child>
                   <widget class="GtkLabel" id="label791">
                     <property name="label" translatable="yes">The save settings let you customize how gedit saves files.</property>
@@ -1274,13 +1174,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkHBox" id="hbox10">
                     <property name="homogeneous">no</property>
                     <property name="spacing">0</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkCheckButton" id="backup_copy_checkbutton">
                         <property name="can_focus">yes</property>
@@ -1303,14 +1201,12 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">yes</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkHBox" id="hbox11">
                     <property name="homogeneous">no</property>
                     <property name="spacing">3</property>
                     <property name="visible">no</property>
                     <property name="sensitive">yes</property>
-
                     <child>
                       <widget class="GtkCheckButton" id="auto_save_checkbutton">
                         <property name="can_focus">yes</property>
@@ -1326,7 +1222,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">no</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkSpinButton" id="auto_save_spinbutton">
                         <property name="can_focus">yes</property>
@@ -1345,7 +1240,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">no</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkLabel" id="label97">
                         <property name="label" translatable="yes">minutes</property>
@@ -1370,83 +1264,76 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-                
                 <child>
-                          <widget class="GtkFrame" id="save_frame">
-                            <property name="label" translatable="yes">When saving...</property>
-                            <property name="label_xalign">0</property>
-                            <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+                  <widget class="GtkFrame" id="save_frame">
+                    <property name="label" translatable="yes">When saving...</property>
+                    <property name="label_xalign">0</property>
+                    <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
+                    <property name="visible">yes</property>
+                    <property name="sensitive">yes</property>
+                    <child>
+                      <widget class="GtkVBox" id="vbox18">
+                        <property name="border_width">5</property>
+                        <property name="homogeneous">no</property>
+                        <property name="spacing">0</property>
+                        <property name="visible">yes</property>
+                        <child>
+                          <widget class="GtkRadioButton" id="utf8_radiobutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">Always use _UTF-8 encoding (faster)</property>
+                            <property name="active">yes</property>
+                            <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
-                            <property name="sensitive">yes</property>
-
-                            <child>
-                              <widget class="GtkVBox" id="vbox18">
-                                <property name="border_width">5</property>
-                                <property name="homogeneous">no</property>
-                                <property name="spacing">0</property>
-                                <property name="visible">yes</property>
-
-                                <child>
-                                  <widget class="GtkRadioButton" id="utf8_radiobutton">
-                                    <property name="can_focus">yes</property>
-                                    <property name="label" translatable="yes">Always use _UTF-8 encoding (faster)</property>
-                                    <property name="active">yes</property>
-                                    <property name="draw_indicator">yes</property>
-                                    <property name="visible">yes</property>
-                                    <property name="use_underline">yes</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="padding">0</property>
-                                    <property name="expand">no</property>
-                                    <property name="fill">no</property>
-                                  </packing>
-                                </child>
-
-                                <child>
-                                  <widget class="GtkRadioButton" id="locale_if_possible_radiobutton">
-                                    <property name="can_focus">yes</property>
-                                    <property name="label" translatable="yes">Use current _locale when possible</property>
-                                    <property name="active">no</property>
-                                    <property name="draw_indicator">yes</property>
-                                    <property name="visible">yes</property>
-                                    <property name="group">utf8_radiobutton</property>
-                                    <property name="use_underline">yes</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="padding">0</property>
-                                    <property name="expand">no</property>
-                                    <property name="fill">yes</property>
-                                  </packing>
-                                </child>
-
-                                <child>
-                                  <widget class="GtkRadioButton" id="locale_if_previous_radiobutton">
-                                    <property name="can_focus">yes</property>
-                                    <property name="label" translatable="yes">U_se current locale only if the file already use it</property>
-                                    <property name="active">no</property>
-                                    <property name="draw_indicator">yes</property>
-                                    <property name="visible">no</property>
-                                    <property name="use_underline">yes</property>
-                                    <property name="sensitive">yes</property>
-                                    <property name="group">utf8_radiobutton</property>
-                                  </widget>
-                                  <packing>
-                                    <property name="padding">0</property>
-                                    <property name="expand">no</property>
-                                    <property name="fill">no</property>
-                                  </packing>
-                                </child>
-                              </widget>
-                            </child>
+                            <property name="use_underline">yes</property>
                           </widget>
                           <packing>
-                            <property name="padding">6</property>
+                            <property name="padding">0</property>
+                            <property name="expand">no</property>
+                            <property name="fill">no</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkRadioButton" id="locale_if_possible_radiobutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">Use current _locale when possible</property>
+                            <property name="active">no</property>
+                            <property name="draw_indicator">yes</property>
+                            <property name="visible">yes</property>
+                            <property name="group">utf8_radiobutton</property>
+                            <property name="use_underline">yes</property>
+                          </widget>
+                          <packing>
+                            <property name="padding">0</property>
                             <property name="expand">no</property>
                             <property name="fill">yes</property>
                           </packing>
                         </child>
-
-
+                        <child>
+                          <widget class="GtkRadioButton" id="locale_if_previous_radiobutton">
+                            <property name="can_focus">yes</property>
+                            <property name="label" translatable="yes">U_se current locale only if the file already use it</property>
+                            <property name="active">no</property>
+                            <property name="draw_indicator">yes</property>
+                            <property name="visible">no</property>
+                            <property name="use_underline">yes</property>
+                            <property name="sensitive">yes</property>
+                            <property name="group">utf8_radiobutton</property>
+                          </widget>
+                          <packing>
+                            <property name="padding">0</property>
+                            <property name="expand">no</property>
+                            <property name="fill">no</property>
+                          </packing>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="padding">6</property>
+                    <property name="expand">no</property>
+                    <property name="fill">yes</property>
+                  </packing>
+                </child>
               </widget>
             </child>
             <child>
@@ -1464,22 +1351,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
-
-
-
-
-
-
-
-
-
             <child>
               <widget class="GtkVBox" id="vbox74">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-
                 <child>
                   <widget class="GtkLabel" id="label791">
                     <property name="label" translatable="yes">The wrap mode settings let you customize how lines have to be wrapped.</property>
@@ -1497,21 +1373,18 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkFrame" id="frame74">
                     <property name="label" translatable="yes">Wrap mode</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkVBox" id="vbox75">
                         <property name="border_width">5</property>
                         <property name="homogeneous">no</property>
                         <property name="spacing">0</property>
                         <property name="visible">yes</property>
-
                         <child>
                           <widget class="GtkRadioButton" id="wrap_never_radiobutton">
                             <property name="can_focus">yes</property>
@@ -1527,7 +1400,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="fill">no</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkRadioButton" id="wrap_word_radiobutton">
                             <property name="can_focus">yes</property>
@@ -1544,7 +1416,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="fill">yes</property>
                           </packing>
                         </child>
-
                         <child>
                           <widget class="GtkRadioButton" id="wrap_char_radiobutton">
                             <property name="can_focus">yes</property>
@@ -1561,7 +1432,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="fill">yes</property>
                           </packing>
                         </child>
-
                       </widget>
                     </child>
                   </widget>
@@ -1573,7 +1443,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 </child>
               </widget>
             </child>
-
             <child>
               <widget class="GtkLabel" id="label72">
                 <property name="label" translatable="yes">Wrap mode</property>
@@ -1589,16 +1458,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
-
-
-
             <child>
               <widget class="GtkVBox" id="vbox180">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-                
                 <child>
                   <widget class="GtkLabel" id="labe2791">
                     <property name="label" translatable="yes">The print settings let you customize how gedit prints documents.</property>
@@ -1616,13 +1480,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkHBox" id="hbox110">
                     <property name="homogeneous">no</property>
                     <property name="spacing">0</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkCheckButton" id="add_header_checkbutton">
                         <property name="can_focus">yes</property>
@@ -1645,13 +1507,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">yes</property>
                   </packing>
                 </child>
-                
                 <child>
                   <widget class="GtkHBox" id="hbox113">
                     <property name="homogeneous">no</property>
                     <property name="spacing">0</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkCheckButton" id="wrap_lines_checkbutton">
                         <property name="can_focus">yes</property>
@@ -1674,14 +1534,12 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">yes</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkHBox" id="hbox111">
                     <property name="homogeneous">no</property>
                     <property name="spacing">3</property>
                     <property name="visible">yes</property>
                     <property name="sensitive">yes</property>
-
                     <child>
                       <widget class="GtkCheckButton" id="line_numbers_checkbutton">
                         <property name="can_focus">yes</property>
@@ -1697,7 +1555,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">no</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkSpinButton" id="line_numbers_spinbutton">
                         <property name="can_focus">yes</property>
@@ -1716,7 +1573,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="fill">no</property>
                       </packing>
                     </child>
-
                     <child>
                       <widget class="GtkLabel" id="label97">
                         <property name="label" translatable="yes">line(s)</property>
@@ -1758,15 +1614,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
-
-
             <child>
               <widget class="GtkVBox" id="line_numbers_page">
                 <property name="homogeneous">no</property>
                 <property name="spacing">8</property>
                 <property name="visible">yes</property>
-                
                 <child>
                   <widget class="GtkLabel" id="labe2791">
                     <property name="label" translatable="yes">The line numbers setting lets you choose to display the line numbers on the left hand side of the window.</property>
@@ -1784,13 +1636,11 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">no</property>
                   </packing>
                 </child>
-
                 <child>
                   <widget class="GtkHBox" id="ln_hbox">
                     <property name="homogeneous">no</property>
                     <property name="spacing">0</property>
                     <property name="visible">yes</property>
-
                     <child>
                       <widget class="GtkCheckButton" id="display_line_numbers_checkbutton">
                         <property name="can_focus">yes</property>
@@ -1813,7 +1663,6 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="fill">yes</property>
                   </packing>
                 </child>
-                
               </widget>
             </child>
             <child>
@@ -1831,9 +1680,224 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                 <property name="type">tab</property>
               </packing>
             </child>
-
-
-           </widget>
+            <child>
+              <widget class="GtkVBox" id="print_fonts">
+                <property name="homogeneous">no</property>
+                <property name="spacing">8</property>
+                <property name="visible">yes</property>
+                <child>
+                  <widget class="GtkLabel" id="labepf2791">
+                    <property name="label" translatable="yes">The print fonts setting lets you.....</property>
+                    <property name="justify">GTK_JUSTIFY_LEFT</property>
+                    <property name="wrap">yes</property>
+                    <property name="xalign">0.0</property>
+                    <property name="yalign">0.0</property>
+                    <property name="xpad">0</property>
+                    <property name="ypad">0</property>
+                    <property name="visible">yes</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">6</property>
+                    <property name="expand">no</property>
+                    <property name="fill">no</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkTable" id="table1">
+                    <property name="visible">True</property>
+                    <property name="n_rows">2</property>
+                    <property name="n_columns">3</property>
+                    <property name="homogeneous">False</property>
+                    <property name="row_spacing">4</property>
+                    <property name="column_spacing">6</property>
+                    <child>
+                      <widget class="GtkLabel" id="label3">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Header:</property>
+                        <property name="use_underline">False</property>
+                        <property name="use_markup">False</property>
+                        <property name="justify">GTK_JUSTIFY_LEFT</property>
+                        <property name="wrap">False</property>
+                        <property name="selectable">False</property>
+                        <property name="xalign">0</property>
+                        <property name="yalign">0.5</property>
+                        <property name="xpad">0</property>
+                        <property name="ypad">0</property>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="right_attach">1</property>
+                        <property name="top_attach">0</property>
+                        <property name="bottom_attach">1</property>
+                        <property name="x_options">fill</property>
+                        <property name="y_options"/>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkLabel" id="label4">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">_Body:</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_markup">False</property>
+                        <property name="justify">GTK_JUSTIFY_LEFT</property>
+                        <property name="wrap">False</property>
+                        <property name="selectable">False</property>
+                        <property name="xalign">0</property>
+                        <property name="yalign">0.5</property>
+                        <property name="xpad">0</property>
+                        <property name="ypad">0</property>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="right_attach">1</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options">fill</property>
+                        <property name="y_options"/>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEntry" id="header_font_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="editable">False</property>
+                        <property name="visibility">True</property>
+                        <property name="max_length">0</property>
+                        <property name="text" translatable="yes"/>
+                        <property name="has_frame">True</property>
+                        <property name="invisible_char" translatable="yes">*</property>
+                        <property name="activates_default">False</property>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">0</property>
+                        <property name="bottom_attach">1</property>
+                        <property name="y_options"/>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkEntry" id="body_font_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="editable">False</property>
+                        <property name="visibility">True</property>
+                        <property name="max_length">0</property>
+                        <property name="text" translatable="yes"/>
+                        <property name="has_frame">True</property>
+                        <property name="invisible_char" translatable="yes">*</property>
+                        <property name="activates_default">False</property>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="y_options"/>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkButton" id="header_font_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="relief">GTK_RELIEF_NORMAL</property>
+                        <child>
+                          <widget class="GtkAlignment" id="alignment1">
+                            <property name="visible">True</property>
+                            <property name="xalign">0.5</property>
+                            <property name="yalign">0.5</property>
+                            <property name="xscale">0</property>
+                            <property name="yscale">0</property>
+                            <child>
+                              <widget class="GtkHBox" id="hbox1">
+                                <property name="visible">True</property>
+                                <property name="homogeneous">False</property>
+                                <property name="spacing">2</property>
+                                <child>
+                                  <widget class="GtkImage" id="image1">
+                                    <property name="visible">True</property>
+                                    <property name="stock">gtk-select-font</property>
+                                    <property name="icon_size">4</property>
+                                    <property name="xalign">0.5</property>
+                                    <property name="yalign">0.5</property>
+                                    <property name="xpad">0</property>
+                                    <property name="ypad">0</property>
+                                  </widget>
+                                  <packing>
+                                    <property name="padding">0</property>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                  </packing>
+                                </child>
+                              </widget>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="top_attach">0</property>
+                        <property name="bottom_attach">1</property>
+                        <property name="x_options">fill</property>
+                        <property name="y_options"/>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="GtkButton" id="body_font_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="relief">GTK_RELIEF_NORMAL</property>
+                        <child>
+                          <widget class="GtkImage" id="image2">
+                            <property name="visible">True</property>
+                            <property name="stock">gtk-select-font</property>
+                            <property name="icon_size">4</property>
+                            <property name="xalign">0.5</property>
+                            <property name="yalign">0.5</property>
+                            <property name="xpad">0</property>
+                            <property name="ypad">0</property>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="left_attach">2</property>
+                        <property name="right_attach">3</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options">fill</property>
+                        <property name="y_options"/>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="padding">0</property>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="tab_expand">False</property>
+                <property name="tab_fill">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="ln_label">
+                <property name="label" translatable="yes">Print fonts</property>
+                <property name="justify">GTK_JUSTIFY_CENTER</property>
+                <property name="wrap">no</property>
+                <property name="xalign">0.5</property>
+                <property name="yalign">0.5</property>
+                <property name="xpad">0</property>
+                <property name="ypad">0</property>
+                <property name="visible">yes</property>
+              </widget>
+              <packing>
+                <property name="type">tab</property>
+              </packing>
+            </child>
+          </widget>
           <packing>
             <property name="padding">0</property>
             <property name="expand">no</property>

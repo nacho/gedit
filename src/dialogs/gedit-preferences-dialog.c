@@ -51,6 +51,7 @@
 #define WRAP_MODE_SETTINGS	8
 #define PRINT_SETTINGS		9
 #define LINE_NUMBERS_SETTINGS	10
+#define PRINT_FONTS_SETTINGS	11
 
 /*
 #define DEBUG_MDI_PREFS
@@ -229,6 +230,8 @@ static CategoriesTreeItem print [] =
 {
 	{_("Page"), NULL, PRINT_SETTINGS},
 
+	{_("Fonts"), NULL, PRINT_FONTS_SETTINGS},
+
 	{ NULL }
 };
 
@@ -309,8 +312,6 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	g_object_set (G_OBJECT (label), "xalign", 0.0, NULL);
 
 	ct = gedit_preferences_dialog_create_categories_tree (dlg);
-
-	gtk_label_set_mnemonic_widget (GTK_LABEL (label), dlg->priv->categories_tree);
 		
 	gtk_box_pack_start (GTK_BOX (r), label, FALSE, FALSE, 6);
 	gtk_box_pack_start (GTK_BOX (r), ct, TRUE, TRUE, 0);
@@ -324,6 +325,8 @@ gedit_preferences_dialog_init (GeditPreferencesDialog *dlg)
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), hbox,
 			FALSE, FALSE, 0);
 	
+	gtk_label_set_mnemonic_widget (GTK_LABEL (label), dlg->priv->categories_tree);
+
 	gtk_widget_show_all (GTK_DIALOG (dlg)->vbox);	
 
 	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
