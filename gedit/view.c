@@ -466,7 +466,7 @@ gedit_view_init (View *view)
 	
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->window),
 					GTK_POLICY_NEVER,
-					GTK_POLICY_AUTOMATIC);
+					GTK_POLICY_ALWAYS);
 
         /* FIXME use settings->line_wrap and add horz. scroll bars. Chema*/
 	view->line_wrap = 1;
@@ -476,6 +476,8 @@ gedit_view_init (View *view)
 	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
 
+	gtk_container_add (GTK_CONTAINER (view->window), view->text);
+	
 	/* Toolbar */
 	view->toolbar = NULL;
 
@@ -484,7 +486,6 @@ gedit_view_init (View *view)
 			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
 	gtk_signal_connect (GTK_OBJECT (view->text), "key_press_event",
 			    GTK_SIGNAL_FUNC (gedit_event_key_press), NULL);
-
 
 	/* Handle Auto Indent */
 	gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
@@ -496,8 +497,6 @@ gedit_view_init (View *view)
 	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
 			    GTK_SIGNAL_FUNC (doc_delete_text_cb),
 			    (gpointer) view);
-
-	gtk_container_add (GTK_CONTAINER (view->window), view->text);
 
 	view->view_text_changed_signal =
 		gtk_signal_connect (GTK_OBJECT(view->text), "changed",
@@ -543,9 +542,14 @@ gedit_view_init (View *view)
 
 	view->split_parent = GTK_WIDGET (view->split_screen)->parent;
 #endif
-	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (gedit_window_active())));
-  	gdk_font_unref (style->font);
 
+#if 1
+	/*
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (gedit_window_active())));
+	*/
+	g_print ("new\n");
+	style = gtk_style_copy (gtk_widget_get_style (view->text));
+	
 	bg = &style->base[0];
 	bg->red = settings->bg[0];
 	bg->green = settings->bg[1];
@@ -556,6 +560,34 @@ gedit_view_init (View *view)
 	fg->green = settings->fg[1];
 	fg->blue = settings->fg[2];
 
+   	gtk_widget_set_style (GTK_WIDGET(view->text), style);
+	/*
+	gtk_widget_set_rc_style (GTK_WIDGET(view->text));
+	gtk_widget_ensure_style (GTK_WIDGET(view->text));
+	*/
+	gtk_style_unref (style);
+#else
+	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (background),
+                                    &c->red, &c->green, &c->blue, 0);
+        settings->bg[0] = c->red;
+        settings->bg[1] = c->green;
+        settings->bg[2] = c->blue;
+        
+        c = &style->text[0];
+        
+        gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (foreground),
+                                    &c->red, &c->green, &c->blue, 0);
+        settings->fg[0] = c->red;
+        settings->fg[1] = c->green;
+        settings->fg[2] = c->blue;
+
+	gtk_style_unref (style);
+
+#endif	
+
+	/* Font */
+#if 1
+  	gdk_font_unref (style->font);
 	if (settings->use_fontset)
 	{
 		style->font = view->font ? gdk_fontset_load (view->font) : NULL;
@@ -576,9 +608,7 @@ gedit_view_init (View *view)
 		} 
 
 	}
-	
-   	gtk_widget_set_style (GTK_WIDGET(view->text), style);
-	gtk_style_unref (style);
+#endif	
 
 	/* Popup Menu */
 	menu = gnome_popup_menu_new (popup_menu);
@@ -588,10 +618,9 @@ gedit_view_init (View *view)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 
-	/*
+#ifdef ENABLE_SPLIT_SCREEN
 	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
-	*/
-
+#endif	
 	gtk_widget_show_all (view->vbox);
 	gtk_widget_grab_focus (view->text);
 

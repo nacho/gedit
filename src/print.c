@@ -22,6 +22,9 @@
  *   Chema Celorio <chema@celorio.com>
  */ 
 
+/*
+#define GEDIT_PRINT_SELECTION
+*/
 
 #include <config.h>
 #include <gnome.h>
