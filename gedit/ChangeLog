@@ -1,3 +1,10 @@
+2002-04-30  Federico Mena Quintero  <federico@ximian.com>
+
+	* dialogs/gedit-dialog-replace.c
+	(replace_dlg_replace_button_pressed): Do not pass null arguments
+	for printf() formats to gedit_debug(); this will crash on
+	non-glibc systems.  Should fix #78011.
+
 2002-04-30  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-ui.xml: added an icon to Help->Contents

@@ -610,8 +610,8 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 
 	selected_text = gedit_document_get_selected_text (doc, NULL, NULL);
 
-	gedit_debug (DEBUG_SEARCH, "Sel text: %s", selected_text);
-	gedit_debug (DEBUG_SEARCH, "Search string: %s", search_string);
+	gedit_debug (DEBUG_SEARCH, "Sel text: %s", selected_text ? selected_text : "NULL");
+	gedit_debug (DEBUG_SEARCH, "Search string: %s", search_string ? search_string : "NULL");
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
 		case_sensitive = TRUE;
@@ -626,7 +626,8 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 						       strlen (search_string)) != 0))
 	{
 		gedit_debug (DEBUG_SEARCH, "selected_text (%s) != search_string (%s)", 
-				selected_text, search_string);
+			     selected_text ? selected_text : "NULL",
+			     search_string ? search_string : "NULL");
 
 		if (selected_text != NULL)
 			g_free (selected_text);
@@ -641,7 +642,7 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 				
 	g_free (selected_text);
 		
-	gedit_debug (DEBUG_SEARCH, "Replace string: %s", replace_string);
+	gedit_debug (DEBUG_SEARCH, "Replace string: %s", replace_string ? replace_string : "NULL");
 
 	gedit_document_replace_selected_text (doc, replace_string);
 
