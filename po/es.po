@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-16 22:08+0200\n"
-"PO-Revision-Date: 2004-05-16 22:17+0200\n"
+"POT-Creation-Date: 2004-07-12 22:36+0200\n"
+"PO-Revision-Date: 2004-07-12 22:36+0200\n"
 "Last-Translator: Pablo G. del Campo <pablodc@bigfoot.com>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -487,7 +487,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,ACTUAL,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
@@ -505,7 +505,7 @@ msgid "If you don't save your documents, all your changes will be lost."
 msgstr "Si no guarda sus documentos todos los cambios se perderán."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:658
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
 msgid "S_elect the documents you want to save:"
 msgstr "S_eleccione los documentos que desea guardar:"
 
@@ -517,11 +517,16 @@ msgstr "_Ninguno"
 msgid "_Save Selected"
 msgstr "Guardar los _seleccionados"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:141
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Do_n't save"
 msgstr "_No guardar"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:361
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:704
+msgid "Question"
+msgstr "Pregunta"
+
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:364
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
@@ -536,13 +541,13 @@ msgstr[1] ""
 "Si no guarda los cambios desde los últimos %ld segundos serán perdidos "
 "definitivamente."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:370
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:373
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
 msgstr ""
 "Si no guarda los cambios desde el último minuto se perderán definitivamente."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:379
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -557,7 +562,7 @@ msgstr[1] ""
 "Si no guarda los cambios desde el último minuto y %ld segundos se perderán "
 "definitivamente."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:389
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
@@ -572,13 +577,13 @@ msgstr[1] ""
 "Si no guarda los cambios desde los últimos %ld minutos se perderán "
 "definitivamente."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
 msgstr ""
 "Si no guarda los cambios desde la última hora se perderán definitivamente."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:407
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -593,7 +598,7 @@ msgstr[1] ""
 "Si no guarda los cambios desde la última hora y %d minutos se perderán "
 "definitivamente."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:422
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:425
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
@@ -605,23 +610,25 @@ msgstr[1] ""
 "Si no guarda los cambios desde las últimas %d horas se perderán "
 "definitivamente."
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:466
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:469
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "¿Desea guardar los cambios al documento «%s» antes de cerrar?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:641
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] "Hay %d documento con cambios sin guardar. ¿Desea guardar los cambios antes de cerrar?"
+msgstr[0] ""
+"Hay %d documento con cambios sin guardar. ¿Desea guardar los cambios antes "
+"de cerrar?"
 msgstr[1] ""
 "Hay %d documentos con cambios sin guardar. ¿Desea guardar los cambios antes "
 "de cerrar?"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:675
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
 msgid "If you don't save, all your changes will be definitively lost."
 msgstr "Si no guarda todos sus cambios se perderán definitivamente."
 
@@ -649,7 +656,7 @@ msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "_Reemplazar"
 
@@ -695,11 +702,11 @@ msgstr "Códigos de caracteres"
 msgid "E_ncodings shown in menu:"
 msgstr "Co_dificaciones mostradas en el menú:"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:489
+#: gedit/dialogs/gedit-page-setup-dialog.c:496
 msgid "Body font picker"
 msgstr "Seleccionador de la tipografía del cuerpo"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:490
+#: gedit/dialogs/gedit-page-setup-dialog.c:497
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
@@ -707,22 +714,22 @@ msgstr ""
 "Pulse este botón para seleccionar la tipografía a ser usada para imprimir el "
 "cuerpo del documento"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:491
+#: gedit/dialogs/gedit-page-setup-dialog.c:498
 msgid "Page headers font picker"
 msgstr "Seleccionador de tipografía para las cabeceras de las páginas"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:492
+#: gedit/dialogs/gedit-page-setup-dialog.c:499
 msgid ""
 "Push this button to select the font to be used to print the page headers"
 msgstr ""
 "Pulse este botón para seleccionar la tipografía a ser usada para imprimir "
 "las cabeceras de las páginas"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:493
+#: gedit/dialogs/gedit-page-setup-dialog.c:500
 msgid "Line numbers font picker"
 msgstr "Seleccionador de tipografía para los números de línea"
 
-#: gedit/dialogs/gedit-page-setup-dialog.c:494
+#: gedit/dialogs/gedit-page-setup-dialog.c:501
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr ""
 "Pulse este botón para seleccionar la tipografía a ser usada para imprimir "
@@ -768,20 +775,20 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "El archivo seleccionado no es ejecutable."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:666
+#: gedit/dialogs/gedit-preferences-dialog.c:673
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Pulse este botón para seleccionar la tipografía que utilizará el editor"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:668
+#: gedit/dialogs/gedit-preferences-dialog.c:675
 msgid "Push this button to configure text color"
 msgstr "Pulse este botón para configurar el color del texto"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:670
+#: gedit/dialogs/gedit-preferences-dialog.c:677
 msgid "Push this button to configure background color"
 msgstr "Presione este botón para configurar el color de fondo"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:672
+#: gedit/dialogs/gedit-preferences-dialog.c:679
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -789,7 +796,7 @@ msgstr ""
 "Pulse este botón para configurar el color con el cual debería aparecer el "
 "texto seleccionado"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:675
+#: gedit/dialogs/gedit-preferences-dialog.c:682
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -797,7 +804,7 @@ msgstr ""
 "Pulse este botón para configurar el color con el cual aparecerá el texto "
 "debería aparecer marcado"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1082
+#: gedit/dialogs/gedit-preferences-dialog.c:1132
 msgid "Elements"
 msgstr "Elementos"
 
@@ -1319,17 +1326,17 @@ msgstr ""
 msgid "Could not create a backup file."
 msgstr "No se ha podido crear un archivo de respaldo."
 
-#: gedit/gedit-encodings-option-menu.c:203
+#: gedit/gedit-encodings-option-menu.c:207
 msgid "Auto Detected"
 msgstr "Detección automática"
 
-#: gedit/gedit-encodings-option-menu.c:223
-#: gedit/gedit-encodings-option-menu.c:245
+#: gedit/gedit-encodings-option-menu.c:227
+#: gedit/gedit-encodings-option-menu.c:249
 #, c-format
 msgid "Current Locale (%s)"
 msgstr "Localización actual (%s)"
 
-#: gedit/gedit-encodings-option-menu.c:306
+#: gedit/gedit-encodings-option-menu.c:310
 msgid "Add or _Remove..."
 msgstr "Añadir o quita_r..."
 
@@ -1444,45 +1451,45 @@ msgstr "Vietnamita"
 msgid "Thai"
 msgstr "Tailandesa"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Ya existe un archivo con el nombre «%s».\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "¿Desea reemplazarlo con el que está guardando ahora?"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "El archivo «%s» es de sólo lectura.\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "¿Desea intentar reemplazarlo con el que está guardando ahora?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:362
 msgid "All Files"
 msgstr "Todos los archivos"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Text Files"
 msgstr "Todos los archivos de texto"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:388
 msgid "Ch_aracter Coding:"
 msgstr "Codificación de c_aracteres:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:534
 msgid "Select a file to open"
 msgstr "Seleccione un archivo a para abrir"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:560
 msgid "Select files to open"
 msgstr "Seleccione archivos para abrir"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:592
 msgid "Select a filename to save"
 msgstr "Seleccione el nombre de archivo a guardar"
 
@@ -1490,46 +1497,52 @@ msgstr "Seleccione el nombre de archivo a guardar"
 msgid "Open File..."
 msgstr "Abrir un archivo..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:421
+#: gedit/gedit-file.c:272 gedit/gedit-file.c:425
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Guardando el documento «%s»..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:442
+#: gedit/gedit-file.c:300 gedit/gedit-file.c:446
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "El documento «%s» no ha sido guardado."
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:434
+#: gedit/gedit-file.c:314 gedit/gedit-file.c:438
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "El documento «%s» ha sido guardado."
 
-#: gedit/gedit-file.c:400
+#: gedit/gedit-file.c:405
 msgid "Save as..."
 msgstr "Guardar como..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:605
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "¿Recuperar los cambios no guardados en el documento «%s»?"
 
-#: gedit/gedit-file.c:609
+#: gedit/gedit-file.c:614
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "Los cambios realizados al documento en el último %ld segundo se perderán permanentemente."
-msgstr[1] "Los cambios realizados al documento en los últimos %ld segundos se perderán permanentemente."
+msgstr[0] ""
+"Los cambios realizados al documento en el último %ld segundo se perderán "
+"permanentemente."
+msgstr[1] ""
+"Los cambios realizados al documento en los últimos %ld segundos se perderán "
+"permanentemente."
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:623
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
-msgstr "Los cambios realizados al documento en el último minuto se perderán permanentemente."
+msgstr ""
+"Los cambios realizados al documento en el último minuto se perderán "
+"permanentemente."
 
-#: gedit/gedit-file.c:624
+#: gedit/gedit-file.c:629
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1537,24 +1550,34 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] "Los cambios realizados al documento en el último minuto y %ld segundo se perderán permanentemente."
-msgstr[1] "Los cambios realizados al documento en el último minuto y %ld segundos se perderán permanentemente."
+msgstr[0] ""
+"Los cambios realizados al documento en el último minuto y %ld segundo se "
+"perderán permanentemente."
+msgstr[1] ""
+"Los cambios realizados al documento en el último minuto y %ld segundos se "
+"perderán permanentemente."
 
-#: gedit/gedit-file.c:634
+#: gedit/gedit-file.c:639
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "Los cambios realizados al documento en el último minuto %ld se perderán permanentemente."
-msgstr[1] "Los cambios realizados al documento en los últimos %ld minutos se perderán permanentemente."
+msgstr[0] ""
+"Los cambios realizados al documento en el último minuto %ld se perderán "
+"permanentemente."
+msgstr[1] ""
+"Los cambios realizados al documento en los últimos %ld minutos se perderán "
+"permanentemente."
 
-#: gedit/gedit-file.c:649
+#: gedit/gedit-file.c:654
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgstr "Los cambios realizados al documento en la última hora se perderán permanentemente."
+msgstr ""
+"Los cambios realizados al documento en la última hora se perderán "
+"permanentemente."
 
-#: gedit/gedit-file.c:655
+#: gedit/gedit-file.c:660
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1562,82 +1585,90 @@ msgid ""
 msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] "Los cambios realizados al documento en la última hora y %d minuto se perderán permanentemente."
-msgstr[1] "Los cambios realizados al documento en la última hora y %d minutos se perderán permanentemente."
+msgstr[0] ""
+"Los cambios realizados al documento en la última hora y %d minuto se "
+"perderán permanentemente."
+msgstr[1] ""
+"Los cambios realizados al documento en la última hora y %d minutos se "
+"perderán permanentemente."
 
-#: gedit/gedit-file.c:670
+#: gedit/gedit-file.c:675
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Los cambios realizados al documento en la última %d hora se perderán permanentemente."
-msgstr[1] "Los cambios realizados al documento en las últimas %d horas se perderán permanentemente."
+msgstr[0] ""
+"Los cambios realizados al documento en la última %d hora se perderán "
+"permanentemente."
+msgstr[1] ""
+"Los cambios realizados al documento en las últimas %d horas se perderán "
+"permanentemente."
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Re_vertir"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:747
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Ocurrió un error al recuperar el documento «%s»."
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:754
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "El documento «%s» no ha sido recuperado."
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:758
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "El documento «%s» ha sido recuperado."
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:786
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Recuperando el documento «%s»..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:921
 msgid "Could not read data from stdin."
 msgstr "No se han podido leer datos desde la entrada estándar."
 
-#: gedit/gedit-file.c:962
+#: gedit/gedit-file.c:971
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "El archivo «%s» no existe. ¿Desea crearlo?"
 
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1094
 msgid "Reverting file:"
 msgstr "Recuperando el archivo:"
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1098
 msgid "Loading file:"
 msgstr "Cargando el archivo:"
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1267 gedit/gedit-file.c:1426
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Ocurrió un error al carga el archivo «%s»"
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1288
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Archivo «%s» cargado"
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1365
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Archivo %d cargado"
 msgstr[1] "%d Archivos cargados"
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1399
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Cargando el archivo «%s»..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1546
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2709,7 +2740,9 @@ msgstr "_Actualizar"
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
-msgstr "Analiza el documento actual y determina la cantidad de palabras, líneas, caracteres y caracteres que no son espacios en él."
+msgstr ""
+"Analiza el documento actual y determina la cantidad de palabras, líneas, "
+"caracteres y caracteres que no son espacios en él."
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -2844,7 +2877,9 @@ msgstr "Ha ocurrido un error mientras se ejecutaba el comando seleccionado."
 msgid ""
 "Executes an external program and, if required, displays its output in the "
 "output window."
-msgstr "Ejecuta un programa externo , si se requiere, guarda su salida en la ventana de salida."
+msgstr ""
+"Ejecuta un programa externo , si se requiere, guarda su salida en la ventana "
+"de salida."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
 msgid "Shell command"
@@ -3199,7 +3234,9 @@ msgstr "Mostrar la ventana de lista de etiquetas"
 msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
-msgstr "Proporciona un método para insertar fácilmente en un documento las cadenas/etiquetas mas comúnmente utilizadas sin tener que teclearlas."
+msgstr ""
+"Proporciona un método para insertar fácilmente en un documento las cadenas/"
+"etiquetas mas comúnmente utilizadas sin tener que teclearlas."
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
