@@ -29,6 +29,8 @@
 #include <bonobo/bonobo-dock-layout.h>
 #include <bonobo/bonobo-ui-util.h>
 
+#include "gedit-debug.h"
+
 #include <string.h>
 
 #define BONOBO_MDI_KEY "BonoboMDI"
@@ -1440,12 +1442,7 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
 		gtk_widget_show (GTK_WIDGET (mdi->priv->active_window));
 	}
 
-	/* this reference will compensate the view's unrefing
-	   when removed from its parent later, as we want it to
-	   stay valid until removed from the child with a call
-	   to bonobo_mdi_child_remove_view() */
-	gtk_widget_ref (view);
-
+	
 	if (!GTK_WIDGET_VISIBLE (view))
 		gtk_widget_show (view);
 
@@ -1477,7 +1474,15 @@ bonobo_mdi_add_view (BonoboMDI *mdi, BonoboMDIChild *child)
 
 				bonobo_window_set_contents (mdi->priv->active_window, view);
 				app_set_view (mdi, mdi->priv->active_window, view);
+
 			}
+
+	/* this reference will compensate the view's unrefing
+	   when removed from its parent later, as we want it to
+	   stay valid until removed from the child with a call
+	   to bonobo_mdi_child_remove_view() */
+	g_object_ref (G_OBJECT (view));
+	gtk_object_sink (GTK_OBJECT (view));
 
 	g_object_set_data (G_OBJECT (view), BONOBO_MDI_CHILD_KEY, child);
 	
@@ -1599,6 +1604,8 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 	BonoboWindow *window;
 	BonoboMDIChild *child;
 	gint ret = TRUE;
+
+	gedit_debug (DEBUG_MDI, "");
 	
 	g_return_val_if_fail (mdi != NULL, FALSE);
 	g_return_val_if_fail (BONOBO_IS_MDI (mdi), FALSE);
@@ -1620,7 +1627,11 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 
 	window = bonobo_mdi_get_window_from_view (view);
 
+	gedit_debug (DEBUG_MDI, "BU");
+
 	gtk_container_remove (GTK_CONTAINER (parent), view);
+
+	gedit_debug (DEBUG_MDI, "AU");
 
 	if (view == mdi->priv->active_view)
 	   mdi->priv->active_view = NULL;
@@ -1678,6 +1689,8 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 	/* remove this view from the child's view list unless in MODAL mode */
 	if(mdi->priv->mode != BONOBO_MDI_MODAL)
 		bonobo_mdi_child_remove_view (child, view);
+
+	gedit_debug (DEBUG_MDI, "END");
 
 	return TRUE;
 }
@@ -1755,6 +1768,8 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 	GList *view_node;
 	GtkWidget *view;
 
+	gedit_debug (DEBUG_MDI, "");
+	
 	g_return_val_if_fail (mdi != NULL, FALSE);
 	g_return_val_if_fail (BONOBO_IS_MDI (mdi), FALSE);
 	g_return_val_if_fail (child != NULL, FALSE);
@@ -1762,6 +1777,7 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 
 	/* if force is set to TRUE, don't call the remove_child handler (ie there is no way for the
 	   user to stop removal of the child) */
+
 	if (!force)
 		g_signal_emit (G_OBJECT (mdi), mdi_signals [REMOVE_CHILD], 0, child, &ret);
 
@@ -1779,6 +1795,7 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 
 	mdi->priv->children = g_list_remove (mdi->priv->children, child);
 
+
 	child_list_menu_remove_item (mdi, child);
 
 	if (child == mdi->priv->active_child)
@@ -1789,7 +1806,9 @@ bonobo_mdi_remove_child (BonoboMDI *mdi, BonoboMDIChild *child, gint force)
 	g_signal_handlers_disconnect_by_func (GTK_OBJECT (child), 
 			GTK_SIGNAL_FUNC (child_name_changed), mdi);
 
+
 	g_object_unref (G_OBJECT (child));
+
 
 	if (mdi->priv->mode == BONOBO_MDI_MODAL && mdi->priv->children) 
 	{

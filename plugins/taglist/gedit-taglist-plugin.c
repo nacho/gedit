@@ -38,7 +38,7 @@
 #include "gedit-taglist-plugin-parser.h"
 
 #define MENU_ITEM_LABEL		N_("_Show tag list")
-#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps/"
+#define MENU_ITEM_PATH		"/menu/Edit/EditOps_5/"
 #define MENU_ITEM_NAME		"TagList"	
 #define MENU_ITEM_TIP		N_("Show the tag list window.")
 

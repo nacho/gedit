@@ -1,3 +1,14 @@
+2002-02-12  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-ui.xml: added EditOps_5 placeholder
+
+	* dialogs/gedit-dialog-plugin-manager.c 
+	(dialog_plugin_manager_construct_tree): unref model
+
+	* dialogs/gedit-preferences-dialog.c (finalize): unref tree model
+
+	* dialogs/plugin-manager.glade2: fixed scrolling bug
+
 2002-02-08  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-document.[ch] (gedit_document_save_a_copy_as): 

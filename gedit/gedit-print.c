@@ -716,6 +716,8 @@ gedit_print_line_number (GeditPrintJobInfo *pji, gdouble y)
 		
 	gint line_num = pji->first_line_to_print + pji->printed_lines;
 
+	gedit_debug (DEBUG_PRINT, "");
+
 	if ((pji->printed_lines + 1) % gedit_settings->print_line_numbers != 0)
 	       return;	
 		

@@ -1,6 +1,5 @@
 # ASCII table plugin
-
-plugindir = $(libdir)/gedit/plugins
+plugindir = $(libdir)/gedit2/plugins
 
 plugin_LTLIBRARIES = libasciitable.la
 
@@ -8,14 +7,20 @@ libasciitable_la_SOURCES = ascii.c
 
 
 INCLUDES =						\
-	-I$(top_srcdir)/src				\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
-	-I$(includedir)					\
-	$(EXTRA_GNOME_CFLAGS) \
-	$(GNOME_INCLUDEDIR)
+	-I$(top_srcdir)/src 				\
+	$(GEDIT_CFLAGS) 				\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"	\
+	-DG_DISABLE_DEPRECATED				\
+	-DGDK_DISABLE_DEPRECATED			\
+	-DGTK_DISABLE_DEPRECATED			\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+	-DGNOME_DISABLE_DEPRECATED			
 
-gladedir = $(datadir)/gedit/glade
-glade_DATA = asciitable.glade
+
+gladedir = $(datadir)/gedit2/glade
+glade_DATA = asciitable.glade2
 
 EXTRA_DIST = $(glade_DATA)
+
+

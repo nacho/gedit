@@ -1,3 +1,22 @@
+2002-02-12  Paolo Maggi  <maggi@athena.polito.it>
+
+	* Makefile.am (SUBDIRS): added ASCII
+
+	* ASCII/ascii.c:
+	* ASCCI/Makefile.am: ported
+	
+	* ASCII/asciitable.glade: removed
+	
+	* ASCII/asciitable.glade2: new file
+
+	* taglist/gedit-taglist-plugin-window.c (populate_tags_list):
+	unref module
+
+	* taglist/gedit-taglist-plugin.c: #define MENU_ITEM_PATH 
+	"/menu/Edit/EditOps_5/"
+
+	* time/time.c (create_formats_list): unref module
+
 2002-02-10  Paolo Maggi  <maggi@athena.polito.it>
 
 	* diff/diff.c: save/load settings

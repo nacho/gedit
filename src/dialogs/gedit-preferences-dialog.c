@@ -323,6 +323,8 @@ gedit_preferences_dialog_finalize (GObject *object)
 	g_return_if_fail (GEDIT_IS_PREFERENCES_DIALOG (dlg));
 	g_return_if_fail (dlg->priv != NULL);
 
+	g_object_unref (G_OBJECT (dlg->priv->categories_tree_model));
+
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	g_free (dlg->priv);

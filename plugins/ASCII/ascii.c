@@ -1,5 +1,9 @@
-/* gedit - ASCII table plugin
- * Copyright (C) 2001 Paolo Maggi
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * docinfo.c
+ * This file is part of gedit
+ *
+ * Copyright (C) 2001-2002 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,23 +17,37 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- * 
- * Authors: Paolo Maggi <maggi@athena.polito.it>
- *
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA. 
  */
-#include <config.h>
-#include <gnome.h>
-#include <glade/glade.h>
+ 
+/*
+ * Modified by the gedit Team, 2001-2002. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
+ */
 
-#include "window.h"
-#include "document.h"
-#include "utils.h"
+#include <glade/glade-xml.h>
+#include <libgnome/gnome-i18n.h>
 
-#include "view.h"
-#include "plugin.h"
+#include <gedit-plugin.h>
+#include <gedit-debug.h>
+#include <gedit-menus.h>
+#include <gedit-utils.h>
 
-#define GEDIT_PLUGIN_GLADE_FILE "/asciitable.glade"
+#define MENU_ITEM_LABEL		N_("_ASCII table")
+#define MENU_ITEM_PATH		"/menu/Edit/EditOps_5/"
+#define MENU_ITEM_NAME		"ASCIITablePlugin"	
+#define MENU_ITEM_TIP		N_("Pop-up a dialog containing an ASCII Table")
+
+enum {
+	CHAR_COLUMN,
+	DEC_COLUMN,
+	HEX_COLUMN,
+	NAME_COLUMN,
+	INDEX_COLUMN,
+	NUM_COLUMNS
+};
 
 static char *names[33] = { 
 	"NUL", 
@@ -67,71 +85,115 @@ static char *names[33] = {
 	"SPACE"
 	};
 
-static GtkWidget *dialog = NULL;
-static GtkWidget* ascii_table = NULL;
+typedef struct _ASCIITableDialog ASCIITableDialog;
 
-static gint selected_row = 0;
+struct _ASCIITableDialog {
+	GtkWidget *dialog;
+
+	GtkWidget *ascii_table;
+};
+
+static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
+static ASCIITableDialog *get_dialog (void);
+static void dialog_response_handler (GtkDialog *dlg, gint res_id,  ASCIITableDialog *dialog);
+static void insert_char (gint i);
+static void ascii_table_real (void);
+static GtkTreeModel *create_model (void);
+static void create_ASCII_table_list (ASCIITableDialog *dialog);
+static void ASCII_table_row_activated_cb (GtkTreeView *ascii_table, GtkTreePath *path,
+		  GtkTreeViewColumn *column, gpointer data);
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+
 
 static void
-destroy_plugin (PluginData *pd)
+dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
+
+	if (dialog_pointer != NULL)
+	{
+		g_free (*dialog_pointer);
+		*dialog_pointer = NULL;
+	}	
 }
 
 static void
-gedit_plugin_finish (GtkWidget *widget, gpointer data)
+dialog_response_handler (GtkDialog *dlg, gint res_id,  ASCIITableDialog *dialog)
 {
+	GtkTreeModel *model;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+	gint index;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	gnome_dialog_close (GNOME_DIALOG (widget));
-	dialog = NULL;
+	switch (res_id) {
+		case GTK_RESPONSE_OK:
+			
+			model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->ascii_table));
+			g_return_if_fail (model != NULL);
+
+			selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->ascii_table));
+			g_return_if_fail (selection != NULL);
+
+			if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+			{
+				gtk_tree_model_get (model, &iter, INDEX_COLUMN, &index, -1);
+
+				gedit_debug (DEBUG_PLUGINS, "Index: %d", index);
+
+				insert_char (index);
+			}
+
+			break;
+
+		case GTK_RESPONSE_HELP:
+			/* FIXME */
+			break;
+			
+		default:
+			gtk_widget_destroy (dialog->dialog);
+	}
 }
 
-static void
-close_button_pressed (GtkWidget *widget, GtkWidget* data)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	gnome_dialog_close (GNOME_DIALOG (data));
-	dialog = NULL;
-}
-
-static void
-help_button_pressed (GtkWidget *widget, gpointer data)
-{
-	/* FIXME: Paolo - change to point to the right help page */
-	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	gnome_help_display (NULL, &help_entry);
-}
 
 static void
 insert_char (gint i)
 {
-	GeditView *view = gedit_view_active();
-	gchar ch[4];
+	GeditDocument *doc;
+	gchar *ch;
+	gchar *ch_utf8;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	if (!view)
+	doc = gedit_get_active_document ();
+
+	if (doc == NULL)
 	     return;
 
 	g_return_if_fail ((i >=0) && (i < 256));
 
-	sprintf (ch, "%c", i);
-	gedit_document_insert_text (view->doc, ch, gedit_view_get_position (view), TRUE);	
+	ch = g_strdup_printf ("%c", i);
+	
+	ch_utf8 = g_locale_to_utf8 (ch, -1, NULL, NULL, NULL);
+		
+	if (ch_utf8 == NULL)
+		g_warning ("Unable to convert '%s' to utf8", ch);
+	else
+	{
+		gedit_document_insert_text_at_cursor (doc, ch_utf8, -1);	
+
+		g_free (ch_utf8);
+	}
+
+	g_free (ch);
 }
 
-static void
-insert_char_button_pressed (GtkWidget *widget, GtkWidget* data)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	insert_char (selected_row);
-}
-
+#if 0
 static void
 ascii_table_row_selected (GtkCList *clist, gint row, gint column, 
 		          GdkEventButton *event, gpointer user_data)
@@ -148,134 +210,308 @@ ascii_table_row_selected (GtkCList *clist, gint row, gint column,
 		insert_char (selected_row);
 	}
 }
+#endif
 
-static void
-gedit_plugin_create_dialog (void)
+static GtkTreeModel*
+create_model (void)
 {
-	GladeXML *gui = NULL;
-	GtkWidget *close_button = NULL;
-	GtkWidget *help_button = NULL;
-	GtkWidget *insert_char_button = NULL;
-		
-	gchar *items[4];
+	gint i = 0;
+	GtkListStore *store;
+	GtkTreeIter iter;
+	
 	gchar ch[5];
 	gchar dec[5];
 	gchar hex[5];
- 	
-	gint i;
-
-	if (dialog != NULL)
-	{
-		g_return_if_fail (GTK_WIDGET_REALIZED (dialog));
-		g_return_if_fail (ascii_table != NULL);
-
-		gdk_window_show (dialog->window);
-		gdk_window_raise (dialog->window);
-		
-		return;		
-	}	
-
-	gui = glade_xml_new (GEDIT_GLADEDIR
-			     GEDIT_PLUGIN_GLADE_FILE,
-			     "dialog");
+	gchar *name;
 	
-	if (!gui) {
-		g_warning ("Could not find %s, reinstall gedit.\n",
-			   GEDIT_GLADEDIR
-			   GEDIT_PLUGIN_GLADE_FILE);
-		return;
-	}
+	gedit_debug (DEBUG_PLUGINS, "");
 
-	dialog             = glade_xml_get_widget (gui, "dialog");
-	ascii_table        = glade_xml_get_widget (gui, "ascii_table");
-	close_button       = glade_xml_get_widget (gui, "close_button");
-	help_button        = glade_xml_get_widget (gui, "help_button");
-	insert_char_button = glade_xml_get_widget (gui, "insert_char_button");
+	/* create list store */
+	store = gtk_list_store_new (NUM_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT);
 
-	g_return_if_fail (dialog             != NULL);
-	g_return_if_fail (ascii_table        != NULL);
-	g_return_if_fail (close_button       != NULL);
-	g_return_if_fail (help_button        != NULL);
-	g_return_if_fail (insert_char_button != NULL);
-
-	gtk_clist_column_titles_passive (GTK_CLIST (ascii_table));
-	gtk_clist_set_column_width (GTK_CLIST(ascii_table), 0, 60);
-	gtk_clist_set_column_width (GTK_CLIST(ascii_table), 1, 60);
-	gtk_clist_set_column_width (GTK_CLIST(ascii_table), 2, 60);
-	gtk_clist_set_column_width (GTK_CLIST(ascii_table), 3, 60);
-
-	gtk_clist_set_column_resizeable	(GTK_CLIST(ascii_table), 0, FALSE);
-	gtk_clist_set_column_resizeable	(GTK_CLIST(ascii_table), 1, FALSE);
-	gtk_clist_set_column_resizeable	(GTK_CLIST(ascii_table), 2, FALSE);
-	gtk_clist_set_column_resizeable	(GTK_CLIST(ascii_table), 3, FALSE);
-
-	for (i=0; i<256; ++i)
+	/* add data to the list store */
+	for (i = 0; i < 256; ++i)
 	{
-		sprintf (ch, "%3c", i);
+		gchar* ch_utf8;
+		
+		if (i < 33)
+			sprintf (ch, "    ");
+		else
+			sprintf (ch, "   %c", i);
+		
 		sprintf (dec, "%3d", i);
 		sprintf (hex, "%2.2X", i);
 		
-		items[0] = ch;
-		items[1] = dec;
-		items[2] = hex;
+		ch_utf8 = g_locale_to_utf8 (ch, -1, NULL, NULL, NULL);
+		
+		if (ch_utf8 == NULL)
+			g_warning ("Unable to convert '%s' to utf8", ch);
 		
 		if (i < 33)
-			items[3] = names[i];
+			name = names[i];
 		else
 		{
 			if (i == 127)
-				items[3] = "DEL";
+				name = "DEL";
 			else
-				items[3] = "";
+				name = "";
 		}
 			
-		gtk_clist_append (GTK_CLIST (ascii_table), items);
+		gtk_list_store_append (store, &iter);
+		
+		gtk_list_store_set (store, &iter,
+				    CHAR_COLUMN, (ch_utf8 != NULL) ? ch_utf8 : " ",
+				    DEC_COLUMN, dec,
+				    HEX_COLUMN, hex,
+				    NAME_COLUMN, name,
+				    INDEX_COLUMN, i,
+				    -1);
+
+		g_free (ch_utf8);
+	}
+	
+	return GTK_TREE_MODEL (store);
+}
+
+static void
+ASCII_table_row_activated_cb (GtkTreeView *ascii_table, GtkTreePath *path,
+		  GtkTreeViewColumn *column, gpointer data)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	gint index;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ascii_table));
+	g_return_if_fail (model != NULL);
+	
+	gtk_tree_model_get_iter (model, &iter, path);
+	g_return_if_fail (&iter != NULL);
+
+	gtk_tree_model_get (model, &iter, INDEX_COLUMN, &index, -1);
+
+	gedit_debug (DEBUG_PLUGINS, "Index: %d", index);
+
+	insert_char (index);
+}
+
+static void
+create_ASCII_table_list (ASCIITableDialog *dialog)
+{
+	GtkTreeViewColumn *column;
+	GtkCellRenderer *cell;
+	GtkTreeModel *model;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (dialog != NULL);
+
+	model = create_model ();
+
+	/* Set tree view model*/
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->ascii_table), model);
+
+	g_object_unref (G_OBJECT (model));
+	
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (dialog->ascii_table), TRUE);
+	
+	/* the Char formats column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Char"), cell, 
+			"text", CHAR_COLUMN, NULL);
+	gtk_tree_view_column_set_min_width (column, 60);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->ascii_table), column);
+
+	/* the Dec# formats column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Dec#"), cell, 
+			"text", DEC_COLUMN, NULL);
+	gtk_tree_view_column_set_min_width (column, 60);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->ascii_table), column);
+
+	/* the Hex# formats column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Hex#"), cell, 
+			"text", HEX_COLUMN, NULL);
+	gtk_tree_view_column_set_min_width (column, 60);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->ascii_table), column);
+
+	/* the Name formats column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Name"), cell, 
+			"text", NAME_COLUMN, NULL);
+	gtk_tree_view_column_set_min_width (column, 60);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dialog->ascii_table), column);
+
+	g_signal_connect_after (G_OBJECT (dialog->ascii_table), "row_activated",
+				G_CALLBACK (ASCII_table_row_activated_cb), NULL);
+
+	gtk_widget_show (dialog->ascii_table);
+}
+
+static ASCIITableDialog*
+get_dialog (void)
+{
+	static ASCIITableDialog *dialog = NULL;
+
+	GladeXML *gui;
+	GtkWindow *window;
+	GtkWidget *content;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	window = GTK_WINDOW (gedit_get_active_window ());
+
+	if (dialog != NULL)
+	{
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
+
+		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+				window);
+	
+		return dialog;
 	}
 
-	gtk_clist_select_row (GTK_CLIST (ascii_table), 0, 0);
+	gui = glade_xml_new (GEDIT_GLADEDIR "asciitable.glade2",
+			     "asciitable_dialog_content", NULL);
 
-	/* Connect the signals */
-	gtk_signal_connect (GTK_OBJECT (close_button), "clicked",
-			    GTK_SIGNAL_FUNC (close_button_pressed), dialog);
-	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
-			    GTK_SIGNAL_FUNC (help_button_pressed), NULL);
+	if (!gui) {
+		g_warning
+		    ("Could not find asciitable.glade2, reinstall gedit.\n");
+		return NULL;
+	}
 
-	gtk_signal_connect (GTK_OBJECT (insert_char_button), "clicked",
-			    GTK_SIGNAL_FUNC (insert_char_button_pressed), NULL);
-	gtk_signal_connect (GTK_OBJECT (ascii_table), "select-row",
-			    GTK_SIGNAL_FUNC (ascii_table_row_selected), NULL);
+	dialog = g_new0 (ASCIITableDialog, 1);
 
-	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    GTK_SIGNAL_FUNC (gedit_plugin_finish), NULL);
+	dialog->dialog = gtk_dialog_new_with_buttons (_("ASCII table"),
+						      window,
+						      GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_STOCK_CLOSE,
+						      GTK_RESPONSE_CLOSE,
+						      GTK_STOCK_HELP,
+						      GTK_RESPONSE_HELP,
+						      NULL);
 
-	/* Set the dialog parent and modal type */ 
-	gnome_dialog_set_parent      (GNOME_DIALOG (dialog), gedit_window_active());
-	gtk_window_set_modal         (GTK_WINDOW (dialog), FALSE);
-	gnome_dialog_set_default     (GNOME_DIALOG (dialog), 0);
+	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
-	/* Show everything then free the GladeXML memory */
-	gtk_widget_show_all (dialog);
-	gtk_object_unref (GTK_OBJECT (gui));
-}
+	/* Add the update button */
+	gedit_dialog_add_button (GTK_DIALOG (dialog->dialog), 
+				 _("_Insert char"), GTK_STOCK_ADD, GTK_RESPONSE_OK);
+
+	content			= glade_xml_get_widget (gui, "asciitable_dialog_content");
+	g_return_val_if_fail (content != NULL, NULL);
+
+	dialog->ascii_table 	= glade_xml_get_widget (gui, "ascii_table");
+	g_return_val_if_fail (dialog->ascii_table  != NULL, NULL);
 	
-gint
-init_plugin (PluginData *pd)
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
+			    content, FALSE, FALSE, 0);
+
+	create_ASCII_table_list (dialog);
+	
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
+					 GTK_RESPONSE_OK);
+
+	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
+			   G_CALLBACK (dialog_destroyed), &dialog);
+
+	g_signal_connect (G_OBJECT (dialog->dialog), "response",
+			   G_CALLBACK (dialog_response_handler), dialog);
+
+	g_object_unref (gui);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
+
+	gtk_widget_show (dialog->dialog);
+
+	return dialog;
+}
+
+static void
+ascii_table_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	ascii_table_real ();
+}
+
+static void
+ascii_table_real (void)
+{
+	ASCIITableDialog *dialog;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	dialog = get_dialog ();
+	if (dialog == NULL) 
+	{
+		g_warning ("Could not create the ASCII Table");
+		return;
+	}
+
+}
+
+G_MODULE_EXPORT GeditPluginState
+update_ui (GeditPlugin *plugin, BonoboWindow *window)
+{
+	BonoboUIComponent *uic;
+	
+	gedit_debug (DEBUG_PLUGINS, "");	
+	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+
+	uic = gedit_get_ui_component_from_window (window);
+
+	gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
+
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+activate (GeditPlugin *pd)
+{
+	GList *top_windows;
+        gedit_debug (DEBUG_PLUGINS, "");
+
+        top_windows = gedit_get_top_windows ();
+        g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
+
+        while (top_windows)
+        {
+		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+				     MENU_ITEM_PATH, MENU_ITEM_NAME,
+				     MENU_ITEM_LABEL, MENU_ITEM_TIP, NULL,
+				     ascii_table_cb);
+
+                pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
+
+                top_windows = g_list_next (top_windows);
+        }
+
+        return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+deactivate (GeditPlugin *pd)
+{
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	return PLUGIN_OK;
+}
+
+G_MODULE_EXPORT GeditPluginState
+init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("ASCII table");
-	pd->desc = _("ASCII table");
-	pd->long_desc = _("This plugin displays a pop-up dialog which contains an ASCII Table.");
+	pd->desc = _("This plugin displays a pop-up dialog which contains an ASCII Table.");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->needs_a_document = FALSE;
-	pd->modifies_an_existing_doc = FALSE;
-
-	pd->private_data = (gpointer)gedit_plugin_create_dialog;
-
-	pd->installed_by_default = TRUE;	
-
+	pd->copyright = _("Copyright (C) 2001-2002 Paolo Maggi");
+	
+	pd->private_data = NULL;
+		
 	return PLUGIN_OK;
 }
 

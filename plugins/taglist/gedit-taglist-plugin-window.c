@@ -286,6 +286,8 @@ populate_tags_list (void)
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tag_list_window->tags_list), 
 			         model);
+
+	g_object_unref (G_OBJECT (model));
 }
 
 static GtkTreeModel*

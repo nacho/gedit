@@ -417,7 +417,8 @@ dialog_plugin_manager_construct_tree (GeditDialogPluginManager *dialog)
 	g_signal_connect (G_OBJECT (dialog->tree), "row_activated",
 			  G_CALLBACK (row_activated_cb), dialog);
 
-
+	g_object_unref (G_OBJECT (model));
+	
 	gtk_widget_show (dialog->tree);
 }
 
