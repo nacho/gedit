@@ -510,6 +510,14 @@ gint gE_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		file_close_cb (w, NULL);
 	    		break;
 	    
+	    case 'z':
+	    		gE_undo_do (w, NULL);
+	    		break;
+	    
+	    case 'r':
+	    		gE_undo_redo (w, NULL);
+	    		break;
+	    
 	    default:
 	    		return TRUE;
 	    		break;
