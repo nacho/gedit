@@ -185,6 +185,8 @@ static void gedit_preferences_dialog_undo_checkbutton_toggled (GtkToggleButton *
 static gboolean gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_logo_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static void gedit_preferences_dialog_auto_save_checkbutton_toggled (GtkToggleButton *button,
+							 GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static void gedit_preferences_dialog_line_numbers_checkbutton_toggled (GtkToggleButton *button,
 							 GeditPreferencesDialog *dlg);
@@ -979,6 +981,19 @@ gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, Glad
 	return TRUE;
 }
 
+static void
+gedit_preferences_dialog_auto_save_checkbutton_toggled (GtkToggleButton *button,
+							 GeditPreferencesDialog *dlg)
+{
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->auto_save_checkbutton)))
+	{
+		gtk_widget_set_sensitive (dlg->priv->auto_save_spinbutton, TRUE);
+		gtk_widget_grab_focus (dlg->priv->auto_save_spinbutton);
+	}
+	else	
+		gtk_widget_set_sensitive (dlg->priv->auto_save_spinbutton, FALSE);
+}
+
 static gboolean 
 gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui)
 {
@@ -1008,7 +1023,10 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 
 	/* FIXME */
 	gtk_widget_set_sensitive (dlg->priv->locale_if_previous_radiobutton, FALSE);
-	
+
+	g_signal_connect (G_OBJECT (dlg->priv->auto_save_checkbutton), "toggled", 
+			G_CALLBACK (gedit_preferences_dialog_auto_save_checkbutton_toggled), dlg);
+
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton),
 				      gedit_settings->create_backup_copy);
 
@@ -1016,7 +1034,7 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 				      gedit_settings->auto_save);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->auto_save_spinbutton),
 				    gedit_settings->auto_save_interval);
-
+	gtk_widget_set_sensitive (dlg->priv->auto_save_spinbutton, gedit_settings->auto_save);
 
 	switch (gedit_settings->save_encoding)
 	{
