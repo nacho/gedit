@@ -335,7 +335,7 @@ analyze_response (GtkFileChooser *chooser, gint response, const gchar *orig_uri)
 	    response == GTK_RESPONSE_DELETE_EVENT) 
 	{
 		gtk_widget_hide (GTK_WIDGET (chooser));
-		
+
 		return NULL;
 	}
 
@@ -396,19 +396,39 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 	return FALSE;
 }
 
+static gboolean
+uri_is_in_dir (const gchar *uri, const gchar *dir_uri)
+{
+	gboolean ret = FALSE;
+	gchar *file_dir;
+
+	file_dir = gedit_utils_uri_get_dirname (uri);
+
+	if (gnome_vfs_uris_match (file_dir, dir_uri))
+		ret = TRUE;
+
+	g_free (file_dir);
+
+	return ret;
+}
+
 static gchar *
 run_copy_file_chooser (GtkWindow *parent,
 		       GeditDocument *orig,
 		       const GeditEncoding **encoding)
 {
+	gchar *orig_uri;
 	GtkWidget *chooser;
 	GtkFileFilter *filter;
 	GtkWidget *hbox;
 	GtkWidget *label;
 	GtkWidget *menu;
-	gchar *name;
+	gchar *name = NULL;
+	gchar *cur_dir_uri;
 	gint res;
 	gpointer retval;
+
+	orig_uri = gedit_document_get_raw_uri (orig);
 
 	chooser = gtk_file_chooser_dialog_new (_("Save Copy..."),
 					       parent,
@@ -422,12 +442,29 @@ run_copy_file_chooser (GtkWindow *parent,
 
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), FALSE);
 
-	/* we specify the suggested filename in the entry to be the
-	 * same as the original, but we don't set the whole uri: we don't
-	 * want the user to try to overwrite!
+	/* we specify the suggested filename in the entry, but we don't set
+	 * the whole uri: we don't want the user to try to overwrite and saving
+	 * a copy in the same dir is not very useful.
+	 * If we rally are in the same dir we suffix the suggested name with "(Copy)".
 	 */
-	name = gedit_document_get_short_name (orig);
+	cur_dir_uri = gtk_file_chooser_get_current_folder_uri (GTK_FILE_CHOOSER (chooser));
+	if (orig_uri != NULL && uri_is_in_dir (orig_uri, cur_dir_uri))
+	{
+		gchar *tmp = gedit_document_get_short_name (orig);
+
+		if (tmp != NULL)
+		{
+			/* translators: %s is a filename */
+			name = g_strdup_printf (_("%s (copy)"), tmp);
+			g_free (tmp);
+		}
+	}
+	else
+	{
+		name = gedit_document_get_short_name (orig);
+	}
 	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (chooser), name);
+	g_free (cur_dir_uri);
 	g_free (name);
 
 	/* Filters */
@@ -467,13 +504,9 @@ run_copy_file_chooser (GtkWindow *parent,
 
 	do 
 	{
-		gchar *orig_uri = gedit_document_get_raw_uri (orig);
-
 		res = gtk_dialog_run (GTK_DIALOG (chooser));
 
 		retval = analyze_response (GTK_FILE_CHOOSER (chooser), res, orig_uri);
-
-		g_free (orig_uri);
 	}
 	while (GTK_WIDGET_VISIBLE (chooser));
 
@@ -481,6 +514,7 @@ run_copy_file_chooser (GtkWindow *parent,
 		*encoding = gedit_encodings_option_menu_get_selected_encoding (GEDIT_ENCODINGS_OPTION_MENU (menu));
 
 	gtk_widget_destroy (chooser);
+	g_free (orig_uri);
 
 	return retval;
 }
