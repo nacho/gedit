@@ -21,13 +21,9 @@
 /* Plugins system based on that used in Gnumeric */
  
 #include <config.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <glib.h>
-#include <gmodule.h>
 #include <gnome.h>
-#include <string.h>
-
+#include <gmodule.h>
+#include <dirent.h>
 #include "main.h"
 #include "gE_window.h"
 #include "gE_view.h"
@@ -38,9 +34,10 @@
 
 GSList	*plugin_list = NULL;
 
-gedit_Plugin_Data *plugin_load (const gchar *file)
+gedit_Plugin_Data *
+plugin_load (const gchar *file)
 {
-	gedit_Plugin_Data	*pd;
+	gedit_Plugin_Data *pd;
 	guint res;
 	
 	g_return_val_if_fail (file != NULL, NULL);
@@ -86,7 +83,8 @@ gedit_Plugin_Data *plugin_load (const gchar *file)
 	return NULL;
 }
 
-void plugin_unload (gedit_Plugin_Data *pd) 
+void
+plugin_unload (gedit_Plugin_Data *pd)
 {
 	int w, n;
 	char *path;
@@ -108,11 +106,11 @@ void plugin_unload (gedit_Plugin_Data *pd)
 	path = g_new(gchar, strlen(_("_Plugins")) + 2);
   	sprintf(path, "%s/", _("_Plugins"));
 	
-	for (w = 0; w < g_list_length (mdi->windows); w++) {
+	for (w = 0; w < g_list_length (mdi->windows); w++)
+	{
 		app = g_list_nth_data (mdi->windows, w);
 		
 		gnome_app_remove_menu_range (app, path, n, 1);
-	
 	}
 	
 	g_module_close (pd->handle);
@@ -120,8 +118,8 @@ void plugin_unload (gedit_Plugin_Data *pd)
 	g_free (pd);
 }
 
-
-static void plugin_load_plugins_in_dir (char *dir)
+static void
+plugin_load_plugins_in_dir (char *dir)
 {
 	DIR *d;
 	struct dirent *e;
@@ -141,7 +139,8 @@ static void plugin_load_plugins_in_dir (char *dir)
 	closedir (d);
 }
 
-static void load_all_plugins ()
+static void
+load_all_plugins (void)
 {
 	char *pdir;
 	char const * const home = getenv ("HOME");
@@ -159,7 +158,8 @@ static void load_all_plugins ()
 	g_free (pdir);
 }
 
-void gedit_plugins_init ()
+void
+gedit_plugins_init (void)
 {
 	if (!g_module_supported ())
 		return;
@@ -168,7 +168,8 @@ void gedit_plugins_init ()
 }
 
 
-void gedit_plugins_window_add (GnomeApp *app)
+void
+gedit_plugins_window_add (GnomeApp *app)
 {
 	gedit_Plugin_Data *pd;
 	gint	n;

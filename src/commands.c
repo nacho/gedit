@@ -31,13 +31,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include <dirent.h>
-#include <stdio.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include <gdk/gdkkeysyms.h>
-
-
 #include "main.h"
 #include "gE_view.h"
 #include "commands.h"
@@ -46,6 +39,7 @@
 #include "gE_prefs.h"
 #include "gedit-file-io.h"
 #include "gedit-search.h"
+#include "gedit-utils.h"
 
 /*
 static void close_file_save_yes_sel (GtkWidget *w, gedit_data *data);
@@ -76,37 +70,36 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	int ret;
 	char msg[100];
 	
-	sprintf(msg  , "The file %s does not exist. Would you like to create it?", title);
+	sprintf (msg  , "The file %s does not exist. Would you like to create it?", title);
 
 
 	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,
-								GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
-								NULL);
+					GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO,
+					NULL);
 	
 	ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
 
 	switch (ret) {
 	/* yes */
 	case 0 : 
-			doc = gedit_document_new_with_title (title);
-			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	        	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+		doc = gedit_document_new_with_title (title);
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 		
-                	if ((gedit_file_save(doc, title)) != 0)
-			{
-				gedit_flash (_("Could not save file!"));
-				return FALSE;
-			}
-			return TRUE;
+		if ((gedit_file_save(doc, title)) != 0)
+		{
+			gedit_flash (_("Could not save file!"));
+			return FALSE;
+		}
+		return TRUE;
 	/* no */
 	case 1 : 
-			return FALSE;
+		return FALSE;
 
 	/* error */
 	default: 
-			g_print ("and error occured %d\n", ret);
-			exit(-1);
-			
+		g_print ("an error occured %d\n", ret);
+		exit (-1);
 	} 
 }
 
@@ -114,7 +107,8 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 
 /* --- Notebook Tab Stuff --- */
 
-void tab_pos (GtkPositionType pos)
+void
+tab_pos (GtkPositionType pos)
 {
 	
 	gint i;
@@ -177,6 +171,7 @@ tab_rgt_cb(GtkWidget *widget, gpointer cbwindow)
 	tab_pos (GTK_POS_RIGHT);
 	
 }
+
 /*
 void
 tab_toggle_cb(GtkWidget *widget, gpointer cbwindow)
@@ -191,18 +186,16 @@ tab_toggle_cb(GtkWidget *widget, gpointer cbwindow)
 /* ---- Auto-indent Callback(s) --- */
 
 void
-auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
+auto_indent_toggle_cb (GtkWidget *w, gpointer cbdata)
 {
-
 	gedit_window_set_auto_indent (!settings->auto_indent);
-	
 }
 
 
 /* --- Drag and Drop Callback(s) --- */
 
 void
-filenames_dropped (GtkWidget * widget,
+filenames_dropped (GtkWidget        *widget,
                    GdkDragContext   *context,
                    gint              x,
                    gint              y,
@@ -216,14 +209,13 @@ filenames_dropped (GtkWidget * widget,
 	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
 	tmp_list = names;
 
-	while (tmp_list) {
-	
+	while (tmp_list)
+	{
 		doc = gedit_document_new_with_file ((gchar *)tmp_list->data);
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	        
 		tmp_list = tmp_list->next;
-		
 	}
 }
 
@@ -236,11 +228,10 @@ file_new_cb (GtkWidget *widget, gpointer cbdata)
 	gedit_document *doc;
 
 	gedit_flash (_(MSGBAR_FILE_NEW));
-	doc = gedit_document_new();
+	doc = gedit_document_new ();
 	
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	
 }
 
 
@@ -258,10 +249,8 @@ window_new_cb (GtkWidget *widget, gpointer cbdata)
 static void
 file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
-
 	gchar *filename;
 	gchar *nfile;
-/*	gchar *flash; */
 	struct stat sb;
 	gedit_document *doc;
 
@@ -277,9 +266,9 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 		if (S_ISDIR(sb.st_mode))
 		{
 			nfile = g_malloc0(strlen (filename) + 3);
-			sprintf(nfile, "%s/.", filename);
+			sprintf (nfile, "%s/.", filename);
 			gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel), nfile);
-			g_free(nfile);
+			g_free (nfile);
 			return;
 		}
 
@@ -331,7 +320,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 
 	gtk_widget_hide (GTK_WIDGET(osel));
 	return;
-} /* file_open_ok_sel */
+}
 
 
 /*
@@ -340,10 +329,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 static void
 file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
 {
-
 	gtk_widget_hide (w);
-	
-		
 }
 
 
@@ -353,17 +339,15 @@ file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
 static gint
 file_cancel_sel (GtkWidget *w, GtkFileSelection *fs)
 {
-
 	if (GTK_WIDGET_VISIBLE(fs))
 	  gtk_widget_hide (GTK_WIDGET(fs));
 
 	return TRUE;
-
 }
 
-void file_open_cb(GtkWidget *widget, gpointer cbdata)
+void
+file_open_cb (GtkWidget *widget, gpointer cbdata)
 {
-	
 	/*static GtkWidget *open_fileselector;*/
 	
 	if (osel == NULL) {
@@ -473,7 +457,8 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
  *
  * data->temp1 must be the file saveas dialog box
  */
-static void file_saveas_ok_sel(GtkWidget *w, gedit_data *data)
+static void
+file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 {
 	
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(ssel)));
@@ -505,34 +490,33 @@ static void file_saveas_ok_sel(GtkWidget *w, gedit_data *data)
 static gint
 file_saveas_destroy (GtkWidget *w, GtkWidget **sel)
 {
-
 	gtk_widget_destroy(*sel);
 	*sel = NULL;
 	
 	return TRUE;
-	
 }
 
 void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
-
 	gchar *title;
 	
 	title = g_strdup_printf (_("Save %s As..."), (gchar*) cbdata);
 
-	ssel = gtk_file_selection_new(title);
+	ssel = gtk_file_selection_new (title);
 
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(ssel)->ok_button),
-				   "clicked", (GtkSignalFunc)file_saveas_ok_sel, 
-				   NULL);
+	gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(ssel)->ok_button),
+			    "clicked",
+			    GTK_SIGNAL_FUNC (file_saveas_ok_sel),
+			    NULL);
 
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(ssel)->cancel_button),
-				"clicked", (GtkSignalFunc)file_saveas_destroy, 
-				&ssel);
+	gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(ssel)->cancel_button),
+			    "clicked",
+			    GTK_SIGNAL_FUNC (file_saveas_destroy),
+			    &ssel);
 
 
-	gtk_widget_show(ssel);
+	gtk_widget_show (ssel);
 
 	g_free (title);
 }
@@ -592,10 +576,14 @@ file_save_all_as_cb (GtkWidget *widget, gpointer cbdata)
 	fs = gtk_file_selection_new (title);
 
 	gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(fs)->ok_button),
-			    "clicked", (GtkSignalFunc)file_save_all_as_ok_sel, fs);
+			    "clicked",
+			    GTK_SIGNAL_FUNC (file_save_all_as_ok_sel),
+			    fs);
 						
 	gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(fs)->cancel_button),
-			    "clicked", (GtkSignalFunc)file_save_all_as_destroy, fs);
+			    "clicked",
+			    GTK_SIGNAL_FUNC (file_save_all_as_destroy),
+			    fs);
 
 
 	gtk_widget_show(fs);
@@ -611,32 +599,25 @@ file_save_all_as_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_cb(GtkWidget *widget, gpointer cbdata)
 {
-
 	gedit_document *doc;
 	
 	if (mdi->active_child == NULL)
-	  return;
+		return;
 	
-	if (gnome_mdi_remove_child (mdi, mdi->active_child, FALSE)) {
-	
-	  if (mdi->active_child == NULL) {
-	  
-	    if (!settings->close_doc) {
-	    
-	      doc = gedit_document_new ();
-	      gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	      gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	    
-	    } else {
-	    
-	     g_print ("Er.. Unimplemented alternative!\n");
-	    
-	    }
-	     
-	  }
-	  
+	if (gnome_mdi_remove_child (mdi, mdi->active_child, FALSE))
+	{
+		if (mdi->active_child == NULL)
+		{
+			if (!settings->close_doc)
+			{
+				doc = gedit_document_new ();
+				gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+				gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+			}
+			else
+				g_assert_not_reached ();
+		}
 	}
-	
 }
 
 /*
@@ -645,63 +626,56 @@ file_close_cb(GtkWidget *widget, gpointer cbdata)
 void
 file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 {
-
 	gedit_document *doc;
 
-	if (gnome_mdi_remove_all (mdi, FALSE)) {
-	
-          if (mdi->active_child == NULL) {
-          
-	    /* if there are no open documents create a blank one */
-	    if (g_list_length(mdi->children) == 0) {
-
-		doc = gedit_document_new ();
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
-	    }
-
-	  }
-	  
+	if (gnome_mdi_remove_all (mdi, FALSE))
+	{
+		if (mdi->active_child == NULL)
+		{
+			/* if there are no open documents create a blank one */
+			if (g_list_length(mdi->children) == 0)
+			{
+				doc = gedit_document_new ();
+				gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+				gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
+			}
+		}
 	}
-
 }
 
-gint file_revert_do (gedit_document *doc)
+gboolean
+file_revert_do (gedit_document *doc)
 {
-
-	GnomeMessageBox *msgbox;
+	GtkWidget *msgbox;
 	gchar msg[80];
 	gint ret;
 
-	sprintf(msg, _("Are you sure you wish to revert all changes?\n(%s)"),
-		doc->filename);
+	sprintf (msg, _("Are you sure you wish to revert all changes?\n(%s)"),
+		 doc->filename);
 	
-
-	msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
-	    							  msg,
-	    							  GNOME_MESSAGE_BOX_QUESTION,
-	    							  GNOME_STOCK_BUTTON_YES,
-	    							  GNOME_STOCK_BUTTON_NO,
-	    							  NULL));
+	msgbox = gnome_message_box_new (msg,
+					GNOME_MESSAGE_BOX_QUESTION,
+					GNOME_STOCK_BUTTON_YES,
+					GNOME_STOCK_BUTTON_NO,
+					NULL);
 	    							  
 	    							  
 	gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
 	ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
 	    	    
-	switch (ret) {
-	        
+	switch (ret)
+	{
 	case 0:
-			gedit_file_open (doc, doc->filename);
-			return TRUE;
+		gedit_file_open (doc, doc->filename);
+		return TRUE;
 	
 	case 1:
-			return FALSE;
+		return FALSE;
 	
 	default:
-			return FALSE;
+		return FALSE;
 			
 	}
-	      
 }
 
 /* File revertion callback */
@@ -720,7 +694,6 @@ file_revert_cb (GtkWidget *widget, gpointer cbdata)
 			{
 				if ((file_revert_do (doc)) == 0)
 					return;
-	    
 			}
 			else
 				gnome_app_flash (mdi->active_window, _("Document Unchanged..."));
@@ -730,7 +703,6 @@ file_revert_cb (GtkWidget *widget, gpointer cbdata)
 			gnome_app_flash (mdi->active_window, _("Document Unsaved..."));
 	}
 }
-
 
 /*
  * quits gEdit by closing all windows.  only quits if all windows closed.
@@ -744,26 +716,24 @@ file_quit_cb (GtkWidget *widget, gpointer cbdata)
 		gtk_object_destroy (GTK_OBJECT (mdi));
 	else
 		return;
-	
-	gtk_exit (0);	/* should not reach here */
+
+	gtk_main_quit ();
 }
 
 
 /* ---- Clipboard Callbacks ---- */
 
 void
-edit_cut_cb(GtkWidget *widget, gpointer cbdata)
+edit_cut_cb (GtkWidget *widget, gpointer cbdata)
 {
-
 	gtk_editable_cut_clipboard(GTK_EDITABLE(
 		GE_VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_CUT);
-	
 }
 
 void
-edit_copy_cb(GtkWidget *widget, gpointer cbdata)
+edit_copy_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gtk_editable_copy_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
@@ -772,7 +742,7 @@ edit_copy_cb(GtkWidget *widget, gpointer cbdata)
 }
 	
 void
-edit_paste_cb(GtkWidget *widget, gpointer cbdata)
+edit_paste_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gtk_editable_paste_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
@@ -781,7 +751,7 @@ edit_paste_cb(GtkWidget *widget, gpointer cbdata)
 }
 
 void
-edit_selall_cb(GtkWidget *widget, gpointer cbdata)
+edit_selall_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gtk_editable_select_region(GTK_EDITABLE(GE_VIEW (mdi->active_view)->text), 0,
 				   gtk_text_get_length( GTK_TEXT(GE_VIEW (mdi->active_view)->text)));
@@ -790,95 +760,76 @@ edit_selall_cb(GtkWidget *widget, gpointer cbdata)
 }
 
 
-/* Add a file to the Recent-used list... */
-
-void
-recent_add (char *filename)
-{
-	gnome_history_recently_used (filename, "text/plain", "gEdit", "");
-}
-
-
-/* Grabs the recent used list, then updates the menus via a call to recent_update_menus 
- * Should be called after each addition to the list 
- */
-
+/* Grabs the recent used list, then updates the menus via a call to
+ * recent_update_menus Should be called after each addition to the
+ * list */
 void
 recent_update (GnomeApp *app)
 {
 	GList *filelist = NULL;
-	
 	GList *gnome_recent_list;
 	GnomeHistoryEntry histentry;
 	char *filename;
 	int i, j;
+	int nrecentdocs = 0;
 
-/*	GList *dirlist = NULL; */
-/*	gboolean duplicate = FALSE; */
-
-	
 	filelist = NULL;
 	gnome_recent_list = gnome_history_get_recently_used ();
 	
-	if (g_list_length (gnome_recent_list) > 0) {
-	
-	   for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--) {
-	   
-	     histentry = g_list_nth_data (gnome_recent_list, i);
+	if (g_list_length (gnome_recent_list) > 0)
+	{
+		for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--)
+		{
+			histentry = g_list_nth_data (gnome_recent_list, i);
 	     
-	     if (strcmp ("gEdit", histentry->creator) == 0) {
-	     
-	       /* This is to make sure you don't have more than one
-		  file of the same name in the recent list
-	       */
+			if (strcmp ("gEdit", histentry->creator) == 0)
+			{
+				/* This is to make sure you don't have more than one
+				   file of the same name in the recent list
+				*/
 	      
-	       if (g_list_length (filelist) > 0) {
-	      
-		 for (j = g_list_length (filelist) - 1; j >= 0; j--) {
-		
-		  if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0) {
-		 
-		    filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
-		  }
-		
-		 }
-		
-	       }
+				if (g_list_length (filelist) > 0)
+				{
+					for (j = g_list_length (filelist) - 1; j >= 0; j--)
+					{
+						if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
+						{
+							filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
+							nrecentdocs--;
+						}
+					}
+				}
 
-	       filename = g_malloc0 (strlen (histentry->filename) + 1);
-	       strcpy (filename, histentry->filename);
-	       filelist = g_list_append (filelist, filename);
-
-	       /* For recent-directories, not yet fully implemented...
-		   
-	       end_path = strrchr (histentry->filename, '/');
-	       if (end_path) {
-		   
-		 for (i = 0; i < strlen (histentry->filename); i++)
-		  if ((histentry->filename + i) == end_path)
-			break;
+				filename = g_malloc0 (strlen (histentry->filename) + 1);
+				strcpy (filename, histentry->filename);
+				filelist = g_list_append (filelist, filename);
+				nrecentdocs++;
 				
-		 directory = g_malloc0 (i + 2);
-	         strcat (directory, histentry->filename, i);
+				/* For recent-directories, not yet fully implemented...
+		   
+				   end_path = strrchr (histentry->filename, '/');
+				   if (end_path) {
+		   
+				   for (i = 0; i < strlen (histentry->filename); i++)
+				   if ((histentry->filename + i) == end_path)
+				   break;
+				
+				   directory = g_malloc0 (i + 2);
+				   strcat (directory, histentry->filename, i);
 			
-	       }
+				   }
+				*/
                    
-                   */
-                   
-	       if (g_list_length (filelist) == MAX_RECENT)
-		 break;
-
-             }
-
-             
-	   }
-	   
+				if (nrecentdocs == MAX_RECENT)
+/*				if (g_list_length (filelist) == MAX_RECENT) */
+					break;
+			}
+		}
 	}
 	
 	gnome_history_free_recently_used_list (gnome_recent_list);
 	
 	recent_update_menus (app, filelist);
-
 }
 
 /* Actually updates the recent-used menu... */
@@ -886,17 +837,18 @@ recent_update (GnomeApp *app)
 static void
 recent_update_menus (GnomeApp *app, GList *recent_files)
 {
-
 	GnomeUIInfo *menu;
 	gedit_data *data;
 	gchar *path;
 	int i;
 
+	g_return_if_fail (app != NULL);
+
 	if (settings->num_recent)
-	  gnome_app_remove_menu_range (app, _("_File/"), 6, settings->num_recent + 1);
+		gnome_app_remove_menu_range (app, _("_File/"), 6, settings->num_recent + 1);
 
 	if (recent_files == NULL)
-	  return;
+		return;
 
 
 	/* insert a separator at the beginning */
@@ -910,75 +862,84 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	gnome_app_insert_menus (GNOME_APP(app), path, menu);
 
 
-	for (i = g_list_length (recent_files) - 1; i >= 0;  i--) {
+	for (i = g_list_length (recent_files) - 1; i >= 0;  i--)
+	{
+		menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
 	
-	 menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+		data = g_malloc0 (sizeof (gedit_data));
+		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
 	
-	 data = g_malloc0 (sizeof (gedit_data));
-	 data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
-	
-	 menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
-	 sprintf (menu->label, "_%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
-	 menu->type = GNOME_APP_UI_ITEM;
-	 menu->hint = NULL;
-	 menu->moreinfo = (gpointer) recent_cb;
-	 menu->user_data = data;
-	 menu->unused_data = NULL;
-	 menu->pixmap_type = 0;
-	 menu->pixmap_info = NULL;
-	 menu->accelerator_key = 0;
+		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
+		sprintf (menu->label, "_%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
+		menu->type = GNOME_APP_UI_ITEM;
+		menu->hint = NULL;
+		menu->moreinfo = (gpointer) recent_cb;
+		menu->user_data = data;
+		menu->unused_data = NULL;
+		menu->pixmap_type = 0;
+		menu->pixmap_info = NULL;
+		menu->accelerator_key = 0;
 
-	 (menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
+		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 	
-	 gnome_app_insert_menus (GNOME_APP(app), path, menu);
-	 g_free (g_list_nth_data (recent_files, i));	 
-	 
+		gnome_app_insert_menus (GNOME_APP(app), path, menu);
+		g_free (g_list_nth_data (recent_files, i));	 
 	}
 	
 	g_free (menu);
 	settings->num_recent = g_list_length (recent_files);
 	g_list_free (recent_files);
 
-	if (path)
-	  g_free (path);
-	
+	g_free (path);
 }
 
+/* Callback for a users click on one of the recent docs in the File menu */
 static void
-recent_cb(GtkWidget *w, gedit_data *data)
+recent_cb (GtkWidget *widget, gedit_data *data)
 {
+	gedit_document *doc = gedit_document_current ();
+	
+	g_return_if_fail (data != NULL);
 
-	gedit_document *doc;
-	
-	if ((doc = gedit_document_current ())) {
-	
-	  if (doc->filename || GE_VIEW(mdi->active_view)->changed) {
-            doc = gedit_document_new_with_file (data->temp1);
-	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	if (doc)
+	{
+		if (doc->filename || GE_VIEW(mdi->active_view)->changed)
+		{
+			doc = gedit_document_new_with_file (data->temp1);
+			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	    
-	  } else {
-	  
-	   /*doc = gedit_document_new_with_file (data->temp1);
-	   gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	   gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));*/
-	   gedit_file_open (doc, data->temp1);
-	   
-	  }
-	
+		}
+		else
+		{
+			/* FIXME.jel: add some conditional check and
+			   an else to handle the case where the file
+			   in the recent menu fails to open
+			   (deleted/moved/new permissions) */
+			gedit_file_open (doc, data->temp1);
+		}
 	}
-	
 }
 
+/**
+ * recent_add:
+ * @filename: Filename of document to add to the recently accessed list
+ *
+ * Record a file in GNOME's recent documents database */
+void
+recent_add (char *filename)
+{
+	gnome_history_recently_used (filename, "text/plain",
+				     "gEdit", "gEdit document");
+}
 
 void
 options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
-/*	gint visible; */
 
 	if (!view->split_parent)
-	  return;
+		return;
 
 	gedit_view_set_split_screen
 		(view, !GTK_WIDGET_VISIBLE (view->split_parent));

@@ -242,7 +242,8 @@ gedit_document_new (void)
 	gedit_document *doc;
 
 	/* FIXME: Blarg!! */
-	if ((doc = gtk_type_new (gedit_document_get_type ())))
+	doc = gtk_type_new (gedit_document_get_type ());
+	if (doc)
 	{
 		gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
 					  gedit_get_document_tab_name());
@@ -252,7 +253,7 @@ gedit_document_new (void)
 	}
 
 	g_assert_not_reached ();
-	gtk_object_destroy (GTK_OBJECT(doc));
+	gtk_object_destroy (GTK_OBJECT (doc));
 	
 	return NULL;
 }
@@ -310,7 +311,7 @@ gedit_document_current (void)
 	gedit_document *current_document = NULL;
 
 	if (mdi->active_child)
-		current_document = GE_DOCUMENT(mdi->active_child);
+		current_document = GE_DOCUMENT (mdi->active_child);
  
 	return current_document;
 }

@@ -63,13 +63,17 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 				g_free (tmp_buf);
 
 				gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
-							  g_basename(fname));
+							  g_basename (fname));
 
 				fclose (fp);
+				doc->filename = g_strdup (fname);
+
 				for (i = 0; i < g_list_length (doc->views); i++)
 				{
 					nth_view = g_list_nth_data (doc->views, i);
 					gedit_view_refresh (nth_view);
+					gedit_set_title (nth_view->document);
+
 					/* Make the document readonly if you can't write to the file. */
 					gedit_view_set_read_only (nth_view, access (fname, W_OK) != 0);
 					if (!nth_view->changed_id)
@@ -82,8 +86,6 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 				/* update the recent files menu */
 				recent_add (fname);
 				recent_update (GNOME_APP (mdi->active_window));
-
-				doc->filename = g_strdup (fname);
 				return 0;
 			}
 			else

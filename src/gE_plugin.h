@@ -32,7 +32,6 @@ enum {
 };
 
 struct _gedit_Plugin_Data {
-	
 	gchar	*file;
 	GModule	*handle;
 	
@@ -46,7 +45,6 @@ struct _gedit_Plugin_Data {
 	
 	/* filled in by plugin */
 	void	*private_data;
-	
 };
 
 extern GSList	*plugin_list;
@@ -54,10 +52,10 @@ extern GSList	*plugin_list;
 /* Plugin MUST have this function */
 extern gint init_plugin (gedit_Plugin_Data *pd);
 
-void		 gedit_plugins_init 	(void);
-gedit_Plugin_Data	*plugin_load 		(const gchar *file);
-void		 plugin_unload		(gedit_Plugin_Data *pd);
+gedit_Plugin_Data *plugin_load              (const gchar *file);
+void               gedit_plugins_init       (void);
+void               plugin_unload            (gedit_Plugin_Data *pd);
 
-void		 gedit_plugins_window_add (GnomeApp *app);
+void               gedit_plugins_window_add (GnomeApp *app);
 
 #endif /* __GE_PLUGIN_H__ */

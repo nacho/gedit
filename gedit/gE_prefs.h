@@ -19,9 +19,6 @@
 #ifndef __GE_PREFS_H__
 #define __GE_PREFS_H__
 
-extern void gedit_save_settings (void);
-extern void gedit_get_settings (void);
-
 typedef struct _gedit_preference gedit_preference;
 
 struct _gedit_preference {
@@ -56,5 +53,9 @@ struct _gedit_preference {
 };
 
 extern gedit_preference *settings;
+
+extern void gedit_save_settings (void);
+extern void gedit_load_settings (void);
+
 
 #endif /* __GE_PREFS_H__ */

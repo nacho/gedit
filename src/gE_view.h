@@ -31,6 +31,7 @@ typedef struct _gedit_view gedit_view;
 typedef struct _gedit_view_class gedit_view_class;
 
 struct _gedit_view {
+
 	/*GtkFixed fixed;*/
 	GtkVBox box;
 	
@@ -71,13 +72,11 @@ struct _gedit_view {
 	
 };
 
-
 struct _gedit_view_class {
-	/* dunno */
+
 	GtkVBoxClass parent_class;
 	
 	void (*cursor_moved)(gedit_view *view);
-	
 };
 
 
@@ -94,7 +93,7 @@ void 		gedit_view_set_line_wrap 	(gedit_view *view, gint line_wrap);
 void 		gedit_view_set_read_only 	(gedit_view *view, gint read_only);
 void 		gedit_view_set_split_screen 	(gedit_view *view, gint split_screen);
 
-/* Should we have teh GtkText fucntions? */
+/* Should we have the GtkText fucntions? */
 
 /* hmm.. we are basically reimplenting a text widget for the
  * needs of gEdit.. so.. any util functions that could be used

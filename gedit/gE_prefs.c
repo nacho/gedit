@@ -66,7 +66,7 @@ gedit_save_settings (void)
 }
 
 void
-gedit_get_settings (void)
+gedit_load_settings (void)
 {
 	gnome_config_push_prefix ("/gEdit/Global/");
 	 

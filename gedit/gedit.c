@@ -43,10 +43,8 @@ gint mdiMode = GNOME_MDI_DEFAULT_MODE;
 gboolean use_fontset = FALSE;
 
 
-
 static const struct poptOption options[] = {
-
-    {NULL, '\0', 0, NULL, 0}
+	{NULL, '\0', 0, NULL, 0}
 };
 
 static GList *file_list;
@@ -174,7 +172,7 @@ main (int argc, char **argv)
 			   GTK_SIGNAL_FUNC(gedit_window_new), NULL);
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);*/
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);*/
-	gedit_get_settings();
+	gedit_load_settings ();
 	gnome_mdi_set_mode (mdi, mdiMode);	
 /*	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	*/
 	gnome_mdi_open_toplevel(mdi);
@@ -198,7 +196,6 @@ main (int argc, char **argv)
 					gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 					gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 				}
-
 			}
 			else
 			{
@@ -206,7 +203,7 @@ main (int argc, char **argv)
 			}
 		}
                 /* if there are no open documents create a blank one */
-		if (g_list_length(mdi->children) == 0 && FALSE )
+		if (g_list_length(mdi->children) == 0)
 		{
 			doc = gedit_document_new ();
 			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));

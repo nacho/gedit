@@ -1,3 +1,17 @@
+2000-04-03  Jason Leach  <leach@wam.umd.edu>
+
+	* gedit.c (main): who added the && FALSE to the
+	if (g_list_length(mdi->children) == 0) ?  Took that out.
+
+	* gE_view.c (popup_menu): cleaned up this GnomeUIInfo
+
+	* commands.c: removed 5 unnecessar #includes
+	(file_quit_cb): lets quit via gtk_main_quit() rather than a
+	gtk_exit(0);
+	(recent_update_menus): don't need to if() before g_free()
+	(recent_update): replace resource heavy g_list_length calls with
+	an integer counter.
+
 2000-04-03  Chema Celorio  <chema@celorio.com>
 
 	* gedit-menus.c (gedit_menu): When compiling

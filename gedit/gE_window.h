@@ -17,8 +17,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __GE_DOCUMENT_H__
-#define __GE_DOCUMENT_H__
+#ifndef __GE_WINDOW_H___
+#define __GE_WINDOW_H__
 
 #define MSGBAR_CLEAR		" "
 #define MSGBAR_FILE_NEW		"New File..."
@@ -49,4 +49,4 @@ extern gedit_document *gE_document_new_container (gE_window *w, gchar *title,
 #endif
 
 
-#endif /* __GE_DOCUMENT_H__ */
+#endif /* __GE_WINDOW_H__ */

@@ -145,7 +145,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
-	/*gedit_get_settings ();*/
+	/*gedit_load_settings ();*/
 	
 	/* find in files result window  dont show it.*/
 	search_result_window = create_find_in_files_result_window();
