@@ -6,14 +6,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: sk\n"
-"POT-Creation-Date: 2002-05-11 15:41+0200\n"
-"PO-Revision-Date: 2002-05-11 15:46+0200\n"
-"Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
+"POT-Creation-Date: 2002-05-16 14:33+0200\n"
+"PO-Revision-Date: 2002-05-16 14:35+0200\n"
+"Last-Translator: Stanislav Višňovský <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0beta1\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: gedit.desktop.in.h:1
 msgid "Edit text files"
@@ -527,7 +527,7 @@ msgid "Could not create the Plugin Manager dialog"
 msgstr "Nepodarilo sa vytvoriť dialóg pre správcu modulov."
 
 #: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Nahradiť"
 
@@ -537,11 +537,11 @@ msgstr "Nahradiť _všetko"
 
 #. Add Replace button
 #: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:103
 msgid "_Replace"
 msgstr "Na_hradiť"
 
-#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
 msgid "Find"
 msgstr "Nájsť"
 
@@ -619,12 +619,12 @@ msgid "Line numbers"
 msgstr "Čísla riadkov"
 
 #: src/dialogs/gedit-preferences-dialog.c:245
-#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:63
+#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Uložiť"
 
 #: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:83
+#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:81
 msgid "Undo"
 msgstr "Vrátiť späť"
 
@@ -642,7 +642,7 @@ msgstr "Editor"
 
 #: src/dialogs/gedit-preferences-dialog.c:264
 #: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
-#: src/gedit-ui.xml.h:47
+#: src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Tlačiť"
 
@@ -654,7 +654,7 @@ msgstr "Používateľské rozhranie"
 msgid "Cat_egories:"
 msgstr "_Kategórie:"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:46
+#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "Nastavenie"
 
@@ -959,7 +959,7 @@ msgstr "_Písmo editora:"
 msgid "_Font used to print headers:"
 msgstr "Písmo pre tlač hlavičky:"
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:97
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:96
 msgid "_Icon"
 msgstr "_Ikona"
 
@@ -1178,42 +1178,46 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "geditr je malý a jednoduchý textový editor pre Gnome"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 msgid "Untitled"
 msgstr "Bez mena"
 
-#: src/gedit-document.c:660 src/gedit-document.c:766
+#: src/gedit-document.c:556 src/gedit-document.c:579
+msgid "Invalid file name"
+msgstr "Neplatné meno súboru"
+
+#: src/gedit-document.c:700 src/gedit-document.c:806
 msgid "Invalid UTF-8 data"
 msgstr "Neplatné dáta UTF-8"
 
-#: src/gedit-document.c:966
+#: src/gedit-document.c:1006
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nepodarilo sa prečítať informácie o symbolickom odkaze %s"
 
-#: src/gedit-document.c:1012
+#: src/gedit-document.c:1052
 msgid "The file has too many symbolic links."
 msgstr "Súbor obrazuje príliš veľa symbolických odkazov."
 
-#: src/gedit-document.c:1061
+#: src/gedit-document.c:1101
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit nedokáže spracovať umiesta %s: v režime zápisu."
 
-#: src/gedit-document.c:1068
+#: src/gedit-document.c:1108
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "geditr nedokáže spracovať tento typ umiestnenia v režime zápisu."
 
-#: src/gedit-document.c:1080
+#: src/gedit-document.c:1120
 msgid "Invalid filename."
 msgstr "Neplatné meno súboru."
 
-#: src/gedit-document.c:1158
+#: src/gedit-document.c:1198
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1221,21 +1225,21 @@ msgstr ""
 "Nedostatok miesta pre uloženie súboru.\n"
 "Uvoľnite nejaké miesto na disku a skúste to znovu."
 
-#: src/gedit-document.c:1163
+#: src/gedit-document.c:1203
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
-"Disk, na ktorý sa pokúšate uložiť súbor, má obmedzené veľkosti "
-"súborov. Skúste uložiť menší súbor alebo súbor skúste uložiť "
-"na disk, ktorý toto obmedzenie nemá."
+"Disk, na ktorý sa pokúšate uložiť súbor, má obmedzené veľkosti súborov. "
+"Skúste uložiť menší súbor alebo súbor skúste uložiť na disk, ktorý toto "
+"obmedzenie nemá."
 
-#: src/gedit-document.c:1200
+#: src/gedit-document.c:1240
 msgid "Could not create a backup file."
 msgstr "Nepodarilo sa vytvoriť záložnú kópiu súboru."
 
-#: src/gedit-document.c:1348
+#: src/gedit-document.c:1388
 msgid "It is not possible to revert an Untitled document"
 msgstr "Nemôžete sa vrátiť v dokumente bez mena."
 
@@ -1260,54 +1264,54 @@ msgstr "Vyberte meno súboru"
 msgid "Open File ..."
 msgstr "Otvoriť súbor..."
 
-#: src/gedit-file.c:134 src/gedit-file.c:636
+#: src/gedit-file.c:141 src/gedit-file.c:708
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Načítaný súbor '%s'"
 
-#: src/gedit-file.c:242 src/gedit-file.c:314
+#: src/gedit-file.c:264 src/gedit-file.c:351
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Ukladám súbor '%s'..."
 
-#: src/gedit-file.c:263 src/gedit-file.c:321
+#: src/gedit-file.c:285 src/gedit-file.c:361
 msgid "The document has not been saved."
 msgstr "Dokument nebol uložený."
 
-#: src/gedit-file.c:275 src/gedit-file.c:319
+#: src/gedit-file.c:299 src/gedit-file.c:358
 #, c-format
 msgid "File '%s' saved."
 msgstr "Súbor '%s' uložený."
 
-#: src/gedit-file.c:306
+#: src/gedit-file.c:340
 msgid "Save as ..."
 msgstr "Uložiť ako..."
 
-#: src/gedit-file.c:464
+#: src/gedit-file.c:519
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Vraciam obsah súboru '%s'..."
 
-#: src/gedit-file.c:477
+#: src/gedit-file.c:532
 msgid "The document has not been reverted."
 msgstr "Dokument nebol vrátený."
 
-#: src/gedit-file.c:487
+#: src/gedit-file.c:542
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Súbor '%s' vrátený."
 
-#: src/gedit-file.c:530
+#: src/gedit-file.c:589
 #, c-format
 msgid "Loading %d file..."
 msgstr "Načítavam %d súbor..."
 
-#: src/gedit-file.c:566
+#: src/gedit-file.c:625
 #, c-format
 msgid "Loaded %i files"
 msgstr "Načítaných %i súborov"
 
-#: src/gedit-file.c:690
+#: src/gedit-file.c:766
 msgid "Could not read data from stdin."
 msgstr "Nastala chyba pri čítaní zo štandardného vstupu."
 
@@ -1431,414 +1435,410 @@ msgid "About this application"
 msgstr "O aplikácii"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr "O programe..."
-
-#: src/gedit-ui.xml.h:3
 msgid "Add/Remove plugins"
 msgstr "Pridať/odstrániť moduly"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
 msgstr "_Prispôsobiť stavový riadok"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Zmena zobrazenia stavového riadku v aktuálnom okne"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Zmena zobrazenia panelu nástrojov v aktuálnom okne"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Clos_e All"
 msgstr "Zav_rieť všetko"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close"
 msgstr "Zavrieť"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close All"
 msgstr "Zavrieť všetko"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close all open files"
 msgstr "Zavrie všetky otvorené súbory"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Close the current file"
 msgstr "Zavrie aktuálny súbor"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Configure the application"
 msgstr "Nastaví aplikáciu"
 
-#: src/gedit-ui.xml.h:13
-msgid "Contents"
-msgstr "Obsah"
-
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:12
 msgid "Copy"
 msgstr "Kopírovať"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:13
 msgid "Copy the selection"
 msgstr "Skopíruje výber do schránky"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:14
 msgid "Create a new document"
 msgstr "Vytvorí nový dokument"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:15
 msgid "Cu_t"
 msgstr "Vy_strihnúť"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:16
 msgid "Customize"
 msgstr "Prispôsobiť"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:17
 msgid "Customize toolbars"
 msgstr "Prispôsobiť panely nástrojov"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:18
 msgid "Cut"
 msgstr "Vystrihnúť"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:19
 msgid "Cut the selection"
 msgstr "Vystihne výber"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:20
 msgid "Delete"
 msgstr "Odstrániť"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:21
 msgid "Delete the selected text"
 msgstr "Odstráni vybraný text"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:22
 msgid "Dump XML"
 msgstr "Vypísať XML"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:23
 msgid "Dump the UI Xml description"
 msgstr "Vypíše XML popis rozhrania"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:25
 msgid "Find Again"
 msgstr "Hľadať znovu"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:26
 msgid "Find Ne_xt"
 msgstr "_Hľadať ďalej"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:27
 msgid "Go to a specific line number"
 msgstr "Prejde na riadok so zadaných číslom"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:28
 msgid "Goto _Line"
 msgstr "_Prejsť na riadok"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:29
 msgid "Icon and _Text"
 msgstr "Ikony a _text"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:30
 msgid "Main toolbar"
 msgstr "Hlavný panel nástrojov"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:31
 msgid "New"
 msgstr "Nový"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:32
 msgid "Only show icons in the toolbar"
 msgstr "Zobraziť v paneli nástrojov iba ikony"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:33
 msgid "Open"
 msgstr "Otvoriť"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:34
 msgid "Open Location..."
 msgstr "Otvoriť miesto..."
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:35
 msgid "Open _Location..."
 msgstr "Otvoriť _miesto..."
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:36
 msgid "Open a file"
 msgstr "Otvoriť súbor"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:37
 msgid "Open a file from a specified location"
 msgstr "Otvorí súbor zo zadaného miesta"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:38
 msgid "Open the gedit manual"
 msgstr "Zobraziť manuál pre gedit"
 
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:39
 msgid "Paste"
 msgstr "Vložiť"
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:40
 msgid "Paste the clipboard"
 msgstr "Vloží obsah schránky"
 
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:41
 msgid "Plugin _Manager"
 msgstr "Správca _modulov"
 
-#: src/gedit-ui.xml.h:44
+#: src/gedit-ui.xml.h:42
 msgid "Plugin _Manager..."
 msgstr "Správca _modulov..."
 
-#: src/gedit-ui.xml.h:45
+#: src/gedit-ui.xml.h:43
 msgid "Pr_eferences..."
 msgstr "Nas_tavenie..."
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:46
 msgid "Print Previe_w"
 msgstr "Ná_hľad tlače"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:47
 msgid "Print Preview"
 msgstr "Náhľad tlače"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:48
 msgid "Print Setup"
 msgstr "Nastavenie tlače"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:49
 msgid "Print preview"
 msgstr "Náhľad tlače"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:50
 msgid "Print the current file"
 msgstr "Vytlačí aktuálny súbor"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:51
 msgid "Quit"
 msgstr "Koniec"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:52
 msgid "Quit the program"
 msgstr "Ukončí program"
 
-#: src/gedit-ui.xml.h:55
+#: src/gedit-ui.xml.h:53
 msgid "Recent _Files"
 msgstr "N_edávne súbory"
 
-#: src/gedit-ui.xml.h:56
+#: src/gedit-ui.xml.h:54
 msgid "Redo"
 msgstr "Opakovať vrátené"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:55
 msgid "Redo the undone action"
 msgstr "Znovu vykoná poslednú vrátenú akciu"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:57
 msgid "Replace a string"
 msgstr "Nahradiť reťazec"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:58
 msgid "Revert"
 msgstr "Vrátiť"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:59
 msgid "Revert to a saved version of the file"
 msgstr "Vráti sa k uloženej verzii súboru"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:60
 msgid "Sa_ve All"
 msgstr "Uložiť všet_ko"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:62
 msgid "Save All"
 msgstr "Uložiť všetko"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:63
 msgid "Save As"
 msgstr "Uložiť ako"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:64
 msgid "Save _As..."
 msgstr "Uložiť _ako..."
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:65
 msgid "Save all open files"
 msgstr "Uloží všetky otvorené súbory"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:66
 msgid "Save the current file"
 msgstr "Uloží aktuálny súbor"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:67
 msgid "Save the current file with a different name"
 msgstr "Uloží aktuálny súbor pod iným menom"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:68
 msgid "Search again for the same string"
 msgstr "Znovu nájde rovnaký reťazec"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:69
 msgid "Search for a string"
 msgstr "Hľadať reťazec"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:70
 msgid "Select All"
 msgstr "Vybrať všetko"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:71
 msgid "Select _All"
 msgstr "Vybrať _všetko"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:72
 msgid "Select the entire document"
 msgstr "Vyberie celý dokument"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:73
 msgid "Set toolbar button style according to desktop default"
 msgstr "Nastaví štýl panelu nástrojov podľa štandardného nastavenia"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:74
 msgid "Setup the page settings for your current printer"
 msgstr "Nastavenie stránky pre vašu aktuálnu tlačiareň"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:75
 msgid "Show _Cursor Position"
 msgstr "Zobraziť pozíciu _kurzoru"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:76
 msgid "Show _Overwrite Mode"
 msgstr "Zobraziť režim p_repisovania"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:77
 msgid "Show _Tooltips"
 msgstr "Zobraziť _rady"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:78
 msgid "Show cursor position in the statusbar"
 msgstr "Zobraziť pozíciu kurzoru v stavovom riadku"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:79
 msgid "Show overwrite mode in the statusbar"
 msgstr "Zobraziť mód prepisovania v stavovom riadku"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:80
 msgid "Show tooltips in the toolbar"
 msgstr "Zobraziť rady pre panel nástrojov"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:82
 msgid "Undo the last action"
 msgstr "Vráti poslednú akciu"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:83
 msgid "_About..."
 msgstr "_O programe..."
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:84
 msgid "_Close"
 msgstr "_Zavrieť"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:85
+msgid "_Contents"
+msgstr "_Obsah"
+
+#: src/gedit-ui.xml.h:86
 msgid "_Copy"
 msgstr "_Kopírovať"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:87
 msgid "_Customize Toolbar"
 msgstr "Prispôsobiť _panely nástrojov"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:88
 msgid "_Debug"
 msgstr "_Ladiť"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:89
 msgid "_Delete"
 msgstr "_Odstrániť"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:90
 msgid "_Desktop Default"
 msgstr "Š_tandardné nastavenie"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:91
 msgid "_Documents"
 msgstr "_Dokumenty"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:92
 msgid "_Edit"
 msgstr "_Upraviť"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:93
 msgid "_File"
 msgstr "_Súbor"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:94
 msgid "_Find"
 msgstr "_Nájsť"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:95
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:97
 msgid "_New"
 msgstr "_Nový"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:98
 msgid "_Open..."
 msgstr "_Otvoriť..."
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:99
 msgid "_Paste"
 msgstr "V_ložiť"
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:100
 msgid "_Print..."
 msgstr "_Tlačiť..."
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:101
 msgid "_Quit"
 msgstr "_Koniec"
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:102
 msgid "_Redo"
 msgstr "_Opakovať vrátené"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:104
 msgid "_Revert"
 msgstr "_Vrátiť"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:105
 msgid "_Save"
 msgstr "_Uložiť"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:106
 msgid "_Search"
 msgstr "_Nájsť"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:107
 msgid "_Statusbar"
 msgstr "_Stavový riadok"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:108
 msgid "_Toolbar"
 msgstr "Panel _nástrojov"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:109
 msgid "_Tools"
 msgstr "_Nástroje"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:110
 msgid "_Undo"
 msgstr "Vrátiť _späť"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:111
 msgid "_View"
 msgstr "_Zobraziť"
 
@@ -2135,57 +2135,72 @@ msgstr "  CEZ"
 msgid "  INS"
 msgstr "  VKL"
 
-#: src/gedit2.c:68
+#: src/gedit2.c:69
 msgid "Show mdi debugging messages."
 msgstr "Zobraziť ladiace správy mdi."
 
-#: src/gedit2.c:71
+#: src/gedit2.c:72
 msgid "Show commands debugging messages."
-msgstr "Ukázať ladiace správy príkazov."
+msgstr "Zobraziť ladiace správy príkazov."
 
-#: src/gedit2.c:74
+#: src/gedit2.c:75
 msgid "Show document debugging messages."
-msgstr "Ukázať ladiace správy dokumentu."
+msgstr "Zobraziť ladiace správy dokumentu."
 
-#: src/gedit2.c:77
+#: src/gedit2.c:78
 msgid "Show file debugging messages."
-msgstr "Ukázať ladiace správy súboru."
+msgstr "Zobraziť ladiace správy súboru."
 
-#: src/gedit2.c:80
+#: src/gedit2.c:81
 msgid "Show plugin debugging messages."
-msgstr "Ukázať ladiace správy modulu."
+msgstr "Zobraziť ladiace správy modulu."
 
-#: src/gedit2.c:83
+#: src/gedit2.c:84
 msgid "Show prefs debugging messages."
-msgstr "Ukázať ladiace správy nastavenia."
+msgstr "Zobraziť ladiace správy nastavenia."
 
-#: src/gedit2.c:86
+#: src/gedit2.c:87
 msgid "Show printing debugging messages."
-msgstr "Ukázať ladiace správy tlače."
+msgstr "Zobraziť ladiace správy tlače."
 
-#: src/gedit2.c:89
+#: src/gedit2.c:90
 msgid "Show search debugging messages."
-msgstr "Ukázať ladiace správy hľadania."
+msgstr "Zobraziť ladiace správy hľadania."
 
-#: src/gedit2.c:92
+#: src/gedit2.c:93
 msgid "Show undo debugging messages."
-msgstr "Ukázať ladiace správy vrátenia späť."
+msgstr "Zobraziť ladiace správy vrátenia späť."
 
-#: src/gedit2.c:95
+#: src/gedit2.c:96
 msgid "Show view debugging messages."
-msgstr "Ukázať ladiace správy pohľadu."
+msgstr "Zobraziť ladiace správy pohľadu."
 
-#: src/gedit2.c:98
+#: src/gedit2.c:99
 msgid "Show recent debugging messages."
-msgstr "Ukázať ladiace správy nedávnych súborov."
+msgstr "Zobraziť ladiace správy nedávnych súborov."
 
-#: src/gedit2.c:101
+#: src/gedit2.c:102
+msgid "Show session management debugging messages."
+msgstr "Zobraziť ladiace správy správy sedenia."
+
+#: src/gedit2.c:105
 msgid "Turn on all debugging messages."
-msgstr "Zapnúť všetky ladiace správy."
+msgstr "Zobraziť všetky ladiace správy."
 
-#: src/gedit2.c:159
+#: src/gedit2.c:164
 msgid "The GNOME text editor"
 msgstr "Textový editor GNOME"
+
+#: src/gnome-recent-view-bonobo.c:189
+#, c-format
+msgid "Open %s"
+msgstr "Otvoriť %s"
+
+#~ msgid "About..."
+#~ msgstr "O programe..."
+
+#~ msgid "Contents"
+#~ msgstr "Obsah"
 
 #~ msgid ""
 #~ "Make sure that the path you provided exists, and that you have the "
@@ -2195,12 +2210,6 @@ msgstr "Textový editor GNOME"
 
 #~ msgid "gedit - Print Document"
 #~ msgstr "gedit - Tlačiť dokument"
-
-#~ msgid "Open %s"
-#~ msgstr "Otvoriť %s"
-
-#~ msgid "_Contents"
-#~ msgstr "_Obsah"
 
 #~ msgid "_Plugin Manager"
 #~ msgstr "Správca _modulov"
