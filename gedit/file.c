@@ -326,25 +326,24 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 
 	if (uri != NULL)
 	{
-
 		scheme = gnome_vfs_uri_get_scheme(uri);
-		
+
 		/* FIXME: all remote files are marked as readonly */
 		if ((scheme != NULL) && (strcmp (scheme, "file") == 0) && GNOME_VFS_FILE_INFO_LOCAL (info))
 		{
 			gchar* tmp_str;
-
-			/*
-			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
-			*/
-			tmp_str = gnome_vfs_get_local_path_from_uri (fname);
-				
-			if (tmp_str != NULL)
+		        gchar* tmp_str2;
+												
+			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);				
+			tmp_str2 = gnome_vfs_unescape_string_for_display (tmp_str);
+	
+			if (tmp_str2 != NULL)
 			{
-				gedit_document_set_readonly (doc, access (tmp_str, W_OK) ? TRUE : FALSE);
-				g_free (tmp_str);
-			}
+				gedit_document_set_readonly (doc, access (tmp_str2, W_OK) ? TRUE : FALSE);
+			}			
 
+			g_free (tmp_str2);
+			g_free (tmp_str);
 		}
 		
 		gnome_vfs_uri_unref (uri);
