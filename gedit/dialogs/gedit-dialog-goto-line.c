@@ -136,7 +136,7 @@ dialog_goto_line_get_dialog (void)
 
 	dialog = g_new0 (GeditDialogGotoLine, 1);
 
-	dialog->dialog = gtk_dialog_new_with_buttons (_("Goto line..."),
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Go to Line"),
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
@@ -146,7 +146,7 @@ dialog_goto_line_get_dialog (void)
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
 
 	/* Add Goto Line button */
-	button = gedit_button_new_with_stock_image (_("_Goto line"), GTK_STOCK_JUMP_TO);
+	button = gedit_button_new_with_stock_image (_("_Go to Line"), GTK_STOCK_JUMP_TO);
 	g_return_val_if_fail (button != NULL, NULL);
 
 	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);

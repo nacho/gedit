@@ -382,18 +382,27 @@ gedit_undo_manager_undo (GeditUndoManager *um)
 		switch (undo_action->action_type)
 		{
 			case GEDIT_UNDO_ACTION_DELETE:
+				gedit_document_set_cursor (
+					um->priv->document, 
+					undo_action->action.delete.start);
+
 				gedit_document_insert_text (
 					um->priv->document, 
 					undo_action->action.delete.start, 
 					undo_action->action.delete.text,
 					strlen (undo_action->action.delete.text));
-				break;
+
+								break;
 			case GEDIT_UNDO_ACTION_INSERT:
 				gedit_document_delete_text (
 					um->priv->document, 
 					undo_action->action.insert.pos, 
 					undo_action->action.insert.pos + 
 						undo_action->action.insert.chars); 
+
+				gedit_document_set_cursor (
+					um->priv->document, 
+					undo_action->action.insert.pos);
 				break;
 
 			default:
@@ -443,9 +452,18 @@ gedit_undo_manager_redo (GeditUndoManager *um)
 					um->priv->document, 
 					undo_action->action.delete.start, 
 					undo_action->action.delete.end); 
+
+				gedit_document_set_cursor (
+					um->priv->document,
+					undo_action->action.delete.start);
+
 				break;
 				
 			case GEDIT_UNDO_ACTION_INSERT:
+				gedit_document_set_cursor (
+					um->priv->document,
+					undo_action->action.insert.pos);
+
 				gedit_document_insert_text (
 					um->priv->document, 
 					undo_action->action.insert.pos, 

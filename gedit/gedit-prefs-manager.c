@@ -1712,8 +1712,7 @@ gconf_value_type_to_string(GConfValueType type)
       return "*invalid*";
       break;
     default:
-      g_assert_not_reached();
-      return NULL; /* for warnings */
+      g_return_val_if_fail (FALSE, NULL);
       break;
     }
 }
@@ -1742,7 +1741,7 @@ handle_error (GConfClient* client, GError* error, GError** err)
 }
 
 static gboolean
-check_type(const gchar* key, GConfValue* val, GConfValueType t, GError** err)
+check_type (const gchar* key, GConfValue* val, GConfValueType t, GError** err)
 {
   if (val->type != t)
     {
@@ -1772,7 +1771,7 @@ gconf_client_get_bool_with_default (GConfClient* client, const gchar* key,
   GError* error = NULL;
   GConfValue* val;
 
-  g_return_val_if_fail (err == NULL || *err == NULL, FALSE);
+  g_return_val_if_fail (err == NULL || *err == NULL, def);
 
   val = gconf_client_get (client, key, &error);
 
@@ -1780,7 +1779,7 @@ gconf_client_get_bool_with_default (GConfClient* client, const gchar* key,
     {
       gboolean retval = def;
 
-      g_assert (error == NULL);
+      g_return_val_if_fail (error == NULL, retval);
       
       if (check_type (key, val, GCONF_VALUE_BOOL, &error))
         retval = gconf_value_get_bool (val);
@@ -1806,13 +1805,13 @@ gconf_client_get_string_with_default (GConfClient* client, const gchar* key,
   GError* error = NULL;
   gchar* val;
 
-  g_return_val_if_fail (err == NULL || *err == NULL, NULL);
+  g_return_val_if_fail (err == NULL || *err == NULL, def ? g_strdup (def) : NULL);
 
   val = gconf_client_get_string (client, key, &error);
 
   if (val != NULL)
     {
-      g_assert(error == NULL);
+      g_return_val_if_fail (error == NULL, def ? g_strdup (def) : NULL);
       
       return val;
     }
@@ -1831,7 +1830,7 @@ gconf_client_get_int_with_default (GConfClient* client, const gchar* key,
   GError* error = NULL;
   GConfValue* val;
 
-  g_return_val_if_fail (err == NULL || *err == NULL, 0);
+  g_return_val_if_fail (err == NULL || *err == NULL, def);
 
   val = gconf_client_get (client, key, &error);
 
@@ -1839,7 +1838,7 @@ gconf_client_get_int_with_default (GConfClient* client, const gchar* key,
     {
       gint retval = def;
 
-      g_assert(error == NULL);
+      g_return_val_if_fail (error == NULL, def);
       
       if (check_type (key, val, GCONF_VALUE_INT, &error))
         retval = gconf_value_get_int(val);

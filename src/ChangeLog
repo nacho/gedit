@@ -1,5 +1,17 @@
 2002-12-09  Paolo Maggi  <paolo.maggi@polito.it>
 
+	* gedit-commands.c:
+	* gedit-view.c: 
+	* gedit-undo-manager.c: fixed bug #99249 (Undo and redo should move 
+	the document display to the part being altered)
+	
+	* dialogs/gedit-dialog-goto-line.c (dialog_goto_line_get_dialog): 
+	fixed according	to ui-review
+
+	* gedit-prefs-manager.c: replace g_assert with g_return[_val]_if_fail
+
+2002-12-09  Paolo Maggi  <paolo.maggi@polito.it>
+
 	* gedit-ui.xml: added a shortcut (ctrl+L) to the Open Location menu entry,
 	removed icon from the Open Location menu entry, s/Preferences.../Preferences,
 	s/Goto line/Go to Line Number..., s/Find/Find..., s/Replace/Replace...

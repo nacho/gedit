@@ -34,8 +34,8 @@ typedef struct _SortDialog SortDialog;
 struct _SortDialog {
 	GtkWidget *dialog;
 
-	GtkWidget *descending_radiobutton;
-	GtkWidget *case_sensitive_checkbutton;
+	GtkWidget *reverse_order_checkbutton;
+	GtkWidget *ignore_case_checkbutton;
 	GtkWidget *remove_dups_checkbutton;
 	GtkWidget *col_num_spinbutton;
 };
@@ -43,8 +43,8 @@ struct _SortDialog {
 typedef struct _SortInfo SortInfo;
 
 struct _SortInfo {
-	gboolean case_sensitive;
-	gboolean ascending;
+	gboolean ignore_case;
+	gboolean reverse_order;
 	gboolean remove_duplicates;
 
 	gint starting_column;
@@ -141,19 +141,19 @@ get_dialog ()
 
 	/* Save some references to the main dialog widgets */
 	dialog->dialog = glade_xml_get_widget (gui, "sort_dialog");
-	dialog->descending_radiobutton =
-	    glade_xml_get_widget (gui, "descending_radiobutton");
+	dialog->reverse_order_checkbutton =
+	    glade_xml_get_widget (gui, "reverse_order_checkbutton");
 	dialog->col_num_spinbutton =
 	    glade_xml_get_widget (gui, "col_num_spinbutton");
-	dialog->case_sensitive_checkbutton =
-	    glade_xml_get_widget (gui, "case_sensitive_checkbutton");
+	dialog->ignore_case_checkbutton =
+	    glade_xml_get_widget (gui, "ignore_case_checkbutton");
 	dialog->remove_dups_checkbutton =
 	    glade_xml_get_widget (gui, "remove_dups_checkbutton");
 
 	g_return_val_if_fail (dialog->dialog, NULL);
-	g_return_val_if_fail (dialog->descending_radiobutton, NULL);
+	g_return_val_if_fail (dialog->reverse_order_checkbutton, NULL);
 	g_return_val_if_fail (dialog->col_num_spinbutton, NULL);
-	g_return_val_if_fail (dialog->case_sensitive_checkbutton, NULL);
+	g_return_val_if_fail (dialog->ignore_case_checkbutton, NULL);
 	g_return_val_if_fail (dialog->remove_dups_checkbutton, NULL);
 
 	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
@@ -166,6 +166,9 @@ get_dialog ()
 
 	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
 	gtk_window_set_modal (GTK_WINDOW (dialog->dialog), TRUE);
+
+	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
+					      window);
 
 	gtk_widget_show (dialog->dialog);
 
@@ -212,7 +215,7 @@ my_compare (const void *s1, const void *s2, gpointer data)
 
 	g_return_val_if_fail (sort_info != NULL, -1);
 
-	if (sort_info->case_sensitive) {
+	if (!sort_info->ignore_case) {
 		string1 = *((gchar **) s1);
 		string2 = *((gchar **) s2);
 	} else {
@@ -263,12 +266,12 @@ my_compare (const void *s1, const void *s2, gpointer data)
 	}
 
 	/* Do the necessary cleanup */
-	if (!sort_info->case_sensitive) {
+	if (sort_info->ignore_case) {
 		g_free (string1);
 		g_free (string2);
 	}
 
-	if (!sort_info->ascending) {
+	if (sort_info->reverse_order) {
 		/* Reverse the order */
 		ret = -1 * ret;
 	}
@@ -305,14 +308,14 @@ sort_document (SortDialog * dlg)
 
 	sort_info = g_new0 (SortInfo, 1);
 
-	sort_info->case_sensitive =
+	sort_info->ignore_case =
 	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
 					  (dlg->
-					   case_sensitive_checkbutton));
+					   ignore_case_checkbutton));
 
-	sort_info->ascending =
-	    !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-					   (dlg->descending_radiobutton));
+	sort_info->reverse_order =
+	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
+					   (dlg->reverse_order_checkbutton));
 
 	sort_info->remove_duplicates =
 	    gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
@@ -320,8 +323,7 @@ sort_document (SortDialog * dlg)
 
 	sort_info->starting_column =
 	    gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
-					      (dlg->col_num_spinbutton)) -
-	    1;
+					      (dlg->col_num_spinbutton)) - 1;
 
 	if (!gedit_document_get_selection (doc, &start, &end)) {
 		buffer = gedit_document_get_chars (doc, 0, -1);

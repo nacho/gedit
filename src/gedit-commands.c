@@ -212,7 +212,9 @@ gedit_cmd_edit_undo (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 
 	gedit_document_undo (active_document);
 
-	/* TODO: Move the cursor */
+	gedit_view_scroll_to_cursor (active_view);
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void 
@@ -229,7 +231,9 @@ gedit_cmd_edit_redo (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 
 	gedit_document_redo (active_document);
 
-	/* TODO: Move the cursor */
+	gedit_view_scroll_to_cursor (active_view);
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void 
@@ -241,6 +245,8 @@ gedit_cmd_edit_cut (BonoboUIComponent *uic, gpointer user_data, const gchar* ver
 	g_return_if_fail (active_view);
 	
 	gedit_view_cut_clipboard (active_view); 
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void 
@@ -251,7 +257,9 @@ gedit_cmd_edit_copy (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
 	g_return_if_fail (active_view);
 	
-	gedit_view_copy_clipboard (active_view); 
+	gedit_view_copy_clipboard (active_view);
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void 
@@ -263,6 +271,8 @@ gedit_cmd_edit_paste (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	g_return_if_fail (active_view);
 	
 	gedit_view_paste_clipboard (active_view); 
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void 
@@ -273,17 +283,26 @@ gedit_cmd_edit_clear (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
 	g_return_if_fail (active_view);
 	
-	gedit_view_delete_selection (active_view); 
+	gedit_view_delete_selection (active_view);
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void
 gedit_cmd_edit_select_all (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument* active_doc;
+	GeditView* active_view;
+
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_view);
 
 	active_doc = gedit_get_active_document ();
+	g_return_if_fail (active_doc);
 
 	gedit_document_set_selection (active_doc, 0, -1); 
+
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 }
 
 void 

@@ -43,10 +43,10 @@
 #include <gedit-menus.h>
 #include <gedit-utils.h>
 
-#define MENU_ITEM_LABEL		N_("_Word Count")
+#define MENU_ITEM_LABEL		N_("_Document Statistics")
 #define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_2/"
 #define MENU_ITEM_NAME		"PluginWordCount"	
-#define MENU_ITEM_TIP		N_("Get info on current document")
+#define MENU_ITEM_TIP		N_("Get statistic info on current document")
 
 typedef struct _DocInfoDialog DocInfoDialog;
 
@@ -133,13 +133,13 @@ get_dialog ()
 
 	if (!gui) {
 		g_warning
-		    ("Could not find docinfo.glade2, reinstall gedit.\n");
+		    ("Could not find %s, reinstall gedit.\n", "docinfo.glade2");
 		return NULL;
 	}
 
 	dialog = g_new0 (DocInfoDialog, 1);
 
-	dialog->dialog = gtk_dialog_new_with_buttons (_("Word count"),
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Document Statistics"),
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,

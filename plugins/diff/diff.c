@@ -268,7 +268,7 @@ get_diff_dialog (GtkWindow* parent)
 	dialog = g_new0 (DiffDialog, 1);
 
 	/* Create the dialog */
-	dialog->dialog = gtk_dialog_new_with_buttons (_("Compare two files..."),
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Compare Files"),
 						      parent,
 						      GTK_DIALOG_DESTROY_WITH_PARENT |
 						      GTK_DIALOG_MODAL,

@@ -48,17 +48,13 @@
 #include "gedit-spell-language-dialog.h"
 #include "gedit-automatic-spell-checker.h"
 
-#define SUBMENU_LABEL		N_("_Spelling...")
-#define SUBMENU_PATH		"/menu/Tools/ToolsOps_1/"
-#define SUBMENU_NAME		"SpellingMenu"	
-
-#define MENU_ITEM_LABEL		N_("_Check Spelling...")
-#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_1/SpellingMenu/"
+#define MENU_ITEM_LABEL		N_("_Check Spelling")
+#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_1/"
 #define MENU_ITEM_NAME		"SpellChecker"	
 #define MENU_ITEM_TIP		N_("Check the current document for incorrect spelling")
 
-#define MENU_ITEM_LABEL_AUTO	N_("_Auto Spellcheck")
-#define MENU_ITEM_PATH_AUTO	"/menu/Tools/ToolsOps_1/SpellingMenu/"
+#define MENU_ITEM_LABEL_AUTO	N_("_Autocheck Spelling")
+#define MENU_ITEM_PATH_AUTO	"/menu/Tools/ToolsOps_1/"
 #define MENU_ITEM_NAME_AUTO	"AutoSpellChecker"	
 #define MENU_ITEM_TIP_AUTO	N_("Automatically spell-check the current document")
 
@@ -756,10 +752,6 @@ activate (GeditPlugin *pd)
         {
 		BonoboUIComponent *ui_component;
 
-		gedit_menus_add_submenu (BONOBO_WINDOW (top_windows->data),
-				     SUBMENU_PATH, SUBMENU_NAME,
-				     SUBMENU_LABEL);
-
 		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
 				     MENU_ITEM_PATH, MENU_ITEM_NAME,
 				     MENU_ITEM_LABEL, MENU_ITEM_TIP, GTK_STOCK_SPELL_CHECK,
@@ -794,9 +786,6 @@ deactivate (GeditPlugin *pd)
 {
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH_AUTO, MENU_ITEM_NAME_AUTO);
-
-	gedit_menus_remove_submenu_all (SUBMENU_PATH, SUBMENU_NAME);
-
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH_LANG, MENU_ITEM_NAME_LANG);
 
 	return PLUGIN_OK;
