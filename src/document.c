@@ -337,7 +337,7 @@ gedit_document_new (void)
 {
 	Document *doc;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug ("start", DEBUG_DOCUMENT);
 
 	doc = gtk_type_new (gedit_document_get_type ());
 
@@ -346,6 +346,8 @@ gedit_document_new (void)
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	
+	gedit_window_set_widgets_sensitivity (TRUE);
+
 	gedit_debug ("end", DEBUG_DOCUMENT);
 
 	return doc;
@@ -356,7 +358,7 @@ gedit_document_new_with_title (gchar *title)
 {
 	Document *doc;
 	
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug ("start", DEBUG_DOCUMENT);
 
 	g_return_val_if_fail (title != NULL, NULL);
 	doc = gtk_type_new (gedit_document_get_type ());
@@ -366,6 +368,10 @@ gedit_document_new_with_title (gchar *title)
 	
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+
+	gedit_window_set_widgets_sensitivity (TRUE);
+
+	gedit_debug ("end", DEBUG_DOCUMENT);
 
 	return doc;
 }
@@ -385,8 +391,9 @@ gedit_document_new_with_file (gchar *file_name)
 
 	if (gedit_file_open (doc, file_name) == 1)
 		return FALSE;
-	else
-		return TRUE;
+
+	gedit_window_set_widgets_sensitivity (TRUE);
+	return TRUE;
 
 }
 

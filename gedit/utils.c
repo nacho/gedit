@@ -26,8 +26,11 @@
 #include <config.h>
 #include <gnome.h>
 
+#include <sys/stat.h> 
+
 #include "document.h"
 #include "utils.h"
+
 
 
 int
@@ -103,6 +106,64 @@ gedit_flash_va (gchar *format, ...)
 
 
 
+/**
+ * gedit_util_is_program: 
+ * @program: the program path to tests for
+ * @default_name: a default expected name to be added to the path if *program
+ *                is a directory. Can be NULL.
+ * 
+ * Verifies is "*program" is actualy a progam and returns a enum with the result.
+ * if "*program" is a directory "*default_name" is searched for in that directory
+ *
+ * Return Value: enum of GeditProgramErrors
+ **/
+gint
+gedit_utils_is_program (gchar * program, gchar* default_name)
+{
+	struct stat stats;
+
+	if ( !program || strlen(program)==0 ||
+	     !g_file_exists(program))
+		return GEDIT_PROGRAM_NOT_EXISTS;
+
+	if (stat(program, &stats))
+		return GEDIT_PROGRAM_NOT_EXECUTABLE;
+	
+	if (S_ISDIR(stats.st_mode))
+	{
+		gchar * program_from_dir = NULL;
+
+		if (!default_name)
+			return GEDIT_PROGRAM_IS_DIRECTORY;
+		program_from_dir = g_strdup_printf ("%s%s%s",
+						    program,
+						    (program [strlen(program)-1] == '/')?"":"/",
+						    default_name);
+		if ( !program_from_dir || strlen(program_from_dir)==0 ||
+		     !g_file_exists(program_from_dir))
+		{
+			g_free (program_from_dir);
+			return GEDIT_PROGRAM_IS_DIRECTORY;
+		}
+		if (stat(program_from_dir, &stats))
+		{
+			g_free (program_from_dir);
+			return GEDIT_PROGRAM_NOT_EXISTS;
+		}
+		if (!(S_IXUSR & stats.st_mode))
+		{
+			g_free (program_from_dir);
+			return GEDIT_PROGRAM_NOT_EXECUTABLE;
+		}
+		g_free (program_from_dir);
+		return GEDIT_PROGRAM_IS_INSIDE_DIRECTORY;
+	}
+
+	if (!(S_IXUSR & stats.st_mode))
+		return GEDIT_PROGRAM_NOT_EXECUTABLE;
+
+	return GEDIT_PROGRAM_OK;
+}
 
 
 
@@ -151,3 +212,4 @@ print_time (void)
 		 "Real time : ", field_width, real_time, " seconds");
 	return user_time;
 }
+

@@ -48,9 +48,9 @@ GnomeApp *	gedit_window_active_app (void);
 void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 void	gedit_window_set_auto_indent (gint auto_indent);
 void	gedit_window_set_status_bar (GnomeApp *app);
-void	gedit_window_refresh_toolbar (void);
 void	gedit_window_refresh_all (gint mdi_mode_changed);
 void	gedit_window_set_toolbar_labels (GnomeApp *app);
+void	gedit_window_set_widgets_sensitivity (gint sensitive);
 
 static void	gedit_window_set_icon (GtkWidget *window, char *icon);
 
@@ -231,7 +231,7 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 	GdkColor *bg, *fg;
 
 	
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug("1", DEBUG_PREFS);
 
 	/* Set mdi mode */
 	if (mdi_mode_changed)
@@ -241,7 +241,22 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 
 	tab_pos (settings->tab_pos);
 
+	gedit_debug("2", DEBUG_PREFS);
 	/* Set style and font for each children */
+
+	/* We  need to change the toolbar style even if there aren't any documents open !!!
+	   the toolbar is loaded for every view that is open, because when mdi_mode = toplevel
+	   each view will have it's own undo & redo buttons that need to get shaded/unshaded
+	   Chema */
+	if (gedit_document_current()==NULL)
+	{
+		GnomeApp *app = NULL;
+		app = g_list_nth_data (mdi->windows, 0);
+		if (app)
+			gedit_window_set_toolbar_labels (app);
+		return;
+	}
+		
 	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
 
 	bg = &style->base[0];
@@ -277,6 +292,7 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 #endif	
 		}
 	}
+	
 	/* Set the toolbar and the status bar for each window. (mdi_mode = toplevel); */
 	for (n = 0; n < g_list_length (mdi->windows); n++)
 	{
@@ -284,6 +300,101 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 		gedit_window_set_status_bar (nth_app);
 		gedit_window_set_toolbar_labels (nth_app);
 	}
+}
 
+
+void
+gedit_window_set_widgets_sensitivity (gint sensitive)
+{
+	GnomeApp *app = NULL;
+	GnomeUIInfo *ui_info;
+	GnomeUIInfo *sub_ui_info;
+	GtkWidget *widget;
+	gint count = 0, sub_count = 0;
+	
+	gedit_debug("", DEBUG_FILE);
+
+	if (!sensitive && gedit_document_current()!=NULL)
+		return;
+	if (sensitive && gedit_document_current()==NULL)
+		return;
+
+	app = g_list_nth_data (mdi->windows, 0);
+
+	g_return_if_fail (app!=NULL);
+
+	/* get the UI_info structures */
+	ui_info = gtk_object_get_data (GTK_OBJECT (app),
+					       GNOME_MDI_TOOLBAR_INFO_KEY);
+
+	g_return_if_fail (ui_info != NULL);
+
+	/* Set the toolbar tems */
+	while (ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (ui_info [count].moreinfo == file_save_as_cb ||
+		    ui_info [count].moreinfo == file_close_cb   ||
+		    ui_info [count].moreinfo == file_print_cb   ||
+		    ui_info [count].moreinfo == file_save_cb    ||
+		    ui_info [count].moreinfo == gedit_undo_undo ||
+		    ui_info [count].moreinfo == gedit_undo_redo ||
+		    ui_info [count].moreinfo == edit_cut_cb     ||
+		    ui_info [count].moreinfo == edit_copy_cb    ||
+		    ui_info [count].moreinfo == edit_paste_cb   ||
+		    ui_info [count].moreinfo == find_cb         ||
+		    ui_info [count].moreinfo == count_lines_cb  )
+		{
+			widget =  ui_info [count].widget;
+			if (widget)
+				gtk_widget_set_sensitive (widget, sensitive);
+		}
+		count++;
+	}
+
+
+	ui_info = gtk_object_get_data (GTK_OBJECT (app),
+				       GNOME_MDI_MENUBAR_INFO_KEY);
+	g_return_if_fail (ui_info != NULL);
+
+	/* Set the menus and submenus */
+	count = 0;
+	while (ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (ui_info[count].type == GNOME_APP_UI_SUBTREE_STOCK ||
+		    ui_info[count].type == GNOME_APP_UI_SUBTREE)
+		{
+			sub_count = 0;
+			sub_ui_info = ui_info [count].moreinfo;
+			while (sub_ui_info[sub_count].type != GNOME_APP_UI_ENDOFINFO)
+			{
+				if (sub_ui_info [sub_count].moreinfo == file_save_as_cb ||
+				    sub_ui_info [sub_count].moreinfo == file_save_cb    ||
+				    sub_ui_info [sub_count].moreinfo == file_save_all_cb   ||
+				    sub_ui_info [sub_count].moreinfo == file_close_cb   ||
+				    sub_ui_info [sub_count].moreinfo == file_close_all_cb   ||
+				    sub_ui_info [sub_count].moreinfo == file_revert_cb  ||
+				    sub_ui_info [sub_count].moreinfo == file_print_cb   ||
+				    sub_ui_info [sub_count].moreinfo == file_print_preview_cb   ||
+				    sub_ui_info [sub_count].moreinfo == gedit_undo_undo ||
+				    sub_ui_info [sub_count].moreinfo == gedit_undo_redo ||
+				    sub_ui_info [sub_count].moreinfo == edit_cut_cb     ||
+				    sub_ui_info [sub_count].moreinfo == edit_copy_cb    ||
+				    sub_ui_info [sub_count].moreinfo == edit_paste_cb   ||
+				    sub_ui_info [sub_count].moreinfo == find_cb         ||
+				    sub_ui_info [sub_count].moreinfo == count_lines_cb  )
+				{
+					widget =  sub_ui_info [sub_count].widget;
+					if (widget)
+						gtk_widget_set_sensitive (widget, sensitive);
+					else
+						g_print ("Is not widget");
+				}
+				sub_count++;
+			}
+		}
+		count++;
+	}
+
+	return;
 
 }

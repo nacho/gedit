@@ -992,10 +992,6 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 }
 
 
-/* WHY is this in gnome-mdi.c and not gnome-mdi.h ????????? Ask Jaka.   Chema */
-#define GNOME_MDI_TOOLBAR_INFO_KEY	"MDIToolbarUIInfo"
-#define GNOME_MDI_MENUBAR_INFO_KEY	"MDIMenubarUIInfo"
-#define GNOME_MDI_CHILD_MENU_INFO_KEY	"MDIChildMenuUIInfo"
 void
 gedit_view_load_widgets (View *view)
 {

@@ -26,6 +26,13 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+
+/* WHY is this in gnome-mdi.c and not gnome-mdi.h ????????? Ask Jaka.   Chema */
+#define GNOME_MDI_TOOLBAR_INFO_KEY	"MDIToolbarUIInfo"
+#define GNOME_MDI_MENUBAR_INFO_KEY	"MDIMenubarUIInfo"
+#define GNOME_MDI_CHILD_MENU_INFO_KEY	"MDIChildMenuUIInfo"
+
+
 typedef enum {
 	DEBUG_VIEW,
 	DEBUG_UNDO,
@@ -131,5 +138,15 @@ void	gedit_debug_mess (gchar *message, DebugSection type);
 /* Radio buttons utility functions */
 gint	gtk_radio_group_get_selected (GSList *radio_group);
 void	gtk_radio_button_select (GSList *group, int n);
+
+typedef enum {
+	GEDIT_PROGRAM_OK,
+	GEDIT_PROGRAM_NOT_EXISTS,
+	GEDIT_PROGRAM_IS_DIRECTORY,
+	GEDIT_PROGRAM_IS_INSIDE_DIRECTORY,
+	GEDIT_PROGRAM_NOT_EXECUTABLE
+} GeditProgramErrors;
+
+gint	gedit_utils_is_program (gchar * program, gchar* default_name);
 
 #endif /* __UTILS_H__ */

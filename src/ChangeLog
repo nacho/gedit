@@ -1,3 +1,21 @@
+2000-06-20  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_widgets_sensitivity): new function that turns
+	on and off the sensitivty of the menus & toolbar items.
+
+	* file.c (file_close_cb): turn off sensitivty of toolbar and menu
+	items ( that need a document to work)
+	(file_close_all_cb): ditto
+
+	* document.c (gedit_document_new_with_file): turn toolbar and 
+	menu items sensitivity on
+	(gedit_document_new_with_title): ditto
+	(gedit_document_new): ditto
+
+	* window.c (gedit_window_refresh_all): fix a crash that happened
+	when apply was clicked in the prefs box and there where no documents
+	open.
+
 2000-06-19  Chema Celorio  <chema@celorio.com>
 
 	* window.c (gedit_window_refresh_all): queue_resize the toolbar when setting

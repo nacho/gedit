@@ -36,6 +36,9 @@
 #include "utils.h"
 #include "recent.h"
 #include "window.h"
+#include "print.h"
+#include "undo.h"
+#include "search.h"
 
 #define GEDIT_STDIN_BUFSIZE 1024
 
@@ -68,7 +71,6 @@ static void cancel_cb (GtkWidget *w, gpointer cbdata);
        void gedit_close_all_flag_clear (void);
 static void gedit_close_all_flag_status (guchar *function);
 static void gedit_close_all_flag_verify (guchar *function);
-
 
 gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
 
@@ -162,7 +164,6 @@ gedit_file_open (Document *doc, gchar *fname)
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	gedit_recent_add (fname);
 	gedit_recent_update (gedit_window_active_app());
-
 	gedit_debug ("end", DEBUG_FILE);
 
 	return 0;
@@ -653,7 +654,7 @@ void
 file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug("start", DEBUG_FILE);
 
 	if (mdi->active_child == NULL)
 		return;
@@ -661,6 +662,7 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 
 	gedit_document_set_title (gedit_document_current());
 
+	gedit_window_set_widgets_sensitivity (FALSE);
 }
 
 void
@@ -673,20 +675,18 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 	if (gedit_close_all_flag != GEDIT_CLOSE_ALL_FLAG_QUIT)
 		gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_CLOSE_ALL;
 
-	gedit_debug("1", DEBUG_FILE);
-
 	if (mdi->active_child == NULL)
 		return;
 
-	gedit_debug("2", DEBUG_FILE);
-	
 	gnome_mdi_remove_all (mdi, FALSE);
 
 	/* If this close all was successful, clear the flag */
 	if (gedit_document_current()==NULL)
 		gedit_close_all_flag_clear();
 
-	gedit_debug("endt", DEBUG_FILE);
+	gedit_window_set_widgets_sensitivity (FALSE);
+	
+	gedit_debug("end", DEBUG_FILE);
 }
 
 void
@@ -871,15 +871,11 @@ gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
 	g_return_val_if_fail (file_name_to_convert != NULL, NULL);
 
 	if (g_path_is_absolute(file_name_to_convert))
-	{
 		file_name_in = g_strdup (file_name_to_convert);
-	}
 	else
-	{
 		file_name_in = g_strdup_printf ("%s/%s",
 						g_get_current_dir(),
 						file_name_to_convert);
-	}
 
 	file_name_in_length = strlen (file_name_in);
 	file_name_out = g_malloc (file_name_in_length + 1);
@@ -894,8 +890,8 @@ gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
 			if (i < file_name_in_length-1)
 				if (file_name_in[i+2] == '/')
 				{
-					i+=2;
 					/* Remove the last directory in file_name_out */
+					i+=2;
 					j--;
 					while (file_name_out [j-1] != '/')
 						j--;
@@ -919,3 +915,4 @@ gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
 	return file_name_out;
 
 } 
+

@@ -11,11 +11,11 @@
 #include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
-#include <sys/stat.h> 
 
 #include "document.h"
 #include "plugin.h"
 #include "window.h"
+#include "utils.h"
 
 static GtkWidget *from_entry, *subject_entry, *to_entry;
 static gchar *mailer_location;
@@ -32,6 +32,15 @@ email_finish (GtkWidget *w, gpointer data)
 	gnome_dialog_close (GNOME_DIALOG (w));
 }
 
+/**
+ * gedit_plugin_email_sendmail_location_dialog:
+ * @void: 
+ * 
+ * it displays and pop-up a dialog so that the user can specify a
+ * location for sendmail.
+ * 
+ * Return Value: a string with the path specified by the user
+ **/
 static gchar *
 gedit_plugin_email_sendmail_location_dialog (void)
 {
@@ -77,71 +86,6 @@ gedit_plugin_email_sendmail_location_dialog (void)
 	return location;
 }
 
-typedef enum {
-	GEDIT_PROGRAM_NO_ERROR,
-	GEDIT_PROGRAM_NOT_EXISTS,
-	GEDIT_PROGRAM_IS_DIRECTORY,
-	GEDIT_PROGRAM_IS_INSIDE_DIRECTORY,
-	GEDIT_PROGRAM_NOT_EXECUTABLE
-} GeditProgramErrors;
-
-/**
- * gedit_is_program:
- * @program: 
- * @default_name: 
- * 
- * Verifies is "*program" is actualy a progam and returns a enum with the result.
- * if "*program" is a directory "*default_name" is searched for in that directory
- *
- * Return Value: 
- **/
-static gint
-gedit_is_program (gchar * program, gchar* default_name)
-{
-	struct stat stats;
-
-	if ( !program || strlen(program)==0 ||
-	     !g_file_exists(program))
-		return GEDIT_PROGRAM_NOT_EXISTS;
-
-	if (stat(program, &stats))
-		return GEDIT_PROGRAM_NOT_EXECUTABLE;
-	
-	if (S_ISDIR(stats.st_mode))
-	{
-		gchar * program_from_dir = NULL;
-
-		if (program [strlen(program)-1] == '/')
-			program_from_dir = g_strdup_printf ("%s%s", program, default_name);
-		else
-			program_from_dir = g_strdup_printf ("%s/%s", program, default_name);
-
-		if ( !program_from_dir || strlen(program_from_dir)==0 ||
-		     !g_file_exists(program_from_dir))
-		{
-			g_free (program_from_dir);
-			return GEDIT_PROGRAM_IS_DIRECTORY;
-		}
-		if (stat(program_from_dir, &stats))
-		{
-			g_free (program_from_dir);
-			return GEDIT_PROGRAM_NOT_EXISTS;
-		}
-		if (!(S_IXUSR & stats.st_mode))
-		{
-			g_free (program_from_dir);
-			return GEDIT_PROGRAM_NOT_EXECUTABLE;
-		}
-		g_free (program_from_dir);
-		return GEDIT_PROGRAM_IS_INSIDE_DIRECTORY;
-	}
-
-	if (!(S_IXUSR & stats.st_mode))
-		return GEDIT_PROGRAM_NOT_EXECUTABLE;
-
-	return GEDIT_PROGRAM_NO_ERROR;
-}
-
 static gchar*
 gedit_plugin_email_get_sendmail (void)
 {
@@ -153,7 +97,7 @@ gedit_plugin_email_get_sendmail (void)
 
 	/* If there was a program in the config, but it is no good. Clear "sendmail" */
 	if (sendmail)
-		if (gedit_is_program (sendmail, "sendmail") != GEDIT_PROGRAM_NO_ERROR)
+		if (gedit_utils_is_program (sendmail, "sendmail") != GEDIT_PROGRAM_OK)
 		{
 			g_free (sendmail);
 			sendmail = NULL;
@@ -161,7 +105,7 @@ gedit_plugin_email_get_sendmail (void)
 			gnome_config_sync ();
 		}
 
-	/* If we have no 1st choice yet get from path */
+	/* If we have no 1st choice yet, get from path */
 	if (!sendmail)
 		sendmail = g_strdup (gnome_is_program_in_path ("sendmail"));
 
@@ -185,7 +129,7 @@ gedit_plugin_email_get_mailer_location (void)
 	sendmail = gedit_plugin_email_get_sendmail ();
 	
 	/* While "sendmail" is not valid, display error messages */
-	while ((error_code = gedit_is_program (sendmail, "sendmail"))!=GEDIT_PROGRAM_NO_ERROR)
+	while ((error_code = gedit_utils_is_program (sendmail, "sendmail"))!=GEDIT_PROGRAM_OK)
 	{
 		gchar *message = NULL;
 		gchar *message_full;
@@ -206,12 +150,11 @@ gedit_plugin_email_get_mailer_location (void)
 			g_free (message);
 			continue;
 		}
-
 		else if (error_code == GEDIT_PROGRAM_NOT_EXISTS)
 			message = g_strdup_printf (_("'%s' doesn't seem to exist.\n\n"), sendmail);
 		else if (error_code == GEDIT_PROGRAM_IS_DIRECTORY)
 			message = g_strdup_printf (_("'%s' seems to be a directory.\n"
-						     "And 'sendmail' could not be found inside it.\n\n"), sendmail);
+						     "but 'sendmail' could not be found inside it.\n\n"), sendmail);
 		else if (error_code == GEDIT_PROGRAM_NOT_EXECUTABLE)
 			message = g_strdup_printf (_("'%s' doesn't seem to be a program.\n\n"), sendmail);
 		else
@@ -242,7 +185,7 @@ gedit_plugin_email_get_mailer_location (void)
 	return sendmail;
 }
 
-/* the function that actually does the wrok */
+/* the function that actually does the work */
 static void
 email_clicked (GtkWidget *w, gint button, gpointer data)
 {

@@ -49,6 +49,7 @@
     was not found. /come/chema... v.s. /home/chema...
 [X] fix the problem with changing undo levels. When reducing the size of the undo
     levels the undo stack becomes a mess.   
+[X] if you click apply to the prefs box and there aren't any docs open, gedit crashes
 [~] check for the existence of sendmail and of diff. If they are
     not found ask the user for the location and set it in settings->sendmail
     & settings->diff. Same thing for the browse plugin [lynx]
@@ -58,8 +59,8 @@
 [ ] set sensitivity of the menu/toolbar items that needs a file opened to work.
     In the toolbars -> save, close, print, cut, copy, past, search, get_lines,
     In the menus -> save, save as, save all, revert, print, print_preview, close, close_all
-    we need a GList for all this widgets. The problem is that for MDI_MODE = toplevel, we
-    need a list for each view.
+    we need a GList for all this widgets. 
+[ ] if there aren't any docs and the status bar is turned on, it does not appear.
 
 
 *** Chema maybe ***
