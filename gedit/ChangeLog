@@ -1,6 +1,14 @@
 1998-08-06  Chris Lahey  <clahey@umich.edu>
 
 	* plugin.h: 
+	* plugin.c (process_next): 
+	the plugin_document_close function is now required to return a
+	bool based on whether the document actually closed.  Returns TRUE
+	if the plugin actually closed.
+
+1998-08-06  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h: 
 	* plugin.c: Added a document_close function to the API.
 
 1998-07-29  Alex Roberts  <bse@dial.pipex.com>

@@ -437,8 +437,10 @@ process_next( plugin *plug, gchar *buffer, int length, gpointer data )
     case 17:
       if ( plug->callbacks.document.close )
 	{	
-	  plug->callbacks.document.close( *( (int *) buffer ) );
+	  plugin_send_data_bool( plug, plug->callbacks.document.close( *( (int *) buffer ) ) );
 	}
+      else
+	plugin_send_data_bool( plug, FALSE );
       plugin_get_all( plug, 1, process_command, NULL );
       break;  
     }

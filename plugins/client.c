@@ -217,10 +217,12 @@ gint client_document_open( gint context, gchar *title )
   return getnumber( fddata );
 }
 
-void client_document_close( gint docid )
+/* Returns true if document was actually closed. */
+gboolean client_document_close( gint docid )
 {
   sendcommand( 'l', fdsend );
   sendnumber( fdsend, docid );
+  return getbool( fddata );
 }
 
 void client_text_append( gint docid, gchar *buff, gint length )

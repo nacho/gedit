@@ -1,5 +1,11 @@
 1998-08-06  Chris Lahey  <clahey@umich.edu>
 
+	* client.c (client_document_close): 
+	* client.h: client_document_close returns a value based on whether
+	the document was actually closed.  Returns true if it was closed.
+
+1998-08-06  Chris Lahey  <clahey@umich.edu>
+
 	* client.h: 
 	* client.c: Added a document_close function.
 	Added a bunch of checks during writing data.
