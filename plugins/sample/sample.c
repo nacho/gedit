@@ -24,7 +24,7 @@ destroy_plugin (PluginData *pd)
 static void
 insert_hello (void)
 {
-	View *view = gedit_view_current();
+	View *view = gedit_view_active();
 
 	if (!view)
 	     return;

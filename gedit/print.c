@@ -572,7 +572,7 @@ print_set_pji (PrintJobInfo * pji, Document *doc)
 	if (!gedit_print_verify_fonts())
 		return FALSE;
 
-	pji->view = gedit_view_current();
+	pji->view = gedit_view_active();
 	pji->doc = doc;
 	pji->buffer_size = gtk_text_get_length(GTK_TEXT(pji->view->text));
 	pji->buffer = gedit_document_get_buffer (doc);

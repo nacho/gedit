@@ -1,3 +1,20 @@
+2000-06-19  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_refresh_all): fix the bug in which the toolbars will
+	no get loaded when the mdi_mode is changed.
+
+2000-06-18  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_check_size): fix the bug that messed the undo stack when reducing
+	the number of undo levels in the prefs. We need to remove elements from the bottom
+	up, since the list length is changed every time we removed an element from the top.
+
+	* document.c (gedit_document_swap_hc_cb): kill bug
+
+	* view.c (gedit_view_load_toolbar_widgets): unshade/shade the undo&redo menu items
+	too
+	(gedit_view_set_undo): ditto
+
 2000-06-18  Chema Celorio  <chema@celorio.com>
 
 	* window.c (gedit_window_set_toolbar_labels): fix the problem in which the

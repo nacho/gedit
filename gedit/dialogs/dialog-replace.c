@@ -87,7 +87,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		return;
 	}
 
-	view = gedit_view_current();
+	view = gedit_view_active();
 
 	g_return_if_fail (view!=NULL);
 

@@ -226,19 +226,12 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 	
 	gedit_debug("", DEBUG_PREFS);
 
-	/* Set the toolbar and the status bar for each window. (mdi_mode = toplevel); */
-	for (n = 0; n < g_list_length (mdi->windows); n++)
-	{
-		nth_app = GNOME_APP (g_list_nth_data (mdi->windows, n));
-		gedit_window_set_status_bar (nth_app);
-		gedit_window_set_toolbar_labels (nth_app);
-	}
-
 	/* Set mdi mode */
 	if (mdi_mode_changed)
 	{
 		gnome_mdi_set_mode (mdi, settings->mdi_mode);
 	}
+
 	tab_pos (settings->tab_pos);
 
 	/* Set style and font for each children */
@@ -257,21 +250,33 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 	for (n = 0; n < g_list_length (mdi->children); n++)
 	{
 		nth_doc = DOCUMENT (g_list_nth_data (mdi->children, n));
-		gedit_document_set_undo (nth_doc, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
-
 		for (m = 0; m < g_list_length (nth_doc->views); m++)
 		{
-			mth_view = g_list_nth_data (nth_doc->views, m);
+			mth_view = VIEW (g_list_nth_data (nth_doc->views, m));
+			/* WE NEED TO SET VIEW->APP FIRST !!!!!!!!!!!!!! */
+			if (mdi_mode_changed)
+			{
+				gtk_widget_grab_focus (mth_view->text);
+				mth_view->app = gedit_window_active_app();
+				gedit_view_load_widgets (mth_view);
+			}
+			gedit_view_set_undo (mth_view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
 			gedit_view_set_word_wrap (mth_view, settings->word_wrap);
 			gtk_widget_set_style (GTK_WIDGET (mth_view->text),
 					      style);
 			gedit_view_set_font (mth_view, settings->font);
-			if (mdi_mode_changed)
-				gedit_view_load_toolbar_widgets (mth_view);
 #ifdef ENABLE_SPLIT_SCREEN
 			gedit_view_set_split_screen ( mth_view, (gint) settings->splitscreen);
 #endif	
 		}
 	}
+	/* Set the toolbar and the status bar for each window. (mdi_mode = toplevel); */
+	for (n = 0; n < g_list_length (mdi->windows); n++)
+	{
+		nth_app = GNOME_APP (g_list_nth_data (mdi->windows, n));
+		gedit_window_set_status_bar (nth_app);
+		gedit_window_set_toolbar_labels (nth_app);
+	}
+
 
 }

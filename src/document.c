@@ -417,7 +417,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 
 	gedit_debug ("start", DEBUG_DOCUMENT);
 	
-	if (!gedit_view_current())
+	if (!gedit_view_active())
 	{
 		gedit_debug ("returning, since views. are NULL", DEBUG_DOCUMENT);
 		return TRUE;
@@ -675,12 +675,20 @@ gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
 
 	new_file_name = NULL;
 	len = strlen (doc->filename);
-	
+
 	while (len)
 	{
 		if (doc->filename[len] == '.')
 			break;
 		len--;
+	}
+
+	if (len == 0)
+	{
+		gchar *errstr = g_strdup (_("This file does not end with a valid extension\n"));
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
+		return;
 	}
 
 	len++;
@@ -760,11 +768,11 @@ gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state)
 	
 	gedit_debug ("", DEBUG_DOCUMENT);
 	
-	g_return_if_fail (doc!=NULL);
+	g_return_if_fail (IS_GE_DOCUMENT(doc));
 
 	for ( n=0; n < g_list_length (doc->views); n++)
 	{
-		nth_view = g_list_nth_data (doc->views, n);
+		nth_view = VIEW (g_list_nth_data (doc->views, n));
 		gedit_view_set_undo (nth_view, undo_state, redo_state);
 	}
 }

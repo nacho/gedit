@@ -35,41 +35,14 @@ typedef struct _GeditToolbar GeditToolbar;
 
 struct _GeditToolbar
 {
-	/*
-	GtkWidget *new_button;
-	GtkWidget *open_button;
-	GtkWidget *save_button;
-	GtkWidget *close_button;
-	GtkWidget *print_button;
-	*/
 	GtkWidget *undo_button;
 	GtkWidget *redo_button;
-	/*
-	GtkWidget *cut_button;
-	GtkWidget *copy_button;
-	GtkWidget *paste_button;
-	GtkWidget *find_button;
-	GtkWidget *info_button;
-	GtkWidget *exit_button;
-	*/
 
-	/*
-	gint new : 1;
-	gint open : 1;
-	gint save : 1;
-	gint close : 1;
-	gint print : 1;
-	*/
-	gint undo : 1;
-	gint redo : 1;
-	/*
-	gint cut : 1;
-	gint copy : 1;
-	gint paste : 1;
-	gint find : 1;
-	gint info : 1;
-	gint exit : 1;
-	*/
+	GtkWidget *undo_menu_item;
+	GtkWidget *redo_menu_item;
+
+	gint undo;
+	gint redo;
 };
 
 struct _View
@@ -124,7 +97,7 @@ void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
 /* General utils */
 guint	   	gedit_view_get_type	(void);
 GtkWidget*	gedit_view_new		(Document *doc);
-View *		gedit_view_current	(void);
+View *		gedit_view_active	(void);
 
 /* View settings */
 void	gedit_view_set_font		(View *view, gchar *font);
@@ -148,7 +121,7 @@ void	gedit_view_set_position		(View *view, gint pos);
 guint	gedit_view_get_position		(View *view);
 
 /* toolbar */
-void	gedit_view_load_toolbar_widgets (View *view);
+void	gedit_view_load_widgets (View *view);
 void	gedit_view_set_undo (View *view, gint undo_state, gint redo_state);
 
 

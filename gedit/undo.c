@@ -58,7 +58,7 @@ gedit_undo_check_size (Document *doc)
 	   since the undo list gets freed on any call to gedit_undo_add */
 	if (g_list_length (doc->undo) > settings->undo_levels && settings->undo_levels > 0)
 	{
-		for (n=settings->undo_levels; n < g_list_length (doc->undo); n++)
+		for (n=g_list_length (doc->undo)-1; n >= settings->undo_levels;  n--)
 		{
 			nth_undo = g_list_nth_data (doc->undo, n);
 			doc->undo = g_list_remove (doc->undo, nth_undo);
@@ -114,7 +114,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 		return;
 
 	if (view==NULL)
-		view = gedit_view_current ();
+		view = gedit_view_active ();
 	
 	undo = g_new (GeditUndoInfo, 1);
 	undo->text = g_strdup (text);
@@ -313,11 +313,11 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 	doc->undo = g_list_remove (doc->undo, undo);
 
 	/* Check if there is a selection active */
-	if (gedit_view_get_selection (gedit_view_current(), NULL, NULL))
-		gedit_view_set_selection (gedit_view_current(), 0, 0);
+	if (gedit_view_get_selection (gedit_view_active(), NULL, NULL))
+		gedit_view_set_selection (gedit_view_active(), 0, 0);
 	
 	/* Move the view (scrollbars) to the correct position */
-	gedit_view_set_window_position (gedit_view_current(), undo->window_position);
+	gedit_view_set_window_position (gedit_view_active(), undo->window_position);
 
 	switch (undo->action){
 	case GEDIT_UNDO_ACTION_DELETE:
@@ -382,11 +382,11 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	doc->redo = g_list_remove (doc->redo, redo);
 
 	/* Check if there is a selection active */
-	if (gedit_view_get_selection (gedit_view_current(), NULL, NULL))
-		gedit_view_set_selection (gedit_view_current(), 0, 0);
+	if (gedit_view_get_selection (gedit_view_active(), NULL, NULL))
+		gedit_view_set_selection (gedit_view_active(), 0, 0);
 
 	/* Move the view to the right position. */
-	gedit_view_set_window_position (gedit_view_current(), redo->window_position);
+	gedit_view_set_window_position (gedit_view_active(), redo->window_position);
 				  
 	switch (redo->action){
 	case GEDIT_UNDO_ACTION_INSERT:

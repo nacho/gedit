@@ -132,7 +132,7 @@ edit_cut_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 
-	gtk_editable_cut_clipboard (gedit_editable_current());
+	gtk_editable_cut_clipboard (gedit_editable_active());
 
 	gnome_app_flash (gedit_window_active_app(), MSGBAR_CUT);
 }
@@ -143,7 +143,7 @@ edit_copy_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 		
-	gtk_editable_copy_clipboard (gedit_editable_current());
+	gtk_editable_copy_clipboard (gedit_editable_active());
 
 	gnome_app_flash (gedit_window_active_app(), MSGBAR_COPY);
 }
@@ -154,7 +154,7 @@ edit_paste_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 
-	gtk_editable_paste_clipboard (gedit_editable_current());
+	gtk_editable_paste_clipboard (gedit_editable_active());
 
 	gnome_app_flash (gedit_window_active_app(), MSGBAR_PASTE);
 }
@@ -167,7 +167,7 @@ edit_selall_cb (GtkWidget *widget, gpointer data)
 	if (doc == NULL)
 		return;
 	
-	gtk_editable_select_region (gedit_editable_current(), 0,
+	gtk_editable_select_region (gedit_editable_active(), 0,
 				    gedit_document_get_buffer_length(doc));
 
 	gnome_app_flash (gedit_window_active_app(), MSGBAR_SELECT_ALL);
@@ -177,7 +177,7 @@ edit_selall_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
-	View *view = gedit_view_current();
+	View *view = gedit_view_active();
 
 	if (!gedit_document_current())
 		return;
@@ -188,7 +188,7 @@ options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	View *view = gedit_view_current();
+	View *view = gedit_view_active();
 	
 	if (!gedit_document_current())
 		return;

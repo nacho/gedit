@@ -110,11 +110,11 @@ shell_output_scan_text (GtkWidget *w , gpointer data)
 		g_free ( buffer_in ) ;
 	}
 	
-	position = gedit_view_get_position (gedit_view_current ());
+	position = gedit_view_get_position (gedit_view_active ());
 	 
 	gedit_document_insert_text (doc, buffer_out->str , position , TRUE);
 
-	gedit_view_set_position (gedit_view_current (), position + buffer_out->len);
+	gedit_view_set_position (gedit_view_active (), position + buffer_out->len);
 			
 	gnome_dialog_close (GNOME_DIALOG (dialog));
 

@@ -88,7 +88,7 @@ gedit_search_start (void)
 {
 	gedit_debug("", DEBUG_SEARCH);
 
-	gedit_search_info.view = gedit_view_current();
+	gedit_search_info.view = gedit_view_active();
 	gedit_search_info.doc = gedit_document_current();
 	gedit_search_info.original_readonly_state = gedit_search_info.view->readonly;
 
@@ -235,7 +235,7 @@ find_again_execute (void)
 	View *view;
 	gint case_sensitive;
 
-	view = gedit_view_current();
+	view = gedit_view_active();
 	if (view == NULL)
 		return;
 
@@ -341,7 +341,7 @@ search_text_execute ( gulong starting_position,
 
 	*pos_found = p2 - text_length;
 
-	if (gedit_view_current() != gedit_search_info.view)
+	if (gedit_view_active() != gedit_search_info.view)
 		g_warning("View is not the same !!!!!!!!!!!! search.c");
 
 	return TRUE;

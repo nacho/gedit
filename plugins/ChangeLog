@@ -1,3 +1,16 @@
+2000-06-19  Chema Celorio  <chema@celorio.com>
+
+	* email/email.c (gedit_plugin_email_sendmail_location_dialog): check for the location
+	of sendmail before using the plugin. If sendmail is not found, display a dialog box
+	so that sendmail could be located.
+
+	* sendmail.glade: new file
+	* sendmail.glade.h : new file
+
+	* time/time.c: use view_active not view_current
+	* sample/sample.c (insert_hello): ditto
+	* shell_output/shell_output.c (shell_output_scan_text): ditto
+
 2000-06-18  Chema Celorio  <chema@celorio.com>
 
 	* sample/Makefile.am (INCLUDES): ditto

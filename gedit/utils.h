@@ -122,7 +122,7 @@ static const struct poptOption options[] =
 	{NULL, '\0', 0, NULL, 0}
 };
 
-#define gedit_editable_current() GTK_EDITABLE(VIEW (gedit_view_current())->text)
+#define gedit_editable_active() GTK_EDITABLE(VIEW (gedit_view_active())->text)
 
 void	gedit_flash     (gchar *msg);
 void	gedit_flash_va  (gchar *format, ...);
