@@ -392,6 +392,12 @@ end_element_handler (GMarkupParseContext *context,
 
 	switch (peek_state (info)) {
 		case STATE_RECENT_ITEM:
+			if ((info->current_item->mime_type == NULL) && 
+			    !info->current_item->mime_type_is_explicit)
+			{
+				egg_recent_item_set_mime_type (info->current_item, NULL);
+			}
+
 			info->items = g_list_append (info->items,
 						    info->current_item);
 			if (info->current_item->uri == NULL ||
@@ -422,7 +428,17 @@ text_handler (GMarkupParseContext *context,
 		case STATE_GROUPS:
 		break;
 		case STATE_URI:
-			egg_recent_item_set_uri (info->current_item, text);
+		{
+			if ((info->current_item->mime_type == NULL) &&
+ 			    !info->current_item->mime_type_is_explicit)
+			{
+				info->current_item->mime_type_is_explicit = TRUE;
+				egg_recent_item_set_uri (info->current_item, text);
+				info->current_item->mime_type_is_explicit = FALSE;
+			}
+			else
+				egg_recent_item_set_uri (info->current_item, text);
+		}
 		break;
 		case STATE_MIME_TYPE:
 			egg_recent_item_set_mime_type (info->current_item,

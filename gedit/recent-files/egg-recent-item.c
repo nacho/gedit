@@ -186,7 +186,10 @@ egg_recent_item_update_mime_type (EggRecentItem *item)
 		item->mime_type = NULL;
 
 		if (item->uri)
+		{
+			/* g_print ("Get mime-type for %s\n", item->uri); */
 			item->mime_type = gnome_vfs_get_mime_type (item->uri);
+		}
 
 		if (!item->mime_type)
 			item->mime_type = g_strdup (GNOME_VFS_MIME_TYPE_UNKNOWN);
