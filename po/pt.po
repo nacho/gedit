@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-08-17 17:44+0100\n"
-"PO-Revision-Date: 2002-08-17 17:45+0100\n"
+"POT-Creation-Date: 2002-08-26 11:17+0100\n"
+"PO-Revision-Date: 2002-08-26 11:25+0100\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese pt <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -39,11 +39,11 @@ msgstr ""
 
 #: data/gedit.schemas.in.h:2
 msgid "Auto Save"
-msgstr "Auto Gravação"
+msgstr "Gravação Automática"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Save Interval"
-msgstr "Intrevalo de Auto Gravação"
+msgstr "Intrevalo de Gravação Automática"
 
 #: data/gedit.schemas.in.h:4
 msgid "Background Color"
@@ -95,7 +95,7 @@ msgid ""
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
 "Extensão ou sufixo a utilizar para nomes de ficheiros de segurança. Apenas "
-"terá efeito de a opção \"Criar Cópias de Segurança\" estiver activo."
+"terá efeito se a opção \"Criar Cópias de Segurança\" estiver activa."
 
 #: data/gedit.schemas.in.h:14
 msgid ""
@@ -149,7 +149,7 @@ msgid ""
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
 "Número de minutos após os quais o gedit irá automaticamente gravar os "
-"ficheiros modificados. Apenas terá efeito se a opção \"Auto Gravação\" "
+"ficheiros modificados. Apenas terá efeito se a opção \"Gravação Automática\" "
 "estiver activa."
 
 #: data/gedit.schemas.in.h:23
@@ -190,7 +190,7 @@ msgid ""
 msgstr ""
 "Especifica como quebrar linhas longas para impressão. Utilize \"GTK_WRAP_NONE"
 "\" para nenhuma quebra, \"GTK_WRAP_WORD\" para quebrar nos limites das "
-"palavras e \"GTK_WRAP_CHAR\" para quebrar nos limites de caracteres "
+"palavras e \"GTK_WRAP_CHAR\" para quebrar nos limites dos caracteres "
 "individuais. Note que os valores são sensíveis à capitalização, pelo que se "
 "deverá certificar de que aparecem exactamente como aqui mencionados."
 
@@ -204,7 +204,7 @@ msgid ""
 msgstr ""
 "Especifica como quebrar linhas longas na área de edição. Utilize "
 "\"GTK_WRAP_NONE\" para nenhuma quebra, \"GTK_WRAP_WORD\" para quebrar nos "
-"limites das palavras e \"GTK_WRAP_CHAR\" para quebrar nos limites de "
+"limites das palavras e \"GTK_WRAP_CHAR\" para quebrar nos limites dos "
 "caracteres individuais. Note que os valores são sensíveis à capitalização, "
 "pelo que se deverá certificar de que aparecem exactamente como aqui "
 "mencionados."
@@ -330,7 +330,7 @@ msgid ""
 msgstr ""
 "Se o gedit deverá gravar automaticamente após um determinado intrevalo os "
 "ficheiros modificados. Pode definir o intrevalo de tempo com a opção "
-"\"Intrevalo de Auto Gravação\"."
+"\"Intrevalo de Gravação Automática\"."
 
 #: data/gedit.schemas.in.h:48
 msgid ""
@@ -389,7 +389,7 @@ msgid ""
 msgstr ""
 "Se deverão ser utilizadas as cores por omissão do sistema para a área de "
 "edição. Se esta opção estiver desligada, as cores da área de edição serão as "
-"especificadas nas opções \"Cor de Fundo\", \"Cor do Texto\", \"Cor do Tetxo "
+"especificadas nas opções \"Cor de Fundo\", \"Cor do Texto\", \"Cor do Texto "
 "Seleccionado\" e \"Cor de Selecção\"."
 
 #: data/gedit.schemas.in.h:56
@@ -441,7 +441,7 @@ msgstr "Este plugin mostra uma janela de popup que contém uma Tabela ASCII."
 
 #: plugins/ASCII/ascii.c:526
 msgid "Copyright (C) 2001-2002 Paolo Maggi"
-msgstr "Copyright (C) 2001-20022 Paolo Maggi"
+msgstr "Copyright (C) 2001-2002 Paolo Maggi"
 
 #: plugins/ASCII/asciitable.glade2.h:1
 msgid ""
@@ -482,33 +482,33 @@ msgstr "Um plugin que abre ChangeLogs encontrados em mensagens de CVS commit."
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright (C) 2002 - James Willcox"
 
-#: plugins/diff/diff.c:61
+#: plugins/diff/diff.c:62
 msgid "Co_mpare Files..."
 msgstr "Co_mparar Ficheiros..."
 
-#: plugins/diff/diff.c:64
+#: plugins/diff/diff.c:65
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 "Gera um ficheiro com as diferenças (diff) entre dois documentos ou ficheiros"
 
-#: plugins/diff/diff.c:66
+#: plugins/diff/diff.c:67
 msgid "Compare files"
 msgstr "Comparar ficheiros"
 
 #. Create the dialog
-#: plugins/diff/diff.c:267
+#: plugins/diff/diff.c:268
 msgid "Compare two files..."
 msgstr "Comparar dois ficheiros..."
 
-#: plugins/diff/diff.c:281
+#: plugins/diff/diff.c:282
 msgid "C_ompare"
 msgstr "C_omparar"
 
-#: plugins/diff/diff.c:502
+#: plugins/diff/diff.c:503
 msgid "The two documents you selected are the same."
 msgstr "Os dois documentos seleccionados são idênticos."
 
-#: plugins/diff/diff.c:510
+#: plugins/diff/diff.c:511
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -516,9 +516,9 @@ msgid ""
 msgstr ""
 "O \"primeiro\" ficheiro que seleccionou não existe.\n"
 "\n"
-"Por favor indique um ficheiro válido."
+"Indique um ficheiro válido."
 
-#: plugins/diff/diff.c:519
+#: plugins/diff/diff.c:520
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -526,22 +526,22 @@ msgid ""
 msgstr ""
 "O \"segundo\" ficheiro que seleccionou não existe.\n"
 "\n"
-"Por favor indique um ficheiro válido."
+"Indique um ficheiro válido."
 
-#: plugins/diff/diff.c:527
+#: plugins/diff/diff.c:528
 msgid "The two files you selected are the same."
 msgstr "Os dois documentos seleccionados são idênticos."
 
-#: plugins/diff/diff.c:544
+#: plugins/diff/diff.c:546
 msgid "The \"first\" document contains no text."
 msgstr "O \"primeiro\" documento está vazio."
 
-#: plugins/diff/diff.c:573
+#: plugins/diff/diff.c:581
 msgid "The \"second\" document contains no text."
 msgstr "O \"segundo\" documento está vazio."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:594
+#: plugins/diff/diff.c:607
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -551,7 +551,7 @@ msgstr ""
 "\n"
 "gedit foi incapaz de criar o ficheiro temporário."
 
-#: plugins/diff/diff.c:612 plugins/diff/diff.c:625
+#: plugins/diff/diff.c:625 plugins/diff/diff.c:638
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -561,11 +561,11 @@ msgstr ""
 "\n"
 "Erro ao executar o comando diff."
 
-#: plugins/diff/diff.c:647
+#: plugins/diff/diff.c:660
 msgid "No differences were found between the selected documents."
 msgstr "Não foram encontradas diferenças entre os documentos seleccionados."
 
-#: plugins/diff/diff.c:688
+#: plugins/diff/diff.c:701
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
@@ -575,7 +575,7 @@ msgstr ""
 "\n"
 "O resultado contém dados UTF-8 inválidos."
 
-#: plugins/diff/diff.c:912
+#: plugins/diff/diff.c:925
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
@@ -584,10 +584,10 @@ msgstr ""
 "Gera um ficheiro de diferenças (diff) entre dois documentos ou ficheiros em "
 "disco.\n"
 "\n"
-"Para mais informações sobre o \"diff\", tecle \"man diff\" numa linha de "
+"Para mais informações sobre o \"diff\", escreva \"man diff\" numa linha de "
 "comando.\n"
 
-#: plugins/diff/diff.c:915
+#: plugins/diff/diff.c:928
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
@@ -752,8 +752,8 @@ msgid "gedit: Document Info plugin"
 msgstr "gedit: plugin Informação Documento"
 
 #: plugins/sample/sample.c:43
-msgid "Insert User _Name"
-msgstr "Inserir _Nome Utilizador"
+msgid "Insert User Na_me"
+msgstr "Inserir No_me Utilizador"
 
 #: plugins/sample/sample.c:46
 msgid "Insert the user name at the cursor position"
@@ -839,11 +839,11 @@ msgstr "Plugin lista etiquetas"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:154
 msgid "Select the group of tab you want to use"
-msgstr "Seleccione o grupo de pastas que quer utilizar"
+msgstr "Seleccione o grupo de etiquetas que quer utilizar"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:176
 msgid "Tag Groups Combo"
-msgstr "Combo de Grupos de Pastas"
+msgstr "Combo de Grupos de Etiquetas"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:178
 msgid "Tags Name List"
@@ -881,8 +881,8 @@ msgstr ""
 "num documento expressões muito utilizadas sem ter de as escrever."
 
 #: plugins/time/time.c:45
-msgid "_Insert Date/Time"
-msgstr "_Inserir Data/Hora"
+msgid "In_sert Date/Time"
+msgstr "In_serir Data/Hora"
 
 #: plugins/time/time.c:48
 msgid "Insert current date and time at the cursor position"
@@ -1157,7 +1157,8 @@ msgstr " linha(s)"
 
 #: src/dialogs/gedit-preferences.glade2.h:4
 msgid "Always use UTF-8 encoding (faster) when creating a new file"
-msgstr "Utilizar sempre codificação UTF-8 (mais rápido) ao criar um novo ficheiro"
+msgstr ""
+"Utilizar sempre codificação UTF-8 (mais rápido) ao criar um novo ficheiro"
 
 #: src/dialogs/gedit-preferences.glade2.h:5
 msgid "Always use UTF-8 encoding (faster) when saving"
@@ -1206,7 +1207,7 @@ msgstr "Definir a cor de fundo"
 
 #: src/dialogs/gedit-preferences.glade2.h:17
 msgid "Pick the selected text color"
-msgstr "Definir a cor de texto seleccionada"
+msgstr "Definir a cor de texto seleccionado"
 
 #: src/dialogs/gedit-preferences.glade2.h:18
 msgid "Pick the selection color"
@@ -1246,7 +1247,7 @@ msgstr "Definir largura dos se_paradores equivalente a  "
 
 #: src/dialogs/gedit-preferences.glade2.h:29
 msgid "Set limit on _undo actions to"
-msgstr "Definir o limite de passos a desfa_zer para"
+msgstr "Definir o limite de acções de desfa_zer para"
 
 #: src/dialogs/gedit-preferences.glade2.h:31
 msgid ""
@@ -1295,7 +1296,7 @@ msgstr ""
 #: src/dialogs/gedit-preferences.glade2.h:37
 msgid "The tabs settings let you customize the tabs width."
 msgstr ""
-"As definições de pastas permitem-lhe customizar a largura dos separadores."
+"As definições de abas permitem-lhe customizar a largura das abas."
 
 #: src/dialogs/gedit-preferences.glade2.h:38
 msgid ""
@@ -1317,23 +1318,24 @@ msgstr "Utilizar core_s de tema de defeito"
 
 #: src/dialogs/gedit-preferences.glade2.h:41
 msgid "U_se original file encoding if possible"
-msgstr "Utilizar a codificação original do ficheiro _se possível"
+msgstr "_Se possível, utilizar a codificação original do ficheiro"
 
 #: src/dialogs/gedit-preferences.glade2.h:43
 msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Utiliza_r codificação de local actual se possível"
+msgstr "Se possível, utiliza_r codificação de local actual"
 
 #: src/dialogs/gedit-preferences.glade2.h:44
 msgid "Use current _locale's encoding if possible"
-msgstr "Utilizar codificação de _local actual se possível"
+msgstr "Se possível, utilizar codificação de _local actual"
 
 #: src/dialogs/gedit-preferences.glade2.h:45
 msgid "Use current locale's encoding if possible when creating a new file"
-msgstr "Utilizar codificação de local actual, se possível, ao criar um novo ficheiro"
+msgstr ""
+"Se possível, utilizar codificação de local actual ao criar um novo ficheiro"
 
 #: src/dialogs/gedit-preferences.glade2.h:46
 msgid "Use current locale's encoding if possible when saving"
-msgstr "Utilizar codificação de local actual, se possível, ao gravar"
+msgstr "Se possível, utilizar codificação de local actual ao gravar"
 
 #: src/dialogs/gedit-preferences.glade2.h:47
 msgid "When creating a new file..."
@@ -1377,7 +1379,7 @@ msgstr "_Nunca quebrar linhas"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
 msgid "_Restore default fonts"
-msgstr "_Repor fontes de defeito"
+msgstr "_Repor fontes por omissão"
 
 #: src/dialogs/gedit-preferences.glade2.h:59
 msgid "_Text color:"
@@ -1385,7 +1387,7 @@ msgstr "Cor do _texto:"
 
 #: src/dialogs/gedit-preferences.glade2.h:60
 msgid "_Use default theme font"
-msgstr "_Utilizar fonte do tema de defeito"
+msgstr "_Utilizar fonte do tema por omissão"
 
 #: src/dialogs/gedit-preferences.glade2.h:61
 msgid "action(s)"
@@ -1397,19 +1399,19 @@ msgstr "minutos"
 
 #: src/dialogs/gnome-print-font-dialog.c:107
 msgid "_Insert a new preview phrase."
-msgstr "_Inserir nova frase de previsão."
+msgstr "_Inserir nova frase de antevisão."
 
 #: src/dialogs/gnome-print-font-dialog.c:113
 msgid "Modify preview phrase..."
-msgstr "Modificar frase de previsão..."
+msgstr "Modificar frase de antevisão..."
 
 #: src/dialogs/gnome-print-font-dialog.c:167
 msgid "Preview"
-msgstr "Prever"
+msgstr "Antever"
 
 #: src/dialogs/gnome-print-font-dialog.c:180
 msgid "_Modify preview phrase..."
-msgstr "_Modificar frase de previsão..."
+msgstr "_Modificar frase de antevisão..."
 
 #: src/dialogs/gnome-print-font-dialog.c:243
 msgid "Font Selection"
@@ -1445,11 +1447,11 @@ msgstr "Nome da fonte seleccionada"
 
 #: src/dialogs/gnome-print-font-picker.c:206
 msgid "Preview text"
-msgstr "Prever texto"
+msgstr "Texto antevisão"
 
 #: src/dialogs/gnome-print-font-picker.c:207
 msgid "Preview text shown in the dialog"
-msgstr "Prever o texto apresentado no diálogo"
+msgstr "Antever o texto apresentado no diálogo"
 
 #: src/dialogs/gnome-print-font-picker.c:215
 msgid "Use font in label"
@@ -1526,7 +1528,7 @@ msgstr "Su_bstituir por: "
 
 #: src/dialogs/replace.glade2.h:4
 msgid "Search fro_m the beginning of the document"
-msgstr "Procurar do início do docu_mento"
+msgstr "Procurar a partir do início do docu_mento"
 
 #: src/dialogs/replace.glade2.h:5
 msgid "Search from the c_ursor position"
@@ -1542,7 +1544,7 @@ msgstr "Introduza a localização (URI) do ficheiro que deseja abrir:"
 
 #: src/gedit-commands.c:56
 msgid "Not yet implemented."
-msgstr "Ainda não imlementado."
+msgstr "Por implementar."
 
 #: src/gedit-commands.c:339
 #, c-format
@@ -1598,7 +1600,7 @@ msgstr "O ficheiro tem demasiadas ligações simbólicas."
 #: src/gedit-document.c:1249
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr "gedit não consegue geiri localizações %s: em modo de escrita."
+msgstr "gedit não consegue gerir localizações %s: em modo de escrita."
 
 #: src/gedit-document.c:1256
 msgid "gedit cannot handle this kind of location in write mode."
@@ -1660,63 +1662,78 @@ msgstr ""
 msgid "Select a filename to save"
 msgstr "Seleccione um nome de ficheiro a gravar"
 
-#: src/gedit-file.c:150
+#: src/gedit-file.c:151
 msgid "Open File ..."
 msgstr "Abrir Ficheiro ..."
 
-#: src/gedit-file.c:176 src/gedit-file.c:831
+#: src/gedit-file.c:177 src/gedit-file.c:853
 #, c-format
 msgid "Loaded file '%s'"
-msgstr "Carregado o ficheiro '%s'"
+msgstr "Ficheiro '%s' carregado"
 
-#: src/gedit-file.c:304 src/gedit-file.c:433
+#: src/gedit-file.c:305 src/gedit-file.c:434
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "A gravar ficheiro '%s' ..."
 
-#: src/gedit-file.c:332 src/gedit-file.c:448
+#: src/gedit-file.c:333 src/gedit-file.c:449
 msgid "The document has not been saved."
 msgstr "O documento não foi gravado."
 
-#: src/gedit-file.c:345 src/gedit-file.c:445
+#: src/gedit-file.c:346 src/gedit-file.c:446
 #, c-format
 msgid "File '%s' saved."
 msgstr "Ficheiro '%s' gravado."
 
-#: src/gedit-file.c:412
+#: src/gedit-file.c:413
 msgid "Save as ..."
 msgstr "Gravar como ..."
 
-#: src/gedit-file.c:626
+#: src/gedit-file.c:604
+#, c-format
+msgid ""
+"Do you want to revert to saved the document \"%s\" ?\n"
+"\n"
+"You will not be able to undo this operation."
+msgstr ""
+"Deseja reverter para o documento \"%s\" gravado?\n"
+"\n"
+"Não será possível desfazer esta operação."
+
+#: src/gedit-file.c:614 src/gedit-ui.xml.h:99
+msgid "_Revert"
+msgstr "_Reverter"
+
+#: src/gedit-file.c:648
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "A reverter ficheiro '%s' ..."
 
-#: src/gedit-file.c:639
+#: src/gedit-file.c:661
 msgid "The document has not been reverted."
 msgstr "O documento não foi revertido."
 
-#: src/gedit-file.c:649
+#: src/gedit-file.c:671
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Ficheiro '%s' revertido."
 
-#: src/gedit-file.c:675
+#: src/gedit-file.c:697
 #, c-format
 msgid "Loading %d files..."
-msgstr "A Carregar %d ficheiros..."
+msgstr "A carregar %d ficheiros..."
 
-#: src/gedit-file.c:711
+#: src/gedit-file.c:733
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "O ficheiro \"%s\" não existe.  Deseja cria-lo?"
 
-#: src/gedit-file.c:766
+#: src/gedit-file.c:788
 #, c-format
 msgid "Loaded %i files"
-msgstr "Carregados %i ficheiros"
+msgstr "%i ficheiros carregados"
 
-#: src/gedit-file.c:889
+#: src/gedit-file.c:911
 msgid "Could not read data from stdin."
 msgstr "Incapaz de ler dados do stdin."
 
@@ -1741,7 +1758,7 @@ msgstr "Não sai_r"
 
 #: src/gedit-mdi.c:878
 msgid "_Don't close"
-msgstr "_Não fec_har"
+msgstr "Não fec_har"
 
 #: src/gedit-mdi.c:968
 msgid "(modified)"
@@ -1808,7 +1825,7 @@ msgstr "Não é possível inicializar o gestor de preferências."
 #: src/gedit-prefs-manager.c:1589
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
-msgstr "Esperava `%s' obtido `%s' para a tecla %s"
+msgstr "`%s' esperado, obtido `%s' para a tecla %s"
 
 #: src/gedit-print.c:191
 msgid ""
@@ -1831,7 +1848,7 @@ msgstr "Página: %d"
 
 #: src/gedit-print.c:517
 msgid "gedit - Print Preview"
-msgstr "gedit - Prever Impressão"
+msgstr "gedit - Antever Impressão"
 
 #: src/gedit-print.c:595
 #, c-format
@@ -1994,7 +2011,7 @@ msgstr "Colar"
 
 #: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
-msgstr "Colar da memória"
+msgstr "Colar da área de transferência"
 
 #: src/gedit-ui.xml.h:40
 msgid "Pr_eferences..."
@@ -2002,11 +2019,11 @@ msgstr "Pr_eferências..."
 
 #: src/gedit-ui.xml.h:43
 msgid "Print Previe_w"
-msgstr "Pre_ver Impressão"
+msgstr "Ante_ver Impressão"
 
 #: src/gedit-ui.xml.h:44
 msgid "Print Preview"
-msgstr "Prever Impressão"
+msgstr "Antever Impressão"
 
 #: src/gedit-ui.xml.h:45
 msgid "Print Setup"
@@ -2014,7 +2031,7 @@ msgstr "Configuração Impressão"
 
 #: src/gedit-ui.xml.h:46
 msgid "Print preview"
-msgstr "Prever impressão"
+msgstr "Antever impressão"
 
 #: src/gedit-ui.xml.h:47
 msgid "Print the current file"
@@ -2103,8 +2120,8 @@ msgstr "Seleccionar todo o documento"
 #: src/gedit-ui.xml.h:70
 msgid "Set toolbar button style according to desktop default"
 msgstr ""
-"Configurar estilo dos botões da barra de ferramentas de acordo com as "
-"definições do ambiente de trabalho"
+"Configurar estilo dos botões da barra de ferramentas de acordo com os "
+"valores por omissão do ambiente de trabalho"
 
 #: src/gedit-ui.xml.h:71
 msgid "Setup the page settings for your current printer"
@@ -2160,7 +2177,7 @@ msgstr "_Apagar"
 
 #: src/gedit-ui.xml.h:85
 msgid "_Desktop Default"
-msgstr "Ambiente Trabalho _Defeito"
+msgstr "Por Omissão _do Ambiente Trabalho"
 
 #: src/gedit-ui.xml.h:86
 msgid "_Documents"
@@ -2210,10 +2227,6 @@ msgstr "_Sair"
 msgid "_Redo"
 msgstr "_Refazer"
 
-#: src/gedit-ui.xml.h:99
-msgid "_Revert"
-msgstr "_Reverter"
-
 #: src/gedit-ui.xml.h:100
 msgid "_Save"
 msgstr "_Gravar"
@@ -2224,7 +2237,7 @@ msgstr "Procur_ar"
 
 #: src/gedit-ui.xml.h:102
 msgid "_Statusbar"
-msgstr "Barra de e_stados"
+msgstr "Barra de E_stados"
 
 #: src/gedit-ui.xml.h:103
 msgid "_Toolbar"
@@ -2232,7 +2245,7 @@ msgstr "Barra Ferramen_tas"
 
 #: src/gedit-ui.xml.h:104
 msgid "_Tools"
-msgstr "_Ferramentas"
+msgstr "Ferramen_tas"
 
 #: src/gedit-ui.xml.h:105
 msgid "_Undo"
@@ -2251,7 +2264,7 @@ msgid ""
 msgstr ""
 "Incapaz de encontrar o ficheiro \"%s\".\n"
 "\n"
-"Verifique que inserio a localização correcta e tente novamente."
+"Verifique que inseriu a localização correcta e tente novamente."
 
 #: src/gedit-utils.c:799
 #, c-format
@@ -2263,8 +2276,8 @@ msgstr "Incapaz de abrir o ficheiro \"%s\" porque contém dados corrompidos."
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
-"Incapaz de abrir o ficheiro \"%s\" porque o gedit não consegue gerir %s: "
-"localizações."
+"Incapaz de abrir o ficheiro \"%s\" porque o gedit não consegue gerir "
+"localizações %s: ."
 
 #: src/gedit-utils.c:816
 #, c-format
@@ -2375,7 +2388,7 @@ msgid ""
 "\n"
 "Please, check that you typed the location correctly and try again."
 msgstr ""
-"Incapaz de abrir o ficheiro \"%s\" porque a tentativa de fazer login "
+"Incapaz de abrir o ficheiro \"%s\" porque a tentativa de fazer iniciar sessão "
 "falhou.\n"
 "\n"
 "Verifique que escreveu correctamente a localização e tente novamente."
@@ -2674,6 +2687,9 @@ msgstr "Criar um novo documento numa instância existente do gedit"
 #, c-format
 msgid "Open %s"
 msgstr "Abrir %s"
+
+#~ msgid "_Insert Date/Time"
+#~ msgstr "_Inserir Data/Hora"
 
 #~ msgid "Plugin Manager"
 #~ msgstr "Gestor de Plugin"
