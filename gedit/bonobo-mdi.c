@@ -502,7 +502,7 @@ escape_underscores (const gchar* text)
 
     	length = strlen (text);
 
-	str = g_string_new ("");
+	str = g_string_sized_new (length);
 
   	p = text;
   	end = text + length;
@@ -2486,6 +2486,7 @@ bonobo_mdi_get_bottom_pane_for_window (BonoboWindow *win)
 	return (pane != NULL) ? GTK_WIDGET (pane) : NULL;
 }
 
+/* it returns a newly allocated list */
 GList *
 bonobo_mdi_get_views_from_window (BonoboMDI    *mdi, 
 				  BonoboWindow *window)
@@ -2501,6 +2502,7 @@ bonobo_mdi_get_views_from_window (BonoboMDI    *mdi,
 	return children;
 }
 
+/* it returns a newly allocated list */
 GList *
 bonobo_mdi_get_views (BonoboMDI *mdi)
 {
