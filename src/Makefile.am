@@ -31,7 +31,9 @@ gedit_LDADD = 				\
 
 BUILT_SOURCES = 			\
 	gedit-marshal.c			\
-	gedit-marshal.h
+	gedit-marshal.h			\
+	gnome-recent-marshal.c		\
+	gnome-recent-marshal.h
 
 gedit_SOURCES = 			\
 	gedit2.c			\
@@ -56,8 +58,6 @@ gedit_SOURCES = 			\
 	gedit-commands.c		\
 	gedit-file.h			\
 	gedit-file.c			\
-	gedit-recent.h			\
-	gedit-recent.c			\
 	gedit-undo-manager.h		\
 	gedit-undo-manager.c		\
 	gedit-print.h			\
@@ -74,6 +74,16 @@ gedit_SOURCES = 			\
 	gedit-plugins-engine.c		\
 	gedit-plugin.h			\
 	gedit-plugin.c			\
+	gnome-recent-model.c		\
+	gnome-recent-model.h		\
+	gnome-recent-view.c		\
+	gnome-recent-view.h		\
+	gnome-recent-view-bonobo.c	\
+	gnome-recent-view-bonobo.h	\
+	gnome-recent-util.c		\
+	gnome-recent-util.h		\
+	gedit-recent.c			\
+	gedit-recent.h			\
 	$(BUILT_SOURCES)
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
@@ -82,6 +92,13 @@ gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"gedit-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
+
+gnome-recent-marshal.h: gnome-recent-marshal.list $(GLIB_GENMARSHAL)
+	$(GLIB_GENMARSHAL) $< --header --prefix=gnome_recent > $@
+
+gnome-recent-marshal.c: gnome-recent-marshal.list $(GLIB_GENMARSHAL)
+	echo "#include \"gnome-recent-marshal.h\"" > $@ && \
+	$(GLIB_GENMARSHAL) $< --body --prefix=gnome_recent >> $@
 
 ui_DATA = gedit-ui.xml
 

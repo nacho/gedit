@@ -50,6 +50,7 @@
 #include "gedit-view.h"
 #include "gedit-utils.h"
 #include "gedit-plugins-engine.h"
+#include "gnome-recent-view-bonobo.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -222,7 +223,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	GtkWidget *widget;
 	BonoboControl *control;
 	BonoboUIComponent *ui_component;
-	GeditRecent *recent;
+	GnomeRecentView *view;
+	GnomeRecentModel *model;
 
 	static GtkTargetEntry drag_types[] =
 	{
@@ -314,14 +316,14 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			(gpointer)win);
 
 
-	/* add a GeditRecent object */
-	recent = gedit_recent_new_with_ui_component ("gedit",
-						     gedit_settings->max_recents,
-						     ui_component,
-						     "/menu/File/Recents");
-	g_signal_connect (G_OBJECT (recent), "activate",
+	/* add a GeditRecentView object */
+	model = gedit_recent_get_model ();
+	view = GNOME_RECENT_VIEW (gnome_recent_view_bonobo_new (ui_component, "/menu/File/Recents"));
+	gnome_recent_view_set_model (view, model);
+	
+	g_signal_connect (G_OBJECT (view), "activate",
 			  G_CALLBACK (gedit_file_open_recent), NULL);
-	g_object_set_data (G_OBJECT (win), RECENT_KEY, recent);
+	g_object_set_data (G_OBJECT (win), RECENT_KEY, view);
 
 	/* Set the window prefs. */
 	gtk_window_set_default_size (GTK_WINDOW (win), 
@@ -1111,13 +1113,13 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 	g_free (font);
 }
 
-GeditRecent*
-gedit_mdi_get_recent_from_window (BonoboWindow* win)
+GnomeRecentView *
+gedit_mdi_get_recent_view_from_window (BonoboWindow* win)
 {
 	gpointer r;
 	gedit_debug (DEBUG_MDI, "");
 
 	r = g_object_get_data (G_OBJECT (win), RECENT_KEY);
 	
-	return (r != NULL) ? GEDIT_RECENT (r) : NULL;
+	return (r != NULL) ? GNOME_RECENT_VIEW (r) : NULL;
 }

@@ -166,6 +166,7 @@ main (int argc, char **argv)
 	/* Load user preferences */
 	gedit_prefs_init ();
 	gedit_prefs_load_settings ();
+	gedit_recent_init ();
 
 	/* Init plugins engine */
 	gedit_plugins_engine_init ();

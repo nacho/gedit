@@ -46,6 +46,7 @@
 #include "gedit-prefs.h"
 #include "gedit-file-selector-util.h"
 #include "gedit-plugins-engine.h"
+#include "gnome-recent-model.h"
 
 static gboolean gedit_file_open_real (const gchar* file_name, GeditMDIChild* child);
 static gboolean gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child);
@@ -144,8 +145,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 {
 	GError *error = NULL;
 	gchar* uri;
-	GeditRecent *recent;
-	BonoboWindow *win;
+	GnomeRecentModel *recent;
 
 	gedit_debug (DEBUG_FILE, "File name: %s", file_name);
 
@@ -197,9 +197,8 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 		}	
 	}
 
-	win = gedit_get_active_window ();
-	recent = gedit_mdi_get_recent_from_window (win);
-	gedit_recent_add (recent, uri);
+	recent = gedit_recent_get_model ();
+	gnome_recent_model_add (recent, uri);
 
 	g_free (uri);
 
@@ -269,16 +268,14 @@ gedit_file_save (GeditMDIChild* child)
 	}	
 	else
 	{
-		BonoboWindow *win;
-		GeditRecent *recent;
+		GnomeRecentModel *recent;
 
 		gedit_debug (DEBUG_FILE, "OK");
 
 		gedit_utils_flash_va (_("File '%s' saved."), uri);
 
-		win = gedit_get_active_window ();
-		recent = gedit_mdi_get_recent_from_window (win);
-		gedit_recent_add (recent, uri);
+		recent = gedit_recent_get_model ();
+		gnome_recent_model_add (recent, uri);
 
 		g_free (uri);
 
@@ -366,14 +363,12 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	}	
 	else
 	{
-		BonoboWindow *win;
-		GeditRecent *recent;
+		GnomeRecentModel *recent;
 
 		gedit_debug (DEBUG_FILE, "OK");
 
-		win = gedit_get_active_window ();
-		recent = gedit_mdi_get_recent_from_window (win);
-		gedit_recent_add (recent, uri);
+		recent = gedit_recent_get_model ();
+		gnome_recent_model_add (recent, uri);
 
 		g_free (uri);
 
@@ -574,20 +569,27 @@ gedit_file_open_uri_list (GList* uri_list, gint line)
 }
 
 gboolean 
-gedit_file_open_recent (GeditRecent *recent, const gchar *uri, gpointer data)
+gedit_file_open_recent (GnomeRecentView *view, const gchar *uri, gpointer data)
 {
 	gboolean ret;
+	GnomeRecentModel *model;
 	GeditView* active_view;
 
 	gedit_debug (DEBUG_FILE, "Open : %s", uri);
 
 	ret = gedit_file_open_single_uri (uri);
+	if (ret) {
+		model = gedit_recent_get_model ();
+		gnome_recent_model_add (model, uri);
+	}
+		
 
 	active_view = gedit_get_active_view ();
 	if (active_view != NULL)
 		gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
 	gedit_debug (DEBUG_FILE, "END");
+
 
 	return ret;
 }

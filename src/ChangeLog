@@ -1,3 +1,22 @@
+2002-04-29  James Willcox  <jwillcox@cs.indiana.edu>
+
+	* Makefile.am:  Added a bunch of new stuff for gnome-recent (recent
+	files code)
+	* gnome-recent-model.[ch], gnome-recent-view.[ch],
+	gnome-recent-view-bonobo.[ch], gnome-recent-util.[ch],
+	gnome-recent-marshal.list:
+	All new files, replaces the old recent files system with a new
+	model-view system.
+	* gedit-file.c (gedit_file_open_recent):  Small changes to cope with
+	gnome-recent stuff
+	* gedit-mdi.c: ditto
+	* gedit-recent.[ch]:  Essentially, these are new, even though they
+	existed before.  This is just an accessor for the gnome-recent
+	model now.
+
+	All of this stuff should fix bug #76641 (problems when FAM isn't
+	available).
+
 2002-04-23  Federico Mena Quintero  <federico@ximian.com>
 
 	* gedit-document.c (gedit_document_save_as_real): Properly handle
