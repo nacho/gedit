@@ -786,7 +786,7 @@ static GtkWidget *window_page_new()
   	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
   	gtk_widget_show (hbox);
   
-  	label = gtk_label_new ("Current Width:");
+  	label = gtk_label_new (_("Current Width:"));
   	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
   	gtk_widget_show (label);
   	
@@ -807,7 +807,7 @@ static GtkWidget *window_page_new()
   	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
   	gtk_widget_show (hbox);
 
-  	label = gtk_label_new ("Startup Width:");
+  	label = gtk_label_new (_("Startup Width:"));
   	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
   	gtk_widget_show (label);
   	
@@ -815,7 +815,7 @@ static GtkWidget *window_page_new()
   	gtk_box_pack_start (GTK_BOX (hbox), prefs->preW, FALSE, FALSE, 3);
   	gtk_widget_show (prefs->preW);
   	
-  	button = gtk_button_new_with_label ("Use Current");
+  	button = gtk_button_new_with_label (_("Use Current"));
   	gtk_signal_connect (GTK_OBJECT (button), "clicked",
   					GTK_SIGNAL_FUNC (use_current), (gint) 0);
   	gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 4);
@@ -827,7 +827,7 @@ static GtkWidget *window_page_new()
   	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
   	gtk_widget_show (hbox);
   
-  	label = gtk_label_new ("Current Height:");
+  	label = gtk_label_new (_("Current Height:"));
   	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
   	gtk_widget_show (label);
   	
@@ -847,7 +847,7 @@ static GtkWidget *window_page_new()
   	gtk_container_border_width (GTK_CONTAINER (hbox), 4);
   	gtk_widget_show (hbox);
   	  	
-  	label = gtk_label_new ("Startup Height:");
+  	label = gtk_label_new (_("Startup Height:"));
   	gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
   	gtk_widget_show (label);
   	
@@ -855,7 +855,7 @@ static GtkWidget *window_page_new()
   	gtk_box_pack_start (GTK_BOX (hbox), prefs->preH, FALSE, FALSE, 3);
   	gtk_widget_show (prefs->preH);
 
-  	button = gtk_button_new_with_label ("Use Current");
+  	button = gtk_button_new_with_label (_("Use Current"));
   	gtk_signal_connect (GTK_OBJECT (button), "clicked",
   					GTK_SIGNAL_FUNC (use_current), (gint) 1);
   	gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 4);

@@ -19,10 +19,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <config.h>
 #include <gnome.h>
 #include <gtk/gtk.h>
 #include <glib.h>
-#include <config.h>
 
 #include "main.h"
 #include "gE_document.h"
@@ -408,8 +408,8 @@ create_replace_dialog ()
 	GtkWidget *frame, *entry, *radio, *check;
 
 	dialog = gnome_dialog_new (_("Replace"),
-		"Replace",
-		"Replace all",
+		_("Replace"),
+		_("Replace all"),
 		GNOME_STOCK_BUTTON_CLOSE,
 		NULL);
 

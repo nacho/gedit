@@ -26,18 +26,18 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 {
 	GtkWidget *about;
 	const gchar *authors[] = {
-		N_("Alex Roberts"),
-		N_("Evan Lawrence"),
-		N_("http://gedit.pn.org"),
+		"Alex Roberts",
+		"Evan Lawrence",
+		"http://gedit.pn.org",
 		"",
 		N_("With special thanks to:"),
-		N_("       Will LaShell"),
-		N_("       Chris Lahey"),
-		N_("       Andy Kahn"),
-		N_("       Miguel de Icaza"),
-		N_("       Martin Baulig"),
-		N_("       Thomas Holmgren"),
-		N_("       Martijn van Beers"),
+		"       Will LaShell",
+		"       Chris Lahey",
+		"       Andy Kahn",
+		"       Miguel de Icaza",
+		"       Martin Baulig",
+		"       Thomas Holmgren",
+		"       Martijn van Beers",
 		NULL
 	};
 /*
