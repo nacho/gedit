@@ -61,9 +61,10 @@ struct _Preferences
 	
 	gint close_doc;
 
-	gint printwrap;        /* Printing stuf ...*/
-	gint printlines;
-	gint printheader;
+	gint print_wrap_lines : 1;        /* Printing stuf ...*/
+	gint print_lines : 1;
+	gint print_header;
+	gint print_orientation;
 	gchar *papersize;
 };
 
