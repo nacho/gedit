@@ -5,13 +5,44 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-14 20:54-0400\n"
+"POT-Creation-Date: 2000-04-16 23:31-0400\n"
 "PO-Revision-Date: 1999-06-05 12:08+0900\n"
 "Last-Translator: Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>\n"
 "Language-Team: Japanese <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=euc-japan\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: plugins/convert/convert.c:136
+#, fuzzy
+msgid "Convert"
+msgstr "元に戻す"
+
+#: plugins/convert/convert.c:137
+msgid "Number Converter"
+msgstr ""
+
+#: plugins/diff/diff.c:204
+msgid "Diff"
+msgstr ""
+
+#: plugins/diff/diff.c:205
+msgid "Diff plugin."
+msgstr ""
+
+#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
+#: src/print.c:361
+msgid "Untitled"
+msgstr "名前無し"
+
+#: plugins/email/email.c:155
+msgid "Email"
+msgstr ""
+
+#: plugins/email/email.c:156
+#, fuzzy
+msgid "Email the current document"
+msgstr "現在編集中のファイルを保存"
 
 #: plugins/sample/sample.c:52
 msgid "Hello World"
@@ -30,382 +61,6 @@ msgstr ""
 msgid "Inserts the current date and time"
 msgstr "現在編集中のファイルを閉じる"
 
-#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
-#: src/print.c:281
-msgid "Untitled"
-msgstr "名前無し"
-
-#: plugins/email/email.c:155
-msgid "Email"
-msgstr ""
-
-#: plugins/email/email.c:156
-#, fuzzy
-msgid "Email the current document"
-msgstr "現在編集中のファイルを保存"
-
-#: src/window.c:54
-#, fuzzy
-msgid "Filename"
-msgstr "ファイル(_F)"
-
-#: src/menus.c:368 src/window.c:55
-msgid "Line"
-msgstr "行"
-
-#: src/window.c:56
-msgid "Contents"
-msgstr ""
-
-#: src/file.c:87
-msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file exists."
-msgstr ""
-
-#: src/file.c:94
-msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file is not beeing used by another aplication."
-msgstr ""
-
-#: src/file.c:103
-msgid "Could not allocate the requrired memory."
-msgstr ""
-
-#: src/file.c:109
-#, c-format
-msgid ""
-"gedit was unable to open the file: \n"
-"\n"
-"%s\n"
-"\n"
-"Make sure that you have permissions for opening the file."
-msgstr ""
-
-#: src/file.c:177
-#, c-format
-msgid ""
-"gedit was unable to save the file: \n"
-"\n"
-" %s \n"
-"\n"
-"Make sure that the path you provided exists,and that you have the appropiate "
-"write permissions."
-msgstr ""
-
-#: src/file.c:191 src/file.c:205
-#, c-format
-msgid ""
-"gedit was unable to save the file :\n"
-"\n"
-" %s \n"
-"\n"
-"Because of an unknown reason (1). Please report this Problem to "
-"submit@bugs.gnome.org"
-msgstr ""
-
-#: src/file.c:271
-#, fuzzy
-msgid "Open File ..."
-msgstr "開くファイル名..."
-
-#: src/file.c:313
-#, fuzzy
-msgid "Save As..."
-msgstr "保存するファイル名.."
-
-#: src/file.c:351
-#, c-format
-msgid "Loaded file %s"
-msgstr ""
-
-#: src/file.c:417
-#, c-format
-msgid "``%s'' is about to be overwriten. Do you want to continue ?"
-msgstr ""
-
-#: src/file.c:428
-#, fuzzy
-msgid "Document has not been saved."
-msgstr "この文書は保存されていません..."
-
-#: src/file.c:436
-msgid "Error saving file!"
-msgstr "保存中にエラーが起きました！"
-
-#: src/file.c:518
-#, c-format
-msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr ""
-
-#: src/document.c:340
-#, fuzzy, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr "'%s' は変更されています。保存しますか？"
-
-#: src/plugin.c:56
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr ""
-
-#: src/plugin.c:67
-msgid "Error, plugin does not contain init_plugin function."
-msgstr ""
-
-#: src/plugin.c:75
-msgid "Error, init_plugin returned an error"
-msgstr ""
-
-#: src/plugin.c:101
-msgid "Error, plugin is still in use"
-msgstr ""
-
-#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
-msgid "_Plugins"
-msgstr "プラグイン(_P)"
-
-#: src/print.c:211
-#, c-format
-msgid "gedit (%s): Print Preview"
-msgstr ""
-
-#: src/print.c:361
-#, c-format
-msgid "Page: %i/%i"
-msgstr ""
-
-#: src/menus.c:49
-msgid "Open (swap) .c/.h file"
-msgstr "対応する .c/.h ファイルを開く"
-
-#: src/menus.c:58
-msgid "_New"
-msgstr "新規(_N)"
-
-#: src/menus.c:59 src/menus.c:323
-msgid "Create a new document"
-msgstr "新規文書を作る"
-
-#: src/menus.c:64
-#, fuzzy
-msgid "Save All"
-msgstr "保存するファイル名.."
-
-#: src/menus.c:65
-#, fuzzy
-msgid "Save All Open Files"
-msgstr "現在編集中のファイルを保存"
-
-#: src/menus.c:80
-msgid "Print preview..."
-msgstr ""
-
-#: src/menus.c:81
-msgid "Preview data to be printed"
-msgstr ""
-
-#: src/menus.c:87
-#, fuzzy
-msgid "Close All"
-msgstr "閉じる"
-
-#: src/menus.c:88
-#, fuzzy
-msgid "Close All Open Files"
-msgstr "現在編集中のファイルを閉じる"
-
-#: src/menus.c:123
-#, fuzzy
-msgid "Goto _Line..."
-msgstr "指定行へ移動"
-
-#: src/menus.c:124
-msgid "Go to a specific line number"
-msgstr ""
-
-#: src/menus.c:133
-msgid "_Add View"
-msgstr "ビューを追加(_A)"
-
-#: src/menus.c:134
-msgid "Add a new view of the document"
-msgstr "文書に新しいビューを追加"
-
-#: src/menus.c:136
-msgid "_Remove View"
-msgstr "ビューを削除"
-
-#: src/menus.c:137
-msgid "Remove view of the document"
-msgstr "文書のビューを削除する"
-
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-#. N_("Toggle autoindent"),
-#. auto_indent_toggle_cb, NULL,
-#. NULL),
-#.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:209
-msgid "Show Statusbar"
-msgstr "ステータスバーを表示"
-
-#: src/menus.c:210
-msgid ""
-"Enable or disable the statusbar at the bottom of this application window."
-msgstr ""
-
-#: src/menus.c:323
-msgid "New"
-msgstr "新規"
-
-#: src/menus.c:327
-msgid "Open"
-msgstr "開く"
-
-#: src/menus.c:327
-msgid "Open a file"
-msgstr "ファイルを開く"
-
-#: src/menus.c:331
-msgid "Save"
-msgstr "保存"
-
-#: src/menus.c:331
-#, fuzzy
-msgid "Save the current file"
-msgstr "現在編集中のファイルを印刷"
-
-#: src/menus.c:335
-msgid "Close"
-msgstr "閉じる"
-
-#: src/menus.c:335
-#, fuzzy
-msgid "Close the current file"
-msgstr "現在編集中のファイルを印刷"
-
-#: src/menus.c:339
-msgid "Print"
-msgstr "印刷"
-
-#: src/menus.c:339
-msgid "Print the current file"
-msgstr "現在編集中のファイルを印刷"
-
-#: src/menus.c:344
-#, fuzzy
-msgid "Undo"
-msgstr "ウインドウ"
-
-#: src/menus.c:344
-msgid "Undo last operation"
-msgstr ""
-
-#: src/menus.c:348
-#, fuzzy
-msgid "Redo"
-msgstr "読出し専用"
-
-#: src/menus.c:348
-msgid "Redo last operation"
-msgstr ""
-
-#: src/menus.c:352
-msgid "Cut"
-msgstr "切り取り"
-
-#: src/menus.c:352
-msgid "Cut the selection"
-msgstr "選択領域を切り取り"
-
-#: src/menus.c:356
-msgid "Copy"
-msgstr "複写"
-
-#: src/menus.c:356
-msgid "Copy the selection"
-msgstr "選択領域を複写"
-
-#: src/menus.c:360
-msgid "Paste"
-msgstr "貼り付け"
-
-#: src/menus.c:360
-msgid "Paste the clipboard"
-msgstr "クリップボードを張り付け"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
-msgid "Find"
-msgstr "検索"
-
-#: src/menus.c:364
-msgid "Search for a string"
-msgstr "文字列を検索"
-
-#: src/menus.c:368
-#, fuzzy
-msgid "Get the current and total lines"
-msgstr "現在編集中のファイルを閉じる"
-
-#: src/menus.c:373
-msgid "Exit"
-msgstr "終了"
-
-#: src/menus.c:373
-msgid "Exit the program"
-msgstr "エディタを終了する"
-
-#: src/search.c:286
-msgid "Find In Files"
-msgstr ""
-
-#: src/search.c:287
-msgid "Search"
-msgstr "検索"
-
-#: src/search.c:291
-msgid "Search for:"
-msgstr "検索対象:"
-
-#: src/search.c:611
-#, fuzzy, c-format
-msgid ""
-"Filename: %s\n"
-"\n"
-"Total Lines: %i\n"
-"Current Line: %i"
-msgstr ""
-"合計: %i 行\n"
-"現在: %i 行"
-
-#: src/search.c:634
-msgid "Search from cursor"
-msgstr "カーソル位置から検索"
-
-#: src/search.c:641
-msgid "Search from beginning of document"
-msgstr "文書の最初から検索"
-
-#: src/search.c:648
-msgid "Search from end of document"
-msgstr "文書の最後から検索"
-
-#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
-#: src/search.c:655
-msgid "Case sensitive"
-msgstr "大文字小文字の区別"
-
-#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
-#: src/search.c:661
-msgid "Reverse search"
-msgstr "後向き検索"
-
 #: src/dialogs/dialog-about.c:52
 msgid "With special thanks to:"
 msgstr ""
@@ -417,6 +72,73 @@ msgstr ""
 #: src/dialogs/dialog-about.c:69
 #, fuzzy
 msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gEditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
+
+#: src/dialogs/dialog-find-line.c:130
+#, fuzzy
+msgid "Go to line"
+msgstr "指定行へ移動"
+
+#: src/dialogs/dialog-find-line.c:140
+#, fuzzy
+msgid "Line number: "
+msgstr "行番号"
+
+#. glade won't let me set the title of the propertybox
+#: src/dialogs/dialog-prefs.c:443
+msgid "gedit: Preferences"
+msgstr ""
+
+#: src/dialogs/dialog-replace.c:106
+msgid "Replace?"
+msgstr "置換しますか？"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/dialog-replace.c:119 src/dialogs/dialog-replace.c:120
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
+msgid "Replace"
+msgstr "置換"
+
+#: src/dialogs/dialog-replace.c:121
+#, fuzzy
+msgid "Replace all"
+msgstr "置換"
+
+#: src/dialogs/dialog-replace.c:125 src/dialogs/dialog-search.c:62
+#: src/search.c:291
+msgid "Search for:"
+msgstr "検索対象:"
+
+#: src/dialogs/dialog-replace.c:135
+#, fuzzy
+msgid "Replace with:"
+msgstr "置換対象:"
+
+#: src/dialogs/dialog-replace.c:146 src/dialogs/replace.glade.h:19
+msgid "Ask before replacing"
+msgstr "置換前に確認"
+
+#: src/dialogs/dialog-search.c:57 src/dialogs/dialog-search.c:58
+#: src/search.c:287
+msgid "Search"
+msgstr "検索"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/about.glade.h:7
+msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
+msgstr ""
+
+#: src/dialogs/about.glade.h:8
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
 
 #.
@@ -446,6 +168,16 @@ msgstr ""
 #: src/dialogs/prefs.glade.h:7
 msgid "Appearance"
 msgstr "外見"
+
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, NULL,
+#. NULL),
+#.
+#: src/dialogs/prefs.glade.h:8 src/menus.c:209
+msgid "Show Statusbar"
+msgstr "ステータスバーを表示"
 
 #: src/dialogs/prefs.glade.h:9
 #, fuzzy
@@ -562,41 +294,30 @@ msgstr ""
 msgid "line(s)"
 msgstr ""
 
-#: src/dialogs/search.glade.h:9
-msgid ""
-"Cursor\n"
-"Beginning of Document\n"
-"End of Document\n"
-msgstr ""
-
-#: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
+#: src/dialogs/prefs.glade.h:44
 #, fuzzy
-msgid "Search for: "
-msgstr "検索対象:"
-
-#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
-#, fuzzy
-msgid "Search from: "
-msgstr "検索対象:"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
-msgid "Replace"
-msgstr "置換"
+msgid "Paper"
+msgstr "貼り付け"
 
 #: src/dialogs/replace.glade.h:9
 #, fuzzy
 msgid "Replace All"
 msgstr "置換"
 
+#: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
+#, fuzzy
+msgid "Search for: "
+msgstr "検索対象:"
+
 #: src/dialogs/replace.glade.h:11
 #, fuzzy
 msgid "Replace with: "
 msgstr "置換対象:"
+
+#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
+#, fuzzy
+msgid "Search from: "
+msgstr "検索対象:"
 
 #: src/dialogs/replace.glade.h:13
 msgid ""
@@ -605,9 +326,371 @@ msgid ""
 "End of document\n"
 msgstr ""
 
-#: src/dialogs/replace.glade.h:19
-msgid "Ask before replacing"
-msgstr "置換前に確認"
+#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
+#: src/search.c:655
+msgid "Case sensitive"
+msgstr "大文字小文字の区別"
+
+#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
+#: src/search.c:661
+msgid "Reverse search"
+msgstr "後向き検索"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
+msgid "Find"
+msgstr "検索"
+
+#: src/dialogs/search.glade.h:9
+msgid ""
+"Cursor\n"
+"Beginning of Document\n"
+"End of Document\n"
+msgstr ""
+
+#: src/document.c:341
+#, fuzzy, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr "'%s' は変更されています。保存しますか？"
+
+#: src/file.c:87
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
+msgstr ""
+
+#: src/file.c:94
+#, c-format
+msgid ""
+"An error was encountered while opening the file:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Please make sure the file is not beeing used by another aplication\n"
+"and that the file is not empty."
+msgstr ""
+
+#: src/file.c:106
+msgid "Could not allocate the requrired memory."
+msgstr ""
+
+#: src/file.c:112
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have permissions for opening the file."
+msgstr ""
+
+#: src/file.c:180
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exists,and that you have the appropiate "
+"write permissions."
+msgstr ""
+
+#: src/file.c:194 src/file.c:208
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+
+#: src/file.c:274
+#, fuzzy
+msgid "Open File ..."
+msgstr "開くファイル名..."
+
+#: src/file.c:316
+#, fuzzy
+msgid "Save As..."
+msgstr "保存するファイル名.."
+
+#: src/file.c:354
+#, c-format
+msgid "Loaded file %s"
+msgstr ""
+
+#: src/file.c:420
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr ""
+
+#: src/file.c:431
+#, fuzzy
+msgid "Document has not been saved."
+msgstr "この文書は保存されていません..."
+
+#: src/file.c:439
+msgid "Error saving file!"
+msgstr "保存中にエラーが起きました！"
+
+#: src/file.c:521
+#, c-format
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
+msgstr ""
+
+#: src/menus.c:49
+msgid "Open (swap) .c/.h file"
+msgstr "対応する .c/.h ファイルを開く"
+
+#: src/menus.c:58
+msgid "_New"
+msgstr "新規(_N)"
+
+#: src/menus.c:59 src/menus.c:323
+msgid "Create a new document"
+msgstr "新規文書を作る"
+
+#: src/menus.c:64
+#, fuzzy
+msgid "Save All"
+msgstr "保存するファイル名.."
+
+#: src/menus.c:65
+#, fuzzy
+msgid "Save All Open Files"
+msgstr "現在編集中のファイルを保存"
+
+#: src/menus.c:80
+msgid "Print preview..."
+msgstr ""
+
+#: src/menus.c:81
+msgid "Preview data to be printed"
+msgstr ""
+
+#: src/menus.c:87
+#, fuzzy
+msgid "Close All"
+msgstr "閉じる"
+
+#: src/menus.c:88
+#, fuzzy
+msgid "Close All Open Files"
+msgstr "現在編集中のファイルを閉じる"
+
+#: src/menus.c:123
+#, fuzzy
+msgid "Goto _Line..."
+msgstr "指定行へ移動"
+
+#: src/menus.c:124
+msgid "Go to a specific line number"
+msgstr ""
+
+#: src/menus.c:133
+msgid "_Add View"
+msgstr "ビューを追加(_A)"
+
+#: src/menus.c:134
+msgid "Add a new view of the document"
+msgstr "文書に新しいビューを追加"
+
+#: src/menus.c:136
+msgid "_Remove View"
+msgstr "ビューを削除"
+
+#: src/menus.c:137
+msgid "Remove view of the document"
+msgstr "文書のビューを削除する"
+
+#: src/menus.c:210
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr ""
+
+#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
+msgid "_Plugins"
+msgstr "プラグイン(_P)"
+
+#: src/menus.c:323
+msgid "New"
+msgstr "新規"
+
+#: src/menus.c:327
+msgid "Open"
+msgstr "開く"
+
+#: src/menus.c:327
+msgid "Open a file"
+msgstr "ファイルを開く"
+
+#: src/menus.c:331
+msgid "Save"
+msgstr "保存"
+
+#: src/menus.c:331
+#, fuzzy
+msgid "Save the current file"
+msgstr "現在編集中のファイルを印刷"
+
+#: src/menus.c:335
+msgid "Close"
+msgstr "閉じる"
+
+#: src/menus.c:335
+#, fuzzy
+msgid "Close the current file"
+msgstr "現在編集中のファイルを印刷"
+
+#: src/menus.c:339
+msgid "Print"
+msgstr "印刷"
+
+#: src/menus.c:339
+msgid "Print the current file"
+msgstr "現在編集中のファイルを印刷"
+
+#: src/menus.c:344
+#, fuzzy
+msgid "Undo"
+msgstr "ウインドウ"
+
+#: src/menus.c:344
+msgid "Undo last operation"
+msgstr ""
+
+#: src/menus.c:348
+#, fuzzy
+msgid "Redo"
+msgstr "読出し専用"
+
+#: src/menus.c:348
+msgid "Redo last operation"
+msgstr ""
+
+#: src/menus.c:352
+msgid "Cut"
+msgstr "切り取り"
+
+#: src/menus.c:352
+msgid "Cut the selection"
+msgstr "選択領域を切り取り"
+
+#: src/menus.c:356
+msgid "Copy"
+msgstr "複写"
+
+#: src/menus.c:356
+msgid "Copy the selection"
+msgstr "選択領域を複写"
+
+#: src/menus.c:360
+msgid "Paste"
+msgstr "貼り付け"
+
+#: src/menus.c:360
+msgid "Paste the clipboard"
+msgstr "クリップボードを張り付け"
+
+#: src/menus.c:364
+msgid "Search for a string"
+msgstr "文字列を検索"
+
+#: src/menus.c:368 src/window.c:55
+msgid "Line"
+msgstr "行"
+
+#: src/menus.c:368
+#, fuzzy
+msgid "Get the current and total lines"
+msgstr "現在編集中のファイルを閉じる"
+
+#: src/menus.c:373
+msgid "Exit"
+msgstr "終了"
+
+#: src/menus.c:373
+msgid "Exit the program"
+msgstr "エディタを終了する"
+
+#: src/plugin.c:56
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/plugin.c:75
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/plugin.c:101
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/print.c:243
+#, c-format
+msgid "gedit (%s): Print Preview"
+msgstr ""
+
+#: src/print.c:473
+#, c-format
+msgid "Page: %i/%i"
+msgstr ""
+
+#: src/recent.c:52
+msgid "_File/"
+msgstr "ファイル(_F)/"
+
+#: src/recent.c:59 src/recent.c:60
+#, fuzzy
+msgid "_File"
+msgstr "ファイル(_F)/"
+
+#: src/search.c:286
+msgid "Find In Files"
+msgstr ""
+
+#: src/search.c:611
+#, fuzzy, c-format
+msgid ""
+"Filename: %s\n"
+"\n"
+"Total Lines: %i\n"
+"Current Line: %i"
+msgstr ""
+"合計: %i 行\n"
+"現在: %i 行"
+
+#: src/search.c:634
+msgid "Search from cursor"
+msgstr "カーソル位置から検索"
+
+#: src/search.c:641
+msgid "Search from beginning of document"
+msgstr "文書の最初から検索"
+
+#: src/search.c:648
+msgid "Search from end of document"
+msgstr "文書の最後から検索"
+
+#: src/window.c:54
+#, fuzzy
+msgid "Filename"
+msgstr "ファイル(_F)"
+
+#: src/window.c:56
+msgid "Contents"
+msgstr ""
 
 #~ msgid "Read only file!"
 #~ msgstr "読み込み専用のファイルです！"
@@ -624,9 +707,6 @@ msgstr "置換前に確認"
 
 #~ msgid "Document Unchanged..."
 #~ msgstr "この文書は変更されていません..."
-
-#~ msgid "_File/"
-#~ msgstr "ファイル(_F)/"
 
 #, fuzzy
 #~ msgid "Can't open file!"
@@ -697,9 +777,6 @@ msgstr "置換前に確認"
 #~ msgid "_Splitscreen"
 #~ msgstr "分割表示(_S)"
 
-#~ msgid "Revert"
-#~ msgstr "元に戻す"
-
 #~ msgid "_Top"
 #~ msgstr "上(_T)"
 
@@ -738,9 +815,6 @@ msgstr "置換前に確認"
 
 #~ msgid "Save the current settings for future sessions"
 #~ msgstr "設定を次回からも有効にする"
-
-#~ msgid "Replace?"
-#~ msgstr "置換しますか？"
 
 #~ msgid ""
 #~ "Enter print command below\n"

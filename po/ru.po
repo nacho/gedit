@@ -4,13 +4,43 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-16 21:23+0400\n"
+"POT-Creation-Date: 2000-04-16 23:31-0400\n"
 "PO-Revision-Date: 2000-04-16 21:31+04:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: plugins/convert/convert.c:136
+#, fuzzy
+msgid "Convert"
+msgstr "Содержание"
+
+#: plugins/convert/convert.c:137
+msgid "Number Converter"
+msgstr ""
+
+#: plugins/diff/diff.c:204
+msgid "Diff"
+msgstr ""
+
+#: plugins/diff/diff.c:205
+msgid "Diff plugin."
+msgstr ""
+
+#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
+#: src/print.c:361
+msgid "Untitled"
+msgstr "Безымянное"
+
+#: plugins/email/email.c:155
+msgid "Email"
+msgstr "Эл. адрес"
+
+#: plugins/email/email.c:156
+msgid "Email the current document"
+msgstr "Эл. адрес текущего документа"
 
 #: plugins/sample/sample.c:52
 msgid "Hello World"
@@ -28,401 +58,6 @@ msgstr "Вставить время"
 msgid "Inserts the current date and time"
 msgstr "Вставить текущую дату и время"
 
-#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
-#: src/print.c:354
-msgid "Untitled"
-msgstr "Безымянное"
-
-#: plugins/email/email.c:155
-msgid "Email"
-msgstr "Эл. адрес"
-
-#: plugins/email/email.c:156
-msgid "Email the current document"
-msgstr "Эл. адрес текущего документа"
-
-#: src/window.c:54
-msgid "Filename"
-msgstr "Имя файла"
-
-#: src/menus.c:368 src/window.c:55
-msgid "Line"
-msgstr "Строка"
-
-#: src/window.c:56
-msgid "Contents"
-msgstr "Содержание"
-
-#: src/file.c:87
-msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file exists."
-msgstr ""
-"При открытии файла была обнаружена ошибка.\n"
-"Убедитесь, что файл существует."
-
-#: src/file.c:94
-#, c-format
-msgid ""
-"An error was encountered while opening the file:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Please make sure the file is not beeing used by another aplication\n"
-"and that the file is not empty."
-msgstr ""
-"При открытии файла была обнаружена ошибка:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Убедитесь, что файл не используется другим приложением\n"
-"и что файл не пуст."
-
-#: src/file.c:106
-msgid "Could not allocate the requrired memory."
-msgstr "Не удалось получить необходимую память."
-
-#: src/file.c:112
-#, c-format
-msgid ""
-"gedit was unable to open the file: \n"
-"\n"
-"%s\n"
-"\n"
-"Make sure that you have permissions for opening the file."
-msgstr ""
-"gEdit не смог открыть файл:\n"
-"\n"
-"%s\n"
-"\n"
-"Убедитесь, что у вас есть права на чтение этого файла."
-
-#: src/file.c:180
-#, c-format
-msgid ""
-"gedit was unable to save the file: \n"
-"\n"
-" %s \n"
-"\n"
-"Make sure that the path you provided exists,and that you have the appropiate "
-"write permissions."
-msgstr ""
-"gEdit не смог сохранить файл: \n"
-"\n"
-"%s \n"
-"\n"
-"Убедитесь, что указанный путь существует и что у вас есть соответствующие "
-"права на запись."
-
-#: src/file.c:194 src/file.c:208
-#, c-format
-msgid ""
-"gedit was unable to save the file :\n"
-"\n"
-" %s \n"
-"\n"
-"Because of an unknown reason (1). Please report this Problem to "
-"submit@bugs.gnome.org"
-msgstr ""
-"gEdit не смог сохранить файл:\n"
-"\n"
-" %s \n"
-"\n"
-"По неизвестной причине (1). Пожалуйста сообщите об этой Проблеме по адресу "
-"submit@bugs.gnome.org"
-
-#: src/file.c:274
-msgid "Open File ..."
-msgstr "Открыть файл..."
-
-#: src/file.c:316
-msgid "Save As..."
-msgstr "Сохранить как..."
-
-#: src/file.c:354
-#, c-format
-msgid "Loaded file %s"
-msgstr "Загружен файл %s"
-
-#: src/file.c:420
-#, c-format
-msgid "``%s'' is about to be overwriten. Do you want to continue ?"
-msgstr "'%s' будет перезаписан. Хотите продолжить?"
-
-#: src/file.c:431
-msgid "Document has not been saved."
-msgstr "Документ не был сохранен."
-
-#: src/file.c:439
-msgid "Error saving file!"
-msgstr "Ошибка при сохранении файла!"
-
-#: src/file.c:521
-#, c-format
-msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr "Файл '%s' не существует. Хотите создать его?"
-
-#: src/document.c:341
-#, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr " '%s' был изменен. Вы хотите сохранить его?"
-
-#: src/plugin.c:56
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr "Ошибка, не удалось открыть файл модуля, %s"
-
-#: src/plugin.c:67
-msgid "Error, plugin does not contain init_plugin function."
-msgstr "Ошибка, дополнение не содержит функции init_plugin."
-
-#: src/plugin.c:75
-msgid "Error, init_plugin returned an error"
-msgstr "Ошибка, init_plugin вернула ошибку"
-
-#: src/plugin.c:101
-msgid "Error, plugin is still in use"
-msgstr "Ошибка, дополнение еще используется"
-
-#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
-msgid "_Plugins"
-msgstr "Дополнения"
-
-#: src/print.c:240
-#, c-format
-msgid "gedit (%s): Print Preview"
-msgstr "gEdit (%s): Просмотр печати"
-
-#: src/print.c:458
-#, c-format
-msgid "Page: %i/%i"
-msgstr "Страница: %i/%i"
-
-#: src/menus.c:49
-msgid "Open (swap) .c/.h file"
-msgstr "Открыть (переключить) .c/.h файл"
-
-#: src/menus.c:58
-msgid "_New"
-msgstr "Новый"
-
-#: src/menus.c:59 src/menus.c:323
-msgid "Create a new document"
-msgstr "Создать новый документ"
-
-#: src/menus.c:64
-msgid "Save All"
-msgstr "Сохранить все"
-
-#: src/menus.c:65
-msgid "Save All Open Files"
-msgstr "Сохранить все открытые файлы"
-
-#: src/menus.c:80
-msgid "Print preview..."
-msgstr "Просмотр печати..."
-
-#: src/menus.c:81
-msgid "Preview data to be printed"
-msgstr "Просмотр данных, которые будут напечатаны"
-
-#: src/menus.c:87
-msgid "Close All"
-msgstr "Закрыть Все"
-
-#: src/menus.c:88
-msgid "Close All Open Files"
-msgstr "Закрыть все открытые файлы"
-
-#: src/menus.c:123
-msgid "Goto _Line..."
-msgstr "Перейти к строке..."
-
-#: src/menus.c:124
-msgid "Go to a specific line number"
-msgstr "Перейти к строке с указанным номером"
-
-#: src/menus.c:133
-msgid "_Add View"
-msgstr "Добавить окно"
-
-#: src/menus.c:134
-msgid "Add a new view of the document"
-msgstr "Добавить новое окно для документа"
-
-#: src/menus.c:136
-msgid "_Remove View"
-msgstr "Удалить окно"
-
-#: src/menus.c:137
-msgid "Remove view of the document"
-msgstr "Удалить окно документа"
-
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-#. N_("Toggle autoindent"),
-#. auto_indent_toggle_cb, NULL,
-#. NULL),
-#.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:209
-msgid "Show Statusbar"
-msgstr "Показать строку состояния"
-
-#: src/menus.c:210
-msgid ""
-"Enable or disable the statusbar at the bottom of this application window."
-msgstr "Включение/Отключение строки состояния внизу этого окна приложения."
-
-#: src/menus.c:323
-msgid "New"
-msgstr "Новый"
-
-#: src/menus.c:327
-msgid "Open"
-msgstr "Открыть"
-
-#: src/menus.c:327
-msgid "Open a file"
-msgstr "Открыть файл"
-
-#: src/menus.c:331
-msgid "Save"
-msgstr "Сохранить"
-
-#: src/menus.c:331
-msgid "Save the current file"
-msgstr "Сохранить текущий файл"
-
-#: src/menus.c:335
-msgid "Close"
-msgstr "Закрыть"
-
-#: src/menus.c:335
-msgid "Close the current file"
-msgstr "Закрыть текущий файл"
-
-#: src/menus.c:339
-msgid "Print"
-msgstr "Печать"
-
-#: src/menus.c:339
-msgid "Print the current file"
-msgstr "Напечатать текущий файл"
-
-#: src/menus.c:344
-msgid "Undo"
-msgstr "Откат"
-
-#: src/menus.c:344
-msgid "Undo last operation"
-msgstr "Отмена последнего действия"
-
-#: src/menus.c:348
-msgid "Redo"
-msgstr "Возврат"
-
-#: src/menus.c:348
-msgid "Redo last operation"
-msgstr "Повтор отмененного действия"
-
-#: src/menus.c:352
-msgid "Cut"
-msgstr "Вырезать"
-
-#: src/menus.c:352
-msgid "Cut the selection"
-msgstr "Вырезать выделение"
-
-#: src/menus.c:356
-msgid "Copy"
-msgstr "Скопировать"
-
-#: src/menus.c:356
-msgid "Copy the selection"
-msgstr "Скопировать выделение"
-
-#: src/menus.c:360
-msgid "Paste"
-msgstr "Вставить"
-
-#: src/menus.c:360
-msgid "Paste the clipboard"
-msgstr "Вставить из буфера обмена"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
-msgid "Find"
-msgstr "Найти"
-
-#: src/menus.c:364
-msgid "Search for a string"
-msgstr "Поиск строки"
-
-#: src/menus.c:368
-msgid "Get the current and total lines"
-msgstr "Указать текущую строку и общее количество строк"
-
-#: src/menus.c:373
-msgid "Exit"
-msgstr "Выход"
-
-#: src/menus.c:373
-msgid "Exit the program"
-msgstr "Выйти из программы"
-
-#: src/search.c:286
-msgid "Find In Files"
-msgstr "Поиск в файлах"
-
-#: src/search.c:287
-msgid "Search"
-msgstr "Поиск"
-
-#: src/search.c:291
-msgid "Search for:"
-msgstr "Поиск:"
-
-#: src/search.c:611
-#, c-format
-msgid ""
-"Filename: %s\n"
-"\n"
-"Total Lines: %i\n"
-"Current Line: %i"
-msgstr ""
-"Имя файла: %s\n"
-"\n"
-"Всего строк: %i\n"
-"Текущая строка: %i"
-
-#: src/search.c:634
-msgid "Search from cursor"
-msgstr "Поиск от позиции курсора"
-
-#: src/search.c:641
-msgid "Search from beginning of document"
-msgstr "Поиск от начала документа"
-
-#: src/search.c:648
-msgid "Search from end of document"
-msgstr "Поиск с конца документа"
-
-#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
-#: src/search.c:655
-msgid "Case sensitive"
-msgstr "Чувствительный к регистру"
-
-#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
-#: src/search.c:661
-msgid "Reverse search"
-msgstr "Обратный поиск"
-
 #: src/dialogs/dialog-about.c:52
 msgid "With special thanks to:"
 msgstr "С особой признательностью:"
@@ -433,6 +68,75 @@ msgstr "(С) 1998б 1999 Alex Roberts и Evan Lawrence"
 
 #: src/dialogs/dialog-about.c:69
 msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
+
+#: src/dialogs/dialog-find-line.c:130
+#, fuzzy
+msgid "Go to line"
+msgstr "Перейти к строке"
+
+#: src/dialogs/dialog-find-line.c:140
+#, fuzzy
+msgid "Line number: "
+msgstr "Номер строки:"
+
+#. glade won't let me set the title of the propertybox
+#: src/dialogs/dialog-prefs.c:443
+msgid "gedit: Preferences"
+msgstr ""
+
+#: src/dialogs/dialog-replace.c:106
+#, fuzzy
+msgid "Replace?"
+msgstr "Заменить"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/dialog-replace.c:119 src/dialogs/dialog-replace.c:120
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
+msgid "Replace"
+msgstr "Заменить"
+
+#: src/dialogs/dialog-replace.c:121
+#, fuzzy
+msgid "Replace all"
+msgstr "Заменить все"
+
+#: src/dialogs/dialog-replace.c:125 src/dialogs/dialog-search.c:62
+#: src/search.c:291
+msgid "Search for:"
+msgstr "Поиск:"
+
+#: src/dialogs/dialog-replace.c:135
+#, fuzzy
+msgid "Replace with:"
+msgstr "Заменить на:"
+
+#: src/dialogs/dialog-replace.c:146 src/dialogs/replace.glade.h:19
+msgid "Ask before replacing"
+msgstr "Спрашивать перед заменой"
+
+#: src/dialogs/dialog-search.c:57 src/dialogs/dialog-search.c:58
+#: src/search.c:287
+msgid "Search"
+msgstr "Поиск"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/about.glade.h:7
+#, fuzzy
+msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
+msgstr "(С) 1998б 1999 Alex Roberts и Evan Lawrence"
+
+#: src/dialogs/about.glade.h:8
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
 #.
@@ -460,6 +164,16 @@ msgstr "Введите номер строки, к которой вы хотите перейти."
 #: src/dialogs/prefs.glade.h:7
 msgid "Appearance"
 msgstr "Внешний вид"
+
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, NULL,
+#. NULL),
+#.
+#: src/dialogs/prefs.glade.h:8 src/menus.c:209
+msgid "Show Statusbar"
+msgstr "Показать строку состояния"
 
 #: src/dialogs/prefs.glade.h:9
 msgid "Show splitscreen"
@@ -581,40 +295,21 @@ msgstr "строк(и)"
 msgid "Paper"
 msgstr "Бумага"
 
-#: src/dialogs/search.glade.h:9
-msgid ""
-"Cursor\n"
-"Beginning of Document\n"
-"End of Document\n"
-msgstr ""
-"Курсор\n"
-"Начало документа\n"
-"Конец документа\n"
+#: src/dialogs/replace.glade.h:9
+msgid "Replace All"
+msgstr "Заменить все"
 
 #: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
 msgid "Search for: "
 msgstr "Поиск:"
 
-#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
-msgid "Search from: "
-msgstr "Поиск от:"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
-msgid "Replace"
-msgstr "Заменить"
-
-#: src/dialogs/replace.glade.h:9
-msgid "Replace All"
-msgstr "Заменить все"
-
 #: src/dialogs/replace.glade.h:11
 msgid "Replace with: "
 msgstr "Заменить на:"
+
+#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
+msgid "Search from: "
+msgstr "Поиск от:"
 
 #: src/dialogs/replace.glade.h:13
 msgid ""
@@ -626,6 +321,385 @@ msgstr ""
 "Начало документа\n"
 "Конец документа\n"
 
-#: src/dialogs/replace.glade.h:19
-msgid "Ask before replacing"
-msgstr "Спрашивать перед заменой"
+#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
+#: src/search.c:655
+msgid "Case sensitive"
+msgstr "Чувствительный к регистру"
+
+#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
+#: src/search.c:661
+msgid "Reverse search"
+msgstr "Обратный поиск"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
+msgid "Find"
+msgstr "Найти"
+
+#: src/dialogs/search.glade.h:9
+msgid ""
+"Cursor\n"
+"Beginning of Document\n"
+"End of Document\n"
+msgstr ""
+"Курсор\n"
+"Начало документа\n"
+"Конец документа\n"
+
+#: src/document.c:341
+#, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr " '%s' был изменен. Вы хотите сохранить его?"
+
+#: src/file.c:87
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
+msgstr ""
+"При открытии файла была обнаружена ошибка.\n"
+"Убедитесь, что файл существует."
+
+#: src/file.c:94
+#, c-format
+msgid ""
+"An error was encountered while opening the file:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Please make sure the file is not beeing used by another aplication\n"
+"and that the file is not empty."
+msgstr ""
+"При открытии файла была обнаружена ошибка:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Убедитесь, что файл не используется другим приложением\n"
+"и что файл не пуст."
+
+#: src/file.c:106
+msgid "Could not allocate the requrired memory."
+msgstr "Не удалось получить необходимую память."
+
+#: src/file.c:112
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have permissions for opening the file."
+msgstr ""
+"gEdit не смог открыть файл:\n"
+"\n"
+"%s\n"
+"\n"
+"Убедитесь, что у вас есть права на чтение этого файла."
+
+#: src/file.c:180
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exists,and that you have the appropiate "
+"write permissions."
+msgstr ""
+"gEdit не смог сохранить файл: \n"
+"\n"
+"%s \n"
+"\n"
+"Убедитесь, что указанный путь существует и что у вас есть соответствующие "
+"права на запись."
+
+#: src/file.c:194 src/file.c:208
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+"gEdit не смог сохранить файл:\n"
+"\n"
+" %s \n"
+"\n"
+"По неизвестной причине (1). Пожалуйста сообщите об этой Проблеме по адресу "
+"submit@bugs.gnome.org"
+
+#: src/file.c:274
+msgid "Open File ..."
+msgstr "Открыть файл..."
+
+#: src/file.c:316
+msgid "Save As..."
+msgstr "Сохранить как..."
+
+#: src/file.c:354
+#, c-format
+msgid "Loaded file %s"
+msgstr "Загружен файл %s"
+
+#: src/file.c:420
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr "'%s' будет перезаписан. Хотите продолжить?"
+
+#: src/file.c:431
+msgid "Document has not been saved."
+msgstr "Документ не был сохранен."
+
+#: src/file.c:439
+msgid "Error saving file!"
+msgstr "Ошибка при сохранении файла!"
+
+#: src/file.c:521
+#, c-format
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
+msgstr "Файл '%s' не существует. Хотите создать его?"
+
+#: src/menus.c:49
+msgid "Open (swap) .c/.h file"
+msgstr "Открыть (переключить) .c/.h файл"
+
+#: src/menus.c:58
+msgid "_New"
+msgstr "Новый"
+
+#: src/menus.c:59 src/menus.c:323
+msgid "Create a new document"
+msgstr "Создать новый документ"
+
+#: src/menus.c:64
+msgid "Save All"
+msgstr "Сохранить все"
+
+#: src/menus.c:65
+msgid "Save All Open Files"
+msgstr "Сохранить все открытые файлы"
+
+#: src/menus.c:80
+msgid "Print preview..."
+msgstr "Просмотр печати..."
+
+#: src/menus.c:81
+msgid "Preview data to be printed"
+msgstr "Просмотр данных, которые будут напечатаны"
+
+#: src/menus.c:87
+msgid "Close All"
+msgstr "Закрыть Все"
+
+#: src/menus.c:88
+msgid "Close All Open Files"
+msgstr "Закрыть все открытые файлы"
+
+#: src/menus.c:123
+msgid "Goto _Line..."
+msgstr "Перейти к строке..."
+
+#: src/menus.c:124
+msgid "Go to a specific line number"
+msgstr "Перейти к строке с указанным номером"
+
+#: src/menus.c:133
+msgid "_Add View"
+msgstr "Добавить окно"
+
+#: src/menus.c:134
+msgid "Add a new view of the document"
+msgstr "Добавить новое окно для документа"
+
+#: src/menus.c:136
+msgid "_Remove View"
+msgstr "Удалить окно"
+
+#: src/menus.c:137
+msgid "Remove view of the document"
+msgstr "Удалить окно документа"
+
+#: src/menus.c:210
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr "Включение/Отключение строки состояния внизу этого окна приложения."
+
+#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
+msgid "_Plugins"
+msgstr "Дополнения"
+
+#: src/menus.c:323
+msgid "New"
+msgstr "Новый"
+
+#: src/menus.c:327
+msgid "Open"
+msgstr "Открыть"
+
+#: src/menus.c:327
+msgid "Open a file"
+msgstr "Открыть файл"
+
+#: src/menus.c:331
+msgid "Save"
+msgstr "Сохранить"
+
+#: src/menus.c:331
+msgid "Save the current file"
+msgstr "Сохранить текущий файл"
+
+#: src/menus.c:335
+msgid "Close"
+msgstr "Закрыть"
+
+#: src/menus.c:335
+msgid "Close the current file"
+msgstr "Закрыть текущий файл"
+
+#: src/menus.c:339
+msgid "Print"
+msgstr "Печать"
+
+#: src/menus.c:339
+msgid "Print the current file"
+msgstr "Напечатать текущий файл"
+
+#: src/menus.c:344
+msgid "Undo"
+msgstr "Откат"
+
+#: src/menus.c:344
+msgid "Undo last operation"
+msgstr "Отмена последнего действия"
+
+#: src/menus.c:348
+msgid "Redo"
+msgstr "Возврат"
+
+#: src/menus.c:348
+msgid "Redo last operation"
+msgstr "Повтор отмененного действия"
+
+#: src/menus.c:352
+msgid "Cut"
+msgstr "Вырезать"
+
+#: src/menus.c:352
+msgid "Cut the selection"
+msgstr "Вырезать выделение"
+
+#: src/menus.c:356
+msgid "Copy"
+msgstr "Скопировать"
+
+#: src/menus.c:356
+msgid "Copy the selection"
+msgstr "Скопировать выделение"
+
+#: src/menus.c:360
+msgid "Paste"
+msgstr "Вставить"
+
+#: src/menus.c:360
+msgid "Paste the clipboard"
+msgstr "Вставить из буфера обмена"
+
+#: src/menus.c:364
+msgid "Search for a string"
+msgstr "Поиск строки"
+
+#: src/menus.c:368 src/window.c:55
+msgid "Line"
+msgstr "Строка"
+
+#: src/menus.c:368
+msgid "Get the current and total lines"
+msgstr "Указать текущую строку и общее количество строк"
+
+#: src/menus.c:373
+msgid "Exit"
+msgstr "Выход"
+
+#: src/menus.c:373
+msgid "Exit the program"
+msgstr "Выйти из программы"
+
+#: src/plugin.c:56
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr "Ошибка, не удалось открыть файл модуля, %s"
+
+#: src/plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr "Ошибка, дополнение не содержит функции init_plugin."
+
+#: src/plugin.c:75
+msgid "Error, init_plugin returned an error"
+msgstr "Ошибка, init_plugin вернула ошибку"
+
+#: src/plugin.c:101
+msgid "Error, plugin is still in use"
+msgstr "Ошибка, дополнение еще используется"
+
+#: src/print.c:243
+#, c-format
+msgid "gedit (%s): Print Preview"
+msgstr "gEdit (%s): Просмотр печати"
+
+#: src/print.c:473
+#, c-format
+msgid "Page: %i/%i"
+msgstr "Страница: %i/%i"
+
+#: src/recent.c:52
+msgid "_File/"
+msgstr ""
+
+#: src/recent.c:59 src/recent.c:60
+#, fuzzy
+msgid "_File"
+msgstr "Имя файла"
+
+#: src/search.c:286
+msgid "Find In Files"
+msgstr "Поиск в файлах"
+
+#: src/search.c:611
+#, c-format
+msgid ""
+"Filename: %s\n"
+"\n"
+"Total Lines: %i\n"
+"Current Line: %i"
+msgstr ""
+"Имя файла: %s\n"
+"\n"
+"Всего строк: %i\n"
+"Текущая строка: %i"
+
+#: src/search.c:634
+msgid "Search from cursor"
+msgstr "Поиск от позиции курсора"
+
+#: src/search.c:641
+msgid "Search from beginning of document"
+msgstr "Поиск от начала документа"
+
+#: src/search.c:648
+msgid "Search from end of document"
+msgstr "Поиск с конца документа"
+
+#: src/window.c:54
+msgid "Filename"
+msgstr "Имя файла"
+
+#: src/window.c:56
+msgid "Contents"
+msgstr "Содержание"

@@ -38,7 +38,10 @@ struct _Preferences
 	gint  have_tb_pix;
 	gint  have_tb_text;
 	gint  use_relief_toolbar;
+
+	gboolean use_fontset;
 	gchar *font;
+
 	gint  splitscreen;
 	gint  num_recent;	/* Number of recently accessed
 				   documents in the Recent Documents
@@ -62,7 +65,6 @@ struct _Preferences
 };
 
 extern Preferences *settings;
-extern gboolean use_fontset;
 
 extern void gedit_save_settings (void);
 extern void gedit_load_settings (void);

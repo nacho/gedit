@@ -21,10 +21,6 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-/*
-#include "window.h"
-#include "gedit.h"
-*/
 #include "commands.h"
 #include "document.h"
 #include "prefs.h"
@@ -112,15 +108,6 @@ main (int argc, char **argv)
 #else
 	gnome_init_with_popt_table ("gedit", VERSION, argc, argv, options, 0, &ctx);
 #endif /* HAVE_LIBGNORBA */
-
-	/* Determine we use fonts or fontsets. If a fontset is supplied
-	   for text widgets, we use fontsets for drawing texts. Otherwise
-	   we use normal fonts instead. */
-	dummy_widget = gtk_text_new (NULL, NULL);
-	gtk_widget_ensure_style (dummy_widget);
-	if (dummy_widget->style->font->type == GDK_FONT_FONTSET)
-		use_fontset = TRUE;
-	gtk_widget_destroy (dummy_widget);
 
 	args = (char**) poptGetArgs(ctx);
 

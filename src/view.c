@@ -611,7 +611,7 @@ gedit_view_init (View *view)
 	fg->green = settings->fg[1];
 	fg->blue = settings->fg[2];
 
-	if (use_fontset)
+	if (settings->use_fontset)
 	{
 		style->font = view->font ? gdk_fontset_load (view->font) : NULL;
 		if (style->font == NULL)
@@ -802,7 +802,7 @@ gedit_view_set_font (View *view, gchar *fontname)
 	
 	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET((view)->text)));
   	
-  	if (use_fontset)
+  	if (settings->use_fontset)
 		font = gdk_fontset_load (fontname);
   	else
 		font = gdk_font_load (fontname);

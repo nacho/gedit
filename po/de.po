@@ -5,13 +5,44 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-14 20:54-0400\n"
+"POT-Creation-Date: 2000-04-16 23:31-0400\n"
 "PO-Revision-Date: 1999-08-09 16:15+02:00\n"
 "Last-Translator: Matthias Warkus <mawa@iname.com>\n"
 "Language-Team: Matthias Warkus <mawa@iname.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: plugins/convert/convert.c:136
+#, fuzzy
+msgid "Convert"
+msgstr "Verwerfen"
+
+#: plugins/convert/convert.c:137
+msgid "Number Converter"
+msgstr ""
+
+#: plugins/diff/diff.c:204
+msgid "Diff"
+msgstr ""
+
+#: plugins/diff/diff.c:205
+msgid "Diff plugin."
+msgstr ""
+
+#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
+#: src/print.c:361
+msgid "Untitled"
+msgstr "Namenlos"
+
+#: plugins/email/email.c:155
+msgid "Email"
+msgstr ""
+
+#: plugins/email/email.c:156
+#, fuzzy
+msgid "Email the current document"
+msgstr "Aktuelle Datei speichern"
 
 #: plugins/sample/sample.c:52
 msgid "Hello World"
@@ -30,383 +61,6 @@ msgstr ""
 msgid "Inserts the current date and time"
 msgstr "Aktuelle Datei schließen"
 
-#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
-#: src/print.c:281
-msgid "Untitled"
-msgstr "Namenlos"
-
-#: plugins/email/email.c:155
-msgid "Email"
-msgstr ""
-
-#: plugins/email/email.c:156
-#, fuzzy
-msgid "Email the current document"
-msgstr "Aktuelle Datei speichern"
-
-#: src/window.c:54
-#, fuzzy
-msgid "Filename"
-msgstr "_Datei"
-
-#: src/menus.c:368 src/window.c:55
-#, fuzzy
-msgid "Line"
-msgstr "Zeilenumbruch"
-
-#: src/window.c:56
-msgid "Contents"
-msgstr ""
-
-#: src/file.c:87
-msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file exists."
-msgstr ""
-
-#: src/file.c:94
-msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file is not beeing used by another aplication."
-msgstr ""
-
-#: src/file.c:103
-msgid "Could not allocate the requrired memory."
-msgstr ""
-
-#: src/file.c:109
-#, c-format
-msgid ""
-"gedit was unable to open the file: \n"
-"\n"
-"%s\n"
-"\n"
-"Make sure that you have permissions for opening the file."
-msgstr ""
-
-#: src/file.c:177
-#, c-format
-msgid ""
-"gedit was unable to save the file: \n"
-"\n"
-" %s \n"
-"\n"
-"Make sure that the path you provided exists,and that you have the appropiate "
-"write permissions."
-msgstr ""
-
-#: src/file.c:191 src/file.c:205
-#, c-format
-msgid ""
-"gedit was unable to save the file :\n"
-"\n"
-" %s \n"
-"\n"
-"Because of an unknown reason (1). Please report this Problem to "
-"submit@bugs.gnome.org"
-msgstr ""
-
-#: src/file.c:271
-#, fuzzy
-msgid "Open File ..."
-msgstr "Datei öffnen..."
-
-#: src/file.c:313
-#, fuzzy
-msgid "Save As..."
-msgstr "Speichern unter..."
-
-#: src/file.c:351
-#, c-format
-msgid "Loaded file %s"
-msgstr ""
-
-#: src/file.c:417
-#, c-format
-msgid "``%s'' is about to be overwriten. Do you want to continue ?"
-msgstr ""
-
-#: src/file.c:428
-#, fuzzy
-msgid "Document has not been saved."
-msgstr "Dokument ungesichert..."
-
-#: src/file.c:436
-msgid "Error saving file!"
-msgstr "Fehler beim Speichern der Datei!"
-
-#: src/file.c:518
-#, c-format
-msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr ""
-
-#: src/document.c:340
-#, fuzzy, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr " `%s' wurde geändert. Wollen Sie es speichern?"
-
-#: src/plugin.c:56
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr ""
-
-#: src/plugin.c:67
-msgid "Error, plugin does not contain init_plugin function."
-msgstr ""
-
-#: src/plugin.c:75
-msgid "Error, init_plugin returned an error"
-msgstr ""
-
-#: src/plugin.c:101
-msgid "Error, plugin is still in use"
-msgstr ""
-
-#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
-msgid "_Plugins"
-msgstr "Plugins"
-
-#: src/print.c:211
-#, c-format
-msgid "gedit (%s): Print Preview"
-msgstr ""
-
-#: src/print.c:361
-#, c-format
-msgid "Page: %i/%i"
-msgstr ""
-
-#: src/menus.c:49
-msgid "Open (swap) .c/.h file"
-msgstr ".c/.h-Datei öffnen (austauschen)"
-
-#: src/menus.c:58
-msgid "_New"
-msgstr "Neu"
-
-#: src/menus.c:59 src/menus.c:323
-msgid "Create a new document"
-msgstr "Neues Dokument erzeugen"
-
-#: src/menus.c:64
-#, fuzzy
-msgid "Save All"
-msgstr "Speichern unter..."
-
-#: src/menus.c:65
-#, fuzzy
-msgid "Save All Open Files"
-msgstr "Aktuelle Datei speichern"
-
-#: src/menus.c:80
-msgid "Print preview..."
-msgstr ""
-
-#: src/menus.c:81
-msgid "Preview data to be printed"
-msgstr ""
-
-#: src/menus.c:87
-#, fuzzy
-msgid "Close All"
-msgstr "Schließen"
-
-#: src/menus.c:88
-#, fuzzy
-msgid "Close All Open Files"
-msgstr "Aktuelle Datei schließen"
-
-#: src/menus.c:123
-#, fuzzy
-msgid "Goto _Line..."
-msgstr "Gehe zu Zeile"
-
-#: src/menus.c:124
-msgid "Go to a specific line number"
-msgstr ""
-
-#: src/menus.c:133
-msgid "_Add View"
-msgstr "Ansicht hinzufügen"
-
-#: src/menus.c:134
-msgid "Add a new view of the document"
-msgstr "Eine neue Ansicht auf das Dokument hinzufügen"
-
-#: src/menus.c:136
-msgid "_Remove View"
-msgstr "Ansicht entfernen"
-
-#: src/menus.c:137
-msgid "Remove view of the document"
-msgstr "Ansicht auf das Dokument entfernen"
-
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-#. N_("Toggle autoindent"),
-#. auto_indent_toggle_cb, NULL,
-#. NULL),
-#.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:209
-msgid "Show Statusbar"
-msgstr "Statuszeile an/aus"
-
-#: src/menus.c:210
-msgid ""
-"Enable or disable the statusbar at the bottom of this application window."
-msgstr ""
-
-#: src/menus.c:323
-msgid "New"
-msgstr "Neu"
-
-#: src/menus.c:327
-msgid "Open"
-msgstr "Öffnen"
-
-#: src/menus.c:327
-msgid "Open a file"
-msgstr "Eine Datei öffnen"
-
-#: src/menus.c:331
-msgid "Save"
-msgstr "Speichern"
-
-#: src/menus.c:331
-#, fuzzy
-msgid "Save the current file"
-msgstr "Aktuelle Datei drucken"
-
-#: src/menus.c:335
-msgid "Close"
-msgstr "Schließen"
-
-#: src/menus.c:335
-#, fuzzy
-msgid "Close the current file"
-msgstr "Aktuelle Datei drucken"
-
-#: src/menus.c:339
-msgid "Print"
-msgstr "Drucken"
-
-#: src/menus.c:339
-msgid "Print the current file"
-msgstr "Aktuelle Datei drucken"
-
-#: src/menus.c:344
-#, fuzzy
-msgid "Undo"
-msgstr "Fenster"
-
-#: src/menus.c:344
-msgid "Undo last operation"
-msgstr ""
-
-#: src/menus.c:348
-#, fuzzy
-msgid "Redo"
-msgstr "Schreibschutz"
-
-#: src/menus.c:348
-msgid "Redo last operation"
-msgstr ""
-
-#: src/menus.c:352
-msgid "Cut"
-msgstr "Ausschneiden"
-
-#: src/menus.c:352
-msgid "Cut the selection"
-msgstr "Markierten Text ausschneiden"
-
-#: src/menus.c:356
-msgid "Copy"
-msgstr "Kopieren"
-
-#: src/menus.c:356
-msgid "Copy the selection"
-msgstr "Markierten Text kopieren"
-
-#: src/menus.c:360
-msgid "Paste"
-msgstr "Einfügen"
-
-#: src/menus.c:360
-msgid "Paste the clipboard"
-msgstr "Zwischenablage einfügen"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
-msgid "Find"
-msgstr "Suchen"
-
-#: src/menus.c:364
-msgid "Search for a string"
-msgstr "Eine Zeichenkette suchen"
-
-#: src/menus.c:368
-#, fuzzy
-msgid "Get the current and total lines"
-msgstr "Aktuelle Datei schließen"
-
-#: src/menus.c:373
-msgid "Exit"
-msgstr "Beenden"
-
-#: src/menus.c:373
-msgid "Exit the program"
-msgstr "Das Programm beenden"
-
-#: src/search.c:286
-msgid "Find In Files"
-msgstr ""
-
-#: src/search.c:287
-msgid "Search"
-msgstr "Suchen"
-
-#: src/search.c:291
-msgid "Search for:"
-msgstr "Suchen nach:"
-
-#: src/search.c:611
-#, fuzzy, c-format
-msgid ""
-"Filename: %s\n"
-"\n"
-"Total Lines: %i\n"
-"Current Line: %i"
-msgstr ""
-"Zeilenanzahl: %i\n"
-"Aktuelle Zeile: %i"
-
-#: src/search.c:634
-msgid "Search from cursor"
-msgstr "Vom Cursor an suchen"
-
-#: src/search.c:641
-msgid "Search from beginning of document"
-msgstr "Vom Dokumentanfang an suchen"
-
-#: src/search.c:648
-msgid "Search from end of document"
-msgstr "Vom Dokumentende her suchen"
-
-#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
-#: src/search.c:655
-msgid "Case sensitive"
-msgstr "Groß-/Kleinschreibung beachten"
-
-#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
-#: src/search.c:661
-msgid "Reverse search"
-msgstr "Suche rückwärts"
-
 #: src/dialogs/dialog-about.c:52
 msgid "With special thanks to:"
 msgstr "Besonderer Dank an:"
@@ -418,6 +72,74 @@ msgstr "(C) 1998, 1999 Alex Roberts und Evan Lawrence"
 #: src/dialogs/dialog-about.c:69
 #, fuzzy
 msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gEdit ist ein kleiner und handlicher Texteditor für GNOME/Gtk+"
+
+#: src/dialogs/dialog-find-line.c:130
+#, fuzzy
+msgid "Go to line"
+msgstr "Gehe zu Zeile"
+
+#: src/dialogs/dialog-find-line.c:140
+#, fuzzy
+msgid "Line number: "
+msgstr "Zeilennummer"
+
+#. glade won't let me set the title of the propertybox
+#: src/dialogs/dialog-prefs.c:443
+msgid "gedit: Preferences"
+msgstr ""
+
+#: src/dialogs/dialog-replace.c:106
+msgid "Replace?"
+msgstr "Ersetzen?"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/dialog-replace.c:119 src/dialogs/dialog-replace.c:120
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
+msgid "Replace"
+msgstr "Ersetzen"
+
+#: src/dialogs/dialog-replace.c:121
+#, fuzzy
+msgid "Replace all"
+msgstr "Alle ersetzen"
+
+#: src/dialogs/dialog-replace.c:125 src/dialogs/dialog-search.c:62
+#: src/search.c:291
+msgid "Search for:"
+msgstr "Suchen nach:"
+
+#: src/dialogs/dialog-replace.c:135
+#, fuzzy
+msgid "Replace with:"
+msgstr "Ersetzen durch:"
+
+#: src/dialogs/dialog-replace.c:146 src/dialogs/replace.glade.h:19
+msgid "Ask before replacing"
+msgstr "Nachfragen vor dem Ersetzen"
+
+#: src/dialogs/dialog-search.c:57 src/dialogs/dialog-search.c:58
+#: src/search.c:287
+msgid "Search"
+msgstr "Suchen"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/about.glade.h:7
+#, fuzzy
+msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
+msgstr "(C) 1998, 1999 Alex Roberts und Evan Lawrence"
+
+#: src/dialogs/about.glade.h:8
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gEdit ist ein kleiner und handlicher Texteditor für GNOME/Gtk+"
 
 #.
@@ -447,6 +169,16 @@ msgstr ""
 #: src/dialogs/prefs.glade.h:7
 msgid "Appearance"
 msgstr "Aussehen"
+
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, NULL,
+#. NULL),
+#.
+#: src/dialogs/prefs.glade.h:8 src/menus.c:209
+msgid "Show Statusbar"
+msgstr "Statuszeile an/aus"
 
 #: src/dialogs/prefs.glade.h:9
 #, fuzzy
@@ -563,41 +295,30 @@ msgstr ""
 msgid "line(s)"
 msgstr ""
 
-#: src/dialogs/search.glade.h:9
-msgid ""
-"Cursor\n"
-"Beginning of Document\n"
-"End of Document\n"
-msgstr ""
-
-#: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
+#: src/dialogs/prefs.glade.h:44
 #, fuzzy
-msgid "Search for: "
-msgstr "Suchen nach:"
-
-#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
-#, fuzzy
-msgid "Search from: "
-msgstr "Suchen nach:"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
-msgid "Replace"
-msgstr "Ersetzen"
+msgid "Paper"
+msgstr "Einfügen"
 
 #: src/dialogs/replace.glade.h:9
 #, fuzzy
 msgid "Replace All"
 msgstr "Alle ersetzen"
 
+#: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
+#, fuzzy
+msgid "Search for: "
+msgstr "Suchen nach:"
+
 #: src/dialogs/replace.glade.h:11
 #, fuzzy
 msgid "Replace with: "
 msgstr "Ersetzen durch:"
+
+#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
+#, fuzzy
+msgid "Search from: "
+msgstr "Suchen nach:"
 
 #: src/dialogs/replace.glade.h:13
 msgid ""
@@ -606,9 +327,372 @@ msgid ""
 "End of document\n"
 msgstr ""
 
-#: src/dialogs/replace.glade.h:19
-msgid "Ask before replacing"
-msgstr "Nachfragen vor dem Ersetzen"
+#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
+#: src/search.c:655
+msgid "Case sensitive"
+msgstr "Groß-/Kleinschreibung beachten"
+
+#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
+#: src/search.c:661
+msgid "Reverse search"
+msgstr "Suche rückwärts"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
+msgid "Find"
+msgstr "Suchen"
+
+#: src/dialogs/search.glade.h:9
+msgid ""
+"Cursor\n"
+"Beginning of Document\n"
+"End of Document\n"
+msgstr ""
+
+#: src/document.c:341
+#, fuzzy, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr " `%s' wurde geändert. Wollen Sie es speichern?"
+
+#: src/file.c:87
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
+msgstr ""
+
+#: src/file.c:94
+#, c-format
+msgid ""
+"An error was encountered while opening the file:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Please make sure the file is not beeing used by another aplication\n"
+"and that the file is not empty."
+msgstr ""
+
+#: src/file.c:106
+msgid "Could not allocate the requrired memory."
+msgstr ""
+
+#: src/file.c:112
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have permissions for opening the file."
+msgstr ""
+
+#: src/file.c:180
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exists,and that you have the appropiate "
+"write permissions."
+msgstr ""
+
+#: src/file.c:194 src/file.c:208
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+
+#: src/file.c:274
+#, fuzzy
+msgid "Open File ..."
+msgstr "Datei öffnen..."
+
+#: src/file.c:316
+#, fuzzy
+msgid "Save As..."
+msgstr "Speichern unter..."
+
+#: src/file.c:354
+#, c-format
+msgid "Loaded file %s"
+msgstr ""
+
+#: src/file.c:420
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr ""
+
+#: src/file.c:431
+#, fuzzy
+msgid "Document has not been saved."
+msgstr "Dokument ungesichert..."
+
+#: src/file.c:439
+msgid "Error saving file!"
+msgstr "Fehler beim Speichern der Datei!"
+
+#: src/file.c:521
+#, c-format
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
+msgstr ""
+
+#: src/menus.c:49
+msgid "Open (swap) .c/.h file"
+msgstr ".c/.h-Datei öffnen (austauschen)"
+
+#: src/menus.c:58
+msgid "_New"
+msgstr "Neu"
+
+#: src/menus.c:59 src/menus.c:323
+msgid "Create a new document"
+msgstr "Neues Dokument erzeugen"
+
+#: src/menus.c:64
+#, fuzzy
+msgid "Save All"
+msgstr "Speichern unter..."
+
+#: src/menus.c:65
+#, fuzzy
+msgid "Save All Open Files"
+msgstr "Aktuelle Datei speichern"
+
+#: src/menus.c:80
+msgid "Print preview..."
+msgstr ""
+
+#: src/menus.c:81
+msgid "Preview data to be printed"
+msgstr ""
+
+#: src/menus.c:87
+#, fuzzy
+msgid "Close All"
+msgstr "Schließen"
+
+#: src/menus.c:88
+#, fuzzy
+msgid "Close All Open Files"
+msgstr "Aktuelle Datei schließen"
+
+#: src/menus.c:123
+#, fuzzy
+msgid "Goto _Line..."
+msgstr "Gehe zu Zeile"
+
+#: src/menus.c:124
+msgid "Go to a specific line number"
+msgstr ""
+
+#: src/menus.c:133
+msgid "_Add View"
+msgstr "Ansicht hinzufügen"
+
+#: src/menus.c:134
+msgid "Add a new view of the document"
+msgstr "Eine neue Ansicht auf das Dokument hinzufügen"
+
+#: src/menus.c:136
+msgid "_Remove View"
+msgstr "Ansicht entfernen"
+
+#: src/menus.c:137
+msgid "Remove view of the document"
+msgstr "Ansicht auf das Dokument entfernen"
+
+#: src/menus.c:210
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr ""
+
+#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
+msgid "_Plugins"
+msgstr "Plugins"
+
+#: src/menus.c:323
+msgid "New"
+msgstr "Neu"
+
+#: src/menus.c:327
+msgid "Open"
+msgstr "Öffnen"
+
+#: src/menus.c:327
+msgid "Open a file"
+msgstr "Eine Datei öffnen"
+
+#: src/menus.c:331
+msgid "Save"
+msgstr "Speichern"
+
+#: src/menus.c:331
+#, fuzzy
+msgid "Save the current file"
+msgstr "Aktuelle Datei drucken"
+
+#: src/menus.c:335
+msgid "Close"
+msgstr "Schließen"
+
+#: src/menus.c:335
+#, fuzzy
+msgid "Close the current file"
+msgstr "Aktuelle Datei drucken"
+
+#: src/menus.c:339
+msgid "Print"
+msgstr "Drucken"
+
+#: src/menus.c:339
+msgid "Print the current file"
+msgstr "Aktuelle Datei drucken"
+
+#: src/menus.c:344
+#, fuzzy
+msgid "Undo"
+msgstr "Fenster"
+
+#: src/menus.c:344
+msgid "Undo last operation"
+msgstr ""
+
+#: src/menus.c:348
+#, fuzzy
+msgid "Redo"
+msgstr "Schreibschutz"
+
+#: src/menus.c:348
+msgid "Redo last operation"
+msgstr ""
+
+#: src/menus.c:352
+msgid "Cut"
+msgstr "Ausschneiden"
+
+#: src/menus.c:352
+msgid "Cut the selection"
+msgstr "Markierten Text ausschneiden"
+
+#: src/menus.c:356
+msgid "Copy"
+msgstr "Kopieren"
+
+#: src/menus.c:356
+msgid "Copy the selection"
+msgstr "Markierten Text kopieren"
+
+#: src/menus.c:360
+msgid "Paste"
+msgstr "Einfügen"
+
+#: src/menus.c:360
+msgid "Paste the clipboard"
+msgstr "Zwischenablage einfügen"
+
+#: src/menus.c:364
+msgid "Search for a string"
+msgstr "Eine Zeichenkette suchen"
+
+#: src/menus.c:368 src/window.c:55
+#, fuzzy
+msgid "Line"
+msgstr "Zeilenumbruch"
+
+#: src/menus.c:368
+#, fuzzy
+msgid "Get the current and total lines"
+msgstr "Aktuelle Datei schließen"
+
+#: src/menus.c:373
+msgid "Exit"
+msgstr "Beenden"
+
+#: src/menus.c:373
+msgid "Exit the program"
+msgstr "Das Programm beenden"
+
+#: src/plugin.c:56
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr ""
+
+#: src/plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr ""
+
+#: src/plugin.c:75
+msgid "Error, init_plugin returned an error"
+msgstr ""
+
+#: src/plugin.c:101
+msgid "Error, plugin is still in use"
+msgstr ""
+
+#: src/print.c:243
+#, c-format
+msgid "gedit (%s): Print Preview"
+msgstr ""
+
+#: src/print.c:473
+#, c-format
+msgid "Page: %i/%i"
+msgstr ""
+
+#: src/recent.c:52
+msgid "_File/"
+msgstr "_Datei/"
+
+#: src/recent.c:59 src/recent.c:60
+#, fuzzy
+msgid "_File"
+msgstr "_Datei/"
+
+#: src/search.c:286
+msgid "Find In Files"
+msgstr ""
+
+#: src/search.c:611
+#, fuzzy, c-format
+msgid ""
+"Filename: %s\n"
+"\n"
+"Total Lines: %i\n"
+"Current Line: %i"
+msgstr ""
+"Zeilenanzahl: %i\n"
+"Aktuelle Zeile: %i"
+
+#: src/search.c:634
+msgid "Search from cursor"
+msgstr "Vom Cursor an suchen"
+
+#: src/search.c:641
+msgid "Search from beginning of document"
+msgstr "Vom Dokumentanfang an suchen"
+
+#: src/search.c:648
+msgid "Search from end of document"
+msgstr "Vom Dokumentende her suchen"
+
+#: src/window.c:54
+#, fuzzy
+msgid "Filename"
+msgstr "_Datei"
+
+#: src/window.c:56
+msgid "Contents"
+msgstr ""
 
 #~ msgid "The gEdit Email Plugin"
 #~ msgstr "Das gEdit-E-Mail-Plugin"
@@ -629,9 +713,6 @@ msgstr "Nachfragen vor dem Ersetzen"
 
 #~ msgid "Document Unchanged..."
 #~ msgstr "Dokument ungesichert..."
-
-#~ msgid "_File/"
-#~ msgstr "_Datei/"
 
 #, fuzzy
 #~ msgid "Can't open file!"
@@ -722,9 +803,6 @@ msgstr "Nachfragen vor dem Ersetzen"
 #~ msgid "Show toolbar _icons"
 #~ msgstr "Werkzeugicons anzeigen"
 
-#~ msgid "Revert"
-#~ msgstr "Verwerfen"
-
 #~ msgid "_Top"
 #~ msgstr "Oben"
 
@@ -763,9 +841,6 @@ msgstr "Nachfragen vor dem Ersetzen"
 
 #~ msgid "Save the current settings for future sessions"
 #~ msgstr "Aktuelle Einstellungen für spätere Sitzungen speichern"
-
-#~ msgid "Replace?"
-#~ msgstr "Ersetzen?"
 
 #~ msgid ""
 #~ "Enter print command below\n"

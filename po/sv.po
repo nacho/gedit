@@ -5,13 +5,43 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-17 00:13+0200\n"
+"POT-Creation-Date: 2000-04-16 23:31-0400\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Andreas Hyden <a.hyden@cyberpoint.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: plugins/convert/convert.c:136
+#, fuzzy
+msgid "Convert"
+msgstr "Innehåll"
+
+#: plugins/convert/convert.c:137
+msgid "Number Converter"
+msgstr ""
+
+#: plugins/diff/diff.c:204
+msgid "Diff"
+msgstr ""
+
+#: plugins/diff/diff.c:205
+msgid "Diff plugin."
+msgstr ""
+
+#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
+#: src/print.c:361
+msgid "Untitled"
+msgstr "Namnlös"
+
+#: plugins/email/email.c:155
+msgid "Email"
+msgstr "Epost"
+
+#: plugins/email/email.c:156
+msgid "Email the current document"
+msgstr "Eposta det aktiva dokumentet"
 
 #: plugins/sample/sample.c:52
 msgid "Hello World"
@@ -29,402 +59,6 @@ msgstr "Infoga tid"
 msgid "Inserts the current date and time"
 msgstr "Infogar dagens datum och tid"
 
-#: plugins/email/email.c:126 plugins/email/email.c:133 src/document.c:156
-#: src/print.c:354
-msgid "Untitled"
-msgstr "Namnlös"
-
-#: plugins/email/email.c:155
-msgid "Email"
-msgstr "Epost"
-
-#: plugins/email/email.c:156
-msgid "Email the current document"
-msgstr "Eposta det aktiva dokumentet"
-
-#: src/window.c:54
-msgid "Filename"
-msgstr "Filnamn"
-
-#: src/menus.c:368 src/window.c:55
-msgid "Line"
-msgstr "Rad"
-
-#: src/window.c:56
-msgid "Contents"
-msgstr "Innehåll"
-
-#: src/file.c:87
-msgid ""
-"An error was encountered while opening the file.\n"
-"Please make sure the file exists."
-msgstr ""
-"Ett fel uppstod vid öppning av filen.\n"
-"Var god och se till om filen finns."
-
-#: src/file.c:94
-msgid ""
-"An error was encountered while opening the file:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Please make sure the file is not beeing used by another aplication\n"
-"and that the file is not empty."
-msgstr ""
-"Ett fel uppstod vid öppning av filen:\n"
-"\n"
-"%s\n"
-"\n"
-"\n"
-"Var god och se till att filen inte används av något annat program\n"
-"och att filen inte är tom."
-
-#: src/file.c:106
-msgid "Could not allocate the requrired memory."
-msgstr "Kunde inte allokera tillräckligt med minne."
-
-#: src/file.c:112
-#, c-format
-msgid ""
-"gedit was unable to open the file: \n"
-"\n"
-"%s\n"
-"\n"
-"Make sure that you have permissions for opening the file."
-msgstr ""
-"gedit kunde inte öppna filen: \n"
-"\n"
-"%s\n"
-"\n"
-"Se till att du har rättigheter för att öppna filen."
-
-#: src/file.c:180
-#, c-format
-msgid ""
-"gedit was unable to save the file: \n"
-"\n"
-" %s \n"
-"\n"
-"Make sure that the path you provided exists,and that you have the appropiate "
-"write permissions."
-msgstr ""
-"gedit kunde inte spara filen: \n"
-"\n"
-" %s \n"
-"\n"
-"Se till att sökvägen du angav existerar, och att du har de rätta "
-"skrivrättigheterna."
-
-#: src/file.c:194 src/file.c:208
-#, c-format
-msgid ""
-"gedit was unable to save the file :\n"
-"\n"
-" %s \n"
-"\n"
-"Because of an unknown reason (1). Please report this Problem to "
-"submit@bugs.gnome.org"
-msgstr ""
-"gedit kunde inte spara filen :\n"
-"\n"
-" %s \n"
-"\n"
-"På grund av en okänd orsak (1). Var god och rapportera detta problemet till "
-"submit@bugs.gnome.org"
-
-#: src/file.c:274
-msgid "Open File ..."
-msgstr "Öppna fil ..."
-
-#: src/file.c:316
-msgid "Save As..."
-msgstr "Spara som..."
-
-#: src/file.c:354
-#, c-format
-msgid "Loaded file %s"
-msgstr "Laddade filen %s"
-
-#: src/file.c:420
-#, c-format
-msgid "``%s'' is about to be overwriten. Do you want to continue ?"
-msgstr "\"%s\" kommer att skrivas över. Vill du fortsätta ?"
-
-#: src/file.c:431
-msgid "Document has not been saved."
-msgstr "Dokument har inte sparats."
-
-#: src/file.c:439
-msgid "Error saving file!"
-msgstr "Fel vid sparning av fil!"
-
-#: src/file.c:521
-#, c-format
-msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr "Filen \"%s\" finns inte. Vill du skapa den?"
-
-#: src/document.c:341
-#, c-format
-msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr " \"%s\" har blivit ändrad. Vill du spara den?"
-
-#: src/plugin.c:56
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr "Fel, kunde inte öppna modulfilen, %s"
-
-#: src/plugin.c:67
-msgid "Error, plugin does not contain init_plugin function."
-msgstr "Fel, insticksprogrammet innehåller inte init_plugin funktionen."
-
-#: src/plugin.c:75
-msgid "Error, init_plugin returned an error"
-msgstr "Fel, init_plugin retunerade ett fel"
-
-#: src/plugin.c:101
-msgid "Error, plugin is still in use"
-msgstr "Fel, insticksprogrammet används fortfarande"
-
-#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
-msgid "_Plugins"
-msgstr "_Insticksprogram"
-
-#: src/print.c:240
-#, c-format
-msgid "gedit (%s): Print Preview"
-msgstr "gedit (%s): Förhandsgranskning"
-
-#: src/print.c:458
-#, c-format
-msgid "Page: %i/%i"
-msgstr "Sida: %i/%i"
-
-#: src/menus.c:49
-msgid "Open (swap) .c/.h file"
-msgstr "Öppna (byt) .c/.h filen"
-
-#: src/menus.c:58
-msgid "_New"
-msgstr "_Ny"
-
-#: src/menus.c:59 src/menus.c:323
-msgid "Create a new document"
-msgstr "Skapa nytt dokument"
-
-#: src/menus.c:64
-msgid "Save All"
-msgstr "Spara alla"
-
-#: src/menus.c:65
-msgid "Save All Open Files"
-msgstr "Spara alla öppna filer"
-
-#: src/menus.c:80
-msgid "Print preview..."
-msgstr "Förhandsgranskning..."
-
-#: src/menus.c:81
-msgid "Preview data to be printed"
-msgstr "Förhandsgranska data som ska skrivas ut"
-
-#: src/menus.c:87
-msgid "Close All"
-msgstr "Stäng alla"
-
-#: src/menus.c:88
-msgid "Close All Open Files"
-msgstr "Stäng alla öppna filer"
-
-#: src/menus.c:123
-msgid "Goto _Line..."
-msgstr "Gå till _rad"
-
-#: src/menus.c:124
-msgid "Go to a specific line number"
-msgstr "Gå till en specifik linje"
-
-#: src/menus.c:133
-msgid "_Add View"
-msgstr "_Lägg till vy"
-
-#: src/menus.c:134
-msgid "Add a new view of the document"
-msgstr "Lägg till en ny vy av dokumentet"
-
-#: src/menus.c:136
-msgid "_Remove View"
-msgstr "_Ta bort vy"
-
-#: src/menus.c:137
-msgid "Remove view of the document"
-msgstr "Tar bort en vy av dokumentet"
-
-#.
-#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
-#. N_("Toggle autoindent"),
-#. auto_indent_toggle_cb, NULL,
-#. NULL),
-#.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:209
-msgid "Show Statusbar"
-msgstr "Visa statusrad"
-
-#: src/menus.c:210
-msgid ""
-"Enable or disable the statusbar at the bottom of this application window."
-msgstr ""
-"Aktivera eller avaktivera statusraden längst ner på det här "
-"applikationsfönstret."
-
-#: src/menus.c:323
-msgid "New"
-msgstr "Nytt"
-
-#: src/menus.c:327
-msgid "Open"
-msgstr "Öppna"
-
-#: src/menus.c:327
-msgid "Open a file"
-msgstr "Öppna en fil"
-
-#: src/menus.c:331
-msgid "Save"
-msgstr "Spara"
-
-#: src/menus.c:331
-msgid "Save the current file"
-msgstr "Spara den aktiva filen"
-
-#: src/menus.c:335
-msgid "Close"
-msgstr "Stäng"
-
-#: src/menus.c:335
-msgid "Close the current file"
-msgstr "Stäng den aktiva filen"
-
-#: src/menus.c:339
-msgid "Print"
-msgstr "Skriv ut"
-
-#: src/menus.c:339
-msgid "Print the current file"
-msgstr "Skriv ut nuvarande fil"
-
-#: src/menus.c:344
-msgid "Undo"
-msgstr "Ångra"
-
-#: src/menus.c:344
-msgid "Undo last operation"
-msgstr "Ångra den senaste ändringen"
-
-#: src/menus.c:348
-msgid "Redo"
-msgstr "Gör om"
-
-#: src/menus.c:348
-msgid "Redo last operation"
-msgstr "Gör om senaste ändringen"
-
-#: src/menus.c:352
-msgid "Cut"
-msgstr "Klipp ut"
-
-#: src/menus.c:352
-msgid "Cut the selection"
-msgstr "Klipp ut markeringen"
-
-#: src/menus.c:356
-msgid "Copy"
-msgstr "Kopiera"
-
-#: src/menus.c:356
-msgid "Copy the selection"
-msgstr "Kopiera markeringen"
-
-#: src/menus.c:360
-msgid "Paste"
-msgstr "Klistra in"
-
-#: src/menus.c:360
-msgid "Paste the clipboard"
-msgstr "Klistra in från urklippet"
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
-msgid "Find"
-msgstr "Sök"
-
-#: src/menus.c:364
-msgid "Search for a string"
-msgstr "Sök efter en sträng"
-
-#: src/menus.c:368
-msgid "Get the current and total lines"
-msgstr "Få tag på den nuvarande och det totala antalet linjer"
-
-#: src/menus.c:373
-msgid "Exit"
-msgstr "Avsluta"
-
-#: src/menus.c:373
-msgid "Exit the program"
-msgstr "Avslutar programmet"
-
-#: src/search.c:286
-msgid "Find In Files"
-msgstr "Hitta i filer"
-
-#: src/search.c:287
-msgid "Search"
-msgstr "Sök"
-
-#: src/search.c:291
-msgid "Search for:"
-msgstr "Sök efter:"
-
-#: src/search.c:611
-#, c-format
-msgid ""
-"Filename: %s\n"
-"\n"
-"Total Lines: %i\n"
-"Current Line: %i"
-msgstr ""
-"Filnamn: %s\n"
-"\n"
-"Totalt antal rader: %i\n"
-"Nuvarande rad: %i"
-
-#: src/search.c:634
-msgid "Search from cursor"
-msgstr "Sök från markören"
-
-#: src/search.c:641
-msgid "Search from beginning of document"
-msgstr "Sök från början av dokumentet"
-
-#: src/search.c:648
-msgid "Search from end of document"
-msgstr "Sök från slutet av dokumentet"
-
-#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
-#: src/search.c:655
-msgid "Case sensitive"
-msgstr "Matcha gemener/versaler"
-
-#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
-#: src/search.c:661
-msgid "Reverse search"
-msgstr "Omvänd sökning"
-
 #: src/dialogs/dialog-about.c:52
 msgid "With special thanks to:"
 msgstr "Med extra tack till:"
@@ -435,6 +69,74 @@ msgstr "(C) 1998, 1999 Alex Roberts och Evan Lawrence"
 
 #: src/dialogs/dialog-about.c:69
 msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
+msgstr "gedit är en liten och tunn texteditor för GNOME/Gtk+"
+
+#: src/dialogs/dialog-find-line.c:130
+#, fuzzy
+msgid "Go to line"
+msgstr "Gå till rad"
+
+#: src/dialogs/dialog-find-line.c:140
+#, fuzzy
+msgid "Line number: "
+msgstr "Radnummer:"
+
+#. glade won't let me set the title of the propertybox
+#: src/dialogs/dialog-prefs.c:443
+msgid "gedit: Preferences"
+msgstr ""
+
+#: src/dialogs/dialog-replace.c:106
+msgid "Replace?"
+msgstr "Ersätt?"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/dialog-replace.c:119 src/dialogs/dialog-replace.c:120
+#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
+msgid "Replace"
+msgstr "Byt ut"
+
+#: src/dialogs/dialog-replace.c:121
+#, fuzzy
+msgid "Replace all"
+msgstr "Byt ut alla"
+
+#: src/dialogs/dialog-replace.c:125 src/dialogs/dialog-search.c:62
+#: src/search.c:291
+msgid "Search for:"
+msgstr "Sök efter:"
+
+#: src/dialogs/dialog-replace.c:135
+#, fuzzy
+msgid "Replace with:"
+msgstr "Byt ut mot: "
+
+#: src/dialogs/dialog-replace.c:146 src/dialogs/replace.glade.h:19
+msgid "Ask before replacing"
+msgstr "Fråga före ersättning"
+
+#: src/dialogs/dialog-search.c:57 src/dialogs/dialog-search.c:58
+#: src/search.c:287
+msgid "Search"
+msgstr "Sök"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/about.glade.h:7
+#, fuzzy
+msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
+msgstr "(C) 1998, 1999 Alex Roberts och Evan Lawrence"
+
+#: src/dialogs/about.glade.h:8
+#, fuzzy
+msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit är en liten och tunn texteditor för GNOME/Gtk+"
 
 #.
@@ -462,6 +164,16 @@ msgstr "Ange radnummret du vill gå till."
 #: src/dialogs/prefs.glade.h:7
 msgid "Appearance"
 msgstr "Utseende"
+
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, NULL,
+#. NULL),
+#.
+#: src/dialogs/prefs.glade.h:8 src/menus.c:209
+msgid "Show Statusbar"
+msgstr "Visa statusrad"
 
 #: src/dialogs/prefs.glade.h:9
 msgid "Show splitscreen"
@@ -579,40 +291,21 @@ msgstr "linje(r)"
 msgid "Paper"
 msgstr "Papper"
 
-#: src/dialogs/search.glade.h:9
-msgid ""
-"Cursor\n"
-"Beginning of Document\n"
-"End of Document\n"
-msgstr ""
-"Textmarkören\n"
-"Början av dokumentet\n"
-"Slutet av dokumentet\n"
+#: src/dialogs/replace.glade.h:9
+msgid "Replace All"
+msgstr "Byt ut alla"
 
 #: src/dialogs/replace.glade.h:10 src/dialogs/search.glade.h:13
 msgid "Search for: "
 msgstr "Sök efter: "
 
-#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
-msgid "Search from: "
-msgstr "Sök från: "
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: src/dialogs/replace.glade.h:7 src/dialogs/replace.glade.h:8
-msgid "Replace"
-msgstr "Byt ut"
-
-#: src/dialogs/replace.glade.h:9
-msgid "Replace All"
-msgstr "Byt ut alla"
-
 #: src/dialogs/replace.glade.h:11
 msgid "Replace with: "
 msgstr "Byt ut mot: "
+
+#: src/dialogs/replace.glade.h:12 src/dialogs/search.glade.h:14
+msgid "Search from: "
+msgstr "Sök från: "
 
 #: src/dialogs/replace.glade.h:13
 msgid ""
@@ -624,9 +317,390 @@ msgstr ""
 "Början av dokumentet\n"
 "Slutet av dokumentet\n"
 
-#: src/dialogs/replace.glade.h:19
-msgid "Ask before replacing"
-msgstr "Fråga före ersättning"
+#: src/dialogs/replace.glade.h:17 src/dialogs/search.glade.h:15
+#: src/search.c:655
+msgid "Case sensitive"
+msgstr "Matcha gemener/versaler"
+
+#: src/dialogs/replace.glade.h:18 src/dialogs/search.glade.h:16
+#: src/search.c:661
+msgid "Reverse search"
+msgstr "Omvänd sökning"
+
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:364
+msgid "Find"
+msgstr "Sök"
+
+#: src/dialogs/search.glade.h:9
+msgid ""
+"Cursor\n"
+"Beginning of Document\n"
+"End of Document\n"
+msgstr ""
+"Textmarkören\n"
+"Början av dokumentet\n"
+"Slutet av dokumentet\n"
+
+#: src/document.c:341
+#, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
+msgstr " \"%s\" har blivit ändrad. Vill du spara den?"
+
+#: src/file.c:87
+msgid ""
+"An error was encountered while opening the file.\n"
+"Please make sure the file exists."
+msgstr ""
+"Ett fel uppstod vid öppning av filen.\n"
+"Var god och se till om filen finns."
+
+#: src/file.c:94
+#, c-format
+msgid ""
+"An error was encountered while opening the file:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Please make sure the file is not beeing used by another aplication\n"
+"and that the file is not empty."
+msgstr ""
+"Ett fel uppstod vid öppning av filen:\n"
+"\n"
+"%s\n"
+"\n"
+"\n"
+"Var god och se till att filen inte används av något annat program\n"
+"och att filen inte är tom."
+
+#: src/file.c:106
+msgid "Could not allocate the requrired memory."
+msgstr "Kunde inte allokera tillräckligt med minne."
+
+#: src/file.c:112
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have permissions for opening the file."
+msgstr ""
+"gedit kunde inte öppna filen: \n"
+"\n"
+"%s\n"
+"\n"
+"Se till att du har rättigheter för att öppna filen."
+
+#: src/file.c:180
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exists,and that you have the appropiate "
+"write permissions."
+msgstr ""
+"gedit kunde inte spara filen: \n"
+"\n"
+" %s \n"
+"\n"
+"Se till att sökvägen du angav existerar, och att du har de rätta "
+"skrivrättigheterna."
+
+#: src/file.c:194 src/file.c:208
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+"gedit kunde inte spara filen :\n"
+"\n"
+" %s \n"
+"\n"
+"På grund av en okänd orsak (1). Var god och rapportera detta problemet till "
+"submit@bugs.gnome.org"
+
+#: src/file.c:274
+msgid "Open File ..."
+msgstr "Öppna fil ..."
+
+#: src/file.c:316
+msgid "Save As..."
+msgstr "Spara som..."
+
+#: src/file.c:354
+#, c-format
+msgid "Loaded file %s"
+msgstr "Laddade filen %s"
+
+#: src/file.c:420
+#, c-format
+msgid "``%s'' is about to be overwriten. Do you want to continue ?"
+msgstr "\"%s\" kommer att skrivas över. Vill du fortsätta ?"
+
+#: src/file.c:431
+msgid "Document has not been saved."
+msgstr "Dokument har inte sparats."
+
+#: src/file.c:439
+msgid "Error saving file!"
+msgstr "Fel vid sparning av fil!"
+
+#: src/file.c:521
+#, c-format
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
+msgstr "Filen \"%s\" finns inte. Vill du skapa den?"
+
+#: src/menus.c:49
+msgid "Open (swap) .c/.h file"
+msgstr "Öppna (byt) .c/.h filen"
+
+#: src/menus.c:58
+msgid "_New"
+msgstr "_Ny"
+
+#: src/menus.c:59 src/menus.c:323
+msgid "Create a new document"
+msgstr "Skapa nytt dokument"
+
+#: src/menus.c:64
+msgid "Save All"
+msgstr "Spara alla"
+
+#: src/menus.c:65
+msgid "Save All Open Files"
+msgstr "Spara alla öppna filer"
+
+#: src/menus.c:80
+msgid "Print preview..."
+msgstr "Förhandsgranskning..."
+
+#: src/menus.c:81
+msgid "Preview data to be printed"
+msgstr "Förhandsgranska data som ska skrivas ut"
+
+#: src/menus.c:87
+msgid "Close All"
+msgstr "Stäng alla"
+
+#: src/menus.c:88
+msgid "Close All Open Files"
+msgstr "Stäng alla öppna filer"
+
+#: src/menus.c:123
+msgid "Goto _Line..."
+msgstr "Gå till _rad"
+
+#: src/menus.c:124
+msgid "Go to a specific line number"
+msgstr "Gå till en specifik linje"
+
+#: src/menus.c:133
+msgid "_Add View"
+msgstr "_Lägg till vy"
+
+#: src/menus.c:134
+msgid "Add a new view of the document"
+msgstr "Lägg till en ny vy av dokumentet"
+
+#: src/menus.c:136
+msgid "_Remove View"
+msgstr "_Ta bort vy"
+
+#: src/menus.c:137
+msgid "Remove view of the document"
+msgstr "Tar bort en vy av dokumentet"
+
+#: src/menus.c:210
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr ""
+"Aktivera eller avaktivera statusraden längst ner på det här "
+"applikationsfönstret."
+
+#: src/menus.c:306 src/plugin.c:111 src/plugin.c:203
+msgid "_Plugins"
+msgstr "_Insticksprogram"
+
+#: src/menus.c:323
+msgid "New"
+msgstr "Nytt"
+
+#: src/menus.c:327
+msgid "Open"
+msgstr "Öppna"
+
+#: src/menus.c:327
+msgid "Open a file"
+msgstr "Öppna en fil"
+
+#: src/menus.c:331
+msgid "Save"
+msgstr "Spara"
+
+#: src/menus.c:331
+msgid "Save the current file"
+msgstr "Spara den aktiva filen"
+
+#: src/menus.c:335
+msgid "Close"
+msgstr "Stäng"
+
+#: src/menus.c:335
+msgid "Close the current file"
+msgstr "Stäng den aktiva filen"
+
+#: src/menus.c:339
+msgid "Print"
+msgstr "Skriv ut"
+
+#: src/menus.c:339
+msgid "Print the current file"
+msgstr "Skriv ut nuvarande fil"
+
+#: src/menus.c:344
+msgid "Undo"
+msgstr "Ångra"
+
+#: src/menus.c:344
+msgid "Undo last operation"
+msgstr "Ångra den senaste ändringen"
+
+#: src/menus.c:348
+msgid "Redo"
+msgstr "Gör om"
+
+#: src/menus.c:348
+msgid "Redo last operation"
+msgstr "Gör om senaste ändringen"
+
+#: src/menus.c:352
+msgid "Cut"
+msgstr "Klipp ut"
+
+#: src/menus.c:352
+msgid "Cut the selection"
+msgstr "Klipp ut markeringen"
+
+#: src/menus.c:356
+msgid "Copy"
+msgstr "Kopiera"
+
+#: src/menus.c:356
+msgid "Copy the selection"
+msgstr "Kopiera markeringen"
+
+#: src/menus.c:360
+msgid "Paste"
+msgstr "Klistra in"
+
+#: src/menus.c:360
+msgid "Paste the clipboard"
+msgstr "Klistra in från urklippet"
+
+#: src/menus.c:364
+msgid "Search for a string"
+msgstr "Sök efter en sträng"
+
+#: src/menus.c:368 src/window.c:55
+msgid "Line"
+msgstr "Rad"
+
+#: src/menus.c:368
+msgid "Get the current and total lines"
+msgstr "Få tag på den nuvarande och det totala antalet linjer"
+
+#: src/menus.c:373
+msgid "Exit"
+msgstr "Avsluta"
+
+#: src/menus.c:373
+msgid "Exit the program"
+msgstr "Avslutar programmet"
+
+#: src/plugin.c:56
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr "Fel, kunde inte öppna modulfilen, %s"
+
+#: src/plugin.c:67
+msgid "Error, plugin does not contain init_plugin function."
+msgstr "Fel, insticksprogrammet innehåller inte init_plugin funktionen."
+
+#: src/plugin.c:75
+msgid "Error, init_plugin returned an error"
+msgstr "Fel, init_plugin retunerade ett fel"
+
+#: src/plugin.c:101
+msgid "Error, plugin is still in use"
+msgstr "Fel, insticksprogrammet används fortfarande"
+
+#: src/print.c:243
+#, c-format
+msgid "gedit (%s): Print Preview"
+msgstr "gedit (%s): Förhandsgranskning"
+
+#: src/print.c:473
+#, c-format
+msgid "Page: %i/%i"
+msgstr "Sida: %i/%i"
+
+#: src/recent.c:52
+msgid "_File/"
+msgstr "_Arkiv/"
+
+#: src/recent.c:59 src/recent.c:60
+#, fuzzy
+msgid "_File"
+msgstr "_Arkiv/"
+
+#: src/search.c:286
+msgid "Find In Files"
+msgstr "Hitta i filer"
+
+#: src/search.c:611
+#, c-format
+msgid ""
+"Filename: %s\n"
+"\n"
+"Total Lines: %i\n"
+"Current Line: %i"
+msgstr ""
+"Filnamn: %s\n"
+"\n"
+"Totalt antal rader: %i\n"
+"Nuvarande rad: %i"
+
+#: src/search.c:634
+msgid "Search from cursor"
+msgstr "Sök från markören"
+
+#: src/search.c:641
+msgid "Search from beginning of document"
+msgstr "Sök från början av dokumentet"
+
+#: src/search.c:648
+msgid "Search from end of document"
+msgstr "Sök från slutet av dokumentet"
+
+#: src/window.c:54
+msgid "Filename"
+msgstr "Filnamn"
+
+#: src/window.c:56
+msgid "Contents"
+msgstr "Innehåll"
 
 #~ msgid "Notebook"
 #~ msgstr "Flikar"
@@ -746,9 +820,6 @@ msgstr "Fråga före ersättning"
 #~ msgid "Document Unchanged..."
 #~ msgstr "Dokument oförändrat..."
 
-#~ msgid "_File/"
-#~ msgstr "_Arkiv/"
-
 #~ msgid "Find _Line..."
 #~ msgstr "Hitta _rad..."
 
@@ -763,9 +834,6 @@ msgstr "Fråga före ersättning"
 
 #~ msgid "Toggle statusbar"
 #~ msgstr "Sätt på/av statusrad"
-
-#~ msgid "Replace?"
-#~ msgstr "Ersätt?"
 
 #, fuzzy
 #~ msgid "Can't open file!"

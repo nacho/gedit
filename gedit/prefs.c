@@ -33,7 +33,6 @@
 #include "utils.h"
 
 
-gboolean use_fontset = FALSE;
 Preferences *settings = NULL;
 
 
@@ -86,6 +85,28 @@ gedit_save_settings (void)
 	gnome_config_sync ();
 }
 
+/* Determine we use fonts or fontsets. If a fontset is supplied for
+ * text widgets, we use fontsets for drawing texts. Otherwise we use
+ * normal fonts instead.
+ */
+static gboolean
+prefs_determine_use_fontset (void)
+{
+	GtkWidget *dummy_widget;
+	gboolean retval;
+
+	dummy_widget = gtk_text_new (NULL, NULL);
+	gtk_widget_ensure_style (dummy_widget);
+	if (dummy_widget->style->font->type == GDK_FONT_FONTSET)
+		retval = TRUE;
+	else
+		retval = FALSE;
+
+	gtk_widget_destroy (dummy_widget);
+
+	return retval;
+}
+
 void
 gedit_load_settings (void)
 {
@@ -135,11 +156,12 @@ gedit_load_settings (void)
 		g_free (settings->papersize);
 		strcpy (settings->papersize, gnome_paper_name_default());
 	}
-	
+
+	settings->use_fontset = prefs_determine_use_fontset ();
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL)
 	{
-		if (use_fontset)
+		if (settings->use_fontset)
 			settings->font = DEFAULT_FONTSET;
 		else
 			settings->font = DEFAULT_FONT;
