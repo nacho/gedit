@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2001-03-16 06:50+0100\n"
+"POT-Creation-Date: 2001-03-25 13:51+0200\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -126,7 +126,7 @@ msgstr ""
 "gedit ne more ustvariti zaèasne datoteke.\n"
 "\n"
 
-#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:759
 #, c-format
 msgid "Untitled %i"
 msgstr "Neimenovan %i"
@@ -705,9 +705,19 @@ msgstr "Vnesite lokacijo (URI) datoteke, ki jo ¾elite odpreti:"
 msgid "RO - "
 msgstr "Le branje - "
 
+#: src/document.c:295
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
+
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Neimenovan"
+
+#: src/document.c:299
+#, c-format
+msgid "%s %d*"
+msgstr "%s %d*"
 
 #: src/document.c:479
 #, c-format
@@ -715,7 +725,7 @@ msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' je bil spremenjen.  Ga ¾elite shraniti?"
 
 #. If you try to open a non existant remote file
-#: src/document.c:710
+#: src/document.c:716
 #, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
@@ -730,19 +740,19 @@ msgstr ""
 "se je zgodila napaka.\n"
 "Prosim preverite ali datoteka obstaja."
 
-#: src/document.c:763 src/document.c:771
+#: src/document.c:769 src/document.c:777
 msgid "(modified)"
 msgstr "(spremenjena)"
 
-#: src/document.c:765 src/document.c:773
+#: src/document.c:771 src/document.c:779
 msgid "(readonly)"
 msgstr "(le berljiva)"
 
-#: src/document.c:824 src/document.c:864
+#: src/document.c:830 src/document.c:870
 msgid "This file does not end with a valid extension\n"
 msgstr "Ime te datoteke nima velajvne pripone\n"
 
-#: src/document.c:872
+#: src/document.c:878
 #, c-format
 msgid "The file %s was not found."
 msgstr "Datoteka %s ni bila najdena."
@@ -1046,14 +1056,6 @@ msgstr "_Skoèi na vrstico..."
 msgid "Go to a specific line number"
 msgstr "Pojdi na doloèeno ¹tevilko vrstice"
 
-#: src/menus.c:160
-msgid "File _Info"
-msgstr "_Podatki o datoteki"
-
-#: src/menus.c:161
-msgid "Get the basic file info"
-msgstr "Dobi osnovne podatke o datoteki"
-
 #: src/menus.c:173
 msgid "_Add View"
 msgstr "_Dodaj Pogled"
@@ -1081,7 +1083,7 @@ msgstr "_Vtièniki"
 
 #: src/menus.c:241
 msgid "_Documents"
-msgstr "_Dokumenti"
+msgstr "Do_kumenti"
 
 #: src/menus.c:255
 msgid "New"
@@ -1154,6 +1156,14 @@ msgstr "Prilepi odlo¾i¹èe"
 #: src/menus.c:298
 msgid "Search for a string"
 msgstr "I¹èi niz"
+
+#: src/menus.c:303
+msgid "Exit"
+msgstr "Izhod"
+
+#: src/menus.c:303
+msgid "Exit the program"
+msgstr "Izhod iz programa"
 
 #: src/plugin.c:107
 msgid "_Manager ..."
@@ -1316,17 +1326,11 @@ msgstr ""
 msgid "You can't remove the last view of a document."
 msgstr "Ne morete razveljaviti neimenovanega dokumenta."
 
-#~ msgid "%s %d"
-#~ msgstr "%s %d"
+#~ msgid "File _Info"
+#~ msgstr "_Podatki o datoteki"
 
-#~ msgid "%s %d*"
-#~ msgstr "%s %d*"
-
-#~ msgid "Exit"
-#~ msgstr "Izhod"
-
-#~ msgid "Exit the program"
-#~ msgstr "Izhod iz programa"
+#~ msgid "Get the basic file info"
+#~ msgstr "Dobi osnovne podatke o datoteki"
 
 #~ msgid "Text editor"
 #~ msgstr "Urejevalnik besedil"
