@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-05-19 11:27+0200\n"
-"PO-Revision-Date: 2002-05-27 11:18+0100\n"
+"POT-Creation-Date: 2002-05-28 21:42+0200\n"
+"PO-Revision-Date: 2002-05-28 21:55+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -83,6 +83,7 @@ msgstr "Wstaw znak"
 msgid "gedit: ASCII table"
 msgstr "gedit: Tabela ASCII"
 
+#. AFAIK, all cvs commit messages start with this
 #: plugins/cvschangelog/cvschangelog.c:1
 msgid "Open CVS Chan_geLogs"
 msgstr "Otwórz plik Chan_gelog z CVS"
@@ -728,11 +729,11 @@ msgstr "_Zawijaj wiersze (na granicach znaków)"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " character(s)"
-msgstr " znak(i)"
+msgstr " znaków"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid " line(s)"
-msgstr " wiersz(e)"
+msgstr " wierszy"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Always use _UTF-8 encoding (faster)"
@@ -837,11 +838,11 @@ msgstr "Kolor zazna_czenia:"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Set _tabs width equivalent to  "
-msgstr ""
+msgstr "Traktowanie znaku _tabulacji jako odpowiednika "
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Set limit on _undo actions to"
-msgstr "Liczba możliwych _cofnięć"
+msgstr "Ograniczenie liczby możliwych _cofnięć do"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Sho_w tooltips"
@@ -912,7 +913,7 @@ msgstr ""
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The tabs settings let you customize the tabs width."
-msgstr "Ustawienia zakładek pozwalają na dopasowanie szerokości zakładek."
+msgstr "Ustawienia tabulacji pozwalają na ustalenie rozmiaru tabulacji."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
@@ -933,6 +934,7 @@ msgstr ""
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
 msgstr ""
+"Ustawienia trybu zawijania pozwalają na ustalenie sposobu zawijania wierszy."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Toolbars"
@@ -944,7 +946,7 @@ msgstr "Góra"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Toplevel"
-msgstr ""
+msgstr "Okna nadrzędne"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "U_se current locale only if the file already use it"
@@ -1028,7 +1030,7 @@ msgstr "Użycie _domyślnej czcionki motywu"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "action(s)"
-msgstr "operacje"
+msgstr "operacji"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "minutes"
@@ -1092,11 +1094,13 @@ msgstr "Tekst podglądu wyświetlany w oknie"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Use font in label"
-msgstr ""
+msgstr "Wybrana czcionka w etykiecie"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Use font in the label in font info mode"
 msgstr ""
+"Określa, czy w trybie informacji o czcionce w etykiecie powinna być używana "
+"wybrana czcionka."
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Font size for label"
@@ -1108,11 +1112,12 @@ msgstr "Rozmiar czcionki dla etykiety w trybie informacyjnym czcionek"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Show size"
-msgstr ""
+msgstr "Wyświetlanie rozmiaru"
 
 #: src/dialogs/gnome-print-font-picker.c:1
 msgid "Show size in font info mode"
 msgstr ""
+"Określa, czy w trybie informacji o czcionce powinien być wyświetlany rozmiar."
 
 #. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
@@ -1751,10 +1756,6 @@ msgid "Show _Overwrite Mode"
 msgstr "Wyświetlanie trybu _nadpisywania"
 
 #: src/gedit-ui.xml.h:1
-msgid "Show _Tooltips"
-msgstr "Wyświetlanie p_odpowiedzi"
-
-#: src/gedit-ui.xml.h:1
 msgid "Show cursor position in the statusbar"
 msgstr "Przełącza wyświetlanie na pasku stanu pozycji kursora"
 
@@ -1763,15 +1764,11 @@ msgid "Show overwrite mode in the statusbar"
 msgstr "Przełącza wyświetlanie na pasku stanu trybu nadpisywania"
 
 #: src/gedit-ui.xml.h:1
-msgid "Show tooltips in the toolbar"
-msgstr "Przełącza wyświetlanie podpowiedzi na pasku narzędziowym"
-
-#: src/gedit-ui.xml.h:1
 msgid "Undo the last action"
 msgstr "Cofa ostatnią operację"
 
 #: src/gedit-ui.xml.h:1
-msgid "_About..."
+msgid "_About"
 msgstr "_Informacje o..."
 
 #: src/gedit-ui.xml.h:1
@@ -1792,7 +1789,7 @@ msgstr "_Dopasuj pasek narzędziowy"
 
 #: src/gedit-ui.xml.h:1
 msgid "_Debug"
-msgstr ""
+msgstr "_Debugowanie"
 
 #: src/gedit-ui.xml.h:1
 msgid "_Delete"
