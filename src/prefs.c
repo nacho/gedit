@@ -85,7 +85,7 @@ gedit_load_settings (void)
 	gnome_config_push_prefix ("/gedit/Global/");
 
 	settings->tab_pos = gnome_config_get_int ("tab_pos=2");
-	settings->mdi_mode = gnome_config_get_int ("mdi_mode=3");
+	settings->mdi_mode = gnome_config_get_int ("mdi_mode=42");
 
 	settings->auto_indent = gnome_config_get_bool ("auto_indent");
 	settings->word_wrap = gnome_config_get_bool ("word_wrap");
