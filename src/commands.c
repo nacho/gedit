@@ -528,8 +528,13 @@ file_save_cb(GtkWidget *widget, gpointer cbdata)
 	if (fname == NULL)
 		file_save_as_cb(NULL, data);
 	else
-		gE_file_save(data->window, gE_document_current(data->window),
-			gE_document_current(data->window)->filename);
+	 if ((gE_file_save(data->window, gE_document_current(data->window),
+	               gE_document_current(data->window)->filename)) != NULL)
+	   {
+	gE_msgbar_set(data->window, "Read only file!");
+	file_save_as_cb(NULL, data);
+        }
+
 }
 
 void
