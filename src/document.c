@@ -657,9 +657,8 @@ gedit_document_load ( GList *file_list)
 		}
 
 		scheme = gnome_vfs_uri_get_scheme(uri);
-		g_assert(scheme != NULL);
 
-		if (strcmp (scheme, "file") == 0)
+		if ((scheme != NULL) && (strcmp (scheme, "file") == 0))
 		{
 			gchar* tmp_str;
 			
@@ -709,8 +708,8 @@ gedit_document_load ( GList *file_list)
 	if (gedit_document_current() == NULL)
 		gedit_document_new ();
 	
-	g_assert(gedit_window_active_app() != NULL);
-	g_assert(gedit_document_current() != NULL);
+	g_return_val_if_fail(gedit_window_active_app() != NULL, FALSE);
+	g_return_val_if_fail(gedit_document_current() != NULL, FALSE);
 
 	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
 	

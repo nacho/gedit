@@ -1,3 +1,13 @@
+2001-02-13  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c (gedit_file_open): now uses g_return_val_if_fail
+	instead of g_assert
+	(gedit_file_open_ok_sel): now uses g_return_if_fail
+	instead of g_assert
+
+	* document.c (gedit_document_load):  now uses
+	g_return_val_if_fail instead of g_assert
+
 2001-02-12  Paolo Maggi  <maggi@athena.polito.it>
 
 	* file.c (gedit_file_save_as_ok_sel): remove g_assert
@@ -5,7 +15,7 @@
 	(file_save_document): before saving a document raise
 	one of its views.
 	
-	* document.c (remve_child_cb): before removing a mdi child
+	* document.c (remove_child_cb): before removing a mdi child
 	raise a view if the document is changed.	
 	
 2001-02-11  Chema Celorio  <chema@celorio.com>

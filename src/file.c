@@ -312,33 +312,34 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		gedit_view_set_position (view, 0);
 	}
 	
+
+	/* Conservatively set doc to readonly */
+	gedit_document_set_readonly (doc, TRUE);
+
 	uri = gnome_vfs_uri_new (fname);
-	g_assert(uri != NULL);
 
-	scheme = gnome_vfs_uri_get_scheme(uri);
-	g_assert(scheme != NULL);
-	
-	/* FIXME: all remote files are marked as readonly */
-	if ((strcmp(scheme, "file") == 0))
+	if (uri != NULL)
 	{
-		gchar* tmp_str;
 
-		g_assert(GNOME_VFS_FILE_INFO_LOCAL (&info));
-			
-		tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
-		g_assert(tmp_str != NULL);
-
-		gedit_document_set_readonly (doc, access (tmp_str, W_OK) ? TRUE : FALSE);
+		scheme = gnome_vfs_uri_get_scheme(uri);
 		
-		g_free(tmp_str);
+		/* FIXME: all remote files are marked as readonly */
+		if ((scheme != NULL) && (strcmp (scheme, "file") == 0) && GNOME_VFS_FILE_INFO_LOCAL (&info))
+		{
+			gchar* tmp_str;
 
-	}
-	else
-	{	
-		gedit_document_set_readonly (doc, TRUE);
-	}
+			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
 
-	gnome_vfs_uri_unref(uri);
+			if (tmp_str != NULL)
+			{
+				gedit_document_set_readonly (doc, access (tmp_str, W_OK) ? TRUE : FALSE);
+				g_free (tmp_str);
+			}
+
+		}
+		
+		gnome_vfs_uri_unref (uri);
+	}
 	
 	g_string_free (tmp_buf, TRUE);
 	gnome_vfs_file_info_clear (&info);
@@ -818,7 +819,7 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkWidget *file_selector_)
 	
 	if (gedit_document_current())
 	{
-		g_assert(gedit_window_active_app());
+		g_return_if_fail(gedit_window_active_app());
 		gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), 
 				gedit_document_current()->readonly);
 	}	
