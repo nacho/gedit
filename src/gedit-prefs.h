@@ -19,7 +19,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. * *
+ * Boston, MA 02111-1307, USA. 
  */
  
 /*
@@ -28,64 +28,81 @@
  * See the ChangeLog files for a list of changes. 
  */
 
-
-/* TODO: It should be rewritten to use GConf */
-/* TODO: check if all the preferences are really used in the code */
-
 #ifndef __GEDIT_PREFS_H__
 #define __GEDIT_PREFS_H__
 
 typedef struct _GeditPreferences GeditPreferences;
 
 typedef enum {
-	GEDIT_TOOLBAR_SYSTEM,
+	GEDIT_TOOLBAR_SYSTEM = 0,
 	GEDIT_TOOLBAR_ICONS,
 	GEDIT_TOOLBAR_ICONS_AND_TEXT
 } GeditToolbarSetting;
 
+typedef enum {
+	GEDIT_SAVE_ALWAYS_UTF8 = 0,
+	GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE,
+	GEDIT_SAVE_CURRENT_LOCALE_IF_USED
+} GeditSaveEncodingSetting;
+
+
 struct _GeditPreferences
 {
-	guint auto_indent;
-	gint  wrap_mode;
-	gint  toolbar_labels;
-	gint  show_tabs;
-	gint  tab_pos; /* Mdi Tab Position */
-	gint  tab_size; /* Tab size */
-	guint show_status;
-	gint  show_tooltips;
-	gint  have_toolbar;
-	gint  undo_levels;
-
-/*	gboolean use_fontset;
- */
-	gint  use_default_font;
-	gchar *font;
-
-	gint  splitscreen;
-
-	gint  mdi_mode;
+	/* Editor/Fonts&Color */
+	gboolean	use_default_font;
+	gchar 		*editor_font;
 	
-	gint  use_default_colors;
-	guint16 bg[3];
-	guint16 fg[3];
-	guint16 st[3];
-	guint16 sel[3];
+	gboolean	use_default_colors;
+	GdkColor	background_color;
+	GdkColor 	text_color;
+	GdkColor 	selection_color;
+	GdkColor	selected_text_color;
 
-	gint width, height;
-	
-	gint run;		/* Flag to see if this is the first
-				   time gedit is run */
-	
-	gint close_doc;
+	/* Editor/Save */
+	gboolean	create_backup_copy;
+	gchar		*backup_extension; /* Advanced: configurable only using
+					      gconftool */
 
+	gboolean	auto_save;
+	gint		auto_save_interval;
+
+	GeditSaveEncodingSetting save_encoding;
+
+	/* Editor/Undo */
+	gint 		undo_levels; /* If < 1 then no limits */
+
+	/* Editor/Wrap Mode*/
+	gint		wrap_mode;
+
+	/* Editor/Tabs */
+	gint		tab_size;
+
+	/* User Interface/Toolbar */
+	gboolean		toolbar_visible;
+	GeditToolbarSetting 	toolbar_buttons_style; 
+	gboolean		toolbar_view_tooltips;
+
+	/* User Interface/Statusbar */
+	gboolean	statusbar_visible;
+
+	/* User Interface/MDI Mode */
+	gint		mdi_mode;
+	gint		mdi_tabs_position; /* Tabs position when mdi_mode is notebook */
+	
+	/* Window geometry */
+	gint 		window_width;
+	gint		window_height;
+
+#if 0 /*TO BE CLEANED*/
 	gint print_wrap_lines : 1;        /* Printing stuf ...*/
 	gint print_lines;
 	gint print_header;
 	gint print_orientation;
 	gchar *papersize;
+#endif
 };
 
-extern GeditPreferences *settings;
+extern GeditPreferences *gedit_settings;
 
 void gedit_prefs_save_settings (void);
 void gedit_prefs_load_settings (void);

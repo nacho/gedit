@@ -646,10 +646,10 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 	g_return_if_fail (GEDIT_IS_UNDO_MANAGER (um));
 	g_return_if_fail (um->priv != NULL);
 	
-	if (settings->undo_levels < 1)
+	if (gedit_settings->undo_levels < 1)
 		return;
 
-	if (gedit_undo_manager_get_number_of_groups (um) > settings->undo_levels)
+	if (gedit_undo_manager_get_number_of_groups (um) > gedit_settings->undo_levels)
 	{
 		GeditUndoAction *undo_action;
 		GList* last;
@@ -675,7 +675,8 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 			undo_action = (GeditUndoAction*) last->data;
 
 		} while ((undo_action->order_in_group > 1) || 
-			 (gedit_undo_manager_get_number_of_groups (um) > settings->undo_levels));
+			 (gedit_undo_manager_get_number_of_groups (um) > 
+			  gedit_settings->undo_levels));
 	}	
 }
 

@@ -124,7 +124,8 @@ gedit_mdi_init (GeditMDI  *mdi)
 {
 	gedit_debug (DEBUG_MDI, "START");
 
-	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit2", "gedit", GTK_POS_TOP/*FIXME: settings->tab_pos*/);
+	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit2", "gedit", 
+			gedit_settings->mdi_tabs_position);
 	
 	mdi->priv = g_new0 (GeditMDIPrivate, 1);
 
@@ -134,7 +135,7 @@ gedit_mdi_init (GeditMDI  *mdi)
 	
 	bonobo_mdi_set_child_list_path (BONOBO_MDI (mdi), "/menu/Documents/");
 
-	bonobo_mdi_set_mode (BONOBO_MDI (mdi), settings->mdi_mode);
+	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);
 
 	/* Connect signals */
 	gtk_signal_connect (GTK_OBJECT (mdi), "top_window_created",
@@ -229,7 +230,9 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	gedit_mdi_set_app_toolbar_style (win);
 		
 	/* Set the window prefs. */
-	gtk_window_set_default_size (GTK_WINDOW (win), settings->width, settings->height);
+	gtk_window_set_default_size (GTK_WINDOW (win), 
+			gedit_settings->window_width, 
+			gedit_settings->window_height);
 	gtk_window_set_policy (GTK_WINDOW (win), TRUE, TRUE, FALSE);
 
 	
@@ -291,7 +294,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	ui_engine = bonobo_window_get_ui_engine (win);
 	g_return_if_fail (ui_engine != NULL);
 	
-	if (!settings->have_toolbar)
+	if (!gedit_settings->toolbar_visible)
 	{
 		ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
 				"hidden", "1");
@@ -308,13 +311,13 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 		goto error;
 
 	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-					"tips", settings->show_tooltips ? "1" : "0");
+					"tips", gedit_settings->toolbar_view_tooltips ? "1" : "0");
 
 	if (ret != BONOBO_UI_ERROR_OK) 
 		goto error;
 
 
-	switch (settings->toolbar_labels)
+	switch (gedit_settings->toolbar_buttons_style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
 			/* FIXME
@@ -379,7 +382,7 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	g_return_if_fail (ui_engine != NULL);
 
 	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/status",
-				"hidden", settings->show_status ? "0" : "1");
+				"hidden", gedit_settings->statusbar_visible ? "0" : "1");
 	g_return_if_fail (ret == BONOBO_UI_ERROR_OK);		
 }
 
@@ -736,7 +739,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 
 	children = bonobo_mdi_get_children (BONOBO_MDI (mdi));
 
-	if (settings->use_default_colors)
+	if (gedit_settings->use_default_colors)
 	{
 		GtkStyle *style;
 	       
@@ -751,24 +754,13 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 	}
 	else
 	{
-		background.red = settings->bg [0];
-		background.green = settings->bg [1];
-		background.blue = settings->bg [2];
-
-		text.red = settings->fg [0];
-		text.green = settings->fg [1];
-		text.blue = settings->fg [2];
-
-		selection.red = settings->sel [0];
-		selection.green = settings->sel [1];
-		selection.blue = settings->sel [2];
-
-		sel_text.red = settings->st [0];
-		sel_text.green = settings->st [1];
-		sel_text.blue = settings->st [2];
+		background = gedit_settings->background_color;
+		text = gedit_settings->text_color;
+		selection = gedit_settings->selection_color;
+		sel_text = gedit_settings->selected_text_color;
 	}
 
-	if (settings->use_default_font)
+	if (gedit_settings->use_default_font)
 	{
 		GtkStyle *style;
 		
@@ -778,13 +770,13 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 		
 		if (font == NULL)
 			/* Fallback */
-			font = settings->font;
+			font = gedit_settings->editor_font;
 
 		gtk_style_unref (style);
 
 	}
 	else
-		font = settings->font;
+		font = gedit_settings->editor_font;
 
 	while (children != NULL)
 	{
@@ -796,7 +788,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 			
 			gedit_view_set_colors (v, &background, &text, &selection, &sel_text);
 			gedit_view_set_font (v, font);
-			gedit_view_set_wrap_mode (v, settings->wrap_mode);
+			gedit_view_set_wrap_mode (v, gedit_settings->wrap_mode);
 			views = views->next;
 		}
 		
@@ -804,7 +796,7 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 	}
 
 /*
-	bonobo_mdi_set_mode (BONOBO_MDI (mdi), settings->mdi_mode);
+	bonobo_mdi_set_mode (BONOBO_MDI (mdi), gedit_settings->mdi_mode);
 */
 }
 

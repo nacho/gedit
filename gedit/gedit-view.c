@@ -144,32 +144,21 @@ gedit_view_init (GeditView  *view)
 	 *  Set tab, fonts, wrap mode, colors, etc. according
 	 *  to preferences 
 	 */
-	if (!settings->use_default_font)
-		gedit_view_set_font (view, settings->font);
+	if (!gedit_settings->use_default_font)
+		gedit_view_set_font (view, gedit_settings->editor_font);
 
-	if (!settings->use_default_colors)
+	if (!gedit_settings->use_default_colors)
 	{
-		background.red = settings->bg [0];
-		background.green = settings->bg [1];
-		background.blue = settings->bg [2];
-
-		text.red = settings->fg [0];
-		text.green = settings->fg [1];
-		text.blue = settings->fg [2];
-
-		selection.red = settings->sel [0];
-		selection.green = settings->sel [1];
-		selection.blue = settings->sel [2];
-
-		sel_text.red = settings->st [0];
-		sel_text.green = settings->st [1];
-		sel_text.blue = settings->st [2];
+		background = gedit_settings->background_color;
+		text = gedit_settings->text_color;
+		selection = gedit_settings->selection_color;
+		sel_text = gedit_settings->selected_text_color;
 
 		gedit_view_set_colors (view, 
 				&background, &text, &selection, &sel_text);
 	}	
 
-	gedit_view_set_wrap_mode (view, settings->wrap_mode);
+	gedit_view_set_wrap_mode (view, gedit_settings->wrap_mode);
 
 	/* FIXME: uncomment when gedit_view_set_tab_size will work
 	gedit_view_set_tab_size (view, 8);

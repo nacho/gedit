@@ -1,61 +1,204 @@
 <gconfschemafile>
-
-<!-- 
-Note: all double hyphens in this comment have a space in the middle
-because double hyphen isn't allowed in comments. So, remove the space
-before use.
-
-To install this file type: 
-      gconftool - -install-schema-file basic-gconf-app.schemas 
-You probably want your "make install" to do this for real applications.
-Also, you probably want a configure option so people can retarget where the 
-schema file gets installed. The option should be called - -gconf-config-source=blah
-To change the gconftool target use the - -config-source=blah option to gconftool.
--->
-
   <schemalist>
     <schema>
-      <key>/schemas/apps/gedit2/default-booleans</key>
-      <applyto>/apps/gedit2/use-default-font</applyto>
+      <key>/schemas/apps/gedit2/default-TRUE-booleans</key>
       <applyto>/apps/gedit2/use-default-colors</applyto>
-      <applyto>/apps/gedit2/show-statusbar</applyto>
-      <applyto>/apps/gedit2/toolbar</applyto>
-      <applyto>/apps/gedit2/show-tooltips</applyto>
+      <applyto>/apps/gedit2/create-backup-copy</applyto>
+      <applyto>/apps/gedit2/toolbar-visible</applyto>
+      <applyto>/apps/gedit2/toolbar-view-tooltips</applyto>
+      <applyto>/apps/gedit2/statusbar-visible</applyto>
       <owner>gedit2</owner>
+      <default>TRUE</default>
       <type>bool</type>
       <locale name="C">
-        <default>TRUE</default>
-        <short>Default booleans</short>
-        <long>Default booleans</long>
+        <short>Default TRUE booleans</short>
+        <long>Default TRUE booleans</long>
       </locale>
     </schema>
+
     <schema>
-      <key>/schemas/apps/gedit2/default-tab-pos</key>
-      <applyto>/apps/gedit2/tab-position</applyto>
+      <key>/schemas/apps/gedit2/default-FALSE-booleans</key>
+      <applyto>/apps/gedit2/use-default-font</applyto>
+      <applyto>/apps/gedit2/auto-save</applyto>
+      <owner>gedit2</owner>
+      <type>bool</type>
+      <default>FALSE</default>
+      <locale name="C">
+        <short>Default FALSE booleans</short>
+        <long>Default FALSE booleans</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/editor-font</key>
+      <applyto>/apps/gedit2/editor-font</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>Courier Medium 12</default>
+      <locale name="C">
+        <short>Default font</short>
+        <long>Default font used by the editor</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/background-color</key>
+      <applyto>/apps/gedit2/background-color</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>#ffffffffffff</default>
+      <locale name="C">
+        <short>Default background color</short>
+        <long>Default background color</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/text-color</key>
+      <applyto>/apps/gedit2/text-color</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>#000000000000</default>
+      <locale name="C">
+        <short>Default text color</short>
+        <long>Default text color</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/selected-text_color</key>
+      <applyto>/apps/gedit2/selected-text-color</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>#ffffffffffff</default>
+      <locale name="C">
+        <short>Default selected text color</short>
+        <long>Default selected text color</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/selection-color</key>
+      <applyto>/apps/gedit2/selection-color</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>#000000009c9c</default>
+      <locale name="C">
+        <short>Default selection color</short>
+        <long>Default selection color</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/backup-copy-extension</key>
+      <applyto>/apps/gedit2/backup-copy-extension</applyto>
+      <owner>gedit2</owner>
+      <type>string</type>
+      <default>.bak</default>
+      <locale name="C">
+        <short>Extension of the backup files</short>
+        <long>Extension of the backup files (it is added to the actual file name)</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/auto-save-interval</key>
+      <applyto>/apps/gedit2/auto-save-interval</applyto>
       <owner>gedit2</owner>
       <type>int</type>
+      <default>10</default>
       <locale name="C">
-        <default>2</default>
-        <short>Default tab pos</short>
-        <long>Default tab pos</long>
+        <short>Auto save interval in minutes</short>
+        <long>Auto save interval in minutes</long>
       </locale>
     </schema>
+
     <schema>
-      <key>/schemas/apps/gedit2/window-defaults</key>
-      <applyto>/apps/gedit2/window-width</applyto>
-      <applyto>/apps/gedit2/window-height</applyto>
+      <key>/schemas/apps/gedit2/save-encoding</key>
+      <applyto>/apps/gedit2/save-encoding</applyto>
       <owner>gedit2</owner>
       <type>int</type>
+      <default>0</default>
       <locale name="C">
-        <default>500</default>
-        <short>Default window sizes</short>
-        <long>Default window sizes</long>
+        <short>Save encoding</short>
+        <long>Save encoding (0: Always use UTF-8, 1: Use current locale if possible,
+	2: Use current locale if the file already used it)</long>
       </locale>
     </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/undo-levels</key>
+      <applyto>/apps/gedit2/undo-levels</applyto>
+      <owner>gedit2</owner>
+      <type>int</type>
+      <default>25</default>
+      <locale name="C">
+        <short>Undo levels</short>
+        <long>Undo levels (-1: no limits)</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/wrap-mode</key>
+      <applyto>/apps/gedit2/wrap-mode</applyto>
+      <owner>gedit2</owner>
+      <type>int</type>
+      <default>0</default>
+      <locale name="C">
+        <short>Wrap mode</short>
+        <long>Wrap mode (0: no wrap, 1: wrap lines at work boundaries,
+        2: wrap lines at char boundaries)</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/tab-size</key>
+      <applyto>/apps/gedit2/tab-size</applyto>
+      <owner>gedit2</owner>
+      <type>int</type>
+      <default>8</default>
+      <locale name="C">
+        <short>Tab size</short>
+        <long>Tab size</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/toolbar-buttons-style</key>
+      <applyto>/apps/gedit2/toolbar-buttons-style</applyto>
+      <owner>gedit2</owner>
+      <type>int</type>
+      <default>0</default>
+      <locale name="C">
+        <short>Toolbar buttons style</short>
+        <long>Toolbar buttons style (0: According to system preferences, 1: icons,
+        2: icons and text)</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/mdi-mode</key>
+      <applyto>/apps/gedit2/mdi-mode</applyto>
+      <owner>gedit2</owner>
+      <type>int</type>
+      <default>0</default>
+      <locale name="C">
+        <short>MDI Mode</short>
+        <long>MDI Mode (0: Notebook, 1: Toplevel, 2: Modal)</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit2/mdi-tabs-position</key>
+      <applyto>/apps/gedit2/mdi-tabs-position</applyto>
+      <owner>gedit2</owner>
+      <type>int</type>
+      <default>2</default>
+      <locale name="C">
+        <short>MDI tabs position</short>
+        <long>MDI tabs position (0: Left, 1: Right, 2: Top, 3: Bottom)</long>
+      </locale>
+    </schema>
+
   </schemalist>
-  
 </gconfschemafile>
-
-
-
-
