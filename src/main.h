@@ -72,9 +72,9 @@ typedef struct _gE_window {
 #ifdef WITHOUT_GNOME
 	GtkWidget *menubar_handle;	/* holds the menubar */
 #endif
-	gint auto_indent;
+	guint auto_indent;
 	gint show_tabs;
-	gint show_status;
+	guint show_status;
 	gint show_tooltips;
 	gint have_toolbar;
 	gint have_tb_pix;

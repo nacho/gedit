@@ -140,6 +140,8 @@ static GtkMenuEntry menu_items[] =
 		tb_tooltips_on_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toolbar/Tooltips Off", NULL,
 		tb_tooltips_off_cb, (gpointer)GE_WINDOW, NULL},
+	{"<Main>/Options/<separator>", NULL, NULL, NULL},
+	{"<Main>/Options/Save Settings", NULL, gE_save_settings, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Plugins/", NULL, NULL, NULL},
 	{"<Main>/Window/New Window", NULL,
 		window_new_cb, (gpointer)GE_DATA, NULL},

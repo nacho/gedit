@@ -241,8 +241,8 @@ void gE_prefs_close ()
 		g_free (prefs_fn);
 		return;
 	}
-	g_free (temp_fn);
-	g_free (prefs_fn);
+	/*g_free (temp_fn);*/
+	/*g_free (prefs_fn);*/
 
 }
 

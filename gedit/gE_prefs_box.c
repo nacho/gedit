@@ -98,10 +98,12 @@ void gE_window_refresh(gE_window *w)
 {
 GtkStyle *style;
 
-     if (w->show_status == FALSE)
+	#ifndef WITHOUT_GNOME
+    if (w->show_status == 0)
        gtk_widget_hide (w->statusbox);
      else
        gtk_widget_show (w->statusbox);
+       
      
   style = gtk_style_new();
   gdk_font_unref (style->font);
@@ -113,7 +115,8 @@ GtkStyle *style;
   #endif
      gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->text), style);
   gtk_widget_pop_style ();
-
+  	
+  	#endif
 }
 
 void gE_apply(

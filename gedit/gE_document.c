@@ -421,8 +421,8 @@ gE_document *gE_document_current(gE_window *window)
 	gE_document *current_document;
 	current_document = NULL;
 
-	g_assert(window != NULL);
-	g_assert(window->notebook != NULL);
+	/*g_assert(window != NULL);
+	g_assert(window->notebook != NULL);*/
 	cur = gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook));
 	/*g_print("%d\n",cur);*/
 	current_document = g_list_nth_data (window->documents, cur);
