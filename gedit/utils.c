@@ -164,6 +164,10 @@ gedit_debug_mess (gchar *message, DebugSection type)
 		break;
 	case DEBUG_PREFS_DEEP:
 		break;
+	case DEBUG_DOCUMENT:
+		break;
+	case DEBUG_DOCUMENT_DEEP:
+		break;
 	}
 #endif
 }

@@ -37,6 +37,8 @@ typedef enum {
 	DEBUG_PREFS_DEEP,
 	DEBUG_PRINT,
 	DEBUG_PRINT_DEEP,
+	DEBUG_DOCUMENT,
+	DEBUG_DOCUMENT_DEEP,
 	DEBUG_COMMANDS
 } DebugSection;
 
@@ -44,7 +46,8 @@ typedef enum {
 void gedit_set_title (Document *doc);
 void gedit_flash     (gchar *msg);
 void gedit_flash_va  (gchar *format, ...);
-
+int  gtk_radio_group_get_selected (GSList *radio_group);
+void gtk_radio_button_select (GSList *group, int n);
 void gedit_debug_mess (gchar *message, DebugSection type);
 
 #endif /* __GEDIT_UTILS_H__ */

@@ -399,12 +399,12 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		return FALSE;
 	}
 
-	gedit_debug_mess ("F: About to if\n", DEBUG_VIEW);
-	
+	gedit_debug_mess ("F:     entering if..\n", DEBUG_VIEW_DEEP);
+
 	/* Control key related */
 	if (event->state & GDK_CONTROL_MASK)
 	{
-		gedit_debug_mess ("F:If successfull \n", DEBUG_VIEW);
+		gedit_debug_mess ("F:If successfull \n", DEBUG_VIEW_DEEP);
 		switch (event->keyval)
 		{
 		case 's':
@@ -438,7 +438,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		}
 	}
 
-	gedit_debug_mess ("F:returning from : gedit_event_key_press\n", DEBUG_VIEW);
+	gedit_debug_mess ("F:      returning, gedit_event_key_press\n", DEBUG_VIEW_DEEP);
 
 	return TRUE;
 }
@@ -672,8 +672,6 @@ gedit_view_get_type (void)
 {
 	static guint gedit_view_type = 0;
 
-	gedit_debug_mess ("F:gedit_view_get_type.\n", DEBUG_VIEW);
-
 	if (!gedit_view_type)
 	{
 		GtkTypeInfo gedit_view_info =
@@ -895,7 +893,7 @@ gedit_view_refresh (View *view)
 {
 	gint i = gedit_view_get_length (view);
 
-	gedit_debug_mess ("F:gedit_view_refresh<------------------------\n", DEBUG_VIEW);
+	gedit_debug_mess ("F:gedit_view_refresh\n", DEBUG_VIEW);
 
 	if (i > 0)
 	{
