@@ -1,4 +1,5 @@
-figs = 
+figs = \
+	edit_window.png
 docname = gedit
 lang = C
 omffile = gedit-C.omf
