@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit2 1.109.x\n"
-"POT-Creation-Date: 2002-01-28 03:09+0800\n"
+"POT-Creation-Date: 2002-02-04 03:26+0800\n"
 "PO-Revision-Date: 2002-01-27 01:22+0800\n"
 "Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.org>\n"
@@ -21,15 +21,23 @@ msgstr "Teks Editor Gnome"
 msgid "gedit"
 msgstr "gedit"
 
-#: plugins/cvschangelog/cvschangelog.c:219
+#: plugins/cvschangelog/cvschangelog.c:35
+msgid "Open _CVS ChangeLogs"
+msgstr "Buka ChangeLog _CVS"
+
+#: plugins/cvschangelog/cvschangelog.c:38
+msgid "Searches for ChangeLogs in the current document and opens them."
+msgstr "Cari ChangeLog pada dokumen semasa dan buka."
+
+#: plugins/cvschangelog/cvschangelog.c:224
 msgid "CVS ChangeLog"
 msgstr "ChangLog CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:220
+#: plugins/cvschangelog/cvschangelog.c:225
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr "Plugin yang membuka ChangeLog yang dijumpai  pada mesej commit CVS."
 
-#: plugins/cvschangelog/cvschangelog.c:222
+#: plugins/cvschangelog/cvschangelog.c:227
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright (C) 2002 - James Willcox"
 
@@ -41,7 +49,7 @@ msgstr "_Kiraan Perkataan"
 msgid "Get info on current document."
 msgstr "Dapatkan maklumat pada dokumen semasa"
 
-#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:403
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:354
 msgid "Word count"
 msgstr "Kiraan perkataan"
 
@@ -49,7 +57,7 @@ msgstr "Kiraan perkataan"
 msgid "Update"
 msgstr "Kemaskini"
 
-#: plugins/docinfo/docinfo.c:404
+#: plugins/docinfo/docinfo.c:355
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
@@ -59,20 +67,28 @@ msgstr ""
 "nombor, baris, aksara dan aksara bukan space padanya dan memaparkan "
 "keputusan."
 
-#: plugins/docinfo/docinfo.c:408 plugins/sample/sample.c:173
-#: plugins/shell_output/shell_output.c:456 plugins/time/time.c:554
+#: plugins/docinfo/docinfo.c:359 plugins/sample/sample.c:129
+#: plugins/shell_output/shell_output.c:407 plugins/time/time.c:503
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Hakcipta (C) 2002 - Paolo Maggi"
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:36
+msgid "_Hello World"
+msgstr "_Hello Dunia"
+
+#: plugins/sample/sample.c:39
+msgid "Prints Hello World."
+msgstr "Cetak Hello Dunia."
+
+#: plugins/sample/sample.c:57
 msgid "Hello World "
 msgstr "Hello Dunia "
 
-#: plugins/sample/sample.c:170
+#: plugins/sample/sample.c:126
 msgid "Hello World"
 msgstr "Hello Dunia"
 
-#: plugins/sample/sample.c:171
+#: plugins/sample/sample.c:127
 msgid "Sample 'hello world' plugin."
 msgstr "Contoh plugin 'hello dunia'."
 
@@ -85,7 +101,7 @@ msgid "Insert the shell output in the current document."
 msgstr "Selit output shell pada dokumen semasa"
 
 #: plugins/shell_output/shell_output.c:138
-#: plugins/shell_output/shell_output.c:452
+#: plugins/shell_output/shell_output.c:403
 msgid "Shell output"
 msgstr "Output shell"
 
@@ -117,7 +133,7 @@ msgstr ""
 msgid "An error occurs while running the selected command."
 msgstr "Ralat berlaku bila melaksanakan arahang dipilih."
 
-#: plugins/shell_output/shell_output.c:453
+#: plugins/shell_output/shell_output.c:404
 msgid ""
 "Exucute a program and insert its output in the current document at the "
 "current cursor position"
@@ -141,11 +157,11 @@ msgstr "Format yang ada"
 msgid "Configure insert date/time plugin"
 msgstr "Konfigurasi plugin penyelitan tarikh/masa"
 
-#: plugins/time/time.c:551
+#: plugins/time/time.c:500
 msgid "Insert Date/Time"
 msgstr "Selit Tarikh/Masa"
 
-#: plugins/time/time.c:552
+#: plugins/time/time.c:501
 msgid "Inserts the current date and time at the cursor position."
 msgstr "Selitkan tarikh dan masa semasa pada posisi kursor."
 
@@ -175,57 +191,57 @@ msgstr "Plugin"
 msgid "Load"
 msgstr "Muatkan"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:316
+#: src/dialogs/gedit-dialog-plugin-manager.c:312
 msgid "Module file name"
 msgstr "Nama fail modul"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:317
+#: src/dialogs/gedit-dialog-plugin-manager.c:313
 msgid "Author(s)"
 msgstr "Penulis"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:450
+#: src/dialogs/gedit-dialog-plugin-manager.c:443
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr "Tak dapat menjumpai find plugin-manager.glade2, ulangpasang gedit.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:458
+#: src/dialogs/gedit-dialog-plugin-manager.c:451
 msgid "Plugin Manager"
 msgstr "Pengurus Plugin"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:485
+#: src/dialogs/gedit-dialog-plugin-manager.c:478
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 "Fail glade tak sah bagi Pengurus Plugin -- tidak semua widget dijumpai.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:574
+#: src/dialogs/gedit-dialog-plugin-manager.c:566
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Tak dapat mencipta dialog Pengutus Plugin"
 
-#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
+#: src/dialogs/gedit-dialog-replace.c:167 src/gedit-ui.xml.h:49
 msgid "Replace"
 msgstr "Ganti"
 
-#: src/dialogs/gedit-dialog-replace.c:176
+#: src/dialogs/gedit-dialog-replace.c:178
 msgid "Replace _All"
 msgstr "Gantikan Semu_a"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:116
 #: src/gedit-file.c:823 src/gedit-ui.xml.h:85
 msgid "_Replace"
 msgstr "_Ganti"
 
-#: src/dialogs/gedit-dialog-replace.c:268 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "Cari"
 
 #: src/dialogs/gedit-dialog-replace.c:469
 #: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:697
+#: src/dialogs/gedit-dialog-replace.c:695
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Teks \"%s\" tidak dijumpai"
 
-#: src/dialogs/gedit-dialog-replace.c:706
+#: src/dialogs/gedit-dialog-replace.c:704
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Jumpa dan gantikan %d kali"
@@ -457,7 +473,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:548
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -468,23 +484,23 @@ msgstr ""
 "\n"
 "Perubahan itu akan hilang jika anda tidak menyimpannya."
 
-#: src/gedit-mdi.c:578
+#: src/gedit-mdi.c:553
 msgid "Do_n't save"
 msgstr "Ja_ngan simpan"
 
-#: src/gedit-mdi.c:596
+#: src/gedit-mdi.c:571
 msgid "_Don't quit"
 msgstr "_Jangan keluar"
 
-#: src/gedit-mdi.c:600
+#: src/gedit-mdi.c:575
 msgid "_Don't close"
 msgstr "_Jangan tutup"
 
-#: src/gedit-mdi.c:684
+#: src/gedit-mdi.c:659
 msgid "(modified)"
 msgstr "(Diubah)"
 
-#: src/gedit-mdi.c:690
+#: src/gedit-mdi.c:665
 msgid "(readonly)"
 msgstr "(bacasahaja)"
 
@@ -927,16 +943,16 @@ msgstr "_Radas"
 msgid "_Undo"
 msgstr "N_yahcara"
 
-#: src/gedit-view.c:825
+#: src/gedit-view.c:824
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr " brs %d, Kol. %d"
 
-#: src/gedit-view.c:863
+#: src/gedit-view.c:862
 msgid "  OVR"
 msgstr " OVR"
 
-#: src/gedit-view.c:865
+#: src/gedit-view.c:864
 msgid "  INS"
 msgstr " INS"
 
