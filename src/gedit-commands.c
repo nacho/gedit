@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <string.h>
 #include <gtk/gtk.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
@@ -487,10 +488,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 		NULL
 	};
 	
-	/* Translator credits */
-	/*
-	gchar *translator_credits = _("");
-	*/
+	gchar *translator_credits = _("translator_credits");
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
@@ -521,7 +519,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 				_("gedit is a small and lightweight text editor for Gnome"),
 				(const char **)authors,
 				(const char **)documenters,
-				NULL, /*(const char *)translator_credits,*/
+				strcmp (translator_credits, "translator_credits") != 0 ? (const char *)translator_credits : NULL,
 				pixbuf);
 
 	gtk_window_set_transient_for (GTK_WINDOW (about),
