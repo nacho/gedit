@@ -1882,7 +1882,6 @@ gedit_window_prefs_save (GeditWindowPrefs *prefs)
 	if ((prefs->statusbar_visible != gedit_prefs_manager_get_statusbar_visible ()) &&
 	    gedit_prefs_manager_statusbar_visible_can_set ())
 		gedit_prefs_manager_set_statusbar_visible (prefs->statusbar_visible);
-
 }
 
 static gchar* 
@@ -1897,7 +1896,7 @@ escape_underscores (const gchar* text)
 
     	length = strlen (text);
 
-	str = g_string_new ("");
+	str = g_string_sized_new (length);
 
   	p = text;
   	end = text + length;
@@ -1935,7 +1934,7 @@ replace_spaces_with_underscores (const gchar* text)
 
     	length = strlen (text);
 
-	str = g_string_new ("");
+	str = g_string_sized_new (length);
 
   	p = text;
   	end = text + length;
@@ -2028,7 +2027,6 @@ language_toggled_handler (
 
 	gedit_document_set_language (doc, lang);
 }
-
 
 static gchar *
 get_verb_name_for_language (GtkSourceLanguage *lang)

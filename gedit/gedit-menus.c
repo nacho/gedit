@@ -33,6 +33,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include "gedit-menus.h"
 #include "gedit-commands.h"
 #include "gedit2.h"
@@ -209,7 +211,6 @@ gchar* gedit_menus_not_modified_doc_sensible_verbs [] = {
 	NULL
 };
 
-
 void
 gedit_menus_set_verb_sensitive (BonoboUIComponent *ui_component, gchar* cname, gboolean sensitive)
 {
@@ -243,6 +244,42 @@ gedit_menus_set_verb_state (BonoboUIComponent *ui_component, gchar* cname, gbool
 		ui_component, cname, "state", state ? "1" : "0", NULL);
 }
 
+/* arbitrarily escape slashes in a item path with a "-", otherwise
+ * bonobo gets confused... slashes are ok in menu labels
+ */
+static gchar *
+escape_slashes (const gchar *text)
+{
+	GString *str;
+	gint length;
+	const gchar *p;
+	const gchar *end;
+
+  	g_return_val_if_fail (text != NULL, NULL);
+
+    	length = strlen (text);
+
+	str = g_string_sized_new (length);
+
+  	p = text;
+  	end = text + length;
+
+	while (p != end)
+	{
+		const gchar *next;
+		next = g_utf8_next_char (p);
+
+		if (*p == '/')
+			g_string_append (str, "-");
+		else
+			g_string_append_len (str, p, next - p);
+
+		p = next;
+	}
+
+	return g_string_free (str, FALSE);
+}
+
 void
 gedit_menus_add_menu_item (BonoboWindow *window, const gchar *path,
 		     const gchar *name, const gchar *label,
@@ -250,6 +287,7 @@ gedit_menus_add_menu_item (BonoboWindow *window, const gchar *path,
 		     BonoboUIVerbFn cb)
 {
 	BonoboUIComponent *ui_component;
+	gchar *escaped_name;
 	gchar *item_path;
 	gchar *cmd;
 
@@ -258,40 +296,41 @@ gedit_menus_add_menu_item (BonoboWindow *window, const gchar *path,
 	g_return_if_fail (label != NULL);
 	g_return_if_fail (cb != NULL);
 	
-	item_path = g_strconcat (path, name, NULL);
+	escaped_name = escape_slashes (name);
+
+	item_path = g_strconcat (path, escaped_name, NULL);
 	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
 	if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL)) {
 		gchar *xml;
 
 		xml = g_strdup_printf ("<menuitem name=\"%s\" verb=\"\""
 				       " _label=\"%s\""
-				       " _tip=\"%s\" hidden=\"0\" />", name,
-				       label, tooltip);
-
+				       " _tip=\"%s\" hidden=\"0\" />",
+				       escaped_name, label, tooltip);
 
 		if (stock_pixmap != NULL) {
 			cmd = g_strdup_printf ("<cmd name=\"%s\""
 				" pixtype=\"stock\" pixname=\"%s\" />",
-				name, stock_pixmap);
+				escaped_name, stock_pixmap);
 		}
 		else {
-			cmd = g_strdup_printf ("<cmd name=\"%s\" />", name);
+			cmd = g_strdup_printf ("<cmd name=\"%s\" />", escaped_name);
 		}
-
 
 		bonobo_ui_component_set_translate (ui_component, path,
 						   xml, NULL);
 
 		bonobo_ui_component_set_translate (ui_component, "/commands/",
 						   cmd, NULL);
-						   
-		bonobo_ui_component_add_verb (ui_component, name, cb, NULL);
+
+		bonobo_ui_component_add_verb (ui_component, escaped_name, cb, NULL);
 
 		g_free (xml);
 		g_free (cmd);
 	}
 
 	g_free (item_path);
+	g_free (escaped_name);
 }
 
 void
@@ -299,19 +338,22 @@ gedit_menus_remove_menu_item (BonoboWindow *window, const gchar *path,
 			const gchar *name)
 {
 	BonoboUIComponent *ui_component;
+	gchar *escaped_name;
 	gchar *item_path;
 
 	g_return_if_fail (window != NULL);
 	g_return_if_fail (path != NULL);
 	g_return_if_fail (name != NULL);
 
-	item_path = g_strconcat (path, name, NULL);
+	escaped_name = escape_slashes (name);
+
+	item_path = g_strconcat (path, escaped_name, NULL);
 	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
 
 	if (bonobo_ui_component_path_exists (ui_component, item_path, NULL)) {
 		gchar *cmd;
 
-		cmd = g_strdup_printf ("/commands/%s", name);
+		cmd = g_strdup_printf ("/commands/%s", escaped_name);
 		
 		bonobo_ui_component_rm (ui_component, item_path, NULL);
 		bonobo_ui_component_rm (ui_component, cmd, NULL);
@@ -320,6 +362,7 @@ gedit_menus_remove_menu_item (BonoboWindow *window, const gchar *path,
 	}
 
 	g_free (item_path);
+	g_free (escaped_name);
 }
 
 void
@@ -336,7 +379,6 @@ gedit_menus_add_menu_item_all (const gchar *path, const gchar *name,
 	while (top_windows)
 	{
 		BonoboWindow* window = BONOBO_WINDOW (top_windows->data);
-
 
 		gedit_menus_add_menu_item (window, path, name, label, tooltip,
 				     stock_pixmap, cb);
@@ -363,13 +405,13 @@ gedit_menus_remove_menu_item_all (const gchar *path, const gchar *name)
 	}
 }
 
-
 void
 gedit_menus_add_menu_item_toggle (BonoboWindow *window, const gchar *path,
 		     const gchar *name, const gchar *label, const gchar *tooltip, 
 		     BonoboUIListenerFn lt, gpointer data)
 {
 	BonoboUIComponent *ui_component;
+	gchar *escaped_name;
 	gchar *item_path;
 	gchar *cmd;
 
@@ -377,32 +419,35 @@ gedit_menus_add_menu_item_toggle (BonoboWindow *window, const gchar *path,
 	g_return_if_fail (path != NULL);
 	g_return_if_fail (label != NULL);
 	g_return_if_fail (lt != NULL);
-	
-	item_path = g_strconcat (path, name, NULL);
+
+	escaped_name = escape_slashes (name);
+
+	item_path = g_strconcat (path, escaped_name, NULL);
 	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
 	if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL)) 
 	{
 		gchar *xml;
 
 		xml = g_strdup_printf ("<menuitem name=\"%s\" id=\"%s\" verb=\"\" />",
-				       name, name);
+				       escaped_name, escaped_name);
 
 		cmd = g_strdup_printf ("<cmd name=\"%s\" _label=\"%s\" type=\"toggle\" _tip=\"%s\" state=\"0\"/>", 
-				name, label, tooltip);
-		
+				escaped_name, label, tooltip);
+
 		bonobo_ui_component_set_translate (ui_component, "/commands/",
 						   cmd, NULL);
 
 		bonobo_ui_component_set_translate (ui_component, path,
 						   xml, NULL);
 
-		bonobo_ui_component_add_listener (ui_component, name, lt, data);
+		bonobo_ui_component_add_listener (ui_component, escaped_name, lt, data);
 
 		g_free (xml);
 		g_free (cmd);
 	}
 
 	g_free (item_path);
+	g_free (escaped_name);
 }
 
 
@@ -420,7 +465,6 @@ gedit_menus_add_menu_item_toggle_all (const gchar *path,
 	{
 		BonoboWindow* window = BONOBO_WINDOW (top_windows->data);
 
-
 		gedit_menus_add_menu_item_toggle (window, path, name, label, tooltip,
 				     lt, data);
 		
@@ -434,6 +478,7 @@ gedit_menus_add_menu_item_radio (BonoboWindow *window, const gchar *path,
 		     BonoboUIListenerFn lt, gpointer data)
 {
 	BonoboUIComponent *ui_component;
+	gchar *escaped_name;
 	gchar *item_path;
 	gchar *cmd;
 
@@ -444,18 +489,20 @@ gedit_menus_add_menu_item_radio (BonoboWindow *window, const gchar *path,
 	g_return_if_fail (group != NULL);
 	g_return_if_fail (lt != NULL);
 	
-	item_path = g_strconcat (path, name, NULL);
+	escaped_name = escape_slashes (name);
+
+	item_path = g_strconcat (path, escaped_name, NULL);
 	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
 	if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL)) 
 	{
 		gchar *xml;
 
 		xml = g_strdup_printf ("<menuitem name=\"%s\" id=\"%s\" verb=\"\" />",
-				       name, name);
+				       escaped_name, escaped_name);
 
 		cmd = g_strdup_printf ("<cmd name=\"%s\" _label=\"%s\" type=\"radio\" group =\"%s\" "
 				       "_tip=\"%s\" state=\"0\"/>", 
-				       name, label, group, tooltip);
+				       escaped_name, label, group, tooltip);
 		
 		bonobo_ui_component_set_translate (ui_component, "/commands/",
 						   cmd, NULL);
@@ -463,15 +510,15 @@ gedit_menus_add_menu_item_radio (BonoboWindow *window, const gchar *path,
 		bonobo_ui_component_set_translate (ui_component, path,
 						   xml, NULL);
 
-		bonobo_ui_component_add_listener (ui_component, name, lt, data);
+		bonobo_ui_component_add_listener (ui_component, escaped_name, lt, data);
 
 		g_free (xml);
 		g_free (cmd);
 	}
 
 	g_free (item_path);
+	g_free (escaped_name);
 }
-
 
 void
 gedit_menus_add_menu_item_radio_all (const gchar *path,
@@ -487,7 +534,6 @@ gedit_menus_add_menu_item_radio_all (const gchar *path,
 	{
 		BonoboWindow* window = BONOBO_WINDOW (top_windows->data);
 
-
 		gedit_menus_add_menu_item_radio (window, path, name, group, label, tooltip,
 				     lt, data);
 		
@@ -500,20 +546,23 @@ gedit_menus_add_submenu (BonoboWindow *window, const gchar *path,
 		     const gchar *name, const gchar *label)
 {
 	BonoboUIComponent *ui_component;
+	gchar *escaped_name;
 	gchar *item_path;
 
 	g_return_if_fail (window != NULL);
 	g_return_if_fail (path != NULL);
 	g_return_if_fail (label != NULL);
-	
-	item_path = g_strconcat (path, name, NULL);
+
+	escaped_name = escape_slashes (name);
+
+	item_path = g_strconcat (path, escaped_name, NULL);
 	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
 	if (!bonobo_ui_component_path_exists (ui_component, item_path, NULL)) {
 		gchar *xml;
 
 		xml = g_strdup_printf ("<submenu name=\"%s\""
 				       " _label=\"%s\" />", 
-				       name, label);
+				       escaped_name, label);
 
 		bonobo_ui_component_set_translate (ui_component, path,
 						   xml, NULL);
@@ -522,6 +571,7 @@ gedit_menus_add_submenu (BonoboWindow *window, const gchar *path,
 	}
 
 	g_free (item_path);
+	g_free (escaped_name);
 }
 
 void
@@ -540,26 +590,29 @@ gedit_menus_add_submenu_all (const gchar *path, const gchar *name, const gchar *
 		
 		top_windows = g_list_next (top_windows);
 	}
-
 }
 
 void
 gedit_menus_remove_submenu (BonoboWindow *window, const gchar *path,  const gchar *name)
 {
 	BonoboUIComponent *ui_component;
+	gchar *escaped_name;
 	gchar *item_path;
 
 	g_return_if_fail (window != NULL);
 	g_return_if_fail (path != NULL);
 	g_return_if_fail (name != NULL);
 
-	item_path = g_strconcat (path, name, NULL);
+	escaped_name = g_strconcat (path, name, NULL);
+
+	item_path = escape_slashes (escaped_name);
 	ui_component = gedit_get_ui_component_from_window (BONOBO_WINDOW (window));
 
 	if (bonobo_ui_component_path_exists (ui_component, item_path, NULL)) 
 		bonobo_ui_component_rm (ui_component, item_path, NULL);
 
 	g_free (item_path);
+	g_free (escaped_name);
 }
 
 void
