@@ -310,7 +310,8 @@ bonobo_mdi_instance_init (BonoboMDI *mdi)
 	mdi->priv->tab_pos = gnome_preferences_get_mdi_tab_pos();
 	 */
 	mdi->priv->mode = BONOBO_MDI_NOTEBOOK;
-
+	mdi->priv->tab_pos = GTK_POS_TOP;
+		
 	mdi->priv->signal_id 		= 0;
 	mdi->priv->in_drag 		= FALSE;
 

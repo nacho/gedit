@@ -360,6 +360,9 @@ gedit_document_new_with_uri (const gchar *uri, GError **error)
 void 		
 gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 {
+	GtkTextIter start;
+	GtkTextIter end;
+
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (document != NULL);
@@ -367,6 +370,22 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 
 	if (document->priv->readonly == readonly) 
 		return;
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (document), &start, 0);
+      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (document), &end);
+
+	if(readonly) 
+	{
+		gtk_text_buffer_apply_tag_by_name (GTK_TEXT_BUFFER (document), 
+					NOT_EDITABLE_TAG_NAME, &start, &end);
+	}
+	else
+	{
+		gtk_text_buffer_remove_tag_by_name (GTK_TEXT_BUFFER (document), 
+					NOT_EDITABLE_TAG_NAME, &start, &end);
+	}
+
+	document->priv->readonly = readonly;
 
 	g_signal_emit (G_OBJECT (document),
                        document_signals[READONLY_CHANGED],
@@ -420,29 +439,9 @@ gedit_document_real_saved (GeditDocument *document)
 static void 
 gedit_document_real_readonly_changed (GeditDocument *document, gboolean readonly)
 {
-	GtkTextIter start;
-	GtkTextIter end;
-	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (document != NULL);
-	g_return_if_fail (document->priv != NULL);
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (document), &start, 0);
-      	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (document), &end);
-
-	if(readonly) 
-	{
-		gtk_text_buffer_apply_tag_by_name (GTK_TEXT_BUFFER (document), 
-					NOT_EDITABLE_TAG_NAME, &start, &end);
-	}
-	else
-	{
-		gtk_text_buffer_remove_tag_by_name (GTK_TEXT_BUFFER (document), 
-					NOT_EDITABLE_TAG_NAME, &start, &end);
-	}
-
-	document->priv->readonly = readonly;
 }
 
 gchar*
@@ -720,7 +719,6 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
-	g_return_val_if_fail (!doc->priv->readonly, FALSE);
 
 	if (gedit_document_save_as_real (doc, uri, error))
 	{
@@ -745,7 +743,6 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, GError **erro
 	g_return_val_if_fail (doc != NULL, FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
-	g_return_val_if_fail (!doc->priv->readonly, FALSE);
 
 	if (!gedit_utils_uri_has_file_scheme (uri))
 	{

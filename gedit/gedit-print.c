@@ -31,11 +31,12 @@
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 
+#include "gedit2.h"
 #include "gedit-print.h"
 #include "gedit-debug.h"
 
 
-static void 	gedit_print_real 	(gboolean preview);
+static void 	gedit_print_real 	(GeditDocument* doc, gboolean preview);
 static gboolean	gedit_print_run_dialog 	(/*PrintJobInfo *pji*/);
 
 /**
@@ -60,7 +61,7 @@ gedit_print_run_dialog (/*PrintJobInfo *pji*/)
 		selection_flag = GNOME_PRINT_RANGE_SELECTION;
 		
 	dialog =  gnome_print_dialog_new ((const char *) _("Print Document"),
-			          GNOME_PRINT_DIALOG_RANGE);
+			          GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
 	
 	gnome_print_dialog_construct_range_page ( GNOME_PRINT_DIALOG (dialog),
 						  GNOME_PRINT_RANGE_ALL |
@@ -68,6 +69,12 @@ gedit_print_run_dialog (/*PrintJobInfo *pji*/)
 						  selection_flag,
 						  1, /*pji->pages*/5, "A",
 							  _("Pages"));
+
+	gtk_window_set_transient_for (GTK_WINDOW (dialog),
+				      GTK_WINDOW
+				      (bonobo_mdi_get_active_window
+				       (BONOBO_MDI (gedit_mdi))));
+
 
 	gtk_dialog_run (GTK_DIALOG (dialog));
 #if 0
@@ -110,8 +117,9 @@ gedit_print_run_dialog (/*PrintJobInfo *pji*/)
  * The main printing function
  **/
 static void
-gedit_print_real (gboolean preview)
+gedit_print_real (GeditDocument* doc, gboolean preview)
 {
+	
 #if 0
 	PrintJobInfo *pji;
 	gboolean cancel = FALSE;
@@ -155,16 +163,30 @@ gedit_print_real (gboolean preview)
 void 
 gedit_print (GeditMDIChild* active_child)
 {
+	GeditDocument *doc;
+	
 	gedit_debug (DEBUG_PRINT, "");
+	
+	g_return_if_fail (active_child != NULL);
 
-	gedit_print_real (FALSE);
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+
+	gedit_print_real (doc, FALSE);
 }
 
 void 
 gedit_print_preview (GeditMDIChild* active_child)
 {
-	gedit_debug (DEBUG_PRINT, "");	
+	GeditDocument *doc;
+	
+	gedit_debug (DEBUG_PRINT, "");
+	
+	g_return_if_fail (active_child != NULL);
 
-	gedit_print_real (TRUE);
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+
+	gedit_print_real (doc, TRUE);
 }
 

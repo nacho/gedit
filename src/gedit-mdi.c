@@ -124,7 +124,7 @@ gedit_mdi_init (GeditMDI  *mdi)
 {
 	gedit_debug (DEBUG_MDI, "START");
 
-	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit2", "gedit", settings->tab_pos);
+	bonobo_mdi_construct (BONOBO_MDI (mdi), "gedit2", "gedit", GTK_POS_TOP/*FIXME: settings->tab_pos*/);
 	
 	mdi->priv = g_new0 (GeditMDIPrivate, 1);
 
@@ -564,17 +564,17 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 
 	if (gedit_document_get_modified (doc))
 	{
-		title = g_strdup_printf ("gedit - [%s] %s", docname, _("(modified)"));
+		title = g_strdup_printf ("%s %s - gedit", docname, _("(modified)"));
 	} 
 	else 
 	{
 		if (gedit_document_is_readonly (doc)) 
 		{
-			title = g_strdup_printf ("gedit - [%s] %s", docname, _("(readonly)"));
+			title = g_strdup_printf ("%s %s - gedit", docname, _("(readonly)"));
 		} 
 		else 
 		{
-			title = g_strdup_printf ("gedit - [%s]", docname);
+			title = g_strdup_printf ("%s - gedit", docname);
 		}
 
 	}
