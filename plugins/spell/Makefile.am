@@ -28,9 +28,7 @@ libspell_la_SOURCES = spell.c 				\
 	gedit-spell-language-dialog.h			\
 	gedit-automatic-spell-checker.c			\
 	gedit-automatic-spell-checker.h			\
-	$(BUILT_SOURCES)				\
-	preload.c					\
-	preload.h					
+	$(BUILT_SOURCES)				
 
 libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
 libspell_la_LIBADD =  $(PSPELL_LIBS)

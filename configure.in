@@ -37,7 +37,7 @@ dnl ******************
 dnl pspell checks
 dnl ******************
 
-AC_MSG_CHECKING([for pspell])
+AC_MSG_CHECKING([for aspell/pspell])
 if pspell-config version > /dev/null 2>&1; then
 	pspell_ver=`pspell-config version`
 	pspell_num=`echo ${pspell_ver} | awk 'BEGIN {FS="."}{printf $1*10000 + $2*100 + $3;}'`
@@ -45,23 +45,21 @@ if pspell-config version > /dev/null 2>&1; then
 		AC_MSG_RESULT([pspell version .12 or later required, you have ${pspell_ver} installed])
 	else
 		AC_MSG_RESULT([found ($pspell_ver)])
+
 		AC_CHECK_HEADER(pspell/pspell.h,
-			PSPELL_LIBS="-lpspell"
-			SPELL_PLUGIN_DIR="spell"
-			AC_SUBST(SPELL_PLUGIN_DIR))
+			[AC_CHECK_LIB(aspell, new_aspell_speller, 
+				[PSPELL_LIBS="-laspell" SPELL_PLUGIN_DIR="spell" AC_SUBST(SPELL_PLUGIN_DIR)],
+   				[AC_CHECK_LIB(pspell, new_pspell_manager, 
+					[PSPELL_LIBS="-lpspell" SPELL_PLUGIN_DIR="spell" AC_SUBST(SPELL_PLUGIN_DIR)],
+					[AC_MSG_WARN([You must have the aspell or pspell dev libraries to build the spell plugin.])] 
+				)]
+			)],
+			[AC_MSG_WARN([You must have the aspell or pspell dev libraries to build the spell plugin.])] 
+		)
 	fi
 else
 	AC_MSG_RESULT([not found])
 fi
-
-AC_CHECK_LIB(aspell,main,
-	     AC_CHECK_LIB(pspell_aspell,main,
-             PSPELL_LIBS="$PSPELL_LIBS -lpspell_aspell -laspell"
-             AC_DEFINE(HAVE_ASPELL_MODULE,,[Use aspell]),,-laspell $PSPELL_LIBS),,)
-
-AC_CHECK_LIB(pspell_ispell,main,
-             PSPELL_LIBS="$PSPELL_LIBS -lpspell_ispell"
-             AC_DEFINE(HAVE_ISPELL_MODULE,,[Use ispell]),,$PSPELL_LIBS)
 
 AC_SUBST(PSPELL_LIBS)
 AC_SUBST(CFLAGS)
