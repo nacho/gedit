@@ -20,6 +20,14 @@ else
 GMODULE_PLUGIN_SRCLIST =
 endif
 
+if HAVE_ORBIT
+corba_libs = @ORBIT_LIBS@
+endif
+
+if HAVE_LIBGNORBA
+libgnorba_libs = -lgnorba
+endif
+
 bin_PROGRAMS = gedit
 
 gedit_SOURCES = 	\
@@ -61,7 +69,8 @@ gedit_SOURCES = 	\
 
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 
-gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
+gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(corba_libs) \
+	      $(libgnorba_libs) $(INTLLIBS)
 
 EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm
 
@@ -70,6 +79,6 @@ CPPFLAGS = \
 	-DDATADIR=\""$(datadir)"\" \
 	-DPLUGINDIR=\""$(plugindir)"\" \
 	-DPLUGINLIBDIR=\""$(pluginlibdir)"\" \
-	-Wall -Wno-unused -ansi
+	-Wall -Wno-unused -ansi -D_IN_GEDIT
 #	-DDEBUG
 

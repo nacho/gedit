@@ -214,8 +214,10 @@ gE_Plugin_Register (gE_Plugin_Object *plugin)
  */
 
 gboolean
-gE_Plugin_Load (gE_Plugin_Object *plugin)
+gE_Plugin_Load (gE_Plugin_Object *plugin, gint context)
 {
+	printf ("LOAD: %p - %p\n", plugin, plugin->module);
+
 	if (plugin->module)
 		return TRUE;
 
@@ -248,7 +250,7 @@ gE_Plugin_Load (gE_Plugin_Object *plugin)
 	fprintf (stderr, "Plugin Name: %s\n", plugin->info->plugin_name);
 
 	if (plugin->info->init_func)
-		plugin->info->init_func (plugin);
+		plugin->info->init_func (plugin, context);
 
 	return TRUE;
 

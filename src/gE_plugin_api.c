@@ -76,7 +76,9 @@ void start_plugin( GtkWidget *widget, gE_data *data )
 
 #ifdef WITH_GMODULE_PLUGINS
   if ( info->type == PLUGIN_GMODULE ) {
-      gE_Plugin_Load ( (gE_Plugin_Object *)info->user_data );
+      gE_Plugin_Load ( (gE_Plugin_Object *)info->user_data,
+		       *(int *)g_hash_table_lookup (win_pointer_to_int,
+						    data->window) );
       return;
   }
 #endif

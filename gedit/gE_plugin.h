@@ -26,7 +26,7 @@
 typedef struct _gE_Plugin_Object	gE_Plugin_Object;
 typedef struct _gE_Plugin_Info		gE_Plugin_Info;
 
-typedef void (*gE_Plugin_InitFunc)	(gE_Plugin_Object *);
+typedef void (*gE_Plugin_InitFunc)	(gE_Plugin_Object *, gint);
 
 struct _gE_Plugin_Info
 {
@@ -52,6 +52,23 @@ extern GList *gE_Plugin_List;
 extern void gE_Plugin_Query_All (void);
 extern gE_Plugin_Object *gE_Plugin_Query (gchar *);
 extern void gE_Plugin_Register (gE_Plugin_Object *);
-extern gboolean gE_Plugin_Load (gE_Plugin_Object *);
+extern gboolean gE_Plugin_Load (gE_Plugin_Object *, gint);
+
+#ifndef _IN_GEDIT
+
+/* Only when included from plugin ... */
+
+#include <libgnorba/gnorba.h>
+
+extern void corba_exception (CORBA_Environment *);
+
+extern CORBA_ORB global_orb;
+extern PortableServer_POA root_poa;
+extern PortableServer_POAManager root_poa_manager;
+extern CORBA_Environment *global_ev;
+extern CORBA_Object name_service;
+
+#endif /* not _IN_GEDIT */
+
 
 #endif /* __GE_PLUGIN_H__ */

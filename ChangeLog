@@ -1,3 +1,32 @@
+1998-10-14  Martin Baulig  <martin@home-of-linux.org>
+
+	Added some basic CORBA stuff. CORBA is only used in plugins, but
+	we need to initialize it in the main program.
+	
+	* configure.in (--enable-orbit): New parameter to link with ORBit.
+	If found, check for LibGnorba and define two (HAVE_OBIT) and
+	(HAVE_LIBGNORBA) automake conditionals. Also AC_DEFINE(HAVE_ORBIT)
+	and AC_DEFINE(HAVE_LIBGNORBA) if ORBit/LibGnorba is found.
+	Only check for this if the GModule Plugins are enabled.
+
+	* src/Makefile.am (CPPFLAGS): Define `_IN_GEDIT'.
+	(gedit_LDADD): Link with ORBit and LibGnorba if they're found.
+
+	* src/gE_plugin.c (gE_Plugin_Load): Pass the edit context to
+	the plugin so that it can use the old plugin API as well.
+
+	* src/gE_plugin.h: If we are not _IN_GEDIT, add `extern' declarations
+	for the CORBA variables `global_orb', `root_poa', `root_poa_manager',
+ 	`global_ev' and `name_service' and a prototype for `corba_exception'.
+
+	The following stuff is `#ifdef HAVE_LIBGNORBA':
+	
+	* src/gedit.c (corba_exception): New function which is used for
+	CORBA error handling.
+	(global_orb, root_poa, root_poa_manager, global_ev, name_service):
+	New global variables which can be used in CORBA-aware plugins.
+	(main): Initialize CORBA here.
+
 1998-10-14  Alex Roberts  <bse@dial.pipex.com>
 
 	* gE_prefs_box.c: Removed Font 'restart gEdit' label...

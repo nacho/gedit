@@ -39,6 +39,10 @@
 #include <gE_plugin.h>
 #endif
 
+#ifdef HAVE_LIBGNORBA
+#include <libgnorba/gnorba.h>
+#endif
+
 GList *window_list;
 extern GList *plugins;
 
@@ -249,17 +253,73 @@ static struct argp parser =
 	argp_options, parse_an_arg, NULL, NULL, NULL, NULL, NULL
 };
 
+#ifdef HAVE_LIBGNORBA
+
+CORBA_ORB global_orb;
+PortableServer_POA root_poa;
+PortableServer_POAManager root_poa_manager;
+CORBA_Environment *global_ev;
+CORBA_Object name_service;
+
+void
+corba_exception (CORBA_Environment* ev)
+{
+	switch (ev->_major) {
+	case CORBA_SYSTEM_EXCEPTION:
+		g_log ("GEdit CORBA", G_LOG_LEVEL_DEBUG,
+		       "CORBA system exception %s.\n",
+		       CORBA_exception_id (ev));
+		break;
+	case CORBA_USER_EXCEPTION:
+		g_log ("GEdit CORBA", G_LOG_LEVEL_DEBUG,
+		       "CORBA user exception: %s.\n",
+		       CORBA_exception_id (ev));
+		break;
+	default:
+		break;
+	}
+}
+
+#endif /* HAVE_LIBGNORBA */
+
 int main (int argc, char **argv)
 {
 
 	gE_window *window;
 	gE_data *data;
 	plugin_callback_struct callbacks;
+
 	argp_program_version = VERSION;
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
 
+#ifdef HAVE_LIBGNORBA
+
+	global_ev = g_new0 (CORBA_Environment, 1);
+
+	CORBA_exception_init (global_ev);
+	global_orb = gnome_CORBA_init
+		("gedit", &parser, &argc, argv, 0, NULL, global_ev);
+	corba_exception (global_ev);
+	
+	root_poa = CORBA_ORB_resolve_initial_references
+		(global_orb, "RootPOA", global_ev);
+	corba_exception (global_ev);
+
+	root_poa_manager = PortableServer_POA__get_the_POAManager
+		(root_poa, global_ev);
+	corba_exception (global_ev);
+
+	PortableServer_POAManager_activate (root_poa_manager, global_ev);
+	corba_exception (global_ev);
+
+	name_service = gnome_name_service_get ();
+
+#else
+
 	gnome_init ("gEdit", &parser, argc, argv, 0, NULL);
+
+#endif /* HAVE_LIBGNORBA */
 
 	gE_rc_parse();
 
