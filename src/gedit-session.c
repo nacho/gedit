@@ -111,10 +111,10 @@ client_save_yourself_cb (GnomeClient *client,
 	/* Tell the session manager how to clone or restart this instance */
 
 	argv[0] = (char *) program_argv0;
-	argv[1] = "--debug-session";
-
-	gnome_client_set_clone_command (client, 2, argv);
-	gnome_client_set_restart_command (client, 2, argv);
+	argv[1] = NULL; /* "--debug-session"; */
+	
+	gnome_client_set_clone_command (client, 1 /*2*/, argv);
+	gnome_client_set_restart_command (client, 1 /*2*/, argv);
 
 	gedit_debug (DEBUG_SESSION, "END");
 
