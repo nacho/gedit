@@ -665,7 +665,7 @@ static void gE_view_init (gE_view *view)
 
 	view->text = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(view->text), !view->read_only);
-	gtk_text_set_word_wrap(GTK_TEXT(view->text), view->word_wrap);
+	gtk_text_set_word_wrap(GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap(GTK_TEXT(view->text), view->line_wrap);
 
 	
@@ -679,8 +679,8 @@ static void gE_view_init (gE_view *view)
 
 
 	/* Handle Auto Indent */
-	gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
-		GTK_SIGNAL_FUNC(auto_indent_cb), view);
+	view->indent = gtk_signal_connect_after (GTK_OBJECT(view->text), "insert_text",
+										 GTK_SIGNAL_FUNC(auto_indent_cb), view);
 
 	/*	
 	I'm not even sure why these are here.. i'm sure there are much easier ways
@@ -727,7 +727,7 @@ static void gE_view_init (gE_view *view)
 
 	view->split_screen = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(view->split_screen), !view->read_only);
-	gtk_text_set_word_wrap(GTK_TEXT(view->split_screen), view->word_wrap);
+	gtk_text_set_word_wrap(GTK_TEXT(view->split_screen), settings->word_wrap);
 	gtk_text_set_line_wrap(GTK_TEXT(view->split_screen), view->line_wrap);
 
 	
@@ -748,8 +748,9 @@ static void gE_view_init (gE_view *view)
 				                     GTK_SIGNAL_FUNC(doc_delete_text_cb),
 				                     (gpointer) view);
 
-	gtk_signal_connect_after(GTK_OBJECT(view->split_screen),
-		"insert_text", GTK_SIGNAL_FUNC(auto_indent_cb), view);
+	view->s_indent = gtk_signal_connect (GTK_OBJECT(view->split_screen), "insert_text",
+	                                    GTK_SIGNAL_FUNC(auto_indent_cb),
+	                                    (gpointer) view);
 				
 	gtk_container_add (GTK_CONTAINER (view->scrwindow[1]), view->split_screen);
 
@@ -908,7 +909,8 @@ void gE_view_set_word_wrap (gE_view *view, gint word_wrap)
 
 	view->word_wrap = word_wrap;
 
-	gtk_text_set_word_wrap (GTK_TEXT (view->text), view->word_wrap);
+	gtk_text_set_word_wrap (GTK_TEXT (view->text), word_wrap);
+	gtk_text_set_word_wrap (GTK_TEXT (view->split_screen), word_wrap);
 
 }
 
@@ -972,7 +974,6 @@ void gE_view_set_font (gE_view *view, gchar *font)
 	gtk_widget_pop_style ();
 
 }
-
 
 void gE_view_set_position (gE_view *view, gint pos)
 {

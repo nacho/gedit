@@ -537,8 +537,10 @@ find_in_file_search
 	    		get_start_index_of_line (view, i)
 	    	);
 	    counter++;
+	    
 	  }	 
 	  g_free (buffer);
+	  
 	}
 	return counter;	
 }

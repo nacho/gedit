@@ -12,7 +12,7 @@ print MAKEFILE << 'EOF';
 dnl This is a generated file.  Please see makeconfig.pl.
 AC_INIT(src/gedit.c)
 AM_CONFIG_HEADER(config.h)
-AM_INIT_AUTOMAKE(gedit, 0.6.0pre)
+AM_INIT_AUTOMAKE(gedit, 0.6.0)
 
 AM_MAINTAINER_MODE
 AM_ACLOCAL_INCLUDE(macros)
@@ -73,7 +73,7 @@ dnl AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LI
 AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
 
 
-ALL_LINGUAS="cs da de es fr ga it ja ko nl no pt pt_BR ru sv uk wa zh_TW.Big5 pl"
+ALL_LINGUAS="cs da de es fr ga it ja ko nl no pt pt_BR ru sv uk wa zh_TW.Big5 pl gl"
 AM_GNU_GETTEXT
 
 

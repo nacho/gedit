@@ -145,24 +145,6 @@ GnomeUIInfo gedit_tab_menu []= {
 
 };
 
-GnomeUIInfo gedit_scrbar_menu []= {
-
-	{ GNOME_APP_UI_ITEM, N_("_None"),
-	  N_("Don't have a scrollbar"),
-	  scrollbar_none_cb, NULL },
-
-	{ GNOME_APP_UI_ITEM, N_("A_lways"),
-	  N_("Always have the scrollbar"),
-	  scrollbar_always_cb, NULL },
-
-	{ GNOME_APP_UI_ITEM, N_("_Automatic"),
-	  N_("Only have scrollbar when it's needed"),
-	  scrollbar_auto_cb, NULL },
-
-	GNOMEUIINFO_END
-
-};
-
 
 GnomeUIInfo gedit_settings_menu []= {
 /* -- These settings are in the Preferences Box, and only need to be
@@ -203,9 +185,6 @@ GnomeUIInfo gedit_settings_menu []= {
 	{ GNOME_APP_UI_SUBTREE, N_("_Document Tabs"),
 	  N_("Change the placement of the document tabs"), &gedit_tab_menu },
 	  
-	{ GNOME_APP_UI_SUBTREE, N_("_Scrollbar"),
-	  N_("Change visibility options of the scrollbar"), &gedit_scrbar_menu },
-
 	GNOMEUIINFO_SEPARATOR,
 
 	{ GNOME_APP_UI_ITEM, N_("Sa_ve Settings"),
@@ -277,128 +256,8 @@ GnomeUIInfo gedit_menu [] = {
 
 GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 {
-/*	add_callback_data (gedit_file_menu, GNOME_APP (mdi->active_window), data);
-	add_callback_data (gedit_edit_menu, GNOME_APP (mdi->active_window), data);
-	add_callback_data (gedit_tab_menu, window, data);
-	add_callback_data (gedit_settings_menu,GNOME_APP (mdi->active_window), data);
-	add_callback_data (gedit_window_menu, GNOME_APP (mdi->active_window), data);
-	add_callback_data (gedit_docs_menu, GNOME_APP (mdi->active_window), data);
-	add_callback_data (gedit_help_menu, GNOME_APP (mdi->active_window), data);
-*/
+
 	gnome_app_create_menus (GNOME_APP (mdi->active_window), gedit_menu);
 
-/*	remove_callback_data (gedit_file_menu, GNOME_APP (mdi->active_window), data);
-	remove_callback_data (gedit_edit_menu, GNOME_APP (mdi->active_window), data);
-	remove_callback_data (gedit_tab_menu, GNOME_APP (mdi->active_window),data);
-       remove_callback_data (gedit_settings_menu,GNOME_APP (mdi->active_window), data);
-	remove_callback_data (gedit_window_menu,GNOME_APP (mdi->active_window),data);
-	remove_callback_data (gedit_docs_menu, GNOME_APP (mdi->active_window), data);
-	remove_callback_data (gedit_help_menu, GNOME_APP (mdi->active_window), data);
-*/
 	return (GnomeUIInfo *) gedit_menu;
-}
-
-/*
- * This function initializes the toggle menu items to the proper states.
- * It is called from gE_window_nwe after the settings have been loaded.
- */
-void
-gE_set_menu_toggle_states()
-{
-
-	gE_document *doc;
-	gE_view *view;
-	int i;
-
-#define GE_SET_TOGGLE_STATE(item, l, boolean)                            \
-  if (!strcmp(item.label, l))                                            \
-    GTK_CHECK_MENU_ITEM (item.widget)->active = boolean
-
-  /*
-   * Initialize the states of the document tabs menu...
-   * FIXME: This is borked right now.. does GnomeMDI need this? 
-   *  	    An addition to the prefs box would be better..
-   */
-/*  for (i = 0; gedit_tab_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++)
-    {
-      if (gedit_tab_menu[i].label)
-	{
-	  GE_SET_TOGGLE_STATE(gedit_tab_menu[i], GE_TOGGLE_LABEL_SHOWTABS,
-			      settings->show_tabs);
-	  
-	}
-    }*/
-
-
-  /*
-   * The settings menu...
-   */
-	for (i = 0; gedit_settings_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++) {
-
-	  if (gedit_settings_menu[i].label) {
-
-	    GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_AUTOINDENT),
-						settings->auto_indent);
-
-	    GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_STATUSBAR),
-						settings->show_status);
-
-            if ((doc = gE_document_current ())) {
-
-	      view = GE_VIEW (mdi->active_view);
-          
-	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_WORDWRAP),
-						view->word_wrap);
-
-	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_LINEWRAP),
-						view->line_wrap);
-
-	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_READONLY),
-						view->read_only);
-
-	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_SPLITSCREEN),
-						view->splitscreen);
-
-	    }
-
-	}
-
-    }
-
-}
-
-void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
-{
-
-	int i = 0;
-
-	while (menu[i].type != GNOME_APP_UI_ENDOFINFO) {
-
-		if (menu[i].user_data == (gpointer)GE_DATA)
-		  menu[i].user_data = data;
-		if (menu[i].user_data == (gpointer)GE_WINDOW)
-		  menu[i].user_data = window;
-
-		i++;
-
-	}
-
-}
-
-void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
-{
-
-	int i = 0;
-
-	while (menu[i].type != GNOME_APP_UI_ENDOFINFO) {
-
-		if (menu[i].user_data == data)
-			menu[i].user_data = (gpointer) GE_DATA;
-		if (menu[i].user_data == window)
-			menu[i].user_data = (gpointer) GE_WINDOW;
-
-		i++;
-
-	}
-
 }

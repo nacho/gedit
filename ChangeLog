@@ -1,3 +1,68 @@
+Wed Nov 17 16:36:35 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gedit.spec.in: Added FAQ and the new TODO file to the docs
+	  list.. no wonder ppl keep emailing me with questions answered
+	  in the FAQ. =]
+
+Wed Nov 17 16:17:04 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* makeconfig.pl: 0.6.0pre -> 0.6.0 .... we're almost there!
+	
+	* README: Finally, we're at 0.6.0 =]
+	
+	* NEWS: Added 0.6.0 ANNOUNCE message
+
+Tue Nov 16 16:32:46 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* TODO-road_to_1.0.0: Marked off "Remove legacy code" as done.
+	  I thnk we're almost there for 0.6.0
+	
+	* FAQ: Removed cruft from this file, and semi-answered the first
+	  question
+	
+	* makeconfig.pl: added gl to ALL_LINGUAS
+
+Tue Nov 16 16:07:10 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* Makefile.am: Added TODO-road_to_1.0.0 to the extra dist.
+	
+	* commands.c: Removed all scrollbar setting code.. automatic 
+	  scrollbar is always used now
+	
+	* menus.c: Removed scrollbar submenu form settings menu
+	  (gE_set_menu_toggle_states), ({add,remove}_callback_data)
+	   Removed now unused, legacy, functions.
+	  (gE_menus_init) Tidied it up a bit
+	
+	* gE_prefs.c: Remvoed scrollbar settings (they didnt save anyway,
+	  probably due to the fact the setting isnt an integer, its an 
+	  enum).
+
+Tue Nov 16 15:12:58 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* ChangeLog: Fixed some of the earlier entries, the names seem to
+	  have vanished. On another note of interest, i just did a grep
+	  of this file and there are currently 370 entries.. eeek!
+
+Tue Nov 16 14:54:40 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_prefs.h: Added a word_wrap flag to the preferences struct.
+	
+	* src/gE_prefs.c: (gE_save_settings) (gE_get_settings) Save and load
+	  word_wrap setting.
+	
+	* src/gE_prefs_box.c: (gE_apply) Store the word_wrap setting
+	  (gE_window_refresh) Refresh the word_wrap setting by calling te
+	  gE_view set_word_wrap function.
+	  (get_prefs) Get the word_wrap toggle state
+	
+	* src/gE_view.c: (gE_view_set_word_wrap) Set both the main text pane
+	  and hte split screen
+	  (gE_view_init) Make the signal connection for the split screen
+	  auto indent a regular signal conenction.
+	
+	* KNOWNBUGS: Added note about auto indent and multiple views.
+
 Sat Nov 13 14:17:38 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* makeconfig.pl: Upped version number to 0.6.0pre
@@ -3384,12 +3449,12 @@ Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* main.h: #included <stdio.h> to get declaration of size_t.
 
-1998-05-28   <bse@dial.pipex.com>
+1998-05-28  Alex Roberts  <bse@dial.pipex.com>
 
 	* Thanx to Eli Miller (spooge, his IRC nick) gEdit will now
 	  re-size smaller than its startup size :)
 
-1998-05-26   <evan@worldpath.net>
+1998-05-26  Evan Lawrence  <evan@worldpath.net>
 
 	* Fixed >2 New file bug
 
@@ -3400,7 +3465,7 @@ Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* Synced the Options menu between the GNOME and non-GNOME versions
 
-1998-05-26   <bse@dial.pipex.com>
+1998-05-26  Alex Roberts  <bse@dial.pipex.com>
 
 	* Released 0.4.0 (Non-GNOME)
 
@@ -3408,11 +3473,11 @@ Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
 	  Currently, it will keep the Tab Position, and if the Statusbar is
 	  visible or not...
 
-1998-05-15   <bse@dial.pipex.com>
+1998-05-15  Alex Roberts  <bse@dial.pipex.com>
 
 	* Print partially implemented...
 
-1998-05-13   <bse@dial.pipex.com>
+1998-05-13  Alex Roberts  <bse@dial.pipex.com>
 
 	* Removed a piece of annoying debugging code...
 
@@ -3420,25 +3485,25 @@ Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
 	
 	* Fixed some errors in man page...
 
-1998-05-12   <bse@dial.pipex.com>
+1998-05-12  Alex Roberts  <bse@dial.pipex.com>
 
 	* Updated the README/AUTHORS files to my new email address
 	  (bse@dial.pipex.com)
 
 	* Upped version number to 0.4, ready for next release
 
-1998-05-10   <evan@worldpath.net>
+1998-05-10  Evan Lawrence  <evan@worldpath.net>
 
 	* Fixed the bug with gEdit not asking if you want to save modified files when you quit...
 	  It's a bit of a hack, but I didn't feel like rewriting a lot of the code from the close routine..
 
-1998-05-09  <bse@dial.pipex.com>
+1998-05-09  Alex Roberts  <bse@dial.pipex.com>
 
 	* Added GNOME version number to the title, it looks better with a version number i feel...
 	
 	* Fixed segfault on startup when using GTK+ 1.1. Hopefully, the bug has gone...
 
-1998-05-03  <bse@dial.pipex.com>
+1998-05-03  Alex Roberts  <bse@dial.pipex.com>
 
 	* Fixed the sigsegv when loading a file from the cmd line.
 	   This does break the (already broken because of the .gnome/gtkrc) font settings
@@ -3447,7 +3512,7 @@ Sun May 03 03:17:13  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* .cvsignore: New file. Added some files to it as well.
 	
-1998-05-02   <bse@dial.pipex.com>
+1998-05-02  Alex Roberts  <bse@dial.pipex.com>
 
 	* Improved the description of gEdit in the About Box...
 
@@ -3459,12 +3524,12 @@ Sun May 03 03:17:13  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* robo@earthling.net -> bse@dial.pipex.com     (robo doesn't work anymore)
 
-1998-04-29   <evan@worldpath.net>
+1998-04-29  Evan Lawrence  <evan@worldpath.net>
 
 	* Several changes in the past few days - you can toggle autoindent,
 	  wordwrap, the document tabs, and the statusbar now.. Other misc stuff...
 
-1998-04-20   <evan@worldpath.net>
+1998-04-20  Evan Lawrence  <evan@worldpath.net>
 
 	* Made some more changes to the statusbar
 	
@@ -3473,12 +3538,12 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
 	* Makefile.in, configure, aclocal.m4: Removed automatically
 	generated files. Hope this is OK.
 
-1998-04-19   <robo@earthling.net>
+1998-04-19  Alex Roberts  <robo@earthling.net>
 
 	* Changed application class to gEdit.gedit (from gedit.Gedit), to help with
 	  window managers (e.g WindowMaker)
 
-1998-04-19   <robo@earthling.net>
+1998-04-19  Alex Roberts  <robo@earthling.net>
 
 	* Fixed the configure.in script to include the GTK+ include directories,
 	  (/usr/local/include/glib, etc), and YES we _are_ using gtk-config to
@@ -3490,7 +3555,7 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
        -* Flickering of the Line/Column fixed (evan@worldpath.net)
        -* If file from command line doesn't exist, gEdit creates it (evan)
 
-1998-04-16   <robo@earthling.net>
+1998-04-16  Alex Roberts  <robo@earthling.net>
 
 	* Implemented Line/Column display, buggy though, and the Line counter only counts up to the
           height of the text box, so, it doesn't really work(probably to do with the Text Widget,
@@ -3503,7 +3568,7 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
 
 	* Added gEdit.desktop for GNOME Panel, for a little GNOMEification of gEdit
 
-1998-04-15   <robo@earthling.net>
+1998-04-15  Alex Roberts  <robo@earthling.net>
 
 	* Added keyboard shortcuts to the search and the 
 	  search and replace commands...
@@ -3511,7 +3576,7 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
 	* Improved the About box: added homepage, and GTK Version
 	  labels, and added gEdit icon...
 
-1998-04-13   <robo@earthling.net>
+1998-04-13  Alex Roberts  <robo@earthling.net>
 
 	* Changed File Close shortcut to Alt-W...
 
@@ -3519,11 +3584,11 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
 	  (Which also fixes the Sigsegv when closing files from the command
 	   line)...
 
-1998-04-06   <robo@earthling.net>
+1998-04-06  Alex Roberts  <robo@earthling.net>
 
 	* Added statusbar code
 
-1998-04-04   <robo@earthling.net>
+1998-04-04  Alex Roberts  <robo@earthling.net>
 
 	* Released 0.3.2
 
@@ -3532,11 +3597,11 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
 	* Added 2 icons to distribution, one by me, and one by joatman
 	  (joatman@base.org)
 
-1998-04-01   <robo@earthling.net>
+1998-04-01  Alex Roberts  <robo@earthling.net>
 
 	* Added man page to distribution
 
-1998-03-28   <robo@earthling.net>
+1998-03-28  Alex Roberts  <robo@earthling.net>
 
 	* Released 0.3.1
 
@@ -3552,61 +3617,61 @@ Sun Apr 19 17:03:15 1998  Havoc Pennington  <hp@pobox.com>
 	  open a file using a command like 'gedit
 	  /etc/resolv.conf' that's fixed...
 
-1998-03-26   <robo@earthling.net>
+1998-03-26  Alex Roberts  <robo@earthling.net>
 
 	* A file opened from the commandline, the tab no longer shows the
 	  './' before the filename...
 
-1998-03-25   <robo@earthling.net>
+1998-03-25  Alex Roberts  <robo@earthling.net>
 	* Released 0.3
 
 	* Fixed the command line opening bug, now it inserts a './' so when
 	  it saves, all it erases from the tab is the './', instead of the
 	  whole filename.
 
-1998-03-24   <evan@worldpath.net>
+1998-03-24  Evan Lawrence  <evan@worldpath.net>
 
 	* It no longer dies a horrible death when you try to save empty
 	  files (thanks to Taneli) and behaves quite normally when you open
 	  a binary file...
 
-1998-03-23   <evan@worldpath.net>
+1998-03-23  Evan Lawrence  <evan@worldpath.net>
 
 	* OK, I think I'm done with search and replace, it now
 	  has the option to ask before replacing. Next up: fix the binary
 	  file bug and apply the patch from Taneli...
 
-1998-03-22   <evan@worldpath.net>
+1998-03-22  Evan Lawrence  <evan@worldpath.net>
 
 	* Just about done with search and replace, just a few niceties to
 	  add..
 
-1998-03-15    <evan@worldpath.net>
+1998-03-15  Evan Lawrence  <evan@worldpath.net>
 
 	* Close will now ask if you want to save
 	  before closing a modified file...
 
-1998-03-15    <robo@earthling.net>
+1998-03-15  Alex Roberts  <robo@earthling.net>
 
 	* Woohoo! preferences work!! Now it will read and write ~/.gedit!! :)
  	  You can change the font of the text box (still need to restart
 	  gEdit tho,and when you put the text font dialog box up, it puts
 	  it back to the default!)
 
-1998-03-13    <evan@worldpath.net>
+1998-03-13  Evan Lawrence  <evan@worldpath.net>
 
 	* Fixed the save bug... document->filename
 	  was going out of scope...
 
-1998-03-10    <evan@worldpath.net>
+1998-03-10  Evan Lawrence  <evan@worldpath.net>
 
 	* Fixed those incredibly annoying close bugs
 
-1998-03-07    <robo@earthling.net>
+1998-03-07  Alex Roberts  <robo@earthling.net>
 
 	* Command line options added
 
-1998-03-05    <robo@earthling.net>
+1998-03-05  Alex Roberts  <robo@earthling.net>
 
 	* 0.2 -> 0.2.1
 

@@ -60,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-, root, root)
 
-%doc README COPYING ChangeLog NEWS TODO AUTHORS INSTALL THANKS
+%doc README COPYING ChangeLog NEWS TODO AUTHORS INSTALL THANKS TODO-road_to_1.0.0 FAQ
 %{prefix}/bin/gedit
 %{prefix}/share/*
 #%{prefix}/share/locale/*/*/*
@@ -78,6 +78,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/*
 
 %changelog
+* Wed Nov 17 16:35:29 GMT 1999 Alex Roberts <bse@gedit.pn.org>
+- Updated doc's to be included in RPM
+
 * Sat Feb 06 1999 Michael Johnson <johnsonm@redhat.com>
 - Cleaned up a bit for Red Hat use
 

@@ -163,6 +163,7 @@ void gE_window_refresh(gE_window *w)
 	    nth_view = g_list_nth_data (doc->views, j);
 
   	    gE_view_set_font (nth_view, settings->font);
+  	    gE_view_set_word_wrap (nth_view, settings->word_wrap);
   	    
   	  }
 
@@ -182,6 +183,7 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 	settings->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
 	settings->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
 	GE_VIEW (mdi->active_view)->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
+	settings->word_wrap = (GTK_TOGGLE_BUTTON (prefs->wordwrap)->active);
 
 	/* Print Settings */
 	settings->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
@@ -244,6 +246,8 @@ void get_prefs(gE_data *data)
 							 settings->show_status);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
 							 GE_VIEW (mdi->active_view)->splitscreen);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->wordwrap),
+							 settings->word_wrap);
   					   
 	
 	if (!settings->close_doc)

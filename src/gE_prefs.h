@@ -26,6 +26,7 @@ extern void gE_rc_parse(void);
 typedef struct _gE_preference {
 
 	guint auto_indent;
+	gint word_wrap;
 	gint show_tabs;
 	gint tab_pos;
 	guint show_status;
@@ -40,7 +41,6 @@ typedef struct _gE_preference {
 	gint num_recent; /* Number of recently accessed documents in the 
 	                   Recent Documents menu */
 	gint mdi_mode;
-	gint scrollbar;
 	
 	gint width, height;
 	

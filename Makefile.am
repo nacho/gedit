@@ -6,7 +6,7 @@ SUBDIRS = macros po intl src editor-plugins help
 
 EXTRA_DIST = KNOWNBUGS FAQ ChangeLog README README.plugins			\
 	INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gedit.desktop	\
-	ABOUT-NLS TODO gedit.spec.in gedit.keys
+	ABOUT-NLS TODO TODO-road_to_1.0.0 gedit.spec.in gedit.keys
 
 man_MANS = gedit.1
 

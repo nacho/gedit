@@ -36,6 +36,7 @@ gE_save_settings()
 
 	gnome_config_set_int ("tab pos", (gint) mdi->tab_pos);
 	gnome_config_set_int ("auto indent", (gboolean) settings->auto_indent);
+	gnome_config_set_int ("word wrap", (gboolean) settings->word_wrap);
 	gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
 	gnome_config_set_int ("toolbar", (gint) settings->have_toolbar);
 	gnome_config_set_int ("tb text", (gint) settings->have_tb_text);
@@ -44,7 +45,6 @@ gE_save_settings()
 	gnome_config_set_int ("splitscreen", (gint) settings->splitscreen);
 	gnome_config_set_int ("close doc", (gint) settings->close_doc);
 	gnome_config_set_int ("mdi mode", mdiMode);
-	gnome_config_set_int ("scrollbar", settings->scrollbar);
 	gnome_config_set_string ("font", settings->font);
 	gnome_config_set_int ("width", (gint) settings->width);
 	gnome_config_set_int ("height", (gint) settings->height);
@@ -69,6 +69,8 @@ void gE_get_settings()
 	gnome_config_push_prefix ("/gEdit/Global/");
 	 
 	mdi->tab_pos = gnome_config_get_int ("tab pos");
+	settings->auto_indent = gnome_config_get_int ("auto indent");
+	settings->word_wrap = gnome_config_get_int ("word wrap");
 	settings->run = gnome_config_get_int ("run");
 	settings->show_status = gnome_config_get_int ("show statusbar");
 	settings->have_toolbar = gnome_config_get_int ("toolbar");
@@ -81,10 +83,6 @@ void gE_get_settings()
 	if (!mdiMode)
 	  mdiMode = mdi_type[GNOME_MDI_NOTEBOOK];
 	   
-	settings->scrollbar = gnome_config_get_int ("scrollbar");
-	if (!settings->scrollbar)
-	  settings->scrollbar = GTK_POLICY_AUTOMATIC;
-	 
 	settings->width = gnome_config_get_int ("width");
 	if (!settings->width)
 	  settings->width = 630;

@@ -26,7 +26,6 @@ extern "C" {
 extern GnomeUIInfo gedit_menu [];
 
 extern GnomeUIInfo * gE_menus_init(gE_window *window, gE_data *data);
-void gE_set_menu_toggle_states();
    
 #ifdef __cplusplus
 }
