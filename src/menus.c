@@ -240,14 +240,16 @@ GnomeUIInfo gedit_file_menu [] = {
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, (gpointer) GE_DATA),
 
+	GNOMEUIINFO_SEPARATOR, 
+
 	GNOMEUIINFO_MENU_PRINT_ITEM(file_print_cb, (gpointer) GE_DATA),
 	
+	GNOMEUIINFO_SEPARATOR, 
+
 	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
 
 	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
-
-	{ GNOME_APP_UI_SEPARATOR },
 
 	GNOMEUIINFO_MENU_EXIT_ITEM(file_quit_cb, (gpointer) GE_DATA),
 
