@@ -116,6 +116,16 @@ GnomeUIInfo gedit_edit_menu[] =
 	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_select_all_cb, NULL),
 
 	GNOMEUIINFO_SEPARATOR,
+	
+	{
+		GNOME_APP_UI_ITEM,
+		N_("Goto _Line..."),
+		N_("Go to a specific line number"),
+		gedit_goto_line_cb, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO
+	},
+
+	GNOMEUIINFO_SEPARATOR,
 
 	GNOMEUIINFO_MENU_FIND_ITEM       (gedit_find_cb, NULL),
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM (gedit_find_again_cb, NULL),
@@ -125,11 +135,12 @@ GnomeUIInfo gedit_edit_menu[] =
 
 	{
 		GNOME_APP_UI_ITEM,
-		N_("Goto _Line..."),
-		N_("Go to a specific line number"),
-		gedit_goto_line_cb, NULL, NULL,
-		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
+		N_("File _Info"),
+		N_("Get the basic file info"),
+		gedit_file_info_cb, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_INDEX
 	},
+
 
 	GNOMEUIINFO_END
 };
@@ -238,6 +249,7 @@ GnomeUIInfo toolbar_data[] =
 		GNOME_APP_UI_ITEM, N_("Redo"), N_("Redo last operation"), gedit_undo_redo,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_REDO
 	},
+	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM, N_("Cut"), N_("Cut the selection"), edit_cut_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CUT
@@ -253,10 +265,6 @@ GnomeUIInfo toolbar_data[] =
 	{
 		GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), gedit_find_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH
-	},
-	{
-		GNOME_APP_UI_ITEM, N_("Line"), N_("Get the basic file info."), gedit_file_info_cb,
-		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_INDEX
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
