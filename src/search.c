@@ -17,23 +17,17 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* I have included this files in the CVS because I am
-   goint to delete some search finctions that we might
-   want to implement as plugins in the future */ 
-
 #include <config.h>
 #include <gnome.h>
 
-#include "window.h"
-#include "gedit.h"
 #include "view.h"
 #include "document.h"
 #include "search.h"
 #include "utils.h"
 
-/* 
- * variable declarations  
- */
+
+GtkWidget *search_result_window;
+GtkWidget *search_result_clist;
 GtkWidget *find_in_files_dialog;
 
 typedef struct _gedit_clist_data
@@ -44,9 +38,7 @@ typedef struct _gedit_clist_data
 	gint   index;
 } gedit_clist_data;
 
-/* 
- * yfunction declerations
- */
+
 gint pos_to_line (Document *doc, gint pos, gint *numlines);
 gint line_to_pos (Document *doc, gint line, gint *numlines);
 gint get_line_count (Document *doc);

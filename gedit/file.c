@@ -21,7 +21,6 @@
 #include <gnome.h>
 #include <sys/stat.h> /* for stat() */
 
-#include "window.h"
 #include "gedit.h"
 #include "commands.h"
 #include "document.h"
@@ -330,7 +329,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	Document *doc;
 
-	gedit_debug_mess("file-io.c - file open ok sel\n", DEBUG_FILE);
+	gedit_debug_mess ("file-io.c - file open ok sel\n", DEBUG_FILE);
 	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
 	{
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
@@ -338,7 +337,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 		gedit_flash_va (_("Loaded file %s"), doc->filename);
 	}
 
-	gtk_widget_hide(GTK_WIDGET(open_file_selector));
+	gtk_widget_hide (GTK_WIDGET(open_file_selector));
 	return;
 }
 
@@ -392,7 +391,7 @@ file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 	gtk_widget_hide (GTK_WIDGET (save_file_selector));
 	save_file_selector = NULL;
 	
-        if (g_file_exists( fname ))
+        if (g_file_exists (fname))
 	{
 		guchar * msg;
 		GtkWidget *msgbox;

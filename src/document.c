@@ -22,7 +22,6 @@
 #include <gnome.h>
 
 #include "window.h"
-#include "gedit.h"
 #include "undo.h"
 #include "file.h"
 #include "search.h"

@@ -4,7 +4,9 @@
  *
  * Author:
  *  Jason Leach <leach@wam.umd.edu>
- *
+ */
+
+/*
  * TODO:
  * [ ] revert back to non-glade, this dialog is too small to get anything
  *     from it.
@@ -20,44 +22,6 @@
 /* static GtkWidget * create_line_dialog (void);*/
 static void find_line_clicked_cb (GtkWidget *widget, gint button, Document *doc);
        void dialog_find_line (void);
-
-
-/* This function seems not beeing used. Chema*/
-#if 0
-static GtkWidget *
-create_line_dialog (void)
-{
-	GtkWidget *dialog;
-	GtkWidget *hbox, *label, *spin;
-	GtkObject *adj;
-
-	dialog = gnome_dialog_new (_("Go to line"),
-				   GNOME_STOCK_BUTTON_OK,
-				   GNOME_STOCK_BUTTON_CANCEL,
-				   NULL);
-
-	hbox = gtk_hbox_new (TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (hbox);
-
-	label = gtk_label_new (_("Line number: "));
-	gtk_box_pack_start (GTK_BOX (hbox), label,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (label);
-
-	adj = gtk_adjustment_new (1, 1, 1, 1, 20, 20);
-	spin = gtk_spin_button_new (GTK_ADJUSTMENT(adj), 1, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), spin,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (spin);
-
-	gtk_object_set_data (GTK_OBJECT (dialog), "line", spin);
-	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
-
-	return dialog;
-}
-#endif
 
 
 /* Callback on the "clicked" signal in the Find Line dialog */
@@ -83,6 +47,11 @@ find_line_clicked_cb (GtkWidget *widget, gint button, Document *doc)
 		gnome_dialog_close (GNOME_DIALOG (widget));
 }
 
+void
+dialog_find_line_impl (void)
+{
+
+}
 
 void
 dialog_find_line (void)
@@ -148,3 +117,40 @@ dialog_find_line (void)
 	gtk_widget_show (line_dialog);
 #endif
 }
+
+
+#if 0
+static GtkWidget *
+create_line_dialog (void)
+{
+	GtkWidget *dialog;
+	GtkWidget *hbox, *label, *spin;
+	GtkObject *adj;
+
+	dialog = gnome_dialog_new (_("Go to line"),
+				   GNOME_STOCK_BUTTON_OK,
+				   GNOME_STOCK_BUTTON_CANCEL,
+				   NULL);
+
+	hbox = gtk_hbox_new (TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox,
+			    FALSE, FALSE, 0);
+	gtk_widget_show (hbox);
+
+	label = gtk_label_new (_("Line number: "));
+	gtk_box_pack_start (GTK_BOX (hbox), label,
+			    FALSE, FALSE, 0);
+	gtk_widget_show (label);
+
+	adj = gtk_adjustment_new (1, 1, 1, 1, 20, 20);
+	spin = gtk_spin_button_new (GTK_ADJUSTMENT(adj), 1, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), spin,
+			    FALSE, FALSE, 0);
+	gtk_widget_show (spin);
+
+	gtk_object_set_data (GTK_OBJECT (dialog), "line", spin);
+	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
+
+	return dialog;
+}
+#endif

@@ -27,8 +27,8 @@
 #include <time.h>
 #include <signal.h>
 
+
 #include "window.h"
-#include "gedit.h"
 #include "view.h"
 #include "commands.h"
 #include "document.h"
@@ -141,8 +141,6 @@ filenames_dropped (GtkWidget        *widget,
 	}
 }
 
-
-
 void
 window_new_cb (GtkWidget *widget, gpointer cbdata)
 {
@@ -156,8 +154,7 @@ edit_cut_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 	
-	gtk_editable_cut_clipboard(GTK_EDITABLE(
-		VIEW (mdi->active_view)->text));
+	gtk_editable_cut_clipboard (GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_CUT);
 }
@@ -168,8 +165,7 @@ edit_copy_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 		
-	gtk_editable_copy_clipboard(
-		GTK_EDITABLE(VIEW (mdi->active_view)->text));
+	gtk_editable_copy_clipboard (GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_COPY);
 }
@@ -180,8 +176,7 @@ edit_paste_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 
-	gtk_editable_paste_clipboard(
-		GTK_EDITABLE(VIEW (mdi->active_view)->text));
+	gtk_editable_paste_clipboard (GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_PASTE);
 }
@@ -192,8 +187,8 @@ edit_selall_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 	
-	gtk_editable_select_region(GTK_EDITABLE(VIEW (mdi->active_view)->text), 0,
-				   gtk_text_get_length (GTK_TEXT(VIEW (mdi->active_view)->text)));
+	gtk_editable_select_region (GTK_EDITABLE(VIEW (mdi->active_view)->text), 0,
+				    gtk_text_get_length (GTK_TEXT(VIEW (mdi->active_view)->text)));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_SELECT_ALL);
 }

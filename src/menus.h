@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* vi:set ts=4 sts=0 sw=4:
- *
+/* 
  * gedit
  *
  * This program is free software; you can redistribute it and/or modify
@@ -17,6 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
 #ifndef __MENUS_H__
 #define __MENUS_H__
 
@@ -24,6 +24,5 @@ extern GnomeUIInfo gedit_menu[];
 extern GnomeUIInfo toolbar_data[];
 extern GnomeUIInfo doc_menu[];
 extern GnomeUIInfo popup_menu[];
-extern GnomeUIInfo *gedit_menus_init (Window *window, gedit_data *data);
 
 #endif /* __MENUS_H__ */

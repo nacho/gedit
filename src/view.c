@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* gedit - New Document interface  
- *
+/* 
  * gedit
  * Copyright (C) 1999 Alex Roberts and Evan Lawrence
  *
@@ -19,12 +18,9 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* This file need rewriting ... CHEMA */ 
 #include <config.h>
 #include <gnome.h>
 
-#include "window.h"
-#include "gedit.h"
 #include "undo.h"
 #include "print.h"
 #include "utils.h"
@@ -34,6 +30,7 @@
 #include "document.h"
 #include "commands.h"
 #include "prefs.h"
+#include "gedit.h"
 
 #define GE_DATA		1
 

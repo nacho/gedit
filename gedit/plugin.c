@@ -26,8 +26,6 @@
 #include <gmodule.h>
 #include <dirent.h> 
 
-#include "window.h"
-#include "gedit.h"
 #include "file.h"
 #include "plugin.h"
 #include "document.h"

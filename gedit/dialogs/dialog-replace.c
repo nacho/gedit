@@ -14,11 +14,10 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "window.h"
-#include "gedit.h"
 #include "view.h"
 #include "document.h"
 #include "search.h"
+#include "gedit.h"
 
 static GtkWidget *replace_dialog;
 

@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* vi:set ts=8 sts=0 sw=8:
- *
+/* 
  * gedit
  * Copyright (C) 1998 Alex Roberts and Evan Lawrence
  *
@@ -23,7 +22,6 @@
 #include <gnome.h>
 
 #include "window.h"
-#include "gedit.h"
 #include "view.h"
 #include "commands.h"
 #include "document.h"
@@ -43,18 +41,11 @@ GList *window_list = NULL;
 
 /* Window *window; */
 
-GtkWidget *search_result_window;
-GtkWidget *search_result_clist;
-
 /* Prototype for setting the window icon */
-void gedit_window_set_icon (GtkWidget *window, char *icon);
+static void gedit_window_set_icon (GtkWidget *window, char *icon);
 
 
-/**
- * create_find_in_files_result_window:
- *
- * Create the find in all files search result window but don't show it.
- */
+/* Create a find in all files search result window but don't show it. */
 static GtkWidget*
 create_find_in_files_result_window (void)
 {
@@ -183,7 +174,7 @@ gedit_window_set_auto_indent (gint auto_indent)
 }
 
 /* set the a window icon */
-void
+static void
 gedit_window_set_icon (GtkWidget *window, char *icon)
 {
 	GdkPixmap *pixmap;
@@ -215,7 +206,6 @@ gedit_window_set_status_bar (gint show_status)
 	{
 		GtkWidget *statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
 
-/*		mdi->active_window->statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER); */
 		gnome_app_set_statusbar (GNOME_APP (mdi->active_window),
 					 GTK_WIDGET (statusbar));
 		gnome_app_install_menu_hints (GNOME_APP (mdi->active_window),
@@ -239,13 +229,6 @@ gedit_window_set_status_bar (gint show_status)
 		gtk_widget_unref (GNOME_APP (mdi->active_window)->statusbar);
 		status_showing = TRUE;
 	}
-
-/*
-	if (show_status)
-		gtk_widget_show (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar)); 
-	else
-		gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
-*/
 }
 
 
@@ -257,11 +240,10 @@ gedit_window_set_status_bar (gint show_status)
  * TODO: if a .h file is open, do we swap to a .c or a .cpp?  we
  * should put a check in there.  if both exist, then probably open
  * both files.
- */
+ **/
 void
 doc_swaphc_cb (GtkWidget *widget, gpointer data)
 {
-
 	size_t len;
 	char *newfname;
 	Document *doc;

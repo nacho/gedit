@@ -167,8 +167,3 @@ gedit_debug_mess (gchar *message, DebugSection type)
 	}
 #endif
 }
-
-
-
-
-

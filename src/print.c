@@ -26,8 +26,6 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "window.h"
-#include "gedit.h"
 #include "print.h"
 #include "file.h"
 #include "view.h"

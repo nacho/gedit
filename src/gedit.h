@@ -21,7 +21,8 @@
 #ifndef __GEDIT_H__
 #define __GEDIT_H__
 
-#define GEDIT_ID	"gedit "VERSION
+#include "window.h"
+#include "document.h"
 
 typedef struct _gedit_data gedit_data;
 

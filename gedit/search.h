@@ -17,10 +17,6 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-
-/* I have included this files in the CVS because I am
-   goint to delete some search finctions that we might
-   want to implement as plugins in the future */ 
 #ifndef __SEARCH_H__
 #define __SEARCH_H__
 
@@ -59,5 +55,8 @@ void search_select            (Document *doc,
 			       gint         pos,
 			       gulong       options);
 
+
+extern GtkWidget *search_result_window;
+extern GtkWidget *search_result_clist;
 
 #endif /* __SEARCH_H__ */

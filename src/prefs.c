@@ -17,17 +17,21 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/* TODO:
+ * [ ] stop saving everything in /gedit/Global/, split config file
+ * into sections
+ *
+ */
+
 #include <config.h>
 #include <gnome.h>
 
-#include "window.h"
-#include "gedit.h"
 #include "prefs.h"
 #include "view.h"
 #include "commands.h"
 #include "document.h"
 #include "utils.h"
-/*#include "gedit.h" */
+
 
 gboolean use_fontset = FALSE;
 Preferences *settings = NULL;

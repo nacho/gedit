@@ -21,8 +21,10 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
+/*
 #include "window.h"
 #include "gedit.h"
+*/
 #include "commands.h"
 #include "document.h"
 #include "prefs.h"
@@ -163,11 +165,7 @@ main (int argc, char **argv)
 		}
 	}
 	
-
 	gtk_main ();
 
 	return 0;
 }
-
-
-

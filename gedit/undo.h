@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* 	- Undo/Redo interface
- *
+/* 
  * gedit
  * Copyright (C) 1999 Alex Roberts and Evan Lawrence
  *
@@ -19,20 +18,25 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __GEDIT_UNDO_H__
-#define __GEDIT_UNDO_H__
+#ifndef __UNDO_H__
+#define __UNDO_H__
+
+#include "document.h"
 
 /* Actions */
 #define	INSERT	0
 #define	DELETE	1
 
-typedef struct _gedit_undo {
-	gchar *text;		/* The text data */
+typedef struct _gedit_undo gedit_undo;
+
+struct _gedit_undo
+{
+	gchar *text;	/* The text data */
 	gint start_pos;	/* The position in the document */
 	gint end_pos;
 	gint action;	/* whether the user has inserted or deleted */
 	gint status;	/* the changed status of the document used with this node */
-}gedit_undo;
+};
 
 extern void gedit_undo_add      (gchar*, gint, gint, gint, Document*);
 extern void gedit_undo_reset	(GList*);
@@ -40,4 +44,4 @@ extern void gedit_undo_do	(GtkWidget*, gpointer);
 extern void gedit_undo_redo	(GtkWidget*, gpointer);
 extern void gedit_undo_history	(GtkWidget*, gpointer*);
 
-#endif /* __GEDIT_UNDO_H__ */
+#endif /* __UNDO_H__ */

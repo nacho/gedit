@@ -62,13 +62,10 @@ struct _Preferences
 
 extern Preferences *settings;
 extern gboolean use_fontset;
-extern gint mdiMode;
 
 extern void gedit_save_settings (void);
 extern void gedit_load_settings (void);
 
-extern void gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata);
-extern void gedit_property_box_new (void);
 extern void gedit_window_refresh (void);
 
 

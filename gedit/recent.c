@@ -21,7 +21,6 @@
 #include <gnome.h>
 #include <libgnome/gnome-history.h>
 
-#include "window.h"
 #include "gedit.h"
 #include "document.h"
 #include "view.h"

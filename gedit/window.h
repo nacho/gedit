@@ -32,8 +32,6 @@
 #define MSGBAR_PASTE		"Selection Pasted..."
 #define MSGBAR_SELECT_ALL	"All Text Selected..."
 
-#include "document.h"
-
 typedef struct _Window Window;
 
 struct _Window
@@ -61,19 +59,12 @@ struct _Window
 extern GList *window_list;
 
 extern GtkWidget *col_label;
-extern GtkWidget *search_result_window;
-extern GtkWidget *search_result_clist;
 
 extern void gedit_window_set_auto_indent (gint auto_indent);
 extern void gedit_window_set_status_bar (gint show_status);
 extern void gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 
 extern void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
-
-#ifdef WITH_GMODULE_PLUGINS
-extern Document *gedit_document_new_container (Window *w, gchar *title,
-					       gint with_split_screen);
-#endif
 
 
 #endif /* __WINDOW_H__ */
