@@ -5,6 +5,7 @@ SUBDIRS = gedit pixmaps po help data plugins
 distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 
 EXTRA_DIST = BUGS		\
+	message-of-doom		\
 	ChangeLog  		\
 	MAINTAINERS		\
 	README 			\
