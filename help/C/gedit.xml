@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
-"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+"http://basil.ireland.sun.com:8080/docbook/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "2.0.2">
-  <!ENTITY manrevision "2.3">
-  <!ENTITY date "September 2002">
+  <!ENTITY appversion "2.2.0">
+  <!ENTITY manrevision "2.4">
+  <!ENTITY date "January 2003">
   <!ENTITY app "gedit">
 ]>
 <!-- 
@@ -22,7 +22,7 @@
   <articleinfo> 
 	 <title>&app; Manual V&manrevision;</title>
 	 <copyright> 
-		<year>2002</year>
+		<year>2003</year>
 		<holder>Sun Microsystems</holder> </copyright>
 	 <copyright> 
 		<year>2000</year>
@@ -46,7 +46,6 @@
 		  <surname>GNOME Documentation Team</surname> 
 		  <affiliation> 
 			 <orgname>Sun Microsystems</orgname>
-			 <address> <email>gdocteam@sun.com</email> </address>
 		  </affiliation>
 		</author>
 		<author> 
@@ -57,6 +56,11 @@
 			 <address> <email>baudais@okstate.edu</email> </address>
 		  </affiliation>
 		</author> 
+                <othercredit role="reviewer">
+                <firstname>Baris</firstname>
+                <surname>Cicek (provided review comments from earlier revisions of the gedit application) </surname>
+                </othercredit>
+
 <!-- This is appropriate place for other contributors: translators,
       maintainers,  etc. Commented out by default.
        <othercredit role="translator">
@@ -81,8 +85,15 @@
 		  <revnumber>&app; Manual V&manrevision;</revnumber>
 		  <date>&date;</date> 
 		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team
-				<email>gdocteam@sun.com</email> </para>
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.3</revnumber>
+		  <date>September 2002</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -90,8 +101,7 @@
 		  <revnumber>gedit Manual V2.2</revnumber>
 		  <date>August 2002</date> 
 		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team
-				<email>gdocteam@sun.com</email> </para>
+			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -99,8 +109,7 @@
 		  <revnumber>gedit Manual V2.1</revnumber>
 		  <date>June 2002</date> 
 		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team
-				<email>gdocteam@sun.com</email> </para>
+			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -108,8 +117,7 @@
 		  <revnumber>gedit Manual V2.0</revnumber>
 		  <date>March 2002</date> 
 		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team
-				<email>gdocteam@sun.com</email> </para>
+			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -214,6 +222,11 @@
 				  editing. </para>
 			 </listitem>
 		  </varlistentry>
+		  <varlistentry> <term>Output window</term> 
+			 <listitem> 
+				<para>The output window displays the output returned by the Shell command plugin and the Compare files plugin. </para>
+			 </listitem>
+		  </varlistentry>
 		  <varlistentry> <term>Statusbar</term> 
 			 <listitem> 
 				<para>The statusbar displays information about current
@@ -240,11 +253,13 @@
 		  application adds a tab for each open file to the window. To display another
 		  open file, click on the tab that corresponds to the file. To create a new
 		  <application> &app;</application> window for each file that is open, drag the
-		  tab corresponding to each file to the desktop background. You can also use the
-		  <guimenu>Documents</guimenu> menu to move between the open files.</para>
+		  tab corresponding to each file to the desktop background. </para>
+                  <para>You can also use the
+		  <guimenu>Documents</guimenu> menu to move between the open files. You can choose <menuchoice> <guimenu>Documents</guimenu> <guimenuitem>Move to New Window</guimenuitem> </menuchoice> to move a document to a new <application> &app;</application> window.
+</para>
 		<para>The application records the paths and filenames of the five
 		  most recent files that you edited and displays the files as menu items on the <menuchoice>
-		  <guimenu>File</guimenu> <guisubmenu>Recent Files</guisubmenu> </menuchoice> menu. 
+		  <guimenu>File</guimenu> </menuchoice> menu. 
 		  </para>
 	 </sect2>
 <!-- ============= To Open Multiple Files from the Command Line ========= -->
@@ -256,6 +271,7 @@
 		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
 		<para>When the application starts, the files that you specify are
 		  displayed in the <application>&app;</application> window.</para>
+                <para>For more information on how to run <application>&app;</application> from a command line, see <citerefentry><refentrytitle>&app;</refentrytitle><manvolnum>1</manvolnum></citerefentry>.</para>
 	 </sect2>
   </sect1>
 <!-- ================ Usage ================================ -->
@@ -287,7 +303,7 @@
 		  </listitem>
 		  <listitem><para>To save all of the files that are currently open in
 				<application>&app;</application>, choose 
-				<menuchoice> <guimenu>File</guimenu> <guimenuitem>Save
+				<menuchoice> <guimenu>Documents</guimenu> <guimenuitem>Save
 				  All</guimenuitem> </menuchoice>.</para>
 		  </listitem>
 		</itemizedlist>
@@ -304,7 +320,7 @@
 		  </listitem>
 		  <listitem><para>Use the <guimenuitem>Cut</guimenuitem>,
 				<guimenuitem>Copy</guimenuitem>, <guimenuitem>Paste</guimenuitem>, and
-				<guimenuitem>Delete</guimenuitem> menu items on the <guimenu>Edit</guimenu> to edit text. </para>
+				<guimenuitem>Delete</guimenuitem> menu items on the <guimenu>Edit</guimenu> menu to edit text. </para>
 		  </listitem>
 		</itemizedlist>
 		<para>When you select text with the mouse,
@@ -341,7 +357,7 @@
 			 </menuchoice>. To redo an edit, choose 
 		  <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Redo</guimenuitem>
 			 </menuchoice>. The number of previous edits that you can undo is determined by
-		  the <guilabel>Set limit on undo levels to</guilabel> setting in the
+		  the <guilabel>Set limit on undo actions to</guilabel> setting in the
 		  <xref linkend="gedit-prefs-undo"/> tabbed section of the
 		  <guilabel>Preferences</guilabel> dialog. By default, the number of actions that you 
 		  can undo is 25.</para>
@@ -356,22 +372,33 @@
 				  <guimenuitem>Find</guimenuitem> </menuchoice>
 				to display the <guilabel>Find</guilabel> dialog.</para>
 		  </listitem>
-		  <listitem><para>Type the string that you want to find in the
+		  <listitem><para>Type the string that you want to find, in the
 				<guilabel>Search for</guilabel> field.</para>
-		  </listitem>
-		  <listitem><para>Select one of the following options:</para>
+                  <para>You can include the following escape sequences:</para>
 			 <itemizedlist> 
-				<listitem><para><guilabel>Search from the beginning of the
-					 document</guilabel></para>
+				<listitem>
+                                   <para><literal>\n</literal></para>
+                                   <para>Use this escape sequence to specify a new line</para>
 				</listitem>
-				<listitem><para><guilabel>Search from the cursor position
-					 </guilabel></para>
+				<listitem>
+                                   <para><literal>\t</literal></para>
+                                   <para>Use this escape sequence to specify a tab character</para>
 				</listitem>
-			 </itemizedlist>
+				<listitem>
+                                   <para><literal>\r</literal></para>
+                                   <para>Use this escape sequence to specify a carriage return</para>
+				</listitem>
+			 </itemizedlist> 
 		  </listitem>
 		  <listitem><para>Select the <guilabel>Case sensitive</guilabel> option
 				to only find occurrences of the string that match the case of the text that you
 				type. </para>
+		  </listitem>
+		  <listitem><para>Select the <guilabel>Match entire word only</guilabel> option
+				to only find occurrences of the string that match the entire words of the text that you
+				type. </para>
+		  </listitem>
+		  <listitem><para>Select the <guilabel>Wrap around</guilabel> option to search to the end of the file and then continue the search from the beginning of the file. </para>
 		  </listitem>
 		  <listitem><para>Click <guibutton>Find</guibutton> to search the file
 				for the first occurrence of the string. If <application>&app;</application>
@@ -379,7 +406,7 @@
 				the string.</para>
 		  </listitem>
 		  <listitem><para>To find the next occurrence of the string, click
-				<guibutton>Find Next</guibutton>.</para>
+				<guibutton>Find</guibutton>.</para>
 		  </listitem>
 		  <listitem><para>To finish the search, click
 				<guibutton>Close</guibutton>. </para>
@@ -397,25 +424,36 @@
 				  <guimenuitem>Replace</guimenuitem> </menuchoice>
 				to display the <guilabel>Replace</guilabel> dialog.</para>
 		  </listitem>
-		  <listitem><para>Type the string that you want to find in the
+		  <listitem><para>Type the string that you want to find, in the
 				<guilabel>Search for</guilabel> field. </para>
+                  <para>You can include the following escape sequences:</para>
+			 <itemizedlist> 
+				<listitem>
+                                   <para><literal>\n</literal></para>
+                                   <para>Use this escape sequence to specify a new line</para>
+				</listitem>
+				<listitem>
+                                   <para><literal>\t</literal></para>
+                                   <para>Use this escape sequence to specify a tab character</para>
+				</listitem>
+				<listitem>
+                                   <para><literal>\r</literal></para>
+                                   <para>Use this escape sequence to specify a carriage return</para>
+				</listitem>
+			 </itemizedlist> 
 		  </listitem>
 		  <listitem><para>Type the string that you want to use to replace the
-				string that you find in the <guilabel>Replace with</guilabel> field.</para>
-		  </listitem>
-		  <listitem><para>Select one of the following options:</para>
-			 <itemizedlist> 
-				<listitem><para><guilabel>Search from the beginning of the
-					 document</guilabel></para>
-				</listitem>
-				<listitem><para><guilabel>Search from the cursor
-					 position</guilabel></para>
-				</listitem>
-			 </itemizedlist>
+				string that you find, in the <guilabel>Replace with</guilabel> field.</para>
 		  </listitem>
 		  <listitem><para>Select the <guilabel>Case sensitive</guilabel> option
 				to only find occurrences of the string that match the case of the text that you
 				enter. </para>
+		  </listitem>
+		  <listitem><para>Select the <guilabel>Match entire word only</guilabel> option
+				to only find occurrences of the string that match the entire words of the text that you
+				type. </para>
+		  </listitem>
+		  <listitem><para>Select the <guilabel>Wrap around</guilabel> option to search to the end of the file and then continue the search from the beginning of the file. </para>
 		  </listitem>
 		  <listitem><para>Click <guibutton>Find</guibutton> to search the file
 				for the first occurrence of the string. If <application>&app;</application>
@@ -428,7 +466,7 @@
 				all occurrences of the string.</para>
 		  </listitem>
 		  <listitem><para>To find the next occurrence of the string, click
-				<guibutton>Find Next</guibutton>.</para>
+				<guibutton>Find</guibutton>.</para>
 		  </listitem>
 		  <listitem><para>To finish the search, click
 				<guibutton>Close</guibutton>. </para>
@@ -442,8 +480,11 @@
 		<itemizedlist>
 		<listitem>
 		<para>Choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Open Location</guimenuitem> 
-		</menuchoice>to display the <guilabel>Open from URI</guilabel>dialog. Enter the URI of the 
-		file that you want toopen, then click <guibutton>Open</guibutton>.</para>
+		</menuchoice>
+to display the <guilabel>Open Location</guilabel>
+dialog. Enter the URI of the 
+		file that you want to
+open, then click <guibutton>Open</guibutton>.</para>
 		</listitem>
 		<listitem>
 		<para>Type <command>gedit <replaceable>http://...</replaceable></command> at a command line, where
@@ -462,29 +503,55 @@
 		  <keycap>Return</keycap>.</para>
 		<para>The output of the <command>ls</command> command is displayed in a
 		  new text file in the <application>&app;</application> window.</para>
-		<para>Alternatively, you can use the Shell Output plugin to pipe command
-		  output to the current file. To use the Shell Output plugin, perform the
+		<para>Alternatively, you can use the Shell command plugin to pipe command
+		  output to the current file. To use the Shell command plugin, perform the
 		  following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Shell Output plugin. See <xref linkend="gedit-install-plugins"/> for 
+		  <listitem><para>Load the Shell command plugin. See <xref linkend="gedit-install-plugins"/> for 
 			information about how to load a plugin.</para>
 		  </listitem>
 
 		  <listitem><para>Choose 
-				<menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Insert Shell
-				  Output</guimenuitem> </menuchoice>
-				to display the <guilabel>Shell output</guilabel> dialog.
+				<menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Run Command</guimenuitem> </menuchoice>
+				to display the <guilabel>Run Command</guilabel> dialog.
 				</para>
 		  </listitem>
 		  <listitem><para>Type the shell command that you want to execute in the
-				<guilabel>Shell command</guilabel> field.</para>
+				<guilabel>Command</guilabel> field. </para>
+                             <para> You can include the following special characters:</para>
+                                <itemizedlist>
+                                  <listitem>
+                                   <para><literal>%f</literal></para>
+                                   <para>Use these special characters to specify the file name of the current active document, including the path. </para>
+                                  </listitem>
+                                  <listitem>
+                                   <para><literal>%n</literal></para>
+                                   <para>Use these special characters to specify the file name of the current active document, without the path; in this case, <application>&app;</application> looks for the file in the Working directory. </para>
+                                  </listitem>
+                                </itemizedlist>
 		  </listitem>
 		  <listitem><para>Edit the <guilabel>Working directory</guilabel> field
-				if necessary. By default, the Shell Output plugin executes the command you
+				if necessary. By default, the Shell command plugin executes the command you
 				specify in the current directory.</para>
 		  </listitem>
-		  <listitem><para>Click <guibutton>Run</guibutton>. The Shell Output
-				plugin executes the command and inserts the text output into the current file.
+		  <listitem><para>Select the <guilabel>Show results in Output Window</guilabel> option to display the results of the command in the Output window. If this option is not selected, the results of the command are discarded. By default, the <guilabel>Show results in Output Window</guilabel> option is selected.
+				</para>
+		  </listitem>
+		  <listitem><para>Click <guibutton>Run</guibutton>. The Shell command
+				plugin executes the command and inserts the text output into the output window.
+				</para>
+		  </listitem>
+		  <listitem><para>Use the <keycap>Shift</keycap> key to select the text in the output window.
+				</para>
+		  </listitem>
+		  <listitem><para>Click the <guibutton>Copy selected lines</guibutton> button to copy the selected text into the buffer.
+				</para>
+		  </listitem>
+		  <listitem><para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Paste</guimenuitem> </menuchoice>
+                                to paste the selected text into the file.
+				</para>
+		  </listitem>
+		  <listitem><para>Click the <guibutton>Close the output window</guibutton> button to close the output window.
 				</para>
 		  </listitem>
 		</orderedlist>
@@ -496,15 +563,17 @@
 		  steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose 
-				<menuchoice> <guimenu>Search</guimenu> <guimenuitem>Goto
+				<menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go To
 				  Line</guimenuitem> </menuchoice>
-				to display the <guilabel>Goto line</guilabel> dialog.</para>
+				to display the <guilabel>Go to line</guilabel> dialog.</para>
 		  </listitem>
 		  <listitem><para>Type the number of the line that you want to move the
 				cursor to in the <guilabel>Line number</guilabel> field.</para>
 		  </listitem>
-		  <listitem><para>Click <guibutton>Goto line</guibutton>. The application
+		  <listitem><para>Click <guibutton>Go to line</guibutton>. The application
 				moves the cursor to the line number that you specify.</para>
+		  </listitem>
+		  <listitem><para>To close the <guilabel>Go to line</guilabel> dialog, click <guibutton>Close</guibutton>.</para>
 		  </listitem>
 		</orderedlist>
 	 </sect2>
@@ -557,23 +626,27 @@
 				<para><guilabel>Selection</guilabel></para>
 				<para>Select this option to print the selected text only. This option
 				is only available if you selected text.</para>
-				</listitem>								
+				</listitem>
+								
 				</itemizedlist>
-				<!-- <para>Default: <guilabel>All</guilabel>.</para> -->
+				<!-- <para>Default: <guilabel>All</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Copies</guilabel> </term> 
 			 <listitem> 
 				<para>Use this spin box to specify the number of copies of the file that
 				you want to print.</para>
-				<!-- <para>Default: 1.</para> -->
+				<!-- <para>Default: 1.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Collate</guilabel> </term> 
 			 <listitem> 
 				<para>If you are printing multiple copies of the file, select this option
 				to collate the printed copies.</para>
-				<!-- <para>Default: unselected.</para> -->
+				<!-- <para>Default: unselected.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -586,14 +659,16 @@
 			 <listitem> 
 				<para>Use this drop-down list box to select the printer to which you want
 				to print the file.</para>
-				<!-- <para>Default: <guilabel>Gnome default printer</guilabel>.</para> -->
+				<!-- <para>Default: <guilabel>Gnome default printer</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Settings</guilabel> </term> 
 			 <listitem> 
 				<para>Use this drop-down list box to select the printer settings. To configure
 				the printer, click <guibutton>Configure</guibutton>.</para>
-				<!-- <para>Default: Default.</para> -->
+				<!-- <para>Default: Default.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Location</guilabel> </term> 
@@ -601,8 +676,11 @@
 				<para>Use this drop-down list box to select the print destination. To print the
 				file to a printer, choose <guilabel>lpr</guilabel>. To print the file
 				to a print file, choose <guilabel>File</guilabel>. If you select <guilabel>File</guilabel>,
-				type the name of the output file in the text box provided.</para>
-				<!-- <para>Default: <guilabel>lpr</guilabel>.</para> -->
+				type the name of the output file in the text box provided. To print a file to a 
+                                location of your choice, choose <guilabel>Custom</guilabel>. Type the location you want 
+                                in the <guilabel>Custom</guilabel> text box.</para>
+				<!-- <para>Default: <guilabel>lpr</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -615,27 +693,39 @@
 			 <listitem> 
 				<para>Use this drop-down list box to select the size of the paper to 
 				which you want to print the file.</para>
-				<!-- <para>Default: <guilabel>A4</guilabel>.</para> -->
+				<!-- <para>Default: <guilabel>A4</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Width</guilabel> </term> 
 			 <listitem> 
 				<para>Use this spin box to specify the width of the paper. Use the
-				<guilabel>Centimeters</guilabel> drop-down list box to change the 
+				adjacent drop-down list box to change the 
 				measurement unit for specifying the paper size.</para>
-				<!-- <para>Default: 21.00 centimeters.</para> -->
+				<!-- <para>Default: 21.00 centimeters.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Height</guilabel> </term> 
 			 <listitem> 
 				<para>Use this spin box to specify the height of the paper.</para>
-				<!-- <para>Default: 29.70 centimeters.</para> -->
+				<!-- <para>Default: 29.70 centimeters.</para>
+ -->
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Feed orientation</guilabel> </term> 
+			 <listitem> 
+				<para>Use this drop-down list box to specify the orientation 
+                                of the paper in the printer.</para>
+				<!-- <para>Default: <guilabel>Portrait</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Page orientation</guilabel> </term> 
 			 <listitem> 
 				<para>Use this drop-down list box to select the page orientation.</para>
-				<!-- <para>Default: <guilabel>Portrait</guilabel>.</para> -->
+				<!-- <para>Default: <guilabel>Portrait</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Layout</guilabel> </term> 
@@ -643,7 +733,8 @@
 				<para>Use this drop-down list box to select the page layout. A preview
 				of each layout that you select is displayed in the <guilabel>Preview</guilabel>
 				area.</para>
-				<!-- <para>Default: <guilabel>Plain</guilabel>.</para> -->
+				<!-- <para>Default: <guilabel>Plain</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		</variablelist>
@@ -674,21 +765,38 @@
 			<entry><para>Displays a dialog that contains an ASCII table. You can use the ASCII table to insert characters into a file.</para></entry> 
 		</row>  
 		<row valign="top"> 
-			<entry><para>Compare files</para></entry> 
-			<entry><para>Compares two files and displays the differences between the files in a new <application>&app;</application> window.
-			This plugin uses the <application>diff</application> program to compare the files.</para></entry> 
-		</row>
-		<row valign="top"> 
 			<entry><para>CVS ChangeLog</para></entry> 
 			<entry><para>Opens the log messages associated with CVS commit commands.</para></entry> 
 		</row> 
+		<row valign="top"> 
+			<entry><para>Compare files</para></entry> 
+			<entry><para>Compares two files and displays the differences between the files in the Output window.
+			This plugin uses the <application>diff</application> program to compare the files.</para></entry> 
+		</row>
+		<row valign="top"> 
+			<entry><para>Document Statistics</para></entry> 
+			<entry><para>Counts the number of lines, words, characters with spaces, characters without spaces, and bytes in the current file. The plugin
+			displays the results in a <guilabel>Document Statistics</guilabel> window. </para></entry> 
+		</row> 
+		<row valign="top">
+			<entry><para>Indent lines</para></entry> 
+			<entry><para>Indents the selected lines, or removes the indentation from the selected lines.</para></entry> 
+		</row>
 		<row valign="top">
 			<entry><para>Insert Date/Time</para></entry> 
 			<entry><para>Inserts the current date and time into a file.</para></entry> 
 		</row>
 		<row valign="top">
-			<entry><para>Shell Output</para></entry> 
-			<entry><para>Inserts the text output of a shell command into a file. </para></entry> 
+			<entry><para>Shell command</para></entry> 
+			<entry><para>Displays the text output of a shell command in the output window. </para></entry> 
+		</row> 
+		<row valign="top">
+			<entry><para>Sort</para></entry> 
+			<entry><para>Sorts the selected text. </para></entry> 
+		</row> 
+		<row valign="top">
+			<entry><para>Spell checker</para></entry> 
+			<entry><para>Checks the spelling in the selected text. You can configure <application>&app;</application> to check the spelling automatically, or you can check the spelling manually, in the specified language.</para></entry> 
 		</row> 
 		<row valign="top">
 			<entry><para>Tag list</para></entry> 
@@ -698,12 +806,7 @@
 		<row valign="top">
 			<entry><para>User name</para></entry> 
 			<entry><para>Inserts the username of the current user into the file. </para></entry> 
-		</row>
-		<row valign="top"> 
-			<entry><para>Word count</para></entry> 
-			<entry><para>Counts the number of lines, words, characters with spaces, characters without spaces, and bytes in the current file. The plugin
-			displays the results in a <guilabel>Word count</guilabel> window. </para></entry> 
-		</row>  	
+		</row> 
 		</tbody> 
 		</tgroup>
 		</informaltable> 
@@ -715,8 +818,7 @@
 		  <menuchoice> 
 		  <guimenu>Edit</guimenu>
 		  <guimenuitem>Preferences</guimenuitem> 
-		  </menuchoice>. Click on the arrow next to the <guilabel>Plugins</guilabel> category, then click on 
-		  the <guilabel>Manager</guilabel> subcategory. 
+		  </menuchoice>. Within the <guilabel>Plugins</guilabel> category, click on the <guilabel>Manager</guilabel> subcategory. 
 		  The <guilabel>Manager</guilabel> subcategory displays the following information:</para>
 		<itemizedlist> 
 		  <listitem><para>A list of the plugins that are available.</para>
@@ -755,33 +857,56 @@
 		</row> 
 		<row valign="top"> 
 			<entry><para>Compare files</para></entry> 
-			<entry><para><menuchoice><guimenu>File</guimenu> 
+			<entry><para><menuchoice><guimenu>Tools</guimenu> 
 			<guimenuitem>Compare files</guimenuitem></menuchoice></para></entry> 
 		</row>
 		<row valign="top"> 
-			<entry><para>Word count</para></entry> 
-			<entry><para><menuchoice><guimenu>Search</guimenu> 
-			<guimenuitem>Word Count</guimenuitem></menuchoice></para></entry> 
+			<entry><para>Document Statistics</para></entry> 
+			<entry><para><menuchoice><guimenu>Tools</guimenu> 
+			<guimenuitem>Document Statistics</guimenuitem></menuchoice></para></entry> 
 		</row> 
+		<row valign="top"> 
+			<entry><para>Indent lines</para></entry> 
+			<entry><para><menuchoice><guimenu>Edit</guimenu> 
+			<guimenuitem>Indent</guimenuitem></menuchoice></para>
+                        <para><menuchoice><guimenu>Edit</guimenu> 
+			<guimenuitem>Unindent</guimenuitem></menuchoice></para></entry> 
+		</row> 
+		<row valign="top">
+			<entry><para>Insert Date/Time</para></entry> 
+			<entry><para><menuchoice><guimenu>Edit</guimenu> 
+			<guimenuitem>Insert Date/Time</guimenuitem></menuchoice></para></entry> 
+		</row>
 		<row valign="top">
 			<entry><para>User name</para></entry> 
 			<entry><para><menuchoice><guimenu>Edit</guimenu> 
 			<guimenuitem>Insert User Name</guimenuitem></menuchoice></para></entry> 
 		</row> 
 		<row valign="top">
-			<entry><para>Shell Output</para></entry> 
+			<entry><para>Shell command</para></entry> 
+			<entry><para><menuchoice><guimenu>Tools</guimenu> 
+			<guimenuitem>Run Command</guimenuitem></menuchoice></para></entry> 
+		</row> 
+		<row valign="top">
+			<entry><para>Sort</para></entry> 
 			<entry><para><menuchoice><guimenu>Edit</guimenu> 
-			<guimenuitem>Insert Shell Output</guimenuitem></menuchoice></para></entry> 
+			<guimenuitem>Sort</guimenuitem></menuchoice></para></entry> 
+		</row> 
+		<row valign="top">
+			<entry><para>Spell checker</para></entry> 
+			<entry>
+                          <para><menuchoice><guimenu>Tools</guimenu> 
+			  <guimenuitem>Check Spelling</guimenuitem></menuchoice></para>
+			  <para><menuchoice><guimenu>Tools</guimenu> 
+			  <guimenuitem>Autocheck Spelling</guimenuitem></menuchoice></para> 
+			  <para><menuchoice><guimenu>Tools</guimenu> 
+			  <guimenuitem>Set Language</guimenuitem></menuchoice></para> 
+                        </entry> 
 		</row> 
 		<row valign="top">
 			<entry><para>Tag list</para></entry> 
 			<entry><para><menuchoice><guimenu>View</guimenu> 
 			<guimenuitem>Tag List</guimenuitem></menuchoice></para></entry> 
-		</row>
-		<row valign="top">
-			<entry><para>Insert Date/Time</para></entry> 
-			<entry><para><menuchoice><guimenu>Edit</guimenu> 
-			<guimenuitem>Insert Date/Time</guimenuitem></menuchoice></para></entry> 
 		</row>
 		</tbody> 
 		</tgroup>
@@ -813,6 +938,10 @@
 		  <para><guimenuitem>Icon and Text</guimenuitem></para>
 		  <para>Display icons and text.</para>
 		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Priority Text beside Icons</guimenuitem></para>
+		  <para>Display icons, and display text beside some of the icons.</para>
+		  </listitem>
 		  </itemizedlist>
 	 <para>To display or hide the statusbar, choose <menuchoice> <guimenu>View</guimenu>
 	 <guimenuitem>Statusbar</guimenuitem> </menuchoice>. To customize how <application>&app;</application>
@@ -832,6 +961,8 @@
 		  <!-- <para>Default: selected.</para> -->
 		  </listitem>
 		  </itemizedlist>
+	 <para>To display or hide the output window, choose <menuchoice> <guimenu>View</guimenu>
+		  <guimenuitem>Output window</guimenuitem> </menuchoice>.</para>
 	 
 	 </sect2>
   </sect1>
@@ -866,20 +997,23 @@
 		   <varlistentry> <term><guilabel>Use default theme font</guilabel> </term> 
 			 <listitem> 
 				<para>Select this option to use the default system font for the text in the <application>&app;</application> text window. </para>
-				<!-- <para>Default: unselected.</para> -->
+				<!-- <para>Default: unselected.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>			
-		   <varlistentry> <term><guilabel>Font used by the editor</guilabel> </term> 
+		   <varlistentry> <term><guilabel>Editor font</guilabel> </term> 
 			 <listitem> 
 				<para>This field displays the font that <application>&app;</application> uses to display text. 
 				Click on the button to specify the font type, style, and size to use for text. </para>
-				<!-- <para>Default: Courier Medium 12 point.</para> -->
+				<!-- <para>Default: Courier Medium 12 point.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		   <varlistentry> <term><guilabel>Use default theme colors</guilabel> </term> 
 			 <listitem> 
 				<para>Select this option to use the default theme colors in the <application>&app;</application> text window. </para>
-				<!-- <para>Default: selected.</para> -->
+				<!-- <para>Default: selected.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>			
 		  	<varlistentry> <term><guilabel>Text color</guilabel> </term> 
@@ -887,7 +1021,8 @@
 				<para>Click on the <guibutton>Text color</guibutton> button to
 				  display the color selector dialog. Select a color to use to display text in the <application>&app;</application>
 				text window. </para>
-				<!-- <para>Default: black.</para> -->
+				<!-- <para>Default: black.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Background color</guilabel> </term> 
@@ -895,7 +1030,8 @@
 				<para>Click on the <guibutton>Background color</guibutton> button to
 				  display the color selector dialog. Select a background color for the <application>&app;</application>
 				text window. </para>
-				<!-- <para>Default: white.</para> -->
+				<!-- <para>Default: white.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>			
 		  	<varlistentry> <term><guilabel>Selected text color</guilabel> </term> 
@@ -903,7 +1039,8 @@
 				<para>Click on the <guibutton>Selected text color</guibutton> button to
 				  display the color selector dialog. Select a color to use to display selected text.
 				</para>
-				<!-- <para>Default: white.</para> -->
+				<!-- <para>Default: white.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Selection color</guilabel> </term> 
@@ -911,7 +1048,8 @@
 				<para>Click on the <guibutton>Selection color</guibutton> button to
 				  display the color selector dialog. Select a background color to use to highlight a text selection.
 				  </para>
-				<!-- <para>Default: blue.</para> -->
+				<!-- <para>Default: blue.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>			
 			</variablelist>
@@ -925,7 +1063,18 @@
 				<para>Use this spin box to specify the width of the space that
 				  <application> &app;</application> inserts when you press the
 				  <keycap>Tab</keycap> key. </para>
-				<!-- <para>Default: 8 characters.</para> -->
+				<!-- <para>Default: 8 characters.</para>
+ -->
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Insert spaces instead of tabs</guilabel> </term> 
+			 <listitem> 
+				<para>Select this option to specify that
+				  <application> &app;</application> should insert spaces instead of a tab character 
+                                      when you press the
+				  <keycap>Tab</keycap> key. </para>
+				<!-- <para>Default: 8 characters.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -934,32 +1083,52 @@
 	 	<sect3 id="gedit-prefs-wrapmode">
 	 		<title>Wrap Mode</title>
 			<variablelist>
-	 		<varlistentry> <term><guilabel>Wrap mode</guilabel> </term> 
-			 <listitem> 
-				<para>Select one of the following options to determine how 
-				<application>&app;</application> wraps text in the <application>&app;</application>
-				window:</para>
-				<itemizedlist>
-				<listitem>
-				<para><guilabel>Never wrap lines</guilabel></para>
-				<para>Select this option to never wrap lines. The text that you type is displayed in one line until you press 
-				<keycap>Return</keycap>.</para>
-				</listitem>
-				<listitem>
-				<para><guilabel>Wrap lines at word boundaries</guilabel></para>
-				<para>Select this option to wrap text onto the next line, at a word level, when you reach the text window boundary. </para>
-				</listitem>
-				<listitem>
-				<para><guilabel>Wrap lines at character boundaries</guilabel></para>
-				<para>Select this option to wrap text onto the next line, at a character level, when you reach the text window boundary.</para>
-				</listitem>								
-				</itemizedlist>
-				<!-- <para>Default: <guilabel>Wrap lines at word boundaries</guilabel>.</para> -->
+	 		<varlistentry> <term><guilabel>Enable text wrapping</guilabel> </term> 
+			 <listitem> <para>Select this option to wrap text onto the next line,
+                         at a character level, when you reach the text window boundary. </para>
+				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
+ -->
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Do not split words over two lines</guilabel> </term> 
+			 <listitem> <para>Select this option to wrap text onto the next line,
+                         at a word level, when you reach the text window boundary. </para>
+				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
+ -->
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+
+	 	<sect3 id="gedit-prefs-autoindent">
+	 		<title>Auto Indent</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Enable auto indentation</guilabel> </term> 
+			 <listitem> <para>Select this option to specify that the next line should start at the indentation level of the current line.
+</para>
+				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
 		</sect3>	 
 	 
+	 	<sect3 id="gedit-prefs-open">
+	 		<title>Open</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Supported encodings</guilabel> </term> 
+			 <listitem> <para>Click <guibutton>Add</guibutton> to add an encoding to the list of supported encodings. Supported encodings are used by <application>&app;</application> to open files that are not in UTF-8 format or in the current locale encoding.
+                           Click <guibutton>Remove</guibutton> to remove an encoding from the list of supported encodings.
+                           Click <guibutton>Up</guibutton> to move an encoding to a higher position in the list of supported encodings.
+                           Click <guibutton>Down</guibutton> to move an encoding to a lower position in the list of supported encodings.
+                            </para>
+				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
+ -->
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+
 	 	<sect3 id="gedit-prefs-linenumbers">
 	 		<title>Line numbers</title>
 			<variablelist>
@@ -990,7 +1159,7 @@
 				<!-- <para>Default: unselected, 10 minutes.</para> -->
 			 </listitem>
 		  	</varlistentry>
-	 		<varlistentry> <term><guilabel>When saving</guilabel> </term> 
+	 		<varlistentry> <term><guilabel>When saving an existing file</guilabel> </term> 
 			 <listitem> 
 				<para>Select one of the following save options:</para>
 				<itemizedlist>
@@ -999,19 +1168,19 @@
 				<para>Select this option to save files using UTF-8 bit encoding.</para>
 				</listitem>
 				<listitem>
-				<para><guilabel>Use current locale when possible</guilabel></para>
+				<para><guilabel>Use current locale's encoding if possible</guilabel></para>
 				<para>Select this option to save files using the current locale. You can set up locales for
 				different input methods. </para>
 				</listitem>
 				<listitem>
-				<para><guilabel>Use current locale only if the file already uses it</guilabel></para>
+				<para><guilabel>Use original file encoding if possible</guilabel></para>
 				<para>Select this option to save a file using the current locale if the file was already saved in the current locale.</para>
 				</listitem>								
 				</itemizedlist>
 				<!-- <para>Default: <guilabel>Always use UTF-8 encoding (faster)</guilabel></para> -->
 			 </listitem>
 		  	</varlistentry>
-		  	<varlistentry> <term><guilabel>When creating a new file</guilabel> </term> 
+		  	<varlistentry> <term><guilabel>When saving a new file</guilabel> </term> 
 			 <listitem> 
 				<para>Select one of the following save options for new files:</para>
 				<itemizedlist>
@@ -1035,12 +1204,13 @@
 	 	<sect3 id="gedit-prefs-undo">
 	 		<title>Undo</title>
 	 		<variablelist>
-	 		<varlistentry> <term><guilabel>Set limit on undo levels to</guilabel> </term> 
+	 		<varlistentry> <term><guilabel>Set limit on undo actions to</guilabel> </term> 
 			 <listitem> 
 				<para>Select this option to set a limit on the number of editing actions that you 
 				can undo. Use the spin box to specify the maximum number of actions that you
 				can undo. </para>
-				<!-- <para>Default: selected, 25 actions.</para> -->
+				<!-- <para>Default: selected, 25 actions.</para>
+ -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -1060,15 +1230,17 @@
 			 <listitem> 
 				<para>Select this option to include a header on each page that you
 				  print. You cannot configure the header. </para>
-				<!-- <para>Default: selected.</para> -->
+				<!-- <para>Default: selected.</para>
+ -->
 			 </listitem>
 		  </varlistentry>
-		  <varlistentry> <term><guilabel>Wrap lines (at character boundaries)</guilabel> </term> 
+		  <varlistentry> <term><guilabel>Enable text wrapping</guilabel> </term> 
 			 <listitem> 
-				<para>Select this option to automatically wrap text at a character level when you print
+				<para>Select this option to automatically wrap text at a word level when you print
 				  a file. The application counts wrapped lines as one line for line numbering purposes.
 				  </para>
-				<!-- <para>Default: selected.</para> -->
+				<!-- <para>Default: selected.</para>
+ -->
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry> <term><guilabel>Print line numbers every</guilabel>
@@ -1077,7 +1249,8 @@
 				<para>Select this option to include line numbers when you print a
 				  file. Use the spin box to specify how often to print the line numbers, for
 				  example every 5 lines, every 10 lines, and so on. </para>
-				<!-- <para>Default: unselected, 1 line.</para> -->
+				<!-- <para>Default: unselected, 1 line.</para>
+ -->
 			 </listitem>
 		  </varlistentry>
 		</variablelist>
@@ -1086,25 +1259,28 @@
 		<sect3 id="gedit-prefs-fonts">
 	 		<title>Fonts</title>
 	 	<variablelist> 
-		  <varlistentry> <term><guilabel>Font used to print the body</guilabel> </term> 
+		  <varlistentry> <term><guilabel>Body</guilabel> </term> 
 			 <listitem> 
 				<para>Click on this button to select the font to use to print the body text of a 
 				file.</para>
-				<!-- <para>Default: Courier 9.0.</para> -->
+				<!-- <para>Default: Courier 9.0.</para>
+ -->
 			 </listitem>
 		  </varlistentry>
-		  <varlistentry> <term><guilabel>Font used to print headers</guilabel> </term> 
+		  <varlistentry> <term><guilabel>Page headers</guilabel> </term> 
 			 <listitem> 
 				<para>Click on this button to select the font to use to print the headers in a 
 				file.  </para>
-				<!-- <para>Default: Helvetica 11.0.</para> -->
+				<!-- <para>Default: Helvetica 11.0.</para>
+ -->
 			 </listitem>
 		  </varlistentry>
-		  <varlistentry> <term><guilabel>Font used to print line numbers</guilabel>
+		  <varlistentry> <term><guilabel>Line numbers</guilabel>
 			 </term> 
 			 <listitem> 
 				<para>Click on this button to select a font to use to print line numbers.</para>
-				<!-- <para>Default: Helvetica 8.0.</para> -->
+				<!-- <para>Default: Helvetica 8.0.</para>
+ -->
 			 </listitem>
 		  </varlistentry>
 		</variablelist>
