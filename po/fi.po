@@ -1,14 +1,14 @@
 # gedit Finnish Translation
 # Suomennos: http://gnome-fi.sourceforge.net/
-# Copyright (C) 2001 Free Software Foundation, Inc.
+# Copyright (C) 1999-2001 Free Software Foundation, Inc.
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2001.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2001-03-02 13:46+0000\n"
-"PO-Revision-Date: 2001-02-28 12:00+0300\n"
+"POT-Creation-Date: 2001-03-08 18:17+0000\n"
+"PO-Revision-Date: 2001-03-08 19:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,12 +40,12 @@ msgstr "Anna selattava URL:"
 msgid "Lynx found at: "
 msgstr "Lynx löydetty polusta: "
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "sijainti"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr "_Muuta... "
@@ -87,11 +87,11 @@ msgstr " Desimaalista _oktaaliksi "
 msgid " Hex to Decima_l "
 msgstr " Heksaalista _desimaaliksi "
 
-#: plugins/diff/diff.c:121
+#: plugins/diff/diff.c:127
 msgid "The two documents you selected are the same."
 msgstr "Valitut asiakirjat ovat samoja"
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:133
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -101,7 +101,7 @@ msgstr ""
 "\n"
 "Anna kelvollinen tiedosto."
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:140
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -111,16 +111,16 @@ msgstr ""
 "\n"
 "Anna kelvollinen tiedosto."
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:151
 msgid "The \"first\" document contains no text."
 msgstr "Asiakirjoista ensimmäinen ei sisällä tekstiä."
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:163
 msgid "The \"second\" document contains no text."
 msgstr "Asiakirjoista jälkimmäinen ei sisällä tekstiä"
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:172
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -128,20 +128,20 @@ msgstr ""
 "gedit ei onnistunut luomaan väliaikaistiedostoa.\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:753
 #, c-format
 msgid "Untitled %i"
 msgstr "Nimetön %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:497
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:498
 msgid "Makes a diff file from two documents or files"
 msgstr "Luo diff-tiedoston kahdesta asiakirjasta tai tiedostosta"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:499
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -187,6 +187,10 @@ msgid "Select the \"second\" file..."
 msgstr "Valitse toinen tiedosto..."
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr "Yhdennetty tulostusmuoto (-u valitsin)"
+
+#: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "Diff löydetty polusta: "
 
@@ -318,11 +322,11 @@ msgstr "gedit: Komentotulkin tulosteliitännäinen"
 
 #: plugins/shell_output/shell_output.glade.h:8
 msgid "Specify the working directory and the command you want to run."
-msgstr "Anna suoritushakemisto ja suoritettava komento."
+msgstr "Anna työhakemisto ja suoritettava komento."
 
 #: plugins/shell_output/shell_output.glade.h:9
 msgid "_Working directory:"
-msgstr "_Suoritushakemisto:"
+msgstr "_Työhakemisto:"
 
 #: plugins/shell_output/shell_output.glade.h:10
 msgid "Shell _command:"
@@ -330,7 +334,7 @@ msgstr "Komentotulkin _komento:"
 
 #: plugins/shell_output/shell_output.glade.h:11
 msgid "Select the working directory..."
-msgstr "Valitse suoritushakemisto..."
+msgstr "Valitse työhakemisto..."
 
 #: plugins/time/time.c:84
 msgid "Insert Time"
@@ -387,16 +391,16 @@ msgstr "gedit: Asetukset"
 msgid "Replace"
 msgstr "Korvaa"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "Etsi"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
+msgid "Search string not found"
 msgstr "Merkkijonoa ei löytynyt"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
+msgid "Search string not found."
 msgstr "Merkkijonoa ei löytynyt."
 
 #: src/dialogs/dialog-replace.c:362
@@ -433,46 +437,50 @@ msgstr "Rivinumero:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+msgid "Preferences"
+msgstr "Asetukset"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "Ulkonäkö"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
-msgstr "Näytä tilarivi"
-
 #: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
-msgstr "Aseta työkalurivi järjestelmän asetusten mukaisesti"
+msgid "S_how statusbar"
+msgstr "N_äytä tilarivi"
 
 #: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
-msgstr "Näytä vain ikonit työkalurivissä"
+msgid "Set toolbar according to _system settings"
+msgstr "Aseta työkalurivi _järjestelmän asetusten mukaisesti"
 
 #: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
-msgstr "Näytä sekä ikonit että teksti työkalurivissä"
+msgid "Set toolbar to _icons only"
+msgstr "Näytä vain _ikonit työkalurivissä"
 
 #: src/dialogs/prefs.glade.h:12
+msgid "Set toolbar to icons with _text"
+msgstr "Näytä sekä ikonit että _teksti työkalurivissä"
+
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "Editointiasetukset"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
-msgstr "Sisennä automaattisesti"
-
 #: src/dialogs/prefs.glade.h:14
-msgid "Tab width: "
-msgstr "Painikkeiden leveys: "
+msgid "Enable _Auto-indent"
+msgstr "Sisennä _automaattisesti"
 
 #: src/dialogs/prefs.glade.h:15
+msgid "Tab _width: "
+msgstr "Sa_rkainten leveys: "
+
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "Yleiset"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "UAK (Usean Asiakirjan Käyttöliittymä)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -484,7 +492,7 @@ msgstr ""
 "Ylhäällä\n"
 "Alhaalla\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -496,95 +504,99 @@ msgstr ""
 "Alisteiset\n"
 "Oletus\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
-msgstr "Tila: "
-
 #: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
-msgstr "Muistio-tilan painikkeet: "
+msgid "_Mode: "
+msgstr "T_ila: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:29
+msgid "Notebook _tab position: "
+msgstr "Muistio-tilan _painikkeet: "
+
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "Kumoa"
 
-#: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to:"
-msgstr "Aseta kumoamiskertojen raja:"
-
 #: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
-msgstr "taso(a)"
+msgid "Set limit on _undo levels to:"
+msgstr "Aseta _kumoamiskertojen raja:"
 
 #: src/dialogs/prefs.glade.h:32
+msgid "_level(s)"
+msgstr "_taso(a)"
+
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "Asiakirjat"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "Kirjasimet"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "Valitse kirjasinlaji"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÅåÄäÖö"
 
-#: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
-msgstr "Oletuskirjasin: "
-
 #: src/dialogs/prefs.glade.h:37
+msgid "_Default font: "
+msgstr "_Oletuskirjasin: "
+
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "Värit"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "Valitse väri"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
-msgstr "Taustaväri: "
-
 #: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
-msgstr "Tekstin väri: "
+msgid "_Background: "
+msgstr "T_austaväri: "
 
 #: src/dialogs/prefs.glade.h:42
+msgid "_Foreground: "
+msgstr "T_ekstin väri: "
+
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "Kirjasimet/Värit"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "Tulostus"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "Lisää _otsikkorivi"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr "Rivitä _automaattisesti"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
-msgstr "Tulosta _rivinumero joka"
-
 #: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
-msgstr ":s rivi"
+msgid "Print line _numbers every:"
+msgstr "Tulosta _rivinumero joka:"
 
 #: src/dialogs/prefs.glade.h:48
+msgid "l_ine(s)"
+msgstr ":s r_ivi"
+
+#: src/dialogs/prefs.glade.h:49
+msgid "Orientation"
+msgstr "Tulostustapa"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "_Pysty"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "_Vaaka"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Paperi"
 
@@ -687,7 +699,7 @@ msgstr "Liitännäisen kuvaus"
 msgid "Open as URI"
 msgstr "Avaa URI:nä"
 
-#: src/dialogs/uri.glade.h:8 src/menus.c:244
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
 msgid "Open"
 msgstr "Avaa"
 
@@ -978,21 +990,21 @@ msgstr "Avaa (vaihda) .c/.h tiedosto"
 msgid "_New"
 msgstr "_Uusi"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "Luo uusi asiakirja"
 
 #: src/menus.c:68
-msgid "Save All"
-msgstr "Tallenna kaikki"
+msgid "Sav_e All"
+msgstr "Tallenna _kaikki"
 
 #: src/menus.c:69
 msgid "Save All Open Files"
 msgstr "Tallenna kaikki avoimet tiedostot"
 
 #: src/menus.c:74
-msgid "Revert"
-msgstr "Palauta levyltä"
+msgid "_Revert"
+msgstr "_Palauta levyltä"
 
 #: src/menus.c:83
 msgid "Open from _URI..."
@@ -1011,145 +1023,141 @@ msgid "Print preview"
 msgstr "Tulostuksen esikatselu"
 
 #: src/menus.c:102
-msgid "Print preview..."
-msgstr "Tulostuksen esikatselu..."
+msgid "Print pre_view..."
+msgstr "Tulostuksen _esikatselu..."
 
 #: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Esikatsele tulostettavia tietoja"
 
 #: src/menus.c:110
-msgid "Close All"
-msgstr "Sulje kaikki"
+msgid "C_lose All"
+msgstr "S_ulje kaikki"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Sulje kaikki avoimet tiedostot"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "Siirry _riville..."
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "Siirry tietylle rivinumerolle"
 
-#: src/menus.c:154
+#: src/menus.c:160
 msgid "File _Info"
 msgstr "Tiedoston _tiedot"
 
-#: src/menus.c:155
+#: src/menus.c:161
 msgid "Get the basic file info"
 msgstr "Hae tiedoston perustiedot"
 
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "_Lisää näkymä"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr "Lisää uusi asiakirjan näkymä"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "_Poista näkymä"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr "Poista asiakirjan näkymä"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/menus.c:220
+msgid "Se_arch"
+msgstr "_Etsi"
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
 #: src/window.c:677
 msgid "_Plugins"
 msgstr "_Liitännäiset"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "_Asiakirjat"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "Uusi"
 
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr "Tallenna"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "Tallenna nykyinen tiedosto"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr "Sulje"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "Sulje nykyinen tiedosto"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "Tulosta"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "Tulosta nykyinen tiedosto"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "Kumoa edellisen toiminto"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
-msgstr "Tee uudelleen"
+msgstr "Uudelleen"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "Tee edellinen toiminto uudelleen"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "Leikkaa"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "Leikkaa valinta"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "Kopioi"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "Kopioi valinta"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "Liitä"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "Liitä leikepöydän sisältö"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr "Etsi merkkijonoa"
 
-#: src/menus.c:288
-msgid "Exit"
-msgstr "Poistu"
-
-#: src/menus.c:288
-msgid "Exit the program"
-msgstr "Poistu ohjelmasta"
-
 #: src/plugin.c:107
-msgid "Manager ..."
-msgstr "Hallinta ..."
+msgid "_Manager ..."
+msgstr "_Hallinta ..."
 
 #: src/plugin.c:108
 msgid "Add/Remove installed plugins"
@@ -1194,12 +1202,12 @@ msgstr ""
 "\n"
 
 #: src/plugin.c:220
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
 " Do you want to specify a new location for %s?"
 msgstr ""
-"%s liitännäisen käyttämiseksi tarvitaan %s. \n"
+"%sLiitännäisen %s käyttämiseksi tarvitaan %s. \n"
 " Haluatko antaa %s:lle uuden sijainnin?"
 
 #: src/plugin.c:322
