@@ -1,3 +1,12 @@
+2003-03-03  Paolo Maggi <paolo.maggi@polito.it>
+
+	* gedit-utils.c: #include <sys/time.h>, patch by 
+	Jim McElwaine <jnm11@amtp.cam.ac.uk> (fix bug #105416)
+
+	(gedit_utils_flash): don't update UI (it fixes a crash
+	when you save a big file and immediately quit gedit, it should also fix
+	bug #98798 <crash on close [gedit_document_save_as]>
+
 2003-02-25  James Willcox  <jwillcox@gnome.org>
 
 	* recent-files/Makefile.am: Install headers in gedit/recent-files instead of gedit/

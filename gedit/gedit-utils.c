@@ -41,6 +41,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/time.h>
 #include <fcntl.h>
 
 #include <string.h>
@@ -174,10 +175,6 @@ gedit_utils_flash (gchar *msg)
 	g_return_if_fail (msg != NULL);
 	
 	bonobo_window_flash (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi)), msg);
-
-	/* Update UI */
-	while (gtk_events_pending ())
-		  gtk_main_iteration ();
 }
 
 /**
