@@ -87,8 +87,9 @@ activate (GeditPlugin *pd)
 	GList *top_windows;
         gedit_debug (DEBUG_PLUGINS, "");
 
-	if (create_taglist () == NULL)
-		return PLUGIN_ERROR;
+	if (taglist == NULL)
+		if (create_taglist () == NULL)
+			return PLUGIN_ERROR;
 	
         top_windows = gedit_get_top_windows ();
         g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);

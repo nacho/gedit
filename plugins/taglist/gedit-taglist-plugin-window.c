@@ -286,7 +286,7 @@ populate_tags_list (void)
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (tag_list_window->tags_list), 
 			         model);
-
+	
 	g_object_unref (G_OBJECT (model));
 }
 
@@ -311,7 +311,7 @@ create_model (void)
 		const gchar* tag_name;
 
 		tag_name = ((Tag*)list->data)->name;
-		
+
 		gedit_debug (DEBUG_PLUGINS, "%d : %s", i, tag_name);
 		
 		gtk_list_store_append (store, &iter);
@@ -323,7 +323,7 @@ create_model (void)
 
 		list = g_list_next (list);
 	}
-
+	
 	gedit_debug (DEBUG_PLUGINS, "Rows: %d ", 
 			gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL));
 	

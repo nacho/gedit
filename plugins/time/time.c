@@ -232,7 +232,7 @@ create_formats_list (TimeConfigureDialog *dialog)
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
 	GtkTreeModel *model;
-
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (dialog != NULL);
