@@ -3,9 +3,9 @@
 # Sergey Panov <sipan@mit.edu>
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2001-03-02 22:41+0100\n"
-"PO-Revision-Date: 2001-03-01 14:55+03:00\n"
+"Project-Id-Version: gedit-0.9.*\n"
+"POT-Creation-Date: 2001-04-24 14:48+0400\n"
+"PO-Revision-Date: 2001-04-24 14:54+04:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -37,12 +37,12 @@ msgstr "Введите URL для просмотра:"
 msgid "Lynx found at: "
 msgstr "Lynx найден в:"
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "положение"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
 msgid " _Change... "
 msgstr "Изменить..."
@@ -84,11 +84,11 @@ msgstr "Десятичное в восьмеричное"
 msgid " Hex to Decima_l "
 msgstr "Шестнадцатиричное в десятичное"
 
-#: plugins/diff/diff.c:121
+#: plugins/diff/diff.c:127
 msgid "The two documents you selected are the same."
 msgstr "Оба выбранных документа одинаковы"
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:133
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -99,7 +99,7 @@ msgstr ""
 "\n"
 "Пожалуйста выберите правильный файл."
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:140
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -110,16 +110,16 @@ msgstr ""
 "\n"
 "Пожалуйста выберите правильный файл."
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:151
 msgid "The \"first\" document contains no text."
 msgstr "\"Первый\" документ не содержит текста."
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:163
 msgid "The \"second\" document contains no text."
 msgstr "\"Второй\" документ не содержит текста."
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:172
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -127,21 +127,21 @@ msgstr ""
 "gedit не удалось создать временный файл.\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:296 plugins/email/email.c:230 src/document.c:759
 #, c-format
 msgid "Untitled %i"
 msgstr "Безымянное %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:497
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:498
 msgid "Makes a diff file from two documents or files"
 msgstr ""
 "Делает файл diff из 2-х документов или файлов"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:499
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
@@ -189,6 +189,10 @@ msgid "Select the \"second\" file..."
 msgstr "Выберите \"второй\" файл..."
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr "Использовать унифицированный формат вывода (параметр \"-u\")"
+
+#: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "Diff найден в:"
 
@@ -361,23 +365,12 @@ msgstr ""
 "gEdit -- маленький и легкий текстовый "
 "редактор для GNOME."
 
-#: src/dialogs/dialog-plugins.c:90
+#: src/dialogs/dialog-plugins.c:87
 #, c-format
 msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 msgstr ""
 "Чтобы использовать дополнение %s, вам надо "
 "указать положение \"%s\"."
-
-#: src/dialogs/dialog-plugins.c:455
-#, c-format
-msgid ""
-"Plugin Name: %s\n"
-"Author: %s\n"
-"Description: %s\n"
-msgstr ""
-"Название дополнения: %s\n"
-"Автор: %s\n"
-"Описание: %s\n"
 
 #. glade won't let me set the title of the propertybox
 #: src/dialogs/dialog-prefs.c:578
@@ -394,17 +387,17 @@ msgstr "gedit: Настройки"
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "Найти"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
-msgstr "Текст не найден"
+msgid "Search string not found"
+msgstr "Искомая строка не найдена"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
-msgstr "Текст не найден."
+msgid "Search string not found."
+msgstr "Искомая строка не найдена."
 
 #: src/dialogs/dialog-replace.c:362
 #, c-format
@@ -417,7 +410,7 @@ msgstr ""
 "Не удалось получить необходимую память "
 "для замены всех запросов."
 
-#: src/dialogs/dialog-uri.c:138 src/file.c:828 src/file.c:835
+#: src/dialogs/dialog-uri.c:138 src/file.c:827 src/file.c:834
 #, c-format
 msgid "Loaded file %s"
 msgstr "Загружен файл %s"
@@ -441,52 +434,56 @@ msgstr "Номер строки:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+msgid "Preferences"
+msgstr "Настройки"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "Внешний вид"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
+#: src/dialogs/prefs.glade.h:9
+msgid "S_how statusbar"
 msgstr "Показать строку состояния"
 
-#: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
+#: src/dialogs/prefs.glade.h:10
+msgid "Set toolbar according to _system settings"
 msgstr ""
 "Установить панель инструментов в "
 "соответствии с системными установками"
 
-#: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
+#: src/dialogs/prefs.glade.h:11
+msgid "Set toolbar to _icons only"
 msgstr ""
 "Показывать на панели инструментов только "
 "пиктограммы"
 
-#: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
+#: src/dialogs/prefs.glade.h:12
+msgid "Set toolbar to icons with _text"
 msgstr ""
 "Показывать на панели инструментов "
 "пиктограммы и подписи"
 
-#: src/dialogs/prefs.glade.h:12
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "Поведение редактора"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
+#: src/dialogs/prefs.glade.h:14
+msgid "Enable _Auto-indent"
 msgstr "Включить Автовыравнивание"
 
-#: src/dialogs/prefs.glade.h:14
-msgid "Tab width: "
+#: src/dialogs/prefs.glade.h:15
+msgid "Tab _width: "
 msgstr "Ширина табулятора: "
 
-#: src/dialogs/prefs.glade.h:15
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "Общие"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (Многодокументный интерфейс)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -498,7 +495,7 @@ msgstr ""
 "Сверху\n"
 "Снизу\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -510,97 +507,100 @@ msgstr ""
 "Модальный\n"
 "По умолчанию\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
+#: src/dialogs/prefs.glade.h:28
+msgid "_Mode: "
 msgstr "Режим:"
 
-#: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
-msgstr "Положение ярлыков блокнота:"
+#: src/dialogs/prefs.glade.h:29
+msgid "Notebook _tab position: "
+msgstr "Положение ярлыков блокнота: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "Откат"
 
-#: src/dialogs/prefs.glade.h:30
-msgid "Set limit on undo levels to:"
+#: src/dialogs/prefs.glade.h:31
+msgid "Set limit on _undo levels to:"
 msgstr "Установить предел уровней отката:"
 
-#: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
+#: src/dialogs/prefs.glade.h:32
+msgid "_level(s)"
 msgstr "уровень(и)"
 
-#: src/dialogs/prefs.glade.h:32
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "Документы"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "Шрифты"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "Выбрать шрифт"
 
-#: src/dialogs/prefs.glade.h:35
+#: src/dialogs/prefs.glade.h:36
 msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
 msgstr ""
-"AaBbCcDdEeFfGgHhIiJjKkLlАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛл�"
-"�м"
-
-#: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
-msgstr "Шрифт по умолчанию:"
+"AaBbCcDdEeFfGgHhIiJjKkLlАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМм"
 
 #: src/dialogs/prefs.glade.h:37
+msgid "_Default font: "
+msgstr "Шрифт по умолчанию:"
+
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "Цвета"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "Выбрать цвет"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
+#: src/dialogs/prefs.glade.h:41
+msgid "_Background: "
 msgstr "Цвет фона:"
 
-#: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
+#: src/dialogs/prefs.glade.h:42
+msgid "_Foreground: "
 msgstr "Цвет текста:"
 
-#: src/dialogs/prefs.glade.h:42
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "Шрифты/Цвета"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "Печать"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "Добавить заголовок"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr "Включить перевод строк"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
+#: src/dialogs/prefs.glade.h:47
+msgid "Print line _numbers every:"
 msgstr "Печатать номера строк каждые:"
 
-#: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
+#: src/dialogs/prefs.glade.h:48
+msgid "l_ine(s)"
 msgstr "строк(и)"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
+msgid "Orientation"
+msgstr "Ориентация"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "Портрет"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "Блокнот"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Бумага"
 
@@ -661,40 +661,36 @@ msgstr "Чувствительный к регистру"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/plugin-manager.glade.h:7
-msgid "gedit Plugin Manager"
-msgstr "Диспетчер дополнений gedit"
+msgid "Plugins manager..."
+msgstr "Диспетчер дополнений..."
 
 #: src/dialogs/plugin-manager.glade.h:8
-msgid "Select the plugins to install"
-msgstr "Выберите дополнение для установки"
+msgid "Select the plugins to install:"
+msgstr "Выберите дополнение для установки:"
 
-#: src/dialogs/plugin-manager.glade.h:9 src/dialogs/plugin-manager.glade.h:10
-msgid "Available Plugins"
-msgstr "Доступные дополнения"
+#: src/dialogs/plugin-manager.glade.h:9
+msgid "_Select all"
+msgstr "Выбрать все"
+
+#: src/dialogs/plugin-manager.glade.h:10
+msgid "_Remove all"
+msgstr "Удалить все"
 
 #: src/dialogs/plugin-manager.glade.h:11
-msgid "Add >"
-msgstr "Добавить >"
+msgid "_Description"
+msgstr "Описание"
 
 #: src/dialogs/plugin-manager.glade.h:12
-msgid "< Remove"
-msgstr "< Удалить"
+msgid "File name:"
+msgstr "Имя файла:"
 
 #: src/dialogs/plugin-manager.glade.h:13
-msgid "Add All >>"
-msgstr "Добавить все >>"
+msgid "Author(s):"
+msgstr "Автор(ы):"
 
 #: src/dialogs/plugin-manager.glade.h:14
-msgid "<< Remove All"
-msgstr "<<Удалить все"
-
-#: src/dialogs/plugin-manager.glade.h:15 src/dialogs/plugin-manager.glade.h:16
-msgid "Installed Plugins"
-msgstr "Установленные дополнения"
-
-#: src/dialogs/plugin-manager.glade.h:17
-msgid "Plugin description"
-msgstr "Описание дополнения"
+msgid "De_tails"
+msgstr "Подробности"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -702,10 +698,10 @@ msgstr "Описание дополнения"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/uri.glade.h:7
-msgid "Open as URI"
-msgstr "Открыть как URI"
+msgid "Open from URI"
+msgstr "Открыть по URI"
 
-#: src/dialogs/uri.glade.h:8 src/menus.c:244
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
 msgid "Open"
 msgstr "Открыть"
 
@@ -730,7 +726,7 @@ msgstr ""
 " '%s' был изменен. Вы хотите сохранить его?"
 
 #. If you try to open a non existant remote file
-#: src/document.c:710
+#: src/document.c:716
 #, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
@@ -746,21 +742,21 @@ msgstr ""
 "\n"
 "Убедитесь, что файл существует."
 
-#: src/document.c:763 src/document.c:771
+#: src/document.c:769 src/document.c:777
 msgid "(modified)"
 msgstr "(изменено)"
 
-#: src/document.c:765 src/document.c:773
+#: src/document.c:771 src/document.c:779
 msgid "(readonly)"
 msgstr "(только чтение)"
 
-#: src/document.c:824 src/document.c:864
+#: src/document.c:830 src/document.c:870
 msgid "This file does not end with a valid extension\n"
 msgstr ""
 "Этот файл заканчивается недопустимым "
 "расширением\n"
 
-#: src/document.c:872
+#: src/document.c:878
 #, c-format
 msgid "The file %s was not found."
 msgstr "Файл %s не был найден."
@@ -841,15 +837,15 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/file.c:482
+#: src/file.c:481
 msgid "Save As..."
 msgstr "Сохранить как..."
 
-#: src/file.c:552
+#: src/file.c:551
 msgid "The document contains no data."
 msgstr "Документ не содержит текста."
 
-#: src/file.c:563
+#: src/file.c:562
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -867,7 +863,7 @@ msgstr ""
 "и что у вас есть соответствующие права на "
 "запись."
 
-#: src/file.c:577
+#: src/file.c:576
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -885,7 +881,7 @@ msgstr ""
 "сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:595
+#: src/file.c:594
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
@@ -903,45 +899,45 @@ msgstr ""
 "сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:697
+#: src/file.c:696
 msgid "Could not allocate the required memory."
 msgstr ""
 "Не удалось получить необходимую память."
 
-#: src/file.c:717
+#: src/file.c:716
 msgid "Error in the pipe."
 msgstr "Ошибка в канале."
 
-#: src/file.c:842
+#: src/file.c:841
 #, c-format
 msgid "Loaded %i files"
 msgstr "Загружено %i файлов"
 
-#: src/file.c:908
+#: src/file.c:907
 msgid "Open File ..."
 msgstr "Открыть файл..."
 
-#: src/file.c:1041
+#: src/file.c:1040
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr ""
 "'%s' будет перезаписан. Хотите продолжить?"
 
-#: src/file.c:1053
+#: src/file.c:1052
 msgid "Document has not been saved."
 msgstr "Документ не был сохранен."
 
-#: src/file.c:1063
+#: src/file.c:1062
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/file.c:1192
+#: src/file.c:1191
 msgid "You can't revert an Untitled document\n"
 msgstr ""
 "Вы не можете восстановить "
 "неозаглавленный документ\n"
 
-#: src/file.c:1205
+#: src/file.c:1204
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -951,7 +947,7 @@ msgstr ""
 "изменения?\n"
 "(%s)"
 
-#: src/file.c:1236
+#: src/file.c:1235
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr ""
@@ -1024,12 +1020,12 @@ msgstr "Открыть (переключить) .c/.h файл"
 msgid "_New"
 msgstr "Новый"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "Создать новый документ"
 
 #: src/menus.c:68
-msgid "Save All"
+msgid "Sav_e All"
 msgstr "Сохранить все"
 
 #: src/menus.c:69
@@ -1037,7 +1033,7 @@ msgid "Save All Open Files"
 msgstr "Сохранить все открытые файлы"
 
 #: src/menus.c:74
-msgid "Revert"
+msgid "_Revert"
 msgstr "Вернуть"
 
 #: src/menus.c:83
@@ -1057,7 +1053,7 @@ msgid "Print preview"
 msgstr "Просмотр печати"
 
 #: src/menus.c:102
-msgid "Print preview..."
+msgid "Print pre_view..."
 msgstr "Просмотр печати..."
 
 #: src/menus.c:103
@@ -1066,136 +1062,132 @@ msgstr ""
 "Просмотр данных, которые будут напечатаны"
 
 #: src/menus.c:110
-msgid "Close All"
+msgid "C_lose All"
 msgstr "Закрыть Все"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Закрыть все открытые файлы"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "Перейти к строке..."
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "Перейти к строке с указанным номером"
 
-#: src/menus.c:154
-msgid "File _Info"
-msgstr "Информация о файле"
-
-#: src/menus.c:155
-msgid "Get the basic file info"
-msgstr "Получить основную информацию о файле."
-
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "Добавить окно"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr "Добавить новое окно для документа"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "Удалить окно"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/menus.c:220
+msgid "Se_arch"
+msgstr "Поиск"
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
 #: src/window.c:677
 msgid "_Plugins"
 msgstr "Дополнения"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "Документы"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "Новый"
 
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "Открыть файл"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "Закрыть текущий файл"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "Печать"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "Напечатать текущий файл"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "Отмена последнего действия"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
 msgstr "Возврат"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "Повтор отмененного действия"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "Вырезать выделение"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "Скопировать"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "Скопировать выделение"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "Вставить из буфера обмена"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr "Поиск строки"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit"
 msgstr "Выход"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
 #: src/plugin.c:107
-msgid "Manager ..."
+msgid "_Manager ..."
 msgstr "Диспетчер..."
 
 #: src/plugin.c:108
@@ -1284,7 +1276,7 @@ msgstr "Страницы"
 msgid "gedit: Print Preview\n"
 msgstr "gedit: Просмотр печати\n"
 
-#: src/print-doc.c:504
+#: src/print-doc.c:505
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
@@ -1361,7 +1353,7 @@ msgstr ""
 "Текущая строка: %i\n"
 "Текущий столбец: %i"
 
-#: src/view.c:994
+#: src/view.c:978
 msgid "You can't remove the last view of a document."
 msgstr ""
 "Вы не можете удалить последнее окно "
