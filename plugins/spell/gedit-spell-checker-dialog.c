@@ -31,6 +31,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include <glade/glade-xml.h>
 #include <bonobo/bonobo-i18n.h>
 #include <gtk/gtk.h>
@@ -100,7 +102,8 @@ static void	ignore_button_clicked_handler 			(GtkButton *button,
 								 GeditSpellCheckerDialog *dlg);
 static void	ignore_all_button_clicked_handler 		(GtkButton *button, 
 								 GeditSpellCheckerDialog *dlg);
-
+static void	change_button_clicked_handler 			(GtkButton *button, 
+								 GeditSpellCheckerDialog *dlg);
 
 static GtkWindowClass *parent_class = NULL;
 static guint signals [LAST_SIGNAL] = { 0 };
@@ -324,7 +327,8 @@ gedit_spell_checker_dialog_init (GeditSpellCheckerDialog *dlg)
 			  G_CALLBACK (ignore_button_clicked_handler), dlg);
 	g_signal_connect (G_OBJECT (dlg->ignore_all_button), "clicked",
 			  G_CALLBACK (ignore_all_button_clicked_handler), dlg);
-
+	g_signal_connect (G_OBJECT (dlg->change_button), "clicked",
+			  G_CALLBACK (change_button_clicked_handler), dlg);
 
 	g_object_unref (G_OBJECT (gui));
 }
@@ -424,7 +428,7 @@ gedit_spell_checker_dialog_set_mispelled_word (GeditSpellCheckerDialog *dlg,
 		const gchar* word, gint len)
 {
 	gchar *tmp;
-	GSList *sug;
+	GSList *sug, *list;
 	GError *error = NULL;
 	
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
@@ -457,6 +461,8 @@ gedit_spell_checker_dialog_set_mispelled_word (GeditSpellCheckerDialog *dlg,
 		update_suggestions_list_model (dlg, sug);
 
 	/* free the suggestion list */
+	list = sug;
+	
 	while (sug)
 	{
 		g_free (sug->data);
@@ -464,7 +470,8 @@ gedit_spell_checker_dialog_set_mispelled_word (GeditSpellCheckerDialog *dlg,
 		sug = g_slist_next (sug);
 	}
 
-	g_slist_free (sug);
+
+	g_slist_free (list);
 
 	gtk_widget_set_sensitive (dlg->ignore_button, TRUE);
 	gtk_widget_set_sensitive (dlg->ignore_all_button, TRUE);
@@ -601,7 +608,7 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	}
 	else
 	{
-		GSList *sug;
+		GSList *sug, *list;
 		GError *error = NULL;
 
 		sug = gedit_spell_checker_get_suggestions (dlg->spell_checker,
@@ -618,6 +625,8 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 			update_suggestions_list_model (dlg, sug);
 
 		/* free the suggestion list */
+		list = sug;
+		
 		while (sug)
 		{
 			g_free (sug->data);
@@ -625,7 +634,7 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 			sug = g_slist_next (sug);
 		}
 
-		g_slist_free (sug);
+		g_slist_free (list);
 	}
 }
 
@@ -687,16 +696,45 @@ ignore_all_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	g_print ("Ignore all: %s\n", word); 
 	if (handler_ret)
 	{
-		gboolean ret;
 		g_print ("Add word to session: %s\n", word); 
 
-		ret = gedit_spell_checker_add_word_to_session (dlg->spell_checker, 
+		gedit_spell_checker_add_word_to_session (dlg->spell_checker, 
 			word, -1, NULL);
-
-		g_return_if_fail (ret);
 	}
 
 	g_free (word);
+}
+
+static void
+change_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
+{
+	gboolean handler_ret = TRUE;
+	gchar *word;
+	gchar *change;
+	
+	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
+	g_return_if_fail (dlg->mispelled_word != NULL);
+
+	word = g_strdup (dlg->mispelled_word);
+	
+	change = g_strdup (gtk_entry_get_text (GTK_ENTRY (dlg->word_entry)));
+	g_return_if_fail (change != NULL);
+	g_return_if_fail (strlen (change) > 0);
+			
+	g_signal_emit (G_OBJECT (dlg), signals [CHANGE], 0, 
+			word, change, &handler_ret);
+
+	g_print ("Change: %s -> %s \n", word, change); 
+	if (handler_ret)
+	{
+		g_print ("Set correction.\n");
+		
+		gedit_spell_checker_set_correction (dlg->spell_checker, 
+			word, -1, change, -1, NULL);
+	}
+
+	g_free (word);
+	g_free (change);
 }
 
 void 

@@ -62,6 +62,9 @@ struct _CheckRange
 	gint start;
 	gint end;
 
+	gint mw_start; /* mispelled word start */
+	gint mw_end;   /* end */
+
 	gint current;
 };
 
@@ -98,57 +101,6 @@ get_spell_checker_from_document (GeditDocument *doc)
 	return spell;
 }
 
-static void
-set_check_range (GeditDocument *doc, gint start, gint end)
-{
-	CheckRange *range;
-	gpointer data;
-	GtkTextIter start_iter;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	g_return_if_fail (doc != NULL);
-	g_return_if_fail (start >= 0);
-	g_return_if_fail (start < gedit_document_get_char_count (doc));
-	g_return_if_fail ((end >= start) || (end < 0));
-
-	data = g_object_get_qdata (G_OBJECT (doc), check_range_id);
-
-	if (data != NULL)
-		g_free (data);
-
-	if (end < 0)
-		end = gedit_document_get_char_count (doc) - 1;
-
-	g_return_if_fail (end >= start);
-
-	range = g_new0 (CheckRange, 1);
-
-	range->start = start;
-	range->end = end;
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
-			&start_iter, start);
-
-	if (!gtk_text_iter_starts_word (&start_iter) && !gtk_text_iter_inside_word (&start_iter))
-	{	
-		/* if we're neither at the beginning nor inside a word,
-		 * me must be in some spaces.
-		 * skip forward to the beginning of the next word. */
-		if (gtk_text_iter_forward_word_end (&start_iter))
-			gtk_text_iter_backward_word_start (&start_iter);	
-	}
-
-	range->current = MIN (gtk_text_iter_get_offset (&start_iter), range->end);
-
-	g_object_set_qdata_full (G_OBJECT (doc), 
-				 check_range_id, 
-				 range, 
-				 (GDestroyNotify)g_free);
-
-	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", start, end, start);
-}
-
 static CheckRange*
 get_check_range (GeditDocument *doc)
 {
@@ -166,12 +118,12 @@ get_check_range (GeditDocument *doc)
 	return range;
 }
 
-
 static void
 update_current (GeditDocument *doc, gint current)
 {
 	CheckRange *range;
-	
+	GtkTextIter iter;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (doc != NULL);
@@ -182,18 +134,110 @@ update_current (GeditDocument *doc, gint current)
 
 	range->current = current;
 
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
+			&iter, current);
+
+	if (!gtk_text_iter_inside_word (&iter))
+	{	
+		/* if we're not inside a word,
+		 * we must be in some spaces.
+		 * skip forward to the beginning of the next word. */
+		if (!gtk_text_iter_is_end (&iter))
+		{
+			gtk_text_iter_forward_word_end (&iter);
+			gtk_text_iter_backward_word_start (&iter);	
+		}
+	}
+	else
+	{
+		if (!gtk_text_iter_starts_word (&iter))
+			gtk_text_iter_backward_word_start (&iter);	
+	}
+
+	range->current = MIN (gtk_text_iter_get_offset (&iter), range->end);
+
 	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", range->start, range->end, 
 		range->current);
 }
 
 static void
+set_check_range (GeditDocument *doc, gint start, gint end)
+{
+	CheckRange *range;
+	gpointer data;
+	GtkTextIter iter;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (start >= 0);
+	g_return_if_fail (start < gedit_document_get_char_count (doc));
+	g_return_if_fail ((end >= start) || (end < 0));
+
+	data = g_object_get_qdata (G_OBJECT (doc), check_range_id);
+
+	if (data != NULL)
+		g_free (data);
+
+	if (end < 0)
+		end = gedit_document_get_char_count (doc);
+
+	g_return_if_fail (end >= start);
+
+	range = g_new0 (CheckRange, 1);
+
+	range->start = start;
+
+	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
+			&iter, end);
+
+	if (!gtk_text_iter_inside_word (&iter))
+	{	
+		/* if we're neither inside a word,
+		 * we must be in some spaces.
+		 * skip backward to the end of the previous word. */
+		if (!gtk_text_iter_is_end (&iter))
+		{
+			gtk_text_iter_backward_word_start (&iter);	
+			gtk_text_iter_forward_word_end (&iter);
+		}
+	}
+	else
+	{
+		if (!gtk_text_iter_ends_word (&iter))
+			gtk_text_iter_forward_word_end (&iter);
+	}
+
+	range->end = gtk_text_iter_get_offset (&iter);
+			
+	range->mw_start = -1;
+	range->mw_end = -1;
+	
+	g_object_set_qdata_full (G_OBJECT (doc), 
+				 check_range_id, 
+				 range, 
+				 (GDestroyNotify)g_free);
+
+	update_current (doc, start);
+
+	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", start, end, range->current);
+}
+
+static void
 delete_check_range (GeditDocument *doc)
 {
+	CheckRange *range;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (doc != NULL);
 
-	g_object_steal_qdata (G_OBJECT (doc), check_range_id);
+	range = get_check_range (doc);
+	g_free (range);
+
+	g_object_set_qdata (G_OBJECT (doc), 
+			    check_range_id, 
+			    NULL);
 }
 
 static gboolean
@@ -216,14 +260,22 @@ get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
 			&current_iter, range->current);
 
+	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", range->start, range->end, 
+		range->current);
+
 	end_iter = current_iter;
 
-	if (gtk_text_iter_inside_word (&end_iter))
-		if (!gtk_text_iter_forward_word_end (&end_iter))
-			return FALSE;
+	if (!gtk_text_iter_is_end (&end_iter))
+	{
+		gedit_debug (DEBUG_PLUGINS, "Current is not end");
+		
+		gtk_text_iter_forward_word_end (&end_iter);
+	}
 
 	*start = range->current;
 	*end = MIN (gtk_text_iter_get_offset (&end_iter), range->end);
+
+	gedit_debug (DEBUG_PLUGINS, "Current word extends [%d, %d]", *start, *end);
 
 	return (*start < *end);
 }
@@ -234,6 +286,7 @@ goto_next_word (GeditDocument *doc)
 	CheckRange *range;
 	
 	GtkTextIter current_iter;
+	gint current;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -242,18 +295,24 @@ goto_next_word (GeditDocument *doc)
 	range = get_check_range (doc);
 	g_return_val_if_fail (range != NULL, FALSE);
 
+	if (range->current >= range->end)
+		return FALSE;
+
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
 			&current_iter, range->current);
-
-	if (!gtk_text_iter_forward_word_ends (&current_iter, 2))
-		return FALSE;
 	
-	if (!gtk_text_iter_backward_word_start (&current_iter))
+	gtk_text_iter_forward_word_ends (&current_iter, 2);
+	
+	gtk_text_iter_backward_word_start (&current_iter);
+
+	current = gtk_text_iter_get_offset (&current_iter);
+	if ((range->current < current) && (current < range->end))		
+	{
+		update_current (doc, gtk_text_iter_get_offset (&current_iter));
+		return TRUE;
+	}
+	else
 		return FALSE;
-
-	update_current (doc, gtk_text_iter_get_offset (&current_iter));
-
-	return TRUE;
 }
 
 static gchar*
@@ -282,13 +341,15 @@ get_next_mispelled_word (GeditDocument *doc)
 
 	while (gedit_spell_checker_check_word (spell, word, -1, NULL))
 	{
+		gboolean res;
+		
 		g_free (word);
 
 		if (!goto_next_word (doc))
 			return NULL;
 
-		if (!get_current_word_extents (doc, &start, &end))
-			return NULL;
+		res = get_current_word_extents (doc, &start, &end);
+		g_return_val_if_fail (res, NULL);
 
 		word = gedit_document_get_chars (doc, start, end);
 		g_return_val_if_fail (word != NULL, NULL);
@@ -297,12 +358,20 @@ get_next_mispelled_word (GeditDocument *doc)
 	}
 
 	if (!goto_next_word (doc))
-		range->current = gedit_document_get_char_count (doc) - 1;
+		range->current = gedit_document_get_char_count (doc);
 
 	if (word != NULL)
 	{
+		range->mw_start = start;
+		range->mw_end = end;
+
 		gedit_document_set_selection (doc, start, end);
 		gedit_view_scroll_to_cursor (gedit_get_active_view ());
+	}
+	else	
+	{
+		range->mw_start = -1;
+		range->mw_end = -1;
 	}
 
 	return word;
@@ -329,12 +398,52 @@ ignore_cb (GeditSpellCheckerDialog *dlg, const gchar *w, GeditDocument *doc)
 
 	gedit_spell_checker_dialog_set_mispelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
 			word, -1);
-
 	g_free (word);
 
 	return TRUE;
 }
 
+static gboolean
+change_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *change, GeditDocument *doc)
+{
+	CheckRange *range;
+	gchar *w = NULL;
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (word != NULL, FALSE);
+	g_return_val_if_fail (change != NULL, FALSE);
+
+	range = get_check_range (doc);
+	g_return_val_if_fail (range != NULL, FALSE);
+
+	w = gedit_document_get_chars (doc, range->mw_start, range->mw_end);
+	g_return_val_if_fail (w != NULL, FALSE);
+
+	if (strcmp (w, word) != 0)
+	{
+		g_free (w);
+		return FALSE;
+	}
+
+	g_free (w);
+       	
+	gedit_document_begin_user_action (doc);
+
+	gedit_document_delete_text (doc, range->mw_start, range->mw_end);
+	gedit_document_insert_text (doc, range->mw_start, change, -1);
+
+	gedit_document_end_user_action (doc);
+
+	update_current (doc, range->mw_start + g_utf8_strlen (change, -1) - 1);
+
+	/* go to next mispelled word */
+	ignore_cb (dlg, word, doc);
+
+	return TRUE;
+}
+	
 static void
 show_empty_document_dialog ()
 {
@@ -386,6 +495,12 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
+	if (spell_checker_id == 0)
+		spell_checker_id = g_quark_from_static_string ("GeditSpellCheckerID");
+	
+	if (check_range_id == 0)
+		check_range_id = g_quark_from_static_string ("CheckRangeID");
+
 	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
@@ -423,6 +538,8 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 
 	g_signal_connect (G_OBJECT (dlg), "ignore", G_CALLBACK (ignore_cb), doc);
 	g_signal_connect (G_OBJECT (dlg), "ignore_all", G_CALLBACK (ignore_cb), doc);
+
+	g_signal_connect (G_OBJECT (dlg), "change", G_CALLBACK (change_cb), doc);
 
 	gedit_spell_checker_dialog_set_mispelled_word (GEDIT_SPELL_CHECKER_DIALOG (dlg),
 			word, -1);
@@ -506,10 +623,7 @@ init (GeditPlugin *pd)
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	
 	pd->private_data = NULL;
-
-	spell_checker_id = g_quark_from_static_string ("GeditSpellCheckerID");
-	check_range_id = g_quark_from_static_string ("CheckRangeID");
-
+	
 	return PLUGIN_OK;
 }
 

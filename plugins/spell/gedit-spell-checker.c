@@ -91,7 +91,7 @@ static GeditLanguage known_languages [KNOWN_LANGUAGES + 1] =
 	{"pt_pt", N_("Portuguese (Portugal)")},
 	{"pt_br", N_("Portuguese (Brazilian)")},
 	{"ru", N_("Russian")},
-	{"sv", N_("Swedish")},
+{"sv", N_("Swedish")},
 	{NULL, NULL}
 };
 
@@ -281,7 +281,7 @@ set_language_internal (GeditSpellChecker *spell, const GeditLanguage *language, 
 		}
 	}
 	else
-		lang = g_strdup (language->abrev);
+		lang = language->abrev;
 
 	config = new_pspell_config ();
 	g_return_val_if_fail (config != NULL, FALSE);
