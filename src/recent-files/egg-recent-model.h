@@ -6,13 +6,20 @@
 
 G_BEGIN_DECLS
 
-#define EGG_RECENT_MODEL(obj)		G_TYPE_CHECK_INSTANCE_CAST (obj, egg_recent_model_get_type (), EggRecentModel)
-#define EGG_RECENT_MODEL_CLASS(klass) 	G_TYPE_CHECK_CLASS_CAST (klass, egg_recent_model_get_type (), EggRecentModelClass)
-#define EGG_IS_RECENT_MODEL(obj)		G_TYPE_CHECK_INSTANCE_TYPE (obj, egg_recent_model_get_type ())
+#define EGG_TYPE_RECENT_MODEL		(egg_recent_model_get_type ())
+#define EGG_RECENT_MODEL(obj)		G_TYPE_CHECK_INSTANCE_CAST (obj, EGG_TYPE_RECENT_MODEL, EggRecentModel)
+#define EGG_RECENT_MODEL_CLASS(klass) 	G_TYPE_CHECK_CLASS_CAST (klass, EGG_TYPE_RECENT_MODEL, EggRecentModelClass)
+#define EGG_IS_RECENT_MODEL(obj)	G_TYPE_CHECK_INSTANCE_TYPE (obj, egg_recent_model_get_type ())
 
-typedef struct _EggRecentModel EggRecentModel;
+typedef struct _EggRecentModel        EggRecentModel;
+typedef struct _EggRecentModelPrivate EggRecentModelPrivate;
+typedef struct _EggRecentModelClass   EggRecentModelClass;
 
-typedef struct _EggRecentModelClass EggRecentModelClass;
+struct _EggRecentModel {
+	GObject                parent_instance;
+
+	EggRecentModelPrivate *priv;
+};
 
 struct _EggRecentModelClass {
 	GObjectClass parent_class;
@@ -27,8 +34,8 @@ typedef enum {
 } EggRecentModelSort;
 
 
-/* group names for a couple of things */
-#define EGG_RECENT_MODEL_GROUP_LAUNCHERS "Launchers"
+/* Standard group names */
+#define EGG_RECENT_GROUP_LAUNCHERS "Launchers"
 
 
 GType    egg_recent_model_get_type     (void);

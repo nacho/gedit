@@ -1536,7 +1536,7 @@ gedit_prefs_manager_save_window_size_and_state (BonoboWindow *window)
 
 
 /* Encodings */
-GSList const *
+GSList *
 gedit_prefs_manager_get_encodings (void)
 {
 	GSList *strings;

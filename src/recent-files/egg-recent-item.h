@@ -51,9 +51,11 @@ gchar * egg_recent_item_get_mime_type (const EggRecentItem *item);
 void egg_recent_item_set_timestamp (EggRecentItem *item, time_t timestamp);
 time_t egg_recent_item_get_timestamp (const EggRecentItem *item);
 
+G_CONST_RETURN gchar *egg_recent_item_peek_uri (const EggRecentItem *item);
+
 
 /* groups */
-const GList *  egg_recent_item_get_groups (const EggRecentItem *item);
+G_CONST_RETURN GList *  egg_recent_item_get_groups (const EggRecentItem *item);
 
 gboolean       egg_recent_item_in_group (const EggRecentItem *item,
 					   const gchar *group_name);

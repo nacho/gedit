@@ -196,7 +196,6 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 			GdkPixbuf *pixbuf;
 			gchar *mime_type;
 			gchar *uri;
-			gchar *pixbuf_xml;
 
 			mime_type = egg_recent_item_get_mime_type (item);
 			uri = egg_recent_item_get_uri (item);
@@ -206,10 +205,14 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 
 			if (pixbuf != NULL) {
+				gchar *pixbuf_xml;
+
 				/* Riiiiight.... */
 				pixbuf_xml = bonobo_ui_util_pixbuf_to_xml (pixbuf);
 				
 				cmd = g_strdup_printf ("<cmd name=\"%s\" pixtype=\"pixbuf\" pixname=\"%s\"/>", verb_name, pixbuf_xml);
+
+				g_free (pixbuf_xml);
 			} else {
 				cmd = g_strdup_printf ("<cmd name=\"%s\"/> ",
 					       	       verb_name);
@@ -217,7 +220,6 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 			g_free (mime_type);
 			g_free (uri);
-			g_free (pixbuf_xml);
 		} else
 			cmd = g_strdup_printf ("<cmd name=\"%s\"/> ",
 					       verb_name);

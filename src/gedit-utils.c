@@ -1633,30 +1633,26 @@ gchar *
 gedit_utils_convert_to_utf8 (const gchar *content, gsize len,
 			     gchar **encoding_used)
 {
-	const GSList *tmp_encodings = NULL;
 	GSList *encodings = NULL;
-	const GeditEncoding *locale_encoding;
+	GSList *start;
 	const gchar *locale_charset;
 
 	if (g_utf8_validate (content, len, NULL))
 		return g_strdup (content);
 
-	tmp_encodings = gedit_prefs_manager_get_encodings ();
+	encodings = gedit_prefs_manager_get_encodings ();
 
-	g_get_charset (&locale_charset);
+	if (g_get_charset (&locale_charset) == FALSE) {
+		const GeditEncoding *locale_encoding;
 
-	locale_encoding = gedit_encoding_get_from_charset (locale_charset);
-
-	if (strcmp (locale_charset, "UTF-8") != 0) {
-		/* add their locale to one of the encodings to try */
+		/* not using a UTF-8 locale, so try converting
+		 * from that first */
+		locale_encoding = gedit_encoding_get_from_charset (locale_charset);
 		encodings = g_slist_prepend (encodings,
 					(gpointer)locale_encoding);
-		encodings = g_slist_concat (encodings,
-					(GSList *)tmp_encodings);
-	} else {
-		/* converting from UTF-8 to UTF-8 doesn't make sense */
-		encodings = g_slist_concat (NULL, (GSList *)tmp_encodings);
 	}
+
+	start = encodings;
 
 	while (encodings != NULL) {
 		GeditEncoding *enc;
@@ -1679,6 +1675,8 @@ gedit_utils_convert_to_utf8 (const gchar *content, gsize len,
 
 		encodings = encodings->next;
 	}
+
+	g_slist_free (start);
 	
 	return NULL;
 }

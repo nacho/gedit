@@ -25,6 +25,7 @@
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include "egg-recent-item.h"
+#include "egg-recent-vfs-utils.h"
 
 
 
@@ -186,7 +187,7 @@ egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 
 	/* if G_BROKEN_FILENAMES is not set, this should succede */
 	if (g_utf8_validate (uri, -1, NULL)) {
-		item->uri = gnome_vfs_make_uri_from_input (uri);
+		item->uri = egg_recent_vfs_make_uri_from_input (uri);
 	} else {
 		utf8_uri = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
 
@@ -196,7 +197,7 @@ egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 		}
 
 		if (g_utf8_validate (utf8_uri, -1, NULL)) {
-			item->uri = gnome_vfs_make_uri_from_input (utf8_uri);
+			item->uri = egg_recent_vfs_make_uri_from_input (utf8_uri);
 		} else {
 			g_free (utf8_uri);
 			return FALSE;
@@ -214,6 +215,12 @@ egg_recent_item_get_uri (const EggRecentItem *item)
 	return g_strdup (item->uri);
 }
 
+G_CONST_RETURN gchar * 
+egg_recent_item_peek_uri (const EggRecentItem *item)
+{
+	return item->uri;
+}
+
 gchar * 
 egg_recent_item_get_uri_utf8 (const EggRecentItem *item)
 {
@@ -226,7 +233,7 @@ egg_recent_item_get_uri_utf8 (const EggRecentItem *item)
 gchar *
 egg_recent_item_get_uri_for_display (const EggRecentItem *item)
 {
-	return gnome_vfs_format_uri_for_display (item->uri);
+	return egg_recent_vfs_format_uri_for_display (item->uri);
 }
 
 void 
@@ -244,6 +251,9 @@ egg_recent_item_get_mime_type (const EggRecentItem *item)
 void 
 egg_recent_item_set_timestamp (EggRecentItem *item, time_t timestamp)
 {
+	if (timestamp == (time_t) -1)
+		time (&timestamp);
+
 	item->timestamp = timestamp;
 }
 
@@ -253,7 +263,7 @@ egg_recent_item_get_timestamp (const EggRecentItem *item)
 	return item->timestamp;
 }
 
-const GList *
+G_CONST_RETURN GList *
 egg_recent_item_get_groups (const EggRecentItem *item)
 {
 	return item->groups;
