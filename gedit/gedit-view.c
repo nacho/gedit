@@ -660,6 +660,8 @@ gedit_view_update_cursor_position_statusbar (GtkTextBuffer *buffer, GeditView* v
 		msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 	*/
 
+	/* Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
+	use abbreviations if possible to avoid space problems. */
 	msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
 	
 	gtk_statusbar_push (GTK_STATUSBAR (view->priv->cursor_position_statusbar), 
