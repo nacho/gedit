@@ -1,5 +1,11 @@
 2000-06-22  Chema Celorio  <chema@celorio.com>
 
+	* view.c (gedit_view_get_position): fix a bug in which the text
+	position will not get updated in the text widget when the position
+	is changed with the mouse.
+
+2000-06-22  Chema Celorio  <chema@celorio.com>
+
 	* plugin.c (gedit_plugin_program_location_get): clean g_prints
 	* dialogs/dialog-plugins.c: ditto
 

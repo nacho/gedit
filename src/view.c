@@ -762,8 +762,19 @@ gedit_view_get_position (View *view)
 	g_return_val_if_fail (view!=NULL, 0);
 
 	if (gedit_view_get_selection (view, &start_pos, &end_pos))
+	{
+		g_print ("returning endpos %i\n", end_pos);
 		return end_pos;
+	}
+
+	gtk_text_freeze (GTK_TEXT(view->text));
+	gtk_text_thaw   (GTK_TEXT(view->text));
+
+#if 1 /* Fix a bug */		 
+	return gtk_editable_get_position (GTK_EDITABLE(view->text));
+#else
 	return gtk_text_get_point (GTK_TEXT (view->text));
+#endif
 }
 
 #if 0 /* Commented out by chema to kill warning. We should implement this */
@@ -910,14 +921,16 @@ gedit_view_update_line_indicator (void)
 {
 	static char col [32];
 
-	return;
+	
+return;
 	/*
 	*/
 	
 	/* FIXME: Disable by chema for 0.7.0 . this hack is not working correctly */
 	gedit_debug ("", DEBUG_VIEW);
 
-	sprintf (col, "Column: %d", GTK_TEXT(VIEW(gedit_view_active())->text)->cursor_pos_x/7);
+	sprintf (col, "Column: %d",
+		 GTK_TEXT(VIEW(gedit_view_active())->text)->cursor_pos_x/7);
 
 	if (settings->show_status)
 	{
@@ -930,9 +943,9 @@ static gint
 gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	gedit_debug ("", DEBUG_VIEW);
-	
-	gedit_view_update_line_indicator ();
 
+	gedit_view_update_line_indicator ();
+	
 	return FALSE;
 }
 

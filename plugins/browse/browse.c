@@ -32,17 +32,22 @@
 #include "view.h"
 #include "utils.h"
 
+#define GEDIT_PLUGIN_PROGRAM "sendmail"
+/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
+   it is used to display "you can not use the [name] plugin without this program... */
+#define GEDIT_PLUGIN_NAME  _("email")
+
 static GtkWidget *location_label;
 static GtkWidget *url_entry;
 
 static void
-gedit_plugin_browse_destroy (PluginData *pd)
+gedit_plugin_destroy (PluginData *pd)
 {
 	g_free (pd->name);
 }
 
 static void
-gedit_plugin_browse_finish (GtkWidget *widget, gpointer data)
+gedit_plugin_finish (GtkWidget *widget, gpointer data)
 {
 	gnome_dialog_close (GNOME_DIALOG(widget));
 }
@@ -53,7 +58,7 @@ gedit_plugin_browse_finish (GtkWidget *widget, gpointer data)
 */
    
 static void
-gedit_plugin_browse_execute (GtkWidget *widget, gint button, gpointer data)
+gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 {
 	int fdpipe[2];
 	gchar *url;
@@ -139,7 +144,7 @@ gedit_plugin_browse_execute (GtkWidget *widget, gint button, gpointer data)
 }
 
 static void
-gedit_plugin_browse_change_location (GtkWidget *button, gpointer userdata)
+gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 {
 	GtkWidget *dialog;
 	GtkWidget *label;
@@ -148,9 +153,8 @@ gedit_plugin_browse_change_location (GtkWidget *button, gpointer userdata)
 	gedit_debug ("start", DEBUG_PLUGINS);
 	dialog = userdata;
 
-	/* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
-	   it is used to display "you can not use the [name] plugin without this program... */
-	new_location = gedit_plugin_program_location_change ("lynx", _("browse"));
+	new_location = gedit_plugin_program_location_change (GEDIT_PLUGIN_PROGRAM,
+							     GEDIT_PLUGIN_NAME);
 
 	if ( new_location == NULL)
 	{
@@ -197,7 +201,7 @@ gedit_plugin_browse_create_dialog (void)
 
 	if (!gui)
 	{
-		g_warning ("Could not find browse.glade in %s", GEDIT_GLADEDIR "/browse.glade");
+		g_warning ("Could not find %s", GEDIT_GLADEDIR "/browse.glade");
 		return;
 	}
 
@@ -220,11 +224,11 @@ gedit_plugin_browse_create_dialog (void)
 
 	/* Connect the signals */
 	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_browse_execute), NULL);
+			    GTK_SIGNAL_FUNC (gedit_plugin_execute), NULL);
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
-			    GTK_SIGNAL_FUNC (gedit_plugin_browse_finish), NULL);
+			    GTK_SIGNAL_FUNC (gedit_plugin_finish), NULL);
 	gtk_signal_connect (GTK_OBJECT (change_button), "clicked",
-			    GTK_SIGNAL_FUNC (gedit_plugin_browse_change_location), dialog);
+			    GTK_SIGNAL_FUNC (gedit_plugin_change_location), dialog);
 
         /* Set the dialog parent and modal type */ 
 	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
@@ -239,7 +243,7 @@ gedit_plugin_browse_create_dialog (void)
 gint
 init_plugin (PluginData *pd)
 {
-	pd->destroy_plugin = gedit_plugin_browse_destroy;
+	pd->destroy_plugin = gedit_plugin_destroy;
 	pd->name = _("Browse");
 	pd->desc = _("Web browse plugin");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";

@@ -60,13 +60,14 @@
 [X] the undo and redo buttons do not get anshaded after you open a document
 [X] fix a bug when Searching & replacing text when search text is search for "abcd" in "abcdabcd".
 [X] get the info from the menus/toolbar correctly call gnome_mdi_get_menubar/toolbar_info ..
+[X] fix the problem of the dialogs poping in two diferent places. doh !
 [~] check for the existence of sendmail and of diff. If they are
     not found ask the user for the location and set it in settings->sendmail
     & settings->diff. Same thing for the browse plugin [lynx]
 	[X] email plugin 
-                 [X] fix, change and then cancel.
+                 [X] fix, "change location" and then cancel.
  	[X] browse plugin
-	[ ] diff plugin
+	[~] diff plugin
 
 
 *** Chema maybe ***
@@ -96,16 +97,9 @@
 [ ] Plugin manager, can borrow some of this code from gnumeric or gide
 [ ] Convert the rest of the plugins
 [ ] Finish libglade-ifying the dialogs and such
-[ ] Shade and unshade the undo and redo menu items and toolbar items
-apropiatelly
-[ ] Shade and unshade the file menu items apropiatelly, for example 
-a NULL filename does not have "Revert and Save" options. and when all
-docs are closed most toolbar functions do not work.
-[ ] Fix the bug in which gedit exitst when a file is modified. After
-the user hits "YES" to save the file, gedit does not exits.
 [ ] When creating a new file "gedit file_a.txt" we need to set the title
-[ ] Set view->linewrapp from settings->linewrap. We need to add horz scroll bars too
 [ ] The error reporting on the browse plugin is VERY bad, fix
+[ ] Make the browse plugin non-blocking
 
 ----------------------------------------------------------------------
   gedit 0.7.9
