@@ -147,8 +147,11 @@ is_commit_message (const char *buf)
 	if (!strncmp (buf, GEDIT_CVSCHANGELOG_START_HEADER,
 		      strlen (GEDIT_CVSCHANGELOG_START_HEADER))) {
 		list = get_changelogs (buf);
-		if (list)
+		if (list) {
+			g_list_foreach (list, (GFunc)g_free, NULL);
+			g_list_free (list);
 			return TRUE;
+		}
 	}
 	
 	return FALSE;
@@ -161,6 +164,7 @@ cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verb
 	GeditDocument *doc;
 	gchar *buf;
 	GList *list;
+	GList *tmp;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -172,12 +176,15 @@ cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verb
 
 	list = get_changelogs (buf);
 
-	while (list) {
+	tmp = list;
+	while (tmp) {
 		gedit_file_open_single_uri ((gchar *)list->data);
 
-		list = list->next;
+		tmp = tmp->next;
 	}
 
+	g_list_foreach (list, (GFunc)g_free, NULL);
+	g_list_free (list);
 }
 
 
