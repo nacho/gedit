@@ -37,7 +37,6 @@
 #include <gtk/gtktextiter.h>
 #include <atk/atk.h>
 
-#define GTK_TEXT_SEARCH_CASE_INSENSITIVE (1 << 7)
 
 void	gedit_utils_flash     (gchar *msg);
 void	gedit_utils_flash_va  (gchar *format, ...);
@@ -52,13 +51,6 @@ GtkWidget *gedit_dialog_add_button (GtkDialog *dialog,
 				    const gchar* text, 
 				    const gchar* stock_id, 
 				    gint response_id);
-
-gboolean gedit_text_iter_forward_search  (const GtkTextIter *iter,
-					  const gchar       *str,
-					  GtkTextSearchFlags flags,
-					  GtkTextIter       *match_start,
-					  GtkTextIter       *match_end,
-					  const GtkTextIter *limit);
 
 gchar *gedit_utils_str_middle_truncate (const gchar *string, 
 					guint truncate_length);

@@ -55,6 +55,8 @@
 
 #include "gedit-marshal.h"
 
+#include <gtksourceview/gtksourceiter.h>
+
 #ifdef MAXPATHLEN
 #define GEDIT_MAX_PATH_LEN  MAXPATHLEN
 #elif defined (PATH_MAX)
@@ -1820,7 +1822,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	
 	if (!case_sensitive)
 	{
-		search_flags = search_flags | GTK_TEXT_SEARCH_CASE_INSENSITIVE;
+		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
 	}
 
 	if (from_cursor)
@@ -1850,7 +1852,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 
 		while (!found)
 		{
-          		found = gedit_text_iter_forward_search (&iter, converted_str, search_flags,
+          		found = gtk_source_iter_forward_search (&iter, converted_str, search_flags,
                         	                	&match_start, &match_end,
                                 	               	NULL);	
 

@@ -1,5 +1,13 @@
 2003-06-03  Paolo Maggi <paolo.maggi@polito.it> 
 
+	* gedit-document.c (gedit_document_find ): use 
+	gtk_source_iter_forward_search
+	
+	* gedut-utils.[ch]: remove functions related to caseless searching (now
+	gedit uses the functions provided by GtkSourceView)
+		
+2003-06-03  Paolo Maggi <paolo.maggi@polito.it> 
+
 	* gedit-view.c (gedit_view_init): disables smart-home and smart-end
 	(fixes bug #113878 - Weird cursor behavior using the <HOME> key)
 	
