@@ -28,6 +28,7 @@
 #include "gE_prefs.h"
 #include "gE_window.h"
 #include "gedit-print.h"
+#include "gedit-utils.h"
 
 #define GE_DATA		1
 
@@ -83,26 +84,14 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	view->document->changed = TRUE;
 	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);
 	view->changed_id = FALSE;
-	
-	str = g_malloc (strlen (GNOME_MDI_CHILD(view->document)->name) + 2);
-	
-	sprintf (str, "*%s", GNOME_MDI_CHILD(view->document)->name);
-	/*gtk_label_set(GTK_LABEL(doc->tab_label), MOD_label);*/
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document), str);
-	
-	g_free (str);
-	
-	str = g_malloc0 (strlen (GEDIT_ID) +
-			 strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
-	sprintf (str, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name, GEDIT_ID);
-	gtk_window_set_title(GTK_WINDOW(mdi->active_window), str);
-	g_free(str);
+
+	/* Set the title */
+	gedit_set_title (view->document);
 }
 
 /* 
  * Text insertion and deletion callbacks - used for Undo/Redo (not yet implemented) and split screening
  */
-
 void
 gedit_view_list_insert (gedit_view *view, gedit_data *data)
 {
@@ -110,9 +99,6 @@ gedit_view_list_insert (gedit_view *view, gedit_data *data)
 	gchar *buffer = (guchar *)data->temp2;
 	gint position = (gint)data->temp1;
 	gint length = strlen (buffer);
-/*	gedit_view *nth_view = NULL; */
-/*	gedit_document *doc; */
-	
 	
 	if (view != GE_VIEW(mdi->active_view))
 	{
@@ -844,36 +830,34 @@ void
 gedit_view_set_read_only (gedit_view *view, gint read_only)
 {
 	gchar RO_label[255];
-/*	gchar *fname; */
 
 	view->read_only = read_only;
 	gtk_text_set_editable (GTK_TEXT (view->text), !view->read_only);
 	
-	if (read_only) {
-
-	  sprintf(RO_label, "RO - %s", GNOME_MDI_CHILD(view->document)->name);
-	  gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document), RO_label);
-
-	} else {
-	 
-	 if (view->document->filename)
-		 gnome_mdi_child_set_name (GNOME_MDI_CHILD(view->document),
-					   g_basename(view->document->filename));
-	 else
-		 gnome_mdi_child_set_name (GNOME_MDI_CHILD(view->document),
-					   gedit_get_document_tab_name());
-
+	if (read_only)
+	{
+		sprintf (RO_label, "RO - %s", GNOME_MDI_CHILD(view->document)->name);
+		gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document), RO_label);
+	}
+	else
+	{
+		if (view->document->filename)
+			gnome_mdi_child_set_name (GNOME_MDI_CHILD(view->document),
+						  g_basename(view->document->filename));
+		else
+			gnome_mdi_child_set_name (GNOME_MDI_CHILD(view->document),
+						  gedit_get_document_tab_name());
 	}
 	 
 	if (view->split_screen)
-		gtk_text_set_editable (GTK_TEXT (view->split_screen), !view->read_only);
+		gtk_text_set_editable (GTK_TEXT (view->split_screen),
+				       !view->read_only);
 
 }
 
 void
 gedit_view_set_font (gedit_view *view, gchar *font)
 {
-
 	GtkStyle *style;
 	
 	style = gtk_style_copy(gtk_widget_get_style (
@@ -887,13 +871,10 @@ gedit_view_set_font (gedit_view *view, gchar *font)
   
   	gtk_widget_push_style (style);    
 
-  	gtk_widget_set_style(GTK_WIDGET((view)->split_screen), style);
-
-  	gtk_widget_set_style(GTK_WIDGET((view)->text), style);
-
+  	gtk_widget_set_style (GTK_WIDGET((view)->split_screen), style);
+  	gtk_widget_set_style (GTK_WIDGET((view)->text), style);
 
 	gtk_widget_pop_style ();
-
 }
 
 void

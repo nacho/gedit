@@ -178,7 +178,7 @@ gedit_document_destroy (GtkObject *obj)
 static void
 gedit_document_class_init (gedit_document_class *class)
 {
-	GtkObjectClass 		*object_class;
+	GtkObjectClass  	*object_class;
 	GnomeMDIChildClass	*child_class;
 	
 	object_class = (GtkObjectClass*)class;
@@ -203,7 +203,6 @@ void
 gedit_document_init (gedit_document *doc)
 {
 	/* FIXME: This prolly needs work.. */
-/*	gint *ptr; */
 	
 	doc->filename = NULL;
 	doc->changed = FALSE;
@@ -240,7 +239,6 @@ gedit_document *
 gedit_document_new (void)
 {
 	gedit_document *doc;
-/*	int i; */
 
 	/* FIXME: Blarg!! */
 	if ((doc = gtk_type_new (gedit_document_get_type ())))
@@ -251,8 +249,8 @@ gedit_document_new (void)
 		doc->buf = g_string_sized_new (64);
 		return doc;
 	}
-	
-	g_print ("Eeek.. bork!\n");
+
+	g_assert_not_reached ();
 	gtk_object_destroy (GTK_OBJECT(doc));
 	
 	return NULL;
@@ -286,29 +284,28 @@ gedit_document_new_with_file (gchar *filename)
 {
 	gedit_document *doc;
 	struct stat stats;
-/*	gchar *tmp_buf; */
-/*	FILE *fp; */
 
 	if (!stat(filename, &stats) && S_ISREG(stats.st_mode))
 	{
-	  if ((doc = gtk_type_new (gedit_document_get_type ())))
-	  {
-	    if (!gedit_file_open (doc, filename))
-	    {
-	    	/*g_free (filename);*/
-	    	return doc;
-	    }
-	  }
-	  g_print ("Eeek.. bork!\n");
-	  gtk_object_destroy (GTK_OBJECT(doc));
+		if ((doc = gtk_type_new (gedit_document_get_type ())))
+		{
+			if (!gedit_file_open (doc, filename))
+			{
+				/*g_free (filename);*/
+				return doc;
+			}
+		}
+
+		g_assert_not_reached ();
+		gtk_object_destroy (GTK_OBJECT(doc));
 	}
+
 	return NULL;
 }
 
 gedit_document *
 gedit_document_current (void)
 {
-/*	gint cur; */
 	gedit_document *current_document = NULL;
 
 	if (mdi->active_child)
@@ -340,24 +337,19 @@ gedit_add_view (GtkWidget *w, gpointer data)
 {
 	GnomeMDIChild *child;
 	gedit_view *view;
-/*	gedit_document *doc = GE_DOCUMENT (data); */
-/*	gint v; */
-/*	gchar *buf; */
-/*	GtkText *text; */
 
-	if (mdi->active_view) {
-	
-	  view = GE_VIEW (mdi->active_view);
-	  g_print ("contents: %d\n",
-		    GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
+	if (mdi->active_view)
+	{
+		view = GE_VIEW (mdi->active_view);
+		g_print ("contents: %d\n",
+			 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
 	   
-	  /* sync the buffer before adding the view */
-	  	  gedit_view_buffer_sync (view);
+		/* sync the buffer before adding the view */
+		gedit_view_buffer_sync (view);
 	   
-	  child = gnome_mdi_get_child_from_view (mdi->active_view);
+		child = gnome_mdi_get_child_from_view (mdi->active_view);
 	   
-  
-	  gnome_mdi_add_view (mdi, child);
+		gnome_mdi_add_view (mdi, child);
 	}
 }
 
@@ -367,7 +359,7 @@ gedit_remove_view (GtkWidget *w, gpointer data)
 	gedit_document *doc = GE_DOCUMENT (data);
 	
 	if (mdi->active_view == NULL)
-	  return;
+		return;
 
 	/* First, we remove the view from the document's list */
 	doc->views = g_list_remove (doc->views, GE_VIEW (mdi->active_view));
@@ -385,47 +377,42 @@ remove_doc_cb (GnomeMDI *mdi, gedit_document *doc)
 	int ret;
 	char *fname, *msg;
 	gedit_data *data = g_malloc (sizeof(gedit_data));
-/*	int *ptr; */
 
 	fname = GNOME_MDI_CHILD (doc)->name;
-	msg =   (char *)g_malloc(strlen(fname) + 52);
-	sprintf(msg, _(" '%s' has been modified. Do you wish to save it?"), fname);
+/*	msg = (char *)g_malloc(strlen(fname) + 52);
+	sprintf (msg, _(" '%s' has been modified. Do you wish to save it?"), fname);
+*/
 	
-	if (mdi->active_view) {
+	msg = g_strdup_printf (_(" '%s' has been modified.  Do you wish to save it?"), fname);
 	
-	  if (doc->changed) {
-	  
-	    msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
-	    							msg,
-	    							GNOME_MESSAGE_BOX_QUESTION,
-	    							GNOME_STOCK_BUTTON_YES,
-	    							GNOME_STOCK_BUTTON_NO,
-	    							GNOME_STOCK_BUTTON_CANCEL,
-	    							NULL));
+	if (mdi->active_view)
+	{
+		if (doc->changed)
+		{
+			msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
+				msg,
+				GNOME_MESSAGE_BOX_QUESTION,
+				GNOME_STOCK_BUTTON_YES,
+				GNOME_STOCK_BUTTON_NO,
+				GNOME_STOCK_BUTTON_CANCEL,
+				NULL));
 	    							
-	    gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
-	    ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+			gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
+			ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
 	    	    
-	    switch (ret) {
-	    
-	    case 0:
-	    		file_save_cb (NULL, data);
-	    		g_print("blargh\n");
-	    
-	    case 1:
-	    		return TRUE;
-	    
-	    default:
-	    		return FALSE;
-	    		
-	    }
-
-          }
-          
+			switch (ret)
+			{
+			case 0:
+				file_save_cb (NULL, data);
+			case 1:
+				return TRUE;
+			default:
+				return FALSE;
+			}
+		}
         }
 	
 	return TRUE;
-	
 }
 
 void
@@ -481,7 +468,9 @@ add_child_cb (GnomeMDI *mdi, gedit_document *doc)
 	return TRUE;
 }
 
-#if 0 /* These are defined but not used */
+
+/* These are defined but not used */
+#if 0 
 static gint gedit_document_signals [LAST_SIGNAL];
 
 static void

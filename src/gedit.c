@@ -176,8 +176,10 @@ main (int argc, char **argv)
 	gtk_signal_connect (GTK_OBJECT(mdi), "destroy",
 			    GTK_SIGNAL_FUNC (file_quit_cb), NULL);
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
-	gtk_signal_connect(GTK_OBJECT(mdi), "child_changed", GTK_SIGNAL_FUNC(child_switch), NULL);
-        gtk_signal_connect(GTK_OBJECT(mdi), "app_created", GTK_SIGNAL_FUNC(gedit_window_new), NULL);
+	gtk_signal_connect(GTK_OBJECT(mdi), "child_changed",
+			   GTK_SIGNAL_FUNC(child_switch), NULL);
+        gtk_signal_connect(GTK_OBJECT(mdi), "app_created",
+			   GTK_SIGNAL_FUNC(gedit_window_new), NULL);
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);*/
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);*/
 	gedit_get_settings();

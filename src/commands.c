@@ -396,46 +396,37 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 	
 }
 
-
-void file_save_cb(GtkWidget *widget, gpointer cbdata)
+void
+file_save_cb (GtkWidget *widget, gpointer cbdata)
 {
-
 	gchar *fname;
 	gedit_document *doc;
 	gedit_view *view;
 	gchar *title;
 
-	if (gedit_document_current()) {
-	
-	  doc = gedit_document_current();
-	  view = GE_VIEW (mdi->active_view);
+	if (gedit_document_current())
+	{
+		doc = gedit_document_current();
+		view = GE_VIEW (mdi->active_view);
 	    
-	  if (doc->changed) {
-	  
- 	    fname = g_strdup (doc->filename);
+		if (doc->changed)
+		{
+			fname = g_strdup (doc->filename);
 
- 	    if (fname == NULL) {
- 	    
-		title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
-		file_save_as_cb(widget, title);
-	    	g_free (title);
-	    } else
-	      if ((gedit_file_save(doc, doc->filename)) != 0) {
-	      
-		gnome_app_flash (mdi->active_window, _("Read only file!"));
-		file_save_as_cb(widget, NULL);
-       	      
-       	      }
-          
-	    g_free (fname);
-
-            }
-            
-          }            
-        
-        
-
-
+			if (fname == NULL)
+			{
+				title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
+				file_save_as_cb (widget, title);
+				g_free (title);
+			}
+			else if ((gedit_file_save(doc, doc->filename)) != 0)
+			{
+					gnome_app_flash (mdi->active_window, _("Read only file!"));
+					file_save_as_cb(widget, NULL);
+			}
+			g_free (fname);
+		}
+	}            
 }
 
 /*
@@ -444,9 +435,8 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
  * saves all open and changed files
  */
 void 
-file_save_all_cb(GtkWidget *widget, gpointer cbdata)
+file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-
 	int i;
 	gchar *fname, *title;
 	gedit_document *doc;

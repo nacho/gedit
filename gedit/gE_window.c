@@ -32,6 +32,7 @@
 #include "gedit-menus.h"
 #include "gE_prefs.h"
 #include "gedit-search.h"
+#include "gedit-utils.h"
 #include "gE_plugin.h"
 #include "../pixmaps/gE_icon.xpm"
 
@@ -235,21 +236,15 @@ gedit_window_set_status_bar (gint show_status)
 */
 }
 
+
 void
 child_switch (GnomeMDI *mdi, gedit_document *doc)
 {
-	gchar *title;
-
 	if (gedit_document_current())
 	{
-		gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
-		title = g_malloc0 (strlen (GEDIT_ID) +
-				   strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
-		sprintf (title, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name,
-			 GEDIT_ID);
-	  
-		gtk_window_set_title (GTK_WINDOW(mdi->active_window), title);
-		g_free (title);
+		gtk_widget_grab_focus (GE_VIEW(mdi->active_view)->text);
+
+		gedit_set_title (gedit_document_current());
 	}
 }
 

@@ -166,14 +166,8 @@ gedit_file_save (gedit_document *doc, gchar *fname)
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc),
 				  g_basename (doc->filename));
 
-	/* Set the title to a plain filename & gedit version,
-         * indicating this window has no changes pending */
-	tmpstr = g_malloc0 (strlen (GEDIT_ID) +
-			    strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
-	sprintf (tmpstr, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name, GEDIT_ID);
-	gtk_window_set_title (GTK_WINDOW(mdi->active_window), tmpstr);
-	g_free(tmpstr);
-
+	/* Set the title to indicate the document is no longer modified */
+	gedit_set_title (doc);
 
 	if (!view->changed_id)
 		view->changed_id = gtk_signal_connect (GTK_OBJECT(view->text), "changed",
