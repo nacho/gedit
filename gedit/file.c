@@ -76,6 +76,14 @@ static void gedit_close_all_flag_verify (guchar *function);
 gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
 
 
+static gchar * message_to_translators = N_("Hello Dear Translator :\n"
+					   "This is the unstable branch of gedit. \n"
+					   "I think you should be translating "
+					   "the gedit-1-0 branch. To get it from cvs type : \n"
+					   "cvs -z3 co -r gedit-1-0 gedit\n"
+					   "Thank you. Chema"
+
+
 typedef struct {
 	GeditDocument *doc;
 	GeditView *view;
