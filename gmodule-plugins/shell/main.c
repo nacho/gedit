@@ -74,7 +74,7 @@ start_plugin(gE_Plugin_Object * plugin, gint context)
    gtk_signal_connect(GTK_OBJECT(zterm), "child_died",
 		      child_died_cb, (gpointer) docid);
 
-   switch (zvt_term_forkpty(ZVT_TERM(zterm))) {
+   switch (zvt_term_forkpty(ZVT_TERM(zterm),1)) {
      case -1:
 	perror("ERROR: unable to fork:");
 	exit(1);
