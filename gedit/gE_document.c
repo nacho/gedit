@@ -49,7 +49,7 @@ typedef struct {
 	GtkMenuCallback cb;
 } popup_t;
 
-static void gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);
+static gint gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);
 static void gE_window_create_popupmenu(gE_data *);
 static void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);
 static gboolean gE_document_popup_cb(GtkWidget *widget,GdkEvent *ev); 
@@ -551,10 +551,11 @@ notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 	/*}*/
 }
 
-static void
+static gint
 gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 {
 	window_close_cb(widget, data);
+	return TRUE;
 }
 
 
