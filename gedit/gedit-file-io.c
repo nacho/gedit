@@ -77,7 +77,7 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 											   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
 				}
 
-				gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPEN), fname);
+				gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 
 				flash = g_strdup_printf ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 				gnome_app_flash (mdi->active_window, flash);
