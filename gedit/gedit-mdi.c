@@ -118,6 +118,7 @@ static void gedit_mdi_view_menu_item_toggled_handler (
 static void add_languages_menu (BonoboMDI *mdi, BonoboWindow *win);
 static void gedit_mdi_update_languages_menu (BonoboMDI *mdi);
 
+static void gedit_mdi_update_encoding_status_bar (BonoboMDI *mdi);
 
 static GQuark window_prefs_id = 0;
 
@@ -384,6 +385,7 @@ static void
 gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 {
 	GtkWidget *widget;
+
 	BonoboControl *control;
 	BonoboUIComponent *ui_component;
 	EggRecentView *view;
@@ -408,6 +410,24 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			  G_CALLBACK (gedit_mdi_drag_data_received_handler), 
 			  NULL);
 	
+	/* Add encoding status bar */
+	widget = gtk_statusbar_new ();
+	control = bonobo_control_new (widget);
+	
+	gtk_widget_set_size_request (widget, 180, 10);
+	gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (widget), FALSE);
+
+	bonobo_ui_component_object_set (ui_component,
+		       			"/status/Encoding",
+					BONOBO_OBJREF (control),
+					NULL);
+
+	gtk_widget_show (widget);
+
+	bonobo_object_unref (BONOBO_OBJECT (control));
+
+	g_object_set_data (G_OBJECT (win), "Encoding", widget);
+
 	/* Add cursor position status bar */
 	widget = gtk_statusbar_new ();
 	control = bonobo_control_new (widget);
@@ -832,6 +852,7 @@ gedit_mdi_child_state_changed_handler (GeditMDIChild *child)
 	gedit_mdi_set_active_window_title (BONOBO_MDI (gedit_mdi));
 	gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
 	gedit_mdi_update_languages_menu (BONOBO_MDI (gedit_mdi));
+	gedit_mdi_update_encoding_status_bar (BONOBO_MDI (gedit_mdi));
 }
 
 static void 
@@ -1030,6 +1051,48 @@ gedit_mdi_remove_view_handler (BonoboMDI *mdi,  GtkWidget *view)
 	return TRUE;
 }
 
+static void 
+gedit_mdi_update_encoding_status_bar (BonoboMDI *mdi)
+{
+	BonoboMDIChild* active_child = NULL;
+	GeditDocument* doc = NULL;
+	const GeditEncoding* enc;
+	GtkWidget *status;
+	gchar *msg;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	active_child = bonobo_mdi_get_active_child (mdi);
+	if (active_child == NULL)
+		return;
+
+	doc = GEDIT_MDI_CHILD (active_child)->document;
+	g_return_if_fail (doc != NULL);
+
+	enc = gedit_document_get_encoding (doc);
+
+	status = g_object_get_data (G_OBJECT (bonobo_mdi_get_active_window (mdi)), "Encoding");	
+	g_return_if_fail (status != NULL);
+
+	/* clear any previous message, underflow is allowed */
+	gtk_statusbar_pop (GTK_STATUSBAR (status), 0); 
+
+	if (enc == NULL)
+		msg = g_strdup (_("  Unicode (UTF-8)"));	
+	else
+	{
+		gchar *e = gedit_encoding_to_string (enc);
+
+		msg = g_strdup_printf (_("  %s"), e);
+
+		g_free (e);
+	}
+
+	gtk_statusbar_push (GTK_STATUSBAR (status), 0, msg);
+
+      	g_free (msg);
+}
+
 void 
 gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 {
@@ -1082,6 +1145,7 @@ void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old_child)
 		
 	gedit_mdi_set_active_window_title (mdi);	
 	gedit_mdi_update_languages_menu (mdi);
+	gedit_mdi_update_encoding_status_bar (mdi);
 }
 
 static 
@@ -1129,6 +1193,14 @@ gedit_mdi_clear_active_window_statusbar (GeditMDI *mdi)
 	win = bonobo_mdi_get_active_window (BONOBO_MDI (mdi));
 	if (win == NULL)
 		return;
+
+	status = g_object_get_data (G_OBJECT (win), "Encoding");	
+	g_return_if_fail (status != NULL);
+	g_return_if_fail (GTK_IS_STATUSBAR (status));
+
+	/* clear any previous message, underflow is allowed */
+	gtk_statusbar_pop (GTK_STATUSBAR (status), 0); 
+
 
 	status = g_object_get_data (G_OBJECT (win), "CursorPosition");	
 	g_return_if_fail (status != NULL);
@@ -1593,14 +1665,14 @@ get_verb_name_for_language (GtkSourceLanguage *lang)
 	gchar *verb_name;
 
 	if (lang == NULL)
-		return g_strdup ("/commands/Normal");
+		return g_strdup ("/commands/gedit_lang__Normal");
 
 	lang_name = gtk_source_language_get_name (lang);
 	safe_name = g_markup_escape_text (lang_name, strlen (lang_name));
 	
 	name = replace_spaces_with_underscores (safe_name);
 
-	verb_name = g_strdup_printf ("/commands/%s", name);
+	verb_name = g_strdup_printf ("/commands/gedit_lang__%s", name);
 		
 	g_free (safe_name);
 	g_free (lang_name);
@@ -1622,7 +1694,7 @@ add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
 
 	gedit_menus_add_menu_item_radio (win,
 					 "/menu/View/HighlightMode/",
-					 "Normal",
+					 "gedit_lang__Normal",
 					 "Langs",
 					 _("Normal"),
 					 _("Use Normal highlight mode"),
@@ -1690,14 +1762,17 @@ add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
 		gchar *label;
 		gchar *name;
 		gchar *tip;
+		gchar *tmp;
 
 		path = get_base_path_for_language (l->data);
 
 		lang_name = gtk_source_language_get_name (l->data);
 		safe_name = g_markup_escape_text (lang_name, strlen (lang_name));
 		label = escape_underscores (safe_name);
-		name = replace_spaces_with_underscores (safe_name);
-
+		tmp = replace_spaces_with_underscores (safe_name);
+		name = g_strdup_printf ("gedit_lang__%s", tmp);
+		g_free (tmp);
+		
 		tip = g_strdup_printf (N_("Use %s highlight mode"), safe_name);
 
 		gedit_menus_add_menu_item_radio (win,

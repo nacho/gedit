@@ -2129,3 +2129,12 @@ gedit_document_get_language (GeditDocument *doc)
 
 	return gtk_source_buffer_get_language (GTK_SOURCE_BUFFER (doc));
 }
+
+const GeditEncoding  *
+gedit_document_get_encoding (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	return gedit_encoding_get_from_charset (doc->priv->encoding);
+}
+

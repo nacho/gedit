@@ -1,5 +1,15 @@
 2003-05-20  Paolo Maggi  <paolo.maggi@polito.it>
 
+        * gedit-document.[ch] (gedit_document_get_encoding): new function
+
+        * gedit-encodings.c (gedit_encoding_get_from_charset): returns
+	NULL if charset == NULL
+	
+	* gedit-mdi.c:
+	* gedit-ui.xml: add an Encoding status bar
+	
+2003-05-20  Paolo Maggi  <paolo.maggi@polito.it>
+
 	* gedit-languages-manager.[ch]: new files
 	
 	* Makefile.am: compile new files, do not install

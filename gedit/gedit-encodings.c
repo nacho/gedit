@@ -284,6 +284,9 @@ gedit_encoding_get_from_charset (const gchar *charset)
 
 	gedit_encoding_lazy_init ();
 
+	if (charset == NULL)
+		return NULL;
+
 	i = 0; 
 	while (i < GEDIT_ENCODING_LAST)
 	{

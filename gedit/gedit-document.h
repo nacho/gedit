@@ -35,6 +35,8 @@
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
 
+#include <gedit/gedit-encodings.h>
+
 #define GEDIT_TYPE_DOCUMENT             (gedit_document_get_type ())
 #define GEDIT_DOCUMENT(obj)		(GTK_CHECK_CAST ((obj), GEDIT_TYPE_DOCUMENT, GeditDocument))
 #define GEDIT_DOCUMENT_CLASS(klass)	(GTK_CHECK_CLASS_CAST ((klass), GEDIT_TYPE_DOCUMENT, GeditDocumentClass))
@@ -180,6 +182,8 @@ void		gedit_document_set_selection 	(GeditDocument *doc,
 void 		gedit_document_set_language 	(GeditDocument *doc, 
 						 GtkSourceLanguage *lang);
 GtkSourceLanguage *gedit_document_get_language 	(GeditDocument *doc);
+
+const GeditEncoding *gedit_document_get_encoding (GeditDocument *doc);
 
 #endif /* __GEDIT_DOCUMENT_H__ */
 
