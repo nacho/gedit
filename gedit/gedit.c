@@ -152,7 +152,7 @@ main (int argc, char **argv)
 			if (g_file_exists (file_list->data))
 			{
 				doc = gedit_document_new_with_file (file_list->data);
-				if (doc->buf != NULL)
+				if (doc != NULL)
 				{
 					gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 					gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));

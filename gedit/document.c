@@ -230,6 +230,7 @@ gedit_document_new_with_file (gchar *filename)
 	gedit_debug_mess ("f:gedit_document_new_with_file\n", DEBUG_DOCUMENT);
 
 	doc = gtk_type_new (gedit_document_get_type ());
+
 	if (doc)
 	{
 		if (!gedit_file_open (doc, filename))

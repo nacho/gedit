@@ -91,11 +91,14 @@ gedit_file_open (Document *doc, gchar *fname)
 
 	if ( stats.st_size  == 0)
 	{
-		gnome_app_error (mdi->active_window, _("An error was encountered while opening the file."
-						       "\nPlease make sure the file is not beeing used by another aplication."));
+		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
+						    "\nPlease make sure the file is not beeing used by another aplication\n"
+						    "and that the file is not empty."), fname);
+		gnome_app_error (mdi->active_window, errstr);
+		g_free (errstr);
 		return 1;
 	}
-
+	
 	doc->buf_size = stats.st_size;
 
 	if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) == NULL)
