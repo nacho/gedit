@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2001-06-27 21:12+0200\n"
+"POT-Creation-Date: 2001-09-09 02:57-0500\n"
 "PO-Revision-Date: 2001-06-27 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -15,9 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/browse/browse.c:38 plugins/browse/browse.c:250
+#: plugins/browse/browse.c:250
 msgid "Browse"
 msgstr "ブラウズ"
 
@@ -88,12 +86,6 @@ msgstr "10進から8進(_O)"
 #: plugins/convert/convert.glade.h:12
 msgid " Hex to Decima_l "
 msgstr "16進から10進(_L)"
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/diff/diff.c:36
-msgid "diff"
-msgstr "比較"
 
 #: plugins/diff/diff.c:126
 msgid "The two documents you selected are the same."
@@ -202,12 +194,6 @@ msgstr "unified出力フォーマットを使う(-uオプション)(_U)"
 #: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "diffが見つかりました: "
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:22
-msgid "email"
-msgstr "電子メール"
 
 #: plugins/email/email.c:75
 #, c-format
@@ -707,19 +693,9 @@ msgstr "開きたいファイルの位置(URI)を入力して下さい:"
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:295
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "名前無し"
-
-#: src/document.c:299
-#, c-format
-msgid "%s %d*"
-msgstr "%s %d*"
 
 #: src/document.c:477
 #, c-format
@@ -844,8 +820,8 @@ msgid ""
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (1). Please report this Problem to submit@bugs."
-"gnome.org"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
 msgstr ""
 "geditはファイルを保存できませんでした:\n"
 "\n"
@@ -861,8 +837,8 @@ msgid ""
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (2). Please report this Problem to submit@bugs."
-"gnome.org"
+"Because of an unknown reason (2). Please report this Problem to "
+"submit@bugs.gnome.org"
 msgstr ""
 "geditはファイルを保存できませんでした: \n"
 "\n"
@@ -1250,17 +1226,17 @@ msgstr "印刷 ..."
 #. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:252
+#: src/recent.c:549
 msgid "_File/"
 msgstr "ファイル(_F)/"
 
 #. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:261
+#: src/recent.c:558
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: src/recent.c:283
+#: src/recent.c:580
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "最近使ったファイルを開けません: %s"
@@ -1270,8 +1246,8 @@ msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
 msgstr ""
-"他の検索操作がアクティブなときに行数をカウントできません。検索ダイアログを閉"
-"じてください。"
+"他の検索操作がアクティブなときに行数をカウントできません。検索ダイアログを閉じ"
+"てください。"
 
 #: src/search.c:410
 #, c-format
@@ -1298,9 +1274,21 @@ msgstr ""
 "現在の行番号: %i\n"
 "現在のカラム番号: %i"
 
-#: src/view.c:908
+#: src/view.c:940
 msgid "You can't remove the last view of a document."
 msgstr "ドキュメントの最後のビューは削除できません。"
+
+#~ msgid "diff"
+#~ msgstr "比較"
+
+#~ msgid "email"
+#~ msgstr "電子メール"
+
+#~ msgid "%s %d"
+#~ msgstr "%s %d"
+
+#~ msgid "%s %d*"
+#~ msgstr "%s %d*"
 
 #~ msgid "ASCII table"
 #~ msgstr "ASCIIテーブル"
@@ -1352,8 +1340,8 @@ msgstr "ドキュメントの最後のビューは削除できません。"
 #~ "This plugin displays a pop-up dialog which contains basic information on "
 #~ "current document."
 #~ msgstr ""
-#~ "このプラグインは現在のドキュメントの基本的な情報のポップアップダイアログを"
-#~ "表示します。"
+#~ "このプラグインは現在のドキュメントの基本的な情報のポップアップダイアログを表示"
+#~ "します。"
 
 #~ msgid "gedit: Document Info plugin"
 #~ msgstr "gedit: ドキュメント情報プラグイン"

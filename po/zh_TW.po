@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.6\n"
-"POT-Creation-Date: 2001-07-27 20:49+0800\n"
+"POT-Creation-Date: 2001-09-09 02:57-0500\n"
 "PO-Revision-Date: 2001-08-08 19:46+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -15,9 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 # plugins/browse/browse.c:246
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/browse/browse.c:38 plugins/browse/browse.c:250
+#: plugins/browse/browse.c:250
 msgid "Browse"
 msgstr "瀏覽"
 
@@ -88,12 +86,6 @@ msgstr "十進位到八進位(_O)"
 #: plugins/convert/convert.glade.h:12
 msgid " Hex to Decima_l "
 msgstr "十六進位到十進位(_l)"
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/diff/diff.c:36
-msgid "diff"
-msgstr "檔案差異"
 
 #: plugins/diff/diff.c:126
 msgid "The two documents you selected are the same."
@@ -201,12 +193,6 @@ msgstr "使用統一的輸出格式（-u 選項）(_u)"
 #: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "檔案差異在："
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:22
-msgid "email"
-msgstr "電子郵件"
 
 #: plugins/email/email.c:75
 #, c-format
@@ -706,19 +692,9 @@ msgstr "輸入要開啟的檔案位置或 URI："
 msgid "RO - "
 msgstr "唯讀 - "
 
-#: src/document.c:295
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "未命名"
-
-#: src/document.c:299
-#, c-format
-msgid "%s %d*"
-msgstr "%s %d*"
 
 #: src/document.c:477
 #, c-format
@@ -843,8 +819,8 @@ msgid ""
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (1). Please report this Problem to submit@bugs."
-"gnome.org"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
 msgstr ""
 "gedit 無法儲存檔案：\n"
 "\n"
@@ -859,8 +835,8 @@ msgid ""
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (2). Please report this Problem to submit@bugs."
-"gnome.org"
+"Because of an unknown reason (2). Please report this Problem to "
+"submit@bugs.gnome.org"
 msgstr ""
 "gedit 無法儲存檔案：\n"
 "\n"
@@ -1249,17 +1225,17 @@ msgstr "列印中 ..."
 #. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:252
+#: src/recent.c:549
 msgid "_File/"
 msgstr "檔案(_F)/"
 
 #. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:261
+#: src/recent.c:558
 msgid "_File"
 msgstr "檔案(_F)"
 
-#: src/recent.c:283
+#: src/recent.c:580
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "無法開啟最近開啟的檔案：%s"
@@ -1295,9 +1271,21 @@ msgstr ""
 "目前行數: %i\n"
 "目前列數: %i"
 
-#: src/view.c:908
+#: src/view.c:940
 msgid "You can't remove the last view of a document."
 msgstr "您不能移除文件最後一個檢視。"
+
+#~ msgid "diff"
+#~ msgstr "檔案差異"
+
+#~ msgid "email"
+#~ msgstr "電子郵件"
+
+#~ msgid "%s %d"
+#~ msgstr "%s %d"
+
+#~ msgid "%s %d*"
+#~ msgstr "%s %d*"
 
 #~ msgid ""
 #~ "Plugin Name: %s\n"

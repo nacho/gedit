@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.7\n"
-"POT-Creation-Date: 2001-05-28 12:35+0200\n"
+"POT-Creation-Date: 2001-09-09 02:57-0500\n"
 "PO-Revision-Date: 2001-05-31 10:06+300\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -13,9 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/browse/browse.c:38 plugins/browse/browse.c:250
+#: plugins/browse/browse.c:250
 msgid "Browse"
 msgstr "Gözat"
 
@@ -86,12 +84,6 @@ msgstr "Onlu'dan _Sekizliye "
 #: plugins/convert/convert.glade.h:12
 msgid " Hex to Decima_l "
 msgstr "Onaltılı'dan On_luya "
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/diff/diff.c:36
-msgid "diff"
-msgstr "diff"
 
 #: plugins/diff/diff.c:126
 msgid "The two documents you selected are the same."
@@ -200,12 +192,6 @@ msgstr "_Birleşik çıktı biçemi kullan (-u seçeneği)"
 #: plugins/diff/diff.glade.h:18
 msgid "Diff found at: "
 msgstr "Diff'in yeri: "
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:22
-msgid "email"
-msgstr "ePosta"
 
 #: plugins/email/email.c:75
 #, c-format
@@ -368,7 +354,8 @@ msgstr "(C) 1998, 1999, 2000 Alex Roberts ve Evan Lawrence"
 
 #: src/dialogs/about.glade.h:8
 msgid "gedit is a small and lightweight text editor for GNOME."
-msgstr "gedit GNOME için ufak ve kolay kullanılabilen bir metin düzenleyicidir."
+msgstr ""
+"gedit GNOME için ufak ve kolay kullanılabilen bir metin düzenleyicidir."
 
 #: src/dialogs/dialog-plugins.c:87
 #, c-format
@@ -411,7 +398,7 @@ msgstr "%i oluşum bulundu ve değiştirildi."
 msgid "Could not allocate the memory for the Replace all request."
 msgstr "Değiştirmeler için gereken bellek ayrılamadı."
 
-#: src/dialogs/dialog-uri.c:143 src/file.c:814 src/file.c:821
+#: src/dialogs/dialog-uri.c:143 src/file.c:823 src/file.c:830
 #, c-format
 msgid "Loaded file %s"
 msgstr "%s dosyası yüklendi"
@@ -705,19 +692,9 @@ msgstr "Açmak istediğiniz dosyanın konumunu (URI) verin:"
 msgid "RO - "
 msgstr "Salt-okunur - "
 
-#: src/document.c:295
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "İsimsiz"
-
-#: src/document.c:299
-#, c-format
-msgid "%s %d*"
-msgstr "%s %d*"
 
 #: src/document.c:477
 #, c-format
@@ -741,7 +718,7 @@ msgstr "Bu dosyanın geçerli bir uzantısı yok\n"
 msgid "The file %s was not found."
 msgstr "%s dosyası bulunamadı."
 
-#: src/file.c:218
+#: src/file.c:226
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -750,7 +727,7 @@ msgstr ""
 "\"%s\" dosyası açılırken bir hata oluştu.\n"
 "Lütfen dosyanın var olduğundan emin olunuz."
 
-#: src/file.c:236
+#: src/file.c:245
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -759,7 +736,7 @@ msgstr ""
 "\"%s\" dosyası açılırken bir hata saptandı.\n"
 "Gereken bellek ayrılamadı."
 
-#: src/file.c:248
+#: src/file.c:257
 #, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -773,7 +750,7 @@ msgstr ""
 "\n"
 "Gerekli erişim izinlerine sahip olmayabilirsiniz."
 
-#: src/file.c:268
+#: src/file.c:277
 #, c-format
 msgid ""
 "An error was encountered while reading the file: \n"
@@ -783,7 +760,7 @@ msgstr ""
 "%s\n"
 "dosyası okunurken bir hata saptandı."
 
-#: src/file.c:289
+#: src/file.c:298
 #, c-format
 msgid ""
 "Internal error reading the file: \n"
@@ -797,7 +774,7 @@ msgstr ""
 "\n"
 "Lütfen bu sorunu submit@bugs.gnome.org adresine rapor ediniz."
 
-#: src/file.c:305
+#: src/file.c:314
 #, c-format
 msgid ""
 "An error was encountered while closing the file: \n"
@@ -808,15 +785,15 @@ msgstr ""
 "\n"
 "dosyası kapatılırken bir hata saptandı."
 
-#: src/file.c:468
+#: src/file.c:477
 msgid "Save As..."
 msgstr "Farklı Kaydet... "
 
-#: src/file.c:538
+#: src/file.c:547
 msgid "The document contains no data."
 msgstr "Belge veri içermiyor."
 
-#: src/file.c:549
+#: src/file.c:558
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -832,15 +809,15 @@ msgstr ""
 "Gerekli erişim izinlerinizin bulunduğundan ve\n"
 "dosya yolunun var olduğundan emin olunuz."
 
-#: src/file.c:563
+#: src/file.c:572
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (1). Please report this Problem to submit@bugs."
-"gnome.org"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
 msgstr ""
 "%s\n"
 "\n"
@@ -849,15 +826,15 @@ msgstr ""
 "Bunun sebebi bilinmiyor (1) . Lütfen bu sorunu submit@bugs.gnome.org "
 "adresine rapor ediniz."
 
-#: src/file.c:581
+#: src/file.c:590
 #, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (2). Please report this Problem to submit@bugs."
-"gnome.org"
+"Because of an unknown reason (2). Please report this Problem to "
+"submit@bugs.gnome.org"
 msgstr ""
 "%s\n"
 "\n"
@@ -866,41 +843,41 @@ msgstr ""
 "Bunun sebebi bilinmiyor (2) . Lütfen bu sorunu submit@bugs.gnome.org "
 "adresine bildiriniz."
 
-#: src/file.c:683
+#: src/file.c:692
 msgid "Could not allocate the required memory."
 msgstr "Gerekli bellek ayrılamadı."
 
-#: src/file.c:703
+#: src/file.c:712
 msgid "Error in the pipe."
 msgstr "Veri yolunda hata."
 
-#: src/file.c:828
+#: src/file.c:837
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i dosya yüklendi"
 
-#: src/file.c:894
+#: src/file.c:903
 msgid "Open File ..."
 msgstr "Dosya Aç..."
 
-#: src/file.c:1027
+#: src/file.c:1036
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s''nin üstüne yazılacak. Devam etmek istiyor musunuz?"
 
-#: src/file.c:1039
+#: src/file.c:1048
 msgid "Document has not been saved."
 msgstr "Belge kaydedilmemişti."
 
-#: src/file.c:1049
+#: src/file.c:1058
 msgid "Error saving file!"
 msgstr "Kaydederken bir hata oluştu!"
 
-#: src/file.c:1178
+#: src/file.c:1187
 msgid "You can't revert an Untitled document\n"
 msgstr "İsimsiz bir belge eski haline getirilemez\n"
 
-#: src/file.c:1191
+#: src/file.c:1200
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -909,7 +886,7 @@ msgstr ""
 "Tüm değişiklikleri geri almak istediğinizden emin misiniz?\n"
 "(%s)"
 
-#: src/file.c:1222
+#: src/file.c:1231
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "``%s'' dosyası yok. Dosya oluşturulsun mu?"
@@ -1228,7 +1205,7 @@ msgstr "gedit: Yazdırma önizleme\n"
 msgid "Page: %i/%i"
 msgstr "Sayfa: %i/%i"
 
-#: src/print-util.c:163 src/print-util.c:178
+#: src/print-util.c:222 src/print-util.c:237
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1237,28 +1214,28 @@ msgstr ""
 "gedit \"%s\" yazıtipini bulamadı.\n"
 "gedit bu yazıtipi olmadan yazdıramaz."
 
-#: src/print-util.c:219
+#: src/print-util.c:278
 msgid "Printing .."
 msgstr "Yazdırma .."
 
-#: src/print-util.c:230
+#: src/print-util.c:289
 msgid "Printing ..."
 msgstr "Yazdırma ..."
 
 #. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
 #. * fail to insert the recent menu items.
-#: src/recent.c:252
+#: src/recent.c:549
 msgid "_File/"
 msgstr "_Dosya/"
 
 #. xgettext translators: Use the name of the stock Menu item for "File"
 #. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:261
+#: src/recent.c:558
 msgid "_File"
 msgstr "_Dosya"
 
-#: src/recent.c:283
+#: src/recent.c:580
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Son çalışılan dosya açılamadı: %s"
@@ -1268,8 +1245,8 @@ msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
 msgstr ""
-"Başka bir arama işlemi sürerken satırlar sayılamaz, lütfen arama diyaloğunu "
-"kapatın."
+"Başka bir arama işlemi sürerken satırlar sayılamaz, lütfen arama "
+"diyaloğunu kapatın."
 
 #: src/search.c:410
 #, c-format
@@ -1296,7 +1273,18 @@ msgstr ""
 "Geçerli satır: %i\n"
 "Geçerli sütun: %i"
 
-#: src/view.c:908
+#: src/view.c:940
 msgid "You can't remove the last view of a document."
 msgstr "Bir belgenin son görünümü kaldırılamaz."
 
+#~ msgid "diff"
+#~ msgstr "diff"
+
+#~ msgid "email"
+#~ msgstr "ePosta"
+
+#~ msgid "%s %d"
+#~ msgstr "%s %d"
+
+#~ msgid "%s %d*"
+#~ msgstr "%s %d*"
