@@ -1,16 +1,16 @@
 # gedit Finnish Translation
-# Suomennos: http://gnome-fi.sourceforge.net/
-# Copyright (C) 1999-2004 Free Software Foundation, Inc.
+# Suomennos: http://www.gnome.fi/
+# Copyright (C) 1999-2005 Free Software Foundation, Inc.
 # Jarkko Ranta <jjranta@cc.joensuu.fi>, 2000-2004.
-# 
+# Sami Pesonen <sampeson@iki.fi>, 2005.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit (gnome-2-8)\n"
+"Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-19 11:12+0200\n"
-"PO-Revision-Date: 2004-12-07 12:38+0200\n"
-"Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
+"POT-Creation-Date: 2005-02-26 02:25+0200\n"
+"PO-Revision-Date: 2005-02-26 02:07+0200\n"
+"Last-Translator: Sami Pesonen <sampeson@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,7 +45,7 @@ msgstr "gedit-automaatiotehdas"
 msgid "Edit text files"
 msgstr "Muokkaa tekstitiedostoja"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:306
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
@@ -58,9 +58,8 @@ msgstr ""
 "ainoastaan mikäli asetus \"Käytä oletuskirjasinta\" ei ole päällä."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "Käynnistä %s"
+msgstr "Käynnissä olevat liitännäiset"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -219,9 +218,8 @@ msgstr "Monospace 12"
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
 #: data/gedit.schemas.in.h:37
-#, fuzzy
 msgid "Monospace 9"
-msgstr "Monospace 12"
+msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and replaced by
@@ -262,16 +260,14 @@ msgstr "Oikean reunuksen sijainti"
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
 #: data/gedit.schemas.in.h:50
-#, fuzzy
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid "Sans 8"
-msgstr "Espanja"
+msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
@@ -339,11 +335,12 @@ msgid ""
 msgstr "Määrittää tulostettaessa käytettävän tekstikirjasimen."
 
 #: data/gedit.schemas.in.h:68
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "Määrittää tulostettaessa käytettävän tekstikirjasimen."
+msgstr ""
+"Määrittää tulostettaessa käytettävän tekstikirjasimen. Tämä on gnome-print "
+"kirjasimen nimi ja print_font_body_pango korvaa sen."
 
 #: data/gedit.schemas.in.h:69
 msgid ""
@@ -355,7 +352,6 @@ msgstr ""
 "kuin nolla."
 
 #: data/gedit.schemas.in.h:70
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -363,7 +359,8 @@ msgid ""
 msgstr ""
 "Määrittää tulostettaessa käytettävän rivinumeron kirjasimen. Tämä on "
 "voimassa ainoastaan, mikäli asetuksen \"Tulosta rivinumerot\" arvo on muu "
-"kuin nolla."
+"kuin nolla. Tämä on gnome-print kirjasimen nimi ja print_font_numbers_pango "
+"korvaa sen."
 
 #: data/gedit.schemas.in.h:71
 msgid ""
@@ -374,14 +371,14 @@ msgstr ""
 "voimassa ainoastaan, mikäli asetus \"Tulosta otsikkotiedot\" on päällä."
 
 #: data/gedit.schemas.in.h:72
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "Määrittää tulostettaessa käytettävän otsikkotiedon kirjasimen. Tämä on "
-"voimassa ainoastaan, mikäli asetus \"Tulosta otsikkotiedot\" on päällä."
+"voimassa ainoastaan, mikäli asetus \"Tulosta otsikkotiedot\" on päällä. Tämä "
+"on gnome-print kirjasimen nimi ja print_font_header_pango korvaa sen."
 
 #: data/gedit.schemas.in.h:73
 msgid ""
@@ -485,14 +482,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "Määrittää käyttääkö gedit syntaksiväritystä."
 
 #: data/gedit.schemas.in.h:91
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Määrittää käyttääkö gedit syntaksiväritystä."
+msgstr "Määrittää korostaako gedit vastaavaa hakasulkua."
 
 #: data/gedit.schemas.in.h:92
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "Määrittää käyttääkö gedit syntaksiväritystä tulostettaessa."
+msgstr "Määrittää korostaako gedit nykyistä riviä."
 
 #: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
@@ -556,9 +551,8 @@ msgid "Activate %s"
 msgstr "Käynnistä %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Sulje tulosteikkuna"
+msgstr "Sulje _ilman tallentamista"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -615,14 +609,15 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] ""
 "Mikäli et tallenna, muutokset viimeisen tunnin ajalta menetetään pysyvästi."
 msgstr[1] ""
-"Mikäli et tallenna, muutokset viimeisen tunnin ajalta menetetään pysyvästi."
+"Mikäli et tallenna, muutokset viimeisen %d tunnin ajalta menetetään "
+"pysyvästi."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -803,19 +798,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automaattinen sisennys</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Tekstin rivitys</b>"
+msgstr "<b>Hakasulkujen vastaavuus</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Tekstin rivitys</b>"
+msgstr "<b>Nykyinen rivi</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -839,7 +831,6 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Oikea reunus</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Sarkaimet</b>"
 
@@ -992,7 +983,6 @@ msgid "_Display line numbers"
 msgstr "Näytä rivi_numerot"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "Käytä auto_maattisisennystä"
 
@@ -1017,7 +1007,6 @@ msgid "_Right margin at column:"
 msgstr "Oikea _reunus sarakkeessa:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "_Sarkainleveys:"
 
@@ -1185,59 +1174,57 @@ msgstr ""
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
-"Jarkko Ranta, 2000-2004\n"
+"Sami Pesonen, 2005Jarkko Ranta, 2000-2004\n"
 "\n"
-"http://gnome-fi.org/"
+"http://www.gnome.fi/"
 
 #: gedit/gedit-commands.c:579
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
-#, fuzzy
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
-msgstr "A_siakirjat"
+msgstr "Tallentamaton asiakirja"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "Epäkelpo tiedostonimi"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1423
 msgid "Invalid UTF-8 data"
 msgstr "Viallista UTF-8 dataa"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1670
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Symbolisen linkin tietojen lukeminen kohteelle %s epäonnistui"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1716
 msgid "The file has too many symbolic links."
 msgstr "Tiedostolla on liian monta symbolista linkkiä."
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1799
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr ""
 "gedit ei pysty käsittelemään sijaintia %s: sijainti kirjoitusoikeuksin."
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1806
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ei pysty käsittelemään tällaista sijaintia kirjoitustilassa."
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1819
 msgid "Invalid filename."
 msgstr "Epäkelpo tiedostonimi."
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1968
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1245,7 +1232,7 @@ msgstr ""
 "Levyllä ei ole tarpeeksi tilaa tiedoston tallentamiseksi.\n"
 "Vapauta levytilaa ja yritä uudelleen."
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1973
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1255,7 +1242,7 @@ msgstr ""
 "Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
 "rajoitusta."
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2017
 msgid "Could not create a backup file."
 msgstr "Tiedoston varmuuskopiointi ei onnistunut."
 
@@ -1416,7 +1403,6 @@ msgid "All Text Files"
 msgstr "Kaikki tekstitiedostot"
 
 #: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
-#, fuzzy
 msgid "_Character Coding:"
 msgstr "_Merkistön koodaus:"
 
@@ -1432,37 +1418,37 @@ msgstr "Valitse avattavat tiedostot"
 msgid "Select a filename to save"
 msgstr "Valitse tiedostonimi jolla tallennetaan"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "Avaa tiedosto..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Tallennetaan asiakirjaa \"%s\"..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Asiakirjaa \"%s\" ei ole tallennettu."
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Asiakirja \"%s\" on tallennettu."
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "Tallenna nimellä..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 "Haluatko palauttaa asiakirjan \"%s\" ja kumota tallentamisen jälkeen tehdyt "
 "muutokset?"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1476,14 +1462,14 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen %ld sekunnin aikana "
 "menetetään lopullisesti."
 
-#: gedit/gedit-file.c:543
+#: gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin aikana menetetään "
 "lopullisesti."
 
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1498,7 +1484,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin ja %ld sekunnin "
 "aikana menetetään lopullisesti."
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1512,8 +1498,8 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen %ld minuutin aikana "
 "menetetään lopullisesti."
 
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
@@ -1521,10 +1507,10 @@ msgstr[0] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen tunnin aikana menetetään "
 "lopullisesti."
 msgstr[1] ""
-"Muutokset jotka on tehty asiakirjaan viimeisen tunnin aikana menetetään "
+"Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana menetetään "
 "lopullisesti."
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1539,70 +1525,70 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen tunnin ja %d minuutin aikana "
 "menetetään lopullisesti."
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Tiedoston \"%s\" palauttaminen epäonnistui."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Asiakirjaa \"%s\" ei palautettu."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Asiakirja \"%s\" on palautettu."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Palautetaan asiakirjaa \"%s\"..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "Virhe luettaessa dataa stdin:istä."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "Palautetaan tiedostoa:"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "Ladataan tiedostoa:"
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Tiedoston \"%s\" lataaminen epäonnistui"
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Ladattu tiedosto \"%s\""
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Ladattu %d tiedosto"
 msgstr[1] "Ladattu %d tiedostoa"
 
-#: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#: gedit/gedit-file.c:1288
+#, c-format
 msgid "Created file \"%s\""
-msgstr "Ladattu tiedosto \"%s\""
+msgstr "Luotu tiedosto \"%s\""
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Ladataan tiedostoa \"%s\"..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1473
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1610,18 +1596,14 @@ msgstr[0] "Ladataan %d tiedostoa..."
 msgstr[1] "Ladataan %d tiedostoa..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui"
+msgstr "Tiedostoa \"%s\" ei löytynyt"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" on hakemisto.\n"
-"\n"
-"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+msgstr "Tarkista·että·kirjoitit·osoitteen·oikein·ja·yritä·uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1637,34 +1619,25 @@ msgid "Could not open the file \"%s\""
 msgstr "Tiedoston \"%s\" avaaminen epäonnistui"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää viallista dataa."
+msgstr "Tiedosto sisältää viallista dataa."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr ""
-"gedit ei pysty käsittelemään sijaintia %s: sijainti kirjoitusoikeuksin."
+msgstr "gedit ei pysty käsittelemään sijaintia %s:."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr ""
-"gedit ei pysty käsittelemään sijaintia %s: sijainti kirjoitusoikeuksin."
+msgstr "gedit ei pysty käsittelemään tätä sijaintia."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää dataa epäkelvossa "
-"muodossa."
+msgstr "Tiedosto sisältää dataa epäkelvossa muodossa."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Tiedostolla on liian monta symbolista linkkiä."
+msgstr "Tiedosto on liian suuri."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
@@ -1676,14 +1649,10 @@ msgid "Access was denied."
 msgstr ""
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open files and try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska liian monta tiedostoa on jo "
-"auki.\n"
-"\n"
-"Sulje ensin joku tiedosto ja yritä uudelleen."
+"Liian monta tiedostoa on auki. Sulje ensin joku tiedosto ja yritä uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
@@ -1691,110 +1660,89 @@ msgid "\"%s\" is a directory"
 msgstr ""
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen vaatii liikaa muistia. Sulje jokin käynnissä "
-"oleva ohjelma ja yritä uudelleen."
+"Tiedoston avaaminen vaatii liikaa muistia. Sulje jokin käynnissä oleva "
+"ohjelma ja yritä uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska palvelinta \"%s\" "
-"ei löytynyt. \n"
-"\n"
-"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
+"Isäntänimeä \"%s\" ei löytynyt. Tarkista että välipalvelimesi asetukset ovat "
+"kunnossa ja yritä uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"\"%s\" ei ole kelvollinen sijainti.\n"
-"\n"
-"Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+"Isäntänimi ei ole kelvollinen. Tarkista että kirjoitit osoitteen oikein ja "
+"yritä uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on tyhjä.\n"
-"\n"
-"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
+"Isäntänimi on tyhjä. Tarkista että välipalvelimesi asetukset ovat kunnossa "
+"ja yritä uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"Tiedostoa \"%s\" ei löytynyt.\n"
-"\n"
-"Tarkista että annoit sijainnin oikein ja yritä uudelleen."
+"Kirjautumisyritys epäonnistui. Tarkista että annoit sijainnin oikein ja "
+"yritä uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää epäkelpoa dataa.\n"
-"\n"
-"Yrität luultavasti avata binääritiedostoa."
+"Tiedosto sisältää epäkelpoa dataa. Yrität luultavasti avata binääritiedostoa."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
 msgstr ""
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska gedit ei tunnistanut merkistön "
-"koodaustapaa automaattisesti.\n"
-"\n"
-"Tarkista ettet yritä avata binääritiedostoa ja yritä uudestaan valitsemalla "
-"jokin merkistön koodaustapa 'Avaa tiedosto...' (tai 'Avaa sijainti') -"
-"ikkunassa."
+"gedit ei tunnistanut merkistön koodaustapaa automaattisesti.Tarkista ettet "
+"yritä avata binääritiedostoa ja yritä uudestaan valitsemalla jokin merkistön "
+"koodaustapa 'Avaa tiedosto...' (tai 'Avaa sijainti') -ikkunassa."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui koska se on liian suuri."
+msgstr "Tiedoston \"%s\" avaaminen epäonnistui %s-merkistön koodauksella"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui käytettäessä merkistöä \"%s\".\n"
 "Tarkista ettet yritä avata binääritiedostoa ja että olet valinnut oikean "
 "koodaustavan 'Avaa tiedosto...' (tai 'Avaa sijainti') -ikkunassa ja yritä "
 "uudestaan."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska se sisältää epäkelpoa dataa.\n"
-"\n"
-"Yrität luultavasti avata binääritiedostoa."
+"Tiedosto sisältää epäkelpoa dataa. Yrität luultavasti avata binääritiedostoa."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1803,128 +1751,97 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui."
+msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska gedit ei löydä "
-"sitä.\n"
-"\n"
-"Tämä voi johtua siitä että se on poistettu."
+msgstr "gedit ei löydä sitä. Tämä voi johtua siitä että se on poistettu."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska liian monta tiedostoa on jo "
-"auki.\n"
-"\n"
-"Sulje ensin joku tiedosto ja yritä uudelleen."
+"Liian monta tiedostoa on jo auki. Sulje ensin joku tiedosto ja yritä "
+"uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen vaatii liikaa muistia. Sulje jokin käynnissä "
-"oleva ohjelma ja yritä uudelleen."
+"Liian vähän vapaata muistia. Sulje jokin käynnissä oleva ohjelma ja yritä "
+"uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"Tiedoston \"%s\" avaaminen epäonnistui koska palvelimen nimi on tyhjä.\n"
-"\n"
-"Tarkista että välityspalvelimesi asetukset ovat kunnossa ja yritä uudelleen."
+"Isäntänimi on tyhjä. Tarkista että välipalvelimesi asetukset ovat kunnossa "
+"ja yritä uudelleen."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
 msgstr ""
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"Tiedoston \"%s\" palauttaminen levyltä epäonnistui koska se sisältää "
-"epäkelpoa UTF-8 dataa.\n"
-"\n"
-"Yrität luultavasti avata binääritiedostoa."
+"Tiedosto sisältää epäkelpoa UTF-8 dataa. Yrität luultavasti avata "
+"binääritiedostoa."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "Et voi palauttaa Nimetöntä asiakirjaa levyltä."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
+msgstr "Tiedoston \"%s\" tallentaminen epäonnistui"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "Tiedosto \"%s\" on jo olemassa."
+msgstr "Tiedosto \"%s\" on jo olemassa"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" on hakemisto.\n"
-"\n"
-"Varmista että kirjoitit osoitteen oikein."
+msgstr "Varmista että kirjoitit osoitteen oikein."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "Tiedoston \"%s\" luominen epäonnistui."
+msgstr "Tiedoston \"%s\" luominen epäonnistui"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Tiedoston \"%s\" luominen epäonnistui.\n"
-"\n"
-"Varmista että sinulla on tarvittavat kirjoitusoikeudet."
+msgstr "Varmista että sinulla on tarvittavat kirjoitusoikeudet."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"Tiedoston \"%s\" luominen epäonnistui.\n"
-"\n"
-"Tiedostonimi on liian pitkä."
+msgstr "Tiedostonimi on liian pitkä."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
 msgstr ""
-"Tiedoston \"%s\" luominen epäonnistui.\n"
-"\n"
 "Annetulla nimellä olevaa hakemistokomponenttia ei ole olemassa, tai se on "
 "symbolinen linkki jolla ei ole kohdetta."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"Levyllä ei ole tarpeeksi tilaa tiedoston \"%s\" tallentamiseksi.\n"
-"\n"
-"Vapauta levytilaa ja yritä uudelleen."
+"Levyllä ei ole tarpeeksi tilaa tiedoston \"%s\" tallentamiseksi. Vapauta "
+"levytilaa ja yritä uudelleen."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1963,9 +1880,8 @@ msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
 #: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
-#, fuzzy
 msgid "Read Only"
-msgstr "(vain luku)"
+msgstr "Vain luku"
 
 #: gedit/gedit-mdi.c:2068
 msgid "Normal"
@@ -2439,16 +2355,16 @@ msgstr " (epäkelpoa Unicodea)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:841
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rvi %d, Srke %d"
 
-#: gedit/gedit-view.c:877
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr "  PÄÄLLE"
 
-#: gedit/gedit-view.c:879
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr "  LISÄÄ"
 
@@ -2472,7 +2388,7 @@ msgstr "Luo uusi itsenäinen ikkuna käynnissä olevaan geditiin"
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Luo uusi asiakirja jo käynnissä olevaan geditiin"
 
-#: gedit/gedit2.c:161
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Määritelty koodaus \"%s\" on epäkelpo\n"
@@ -2629,19 +2545,17 @@ msgid "User name"
 msgstr "Käyttäjänimi"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "_Kopioi"
+msgstr "Ta_llenna kopio..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "Aseta aktiivisen asiakirjan kieli"
+msgstr "Tallenna nykyisestä asiakirjasta kopio"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
+msgstr "Kopion tallentaminen epäonnistui kohteeseen \"%s\""
 
 #: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
@@ -2662,9 +2576,9 @@ msgid "Save a Copy"
 msgstr "Tallenna kopio"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Järjestä aktiivinen asiakirja tai valinta."
+msgstr ""
+"Tallentaa kopion nykyisestä asiakirjasta paikalliseen tai etäsijaintiin."
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -3264,9 +3178,8 @@ msgid "Acronym"
 msgstr "Akronyymi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "rivin välein"
+msgstr "Tasaus"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
@@ -3323,9 +3236,8 @@ msgid "Base URI"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "Käytä kirjasinta otsikossa"
+msgstr "Oletuskirjasin"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
@@ -3348,14 +3260,12 @@ msgid "Box"
 msgstr "Laatikko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Keskieurooppalainen"
+msgstr "Solun riviväli"
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "Yleiset"
+msgstr "Keskitä"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 #, fuzzy
@@ -3406,9 +3316,8 @@ msgid "Columns"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "_Sisältö"
+msgstr "Kommentti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
@@ -3425,9 +3334,8 @@ msgid "Content type"
 msgstr "_Sisältö"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "_Sisältö"
+msgstr "Koordinaatit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3463,14 +3371,12 @@ msgid "Definition term"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Deleted text"
-msgstr "Tyhjennä valittu teksti"
+msgstr "Poistettu teksti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
-#, fuzzy
 msgid "Direction"
-msgstr "Bretoni"
+msgstr "Suunta"
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
@@ -3481,39 +3387,32 @@ msgid "Directory list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Disabled"
-msgstr "Käytössä"
+msgstr "Pois käytöstä"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
 msgid "Document base"
-msgstr "A_siakirjat"
+msgstr "Asiakirjan perus URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
 msgid "Document body"
-msgstr "A_siakirjat"
+msgstr "Asiakirjan runko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Document head"
-msgstr "A_siakirjat"
+msgstr "Asiakirjan otsikkotiedot"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document title"
-msgstr "Asiakirjan tilastot"
+msgstr "Asiakirjan otsikko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Document type"
-msgstr "A_siakirjat"
+msgstr "Asiakirjan tyyppi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
-#, fuzzy
 msgid "Element ID"
-msgstr "Elementit"
+msgstr "Elementtitunniste"
 
 #: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
@@ -3537,18 +3436,16 @@ msgid "Font face"
 msgstr "Kirjasimen nimi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
-#, fuzzy
 msgid "For label"
-msgstr "otsikko"
+msgstr "Otsikkoa varten"
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "Pakotettu rivinvaihto"
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
-#, fuzzy
 msgid "Form"
-msgstr "Tavallinen"
+msgstr "Kaavake"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
@@ -3579,9 +3476,8 @@ msgid "Forward link"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
-#, fuzzy
 msgid "Frame"
-msgstr "Nimi:"
+msgstr "Kehys"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
@@ -3600,9 +3496,8 @@ msgid "Frameborder"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
 msgid "Frameset"
-msgstr "Fär-saaret"
+msgstr "Kehykset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
@@ -3747,9 +3642,8 @@ msgid "Java applet"
 msgstr "Java-sovelma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
 msgid "Label"
-msgstr "otsikko"
+msgstr "Otsikko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
@@ -3764,9 +3658,8 @@ msgid "Layer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
-#, fuzzy
 msgid "Link color"
-msgstr "Valitse väri"
+msgstr "Linkin väri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
@@ -3871,9 +3764,8 @@ msgid "No line break"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
-#, fuzzy
 msgid "No resize"
-msgstr "Näytä koko"
+msgstr "Ei koonmuutosta"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
@@ -4097,9 +3989,8 @@ msgid "Server-side image map"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "Tallennus"
+msgstr "Muoto"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -4110,9 +4001,8 @@ msgid "Single line prompt"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "Sarkaimen koko"
+msgstr "Koko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
 #, fuzzy
@@ -4128,9 +4018,8 @@ msgid "Sound"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "Tallennus"
+msgstr "Välilyönti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
@@ -4150,9 +4039,8 @@ msgid "Spacing within cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "Espanja"
+msgstr "Väli"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
@@ -4196,9 +4084,8 @@ msgid "Tab order position"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "Käytössä"
+msgstr "Taulukko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
@@ -4675,9 +4562,8 @@ msgid "following-sibling"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "Lisää tyhjeitä"
+msgstr "nimiavaruus"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
 #, fuzzy
@@ -4795,3 +4681,92 @@ msgstr "_Kysy muotoilua"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %ld second will be permanently "
+#~ "lost.If you don't save, changes from the last %ld seconds will be "
+#~ "permanently lost."
+#~ msgstr ""
+#~ "Mikäli et tallenna, muutokset viimeisen %ld sekunnin ajalta menetetään "
+#~ "pysyvästi.Mikäli et tallenna, muutokset viimeisen %ld sekunnin ajalta "
+#~ "menetetään pysyvästi."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last minute and %ld second will be "
+#~ "permanently lost.If you don't save, changes from the last minute and %ld "
+#~ "seconds will be permanently lost."
+#~ msgstr ""
+#~ "Mikäli et tallenna, muutokset viimeisen minuutin ja %ld sekunnin ajalta "
+#~ "menetetään pysyvästi.Mikäli et tallenna, muutokset viimeisen minuutin ja %"
+#~ "ld sekunnin ajalta menetetään pysyvästi."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last %ld minute will be permanently "
+#~ "lost.If you don't save, changes from the last %ld minutes will be "
+#~ "permanently lost."
+#~ msgstr ""
+#~ "Mikäli et tallenna, muutokset viimeisen %ld minuutin ajalta menetetään "
+#~ "pysyvästi.Mikäli et tallenna, muutokset viimeisen %ld minuutin ajalta "
+#~ "menetetään pysyvästi."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last hour will be permanently lost.If "
+#~ "you don't save, changes from the last %d hours will be permanently lost."
+#~ msgstr ""
+#~ "Mikäli et tallenna, muutokset viimeisen tunnin ajalta menetetään "
+#~ "pysyvästi.Mikäli et tallenna, muutokset viimeisen %d tunnilta menetetään "
+#~ "pysyvästi."
+
+#~ msgid ""
+#~ "If you don't save, changes from the last hour and %d minute will be "
+#~ "permanently lost.If you don't save, changes from the last hour and %d "
+#~ "minutes will be permanently lost."
+#~ msgstr ""
+#~ "Mikäli et tallenna, muutokset viimeisen tunnin ja %d minuutin ajalta "
+#~ "menetetään pysyvästi.Mikäli et tallenna, muutokset viimeisen tunnin ja %d "
+#~ "minuutin ajalta menetetään pysyvästi."
+
+#~ msgid ""
+#~ "Changes made to the document in the last %ld second will be permanently "
+#~ "lost.Changes made to the document in the last %ld seconds will be "
+#~ "permanently lost."
+#~ msgstr ""
+#~ "Muutokset jotka on tehty asiakirjaan viimeisen %ld sekunnin aikana "
+#~ "menetetään lopullisesti.Muutokset jotka on tehty asiakirjaan viimeisen %"
+#~ "ld sekunnin aikana menetetään lopullisesti."
+
+#~ msgid ""
+#~ "Changes made to the document in the last minute and %ld second will be "
+#~ "permanently lost.Changes made to the document in the last minute and %ld "
+#~ "seconds will be permanently lost."
+#~ msgstr ""
+#~ "Muutokset jotka on tehty asiakirjaan viimeisen minuutin ja %ld sekunnin "
+#~ "aikana menetetään lopullisesti.Muutokset jotka on tehty asiakirjaan "
+#~ "viimeisen minuutin ja %ld sekunnin aikana menetetään lopullisesti."
+
+#~ msgid ""
+#~ "Changes made to the document in the last %ld minute will be permanently "
+#~ "lost.Changes made to the document in the last %ld minutes will be "
+#~ "permanently lost."
+#~ msgstr ""
+#~ "Muutokset jotka on tehty asiakirjaan viimeisen %ld minuutin aikana "
+#~ "menetetään lopullisesti.Muutokset jotka on tehty asiakirjaan viimeisen %"
+#~ "ld minuutin aikana menetetään lopullisesti."
+
+#~ msgid ""
+#~ "Changes made to the document in the last hour will be permanently lost."
+#~ "Changes made to the document in the last %d hours will be permanently "
+#~ "lost."
+#~ msgstr ""
+#~ "Muutokset jotka on tehty asiakirjaan viimeisen tunnin aikana menetetään "
+#~ "lopullisesti.Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin "
+#~ "aikana menetetään lopullisesti."
+
+#~ msgid ""
+#~ "Changes made to the document in the last hour and %d minute will be "
+#~ "permanently lost.Changes made to the document in the last hour and %d "
+#~ "minutes will be permanently lost."
+#~ msgstr ""
+#~ "Muutokset jotka on tehty asiakirjaan viimeisen tunnin ja %d minuutin "
+#~ "aikana menetetään lopullisesti.Muutokset jotka on tehty asiakirjaan "
+#~ "viimeisen tunnin ja %d minuutin aikana menetetään lopullisesti."
