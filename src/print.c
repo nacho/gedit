@@ -228,6 +228,14 @@ file_print_preview_cb (GtkWidget *widget, gpointer data)
 }
 
 
+/**
+ * print_document:
+ * @doc: the document to be printed, we need this for doc->filename
+ * @pji: the PrintJobInfo struct
+ * @printer: the printer to do the printing to
+ * 
+ * prints *doc
+ **/
 static void
 print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 {
@@ -254,15 +262,22 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 		gedit_debug_mess (debugmsg, DEBUG_PRINT);
 		g_free (debugmsg);
 #endif
+		/* Need to know if we are going to print this page */ 
 		if (pji->range != GNOME_PRINT_RANGE_ALL)
 			pji->print_this_page=(i>=pji->print_first && i<=pji->print_last)?TRUE:FALSE;
 		else
 			pji->print_this_page=TRUE;
-		if (settings->printheader && pji->print_this_page)
-			print_header(pji, i);
-		if (pji->print_this_page)
-			print_setfont (pji);
 
+		if (pji->print_this_page)
+		{
+			gchar * pagenumbertext;
+			pagenumbertext = g_strdup_printf ("%d", i);
+			gnome_print_beginpage (pji->pc, pagenumbertext);
+			g_free (pagenumbertext);
+			if (settings->printheader)
+				print_header(pji, i);
+			print_setfont (pji);
+		}
 		/* in case the first line in the page is a continuation
 		   of the last line in the previous page. Chema */
 		if (pji->buffer[ pji->file_offset -1] != '\n' && i>1 && pji->wrapping)

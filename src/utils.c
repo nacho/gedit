@@ -132,7 +132,7 @@ gedit_flash_va (gchar *format, ...)
 void
 gedit_debug_mess (gchar *message, DebugSection type)
 {
-#if 1
+#if 0
 	g_print(message);
 	return;
 	switch (type)
