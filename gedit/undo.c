@@ -76,7 +76,7 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	if(doc->undo==NULL)
 		return;
 
-	redo = g_new (gedit_undo, 1);
+/*	redo = g_new (gedit_undo, 1); */
 	
 	/* The undo data we need is always at the top op the
 	   stack. So, therefore, the first one =) */

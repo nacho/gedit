@@ -1,5 +1,8 @@
 2000-05-01  Jason Leach  <leach@wam.umd.edu>
 
+	* undo.c (gedit_undo_do): plugged a leak that happened everytime
+	you did undo then redo.
+
 	* recent.c (recent_update_menus): fixed a 35-45 byte leak that
 	happened every time you opened a file or this was called (visit a
 	file already in your recent list, etc).
