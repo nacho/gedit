@@ -4,8 +4,8 @@ Before releasing :
 - Finish the preferences dialog in glade and the code too.
   * add wrapping ( see print.c )
   * add tab position
-  * add diable status bar 
-- Remove the unusefull plugins
+  * add disable/enable status bar 
+- Remove the unusefull plugins ( like Hello world and convert)
 - Fix the problem when you ./configure --prefix
   other than gnome-config --prefix
 - Lear to use shh and to upload to the ftp server
@@ -15,21 +15,20 @@ Before releasing :
 - Hide the Files menu, only display it if mode=modal
 
 
-Please consult the file BUGS for information about know bugs for this version.
+announcement email .....
+
 
 Mayor changes for this release :
 - Many bugs and crash fixes ( Jason Leach and me )
+- The pluggin api now compiles and has been cleaned, some pluggins have been
+  converted to the new structure. ( Jason )
 - File IO operations have been rewriten ( me )
 - Printing has been rewriten, it now uses gnome-print ( me )
+- Makefile work ( Jason )
+- /src/ cleaning ( mostly Jason )
 - The menus can now be accesed thru alt+key ( Jason )
 - the menu has been simplified. Some menu entries have been deleted and are
   included as an option in the preference window. ( me )
-- The pluggin api now compiles and has been cleaned, some pluggins have been
-  converted to the new structure. ( Jason )
-
-Dev. stuff
-- Makefile work ( Jason )
-- /src/ cleaning ( Jason )
 - source code format is now unified across all files. ( Jason and me )
 - The bug database at bugs.gnome.org has been cleaned and thus it can
   now be used. ( Jason and me )
@@ -38,9 +37,10 @@ Disabled stuff :
 [ some features have been disabled as they are know not to work
 or are unstable ]
 - Most of the pluggins have been disabled for this release as they are
-know to be unstable/buggy.
-- The status bar does not display Column: since it is VERY inaccurate
-- The goto line feature has been disable, is not working properly
+know to be unstable/buggy, we need to convert the rest.
+- The status bar does not to display "Column:x" since it is VERY inaccurate
+- The goto line feature has been disable, is not working properly. It is
+crashing and is selecting text, inaccurate etc. etc.
 
 Enjoy
 Chema Celorio
