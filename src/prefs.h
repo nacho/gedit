@@ -22,9 +22,6 @@
 #ifndef __PREFS_H__
 #define __PREFS_H__
 
-#define DEFAULT_FONT "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
-#define DEFAULT_FONTSET "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
-
 
 typedef struct _Preferences Preferences;
 

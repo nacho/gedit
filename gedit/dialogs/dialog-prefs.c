@@ -137,14 +137,9 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 		
 	}
 
-#ifdef ENABLE_SPLIT_SCREEN
-	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
-#endif
-
-#if 1 /* FIXME We are leaking memory here but it is crashing */
 	if (settings->font)
 		g_free (settings->font);
-#endif	
+	
 	settings->font = g_strdup (gnome_font_picker_get_font_name (GNOME_FONT_PICKER (defaultfont)));
 
 	if (gtk_radio_group_get_selected (GTK_RADIO_BUTTON(print_orientation_portrait_radio_button)->group)==0)

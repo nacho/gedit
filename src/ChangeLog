@@ -1,3 +1,14 @@
+2000-10-16  Chema Celorio  <chema@celorio.com>
+
+	* menus.c: clean the file, remove unused stuff
+	add ifndef's for stuff that is disabled
+	* menus.h: ditto
+
+2000-10-15  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-prefs.c (apply_cb): fix a crash when starting with
+	a clean ~/.gnome/gedit. You Shall strdup a string you plan to free.
+
 2000-10-15  Chema Celorio  <chema@celorio.com>
 
 	* menus.c: renamed some public functions prepending gedit_

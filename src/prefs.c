@@ -39,6 +39,9 @@
 
 Preferences *settings = NULL;
 
+#define DEFAULT_FONT (const gchar*) "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
+#define DEFAULT_FONTSET "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
+
 void 
 gedit_prefs_save_settings (void)
 {
@@ -192,12 +195,7 @@ gedit_prefs_load_settings (void)
 	settings->use_fontset = gedit_prefs_determine_use_fontset ();
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL)
-	{
-		if (settings->use_fontset)
-			settings->font = DEFAULT_FONTSET;
-		else
-			settings->font = DEFAULT_FONT;
-	}
+		settings->font = g_strdup (DEFAULT_FONT);
 	
 	if (mdi)
 		tab_pos (settings->tab_pos);

@@ -19,12 +19,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __MENUS_H__
-#define __MENUS_H__
+#ifndef __GEDIT_MENUS_H__
+#define __GEDIT_MENUS_H__
 
 extern GnomeUIInfo gedit_menu[];
 extern GnomeUIInfo toolbar_data[];
 extern GnomeUIInfo doc_menu[];
 extern GnomeUIInfo popup_menu[];
 
-#endif /* __MENUS_H__ */
+#endif /* __GEDIT_MENUS_H__ */

@@ -33,6 +33,8 @@
 #include "document.h"
 #include "dialogs/dialogs.h"
 
+#define GEDIT_DISABLE_VIEW_MENU /* FIXME: This is not working correctly. Chema */
+
 GnomeUIInfo popup_menu[] =
 {
 	GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
@@ -68,18 +70,10 @@ GnomeUIInfo gedit_file_menu[] =
 				GNOME_STOCK_MENU_SAVE),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM (file_save_as_cb, NULL),
-#if 1
 	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
 				NULL,
 				file_revert_cb, 
 				GNOME_STOCK_MENU_REFRESH),
-#else
-	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
-				NULL,
-				file_revert_cb, 
-				GNOME_STOCK_MENU_REFRESH),
-#endif
-
 	GNOMEUIINFO_SEPARATOR, 
 
 	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
@@ -137,8 +131,7 @@ GnomeUIInfo gedit_edit_menu[] =
 	GNOMEUIINFO_END
 };
 
-#if 0
-/* Disable, since it is not working correctly. Chema*/
+#ifndef GEDIT_DISABLE_VIEW_MENU
 GnomeUIInfo view_menu[] =
 {
 	GNOMEUIINFO_ITEM_NONE (N_("_Add View"),
@@ -158,12 +151,6 @@ GnomeUIInfo doc_menu[] =
 
 GnomeUIInfo gedit_settings_menu[] =
 {
-	/* This is not working correctly . FIXME  Chema.
-	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Show Statusbar"),
-				    N_("Enable or disable the statusbar at the bottom of this application window."),
-				    options_toggle_status_bar_cb,
-				    NULL, NULL),
-	*/
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM (gedit_dialog_prefs, NULL),
 
 	GNOMEUIINFO_END
@@ -200,7 +187,7 @@ GnomeUIInfo gedit_menu[] =
 		GNOME_APP_PIXMAP_NONE, NULL,
 		0, 0, NULL
 	},
-#if 0
+#ifndef GEDIT_DISABLE_VIEW_MENU
 	GNOMEUIINFO_MENU_VIEW_TREE (view_menu),
 #endif	
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
@@ -276,23 +263,3 @@ GnomeUIInfo toolbar_data[] =
 	GNOMEUIINFO_END
 };
 
-
-
-#if 0
-/**
- * gedit_menus_init:
- * @window:
- * @data: 
- * 
- **/
-GnomeUIInfo *
-gedit_menus_init (Window *window)
-{
-
-	g_return_val_if_fail (window != NULL, NULL);
-
-	gnome_app_create_menus (GNOME_APP (mdi->active_window), gedit_menu);
-
-	return (GnomeUIInfo *) gedit_menu;
-}
-#endif
