@@ -24,8 +24,11 @@
 
 void gE_about_box(GtkWidget *w, gpointer cbdata)
 {
+
 	GtkWidget *about;
+	
 	const gchar *authors[] = {
+	
 		"Alex Roberts",
 		"Evan Lawrence",
 		"http://gedit.pn.org",
@@ -39,19 +42,15 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 		"       Thomas Holmgren",
 		"       Martijn van Beers",
 		NULL
+		
 	};
-/*
-#ifdef ENABLE_NLS
-    {
-	    int i=0;
-	    while (authors[i] != NULL) authors[i]=_(authors[i]);
-    }
-#endif
-*/
+
 	about = gnome_about_new ("gEdit", VERSION,
 			_("(C) 1998, 1999 Alex Roberts and Evan Lawrence"),
 			authors,
 			_("gEdit is a small and lightweight text editor for GNOME/Gtk+"),
 			NULL);
+			
 	gtk_widget_show (about);
+	
 }

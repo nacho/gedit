@@ -19,8 +19,6 @@
 #ifndef __GE_PREFS_H__
 #define __GE_PREFS_H__
 
-#include "gE_prefslib.h"
-
 extern void gE_save_settings();
 extern void gE_get_settings();
 extern void gE_rc_parse(void);

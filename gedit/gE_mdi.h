@@ -50,6 +50,7 @@ extern guint mdi_type [NUM_MDI_MODES];
 
 GtkType gE_document_get_type ();
 gE_document *gE_document_new ();
+gE_document *gE_document_new_with_title (gchar *title);
 gE_document *gE_document_new_with_file (gchar *filename);
 gE_document *gE_document_current ();
 void gE_add_view (GtkWidget *w, gpointer data);

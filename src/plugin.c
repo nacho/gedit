@@ -35,13 +35,14 @@ plugin *custom_plugin_new_with_query( gchar *path, gchar *plugin_name, gboolean 
 
 typedef struct
 {
-  plugin *plug;
-  gchar *buff;
-  int length;
-  int sofar;
-  int incall;
-  plugin_callback *finished;
-  gpointer data;
+	plugin *plug;
+	gchar *buff;
+	int length;
+	int sofar;
+	int incall;
+	plugin_callback *finished;
+	gpointer data;
+
 } partly_read;
 
 plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
@@ -53,193 +54,215 @@ plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
 
 plugin *plugin_new( gchar *plugin_name )
 {
-  return plugin_new_with_query( plugin_name, FALSE );
+
+	return plugin_new_with_query( plugin_name, FALSE );
+
 }
 
 plugin *plugin_query( gchar *plugin_name )
 {
-  return plugin_new_with_query( plugin_name, TRUE );
+
+	return plugin_new_with_query( plugin_name, TRUE );
+
 }
 
 plugin *custom_plugin_new_with_query( gchar *path, gchar *plugin_name, gboolean query )
 {
-  int toline[2]; /* Commands to the plugin. */
-  int fromline[2]; /* Commands from the plugin. */
-  int dataline[2]; /* Data to the plugin. */
-  plugin *new_plugin = g_new( plugin, 1 ); /* The plugin. */
-  DIR *dir;
-  struct dirent *direntry;
-  gchar *temp, *long_name;
+
+	int toline[2]; /* Commands to the plugin. */
+	int fromline[2]; /* Commands from the plugin. */
+	int dataline[2]; /* Data to the plugin. */
+	plugin *new_plugin = g_new( plugin, 1 ); /* The plugin. */
+	DIR *dir;
+	struct dirent *direntry;
+	gchar *temp, *long_name;
   
  
-  if ( pipe( toline ) == -1 || pipe( fromline ) == -1 || pipe( dataline ) == -1 )
-    {
-      g_free( new_plugin );
-      return 0;
-    }
+	if ( pipe( toline ) == -1 || pipe( fromline ) == -1 || pipe( dataline ) == -1 ) {
+
+	  g_free( new_plugin );
+	  return 0;
+
+	}
     
   
-  	  temp = plugin_name;
-	  plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
-	  sprintf( plugin_name, "%s/%s", path, temp );
+	temp = plugin_name;
+	plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
+	sprintf( plugin_name, "%s/%s", path, temp );
       
-  new_plugin->pipe_to = toline[1];
-  new_plugin->pipe_from = fromline[0];
-  new_plugin->pipe_data = dataline[1];
- new_plugin->name = g_strdup( plugin_name );
-  new_plugin->pid = fork();
-  if ( new_plugin->pid == 0 )
-    {
-      /* New process. */
-      char *argv[7];
+	new_plugin->pipe_to = toline[1];
+	new_plugin->pipe_from = fromline[0];
+	new_plugin->pipe_data = dataline[1];
+	new_plugin->name = g_strdup( plugin_name );
+	new_plugin->pid = fork();
 
-      close( new_plugin->pipe_to );
-      close( new_plugin->pipe_from );
-      close( new_plugin->pipe_data );
-      argv[0] = g_malloc0( 11 + strlen( new_plugin->name ) );
-      sprintf( argv[0], "go-plugin-%s", new_plugin->name );
-      argv[1] = g_strdup( "-go" );
-      argv[2] = g_malloc0( 15 );
-      g_snprintf( argv[2], 15, "%d", toline[0] );
-      argv[3] = g_malloc0( 15 );
-      g_snprintf( argv[3], 15, "%d", fromline[1] );
-      argv[4] = g_malloc0( 15 );
-      g_snprintf( argv[4], 15, "%d", dataline[0] );
-      if ( query )
-	{
-	  argv[5] = g_strdup( "--query" );
-	  argv[6] = NULL;
+	if ( new_plugin->pid == 0 ) {
+	
+	  /* New process. */
+	  char *argv[7];
+
+	  close( new_plugin->pipe_to );
+	  close( new_plugin->pipe_from );
+	  close( new_plugin->pipe_data );
+	  argv[0] = g_malloc0( 11 + strlen( new_plugin->name ) );
+	  sprintf( argv[0], "go-plugin-%s", new_plugin->name );
+	  argv[1] = g_strdup( "-go" );
+	  argv[2] = g_malloc0( 15 );
+	  g_snprintf( argv[2], 15, "%d", toline[0] );
+	  argv[3] = g_malloc0( 15 );
+	  g_snprintf( argv[3], 15, "%d", fromline[1] );
+	  argv[4] = g_malloc0( 15 );
+	  g_snprintf( argv[4], 15, "%d", dataline[0] );
+
+	  if ( query ) {
+
+	    argv[5] = g_strdup( "--query" );
+	    argv[6] = NULL;
+
+	  } else {
+	   
+	   argv[5] = NULL;
+	  
+	  }
+
+	  execv(plugin_name, argv);
+	  
+	  /* This is only reached if something goes wrong. */
+	  _exit( 1 );
+
+	} else if ( new_plugin->pid == -1 ) {
+
+	 /* Failure. */
+	 g_free( new_plugin );
+
+	 return 0;
+
 	}
-      else
-	argv[5] = NULL;
-     /* if ( plugin_name != '/' )
-	{ 
-	  temp = plugin_name;
-	  plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
-	  sprintf( plugin_name, "%s/%s", path, temp );
-	  new_plugin->name = g_strdup( plugin_name ); 
-	}*/
-      execv(plugin_name, argv);
-      /* This is only reached if something goes wrong. */
-      _exit( 1 );
-    }
-  else if ( new_plugin->pid == -1 )
-    {
-      /* Failure. */
-      g_free( new_plugin );
-      return 0;
-    }
-  /* Success. */
+	
+	/* Success. */
 
-  close( toline[0] );
-  close( fromline[1] );
-  close( dataline[0] );
-  return new_plugin;
+	close( toline[0] );
+	close( fromline[1] );
+	close( dataline[0] );
+
+	return new_plugin;
+
 }
 
 plugin *custom_plugin_new( gchar *path, gchar *plugin_name )
 {
-  return custom_plugin_new_with_query( path, plugin_name, FALSE );
+
+	return custom_plugin_new_with_query( path, plugin_name, FALSE );
+
 }
 
 void custom_plugin_query( gchar *path, gchar *plugin_name, plugin_callback_struct *callbacks )
 {
-plugin *plug;
-plugin_list_data *pl_list;
-int i;
+	plugin *plug;
+	plugin_list_data *pl_list;
+	int i;
 
-  plug = custom_plugin_new_with_query( path, plugin_name, TRUE );
-  plug->callbacks = *callbacks;
+	plug = custom_plugin_new_with_query( path, plugin_name, TRUE );
+	plug->callbacks = *callbacks;
   
 #if 0 		
-	      plug->context = 0;
-	      pthread_create( &plug->thread, NULL, (void *(*)(void *)) plugin_parse, plug );
+	plug->context = 0;
+	pthread_create( &plug->thread, NULL, (void *(*)(void *)) plugin_parse, plug );
 #else
-	      plugin_get_all( plug, 1, process_command, NULL ); 
-	      plugin_send_int( plug, 0 );
+	plugin_get_all( plug, 1, process_command, NULL ); 
+	plugin_send_int( plug, 0 );
 #endif
 
-	if ((pl_list = g_malloc0 (sizeof (plugin_list_data))) == NULL)
-	  {
-	    g_print ("custom_plugin_query: Memory Allocation Error.\n");
-	    return;
-	  }
+	if ((pl_list = g_malloc0 (sizeof (plugin_list_data))) == NULL) {
+
+	  g_print ("custom_plugin_query: Memory Allocation Error.\n");
+
+	  return;
+
+	}
 	  
 	pl_list->name = g_strdup (plugin_name);
 	pl_list->location = g_strdup (path);
 	plugin_list = g_list_append (plugin_list, pl_list);
+
 }
 
 plugin *custom_plugin_new_with_param( gchar *path, gchar *plugin_name, int argc, gchar *arg[] )
 {
-  int toline[2]; /* Commands to the plugin. */
-  int fromline[2]; /* Commands from the plugin. */
-  int dataline[2]; /* Data to the plugin. */
-  plugin *new_plugin = g_new( plugin, 1 ); /* The plugin. */
-  gchar *temp;
+
+	int toline[2]; /* Commands to the plugin. */
+	int fromline[2]; /* Commands from the plugin. */
+	int dataline[2]; /* Data to the plugin. */
+	plugin *new_plugin = g_new( plugin, 1 ); /* The plugin. */
+	gchar *temp;
   
-  if ( pipe( toline ) == -1 || pipe( fromline ) == -1 || pipe( dataline ) == -1 )
-    {
-      g_free( new_plugin );
-      return 0;
-    }
-    
-    
-      	  temp = plugin_name;
-	  plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
-	  sprintf( plugin_name, "%s/%s", path, temp );
-	  
-  new_plugin->pipe_to = toline[1];
-  new_plugin->pipe_from = fromline[0];
-  new_plugin->pipe_data = dataline[1];
-  new_plugin->name = g_strdup( plugin_name );
-  new_plugin->pid = fork();
-  if ( new_plugin->pid == 0 )
-    {
-      /* New process. */
-      char **argv = g_malloc0 ( sizeof(char *) * argc + 6 );
-      int i;
+	if ( pipe( toline ) == -1 || pipe( fromline ) == -1 || pipe( dataline ) == -1 ) {
 
-      close( new_plugin->pipe_to );
-      close( new_plugin->pipe_from );
-      close( new_plugin->pipe_data );
-      argv[0] = g_malloc0( 10 + strlen( new_plugin->name ) );
-      sprintf( argv[0], "go-plugin-%s", new_plugin->name );
-      argv[1] = g_strdup( "-go" );
-      argv[2] = g_malloc0( 15 );
-      g_snprintf( argv[2], 15, "%d", toline[0] );
-      argv[3] = g_malloc0( 15 );
-      g_snprintf( argv[3], 15, "%d", fromline[1] );
-      argv[4] = g_malloc0( 15 );
-      g_snprintf( argv[4], 15, "%d", dataline[0] );
-      for( i = 0; i < argc; i++ )
-	{
-	  argv[i + 5] = arg[i];
+	  g_free( new_plugin );
+	  return 0;
+
 	}
-      argv[5+argc] = NULL;
-    /*  if ( *plugin_name != '/' )
-	{
-	  gchar *temp = plugin_name;
-	  plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
-	  sprintf( plugin_name, "%s/%s", path, temp );
-	}*/
-	
-      execv(plugin_name, argv);
-      /* This is only reached if something goes wrong. */
-      _exit( 1 );
-    }
-  else if ( new_plugin->pid == -1 )
-    {
-      /* Failure. */
-      g_free( new_plugin );
-      return 0;
-    }
-  /* Success. */
+    
+    
+	temp = plugin_name;
+	plugin_name = g_malloc0( strlen( temp ) + strlen( path ) + 2 );
+	sprintf( plugin_name, "%s/%s", path, temp );
+	  
+	new_plugin->pipe_to = toline[1];
+	new_plugin->pipe_from = fromline[0];
+	new_plugin->pipe_data = dataline[1];
+	new_plugin->name = g_strdup( plugin_name );
+	new_plugin->pid = fork();
+	if ( new_plugin->pid == 0 ) {
 
-  close( toline[0] );
-  close( fromline[1] );
-  close( dataline[0] );
-  return new_plugin;
+	  /* New process. */
+	  char **argv = g_malloc0 ( sizeof(char *) * argc + 6 );
+	  int i;
+
+	  close( new_plugin->pipe_to );
+	  close( new_plugin->pipe_from );
+	  close( new_plugin->pipe_data );
+	  argv[0] = g_malloc0( 10 + strlen( new_plugin->name ) );
+	  sprintf( argv[0], "go-plugin-%s", new_plugin->name );
+	  argv[1] = g_strdup( "-go" );
+	  argv[2] = g_malloc0( 15 );
+
+	  g_snprintf( argv[2], 15, "%d", toline[0] );
+	  argv[3] = g_malloc0( 15 );
+
+	  g_snprintf( argv[3], 15, "%d", fromline[1] );
+	  argv[4] = g_malloc0( 15 );
+
+	  g_snprintf( argv[4], 15, "%d", dataline[0] );
+
+	  for ( i = 0; i < argc; i++ ) {
+	    argv[i + 5] = arg[i];
+	  }
+
+	  argv[5+argc] = NULL;
+	
+	  execv(plugin_name, argv);
+
+	  /* This is only reached if something goes wrong. */
+	  _exit( 1 );
+
+	} else if ( new_plugin->pid == -1 ) {
+
+	 /* Failure. */
+	 g_free( new_plugin );
+
+	 return 0;
+
+	}
+
+	/* Success. */
+
+	close( toline[0] );
+	close( fromline[1] );
+	close( dataline[0] );
+
+	return new_plugin;
+
 }
 
 plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
@@ -252,33 +275,36 @@ plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
 void plugin_query_all( plugin_callback_struct *callbacks )
 {
 	   
-	  custom_plugin_query_all ( PLUGINDIR, callbacks );
+	custom_plugin_query_all ( PLUGINDIR, callbacks );
 	
 }
 
 void custom_plugin_query_all( gchar *path, plugin_callback_struct *callbacks )
 {
-  DIR *dir = opendir( path );
-  struct dirent *direntry;
-  gchar *shortname, *long_name;
-  plugin_list_data *pl_list;
+	DIR *dir = opendir( path );
+	struct dirent *direntry;
+	gchar *shortname, *long_name;
+	plugin_list_data *pl_list;
 
 	  
-  if ( dir )
-    {
-      while ( ( direntry = readdir( dir ) ) )
-	{
-	  plugin *plug;
-	  if ( strrchr( direntry->d_name, '/' ) )
-	    shortname = strrchr( direntry->d_name, '/' ) + 1;
-	  else
-	    shortname = direntry->d_name;     
-	  if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) )
-   	    {
-   	      if ( *direntry->d_name != '/' )
+	if ( dir ) {
+
+	  while ( ( direntry = readdir( dir ) ) ) {
+
+	    plugin *plug;
+
+	    if ( strrchr( direntry->d_name, '/' ) )
+	      shortname = strrchr( direntry->d_name, '/' ) + 1;
+	    else
+	      shortname = direntry->d_name;     
+
+	    if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) ) {
+
+	      if ( *direntry->d_name != '/' )
 		long_name = g_strdup_printf( "%s/%s", path, direntry->d_name );
 	      else
 		long_name = direntry->d_name;
+
 	      plug = custom_plugin_new_with_query( path, direntry->d_name, TRUE );
 	      plug->callbacks = *callbacks;
 #if 0 		
@@ -288,106 +314,141 @@ void custom_plugin_query_all( gchar *path, plugin_callback_struct *callbacks )
 	      plugin_get_all( plug, 1, process_command, NULL ); 
 	      plugin_send_int( plug, 0 );
 #endif
-		if ((pl_list = g_malloc0 (sizeof (plugin_list_data))) == NULL)
-	 	  {
-	    		 g_print ("custom_plugin_query: Memory Allocation Error.\n");
-	   		 return;
-	 	  }
 
-		pl_list->name = g_strdup (direntry->d_name);
-		pl_list->location = g_strdup (path);
-		plugin_list = g_list_append (plugin_list, pl_list);
+	     if ((pl_list = g_malloc0 (sizeof (plugin_list_data))) == NULL) {
+
+		g_print ("custom_plugin_query: Memory Allocation Error.\n");
+
+		return;
+
+	     }
+
+	     pl_list->name = g_strdup (direntry->d_name);
+	     pl_list->location = g_strdup (path);
+	     plugin_list = g_list_append (plugin_list, pl_list);
+
 	    }
+
 	}
+
       closedir( dir );
+
     }
+
 }
 
 void plugin_finish( plugin *the_plugin )
 {
-  close( the_plugin->pipe_to );
-  close( the_plugin->pipe_from );
-  close( the_plugin->pipe_data );
-  waitpid( the_plugin->pid, NULL, 0 );
+
+	close( the_plugin->pipe_to );
+	close( the_plugin->pipe_from );
+	close( the_plugin->pipe_data );
+	waitpid( the_plugin->pid, NULL, 0 );
+
 }
 
 void plugin_send(plugin *the_plugin, gchar *buffer, gint length)
 {
-  write( the_plugin->pipe_to, buffer, length );
+
+	write( the_plugin->pipe_to, buffer, length );
+
 }
 
 void plugin_send_int( plugin *the_plugin, gint number)
 {
-  write( the_plugin->pipe_to, &number, sizeof( number ) );
+
+	write( the_plugin->pipe_to, &number, sizeof( number ) );
+
 }
 
 void plugin_send_with_length( plugin *plug, gchar *buffer, gint length )
 {
-  plugin_send_int( plug, length );
-  plugin_send( plug, buffer, length );
+
+	plugin_send_int( plug, length );
+	plugin_send( plug, buffer, length );
+
 }
 
 void plugin_send_data(plugin *the_plugin, gchar *buffer, gint length)
 {
-  write( the_plugin->pipe_data, buffer, length );
+
+	write( the_plugin->pipe_data, buffer, length );
+
 }
 
 void plugin_send_data_int( plugin *the_plugin, gint number)
 {
-  write( the_plugin->pipe_data, &number, sizeof( number ) );
+
+	write( the_plugin->pipe_data, &number, sizeof( number ) );
+
 }
 
 void plugin_send_data_with_length( plugin *plug, gchar *buffer, gint length )
 {
-  plugin_send_data_int( plug, length );
-  plugin_send_data( plug, buffer, length );
+
+	plugin_send_data_int( plug, length );
+	plugin_send_data( plug, buffer, length );
+
 }
 
 void plugin_send_data_bool( plugin *the_plugin, gboolean bool)
 {
-  unsigned char ch = bool ? 1 : 0;
-  write( the_plugin->pipe_data, &ch, sizeof( ch ) );
+
+	unsigned char ch = bool ? 1 : 0;
+	write( the_plugin->pipe_data, &ch, sizeof( ch ) );
+
 }
 
 void plugin_real_get( plugin *the_plugin, gchar *buffer, gint length )
 {
-  gint bytes;
-  gchar *start = buffer;
-  while( length > 0 )
-    {
-      do
-	{
-	  bytes = read( the_plugin->pipe_from, buffer, length );
-	} while ( ( bytes == -1 ) && ( ( errno==EAGAIN ) || ( errno==EINTR ) ) );
+	gint bytes;
+	gchar *start = buffer;
 
-      if ( bytes == -1 )
-	{
-	  g_warning( "Go: Error reading from plugin." );
-	  *start = 0;
-	  return;
-	}
+	while ( length > 0 ) {
+	  do {
 
-      if ( bytes == 0 )
-	{
-	  g_warning( "Go: Error EOF read?" );
-	  *start = 0;
-	  return;
-	}
+	    bytes = read( the_plugin->pipe_from, buffer, length );
 
-      length -= bytes;
-      buffer += bytes;
-    }
+	  } while ( ( bytes == -1 ) && ( ( errno==EAGAIN ) || ( errno==EINTR ) ) );
+
+	  if ( bytes == -1 ) {
+
+	    g_warning( "Go: Error reading from plugin." );
+	    *start = 0;
+
+	    return;
+
+	  }
+
+	  if ( bytes == 0 ) {
+
+	    g_warning( "Go: Error EOF read?" );
+	    *start = 0;
+
+	    return;
+
+	  }
+
+	  length -= bytes;
+	  buffer += bytes;
+
+      }
+
 }
 
 void plugin_get( plugin *the_plugin, gchar *buffer, gint length )
 {
-  buffer[ length ] = 0;
-  plugin_real_get( the_plugin, buffer, length );
+
+	buffer[ length ] = 0;
+	plugin_real_get( the_plugin, buffer, length );
+
 }
 
 void plugin_get_int( plugin *the_plugin, gint *number )
 {
-  plugin_real_get( the_plugin, (gchar *) number, sizeof( gint ) );
+
+	plugin_real_get( the_plugin, (gchar *) number, sizeof( gint ) );
+
 }
 
 #if 0
@@ -674,113 +735,118 @@ void plugin_register( plugin *plug, plugin_callback_struct *callbacks, gint cont
 
 void plugin_register( plugin *plug, plugin_callback_struct *callbacks, gint context )
 {
-  plug->callbacks = *callbacks;
-  plugin_get_all( plug, 1, process_command, NULL ); 
-  plugin_send_int( plug, context ); 
+
+	plug->callbacks = *callbacks;
+	plugin_get_all ( plug, 1, process_command, NULL ); 
+	plugin_send_int ( plug, context ); 
+
 }
 
 static void plugin_get_more( gpointer data, gint source, GdkInputCondition condition )
 {
-  partly_read *partly = (partly_read *) data;
-  int count;
+	partly_read *partly = (partly_read *) data;
+	int count;
 
-  partly->sofar += (count = read( partly->plug->pipe_from, partly->buff + partly->sofar, partly->length - partly->sofar ) );
-  if( partly->length - partly->sofar == 0 )
-    {
-      gdk_input_remove( partly->incall );
-      if ( partly->finished )
-        {
-	 partly->finished( partly->plug, partly->buff, partly->length, partly->data );
-/*      if (partly->buff)
-        g_free( partly->buff );
-      if (partly)
-        g_free( partly );*/
-        }
-    }
-  else if( count == 0 )
-    {
-      gdk_input_remove( partly->incall );
-/*      if (partly->buff)
-        g_free( partly->buff );
-      if (partly)
-        g_free( partly );*/
-    }
+	partly->sofar += (count = read( partly->plug->pipe_from, partly->buff + partly->sofar, partly->length - partly->sofar ) );
+	if ( partly->length - partly->sofar == 0 ) {
+
+	  gdk_input_remove( partly->incall );
+
+	  if ( partly->finished ) {
+
+	    partly->finished( partly->plug, partly->buff, partly->length, partly->data );
+
+	  }
+
+	} else if( count == 0 ) {
+
+	 gdk_input_remove( partly->incall );
+
+	}
+
 }
 
 void
 plugin_get_all( plugin *plug, gint length, plugin_callback *finished, gpointer data )
 {
-  partly_read *partly = g_malloc0( sizeof( partly_read ) );
-  partly->plug = plug;
-  partly->buff = g_malloc0( length + 1 );
-  partly->length = length;
-  partly->sofar = 0;
-  partly->incall = gdk_input_add( plug->pipe_from, GDK_INPUT_READ,
-				  plugin_get_more, partly );
-  partly->finished = finished;
-  partly->data = data;
+
+	partly_read *partly = g_malloc0( sizeof( partly_read ) );
+	partly->plug = plug;
+	partly->buff = g_malloc0( length + 1 );
+	partly->length = length;
+	partly->sofar = 0;
+	partly->incall = gdk_input_add (plug->pipe_from, GDK_INPUT_READ,
+								plugin_get_more, partly);
+
+	partly->finished = finished;
+	partly->data = data;
+
 }
 
 static void
 plugin_send_more( gpointer data, gint source, GdkInputCondition condition )
 {
-  partly_read *partly = (partly_read *) data;
-  int count;
+
+	partly_read *partly = (partly_read *) data;
+	int count;
   
-  partly->sofar += (count = write( source, partly->buff + partly->sofar, partly->length - partly->sofar ) );
-  if( partly->length - partly->sofar == 0 )
-    {
-      gdk_input_remove( partly->incall );
-      if( partly->finished )
-	partly->finished( partly->plug, partly->buff, partly->length, partly->data );
-/*      if (partly->buff)
-        g_free( partly->buff );
-      if (partly)
-        g_free( partly );*/
-    }
-  else if( count == -1 )
-    {
-      gdk_input_remove( partly->incall );
-/*      if (partly->buff)
-        g_free( partly->buff );
-      if (partly)
-        g_free( partly );*/
-    }
+	partly->sofar += (count = write( source, partly->buff + partly->sofar, partly->length - partly->sofar ) );
+
+	if ( partly->length - partly->sofar == 0 ) {
+
+	  gdk_input_remove( partly->incall );
+
+	  if (partly->finished)
+	    partly->finished( partly->plug, partly->buff, partly->length, partly->data );
+
+	} else if( count == -1 ) {
+
+	 gdk_input_remove( partly->incall );
+
+	}
+
 }
 
 void
 plugin_send_data_all_with_length( plugin *plug, gchar *buffer, gint length, plugin_callback *finished, gpointer data )
 {
-  partly_read *partly = g_malloc0( sizeof( partly_read ) );
-  partly->plug = plug;
-  partly->buff = g_malloc( length + sizeof( int ) + 1 );
-  *( (int *) partly->buff) = length;
-  strcpy( partly->buff + sizeof( int ), buffer );
-  partly->length = length + sizeof( int );
-  partly->sofar = 0;
-  partly->incall = gdk_input_add( plug->pipe_data, GDK_INPUT_WRITE,
-				  plugin_send_more, partly );
-  partly->finished = finished;
-  partly->data = data;
+
+	partly_read *partly = g_malloc0( sizeof( partly_read ) );
+	partly->plug = plug;
+	partly->buff = g_malloc( length + sizeof( int ) + 1 );
+	*( (int *) partly->buff) = length;
+
+	strcpy( partly->buff + sizeof( int ), buffer );
+	partly->length = length + sizeof( int );
+	partly->sofar = 0;
+	partly->incall = gdk_input_add (plug->pipe_data, GDK_INPUT_WRITE,
+								plugin_send_more, partly);
+
+	partly->finished = finished;
+	partly->data = data;
+
 }
 
 static void
 plugin_get_command( plugin *plug, gchar *buffer, int length, gpointer data )
 {
-  plugin_get_all( plug, 1, process_command, NULL );
+
+	plugin_get_all( plug, 1, process_command, NULL );
+
 }
 
 static void
 process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 {
-  plugin_parse_state *state = data;
 
-  if( state->command_current_count < state->command_count )
-    {
-      state->command[state->command_current_count ++] = *buffer;
-      switch( state->command[0] )
-	{
-	case 'e':
+	plugin_parse_state *state = data;
+
+	if (state->command_current_count < state->command_count) {
+
+	  state->command[state->command_current_count ++] = *buffer;
+
+	  switch (state->command[0]) {
+	  case 'e':
 	  switch( state->command[1] )
 	    {
 	    case 'r': /* Fall through. */

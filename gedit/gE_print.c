@@ -58,6 +58,7 @@ static GtkWidget *print_cmd_entry = NULL;
 void
 file_print_cb(GtkWidget *widget, gpointer cbdata)
 {
+
 	GtkWidget *hbox;
 	GtkWidget *vbox;
 	GtkWidget *tmp;
@@ -66,7 +67,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	g_assert(data != NULL);
 
 	if (print_dialog)
-		return;
+	  return;
 
 	print_dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
@@ -96,9 +97,10 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show(tmp);
 
 	print_cmd_entry = gtk_entry_new_with_max_length(255);
+	
 	if (settings->print_cmd)
-		gtk_entry_set_text(GTK_ENTRY(print_cmd_entry),
-			settings->print_cmd);
+	  gtk_entry_set_text(GTK_ENTRY(print_cmd_entry), settings->print_cmd);
+	  
 	gtk_box_pack_start(GTK_BOX(hbox), print_cmd_entry, TRUE, TRUE, 10);
 	gtk_widget_show(print_cmd_entry);
 
@@ -123,6 +125,7 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_widget_show(tmp);
 
 	gtk_widget_show(print_dialog);
+	
 } /* file_print_cb */
 
 
@@ -134,10 +137,14 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 static void
 print_destroy(GtkWidget *widget, gpointer data)
 {
+
 	if (print_dialog) {
-		gtk_widget_destroy(print_dialog);
-		print_dialog = NULL;
+	
+	  gtk_widget_destroy(print_dialog);
+	  print_dialog = NULL;
+	
 	}
+
 } /* print_destroy */
 
 
@@ -149,51 +156,58 @@ print_destroy(GtkWidget *widget, gpointer data)
 static void
 file_print_execute(GtkWidget *w, gpointer cbdata)
 {
+
 	gchar *scmd, *pcmd, *tmp, *fname;
 	gE_data *data = (gE_data *)cbdata;
 
 	g_assert(data != NULL);
 
 	if (settings->print_cmd)
-		strcpy(settings->print_cmd,
-			gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
+	  strcpy(settings->print_cmd, gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
 
 	/* print using specified command */
 	if ((pcmd = gtk_entry_get_text(GTK_ENTRY(print_cmd_entry))) == NULL)
-		return;
+	  return;
 
 	/* look for "file variable" and place marker */
-	if ((tmp = strstr(pcmd, "%s")) == NULL)
-		return;
+	if ((tmp = strstr (pcmd, "%s")) == NULL)
+	  return;
+
 	*tmp = '\0';
 	tmp += 2;
 
 	if ((fname = get_filename(data)) == NULL) {
-		print_destroy(NULL, NULL);
-		return;	/* canceled */
+
+	  print_destroy(NULL, NULL);
+	  
+	  return;	/* canceled */
+
 	}
 
 	/* build command and execute; g_malloc handles memory alloc errors */
-	scmd = g_malloc(strlen(pcmd) + strlen(fname) + 1);
-	sprintf(scmd, "%s%s%s", pcmd, fname, tmp);
+	scmd = g_malloc (strlen(pcmd) + strlen(fname) + 1);
+	sprintf (scmd, "%s%s%s", pcmd, fname, tmp);
+
 #ifdef DEBUG
 	g_print("%s\n", scmd);
 #endif
-	if (system(scmd) == -1)
-		perror("file_print_execute: system() error");
-	/*gE_msgbar_set(data->window, MSGBAR_FILE_PRINTED);*/
+
+	if (system (scmd) == -1)
+	  perror ("file_print_execute: system() error");
+
 	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_PRINTED));
 
-	g_free(scmd);
+	g_free (scmd);
 
 	/* delete temporary file.  TODO: allow temp dir to be customizable */
-	if (strncmp(fname, "/tmp", 4) == 0)
-		if (unlink(fname))
-			perror("file_print_execute: unlink() error");
+	if (strncmp (fname, "/tmp", 4) == 0)
+	  if (unlink (fname))
+	    perror ("file_print_execute: unlink() error");
 
-	g_free(fname);
+	g_free (fname);
 
-	print_destroy(NULL, NULL);
+	print_destroy (NULL, NULL);
+
 } /* file_print_execute */
 
 
@@ -215,6 +229,7 @@ file_print_execute(GtkWidget *w, gpointer cbdata)
 static char *
 get_filename(gE_data *data)
 {
+
 	gE_document *doc;
 	char *fname = NULL;
 	char *buttons[] =
@@ -226,60 +241,70 @@ get_filename(gE_data *data)
 	doc = gE_document_current();
 
 	if (!GE_VIEW(mdi->active_view)->changed && doc->filename) {
-		if (doc->sb == NULL)
-			doc->sb = g_malloc(sizeof(struct stat));
-		if (stat(doc->filename, doc->sb) == -1) {
-			/* print warning */
-			g_free(doc->sb);
-			doc->sb = NULL;
-			fname = generate_temp_file(GE_VIEW(mdi->active_child));
-		} else
-			fname = g_strdup(doc->filename);
+	  
+	  if (doc->sb == NULL)
+	     doc->sb = g_malloc(sizeof(struct stat));
+	  
+	  if (stat(doc->filename, doc->sb) == -1) {
+	    
+	    /* print warning */
+	    g_free(doc->sb);
+	    doc->sb = NULL;
+	    fname = generate_temp_file(GE_VIEW(mdi->active_child));
+	    
+	  } else
+	   fname = g_strdup(doc->filename);
+	   
 	} else { /* doc changed or no filename */
-		int ret;
+	 int ret;
 
-		title = g_strdup(_(PRINT_TITLE));
-		if (doc->filename)
-			msg = (char *)g_malloc(strlen(_(PRINT_MSG)) +
-						strlen(doc->filename) + 6);
-		else
-			msg = (char *)g_malloc(strlen(_(PRINT_MSG)) +
-						strlen(_(UNTITLED)) + 6);
-		sprintf(msg, " '%s' %s ", 
-			(doc->filename) ? doc->filename : _(UNTITLED), PRINT_MSG);
+	 title = g_strdup(_(PRINT_TITLE));
+	 if (doc->filename)
+	   msg = (char *)g_malloc(strlen(_(PRINT_MSG)) + strlen(doc->filename) + 6);
+	 else
+	   msg = (char *)g_malloc(strlen(_(PRINT_MSG)) + strlen(_(UNTITLED)) + 6);
+	   sprintf(msg, " '%s' %s ", (doc->filename) ? doc->filename : _(UNTITLED), PRINT_MSG);
 
-		ret = gnome_dialog_run_and_close ((GnomeDialog *)
+	 ret = gnome_dialog_run_and_close ((GnomeDialog *)
 			gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, 
 				buttons[0], buttons[1], buttons[2], NULL)) + 1;
 		
-		g_free(msg);
-		g_free(title);
+	 g_free(msg);
+	 g_free(title);
 
-		switch (ret) {
-		case 1 :
-			fname = generate_temp_file(GE_VIEW(mdi->active_view));
+	 switch (ret) {
+		
+	 case 1 :
+	 		fname = generate_temp_file(GE_VIEW(mdi->active_view));
 			break;
-		case 2 :
+
+	 case 2 :
 			if (doc->filename == NULL) {
-				data->temp1 = (gpointer)TRUE;	/* non-zero */
-				file_save_as_cb(NULL, data);
-				while (data->temp1 != NULL)
-					gtk_main_iteration_do(TRUE);
+			
+			  data->temp1 = (gpointer)TRUE;	/* non-zero */
+			  file_save_as_cb(NULL, data);
+			  while (data->temp1 != NULL)
+			    gtk_main_iteration_do(TRUE);
+			
 			} else
-				gE_file_save(doc, doc->filename);
+			 gE_file_save(doc, doc->filename);
 
 			fname = g_strdup(doc->filename);
 			break;
-		case 3 :
+
+	 case 3 :
 			fname = NULL;
 			break;
-		default:
+
+	 default:
 			printf("get_filename: ge_dialog returned %d\n", ret);
 			exit(-1);
-		} /* switch */
+	 } /* switch */
+	 
 	} /* doc changed or no filename */
 
 	return fname;
+	
 } /* get_filename */
 
 
@@ -294,6 +319,7 @@ get_filename(gE_data *data)
 static char *
 generate_temp_file(gE_view *view)
 {
+
 	FILE *fp;
 	char *fname;
 
@@ -301,23 +327,28 @@ generate_temp_file(gE_view *view)
 
 	sprintf(fname, "/tmp/.gedit_print.%d%d", (int)time(NULL), getpid());
 	if ((fp = fopen(fname, "w")) == NULL) {
-		g_error("generate_temp_file: unable to open '%s'\n", fname);
-		g_free(fname);
-		return NULL;
+		
+	  g_error("generate_temp_file: unable to open '%s'\n", fname);
+	  g_free(fname);
+		
+	  return NULL;
+		
 	}
 
 	if (fputs(gtk_editable_get_chars(GTK_EDITABLE(view->text), 0,
 		gtk_text_get_length(GTK_TEXT(view->text))), fp) == EOF) {
 
-		perror("generate_temp_file: can't write to tmp file");
-		g_free(fname);
-		fclose(fp);
-		return NULL;
+	  perror("generate_temp_file: can't write to tmp file");
+	  g_free(fname);
+	  fclose(fp);
+	  
+	  return NULL;
+	  
 	}
+	
 	fflush(fp);
 	fclose(fp);
 
 	return fname;
+	
 } /* generate_temp_file */
-
-/* the end */

@@ -1,3 +1,70 @@
+Tue Sep  7 18:15:35 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/*.c: Tidied up the source.
+
+Tue Sep  7 17:21:30 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+	
+	* src/gE_view.c: (gE_view_new) Add the gE_view to the GList here, instead
+	  of at the add_view level. 
+	  (gE_view_init) Replaced the gE_prefs_set_int with the gnome_config 
+	  function (as well as the required prefix functions).
+	
+	* src/gE_mdi.c: (gE_add_view) Removed the GList related code.
+	
+	* src/gE_prefs_box.c: (gE_refresh_window) Fixed the Font Updating code..
+	  We now go through the Documents and then go deeper into the 
+	  separate views (via the GList) and update the Font.
+	  
+	* src/gE_prefs.c: (gE_rc_parse) Removed, now unused, function.
+	
+	* src/gE_prefs.h: Removed gE_prefslib.h header.
+	
+	* src/Makefile.am: Removed gE_prefslib.[ch]. We don't need these files 
+	  any more.
+	
+	* The binary is now over 20k smaller than the previous release. =)
+
+Tue Sep  7 15:47:35 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_prefs_box.c: Moved the MDI settings into the Window Settings box
+	  and put the Font settings into the Document Settings box. 
+	  (gE_apply) Change the current view "splitscreen" flag when applying.
+	  (gE_window_refresh) Run the gE_view_set_splitscreen function with
+	  the correct arguments.
+	
+	* menus.c: (gedit_settings_menu) Removed menu entries for settings
+	  that are in the Preferences box, and shouldn't really be on the
+	  menu. ie: Autoindent, Statusbar, and Word/Linewrap. Left the
+	  Readonly and Splitscreen options.
+	
+	* gE_window.c: (gE_window_new) Put the hash table code for the window
+	  back as-was in 0.5.4. Plugins now work again.
+
+Tue Sep  7 15:19:16 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* gE_view.c: (view_list_insert) Check to make sure we dont insert the
+	  text into the current view, only the other views.
+	
+	* gE_mdi.c: (gE_add_view) If the view's GList is NULL, we should add
+	  the current view, before adding the new view to the window (and the
+	  GList).
+
+	* Many thanks to Kosta Arvanitis for supplying some new code, which I
+	  have now incorporated. He didn't supply a ChangeLog so here goes..
+	
+	* src/commands.[ch]: New Save All and Close All features, for saving
+	  all open documents, and closing them all. Also modified the Save As
+	  dialog to include the current Filename in the title.
+	
+	* src/menu.c: Entries for the above callbacks.
+	
+	* gE_mdi.c: (gE_document_new_with_title) New function that creates new
+	  documents with sequential titles (Untitled 1, Untitled 2, etc).
+	
+	* gedit.c: (main) Fixed parsing of command line input files. We now ask
+	  the user if they want to create a new file if one requested doesnt
+	  exist.
+
 1999-09-03  Zbigniew Chyla  <chyla@alice.ci.pwr.wroc.pl>
 
 	* makeconfig.pl: Added pl to ALL_LINGUAS.

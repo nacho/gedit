@@ -83,12 +83,16 @@ void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
 GnomeUIInfo gedit_file_menu [] = {
+
         GNOMEUIINFO_MENU_NEW_ITEM(N_("_New"), N_("Create a new document"),
 				  file_new_cb, NULL),
 
 	GNOMEUIINFO_MENU_OPEN_ITEM(file_open_cb, NULL),
 
 	GNOMEUIINFO_MENU_SAVE_ITEM(file_save_cb, NULL),
+
+	GNOMEUIINFO_ITEM_STOCK (N_("Save All"),N_("Save All Open Files"),
+						file_save_all_cb, GNOME_STOCK_MENU_SAVE),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, NULL),
 
@@ -102,18 +106,19 @@ GnomeUIInfo gedit_file_menu [] = {
 
 	GNOMEUIINFO_MENU_CLOSE_ITEM(file_close_cb, (gpointer) GE_DATA),
 
-/*BORK	{ GNOME_APP_UI_ITEM, N_("Close All"), N_("Close all open files"),
-FIXME	  file_close_all_cb, (gpointer) GE_DATA, NULL,
-	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },*/
+	GNOMEUIINFO_ITEM_STOCK (N_("Close All"),N_("Close All Open Files"),
+						file_close_all_cb, GNOME_STOCK_MENU_CLOSE),
 
 	GNOMEUIINFO_MENU_EXIT_ITEM(file_quit_cb, (gpointer) GE_DATA),
 
 	GNOMEUIINFO_END
+
 };
 
 
 
 GnomeUIInfo gedit_tab_menu []= {
+
 	{ GNOME_APP_UI_ITEM, N_("_Top"),
 	  N_("Put the document tabs at the top"),
 	  tab_top_cb, (gpointer) GE_WINDOW, NULL },
@@ -137,9 +142,11 @@ GnomeUIInfo gedit_tab_menu []= {
 				    tab_toggle_cb, (gpointer) GE_WINDOW, NULL),*/
 	
 	GNOMEUIINFO_END
+
 };
 
 GnomeUIInfo gedit_scrbar_menu []= {
+
 	{ GNOME_APP_UI_ITEM, N_("_None"),
 	  N_("Don't have a scrollbar"),
 	  scrollbar_none_cb, (gpointer) GE_DATA, NULL },
@@ -153,10 +160,14 @@ GnomeUIInfo gedit_scrbar_menu []= {
 	  scrollbar_auto_cb, (gpointer) GE_DATA, NULL },
 
 	GNOMEUIINFO_END
+
 };
 
 
 GnomeUIInfo gedit_settings_menu []= {
+/* -- These settings are in the Preferences Box, and only need to be
+      there.. Readonly and Splitscreen are on a per-document basis
+      
         GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
 				    N_("Toggle autoindent"),
 				    auto_indent_toggle_cb, (gpointer) GE_DATA,
@@ -176,7 +187,7 @@ GnomeUIInfo gedit_settings_menu []= {
 				    N_("Toggle Linewrap"),
 				    options_toggle_line_wrap_cb,
 				    NULL, NULL),
-
+*/
 	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_READONLY,
 				    N_("Toggle Readonly"),
 				    options_toggle_read_only_cb,
@@ -206,9 +217,11 @@ GnomeUIInfo gedit_settings_menu []= {
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gE_prefs_dialog, (gpointer) GE_DATA),
 
 	GNOMEUIINFO_END
+
 };
 
 GnomeUIInfo gedit_window_menu []={
+
  	GNOMEUIINFO_MENU_NEW_WINDOW_ITEM(window_new_cb, (gpointer) GE_DATA),
 
 /*FIXME        GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(window_close_cb,
@@ -222,6 +235,7 @@ GnomeUIInfo gedit_window_menu []={
 	  GNOME_APP_PIXMAP_NONE, NULL, 'L', GDK_CONTROL_MASK, NULL },*/
 
 	GNOMEUIINFO_END
+
 };
 
 GnomeUIInfo gedit_docs_menu[] = {
@@ -239,19 +253,17 @@ GnomeUIInfo gedit_help_menu []= {
 };
 
 
-#if PLUGIN_TEST
 GnomeUIInfo gedit_plugins_menu []= {
   { GNOME_APP_UI_ENDOFINFO}
 };
-#endif
+
 
 GnomeUIInfo gedit_menu [] = {
+
         GNOMEUIINFO_MENU_FILE_TREE(gedit_file_menu),
 
-#if PLUGIN_TEST
 	{ GNOME_APP_UI_SUBTREE, N_("_Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-#endif
 
 	GNOMEUIINFO_MENU_SETTINGS_TREE(gedit_settings_menu),
 	GNOMEUIINFO_MENU_WINDOWS_TREE(gedit_window_menu),
@@ -259,6 +271,7 @@ GnomeUIInfo gedit_menu [] = {
 	GNOMEUIINFO_MENU_HELP_TREE(gedit_help_menu),
 
 	GNOMEUIINFO_END
+
 };
 
 GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
@@ -291,9 +304,10 @@ GnomeUIInfo * gE_menus_init (gE_window *window, gE_data *data)
 void
 gE_set_menu_toggle_states()
 {
-  gE_document *doc;
-  gE_view *view;
-  int i;
+
+	gE_document *doc;
+	gE_view *view;
+	int i;
 
 #define GE_SET_TOGGLE_STATE(item, l, boolean)                            \
   if (!strcmp(item.label, l))                                            \
@@ -318,66 +332,72 @@ gE_set_menu_toggle_states()
   /*
    * The settings menu...
    */
-  for (i = 0; gedit_settings_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++)
-    {
-      if (gedit_settings_menu[i].label)
-	{
-	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      _(GE_TOGGLE_LABEL_AUTOINDENT),
-			      settings->auto_indent);
+	for (i = 0; gedit_settings_menu[i].type != GNOME_APP_UI_ENDOFINFO; i++) {
 
-	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      _(GE_TOGGLE_LABEL_STATUSBAR),
-			      settings->show_status);
+	  if (gedit_settings_menu[i].label) {
 
-      if ((doc = gE_document_current ()))
-        {
-          view = GE_VIEW (mdi->active_view);
+	    GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_AUTOINDENT),
+						settings->auto_indent);
+
+	    GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_STATUSBAR),
+						settings->show_status);
+
+            if ((doc = gE_document_current ())) {
+
+	      view = GE_VIEW (mdi->active_view);
           
-	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      _(GE_TOGGLE_LABEL_WORDWRAP),
-			      view->word_wrap);
+	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_WORDWRAP),
+						view->word_wrap);
 
-	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      _(GE_TOGGLE_LABEL_LINEWRAP),
-			      view->line_wrap);
+	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_LINEWRAP),
+						view->line_wrap);
 
-	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      _(GE_TOGGLE_LABEL_READONLY),
-			      view->read_only);
+	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_READONLY),
+						view->read_only);
 
-	  GE_SET_TOGGLE_STATE(gedit_settings_menu[i],
-			      _(GE_TOGGLE_LABEL_SPLITSCREEN),
-			      view->splitscreen);
+	      GE_SET_TOGGLE_STATE(gedit_settings_menu[i], _(GE_TOGGLE_LABEL_SPLITSCREEN),
+						view->splitscreen);
 
-	 }
+	    }
+
 	}
+
     }
+
 }
 
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
 {
+
 	int i = 0;
 
-	while (menu[i].type != GNOME_APP_UI_ENDOFINFO)
-	{
+	while (menu[i].type != GNOME_APP_UI_ENDOFINFO) {
+
 		if (menu[i].user_data == (gpointer)GE_DATA)
-			menu[i].user_data = data;
+		  menu[i].user_data = data;
 		if (menu[i].user_data == (gpointer)GE_WINDOW)
-			menu[i].user_data = window;
+		  menu[i].user_data = window;
+
 		i++;
+
 	}
+
 }
 
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data)
 {
+
 	int i = 0;
-	while (menu[i].type != GNOME_APP_UI_ENDOFINFO)
-	{
+
+	while (menu[i].type != GNOME_APP_UI_ENDOFINFO) {
+
 		if (menu[i].user_data == data)
 			menu[i].user_data = (gpointer) GE_DATA;
 		if (menu[i].user_data == window)
 			menu[i].user_data = (gpointer) GE_WINDOW;
+
 		i++;
+
 	}
+
 }

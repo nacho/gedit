@@ -34,9 +34,13 @@ extern void window_new_cb(GtkWidget *widget, gpointer cbdata);
 extern void file_open_cb(GtkWidget *widget, gpointer cbdata);
 extern void file_open_in_new_win_cb(GtkWidget *widget, gpointer data);
 extern void file_save_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_save_all_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_save_all_as_cb(GtkWidget *widget, gpointer cbdata);
 extern void file_save_as_cb(GtkWidget *widget, gpointer cbdata);
 extern void file_close_cb(GtkWidget *widget, gpointer cbdata);
+extern void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
 extern void file_revert_cb (GtkWidget *widget, gpointer cbdata);
+extern int popup_create_new_file (GtkWidget *w, gchar *title);
 /*FIXME extern void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
 extern void window_close_cb(GtkWidget *widget, gpointer cbdata);*/
 

@@ -53,8 +53,6 @@ gedit_SOURCES = 	\
 	gE_files.c	\
 	gE_files.h      \
 	gE_prefs.c	\
-	gE_prefslib.c	\
-	gE_prefslib.h	\
 	gE_prefs_box.c	\
 	gE_prefs_box.h	\
 	plugin.c        \
@@ -70,6 +68,8 @@ gedit_SOURCES = 	\
 	menus.c		\
 	search.h	\
 	search.c	
+#	gE_prefslib.c	\
+#	gE_prefslib.h	\
 #	gE_document.c	\
 #	gE_window.h	\
 #	dialog.h	\

@@ -29,20 +29,6 @@
 #include "gE_mdi.h"
 
 
-static char *rc;
-
-void 
-gE_rc_parse(void)
-{
-	/*if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
-	{
-		printf ("gE_rc_parse: Couldn't open gtk rc file for parsing.\n");
-		return;
-	}*/
-	rc = gE_prefs_open_file ("gtkrc", "r");
-	gtk_rc_parse(rc);
-}
-
 void 
 gE_save_settings()
 {
@@ -62,13 +48,15 @@ gE_save_settings()
 	gnome_config_set_string ("font", settings->font);
 	gnome_config_set_int ("width", (gint) settings->width);
 	gnome_config_set_int ("height", (gint) settings->height);
+	
 	if (settings->print_cmd == "")
-		gnome_config_set_string ("print command", "lpr -rs %s");
+	  gnome_config_set_string ("print command", "lpr -rs %s");
 	else
-		gnome_config_set_string ("print command", settings->print_cmd);
+	  gnome_config_set_string ("print command", settings->print_cmd);
 	
 	if (!settings->run)
 	  settings->run = TRUE;
+	
 	gnome_config_set_int ("run", (gint) settings->run);
 	
 	gnome_config_pop_prefix ();
@@ -78,64 +66,67 @@ gE_save_settings()
 void gE_get_settings()
 {
 	 
-	 gnome_config_push_prefix ("/gEdit/Global/");
+	gnome_config_push_prefix ("/gEdit/Global/");
 	 
-/*	 settings->tab_pos = gE_prefs_get_int("tab pos");*/
-	 settings->run = gnome_config_get_int ("run");
-	 settings->show_status = gnome_config_get_int ("show statusbar");
-	 settings->have_toolbar = gnome_config_get_int ("toolbar");
-	 settings->have_tb_text = gnome_config_get_int ("tb text");
-	 settings->have_tb_pix = gnome_config_get_int ("tb pix");
-	 settings->use_relief_toolbar = gnome_config_get_int("tb relief");
-	 settings->splitscreen = gnome_config_get_int("splitscreen");
-	 settings->close_doc = gnome_config_get_int ("close doc");
-	 settings->mdi_mode = gnome_config_get_int ("mdi mode");
-	 if (!settings->mdi_mode)
-	   settings->mdi_mode = mdi_type[GNOME_MDI_NOTEBOOK];
+/*	settings->tab_pos = gE_prefs_get_int("tab pos");*/
+	settings->run = gnome_config_get_int ("run");
+	settings->show_status = gnome_config_get_int ("show statusbar");
+	settings->have_toolbar = gnome_config_get_int ("toolbar");
+	settings->have_tb_text = gnome_config_get_int ("tb text");
+	settings->have_tb_pix = gnome_config_get_int ("tb pix");
+	settings->use_relief_toolbar = gnome_config_get_int("tb relief");
+	settings->splitscreen = gnome_config_get_int("splitscreen");
+	settings->close_doc = gnome_config_get_int ("close doc");
+	settings->mdi_mode = gnome_config_get_int ("mdi mode");
+	if (!settings->mdi_mode)
+	  settings->mdi_mode = mdi_type[GNOME_MDI_NOTEBOOK];
 	   
-	 if (mdiMode != settings->mdi_mode)
-	   {
-	     mdiMode = settings->mdi_mode;
-             gnome_mdi_set_mode (mdi, mdiMode);
-           }
-	 
-	 settings->scrollbar = gnome_config_get_int ("scrollbar");
-	 if (!settings->scrollbar)
-	   settings->scrollbar = GTK_POLICY_AUTOMATIC;
-	 
-	 settings->width = gnome_config_get_int ("width");
-	 if (!settings->width)
-	   settings->width = 630;
+	if (mdiMode != settings->mdi_mode) {
 
-	 settings->height = gnome_config_get_int ("height");
-	 if (!settings->height)
-	   settings->height = 390;
+	  mdiMode = settings->mdi_mode;
+	  gnome_mdi_set_mode (mdi, mdiMode);
+	}
 	 
-	 settings->font = gnome_config_get_string ("font");
-	 if (settings->font == NULL) {
-	   if (use_fontset)
+	settings->scrollbar = gnome_config_get_int ("scrollbar");
+	if (!settings->scrollbar)
+	  settings->scrollbar = GTK_POLICY_AUTOMATIC;
+	 
+	settings->width = gnome_config_get_int ("width");
+	if (!settings->width)
+	  settings->width = 630;
+
+	settings->height = gnome_config_get_int ("height");
+	if (!settings->height)
+	  settings->height = 390;
+	 
+	settings->font = gnome_config_get_string ("font");
+	if (settings->font == NULL) {
+	
+	  if (use_fontset)
 	     settings->font = DEFAULT_FONTSET;
 	   else
 	     settings->font = DEFAULT_FONT;
-	 }
-	 settings->print_cmd = gnome_config_get_string ("print command"); 
-	 if (settings->print_cmd == NULL)
-	   settings->print_cmd = "lpr %s";
+	
+	}
+	
+	settings->print_cmd = gnome_config_get_string ("print command"); 
+	if (settings->print_cmd == NULL)
+	  settings->print_cmd = "lpr %s";
 
 
-/*bOrK	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);*/
-
-	if (settings->run)
-	  {
-	   if (settings->show_status == FALSE)
-	     gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
-	  }
-	else
-	  {
-	   settings->show_status = TRUE;
-	   gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
-	  }
+	if (settings->run) {
+	
+	  if (settings->show_status == FALSE)
+	    gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
+	
+	} else {
+	
+	 settings->show_status = TRUE;
+	 gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
+	
+	}
 	
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
+	
 }

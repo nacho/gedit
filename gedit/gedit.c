@@ -34,10 +34,6 @@
 #include "menus.h"
 #include "toolbar.h"
 
-#ifdef WITH_GMODULE_PLUGINS
-#include <gE_plugin.h>
-#endif
-
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>
 #endif
@@ -55,6 +51,7 @@ gboolean use_fontset = FALSE;
 
 void setup_callbacks( plugin_callback_struct *callbacks )
 {
+
 	callbacks->document.create = gE_plugin_document_create;
 	callbacks->text.append = gE_plugin_text_append;
 	callbacks->text.insert = gE_plugin_text_insert;
@@ -71,22 +68,8 @@ void setup_callbacks( plugin_callback_struct *callbacks )
 	callbacks->text.set_selected_text = NULL;
 	callbacks->document.get_position = NULL;
 	callbacks->document.get_selection = NULL;
+
 }
-/* We dont need this!
-gint file_open_wrapper (char *fname)
-{
-	char *nfile;
-	gE_document *doc;
-
-	doc = gE_document_new();
-	nfile = g_malloc(strlen(fname)+1);
-	strcpy(nfile, name);
-	(gint) gE_file_open (doc, nfile);
-
-	return FALSE;
-}
-*/
-
 
 GSList *launch_plugins = NULL;
 
@@ -96,28 +79,34 @@ add_launch_plugin(poptContext ctx,
 		  const struct poptOption *opt,
 		  char *arg, void *data)
 {
-  if(opt->shortName == 'p') {
-    launch_plugins = g_slist_append(launch_plugins, arg);
-  } /* else something's weird :) */
+
+	if (opt->shortName == 'p') {
+
+	  launch_plugins = g_slist_append(launch_plugins, arg);
+
+	} /* else something's weird :) */
+
 }
 
 static void
 launch_plugin(char *name, gpointer userdata)
 {
-  GString *fullname;
-  plugin_callback_struct callbacks;
-  plugin *plug;
 
-  fullname = g_string_new(NULL);
-  g_string_sprintf( fullname, "%s/%s%s", PLUGINDIR, name, "-plugin" );
+	GString *fullname;
+	plugin_callback_struct callbacks;
+	plugin *plug;
+
+	fullname = g_string_new(NULL);
+	g_string_sprintf( fullname, "%s/%s%s", PLUGINDIR, name, "-plugin" );
 	      
-  plug = plugin_new( fullname->str );
+	plug = plugin_new( fullname->str );
 
-  setup_callbacks( &callbacks );
+	setup_callbacks( &callbacks );
 	      
-  plugin_register( plug, &callbacks, 0 );
+	plugin_register( plug, &callbacks, 0 );
 
-  g_string_free( fullname, TRUE );
+	g_string_free( fullname, TRUE );
+
 }
 
 static const struct poptOption options[] = {
@@ -161,6 +150,7 @@ corba_exception (CORBA_Environment* ev)
 
 int main (int argc, char **argv)
 {
+
 	gE_document *doc;
 	gE_window *window;
 	gE_data *data;
@@ -216,20 +206,19 @@ int main (int argc, char **argv)
 
 	args = poptGetArgs(ctx);
 
-	for(i = 0; args && args[i]; i++) {
+	for (i = 0; args && args[i]; i++) {
+
 	  file_list = g_list_append (file_list, args[i]);
+
 	}
 	
 	poptFreeContext(ctx);
 	
-/*	gE_rc_parse(); -- THis really isnt needed any more.. but i forget the
-				  function itself.. */
-
 	doc_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
 	doc_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
 	win_pointer_to_int = g_hash_table_new (g_direct_hash, g_direct_equal);
 	win_int_to_pointer = g_hash_table_new (g_int_hash, g_int_equal);
-	
+
 	
 	data = g_malloc (sizeof (gE_data));
 	window_list = NULL;
@@ -247,19 +236,12 @@ int main (int argc, char **argv)
 	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
 	
 
-	/*window = gE_window_new();
-	
-	data->window = window;
-	window = g_malloc (sizeof (gE_window)); */
 
 	/* Init plugins... */
 	plugins = NULL;
 	
 	setup_callbacks (&pl_callbacks);
 	
-	/*plugin_query_all (&pl_callbacks);*/
-	/*custom_plugin_query_all ( "/usr/gnome/libexec/plugins", &pl_callbacks);*/
-	/*custom_plugin_query ( "/usr/gnome/libexec", "print-plugin", &pl_callbacks);*/
 	plugin_load_list("gEdit");
 
 		
@@ -282,38 +264,36 @@ int main (int argc, char **argv)
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
 
-	if (file_list){
+	if (file_list) {
 
 	  if (mdi->active_child == NULL)
 	    return 1;
 	
 	  gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
 	
-		for (;file_list; file_list = file_list->next)
-		{
-			/*data->temp2 = file_list->data;*/
-			/*file_open_wrapper (file_list->data);*/
-			doc = gE_document_new_with_file (file_list->data);
-			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	        	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		}
+	  for (;file_list; file_list = file_list->next) {
+
+	    if (g_file_exists (file_list->data)) {
+			  
+		doc = gE_document_new_with_file (file_list->data);
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+	        	  
+	    } else {
+	        	
+		popup_create_new_file (NULL, file_list->data);
+	        	  
+	    }
+   	    
+	        	    
+	  }
+
 	}
-/*	else
-	  doc = gE_document_new();
-*/	
 	
 	g_free (data);
 
 	
-      
-#ifdef WITH_GMODULE_PLUGINS
-	gE_Plugin_Query_All ();
-#endif
-	
-
-	
 	gtk_main ();
 	return 0;
+
 }
-
-

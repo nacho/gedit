@@ -51,14 +51,21 @@ void gE_window_set_icon(GtkWidget *window, char *icon);
 /*gE_window */
 void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
+
 	GtkWidget *statusbar;
+	gint *ptr; /* For Plugin Stuff. */
 	
 	static GtkTargetEntry drag_types[] =
 	{
 		{ "text/uri-list", 0, 0 },
 	};
+
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 
+	ptr = g_new (int, 1);
+	*ptr = ++last_assigned_integer;
+	g_hash_table_insert (win_int_to_pointer, ptr, app);
+        g_hash_table_insert (win_pointer_to_int, app, ptr);
 
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
@@ -89,57 +96,66 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 
 void gE_window_set_auto_indent (gint auto_indent)
 {
+
 	settings->auto_indent = auto_indent;
+
 }
 
 /* set the a window icon */
 void gE_window_set_icon(GtkWidget *window, char *icon)
 {
+
 	GdkPixmap *pixmap;
         GdkBitmap *mask;
 
 	gtk_widget_realize (window);
 	
-	pixmap = gdk_pixmap_create_from_xpm_d (window->window,
-						&mask,
+	pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask,
                                 		&window->style->bg[GTK_STATE_NORMAL],
                                 		(char **)gE_icon);
 	
 	gdk_window_set_icon (window->window, NULL, pixmap, mask);
 	
+	/* Not sure about this.. need to test in E */
 	gtk_widget_unrealize (window);
+
 }
 
 
 void gE_window_set_status_bar (gint show_status)
 {
+
 	settings->show_status = show_status;
+
 	if (show_status)
 	  gtk_widget_show (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
 	else
 	  gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
+
 }
 
 
 void
 child_switch (GnomeMDI *mdi, gE_document *doc)
 {
+
 	gchar *title;
 
-	if (gE_document_current())
-	  {
-	    gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
-	    title = g_malloc0 (strlen (GEDIT_ID) +
-					   strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
-	    sprintf (title, "%s - %s",
-		   GNOME_MDI_CHILD (gE_document_current())->name,
-		   GEDIT_ID);
-	    gtk_window_set_title(GTK_WINDOW(mdi->active_window), title);
-	    g_free(title);
-	  }
+	if (gE_document_current()) {
+	
+	  gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
+	  title = g_malloc0 (strlen (GEDIT_ID) +
+					 strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
+	  sprintf (title, "%s - %s", GNOME_MDI_CHILD (gE_document_current())->name,
+			GEDIT_ID);
 	  
+	  gtk_window_set_title(GTK_WINDOW(mdi->active_window), title);
+	  g_free(title);
+	
+	}
 
 }
+
 /*	umm.. FIXME?
 static gint
 gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
@@ -160,6 +176,7 @@ gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 void
 doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 {
+
 	size_t len;
 	char *newfname;
 	gE_document *doc;
@@ -170,33 +187,45 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 
 	newfname = NULL;
 	len = strlen(doc->filename);
+	
 	while (len) {
 		if (doc->filename[len] == '.')
 			break;
 		len--;
-	};
+	}
 
 	len++;
 	if (doc->filename[len] == 'h') {
+
 		newfname = g_strdup(doc->filename);
 		newfname[len] = 'c';
+
 	} else if (doc->filename[len] == 'H') {
+
 		newfname = g_strdup(doc->filename);
 		newfname[len] = 'C';
+
 	} else if (doc->filename[len] == 'c') {
+
 		newfname = g_strdup(doc->filename);
 		newfname[len] = 'h';
-		if (len < strlen(doc->filename) &&
-			strcmp(doc->filename + len, "cpp") == 0)
+
+		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "cpp") == 0)
 			newfname[len+1] = '\0';
+	
 	} else if (doc->filename[len] == 'C') {
+
 		newfname = g_strdup(doc->filename);
-		if (len < strlen(doc->filename) &&
-				strcmp(doc->filename + len, "CPP") == 0) {
+
+		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "CPP") == 0) {
+
 			newfname[len] = 'H';
 			newfname[len+1] = '\0';
+
 		} else
+
 			newfname[len] = 'H';
+
 	}
 
 	if (!newfname)
@@ -207,111 +236,7 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 	doc = gE_document_new_with_file (newfname);
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+
 } /* doc_swaphc_cb */
 
 /* the end */
-
-#ifdef WITH_GMODULE_PLUGINS
-
-gE_document
-*gE_document_new_container(gE_window *w, gchar *title, gint with_split_screen)
-{
-	gE_document *doc;
-	GtkWidget *table, *vscrollbar, *vpaned, *vbox;
-
-	GtkStyle *style;
-	gint *ptr; /* For plugin stuff. */
-
-	doc = g_malloc0(sizeof(gE_document));
-
-	ptr = g_new(int, 1);
-	*ptr = ++last_assigned_integer;
-	g_hash_table_insert (doc_int_to_pointer, ptr, doc);
-	g_hash_table_insert (doc_pointer_to_int, doc, ptr);
-
-	doc->window = w;
-
-	if (w->notebook == NULL) {
-		w->notebook = gtk_notebook_new ();
-		gtk_notebook_set_scrollable (GTK_NOTEBOOK (w->notebook), TRUE);
-	}
-	
-	vpaned = gtk_vbox_new (TRUE, TRUE);
-	
-	doc->tab_label = gtk_label_new (title);
-	GTK_WIDGET_UNSET_FLAGS (doc->tab_label, GTK_CAN_FOCUS);
-	doc->filename = NULL;
-	doc->word_wrap = TRUE;
-	doc->line_wrap = TRUE;
-	doc->read_only = FALSE;
-	gtk_widget_show (doc->tab_label);
-
-	/* Create the upper split screen */
-	table = gtk_table_new (2, 2, FALSE);
-	gtk_table_set_row_spacing (GTK_TABLE (table), 0, 2);
-	gtk_table_set_col_spacing (GTK_TABLE (table), 0, 2);
-	gtk_box_pack_start (GTK_BOX (vpaned), table, TRUE, TRUE, 1);
-	gtk_widget_show (table);
-
-	/* Create it, but never gtk_widget_show () it. */
-	doc->text = gtk_text_new (NULL, NULL);
-
-	doc->viewport = gtk_viewport_new (NULL, NULL);
-	gtk_table_attach_defaults (GTK_TABLE (table), doc->viewport, 0, 1, 0, 1);
-
-	vbox = gtk_vbox_new (FALSE, FALSE);
-
-	vscrollbar = gtk_vscrollbar_new
-		(GTK_VIEWPORT (doc->viewport)->vadjustment);
-	gtk_box_pack_start (GTK_BOX (vbox), vscrollbar, TRUE, TRUE, 0);
-	gtk_table_attach(GTK_TABLE(table), vbox, 1, 2, 0, 1,
-			 GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
-
-	GTK_WIDGET_UNSET_FLAGS (vscrollbar, GTK_CAN_FOCUS);
-	gtk_widget_show (vscrollbar);
-	gtk_widget_show (vbox);
-
-	doc->split_screen = gtk_text_new (NULL, NULL);
-
-	if (with_split_screen) {
-		/* Create the bottom split screen */
-		table = gtk_table_new (2, 2, FALSE);
-		gtk_table_set_row_spacing (GTK_TABLE (table), 0, 2);
-		gtk_table_set_col_spacing (GTK_TABLE (table), 0, 2);
-		
-		gtk_box_pack_start (GTK_BOX (vpaned), table, TRUE, TRUE, 1);
-		gtk_widget_show (table);
-
-		doc->split_viewport = gtk_viewport_new (NULL, NULL);
-		gtk_table_attach_defaults (GTK_TABLE (table),
-					   doc->split_viewport,
-					   0, 1, 0, 1);
-		doc->split_parent = GTK_WIDGET (doc->split_viewport)->parent;
-
-		vscrollbar = gtk_vscrollbar_new
-			(GTK_VIEWPORT (doc->split_viewport)->vadjustment);
-
-		gtk_table_attach (GTK_TABLE (table), vscrollbar, 1, 2, 0, 1,
-				  GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
-
-		GTK_WIDGET_UNSET_FLAGS (vscrollbar, GTK_CAN_FOCUS);
-		gtk_widget_show (vscrollbar);
-		gtk_widget_hide (GTK_WIDGET (doc->split_viewport)->parent);
-	}
-	
-	gtk_widget_show (vpaned);
-	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), vpaned,
-				 doc->tab_label);
-
-	w->documents = g_list_append(w->documents, doc);
-
-	gtk_notebook_set_page(GTK_NOTEBOOK(w->notebook),
-		g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1);
-
-	gtk_widget_grab_focus(doc->text);
-
-	return doc;
-}
-
-#endif /* WITH_GMODULE_PLUGINS */
-
