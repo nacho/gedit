@@ -58,9 +58,8 @@ clear_text (gE_document *doc)
 gint
 gE_file_open(gE_document *doc, gchar *fname)
 {
-	char *buf;
 	int fd;
-	gchar *title;
+	gchar *buf, *title, *flash;
 	size_t size, bytesread, num;
 
 	/* get file stats (e.g., file size is used by files list window) */
@@ -141,7 +140,9 @@ gE_file_open(gE_document *doc, gchar *fname)
 	} /* filesize > 0 */
 
 	/* misc settings */
-	doc->filename = fname;
+	doc->filename = g_malloc0 (strlen (fname) + 1);
+	doc->filename = g_strdup (fname);
+	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(fname));
 	
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
@@ -167,7 +168,10 @@ gE_file_open(gE_document *doc, gchar *fname)
 				                       GTK_SIGNAL_FUNC(doc_changed_cb),doc);
 
 
-	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_OPENED));
+	flash = g_strdup_printf("%s %s",_(MSGBAR_FILE_OPENED), fname);
+	gnome_app_flash(mdi->active_window, flash);
+	g_free(flash);
+		
 	recent_add (doc->filename);
 	recent_update (GNOME_APP (mdi->active_window));
 
@@ -215,9 +219,14 @@ gE_file_save(gE_document *doc, gchar *fname)
 	fclose(fp);
 
 	if (doc->filename != fname)
-	  g_free(doc->filename);
-	  
-	doc->filename = g_strdup(fname);
+	  {
+	    g_free(doc->filename);
+	    
+	    doc->filename = g_malloc0 (strlen (fname) + 1);
+	
+  
+	    doc->filename = g_strdup(fname);
+	  }
 	doc->changed = FALSE;
 	
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(doc->filename));

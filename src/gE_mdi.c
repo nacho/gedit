@@ -19,6 +19,8 @@
  */
 
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <string.h>
 #include <config.h>
 #include <gnome.h>
@@ -372,27 +374,30 @@ gE_document *gE_document_new_with_file (gchar *filename)
 {
 	gE_document *doc;
 	char *nfile, *name;
+	struct stat stats;
 
 	name = filename;
-	if ((doc = gE_document_new()))
-/*	if ((doc = gtk_type_new (gE_document_get_type ())))*/
+/*	if ((doc = gE_document_new()))*/
+
+	if (!stat(filename, &stats) && S_ISREG(stats.st_mode)) 
 	  {
+	    if ((doc = gtk_type_new (gE_document_get_type ())))
+	      {
 
-   	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), filename);
+   	        gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), g_basename(filename));
 
-/*	    nfile = g_malloc(strlen(name)+1);
-	    strcpy(nfile, name);*/
+	        gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 
-	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-
-    	    gE_file_open (GE_DOCUMENT(doc), filename);
+    	        gE_file_open (GE_DOCUMENT(doc), filename);
 
     	    	    
-	    return doc;
+	        return doc;
+	       }
+		g_print ("Eeek.. bork!\n");
+		gtk_object_destroy (GTK_OBJECT(doc));
 	  }
-	g_print ("Eeek.. bork!\n");
-	gtk_object_destroy (GTK_OBJECT(doc));
+
 	
 	return NULL;
 

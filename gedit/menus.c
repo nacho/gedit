@@ -77,7 +77,7 @@ char *just_a_quick_and_dirty_hack[]={
 	N_("Untitled")
 };
 
-
+	
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
@@ -90,6 +90,8 @@ GnomeUIInfo gedit_file_menu [] = {
 	GNOMEUIINFO_MENU_SAVE_ITEM(file_save_cb, NULL),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM(file_save_as_cb, NULL),
+
+	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),NULL,file_revert_cb,GNOME_STOCK_MENU_REFRESH),
 
 	GNOMEUIINFO_SEPARATOR, 
 

@@ -1,3 +1,32 @@
+1999-05-17  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/menus.c: Added Revert option to File menu.
+	
+	* src/commands.[ch]: Added file_revert_cb and file_revert_do - For file revert
+	  options, now you can revert all changes to a document back to the original
+	  saved state. =)
+	  (recent_update_menus) Changed menu range to 6, otherwise the Revert option
+	  would get replaced by a historic document.
+
+1999-05-17  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/commands.c: (file_open_ok_sel) Use the osel widget instead of a
+	  pointer; Also, duplicate the FileSelection filename instead of pointing
+	  to it (i think this was the problem with opening files before, seems a lot
+	  more stable now).
+	
+	* src/gE_mdi.c: (gE_document_new_with_file) Don't use the gE_document_new to
+	  create the document, use the same method that gE_document_new uses though.
+	
+	* src/gE_files.c: (gE_file_open) The doc->filename is now a duplicate of the
+	  filename arg, not a pointer.
+	  
+	* Stability seems to have been improved greatly now.
+	
+	* makeconfig.pl: Added pt_BR to ALL_LINGUAS.
+	
+	* README.plugins: Added Clahey's Wordcount plugin.
+
 1999-05-12  Alex Roberts  <bse@gedit.pn.org>
 
 	* makeconfig.pl: Changed version number to 0.5.3pre. To differenciate with
@@ -2332,7 +2361,75 @@ Thu Aug 20 20:25:57 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* Fixed the sigsegv when loading a file from the cmd line.
 	   This does break the (already broken because of the .gnome/gtkrc) font settings
+msg =   (char *)g_malloc(strlen(fname) + 52);
+	sprintf(msg, _(" '%s' has been modified. Do you wish to save it?"), fname);
+	
+	if (doc->changed)
+	  {
+	    msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
+	    							  msg,
+	    							  GNOME_MESSAGE_BOX_QUESTION,
+	    							  GNOME_STOCK_BUTTON_YES,
+	    							  GNOME_STOCK_BUTTON_NO,
+	    							  GNOME_STOCK_BUTTON_CANCEL,
+	    							  NULL));
+	    gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
+	    ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+	    	    
+/*	    switch (ret)
+	      {
+	        case 0:
+	                 file_save_cb (NULL, data);
+	                 g_print("blargh\n");
+	        case 1:
+	                 return TRUE;
+	        default:
+	                 return FALSE;
+	      }*/
+	      if (ret == 0)
+	        {
+	          /*file_save_cb (NULL, data);*/
+	          if (gE_document_current()->filename)
+	            file_save_cb (NULL, data);
 
+	        }  
+	      else if (ret == 2)
+	       return FALSE;
+	  }msg =   (char *)g_malloc(strlen(fname) + 52);
+	sprintf(msg, _(" '%s' has been modified. Do you wish to save it?"), fname);
+	
+	if (doc->changed)
+	  {
+	    msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
+	    							  msg,
+	    							  GNOME_MESSAGE_BOX_QUESTION,
+	    							  GNOME_STOCK_BUTTON_YES,
+	    							  GNOME_STOCK_BUTTON_NO,
+	    							  GNOME_STOCK_BUTTON_CANCEL,
+	    							  NULL));
+	    gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
+	    ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+	    	    
+/*	    switch (ret)
+	      {
+	        case 0:
+	                 file_save_cb (NULL, data);
+	                 g_print("blargh\n");
+	        case 1:
+	                 return TRUE;
+	        default:
+	                 return FALSE;
+	      }*/
+	      if (ret == 0)
+	        {
+	          /*file_save_cb (NULL, data);*/
+	          if (gE_document_current()->filename)
+	            file_save_cb (NULL, data);
+
+	        }  
+	      else if (ret == 2)
+	       return FALSE;
+	  }
 Sun May 03 03:17:13  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* .cvsignore: New file. Added some files to it as well.

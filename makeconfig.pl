@@ -73,7 +73,7 @@ AC_CHECK_LIB(zvt, zvt_term_new, have_libzvt=yes, have_libzvt=no, $GNOMEUI_LIBS)
 AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
 
 
-ALL_LINGUAS="cs de es fr ga it ko no pt ru sv nl"
+ALL_LINGUAS="cs de es fr ga it ko no pt ru sv nl pt_BR"
 AM_GNU_GETTEXT
 
 

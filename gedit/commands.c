@@ -57,7 +57,7 @@ static void recent_cb(GtkWidget *w, gE_data *data);
 
 static GtkWidget *open_fs, *save_fs;
 GtkWidget *ssel = NULL;
-static GtkWidget *osel = NULL;
+GtkWidget *osel = NULL;
 gchar *oname = NULL;
 
 /* handles changes in the text widget... */
@@ -476,15 +476,13 @@ static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 {
 	gchar *filename;
 	gchar *nfile;
+	gchar *flash;
 	struct stat sb;
 	gE_document *doc;
-	GtkFileSelection *fs;
 
-	fs = GTK_FILE_SELECTION(osel);
 
-/*	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel));*/
-	filename = g_malloc (strlen (gtk_file_selection_get_filename (fs)));
-	strcpy (filename, gtk_file_selection_get_filename(fs));
+	filename = g_malloc (strlen (gtk_file_selection_get_filename (GTK_FILE_SELECTION(osel))) + 1);
+	filename = g_strdup (gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel)));
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel),"");
 	
 	if (filename != NULL) 
@@ -496,7 +494,7 @@ static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 		  {
 			nfile = g_malloc0(strlen (filename) + 3);
 			sprintf(nfile, "%s/.", filename);
-			gtk_file_selection_set_filename(GTK_FILE_SELECTION(fs), nfile);
+			gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel), nfile);
 			g_free(nfile);
 			return;
 		  }
@@ -561,6 +559,7 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 	if (osel == NULL)
 	  osel = gtk_file_selection_new(_("Open File..."));
 		
+
 	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(osel));
 	
 /*	gtk_signal_connect(GTK_OBJECT(open_fs), "destroy",
@@ -719,6 +718,61 @@ file_close_cb(GtkWidget *widget, gpointer cbdata)
 	gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
 }
 
+
+gint file_revert_do (gE_document *doc)
+{
+	GnomeMessageBox *msgbox;
+	gchar msg[80];
+	gint ret;
+
+	sprintf(msg, _("Are you sure you wish to revert all changes?"));
+	
+
+	msgbox = GNOME_MESSAGE_BOX (gnome_message_box_new (
+	    							  msg,
+	    							  GNOME_MESSAGE_BOX_QUESTION,
+	    							  GNOME_STOCK_BUTTON_YES,
+	    							  GNOME_STOCK_BUTTON_NO,
+	    							  NULL));
+	gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
+	ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+	    	    
+	switch (ret)
+	      {
+	        case 0:
+	                 gE_file_open (doc, doc->filename);
+	                 return TRUE;
+	        case 1:
+	                 return FALSE;
+	        default:
+	                 return FALSE;
+	      }
+	      
+
+}
+
+/* File revertion callback */
+void file_revert_cb (GtkWidget *widget, gpointer cbdata)
+{
+	gE_document *doc;
+	
+	if (gE_document_current ())
+	  {
+	    doc = gE_document_current ();
+	    
+	    if (doc->filename)
+	      if (doc->changed)
+	        {
+	          if ((file_revert_do (doc)) == 0)
+	            return;
+	        }
+	      else
+	        gnome_app_flash (mdi->active_window, _("Document Unchanged..."));
+	    else
+	      gnome_app_flash (mdi->active_window, _("Document Unsaved..."));
+	  }
+	
+}
 
 /*
  * common routine for closing a file.  will prompt for saving if the
@@ -1017,7 +1071,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	int i;
 
 	if (settings->num_recent)
-	  gnome_app_remove_menu_range (app, "_File/", 5, settings->num_recent + 1);
+	  gnome_app_remove_menu_range (app, "_File/", 6, settings->num_recent + 1);
 
 	if (recent_files == NULL)
 		return;
