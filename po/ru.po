@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.4.8\n"
-"POT-Creation-Date: 1998-12-14 21:08-0800\n"
+"POT-Creation-Date: 1998-12-21 23:31+0000\n"
 "PO-Revision-Date: 1998-11-18 14:49:47+0100\n"
 "Last-Translator: Martin Baulig,,,, <norwegen@voyager.uni-trier.de>\n"
 "Language-Team: \n"
@@ -19,246 +19,247 @@ msgstr ""
 "src/gE_prefs.c src/gE_print.c src/gedit.c src/menus.c src/msgbox.c "
 "src/search.c\n"
 
-#: src/commands.c:1053 src/commands.c:1054
-msgid "File"
+#: src/commands.c:1056 src/commands.c:1057 src/menus.c:376
+#, fuzzy
+msgid "_File"
 msgstr "Файл"
 
 #: src/gE_about.c:159
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
-#: src/gedit.c:255
+#: src/gedit.c:233
 msgid "Launch a plugin at startup"
 msgstr "Запустить модуль при запуске"
 
-#: src/gedit.c:255
+#: src/gedit.c:233
 msgid "PLUGIN-NAME"
 msgstr "Имя Модуля"
 
-#: src/menus.c:232
+#: src/menus.c:234
 msgid "New"
 msgstr "Новый"
 
-#: src/menus.c:235
+#: src/menus.c:237
 #, fuzzy
 msgid "Open..."
 msgstr "Открыть"
 
-#: src/menus.c:238
+#: src/menus.c:240
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/menus.c:241
+#: src/menus.c:243
 #, fuzzy
 msgid "Save As..."
 msgstr "Сохранить как"
 
-#: src/menus.c:243
+#: src/menus.c:245
 #, fuzzy
 msgid "Print..."
 msgstr "Печать"
 
-#: src/menus.c:245
+#: src/menus.c:247
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/menus.c:248
+#: src/menus.c:250
 msgid "Close All"
 msgstr "Закрыть Все"
 
-#: src/menus.c:253
+#: src/menus.c:255
 #, fuzzy
 msgid "Exit"
 msgstr "Правка"
 
-#: src/menus.c:262
+#: src/menus.c:264
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/menus.c:265
+#: src/menus.c:267
 msgid "Copy"
 msgstr "Копировать"
 
-#: src/menus.c:268
+#: src/menus.c:270
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/menus.c:272
+#: src/menus.c:274
 msgid "Select All"
 msgstr "Выделить Все"
 
-#: src/menus.c:278
+#: src/menus.c:280
 msgid "Search for Text..."
 msgstr ""
 
-#: src/menus.c:280
+#: src/menus.c:282
 #, fuzzy
 msgid "Search for Line..."
 msgstr "Искать Вновь"
 
-#: src/menus.c:282
+#: src/menus.c:284
 #, fuzzy
 msgid "Search and Replace..."
 msgstr "Найти и Заменить"
 
-#: src/menus.c:285
+#: src/menus.c:287
 msgid "Search Again"
 msgstr "Искать Вновь"
 
-#: src/menus.c:291
+#: src/menus.c:293
 msgid "Top"
 msgstr "Верху"
 
-#: src/menus.c:292
+#: src/menus.c:294
 msgid "Bottom"
 msgstr "Внизу"
 
-#: src/menus.c:293
+#: src/menus.c:295
 msgid "Left"
 msgstr "Слева"
 
-#: src/menus.c:294
+#: src/menus.c:296
 msgid "Right"
 msgstr "Справа"
 
-#: src/menus.c:296
+#: src/menus.c:298
 msgid "Toggle"
 msgstr "Переключить"
 
-#: src/menus.c:301
-msgid "Show Toolbar"
-msgstr "Показать Панель"
-
-#: src/menus.c:302
-msgid "Hide Toolbar"
-msgstr "Спрятать Панель"
-
-#: src/menus.c:304
+#. {GNOME_APP_UI_ITEM, N_("Show Toolbar"), NULL, tb_on_cb, (gpointer) GE_WINDOW, NULL },
+#. {GNOME_APP_UI_ITEM, N_("Hide Toolbar"), NULL, tb_off_cb, (gpointer) GE_WINDOW, NULL },
+#. {GNOME_APP_UI_SEPARATOR},
+#.
+#: src/menus.c:307
 msgid "Pictures and Text"
 msgstr "Иконки и Текст"
 
-#: src/menus.c:305
+#: src/menus.c:308
 msgid "Pictures only"
 msgstr "Только Иконки"
 
-#: src/menus.c:306
+#: src/menus.c:309
 msgid "Text only"
 msgstr "Только Текст"
 
-#: src/menus.c:309
+#: src/menus.c:312
 msgid "Toolbar Relief On"
 msgstr ""
 
-#: src/menus.c:310
+#: src/menus.c:313
 msgid "Toolbar Relief Off"
 msgstr ""
 
-#: src/menus.c:313
+#: src/menus.c:316
 msgid "Tooltips On"
 msgstr "Подсказки Включены"
 
-#: src/menus.c:314
+#: src/menus.c:317
 msgid "Tooltips Off"
 msgstr "Подсказки Выключены"
 
-#: src/menus.c:319
+#: src/menus.c:322
 msgid "Preferences..."
 msgstr "Настройки..."
 
-#: src/menus.c:321
+#: src/menus.c:324
 msgid "Toggle Autoindent"
 msgstr "Переключить Автовыравнивание"
 
-#: src/menus.c:322
+#: src/menus.c:325
 msgid "Toggle Statusbar"
 msgstr "Переключить Статут"
 
-#: src/menus.c:323
+#: src/menus.c:326
 msgid "Toggle Wordwrap"
 msgstr "Переключить Заворачивание Слов"
 
-#: src/menus.c:324
+#: src/menus.c:327
 msgid "Toggle Linewrap"
 msgstr ""
 
-#: src/menus.c:325
+#: src/menus.c:328
 msgid "Toggle Readonly"
 msgstr ""
 
-#: src/menus.c:326
+#: src/menus.c:329
 msgid "Toggle Split Screen"
 msgstr "Переключить Разделение Экрана"
 
-#: src/menus.c:328
+#: src/menus.c:331
 msgid "Toggle Scrollball"
 msgstr "Переключить Скроллинг"
 
-#: src/menus.c:331
+#: src/menus.c:334
 msgid "Document Tabs"
 msgstr "Ручки Документов"
 
-#: src/menus.c:332
+#: src/menus.c:335
 msgid "Toolbar"
 msgstr "Панель"
 
-#: src/menus.c:334
+#: src/menus.c:337
 msgid "Save Settings"
 msgstr "Сохранить Настройки"
 
-#: src/menus.c:339
+#: src/menus.c:342
 msgid "New Window"
 msgstr "Новое Окно"
 
-#: src/menus.c:341
+#: src/menus.c:344
 msgid "Close Window"
 msgstr "Закрыть Окно"
 
-#: src/menus.c:344
+#: src/menus.c:347
 msgid "Document List"
 msgstr "Список Документов"
 
-#: src/menus.c:347
+#: src/menus.c:350
 msgid "Message Box"
 msgstr "Окно Сообщений"
 
-#: src/menus.c:358
+#: src/menus.c:361
 msgid "About..."
 msgstr "О программе..."
 
-#: src/menus.c:373
-#, fuzzy
-msgid "_File"
-msgstr "Файл"
-
-#: src/menus.c:375
+#: src/menus.c:378
 #, fuzzy
 msgid "_Edit"
 msgstr "Правка"
 
-#: src/menus.c:377
+#: src/menus.c:380
 #, fuzzy
 msgid "_Search"
 msgstr "Найти"
 
-#: src/menus.c:379
+#: src/menus.c:382
 #, fuzzy
 msgid "_Options"
 msgstr "Опции"
 
-#: src/menus.c:382
+#: src/menus.c:385
 #, fuzzy
 msgid "_Plugins"
 msgstr "Модули"
 
-#: src/menus.c:385
+#: src/menus.c:388
 #, fuzzy
 msgid "_Window"
 msgstr "Окно"
 
-#: src/menus.c:387
+#: src/menus.c:390
 #, fuzzy
 msgid "_Help"
 msgstr "Помощь"
+
+#~ msgid "File"
+#~ msgstr "Файл"
+
+#~ msgid "Show Toolbar"
+#~ msgstr "Показать Панель"
+
+#~ msgid "Hide Toolbar"
+#~ msgstr "Спрятать Панель"
 
 #~ msgid "Plugin Name"
 #~ msgstr "Имя Модуля"
