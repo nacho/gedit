@@ -56,6 +56,7 @@ struct _GeditUndoInsertAction
 	gint   pos; 
 	gchar *text;
 	gint   length;
+	gint   chars;
 };
 
 struct _GeditUndoDeleteAction
@@ -357,7 +358,7 @@ gedit_undo_manager_undo (GeditUndoManager *um)
 					um->priv->document, 
 					undo_action->action.insert.pos, 
 					undo_action->action.insert.pos + 
-						undo_action->action.insert.length); 
+						undo_action->action.insert.chars); 
 				break;
 
 			default:
@@ -490,17 +491,16 @@ gedit_undo_manager_insert_text_handler (GtkTextBuffer *buffer, GtkTextIter *pos,
 	if (um->priv->running_not_undoable_actions > 0)
 		return;
 
+	g_return_if_fail (strlen (text) == (guint)length);
+	
 	undo_action.action_type = GEDIT_UNDO_ACTION_INSERT;
 
 	undo_action.action.insert.pos    = gtk_text_iter_get_offset (pos);
 	undo_action.action.insert.text   = g_strdup (text);
 	undo_action.action.insert.length = length;
-	
-	/* FIXME: it is broken with non ASCII chars */
-	/*
-	if ((g_utf8_strlen (text, length) > 1) || (g_utf8_get_char (text) == '\n'))
-	*/
-	if ((length > 1) || (g_utf8_get_char (text) == '\n'))
+	undo_action.action.insert.chars  = g_utf8_strlen (text, length);
+
+	if ((undo_action.action.insert.chars > 1) || (g_utf8_get_char (text) == '\n'))
 
 	       	undo_action.mergeable = FALSE;
 	else
@@ -522,6 +522,8 @@ gedit_undo_manager_delete_range_handler (GtkTextBuffer *buffer, GtkTextIter *sta
 
 	undo_action.action_type = GEDIT_UNDO_ACTION_DELETE;
 
+	gtk_text_iter_order (start, end);
+
 	undo_action.action.delete.start  = gtk_text_iter_get_offset (start);
 	undo_action.action.delete.end    = gtk_text_iter_get_offset (end);
 
@@ -530,12 +532,8 @@ gedit_undo_manager_delete_range_handler (GtkTextBuffer *buffer, GtkTextIter *sta
 						undo_action.action.delete.start,
 						undo_action.action.delete.end);
 
-	/* FIXME: it is broken with non ASCII chars */
-	/*
-	if ((undo_action.action.delete.end - undo_action.action.delete.start) > 1)
-	*/
-	if ((strlen (undo_action.action.delete.text) > 1) ||
-	    (g_utf8_get_char (undo_action.action.delete.text  ) == '\n'))
+	if (((undo_action.action.delete.end - undo_action.action.delete.start) > 1) ||
+	     (g_utf8_get_char (undo_action.action.delete.text  ) == '\n'))
 	       	undo_action.mergeable = FALSE;
 	else
 		undo_action.mergeable = TRUE;
@@ -700,8 +698,6 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 static gboolean 
 gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_action)
 {
-	/* FIXME: it is broken with non ASCII chars */
-	
 	GeditUndoAction *last_action;
 	
 	gedit_debug (DEBUG_UNDO, "");
@@ -738,12 +734,13 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 			gchar *str;
 			
 #define L  (last_action->action.delete.end - last_action->action.delete.start - 1)
-
+#define g_utf8_get_char_at(p,i) g_utf8_get_char(g_utf8_offset_to_pointer((p),(i)))
+			
 			/* Deleted with the delete key */
-			if ((undo_action->action.delete.text [0] != ' ') &&
-			    (undo_action->action.delete.text [0] != '\t') &&
-                            ((last_action->action.delete.text [L] == ' ') ||
-			     (last_action->action.delete.text [L] == '\t')))
+			if ((g_utf8_get_char (undo_action->action.delete.text) != ' ') &&
+			    (g_utf8_get_char (undo_action->action.delete.text) != '\t') &&
+                            ((g_utf8_get_char_at (last_action->action.delete.text, L) == ' ') ||
+			     (g_utf8_get_char_at (last_action->action.delete.text, L)  == '\t')))
 			{
 				last_action->mergeable = FALSE;
 				return FALSE;
@@ -753,7 +750,7 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 				undo_action->action.delete.text);
 			
 			g_free (last_action->action.delete.text);
-			last_action->action.delete.end += 1;
+			last_action->action.delete.end += (L + 1);
 			last_action->action.delete.text = str;
 		}
 		else
@@ -761,10 +758,10 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 			gchar *str;
 			
 			/* Deleted with the backspace key */
-			if ((undo_action->action.delete.text [0] != ' ') &&
-			    (undo_action->action.delete.text [0] != '\t') &&
-                            ((last_action->action.delete.text [0] == ' ') ||
-			     (last_action->action.delete.text [0] == '\t')))
+			if ((g_utf8_get_char (undo_action->action.delete.text) != ' ') &&
+			    (g_utf8_get_char (undo_action->action.delete.text) != '\t') &&
+                            ((g_utf8_get_char (last_action->action.delete.text) == ' ') ||
+			     (g_utf8_get_char (last_action->action.delete.text) == '\t')))
 			{
 				last_action->mergeable = FALSE;
 				return FALSE;
@@ -781,13 +778,15 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 	else if (undo_action->action_type == GEDIT_UNDO_ACTION_INSERT)
 	{
 		gchar* str;
-
+		
+#define I (last_action->action.insert.chars - 1)
+		
 		if ((undo_action->action.insert.pos != 
-		     	(last_action->action.insert.pos + last_action->action.insert.length)) ||
-		    ((undo_action->action.insert.text [0] != ' ') &&
-		      (undo_action->action.insert.text [0] != '\t') &&
-		     ((last_action->action.insert.text [last_action->action.insert.length - 1] == ' ') ||
-		      (last_action->action.insert.text [last_action->action.insert.length - 1] == '\t')))
+		     	(last_action->action.insert.pos + last_action->action.insert.chars)) ||
+		    ((g_utf8_get_char (undo_action->action.insert.text) != ' ') &&
+		      (g_utf8_get_char (undo_action->action.insert.text) != '\t') &&
+		     ((g_utf8_get_char_at (last_action->action.insert.text, I) == ' ') ||
+		      (g_utf8_get_char_at (last_action->action.insert.text, I) == '\t')))
 		   )
 		{
 			last_action->mergeable = FALSE;
@@ -800,6 +799,8 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 		g_free (last_action->action.insert.text);
 		last_action->action.insert.length += undo_action->action.insert.length;
 		last_action->action.insert.text = str;
+		last_action->action.insert.chars += undo_action->action.insert.chars;
+
 	}
 	else
 		g_warning ("Unknown action inside undo merge encountered");	

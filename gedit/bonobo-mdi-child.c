@@ -152,7 +152,9 @@ bonobo_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *old_label, gpointe
 
 		label = gtk_label_new (child->priv->name);
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+		/*
 		gtk_widget_show (label);
+		*/
 		return label;
 	}
 }
