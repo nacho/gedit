@@ -20,16 +20,17 @@ INCLUDES = \
 plugin_LTLIBRARIES = libspell.la
 
 libspell_la_SOURCES = spell.c 				\
-	preload.c					\
-	preload.h					\
 	gedit-spell-checker.c 				\
 	gedit-spell-checker.h				\
 	gedit-spell-checker-dialog.c			\
 	gedit-spell-checker-dialog.h			\
 	$(BUILT_SOURCES)	
 
-libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
-libspell_la_LIBADD = $(PSPELL_LIBS)
+#	preload.c					\
+#	preload.h					\
+
+libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
+libspell_la_LIBADD =  -l$(PSPELL_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = spell-checker.glade2

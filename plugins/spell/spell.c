@@ -112,8 +112,8 @@ get_check_range (GeditDocument *doc)
 
 	range = (CheckRange *) g_object_get_qdata (G_OBJECT (doc), check_range_id);
 
-	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", range->start, range->end, 
-			range->current);
+	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", range != NULL ? range->start : -1,
+		       range != NULL ? range->end : -1, range != NULL ? range->current : -1);
 
 	return range;
 }
@@ -164,7 +164,6 @@ static void
 set_check_range (GeditDocument *doc, gint start, gint end)
 {
 	CheckRange *range;
-	gpointer data;
 	GtkTextIter iter;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
@@ -174,18 +173,25 @@ set_check_range (GeditDocument *doc, gint start, gint end)
 	g_return_if_fail (start < gedit_document_get_char_count (doc));
 	g_return_if_fail ((end >= start) || (end < 0));
 
-	data = g_object_get_qdata (G_OBJECT (doc), check_range_id);
+	range = get_check_range (doc);
 
-	if (data != NULL)
-		g_free (data);
+	if (range == NULL)
+	{
+		gedit_debug (DEBUG_PLUGINS, "There was not a previous check range");
 
+		range = g_new0 (CheckRange, 1);
+
+		g_object_set_qdata_full (G_OBJECT (doc), 
+				 check_range_id, 
+				 range, 
+				 (GDestroyNotify)g_free);
+	}
+	
 	if (end < 0)
 		end = gedit_document_get_char_count (doc);
 
 	g_return_if_fail (end >= start);
-
-	range = g_new0 (CheckRange, 1);
-
+	
 	range->start = start;
 
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
@@ -212,33 +218,12 @@ set_check_range (GeditDocument *doc, gint start, gint end)
 			
 	range->mw_start = -1;
 	range->mw_end = -1;
-	
-	g_object_set_qdata_full (G_OBJECT (doc), 
-				 check_range_id, 
-				 range, 
-				 (GDestroyNotify)g_free);
-
+		
 	update_current (doc, start);
 
 	gedit_debug (DEBUG_PLUGINS, "Range [%d, %d] (%d)", start, end, range->current);
 }
 
-static void
-delete_check_range (GeditDocument *doc)
-{
-	CheckRange *range;
-
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	g_return_if_fail (doc != NULL);
-
-	range = get_check_range (doc);
-	g_free (range);
-
-	g_object_set_qdata (G_OBJECT (doc), 
-			    check_range_id, 
-			    NULL);
-}
 
 static gboolean
 get_current_word_extents (GeditDocument *doc, gint *start, gint *end)
@@ -389,8 +374,6 @@ ignore_cb (GeditSpellCheckerDialog *dlg, const gchar *w, GeditDocument *doc)
 	word = get_next_mispelled_word (doc);
 	if (word == NULL)
 	{
-		delete_check_range (doc);
-
 		gedit_spell_checker_dialog_set_completed (dlg);
 		
 		return TRUE;
@@ -525,8 +508,6 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	word = get_next_mispelled_word (doc);
 	if (word == NULL)
 	{
-		delete_check_range (doc);
-
 		show_no_mispelled_words_dialog (sel);
 		return;
 	}
