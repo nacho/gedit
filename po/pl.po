@@ -2,27 +2,52 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2000-06-10 19:35+0200\n"
-"PO-Revision-Date: 2000-06-10 19:35+0200\n"
-"Last-Translator: GNOME PL Team <gnomepl@pandora.info.bielsko.pl>\n"
+"POT-Creation-Date: 2000-10-17 02:54+0200\n"
+"PO-Revision-Date: 2000-10-19 18:03+0200\n"
+"Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: plugins/browse/browse.c:1
+msgid "browse"
+msgstr "przegl±daj"
+
+#: plugins/browse/browse.c:1
 msgid "Browse"
 msgstr "Przegl±daj"
 
-#: plugins/browse/browse.c:1
+#: plugins/browse/browse.c:1 plugins/browse/browse.c:1
 msgid "Web browse plugin"
 msgstr "Wtyczka przegl±darki"
+
+#: plugins/browse/browse.glade.h:1
+msgid "gedit web browse plugin"
+msgstr "Wtyczka przegl±darki"
+
+#: plugins/browse/browse.glade.h:1
+msgid "Enter the Url to browse for :"
+msgstr "Wprowad¼ URL, który chcesz przegl±daæ :"
+
+#: plugins/browse/browse.glade.h:1
+msgid "lynx was found at : "
+msgstr "Odnaleziono program lynx w : "
+
+#: plugins/browse/browse.glade.h:1 plugins/diff/diff.glade.h:1
+msgid "location"
+msgstr "po³o¿enie"
+
+#: plugins/browse/browse.glade.h:1 plugins/diff/diff.glade.h:1
+msgid "Change"
+msgstr "Zmieñ"
 
 #: plugins/convert/convert.c:1
 msgid "Convert"
 msgstr "Konwertuj"
 
-#: plugins/convert/convert.c:1 plugins/convert/convert.glade.h:1
+#: plugins/convert/convert.c:1 plugins/convert/convert.c:1
+#: plugins/convert/convert.glade.h:1
 msgid "Number Converter"
 msgstr "Konwerter liczb"
 
@@ -47,17 +72,77 @@ msgid "Hex to Decimal"
 msgstr "Szesnastkowo na dziesiêtnie"
 
 #: plugins/diff/diff.c:1
+msgid "The two documents selected are the same"
+msgstr "Zaznaczone dokumenty s± takie same"
+
+#: plugins/diff/diff.c:1
+msgid ""
+"The file selected does not exists\n"
+"\n"
+"Please provide a valid file"
+msgstr ""
+"Wybrany plik nie istnieje\n"
+"\n"
+"Wprowad¼ poprawny plik"
+
+#: plugins/diff/diff.c:1 plugins/diff/diff.c:1
+msgid "The document contains no text"
+msgstr "Dokument nie zawiera tekstu"
+
+#: plugins/diff/diff.c:1
+msgid ""
+"gedit could not create a temp file.\n"
+"\n"
+msgstr ""
+"Nie mo¿na utworzyæ pliku tymczasowego.\n"
+"\n"
+
+#: plugins/diff/diff.c:1 plugins/email/email.c:1 plugins/email/email.c:1
+#: src/document.c:1 src/print.c:1
+msgid "Untitled"
+msgstr "BezNazwy"
+
+#: plugins/diff/diff.c:1
 msgid "Diff"
 msgstr "Diff"
 
 #: plugins/diff/diff.c:1
-msgid "Diff plugin."
-msgstr "Wtyczka diff"
+msgid "Makes a diff file from 2 documents or files"
+msgstr "Tworzy opis ró¿nic (diff) pomiêdzy dwoma dokumentami lub plikami"
 
-#: plugins/email/email.c:1 plugins/email/email.c:1 src/document.c:1
-#: src/print.c:1
-msgid "Untitled"
-msgstr "BezNazwy"
+#: plugins/diff/diff.c:1
+msgid ""
+"Makes a diff file from 2 documents or files on disk\n"
+"For more info on diff, type \"man diff\" in a shell prompt\n"
+msgstr ""
+"Tworzy opis ró¿nic (diff) pomiêdzy dwoma dokumentami lub plikami na dysku\n"
+"Aby uzyskaæ wiêcej informacji o programie diff, wpisz \"man diff\" w wierszu "
+"poleceñ pow³oki\n"
+
+#: plugins/diff/diff.glade.h:1
+msgid "Choose the files to diff"
+msgstr "Wybierz pliki do porównania"
+
+#: plugins/diff/diff.glade.h:1 plugins/diff/diff.glade.h:1
+msgid "From document"
+msgstr "Z dokumentu"
+
+#: plugins/diff/diff.glade.h:1 plugins/diff/diff.glade.h:1
+msgid "From a file on disk"
+msgstr "Z pliku na dysku"
+
+#: plugins/diff/diff.glade.h:1 plugins/diff/diff.glade.h:1
+msgid "don't translate this\n"
+msgstr "nie t³umacz tego\n"
+
+#: plugins/diff/diff.glade.h:1
+msgid "diff found at : "
+msgstr "Odnaleziono program diff w : "
+
+#: plugins/email/email.c:1
+#, c-format
+msgid "Executing command : %s"
+msgstr "Wykonywanie polecenia: %s"
 
 #: plugins/email/email.c:1
 msgid "Email"
@@ -66,6 +151,14 @@ msgstr "E-mail"
 #: plugins/email/email.c:1
 msgid "Email the current document"
 msgstr "Wysy³a bie¿±cy dokument e-mailem"
+
+#: plugins/email/email.c:1
+msgid ""
+"Email the current document to a specified email address\n"
+"gedit searches for sendmail to use this plugin."
+msgstr ""
+"Wysy³a bie¿±cy dokument poczt± elektroniczn± pod podany adres e-mail\n"
+"Przed u¿yciem wtyczki wyszukiwany jest program sendmail."
 
 #: plugins/email/email.glade.h:1
 msgid "gedit: e-mail plugin"
@@ -84,22 +177,67 @@ msgid "Subject:"
 msgstr "Temat:"
 
 #: plugins/email/email.glade.h:1
-msgid "File to use as body of message: "
+msgid "Change..."
+msgstr "Zmieñ..."
+
+#: plugins/email/email.glade.h:1
+msgid "label12"
+msgstr "etykieta2"
+
+#: plugins/email/email.glade.h:1
+msgid "File to use as body of message : "
 msgstr "Plik wykorzystany jako tre¶æ listu: "
+
+#: plugins/email/email.glade.h:1
+msgid "Sendmail found at :"
+msgstr "Odnaleziono program sendmail w : "
+
+#: plugins/email/email.glade.h:1
+msgid "label13"
+msgstr "etykieta13"
+
+#: plugins/reverse/reverse.c:1
+msgid "Reverse"
+msgstr "Przywróæ"
+
+#: plugins/reverse/reverse.c:1 plugins/reverse/reverse.c:1
+msgid "Reverse text"
+msgstr "Przywraca tekst"
 
 #: plugins/sample/sample.c:1
 msgid "Hello World"
 msgstr "Witaj ¶wiecie"
 
-#: plugins/sample/sample.c:1
+#: plugins/sample/sample.c:1 plugins/sample/sample.c:1
 msgid "Sample 'hello world' plugin."
-msgstr "Przyk³adowa wtyczka 'witaj ¶wiecie'."
+msgstr "Przyk³adowa wtyczka \"witaj ¶wiecie\"."
+
+#: plugins/shell_output/shell_output.c:1
+msgid "Shell Output"
+msgstr "Wynik dzia³ania pow³oki"
+
+#: plugins/shell_output/shell_output.c:1
+#: plugins/shell_output/shell_output.c:1
+msgid "Insert the shell output in the document"
+msgstr "Wstawia wynik dzia³ania pow³oki do dokumentu"
+
+#: plugins/shell_output/shell_output.glade.h:1
+msgid "Shell Output plugin"
+msgstr "Wtyczka pow³oki"
+
+#: plugins/shell_output/shell_output.glade.h:1
+msgid "Directory  "
+msgstr "Katalog "
+
+#: plugins/shell_output/shell_output.glade.h:1
+msgid "Enter shell command "
+msgstr "Wprowad¼ polecenie pow³oki "
 
 #: plugins/time/time.c:1
 msgid "Insert Time"
 msgstr "Wstaw czas"
 
-#: plugins/time/time.c:1
+#: plugins/time/time.c:1 plugins/time/time.c:1
 msgid "Inserts the current date and time"
 msgstr "Wstawia bie¿±c± datê i czas"
 
@@ -111,31 +249,43 @@ msgstr "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
 msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit jest niewielkim edytorem tekstu dla GNOME."
 
-#: src/dialogs/dialog-about.c:1
-msgid "With special thanks to:"
-msgstr "Specjalne podziêkowania dla:"
-
-#: src/dialogs/dialog-about.c:1
-msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-
-#: src/dialogs/dialog-about.c:1
-msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
-msgstr "gedit jest niewielkim edytorem tekstu dla GNOME/GTK+"
+#: src/dialogs/dialog-plugins.c:1
+#, c-format
+msgid ""
+"Plugin Name : %s\n"
+"Author : %s\n"
+"Description : %s\n"
+msgstr ""
+"Nazwa wtyczki : %s\n"
+"Autor : %s\n"
+"Opis : %s\n"
 
 #: src/dialogs/dialog-prefs.c:1
 msgid "gedit: Preferences"
 msgstr "gedit: Preferencje"
+
+#: src/dialogs/dialog-replace.c:1 src/dialogs/replace.glade.h:1
+#: src/dialogs/replace.glade.h:1
+msgid "Replace"
+msgstr "Zmieñ"
+
+#: src/dialogs/dialog-replace.c:1 src/menus.c:1
+msgid "Find"
+msgstr "Znajd¼"
+
+#: src/dialogs/dialog-replace.c:1 src/search.c:1
+#, c-format
+msgid "Text found at line :%i"
+msgstr "Znaleziono tekst w wierszu: %i"
 
 #: src/dialogs/dialog-replace.c:1
 #, c-format
 msgid "found and replaced %i occurrences."
 msgstr "znaleziono i zmieniono %i wyst±pieñ."
 
-#: src/dialogs/dialog-replace.c:1 src/search.c:1
-#, c-format
-msgid "Text found at line :%i"
-msgstr "Znaleziono tekst w wierszu: %i"
+#: src/dialogs/dialog-replace.c:1
+msgid "Could not allocate the memory for the Replace all request."
+msgstr "Nie mo¿na zaalokowaæ pamiêci dla funkcji Zmieñ wszystkie."
 
 #: src/dialogs/goto-line.glade.h:1
 msgid "Goto Line"
@@ -145,21 +295,25 @@ msgstr "Przejd¼ do wiersza"
 msgid "Line number:"
 msgstr "Numer wiersza:"
 
-#: src/dialogs/goto-line.glade.h:1
-msgid "Enter the line number you wish to go to."
-msgstr "Wprowad¼ numer wiersza, do którego chcesz przej¶æ"
-
 #: src/dialogs/prefs.glade.h:1
 msgid "Appearance"
 msgstr "Wygl±d"
 
-#: src/dialogs/prefs.glade.h:1 src/menus.c:1
+#: src/dialogs/prefs.glade.h:1
 msgid "Show Statusbar"
 msgstr "Wy¶wietlanie paska stanu"
 
 #: src/dialogs/prefs.glade.h:1
-msgid "Show splitscreen"
-msgstr "Wy¶wietlanie podzia³u ekranu"
+msgid "Set toolbar according to system settings"
+msgstr "Ustawienia paska narzêdziowego zgodne z ustawieniami systemowymi"
+
+#: src/dialogs/prefs.glade.h:1
+msgid "Set toolbar to Icons only"
+msgstr "Wy¶wietlanie na pasku narzêdziowym tylko ikon"
+
+#: src/dialogs/prefs.glade.h:1
+msgid "Set toolbar to Icons with text"
+msgstr "Wy¶wietlanie na pasku narzêdziowym ikon wraz z podpisami"
 
 #: src/dialogs/prefs.glade.h:1
 msgid "Editor Behavior"
@@ -168,10 +322,6 @@ msgstr "Zachowanie edytora"
 #: src/dialogs/prefs.glade.h:1
 msgid "Enable Auto-indent"
 msgstr "Automatyczne wciêcia"
-
-#: src/dialogs/prefs.glade.h:1
-msgid "Enable Wordwrap"
-msgstr "Zawijanie wierszy"
 
 #: src/dialogs/prefs.glade.h:1
 msgid "General"
@@ -271,7 +421,7 @@ msgstr "Drukowanie"
 
 #: src/dialogs/prefs.glade.h:1
 msgid "Add _header"
-msgstr "Dodaj _nag³ówek"
+msgstr "Z _nag³ówkiem"
 
 #: src/dialogs/prefs.glade.h:1
 msgid "Enable word _wrapping"
@@ -279,7 +429,7 @@ msgstr "_Zawijanie wierszy"
 
 #: src/dialogs/prefs.glade.h:1
 msgid "Print _line numbers every:"
-msgstr "Drukowanie numerów _wierszy co:"
+msgstr "Numery _wierszy co:"
 
 #: src/dialogs/prefs.glade.h:1
 msgid "line(s)"
@@ -296,10 +446,6 @@ msgstr "P_ejza¿"
 #: src/dialogs/prefs.glade.h:1
 msgid "Paper"
 msgstr "Papier"
-
-#: src/dialogs/replace.glade.h:1 src/dialogs/replace.glade.h:1
-msgid "Replace"
-msgstr "Zmieñ"
 
 #: src/dialogs/replace.glade.h:1
 msgid "Find Next"
@@ -329,14 +475,45 @@ msgstr "P_o³o¿enie kursora"
 msgid "Case se_nsitive"
 msgstr "Uwzglêdnianie w_ielko¶ci liter"
 
+#: src/dialogs/plugin-manager.glade.h:1
+msgid "gedit Plugin Manager"
+msgstr "Mened¿er wtyczek programu gedit"
+
+#: src/dialogs/plugin-manager.glade.h:1
+msgid "Select the plugins to install"
+msgstr "Wybór instalowanych wtyczek"
+
+#: src/dialogs/plugin-manager.glade.h:1 src/dialogs/plugin-manager.glade.h:1
+msgid "Available Plugins"
+msgstr "Dostêpne wtyczki"
+
+#: src/dialogs/plugin-manager.glade.h:1
+msgid "Add >"
+msgstr "Dodaj >"
+
+#: src/dialogs/plugin-manager.glade.h:1
+msgid "< Remove"
+msgstr "< Usuñ"
+
+#: src/dialogs/plugin-manager.glade.h:1
+msgid "Add All >>"
+msgstr "Dodaj wszystkie >>"
+
+#: src/dialogs/plugin-manager.glade.h:1
+msgid "<< Remove All"
+msgstr "<< Usuñ wszystkie"
+
+#: src/dialogs/plugin-manager.glade.h:1 src/dialogs/plugin-manager.glade.h:1
+msgid "Installed Plugins"
+msgstr "Zainstalowane wtyczki"
+
+#: src/dialogs/plugin-manager.glade.h:1
+msgid "Plugin description"
+msgstr "Opis wtyczki"
+
 #: src/document.c:1
 msgid "RO - "
 msgstr "RO - "
-
-#: src/document.c:1
-#, c-format
-msgid "%s%s"
-msgstr "%s%s"
 
 #: src/document.c:1
 #, c-format
@@ -346,14 +523,37 @@ msgstr "%s %d"
 #: src/document.c:1
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
-msgstr " '%s' zosta³ zmieniony. Czy chcesz go zapisaæ?"
+msgstr "\"%s\" zosta³ zmieniony. Czy chcesz go zapisaæ?"
+
+#: src/document.c:1
+#, c-format
+msgid "Untitled %i"
+msgstr "BezNazwy %i"
+
+#: src/document.c:1
+msgid "(modified)"
+msgstr "(zmodyfikowany)"
+
+#: src/document.c:1
+msgid "(readonly)"
+msgstr "(tylko do odczytu)"
+
+#: src/document.c:1 src/document.c:1
+msgid "This file does not end with a valid extension\n"
+msgstr "Nazwa pliku nie jest zakoñczona poprawnym rozszerzeniem\n"
+
+#: src/document.c:1
+#, c-format
+msgid "The file %s was not found."
+msgstr "Nie odnaleziono pliku %s."
 
 #: src/file.c:1
+#, c-format
 msgid ""
-"An error was encountered while opening the file.\n"
+"An error was encountered while opening the file \"%s\".\n"
 "Please make sure the file exists."
 msgstr ""
-"Przy otwieraniu pliku wyst±pi³ b³±d.\n"
+"Przy otwieraniu pliku \"%s\" wyst±pi³ b³±d.\n"
 "Upewnij siê, ¿e plik istnieje."
 
 #: src/file.c:1
@@ -393,6 +593,14 @@ msgstr ""
 "%s\n"
 "\n"
 "Upewnij siê, ¿e masz prawo do odczytu tego pliku."
+
+#: src/file.c:1
+msgid "Save As..."
+msgstr "Zapisz jako..."
+
+#: src/file.c:1
+msgid "The document contains no data."
+msgstr "Dokument nie zawiera danych."
 
 #: src/file.c:1
 #, c-format
@@ -449,23 +657,24 @@ msgstr ""
 msgid "Error in the pipe ."
 msgstr "B³±d w potoku."
 
-#: src/file.c:1
-msgid "Open File ..."
-msgstr "Otwórz plik ..."
-
-#: src/file.c:1
-msgid "Save As..."
-msgstr "Zapisz jako..."
-
-#: src/file.c:1
+#: src/file.c:1 src/file.c:1
 #, c-format
 msgid "Loaded file %s"
 msgstr "Wczytano plik %s"
 
 #: src/file.c:1
 #, c-format
+msgid "Loaded %i files"
+msgstr "Wczytano %i plików"
+
+#: src/file.c:1
+msgid "Open File ..."
+msgstr "Otwórz plik ..."
+
+#: src/file.c:1
+#, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
-msgstr "Plik '%s' zostanie nadpisany. Kontynuowaæ?"
+msgstr "Plik \"%s\" zostanie nadpisany. Kontynuowaæ?"
 
 #: src/file.c:1
 msgid "Document has not been saved."
@@ -491,7 +700,7 @@ msgstr ""
 #: src/file.c:1
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr "Plik '%s' nie istnieje. Czy chcesz go utworzyæ?"
+msgstr "Plik \"%s\" nie istnieje. Czy chcesz go utworzyæ?"
 
 #: src/menus.c:1
 msgid "Open (swap) .c/.h file"
@@ -513,9 +722,17 @@ msgstr "Zapisz wszystkie"
 msgid "Save All Open Files"
 msgstr "Zapisuje wszystkie pliki"
 
-#: src/menus.c:1
+#: src/menus.c:1 src/menus.c:1
 msgid "Revert"
 msgstr "Przywróæ"
+
+#: src/menus.c:1
+msgid "Print pre_view"
+msgstr "P_odgl±d wydruku..."
+
+#: src/menus.c:1
+msgid "Print preview"
+msgstr "Podgl±d wydruku"
 
 #: src/menus.c:1
 msgid "Print preview..."
@@ -532,14 +749,6 @@ msgstr "Zamknij wszystkie"
 #: src/menus.c:1
 msgid "Close All Open Files"
 msgstr "Zamyka wszystkie pliki"
-
-#: src/menus.c:1
-msgid "Find _In Files..."
-msgstr "Znajd¼ _w plikach....."
-
-#: src/menus.c:1
-msgid "Find text in all open files"
-msgstr "Poszukuje tekstu we wszystkich otwartych plikach"
 
 #: src/menus.c:1
 msgid "Goto _Line..."
@@ -565,50 +774,13 @@ msgstr "Usuñ widok"
 msgid "Remove view of the document"
 msgstr "Usuñ widok dokumentu"
 
-#: src/menus.c:1
-msgid "_Top"
-msgstr "_Góra"
-
-#: src/menus.c:1
-msgid "Put the document tabs at the top"
-msgstr "Umieszcza zak³adki dokumentów u góry"
-
-#: src/menus.c:1
-msgid "_Bottom"
-msgstr "_Dó³"
-
-#: src/menus.c:1
-msgid "Put the document tabs at the bottom"
-msgstr "Umieszcza zak³adki dokumentów u do³u"
-
-#: src/menus.c:1
-msgid "_Left"
-msgstr "_Lewa"
-
-#: src/menus.c:1
-msgid "Put the document tabs on the left"
-msgstr "Umieszcza zak³adki dokumentów po lewej"
-
-#: src/menus.c:1
-msgid "_Right"
-msgstr "_Prawa"
-
-#: src/menus.c:1
-msgid "Put the document tabs on the right"
-msgstr "Umieszcza zak³adki dokumentów po prawej"
-
-#: src/menus.c:1
-msgid "Toggle the presence of the document tabs"
-msgstr "Prze³±cza wy¶wietlanie zak³adek dokumentów"
-
-#: src/menus.c:1
-msgid ""
-"Enable or disable the statusbar at the bottom of this application window."
-msgstr "Prze³±cza wy¶wietlanie paska stanu w dolnej czê¶ci okna aplikacji."
-
 #: src/menus.c:1 src/plugin.c:1 src/plugin.c:1
 msgid "_Plugins"
 msgstr "W_tyczki"
+
+#: src/menus.c:1
+msgid "_Documents"
+msgstr "_Dokumenty"
 
 #: src/menus.c:1
 msgid "New"
@@ -683,20 +855,16 @@ msgid "Paste the clipboard"
 msgstr "Wkleja zawarto¶æ schowka"
 
 #: src/menus.c:1
-msgid "Find"
-msgstr "Znajd¼"
+msgid "Search for a string"
+msgstr "Wyszukuje tekst"
 
 #: src/menus.c:1
-msgid "Search for a string"
-msgstr "Wyszukuje napis"
-
-#: src/menus.c:1 src/window.c:1
 msgid "Line"
 msgstr "Wiersz"
 
 #: src/menus.c:1
-msgid "Get the current and total lines"
-msgstr "Podaje informacje o bie¿±cym wierszu oraz o liczbie wierszy"
+msgid "Get file info like characters, lines, words & paragraphs count."
+msgstr "Wy¶wietla zestawienie informacji o pliku"
 
 #: src/menus.c:1
 msgid "Exit"
@@ -705,6 +873,61 @@ msgstr "Zakoñcz"
 #: src/menus.c:1
 msgid "Exit the program"
 msgstr "Koñczy program"
+
+#: src/plugin.c:1
+msgid "Manager ..."
+msgstr "Mened¿er..."
+
+#: src/plugin.c:1
+msgid "Add/Remove installed plugins"
+msgstr "Dodaje/Usuwa zainstalowane wtyczki"
+
+#: src/plugin.c:1
+#, c-format
+msgid ""
+"The program %s could not be found.\n"
+"\n"
+msgstr ""
+"Nie mo¿na odnale¼æ programu %s.\n"
+"\n"
+
+#: src/plugin.c:1
+#, c-format
+msgid ""
+"'%s' doesn't seem to exist.\n"
+"\n"
+msgstr ""
+"\"%s\" nie istnieje.\n"
+"\n"
+
+#: src/plugin.c:1
+#, c-format
+msgid ""
+"'%s' seems to be a directory.\n"
+"but '%s' could not be found inside it.\n"
+"\n"
+msgstr ""
+"\"%s\" jest katalogiem.\n"
+"Nie odnaleziono \"%s\" w jego wnêtrzu.\n"
+"\n"
+
+#: src/plugin.c:1
+#, c-format
+msgid ""
+"'%s' doesn't seem to be a program.\n"
+"\n"
+msgstr ""
+"\"%s\" nie jest programem.\n"
+"\n"
+
+#: src/plugin.c:1
+#, c-format
+msgid ""
+"%sYou won't be able to use the %s plugin without %s. \n"
+" Do you want to specify a new location for %s?"
+msgstr ""
+"%sU¿ycie wtyczki %s nie bêdzie mo¿liwe bez %s.\n"
+"Czy chcesz okre¶liæ nowe po³o¿enie %s?"
 
 #: src/plugin.c:1
 #, c-format
@@ -732,6 +955,15 @@ msgstr "Strony"
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Podgl±d wydruku"
 
+#: src/print.c:1 src/print.c:1
+#, c-format
+msgid ""
+"gedit could not find the font \"%s\".\n"
+"gedit is unable to print without this font installed."
+msgstr ""
+"Nie mo¿na odnale¼æ czcionki \"%s\".\n"
+"Bez zainstalowania tej czcionki drukowanie nie jest mo¿liwe."
+
 #: src/print.c:1
 #, c-format
 msgid "Page: %i/%i"
@@ -744,6 +976,11 @@ msgstr "_Plik/"
 #: src/recent.c:1 src/recent.c:1
 msgid "_File"
 msgstr "_Plik"
+
+#: src/recent.c:1
+#, c-format
+msgid "Unable to open recent file : %s"
+msgstr "Nie mo¿na otworzyæ pliku : %s"
 
 #: src/search.c:1
 msgid ""
@@ -758,13 +995,25 @@ msgstr ""
 msgid ""
 "Filename: %s\n"
 "\n"
+"Total Characters: %i\n"
+"Total Words: %i\n"
 "Total Lines: %i\n"
-"Current Line: %i"
+"Total Paragraphs: %i\n"
+"Total Bytes: %i\n"
+"\n"
+"Current Line: %i\n"
+"Current Column: %i"
 msgstr ""
 "Nazwa pliku: %s\n"
 "\n"
+"Liczba znaków: %i\n"
+"Liczba s³ów: %i\n"
 "Liczba wierszy: %i\n"
-"Bie¿±cy wiersz: %i"
+"Liczba akapitów: %i\n"
+"Liczba bajtów: %i\n"
+"\n"
+"Bie¿±cy wiersz: %i\n"
+"Bie¿±ca kolumna: %i"
 
 #: src/search.c:1
 msgid "Text not found"
@@ -778,10 +1027,6 @@ msgstr "Nie odnaleziono tekstu."
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Nie mo¿na wyszukaæ ponownie. Nie ma testu, który mo¿na znale¼æ."
 
-#: src/window.c:1
-msgid "Filename"
-msgstr "Nazwa pliku"
-
-#: src/window.c:1
-msgid "Contents"
-msgstr "Zawarto¶æ"
+#: src/view.c:1
+msgid "You can't remove the last view of a document."
+msgstr "Nie mo¿na usun±æ ostatniego widoku dokumentu."
