@@ -205,10 +205,13 @@ string_to_tag_style (const gchar *string)
 	if ((style->strikethrough < 0) || (style->strikethrough > 1))
 		goto error;
 
+	g_strfreev (items);
+
 	return style;
 
 error:
 	gtk_source_tag_style_free (style);
+	g_strfreev (items);
 
 	return NULL;
 }
