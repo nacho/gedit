@@ -25,6 +25,7 @@
 #include "main.h"
 #include "gE_print.h"
 #include "search.h"
+#include "gE_undo.h"
 
 GnomeUIInfo toolbar_data[] = {
 	{ GNOME_APP_UI_ITEM, N_("New"), N_("Create a new document"), file_new_cb,
@@ -39,6 +40,11 @@ GnomeUIInfo toolbar_data[] = {
 	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PRINT },
 
 	GNOMEUIINFO_SEPARATOR,
+
+	{ GNOME_APP_UI_ITEM, N_("Undo"), N_("Undo last operation"), gE_undo_do,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_UNDO },
+	{ GNOME_APP_UI_ITEM, N_("Redo"), N_("Redo last operation"), gE_undo_redo,
+	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_REDO },
 
 	{ GNOME_APP_UI_ITEM, N_("Cut"), N_("Cut the selection"), edit_cut_cb,
 	  NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CUT },
