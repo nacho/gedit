@@ -208,5 +208,7 @@ gedit_plugins_window_add (GnomeApp *app)
 		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 		
 		gnome_app_insert_menus (app, path, menu);
+
+		g_free (path);
 	}
 }

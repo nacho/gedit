@@ -41,7 +41,6 @@
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
 #include <libgnomeprint/gnome-print-preview.h>
-#include <libgnomeprint/gnome-print-dialog.h>
 
 typedef struct _PrintJobInfo {
 	/* gnome print stuff */
@@ -63,11 +62,11 @@ typedef struct _PrintJobInfo {
 	float font_char_height;
 
 	/* Page stuff */ 
-	int   pages;
-	float page_width, page_height;
-	float margin_top, margin_bottom, margin_left, margin_right, margin_numbers;
-	float printable_width, printable_height;
-	float header_height;
+	int    pages;
+	float  page_width, page_height;
+	float  margin_top, margin_bottom, margin_left, margin_right, margin_numbers;
+	float  printable_width, printable_height;
+	float  header_height;
 	gint   total_lines, total_lines_real;
 	gint   lines_per_page;
 	gint   chars_per_line;
@@ -80,14 +79,14 @@ typedef struct _PrintJobInfo {
 	gint print_this_page;
 	gint preview;
 	
-	/* Variables */
-	gint   file_offset;
-	gint   current_line;
+	/* buffer stuff */
+	gint file_offset;
+	gint current_line;
 
 	/* Text Wrapping */
-	gint   wrapping;
-	gint   break_chars;
-	gint   add_marks; /* little mark on lines that are a continuation of the above */ 
+	gint wrapping;
+	gint break_chars;
+	gint add_marks; /* little mark on lines that are a continuation of the above */ 
 } PrintJobInfo;
 
 
@@ -110,11 +109,13 @@ static void set_pji ( PrintJobInfo * pji, Document *doc);
 
 /**
  * file_print_cb:
- * @widget:
- * @data:
+ * @widget: 
+ * @data: 
+ * @file_printpreview: FALSE if print_preview is needed.
+ * 
+ * Starts the printing process and creates a print dialog box.
+ * This should be the only routine global to the world (and Print Preview_cb)
  *
- * Calls gnome-print to create a print dialog box.  This should be the
- * only routing global to the world (and Print Preview)
  **/
 void
 file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
@@ -137,8 +138,11 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	pji->pc = gnome_print_master_get_context(pji->master);
 	g_return_if_fail(pji->pc != NULL);
 	
-	set_pji (pji, doc );
+	/* We need to calculate the number of pages
+	   before running the dialog */
+	set_pji (pji, doc);
 
+	/* file_print preview is a false when preview is requested */ 
 	if (file_printpreview)
 	{
 		dialog = (GnomePrintDialog *)gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
@@ -147,8 +151,6 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 							  1, pji->pages, "A",
 							  _("Pages")/* Translators: As in [Range] Pages from:[x]  to*/);
 
-		/* We need to calculate the number of pages
-		   before running the dialog */
 		switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 		case GNOME_PRINT_PRINT:
 			break;
@@ -156,8 +158,10 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 			pji->preview = TRUE;
 			break;
 		case -1:
+			print_pji_destroy (pji);
 			return;
 		default:
+			print_pji_destroy (pji);
 			gnome_dialog_close (GNOME_DIALOG (dialog));
 			return;
 		}
@@ -202,7 +206,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	print_pji_destroy (pji);
 	
 /*	FIXME : we need to set the parent of the dialog to be the active window,
-	because of some window manager issues */
+	because of some window manager issues, tha clahey told me about*/
 #if 0	
         gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window)); 
 	gtk_widget_show_all (dialog);
@@ -210,6 +214,15 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 }
 
 
+/**
+ * file_print_preview_cb:
+ * @widget: 
+ * @data: 
+ * 
+ * Callback for print previewing. We just call file_prin_cb
+ * with the 3rd argument = FALSE;
+ *
+ **/
 void
 file_print_preview_cb (GtkWidget *widget, gpointer data)
 {
@@ -228,6 +241,7 @@ file_print_preview_cb (GtkWidget *widget, gpointer data)
  * @printer: the printer to do the printing to, NULL for printpreview
  * 
  * prints *doc
+ *
  **/
 static void
 print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
@@ -243,7 +257,8 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 	for (current_page = 1; current_page <= pji->pages; current_page++)
 	{
 		if (pji->range != GNOME_PRINT_RANGE_ALL)
-			pji->print_this_page = (current_page>=pji->print_first && current_page<=pji->print_last) ? TRUE:FALSE;
+			pji->print_this_page = (current_page>=pji->print_first &&
+						current_page<=pji->print_last) ? TRUE:FALSE;
 		else
 			pji->print_this_page = TRUE;
 
@@ -291,7 +306,7 @@ print_line (PrintJobInfo *pji, int line)
 {
 	int i;
 	int temp_i; /* We need to store i before scanning for a word wrap. If we cant wrap a word
-		      ( the word size > chars_per_row ) we break that line and resotore the old_i value*/
+		      ( the word size > chars_per_row ) we break that line and resotore the old i value*/
 	int print_line = TRUE;
 	int first_line = TRUE;
 
