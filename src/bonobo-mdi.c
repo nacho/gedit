@@ -25,7 +25,7 @@
 #include "bonobo-mdi.h"
 
 #include <bonobo/bonobo-i18n.h>
-#include <libgnome/gnome-marshal.h>
+#include <gedit-marshal.h>
 #include <bonobo/bonobo-dock-layout.h>
 #include <bonobo/bonobo-ui-util.h>
 
@@ -181,25 +181,25 @@ bonobo_mdi_class_init (BonoboMDIClass *class)
 					GTK_RUN_LAST,
 					GTK_CLASS_TYPE (object_class),
 					GTK_SIGNAL_OFFSET (BonoboMDIClass, add_child),
-					gnome_marshal_BOOLEAN__OBJECT,
+					gedit_marshal_BOOLEAN__OBJECT,
 					GTK_TYPE_BOOL, 1, BONOBO_TYPE_MDI_CHILD);
 	mdi_signals[REMOVE_CHILD] = gtk_signal_new ("remove_child",
 					GTK_RUN_LAST,
 					GTK_CLASS_TYPE (object_class),
 					GTK_SIGNAL_OFFSET (BonoboMDIClass, remove_child),
-					gnome_marshal_BOOLEAN__OBJECT,
+					gedit_marshal_BOOLEAN__OBJECT,
 					GTK_TYPE_BOOL, 1, BONOBO_TYPE_MDI_CHILD);
 	mdi_signals[ADD_VIEW] = gtk_signal_new ("add_view",
 					GTK_RUN_LAST,
 					GTK_CLASS_TYPE (object_class),
 					GTK_SIGNAL_OFFSET (BonoboMDIClass, add_view),
-					gnome_marshal_BOOLEAN__OBJECT,
+					gedit_marshal_BOOLEAN__OBJECT,
 					GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
 	mdi_signals[REMOVE_VIEW] = gtk_signal_new ("remove_view",
 					GTK_RUN_LAST,
 					GTK_CLASS_TYPE (object_class),
 					GTK_SIGNAL_OFFSET (BonoboMDIClass, remove_view),
-					gnome_marshal_BOOLEAN__OBJECT,
+					gedit_marshal_BOOLEAN__OBJECT,
 					GTK_TYPE_BOOL, 1, GTK_TYPE_WIDGET);
 	mdi_signals[CHILD_CHANGED] = gtk_signal_new ("child_changed",
 					GTK_RUN_LAST,

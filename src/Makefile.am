@@ -21,6 +21,10 @@ gedit2_LDADD = \
 	dialogs/libdialogs.a	\
 	$(GEDIT_LIBS)
 
+BUILT_SOURCES = \
+	gedit-marshal.c	\
+	gedit-marshal.h
+
 gedit2_SOURCES = 		\
 	gedit2.c		\
 	gedit2.h		\
@@ -55,10 +59,20 @@ gedit2_SOURCES = 		\
 	bonobo-mdi.c		\
 	bonobo-mdi.h		\
 	gnome-vfs-helpers.c	\
-	gnome-vfs-helpers.h
+	gnome-vfs-helpers.h	\
+	$(BUILT_SOURCES)
+
+gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
+	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
+
+gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
+	echo "#include \"gedit-marshal.h\"" > $@ && \
+	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
 ui_DATA = gedit-ui.xml
 
-EXTRA_DIST = $(ui_DATA)
+EXTRA_DIST = \
+	$(ui_DATA)	\
+	gedit-marshal.list
 
-
+CLEANFILES = $(BUILT_SOURCES)
