@@ -29,16 +29,194 @@
 
 #include <libgnome/libgnome.h>
 #include <libgnomeprint/gnome-print.h>
+#include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
+#include <libgnomeprintui/gnome-print-master-preview.h>
 
 #include "gedit2.h"
 #include "gedit-print.h"
 #include "gedit-debug.h"
+#include "gedit-document.h"
+#include "gedit-prefs.h"
+
+#define CM(v) ((v) * 72.0 / 2.54)
+#define A4_WIDTH (210.0 * 72 / 25.4)
+#define A4_HEIGHT (297.0 * 72 / 25.4)
+
+typedef struct _GeditPrintJobInfo	GeditPrintJobInfo;
+
+struct _GeditPrintJobInfo {
+
+	GeditDocument 		*doc;
+	
+	gboolean 		 preview;
+
+	GnomePrintConfig 	*config;
+	gint			 range_type;
+
+	GnomePrintMaster	*print_master;
+	GnomePrintContext	*print_ctx;
+
+	gint			 page_num;
+	/* Page stuff*/
+	gdouble			 page_width;
+	gdouble			 page_height;
+	gdouble			 margin_top;
+	gdouble			 margin_left;
+	gdouble			 margin_right;
+	gdouble			 margin_bottom;
+	gdouble			 header_height;
+	gdouble			 footer_height;
+
+	/* Fonts */
+	GnomeFont		*font_body;
+	GnomeFont		*font_header_and_footer;
+	GnomeFont		*font_numbers;	
+};
+
+static GQuark gedit_print_error_quark ();
+#define GEDIT_PRINT_ERROR gedit_print_error_quark ()	
+
+static GeditPrintJobInfo* gedit_print_job_info_new (GeditDocument* doc, GError **error);
+static void gedit_print_job_info_destroy (GeditPrintJobInfo *pji);
+
+static void gedit_print_preview_real 	(GeditPrintJobInfo *pji);
+static void 	gedit_print_real 	(GeditDocument* doc, gboolean preview, GError **error);
+static gboolean	gedit_print_run_dialog 	(GeditPrintJobInfo *pji);
+
+static void gedit_print_error_dialog (GError *error);
+
+static const gchar* gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji, 
+					const gchar *start, const gchar *end, gboolean first_line_of_par);
+
+static void gedit_print_line 		(GeditPrintJobInfo *pji, const gchar *start, 
+		                         const gchar *end, gdouble y, gboolean first_line_of_par);
+static gdouble gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, 
+		  			 const gchar *end, gdouble y);
+
+GQuark 
+gedit_print_error_quark ()
+{
+  static GQuark quark;
+  if (!quark)
+    quark = g_quark_from_static_string ("gedit_print_error");
+
+  return quark;
+}
 
 
-static void 	gedit_print_real 	(GeditDocument* doc, gboolean preview);
-static gboolean	gedit_print_run_dialog 	(/*PrintJobInfo *pji*/);
+static GeditPrintJobInfo* 
+gedit_print_job_info_new (GeditDocument* doc, GError **error)
+{	
+	GeditPrintJobInfo *pji;
+	
+	gedit_debug (DEBUG_PRINT, "");
+	
+	g_return_val_if_fail (doc != NULL, NULL);
+	g_return_val_if_fail (gedit_settings != NULL, NULL);
 
+	pji = g_new0 (GeditPrintJobInfo, 1);
+
+	pji->doc = doc;
+	pji->preview = FALSE;
+	pji->range_type = GNOME_PRINT_RANGE_ALL;
+
+	pji->page_width = A4_WIDTH;
+	pji->page_height = A4_HEIGHT;
+	pji->margin_top = CM (1);
+	pji->margin_left = CM (1);
+	pji->margin_right = CM (1);
+	pji->margin_bottom = CM (1);
+	pji->header_height = CM (0);
+	pji->footer_height = CM (0);	
+
+	pji->font_body = gnome_font_find_closest_from_full_name (
+					gedit_settings->print_font_body);
+
+	pji->font_header_and_footer = gnome_font_find_closest_from_full_name (
+					gedit_settings->print_font_header_and_footer);
+
+	pji->font_numbers = gnome_font_find_closest_from_full_name (
+					gedit_settings->print_font_numbers);
+
+	if ((pji->font_body == NULL) || 
+	    (pji->font_header_and_footer == NULL) ||
+	    (pji->font_numbers == NULL))
+	{
+		g_set_error (error, GEDIT_PRINT_ERROR, 1,
+			_("gedit is unable to print since it cannot find\n"
+			  "one of the required fonts."));
+		
+		gedit_print_job_info_destroy (pji);
+		
+		return NULL;
+	}
+
+	if (gedit_settings->print_header)
+		pji->header_height = 2.5 * gnome_font_get_size (pji->font_header_and_footer);
+	else
+		pji->header_height = 0;
+
+	if (gedit_settings->print_footer)
+		pji->footer_height = 2.5 * gnome_font_get_size (pji->font_header_and_footer);
+	else
+		pji->footer_height = 0;
+	
+	return pji;
+}	
+
+static void
+gedit_print_job_info_destroy (GeditPrintJobInfo *pji)
+{
+	gedit_debug (DEBUG_PRINT, "");
+
+	g_return_if_fail (pji != NULL);
+	
+	if (pji->config != NULL)
+		gnome_print_config_unref (pji->config);
+
+	if (pji->print_ctx != NULL)
+		g_object_unref (pji->print_ctx);
+
+	if (pji->print_master != NULL)
+		g_object_unref (pji->print_master);
+
+	g_free (pji);
+}
+
+static void
+gedit_print_update_page_size_and_margins (GeditPrintJobInfo *pji)
+{
+	const GnomePrintUnit *unit;
+
+	gedit_debug (DEBUG_PRINT, "");
+
+	gnome_print_master_get_page_size_from_config (pji->config, 
+			&pji->page_width, &pji->page_height);
+
+	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_LEFT, 
+				&pji->margin_left, &unit)) 
+	{
+		gnome_print_convert_distance (&pji->margin_left, unit, GNOME_PRINT_PS_UNIT);
+	}
+	
+	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_RIGHT, 
+				&pji->margin_right, &unit)) 
+	{
+		gnome_print_convert_distance (&pji->margin_right, unit, GNOME_PRINT_PS_UNIT);
+	}
+	
+	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_TOP, 
+				&pji->margin_top, &unit)) 
+	{
+		gnome_print_convert_distance (&pji->margin_top, unit, GNOME_PRINT_PS_UNIT);
+	}
+	if (gnome_print_config_get_length (pji->config, GNOME_PRINT_KEY_PAGE_MARGIN_BOTTOM, 
+				&pji->margin_bottom, &unit)) 
+	{
+		gnome_print_convert_distance (&pji->margin_bottom, unit, GNOME_PRINT_PS_UNIT);
+	}
+}
 /**
  * gedit_print_run_dialog:
  * @pji: 
@@ -48,24 +226,27 @@ static gboolean	gedit_print_run_dialog 	(/*PrintJobInfo *pji*/);
  * Return Value: TRUE if the printing was canceled by the user
  **/
 static gboolean
-gedit_print_run_dialog (/*PrintJobInfo *pji*/)
+gedit_print_run_dialog (GeditPrintJobInfo *pji)
 {
 	GtkWidget *dialog;
-	guint start_pos;
-	guint end_pos;
 	gint selection_flag;
-/*
-	if (!gedit_view_get_selection (pji->view, &start_pos, &end_pos))
+	gint res;
+
+	gedit_debug (DEBUG_PRINT, "");
+
+	g_return_val_if_fail (pji != NULL, TRUE);
+	
+	if (!gedit_document_has_selected_text (pji->doc))
 		selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
-	else*/
+	else
 		selection_flag = GNOME_PRINT_RANGE_SELECTION;
 		
-	dialog =  gnome_print_dialog_new ((const char *) _("Print Document"),
+	dialog = gnome_print_dialog_new ((const char *) _("gedit - Print Document"),
 			          GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
 	
 	gnome_print_dialog_construct_range_page ( GNOME_PRINT_DIALOG (dialog),
 						  GNOME_PRINT_RANGE_ALL |
-						  GNOME_PRINT_RANGE_RANGE |
+						  /*GNOME_PRINT_RANGE_RANGE |*/
 						  selection_flag,
 						  1, /*pji->pages*/5, "A",
 							  _("Pages"));
@@ -75,39 +256,167 @@ gedit_print_run_dialog (/*PrintJobInfo *pji*/)
 				      (bonobo_mdi_get_active_window
 				       (BONOBO_MDI (gedit_mdi))));
 
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
 
-	gtk_dialog_run (GTK_DIALOG (dialog));
-#if 0
-	switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
-	case GNOME_PRINT_PRINT:
-		break;
-	case GNOME_PRINT_PREVIEW:
-		pji->preview = TRUE;
-		break;
-	case -1:
-		return TRUE;
-	default:
-		gnome_dialog_close (GNOME_DIALOG (dialog));
-		return TRUE;
+	switch (res) 
+	{
+		case GNOME_PRINT_DIALOG_RESPONSE_PRINT:
+			gedit_debug (DEBUG_PRINT, "Print button pressed.");
+			break;
+		case GNOME_PRINT_DIALOG_RESPONSE_PREVIEW:
+			gedit_debug (DEBUG_PRINT, "Preview button pressed.");
+			pji->preview = TRUE;
+			break;
+		default:
+			gtk_widget_destroy (dialog);
+			return TRUE;
 	}
 	
-	pji->printer = gnome_print_dialog_get_printer (GNOME_PRINT_DIALOG (dialog));
-	/* If preview, do not set the printer so that the print button in the preview
-	 * window will pop another print dialog */
-	if (pji->printer && !pji->preview)
-		gnome_print_master_set_printer (pji->master, pji->printer);
-	
-	pji->range = gnome_print_dialog_get_range_page (
-		GNOME_PRINT_DIALOG (dialog),
-		&pji->page_first,
-		&pji->page_last);
+	g_return_val_if_fail (pji->config == NULL, TRUE);
+	pji->config = gnome_print_dialog_get_config (GNOME_PRINT_DIALOG (dialog));
 
-	if (pji->range == GNOME_PRINT_RANGE_SELECTION)
-		gedit_print_range_is_selection (pji, start_pos, end_pos);
-#endif
+	pji->range_type = gnome_print_dialog_get_range (GNOME_PRINT_DIALOG (dialog));
+
 	gtk_widget_destroy (dialog);
 
+	gedit_debug (DEBUG_PRINT, "Print dialog destroyed.");
+
 	return FALSE;
+}
+
+static void
+gedit_print_header (GeditPrintJobInfo *pji, gint page_number)
+{
+	gdouble y, x, len;
+	gchar* l_text;
+	gchar* r_text;
+
+	gedit_debug (DEBUG_PRINT, "");	
+
+	g_return_if_fail (pji != NULL);
+	g_return_if_fail (pji->font_header_and_footer != NULL);
+	g_return_if_fail (pji->doc != NULL);
+
+	gnome_print_setfont (pji->print_ctx, pji->font_header_and_footer);
+
+	y = pji->page_height - pji->margin_top -
+		gnome_font_get_ascender (pji->font_header_and_footer);
+
+	/* Print left text */
+	x = pji->margin_right;
+	
+	l_text = g_strdup_printf (_("File: %s"), gedit_document_get_uri (pji->doc));
+	gnome_print_moveto (pji->print_ctx, x, y);
+	gnome_print_show (pji->print_ctx, l_text);
+
+	/* Print right text */
+	r_text = g_strdup_printf (_("Page: %d"), page_number);
+	len = gnome_font_get_width_utf8 (pji->font_header_and_footer, r_text);
+
+	x = pji->page_width - pji->margin_right - len;
+
+	gnome_print_moveto (pji->print_ctx, x, y);
+	gnome_print_show (pji->print_ctx, r_text);
+
+	/* Print line */
+	y = pji->page_height - pji->margin_top -
+		(1.5 * gnome_font_get_size (pji->font_header_and_footer));
+
+	gnome_print_setlinewidth (pji->print_ctx, 1.0);
+	gnome_print_moveto (pji->print_ctx,  pji->margin_right, y);
+	gnome_print_lineto (pji->print_ctx, pji->page_width - pji->margin_right, y);
+	gnome_print_stroke (pji->print_ctx);
+
+	g_free (l_text);
+	g_free (r_text);
+}
+
+static void
+gedit_print_document (GeditPrintJobInfo *pji)
+{
+	gchar *text_to_print;
+	gchar *text_end;
+	const gchar *end;
+	const gchar *p;
+	gdouble y;
+	gint paragraph_delimiter_index;
+	gint next_paragraph_start;
+	gedit_debug (DEBUG_PRINT, "");	
+	
+	text_to_print = gedit_document_get_buffer (pji->doc);
+	text_end = text_to_print + strlen (text_to_print);
+	
+	gnome_print_beginpage (pji->print_ctx, "1");
+	
+	pji->page_num = 1;
+	
+	gedit_print_header (pji, 1);
+
+	y = pji->page_height - pji->margin_top - pji->header_height;
+	
+	pango_find_paragraph_boundary (text_to_print, -1, 
+			&paragraph_delimiter_index, &next_paragraph_start);
+
+	p = text_to_print;
+	end = text_to_print + paragraph_delimiter_index;
+
+	while (p < text_end)
+	{
+		gunichar wc = g_utf8_get_char (p);
+  		/* Only one character has type G_UNICODE_PARAGRAPH_SEPARATOR in
+		 * Unicode 3.0; update this if that changes.
+   		 */
+#define PARAGRAPH_SEPARATOR 0x2029
+
+		if ((wc == '\n' ||
+           	     wc == '\r' ||
+                     wc == PARAGRAPH_SEPARATOR))
+		{
+			y -= 1.2 * gnome_font_get_size (pji->font_body);
+		}
+		else
+		{	
+			y = gedit_print_paragraph (pji, p, end, y);
+		}
+		
+		p = p + next_paragraph_start;
+		
+		if (p < text_end)
+		{
+			pango_find_paragraph_boundary (p, -1, 
+				&paragraph_delimiter_index, &next_paragraph_start);
+			end = p + paragraph_delimiter_index;
+		}
+		
+	}
+
+	gnome_print_showpage (pji->print_ctx);
+
+	g_free (text_to_print);
+}
+
+/**
+ * gedit_print_preview_real:
+ * @pji: 
+ * 
+ * Create and show the print preview window
+ **/
+static void
+gedit_print_preview_real (GeditPrintJobInfo *pji)
+{
+	GtkWidget *gpmp;
+	gchar *title;
+	
+	gedit_debug (DEBUG_PRINT, "");
+
+	g_return_if_fail (pji != NULL);
+	g_return_if_fail (pji->print_master != NULL);
+
+	title = g_strdup_printf (_("gedit - Print Preview"));
+	gpmp = gnome_print_master_preview_new (pji->print_master, title);
+	g_free (title);
+
+	gtk_widget_show (gpmp);
 }
 
 /**
@@ -117,46 +426,84 @@ gedit_print_run_dialog (/*PrintJobInfo *pji*/)
  * The main printing function
  **/
 static void
-gedit_print_real (GeditDocument* doc, gboolean preview)
+gedit_print_real (GeditDocument* doc, gboolean preview, GError **error)
 {
-	
-#if 0
-	PrintJobInfo *pji;
+	GeditPrintJobInfo *pji;
 	gboolean cancel = FALSE;
 
 	gedit_debug (DEBUG_PRINT, "");
-
-	if (!gedit_print_verify_fonts ())
+		
+	pji = gedit_print_job_info_new (doc, error);
+	
+	if (pji == NULL)
 		return;
-
-	pji = gedit_print_job_info_new ();
+	
 	pji->preview = preview;
 
 	if (!pji->preview)
+		/* 
+		 * Open the print dialog and initialize
+		 * pji->config 
+		 */
 		cancel = gedit_print_run_dialog (pji);
+	else
+		pji->config = gnome_print_config_default ();
 
 	/* The canceled button on the dialog was clicked */
 	if (cancel) {
 		gedit_print_job_info_destroy (pji);
 		return;
 	}
-		
-	gedit_print_document (pji);
 
+	g_return_if_fail (pji->config != NULL);
+
+	pji->print_master = gnome_print_master_new_from_config (pji->config);
+	g_return_if_fail (pji->print_master != NULL);
+
+	pji->print_ctx = gnome_print_master_get_context (pji->print_master);
+	g_return_if_fail (pji->print_ctx != NULL);
+
+	gedit_print_update_page_size_and_margins (pji);
+	gedit_print_document (pji);
+#if 0
 	/* The printing was canceled while in progress */
 	if (pji->canceled) {
 		gedit_print_job_info_destroy (pji);
 		return;
 	}
-		
+#endif	
+	gnome_print_master_close (pji->print_master);
+
 	if (pji->preview)
 		gedit_print_preview_real (pji);
 	else
-		gnome_print_master_print (pji->master);
+		gnome_print_master_print (pji->print_master);
 	
 	gedit_print_job_info_destroy (pji);
-#endif
-	gedit_print_run_dialog ();
+}
+
+static void 
+gedit_print_error_dialog (GError *error)
+{
+	GtkWidget *dialog;
+	gchar *errstr;
+		       	
+	errstr = g_strdup_printf (_("An error occurred while printing.\n\n%s,"), error->message);
+		
+	dialog = gtk_message_dialog_new (
+			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		   	GTK_MESSAGE_ERROR,
+		   	GTK_BUTTONS_OK,
+			errstr);
+			
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+
+	gtk_widget_destroy (dialog);
+			
+	g_free (errstr);
 }
 
 
@@ -164,6 +511,7 @@ void
 gedit_print (GeditMDIChild* active_child)
 {
 	GeditDocument *doc;
+	GError *error = NULL;
 	
 	gedit_debug (DEBUG_PRINT, "");
 	
@@ -172,13 +520,20 @@ gedit_print (GeditMDIChild* active_child)
 	doc = active_child->document;
 	g_return_if_fail (doc != NULL);
 
-	gedit_print_real (doc, FALSE);
+	gedit_print_real (doc, FALSE, &error);
+
+	if (error)
+	{
+		gedit_print_error_dialog (error);
+		g_error_free (error);
+	}
 }
 
 void 
 gedit_print_preview (GeditMDIChild* active_child)
 {
 	GeditDocument *doc;
+	GError *error = NULL;
 	
 	gedit_debug (DEBUG_PRINT, "");
 	
@@ -187,6 +542,202 @@ gedit_print_preview (GeditMDIChild* active_child)
 	doc = active_child->document;
 	g_return_if_fail (doc != NULL);
 
-	gedit_print_real (doc, TRUE);
+	gedit_print_real (doc, TRUE, &error);
+
+	if (error)
+	{
+		gedit_print_error_dialog (error);
+		g_error_free (error);
+	}
+}
+
+static const gchar*
+gedit_print_get_next_line_to_print_delimiter (GeditPrintJobInfo *pji, 
+		const gchar *start, const gchar *end, gboolean first_line_of_par)
+{
+	const gchar* p;
+	gdouble line_width = 0.0;
+	gdouble printable_page_width;
+	ArtPoint space_advance;
+	gint space;
+
+	gint chars_in_this_line = 0;
+	gint tab_size = gedit_settings->tab_size;
+	
+	gedit_debug (DEBUG_PRINT, "");
+
+	printable_page_width = pji->page_width - (pji->margin_right + pji->margin_left);
+	
+	p = start;
+
+	/* Find space advance */
+	space = gnome_font_face_lookup_default (gnome_font_get_face (pji->font_body), ' ');
+	gnome_font_get_glyph_stdadvance (pji->font_body, space, &space_advance);
+
+	if (!first_line_of_par)
+	{
+		gunichar ch = g_utf8_get_char (p);
+		
+		while (ch == ' ' || ch == '\t')
+		{
+			p = g_utf8_next_char (p);
+			ch = g_utf8_get_char (p);
+		}
+	}
+
+	while (p < end)	
+	{
+		gunichar ch;
+	       	gint glyph;
+		
+		ch = g_utf8_get_char (p);
+		++chars_in_this_line;
+		
+		if (ch == '\t')
+		{
+			/* FIXME: use a tabs array */
+			gint num_of_equivalent_spaces;
+			
+			glyph = gnome_font_lookup_default (pji->font_body, ' ');
+			
+			num_of_equivalent_spaces = tab_size - ((chars_in_this_line - 1) % tab_size); 
+			chars_in_this_line += num_of_equivalent_spaces - 1;
+			
+			line_width += (num_of_equivalent_spaces * space_advance.x); 
+		}
+		else
+		{
+			glyph = gnome_font_lookup_default (pji->font_body, ch);
+
+			if (ch == ' ')
+				line_width += space_advance.x;
+			else	
+				line_width += gnome_font_get_glyph_width (pji->font_body, glyph);
+		}
+
+		if (line_width > printable_page_width)
+		{
+			/* FIXME: take care of lines wrapping at word boundaries too */
+			return p;
+		}
+
+		p = g_utf8_next_char (p);
+	}
+
+	return end;
+}
+
+static void
+gedit_print_line (GeditPrintJobInfo *pji, const gchar *start, const gchar *end, gdouble y, 
+		gboolean first_line_of_par)
+{
+	GnomeGlyphList * gl;
+	gdouble x;
+	const gchar* p;
+	gint chars_in_this_line = 0;
+	gint tab_size = gedit_settings->tab_size;
+	
+	gedit_debug (DEBUG_PRINT, "");
+
+	p = start;
+	
+	gl = gnome_glyphlist_from_text_dumb (pji->font_body, 0x000000ff, 0.0, 0.0, "");
+	
+	gnome_glyphlist_advance (gl, TRUE);
+	
+	x = pji->margin_left;
+	gnome_glyphlist_moveto (gl, x, y - gnome_font_get_ascender (pji->font_body));
+	
+	if (!first_line_of_par)
+	{
+		gunichar ch = g_utf8_get_char (p);
+		
+		while (ch == ' ' || ch == '\t')
+		{
+			p = g_utf8_next_char (p);
+			ch = g_utf8_get_char (p);
+		}
+	}
+		
+	while (p < end)
+	{
+		gunichar ch;
+	       	gint glyph;
+		
+		ch = g_utf8_get_char (p);
+		++chars_in_this_line;
+		
+		if (ch == '\t')
+		{
+			/* FIXME: use a tabs array */
+			gint i;
+			gint num_of_equivalent_spaces;
+			
+			glyph = gnome_font_lookup_default (pji->font_body, ' ');
+			
+			num_of_equivalent_spaces = tab_size - ((chars_in_this_line - 1) % tab_size); 
+			chars_in_this_line += num_of_equivalent_spaces - 1;
+			
+			for (i = 0; i < num_of_equivalent_spaces; ++i)
+				gnome_glyphlist_glyph (gl, glyph);
+	
+		}
+		else
+		{
+			glyph = gnome_font_lookup_default (pji->font_body, ch);
+			gnome_glyphlist_glyph (gl, glyph);
+		}
+
+		p = g_utf8_next_char (p);
+	}
+
+	gnome_print_moveto (pji->print_ctx, 0.0, 0.0);
+	gnome_print_glyphlist (pji->print_ctx, gl);
+	gnome_glyphlist_unref (gl);
+}
+
+static gdouble
+gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, const gchar *end, gdouble y)
+{
+	const gchar *p, *s;
+	gdouble fontheight;
+	gboolean fl;
+
+	gedit_debug (DEBUG_PRINT, "");
+	
+	p = start;
+
+	fl = TRUE;
+
+	fontheight = gnome_font_get_ascender (pji->font_body) + 
+				gnome_font_get_descender (pji->font_body);
+
+	while (p < end)
+	{
+		s = p;
+		p = gedit_print_get_next_line_to_print_delimiter (pji, s, end, fl);
+		gedit_print_line (pji, s, p, y, fl);
+		y -= 1.2 * gnome_font_get_size (pji->font_body);
+		fl = FALSE;
+		
+		if ((y - pji->margin_bottom) < fontheight)
+		{
+			gchar *pn_str;
+			gnome_print_showpage (pji->print_ctx);
+
+			++pji->page_num;
+			pn_str = g_strdup_printf ("%d", pji->page_num);
+			gnome_print_beginpage (pji->print_ctx, pn_str);
+
+			g_free (pn_str);
+
+			gedit_print_header (pji, +pji->page_num);
+
+			y = pji->page_height - pji->margin_top - pji->header_height;
+		}
+
+	}
+	
+	return y;
 }
 

@@ -35,6 +35,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "gedit-prefs.h"
 #include "gnome-vfs-helpers.h"
 #include "gedit-document.h"
 #include "gedit-debug.h"
@@ -83,7 +84,7 @@ static void gedit_document_real_readonly_changed	(GeditDocument *document,
 							 gboolean readonly);
 
 static gboolean	gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, 
-					     GError **error);
+					     gboolean create_backup_copy, GError **error);
 static void gedit_document_set_uri (GeditDocument* doc, const gchar* uri);
 
 static void gedit_document_can_undo_handler (GeditUndoManager* um, gboolean can_undo, 
@@ -708,7 +709,8 @@ gedit_document_save (GeditDocument* doc, GError **error)
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (!doc->priv->readonly, FALSE);
 
-	return gedit_document_save_as_real (doc, doc->priv->uri, error);
+	return gedit_document_save_as_real (doc, doc->priv->uri, 
+			gedit_settings->create_backup_copy, error);
 }
 
 gboolean	
@@ -720,7 +722,7 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (uri != NULL, FALSE);
 
-	if (gedit_document_save_as_real (doc, uri, error))
+	if (gedit_document_save_as_real (doc, uri, FALSE, error))
 	{
 		gedit_document_set_uri (doc, uri);
 		gedit_document_set_readonly (doc, FALSE);
@@ -731,13 +733,16 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri, GError **error)
 }
 
 static gboolean	
-gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, GError **error)
+gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
+	       gboolean create_backup_copy, GError **error)
 {
-	/* TODO: backup file? */
 	FILE* file;
 	gchar* chars;
 	gchar* fname;
-
+	gchar* bak_fname = NULL;
+	gboolean have_backup = FALSE;
+	gboolean res = FALSE;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc != NULL, FALSE);
@@ -753,19 +758,42 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, GError **erro
 	
 	fname = gnome_vfs_x_format_uri_for_display (uri);
 
+	if (create_backup_copy && (fname != NULL))
+	{
+		bak_fname = g_strconcat (fname, gedit_settings->backup_extension, NULL);
+		
+		if ((bak_fname == NULL) || (rename (fname, bak_fname) != 0))
+    		{
+      			if (errno != ENOENT)
+			{
+				g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
+					"Cannot create the backup copy of the file.\n"
+					"The file has not been saved.");
+		
+				if (fname != NULL) 
+					g_free (fname);
+
+				if (bak_fname != NULL) 
+					g_free (bak_fname);
+
+				return FALSE;
+
+			}
+    		}
+  		else
+    			have_backup = TRUE;
+	}
+
 	if ((fname == NULL) || ((file = fopen (fname, "w")) == NULL))
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
 			"Make sure that the path you provided exists,\n"
 			"and that you have the appropriate write permissions.");
-		
-		if (fname != NULL) 
-			g_free (fname);
-		
-		return FALSE;
-	}
+						
+		res = FALSE;
 
-	g_free (fname);
+		goto finally;
+	}
 
       	chars = gedit_document_get_buffer (doc);
 
@@ -774,14 +802,29 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, GError **erro
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, g_strerror (errno));
 		g_free (chars);
 
-		return FALSE;
+		res = FALSE;
+
+		goto finally;
 	}
 
 	g_free (chars);
 
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);	  
 
-	return TRUE;
+	res = TRUE;
+	
+finally:
+	if (!res && have_backup)
+		/* FIXME: should the errors be managed ? - Paolo */
+      		rename (bak_fname, fname);
+	
+	if (fname != NULL) 
+		g_free (fname);
+
+	if (bak_fname != NULL) 
+		g_free (bak_fname);
+
+  	return res;
 }
 
 gchar* 
@@ -1145,7 +1188,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 
 	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 	
-	/* FIXME: enable support for case sensitice -- Paolo */
+	/* FIXME: enable support for case sensitive -- Paolo */
 	/*
 	if (!case_sensitive)
 	{
@@ -1243,6 +1286,29 @@ gedit_document_get_selected_text (GeditDocument *doc)
 	gtk_text_iter_order (&sel_bound, &iter);	
 
 	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &iter, &sel_bound, TRUE);
+}
+
+gboolean
+gedit_document_has_selected_text (GeditDocument *doc)
+{
+	GtkTextIter iter;
+	GtkTextIter sel_bound;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &iter,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "insert"));
+		
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &sel_bound,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "selection_bound"));
+
+	return !gtk_text_iter_equal (&sel_bound, &iter);	
 }
 
 void

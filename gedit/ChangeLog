@@ -1,3 +1,21 @@
+2002-01-03  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-document.c (gedit_document_save_as_real): create
+	a backup copy of the file before saving
+	(gedit_document_has_selected_text): new function
+	
+	* gedit-document.h (gedit_document_has_selected_text): new 
+	prototype
+
+	* gedit-prefs.[ch]: preferences for printing support added
+
+	* gedit-print.c: rewritten, now gedit2 has a basic printing
+	support
+
+	* dialog/gedit-preferences-dialog.c: added a Save page
+
+	* dialogs/gedit-preferences.glade2: ditto
+
 2001-12-29  Paolo Maggi  <maggi@athena.polito.it>
 	
 	* gedit-prefs.[ch]: rewritten

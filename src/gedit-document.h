@@ -127,6 +127,7 @@ gchar*		gedit_document_get_chars 	(GeditDocument *doc,
 					         gint start, gint end);
 
 gchar*		gedit_document_get_selected_text (GeditDocument *doc);
+gboolean	gedit_document_has_selected_text (GeditDocument *doc);
 
 /* Multi-level Undo/Redo operations */
 gboolean	gedit_document_can_undo		(const GeditDocument *doc);

@@ -31,6 +31,8 @@
 #ifndef __GEDIT_PREFS_H__
 #define __GEDIT_PREFS_H__
 
+#include <gdk/gdkcolor.h>
+
 typedef struct _GeditPreferences GeditPreferences;
 
 typedef enum {
@@ -100,6 +102,12 @@ struct _GeditPreferences
 	gint print_orientation;
 	gchar *papersize;
 #endif
+	gboolean 	 print_header;
+	gboolean	 print_footer;
+
+	gchar		*print_font_body;
+	gchar		*print_font_header_and_footer;
+	gchar		*print_font_numbers;
 };
 
 extern GeditPreferences *gedit_settings;

@@ -113,6 +113,12 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*wrap_never_radiobutton;
 	GtkWidget	*wrap_word_radiobutton;
 	GtkWidget	*wrap_char_radiobutton;
+
+	/* Save page */
+	GtkWidget	*backup_copy_checkbutton;
+	GtkWidget	*utf8_radiobutton;
+	GtkWidget	*locale_if_possible_radiobutton;
+	GtkWidget	*locale_if_previous_radiobutton;
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -160,6 +166,7 @@ static void gedit_preferences_dialog_undo_checkbutton_toggled (GtkToggleButton *
 static gboolean gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_logo_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 static gboolean gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static gboolean gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui);
 
 
 static GtkDialogClass* parent_class = NULL;
@@ -487,6 +494,7 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_tabs_page (dlg, gui);
 	gedit_preferences_dialog_setup_logo_page (dlg, gui);
 	gedit_preferences_dialog_setup_wrap_mode_page (dlg, gui);
+	gedit_preferences_dialog_setup_save_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -540,20 +548,25 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 
 
 	if (gedit_settings->toolbar_visible)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_radiobutton), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dlg->priv->toolbar_show_radiobutton), TRUE);
 	else
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_hide_radiobutton), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dlg->priv->toolbar_hide_radiobutton), TRUE);
 
 	switch (gedit_settings->toolbar_buttons_style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_system_radiobutton), TRUE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->toolbar_system_radiobutton), TRUE);
 			break;
 		case GEDIT_TOOLBAR_ICONS:
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_radiobutton), TRUE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_radiobutton), TRUE);
 			break;
 		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_text_radiobutton), TRUE);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->toolbar_icon_text_radiobutton), TRUE);
 			break;
 
 		dafult:
@@ -561,9 +574,11 @@ gedit_preferences_dialog_setup_toolbar_page (GeditPreferencesDialog *dlg, GladeX
 	}
 	
 	if (gedit_settings->toolbar_view_tooltips)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_tooltips_checkbutton), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dlg->priv->toolbar_tooltips_checkbutton), TRUE);
 	else
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->toolbar_tooltips_checkbutton), FALSE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dlg->priv->toolbar_tooltips_checkbutton), FALSE);
 		
 	return TRUE;
 }
@@ -701,7 +716,8 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 	dlg->priv->fontpicker = gnome_font_picker_new ();
 	g_return_val_if_fail (dlg->priv->fontpicker, FALSE);
 
-	gnome_font_picker_set_mode (GNOME_FONT_PICKER (dlg->priv->fontpicker), GNOME_FONT_PICKER_MODE_FONT_INFO);
+	gnome_font_picker_set_mode (GNOME_FONT_PICKER (dlg->priv->fontpicker), 
+			GNOME_FONT_PICKER_MODE_FONT_INFO);
 	gnome_font_picker_fi_set_use_font_in_label (GNOME_FONT_PICKER (dlg->priv->fontpicker),
                                                        TRUE, 14);
 	gnome_font_picker_fi_set_show_size (GNOME_FONT_PICKER (dlg->priv->fontpicker), TRUE);
@@ -866,6 +882,53 @@ gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, Glad
 	return TRUE;
 }
 
+static gboolean 
+gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	gedit_debug (DEBUG_PREFS, "");
+	
+	dlg->priv->backup_copy_checkbutton = glade_xml_get_widget (gui, 
+			"backup_copy_checkbutton");
+
+	dlg->priv->utf8_radiobutton= glade_xml_get_widget (gui, 
+			"utf8_radiobutton"); 
+	dlg->priv->locale_if_possible_radiobutton= glade_xml_get_widget (gui, 
+			"locale_if_possible_radiobutton"); 
+	dlg->priv->locale_if_previous_radiobutton= glade_xml_get_widget (gui, 
+			"locale_if_previous_radiobutton");
+
+	g_return_val_if_fail (dlg->priv->backup_copy_checkbutton, FALSE);
+	
+	g_return_val_if_fail (dlg->priv->utf8_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->locale_if_possible_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->locale_if_previous_radiobutton, FALSE);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton),
+				      gedit_settings->create_backup_copy);
+
+	switch (gedit_settings->save_encoding)
+	{
+		case GEDIT_SAVE_ALWAYS_UTF8:
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->utf8_radiobutton), TRUE);
+			break;
+		case GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE:
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->locale_if_possible_radiobutton),
+				TRUE);
+			break;
+		case GEDIT_SAVE_CURRENT_LOCALE_IF_USED:
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->locale_if_previous_radiobutton),
+				TRUE);
+			break;
+		default:
+			/* Not possible */
+			g_return_val_if_fail (FALSE, FALSE);
+	}
+	
+	return TRUE;
+}
 
 gboolean 
 gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
@@ -990,8 +1053,20 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 	else
 		gedit_settings->wrap_mode = GTK_WRAP_NONE;
 			
-	return TRUE;
+	/* Save page */
+	gedit_settings->create_backup_copy = 
+		gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton));
 
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->utf8_radiobutton)))
+		gedit_settings->save_encoding = GEDIT_SAVE_ALWAYS_UTF8;
+	else
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->locale_if_possible_radiobutton)))
+		gedit_settings->save_encoding = GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE;
+	else
+		gedit_settings->save_encoding = GEDIT_SAVE_CURRENT_LOCALE_IF_USED;
+	
+	return TRUE;
+	
 error:
 	*gedit_settings = old_prefs;
 	g_return_val_if_fail (FALSE, FALSE);

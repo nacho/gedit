@@ -1327,7 +1327,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                     <property name="visible">yes</property>
 
                     <child>
-                      <widget class="GtkCheckButton" id="backup_copy">
+                      <widget class="GtkCheckButton" id="backup_copy_checkbutton">
                         <property name="can_focus">yes</property>
                         <property name="label" translatable="yes">Create a _backup copy of files before saving</property>
                         <property name="active">no</property>
@@ -1353,7 +1353,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                   <widget class="GtkHBox" id="hbox11">
                     <property name="homogeneous">no</property>
                     <property name="spacing">3</property>
-                    <property name="visible">yes</property>
+                    <property name="visible">no</property>
                     <property name="sensitive">no</property>
 
                     <child>
@@ -1422,6 +1422,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="label_xalign">0</property>
                             <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                             <property name="visible">yes</property>
+                            <property name="sensitive">no</property>
 
                             <child>
                               <widget class="GtkVBox" id="vbox18">

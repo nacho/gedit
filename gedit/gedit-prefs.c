@@ -92,7 +92,11 @@
 GeditPreferences 	*gedit_settings 	= NULL;
 static GConfClient 	*gedit_gconf_client 	= NULL;
 
-#define DEFAULT_FONT (const gchar*) "Courier Medium 12"
+#define DEFAULT_EDITOR_FONT 		(const gchar*) "Courier Medium 12"
+
+#define DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Courier 10"
+#define DEFAULT_PRINT_FONT_H_AND_F	(const gchar*) "Helvetica 12"
+#define DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Courier 8"
 
 static gchar* 
 gedit_prefs_gdk_color_to_string (GdkColor color)
@@ -308,13 +312,16 @@ gedit_prefs_load_settings (void)
 				gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_USE_DEFAULT_FONT,
 				NULL);
+	
+	if (gedit_settings->editor_font != NULL)
+		g_free (gedit_settings->editor_font);
 
 	gedit_settings->editor_font = gconf_client_get_string (
 				gedit_gconf_client,
 				GEDIT_BASE_KEY GEDIT_PREF_EDITOR_FONT,
 			      	NULL);
 	if (gedit_settings->editor_font == NULL)
-		gedit_settings->editor_font = g_strdup (DEFAULT_FONT);
+		gedit_settings->editor_font = g_strdup (DEFAULT_EDITOR_FONT);
 	
 	gedit_settings->use_default_colors = gconf_client_get_bool (
 				gedit_gconf_client,
@@ -379,6 +386,9 @@ gedit_prefs_load_settings (void)
 			      	GEDIT_BASE_KEY GEDIT_PREFS_CREATE_BACKUP_COPY,
 			      	NULL);
 
+	if (gedit_settings->backup_extension != NULL)
+		g_free (gedit_settings->backup_extension);
+	
 	gedit_settings->backup_extension = gconf_client_get_string (
 				gedit_gconf_client,
 			      	GEDIT_BASE_KEY GEDIT_PREFS_BACKUP_EXTENSION,
@@ -453,8 +463,27 @@ gedit_prefs_load_settings (void)
 				GEDIT_BASE_KEY GEDIT_PREF_TABS_POSITION,
 				NULL);
 
+	/* FIXME */
 	gedit_settings->window_width = 600;
 	gedit_settings->window_height = 400;
+
+	gedit_settings->print_header = TRUE;
+	gedit_settings->print_footer = FALSE;
+
+	if (gedit_settings->print_font_body != NULL)
+		g_free (gedit_settings->print_font_body);
+	
+	gedit_settings->print_font_body = g_strdup (DEFAULT_PRINT_FONT_BODY);
+	
+	if (gedit_settings->print_font_header_and_footer != NULL)
+		g_free (gedit_settings->print_font_header_and_footer);
+	
+	gedit_settings->print_font_header_and_footer =  g_strdup (DEFAULT_PRINT_FONT_H_AND_F);	
+	
+	if (gedit_settings->print_font_numbers != NULL)
+		g_free (gedit_settings->print_font_numbers);
+	
+	gedit_settings->print_font_numbers = g_strdup (DEFAULT_PRINT_FONT_NUMBERS);
 
 	gedit_debug (DEBUG_PREFS, "END");
 }
