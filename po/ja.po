@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-01 13:22+0100\n"
-"PO-Revision-Date: 2004-08-19 10:19+0900\n"
+"POT-Creation-Date: 2004-11-04 16:55+0900\n"
+"PO-Revision-Date: 2004-11-04 16:53+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -61,9 +61,8 @@ msgstr ""
 "トを使う\" オプションを無効にしている場合にのみ効果があります。"
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "%s をアクティブにします"
+msgstr "利用可能なプラグイン"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -187,6 +186,8 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"利用可能なプラグインの一覧です。プラグインの \"場所\" が含まれます。指定した"
+"プラグインの \"場所\" を得るにはファイル .gedit-plugin を参照して下さい。"
 
 #: data/gedit.schemas.in.h:27
 msgid ""
@@ -1223,9 +1224,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:645 gedit/gedit-document.c:663
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "ドキュメント(_D)"
+msgstr "保存していないドキュメント"
 
 #: gedit/gedit-document.c:651 gedit/gedit-document.c:698
 msgid "Invalid file name"
@@ -1431,9 +1431,8 @@ msgid "All Text Files"
 msgstr "全てのテキスト・ファイル"
 
 #: gedit/gedit-file-selector-util.c:396
-#, fuzzy
 msgid "_Character Coding:"
-msgstr "文字コード(_A):"
+msgstr "文字コード(_C):"
 
 #: gedit/gedit-file-selector-util.c:541
 msgid "Select a file to open"
@@ -1593,7 +1592,7 @@ msgstr[1] "%d 個のファイルを読み込みました"
 msgid "Loading file \"%s\"..."
 msgstr "ファイル \"%s\" を読み込んでいます..."
 
-#: gedit/gedit-file.c:1378
+#: gedit/gedit-file.c:1374
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2494,7 +2493,7 @@ msgstr "ファイル \"%s\" を作成できませんでした。"
 
 #: gedit/gedit-utils.c:1417
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (Unicode が不正です)"
 
 #.
 #. if (col == chars)
@@ -3146,75 +3145,3 @@ msgstr "フォーマットのためのプロンプト(_P)"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "フォーマットをカスタマイズする(_U)"
-
-#~ msgid "Untitled"
-#~ msgstr "名前無し"
-
-#~ msgid "Error, unable to open module file '%s'\n"
-#~ msgstr "エラー: モジュール・ファイル '%s'を開けません。\n"
-
-#~ msgid "Error, plugin '%s' does not contain init function."
-#~ msgstr "エラー: プラグイン '%s' は init 関数を含んでいません。"
-
-#~ msgid "Error, plugin '%s' does not contain activate function."
-#~ msgstr "エラー: プラグイン '%s' は activate 関数を含んでいません。"
-
-#~ msgid "Error, plugin '%s' does not contain deactivate function."
-#~ msgstr "エラー: プラグイン '%s' は deactivate 関数を含んでいません。"
-
-#~ msgid "Error, impossible to initialize plugin '%s'"
-#~ msgstr "エラー: プラグイン '%s' を初期化できません。"
-
-#~ msgid "Error, impossible to destroy plugin '%s'"
-#~ msgstr "エラー: プラグイン '%s' を無効にできません。"
-
-#~ msgid "Error, impossible to activate plugin '%s'"
-#~ msgstr "エラー: プラグイン '%s' を起動できません。"
-
-#~ msgid "Error, impossible to deactivate plugin '%s'"
-#~ msgstr "エラー: プラグイン '%s' を停止できません。"
-
-#~ msgid "Error, impossible to update ui of the plugin '%s'"
-#~ msgstr "エラー: プラグイン '%s' の UI を更新できません。"
-
-#~ msgid "C_hange Case"
-#~ msgstr "文字の変更(_H)"
-
-#~ msgid "All _Upper Case"
-#~ msgstr "全て大文字にする(_U)"
-
-#~ msgid "All _Lower Case"
-#~ msgstr "全て小文字にする(_L)"
-
-#~ msgid "_Invert Case"
-#~ msgstr "大/小文字を反転する(_I)"
-
-#~ msgid "_Title Case"
-#~ msgstr "先頭を大文字にする(_T)"
-
-#~ msgid "Change selected text to upper case"
-#~ msgstr "選択したテキストを大文字にします"
-
-#~ msgid "Change selected text to lower case"
-#~ msgstr "選択したテキストを小文字にします"
-
-#~ msgid "Invert the case of selected text"
-#~ msgstr "選択したテキストの大/小文字を反転します"
-
-#~ msgid "Capitalize the first letter of each selected word"
-#~ msgstr "選択した単語の先頭文字を大文字にします"
-
-#~ msgid "Change Case"
-#~ msgstr "大/小文字の変更"
-
-#~ msgid "Changes the case of selected text."
-#~ msgstr "選択したテキストの大/小文字を変更します。"
-
-#~ msgid "Save method not implemented for gedit viewer"
-#~ msgstr "gedit ビューア用に実装されていないメソッドを保存します"
-
-#~ msgid "Copy the selected text to the clipboard"
-#~ msgstr "選択したテキストをクリップボードにコピーします"
-
-#~ msgid "_Copy Text"
-#~ msgstr "テキストのコピー(_C)"
