@@ -479,6 +479,7 @@ change_all_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *cha
 
 	gchar *last_searched_text;
 	gchar *last_replaced_text;
+	gint flags = 0;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 	
@@ -503,7 +504,10 @@ change_all_cb (GeditSpellCheckerDialog *dlg, const gchar *word, const gchar *cha
 	last_searched_text = gedit_document_get_last_searched_text (doc);
 	last_replaced_text = gedit_document_get_last_replace_text (doc);
        	
-	gedit_document_replace_all (doc, word, change, TRUE, TRUE);
+	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, TRUE);
+	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, TRUE);
+       	
+	gedit_document_replace_all (doc, word, change, flags);
 
 	update_current (doc, range->mw_start + g_utf8_strlen (change, -1));
 

@@ -512,8 +512,9 @@ gedit_document_real_loaded (GeditDocument *document)
 					   "last_searched_text");
 	if (data != NULL)
 	{
-		gedit_document_set_last_searched_text (document,
-						       data);
+		if (document->priv->last_searched_text == NULL)
+			gedit_document_set_last_searched_text (document,
+							       data);
 
 		g_free (data);
 	}
@@ -522,8 +523,9 @@ gedit_document_real_loaded (GeditDocument *document)
 					   "last_replaced_text");
 	if (data != NULL)
 	{
-		gedit_document_set_last_replace_text (document,
-						      data);
+		if (document->priv->last_replace_text == NULL)
+			gedit_document_set_last_replace_text (document,
+							      data);
 
 		g_free (data);
 	}
@@ -1856,18 +1858,16 @@ gedit_document_set_last_replace_text (GeditDocument* doc, const gchar *text)
 }
 
 gboolean
-gedit_document_find (GeditDocument* doc, const gchar* str, 
-		gboolean from_cursor, gboolean case_sensitive, gboolean entire_word)
+gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 {
 	GtkTextIter iter;
 	gboolean found = FALSE;
-	GtkTextSearchFlags search_flags;
+	GtkSourceSearchFlags search_flags;
 	gchar *converted_str;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (str != NULL, FALSE);
 
 	converted_str = gedit_utils_convert_search_text (str);
@@ -1876,33 +1876,45 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	gedit_debug (DEBUG_DOCUMENT, "str: %s", str);
 	gedit_debug (DEBUG_DOCUMENT, "converted_str: %s", converted_str);
 
-	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
+	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
 	
-	if (!case_sensitive)
+	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (flags))
 	{
 		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
 	}
 
-	if (from_cursor)
+	if (GEDIT_SEARCH_IS_FROM_CURSOR (flags))
 	{
 		GtkTextIter sel_bound;
 		
-		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &iter,
+		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), &iter,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					                      "insert"));
 		
-		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &sel_bound,
+		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), &sel_bound,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					                      "selection_bound"));
 		
-		gtk_text_iter_order (&sel_bound, &iter);		
+		if (!GEDIT_SEARCH_IS_BACKWARDS (flags))
+			gtk_text_iter_order (&sel_bound, &iter);		
+		else
+			gtk_text_iter_order (&iter, &sel_bound);		
 	}
 	else		
-		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
-
-	found = FALSE;
+	{
+		if (GEDIT_SEARCH_IS_BACKWARDS (flags))
+		{
+			/* get an iterator at the end of the document */
+			gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc),
+							    &iter, -1);
+		}
+		else
+		{
+			/* get an iterator at the beginning of the document */
+			gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc),
+							    &iter, 0);
+		}
+	}
 	
 	if (*converted_str != '\0')
     	{
@@ -1910,18 +1922,33 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 
 		while (!found)
 		{
-          		found = gtk_source_iter_forward_search (&iter, converted_str, search_flags,
+			if (GEDIT_SEARCH_IS_BACKWARDS (flags))
+			{
+				/*gtk_text_iter_backward_word_start (&iter);*/
+				/*
+				gtk_text_iter_backward_char (&iter);
+				*/
+				
+	          		found = gtk_source_iter_backward_search (&iter,
+							converted_str, search_flags,
                         	                	&match_start, &match_end,
                                 	               	NULL);	
+			}
+			else
+			{
+	          		found = gtk_source_iter_forward_search (&iter,
+							converted_str, search_flags,
+                        	                	&match_start, &match_end,
+                                	               	NULL);
+			}
 
-			if (found && entire_word)
+			if (found && GEDIT_SEARCH_IS_ENTIRE_WORD (flags))
 			{
 				found = gtk_text_iter_starts_word (&match_start) && 
 					gtk_text_iter_ends_word (&match_end);
 
 				if (!found) 
 					iter = match_end;
-
 			}
 			else
 				break;
@@ -1940,8 +1967,8 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 			g_free (doc->priv->last_searched_text);
 
 		doc->priv->last_searched_text = g_strdup (str);
-		doc->priv->last_search_was_case_sensitive = case_sensitive;
-		doc->priv->last_search_was_entire_word = entire_word;
+		doc->priv->last_search_was_case_sensitive = GEDIT_SEARCH_IS_CASE_SENSITIVE (flags);
+		doc->priv->last_search_was_entire_word = GEDIT_SEARCH_IS_ENTIRE_WORD (flags);
 	}
 
 	g_free (converted_str);
@@ -1949,8 +1976,8 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	return found;
 }
 
-gboolean
-gedit_document_find_again (GeditDocument* doc, gboolean from_cursor)
+static gboolean
+gedit_document_find_again (GeditDocument* doc, gint flags)
 {
 	gchar* last_searched_text;
 	gboolean found;
@@ -1965,15 +1992,39 @@ gedit_document_find_again (GeditDocument* doc, gboolean from_cursor)
 	if (last_searched_text == NULL)
 		return FALSE;
 	
-	found = gedit_document_find (doc, 
-				     last_searched_text, 
-				     from_cursor, 
-				     doc->priv->last_search_was_case_sensitive, 
-				     doc->priv->last_search_was_entire_word);
+	/* pack bitflag array with previous data */
+	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, doc->priv->last_search_was_case_sensitive);
+	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, doc->priv->last_search_was_entire_word);
+
+	/* run the search */
+	found = gedit_document_find (doc, last_searched_text, flags);
 
 	g_free (last_searched_text);
 
 	return found;
+}
+
+gboolean 
+gedit_document_find_next (GeditDocument* doc, gint flags)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	GEDIT_SEARCH_SET_BACKWARDS (flags, FALSE);
+
+	/* run the search */
+	return gedit_document_find_again (doc, flags);
+}
+
+gboolean 
+gedit_document_find_prev (GeditDocument* doc, gint flags)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	/* pack bitflag array with the backwards searching operative */
+	GEDIT_SEARCH_SET_BACKWARDS (flags, TRUE);
+
+	/* run the search */
+	return gedit_document_find_again (doc, flags);
 }
 
 gboolean 
@@ -2065,9 +2116,9 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 
 gboolean
 gedit_document_replace_all (GeditDocument *doc,
-	      	const gchar *find, const gchar *replace, gboolean case_sensitive, gboolean entire_word)
+			    const gchar *find, const gchar *replace,
+			    gint flags)
 {
-	gboolean from_cursor = FALSE;
 	gboolean cont = 0;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -2078,11 +2129,15 @@ gedit_document_replace_all (GeditDocument *doc,
 
 	gedit_document_begin_user_action (doc);
 
-	while (gedit_document_find (doc, find, from_cursor, case_sensitive, entire_word)) 
+	GEDIT_SEARCH_SET_BACKWARDS (flags, FALSE);
+	GEDIT_SEARCH_SET_FROM_CURSOR (flags, FALSE);
+
+	while (gedit_document_find (doc, find, flags)) 
 	{
 		gedit_document_replace_selected_text (doc, replace);
 		
-		from_cursor = TRUE;
+		GEDIT_SEARCH_SET_FROM_CURSOR (flags, TRUE);
+		
 		++cont;
 	}
 

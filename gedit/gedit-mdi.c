@@ -1199,8 +1199,8 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	g_return_if_fail (doc != NULL);
 	
 	lst = gedit_document_get_last_searched_text (doc);
-
-	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindAgain", lst != NULL);	
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindNext", lst != NULL);	
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindPrev", lst != NULL);
 	g_free (lst);
 		
 	if (gedit_document_is_readonly (doc))

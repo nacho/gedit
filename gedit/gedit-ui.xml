@@ -77,9 +77,12 @@
 	<cmd name="SearchFind" _label="Find" _tip="Search for a string"
         pixtype="stock" pixname="gtk-find" accel="*Control*F"/>
 	
-        <cmd name="SearchFindAgain" _label="Find Again" _tip="Search again for the same string"
+        <cmd name="SearchFindNext" _label="Find Next" _tip="Search again for the same string"
           pixtype="stock" pixname="gtk-find" accel="*Control*G"/>
 	
+        <cmd name="SearchFindPrev" _label="Find Previous" _tip="Search backwards for the same string"
+          pixtype="stock" pixname="gtk-find" accel="*Shift**Control*G"/>
+
         <cmd name="SearchReplace" _label="Replace" _tip="Replace a string"
           pixtype="stock" pixname="gtk-find-and-replace" accel="*Control*R"/>
 
@@ -236,7 +239,9 @@
 
 	<menuitem name="SearchFind" verb="" _label="_Find..."/>
 
-	<menuitem name="SearchFindAgain" verb="" _label="Find Ne_xt"/>
+	<menuitem name="SearchFindNext" verb="" _label="Find Ne_xt"/>
+
+	<menuitem name="SearchFindPrev" verb="" _label="Find Pre_vious"/>
 
 	<menuitem name="SearchReplace" verb="" _label="_Replace..."/>
 

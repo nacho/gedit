@@ -1,3 +1,29 @@
+ 2003-06-07 Eric Ritezel <eisenwulf@inductiveart.net>
+ 
+ 	* dialogs/replace.glade2: added checkbutton for backwards searching
+ 	(#99730: UI review dictates backwards searching option.)
+ 
+ 	* dialogs/gedit-dialog-replace.c: updated for backwards searching
+ 	([find|replace]_dlg_find_button_pressed):
+ 	(replace_dlg_replace_button_pressed):
+ 	(dialog_[find|replace]_get_dialog): reflect new glade changes
+ 	(gedit_dialog_[find|replace]): reflect changes in dialog structure 
+ 
+ 	* gedit-document.[ch]: updated structs/prototypes for backwards search
+ 	(gedit_document_find_again):
+ 	(gedit_document_replace_all): updated for backwards searching
+ 	(gedit_document_find): added hooks for GtkSourceView backwards search
+ 
+ 	* gedit-document.h: added GEDIT_SEARCH_ macros/defs for manipulating
+ 	the search parameter bitfield ("Probably we need to think a more
+ 	extensible signature for the gedit_document_find function").
+ 
+ 	* gedit-commands.[ch]: updated Find Next, added Find Previous.
+ 
+ 	* gedit-menus.c:
+ 	* gedit-mdi.c: /commands/SearchFindAgain to FindNext and FindPrev
+ 	* gedit-ui.xml: add accelerator *Shift**Contol*G for FindPrev  
+
 2003-06-06  Paolo Maggi <paolo.maggi@polito.it> 
 
 	New way for managing encodings.

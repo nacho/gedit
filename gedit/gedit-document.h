@@ -45,6 +45,28 @@
 #define GEDIT_DOCUMENT_GET_CLASS(obj)  	(GTK_CHECK_GET_CLASS ((obj), GEDIT_TYPE_DOCUMENT, GeditDocumentClass))
 
 
+#define GEDIT_SEARCH_ENTIRE_WORD   	(1 << 0 )
+#define GEDIT_SEARCH_BACKWARDS     	(1 << 1 )
+#define GEDIT_SEARCH_CASE_SENSITIVE	(1 << 2 )
+#define GEDIT_SEARCH_FROM_CURSOR   	(1 << 3 )
+
+#define GEDIT_SEARCH_IS_ENTIRE_WORD(sflags) ((sflags & GEDIT_SEARCH_ENTIRE_WORD) != 0)
+#define GEDIT_SEARCH_SET_ENTIRE_WORD(sflags,state) ((state == TRUE) ? \
+(sflags |= GEDIT_SEARCH_ENTIRE_WORD) : (sflags &= ~GEDIT_SEARCH_ENTIRE_WORD))
+
+#define GEDIT_SEARCH_IS_BACKWARDS(sflags) ((sflags & GEDIT_SEARCH_BACKWARDS) != 0)
+#define GEDIT_SEARCH_SET_BACKWARDS(sflags,state) ((state == TRUE) ? \
+(sflags |= GEDIT_SEARCH_BACKWARDS) : (sflags &= ~GEDIT_SEARCH_BACKWARDS))
+
+#define GEDIT_SEARCH_IS_CASE_SENSITIVE(sflags) ((sflags &  GEDIT_SEARCH_CASE_SENSITIVE) != 0)
+#define GEDIT_SEARCH_SET_CASE_SENSITIVE(sflags,state) ((state == TRUE) ? \
+(sflags |= GEDIT_SEARCH_CASE_SENSITIVE) : (sflags &= ~GEDIT_SEARCH_CASE_SENSITIVE))
+
+#define GEDIT_SEARCH_IS_FROM_CURSOR(sflags) ((sflags &  GEDIT_SEARCH_FROM_CURSOR) != 0)
+#define GEDIT_SEARCH_SET_FROM_CURSOR(sflags,state) ((state == TRUE) ? \
+(sflags |= GEDIT_SEARCH_FROM_CURSOR) : (sflags &= ~GEDIT_SEARCH_FROM_CURSOR))
+
+
 typedef struct _GeditDocument           GeditDocument;
 typedef struct _GeditDocumentClass 	GeditDocumentClass;
 
@@ -53,7 +75,6 @@ typedef struct _GeditDocumentPrivate    GeditDocumentPrivate;
 struct _GeditDocument
 {
 	GtkSourceBuffer buffer;
-	
 	GeditDocumentPrivate *priv;
 };
 
@@ -79,6 +100,7 @@ struct _GeditDocumentClass
 #define GEDIT_ERROR_INVALID_UTF8_DATA 	1024
 #define GEDIT_ERROR_UNTITLED		1025	
 #define GEDIT_DOCUMENT_IO_ERROR gedit_document_io_error_quark ()
+
 GQuark 		gedit_document_io_error_quark (void);
 
 GType        	gedit_document_get_type      	(void) G_GNUC_CONST;
@@ -172,19 +194,16 @@ void 		gedit_document_set_last_searched_text (GeditDocument* doc, const gchar *t
 void 		gedit_document_set_last_replace_text  (GeditDocument* doc, const gchar *text);
 
 gboolean	gedit_document_find 		(GeditDocument* doc, const gchar* str, 
-						 gboolean from_cursor, 
-						 gboolean case_sensitive,
-						 gboolean entire_word);
-gboolean	gedit_document_find_again	(GeditDocument* doc,
-						 gboolean from_cursor);
+						 gint flags);
+gboolean	gedit_document_find_next	(GeditDocument* doc, gint flags);
+gboolean	gedit_document_find_prev	(GeditDocument* doc, gint flags);
 
 void		gedit_document_replace_selected_text (GeditDocument *doc, 
 						      const gchar *replace);
 gboolean	gedit_document_replace_all 	(GeditDocument *doc,
 				            	 const gchar *find, 
 						 const gchar *replace, 
-					    	 gboolean case_sensitive,
-						 gboolean entire_word);
+					    	 gint flags);
 guint		gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset);
 
 void		gedit_document_set_selection 	(GeditDocument *doc, 

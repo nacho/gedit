@@ -65,6 +65,7 @@ struct _GeditDialogReplace {
 	GtkWidget *match_case_checkbutton;
 	GtkWidget *entire_word_checkbutton;
 	GtkWidget *wrap_around_checkbutton;
+	GtkWidget *search_backwards_checkbutton;
 };
 
 struct _GeditDialogFind {
@@ -76,6 +77,7 @@ struct _GeditDialogFind {
 	GtkWidget *match_case_checkbutton;
 	GtkWidget *entire_word_checkbutton;
 	GtkWidget *wrap_around_checkbutton;
+	GtkWidget *search_backwards_checkbutton;
 };
 
 static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
@@ -96,6 +98,7 @@ static GeditDialogFind    *dialog_find_get_dialog 	(void);
 static GQuark was_wrap_around_id = 0;
 static GQuark was_entire_word_id = 0;
 static GQuark was_case_sensitive_id = 0;
+static GQuark was_search_backwards_id = 0;
 
 GQuark 
 gedit_was_wrap_around_quark (void)
@@ -300,6 +303,7 @@ dialog_replace_get_dialog (void)
 	dialog->match_case_checkbutton = glade_xml_get_widget (gui, "match_case_checkbutton");
 	dialog->wrap_around_checkbutton =  glade_xml_get_widget (gui, "wrap_around_checkbutton");
 	dialog->entire_word_checkbutton = glade_xml_get_widget (gui, "entire_word_checkbutton");
+	dialog->search_backwards_checkbutton = glade_xml_get_widget (gui, "search_backwards_checkbutton");
 
 	if (!content				||
 	    !dialog->search_entry 		||
@@ -309,7 +313,8 @@ dialog_replace_get_dialog (void)
 	    !replace_with_label 		||
 	    !dialog->match_case_checkbutton 	||
 	    !dialog->entire_word_checkbutton 	||
-	    !dialog->wrap_around_checkbutton)
+	    !dialog->wrap_around_checkbutton 	||
+	    !dialog->search_backwards_checkbutton)
 	{
 		g_print
 		    ("Could not find the required widgets inside replace.glade2.\n");
@@ -421,10 +426,12 @@ dialog_find_get_dialog (void)
 	dialog->match_case_checkbutton = glade_xml_get_widget (gui, "match_case_checkbutton");
 	dialog->wrap_around_checkbutton =  glade_xml_get_widget (gui, "wrap_around_checkbutton");
 	dialog->entire_word_checkbutton = glade_xml_get_widget (gui, "entire_word_checkbutton");
+	dialog->search_backwards_checkbutton = glade_xml_get_widget (gui, "search_backwards_checkbutton");
 
 	table                      = glade_xml_get_widget (gui, "table");
 
 	if (!content				||
+	    !table				||
 	    !dialog->search_entry 		||
 	    !dialog->search_entry_list 		||
 	    !replace_entry			||
@@ -432,7 +439,7 @@ dialog_find_get_dialog (void)
 	    !dialog->match_case_checkbutton 	||
 	    !dialog->entire_word_checkbutton 	||
 	    !dialog->wrap_around_checkbutton	||
-	    !table) 
+	    !dialog->search_backwards_checkbutton)
 	{
 		g_print
 		    ("Could not find the required widgets inside replace.glade2.\n");
@@ -564,6 +571,7 @@ gedit_dialog_find (void)
 	gboolean was_wrap_around;
 	gboolean was_entire_word;
 	gboolean was_case_sensitive;
+	gboolean was_search_backwards;
 	gpointer data;
 	
 	gedit_debug (DEBUG_SEARCH, "");
@@ -612,6 +620,9 @@ gedit_dialog_find (void)
 		}
 	}
 
+	if (!was_search_backwards_id)
+		was_search_backwards_id = g_quark_from_static_string ("GeditWasSearchBackwards");
+
 	if (!was_wrap_around_id)
 		was_wrap_around_id = gedit_was_wrap_around_quark ();
 
@@ -626,6 +637,12 @@ gedit_dialog_find (void)
 		was_wrap_around = TRUE;
 	else
 		was_wrap_around = GPOINTER_TO_BOOLEAN (data);
+
+	data = g_object_get_qdata (G_OBJECT (doc), was_search_backwards_id);
+	if (data == NULL)
+		was_search_backwards = FALSE;
+	else
+		was_search_backwards = GPOINTER_TO_BOOLEAN (data);
 
 	data = g_object_get_qdata (G_OBJECT (doc), was_entire_word_id);
 	if (data == NULL)
@@ -645,6 +662,8 @@ gedit_dialog_find (void)
 				      was_entire_word);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->wrap_around_checkbutton),
 				      was_wrap_around);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->search_backwards_checkbutton),
+				      was_search_backwards);
 
 	gtk_widget_grab_focus (dialog->search_entry);
 	
@@ -665,6 +684,7 @@ gedit_dialog_replace (void)
 	gboolean was_wrap_around;
 	gboolean was_entire_word;
 	gboolean was_case_sensitive;
+	gboolean was_search_backwards;
 	gpointer data;
 
 	gedit_debug (DEBUG_SEARCH, "");
@@ -723,6 +743,10 @@ gedit_dialog_replace (void)
 		gtk_entry_set_text (GTK_ENTRY (dialog->replace_entry), last_replace_text);
 		g_free (last_replace_text);	
 	}
+
+	if (!was_search_backwards_id)
+		was_search_backwards_id = g_quark_from_static_string ("GeditWasSearchBackwards");
+
 	if (!was_wrap_around_id)
 		was_wrap_around_id = gedit_was_wrap_around_quark ();
 
@@ -731,6 +755,12 @@ gedit_dialog_replace (void)
 
 	if (!was_case_sensitive_id)
 		was_case_sensitive_id = g_quark_from_static_string ("GeditWasCaseSensitive");
+
+	data = g_object_get_qdata (G_OBJECT (doc), was_search_backwards_id);
+	if (data == NULL)
+		was_search_backwards = FALSE;
+	else
+		was_search_backwards = GPOINTER_TO_BOOLEAN (data);
 
 	data = g_object_get_qdata (G_OBJECT (doc), was_wrap_around_id);
 	if (data == NULL)
@@ -756,6 +786,8 @@ gedit_dialog_replace (void)
 				      was_entire_word);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->wrap_around_checkbutton),
 				      was_wrap_around);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->search_backwards_checkbutton),
+				      was_search_backwards);
 
 	gtk_widget_grab_focus (dialog->search_entry);
 	
@@ -770,10 +802,13 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 	GeditView* active_view;
 	GeditDocument *doc;
 	const gchar* search_string = NULL;
+	gboolean found;
+
 	gboolean case_sensitive;
 	gboolean entire_word;
 	gboolean wrap_around;
-	gboolean found;
+	gboolean search_backwards;
+	gint flags = 0;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -797,20 +832,33 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 
 	gnome_entry_prepend_history (GNOME_ENTRY (dialog->search_entry_list), TRUE, search_string);
 		
+	/* retrieve search settings from the dialog */
 	case_sensitive = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->match_case_checkbutton));
-
 	entire_word = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton));
-	
 	wrap_around = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->wrap_around_checkbutton));
+	search_backwards = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->search_backwards_checkbutton));
 
-	g_object_set_qdata (G_OBJECT (doc), was_wrap_around_id, GBOOLEAN_TO_POINTER (wrap_around ));
+	/* setup quarks for next invocation */
+	g_object_set_qdata (G_OBJECT (doc), was_search_backwards_id, GBOOLEAN_TO_POINTER (search_backwards));
+	g_object_set_qdata (G_OBJECT (doc), was_wrap_around_id, GBOOLEAN_TO_POINTER (wrap_around));
 	g_object_set_qdata (G_OBJECT (doc), was_entire_word_id, GBOOLEAN_TO_POINTER (entire_word));
 	g_object_set_qdata (G_OBJECT (doc), was_case_sensitive_id, GBOOLEAN_TO_POINTER (case_sensitive));
 
-	found = gedit_document_find (doc, search_string, TRUE, case_sensitive, entire_word);
+	/* setup search parameter bitfield */
+	GEDIT_SEARCH_SET_FROM_CURSOR (flags, TRUE);
+	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, case_sensitive);
+	GEDIT_SEARCH_SET_BACKWARDS (flags, search_backwards);
+	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
+	/* run search */
+	found = gedit_document_find (doc, search_string, flags);
+
+	/* if we're able to wrap, don't use the cursor position */
 	if (!found && wrap_around)
-		found = gedit_document_find (doc, search_string, FALSE, case_sensitive, entire_word);
+	{
+		GEDIT_SEARCH_SET_FROM_CURSOR (flags, FALSE);
+		found = gedit_document_find (doc, search_string, flags);
+	}
 
 	if (found)
 		gedit_view_scroll_to_cursor (active_view);
@@ -830,10 +878,13 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 	GeditView* active_view;
 	GeditDocument *doc;
 	const gchar* search_string = NULL;
+	gboolean found;
+
 	gboolean case_sensitive;
 	gboolean entire_word;
 	gboolean wrap_around;
-	gboolean found;
+	gboolean search_backwards;
+	gint flags = 0;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -857,20 +908,33 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 	
 	gnome_entry_prepend_history (GNOME_ENTRY (dialog->search_entry_list), TRUE, search_string);
 		
+	/* retrieve search settings from the dialog */
 	case_sensitive = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->match_case_checkbutton));
-
 	entire_word = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton));
-
 	wrap_around = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->wrap_around_checkbutton));
+	search_backwards = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->search_backwards_checkbutton));
 
+	/* setup quarks for next invocation */
+	g_object_set_qdata (G_OBJECT (doc), was_search_backwards_id, GBOOLEAN_TO_POINTER (search_backwards));
 	g_object_set_qdata (G_OBJECT (doc), was_wrap_around_id, GBOOLEAN_TO_POINTER (wrap_around));
 	g_object_set_qdata (G_OBJECT (doc), was_entire_word_id, GBOOLEAN_TO_POINTER (entire_word));
 	g_object_set_qdata (G_OBJECT (doc), was_case_sensitive_id, GBOOLEAN_TO_POINTER (case_sensitive));
 
-	found = gedit_document_find (doc, search_string, TRUE, case_sensitive, entire_word);
+	/* setup search parameter bitfield */
+	GEDIT_SEARCH_SET_FROM_CURSOR (flags, TRUE);
+	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, case_sensitive);
+	GEDIT_SEARCH_SET_BACKWARDS (flags, search_backwards);
+	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
+	/* run search */
+	found = gedit_document_find (doc, search_string, flags);
+
+	/* if we're able to wrap, don't use the cursor position */
 	if (!found && wrap_around)
-		found = gedit_document_find (doc, search_string, FALSE, case_sensitive, entire_word);
+	{
+		GEDIT_SEARCH_SET_FROM_CURSOR (flags, FALSE);
+		found = gedit_document_find (doc, search_string, flags);
+	}
 
 	if (found)
 		gedit_view_scroll_to_cursor (active_view);
@@ -893,11 +957,14 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	const gchar* replace_string = NULL;
 	gchar* selected_text = NULL;
 	gchar *converted_search_string = NULL;
+	gint start, end;
+	gboolean found;
+
 	gboolean case_sensitive;
 	gboolean entire_word;
-	gint start, end;
 	gboolean wrap_around;
-	gboolean found;
+	gboolean search_backwards;
+	gint flags = 0;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
@@ -941,11 +1008,11 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	gedit_debug (DEBUG_SEARCH, "Sel text: %s", selected_text ? selected_text : "NULL");
 	gedit_debug (DEBUG_SEARCH, "Search string: %s", search_string ? search_string : "NULL");
 
+	/* retrieve search settings from the dialog */
 	case_sensitive = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->match_case_checkbutton));
-
 	entire_word = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton));
-
 	wrap_around = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->wrap_around_checkbutton));
+	search_backwards = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->search_backwards_checkbutton));
 
 	converted_search_string = gedit_utils_convert_search_text (search_string);
 
@@ -979,11 +1046,21 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 
 	gedit_debug (DEBUG_SEARCH, "Replaced");
 
-	/* go ahead and find the next one */
-	found = gedit_document_find (doc, search_string, TRUE, case_sensitive, entire_word);
+	/* setup search parameter bitfield */
+	GEDIT_SEARCH_SET_FROM_CURSOR (flags, TRUE);
+	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, case_sensitive);
+	GEDIT_SEARCH_SET_BACKWARDS (flags, search_backwards);
+	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
 
+	/* run search */
+	found = gedit_document_find (doc, search_string, flags);
+
+	/* if we're able to wrap, don't use the cursor position */
 	if (!found && wrap_around)
-		found = gedit_document_find (doc, search_string, FALSE, case_sensitive, entire_word);
+	{
+		GEDIT_SEARCH_SET_FROM_CURSOR (flags, FALSE);
+		found = gedit_document_find (doc, search_string, flags);
+	}
 
 	if (found)
 		gedit_view_scroll_to_cursor (active_view);
@@ -1005,10 +1082,12 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	GeditDocument *doc;
 	const gchar* search_string = NULL;
 	const gchar* replace_string = NULL;
-	gboolean case_sensitive;
-	gboolean entire_word;
 	gint replaced_items;
 	GtkWidget *message_dlg;
+	
+	gboolean case_sensitive;
+	gboolean entire_word;
+	gint flags = 0;
 	
  	gedit_debug (DEBUG_SEARCH, "");
 
@@ -1040,12 +1119,15 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 					     TRUE, 
 					     replace_string);
 
+	/* retrieve search settings from the dialog */
 	case_sensitive = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->match_case_checkbutton));
-
 	entire_word = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->entire_word_checkbutton));
 
-	replaced_items = gedit_document_replace_all (doc, search_string, replace_string, 
-						     case_sensitive, entire_word);
+	/* setup search parameter bitfield */
+	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, case_sensitive);
+	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, entire_word);
+
+	replaced_items = gedit_document_replace_all (doc, search_string, replace_string, flags);
 
 	update_menu_items_sensitivity ();
 
@@ -1075,4 +1157,3 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 	gtk_dialog_run (GTK_DIALOG (message_dlg));
   	gtk_widget_destroy (message_dlg);
 }
-

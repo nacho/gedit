@@ -338,70 +338,118 @@ gedit_cmd_search_find (BonoboUIComponent *uic, gpointer user_data, const gchar* 
 	gedit_dialog_find ();
 }
 
-void 
-gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+static void 
+search_find_again (GeditDocument *doc, gchar *last_searched_text, gboolean backward)
 {
-	GeditMDIChild *active_child;
-	GeditDocument *doc;
 	GeditView *active_view;
+	gpointer data;
+	gboolean found;
+	gboolean was_wrap_around;
+	gint flags = 0;
+	
+	active_view = gedit_get_active_view ();
+	g_return_if_fail (active_view != NULL);
+
+	data = g_object_get_qdata (G_OBJECT (doc), gedit_was_wrap_around_quark ());
+	if (data == NULL)
+	{
+		was_wrap_around = TRUE;
+	}
+	else
+	{
+		was_wrap_around = GPOINTER_TO_BOOLEAN (data);
+	}
+
+	GEDIT_SEARCH_SET_FROM_CURSOR (flags, TRUE);
+	
+	if (!backward)
+		found = gedit_document_find_next (doc, flags);
+	else
+		found = gedit_document_find_prev (doc, flags);
+		
+	if (!found && was_wrap_around)
+	{
+		GEDIT_SEARCH_SET_FROM_CURSOR (flags, FALSE);
+		
+		if (!backward)
+			found = gedit_document_find_next (doc, flags);
+		else
+			found = gedit_document_find_prev (doc, flags);
+	}
+
+	if (!found)
+	{	
+		GtkWidget *message_dlg;
+
+		message_dlg = gtk_message_dialog_new (
+			GTK_WINDOW (gedit_get_active_window ()),
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_INFO,
+			GTK_BUTTONS_OK,
+			_("The text \"%s\" was not found."), last_searched_text);
+
+		gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
+
+		gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
+
+		gtk_dialog_run (GTK_DIALOG (message_dlg));
+		gtk_widget_destroy (message_dlg);
+	}
+	else
+	{
+		gedit_view_scroll_to_cursor (active_view);
+	}
+}
+
+void 
+gedit_cmd_search_find_next (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GeditDocument *doc;
 	gchar* last_searched_text;
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
-	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
-	g_return_if_fail (active_child);
-
-	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
-	g_return_if_fail (active_view != NULL);
-
-	doc = GEDIT_DOCUMENT (active_child->document);
+	doc = gedit_get_active_document ();
 	g_return_if_fail (doc);
 
 	last_searched_text = gedit_document_get_last_searched_text (doc);
+
 	if (last_searched_text != NULL)
 	{
-		gpointer data;
-		gboolean was_wrap_around;
-		gboolean found;
-
-		data = g_object_get_qdata (G_OBJECT (doc), gedit_was_wrap_around_quark ());
-		if (data == NULL)
-			was_wrap_around = TRUE;
-		else
-			was_wrap_around = GPOINTER_TO_BOOLEAN (data);
-
-		found = gedit_document_find_again (doc, TRUE);
-
-		if (!found && was_wrap_around)
-			found = gedit_document_find_again (doc, FALSE);
-
-		if (!found)
-		{	
-			GtkWidget *message_dlg;
-
-			message_dlg = gtk_message_dialog_new (
-				GTK_WINDOW (gedit_get_active_window ()),
-				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_INFO,
-				GTK_BUTTONS_OK,
-				_("The text \"%s\" was not found."), last_searched_text);
-
-			gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
-
-			gtk_window_set_resizable (GTK_WINDOW (message_dlg), FALSE);
-
-			gtk_dialog_run (GTK_DIALOG (message_dlg));
-  			gtk_widget_destroy (message_dlg);
-		}
-		else
-			gedit_view_scroll_to_cursor (active_view);
-
-		g_free (last_searched_text);
+		search_find_again (doc, last_searched_text, FALSE);
 	}
 	else
+	{
 		gedit_dialog_find ();
+	}
+
+	g_free (last_searched_text);
 }
 
+void 
+gedit_cmd_search_find_prev (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GeditDocument *doc;
+	gchar* last_searched_text;
+	
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	doc = gedit_get_active_document ();
+	g_return_if_fail (doc);
+
+	last_searched_text = gedit_document_get_last_searched_text (doc);
+
+	if (last_searched_text != NULL)
+	{
+		search_find_again (doc, last_searched_text, TRUE);
+	}
+	else
+	{
+		gedit_dialog_find ();
+	}
+
+	g_free (last_searched_text);
+}
 
 void 
 gedit_cmd_search_replace (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
