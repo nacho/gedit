@@ -1146,7 +1146,9 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_INFO,
 			GTK_BUTTONS_OK,
-			_("Found and replaced %d occurrences."), replaced_items);
+			ngettext("Found and replaced %d occurrence.",
+				 "Found and replaced %d occurrences.",
+				 replaced_items), replaced_items);
 	}
 	
 	gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);

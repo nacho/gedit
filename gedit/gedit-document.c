@@ -314,7 +314,7 @@ gedit_document_finalize (GObject *object)
 	if (document->priv->uri != NULL)
 	{
 		gchar *position;
-		gchar *lang_name = NULL;
+		gchar *lang_id = NULL;
 		GtkSourceLanguage *lang;
 
 		position = g_strdup_printf ("%d", 
@@ -337,13 +337,16 @@ gedit_document_finalize (GObject *object)
 		lang = gedit_document_get_language (document);
 
 		if (lang != NULL)
-			lang_name = gtk_source_language_get_name (lang);
+		{
+			lang_id = gtk_source_language_get_id (lang);
+			g_return_if_fail (lang_id != NULL);
+		}
 	
 		gedit_metadata_manager_set (document->priv->uri,
 					    "language",
-					    lang_name == NULL ? "_NORMAL_" : lang_name);
+					    (lang_id == NULL) ? "_NORMAL_" : lang_id);
 			
-		g_free (lang_name);
+		g_free (lang_id);
 	}
 
 	g_free (document->priv->uri);
@@ -1852,7 +1855,7 @@ gedit_document_get_last_searched_text (GeditDocument* doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	
-	return doc->priv->last_searched_text != NULL ? 
+	return (doc->priv->last_searched_text != NULL) ? 
 		g_strdup (doc->priv->last_searched_text) : NULL;	
 }
 
@@ -1862,7 +1865,7 @@ gedit_document_get_last_replace_text (GeditDocument* doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 
-	return doc->priv->last_replace_text != NULL ? 
+	return (doc->priv->last_replace_text != NULL) ? 
 		g_strdup (doc->priv->last_replace_text) : NULL;	
 }
 
@@ -2285,11 +2288,14 @@ gedit_document_set_language (GeditDocument *doc, GtkSourceLanguage *lang)
 		gchar *lang_id = NULL;
 
 		if (lang != NULL)
+		{
 			lang_id = gtk_source_language_get_id (lang);
+			g_return_if_fail (lang_id != NULL);
+		}
 		
 		gedit_metadata_manager_set (doc->priv->uri,
 					    "language",
-					    lang_id == NULL ? "_NORMAL_" : lang_id);
+					    (lang_id == NULL) ? "_NORMAL_" : lang_id);
 
 		g_free (lang_id);
 	}

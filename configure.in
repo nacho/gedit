@@ -51,10 +51,10 @@ if pspell-config version > /dev/null 2>&1; then
 				[PSPELL_LIBS="-laspell" SPELL_PLUGIN_DIR="spell" AC_SUBST(SPELL_PLUGIN_DIR)],
    				[AC_CHECK_LIB(pspell, new_pspell_manager, 
 					[PSPELL_LIBS="-lpspell" SPELL_PLUGIN_DIR="spell" AC_SUBST(SPELL_PLUGIN_DIR)],
-					[AC_MSG_WARN([You must have the aspell or pspell dev libraries to build the spell plugin.])] 
+					[AC_MSG_WARN([You must have the aspell or pspell dev packages to build the spell plugin.])] 
 				)]
 			)],
-			[AC_MSG_WARN([You must have the aspell or pspell dev libraries to build the spell plugin.])] 
+			[AC_MSG_WARN([You must have the aspell or pspell dev packages to build the spell plugin.])] 
 		)
 	fi
 else
@@ -89,6 +89,11 @@ dnl
 AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
 gedit. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))
 
+dnl
+dnl Check ngettext
+dnl
+
+AC_CHECK_FUNCS(ngettext,, AC_MSG_ERROR([ngettext function is required to build gedit.]))
 
 dnl ================================================================
 dnl GEDIT_DATA_DIR - Sets the location of the data directory, where we install

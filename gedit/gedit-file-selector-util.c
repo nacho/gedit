@@ -72,6 +72,10 @@ static GQuark user_data_id = 0;
 #define GET_MODE(w) (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (w), "GnomeFileSelectorMode")))
 #define SET_MODE(w, m) (g_object_set_data (G_OBJECT (w), "GnomeFileSelectorMode", GINT_TO_POINTER (m)))
 
+#define GET_ENABLE_VFS(w) (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (w), "GnomeFileSelectorEnableVFS")))
+#define SET_ENABLE_VFS(w, m) (g_object_set_data (G_OBJECT (w), "GnomeFileSelectorEnableVFS", GINT_TO_POINTER (m)))
+
+
 typedef enum {
 	FILESEL_OPEN,
 	FILESEL_OPEN_MULTI,
@@ -83,6 +87,7 @@ delete_file_selector (GtkWidget *d, GdkEventAny *e, gpointer data)
 {
 	gtk_widget_hide (d);
 	gtk_main_quit ();
+
 	return TRUE;
 }
 
@@ -163,114 +168,265 @@ replace_read_only_file (GtkWindow *parent, const gchar* file_name)
 			       file_name);
 }
 
-static char *
-concat_dir_and_file (const char *dir, const char *file)
-{
-	g_return_val_if_fail (dir != NULL, NULL);
-	g_return_val_if_fail (file != NULL, NULL);
-
-        /* If the directory name doesn't have a / on the end, we need
-	   to add one so we get a proper path to the file */
-	if (dir[0] != '\0' && dir [strlen(dir) - 1] != G_DIR_SEPARATOR)
-		return g_strconcat (dir, G_DIR_SEPARATOR_S, file, NULL);
-	else
-		return g_strconcat (dir, file, NULL);
-}
-
 /* Tests whether we have write permissions for a file */
 static gboolean
-is_read_only (const gchar *filename)
+is_read_only (const gchar *name)
 {
-	if (access (filename, W_OK) == -1)
-		return (errno == EACCES);
+	gboolean                 ret;
+	GnomeVFSFileInfo        *info;
+
+	g_return_val_if_fail (name != NULL, FALSE);
+	
+	info = gnome_vfs_file_info_new ();
+	
+	/* FIXME: is GNOME_VFS_FILE_INFO_FOLLOW_LINKS right in this case? - Paolo */
+	if (gnome_vfs_get_file_info (name,
+				     info, 
+				     GNOME_VFS_FILE_INFO_FOLLOW_LINKS | 
+				     GNOME_VFS_FILE_INFO_GET_ACCESS_RIGHTS) != GNOME_VFS_OK)
+	{
+		gnome_vfs_file_info_unref (info);
+
+		return TRUE;
+	}
+		
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_ACCESS)
+	{
+		ret = !(info->permissions & GNOME_VFS_PERM_ACCESS_WRITABLE);
+	}
 	else
+	{
+		ret = TRUE;
+	}
+	
+	gnome_vfs_file_info_unref (info);
+
+	return ret;	
+}
+
+static gboolean
+file_is_dir (gchar *name)
+{
+	gboolean                 ret;
+	GnomeVFSFileInfo        *info;
+
+	g_return_val_if_fail (name != NULL, FALSE);
+	
+	info = gnome_vfs_file_info_new ();
+	
+	/* FIXME: is GNOME_VFS_FILE_INFO_FOLLOW_LINKS right in this case? - Paolo */
+	if (gnome_vfs_get_file_info (name, 
+				     info, 
+				     GNOME_VFS_FILE_INFO_FOLLOW_LINKS) != GNOME_VFS_OK)
+	{
+		gnome_vfs_file_info_unref (info);
+		
 		return FALSE;
+	}
+		
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE)
+	{
+		ret = (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY);
+	}
+	else
+	{
+		ret = FALSE;
+	}
+	
+	gnome_vfs_file_info_unref (info);
+
+	return ret;	
+}
+
+static gboolean 
+file_exists (gchar *name)
+{
+	GnomeVFSURI *uri;
+	gboolean ret;
+	
+	g_return_val_if_fail (name != NULL, FALSE);
+
+	uri = gnome_vfs_uri_new (name);
+	g_return_val_if_fail (uri != NULL, FALSE);
+
+	ret = gnome_vfs_uri_exists (uri);
+
+	gnome_vfs_uri_unref (uri);
+
+	return ret;
 }
 
 static void
-ok_clicked_cb (GtkWidget *widget, gpointer data)
+response_cb (GtkWidget *widget, gint response, gpointer data)
 {
-	GtkFileSelection *fsel;
-	const gchar *file_name;
-
-	fsel = data;
-
-	file_name = gtk_file_selection_get_filename (fsel);
-
-	if (!strlen (file_name))
-		return;
+	GtkFileChooser *chooser;
+	gchar *file_name;
+	gchar *uri;
 	
-	/* Change into directory if that's what user selected */
-	if (g_file_test (file_name, G_FILE_TEST_IS_DIR)) {
-		gint name_len;
-		gchar *dir_name;
+	gboolean enable_vfs;
+	
+	chooser = GTK_FILE_CHOOSER (widget);
 
-		name_len = strlen (file_name);
-		if (name_len < 1 || file_name [name_len - 1] != '/') {
-			/* The file selector needs a '/' at the end of a directory name */
-			dir_name = g_strconcat (file_name, "/", NULL);
-		} else {
-			dir_name = g_strdup (file_name);
-		}
-		gtk_file_selection_set_filename (fsel, dir_name);
-		g_free (dir_name);
-	} 
-	else if (GET_MODE (fsel) == FILESEL_OPEN_MULTI) 
+	if (response == GTK_RESPONSE_CANCEL) 
 	{
-		gchar **strv = gtk_file_selection_get_selections (fsel);
+		gtk_widget_hide (GTK_WIDGET (chooser));
+		gtk_main_quit ();
+
+		g_object_set_qdata (G_OBJECT (chooser),
+	 		    	    user_data_id,
+				    NULL);
+
+		return;
+	}
+
+	enable_vfs = GET_ENABLE_VFS (chooser);
+
+	if (enable_vfs)
+	{
+		file_name = gtk_file_chooser_get_uri (chooser);
+	}
+	else
+	{
+		file_name = gtk_file_chooser_get_filename (chooser);
+	}
+
+	if ((file_name == NULL) || (strlen (file_name) == 0)) 
+	{
+		g_free (file_name);
+		return;
+	}
+
+	if (enable_vfs)
+	{
+		uri = g_strdup (file_name);
+	}
+	else
+	{
+		uri = gnome_vfs_get_uri_from_local_path (file_name);
+	}
+
+	/* Change into directory if that's what user selected */
+	if (file_is_dir (uri)) 
+	{		
+		gtk_file_chooser_set_current_folder_uri (chooser, uri);
 		
-		g_object_set_qdata (G_OBJECT (fsel),
-				    user_data_id, strv);
+		g_free (file_name);
+		g_free (uri);
+	} 
+	else if (GET_MODE (chooser) == FILESEL_OPEN_MULTI) 
+	{
+		GSList *files;
+	       
+		g_free (file_name);
+		g_free (uri);
+
+		if (enable_vfs)
+			files = gtk_file_chooser_get_uris (chooser);
+		else
+			files = gtk_file_chooser_get_filenames (chooser);
+
+		g_object_set_qdata (G_OBJECT (chooser),
+				    user_data_id, 
+				    files);
+		
 		gtk_main_quit ();
 	}
 	else	
 	{	
-		if (GET_MODE (fsel) == FILESEL_SAVE)
+		if (GET_MODE (chooser) == FILESEL_SAVE)
 		{
-			if (g_file_test (file_name, G_FILE_TEST_EXISTS))
+			if (file_exists (uri))
 			{
-				if (is_read_only (file_name))
+				if (is_read_only (uri))
 				{
-					if (!replace_read_only_file (GTK_WINDOW (fsel), file_name))
+					if (!replace_read_only_file (GTK_WINDOW (chooser), file_name)) 
+					{
+						g_free (file_name);
+						g_free (uri);
 						return;
+					}
 				}
-				else if (!replace_existing_file (GTK_WINDOW (fsel), file_name))
+				else if (!replace_existing_file (GTK_WINDOW (chooser), file_name)) 
+				{
+					g_free (file_name);
+					g_free (uri);
+
 					return;
+				}
 			}
 		}
 
-		gtk_widget_hide (GTK_WIDGET (fsel));
+		gtk_widget_hide (GTK_WIDGET (chooser));
 
-		g_object_set_qdata (G_OBJECT (fsel),
-			    	   user_data_id,
-				   g_strdup (file_name));
+		g_object_set_qdata (G_OBJECT (chooser),
+			    	    user_data_id,
+				    file_name);
+
+		g_free (uri);
+
 		gtk_main_quit ();
 	} 
 }
 
-static void
-cancel_clicked_cb (GtkWidget *widget, gpointer data)
+static gboolean
+all_text_files_filter (const GtkFileFilterInfo *filter_info,
+		       gpointer                 data)
 {
-	gtk_widget_hide (GTK_WIDGET (data));
-	gtk_main_quit ();
+	if (filter_info->mime_type == NULL)
+		return TRUE;
+	
+	if (strncmp (filter_info->mime_type, "text/", 5) == 0)
+	{
+	    return TRUE;
+	}
 
-	g_object_set_qdata (G_OBJECT (data),
- 		    	    user_data_id,
-			    NULL);
+	return FALSE;
 }
 
-
 static GtkWindow *
-create_gtk_selector (FileselMode mode,
+create_gtk_selector (GtkWindow *parent,
+		     FileselMode mode,
+		     const char *title,
 		     const char *default_path,
 		     const char *default_filename,
 		     gboolean use_encoding,
 		     const GeditEncoding *encoding)
 {
-	GtkWidget *filesel;
-	gchar* path;
-		
-	filesel = gtk_file_selection_new (NULL);
+	GtkWidget     *filesel;
+	GtkFileFilter *filter;
+	
+	filesel = gtk_file_chooser_dialog_new (title,
+					       parent,
+					       (mode == FILESEL_SAVE) ? GTK_FILE_CHOOSER_ACTION_SAVE
+					       			    : GTK_FILE_CHOOSER_ACTION_OPEN,
+					       GTK_STOCK_CANCEL,
+					       GTK_RESPONSE_CANCEL,
+					       (mode == FILESEL_SAVE) ? GTK_STOCK_SAVE
+								    : GTK_STOCK_OPEN,
+					       GTK_RESPONSE_OK,
+					       NULL);
+	
+	gtk_dialog_set_default_response (GTK_DIALOG (filesel), GTK_RESPONSE_OK);
+
+	/* Filters */
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, "All Files");
+	gtk_file_filter_add_pattern (filter, "*");
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (filesel), filter);
+
+	filter = gtk_file_filter_new ();
+	gtk_file_filter_set_name (filter, "All Text Files");
+	gtk_file_filter_add_custom (filter, 
+				    GTK_FILE_FILTER_MIME_TYPE,
+				    all_text_files_filter, 
+				    NULL, 
+				    NULL);
+	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (filesel), filter);
+
+	/* TODO: Add filters for all supported languages - Paolo */
+
+	/* Make this filter the default */
+	gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (filesel), filter);
 
 	if (use_encoding)
 	{
@@ -296,11 +452,10 @@ create_gtk_selector (FileselMode mode,
 				  TRUE,
 				  0);
 
-		gtk_box_pack_end (GTK_BOX (GTK_FILE_SELECTION (filesel)->main_vbox), 
-				  hbox,
-				  FALSE,
-				  FALSE,
-				  6);
+		gtk_file_chooser_set_extra_widget (GTK_FILE_CHOOSER (filesel), 
+						   hbox);
+
+		gtk_widget_show_all (hbox);
 
 		g_object_set_data (G_OBJECT (filesel), 
 				   "encodings-option_menu",
@@ -313,40 +468,19 @@ create_gtk_selector (FileselMode mode,
 
 	}
 
-	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
-			  "clicked", G_CALLBACK (ok_clicked_cb),
+	g_signal_connect (G_OBJECT (filesel),
+			  "response", G_CALLBACK (response_cb),
 			  filesel);
 
-	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->cancel_button),
-			  "clicked", G_CALLBACK (cancel_clicked_cb),
-			  filesel);
-
+	/* FIXME: enable the use of URIs - Paolo */
 	if (default_path)
-		path = g_strconcat (default_path, 
-				    default_path[strlen (default_path) - 1] == '/' ? NULL : 
-				    "/", NULL);
-	else
-		path = g_strdup ("./");
+		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (filesel), default_path);
 
-	if (default_filename) 
-	{
-		gchar* file_name = concat_dir_and_file (path, default_filename);
-		gtk_file_selection_set_filename (GTK_FILE_SELECTION (filesel), file_name);
-		g_free (file_name);
-
-		/* Select file name */
-		gtk_editable_select_region (GTK_EDITABLE (
-					    GTK_FILE_SELECTION (filesel)->selection_entry), 
-					    0, -1);
-					    
-	}
-	else
-		gtk_file_selection_set_filename (GTK_FILE_SELECTION (filesel), path);
-
-	g_free (path);
+	if (default_filename)
+		gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (filesel), default_filename);
 
 	if (mode == FILESEL_OPEN_MULTI) 
-		gtk_file_selection_set_select_multiple (GTK_FILE_SELECTION (filesel), TRUE);
+		gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (filesel), TRUE);
 
 	return GTK_WINDOW (filesel);
 }
@@ -356,7 +490,6 @@ run_file_selector (GtkWindow  *parent,
 		   gboolean    enable_vfs,
 		   FileselMode mode, 
 		   const char *title,
-		   const char *mime_types,
 		   const char *default_path, 
 		   const char *default_filename,
 		   const GeditEncoding **encoding)
@@ -364,25 +497,23 @@ run_file_selector (GtkWindow  *parent,
 {
 	GtkWindow *dialog = NULL;
 	gpointer   retval;
-	gpointer   data;
 
 	if (!user_data_id)
 		user_data_id = g_quark_from_static_string ("GeditUserData");
 
-	dialog = create_gtk_selector (mode,
+	dialog = create_gtk_selector (parent,
+				      mode,
+				      title,
 				      default_path, 
 				      default_filename, 
 				      (encoding != NULL),
 				      (encoding != NULL) ? *encoding : NULL);
 
 	SET_MODE (dialog, mode);
-
-	gtk_window_set_title (dialog, title);
+	SET_ENABLE_VFS (dialog, enable_vfs);
+	
 	gtk_window_set_modal (dialog, TRUE);
 
-	if (parent)
-		gtk_window_set_transient_for (dialog, parent);
-	
 	g_signal_connect (G_OBJECT (dialog), "delete_event",
 			  G_CALLBACK (delete_file_selector),
 			  dialog);
@@ -391,32 +522,7 @@ run_file_selector (GtkWindow  *parent,
 
 	gtk_main ();
 
-	data = g_object_get_qdata (G_OBJECT (dialog), user_data_id);
-	
-	if (data != NULL) 
-	{
-		if (enable_vfs && (mode != FILESEL_OPEN_MULTI)) 
-		{
-	 		retval = gnome_vfs_get_uri_from_local_path (data);
- 			g_free (data);
-		}
-		else if (enable_vfs && (mode == FILESEL_OPEN_MULTI)) 
-		{
-			gint i;
-			gchar **files = data;
-
-			for (i = 0; files[i]; ++i) 
-			{
-				gchar *tmp = files [i];
-				files [i] = gnome_vfs_get_uri_from_local_path (tmp);
-				g_free (tmp);
-			}
-
-			retval = files;
-	 	} else
- 			retval = data;
-	} else
-		retval = NULL;
+	retval = g_object_get_qdata (G_OBJECT (dialog), user_data_id);
 
 	if (encoding != NULL)
 	{
@@ -438,8 +544,6 @@ run_file_selector (GtkWindow  *parent,
  * @parent: optional window the dialog should be a transient for.
  * @enable_vfs: if FALSE, restrict files to local paths.
  * @title: optional window title to use
- * @mime_types: optional list of mime types to provide filters for.
- *   These are of the form: "HTML Files:text/html|Text Files:text/html,text/plain"
  * @default_path: optional directory to start in
  *
  * Creates and shows a modal open file dialog, waiting for the user to
@@ -452,13 +556,12 @@ char *
 gedit_file_selector_open (GtkWindow  *parent,
 			   gboolean    enable_vfs,
 			   const char *title,
-			   const char *mime_types,
 			   const char *default_path,
 			   const GeditEncoding **encoding)
 {
 	return run_file_selector (parent, enable_vfs, FILESEL_OPEN, 
 				  title ? title : _("Select a file to open"),
-				  mime_types, default_path, NULL, encoding);
+				  default_path, NULL, encoding);
 }
 
 /**
@@ -466,28 +569,25 @@ gedit_file_selector_open (GtkWindow  *parent,
  * @parent: optional window the dialog should be a transient for
  * @enable_vfs: if FALSE, restrict files to local paths.
  * @title: optional window title to use
- * @mime_types: optional list of mime types to provide filters for.
- *   These are of the form: "HTML Files:text/html|Text Files:text/html,text/plain"
  * @default_path: optional directory to start in
  *
  * Creates and shows a modal open file dialog, waiting for the user to
  * select a file or cancel before returning.
  *
- * Return value: a NULL terminated string array of the selected URIs
- * (or local file paths if @enable_vfs is FALSE), or NULL if cancel
- * was pressed.
+ * Return value: a GSList list of the selected URIs 
+ * (or local file paths if @enable_vfs is FALSE), 
+ * or NULL if cancel was pressed.
  **/
-char **
+GSList *
 gedit_file_selector_open_multi (GtkWindow  *parent,
 				gboolean    enable_vfs,
 				const char *title,
-				const char *mime_types,
 				const char *default_path,
 				const GeditEncoding **encoding)
 {
 	return run_file_selector (parent, enable_vfs, FILESEL_OPEN_MULTI,
 				  title ? title : _("Select files to open"),
-				  mime_types, default_path, NULL, encoding);
+				  default_path, NULL, encoding);
 }
 
 /**
@@ -495,8 +595,6 @@ gedit_file_selector_open_multi (GtkWindow  *parent,
  * @parent: optional window the dialog should be a transient for
  * @enable_vfs: if FALSE, restrict files to local paths.
  * @title: optional window title to use
- * @mime_types: optional list of mime types to provide filters for.
- *   These are of the form: "HTML Files:text/html|Text Files:text/html,text/plain"
  * @default_path: optional directory to start in
  * @default_filename: optional file name to default to
  *
@@ -510,12 +608,11 @@ char *
 gedit_file_selector_save (GtkWindow  *parent,
 			   gboolean    enable_vfs,
 			   const char *title,
-			   const char *mime_types,
 			   const char *default_path, 
 			   const char *default_filename,
 			   const GeditEncoding **encoding)
 {
 	return run_file_selector (parent, enable_vfs, FILESEL_SAVE,
 				  title ? title : _("Select a filename to save"),
-				  mime_types, default_path, default_filename, encoding);
+				  default_path, default_filename, encoding);
 }

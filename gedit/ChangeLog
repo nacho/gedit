@@ -1,3 +1,52 @@
+2003-12-29  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-mdi.c (gedit_mdi_remove_child_handler): 
+	HIGgification of the close confirmation dialog 
+	(bug #128810). Patch by	Paolo Borelli (pborelli@katamail.com)
+
+2003-12-29  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-mdi-child.c (set_tooltip): mark tip as translatable
+
+	* gedit-mdi.c (gedit_mdi_set_active_window_title): Truncate 
+	the URI so it doesn't get insanely wide. Set the icon name equals
+	to the document short name.
+
+	* gedit-ui.xml: added icon to the Edit->Delete menu entry
+
+	* gedit-document.c (gedit_document_finalize): 
+	s/gtk_source_language_get_name/gtk_source_language_get_id 
+	(fixed bug #128379 - highlighting sometimes fails)
+
+2003-12-29  Paolo Maggi  <paolo.maggi@polito.it>
+
+	Fixed bug #128548 (gedit should use the new gtk+ 2.3 GtkFileChooser).
+	Based on a patch by Jan Arne Petersen  <jpetersen@uni-bonn.de>
+
+	* gedit/gedit-file-selector-util.c (response_cb),
+	(create_gtk_selector), (run_file_selector): replace 
+	GtkFileSelection with GtkFileChooser
+
+	* gedit/gedit-file-selector-util.h (gedit_file_selector_open_multi): 
+	now returns a GSList instead of a null terminated string 
+	array (because gtk_file_chooser_get_filenames returns a GSList).
+	Remved mime_type parameter
+
+	* gedit/gedit-file.c (gedit_file_open): replace the use of 
+	the null terminated string array with GSList
+
+2003-12-29  Danilo Segan  <dsegan@gmx.net>
+
+	* dialogs/gedit-dialog-replace.c: Use ngettext
+          where appropriate.
+
+	* gedit-file.c: Likewise.
+
+2003-12-29  Eric Ritezel <eisenwulf@inductiveart.net>
+
+	* gedit-utils.c (gedit_utils_convert_search_text): add special
+	case for single backslash search (fix #118935)
+
 2003-11-23  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* */Makefile.am: Disable deprecates only in maintainer mode

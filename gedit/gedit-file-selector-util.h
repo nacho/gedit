@@ -55,21 +55,18 @@ G_BEGIN_DECLS
 char  *gedit_file_selector_open       (GtkWindow  *parent,
 					gboolean    enable_vfs,
 					const char *title,
-					const char *mime_types,
 					const char *default_path,
 					const GeditEncoding **encoding);
 
-char **gedit_file_selector_open_multi (GtkWindow  *parent,
+GSList *gedit_file_selector_open_multi (GtkWindow  *parent,
 					gboolean    enable_vfs,
 					const char *title,
-					const char *mime_types,
 					const char *default_path,
 					const GeditEncoding **encoding);
 
 char  *gedit_file_selector_save       (GtkWindow  *parent,
 					gboolean    enable_vfs,
 					const char *title,
-					const char *mime_types,
 					const char *default_path,
 					const char *default_filename,
 					const GeditEncoding **encoding);

@@ -291,7 +291,9 @@ gedit_language_init_tag_styles (GtkSourceLanguage *language)
 		
 		value = gconf_client_get_string (gconf_client, key, NULL);
 		
-		g_print ("%s -> %s\n", key, value);
+		/* 
+		 * g_print ("%s -> %s\n", key, value);
+		 */
 
 		if (value != NULL)
 		{

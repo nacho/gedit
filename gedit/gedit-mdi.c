@@ -36,6 +36,7 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <eel/eel-string.h>
 
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagesmanager.h>
@@ -58,6 +59,8 @@
 #include "recent-files/egg-recent-view-gtk.h"
 #include "recent-files/egg-recent-model.h"
 #include "gedit-languages-manager.h"
+
+#include <eel/eel-alert-dialog.h>
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -965,11 +968,12 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 			deleted = !gedit_utils_uri_exists (raw_uri);
 	}
 	g_free (raw_uri);
-				
+
 	if (gedit_document_get_modified (doc) || deleted)
 	{
 		GtkWidget *msgbox, *w;
-		gchar *fname = NULL, *msg = NULL;
+		gchar *fname = NULL; 
+		gchar *msg = NULL;
 		gint ret;
 		gboolean exiting;
 
@@ -985,20 +989,6 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 			bonobo_mdi_set_active_view (mdi, w);
 		}
 
-		fname = gedit_document_get_short_name (doc);
-
-		msgbox = gtk_message_dialog_new (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)),
-				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_QUESTION,
-				GTK_BUTTONS_NONE,
-				_("Do you want to save the changes you made to the document \"%s\"? \n\n"
-				  "Your changes will be lost if you don't save them."),
-				fname);
-
-		gedit_dialog_add_button (GTK_DIALOG (msgbox),
-				_("Do_n't save"), GTK_STOCK_NO,
-				GTK_RESPONSE_NO);
-
 		if (gedit_close_x_button_pressed)
 			exiting = FALSE;
 		else if (gedit_exit_button_pressed)
@@ -1012,36 +1002,44 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 				exiting = FALSE;
 		}
 
+		fname = gedit_document_get_short_name (doc);
+		msg = g_strdup_printf (_("Do you want to save the changes you made to the document \"%s\"?"),
+					fname);
+
+		msgbox = eel_alert_dialog_new (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_QUESTION,
+				GTK_BUTTONS_NONE,
+				msg,
+				_("Your changes will be lost if you don't save them."),
+				NULL);
+		g_free (msg);
+		g_free (fname);
+
 #if 0		
 		if (exiting)
 			gedit_dialog_add_button (GTK_DIALOG (msgbox),
-					_("_Don't quit"), GTK_STOCK_CANCEL,
-                	             	GTK_RESPONSE_CANCEL);
+					_("_Don't quit"), GTK_STOCK_NO,
+                	             	GTK_RESPONSE_NO);
 		else
 			gedit_dialog_add_button (GTK_DIALOG (msgbox),
-					_("_Don't close"), GTK_STOCK_CANCEL,
-                	             	GTK_RESPONSE_CANCEL);
+					_("_Don't close"), GTK_STOCK_NO,
+                	             	GTK_RESPONSE_NO);
 #endif
-		
-		gtk_dialog_add_button (GTK_DIALOG (msgbox), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+		gedit_dialog_add_button (GTK_DIALOG (msgbox),
+				_("Do_n't save"), GTK_STOCK_NO,
+				GTK_RESPONSE_NO);
 
-		gtk_dialog_add_button (GTK_DIALOG (msgbox),
-			       	GTK_STOCK_SAVE,
-				GTK_RESPONSE_YES);
+		gtk_dialog_add_buttons (GTK_DIALOG (msgbox),
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
 
 		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_YES);
 
-		gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
-
-		gtk_widget_show (msgbox);
+		/* gtk_widget_show (msgbox); */
 		gtk_window_present (GTK_WINDOW (msgbox));
 
 		ret = gtk_dialog_run (GTK_DIALOG (msgbox));
-		
-		gtk_widget_destroy (msgbox);
-
-		g_free (fname);
-		g_free (msg);
 		
 		switch (ret)
 		{
@@ -1054,6 +1052,8 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 			default:
 				close = FALSE;
 		}
+
+		gtk_widget_destroy (msgbox);
 
 		gedit_debug (DEBUG_MDI, "CLOSE: %s", close ? "TRUE" : "FALSE");
 	}
@@ -1088,17 +1088,20 @@ gedit_mdi_remove_view_handler (BonoboMDI *mdi,  GtkWidget *view)
 	return TRUE;
 }
 
+#define MAX_URI_IN_TITLE_LENGTH 75
+
 void 
 gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 {
-	BonoboMDIChild* active_child = NULL;
-	GeditDocument* doc = NULL;
-	gchar* docname = NULL;
-	gchar* title = NULL;
+	BonoboMDIChild *active_child = NULL;
+	GeditDocument *doc = NULL;
+	gchar *docname = NULL;
+	gchar *title = NULL;
+	gchar *uri;
+	GtkWidget *active_window;
 	
 	gedit_debug (DEBUG_MDI, "");
 
-	
 	active_child = bonobo_mdi_get_active_child (mdi);
 	if (active_child == NULL)
 		return;
@@ -1107,8 +1110,12 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 	g_return_if_fail (doc != NULL);
 	
 	/* Set active window title */
-	docname = gedit_document_get_uri (doc);
-	g_return_if_fail (docname != NULL);
+	uri = gedit_document_get_uri (doc);
+	g_return_if_fail (uri != NULL);
+
+	/* Truncate the URI so it doesn't get insanely wide. */
+	docname = eel_str_middle_truncate (uri, MAX_URI_IN_TITLE_LENGTH);
+	g_free (uri);
 
 	if (gedit_document_get_modified (doc))
 	{
@@ -1127,7 +1134,19 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 
 	}
 
-	gtk_window_set_title (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)), title);
+	active_window = GTK_WIDGET (gedit_get_active_window ());
+
+	if (GTK_WIDGET_REALIZED (active_window))
+	{	
+		gchar *short_name;
+		
+		short_name = gedit_document_get_short_name (doc);
+		
+		gdk_window_set_icon_name (active_window->window, short_name);
+		g_free (short_name);
+	}
+
+	gtk_window_set_title (GTK_WINDOW (active_window), title);
 	
 	g_free (docname);
 	g_free (title);

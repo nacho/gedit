@@ -145,38 +145,39 @@ void
 gedit_file_open (GeditMDIChild *active_child)
 {
 	const GeditEncoding *encoding = NULL;
-	gchar** files;
+	GSList *files;
 	
 	gedit_debug (DEBUG_FILE, "");
 
 	files = gedit_file_selector_open_multi (
-			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			GTK_WINDOW (gedit_get_active_window ()),
 			TRUE,
 		        _("Open File..."), 
-			NULL, 
 			gedit_default_path,
 			&encoding);
 	
 	if (files) 
 	{
-		gint i;
-		for (i = 0; files[i]; ++i)
-		{
-			gedit_debug (DEBUG_FILE, "[%d]: %s", i, files[i]);
+		GSList *iter;
 
-			if (gedit_file_open_real (files[i], encoding, active_child))
+		iter = files;
+		while (iter != NULL)
+		{
+			gedit_debug (DEBUG_FILE, "%s", iter->data);
+
+			if (gedit_file_open_real (iter->data, encoding, active_child))
 			{
 				gchar *uri_utf8;
 				
-				if (gedit_utils_uri_has_file_scheme (files[i]))
+				if (gedit_utils_uri_has_file_scheme (iter->data))
 				{				
 					if (gedit_default_path != NULL)
 						g_free (gedit_default_path);
 
-					gedit_default_path = get_dirname_from_uri (files[i]);
+					gedit_default_path = get_dirname_from_uri (iter->data);
 				}
 				
-				uri_utf8 = eel_format_uri_for_display (files[i]);	
+				uri_utf8 = eel_format_uri_for_display (iter->data);	
 				if (uri_utf8 != NULL)
 				{
 					gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);
@@ -188,10 +189,14 @@ gedit_file_open (GeditMDIChild *active_child)
 			
 			gedit_debug (DEBUG_FILE, "Defaul path : %s", 
 				    (gedit_default_path == NULL) ? NULL : gedit_default_path); 
-			gedit_debug (DEBUG_FILE, "File: %s", files[i]);
+			gedit_debug (DEBUG_FILE, "File: %s", iter->data);
+
+			g_free (iter->data);
+
+			iter = g_slist_next (iter);
 		}
 
-		g_strfreev (files);
+		g_slist_free (files);
 	}
 }
 
@@ -442,7 +447,6 @@ gedit_file_save_as (GeditMDIChild *child)
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			FALSE,
 		        _("Save as..."), 
-			NULL, 
 			path,
 			fname,
 			&encoding);
@@ -729,7 +733,10 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 	l = g_list_length (uri_list);
 	
 	if (l > 1)
-		gedit_utils_flash_va (_("Loading %d files..."), l);
+		gedit_utils_flash_va (ngettext("Loading %d file...",
+					       "Loading %d files...", 
+					       l), 
+				      l);
 
 	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
 

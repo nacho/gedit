@@ -673,10 +673,12 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 	else
 		encoding = gedit_encoding_to_string (enc);
 		
-	tip = g_strdup_printf ("<b>Name:</b> %s\n\n"
-			       "<b>MIME Type:</b> %s\n"
-			       "<b>Encoding:</b> %s", 
-			       uri, mime_full_description, encoding);
+	tip = g_strdup_printf ("<b>%s</b> %s\n\n"
+			       "<b>%s</b> %s\n"
+			       "<b>%s</b> %s",
+			        _("Name:"), uri,
+			       _("MIME Type:"), mime_full_description,
+			       _("Encoding:"), encoding);
 
 	gedit_tooltips_set_tip (tooltips, widget, tip, NULL);
 	g_free (tip);

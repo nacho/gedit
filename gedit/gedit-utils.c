@@ -1154,12 +1154,16 @@ gedit_utils_convert_search_text (const gchar *text)
 	cur = text;
 	end = text + length;
 	prev = NULL;
-	while (cur != end) {
+	
+	while (cur != end) 
+	{
 		const gchar *next;
 		next = g_utf8_next_char (cur);
 
-		if (prev && (*prev == '\\')) {
-			switch (*cur) {
+		if (prev && (*prev == '\\')) 
+		{
+			switch (*cur) 
+			{
 				case 'n':
 					str = g_string_append (str, "\n");
 				break;
@@ -1175,16 +1179,25 @@ gedit_utils_convert_search_text (const gchar *text)
 				break;
 				default:
 					str = g_string_append (str, "\\");
-					str = g_string_append (str, cur);
+					str = g_string_append_len (str, cur, next - cur);
 				break;
 			}
-		} else if (*cur != '\\') {
+		} 
+		else if (*cur != '\\') 
+		{
 			str = g_string_append_len (str, cur, next - cur);
+		} 
+		else if ((next == end) && (*cur == '\\')) 
+		{
+			str = g_string_append (str, "\\");
 		}
-
+		
 		if (!drop_prev)
+		{
 			prev = cur;
-		else {
+		}
+		else 
+		{
 			prev = NULL;
 			drop_prev = FALSE;
 		}
