@@ -538,6 +538,10 @@ gedit_undo_manager_delete_range_handler (GtkTextBuffer *buffer, GtkTextIter *sta
 	else
 		undo_action.mergeable = TRUE;
 
+	gedit_debug (DEBUG_UNDO, "START: %d", undo_action.action.delete.start);
+	gedit_debug (DEBUG_UNDO, "END: %d", undo_action.action.delete.end);
+	gedit_debug (DEBUG_UNDO, "TEXT: %s", undo_action.action.delete.text);
+
 	gedit_undo_manager_add_action (um, undo_action);
 }
 
@@ -735,7 +739,9 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 			
 #define L  (last_action->action.delete.end - last_action->action.delete.start - 1)
 #define g_utf8_get_char_at(p,i) g_utf8_get_char(g_utf8_offset_to_pointer((p),(i)))
-			
+		
+			gedit_debug (DEBUG_UNDO, "L = %d", L);
+
 			/* Deleted with the delete key */
 			if ((g_utf8_get_char (undo_action->action.delete.text) != ' ') &&
 			    (g_utf8_get_char (undo_action->action.delete.text) != '\t') &&
@@ -750,7 +756,7 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 				undo_action->action.delete.text);
 			
 			g_free (last_action->action.delete.text);
-			last_action->action.delete.end += (L + 1);
+			last_action->action.delete.end += (undo_action->action.delete.end - undo_action->action.delete.start);
 			last_action->action.delete.text = str;
 		}
 		else
