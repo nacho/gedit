@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = src pixmaps po plugins help omf-install data
+SUBDIRS = src pixmaps po plugins help data
 
 EXTRA_DIST = BUGS		\
 	ChangeLog  		\
