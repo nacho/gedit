@@ -40,7 +40,7 @@
 
 #define DEFAULT_DELAY 500	/* Default delay in ms */
 #define STICKY_DELAY 0		/* Delay before popping up next tip
-				 * if we're sticky
+				 * if we are sticky
 				 */
 #define STICKY_REVERT_DELAY 1000	/* Delay before sticky tooltips revert
 					 * to normal
