@@ -70,7 +70,7 @@
 
                 <child>
                   <widget class="GtkLabel" id="label1">
-			  <property name="label" translatable="yes">This is the Plugin Manager.  A plugin is a piece of software that gives extra capabilities to gedit.  From here, you can choose which plugins you want to have loaded.</property>
+                    <property name="label" translatable="yes">This is the Plugin Manager.  From here, you can choose which plugins you want to have loaded.</property>
                     <property name="justify">GTK_JUSTIFY_LEFT</property>
                     <property name="wrap">yes</property>
                     <property name="xalign">7.45058e-09</property>
@@ -95,14 +95,20 @@
 
             <child>
               <widget class="GtkScrolledWindow" id="plugin_viewport">
-                <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+                <property name="hscrollbar_policy">GTK_POLICY_NEVER</property>
                 <property name="vscrollbar_policy">GTK_POLICY_ALWAYS</property>
                 <property name="visible">yes</property>
-                <property name="shadow_type">GTK_SHADOW_IN</property>
 
                 <child>
-                  <widget class="GtkTreeView" id="plugin_tree">
+                  <widget class="GtkViewport" id="viewport1">
+                    <property name="shadow_type">GTK_SHADOW_IN</property>
                     <property name="visible">yes</property>
+
+                    <child>
+                      <widget class="GtkTreeView" id="plugin_tree">
+                        <property name="visible">yes</property>
+                      </widget>
+                    </child>
                   </widget>
                 </child>
 
@@ -152,16 +158,17 @@
                   <widget class="GtkButton" id="configure_button">
                     <property name="tooltip" translatable="yes">Configure the selected plugin</property>
                     <property name="can_focus">yes</property>
-                    <property name="can_default">yes</property>
-                    <property name="label" translatable="yes">Con_figure plugin</property>
+                    <property name="label" translatable="yes">_Configure plugin</property>
                     <property name="relief">GTK_RELIEF_NORMAL</property>
+                    <property name="width-request">0</property>
+                    <property name="height-request">0</property>
                     <property name="visible">yes</property>
                     <property name="use_underline">yes</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
                     <property name="expand">no</property>
-                    <property name="fill">yes</property>
+                    <property name="fill">no</property>
                   </packing>
                 </child>
               </widget>
@@ -223,6 +230,42 @@
                     <property name="visible">yes</property>
 
                     <child>
+                      <widget class="GtkLabel" id="name_label">
+                        <property name="label" translatable="yes"></property>
+                        <property name="justify">GTK_JUSTIFY_LEFT</property>
+                        <property name="wrap">no</property>
+                        <property name="xalign">0.05</property>
+                        <property name="yalign">0.5</property>
+                        <property name="xpad">0</property>
+                        <property name="ypad">0</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
+                      </packing>
+                    </child>
+
+                    <child>
+                      <widget class="GtkLabel" id="copyright_label">
+                        <property name="label" translatable="yes"></property>
+                        <property name="justify">GTK_JUSTIFY_LEFT</property>
+                        <property name="wrap">no</property>
+                        <property name="xalign">0.05</property>
+                        <property name="yalign">0.5</property>
+                        <property name="xpad">0</property>
+                        <property name="ypad">0</property>
+                        <property name="visible">yes</property>
+                      </widget>
+                      <packing>
+                        <property name="padding">0</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
+                      </packing>
+                    </child>
+
+                    <child>
                       <widget class="GtkLabel" id="author_label">
                         <property name="label" translatable="yes"></property>
                         <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -234,9 +277,9 @@
                         <property name="visible">yes</property>
                       </widget>
                       <packing>
-                        <property name="padding">0</property>
-                        <property name="expand">yes</property>
-                        <property name="fill">yes</property>
+                        <property name="padding">10</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
                       </packing>
                     </child>
 
@@ -253,8 +296,8 @@
                       </widget>
                       <packing>
                         <property name="padding">0</property>
-                        <property name="expand">yes</property>
-                        <property name="fill">yes</property>
+                        <property name="expand">no</property>
+                        <property name="fill">no</property>
                       </packing>
                     </child>
                   </widget>

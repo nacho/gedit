@@ -58,6 +58,8 @@ struct _GeditDialogPluginManager {
 	GtkWidget *author; 	/* a GtkLabel, shows the author of the plugin */
 	GtkWidget *filename; 	/* a GtkLabel, shows the filename of the plugin */
 	GtkWidget *desc; 	/* a GtkLabel, shows the description of the plugin */
+	GtkWidget *name; 	/* a GtkLabel, shows the name of the plugin */
+	GtkWidget *copyright; 	/* a GtkLabel, shows the copyright info of the plugin */
 	GtkWidget *logo; 	/* a GtkImage, a small logo */
 	GtkWidget *configure_button; /* a GtkButton,configures a plugin when clicked */
 
@@ -171,18 +173,20 @@ row_activated_cb (GtkTreeView *tree_view,
 		  gpointer data)
 {
 	GeditDialogPluginManager *dialog = data;
-	GeditPluginInfo *info;
+	GtkTreeIter iter;
+	GtkTreeModel *model;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	info = dialog_plugin_manager_get_selected_plugin (dialog);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->tree));
 
-	g_return_if_fail (info != NULL);
+	g_return_if_fail (model != NULL);
+	
+	gtk_tree_model_get_iter (model, &iter, path);
 
-	gedit_debug (DEBUG_PLUGINS, "Configuring: %s\n", info->plugin->name);
+	g_return_if_fail (&iter != NULL);
 	
-	gedit_plugins_engine_configure_plugin (info->plugin, dialog->dialog);
-	
+	dialog_plugin_manager_toggle_active (&iter, model);
 }
 
 static void
@@ -232,7 +236,8 @@ dialog_plugin_manager_populate_lists (GeditDialogPluginManager *dialog)
 		g_return_if_fail (selection != NULL);
 		gtk_tree_selection_select_iter (selection, &iter);
 
-		gtk_tree_model_get (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+		gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
+				    PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
 
 		gtk_widget_set_sensitive (GTK_WIDGET (dialog->configure_button),
 				  gedit_plugins_engine_is_a_configurable_plugin (info->plugin));
@@ -296,20 +301,31 @@ dialog_plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
 static void
 dialog_plugin_manager_update_info (GeditDialogPluginManager *dialog, GeditPluginInfo *info)
 {
+	gchar *t;
 	gchar *filename;
+	gchar *author;
+	gchar *name;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	/* maybe we should put the full path?  It's pretty long.... */
-	filename = g_path_get_basename (info->plugin->file);
+	t = g_path_get_basename (info->plugin->file);
+	g_return_if_fail (t != NULL);
 
-	g_return_if_fail (filename != NULL);
+	filename = g_strdup_printf ("%s: %s", _("Module file name"), t);
+	author = g_strdup_printf ("%s: %s", _("Author(s)"), info->plugin->author);
+	name = g_strdup_printf ("%s plugin", info->plugin->name);
 
 	gtk_label_set_text (GTK_LABEL (dialog->desc), info->plugin->desc);
-	gtk_label_set_text (GTK_LABEL (dialog->author), info->plugin->author);
+	gtk_label_set_text (GTK_LABEL (dialog->author), author);
 	gtk_label_set_text (GTK_LABEL (dialog->filename), filename);
+	gtk_label_set_text (GTK_LABEL (dialog->copyright), info->plugin->copyright);
+	gtk_label_set_text (GTK_LABEL (dialog->name), name);
 
+	g_free (t);
+	g_free (author);
 	g_free (filename);
+	g_free (name);
 }
 
 static GeditPluginInfo *
@@ -455,12 +471,15 @@ dialog_plugin_manager_get_dialog (void)
 	dialog->desc = glade_xml_get_widget (gui, "desc_label");
 	dialog->author = glade_xml_get_widget (gui, "author_label");
 	dialog->filename = glade_xml_get_widget (gui, "file_label");
+	dialog->name = glade_xml_get_widget (gui, "name_label");
+	dialog->copyright = glade_xml_get_widget (gui, "copyright_label");
 	dialog->configure_button = glade_xml_get_widget (gui, "configure_button");
 	dialog->logo = glade_xml_get_widget (gui, "plugin_logo");
 	viewport = glade_xml_get_widget (gui, "plugin_viewport");
 
-	if (!(content && dialog->tree && dialog->notebook && dialog->desc && dialog->author
-	      && dialog->filename && dialog->configure_button && dialog->logo && viewport)) {
+	if (!(content && dialog->tree && dialog->notebook && dialog->desc &&
+	      dialog->author && dialog->filename && dialog->configure_button &&
+	      dialog->logo && viewport && dialog->name && dialog->copyright)) {
 
 		g_warning (_("Invalid glade file for plugin manager -- not all widgets found.\n"));
 		g_object_unref (gui);
@@ -469,7 +488,7 @@ dialog_plugin_manager_get_dialog (void)
 	}
 
 	/* setup a window of a sane size. */
-	gtk_widget_set_size_request (GTK_WIDGET (dialog->notebook), 250, 100);
+	gtk_widget_set_size_request (GTK_WIDGET (dialog->notebook), 250, 150);
 	gtk_widget_set_size_request (GTK_WIDGET (viewport), 250, 120);
 	
 	/* stick the plugin manager logo in there */
