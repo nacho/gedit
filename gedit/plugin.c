@@ -12,14 +12,14 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
-#include "plugin.h"
-#include <unistd.h>
-#include <gtk/gtk.h>
-#include <string.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <string.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <gtk/gtk.h>
+#include "plugin.h"
 
 static void process_command( plugin *plug, gchar *buffer, int length, gpointer data );
 
