@@ -181,6 +181,7 @@ gE_window *gE_window_new()
   gtk_window_set_title (GTK_WINDOW (window->window), gEdit_ID);
 #endif
   gtk_widget_set_usize(GTK_WIDGET(window->window), 595, 390);
+  gtk_window_set_policy(GTK_WINDOW(window->window), TRUE, TRUE, FALSE);
   gtk_container_border_width (GTK_CONTAINER (window->window), 0);
       
   box1 = gtk_vbox_new (FALSE, 0);
