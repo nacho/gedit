@@ -14,7 +14,7 @@
 #include "document.h"
 #include "plugin.h"
 #include "view.h"
-
+#include "utils.h"
 
 #define GEDIT_PLUGIN_SHELL_BUFFER_SIZE 1024
 

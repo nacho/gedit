@@ -329,14 +329,16 @@ gedit_document_get_chars (GeditDocument *doc, guint start_pos, guint end_pos)
  * 
  * returns a newly allocated buffer containg the text inside doc
  * 
- * Return Value: 
+ * Return Value: the content of the document as a null-terminated string. 
+ * The result must be freed with g_free() when the application is finished with it.
  **/
 guchar *
 gedit_document_get_buffer (GeditDocument *doc)
 {
 	guchar * buffer;
-	guint length;
+/*	guint length;
 	GtkText * text;
+*/
 	GeditView * view;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -344,13 +346,18 @@ gedit_document_get_buffer (GeditDocument *doc)
 	g_return_val_if_fail (doc!=NULL, NULL);
 	view = g_list_nth_data (doc->views, 0);
 	g_return_val_if_fail (view!=NULL, NULL);
-
+/*
 	text = GTK_TEXT (view->text);
 
 	length = gtk_text_get_length (text);
 	buffer = gtk_editable_get_chars ( GTK_EDITABLE ( text ),
 					  0,
 					  length);
+*/
+	buffer = gtk_editable_get_chars ( GTK_EDITABLE ( view->text ),
+					  0,
+					  -1);
+
 	return buffer;
 }
 

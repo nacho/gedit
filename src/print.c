@@ -30,6 +30,7 @@
 
 #include "print.h"
 #include "print-doc.h"
+#include "print-util.h"
 #include "file.h"
 #include "commands.h"
 #include "prefs.h"
