@@ -5,19 +5,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.9.4\n"
-"POT-Creation-Date: 2001-02-28 13:55+0100\n"
+"POT-Creation-Date: 2001-05-21 19:40+0200\n"
 "PO-Revision-Date: 1999-09-20 17:36+0300\n"
 "Last-Translator: Yuri Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8-bit\n"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:251
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/browse/browse.c:38 plugins/browse/browse.c:250
 msgid "Browse"
 msgstr "Перегляд WWW"
 
-#: plugins/browse/browse.c:252 plugins/browse/browse.c:253
+#: plugins/browse/browse.c:251 plugins/browse/browse.c:252
 msgid "Web browse plugin"
 msgstr "Доповнення перегляду WWW"
 
@@ -41,22 +43,22 @@ msgstr "Введіть URL для перегляду: "
 msgid "Lynx found at: "
 msgstr "lynx було знайдено на: "
 
-#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:18
+#: plugins/browse/browse.glade.h:10 plugins/diff/diff.glade.h:19
 #: plugins/email/email.glade.h:22
 msgid "location"
 msgstr "розташування"
 
-#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:19
+#: plugins/browse/browse.glade.h:11 plugins/diff/diff.glade.h:20
 #: plugins/email/email.glade.h:24
 #, fuzzy
 msgid " _Change... "
 msgstr "Змінити..."
 
-#: plugins/convert/convert.c:180
+#: plugins/convert/convert.c:179
 msgid "Convert"
 msgstr "Перетворити"
 
-#: plugins/convert/convert.c:181 plugins/convert/convert.c:182
+#: plugins/convert/convert.c:180 plugins/convert/convert.c:181
 msgid "Number Converter"
 msgstr "Перетворювач чисел"
 
@@ -95,45 +97,52 @@ msgstr "Десяткове у вісімкове"
 msgid " Hex to Decima_l "
 msgstr "Шістнадцяткове у десяткове"
 
-#: plugins/diff/diff.c:121
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/diff/diff.c:36
+#, fuzzy
+msgid "diff"
+msgstr "Відмінності"
+
+#: plugins/diff/diff.c:126
 #, fuzzy
 msgid "The two documents you selected are the same."
 msgstr "Два вибрані документи однакові"
 
-#: plugins/diff/diff.c:127
+#: plugins/diff/diff.c:132
 #, fuzzy
 msgid ""
-"The \"first\" file you selected does not exists.\n"
+"The \"first\" file you selected does not exist.\n"
 "\n"
-"Please, provide a valid file."
+"Please provide a valid file."
 msgstr ""
 "Вибраного файлу не існує\n"
 "\n"
 "Вкажіть вірну назву файлу"
 
-#: plugins/diff/diff.c:134
+#: plugins/diff/diff.c:139
 #, fuzzy
 msgid ""
-"The \"second\" file you selected does not exists.\n"
+"The \"second\" file you selected does not exist.\n"
 "\n"
-"Please, provide a valid file."
+"Please provide a valid file."
 msgstr ""
 "Вибраного файлу не існує\n"
 "\n"
 "Вкажіть вірну назву файлу"
 
-#: plugins/diff/diff.c:145
+#: plugins/diff/diff.c:150
 #, fuzzy
 msgid "The \"first\" document contains no text."
 msgstr "Документ не містить тексту"
 
-#: plugins/diff/diff.c:157
+#: plugins/diff/diff.c:162
 #, fuzzy
 msgid "The \"second\" document contains no text."
 msgstr "Документ не містить тексту"
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:166
+#: plugins/diff/diff.c:171
 msgid ""
 "gedit could not create a temp file.\n"
 "\n"
@@ -141,32 +150,28 @@ msgstr ""
 "Неможливо створити тимчасовивй файл.\n"
 "\n"
 
-#: plugins/diff/diff.c:282 plugins/email/email.c:230 src/document.c:753
+#: plugins/diff/diff.c:295 plugins/email/email.c:229 src/document.c:761
 #, c-format
 msgid "Untitled %i"
 msgstr "Неназвано %i"
 
-#: plugins/diff/diff.c:474
+#: plugins/diff/diff.c:496
 msgid "Diff"
 msgstr "Відмінності"
 
-#: plugins/diff/diff.c:475
+#: plugins/diff/diff.c:497
 #, fuzzy
 msgid "Makes a diff file from two documents or files"
-msgstr ""
-"Зробити файл diff з двох документів чи "
-"файлів"
+msgstr "Зробити файл diff з двох документів чи файлів"
 
-#: plugins/diff/diff.c:476
+#: plugins/diff/diff.c:498
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk\n"
 "For more info on diff, type \"man diff\" in a shell prompt\n"
 msgstr ""
-"Зробити файл diff з двох документів чи "
-"файлів на диску\n"
-"Для докладнішої інформації про diff, "
-"введіть \"man diff\" в оболонці\n"
+"Зробити файл diff з двох документів чи файлів на диску\n"
+"Для докладнішої інформації про diff, введіть \"man diff\" в оболонці\n"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -209,32 +214,41 @@ msgid "Select the \"second\" file..."
 msgstr ""
 
 #: plugins/diff/diff.glade.h:17
+msgid "Use the _unified output format (-u option)"
+msgstr ""
+
+#: plugins/diff/diff.glade.h:18
 #, fuzzy
 msgid "Diff found at: "
 msgstr "diff знайдено на: "
 
-#: plugins/email/email.c:76
+#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/email/email.c:22
+#, fuzzy
+msgid "email"
+msgstr "Е-пошта"
+
+#: plugins/email/email.c:75
 #, fuzzy, c-format
 msgid "Executing command: %s"
 msgstr "Виконання команди: %s"
 
-#: plugins/email/email.c:276
+#: plugins/email/email.c:275
 msgid "Email"
 msgstr "Е-пошта"
 
-#: plugins/email/email.c:277
+#: plugins/email/email.c:276
 msgid "Email the current document"
 msgstr "Відіслати поточний документ"
 
-#: plugins/email/email.c:278
+#: plugins/email/email.c:277
 msgid ""
 "Email the current document to a specified email address\n"
 "gedit searches for sendmail to use this plugin."
 msgstr ""
-"Відіслати поточний документ за вказаною "
-"адресою\n"
-"gedit шукає sendmail щоб використати це "
-"доповнення."
+"Відіслати поточний документ за вказаною адресою\n"
+"gedit шукає sendmail щоб використати це доповнення."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -267,8 +281,7 @@ msgstr "мітка12"
 
 #: plugins/email/email.glade.h:13 plugins/email/email.glade.h:20
 msgid "File to use as body of message: "
-msgstr ""
-"Файл, що слугуватиме тілом повідомлення: "
+msgstr "Файл, що слугуватиме тілом повідомлення: "
 
 #: plugins/email/email.glade.h:14 plugins/email/email.glade.h:21
 #, fuzzy
@@ -303,35 +316,35 @@ msgstr "До:"
 msgid "filename"
 msgstr ""
 
-#: plugins/reverse/reverse.c:70
+#: plugins/reverse/reverse.c:69
 msgid "Reverse"
 msgstr "Перевернути"
 
-#: plugins/reverse/reverse.c:71 plugins/reverse/reverse.c:72
+#: plugins/reverse/reverse.c:70 plugins/reverse/reverse.c:71
 msgid "Reverse text"
 msgstr "Перевернути текст"
 
-#: plugins/sample/sample.c:55
+#: plugins/sample/sample.c:53
 msgid "Hello World"
 msgstr "Привіт, світ"
 
-#: plugins/sample/sample.c:56 plugins/sample/sample.c:57
+#: plugins/sample/sample.c:54 plugins/sample/sample.c:55
 msgid "Sample 'hello world' plugin."
 msgstr "Приклад доповнення \"привіт, світ\"."
 
-#: plugins/shell_output/shell_output.c:65
+#: plugins/shell_output/shell_output.c:64
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
 
-#: plugins/shell_output/shell_output.c:214
+#: plugins/shell_output/shell_output.c:213
 msgid "Shell Output"
 msgstr "Вивід оболонки"
 
+#: plugins/shell_output/shell_output.c:214
 #: plugins/shell_output/shell_output.c:215
-#: plugins/shell_output/shell_output.c:216
 msgid "Insert the shell output in the document"
 msgstr "Вставити вивід оболонки в документ"
 
@@ -362,11 +375,11 @@ msgstr "Введіть команду оболонки "
 msgid "Select the working directory..."
 msgstr ""
 
-#: plugins/time/time.c:84
+#: plugins/time/time.c:83
 msgid "Insert Time"
 msgstr "Вставити час"
 
-#: plugins/time/time.c:85 plugins/time/time.c:86
+#: plugins/time/time.c:84 plugins/time/time.c:85
 msgid "Inserts the current date and time"
 msgstr "Вставляє поточні дату і час"
 
@@ -381,28 +394,14 @@ msgstr "© 1998, 1999, 2000 Alex Roberts та Evan Lawrence"
 
 #: src/dialogs/about.glade.h:8
 msgid "gedit is a small and lightweight text editor for GNOME."
-msgstr ""
-"gedit - малий та легкий текстовий редактор "
-"для GNOME."
+msgstr "gedit - малий та легкий текстовий редактор для GNOME."
 
-#: src/dialogs/dialog-plugins.c:90
+#: src/dialogs/dialog-plugins.c:87
 #, fuzzy, c-format
 msgid "To use the %s plugin, you need to specify a location for \"%s\"."
 msgstr ""
-"%sВи не зможете використовувати "
-"доповнення \"%s\" без %s. \n"
+"%sВи не зможете використовувати доповнення \"%s\" без %s. \n"
 " Ви хочете вказати нове розміщення %s?"
-
-#: src/dialogs/dialog-plugins.c:455
-#, fuzzy, c-format
-msgid ""
-"Plugin Name: %s\n"
-"Author: %s\n"
-"Description: %s\n"
-msgstr ""
-"Назва доповнення: %s\n"
-"Автор: %s\n"
-"Опис: %s\n"
 
 #. glade won't let me set the title of the propertybox
 #: src/dialogs/dialog-prefs.c:578
@@ -419,16 +418,18 @@ msgstr "gedit: Настройки"
 msgid "Replace"
 msgstr "Замінити"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:283
+#: src/dialogs/dialog-replace.c:135 src/menus.c:298
 msgid "Find"
 msgstr "Знайти"
 
 #: src/dialogs/dialog-replace.c:332
-msgid "Text not found"
+#, fuzzy
+msgid "Search string not found"
 msgstr "Текс не знайдено"
 
 #: src/dialogs/dialog-replace.c:337
-msgid "Text not found."
+#, fuzzy
+msgid "Search string not found."
 msgstr "Текс не знайдено."
 
 #: src/dialogs/dialog-replace.c:362
@@ -438,9 +439,12 @@ msgstr "зроблено %i замін."
 
 #: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
 msgid "Could not allocate the memory for the Replace all request."
-msgstr ""
-"Не вдалося виділити пам'ять для заміни "
-"всього."
+msgstr "Не вдалося виділити пам'ять для заміни всього."
+
+#: src/dialogs/dialog-uri.c:138 src/file.c:827 src/file.c:834
+#, c-format
+msgid "Loaded file %s"
+msgstr "Завантажено файл %s"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -461,50 +465,57 @@ msgstr "Номер рядка:"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/prefs.glade.h:7
+#, fuzzy
+msgid "Preferences"
+msgstr "gedit: Настройки"
+
+#: src/dialogs/prefs.glade.h:8
 msgid "Appearance"
 msgstr "Вигляд"
 
-#: src/dialogs/prefs.glade.h:8
-msgid "Show Statusbar"
+#: src/dialogs/prefs.glade.h:9
+#, fuzzy
+msgid "S_how statusbar"
 msgstr "Показати панель стану"
 
-#: src/dialogs/prefs.glade.h:9
-msgid "Set toolbar according to system settings"
-msgstr ""
-"Панелі інструментів користується "
-"системними налаштуваннями"
-
 #: src/dialogs/prefs.glade.h:10
-msgid "Set toolbar to Icons only"
-msgstr "Піктограми в панелі інструментів"
+#, fuzzy
+msgid "Set toolbar according to _system settings"
+msgstr "Панелі інструментів користується системними налаштуваннями"
 
 #: src/dialogs/prefs.glade.h:11
-msgid "Set toolbar to Icons with text"
-msgstr ""
-"Піктограми та текст в панелі інструментів"
+#, fuzzy
+msgid "Set toolbar to _icons only"
+msgstr "Піктограми в панелі інструментів"
 
 #: src/dialogs/prefs.glade.h:12
+#, fuzzy
+msgid "Set toolbar to icons with _text"
+msgstr "Піктограми та текст в панелі інструментів"
+
+#: src/dialogs/prefs.glade.h:13
 msgid "Editor Behavior"
 msgstr "Режим роботи редактора"
 
-#: src/dialogs/prefs.glade.h:13
-msgid "Enable Auto-indent"
-msgstr "Автоматичний відступ"
-
 #: src/dialogs/prefs.glade.h:14
 #, fuzzy
-msgid "Tab width: "
-msgstr "Змінити на: "
+msgid "Enable _Auto-indent"
+msgstr "Автоматичний відступ"
 
 #: src/dialogs/prefs.glade.h:15
+#, fuzzy
+msgid "Tab _width: "
+msgstr "Змінити на: "
+
+#: src/dialogs/prefs.glade.h:16
 msgid "General"
 msgstr "Загальне"
 
-#: src/dialogs/prefs.glade.h:16
+#: src/dialogs/prefs.glade.h:17
 msgid "MDI (Multiple Document Interface)"
 msgstr "MDI (Multiple Document Interface)"
 
-#: src/dialogs/prefs.glade.h:17
+#: src/dialogs/prefs.glade.h:18
 msgid ""
 "Left\n"
 "Right\n"
@@ -516,7 +527,7 @@ msgstr ""
 "Зверху\n"
 "Знизу\n"
 
-#: src/dialogs/prefs.glade.h:22
+#: src/dialogs/prefs.glade.h:23
 msgid ""
 "Notebook\n"
 "Toplevel\n"
@@ -528,99 +539,109 @@ msgstr ""
 "Модальний\n"
 "Типовий\n"
 
-#: src/dialogs/prefs.glade.h:27
-msgid "Mode: "
+#: src/dialogs/prefs.glade.h:28
+#, fuzzy
+msgid "_Mode: "
 msgstr "Режим: "
 
-#: src/dialogs/prefs.glade.h:28
-msgid "Notebook Tab Position: "
+#: src/dialogs/prefs.glade.h:29
+#, fuzzy
+msgid "Notebook _tab position: "
 msgstr "Розміщення закладок: "
 
-#: src/dialogs/prefs.glade.h:29 src/menus.c:261
+#: src/dialogs/prefs.glade.h:30 src/menus.c:276
 msgid "Undo"
 msgstr "Відмінити"
 
-#: src/dialogs/prefs.glade.h:30
-#, fuzzy
-msgid "Set limit on undo levels to:"
-msgstr ""
-"Встановити кількість рівнів відкату у:"
-
 #: src/dialogs/prefs.glade.h:31
-msgid "level(s)"
-msgstr " "
+#, fuzzy
+msgid "Set limit on _undo levels to:"
+msgstr "Встановити кількість рівнів відкату у:"
 
 #: src/dialogs/prefs.glade.h:32
+#, fuzzy
+msgid "_level(s)"
+msgstr " "
+
+#: src/dialogs/prefs.glade.h:33
 msgid "Documents"
 msgstr "Документи"
 
-#: src/dialogs/prefs.glade.h:33
+#: src/dialogs/prefs.glade.h:34
 msgid "Fonts"
 msgstr "Шрифти"
 
-#: src/dialogs/prefs.glade.h:34
+#: src/dialogs/prefs.glade.h:35
 msgid "Pick a Font"
 msgstr "Вибір шрифту"
 
-#: src/dialogs/prefs.glade.h:35
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr ""
-"АаБбВвГгҐґДдЕеЄєЖжЗзИиІіЇїЙйКкЛлМмНнОо�"
-"�пРрСсТтУуФфХхЦцШшЩщЬьЮюЯя"
-
 #: src/dialogs/prefs.glade.h:36
-msgid "Default Font: "
-msgstr "Типовий шрифт: "
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "АаБбВвГгҐґДдЕеЄєЖжЗзИиІіЇїЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцШшЩщЬьЮюЯя"
 
 #: src/dialogs/prefs.glade.h:37
+#, fuzzy
+msgid "_Default font: "
+msgstr "Типовий шрифт: "
+
+#: src/dialogs/prefs.glade.h:38
 msgid "Colors"
 msgstr "Кольори"
 
-#: src/dialogs/prefs.glade.h:38 src/dialogs/prefs.glade.h:39
+#: src/dialogs/prefs.glade.h:39 src/dialogs/prefs.glade.h:40
 msgid "Pick a color"
 msgstr "Вибрати колір"
 
-#: src/dialogs/prefs.glade.h:40
-msgid "Background: "
+#: src/dialogs/prefs.glade.h:41
+#, fuzzy
+msgid "_Background: "
 msgstr "Тло: "
 
-#: src/dialogs/prefs.glade.h:41
-msgid "Foreground: "
+#: src/dialogs/prefs.glade.h:42
+#, fuzzy
+msgid "_Foreground: "
 msgstr "Передній план: "
 
-#: src/dialogs/prefs.glade.h:42
+#: src/dialogs/prefs.glade.h:43
 msgid "Fonts/Colors"
 msgstr "Шрифти/кольори"
 
-#: src/dialogs/prefs.glade.h:43 src/dialogs/prefs.glade.h:50
+#: src/dialogs/prefs.glade.h:44 src/dialogs/prefs.glade.h:52
 msgid "Printing"
 msgstr "Друк"
 
-#: src/dialogs/prefs.glade.h:44
+#: src/dialogs/prefs.glade.h:45
 msgid "Add _header"
 msgstr "Додати заголовок"
 
-#: src/dialogs/prefs.glade.h:45
+#: src/dialogs/prefs.glade.h:46
 msgid "Enable word _wrapping"
 msgstr "Увімкнути перенос слів"
 
-#: src/dialogs/prefs.glade.h:46
-msgid "Print _line numbers every:"
+#: src/dialogs/prefs.glade.h:47
+#, fuzzy
+msgid "Print line _numbers every:"
 msgstr "Друкувати номер кожного:"
 
-#: src/dialogs/prefs.glade.h:47
-msgid "line(s)"
+#: src/dialogs/prefs.glade.h:48
+#, fuzzy
+msgid "l_ine(s)"
 msgstr "рядка"
 
-#: src/dialogs/prefs.glade.h:48
+#: src/dialogs/prefs.glade.h:49
+#, fuzzy
+msgid "Orientation"
+msgstr "Друк"
+
+#: src/dialogs/prefs.glade.h:50
 msgid "_Portrait"
 msgstr "Книжна"
 
-#: src/dialogs/prefs.glade.h:49
+#: src/dialogs/prefs.glade.h:51
 msgid "_Landscape"
 msgstr "Альбомна"
 
-#: src/dialogs/prefs.glade.h:51
+#: src/dialogs/prefs.glade.h:53 src/dialogs/prefs.glade.h:54
 msgid "Paper"
 msgstr "Папір"
 
@@ -681,56 +702,84 @@ msgstr "Чутливість до реґістру"
 #. * DO NOT compile it as part of your application.
 #.
 #: src/dialogs/plugin-manager.glade.h:7
-msgid "gedit Plugin Manager"
+#, fuzzy
+msgid "Plugins manager..."
 msgstr "Менеджер доповнень gedit"
 
 #: src/dialogs/plugin-manager.glade.h:8
-msgid "Select the plugins to install"
+#, fuzzy
+msgid "Select the plugins to activate:"
 msgstr "Виберіть доповнення для встановлення"
 
-#: src/dialogs/plugin-manager.glade.h:9 src/dialogs/plugin-manager.glade.h:10
-msgid "Available Plugins"
-msgstr "Наявні доповнення"
+#: src/dialogs/plugin-manager.glade.h:9
+msgid "_Activate all"
+msgstr ""
+
+#: src/dialogs/plugin-manager.glade.h:10
+msgid "_Deactivate all"
+msgstr ""
 
 #: src/dialogs/plugin-manager.glade.h:11
-msgid "Add >"
-msgstr "Додати >"
+#, fuzzy
+msgid "De_scription"
+msgstr "Опас доповнення"
 
 #: src/dialogs/plugin-manager.glade.h:12
-msgid "< Remove"
-msgstr "< Видалити"
+#, fuzzy
+msgid "File name:"
+msgstr "Номер рядка:"
 
 #: src/dialogs/plugin-manager.glade.h:13
-msgid "Add All >>"
-msgstr "Додати всі >>"
+msgid "Author(s):"
+msgstr ""
 
 #: src/dialogs/plugin-manager.glade.h:14
-msgid "<< Remove All"
-msgstr "<< Видалити всі"
+msgid "De_tails"
+msgstr ""
 
-#: src/dialogs/plugin-manager.glade.h:15 src/dialogs/plugin-manager.glade.h:16
-msgid "Installed Plugins"
-msgstr "Встановлені доповнення"
+#.
+#. * Translatable strings file generated by Glade.
+#. * Add this file to your project's POTFILES.in.
+#. * DO NOT compile it as part of your application.
+#.
+#: src/dialogs/uri.glade.h:7
+#, fuzzy
+msgid "Open from URI"
+msgstr "Відкрити файл..."
 
-#: src/dialogs/plugin-manager.glade.h:17
-msgid "Plugin description"
-msgstr "Опас доповнення"
+#: src/dialogs/uri.glade.h:8 src/menus.c:259
+msgid "Open"
+msgstr "Відкрити"
+
+#: src/dialogs/uri.glade.h:9
+msgid "Enter the location (URI) of the file you would like to open:"
+msgstr ""
 
 #: src/document.c:267 src/document.c:271
 msgid "RO - "
 msgstr "Лише читання - "
 
+#: src/document.c:295
+#, c-format
+msgid "%s %d"
+msgstr ""
+
 #: src/document.c:295 src/document.c:299
 msgid "Untitled"
 msgstr "Неназвано"
 
-#: src/document.c:479
+#: src/document.c:299
+#, c-format
+msgid "%s %d*"
+msgstr ""
+
+#: src/document.c:477
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "\"%s\" було модифіковано.  Зберегти його?"
 
 #. If you try to open a non existant remote file
-#: src/document.c:710
+#: src/document.c:718
 #, fuzzy, c-format
 msgid ""
 "An error was encountered while opening the file: \n"
@@ -742,20 +791,19 @@ msgstr ""
 "Сталася помилка на відкриванні файлу.\n"
 "Переконайтеся що файл існує."
 
-#: src/document.c:763 src/document.c:771
+#: src/document.c:771 src/document.c:779
 msgid "(modified)"
 msgstr "(модифіковано)"
 
-#: src/document.c:765 src/document.c:773
+#: src/document.c:773 src/document.c:781
 msgid "(readonly)"
 msgstr "(лише зчитуваня)"
 
-#: src/document.c:824 src/document.c:864
+#: src/document.c:832 src/document.c:872
 msgid "This file does not end with a valid extension\n"
-msgstr ""
-"Цей файл не має коректного розширення\n"
+msgstr "Цей файл не має коректного розширення\n"
 
-#: src/document.c:872
+#: src/document.c:880
 #, c-format
 msgid "The file %s was not found."
 msgstr "Файлу %s не знайдено."
@@ -791,8 +839,7 @@ msgstr ""
 "\n"
 "%s\n"
 "\n"
-"Переконайтесь, що ви маєте права для "
-"відкривання файлу."
+"Переконайтесь, що ви маєте права для відкривання файлу."
 
 #: src/file.c:252
 #, fuzzy, c-format
@@ -817,8 +864,8 @@ msgstr ""
 "\n"
 " %s \n"
 "\n"
-"з невідомої причини (1). Будь ласка, "
-"повідомте про це на submit@bugs.gnome.org"
+"з невідомої причини (1). Будь ласка, повідомте про це на submit@bugs.gnome."
+"org"
 
 #: src/file.c:290
 #, fuzzy, c-format
@@ -830,15 +877,15 @@ msgstr ""
 "Сталася помилка на відкриванні файлу.\n"
 "Переконайтеся що файл існує."
 
-#: src/file.c:482
+#: src/file.c:481
 msgid "Save As..."
 msgstr "Зберегти як..."
 
-#: src/file.c:552
+#: src/file.c:551
 msgid "The document contains no data."
 msgstr "Документ не містить даних."
 
-#: src/file.c:563
+#: src/file.c:562
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -852,105 +899,143 @@ msgstr ""
 "\n"
 " %s \n"
 "\n"
-"Переконайтесь, що вказаний вами шлях "
-"існує і ви маєте відповідні права на "
+"Переконайтесь, що вказаний вами шлях існує і ви маєте відповідні права на "
 "запис."
 
-#: src/file.c:577
+#: src/file.c:576
 #, fuzzy, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (1). Please report this Problem to "
-"submit@bugs.gnome.org"
+"Because of an unknown reason (1). Please report this Problem to submit@bugs."
+"gnome.org"
 msgstr ""
 "Не вдалось зберегти файл:\n"
 "\n"
 " %s \n"
 "\n"
-"з невідомої причини (1). Будь ласка, "
-"повідомте про це на submit@bugs.gnome.org"
+"з невідомої причини (1). Будь ласка, повідомте про це на submit@bugs.gnome."
+"org"
 
-#: src/file.c:595
+#: src/file.c:594
 #, fuzzy, c-format
 msgid ""
 "gedit was unable to save the file:\n"
 "\n"
 " %s \n"
 "\n"
-"Because of an unknown reason (2). Please report this Problem to "
-"submit@bugs.gnome.org"
+"Because of an unknown reason (2). Please report this Problem to submit@bugs."
+"gnome.org"
 msgstr ""
 "Не вдалось зберегти файл:\n"
 "\n"
 " %s \n"
 "\n"
-"з невідомої причини (2). Будь ласка, "
-"повідомте про це на submit@bugs.gnome.org"
+"з невідомої причини (2). Будь ласка, повідомте про це на submit@bugs.gnome."
+"org"
 
-#: src/file.c:697
+#: src/file.c:696
 msgid "Could not allocate the required memory."
-msgstr ""
-"Не вдалося виділити необхідну кількість "
-"пам'яті."
+msgstr "Не вдалося виділити необхідну кількість пам'яті."
 
-#: src/file.c:717
+#: src/file.c:716
 #, fuzzy
 msgid "Error in the pipe."
 msgstr "Помилка в каналі."
 
-#: src/file.c:828 src/file.c:835
-#, c-format
-msgid "Loaded file %s"
-msgstr "Завантажено файл %s"
-
-#: src/file.c:842
+#: src/file.c:841
 #, c-format
 msgid "Loaded %i files"
 msgstr "Завантажено %i файлів"
 
-#: src/file.c:908
+#: src/file.c:907
 msgid "Open File ..."
 msgstr "Відкрити файл..."
 
-#: src/file.c:1041
+#: src/file.c:1040
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
-msgstr ""
-"\"%s\" буде переписано. Ви хочете продовжити?"
+msgstr "\"%s\" буде переписано. Ви хочете продовжити?"
 
-#: src/file.c:1053
+#: src/file.c:1052
 msgid "Document has not been saved."
 msgstr "Документ не було збережено."
 
-#: src/file.c:1063
+#: src/file.c:1062
 msgid "Error saving file!"
 msgstr "Помилка при збереженні файла!"
 
-#: src/file.c:1192
+#: src/file.c:1191
 msgid "You can't revert an Untitled document\n"
-msgstr ""
-"Ви не можете відновити неназваний "
-"документ\n"
+msgstr "Ви не можете відновити неназваний документ\n"
 
-#: src/file.c:1205
+#: src/file.c:1204
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr ""
-"Ви впевнені, що хочете відмінити усі "
-"зміни?\n"
+"Ви впевнені, що хочете відмінити усі зміни?\n"
 "(%s)"
 
-#: src/file.c:1236
+#: src/file.c:1235
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
+msgstr "Файлу \"%s\" не існує.  Ви хочете створити його?"
+
+#: src/gedit.c:47
+msgid "Show window debugging messages."
 msgstr ""
-"Файлу \"%s\" не існує.  Ви хочете створити "
-"його?"
+
+#: src/gedit.c:50
+msgid "Show commands debugging messages."
+msgstr ""
+
+#: src/gedit.c:53
+msgid "Show document debugging messages."
+msgstr ""
+
+#: src/gedit.c:56
+msgid "Show file debugging messages."
+msgstr ""
+
+#: src/gedit.c:59
+msgid "Show plugin debugging messages."
+msgstr ""
+
+#: src/gedit.c:62
+msgid "Show prefs debugging messages."
+msgstr ""
+
+#: src/gedit.c:65
+msgid "Show printing debugging messages."
+msgstr ""
+
+#: src/gedit.c:68
+msgid "Show search debugging messages."
+msgstr ""
+
+#: src/gedit.c:71
+msgid "Show undo debugging messages."
+msgstr ""
+
+#: src/gedit.c:74
+msgid "Show view debugging messages."
+msgstr ""
+
+#: src/gedit.c:77
+msgid "Show recent debugging messages."
+msgstr ""
+
+#: src/gedit.c:80
+msgid "Turn on all debugging messages."
+msgstr ""
+
+#: src/gedit.c:159
+msgid "Cannot initialize gnome-vfs."
+msgstr ""
 
 #: src/menus.c:54
 msgid "Open (swap) .c/.h file"
@@ -960,12 +1045,13 @@ msgstr "Відкрити (обміняти) .c/.h файл"
 msgid "_New"
 msgstr "_Новий"
 
-#: src/menus.c:63 src/menus.c:240
+#: src/menus.c:63 src/menus.c:255
 msgid "Create a new document"
 msgstr "Створення нового документа"
 
 #: src/menus.c:68
-msgid "Save All"
+#, fuzzy
+msgid "Sav_e All"
 msgstr "Зберегти все"
 
 #: src/menus.c:69
@@ -973,7 +1059,8 @@ msgid "Save All Open Files"
 msgstr "Збереження усіх відкритих файлів"
 
 #: src/menus.c:74
-msgid "Revert"
+#, fuzzy
+msgid "_Revert"
 msgstr "Відновити"
 
 #: src/menus.c:83
@@ -994,7 +1081,8 @@ msgid "Print preview"
 msgstr "Перегляд друку"
 
 #: src/menus.c:102
-msgid "Print preview..."
+#, fuzzy
+msgid "Print pre_view..."
 msgstr "Перегляд друку"
 
 #: src/menus.c:103
@@ -1002,146 +1090,141 @@ msgid "Preview data to be printed"
 msgstr "Перегляд даних, що будуть надруковані"
 
 #: src/menus.c:110
-msgid "Close All"
+#, fuzzy
+msgid "C_lose All"
 msgstr "Закрити все"
 
 #: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Закриття усіх відкритих файлів"
 
-#: src/menus.c:138
+#: src/menus.c:150
 msgid "Goto _Line..."
 msgstr "Перейти на рядок..."
 
-#: src/menus.c:139
+#: src/menus.c:151
 msgid "Go to a specific line number"
 msgstr "Перейти на вказаний рядок"
 
-#: src/menus.c:154
-msgid "File _Info"
-msgstr "Інформація про файл"
-
-#: src/menus.c:155
-msgid "Get the basic file info"
-msgstr "Отримати основну інформацію про файл"
-
-#: src/menus.c:167
+#: src/menus.c:173
 msgid "_Add View"
 msgstr "_Додати вигляд"
 
-#: src/menus.c:168
+#: src/menus.c:174
 msgid "Add a new view of the document"
 msgstr "Додавання нового вигляду документа"
 
-#: src/menus.c:170
+#: src/menus.c:176
 msgid "_Remove View"
 msgstr "_Видалити вигляд"
 
-#: src/menus.c:171
+#: src/menus.c:177
 msgid "Remove view of the document"
 msgstr "Видалення вигляду документа"
 
-#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402
+#: src/menus.c:220
+#, fuzzy
+msgid "Se_arch"
+msgstr "Шукати: "
+
+#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:500
+#: src/window.c:677
 msgid "_Plugins"
 msgstr "До_повненя"
 
-#: src/menus.c:226
+#: src/menus.c:241
 msgid "_Documents"
 msgstr "Документи"
 
-#: src/menus.c:240
+#: src/menus.c:255
 msgid "New"
 msgstr "Новий"
 
-#: src/menus.c:244
-msgid "Open"
-msgstr "Відкрити"
-
-#: src/menus.c:244
+#: src/menus.c:259
 msgid "Open a file"
 msgstr "Відкрити файл"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/menus.c:248
+#: src/menus.c:263
 msgid "Save the current file"
 msgstr "Зберегти поточний файл"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close"
 msgstr "Закрити"
 
-#: src/menus.c:252
+#: src/menus.c:267
 msgid "Close the current file"
 msgstr "Закрити поточний файл"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print"
 msgstr "Друкувати"
 
-#: src/menus.c:256
+#: src/menus.c:271
 msgid "Print the current file"
 msgstr "Друкувати поточний файл"
 
-#: src/menus.c:261
+#: src/menus.c:276
 msgid "Undo last operation"
 msgstr "Відмінити останню операцію"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo"
 msgstr "Відновити"
 
-#: src/menus.c:265
+#: src/menus.c:280
 msgid "Redo last operation"
 msgstr "Відновити відмінену операцію"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut"
 msgstr "Вирізати"
 
-#: src/menus.c:270
+#: src/menus.c:285
 msgid "Cut the selection"
 msgstr "Вирізати вибране"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy"
 msgstr "Скопіювати"
 
-#: src/menus.c:274
+#: src/menus.c:289
 msgid "Copy the selection"
 msgstr "Скопіювати вибране"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste"
 msgstr "Вставити"
 
-#: src/menus.c:278
+#: src/menus.c:293
 msgid "Paste the clipboard"
 msgstr "Вставити буфер обміну"
 
-#: src/menus.c:283
+#: src/menus.c:298
 msgid "Search for a string"
 msgstr "Пошук радка"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit"
 msgstr "Вийти"
 
-#: src/menus.c:288
+#: src/menus.c:303
 msgid "Exit the program"
 msgstr "Вийти з програми"
 
 #: src/plugin.c:107
-msgid "Manager ..."
+#, fuzzy
+msgid "_Manager ..."
 msgstr "Менеджер..."
 
 #: src/plugin.c:108
-msgid "Add/Remove installed plugins"
-msgstr ""
-"Додавання та видалення встановлених "
-"доповнень"
+#, fuzzy
+msgid "Manage available plugin modules"
+msgstr "Наявні доповнення"
 
 #: src/plugin.c:195
 #, c-format
@@ -1187,45 +1270,63 @@ msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
 " Do you want to specify a new location for %s?"
 msgstr ""
-"%sВи не зможете використовувати "
-"доповнення \"%s\" без %s. \n"
+"%sВи не зможете використовувати доповнення \"%s\" без %s. \n"
 " Ви хочете вказати нове розміщення %s?"
 
 #: src/plugin.c:322
 #, c-format
 msgid "Error, unable to open module file, %s"
-msgstr ""
-"Помилка, не вдалося відкрити файл модуля, "
-"%s"
+msgstr "Помилка, не вдалося відкрити файл модуля, %s"
 
 #: src/plugin.c:332
 msgid "Error, plugin does not contain init_plugin function."
-msgstr ""
-"Помилка, доповнення не містить функції "
-"init_plugin."
+msgstr "Помилка, доповнення не містить функції init_plugin."
 
 #: src/plugin.c:345
 msgid "Error, init_plugin returned an error"
-msgstr ""
-"Помилка, функція init_plugin повернула помилку"
+msgstr "Помилка, функція init_plugin повернула помилку"
 
 #: src/plugin.c:392
 msgid "Error, plugin is still in use"
 msgstr "Помилка, доповнення використовується"
 
-#: src/print.c:229
+#: src/print.c:230
 #, fuzzy
 msgid "Print Document"
 msgstr "Документи"
 
-#: src/print.c:237
+#: src/print.c:238
 msgid "Pages"
 msgstr "Сторінки"
 
-#: src/print.c:285
+#: src/print.c:286
 #, fuzzy
 msgid "gedit: Print Preview\n"
 msgstr "gedit (%s): Попередний передгляд друку"
+
+#: src/print-doc.c:505
+#, c-format
+msgid "Page: %i/%i"
+msgstr "Сторінка: %i/%i"
+
+#: src/print-util.c:163 src/print-util.c:178
+#, c-format
+msgid ""
+"gedit could not find the font \"%s\".\n"
+"gedit is unable to print without this font installed."
+msgstr ""
+"Не вдалося знайти шрифт \"%s\".\n"
+"Без цього шрифту друк неможливий."
+
+#: src/print-util.c:219
+#, fuzzy
+msgid "Printing .."
+msgstr "Друк"
+
+#: src/print-util.c:230
+#, fuzzy
+msgid "Printing ..."
+msgstr "Друк"
 
 #. xgettext translators: Use the name of the stock
 #. * Menu item for "File"	if it is not the same, we are going to
@@ -1250,8 +1351,7 @@ msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
 msgstr ""
-"Неможливо підрахувати кількість рядків, "
-"якщо активна інша операція пошуку, "
+"Неможливо підрахувати кількість рядків, якщо активна інша операція пошуку, "
 "закрийте діалог пошуку."
 
 #: src/search.c:410
@@ -1279,15 +1379,46 @@ msgstr ""
 "Поточний рядок: %i\n"
 "Поточний стовпчик: %i"
 
-#: src/view.c:994
+#: src/view.c:908
 msgid "You can't remove the last view of a document."
-msgstr ""
-"Ви не можете видалити останній вигляд "
-"документу."
+msgstr "Ви не можете видалити останній вигляд документу."
+
+#, fuzzy
+#~ msgid ""
+#~ "Plugin Name: %s\n"
+#~ "Author: %s\n"
+#~ "Description: %s\n"
+#~ msgstr ""
+#~ "Назва доповнення: %s\n"
+#~ "Автор: %s\n"
+#~ "Опис: %s\n"
+
+#~ msgid "Add >"
+#~ msgstr "Додати >"
+
+#~ msgid "< Remove"
+#~ msgstr "< Видалити"
+
+#~ msgid "Add All >>"
+#~ msgstr "Додати всі >>"
+
+#~ msgid "<< Remove All"
+#~ msgstr "<< Видалити всі"
+
+#~ msgid "Installed Plugins"
+#~ msgstr "Встановлені доповнення"
+
+#~ msgid "File _Info"
+#~ msgstr "Інформація про файл"
+
+#~ msgid "Get the basic file info"
+#~ msgstr "Отримати основну інформацію про файл"
+
+#~ msgid "Add/Remove installed plugins"
+#~ msgstr "Додавання та видалення встановлених доповнень"
 
 #~ msgid "File to use as body of message : "
-#~ msgstr ""
-#~ "Файл, що слугуватиме тілом повідомлення: "
+#~ msgstr "Файл, що слугуватиме тілом повідомлення: "
 
 #~ msgid "Sendmail found at :"
 #~ msgstr "Sendmail знайдено на: "
@@ -1305,16 +1436,6 @@ msgstr ""
 #~ msgstr "Каталог  "
 
 #~ msgid ""
-#~ "gedit could not find the font \"%s\".\n"
-#~ "gedit is unable to print without this font installed."
-#~ msgstr ""
-#~ "Не вдалося знайти шрифт \"%s\".\n"
-#~ "Без цього шрифту друк неможливий."
-
-#~ msgid "Page: %i/%i"
-#~ msgstr "Сторінка: %i/%i"
-
-#~ msgid ""
 #~ "An error was encountered while opening the file:\n"
 #~ "\n"
 #~ "%s\n"
@@ -1328,6 +1449,5 @@ msgstr ""
 #~ "%s\n"
 #~ "\n"
 #~ "\n"
-#~ "Переконайтеся, що він не "
-#~ "використовується іншою програмою\n"
+#~ "Переконайтеся, що він не використовується іншою програмою\n"
 #~ "та цей файл не порожній."
