@@ -23,9 +23,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
@@ -160,15 +158,10 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 
 	/* misc settings */
 	doc->filename = fname;
-	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)g_basename(fname));
-	#else
-	gtk_label_set(GTK_LABEL(doc->tab_label), strrchr (fname, '/'));
-	#endif
 	
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
 	/* Copy the buffer if split-screening enabled */
 	if (doc->split_screen) {
 		int pos;
@@ -182,7 +175,6 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 		gtk_text_thaw(GTK_TEXT(doc->split_screen));
 		g_free (buf);
 	}
-#endif
 	
 	/* enable document change detection */
 	doc->changed = FALSE;
@@ -257,12 +249,9 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 		g_free(doc->filename);
 	doc->filename = g_strdup(fname);
 	doc->changed = FALSE;
-	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	gtk_label_set(GTK_LABEL(doc->tab_label),
 		(const char *)g_basename(doc->filename));
-	#else
-	gtk_label_set(GTK_LABEL(doc->tab_label), strrchr(doc->filename, '/'));
-	#endif
+
 	
 	if (!doc->changed_id)
 		doc->changed_id =
@@ -277,15 +266,10 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 	gtk_window_set_title (GTK_WINDOW (window->window), title);
 	g_free (title);
 
-	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	flw_update_entry(window, doc,
 		gtk_notebook_current_page(GTK_NOTEBOOK(window->notebook)),
 		(char *)g_basename(fname));
-	#else
-	flw_update_entry(window, doc,
-		gtk_notebook_current_page(GTK_NOTEBOOK(window->notebook)),
-		strrchr(fname, '/'));	
-	#endif
+
 	
 	gE_msgbar_set(window, MSGBAR_FILE_SAVED);
 	return 0;
@@ -490,11 +474,7 @@ flw_append_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 	}
 
 	if (text && strlen(text) > 0) {
-	#ifdef GTK_HAVE_FEATURES_1_1_0
 		rownfo[2] =  (char *)g_basename(text);
-	#else
-		rownfo[2] = strrchr (text, '/');
-	#endif
 	} else {
 		rownfo[1] = _(UNKNOWN);
 		rownfo[2] = _(UNTITLED);

@@ -19,9 +19,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
+
 
 #include <gtk/gtk.h>
 #include <glib.h>
@@ -32,31 +31,10 @@
 #include "gE_prefs_box.h"
 #include "gE_document.h"
 
-#ifdef WITHOUT_GNOME
-typedef struct _gE_Prop_Box{
-	GtkWidget *window;
-	GtkWidget *notebook;
-	GtkWidget *ok_button;	  
-	GtkWidget *apply_button;   
-	GtkWidget *close_button;  
-	GtkWidget *help_button;	
-	
-	 GtkWidget *gen_vbox;
-	GtkWidget *prn_vbox;
-	GtkWidget *fnt_vbox;
-	
-	GtkWidget *separator;
 
-} gE_Prop_Box;
-#endif
 
 typedef struct _gE_prefs_data {
-	#ifndef WITHOUT_GNOME
-	 GnomePropertyBox *pbox;
-	#else
-	 gE_Prop_Box *pbox;
-	#endif
-	
+	GnomePropertyBox *pbox;
 	
 	/* Font Seleftion */
 	GtkWidget *fontsel;
@@ -79,18 +57,11 @@ typedef struct _gE_prefs_data {
 } gE_prefs_data;
 
 static gE_prefs_data *prefs;
-#ifdef WITHOUT_GNOME
-gE_Prop_Box *pbox;
-#endif
+
 
 void cancel()
 {
-  #ifndef WITHOUT_GNOME
   gtk_widget_destroy (GTK_WIDGET (prefs->pbox));
-  #else
-  gtk_widget_hide (GTK_WIDGET (pbox->window));
-  g_free (pbox);
-  #endif
   g_free(prefs);
   prefs = NULL;
 }
@@ -105,11 +76,8 @@ gint i;
      else
        gtk_widget_show (w->statusbox);
        
-    #ifdef GTK_HAVE_FEATURES_1_1_0
      /* if (w->splitscreen == TRUE) */
        gE_document_set_split_screen (gE_document_current(w), (gint) w->splitscreen);
-    #endif
-    
     
   style = gtk_style_new();
   gdk_font_unref (style->font);
@@ -118,10 +86,9 @@ gint i;
   gtk_widget_push_style (style);    
   for (i = 0; i < g_list_length (w->documents); i++)
   {
-  	#ifdef GTK_HAVE_FEATURES_1_1_0	 
   	gtk_widget_set_style(GTK_WIDGET(
   		((gE_document *) g_list_nth_data (w->documents, i))->split_screen), style);
-  	#endif
+
   	gtk_widget_set_style(GTK_WIDGET(
   		((gE_document *) g_list_nth_data (w->documents, i))->text), style);
   }
@@ -131,15 +98,7 @@ gint i;
   
 }
 
-void gE_apply(
-#ifndef WITHOUT_GNOME
-#ifndef WITHOUT_GNOME
-GnomePropertyBox *pbox,
-#else
-gE_Prop_Box *pbox,
-#endif
-#endif
- gint page, gE_data *data)
+void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 {
   FILE *file;
   gchar *rc;
@@ -148,9 +107,7 @@ gE_Prop_Box *pbox,
   /* General Settings */
   data->window->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
   data->window->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
-  #ifdef GTK_HAVE_FEATURES_1_1_0
   data->window->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
-  #endif
 
   /* Print Settings */
   data->window->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
@@ -201,9 +158,6 @@ static GtkWidget *general_page_new()
 
   main_vbox = gtk_vbox_new (FALSE, 0);
   gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
-  #ifdef WITHOUT_GNOME
-  gtk_box_pack_start (GTK_BOX(pbox->gen_vbox), main_vbox, TRUE, TRUE, 0);
-  #endif
   gtk_widget_show (main_vbox);
   
   frame = gtk_frame_new (_("Appearance"));
@@ -298,10 +252,8 @@ static GtkWidget *print_page_new()
 
 void font_sel_ok (GtkWidget	*w, GtkWidget *fsel)
 {
-#ifdef GTK_HAVE_FEATURES_1_1_0	
   gtk_entry_set_text(GTK_ENTRY(prefs->font),
        gtk_font_selection_dialog_get_font_name (GTK_FONT_SELECTION_DIALOG(fsel)));
-#endif
   gtk_widget_destroy (fsel);
 }
 
@@ -310,7 +262,6 @@ void font_sel_cancel (GtkWidget *w, GtkWidget *fsel)
   gtk_widget_destroy (fsel);
 }
 
-#ifdef GTK_HAVE_FEATURES_1_1_0	
 void font_sel()
 {
        GtkWidget *fs;
@@ -353,7 +304,6 @@ void font_sel()
         gtk_widget_destroy (prefs->fontsel);*/
         
 }
-#endif /* GTK_HAVE_FEATURES_1_1_0 */
 
 static GtkWidget *font_page_new()
 {
@@ -382,7 +332,6 @@ static GtkWidget *font_page_new()
   gtk_box_pack_start(GTK_BOX(hbox), prefs->font, TRUE, TRUE, 0);
   gtk_widget_show (prefs->font);
     
-  #ifdef GTK_HAVE_FEATURES_1_1_0	
   button = gtk_button_new_with_label (_("Select..."));
   gtk_signal_connect (GTK_OBJECT(button), "clicked",
    			  GTK_SIGNAL_FUNC(font_sel),
@@ -390,7 +339,6 @@ static GtkWidget *font_page_new()
   
   gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 2);
   gtk_widget_show(button);
-  #endif
   
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 0);
@@ -406,131 +354,16 @@ static GtkWidget *font_page_new()
   return main_vbox;
 }
 
-/* -------- */
-#ifdef WITHOUT_GNOME
-void apply_close(gE_data *data)
-{
-  /*gE_apply(NULL, NULL,data);*/
-
-  cancel();
-
-}
-
-void gE_property_box_new(gE_data *data)
-{
-  GtkWidget *hbox, *vbox, *label;
 
 
- 
-  pbox = g_malloc(sizeof(gE_Prop_Box));
-  pbox->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  gtk_widget_set_usize (GTK_WIDGET(pbox->window), 500, 400);
-  
-      gtk_signal_connect (GTK_OBJECT (pbox->window), "destroy",
-			  GTK_SIGNAL_FUNC(cancel),
-			  NULL);
-  gtk_signal_connect (GTK_OBJECT (pbox->window), "delete_event",
-		      GTK_SIGNAL_FUNC (gtk_false), NULL);
-		      
-      gtk_window_set_title (GTK_WINDOW (pbox->window), _("Preferences"));
-      gtk_container_border_width (GTK_CONTAINER (pbox->window), 0);
- 
- 	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_container_add(GTK_CONTAINER(pbox->window), vbox);
-	gtk_widget_show(vbox);
-
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(GTK_BOX(hbox)), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show(hbox);
-
-  pbox->notebook = gtk_notebook_new();
-  gtk_box_pack_start(GTK_BOX(hbox), pbox->notebook, TRUE, TRUE, 0);
-  gtk_widget_show (pbox->notebook);
- 
-  /* General Settings */
-  label = gtk_label_new ("General");
-  pbox->gen_vbox = gtk_vbox_new (FALSE, 0);
-  gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), pbox->gen_vbox, label);
-/*  gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook), general_page_new(), label);*/
-  gtk_widget_show(pbox->gen_vbox);
-  gtk_widget_show(label);
-  
-  general_page_new();
-  
-  
-  /* Print Settings */
-  label = gtk_label_new ("Print");
-  gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
-                               print_page_new(), label);
-
-  /* Font Settings */
-  label = gtk_label_new ("Font");
-  gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
-                                           font_page_new(), label);
- gtk_widget_show (pbox->notebook);
-  get_prefs(data); 
- 
- 
- 	hbox = gtk_hbox_new(FALSE, 10);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show(hbox);
-
-	pbox->separator = gtk_hseparator_new();
-	gtk_box_pack_start(GTK_BOX(vbox), pbox->separator, FALSE, TRUE, 0);
-	gtk_widget_show(pbox->separator);
- 
-	hbox = gtk_hbox_new(FALSE, 10);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
-	gtk_widget_show(hbox);  
-  
-  pbox->ok_button = gtk_button_new_with_label ("OK");
-  gtk_signal_connect (GTK_OBJECT (pbox->ok_button), "clicked",
-			  GTK_SIGNAL_FUNC (gE_apply),
-			  data);
-  gtk_signal_connect (GTK_OBJECT (pbox->ok_button), "clicked",
-			  GTK_SIGNAL_FUNC (cancel),
-			  NULL);
-  gtk_box_pack_start(GTK_BOX(hbox), pbox->ok_button, TRUE, TRUE, 0);
-  gtk_widget_show (pbox->ok_button);
-
-  pbox->apply_button = gtk_button_new_with_label ("Apply");
-  gtk_signal_connect (GTK_OBJECT (pbox->apply_button), "clicked",
-			  GTK_SIGNAL_FUNC (gE_apply),
-			  data);
-  gtk_box_pack_start(GTK_BOX(hbox), pbox->apply_button, TRUE, TRUE, 0);
-  gtk_widget_show (pbox->apply_button);
-
-  pbox->close_button = gtk_button_new_with_label ("Close");
-  gtk_signal_connect (GTK_OBJECT (pbox->close_button), "clicked",
-			  GTK_SIGNAL_FUNC (cancel),
-			  NULL);
-  gtk_box_pack_start(GTK_BOX(hbox), pbox->close_button, TRUE, TRUE, 0);
-  gtk_widget_show (pbox->close_button);
-  
-
-  gtk_widget_show_all (pbox->window);
-
-}  
-#endif
-
-
-/* -------- */
-#ifndef WITHOUT_GNOME
 void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 {
   gnome_property_box_changed (pbox);
 }
-#endif
-
 
 void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 {
-#ifndef WITHOUT_GNOME
   static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
-#endif
   GtkWidget *label;
 
   
@@ -538,11 +371,6 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
   prefs = g_malloc (sizeof(gE_prefs_data));
 
- 
- #ifdef WITHOUT_GNOME
-    gE_property_box_new (data);
-  #endif
-#ifndef WITHOUT_GNOME
   if (!prefs)
     {
       /*gdk_window_raise (GTK_WIDGET (prefs->pbox)->window);*/
@@ -605,7 +433,6 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
 
   gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
-
- #endif                                    
+                                    
 }
 

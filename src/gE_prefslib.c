@@ -25,9 +25,7 @@
 #include <gtk/gtk.h>
 #include <fcntl.h>
 #include <unistd.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
 
 #include "gE_prefslib.h"
 GList *gE_prefs = NULL;
@@ -257,26 +255,6 @@ void gE_prefs_close ()
 
 char *gE_prefs_get_data (char *name)
 {
-#ifdef WITHOUT_GNOME
-
-	int i;
-	char *value;
-	gE_pref *pref;
-
-	for (i = 0; i < g_list_length (gE_prefs); i++)
-	{
-		pref = g_list_nth_data (gE_prefs, i);
-		if (strcmp (name, pref->name) == 0)
-		{
-			value = g_strdup (pref->value);
-			return value;
-		}
-	}
-
-	value = gE_prefs_get_default (name);
-	return value;
-
-#else /* WITHOUT_GNOME */
 
 	char *value;
 	gnome_config_push_prefix("/gEdit/Global/");
@@ -287,46 +265,16 @@ char *gE_prefs_get_data (char *name)
 		value = gE_prefs_get_default (name);
 	return value;
 
-#endif
 }
 
 void gE_prefs_set_data (char *name, char *value)
 {
-
-#ifdef WITHOUT_GNOME
-
-	gE_pref *pref;
-	int i;
-	char *new_value;
-
-	for (i = 0; i < g_list_length (gE_prefs); i++)
-	{
-		pref = g_list_nth_data (gE_prefs, i);
-		if (strcmp (name, pref->name) == 0)
-		{
-			g_free (pref->value);
-			new_value = g_strdup (value);
-			pref->value = new_value;
-			return;
-		}
-	}
-	if ((pref = g_malloc0 (sizeof (gE_pref))) == NULL)
-	{
-		printf ("gE_prefs_set_data: Allocation error.\n");
-		return;
-	}
-	pref->name = g_strdup (name);
-	pref->value = g_strdup (value);
-	gE_prefs = g_list_append (gE_prefs, pref);
-
-#else
 
 	gnome_config_push_prefix ("/gEdit/Global/");
 	gnome_config_set_string (name, value);
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 	
-#endif
 }
 
 
@@ -342,10 +290,8 @@ char *gE_prefs_get_default (char *name)
 		{ "tb pix", "1" },
 		{ "tb text", "1" },
 		{ "show statusbar", "1" },
-#ifdef GTK_HAVE_FEATURES_1_1_0
 		{ "tb relief", "0" },
 		{ "splitscreen", "0" },
-#endif
 		{ NULL, NULL }
 	};
 
@@ -376,21 +322,6 @@ void gE_prefs_set_char(char *name, char *value)
 int gE_prefs_get_int(char *name)
 {
 
-#ifdef WITHOUT_GNOME
-
-	int i;
-	char *value;
-	
-	value = gE_prefs_get_data (name);
-	if (value == NULL)
-		return 0;
-
-	i = atoi (value);
-	g_free (value);
-	return i;
-
-#else
-
 	int i;
 	char *value;
 	gnome_config_push_prefix ("/gEdit/Global/");
@@ -406,28 +337,15 @@ int gE_prefs_get_int(char *name)
 */
 	return i;
 	
-#endif
 }
 
 void gE_prefs_set_int(char *name, int value) 
 {
-
-#ifdef WITHOUT_GNOME
-
-	char *buf;
-
-	buf = g_malloc0(sizeof(value));
-	sprintf(buf, "%d", value);
-	gE_prefs_set_data (name, buf);
-	g_free (buf);
-
-#else
 
 	gnome_config_push_prefix ("/gEdit/Global/");
 	gnome_config_set_int (name, value);
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 
-#endif
 }
 

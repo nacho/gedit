@@ -42,14 +42,10 @@ extern gE_document *gE_document_new(gE_window *window);
 extern gE_document *gE_document_new_with_file (gE_window *window, gchar *filename);
 extern gE_document *gE_document_current(gE_window *window);
 extern void gE_document_set_word_wrap (gE_document *doc, gint word_wrap);
-#ifdef GTK_HAVE_FEATURES_1_1_0	
 extern void gE_document_set_line_wrap (gE_document *doc, gint line_wrap);
-#endif
 extern void gE_document_set_read_only (gE_document *doc, gint read_only);
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
 extern void gE_document_set_split_screen (gE_document *doc, gint split_screen);
-#endif
 extern void gE_msgbar_set(gE_window *window, char *msg);
 extern gboolean gE_msgbar_clear(gpointer data);
 

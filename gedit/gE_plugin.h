@@ -118,13 +118,9 @@ extern selection_range gE_plugin_document_get_selection (gint);
 extern void gE_plugin_set_auto_indent(gint, gint);
 extern void gE_plugin_set_status_bar(gint, gint);
 extern void gE_plugin_set_word_wrap(gint, gint);
-#ifdef GTK_HAVE_FEATURES_1_1_0
 extern void gE_plugin_set_line_wrap(gint, gint);
-#endif
 extern void gE_plugin_set_read_only(gint, gint);
-#ifdef GTK_HAVE_FEATURES_1_1_0
 extern void gE_plugin_set_split_screen(gint, gint);
-#endif
 
 extern gboolean gE_plugin_program_quit(void);
 extern GtkText *gE_plugin_get_widget(gint);

@@ -30,10 +30,7 @@
 #include "gE_document.h"
 #include "gE_files.h"
 #include "commands.h"
-
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
 
 GList *plugins;
 GHashTable *win_int_to_pointer,
@@ -64,13 +61,9 @@ start_plugin(GtkWidget * widget, gE_data * data)
    callbacks.document.set_auto_indent = gE_plugin_set_auto_indent;
    callbacks.document.set_status_bar = gE_plugin_set_status_bar;
    callbacks.document.set_word_wrap = gE_plugin_set_word_wrap;
-   #ifdef GTK_HAVE_FEATURES_1_1_0
    callbacks.document.set_line_wrap = gE_plugin_set_line_wrap;
-   #endif
    callbacks.document.set_read_only = gE_plugin_set_read_only;
-   #ifdef GTK_HAVE_FEATURES_1_1_0
    callbacks.document.set_split_screen = gE_plugin_set_split_screen;
-   #endif
 
    callbacks.text.get = gE_plugin_text_get;
    callbacks.program.quit = gE_plugin_program_quit;
@@ -101,7 +94,8 @@ add_plugin_to_menu(gE_window * window, plugin_info * info)
 {
    gE_data *data = g_malloc0(sizeof(gE_data));
 
-#ifdef WITHOUT_GNOME
+#ifdef WITHOUT_GNOME /* I would like to keep this WITHOUT_GNOME.. for future Plugins menu
+				references.. Thanks --Alex ' */
    GtkMenuEntry *entry = g_malloc0(sizeof(GtkMenuEntry));
 
    entry->path = g_malloc0(strlen(info->menu_location) + strlen("Plugins/") + 1);
@@ -344,7 +338,6 @@ gE_plugin_set_word_wrap(gint docid, gint word_wrap)
    gE_document_set_word_wrap(document, word_wrap);
 }
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
 void 
 gE_plugin_set_line_wrap(gint docid, gint line_wrap)
 {
@@ -352,7 +345,6 @@ gE_plugin_set_line_wrap(gint docid, gint line_wrap)
 
    gE_document_set_line_wrap(document, line_wrap);
 }
-#endif
 
 void 
 gE_plugin_set_read_only(gint docid, gint read_only)
@@ -362,7 +354,6 @@ gE_plugin_set_read_only(gint docid, gint read_only)
    gE_document_set_read_only(document, read_only);
 }
 
-#ifdef GTK_HAVE_FEATURES_1_1_0
 void 
 gE_plugin_set_split_screen(gint docid, gint split_screen)
 {
@@ -370,7 +361,6 @@ gE_plugin_set_split_screen(gint docid, gint split_screen)
 
    gE_document_set_split_screen(document, split_screen);
 }
-#endif
 
 
 /* Program Related functions */

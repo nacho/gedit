@@ -25,9 +25,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
 #include <gtk/gtk.h>
 #include <time.h>
 #include "main.h"
@@ -108,21 +106,13 @@ file_print_cb(GtkWidget *widget, gpointer cbdata)
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 5);
 	gtk_widget_show(hbox);
 
-#ifdef WITHOUT_GNOME
-	tmp = gtk_button_new_with_label("OK");
-#else
 	tmp = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-#endif
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 15);
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(file_print_execute), data);
 	gtk_widget_show(tmp);
 
-#ifdef WITHOUT_GNOME
-	tmp = gtk_button_new_with_label("Cancel");
-#else
 	tmp = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-#endif
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 15);
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(print_destroy), data->window);
@@ -253,13 +243,9 @@ get_filename(gE_data *data)
 		sprintf(msg, " '%s' %s ", 
 			(doc->filename) ? doc->filename : _(UNTITLED), PRINT_MSG);
 
-		#ifdef WITHOUT_GNOME
-		ret = ge_dialog(title, msg, 3, buttons, 3, NULL, NULL, TRUE);
-		#else
 		ret = gnome_dialog_run_and_close ((GnomeDialog *)
 			gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, 
 				buttons[0], buttons[1], buttons[2], NULL)) + 1;
-		#endif
 		
 		g_free(msg);
 		g_free(title);

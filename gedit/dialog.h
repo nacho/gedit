@@ -23,15 +23,6 @@
  * this assumes that the GNOME_STOCK_BUTTON_* defs are strings.  obviously,
  * will need to be updated if GNOME_STOCK_BUTTON_* changes type.
  */
-#ifdef WITHOUT_GNOME
-#define GE_BUTTON_OK     "Ok"
-#define GE_BUTTON_CANCEL "Cancel"
-#define GE_BUTTON_YES    "Yes"
-#define GE_BUTTON_NO     "No"
-#define GE_BUTTON_CLOSE  "Close"
-#define GE_BUTTON_APPLY  "Apply"
-#define GE_BUTTON_HELP   "Help"
-#else
 #define GE_BUTTON_OK     GNOME_STOCK_BUTTON_OK
 #define GE_BUTTON_CANCEL GNOME_STOCK_BUTTON_CANCEL
 #define GE_BUTTON_YES    GNOME_STOCK_BUTTON_YES
@@ -39,7 +30,6 @@
 #define GE_BUTTON_CLOSE  GNOME_STOCK_BUTTON_CLOSE
 #define GE_BUTTON_APPLY  GNOME_STOCK_BUTTON_APPLY
 #define GE_BUTTON_HELP   GNOME_STOCK_BUTTON_HELP
-#endif
 
 extern int ge_dialog(char *title, char *msg, short num, char **buttons,
 	short dflt, GtkSignalFunc **cbs, void **cbd, gboolean blocking);

@@ -19,9 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
 #include <gtk/gtk.h>
 #include <glib.h>
 #include <time.h>
@@ -239,11 +237,8 @@ gE_prefs_window(gE_window *window)
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
 
-#ifdef WITHOUT_GNOME
-	tmp = gtk_button_new_with_label("Ok");
-#else
 	tmp = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
-#endif
+
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(ok_prefs), window);
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 0);
@@ -251,11 +246,8 @@ gE_prefs_window(gE_window *window)
 	gtk_widget_grab_default(tmp);
 	gtk_widget_show(tmp);
 
-#ifdef WITHOUT_GNOME
-	tmp = gtk_button_new_with_label("Cancel");
-#else
 	tmp = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-#endif
+
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
 		GTK_SIGNAL_FUNC(cancel_prefs), (gpointer) "button");
 	gtk_box_pack_start(GTK_BOX(hbox), tmp, TRUE, TRUE, 0);
@@ -293,10 +285,8 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 	gE_prefs_set_int("toolbar", (gint) window->have_toolbar);
 	gE_prefs_set_int("tb text", (gint) window->have_tb_text);
 	gE_prefs_set_int("tb pix", (gint) window->have_tb_pix);
-#ifdef GTK_HAVE_FEATURES_1_1_0
 	gE_prefs_set_int("tb relief", (gint) window->use_relief_toolbar);
 	gE_prefs_set_int("splitscreen", (gint) window->splitscreen);
-#endif
 
 	gE_prefs_set_char("font", window->font);
 	if (window->print_cmd == "")
@@ -314,10 +304,8 @@ void gE_get_settings(gE_window *w)
 	 w->have_toolbar = gE_prefs_get_int("toolbar");
 	 w->have_tb_text = gE_prefs_get_int("tb text");
 	 w->have_tb_pix = gE_prefs_get_int("tb pix");
-#ifdef GTK_HAVE_FEATURES_1_1_0
 	 w->use_relief_toolbar = gE_prefs_get_int("tb relief");
 	 w->splitscreen = gE_prefs_get_int("splitscreen");
-#endif
 	 w->font = gE_prefs_get_char("font");
 	 if (w->font == NULL)
 	   w->font = "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1";

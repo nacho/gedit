@@ -1,3 +1,35 @@
+1999-02-03  Alex Roberts <bse@dial.pipex.com>
+
+	* src/search.c:
+	  src/gE_prefs.c:
+	  src/gE_document.h:
+	  src/gE_prefs_box.c:
+	  src/gE_files.c:
+	  src/gE_plugin.h:
+	  src/gE_plugin_api.c:
+	  src/gE_about.c: 
+	  src/dialog.[ch]:
+	  src/toolbar.h: Purged Gtk-only code, and removed references to
+	  '#ifdef GTK_HAVE_FEATURES_1_1_0' (as we are going Gnome, and Gnome
+	  requires  Gtk+ 1.1.x)..
+	  (I left #ifdef WITHOUT_GNOME in gE_plugin_api.c (the menus part), for
+	  future menu references, it could be useful in the futre)
+
+	* gE_about.c: Added a 'Special Thanks To' to the About Box.. Gtk-Only
+	  had it, why shouldn't Gnome-only?
+	
+	* main.h:
+	  gE_about.c: Use VERSION defined in config.h
+	
+	* TODO: 
+	  KNOWNBUGS: Updated it
+	
+	* FAQ: Added.. (Add Q/A's when they are asked/answered :)
+	
+	* Makefile.am: Added FAQ
+	
+	* makeconfig.pl: Version is 0.4.9!
+	
 1999-02-03  Chris Lahey  <clahey@umich.edu>
 
 	* autogen.sh: Changed it to look for makeconfig.pl instead of

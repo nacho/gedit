@@ -103,11 +103,8 @@ ge_dialog(char *title, char *msg, short num, char **buttons, short dflt,
 	dlgdata->cbd = cbd;
 
 	for (i = 0; i < num; i++) {
-#ifdef WITHOUT_GNOME
-		tmp = gtk_button_new_with_label(buttons[i]);
-#else
+
 		tmp = gnome_stock_button(buttons[i]);
-#endif
 		gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dlg)->action_area),
 			tmp, TRUE, TRUE, 2);
 

@@ -19,11 +19,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <gtk/gtk.h>
-#include <config.h>
-#ifndef WITHOUT_GNOME
 #include <gnome.h>
-#endif
+#include <gtk/gtk.h>
+#include <glib.h>
+#include <config.h>
+
 
 #include "main.h"
 #include "gE_document.h"
@@ -147,16 +147,10 @@ void count_lines_cb (GtkWidget *widget, gpointer cbwindow)
 	
 	msg = g_malloc0 (200);
 	sprintf (msg, _("Total Lines: %i\nCurrent Line: %i"), total_lines, line_number);
-	#ifdef WITHOUT_GNOME
-	ge_dialog (_("Line Information"),
-		msg,
-		1, buttons,
-		1, NULL, NULL, TRUE);
-	#else
+	
 	gnome_dialog_run_and_close ((GnomeDialog *)
 		gnome_message_box_new (msg, GNOME_MESSAGE_BOX_INFO,
 			buttons[0], NULL));
-	#endif
 }
 
 static void
@@ -418,13 +412,9 @@ search_create_dialog(gE_window *window, gE_search *options, gboolean replace)
 	options->prompt_before_replacing =
 		gtk_check_button_new_with_label(_("Prompt before replacing"));
 
-#ifdef WITHOUT_GNOME
-	ok = gtk_button_new_with_label("OK");
-	cancel = gtk_button_new_with_label("Cancel");
-#else
 	ok = gnome_stock_button(GNOME_STOCK_BUTTON_OK);
 	cancel = gnome_stock_button(GNOME_STOCK_BUTTON_CANCEL);
-#endif
+
 	gtk_box_pack_start(GTK_BOX(GTK_DIALOG(options->window)->vbox),
 		hbox, TRUE, TRUE, 0);
 
