@@ -63,7 +63,7 @@ typedef struct _gE_window {
 	GtkWidget *line_label, *col_label;
 	GtkWidget *files_list_window;
 	GtkWidget *files_list_window_data;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	GtkAccelGroup *accel;
 #else
 	GtkAcceleratorTable *accel;
