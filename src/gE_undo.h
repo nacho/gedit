@@ -44,10 +44,10 @@ typedef struct _gE_undo {
 
 
 /* add an undo node */
-extern void gE_undo_add		(gchar*, gint*, gint*, gint*, gE_document*);
+extern void gE_undo_add		(gchar*, gint, gint, gint, gE_document*);
 
 /* clear the list */
-extern void gE_undo_reset	(gE_document*);
+extern void gE_undo_reset	(GList*);
 
 /* callbacks to do the undo or the redo */
 extern void gE_undo_do		(GtkWidget*, gpointer*);

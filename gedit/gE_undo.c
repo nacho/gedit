@@ -25,3 +25,30 @@
 #include "gE_mdi.h"
 #include "gE_window.h"
 
+
+void gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gE_document *doc)
+{
+
+	gE_undo *undo;
+	
+	undo = g_new(gE_undo, 1);
+	
+	undo->text = text;
+	undo->start_pos = start_pos;
+	undo->end_pos = end_pos;
+	undo->action = action;
+	undo->status = doc->changed;
+	
+	/* nuke the redo list, if its available */
+	if (doc->redo) {
+	
+		g_list_free (doc->redo);
+	
+	}
+
+	g_message ("gE_undo_add: Adding to Undo list..");
+	
+	doc->undo = g_list_prepend (doc->undo, undo);
+
+}
+

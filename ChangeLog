@@ -1,3 +1,12 @@
+Sun Sep 12 17:28:35 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_undo.c: (gE_undo_add) New fucntion. Add's undo item to the stack.
+	
+	* src/gE_view.c: (doc_insert_text_cb) (doc_delete_text_cb) Added function
+	  call to insert the inserted or deleted text into the undo stack.
+	
+	* src/Makefile.am: Added gE_undo.[ch] to the source list.
+
 Sun Sep 12 16:18:18 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_undo.[ch]: Added stubs for the new undo/redo system.

@@ -78,6 +78,7 @@ typedef struct _gE_document {
 
 	/* Undo/Redo GLists */
 	GList *undo;		/* Undo Stack */
+	GList *undo_top;	
 	GList *redo;		/* Redo Stack */
 
 } gE_document;

@@ -48,6 +48,8 @@ gedit_SOURCES = 	\
 	gE_view.h	\
 	gE_mdi.c	\
 	gE_mdi.h	\
+	gE_undo.c	\
+	gE_undo.h	\
 	gE_about.c	\
 	gE_about.h      \
 	gE_files.c	\

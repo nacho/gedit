@@ -22,6 +22,7 @@
 #include <config.h>
 #include "gE_view.h"
 #include "main.h"
+#include "gE_undo.h"
 #include "gE_mdi.h"
 #include "commands.h"
 #include "gE_prefs.h"
@@ -244,6 +245,9 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	gtk_text_set_point (GTK_TEXT (significant_other), position);
 	
 	g_free (data);
+
+
+	gE_undo_add (buffer, position, (pos + length), INSERT, doc);
 	
 	if (length > 96)  
 	  g_free (buffer);
@@ -258,6 +262,7 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	GtkWidget *significant_other;
 	gE_document *doc;
 	gE_view *nth_view = NULL;
+	gchar *buffer;
 	gint n;
 
 	if (!view->split_screen)
@@ -294,6 +299,9 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	  doc->buf = g_string_truncate (doc->buf, start_pos);
 	
 	}
+
+	buffer = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
+	gE_undo_add (buffer, start_pos, end_pos, DELETE, doc);
 
 	view->flag = significant_other;
 	gtk_text_freeze (GTK_TEXT (significant_other));
@@ -335,7 +343,7 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	  }
 	  
 	}
-	
+
 }
 
 
