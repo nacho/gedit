@@ -1,0 +1,1663 @@
+<!DOCTYPE Article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
+<!ENTITY version "0.9.0">
+]>
+
+<article id="index">
+
+  <artheader>
+  <title>gedit</title>
+
+  <copyright>
+    <year>1998, 1999, 2000</year>
+    <holder>Alex Roberts, Evan Lawrence</holder>
+  </copyright>
+  <copyright>
+   <year>2000</year>
+   <holder>Eric Baudais (著者)</holder>
+  </copyright>
+
+  <copyright>
+   <year>2000</year>
+   <holder>小松崎章仁(邦訳)</holder>
+  </copyright>
+
+  <legalnotice>
+   <para>
+    あなたはフリーソフトウェア財団の定めるフリー文書利用許諾契約書
+によって第1.1版もしくはそれ以降の元に複製、配布、可変が認められています。
+変更不可部分、表表紙部分、裏表紙部分は指定しません。
+あなたはGNU フリー文書利用許諾契約書の複写を<ulink type="http" url="http://www.fsf.org">WebサイトからかFree Software Fundation, Inc.,59 Temple Place - 
+Suite 330,Boston,MA 02111-1307, USA.
+に手紙を書くことでフリーソフトウェア財団から手に入れることができます。</para>
+   <para>
+多くの名前は会社によって製品を区別するために使用されていて、商標とされています。
+GNOME ドキュメントの様々な箇所にこれらの名前が表れますが、
+これらの商標は大文字か頭文字が大文字かで示しています。
+   </para>
+  </legalnotice>
+
+  <!-- this is version of manual, not application -->
+  <!-- これはマニュアルのバージョンであって、アプリケーションのものではありません。--> 
+  <releaseinfo>
+これはgeditのマニュアル第 1.0版です。
+  </releaseinfo>
+
+  </artheader>
+
+  <sect1 id="intro">
+    <title>はじめに</title>
+
+    <para>
+      <application>gedit</application>は軽く強力なテキストエディタです。
+単純なテキストエディタから期待する基本的な機能を持ちますが、
+自然なグラフィックユーザーインターフェイス(GUI)を持ちます。
+<application>gedit</application>はまた<systemitem>端末</systemitem>からコマンドラインで
+簡単に素早くファイルの閲覧、編集などをも利用できます。
+概して、<application>gedit</application>は役に立ち、パワフルな機能を持ち簡単に利用できる<systemitem>GNOME デスクトップ</systemitem>のテキストエディタです。
+    </para>
+
+    <para>
+      <application>gedit</application>は機能拡張のためのプラグイン構造を持ちます。
+      これによって、シェル出力を画面にパイプするといった、ただのテキストエディタ以外の機能が
+      利用できます。
+      また、プラグイン構造は人に電子メールを送ったり、インターネットを閲覧したり、
+      <application>gedit</application>から<command>diff</command>を提供したりします。
+
+    </para>
+
+    <para>
+      <application>gedit</application>は多様な方法で、利用者の要求に答えます。
+      <application>gedit</application>はすべてのコマンドやツール、オプション
+      を持つ伝統的なメニューを持ちます。そしてまた、よく使うコマンドがあるツールバーも
+      持っています。メニューバーとツールバーは素早くアクセスするために選んだ
+      デスクトップのどこにでも移動することができます。
+      <application>gedit</application>はまた、<interface>テキストウィンドウ</interface>にも
+      メニューを持ちます。その中には、<application>gedit</application>で
+      よく使う一般的な編集コマンドがあります。
+      <application>gedit</application>は素早く簡単にコマンドを使うために
+      <interface>メニュー</interface>、<interface>ツールバー</interface>、
+      <interface>右クリックメニュー</interface>を提供します。
+    </para>
+    
+    <para>
+	<application>gedit</application>を起動するには、
+	<guisubmenu>アプリケーション</guisubmenu>メニューの中の<guimenuitem>gedit</guimenuitem>
+	を選択するか、コマンドラインから<command>gedit</command>と入力してください。
+    </para>
+    
+    <para>
+      <application>gedit</application>はGNOME 統合デスクトップ環境の基本的なアプリケーションです。
+      このマニュアルは、<application>gedit</application>の第&version版について書かれています。
+    </para>
+  </sect1>
+
+  <sect1 id="usage">
+    <title>使い方</title>
+
+    <para>
+      テキストエディタはGNOME デスクトップで不可欠なものです。
+小さな文書を書いたり、設定ファイルを編集したり、Webページを製作したり、
+<application>gedit</application>はあなたの要求を満たしてくれるでしょう。
+
+     <!--将来的には、<application>gedit</application>の 
+      <link linkend="plugins">プラグイン</link>も有用になるでしょう。
+これらは基本的なテキストエディタの機能を拡張します。-->
+    </para>
+
+    <para>
+      <application>gedit</application>を起動すると、
+      <interface>メインウィンドウ</interface>が開かれます。
+
+      <figure id="mainwindow-fig">
+	<title>gedit メインウィンドウ</title>
+	<screenshot>
+	  <screeninfo>gedit Main Window</screeninfo>
+	  <graphic fileref="images/gedit" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
+すると、<application>gedit</application>のすべての機能とツールを持つ、
+<link linkend="menubar">メニューバー</link>が見えるでしょう。
+また、<application>gedit</application>で頻繁に使用するであろう、
+基本的な機能を持つツールバーも表れるでしょう。
+テキストウィンドウで右クリックをすると、いくつかの編集、ファイル操作コマンドをもつ
+<link linkend="pop-up-menu">ポップアップメニュー</link>
+が表れます。
+    </para>
+
+    <para>
+      <application>gedit</application>の<link linkend="plugins">プラグイン</link>は
+emailを素早く友人に送ったり、仕事の助けとしてウェブでページを検索したり、
+ファイルの差分を<command>diff</command>コマンドで述べるファイルを提供したり、
+シェルの出力を<application>gedit</application>に挿入するシェル出力プラグインや、
+<command>date</command>コマンドで現在時刻を文書に挿入したり、  
+<quote>Hello World</quote>を挿入したり、
+編集中の文書の文字順序を逆転させたり、
+10進数を16進数、8進数に変換したり元に戻したりできます。
+
+      <footnote>
+	<para>
+		10進数と16進数と8進数は異なる基底の数字です。
+		10進数は10が基底で、毎日のように見ている数字で、
+		16進数(hexidecimal)は16が基底の数字で、
+		8進数(Octal)は8が基底です。
+		10進数での45は16進数では2D、8進数では55になります。
+	</para>
+      </footnote>
+    </para>
+
+    <sect2 id="usage-commandline">
+      <title>コマンドラインからの使用</title>
+      
+      <para>
+	<application>gedit</application>はまたコマンドラインから 
+	<command>gedit</command>と入力することで起動できます。
+	編集したいファイルがある場合はファイル名を付け加えてください。
+	これは新しい<application>gedit</application>の<interface>メインウィンドウ</interface>
+	また、コマンドラインから複数のファイルを開くこともできます。
+	<command>gedit</command>に続けてスペースでそれぞれのファイル名を区切って
+	入力することで可能です。
+	<filename>file1.txt</filename>,<filename>file2.txt</filename>と
+	<filename>file3.txt</filename>の3つのファイルを開くには
+	<command>gedit</command> <filename>file1.txt</filename> 
+	<filename>file2.txt</filename> <filename>file3.txt</filename>
+	と端末に入力します。
+	この特徴は好みのシェルを使っている間に、とても素早く簡単に設定ファイルや
+	スクリプトを編集できることです。
+
+	<note>
+	  <para>
+	    ファイルを<systemitem>X端末</systemitem>から起動した<application>gedit</application>で開いて、
+		<systemitem>X端末</systemitem>を終了すると起動した<application>gedit</application>も終了します。
+		この現象の理由は<application>gedit</application>が親プロセスである
+		<systemitem>X端末</systemitem>の子プロセスだからです。
+		Uuix 環境では親プロセスを終了するとそこから引き出されたすべての
+		子プロセスが終了します。すべての子プロセスを終了することは
+		Unix 環境ではとても有用なことです。
+		この部分が理解できなくても全く問題はありません。
+		<systemitem>X端末</systemitem>から起動し、<systemitem>X端末</systemitem>を
+		終了すると<application>gedit</application>もまた終了することだけ覚えておいてください。
+
+	  </para>
+	</note>
+      </para>
+
+      <para>
+	<application>gedit</application>はまた<systemitem>コンソール</systemitem>
+	や<systemitem>X端末</systemitem>でのパイプもサポートしています。
+	<application>gedit</application>でパイプを使用する時は他のコマンドの出力を
+	テキストファイルとして<application>gedit</application>の<interface>メインウィンドウ</interface>に開かれます。
+	例えば、<command>ls</command>を使って特定のディレクトリに何のファイルが入っているかの
+	一覧を表示したい時は<command>ls</command> 
+	<command>|</command> <command>gedit</command>
+	と入力します。
+	<footnote>
+	  <para>
+	     | (パイプ) 文字はキーボートによって様々ですが、たいてい\(バックスラッシュ)の
+		下側にあります。たいていはきボードの右シフトキーの左か
+		] (閉大括弧)の側、エンターキーの上、バックスペースの側かにあります。
+		（訳注：日本語キーボードの場合はたいていバックスペースの左側です。）
+	  </para>
+	</footnote>
+	通常コンソールか<systemitem>X 端末</systemitem>上の<command>ls</command>の出力は
+	<application>gedit</application>の新規テキストに表示されます。
+	このオプションは出力が速すぎたり、テキスト内の出力を使いたいときに役立ちます。
+      </para>
+    </sect2>
+<!--  ***FIXME: Need to write something about the toolbar?***  -->
+<!--    <sect2 id="toolbar">
+      <title>Toolbar</title>
+      <para>
+      <figure id="toolbar-fig">
+	<title>geditのツールバー</title>
+	<screenshot>
+	  <screeninfo>gedit toolbar</screeninfo>
+	  <graphic fileref="images/toolbar" format="png"
+		   srccredit="dkw">
+	  </graphic>
+	</screenshot>
+      </figure>
+      </para>
+    </sect2>
+-->
+  </sect1>
+
+  <sect1 id="plugins">
+    <title>プラグイン</title>
+
+    <para>
+	<application>gedit</application>とともにいくつものプラグインが付属しています。
+	これらは<application>gedit</application>の機能を拡大、拡張できることを意味しています。
+	プラグインはプログラム本体と分離されて、このように機能を加えるだけで
+	機能やスケールを好みにすることができます。
+    </para>
+
+      <figure id="manager-fig">
+	<title>プラグインマネージャ</title>
+	<screenshot>
+	  <screeninfo>plugin manager</screeninfo>
+	  <graphic fileref="images/manager" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
+
+    <para>
+	     <application>gedit</application>の<guimenu>プラグイン</guimenu>メニュー
+	の中にインストールされたそれぞれのメニューアイテムがあります。
+	<application>gedit</application>で有効にするプラグインを選択するには
+	<guimenuitem>マネージャ&hellip;</guimenuitem>を開く必要があります。
+	プラグインマネージャでは使用したいプラグインを選択します。
+	あなたはプラグインをインストールしただけでは<guimenu>プラグイン</guimenu>メニュー
+	には表示されないことに気付くでしょう。
+	開かれた左側のウィンドウでインストールしたいプラグインをクリックして
+	<guibutton>追加</guibutton>ボタンを押して下さい。これは、プラグインを
+	インストールし、<guimenu>プラグイン</guimenu>メニューにプラグインを置き、
+	プラグインが実行できるようにします。すべてのプラグインをインストールたいときは、
+	<guibutton>すべて追加</guibutton>ボタンを押します。
+	<application>gedit</application>のプラグインをアンインストールしたいときは、
+	右側のウィンドウで選択し、<guibutton>削除</guibutton>ボタンを押します。
+	すべてのプラグインを無効にしたいと場合は<guibutton>すべて削除</guibutton>
+	ボタンを押します。
+    </para>
+
+    <sect2 id="browse">
+      <title>ブラウズプラグイン</title>
+
+      <figure id="browse-fig">
+	<title>ブラウズプラグイン</title>
+	<screenshot>
+	  <screeninfo>browse plugin</screeninfo>
+	  <graphic fileref="images/browse" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	<guimenuitem>ブラウズ</guimenuitem>プラグインは表示したいウェブページのurl を入力する
+	テキストウィンドウを持っています。url を入力すると、<application>gedit</application>
+	はメインウィンドウにウェブページを表示します。もし、ダイアログの下の方にあるパスが
+	<application>Lynx</application>の正確なパスでない場合、<guibutton>変更</guibutton>
+	ボタンを押すと変更できます。
+
+	<figure id="lynx-fig">
+	  <title>Lynx パスの変更</title>
+	  <screenshot>
+	    <screeninfo>change lynx path</screeninfo>
+	    <graphic fileref="images/lynx" format="png"
+		   srccredit="Eric Baudais">
+	    </graphic>
+	  </screenshot>
+	</figure>
+	システムに合った正確なパスを入力するか、<guibutton>Browse</guibutton> ボタンを
+	押してシステムから<filename>lynx</filename> を見つけ出すことが必要です。
+	その後、適切なフィールドを埋めて<guibutton>OK</guibutton>ボタンを押すと、
+	ウェブページが表示されます。
+      </para>
+    </sect2>
+
+    <sect2 id="diff">
+      <title>diff プラグイン</title>
+
+      <figure id="diff-fig">
+	<title>diff プラグイン</title>
+	<screenshot>
+	  <screeninfo>diff plugin</screeninfo>
+	  <graphic fileref="images/diff" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	<guimenuitem>diff</guimenuitem>プラグインで差異を出力するファイルを選択するのに
+	2つの方法があります。<application>gedit</application>で開いているファイルから
+	オリジナルのファイルを選択できます。また、1つ目(左側)のテキストウィンドウに
+	ファイル名を入力することでも指定できます。次に改訂されたファイルを2つ目(右側)の
+	テキストにファイル名を入力するか、開かれているファイルのリストから選択するかします。
+	これで、ファイルの差異が<systemitem>メインウィンドウ</systemitem>に開かれます。
+
+	<note>
+	  <para>
+	    <application>gedit</application>はダイアログで入力した2つのファイルを
+	<command>diff</command> コマンドで実行します。
+	その出力は<application>gedit</application>の<systemitem>メインウィンドウ</systemitem>
+	に表示されます。もし、1つ目が<filename>file1.txt</filename>、2つ目が<filename>file2.txt
+	</filename>なら、<application>gedit</application>はコマンド <prompt>$</prompt><command>diff</command> <filename>file1.txt</filename> 
+	    <filename>file2.txt</filename>の出力を表示します。
+	  </para>
+	</note>
+      </para>
+    </sect2>
+
+    <sect2 id="email">
+      <title>Email プラグイン</title>
+
+      <figure id="email-fig">
+	<title>Email プラグイン</title>
+	<screenshot>
+	  <screeninfo>email plugin</screeninfo>
+	  <graphic fileref="images/email" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	<guimenuitem>Email</guimenuitem> プラグインは編集中のテキストファイルを
+	メイルの本文として送信します。subjectはファイル名により、自動的に決まりますが、
+	ダイアログによって変更することもできます。From:部分はシステムにより
+	自動的に決まりますが、これも変更可能です。
+	To:部分に受取人のアドレスを入力しなければいけません。
+	もし、sendmail 互換メイラー
+	<footnote>
+	  <para>
+	  sendmail 互換メイラーはemail を目的の場所に届けるために
+	  インターネット上の正確なサーバに送ります。
+	  そのプログラムはemail を送るためにSMTP(Simple Mail Transfer Protocol) を使います。
+	  sendmail 互換メイラーと非互換メイラーの違いはコマンドラインの構文です。
+	sendmail 互換メイラーはたとえ操作が完全に異なっていても 
+	<application>sendmail</application>と同様の構文を持っています。
+	  </para>
+	</footnote>
+	がダイアログの下側に表示されていなければ、<guibutton>参照</guibutton>ボタンで
+	変更できます。
+	<figure id="mta-fig">
+	  <title>sendmailディレクトリの変更</title>
+	  <screenshot>
+	    <screeninfo>change sendmail</screeninfo>
+	    <graphic fileref="images/mta" format="png"
+		   srccredit="Eric Baudais">
+	    </graphic>
+	  </screenshot>
+	</figure>
+そして、テキストウィンドウにsendmail 互換メイラーの正確なパスを入力するか、
+<guibutton>変更</guibutton>ボタンをクリックして指定する必要があります。
+もし、sendmail メイラーを持っていなければ、それは送信するには必要なので用意してください。
+正確なフィールドを埋めた後、<guibutton>OK</guibutton>ボタンを押すと送信し、
+<guibutton>キャンセル</guibutton>を押すと送信しません。
+      </para>
+    </sect2>
+
+    <sect2 id="time">
+      <title>時刻挿入プラグイン</title>
+
+      <para>
+	<guimenuitem>時刻挿入</guimenuitem>プラグインは文書に日付と時刻を挿入します。
+	これは<command>date</command> コマンドの出力によるものです。	
+      </para>
+    </sect2>
+
+    <sect2 id="hello">
+      <title>Hello World プラグイン</title>
+
+      <para>
+	<guimenuitem>hello world</guimenuitem>プラグインは文書に<quote>Hello World</quote>
+	を挿入します。これは他のプラグインのテンプレートになることを意味しています。
+	もしあなたが<application>gedit</application>のプラグインを書くことに興味が
+	あるのなら、<guimenuitem>hello world</guimenuitem>プラグインのソースコードを見て、
+	そして、やったことが二度手間にならないように<link linkend="authors">メンテナー</link>にコンタクトをとって下さい。
+      </para>
+    </sect2>
+<!--
+    <sect2 id="reverse">
+      <title>The Reverse Plugin</title>
+
+      <para>
+	This plugin is still in development.  Write about it when it is done.
+      </para>
+    </sect2>-->
+
+    <sect2 id="shell">
+      <title>シェル出力プラグイン</title>
+
+      <figure id="shell-fig">
+	<title>シェル出力プラグイン</title>
+	<screenshot>
+	  <screeninfo>shell output plugin</screeninfo>
+	  <graphic fileref="images/shell" format="png"
+		   srccredit="Eric Baudais">
+	  </graphic>
+	</screenshot>
+      </figure>
+
+      <para>
+	<guimenuitem>シェル出力</guimenuitem>プラグインは表示されたディレクトリコマンドを
+	実行し出力をメインウィンドウに出します。<guimenuitem>シェル出力</guimenuitem>プラグイン
+	はコンソールベースのプログラムの実行結果をテキストに挿入するために作成されました。
+	しかし、<application>gedit</application>はたとえ<application>gnumeric</application>
+	のような他のアプリケーションを実行しようとしてもそれを止めることをしません。
+	ですので、コンソールベースでテキストのみで非対話的なコマンドのみ実行するようにして下さい。
+      </para>
+      <para>
+	
+	シェル出力プラグインでは、あなたが使っているシェルと同じシェルを使い
+  ます。<application>bash</application>をシェルにしているのなら、
+  <application>gedit</application>は<application>bash</application>で
+  コマンドを実行します。そして、通常はコンソールや端末に出力され
+  るものと同じものが、編集中のテキストファイルの途中に挿入されます。
+      </para>
+    </sect2>
+
+  </sect1>
+
+  <sect1 id="prefs">
+    <title>設定</title>
+    <para>
+	アプリケーションの設定を変更するには、<guimenu>設定</guimenu>メニューの中の
+	<guimenuitem>設定&hellip;</guimenuitem>を選択します。
+	すると、<interface>設定</interface>ダイアログが開かれます。
+    </para>
+
+    <para>
+	<application>gedit</application>をデフォルトのエディタにすることができます。
+	デフォルトのエディタは文書を開く時や編集する時、他のアプリケーションに使用されたり
+	するときに起動します。<application>gedit</application>をデフォルトのエディタにするには
+	端末から<command>export</command> EDITOR='gedit'と入力して下さい。
+	これでは、システムをリブートするまでの間だけ有効です。
+	不変的にするには、<application>bash</application>を使っている場合、
+	<filename>.bash_profile</filename>に<quote>
+	<command>export</command> EDITOR='gedit'</quote>を挿入します。
+	もし他のシェルを使っている場合は、変更すべきファイルを見つけて、
+	環境変数$EDITOR をgeditに変更して下さい。
+    </para>
+
+    <sect2 id="general">
+      <title>一般</title>
+      
+    <figure id="preferences-fig">
+      <title>一般タブが選択された設定ダイアログ</title>
+      <screenshot>
+	<screeninfo>General Tab</screeninfo>
+	<graphic fileref="images/prefs-general" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>外見</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      内容:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guibutton>ステータスバーを表示</guibutton> &mdash;
+		    これは、<interface>メインウィンドウ</interface>の
+		    下部にステータスバーを表示するかどうかを決定するオプションです。
+		    ステータスバーは概要説明や<application>gedit</application>の現在の処理を
+		    表示します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>ツールバーをシステム設定に任せる</guibutton> &mdash;
+		    これは、ツールバーの表示をシステムにGNOME の設定に任せます。
+		    設定の変更は<application>コントロールパネル</application>で行なえます。
+		    システムの設定を変更するには、<guimenu>メインメニュー</guimenu>の中の
+		    <guisubmenu>デスクトップ設定</guisubmenu>の中にある
+		    <application>GNOME コントロールセンター</application>を起動します。
+		    そして、<guimenu>ユーザインターフェイス</guimenu>メニューから
+		    <guisubmenu>アプリケーション</guisubmenu>を選択します。
+		    </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>ツールバーにアイコンのみ表示</guibutton> &mdash;
+			これは、ツールバーにアイコンのみを表示します。
+			アイコンの下に何をするのかの説明は表示されません。
+			これは、<application>コントロールセンター</application>の振舞いを
+			オーバーライドします。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>ツールバーに文字ラベルを付ける</guibutton> &mdash;
+		    これは、アイコンの下に説明を付けます。
+		    これも、<application>コントロールセンター</application>の振舞いを
+			オーバーライドします。
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guilabel>エディタの動作</guilabel></term>
+
+	  <listitem>
+	    <para>
+	    内容:
+
+	      <itemizedlist mark="opencircle">
+
+		<listitem>
+		  <para>
+		    <guibutton>自動字下げ</guibutton> &mdash;
+		    このオプションは、application>gedit</application>で自動字下げを有効に
+		    します。自動字下げはテキストラインを前の行と同じにします。
+		    自動字下げは設定ファイルやスクリプト、コードなどを書いている時に特に役立ちますが、テキストの段落を書きたい時には厄介になります。
+		  </para>
+		</listitem>
+<!--            ***This option is deprecated or just not around.***
+		<listitem>
+		  <para>
+		    <guibutton>Enable Wordwrap</guibutton> &mdash;
+                    このオプションは自動改行を有効にします。自動改行は<interface>テキストウィンドウ</interface>をこえたとき
+                   自動的にテキストを次の行に送るものです。
+                   </para>
+		</listitem>-->
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+      </variablelist>
+    </sect2>
+
+    <sect2 id="documents">
+      <title>ドキュメント</title>
+      
+    <figure id="documents-fig">
+      <title>ドキュメントタブが選択された設定ダイアログ</title>
+      <screenshot>
+	<screeninfo>Preferences dialog with Documents tab</screeninfo>
+	<graphic fileref="images/prefs-documents" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>MDI (Multiple Document Interface)</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      内容:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>Mode:</guilabel> &mdash;
+		    このオプションは<application>gedit</application>でどのように
+		    <interface>メインウィンドウ</interface>を表示するかとどのように新しく
+		    開くかを指定します。
+		    このオプションはどのようにユーザーインターフェイスを
+		    <interface>メインウィンドウ</interface>に使うかを決定します。
+		    それには、notebook、toplevel、modal、defaultの4つがあります。
+		  </para>
+
+		  <para>
+		  notebook スタイルは非常に<guimenuitem>設定&hellip;</guimenuitem>ダイアログに
+		  似ています。notebook スタイルで最も目立つものは
+		  <interface>メインウィンドウ</interface>のタブです。
+		  ハイライトされたタブが現在見ている文書です。他の開かれた文書に変更するには、
+		  後ろ側になっているタブをクリックするだけです。
+		  notebook スタイルでは複数の文書を同時に開くことはできず、編集中の
+		  文書のみ見ることができます。
+		  </para>
+
+		  <para>
+		    toplevel スタイルはそれぞれの文書に対して新しい
+		    <application>gedit</application>を開きます。
+		    ウィンドウはそれぞれ重なります。
+			ここから自由に	<application>gedit</application>のウィンドウを動かすことが
+			できます。これでは、1つ以上の文章を見ることができたり、同じ文書を
+			違うポジションで見ることができます。
+		  </para>
+
+		  <para>
+		  modal スタイルは文書をいくつ開いていても一つしか開きません。
+		  <guimenu>Documents</guimenu>メニューを使うことによって、
+		  違う文書に変更できます。
+		  default スタイルはmodal スタイルと同じです。
+		  <application>gedit</application>の以前のバージョンから変更されたものです。
+		  このスタイルは<application>gedit</application>でとても平凡なスタイルです。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guilabel>タブの位置</guilabel> &mdash;
+		    このオプションはnotebook スタイルのタブの位置を指定します。
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guilabel>元に戻す</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      設定内容:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>Set limit on undo levels to:</guilabel> &mdash;
+		    このオプションは何回まで操作を元に戻すことができるかを
+		    設定します。例えば、5回に設定されていれば5回だけ元に戻すボタンを
+		    使うことができます。もしあなたが、筆者のように多くの間違いをするようで
+		    あれば、きっと初期値の5回よりも多く設定したくなるでしょう。
+		    
+		    <note>
+		      <para>
+		      <application>gedit</application>は
+		      16 MB以下のメモリの少ないユーザはundo level limit分メモリに
+		      それぞれの命令を蓄えておくため16 MB以下のメモリが少ないユーザは
+		      undo level limitを低めに設定してください。
+		      もし、50 に設定した場合は50 回分の命令をメインメモリに蓄えます。
+	      </para>
+		    </note>
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="fonts">
+      <title>フォント/色</title>
+      
+    <figure id="fonts-fig">
+      <title>フォント/色タブが選択された設定ダイアログ</title>
+      <screenshot>
+	<screeninfo>Preferences dialog with Fonts/Colors tab</screeninfo>
+	<graphic fileref="images/prefs-font" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>フォント</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      設定内容:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>デフォルト</guilabel> &mdash;
+		    <application>gedit</application>のデフォルトで使用するフォントを指定します。
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+	
+	<varlistentry>
+	  <term><guilabel>色</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      設定内容:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guilabel>背景色:</guilabel> &mdash;
+		    これは<application>gedit</application>の
+		    <interface>メインウィンドウ</interface>の背景色を選びます。
+  		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guilabel>文字色:</guilabel> &mdash;
+		    これは<application>gedit</application>の
+		    <interface>メインウィンドウ</interface>の文字色を選びます。
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="printing">
+      <title>印刷</title>
+
+    <figure id="printing-fig">
+      <title>印刷タブが選択された設定ダイアログ</title>
+      <screenshot>
+	<screeninfo>Fonts/Colors dialog with Printing tab</screeninfo>
+	<graphic fileref="images/prefs-printing" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>印刷</guilabel></term>
+
+	  <listitem>
+	    <para>
+	      設定内容:
+
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guibutton>Add header</guibutton> &mdash;
+		    これは、それぞれのページにヘッダーを追加します。
+		    <application>gedit</application>のバージョン0.8.0ではヘッダーを
+		    操作することができません。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Enable word wrapping</guibutton> &mdash;
+		    このオプションはword wrapping を有効にします。
+		    wordwrap は<link linkend="paper">設定ダイアログの用紙タブ</link>で指定した
+		    幅を越えたとき、自動的に次の行にします。ですので、明示的に
+		    <keysym>改行</keysym>する必要はありません。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Print line numbers every:</guibutton> &mdash;
+		    これはファイルの行番号を印刷します。同時に何間隔で印刷するかを指定する
+		    必要があります。デフォルトなら5行毎です。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Portrait</guibutton> &mdash;
+		    これは、portrant スタイルを使って印刷をします。
+		    portrant スタイルは用紙の端に小さく印刷されるテキストがあります。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <guibutton>Landscape</guibutton> &mdash;
+		    これは、portrait スタイルを使って印刷をします。
+		    用紙の端に大きく印刷されるテキストがあります。
+		  </para>
+		</listitem>
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+
+    <sect2 id="paper">
+      <title>Paper</title>
+
+    <figure id="paper-fig">
+      <title>用紙タブが選択された設定ダイアログ</title>
+      <screenshot>
+	<screeninfo>Fonts/Colors dialog with Paper tab</screeninfo>
+	<graphic fileref="images/prefs-paper" format="png"
+		 srccredit="Eric Baudais">
+	</graphic>
+      </screenshot>
+    </figure>
+      
+      <para>
+	設定内容:
+	
+	<itemizedlist mark="opencircle">
+	  <listitem>
+	    <para>
+	      <guilabel>用紙:</guilabel> &mdash;
+	      これはどの種類の用紙に文書を印刷するかを指定します。<guilabel>width</guilabel>
+	      と<guilabel>height</guilabel> ボックスは適切な用紙サイズにより自動的に
+	      変化します。
+	    </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+	      <guilabel>Width:</guilabel> &mdash;
+	      これは文書を印刷する用紙の幅を指定します。
+	      <guilabel>width</guilabel>ボックスの右側のボックスで<guilabel>width</guilabel>と
+	      <guilabel>height</guilabel>を計る単位を変更できます。
+	      
+	    </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+	      <guilabel>Height:</guilabel> &mdash;
+	      これは文書を印刷する用紙の長さを指定します。
+	      右側はその単位です。
+	      
+	    </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+	      <guibutton>Set System Paper Size</guibutton> &mdash;
+	      このオプションは用紙の<guilabel>width</guilabel>と
+	      <guilabel>height</guilabel>をシステムの用紙サイズに設定します。
+	      システムの用紙サイズは <filename>paperconf</filename>の
+	      環境変数$PAPERCONF によって決められています。
+	    </para>
+	  </listitem>
+	</itemizedlist>
+
+      </para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="menus">
+    <title>メニュー</title>
+
+    <para>
+    	<application>gedit</application>にはことなる三種類のメニューがあります。
+    	すべての命令、オプション、プラグインを含んだ<interface>メニューバー</interface>、
+    	よく使用する命令を含んだ<interface>ツールバー</interface>、
+    	ファイル操作で役に立つ<interface>テキストウィンドウ</interface>の
+	<interface>右クリックメニュー</interface>です。
+	ここでは量が多いので<interface>メニューバー</interface>についてのみ解説します。
+	<interface>ツールバー</interface>と<link linkend="pop-up-menu"><interface>
+      右クリックメニュー</interface></link>についてはこのマニュアルの他の部分で解説します。
+    </para>
+
+    <sect2 id="menubar">
+      <title>メニューバー</title>
+      <para>
+	<interface>メニューバー</interface>は<interface>デスクトップ</interface>中に移動することができます。
+<interface>メニューバー</interface>の左端の浮き出て、点の付いた部分をドラッグすることができます。
+	<footnote>
+	  <para>
+		ドラッグはオブジェクトをマウスでクリックし、離さずにマウスの位置を
+		移動することを参照します。そして、マウスボタンを離すとマウスで移動していた
+		オブジェクトをデスクトップのその位置に移動します。この操作は一般的に
+		<qote>ドラッグアンドドロップ</qote>と呼ばれています。
+	  </para>
+	</footnote>
+	マウスに捕まれたメニューバーはデスクトップ上のどこにでも移動することができます。
+	<interface>メインウィンドウ</interface>の辺りに持っていくと
+	<interface>メニューバー</interface>を<interface>メインウィンドウ</interface>の
+	四隅にくっつけることもできます。メニューバーの初期位置は
+	<interface>メインウィンドウ</interface>の上の方でメニューの下側です。
+      </para>
+
+      <variablelist>
+	
+	<varlistentry>
+	  <term><guimenu>ファイル</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      メニューの内容:
+
+	      <itemizedlist mark="opencircle">
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>新規</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは新規ファイルを開きます。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>F3</keysym>
+		      </shortcut>
+		      <guimenuitem>開く&hellip;</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、<interface>開く</interface>ダイアログを開きます。
+		    ここから開くファイルを選べます。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-S</keysym>
+		      </shortcut>
+		      <guimenuitem>保存</guimenuitem>
+		    </menuchoice> &mdash; 
+		    以前に保存したファイルがあればそのファイルに保存します。
+		    そうでなければ、<interface>名前を付けて保存&hellip</interface>ダイアログ
+		    を開きます。
+		    
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>すべて保存</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、<application>gedit</application>で開いているすべてのファイルを保存します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>名前を付けて保存&hellip;</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、選択しているファイルを<interface>名前を付けて保存&hellip</interface>ダイアログを開いて保存します。
+                    違う名前で保存したいときに使用します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>Revert</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、保存していないすべての変更を破棄して元のファイルを
+		    <interface>メインウィンドウ</interface>に開き直します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>1.</guimenuitem>
+		    </menuchoice> &mdash; 
+		    <guimenu>ファイル</guimenu>メニューのこの部分は<application>gedit</application>で最近開いたファイルを表示します。
+                    クリックするとそのファイルが開かれます。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>印刷</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="print-dialog-fig">
+		      <title>Print Document Dialogtitle><screenshot>
+			<screeninfo>Print Document dialog</screeninfo>
+			<graphic fileref="images/print" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+     			これは<interface>Print Document</interface>ダイアログを開きます。
+<interface>Print Document</interface>は<guilabel>Select printer</guilabel>と<guilabel>Print Range</guilabel>の2つの部分に分かれています。
+		    </para>
+
+		    <para>
+		      <guilabel>Select printer</guilabel>部分はファイルをどのプリンタに印刷するか、もしくはどのpre-press
+		      <footnote>
+		        <para>
+			  pre-press ファイルとは、専門家や印刷業者が利用でき、
+			  パンフレットやチラシ、レターヘッドなどに使用します。
+			  フォーマットは、PS(Postscript)や、PDF(Portable Document Format)です。
+			  (Portable Document Format).
+		        </para>
+		      </footnote>
+		      に出力するか指定します。
+		      <guibutton>Printer</guibutton>ボタンと<guibutton>File</guibutton>ボタンは
+		      ダイアログの端にあります。
+		      もしファイルを印刷するのにプリンタを選んだなら
+		      <guibutton>Printer</guibutton>ボタンの右側のテキストウィンドウに
+		      正しいコマンドを指定します。
+		      pre-pressを選んだのなら、<guibutton>File</guibutton>ボタンの右側の
+		      テキストウィンドウで出力するファイル名を指定します。
+		      <guilabel>Name:</guilabel>プルダウンメニューで出力する
+ファイルのフォーマットを選択できます。
+
+		    </para>
+
+		    <para>
+		      <guilabel>Print Range</guilabel>部分はファイルのどの部分を
+		      印刷するかを指定します。<guibutton>All</guibutton> ボタンが選択されていればファイル全部が印刷されます。
+		      もし、ファイルの特定のページを印刷したいのなら、<guibutton>Pages</guibutton>を押して、始まりと終りのページ番号を入力します。
+		      もし、現在のページだけ印刷したければ、<guibutton>Selection</guibutton>ボタンを押します。
+		    </para>
+
+		    <para>
+		      <interface>Print Document</interface> ダイアログの下部分には、3 つのボタ
+ンがあります。<guibutton>Print</guibutton> ボタンは、<interface>Print
+Document</interface> ダイアログ中の設定を用いて、文書を印刷します。
+<guibutton>Preview</guibutton>ボタンは、<interface>Print
+Document</interface>を閉じて、<interface>Print Preview</interface> ダ
+イアログを呼び出します。この<interface>Print Preview</interface>ダイア
+ログでは、実際の印刷前に文書のプレビューを見ることができます。
+
+		    </para>
+
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>印刷のプレビュー</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="print-preview-fig">
+		      <title>Print Preview Document ダイアログ</title>
+		      <screenshot>
+			<screeninfo>Print Preview Document dialog</screeninfo>
+			<graphic fileref="images/print-preview" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+
+		    <interface>印刷のプレビュー</interface>は文書の印刷プレビューを表示します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-W</keysym>
+		      </shortcut>
+		      <guimenuitem>閉じる</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは<application>gedit</application>の文書を閉じます。
+		    もし、保存されていなければ変更を保存するか破棄するかを問い合わせます。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>すべて閉じる</guimenuitem>
+		    </menuchoice> &mdash; 
+		    
+		    これは<application>gedit</application>のすべての文書を閉じます。
+		    もし、保存されていなければ変更を保存するか破棄するかを問い合わせます。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-Q</keysym>
+		      </shortcut>
+		      <guimenuitem>終了</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは<application>gedit</application>を終了します。
+		    もし、保存されていないファイルがあれば変更を保存するか破棄するかを問い合わせます。
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>編集</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      メニューの内容:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-Z</keysym>
+		      </shortcut>
+		      <guimenuitem>元に戻す</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、文字入力や命令が実行される前の状態に戻します。
+<link linkend="documents-fig"><interface>設定&hellip;</interface>ダイアログで
+設定した回数だけ元に戻すことができます。
+		    </link>
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-R</keysym>
+		      </shortcut>
+		      <guimenuitem>やり直し</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、<guimenuitem>元に戻す</guimenuitem>が実行される前の状態に戻します。
+		    <guimenuitem>元に戻す</guimenuitem>の逆の操作です。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-X</keysym>
+		      </shortcut>
+		      <guimenuitem>切り取り</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、<interface>text window</interface>で選択されたテキストをバッファの移してテキストは削除します。
+		    <guimenuitem>張り付け</guimenuitem>でバッファのテキストを取り出して編集中のファイルに挿入します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-C</keysym>
+		      </shortcut>
+		      <guimenuitem>コピーuimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、<interface>テキストウィンドウ</interface>で選択されたテキストをバッファに蓄えますが、削除はしません。
+		    <guimenuitem>張り付け</guimenuitem>でバッファのテキストを取り出して編集中のファイルに挿入します。
+
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Ctl-V</keysym>
+		      </shortcut>
+		      <guimenuitem>張り付け</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、バッファの内容を文書に挿入します。
+		    <guimenuitem>切り取り</guimenuitem>と<guimenuitem>コピー</guimenuitem>がバッファに入れる方法です。
+		    </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>全選択</guimenuitem>
+		    </menuchoice> &mdash; 
+		    現在編集中の文書のすべてのテキストを選択します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>F6</keysym>
+		      </shortcut>
+		      <guimenuitem>検索</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="find-dialog-fig">
+		      <title>Find Dialog</title>
+		      <screenshot>
+			<screeninfo>検索ダイアログ</screeninfo>
+			<graphic fileref="images/find" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		    </screenshot>
+		    </figure>
+
+		    これは、<interface>検索</interface>ダイアログを開きます。
+		    <guilabel>Search For:</guilabel><interface>テキストウィンドウ</interface>に検索したい文字列を入力します。
+		    <guibutton>beginning of the document</guibutton>ボタンを押すとファイルの先頭から検索することができます。
+		    <interface>メインウィンドウ</interface>のカーソルのある位置から検索するには
+		    <guibutton>cursor position</guibutton>ボタンを使います。
+                    また、大文字、小文字を区別して、<application>gedit</application>に検索させるかどうかも指定できます。
+		  </para>
+		</listitem>
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>Shift-F6</keysym>
+		      </shortcut>
+		      <guimenuitem>再検索</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、直前に<interface>検索</interface>ダイアログで入力した文字列を再度検索します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <shortcut>
+			<keysym>F7</keysym>
+		      </shortcut>
+		      <guimenuitem>置換</guimenuitem>
+		    </menuchoice> &mdash; 
+		    </para>
+
+		    <figure id="replace-dialog-fig">
+		      <title>置換ダイアログ</title>
+		      <screenshot>
+			<screeninfo>Replace dialog</screeninfo>
+			<graphic fileref="images/replace" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+		  <para>
+		  これは、<interface>置換</interface>ダイアログを開きます。
+		  これで、文字列を検索して、他の文字列で置換することができます。検索したい文字列を<guilabel>Search For:
+</guilabel><interface>テキストウィンドウ</interface>で入力し、
+<guilabel>Replace with:</guilabel><interface>テキストウィンドウ</interface>に
+置換したい文字列を入力します。
+<guibutton>beginning of the document</guibutton>ボタンを押すと
+ファイルの先頭から検索することができます。
+<interface>メインウィンドウ</interface>のカーソルのある位置から検索するには
+<guibutton>cursor position</guibutton>ボタンを使います。
+また、入力したとおりに大文字・小文字を区別して
+  <application>gedit</application>に検索させるか、大文字・小文字を区別
+せずに検索させるか、も指定できます。
+	  </para>
+		  <para>
+		      検索する文字列と置換する文字列を入力したら、<interface>置換</interface>ダイアログの下の方にある
+<guibutton>検索</guibutton>ボタンを押します。
+そして、選択されている文字列を<guilabel>Repace with:</guilabel><interface>テキストウィンドウ</interface>で置換するには
+<guibutton>置換</guibutton>ボタンを押します。
+もし、 <guilabel>Search for:</guilabel>で指定した文字列をすべて<guilabel>Replace with</guilabel>
+<interface>テキストウィンドウ</interface>で置換したい場合は、
+<guibutton>Replace All</guibutton>ボタンをクリックします。
+		    </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>指定行へ移動</guimenuitem>
+		    </menuchoice> &mdash; 
+
+		    <figure id="goto-dialog-fig">
+		      <title>指定行へ移動</title>
+		      <screenshot>
+			<screeninfo>Goto Line dialog</screeninfo>
+			<graphic fileref="images/goto-line" format="png"
+				 srccredit="Eric Baudais">
+			</graphic>
+		      </screenshot>
+		    </figure>
+		  これは、<interface>指定行へ移動</interface>ダイアログを開きます。
+<interface>Main Window</interface>で移動したい行番号を入力し
+<guibutton>Ok</guibutton>ボタンを押すと、
+ファイルの先頭から指定した行へカーソルが移動します。
+指定した行がファイルの最後の行よりも大きい場合はファイルの最終行へ移動します。
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>表示</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      メニューの内容:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>ビューを追加</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、現在編集中のファイルをほかのウィンドウで開きます。
+		    もし、あるビューでファイルを編集していたなら、おなじファイルが更新されて、すべてのビューを通じて、変更されます。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>ビューを削除</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、編集中の文書のウィンドウを閉じます。
+		    This item closes a window to the file you are editing.
+		    <note>
+		      <para>
+		    もし、ビューを削除できなければ、それは文書が一つだけしかないためです。
+		    ビューを削除するためには、さらにファイルを開かなければなりません。
+		      </para>
+		    </note>
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>設定</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      メニューの内容:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>ステータスバーの表示</guimenuitem>
+		    </menuchoice> &mdash; 
+		    これは、ステータスバーを表示するかどうかを決めます。ステータスバーは概要説明や<application>gedit</application>の現在の処理を表示します。
+		  </para>
+		</listitem>
+
+		<listitem>
+		  <para>
+		    <menuchoice>
+		      <guimenuitem>設定&hellip;</guimenuitem>
+		    </menuchoice> &mdash; 
+		    <link linkend="prefs"><interface>設定&hellip;
+		    </interface></link>ダイアログを開きます。
+		  </para>
+		</listitem>
+
+	      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term><guimenu>Documents</guimenu></term>
+
+	  <listitem>
+	    <para>
+	      このメニューには、<application>gedit</application>で現在開いているすべてのファイルが表示されます。ファイルをクリックすると、そのファイルが<interface>メインウィンドウ</interface>に表示され編集できます。
+	    </para>
+	  </listitem>
+
+	</varlistentry>
+	<varlistentry>
+	  <term><guimenu>ヘルプ</guimenu></term>
+	
+	  <listitem>
+	    <para>
+	      メニューの内容:
+	      <itemizedlist mark="opencircle">
+		<listitem>
+		  <para>
+		    <guimenuitem>Help</guimenuitem> &mdash;
+		    このマニュアルを開きます。	  </para>
+		</listitem>
+		
+		<listitem>
+		  <para>
+		    <guimenuitem>情報</guimenuitem> &mdash;
+		    作者や現開発者名、現在のバージョンなど<application>gedit</application>の基本的な情報を表示します。
+		  </para>
+		</listitem>
+      </itemizedlist>
+
+	    </para>
+	  </listitem>
+	</varlistentry>
+
+      </variablelist>
+    </sect2>
+
+    <sect2 id="pop-up-menu">
+      <title>右クリックメニュー</title>
+      <para>
+	<interface>右クリック</interface>メニューは<application>gedit</application>の<interface>Main Window</interface>で右クリックするとアクセスできます。
+      </para>
+
+      <para>
+	メニューの内容:
+	
+	<itemizedlist mark="opencircle">
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-X</keysym>
+		</shortcut>
+		<guimenuitem>切り取り</guimenuitem>
+	      </menuchoice> &mdash; 
+これは、<interface>text window</interface>で選択されたテキストをバッファの移してテキストは削除します。
+<guimenuitem>張り付け</guimenuitem>でバッファのテキストを取り出して
+編集中のファイルに挿入します。
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-C</keysym>
+		</shortcut>
+		<guimenuitem>コピー<guimenuitem>
+	      </menuchoice> &mdash; 
+これは、<interface>テキストウィンドウ</interface>で選択されたテキストをバッファに蓄えますが、
+削除はしません。
+<guimenuitem>張り付け</guimenuitem>でバッファのテキストを取り出して
+編集中のファイルに挿入します。
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-V</keysym>
+		</shortcut>
+		<guimenuitem>貼り付け</guimenuitem>
+	      </menuchoice> &mdash; 
+	      これは、バッファの内容を文書に挿入します。
+		    <guimenuitem>切り取り</guimenuitem>と<guimenuitem>コピー</guimenuitem>がバッファに蓄える方法です。
+	    </para>
+	  </listitem>
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<guimenuitem>全選択</guimenuitem>
+	      </menuchoice> &mdash; 
+	      現在編集中の文書のすべてのテキストを選択します。
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-S</keysym>
+		</shortcut>
+		<guimenuitem>保存</guimenuitem>
+	      </menuchoice> &mdash; 
+		    以前に保存したファイルがあればそのファイルに保存します。
+		    そうでなければ、<interface>名前を付けて保存&hellip</interface>ダイアログ
+		    を開きます。
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<shortcut>
+		  <keysym>Ctl-W</keysym>
+		</shortcut>
+		<guimenuitem>閉じる</guimenuitem>
+	      </menuchoice> &mdash; 
+	      これは<application>gedit</application>の文書を閉じます。もし、保存されていなければ変更を保存するか破棄するかを問い合わせます。
+	    </para>
+	  </listitem>
+	  
+	  <listitem>
+	    <para>
+	      <menuchoice>
+		<guimenuitem>Print</guimenuitem>
+	      </menuchoice> &mdash; 
+	      これは、<interface>印刷</interface>ダイアログを開きます。
+<guimenuitem>印刷</guimenuitem>に関してさらに詳しいことは<link linkend="print-dialog-fig"><interface>印刷</interface>ダイアログ</link>を見てください。
+	    </para>
+	  </listitem>
+	</itemizedlist>
+      </para>
+    </sect2>
+  </sect1>
+  
+ <sect1 id="bugs">
+  <title>既知不具合</title>
+
+    <para>
+      <itemizedlist mark="opencircle">
+	<listitem>
+	  <para>
+            <application>gedit</application>は構文強調が使えませんん。
+            <application>gedit</application>が使用しているウィジェットは構文強調に適していないのです。
+	  </para>
+	</listitem>
+      </itemizedlist>
+    </para>
+
+  </sect1>
+
+  <sect1 id="faq">
+    <title>よくある質問</title>
+
+    <qandaset defaultlabel="qanda">
+
+      <qandaentry id="highlighting">
+	<question>
+	  <para>
+	    構文強調をしたいのですが、いつ頃組み込まれるのでしょうか？
+	  </para>
+	</question>
+	
+	<answer>
+	  <para>
+	  現在、GTK+ テキストウジェトは構文強調を確実に行なうには適していません。
+          新しいテキストウジェットに移行したときには、構文強調を追加します。
+	  </para>
+	  <para>
+          ほかの手段としては、<application>gedit</application>はシンプルなテキストエディタのつもりなので、
+          もし、構文強調を求めるのなら、それを満たす<application>VIM</application>や、<application>emacs</application>、<application>elvis</application>などの
+テキストエディタを使用することを強く推奨します。
+	  </para>
+	</answer>
+      </qandaentry>
+<!--
+      <qandaentry id="slow-screen">
+	<question>
+	  <para>
+	    <application>Gedit</application> seems very slow when I type.  After I start typing, 
+	    I can see the text appearing slowly, one character at a time.  What is wrong?
+	  </para>
+	</question>
+	<answer>
+	  <para>
+	    This behavior occurs when the active theme is poorly written.  Change your theme to 
+	    a nicely written one.  Having this kind of theme is not only affecting the speed 
+	    the <application>gedit</application> window is being redrawn, but all the gtk windows.  
+	    In <application>gedit</application> it is just more evident.
+	  </para>
+	</answer>
+      </qandaentry>
+-->
+    </qandaset>
+  </sect1>
+
+
+<!-- ============= Authors ================================ -->
+
+ <sect1 id="authors">
+  <title>Authors</title>
+  <para>
+   <application>gedit</application>はAlex Roberts(<email>bse@error.fsnet.co.uk</email>)とEvan Lawrence によって作成されました。
+現在はChema Celorio (<email>chema@celorio.com</email>)とJason Leach(<email>leach@wam.umd.edu</email>) によって整備されています。
+<application>gedit</application>の画像関係の仕事はSteve Hall (<email>steve_hall@mindspring.com</email>)が行ないました。
+<application>gedit</application>のさらに詳しい情報を手に入れるためには、<ulink
+   url="http://gedit.sourceforge.net" type="http">gedit のウェブページ
+</ulink>http://gedit.sourceforge.netを見てください。
+<application>gedit</application>に対するコメントや提案はメーリングリスト
+(<email>gedit-list@sourceforge.org</email>)に送ってください。
+バク情報は<ulink url="http://bugs.gnome.org" type="http">GNOME
+   bug tracking database</ulink>に送ってください。 (バグ報告の説明は
+   <ulink
+   url="http://bugs.gnome.org/Reporting.html" type="http">
+   オンライン</ulink>で見つけられます。) 
+   もしGNOME 1.1 以降を使っているなら、<guimenu>メインメニュー</guimenu>の中の
+   <guisubmenu>ユーティリティー</guisubmenu>にある
+   <application>バグ報告ツール(<command>bug-buddy</command>)</application>も使えます。
+  </para>
+
+  <para>
+   このマニュアルはEric Baudais(<email>baudais@okstate.edu</email>)が作成しました。このマニュアルへのコメントや提案があったら
+<ulink type="http" url="http://www.gnome.org/gdp">GNOME Documentation Project</ulink>に<email>docs@gnome.org</email>で、
+送ってください。
+また、<ulink type="http"
+   url="http://www.gnome.org/gdp/doctable/">GNOME Documentation Status
+   Table</ulink>.を使ってオンラインでコメントを送ることもできます。
+  </para>
+
+   <para>
+   日本語訳は小松崎章仁(<email>akomatsu@apricot.ocn.ne.jp</email>)が行ないました。これに関してコメントや提案がありましたらメールを送ってください。
+
+  </para>
+
+
+ </sect1>
+
+
+ <!-- ============= Application License ============================= -->
+
+ <sect1 id="license">
+  <title>ライセンス</title>
+  <para>
+  このプログラムはフリーソフトウェアです。<citetitle>GNU 一般公有使用許諾誓約書</citetitle>
+  第二版（とあなたのオプション）、もしくはそれ以降
+  に基づく再配布、変造ができます。
+  </para>
+  <para>
+このプログラムは役に立つことを望んで配布されていますが、いかなる保証もありません。
+商用や特殊な目的での使用は暗黙の保証もありません。さらに詳しくは
+<citetitle>GNU 一般公有使用許諾契約書</citetitle>を見てください。
+  </para>
+  <para>
+<citetitle>GNU 一般公有使用許諾契約書</citetitle>の写しが
+<citetitle>GNOME ユーザガイド</citetitle>の付録に含まれています。
+また、<citetitle>GNU 一般公有使用許諾契約書</citetitle>の写し
+を<ulink type="http"
+   url="http://www.fsf.org">Web サイト</ulink>を見るか、
+   <address>
+    Free Software Foundation, Inc.
+    <street>59 Temple Place</street> - Suite 330
+    <city>Boston</city>, <state>MA</state> <postcode>02111-1307</postcode>
+    <country>USA</country>
+   </address>
+   に書き送ることで入手できます。
+  </para>
+ </sect1>  
+</article>
+
+
+
+
