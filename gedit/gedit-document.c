@@ -917,14 +917,17 @@ gedit_document_save_a_copy_as (GeditDocument* doc, const gchar *uri, GError **er
 /* FIXME: define new ERROR_CODE and remove the error 
  * strings from here -- Paolo
  */
+#define BAK_EXTENSION_PLUS "~00~"
+
 static gboolean	
 gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	       gboolean create_backup_copy, GError **error)
 {
-	FILE* file;
-	gchar* chars;
-	gchar* fname;
-	gchar* bak_fname = NULL;
+	FILE  *file;
+	gchar *chars;
+	gchar *fname;
+	gchar *bak_fname = NULL;
+	gchar *temp_fname = NULL;
 	gboolean have_backup = FALSE;
 	gboolean res = FALSE;
 	
@@ -957,11 +960,11 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	
 	fname = gnome_vfs_x_format_uri_for_display (uri);
 
-	if (create_backup_copy && (fname != NULL))
+	if (fname != NULL)
 	{
-		bak_fname = g_strconcat (fname, gedit_settings->backup_extension, NULL);
+		temp_fname = g_strconcat (fname, gedit_settings->backup_extension, BAK_EXTENSION_PLUS, NULL);
 		
-		if ((bak_fname == NULL) || (rename (fname, bak_fname) != 0))
+		if ((temp_fname == NULL) || (rename (fname, temp_fname) != 0))
     		{
       			if (errno != ENOENT)
 			{
@@ -971,8 +974,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 				if (fname != NULL) 
 					g_free (fname);
 
-				if (bak_fname != NULL) 
-					g_free (bak_fname);
+				if (temp_fname != NULL) 
+					g_free (temp_fname);
 
 				return FALSE;
 
@@ -980,7 +983,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
     		}
   		else
     			have_backup = TRUE;
-	}
+	}	
 
 	if ((fname == NULL) || ((file = fopen (fname, "w")) == NULL))
 	{
@@ -1049,12 +1052,27 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 	res = TRUE;
 	
 finally:
-	if (!res && have_backup)
-		/* FIXME: should the errors be managed ? - Paolo */
-      		rename (bak_fname, fname);
+
+	if (have_backup)
+	{
+		/* FIXME: should the I/O errors be managed ? - Paolo */
+		if (!res)
+      			rename (temp_fname, fname);
+		else 
+			if (create_backup_copy)
+			{
+				bak_fname = g_strconcat (fname, gedit_settings->backup_extension, NULL);
+				rename (temp_fname, bak_fname);
+			}
+			else
+				unlink (temp_fname);			
+	}
 	
 	if (fname != NULL) 
 		g_free (fname);
+
+	if (temp_fname != NULL) 
+		g_free (temp_fname);
 
 	if (bak_fname != NULL) 
 		g_free (bak_fname);
