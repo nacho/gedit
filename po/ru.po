@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-06-10 16:49+0000\n"
-"PO-Revision-Date: 2000-06-10 16:49+00:00\n"
+"POT-Creation-Date: 2000-06-13 20:03+0000\n"
+"PO-Revision-Date: 2000-06-13 20:04+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr "Просмотр Web"
 msgid "Web browse plugin"
 msgstr "Дополнение просмотра Web"
 
-#: plugins/convert/convert.c:129
+#: plugins/convert/convert.c:150
 msgid "Convert"
 msgstr "Преобразовать"
 
@@ -29,7 +29,7 @@ msgstr "Преобразовать"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: plugins/convert/convert.c:130 plugins/convert/convert.glade.h:7
+#: plugins/convert/convert.c:151 plugins/convert/convert.glade.h:7
 msgid "Number Converter"
 msgstr "Преобразователь чисел"
 
@@ -61,16 +61,16 @@ msgstr "Diff"
 msgid "Diff plugin."
 msgstr "Дополнение diff"
 
-#: plugins/email/email.c:135 plugins/email/email.c:144 src/document.c:159
+#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:237
 #: src/print.c:475
 msgid "Untitled"
 msgstr "Безымянное"
 
-#: plugins/email/email.c:166
+#: plugins/email/email.c:172
 msgid "Email"
 msgstr "Эл. адрес"
 
-#: plugins/email/email.c:167
+#: plugins/email/email.c:173
 msgid "Email the current document"
 msgstr "Эл. адрес текущего документа"
 
@@ -141,16 +141,16 @@ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:535
+#: src/dialogs/dialog-prefs.c:536
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
-#: src/dialogs/dialog-replace.c:172
+#: src/dialogs/dialog-replace.c:176
 #, c-format
 msgid "found and replaced %i occurrences."
 msgstr "найдено и заменено %i вхождений."
 
-#: src/dialogs/dialog-replace.c:234 src/search.c:288
+#: src/dialogs/dialog-replace.c:241 src/search.c:288
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Текст найден в строке:%i"
@@ -340,9 +340,9 @@ msgstr "Бумага"
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/dialogs/replace.glade.h:8
-msgid "Find Next"
-msgstr "Найти следующее"
+#: src/dialogs/replace.glade.h:8 src/menus.c:365
+msgid "Find"
+msgstr "Найти"
 
 #: src/dialogs/replace.glade.h:10
 msgid "Replace All"
@@ -370,16 +370,16 @@ msgstr "Чувствительный к регистру"
 
 #. xgettext translators : RO = Read Only, it apears before
 #. the document "tab" in the mdi window like "R0 - file.txt"
-#: src/document.c:162
+#: src/document.c:240
 msgid "RO - "
 msgstr "Только чтение - "
 
-#: src/document.c:344
+#: src/document.c:433
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
 
-#: src/file.c:94
+#: src/file.c:103
 msgid ""
 "An error was encountered while opening the file.\n"
 "Please make sure the file exists."
@@ -387,7 +387,7 @@ msgstr ""
 "При открытии файла была обнаружена ошибка.\n"
 "Убедитесь, что файл существует."
 
-#: src/file.c:101
+#: src/file.c:110
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -406,11 +406,11 @@ msgstr ""
 "Убедитесь, что файл не используется другим приложением\n"
 "и что файл не пуст."
 
-#: src/file.c:111 src/file.c:254
+#: src/file.c:120 src/file.c:362
 msgid "Could not allocate the required memory."
 msgstr "Не удалось получить необходимую память."
 
-#: src/file.c:117
+#: src/file.c:126
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -425,7 +425,7 @@ msgstr ""
 "\n"
 "Убедитесь, что у вас есть права на чтение этого файла."
 
-#: src/file.c:171
+#: src/file.c:208
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -442,7 +442,7 @@ msgstr ""
 "Убедитесь, что указанный путь существует и что у вас есть соответствующие "
 "права на запись."
 
-#: src/file.c:184
+#: src/file.c:222
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -459,7 +459,7 @@ msgstr ""
 "По неизвестной причине (1). Пожалуйста сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:198
+#: src/file.c:237
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -476,41 +476,41 @@ msgstr ""
 "По неизвестной причине (2). Пожалуйста сообщите об этой Проблеме по адресу "
 "submit@bugs.gnome.org"
 
-#: src/file.c:273
-msgid "Error in the pipe ."
-msgstr "Ошибка в канале."
-
 #: src/file.c:324
-msgid "Open File ..."
-msgstr "Открыть файл..."
-
-#: src/file.c:365
 msgid "Save As..."
 msgstr "Сохранить как..."
 
-#: src/file.c:401
+#: src/file.c:381
+msgid "Error in the pipe ."
+msgstr "Ошибка в канале."
+
+#: src/file.c:436
+msgid "Open File ..."
+msgstr "Открыть файл..."
+
+#: src/file.c:494
 #, c-format
 msgid "Loaded file %s"
 msgstr "Загружен файл %s"
 
-#: src/file.c:465
+#: src/file.c:586
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "'%s' будет перезаписан. Хотите продолжить?"
 
-#: src/file.c:476
+#: src/file.c:598
 msgid "Document has not been saved."
 msgstr "Документ не был сохранен."
 
-#: src/file.c:485
+#: src/file.c:608
 msgid "Error saving file!"
 msgstr "Ошибка при сохранении файла!"
 
-#: src/file.c:558
+#: src/file.c:708
 msgid "You can't revert an Untitled document\n"
 msgstr "Вы не можете восстановить неозаглавленный документ\n"
 
-#: src/file.c:571
+#: src/file.c:721
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -519,7 +519,7 @@ msgstr ""
 "Вы уверены в том что хотите отменить все изменения?\n"
 "(%s)"
 
-#: src/file.c:600
+#: src/file.c:750
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Файл '%s' не существует. Хотите создать его?"
@@ -714,10 +714,6 @@ msgid "Paste the clipboard"
 msgstr "Вставить из буфера обмена"
 
 #: src/menus.c:365
-msgid "Find"
-msgstr "Найти"
-
-#: src/menus.c:365
 msgid "Search for a string"
 msgstr "Поиск строки"
 
@@ -768,13 +764,18 @@ msgstr "gEdit (%s): Просмотр печати"
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
 
-#: src/recent.c:187
+#: src/recent.c:188
 msgid "_File/"
 msgstr "Файл/"
 
-#: src/recent.c:195 src/recent.c:196
+#: src/recent.c:196 src/recent.c:197
 msgid "_File"
 msgstr "Файл"
+
+#: src/recent.c:251
+#, c-format
+msgid "Unable to open recent file : %s"
+msgstr "Ошибка, не удалось открыть недавно открывавшийся файл: %s"
 
 #: src/search.c:190
 msgid ""
