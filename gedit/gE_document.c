@@ -105,7 +105,7 @@ gE_window *gE_window_new()
 
 #ifdef WITHOUT_GNOME
 /*
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
   gtk_window_add_accel_group(GTK_WINDOW(window->window), window->accel);
 #else
   gtk_window_add_accelerator_table(GTK_WINDOW(window->window), window->accel);

@@ -129,7 +129,7 @@ void
 gE_menus_init (gE_window *window, gE_data *data)
 {
 	GtkWidget **menubar;
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	GtkAccelGroup **accel;
 #else
 	GtkAcceleratorTable **accel;
@@ -145,7 +145,7 @@ gE_menus_init (gE_window *window, gE_data *data)
 		*menubar = subfactory->widget;
 		window->factory = subfactory;
 	}
-#ifdef GTK_HAVE_ACCEL_GROUP
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	if(accel)
 		*accel = subfactory->accel_group;
 #else
