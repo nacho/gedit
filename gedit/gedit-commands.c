@@ -137,6 +137,7 @@ gedit_cmd_file_open_uri (BonoboUIComponent *uic, gpointer user_data, const gchar
 void
 gedit_cmd_file_print (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
+
 	TO_BE_IMPLEMENTED
 /*		
 	GeditMDIChild *active_child;

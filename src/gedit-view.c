@@ -470,10 +470,3 @@ gedit_view_set_tab_size (GeditView* view, gint tab_size)
 	pango_tab_array_free (tab_array);
 
 }
-
-
-
-
-	
-
-

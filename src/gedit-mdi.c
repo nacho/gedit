@@ -307,6 +307,13 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	if (ret != BONOBO_UI_ERROR_OK) 
 		goto error;
 
+	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
+					"tips", settings->show_tooltips ? "1" : "0");
+
+	if (ret != BONOBO_UI_ERROR_OK) 
+		goto error;
+
+
 	switch (settings->toolbar_labels)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
@@ -332,12 +339,13 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 		case GEDIT_TOOLBAR_ICONS:
 			gedit_debug (DEBUG_MDI, "GEDIT: ICONS");
 			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-						"look", "icons");
+						"look", "icon");
 			if (ret != BONOBO_UI_ERROR_OK) 
 					goto error;
 
 			break;
 		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
+			gedit_debug (DEBUG_MDI, "GEDIT: ICONS_AND_TEXT");
 			ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
 						"look", "both");
 			if (ret != BONOBO_UI_ERROR_OK) 
@@ -347,15 +355,9 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 			goto error;
 		break;
 	}
-
-	ret = bonobo_ui_engine_xml_set_prop (ui_engine, "/Toolbar",
-					"tips", settings->show_tooltips ? "1" : "0");
-
-	if (ret != BONOBO_UI_ERROR_OK) 
-		goto error;
-
+	
 	bonobo_ui_engine_thaw (ui_engine);
-
+	
 	return;
 	
 error:
