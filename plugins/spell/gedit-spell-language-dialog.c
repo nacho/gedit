@@ -31,11 +31,9 @@
 #include <config.h>
 #endif
 
+#include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnome/libgnome.h>
 #include <gtk/gtk.h>
-
-#include <glib/gslist.h>
 
 #include "gedit-spell-language-dialog.h"
 

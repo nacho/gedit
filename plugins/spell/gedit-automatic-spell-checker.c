@@ -37,7 +37,8 @@
 #endif
 
 #include <string.h>
-#include <libgnome/gnome-i18n.h>
+
+#include <glib/gi18n.h>
 
 #include "gedit-automatic-spell-checker.h"
 

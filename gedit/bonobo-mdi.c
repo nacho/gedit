@@ -34,7 +34,7 @@
 
 #include "bonobo-mdi.h"
 
-#include <bonobo/bonobo-i18n.h>
+#include <glib/gi18n-lib.h>
 #include <gedit-marshal.h>
 #include <bonobo/bonobo-dock-layout.h>
 #include <bonobo/bonobo-ui-util.h>

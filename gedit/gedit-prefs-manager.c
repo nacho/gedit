@@ -33,16 +33,13 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <gconf/gconf-value.h>
-
-#include <libgnome/gnome-i18n.h>
 #include <libgnomeprint/gnome-font.h>
 
 #include "gedit-prefs-manager.h"
 #include "gedit-prefs-manager-private.h"
-
 #include "gedit-debug.h"
-
 #include "gedit-encodings.h"
 
 #define DEFINE_BOOL_PREF(name, key, def) gboolean 			\
@@ -617,7 +614,6 @@ gedit_prefs_manager_set_wrap_mode (GtkWrapMode wp)
 	gedit_prefs_manager_set_string (GPM_WRAP_MODE,
 					str);
 }
-
 	
 gboolean
 gedit_prefs_manager_wrap_mode_can_set (void)
@@ -793,7 +789,6 @@ gedit_prefs_manager_set_print_wrap_mode (GtkWrapMode pwp)
 					str);
 }
 
-	
 gboolean
 gedit_prefs_manager_print_wrap_mode_can_set (void)
 {
@@ -1112,8 +1107,6 @@ gedit_prefs_manager_get_auto_detected_encodings (void)
 	return res;
 }
 
-
-
 GSList *
 gedit_prefs_manager_get_shown_in_menu_encodings (void)
 {
@@ -1423,6 +1416,4 @@ gconf_client_get_int_with_default (GConfClient* client, const gchar* key,
       return def;
     }
 }
-
-
 

@@ -31,14 +31,11 @@
 #include <config.h>
 #endif
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
-#include <libgnome/gnome-i18n.h>
-
 #include "gedit-encodings-option-menu.h"
-
 #include "gedit-prefs-manager.h"
-
 #include "dialogs/gedit-encodings-dialog.h"
 
 #define ENCODING_KEY "Enconding"

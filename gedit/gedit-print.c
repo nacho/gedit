@@ -36,13 +36,13 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>	/* For strlen */
 
-#include <libgnome/libgnome.h>
+#include <glib/gi18n.h>
+#include <libgnome/gnome-util.h>
 #include <libgnomeprintui/gnome-print-dialog.h>
 #include <libgnomeprintui/gnome-print-job-preview.h>
 #include <gtksourceview/gtksourceprintjob.h>
-
-#include <string.h>	/* For strlen */
 
 #include "gedit2.h"
 #include "gedit-print.h"

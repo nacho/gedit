@@ -32,14 +32,13 @@
 #include <config.h>
 #endif
 
+#include <glib/gi18n.h>
 #include <libgnomeui/gnome-popup-menu.h>
 #include <libgnomeui/gnome-icon-theme.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
 #include <gtk/gtkeventbox.h>
-
-#include <bonobo/bonobo-i18n.h>
 
 #include "gedit-mdi-child.h"
 #include "gedit-debug.h"

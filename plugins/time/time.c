@@ -32,14 +32,13 @@
 #endif
 
 #include <string.h>
+#include <time.h>
 
+#include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnome/gnome-i18n.h>
 #include <gconf/gconf-client.h>
 #include <libgnome/gnome-help.h>
 #include <libgnome/gnome-config.h>
-
-#include <time.h>
 
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-debug.h>

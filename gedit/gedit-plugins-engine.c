@@ -33,8 +33,8 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <libgnome/gnome-util.h>
-#include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-theme-parser.h>
 #include <gconf/gconf-client.h>
 

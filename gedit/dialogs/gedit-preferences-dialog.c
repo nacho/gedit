@@ -33,11 +33,10 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnome/libgnome.h>
+#include <libgnome/gnome-help.h>
 #include <gconf/gconf-client.h>
-#include <libgnomeui/libgnomeui.h>
-
 #include <gtksourceview/gtksourcetag.h>
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagesmanager.h>

@@ -33,8 +33,8 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnome/libgnome.h>
 #include <libgnomeui/gnome-entry.h>
 
 #include "gedit2.h"

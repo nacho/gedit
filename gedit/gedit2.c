@@ -35,6 +35,7 @@
 #include <locale.h>
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>

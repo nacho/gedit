@@ -33,6 +33,8 @@
 #include <config.h>
 #endif
 
+#include <glib/gi18n.h>
+
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>

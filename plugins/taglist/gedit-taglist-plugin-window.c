@@ -31,12 +31,12 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-help.h>
 #include <gdk/gdkkeysyms.h>
-
-#include <string.h>
 
 #include "gedit-taglist-plugin.h"
 #include "gedit-taglist-plugin-window.h"

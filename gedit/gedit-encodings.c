@@ -31,16 +31,18 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
+#include <glib/gi18n.h>
+
 #include "gedit-encodings.h"
 
-#include <bonobo/bonobo-i18n.h>
-#include <string.h>
 
 struct _GeditEncoding
 {
-  gint   index;
-  gchar *charset;
-  gchar *name;
+	gint   index;
+	gchar *charset;
+	gchar *name;
 };
 
 /* 
@@ -389,7 +391,6 @@ gedit_encoding_get_current (void)
 
 	return locale_encoding;
 }
-	
 
 gchar *
 gedit_encoding_to_string (const GeditEncoding* enc)
@@ -431,5 +432,4 @@ gedit_encoding_get_name (const GeditEncoding* enc)
 
 	return (enc->name == NULL) ? _("Unknown") : enc->name;
 }
-
 

@@ -10,8 +10,10 @@
 #include <config.h>
 #endif
 
-#include <gnome.h>
 #include <string.h>
+
+#include <glib/gi18n.h>
+#include <libgnome/gnome-help.h>
 #include <glade/glade-xml.h>
 
 #include <gedit/gedit-menus.h>

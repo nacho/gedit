@@ -33,17 +33,16 @@
 
 #include <string.h>
 
-#include "gedit-encodings-dialog.h"
-
-#include <glade/glade-xml.h>
-#include <libgnome/libgnome.h>
-#include <gtk/gtk.h>
 
 #include <glib/gslist.h>
+#include <glib/gi18n.h>
+#include <glade/glade-xml.h>
+#include <libgnome/gnome-help.h>
+#include <gtk/gtk.h>
 
+#include "gedit-encodings-dialog.h"
 #include "gedit-encodings.h"
 #include "gedit-prefs-manager.h"
-
 #include "gedit-debug.h"
 
 

@@ -33,8 +33,9 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnome/libgnome.h>
+#include <libgnome/gnome-help.h>
 #include <gconf/gconf-client.h>
 
 #include <gedit/gedit-prefs-manager.h>

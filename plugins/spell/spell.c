@@ -34,7 +34,7 @@
 #include <string.h> /* For strlen */
 
 #include <glib/gutils.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 #include <gedit/gedit-menus.h>
 #include <gedit/gedit-plugin.h>
@@ -623,7 +623,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	{
 		/* get selection points */
 		start = gtk_text_iter_get_offset (&sel_start);
-		start = gtk_text_iter_get_offset (&sel_end);
+		end = gtk_text_iter_get_offset (&sel_end);
 		set_check_range (doc, start, end);
 		sel = TRUE;
 	}

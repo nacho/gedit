@@ -32,9 +32,9 @@
 #include <config.h>
 #endif
 
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include <libgnome/gnome-i18n.h>
 #include <libgnomeui/gnome-popup-menu.h>
 
 #include "gedit-output-window.h"

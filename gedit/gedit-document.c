@@ -33,6 +33,7 @@
 #include <config.h>
 #endif
 
+#include <errno.h>
 #include <unistd.h>  
 #include <stdio.h>
 #include <string.h>
@@ -41,10 +42,9 @@
 #include <sys/param.h>
 #include <fcntl.h>
 
-#include <libgnome/libgnome.h>
+#include <glib/gi18n.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <eel/eel-vfs-extensions.h>
-
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 
 #include "gedit-prefs-manager-app.h"

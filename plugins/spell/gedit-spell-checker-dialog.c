@@ -33,8 +33,8 @@
 
 #include <string.h>
 
+#include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <bonobo/bonobo-i18n.h>
 #include <gtk/gtk.h>
 
 #include "gedit-spell-checker-dialog.h"

@@ -31,13 +31,12 @@
 #include <config.h>
 #endif
 
-#include <glade/glade-xml.h>
-#include <libgnome/libgnome.h>
-
 #include <string.h>
 
-#include "gedit-plugin-manager.h"
+#include <glib/gi18n.h>
+#include <glade/glade-xml.h>
 
+#include "gedit-plugin-manager.h"
 #include "gedit2.h"
 #include "gedit-mdi.h"
 #include "gedit-utils.h"

@@ -34,7 +34,7 @@
 #include <string.h> /* For strlen */
 
 #include <glib/gutils.h>
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 #include <gedit/gedit-menus.h>
 #include <gedit/gedit-plugin.h>

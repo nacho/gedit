@@ -35,8 +35,8 @@
 
 #include <pspell/pspell.h>
 
+#include <glib/gi18n.h>
 #include <glib/gstrfuncs.h>
-#include <bonobo/bonobo-i18n.h>
 
 #include "gedit-spell-checker.h"
 

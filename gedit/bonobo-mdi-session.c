@@ -29,8 +29,6 @@
 #include <stdio.h>
 #include <string.h>
 
-/*#include "gnome-i18nP.h"*/
-
 #include "bonobo-mdi-session.h"
 #include <libgnome/gnome-config.h>
 #include <bonobo/bonobo-dock-layout.h>

@@ -34,8 +34,11 @@
 #endif
 
 #include <string.h>
+
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <libgnome/libgnome.h>
+#include <libgnome/gnome-help.h>
+#include <libgnome/gnome-url.h>
 
 #include "gedit-commands.h"
 #include "gedit2.h"

@@ -34,16 +34,14 @@
 
 #include <string.h>
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 #include <gdk/gdkkeysyms.h>
-
 #include <gtksourceview/gtksourceview.h>
 
 #include "gedit-view.h"
 #include "gedit-debug.h"
 #include "gedit-menus.h"
 #include "gedit-prefs-manager-app.h"
-
 #include "gedit-marshal.h"
 
 #define MIN_NUMBER_WINDOW_WIDTH 20

@@ -31,12 +31,11 @@
 #include <config.h>
 #endif
 
-#include <glade/glade-xml.h>
-#include <libgnome/gnome-i18n.h>
-
-#include <pango/pango-break.h>
-
 #include <string.h> /* For strlen (...) */
+
+#include <glib/gi18n.h>
+#include <glade/glade-xml.h>
+#include <pango/pango-break.h>
 
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-debug.h>

@@ -31,9 +31,9 @@
 #include <config.h>
 #endif
 
+#include <glib/gi18n.h>
 #include <glade/glade-xml.h>
 #include <libgnomeui/libgnomeui.h>
-#include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-help.h>
 #include <gconf/gconf-client.h>
 
