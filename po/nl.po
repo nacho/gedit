@@ -15,9 +15,9 @@ msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-21 20:01+0100\n"
-"PO-Revision-Date: 2004-08-23 13:20+0100\n"
+"PO-Revision-Date: 2004-12-23 19:26+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
-"Language-Team: Dutch <vertaling@nl.linux.org>\n"
+"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -65,9 +65,8 @@ msgstr ""
 "uitgeschakeld."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "%s activeren"
+msgstr "Actieve plug-ins"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -195,6 +194,9 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"Lijst van actieve plug-ins. Deze bevat de \"Lokatie\" van de actieve "
+"plug-ins. Zie het .gedit-plugin bestand voor informatie over de \"Lokatie\" "
+"van een bepaalde plug-in."
 
 #: data/gedit.schemas.in.h:27
 msgid ""
@@ -219,9 +221,8 @@ msgid "Monospace 12"
 msgstr "Vaste spatiëring 12"
 
 #: data/gedit.schemas.in.h:31
-#, fuzzy
 msgid "Monospace 9"
-msgstr "Vaste spatiëring 12"
+msgstr "Vaste spatiëring 9"
 
 #: data/gedit.schemas.in.h:32
 msgid "Monospace Regular 9"
@@ -256,14 +257,12 @@ msgid "Right Margin Position"
 msgstr "Positie van rechterkantlijn"
 
 #: data/gedit.schemas.in.h:39
-#, fuzzy
 msgid "Sans 11"
-msgstr "Schreefloos Normaal 11"
+msgstr "Schreefloos 11"
 
 #: data/gedit.schemas.in.h:40
-#, fuzzy
 msgid "Sans 8"
-msgstr "Spaans"
+msgstr "Schreefloos 8"
 
 #: data/gedit.schemas.in.h:41
 msgid "Sans Regular 11"
@@ -326,12 +325,13 @@ msgstr ""
 "Het lettertype om te gebruiken voor de inhoud van documenten bij afdrukken."
 
 #: data/gedit.schemas.in.h:49
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
-"Het lettertype om te gebruiken voor de inhoud van documenten bij afdrukken."
+"Geeft het lettertype aan om te gebruiken voor de inhoud van documenten bij "
+"het afdrukken ervan. Dit is een gnome-print lettertypenaam en wordt vervangen "
+"door print_font_body_pango."
 
 #: data/gedit.schemas.in.h:50
 msgid ""
@@ -343,15 +343,15 @@ msgstr ""
 "\" is ingeschakeld."
 
 #: data/gedit.schemas.in.h:51
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
-"Het lettertype om te gebruiken voor de regelnummers van documenten bij "
+"Geeft het lettertype aan om te gebruiken voor de regelnummers bij het "
 "afdrukken. Dit heeft alleen effect indien de optie \"Regelnummers afdrukken"
-"\" is ingeschakeld."
+"\" is ingeschakeld. Dit is een gnome-print lettertypenaam en wordt vervangen "
+"door print_font_numbers_pango."
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -363,15 +363,15 @@ msgstr ""
 "\" is ingeschakeld."
 
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
-"Het lettertype om te gebruiken voor de koptekst van documenten bij "
+"Het lettertype om te gebruiken voor de koptekst van documenten bij het "
 "afdrukken. Dit heeft alleen effect indien de optie \"Paginakoppen afdrukken"
-"\" is ingeschakeld."
+"\" is ingeschakeld. Dit is een gnome-print lettertypenaam en wordt vervangen "
+"door print_font_header_pango."
 
 #: data/gedit.schemas.in.h:54
 msgid ""
@@ -622,7 +622,7 @@ msgstr[1] ""
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
@@ -630,7 +630,7 @@ msgstr[0] ""
 "Als u niet opslaat, zijn de wijzigingen van het afgelopen uur definitief "
 "verloren."
 msgstr[1] ""
-"Als u niet opslaat, zijn de wijzigingen van het afgelopen uur definitief "
+"Als u niet opslaat, zijn de wijzigingen van de afgelopen %d uur definitief "
 "verloren."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -711,7 +711,7 @@ msgstr[1] "%d zoektermen gevonden en vervangen."
 
 #: gedit/dialogs/gedit-dialog-uri.c:91
 msgid "Open Location"
-msgstr "Locatie openen"
+msgstr "Lokatie openen"
 
 #: gedit/dialogs/gedit-encodings-dialog.c:72
 #, c-format
@@ -751,7 +751,7 @@ msgstr "Ingeschakeld"
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:86
 #: gedit/dialogs/program-location-dialog.glade2.h:2
 msgid "Set program location..."
-msgstr "Programmalocatie instellen..."
+msgstr "Programmalokatie instellen..."
 
 #: gedit/dialogs/gedit-plugin-program-location-dialog.c:116
 #, c-format
@@ -810,7 +810,6 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatisch inspringen</b>"
 
@@ -836,9 +835,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Rechterkantlijn</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>Tabbladen</b>"
+msgstr "<b>Tab-afstanden</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -980,7 +978,6 @@ msgid "_Display line numbers"
 msgstr "Regelnummers _weergeven"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "_Automatisch inspringen inschakelen"
 
@@ -1094,11 +1091,11 @@ msgstr "dialoog1"
 
 #: gedit/dialogs/program-location-dialog.glade2.h:1
 msgid "Browse for program location..."
-msgstr "Bladeren naar programmalocatie..."
+msgstr "Bladeren naar programmalokatie..."
 
 #: gedit/dialogs/program-location-dialog.glade2.h:3
 msgid "_Location to search for:"
-msgstr "_Locatie om te zoeken:"
+msgstr "_Lokatie om te zoeken:"
 
 #: gedit/dialogs/program-location-dialog.glade2.h:4
 msgid "label"
@@ -1148,7 +1145,7 @@ msgstr "Te_kencodering:"
 
 #: gedit/dialogs/uri.glade2.h:3
 msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Geef de locatie (URI) van het bestand dat u wilt openen:"
+msgstr "Geef de _lokatie (URI) van het bestand dat u wilt openen:"
 
 #: gedit/dialogs/uri.glade2.h:4
 msgid "Open from URI"
@@ -1170,7 +1167,7 @@ msgstr ""
 "Jan-Willem Harmanny \n"
 "Ronald Hummelink \n"
 "Sander Knopper \n"
-"Reinout van Schouwen \n"
+"Reinout van Schouwen <reinouts@gnome.org>\n"
 "Taco Witte \n"
 "Daniel van Eeden"
 
@@ -1180,9 +1177,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:653 gedit/gedit-document.c:671
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "Do_cumenten"
+msgstr "Niet-opgeslagen document"
 
 #: gedit/gedit-document.c:659 gedit/gedit-document.c:706
 msgid "Invalid file name"
@@ -1208,17 +1204,19 @@ msgstr "gedit kan geen %s: gebruiken in schrijfmodus."
 
 #: gedit/gedit-document.c:1792
 msgid "gedit cannot handle this kind of location in write mode."
-msgstr "gedit kan deze locatie niet gebruiken in schrijfmodus."
+msgstr "de tekst-editor kan deze lokatie niet gebruiken in schrijfmodus."
 
 #: gedit/gedit-document.c:1805
 msgid "Invalid filename."
-msgstr "Ongeldige bestandsnaam"
+msgstr "Ongeldige bestandsnaam."
 
 #: gedit/gedit-document.c:1919
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
-msgstr "Er is niet genoeg vrije schijfruimte om het bestand op te slaan."
+msgstr
+"Er is niet genoeg vrije schijfruimte om het bestand op te slaan.\n"
+"Maak wat schijfruimte vrij en probeer het opnieuw."
 
 #: gedit/gedit-document.c:1924
 msgid ""
@@ -1391,7 +1389,6 @@ msgid "All Text Files"
 msgstr "Alle tekst bestanden"
 
 #: gedit/gedit-file-selector-util.c:382
-#, fuzzy
 msgid "_Character Coding:"
 msgstr "Te_kencodering:"
 
@@ -1486,7 +1483,7 @@ msgstr[1] ""
 "verloren zijn."
 
 #: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
@@ -1494,7 +1491,7 @@ msgstr[0] ""
 "Wijzigingen aan het document van het laatste uur zullen definitief verloren "
 "zijn."
 msgstr[1] ""
-"Wijzigingen aan het document van het laatste uur zullen definitief verloren "
+"Wijzigingen aan het document van de laatste %d uur zullen definitief verloren "
 "zijn."
 
 #: gedit/gedit-file.c:580
@@ -1566,9 +1563,9 @@ msgstr[0] "%d bestand geladen"
 msgstr[1] "%d bestanden geladen"
 
 #: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#, c-format
 msgid "Created file \"%s\""
-msgstr "Bestand \"%s\" geladen"
+msgstr "Bestand \"%s\" aangemaakt"
 
 #: gedit/gedit-file.c:1284
 #, c-format
@@ -1583,18 +1580,15 @@ msgstr[0] "%d bestand wordt geladen..."
 msgstr[1] "%d bestanden worden geladen..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Kan het bestand \"%s\" niet openen."
+msgstr "Kan het bestand \"%s\" niet vinden"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
 msgstr ""
-"\"%s\" is een map.\n"
-"\n"
-"Ga na of u een juiste bestandslocatie heeft ingevoerd en probeer het opnieuw."
+"Ga na of u de lokatie correct heeft ingevoerd en probeer het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1610,161 +1604,137 @@ msgid "Could not open the file \"%s\""
 msgstr "Kan het bestand \"%s\" niet openen."
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Kan het bestand \"%s\" niet openen, want het bevat foute data."
+msgstr "Het bestand bevat gecorrumpeerde gegevens."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit kan geen %s: gebruiken in schrijfmodus."
+msgstr "de tekst-editor kan geen %s:-lokaties aan."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit kan geen %s: gebruiken in schrijfmodus."
+msgstr "de tekst-editor kan deze lokatie niet aan."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr ""
-"Kan het bestand \"%s\" niet openen omdat het data in een onjuist formaat "
-"bevat."
+msgstr "Het bestand bevat gegevens in een onjuist formaat."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Het bestand heeft te veel sybolische verwijzingen."
+msgstr "Het bestand is te groot."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "\"%s\" is een ongeldige lokatie"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "Toegang is geweigerd."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open file and try again."
 msgstr ""
-"Kan het bestand \"%s\" niet openen omdat er teveel bestanden geopend zijn.\n"
-"\n"
-"Sluit enkele bestanden en probeer opnieuw."
+"er zijn te veel geopende bestanden. Sluit er eentje en probeer het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" is een map"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "application and try again."
 msgstr ""
-"Er is niet genoeg geheugen om \"%s\" te openen. Sluit enkele programma's en "
-"probeer opnieuw."
+"Er is niet genoeg geheugen om het bestand te openen. Sluit enkele actieve "
+"programma's en probeer het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"Kan het bestand \"%s\" niet terugzetten omdat de host \"%s\" niet kon worden "
-"gevonden.\n"
-"\n"
-"Kijk of de proxysettings juist zijn en probeer opnieuw."
+"De computer \"%s\" is niet te vinden. Kijk of de proxy-instellingen juist "
+"zijn en probeer het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"\"%s\" is geen geldige locatie.\n"
-"\n"
-"Ga na of u de locatie correct heeft ingetypt en probeer het opnieuw."
+"De hostnaam bleek ongeldig te zijn. Ga na of u de lokatie correct "
+"heeft ingevoerd en probeer het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"Kan het bestand \"%s\" niet openen omdat de hostnaam leeg is.\n"
-"\n"
-"Kijk of de proxy-instellingen juist zijn en probeer opnieuw."
+"De hostnaam is leeg. Kijk of de proxy-instellingen juist zijn en probeer "
+"het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"Kan het bestand \"%s\" niet vinden\n"
-"\n"
-"Kijk of de juiste bestandslocatie werd ingevoerd en probeer opnieuw."
+"Aanmeldpoging is mislukt. Ga na of u de juiste lokatie heeft ingevoerd "
+"en probeer het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
 msgstr ""
-"Kan het bestand \"%s\" niet openen omdat het ongeldige data bevat.\n"
-"\n"
-"U heeft waarschijnlijk geprobeerd een binair bestand te openen."
+"Het bestand bevat ongeldige gegevens. U probeert waarschijnlijk een binair "
+"bestand te openen."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "Het bestand dat u probeert te openen is geen normaal bestand."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"Kon het bestand \"%s\" niet openen omdat gedit niet in staat was de correcte "
-"tekencodering automatisch te bepalen.\n"
-"\n"
-"Ga na of u niet een binair bestand probeert te openen en of u de juiste "
-"tekencodering heeft geselecteerd in het 'Bestand openen...' (of 'Lokatie "
+"De tekst-editor was niet in staat de tekencodering automatisch te bespeuren. "
+"Ga na of u niet een binair bestand probeert te openen en probeer het opnieuw, "
+"waarbij u een tekencodering selecteert in het 'Bestand openen...' (of 'Lokatie "
 "openen')-dialoogvenster."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Kan het bestand \"%s\" niet openen omdat het te groot is."
+msgstr ""
+"Kan het bestand \"%s\" niet openen met gebruikmaking van de %s-"
+"tekencodering."
 
+# tryingto => trying to
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not tryingto open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Kan het bestand \"%s\" niet openen met de %s-tekencodering.\n"
-" \n"
 "Ga na of u niet een binair bestand probeert te openen en of u de juiste "
 "tekencodering heeft geselecteerd in het 'Bestand openen...' (of 'Lokatie "
 "openen')-dialoogvenster en probeer het nogmaals."
 
+# Invalid data format?
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid data. Probably, you are trying to open "
 "a binary file."
 msgstr ""
-"Kan het bestand \"%s\" niet openen omdat het ongeldige data bevat.\n"
-"\n"
-"U heeft waarschijnlijk geprobeerd een binair bestand te openen."
+"Het bestand bevat gegevens in een ongeldig formaat. U probeert waarschijnlijk "
+"een binair bestand te openen."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1773,126 +1743,98 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
 msgstr "Kon het bestand \"%s\" niet terugzetten."
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr ""
-"Kan het bestand \"%s\" niet terugzetten omdat gedit het niet kon vinden.\n"
-"\n"
-"Misschien is het onlangs verwijderd."
+"de tekst-editor kan het niet vinden. Mogelijk is het onlangs verwijderd."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open file and try again."
 msgstr ""
-"Kan het bestand \"%s\" niet openen omdat er teveel bestanden geopend zijn.\n"
-"\n"
-"Sluit enkele bestanden en probeer opnieuw."
+"Er zijn teveel geopende bestanden. Sluit een open bestand en probeer het "
+"opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running application and try "
 "again."
 msgstr ""
-"Er is niet genoeg geheugen om \"%s\" te openen. Sluit enkele programma's en "
-"probeer opnieuw."
+"Er is niet genoeg geheugen. Sluit een actieve toepassing en "
+"probeer het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"Kan het bestand \"%s\" niet openen omdat de hostnaam leeg is.\n"
-"\n"
-"Kijk of de proxy-instellingen juist zijn en probeer opnieuw."
+"De hostnaam is leeg. Ga na of de proxy-instellingen juist zijn en probeer "
+"het opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "Aanmeldpoging is mislukt."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"Kan het bestand \"%s\" niet terugzetten omdat het onjuiste UTF-8 data "
-"bevat.\n"
-"\n"
-"U probeert waarschijnlijk een binair bestand te openen."
+"Het bestand bevat onjuiste UTF-8 gegevens. U probeert waarschijnlijk een "
+"binair bestand te herstellen."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
-msgstr "Het is niet mogelijk om Naamlose documenten terugzetten."
+msgstr "Het is niet mogelijk om Naamloze documenten terug te zetten."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Kan het bestand \"%s\" niet opslaan."
+msgstr "Kan het bestand \"%s\" niet opslaan"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "Het bestand \"%s\" bestaat al."
+msgstr "Het bestand \"%s\" bestaat al"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" is een map.\n"
-"\n"
-"Controleer of u een juiste bestandslocatie heeft ingevoerd."
+msgstr "Ga na of u de lokatie correct heeft ingevoerd."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "Kon het bestand \"%s\" niet aanmaken."
+msgstr "Kan het bestand \"%s\" niet aanmaken"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Kan het bestand \"%s\" niet maken.\n"
-"\n"
-"Zorg ervoor dat U de benodigde schrijfrechten heeft."
+msgstr "Zorg ervoor dat u de benodigde schrijfrechten heeft."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"Kan het bestand \"%s\" niet aanmaken.\n"
-"\n"
-"De bestandsnaam is te lang."
+msgstr "De bestandsnaam is te lang."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
 msgstr ""
-"Kan het bestand \"%s\" niet maken.\n"
-"\n"
-"Een map in de bestandsnaam bestaat niet, of is een losse symbolische "
+"Een mapcomponent in de bestandsnaam bestaat niet, of is een losse symbolische "
 "verwijzing."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"Er is niet genoeg vrije schijfruimte om het bestand \"%s\" op te slaan.\n"
-"\n"
-"Maak eerst wat ruimte vrij en probeer dan opnieuw."
+"Er is niet genoeg vrije schijfruimte om het bestand aan te maken."
+"Maak eerst wat ruimte vrij en probeer het opnieuw."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1931,9 +1873,8 @@ msgid "Open a recently used file"
 msgstr "Een recent gebruikt bestand openen"
 
 #: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
-#, fuzzy
 msgid "Read Only"
-msgstr "(alleen lezen)"
+msgstr "Alleen lezen"
 
 #: gedit/gedit-mdi.c:2072
 msgid "Normal"
@@ -2110,11 +2051,11 @@ msgstr "Openen"
 
 #: gedit/gedit-ui.xml.h:28
 msgid "Open Location..."
-msgstr "Locatie openen..."
+msgstr "Lokatie openen..."
 
 #: gedit/gedit-ui.xml.h:29
 msgid "Open _Location..."
-msgstr "_Locatie openen..."
+msgstr "_Lokatie openen..."
 
 #: gedit/gedit-ui.xml.h:30
 msgid "Open a file"
@@ -2122,7 +2063,7 @@ msgstr "Bestand openen"
 
 #: gedit/gedit-ui.xml.h:31
 msgid "Open a file from a specified location"
-msgstr "Een bestand openen van een aangegeven locatie"
+msgstr "Een bestand openen van een aangegeven lokatie"
 
 #: gedit/gedit-ui.xml.h:32
 msgid "Open the gedit manual"
@@ -2448,12 +2389,15 @@ msgstr "De aangegeven codering \"%s\" is ongeldig\n"
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
 msgstr ""
+"Het bestand dat u probeert te openen bevat een ongeldige byte-opeenvolging."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
+"de tekst-editor is niet in staat om automatisch de codering te bespeuren van "
+"het bestand dat u wilt openen."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2996,12 +2940,10 @@ msgid "The document is empty."
 msgstr "Het document bevat geen tekst."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
 msgstr "De geselecteerde tekst bevat geen incorrect gespelde woorden."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
 msgstr "Het document bevat geen incorrect gespelde woorden."
 
