@@ -1,3 +1,20 @@
+2002-12-15  Paolo Maggi  <paolo.maggi@polito.it>
+	
+	* gedit-viewc.c (gedit_view_grab_focus): don't modify GtkTextView 
+	readonly field disable_scroll_on_focus
+
+	* dialogs/gedit-dialog-replace.c : escape text before inserting in the 
+	search or replace entry
+	(insert_text_handler)(escape_search_text): new functions
+
+2002-12-15  Adam Ritter  <adam@xiphias.cjb.net>
+
+	* dialogs/gedit-dialog-replace.c (gedit_dialog_find):
+	* dialogs/gedit-dialog-replace.c (gedit_dialog_replace):
+
+	After selecting a word and trying to find/replace
+	the selected word is in the corresponding dialog. (Bug #100340)
+
 2002-12-15  Chema Celorio  <chema@celorio.com>
 
 	* gedit-print.c: don't define gnome-print declarations here

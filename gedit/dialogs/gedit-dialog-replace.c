@@ -87,6 +87,8 @@ static void replace_dlg_find_button_pressed (GeditDialogReplace * dialog);
 static void replace_dlg_replace_button_pressed (GeditDialogReplace * dialog);
 static void replace_dlg_replace_all_button_pressed (GeditDialogReplace * dialog);
 
+static void insert_text_handler (GtkEditable *editable, const gchar *text, gint length, gint *position);
+
 static GeditDialogReplace *dialog_replace_get_dialog 	(void);
 static GeditDialogFind    *dialog_find_get_dialog 	(void);
 
@@ -301,6 +303,12 @@ dialog_replace_get_dialog (void)
 	g_signal_connect (G_OBJECT (dialog->search_entry_list), "changed",
 			  G_CALLBACK (replace_search_entry_changed), dialog);
 	
+	g_signal_connect (G_OBJECT (dialog->search_entry), "insert_text",
+			  G_CALLBACK (insert_text_handler), NULL);
+
+	g_signal_connect (G_OBJECT (dialog->replace_entry), "insert_text",
+			  G_CALLBACK (insert_text_handler), NULL);
+
 	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
 			  G_CALLBACK (dialog_destroyed), &dialog);
 
@@ -419,6 +427,9 @@ dialog_find_get_dialog (void)
 	g_signal_connect (G_OBJECT (dialog->search_entry_list), "changed",
 			  G_CALLBACK (find_search_entry_changed), dialog);
 
+	g_signal_connect (G_OBJECT (dialog->search_entry), "insert_text",
+			  G_CALLBACK (insert_text_handler), NULL);
+
 	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
 			 G_CALLBACK (dialog_destroyed), &dialog);
 
@@ -432,6 +443,89 @@ dialog_find_get_dialog (void)
 	return dialog;
 }
 
+static gchar* 
+escape_search_text (const gchar* text)
+{
+	GString *str;
+	gint length;
+	const gchar *p;
+ 	const gchar *end;
+
+  	g_return_val_if_fail (text != NULL, NULL);
+
+	gedit_debug (DEBUG_SEARCH, "Text: %s", text);
+
+    	length = strlen (text);
+
+	str = g_string_new ("");
+
+  	p = text;
+  	end = text + length;
+
+  	while (p != end)
+    	{
+      		const gchar *next;
+      		next = g_utf8_next_char (p);
+
+		switch (*p)
+        	{
+       			case '\n':
+          			g_string_append (str, "\\n");
+          			break;
+			case '\r':
+          			g_string_append (str, "\\r");
+          			break;
+			case '\t':
+          			g_string_append (str, "\\t");
+          			break;
+        		default:
+          			g_string_append_len (str, p, next - p);
+          			break;
+        	}
+
+      		p = next;
+    	}
+
+	return g_string_free (str, FALSE);
+}
+
+static void
+insert_text_handler (GtkEditable *editable, const gchar *text, gint length, gint *position)
+{
+	static gboolean insert_text = FALSE;
+	gchar *escaped_text;
+	gint new_len;
+
+	gedit_debug (DEBUG_SEARCH, "Text: %s", text);
+
+	/* To avoid recursive behavior */
+	if (insert_text)
+		return;
+
+	escaped_text = escape_search_text (text);
+
+	gedit_debug (DEBUG_SEARCH, "Escaped Text: %s", escaped_text);
+
+	new_len = strlen (escaped_text);
+
+	if (new_len == length)
+	{
+		g_free (escaped_text);
+		return;
+	}
+
+	insert_text = TRUE;
+
+	g_signal_stop_emission_by_name (editable, "insert_text");
+	
+	gtk_editable_insert_text (editable, escaped_text, new_len, position);
+
+	insert_text = FALSE;
+
+	g_free (escaped_text);
+}
+
+
 void
 gedit_dialog_find (void)
 {
@@ -439,6 +533,8 @@ gedit_dialog_find (void)
 	GeditMDIChild *active_child;
 	GeditDocument *doc;
 	gchar* last_searched_text;
+	gint selection_start, selection_end;
+	gboolean selection_exists;
 	gboolean was_wrap_around;
 	gboolean was_entire_word;
 	gboolean was_case_sensitive;
@@ -469,11 +565,25 @@ gedit_dialog_find (void)
 	doc = active_child->document;
 	g_return_if_fail (doc != NULL);
 
-	last_searched_text = gedit_document_get_last_searched_text (doc);
-	if (last_searched_text != NULL)
+	selection_exists = gedit_document_get_selection (doc, &selection_start, &selection_end);
+	if (selection_exists && (selection_end - selection_start < 80)) 
 	{
-		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
-		g_free (last_searched_text);	
+		gchar *selection_text;
+		
+		selection_text = gedit_document_get_chars (doc, selection_start, selection_end);
+		
+		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), selection_text);
+		
+		g_free (selection_text);
+	} 
+	else 
+	{
+		last_searched_text = gedit_document_get_last_searched_text (doc);
+		if (last_searched_text != NULL)
+		{
+			gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
+			g_free (last_searched_text);	
+		}
 	}
 
 	if (!was_wrap_around_id)
@@ -524,6 +634,8 @@ gedit_dialog_replace (void)
 	GeditDocument *doc;
 	gchar* last_searched_text;
 	gchar* last_replace_text;
+	gint selection_start, selection_end;
+	gboolean selection_exists;
 	gboolean was_wrap_around;
 	gboolean was_entire_word;
 	gboolean was_case_sensitive;
@@ -558,20 +670,33 @@ gedit_dialog_replace (void)
 	doc = active_child->document;
 	g_return_if_fail (doc != NULL);
 
-	last_searched_text = gedit_document_get_last_searched_text (doc);
-	if (last_searched_text != NULL)
+	selection_exists = gedit_document_get_selection (doc, &selection_start, &selection_end);
+	if (selection_exists && (selection_end - selection_start < 80)) 
 	{
-		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
-		g_free (last_searched_text);	
+		gchar *selection_text;
+		
+		selection_text = gedit_document_get_chars (doc, selection_start, selection_end);
+		
+		gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), selection_text);
+		
+		g_free (selection_text);
+	} 
+	else 
+	{
+		last_searched_text = gedit_document_get_last_searched_text (doc);
+		if (last_searched_text != NULL)
+		{
+			gtk_entry_set_text (GTK_ENTRY (dialog->search_entry), last_searched_text);
+			g_free (last_searched_text);	
+		}
 	}
-
+	
 	last_replace_text = gedit_document_get_last_replace_text (doc);
 	if (last_replace_text != NULL)
 	{
 		gtk_entry_set_text (GTK_ENTRY (dialog->replace_entry), last_replace_text);
 		g_free (last_replace_text);	
 	}
-
 	if (!was_wrap_around_id)
 		was_wrap_around_id = gedit_was_wrap_around_quark ();
 

@@ -177,11 +177,11 @@ dialog_goto_line_get_dialog (void)
 	g_signal_connect (G_OBJECT (dialog->entry), "insert_text",
 			  G_CALLBACK (entry_insert_text), dialog);
 
-	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
-			 G_CALLBACK (dialog_destroyed), &dialog);
+	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
+			  G_CALLBACK (dialog_destroyed), &dialog);
 
-	g_signal_connect(G_OBJECT (dialog->dialog), "response",
-			 G_CALLBACK (dialog_response_handler), dialog);
+	g_signal_connect (G_OBJECT (dialog->dialog), "response",
+			  G_CALLBACK (dialog_response_handler), dialog);
 
 	g_object_unref (gui);
 

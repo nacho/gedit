@@ -153,9 +153,7 @@ gedit_view_grab_focus (GtkWidget *widget)
 	
 	view = GEDIT_VIEW (widget);
 
-	GTK_TEXT_VIEW (view->priv->text_view)->disable_scroll_on_focus = TRUE;
 	gtk_widget_grab_focus (GTK_WIDGET (view->priv->text_view));
-	GTK_TEXT_VIEW (view->priv->text_view)->disable_scroll_on_focus = FALSE;
 }
 
 static void
@@ -490,15 +488,16 @@ gedit_view_init (GeditView  *view)
 	gtk_text_view_set_left_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
 	gtk_text_view_set_right_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
 
+	/*
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view), GTK_CAN_FOCUS);
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_CAN_FOCUS);
+	*/
 
 	g_signal_connect (G_OBJECT (view->priv->text_view), "populate-popup",
 			  G_CALLBACK (gedit_view_populate_popup), view);
 
 	g_signal_connect (G_OBJECT (view->priv->text_view), "button-press-event",
 			  G_CALLBACK (button_press_event), NULL);
-
 }
 
 static void 
