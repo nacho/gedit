@@ -43,17 +43,29 @@
 #include <libgnomeui/gnome-stock-icons.h>
 
 #include "gedit-spell-checker.h"
+
 #include "gedit-spell-checker-dialog.h"
 #include "gedit-spell-language-dialog.h"
+#include "gedit-automatic-spell-checker.h"
+
+#define SUBMENU_LABEL		N_("_Spelling...")
+#define SUBMENU_PATH		"/menu/Tools/ToolsOps_1/"
+#define SUBMENU_NAME		"SpellingMenu"	
 
 #define MENU_ITEM_LABEL		N_("_Check Spelling...")
-#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_1/"
+#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_1/SpellingMenu/"
 #define MENU_ITEM_NAME		"SpellChecker"	
-#define MENU_ITEM_TIP		N_("Check the spelling of the current document.")
+#define MENU_ITEM_TIP		N_("Check the current document for incorrect spelling")
+
+#define MENU_ITEM_LABEL_AUTO	N_("_Auto Spellcheck")
+#define MENU_ITEM_PATH_AUTO	"/menu/Tools/ToolsOps_1/SpellingMenu/"
+#define MENU_ITEM_NAME_AUTO	"AutoSpellChecker"	
+#define MENU_ITEM_TIP_AUTO	N_("Automatically spell-check the current document")
 
 #define MENU_ITEM_LABEL_LANG	N_("Set _Language")
+#define MENU_ITEM_PATH_LANG	"/menu/Tools/ToolsOps_1/"
 #define MENU_ITEM_NAME_LANG	"SpellSetLanguage"	
-#define MENU_ITEM_TIP_LANG	N_("Set the language of the current document.")
+#define MENU_ITEM_TIP_LANG	N_("Set the language of the current document")
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
 G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
@@ -648,12 +660,55 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	
 }	
 
+static void
+auto_spell_cb (BonoboUIComponent           *ui_component,
+	     const char                  *path,
+	     Bonobo_UIComponent_EventType type,
+	     const char                  *state,
+	     gpointer               	  data)
+{
+	GeditAutomaticSpellChecker *autospell;
+	GeditDocument *doc;
+	GeditSpellChecker *spell;
+
+	gboolean s;
+	
+	gedit_debug (DEBUG_PLUGINS, "%s toggled to '%s'", path, state);
+
+	doc = gedit_get_active_document ();
+	if (doc == NULL)
+		return;
+
+	s = (strcmp (state, "1") == 0);
+
+	spell = get_spell_checker_from_document (doc);
+	g_return_if_fail (spell != NULL);
+
+	autospell = gedit_automatic_spell_checker_get_from_document (doc);
+
+	if (s)
+	{
+		if (autospell == NULL)	
+		{
+			autospell = gedit_automatic_spell_checker_new (doc, spell);
+			gedit_automatic_spell_checker_attach_view (autospell, gedit_get_active_view ());
+			gedit_automatic_spell_checker_recheck_all (autospell);
+		}
+	}
+	else
+	{
+		if (autospell != NULL)
+			gedit_automatic_spell_checker_free (autospell);
+	}
+}
+
 G_MODULE_EXPORT GeditPluginState
 update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
 	BonoboUIComponent *uic;
 	GeditDocument *doc;
-	
+	GeditAutomaticSpellChecker *autospell;
+
 	gedit_debug (DEBUG_PLUGINS, "");
 	
 	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
@@ -663,15 +718,28 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 	doc = gedit_get_active_document ();
 
 	if ((doc == NULL) || gedit_document_is_readonly (doc))
+	{
 		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME_AUTO, FALSE);
+	}
 	else
+	{
 		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
+		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME_AUTO, TRUE);
+	}
 
 	if (doc == NULL)
+	{
 		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME_LANG, FALSE);
+		gedit_menus_set_verb_state (uic, "/commands/" MENU_ITEM_NAME_AUTO, FALSE);
+	}
 	else
+	{
 		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME_LANG, TRUE);
 
+		autospell = gedit_automatic_spell_checker_get_from_document (doc);
+		gedit_menus_set_verb_state (uic, "/commands/" MENU_ITEM_NAME_AUTO, autospell != NULL);
+	}
 
 	return PLUGIN_OK;
 }
@@ -697,6 +765,10 @@ activate (GeditPlugin *pd)
         {
 		BonoboUIComponent *ui_component;
 
+		gedit_menus_add_submenu (BONOBO_WINDOW (top_windows->data),
+				     SUBMENU_PATH, SUBMENU_NAME,
+				     SUBMENU_LABEL);
+
 		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
 				     MENU_ITEM_PATH, MENU_ITEM_NAME,
 				     MENU_ITEM_LABEL, MENU_ITEM_TIP, GTK_STOCK_SPELL_CHECK,
@@ -708,8 +780,13 @@ activate (GeditPlugin *pd)
 		bonobo_ui_component_set_prop (
 			ui_component, "/commands/" MENU_ITEM_NAME, "accel", "F7", NULL);
 
+		gedit_menus_add_menu_item_toggle (BONOBO_WINDOW (top_windows->data),
+				     MENU_ITEM_PATH_AUTO, MENU_ITEM_NAME_AUTO,
+				     MENU_ITEM_LABEL_AUTO, MENU_ITEM_TIP_AUTO,
+				     auto_spell_cb, NULL);
+
 		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
-				     MENU_ITEM_PATH, MENU_ITEM_NAME_LANG,
+				     MENU_ITEM_PATH_LANG, MENU_ITEM_NAME_LANG,
 				     MENU_ITEM_LABEL_LANG, MENU_ITEM_TIP_LANG, GNOME_STOCK_BOOK_BLUE,
 				     set_language_cb);
 
@@ -725,8 +802,11 @@ G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
-	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME_LANG);
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH_AUTO, MENU_ITEM_NAME_AUTO);
 
+	gedit_menus_remove_submenu_all (SUBMENU_PATH, SUBMENU_NAME);
+
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH_LANG, MENU_ITEM_NAME_LANG);
 
 	return PLUGIN_OK;
 }

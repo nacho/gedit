@@ -97,10 +97,10 @@ gboolean		 gedit_spell_checker_add_word_to_session (GeditSpellChecker *spell,
 								 gint len, 
 								 GError **error);
 
-gboolean		gedit_spell_checker_clear_session 	(GeditSpellChecker *spell, 
+gboolean		 gedit_spell_checker_clear_session 	(GeditSpellChecker *spell, 
 								 GError **error);
 
-gboolean		gedit_spell_checker_set_correction 	(GeditSpellChecker *spell, 
+gboolean		 gedit_spell_checker_set_correction 	(GeditSpellChecker *spell, 
 								 const gchar *word, 
 								 gint w_len, 
 								 const gchar *replacement, 

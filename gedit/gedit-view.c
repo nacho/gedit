@@ -40,6 +40,8 @@
 #include "gedit-menus.h"
 #include "gedit-prefs-manager.h"
 
+#include "gedit-marshal.h"
+
 #define MIN_NUMBER_WINDOW_WIDTH 20
 
 struct _GeditViewPrivate
@@ -67,6 +69,14 @@ static GtkTargetEntry drop_types[] = {
 };
 
 static gint n_drop_types = sizeof (drop_types) / sizeof (drop_types[0]);
+
+enum
+{
+ 	POPULATE_POPUP,
+	LAST_SIGNAL
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
 
 static void gedit_view_class_init 	(GeditViewClass	*klass);
 static void gedit_view_init 		(GeditView 	*view);
@@ -165,7 +175,17 @@ gedit_view_class_init (GeditViewClass *klass)
   	object_class->finalize = gedit_view_finalize;
 
 	GTK_WIDGET_CLASS (klass)->grab_focus = gedit_view_grab_focus;
-	
+
+	signals[POPULATE_POPUP] =
+		g_signal_new ("populate_popup",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditViewClass, populate_popup),
+			      NULL, NULL,
+			      gedit_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1,
+			      GTK_TYPE_MENU);
 }
 
 /* This function is taken from gtk+/tests/testtext.c */
@@ -363,6 +383,33 @@ gedit_view_line_numbers_expose (GtkWidget      *widget,
 	return FALSE;
 }
 
+/* when the user right-clicks on a word, we move the cursor to the 
+ * location of the clicked-upon word.
+ */
+static gboolean
+button_press_event (GtkTextView *view, GdkEventButton *event, gpointer data) 
+{
+	if (event->button == 3) 
+	{
+		gint x, y;
+		GtkTextIter iter;
+		GtkTextIter start, end;
+
+		gtk_text_view_window_to_buffer_coords (view, 
+				GTK_TEXT_WINDOW_TEXT, 
+				event->x, event->y,
+				&x, &y);
+		
+		gtk_text_view_get_iter_at_location(view, &iter, x, y);
+
+		if (!(gtk_text_buffer_get_selection_bounds (
+					gtk_text_view_get_buffer (view), &start, &end) &&          
+		    gtk_text_iter_in_range (&iter, &start, &end)))
+			gtk_text_buffer_place_cursor (gtk_text_view_get_buffer (view), &iter);
+	}
+	return FALSE; /* false: let gtk process this event, too.
+			 we don't want to eat any events. */
+}
 
 static void 
 gedit_view_init (GeditView  *view)
@@ -427,9 +474,14 @@ gedit_view_init (GeditView  *view)
 	gtk_text_view_set_right_margin (GTK_TEXT_VIEW (view->priv->text_view), 2);
 
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view), GTK_CAN_FOCUS);
+	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view->priv->text_view), GTK_CAN_FOCUS);
 
 	g_signal_connect (G_OBJECT (view->priv->text_view), "populate-popup",
 			  G_CALLBACK (gedit_view_populate_popup), view);
+
+	g_signal_connect (G_OBJECT (view->priv->text_view), "button-press-event",
+			  G_CALLBACK (button_press_event), NULL);
+
 }
 
 static void 
@@ -1019,7 +1071,9 @@ gedit_view_populate_popup (GtkTextView *textview, GtkMenu *menu, gpointer data)
 	g_signal_connect (G_OBJECT (menu_item), "activate",
 		      	  G_CALLBACK (gedit_view_undo_activate_callback), doc);
 	gtk_widget_show (menu_item);
-	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);	
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	g_signal_emit (G_OBJECT (view), signals[POPULATE_POPUP], 0, menu);
 }
 
 static void 
@@ -1072,5 +1126,15 @@ gedit_view_dnd_drop (GtkTextView *view,
 
 		return;
 	}
+}
+
+GtkTextView *
+gedit_view_get_gtk_text_view (const GeditView *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_val_if_fail (GEDIT_IS_VIEW (view), NULL);
+
+	return view->priv->text_view;
 }
 

@@ -96,4 +96,20 @@ void gedit_menus_add_menu_item_toggle_all (const gchar *path,
 #define gedit_menus_remove_menu_item_toggle 	gedit_menus_remove_menu_item
 #define gedit_menus_remove_menu_item_toggle_all	gedit_menus_remove_menu_item_all
 
+void gedit_menus_add_submenu (BonoboWindow *window, 
+		     const gchar *path,
+		     const gchar *name, 
+		     const gchar *label);
+
+void gedit_menus_add_submenu_all (const gchar *path, 
+		     const gchar *name, 
+		     const gchar *label);
+
+void gedit_menus_remove_submenu (BonoboWindow *window, 
+		     const gchar *path,
+		     const gchar *name);
+
+void gedit_menus_remove_submenu_all (const gchar *path,
+		     const gchar *name);
+
 #endif /* __GEDIT_MENU_H__ */

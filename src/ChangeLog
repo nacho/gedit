@@ -1,3 +1,14 @@
+2002-10-05  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-marshal.list: added VOID:OBJECT
+
+	* gedit-menus.[ch] (gedit_menus_add_submenu)(gedit_menus_add_submenu_all)
+	(gedit_menus_remove_submenu)(gedit_menus_remove_submenu_all): new functions
+
+	* gedit-view.[ch]: new "populate_popup" signal
+	(button_press_event): new function
+	(gedit_view_get_gtk_text_view): new function
+
 2002-10-03  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-view.c (gedit_view_line_numbers_expose): don't stop emission
