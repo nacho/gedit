@@ -11,23 +11,22 @@ Release:   %rel
 Copyright: GPL
 Group: Applications/Editors
 Source0:   gedit-%{PACKAGE_VERSION}.tar.gz
-URL:       http://gedit.pn.org/
+URL:       http://gedit.sourceforge.net
 BuildRoot: /var/tmp/gedit-%{PACKAGE_VERSION}-root
-Docdir: %{prefix}/doc
+Docdir: %{prefix}/help
 
 Requires: gtk+ >= 1.2.7
 Requires: gnome-libs >= 1.0.55
 Requires: gnome-print >= 0.18
 
 %description
-gedit is a small but powerful text editor designed expressly
-for GNOME.
+gedit is a small but powerful text editor for
+the GNOME desktop.
 
-It includes such features as split-screen mode, a plugin
-API, which allows gedit to be extended to support many
-features while remaining small at its core, multiple
-document editing through the use of a 'tabbed' notebook and
-many more functions.
+It includes plugin API, which allows gedit to be extended
+to support many features while remaining small at its core,
+multiple document editing through the use of a 'tabbed'
+notebook and many more functions.
 
 GNOME is required to use gedit (Gnome-Libs and Gtk+).
 
@@ -91,6 +90,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/gedit/plugins/*
 
 %changelog
+* Sun Jun 11 2000 Chema Celorio
+- updated description and webpage
+
 * Fri Jun 09 2000 Carlos Perelló Marín <carpema@hispalinux.es>
 - Added the Spanish description
 
