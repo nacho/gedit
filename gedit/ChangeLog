@@ -1,3 +1,14 @@
+2005-02-27  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit-document.c (update_document_contents): fixes bug #167867 (Autosave
+	should not save unmodified files). Call gedit_document_set_readonly after
+	gedit_document_set_uri to activate autosaving also if the document has never
+	been saved before.
+
+	* gedit-encodings.c (gedit_encoding_to_string)
+	(gedit_encoding_get_charset) (gedit_encoding_get_name): fixes some
+	broken preconditions
+
 2005-02-26  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-mdi.c: be smarter about ellipsizing the window title when

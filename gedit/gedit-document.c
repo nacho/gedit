@@ -893,24 +893,12 @@ update_document_contents (GeditDocument        *doc,
 	else
 		encoding = gedit_encoding_get_utf8 ();
 
-	if (gedit_utils_is_uri_read_only (uri))
-	{
-		gedit_debug (DEBUG_DOCUMENT, "READ-ONLY");
+	gedit_document_set_uri (doc, uri);
+	gedit_document_set_encoding (doc, encoding);
 
-		gedit_document_set_readonly (doc, TRUE);
-	}
-	else
-	{
-		gedit_debug (DEBUG_DOCUMENT, "NOT READ-ONLY");
-
-		gedit_document_set_readonly (doc, FALSE);
-	}
+	gedit_document_set_readonly (doc, gedit_utils_is_uri_read_only (uri));
 
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
-
-	gedit_document_set_uri (doc, uri);
-
-	gedit_document_set_encoding (doc, encoding);
 
 	g_get_current_time (&doc->priv->time_of_last_save_or_load);
 	

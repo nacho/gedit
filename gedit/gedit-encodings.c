@@ -396,9 +396,10 @@ gchar *
 gedit_encoding_to_string (const GeditEncoding* enc)
 {
 	g_return_val_if_fail (enc != NULL, NULL);
-	g_return_val_if_fail (enc->charset != NULL, NULL);
-
+	
 	gedit_encoding_lazy_init ();
+
+	g_return_val_if_fail (enc->charset != NULL, NULL);
 
 	if (enc->name != NULL)
 	    	return g_strdup_printf ("%s (%s)", enc->name, enc->charset);
@@ -415,9 +416,10 @@ const gchar *
 gedit_encoding_get_charset (const GeditEncoding* enc)
 {
 	g_return_val_if_fail (enc != NULL, NULL);
-	g_return_val_if_fail (enc->charset != NULL, NULL);
 
 	gedit_encoding_lazy_init ();
+
+	g_return_val_if_fail (enc->charset != NULL, NULL);
 
 	return enc->charset;
 }
@@ -426,7 +428,6 @@ const gchar *
 gedit_encoding_get_name (const GeditEncoding* enc)
 {
 	g_return_val_if_fail (enc != NULL, NULL);
-	g_return_val_if_fail (enc->name != NULL, NULL);
 
 	gedit_encoding_lazy_init ();
 
