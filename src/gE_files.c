@@ -51,7 +51,17 @@ gint gE_file_open(gE_document *document, gchar *filename)
 
 	if ((file_handle = fopen(filename, "rt")) == NULL)
 	{
-		g_warning ("Unable to open file %s.", filename);
+		document->filename = filename;
+		gtk_label_set (GTK_LABEL(document->tab_label), strip_filename(filename));
+		gtk_text_set_point (GTK_TEXT(document->text), 0);
+		document->changed = FALSE;
+		if (!document->changed_id)
+			document->changed_id = gtk_signal_connect (GTK_OBJECT(document->text), "changed", 
+			                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
+	
+
+		gtk_statusbar_push (GTK_STATUSBAR(main_window->statusbar), 1, "File Opened...");
+		
 		return 1;
 	}
 	gtk_text_freeze (GTK_TEXT(document->text));
