@@ -34,10 +34,10 @@ void edit_paste_cb (GtkWidget *widget, gpointer cbdata);
 void edit_select_all_cb (GtkWidget *widget, gpointer cbdata);
 
 /* Tab positioning */
-void tab_top_cb (GtkWidget *widget, gpointer cbwindow);
-void tab_bot_cb (GtkWidget *widget, gpointer cbwindow);
-void tab_lef_cb (GtkWidget *widget, gpointer cbwindow);
-void tab_rgt_cb (GtkWidget *widget, gpointer cbwindow);
+void tab_top_cb    (GtkWidget *widget, gpointer cbwindow);
+void tab_bottom_cb (GtkWidget *widget, gpointer cbwindow);
+void tab_left_cb   (GtkWidget *widget, gpointer cbwindow);
+void tab_right_cb  (GtkWidget *widget, gpointer cbwindow);
 void tab_toggle_cb (GtkWidget *widget, gpointer cbwindow);
 
 #if 0

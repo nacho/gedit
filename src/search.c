@@ -166,6 +166,7 @@ file_info_cb (GtkWidget *widget, gpointer data)
 	gint line_number = 0 ;
 	gint column_number = 0 ;
 	gchar *msg;
+	gchar *doc_name;
 	Document *doc;
 
 	gedit_debug (DEBUG_RECENT, "");
@@ -188,6 +189,7 @@ file_info_cb (GtkWidget *widget, gpointer data)
 
 	gedit_search_end();
 
+	doc_name = gedit_document_get_tab_name (doc);
 	msg = g_strdup_printf (_("Filename: %s\n\n"
 				 "Total Characters: %i\n"
 				 "Total Words: %i\n"
@@ -196,8 +198,9 @@ file_info_cb (GtkWidget *widget, gpointer data)
 				 "Total Bytes: %i\n\n"
 				 "Current Line: %i\n"
 				 "Current Column: %i"),
-			       gedit_document_get_tab_name (doc), total_chars , total_words ,
+			       doc_name, total_chars , total_words ,
 			       total_lines , total_paragraphs , gedit_search_info.buffer_length, line_number , column_number );
+	g_free (doc_name);
 			
 	gnome_dialog_run_and_close ((GnomeDialog *)
 				    gnome_message_box_new (msg,
@@ -406,7 +409,7 @@ pos_to_line (gint pos, gint *numlines)
 }
 
 guint
-line_to_pos (Document *doc, gint line, gint *lines)
+line_to_pos (gint line, gint *lines)
 {
 	gint current_line = 0, i;
 	guint pos;

@@ -69,7 +69,7 @@ struct _Preferences
 	gint close_doc;
 
 	gint print_wrap_lines : 1;        /* Printing stuf ...*/
-	gint print_lines : 1;
+	gint print_lines;
 	gint print_header;
 	gint print_orientation;
 	gchar *papersize;
@@ -81,8 +81,6 @@ void gedit_prefs_save_settings (void);
 void gedit_prefs_load_settings (void);
 
 #endif /* __PREFS_H__ */
-
-
 
 
 

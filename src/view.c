@@ -489,6 +489,7 @@ gedit_view_class_init (ViewClass *klass)
 	widget_class->realize = gedit_view_realize;
 	*/
 	object_class->finalize = gedit_view_finalize;
+	
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 }
 

@@ -180,9 +180,7 @@ gedit_plugin_browse_create_dialog (void)
 	GladeXML *gui;
 	GtkWidget *dialog;
 	GtkWidget *change_button;
-	
 	gchar *browser_location;
-	gchar *location_label_label;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 	
@@ -219,10 +217,9 @@ gedit_plugin_browse_create_dialog (void)
 	
         /* Set the location label */
 	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
-	location_label_label = g_strdup (browser_location);
 	gtk_label_set_text (GTK_LABEL (location_label),
-			    location_label_label);
-	g_free (location_label_label);
+					browser_location);
+	g_free (browser_location);
 
 	/* Connect the signals */
 	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",

@@ -54,6 +54,8 @@ static gchar*		gedit_plugin_guess_program_location (gchar *program_name);
 static void		gedit_plugin_program_location_clear (gchar *program_name);
 
 
+
+
 void
 gedit_plugins_init (void)
 {
@@ -171,7 +173,7 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 		program_location = gedit_plugin_guess_program_location (program_name);
 
 	/* While "sendmail" is not valid, display error messages */
-	while (dont_guess || (error_code = gedit_utils_is_program (program_location, program_name))!=GEDIT_PROGRAM_OK)
+	while (dont_guess || (error_code = gedit_utils_is_program (program_location, program_name)) != GEDIT_PROGRAM_OK)
 	{
 		gchar *message = NULL;
 		gchar *message_full;
@@ -179,7 +181,8 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 
 		if (dont_guess)
 		{
-			program_location = g_strdup (gedit_plugin_program_location_dialog ());
+			g_free (program_location);
+			program_location = gedit_plugin_program_location_dialog ();
 			dont_guess = FALSE;
 			/* If the user cancelled or pressed ESC */
 			if (program_location == NULL)
@@ -189,6 +192,7 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 		
 		if (program_location == NULL)
 			message = g_strdup_printf (_("The program %s could not be found.\n\n"), program_name);
+		
 		else if (error_code == GEDIT_PROGRAM_IS_INSIDE_DIRECTORY)
 		{
 			/* the user chose a directory and "sendmail" was found inside it */
@@ -256,13 +260,16 @@ gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name)
 	gchar * config_string;
 	gchar * old_location = NULL;
 	gchar * new_location = NULL;
+	gchar * temp_string;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	/* Save a copy of the old location, in case the user cancels the dialog */
 	config_string = gedit_plugin_program_location_string (program_name);
-	if (gnome_config_get_string (config_string))
-		old_location = g_strdup (gnome_config_get_string (config_string));
+	temp_string = gnome_config_get_string (config_string);
+	if (temp_string)
+		old_location = g_strdup (temp_string);
+	g_free (temp_string);
 	g_free (config_string);
 
 	gedit_plugin_program_location_clear (program_name);
@@ -281,7 +288,8 @@ gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name)
 		return NULL;
 	}
 
-	g_free (old_location);
+	if (old_location)
+		g_free (old_location);
 
 	return new_location;
 }
@@ -307,6 +315,8 @@ gedit_plugin_load (const gchar *file)
 	
 	pd->file = g_strdup (file);
 	pd->handle = g_module_open (file, 0);
+
+	g_print ("Sizeof %i\n", sizeof (PluginData));
 
 	if (!pd->handle)
 	{
@@ -463,9 +473,7 @@ gedit_plugin_guess_program_location (gchar *program_name)
 
 	config_string = gedit_plugin_program_location_string (program_name);
 
-	/* get the program pointed by the config */
-	if (gnome_config_get_string (config_string))
-		location = g_strdup (gnome_config_get_string (config_string));
+	location = gnome_config_get_string (config_string);
 
 	/* If there was a program in the config, but it is no good. Clear "sendmail" */
 	if (location)
@@ -482,7 +490,7 @@ gedit_plugin_guess_program_location (gchar *program_name)
 
 	/* If we have no 1st choice yet, get from path */
 	if (!location)
-		location = g_strdup (gnome_is_program_in_path (program_name));
+		location = gnome_is_program_in_path (program_name);
 
 	/* If it isn't on path, look for common places */
 	if (!location)

@@ -43,57 +43,60 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	FILE *sendmail;
-	gchar *subject, *from, *to, *command;
+	const gchar *subject, *from, *to, *command;
 	guchar * buffer;
-	gchar *program_location = NULL;
+	const gchar *program_location = NULL;
 
-	if (button == 0)
-	{
-		to = gtk_entry_get_text (GTK_ENTRY (to_entry));
-		from = gtk_entry_get_text (GTK_ENTRY (from_entry));
-		subject = gtk_entry_get_text (GTK_ENTRY (subject_entry));
-		program_location = g_strdup (GTK_LABEL(location_label)->label);
-		g_return_if_fail (program_location != NULL);
-		command = g_strdup_printf ("%s %s", program_location, to);
-		g_free (program_location);
-
-		gedit_flash_va (_("Executing command : %s"), command);
-		
-		if (!from || strlen (from) == 0 || !to || strlen (to)==0)
-		{
-			GnomeDialog *error_dialog;
-			error_dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please provide a valid email address.",
-								    gedit_window_active()));
-			gnome_dialog_run_and_close (error_dialog);
-			gdk_window_raise (widget->window);
-			return;
-		}
-
-		if ((sendmail = popen (command, "w")) == NULL)
-		{
-			g_warning ("Couldn't open stream to %s\n", program_location);
-			g_free (command);
-			return;
-		}
-	    
-		fprintf (sendmail, "To: %s\n", to);
-		fprintf (sendmail, "From: %s\n", from);
-		fprintf (sendmail, "Subject: %s\n", subject);
-		fprintf (sendmail, "X-Mailer: gedit email plugin v 0.2\n");
-		fflush (sendmail);
-		
-		buffer = gedit_document_get_buffer (doc);
-		fprintf (sendmail, "%s\n", buffer);
-		g_free (buffer);
-		
-		fflush (sendmail);
-		pclose (sendmail);
-	    
-		gnome_config_set_string ("/gedit/email_plugin/From", from);
-		gnome_config_sync ();
-		
-		g_free (command);
+	if (button != 0) {
+		gnome_dialog_close (GNOME_DIALOG (widget));
+		return;
 	}
+		
+	to = gtk_entry_get_text (GTK_ENTRY (to_entry));
+	from = gtk_entry_get_text (GTK_ENTRY (from_entry));
+	subject = gtk_entry_get_text (GTK_ENTRY (subject_entry));
+	program_location = GTK_LABEL(location_label)->label;
+	
+	g_return_if_fail (program_location != NULL);
+	command = g_strdup_printf ("%s %s", program_location, to);
+
+	gedit_flash_va (_("Executing command : %s"), command);
+		
+	if (!from || strlen (from) == 0 || !to || strlen (to)==0)
+	{
+		GnomeDialog *error_dialog;
+		error_dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please provide a valid email address.",
+									  gedit_window_active()));
+		gnome_dialog_run_and_close (error_dialog);
+		gdk_window_raise (widget->window);
+		g_free (command);
+		return;
+	}
+
+	if ((sendmail = popen (command, "w")) == NULL)
+	{
+		g_warning ("Couldn't open stream to %s\n", program_location);
+		g_free (command);
+		return;
+	}
+	    
+	fprintf (sendmail, "To: %s\n", to);
+	fprintf (sendmail, "From: %s\n", from);
+	fprintf (sendmail, "Subject: %s\n", subject);
+	fprintf (sendmail, "X-Mailer: gedit email plugin v 0.2\n");
+	fflush (sendmail);
+		
+	buffer = gedit_document_get_buffer (doc);
+	fprintf (sendmail, "%s\n", buffer);
+	g_free (buffer);
+	
+	fflush (sendmail);
+	pclose (sendmail);
+	    
+	gnome_config_set_string ("/gedit/email_plugin/From", from);
+	gnome_config_sync ();
+		
+	g_free (command);
 
 	gnome_dialog_close (GNOME_DIALOG (widget));
 }
@@ -140,8 +143,8 @@ gedit_plugin_create_dialog (void)
 	gchar *username, *fullname, *hostname;
 	gchar *from;
 	gchar *filename_label_label;
-	gchar *location_label_label;
 	gchar *program_location;
+	gchar *config_string;
 
 	if (!doc)
 	     return;
@@ -194,10 +197,12 @@ gedit_plugin_create_dialog (void)
 	fullname = g_get_real_name ();
 	hostname = getenv ("HOSTNAME");
 
-	if (gnome_config_get_string ("/gedit/email_plugin/From"))
+	config_string = gnome_config_get_string ("/gedit/email_plugin/From");
+	if (config_string)
 	{
 		gtk_entry_set_text (GTK_ENTRY (glade_xml_get_widget (gui, "from_entry")), 
-				    gnome_config_get_string ("/gedit/email_plugin/From"));
+				    config_string);
+		g_free (config_string);
 	}
 	else if (fullname && hostname)
 	{
@@ -230,10 +235,9 @@ gedit_plugin_create_dialog (void)
 	
         /* Set the sendmail location label */
 	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
-	location_label_label = g_strdup (program_location);
 	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "location_label")),
-			    location_label_label);
-	g_free (location_label_label);
+			    program_location);
+	g_free (program_location);
 	
 
 	/* Connect the signals */

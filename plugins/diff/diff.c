@@ -79,7 +79,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	label  = gtk_object_get_data (GTK_OBJECT (widget), "location_label");
 	g_return_if_fail (label!=NULL);
 
-	program_location = g_strdup (GTK_LABEL(label)->label);
+	program_location = GTK_LABEL(label)->label;
 	
 	if (button != 0)
 	{
@@ -268,6 +268,7 @@ gedit_plugin_diff_load_documents (GtkWidget ** options_menu, gint second_menu)
 				    GTK_SIGNAL_FUNC (gedit_plugin_diff_update_document),
 				    GINT_TO_POINTER (n+(second_menu?1000:0)));
 		gtk_menu_append (GTK_MENU (menu), menu_item);
+		g_free (document_name);
 	}
      
 	gtk_option_menu_set_menu (GTK_OPTION_MENU(*options_menu), menu);
@@ -368,6 +369,7 @@ gedit_plugin_create_dialog (void)
 	gtk_object_set_data (GTK_OBJECT (dialog), "location_label", location_label);
 	gtk_label_set_text (GTK_LABEL (glade_xml_get_widget (gui, "location_label")),
 			    program_location);
+	g_free (program_location);
 	
         /* Connect the signals */
 	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",

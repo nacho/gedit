@@ -137,6 +137,8 @@ GnomeUIInfo gedit_edit_menu[] =
 	GNOMEUIINFO_END
 };
 
+#if 0
+/* Disable, since it is not working correctly. Chema*/
 GnomeUIInfo view_menu[] =
 {
 	GNOMEUIINFO_ITEM_NONE (N_("_Add View"),
@@ -147,6 +149,7 @@ GnomeUIInfo view_menu[] =
 			       gedit_view_remove_cb),
 	GNOMEUIINFO_END
 };
+#endif
 
 GnomeUIInfo doc_menu[] =
 {
@@ -197,7 +200,9 @@ GnomeUIInfo gedit_menu[] =
 		GNOME_APP_PIXMAP_NONE, NULL,
 		0, 0, NULL
 	},
+#if 0
 	GNOMEUIINFO_MENU_VIEW_TREE (view_menu),
+#endif	
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
 	{
 		GNOME_APP_UI_SUBTREE,

@@ -139,6 +139,7 @@ shell_output (void){
 
      GtkWidget *ok;
      GtkWidget *cancel;
+     gchar *text;
     
 
      gui = glade_xml_new (GEDIT_GLADEDIR "/shell_output.glade",NULL);
@@ -155,19 +156,25 @@ shell_output (void){
      command    = glade_xml_get_widget (gui,"command_entry");
      directory  = glade_xml_get_widget (gui,"directory_entry");
 
-     gtk_entry_set_text (GTK_ENTRY (directory) ,  gnome_config_get_string ("/Editor_Plugins/shell_output/directory") ) ;
+     text = gnome_config_get_string ("/Editor_Plugins/shell_output/directory");
+     gtk_entry_set_text (GTK_ENTRY (directory), text);
+     g_free (text);
      
-     gtk_signal_connect (GTK_OBJECT ( ok ) , "clicked" , GTK_SIGNAL_FUNC(shell_output_scan_text) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( command ) , "activate" , GTK_SIGNAL_FUNC(shell_output_scan_text) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( cancel ) , "clicked" , GTK_SIGNAL_FUNC(shell_output_finish) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( dialog ) , "delete_event" , GTK_SIGNAL_FUNC(shell_output_finish) , NULL);
+     gtk_signal_connect (GTK_OBJECT (ok), "clicked",
+			 GTK_SIGNAL_FUNC(shell_output_scan_text), NULL);
+     gtk_signal_connect (GTK_OBJECT (command), "activate",
+			 GTK_SIGNAL_FUNC(shell_output_scan_text), NULL);
+     gtk_signal_connect (GTK_OBJECT (cancel), "clicked",
+			 GTK_SIGNAL_FUNC(shell_output_finish), NULL);
+     gtk_signal_connect (GTK_OBJECT (dialog), "delete_event",
+			 GTK_SIGNAL_FUNC(shell_output_finish), NULL);
      
      gnome_dialog_set_parent (GNOME_DIALOG (dialog), gedit_window_active());
      gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
      gtk_widget_show_all (dialog);
-     gtk_object_destroy (GTK_OBJECT (gui));
-
+     
+     gtk_object_unref (GTK_OBJECT (gui));
 }
 
 

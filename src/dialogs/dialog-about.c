@@ -39,5 +39,5 @@ dialog_about (void)
 		return;
 	}
 	gtk_widget_show (glade_xml_get_widget (gui, "about"));
-	gtk_object_destroy (GTK_OBJECT (gui));
+	gtk_object_unref (GTK_OBJECT (gui));
 }

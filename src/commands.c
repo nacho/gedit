@@ -75,7 +75,7 @@ tab_top_cb (GtkWidget *widget, gpointer cbwindow)
 }
 
 void
-tab_bot_cb (GtkWidget *widget, gpointer cbwindow)
+tab_bottom_cb (GtkWidget *widget, gpointer cbwindow)
 {
 	mdi->tab_pos =  GTK_POS_BOTTOM;
 	settings->tab_pos = GTK_POS_BOTTOM;
@@ -84,7 +84,7 @@ tab_bot_cb (GtkWidget *widget, gpointer cbwindow)
 }
 
 void
-tab_lef_cb (GtkWidget *widget, gpointer cbwindow)
+tab_left_cb (GtkWidget *widget, gpointer cbwindow)
 {
 	mdi->tab_pos =  GTK_POS_LEFT;
 	settings->tab_pos = GTK_POS_LEFT;
@@ -93,7 +93,7 @@ tab_lef_cb (GtkWidget *widget, gpointer cbwindow)
 }
 
 void
-tab_rgt_cb (GtkWidget *widget, gpointer cbwindow)
+tab_right_cb (GtkWidget *widget, gpointer cbwindow)
 {
 	mdi->tab_pos =  GTK_POS_RIGHT;
 	settings->tab_pos = GTK_POS_RIGHT;

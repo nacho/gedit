@@ -1,3 +1,26 @@
+2000-10-10  Chema Celorio  <chema@celorio.com>
+
+	* prefs.h (struct _Preferences): print_lines was marked as ": 1" and
+	the print lines function did not worked. Fix.
+
+	* file.c (gedit_file_open_ok_sel): if there aren't any selected files.
+	Open the file specified in the entry
+
+	* plugin.c (gedit_plugin_guess_program_location): kill 3 leaks
+	gnoem_config_get_string returns g_malloc'ed strings
+	(gedit_plugin_program_location_change): mem leak
+	(gedit_plugin_program_location_get): another one
+
+	* file.c (gedit_file_selector_key_event): if the user hits ESC in the
+	open or save dialog, destroy the dialog
+
+	* search.c (file_info_cb): kill another memleak
+
+	* commands.c (tab_right_cb): use left,bottom & right. Not lft,btm &rgt
+
+	* dialogs/dialog-goto-line.c: rewrite. Actually understand gnome_dialog
+	and use it.
+
 2000-10-10  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* dialogs/dialog-prefs.c: Changed to really work with

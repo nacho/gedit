@@ -163,8 +163,7 @@ gedit_file_open (Document *doc, const gchar *fname)
 	}
 
 #if 0
-	/* Disable this check, the users have requested that they need to open 0
-	   bytes files */
+	/* Disable this check, the users have requested that they need to open 0  bytes files */
 	if (stats.st_size  == 0)
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
@@ -228,6 +227,17 @@ gedit_file_open (Document *doc, const gchar *fname)
 }
 
 
+static gint
+gedit_file_selector_key_event (GtkFileSelection *fsel, GdkEventKey *event)
+{
+	if (event->keyval == GDK_Escape) {
+		gtk_button_clicked (GTK_BUTTON (fsel->cancel_button));
+		return 1;
+	} else
+		return 0;
+}
+
+
 /**
  * gedit_file_save_as:
  * @doc: 
@@ -262,6 +272,10 @@ gedit_file_save_as (Document *doc)
 				    "clicked",
 				    GTK_SIGNAL_FUNC(cancel_cb),
 				    save_file_selector);
+		gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION(save_file_selector)),
+				    "key_press_event",
+				    GTK_SIGNAL_FUNC (gedit_file_selector_key_event),
+				    NULL);
 
 		/* If this save as was the result of a close all, and the user cancels the
 		   save, clear the flag */
@@ -574,14 +588,21 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkWidget *file_selector_)
 	directory = g_dirname (file_name);
 
 	files = gedit_file_selector_get_filenames (file_selector, &directory);
-	list = files;
-	for (; list != NULL; list = list->next) {
-		file_name = list->data;
-		full_path = g_concat_dir_and_file (directory, file_name);
-		if (gedit_document_new_with_file (full_path))
-			gedit_flash_va (_("Loaded file %s"), full_path);
-		g_free (full_path);
-		g_free (file_name);
+
+	if (files == NULL) {
+		if (gedit_document_new_with_file (file_name))
+			gedit_flash_va (_("Loaded file %s"), file_name);
+	} else {
+		list = files;
+		for (; list != NULL; list = list->next) {
+			file_name = list->data;
+			full_path = g_concat_dir_and_file (directory, file_name);
+			g_print ("Full path %s\n", full_path);
+			if (gedit_document_new_with_file (full_path))
+				gedit_flash_va (_("Loaded file %s"), full_path);
+			g_free (full_path);
+			g_free (file_name);
+		}
 	}
 
 	if (g_slist_length (files) > 1)
@@ -593,7 +614,6 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkWidget *file_selector_)
 	
 	return;
 }
-
 
 void
 file_open_cb (GtkWidget *widget, gpointer cbdata)
@@ -622,6 +642,10 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 				   "clicked",
 				   GTK_SIGNAL_FUNC (cancel_cb),
 				   open_file_selector);
+		gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION(open_file_selector)),
+				    "key_press_event",
+				    GTK_SIGNAL_FUNC (gedit_file_selector_key_event),
+				    NULL);
 		gtk_clist_set_selection_mode(
 			GTK_CLIST(GTK_FILE_SELECTION(open_file_selector)->file_list),
 			GTK_SELECTION_EXTENDED);
@@ -672,7 +696,8 @@ static gint
 delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 {
 	gedit_debug (DEBUG_FILE, "");
-	
+
+	g_print ("DElete event callback ........\n");
 	gtk_widget_hide (widget);
 	return TRUE;
 }

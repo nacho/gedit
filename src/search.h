@@ -47,7 +47,7 @@ extern SearchInfo gedit_search_info;
   void replace_cb (GtkWidget *widget, gpointer data);
   void goto_line_cb (GtkWidget *widget, gpointer data);
   gint pos_to_line (gint pos, gint *numlines);
- guint line_to_pos (Document *doc, gint line, gint *lines);
+ guint line_to_pos (gint line, gint *lines);
   void file_info ( gint pos , gint *total_chars , gint *total_words , gint *total_lines ,
 		   gint *total_paragraphs , gint *line_number , gint *column_number );
   gint search_text_execute ( gulong starting_position, gint case_sensitive, guchar *text_to_search_for,

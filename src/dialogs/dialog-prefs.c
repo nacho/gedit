@@ -158,10 +158,16 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	else
 		settings->papersize = strdup (gnome_paper_selector_get_name( GNOME_PAPER_SELECTOR (paperselector)));
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines)))
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines))) {
+		g_print ("-1\n");
 		settings->print_lines = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (print_lines_spin_button));
+	}
 	else
+	{
+		g_print ("-2\n");
 		settings->print_lines = 0;
+	}
+	g_print ("Settings print lines %i\n", settings->print_lines);
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (undo_levels)))
 		settings->undo_levels = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (undo_levels_spin_button));
@@ -438,11 +444,13 @@ print_lines_toggled (GtkWidget *widget, gpointer data)
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines)))
 	{
+		g_print ("1A\n");
 		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), TRUE);
 	}
 	else
 	{
+		g_print ("1b\n");
 		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), FALSE);
 		gtk_widget_set_sensitive (GTK_WIDGET (lines_label), FALSE);
 	}

@@ -68,8 +68,6 @@ extern GList	*plugins_installed_list;
 /* Plugin MUST have this function */
 /*extern gint init_plugin (PluginData *pd); */
 
-gint init_plugin (PluginData *pd);
-
 void			gedit_plugins_init (void);
 void			gedit_plugins_menu_add (GnomeApp *app);
 

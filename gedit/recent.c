@@ -192,7 +192,6 @@ static void
 gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 {
 	GnomeUIInfo *menu;
-	gchar *filename;
 	gchar *path;
 	int i;
 

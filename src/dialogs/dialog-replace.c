@@ -47,8 +47,10 @@ replace_text_destroyed_cb (GtkWidget *widget, gint button)
 {
 	gedit_debug (DEBUG_SEARCH, "");
 	gedit_search_end();
-	widget = NULL;
+
+	g_print ("Destroy !\n");
 }
+
 
 
 static void
@@ -280,15 +282,10 @@ dialog_replace (gint full)
 	
 	if (replace_text_dialog!=NULL)
 	{
-		/* If the dialog is open and active, just show it
-		   should we "raise" it instead for showing it ? maybe
-		   chema */
-		/* FIXME !!!!!!!!
-		g_print(" ........\n");
+		g_print ("Show\n");
 		gdk_window_show (replace_text_dialog->window);
 		gdk_window_raise (replace_text_dialog->window);
 		return;
-		*/
 	}
 	
 	gui = glade_xml_new (GEDIT_GLADEDIR
