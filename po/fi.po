@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-01-24 20:36+0100\n"
-"PO-Revision-Date: 2001-10-17 14:00+0300\n"
+"POT-Creation-Date: 2002-01-29 19:00+0200\n"
+"PO-Revision-Date: 2002-01-29 14:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -16,86 +16,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: gedit2.desktop.in.h:1
-#, fuzzy
 msgid "Gnome Text Editor"
-msgstr "Tekstieditori"
+msgstr "Gnomen tekstieditori"
 
 #: gedit2.desktop.in.h:2 src/gedit-commands.c:494
 msgid "gedit"
 msgstr "gedit"
 
-#: plugins/cvschangelog/cvschangelog.c:219
+#: plugins/cvschangelog/cvschangelog.c:35
+msgid "Open _CVS ChangeLogs"
+msgstr "Avaa _CVS-muutoslokit"
+
+#: plugins/cvschangelog/cvschangelog.c:38
+msgid "Searches for ChangeLogs in the current document and opens them."
+msgstr "Etsii kyseisen asiakirjan ChangeLogeja ja avaa ne."
+
+#: plugins/cvschangelog/cvschangelog.c:224
 msgid "CVS ChangeLog"
-msgstr ""
+msgstr "CVS-muutosloki"
 
-#: plugins/cvschangelog/cvschangelog.c:220
+#: plugins/cvschangelog/cvschangelog.c:225
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr ""
+msgstr "Liitännäinen joka avaa CVS-lähetyksissä esiintyviä muutoslokeja."
 
-#: plugins/cvschangelog/cvschangelog.c:222
+#: plugins/cvschangelog/cvschangelog.c:227
 msgid "Copyright (C) 2002 - James Willcox"
-msgstr ""
+msgstr "Copyright (C) 2002 - James Willcox"
 
 #: plugins/docinfo/docinfo.c:40
 msgid "_Word Count"
-msgstr ""
+msgstr "_Laske sanat"
 
 #: plugins/docinfo/docinfo.c:43
 msgid "Get info on current document."
 msgstr "Katso aktiivisen asiakirjan tietoja."
 
-#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:403
+#: plugins/docinfo/docinfo.c:136 plugins/docinfo/docinfo.c:354
 msgid "Word count"
-msgstr ""
+msgstr "Laske sanat"
 
 #: plugins/docinfo/docinfo.c:147
 msgid "Update"
 msgstr "Päivitä"
 
-#: plugins/docinfo/docinfo.c:404
+#: plugins/docinfo/docinfo.c:355
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
+"Analysoi avoimena olevan asiakirjan ja päättelee siinä olevien sanojen, "
+"rivien, merkkien ja ei-tyhjien merkkien määrät ja tulostaa ne."
 
-#: plugins/docinfo/docinfo.c:408 plugins/sample/sample.c:173
-#: plugins/shell_output/shell_output.c:456 plugins/time/time.c:554
+#: plugins/docinfo/docinfo.c:359 plugins/sample/sample.c:129
+#: plugins/shell_output/shell_output.c:407 plugins/time/time.c:503
 msgid "Copyright (C) 2002 - Paolo Maggi"
-msgstr ""
+msgstr "Copyright (C) 2002 - Paolo Maggi"
 
-#: plugins/sample/sample.c:52
-#, fuzzy
+#: plugins/sample/sample.c:36
+msgid "_Hello World"
+msgstr "_Hei maailma"
+
+#: plugins/sample/sample.c:39
+msgid "Prints Hello World."
+msgstr "Tulostaa 'Hei maailma'"
+
+#: plugins/sample/sample.c:57
 msgid "Hello World "
-msgstr "Hei, maailma"
+msgstr "Hei maailma "
 
-#: plugins/sample/sample.c:170
+#: plugins/sample/sample.c:126
 msgid "Hello World"
-msgstr "Hei, maailma"
+msgstr "Hei maailma"
 
-#: plugins/sample/sample.c:171
+#: plugins/sample/sample.c:127
 msgid "Sample 'hello world' plugin."
-msgstr "Yksinkertainen 'hei, maailma' -liitännäinen"
+msgstr "Yksinkertainen 'hei maailma' -liitännäinen"
 
 #: plugins/shell_output/shell_output.c:36
-#, fuzzy
 msgid "Insert shell _output"
-msgstr "Lisää asiakirjaan tuloste komentotulkista"
+msgstr "Lisää k_omentotulkkituloste"
 
 #: plugins/shell_output/shell_output.c:39
-#, fuzzy
 msgid "Insert the shell output in the current document."
-msgstr "Lisää asiakirjaan tuloste komentotulkista"
+msgstr "Lisää asiakirjaan tuloste komentotulkista."
 
 #: plugins/shell_output/shell_output.c:138
-#: plugins/shell_output/shell_output.c:452
-#, fuzzy
+#: plugins/shell_output/shell_output.c:403
 msgid "Shell output"
 msgstr "Komentotulkin tuloste"
 
 #: plugins/shell_output/shell_output.c:151
 msgid "_Run"
-msgstr ""
+msgstr "_Suorita"
 
 #: plugins/shell_output/shell_output.c:240
 msgid ""
@@ -108,164 +121,148 @@ msgstr ""
 "Anna kelvollinen komento."
 
 #: plugins/shell_output/shell_output.c:269
-#, fuzzy
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
 "Please, insert a valid shell command."
 msgstr ""
-"Annoit tyhjän komennon komentotulkille.\n"
+"Virhe tulkittaessa komentoa.\n"
 "\n"
 "Anna kelvollinen komento."
 
 #: plugins/shell_output/shell_output.c:322
-#, fuzzy
 msgid "An error occurs while running the selected command."
-msgstr ""
-"Virhe avattaessa tiedostoa: \n"
-"\n"
-"%s"
+msgstr "Antamaasi komentoa suoritettaessa tapahtui virhe."
 
-#: plugins/shell_output/shell_output.c:453
+#: plugins/shell_output/shell_output.c:404
 msgid ""
 "Exucute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr ""
+"Suorita komento ja liitä sen tuloste valittuna olevaan asiakirjaan "
+"osoittimen kohdalle"
 
 #: plugins/time/time.c:39
-#, fuzzy
 msgid "_Insert Date/Time"
-msgstr "Lisää aika"
+msgstr "L_isää päiväys/aika"
 
 #: plugins/time/time.c:42
-#, fuzzy
 msgid "Insert current date and time at the cursor position."
-msgstr "Lisää päiväyksen ja ajan"
+msgstr "Lisää päiväys ja aika kohdistimen kohdalle."
 
 #: plugins/time/time.c:227
 msgid "Available formats"
-msgstr ""
+msgstr "Käytettävissä olevat muodot"
 
 #: plugins/time/time.c:268
 msgid "Configure insert date/time plugin"
-msgstr ""
+msgstr "Muokkaa päiväys/aika -liitännäisen asetuksia"
 
-#: plugins/time/time.c:551
-#, fuzzy
+#: plugins/time/time.c:500
 msgid "Insert Date/Time"
-msgstr "Lisää aika"
+msgstr "Lisää päiväys/aika"
 
-#: plugins/time/time.c:552
-#, fuzzy
+#: plugins/time/time.c:501
 msgid "Inserts the current date and time at the cursor position."
-msgstr "Lisää päiväyksen ja ajan"
+msgstr "Lisää päiväyksen ja ajan kohdistimen kohdalle."
 
 #: src/bonobo-mdi.c:485 src/bonobo-mdi.c:561 src/bonobo-mdi.c:1927
-#, fuzzy, c-format
+#, c-format
 msgid "Activate %s"
-msgstr "Käynnistä k_aikki"
+msgstr "Käynnistä %s"
 
 #: src/dialogs/gedit-dialog-goto-line.c:114
-#, fuzzy
 msgid "Goto line..."
-msgstr "Siirry _riville..."
+msgstr "Siirry riville..."
 
 #. Add Goto Line button
 #: src/dialogs/gedit-dialog-goto-line.c:124
-#, fuzzy
 msgid "_Goto line"
-msgstr "Siirry riville"
+msgstr "_Siirry riville"
 
 #: src/dialogs/gedit-dialog-goto-line.c:140
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
-msgstr ""
+msgstr "goto-line.glade2:n sisältä ei löytynyt tarvittavia laajennuksia.\n"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:45
-#, fuzzy
 msgid "Plugin"
-msgstr "_Liitännäiset"
+msgstr "Liitännäinen"
 
 #: src/dialogs/gedit-dialog-plugin-manager.c:46
 msgid "Load"
-msgstr ""
+msgstr "Lataa"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:316
-#, fuzzy
+#: src/dialogs/gedit-dialog-plugin-manager.c:312
 msgid "Module file name"
-msgstr "tiedostonimi"
+msgstr "Moduulin tiedostonimi"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:317
-#, fuzzy
+#: src/dialogs/gedit-dialog-plugin-manager.c:313
 msgid "Author(s)"
 msgstr "Tekijä(t)"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:450
+#: src/dialogs/gedit-dialog-plugin-manager.c:443
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
+msgstr "plugin-manager.glade2:a ei löytynyt. Asenna gedit uudelleen.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:458
-#, fuzzy
+#: src/dialogs/gedit-dialog-plugin-manager.c:451
 msgid "Plugin Manager"
-msgstr "Lliitännäistenhallinta..."
+msgstr "Lliitännäistenhallinta"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:485
+#: src/dialogs/gedit-dialog-plugin-manager.c:478
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
+"Epäkelpo glade-tiedosto liitännäistenhallinnalle -- kaikkia tarpeellisia "
+"laajennuksia ei löytynyt.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:574
+#: src/dialogs/gedit-dialog-plugin-manager.c:566
 msgid "Could not create the Plugin Manager dialog"
-msgstr ""
+msgstr "Liitännäisten hallintaikkunan luominen epäonnistui"
 
-#: src/dialogs/gedit-dialog-replace.c:165 src/gedit-ui.xml.h:49
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:167 src/gedit-ui.xml.h:49
 msgid "Replace"
 msgstr "Korvaa"
 
-#: src/dialogs/gedit-dialog-replace.c:176
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:178
 msgid "Replace _All"
-msgstr "Korvaa kaikki"
+msgstr "Korvaa k_aikki"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:179 src/gedit-file-selector-util.c:116
+#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:116
 #: src/gedit-file.c:823 src/gedit-ui.xml.h:85
-#, fuzzy
 msgid "_Replace"
-msgstr "Korvaa"
+msgstr "Ko_rvaa"
 
-#: src/dialogs/gedit-dialog-replace.c:268 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:270 src/gedit-ui.xml.h:26
 msgid "Find"
 msgstr "Etsi"
 
 #: src/dialogs/gedit-dialog-replace.c:469
 #: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:697
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:695
+#, c-format
 msgid "The text \"%s\" was not found."
-msgstr "Tiedostoa %s ei löytynyt."
+msgstr "Tekstiä \"%s\" ei löytynyt."
 
-#: src/dialogs/gedit-dialog-replace.c:706
-#, fuzzy, c-format
+#: src/dialogs/gedit-dialog-replace.c:704
+#, c-format
 msgid "Found and replaced %d occurences."
-msgstr "Löydetty ja korvattu %i tapausta."
+msgstr "Löydetty ja korvattu %d tapausta."
 
 #: src/dialogs/gedit-preferences-dialog.c:197
 msgid "Toolbar"
-msgstr ""
+msgstr "Työkalupalkki"
 
 #: src/dialogs/gedit-preferences-dialog.c:198
-#, fuzzy
 msgid "Status bar"
-msgstr "N_äytä tilarivi"
+msgstr "Tilarivi"
 
 #: src/dialogs/gedit-preferences-dialog.c:201
 msgid "MDI"
-msgstr ""
+msgstr "UAK"
 
 #: src/dialogs/gedit-preferences-dialog.c:209
-#, fuzzy
 msgid "Font & Colors"
-msgstr "Kirjasimet/Värit"
+msgstr "Kirjasimet & Värit"
 
 #: src/dialogs/gedit-preferences-dialog.c:211 src/gedit-ui.xml.h:54
 msgid "Save"
@@ -280,22 +277,19 @@ msgstr "Kumoa"
 
 #: src/dialogs/gedit-preferences-dialog.c:216
 msgid "Wrap mode"
-msgstr ""
+msgstr "Rivitys"
 
 #: src/dialogs/gedit-preferences-dialog.c:217
-#, fuzzy
 msgid "Line numbers"
-msgstr "Rivinumero:"
+msgstr "Rivinumerot"
 
 #: src/dialogs/gedit-preferences-dialog.c:224
-#, fuzzy
 msgid "Page"
-msgstr "Sivut"
+msgstr "Sivu"
 
 #: src/dialogs/gedit-preferences-dialog.c:231
-#, fuzzy
 msgid "Editor"
-msgstr "Poistu"
+msgstr "Muokkain"
 
 #: src/dialogs/gedit-preferences-dialog.c:232 src/gedit-ui.xml.h:41
 msgid "Print"
@@ -303,7 +297,7 @@ msgstr "Tulosta"
 
 #: src/dialogs/gedit-preferences-dialog.c:233
 msgid "User interface"
-msgstr ""
+msgstr "Käyttöliittymä"
 
 #: src/dialogs/gedit-preferences-dialog.c:303 src/gedit-ui.xml.h:40
 msgid "Preferences"
@@ -311,23 +305,22 @@ msgstr "Asetukset"
 
 #: src/dialogs/gedit-preferences-dialog.c:464
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriat"
 
 #: src/gedit-commands.c:56
 msgid "Not yet implemented."
-msgstr ""
+msgstr "Ei vielä toteutettu."
 
 #: src/gedit-commands.c:339
-#, fuzzy, c-format
+#, c-format
 msgid "The string \"%s\" has not been found."
-msgstr "Merkkijonoa ei löytynyt."
+msgstr "Merkkijonoa \"%s\" ei löytynyt."
 
 #: src/gedit-commands.c:419
 msgid "Impossible to update gedit settings."
-msgstr ""
+msgstr "geditin asetusten päivittäminen epäonnistui."
 
 #: src/gedit-commands.c:497
-#, fuzzy
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr ""
 "gedit on pieni ja kevyt tekstieditori Gnomelle. Suomennos: http://gnome-fi."
@@ -343,17 +336,12 @@ msgid "Untitled"
 msgstr "Nimetön"
 
 #: src/gedit-document.c:596 src/gedit-document.c:702
-#, fuzzy
 msgid "Invalid UTF-8 data encountered reading file"
-msgstr ""
-"Virhe avattaessa tiedostoa: \n"
-"\n"
-"%s"
+msgstr "Virheellistä UTF-8 dataa luettaessa tiedostoa"
 
 #: src/gedit-document.c:1055
-#, fuzzy
 msgid "It is not possible to revert an Untitled document"
-msgstr "Et voi palauttaa Nimettömään asiakirjaan\n"
+msgstr "Et voi palauttaa Nimetöntä asiakirjaa levyltä"
 
 #: src/gedit-file-selector-util.c:104
 #, c-format
@@ -361,26 +349,26 @@ msgid ""
 "A file named ''%s'' already exists.\n"
 "Do you want to replace it with the one you are saving?"
 msgstr ""
+"Tiedosto nimeltä ''%s'' on jo olemassa.\n"
+"Haluatko korvata sen tiedostolla jonka olet tallentamassa?"
 
 #: src/gedit-file-selector-util.c:112
-#, fuzzy
 msgid "Do_n't replace"
-msgstr "Korvaa"
+msgstr "Ä_lä korvaa"
 
 #: src/gedit-file-selector-util.c:544
-#, fuzzy
 msgid "Select a filename to save"
-msgstr "Valitse käynnistettävät liitännäiset:"
+msgstr "Valitse tiedostonimi jolla tallennetaan"
 
 #: src/gedit-file.c:237 src/gedit-file.c:367 src/gedit-file.c:1148
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded file '%s'"
-msgstr "Ladattu tiedosto %s"
+msgstr "Ladattu tiedosto '%s'"
 
 #: src/gedit-file.c:248 src/gedit-file.c:1046
-#, fuzzy, c-format
+#, c-format
 msgid "Loading %d file..."
-msgstr "Ladattu %i tiedostoa"
+msgstr "Ladattu %d tiedosto..."
 
 #: src/gedit-file.c:265 src/gedit-file.c:1082
 #, c-format
@@ -392,52 +380,50 @@ msgid "Open File ..."
 msgstr "Avaa tiedosto ..."
 
 #: src/gedit-file.c:404 src/gedit-file.c:452
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Virhe avattaessa tiedostoa: \n"
+"Virhe avattaessa tiedostoa \"%s\".\n"
 "\n"
-"%s"
+"%s."
 
 #: src/gedit-file.c:522 src/gedit-file.c:692 src/gedit-file.c:840
-#, fuzzy, c-format
+#, c-format
 msgid "Saving file '%s' ..."
-msgstr "Tallenna nimellä..."
+msgstr "Tallennetaan tiedostoa '%s' ..."
 
 #: src/gedit-file.c:537 src/gedit-file.c:739 src/gedit-file.c:958
 msgid "Unknown error"
-msgstr ""
+msgstr "Tuntematon virhe"
 
 #: src/gedit-file.c:544 src/gedit-file.c:746
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Virhe avattaessa tiedostoa: \n"
+"Virhe tallennettaessa tiedostoa \"%s\".\n"
 "\n"
-"%s"
+"%s."
 
 #: src/gedit-file.c:572 src/gedit-file.c:699 src/gedit-file.c:847
-#, fuzzy
 msgid "The document has not been saved."
-msgstr "Asiakirjaa ei tallennettu."
+msgstr "Asiakirjaa ei ole tallennettu."
 
 #: src/gedit-file.c:582 src/gedit-file.c:697 src/gedit-file.c:845
 #, c-format
 msgid "File '%s' saved."
-msgstr ""
+msgstr "Tiedosto '%s' tallennettu."
 
 #: src/gedit-file.c:651
 msgid "Save As..."
 msgstr "Tallenna nimellä..."
 
 #: src/gedit-file.c:684
-#, fuzzy
 msgid "Save as ..."
 msgstr "Tallenna nimellä..."
 
@@ -447,173 +433,177 @@ msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
+"Tiedosto nimeltä ``%s'' on jo olemassa tässä sijainnissa. Haluatko korvata "
+"sen tiedostolla jota olet tallentamassa?"
 
 #: src/gedit-file.c:944
 #, c-format
 msgid "Reverting file '%s' ..."
-msgstr ""
+msgstr "Palautetaan tiedosto '%s' ..."
 
 #: src/gedit-file.c:965
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Virhe avattaessa tiedostoa: \n"
+"Virhe palautettaessa tiedostoa \"%s\".\n"
 "\n"
-"%s"
+"%s."
 
 #: src/gedit-file.c:993
-#, fuzzy
 msgid "The document has not been reverted."
-msgstr "Asiakirjaa ei tallennettu."
+msgstr "Asiakirjaa ei palautettu."
 
 #: src/gedit-file.c:1003
 #, c-format
 msgid "File '%s' reverted."
-msgstr ""
+msgstr "Tiedosto '%s' palautettu."
 
 #: src/gedit-file.c:1103
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded file %s"
 msgstr "Ladattu tiedosto %s"
 
 #: src/gedit-file.c:1202
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
 "\n"
 "%s."
 msgstr ""
-"Virhe avattaessa tiedostoa: \n"
+"Virhe luettaessa dataa stdin:istä.\n"
 "\n"
-"%s"
+"%s."
 
-#: src/gedit-mdi.c:573
+#: src/gedit-mdi.c:548
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
+"Haluatko tallentaa asiakirjaan ``%s'' tekemäsi muutokset? \n"
+"\n"
+"Tekemäsi muutokset menetetään ellet tallenna niitä."
 
-#: src/gedit-mdi.c:578
+#: src/gedit-mdi.c:553
 msgid "Do_n't save"
-msgstr ""
+msgstr "Ä_lä tallenna"
 
-#: src/gedit-mdi.c:596
+#: src/gedit-mdi.c:571
 msgid "_Don't quit"
-msgstr ""
+msgstr "Älä l_opeta"
 
-#: src/gedit-mdi.c:600
+#: src/gedit-mdi.c:575
 msgid "_Don't close"
-msgstr ""
+msgstr "Älä _sulje"
 
-#: src/gedit-mdi.c:684
+#: src/gedit-mdi.c:659
 msgid "(modified)"
 msgstr "(muutettu)"
 
-#: src/gedit-mdi.c:690
+#: src/gedit-mdi.c:665
 msgid "(readonly)"
 msgstr "(vain luku)"
 
 #: src/gedit-plugins-engine.c:154
-#, fuzzy, c-format
+#, c-format
 msgid "Error, unable to open module file '%s'\n"
-msgstr "Virhe, moduulitiedoston %s avaaminen ei onnistu"
+msgstr "Virhe, moduulitiedoston '%s' avaaminen ei onnistunut\n"
 
 #: src/gedit-plugins-engine.c:169
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain init function."
-msgstr "Virhe, liitännäinen ei sisällä init_plugin -funktiota."
+msgstr "Virhe, liitännäinen '%s' ei sisällä init-funktiota."
 
 #: src/gedit-plugins-engine.c:179
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Virhe, liitännäinen ei sisällä init_plugin -funktiota."
+msgstr "Virhe, liitännäinen '%s' ei sisällä activate-funktiota."
 
 #: src/gedit-plugins-engine.c:189
-#, fuzzy, c-format
+#, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Virhe, liitännäinen ei sisällä init_plugin -funktiota."
+msgstr "Virhe, liitännäinen '%s' ei sisällä deactivate-funktiota."
 
 #: src/gedit-plugins-engine.c:219
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
-msgstr ""
+msgstr "Virhe, liitännäisen '%s' alustus ei onnistu"
 
 #: src/gedit-plugins-engine.c:227
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
-msgstr ""
+msgstr "Virhe, liitännäinen '%s' ei määritä nimeään"
 
 #: src/gedit-plugins-engine.c:302
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
-msgstr ""
+msgstr "Virhe, asetusten tallentaminen liitännäiselle '%s' epäonnistui"
 
 #: src/gedit-plugins-engine.c:370 src/gedit-plugins-engine.c:428
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
-msgstr ""
+msgstr "Virhe, liitännäisen '%s' käynnistys ei onnistu"
 
 #: src/gedit-plugins-engine.c:397
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
-msgstr ""
+msgstr "Virhe, liitännäisen '%s' poistaminen käytöstä ei onnistu"
 
 #: src/gedit-plugins-engine.c:469
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr ""
+msgstr "Virhe, liitännäisen '%s' käyttöliittymän päivitys ei onnistu"
 
 #: src/gedit-print.c:158
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr ""
+"gedit ei pysty tulostamaan koska se ei löydä\n"
+"yhtä tarvittavista kirjasimista."
 
 #: src/gedit-print.c:265
-#, fuzzy
 msgid "gedit - Print Document"
-msgstr "Tulosta asiakirja"
+msgstr "gedit - Tulosta asiakirja"
 
 #: src/gedit-print.c:274
 msgid "Lines"
 msgstr "Rivejä"
 
 #: src/gedit-print.c:330
-#, fuzzy, c-format
+#, c-format
 msgid "File: %s"
-msgstr "_Tiedosto"
+msgstr "Tiedosto: %s"
 
 #. Print right text
 #: src/gedit-print.c:335
-#, fuzzy, c-format
+#, c-format
 msgid "Page: %d"
-msgstr "Sivu: %i/%i"
+msgstr "Sivu: %d"
 
 #: src/gedit-print.c:468
-#, fuzzy
 msgid "gedit - Print Preview"
-msgstr "gedit: Tulostuksen esikatselu\n"
+msgstr "gedit: Tulostuksen esikatselu"
 
 #: src/gedit-print.c:544
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while printing.\n"
 "\n"
 "%s,"
 msgstr ""
-"Virhe avattaessa tiedostoa: \n"
+"Tulostusvirhe.\n"
 "\n"
-"%s"
+"%s,"
 
 #: src/gedit-recent.c:252
-#, fuzzy, c-format
+#, c-format
 msgid "Open file %s"
-msgstr "Avaa tiedosto"
+msgstr "Avaa tiedosto %s"
 
 #: src/gedit-recent.c:320
 #, c-format
@@ -621,53 +611,46 @@ msgid "Unable to open recent file: %s"
 msgstr "Virhe avattaessa pikavalintaa: %s"
 
 #: src/gedit-ui.xml.h:1
-#, fuzzy
 msgid "About this application"
-msgstr "Leikkaa valinta"
+msgstr "Tietoja tästä sovelluksesta"
 
 #: src/gedit-ui.xml.h:2
 msgid "About..."
-msgstr ""
+msgstr "Tietoja..."
 
 #: src/gedit-ui.xml.h:3
 msgid "Add/Remove plugins"
-msgstr ""
+msgstr "Lisää/Poista liitännäisiä"
 
 #: src/gedit-ui.xml.h:4
-#, fuzzy
 msgid "C_lear"
-msgstr "Merkki"
+msgstr "T_yhjennä"
 
 #: src/gedit-ui.xml.h:5
 msgid "C_lose All"
 msgstr "S_ulje kaikki"
 
 #: src/gedit-ui.xml.h:6
-#, fuzzy
 msgid "C_ut"
-msgstr "Leikkaa"
+msgstr "_Leikkaa"
 
 #: src/gedit-ui.xml.h:7
-#, fuzzy
 msgid "Clear"
-msgstr "Merkki"
+msgstr "Tyhjennä"
 
 #: src/gedit-ui.xml.h:8
-#, fuzzy
 msgid "Clear the selection"
-msgstr "Leikkaa valinta"
+msgstr "Tyhjennä valinta"
 
 #: src/gedit-ui.xml.h:9
 msgid "Close"
 msgstr "Sulje"
 
 #: src/gedit-ui.xml.h:10
-#, fuzzy
 msgid "Close All"
-msgstr "S_ulje kaikki"
+msgstr "Sulje kaikki"
 
 #: src/gedit-ui.xml.h:11
-#, fuzzy
 msgid "Close all open files"
 msgstr "Sulje kaikki avoimet tiedostot"
 
@@ -676,9 +659,8 @@ msgid "Close the current file"
 msgstr "Sulje nykyinen tiedosto"
 
 #: src/gedit-ui.xml.h:13
-#, fuzzy
 msgid "Configure the application"
-msgstr "Leikkaa valinta"
+msgstr "Muokkaa sovelluksen asetuksia"
 
 #: src/gedit-ui.xml.h:14
 msgid "Copy"
@@ -694,11 +676,11 @@ msgstr "Luo uusi asiakirja"
 
 #: src/gedit-ui.xml.h:17
 msgid "Customize"
-msgstr ""
+msgstr "Mukauta"
 
 #: src/gedit-ui.xml.h:18
 msgid "Customize toolbars"
-msgstr ""
+msgstr "Mukauta työkalupalkkeja"
 
 #: src/gedit-ui.xml.h:19
 msgid "Cut"
@@ -717,13 +699,12 @@ msgid "Dump the UI Xml description"
 msgstr ""
 
 #: src/gedit-ui.xml.h:23
-#, fuzzy
 msgid "E_xit"
-msgstr "Poistu"
+msgstr "_Lopeta"
 
 #: src/gedit-ui.xml.h:24
 msgid "Exit"
-msgstr "Poistu"
+msgstr "Lopeta"
 
 #: src/gedit-ui.xml.h:25
 msgid "Exit the program"
@@ -731,24 +712,23 @@ msgstr "Poistu ohjelmasta"
 
 #: src/gedit-ui.xml.h:27
 msgid "Find Again"
-msgstr ""
+msgstr "Etsi seuraava"
 
 #: src/gedit-ui.xml.h:28
 msgid "Find _Again"
-msgstr ""
+msgstr "Etsi seur_aava"
 
 #: src/gedit-ui.xml.h:29
 msgid "Go to a specific line number"
 msgstr "Siirry tietylle rivinumerolle"
 
 #: src/gedit-ui.xml.h:30
-#, fuzzy
 msgid "Goto _Line"
-msgstr "Siirry riville"
+msgstr "Siirry _riville"
 
 #: src/gedit-ui.xml.h:31
 msgid "Main toolbar"
-msgstr ""
+msgstr "Päätyökalupalkki"
 
 #: src/gedit-ui.xml.h:32
 msgid "New"
@@ -759,7 +739,6 @@ msgid "Open"
 msgstr "Avaa"
 
 #: src/gedit-ui.xml.h:34
-#, fuzzy
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
@@ -769,7 +748,7 @@ msgstr "Avaa tiedosto tietystä URI:sta"
 
 #: src/gedit-ui.xml.h:36
 msgid "Open from URI"
-msgstr "Avaa _URI:sta"
+msgstr "Avaa URI:sta"
 
 #: src/gedit-ui.xml.h:37
 msgid "Open from _URI..."
@@ -784,19 +763,16 @@ msgid "Paste the clipboard"
 msgstr "Liitä leikepöydän sisältö"
 
 #: src/gedit-ui.xml.h:42
-#, fuzzy
 msgid "Print Pre_view"
 msgstr "Tulostuksen _esikatselu..."
 
 #: src/gedit-ui.xml.h:43
-#, fuzzy
 msgid "Print Preview"
 msgstr "Tulostuksen esikatselu"
 
 #: src/gedit-ui.xml.h:44
-#, fuzzy
 msgid "Print Setup"
-msgstr "Tulosta asiakirja"
+msgstr "Tulostusasetukset"
 
 #: src/gedit-ui.xml.h:45
 msgid "Print preview"
@@ -811,45 +787,38 @@ msgid "Redo"
 msgstr "Uudelleen"
 
 #: src/gedit-ui.xml.h:48
-#, fuzzy
 msgid "Redo the undone action"
-msgstr "Tee edellinen toiminto uudelleen"
+msgstr "Toista edellinen komento"
 
 #: src/gedit-ui.xml.h:50
-#, fuzzy
 msgid "Replace a string"
-msgstr "Etsi merkkijonoa"
+msgstr "Korvaa merkkijoni"
 
 #: src/gedit-ui.xml.h:51
 msgid "Revert to a saved version of the file"
-msgstr ""
+msgstr "Palauta levylle tallennettu versio tiedostosta"
 
 #: src/gedit-ui.xml.h:52
-#, fuzzy
 msgid "Revert to saved"
-msgstr "Käännä"
+msgstr "Palauta tallennettu"
 
 #: src/gedit-ui.xml.h:53
 msgid "Sav_e All"
-msgstr "Tallenna _kaikki"
+msgstr "Tall_enna kaikki"
 
 #: src/gedit-ui.xml.h:55
-#, fuzzy
 msgid "Save All"
-msgstr "Tallenna _kaikki"
+msgstr "Tallenna kaikki"
 
 #: src/gedit-ui.xml.h:56
-#, fuzzy
 msgid "Save As"
-msgstr "Tallenna nimellä..."
+msgstr "Tallenna nimellä"
 
 #: src/gedit-ui.xml.h:57
-#, fuzzy
 msgid "Save _As..."
-msgstr "Tallenna nimellä..."
+msgstr "T_allenna nimellä..."
 
 #: src/gedit-ui.xml.h:58
-#, fuzzy
 msgid "Save all open files"
 msgstr "Tallenna kaikki avoimet tiedostot"
 
@@ -858,218 +827,189 @@ msgid "Save the current file"
 msgstr "Tallenna nykyinen tiedosto"
 
 #: src/gedit-ui.xml.h:60
-#, fuzzy
 msgid "Save the current file with a different name"
-msgstr "Tallenna nykyinen tiedosto"
+msgstr "Tallenna nykyinen tiedosto uudella nimellä"
 
 #: src/gedit-ui.xml.h:61
 msgid "Se_arch"
 msgstr "_Etsi"
 
 #: src/gedit-ui.xml.h:62
-#, fuzzy
 msgid "Search again for the same string"
-msgstr "Etsi merkkijonoa"
+msgstr "Etsi uudestan samaa merkkijonoa"
 
 #: src/gedit-ui.xml.h:63
 msgid "Search for a string"
 msgstr "Etsi merkkijonoa"
 
 #: src/gedit-ui.xml.h:64
-#, fuzzy
 msgid "Select All"
-msgstr "Korvaa kaikki"
+msgstr "Valitse kaikki"
 
 #: src/gedit-ui.xml.h:65
-#, fuzzy
 msgid "Select the entire document"
-msgstr "Lähetä asiakirja sähköpostina"
+msgstr "Valitse koko asiakirjan sisältö"
 
 #: src/gedit-ui.xml.h:66
 msgid "Setup the page settings for your current printer"
-msgstr ""
+msgstr "Aseta tulostimesi sivuasetukset"
 
 #: src/gedit-ui.xml.h:68
-#, fuzzy
 msgid "Undo the last action"
 msgstr "Kumoa edellisen toiminto"
 
 #: src/gedit-ui.xml.h:69
 msgid "_About..."
-msgstr ""
+msgstr "_Tietoja..."
 
 #: src/gedit-ui.xml.h:70
-#, fuzzy
 msgid "_Close"
-msgstr "Sulje"
+msgstr "_Sulje"
 
 #: src/gedit-ui.xml.h:71
-#, fuzzy
 msgid "_Copy"
-msgstr "Kopioi"
+msgstr "K_opioi"
 
 #: src/gedit-ui.xml.h:72
 msgid "_Debug"
-msgstr ""
+msgstr "_Debug-viestit"
 
 #: src/gedit-ui.xml.h:73
 msgid "_Documents"
 msgstr "_Asiakirjat"
 
 #: src/gedit-ui.xml.h:74
-#, fuzzy
 msgid "_Edit"
-msgstr "Poistu"
+msgstr "_Muokkaa"
 
 #: src/gedit-ui.xml.h:75
 msgid "_File"
 msgstr "_Tiedosto"
 
 #: src/gedit-ui.xml.h:76
-#, fuzzy
 msgid "_Find"
-msgstr "Etsi"
+msgstr "_Etsi"
 
 #: src/gedit-ui.xml.h:77
 msgid "_Help"
-msgstr ""
+msgstr "_Ohje"
 
 #: src/gedit-ui.xml.h:78
 msgid "_New"
 msgstr "_Uusi"
 
 #: src/gedit-ui.xml.h:79
-#, fuzzy
 msgid "_Open..."
-msgstr "Avaa"
+msgstr "_Avaa..."
 
 #: src/gedit-ui.xml.h:80
-#, fuzzy
 msgid "_Paste"
-msgstr "Liitä"
+msgstr "L_iitä"
 
 #: src/gedit-ui.xml.h:81
-#, fuzzy
 msgid "_Plugins manager"
-msgstr "Lliitännäistenhallinta..."
+msgstr "_Liitännäistenhallinta"
 
 #: src/gedit-ui.xml.h:82
-#, fuzzy
 msgid "_Preferences"
-msgstr "Asetukset"
+msgstr "_Asetukset"
 
 #: src/gedit-ui.xml.h:83
-#, fuzzy
 msgid "_Print"
-msgstr "Tulosta"
+msgstr "T_ulosta"
 
 #: src/gedit-ui.xml.h:84
-#, fuzzy
 msgid "_Redo"
-msgstr "Uudelleen"
+msgstr "_Uudelleen"
 
 #: src/gedit-ui.xml.h:86
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
 #: src/gedit-ui.xml.h:87
-#, fuzzy
 msgid "_Save"
-msgstr "Tallenna"
+msgstr "_Tallenna"
 
 #: src/gedit-ui.xml.h:88
-#, fuzzy
 msgid "_Select all"
-msgstr "Pysä_ytä kaikki"
+msgstr "Valit_se kaikki"
 
 #: src/gedit-ui.xml.h:89
 msgid "_Settings"
-msgstr ""
+msgstr "_Asetukset"
 
 #: src/gedit-ui.xml.h:90
-#, fuzzy
 msgid "_Tools"
-msgstr "_Vastaanottaja:"
+msgstr "_Työkalut"
 
 #: src/gedit-ui.xml.h:91
-#, fuzzy
 msgid "_Undo"
-msgstr "Kumoa"
+msgstr "K_umoa"
 
-#: src/gedit-view.c:825
+#: src/gedit-view.c:824
 #, c-format
 msgid "  Ln %d, Col. %d"
-msgstr ""
+msgstr "  Rvi %d, Srke %d"
 
-#: src/gedit-view.c:863
+#: src/gedit-view.c:862
 msgid "  OVR"
-msgstr ""
+msgstr "  PÄÄLLE"
 
-#: src/gedit-view.c:865
+#: src/gedit-view.c:864
 msgid "  INS"
-msgstr ""
+msgstr "  LISÄÄ"
 
 #: src/gedit2.c:70
-#, fuzzy
 msgid "Show mdi debugging messages."
-msgstr "Näytä näkymien debug-tekstit."
+msgstr "Näytä uak:n debug-viestit."
 
 #: src/gedit2.c:73
 msgid "Show commands debugging messages."
-msgstr "Näytä komentojen debug-tekstit."
+msgstr "Näytä komentojen debug-viestit."
 
 #: src/gedit2.c:76
 msgid "Show document debugging messages."
-msgstr "Näytä asiakirjojen debug-tekstit."
+msgstr "Näytä asiakirjojen debug-viestit."
 
 #: src/gedit2.c:79
 msgid "Show file debugging messages."
-msgstr "Näytä tiedostojen debug-tekstit."
+msgstr "Näytä tiedostojen debug-viestit."
 
 #: src/gedit2.c:82
 msgid "Show plugin debugging messages."
-msgstr "Näytä liitännäisten debug-tekstit."
+msgstr "Näytä liitännäisten debug-viestit."
 
 #: src/gedit2.c:85
 msgid "Show prefs debugging messages."
-msgstr "Näytä asetusten debug-tekstit."
+msgstr "Näytä asetusten debug-viestit."
 
 #: src/gedit2.c:88
 msgid "Show printing debugging messages."
-msgstr "Näytä tulostuksen debug-tekstit."
+msgstr "Näytä tulostuksen debug-viestit."
 
 #: src/gedit2.c:91
 msgid "Show search debugging messages."
-msgstr "Näytä etsimisen debug-tekstit."
+msgstr "Näytä etsimisen debug-viestit."
 
 #: src/gedit2.c:94
 msgid "Show undo debugging messages."
-msgstr "Näytä kumoamisten debug-tekstit."
+msgstr "Näytä kumoamisten debug-viestit."
 
 #: src/gedit2.c:97
 msgid "Show view debugging messages."
-msgstr "Näytä näkymien debug-tekstit."
+msgstr "Näytä näkymien debug-viestit."
 
 #: src/gedit2.c:100
 msgid "Show recent debugging messages."
-msgstr "Näytä pikavalintojen debug-tekstit."
+msgstr "Näytä pikavalintojen debug-viestit."
 
 #: src/gedit2.c:103
 msgid "Turn on all debugging messages."
-msgstr "Näytä kaikki debug-tekstit."
+msgstr "Näytä kaikki debug-viestit."
 
 #: src/gedit2.c:164
-#, fuzzy
 msgid "The gnome text editor"
-msgstr "Tekstieditori"
-
-#, fuzzy
-#~ msgid "Manager"
-#~ msgstr "_Hallinta ..."
-
-#, fuzzy
-#~ msgid "_Manager"
-#~ msgstr "_Hallinta ..."
+msgstr "Gnomen tekstieditori"
 
 #~ msgid "ASCII table"
 #~ msgstr "ASCII-taulu"
