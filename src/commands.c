@@ -49,9 +49,9 @@ static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
 static void close_file_save_no_sel(GtkWidget *w, gE_data *data);
 static void close_doc_common(gE_data *data);
 static void close_window_common(gE_window *w);
-static void file_saveas_destroy(GtkWidget *w, gpointer cbdata);
-static void file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
-static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
+static gint file_saveas_destroy(GtkWidget *w, gpointer cbdata);
+static gint file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
+static gint file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
 static void line_pos_cb(GtkWidget *w, gE_data *data);
 static void recent_update_menus (gE_window *window, GList *recent_files);
 static void recent_cb(GtkWidget *w, gE_data *data);
@@ -192,7 +192,7 @@ popup_close_verify(gE_document *doc, gE_data *data)
 /*
  * file open callback : user selects "Ok"
  */
-void
+gint
 file_open_ok_sel(GtkWidget *widget, gE_data *data)
 {
 	char *filename;
@@ -212,7 +212,7 @@ file_open_ok_sel(GtkWidget *widget, gE_data *data)
 
 	if (filename != NULL) {
 		if (stat(filename, &sb) == -1)
-			return;
+			return TRUE;
 
 		if (S_ISDIR(sb.st_mode)) {
 			nfile = g_malloc0(strlen (filename) + 3);
@@ -220,7 +220,7 @@ file_open_ok_sel(GtkWidget *widget, gE_data *data)
 			gtk_file_selection_set_filename(GTK_FILE_SELECTION(
 				w->open_fileselector), nfile);
 			g_free(nfile);
-			return;
+			return TRUE;
 		}
 
 		curdoc = gE_document_current(w);
@@ -232,6 +232,8 @@ file_open_ok_sel(GtkWidget *widget, gE_data *data)
 	}
 	if (GTK_WIDGET_VISIBLE(fs))
 		gtk_widget_hide (GTK_WIDGET(fs));
+
+	return TRUE;
 } /* file_open_ok_sel */
 
 /*
@@ -239,7 +241,7 @@ file_open_ok_sel(GtkWidget *widget, gE_data *data)
  *
  * data->temp1 must be the file saveas dialog box
  */
-void
+gint
 file_saveas_ok_sel(GtkWidget *w, gE_data *data)
 {
 	char *fname;
@@ -261,27 +263,31 @@ file_saveas_ok_sel(GtkWidget *w, gE_data *data)
 		} else
 			data->flag = FALSE;	/* indicate not saved */
 	}
+
+	return TRUE;
 } /* file_saveas_ok_sel */
 
 
 /*
  * file open callback : user selects "Cancel"
  */
-static void
+static gint
 file_cancel_sel (GtkWidget *w, GtkFileSelection *fs)
 {
   if (GTK_WIDGET_VISIBLE(fs))
     gtk_widget_hide (GTK_WIDGET(fs));
+  return TRUE;
 }
 
 
 /*
  * file selection dialog callback
  */
-static void
+static gint
 file_sel_destroy (GtkWidget *w, GtkFileSelection *fs)
 {
 	fs = NULL;
+	return TRUE;
 }
 
 
@@ -602,10 +608,11 @@ file_save_as_cb(GtkWidget *widget, gpointer cbdata)
 /*
  * destroy the "save as" dialog box
  */
-static void
+static gint
 file_saveas_destroy(GtkWidget *w, gpointer cbdata)
 {
 	gtk_widget_destroy((GtkWidget *)cbdata);
+	return TRUE;
 }
 
 
