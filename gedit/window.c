@@ -42,7 +42,7 @@ GList *window_list = NULL;
 /* I am rewriting the search option, and search results from all
    documents will not get imlemented initially */
 #define ENABLE_SEARCH_RESULT_CLIST
-#undef ENABLE_SEARCH_RESULT_CLIST
+#undef  ENABLE_SEARCH_RESULT_CLIST
 
 
 /* Window *window; */

@@ -402,8 +402,6 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 
 	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
 	{
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 		gedit_flash_va (_("Loaded file %s"), doc->filename);
 	}
 

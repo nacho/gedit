@@ -36,6 +36,14 @@ static void gedit_undo_check_size (Document *doc);
        void gedit_undo_free_list (GList **list_pointer);
 static gint gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guchar * text);
 
+/**
+ * gedit_undo_check_size:
+ * @doc: document to check
+ * 
+ * Checks that the size of doc->undo does not excede settings->undo_levels and
+ * frees any undo level above sett->undo_level.
+ *
+ **/
 static void
 gedit_undo_check_size (Document *doc)
 {
@@ -79,7 +87,7 @@ gedit_undo_check_size (Document *doc)
  * @text: 
  * @start_pos: 
  * @end_pos: 
- * @action: edither GEDIT_UNDO_INSERT or GEDIT_UNDO_DELETE
+ * @action: either GEDIT_UNDO_INSERT or GEDIT_UNDO_DELETE
  * @doc: 
  * @view: The view so that we save the scroll bar position.
  * 
@@ -127,7 +135,8 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
  * @end_pos: 
  * @action: 
  * 
- * This function tries to merge an undo object with a new set of data
+ * This function tries to merge the undo object at the top of
+ * the stack with a new set of data
  * 
  * Return Value: TRUE is merge was sucessful, FALSE otherwise
  **/
@@ -175,7 +184,6 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 		last_undo->mergeable = FALSE;		
 		return FALSE;
 	}
-
 
 	if (action != last_undo->action)
 	{
@@ -258,6 +266,13 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 }
 
 
+/**
+ * gedit_undo_do:
+ * @w: not used
+ * @data: not used
+ * 
+ * Executes an undo request on the current document
+ **/
 void
 gedit_undo_do (GtkWidget *w, gpointer data)
 {
@@ -282,26 +297,32 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	/* The undo data we need is always at the top op the
 	   stack. So, therefore, the first one =) */
 	undo = g_list_nth_data (doc->undo, 0);
+	undo->mergeable = FALSE;
+
 	doc->redo = g_list_prepend (doc->redo, undo);
 	doc->undo = g_list_remove (doc->undo, undo);
-	undo->mergeable = FALSE;
 
 	/* Move the view (scrollbars) to the correct position */
 	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
 				  undo->window_position);
 	
 	if (undo->action == GEDIT_UNDO_DELETE)
-		/* We're inserting something that was deleted */
-		views_insert (doc, undo->start_pos, undo->text, undo->end_pos - undo->start_pos, NULL);
+		gedit_document_insert_text (doc, undo->text, undo->start_pos, FALSE);
 	else if (undo->action == GEDIT_UNDO_INSERT)
-		/* We're deleteing somthing that had been inserted */
-		doc_delete_text_cb (GTK_WIDGET(text), undo->start_pos, undo->end_pos, view, FALSE, FALSE);
-             	/* views_delete (doc, undo->start_pos, undo->end_pos);*/
-        	/*doc->changed = undo->status; Disabled by chema. See below..*/
+		gedit_document_delete_text (doc, undo->start_pos, undo->end_pos-undo->start_pos, FALSE);
 	else
 		g_assert_not_reached ();
+
+	/*doc->changed = undo->status; Disabled by chema. See below..*/
 }
 
+/**
+ * gedit_undo_redo:
+ * @w: not used
+ * @data: not used
+ * 
+ * executes a redo request on the current document
+ **/
 void
 gedit_undo_redo (GtkWidget *w, gpointer data)
 {
@@ -330,24 +351,22 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 				  redo->window_position);
 				  
 	if (redo->action == GEDIT_UNDO_INSERT)
-		/* We're inserting something that was deleted */
-		views_insert (doc, redo->start_pos, redo->text, redo->end_pos - redo->start_pos, NULL);
+		gedit_document_insert_text (doc, redo->text, redo->start_pos, FALSE);
 	else if (redo->action == GEDIT_UNDO_DELETE)
-		/* We're deleteing somthing that had been inserted */
-/*		views_delete (doc, redo->start_pos, redo->end_pos);*/
-		doc_delete_text_cb (GTK_WIDGET(text), redo->start_pos, redo->end_pos, view, FALSE, FALSE);
-
-		/*doc->changed = undo->status; disable by chema. We need to call the appropiate function
-		  to actually change the title and stuff.*/
+		gedit_document_delete_text (doc, redo->start_pos, redo->end_pos-redo->start_pos, FALSE);
 	else 
 		g_assert_not_reached ();
+
+	/*doc->changed = undo->status; disable by chema. We need to call the appropiate function
+	  to actually change the title and stuff.*/
 }
 
 
 /**
  * gedit_undo_free_list:
- * @list_pointer: 
- * 
+ * @list_pointer: list to be freed
+ *
+ * frees and undo structure list
  **/
 void
 gedit_undo_free_list (GList ** list_pointer)

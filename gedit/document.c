@@ -41,6 +41,8 @@ typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
 static GnomeMDIChildClass *parent_class = NULL;
 
 void gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable);
+void gedit_document_delete_text (Document *doc, guint position, gint length, gint undoable);
+
 GtkType gedit_document_get_type (void);
 static GtkWidget * gedit_document_create_view (GnomeMDIChild *child);
 static void gedit_document_destroy (GtkObject *obj);
@@ -92,6 +94,36 @@ gedit_document_insert_text (Document *doc, guchar *text, guint position, gint un
 	exclude_this_view = FALSE;
 
 	doc_insert_text_cb (editable, text, length, &position, view, exclude_this_view, undoable);
+}
+
+/**
+ * gedit_document_delete_text: Deletes text from a document and hadles all the details like
+ *                             adding the data to the undo stack and deleting it from multiple views
+ *                             Provides an abstraction layer between gedit and the text widget.
+ * @doc: document to delete text from
+ * @position: position to delete the text from
+ * @length: length of the text to delete
+ * @undoable: if this deletion gets added to the undo stack or not.
+ * 
+ *
+ **/
+void
+gedit_document_delete_text (Document *doc, guint position, gint length, gint undoable)
+{
+	View *view;
+	GtkText *text_widget;
+	GtkWidget *editable;
+	gint exclude_this_view;
+
+	view = g_list_nth_data (doc->views, 0);
+	g_return_if_fail (view!=NULL);
+	text_widget = GTK_TEXT (view->text);
+	g_return_if_fail (text_widget!=NULL);
+	editable = GTK_WIDGET (text_widget);
+	g_return_if_fail (editable!=NULL);
+	exclude_this_view = FALSE;
+
+	doc_delete_text_cb (editable, position, position+length, view, exclude_this_view, undoable);
 }
 
 GtkType

@@ -69,6 +69,7 @@ extern guint mdi_type [NUM_MDI_MODES];
 extern GnomeMDI *mdi;
 
 void gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable);
+void gedit_document_delete_text (Document *doc, guint position, gint length, gint undoable);
 
 GtkType gedit_document_get_type (void);
 Document* gedit_document_new (void);

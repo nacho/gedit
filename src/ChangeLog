@@ -1,5 +1,20 @@
 2000-06-04  Chema Celorio  <chema@celorio.com>
 
+	* document.c (gedit_document_delete_text): new function.
+
+	* undo.c (gedit_undo_do): use gedit_document_delete_text and
+	gedit_document_insert_text.
+	(gedit_undo_redo): ditto
+
+	* file.c (gedit_file_open_ok_sel): don't create the
+	view here. gedit_document_new_with_file will.
+
+	* view.c (views_delete): use gedit_view_delete
+	(gedit_view_delete): new function. 
+	* view.c (doc_delete_text_cb): rewrite
+
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
 	* view.c (gedit_view_insert): don't freeze and thaw the view.
 	(views_delete): ditto.
 
