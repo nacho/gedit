@@ -143,11 +143,6 @@ gboolean	gedit_document_save_as 		(GeditDocument        *doc,
 						 const GeditEncoding  *encoding,
 						 GError              **error);
 
-gboolean	gedit_document_save_a_copy_as 	(GeditDocument        *doc,
-						 const gchar          *uri, 
-						 const GeditEncoding  *encoding,
-						 GError              **error);
-
 void	 	gedit_document_revert 		(GeditDocument *doc);
 
 gboolean	gedit_document_is_untitled 	(const GeditDocument* doc);

@@ -1653,31 +1653,6 @@ gedit_document_save_as (GeditDocument* doc, const gchar *uri,
 	return ret;
 }
 
-gboolean	
-gedit_document_save_a_copy_as (GeditDocument *doc, const gchar *uri, 
-			       const GeditEncoding *encoding, GError **error)
-{
-	gboolean m;
-	gboolean ret;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (doc != NULL, FALSE);
-	g_return_val_if_fail (doc->priv != NULL, FALSE);
-	g_return_val_if_fail (uri != NULL, FALSE);
-
-	if (encoding == NULL)
-		encoding = gedit_document_get_encoding (doc);
-	
-	m = gedit_document_get_modified (doc);
-
-	ret = gedit_document_save_as_real (doc, uri, encoding, FALSE, error);
-	
-	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), m);	 
-
-	return ret;
-}
-
 #define MAX_LINK_LEVEL 256
 
 /* Does readlink() recursively until we find a real filename. */
@@ -1791,6 +1766,8 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 	gint retval;
 	gboolean res;
 	gboolean add_cr;
+	GtkTextIter start_iter;
+	GtkTextIter end_iter;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -1906,8 +1883,10 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 		goto out;
 	}
 
-	chars = gedit_document_get_chars (doc, 0, -1);
-	
+	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter);
+	chars = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
+					   &start_iter, &end_iter, TRUE);
+
 	if (encoding != gedit_encoding_get_utf8 ())
 	{
 		GError *conv_error = NULL;

@@ -451,8 +451,8 @@ gedit_get_ui_component_from_window (BonoboWindow* win)
 GList *
 gedit_get_open_documents (void)
 {
-	GList* children;
-	GList* docs = NULL;
+	GList *children;
+	GList *docs = NULL;
 	g_return_val_if_fail (gedit_mdi != NULL, NULL);
 
 	children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
@@ -462,12 +462,12 @@ gedit_get_open_documents (void)
 		GeditMDIChild *child;
 
 		child = GEDIT_MDI_CHILD (children->data);
-		
-		docs = g_list_append (docs, child->document);
+
+		docs = g_list_prepend (docs, child->document);
 		children = g_list_next (children);
 	}
-	
-	return docs;
+
+	return g_list_reverse (docs);
 }
 
 GeditMDI *
