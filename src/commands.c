@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
@@ -252,6 +253,7 @@ void window_new_cb(GtkWidget *widget, gpointer cbdata)
  */
 static void file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
+
 	gchar *filename;
 	gchar *nfile;
 	gchar *flash;
@@ -262,68 +264,64 @@ static void file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 	filename = g_strdup (gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel)));
 	gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel),"");
 	
-	if (filename != NULL) {
-		
-	   if (stat(filename, &sb) == -1)
-	     return;
+	if (filename != NULL)
+	{
+		if (stat(filename, &sb) == -1)
+			return;
 
-	   if (S_ISDIR(sb.st_mode)) {
-	   
-	      nfile = g_malloc0(strlen (filename) + 3);
-	      sprintf(nfile, "%s/.", filename);
-	      
-	      gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel), nfile);
-	      
-	      g_free(nfile);
-	      
-	      return;
-	   }
+		if (S_ISDIR(sb.st_mode))
+		{
+			nfile = g_malloc0(strlen (filename) + 3);
+			sprintf(nfile, "%s/.", filename);
+			gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel), nfile);
+			g_free(nfile);
+			return;
+		}
 
-	   if (gE_document_current ()) {
-	   
-	     doc = gE_document_current();
-		     
-	     if (doc->filename || doc->changed) {
-	     
-	       doc = gE_document_new_with_file (filename);
-	       gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	       gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+		if (gE_document_current ())
+		{
+			doc = gE_document_current();
+			if (doc->filename || doc->changed)
+			{
+				doc = gE_document_new_with_file (filename);
+				if(doc==NULL)
+				{
+					/*gnome_app_error(mdi->active_window, _("Can't open file!"));*/
+					gtk_widget_hide (GTK_WIDGET(osel));
+					return;
+				}
+				else
+				{
+					gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+					gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+				}
+				/* Make the document readonly if you can't write to the file. */
+				gE_view_set_read_only (GE_VIEW(mdi->active_view), access (filename, W_OK) != 0);
+			}
+			else
+			{
+				gE_file_open (GE_DOCUMENT(doc), filename);
+			}
+			gtk_widget_hide (GTK_WIDGET(osel));
+			return;
+		}
+		else
+		{
+			doc = gE_document_new_with_file (filename);
+			if( doc==NULL )
+				g_print("FIXME : Could not open file ...(2012)\n");
+			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+                        /* Make the document readonly if you can't write to the file. */
+			gE_view_set_read_only (GE_VIEW(mdi->active_view), access (filename, W_OK) != 0);
 
-  	       /* Make the document readonly if you can't write to the file. */
-	       gE_view_set_read_only (GE_VIEW(mdi->active_view), access (filename, W_OK) != 0);
-	        		 
-	     } else {
-	      
-	      gE_file_open (GE_DOCUMENT(doc), filename);
-	     
-	     }
-		     
-	     gtk_widget_hide (GTK_WIDGET(osel));
-	     
-	     return;
-	     
-	   } else {
-		     
-	    doc = gE_document_new_with_file (filename);
-	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-
-
- 	    /* Make the document readonly if you can't write to the file. */
-	    gE_view_set_read_only (GE_VIEW(mdi->active_view), access (filename, W_OK) != 0);
-		     
-	    gtk_widget_hide (GTK_WIDGET(osel));
-	    return;
-	    
-	   }
-	
-		
-
+			gtk_widget_hide (GTK_WIDGET(osel));
+			return;
+		}
 	}
-	
+
 	gtk_widget_hide (GTK_WIDGET(osel));
 	return;
-	
 } /* file_open_ok_sel */
 
 
@@ -985,8 +983,7 @@ recent_cb(GtkWidget *w, gE_data *data)
 	if ((doc = gE_document_current ())) {
 	
 	  if (doc->filename || GE_VIEW(mdi->active_view)->changed) {
-	  
-	    doc = gE_document_new_with_file (data->temp1);
+            doc = gE_document_new_with_file (data->temp1);
 	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	    

@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* gEdit
  * Copyright (C) 1998 Alex Roberts and Evan Lawrence
  *
@@ -165,63 +166,60 @@ int main (int argc, char **argv)
 	gE_plugins_init ();
 	
 	/* new plugins system init will be here */
-		
-    /* connect signals -- FIXME -- We'll do the rest later */
-    gtk_signal_connect(GTK_OBJECT(mdi), "remove_child", GTK_SIGNAL_FUNC(remove_doc_cb), NULL);
-    gtk_signal_connect(GTK_OBJECT(mdi), "destroy", GTK_SIGNAL_FUNC(file_quit_cb), NULL);
-/*    gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
-    gtk_signal_connect(GTK_OBJECT(mdi), "child_changed", GTK_SIGNAL_FUNC(child_switch), NULL);
-    gtk_signal_connect(GTK_OBJECT(mdi), "app_created", GTK_SIGNAL_FUNC(gE_window_new), NULL);
-/*    gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);
-    gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);		
-*/
+	/* connect signals -- FIXME -- We'll do the rest later */
+	gtk_signal_connect(GTK_OBJECT(mdi), "remove_child", GTK_SIGNAL_FUNC(remove_doc_cb), NULL);
+	gtk_signal_connect(GTK_OBJECT(mdi), "destroy", GTK_SIGNAL_FUNC(file_quit_cb), NULL);
+/*	gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
+	gtk_signal_connect(GTK_OBJECT(mdi), "child_changed", GTK_SIGNAL_FUNC(child_switch), NULL);
+        gtk_signal_connect(GTK_OBJECT(mdi), "app_created", GTK_SIGNAL_FUNC(gE_window_new), NULL);
+/*	gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);*/
+/*	gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);*/
 	gE_get_settings();
 	gnome_mdi_set_mode (mdi, mdiMode);	
 /*	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	*/
-		
 	gnome_mdi_open_toplevel(mdi);
 
 	doc = gE_document_new ();
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
 
-	if (file_list) {
-
-	  if (mdi->active_child == NULL)
-	    return 1;
-	
-	  gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
-	
-	  for (;file_list; file_list = file_list->next) {
-
-	    if (g_file_exists (file_list->data)) {
-			  
-		doc = gE_document_new_with_file (file_list->data);
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	        	  
-	    } else {
-	        	
-		popup_create_new_file (NULL, file_list->data);
-
-	    }
-
-	  }
-
-	  /* if there are no open documents create a blank one */
-	  if (g_list_length(mdi->children) == 0) {
-	  
-		doc = gE_document_new ();
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
-	  }
-	    
+	if (file_list)
+	{
+		if (mdi->active_child == NULL)
+			return 1;
+		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
+		for (;file_list; file_list = file_list->next)
+		{
+			if (g_file_exists (file_list->data))
+			{
+				doc = gE_document_new_with_file (file_list->data);
+				if( doc!=NULL)
+				{
+					gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+					gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+				}
+			}
+			else
+			{
+				popup_create_new_file (NULL, file_list->data);
+			}
+		}
+                /* if there are no open documents create a blank one */
+		if (g_list_length(mdi->children) == 0)
+		{
+			doc = gE_document_new ();
+			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+			gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
+		}
 	}
 	
 	/*g_free (data);*/
-
 	
 	gtk_main ();
 	return 0;
 
 }
+
+
+
+

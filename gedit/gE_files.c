@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
@@ -40,16 +41,12 @@ static void clear_text (gE_view *view);
 static void
 clear_text (gE_view *view)
 {
-
 	gint i = gE_view_get_length (view);
 
 	if (i > 0) {
-	
-	  gE_view_set_position (view, i);
-	  gtk_text_backward_delete (GTK_TEXT(view->text), i);
-		
+		gE_view_set_position (view, i);
+		gtk_text_backward_delete (GTK_TEXT(view->text), i);
 	}
-
 }
 
 
@@ -63,7 +60,6 @@ clear_text (gE_view *view)
 gint
 gE_file_open (gE_document *doc, gchar *fname)
 {
-
 	char *nfile, *name;
 	gchar *tmp_buf, *flash;
 	struct stat stats;
@@ -73,61 +69,44 @@ gE_file_open (gE_document *doc, gchar *fname)
 
 	name = fname;
 
-	if (!stat(fname, &stats) && S_ISREG(stats.st_mode)) {
-	
-   	  doc->buf_size = stats.st_size;
-   	        
-   	  if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL) {
-   	    
-   	    if ((doc->filename = g_strdup (fname)) != NULL) {
-   	      
-   	      /*gE_file_open (GE_DOCUMENT(doc));*/
-   	                
-   	      if ((fp = fopen (fname, "r")) != NULL) {
-   	        
-   	        doc->buf_size = fread (tmp_buf, 1, doc->buf_size,fp);
-   	        doc->buf = g_string_new (tmp_buf);
-   	        g_free (tmp_buf);
-
-		gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), g_basename(fname));
-   	          
-  	        fclose (fp);
-  	        
-  	        for (i = 0; i < g_list_length (doc->views); i++) {
-  	        
-  	          nth_view = g_list_nth_data (doc->views, i);
-  	          
-  	          gE_view_refresh (nth_view);
-
-  	          /* Make the document readonly if you can't write to the file. */
-		  gE_view_set_read_only (nth_view, access (fname, W_OK) != 0);
-
-		  if (!nth_view->changed_id)
-	  		nth_view->changed_id =	gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
-									    GTK_SIGNAL_FUNC(view_changed_cb), nth_view); 
-  	        }
-  	        
-  	        flash = g_strdup_printf("%s %s",_(MSGBAR_FILE_OPENED), fname);
-		gnome_app_flash(mdi->active_window, flash);
-		g_free(flash);
-		
-		doc->changed = FALSE;
-		
-		recent_add (doc->filename);
-		recent_update (GNOME_APP (mdi->active_window));
-		
-		return 0;
-
-	      }
-	
-	    }
-	
-	  }
-	
+	if (!stat(fname, &stats) && S_ISREG(stats.st_mode))
+	{
+		doc->buf_size = stats.st_size;
+		if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL) {
+			if ((doc->filename = g_strdup (fname)) != NULL) {
+                                /*gE_file_open (GE_DOCUMENT(doc));*/
+				if ((fp = fopen (fname, "r")) != NULL) {
+					doc->buf_size = fread (tmp_buf, 1, doc->buf_size,fp);
+					doc->buf = g_string_new (tmp_buf);
+					g_free (tmp_buf);
+					gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), g_basename(fname));
+					fclose (fp);
+					for (i = 0; i < g_list_length (doc->views); i++) {
+						nth_view = g_list_nth_data (doc->views, i);
+						gE_view_refresh (nth_view);
+                                                /* Make the document readonly if you can't write to the file. */
+						gE_view_set_read_only (nth_view, access (fname, W_OK) != 0);
+						if (!nth_view->changed_id)
+							nth_view->changed_id =	gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
+												    GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
+					}
+					flash = g_strdup_printf("%s %s",_(MSGBAR_FILE_OPENED), fname);
+					gnome_app_flash(mdi->active_window, flash);
+					g_free(flash);
+					doc->changed = FALSE;
+					recent_add (doc->filename);
+					recent_update (GNOME_APP (mdi->active_window));
+					return 0;
+				}
+				else
+				{
+					gnome_app_error(mdi->active_window, _("Can't open file!"));
+					return NULL;
+				}
+			}
+		}
 	}
-	
 	return 1;
-
 } /* gE_file_open */
 
 

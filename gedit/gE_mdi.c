@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
@@ -246,15 +247,13 @@ gE_document *gE_document_new ()
 	gE_document *doc;
 	
 	int i;
-	
+
 	/* FIXME: Blarg!! */
-	
 	if ((doc = gtk_type_new (gE_document_get_type ()))) {
 	
 	  gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), get_untitled_as_string());
 	  
 	  doc->buf = g_string_sized_new (64);
-
 	  return doc;
 	}
 	
@@ -323,45 +322,36 @@ gE_document *gE_document_new_with_file (gchar *filename)
 	FILE *fp;
 
 /*	if ((doc = gE_document_new()))*/
-
-	if (!stat(filename, &stats) && S_ISREG(stats.st_mode)) {
-	
-	  if ((doc = gtk_type_new (gE_document_get_type ()))) {
-	  
-   	    doc->buf_size = stats.st_size;
-   	        
-   	    if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL) {
-   	    
-   	      if ((doc->filename = g_strdup (filename)) != NULL) {
-   	      
-   	        /*gE_file_open (GE_DOCUMENT(doc));*/
-   	                
-   	        if ((fp = fopen (filename, "r")) != NULL) {
-   	        
-   	          doc->buf_size = fread (tmp_buf, 1, doc->buf_size,fp);
-   	          doc->buf = g_string_new (tmp_buf);
-   	          g_free (tmp_buf);
-   	          
-   	          gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), g_basename(filename));
-
-   	          fclose (fp);
-
-		  return doc;
-	
-	        }
-	
-	      }
-	
-	    }
-	
-	  }
-	
-	  g_print ("Eeek.. bork!\n");
-	  gtk_object_destroy (GTK_OBJECT(doc));
-	
+	if (!stat(filename, &stats) && S_ISREG(stats.st_mode))
+	{
+	     if ((doc = gtk_type_new (gE_document_get_type ())))
+	     {
+		  doc->buf_size = stats.st_size;
+		  if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL)
+		  {
+		       if ((doc->filename = g_strdup (filename)) != NULL)
+		       {
+			    /*gE_file_open (GE_DOCUMENT(doc));*/
+			    if ((fp = fopen (filename, "r")) != NULL)
+			    {
+				 doc->buf_size = fread (tmp_buf, 1, doc->buf_size,fp);
+				 doc->buf = g_string_new (tmp_buf);
+				 g_free (tmp_buf);
+				 gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), g_basename(filename));
+				 fclose (fp);
+				 return doc;
+			    }
+			    else
+			    {
+				 gnome_app_error(mdi->active_window, _("Can't open file!"));
+				 g_free (tmp_buf);
+				 return NULL;
+			    }
+		       }
+		  }
+	     }
+	     gtk_object_destroy (GTK_OBJECT(doc));
 	}
-
-	
 	return NULL;
 
 } /* gE_document_new_with_file */
