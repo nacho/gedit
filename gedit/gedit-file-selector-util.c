@@ -298,8 +298,8 @@ create_gtk_selector (FileselMode mode,
 
 		gtk_box_pack_end (GTK_BOX (GTK_FILE_SELECTION (filesel)->main_vbox), 
 				  hbox,
-				  TRUE,
-				  TRUE,
+				  FALSE,
+				  FALSE,
 				  6);
 
 		g_object_set_data (G_OBJECT (filesel), 

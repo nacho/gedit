@@ -1,5 +1,11 @@
 2003-08-22  Paolo Maggi  <paolo.maggi@polito.it>
 
+	* gedit-file-selector-util.c (create_gtk_selector): 
+	avoid resizing of the Character Coding button when the dialog 
+	is resized (bug #120351)
+
+2003-08-22  Paolo Maggi  <paolo.maggi@polito.it>
+
 	* gedit-document.c (gedit_document_new): disable bracket matching
 	since it is broken.
 	(gedit_document_set_uri)(gedit_document_set_language): 
