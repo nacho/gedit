@@ -38,10 +38,14 @@
 /*#include "toolbar.h"*/
 #include "gE_prefs.h"
 /*#include "search.h"*/
+#include "gE_icon.xpm"
 
 extern GList *plugins;
 gE_window *window;
 extern GtkWidget  *col_label;
+
+/* Prototype for setting the window icon */
+void gE_window_set_icon(GtkWidget *window, char *icon);
 
 
 /*gE_window */
@@ -78,7 +82,8 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	gnome_app_set_statusbar (GNOME_APP(app),GTK_WIDGET (statusbar));
 		
 	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
-
+	
+	gE_window_set_icon(GTK_WIDGET(app), "gE_icon");
 	
 } /* gE_window_new */
 
@@ -86,6 +91,25 @@ void gE_window_set_auto_indent (gint auto_indent)
 {
 	settings->auto_indent = auto_indent;
 }
+
+/* set the a window icon */
+void gE_window_set_icon(GtkWidget *window, char *icon)
+{
+	GdkPixmap *pixmap;
+        GdkBitmap *mask;
+
+	gtk_widget_realize (window);
+	
+	pixmap = gdk_pixmap_create_from_xpm_d (window->window,
+						&mask,
+                                		&window->style->bg[GTK_STATE_NORMAL],
+                                		(char **)gE_icon);
+	
+	gdk_window_set_icon (window->window, NULL, pixmap, mask);
+	
+	gtk_widget_unrealize (window);
+}
+
 
 void gE_window_set_status_bar (gint show_status)
 {

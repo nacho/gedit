@@ -761,6 +761,7 @@ void recent_add (char *filename)
  * gnome_app_remove_menu_range(app, path, start, num) removes num items from the existing app's menu structure
  * begining with item described by path plus the number specified by start
  */
+/*
 void
 gnome_app_remove_menu_range (GnomeApp *app,
 		       gchar *path,
@@ -774,10 +775,10 @@ gnome_app_remove_menu_range (GnomeApp *app,
   g_return_if_fail(app != NULL);
   g_return_if_fail(GNOME_IS_APP(app));
 
-  /* find the first item (which is actually at position pos-1) to remove */
+   find the first item (which is actually at position pos-1) to remove 
   parent = gnome_app_find_menu_pos(app->menubar, path, &pos);
 
-  /* in case of path ".../" remove the first item */
+   in case of path ".../" remove the first item 
   if(pos == 0)
     pos = 1;
 
@@ -788,11 +789,11 @@ gnome_app_remove_menu_range (GnomeApp *app,
     return;
   }
 
-  /* remove items */
+   remove items 
   children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
   while(children && items > 0) {
     child = GTK_WIDGET(children->data);
-    /* children = g_list_next(children); */
+     children = g_list_next(children); 
     gtk_container_remove(GTK_CONTAINER(parent), child);
     children = g_list_nth(GTK_MENU_SHELL(parent)->children, pos - 1);
     items--;
@@ -800,6 +801,7 @@ gnome_app_remove_menu_range (GnomeApp *app,
 
   gtk_widget_queue_resize(parent);
 }
+*/
 
 /* Grabs the recent used list, then updates the menus via a call to recent_update_menus 
  * Should be called after each addition to the list 
