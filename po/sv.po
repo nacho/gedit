@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-04-02 15:42-0400\n"
+"POT-Creation-Date: 2000-04-03 19:17+0200\n"
 "PO-Revision-Date: 1999-09-07 04:20+0200\n"
 "Last-Translator: Andreas Hyden <a.hyden@cyberpoint.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -23,12 +23,11 @@ msgstr "Exempel \"Hej världen\" insticksprogram."
 
 #: plugins/time/time.c:96
 msgid "Insert Time"
-msgstr ""
+msgstr "Infoga tid"
 
 #: plugins/time/time.c:97
-#, fuzzy
 msgid "Inserts the current date and time"
-msgstr "Stäng nuvarande fil"
+msgstr "Infogar dagens datum och tid"
 
 #: plugins/email/email.c:101
 msgid "The gEdit Email Plugin"
@@ -36,12 +35,11 @@ msgstr "gEdits epost-tillägg"
 
 #: plugins/email/email.c:202
 msgid "Email"
-msgstr ""
+msgstr "Epost"
 
 #: plugins/email/email.c:203
-#, fuzzy
 msgid "Email the current document"
-msgstr "Spara nuvarande fil"
+msgstr "Eposta det aktiva dokumentet"
 
 #: src/commands.c:97
 msgid "Could not save file!"
@@ -51,102 +49,135 @@ msgstr "Kunde inte spara fil!"
 msgid "Open File..."
 msgstr "Öppna fil..."
 
-#: src/commands.c:425 src/commands.c:473
+#: src/commands.c:424 src/commands.c:462
 msgid "Read only file!"
 msgstr "Skrivskyddad fil!"
 
-#: src/commands.c:512 src/commands.c:582
+#: src/commands.c:493 src/commands.c:562
 msgid "Error saving file!"
 msgstr "Fel vid sparning av fil!"
 
-#: src/commands.c:542
+#: src/commands.c:522
 #, c-format
 msgid "Save %s As..."
 msgstr "Spara %s som..."
 
-#: src/commands.c:615
+#: src/commands.c:591
 #, c-format
 msgid "Save %s As ..."
 msgstr "Spara %s som..."
 
-#: src/commands.c:701
+#: src/commands.c:676
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
 "(%s)"
 msgstr ""
-"Är du säker att du vill ångra alla förändringar?\n"
+"Är du säker att du vill ångra alla ändringar?\n"
 "(%s)"
 
-#: src/commands.c:749
+#: src/commands.c:726
 msgid "Document Unchanged..."
 msgstr "Dokument oförändrat..."
 
-#: src/commands.c:753
+#: src/commands.c:730
 msgid "Document Unsaved..."
 msgstr "Dokument ej sparat..."
 
-#: src/commands.c:937
+#: src/commands.c:896
 msgid "_File/"
 msgstr "_Arkiv/"
 
-#: src/commands.c:946 src/commands.c:947
+#: src/commands.c:905 src/commands.c:906
 msgid "_File"
 msgstr "_Arkiv"
 
-#: src/gE_about.c:39
+#: src/gedit-about.c:39
 msgid "With special thanks to:"
 msgstr "Med extra tack till:"
 
-#: src/gE_about.c:54
+#: src/gedit-about.c:54
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "(C) 1998, 1999 Alex Roberts och Evan Lawrence"
 
-#: src/gE_about.c:56
+#: src/gedit-about.c:56
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit är en liten och tunn texteditor för GNOME/Gtk+"
 
-#: src/gE_files.c:95
-#, fuzzy
-msgid "Can't open file!"
-msgstr "Skrivskyddad fil!"
+#: src/gedit-file-io.c:91
+#, c-format
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have read access permissions for the file."
+msgstr ""
+"gedit kunde inte öppna filen: \n"
+"\n"
+"%s\n"
+"Se till att du har läsrättigheter för filen."
 
-#: src/gE_mdi.c:78
+#. g_warning ("Can't open file %s for saving", fname);
+#: src/gedit-file-io.c:130
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exits,and that you have the appropiate "
+"write permissions."
+msgstr ""
+"gedit kunde inte skriva till filen: \n"
+"\n"
+" %s \n"
+"\n"
+"Se till att sökvägen du angav existerar, och att du har de rätta "
+"skrivrättigheterna"
+
+#: src/gE_mdi.c:71
 msgid "Find _Line..."
 msgstr "Hitta _rad..."
 
-#: src/gE_mdi.c:79
+#: src/gE_mdi.c:72
 msgid "Search for a line"
 msgstr "Sök efter en rad"
 
-#: src/gE_mdi.c:84
+#: src/gE_mdi.c:77
 msgid "Find _In Files..."
 msgstr "Hitta _i filer..."
 
-#: src/gE_mdi.c:85
+#: src/gE_mdi.c:78
 msgid "Find text in all open files"
 msgstr "Hitta text i alla öppna filer"
 
-#: src/gE_mdi.c:100
+#: src/gE_mdi.c:92
 msgid "_Add View"
 msgstr "_Lägg till vy"
 
-#: src/gE_mdi.c:101
+#: src/gE_mdi.c:93
 msgid "Add a new view of the document"
 msgstr "Lägg till en ny vy av dokumentet"
 
-#: src/gE_mdi.c:102
+#: src/gE_mdi.c:95
 msgid "_Remove View"
 msgstr "_Ta bort vy"
 
-#: src/gE_mdi.c:103
+#: src/gE_mdi.c:96
 msgid "Remove view of the document"
 msgstr "Tar bort en vy av dokumentet"
 
-#: src/gE_mdi.c:411
-#, c-format
-msgid " '%s' has been modified. Do you wish to save it?"
-msgstr " '%s' har ändrats. Vill du spara den?"
+#: src/gE_mdi.c:221
+msgid "Untitled"
+msgstr "Namnlös"
+
+#. msg = (char *)g_malloc(strlen(fname) + 52);
+#. sprintf (msg, _(" '%s' has been modified. Do you wish to save it?"), fname);
+#.
+#: src/gE_mdi.c:389
+msgid " '%s' has been modified.  Do you wish to save it?"
+msgstr " \"%s\" har blivit ändrad. Vill du spara den?"
 
 #: src/gE_plugin.c:57
 #, c-format
@@ -166,7 +197,7 @@ msgid "Error, plugin is still in use"
 msgstr "Fel, insticksprogrammet används fortfarande"
 
 #: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
-#: src/gE_plugin.c:182 src/menus.c:245
+#: src/gE_plugin.c:182 src/gedit-menus.c:235
 msgid "_Plugins"
 msgstr "_Insticksprogram"
 
@@ -186,265 +217,345 @@ msgstr "Toppnivå"
 msgid "Modal"
 msgstr "Modal"
 
-#: src/gE_prefs_box.c:337
+#: src/gE_prefs_box.c:322
 msgid "Appearance"
 msgstr "Utseende"
 
-#: src/gE_prefs_box.c:350
+#: src/gE_prefs_box.c:335
 msgid "Show Statusbar"
 msgstr "Visa statusrad"
 
-#: src/gE_prefs_box.c:359
+#: src/gE_prefs_box.c:344
 msgid "Show Splitscreen"
 msgstr "Visa skärmdelning"
 
-#: src/gE_prefs_box.c:369
+#: src/gE_prefs_box.c:354
 msgid "Editor Behavior"
 msgstr "Editor-uppförande"
 
-#: src/gE_prefs_box.c:382
+#: src/gE_prefs_box.c:367
 msgid "Enable Autoindent"
 msgstr "Använd autoindrag"
 
-#: src/gE_prefs_box.c:386
+#: src/gE_prefs_box.c:371
 msgid "Enable Wordwrap"
 msgstr "Använd ordbryting"
 
-#: src/gE_prefs_box.c:408
+#: src/gE_prefs_box.c:393
 msgid "Text Background"
 msgstr "Textbakgrund"
 
-#: src/gE_prefs_box.c:429
+#: src/gE_prefs_box.c:414
 msgid "Text Foreground"
 msgstr "Textfärg"
 
 #. Document Closing stuffs
-#: src/gE_prefs_box.c:498
+#: src/gE_prefs_box.c:483
 msgid "Document Settings"
 msgstr "Dokumentinställningar"
 
-#: src/gE_prefs_box.c:512
+#: src/gE_prefs_box.c:497
 msgid "New Document After Closing Last"
 msgstr "Nytt dokument efter sista stängs"
 
-#: src/gE_prefs_box.c:518
+#: src/gE_prefs_box.c:503
 msgid "Close Window After Closing Last"
 msgstr "Stäng fönstret efter sista stängs"
 
 #. End of docyment closing stuffs
 #. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:527
+#: src/gE_prefs_box.c:512
 msgid "Current Font"
 msgstr "Nuvarande typsnitt"
 
-#: src/gE_prefs_box.c:544
+#: src/gE_prefs_box.c:529
 msgid "Select..."
 msgstr "Välj..."
 
 #. End of Font Setttings
 #. Print COmmand
-#: src/gE_prefs_box.c:560
+#: src/gE_prefs_box.c:545
 msgid "Print Command"
 msgstr "Utskriftskommando"
 
 #. Window Size Settings
-#: src/gE_prefs_box.c:620
+#: src/gE_prefs_box.c:605
 msgid "Window Size"
 msgstr "Fönsterstorlek"
 
-#: src/gE_prefs_box.c:633
+#: src/gE_prefs_box.c:618
 msgid "Current Width:"
 msgstr "Nuvarande bredd:"
 
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:638
 msgid "Startup Width:"
 msgstr "Start-bredd:"
 
-#: src/gE_prefs_box.c:661 src/gE_prefs_box.c:701
+#: src/gE_prefs_box.c:646 src/gE_prefs_box.c:686
 msgid "Use Current"
 msgstr "Använd nuvarande"
 
-#: src/gE_prefs_box.c:673
+#: src/gE_prefs_box.c:658
 msgid "Current Height:"
 msgstr "Nuvarande höjd:"
 
-#: src/gE_prefs_box.c:693
+#: src/gE_prefs_box.c:678
 msgid "Startup Height:"
 msgstr "Start-höjd:"
 
 #. MDI Mode settnigs
-#: src/gE_prefs_box.c:709
+#: src/gE_prefs_box.c:694
 msgid "MDI Mode"
 msgstr "MDI-läge"
 
-#. General Settings
-#: src/gE_prefs_box.c:780
+#: src/gE_prefs_box.c:767
 msgid "General"
 msgstr "Generellt"
 
-#. Window Settings
-#: src/gE_prefs_box.c:785
+#: src/gE_prefs_box.c:772
 msgid "Window"
 msgstr "Fönster"
 
-#. Docuemnt Settings
-#: src/gE_prefs_box.c:790
+#: src/gE_prefs_box.c:777
 msgid "Document"
 msgstr "Dokument"
 
-#: src/gE_print.c:175
+#: src/gedit-print.c:184
 #, c-format
 msgid "gEdit (%s): Print Preview"
-msgstr ""
+msgstr "gedit (%s): Förhandsgranskning"
 
-#: src/gE_print.c:277
+#: src/gedit-print.c:291
 #, c-format
 msgid "Page: %i/%i"
-msgstr ""
+msgstr "Sida: %i/%i"
 
-#: src/menus.c:71
-msgid "_Autoindent"
-msgstr "_Autoindrag"
-
-#: src/menus.c:72
-msgid "Status_bar"
-msgstr "_Statusrad"
-
-#: src/menus.c:73
-msgid "_Wordwrap"
-msgstr "_Ordbryting"
-
-#: src/menus.c:74
-msgid "_Linewrap"
-msgstr "_Radbrytning"
-
-#: src/menus.c:75
-msgid "_Readonly"
-msgstr "S_krivskydd"
-
-#: src/menus.c:76
-msgid "_Splitscreen"
-msgstr "Skärm_delning"
-
-#: src/menus.c:77
-msgid "_Show tabs"
-msgstr "_Visa flikar"
-
-#: src/menus.c:78
-msgid "Toolbar _relief"
-msgstr "Verktygsrads_relief på"
-
-#: src/menus.c:79
-msgid "_Show tooltips"
-msgstr "_Visa hjälprutor"
-
-#: src/menus.c:80
-msgid "Show toolbar _text"
-msgstr "Visa _text på verktygsraden"
-
-#: src/menus.c:81
-msgid "Show toolbar _icons"
-msgstr "Visa _ikoner på verktygsraden"
-
-#. and this one is the default file name
-#: src/menus.c:83
-msgid "Untitled"
-msgstr "Namnlös"
-
-#: src/menus.c:89
+#: src/gedit-menus.c:46
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:89
+#: src/gedit-menus.c:47 src/gedit-menus.c:253
 msgid "Create a new document"
 msgstr "Skapa nytt dokument"
 
-#: src/menus.c:96
+#: src/gedit-menus.c:51
 msgid "Save All"
 msgstr "Spara alla"
 
-#: src/menus.c:96
+#: src/gedit-menus.c:52
 msgid "Save All Open Files"
 msgstr "Spara alla öppna filer"
 
-#: src/menus.c:101
-msgid "Revert"
-msgstr "Återgå"
+#: src/gedit-menus.c:69
+msgid "Print preview..."
+msgstr "Förhandsgranskning..."
 
-#: src/menus.c:111
+#: src/gedit-menus.c:70
+msgid "Preview data to be printed"
+msgstr "Förhandsgranska data som ska skrivas ut"
+
+#: src/gedit-menus.c:77
 msgid "Close All"
 msgstr "Stäng alla"
 
-#: src/menus.c:111
+#: src/gedit-menus.c:78
 msgid "Close All Open Files"
 msgstr "Stäng alla öppna filer"
 
-#: src/menus.c:124
+#: src/gedit-menus.c:93
 msgid "_Top"
 msgstr "_Överst"
 
-#: src/menus.c:125
+#: src/gedit-menus.c:94
 msgid "Put the document tabs at the top"
 msgstr "Placera dokument-flikarna överst"
 
-#: src/menus.c:128
+#: src/gedit-menus.c:99
 msgid "_Bottom"
 msgstr "_Nederst"
 
-#: src/menus.c:129
+#: src/gedit-menus.c:100
 msgid "Put the document tabs at the bottom"
 msgstr "Placera dokument-flikarna nederst"
 
-#: src/menus.c:132
+#: src/gedit-menus.c:105
 msgid "_Left"
 msgstr "_Vänster"
 
-#: src/menus.c:133
+#: src/gedit-menus.c:106
 msgid "Put the document tabs on the left"
 msgstr "Placera dokument-flikarna till vänster"
 
-#: src/menus.c:136
+#: src/gedit-menus.c:111
 msgid "_Right"
 msgstr "_Höger"
 
-#: src/menus.c:137
+#: src/gedit-menus.c:112
 msgid "Put the document tabs on the right"
 msgstr "Placera dokument-flikarna till höger"
 
-#: src/menus.c:176
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_AUTOINDENT,
+#. N_("Toggle autoindent"),
+#. auto_indent_toggle_cb, (gpointer) GE_DATA,
+#. NULL),
+#.
+#: src/gedit-menus.c:139
+msgid "Toggle Statusbar"
+msgstr "Sätt på/av statusraden"
+
+#: src/gedit-menus.c:140
+msgid "Toggle statusbar"
+msgstr "Sätt på/av statusrad"
+
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
+#. N_("Toggle Wordwrap"),
+#. options_toggle_word_wrap_cb,
+#. NULL, NULL),
+#.
+#. GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_LINEWRAP,
+#. N_("Toggle Linewrap"),
+#. options_toggle_line_wrap_cb,
+#. NULL, NULL),
+#.
+#: src/gedit-menus.c:154
+msgid "_Readonly"
+msgstr "S_krivskydd"
+
+#: src/gedit-menus.c:155
 msgid "Toggle Readonly"
 msgstr "Sätt på/av skrivskydd"
 
-#: src/menus.c:187
+#: src/gedit-menus.c:169
 msgid "_Document Tabs"
 msgstr "_Dokumentflikar"
 
-#: src/menus.c:188
+#: src/gedit-menus.c:170
 msgid "Change the placement of the document tabs"
 msgstr "Ändra placeringen av dokument-flikarna"
 
-#: src/menus.c:192
+#: src/gedit-menus.c:178
 msgid "Sa_ve Settings"
 msgstr "Sp_ara inställningar"
 
-#: src/menus.c:193
+#: src/gedit-menus.c:179
 msgid "Save the current settings for future sessions"
 msgstr "Spara nuvarande inställningar för framtida sessioner"
 
-#: src/search.c:415
+#: src/gedit-menus.c:253
+msgid "New"
+msgstr "Nytt"
+
+#: src/gedit-menus.c:257
+msgid "Open"
+msgstr "Öppna"
+
+#: src/gedit-menus.c:257
+msgid "Open a file"
+msgstr "Öppna en fil"
+
+#: src/gE_view.c:44 src/gedit-menus.c:261
+msgid "Save"
+msgstr "Spara"
+
+#: src/gedit-menus.c:261
+msgid "Save the current file"
+msgstr "Spara den aktiva filen"
+
+#: src/gE_view.c:45 src/gedit-menus.c:265
+msgid "Close"
+msgstr "Stäng"
+
+#: src/gedit-menus.c:265
+msgid "Close the current file"
+msgstr "Stäng den aktiva filen"
+
+#: src/gE_view.c:46 src/gedit-menus.c:269
+msgid "Print"
+msgstr "Skriv ut"
+
+#: src/gedit-menus.c:269
+msgid "Print the current file"
+msgstr "Skriv ut nuvarande fil"
+
+#: src/gedit-menus.c:274
+msgid "Undo"
+msgstr "Ångra"
+
+#: src/gedit-menus.c:274
+msgid "Undo last operation"
+msgstr "Ångra den senaste ändringen"
+
+#: src/gedit-menus.c:278
+msgid "Redo"
+msgstr "Gör om"
+
+#: src/gedit-menus.c:278
+msgid "Redo last operation"
+msgstr "Gör om senaste ändringen"
+
+#: src/gedit-menus.c:282
+msgid "Cut"
+msgstr "Klipp ut"
+
+#: src/gedit-menus.c:282
+msgid "Cut the selection"
+msgstr "Klipp ut markeringen"
+
+#: src/gedit-menus.c:286
+msgid "Copy"
+msgstr "Kopiera"
+
+#: src/gedit-menus.c:286
+msgid "Copy the selection"
+msgstr "Kopiera markeringen"
+
+#: src/gedit-menus.c:290
+msgid "Paste"
+msgstr "Klistra in"
+
+#: src/gedit-menus.c:290
+msgid "Paste the clipboard"
+msgstr "Klistra in från urklippet"
+
+#: src/gedit-menus.c:294
+msgid "Find"
+msgstr "Sök"
+
+#: src/gedit-menus.c:294
+msgid "Search for a string"
+msgstr "Sök efter en sträng"
+
+#: src/gedit-menus.c:298
+msgid "Line"
+msgstr "Rad"
+
+#: src/gedit-menus.c:298
+msgid "Get the current and total lines"
+msgstr "Få tag på den nuvarande och det totala antalet linjer"
+
+#: src/gedit-menus.c:303
+msgid "Exit"
+msgstr "Avsluta"
+
+#: src/gedit-menus.c:303
+msgid "Exit the program"
+msgstr "Avslutar programmet"
+
+#: src/gedit-search.c:341
 msgid "Find In Files"
 msgstr "Hitta i filer"
 
-#. GtkWidget *radio, *check;
-#: src/search.c:416 src/search.c:836 src/search.c:837
+#: src/gedit-search.c:342 src/gedit-search.c:756 src/gedit-search.c:757
 msgid "Search"
 msgstr "Sök"
 
-#: src/search.c:420 src/search.c:841 src/search.c:870
+#: src/gedit-search.c:346 src/gedit-search.c:761 src/gedit-search.c:789
 msgid "Search for:"
 msgstr "Sök efter:"
 
-#: src/search.c:740
+#: src/gedit-search.c:658
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -457,70 +568,94 @@ msgstr ""
 "Totalt antal rader: %i\n"
 "Nuvarande rad: %i"
 
-#: src/search.c:762
+#: src/gedit-search.c:682
 msgid "Go to line"
 msgstr "Gå till rad"
 
-#: src/search.c:772
+#: src/gedit-search.c:692
 msgid "Line number"
 msgstr "Radnummer"
 
-#: src/search.c:795
+#: src/gedit-search.c:716
 msgid "Search from cursor"
 msgstr "Sök från markören"
 
-#: src/search.c:802
+#: src/gedit-search.c:723
 msgid "Search from beginning of document"
 msgstr "Sök från början av dokumentet"
 
-#: src/search.c:809
+#: src/gedit-search.c:730
 msgid "Search from end of document"
 msgstr "Sök från slutet av dokumentet"
 
-#: src/search.c:816
+#: src/gedit-search.c:737
 msgid "Case sensitive"
 msgstr "Matcha gemener/versaler"
 
-#: src/search.c:822
+#: src/gedit-search.c:743
 msgid "Reverse search"
 msgstr "Omvänd sökning"
 
-#. GtkWidget *radio;
-#: src/search.c:864 src/search.c:865
+#: src/gedit-search.c:783 src/gedit-search.c:784
 msgid "Replace"
 msgstr "Byt ut"
 
-#: src/search.c:866
+#: src/gedit-search.c:785
 msgid "Replace all"
 msgstr "Byt ut alla"
 
-#: src/search.c:880
+#: src/gedit-search.c:799
 msgid "Replace with:"
 msgstr "Byt ut mot:"
 
-#: src/search.c:891
+#: src/gedit-search.c:810
 msgid "Ask before replacing"
 msgstr "Fråga före ersättning"
 
-#: src/search.c:1096
+#: src/gedit-search.c:1024
 msgid "Replace?"
 msgstr "Ersätt?"
 
-#: src/gE_view.c:43
-msgid "Save"
-msgstr "Spara"
-
-#: src/gE_view.c:44
-msgid "Close"
-msgstr "Stäng"
-
-#: src/gE_view.c:45
-msgid "Print"
-msgstr "Skriv ut"
-
-#: src/gE_view.c:49
+#: src/gE_view.c:50
 msgid "Open (swap) .c/.h file"
 msgstr "Öppna (byt) .c/.h filen"
+
+#, fuzzy
+#~ msgid "Can't open file!"
+#~ msgstr "Skrivskyddad fil!"
+
+#~ msgid "_Autoindent"
+#~ msgstr "_Autoindrag"
+
+#~ msgid "Status_bar"
+#~ msgstr "_Statusrad"
+
+#~ msgid "_Wordwrap"
+#~ msgstr "_Ordbryting"
+
+#~ msgid "_Linewrap"
+#~ msgstr "_Radbrytning"
+
+#~ msgid "_Splitscreen"
+#~ msgstr "Skärm_delning"
+
+#~ msgid "_Show tabs"
+#~ msgstr "_Visa flikar"
+
+#~ msgid "Toolbar _relief"
+#~ msgstr "Verktygsrads_relief på"
+
+#~ msgid "_Show tooltips"
+#~ msgstr "_Visa hjälprutor"
+
+#~ msgid "Show toolbar _text"
+#~ msgstr "Visa _text på verktygsraden"
+
+#~ msgid "Show toolbar _icons"
+#~ msgstr "Visa _ikoner på verktygsraden"
+
+#~ msgid "Revert"
+#~ msgstr "Återgå"
 
 #~ msgid ""
 #~ "Enter print command below\n"
@@ -604,48 +739,6 @@ msgstr "Öppna (byt) .c/.h filen"
 #~ msgid "Shell"
 #~ msgstr "Skal"
 
-#~ msgid "Cut"
-#~ msgstr "Klipp ut"
-
-#~ msgid "Copy"
-#~ msgstr "Kopiera"
-
-#~ msgid "Paste"
-#~ msgstr "Klistra in"
-
-#~ msgid "New"
-#~ msgstr "Nytt"
-
-#~ msgid "Open"
-#~ msgstr "Öppna"
-
-#~ msgid "Open a file"
-#~ msgstr "Öppna en fil"
-
-#~ msgid "Print the current file"
-#~ msgstr "Skriv ut nuvarande fil"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Klipp ut markeringen"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Kopiera markeringen"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Klistra in från urklippet"
-
-#~ msgid "Find"
-#~ msgstr "Sök"
-
-#~ msgid "Search for a string"
-#~ msgstr "Sök efter en sträng"
-
-#~ msgid "Exit"
-#~ msgstr "Avsluta"
-
-#~ msgid "Exit the program"
-#~ msgstr "Avslutar programmet"
-
 #~ msgid "Font"
 #~ msgstr "Typsnitt"
 
@@ -655,9 +748,6 @@ msgstr "Öppna (byt) .c/.h filen"
 #~ msgid "Toggle autoindent"
 #~ msgstr "Sätt på/av autoindrag"
 
-#~ msgid "Toggle statusbar"
-#~ msgstr "Sätt på/av statusrad"
-
 #~ msgid "Toggle Wordwrap"
 #~ msgstr "Sätt på/av ordbryting"
 
@@ -666,6 +756,3 @@ msgstr "Öppna (byt) .c/.h filen"
 
 #~ msgid "Column:\t0"
 #~ msgstr "Kolumn:\t0"
-
-#~ msgid "Line"
-#~ msgstr "Rad"
