@@ -105,14 +105,19 @@ GnomeUIInfo gedit_edit_menu[] =
         GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, NULL),
 	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, NULL),
 	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, NULL),
-	GNOMEUIINFO_SEPARATOR,
+
+/*	Simplify the interface. Find in files should be a plugin
+	Find in all the files open is something that will be used
+	very very little times. We should have it as a plugin, tho
 	{
 		GNOME_APP_UI_ITEM,
 		N_("Find _In Files..."),
 		N_("Find text in all open files"),
 		find_in_files_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
-	},
+	},*/
+
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_FIND_ITEM (search_cb, NULL),
 	GNOMEUIINFO_MENU_REPLACE_ITEM (replace_cb, NULL),
 	GNOMEUIINFO_SEPARATOR,
@@ -144,7 +149,11 @@ GnomeUIInfo doc_menu[] =
 	GNOMEUIINFO_END
 };
 
-
+/* We need to simplify the menus !!.
+   A newbiew will probably never want to change this
+   option, disable it as a menu option but add it as
+   a preference item.
+   Chema. 
 GnomeUIInfo gedit_tab_menu[] =
 {
 	{
@@ -172,20 +181,24 @@ GnomeUIInfo gedit_tab_menu[] =
 		tab_rgt_cb, NULL
 	},
 
-/*
+
 	GNOMEUIINFO_SEPARATOR,
 
 	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SHOWTABS,
 			            N_("Toggle the presence of the document tabs"),
 				    tab_toggle_cb, (gpointer) GE_WINDOW, NULL),
-*/
 	
-	GNOMEUIINFO_END
-};
+				    GNOMEUIINFO_END 
+}; */
 
 
 /* These are the customizable checkboxes in the Settings menu,
    Readonly and Splitscreen are on a per-document basis */
+/* We need to simplify the interface. Why would the user
+   want to change the ReadOnly flag ???. Chema */
+/* The toggle status bar should be in preferneces.
+   Same thing here, who will togle the status bar,
+   simpify the interface... Chema */
 
 GnomeUIInfo gedit_settings_menu[] =
 {
@@ -195,10 +208,12 @@ GnomeUIInfo gedit_settings_menu[] =
 				    auto_indent_toggle_cb, (gpointer) GE_DATA,
 				    NULL),
 */
+/*
 	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Show Statusbar"),
 				    N_("Enable or disable the statusbar at the bottom of this application window."),
 				    options_toggle_status_bar_cb,
 				    NULL, NULL),
+*/
 /*
 	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
 				    N_("Toggle Wordwrap"),
@@ -210,10 +225,12 @@ GnomeUIInfo gedit_settings_menu[] =
 				    options_toggle_line_wrap_cb,
 				    NULL, NULL),
 */
+/*
 	GNOMEUIINFO_TOGGLEITEM_DATA (N_("_Readonly"),
 				     N_("Toggle Readonly"),
 				     options_toggle_read_only_cb,
 				     NULL, NULL),
+*/
 
 /*
 	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_SPLITSCREEN,
@@ -221,26 +238,28 @@ GnomeUIInfo gedit_settings_menu[] =
 				    options_toggle_split_screen_cb,
 				    NULL, NULL),
 */
-	GNOMEUIINFO_SEPARATOR,
+/*	GNOMEUIINFO_SEPARATOR, */
 
+	/*
 	{
 		GNOME_APP_UI_SUBTREE,
 		N_("_Document Tabs"),
 		N_("Change the placement of the document tabs"),
 		&gedit_tab_menu
 	},
-
-	GNOMEUIINFO_SEPARATOR,
-
+		
+	GNOMEUIINFO_SEPARATOR,*/
+/* Simplify the menus, save setting should be in the preferences window,
+   not as a menu option. Chema 
 	{
 		GNOME_APP_UI_ITEM,
 		N_("Sa_ve Settings"),
 		N_("Save the current settings for future sessions"),
 		gedit_save_settings, NULL,
 		NULL
-	},
+		},*/
 
-	GNOMEUIINFO_SEPARATOR, 
+/* 	GNOMEUIINFO_SEPARATOR, */ 
 
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM (gedit_prefs_dialog, NULL),
 
@@ -363,6 +382,10 @@ GnomeUIInfo toolbar_data[] =
 	GNOMEUIINFO_END
 };
 
+void find_line_cb (GtkWidget *widget, gpointer data);
+void replace_cb (GtkWidget *widget, gpointer data);
+void about_cb (GtkWidget *widget, gpointer data);
+
 #if 0
 /**
  * gedit_menus_init:
@@ -391,8 +414,7 @@ find_line_cb (GtkWidget *widget, gpointer data)
 void
 replace_cb (GtkWidget *widget, gpointer data)
 {
-        /* I broke this ... CHEMA :) */
-	/* dialog_replace ();*/
+	dialog_replace ();
 }
 
 void
@@ -400,5 +422,13 @@ about_cb (GtkWidget *widget, gpointer data)
 {
 	dialog_about ();
 }
+
+
+
+
+
+
+
+
 
 

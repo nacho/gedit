@@ -21,6 +21,8 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
+void dialog_about (void);
+
 /**
  * gedit_about:
  *

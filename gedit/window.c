@@ -33,6 +33,7 @@
 #include "search.h"
 #include "utils.h"
 #include "plugin.h"
+#include "recent.h"
 #include "../pixmaps/gE_icon.xpm"
 
 extern GList *plugins;

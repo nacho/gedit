@@ -56,8 +56,23 @@ gchar *mdi_type_label [NUM_MDI_MODES] =
 	N_("Modal"),
 };
 
-static void properties_changed (GtkWidget *widget, GnomePropertyBox *pbox);
-static void apply_cb (GnomePropertyBox *pbox, gint page, gedit_data *data);
+
+
+       static void cancel_cb (void);
+              void gedit_window_refresh (Window *w);
+       static void apply_cb (GnomePropertyBox *pbox, gint page, gedit_data *data);
+              void get_prefs (gedit_data *data);
+static GtkWidget * general_page_new (void);
+              void font_sel_ok (GtkWidget *w, GtkWidget *fsel);
+       static void font_sel_cancel (GtkWidget *w, GtkWidget *fsel);
+              void font_sel (void);
+static GtkWidget * doc_page_new (void);
+              void use_current (GtkWidget *w, gpointer size);
+static GtkWidget * window_page_new (void);
+       static void properties_changed (GtkWidget *widget, GnomePropertyBox *pbox);
+              void gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata);
+              void gedit_save_settings (void);
+              void gedit_load_settings (void);
 
 static void
 cancel_cb (void)
@@ -830,13 +845,3 @@ gedit_load_settings (void)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 }
-
-
-
-
-
-
-
-
-
-

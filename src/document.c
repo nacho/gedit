@@ -280,8 +280,7 @@ gedit_add_view (GtkWidget *w, gpointer data)
 	if (mdi->active_view)
 	{
 		view = VIEW (mdi->active_view);
-		g_print ("contents: %d\n",
-			 GTK_TEXT(VIEW(mdi->active_view)->text)->first_line_start_index);
+/*		g_print ("contents: %d\n", GTK_TEXT(VIEW(mdi->active_view)->text)->first_line_start_index);*/
 	   
 		/* sync the buffer before adding the view */
 		gedit_view_buffer_sync (view);
@@ -454,28 +453,3 @@ add_child_cb (GnomeMDI *mdi, Document *doc)
 	return TRUE;
 }
 
-
-/* These are defined but not used */
-#if 0 
-static gint gedit_document_signals [LAST_SIGNAL];
-
-static void
-gedit_document_marshal (GtkObject     *object,
-		     GtkSignalFunc	func,
-		     gpointer	func_data,
-		     GtkArg        *args)
-{
-	gedit_document_signal rfunc;
-	
-	rfunc = (gedit_document_signal) func;
-	
-	(* rfunc)(object, GTK_VALUE_POINTER(args[0]), func_data);
-}
-
-static void
-gedit_document_real_changed (Document *doc, gpointer change_data)
-{
-	/* FIXME! */
-	g_print ("blarg\n");
-}
-#endif /* #if 0 */

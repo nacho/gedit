@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * dialog-find-line.c: Dialog box for going to a specified line.
  *
@@ -16,9 +17,12 @@
 #include "document.h"
 #include "search.h"
 
-/*static GtkWidget *line_dialog; */
-/*static GtkWidget* create_line_dialog (void); */
+/* static GtkWidget * create_line_dialog (void);*/
+static void find_line_clicked_cb (GtkWidget *widget, gint button, Document *doc);
+       void dialog_find_line (void);
 
+
+/* This function seems not beeing used. Chema
 static GtkWidget *
 create_line_dialog (void)
 {
@@ -52,6 +56,8 @@ create_line_dialog (void)
 
 	return dialog;
 }
+*/
+
 
 /* Callback on the "clicked" signal in the Find Line dialog */
 static void

@@ -22,3 +22,6 @@ glade_DATA =		\
 	replace.glade
 
 EXTRA_DIST = $(glade_DATA)
+
+
+

@@ -34,6 +34,7 @@
        void recent_update (GnomeApp *app);
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb (GtkWidget *w, gedit_data *data);
+       void recent_add (char *filename);
 
 
 /**

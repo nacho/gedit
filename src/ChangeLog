@@ -1,5 +1,38 @@
 2000-04-09  Chema Celorio  <chema@celorio.com>
 
+	* document.c (gedit_document_real_changed): not used, delete it.
+	(gedit_document_marshal): not used, delete it.
+	(gedit_add_view): commented out a g_print function ..
+
+	* dialogs/dialog-replace.c: Removed some compile
+	warnings.
+
+	* menus.c (gedit_tab_menu): simpify the menus
+	set the tabs in the prefs box not on a menu entry.
+	(gedit_settings_menu): why would the user change
+	the RO setting ?. Removed from menu
+	(gedit_settings_menu): Removed the save settings
+	entry from the menu. Settings should be saved automaticlly
+	by the prefs box.
+
+	* prefs.c:  removed compile warnings
+	* recent.c: removed a compile warning
+	* dialogs/dialog-find-line.c: removed a compile
+	warning.
+	* dialogs/dialog-replace.c: removed a compile
+	warning.
+
+	* search_backup.c:
+	* search_backup.h:
+	I have included this files in the CVS because I am
+	goint to delete some search functions that we might
+	want to implement as plugins in the future. We need
+	to simplify the find & search/replace functions. The
+	more complex stuff like find in all files ( or something
+	like grep ) will be better off, if implemented as a plugin
+
+2000-04-09  Chema Celorio  <chema@celorio.com>
+
 	* view.c (gedit_view_init): Do not connect key_press_event
 	with gtk_signal_connect_after. key_press_event has to be
 	the first function to handle this event. This fixes the Ctrl+W

@@ -118,6 +118,11 @@ gedit_debug_mess (gchar *message, DebugSection type)
 		break;
 	case DEBUG_FILE_DEEP:
 		break;
+	case DEBUG_SEARCH:
+		g_print(message);
+		break;
+	case DEBUG_SEARCH_DEEP:
+		break;
 	}
 #endif
 }

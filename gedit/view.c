@@ -215,8 +215,6 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 
 	gedit_debug_mess ("F:doc_delete_text_cb\n", DEBUG_VIEW);
 
-	g_print("Aqui esta el Bife !\n");
-	
 	if (!view->split_screen)
 		return;
 

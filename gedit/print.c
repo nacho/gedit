@@ -177,7 +177,6 @@ print_document (Document *doc, GnomePrinter *printer)
 		for (j = 1; j<= pji->total_lines; j++)
 /*		while (pji->file_offset < pji->buffer_size)*/ 
 		{
-			g_print("j: %i\n",j);
 			print_line (pji);
 			if (pji->current_line % pji->lines_per_page == 0)
 				break;
@@ -219,7 +218,6 @@ print_line (PrintJobInfo *pji)
 	int i;
 	int print_line = TRUE;
 
-	g_print("Print line \n");
 	i = 0;
 	while( pji->buffer[ pji->file_offset + i] != '\n' && pji->current_line < pji->total_lines && (pji->file_offset+i) < pji->buffer_size)
 	{
@@ -248,8 +246,6 @@ print_ps_line (PrintJobInfo * pji)
 {
 	float y = pji->page_height -  pji->margin_top - pji->header_height -
 	(pji->font_char_height*( (pji->current_line++ % pji->lines_per_page)+1 ));
-
-	g_print("Print PS line \n");
 
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
 	gnome_print_show (pji->pc, pji->temp);
@@ -344,7 +340,6 @@ print_determine_lines (PrintJobInfo *pji)
 			if (pji->buffer[i] == '\n')
 				lines--;
 
-	g_print("Lines: %i\n", lines);
 	return lines;
 }
 
