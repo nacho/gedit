@@ -1,3 +1,13 @@
+2002-02-14  Paolo Maggi  <maggi@athena.polito.it>
+
+	* taglist/taglist.xml: split into HTML.tags and Latex.tags
+
+	* taglist/gedit-taglist-plugin-parser.c (parse_taglist_dir): 
+	new function
+	(create_taglist): first load user's taglists and then
+	system's taglists
+	(parse_taglist_file): skip already existing tag groups
+
 2002-02-13  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* ascii/ascii.c: #include <config.h> for proper i18n.

@@ -30,10 +30,17 @@
 #include <libxml/parser.h>
 #include <glib.h>
 
+#include <dirent.h> 
+#include <string.h>
+#include <errno.h>
+
+#include <libgnome/gnome-util.h>
+
 #include <gedit-debug.h>
 
 #include "gedit-taglist-plugin-parser.h"
 
+#define USER_GEDIT_TAGLIST_PLUGIN_LOCATION ".gedit2/plugins/taglist/"
 
 TagList *taglist = NULL;
 
@@ -41,6 +48,7 @@ static gboolean	 parse_tag (Tag *tag, xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur
 static gboolean	 parse_tag_group (TagGroup *tg, const gchar *fn, 
 				  xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur);
 static TagList 	*parse_taglist_file (const gchar* filename);
+static TagList  *parse_taglist_dir (const gchar *dir);
 
 static void	 free_tag (Tag *tag);
 static void	 free_tag_group (TagGroup *tag_group);
@@ -48,8 +56,9 @@ static void	 free_tag_group (TagGroup *tag_group);
 static gboolean
 parse_tag (Tag *tag, xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur) 
 {
+	/*
 	gedit_debug (DEBUG_PLUGINS, "  Tag name: %s", tag->name);
-
+	*/
 	/* We don't care what the top level element name is */
 	cur = cur->xmlChildrenNode;
     
@@ -59,16 +68,18 @@ parse_tag (Tag *tag, xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur)
 		    (cur->ns == ns))
 		{			
 			tag->begin = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
-
+			/*
 			gedit_debug (DEBUG_PLUGINS, "    - Begin: %s", tag->begin);
+			*/
 		}
 
 		if ((!xmlStrcmp (cur->name, (const xmlChar *)"End")) &&
 		    (cur->ns == ns))			
 		{
 			tag->end = xmlNodeListGetString (doc, cur->xmlChildrenNode, 1);
-
+			/*
 			gedit_debug (DEBUG_PLUGINS, "    - End: %s", tag->end);
+			*/
 		}
 
 		cur = cur->next;
@@ -156,12 +167,18 @@ parse_taglist_file (const gchar* filename)
 
 	gedit_debug (DEBUG_PLUGINS, "Parse file: %s", filename);
 
+	xmlKeepBlanksDefault (0);
+
 	/*
 	* build an XML tree from a the file;
 	*/
 	doc = xmlParseFile (filename);
 	if (doc == NULL) 
+	{	
+		g_warning ("The tag list file '%s' is empty.", filename);	
+	
 		return taglist;
+	}
 
 	/*
 	* Check the document is of the right kind
@@ -241,22 +258,45 @@ parse_taglist_file (const gchar* filename)
 			else
 			{
 				/* Name found */
+				gboolean exists = FALSE;
+				GList *t = taglist->tag_groups;
 				
-				/* Parse tag group */
-				if (parse_tag_group (tag_group, filename, doc, ns, cur))
+				/* Check if the tag group already exists */
+				while (t && !exists)
 				{
-					/* Append TagGroup to TagList */
-					taglist->tag_groups = 
-						g_list_append (taglist->tag_groups, tag_group);
-				}
-				else
-				{
-					/* Error parsing TagGroup */
-					g_warning ("The tag list file '%s' is of the wrong type, "
-				   		   "error parsing TagGroup '%s'.", 
-						   filename, tag_group->name);
+					gchar *tgn = ((TagGroup*)(t->data))->name;
+					
+					if (strcmp (tgn, tag_group->name) == 0)
+					{
+						gedit_debug (DEBUG_PLUGINS, 
+							     "Tag group '%s' already exists.", tgn);
+						
+						exists = TRUE;
 
-					free_tag_group (tag_group);
+						free_tag_group (tag_group);
+					}
+					
+					t = g_list_next (t);		
+				}
+
+				if (!exists)
+				{				
+					/* Parse tag group */
+					if (parse_tag_group (tag_group, filename, doc, ns, cur))
+					{
+						/* Append TagGroup to TagList */
+						taglist->tag_groups = 
+							g_list_append (taglist->tag_groups, tag_group);
+					}
+					else
+					{
+						/* Error parsing TagGroup */
+						g_warning ("The tag list file '%s' is of the wrong type, "
+				   			   "error parsing TagGroup '%s'.", 
+							   filename, tag_group->name);
+
+						free_tag_group (tag_group);
+					}
 				}
 			}
 		}
@@ -275,8 +315,9 @@ parse_taglist_file (const gchar* filename)
 static void
 free_tag (Tag *tag)
 {
+	/*
 	gedit_debug (DEBUG_PLUGINS, "Tag: %s", tag->name);
-
+	*/
 	g_return_if_fail (tag != NULL);
 
 	free (tag->name);
@@ -337,15 +378,57 @@ free_taglist (void)
 	gedit_debug (DEBUG_PLUGINS, "END");
 }
 
+static TagList * 
+parse_taglist_dir (const gchar *dir)
+{
+	DIR *d;
+	struct dirent *e;
+
+	gedit_debug (DEBUG_PLUGINS, "DIR: %s", dir);
+
+	d = opendir (dir);
+	
+	if (d == NULL)
+	{		
+		gedit_debug (DEBUG_PLUGINS, "%s", strerror (errno));
+		return taglist;
+	}
+	
+	while ((e = readdir (d)) != NULL)
+	{
+		if (strncmp (e->d_name + strlen (e->d_name) - 5, ".tags", 5) == 0)
+		{
+			gchar *tags_file = g_strconcat (dir, e->d_name, NULL);
+			parse_taglist_file (tags_file);
+			g_free (tags_file);
+		}
+	}
+	closedir (d);
+
+	return taglist;
+}
 
 TagList* create_taglist (void)
 {
+	gchar const * const home = g_get_home_dir ();
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_val_if_fail (taglist == NULL, taglist);
 
-	xmlKeepBlanksDefault (0);
+	/* load user's taglists */
+	if (home != NULL)
+	{
+		gchar *pdir;
 
-	/* FIXME: search user's taglists */	
-	return parse_taglist_file (GEDIT_TAGLIST);
+		pdir = gnome_util_prepend_user_home (
+				USER_GEDIT_TAGLIST_PLUGIN_LOCATION);
+		parse_taglist_dir (pdir);
+		g_free (pdir);
+	}
+	
+	/* load system's taglists */	
+	parse_taglist_dir (GEDIT_TAGLIST_DIR);
+
+	return taglist;
 }
