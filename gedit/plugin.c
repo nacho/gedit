@@ -35,6 +35,11 @@
 #include "utils.h"
 #include "window.h"
 
+#ifndef DATA_PLUGINS_TO_REMOVE
+#define DATA_PLUGINS_TO_REMOVE "plugins_to_remove"
+#endif
+
+
 GList	*plugins_list = NULL;
 
 void			gedit_plugins_init (void);
@@ -75,16 +80,23 @@ gedit_plugins_menu_add (GnomeApp *app)
 	gint         n;
 	gchar       *path;
 	GnomeUIInfo *menu;
-	static gint menu_pos = -1;
+	gint *items_to_remove;
+	gint menu_pos;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (app != NULL);
 
 	path = g_strdup_printf ("%s/", _("_Plugins"));
+	
+	items_to_remove = gtk_object_get_data (GTK_OBJECT(app), DATA_PLUGINS_TO_REMOVE);
 
-	if (menu_pos != -1)
-		gnome_app_remove_menus (app, path, menu_pos);
+	if(items_to_remove != NULL) {
+
+		gnome_app_remove_menus (app, path, *items_to_remove);
+	
+		gtk_object_remove_data(GTK_OBJECT(app), DATA_PLUGINS_TO_REMOVE);
+	}
 
 	n = g_list_length (plugins_list) + 1 ;
 
@@ -116,32 +128,18 @@ gedit_plugins_menu_add (GnomeApp *app)
 		menu [menu_pos].pixmap_type = GNOME_APP_PIXMAP_NONE;
 		menu_pos++;
 	}
+	
 	menu [menu_pos].type = GNOME_APP_UI_ENDOFINFO;
 
 	gnome_app_insert_menus (app, path, menu);
 	gnome_app_install_menu_hints (app, menu);
 
-#if 0 /* We keep a pointer to the menu item in the plugin strucure
-	 this is broken because with multiple toplevel windows
-	 there are more than 1 widgets for each plugin */
-	menu_pos = 2;
-	for (n = 0; n < g_list_length (plugins_list); n++)
-	{
-		pd = g_list_nth_data (plugins_list, n);
-
-		if (!pd->installed)
-			continue;
-
-		pd->menu_item = menu [menu_pos].widget;
-		/*
-		g_free (menu [menu_pos].label);
-		*/
-		menu_pos++;
-	}
-#endif	
-
 	g_free (path);
 	g_free (menu);
+
+	items_to_remove = g_new0 (gint, 1);
+	*items_to_remove = menu_pos;
+	gtk_object_set_data_full (GTK_OBJECT(app), DATA_PLUGINS_TO_REMOVE, items_to_remove, g_free);
 }
 
 void

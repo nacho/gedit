@@ -1,3 +1,56 @@
+2000-11-20  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/about.glade: Added paolo and roberto to the about
+	box.
+
+	* prefs.c (gedit_prefs_load_settings): fix a crash.
+
+2000-11-20  Paolo Maggi  <maggi@athena.polito.it>
+
+	* recent.c (recent_cb): when needed update the recent file 
+	menu in all open windows
+
+2000-11-18  Paolo Maggi  <maggi@athena.polito.it>
+
+        * plugin.c: #defined DATA_PLUGINS_TO_REMOVE
+	(gedit_plugins_menu_add): fix problems when used
+	with more than one toplevel windows; remove old broken
+	code
+
+	* plugin.h: menu_item attribute commented because it is not 
+	needed
+
+	* window.c (gedit_window_set_widgets_sensitivity): fix 
+	problems withplugins sensitivity; remove old broken code
+	(gedit_window_set_plugins_menu_sensitivity): new method
+
+	* window.h: new method gedit_window_set_plugins_menu_sensitivity
+
+	* dialogs/dialog-plugins.c: #included <string.h> to fix warnings
+	(gedit_plugin_manager_clicked): set plugins menu sensitivity
+
+	* undo.c: #included <string.h> to fix warnings
+
+	* dialogs/dialog-replace.c: #included <string.h> to fix warnings
+	(dialog_display_messages): fix warning
+
+	* dialogs/dialog-prefs.c: #included <string.h> to fix warnings
+
+2000-11-17  Paolo Maggi  <maggi@athena.polito.it>
+
+	* recent.c: #defined DATA_ITEMS_TO_REMOVE
+	(gedit_recent_update_menus): fix recent items
+	bugs. Now the right number of items are removed from menu
+	(gedit_recent_update_all_windows): new method
+	(gedit_recent_update): documentation modified
+
+	* recent.h: new method gedit_recent_update_all_windows
+
+	* file.c (gedit_file_open): now it uses 
+	gedit_recent_update_all_windows in place of gedit_recent_update
+	(gedit_file_save_as_ok_sel):  now it uses 
+	gedit_recent_update_all_windows in place of gedit_recent_update
+
 2000-10-30  Chema Celorio  <chema@celorio.com>
 
 	* recent.c (gedit_recent_update_menus): add a comment for
