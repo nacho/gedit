@@ -101,13 +101,13 @@ fi
 dnl ******************************
 dnl gnome-libs checking
 dnl ******************************
-AC_MSG_CHECKING(for gnome-libs > 1.0.56)
+AC_MSG_CHECKING(for gnome-libs > 1.0.58)
 if gnome-config --version > /dev/null 2>&1; then
    vers=`gnome-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
-   if test "$vers" -ge 56; then
+   if test "$vers" -ge 58; then
       AC_MSG_RESULT(found)
    else
-      AC_MSG_ERROR(You need at least gnome-libs 1.0.56 for this version of gedit)
+      AC_MSG_ERROR(You need at least gnome-libs 1.0.58 for this version of gedit)
    fi
 else
    AC_MSG_ERROR(Did not find gnome-libs installed)

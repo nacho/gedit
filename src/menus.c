@@ -33,6 +33,7 @@
 #include "prefs.h"
 #include "view.h"
 
+#include "dialogs.h"
 
 GnomeUIInfo popup_menu[] =
 {
@@ -118,7 +119,7 @@ GnomeUIInfo gedit_edit_menu[] =
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
 	},
 	GNOMEUIINFO_MENU_FIND_ITEM (search_cb, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM (replace_cb, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM (dialog_replace, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM,

@@ -28,16 +28,13 @@
 
 
 /* pointers to the dialogs */
-/*static GtkWidget *line_dialog; */
 static GtkWidget *search_dialog;
-static GtkWidget *replace_dialog;
 
 /* private functions */
-/*static GtkWidget* create_line_dialog (void); */
 static GtkWidget* create_search_dialog (void);
-static GtkWidget* create_replace_dialog (void);
 
-static void add_search_options (GtkWidget *dialog);
+
+void add_search_options (GtkWidget *dialog);
 static void find_line_clicked_cb    (GtkWidget   *widget,
 				     gint         button,
 				     Document *doc);
@@ -47,21 +44,10 @@ static void search_dialog_button_cb  (GtkWidget   *widget,
 static void replace_dialog_button_cb (GtkWidget   *widget,
                                       gint         button,
                                       Document *doc);
-static void get_search_options       (Document *doc,
-                                      GtkWidget   *widget,
-                                      gchar      **txt,
-                                      gulong      *options,
-                                      gint        *pos);
 static gboolean search               (GtkEditable *text,
                                       gchar       *str,
                                       gint         pos,
                                       gulong       options);
-static void search_select            (Document *doc,
-                                      gchar       *str,
-                                      gint         pos,
-                                      gulong       options);
-static gint ask_replace (void);
-static gint num_widechars (const gchar *str);
 
 /* 
  * find in files variable declarations  
@@ -292,60 +278,6 @@ search_cb (GtkWidget *widget, gpointer data)
 	gtk_widget_show (search_dialog);
 }
 
-void
-replace_cb (GtkWidget *widget, gpointer data)
-{
-	Document *doc;
-
-	doc = gedit_document_current ();
-
-	if (!replace_dialog)
-		replace_dialog = create_replace_dialog ();
-
-	gtk_signal_connect (GTK_OBJECT (replace_dialog), "clicked",
-			    GTK_SIGNAL_FUNC (replace_dialog_button_cb), doc);
-	gtk_widget_show (replace_dialog);
-}
-
-static GtkWidget *
-create_line_dialog (void)
-{
-	GtkWidget *dialog;
-	GtkWidget *hbox, *label, *spin;
-	GtkObject *adj;
-
-	dialog = gnome_dialog_new (_("Go to line"),
-				   GNOME_STOCK_BUTTON_OK,
-				   GNOME_STOCK_BUTTON_CANCEL,
-				   NULL);
-
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (hbox);
-
-	label = gtk_label_new (_("Line number"));
-	gtk_box_pack_start (GTK_BOX (hbox), label,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (label);
-
-	adj = gtk_adjustment_new (1, 1, 1, 1, 20, 20);
-	spin = gtk_spin_button_new (GTK_ADJUSTMENT(adj), 1, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), spin,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (spin);
-
-	gtk_object_set_data (GTK_OBJECT (dialog), "line", spin);
-	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
-
-	return dialog;
-}
-
-/* 
- *  All the find in files functions
- *
- */
-
 /* 
  *  Callback sent from the menubar 
  */
@@ -397,10 +329,8 @@ create_find_in_files_dialog (void)
 	return dialog;
 }
 
-
 static int
-get_start_index_of_line (gedit_view *view,
-			 gint pos)
+get_start_index_of_line (gedit_view *view, gint pos)
 {
 	gchar *buffer;
 
@@ -422,8 +352,7 @@ get_start_index_of_line (gedit_view *view,
  * Return the line (as text) which view->text[pos] is located on.
  */
 static gchar*
-get_line_as_text (gedit_view *view, 
-		  gint pos)
+get_line_as_text (gedit_view *view, gint pos)
 {
 	gchar *buffer;
 	gint   start = pos;
@@ -457,8 +386,7 @@ get_line_as_text (gedit_view *view,
  * filename, linenumber, line text. Return total number of matches 
  */
 static int
-find_in_file_search (gedit_view *view,
-		     gchar   *str)
+find_in_file_search (gedit_view *view, gchar *str)
 {
 	gint i;
 	gint textlen;
@@ -586,8 +514,7 @@ show_search_result_window (void)
  * Hide the search_result_window
  */
 void 
-remove_search_result_cb (GtkWidget 	*widget, 
-			 gpointer 	data)
+remove_search_result_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_button_set_relief (GTK_BUTTON(widget), GTK_RELIEF_NONE);
 	gtk_widget_hide (search_result_window);
@@ -667,9 +594,6 @@ destroy_clist_data (gpointer data)
 }
 
 
-/* end find in files functions */
-
-
 /*
  * PUBLIC: count_lines_cb
  *
@@ -703,7 +627,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	}
 }
 
-static void
+void
 add_search_options (GtkWidget *dialog)
 {
 	GtkWidget *radio, *check;
@@ -771,49 +695,6 @@ create_search_dialog (void)
 	return dialog;
 }
 
-static GtkWidget *
-create_replace_dialog (void)
-{
-	GtkWidget *dialog;
-	GtkWidget *frame, *entry, *check;
-
-	dialog = gnome_dialog_new (_("Replace"),
-				   _("Replace"),
-				   _("Replace all"),
-				   GNOME_STOCK_BUTTON_CLOSE,
-				   NULL);
-
-	frame = gtk_frame_new (_("Search for:"));
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), frame,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (frame);
-	entry = gnome_entry_new ("searchdialogsearch");
-	gtk_container_add (GTK_CONTAINER (frame), entry);
-	gtk_widget_show (entry);
-	entry = gnome_entry_gtk_entry (GNOME_ENTRY(entry));
-	gtk_object_set_data (GTK_OBJECT (dialog), "searchtext", entry);
-
-	frame = gtk_frame_new (_("Replace with:"));
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), frame,
-			    FALSE, FALSE, 0);
-	gtk_widget_show (frame);
-	entry = gnome_entry_new ("searchdialogreplace");
-	gtk_container_add (GTK_CONTAINER (frame), entry);
-	gtk_widget_show (entry);
-	entry = gnome_entry_gtk_entry (GNOME_ENTRY(entry));
-	gtk_object_set_data (GTK_OBJECT (dialog), "replacetext", entry);
-
-	add_search_options (dialog);
-	check = gtk_check_button_new_with_label (_("Ask before replacing"));
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), check,
-			    FALSE, FALSE, 0);
-	gtk_object_set_data (GTK_OBJECT (dialog), "confirm", check);
-	gtk_widget_show (check);
-
-	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
-
-	return dialog;
-}
 
 /*
  * Search dialog
@@ -841,65 +722,7 @@ search_dialog_button_cb (GtkWidget *widget, gint button, Document *doc)
 	}
 }
 
-/*
- * Replace dialog
- */
-static void
-replace_dialog_button_cb (GtkWidget *widget, gint button, Document *doc)
-{
-	GtkWidget *datalink;
-	gint pos, dowhat = 0;
-	gulong options;
-	gchar *str, *replace;
-	gboolean confirm = FALSE;
-
-	options = 0;
-	if (button < 2)
-	{
-		get_search_options (doc, widget, &str, &options, &pos);
-		datalink = gtk_object_get_data (GTK_OBJECT (widget),
-						"replacetext");
-		replace = gtk_entry_get_text (GTK_ENTRY (datalink));
-		datalink = gtk_object_get_data (GTK_OBJECT (widget),
-						"confirm");
-		if (GTK_TOGGLE_BUTTON (datalink)->active)
-			confirm = TRUE;
-		do {
-			pos = gedit_search_search (doc, str, pos, options);
-			if (pos == -1) break;
-			if (confirm) {
-				search_select (doc, str, pos, options);
-				dowhat = ask_replace();
-				if (dowhat == 2)  break;
-				if (dowhat == 1) {
-					if ( !(options | SEARCH_BACKWARDS)) {
-						pos += num_widechars (str);
-					}
-					continue;
-				}
-			}
-
-			gedit_search_replace (doc, pos, num_widechars (str),
-					      replace);
-			if ( !(options | SEARCH_BACKWARDS)) {
-				pos += num_widechars (replace);
-			}
-		} while (button);
-	}
-	else
-	{
-		gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
-					       GTK_SIGNAL_FUNC (replace_dialog_button_cb),
-					       doc);
-		gnome_dialog_close (GNOME_DIALOG (widget));
-	}
-}
-/* Utility functions
- *
- * the actual search
- */
-
-static void
+void
 get_search_options (Document *doc, GtkWidget *widget,
 		    gchar **txt, gulong *options, gint *pos)
 {
@@ -921,15 +744,17 @@ get_search_options (Document *doc, GtkWidget *widget,
 	*txt = gtk_entry_get_text (GTK_ENTRY (datalink));
 
 	from = gtk_object_get_data (GTK_OBJECT (widget), "searchfrom");
-	while (from) {
+	while (from)
+	{
 		pos_but = from->data;
-		if (GTK_TOGGLE_BUTTON(pos_but)->active) {
+		if (GTK_TOGGLE_BUTTON (pos_but)->active)
 			break;
-		}
 		from = from->next;
 		pos_type++;
 	}
-	switch (pos_type) {
+
+	switch (pos_type)
+	{
 	case 0:
 		*pos = gtk_text_get_length (GTK_TEXT (view->text));
 		break;
@@ -959,7 +784,7 @@ search (GtkEditable *text, gchar *str, gint pos, gulong options)
 	return retval;
 }
 
-static void
+void
 search_select (Document *doc, gchar *str, gint pos, gulong options)
 {
 	gint numwcs;
@@ -985,20 +810,8 @@ search_select (Document *doc, gchar *str, gint pos, gulong options)
 	}
 }
 
-static gint
-ask_replace (void)
-{
-	return gnome_dialog_run_and_close (
-		GNOME_DIALOG (gnome_message_box_new (
-			_("Replace?"), GNOME_MESSAGE_BOX_INFO,
-			GNOME_STOCK_BUTTON_YES,
-			GNOME_STOCK_BUTTON_NO,
-			GNOME_STOCK_BUTTON_CANCEL,
-			NULL)));
-}
-
 /* returns the number of wide characters contained in str */
-static gint
+gint
 num_widechars (const gchar *str)
 {
 	gint numwcs;

@@ -79,6 +79,7 @@ gedit_window_refresh (Window *w)
 	Document *doc;
 	GtkStyle *style;
 	GdkColor *bg, *fg;
+	GdkFont *font = NULL;
 
 	gedit_view_set_split_screen (GE_VIEW (mdi->active_view),
 				     (gint) GE_VIEW (mdi->active_view)->splitscreen);
@@ -103,6 +104,18 @@ gedit_window_refresh (Window *w)
         }
 */
 	style = gtk_style_copy (gtk_widget_get_style (GE_VIEW (mdi->active_view)->text));
+
+	/* set the font */
+	if (use_fontset)
+		font = gdk_fontset_load (settings->font);
+	else
+		font = gdk_font_load (settings->font);
+
+	if (font != NULL)
+		style->font = font;
+	else
+		g_warning ("Couldn't load font ``%s''", settings->font);
+
 
 	bg = &style->base[0];
 	bg->red = settings->bg[0];

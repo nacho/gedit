@@ -5,6 +5,7 @@ SUBDIRS = dialogs
 INCLUDES = \
 	-I$(includedir) 				\
 	-I$(top_srcdir) 				\
+	-I$(srcdir)/dialogs				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\" 		\
 	-I$(top_srcdir)/intl 				\
@@ -52,13 +53,13 @@ gedit_SOURCES = 		\
 	search.c 		\
 	search.h
 
-gedit_LDADD = 			\
-	dialogs/libdialogs.a	\
-	$(GNOME_LIBDIR) 	\
-	$(GNOMEUI_LIBS) 	\
-	$(corba_libs) 		\
-	$(libgnorba_libs) 	\
-	$(INTLLIBS) 		\
+gedit_LDADD = 				\
+	dialogs/libdialogs.a		\
+	$(GNOME_LIBDIR) 		\
+	$(GNOMEUI_LIBS) 		\
+	$(corba_libs) 			\
+	$(libgnorba_libs) 		\
+	$(INTLLIBS) 			\
 	$(EXTRA_GNOME_LIBS)
 
 EXTRA_DIST = 

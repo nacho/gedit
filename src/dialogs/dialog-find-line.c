@@ -1,9 +1,54 @@
+/*
+ * dialog-find-line.c: Dialog box for going to a specified line.
+ *
+ * Author:
+ *  Jason Leach <leach@wam.umd.edu>
+ *
+ */
+
 #include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
 
 #include "document.h"
 #include "search.h"
+
+/*static GtkWidget *line_dialog; */
+/*static GtkWidget* create_line_dialog (void); */
+
+static GtkWidget *
+create_line_dialog (void)
+{
+	GtkWidget *dialog;
+	GtkWidget *hbox, *label, *spin;
+	GtkObject *adj;
+
+	dialog = gnome_dialog_new (_("Go to line"),
+				   GNOME_STOCK_BUTTON_OK,
+				   GNOME_STOCK_BUTTON_CANCEL,
+				   NULL);
+
+	hbox = gtk_hbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), hbox,
+			    FALSE, FALSE, 0);
+	gtk_widget_show (hbox);
+
+	label = gtk_label_new (_("Line number"));
+	gtk_box_pack_start (GTK_BOX (hbox), label,
+			    FALSE, FALSE, 0);
+	gtk_widget_show (label);
+
+	adj = gtk_adjustment_new (1, 1, 1, 1, 20, 20);
+	spin = gtk_spin_button_new (GTK_ADJUSTMENT(adj), 1, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), spin,
+			    FALSE, FALSE, 0);
+	gtk_widget_show (spin);
+
+	gtk_object_set_data (GTK_OBJECT (dialog), "line", spin);
+	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
+
+	return dialog;
+}
 
 /* Callback on the "clicked" signal in the Find Line dialog */
 static void

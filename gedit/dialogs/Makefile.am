@@ -10,7 +10,8 @@ INCLUDES = 						\
 
 noinst_LIBRARIES = libdialogs.a
 
-libdialogs_a_SOURCES = 				\
+libdialogs_a_SOURCES = 			\
+	dialog-replace.c		\
 	dialog-find-line.c
 
 glade_DATA =		\
