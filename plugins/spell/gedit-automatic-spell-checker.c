@@ -69,12 +69,25 @@ check_word (GeditAutomaticSpellChecker *spell, GtkTextIter *start, GtkTextIter *
 	gchar *word;
 	
 	word = gtk_text_buffer_get_text (GTK_TEXT_BUFFER (spell->doc), start, end, FALSE);
-	
+
+	/*
+	g_print ("Check word: %s [%d - %d]\n", word, gtk_text_iter_get_offset (start),
+						gtk_text_iter_get_offset (end));
+	*/
+
 	if (!gedit_spell_checker_check_word (spell->spell_checker, word, -1, NULL)) 
+	{
+		/*
+		g_print ("Apply tag: [%d - %d]\n", gtk_text_iter_get_offset (start),
+						gtk_text_iter_get_offset (end));
+		*/
+
 		gtk_text_buffer_apply_tag (GTK_TEXT_BUFFER (spell->doc), 
 					   spell->tag_highlight, 
 					   start, 
 					   end);
+	}
+	
 	g_free (word);
 }
 
@@ -86,6 +99,11 @@ check_range (GeditAutomaticSpellChecker *spell, GtkTextIter start, GtkTextIter e
 	 * so we don't have to figure it out. */
 
 	GtkTextIter wstart, wend;
+
+	/*
+	g_print ("Check range: [%d - %d]\n", gtk_text_iter_get_offset (&start),
+						gtk_text_iter_get_offset (&end));
+	*/
 
 	if (gtk_text_iter_inside_word (&end))
 		gtk_text_iter_forward_word_end (&end);
@@ -523,6 +541,8 @@ gedit_automatic_spell_checker_new (GeditDocument *doc, GeditSpellChecker *checke
 				"foreground", "red", 
 				"underline", PANGO_UNDERLINE_SINGLE,
 				NULL);
+
+	gtk_text_tag_set_priority (spell->tag_highlight, 0);
 
 	/* we create the mark here, but we don't use it until text is
 	 * inserted, so we don't really care where iter points.  */
