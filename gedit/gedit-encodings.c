@@ -249,7 +249,7 @@ static GeditEncoding encodings [] = {
   { GEDIT_ENCODING_MAC_DEVANAGARI,
     "MAC_DEVANAGARI", N_("Hindi") },
   { GEDIT_ENCODING_MAC_FARSI,
-    "MAC_FARSI", N_("Farsi") },
+    "MAC_FARSI", N_("Persian") },
   { GEDIT_ENCODING_MAC_GREEK,
     "MAC_GREEK", N_("Greek") },
   { GEDIT_ENCODING_MAC_GUJARATI,
