@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-10-19 23:15+0400\n"
-"PO-Revision-Date: 2000-10-19 23:16+04:00\n"
+"POT-Creation-Date: 2000-10-30 23:50+0300\n"
+"PO-Revision-Date: 2000-10-30 23:50+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:267 src/print.c:581
+#: src/document.c:269 src/print.c:703
 msgid "Untitled"
 msgstr "Безымянное"
 
@@ -184,19 +184,19 @@ msgstr ""
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: plugins/email/email.glade.h:7
+#: plugins/email/email.glade.h:7 src/dialogs/program.glade.h:7
 msgid "gedit: e-mail plugin"
 msgstr "gedit: дополнение эл.почты"
 
-#: plugins/email/email.glade.h:8
+#: plugins/email/email.glade.h:8 src/dialogs/program.glade.h:8
 msgid "From:"
 msgstr "От:"
 
-#: plugins/email/email.glade.h:9
+#: plugins/email/email.glade.h:9 src/dialogs/program.glade.h:9
 msgid "To:"
 msgstr "Кому:"
 
-#: plugins/email/email.glade.h:10
+#: plugins/email/email.glade.h:10 src/dialogs/program.glade.h:10
 msgid "Subject:"
 msgstr "Тема:"
 
@@ -309,29 +309,24 @@ msgstr "gedit: Настройки"
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/dialogs/dialog-replace.c:134 src/menus.c:253
+#: src/dialogs/dialog-replace.c:134 src/menus.c:254
 msgid "Find"
 msgstr "Найти"
 
-#: src/dialogs/dialog-replace.c:185
-#, c-format
-msgid "Text found at line :%i"
-msgstr "Текст найден в строке:%i"
-
-#: src/dialogs/dialog-replace.c:316
+#: src/dialogs/dialog-replace.c:331
 msgid "Text not found"
 msgstr "Текст не найден"
 
-#: src/dialogs/dialog-replace.c:321
+#: src/dialogs/dialog-replace.c:336
 msgid "Text not found."
 msgstr "Текст не найден."
 
-#: src/dialogs/dialog-replace.c:343
+#: src/dialogs/dialog-replace.c:361
 #, c-format
 msgid "found and replaced %i occurrences."
 msgstr "найдено и заменено %i вхождений."
 
-#: src/dialogs/dialog-replace.c:353
+#: src/dialogs/dialog-replace.c:371
 msgid "Could not allocate the memory for the Replace all request."
 msgstr "Не удалось получить необходимую память для замены всех запросов."
 
@@ -421,7 +416,7 @@ msgstr "Режим:"
 msgid "Notebook Tab Position: "
 msgstr "Положение ярлыков блокнота:"
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:233
+#: src/dialogs/prefs.glade.h:28 src/menus.c:234
 msgid "Undo"
 msgstr "Откат"
 
@@ -505,6 +500,14 @@ msgstr "Блокнот"
 msgid "Paper"
 msgstr "Бумага"
 
+#: src/dialogs/program.glade.h:11
+msgid "File to use as body of message: "
+msgstr "Файл используемый как тело сообщения: "
+
+#: src/dialogs/program.glade.h:12
+msgid "Location of sendmail to search for :"
+msgstr "Место поиска sendmail: "
+
 #: src/dialogs/replace.glade.h:8
 msgid "Find Next"
 msgstr "Найти следующее"
@@ -574,38 +577,38 @@ msgstr "Установленные дополнения"
 msgid "Plugin description"
 msgstr "Описание дополнения"
 
-#: src/document.c:249
+#: src/document.c:251
 msgid "RO - "
 msgstr "Только чтение - "
 
-#: src/document.c:267
+#: src/document.c:269
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/document.c:441
+#: src/document.c:443
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
 
-#: src/document.c:647
+#: src/document.c:652
 #, c-format
 msgid "Untitled %i"
 msgstr "Безымянное %i"
 
-#: src/document.c:653
+#: src/document.c:658
 msgid "(modified)"
 msgstr "(изменено)"
 
-#: src/document.c:655
+#: src/document.c:660
 msgid "(readonly)"
 msgstr "(только чтение)"
 
-#: src/document.c:705 src/document.c:745
+#: src/document.c:710 src/document.c:750
 msgid "This file does not end with a valid extension\n"
 msgstr "Этот файл заканчивается недопустимым расширением\n"
 
-#: src/document.c:753
+#: src/document.c:758
 #, c-format
 msgid "The file %s was not found."
 msgstr "Файл %s не был найден."
@@ -765,175 +768,175 @@ msgstr ""
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Файл '%s' не существует. Хотите создать его?"
 
-#: src/menus.c:53
+#: src/menus.c:54
 msgid "Open (swap) .c/.h file"
 msgstr "Открыть (переключить) .c/.h файл"
 
-#: src/menus.c:61
+#: src/menus.c:62
 msgid "_New"
 msgstr "Новый"
 
-#: src/menus.c:62 src/menus.c:212
+#: src/menus.c:63 src/menus.c:213
 msgid "Create a new document"
 msgstr "Создать новый документ"
 
-#: src/menus.c:67
+#: src/menus.c:68
 msgid "Save All"
 msgstr "Сохранить все"
 
-#: src/menus.c:68
+#: src/menus.c:69
 msgid "Save All Open Files"
 msgstr "Сохранить все открытые файлы"
 
-#: src/menus.c:73
+#: src/menus.c:74
 msgid "Revert"
 msgstr "Вернуть"
 
-#: src/menus.c:84
+#: src/menus.c:85
 msgid "Print pre_view"
 msgstr "Просмотр печати"
 
-#: src/menus.c:84
+#: src/menus.c:85
 msgid "Print preview"
 msgstr "Просмотр печати"
 
-#: src/menus.c:88
+#: src/menus.c:89
 msgid "Print preview..."
 msgstr "Просмотр печати..."
 
-#: src/menus.c:89
+#: src/menus.c:90
 msgid "Preview data to be printed"
 msgstr "Просмотр данных, которые будут напечатаны"
 
-#: src/menus.c:96
+#: src/menus.c:97
 msgid "Close All"
 msgstr "Закрыть Все"
 
-#: src/menus.c:97
+#: src/menus.c:98
 msgid "Close All Open Files"
 msgstr "Закрыть все открытые файлы"
 
-#: src/menus.c:127
+#: src/menus.c:128
 msgid "Goto _Line..."
 msgstr "Перейти к строке..."
 
-#: src/menus.c:128
+#: src/menus.c:129
 msgid "Go to a specific line number"
 msgstr "Перейти к строке с указанным номером"
 
-#: src/menus.c:139
+#: src/menus.c:140
 msgid "_Add View"
 msgstr "Добавить окно"
 
-#: src/menus.c:140
+#: src/menus.c:141
 msgid "Add a new view of the document"
 msgstr "Добавить новое окно для документа"
 
-#: src/menus.c:142
+#: src/menus.c:143
 msgid "_Remove View"
 msgstr "Удалить окно"
 
-#: src/menus.c:143
+#: src/menus.c:144
 msgid "Remove view of the document"
 msgstr "Удалить окно документа"
 
-#: src/menus.c:186 src/plugin.c:84 src/plugin.c:402
+#: src/menus.c:187 src/plugin.c:84 src/plugin.c:402
 msgid "_Plugins"
 msgstr "Дополнения"
 
-#: src/menus.c:198
+#: src/menus.c:199
 msgid "_Documents"
 msgstr "Документы"
 
-#: src/menus.c:212
+#: src/menus.c:213
 msgid "New"
 msgstr "Новый"
 
-#: src/menus.c:216
+#: src/menus.c:217
 msgid "Open"
 msgstr "Открыть"
 
-#: src/menus.c:216
+#: src/menus.c:217
 msgid "Open a file"
 msgstr "Открыть файл"
 
-#: src/menus.c:220
+#: src/menus.c:221
 msgid "Save"
 msgstr "Сохранить"
 
-#: src/menus.c:220
+#: src/menus.c:221
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
-#: src/menus.c:224
+#: src/menus.c:225
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/menus.c:224
+#: src/menus.c:225
 msgid "Close the current file"
 msgstr "Закрыть текущий файл"
 
-#: src/menus.c:228
+#: src/menus.c:229
 msgid "Print"
 msgstr "Печать"
 
-#: src/menus.c:228
+#: src/menus.c:229
 msgid "Print the current file"
 msgstr "Напечатать текущий файл"
 
-#: src/menus.c:233
+#: src/menus.c:234
 msgid "Undo last operation"
 msgstr "Отмена последнего действия"
 
-#: src/menus.c:237
+#: src/menus.c:238
 msgid "Redo"
 msgstr "Возврат"
 
-#: src/menus.c:237
+#: src/menus.c:238
 msgid "Redo last operation"
 msgstr "Повтор отмененного действия"
 
-#: src/menus.c:241
+#: src/menus.c:242
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/menus.c:241
+#: src/menus.c:242
 msgid "Cut the selection"
 msgstr "Вырезать выделение"
 
-#: src/menus.c:245
+#: src/menus.c:246
 msgid "Copy"
 msgstr "Скопировать"
 
-#: src/menus.c:245
+#: src/menus.c:246
 msgid "Copy the selection"
 msgstr "Скопировать выделение"
 
-#: src/menus.c:249
+#: src/menus.c:250
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/menus.c:249
+#: src/menus.c:250
 msgid "Paste the clipboard"
 msgstr "Вставить из буфера обмена"
 
-#: src/menus.c:253
+#: src/menus.c:254
 msgid "Search for a string"
 msgstr "Поиск строки"
 
-#: src/menus.c:257
+#: src/menus.c:258
 msgid "Line"
 msgstr "Строка"
 
-#: src/menus.c:257
+#: src/menus.c:258
 msgid "Get the basic file info."
 msgstr "Получить основную информацию о файле."
 
-#: src/menus.c:262
+#: src/menus.c:263
 msgid "Exit"
 msgstr "Выход"
 
-#: src/menus.c:262
+#: src/menus.c:263
 msgid "Exit the program"
 msgstr "Выйти из программы"
 
@@ -1009,16 +1012,16 @@ msgstr "Ошибка, init_plugin вернула ошибку"
 msgid "Error, plugin is still in use"
 msgstr "Ошибка, дополнение еще используется"
 
-#: src/print.c:172
+#: src/print.c:295
 msgid "Pages"
 msgstr "Страницы"
 
-#: src/print.c:230
+#: src/print.c:353
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gEdit (%s): Просмотр печати"
 
-#: src/print.c:530 src/print.c:545
+#: src/print.c:652 src/print.c:667
 #, c-format
 msgid ""
 "gedit could not find the font \"%s\".\n"
@@ -1027,20 +1030,20 @@ msgstr ""
 "gedit: невозможно найти шрифт \"%s\".\n"
 "gedit: невозможно напечатать без установленного шрифта."
 
-#: src/print.c:838
+#: src/print.c:960
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
 
-#: src/recent.c:232
+#: src/recent.c:234
 msgid "_File/"
 msgstr "Файл/"
 
-#: src/recent.c:235
+#: src/recent.c:237
 msgid "_File"
 msgstr "Файл"
 
-#: src/recent.c:254
+#: src/recent.c:256
 #, c-format
 msgid "Unable to open recent file : %s"
 msgstr "Ошибка, не удалось открыть недавно открывавшийся файл: %s"
@@ -1078,6 +1081,6 @@ msgstr ""
 "Текущая строка: %i\n"
 "Текущий столбец: %i"
 
-#: src/view.c:955
+#: src/view.c:963
 msgid "You can't remove the last view of a document."
 msgstr "Вы не можете удалить последнее окно документа."
