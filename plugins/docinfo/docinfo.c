@@ -44,7 +44,7 @@
 #include <gedit-utils.h>
 
 #define MENU_ITEM_LABEL		N_("_Word Count")
-#define MENU_ITEM_PATH		"/menu/Search/SearchOps_3/"
+#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_2/"
 #define MENU_ITEM_NAME		"PluginWordCount"	
 #define MENU_ITEM_TIP		N_("Get info on current document")
 

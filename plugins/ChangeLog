@@ -1,5 +1,18 @@
 2002-09-13  Paolo Maggi  <maggi@athena.polito.it>
 
+	* spell/docinfo.c (MENU_ITEM_PATH): put the docinfo plugin in the 
+	Tools menu
+
+	* spell/Makefile.am (libspell_la_SOURCES): added
+	gedit-spell-language-dialog.[ch]
+	(glade_DATA): added languages-dialog.glade2
+
+	* spell/spell.c: added the set language dialog
+
+	* spell/gedit-spell-language-dialog.[ch]: new files
+
+2002-09-13  Paolo Maggi  <maggi@athena.polito.it>
+
 	* spell/gedit-spell-checker.c (gedit_spell_checker_get_available_languages):
 	does not require parameters
 	(gedit_spell_checker_set_language): rewritten

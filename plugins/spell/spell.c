@@ -40,14 +40,20 @@
 #include <gedit-plugin.h>
 #include <gedit-debug.h>
 
+#include <libgnomeui/gnome-stock-icons.h>
+
 #include "gedit-spell-checker.h"
 #include "gedit-spell-checker-dialog.h"
+#include "gedit-spell-language-dialog.h"
 
-
-#define MENU_ITEM_LABEL		N_("_Spell check")
-#define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
+#define MENU_ITEM_LABEL		N_("_Check Spelling...")
+#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_1/"
 #define MENU_ITEM_NAME		"SpellChecker"	
 #define MENU_ITEM_TIP		N_("Check the spelling of the current document.")
+
+#define MENU_ITEM_LABEL_LANG	N_("Set _Language")
+#define MENU_ITEM_NAME_LANG	"SpellSetLanguage"	
+#define MENU_ITEM_TIP_LANG	N_("Set the language of the current document.")
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
 G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
@@ -562,6 +568,23 @@ show_no_mispelled_words_dialog (gboolean sel)
 
 
 static void
+set_language_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GeditDocument *doc;
+	GeditSpellChecker *spell;
+
+	gedit_debug (DEBUG_PLUGINS, "");
+	
+	doc = gedit_get_active_document ();
+	g_return_if_fail (doc != NULL);
+
+	spell = get_spell_checker_from_document (doc);
+	g_return_if_fail (spell != NULL);
+
+	gedit_spell_language_dialog_run (spell, GTK_WINDOW (gedit_get_active_window ()));
+}
+
+static void
 spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	GeditDocument *doc;
@@ -573,13 +596,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	gboolean sel = FALSE;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
-
-	if (spell_checker_id == 0)
-		spell_checker_id = g_quark_from_static_string ("GeditSpellCheckerID");
 	
-	if (check_range_id == 0)
-		check_range_id = g_quark_from_static_string ("CheckRangeID");
-
 	doc = gedit_get_active_document ();
 	g_return_if_fail (doc != NULL);
 
@@ -627,6 +644,7 @@ spell_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	g_free (word);
 
 	gtk_widget_show (dlg);
+	
 }	
 
 G_MODULE_EXPORT GeditPluginState
@@ -670,10 +688,23 @@ activate (GeditPlugin *pd)
 
         while (top_windows)
         {
+		BonoboUIComponent *ui_component;
+
 		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
 				     MENU_ITEM_PATH, MENU_ITEM_NAME,
 				     MENU_ITEM_LABEL, MENU_ITEM_TIP, GTK_STOCK_SPELL_CHECK,
 				     spell_cb);
+
+		ui_component = gedit_get_ui_component_from_window (
+					BONOBO_WINDOW (top_windows->data));
+
+		bonobo_ui_component_set_prop (
+			ui_component, "/commands/" MENU_ITEM_NAME, "accel", "F7", NULL);
+
+		gedit_menus_add_menu_item (BONOBO_WINDOW (top_windows->data),
+				     MENU_ITEM_PATH, MENU_ITEM_NAME_LANG,
+				     MENU_ITEM_LABEL_LANG, MENU_ITEM_TIP_LANG, GNOME_STOCK_BOOK_BLUE,
+				     set_language_cb);
 
                 pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
 
@@ -687,6 +718,8 @@ G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME_LANG);
+
 
 	return PLUGIN_OK;
 }
@@ -703,6 +736,12 @@ init (GeditPlugin *pd)
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
 	
 	pd->private_data = NULL;
+
+	if (spell_checker_id == 0)
+		spell_checker_id = g_quark_from_static_string ("GeditSpellCheckerID");
+	
+	if (check_range_id == 0)
+		check_range_id = g_quark_from_static_string ("CheckRangeID");
 	
 	return PLUGIN_OK;
 }

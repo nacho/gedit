@@ -91,7 +91,7 @@ static GeditLanguage known_languages [KNOWN_LANGUAGES + 1] =
 	{"pt_pt", N_("Portuguese (Portugal)")},
 	{"pt_br", N_("Portuguese (Brazilian)")},
 	{"ru", N_("Russian")},
-{"sv", N_("Swedish")},
+	{"sv", N_("Swedish")},
 	{NULL, NULL}
 };
 
@@ -322,7 +322,6 @@ lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **err
 	spell->active_lang = language;
 
 	return TRUE;
-
 }
 
 const GSList *
@@ -363,37 +362,16 @@ gedit_spell_checker_set_language (GeditSpellChecker *spell,
 			const GeditLanguage *language,
 			GError **error)
 {
-	PspellConfig *config;
-	const gchar *lang;
-	gint ret;
-
 	g_return_val_if_fail (spell != NULL, FALSE);
 	g_return_val_if_fail (GEDIT_IS_SPELL_CHECKER (spell), FALSE);
 
-	if (spell->manager == NULL)
-		return lazy_init (spell, spell->active_lang, error);
-
-	lang = get_lang_code (language);
-	
-	config = pspell_manager_config (spell->manager);
-	g_return_val_if_fail (config != NULL, FALSE);
-
-	if (lang == NULL)
-		ret = pspell_config_remove (config, "language-tag");
-	else
-		ret = pspell_config_replace (config, "language-tag", lang);
-
-	if (ret != 0)
+	if (spell->manager != NULL)
 	{
-		g_set_error (error, GEDIT_SPELL_CHECKER_ERROR, GEDIT_SPELL_CHECKER_ERROR_PSPELL,
-				"pspell: %s", pspell_config_error_message (config));
+		delete_pspell_manager (spell->manager);
+		spell->manager = NULL;
+	}
 
-		return FALSE;
-	} 
-
-	spell->active_lang = language;
-
-	return TRUE;
+	return lazy_init (spell, language, error);
 }
 
 const GeditLanguage *

@@ -24,6 +24,8 @@ libspell_la_SOURCES = spell.c 				\
 	gedit-spell-checker.h				\
 	gedit-spell-checker-dialog.c			\
 	gedit-spell-checker-dialog.h			\
+	gedit-spell-language-dialog.c			\
+	gedit-spell-language-dialog.h			\
 	$(BUILT_SOURCES)				\
 	preload.c					\
 	preload.h					
@@ -32,7 +34,7 @@ libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 libspell_la_LIBADD =  $(PSPELL_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
-glade_DATA = spell-checker.glade2
+glade_DATA = spell-checker.glade2 languages-dialog.glade2
 
 gedit-spell-checker-dialog-marshal.h: gedit-spell-checker-dialog-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
