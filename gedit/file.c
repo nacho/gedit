@@ -870,7 +870,7 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	g_assert(gedit_window_active_app() != NULL);
 	g_assert(gedit_document_current() != NULL);
 
-	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), TRUE);	
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), FALSE);	
 }
 
 
