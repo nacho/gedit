@@ -8,7 +8,6 @@
 #include "gE_icon.xpm"
 #include "main.h"
 
-extern gchar *gEdit_ID;
 
 #ifdef WITHOUT_GNOME
 GtkWidget *about_window;
@@ -82,6 +81,8 @@ void gE_about_box()
 	gtk_widget_show (about_window);
 }
 #else
+
+
 void gE_about_box()
 {
         GtkWidget *about;
@@ -92,7 +93,7 @@ void gE_about_box()
 		NULL
 	};
 
-        about = gnome_about_new (_(gEdit_ID), NULL,
+        about = gnome_about_new (GEDIT_ID, NULL,
 				 "(C) 1998 Alex Roberts and Evan Lawrence",
 				 authors,
 				 _("gEdit is a small and lightweight text editor for GNOME/Gtk+"),

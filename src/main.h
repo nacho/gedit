@@ -12,7 +12,7 @@ extern "C" {
 #endif
 
 #define STRING_LENGTH_MAX	256
-
+#define GEDIT_ID	"gEdit 0.4.0"
 typedef struct _gE_search gE_search;
 typedef struct _gE_prefs gE_prefs;
 typedef struct _gE_window gE_window;

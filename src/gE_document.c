@@ -30,7 +30,6 @@
 #include "menus.h"
 #include "toolbar.h"
 
-gchar gEdit_ID[] = "gEdit 0.4.0";
 
 #ifndef WITHOUT_GNOME
 GnomeUIInfo gedit_file_menu [] = {
@@ -194,7 +193,7 @@ gE_window *gE_window_new()
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window->window, "gedit window");
 #else
-  window->window = gnome_app_new ("gEdit", gEdit_ID );
+  window->window = gnome_app_new ("gEdit", GEDIT_ID );
 #endif
   gtk_signal_connect (GTK_OBJECT (window->window), "destroy",
   		      GTK_SIGNAL_FUNC(destroy_window),
@@ -205,7 +204,7 @@ gE_window *gE_window_new()
      
   gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
 #ifdef WITHOUT_GNOME
-  gtk_window_set_title (GTK_WINDOW (window->window), gEdit_ID);
+  gtk_window_set_title (GTK_WINDOW (window->window), GEDIT_ID);
 #endif
   gtk_widget_set_usize(GTK_WIDGET(window->window), 595, 390);
   gtk_window_set_policy(GTK_WINDOW(window->window), TRUE, TRUE, FALSE);
@@ -424,7 +423,7 @@ void gE_document_toggle_wordwrap (GtkWidget *w, gpointer data)
 		
 void gE_show_version()
 {
-	g_print ("%s\n", gEdit_ID);
+	g_print ("%s\n", GEDIT_ID);
 }
 
 #if PLUGIN_TEST
