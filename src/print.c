@@ -656,7 +656,7 @@ gedit_print_verify_fonts (void)
 		g_free (errstr);
 		return FALSE;
 	}
-	gtk_object_unref (GTK_OBJECT (test_font));
+	gnome_font_unref (test_font);
 	g_free (test_font_name);
 	
 	/* Helvetica  */
@@ -671,7 +671,7 @@ gedit_print_verify_fonts (void)
 		g_free (errstr);
 		return FALSE;
 	}
-	gtk_object_unref (GTK_OBJECT (test_font));
+	gnome_font_unref (test_font);
 	g_free (test_font_name);	
 
 	return TRUE;
