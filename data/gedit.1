@@ -1,6 +1,9 @@
 .TH GEDIT l "05 Jul 2002"
 .SH NAME
-\fBgedit\fP \- small and lightweight text editor for Gnome
+\fBgedit\fP \- simple text editor for GNOME
+
+The gedit application is a simple text editor. You can use gedit to create and edit text files. You can use gedit plugins to perform a variety of tasks related to text-editing from within the gedit window.
+
 .SH SYNTAX
 .B gedit
 .RI [ --help ]
@@ -8,7 +11,7 @@
 .RI [ filename(s) ... ]
 .SH DESCRIPTION
 .B gedit
-is a text editor for the Gnome Desktop.
+is a text editor for the GNOME Desktop.
 .LP
 .SH OPTIONS
 
@@ -16,26 +19,31 @@ is a text editor for the Gnome Desktop.
 \fB\-\-help\fR
 Prints the command line options.
 .TP
-\fB\-\-debug[-section]
-Runs gedit in debug mode. In debug mode all the functions that are beeing called dump
-to the console the function names. Specific sections for debugging can be specified,
-the sections are : window, commands, document, file, plugins, prefs, print, search,
-undo, view and recent. Run gedit \-\-help  or more information.
+\fB\-\-debug[-section]\fR
+Runs gedit in debug mode. In debug mode function names are dumped to the console when they are invoked. Specific sections for debugging are allowed.  The sections are: window, commands, document, file, plugins, prefs, print, search,
+undo, view and recent. Run `gedit \-\-help' for more information.
 .TP
-\fB\-\-filename
+\fB\-\-filename\fR
 Specifies the file to open when gedit starts - if this is not specified, gedit will
 load a blank file with an Untitled label. Multiple files can be loaded if they are
-separated by spaces.
+separated by spaces.  Gedit also supports handling of remote files.  For example, you can pass the location of a webpage to gedit, like "http://www.gnome.org".
+.TP
+\fB\-\-new\-window\fR
+Create a new toplevel window in an existing instance of gedit.
+.TP
+\fB\-\-new\-document\fR
+Create a new document in an existing instance of gedit.
+.TP
+\fB\-\-quit\fR
+Quit an existing instance of gedit.
 .SH PIPES
-Gedit acepts pipes, so it can be run after another command to load the ouptup into
+Gedit accepts pipes, so it can be run after another command to load the output into
 gedit. For example :
 .TP
 ls -l | gedit
 .PB
 .SH BUGS
-See the BUGS file for a list of the bugs we know about but haven't bothered to
-fix yet, if you find a bug that isn't listed in that file, report it on
-http://bugzilla.gnome.org/enter_bug.cgi?product=gedit.
+If you find a bug, please report it at http://bugzilla.gnome.org, or use a helper application, such as Bug Buddy.
 
 .SH AUTHORS
 Paolo Maggi (maggi@athena.polito.it)
