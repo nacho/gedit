@@ -4,13 +4,20 @@ SUBDIRS = src pixmaps po plugins
 
 GEDIT_SCHEMA = gedit.schemas
 
+desktopdir  = $(datadir)/applications
+desktop_in_files = gedit.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+
+@INTLTOOL_DESKTOP_RULE@
+
 EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
-	gedit.1 gedit2.desktop.in \
+	gedit.1 \
+	$(desktop_in_files) \
+	$(desktop_DATA) \
 	TODO gedit.keys.in app-docs.make \
 	intltool-extract.in intltool-merge.in intltool-update.in \
 	$(GEDIT_SCHEMA)
 
-@INTLTOOL_DESKTOP_RULE@
 
 @INTLTOOL_KEYS_RULE@
 
