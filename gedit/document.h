@@ -32,65 +32,49 @@ typedef struct _DocumentClass DocumentClass;
 struct _DocumentClass
 {
 	GnomeMDIChildClass parent_class;
-	
-	void (*document_changed)(Document *, gpointer);
 
+	void (*document_changed)(Document *, gpointer);
+	
 };
 
 struct _Document
 {
 	GnomeMDIChild mdi_child;
-	
 	GList *views;
-	
-	GtkWidget *tab_label;
+
 	gchar *filename;
+	GtkWidget *tab_label;
 
-	/* guchar *buf; */
-	/*GString buffer;*/
-	/*guint buffer_size;*/
-
-	gint changed_id;
+	/* flags. FIXME: use only one bit of the flags
+	   with << ask federico about it. Chema */
 	gint changed;
-
-	struct stat *sb;
-
-	/* Undo/Redo GLists */
-	GList *undo;		/* Undo Stack */
-	GList *redo;		/* Redo Stack */
-
-	int  readonly;
+	gint readonly;
 	gint untitled_number;
+
+	/* Undo/Redo Lists */
+	GList *undo;
+	GList *redo;
 };
 
 
-#define NUM_MDI_MODES		4
+#define NUM_MDI_MODES 4
 extern guint mdi_type [NUM_MDI_MODES];
 extern GnomeMDI *mdi;
 
 void gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable);
 void gedit_document_delete_text (Document *doc, guint position, gint length, gint undoable);
+void gedit_document_set_readonly (Document *doc, gint readonly);
 
-GtkType gedit_document_get_type (void);
-Document* gedit_document_new (void);
-Document* gedit_document_new_with_title (gchar *title);
-Document* gedit_document_new_with_file (gchar *filename);
-Document* gedit_document_stdin ();
-Document* gedit_document_current (void);
+gchar*	gedit_document_get_tab_name (Document *doc);
+guchar*	gedit_document_get_buffer (Document * doc);
+guint	gedit_document_get_buffer_length (Document * doc);
 
-void gedit_add_view     (GtkWidget *w, gpointer data);
-void gedit_remove_view  (GtkWidget *w, gpointer data);
+Document * gedit_document_new (void);
+Document * gedit_document_new_with_title (gchar *title);
+Document * gedit_document_new_with_file (gchar *filename);
+Document * gedit_document_current (void);
 
-/*gint remove_doc_cb       (GnomeMDI *mdi, Document *doc); */
-void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
-void add_view_cb         (GnomeMDI *mdi, Document *doc);
-gint add_child_cb        (GnomeMDI *mdi, Document *doc);
-
-gchar  * gedit_get_document_tab_name (Document *doc);
-guchar * gedit_document_get_buffer (Document * doc);
-guint gedit_document_get_buffer_length (Document * doc);
 void gedit_mdi_init (void);
-
 void gedit_document_load ( GList *file_list);
 
 #endif /* __DOCUMENT_H__ */

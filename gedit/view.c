@@ -55,23 +55,24 @@ GtkVBoxClass *parent_class = NULL;
        void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
        void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
    gboolean auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
-static void line_pos_cb (GtkWidget *widget, gedit_data *data);
-static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
-static gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
-static void gedit_view_class_init (ViewClass *klass);
-static void gedit_view_init (View *view);
-      guint gedit_view_get_type (void);
+
+
+guint gedit_view_get_type (void);
 GtkWidget * gedit_view_new (Document *doc);
-#ifdef ENABLE_SPLIT_SCREEN
-       void gedit_view_set_split_screen (View *view, gint split_screen);
-#endif
+
        void gedit_view_set_word_wrap (View *view, gint word_wrap);
-       void gedit_view_set_read_only (View *view, gint read_only);
+       void gedit_view_set_readonly (View *view, gint readonly);
        void gedit_view_set_font (View *view, gchar *fontname);
        void gedit_view_set_position (View *view, gint pos);
       guint gedit_view_get_position (View *view);
        void gedit_view_set_selection (View *view, guint  start, guint  end);
        gint gedit_view_get_selection (View *view, guint *start, guint *end);
+
+static void line_pos_cb (GtkWidget *widget, gedit_data *data);
+static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
+static gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
+static void gedit_view_class_init (ViewClass *klass);
+static void gedit_view_init (View *view);
 
 View *
 gedit_view_current (void)
@@ -99,16 +100,13 @@ gedit_view_changed_cb (GtkWidget *w, gpointer cbdata)
 		return;
 	
 	view->document->changed = TRUE;
+
 	/* We are not connecting this singnal anymore ...  Chema 
-	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);
-	view->changed_id = FALSE;*/
+	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);*/
 
 	/* Set the title */
 	gedit_set_title (view->document);
-	/*
-	This was causing a "Untitled #? problem .. Chema 
-	gedit_view_set_read_only (view, view->document->readonly);
-	*/
+	
 }
 
 
@@ -170,23 +168,11 @@ gedit_view_insert (View  *view, guint position, gchar * text, gint length)
 {
 	guint p1;
 	
-/*	gtk_text_freeze (GTK_TEXT (view->text));*/
 	p1 = gtk_text_get_point (GTK_TEXT (view->text));
 	gtk_text_set_point (GTK_TEXT(view->text), position);
-/*	gtk_text_thaw (GTK_TEXT (view->text));*/
 	gtk_text_insert (GTK_TEXT (view->text), NULL,
 			 NULL, NULL, text,
 			 length);
-
-#ifdef ENABLE_SPLIT_SCREEN
-	gtk_text_freeze (GTK_TEXT (view->split_screen));
-	p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
-	gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
-	gtk_text_thaw (GTK_TEXT (view->split_screen));
-	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-			 NULL, NULL, undo->text,
-			 strlen(undo->text));
-#endif	
 }
 
 void
@@ -212,27 +198,10 @@ void
 gedit_view_delete (View *view, guint position, gint length)
 {
 	guint p1;
-	/*
-	gtk_text_freeze (GTK_TEXT (view->text));
-	disabled by chema
-	*/
+
 	p1 = gtk_text_get_point (GTK_TEXT (view->text));
 	gtk_text_set_point (GTK_TEXT(view->text), position);
-	/* thaw before deleting so that cursos repositions ok */
-	/* disabled by chema
-	gtk_text_thaw (GTK_TEXT (view->text));
-	*/
 	gtk_text_forward_delete (GTK_TEXT (view->text), length);
-#ifdef ENABLE_SPLIT_SCREEN			
-	gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
-	p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
-	gtk_text_set_point (GTK_TEXT(nth_view->split_screen), start_pos);
-	gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
-	gtk_text_backward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
-	/* I have not tried it but WHY whould you use backward above and forward here ? Chema
-	   gtk_text_forward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
-	*/
-#endif
 }
 
 void
@@ -290,6 +259,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 }
 
 
+/* This is ugly. rewrite .. Chema */
 gboolean
 auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		int *pos, gpointer data)
@@ -313,7 +283,6 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		return FALSE;
 	if (!settings->auto_indent)
 		return FALSE;
-
 
 	doc = view->document;
 
@@ -376,102 +345,11 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 }
 
 static void
-line_pos_cb (GtkWidget *widget, gedit_data *data)
-{
-	static char col [32];
-
-	return;
-	/* FIXME: Disable by chema for 0.7.0 . this hack is not working */
-	gedit_debug ("", DEBUG_VIEW);
-
-	sprintf (col, "Column: %d", GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/7);
-
-	if (settings->show_status)
-	{
-		GnomeApp *app = gnome_mdi_get_active_window (mdi);
-		gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
-	}
-}
-
-static gint
-gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
-{
-	gedit_debug ("", DEBUG_VIEW);
-	
-	line_pos_cb (NULL, NULL);
-
-	return FALSE;
-}
-
-static gint
-gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
-{
-	gedit_debug ("", DEBUG_VIEW);
-
-	line_pos_cb (NULL, NULL);
-
-	if (event->state & GDK_MOD1_MASK)
-	{
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
-		return FALSE;
-	}
-
-	/* Control key related */
-	if (event->state & GDK_CONTROL_MASK)
-	{
-		switch (event->keyval)
-		{
-		case 's':
-			file_save_cb (w);
-	    		break;
-		case 'p':
-	    		file_print_cb (w, NULL, FALSE);
-	    		break;
-		case 'n':
-/*			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event"); */
-			return FALSE;
-			break;
-		case 'w':
-	    		file_close_cb (w, NULL);
-	    		break;
-		case 'z':
-			/* Undo is getting called twice, 1 thru this function
-			   and 1 time thru the aceleratior (I guess). Chema 
-	    		gedit_undo_do (w, NULL);
-			*/
-	    		break;
-		case 'r':
-			/* Same as undo_do 
-	    		gedit_undo_redo (w, NULL);
-			*/
-	    		break;
-			/* WTF: ??? chema 
-		case 'k':
-	    		gedit_undo_redo (w, NULL);
-	    		break;*/
-		case 'q':
-			file_quit_cb (w, NULL);
-	    		break;
-		default:
-	    		return TRUE;
-	    		break;
-		}
-	}
-
-	return TRUE;
-}
-
-
-
-static void
 gedit_view_class_init (ViewClass *klass)
 {
 	GtkObjectClass *object_class;
-	/*GtkWidgetClass *widget_class;
-	GtkFixedClass *fixed_class;*/
 	
 	object_class = (GtkObjectClass *)klass;
-	/*widget_class = (GtkWidgetClass *)klass;*/
 
 	gedit_debug ("", DEBUG_VIEW);
 	
@@ -486,6 +364,7 @@ gedit_view_class_init (ViewClass *klass)
 
 	gtk_object_class_add_signals (object_class, gedit_view_signals, LAST_SIGNAL);
 	klass->cursor_moved = NULL;
+
 	/*
 	widget_class->size_allocate = gedit_view_size_allocate;
 	widget_class->size_request = gedit_view_size_request;
@@ -530,7 +409,7 @@ gedit_view_init (View *view)
 	view->line_wrap = 1; /* FIXME use settings->line_wrap and add scroll bars. Chema*/
 
 	view->text = gtk_text_new (NULL, NULL);
-	gtk_text_set_editable (GTK_TEXT(view->text), !view->read_only);
+	gtk_text_set_editable (GTK_TEXT(view->text), !view->readonly);
 	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
 	
@@ -599,7 +478,7 @@ gedit_view_init (View *view)
       	gtk_widget_show (view->scrwindow[1]);
 
 	view->split_screen = gtk_text_new (NULL, NULL);
-	gtk_text_set_editable (GTK_TEXT (view->split_screen), !view->read_only);
+	gtk_text_set_editable (GTK_TEXT (view->split_screen), !view->readonly);
 	gtk_text_set_word_wrap (GTK_TEXT (view->split_screen), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT (view->split_screen), view->line_wrap);
 	
@@ -724,7 +603,7 @@ gedit_view_new (Document *doc)
 	View *view;
 	guchar *document_buffer;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug ("start", DEBUG_VIEW);
 
 	if (doc == NULL)
 		return NULL;
@@ -736,6 +615,8 @@ gedit_view_new (Document *doc)
 	document_buffer = gedit_document_get_buffer (view->document);
 	gedit_view_insert (view, 0, document_buffer, FALSE);
 	g_free (document_buffer);
+
+	gedit_debug ("end", DEBUG_VIEW);
 
 	return GTK_WIDGET (view);
 }
@@ -772,43 +653,23 @@ gedit_view_set_word_wrap (View *view, gint word_wrap)
 }
 
 void
-gedit_view_set_read_only (View *view, gint read_only)
+gedit_view_set_readonly (View *view, gint readonly)
 {
-	/* FIXME: don't use a predefined size for the label ... Chema */
-	gchar RO_label[255];
+	gchar * doc_name;
 
 	gedit_debug ("", DEBUG_VIEW);
 	
-	view->read_only = read_only;
-	gtk_text_set_editable (GTK_TEXT (view->text), !view->read_only);
-	
-	if (read_only)
-	{
-		sprintf (RO_label, "RO - %s", GNOME_MDI_CHILD(view->document)->name);
-		gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document), RO_label);
-	}
-	else
-	{
-		if (view->document->filename)
-		{
-			gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document),
-						  g_basename (view->document->filename));
-		}
-		else
-		{
-			gchar * doc_name = gedit_get_document_tab_name(view->document);
-			gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document),
-						  doc_name);
-			g_free (doc_name);
-		}
-	}
-	 
+	view->readonly = readonly;
+	gtk_text_set_editable (GTK_TEXT (view->text), !view->readonly);
 #ifdef ENABLE_SPLIT_SCREEN
 	if (view->split_screen)
 		gtk_text_set_editable (GTK_TEXT (view->split_screen),
-				       !view->read_only);
+				       !view->readonly);
 #endif
 	
+	doc_name = gedit_document_get_tab_name (view->document);
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document), doc_name);
+	g_free (doc_name);
 }
 
 /**
@@ -942,7 +803,7 @@ gedit_add_view (GtkWidget *widget, gpointer data)
 	View *view;
 	guchar * buffer;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug ("start", DEBUG_DOCUMENT);
 
 	view = gedit_view_current();
 
@@ -955,9 +816,11 @@ gedit_add_view (GtkWidget *widget, gpointer data)
 		view = gedit_view_current();
 		gedit_view_insert ( view, 0, buffer, strlen (buffer));
 		/* Move the window to the top after inserting */
-		gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj), 0);
+		gedit_view_set_window_position (view, 0);
 		g_free (buffer);
 	}
+
+	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 /* Called from the View menu */
@@ -976,4 +839,90 @@ gedit_remove_view (GtkWidget *widget, gpointer data)
 	  
 	/* Now, we can remove the view proper */
 	gnome_mdi_remove_view (mdi, mdi->active_view, FALSE);
+}
+
+static void
+line_pos_cb (GtkWidget *widget, gedit_data *data)
+{
+	static char col [32];
+
+	return;
+	/* FIXME: Disable by chema for 0.7.0 . this hack is not working */
+	gedit_debug ("", DEBUG_VIEW);
+
+	sprintf (col, "Column: %d", GTK_TEXT(VIEW(mdi->active_view)->text)->cursor_pos_x/7);
+
+	if (settings->show_status)
+	{
+		GnomeApp *app = gnome_mdi_get_active_window (mdi);
+		gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
+	}
+}
+
+static gint
+gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
+{
+	gedit_debug ("", DEBUG_VIEW);
+	
+	line_pos_cb (NULL, NULL);
+
+	return FALSE;
+}
+
+static gint
+gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
+{
+	gedit_debug ("", DEBUG_VIEW);
+
+	line_pos_cb (NULL, NULL);
+
+	if (event->state & GDK_MOD1_MASK)
+	{
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
+		return FALSE;
+	}
+
+	/* Control key related */
+	if (event->state & GDK_CONTROL_MASK)
+	{
+		switch (event->keyval)
+		{
+		case 's':
+			file_save_cb (w);
+	    		break;
+		case 'p':
+	    		file_print_cb (w, NULL, FALSE);
+	    		break;
+		case 'n':
+/*			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event"); */
+			return FALSE;
+			break;
+		case 'w':
+	    		file_close_cb (w, NULL);
+	    		break;
+		case 'z':
+			/* Undo is getting called twice, 1 thru this function
+			   and 1 time thru the aceleratior (I guess). Chema 
+	    		gedit_undo_do (w, NULL);
+			*/
+	    		break;
+		case 'r':
+			/* Same as undo_do 
+	    		gedit_undo_redo (w, NULL);
+			*/
+	    		break;
+			/* WTF: ??? chema 
+		case 'k':
+	    		gedit_undo_redo (w, NULL);
+	    		break;*/
+		case 'q':
+			file_quit_cb (w, NULL);
+	    		break;
+		default:
+	    		return TRUE;
+	    		break;
+		}
+	}
+
+	return TRUE;
 }

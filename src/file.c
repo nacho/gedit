@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose M Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,6 +43,7 @@ GtkWidget *open_file_selector = NULL;
 gint gedit_file_open (Document *doc, gchar *fname);
 gint gedit_file_save (Document *doc, gchar *fname);
 gint gedit_file_stdin (Document *doc);
+
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_cb (GtkWidget *widget);
@@ -53,7 +54,7 @@ void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
 void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 
-   gboolean popup_create_new_file (GtkWidget *w, gchar *title);
+       gint gedit_file_create_popup (guchar *title);
 static void gedit_file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
 static void gedit_file_save_as_ok_sel (GtkWidget *w, gedit_data *data);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
@@ -122,21 +123,13 @@ gedit_file_open (Document *doc, gchar *fname)
 	fclose (fp);
 
 	if (doc==NULL)
-	{
 		doc = gedit_document_new ();
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename (fname));
-	}
 
 	doc->filename = g_strdup (fname);
-	doc->readonly = access (fname, W_OK) ? TRUE : FALSE;
-
+	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
 	doc->changed = FALSE;
-
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename (doc->filename));
-	
+	doc->untitled = 0;
 	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
@@ -217,7 +210,8 @@ gedit_file_save (Document *doc, gchar *fname)
 	}
 	
 	doc->changed = FALSE;
-	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename (doc->filename));
+	doc->untitled = 0;
+	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 	gedit_set_title (doc);
 
 	if (!view->changed_id)
@@ -246,7 +240,6 @@ gedit_file_stdin (Document *doc)
 	View *view;
 	
 	gedit_debug ("", DEBUG_FILE);
-	g_return_val_if_fail (doc != NULL, 1);
 
 	fstat(STDIN_FILENO, &stats);
 	
@@ -266,11 +259,7 @@ gedit_file_stdin (Document *doc)
 	fclose(stdin);
 
 	if (doc==NULL)
-	{
 		doc = gedit_document_new ();
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	}
 
 	view = g_list_nth_data (doc->views, 0);
 
@@ -299,10 +288,8 @@ file_new_cb (GtkWidget *widget, gpointer cbdata)
 	gedit_debug("", DEBUG_FILE);
 	
 	gedit_flash (_(MSGBAR_FILE_NEW));
+
 	doc = gedit_document_new ();
-	
-	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 }
 
 void
@@ -485,17 +472,23 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gedit_data *data)
 		}
 	}
 	    
-	if (gedit_file_save(doc, fname) != 0) 
-		gedit_flash (_("Error saving file!"));
-
-	/* If file save was succesfull, then we should turn the readonly flag off */
-	for (i = 0; i < g_list_length (doc->views); i++)
+	if (gedit_file_save(doc, fname) != 0)
 	{
-		nth_view = g_list_nth_data (doc->views, i);
-		gedit_view_set_read_only (nth_view, FALSE);
+		gedit_flash (_("Error saving file!"));
+		g_free (fname);
+		return;
 	}
 
 	g_free (fname);
+
+        /* If file save was succesfull, then we should turn the readonly flag off */
+	for (i = 0; i < g_list_length (doc->views); i++)
+	{
+		nth_view = g_list_nth_data (doc->views, i);
+		gedit_view_set_readonly (nth_view, FALSE);
+	}
+
+
 }
 
 
@@ -582,8 +575,8 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 }
 
 
-gboolean
-popup_create_new_file (GtkWidget *w, gchar *title)
+gint 
+gedit_file_create_popup (guchar *title)
 {
 	GtkWidget *msgbox;
 	Document *doc;
@@ -605,9 +598,6 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	{
 	case 0 : 
 		doc = gedit_document_new_with_title (title);
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		/* gedit_file_save (doc, title); Why save it ? Chema */
 		doc->filename = g_strdup (title);
 		doc->changed = FALSE;
 		return TRUE;

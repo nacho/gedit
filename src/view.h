@@ -66,7 +66,7 @@ struct _View
 	
 	gint word_wrap;
 	gint line_wrap;
-	gint read_only;
+	gint readonly;
 	
 	/* Temporary flags */
 	gpointer temp1;
@@ -92,7 +92,7 @@ View *		gedit_view_current	(void);
 /* View settings */
 void	gedit_view_set_font		(View *view, gchar *font);
 void	gedit_view_set_word_wrap	(View *view, gint word_wrap);
-void	gedit_view_set_read_only	(View *view, gint read_only);
+void	gedit_view_set_readonly		(View *view, gint readonly);
 void	gedit_view_set_split_screen	(View *view, gint split_screen);
 
 /* Scrolled window */

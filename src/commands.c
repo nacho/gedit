@@ -109,11 +109,14 @@ tab_none_cb(GtkWidget *widget, gpointer cbwindow)
 	gtk_notebook_set_show_tabs(GTK_NOTEBOOK(w->notebook), w->show_tabs);
 }*/ 
 
+
+#if 0
 void
 auto_indent_toggle_cb (GtkWidget *w, gpointer cbdata)
 {
 	gedit_window_set_auto_indent (!settings->auto_indent);
 }
+#endif
 
 void
 filenames_dropped (GtkWidget        *widget,
@@ -127,7 +130,7 @@ filenames_dropped (GtkWidget        *widget,
 	GList *names, *tmp_list;
 	Document *doc;
 
-	gedit_debug("F:filenames_dropped\n", DEBUG_FILE);
+	gedit_debug("", DEBUG_FILE);
 	
 	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
 	tmp_list = names;
@@ -135,9 +138,6 @@ filenames_dropped (GtkWidget        *widget,
 	while (tmp_list)
 	{
 		doc = gedit_document_new_with_file ((gchar *)tmp_list->data);
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	        
 		tmp_list = tmp_list->next;
 	}
 }
@@ -221,7 +221,7 @@ options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 	if (!gedit_document_current())
 		return;
 
-	gedit_view_set_read_only (view, !view->read_only);
+	gedit_view_set_readonly (view, !view->readonly);
 }
 
 void

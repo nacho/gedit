@@ -107,7 +107,7 @@ search_start (void)
 
 	gedit_search_info.view = gedit_view_current();
 	gedit_search_info.doc = gedit_document_current();
-	gedit_search_info.original_readonly_state = gedit_search_info.view->read_only;
+	gedit_search_info.original_readonly_state = gedit_search_info.view->readonly;
 #if 0 /* Speed problems when using large files. Chema */
 	gedit_view_set_read_only (gedit_search_info.view, TRUE);
 #endif

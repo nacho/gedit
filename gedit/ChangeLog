@@ -1,5 +1,16 @@
+2000-06-05  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_create_popup): rename
+
+	* document.c (gedit_get_document_tab_name): rewrite. This is the only function
+
 2000-06-04  Chema Celorio  <chema@celorio.com>
 
+	* document.h (struct _Document): clean the structure.
+
+2000-06-04  Chema Celorio  <chema@celorio.com>
+
+	* file.c (file_revert_cb): before reverting a file delete it's text.
 
 	* search.c: remove all direct access to the text
 	and mdi. Use the new functions to make the code textwidget and mdi

@@ -326,8 +326,6 @@ doc_swaphc_cb (GtkWidget *widget, gpointer data)
 	/* hmm maybe whe should check if the file exist before we try
 	 * to open.  this will be fixed later....  */
 	doc = gedit_document_new_with_file (newfname);
-	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 }
 
 

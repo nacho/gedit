@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence, Jason Leach, Jose M Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,23 +28,19 @@
 #include "document.h"
 
 /* we should be able to not expose this functions ...*/
-extern gint gedit_file_open (Document *doc, gchar *fname);
-extern gint gedit_file_stdin (Document *doc);
-extern gint gedit_file_save (Document *doc, gchar *fname);
-/* extern gint gedit_file_stdin (Document *doc);*/
+gint gedit_file_open (Document *doc, gchar *fname);
+gint gedit_file_stdin (Document *doc);
+gint gedit_file_save (Document *doc, gchar *fname);
+gint gedit_file_create_popup (guchar *title);
 
-extern void file_new_cb (GtkWidget *widget, gpointer cbdata);
-
-extern void file_open_cb (GtkWidget *widget, gpointer cbdata);
-
-extern void file_save_cb (GtkWidget *widget);
-extern void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
-extern void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
-
-extern void file_close_cb (GtkWidget *widget, gpointer cbdata);
-extern void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
-
-extern void file_revert_cb (GtkWidget *widget, gpointer cbdata);
+void file_new_cb (GtkWidget *widget, gpointer cbdata);
+void file_open_cb (GtkWidget *widget, gpointer cbdata);
+void file_save_cb (GtkWidget *widget);
+void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
+void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
+void file_close_cb (GtkWidget *widget, gpointer cbdata);
+void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
+void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 
 #endif /* __FILE_H__ */
 
