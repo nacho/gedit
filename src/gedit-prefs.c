@@ -334,10 +334,16 @@ gedit_prefs_load_settings (void)
 	gchar *str_color = NULL;
 
 	gedit_debug (DEBUG_PREFS, "START");
-	g_return_if_fail (gedit_gconf_client != NULL);
-
+	
 	if (gedit_settings == NULL)
 		gedit_settings = g_new0 (GeditPreferences, 1);
+
+	if (gedit_gconf_client == NULL)
+	{
+		/* TODO: in any case set default values */
+		g_warning ("Cannot load settings.");
+		return;
+	}
 
 	gedit_settings->use_default_font = gconf_client_get_bool (
 				gedit_gconf_client,

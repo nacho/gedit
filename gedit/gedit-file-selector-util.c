@@ -62,11 +62,15 @@
 #include <gtk/gtksignal.h>
 #include <gtk/gtkmessagedialog.h>
 #include <gtk/gtkeditable.h>
+#include <gtk/gtkstock.h>
 
 #include <bonobo/bonobo-i18n.h>
 
 #include <libgnomevfs/gnome-vfs-uri.h>
 #include <libgnomevfs/gnome-vfs-ops.h>
+
+#include "gnome-vfs-helpers.h"
+#include "gedit-utils.h"
 
 #define GET_MODE(w) (GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (w), "GnomeFileSelectorMode")))
 #define SET_MODE(w, m) (gtk_object_set_data (GTK_OBJECT (w), "GnomeFileSelectorMode", GINT_TO_POINTER (m)))
@@ -90,21 +94,28 @@ replace_existing_file (GtkWindow *parent, const gchar* file_name)
 {
 	GtkWidget *msgbox;
 	gint ret;
-		
+	gchar* uri;
+	
+	uri = gnome_vfs_x_format_uri_for_display (file_name);
 	msgbox = gtk_message_dialog_new (parent,
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			GTK_MESSAGE_QUESTION,
-			GTK_BUTTONS_CANCEL,
-			_("A file named ''%s'' already exists."
+			GTK_BUTTONS_NONE,
+			_("A file named ''%s'' already exists.\n"
 			  "Do you want to replace it with the "
 			  "one you are saving?"), 
-			file_name);
+			uri);
+	g_free (uri);
 
-	gtk_dialog_add_button (GTK_DIALOG (msgbox),
-			_("_Replace"), GTK_RESPONSE_YES);
+	/* Add Don't Replace button */
+	gedit_dialog_add_button (GTK_DIALOG (msgbox), 
+			_("Do_n't replace"), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 
-	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), 
-			GTK_RESPONSE_CANCEL);
+	/* Add Replace button */
+	gedit_dialog_add_button (GTK_DIALOG (msgbox), 
+			_("_Replace"), GTK_STOCK_REFRESH, GTK_RESPONSE_YES);
+
+	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
 
 	ret = gtk_dialog_run (GTK_DIALOG (msgbox));
 		
@@ -153,12 +164,15 @@ listener_cb (BonoboListener *listener,
 		GnomeVFSURI *uri = gnome_vfs_uri_new (seq->_buffer[0]);
 
 		if (gnome_vfs_uri_exists (uri)) 
-			if (!replace_existing_file (GTK_WINDOW (dialog), seq->_buffer[0])) {
+		{
+			if (!replace_existing_file (GTK_WINDOW (dialog), seq->_buffer[0])) 
+			{
 				gnome_vfs_uri_unref (uri);
 				g_free (subtype);
 				return;
 			}
-
+		}
+			
 		gnome_vfs_uri_unref (uri);
 
 		gtk_object_set_user_data (GTK_OBJECT (dialog),

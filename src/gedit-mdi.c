@@ -45,6 +45,7 @@
 #include "gedit-recent.h" 
 #include "gedit-file.h"
 #include "gedit-view.h"
+#include "gedit-utils.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -507,6 +508,7 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 		GtkWidget *msgbox, *w;
 		gchar *fname = NULL, *msg = NULL;
 		gint ret;
+		gboolean exiting;
 
 		w = GTK_WIDGET (g_list_nth_data (bonobo_mdi_child_get_views (child), 0));
 			
@@ -523,17 +525,35 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 				  "Your changes will be lost if you don't save them."),
 				fname);
 
-	      	gtk_dialog_add_button (GTK_DIALOG (msgbox),
-                             _("_Don't save"),
-                             GTK_RESPONSE_NO);
+		gedit_dialog_add_button (GTK_DIALOG (msgbox),
+				_("Do_n't save"), GTK_STOCK_NO,
+				GTK_RESPONSE_NO);
+
+		if (gedit_close_x_button_pressed)
+			exiting = FALSE;
+		else if (gedit_exit_button_pressed)
+			exiting = TRUE;
+		else
+		{
+			/* Delete event generated */
+			if (g_list_length (bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi))) == 1)
+				exiting = TRUE;
+			else
+				exiting = FALSE;
+		}
+			
+		if (exiting)
+			gedit_dialog_add_button (GTK_DIALOG (msgbox),
+					_("_Don't quit"), GTK_STOCK_CANCEL,
+                	             	GTK_RESPONSE_CANCEL);
+		else
+			gedit_dialog_add_button (GTK_DIALOG (msgbox),
+					_("_Don't close"), GTK_STOCK_CANCEL,
+                	             	GTK_RESPONSE_CANCEL);
 
 		gtk_dialog_add_button (GTK_DIALOG (msgbox),
-                             GTK_STOCK_CANCEL,
-                             GTK_RESPONSE_CANCEL);
-
-		gtk_dialog_add_button (GTK_DIALOG (msgbox),
-                             GTK_STOCK_SAVE,
-                             GTK_RESPONSE_YES);
+			       	GTK_STOCK_SAVE,
+				GTK_RESPONSE_YES);
 
 		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_YES);
 
@@ -559,6 +579,11 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 		gedit_debug (DEBUG_MDI, "CLOSE: %s", close ? "TRUE" : "FALSE");
 	}
 	
+	/* FIXME: there is a bug if you "close all" >1 docs, don't save the document
+	 * and then don't close the last one.
+	 */
+	/* Disable to avoid the bug */
+	/*
 	if (close)
 	{
 		gtk_signal_disconnect_by_func (GTK_OBJECT (child), 
@@ -568,6 +593,7 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 				       GTK_SIGNAL_FUNC (gedit_mdi_child_undo_redo_state_changed_handler),
 				       NULL);
 	}
+	*/
 	
 	return close;
 }

@@ -4,7 +4,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence, Jason Leach
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -52,18 +52,20 @@
 
 #define GEDIT_RECENT_BASE_KEY "/apps/gedit2/recent-files"
 
+static gchar* 	gedit_recent_escape_underscores (const gchar* text);
+
 static void 	gedit_recent_update_menus 	(BonoboWindow *win, GList *recent_files);
 static void 	gedit_recent_cb 		(BonoboUIComponent *uic, gpointer user_data, 
 						 const gchar* verbname);
 static void 	gedit_recent_remove 		(char *filename);
-static GList   *recent_history_get_list 	(void);
-static gchar   *recent_history_update_list 	(const gchar *filename);
+static GList   *gedit_recent_history_get_list 	(void);
+static gchar   *gedit_recent_history_update_list(const gchar *filename);
 
 static GList        *gedit_recent_history_list = NULL;
 static GConfClient  *gedit_gconf_client        = NULL;
 
 static gchar* 
-escape_underscores (const gchar* text)
+gedit_recent_escape_underscores (const gchar* text)
 {
 	GString *str;
 	gint length;
@@ -101,12 +103,14 @@ escape_underscores (const gchar* text)
 }
 
 static GList *
-recent_history_get_list (void)
+gedit_recent_history_get_list (void)
 {
         gchar *filename, *key;
         gint i;
 
 	gedit_debug (DEBUG_RECENT, "");
+	
+	g_return_val_if_fail (gedit_gconf_client != NULL, NULL);
 	
 	if (gedit_recent_history_list)
 		return gedit_recent_history_list;
@@ -130,7 +134,7 @@ recent_history_get_list (void)
 }
 
 /**
- * recent_history_update_list:
+ * gedit_recent_history_update_list:
  * @filename: 
  * 
  * This function updates the history list.  The return value is a 
@@ -140,7 +144,7 @@ recent_history_get_list (void)
  * Return value: 
  **/
 static gchar *
-recent_history_update_list (const gchar *filename)
+gedit_recent_history_update_list (const gchar *filename)
 {
         gchar *removed = NULL;
         GList *l = NULL;
@@ -190,6 +194,8 @@ gedit_recent_history_save (void)
         gint i = 1;
 
 	gedit_debug (DEBUG_RECENT, "");
+
+	g_return_if_fail (gedit_gconf_client != NULL);
 
         for (l = gedit_recent_history_list; l; l = l->next) {
                 key = g_strdup_printf ("%s/file%d", GEDIT_RECENT_BASE_KEY, i++);
@@ -241,7 +247,7 @@ gedit_recent_update_menus (BonoboWindow *win, GList *recent_files)
 
 		uri = gnome_vfs_x_format_uri_for_display (g_list_nth_data (recent_files, i - 1));
 	
-		escaped_name = escape_underscores (uri);
+		escaped_name = gedit_recent_escape_underscores (uri);
 
 		tip =  g_strdup_printf (_("Open file %s"), uri);
 
@@ -334,7 +340,7 @@ gedit_recent_update (BonoboWindow *win)
 
 	gedit_debug (DEBUG_RECENT, "");
 
-	filelist = recent_history_get_list ();
+	filelist = gedit_recent_history_get_list ();
 
 	gedit_recent_update_menus (win, filelist);
 }
@@ -383,7 +389,7 @@ gedit_recent_add (const char *filename)
 	uri = gnome_vfs_x_make_uri_canonical (filename);
 	g_return_if_fail (uri != NULL);
 
-	del_name = recent_history_update_list (uri);
+	del_name = gedit_recent_history_update_list (uri);
 
 	g_free (uri);
 	g_free (del_name);
@@ -422,6 +428,9 @@ gedit_recent_init (BonoboWindow *win)
 	BonoboUIComponent* ui_component;
 	int i;
 
+	gedit_gconf_client = gconf_client_get_default ();
+	g_return_if_fail (gedit_gconf_client != NULL);
+
 	ui_component = bonobo_mdi_get_ui_component_from_window (win);
 	g_return_if_fail (BONOBO_IS_UI_COMPONENT (ui_component));
 	
@@ -445,8 +454,6 @@ gedit_recent_init (BonoboWindow *win)
 
 	
 	bonobo_ui_component_thaw (ui_component, NULL);
-
-	gedit_gconf_client = gconf_client_get_default ();
 
 	gconf_client_add_dir (gedit_gconf_client,
 			      GEDIT_RECENT_BASE_KEY,

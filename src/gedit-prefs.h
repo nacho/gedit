@@ -95,13 +95,7 @@ struct _GeditPreferences
 	gint 		window_width;
 	gint		window_height;
 
-#if 0 /*TO BE CLEANED*/
-	gint print_wrap_lines : 1;        /* Printing stuf ...*/
-	gint print_lines;
-	gint print_header;
-	gint print_orientation;
-	gchar *papersize;
-#endif
+	/* Printing stuff */
 	gboolean 	 print_header;
 	gboolean	 print_wrap_lines;
 	gint		 print_line_numbers;

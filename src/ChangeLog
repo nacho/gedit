@@ -1,3 +1,28 @@
+2002-01-11  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit2.[ch]: added flags gedit_close_x_button_pressed and
+	gedit_exit_button_pressed 
+
+	* gedit-commands.c (gedit_cmd_file_close): update 
+	gedit_close_x_button_pressed
+	(gedit_cmd_file_close_all): ditto
+	(gedit_cmd_file_exit): update gedit_exit_button_pressed
+
+	* gedit-utils.[ch] (gedit_dialog_add_button): new function
+
+	* gedit-file-selector-util.c (replace_existing_file): use new
+	gedit_dialog_add_button function
+
+	* gedit-prefs.h: cleaned
+
+	* gedit-recent.c: renamed some functions (now all the function
+	as the gedit prefix)
+
+	* gedit-file.c: finished porting to the new gedit-file-selector API
+	(gedit_file_save_as_real): new function
+	(gedit_file_save_as_ok_button_clicked_handler): call 
+	gedit_file_save_as_real
+
 2002-01-10  Jason Leach  <jasonleach@usa.net>
 
 	[Use gconf to store recent documents opened]

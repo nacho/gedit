@@ -268,3 +268,25 @@ gedit_button_new_with_stock_image (const gchar* text, const gchar* stock_id)
 	return button;
 }
 
+GtkWidget*
+gedit_dialog_add_button (GtkDialog *dialog, const gchar* text, const gchar* stock_id,
+			 gint response_id)
+{
+	GtkWidget *button;
+	
+	g_return_val_if_fail (GTK_IS_DIALOG (dialog), NULL);
+	g_return_val_if_fail (text != NULL, NULL);
+	g_return_val_if_fail (stock_id != NULL, NULL);
+
+	button = gedit_button_new_with_stock_image (text, stock_id);
+	g_return_val_if_fail (button != NULL, NULL);
+
+	GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+
+	gtk_widget_show (button);
+
+	gtk_dialog_add_action_widget (dialog, button, response_id);	
+
+	return button;
+}
+

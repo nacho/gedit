@@ -44,6 +44,10 @@
 
 #define USE_BONOBO_FILE_SEL_API	
 
+#ifndef USE_BONOBO_FILE_SEL_API
+static GtkWidget *open_file_selector = NULL;
+static GtkWidget *save_file_selector = NULL;
+
 static gint gedit_file_selector_delete_event_handler (GtkWidget *widget, 
 						      GdkEventAny *event);
 static void gedit_file_selector_cancel_button_clicked_handler (GtkWidget *w,
@@ -54,14 +58,13 @@ static void gedit_file_open_ok_button_clicked_handler (GtkWidget *widget,
 						   GeditMDIChild *active_child);
 static void gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, 
 							GeditMDIChild *child);
-
 static GSList*  gedit_file_selector_get_filenames (GtkFileSelection *file_selector);
 static gboolean gedit_file_open_is_dir (GtkFileSelection *file_selector);
+#endif
 
 static gboolean gedit_file_open_real (const gchar* file_name, GeditMDIChild* child);
+static gboolean gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child);
 
-static GtkWidget *open_file_selector = NULL;
-static GtkWidget *save_file_selector = NULL;
 
 void 
 gedit_file_new (void)
@@ -115,6 +118,8 @@ gedit_file_close (GtkWidget *view)
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
 		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
 }
+
+#ifndef USE_BONOBO_FILE_SEL_API
 
 static gint
 gedit_file_selector_delete_event_handler (GtkWidget *widget, GdkEventAny *event)
@@ -259,7 +264,7 @@ gedit_file_open_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *act
 		
 	return;
 }
-
+#endif
 
 void
 gedit_file_open (GeditMDIChild *active_child)
@@ -572,6 +577,8 @@ gedit_file_save (GeditMDIChild* child)
 gboolean
 gedit_file_save_as (GeditMDIChild *child)
 {
+#ifndef USE_BONOBO_FILE_SEL_API
+
 	gint ok_signal_id = 0;
 	GeditDocument* doc = NULL;
 	gchar *fname = NULL;
@@ -639,13 +646,53 @@ gedit_file_save_as (GeditMDIChild *child)
 			ok_signal_id);
 
 	return !gedit_document_get_modified (child->document);
+
+#else		
+	gchar* file;
+	gboolean ret = FALSE;
+	GeditDocument *doc;
+	gchar* fname;
+
+	gedit_debug (DEBUG_FILE, "");
+
+	g_return_val_if_fail (child != NULL, FALSE);
+
+	doc = child->document;
+	g_return_val_if_fail (doc != NULL, FALSE);
+
+	fname = gedit_document_get_uri (doc);
+
+	file = gedit_file_selector_save (
+			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			FALSE,
+		        _("Save as ..."), 
+			NULL, 
+			NULL,
+			fname);
+	g_free (fname);
+
+	if (file) 
+	{
+		gedit_utils_flash_va (_("Saving file '%s' ..."), file);
+		
+		ret = gedit_file_save_as_real (file, child);
+		
+		if (ret)
+			gedit_utils_flash_va (_("File '%s' saved."), file);
+		else
+			gedit_utils_flash_va (_("The document has not been saved."));
+
+		gedit_debug (DEBUG_FILE, "File: %s", file);
+		g_free (file);
+	}
+
+	return ret;
+#endif
 }
 
-static void
-gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *child)
+static gboolean
+gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 {
-	GtkFileSelection *file_selector;
-	const gchar *file_name;
 	gchar *uri;
 	gboolean ret;
 	GeditDocument *doc = NULL;
@@ -653,53 +700,13 @@ gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *
 
 	gedit_debug (DEBUG_FILE, "");
 
-	g_return_if_fail (child != NULL);
+	g_return_val_if_fail (child != NULL, FALSE);
 
 	doc = child->document;
-	g_return_if_fail (doc != NULL);
-
-	g_return_if_fail (GTK_IS_FILE_SELECTION (save_file_selector));
-	file_selector = GTK_FILE_SELECTION (save_file_selector);
-
-	if (gedit_file_open_is_dir (file_selector))
-		return;
-
-	file_name = gtk_file_selection_get_filename (file_selector);
-	g_return_if_fail (file_name != NULL);
-	
-	if (g_file_test (file_name, G_FILE_TEST_EXISTS))
-	{
-		GtkWidget *msgbox;
-		gint ret;
-		
-		msgbox = gtk_message_dialog_new (GTK_WINDOW (file_selector),
-				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_QUESTION,
-				GTK_BUTTONS_CANCEL,
-				_("A file named ``%s'' already exists in this location. Do you want to "
-				  "replace it with the one you are saving?"), 
-				file_name);
-
-		gtk_dialog_add_button (GTK_DIALOG (msgbox),
-                             _("_Replace"),
-                             GTK_RESPONSE_YES);
-
-		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
-
-		ret = gtk_dialog_run (GTK_DIALOG (msgbox));
-		
-		gtk_widget_destroy (msgbox);
-
-		if (ret != GTK_RESPONSE_YES)
-			return;
-	}
-
-	gtk_widget_hide (GTK_WIDGET (file_selector));
+	g_return_val_if_fail (doc != NULL, FALSE);
 
 	uri = gnome_vfs_x_make_uri_canonical (file_name);
-	g_return_if_fail (uri != NULL);
-	
-	gedit_utils_flash_va (_("Saving file '%s' ..."), file_name);	
+	g_return_val_if_fail (uri != NULL, FALSE);
 	
 	ret = gedit_document_save_as (doc, uri, &error);
 
@@ -740,26 +747,91 @@ gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *
 
 		if (error != NULL)
 			g_error_free (error);
+		
+		g_free (uri);
 
-		gedit_utils_flash_va (_("The document has not been saved."));
+		return FALSE;
 		
 	}	
 	else
 	{
 		gedit_debug (DEBUG_FILE, "OK");
 
-		gedit_utils_flash_va (_("File '%s' saved."), file_name);
-
 		gedit_recent_add (uri);
 		gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi)); 
+
+		g_free (uri);
+
+		return TRUE;
+	}
+}
+
+#ifndef USE_BONOBO_FILE_SEL_API
+
+static void
+gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *child)
+{
+	GtkFileSelection *file_selector;
+	const gchar *file_name;
+	gboolean ret;
+
+	gedit_debug (DEBUG_FILE, "");
+
+	g_return_if_fail (child != NULL);
+
+	g_return_if_fail (GTK_IS_FILE_SELECTION (save_file_selector));
+	file_selector = GTK_FILE_SELECTION (save_file_selector);
+
+	if (gedit_file_open_is_dir (file_selector))
+		return;
+
+	file_name = gtk_file_selection_get_filename (file_selector);
+	g_return_if_fail (file_name != NULL);
+	
+	if (g_file_test (file_name, G_FILE_TEST_EXISTS))
+	{
+		GtkWidget *msgbox;
+		gint ret;
+		
+		msgbox = gtk_message_dialog_new (GTK_WINDOW (file_selector),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_QUESTION,
+				GTK_BUTTONS_CANCEL,
+				_("A file named ``%s'' already exists in this location. Do you want to "
+				  "replace it with the one you are saving?"), 
+				file_name);
+
+		gtk_dialog_add_button (GTK_DIALOG (msgbox),
+                             _("_Replace"),
+                             GTK_RESPONSE_YES);
+
+		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
+
+		ret = gtk_dialog_run (GTK_DIALOG (msgbox));
+		
+		gtk_widget_destroy (msgbox);
+
+		if (ret != GTK_RESPONSE_YES)
+			return;
 	}
 
-	g_free (uri);
-	
+	gtk_widget_hide (GTK_WIDGET (file_selector));
+
+	gedit_utils_flash_va (_("Saving file '%s' ..."), file_name);
+		
+	ret = gedit_file_save_as_real (file_name, child);
+		
+	if (ret)
+		gedit_utils_flash_va (_("File '%s' saved."), file_name);
+	else
+		gedit_utils_flash_va (_("The document has not been saved."));
+
 	gtk_main_quit ();
 	
 	return;
 }
+
+#endif
 
 gboolean
 gedit_file_close_all (void)
@@ -779,7 +851,7 @@ void
 gedit_file_exit (void)
 {
 	gedit_debug (DEBUG_FILE, "");
-
+	
 	if (!gedit_file_close_all ())
 		return;
 

@@ -4,7 +4,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence, Jason Leach
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -46,7 +46,9 @@
 #define GNOME_ICONDIR "" 
 #endif
 
-GeditMDI *gedit_mdi = NULL; 
+GeditMDI *gedit_mdi = NULL;
+gboolean gedit_close_x_button_pressed = FALSE;
+gboolean gedit_exit_button_pressed = FALSE; 
 
 static void gedit_set_default_icon ();
 static void gedit_load_file_list (GList *file_list);

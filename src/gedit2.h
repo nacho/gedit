@@ -34,6 +34,8 @@
 #include <gedit-mdi.h>
 
 extern GeditMDI* gedit_mdi;
+extern gboolean gedit_close_x_button_pressed;
+extern gboolean gedit_exit_button_pressed;
 
 #endif /* __GEDIT2_H__ */
 
