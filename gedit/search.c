@@ -203,7 +203,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	gedit_search_end();
 
 	msg = g_strdup_printf (_("Filename: %s\n\nTotal Lines: %i\nCurrent Line: %i"),
-			       doc->filename, total_lines, line_number);
+			       gedit_document_get_tab_name (doc), total_lines, line_number);
 			
 	gnome_dialog_run_and_close ((GnomeDialog *)
 				    gnome_message_box_new (msg,

@@ -1,8 +1,8 @@
-<!DOCTYPE Article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.0//EN"[
+<!DOCTYPE Article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
         <!-- if not using PNG graphic, replace reference above with
              .....PUBLIC "-//OASIS//DTD DocBook V3.1//EN"[
          -->
-<!ENTITY version "0.7.1">
+<!ENTITY version "0.7.9">
         <!-- replace with actual application version number-->
 ]>
 
@@ -151,7 +151,7 @@
      <title>gedit Main Window</title>
      <screenshot>
       <screeninfo>gedit Main Window</screeninfo>
-      <graphic fileref="mainwin" format="png"
+      <graphic fileref="figures/mainwin" format="png"
        srccredit="dkw">
       </graphic>
      </screenshot>
@@ -575,7 +575,7 @@
      <title>gedit Toolbar</title>
      <screenshot>
       <screeninfo>gedit Toolbar</screeninfo>
-      <graphic fileref="toolbar" format="png"
+      <graphic fileref="figures/toolbar" format="png"
        srccredit="dkw">
       </graphic>
      </screenshot>
@@ -675,7 +675,7 @@
    <title>Preferences Dialog</title>
    <screenshot>
     <screeninfo>Preferences dialog</screeninfo>
-    <graphic fileref="preferences" format="png"
+    <graphic fileref="figures/preferences" format="png"
      srccredit="dkw">
     </graphic>
    </screenshot>
@@ -925,6 +925,16 @@
       </para>
      </listitem>
 
+     <listitem>
+      <para>
+       <menuchoice>
+        <guimenuitem>Reverse</guimenuitem>
+       </menuchoice>
+       &mdash; Reverse the text. Where the first character becomes the last
+       character and the last character is the first one.
+      </para>
+     </listitem>
+
     </itemizedlist>
    </para>
  </sect1>
@@ -944,7 +954,7 @@
   <para>
    <application>gedit</application> requires the latest
    <application>gnome-print</application>, either version
-   0.19 or <ulink url="http://cvs.gnome.org" type="http">cvs</ulink>,
+   0.20 or <ulink url="http://cvs.gnome.org" type="http">cvs</ulink>,
    to print properly.
   </para>
 
@@ -955,28 +965,9 @@
    will not exit as expected.
   </para>
 
-  <para> The following features contain bugs due to a problem with
-   the text widget we are using. We paln to migrate to Tktext in
-   the future to resolve these problems:
-   <itemizedlist>
-    <listitem>
-     <para>
-      Search and replace
-     </para>
-    </listitem>
-    <listitem>
-     <para>
-      Line and Column numbering
-     </para>
-    </listitem>
-    <listitem>
-     <para>
-      Syntax Highlighting &mdash; Support for syntax highlighting is
-      being considered. We feel that such support may not be
-      appropriate for gedit.
-     </para>
-    </listitem>
-   </itemizedlist>  
+  <para>
+    At this point gedit does not have syntax higthlightning. The current
+    text widget that we are using is not suitable for this feature.
   </para>
  </sect1>
 
@@ -994,6 +985,7 @@
    </ulink> and <ulink url="mailto:chema@celorio.com" type="mailto">
    Chema Celorio</ulink> have taken over development responsibilities
    and have rewritten major parts of the code.
+  </para>
 
   <para>
    Please send all comment about this manual to the author,
