@@ -120,8 +120,8 @@ gedit_load_settings (void)
 	settings->width = gnome_config_get_int ("width=600");
 	settings->height = gnome_config_get_int ("height=400");
 	 
-	settings->printwrap = gnome_config_get_bool ("printwrap");
-	settings->printheader = gnome_config_get_bool ("printheader");
+	settings->printwrap = gnome_config_get_bool ("printwrap=TRUE");
+	settings->printheader = gnome_config_get_bool ("printheader=TRUE");
 	settings->printlines = gnome_config_get_int ("printlines=0");
 	 
 	settings->font = gnome_config_get_string ("font");
