@@ -101,16 +101,12 @@ static const struct poptOption options [] =
 static void 
 gedit_set_default_icon ()
 {
-	if (!g_file_test (GNOME_ICONDIR "/gedit-icon.png", G_FILE_TEST_EXISTS))
+	if (!gtk_window_set_default_icon_from_file (GNOME_ICONDIR "/gedit-icon.png", NULL))
 	{
-		g_warning ("Could not find %s", GNOME_ICONDIR "/gedit-icon.png");
-	    
+		g_warning ("Could not set the main window icon.");
+
 		/* In case we haven't yet been installed */
-		gnome_window_icon_set_default_from_file ("../pixmaps/gedit-icon.png");
-	}
-	else
-	{
-		gnome_window_icon_set_default_from_file (GNOME_ICONDIR "/gedit-icon.png");
+		gtk_window_set_default_icon_from_file ("../pixmaps/gedit-icon.png", NULL);
 	}
 }
 
@@ -329,7 +325,15 @@ main (int argc, char **argv)
 			    GNOME_PARAM_APP_DATADIR, DATADIR,
 			    NULL);
 
+	/* Must be called after gnome_program_init to avoid problem with the
+         * translation of --help messages */
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+
+	/* Need to set this to the canonical DISPLAY value, since
+	   that's where we're registering per-display components */
+	bonobo_activation_set_activation_env_value
+		("DISPLAY",
+		 gdk_screen_make_display_name (gdk_screen_get_default ()));
 
 	/* check whether we are running already */
         factory = bonobo_activation_activate_from_id

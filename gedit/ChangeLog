@@ -1,3 +1,12 @@
+2005-02-01  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit2.c (gedit_set_default_icon): uses 
+	gtk_window_set_default_icon_from_file instead of 
+	gnome_window_icon_set_default_from_file
+	(main): sets the activation env to the canonical DISPLAY value,
+	fixes bug #157147 (per display registration fails if DISPLAY 
+	env is not complete)
+
 2005-01-27  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-mdi.c: plug small memory leak.
@@ -12,7 +21,7 @@
 
 	* gedit-convert.[ch] (gedit_convert_from_utf8): returns the size of
 	the converted text (as number of bytes)
-
+	
 	* gedit-document.c (gedit_document_save_as_real): fixes 
 	bug #156423 (Saving in UTF-16 encoding destroys files)
 
