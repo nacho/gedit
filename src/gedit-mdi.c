@@ -318,7 +318,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	/* add a GeditRecent object */
 	/* FIXME: maybe max recent files should be a pref? */
 	recent = gedit_recent_new_with_ui_component ("gedit",
-						     10,
+						     4,
 						     ui_component,
 						     "/menu/File/Recents");
 	g_signal_connect (G_OBJECT (recent), "activate",
@@ -615,18 +615,38 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 		goto error;
 
 	if (gedit_settings->statusbar_view_cursor_position)
-		gtk_widget_show (cp);
-	else
-		gtk_widget_hide (cp);
+	{
+		bonobo_ui_component_set_prop (
+			ui_component, "/status/CursorPosition", "hidden", "0", NULL);
 
+		gtk_widget_show (cp);
+	}
+	else
+	{
+		bonobo_ui_component_set_prop (
+			ui_component, "/status/CursorPosition", "hidden", "1", NULL);
+
+		gtk_widget_hide (cp);
+	}
+	
 	om = GTK_WIDGET (g_object_get_data (G_OBJECT (win), "OverwriteMode"));
 	if (om == NULL)
 		goto error;
 
 	if (gedit_settings->statusbar_view_overwrite_mode)
+	{
 		gtk_widget_show (om);
+		
+		bonobo_ui_component_set_prop (
+			ui_component, "/status/OverwriteMode", "hidden", "0", NULL);
+	}
 	else
+	{
+		bonobo_ui_component_set_prop (
+			ui_component, "/status/OverwriteMode", "hidden", "1", NULL);
+		
 		gtk_widget_hide (om);
+	}
 
 	if (!gedit_settings->statusbar_view_overwrite_mode)
 		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (cp), TRUE);
@@ -636,10 +656,10 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	if (!gedit_settings->statusbar_view_cursor_position &&
 	    !gedit_settings->statusbar_view_overwrite_mode)
 		bonobo_ui_component_set_prop (
-			ui_component, "/status/main", "resize_grip", "1", NULL);
+			ui_component, "/status", "resize_grip", "1", NULL);
 	else
 		bonobo_ui_component_set_prop (
-			ui_component, "/status/main", "resize_grip", "0", NULL);
+			ui_component, "/status", "resize_grip", "0", NULL);
 
 error:
 	bonobo_ui_component_thaw (ui_component, NULL);

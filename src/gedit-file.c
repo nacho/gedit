@@ -581,12 +581,15 @@ gboolean
 gedit_file_open_recent (GeditRecent *recent, const gchar *uri, gpointer data)
 {
 	gboolean ret;
+	GeditView* active_view;
 
 	gedit_debug (DEBUG_FILE, "Open : %s", uri);
 
 	ret = gedit_file_open_single_uri (uri);
 
-	gtk_widget_grab_focus (GTK_WIDGET (gedit_get_active_view ()));
+	active_view = gedit_get_active_view ();
+	if (active_view != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
 	gedit_debug (DEBUG_FILE, "END");
 
@@ -616,7 +619,7 @@ gedit_file_open_single_uri (const gchar* uri)
 {
 	gchar *full_path;
 	gboolean ret = TRUE;
-	
+
 	gedit_debug (DEBUG_FILE, "");
 	
 	if (uri == NULL) return FALSE;
@@ -625,7 +628,12 @@ gedit_file_open_single_uri (const gchar* uri)
 
 	if (full_path != NULL) 
 	{
-		ret = gedit_file_open_real (full_path, NULL);
+		BonoboMDIChild *active_child = NULL;
+
+		active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
+		
+		ret = gedit_file_open_real (full_path, 
+					    (active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL);
 		if (ret)
 			gedit_utils_flash_va (_("Loaded file '%s'"), full_path);
 
@@ -648,7 +656,7 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 
 	gedit_debug (DEBUG_FILE, "");
 	
-	fstat(STDIN_FILENO, &stats);
+	fstat (STDIN_FILENO, &stats);
 	
 	if (stats.st_size  == 0)
 		return FALSE;

@@ -1,3 +1,16 @@
+2002-03-04  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-mdi.c (gedit_mdi_set_app_statusbar_style):
+	now the resize_grip really works
+
+	* gedit-ui.xml: fixed for resize_grip
+
+	* gedit-file.c (gedit_file_open_single_uri): open
+	the new document in the active_child if this one
+	is untouched
+	(gedit_file_open_recent): don't try to grab focus
+	if no active view exists
+
 2002-02-28  James Willcox  <jwillcox@cs.indiana.edu>
 
 	* gedit-recent.c (gedit_recent_menu_cb):  Don't free the menu data
