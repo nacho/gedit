@@ -204,9 +204,12 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 void
 gedit_window_set_status_bar (gint show_status)
 {
-	settings->show_status = show_status;
+	if (settings->show_status == show_status)
+		return;
+	else
+		settings->show_status = show_status;
 
-	if ( !mdi->active_window->statusbar )
+	if (!mdi->active_window->statusbar)
 	{
 		GtkWidget *statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
 
@@ -218,7 +221,7 @@ gedit_window_set_status_bar (gint show_status)
 
 		mdi->active_window->statusbar = statusbar;
 	}
-	else if ( mdi->active_window->statusbar->parent )
+	else if (mdi->active_window->statusbar->parent)
 	{
 		gtk_widget_ref (mdi->active_window->statusbar);
 		gtk_container_remove (GTK_CONTAINER (mdi->active_window->statusbar->parent),

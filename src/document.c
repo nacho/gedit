@@ -46,8 +46,6 @@ static gchar* gedit_document_get_config_string (GnomeMDIChild *child);
 gchar* gedit_get_document_tab_name (void);
 
 GnomeMDI *mdi;
-gint mdiMode = GNOME_MDI_DEFAULT_MODE;
-
 
 typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
 
@@ -255,22 +253,6 @@ gedit_document_get_config_string (GnomeMDIChild *child)
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
 }
 
-/*
-  Seems that it is not beeing used
-  Chema
-  
-  GnomeMDIChild *
-gedit_document_new_from_config (gchar *file)
-{
-	Document *doc;
-	
-	doc = gedit_document_new_with_file (file);
-	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));        
-        
-	return GNOME_MDI_CHILD (doc);
-}*/
-
 void
 gedit_add_view (GtkWidget *w, gpointer data)
 {
@@ -371,10 +353,7 @@ gedit_mdi_init (void)
 {
 	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VERSION));
 
-	gnome_config_push_prefix ("/gedit/Global/");
-	mdi->tab_pos = gnome_config_get_int ("tab_pos=2");
-	mdiMode = gnome_config_get_int ("mdi_mode");
-	gnome_config_pop_prefix ();
+	mdi->tab_pos = settings->tab_pos;
 
 	gnome_mdi_set_menubar_template (mdi, gedit_menu);
 	gnome_mdi_set_toolbar_template (mdi, toolbar_data);
@@ -382,8 +361,7 @@ gedit_mdi_init (void)
 	gnome_mdi_set_child_menu_path (mdi, GNOME_MENU_FILE_STRING);
 	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
 
-	/* Connect signals.
-	 * FIXME:  Why are we doing this in main() ? */
+	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (mdi), "remove_child",
 			    GTK_SIGNAL_FUNC (remove_child_cb), NULL);
 	gtk_signal_connect (GTK_OBJECT (mdi), "destroy",
@@ -396,7 +374,7 @@ gedit_mdi_init (void)
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);*/
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);*/
 
-	gnome_mdi_set_mode (mdi, mdiMode);
+	gnome_mdi_set_mode (mdi, settings->mdi_mode);
 }
 
 void
@@ -453,3 +431,17 @@ add_child_cb (GnomeMDI *mdi, Document *doc)
 	return TRUE;
 }
 
+
+#if 0  
+GnomeMDIChild *
+gedit_document_new_from_config (gchar *file)
+{
+	Document *doc;
+	
+	doc = gedit_document_new_with_file (file);
+	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));        
+        
+	return GNOME_MDI_CHILD (doc);
+}
+#endif

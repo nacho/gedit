@@ -34,5 +34,6 @@ struct _gedit_data
 	gboolean flag;	/* general purpose flag to indicate if action completed */
 };
 
+void gedit_shutdown (void);
 
 #endif /* __GEDIT_H__ */

@@ -22,6 +22,7 @@
 #include <libgnome/gnome-history.h>
 
 #include "window.h"
+#include "gedit.h"
 #include "document.h"
 #include "view.h"
 #include "prefs.h"
@@ -37,85 +38,7 @@ static void recent_cb (GtkWidget *w, gedit_data *data);
        void recent_add (char *filename);
 
 
-/**
- * recent_update:
- * @app: 
- *
- * Grabs the list of recently used documents, then updates the menus by
- * calling recent_update_menus().  Should be called after each addition
- * to the recent documents list.
- **/
-void
-recent_update (GnomeApp *app)
-{
-	GList *filelist = NULL;
-	GList *gnome_recent_list;
-	GnomeHistoryEntry histentry;
-	char *filename;
-	int i, j;
-	int nrecentdocs = 0;
-
-	filelist = NULL;
-
-#if 0
-	filelist = gnome_history_get_most_recent_files_for_app ("gedit",
-								MAX_RECENT);
-#endif
-#if 1
-	gnome_recent_list = gnome_history_get_recently_used ();
-
-	if (g_list_length (gnome_recent_list) <= 0)
-	{
-		return;
-	}
-
-	for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--)
-	{
-		histentry = g_list_nth_data (gnome_recent_list, i);
-     
-		if (strcmp ("gedit", histentry->creator) != 0)
-			break;
-
-		/* FIXME : if file_1 is in the 3rd line of the recent
-		   files and I reopen it, it should be in the 1st line now.Chema*/
-		if (g_list_length (filelist) > 0)
-		{
-			for (j = g_list_length (filelist) - 1; j >= 0; j--)
-			{
-				if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
-				{
-					filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
-					nrecentdocs--;
-				}
-			}
-		}
-
-		filename = g_malloc0 (strlen (histentry->filename) + 1);
-		strcpy (filename, histentry->filename);
-		filelist = g_list_append (filelist, filename);
-		nrecentdocs++;
-				
-		/* For recent-directories, not yet fully implemented...
-		   end_path = strrchr (histentry->filename, '/');
-		   if (end_path) {
-		   for (i = 0; i < strlen (histentry->filename); i++)
-		   if ((histentry->filename + i) == end_path)
-		   break;
-		   directory = g_malloc0 (i + 2);
-		   strcat (directory, histentry->filename, i);
-		   }*/
-                   
-		if (nrecentdocs == MAX_RECENT)
-/*			if (g_list_length (filelist) == MAX_RECENT) */
-				break;
-	}
-	
-	gnome_history_free_recently_used_list (gnome_recent_list);
-#endif
-	
-	recent_update_menus (app, filelist);
-}
-
+/* Update the graphical part of the recently-used menu */
 static void
 recent_update_menus (GnomeApp *app, GList *recent_files)
 {
@@ -172,10 +95,11 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	g_free (path);
 }
 
+/* Callback for a click on a file in the recently used menu */
 static void
 recent_cb (GtkWidget *widget, gedit_data *data)
 {
-	Document *doc = gedit_document_current ();
+	Document *doc;
 	
 	g_return_if_fail (data != NULL);
 
@@ -187,11 +111,84 @@ recent_cb (GtkWidget *widget, gedit_data *data)
 	}
 	else
 	{
+		g_print ("recent_cb(): file unable to open\n");
 		/* FIXME :
 		   If an error was encountered the delete the entry
 		   from the menu ... Chema  */
 	}
+}
 
+/**
+ * recent_update:
+ * @app: 
+ *
+ * Grabs the list of recently used documents, then updates the menus by
+ * calling recent_update_menus().  Should be called after each addition
+ * to the recent documents list.
+ **/
+void
+recent_update (GnomeApp *app)
+{
+	GList *filelist = NULL;
+	GList *gnome_recent_list;
+	GnomeHistoryEntry histentry;
+	char *filename;
+	int i, j;
+	int nrecentdocs = 0;
+
+	filelist = NULL;
+
+	gnome_recent_list = gnome_history_get_recently_used ();
+
+	if (g_list_length (gnome_recent_list) <= 0)
+	{
+		return;
+	}
+
+	for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--)
+	{
+		histentry = g_list_nth_data (gnome_recent_list, i);
+     
+		if (strcmp ("gedit", histentry->creator) != 0)
+			break;
+
+		/* FIXME : if file_1 is in the 3rd line of the recent
+		   files and I reopen it, it should be in the 1st line now.Chema*/
+		if (g_list_length (filelist) > 0)
+		{
+			for (j = g_list_length (filelist) - 1; j >= 0; j--)
+			{
+				if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
+				{
+					filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
+					nrecentdocs--;
+				}
+			}
+		}
+
+		filename = g_malloc0 (strlen (histentry->filename) + 1);
+		strcpy (filename, histentry->filename);
+		filelist = g_list_append (filelist, filename);
+		nrecentdocs++;
+				
+		/* For recent-directories, not yet fully implemented...
+		   end_path = strrchr (histentry->filename, '/');
+		   if (end_path) {
+		   for (i = 0; i < strlen (histentry->filename); i++)
+		   if ((histentry->filename + i) == end_path)
+		   break;
+		   directory = g_malloc0 (i + 2);
+		   strcat (directory, histentry->filename, i);
+		   }*/
+                   
+		if (nrecentdocs == MAX_RECENT)
+/*			if (g_list_length (filelist) == MAX_RECENT) */
+				break;
+	}
+	
+	gnome_history_free_recently_used_list (gnome_recent_list);
+	
+	recent_update_menus (app, filelist);
 }
 
 /**

@@ -49,14 +49,16 @@ tab_pos (GtkPositionType pos)
 	GnomeApp *app;
 	GtkWidget *book;
 	
-	if (mdiMode != GNOME_MDI_NOTEBOOK)
+	if ((settings->mdi_mode != GNOME_MDI_NOTEBOOK)
+	    && (settings->mdi_mode != GNOME_MDI_DEFAULT_MODE))
 		return;
 	
 	for (i = 0; i < g_list_length (mdi->windows); i++)
 	{
 		app = g_list_nth_data (mdi->windows, i);
 		book = app->contents;
-		gtk_notebook_set_tab_pos (GTK_NOTEBOOK(book), pos);
+		if (GTK_IS_NOTEBOOK (book))
+			gtk_notebook_set_tab_pos (GTK_NOTEBOOK(book), pos);
 	}
 }
    

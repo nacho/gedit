@@ -12,12 +12,14 @@ noinst_LIBRARIES = libdialogs.a
 
 libdialogs_a_SOURCES = 		\
 	dialog-about.c		\
+	dialog-find-line.c	\
+	dialog-prefs.c		\
 	dialog-replace.c	\
-	dialog-search.c		\
-	dialog-find-line.c
+	dialog-search.c
 
 glade_DATA =		\
 	find-line.glade \
+	prefs.glade	\
 	search.glade	\
 	replace.glade
 

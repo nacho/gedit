@@ -22,7 +22,6 @@
 #define __VIEW_H__
 
 #include "document.h"
-#include "gedit.h"
 
 #define VIEW(obj)		GTK_CHECK_CAST (obj, gedit_view_get_type (), View)
 #define VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_view_get_type (), ViewClass)
@@ -103,8 +102,6 @@ void 	   gedit_view_set_split_screen 	(View *view, gint split_screen);
 
 /* This is a function to insert text into the buffer, used for the GList of views 
    in a gedit_document */
-void	   gedit_view_list_insert	(View *view, gedit_data *data);
- 
 void 	   gedit_view_insert_text 	(View *view, const gchar *text,
 					 gint length, gint pos);
 

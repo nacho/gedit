@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* vi:set ts=8 sts=0 sw=8:
- *
+/* 
  * gedit
  *
  * This program is free software; you can redistribute it and/or modify
@@ -17,16 +16,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
 #ifndef __PREFS_H__
 #define __PREFS_H__
 
 #define DEFAULT_FONT "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
 #define DEFAULT_FONTSET "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
 
-typedef struct _Preference gedit_preference;
-typedef struct _PrefsData gedit_prefs_data;
 
-struct _Preference
+typedef struct _Preferences Preferences;
+
+struct _Preferences
 {
 	guint auto_indent;
 	gint  word_wrap;
@@ -56,48 +56,7 @@ struct _Preference
 	gint close_doc;
 };
 
-struct _PrefsData
-{
-	GnomePropertyBox *pbox;
-	
-	/* Font Seleftion */
-	GtkWidget *fontsel;
-	GtkWidget *font;
-	
-	/* General Settings */
-	GtkWidget *autoindent;
-	GtkWidget *status;
-	GtkWidget *wordwrap;
-	GtkWidget *split;
-	GtkWidget *bgpick;
-	GtkWidget *fgpick;
-	
-	/* MDI Settings */
-	GtkRadioButton *mdi_type [NUM_MDI_MODES];
-	GSList *mdi_list;
-	
-	/* Window Settings */
-	GtkWidget *cur;
-	GtkWidget *preW;
-	GtkWidget *preH;
-	gchar *curW;
-	gchar *curH;
-	
-	/* Doc Settings */
-	/* Stuff like Autosave would go here.. if autosave
-	 * was actually implemented ;) */
-	/* Should print stuff go in here too? hmm.. */
-	GtkWidget *DButton1;
-	GtkWidget *DButton2;
-	
-	/* Toolbar Settings */
-	/* Hmm, dunno... */
-	
-	/* Tab Settings */
-	/* Hmm, dunno... */
-};
-
-extern gedit_preference *settings;
+extern Preferences *settings;
 extern gboolean use_fontset;
 extern gint mdiMode;
 
@@ -106,7 +65,7 @@ extern void gedit_load_settings (void);
 
 extern void gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata);
 extern void gedit_property_box_new (void);
-extern void gedit_window_refresh (Window *w);
+extern void gedit_window_refresh (void);
 
 
 #endif /* __PREFS_H__ */

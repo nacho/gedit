@@ -208,12 +208,12 @@ GnomeUIInfo gedit_settings_menu[] =
 				    auto_indent_toggle_cb, (gpointer) GE_DATA,
 				    NULL),
 */
-/*
+
 	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Show Statusbar"),
 				    N_("Enable or disable the statusbar at the bottom of this application window."),
 				    options_toggle_status_bar_cb,
 				    NULL, NULL),
-*/
+
 /*
 	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
 				    N_("Toggle Wordwrap"),
@@ -261,8 +261,7 @@ GnomeUIInfo gedit_settings_menu[] =
 
 /* 	GNOMEUIINFO_SEPARATOR, */ 
 
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM (gedit_prefs_dialog, NULL),
-
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM (dialog_prefs, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -305,7 +304,6 @@ GnomeUIInfo gedit_plugins_menu[] =
 GnomeUIInfo gedit_menu[] =
 {
         GNOMEUIINFO_MENU_FILE_TREE (gedit_file_menu),
-
 	{
 		GNOME_APP_UI_SUBTREE,
 		N_("_Plugins"),
@@ -314,7 +312,6 @@ GnomeUIInfo gedit_menu[] =
 		GNOME_APP_PIXMAP_NONE, NULL,
 		0, 0, NULL
 	},
-
 	GNOMEUIINFO_MENU_SETTINGS_TREE (gedit_settings_menu),
 /*	GNOMEUIINFO_MENU_WINDOWS_TREE (gedit_window_menu), disabled by Chema */
 	GNOMEUIINFO_MENU_FILES_TREE (gedit_docs_menu),
@@ -422,13 +419,3 @@ about_cb (GtkWidget *widget, gpointer data)
 {
 	dialog_about ();
 }
-
-
-
-
-
-
-
-
-
-

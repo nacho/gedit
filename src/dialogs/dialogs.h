@@ -5,5 +5,6 @@ void search_cb        (GtkWidget *w, gpointer data);
 void dialog_about     (void);
 void dialog_find_line (void);
 void dialog_replace   (void);
+void dialog_prefs     (void);
 
 #endif /* __DIALOGS_H__ */

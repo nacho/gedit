@@ -1,4 +1,3 @@
-
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* gedit
  * Copyright (C) 1998 Alex Roberts and Evan Lawrence
@@ -71,6 +70,14 @@ corba_exception (CORBA_Environment* ev)
 
 #endif /* HAVE_LIBGNORBA */
 
+void
+gedit_shutdown (void)
+{
+	gedit_save_settings ();
+
+	gtk_main_quit ();
+}
+
 int
 main (int argc, char **argv)
 {
@@ -120,10 +127,11 @@ main (int argc, char **argv)
 	
 	poptFreeContext (ctx);
 
-	gedit_plugins_init ();
 	glade_gnome_init ();
-	gedit_mdi_init ();
+
 	gedit_load_settings ();
+	gedit_plugins_init ();
+	gedit_mdi_init ();
 
 	gnome_mdi_open_toplevel (mdi);
 

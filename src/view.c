@@ -46,7 +46,7 @@ static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
 GtkVBoxClass *parent_class = NULL;
 
        void view_changed_cb (GtkWidget *w, gpointer cbdata);
-       void gedit_view_list_insert (View *view, gedit_data *data);
+static void gedit_view_list_insert (View *view, gedit_data *data);
        void view_list_erase (View *view, gedit_data *data);
        gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
        void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
@@ -99,7 +99,7 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
  * Text insertion and deletion callbacks - used for Undo/Redo (not yet
  * implemented) and split screening
  */
-void
+static void
 gedit_view_list_insert (View *view, gedit_data *data)
 {
 	gint p1;
@@ -433,7 +433,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	    		gedit_undo_redo (w, NULL);
 	    		break;
 		case 'q':
-	    		file_quit_cb (w, NULL);
+			file_quit_cb (w, NULL);
 	    		break;
 		default:
 	    		return TRUE;

@@ -44,9 +44,9 @@ gedit_set_title (Document *doc)
 	docname = GNOME_MDI_CHILD (doc)->name;
 
 	if (doc->changed)
-		title = g_strdup_printf ("%s (modified) - %s", docname, "gedit "VERSION);
+		title = g_strdup_printf ("gedit: %s (modified)", docname);
 	else
-		title = g_strdup_printf ("%s - %s", docname, "gedit "VERSION);
+		title = g_strdup_printf ("gedit: %s", docname);
 
 	gtk_window_set_title (GTK_WINDOW (mdi->active_window), title);
 

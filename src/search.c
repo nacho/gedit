@@ -17,6 +17,10 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/* I have included this files in the CVS because I am
+   goint to delete some search finctions that we might
+   want to implement as plugins in the future */ 
+
 #include <config.h>
 #include <gnome.h>
 
@@ -27,7 +31,24 @@
 #include "search.h"
 #include "utils.h"
 
+void add_search_options (GtkWidget *dialog);
+static void find_line_clicked_cb    (GtkWidget   *widget,
+				     gint         button,
+				     Document *doc);
+
+static void replace_dialog_button_cb (GtkWidget   *widget,
+                                      gint         button,
+                                      Document *doc);
+static gboolean search               (GtkEditable *text,
+                                      gchar       *str,
+                                      gint         pos,
+                                      gulong       options);
+
+/* 
+ * find in files variable declarations  
+ */
 GtkWidget *find_in_files_dialog;
+
 typedef struct _gedit_clist_data
 {
 	gchar *fname;
@@ -36,31 +57,31 @@ typedef struct _gedit_clist_data
 	gint   index;
 } gedit_clist_data;
 
-/* Function prototypes */
-             gint pos_to_line (Document *doc, gint pos, gint *numlines);
-             gint line_to_pos (Document *doc, gint line, gint *numlines);
-             gint get_line_count (Document *doc);
-             void seek_to_line (Document *doc, gint line, gint numlines);
-             gint gedit_search_search (Document *doc, gchar *str, gint pos, gulong options);
-             void gedit_search_replace (Document *doc, gint pos, gint len, gchar *replace);
-             void find_in_files_cb (GtkWidget *widget, gpointer data);
+/* 
+ * find in files function declerations
+ */
 static GtkWidget* create_find_in_files_dialog (void);
-       static int get_start_index_of_line (View *view, gint pos);
-    static gchar* get_line_as_text (View *view, gint pos);
-       static int find_in_file_search (View *view, gchar *str);
-      static void search_for_text_in_files (gchar *text);
-      static void find_in_files_dialog_button_cb (GtkWidget *widget, gint button, gpointer data);
-      static void show_search_result_window (void);
-             void remove_search_result_cb (GtkWidget *widget, gpointer data);
-             void search_results_clist_insert (gchar *fname, gchar *contents, gint line, gint index);
-             void search_result_clist_cb (GtkWidget *list, gpointer func_data);
-             void destroy_clist_data (gpointer data);
-             void count_lines_cb (GtkWidget *widget, gpointer data);
-             void add_search_options (GtkWidget *dialog);
-             void get_search_options (Document *doc, GtkWidget *widget, gchar **txt, gulong *options, gint *pos);
-  static gboolean search (GtkEditable *text, gchar *str, gint pos, gulong options);
-             void search_select (Document *doc, gchar *str, gint pos, gulong options);
-             gint num_widechars (const gchar *str);
+static void show_search_result_window (void);
+void search_results_clist_insert (gchar *fname, 
+				  gchar *contents,
+				  gint 	 line, 
+				  gint 	 index);
+static void find_in_files_dialog_button_cb (GtkWidget *widget, 
+					    gint button, 
+					    gpointer data);
+static void search_for_text_in_files (gchar *text);
+static GtkWidget* create_find_in_files_dialog (void);
+
+static gchar* get_line_as_text (View *view, gint pos);
+static int find_in_file_search (View *view, gchar *str);
+static void search_for_text_in_files (gchar *text);
+
+static void find_in_files_dialog_button_cb (GtkWidget *widget, 
+					    gint button, 
+					    gpointer data);
+
+static void show_search_result_window (void);
+static void destroy_clist_data (gpointer data);
 
 
 gint
@@ -647,13 +668,11 @@ add_search_options (GtkWidget *dialog)
 			    FALSE, FALSE, 0);
 	gtk_widget_show (radio);
 	
-	/* Disable this because reverse search is not implemented. Chema
 	radio = gtk_radio_button_new_with_label (radiolist,
 						 _("Search from end of document"));
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), radio,
 			    FALSE, FALSE, 0);
-			    gtk_widget_show (radio);*/
-	
+	gtk_widget_show (radio);
 	radiolist = gtk_radio_button_group (GTK_RADIO_BUTTON (radio));
 	gtk_object_set_data (GTK_OBJECT (dialog), "searchfrom", radiolist);
 	
@@ -662,13 +681,12 @@ add_search_options (GtkWidget *dialog)
 			    FALSE, FALSE, 0);
 	gtk_object_set_data (GTK_OBJECT (dialog), "case", check);
 	gtk_widget_show (check);
-	/* Reverse search is not implemented . Chema 
+	
 	check = gtk_check_button_new_with_label (_("Reverse search"));
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), check,
 			    FALSE, FALSE, 0);
 	gtk_object_set_data (GTK_OBJECT (dialog), "direction", check);
 	gtk_widget_show (check);
-	*/
 }
 
 
@@ -781,4 +799,24 @@ num_widechars (const gchar *str)
 
 	return numwcs >= 0 ? numwcs : 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

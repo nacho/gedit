@@ -444,9 +444,8 @@ file_quit_cb (GtkWidget *widget, gpointer cbdata)
 	else
 		return;
 
-	gtk_main_quit ();
+	gedit_shutdown ();
 }
-
 
 void
 file_revert_cb (GtkWidget *widget, gpointer data)
