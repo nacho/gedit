@@ -1,8 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* Cleaned 10-00 by Chema */
 /*
- * gedit
+ * gedit 
  *
- * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose Celorio
+ * Copyright (C) 2000 Jose M Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,159 +25,340 @@
  */
 
 #include <config.h>
-#include <gnome.h>
+#include <glib.h>
+#include <gtk/gtkwidget.h>
+#include <gtk/gtkentry.h>
+#include <gtk/gtkeditable.h>
+#include <libgnome/gnome-defs.h>
+#include <libgnome/gnome-i18n.h>
+#include <libgnomeui/gnome-dialog.h>
+#include <libgnomeui/gnome-messagebox.h>
+#include <libgnomeui/gnome-stock.h>
+#include <glade/glade-xml.h>
 
-#include "view.h"
-#include "document.h"
-#include "search.h"
-#include "utils.h"
 #include "window.h"
+#include "search.h"
+#include "view.h"
+#include "utils.h"
 #include "dialogs/dialogs.h"
 
-#include <glade/glade.h>
-
-static void replace_text_destroyed_cb (GtkWidget *widget, gint button);
-static void replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
-static void search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog);
-static void replace_text_clicked_cb (GtkWidget *widget, gint button);
-       void dialog_replace (gint full);
-
-
-static void
-replace_text_destroyed_cb (GtkWidget *widget, gint button)
+typedef struct
 {
-	gedit_debug (DEBUG_SEARCH, "");
-	gedit_search_end();
-
-	g_print ("Destroy !\n");
-}
-
-
-
-static void
-replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
-{
-	/* behave as if the user clicked Find/Find next button */
-	gedit_debug (DEBUG_SEARCH, "");
-	replace_text_clicked_cb (dialog, 1);
-}
-
-static void
-search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
-{
-	gedit_debug (DEBUG_SEARCH, "");
-	replace_text_clicked_cb (dialog, 0);
-}
-
-static void
-replace_text_clicked_cb (GtkWidget *widget, gint button)
-{
-	GtkWidget *search_entry, *replace_entry, *case_sensitive, *radio_button_1;
-	gint line_found, total_lines, eureka;
-	gint start_search_from;
-	guint pos_found, start_position = 0, end_pos = 0;
-	gint search_text_length, replace_text_length;
-	gchar * text_to_search_for, *text_to_replace_with;
-	
 	View *view;
+	GladeXML *gui;
+	GnomeDialog *dialog;
+	gboolean not_found;
+	gboolean replacements;
+	GtkWidget *search_entry;
+	GtkWidget *replace_entry;
+	GtkWidget *find_button;
+	GtkWidget *replace_button;
+	GtkWidget *replace_all_button;
+	GtkWidget *replace_hbox;
+	GtkWidget *case_sensitive;
+	GtkWidget *position;
+}GeditReplaceDialog;
+
+static GeditReplaceDialog *
+get_dialog (gboolean full)
+{
+	GeditReplaceDialog *dialog;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
-	if (!search_verify_document())
-	{
-		/* There are no documents open */
-		gnome_dialog_close (GNOME_DIALOG (widget));
+	dialog = g_new0 (GeditReplaceDialog, 1);
+	dialog->gui = glade_xml_new (GEDIT_GLADEDIR "/replace.glade", NULL);
+	if (!dialog->gui) {
+		g_warning ("Could not find replace.glade.");
+		return NULL;
+	}
+
+	dialog->dialog             = GNOME_DIALOG (glade_xml_get_widget (dialog->gui, "dialog"));
+	dialog->search_entry       = glade_xml_get_widget (dialog->gui, "search_for_text_entry");
+	dialog->replace_entry      = glade_xml_get_widget (dialog->gui, "replace_with_text_entry");
+	dialog->find_button        = glade_xml_get_widget (dialog->gui, "find_next_button");
+	dialog->replace_button     = glade_xml_get_widget (dialog->gui, "replace_button");
+	dialog->replace_all_button = glade_xml_get_widget (dialog->gui, "replace_all_button");
+	dialog->replace_hbox       = glade_xml_get_widget (dialog->gui, "hbox_replace_with");
+	dialog->case_sensitive     = glade_xml_get_widget (dialog->gui, "case_sensitive");
+	dialog->position           = glade_xml_get_widget (dialog->gui, "radio_button_1");
+
+	g_return_val_if_fail (dialog->dialog, NULL);
+	g_return_val_if_fail (dialog->search_entry, NULL);
+	g_return_val_if_fail (dialog->replace_entry, NULL);
+	g_return_val_if_fail (dialog->find_button, NULL);
+	g_return_val_if_fail (dialog->replace_button, NULL);
+	g_return_val_if_fail (dialog->replace_all_button, NULL);
+	g_return_val_if_fail (dialog->replace_hbox, NULL);
+	g_return_val_if_fail (dialog->case_sensitive, NULL);
+	g_return_val_if_fail (dialog->position, NULL);
+
+	/* Now, set the properties of the gnome_dialog */
+	gnome_dialog_editable_enters (dialog->dialog, GTK_EDITABLE (dialog->search_entry));
+	gnome_dialog_editable_enters (dialog->dialog, GTK_EDITABLE (dialog->replace_entry));
+	gnome_dialog_close_hides     (dialog->dialog, TRUE);
+
+	gtk_object_unref (GTK_OBJECT (dialog->gui));
+
+	return dialog;
+}
+
+static void
+dialog_set (GeditReplaceDialog *dialog, gboolean replace, gboolean first)
+{
+	GtkLabel *label;
+	
+	gedit_debug (DEBUG_SEARCH, "");
+
+	label = GTK_LABEL(GTK_BIN ((GTK_BUTTON (dialog->find_button)))->child);
+	g_return_if_fail (GTK_IS_LABEL (label));
+
+	if (replace) {
+		gtk_widget_show (dialog->replace_hbox);
+		gtk_widget_show (dialog->replace_button);
+		gtk_widget_show (dialog->replace_all_button);
+		gtk_widget_set_sensitive (dialog->replace_button, !first);
+		gtk_window_set_title ( GTK_WINDOW (dialog->dialog), _("Replace"));
+	} else {
+		gtk_widget_hide (dialog->replace_hbox);
+		gtk_widget_hide (dialog->replace_button);
+		gtk_widget_hide (dialog->replace_all_button);
+		gtk_window_set_title ( GTK_WINDOW (dialog->dialog), _("Find"));
+	}
+
+	if (first) {
+		dialog->not_found = FALSE;
+		dialog->replacements = -1;
+		dialog->view = gedit_view_active ();
+		
+		gtk_label_set_text (label, "Find");
+		
+		gtk_widget_grab_focus (dialog->search_entry);
+
+		gtk_entry_set_position (GTK_ENTRY (dialog->replace_entry), 0);
+		gtk_entry_select_region (GTK_ENTRY (dialog->replace_entry), 0,
+					 GTK_ENTRY (dialog->replace_entry)->text_length);
+		
+		gtk_entry_set_position (GTK_ENTRY (dialog->search_entry), 0);
+		gtk_entry_select_region (GTK_ENTRY (dialog->search_entry), 0,
+					 GTK_ENTRY (dialog->search_entry)->text_length);
+		gtk_radio_button_select (GTK_RADIO_BUTTON(dialog->position)->group, 0);
+		gnome_dialog_set_parent  (dialog->dialog,
+					  gedit_window_active ());
+	} else {
+		gtk_entry_select_region (GTK_ENTRY (dialog->replace_entry), 0, 0);
+		gtk_entry_select_region (GTK_ENTRY (dialog->search_entry), 0, 0);
+		gtk_label_set_text (label, "Find Next");
+		gtk_radio_button_select (GTK_RADIO_BUTTON(dialog->position)->group, 1);
+	}
+
+	gnome_dialog_set_default (dialog->dialog, replace ? (first ? 0 : 1) : 0);
+	
+}
+
+
+static void
+action_find (GeditReplaceDialog *dialog,
+	     guint start_pos,
+	     const gchar *search_text,
+	     gboolean case_sensitive)
+{
+	gboolean found = FALSE;
+	guint pos_found;
+	gint line_found, total_lines;
+
+	found = search_text_execute (start_pos, case_sensitive, search_text,
+				     &pos_found, &line_found, &total_lines, TRUE);
+
+	if (!found) {
+		dialog->not_found = TRUE;
 		return;
 	}
 
-	view = gedit_view_active();
+	gedit_flash_va (_("Text found at line :%i"),line_found);
+	gedit_view_set_window_position_from_lines (dialog->view, line_found, total_lines);
+	gedit_view_set_position	(dialog->view, pos_found);
+	gedit_view_set_selection (dialog->view,
+				  pos_found + 1,	
+				  pos_found + 1 + strlen (search_text));
+	
+	gtk_radio_button_select (GTK_RADIO_BUTTON(dialog->position)->group, 1);
+}
 
-	g_return_if_fail (view!=NULL);
+static void
+action_replace (GeditReplaceDialog *dialog,
+		guint start_pos,
+		const gchar *search_text,
+		const gchar *replace_text,
+		gboolean case_sensitive)
+{
 
-	search_entry   = gtk_object_get_data (GTK_OBJECT (widget), "search_for_text_entry");
-	replace_entry  = gtk_object_get_data (GTK_OBJECT (widget), "replace_with_text_entry");
-	case_sensitive = gtk_object_get_data (GTK_OBJECT (widget), "case_sensitive");
-	radio_button_1 = gtk_object_get_data (GTK_OBJECT (widget), "radio_button_1");
+	gedit_document_replace_text (dialog->view->doc,
+				     replace_text,
+				     strlen (search_text),
+				     start_pos - 1,
+				     TRUE);
 
-	g_assert (search_entry   != NULL);
-	g_assert (replace_entry  != NULL);
-	g_assert (case_sensitive != NULL);
-	g_assert (radio_button_1 != NULL);
+	/* We need to reload the buffer since we changed it */
+	gedit_search_end();
+	gedit_search_start();
 
-	text_to_search_for   = gtk_entry_get_text (GTK_ENTRY(search_entry));
-	text_to_replace_with = gtk_entry_get_text (GTK_ENTRY(replace_entry));
-	search_text_length   = strlen (text_to_search_for);
-	replace_text_length  = strlen (text_to_replace_with);
+	start_pos += strlen (replace_text) - strlen (search_text);
+	
+	action_find (dialog, start_pos, search_text, case_sensitive);
 
-	if (gedit_search_info.last_text_searched != NULL)
+}
+
+static void
+action_replace_all (GeditReplaceDialog *dialog,
+		    guint start_pos,
+		    const gchar *search_text,
+		    const gchar *replace_text,
+		    gboolean case_sensitive)
+{
+	guchar *new_buffer = NULL;
+
+	dialog->replacements = gedit_search_replace_all_execute (dialog->view,
+								 start_pos,
+								 search_text,
+								 replace_text,
+								 case_sensitive,
+								 &new_buffer);
+	
+	if (dialog->replacements > 0)
 	{
-		g_free (gedit_search_info.last_text_searched);
+		/* Check if there is a selection active */
+		if (gedit_view_get_selection (dialog->view, NULL, NULL))
+			gedit_view_set_selection (dialog->view, 0, 0);
+		/* Move the view (scrollbars) to the correct position */
+		gnome_dialog_close (dialog->dialog);
+		gedit_document_delete_text (dialog->view->doc, 0,
+					    gedit_document_get_buffer_length(dialog->view->doc),
+					    TRUE);
+		gedit_document_insert_text (dialog->view->doc, new_buffer, 0, TRUE);
+		/* FIXME : use replace, for undo . !*/ 
+		/*
+		  gedit_document_replace_text (view->doc, new_buffer, 0, gedit_document_get_buffer_length(view->doc), TRUE);
+		*/
 	}
-	gedit_search_info.last_text_searched = g_strdup (text_to_search_for);
-	gedit_search_info.last_text_searched_case_sensitive = GTK_TOGGLE_BUTTON (case_sensitive)->active;
 
-	start_search_from = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(radio_button_1)->group);
+	if (new_buffer!=NULL)
+		g_free (new_buffer);
+		
+}
 
-	switch (start_search_from){
+static void
+dialog_action (GeditReplaceDialog *dialog, gint button, gboolean replace)
+{
+	const gchar *search_text;
+	const gchar *replace_text;
+	gboolean case_sensitive;
+	guint start_pos;
+	guint end_pos;
+	gint selected;
+	
+	gedit_debug (DEBUG_SEARCH, "");
+
+	g_return_if_fail (search_verify_document ());
+
+	search_text  = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));
+	replace_text = gtk_entry_get_text (GTK_ENTRY (dialog->replace_entry));
+
+	g_return_if_fail (search_text != NULL);
+	g_return_if_fail (replace_text != NULL);
+	
+	if (*search_text == 0)
+		return;
+	
+	/* Get the initial position */
+	selected = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(dialog->position)->group);
+	switch (selected) {
 	case 0:
-		start_position = 0;
+		start_pos = 0;
 		break;
 	case 1:
-		if (gedit_view_get_selection (view, &start_position, &end_pos))
-			start_position = end_pos;
+		if (gedit_view_get_selection (dialog->view, &start_pos, &end_pos))
+			start_pos = end_pos;
 		else
-			start_position = gedit_view_get_position (view);
+			start_pos = gedit_view_get_position (dialog->view);
 		break;
 	default:
-		g_warning ("Invalid start search from value");
-		button = 3; /* Act as if close was clicked */
+		g_warning ("Invalid radio button selection.");
+		return;
+	}
+
+	case_sensitive = GTK_TOGGLE_BUTTON (dialog->case_sensitive)->active;
+	switch (button) {
+	case 2:
+		action_replace_all (dialog, start_pos,
+				    search_text, replace_text, case_sensitive);
+		break;
+	case 1:
+		action_replace (dialog, start_pos,
+				search_text, replace_text, case_sensitive);
+		break;
+	case 0:
+		action_find (dialog, start_pos,
+			     search_text, case_sensitive);
 		break;
 	}
-		
-	if (button == 3) /* Close */
-		gnome_dialog_close (GNOME_DIALOG (widget));
+}
+
+/**
+ * gedit_dialog_replace:
+ * @replace: If true, it pops up a replace dialog. If false, it pops up a Find dialog
+ * 
+ * Takes care of creating and actions of the replace dialog, 
+ **/
+void
+gedit_dialog_replace (gboolean replace)
+{
+	static GeditReplaceDialog *dialog = NULL;
+	gint button;
+
+	gedit_debug (DEBUG_SEARCH, "");
+
+	if (dialog == NULL) {
+		dialog = get_dialog (replace);
+		if (dialog == NULL)
+			return;
+	}
+
+	dialog_set (dialog, replace, TRUE);
+	if (dialog->view == NULL)
+		return;
 	
-	if (button == 2) /* Replace All */
-	{
-		/* At this point the text we need to replace is selected */
-		/* we need to 1. call view_delete for the text selected */
-		/* and 2. call view insert to insert the new text */
-		/* FIXME : We can assume that the entries will not change for now,
-		   we will need to add a callback to the text entries on their
-		   chage signals. Chema [ This might not be true anymore since
-		   we are "freezing gedit before doing the search/replace */
+	while (!dialog->not_found &&
+	       (dialog->replacements < 0)) {
 
-		gint replacements = 0;
-		guchar *msg;
-		guchar *new_buffer = NULL;
-
-		start_search_from = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(radio_button_1)->group);
-		replacements = gedit_search_replace_all_execute ( view,
-								  start_position,
-								  text_to_search_for,
-								  text_to_replace_with,
-								  GTK_TOGGLE_BUTTON (case_sensitive)->active,
-								  &new_buffer);
-
-		if (replacements > 0)
-		{
-			gedit_document_delete_text (view->doc, 0, gedit_document_get_buffer_length(view->doc), TRUE);
-			gedit_document_insert_text (view->doc, new_buffer, 0, TRUE);
-			/*
-			gedit_document_replace_text (view->doc, new_buffer, 0, gedit_document_get_buffer_length(view->doc), TRUE);
-			*/
-
-			gedit_search_end();
-			gedit_search_start();
-		}
-
-		if (new_buffer!=NULL)
-			g_free (new_buffer);
+		button = gnome_dialog_run (dialog->dialog);
+		if (button == -1)
+			return;
+		if (button == 3)
+			break;
 		
-		gnome_dialog_close (GNOME_DIALOG (widget));
-			
+		gedit_search_start ();
+		dialog_action (dialog, button, replace);
+		gedit_search_end ();
+
+		if (button == 2) /* Replace all */
+			break;
+
+		/* Call again to update the buttons & the entries */
+		dialog_set (dialog, replace, FALSE);
+	}
+
+	gnome_dialog_close (dialog->dialog);
+
+	/* This is done like this, since we need to close the other
+	   dialog before poping this dialogs*/
+	if (dialog->not_found || dialog->replacements == 0)
+		search_text_not_found_notify (dialog->view);
+
+	if (dialog->replacements > 0) {
+		gchar *msg;
 		msg = g_strdup_printf (_("found and replaced %i occurrences."),
-				       replacements);
+				       dialog->replacements);
 		gnome_dialog_run_and_close ((GnomeDialog *)
 					    gnome_message_box_new (msg,
 								   GNOME_MESSAGE_BOX_INFO,
@@ -184,195 +366,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 								   NULL));
 		g_free (msg);
 	}
-	 
-	if (button == 1) /* Replace */
-	{
-		/* At this point the text we need to replace is selected */
-		/* we need to 1. call view_delete for the text selected */
-		/* and 2. call view insert to insert the new text */
-		/* FIXME : We can assume that the entries will not change for now,
-		   we will need to add a callback to the text entries on their
-		   chage signals */
-
-		guint start, end;
 
 
-		if ( gedit_search_info.replace_start == 0 && gedit_search_info.replace_end == 0 )
-		{
-			/* since there is nothing to replace, act as if FIND NEXT was clicked */
-			button = 0;
-		}
-		else
-		{
-			start = gedit_search_info.replace_start;
-			end = gedit_search_info.replace_end;
-			
-			/* Diselect the text and set the point after this occurence*/
-			/*
-			gedit_document_delete_text (view->doc, start, search_text_length, TRUE);
-			gedit_document_insert_text (view->doc, text_to_replace_with, start, TRUE);
-			*/
-			gedit_document_replace_text (view->doc, text_to_replace_with, start, search_text_length, TRUE);
-
-			/* We need to reload the buffer since we changed it */
-			gedit_search_end();
-			gedit_search_start();
-
-			/* After replacing this occurrence, act as is a Find Next was pressed */
-			/* we also need to modify start_positionition, since a replacement has been made */
-			button = 0;
-			start_position = start_position - search_text_length + replace_text_length;
-		}
-	}
-	
-	if (button == 0) /* Find Next */
-	{
-		if (start_position >= gedit_search_info.buffer_length)
-			eureka = FALSE;
-		else
-			eureka = search_text_execute ( start_position,
-						       GTK_TOGGLE_BUTTON (case_sensitive)->active,
-						       text_to_search_for,
-						       &pos_found,
-						       &line_found,
-						       &total_lines,
-						       TRUE);
-
-		if (!eureka)
-		{
-			search_text_not_found_notify (view);
-			gtk_object_destroy (GTK_OBJECT(widget));
-			return;
-		}
-
-		gedit_flash_va (_("Text found at line :%i"),line_found);
-		gedit_view_set_window_position_from_lines (view, line_found, total_lines);
-		
-		gtk_text_set_point (GTK_TEXT(view->text), pos_found+1);
-		gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
-		gtk_text_backward_delete (GTK_TEXT(view->text), 1);
-		gtk_editable_select_region (GTK_EDITABLE(view->text), pos_found+1, pos_found+1+search_text_length);
-
-		gtk_radio_button_select (GTK_RADIO_BUTTON(radio_button_1)->group, 1);
-		
-		gedit_search_info.replace_start = pos_found + 1;
-		gedit_search_info.replace_end   = pos_found + 1 + search_text_length;
-
-	}
+	return;
 }
-
-void
-dialog_replace (gint full)
-{
-	static GtkWidget *replace_text_dialog = NULL;
-	GtkWidget *search_entry;
-	GtkWidget *replace_entry;
-	GtkWidget *case_sensitive;
-	GtkWidget *radio_button_1;
-	GtkWidget *hbox_replace_with;
-	GtkWidget *replace_button;
-	GtkWidget *replace_all_button;
-	/* kill warning 
-	GtkWidget *ask_before_replacing;
-	*/
-	GladeXML  *gui;
-	gchar * dialog_title;
-
-	gedit_debug (DEBUG_SEARCH, "");
-	
-	if (replace_text_dialog!=NULL)
-	{
-		g_print ("Show\n");
-		gdk_window_show (replace_text_dialog->window);
-		gdk_window_raise (replace_text_dialog->window);
-		return;
-	}
-	
-	gui = glade_xml_new (GEDIT_GLADEDIR
-			     "/replace.glade",
-			     NULL);
-	if (!gui)
-	{
-		g_warning ("Could not find search.glade, reinstall gedit.");
-		return;
-	}
-
-	replace_text_dialog   = glade_xml_get_widget (gui, "dialog");
-	search_entry          = glade_xml_get_widget (gui, "search_for_text_entry");
-	replace_entry         = glade_xml_get_widget (gui, "replace_with_text_entry");
-	case_sensitive        = glade_xml_get_widget (gui, "case_sensitive");
-	radio_button_1        = glade_xml_get_widget (gui, "radio_button_1");
-	hbox_replace_with     = glade_xml_get_widget (gui, "hbox_replace_with");
-	replace_button        = glade_xml_get_widget (gui, "replace_button");
-	replace_all_button    = glade_xml_get_widget (gui, "replace_all_button");
-	/* disabled because it was causing the dialog to pop up twice
-	ask_before_replacing  = glade_xml_get_widget (gui, "ask_before_replacing");
-	*/
-
-	/* FIXME: We hide this feature always because is not
-	   implemented yet. Chema 
-	gtk_widget_hide (ask_before_replacing);
-	*/
-
-	if (!replace_text_dialog ||
-	    !search_entry ||
-	    !replace_entry ||
-	    !case_sensitive ||
-	    !radio_button_1 ||
-	    !hbox_replace_with ||
-	    !replace_button ||
-	    !replace_all_button /*||
-				  !ask_before_replacing*/)
-	{
-		g_warning ("Corrupted search.glade detected, reinstall gedit.");
-		return;
-	}
-
-	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "search_for_text_entry", search_entry);
-	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "replace_with_text_entry", replace_entry);
-	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "case_sensitive", case_sensitive);
-	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "radio_button_1", radio_button_1);
-
-
-	gedit_search_start();
-	
-	gtk_signal_connect (GTK_OBJECT (replace_text_dialog), "clicked",
-			    GTK_SIGNAL_FUNC (replace_text_clicked_cb), replace_text_dialog);
-	gtk_signal_connect (GTK_OBJECT (replace_text_dialog), "destroy",
-			    GTK_SIGNAL_FUNC (replace_text_destroyed_cb), replace_text_dialog);
-	gtk_signal_connect (GTK_OBJECT (search_entry), "activate",
-			    GTK_SIGNAL_FUNC (search_entry_activate_cb), replace_text_dialog);
-	gtk_signal_connect (GTK_OBJECT (replace_entry), "activate",
-			    GTK_SIGNAL_FUNC (replace_entry_activate_cb), replace_text_dialog);
-
-	gnome_dialog_set_parent (GNOME_DIALOG (replace_text_dialog),
-				 gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (replace_text_dialog), TRUE);
-
-
-	/* NOT needed
-	gtk_widget_show_all (replace_text_dialog); 
-	*/
-
-	if (!full)
-	{
-		gtk_widget_hide (hbox_replace_with);
-		gtk_widget_hide (replace_button);
-		gtk_widget_hide (replace_all_button);
-		dialog_title = g_strdup ("Find");
-	}
-	else
-	{
-		dialog_title = g_strdup ("Replace");
-	}
-	gtk_window_set_title ( GTK_WINDOW(replace_text_dialog), dialog_title);
-	
-	g_free (dialog_title);
-
-	gtk_object_unref (GTK_OBJECT (gui));
-
-
-	gnome_dialog_run (GNOME_DIALOG(replace_text_dialog));
-}
-
-

@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* Cleaned 10-00 by Chema */
 /*
  * gedit
  *
@@ -19,19 +20,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __UNDO_H__
-#define __UNDO_H__
+#ifndef __GEDIT_UNDO_H__
+#define __GEDIT_UNDO_H__
 
 #include "document.h"
 #include "view.h"
 
-/* Actions */
 typedef enum {
 	GEDIT_UNDO_ACTION_INSERT,
 	GEDIT_UNDO_ACTION_DELETE,
 	GEDIT_UNDO_ACTION_REPLACE_INSERT,
 	GEDIT_UNDO_ACTION_REPLACE_DELETE
-} GeditUndoActions;
+} GeditUndoAction;
 
 typedef enum {
 	GEDIT_UNDO_STATE_TRUE,
@@ -40,22 +40,9 @@ typedef enum {
 	GEDIT_UNDO_STATE_REFRESH,
 } GeditUndoState;
 
-typedef struct _GeditUndoInfo  GeditUndoInfo;
-
-struct _GeditUndoInfo
-{
-	gchar *text;	/* The text data */
-	gint start_pos;	/* The position in the document */
-	gint end_pos;
-	gint action;	/* whether the user has inserted or deleted */
-	gint status;	/* the changed status of the document used with this node */
-	gfloat window_position;
-	gint mergeable;
-};
-
-void gedit_undo_add      (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
-void gedit_undo_undo	(GtkWidget*, gpointer);
-void gedit_undo_redo	(GtkWidget*, gpointer);
+void gedit_undo_add       (const gchar *text, gint start_pos, gint end_pos, GeditUndoAction action, Document *doc, View *view);
+void gedit_undo_undo	  (GtkWidget*, gpointer);
+void gedit_undo_redo	  (GtkWidget*, gpointer);
 void gedit_undo_free_list (GList **list_pointer);
 
-#endif /* __UNDO_H__ */
+#endif /* __GEDIT_UNDO_H__ */

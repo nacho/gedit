@@ -489,11 +489,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
 	gnome_print_show (pji->pc, pji->temp);
 
-	g_print ("A\n");
-	g_print ("Settings Print_lines %i\n", settings->print_lines);
-	g_print ("line %i\n", line);
-	g_print ("First line %i\n", first_line);
-	
+
 	if (settings->print_lines>0 && line%settings->print_lines==0 && first_line)
 	{
 		char * number_text = g_strdup_printf ("%i",line);
@@ -501,7 +497,6 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 
 		g_return_if_fail (temp_font != NULL);
 
-		g_print ("b\n");
 		gnome_print_setfont (pji->pc, temp_font);
 		gnome_print_moveto (pji->pc, pji->margin_left - pji->margin_numbers, y);
 		gnome_print_show   (pji->pc, number_text);

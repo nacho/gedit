@@ -19,8 +19,11 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __SEARCH_H__
-#define __SEARCH_H__
+#ifndef __GEDIT_SEARCH_H__
+#define __GEDIT_SEARCH_H__
+
+#include "view.h"
+#include "document.h"
 
 typedef struct _SearchInfo {
 	gint state;
@@ -34,8 +37,8 @@ typedef struct _SearchInfo {
 	guint replace_start;
 	guint replace_end;
 } SearchInfo;
-extern SearchInfo gedit_search_info;
 
+extern SearchInfo gedit_search_info;
 
   gint search_verify_document (void);
   void gedit_search_end (void);
@@ -50,10 +53,10 @@ extern SearchInfo gedit_search_info;
  guint line_to_pos (gint line, gint *lines);
   void file_info ( gint pos , gint *total_chars , gint *total_words , gint *total_lines ,
 		   gint *total_paragraphs , gint *line_number , gint *column_number );
-  gint search_text_execute ( gulong starting_position, gint case_sensitive, guchar *text_to_search_for,
+  gint search_text_execute ( gulong starting_position, gint case_sensitive, const guchar *text_to_search_for,
 			     guint * pos_found, gint * line_found, gint * total_lines, gint return_the_line_number);
-  gint gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_text,
-					  guchar *replace_text, gint case_sensitive,
+  gint gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *search_text,
+					  const guchar *replace_text, gint case_sensitive,
 					  guchar **new_buffer);
  void search_text_not_found_notify (View *view);
 
@@ -61,4 +64,4 @@ extern SearchInfo gedit_search_info;
 void start_time (void);
 double print_time (void);
 
-#endif /* __SEARCH_H__ */
+#endif /* __GEDIT_SEARCH_H__ */

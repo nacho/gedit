@@ -1,3 +1,27 @@
+2000-10-14  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c: rewrite, use coolio gnome-dialog functions.
+	This code looks so much cleaner.
+
+	* view.c (gedit_view_delete): fix a problem that was causing replace
+	all to really suck.
+
+	* search.c (gedit_search_replace_all_execute): constify &
+	fix a small bug that was causing a warning to be emited
+
+	* view.c (gedit_view_set_window_position_from_lines): fine tune
+
+	* search.c (search_text_execute): constify
+	* undo.c (gedit_undo_add): constify
+	(gedit_undo_merge): constify
+	(struct _GeditUndoInfo): make this struct private to undo.c
+	: remove <gnome.h>
+
+	* document.c (gedit_document_replace_text): constify
+
+	* dialogs/dialog-prefs.c: remove g_print
+	* print.c: ditto
+
 2000-10-13  Yuri Syrota	<rasta@renome.rovno.ua>
 
 	* file.c: replace "0pplication" with "application"

@@ -29,13 +29,8 @@
 typedef struct _Document Document;
 typedef struct _DocumentClass DocumentClass;
 
-struct _DocumentClass
-{
-	GnomeMDIChildClass parent_class;
-
-	void (*document_changed)(Document *, gpointer);
-	
-};
+#include <libgnomeui/gnome-mdi.h>
+#include <libgnomeui/gnome-mdi-child.h>
 
 struct _Document
 {
@@ -69,9 +64,9 @@ extern GnomeMDI *mdi;
 gint gedit_close_all_flag;
 gint gedit_mdi_destroy_signal;
 
-void gedit_document_insert_text  (Document *doc, guchar *text, guint position,              gint undoable);
-void gedit_document_delete_text  (Document *doc,               guint position, gint length, gint undoable);
-void gedit_document_replace_text (Document *doc, guchar *text, guint position, gint length, gint undoable);
+void gedit_document_insert_text  (Document *doc, const guchar *text,               guint position,              gint undoable);
+void gedit_document_delete_text  (Document *doc,                                   guint position, gint length, gint undoable);
+void gedit_document_replace_text (Document *doc, const guchar *text, gint  length, guint position, gint undoable);
 
 void gedit_document_set_readonly (Document *doc, gint readonly);
 void gedit_document_text_changed_signal_connect (Document *doc);

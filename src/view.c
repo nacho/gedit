@@ -40,28 +40,9 @@ enum {
 
 static GtkObjectClass * parent_class;
 
-void	gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata);
-void	gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
-
-gfloat	gedit_view_get_window_position (View *view);
-void	gedit_view_set_window_position (View *view, gfloat position);
-void	gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
-
 static void	gedit_views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
 static void	gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
 
-void		gedit_view_insert (View  *view, guint position, const gchar * text, gint length);
-
-void		doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view);
-void		doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
-void		doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view);
-void		doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
-gboolean	auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
-
-guint		gedit_view_get_type (void);
-GtkWidget *	gedit_view_new (Document *doc);
-
-void	gedit_view_set_word_wrap (View *view, gint word_wrap);
 void	gedit_view_set_readonly (View *view, gint readonly);
 void	gedit_view_set_font (View *view, gchar *fontname);
 void	gedit_view_set_position (View *view, gint pos);
@@ -170,23 +151,59 @@ gedit_view_set_window_position (View *view, gfloat position)
 void
 gedit_view_set_window_position_from_lines (View *view, guint line, guint lines)
 {
-	float position;
-	float upper;
-	float page_increment;
-
+	gfloat upper;
+	gfloat value;
+	gfloat page_size;
+	gfloat gt;
+	gfloat min;
+	gfloat max;
+	
 	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (line <= lines);
 	
 	upper = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->upper;
-	page_increment = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->page_increment; 
-	position = ( line *  upper / lines - page_increment);
+	value = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
+	page_size = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->page_size;
 
-	gedit_view_set_window_position (view, position);
+	min = value;
+	max = value + (0.9 * page_size); /* We don't want to be in the lower 10%*/
+	
+	gt = upper * (float)(line-1) / (float)(lines-1);
+#if 0	
+	g_print ("Goto :%f. Min :%f, Max:%f\n", gt, min, max);
+#endif	
+	/* No need to move*/
+	if (gt > min && gt < max)
+		return;
+
+	gedit_view_set_window_position (view, gt);
 	
 }
 
-void
+static void
+gedit_view_insert (View  *view, guint position, const gchar * text, gint length)
+{
+	GtkText *textw;
+	gint p1;
+	
+	g_return_if_fail (length > 0);
+	g_return_if_fail (text != NULL);
+	
+	gedit_debug (DEBUG_VIEW, "");
+
+	if (!GTK_WIDGET_MAPPED (view->text))
+		g_warning ("Inserting text into an unmapped text widget (%i)", length);
+
+	textw = GTK_TEXT(view->text);
+	p1 = gtk_text_get_point (textw);
+	gtk_text_set_point (textw, position);
+	gtk_text_insert (textw, NULL,
+			 NULL, NULL, text,
+			 length);
+}
+
+static void
 gedit_views_insert (Document *doc, guint position, gchar * text,
 		    gint length, View * view_exclude)
 {
@@ -217,22 +234,6 @@ gedit_views_insert (Document *doc, guint position, gchar * text,
 	}  
 }
 
-void
-gedit_view_insert (View  *view, guint position, const gchar * text, gint length)
-{
-	g_return_if_fail (length > 0);
-	
-	gedit_debug (DEBUG_VIEW, "");
-
-	if (!GTK_WIDGET_MAPPED (view->text))
-		g_warning ("Inserting text into an unmapped text widget (%i)", length);
-	
-	gtk_text_set_point (GTK_TEXT(view->text), position);
-	gtk_text_insert (GTK_TEXT (view->text), NULL,
-			 NULL, NULL, text,
-			 length);
-}
-
 /* Work arround for a gtktext bug*/
 static gint
 gedit_view_refresh_line_hack (View *view)
@@ -246,6 +247,9 @@ gedit_view_refresh_line_hack (View *view)
 static void
 gedit_view_delete (View *view, guint position, gint length, gboolean exclude_this_view)
 {
+	gfloat upper;
+	gfloat value;
+	gfloat page_size;
 	guint p1;
 
 	gedit_debug (DEBUG_VIEW, "");
@@ -255,8 +259,17 @@ gedit_view_delete (View *view, guint position, gint length, gboolean exclude_thi
 		gtk_text_set_point (GTK_TEXT(view->text), position);
 		gtk_text_forward_delete (GTK_TEXT (view->text), length);
 	}
+	
+	upper = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->upper;
+	value = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
+	page_size = GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->page_size;
 
-	gtk_idle_add ((GtkFunction) gedit_view_refresh_line_hack, view);
+	/* Only add the hack when we need it, if we add it all the time
+	   the reaplace all is ugly. This problem only happens when we are
+	   at the bottom of the file and there is a scroolbar*/
+	if ((page_size != upper) && (value + page_size >= upper))
+		gtk_idle_add ((GtkFunction) gedit_view_refresh_line_hack, view);
+	
 }
 
 
@@ -311,7 +324,7 @@ doc_insert_text_real_cb (GtkWidget *editable, const guchar *insertion_text,int l
 	g_free (text_to_insert);
 }
 
-void
+static void
 doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length,
 		    int *pos, View *view)
 {
@@ -322,7 +335,7 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 
 void
 doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos,
-		    View *view, gint exclude_this_view, gint undo)
+			 View *view, gint exclude_this_view, gint undo)
 {
 	Document *doc;
 	guchar *text_to_delete;
@@ -349,7 +362,7 @@ doc_delete_text_real_cb (GtkWidget *editable, int start_pos, int end_pos,
 }
 
 
-void
+static void
 doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view)
 {
 	gedit_debug (DEBUG_VIEW, "");
@@ -360,7 +373,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view)
 
 /* FIXME: rewrite this function. It's a bit dirty and it is dependant on the
    text widget. Chema */
-gboolean
+static gboolean
 auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		int *pos, gpointer data)
 {
@@ -480,23 +493,26 @@ gedit_view_init (View *view)
 	/* Vbox */
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
+	gtk_widget_show (view->vbox);
 	
-#ifdef ENABLE_SPLIT_SCREEN
 	/* create our paned window */
 	view->pane = gtk_vpaned_new ();
 	gtk_box_pack_start (GTK_BOX (view->vbox), view->pane, TRUE, TRUE, 0);
 	gtk_paned_set_handle_size (GTK_PANED (view->pane), 10);
 	gtk_paned_set_gutter_size (GTK_PANED (view->pane), 10);
-
-	gtk_paned_pack1 (GTK_PANED (view->pane), view->window, TRUE, TRUE);
-#endif
+	gtk_widget_show (view->pane);
 	
 	/* Create the upper split screen */
 	view->window = gtk_scrolled_window_new (NULL, NULL);
+	gtk_paned_pack1 (GTK_PANED (view->pane), view->window, TRUE, TRUE);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->window),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
+	gtk_widget_show (view->window);
+	
+#if 0
 	gtk_box_pack_start (GTK_BOX (view->vbox), view->window, TRUE, TRUE, 0);
+#endif	
 	
 
         /* FIXME use settings->line_wrap and add horz. scroll bars. Chema*/
@@ -507,8 +523,6 @@ gedit_view_init (View *view)
 	gtk_text_set_editable  (GTK_TEXT(view->text), !view->readonly);
 	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
-	gtk_text_set_point (GTK_TEXT(view->text), 0);
-	gtk_container_add (GTK_CONTAINER (view->window), view->text);
 	
 	/* Toolbar */
 	view->toolbar = NULL;
@@ -529,12 +543,17 @@ gedit_view_init (View *view)
 	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
 			    GTK_SIGNAL_FUNC (doc_delete_text_cb), (gpointer) view);
 
+	gtk_container_add (GTK_CONTAINER (view->window), view->text);
+	
 	/* View changed signal */
 	view->view_text_changed_signal =
 		gtk_signal_connect (GTK_OBJECT(view->text), "changed",
 				    GTK_SIGNAL_FUNC (gedit_view_text_changed_cb), view);
 
-	
+
+	gtk_widget_show (view->text);
+	gtk_text_set_point (GTK_TEXT(view->text), 0);
+
 #ifdef ENABLE_SPLIT_SCREEN    
 	/* Create the bottom split screen */
 	view->scrwindow[1] = gtk_scrolled_window_new (NULL, NULL);
@@ -624,9 +643,7 @@ gedit_view_init (View *view)
 	gnome_config_sync ();
 #endif	
 
-#ifdef ENABLE_SPLIT_SCREEN
 	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
-#endif	
 	gtk_widget_show_all (view->vbox);
 	gtk_widget_grab_focus (view->text);
 

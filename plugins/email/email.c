@@ -41,11 +41,12 @@ gedit_plugin_finish (GtkWidget *widget, gpointer data)
 static void
 gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 {
+	const gchar *subject, *from, *to;
+	const gchar *program_location = NULL;
 	Document *doc = gedit_document_current();
 	FILE *sendmail;
-	const gchar *subject, *from, *to, *command;
 	guchar * buffer;
-	const gchar *program_location = NULL;
+	gchar *command;
 
 	if (button != 0) {
 		gnome_dialog_close (GNOME_DIALOG (widget));

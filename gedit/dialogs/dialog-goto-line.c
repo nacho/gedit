@@ -1,19 +1,38 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * dialog-goto-line.c: Dialog box for going to a specified line.
+ * gedit
  *
- * Author:
- * Chema Celorio <chema@celorio.com>
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose Celorio
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ * Author :
+ *    Chema Celorio <chema@celorio.com>
+ * 
  */
 
+
 #include <config.h>
-#include <gnome.h>
+#include <stdlib.h>
+#include <libgnomeui/gnome-dialog.h>
+#include <glade/glade-xml.h>
 
 #include "view.h"
 #include "search.h"
 #include "utils.h"
 #include "dialogs/dialogs.h"
-#include <glade/glade.h>
 
 static void
 gedit_goto_line (gint line)
@@ -45,7 +64,7 @@ gedit_goto_line (gint line)
 }
 
 static gboolean
-dialog_goto_get_dialog (GtkWidget **dialog_, GtkWidget **entry_)
+dialog_goto_line_get_dialog (GtkWidget **dialog_, GtkWidget **entry_)
 {
 	GtkWidget *dialog;
 	GtkWidget *entry;
@@ -78,13 +97,14 @@ dialog_goto_get_dialog (GtkWidget **dialog_, GtkWidget **entry_)
 }
 
 
-/* - On the first method, we don't free the dialog, and thus avoid memleaking, but it uses
-   more memory
+/* - In the first method, we don't free the dialog, and thus avoid memleaking, but it uses
+     more memory
    - The second method uses less memory overall since the dialog is freed after it is used
      but it memleaks, probably a mem-leak in gnome-libs. I keep this code here to eventually
      find this leak
+     (Chema)
 */
-#if 0 
+#if 1 
 void
 dialog_goto_line (void)
 {
@@ -96,7 +116,7 @@ dialog_goto_line (void)
 	gedit_debug(DEBUG_SEARCH, "");
 
 	if (goto_line_dialog == NULL)
-		if (!dialog_goto_get_dialog (&goto_line_dialog, &entry))
+		if (!dialog_goto_line_get_dialog (&goto_line_dialog, &entry))
 			return;
 
 	gnome_dialog_set_parent (GNOME_DIALOG (goto_line_dialog),
@@ -115,7 +135,6 @@ dialog_goto_line (void)
 
 	gnome_dialog_close (GNOME_DIALOG (goto_line_dialog));
 	
-	return;
 }
 
 #else

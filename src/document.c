@@ -35,20 +35,6 @@ GnomeMDI *mdi;
 typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
 static GnomeMDIChildClass *parent_class = NULL;
 
-void gedit_document_insert_text  (Document *doc, guchar *text, guint position,              gint undoable);
-void gedit_document_delete_text  (Document *doc,               guint position, gint length, gint undoable);
-void gedit_document_replace_text (Document *doc, guchar *text, guint position, gint length, gint undoable);
-void gedit_document_set_readonly (Document *doc, gint readonly);
-void gedit_document_text_changed_signal_connect (Document *doc);
-
-gchar*	gedit_document_get_tab_name (Document *doc);
-guchar* gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos);
-guchar*	gedit_document_get_buffer (Document * doc);
-guint	gedit_document_get_buffer_length (Document * doc);
-
-Document * gedit_document_new (void);
-Document * gedit_document_current (void);
-
 static gchar*		gedit_document_get_config_string (GnomeMDIChild *child);
 static gint		remove_child_cb (GnomeMDI *mdi, Document *doc);
 
@@ -58,11 +44,25 @@ static	void		gedit_document_class_init (DocumentClass *class);
 static	void		gedit_document_init (Document *doc);
 	GtkType		gedit_document_get_type (void);
 
-void gedit_mdi_init (void);
-gboolean gedit_document_load ( GList *file_list);
-void gedit_document_set_title (Document *doc);
-void gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data);
-void gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state);
+/* ----- Local structs ------------ */
+
+struct _DocumentClass
+{
+	GnomeMDIChildClass parent_class;
+
+	void (*document_changed)(Document *, gpointer);
+	
+};
+
+
+
+
+
+
+
+
+
+
 
 /**
  * gedit_document_insert_text: Inserts text to a document and hadles all the details like
@@ -76,7 +76,7 @@ void gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state);
  *
  **/
 void
-gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable)
+gedit_document_insert_text (Document *doc, const guchar *text, guint position, gint undoable)
 {
 	View *view;
 	GtkText *text_widget;
@@ -143,13 +143,19 @@ gedit_document_delete_text (Document *doc, guint position, gint length, gint und
  * is equivalent to delete_text + insert_text
  **/
 void
-gedit_document_replace_text (Document *doc, guchar * text_to_insert, guint position, gint length, gint undoable)
+gedit_document_replace_text (Document *doc, const guchar * text_to_insert,
+			     gint length, guint position, gint undoable)
 {
 	gchar *text_to_delete;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (text_to_insert != NULL);
+
 	text_to_delete = gedit_document_get_chars (doc, position, position + length);
+
+	g_return_if_fail (text_to_delete != NULL);
 
 	gedit_document_delete_text (doc, position, length, FALSE);
 	gedit_document_insert_text (doc, text_to_insert, position, FALSE);

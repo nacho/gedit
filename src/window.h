@@ -54,6 +54,7 @@ void	gedit_window_set_widgets_sensitivity (gint unsensitive);
    This migth not be such a bad idea ...
    instead of having the dialogs as public
    variables. Chema
+
 typedef struct _Window Window;
 struct _Window
 {

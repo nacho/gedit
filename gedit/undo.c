@@ -1,4 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* Cleaned 10-00 by Chema */
 /*
  * gedit
  * Copyright (C) 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach & Jose M Celorio
@@ -19,7 +20,6 @@
  */
 
 #include <config.h>
-#include <gnome.h>
 
 #include "window.h"
 #include "undo.h"
@@ -28,12 +28,18 @@
 #include "view.h"
 #include "prefs.h"
 
-static void gedit_undo_check_size (Document *doc);
-       void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
-       void gedit_undo_undo (GtkWidget *w, gpointer data);
-       void gedit_undo_redo (GtkWidget *w, gpointer data);
-       void gedit_undo_free_list (GList **list_pointer);
-static gint gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guchar * text);
+typedef struct _GeditUndoInfo  GeditUndoInfo;
+
+struct _GeditUndoInfo
+{
+	gchar *text;	/* The text data */
+	gint start_pos;	/* The position in the document */
+	gint end_pos;
+	gint action;	/* whether the user has inserted or deleted */
+	gint status;	/* the changed status of the document used with this node */
+	gfloat window_position;
+	gint mergeable;
+};
 
 /**
  * gedit_undo_check_size:
@@ -51,10 +57,6 @@ gedit_undo_check_size (Document *doc)
 	
 	gedit_debug (DEBUG_UNDO, "");
 
-	/*
-#define XTRA_DEBUG_INFO 
-	*/
-
 	if (settings->undo_levels < 1)
 		return;
 	
@@ -71,74 +73,7 @@ gedit_undo_check_size (Document *doc)
 		}
 	}
 
-#if 0	
-	g_print("The undo list size is : %i taking %i bytes. Levels are set at :%i \n\n",
-		g_list_length (doc->undo),
-		g_list_length (doc->undo) * sizeof (GeditUndoInfo),
-		settings->undo_levels);
-	for (n=0; n < g_list_length (doc->undo); n++)
-	{
-		nth_undo = g_list_nth_data (doc->undo, n);
-		if (nth_undo==NULL)
-			g_warning ("nth_undo==NULL");
-		g_print ("Level:%i Type :%i Text:%s Size:%i\n",
-			 n, nth_undo->action, nth_undo->text, nth_undo->end_pos - nth_undo->start_pos);
-	}
-#endif
 }
-
-/**
- * gedit_undo_add:
- * @text: 
- * @start_pos: 
- * @end_pos: 
- * @action: either GEDIT_UNDO_ACTION_INSERT or GEDIT_UNDO_ACTION_DELETE
- * @doc: 
- * @view: The view so that we save the scroll bar position.
- * 
- * Adds text to the undo stack. It also performs test to limit the number
- * of undo levels and deltes the redo list
- **/
-void
-gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
-		gint action, Document *doc, View *view)
-{
-	GeditUndoInfo *undo;
-
-	gedit_debug (DEBUG_UNDO, "");
-
-	g_return_if_fail (end_pos > start_pos);
-
-	gedit_undo_free_list (&doc->redo);
-
-	/* Set the redo sensitivity */
-	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_UNCHANGED, GEDIT_UNDO_STATE_FALSE);
-
-	if (gedit_undo_merge( doc->undo, start_pos, end_pos, action, text))
-		return;
-
-	if (view==NULL)
-		view = gedit_view_active ();
-	
-	undo = g_new (GeditUndoInfo, 1);
-	undo->text = g_strdup (text);
-	undo->start_pos = start_pos;
-	undo->end_pos = end_pos;
-	undo->action = action;
-	undo->status = doc->changed;
-	undo->window_position = gedit_view_get_window_position (view);
-	if (end_pos-start_pos!=1 || text[0]=='\n')
-		undo->mergeable = FALSE;
-	else
-		undo->mergeable = TRUE;
-
-	doc->undo = g_list_prepend (doc->undo, undo);
-
-	gedit_undo_check_size (doc);
-
-	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_TRUE, GEDIT_UNDO_STATE_UNCHANGED);
-}
-
 
 /**
  * gedit_undo_merge:
@@ -153,7 +88,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
  * Return Value: TRUE is merge was sucessful, FALSE otherwise
  **/
 static gint
-gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guchar* text)
+gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, const guchar* text)
 {
 	guchar * temp_string;
 	GeditUndoInfo * last_undo;
@@ -273,6 +208,62 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 
 	return TRUE;
 }
+
+/**
+ * gedit_undo_add:
+ * @text: 
+ * @start_pos: 
+ * @end_pos: 
+ * @action: either GEDIT_UNDO_ACTION_INSERT or GEDIT_UNDO_ACTION_DELETE
+ * @doc: 
+ * @view: The view so that we save the scroll bar position.
+ * 
+ * Adds text to the undo stack. It also performs test to limit the number
+ * of undo levels and deltes the redo list
+ **/
+void
+gedit_undo_add (const gchar *text, gint start_pos, gint end_pos,
+		GeditUndoAction action, Document *doc, View *view)
+{
+	GeditUndoInfo *undo;
+
+	gedit_debug (DEBUG_UNDO, "");
+
+	g_return_if_fail (text != NULL);
+	g_return_if_fail (end_pos > start_pos);
+	
+
+	gedit_undo_free_list (&doc->redo);
+
+	/* Set the redo sensitivity */
+	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_UNCHANGED, GEDIT_UNDO_STATE_FALSE);
+
+	if (gedit_undo_merge (doc->undo, start_pos, end_pos, action, text))
+		return;
+
+	if (view==NULL)
+		view = gedit_view_active ();
+	
+	undo = g_new (GeditUndoInfo, 1);
+	undo->text = g_strdup (text);
+	undo->start_pos = start_pos;
+	undo->end_pos = end_pos;
+	undo->action = action;
+	undo->status = doc->changed;
+	undo->window_position = gedit_view_get_window_position (view);
+	if (end_pos-start_pos!=1 || text[0]=='\n')
+		undo->mergeable = FALSE;
+	else
+		undo->mergeable = TRUE;
+
+	doc->undo = g_list_prepend (doc->undo, undo);
+
+	gedit_undo_check_size (doc);
+
+	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_TRUE, GEDIT_UNDO_STATE_UNCHANGED);
+}
+
+
 
 
 /**

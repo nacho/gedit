@@ -70,47 +70,6 @@ extern gint debug_window;
 #define	DEBUG_COMMANDS	GEDIT_DEBUG_COMMANDS,__FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_WINDOW	GEDIT_DEBUG_WINDOW,  __FILE__, __LINE__, __FUNCTION__
 
-static const struct poptOption options[] =
-{
-	{ "debug-window", '\0', 0, &debug_commands, 0,
-	  N_("Show window debugging messages."), NULL },
-
-	{ "debug-commands", '\0', 0, &debug_commands, 0,
-	  N_("Show commands debugging messages."), NULL },
-
-	{ "debug-document", '\0', 0, &debug_document, 0,
-	  N_("Show document debugging messages."), NULL },
-
-	{ "debug-file", '\0', 0, &debug_file, 0,
-	  N_("Show file debugging messages."), NULL },
-
-	{ "debug-plugins", '\0', 0, &debug_plugins, 0,
-	  N_("Show plugin debugging messages."), NULL },
-
-	{ "debug-prefs", '\0', 0, &debug_prefs, 0,
-	  N_("Show prefs debugging messages."), NULL },
-
-	{ "debug-print", '\0', 0, &debug_print, 0,
-	  N_("Show printing debugging messages."), NULL },
-
-	{ "debug-search", '\0', 0, &debug_search, 0,
-	  N_("Show search debugging messages."), NULL },
-
-	{ "debug-undo", '\0', 0, &debug_undo, 0,
-	  N_("Show undo debugging messages."), NULL },
-
-	{ "debug-view", '\0', 0, &debug_view, 0,
-	  N_("Show view debugging messages."), NULL },
-
-	{ "debug-recent", '\0', 0, &debug_recent, 0,
-	  N_("Show recent debugging messages."), NULL },
-
-	{ "debug", '\0', 0, &debug, 0,
-	  N_("Turn on all debugging messages."), NULL },
-
-	{NULL, '\0', 0, NULL, 0}
-};
-
 #define gedit_editable_active() GTK_EDITABLE(GEDIT_VIEW (gedit_view_active())->text)
 
 void	gedit_flash     (gchar *msg);

@@ -215,7 +215,7 @@ void
 find_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_debug (DEBUG_RECENT, "");
-	dialog_replace (FALSE);
+	gedit_dialog_replace (FALSE);
 }
 
 void
@@ -302,7 +302,7 @@ void
 replace_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_debug (DEBUG_RECENT, "");
-	dialog_replace(TRUE);
+	gedit_dialog_replace (TRUE);
 }
 
 
@@ -322,7 +322,7 @@ goto_line_cb (GtkWidget *widget, gpointer data)
 gint
 search_text_execute ( gulong starting_position,
 		      gint case_sensitive,
-		      guchar *text_to_search_for,
+		      const guchar *text_to_search_for,
 		      guint * pos_found,
 		      gint * line_found,
 		      gint * total_lines,
@@ -345,7 +345,9 @@ search_text_execute ( gulong starting_position,
 #endif
 
 	g_return_val_if_fail (gedit_search_info.state ==  SEARCH_IN_PROGRESS_YES, FALSE);
-	g_return_val_if_fail (starting_position < gedit_search_info.buffer_length, FALSE);
+
+	if (starting_position >= gedit_search_info.buffer_length)
+		return FALSE;
 	
 	case_sensitive_mask = case_sensitive?0:32;
 	text_length = strlen (text_to_search_for);
@@ -530,8 +532,8 @@ file_info ( gint pos,  gint *total_chars, gint *total_words, gint *total_lines,
 #define GEDIT_EXTRA_REPLACEMENTS 20
 
 gint
-gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_text,
-				   guchar *replace_text, gint case_sensitive,
+gedit_search_replace_all_execute ( View *view, guint start_pos, const guchar *search_text,
+				   const guchar *replace_text, gint case_sensitive,
 				   guchar **buffer)
 {
 	guchar * buffer_in;
@@ -619,10 +621,12 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 			p3=0;
 		}
 		
-		if (p2+2 > buffer_out_length - delta)
+		if (p2 > buffer_out_length - (delta*2))
 		{
-			if (delta < 1)
-				g_warning ("This should not happen. Don't wine on me if we crash latter on :-)\n");
+			if (delta < 1) {
+				g_warning ("This should not happen.\n");
+				g_print ("Delta %i, Buffer_out_length:%i, p2:%i\n", delta, buffer_out_length, p2);
+			}
 			buffer_out_length = buffer_in_length + (replacements + GEDIT_EXTRA_REPLACEMENTS) * delta;
 			buffer_out = g_realloc (buffer_out, buffer_out_length);
 			if (buffer_out == NULL)
