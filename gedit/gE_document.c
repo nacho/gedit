@@ -244,11 +244,11 @@ gE_document
 	if (w->notebook == NULL) {
 		w->notebook = gtk_notebook_new();
 		gtk_notebook_set_scrollable(GTK_NOTEBOOK(w->notebook), TRUE);
-/*		gtk_signal_connect_after(GTK_OBJECT(w->notebook),
+		gtk_signal_connect_after(GTK_OBJECT(w->notebook),
 			"switch_page",
 			GTK_SIGNAL_FUNC(notebook_switch_page),
 			w);
-*/
+
 	}
 	
 	vpaned = gtk_vbox_new (TRUE, TRUE);
@@ -506,19 +506,19 @@ notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 	gE_document *doc;
 	gchar *title;
 
-	g_assert(window != NULL);
-	g_assert(window->window != NULL);
+/*	g_assert(window != NULL);
+	g_assert(window->window != NULL);*/
 
 	if (window->documents == NULL)
 		return;	
-
+/*
 	if (GTK_WIDGET_REALIZED(window->window)) {
-		doc = g_list_nth_data(window->documents, num);
-		gtk_widget_grab_focus(doc->text);
+		doc = g_list_nth_data(window->documents, num);*/
+		gtk_widget_grab_focus(gE_document_current(window)->text);
 		title = g_malloc0(strlen(GEDIT_ID) +
-				strlen(GTK_LABEL(doc->tab_label)->label) + 4);
+				strlen(GTK_LABEL(gE_document_current(window)->tab_label)->label) + 4);
 		sprintf(title, "%s - %s",
-			GEDIT_ID, GTK_LABEL(doc->tab_label)->label);
+			GEDIT_ID, GTK_LABEL(gE_document_current(window)->tab_label)->label);
 		gtk_window_set_title(GTK_WINDOW(window->window), title);
 		g_free(title);
 
@@ -528,7 +528,7 @@ notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
 				GTK_CLIST(window->files_list_window_data),
 				num,
 				FlwFnumColumn);
-	}
+	/*}*/
 }
 
 static void
