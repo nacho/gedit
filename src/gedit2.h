@@ -43,10 +43,10 @@ extern GeditMDI* gedit_mdi;
 extern gboolean gedit_close_x_button_pressed;
 extern gboolean gedit_exit_button_pressed;
 
-BonoboWindow* 		gedit_get_active_window 		();
-GeditDocument* 		gedit_get_active_document 		();
-GeditView* 		gedit_get_active_view 			();
-GList* 			gedit_get_top_windows 			();
+BonoboWindow* 		gedit_get_active_window 		(void);
+GeditDocument* 		gedit_get_active_document 		(void);
+GeditView* 		gedit_get_active_view 			(void);
+GList* 			gedit_get_top_windows 			(void);
 BonoboUIComponent*	gedit_get_ui_component_from_window 	(BonoboWindow* win);
 
 

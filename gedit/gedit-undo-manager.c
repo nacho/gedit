@@ -120,7 +120,7 @@ static void gedit_undo_manager_check_list_size 		(GeditUndoManager *um);
 
 static gboolean gedit_undo_manager_merge_action 	(GeditUndoManager *um, 
 		                                         GeditUndoAction *undo_action);
-static guint gedit_undo_manager_get_number_of_groups 	(GeditUndoManager *um);
+static gint gedit_undo_manager_get_number_of_groups 	(GeditUndoManager *um);
 
 static GObjectClass 	*parent_class 				= NULL;
 static guint 		undo_manager_signals [LAST_SIGNAL] 	= { 0 };
@@ -374,7 +374,7 @@ gedit_undo_manager_undo (GeditUndoManager *um)
 		g_signal_emit (G_OBJECT (um), undo_manager_signals [CAN_REDO], 0, TRUE);
 	}
 
-	if (um->priv->next_redo >= (g_list_length (um->priv->actions) - 1))
+	if (um->priv->next_redo >= (gint)(g_list_length (um->priv->actions) - 1))
 	{
 		um->priv->can_undo = FALSE;
 		g_signal_emit (G_OBJECT (um), undo_manager_signals [CAN_UNDO], 0, FALSE);
@@ -806,11 +806,11 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 	return TRUE;
 }
 
-static guint
+static gint
 gedit_undo_manager_get_number_of_groups (GeditUndoManager *um)
 {
 	GList *list = um->priv->actions;
-  	guint num = 0;
+  	gint num = 0;
 
 	gedit_debug (DEBUG_UNDO, "");
   

@@ -33,8 +33,9 @@
 
 #include <time.h>
 
-#include "gedit-plugin.h"
-#include "gedit-debug.h"
+#include <gedit-plugin.h>
+#include <gedit-debug.h>
+#include <gedit-menus.h>
 
 #define MENU_ITEM_LABEL		N_("_Insert Date/Time")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
@@ -43,6 +44,7 @@
 
 #define TIME_BASE_KEY 	"/apps/gedit2/plugins/time"
 #define SEL_FORMAT_KEY	"/sel-format"
+
 
 enum
 {
@@ -93,6 +95,27 @@ static gchar *formats[] =
 
 static gint 		 sel_format 		= 0;
 static GConfClient 	*time_gconf_client 	= NULL;	
+
+
+static char 			*get_time (const gchar* format);
+static void			 dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
+static GtkTreeModel		*create_model (TimeConfigureDialog *dialog);
+static void 			 scroll_to_selected (GtkTreeView *tree_view);
+static void			 create_formats_list (TimeConfigureDialog *dialog);
+static TimeConfigureDialog 	*get_configure_dialog (GtkWindow* parent);
+static void			 time_world_cb (BonoboUIComponent *uic, gpointer user_data, 
+						const gchar* verbname);
+static void			 ok_button_pressed (TimeConfigureDialog *dialog);
+static void			 help_button_pressed (TimeConfigureDialog *dialog);
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState configure (GeditPlugin *p, GtkWidget *parent);
+G_MODULE_EXPORT GeditPluginState save_settings (GeditPlugin *pd);
+
 
 static char *
 get_time (const gchar* format)
@@ -177,7 +200,7 @@ create_model (TimeConfigureDialog *dialog)
 	return GTK_TREE_MODEL (store);
 }
 
-void 
+static void 
 scroll_to_selected (GtkTreeView *tree_view)
 {
 	GtkTreeModel *model;
@@ -211,7 +234,6 @@ create_formats_list (TimeConfigureDialog *dialog)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
-	GtkWidget *button;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -440,6 +462,8 @@ destroy (GeditPlugin *plugin)
 	plugin->deactivate (plugin);
 
 	g_object_unref (G_OBJECT (time_gconf_client));
+
+	return PLUGIN_OK;
 }
 	
 G_MODULE_EXPORT GeditPluginState
@@ -470,7 +494,11 @@ activate (GeditPlugin *pd)
 G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
-       gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState

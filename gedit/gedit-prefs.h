@@ -115,7 +115,7 @@ extern GeditPreferences *gedit_settings;
 
 void gedit_prefs_save_settings (void);
 void gedit_prefs_load_settings (void);
-void gedit_prefs_init ();
+void gedit_prefs_init (void);
 
 gboolean gedit_prefs_configure_event_handler (GtkWidget	     *widget,
 					      GdkEventConfigure   *event);

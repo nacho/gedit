@@ -30,8 +30,12 @@
 #include <glade/glade-xml.h>
 #include <libgnome/gnome-i18n.h>
 
-#include "gedit-plugin.h"
-#include "gedit-debug.h"
+#include <string.h>
+
+#include <gedit-plugin.h>
+#include <gedit-debug.h>
+#include <gedit-utils.h>
+#include <gedit-menus.h>
 
 #define MENU_ITEM_LABEL		N_("Insert shell _output")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
@@ -57,6 +61,12 @@ static void dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDi
 static void	run_command_cb (BonoboUIComponent *uic, gpointer user_data, 
 			       const gchar* verbname);
 static gboolean	run_command_real (ShellOutputDialog *dialog);
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
 
 gchar *current_directory = NULL;
 
@@ -101,7 +111,6 @@ get_dialog ()
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-	GtkWidget *button;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -213,13 +222,12 @@ run_command_real (ShellOutputDialog *dialog)
 	const gchar    *directory_string = NULL ;
 	gboolean  retval;
 	gchar 	**argv = 0;
-	GError   *error = NULL;
 	gchar    *standard_output = NULL;
 	GeditDocument	*doc;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	g_return_if_fail (dialog != NULL);
+	g_return_val_if_fail (dialog != NULL, FALSE);
 
 	doc = gedit_get_active_document ();
 
@@ -340,6 +348,8 @@ destroy (GeditPlugin *plugin)
 	plugin->deactivate (plugin);
 
 	g_free (current_directory);
+
+	return PLUGIN_OK;
 }
 	
 G_MODULE_EXPORT GeditPluginState
@@ -390,8 +400,11 @@ activate (GeditPlugin *pd)
 G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
+	gedit_debug (DEBUG_PLUGINS, "");
+	
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
 
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState

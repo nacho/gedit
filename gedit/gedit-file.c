@@ -900,7 +900,7 @@ gedit_file_exit (void)
 void
 gedit_file_save_all (void)
 {
-	gint i = 0;
+	guint i = 0;
 	GeditMDIChild* child;
 	GtkWidget* view;
 

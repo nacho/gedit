@@ -34,8 +34,10 @@
 
 #include <string.h> /* For strlen (...) */
 
-#include "gedit-plugin.h"
-#include "gedit-debug.h"
+#include <gedit-plugin.h>
+#include <gedit-debug.h>
+#include <gedit-menus.h>
+#include <gedit-utils.h>
 
 #define MENU_ITEM_LABEL		N_("_Word Count")
 #define MENU_ITEM_PATH		"/menu/Search/SearchOps_3/"
@@ -59,9 +61,15 @@ static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 static DocInfoDialog *get_dialog ();
 static void dialog_response_handler (GtkDialog *dlg, gint res_id,  DocInfoDialog *dialog);
 
+static void	word_count_real (void);
 static void	word_count_cb (BonoboUIComponent *uic, gpointer user_data, 
 			       const gchar* verbname);
-static void	word_count_real ();
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+
 
 static void
 dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
@@ -99,7 +107,6 @@ get_dialog ()
 	GladeXML *gui;
 	GtkWindow *window;
 	GtkWidget *content;
-	GtkWidget *button;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -195,7 +202,7 @@ word_count_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
 }
 
 static void
-word_count_real ()
+word_count_real (void)
 {
 	DocInfoDialog *dialog;
 
@@ -343,6 +350,8 @@ G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState

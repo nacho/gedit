@@ -4,7 +4,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,11 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
 
-
-/* TODO: 
- * [X] check if all the preferences are really used in the code 
- */
 
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
@@ -559,7 +555,8 @@ gedit_prefs_load_settings (void)
 	gedit_debug (DEBUG_PREFS, "END");
 }
 
-static void gedit_prefs_notify_cb (GConfClient *client,
+static void 
+gedit_prefs_notify_cb (GConfClient *client,
 				   guint cnxn_id,
 				   GConfEntry *entry,
 				   gpointer user_data)
@@ -567,7 +564,8 @@ static void gedit_prefs_notify_cb (GConfClient *client,
 	gedit_debug (DEBUG_PREFS, "Key was changed: %s", entry->key);
 }
 
-void gedit_prefs_init ()
+void 
+gedit_prefs_init (void)
 {
 	gedit_debug (DEBUG_PREFS, "");
 

@@ -850,6 +850,8 @@ gedit_preferences_dialog_setup_undo_page (GeditPreferencesDialog *dlg, GladeXML 
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->undo_checkbutton), 
 			gedit_settings->undo_levels > 0);
+
+	return TRUE;
 }
 
 
@@ -864,6 +866,8 @@ gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML 
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->priv->tabs_width_spinbutton),
 					   (guint) gedit_settings->tab_size);
+
+	return TRUE;
 }
 
 static gboolean 
@@ -886,6 +890,8 @@ gedit_preferences_dialog_setup_logo_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_object_set_property (G_OBJECT (logo), "file" , &value);
 
 	g_value_unset (&value);
+
+	return TRUE;
 }
 
 static gboolean 

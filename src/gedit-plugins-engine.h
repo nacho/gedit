@@ -45,10 +45,10 @@ struct _GeditPluginInfo
 	GeditPluginActivationState 	 state;
 };
 
-gboolean	 gedit_plugins_engine_init 		();
-void		 gedit_plugins_engine_save_settings 	();
+gboolean	 gedit_plugins_engine_init 		(void);
+void		 gedit_plugins_engine_save_settings 	(void);
 
-const GList	*gedit_plugins_engine_get_plugins_list 	();
+const GList	*gedit_plugins_engine_get_plugins_list 	(void);
 
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPlugin *plugin);
 gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPlugin *plugin);

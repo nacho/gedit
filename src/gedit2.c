@@ -28,9 +28,7 @@
  * See the ChangeLog files for a list of changes. 
  */
 
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
@@ -206,7 +204,7 @@ main (int argc, char **argv)
 
 
 BonoboWindow*
-gedit_get_active_window ()
+gedit_get_active_window (void)
 {
 	g_return_val_if_fail (gedit_mdi != NULL, NULL);
 
@@ -214,7 +212,7 @@ gedit_get_active_window ()
 }
 
 GeditDocument*
-gedit_get_active_document ()
+gedit_get_active_document (void)
 {
 	BonoboMDIChild *active_child;
 
@@ -229,7 +227,7 @@ gedit_get_active_document ()
 }
 
 GeditView*
-gedit_get_active_view ()
+gedit_get_active_view (void)
 {
 	GtkWidget *active_view;
 
@@ -244,7 +242,7 @@ gedit_get_active_view ()
 }
 
 GList* 
-gedit_get_top_windows ()
+gedit_get_top_windows (void)
 {
 	g_return_val_if_fail (gedit_mdi != NULL, NULL);
 

@@ -24,10 +24,15 @@
  */
 
 #include <libgnome/gnome-i18n.h>
+
 #include <errno.h>
-#include "gedit-plugin.h"
-#include "gedit-file.h"
-#include "gedit-debug.h"
+#include <unistd.h>
+#include <string.h>
+
+#include <gedit-plugin.h>
+#include <gedit-file.h>
+#include <gedit-debug.h>
+#include <gedit-menus.h>
 
 #define GEDIT_CVSCHANGELOG_PLUGIN_PATH_STRING_SIZE 1
 
@@ -36,6 +41,12 @@
 #define MENU_ITEM_PATH		"/menu/File/FileOps/"
 #define MENU_ITEM_NAME		"CVSChangeLog"	
 #define MENU_ITEM_TIP		N_("Searches for ChangeLogs in the current document and opens them.")
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+
 
 static gchar *
 get_cwd (void)
@@ -142,11 +153,6 @@ cvs_changelogs_cb (BonoboUIComponent *uic, gpointer user_data, const gchar *verb
 
 }
 
-G_MODULE_EXPORT GeditPluginState
-destroy (GeditPlugin *plugin)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-}
 
 G_MODULE_EXPORT GeditPluginState
 update_ui (GeditPlugin *plugin, BonoboWindow *window)
@@ -212,6 +218,8 @@ G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *plugin)
 {
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState
@@ -220,7 +228,6 @@ init (GeditPlugin* plugin)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	plugin->destroy = destroy;
 	plugin->name = _("CVS ChangeLog");
 	plugin->desc = _("A plugin that opens ChangeLogs found in CVS commit messages.");
 	plugin->author = "James Willcox <jwillcox@cs.indiana.edu>";

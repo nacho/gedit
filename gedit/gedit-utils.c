@@ -50,6 +50,10 @@ typedef struct _MessageInfo MessageInfo;
 
 MessageInfo *current_mi = NULL;
 
+static gint remove_message_timeout (MessageInfo * mi);
+static void remove_timeout_cb (GtkWidget *win, MessageInfo *mi);
+static void bonobo_window_flash (BonoboWindow * win, const gchar * flash);
+
 static gint
 remove_message_timeout (MessageInfo * mi) 
 {
@@ -74,7 +78,7 @@ remove_message_timeout (MessageInfo * mi)
 
 /* Called if the win is destroyed before the timeout occurs. */
 static void
-remove_timeout_cb (GtkWidget *win, MessageInfo *mi ) 
+remove_timeout_cb (GtkWidget *win, MessageInfo *mi) 
 {
  	gtk_timeout_remove (mi->timeoutid);
   	g_free (mi);
@@ -93,7 +97,7 @@ static const guint32 flash_length = 3000; /* 3 seconds, I hope */
  * e.g. "Auto saving..."
  **/
 
-void 
+static void 
 bonobo_window_flash (BonoboWindow * win, const gchar * flash)
 {
 	BonoboUIComponent *ui_component;
@@ -311,7 +315,12 @@ gedit_dialog_add_button (GtkDialog *dialog, const gchar* text, const gchar* stoc
  * IT STILL HAS SOME BUGS
  */
 
-gchar *g_utf8_strcasestr(const gchar *haystack, const gchar *needle)
+static gchar *g_utf8_strcasestr(const gchar *haystack, const gchar *needle);
+static gboolean g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n);
+
+
+static gchar *
+g_utf8_strcasestr(const gchar *haystack, const gchar *needle)
 {
 	gsize needle_len;
 	gsize haystack_len;
@@ -379,7 +388,8 @@ finally_1:
 /*
  * n: len of the string in bytes
  */
-gboolean g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n)
+static gboolean 
+g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n)
 {
 	gchar *casefold;
 	gchar *normalized_s1;

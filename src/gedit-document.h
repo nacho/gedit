@@ -81,8 +81,8 @@ struct _GeditDocumentClass
 
 };
 
-#define GEDIT_DOCUMENT_IO_ERROR gedit_document_io_error_quark()
-GQuark 		gedit_document_io_error_quark();
+#define GEDIT_DOCUMENT_IO_ERROR gedit_document_io_error_quark ()
+GQuark 		gedit_document_io_error_quark (void);
 
 GType        	gedit_document_get_type      	(void) G_GNUC_CONST;
 

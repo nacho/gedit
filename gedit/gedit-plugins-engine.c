@@ -42,19 +42,19 @@
 
 #define GEDIT_PLUGINS_ENGINE_BASE_KEY "/apps/gedit2/plugins"
 
-static void		 gedit_plugins_engine_load_all 	();
-static void		 gedit_plugins_engine_load_dir	();
+static void		 gedit_plugins_engine_load_all 	(void);
+static void		 gedit_plugins_engine_load_dir	(const gchar *dir);
 static GeditPlugin 	*gedit_plugins_engine_load 	(const gchar *file);
 
 static GeditPluginInfo  *gedit_plugins_engine_find_plugin_info (GeditPlugin *plugin);
-static void		 gedit_plugins_engine_reactivate_all ();
+static void		 gedit_plugins_engine_reactivate_all (void);
 
 static GList *gedit_plugins_list = NULL;
 
 static GConfClient *gedit_plugins_engine_gconf_client = NULL;
 
 gboolean
-gedit_plugins_engine_init ()
+gedit_plugins_engine_init (void)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 	
@@ -75,7 +75,7 @@ gedit_plugins_engine_init ()
 }
 
 static void
-gedit_plugins_engine_load_all ()
+gedit_plugins_engine_load_all (void)
 {
 	gchar *pdir;
 
@@ -272,7 +272,7 @@ error:
 }
 
 void
-gedit_plugins_engine_save_settings ()
+gedit_plugins_engine_save_settings (void)
 {
 	GList *pl;
 
@@ -322,7 +322,7 @@ gedit_plugins_engine_save_settings ()
 
 
 const GList *
-gedit_plugins_engine_get_plugins_list ()
+gedit_plugins_engine_get_plugins_list (void)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -407,7 +407,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPlugin *plugin)
 }
 
 static void
-gedit_plugins_engine_reactivate_all ()
+gedit_plugins_engine_reactivate_all (void)
 {
 	GList *pl;
 	

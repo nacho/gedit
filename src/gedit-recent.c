@@ -225,7 +225,7 @@ static void
 gedit_recent_update_menus (BonoboWindow *win, GList *recent_files)
 {
 	BonoboUIComponent* ui_component;
-	int i;
+	guint i;
 
 	gedit_debug (DEBUG_RECENT, "");
 
@@ -355,7 +355,7 @@ gedit_recent_update (BonoboWindow *win)
 void
 gedit_recent_update_all_windows (BonoboMDI *mdi)
 {
-	gint i;
+	guint i;
 	GList *windows;
 	
 	gedit_debug (DEBUG_RECENT, "");
@@ -405,7 +405,7 @@ gedit_recent_add (const char *filename)
 static void
 gedit_recent_remove (char *filename)
 {
-	gint n;
+	guint n;
 	guchar * nth_list_item;
 
 	gedit_debug (DEBUG_RECENT, "");

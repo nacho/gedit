@@ -29,14 +29,21 @@
 
 #include <libgnome/gnome-i18n.h>
 
-#include "gedit-menus.h"
-#include "gedit-plugin.h"
-#include "gedit-debug.h"
+#include <gedit-menus.h>
+#include <gedit-plugin.h>
+#include <gedit-debug.h>
 
 #define MENU_ITEM_LABEL		N_("_Hello World")
 #define MENU_ITEM_PATH		"/menu/Tools/ToolsOps/"
 #define MENU_ITEM_NAME		"HelloWorld"	
 #define MENU_ITEM_TIP		N_("Prints Hello World.")
+
+G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
+G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
+G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+
 
 static void
 hello_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
@@ -85,6 +92,8 @@ G_MODULE_EXPORT GeditPluginState
 destroy (GeditPlugin *plugin)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
+
+	return PLUGIN_OK;
 }
 	
 G_MODULE_EXPORT GeditPluginState
@@ -115,6 +124,8 @@ G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
+
+	return PLUGIN_OK;
 }
 
 G_MODULE_EXPORT GeditPluginState

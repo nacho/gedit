@@ -485,13 +485,14 @@ gedit_document_get_short_name (const GeditDocument* doc)
 }
 
 GQuark 
-gedit_document_io_error_quark()
+gedit_document_io_error_quark (void)
 {
-  static GQuark quark;
-  if (!quark)
-    quark = g_quark_from_static_string ("gedit_io_load_error");
+	static GQuark quark;
+	
+	if (!quark)
+		quark = g_quark_from_static_string ("gedit_io_load_error");
 
-  return quark;
+	return quark;
 }
 
 static gboolean

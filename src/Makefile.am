@@ -5,6 +5,7 @@ bin_PROGRAMS = gedit2
 
 uidir = $(datadir)/gedit2/ui/
 
+
 INCLUDES = \
 	-I$(top_srcdir) 				\
 	-I$(top_builddir) 				\
@@ -14,13 +15,13 @@ INCLUDES = \
 	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DGEDIT_UI_DIR=\""$(datadir)/gedit2/ui/"\" 	\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit2/plugins"\"\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\"
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit2/glade/"\" 
 
-CFLAGS = -g -O2 -Wall -export-dynamic
- 
+gedit2_LDFLAGS = -export-dynamic
+
 gedit2_LDADD = 				\
 	dialogs/libdialogs.a		\
-	$(GEDIT_LIBS)
+	$(GEDIT_LIBS)			
 
 BUILT_SOURCES = 			\
 	gedit-marshal.c			\
