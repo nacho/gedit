@@ -1647,9 +1647,12 @@ gedit_utils_convert_to_utf8 (const gchar *content, gsize len,
 
 		/* not using a UTF-8 locale, so try converting
 		 * from that first */
-		locale_encoding = gedit_encoding_get_from_charset (locale_charset);
-		encodings = g_slist_prepend (encodings,
-					(gpointer)locale_encoding);
+		if (locale_charset != NULL)
+		{
+			locale_encoding = gedit_encoding_get_from_charset (locale_charset);
+			encodings = g_slist_prepend (encodings,
+						(gpointer)locale_encoding);
+		}
 	}
 
 	start = encodings;

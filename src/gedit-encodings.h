@@ -36,7 +36,7 @@ typedef struct _GeditEncoding GeditEncoding;
 
 
 const GeditEncoding			*gedit_encoding_get_from_charset 	(const gchar *charset);
-const GeditEncoding			*gedit_encoding_get_from_index  	(gint indext);
+const GeditEncoding			*gedit_encoding_get_from_index  	(gint index);
 
 gchar 					*gedit_encoding_to_string		(const GeditEncoding* enc);
 const gchar				*gedit_encoding_get_charset		(const GeditEncoding* enc);

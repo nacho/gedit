@@ -63,7 +63,7 @@ GtkType    	gedit_preferences_dialog_get_type 	(void) G_GNUC_CONST;
 
 GtkWidget*	gedit_preferences_dialog_new		(GtkWindow *parent);
 
-gboolean	gedit_preferences_dialog_add_encoding 	(GeditPreferencesDialog *dlg, 
-							 const GeditEncoding* enc);
+gboolean	gedit_preferences_dialog_add_encodings 	(GeditPreferencesDialog *dlg, 
+							 const GSList* encs);
 
 #endif /* __GEDIT_PREFERENCES_DIALOG_H__ */

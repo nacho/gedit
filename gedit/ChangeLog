@@ -1,3 +1,20 @@
+2002-10-02  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-document.[ch]: removed old unused stuff related to tags
+	(the old non-editable tag)
+
+	* gedit-prefs-manager.c (gedit_prefs_manager_get_encodings):
+	can return an empty list
+	(gedit_prefs_manager_set_encodings): implemented
+
+	* gedit-utils.c (gedit_utils_convert_to_utf8): manage wrong locales
+
+	* dialogs/gedit-preferences-dialog.[ch] (gedit_preferences_dialog_add_encodings): 
+	new function
+
+	* dialogs/gedit-encodings-dialog.c (add_button_pressed): fixed to
+	use the new function gedit_preferences_dialog_add_encodings
+
 2002-10-01  James Willcox  <jwillcox@gnome.org>
 
 	* gedit-prefs-manager.c:

@@ -1892,14 +1892,14 @@ gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg,
 static gboolean
 add_enc_to_list (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	GSList *list;
+	GSList **list;
 
 	GValue value = {0, };
 	const GeditEncoding *enc;
 
 	gedit_debug (DEBUG_PREFS, "");
 
-	list = (GSList *)data;
+	list = (GSList **)data;
 
 	gtk_tree_model_get_value (model, iter, COLUMN_ENCODING_POINTER, &value);
 
@@ -1913,7 +1913,7 @@ add_enc_to_list (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpoi
 		g_free (name);
 	}
 
-	list = g_slist_prepend (list, (gpointer) enc);
+	*list = g_slist_prepend (*list, (gpointer) enc);
 
 	g_value_unset (&value);
 
@@ -1934,11 +1934,11 @@ update_encodings_list (GeditPreferencesDialog *dlg)
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
 	g_return_if_fail (model != NULL);
 
-	gtk_tree_model_foreach (model, add_enc_to_list, enc_list);
+	gtk_tree_model_foreach (model, add_enc_to_list, &enc_list);
 
 	enc_list = g_slist_reverse (enc_list);
 
-	/* TODO */
+	gedit_prefs_manager_set_encodings (enc_list);
 
 	g_slist_free (enc_list);
 }
@@ -2024,11 +2024,15 @@ gedit_preferences_dialog_encodings_treeview_selection_changed (GtkTreeSelection 
 	g_return_if_fail (dlg != NULL);
 	g_return_if_fail (selection != NULL);
 
-	selected = gtk_tree_selection_get_selected (selection, NULL, NULL);
-	
+	selected = gtk_tree_selection_get_selected (selection, NULL, NULL) &&
+		gedit_prefs_manager_encodings_can_set ();
+		
 	gtk_widget_set_sensitive (dlg->priv->remove_enc_button, selected);
+	/* FIXME: enable the up and down button */
+	/*
 	gtk_widget_set_sensitive (dlg->priv->up_enc_button, selected);
 	gtk_widget_set_sensitive (dlg->priv->down_enc_button, selected);
+	*/
 }
 
 static gboolean 
@@ -2093,7 +2097,7 @@ gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML 
 	return TRUE;
 }
 
-gboolean
+static gboolean
 gedit_preferences_dialog_add_encoding (GeditPreferencesDialog *dlg, const GeditEncoding* enc)
 {
 	GtkTreeModel *model;
@@ -2143,10 +2147,27 @@ gedit_preferences_dialog_add_encoding (GeditPreferencesDialog *dlg, const GeditE
 				    -1);
 	g_free (name);
 
-	update_encodings_list (dlg);
-
 	return TRUE;
 }
 
+gboolean
+gedit_preferences_dialog_add_encodings (GeditPreferencesDialog *dlg, const GSList* encs)
+{
+	gboolean changed = FALSE;
+
+	while (encs != NULL)
+	{
+		const GeditEncoding* enc = (const GeditEncoding *)encs->data;
+		
+		changed |= gedit_preferences_dialog_add_encoding (dlg, enc);
+
+		encs = g_slist_next (encs);
+	}
+	
+	if (changed)
+		update_encodings_list (dlg);
+
+	return changed;
+}
 
 

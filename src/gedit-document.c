@@ -52,8 +52,6 @@
 
 #include "gedit-marshal.h"
 
-#define NOT_EDITABLE_TAG_NAME "not_editable_tag"
-
 #ifdef MAXPATHLEN
 #define GEDIT_MAX_PATH_LEN  MAXPATHLEN
 #elif defined (PATH_MAX)
@@ -91,8 +89,6 @@ enum {
 	LAST_SIGNAL
 };
 
-static void gedit_document_base_init 		(GeditDocumentClass 	*klass);
-static void gedit_document_base_finalize	(GeditDocumentClass 	*klass);
 static void gedit_document_class_init 		(GeditDocumentClass 	*klass);
 static void gedit_document_init 		(GeditDocument 		*document);
 static void gedit_document_finalize 		(GObject 		*object);
@@ -175,8 +171,8 @@ gedit_document_get_type (void)
       		static const GTypeInfo our_info =
       		{
         		sizeof (GeditDocumentClass),
-        		(GBaseInitFunc) gedit_document_base_init,
-        		(GBaseFinalizeFunc) gedit_document_base_finalize,
+        		NULL, 		/* base_init,*/
+        		NULL, 		/* base_finalize, */
         		(GClassInitFunc) gedit_document_class_init,
         		NULL,           /* class_finalize */
         		NULL,           /* class_data */
@@ -194,25 +190,6 @@ gedit_document_get_type (void)
 	return document_type;
 }
 
-static void
-gedit_document_base_init (GeditDocumentClass *klass)
-{
-	GtkTextTag *not_editable_tag;
-
-	klass->tag_table = gtk_text_tag_table_new ();
-
-	not_editable_tag =  gtk_text_tag_new (NOT_EDITABLE_TAG_NAME);	
-	g_object_set (G_OBJECT (not_editable_tag), "editable", FALSE, NULL);
-	
-	gtk_text_tag_table_add (klass->tag_table, not_editable_tag);	
-}
-
-static void
-gedit_document_base_finalize (GeditDocumentClass *klass)
-{
-	g_object_unref (G_OBJECT (klass->tag_table));
-	klass->tag_table = NULL;
-}
 	
 static void
 gedit_document_class_init (GeditDocumentClass *klass)
@@ -300,10 +277,6 @@ gedit_document_init (GeditDocument *document)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_return_if_fail (document->buffer.tag_table == NULL);
-	document->buffer.tag_table = (GEDIT_DOCUMENT_GET_CLASS (document))->tag_table;
-	g_object_ref (G_OBJECT (document->buffer.tag_table));
-		
 	document->priv = g_new0 (GeditDocumentPrivate, 1);
 	
 	document->priv->uri = NULL;

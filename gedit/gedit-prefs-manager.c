@@ -1551,22 +1551,7 @@ gedit_prefs_manager_get_encodings (void)
 				GCONF_VALUE_STRING, 
 				NULL);
 
-	if (strings == NULL)
-	{
-		gint i;
-		gchar* def [] = GPM_DEFAULT_ENCODINGS;
-
-		for (i = 0; def [i] != NULL; i++)
-		{
-			const GeditEncoding *enc;
-
-			enc = gedit_encoding_get_from_charset (def [i]);
-			
-			if (enc != NULL)
-				res = g_slist_prepend (res, (gpointer)enc);
-		}
-	}
-	else
+	if (strings != NULL)
 	{	
 		GSList *tmp;
 		const GeditEncoding *enc;
@@ -1590,23 +1575,46 @@ gedit_prefs_manager_get_encodings (void)
 		}
 
 		g_slist_foreach (strings, (GFunc) g_free, NULL);
-		g_slist_free (strings);           
-	}
+		g_slist_free (strings);    
 
+	 	res = g_slist_reverse (res);
+	}
 	return res;
 }
 
 void
 gedit_prefs_manager_set_encodings (const GSList *encs)
 {	
-	g_return_if_fail (encs != NULL);
+	GSList *list = NULL;
 	
 	g_return_if_fail (gedit_prefs_manager != NULL);
 	g_return_if_fail (gedit_prefs_manager->gconf_client != NULL);
 	g_return_if_fail (gedit_prefs_manager_encodings_can_set ());
 
-	/* TODO */
+	while (encs != NULL)
+	{
+		const GeditEncoding *enc;
+		const gchar *charset;
+		
+		enc = (const GeditEncoding *)encs->data;
 
+		charset = gedit_encoding_get_charset (enc);
+		g_return_if_fail (charset != NULL);
+
+		list = g_slist_prepend (list, (gpointer)charset);
+
+		encs = g_slist_next (encs);
+	}
+
+	list = g_slist_reverse (list);
+		
+	gconf_client_set_list (gedit_prefs_manager->gconf_client,
+			GPM_ENCODINGS,
+			GCONF_VALUE_STRING,
+		       	list,
+			NULL);	
+	
+	g_slist_free (list);
 }
 
 gboolean

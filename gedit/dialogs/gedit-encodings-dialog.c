@@ -113,7 +113,8 @@ add_button_pressed (GeditEncodingsDialog * dialog)
 {
 	GValue value = {0, };
 	const GeditEncoding* enc;
-
+	GSList *encs = NULL;
+	
 	GtkTreeIter iter;
 	GtkTreeSelection *selection;
 
@@ -131,8 +132,8 @@ add_button_pressed (GeditEncodingsDialog * dialog)
 		enc = gedit_encoding_get_from_index (g_value_get_int (&value));
 		g_return_if_fail (enc != NULL);
 	
-		gedit_preferences_dialog_add_encoding (dialog->prefs_dlg, enc);
-	
+		encs = g_slist_prepend (encs, (gpointer)enc);
+		
 		g_value_unset (&value);
 	}
 
@@ -146,10 +147,18 @@ add_button_pressed (GeditEncodingsDialog * dialog)
 			enc = gedit_encoding_get_from_index (g_value_get_int (&value));
 			g_return_if_fail (enc != NULL);
 	
-			gedit_preferences_dialog_add_encoding (dialog->prefs_dlg, enc);
+			encs = g_slist_prepend (encs, (gpointer)enc);
 	
 			g_value_unset (&value);
 		}
+	}
+
+	if (encs != NULL)
+	{
+		encs = g_slist_reverse (encs);
+		gedit_preferences_dialog_add_encodings (dialog->prefs_dlg, encs);
+
+		g_slist_free (encs);
 	}
 }
 

@@ -59,8 +59,6 @@ struct _GeditDocumentClass
 {
 	GtkTextBufferClass parent_class;
 
-	GtkTextTagTable *tag_table;
-
 	/* File name (uri) changed */
 	void (* name_changed)		(GeditDocument *document);
 
