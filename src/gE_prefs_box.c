@@ -437,7 +437,8 @@ void gE_property_box_new(gE_data *data)
  
   pbox = g_malloc(sizeof(gE_Prop_Box));
   pbox->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-
+  gtk_widget_set_usize (GTK_WIDGET(pbox->window), 500, 400);
+  
       gtk_signal_connect (GTK_OBJECT (pbox->window), "destroy",
 			  GTK_SIGNAL_FUNC(cancel),
 			  NULL);

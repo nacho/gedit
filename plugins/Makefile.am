@@ -6,11 +6,9 @@ endif
 
 if HAVE_GNOME
 spell = spell
-endif
-
-if HAVE_GNOME
 prm = prm
-endif
+ctag = ctag
+endf
 
 if WITH_GMODULE_PLUGINS
 
@@ -25,7 +23,7 @@ endif
 gmodule_plugins = $(shell) $(corba)
 endif
 
-SUBDIRS = client ctag cvsdiff diff email browse encrypt $(spell) \
+SUBDIRS = client $(ctag) cvsdiff diff email browse encrypt $(spell) \
 	  $(prm) convert $(gmodule_plugins) $(extra_dirs)
 
 EXTRA_DIST = plugin_howto gmodule_plugin_howto ChangeLog

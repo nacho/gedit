@@ -10,7 +10,7 @@ Release:   %rel
 Copyright: GPL
 Group:     Editors
 Source0:   gEdit-%{PACKAGE_VERSION}.tar.gz
-URL:       http://gedit.home.ml.org
+URL:       http://gedit.pn.org
 BuildRoot: /tmp/gEdit-%{PACKAGE_VERSION}-root
 Packager: Alex Roberts <bse@dial.pipex.com>
 Requires: gtk+ >= 1.1.7

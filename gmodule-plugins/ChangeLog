@@ -1,3 +1,12 @@
+1998-12-17  Alex Roberts <bse@dial.pipex.com>
+
+	* Makefile.am: added Fred's ctags plugin to  'if WITH_GNOME', as it uses
+	  features that will not work with gtk 1.0.x, and when it is finished will
+	  probably only use features in Gnome...
+	
+	* Makefile.am: Tidied up erroneous if WITH_GNOME's... all under ONE 
+	  'if WITH_GNOME'... No need to check multiple times...
+
 1998-12-15  Jeff Garzik  <jgarzik@Pobox.com>
 
 	* spell/spell.c:  s/gtk_spell/gnome_spell/
