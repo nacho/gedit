@@ -122,8 +122,8 @@ add_plugin_to_menu(gE_window * window, plugin_info * info)
    data->temp1 = g_strdup(info->plugin_name);
    data->temp2 = info;
    data->window = window;
-   path = g_new(gchar, strlen(_("Plugins")) + 2);
-   sprintf(path, "%s/", _("Plugins"));
+   path = g_new(gchar, strlen(_("_Plugins")) + 2);
+   sprintf(path, "%s/", _("_Plugins"));
    menu->label = g_strdup(info->menu_location);
    menu->type = GNOME_APP_UI_ITEM;
    menu->hint = NULL;
