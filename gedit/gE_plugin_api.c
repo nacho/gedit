@@ -67,7 +67,7 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	data->window = window;
 	path = g_malloc0 (strlen ("Plugins/") + 1);
 	sprintf (path, "Plugins/");
-	menu->label = g_strdup (info->plugin_name);
+	menu->label = g_strdup (info->menu_location);
 	menu->type = GNOME_APP_UI_ITEM;
 	menu->hint = NULL;
 	menu->moreinfo = start_plugin;
