@@ -2,6 +2,8 @@
 
 SUBDIRS = gedit pixmaps po help data plugins viewer
 
+distuninstallcheck_listfiles = find . -type f -print | grep -v '^\./var/scrollkeeper'
+
 EXTRA_DIST = BUGS		\
 	ChangeLog  		\
 	message-of-doom		\
