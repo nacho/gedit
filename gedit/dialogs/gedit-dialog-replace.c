@@ -221,11 +221,11 @@ dialog_replace_get_dialog (void)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GEDIT_RESPONSE_FIND);
 
-	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
-			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
+	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
+			 G_CALLBACK (dialog_destroyed), &dialog);
 
-	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "response",
-			   GTK_SIGNAL_FUNC (dialog_replace_response_handler), dialog);
+	g_signal_connect(G_OBJECT (dialog->dialog), "response",
+			 G_CALLBACK (dialog_replace_response_handler), dialog);
 
 	g_object_unref (G_OBJECT (gui));
 
@@ -308,11 +308,11 @@ dialog_find_get_dialog (void)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GEDIT_RESPONSE_FIND);
 
-	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
-			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
+	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
+			 G_CALLBACK (dialog_destroyed), &dialog);
 
-	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "response",
-			   GTK_SIGNAL_FUNC (dialog_find_response_handler), dialog);
+	g_signal_connect(G_OBJECT (dialog->dialog), "response",
+			 G_CALLBACK (dialog_find_response_handler), dialog);
 
 	g_object_unref (G_OBJECT (gui));
 

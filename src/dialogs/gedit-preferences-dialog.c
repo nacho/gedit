@@ -234,26 +234,30 @@ static CategoriesTreeItem toplevel [] =
 	{ NULL }
 };
 
-GtkType
+GType
 gedit_preferences_dialog_get_type (void)
 {
-	static GtkType dialog_type = 0;
+	static GType dialog_type = 0;
 
 	if (!dialog_type)
     	{
-      		static const GtkTypeInfo dialog_info =
+      		static const GTypeInfo dialog_info =
       		{
-			"GeditPreferencesDialog",
-			sizeof (GeditPreferencesDialog),
 			sizeof (GeditPreferencesDialogClass),
-			(GtkClassInitFunc) gedit_preferences_dialog_class_init,
-			(GtkObjectInitFunc) gedit_preferences_dialog_init,
-			/* reserved_1 */ NULL,
-        		/* reserved_2 */ NULL,
-        		(GtkClassInitFunc) NULL,
+        		NULL,		/* base_init */
+        		NULL,		/* base_finalize */
+        		(GClassInitFunc) gedit_preferences_dialog_class_init,
+        		NULL,           /* class_finalize */
+        		NULL,           /* class_data */
+        		sizeof (GeditPreferencesDialog),
+        		0,              /* n_preallocs */
+        		(GInstanceInitFunc) gedit_preferences_dialog_init
       		};
 
-     		dialog_type = gtk_type_unique (GTK_TYPE_DIALOG, &dialog_info);
+     		dialog_type = g_type_register_static (GTK_TYPE_DIALOG,
+						      "GeditPreferencesDialog",
+						      &dialog_info, 
+						      0);
     	}
 
 	return dialog_type;

@@ -1,5 +1,16 @@
 2002-02-05  Paolo Maggi  <maagi@athena.polito.it>
 
+	* dialogs/Makefile.am: define G*_DEPRECATED 
+	in INCLUDES
+
+	* dialogs/gedit-dialog-goto-line.c:
+	* dialogs/gedit-dialog-plugin-manager.c:
+	* dialogs/gedit-dialog-replace.c:
+	* dialogs/gedit-preferences-dialog.c: fix to compile
+	with G*_DEPRECATED
+	
+2002-02-05  Paolo Maggi  <maagi@athena.polito.it>
+
 	* gedit-file-selector-util.c: removed unused code
 	
 	* gedit-debug.c:

@@ -148,11 +148,11 @@ dialog_goto_line_get_dialog (void)
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GTK_RESPONSE_OK);
 
-	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "destroy",
-			   GTK_SIGNAL_FUNC (dialog_destroyed), &dialog);
+	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
+			 G_CALLBACK (dialog_destroyed), &dialog);
 
-	gtk_signal_connect(GTK_OBJECT (dialog->dialog), "response",
-			   GTK_SIGNAL_FUNC (dialog_response_handler), dialog);
+	g_signal_connect(G_OBJECT (dialog->dialog), "response",
+			 G_CALLBACK (dialog_response_handler), dialog);
 
 	g_object_unref (gui);
 
