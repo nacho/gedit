@@ -61,11 +61,16 @@ static void recent_cb(GtkWidget *w, gE_data *data);
 void
 doc_changed_cb(GtkWidget *w, gpointer cbdata)
 {
+gchar MOD_label[255];
+
 	gE_document *doc = (gE_document *) cbdata;
 
 	doc->changed = TRUE;
 	gtk_signal_disconnect (GTK_OBJECT(doc->text), (gint) doc->changed_id);
 	doc->changed_id = FALSE;
+	
+	sprintf(MOD_label, "*%s", GTK_LABEL(doc->tab_label)->label);
+	gtk_label_set(GTK_LABEL(doc->tab_label), MOD_label);
 }
 
 
