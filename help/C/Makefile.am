@@ -1,15 +1,64 @@
 ## Process this file with automake to produce Makefile.in.
 
-EXTRA_DIST = index.html topic.dat \
-	     gedit_help.txt
+figs = \
+	figures/mainwin.png \
+	figures/toolbar.png \
+	figures/preferences.png
 
-gedit_helpdir = $(datadir)/gnome/help/gedit/C
+app = gedit
+lang = C
+helpdir = $(datadir)/gnome/help/$(app)/$(lang)
+help_DATA = \
+	index.html	\
+	topic.dat	\
+	$(figs)
 
-dist-hook:
-	-cp $(EXTRA_DIST) $(distdir)
+EXTRA_DIST = $(app).sgml $(help_DATA)
 
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(gedit_helpdir)
-	$(INSTALL_DATA)  $(srcdir)/index.html $(DESTDIR)$(gedit_helpdir)
-	$(INSTALL_DATA)  $(srcdir)/topic.dat $(DESTDIR)$(gedit_helpdir)
+all: index.html
 
+index.html: $(app)/index.html
+	-cp $(app)/index.html .
+
+# the wierd srcdir trick is because the db2html from the Cygnus RPMs
+# cannot handle relative filenames
+$(app)/index.html: $(srcdir)/$(app).sgml
+	-srcdir=`cd $(srcdir) && pwd`; \
+	db2html $$srcdir/$(app).sgml
+
+app-dist-hook: index.html
+	-$(mkinstalldirs) $(distdir)/$(app)/stylesheet-images
+	-$(mkinstalldirs) $(distdir)/figures
+	-cp $(srcdir)/$(app)/*.html $(distdir)/$(app)
+	-cp $(srcdir)/$(app)/*.css $(distdir)/$(app)
+	-cp $(srcdir)/$(app)/stylesheet-images/*.png \
+		$(distdir)/$(app)/stylesheet-images
+	-cp $(srcdir)/figures/*.png \
+		$(distdir)/figures
+
+install-data-am: index.html
+	-$(mkinstalldirs) $(DESTDIR)$(helpdir)/stylesheet-images
+	-$(mkinstalldirs) $(DESTDIR)$(helpdir)/figures
+	-cp $(srcdir)/topic.dat $(DESTDIR)$(helpdir)
+	-for file in $(srcdir)/$(app)/*.html $(srcdir)/$(app)/*.css $(srcdir)/*.png; do \
+	  basefile=`echo $$file | sed -e 's,^.*/,,'`; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/$$basefile; \
+	done
+	-for file in $(srcdir)/figures/*.png; do \
+	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/figures/$$basefile; \
+	done
+	-for file in $(srcdir)/$(app)/stylesheet-images/*.gif; do \
+	  basefile=`echo $$file | sed -e  's,^.*/,,'`; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(helpdir)/stylesheet-images/$$basefile; \
+	done
+
+$(app).ps: $(srcdir)/$(app).sgml
+	-srcdir=`cd $(srcdir) && pwd`; \
+	db2ps $$srcdir/$(app).sgml
+
+$(app).rtf: $(srcdir)/$(app).sgml
+	-srcdir=`cd $(srcdir) && pwd`; \
+	db2ps $$srcdir/$(app).sgml
+
+dist-hook: app-dist-hook

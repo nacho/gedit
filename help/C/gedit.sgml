@@ -1,0 +1,1049 @@
+<!DOCTYPE Article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.0//EN"[
+        <!-- if not using PNG graphic, replace reference above with
+             .....PUBLIC "-//OASIS//DTD DocBook V3.1//EN"[
+         -->
+<!ENTITY version "0.7.1">
+        <!-- replace with actual application version number-->
+]>
+
+<!-- =============Document Header ============================= -->
+
+<article id="index"> <!-- please do not change the id -->
+
+ <artheader>
+  <title>gedit</title>
+  <copyright>
+   <year>1998</year>
+   <year>1999</year>
+   <year>2000</year>
+   <holder>Jason Leach, </holder>
+   <holder>Chema Celorio, </holder>
+   <holder>Alex Roberts and </holder>
+   <holder>Evan Lawrence </holder>
+  </copyright>
+
+  <!-- translators: uncomment this:
+
+  <copyright>
+   <year>2000</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+
+  <!-- do not put authorname in the header except in copyright - use
+  section "authors" below -->
+
+  <legalnotice>
+   <para>
+    Permission is granted to copy, distribute and/or modify this
+    document under the terms of the <citetitle>GNU Free Documentation
+    License</citetitle>, Version 1.1 or any later version published
+    by the Free Software Foundation with no Invariant Sections, no
+    Front-Cover Texts, and no Back-Cover Texts. You may obtain a copy
+    of the <citetitle>GNU Free Documentation License</citetitle> from
+    the Free Software Foundation by visiting <ulink type="http"
+    url="http://www.fsf.org">their Web site</ulink> or by writing to:
+    Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+    Boston, MA 02111-1307, USA.
+   </para>
+
+   <!-- please remove any of the trademarks below which you are -->
+   <!-- not using, and add new ones if necessary -->
+
+<!--   <para>
+    UNIX is a trademark of X/Open Group.
+   </para> -->
+   <para>
+    Linux is a trademark of Linus Torvalds.
+   </para>
+<!--
+   <para>
+    X Window System is a trademark of X Consortium, Inc.
+   </para> -->
+<!--   <para>
+    Red Hat and RPM are  trademarks of Red Hat, Inc.
+   </para> -->
+<!--
+   <para>
+    Windows is a trademark of Microsoft Corp.
+   </para> -->
+<!--   <para>
+    Macintosh and Apple are trademarks of Apple Computer, Inc.
+   </para> -->
+   <para>
+    All other trademarks are property of their respective owners.
+   </para>
+  </legalnotice>
+
+  <!-- this is version of manual, not application --> 
+<!--
+  <releaseinfo>
+  This is version 1.0 of MY-GNOME-APP manual.
+  </releaseinfo>
+-->
+ </artheader>
+
+ <!-- ============= Document Body ============================= -->
+
+ <!-- ============= Introduction ============================== -->
+ <sect1 id="intro">
+  <title>Introduction</title>
+
+  <para>
+   <application>gedit</application> is a basic text editor that also
+   allows you to perform most functions associated with text editing
+   such as copying, pasting, and searching through a document. gedit
+   also supports a <link linkend="sect.plugins">plugin</link> architecture.
+   gedit allows you to open multiple documents at a time and has a
+   handy tabbed interface for switching between documents. gedit,
+   like many other text editors, works with ASCII files and offers no
+   text formatting commands.
+  </para>
+
+  <para>
+   To find more information about <application>gedit</application>,
+   please visit the <ulink url="http://gedit.sourceforge.net"
+   type="http">gedit web page</ulink>.  
+  </para>
+    
+  <para>
+   To run <application>gedit</application>, select
+   <guimenuitem>gedit</guimenuitem> from the <guimenu>Applications
+   </guimenu> menu, or type <command>gedit</command> on the command
+    line. 
+  </para>
+
+  <para>
+   <application>gedit</application> is included in the
+   <filename>gedit</filename> package, which is part of the
+   GNOME desktop environment. This document describes version
+   &version; of <application>gedit</application>.
+  </para>
+
+ </sect1>
+
+
+ <!-- ================ Usage ================================ -->
+ <!-- This section should describe basic usage of the application. -->
+
+ <sect1 id="usage">
+  <title>Using gedit</title>
+  <para>
+   <application>gedit</application> is a text editor for the GNOME
+   desktop environment. It currently supports creation, opening,
+   closing, and saving of multiple files,  search  and replace,  an
+   options  interface, loading of files via the command line among
+   other uses.
+
+  </para>
+
+  <!-- ========= Basic Usage =========================== -->
+  <sect2 id="mainwin">
+   <title>Basic usage</title>
+   <para>
+    Starting <application>gedit</application> opens 
+    the <interface>Main window</interface>, shown in <xref
+    linkend="mainwindow-fig">.
+
+    <!-- ==== Figure ==== -->
+    <figure id="mainwindow-fig">
+     <title>gedit Main Window</title>
+     <screenshot>
+      <screeninfo>gedit Main Window</screeninfo>
+      <graphic fileref="mainwin" format="png"
+       srccredit="dkw">
+      </graphic>
+     </screenshot>
+    </figure>
+    <!-- ==== End of Figure ==== -->
+   </para>
+
+   <!-- You might want to include a note, warning, or tip, e.g. -->
+<!-- 
+   <warning>
+    <title>WARNING</title>
+    <para>
+     MY-GNOME-APP cannot prove incorrect theorems.
+    </para>
+   </warning>
+-->
+  </sect2>
+
+
+  <!-- This section should also describe main elements of graphic user
+       interface, such as menus and buttons, unless this description
+       is too long - in that case, it should be moved to a separate
+       section. For example -->
+
+
+  <!-- ========= Menus =========================== -->
+  <sect2 id="menubar">
+   <title>Menus</title>
+   <para>
+    The menu bar, located at the top of the <interface>Main
+    Window</interface>, contains the following menus:
+   </para>
+
+   <variablelist>
+
+    <varlistentry>
+     <term><guimenu><accel>F</accel>ile</guimenu></term>
+     <listitem>
+      <para>
+       This menu contains:
+       <itemizedlist>
+
+        <listitem>
+         <anchor id="menu.new">
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>N</accel>ew</guimenuitem>
+          </menuchoice>
+          &mdash; Creates a new file.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.open">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>F3</keysym></shortcut>
+           <guimenuitem><accel>O</accel>pen</guimenuitem>
+          </menuchoice>
+          &mdash; Opens an existing file.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.save">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-s</keysym></shortcut>
+           <guimenuitem><accel>S</accel>ave</guimenuitem>
+          </menuchoice>
+          &mdash; Saves the current file. If the file has already
+          been named, saves with the existing name. If not, acts
+          as Save As.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Save All</guimenuitem>
+          </menuchoice>
+          &mdash; Saves all open documents.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Save <accel>A</accel>s...</guimenuitem>
+          </menuchoice>
+          &mdash; Saves the current file and prompts for the name
+          and location to save the file in.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>R</accel>evert</guimenuitem>
+          </menuchoice>
+          &mdash; Reverts the current document back to its last
+          saved state.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Recent file list</guimenuitem>
+          </menuchoice>
+          &mdash; Shows the last three files opened.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.print">
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>P</accel>rint</guimenuitem>
+          </menuchoice>
+          &mdash; Prints the current file.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Print preview...</guimenuitem>
+          </menuchoice>
+          &mdash; Displays a preview of the printed document.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.close">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-w</keysym></shortcut>
+           <guimenuitem><accel>C</accel>lose</guimenuitem>
+          </menuchoice>
+          &mdash; Closes the current file. If the file has been
+          changed, promts to save the file.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Close All</guimenuitem>
+          </menuchoice>
+          &mdash; Closes all open files. Promts to save changed
+          files.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.exit">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-q</keysym></shortcut>
+           <guimenuitem>E<accel>x</accel>it</guimenuitem>
+          </menuchoice>
+          &mdash; Exits gedit, and closes all open files. Promts
+          to save changed files.
+         </para>
+        </listitem>
+
+       </itemizedlist>
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><guimenu><accel>E</accel>dit</guimenu></term>
+     <listitem>
+      <para>
+       This menu contains:
+       <itemizedlist>
+
+        <listitem>
+         <anchor id="menu.undo">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-z</keysym></shortcut>
+           <guimenuitem><accel>U</accel>ndo</guimenuitem>
+          </menuchoice>
+          &mdash; Undoes the last change made.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.redo">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-r</keysym></shortcut>
+           <guimenuitem><accel>R</accel>edo</guimenuitem>
+          </menuchoice>
+          &mdash; Reapplies the last <guimenuitem>Undo</guimenuitem>.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.cut">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-x</keysym></shortcut>
+           <guimenuitem>C<accel>u</accel>t</guimenuitem>
+          </menuchoice>
+          &mdash; Cut moves the selected text to a temporary
+          location where it can then be place in another location
+          or locations.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.copy">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-c</keysym></shortcut>
+           <guimenuitem><accel>C</accel>opy</guimenuitem>
+          </menuchoice>
+          &mdash; Copies the selected text to a temporary
+          location where it can then be placed in another
+          location or locations.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.paste">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>Ctrl-v</keysym></shortcut>
+           <guimenuitem><accel>P</accel>aste</guimenuitem>
+          </menuchoice>
+          &mdash; Places cut or copied text at the current
+          location.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>S</accel>elect All</guimenuitem>
+          </menuchoice>
+          &mdash; Selects all text in the current document.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.find">
+         <para>
+          <menuchoice>
+           <shortcut><keysym>F6</keysym></shortcut>
+           <guimenuitem><accel>F</accel>ind...</guimenuitem>
+          </menuchoice>
+          &mdash; Searches for text.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <shortcut><keysym>F7</keysym></shortcut>
+           <guimenuitem><accel>R</accel>eplace...</guimenuitem>
+          </menuchoice>
+          &mdash; Replaces text with alternate text.
+         </para>
+        </listitem>
+
+        <listitem>
+         <anchor id="menu.gotoline">
+         <para>
+          <menuchoice>
+           <guimenuitem>Goto <accel>L</accel>ine</guimenuitem>
+          </menuchoice>
+          &mdash; Moves to the specified line.
+         </para>
+        </listitem>
+
+       </itemizedlist>
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><guimenu><accel>V</accel>iew</guimenu></term>
+     <listitem>
+      <para>
+       This menu contains:
+       <itemizedlist>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>A</accel>dd View</guimenuitem>
+          </menuchoice>
+          &mdash; Unknown.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>R</accel>emove View</guimenuitem>
+          </menuchoice>
+          &mdash; Unknown.
+         </para>
+        </listitem>
+
+       </itemizedlist>
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><guimenu><accel>P</accel>lugins</guimenu></term>
+     <listitem>
+      <para>
+       See the <link linkend="sect.plugins">plugins</link> page.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><guimenu><accel>S</accel>ettings</guimenu></term>
+     <listitem>
+      <para>
+       This menu contains:
+       <itemizedlist>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Show Statusbar</guimenuitem>
+          </menuchoice>
+          &mdash; When selected, enables the status bar at the
+          bottom of the window.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>P</accel>references</guimenuitem>
+          </menuchoice>
+          &mdash; Displays the <link linkend="preferences">
+          preferences</link> window.
+         </para>
+        </listitem>
+
+       </itemizedlist>
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><guimenu>Fi<accel>l</accel>es</guimenu></term>
+     <listitem>
+      <para>
+       This menu contains:
+       <itemizedlist>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Document list</guimenuitem>
+          </menuchoice>
+          &mdash; Displays a list of the currently open
+          documents.
+         </para>
+        </listitem>
+
+       </itemizedlist>
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry>
+     <term><guimenu><accel>H</accel>elp</guimenu></term>
+     <listitem>
+      <para>
+       This menu contains:
+       <itemizedlist>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem>Help</guimenuitem>
+          </menuchoice>
+          &mdash; Displays this documentation within a browser.
+         </para>
+        </listitem>
+
+        <listitem>
+         <para>
+          <menuchoice>
+           <guimenuitem><accel>A</accel>bout</guimenuitem>
+          </menuchoice>
+          &mdash; Display basic information about gedit.
+         </para>
+        </listitem>
+
+       </itemizedlist>
+      </para>
+     </listitem>
+    </varlistentry>
+
+   </variablelist>
+  </sect2>
+
+ <!-- ============= Toolbar ============================= -->
+  <sect2 id="toolbar">
+   <title>Toolbar</title>
+   <para>
+    The toolbar, located at the top of the <interface>Main
+    Window</interface>, contains the following items:
+   </para>
+
+    <!-- ==== Figure ==== -->
+    <figure id="toolbar-fig">
+     <title>gedit Toolbar</title>
+     <screenshot>
+      <screeninfo>gedit Toolbar</screeninfo>
+      <graphic fileref="toolbar" format="png"
+       srccredit="dkw">
+      </graphic>
+     </screenshot>
+    </figure>
+    <!-- ==== End of Figure ==== -->
+
+   <para>
+    The toolbar provides a convenient way to access common
+    functions. Except where specified below, each operation
+    is identical to its corresponding menu item.
+    <itemizedlist>
+     <listitem>
+      <para>
+       <link linkend="menu.new">New</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.open">Open</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.save">Save</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.close">Close</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.print">Print</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.undo">Undo</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.redo">Redo</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.cut">Cut</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.copy">Copy</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.paste">Paste</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.find">Find</link>.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       Displays the total number of lines and the current line
+       number of the active document.
+      </para>
+     </listitem>
+     <listitem>
+      <para>
+       <link linkend="menu.exit">Exit</link>.
+      </para>
+     </listitem>
+    </itemizedlist>
+   </para>
+      
+  </sect2>
+ </sect1>
+
+ <!-- ============= Customization ============================= -->
+ <sect1 id="prefs">
+  <title>Customization</title>
+  <anchor id="preferences">
+  <para>
+   To change the application settings, select
+   <guimenuitem>Preferences&hellip;</guimenuitem> from the
+   <guimenu>Settings</guimenu> menu. This opens the
+   <interface>Preferences</interface> dialog, shown in <xref
+   linkend="preferences-fig">.
+  </para>
+
+  <figure id="preferences-fig">
+   <title>Preferences Dialog</title>
+   <screenshot>
+    <screeninfo>Preferences dialog</screeninfo>
+    <graphic fileref="preferences" format="png"
+     srccredit="dkw">
+    </graphic>
+   </screenshot>
+  </figure>
+
+  <para>
+   The properties in the <guilabel>General</guilabel> tab are:
+   <itemizedlist>
+
+    <listitem>
+     <para>
+      Show Statusbar &mdash; If this button is
+      checked, then a status bar is displayed at the
+      bottom of the window.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Show splitscreen &mdash; Selecting this allows you to split
+      the active document into two parts. Drag the tab button up to
+      see the 2nd splitscreen.
+     </para>
+    </listitem>
+
+    <listitem>
+     <anchor id="selection.wrap">    
+     <para>
+      Enable Wordwrap &mdash; If this option is active and the end
+      of line is reached while typing a word, the word will be moved
+      to the next line.
+     </para>
+    </listitem>
+
+   </itemizedlist>
+  </para>
+
+  <para>
+   The properties in the <guilabel>Documents</guilabel> tab are:
+   <itemizedlist>
+
+    <listitem>
+     <para>
+      Mode &mdash; Selecting <option>Notebook</option> will display
+      a tap for each open document. The location of the tap is
+      determined by the <option>Notebook Tap Position</option>
+      selection below. Selecting <option>Top Level</option> will
+      diplay a separate window for each open document. Selecting
+      <option>Modal</option> or <option>Default</option> will
+      do neither. Access to each document is available through the
+      <guimenu>Files</guimenu> menu.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Notebook Tab Position &mdash; Selecting one of <option>
+      Left</option>, <option>Right</option>, <option>Top</option>
+      or <option>Bottom</option> will place the notebook tab on
+      the specified side of the window, if Mode <option>Notebook
+      </option> is selected above.
+     </para>
+    </listitem>
+
+   </itemizedlist>
+  </para>
+
+  <para>
+   The properties in the <guilabel>Fonts/Colors</guilabel> tab are:
+   <itemizedlist>
+
+    <listitem>
+     <para>
+      Default Font &mdash; Clicking the <guibutton>Default Font
+      </guibutton> button displays a font selection dialog which
+      allows you to select the default font for <application>
+      gedit</application>. Please note that individual characters
+      or lines cannot have a different font. This select applies
+      to all documents.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Background &mdash; Clicking the <guibutton>Background
+      </guibutton> button displays a color selection dialog which
+      allows you to select the default background color.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Foreground &mdash; Clicking the <guibutton>Foreground
+      </guibutton> button displays a color selection dialog which
+      allows you to select the default foreground color.
+     </para>
+    </listitem>
+
+   </itemizedlist>
+  </para>
+
+  <para>
+   The properties in the <guilabel>Printing</guilabel> tab are:
+   <itemizedlist>
+
+    <listitem>
+     <para>
+      Add header &mdash; If this button is checked, a header is
+      included with the printed document.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Enable word wrapping &mdash; If this button is checked,
+      <link linkend="selection.wrap">word wrapping</link> is
+      enabled in the printed document
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Print line numbers every N line(s) &mdash; Prints line
+      numbers in the printed document at the specified interval.
+     </para>
+    </listitem>
+
+   </itemizedlist>
+  </para>
+
+  <para>
+   The properties in the <guilabel>Paper</guilabel> tab are:
+   <itemizedlist>
+
+    <listitem>
+     <para>
+      Paper &mdash; Displays a list of common paper formats.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Width &mdash; Selects the width of the printed document.
+      Selecting the <option>Paper</option> and <option>
+      Measurement</option> options will suggest the proper width.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Measurement &mdash; Displays a list of measurement scales
+      such as <option>Inch</option> or <option>Centimeter</option>
+      to be used in the <option>Width</option> and <option>Height
+      </option> selections.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Height &mdash; Selects the height of the printed document.
+      Selecting the <option>Paper</option> and <option>
+      Measurement</option> options will suggest the proper height.
+     </para>
+    </listitem>
+
+    <listitem>
+     <para>
+      Set System Paper Size &mdash; Selecting this option will
+      configure the above printing options to the ssytem default.
+     </para>
+    </listitem>
+
+   </itemizedlist>
+  </para>
+
+  <para>
+    After you have made all the changes you want, click on
+    <guibutton>Apply</guibutton> to apply the changes.Click on the
+    <guibutton>Ok</guibutton> or <guibutton>Close</guibutton>
+    button to close the <interface>Properties</interface> dialog.
+  </para>
+
+  </sect1>
+
+
+ <!-- ============= Various Sections ============================= -->
+ <!-- Here you should add, if necessary, several more sect1's,
+ describing other windows (besides the main one), file formats,
+ preferences dialogs,  etc. as appropriate. Try not to make any of
+ these sections too long. -->
+
+<!-- ============== Plugins ====================================== -->
+ <sect1 id="plugins">
+  <title>Plugins</title>
+  <anchor id="sect.plugins">
+  <para>
+    <application>gedit</application> supports a plugin archictecture.
+    The following plugins are supported in version &version;.
+    <itemizedlist>
+
+     <listitem>
+      <para>
+       <menuchoice>
+        <guimenuitem>Convert</guimenuitem>
+       </menuchoice>
+       &mdash; Coverts decimal to hexadecimal, decimal to
+       octal, or hexadecimal to decimal.
+      </para>
+     </listitem>
+
+     <listitem>
+      <para>
+       <menuchoice>
+        <guimenuitem>Insert Time</guimenuitem>
+       </menuchoice>
+       &mdash; Inserts a timestamp at the current location.
+      </para>
+     </listitem>
+
+     <listitem>
+      <para>
+       <menuchoice>
+        <guimenuitem>Email</guimenuitem>
+       </menuchoice>
+       &mdash; Sends the current document to the given email
+       address. Allows you to specify your address.
+      </para>
+     </listitem>
+
+     <listitem>
+      <para>
+       <menuchoice>
+        <guimenuitem>Diff</guimenuitem>
+       </menuchoice>
+       &mdash; Calculates the difference between the two
+       specified files, using the <command>diff</command> command,
+       and opens a new document containing the output.
+      </para>
+     </listitem>
+
+     <listitem>
+      <para>
+       <menuchoice>
+        <guimenuitem>Browse</guimenuitem>
+       </menuchoice>
+       &mdash; Displays the specified URL.
+      </para>
+     </listitem>
+
+    </itemizedlist>
+   </para>
+ </sect1>
+
+
+ <!-- ============= Bugs ================================== -->
+ <!-- This section should describe known bugs and limitations of
+      the program if there are any - please be frank and list all
+      problems you know of -->
+ <sect1 id="bugs">
+  <title>Known Bugs and Limitations</title>
+  <para>
+   To view the list of known bugs, please visit the <ulink 
+   url="http://bugs.gnome.org" type="http">GNOME bug tracking
+   database</ulink>
+  </para>
+  <para>
+   <application>gedit</application> requires the latest
+   <application>gnome-print</application>, either version
+   0.19 or <ulink url="http://cvs.gnome.org" type="http">cvs</ulink>,
+   to print properly.
+  </para>
+
+  <para>
+   If <guimenuitem>Exit</guimenuitem> is selected with a document
+   modified, <application>gedit</application> will ask to save the
+   changes. After saving the changes <application>gedit</application>
+   will not exit as expected.
+  </para>
+
+  <para> The following features contain bugs due to a problem with
+   the text widget we are using. We paln to migrate to Tktext in
+   the future to resolve these problems:
+   <itemizedlist>
+    <listitem>
+     <para>
+      Search and replace
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Line and Column numbering
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Syntax Highlighting &mdash; Support for syntax highlighting is
+      being considered. We feel that such support may not be
+      appropriate for gedit.
+     </para>
+    </listitem>
+   </itemizedlist>  
+  </para>
+ </sect1>
+
+
+<!-- ============= Authors ================================ -->
+
+ <sect1 id="authors">
+  <title>Authors</title>
+
+  <para>
+   <application>gedit</application> was written by
+   <ulink url="mailto:bse@error.fsnet.co.uk" type="mailto">
+   Alex Roberts</ulink> and Evan Lawrence. As of April 2000, 
+   <ulink url="mailto:leach@wam.umd.edu" type="mailto">Jason Leach
+   </ulink> and <ulink url="mailto:chema@celorio.com" type="mailto">
+   Chema Celorio</ulink> have taken over development responsibilities
+   and have rewritten major parts of the code.
+
+  <para>
+   Please send all comment about this manual to the author,
+   <ulink url="mailto:whitehse@odo.alterworld.net" type="mailto">
+   Dan White </ulink> 
+  </para>
+
+  <!-- For translations: uncomment this:
+
+  <para>
+   Latin translation was done by ME
+   (<email>MYNAME@MYADDRESS</email>). Please send all  comments  and
+   suggestions regarding this translation to SOMEWHERE.
+  </para>
+
+  -->
+
+ </sect1>
+
+
+ <!-- ============= Application License ============================= -->
+
+ <sect1 id="license">
+  <title>License</title>
+  <para>
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the <citetitle>GNU General Public
+   License</citetitle> as published by the Free Software Foundation;
+   either version 2 of the License, or (at your option) any later
+   version.
+  </para>
+  <para>
+   This program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   <citetitle>GNU General Public License</citetitle> for more details.
+  </para>
+  <para>
+   A copy of the <citetitle>GNU General Public License</citetitle> is
+   included as an appendix to the <citetitle>GNOME Users
+   Guide</citetitle>.  You may also obtain a copy of the
+   <citetitle>GNU General Public License</citetitle> from the Free
+   Software Foundation by visiting <ulink type="http"
+   url="http://www.fsf.org">their Web site</ulink> or by writing to
+   <address>
+    Free Software Foundation, Inc.
+    <street>59 Temple Place</street> - Suite 330
+    <city>Boston</city>, <state>MA</state> <postcode>02111-1307</postcode>
+    <country>USA</country>
+   </address>
+  </para>
+ </sect1>
+</article>
