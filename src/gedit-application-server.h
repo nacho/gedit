@@ -29,7 +29,7 @@ typedef struct
 
 GType          gedit_application_server_get_type (void);
 
-BonoboObject  *gedit_application_server_new      (void);
+BonoboObject  *gedit_application_server_new      (GdkScreen *screen);
 
 G_END_DECLS
 

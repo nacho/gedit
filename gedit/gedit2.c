@@ -385,7 +385,7 @@ main (int argc, char **argv)
 		bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi), NULL);
 	}
 
-	gedit_app_server = gedit_application_server_new ();
+	gedit_app_server = gedit_application_server_new (gdk_screen_get_default ());
 	
 	gtk_main();
 	

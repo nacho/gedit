@@ -31,6 +31,7 @@
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-context.h>
+#include <bonobo-activation/bonobo-activation-register.h>
 
 #include "gedit-application-server.h"
 #include "gedit-document-server.h"
@@ -59,13 +60,26 @@ gedit_application_server_factory (BonoboGenericFactory *this_factory,
 }
 
 BonoboObject *
-gedit_application_server_new (void)
+gedit_application_server_new (GdkScreen *screen)
 {
 	BonoboGenericFactory *factory;
+	char                 *display_name;
+	char                 *registration_id;
 
-	factory = bonobo_generic_factory_new ("OAFIID:GNOME_Gedit_Factory",
+	/* We must ensure an instance of gedit per screen
+	 * as gedit has no multiscreen support 
+	 */
+	display_name = gdk_screen_make_display_name (screen);
+	registration_id = bonobo_activation_make_registration_id (
+					"OAFIID:GNOME_Gedit_Factory",
+					display_name);
+
+	factory = bonobo_generic_factory_new (registration_id,
 					      gedit_application_server_factory,
 					      NULL);
+
+	g_free (display_name);
+	g_free (registration_id);
 
 	return BONOBO_OBJECT (factory);
 }
