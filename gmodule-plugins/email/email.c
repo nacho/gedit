@@ -16,7 +16,7 @@
 static GtkWidget *from_entry, *subject_entry, *to_entry;
 static int docid, context;
 
-void send_mail (GtkWidget *w, gpointer data)
+void send_mail (GnomeDialog *window)
 {
 	FILE *sendmail;
 	gchar *subject, *from, *to, *buffer, *command;
@@ -47,16 +47,17 @@ void send_mail (GtkWidget *w, gpointer data)
 	
 	pclose (sendmail);
 	client_finish (context);
-	gtk_main_quit ();
+	gnome_dialog_close (GNOME_DIALOG (window));
 }
 
 
 int main (int argc, char *argv[])
 {
-	GtkWidget *window, *from_label, *to_label, *subject_label, *file_label, *file;
-	GtkWidget *ok, *cancel;
-	GtkWidget *hbox, *vbox;
+	GnomeDialog *window;
+	GtkWidget *from_label, *to_label, *subject_label, *file_label, *file;
+	GtkWidget *hbox, *vbox, *table;
 	gchar *filename, *from;
+	gint butnnum;
 	char *user, *hostname;
 	client_info info = empty_info;
 	struct passwd *pw;
@@ -64,7 +65,6 @@ int main (int argc, char *argv[])
 	info.menu_location = "[Plugins]Email";
 	
 	context = client_init (&argc, &argv, &info);
-/*	gtk_init (&argc, &argv);*/
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
   	textdomain(PACKAGE);
 
@@ -73,24 +73,28 @@ int main (int argc, char *argv[])
 	docid = client_document_current (context);
 	filename = client_document_filename (docid);
 
-	window = gtk_dialog_new ();
-	gtk_window_set_title (GTK_WINDOW (window), "The gEdit Email Plugin");
-	gtk_signal_connect (GTK_OBJECT (window), "destroy", gtk_main_quit, NULL);
+	window = gnome_dialog_new ("Email",
+		GNOME_STOCK_BUTTON_OK,
+		GNOME_STOCK_BUTTON_CANCEL,
+		NULL);
+
 	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (window)->vbox), vbox, FALSE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (
+		GNOME_DIALOG (window)->vbox),
+		vbox, FALSE, TRUE, 2);
+
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 10);
 	
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
-	
+	table = gtk_table_new (3, 2, FALSE);
+	gtk_box_pack_start_defaults (GTK_BOX (vbox), table);
+
 	from_label = gtk_label_new ("From:     ");
-	gtk_box_pack_start (GTK_BOX (hbox), from_label, FALSE, TRUE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), from_label, 0, 1, 0, 1);
 	gtk_widget_show (from_label);
 	
 	from_entry = gtk_entry_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), from_entry, TRUE, TRUE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), from_entry, 1, 2, 0, 1);
 	gtk_widget_show (from_entry);
-	gtk_widget_show (hbox);
 	
 
 	user = getenv ("USER");
@@ -114,33 +118,25 @@ int main (int argc, char *argv[])
 		/*g_free (user);*/
 	}
 
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
-	
 	to_label = gtk_label_new ("To:        ");
-	gtk_box_pack_start (GTK_BOX (hbox), to_label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), to_label, 0, 1, 1, 2);
 	gtk_widget_show (to_label);
 	
 	to_entry = gtk_entry_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), to_entry, TRUE, TRUE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), to_entry, 1, 2, 1, 2);
 	gtk_widget_show (to_entry);
-	gtk_widget_show (hbox);
-	
-	hbox = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 	
 	subject_label = gtk_label_new ("Subject: ");
-	gtk_box_pack_start (GTK_BOX (hbox), subject_label, FALSE, FALSE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), subject_label, 0, 1, 2, 3);
 	gtk_widget_show (subject_label);
 	
 	subject_entry = gtk_entry_new ();
-	gtk_box_pack_start (GTK_BOX (hbox), subject_entry, TRUE, TRUE, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table), subject_entry, 1, 2, 2, 3);
 	if (strlen (filename) < 1)
 		gtk_entry_set_text (GTK_ENTRY (subject_entry), "Untitled");
 	else
 		gtk_entry_set_text (GTK_ENTRY (subject_entry), filename);
 	gtk_widget_show (subject_entry);
-	gtk_widget_show (hbox);
 	
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
@@ -157,21 +153,13 @@ int main (int argc, char *argv[])
 	gtk_box_pack_start (GTK_BOX (hbox), file, TRUE, TRUE, 0);
 	gtk_widget_show (file);
 	gtk_widget_show (hbox);
-	
-	ok = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (window)->action_area), ok, FALSE, TRUE, 0);
-	gtk_signal_connect (GTK_OBJECT (ok), "clicked", GTK_SIGNAL_FUNC (send_mail), NULL);
-	gtk_widget_show (ok);
-	
-	cancel = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (window)->action_area), cancel, FALSE, TRUE, 0);
-	gtk_signal_connect (GTK_OBJECT (cancel), "clicked", gtk_main_quit, NULL);
-	gtk_widget_show (cancel);
-	
 	gtk_widget_show (vbox);
-	gtk_widget_show (window);
 	
-	gtk_main ();
-	exit (0);
+	butnnum = gnome_dialog_run (GNOME_DIALOG (window));
+	
+	if (butnnum == 0)
+		send_mail (window);
+	
+	return 0;
 }
 
