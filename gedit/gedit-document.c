@@ -1063,6 +1063,33 @@ get_info_cb (GnomeVFSAsyncHandle *handle,
 		return;
 	}
 
+	/* just some extra paranoia, since we passed the follow-symlink flag... */
+	g_return_if_fail (info_result->file_info->type != GNOME_VFS_FILE_TYPE_SYMBOLIC_LINK);
+
+	/* if it's not a regular file, error out... */
+	if (info_result->file_info->type != GNOME_VFS_FILE_TYPE_REGULAR)
+	{
+		GError *error = NULL;
+
+		gedit_debug (DEBUG_DOCUMENT, "File %s is of type: %d",
+			     doc->priv->temp_uri, info_result->file_info->type);
+
+		reset_temp_data (doc);
+
+		error = g_error_new (GEDIT_DOCUMENT_IO_ERROR, 
+				     GEDIT_ERROR_NOT_REGULAR_FILE,
+				     "Not a regular file");
+
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADED], 
+			       0,
+			       error);
+
+		g_error_free (error);
+
+		return;
+	}
+
 	if (info_result->file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
 	{
 		doc->priv->temp_size = (gulong)info_result->file_info->size;
@@ -1088,22 +1115,80 @@ static gboolean
 load_local (GeditDocument *doc)
 {
 	GError *error = NULL;
+	GnomeVFSFileInfo *info;
 	GnomeVFSResult res;
 	gint file_size;
 	gchar *file_contents;
 	gboolean ret;
-	
+
 	PROFILE (
 		g_message ("Start loading entire file %s: %.3f", 
 			doc->priv->uri, g_timer_elapsed (timer, NULL));
 	)
+
+	info = gnome_vfs_file_info_new ();
+
+	res = gnome_vfs_get_file_info (doc->priv->temp_uri,
+				       info,
+				       GNOME_VFS_FILE_INFO_DEFAULT |
+				       GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+
+	if (res != GNOME_VFS_OK)
+	{
+		reset_temp_data (doc);
+
+		gnome_vfs_file_info_unref (info);
+
+		error = g_error_new (GEDIT_DOCUMENT_IO_ERROR, 
+				     res,
+				     gnome_vfs_result_to_string (res));
+
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADED], 
+			       0,
+			       error);
+
+		g_error_free (error);
+
+		return FALSE;
+	}
+
+	/* just some extra paranoia, since we passed the follow-symlink flag... */
+	g_return_val_if_fail (info->type != GNOME_VFS_FILE_TYPE_SYMBOLIC_LINK, FALSE);
+
+	/* if it's not a regular file, error out... */
+	if (info->type != GNOME_VFS_FILE_TYPE_REGULAR)
+	{
+		GError *error = NULL;
+
+		gedit_debug (DEBUG_DOCUMENT, "File %s is of type: %d",
+			     doc->priv->temp_uri, info->type);
+
+		reset_temp_data (doc);
+
+		error = g_error_new (GEDIT_DOCUMENT_IO_ERROR, 
+				     GEDIT_ERROR_NOT_REGULAR_FILE,
+				     "Not a regular file");
+
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADED], 
+			       0,
+			       error);
+
+		g_error_free (error);
+		gnome_vfs_file_info_unref (info);
+
+		return FALSE;
+	}
+
+	gnome_vfs_file_info_unref (info);
 
 	res = gnome_vfs_read_entire_file (doc->priv->temp_uri, 
 					  &file_size, 
 					  &file_contents);
 
 	if (res != GNOME_VFS_OK)
-	{		
+	{
 		reset_temp_data (doc);
 		
 		g_free (file_contents);
