@@ -4,7 +4,7 @@ SUBDIRS = macros po intl pixmaps plugins src help
 
 EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	INSTALL gedit.1 gedit.desktop \
-	ABOUT-NLS TODO TODO-road_to_1.0.0 gedit.spec.in gedit.keys
+	ABOUT-NLS TODO gedit.spec.in gedit.keys app-docs.make
 
 man_MANS = gedit.1
 

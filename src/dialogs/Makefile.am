@@ -25,7 +25,6 @@ glade_DATA =		\
 
 glade_msgs =			\
 	about.glade.h		\
-	find-line.glade.h	\
 	prefs.glade.h		\
 	replace.glade.h
 

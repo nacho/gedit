@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.5.5\n"
-"POT-Creation-Date: 2000-05-25 17:51+0000\n"
+"POT-Creation-Date: 2000-06-01 17:07-0400\n"
 "PO-Revision-Date: 2000-05-25 17:52+00:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -12,11 +12,11 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:166
+#: plugins/browse/browse.c:170
 msgid "Browse"
 msgstr "Просмотр Web"
 
-#: plugins/browse/browse.c:167
+#: plugins/browse/browse.c:171
 msgid "Web browse plugin"
 msgstr "Дополнение просмотра Web"
 
@@ -53,24 +53,24 @@ msgstr "Десятичное в восьмеричное"
 msgid "Hex to Decimal"
 msgstr "Шестнадцатиричное в десятичное"
 
-#: plugins/diff/diff.c:207
+#: plugins/diff/diff.c:211
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:208
+#: plugins/diff/diff.c:212
 msgid "Diff plugin."
 msgstr "Дополнение diff"
 
-#: plugins/email/email.c:129 plugins/email/email.c:138 src/document.c:160
-#: src/print.c:420 src/search.c:778 src/search.c:785
+#: plugins/email/email.c:135 plugins/email/email.c:144 src/document.c:161
+#: src/print.c:472
 msgid "Untitled"
 msgstr "Безымянное"
 
-#: plugins/email/email.c:160
+#: plugins/email/email.c:166
 msgid "Email"
 msgstr "Эл. адрес"
 
-#: plugins/email/email.c:161
+#: plugins/email/email.c:167
 msgid "Email the current document"
 msgstr "Эл. адрес текущего документа"
 
@@ -141,11 +141,11 @@ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit -- маленький и легкий текстовый редактор для GNOME/Gtk+"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:451
+#: src/dialogs/dialog-prefs.c:447
 msgid "gedit: Preferences"
 msgstr "gedit: Настройки"
 
-#: src/dialogs/dialog-replace.c:198
+#: src/dialogs/dialog-replace.c:261
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Текст найден в строке:%i"
@@ -343,11 +343,7 @@ msgstr "позиция курсора"
 msgid "Case sensitive"
 msgstr "Чувствительный к регистру"
 
-#: src/dialogs/replace.glade.h:16
-msgid "Ask before replacing"
-msgstr "Спрашивать перед заменой"
-
-#: src/document.c:346
+#: src/document.c:375
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' был изменен. Вы хотите сохранить его?"
@@ -446,7 +442,8 @@ msgstr ""
 "\n"
 " %s \n"
 "\n"
-"По неизвестной причине (2). Пожалуйста сообщите об этой Проблеме по адресу submit@bugs.gnome.org"
+"По неизвестной причине (2). Пожалуйста сообщите об этой Проблеме по адресу "
+"submit@bugs.gnome.org"
 
 #: src/file.c:279
 msgid "Open File ..."
@@ -779,7 +776,7 @@ msgstr "Страницы"
 msgid "gedit (%s): Print Preview"
 msgstr "gEdit (%s): Просмотр печати"
 
-#: src/print.c:536
+#: src/print.c:700
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Страница: %i/%i"
@@ -813,25 +810,13 @@ msgstr ""
 "Всего строк: %i\n"
 "Текущая строка: %i"
 
-#: src/search.c:404
+#: src/search.c:397
 msgid "Text not found"
 msgstr "Текст не найден"
 
-#: src/search.c:415
+#: src/search.c:408
 msgid "Text not found."
 msgstr "Текст не найден."
-
-#: src/search.c:1120
-msgid "Find In Files"
-msgstr "Поиск в файлах"
-
-#: src/search.c:1121
-msgid "Search"
-msgstr "Поиск"
-
-#: src/search.c:1125
-msgid "Search for:"
-msgstr "Поиск:"
 
 #: src/window.c:62
 msgid "Filename"
@@ -840,3 +825,15 @@ msgstr "Имя файла"
 #: src/window.c:64
 msgid "Contents"
 msgstr "Содержание"
+
+#~ msgid "Ask before replacing"
+#~ msgstr "Спрашивать перед заменой"
+
+#~ msgid "Find In Files"
+#~ msgstr "Поиск в файлах"
+
+#~ msgid "Search"
+#~ msgstr "Поиск"
+
+#~ msgid "Search for:"
+#~ msgstr "Поиск:"
