@@ -40,6 +40,7 @@
 #include "gedit-debug.h"
 #include "gedit-file.h"
 #include "gedit-utils.h"
+#include "gedit-session.h"
 
 #include "gedit-plugins-engine.h"
 
@@ -97,6 +98,9 @@ static const struct poptOption options [] =
 	{ "debug-recent", '\0', POPT_ARG_NONE, &debug_recent, 0,
 	  N_("Show recent debugging messages."), NULL },
 
+	 { "debug-session", '\0', POPT_ARG_NONE, &debug_session, 0,
+	  N_("Show session management debugging messages."), NULL },
+
 	{ "debug", '\0', POPT_ARG_NONE, &debug, 0,
 	  N_("Turn on all debugging messages."), NULL },
 
@@ -143,6 +147,7 @@ main (int argc, char **argv)
     	GnomeProgram *program;
 	poptContext ctx;
 	char **args;
+	gboolean restored = FALSE;
 
 	CommandLineData *data = NULL;
 	gint i;
@@ -171,31 +176,41 @@ main (int argc, char **argv)
 	/* Init plugins engine */
 	gedit_plugins_engine_init ();
 
-	/* Parse args and build the list of files to be loaded at startup */
-	g_value_init (&value, G_TYPE_POINTER);
-    	g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
-    	ctx = g_value_get_pointer (&value);
-    	g_value_unset (&value);
+	/* Initialize session management */
+	gedit_session_init (argv[0]);
 
-	args = (char**) poptGetArgs(ctx);
-	
-	data = g_new0 (CommandLineData, 1);
-
-	if (args)	
-		for (i = 0; args[i]; i++) 
-		{
-			if (*args[i] == '+') 
-				data->line_pos = atoi (args[i] + 1);		
-			else
-				data->file_list = g_list_append (data->file_list, args[i]);
-		}
-
-	/* Create gedit_mdi and open the first top level window */
+	/* Create our MDI object */
 	gedit_mdi = gedit_mdi_new ();
-	bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi)); 
 
-	gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)data);
+	if (gedit_session_is_restored ())
+		restored = gedit_session_load ();
 
+	if (!restored) {
+		/* Parse args and build the list of files to be loaded at startup */
+		g_value_init (&value, G_TYPE_POINTER);
+		g_object_get_property (G_OBJECT (program), GNOME_PARAM_POPT_CONTEXT, &value);
+		ctx = g_value_get_pointer (&value);
+		g_value_unset (&value);
+
+		args = (char**) poptGetArgs(ctx);
+	
+		data = g_new0 (CommandLineData, 1);
+
+		if (args)	
+			for (i = 0; args[i]; i++) 
+			{
+				if (*args[i] == '+') 
+					data->line_pos = atoi (args[i] + 1);		
+				else
+					data->file_list = g_list_append (data->file_list, args[i]);
+			}
+		
+		gtk_init_add ((GtkFunction)gedit_load_file_list, (gpointer)data);
+
+		/* Open the first top level window */
+		bonobo_mdi_open_toplevel (BONOBO_MDI (gedit_mdi)); 
+	}
+	
 	gtk_main();
 		
 	return 0;

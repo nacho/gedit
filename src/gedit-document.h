@@ -93,6 +93,7 @@ GeditDocument* 	gedit_document_new_with_uri 	(const gchar *uri, GError **error);
 void 		gedit_document_set_readonly 	(GeditDocument *doc, gboolean readonly);
 gboolean	gedit_document_is_readonly 	(GeditDocument *doc);
 
+gchar*		gedit_document_get_raw_uri 	(const GeditDocument* doc);
 gchar*		gedit_document_get_uri 		(const GeditDocument* doc);
 gchar*		gedit_document_get_short_name 	(const GeditDocument* doc);
 

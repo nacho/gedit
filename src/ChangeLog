@@ -1,3 +1,22 @@
+2002-05-15  Paolo Maggi <maggi@athena.polito.it>
+
+	Added basic session management (thanks to Federico Mena Quintero
+	for his initial patch and his help)
+
+	* gedit-session.[ch], bonobo-mdi-session.[ch]: new files
+
+	* Makefile.am: added the new files to gedit_SOURCES
+
+	* gedit-debug.[ch]: added support for debugging session
+	management related stuffs
+
+	* gedit-document.[ch]  (gedit_document_get_raw_uri): new function
+
+	* gedit-mdi-child.c (gedit_mdi_child_get_config_string): new function
+	(implementation of the virtual function get_config_string)
+
+	* gedit2.c (main): almost rewritten to add SM support
+
 2002-05-14  Paolo Maggi <maggi@athena.polito.it>
 
 	* gedit-ui.xml: added accellerator to help menu items

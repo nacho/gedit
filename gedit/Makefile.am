@@ -62,10 +62,14 @@ gedit_SOURCES = 			\
 	gedit-undo-manager.c		\
 	gedit-print.h			\
 	gedit-print.c			\
-	bonobo-mdi-child.c		\
-	bonobo-mdi-child.h		\
+	gedit-session.c			\
+	gedit-session.h			\
 	bonobo-mdi.c			\
 	bonobo-mdi.h			\
+	bonobo-mdi-child.c		\
+	bonobo-mdi-child.h		\
+	bonobo-mdi-session.c		\
+	bonobo-mdi-session.h		\
 	gnome-vfs-helpers.c		\
 	gnome-vfs-helpers.h		\
 	gedit-file-selector-util.h 	\

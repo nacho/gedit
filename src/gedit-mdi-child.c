@@ -60,6 +60,8 @@ static void gedit_mdi_child_document_readonly_changed_handler (GeditDocument *do
 static void gedit_mdi_child_document_can_undo_redo_handler (GeditDocument *document, 
 						gboolean can, GeditMDIChild* child);
 
+static gchar* gedit_mdi_child_get_config_string (BonoboMDIChild *child, gpointer data);
+		
 static BonoboMDIChildClass *parent_class = NULL;
 static guint mdi_child_signals[LAST_SIGNAL] = { 0 };
 
@@ -127,6 +129,9 @@ gedit_mdi_child_class_init (GeditMDIChildClass *klass)
                     
 	BONOBO_MDI_CHILD_CLASS (klass)->create_view = 
 		(BonoboMDIChildViewCreator)(gedit_mdi_child_create_view);
+
+	BONOBO_MDI_CHILD_CLASS (klass)->get_config_string = 
+		(BonoboMDIChildConfigFunc)(gedit_mdi_child_get_config_string);
 }
 
 static void 
@@ -334,4 +339,17 @@ gedit_mdi_child_create_view (BonoboMDIChild *child)
 	return GTK_WIDGET (new_view);
 }
 
+static gchar* 
+gedit_mdi_child_get_config_string (BonoboMDIChild *child, gpointer data)
+{
+	GeditMDIChild *c;
+	
+	gedit_debug (DEBUG_MDI, "");
 
+	g_return_val_if_fail (child != NULL, NULL);
+	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), NULL);
+
+	c = GEDIT_MDI_CHILD (child);
+	
+	return gedit_document_get_raw_uri (c->document);
+}

@@ -524,6 +524,18 @@ gedit_document_real_readonly_changed (GeditDocument *document, gboolean readonly
 	g_return_if_fail (document != NULL);
 }
 
+
+gchar*
+gedit_document_get_raw_uri (const GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	if (doc->priv->uri == NULL)
+		return NULL;
+	else
+		return g_strdup (doc->priv->uri);
+}
+
 gchar*
 gedit_document_get_uri (const GeditDocument* doc)
 {

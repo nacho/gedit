@@ -45,6 +45,7 @@ gint debug_document = 0;
 gint debug_commands = 0;
 gint debug_recent = 0;
 gint debug_mdi = 0;
+gint debug_session = 0;
 
 void
 gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...)
@@ -69,6 +70,7 @@ gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* forma
 	    (debug_document && section == GEDIT_DEBUG_DOCUMENT) ||
 	    (debug_commands && section == GEDIT_DEBUG_COMMANDS) ||
 	    (debug_recent   && section == GEDIT_DEBUG_RECENT)   ||
+	    (debug_session  && section == GEDIT_DEBUG_SESSION)  ||
 	    (debug_mdi      && section == GEDIT_DEBUG_MDI) )
 		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
 	
