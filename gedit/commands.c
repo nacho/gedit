@@ -774,7 +774,7 @@ window_close_cb(GtkWidget *widget, gpointer cbdata)
 
 	data->flag = FALSE;	/* use flag to indicate all files closed */
 	file_close_all_cb(widget, cbdata);
-	gtk_widget_hide(data->window->window);
+	/*gtk_widget_hide(data->window->window);*/
 
 	if (data->flag) {
 		gE_msgbar_clear((gpointer)(data->window));
@@ -783,7 +783,7 @@ window_close_cb(GtkWidget *widget, gpointer cbdata)
 		close_window_common(data->window);	/* may not return */
 
 		data->window = g_list_nth_data(window_list, 0);
-		gtk_widget_hide(data->window->window);
+		/*gtk_widget_hide(data->window->window);*/
 	} else
 		gtk_widget_show(data->window->window);
 }

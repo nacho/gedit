@@ -250,7 +250,7 @@ GnomeUIInfo gedit_file_menu [] = {
 
 	{ GNOME_APP_UI_SEPARATOR },
 
-	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Exit"),  NULL, file_quit_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
 	  'Q', GDK_CONTROL_MASK, NULL },
 
