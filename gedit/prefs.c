@@ -76,21 +76,21 @@ gedit_prefs_save_settings (void)
 	gnome_config_set_int ("fgg", settings->fg[1]);
 	gnome_config_set_int ("fgb", settings->fg[2]);
 
-	toplevel = gdk_window_get_toplevel (GTK_WIDGET (gedit_window_active())->window);
-	gdk_window_get_root_origin (toplevel, &root_x, &root_y);
-	/* We don't want to save the size of a maximized window,
-	   so chek the left margin. This will not work if there is
-	   a pannel in left, but there is no other way that I know
-	   of knowing if a window is maximzed or not */
-	if (root_x != 0)
-		if (gedit_window_active())
-			gdk_window_get_size (GTK_WIDGET (gedit_window_active())->window,
-					     &settings->width, &settings->height);
-	
-	gnome_config_set_int ("width", (gint) settings->width);
-	gnome_config_set_int ("height", (gint) settings->height);
-
-
+	if (gedit_window_active ()) {
+		toplevel = gdk_window_get_toplevel (GTK_WIDGET (gedit_window_active())->window);
+		gdk_window_get_root_origin (toplevel, &root_x, &root_y);
+		/* We don't want to save the size of a maximized window,
+		   so chek the left margin. This will not work if there is
+		   a pannel in left, but there is no other way that I know
+		   of knowing if a window is maximzed or not */
+		if (root_x != 0)
+			if (gedit_window_active())
+				gdk_window_get_size (GTK_WIDGET (gedit_window_active())->window,
+						     &settings->width, &settings->height);
+		gnome_config_set_int ("width", (gint) settings->width);
+		gnome_config_set_int ("height", (gint) settings->height);
+	}
+		
 	gnome_config_set_bool ("printwrap", settings->print_wrap_lines);
 	gnome_config_set_bool ("printheader", settings->print_header);
 	gnome_config_set_int  ("printlines", settings->print_lines);
