@@ -77,7 +77,9 @@ dialog_open_uri_get_dialog (void)
 	}
 	gtk_object_unref (GTK_OBJECT (gui));
 
+	/*
 	gnome_entry_load_history (GNOME_ENTRY (uri_list));
+	*/
 	
 	gtk_signal_connect (GTK_OBJECT (open_button), "clicked",
 			    GTK_SIGNAL_FUNC (open_button_pressed), NULL);
@@ -88,7 +90,7 @@ dialog_open_uri_get_dialog (void)
 	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
 			    GTK_SIGNAL_FUNC (help_button_pressed), NULL);
 
-	gtk_window_set_modal       (GTK_WINDOW (open_uri_dialog), TRUE);
+	gtk_window_set_modal         (GTK_WINDOW (open_uri_dialog), TRUE);
 	gnome_dialog_set_default     (GNOME_DIALOG (open_uri_dialog), 0);
 	gnome_dialog_editable_enters (GNOME_DIALOG (open_uri_dialog), GTK_EDITABLE (uri));
 	gnome_dialog_close_hides     (GNOME_DIALOG (open_uri_dialog), TRUE);
@@ -129,7 +131,8 @@ open_button_pressed (GtkWidget *widget, gpointer data)
 	{
 		if (gedit_document_new_with_file (file_name))
 		{
-			gnome_entry_append_history ( GNOME_ENTRY (uri_list), TRUE, file_name);			
+			gnome_entry_append_history ( GNOME_ENTRY (uri_list), FALSE, file_name);	
+
 			gedit_flash_va (_("Loaded file %s"), file_name);
 			
  			gtk_widget_hide(open_uri_dialog);

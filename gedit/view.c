@@ -707,7 +707,7 @@ static void
 gedit_view_init (GeditView *view)
 {
 	GtkWidget *window;
-	GtkWidget *menu;
+	static GtkWidget *menu = NULL;
 	GtkStyle *style;
 	GdkColor *bg;
 	GdkColor *fg;
@@ -777,12 +777,19 @@ gedit_view_init (GeditView *view)
 	gtk_style_unref (style);
 
 	/* Popup Menu */
-	menu = gnome_popup_menu_new (popup_menu);
+	if (menu == NULL) 
+	{
+		menu = gnome_popup_menu_new (popup_menu);
+		/* popup menu will not be destroyed when all the view are closed
+		 * FIXME: destroy popup before exiting the program*/
+		gtk_widget_ref(menu);
+	}
+
+	/* The same popup menu is attached to all views */
 	gnome_popup_menu_attach (menu, GTK_WIDGET (view->text), view);
 
 	gtk_widget_show_all   (GTK_WIDGET (view));
 	gtk_widget_grab_focus (GTK_WIDGET (view->text));
-
 }
 
 

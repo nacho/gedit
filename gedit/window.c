@@ -473,7 +473,7 @@ gedit_window_set_widgets_sensitivity_ro (GnomeApp *app, gint unsensitive)
 		{
 			widget =  popup_menu [count].widget;
 	
-			if (GTK_IS_WIDGET (widget) && (GTK_OBJECT(widget)->ref_count > 0))
+			if ((widget != NULL) && GTK_IS_WIDGET (widget) /*&& (GTK_OBJECT(widget)->ref_count > 0)*/)
 			{
 				gtk_widget_set_sensitive (widget, !unsensitive);			
 		/*		g_print("%d %s\n", count, !unsensitive ? "sensitive" : "not sensitive");*/
