@@ -21,11 +21,22 @@
 
 typedef struct
 {
-  int (*create_callback) ( gchar *title );
-  void (*append_callback) ( gint id, gchar *data, gint length );
-  void (*show_callback) ( gint id );
-  int (*current_callback) ();
-  gchar * (*filename_callback) ( gint id );
+  gint (*create) ( gint context, gchar *title );
+  void (*show) ( gint id );
+  gchar* (*filename) ( gint id );
+  gint (*current) ( gint context );
+} plugin_document_callbacks;
+
+typedef struct
+{
+  void (*append) ( gint id, gchar *data, gint length );
+  gchar* (*get) ( gint id );
+} plugin_text_callbacks;
+
+typedef struct
+{
+  plugin_document_callbacks document;
+  plugin_text_callbacks text;
 } plugin_callback_struct;
 
 typedef struct
@@ -49,5 +60,5 @@ void plugin_send_data( plugin *, gchar *, gint length );
 void plugin_send_data_int( plugin *, gint );
 void plugin_get( plugin *, gchar *, gint length );
 void plugin_get_all( plugin *, gint length, plugin_callback *finished, gpointer data );
-void plugin_register( plugin *, plugin_callback_struct * );
+void plugin_register( plugin *, plugin_callback_struct *, gint context );
 #endif

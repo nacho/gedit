@@ -21,31 +21,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <gtk/gtk.h>
+#include "client.h"
 
-int fd;
-int fdsend;
-int fddata;
-GtkWidget *entry1;
-GtkWidget *entry2;
-GtkWidget *dialog;
+static GtkWidget *entry1;
+static GtkWidget *entry2;
+static gint context;
 
 void call_diff( GtkWidget *widget, gpointer data );
-
-static int getnumber( int fd )
-{
-  int number = 0;
-  int length = sizeof( int );
-  char *buff = (char *) &number;
-  buff += sizeof( int );
-  while( length -= read( fd, buff - length, length ) )
-    /* Empty statement */;
-  return number;
-}
-
-static void putnumber( int fd, int number )
-{
-  write( fd, &number, sizeof( number ) );
-}
 
 static void set_entry( GtkWidget *widget, gpointer data )
 {
@@ -70,19 +52,12 @@ static void open_file_sel( GtkWidget *widget, gpointer data )
 int main( int argc, char *argv[] )
 {
   GtkWidget *label;
-  GtkWidget *dialog;
   GtkWidget *hbox;
   GtkWidget *button;
-  if( argc < 5 || strcmp( argv[1], "-go" ) )
-    {
-      printf( "Must be run as a plugin.\n" );
-      _exit(1);
-    }
+  GtkWidget *dialog;
 
-  fd = atoi( argv[2] );
-  fdsend = atoi( argv[3] );
-  fddata = atoi( argv[4] );
-
+  context = client_init( &argc, &argv );
+  
   gtk_init( &argc, &argv );
 
   dialog = gtk_dialog_new();
@@ -122,7 +97,7 @@ int main( int argc, char *argv[] )
 
   gtk_main();
 
-  _exit( 0 );
+  exit( 0 );
 }
 
 void call_diff( GtkWidget *widget, gpointer data )
@@ -132,7 +107,7 @@ void call_diff( GtkWidget *widget, gpointer data )
   int pid;
   char *filenames[2] = { NULL, NULL };
   int docid;
-  int count;
+  int length;
 
   filenames[0] = gtk_entry_get_text( GTK_ENTRY( entry1 ) );
   filenames[1] = gtk_entry_get_text( GTK_ENTRY( entry2 ) );
@@ -162,23 +137,19 @@ void call_diff( GtkWidget *widget, gpointer data )
       _exit( 1 );
     }
   close( fdpipe[1] );
-  write( fdsend, "n", 1 );
-  docid = getnumber( fddata );
 
-  count = 1;
-  while( count > 0 )
+  docid = client_document_new( context );
+  
+  length = 1;
+  while( length > 0 )
     {
-      buff[ count = read( fdpipe[0], buff, 1024 ) ] = 0;
-      if( count > 0 )
+      buff[ length = read( fdpipe[0], buff, 1024 ) ] = 0;
+      if( length > 0 )
 	{
-	  write( fdsend, "a", 1 );
-	  putnumber( fdsend, docid );
-	  putnumber( fdsend, count );
-	  write( fdsend, buff, count );
+	  client_text_append( docid, buff, length );
 	}
     }
-  write( fdsend, "s", 1 );
-  putnumber( fdsend, docid );
-  
-  _exit(0);
+  client_document_show( docid );
+  client_finish( context );
+  gtk_main_quit();
 }

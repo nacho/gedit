@@ -23,11 +23,11 @@
 #endif
 #include <gtk/gtk.h>
 #include <glib.h>
+#include "main.h"
 #if PLUGIN_TEST
 #include "plugin.h"
 #include "gE_plugin_api.h"
 #endif
-#include "main.h"
 #include "menus.h"
 #include "toolbar.h"
 
@@ -439,25 +439,29 @@ void send_hello( GtkWidget *widget, gpointer data )
 
 void start_diff( GtkWidget *widget, gpointer data )
 {
-  plugin_callback_struct callbacks =
-  { gE_plugin_create,
-    gE_plugin_append,
-    gE_plugin_show,
-    gE_plugin_current,
-    gE_plugin_filename};
+  plugin_callback_struct callbacks;
   plugin *plug = plugin_new( "/usr/local/bin/diff-plugin" );
-  plugin_register( plug, &callbacks );
+
+  callbacks.document.create = gE_plugin_create;
+  callbacks.text.append = gE_plugin_append;
+  callbacks.document.show = gE_plugin_show;
+  callbacks.document.current = gE_plugin_current;
+  callbacks.document.filename = gE_plugin_filename;
+  
+  plugin_register( plug, &callbacks, GPOINTER_TO_INT( main_window ) );
 }
 
 void start_cvsdiff( GtkWidget *widget, gpointer data )
 {
-  plugin_callback_struct callbacks =
-  { gE_plugin_create,
-    gE_plugin_append,
-    gE_plugin_show,
-    gE_plugin_current,
-    gE_plugin_filename};
+  plugin_callback_struct callbacks;
   plugin *plug = plugin_new( "/usr/local/bin/cvsdiff-plugin" );
-  plugin_register( plug, &callbacks );
+
+  callbacks.document.create = gE_plugin_create;
+  callbacks.text.append = gE_plugin_append;
+  callbacks.document.show = gE_plugin_show;
+  callbacks.document.current = gE_plugin_current;
+  callbacks.document.filename = gE_plugin_filename;
+
+  plugin_register( plug, &callbacks, GPOINTER_TO_INT( main_window ) );
 }
 #endif

@@ -20,9 +20,9 @@
 #include "main.h"
 #include "gE_plugin_api.h"
 
-int gE_plugin_create( gchar *title )
+int gE_plugin_create( gint context, gchar *title )
 {
-  return GPOINTER_TO_INT( gE_document_new(main_window) );
+  return GPOINTER_TO_INT( gE_document_new( GINT_TO_POINTER( context ) ) );
 }
 
 void gE_plugin_append( gint docid, gchar *buffer, gint length )
@@ -40,9 +40,9 @@ void gE_plugin_show( gint docid )
 {
 }
 
-int gE_plugin_current()
+int gE_plugin_current( gint context )
 {
-  return GPOINTER_TO_INT( gE_document_current(main_window) );
+  return GPOINTER_TO_INT( gE_document_current( GINT_TO_POINTER( context ) ) );
 }
 
 gchar *gE_plugin_filename( gint docid )

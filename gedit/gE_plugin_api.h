@@ -22,10 +22,10 @@
 extern "C" {
 #endif /* __cplusplus */
   
-  int gE_plugin_create( gchar *title );
+  int gE_plugin_create( gint context, gchar *title );
   void gE_plugin_append( gint docid, gchar *buffer, gint length );
   void gE_plugin_show( gint docid );
-  int gE_plugin_current();
+  int gE_plugin_current( gint context );
   char *gE_plugin_filename( gint docid );
 
 #ifdef __cplusplus

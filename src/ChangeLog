@@ -1,3 +1,23 @@
+1998-06-26  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h: 
+	* plugin.c (process_command, plugin_register, process_next): 
+	A bit of plugin API expansion.  Broke up the structs a bit.
+
+	* gE_document.c: 
+	* gE_plugin_api.h: 
+	* gE_plugin_api.c:
+	Using those changes.
+	
+	* client.c:
+	* client.h:
+	New files defining the new plugin client API.
+
+	* diff.c (main): 
+	(call_diff): 
+	* cvsdiff.c (main):
+	Changes to use the new plugin client API.
+
 1998-06-25  Chris Lahey  <clahey@umich.edu>
 
 	* gE_plugin_api.c: 

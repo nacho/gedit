@@ -164,34 +164,58 @@ static void process_command( plugin *plug, gchar *buffer, int length, gpointer d
 
 static void process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 {
-  int next = GPOINTER_TO_INT( data );
+  gint next = GPOINTER_TO_INT( data );
   switch( next )
     {
     case 1:
       plug->docid = *( (int *) buffer );
-      plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 2 ) );
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 2 ) );
       break;
     case 2:
       plugin_get_all( plug, *( (int *) buffer ), process_next, GINT_TO_POINTER( 3 ) );
       break;
     case 3:
-      if ( plug->callbacks.append_callback )
-	plug->callbacks.append_callback( plug->docid, buffer, length );
+      if ( plug->callbacks.text.append )
+	plug->callbacks.text.append( plug->docid, buffer, length );
       plugin_get_all( plug, 1, process_command, NULL );
       break;
     case 4:
-      if ( plug->callbacks.show_callback )
-	plug->callbacks.show_callback( *( (int *) buffer ) );
+      if ( plug->callbacks.document.show )
+	plug->callbacks.document.show( *( (int *) buffer ) );
       plugin_get_all( plug, 1, process_command, NULL );
       break;
     case 5:
-      if ( plug->callbacks.filename_callback )
+      if ( plug->callbacks.document.filename )
 	{
-	  char *filename = plug->callbacks.filename_callback( *( (int *) buffer ) );
+	  char *filename = plug->callbacks.document.filename( *( (int *) buffer ) );
 	  plugin_send_data_with_length( plug, filename, strlen( filename ) );
 	}
       else
-	plugin_send_data_with_length( plug, "abcd", 4 );
+	plugin_send_data_with_length( plug, "", 0 );
+      plugin_get_all( plug, 1, process_command, NULL );
+      break;
+    case 6:
+      if ( plug->callbacks.document.current )
+	plugin_send_data_int( plug, plug->callbacks.document.current( *( (int *) buffer ) ) );
+      else
+	plugin_send_data_int( plug, 0 );
+      plugin_get_all( plug, 1, process_command, NULL );
+      break;
+    case 7:
+      if ( plug->callbacks.document.create )
+	plugin_send_data_int( plug, plug->callbacks.document.create( *( (int *) buffer ), "diff file" ) );
+      else
+	plugin_send_data_int( plug, 0 );
+      plugin_get_all( plug, 1, process_command, NULL );
+      break;
+    case 8:
+      if ( plug->callbacks.text.get )
+	{
+	  char *data = plug->callbacks.text.get( *( (int *) buffer ) );
+	  plugin_send_data_with_length( plug, data, strlen( data ) );
+	}
+      else
+	plugin_send_data_with_length( plug, "", 0 );
       plugin_get_all( plug, 1, process_command, NULL );
       break;
     }
@@ -201,34 +225,33 @@ static void process_command( plugin *plug, gchar *buffer, int length, gpointer d
 {
   switch ( *buffer )
     {
-    case 'a':
-      plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 1 ) );
+    case 'a': /* append */  /* Get docid */
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 1 ) );
       break;
-    case 'n':
-      if ( plug->callbacks.create_callback )
-	plugin_send_data_int( plug, plug->callbacks.create_callback( "diff file" ) );
-      else
-	plugin_send_data_int( plug, 0 );
-      plugin_get_all( plug, 1, process_command, NULL );
+    case 's': /* show */ /* Get docid */
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 4 ) );
       break;
-    case 's':
-      plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 4 ) );
+    case 'f': /* filename */ /* Get docid */
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 5 ) );
       break;
-    case 'c':
-      if ( plug->callbacks.current_callback )
-	plugin_send_data_int( plug, plug->callbacks.current_callback() );
-      else
-	plugin_send_data_int( plug, 0 );
-      plugin_get_all( plug, 1, process_command, NULL );
+    case 'c': /* current */ /* Get context */
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 6 ) );
       break;
-    case 'f':
-      plugin_get_all( plug, 4, process_next, GINT_TO_POINTER( 5 ) );
+    case 'n': /* create */ /* Get context */
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 7 ) );
+      break;
+    case 'g': /* get */ /* Get docid */
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 8 ) );
+      break;
+    case 'd':
+      g_free( plug );
       break;
     }
 }
 
-void plugin_register( plugin *plug, plugin_callback_struct *callbacks )
+void plugin_register( plugin *plug, plugin_callback_struct *callbacks, gint context )
 {
   plug->callbacks = *callbacks;
   plugin_get_all( plug, 1, process_command, NULL );
+  plugin_send_int( plug, context );
 }

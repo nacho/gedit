@@ -18,30 +18,12 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <string.h>
 
-int fd;
-int fdsend;
-int fddata;
-
-static int getnumber( int fd )
-{
-  int number = 0;
-  int length = sizeof( int );
-  char *buff = (char *) &number;
-  buff += sizeof( int );
-  while( length -= read( fd, buff - length, length ) )
-    /* Empty statement */;
-  return number;
-}
-
-static void putnumber( int fd, int number )
-{
-  write( fd, &number, sizeof( number ) );
-}
+#include "client.h"
+#include <glib.h>
 
 int main( int argc, char *argv[] )
 {
@@ -51,35 +33,17 @@ int main( int argc, char *argv[] )
   int pid;
   char *filename = NULL;
   int docid;
-  int count;
   int length;
+  int context;
 
-  if( argc < 5 || strcmp( argv[1], "-go" ) )
-    {
-      printf( "Must be run as a plugin.\n" );
-      _exit(1);
-    }
+  context = client_init( &argc, &argv );
 
-  fd = atoi( argv[2] );
-  fdsend = atoi( argv[3] );
-  fddata = atoi( argv[4] );
-
-  g_print ( "Requesting current: \n" ); 
-  write( fdsend, "c", 1 );
-  docid = getnumber( fddata );
-  g_print ( "Recieved %d.\n", docid );
-
-  g_print ( "Requesting filename: \n" );
-  write( fdsend, "f", 1 );
-  putnumber( fdsend, docid );
-  length = getnumber( fddata );
-  filename = g_malloc0( length + 1 );
-  filename[ read( fddata, filename, length ) ] = 0;
-  g_print ( "Recieved: %s.\n", filename );
+  docid = client_document_current( context );
+  filename = client_document_filename( docid );
   
   if( pipe( fdpipe ) == -1 )
     {
-      _exit( 1 );
+      exit( 1 );
     } 
  
   pid = fork();
@@ -111,23 +75,18 @@ int main( int argc, char *argv[] )
     }
   close( fdpipe[1] );
 
-  write( fdsend, "n", 1 );
-  docid = getnumber( fddata );
+  docid = client_document_new( context );
 
-  count = 1;
-  while( count > 0 )
+  length = 1;
+  while( length > 0 )
     {
-      buff[ count = read( fdpipe[0], buff, 1024 ) ] = 0;
-      if( count > 0 )
-	{
-	  write( fdsend, "a", 1 );
-	  putnumber( fdsend, docid );
-	  putnumber( fdsend, count );
-	  write( fdsend, buff, count );
-	}
+      buff[ length = read( fdpipe[0], buff, 1024 ) ] = 0;
+      if( length > 0 )
+	client_text_append( docid, buff, length );
     }
-  write( fdsend, "s", 1 );
-  putnumber( fdsend, docid );
+
+  client_document_show( docid );
+  client_finish( context );
   
-  _exit(0);
+  exit(0);
 }
