@@ -87,7 +87,7 @@ int main( int argc, char *argv[] )
   dialog = gtk_dialog_new();
   gtk_window_set_title( GTK_WINDOW( dialog ), "Number Converter" );
   gtk_signal_connect( GTK_OBJECT( dialog ), "destroy", gtk_main_quit, NULL );
-  gtk_container_border_width( GTK_CONTAINER( GTK_DIALOG( dialog )->vbox ), 10 );
+  gtk_container_set_border_width( GTK_CONTAINER( GTK_DIALOG( dialog )->vbox ), 10 );
 
 
   hbox = gtk_hbox_new( FALSE, 5 );

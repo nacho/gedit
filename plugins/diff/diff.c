@@ -77,7 +77,7 @@ int main( int argc, char *argv[] )
   dialog = gtk_dialog_new();
   gtk_window_set_title( GTK_WINDOW( dialog ), "Choose files to diff" );
   gtk_signal_connect( GTK_OBJECT( dialog ), "destroy", GTK_SIGNAL_FUNC( done ), NULL );
-  gtk_container_border_width( GTK_CONTAINER( GTK_DIALOG( dialog )->vbox ), 10 );
+  gtk_container_set_border_width( GTK_CONTAINER( GTK_DIALOG( dialog )->vbox ), 10 );
 
   label = gtk_label_new( "Choose files to diff:" );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->vbox ), label, FALSE, FALSE, 0 );
