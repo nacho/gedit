@@ -328,7 +328,10 @@ gedit_document_init (GeditDocument *document)
 	gedit_document_set_max_undo_levels (document,
 					    gedit_prefs_manager_get_undo_actions_limit ());
 
-	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (document), FALSE);
+
+	/* TODO: Set the bracket matching tag style -- Paolo (10 Jan. 2005) */
+	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (document), 
+					      gedit_prefs_manager_get_bracket_matching ());
 
 	document->priv->auto_save = gedit_prefs_manager_get_auto_save ();
 	document->priv->auto_save = (document->priv->auto_save != FALSE);

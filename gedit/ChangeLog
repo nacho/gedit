@@ -1,3 +1,22 @@
+2005-01-11  Paolo Maggi  <paolo@gnome.org>
+
+	Based on a patch by Juerg Billeter <j@bitron.ch>
+	
+	* dialogs/gedit-preferences-dialog.c
+	(bracket_matching_checkbutton_toggled) (setup_view_page)
+	(get_preferences_dialog): added new "Highlight Matching Bracket" option
+
+	* dialogs/gedit-preferences.glade2: ditto
+
+	* gedit-document.c (gedit_document_init): ditto
+
+	* gedit-prefs-manager-app.c (gedit_prefs_manager_app_init)
+	(gedit_prefs_manager_bracket_matching_changed): ditto
+
+	* gedit-prefs-manager.c: ditto
+
+	* gedit-prefs-manager.h: ditto
+
 2005-01-10 Naveen & Team < naveenchandranv@gmail.com >
 
 	* Fixed bug #161998 (http://bugzilla.gnome.org/show_bug.cgi?id=161998).

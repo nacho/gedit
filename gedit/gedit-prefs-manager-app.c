@@ -82,6 +82,10 @@ static void 		gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
 								  guint cnxn_id, 
 								  GConfEntry *entry, 
 								  gpointer user_data);
+static void 		gedit_prefs_manager_bracket_matching_changed (GConfClient *client,
+								      guint cnxn_id, 
+								      GConfEntry *entry, 
+								      gpointer user_data);
 static void 		gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 								      guint cnxn_id, 
 								      GConfEntry *entry, 
@@ -159,6 +163,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_CURRENT_LINE_DIR,
 				gedit_prefs_manager_hl_current_line_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_BRACKET_MATCHING_DIR,
+				gedit_prefs_manager_bracket_matching_changed,
 				NULL, NULL, NULL);
 
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
@@ -721,6 +730,45 @@ gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
 	}
 }
 
+
+static void 
+gedit_prefs_manager_bracket_matching_changed (GConfClient *client,
+	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_BRACKET_MATCHING) == 0)
+	{
+		GList *docs;
+		GList *l;
+		gboolean enable;
+
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			enable = gconf_value_get_bool (entry->value);
+		else
+			enable = GPM_DEFAULT_BRACKET_MATCHING;
+
+		docs = gedit_get_open_documents ();
+		
+		l = docs;
+		while (l != NULL)
+		{
+			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
+
+			gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (l->data),
+							      enable);
+
+
+			l = g_list_next (l);		
+		}
+
+		g_list_free (docs);
+	}
+	
+}
 
 static void 
 gedit_prefs_manager_auto_indent_changed (GConfClient *client,

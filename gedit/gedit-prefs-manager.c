@@ -1206,6 +1206,11 @@ DEFINE_BOOL_PREF (highlight_current_line,
 		  GPM_HIGHLIGHT_CURRENT_LINE,
 		  GPM_DEFAULT_HIGHLIGHT_CURRENT_LINE)
 
+/* Highlight matching bracket */
+DEFINE_BOOL_PREF (bracket_matching,
+		  GPM_BRACKET_MATCHING,
+		  GPM_DEFAULT_BRACKET_MATCHING)
+	
 /* Display Right Margin */
 DEFINE_BOOL_PREF (display_right_margin,
 		  GPM_DISPLAY_RIGHT_MARGIN,
