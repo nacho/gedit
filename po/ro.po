@@ -2,19 +2,20 @@
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # Mugurel Tudor <mugurelu@go.ro>, 2003, 2004.
 # Mişu Moldovan <dumol@go.ro>, 2003, 2004.
+# Dan Damian <dand@gnome.ro>, 2005.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
-"PO-Revision-Date: 2004-09-05 01:32+0300\n"
-"Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
+"POT-Creation-Date: 2005-03-01 06:46+0100\n"
+"PO-Revision-Date: 2005-03-02 21:03+0200\n"
+"Last-Translator: Dan Damian <dand@gnome.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -44,7 +45,7 @@ msgstr "Fabrica de automatizare Gedit"
 msgid "Edit text files"
 msgstr "Editare fişiere text"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "Editor de text"
 
@@ -57,9 +58,8 @@ msgstr ""
 "efect doar dacă opţiunea „Utilizează fontul implicit“ este nebifată."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "Activează %s"
+msgstr "Module active"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -164,11 +164,11 @@ msgstr "Font utilizat la tipărirea antetului"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "Evidenţiază linia curentă"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "Evidenţiază paranteza pereche"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -197,6 +197,8 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"Lista modulelor active. Conţine \"Locaţia\" modulelor active. "
+"Pentru a obţine \"Locaţia\" unui anumit modul, vezi fişierul de module gedit."
 
 #: data/gedit.schemas.in.h:29
 msgid ""
@@ -214,20 +216,26 @@ msgstr "Număr maxim de fişiere recente"
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Număr maxim de acţiuni pe care Gedit le va putea anula şi reface."
 
-#: data/gedit.schemas.in.h:32
-msgid "Monospace 12"
-msgstr "Monospace 12"
-
-#: data/gedit.schemas.in.h:33
-#, fuzzy
-msgid "Monospace 9"
-msgstr "Monospace 12"
-
+#. Translators: This is the Editor Font.
+#. This is a Pango font
 #: data/gedit.schemas.in.h:34
-msgid "Monospace Regular 9"
-msgstr "Monospace Regular 12"
+msgid "Monospace 12"
+msgstr "Monospaţiat 12"
 
-#: data/gedit.schemas.in.h:35
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
+msgid "Monospace 9"
+msgstr "Monospaţiat 9"
+
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
+msgid "Monospace Regular 9"
+msgstr "Monospaţiat normal 12"
+
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -236,53 +244,61 @@ msgstr ""
 "Această setare va avea efect doar dacă opţiunea „Salvare automată“ este "
 "bifată."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "Tipăreşte antetul"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "Numerotează liniile la tipărire"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "Tipăreşte sintaxa evidenţiată"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "Mod de rupere al liniilor la tipărire"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "Poziţia marginii din dreapta"
 
-#: data/gedit.schemas.in.h:41
-#, fuzzy
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
-#, fuzzy
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
-msgstr "Spaniolă"
+msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
-msgstr "Sans Regular 11"
+msgstr "Sans normal 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
-msgstr "Sans Regular 8"
+msgstr "Sans normal 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "Culoare text selectat"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "Culoare selecţie"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -292,7 +308,7 @@ msgstr ""
 "„CURRENT“ este codarea locală curentă. Doar codările recunoscute sunt "
 "utilizate."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -306,7 +322,7 @@ msgstr ""
 "Valorile sunt sensibile la majuscule, aşa că vă rugăm să vă asiguraţi că "
 "apat exact aşa cum sunt menţionate aici."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -320,19 +336,20 @@ msgstr ""
 "Majusculele sunt semnificate, aşa că vă rugăm să vă asiguraţi apat exact aşa "
 "cum sunt menţionate aici."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Specifică fontul utilizat pentru corpul documentului la tipărire."
 
-#: data/gedit.schemas.in.h:51
-#, fuzzy
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "Specifică fontul utilizat pentru corpul documentului la tipărire."
+msgstr ""
+"Specifică fontul utilizat pentru corpul documentului la tipărire."
+"Acesta este un nume de font gnome-print şi va fi înlocuit de print_font_body_pango."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -341,8 +358,7 @@ msgstr ""
 "setare are efect doar dacă opţiunea „Numerotează liniile la tipărire“ este "
 "diferită de zero."
 
-#: data/gedit.schemas.in.h:53
-#, fuzzy
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -350,9 +366,9 @@ msgid ""
 msgstr ""
 "Specifică fontul utilizat pentru numerotarea liniilor la tipărire. Această "
 "setare are efect doar dacă opţiunea „Numerotează liniile la tipărire“ este "
-"diferită de zero."
+"diferită de zero. Numele de font este un nume de font gnome-print şi va fi înlocuit de print_font_numbers_pango."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -361,18 +377,17 @@ msgstr ""
 "documentului. Această setare are efect doar dacă opţiunea „Tipăreşte "
 "antetul“ este bifată."
 
-#: data/gedit.schemas.in.h:55
-#, fuzzy
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
-"Specifică fontul utilizat pentru antetele paginilor la tipărirea "
-"documentului. Această setare are efect doar dacă opţiunea „Tipăreşte "
-"antetul“ este bifată."
+"Specifică fontul utilizat pentru antetele paginilor la tipărirea unui document. "
+"Această setare va avea efect doar dacă opţiunea „Tipăreşte antetul“ este activată."
+"Acesta este un nume de font gnome-print şi va fi înlocuit de print_font_header_pango."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -380,22 +395,22 @@ msgstr ""
 "Specifică numărul maxim de fişiere deschise recent care vor fi afişate în "
 "submeniul „Fişiere recente“."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "Specifică numărul de spaţii care vor fi afişate în locul caracterelor Tab."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "Specifică poziţia marginii din dreapta."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "Bara de status este vizibilă"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -412,35 +427,35 @@ msgstr ""
 "Majusculele sunt semnificative, aşa că este recomandat să fie utilizate "
 "exact aşa cum au fost menţionate aici. "
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "Lungime tab"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "Culoare text"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "Stil bară cu unelte"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "Bara cu unelte este vizibilă"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "Număr maxim al acţiunilor de anulare"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "Utilizează culorile implicite"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "Utilizează fontul implicit"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -450,7 +465,7 @@ msgstr ""
 "timp. Intervalul de timp poate fi setat cu opţiunea „Interval pentru salvare "
 "automată“."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -459,58 +474,55 @@ msgstr ""
 "le salvează. Puteţi seta extensia pentru fişierele de siguranţă create cu "
 "opţiunea „Extensia copiei de siguranţă“."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Dacă Gedit ar trebui să numeroteze liniile în zona de editare."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Dacă gedit ar trebui să afişeze marginea dreaptă în zona de editare."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
-msgstr "Dacă Gedit ar trebui să activeze indentarea automată."
+msgstr "Dacă gedit ar trebui să activeze indentarea automată."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Dacă gedit ar trebui să activeze sintaxa evidenţiată."
 
-#: data/gedit.schemas.in.h:74
-#, fuzzy
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Dacă gedit ar trebui să activeze sintaxa evidenţiată."
+msgstr "Dacă gedit ar trebui să evidenţieze parantezele pereche."
 
-#: data/gedit.schemas.in.h:75
-#, fuzzy
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
-msgstr ""
-"Dacă Gedit ar trebui să tipărească sintaxa evidenţiată pentru documente."
+msgstr "Dacă gedit ar trebui să evidenţieze linia curentă."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Dacă Gedit ar trebui să includă antetul la tipărirea documentelor."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Dacă Gedit ar trebui să insereze spaţii în loc de Tab-uri."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Dacă Gedit ar trebui să tipărească sintaxa evidenţiată pentru documente."
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Dacă bara de stare de la baza ferestrei de editare ar trebui să fie vizibilă."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr ""
 "Dacă bara cu unelte ar trebui să fie vizibilă în ferestrele de editare."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -522,7 +534,7 @@ msgstr ""
 "editare vor fi cele specificate în opţiunile „Culoare fundal“, „Culoare "
 "text“, „Culoare text selectat“ şi „Culoare selecţie“."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -535,14 +547,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -552,9 +564,8 @@ msgid "Activate %s"
 msgstr "Activează %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Închide fereastra de ieşire"
+msgstr "Închide fă_ră a salva"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -564,11 +575,9 @@ msgstr "Întrebare"
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
-msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "Dacă nu salvaţi, modificările din ultima secundă vor fi pierdute."
-msgstr[1] ""
+msgstr "Dacă nu salvaţi, modificările din ultima secundă vor fi pierdute."
 "Dacă nu salvaţi, modificările din ultimele %ld secunde vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
@@ -581,12 +590,10 @@ msgstr "Dacă nu salvaţi, modificările din ultimul minut vor fi pierdute."
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
 "permanently lost."
-msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] ""
+msgstr ""
 "Dacă nu salvaţi, modificările din ultimul minut şi o secundă vor fi pierdute."
-msgstr[1] ""
 "Dacă nu salvaţi, modificările din ultimul minut şi %ld secunde vor fi "
 "pierdute."
 
@@ -594,33 +601,28 @@ msgstr[1] ""
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
-msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "Dacă nu salvaţi, modificările din ultimul minut vor fi pierdute."
-msgstr[1] ""
+msgstr "Dacă nu salvaţi, modificările din ultimul minut vor fi pierdute."
 "Dacă nu salvaţi, modificările din ultimele %ld minute vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
-msgstr[1] "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute."
+msgstr "Dacă nu salvaţi, modificările din ultima oră vor fi pierdute definitiv."
+"Dacă nu salvaţi, modificările din ultimele %d ore vor fi pierdute definitiv."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
 "permanently lost."
-msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] ""
+msgstr ""
 "Dacă nu salvaţi, modificările din ultimul oră şi un minut vor fi pierdute."
-msgstr[1] ""
 "Dacă nu salvaţi, modificările din ultima oră şi %d minute vor fi pierdute."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
@@ -631,17 +633,14 @@ msgstr "Salvaţi modificările aduse documentului „%s” înainte de închider
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] ""
+msgstr ""
 "Există un document cu modificări nesalvate. Salvaţi modificările înainte de "
 "închidere?"
-msgstr[1] ""
 "Există %d documente cu modificări nesalvate. Salvaţi modificările înainte de "
 "închidere?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "S_electaţi documentele pe care doriţi să le salvaţi:"
 
@@ -786,19 +785,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Indentare automată</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Formatare text</b>"
+msgstr "<b>Paranteze pereche</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Formatare text</b>"
+msgstr "<b>Linie curentă</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -822,9 +818,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Marginea dreaptă</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>Taburi</b>"
+msgstr "<b>Oprire tab-uri</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -876,7 +871,7 @@ msgstr "Font şi culori"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "Evi_denţiază linia curentă"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -884,7 +879,7 @@ msgstr "Mod _evidenţiere:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "Evidenţiază paranteza pereche"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -975,7 +970,6 @@ msgid "_Display line numbers"
 msgstr "_Numerotează liniile"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "_Activează indentarea automată"
 
@@ -1000,7 +994,6 @@ msgid "_Right margin at column:"
 msgstr "Marginea _dreaptă la coloana:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "Lăţime _taburi:"
 
@@ -1154,27 +1147,6 @@ msgstr "Introduceţi _locaţia fişierului (URI) pe care doriţi să-l deschide�
 msgid "Open from URI"
 msgstr "Deschide dintr-un URI"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"large\">Aveţi X documente cu modificări "
-"nesalvate. </span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr ""
-"În cazul în care nu salvaţi documentele, toate modificările vor fi pierdute."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "_Nu salva nici unul"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "_Salvează selecţia"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit este un editor de text mic şi rapid pentru Gnome"
@@ -1187,57 +1159,57 @@ msgstr "gedit este un editor de text mic şi rapid pentru Gnome"
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "Mişu Moldovan <dumol@go.ro>\n"
-"Mugurel Tudor <mugurelu@go.ro>"
+"Mugurel Tudor <mugurelu@go.ro>\n"
+"Felix Petrescu <wakax@yahoo.com>\n"
+"Dan Damian <dand@gnome.ro>"
 
 #: gedit/gedit-commands.c:579
 msgid "gedit"
 msgstr "Gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
-#, fuzzy
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
-msgstr "_Documente"
+msgstr "Document nesalvat"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "Nume de fişier invalid"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
 msgstr "Date UTF-8 invalide"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1658
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nu am putut citi datele legăturii simbolice pentru %s"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1704
 msgid "The file has too many symbolic links."
 msgstr "Acest fişier are prea multe legături simbolice."
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1787
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr "Gedit nu a putut gestiona %s: locaţii în modul scriere."
+msgstr "Gedit nu poate gestiona %s: locaţii în modul scriere."
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1794
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "Gedit nu poate gestiona această locaţie în modul scriere."
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1807
 msgid "Invalid filename."
 msgstr "Nume de fişier invalid."
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1956
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1245,7 +1217,7 @@ msgstr ""
 "Nu este destul spaţiu pe disc pentru a salva fişierul.\n"
 "Eliberaţi vă rugăm puţin spaţiu pe disc şi încercaţi din nou."
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1961
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1255,7 +1227,7 @@ msgstr ""
 "maximă a fişierului. Încercaţi vă rugăm să salvaţi un fişier mai mic sau să "
 "salvaţi pe un disc ce nu are această limitare."
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2005
 msgid "Could not create a backup file."
 msgstr "Nu am putut crea un cópie de siguranţă."
 
@@ -1385,7 +1357,7 @@ msgstr "Vietnameză"
 msgid "Thai"
 msgstr "Thailandeză"
 
-#: gedit/gedit-encodings.c:433
+#: gedit/gedit-encodings.c:434
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -1416,7 +1388,6 @@ msgid "All Text Files"
 msgstr "Toate fişierele text"
 
 #: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
-#, fuzzy
 msgid "_Character Coding:"
 msgstr "Codare c_aracter:"
 
@@ -1432,160 +1403,151 @@ msgstr "Selectaţi un fişier pentru deschidere"
 msgid "Select a filename to save"
 msgstr "Selectaţi un nume de fişier pentru salvare"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "Deschide fişierul..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Salvez documentul „%s“..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Documentul „%s” nu a fost salvat."
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Documentul „%s” a fost salvat."
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "Salvează ca..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Doriţi să reveniţi la ultima salvare a documentului „%s”?"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
-msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "Modificările aduse documentului în ultima secundă vor fi pierdute."
-msgstr[1] "Modificările aduse documentului în ultimele %ld vor fi pierdute."
+msgstr "Modificările aduse documentului în ultima secundă vor fi pierdute."
 
-#: gedit/gedit-file.c:543
+#: gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Modificările aduse documentului în ultimul minut vor fi pierdute."
 
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
 "permanently lost."
-msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] ""
+msgstr ""
 "Modificările aduse documentului în ultimul minut şi o secundă vor fi "
 "pierdute."
-msgstr[1] ""
 "Modificările aduse documentului în ultimul minut şi %ld secunde vor fi "
 "pierdute."
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
-msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "Modificările aduse documentului în ultimul minut vor fi pierdute."
-msgstr[1] ""
+msgstr "Modificările aduse documentului în ultimul minut vor fi pierdute."
 "Modificările aduse documentului în ultimele %ld minute vor fi pierdute."
 
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Modificările aduse documentului în ultima oră vor fi pierdute."
-msgstr[1] "Modificările aduse documentului în ultima oră vor fi pierdute."
+msgstr "Modificările aduse documentului în ultima oră vor fi pierdute definitiv."
+"Modificările aduse documentului în ultimele %d ore vor fi pierdute definitiv."
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
 "permanently lost."
-msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] ""
+msgstr ""
 "Modificările aduse documentului în ultima oră şi un minut vor fi pierdute."
-msgstr[1] ""
 "Modificările aduse documentului în ultima oră şi %d minute vor fi pierdute."
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Restaurea_ză"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Nu am putut restaura documentul „%s“."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Documentul „%s” nu a fost restaurat."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Documentul „%s” a fost restaurat."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Restaurez documentul „%s“..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "Nu am putut citi date de la stdin."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "Restaurez fişierul:"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "Încarc fişierul:"
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Eroare la încărcarea fişierului „%s”"
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Am încărcat fişierul „%s“"
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Am încărcat %d fişier"
 msgstr[1] "Am încărcat %d fişier"
 
-#: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#: gedit/gedit-file.c:1288
+#, c-format
 msgid "Created file \"%s\""
-msgstr "Am încărcat fişierul „%s“"
+msgstr "Am creat fişierul „%s“"
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Încarc fişierul „%s”..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1471
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1593,18 +1555,14 @@ msgstr[0] "Încarc %d fişier ..."
 msgstr[1] "Încarc %d fişier ..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Nu am putut deschide fişierul „%s“"
+msgstr "Nu am putut găsi fişierul „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"„%s“ este un director.\n"
-"\n"
-"Vă rugăm verificaţi locaţia introdusă şi încercaţi din nou."
+msgstr "Vă rugăm verificaţi corectitudinea locaţiei introduse şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1620,162 +1578,132 @@ msgid "Could not open the file \"%s\""
 msgstr "Nu am putut deschide fişierul „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Nu am putut deschide fişierul „%s“ deoarece conţine date corupte."
+msgstr "Fişierul conţine date corupte."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "Gedit nu a putut gestiona %s: locaţii în modul scriere."
+msgstr "gedit nu poate gestiona locaţii %s."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "Gedit nu a putut gestiona %s: locaţii în modul scriere."
+msgstr "gedit nu poate gestiona această locaţie."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece conţine date într-un format "
-"invalid."
+msgstr "Fişierul conţine date într-un format invalid."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "Acest fişier are prea multe legături simbolice."
+msgstr "Fişierul este prea mare."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "„%s” nu este o locaţie validă"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "Accesul a fost interzis."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open files and try again."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece sunt prea multe fişiere "
-"deschise.\n"
-"\n"
-"Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
+"sunt prea multe fişiere deschise. Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "„%s” nu  este un director"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"Nu este suficientă memorie liberă pentru a deschide fişierul „%s“. Vă rugăm "
+"Nu este suficientă memorie liberă pentru a deschide fişierul. Vă rugăm "
 "închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece nici o gazdă „%s“ nu a putut fi "
-"găsită.\n"
-"\n"
-"Vă rugăm verificaţi corectitudinea setărilor Proxy şi încercaţi din nou."
+"Gazda „%s“ nu a putut fi găsită. Vă rugăm verificaţi corectitudinea "
+"setărilor Proxy şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"„%s“ nu este o locaţie validă.\n"
-"\n"
-"Vă rugăm verificaţi corectitudinea locaţiei introduse şi încercaţi din nou."
+"Numele gazdei este invalid. Vă rugăm verificaţi corectitudinea locaţiei "
+"introduse şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece numele gazdei lipsea.\n"
-"\n"
-"Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
+"Numele gazdei este gol. Vă rugăm verificaţi dacă setările proxy sunt corecte "
+"şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"Nu am putut găsi fişierul „%s“.\n"
-"\n"
-"Va rugăm verificaţi locaţia introdusă şi încercaţi din nou."
+"Încercarea de autentificare a eşuat. Vă rugăm verificaţi corectitudinea locaţiei"
+"şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece conţine date invalide.\n"
-"\n"
-"Probabil încercaţi să deschideţi un fişier binar."
+"Fişierul conţine date invalide. Probabil încercaţi să deschideţi un fişier "
+"binar."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "Fişierul pe care doriţi să îl deschideţi nu este un fişier normal."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece Gedit nu a putut detecta automat "
-"codarea caracterelor.\n"
-"\n"
-"Verificaţi ca nu cumva să încercaţi să deschideţi un fişier binar şi "
-"încercaţi din nou selectând o codare în dialogul „Deschide...“ (sau "
-"„Deschide locaţia...“)"
+"gedit nu a putut detecta automat codarea caracterelor. Verificaţi ca nu cumva să "
+"încercaţi să deschideţi un fişier binar şi încercaţi din nou selectând o codare în "
+"dialogul „Deschide...“ (sau „Deschide locaţia...“)"
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Nu am putut deschide fişierul „%s“ deoarece este prea mare."
+msgstr "Nu am putut deschide fişierul „%s“ utilizănd codarea „%s”"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ utilizând codarea %s.\n"
-"\n"
 "Vă rugăm verificaţi faptul că nu încercaţi să deschideţi un fişier binar şi "
 "că aţi selectat codarea corectă a caracterelor în dialogul „Deschide "
 "fişierul...“ (sau „Deschide locaţia“) apoi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece conţine date invalide.\n"
-"\n"
-"Probabil încercaţi să deschideţi un fişier binar."
+"Fişierul conţine date într-un format invalid. Probabil încercaţi să deschideţi "
+"un fişier binar."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1784,126 +1712,96 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Nu am putut restaura fişierul „%s“."
+msgstr "Nu am putut restaura fişierul „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece Gedit nu îl poate găsi.\n"
-"\n"
-"Probabil a fost şters de curând."
+"gedit nu poate găsi fişierul. Probabil a fost şters de curând."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece sunt prea multe fişiere "
-"deschise.\n"
-"\n"
-"Vă rugăm închideţi o parte din fişierele deschise şi încercaţi din nou."
+"Sunt prea multe fişiere  deschise. Vă rugăm închideţi o parte din fişierele "
+"deschise şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"Nu este suficientă memorie liberă pentru a deschide fişierul „%s“. Vă rugăm "
-"închideţi o parte din aplicaţiile pornite şi încercaţi din nou."
+"Nu este suficientă memorie liberă. Vă rugăm închideţi o parte din aplicaţiile pornite "
+"şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"Nu am putut deschide fişierul „%s“ deoarece numele gazdei lipsea.\n"
-"\n"
-"Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
+"Numele gazdei este gol. Vă rugăm verificaţi dacă setările proxy sunt corecte şi încercaţi din nou."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "Încercarea de login a eşuat."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"Nu am putut restaura fişierul „%s“ deoarece conţine date invalide UTF-8.\n"
-"\n"
-"Probabil încercaţi să restauraţi un fişier binar."
+"Fişierul conţine date invalide UTF-8. Probabil încercaţi să restauraţi un fişier binar."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "Nu este posibilă restaurarea unui document fără titlu."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Nu am putut salva fişierul „%s“."
+msgstr "Nu am putut salva fişierul „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "Fişierul „%s“ există deja."
+msgstr "Fişierul „%s“ există deja"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"„%s“ este un director.\n"
-"\n"
-"Vă rugăm verificaţi corectitudinea datelor furnizate şi încercaţi din nou."
+msgstr "Vă rugăm verificaţi corectitudinea locaţiei introduse."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "Nu am putut crea fişierul „%s“."
+msgstr "Nu am putut crea fişierul „%s“"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Nu am putut crea fişierul „%s“.\n"
-"\n"
-"Verificaţi dacă aveţi permisiile necesare pentru scriere."
+msgstr "Asiguraţi-vă că aveţi permisiile necesare pentru scriere."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"Nu am putut crea fişierul „%s“\n"
-"\n"
-"Numele fişierului este prea lung."
+msgstr "Numele fişierului este prea lung."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
 msgstr ""
-"Nu am putut crea fişierul „%s“.\n"
-"\n"
 "Un director din numele fişierului nu există sau este o legătură simbolică "
 "greşită."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"Nu este destul spaţiu pe disc pentru a crea fişierul „%s“.\n"
-"\n"
-"Eliberaţi spaţiu pe disc şi încercaţi din nou."
+"Nu este destul spaţiu pe disc. Eliberaţi spaţiu pe disc şi încercaţi "
+"din nou."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1941,20 +1839,19 @@ msgstr "Deschide '%s'"
 msgid "Open a recently used file"
 msgstr "Deschide un fişier recent utilizat"
 
-#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
-#, fuzzy
+#: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
 msgid "Read Only"
-msgstr "(doar citire)"
+msgstr "Doar citire"
 
-#: gedit/gedit-mdi.c:2068
+#: gedit/gedit-mdi.c:2095
 msgid "Normal"
 msgstr "Normală"
 
-#: gedit/gedit-mdi.c:2069
+#: gedit/gedit-mdi.c:2096
 msgid "Use Normal highlight mode"
 msgstr "Utilizează evidenţiere standard"
 
-#: gedit/gedit-mdi.c:2145
+#: gedit/gedit-mdi.c:2172
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Utilizează modul %s de evidenţiere"
@@ -2408,7 +2305,7 @@ msgstr "_Vizualizare"
 
 #: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (Unicode invalid)"
 
 #.
 #. if (col == chars)
@@ -2418,52 +2315,54 @@ msgstr ""
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln %d, Col %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 "Codarea utilizată la deschiderea fişierelor listate în linia de comandă"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "Închide o instanţă existentă a Gedit"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Crează o nouă fereastră într-o instanţă Gedit deja existentă"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crează un nou document într-o instanţă Gedit deja existentă"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Codarea „%s” specificată nu este validă\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "Fişierul pe care doriţi să îl deschideţi conţine o secvenţă de octeţi invalidă."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
+"gedit nu a putut să determine automat codarea fişierului pe care doriţi "
+"să îl deschideţi."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2607,44 +2506,39 @@ msgid "User name"
 msgstr "Nume utilizator"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "_Copiază"
+msgstr "Sal_vează o copie..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "Setaţi limba documentului curent"
+msgstr "Salvează o copie a documentului curent"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "Nu am putut salva fişierul „%s“."
+msgstr "Nu am putut salva o copie a fişierului în „%s”."
 
 #: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
-msgstr ""
+msgstr "Dvs. încercaţi să suprascrieţi fişierul original"
 
 #: plugins/savecopy/savecopy.c:470
-#, fuzzy
 msgid "Save Copy..."
-msgstr "_Nu salva nici unul"
+msgstr "Salvează o copie..."
 
 #. translators: %s is a filename
 #: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (copie)"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "Salvează toate fişierele deschise"
+msgstr "Salvează o copie"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Sortează documentul curent sau selecţia."
+msgstr "Salvează o copie a documentului curent la o locaţie locală sau la distanţă."
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -2816,21 +2710,19 @@ msgstr "Verificarea ortografică s-a terminat"
 
 #: plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "Africană"
 
 #: plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "Arabă"
+msgstr "Amharic"
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbagiană"
 
 #: plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Belarusian"
-msgstr "Bulgară"
+msgstr "Belarusă"
 
 #: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
@@ -2861,9 +2753,8 @@ msgid "Danish"
 msgstr "Daneză"
 
 #: plugins/spell/gedit-spell-checker.c:90
-#, fuzzy
 msgid "German (Austria)"
-msgstr "Germană (Germania)"
+msgstr "Germană (Austria)"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
@@ -2894,14 +2785,12 @@ msgid "Spanish"
 msgstr "Spaniolă"
 
 #: plugins/spell/gedit-spell-checker.c:99
-#, fuzzy
 msgid "Estonian"
-msgstr "Română"
+msgstr "Estonă"
 
 #: plugins/spell/gedit-spell-checker.c:100
-#, fuzzy
 msgid "Persian"
-msgstr "Tipăreşte"
+msgstr "Persană"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
@@ -2920,49 +2809,44 @@ msgid "French (Swiss)"
 msgstr "Franceză (Elveţia)"
 
 #: plugins/spell/gedit-spell-checker.c:105
-#, fuzzy
 msgid "Irish"
-msgstr "Turcă"
+msgstr "Irlandeză"
 
 #: plugins/spell/gedit-spell-checker.c:106
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Galeză scoţiană"
 
 #: plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Gallegan"
-msgstr "Georgiană"
+msgstr "Gallegan"
 
 #: plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "Galeză Manx"
 
 #: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
 msgid "Hindi"
-msgstr "Caută"
+msgstr "Hindusă"
 
 #: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
 msgid "Croatian"
-msgstr "Catalană"
+msgstr "Croată"
 
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "Upper Sorbian"
 
 #: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Hungarian"
-msgstr "Bulgară"
+msgstr "Maghiară"
 
 #: plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "Interlingvistică (IALA)"
 
 #: plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "Indoneză"
 
 #: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2973,61 +2857,56 @@ msgid "Italian"
 msgstr "Italiană"
 
 #: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
-msgstr "Turcă"
+msgstr "Kurdă"
 
 #: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
 msgid "Latin"
-msgstr "Linii"
+msgstr "Latină"
 
 #: plugins/spell/gedit-spell-checker.c:120
 msgid "Lithuanian"
-msgstr ""
+msgstr "Lituaniană"
 
 #: plugins/spell/gedit-spell-checker.c:121
 msgid "Latvian"
-msgstr ""
+msgstr "Letonă"
 
 #: plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
-msgstr ""
+msgstr "Malagasy"
 
 #: plugins/spell/gedit-spell-checker.c:123
 msgid "Maori"
-msgstr ""
+msgstr "Mauri"
 
 #: plugins/spell/gedit-spell-checker.c:124
-#, fuzzy
 msgid "Macedonian"
-msgstr "Gedit"
+msgstr "Macedonă"
 
 #: plugins/spell/gedit-spell-checker.c:125
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongolă"
 
 #: plugins/spell/gedit-spell-checker.c:126
 msgid "Malay"
-msgstr ""
+msgstr "Malaieziană"
 
 #: plugins/spell/gedit-spell-checker.c:127
 msgid "Maltese"
-msgstr ""
+msgstr "Malteză"
 
 #: plugins/spell/gedit-spell-checker.c:128
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "Norvegiană"
+msgstr "Norvegiană Bokmal"
 
 #: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "Olandeză"
 
 #: plugins/spell/gedit-spell-checker.c:130
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "Norvegiană"
+msgstr "Norvegiană Nynorsk"
 
 #: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
@@ -3035,7 +2914,7 @@ msgstr "Norvegiană"
 
 #: plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "Nyanja"
 
 #: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -3051,7 +2930,7 @@ msgstr "Portugheză (Brazilia)"
 
 #: plugins/spell/gedit-spell-checker.c:136
 msgid "Quechua"
-msgstr ""
+msgstr "Quechua"
 
 #: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
@@ -3059,12 +2938,11 @@ msgstr "Rusă"
 
 #: plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "Ucrainiană"
+msgstr "Sardină"
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3080,24 +2958,23 @@ msgstr "Suedeză"
 
 #: plugins/spell/gedit-spell-checker.c:144
 msgid "Swahili"
-msgstr ""
+msgstr "Swahili"
 
 #: plugins/spell/gedit-spell-checker.c:145
-#, fuzzy
 msgid "Tamil"
-msgstr "Thailandeză"
+msgstr "Tamil"
 
 #: plugins/spell/gedit-spell-checker.c:146
 msgid "Tetum"
-msgstr ""
+msgstr "Tetum"
 
 #: plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
-msgstr ""
+msgstr "Tagalog"
 
 #: plugins/spell/gedit-spell-checker.c:148
 msgid "Tswana"
-msgstr ""
+msgstr "Tswana"
 
 #: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
@@ -3105,19 +2982,19 @@ msgstr "Ucrainiană"
 
 #: plugins/spell/gedit-spell-checker.c:151
 msgid "Uzbek"
-msgstr ""
+msgstr "Uzbekă"
 
 #: plugins/spell/gedit-spell-checker.c:153
 msgid "Walloon"
-msgstr ""
+msgstr "Walloon"
 
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "Yiddish"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
-msgstr ""
+msgstr "Zulu"
 
 #: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
@@ -3225,12 +3102,10 @@ msgid "The document is empty."
 msgstr "Acest document este gol."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
 msgstr "Textul selectat nu conţine cuvinte scrise greşit."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
 msgstr "Documentul nu conţine cuvinte scrise greşit."
 
@@ -3243,1052 +3118,980 @@ msgid "Spell checker"
 msgstr "Verificare ortografică"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "Formate disponibile"
+msgstr "Formă abreviată"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "Armeană"
+msgstr "Abreviere"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "Sus"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "Caracter pentru cheie de acesibilitate"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "Acronim"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "linii"
+msgstr "Aliniere"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "Caracter de aliniere"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "Alternative"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "Ancoră"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "URI ancoră"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "Selectaţi un fişier pentru deschidere"
+msgstr "Cod clasă applet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "Vector"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "Informaţie asociată"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "Auto indentare"
+msgstr "Info autor"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "_Tipăreşte antetele paginilor"
+msgstr "Antet legat de axe"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "BGSound"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "Culoa_re fundal:"
+msgstr "Culoare fundal"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "Culoare fundal"
+msgstr "Textură tapet fundal"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "URI de bază"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "Utilizează fontul în etichetă"
+msgstr "Font de bază"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
-msgstr ""
+msgstr "Comportament"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "Text clipitor"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "Aldin"
+msgstr "Contur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "Culoa_re fundal:"
+msgstr "Culoare contur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "Casetă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Central Europeană"
+msgstr "Expensiune rând celule"
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "Generale"
+msgstr "Centru"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr ""
+msgid "Character encoding of linked resource"
+msgstr "Codări caractere ale resurselor referite"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
-msgstr ""
+msgstr "Bifat(stare)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "acţ_iuni"
+msgstr "Citat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
-msgstr ""
+msgstr "Menţionaţi motivul schimbării"
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "ID implementare clasă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "Listă etichete"
+msgstr "Listă clase"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Resetează aranjarea textului"
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr ""
+msgstr "Cod tip conţinut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "Copiază liniile selectate"
+msgstr "Culoare legături selectate"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
-msgstr ""
+msgstr "Expansiune coloană"
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
-msgstr ""
+msgstr "Coloane"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "_Conţinut"
+msgstr "Comentariu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr ""
+msgstr "Fragment cod computer"
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "_Conţinut"
+msgstr "Schemă conţinut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "_Conţinut"
+msgstr "Tip conţinut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "_Conţinut"
+msgstr "Coordonate"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
-msgstr ""
+msgstr "Container stil DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
-msgstr ""
+msgstr "Container DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "Data şi timpul modificării"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "Indicator declaraţie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
-msgid "Definition description"
-msgstr "_Descriere"
+msgid "Defer attribute"
+msgstr "Atribut deferire"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
-msgid "Definition list"
-msgstr ""
+msgid "Definition description"
+msgstr "Descriere definiţie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
-msgid "Definition term"
-msgstr ""
+msgid "Definition list"
+msgstr "Listă definiţii"
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
-msgid "Deleted text"
-msgstr "Şterge textul selectat"
+msgid "Definition term"
+msgstr "Termen definiţie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
-msgid "Direction"
-msgstr "Bretonă"
+msgid "Deleted text"
+msgstr "Text şters"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
-msgid "Directionality"
-msgstr ""
+msgid "Direction"
+msgstr "Direcţie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
-msgid "Directory list"
-msgstr ""
+msgid "Directionality"
+msgstr "Direcţie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
-msgid "Disabled"
-msgstr "Activat"
+msgid "Directory list"
+msgstr "Listă directoare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
-msgid "Document base"
-msgstr "_Documente"
+msgid "Disabled"
+msgstr "Dezactivat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
-msgid "Document body"
-msgstr "_Documente"
+msgid "Document base"
+msgstr "Bază document"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
-msgid "Document head"
-msgstr "_Documente"
+msgid "Document body"
+msgstr "Corp document"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
-msgid "Document title"
-msgstr "Statistici document"
+msgid "Document head"
+msgstr "Antet document"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
-msgid "Document type"
-msgstr "_Documente"
+msgid "Document title"
+msgstr "Titlu document"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
-msgid "Element ID"
-msgstr "Elemente"
+msgid "Document type"
+msgstr "Tip document"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
+msgid "Element ID"
+msgstr "ID element"
+
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
-msgstr ""
+msgstr "Obiect encapsulat"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
-
-#: plugins/taglist/HTML.tags.xml.in.h:65
-msgid "Encode type"
-msgstr ""
+msgstr "Accentuare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:66
-msgid "Figure"
-msgstr ""
+msgid "Encode type"
+msgstr "Tip codare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
-#, fuzzy
+msgid "Figure"
+msgstr "Figură"
+
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "Nume font"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
-msgid "For label"
-msgstr "etichetă"
-
 #: plugins/taglist/HTML.tags.xml.in.h:69
-msgid "Forced line break"
-msgstr ""
+msgid "For label"
+msgstr "Etichetă font"
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
-#, fuzzy
-msgid "Form"
-msgstr "Normală"
+msgid "Forced line break"
+msgstr "Sfârşit de linie forţat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
-msgid "Form action handler"
-msgstr ""
+msgid "Form"
+msgstr "Formular"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
-msgid "Form control group"
-msgstr ""
+msgid "Form action handler"
+msgstr "Operator de acţiuni în formular"
 
 #: plugins/taglist/HTML.tags.xml.in.h:73
-msgid "Form field label text"
-msgstr ""
+msgid "Form control group"
+msgstr "Grup de controale în forumular"
 
 #: plugins/taglist/HTML.tags.xml.in.h:74
-msgid "Form input"
-msgstr ""
+msgid "Form field label text"
+msgstr "Etichetă text de câmp în formular"
 
 #: plugins/taglist/HTML.tags.xml.in.h:75
-msgid "Form input type"
-msgstr ""
+msgid "Form input"
+msgstr "Câmp de introducere în formular"
 
 #: plugins/taglist/HTML.tags.xml.in.h:76
-msgid "Form method"
-msgstr ""
+msgid "Form input type"
+msgstr "Tip câmp de introducere în formular"
 
 #: plugins/taglist/HTML.tags.xml.in.h:77
-msgid "Forward link"
-msgstr ""
+msgid "Form method"
+msgstr "Metodă a formularului"
 
 #: plugins/taglist/HTML.tags.xml.in.h:78
-#, fuzzy
-msgid "Frame"
-msgstr "Nume:"
+msgid "Forward link"
+msgstr "Legătură redirecţionare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
-msgid "Frame render parts"
-msgstr ""
+msgid "Frame"
+msgstr "Cadru"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
-msgid "Frame source"
-msgstr ""
+msgid "Frame render parts"
+msgstr "Porţiuni cadru de render"
 
 #: plugins/taglist/HTML.tags.xml.in.h:81
-msgid "Frame target"
-msgstr ""
+msgid "Frame source"
+msgstr "Sursă cadru"
 
 #: plugins/taglist/HTML.tags.xml.in.h:82
-msgid "Frameborder"
-msgstr ""
+msgid "Frame target"
+msgstr "Ţintă cadru"
 
 #: plugins/taglist/HTML.tags.xml.in.h:83
-#, fuzzy
-msgid "Frameset"
-msgstr "Feroenă"
+msgid "Frameborder"
+msgstr "Margine cadru"
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
-msgid "Frameset columns"
-msgstr "Î_ncepe de la coloana:"
+msgid "Frameset"
+msgstr "Set de cadre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
-msgid "Frameset rows"
-msgstr ""
+msgid "Frameset columns"
+msgstr "Coloane set de cadre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
-msgid "Framespacing"
-msgstr ""
+msgid "Frameset rows"
+msgstr "Rânduri set de cadre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:87
-msgid "Generic embedded object"
-msgstr ""
+msgid "Framespacing"
+msgstr "Spaţiere set de cadre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:88
-msgid "Generic metainformation"
-msgstr ""
+msgid "Generic embedded object"
+msgstr "Obiect înglobat generic"
 
 #: plugins/taglist/HTML.tags.xml.in.h:89
-#, fuzzy
-msgid "Generic span"
-msgstr "Generale"
+msgid "Generic metainformation"
+msgstr "Metainformaţie generică"
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
-msgid "HREF URI"
-msgstr ""
+msgid "Generic span"
+msgstr "Delimitare generică"
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
-msgid "HTML - Special Characters"
-msgstr ""
+msgid "HREF URI"
+msgstr "URI HREF"
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
-msgid "HTML - Tags"
-msgstr ""
+msgid "HTML - Special Characters"
+msgstr "HTML - caractere speciale"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
-msgid "HTML root element"
-msgstr ""
+msgid "HTML - Tags"
+msgstr "HTML - Tag-uri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
-msgid "HTML version"
-msgstr ""
+msgid "HTML root element"
+msgstr "HTML - element rădăcină"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
-msgid "HTTP header name"
-msgstr ""
+msgid "HTML version"
+msgstr "HTML - versiune"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
-msgid "Header cell ID's"
-msgstr ""
+msgid "HTTP header name"
+msgstr "HTTP - nume antet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
-msgid "Heading"
-msgstr ""
+msgid "Header cell ID's"
+msgstr "ID-ul celulei antet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
-msgid "Heading 1"
-msgstr ""
+msgid "Heading"
+msgstr "Subtitlu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
-msgid "Heading 2"
-msgstr ""
+msgid "Heading 1"
+msgstr "Subtitlu 1"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
-msgid "Heading 3"
-msgstr ""
+msgid "Heading 2"
+msgstr "Subtitlu 2"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
-msgid "Heading 4"
-msgstr ""
+msgid "Heading 3"
+msgstr "Subtitlu 3"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
-msgid "Heading 5"
-msgstr ""
+msgid "Heading 4"
+msgstr "Subtitlu 4"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
-msgid "Heading 6"
-msgstr ""
+msgid "Heading 5"
+msgstr "Subtitlu 5"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
-msgid "Height"
-msgstr ""
+msgid "Heading 6"
+msgstr "Subtitlu 6"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
-msgid "Horizontal rule"
-msgstr ""
+msgid "Height"
+msgstr "Înălţime"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
-msgid "Horizontal space"
-msgstr ""
+msgid "Horizontal rule"
+msgstr "Linie orizontală"
 
 #: plugins/taglist/HTML.tags.xml.in.h:107
-msgid "I18N BiDi over-ride"
-msgstr ""
+msgid "Horizontal space"
+msgstr "Spaţiu orizontal"
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
-msgid "Image"
-msgstr ""
+msgid "I18N BiDi over-ride"
+msgstr "Suprascriere BiDi I18N"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
-msgid "Image map"
-msgstr ""
+msgid "Image"
+msgstr "Imagine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
-msgid "Image map area"
-msgstr ""
+msgid "Image map"
+msgstr "Hartă imagine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
-msgid "Image map name"
-msgstr ""
+msgid "Image map area"
+msgstr "Zonă hartă imagine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
-msgid "Image source"
-msgstr ""
+msgid "Image map name"
+msgstr "Nume hartă imagine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
-msgid "Inline frame"
-msgstr "Nume de fişier invalid"
+msgid "Image source"
+msgstr "Sursă imagine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
-msgid "Inline layer"
-msgstr ""
+msgid "Inline frame"
+msgstr "Cadru înglobat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
-msgid "Inserted text"
-msgstr "Inserare dată şi oră"
+msgid "Inline layer"
+msgstr "Strat inline"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
-msgid "Instance definition"
-msgstr ""
+msgid "Inserted text"
+msgstr "Text inserat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
-msgid "Italic text"
-msgstr "Italic"
+msgid "Instance definition"
+msgstr "Definiţie instanţă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
-msgid "Java applet"
-msgstr ""
+msgid "Italic text"
+msgstr "Text italic"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
-msgid "Label"
-msgstr "etichetă"
+msgid "Java applet"
+msgstr "Applet Java"
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
-msgid "Language code"
-msgstr "Limbi"
+msgid "Label"
+msgstr "Etichetă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
-msgid "Large text style"
-msgstr ""
+msgid "Language code"
+msgstr "Cod limbaj"
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
-msgid "Layer"
-msgstr ""
+msgid "Large text style"
+msgstr "Stil text mărit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
-msgid "Link color"
-msgstr "Alegeţi o culoare"
+msgid "Layer"
+msgstr "Strat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
-msgid "List item"
-msgstr ""
+msgid "Link color"
+msgstr "Culoare legătură"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
-msgid "List of MIME types for file upload"
-msgstr ""
+msgid "List item"
+msgstr "Element listă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:126
-msgid "List of supported character sets"
-msgstr ""
+msgid "List of MIME types for file upload"
+msgstr "Lista tipurilor MIME de încărcat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
-msgid "Listing"
-msgstr ""
+msgid "List of supported character sets"
+msgstr "Lista seturilor de caractere suportate"
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
-msgid "Local change to font"
-msgstr "Alegeţi fontul de editare"
+msgid "Listing"
+msgstr "Listă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
-msgid "Long description link"
-msgstr "_Descriere"
+msgid "Local change to font"
+msgstr "Font schimbare locală"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
-msgid "Long quotation"
-msgstr ""
+msgid "Long description link"
+msgstr "Legătură descriere lungă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
-msgid "Mail link"
-msgstr ""
+msgid "Long quotation"
+msgstr "Citat lung"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
-msgid "Margin pixel height"
-msgstr ""
+msgid "Mail link"
+msgstr "Legătură email"
 
 #: plugins/taglist/HTML.tags.xml.in.h:133
-msgid "Margin pixel width"
-msgstr ""
+msgid "Margin pixel height"
+msgstr "Înălţime pixel de margine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:134
-msgid "Marquee"
-msgstr ""
+msgid "Margin pixel width"
+msgstr "Lungime pixel de margine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr ""
+msgid "Marquee"
+msgstr "Marquee"
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-msgid "Media-independent link"
-msgstr ""
+msgid "Maximum length of text field"
+msgstr "Lungime maximă a câmpului text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
-msgid "Menu list"
-msgstr ""
+msgid "Media-independent link"
+msgstr "Legătură independentă de mediu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
-msgid "Multi-line text field"
-msgstr ""
+msgid "Menu list"
+msgstr "Listă meniu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
-msgid "Multicolumn"
-msgstr ""
+msgid "Multi-line text field"
+msgstr "Câmp text multilinie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
-msgid "Multiple"
-msgstr ""
+msgid "Multicolumn"
+msgstr "Multicoloană"
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
-#, fuzzy
-msgid "Name"
-msgstr "Nume:"
+msgid "Multiple"
+msgstr "Multiplu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
-msgid "Named property value"
-msgstr ""
+msgid "Name"
+msgstr "Nume"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
-msgid "Next ID"
-msgstr ""
+msgid "Named property value"
+msgstr "Valoare proprietate numită"
 
 #: plugins/taglist/HTML.tags.xml.in.h:144
-msgid "No URI"
-msgstr ""
+msgid "Next ID"
+msgstr "ID următor"
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
-msgid "No embedded objects"
-msgstr ""
+msgid "No URI"
+msgstr "Fără URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
-msgid "No frames"
-msgstr ""
+msgid "No embedded objects"
+msgstr "Fără obiecte înglobate"
 
 #: plugins/taglist/HTML.tags.xml.in.h:147
-msgid "No layers"
-msgstr ""
+msgid "No frames"
+msgstr "Fără cadre"
 
 #: plugins/taglist/HTML.tags.xml.in.h:148
-msgid "No line break"
-msgstr ""
+msgid "No layers"
+msgstr "Fără straturi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
-#, fuzzy
-msgid "No resize"
-msgstr "Arată mărimea"
+msgid "No line break"
+msgstr "Fără sfârşit de linie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
-msgid "No script"
-msgstr ""
+msgid "No resize"
+msgstr "Fără redimensionare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
-msgid "No shade"
-msgstr ""
+msgid "No script"
+msgstr "Fără script"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
-msgid "No word wrap"
-msgstr ""
+msgid "No shade"
+msgstr "Fără umbră"
 
 #: plugins/taglist/HTML.tags.xml.in.h:153
-msgid "Note"
-msgstr ""
+msgid "No word wrap"
+msgstr "Fără potrivire de cuvinte"
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
-#, fuzzy
-msgid "Object applet file"
-msgstr "Deschide un fişier"
+msgid "Note"
+msgstr "Notă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
-msgid "Object data reference"
-msgstr ""
+msgid "Object applet file"
+msgstr "Fişier obiect applet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
-msgid "Offset for alignment character"
-msgstr ""
+msgid "Object data reference"
+msgstr "Referinţă date obiect"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
-msgid "OnBlur event"
-msgstr ""
+msgid "Offset for alignment character"
+msgstr "Deplasament pentru caracter de aliniere"
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
-msgid "OnChange event"
-msgstr "Inversează mărimea"
+msgid "OnBlur event"
+msgstr "Eveniment onBlur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
-msgid "OnClick event"
-msgstr ""
+msgid "OnChange event"
+msgstr "Eveniment onChange"
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
-msgid "OnDblClick event"
-msgstr ""
+msgid "OnClick event"
+msgstr "Eveniment onClick"
 
 #: plugins/taglist/HTML.tags.xml.in.h:161
-msgid "OnFocus event"
-msgstr ""
+msgid "OnDblClick event"
+msgstr "Eveniment onDblClick"
 
 #: plugins/taglist/HTML.tags.xml.in.h:162
-msgid "OnKeyDown event"
-msgstr ""
+msgid "OnFocus event"
+msgstr "Eveniment onFocus"
 
 #: plugins/taglist/HTML.tags.xml.in.h:163
-msgid "OnKeyPress event"
-msgstr ""
+msgid "OnKeyDown event"
+msgstr "Eveniment onKeyDown"
 
 #: plugins/taglist/HTML.tags.xml.in.h:164
-msgid "OnKeyUp event"
-msgstr ""
+msgid "OnKeyPress event"
+msgstr "Eveniment onKeyPress"
 
 #: plugins/taglist/HTML.tags.xml.in.h:165
-msgid "OnLoad event"
-msgstr ""
+msgid "OnKeyUp event"
+msgstr "Eveniment onKeyUp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:166
-msgid "OnMouseDown event"
-msgstr ""
+msgid "OnLoad event"
+msgstr "Eveniment onLoad"
 
 #: plugins/taglist/HTML.tags.xml.in.h:167
-msgid "OnMouseMove event"
-msgstr ""
+msgid "OnMouseDown event"
+msgstr "Eveniment onMouseDown"
 
 #: plugins/taglist/HTML.tags.xml.in.h:168
-msgid "OnMouseOut event"
-msgstr ""
+msgid "OnMouseMove event"
+msgstr "Eveniment onMouseMove"
 
 #: plugins/taglist/HTML.tags.xml.in.h:169
-msgid "OnMouseOver event"
-msgstr ""
+msgid "OnMouseOut event"
+msgstr "Eveniment onMouseOut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:170
-msgid "OnMouseUp event"
-msgstr ""
+msgid "OnMouseOver event"
+msgstr "Eveniment onMouseOver"
 
 #: plugins/taglist/HTML.tags.xml.in.h:171
-msgid "OnReset event"
-msgstr ""
+msgid "OnMouseUp event"
+msgstr "Eveniment onMouseUp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:172
-msgid "OnSelect event"
-msgstr ""
+msgid "OnReset event"
+msgstr "Eveniment onReset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:173
-msgid "OnSubmit event"
-msgstr ""
+msgid "OnSelect event"
+msgstr "Eveniment onSelect"
 
 #: plugins/taglist/HTML.tags.xml.in.h:174
-msgid "OnUnload event"
-msgstr ""
+msgid "OnSubmit event"
+msgstr "Eveniment onSubmit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:175
-msgid "Option group"
-msgstr ""
+msgid "OnUnload event"
+msgstr "Eveniment onUnload"
 
 #: plugins/taglist/HTML.tags.xml.in.h:176
-#, fuzzy
-msgid "Option selector"
-msgstr "Selectare font"
+msgid "Option group"
+msgstr "Grup opţiuni"
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
-msgid "Ordered list"
-msgstr ""
+msgid "Option selector"
+msgstr "Selector opţiune"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-#, fuzzy
-msgid "Output media"
-msgstr "Linii de ieşire"
+msgid "Ordered list"
+msgstr "Listă ordonată"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
-msgid "Paragraph"
-msgstr ""
+msgid "Output media"
+msgstr "Mediu ieşire"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
-msgid "Paragraph class"
-msgstr ""
+msgid "Paragraph"
+msgstr "Paragraf"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
-msgid "Paragraph style"
-msgstr ""
+msgid "Paragraph class"
+msgstr "Clasă paragraf"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
-msgid "Preformatted listing"
-msgstr ""
+msgid "Paragraph style"
+msgstr "Stil paragraf"
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
-#, fuzzy
-msgid "Preformatted text"
-msgstr "Text previzualizare"
+msgid "Preformatted listing"
+msgstr "Listă preformatată"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
-msgid "Profile metainfo dictionary"
-msgstr ""
+msgid "Preformatted text"
+msgstr "Text preformatat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:185
-msgid "Prompt message"
-msgstr ""
+msgid "Profile metainfo dictionary"
+msgstr "Dicţionar de metainformaţii ale profilului"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
-msgid "Push button"
-msgstr "button1"
+msgid "Prompt message"
+msgstr "Mesaj de prompt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
-msgid "Quote"
-msgstr "Ieşire"
+msgid "Push button"
+msgstr "Buton apăsare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
-msgid "Range"
-msgstr "_Schimbă"
+msgid "Quote"
+msgstr "Citat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
-msgid "ReadOnly text and password"
-msgstr ""
+msgid "Range"
+msgstr "Zonă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
-msgid "Reduced spacing"
-msgstr ""
+msgid "ReadOnly text and password"
+msgstr "Text şi parolă ReadOnly"
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
-msgid "Reverse link"
-msgstr "Ordine _inversă"
+msgid "Reduced spacing"
+msgstr "Spaţiere redusă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
-msgid "Root"
-msgstr ""
+msgid "Reverse link"
+msgstr "Legătură inversă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
-msgid "Rows"
-msgstr ""
+msgid "Root"
+msgstr "Rădăcină"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
-msgid "Rulings between rows and columns"
-msgstr ""
+msgid "Rows"
+msgstr "Rânduri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
-msgid "Sample program output, scripts"
-msgstr ""
+msgid "Rulings between rows and columns"
+msgstr "Marcaje între rânduri şi coloane"
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
-msgid "Scope covered by header cells"
-msgstr ""
+msgid "Sample program output, scripts"
+msgstr "Rezultatul programului exemplu, script-uri"
 
 #: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
-msgstr ""
+msgid "Scope covered by header cells"
+msgstr "Zonă cuprinsă în celulele antet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "Setare limbă"
+msgstr "Nume limbaj script"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
-msgstr ""
+msgstr "Instrucţiuni de script"
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
-msgstr ""
+msgstr "Bară de derulare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "Selectaţi un fişier pentru deschidere"
+msgstr "Opţiune selectabilă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "_Salvează selecţia"
+msgstr "Selectat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
-msgstr ""
+msgstr "Hartă imagine pe server"
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "Salvează"
+msgstr "Formă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
-msgstr ""
+msgstr "Citat scurt înglobat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Single line prompt"
-msgstr ""
+msgstr "Prompt pe o singură linie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "Lungime tab"
+msgstr "Dimensiune"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "Toate fişierele text"
+msgstr "Stil text mic"
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
-msgstr ""
+msgstr "Sfârşit de linie „soft”"
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
-msgstr ""
+msgstr "Sunet"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "Salvează"
+msgstr "Spaţiu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
-msgstr ""
+msgstr "Listă de arhive separată prin spaţiu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "Înlocuieşte"
+msgstr "Spaţiator"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
-msgstr ""
+msgstr "Spaţiu între celule"
 
 #: plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Spacing within cells"
-msgstr ""
+msgstr "Spaţiu în interiorul celulelor"
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "Spaniolă"
+msgstr "Delimitare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
-msgstr ""
+msgstr "Rădăcină pătrată"
 
 #: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
-msgstr ""
+msgstr "Mesaj de aşteptare a încărcării"
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "Numerotează _liniile la tipărire"
+msgstr "Număr de start a secvenţei"
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "Tăiat"
+msgstr "Text tăiat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "Tăiat"
+msgstr "Stil text tăiat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
-msgstr ""
+msgstr "Accentuare puternică"
 
 #: plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Style info"
-msgstr ""
+msgstr "Info stil"
 
 #: plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Subscript"
-msgstr ""
+msgstr "Indice"
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "_Descriere"
+msgstr "Exponent"
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
-msgstr ""
+msgstr "Poziţie ordine tab"
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "Activat"
+msgstr "Tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
-msgstr ""
+msgstr "Corp tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
-#, fuzzy
 msgid "Table caption"
-msgstr "Deschide locaţia"
+msgstr "Titlu tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column group properties"
-msgstr ""
+msgstr "Proprietăţi grup de colane ale tabelei"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table column properties"
-msgstr ""
+msgstr "Proprietăţi coloane tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table data cell"
-msgstr ""
+msgstr "Celulă de date"
 
 #: plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table footer"
-msgstr ""
+msgstr "Subsol tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Table header"
-msgstr ""
+msgstr "Antet tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table header cell"
-msgstr ""
+msgstr "Celulă antet tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table row"
-msgstr ""
+msgstr "Rând tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table summary"
-msgstr ""
+msgstr "Sumar tabelă"
 
 #: plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Target - Blank"
-msgstr ""
+msgstr "Destinaţie - blanc"
 
 #: plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Target - Parent"
-msgstr ""
+msgstr "Destinaţie - părinte"
 
 #: plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Target - Self"
-msgstr ""
+msgstr "Destinaţie - identică"
 
 #: plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Top"
-msgstr ""
+msgstr "Destinaţie - sus"
 
 #: plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "Stil text telex sau monospaţiat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
 msgstr "Culoare text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Text entered by user"
-msgstr ""
+msgstr "Text introdus de utilizator"
 
 #: plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Title"
@@ -4296,424 +4099,407 @@ msgstr "Titlu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "Margine de sus în pixeli"
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
-#, fuzzy
 msgid "Underlined text style"
-msgstr "Subliniere"
+msgstr "Stil text subliniat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "Subliniere"
+msgstr "Listă neordonată"
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
-msgstr ""
+msgstr "Utilizează hartă de imagine"
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
-msgstr ""
+msgstr "Valoare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
-msgstr ""
+msgstr "Interpretare valoare"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
-msgstr ""
+msgstr "Variabilă sau argument program"
 
 #: plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "Aliniere verticală a celulei"
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "Inserează spaţii"
+msgstr "Spaţiu vertical"
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "Alegeţi culoarea marcajelor"
+msgstr "Culoare legătură vizitată"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
-msgstr ""
+msgstr "Lungime"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
-msgstr ""
+msgstr "Citat bibliografic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography item"
-msgstr ""
+msgstr "Element bibliografic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
-msgstr ""
+msgstr "Citat scurt bibliografic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography thebibliography"
-msgstr ""
+msgstr "Bibliografie"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
-msgstr ""
+msgstr "Paranteze &lt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
-msgstr ""
+msgstr "Paranteze ()"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr ""
+msgstr "Paranteze []"
 
 #: plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr ""
+msgstr "Paranteze {}"
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "Intrare fişier"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "Font"
+msgstr "Notă subsol"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr ""
+msgstr "Funcţia cosin"
 
 #: plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
-msgstr ""
+msgstr "Funcţia e^"
 
 #: plugins/taglist/Latex.tags.xml.in.h:14
 msgid "Function exp"
-msgstr ""
+msgstr "Funcţia exp"
 
 #: plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr ""
+msgstr "Funcţia log"
 
 #: plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr ""
+msgstr "Funcţia log10"
 
 #: plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
-msgstr ""
+msgstr "Funcţia sine"
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "Greacă"
+msgstr "Alfa grecesc"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "Greacă"
+msgstr "Beta grecesc"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr ""
+msgstr "Epsilon grecesc"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "Greacă"
+msgstr "Gama grecesc"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr ""
+msgstr "Lambda grecească"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "Greacă"
+msgstr "Rho grecesc"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "Greacă"
+msgstr "Tau grecesc"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "Subtitlu 0 (capitol)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "Subtitlu 0 (capitol*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "Subtitlu 1 (secţiune)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "Subtitlu 1 (secţiune*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "Subtitlu 2 (subsecţiune)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "Subtitlu 2 (subsecţiune*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "Subtitlu 3 (subsubsecţiune)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "Subtitlu 3 (subsubsecţiune*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "Subtitlu 4 (paragraf)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
-msgstr ""
+msgstr "Subtitlu anexă"
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "Element"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr ""
+msgstr "Element cu etichetă"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - Tag-uri"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "_Descriere"
+msgstr "Descriere listă"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
-msgstr ""
+msgstr "Enumerare listă"
 
 #: plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
-msgstr ""
+msgstr "Populare listă"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "Matematice (afişare)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "Matematice (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "Deschide locaţia"
+msgstr "Operator fracţie"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "Operator integrală (afişare)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "Operator integrală (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Operator sumă (afişare)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Operator sumă (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "Preferinţe"
+msgstr "Etichetă referinţă"
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "Preferinţe"
+msgstr "Ref al referinţei"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
-msgstr ""
+msgstr "Simbol &gt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol &gt;="
-msgstr ""
+msgstr "Simbol &gt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol &lt;&lt;"
-msgstr ""
+msgstr "Simbol &lt;&lt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:53
 msgid "Symbol &lt;="
-msgstr ""
+msgstr "Simbol &lt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr ""
+msgstr "Simbol and"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr ""
+msgstr "Simbol const"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "Simbol d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "Simbol d-by-dt-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "Simbol d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "Simbol dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "Simbol equiv"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr ""
+msgstr "Simbol cratimă --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr ""
+msgstr "Simbol cratimă ---"
 
 #: plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr ""
+msgstr "Simbol infinit"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Simbol spaţiu matematic ,"
 
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Simbol spaţiu matematic ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Simbol spaţiu matematic _"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Simbol spaţiu matematic __"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr ""
+msgstr "Simbol simeq"
 
 #: plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr ""
+msgstr "Simbol steluţă"
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "Font aldin"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "Font italic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "Font înclinat"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Tip font"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "Text nedespărţibil"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - Axe"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "Elemente"
+msgstr "XSLT - Elemente"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "Fun"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "înaintaş"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "înaintaş-sau-sine"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "atribut"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "copil"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "descendent"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "descendent-sau-sine"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "următor"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "următorul-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "Inserează spaţii"
+msgstr "namespace"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "Deschide"
+msgstr "părinte"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "precedent"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "precedentul-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "sine"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
@@ -4767,11 +4553,11 @@ msgstr "In_serează data şi ora..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Inserează data şi ora curentă la poziţia curentă a cursorului"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "Formate disponibile"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "Configuraţi modulul „Inserare dată şi oră“..."
 
@@ -4814,6 +4600,24 @@ msgstr "_Solicită un format"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Utilizează un format personalizat"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+#~ "changes. </span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"large\">Aveţi X documente cu modificări "
+#~ "nesalvate. </span>"
+
+#~ msgid "If you don't save your documents, all your changes will be lost."
+#~ msgstr ""
+#~ "În cazul în care nu salvaţi documentele, toate modificările vor fi "
+#~ "pierdute."
+
+#~ msgid "Save _None"
+#~ msgstr "_Nu salva nici unul"
+
+#~ msgid "_Save Selected"
+#~ msgstr "_Salvează selecţia"
 
 #~ msgid "Irish (Gaeilge)"
 #~ msgstr "Irlandeză (Gaeilge)"
