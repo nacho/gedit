@@ -1,7 +1,9 @@
 #ifndef __DIALOGS_H__
 #define __DIALOGS_H__
 
-void dialog_search    (GtkWidget *w, gpointer data);
+GtkWidget * create_search_dialog (void);
+
+void dialog_find      (void);
 void dialog_about     (void);
 void dialog_find_line (void);
 void dialog_replace   (void);

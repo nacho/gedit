@@ -5,12 +5,8 @@
  */
 
 gchar *s = N_("Find");
-gchar *s = N_("Find");
-gchar *s = N_("Cursor\n"
-              "Beginning of Document\n"
-              "End of Document\n"
-              "");
-gchar *s = N_("Search for: ");
-gchar *s = N_("Search from: ");
+gchar *s = N_("Find Next");
+gchar *s = N_("Search for : ");
+gchar *s = N_("beginning of document");
+gchar *s = N_("cursor position");
 gchar *s = N_("Case sensitive");
-gchar *s = N_("Reverse search");

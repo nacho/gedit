@@ -242,12 +242,3 @@ options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 	gedit_window_set_status_bar (!settings->show_status);
 }
 
-void
-find_line_cb (GtkWidget *widget, gpointer data)
-{
-	gedit_debug ("F:find_line_cb\n", DEBUG_UNDO);
-
-	if (!gedit_document_current())
-		return;
-	dialog_find_line ();
-}

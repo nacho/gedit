@@ -84,7 +84,6 @@ extern void options_toggle_read_only_cb (GtkWidget *widget, gpointer data);
 
 void tab_pos (GtkPositionType pos);
 
-void find_line_cb (GtkWidget *widget, gpointer data);
 void replace_cb (GtkWidget *widget, gpointer data);
 void about_cb (GtkWidget *widget, gpointer data);
 

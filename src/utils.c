@@ -122,55 +122,51 @@ gedit_flash_va (gchar *format, ...)
 	g_free (msg);
 }
 
-/**
- * gedit_debug:
- * @message: Message to display on the console
- * @type : Group type of message
- *
- * Print a debug message out to the console
- **/
-#if 0
-void
-gedit_debug (gchar *message, DebugSection type)
+
+
+
+
+
+
+
+/* This is just a stopwatch. Chema
+   I need it to time search functions but
+   it can be removed after I am done with
+   the search stuff */ 
+#include <time.h>
+
+#define MAX_TIME_STRING 100
+typedef struct {
+	clock_t begin_clock, save_clock;
+	time_t  begin_time, save_time;
+} time_keeper;
+
+static time_keeper tk;
+
+void start_time (void)
 {
-/*	return;*/
-	switch (type)
-	{
-	case DEBUG_UNDO:
-		break;
-	case DEBUG_UNDO_DEEP:
-		break;
-	case DEBUG_VIEW:
-		break;
-	case DEBUG_VIEW_DEEP:
-		break;
-	case DEBUG_PLUGINS:
-		break;
-	case DEBUG_PLUGINS_DEEP:
-		break;
-	case DEBUG_FILE:
-		break;
-	case DEBUG_FILE_DEEP:
-		break;
-	case DEBUG_SEARCH:
-		break;
-	case DEBUG_SEARCH_DEEP:
-		break;
-	case DEBUG_PRINT:
-		g_print(message);
-		break;
-	case DEBUG_PRINT_DEEP:
-		break;
-	case DEBUG_COMMANDS:
-		break;
-	case DEBUG_PREFS:
-		break;
-	case DEBUG_PREFS_DEEP:
-		break;
-	case DEBUG_DOCUMENT:
-		break;
-	case DEBUG_DOCUMENT_DEEP:
-		break;
-	}
+	tk.begin_clock = tk.save_clock = clock ();
+	tk.begin_time = tk.save_time = time (NULL);
 }
-#endif
+
+double
+print_time (void)
+{
+	gchar s1 [MAX_TIME_STRING], s2 [MAX_TIME_STRING];
+	gint  field_width, n1, n2;
+	gdouble clocks_per_second = (double) CLOCKS_PER_SEC, user_time, real_time;
+
+	user_time = (clock() - tk.save_clock) / clocks_per_second;
+	real_time = difftime (time (NULL), tk.save_time);
+	tk.save_clock = clock ();
+	tk.save_time = time (NULL);
+
+	/* print the values ... */
+	n1 = sprintf (s1, "%.5f", user_time);
+	n2 = sprintf (s2, "%.5f", real_time);
+	field_width = (n1 > n2)?n1:n2;
+	g_print ("%s%*.5f%s\n%s%*.5f%s\n\n",
+		 "User time : ", field_width, user_time, " seconds",
+		 "Real time : ", field_width, real_time, " seconds");
+	return user_time;
+}

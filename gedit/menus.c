@@ -119,14 +119,14 @@ GnomeUIInfo gedit_edit_menu[] =
 #endif       
 
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_FIND_ITEM (dialog_search, NULL),
-	GNOMEUIINFO_MENU_REPLACE_ITEM (dialog_replace, NULL),
+	GNOMEUIINFO_MENU_FIND_ITEM ( find_cb, NULL),
+	GNOMEUIINFO_MENU_REPLACE_ITEM ( replace_cb, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	{
 		GNOME_APP_UI_ITEM,
 		N_("Goto _Line..."),
 		N_("Go to a specific line number"),
-		find_line_cb, NULL, NULL,
+		goto_line_cb, NULL, NULL,
 		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
 	},
 	GNOMEUIINFO_END
@@ -363,7 +363,7 @@ GnomeUIInfo toolbar_data[] =
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_PASTE
 	},
 	{
-		GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), dialog_search,
+		GNOME_APP_UI_ITEM, N_("Find"), N_("Search for a string"), find_cb,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_SEARCH
 	},
 	{

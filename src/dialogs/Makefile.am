@@ -12,7 +12,7 @@ noinst_LIBRARIES = libdialogs.a
 
 libdialogs_a_SOURCES = 		\
 	dialog-about.c		\
-	dialog-find-line.c	\
+	dialog-goto-line.c	\
 	dialog-prefs.c		\
 	dialog-replace.c	\
 	dialog-search.c		\
@@ -20,7 +20,7 @@ libdialogs_a_SOURCES = 		\
 
 glade_DATA =		\
 	about.glade	\
-	find-line.glade \
+	goto-line.glade \
 	prefs.glade	\
 	search.glade	\
 	replace.glade

@@ -27,6 +27,7 @@
 #include "view.h"
 #include "prefs.h"
 #include "file.h"
+#include "utils.h"
 
 #ifndef MAX_RECENT
 #define MAX_RECENT 4
@@ -36,6 +37,10 @@
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb (GtkWidget *w, gpointer data);
        void recent_add (char *filename);
+
+static GList * history_get_list (void);
+gchar * history_update_list (gchar *filename);
+void history_write_config (void);
 
 
 GList *history_list = NULL;
@@ -47,6 +52,8 @@ history_get_list (void)
         gint max_entries, i;
         gboolean do_set = FALSE;
 
+	gedit_debug ("\n", DEBUG_RECENT);
+	
 	if (history_list)
 		return history_list;
 
@@ -96,6 +103,8 @@ history_update_list (gchar *filename)
         gboolean do_set = FALSE;
         gboolean found = FALSE;
 
+	gedit_debug ("\n", DEBUG_RECENT);
+
         g_return_val_if_fail (filename != NULL, NULL);
 
         /* Get maximum list length from config */
@@ -139,6 +148,8 @@ history_write_config (void)
         GList *l;
         gint max_entries, i = 0;
 
+	gedit_debug ("\n", DEBUG_RECENT);
+
         if (history_list == NULL)
 		return;
 
@@ -168,6 +179,8 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	gchar *filename;
 	gchar *path;
 	int i;
+
+	gedit_debug ("\n", DEBUG_RECENT);
 
 	g_return_if_fail (app != NULL);
 
@@ -208,7 +221,12 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 		gnome_app_insert_menus (GNOME_APP(app), path, menu);
 
 		g_free (menu->label);
-		g_free (filename);
+		/*
+		  OK. here is a memleak, BUT if we free filename
+		  the recent stuff will not work. FIXME :
+		  chema .
+		  g_free (filename);
+		*/
 	}
 
 	g_free (menu);
@@ -223,6 +241,8 @@ recent_cb (GtkWidget *widget, gpointer data)
 {
 	Document *doc;
 	
+	gedit_debug ("\n", DEBUG_RECENT);
+
 	g_return_if_fail (data != NULL);
 
 	doc = gedit_document_new_with_file (data);
@@ -234,6 +254,7 @@ recent_cb (GtkWidget *widget, gpointer data)
 	else
 	{
 		g_print ("recent_cb(): file unable to open\n");
+		g_print ("*%s*\n", (gchar *) data);
 		/* FIXME: If an error was encountered the delete the
 		   entry from the menu */
 	}
@@ -252,6 +273,8 @@ recent_update (GnomeApp *app)
 {
 	GList *filelist = NULL;
 
+	gedit_debug ("\n", DEBUG_RECENT);
+
 	filelist = history_get_list ();
 
 	recent_update_menus (app, filelist);
@@ -267,6 +290,8 @@ void
 recent_add (char *filename)
 {
 	gchar *del_name;
+
+	gedit_debug ("\n", DEBUG_RECENT);
 
 	g_return_if_fail (filename != NULL);
 

@@ -35,7 +35,8 @@ typedef enum {
 	DEBUG_PLUGINS,
 	DEBUG_FILE,
 	DEBUG_DOCUMENT,
-	DEBUG_COMMANDS
+	DEBUG_RECENT,	
+	DEBUG_COMMANDS,
 } DebugSection;
 
 extern gint debug;
@@ -48,6 +49,7 @@ extern gint debug_plugins;
 extern gint debug_file;
 extern gint debug_document;
 extern gint debug_commands;
+extern gint debug_recent;
 
 #define gedit_debug(str, section) \
     if (debug) \
@@ -70,6 +72,8 @@ extern gint debug_commands;
     if (debug_document && section == DEBUG_DOCUMENT) \
 	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_commands && section == DEBUG_COMMANDS) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_recent && section == DEBUG_RECENT) \
 	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
     }
 

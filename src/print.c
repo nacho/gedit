@@ -125,7 +125,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	PrintJobInfo *pji;
 	Document * doc = gedit_document_current();
 
-	gedit_debug ("F:file_print_cb\n", DEBUG_PRINT);
+	gedit_debug ("\n", DEBUG_PRINT);
 	
 	if ( doc == NULL)
 		return;

@@ -11,6 +11,8 @@
  * [ ] libglade-ify me
  */
 
+#if 0
+
 #include <config.h>
 #include <gnome.h>
 
@@ -52,6 +54,7 @@ clicked_cb (GtkWidget *widget, gint button, Document *doc)
 	gchar *str, *replace;
 	gboolean confirm = FALSE;
 
+#if 0
 	options = 0;
 	if (button < 2)
 	{
@@ -96,6 +99,7 @@ clicked_cb (GtkWidget *widget, gint button, Document *doc)
 					       doc);
 		gnome_dialog_close (GNOME_DIALOG (widget));
 	}
+#endif	
 }
 
 static gint
@@ -160,3 +164,5 @@ dialog_replace_impl (void)
 {
 
 }
+
+#endif

@@ -46,6 +46,7 @@ gint debug_plugins = 0;
 gint debug_file = 0;
 gint debug_document = 0;
 gint debug_commands = 0;
+gint debug_recent = 0;
 
 static const struct poptOption options[] =
 {
@@ -75,6 +76,9 @@ static const struct poptOption options[] =
 
 	{ "debug-view", '\0', 0, &debug_view, 0,
 	  N_("Show view debugging messages."), NULL },
+
+	{ "debug-recent", '\0', 0, &debug_recent, 0,
+	  N_("Show recent debugging messages."), NULL },
 
 	{ "debug", '\0', 0, &debug, 0,
 	  N_("Turn on all debugging messages."), NULL },

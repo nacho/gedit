@@ -39,11 +39,19 @@ extern GtkWidget *col_label;
 
 GList *window_list = NULL;
 
+/* I am rewriting the search option, and search results from all
+   documents will not get imlemented initially */
+#define ENABLE_SEARCH_RESULT_CLIST
+#undef ENABLE_SEARCH_RESULT_CLIST
+
+
 /* Window *window; */
 
 /* Prototype for setting the window icon */
 static void gedit_window_set_icon (GtkWidget *window, char *icon);
 
+
+#ifdef ENABLE_SEARCH_RESULT_CLIST
 
 /* Create a find in all files search result window but don't show it. */
 static GtkWidget*
@@ -112,6 +120,7 @@ create_find_in_files_result_window (void)
 
 	return frame;
 }
+#endif
 
 void
 gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
@@ -143,10 +152,14 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	/*gedit_load_settings ();*/
 	
 	/* find in files result window  dont show it.*/
+#ifdef ENABLE_SEARCH_RESULT_CLIST
+	
 	search_result_window = create_find_in_files_result_window ();
 
 	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window,
-			    TRUE, TRUE, 0); 
+			    TRUE, TRUE, 0);
+#endif
+	
 
 	/* gtk_widget_hide(search_result_window); */
 
