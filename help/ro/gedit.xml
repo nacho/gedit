@@ -1,0 +1,1095 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY appversion "1.121.0">
+  <!ENTITY manrevision "2.2">
+  <!ENTITY date "August 2002">
+  <!ENTITY app "gedit">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.GNOME.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Jan 30, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="ro">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo> 
+	 <title>Manualul &app; V&manrevision;</title>
+	 <copyright>
+		<year>2002</year>
+		<holder>Sun Microsystems</holder> </copyright>
+	 <copyright>
+		<year>2000</year>
+		<holder>Eric Baudais</holder> </copyright>
+
+
+
+  <copyright>
+   <year>2002</year>
+   <holder>Mugurel Tudor (traducerea în română)</holder>
+  </copyright>
+
+
+	 <publisher>
+		<publishername> Proiectul pentru Documentaţiii GNOME </publishername>
+	 </publisher>
+	 &legal;
+	 <authorgroup>
+		<author>
+		  <firstname>Echipa Sun pentru Documentaţii GNOME</firstname>
+		  <surname></surname>
+		  <affiliation>
+			 <orgname>Sun Microsystems</orgname>
+			 <address> <email>gdocteam@sun.com</email> </address>
+		  </affiliation>
+		</author>
+		<author>
+		  <firstname>Eric</firstname>
+		  <surname>Baudais</surname>
+		  <affiliation>
+			 <orgname>Proiectul pentru Documentaţii GNOME</orgname>
+			 <address> <email>baudais@okstate.edu</email> </address>
+		  </affiliation>
+		</author>
+
+       <othercredit role="translator">
+	<firstname>Mugurel</firstname>
+	<surname>Tudor</surname>
+	<affiliation>
+	  <orgname><ulink url="http://gnomero.sourceforge.net" type="help">
+	  Proiectul de traducere GNOME în română</ulink></orgname>
+
+	  <address> <email>mugurelu@go.ro</email> </address>
+	</affiliation>
+	<contrib>Traducerea în română</contrib>
+      </othercredit>
+
+	 </authorgroup>
+
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+<!-- Remember to remove the &manrevision; entity from the revision entries other
+   than the current revision. -->
+   		<revision>
+		  <revnumber>Manualul &app; V&manrevision;</revnumber>
+		  <date>&date;</date>
+		  <revdescription>
+			 <para role="author">Echipa Sun pentru Documentaţii GNOME
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Proiectul pentru Documentaţiii GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision>
+		  <revnumber>Manualul gedit V2.1</revnumber>
+		  <date>June 2002</date>
+		  <revdescription>
+			 <para role="author">Echipa Sun pentru Documentaţiii GNOME
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Proiectul pentru Documentaţiii GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision>
+		  <revnumber>Manualul gedit V2.0</revnumber>
+		  <date>March 2002</date>
+		  <revdescription>
+			 <para role="author">Echipa Sun pentru Documentaţiii GNOME
+				<email>gdocteam@sun.com</email> </para>
+			 <para role="publisher">Proiectul pentru Documentaţiii GNOME</para>
+		  </revdescription>
+		</revision>
+		<revision>
+		  <revnumber>gedit V1.0</revnumber>
+		  <date>2000</date>
+		  <revdescription>
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
+			 <para role="publisher">Proiectul pentru Documentaţii GNOME</para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo> Acest manual descrie versiunea &appversion; a &app;.
+		</releaseinfo>
+	 <legalnotice>
+		<title>Comentarii</title>
+		<para>Pentru a raporta un bug sau pentru a face o sugestie referitoare la aplicaţiia
+		 &app;  sau la acest manual, urmăriţii instrucţiunile de la
+		<ulink url="ghelp:gnome-feedback" type="help">Pagina de sugestii GNOME</ulink>.
+      </para>
+<!-- Translators may also add here feedback address for translations -->
+	 </legalnotice>
+  </articleinfo>
+  <indexterm><primary>gedit</primary></indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gedit-intro">
+	 <title>Introducere</title>
+	 <para>Aplicaţia <application>&app;</application> este un simplu editor de text.
+		Puteţi folosi <application>&app;</application> pentru a crea şi edita fişierele
+		text. Puteţi folosi modulele <application>&app;</application> pentru a realiza
+		o mare varitate de operaţii specifice editării de text din interiorul ferestrei
+		<application>&app;</application>.</para>
+  </sect1>
+<!-- ============= Getting Started =========================== -->
+  <sect1 id="gedit-getting-started">
+	 <title>Primii paşi</title>
+
+<!-- ============= To Start gedit ============================ -->
+	 <sect2 id="gedit-to-start">
+		<title>Pentru a porni &app;</title>
+		<para>Puteţi porni <application>&app;</application> în următoarele moduri:</para>
+		<variablelist>
+    		<varlistentry>
+    		<term><guimenu>Meniul</guimenu> Aplicaţii</term>
+    		<listitem>
+    		<para>Alegeţi
+    		<menuchoice>
+    		<guisubmenu>Accesorii</guisubmenu>
+    		<guimenuitem>Editor de text</guimenuitem>
+    		</menuchoice>. </para>
+    		</listitem>
+    		</varlistentry>
+    		<varlistentry>
+    		<term>Linie de comandă</term>
+    		<listitem>
+    		<para>Scrieţi <command>gedit</command>, apoi apăsaţi <keycap>Return</keycap>.</para>
+    		</listitem>
+    		</varlistentry>
+    		</variablelist>
+	</sect2>
+	
+	<sect2 id="gedit-when-you-start">
+	
+		<title>După ce porniţi &app;</title>
+		<para>După ce porniţi <application>&app;</application>, următoarea fereastră
+		va fi afişată:</para>
+
+		<figure id="gedit-window">
+		  <title>Fereastra &app;</title>
+		  <screenshot>
+			 <mediaobject>
+				<imageobject>
+				  <imagedata fileref="figures/gedit_window.png" format="PNG"/>
+					 </imageobject>
+				<textobject> <phrase>Arată fereastra principală gedit.</phrase>
+				</textobject>
+			</mediaobject>
+		  </screenshot>
+		</figure>
+
+		<para>Fereastra <application>&app;</application> conţine următoarele
+		 elemente:</para>
+		<variablelist>
+		  <varlistentry> <term>Bara de meniuri</term>
+			 <listitem>
+				<para>Meniurile din bara de meniuri conţin toate comenzile de care aveţi
+				  nevoie pentru a lucra cu fişiere în <application>&app;</application>.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Bara de unelte</term>
+			 <listitem>
+				<para> Bara de unelte conţine un subset al comenzilor pe care le puteţi accesa
+				din bara de meniuri.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Zona de afişare</term>
+			 <listitem>
+				<para> Zona de afişare conţine textul fişierului pe care îl editaţi.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Bara de status</term>
+			 <listitem>
+				<para>Bara de status afişează informaţii despre activitatea curentă a
+				  <application>&app;</application> şi informaţii contextuale despre
+				  elementele din meniuri. </para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>În momentul executării unui click cu butonul din dreapta în fereastra
+		<application>&app;</application>, aplicaţia afişează un meniu popup.
+		Acesta conţine cele mai comune comenzi pentru editarea textului.</para>
+	 </sect2>
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"> 
+		<title>Pentru a deschide un fişier</title>
+		<para>Pentru a deschide un fişier, alegeţi
+		  <menuchoice> <guimenu>Fişier</guimenu> <guimenuitem>Deschide</guimenuitem>
+			 </menuchoice>
+		  pentru a afişa dialogul <guilabel>Deschide fişier</guilabel>. Selectaţi fişierul
+		  pe care doriţi să-l deschideţi, apoi apăsaţi <guibutton>OK</guibutton>. Fişierul va fi afişat
+		  în fereastra <application>&app;</application>. </para>
+		<para>Puteţi deschide mai multe fişiere în <application>&app;</application>.
+		  Aplicaţia afişează un singur fişier la un moment dat în fereastra principală. Aplicaţia
+		  adaugă un tab ferestrei pentru fiecare fişier deschis. Pentru a afişa un alt fişier
+		  deschis, apăsaţi tabul corespunzător fişierului. Pentru a crea o nouă fereastră <application>&app;</application>
+		  pentru fiecare fişier deschis, trageţi tabul corespunzător fiecărui fişier în afara ferestrei principale.
+		  Puteţi folosi de asemenea meniul <guimenu>Documente</guimenu> pentru a vă mişca
+		  între fişierele deschise.</para>
+		<para>Aplicaţia memorează căile şi numele ultimelor patru fişiere editate, şi va afişa
+		  fişierele ca elemente în meniul <menuchoice>
+		  <guimenu>Fişier</guimenu> <guisubmenu>Fişiere recente</guisubmenu> </menuchoice>.
+		  </para>
+	 </sect2>
+<!-- ============= To Open Multiple Files from the Command Line ========= -->
+	 <sect2 id="gedit-run-from-cmd-line"> 
+		<title>Pentru a deschide mai multe fişiere din linia de comandă</title>
+		<para>Puteţi rula <application>&app;</application> din linia de comandă
+		  deschizând unul sau mai multe fişiere. Pentru a deschide mai multe fişiere din linia de
+		  comandă, scrieţi următoarea comandă, apoi apăsaţi <keycap>Return</keycap>:</para>
+		<para><command>gedit <replaceable>fişier1.txt fişier2.txt fişier3.txt</replaceable></command></para>
+		<para>După ce aplicaţia va porni, fişierele specificate vor fi afişate în fereastra
+		<application>&app;</application>.</para>
+	 </sect2>
+  </sect1>
+<!-- ================ Usage ================================ -->
+  <sect1 id="gedit-usage">
+	 <title>Mod de utilizare</title>
+
+<!-- ============= To Create a New File ======================== -->
+	 <sect2 id="gedit-create-new-file">
+		<title>Pentru a crea un nou fişier</title>
+		<para>Pentru a crea un nou fişier, alegeţi
+		  <menuchoice> <guimenu>Fişier</guimenu> <guimenuitem>Nou</guimenuitem>
+			 </menuchoice>. Aplicaţia va afişa un nou fişier în fereastra
+		  <application>&app;</application>.</para>
+	 </sect2>
+<!-- ============= To Save a File ============================== -->
+	 <sect2 id="gedit-save-file">
+		<title>Pentru a salva un fişier</title>
+		<para>Puteţi salva un fişier în următoarele moduri:</para>
+		<itemizedlist>
+		  <listitem><para>Pentru a salva modificările aduse fişierului curent, alegeţi
+				<menuchoice> <guimenu>Fişier</guimenu>
+				  <guimenuitem>Salvează</guimenuitem> </menuchoice> sau apăsaţi <guibutton>Salvează</guibutton>
+				  din bara de unelte. Dacă fişierul nu are un nume, <application>&app;</application>
+					 va afişa dialogul <guilabel>Salvează ca</guilabel>. Introduceţi numele fişierului în
+				dialogul <guilabel>Salvează ca</guilabel>, apoi apăsaţi <guibutton>OK</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Pentru a salva un nou fişier sau unul existent sub un alt nume, alegeţi
+				<menuchoice> <guimenu>Fişier</guimenu> <guimenuitem>Salvează
+				  ca</guimenuitem> </menuchoice>. Introduceţi numele fişierului în dialogul <guilabel>Salvează
+				ca</guilabel> , apoi apăsaţi <guibutton>OK</guibutton>. </para>
+		  </listitem>
+		  <listitem><para>Pentru a salva toate fişierele deschise la un momentat dat în
+				<application>&app;</application>, alegeţi
+				<menuchoice> <guimenu>Fişier</guimenu> <guimenuitem>Salvează
+				  tot</guimenuitem> </menuchoice>.</para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============= To Edit Text ================================ -->
+	 <sect2 id="gedit-edit-text"> 
+		<title>Pentru a edita textul</title>
+		<para>Puteţi edita textul unui fişier în mai multe feluri:</para>
+		<itemizedlist> 
+		  <listitem><para>Tastaţi noul text de la tastatură. </para>
+		  </listitem>
+		  <listitem><para>Folosiţi tasta <keycap>Delete</keycap> pentru a şterge textul.
+				</para>
+		  </listitem>
+		  <listitem><para>Folosiţi elementele de meniu <guimenuitem>Taie</guimenuitem>,
+				<guimenuitem>Copiază</guimenuitem>, <guimenuitem>Lipeşte</guimenuitem>, şi
+				<guimenuitem>Şterge</guimenuitem> pentru a edita textul. </para>
+		  </listitem>
+		</itemizedlist>
+		<para>În momentul selectării textului cu mausul,
+		  <application>&app;</application> copiază automat textul selectat într-o memorie
+		  tampon. Puteţi apoi efectua oricare dintre operaţiunile de mai jos asupra lui:
+		  </para>
+		<itemizedlist> 
+		  <listitem><para>Pentru a şterge textul selectat din fişier şi a-l muta într-o
+                                memorie tampon, alegeţi
+				<menuchoice> <guimenu>Editare</guimenu> <guimenuitem>Taie</guimenuitem>
+				  </menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Pentru a şterge permanent textul selectat din fişier, alegeţi
+				<menuchoice> <guimenu>Editare</guimenu> <guimenuitem>Şterge</guimenuitem>
+				  </menuchoice>.</para>
+		  </listitem>
+		  <listitem><para>Pentru a insera conţinutul memoriei tampon la poziţia curentă a cursorului,
+		  		apăsaţi butonul din mijloc al mausului sau alegeţi
+				<menuchoice> <guimenu>Editare</guimenu>
+				  <guimenuitem>Lipeşte</guimenuitem> </menuchoice>. Trebuie să tăiaţi sau să copiaţi
+				un text înainte de a-l lipi în fişier.</para>
+		  </listitem>
+		  <listitem><para>Pentru a selecta tot textul dintr-un fişier, 
+		  alegeţi <menuchoice> <guimenu>Editare</guimenu> <guimenuitem>Selectaţi
+				  tot</guimenuitem> </menuchoice>. </para>
+		  </listitem>
+		</itemizedlist>
+	 </sect2>
+<!-- ============== To Undo or Redo Edits ====================== -->
+	 <sect2 id="gedit-undo-redo-edits">
+		<title>Pentru a anula sau reface editarea</title>
+		<para>Pentru a anula o acţiune, alegeţi
+		  <menuchoice> <guimenu>Editare</guimenu> <guimenuitem>Anulează</guimenuitem>
+			 </menuchoice>. Pentru a reface o acţiune, alegeţi
+		  <menuchoice> <guimenu>Editare</guimenu> <guimenuitem>Refă</guimenuitem>
+			 </menuchoice>. Numărul acţiunilor pe care le puteţi anula este determinat de setarea
+		  <guilabel>Setează numărul de anulări la</guilabel> din
+		  <xref linkend="gedit-prefs-undo"/> corespunzătoare dialogului
+		  <guilabel>Preferinţe</guilabel>. Implicit, numărul de acţiuni pe care le puteţi anula este setat
+		  la 25.</para>
+	 </sect2>
+<!-- ============= To Find Text ================================ -->
+	 <sect2 id="gedit-find-text"> 
+		<title>Pentru a căuta un text</title>
+		<para>Pentru a căuta un text anume într-un fişier, realizaţi următorii paşi:</para>
+		<orderedlist> 
+		  <listitem><para>Alegeţi
+				<menuchoice> <guimenu>Căutare</guimenu>
+				  <guimenuitem>Caută</guimenuitem> </menuchoice>
+				pentru a afişa dialogul <guilabel>Caută</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Scrieţi textul pe care doriţi să-l căutaţi în câmpul
+				<guilabel>Caută după</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Selectaţi una dintre următoarele opţiuni:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Caută de la începutul documentului
+					 </guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Caută de la poziţia cursorului
+					 </guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>Selectaţi opţiunea <guilabel>Cu majuscule semnificative</guilabel>
+				pentru a găsi doar textul care se potriveşte exact cu textul pe care l-aţi introdus
+				(gnome va fi diferit faţă de Gnome). </para>
+		  </listitem>
+		  <listitem><para>Apăsaţi <guibutton>Caută</guibutton> pentru a găsi prima
+				potrivire a textului furnizat în fişier. În cazul în care <application>&app;</application>
+				va găsi textul, aplicaţia va deplasa cursorul lângă text şi îl va selecta.</para>
+		  </listitem>
+		  <listitem><para>Pentru a găsi următoarea potrivire a textului, apăsaţi
+				<guibutton>Caută următorul</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Pentru a încheia căutarea, apăsaţi
+				<guibutton>Închide</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Find and Replace Text =================== -->
+	 <sect2 id="gedit-find-replace-text">
+		<title>Pentru a căuta şi înlocui un text</title>
+		<para>Pentru a căuta un text într-un fişier, şi a-l înlocui cu un alt text, realizaţi următorii
+		  paşi:</para>
+		<orderedlist>
+		  <listitem><para>Alegeţi
+				<menuchoice> <guimenu>Căutare</guimenu>
+				  <guimenuitem>Înlocuieşte</guimenuitem> </menuchoice>
+				pentru a afişa dialogul <guilabel>Înlocuieşte</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Scrieţi textul pe care doriţi să-l căutaţi în câmpul
+				<guilabel>Caută după</guilabel>. </para>
+		  </listitem>
+		  <listitem><para>Scrieţi textul pe care doriţi să-l căutaţi în câmpul
+				<guilabel>Înlocuieşte cu</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Selectaţi una dintre următoarele opţiuni:</para>
+			 <itemizedlist>
+				<listitem><para><guilabel>Caută de la începutul
+					 documentului</guilabel></para>
+				</listitem>
+				<listitem><para><guilabel>Caută de la poziţia
+					 cursorului</guilabel></para>
+				</listitem>
+			 </itemizedlist>
+		  </listitem>
+		  <listitem><para>Selectaţi opţiunea <guilabel>Cu majuscule semnificative</guilabel>
+				pentru a găsi doar textul care se potriveşte exact cu textul pe care l-aţi introdus
+				(gnome va fi diferit de Gnome). </para>
+		  </listitem>
+		  <listitem><para>Apăsaţi <guibutton>Caută</guibutton> pentru a căuta fişierul
+				pentru prima potrivire a textului. Dacă <application>&app;</application>
+				va găsi textul, aplicaţia va muta cursorul lângă text şi îl va selecta.
+				</para>
+		  </listitem>
+		  <listitem><para>Apăsaţi <guibutton>Înlocuieşte</guibutton> pentru a înlocui
+				textul găsit cu cel pe care l-aţi tastat în câmpul <guilabel>Înlocuieşte
+				cu</guilabel>. Apăsaţi <guibutton>Înlocuieşte tot</guibutton> pentru
+				a înlocui toate potrivirile textului.</para>
+		  </listitem>
+		  <listitem><para>Pentru a găsi următoarea potrivire de text, apăsaţi
+				<guibutton>Caută următorul</guibutton>.</para>
+		  </listitem>
+		  <listitem><para>Pentru a încheia căutarea, apăsaţi
+				<guibutton>Închide</guibutton>. </para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"> 
+		<title>Pentru a deschide un fişier dintr-un URI</title>
+		<para>Pentru a deschide un fişier dintr-un Identificator Uniform de Resurse (URI),
+		parcurgeţi următorii paşi:</para>
+		<itemizedlist>
+		<listitem>
+		<para>Alegeţi <menuchoice> <guimenu>Fişier</guimenu> <guimenuitem>Deschide locaţia</guimenuitem>
+		</menuchoice>
+pentru a afişa dialogul <guilabel>Deschide dintr-un URI</guilabel>
+. Introduceţi URI-ul fişierului pe care doriţi să-l deschideţi
+, apoi apăsaţi <guibutton>Deschide</guibutton>.</para>
+		</listitem>
+		<listitem>
+		<para>Tastaţi <command>gedit <replaceable>http://...</replaceable></command> în linia de comandă, unde
+		<replaceable>http://...</replaceable> este URI-ul fişierului pe care doriţi să-l deschideţi, apoi apăsaţi
+		<keycap>Return</keycap>.</para>
+		</listitem>
+		</itemizedlist>
+		<para>Aplicaţia va deschide fişierul localizat în URI doar pentru citire.</para>
+	 </sect2>
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output">
+		<title>Pentru a redirecta ieşirea unei comenzi către un fişier</title>
+		<para>Puteţi folosi <application>&app;</application> pentru a redirecta ieşirea
+		  comenzii către un fişier. De exemplu, pentru a redirecta ieşirea comenzii <command>ls
+		  </command> către un fişier text, tastaţi <command>ls | gedit</command>, apoi apăsaţi
+		  <keycap>Return</keycap>.</para>
+		<para>Ieşirea comenzii <command>ls</command> va fi afişată într-un nou fişier
+		  text în fereastra <application>&app;</application>.</para>
+		<para>Alternativ, puteţi folosi modulul Ieşirea comenzii pentru a redirecta ieşirea
+		comenzii către fişierul curent. Pentru a folosi modulul Ieşirea comenzii, parcurgeţi următorii
+		  paşi:</para>
+		<orderedlist>
+		  <listitem><para>Încărcaţi modulul Ieşirea comenzii. Citiţi <xref linkend="gedit-install-plugins"/> pentru
+			informaţii referitoare la încărcarea modulului.</para>
+		  </listitem>
+
+		  <listitem><para>Alegeţi
+				<menuchoice> <guimenu>Editare</guimenu> <guimenuitem>Inserează ieşirea
+				  comenzii</guimenuitem> </menuchoice>
+				pentru a afişa dialogul <guilabel>Ieşirea comenzii</guilabel>.
+				</para>
+		  </listitem>
+		  <listitem><para>Scrieţi comanda shell care doriţi să fie executată în câmpul
+				<guilabel>Comanda</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Editaţi câmpul <guilabel>Directorul de lucru</guilabel>
+				dacă e necesar. Implicit, modulul Ieşirea comenzii execută comanda specificată
+			în directoul curent.</para>
+		  </listitem>
+		  <listitem><para>Apăsaţi <guibutton>Rulează</guibutton>. Modulul Ieşirea comenzii
+			execută comanda şi inserează ieşirea sa în fişierul său.
+				</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+<!-- ============= To Go to a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line">
+		<title>Pentru a merge la o anumită linie</title>
+		<para>Pentru a merge la o anumită linie într-un fişier, parcurgeţi următorii
+		paşi:</para>
+		<orderedlist>
+		  <listitem><para>Alegeţi
+				<menuchoice> <guimenu>Căutare</guimenu> <guimenuitem>Du-te la
+				  linia</guimenuitem> </menuchoice>
+				pentru a afişa dialogul <guilabel>Du-te la linia</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Scrieţi numărul liniei la care doriţi să deplasaţi cursorul în
+		câmpul <guilabel>Număr linie</guilabel>.</para>
+		  </listitem>
+		  <listitem><para>Apăsaţi <guibutton>Du-te la linie</guibutton>. Această aplicaţie
+		va muta cursorul la linia cu numărul specificat.</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>
+	 <sect2 id="gedit-input-mode">
+		<title>Pentru a schimba modul de intrare</title>
+		<para>Pentru a schimba modul de intrare, click cu butonul din drepta în fereastra de editare,
+		 apoi selectaţi <guimenuitem>Input Methods</guimenuitem>.
+		Elementele meniului <guimenuitem>Insert Unicode control character</guimenuitem> furnizează opţiuni
+		pentru a lucra cu seturi de caractere non-latine.</para>
+	 </sect2>
+<!-- ============= To Print a File ============================ -->
+	 <sect2 id="gedit-print-file">
+		<title>Pentru a printa un fişier</title>
+		<para>Puteţi folosi <application>&app;</application> pentru a realiza următoarele:
+		  </para>
+		<itemizedlist>
+		  <listitem><para>Printarea unui fişier către o imprimantă. </para>
+		  </listitem>
+		  <listitem><para>Printarea ieşirii comenzii de printare către un fişier.</para>
+		  </listitem>
+		</itemizedlist>
+		<para>Dacă printaţi către un fişier, <application>&app;</application> va trimite
+		  ieşirea fişierului către un fişier formatat special. Cele mai comune tipuri de fişiere astfel
+		  formatate sunt PostScript şi Portable Document Format (PDF).</para>
+
+		<para>Pentru a previzualiza pagina pe care doriţi să o tipăriţi, alegeţi
+		<menuchoice> <guimenu>Fişier</guimenu>
+		<guimenuitem>Previzualizează printarea</guimenuitem> </menuchoice>
+		pentru a afişa dialogul <guilabel>gedit - Previzualizare printare
+		</guilabel>.</para>
+
+		<para>Pentru a tipări fişierul curent către o imprimantă sau un fişier, alegeţi
+		<menuchoice> <guimenu>Fişier</guimenu>
+		<guimenuitem>Printează</guimenuitem> </menuchoice>
+		pentru a afişa dialogul <guilabel>Printează</guilabel>.</para>
+
+		<para>Dialogul <guilabel>Printează</guilabel> vă permite să specificaţi următoarele
+		opţiuni de printare:</para>
+
+		<sect3 id="print-dialog-job">
+		<title>Secţiunea tab Sarcină</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Tipăreşte</guilabel> </term>
+			 <listitem>
+				<para>Selectaţi una dintre următoarele opţiuni pentru a determina câte
+				pagini vor fi printate:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Tot</guilabel></para>
+				<para>Selectaţi această opţiune pentru a printa toate paginile fişierului.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Selecţie</guilabel></para>
+				<para>Selectaţi această opţiune pentru a printa doar textul selectat. Această setare
+				este disponibilă doar dacă aţi selectat un text.</para>
+				</listitem>
+
+				</itemizedlist>
+				<para>Implicit: <guilabel>Tot</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Copii</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi săgeţile pentru a ajusta numărul de copii pe care doriţi
+				să-l printaţi.</para>
+				<para>Implicit: 1.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Colaj</guilabel> </term>
+			 <listitem>
+				<para>Dacă printaţi mai multe copii ale fişierului, selectaţi această opţiune
+				pentru a printa fiecare copie complet, apoi pentru a o printa pe următoarea.</para>
+				<para>Implicit: neselectat.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+		<sect3 id="print-dialog-printer">
+		<title>Secţiunea tab Imprimantă</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Imprimantă</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi lista din dreapta pentru a selecta imprimanta pe care doriţi
+				să o folosiţi pentru a imprima fişierul.</para>
+				<para>Implicit: <guilabel>Gnome default printer</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Setări</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi lista din dreapta pentru a selecta diverse setări ale imprimantei.
+				Pentru a configura imprimanta, apăsaţi <guibutton>Configurează</guibutton>.</para>
+				<para>Implicit: Implicit.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Locaţie</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi lista din dreapta pentru a seta locaţia imprimantei. Pentru a tipări fişierul
+				către o imprimantă, alegeţi <guilabel>lpr</guilabel>.Pentru a tipări către un fişier,
+				alegeţi <guilabel>Fişier</guilabel>. Dacă selectaţi <guilabel>Fişier</guilabel>,
+				scrieţi numele fişierului de ieşire în căsuţa de text furnizată.</para>
+				<para>Implicit: <guilabel>lpr</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+		<sect3 id="print-dialog-paper">
+		<title>Secţiunea tab Pagină</title>
+		<variablelist>
+	 		<varlistentry> <term><guilabel>Mărime pagină</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi lista pentru a selecta tipul de hârtie folosit la imprimarea
+				fişierului.</para>
+				<para>Implicit: <guilabel>A4</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Lăţime</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi săgeţile pentru a ajusta lăţimea paginii. Folosiţi lista
+				<guilabel>Centimetri</guilabel> din dreapta pentru a schimba unităţile de măsură
+				folosite la specificarea dimensiunilor paginii.</para>
+				<para>Implicit: 21.00 centimetri.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Înălţime</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi săgeţile din dreapta pentru a specifica înălţimea paginii.</para>
+				<para>Implicit: 29.70 centimetri.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Orientarea paginii</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi lista din dreapta pentru a selecta orientarea paginii.</para>
+				<para>Implicit: <guilabel>Vertical</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Layout</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi lista din dreapta pentru a selecta layout-ul paginii. O previzualizare
+			pentru fiecare layout selectat este disponibilă în zona <guilabel>Previzualizare</guilabel>
+				.</para>
+				<para>Implicit: <guilabel>Simplu</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+		</variablelist>
+		</sect3>
+
+	 </sect2>
+<!-- ============= To Use the gedit Plugins ========================= -->
+	 <sect2 id="gedit-use-plugins">
+		<title>Pentru a folosi modulele &app;</title>
+		<para>Un modul este un program suplimentar care măreşte funcţionalitatea
+		  unei aplicaţii. Modulele <application>&app;</application> vă permit efectuarea
+		  unor funcţii variate legate de editarea de text din interiorul ferestrei
+		  <application> &app;</application>.Următorul tabel listează modulele care sunt
+		  disponibile.</para>
+		<informaltable frame="topbot">
+		<tgroup cols="2">
+			<colspec colname="col1"/>
+			<colspec colname="col2"/>
+		<thead>
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nume modul</para></entry>
+			<entry colname="col2" valign="top"><para>Funcţie îndeplinită</para></entry>
+		</row>
+		</thead>
+		<tbody>
+		<row valign="top">
+			<entry><para>Tabel ASCII</para></entry>
+			<entry><para>Afişează un tabel ASCII. Puteţi folosi acest tabel pentru a insera caracterele în fişier.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Compară fişierele</para></entry>
+			<entry><para>Compară două fişiere şi afişează diferenţele dintre fişiere într-o nouă fereastră <application>&app;</application>.
+			Modulul foloseşte programul <application>diff</application> pentru a compara fişierele.</para></entry>
+		</row>
+		<row valign="top"> 
+			<entry><para>CVS ChangeLog</para></entry> 
+			<entry><para>Deschide mesajele de log asociate comenzilor CVS commit.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Inserare dată/oră</para></entry>
+			<entry><para>Inserează data şi ora curentă în fişier.</para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Ieşirea comenzii</para></entry>
+			<entry><para>Inserează ieşirea text a unei comenzi shell în fişier. </para></entry>
+		</row> 
+		<row valign="top">
+			<entry><para>Listă de etichete</para></entry>
+			<entry><para>Afişează o listă ce conţine cele mai folosite etichete. Puteţi folosi acest dialog
+			pentru a insera o etichetă într-un fişier. </para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nume utilizator</para></entry>
+			<entry><para>Inserează numele utilizatorului curent în fişier. </para></entry>
+		</row>
+		<row valign="top"> 
+			<entry><para>Numără cuvintele</para></entry>
+			<entry><para>Numără liniile, cuvintele, caracterele cu spaţii, caracterele fără spaţii
+			 şi mărimea în bytes a fişierului curent. Modulul afişează rezultatul
+			într-o fereastră <guilabel>Numără cuvintele</guilabel>. </para></entry>
+		</row> 
+ 
+	
+		</tbody> 
+		</tgroup>
+		</informaltable> 
+		</sect2>
+<!-- ============= To Load gedit Plugins ========================= -->
+	 <sect2 id="gedit-install-plugins"> 
+		<title>Pentru a încărca modulele &app;</title>
+		<para>Pentru a încărca modulele <application>&app;</application>, alegeţi
+		  <menuchoice>
+		  <guimenu>Editare</guimenu>
+		  <guimenuitem>Manager module</guimenuitem>
+		  </menuchoice>.
+		  Dialogul <guilabel>Manager module</guilabel> va afişa următoarele informaţii:</para>
+		<itemizedlist>
+		  <listitem><para>O listă a tuturor modulelor disponibile.</para>
+		  </listitem>
+		  <listitem><para>Un buton <guibutton>Configurează modul</guibutton>. Puteţi folosi acest buton
+		  pentru a deschide o fereastră de configurare a modulului, acolo unde este posibil.</para>
+		  </listitem>
+		  <listitem><para>O scurtă descriere a fiecărui modul. Pentru a afişa o descriere,
+		  selectaţi un modul din lista de module.</para>
+		  </listitem>
+		  <listitem><para>Detalii despre autorul modulului şi numele modulului.</para>
+		  </listitem>
+		</itemizedlist>
+		<para>Pentru a încărca un modul, selectaţi căsuţa de bifare din dreptul modulului dorit. Aplicaţia <application>&app;</application>
+		va adăuga modulul la meniul corespunzător <application>&app;</application>, după cum este descris în tabelul de mai jos.</para>
+		<informaltable frame="topbot"> 
+		<tgroup cols="2"> 
+		<colspec colname="col1"/> 
+		<colspec colname="col2"/> 
+		<thead> 
+		<row valign="top">
+			<entry colname="col1" colsep="0" valign="top"><para>Nume modul</para></entry>
+			<entry colname="col2" valign="top"><para>Adaugat la meniul</para></entry>
+		</row> 
+		</thead>
+		<tbody> 
+		<row valign="top"> 
+			<entry><para>Tabel ASCII</para></entry>
+			<entry><para><menuchoice><guimenu>Vizualizare</guimenu> <guimenuitem>Tabel ASCII</guimenuitem></menuchoice></para></entry>
+		</row>  
+		<row valign="top"> 
+			<entry><para>Compară fişierele</para></entry>
+			<entry><para><menuchoice><guimenu>Fişier</guimenu> <guimenuitem>Compară fişierele</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top"> 
+			<entry><para>CVS ChangeLog</para></entry> 
+			<entry><para><menuchoice><guimenu>Fişier</guimenu> <guimenuitem>Deschide CVS ChangeLogs</guimenuitem></menuchoice></para></entry>
+		</row> 
+		<row valign="top"> 
+			<entry><para>Numără cuvintele</para></entry>
+			<entry><para><menuchoice><guimenu>Căutare</guimenu> <guimenuitem>Numără cuvintele</guimenuitem></menuchoice></para></entry>
+		</row> 
+		<row valign="top">
+			<entry><para>Ieşirea comenzii</para></entry>
+			<entry><para><menuchoice><guimenu>Editare</guimenu> <guimenuitem>Inserează ieşirea comenzii</guimenuitem></menuchoice></para></entry>
+		</row> 
+		<row valign="top">
+			<entry><para>Listă de etichete</para></entry>
+			<entry><para><menuchoice><guimenu>Vizualizare</guimenu> <guimenuitem>Listă de etichete</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Inserare dată/oră</para></entry>
+			<entry><para><menuchoice><guimenu>Editare</guimenu> <guimenuitem>Inserează dată/oră</guimenuitem></menuchoice></para></entry>
+		</row>
+		<row valign="top">
+			<entry><para>Nume utilizator</para></entry>
+			<entry><para><menuchoice><guimenu>Editare</guimenu> <guimenuitem>Inserează nume utilizator</guimenuitem></menuchoice></para></entry>
+		</row> 
+		</tbody> 
+		</tgroup>
+		</informaltable> 
+
+		<para>Pentru a scoate un modul, deselectaţi căsuţa de bifare corespunzătoare modulului.</para>
+		<para>Pentru a închide dialogul <guilabel>Manager module</guilabel>,
+		  apăsaţi <guibutton>Închide</guibutton>.</para>
+	 </sect2>
+
+	 <sect2 id="gedit-customize-bars">
+	 <title>Pentru a personaliza bara de unelte şi bara de status</title>
+
+	 <para>Pentru a afişa sau ascunde bara de unelte, alegeţi <menuchoice> <guimenu>Vizualizare</guimenu>
+		  <guimenuitem>Bara de unelte</guimenuitem> </menuchoice>. Pentru a personaliza felul în care <application>&app;</application>
+		  afişează bara de unelte, alegeţi <menuchoice> <guimenu>Vizualizare</guimenu>
+		  <guisubmenu>Personalizează bara de unelte</guisubmenu> </menuchoice>, apoi selectaţi una dintre următoarele
+		  opţiuni:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Setări implicite desktop</guimenuitem></para>
+		  <para>Afişează bara implicită.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Iconiţe</guimenuitem></para>
+		  <para>Afişează doar iconiţele.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Iconiţe şi text</guimenuitem></para>
+		  <para>Afişează iconiţe şi text.</para>
+		  </listitem>
+		  </itemizedlist>
+	 <para>Pentru a afişa sau ascunde bara de status, alegeţi <menuchoice> <guimenu>Vizualizare</guimenu>
+		  <guimenuitem>Bara de status</guimenuitem> </menuchoice>. Pentru a personaliza felul în care <application>&app;</application>
+		  afişează bara de status, alegeţi <menuchoice> <guimenu>Vizualizare</guimenu>
+		  <guisubmenu>Personalizează bara de status</guisubmenu> </menuchoice>, apoi selectaţi
+		  una dintre opţiunile:</para>
+		  <itemizedlist>
+		  <listitem>
+		  <para><guimenuitem>Arată poziţia cursorului</guimenuitem></para>
+		  <para>Afişează numărul liniei şi al coloanei la care se află cursorul.</para>
+		  <para>Implicit: selectat.</para>
+		  </listitem>
+		  <listitem>
+		  <para><guimenuitem>Arată modul suprascriere</guimenuitem></para>
+		  <para>Afişează modul de editare. Dacă editorul este în modul inserare, bara de status va conţine cuvântul INS. Dacă editorul este în
+		  modul suprascriere, bara de status va conţine cuvântul OVR.</para>
+		  <para>Implicit: selectat.</para>
+		  </listitem>
+		  </itemizedlist>
+
+	 </sect2>
+  </sect1>
+<!-- ============= Preferences ============================= -->
+  <sect1 id="gedit-prefs">
+	 <title>Preferinţe</title>
+
+	 <para>Pentru a configura <application>&app;</application>, alegeţi
+		<menuchoice>
+		<guimenu>Editare</guimenu>
+		<guimenuitem>Preferinţe</guimenuitem>
+		</menuchoice>. Dialogul <guilabel>Preferinţe</guilabel> conţine următoarele categorii:
+		</para>
+	 <itemizedlist>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para>
+		</listitem>
+		<listitem><para><xref linkend="gedit-prefs-print"/></para>
+		</listitem>
+	 </itemizedlist>
+
+
+	 <sect2 id="gedit-prefs-editor">
+	 <title>Editor</title>
+	 <para>Categoria <guilabel>Editor</guilabel> este divizată în următoarele subcategorii:
+	 </para>
+
+	 	<sect3 id="gedit-prefs-fontsandcolors">
+	 		<title>Fonturi şi culori</title>
+	 		<variablelist>
+		   <varlistentry> <term><guilabel>Foloseşte fontul implicit al temei</guilabel> </term>
+			 <listitem>
+				<para>Selectaţi această opţiune pentru a folosi fontul implicit al temei în fereastra de editare <application>&app;</application>. </para>
+				<para>Implicit: neselectat.</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>Fontul folosit de editor</guilabel> </term>
+			 <listitem>
+				<para>Acest câmp afişează fontul folosit de <application>&app;</application> pentru a afişa textul.
+				Apăsaţi acest buton pentru a specifica tipul, mărimea şi stilul fontului folosit. </para>
+				<para>Implicit: Courier Medium 12 point.</para>
+			 </listitem>
+		  	</varlistentry>
+		   <varlistentry> <term><guilabel>Foloseşte culorile implicite ale temei</guilabel> </term>
+			 <listitem>
+				<para>Selectaţi această opţiune pentru a folosi culorile implicite ale temei în fereastra de editare <application>&app;</application>. </para>
+				<para>Implicit:  selectat.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Culoarea textului</guilabel> </term>
+			 <listitem>
+				<para>Apăsaţi butonul <guibutton>Culoarea textului</guibutton> pentru a afişa dialogul
+				  de selectare a culorii. Selectaţi o culoare pentru a fi folosită la afişarea textului în fereastra de editare <application>&app;</application>.
+				</para>
+				<para>Implicit: negru.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Culoarea de fundal</guilabel> </term>
+			 <listitem>
+				<para>Apăsaţi butonul <guibutton>Culoarea de fundal</guibutton> pentru a afişa dialogul
+				  de selectare a culorii. Selectaţi culoarea de fundal pentru fereastra de editare <application>&app;</application>.
+				</para>
+				<para>Implicit: alb.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Culoarea textului selectat</guilabel> </term>
+			 <listitem>
+				<para>Apăsaţi butonul <guibutton>Culoarea textului selectat</guibutton> petru a afişa
+				  dialogul de selectare a culorii. Selectaţi culoarea folosită la afişarea textului selectat.
+				</para>
+				<para>Implicit: alb.</para>
+			 </listitem>
+		  	</varlistentry>
+		  	<varlistentry> <term><guilabel>Culoarea selecţiei</guilabel> </term>
+			 <listitem>
+				<para>Apăsaţi butonul <guibutton>Culoarea selecţiei</guibutton> pentru a afişa
+				  dialogul de selectare a culorii. Selectaţi culoarea de fundal pentru textul selectat.
+				  </para>
+				<para>Implicit: albastru.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+	 	<sect3 id="gedit-prefs-tabs">
+	 		<title>Taburi</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Setează lăţimea tabului la</guilabel> </term>
+			 <listitem>
+				<para>Folosiţi săgeţile pentru a specifica numărul de spaţii ce vor fi inserate de către
+				  <application> &app;</application> la apăsarea tastei
+				  <keycap>Tab</keycap>. </para>
+				<para>Implicit: 8 caractere.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+
+	 	<sect3 id="gedit-prefs-wrapmode">
+	 		<title>Ruperi</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Ruperi</guilabel> </term>
+			 <listitem>
+				<para>Selectaţi una dintre următoarele opţiuni pentru a determina modul în care
+				<application>&app;</application> va rupe textul în fereastra de editare <application>&app;</application>:
+
+</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Nu rupe niciodată liniile</guilabel></para>
+				<para>Selectaţi această opţiune pentru a nu rupe niciodată liniile. Textul pe care îl scrieţi va fi afişat pe o singură linie
+				până în momentul apăsării tastei <keycap>Return</keycap>.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Rupe liniile între cuvinte</guilabel></para>
+				<para>Selectaţi această opţiune pentru a rupe liniile, între cuvinte, în momentul atingerii limitei ferestrei de editare.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Rupe liniile între caractere</guilabel></para>
+				<para>Selectaţi această opţiune pentru a rupe liniile, între caractere, în momentul atingerii limitei ferestrei de editare.</para>
+				</listitem>
+				</itemizedlist>
+				<para>Implicit: <guilabel>Rupe liniile între caractere</guilabel>.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 
+	 	<sect3 id="gedit-prefs-linenumbers">
+	 		<title>Numerotare linii</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Afişează numărul liniilor</guilabel> </term>
+			 <listitem> 
+				<para>Selectaţi această opţiune pentru a afişa numărul liniei în partea stângă a ferestrei de editare
+				<application>&app;</application>. </para>
+				<para>Implicit: neselectat.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+		
+	 	<sect3 id="gedit-prefs-save">
+	 		<title>Salvează</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Crează o copie de siguranţă pentru fişiere înainte de a salva</guilabel> </term>
+			 <listitem>
+				<para>Selectează această opţiune pentru a crea o copie de siguranţă pentru fişier la fiecare salvare a acestuia.
+				Copia de siguranţă a unui fişier are o extensie <filename>.bak</filename>.</para>
+				<para>Implicit: neselectat.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Salvează automat fişierul curent la fiecare</guilabel> </term>
+			 <listitem> 
+				<para>Selectaţi această opţiune pentru a salva automat fişierul la anumite intervale de timp. Folosiţi săgeţile
+				pentru a ajusta intervalul de timp la care doriţi să se faca salvarea automată.</para>
+				<para>Implicit: neselectat, 10 minute.</para>
+			 </listitem>
+		  	</varlistentry>
+	 		<varlistentry> <term><guilabel>Când salvaţi</guilabel> </term>
+			 <listitem> 
+				<para>Selectaţi una dintre următoarele opţiuni de salvare:</para>
+				<itemizedlist>
+				<listitem>
+				<para><guilabel>Întotdeauna foloseşte codarea UTF-8 (cel mai rapid)</guilabel></para>
+				<para>Selectaţi această opţiune pentru a salva fişierele folosind codarea UTF-8.</para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Foloseşte codarea locală curentă dacă e posibil</guilabel></para>
+				<para>Selectaţi această opţiune pentru a salva fişierele folosind codarea locală. Puteţi seta codări locale
+				pentru diferite metode de intrare. </para>
+				</listitem>
+				<listitem>
+				<para><guilabel>Foloseşte codarea iniţială a fişierului dacă e posibil</guilabel></para>
+				<para>Selectaţi această opţiune pentru a salva fişierul folosind codarea locală curentă dacă fişierul a fost deja salvat folosind codarea locală.</para>
+				</listitem>
+				</itemizedlist>
+				<para>Implicit: <guilabel>Întotdeauna foloseşte codarea UTF-8 (cel mai rapid)</guilabel></para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+
+
+		</sect3>	 
+	 
+	 	<sect3 id="gedit-prefs-undo">
+	 		<title>Anulează</title>
+	 		<variablelist>
+	 		<varlistentry> <term><guilabel>Setează numărul de anulări la</guilabel> </term>
+			 <listitem> 
+				<para>Selectaţi această opţiune dacă doriţi să setaţi numărul acţiunilor de editare pe care
+				le puteţi anula. Folosiţi săgeţile pentru a specifica numărul maxim de acţiuni pe care le puteţi
+				anula. </para>
+				<para>Implicit: selectat, 25 acţiuni.</para>
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>
+	 		
+	 </sect2>	 
+	 
+	<sect2 id="gedit-prefs-print">
+	 <title>Printează</title>
+	 <para>Categoria <guilabel>Printează</guilabel> este divizată în următoarele
+	 subcategorii:</para>
+
+	 	<sect3 id="gedit-prefs-page">
+	 		<title>Pagină</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Printează antetul paginii</guilabel> </term>
+			 <listitem>
+				<para>Selectaţi această opţiune pentru a include un antet pentru fiecare pagină
+				  pe care o printaţi. Nu puteţi configura antetul. </para>
+				<para>Implicit: selectat.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Rupe liniile (între caractere)</guilabel> </term>
+			 <listitem>
+				<para>Selectaţi această opţiune pentru a rupe automat textul între caractere la printarea
+				  unui fişier. Această aplicaţie numără liniile rupte ca fiind una singură din motive statistice.
+				  </para>
+				<para>Implicit: selectat.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Tipăreşte numărul liniei la fiecare</guilabel>
+			 </term>
+			 <listitem>
+				<para>Selectaţi această opţiune pentru a include numărul liniei la printarea
+				  fişierului. Folosiţi săgeţile pentru a specifica cât de des vor fi incluse numerele liniilor, de
+				  exemple la fiecare 5 linii, la fiecare 10 linii, şi aşa mai departe. </para>
+				<para>Implicit: neselectat, 1 linie.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		</sect3>
+
+		<sect3 id="gedit-prefs-fonts">
+	 		<title>Fonturi</title>
+	 	<variablelist>
+		  <varlistentry> <term><guilabel>Fontul folosi pentru a tipări corpul</guilabel> </term>
+			 <listitem>
+				<para>Apăsaţi acest buton pentru a selecta fontul folosit la printarea textului corpului
+				unui fişier.</para>
+				<para>Implicit: Courier 9.0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Fontul folosi pentru a tipări antetele</guilabel> </term>
+			 <listitem>
+				<para>Apăsaţi acest buton pentru a selecta fontul folosit la printarea textului antetului
+				unui fişier.  </para>
+				<para>Implicit: Helvetica 11.0.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term><guilabel>Fontul folosi pentru a tipări numărul liniei</guilabel>
+			 </term>
+			 <listitem>
+				<para>Apăsaţi acest buton pentru selecta fontul folosit la tipărirea numărului liniilor.</para>
+				<para>Implicit: Helvetica 8.0.</para>
+			 </listitem>
+		  </varlistentry>
+		</variablelist>
+		<para>Pentru a reseta fonturile la setările implicite pentru printarea unui fişier din <application>&app;</application>
+		apăsaţi butonul <guibutton>Restaurează fonturile implicite</guibutton>.</para>
+		</sect3>
+
+	 </sect2>
+
+
+ </sect1>
+</article>
