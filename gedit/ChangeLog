@@ -1,3 +1,10 @@
+2003-08-23  Eric Ritezel <eisenwulf@inductiveart.net>
+ 
+ 	* dialogs/gedit-dialog-replace.c (dialog_find/replace_get_dialog):
+ 	* dialogs/gedit-dialog-goto-line.c (dialog_goto_line_get_dialog):
+ 	* gedit-commands.c (gedit_cmd_help_about): use gtk_window_present ()
+ 	instead of gdk_window_* () (#116521: about dialog not unrolling)
+
 2003-08-23  Paolo Maggi  <paolo.maggi@polito.it>
 
 	Fixed bug #120481

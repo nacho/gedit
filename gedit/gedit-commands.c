@@ -567,8 +567,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 
 	if (about != NULL)
 	{
-		gdk_window_show (about->window);
-		gdk_window_raise (about->window);
+		gtk_window_present (GTK_WINDOW (about));
+
 		return;
 	}
 	

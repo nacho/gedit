@@ -245,8 +245,7 @@ dialog_replace_get_dialog (void)
 	
 	if (dialog != NULL)
 	{
-		gdk_window_show (dialog->dialog->window);
-		gdk_window_raise (dialog->dialog->window);
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
 		gtk_widget_grab_focus (dialog->dialog);
 
 		return dialog;
@@ -384,9 +383,9 @@ dialog_find_get_dialog (void)
 
 	if (dialog != NULL)
 	{
-		gdk_window_show (dialog->dialog->window);
-		gdk_window_raise (dialog->dialog->window);
+		gtk_window_present (GTK_WINDOW (dialog->dialog));
 		gtk_widget_grab_focus (dialog->dialog);
+
 		return dialog;
 	}
 
