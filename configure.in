@@ -10,8 +10,6 @@ AM_CONFIG_HEADER(config.h)
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AC_PROG_INTLTOOL([0.11])
 
-GNOME_PLATFORM_GNOME_2(yes, force)
-
 AM_PROG_LIBTOOL
 
 AC_ISC_POSIX
@@ -141,7 +139,6 @@ dnl ==========================================================================
 
 AC_OUTPUT([
 Makefile
-gedit.desktop
 po/Makefile.in
 src/Makefile
 src/dialogs/Makefile
