@@ -108,7 +108,7 @@ gE_about_box(GtkWidget *w, gpointer cbdata)
 	gtk_misc_set_alignment(GTK_MISC(tmp), 0.0, 0.5);
 	gtk_widget_show (tmp);
 
-	tmp = gtk_label_new ("http://nuklear.home.ml.org/gedit");
+	tmp = gtk_label_new ("http://gedit.pn.org");
 	gtk_box_pack_start (GTK_BOX (vbox), tmp, TRUE, TRUE, 1);
 	gtk_misc_set_alignment(GTK_MISC(tmp), 0.0, 0.5);
 	gtk_widget_show (tmp);
@@ -148,7 +148,7 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 	gchar *authors[] = {
 		"Alex Roberts",
 		"Evan Lawrence",
-		"http://nuklear.home.ml.org/gedit",
+		"http://gedit.pn.org",
 		NULL
 	};
 
