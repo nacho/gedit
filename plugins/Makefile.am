@@ -10,7 +10,11 @@ if HAVE_LIBZVT
 shell = shell
 endif
 
-gmodule_plugins = $(shell)
+if HAVE_LIBGNORBA
+corba = idl goad launcher
+endif
+
+gmodule_plugins = $(shell) $(corba)
 endif
 
 SUBDIRS = client cvsdiff diff email encrypt reverse $(spell) \

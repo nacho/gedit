@@ -109,6 +109,8 @@ po/Makefile.in
 macros/Makefile
 src/Makefile
 plugins/Makefile
+plugins/idl/Makefile
+plugins/goad/Makefile
 plugins/diff/Makefile
 plugins/cvsdiff/Makefile
 plugins/email/Makefile
@@ -121,4 +123,5 @@ plugins/testselect/Makefile
 plugins/client/Makefile
 plugins/hello/Makefile
 plugins/shell/Makefile
+plugins/launcher/Makefile
 ],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
