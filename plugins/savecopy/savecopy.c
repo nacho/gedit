@@ -356,6 +356,7 @@ run_copy_file_chooser (GtkWindow *parent,
 	GtkWidget *hbox;
 	GtkWidget *label;
 	GtkWidget *menu;
+	gchar *name;
 	gint res;
 	gpointer retval;
 
@@ -370,6 +371,14 @@ run_copy_file_chooser (GtkWindow *parent,
 	gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_OK);
 
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), FALSE);
+
+	/* we specify the suggested filename in the entry to be the
+	 * same as the original, but we don't set the whole uri: we don't
+	 * want the user to try to overwrite!
+	 */
+	name = gedit_document_get_short_name (orig);
+	gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (chooser), name);
+	g_free (name);
 
 	/* Filters */
 	filter = gtk_file_filter_new ();
