@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.4\n"
-"POT-Creation-Date: 2000-11-24 15:31+0100\n"
-"PO-Revision-Date: 2000-11-24 15:39+01:00\n"
+"POT-Creation-Date: 2000-11-30 10:32+0100\n"
+"PO-Revision-Date: 2000-11-30 10:33+01:00\n"
 "Last-Translator: Emese KOVACS <emese@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -611,7 +611,19 @@ msgstr "Ennek a fájlnak nem érvényes a kiterjesztése\n"
 msgid "The file %s was not found."
 msgstr "A %s fájl nem található"
 
-#: src/file.c:161
+#: src/file.c:79
+msgid ""
+"Hello Dear Translator :\n"
+"This is the unstable branch of gedit. \n"
+"I think you should be translating the gedit-1-0 branch. To get it from cvs "
+"type : \n"
+"cvs -z3 co -r gedit-1-0 gedit\n"
+"Thank you. Chema"
+msgstr ""
+"Thanks, Chema.\n"
+"(so that we get 100% :-)"
+
+#: src/file.c:169
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -620,7 +632,7 @@ msgstr ""
 "Hiba történt a \"%s\" fájl megnyitásakor.\n"
 "Gyõzõdj meg róla, hogy a fájl létezik."
 
-#: src/file.c:172
+#: src/file.c:180
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -639,11 +651,11 @@ msgstr ""
 "Gyõzõdj meg róla, hogy a fájlt nem használja más alkalmazás\n"
 "és hogy a fájl nem üres."
 
-#: src/file.c:183 src/file.c:467
+#: src/file.c:191 src/file.c:475
 msgid "Could not allocate the required memory."
 msgstr "Nem tudtam a szükséges memóriát allokálni."
 
-#: src/file.c:189
+#: src/file.c:197
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -658,15 +670,15 @@ msgstr ""
 "\n"
 "Gyõzõdj meg róla, hogy jogosult vagy a fájl megnyitására."
 
-#: src/file.c:306
+#: src/file.c:314
 msgid "Save As..."
 msgstr "Mentés másként.."
 
-#: src/file.c:365
+#: src/file.c:373
 msgid "The document contains no data."
 msgstr "A dokumentum üres (nem tartalmaz adatot)."
 
-#: src/file.c:376
+#: src/file.c:384
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -683,7 +695,7 @@ msgstr ""
 "Gyõzõdj meg róla, hogy a megadott elérési út létezik és hogy rendelkezel a "
 "szükséges jogosultságokkal."
 
-#: src/file.c:389
+#: src/file.c:397
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -700,7 +712,7 @@ msgstr ""
 "Ismeretlen hiba történt (1). Kérlek jelentsd a hibát a submit@bugs.gnome.org "
 "címen"
 
-#: src/file.c:406
+#: src/file.c:414
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -717,42 +729,42 @@ msgstr ""
 "Ismeretlen hiba történt (2). Kérlek jelentsd a hibát a submit@bugs.gnome.org "
 "címen"
 
-#: src/file.c:487
+#: src/file.c:495
 msgid "Error in the pipe ."
 msgstr "Hiba a csõben (|)."
 
-#: src/file.c:598 src/file.c:605
+#: src/file.c:606 src/file.c:613
 #, c-format
 msgid "Loaded file %s"
 msgstr "%s fájl betöltve"
 
-#: src/file.c:612
+#: src/file.c:620
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i fájl betöltve"
 
-#: src/file.c:668
+#: src/file.c:676
 msgid "Open File ..."
 msgstr "Fájl megnyitás..."
 
-#: src/file.c:799
+#: src/file.c:807
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "A ``%s'' fájl felülírás elõtt áll. Biztos, hogy folytassam ?"
 
-#: src/file.c:811
+#: src/file.c:819
 msgid "Document has not been saved."
 msgstr "A dokumentum nincs elmentve."
 
-#: src/file.c:821
+#: src/file.c:829
 msgid "Error saving file!"
 msgstr "Hiba a fájl mentése közben!"
 
-#: src/file.c:941
+#: src/file.c:949
 msgid "You can't revert an Untitled document\n"
 msgstr "Nem állíthatsz vissza egy Névtelen dokumentumot\n"
 
-#: src/file.c:954
+#: src/file.c:962
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -761,7 +773,7 @@ msgstr ""
 "Biztos, hogy minden változtatást el akarsz vetni?\n"
 "(%s)"
 
-#: src/file.c:985
+#: src/file.c:993
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "A ``%s'' fájl nem létezik. Hozzam létre?"
