@@ -2,69 +2,66 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gEdit\n"
-"POT-Creation-Date: 2000-04-02 15:42-0400\n"
-"PO-Revision-Date: 2000-03-28 22:19+0200\n"
+"POT-Creation-Date: 2000-04-05 16:56+0200\n"
+"PO-Revision-Date: 2000-04-05 16:56+0200\n"
 "Last-Translator: GNOME PL Team <gnomepl@pandora.info.bielsko.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/sample/sample.c:51
+#: plugins/sample/sample.c:1
 msgid "Hello World"
 msgstr "Witaj ¶wiecie"
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:1
 msgid "Sample 'hello world' plugin."
 msgstr "Przyk³adowa wtyczka 'witaj ¶wiecie'."
 
-#: plugins/time/time.c:96
+#: plugins/time/time.c:1
 msgid "Insert Time"
 msgstr "Wstaw czas"
 
-#: plugins/time/time.c:97
+#: plugins/time/time.c:1
 msgid "Inserts the current date and time"
 msgstr "Wstawia bie¿±c± datê i czas"
 
-#: plugins/email/email.c:101
+#: plugins/email/email.c:1
 msgid "The gEdit Email Plugin"
 msgstr "Wtyczka e-mail do programu gEdit"
 
-#: plugins/email/email.c:202
+#: plugins/email/email.c:1
 msgid "Email"
 msgstr "E-mail"
 
-#: plugins/email/email.c:203
+#: plugins/email/email.c:1
 msgid "Email the current document"
 msgstr "Wysy³a bie¿±cy dokument e-mailem"
 
-#: src/commands.c:97
+#: src/commands.c:1
+#, c-format
+msgid "The file ``%s'' does not exist.  Would you like to create it?"
+msgstr "Plik '%s' nie istnieje. Czy chcesz go utworzyæ?"
+
+#: src/commands.c:1
 msgid "Could not save file!"
 msgstr "Nie mo¿na zapisaæ pliku!"
 
-#: src/commands.c:371
-msgid "Open File..."
-msgstr "Otwórz plik..."
-
-#: src/commands.c:425 src/commands.c:473
-msgid "Read only file!"
-msgstr "Plik tylko do odczytu!"
-
-#: src/commands.c:512 src/commands.c:582
+#: src/commands.c:1 src/commands.c:1 src/gedit-file-io.c:1
 msgid "Error saving file!"
 msgstr "B³±d przy zapisie pliku!"
 
-#: src/commands.c:542
+#: src/commands.c:1
 #, c-format
 msgid "Save %s As..."
 msgstr "Zapisz %s jako..."
 
-#: src/commands.c:615
+#: src/commands.c:1
 #, c-format
 msgid "Save %s As ..."
 msgstr "Zapisz %s jako..."
 
-#: src/commands.c:701
+#: src/commands.c:1
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -73,373 +70,502 @@ msgstr ""
 "Na pewno chcesz wycofaæ wszystkie zmiany?\n"
 "(%s)"
 
-#: src/commands.c:749
+#: src/commands.c:1
 msgid "Document Unchanged..."
 msgstr "Dokument nie zosta³ zmieniony..."
 
-#: src/commands.c:753
+#: src/commands.c:1
 msgid "Document Unsaved..."
 msgstr "Dokument nie zosta³ zapisany..."
 
-#: src/commands.c:937
+#: src/commands.c:1
 msgid "_File/"
 msgstr "_Plik/"
 
-#: src/commands.c:946 src/commands.c:947
+#: src/commands.c:1 src/commands.c:1
 msgid "_File"
 msgstr "_Plik"
 
-#: src/gE_about.c:39
+#: src/gedit-about.c:1
 msgid "With special thanks to:"
 msgstr "Specjalne podziêkowania dla:"
 
-#: src/gE_about.c:54
+#: src/gedit-about.c:1
 msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 msgstr "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
 
-#: src/gE_about.c:56
+#: src/gedit-about.c:1
 msgid "gEdit is a small and lightweight text editor for GNOME/Gtk+"
 msgstr "gEdit jest niewielkim i niewymagaj±cym edytorem tekstu dla GNOME/Gtk+"
 
-#: src/gE_files.c:95
-#, fuzzy
-msgid "Can't open file!"
-msgstr "Plik tylko do odczytu!"
+#: src/gedit-window.c:1
+msgid "Filename"
+msgstr "Nazwa pliku"
 
-#: src/gE_mdi.c:78
-msgid "Find _Line..."
-msgstr "Znajd¼ _wiersz..."
+#: src/gedit-menus.c:1 src/gedit-window.c:1
+msgid "Line"
+msgstr "Wiersz"
 
-#: src/gE_mdi.c:79
-msgid "Search for a line"
-msgstr "Poszukuje wiersza"
+#: src/gedit-window.c:1
+msgid "Contents"
+msgstr "Zawarto¶æ"
 
-#: src/gE_mdi.c:84
-msgid "Find _In Files..."
-msgstr "Znajd¼ _w plikach....."
-
-#: src/gE_mdi.c:85
-msgid "Find text in all open files"
-msgstr "Poszukuje tekstu we wszystkich otwartych plikach"
-
-#: src/gE_mdi.c:100
-msgid "_Add View"
-msgstr "Dodaj widok"
-
-#: src/gE_mdi.c:101
-msgid "Add a new view of the document"
-msgstr "Dodaje kolejny widok dokumentu"
-
-#: src/gE_mdi.c:102
-msgid "_Remove View"
-msgstr "Usuñ widok"
-
-#: src/gE_mdi.c:103
-msgid "Remove view of the document"
-msgstr "Usuñ widok dokumentu"
-
-#: src/gE_mdi.c:411
+#: src/gedit-file-io.c:1
 #, c-format
-msgid " '%s' has been modified. Do you wish to save it?"
+msgid ""
+"gedit was unable to open the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Make sure that you have read access permissions for the file."
+msgstr ""
+"nie mo¿na otworzyæ pliku: \n"
+"\n"
+"%s\n"
+"\n"
+"Upewnij siê, ¿e masz prawo odczytu do tego pliku."
+
+#: src/gedit-file-io.c:1
+#, c-format
+msgid ""
+"gedit was unable to save the file: \n"
+"\n"
+" %s \n"
+"\n"
+"Make sure that the path you provided exits,and that you have the appropiate "
+"write permissions."
+msgstr ""
+"nie mo¿na zapisaæ pliku: \n"
+"\n"
+"%s\n"
+"\n"
+"Upewnij siê, ¿e okre¶lona ¶cie¿ka istnieje, oraz ¿e masz odpowiednie prawa "
+"zapisu."
+
+#: src/gedit-file-io.c:1 src/gedit-file-io.c:1
+#, c-format
+msgid ""
+"gedit was unable to save the file :\n"
+"\n"
+" %s \n"
+"\n"
+"Because of an unknown reason (1). Please report this Problem to "
+"submit@bugs.gnome.org"
+msgstr ""
+"Nie mo¿na zapisaæ pliku :\n"
+"\n"
+" %s \n"
+"\n"
+"Przyczyna jest nieznana. Zg³o¶ ten problem pod adresem submit@bugs.gnome.org "
+"(w jêzyku angielskim)."
+
+#: src/gedit-file-io.c:1
+msgid "Open File ..."
+msgstr "Otwórz plik ..."
+
+#: src/gedit-file-io.c:1
+msgid "Save As..."
+msgstr "Zapisz jako..."
+
+#: src/gedit-file-io.c:1
+#, c-format
+msgid "Loaded file %s"
+msgstr "Wczytano plik %s"
+
+#: src/gedit-file-io.c:1
+msgid "Can not open file!"
+msgstr "Nie mo¿na otworzyæ pliku!"
+
+#: src/gedit-document.c:1 src/gedit-print.c:1
+msgid "Untitled"
+msgstr "BezNazwy"
+
+#: src/gedit-document.c:1
+#, c-format
+msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr " '%s' zosta³ zmieniony. Czy chcesz go zapisaæ?"
 
-#: src/gE_plugin.c:57
+#: src/gedit-plugin.c:1
 #, c-format
 msgid "Error, unable to open module file, %s"
 msgstr "B³±d. Nie mo¿na otworzyæ pliku z modu³em, %s."
 
-#: src/gE_plugin.c:67
+#: src/gedit-plugin.c:1
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "B³±d. Wtyczka nie zawiera funkcji init_plugin."
 
-#: src/gE_plugin.c:74
+#: src/gedit-plugin.c:1
 msgid "Error, init_plugin returned an error"
 msgstr "B³±d. Funkcja init_plugin zwróci³a b³±d."
 
-#: src/gE_plugin.c:98
+#: src/gedit-plugin.c:1
 msgid "Error, plugin is still in use"
 msgstr "B³±d. Wtyczka jest wci±¿ w u¿yciu."
 
-#: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
-#: src/gE_plugin.c:182 src/menus.c:245
+#: src/gedit-menus.c:1 src/gedit-plugin.c:1 src/gedit-plugin.c:1
 msgid "_Plugins"
 msgstr "W_tyczki"
 
-#: src/gE_prefs_box.c:103
+#: src/gE_prefs_box.c:1
 msgid "Default"
 msgstr "Domy¶lny"
 
-#: src/gE_prefs_box.c:104
+#: src/gE_prefs_box.c:1
 msgid "Notebook"
 msgstr "Zak³adki"
 
-#: src/gE_prefs_box.c:105
+#: src/gE_prefs_box.c:1
 msgid "Toplevel"
 msgstr "Okna nadrzêdne"
 
-#: src/gE_prefs_box.c:106
+#: src/gE_prefs_box.c:1
 msgid "Modal"
 msgstr "Modalne"
 
-#: src/gE_prefs_box.c:337
+#: src/gE_prefs_box.c:1
 msgid "Appearance"
 msgstr "Wygl±d"
 
-#: src/gE_prefs_box.c:350
+#: src/gE_prefs_box.c:1 src/gedit-menus.c:1
 msgid "Show Statusbar"
 msgstr "Wy¶wietlanie paska stanu"
 
-#: src/gE_prefs_box.c:359
+#: src/gE_prefs_box.c:1
 msgid "Show Splitscreen"
 msgstr "Wy¶wietlanie podzia³u ekranu"
 
-#: src/gE_prefs_box.c:369
+#: src/gE_prefs_box.c:1
 msgid "Editor Behavior"
 msgstr "Zachowanie edytora"
 
-#: src/gE_prefs_box.c:382
+#: src/gE_prefs_box.c:1
 msgid "Enable Autoindent"
 msgstr "Automatyczne wciêcia"
 
-#: src/gE_prefs_box.c:386
+#: src/gE_prefs_box.c:1
 msgid "Enable Wordwrap"
 msgstr "Zawijanie wierszy"
 
-#: src/gE_prefs_box.c:408
+#: src/gE_prefs_box.c:1
 msgid "Text Background"
 msgstr "Kolor t³a tekstu"
 
-#: src/gE_prefs_box.c:429
+#: src/gE_prefs_box.c:1
 msgid "Text Foreground"
 msgstr "Kolor tekstu"
 
-#. Document Closing stuffs
-#: src/gE_prefs_box.c:498
+#: src/gE_prefs_box.c:1
 msgid "Document Settings"
 msgstr "Ustawienia dokumentów"
 
-#: src/gE_prefs_box.c:512
+#: src/gE_prefs_box.c:1
 msgid "New Document After Closing Last"
 msgstr "Nowy dokument po zamkniêciu ostatniego"
 
-#: src/gE_prefs_box.c:518
+#: src/gE_prefs_box.c:1
 msgid "Close Window After Closing Last"
 msgstr "Zamkniêcie okna po zamkniêciu ostatniego"
 
-#. End of docyment closing stuffs
-#. Font Settings (within Document Settings frame)
-#: src/gE_prefs_box.c:527
+#: src/gE_prefs_box.c:1
 msgid "Current Font"
 msgstr "Aktualna czcionka"
 
-#: src/gE_prefs_box.c:544
+#: src/gE_prefs_box.c:1
 msgid "Select..."
 msgstr "Wybierz..."
 
-#. End of Font Setttings
-#. Print COmmand
-#: src/gE_prefs_box.c:560
+#: src/gE_prefs_box.c:1
 msgid "Print Command"
 msgstr "Polecenie wydruku"
 
-#. Window Size Settings
-#: src/gE_prefs_box.c:620
+#: src/gE_prefs_box.c:1
 msgid "Window Size"
 msgstr "Rozmiar okna"
 
-#: src/gE_prefs_box.c:633
+#: src/gE_prefs_box.c:1
 msgid "Current Width:"
 msgstr "Aktualna szeroko¶æ"
 
-#: src/gE_prefs_box.c:653
+#: src/gE_prefs_box.c:1
 msgid "Startup Width:"
 msgstr "Szeroko¶æ pocz±tkowa"
 
-#: src/gE_prefs_box.c:661 src/gE_prefs_box.c:701
+#: src/gE_prefs_box.c:1 src/gE_prefs_box.c:1
 msgid "Use Current"
 msgstr "U¿yj aktualnej"
 
-#: src/gE_prefs_box.c:673
+#: src/gE_prefs_box.c:1
 msgid "Current Height:"
 msgstr "Aktualna wysoko¶æ"
 
-#: src/gE_prefs_box.c:693
+#: src/gE_prefs_box.c:1
 msgid "Startup Height:"
 msgstr "Wysoko¶æ pocz±tkowa"
 
-#. MDI Mode settnigs
-#: src/gE_prefs_box.c:709
+#: src/gE_prefs_box.c:1
 msgid "MDI Mode"
 msgstr "Tryb MDI"
 
-#. General Settings
-#: src/gE_prefs_box.c:780
+#: src/gE_prefs_box.c:1
 msgid "General"
 msgstr "Ogólne"
 
-#. Window Settings
-#: src/gE_prefs_box.c:785
+#: src/gE_prefs_box.c:1
 msgid "Window"
 msgstr "Okno"
 
-#. Docuemnt Settings
-#: src/gE_prefs_box.c:790
+#: src/gE_prefs_box.c:1
 msgid "Document"
 msgstr "Dokument"
 
-#: src/gE_print.c:175
+#: src/gedit-print.c:1
 #, c-format
 msgid "gEdit (%s): Print Preview"
-msgstr ""
+msgstr "gEdit (%s): Podgl±d wydruku"
 
-#: src/gE_print.c:277
+#: src/gedit-print.c:1
 #, c-format
 msgid "Page: %i/%i"
-msgstr ""
+msgstr "Strona: %i/%i"
 
-#: src/menus.c:71
-msgid "_Autoindent"
-msgstr "_Automatyczne wciêcia"
+#: src/gedit-menus.c:1
+msgid "Open (swap) .c/.h file"
+msgstr "Otwórz (zamieñ) plik .c/.h"
 
-#: src/menus.c:72
-msgid "Status_bar"
-msgstr "Pasek _stanu"
-
-#: src/menus.c:73
-msgid "_Wordwrap"
-msgstr "_Zawijanie s³ów"
-
-#: src/menus.c:74
-msgid "_Linewrap"
-msgstr "Zawijanie _wierszy"
-
-#: src/menus.c:75
-msgid "_Readonly"
-msgstr "_Tylko do odczytu"
-
-#: src/menus.c:76
-msgid "_Splitscreen"
-msgstr "Po_dzia³ ekranu"
-
-#: src/menus.c:77
-msgid "_Show tabs"
-msgstr "Wy¶wietlaj _zak³adki"
-
-#: src/menus.c:78
-msgid "Toolbar _relief"
-msgstr "Wg³êbiony pasek narzêdziowy"
-
-#: src/menus.c:79
-msgid "_Show tooltips"
-msgstr "Wy¶wietlaj podpowiedzi"
-
-#: src/menus.c:80
-msgid "Show toolbar _text"
-msgstr "Wy¶wietlaj podpisy pod przyciskami"
-
-#: src/menus.c:81
-msgid "Show toolbar _icons"
-msgstr "Wy¶wietlanie _ikon przycisków"
-
-#. and this one is the default file name
-#: src/menus.c:83
-msgid "Untitled"
-msgstr "BezNazwy"
-
-#: src/menus.c:89
+#: src/gedit-menus.c:1
 msgid "_New"
 msgstr "_Nowy"
 
-#: src/menus.c:89
+#: src/gedit-menus.c:1 src/gedit-menus.c:1
 msgid "Create a new document"
 msgstr "Tworzy nowy dokument"
 
-#: src/menus.c:96
+#: src/gedit-menus.c:1
 msgid "Save All"
 msgstr "Zapisz wszystkie"
 
-#: src/menus.c:96
+#: src/gedit-menus.c:1
 msgid "Save All Open Files"
 msgstr "Zapisuje wszystkie pliki"
 
-#: src/menus.c:101
-msgid "Revert"
-msgstr "_Przywróæ"
+#: src/gedit-menus.c:1
+msgid "Print preview..."
+msgstr "Podgl±d wydruku..."
 
-#: src/menus.c:111
+#: src/gedit-menus.c:1
+msgid "Preview data to be printed"
+msgstr "Wy¶wietla podgl±d wydruku"
+
+#: src/gedit-menus.c:1
 msgid "Close All"
 msgstr "Zamknij wszystkie"
 
-#: src/menus.c:111
+#: src/gedit-menus.c:1
 msgid "Close All Open Files"
 msgstr "Zamyka wszystkie pliki"
 
-#: src/menus.c:124
+#: src/gedit-menus.c:1
+msgid "Find _Line..."
+msgstr "Znajd¼ _wiersz..."
+
+#: src/gedit-menus.c:1
+msgid "Search for a line"
+msgstr "Poszukuje wiersza"
+
+#: src/gedit-menus.c:1
+msgid "Find _In Files..."
+msgstr "Znajd¼ _w plikach....."
+
+#: src/gedit-menus.c:1
+msgid "Find text in all open files"
+msgstr "Poszukuje tekstu we wszystkich otwartych plikach"
+
+#: src/gedit-menus.c:1
+msgid "_Add View"
+msgstr "Dodaj widok"
+
+#: src/gedit-menus.c:1
+msgid "Add a new view of the document"
+msgstr "Dodaje kolejny widok dokumentu"
+
+#: src/gedit-menus.c:1
+msgid "_Remove View"
+msgstr "Usuñ widok"
+
+#: src/gedit-menus.c:1
+msgid "Remove view of the document"
+msgstr "Usuñ widok dokumentu"
+
+#: src/gedit-menus.c:1
 msgid "_Top"
 msgstr "_Góra"
 
-#: src/menus.c:125
+#: src/gedit-menus.c:1
 msgid "Put the document tabs at the top"
 msgstr "Umieszcza zak³adki dokumentów u góry"
 
-#: src/menus.c:128
+#: src/gedit-menus.c:1
 msgid "_Bottom"
 msgstr "_Dó³"
 
-#: src/menus.c:129
+#: src/gedit-menus.c:1
 msgid "Put the document tabs at the bottom"
 msgstr "Umieszcza zak³adki dokumentów u do³u"
 
-#: src/menus.c:132
+#: src/gedit-menus.c:1
 msgid "_Left"
 msgstr "_Lewa"
 
-#: src/menus.c:133
+#: src/gedit-menus.c:1
 msgid "Put the document tabs on the left"
 msgstr "Umieszcza zak³adki dokumentów po lewej"
 
-#: src/menus.c:136
+#: src/gedit-menus.c:1
 msgid "_Right"
 msgstr "_Prawa"
 
-#: src/menus.c:137
+#: src/gedit-menus.c:1
 msgid "Put the document tabs on the right"
 msgstr "Umieszcza zak³adki dokumentów po prawej"
 
-#: src/menus.c:176
+#: src/gedit-menus.c:1
+msgid ""
+"Enable or disable the statusbar at the bottom of this application window."
+msgstr "Prze³±cza wy¶wietlanie paska stanu w dolnej czê¶ci okna aplikacji."
+
+#: src/gedit-menus.c:1
+msgid "_Readonly"
+msgstr "_Tylko do odczytu"
+
+#: src/gedit-menus.c:1
 msgid "Toggle Readonly"
 msgstr "Prze³±cznik trybu tylko do odczytu"
 
-#: src/menus.c:187
+#: src/gedit-menus.c:1
 msgid "_Document Tabs"
 msgstr "Za_k³adki dokumentów"
 
-#: src/menus.c:188
+#: src/gedit-menus.c:1
 msgid "Change the placement of the document tabs"
 msgstr "Zmienia umiejscowienie zak³adek dokumentów"
 
-#: src/menus.c:192
+#: src/gedit-menus.c:1
 msgid "Sa_ve Settings"
 msgstr "Zapi_sz ustawienia"
 
-#: src/menus.c:193
+#: src/gedit-menus.c:1
 msgid "Save the current settings for future sessions"
 msgstr "Zapisuje aktualne ustawienia dla przysz³ych sesji"
 
-#: src/search.c:415
+#: src/gedit-menus.c:1
+msgid "New"
+msgstr "Nowy"
+
+#: src/gedit-menus.c:1
+msgid "Open"
+msgstr "Otwórz"
+
+#: src/gedit-menus.c:1
+msgid "Open a file"
+msgstr "Otwiera plik"
+
+#: src/gedit-menus.c:1
+msgid "Save"
+msgstr "Zapisz"
+
+#: src/gedit-menus.c:1
+msgid "Save the current file"
+msgstr "Zapisuje bie¿±cy plik"
+
+#: src/gedit-menus.c:1
+msgid "Close"
+msgstr "Zamknij"
+
+#: src/gedit-menus.c:1
+msgid "Close the current file"
+msgstr "Zamyka bie¿±cy plik"
+
+#: src/gedit-menus.c:1
+msgid "Print"
+msgstr "Drukuj"
+
+#: src/gedit-menus.c:1
+msgid "Print the current file"
+msgstr "Drukuje bie¿±cy plik"
+
+#: src/gedit-menus.c:1
+msgid "Undo"
+msgstr "Cofnij"
+
+#: src/gedit-menus.c:1
+msgid "Undo last operation"
+msgstr "Cofa ostatni± operacjê"
+
+#: src/gedit-menus.c:1
+msgid "Redo"
+msgstr "Ponów"
+
+#: src/gedit-menus.c:1
+msgid "Redo last operation"
+msgstr "Ponawia ostatni± operacjê"
+
+#: src/gedit-menus.c:1
+msgid "Cut"
+msgstr "Wytnij"
+
+#: src/gedit-menus.c:1
+msgid "Cut the selection"
+msgstr "Wycina zaznaczenie"
+
+#: src/gedit-menus.c:1
+msgid "Copy"
+msgstr "Kopiuj"
+
+#: src/gedit-menus.c:1
+msgid "Copy the selection"
+msgstr "Kopiuje zaznaczenie"
+
+#: src/gedit-menus.c:1
+msgid "Paste"
+msgstr "Wkleja"
+
+#: src/gedit-menus.c:1
+msgid "Paste the clipboard"
+msgstr "Wkleja zawarto¶æ schowka"
+
+#: src/gedit-menus.c:1
+msgid "Find"
+msgstr "Znajd¼"
+
+#: src/gedit-menus.c:1
+msgid "Search for a string"
+msgstr "Wyszukuje napis"
+
+#: src/gedit-menus.c:1
+msgid "Get the current and total lines"
+msgstr "Podaje informacje o bie¿±cym wierszu oraz o liczbie wierszy"
+
+#: src/gedit-menus.c:1
+msgid "Exit"
+msgstr "Zakoñcz"
+
+#: src/gedit-menus.c:1
+msgid "Exit the program"
+msgstr "Koñczy program"
+
+#: src/gedit-search.c:1
 msgid "Find In Files"
 msgstr "Znajd¼ w plikach"
 
-#. GtkWidget *radio, *check;
-#: src/search.c:416 src/search.c:836 src/search.c:837
+#: src/gedit-search.c:1 src/gedit-search.c:1 src/gedit-search.c:1
 msgid "Search"
 msgstr "Znajd¼"
 
-#: src/search.c:420 src/search.c:841 src/search.c:870
+#: src/gedit-search.c:1 src/gedit-search.c:1 src/gedit-search.c:1
 msgid "Search for:"
 msgstr "Znajd¼ tekst:"
 
-#: src/search.c:740
+#: src/gedit-search.c:1
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -452,86 +578,50 @@ msgstr ""
 "Liczba wierszy: %i\n"
 "Bie¿±cy wiersz: %i"
 
-#: src/search.c:762
+#: src/gedit-search.c:1
 msgid "Go to line"
 msgstr "Przejd¼ do wiersza"
 
-#: src/search.c:772
+#: src/gedit-search.c:1
 msgid "Line number"
 msgstr "Numer wiersza"
 
-#: src/search.c:795
+#: src/gedit-search.c:1
 msgid "Search from cursor"
 msgstr "Szukaj od kursora"
 
-#: src/search.c:802
+#: src/gedit-search.c:1
 msgid "Search from beginning of document"
 msgstr "Szukaj od pocz±tku dokumentu"
 
-#: src/search.c:809
+#: src/gedit-search.c:1
 msgid "Search from end of document"
 msgstr "Szukaj od koñca dokumentu"
 
-#: src/search.c:816
+#: src/gedit-search.c:1
 msgid "Case sensitive"
 msgstr "Uwzglêdniaj wielko¶æ liter"
 
-#: src/search.c:822
+#: src/gedit-search.c:1
 msgid "Reverse search"
 msgstr "Przeszukiwanie wstecz"
 
-#. GtkWidget *radio;
-#: src/search.c:864 src/search.c:865
+#: src/gedit-search.c:1 src/gedit-search.c:1
 msgid "Replace"
 msgstr "Zast±p"
 
-#: src/search.c:866
+#: src/gedit-search.c:1
 msgid "Replace all"
 msgstr "Zast±p wszystkie"
 
-#: src/search.c:880
+#: src/gedit-search.c:1
 msgid "Replace with:"
 msgstr "Zast±p na:"
 
-#: src/search.c:891
+#: src/gedit-search.c:1
 msgid "Ask before replacing"
 msgstr "Potwierd¼ przed zast±pieniem"
 
-#: src/search.c:1096
+#: src/gedit-search.c:1
 msgid "Replace?"
 msgstr "Zast±piæ?"
-
-#: src/gE_view.c:43
-msgid "Save"
-msgstr "Zapisz"
-
-#: src/gE_view.c:44
-msgid "Close"
-msgstr "Zamknij"
-
-#: src/gE_view.c:45
-msgid "Print"
-msgstr "Drukuj"
-
-#: src/gE_view.c:49
-msgid "Open (swap) .c/.h file"
-msgstr "Otwórz (zamieñ) plik .c/.h"
-
-#~ msgid ""
-#~ "Enter print command below\n"
-#~ "Remember to include '%s'"
-#~ msgstr ""
-#~ "Podaj polecenie wydruku\n"
-#~ "pamiêtaj o wpisaniu '%s'"
-
-#~ msgid "Print Command:"
-#~ msgstr "Polecenie wydruku:"
-
-#~ msgid "Print anyway"
-#~ msgstr "Drukuj bez wzglêdu na to"
-
-#~ msgid " Save, then print "
-#~ msgstr " Zapisz, nastêpnie drukuj "
-
-#~ msgid "Cancel"
-#~ msgstr "Anuluj"
