@@ -26,8 +26,12 @@
 #include "view.h"
 
 /* Actions */
-#define	GEDIT_UNDO_INSERT	0
-#define	GEDIT_UNDO_DELETE	1
+typedef enum {
+	GEDIT_UNDO_INSERT,
+	GEDIT_UNDO_DELETE,
+	GEDIT_UNDO_REPLACE_INSERT,
+	GEDIT_UNDO_REPLACE_DELETE
+} GeditUndoActions;
 
 typedef struct _GeditUndoInfo  GeditUndoInfo;
 
@@ -43,7 +47,7 @@ struct _GeditUndoInfo
 };
 
 void gedit_undo_add      (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
-void gedit_undo_do	(GtkWidget*, gpointer);
+void gedit_undo_undo	(GtkWidget*, gpointer);
 void gedit_undo_redo	(GtkWidget*, gpointer);
 void gedit_undo_free_list (GList **list_pointer);
 

@@ -95,7 +95,7 @@ GnomeUIInfo gedit_file_menu[] =
 
 GnomeUIInfo gedit_edit_menu[] =
 {
-	GNOMEUIINFO_MENU_UNDO_ITEM (gedit_undo_do, NULL),
+	GNOMEUIINFO_MENU_UNDO_ITEM (gedit_undo_undo, NULL),
 	GNOMEUIINFO_MENU_REDO_ITEM (gedit_undo_redo, NULL),
 	GNOMEUIINFO_SEPARATOR,
         GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, NULL),
@@ -342,7 +342,7 @@ GnomeUIInfo toolbar_data[] =
 	},
 	GNOMEUIINFO_SEPARATOR,
 	{
-		GNOME_APP_UI_ITEM, N_("Undo"), N_("Undo last operation"), gedit_undo_do,
+		GNOME_APP_UI_ITEM, N_("Undo"), N_("Undo last operation"), gedit_undo_undo,
 		NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_UNDO
 	},
 	{

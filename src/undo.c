@@ -31,7 +31,7 @@
 
 static void gedit_undo_check_size (Document *doc);
        void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);
-       void gedit_undo_do (GtkWidget *w, gpointer data);
+       void gedit_undo_undo (GtkWidget *w, gpointer data);
        void gedit_undo_redo (GtkWidget *w, gpointer data);
        void gedit_undo_free_list (GList **list_pointer);
 static gint gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guchar * text);
@@ -104,6 +104,8 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 
 	gedit_debug ("", DEBUG_UNDO);
 
+	g_return_if_fail (end_pos > start_pos);
+	
 	gedit_undo_free_list (&doc->redo);
 
 	if (gedit_undo_merge( doc->undo, start_pos, end_pos, action, text))
@@ -194,6 +196,13 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 		return FALSE;
 	}
 
+	if (action == GEDIT_UNDO_REPLACE_INSERT || action == GEDIT_UNDO_REPLACE_DELETE)
+	{
+		gedit_debug ("We don't merge replaced strings...", DEBUG_UNDO);
+		last_undo->mergeable = FALSE;
+		return FALSE;
+	}
+
 	if (action == GEDIT_UNDO_DELETE)
 	{
 		if (last_undo->start_pos!=end_pos && last_undo->start_pos != start_pos)
@@ -269,14 +278,14 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 
 
 /**
- * gedit_undo_do:
+ * gedit_undo_undo:
  * @w: not used
  * @data: not used
  * 
  * Executes an undo request on the current document
  **/
 void
-gedit_undo_do (GtkWidget *w, gpointer data)
+gedit_undo_undo (GtkWidget *w, gpointer data)
 {
 	Document *doc = gedit_document_current();
 	GeditUndoInfo *undo;
@@ -294,8 +303,8 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	/* The undo data we need is always at the top op the
 	   stack. So, therefore, the first one =) */
 	undo = g_list_nth_data (doc->undo, 0);
+	g_return_if_fail (undo!=NULL);
 	undo->mergeable = FALSE;
-
 	doc->redo = g_list_prepend (doc->redo, undo);
 	doc->undo = g_list_remove (doc->undo, undo);
 
@@ -305,15 +314,36 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	
 	/* Move the view (scrollbars) to the correct position */
 	gedit_view_set_window_position (gedit_view_current(), undo->window_position);
-	
-	if (undo->action == GEDIT_UNDO_DELETE)
-		gedit_document_insert_text (doc, undo->text, undo->start_pos, FALSE);
-	else if (undo->action == GEDIT_UNDO_INSERT)
-		gedit_document_delete_text (doc, undo->start_pos, undo->end_pos-undo->start_pos, FALSE);
-	else
-		g_assert_not_reached ();
 
-	/*doc->changed = undo->status; Disabled by chema. See below..*/
+	switch (undo->action){
+	case GEDIT_UNDO_DELETE:
+		gedit_document_insert_text (doc, undo->text, undo->start_pos, FALSE);
+		break;
+	case GEDIT_UNDO_INSERT:
+		gedit_document_delete_text (doc, undo->start_pos, undo->end_pos-undo->start_pos, FALSE);
+		break;
+	case GEDIT_UNDO_REPLACE_INSERT:
+		gedit_document_delete_text (doc, undo->start_pos, undo->end_pos-undo->start_pos, FALSE);
+		/* "pull" another data structure from the list */
+		undo = g_list_nth_data (doc->undo, 0);
+		g_return_if_fail (undo!=NULL);
+		doc->redo = g_list_prepend (doc->redo, undo);
+		doc->undo = g_list_remove (doc->undo, undo);
+		g_return_if_fail (undo->action==GEDIT_UNDO_REPLACE_DELETE);
+		gedit_document_insert_text (doc, undo->text, undo->start_pos, FALSE);
+		break;
+	case GEDIT_UNDO_REPLACE_DELETE:
+		g_warning ("This should not happen. UNDO_REPLACE_DELETE");
+		break;
+	default:
+		g_assert_not_reached ();
+	}
+
+	if (doc->changed != undo->status)
+	{
+		doc->changed = undo->status;
+		gedit_document_set_title (doc);
+	}
 }
 
 /**
@@ -338,6 +368,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 		return;
 	
 	redo = g_list_nth_data (doc->redo, 0);
+	g_return_if_fail (redo!=NULL);
 	doc->undo = g_list_prepend (doc->undo, redo);
 	doc->redo = g_list_remove (doc->redo, redo);
 
@@ -348,15 +379,35 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	/* Move the view to the right position. */
 	gedit_view_set_window_position (gedit_view_current(), redo->window_position);
 				  
-	if (redo->action == GEDIT_UNDO_INSERT)
+	switch (redo->action){
+	case GEDIT_UNDO_INSERT:
 		gedit_document_insert_text (doc, redo->text, redo->start_pos, FALSE);
-	else if (redo->action == GEDIT_UNDO_DELETE)
+		break;
+	case GEDIT_UNDO_DELETE:
 		gedit_document_delete_text (doc, redo->start_pos, redo->end_pos-redo->start_pos, FALSE);
-	else 
+		break;
+	case GEDIT_UNDO_REPLACE_DELETE:
+		gedit_document_delete_text (doc, redo->start_pos, redo->end_pos-redo->start_pos, FALSE);
+		/* "pull" another data structure from the list */
+		redo = g_list_nth_data (doc->redo, 0);
+		g_return_if_fail (redo!=NULL);
+		doc->undo = g_list_prepend (doc->undo, redo);
+		doc->redo = g_list_remove (doc->redo, redo);
+		g_return_if_fail (redo->action==GEDIT_UNDO_REPLACE_INSERT);
+		gedit_document_insert_text (doc, redo->text, redo->start_pos, FALSE);
+		break;
+	case GEDIT_UNDO_REPLACE_INSERT:
+		g_warning ("This should not happen. Redo: UNDO_REPLACE_INSERT");
+		break;
+	default:
 		g_assert_not_reached ();
+	}
 
-	/*doc->changed = undo->status; disable by chema. We need to call the appropiate function
-	  to actually change the title and stuff.*/
+	if (doc->changed != redo->status)
+	{
+		doc->changed = redo->status;
+		gedit_document_set_title (doc);
+	}
 }
 
 

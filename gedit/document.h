@@ -61,11 +61,15 @@ struct _Document
 extern guint mdi_type [NUM_MDI_MODES];
 extern GnomeMDI *mdi;
 
-void gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable);
-void gedit_document_delete_text (Document *doc, guint position, gint length, gint undoable);
+void gedit_document_insert_text  (Document *doc, guchar *text, guint position,              gint undoable);
+void gedit_document_delete_text  (Document *doc,               guint position, gint length, gint undoable);
+void gedit_document_replace_text (Document *doc, guchar *text, guint position, gint length, gint undoable);
+
+
 void gedit_document_set_readonly (Document *doc, gint readonly);
 
 gchar*	gedit_document_get_tab_name (Document *doc);
+guchar* gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos);
 guchar*	gedit_document_get_buffer (Document * doc);
 guint	gedit_document_get_buffer_length (Document * doc);
 

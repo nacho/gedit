@@ -150,6 +150,8 @@ views_insert (Document *doc, guint position, gchar * text, gint length, View * v
 
 	gedit_debug ("", DEBUG_VIEW);
 
+	g_return_if_fail (doc!=NULL);
+
 	if (!doc->changed)
 		if (g_list_length (doc->views))
 			gedit_view_changed_cb (NULL, (gpointer) g_list_nth_data (doc->views, 0));
@@ -185,12 +187,17 @@ views_delete (Document *doc, guint start_pos, guint end_pos, View *view_exclude)
 
 	gedit_debug ("", DEBUG_VIEW);
 
+	g_return_if_fail (doc!=NULL);
+	g_return_if_fail (end_pos > start_pos);
+
 	for (n = 0; n < g_list_length (doc->views); n++)
 	{
 		nth_view = g_list_nth_data (doc->views, n);
 
 		if (nth_view == view_exclude)
 			continue;
+		
+		g_return_if_fail (nth_view!=NULL);
 
 		gedit_view_delete (nth_view, start_pos, end_pos-start_pos);
 	}
@@ -678,6 +685,9 @@ gedit_view_set_position (View *view, gint pos)
 	gedit_debug ("", DEBUG_VIEW);
 
 	gtk_text_set_point (GTK_TEXT (view->text), pos);
+	gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
+	gtk_text_backward_delete (GTK_TEXT(view->text), 1);
+
 #ifdef ENABLE_SPLIT_SCREEN    	
 	gtk_text_set_point (GTK_TEXT (view->split_screen), pos);
 #endif

@@ -1,5 +1,19 @@
 2000-06-11  Chema Celorio  <chema@celorio.com>
 
+	* undo.c (gedit_undo_undo): renamed, Implement GEDIT_UNDO_REPLACE
+	* undo.c (gedit_undo_redo): Implement GEDIT_UNDO_REPLACE
+
+	* menus.c (toolbar_data): replace undo_do with undo_undo 
+
+	* file.c (gedit_file_open): after opening a doc
+	set the position to 0
+
+	* undo.h (struct _GeditUndoInfo): add GEDIT_UNDO_REPLACE
+
+	* document.c (gedit_document_replace_text): new function
+
+2000-06-11  Chema Celorio  <chema@celorio.com>
+
 	* utils.c: remove gedit_set_title from here
 
 	* document.h: add new prototype

@@ -84,6 +84,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	struct stat stats;
 	FILE *fp;
 	Document *currentdoc;
+	View *view;
 	
 	gedit_debug ("start", DEBUG_FILE);
 	
@@ -134,9 +135,15 @@ gedit_file_open (Document *doc, gchar *fname)
 
 	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
 	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
+	
+	/* Set the cursor position to the start */
+	view = g_list_nth_data (doc->views, 0);
+	g_return_val_if_fail (view!=NULL, 1);
+	gedit_view_set_position (view, 0);
 
 	doc->changed = FALSE;
 	gedit_document_set_title (doc);
+	
 	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);

@@ -1,4 +1,4 @@
-/* *- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit
  *
@@ -35,11 +35,13 @@ GnomeMDI *mdi;
 typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
 static GnomeMDIChildClass *parent_class = NULL;
 
-void gedit_document_insert_text (Document *doc, guchar *text, guint position, gint undoable);
-void gedit_document_delete_text (Document *doc, guint position, gint length, gint undoable);
+void gedit_document_insert_text  (Document *doc, guchar *text, guint position,              gint undoable);
+void gedit_document_delete_text  (Document *doc,               guint position, gint length, gint undoable);
+void gedit_document_replace_text (Document *doc, guchar *text, guint position, gint length, gint undoable);
 void gedit_document_set_readonly (Document *doc, gint readonly);
 
 gchar*	gedit_document_get_tab_name (Document *doc);
+guchar* gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos);
 guchar*	gedit_document_get_buffer (Document * doc);
 guint	gedit_document_get_buffer_length (Document * doc);
 
@@ -130,12 +132,60 @@ gedit_document_delete_text (Document *doc, guint position, gint length, gint und
 	doc_delete_text_cb (editable, position, position+length, view, exclude_this_view, undoable);
 }
 
+/**
+ * gedit_document_replace_text:
+ * @doc: 
+ * @text: 
+ * @position: 
+ * @length: 
+ * @undoable: 
+ * 
+ * is equivalent to delete_text + insert_text
+ **/
+void
+gedit_document_replace_text (Document *doc, guchar * text_to_insert, guint position, gint length, gint undoable)
+{
+	gchar *text_to_delete;
+
+	gedit_debug ("", DEBUG_DOCUMENT);
+
+	text_to_delete = gedit_document_get_chars (doc, position, position + length);
+
+	gedit_document_delete_text (doc, position, length, FALSE);
+	gedit_document_insert_text (doc, text_to_insert, position, FALSE);
+
+	if (undoable)
+	{
+		gint   text_to_delete_length;
+		gint   text_to_insert_length;
+
+		text_to_delete_length = strlen (text_to_delete);
+		text_to_insert_length = strlen (text_to_insert);
+
+		gedit_undo_add (text_to_delete,
+				position,
+				position + length,
+				GEDIT_UNDO_REPLACE_DELETE,
+				doc,
+				NULL);
+
+		gedit_undo_add (text_to_insert,
+				position,
+				position + text_to_insert_length,
+				GEDIT_UNDO_REPLACE_INSERT,
+				doc,
+				NULL);
+	}
+}
+
 void
 gedit_document_set_readonly (Document *doc, gint readonly)
 {
 	View * nth_view;
 	gint n;
-	
+
+	gedit_debug ("", DEBUG_DOCUMENT);
+
 	doc->readonly = readonly;
 		
 	for (n = 0; n < g_list_length (doc->views); n++)
@@ -193,6 +243,28 @@ gedit_document_get_tab_name (Document *doc)
 		}
 		return _(g_strdup_printf ("%s %d", UNTITLED, doc->untitled_number));
 	}
+}
+
+guchar *
+gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos)
+{
+	guchar * buffer;
+	GtkText * text;
+	View * view;
+
+	gedit_debug ("", DEBUG_DOCUMENT);
+
+	g_return_val_if_fail (end_pos > start_pos, NULL);
+	g_return_val_if_fail (doc!=NULL, NULL);
+	view = g_list_nth_data (doc->views, 0);
+	g_return_val_if_fail (view!=NULL, NULL);
+
+	text = GTK_TEXT (view->text);
+
+	buffer = gtk_editable_get_chars ( GTK_EDITABLE ( text ),
+					  start_pos,
+					  end_pos);
+	return buffer;
 }
 
 /**

@@ -160,6 +160,10 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 		{
 			gedit_document_delete_text (view->doc, 0, gedit_document_get_buffer_length(view->doc), TRUE);
 			gedit_document_insert_text (view->doc, new_buffer, 0, TRUE);
+			/*
+			gedit_document_replace_text (view->doc, new_buffer, 0, gedit_document_get_buffer_length(view->doc), TRUE);
+			*/
+
 			gedit_search_end();
 			gedit_search_start();
 		}
@@ -202,8 +206,11 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 			end = gedit_search_info.replace_end;
 			
 			/* Diselect the text and set the point after this occurence*/
+			/*
 			gedit_document_delete_text (view->doc, start, search_text_length, TRUE);
 			gedit_document_insert_text (view->doc, text_to_replace_with, start, TRUE);
+			*/
+			gedit_document_replace_text (view->doc, text_to_replace_with, start, search_text_length, TRUE);
 
 			/* We need to reload the buffer since we changed it */
 			gedit_search_end();
