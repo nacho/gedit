@@ -428,7 +428,7 @@ gedit_switch_view (gboolean forward)
 {
         GtkNotebook *nb;
         GeditView *view;
-        gint page;
+        gint current;
         gint pages;
         
         if (settings->mdi_mode != GNOME_MDI_NOTEBOOK)
@@ -439,10 +439,20 @@ gedit_switch_view (gboolean forward)
         nb = GTK_NOTEBOOK (GTK_WIDGET (view)->parent);
         g_return_if_fail (GTK_IS_NOTEBOOK (nb));
 
-        if (forward)
-                gtk_notebook_next_page (nb);
-        else
-                gtk_notebook_prev_page (nb);
+        current = gtk_notebook_get_current_page (nb) + 1;
+        pages = g_list_length (nb->children);
+
+        if (forward) {
+                if (current == 1)
+                        gtk_notebook_set_page (nb, pages -1);
+                else
+                        gtk_notebook_prev_page (nb);
+        } else { 
+                if (current == pages)
+                        gtk_notebook_set_page (nb, 0);
+                else
+                        gtk_notebook_next_page (nb);
+        }
 }
 
 static gint
