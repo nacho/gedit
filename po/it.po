@@ -1,37 +1,39 @@
-# gedit Italian translation 
-# Giuseppe <quiquoqua@pn.itnet.it>, 1998
+# translation of gedit-it.po to italiano
+# translation of gedit.HEAD.it.po to italiano
+# gedit Italian translation
 # Paolo Maggi <maggi@athena.polito.it> 2002
+# Giuseppe <quiquoqua@pn.itnet.it>, 1998
 # Alessio Frusciante <algol@firenze.linux.it>, 2002
 # Roberto Rosselli Del Turco <rosselli@ling.unipi.it>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 1.116.0\n"
-"POT-Creation-Date: 2003-08-26 23:48+0200\n"
-"PO-Revision-Date: 2003-01-26 09:03+0100\n"
+"Project-Id-Version: gedit-it\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-25 03:56+0200\n"
+"PO-Revision-Date: 2003-08-29 11:51+0200\n"
 "Last-Translator: Roberto Rosselli Del Turco <rosselli@ling.unipi.it>\n"
 "Language-Team: italiano <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
+"X-Generator: KBabel 1.0.1\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
-msgstr ""
+msgstr "Vista gedit"
 
 #: data/GNOME_Gedit.server.in.in.h:2
 msgid "Gedit View."
-msgstr ""
+msgstr "Vista gedit."
 
 #: data/GNOME_Gedit.server.in.in.h:3 viewer/gedit-factory.c:53
 msgid "Gedit viewer factory"
-msgstr ""
+msgstr "Fabbrica della vista gedit"
 
 #: data/GNOME_Gedit.server.in.in.h:4
-#, fuzzy
 msgid "Source"
-msgstr "Ordina"
+msgstr "Fonte"
 
 #: data/GNOME_Gedit.server.in.in.h:5
 msgid "gedit application"
@@ -39,7 +41,7 @@ msgstr "Applicazione gedit"
 
 #: data/GNOME_Gedit.server.in.in.h:6
 msgid "gedit automation factory"
-msgstr ""
+msgstr "Fabbrica per l'automazione di gedit"
 
 #: data/gedit.desktop.in.h:1
 msgid "Edit text files"
@@ -58,9 +60,8 @@ msgstr ""
 "utilizzato soltanto se l'opzione «Usa font predefinito» è disabilitata."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Auto Detected Encodings"
-msgstr "C_odifiche supportate:"
+msgstr "Codifiche riconosciute automaticamente"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Save"
@@ -119,9 +120,8 @@ msgid "Encoding for Saving"
 msgstr "Codifica per il salvataggio"
 
 #: data/gedit.schemas.in.h:15
-#, fuzzy
 msgid "Encodings shown in menu"
-msgstr "Codifica per il salvataggio"
+msgstr "Codifiche mostrate nel menu"
 
 #: data/gedit.schemas.in.h:16
 msgid ""
@@ -179,6 +179,8 @@ msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
+"Elenco delle codifiche mostrate nel menu «Codifica caratteri» nella finestra "
+"di apertura/salvataggio file. Sono mostrate soltanto le codifiche riconosciute."
 
 #: data/gedit.schemas.in.h:25
 msgid "Maximum Recent Files"
@@ -186,7 +188,7 @@ msgstr "Numero massimo di file recenti."
 
 #: data/gedit.schemas.in.h:26
 msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr "N. massimo di azioni che gedit potrà annullare e ripetere."
+msgstr "Numero massimo di azioni che gedit potrà annullare e ripetere."
 
 #: data/gedit.schemas.in.h:27
 msgid ""
@@ -207,7 +209,7 @@ msgstr "Stampa numeri di riga"
 
 #: data/gedit.schemas.in.h:30
 msgid "Print Syntax Highlighting"
-msgstr ""
+msgstr "Stampa l'evidenziazione della sintassi"
 
 #: data/gedit.schemas.in.h:31
 msgid "Printing Line Wrapping Mode"
@@ -222,14 +224,14 @@ msgid "Selection Color"
 msgstr "Colore della selezione"
 
 #: data/gedit.schemas.in.h:34
-#, fuzzy
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
-"Lista delle codifiche usate da gedit per leggere i file non codificati con "
-"UTF-8 o nella codifica della localizzazione attuale."
+"Lista delle codifiche usate da gedit per identificare automaticamente la "
+"codifica di un file. \"CURRENT\" indica la codifica attuale. Sono usate "
+"soltanto le codifiche riconosciute."
 
 #: data/gedit.schemas.in.h:35
 msgid ""
@@ -239,6 +241,12 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
+"Specifica come effettuare l'a capo automatico di righe troppo lunghe per la "
+"stampa. Usa \"GTK_WRAP_NONE\" per evitare l'a capo automatico, "
+"\"GTK_WRAP_WORD\" per effettuarlo in base alle singole parole e "
+"\"GTK_WRAP_CHAR\" per effettuarlo in base ai singoli caratteri. Si faccia "
+"attenzione al fatto che i valori sono sensibili all'uso di maiuscolo/minuscolo, "
+"per cui è necessario digitarli esattamente come appaiono scritti qui sopra."
 
 #: data/gedit.schemas.in.h:36
 msgid ""
@@ -248,10 +256,15 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
+"Specifica come effettuare l'a capo automatico di righe troppo lunghe nell'area "
+"di editing. Usa \"GTK_WRAP_NONE\" per evitare l'a capo automatico, "
+"\"GTK_WRAP_WORD\" per effettuarlo in base alle singole parole e "
+"\"GTK_WRAP_CHAR\" per effettuarlo in base ai singoli caratteri. Si faccia "
+"attenzione al fatto che i valori sono sensibili all'uso di maiuscolo/minuscolo, "
+"per cui è necessario digitarli esattamente come appaiono scritti qui sopra."
 
 #: data/gedit.schemas.in.h:37
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
+msgid "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Specifica il font usato per il corpo del testo di un documento al momento "
 "della stampa."
@@ -280,7 +293,7 @@ msgid ""
 "in the \"Recent Files\" submenu."
 msgstr ""
 "Specifica il numero massimo di file aperti di recente che verranno mostrati "
-"nel sotto-menu «File recenti»."
+"nel sottomenu «File recenti»."
 
 #: data/gedit.schemas.in.h:41
 msgid ""
@@ -303,6 +316,14 @@ msgid ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
+"Stile dei pulsanti della barra degli strumenti. I valori consentiti sono "
+"\"GEDIT_TOOLBAR_SYSTEM\" per utilizzare lo stile predefinito del sistema, "
+"\"GEDIT_TOOLBAR_ICONS\" per visualizzare soltanto le icone, "
+" \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" per visualizzare le icone e le "
+"relative didascalie allo stesso tempo, \"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" "
+"per mostrare le didascalie accanto alleicone. Si faccia attenzione al fatto"
+"che i valori sono sensibili all'uso di maiuscolo/minuscolo, per cui è"
+"necessario digitarli esattamente come appaiono scritti qui sopra."
 
 #: data/gedit.schemas.in.h:44
 msgid "Tab Size"
@@ -326,6 +347,17 @@ msgid ""
 "8 will be used. Note that the values are case-sensitive, so make sure they "
 "appear exactly as mentioned here."
 msgstr ""
+"Il metodo di codifica utilizzato per salvare i file. I valori ammessi sono "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" per salvare obbligatoriamente in UTF-8, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" se si desidera che "
+"gedit converta il documento che sta salvando nella codifica utilizzata dalla "
+"vostra lingua locale, \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\""
+"se si desidera che gedit tenti di utilizzare la codifica originale del file (i "
+"nuovi file verranno salvati in UTF8. Se la conversione ha successo, verrà "
+"utilizzata automaticamente; in caso contrario, verrà utilizzata la codifica "
+"UTF-8. Si faccia attenzione al fatto che i valori sono sensibili all'uso di "
+"maiuscolo/minuscolo, per cui è necessario digitarli esattamente come "
+"appaiono scritti qui sopra."
 
 #: data/gedit.schemas.in.h:47
 msgid "Toolbar Buttons Style"
@@ -384,22 +416,18 @@ msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Abilita l'inserimento di spazi al posto dei tab."
 
 #: data/gedit.schemas.in.h:58
-#, fuzzy
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
-"Abilita la creazione di un'intestazione per i documenti che verranno "
+"Attiva la stampa dell'evidenziazione della sintassi per i documenti che verranno "
 "stampati."
 
 #: data/gedit.schemas.in.h:59
-msgid ""
-"Whether the status bar at the bottom of editing windows should be visible."
-msgstr ""
-"Rende visibile o meno la barra di stato in fondo alle finestre di editing."
+msgid "Whether the status bar at the bottom of editing windows should be visible."
+msgstr "Rende visibile o meno la barra di stato in fondo alle finestre di editing."
 
 #: data/gedit.schemas.in.h:60
 msgid "Whether the toolbar should be visible in editing windows."
-msgstr ""
-"Rende visibile o meno la barra degli strumenti nelle finestre di editing."
+msgstr "Rende visibile o meno la barra degli strumenti nelle finestre di editing."
 
 #: data/gedit.schemas.in.h:61
 msgid ""
@@ -427,7 +455,7 @@ msgstr ""
 #: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
 #, c-format
 msgid "Activate %s"
-msgstr "Mostra %s"
+msgstr "Attiva %s"
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -471,9 +499,9 @@ msgid "Find"
 msgstr "Trova"
 
 #: gedit/dialogs/gedit-dialog-replace.c:1149
-#, fuzzy, c-format
+#, c-format
 msgid "Found and replaced %d occurrences."
-msgstr "Trovate e sostituite %d occorrenze"
+msgstr "Trovate e sostituite %d occorrenze."
 
 #: gedit/dialogs/gedit-dialog-uri.c:87
 msgid "Open Location"
@@ -482,7 +510,7 @@ msgstr "Apri posizione"
 #: gedit/dialogs/gedit-encodings-dialog.c:76
 #, c-format
 msgid "There was an error displaying help: %s"
-msgstr ""
+msgstr "Si è verificato un errore nel mostrare l'aiuto: %s"
 
 #: gedit/dialogs/gedit-encodings-dialog.c:381
 #: gedit/dialogs/gedit-encodings-dialog.c:449
@@ -491,54 +519,46 @@ msgstr "_Descrizione"
 
 #: gedit/dialogs/gedit-encodings-dialog.c:390
 #: gedit/dialogs/gedit-encodings-dialog.c:458
-#, fuzzy
 msgid "_Encoding"
-msgstr "Codifiche"
+msgstr "_Codifica"
 
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:1
-#, fuzzy
 msgid "A_vailable encodings:"
-msgstr "Aggiungi nuove codifiche"
+msgstr "Aggiungi _nuove codifiche:"
 
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:2
-#, fuzzy
 msgid "Character codings"
-msgstr "carattere/i"
+msgstr "Codifiche caratteri"
 
 #: gedit/dialogs/gedit-encodings-dialog.glade2.h:3
 msgid "E_ncodings shown in menu:"
-msgstr ""
+msgstr "_Codifiche mostrate nel menu:"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:490
 msgid "Body font picker"
-msgstr ""
+msgstr "Selettore font del testo"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:491
-#, fuzzy
 msgid ""
 "Push this button to select the font to be used to print the body of the "
 "document"
 msgstr ""
 "Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
-"stampare il corpo del testo"
+"stampare il corpo del documento"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:492
-#, fuzzy
 msgid "Page headers font picker"
-msgstr "Intestazioni di _pagina:"
+msgstr "Selettore del font per le intestazioni di pagina"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:493
-#, fuzzy
-msgid ""
-"Push this button to select the font to be used to print the page headers"
+msgid "Push this button to select the font to be used to print the page headers"
 msgstr ""
 "Cliccare su questo pulsante per selezionare il font che verrà utilizzato per "
-"stampare le intestazioni"
+"stampare le intestazioni di pagina"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:494
-#, fuzzy
 msgid "Line numbers font picker"
-msgstr "Numeri di riga"
+msgstr "Selettore del font per i numeri di riga"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:495
 msgid "Push this button to select the font to be used to print line numbers"
@@ -548,7 +568,7 @@ msgstr ""
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:587
 msgid "Could not find '"
-msgstr ""
+msgstr "Impossibile trovare '"
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:587
 #: gedit/dialogs/gedit-page-setup-dialog.c:629
@@ -557,20 +577,21 @@ msgid ""
 "\n"
 "Reinstall gedit."
 msgstr ""
+"page-setup-dialog.glade2'.\n"
+"\n"
+"Reinstallare gedit."
 
 #: gedit/dialogs/gedit-page-setup-dialog.c:628
-#, fuzzy
 msgid "Could not find the required widgets inside '"
-msgstr "Impossibile trovare i widget richiesti all'interno di %s."
+msgstr "Impossibile trovare i widget richiesti all'interno di '"
 
 #: gedit/dialogs/gedit-plugin-manager.c:53
 msgid "Plugin"
 msgstr "Plugin"
 
 #: gedit/dialogs/gedit-plugin-manager.c:54
-#, fuzzy
 msgid "Enabled"
-msgstr "Abilita sillabazione automatica"
+msgstr "Abilitato"
 
 #: gedit/dialogs/gedit-plugin-manager.c:507
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
@@ -614,7 +635,7 @@ msgid "Tabs"
 msgstr "Tab"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:200
-msgid "Wrap Mode"
+msgid "Text Wrapping"
 msgstr "A capo automatico"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:201
@@ -677,8 +698,7 @@ msgstr "Cliccare su questo pulsante per selezionare il colore di sfondo"
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
-msgstr ""
-"Cliccare su questo pulsante per scedgliere il colore del testo selezionato"
+msgstr "Cliccare su questo pulsante per scegliere il colore del testo selezionato"
 
 #: gedit/dialogs/gedit-preferences-dialog.c:797
 msgid ""
@@ -728,8 +748,7 @@ msgstr "<span weight=\"bold\" size=\"x-large\">Annulla</span>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
 msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"x-large\">Modalità a capo automatico</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Modalità a capo automatico</span>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
@@ -943,13 +962,12 @@ msgid "_Line number:"
 msgstr "_Numero di riga"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:2
-#, fuzzy
 msgid "<b>Line Numbers</b>"
-msgstr "Numeri di riga"
+msgstr "<b>Numeri di riga</b>"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
 msgid "<b>Text Wrapping</b>"
-msgstr ""
+msgstr "<b>A capo automatico</b>"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:6
 msgid "Fonts"
@@ -961,35 +979,31 @@ msgstr "Generale"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:8
 msgid "He_aders and footers:"
-msgstr ""
+msgstr "_Intestazioni e piè di pagina:"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:9
-#, fuzzy
 msgid "Page Setup"
-msgstr "Configurazione stampa"
+msgstr "Impostazioni pagina"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:10
-#, fuzzy
 msgid "Print _line numbers"
-msgstr "Stampa numeri di riga"
+msgstr "Stampa numeri di _riga"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:11
 msgid "Print s_yntax highlighting"
-msgstr ""
+msgstr "Stampa evidenziazione _sintassi"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:12
 msgid "_Body:"
 msgstr "_Corpo del testo:"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:13
-#, fuzzy
 msgid "_Line numbers:"
-msgstr "_Numero di riga"
+msgstr "_Numeri di riga:"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:14
-#, fuzzy
 msgid "_Number every"
-msgstr "Plugin Browser Web per gEdit"
+msgstr "Numeri _ogni"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:15
 msgid "_Print page headers"
@@ -1000,17 +1014,14 @@ msgid "_Restore Default Fonts"
 msgstr "_Ripristina font predefiniti"
 
 #: gedit/dialogs/page-setup-dialog.glade2.h:17
-#, fuzzy
 msgid "lines"
-msgstr "Righe"
+msgstr "righe"
 
 #: gedit/dialogs/plugin-manager.glade2.h:1
-#, fuzzy
 msgid "About selected plugin"
-msgstr "Configura il plugin selezionato"
+msgstr "Informazioni sul plugin selezionato"
 
 #: gedit/dialogs/plugin-manager.glade2.h:2
-#, fuzzy
 msgid "C_onfigure Plugin"
 msgstr "C_onfigura plugin"
 
@@ -1020,16 +1031,15 @@ msgstr "Configura il plugin selezionato"
 
 #: gedit/dialogs/plugin-manager.glade2.h:4
 msgid "button1"
-msgstr ""
+msgstr "pulsante 1"
 
 #: gedit/dialogs/plugin-manager.glade2.h:5
 msgid "dialog1"
 msgstr "dialog1"
 
 #: gedit/dialogs/program-location-dialog.glade2.h:1
-#, fuzzy
 msgid "Browse for program location..."
-msgstr "Configurazione del percorso del programma..."
+msgstr "Sfoglia il percorso del programma..."
 
 #: gedit/dialogs/program-location-dialog.glade2.h:3
 msgid "_Location to search for:"
@@ -1063,7 +1073,7 @@ msgstr "S_ostituisci con:"
 
 #: gedit/dialogs/replace.glade2.h:7
 msgid "Search _backwards"
-msgstr ""
+msgstr "Cerca all'in_dietro"
 
 #: gedit/dialogs/replace.glade2.h:8
 msgid "_Match case"
@@ -1078,9 +1088,8 @@ msgid "_Wrap around"
 msgstr "_Ricomincia dall'inizio"
 
 #: gedit/dialogs/uri.glade2.h:2
-#, fuzzy
 msgid "Ch_aracter coding:"
-msgstr "C_odifiche supportate:"
+msgstr "C_odifiche dei caratteri:"
 
 #: gedit/dialogs/uri.glade2.h:3
 msgid "Enter the _location (URI) of the file you would like to open:"
@@ -1170,17 +1179,17 @@ msgstr "Non è possibile ripristinare un documento «Senza titolo»"
 
 #: gedit/gedit-encodings-option-menu.c:203
 msgid "Auto Detected"
-msgstr ""
+msgstr "Riconoscimento automatico"
 
 #: gedit/gedit-encodings-option-menu.c:223
 #: gedit/gedit-encodings-option-menu.c:245
-#, fuzzy, c-format
+#, c-format
 msgid "Current Locale (%s)"
-msgstr "Font attuale"
+msgstr "Locale attuale (%s)"
 
 #: gedit/gedit-encodings-option-menu.c:306
 msgid "Add or _Remove..."
-msgstr ""
+msgstr "Aggiungi o _rimuovi..."
 
 #: gedit/gedit-encodings.c:132 gedit/gedit-encodings.c:176
 #: gedit/gedit-encodings.c:178 gedit/gedit-encodings.c:180
@@ -1313,21 +1322,19 @@ msgstr ""
 
 #: gedit/gedit-file-selector-util.c:283
 msgid "Ch_aracter Coding:"
-msgstr ""
+msgstr "Codifica _caratteri:"
 
 #: gedit/gedit-file-selector-util.c:460
-#, fuzzy
 msgid "Select a file to open"
-msgstr "Seleziona il none del file da salvare"
+msgstr "Seleziona un file da aprire"
 
 #: gedit/gedit-file-selector-util.c:489
-#, fuzzy
 msgid "Select files to open"
-msgstr "Seleziona il none del file da salvare"
+msgstr "Seleziona i file da aprire"
 
 #: gedit/gedit-file-selector-util.c:519
 msgid "Select a filename to save"
-msgstr "Seleziona il none del file da salvare"
+msgstr "Seleziona il nome del file da salvare"
 
 #: gedit/gedit-file.c:155
 msgid "Open File..."
@@ -1415,19 +1422,16 @@ msgid "_Move to New Window"
 msgstr "_Sposta in una nuova finestra"
 
 #: gedit/gedit-mdi-child.c:664
-#, fuzzy
 msgid "Unknown"
-msgstr "Errore sconosciuto"
+msgstr "Sconosciuto"
 
 #: gedit/gedit-mdi-child.c:672
-#, fuzzy
 msgid "Unicode (UTF-8)"
-msgstr "Unicode"
+msgstr "Unicode (UTF-8)"
 
 #: gedit/gedit-mdi.c:450
-#, fuzzy
 msgid "Open a recently used file"
-msgstr "Apri un file"
+msgstr "Apri un file modificato di recente"
 
 #: gedit/gedit-mdi.c:954
 #, c-format
@@ -1461,16 +1465,16 @@ msgstr "(sola lettura)"
 
 #: gedit/gedit-mdi.c:1676
 msgid "Normal"
-msgstr ""
+msgstr "Normale"
 
 #: gedit/gedit-mdi.c:1677
 msgid "Use Normal highlight mode"
-msgstr ""
+msgstr "Usa la modalità di evidenziazione normale"
 
 #: gedit/gedit-mdi.c:1753
 #, c-format
 msgid "Use %s highlight mode"
-msgstr ""
+msgstr "Usa la modalità di evidenziazione %s"
 
 #: gedit/gedit-output-window.c:333
 msgid "Close the output window"
@@ -1541,7 +1545,7 @@ msgstr "Impossibile inizializzare il gestore delle preferenze"
 #: gedit/gedit-prefs-manager.c:1136
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
-msgstr ""
+msgstr "Valore `%s' atteso, ma acquisito il valore `%s' per la chiave %s"
 
 #: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
 msgid "Print"
@@ -1552,19 +1556,18 @@ msgid "Lines"
 msgstr "Righe"
 
 #: gedit/gedit-print.c:331
-#, fuzzy
 msgid "Preparing pages..."
-msgstr "Preferenze"
+msgstr "Preparazione delle pagine..."
 
 #: gedit/gedit-print.c:358
 #, c-format
 msgid "Rendering page %d of %d..."
-msgstr ""
+msgstr "Creazione della pagina %d di %d..."
 
 #: gedit/gedit-print.c:360
-#, fuzzy, c-format
+#, c-format
 msgid "Printing page %d of %d..."
-msgstr "Stampa"
+msgstr "Stampa di pagina %d di %d in corso..."
 
 #: gedit/gedit-print.c:382 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
@@ -1577,7 +1580,7 @@ msgstr "File: %s"
 
 #: gedit/gedit-print.c:556
 msgid "Page %N of %Q"
-msgstr ""
+msgstr "Pagina %N di %Q"
 
 #: gedit/gedit-ui.xml.h:1
 msgid "About this application"
@@ -1593,8 +1596,7 @@ msgstr "Cambia la visibilità della barra di stato nella finestra corrente"
 
 #: gedit/gedit-ui.xml.h:4
 msgid "Change the visibility of the toolbar in the current window"
-msgstr ""
-"Cambia la visibilità della barra degli strumenti nella finestra corrente"
+msgstr "Cambia la visibilità della barra degli strumenti nella finestra corrente"
 
 #: gedit/gedit-ui.xml.h:5
 msgid "Close"
@@ -1649,14 +1651,12 @@ msgid "Find Ne_xt"
 msgstr "Trova s_uccessivo"
 
 #: gedit/gedit-ui.xml.h:20
-#, fuzzy
 msgid "Find Pre_vious"
-msgstr "Trova _Linea"
+msgstr "Trova _precedente"
 
 #: gedit/gedit-ui.xml.h:21
-#, fuzzy
 msgid "Find Previous"
-msgstr "Anteprima di stampa"
+msgstr "Trova precedente"
 
 #: gedit/gedit-ui.xml.h:22
 msgid "Go to _Line..."
@@ -1703,9 +1703,8 @@ msgid "Open the gedit manual"
 msgstr "Apre il manuale di gedit"
 
 #: gedit/gedit-ui.xml.h:33
-#, fuzzy
 msgid "Page Set_up"
-msgstr "Configurazione stampa"
+msgstr "Configurazione _stampa"
 
 #: gedit/gedit-ui.xml.h:34
 msgid "Paste"
@@ -1784,9 +1783,8 @@ msgid "Search again for the same string"
 msgstr "Cerca ancora la stessa stringa"
 
 #: gedit/gedit-ui.xml.h:57
-#, fuzzy
 msgid "Search backwards for the same string"
-msgstr "Cerca ancora la stessa stringa"
+msgstr "Cerca la stessa stringa all'indietro"
 
 #: gedit/gedit-ui.xml.h:58
 msgid "Search for a string"
@@ -1805,38 +1803,30 @@ msgid "Select the entire document"
 msgstr "Seleziona tutto il documento"
 
 #: gedit/gedit-ui.xml.h:62
-#, fuzzy
-msgid ""
-"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgid "Set toolbar button style according to desktop Menu and Toolbar Preferences"
 msgstr ""
-"Configura lo stile dei pulsanti della barra degli strumenti in base allo "
-"stile predefinito del desktop"
+"Configura lo stile dei pulsanti della barra degli strumenti in base alle "
+"corrispondenti impostazioni del desktop"
 
 #: gedit/gedit-ui.xml.h:63
-#, fuzzy
 msgid "Setup the page settings"
-msgstr ""
-"Configurazione delle impostazioni relative alla pagina per la stampante "
-"corrente"
+msgstr "Configurazione delle impostazioni relative alla pagina"
 
 #: gedit/gedit-ui.xml.h:64
-#, fuzzy
 msgid "Show only icons in the toolbar"
-msgstr "Mostra _Suggerimenti"
+msgstr "Mostra soltanto le icone nella barra degli strumenti"
 
 #: gedit/gedit-ui.xml.h:65
-#, fuzzy
 msgid "Show text below every icon in the toolbar"
-msgstr "Mostra _Suggerimenti"
+msgstr "Mostra il testo sotto ogni icona nella barra degli strumenti"
 
 #: gedit/gedit-ui.xml.h:66
-#, fuzzy
 msgid "Show text only beside important icons in the toolbar"
-msgstr "Mostra soltanto icone nella barra degli strumenti"
+msgstr "Mostra il testo soltanto accanto alle icone importanti nella barra degli strumenti"
 
 #: gedit/gedit-ui.xml.h:67
 msgid "T_ext for Important Icons"
-msgstr ""
+msgstr "T_esto per le icone importanti"
 
 #: gedit/gedit-ui.xml.h:69
 msgid "Undo the last action"
@@ -1900,12 +1890,11 @@ msgstr "A_iuto"
 
 #: gedit/gedit-ui.xml.h:84
 msgid "_Highlight Mode"
-msgstr ""
+msgstr "Modalità di _evidenziazione"
 
 #: gedit/gedit-ui.xml.h:85
-#, fuzzy
 msgid "_Icons Only"
-msgstr "_Icona"
+msgstr "_Soltanto icone"
 
 #: gedit/gedit-ui.xml.h:87
 msgid "_New"
@@ -1957,7 +1946,7 @@ msgstr "Barra di _stato"
 
 #: gedit/gedit-ui.xml.h:100
 msgid "_Text for All Icons"
-msgstr ""
+msgstr "_Testo per tutte le icone"
 
 #: gedit/gedit-ui.xml.h:101
 msgid "_Toolbar"
@@ -1983,7 +1972,7 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 "Impossibile trovare il file «%s».\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
+"Controllare di aver digitato correttamente la posizione e riprovare."
 
 #: gedit/gedit-utils.c:420
 #, c-format
@@ -1992,10 +1981,8 @@ msgstr "Impossibile aprire il file «%s» perché contiene dati corrotti."
 
 #: gedit/gedit-utils.c:431
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Impossibile aprire il file «%s» perché gedit non può gestire posizioni «%s:»."
+msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgstr "Impossibile aprire il file «%s» perché gedit non può gestire posizioni «%s:»."
 
 #: gedit/gedit-utils.c:437
 #, c-format
@@ -2004,8 +1991,7 @@ msgstr "Impossibile aprire il file «%s»"
 
 #: gedit/gedit-utils.c:447
 #, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
+msgid "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 "Impossibile aprire il file «%s» perché contiene dati in un formato non "
 "valido."
@@ -2024,7 +2010,7 @@ msgid ""
 msgstr ""
 "«%s» non è una posizione valida.\n"
 "\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
+"Controllare di aver digitato correttamente la posizione e riprovare."
 
 #: gedit/gedit-utils.c:469
 #, c-format
@@ -2051,7 +2037,7 @@ msgid ""
 msgstr ""
 "«%s» è una directory.\n"
 "\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
+"Controllare di aver digitato correttamente la posizione e riprovare."
 
 #: gedit/gedit-utils.c:492
 #, c-format
@@ -2072,7 +2058,7 @@ msgid ""
 msgstr ""
 "Impossibile aprire il file «%s» perché non è stato trovato l'host «%s».\n"
 "\n"
-"Controllare di aver digitato la posizione correttamente e che le "
+"Controllare di aver digitato correttamente la posizione e che le "
 "impostazioni del proxy siano corrette, quindi riprovare."
 
 #: gedit/gedit-utils.c:533
@@ -2084,7 +2070,7 @@ msgid ""
 msgstr ""
 "Impossibile aprire il file «%s» perché il nome host non è valido.\n"
 "\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
+"Controllare di aver digitato correttamente la posizione e riprovare."
 
 #: gedit/gedit-utils.c:542
 #, c-format
@@ -2107,16 +2093,16 @@ msgstr ""
 "Impossibile aprire il file «%s» perché il tentativo di effettuare il login è "
 "fallito.\n"
 "\n"
-"Controllare di aver digitato la posizione correttamente e riprovare."
+"Controllare di aver digitato correttamente la posizione e riprovare."
 
 #: gedit/gedit-utils.c:560 gedit/gedit-utils.c:628
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
 "\n"
 "Probably, you are trying to open a binary file."
 msgstr ""
-"Impossibile aprire il file «%s» perché contiene dati UTF-8 non validi.\n"
+"Impossibile aprire il file «%s» perché contiene dati non validi.\n"
 "\n"
 "Probabilmente si sta tentando di aprire un file binario."
 
@@ -2130,9 +2116,14 @@ msgid ""
 "selecting a character coding in the 'Open File...' (or 'Open Location') "
 "dialog."
 msgstr ""
+"Impossibile aprire il file «%s» perché gedit non è riuscito a identificare "
+"automaticamente la codifica dei caratteri.\n"
+"\n"
+"Controllare che non si tratti di un file binario e riprovare selezionando una "
+"codifica di caratteri nella finestra di dialogo «Apri file...» (o «Apri posizione...»)."
 
 #: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
 "\n"
@@ -2140,10 +2131,11 @@ msgid ""
 "selected the right character coding in the 'Open File...' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Impossibile aprire il file «%s» perché non è stato trovato l'host «%s».\n"
+"Impossibile aprire il file «%s» utilizzando la codifica dei caratteri «%s».\n"
 "\n"
-"Controllare di aver digitato la posizione correttamente e che le "
-"impostazioni del proxy siano corrette, quindi riprovare."
+"Controllare che non si tratti di un file binario e di aver selezionato la "
+"codifica di caratteri corretta nella finestra di dialogo «Apri file...» (o «Apri "
+"posizione...»), quindi riprovare."
 
 #: gedit/gedit-utils.c:662
 #, c-format
@@ -2151,12 +2143,15 @@ msgid "Could not open the file \"%s\"."
 msgstr "Impossibile aprire il file «%s»."
 
 #: gedit/gedit-utils.c:666
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
 "%s"
-msgstr "Impossibile aprire il file «%s»."
+msgstr ""
+"Impossibile aprire il file «%s».\n"
+"\n"
+"%s"
 
 #: gedit/gedit-utils.c:718
 #, c-format
@@ -2192,8 +2187,7 @@ msgstr "Impossibile ripristinare il file «%s» perché contiene dati corrotti."
 
 #: gedit/gedit-utils.c:793
 #, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "Impossibile ripristinare il file «%s» perché gedit non gestisce le posizioni "
 "«%s:»."
@@ -2284,7 +2278,7 @@ msgstr ""
 "Impossibile ripristinare il file «%s» perché contiene dati UTF-8 non "
 "validi.\n"
 "\n"
-"Probabilmente si sta tentanto di ripristinare un file binario."
+"Probabilmente si sta tentando di ripristinare un file binario."
 
 #: gedit/gedit-utils.c:901
 msgid "It is not possible to revert an Untitled document."
@@ -2364,9 +2358,9 @@ msgstr "Impossibile creare il file «%s»."
 #. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 #.
 #: gedit/gedit-view.c:685
-#, fuzzy, c-format
+#, c-format
 msgid "  Ln %d, Col %d"
-msgstr "  Rg %d, Col. %d"
+msgstr "  Rg %d, Col %d"
 
 #: gedit/gedit-view.c:723
 msgid "  OVR"
@@ -2381,9 +2375,8 @@ msgid "Show utility debugging messages."
 msgstr "Mostra i messaggi di debug delle utility."
 
 #: gedit/gedit2.c:84
-#, fuzzy
 msgid "Show metadata debugging messages."
-msgstr "Mostra i messaggi di debug della mdi."
+msgstr "Mostra i messaggi di debug dei metadata."
 
 #: gedit/gedit2.c:87
 msgid "Show mdi debugging messages."
@@ -2485,9 +2478,8 @@ msgid "0"
 msgstr "0"
 
 #: plugins/docinfo/docinfo.glade2.h:3
-#, fuzzy
 msgid "<span weight=\"bold\">File Name</span>"
-msgstr "<span weight=\"bold\">Colori</span>"
+msgstr "<span weight=\"bold\">Nome del file</span>"
 
 #: plugins/docinfo/docinfo.glade2.h:4
 msgid "Bytes"
@@ -2944,7 +2936,7 @@ msgstr "Lista dei nomi dei tag"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:188
 msgid "Double-click on a tag to insert it in the current document"
-msgstr "Fare doppio click su un tag per inserirlo nel document corrente"
+msgstr "Fare doppio click su un tag per inserirlo nel documento corrente"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:199
 msgid "Tags"
@@ -3032,920 +3024,13 @@ msgstr "_Usa un formato personalizzato"
 
 #: viewer/gedit-persist-stream.c:44
 msgid "Save method not implemented for gedit viewer"
-msgstr ""
+msgstr "Funzione di salvataggio non implementata nella vista gedit"
 
 #: viewer/gedit-viewer-ui.xml.h:1
-#, fuzzy
 msgid "Copy the selected text to the clipboard"
-msgstr "Scelta del colore del testo selezionato"
+msgstr "Copia il testo selezionato nella clipboard"
 
 #: viewer/gedit-viewer-ui.xml.h:2
-#, fuzzy
 msgid "_Copy Text"
-msgstr "_Copia"
+msgstr "_Copia testo"
 
-#~ msgid "Show Cursor Position"
-#~ msgstr "Mostra la posizione del cursore"
-
-#~ msgid "Show Overwrite Mode"
-#~ msgstr "Mostra la modalità sovrascrittura"
-
-#~ msgid ""
-#~ "Whether the status bar should show the cursor position in editing "
-#~ "windows. Make sure you turn on the \"Status Bar is Visible\" option for "
-#~ "this to take effect."
-#~ msgstr ""
-#~ "Attiva la visualizzazione della posizione del cursore nella barra di "
-#~ "stato. Accertarsi di aver abilitato l'opzione «La barra di stato è "
-#~ "visibile» se si intende attivare questa."
-
-#~ msgid ""
-#~ "Whether the status bar should show the insert/overwrite mode in editing "
-#~ "windows. Make sure you turn on the \"Status Bar is Visible\" option for "
-#~ "this to take effect."
-#~ msgstr ""
-#~ "Attiva la visualizzazione della modalità in uso (inserimento o "
-#~ "sovrascrittura) nella barra di stato. Accertarsi di aver abilitato "
-#~ "l'opzione «La barra di stato è visibile» se si intende attivare questa."
-
-#~ msgid "_ASCII Table"
-#~ msgstr "Tabella _ASCII"
-
-#~ msgid "Pop-up a dialog containing an ASCII Table"
-#~ msgstr "Mostra una finestra di dialogo contenente la tabella ASCII"
-
-#~ msgid "Char"
-#~ msgstr "Carattere"
-
-#~ msgid "Dec#"
-#~ msgstr "Dec#"
-
-#~ msgid "Hex#"
-#~ msgstr "Hex#"
-
-#~ msgid "Name"
-#~ msgstr "Nome"
-
-#~ msgid "ASCII Table"
-#~ msgstr "Tabella ASCII"
-
-#~ msgid "_Insert char"
-#~ msgstr "_Inserisci carattere"
-
-#~ msgid "ASCII table"
-#~ msgstr "Tabella ASCII"
-
-#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-#~ msgstr ""
-#~ "Questo plugin mostra una finestra di dialogo che contiene una tabella "
-#~ "ASCII"
-
-#~ msgid "Open CVS Chan_geLogs"
-#~ msgstr "Apri il changelog del CVS"
-
-#~ msgid "Searches for ChangeLogs in the current document and opens them"
-#~ msgstr "Cerca dei changelog nel documento corrente e li apre"
-
-#~ msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-#~ msgstr ""
-#~ "Un plugin che apre i changelo trovati nei messaggi di commit del CVS"
-
-#~ msgid "CVS ChangeLog"
-#~ msgstr "Changelog del CVS"
-
-#~ msgid "Co_mpare Files..."
-#~ msgstr "Co_nfronta File..."
-
-#~ msgid "Makes a diff file from two documents or files"
-#~ msgstr "Crea un file diff tra due documenti o file"
-
-#~ msgid "Compare Files"
-#~ msgstr "Confronta file"
-
-#~ msgid "C_ompare"
-#~ msgstr "C_onfronta"
-
-#~ msgid "Executed command"
-#~ msgstr "Comando eseguito"
-
-#~ msgid "The two documents you selected are the same."
-#~ msgstr "I due documenti selezionati coincidono."
-
-#~ msgid ""
-#~ "The \"first\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Il primo file selezionato non esiste.\n"
-#~ "\n"
-#~ "Selezionare un file valido."
-
-#~ msgid ""
-#~ "The \"second\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Il secondo file selezionato non esiste.\n"
-#~ "\n"
-#~ "Selezionare un file valido."
-
-#~ msgid "The two files you selected are the same."
-#~ msgstr "I due file selezionati coincidono"
-
-#~ msgid "The \"first\" document contains no text."
-#~ msgstr "Il primo documento non contiene testo"
-
-#~ msgid "The \"second\" document contains no text."
-#~ msgstr "Il secondo documento non contiene testo."
-
-#~ msgid ""
-#~ "Impossible to compare the selected documents.\n"
-#~ "\n"
-#~ "gedit could not create a temporary file."
-#~ msgstr ""
-#~ "Impossibile confrontare i documenti selezionati.\n"
-#~ "\n"
-#~ "gedit non può creare un file temporaneo."
-
-#~ msgid ""
-#~ "Impossible to compare the selected documents.\n"
-#~ "\n"
-#~ "Error executing the diff command."
-#~ msgstr ""
-#~ "Impossibile confrontare i documenti selezionati.\n"
-#~ "\n"
-#~ "Errore durante l'esecuzione del comando diff."
-
-#~ msgid "No differences were found between the selected documents."
-#~ msgstr "Non sono state rilevate differenze fra i documenti selezionati."
-
-#~ msgid ""
-#~ "Impossible to compare the selected documents.\n"
-#~ "\n"
-#~ "The result contains invalid UTF-8 data."
-#~ msgstr ""
-#~ "Impossibile confrontare i documenti selezionati.\n"
-#~ "\n"
-#~ "Il risultato contiene dati UTF-8 non validi."
-
-#~ msgid "Choose the files to compare."
-#~ msgstr "Scelta dei file da confrontare"
-
-#~ msgid "Compare files..."
-#~ msgstr "Confronta file..."
-
-#~ msgid "F_rom document"
-#~ msgstr "Dal _documento"
-
-#~ msgid "First"
-#~ msgstr "Primo"
-
-#~ msgid "First file from disk"
-#~ msgstr "Primo file da disco"
-
-#~ msgid "First file from open document"
-#~ msgstr "Il primo file dal documento corrente"
-
-#~ msgid "From _document"
-#~ msgstr "Dal _documento"
-
-#~ msgid "From a _file on disk"
-#~ msgstr "Da un file _su disco"
-
-#~ msgid "From a file o_n disk"
-#~ msgstr "Da un file _su disco"
-
-#~ msgid "Ignore _blanks (-b option)"
-#~ msgstr "Ignora i caratteri vuoti (opzione -b)"
-
-#~ msgid "Note that this option is only supported by GNU diff"
-#~ msgstr "Attenzione: questa opzione è supportata soltanto da GNU diff"
-
-#~ msgid "Second"
-#~ msgstr "Secondo"
-
-#~ msgid "Second file from disk"
-#~ msgstr "Secondo file da disco"
-
-#~ msgid "Second file from open document"
-#~ msgstr "Il secondo file dal documento corrente"
-
-#~ msgid "Select the \"first\" file..."
-#~ msgstr "Selezione del primo file.."
-
-#~ msgid "Select the \"second\" file..."
-#~ msgstr "Selezione del secondo file..."
-
-#~ msgid "Select the first file to compare"
-#~ msgstr "Selezione del primo file da confrontare"
-
-#~ msgid "Select the first open document to compare"
-#~ msgstr "Selezione del primo documento aperto da confrontare"
-
-#~ msgid "Select the second file to compare"
-#~ msgstr "Selezione del secondo file da confrontare"
-
-#~ msgid "Select the second open document to compare"
-#~ msgstr "Selezione del secondo documento aperto da confrontare"
-
-#~ msgid "Use the _unified output format (-u option)"
-#~ msgstr "Utilizza il formato di output _unificato (opzione -u)"
-
-#~ msgid ""
-#~ "The Compare Files plugin uses the <tt>diff</tt> program to compare two "
-#~ "documents or files on disk.\n"
-#~ "\n"
-#~ "For more info on <tt>diff</tt> program, type <tt>man diff</tt> in a shell "
-#~ "prompt."
-#~ msgstr ""
-#~ "Il plugin «Confronta file» usa il programma <tt>diff</tt> per confrontare "
-#~ "due documenti o file su disco.\n"
-#~ "\n"
-#~ "Per maggiori informazioni sul programma <tt>diff</tt>, digitate <tt>man "
-#~ "diff</tt> in un terminale."
-
-#~ msgid "File Name"
-#~ msgstr "Nome del file"
-
-#~ msgid "Load"
-#~ msgstr "Carica"
-
-#~ msgid "Module file name"
-#~ msgstr "Nome del file del modulo"
-
-#~ msgid "Author(s)"
-#~ msgstr "Autore/i"
-
-#~ msgid "Page"
-#~ msgstr "Pagina"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Font</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Apri</span>"
-
-#~ msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-#~ msgstr "<span weight=\"bold\" size=\"x-large\">Pagina</span>"
-
-#~ msgid "<span weight=\"bold\">When saving a new file...</span>"
-#~ msgstr "<span weight=\"bold\">Quando viene salvato un nuovo file...</span>"
-
-#~ msgid "<span weight=\"bold\">When saving an existing file...</span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\">Quando viene salvato un file esistente...</span>"
-
-#~ msgid "Always use U_TF-8 encoding (faster)"
-#~ msgstr "Usa sempre la codifica U_TF-8 (più veloce)"
-
-#~ msgid "Always use _UTF-8 encoding (faster)"
-#~ msgstr "Usa sempre la codifica _UTF-8 (più veloce)"
-
-#~ msgid "Line _numbers:"
-#~ msgstr "_Numeri di riga:"
-
-#~ msgid "Move down"
-#~ msgstr "Sposta in basso"
-
-#~ msgid "Move up"
-#~ msgstr "Sposta in alto"
-
-#~ msgid "Print _line numbers every"
-#~ msgstr "Stampa i numeri di riga ogni"
-
-#~ msgid "Print fonts"
-#~ msgstr "Font di stampa"
-
-#~ msgid "Remove an encoding"
-#~ msgstr "Rimuovi una codifica"
-
-#~ msgid "U_se original file encoding if possible"
-#~ msgstr "U_sa la codifica originale del file se possibile"
-
-#~ msgid "Use cu_rrent locale's encoding if possible"
-#~ msgstr "Usa la codifica della locale co_rrente se possibile"
-
-#~ msgid "Use current _locale's encoding if possible"
-#~ msgstr "Usa la codifica della _locale corrente se possibile"
-
-#~ msgid "li_ne(s)"
-#~ msgstr "ri_ga/e"
-
-#~ msgid "De_tails"
-#~ msgstr "De_ttagli"
-
-#~ msgid "Open a file."
-#~ msgstr "Apri un file."
-
-#~ msgid ""
-#~ "gedit is unable to print since it cannot find\n"
-#~ "one of the required fonts."
-#~ msgstr ""
-#~ "gedit non può stampare perché non riesce a trovare\n"
-#~ "uno dei font necessari."
-
-#~ msgid "Page: %d"
-#~ msgstr "Pagina: %d"
-
-#~ msgid "gedit - Print Preview"
-#~ msgstr "gedit - Anteprima di stampa"
-
-#~ msgid ""
-#~ "An error occurred while printing.\n"
-#~ "\n"
-#~ "%s,"
-#~ msgstr ""
-#~ "Si è verificato un errore durante la stampa.\n"
-#~ "\n"
-#~ "%s,"
-
-#~ msgid "C_ustomize Statusbar"
-#~ msgstr "P_ersonalizza la barra di stato"
-
-#~ msgid "Customize"
-#~ msgstr "Personalizza"
-
-#~ msgid "Customize toolbars"
-#~ msgstr "Personalizza le barre degli strumenti"
-
-#~ msgid "Find Again"
-#~ msgstr "Trova ancora"
-
-#~ msgid "Icon and _Text"
-#~ msgstr "Icona e _testo"
-
-#~ msgid "Show _Cursor Position"
-#~ msgstr "Mostra la posizione del _cursore"
-
-#~ msgid "Show _Overwrite Mode"
-#~ msgstr "Mostra la modalità sovrascrittura"
-
-#~ msgid "Show cursor position in the statusbar"
-#~ msgstr "Mostra la posizione del cursore nella barra di stato"
-
-#~ msgid "Show overwrite mode in the statusbar"
-#~ msgstr "Mostra la modalità sovrascrittura nella barra di stato"
-
-#~ msgid "Choose one or more e_ncodings:"
-#~ msgstr "Scegli una o più _codifiche"
-
-#~ msgid "Croatian"
-#~ msgstr "Croato"
-
-#~ msgid "Hindi"
-#~ msgstr "Hindi"
-
-#~ msgid "Farsi"
-#~ msgstr "Farsi"
-
-#~ msgid "Gujarati"
-#~ msgstr "Gujarati"
-
-#~ msgid "Gurmukhi"
-#~ msgstr "Gurmukhi"
-
-#~ msgid "Icelandic"
-#~ msgstr "Islandese"
-
-#~ msgid "Copyright (C) 2001-2002 Paolo Maggi"
-#~ msgstr "Copyright (C) 2001-2002 Paolo Maggi"
-
-#~ msgid "Paolo Maggi <maggi@athena.polito.it>"
-#~ msgstr "Paolo Maggi <maggi@athena.polito.it>"
-
-#~ msgid "Copyright (C) 2002 James Willcox"
-#~ msgstr "Copyright (C) 2002 James Willcox"
-
-#~ msgid "James Willcox <jwillcox@cs.indiana.edu>"
-#~ msgstr "James Willcox <jwillcox@cs.indiana.edu>"
-
-#~ msgid ""
-#~ "Chema Celorio <chema@celorio.com> and Paolo Maggi <maggi@athena.polito.it>"
-#~ msgstr ""
-#~ "Chema Celorio <chema@celorio.com> e Paolo Maggi <maggi@athena.polito.it>"
-
-#~ msgid ""
-#~ "Copyright (C) 2000 - 2001 Chema Celorio\n"
-#~ "Copyright (C) 2002 Paolo Maggi"
-#~ msgstr ""
-#~ "Copyright (C) 2000 - 2001 Chema Celorio\n"
-#~ "Copyright (C) 2002 Paolo Maggi"
-
-#~ msgid "Copyright (C) 2002 Paolo Maggi"
-#~ msgstr "Copyright (C) 2002 Paolo Maggi"
-
-#~ msgid "Paolo Maggi <paolo.maggi@polito.it>"
-#~ msgstr "Paolo Maggi <paolo.maggi@polito.it>"
-
-#~ msgid "Copyright (C) 2002 - Paolo Maggi"
-#~ msgstr "Copyright (C) 2002 - Paolo Maggi"
-
-#~ msgid ""
-#~ "Paolo Maggi <maggi@athena.polito.it> and Lee Mallabone <gnome@fonicmonkey."
-#~ "net>"
-#~ msgstr ""
-#~ "Paolo Maggi <maggi@athena.polito.it> e Lee Mallabone <gnome@fonicmonkey."
-#~ "net>"
-
-#~ msgid ""
-#~ "Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> "
-#~ "and Paolo Maggi <maggi@athena.polito.it>"
-#~ msgstr ""
-#~ "Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> "
-#~ "e Paolo Maggi <maggi@athena.polito.it>"
-
-#~ msgid ""
-#~ "Copyright (C) 2001 Carlo Borreo\n"
-#~ "Copyright (C) 2002 Lee Mallabone and Paolo Maggi"
-#~ msgstr ""
-#~ "Copyright (C) 2001 Carlo Borreo\n"
-#~ "Copyright (C) 2002 Lee Mallabone e Paolo Maggi"
-
-#~ msgid ""
-#~ "If you wish to insert any of the characters in to the active \n"
-#~ "document, select the character and click the \"Insert Char\" \n"
-#~ "button or double click the character in the table."
-#~ msgstr ""
-#~ "Se si desidera inserire un carattere nel documento attivo, \n"
-#~ "selezionare il carattere e premere il tasto «Inserisci carattere» \n"
-#~ "o fare doppio clic sul carattere nella tabella."
-
-#~ msgid "gedit: ASCII table"
-#~ msgstr "gedit: tabella ASCII"
-
-#~ msgid "Compare two files..."
-#~ msgstr "Confronta due file..."
-
-#, fuzzy
-#~ msgid "Insert Shell _Output"
-#~ msgstr "Plugin Email per gEdit"
-
-#, fuzzy
-#~ msgid "Shell output"
-#~ msgstr "Plugin Email per gEdit"
-
-#, fuzzy
-#~ msgid ""
-#~ "Execute a program and insert its output in the current document at the "
-#~ "current cursor position"
-#~ msgstr "Stampa il file corrente"
-
-#, fuzzy
-#~ msgid "_Goto line"
-#~ msgstr "Vai alla ri_ga"
-
-#, fuzzy
-#~ msgid "Toolbar"
-#~ msgstr "Barra deglistrumenti"
-
-#, fuzzy
-#~ msgid "Status bar"
-#~ msgstr "Barra di stato"
-
-#~ msgid "MDI"
-#~ msgstr "MDI"
-
-#~ msgid "User interface"
-#~ msgstr "Interfaccia utente"
-
-#, fuzzy
-#~ msgid "Bottom"
-#~ msgstr "_Basso"
-
-#~ msgid "Colors"
-#~ msgstr "Colori"
-
-#, fuzzy
-#~ msgid "Left"
-#~ msgstr "_Sinistra"
-
-#~ msgid "Modal"
-#~ msgstr "Modale"
-
-#~ msgid "Notebook"
-#~ msgstr "Notebook"
-
-#, fuzzy
-#~ msgid "Right"
-#~ msgstr "Dest_ra"
-
-#, fuzzy
-#~ msgid "Sho_w tooltips"
-#~ msgstr "Mostra _Suggerimenti"
-
-#, fuzzy
-#~ msgid "Show cursor _position"
-#~ msgstr "Inizia ricerca dal cursore"
-
-#, fuzzy
-#~ msgid "_MDI Mode:"
-#~ msgstr "Modalità  MDI"
-
-#, fuzzy
-#~ msgid "_Show status bar"
-#~ msgstr "Mostra barra di stato"
-
-#, fuzzy
-#~ msgid "_Show toolbar"
-#~ msgstr "Mostra _testo sulla barra degli strumenti"
-
-#~ msgid "Case sensi_tive"
-#~ msgstr "_Maiuscole/minuscole"
-
-#~ msgid "Search fro_m the beginning of the document"
-#~ msgstr "Inizia ricerca dall'_inizio del documento"
-
-#~ msgid "Search from the c_ursor position"
-#~ msgstr "Inizia ricerca dalla posizione del c_ursore"
-
-#~ msgid "Not yet implemented."
-#~ msgstr "Ancora da implementare"
-
-#, fuzzy
-#~ msgid "The string \"%s\" has not been found."
-#~ msgstr "La string «%s» non è stata trovata."
-
-#~ msgid "Impossible to update gedit settings."
-#~ msgstr "Impossibile aggiornare le preferenze di gedit"
-
-#, fuzzy
-#~ msgid "Do_n't replace"
-#~ msgstr "_Non sostituire"
-
-#, fuzzy
-#~ msgid "Error, impossible to save settings of the plugin '%s'"
-#~ msgstr "Impossibile aggiornare le preferenze di gedit"
-
-#~ msgid "gedit - Print Document"
-#~ msgstr "gedit - Stampa documento"
-
-#, fuzzy
-#~ msgid "Open %s"
-#~ msgstr "Apri un file"
-
-#~ msgid "About..."
-#~ msgstr "Informazioni su..."
-
-#, fuzzy
-#~ msgid "Clos_e All"
-#~ msgstr "Chiudi"
-
-#, fuzzy
-#~ msgid "Contents"
-#~ msgstr "Torna a originale"
-
-#, fuzzy
-#~ msgid "Goto _Line"
-#~ msgstr "Vai alla riga"
-
-#, fuzzy
-#~ msgid "Plugin _Manager"
-#~ msgstr "_Plugins"
-
-#, fuzzy
-#~ msgid "Plugin _Manager..."
-#~ msgstr "Gestore dei _Plugin..."
-
-#, fuzzy
-#~ msgid "Sa_ve All"
-#~ msgstr "Salva"
-
-#, fuzzy
-#~ msgid "Show _Tooltips"
-#~ msgstr "Mostra _Suggerimenti"
-
-#, fuzzy
-#~ msgid "level(s)"
-#~ msgstr "Toplevel"
-
-#~ msgid "_Plugin Manager"
-#~ msgstr "Gestore dei _Plugin"
-
-#~ msgid "Invalid UTF-8 data encountered reading file"
-#~ msgstr "Il file contiene dati UTF-8 non validi"
-
-#, fuzzy
-#~ msgid "Loaded file %s"
-#~ msgstr "File %s caricato"
-
-#, fuzzy
-#~ msgid "Clear"
-#~ msgstr "Chiudi"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Esci"
-
-#~ msgid "Exit"
-#~ msgstr "Esci"
-
-#, fuzzy
-#~ msgid "Open from _URI..."
-#~ msgstr "Apri file..."
-
-#, fuzzy
-#~ msgid "Revert to saved"
-#~ msgstr "Elimina"
-
-#, fuzzy
-#~ msgid "Sav_e All"
-#~ msgstr "Salva"
-
-#, fuzzy
-#~ msgid "_Select all"
-#~ msgstr "Seleziona..."
-
-#, fuzzy
-#~ msgid "Save As..."
-#~ msgstr "Salva con nome..."
-
-#, fuzzy
-#~ msgid "Web browse plugin"
-#~ msgstr "Plugin Browser Web per gEdit"
-
-#, fuzzy
-#~ msgid "Untitled %i"
-#~ msgstr "Senza titolo"
-
-#, fuzzy
-#~ msgid "Document info"
-#~ msgstr "Impostazioni documento"
-
-#, fuzzy
-#~ msgid "Sort a document."
-#~ msgstr "Crea nuovo documento"
-
-#, fuzzy
-#~ msgid "gedit: Web Browse plugin"
-#~ msgstr "Plugin Browser Web per gEdit"
-
-#, fuzzy
-#~ msgid "_Converted value:"
-#~ msgstr "Torna a originale"
-
-#, fuzzy
-#~ msgid "Current column"
-#~ msgstr "Font attuale"
-
-#, fuzzy
-#~ msgid "gedit: E-mail plugin"
-#~ msgstr "Plugin Email per gEdit"
-
-#, fuzzy
-#~ msgid "gedit: e-mail plugin"
-#~ msgstr "Plugin Email per gEdit"
-
-#, fuzzy
-#~ msgid "Case Sensitive"
-#~ msgstr "Maiuscole/minuscole"
-
-#, fuzzy
-#~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
-#~ msgstr "(C) 1998, 1999 Alex Roberts e Evan Lawrence"
-
-#, fuzzy
-#~ msgid "Search string not found"
-#~ msgstr "Ricerca una stringa"
-
-#~ msgid "Appearance"
-#~ msgstr "Apparenza"
-
-#, fuzzy
-#~ msgid "Documents"
-#~ msgstr "Documento"
-
-#~ msgid "Editor Behavior"
-#~ msgstr "Comportamento editor"
-
-#, fuzzy
-#~ msgid "Orientation"
-#~ msgstr "Stampa"
-
-#, fuzzy
-#~ msgid "Paper"
-#~ msgstr "Incolla"
-
-#, fuzzy
-#~ msgid "Printing"
-#~ msgstr "Stampa"
-
-#, fuzzy
-#~ msgid "Set toolbar to _icons only"
-#~ msgstr "Mostra _icone sulla barra degli strumenti"
-
-#, fuzzy
-#~ msgid "Set toolbar to icons with _text"
-#~ msgstr "Mostra _icone sulla barra degli strumenti"
-
-#, fuzzy
-#~ msgid "Tab _width: "
-#~ msgstr "Sostituisci con:"
-
-#, fuzzy
-#~ msgid "``%s'' has been modified.  Do you want to save the changes?"
-#~ msgstr " '%s' è stato modificato. Vuoi salvarlo?"
-
-#, fuzzy
-#~ msgid "Error in the pipe."
-#~ msgstr "Errore salvataggio file!"
-
-#~ msgid "Error saving file!"
-#~ msgstr "Errore salvataggio file!"
-
-#, fuzzy
-#~ msgid ""
-#~ "Are you sure you want to revert all changes?\n"
-#~ "(%s)"
-#~ msgstr "Sicuro di voler eliminare tutte le modifiche fatte?"
-
-#~ msgid "Open (swap) .c/.h file"
-#~ msgstr "Apri (swap) file .c/.h"
-
-#~ msgid "Add a new view of the document"
-#~ msgstr "Aggiungi nuova vista documento"
-
-#~ msgid "_Remove View"
-#~ msgstr "_Rimuovi vista"
-
-#, fuzzy
-#~ msgid "Manage available plugin modules"
-#~ msgstr "Usa Plugins"
-
-#, fuzzy
-#~ msgid "Printing .."
-#~ msgstr "Stampa"
-
-#, fuzzy
-#~ msgid "_File/"
-#~ msgstr "Archivio"
-
-#, fuzzy
-#~ msgid "You can't remove the last view of a document."
-#~ msgstr "Rimuovi vista documento"
-
-#, fuzzy
-#~ msgid "< Remove"
-#~ msgstr "_Rimuovi vista"
-
-#~ msgid "With special thanks to:"
-#~ msgstr "Un grazie particolare a:"
-
-#~ msgid "(C) 1998, 1999 Alex Roberts and Evan Lawrence"
-#~ msgstr "(C) 1998, 1999 Alex Roberts e Evan Lawrence"
-
-#, fuzzy
-#~ msgid "gedit is a small and lightweight text editor for GNOME/Gtk+"
-#~ msgstr "gEdit è un editor di testo piccolo e leggero per GNOME/Gtk+"
-
-#, fuzzy
-#~ msgid "beginning of document"
-#~ msgstr "Inizia ricerca dall'inizio del documento"
-
-#, fuzzy
-#~ msgid "Find _In Files..."
-#~ msgstr "Trova _Linea"
-
-#~ msgid "Put the document tabs at the top"
-#~ msgstr "Linguette documento in alto"
-
-#~ msgid "Put the document tabs at the bottom"
-#~ msgstr "Linguette documento sul fondo"
-
-#~ msgid "Put the document tabs on the right"
-#~ msgstr "Linguette documento a destra"
-
-#, fuzzy
-#~ msgid "Toggle the presence of the document tabs"
-#~ msgstr "Modifica posizione linguette documenti"
-
-#, fuzzy
-#~ msgid "Get the current and total lines"
-#~ msgstr "Stampa il file corrente"
-
-#, fuzzy
-#~ msgid ""
-#~ "Filename: %s\n"
-#~ "\n"
-#~ "Total Lines: %i\n"
-#~ "Current Line: %i"
-#~ msgstr ""
-#~ "Righe Totali: %i\n"
-#~ "Riga Attuale: %i"
-
-#~ msgid "Replace?"
-#~ msgstr "Sostituire?"
-
-#~ msgid "Search for:"
-#~ msgstr "Cerca la parola:"
-
-#, fuzzy
-#~ msgid "Replace with:"
-#~ msgstr "Sostituisci con:"
-
-#~ msgid "Ask before replacing"
-#~ msgstr "Chiedi prima di sostituire"
-
-#, fuzzy
-#~ msgid "Search from: "
-#~ msgstr "Cerca la parola:"
-
-#~ msgid "Read only file!"
-#~ msgstr "File a sola lettura!"
-
-#~ msgid "Document Unchanged..."
-#~ msgstr "Documento non modificato..."
-
-#, fuzzy
-#~ msgid "Can't open file!"
-#~ msgstr "File a sola lettura!"
-
-#~ msgid "Search for a line"
-#~ msgstr "Ricerca una linea"
-
-#~ msgid "Window Size"
-#~ msgstr "Dimensione finestra"
-
-#~ msgid "Current Width:"
-#~ msgstr "Larghezza attuale"
-
-#~ msgid "Startup Width:"
-#~ msgstr "Larghezza iniziale"
-
-#~ msgid "Use Current"
-#~ msgstr "Usa attuale"
-
-#~ msgid "Current Height:"
-#~ msgstr "Altezza attuale"
-
-#~ msgid "Startup Height:"
-#~ msgstr "Altezza iniziale"
-
-#~ msgid "_Wordwrap"
-#~ msgstr "S_illabazione automatica"
-
-#~ msgid "_Linewrap"
-#~ msgstr "A _Capo Automatico"
-
-#~ msgid "_Splitscreen"
-#~ msgstr "Dividi _schermo"
-
-#~ msgid "Toggle Readonly"
-#~ msgstr "(Dis)Attiva Sola Lettura"
-
-#~ msgid ""
-#~ "Enter print command below\n"
-#~ "Remember to include '%s'"
-#~ msgstr ""
-#~ "Inserire comando di stampa\n"
-#~ "Ricordare di includere '%s'"
-
-#~ msgid "Print anyway"
-#~ msgstr "Stampa comunque"
-
-#~ msgid "Launch a plugin at startup"
-#~ msgstr "Esegui un plugin all'avvio"
-
-#~ msgid "PLUGIN-NAME"
-#~ msgstr "NOME PLUGIN"
-
-#~ msgid "Toggle Split Screen"
-#~ msgstr "(Dis)Attiva divisione schermo"
-
-#~ msgid "Docid is %ld.\n"
-#~ msgstr "ID Documento: %ld.\n"
-
-#~ msgid "Shell"
-#~ msgstr "Shell"
-
-#~ msgid "Column:\t0"
-#~ msgstr "Colonna:\t0"
-
-#~ msgid "Don't have a scrollbar"
-#~ msgstr "Non usare barra di scroll"
-
-#~ msgid "_Always"
-#~ msgstr "_Sempre"
-
-#~ msgid "Always have the scrollbar"
-#~ msgstr "Usa sempre barra di scroll"
-
-#~ msgid "_Automatic"
-#~ msgstr "_Automatico"
-
-#~ msgid "Only have scrollbar when it's needed"
-#~ msgstr "Barra di scroll solo se necessaria"
-
-#~ msgid "Toggle autoindent"
-#~ msgstr "(Dis)Attiva autoindentazione"
-
-#~ msgid "Toggle statusbar"
-#~ msgstr "(Dis)Attiva barra di stato"
-
-#~ msgid "Toggle Wordwrap"
-#~ msgstr "(Dis)Attiva sillabazione"
-
-#~ msgid "Toggle Linewrap"
-#~ msgstr "(Dis)Attiva a capo automatico"
-
-#~ msgid "_Scrollbar"
-#~ msgstr "Barra di _Scrolling"
