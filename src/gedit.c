@@ -243,7 +243,7 @@ int main (int argc, char **argv)
 	/*plugin_query_all (&pl_callbacks);*/
 	/*custom_plugin_query_all ( "/usr/gnome/libexec/plugins", &pl_callbacks);*/
 	/*custom_plugin_query ( "/usr/gnome/libexec", "print-plugin", &pl_callbacks);*/
-	plugin_load_list();
+	plugin_load_list("gEdit");
       
 #ifdef WITH_GMODULE_PLUGINS
 	gE_Plugin_Query_All ();

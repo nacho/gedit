@@ -51,6 +51,8 @@ typedef struct _gE_prefs_data {
 	/* FIXME: Fix it! Damn you! */
 	GtkWidget *plugin_list;
 	GtkWidget *scroll_window;
+	GtkWidget *plugins_toggle;
+	gE_data *gData;
 	
 	/* Toolbar Settings */
 	/* Hmm, dunno... */
@@ -107,7 +109,7 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
   FILE *file;
   gchar *rc;
 
-  
+
   /* General Settings */
   data->window->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
   data->window->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
@@ -146,6 +148,8 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 
 void get_prefs(gE_data *data)
 {
+  gint uP;
+  
   gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), data->window->print_cmd);
   gtk_entry_set_text (GTK_ENTRY (prefs->font), data->window->font);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->autoindent), 
@@ -154,6 +158,12 @@ void get_prefs(gE_data *data)
   					   data->window->show_status);
   gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
   					   data->window->splitscreen);
+  					   
+ 
+   if (!GTK_TOGGLE_BUTTON(prefs->plugins_toggle)->active)
+     gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), FALSE);
+   else
+     gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), TRUE);
 }
 
 /* General UI Stuff.. */
@@ -410,10 +420,20 @@ static void plugins_clist_add (GtkWidget *w, gpointer data)
 
 static void plugins_clist_remove (GtkWidget *w, gpointer data)
 {
-  int i;
+  int i, i2;
   plugin_list_data *plugins_data;
+  gchar *path;
 
 	/* FIXME: Needs to actually unload the plugin itself.. */
+
+  	/* Try removing plugin from Gnome Menu.. */
+  	path = g_new(gchar, strlen(_("_Plugins")) + 2);
+  	sprintf(path, "%s/", _("_Plugins"));
+  	
+  	i  = (g_list_length (plugin_list)) - (GTK_CLIST(data)->focus_row);
+  	
+  	gnome_app_remove_menu_range (GNOME_APP (prefs->gData->window->window),
+  						path, i, 1);
 
   	for (i = 0; i < GTK_CLIST(data)->focus_row; i++);
   	   
@@ -422,7 +442,7 @@ static void plugins_clist_remove (GtkWidget *w, gpointer data)
   	   plugin_list = g_list_remove (plugin_list, plugins_data);
   	
   	gtk_clist_remove (GTK_CLIST (data), GTK_CLIST (data)->focus_row);
-
+  	plugin_save_list ();
 }
 
 static void plugins_clist_click_column (GtkCList *clist, gint column, gpointer data)
@@ -442,6 +462,54 @@ static void plugins_clist_click_column (GtkCList *clist, gint column, gpointer d
   gtk_clist_sort (clist);
 }
 
+static void plugins_toggle (GtkWidget *w)
+{
+  gchar *plug[2];	/* Temporary plugins data */
+  gchar *path;
+  gint i;
+  plugin_list_data *plugins_data;
+
+  /* Plugins Settings.. (Use Plugins) */
+  if (!GTK_TOGGLE_BUTTON(prefs->plugins_toggle)->active)
+    {
+     	/*
+     	g_print ("Hrmm.. you dont seemto want to use plugins.. Thats not nice!\n");*/
+     	gnome_config_set_int ("/Editor_Plugins/Use/gEdit", -1);
+     	gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), FALSE);
+     	
+     	  	/* Try removing plugin from Gnome Menu.. */
+  	path = g_new(gchar, strlen(_("_Plugins")) + 2);
+  	sprintf(path, "%s/", _("_Plugins"));
+  	
+  	gnome_app_remove_menu_range (GNOME_APP (prefs->gData->window->window),
+  						path, 1, g_list_length (plugin_list));
+     	
+    }
+  else
+    {
+     	gnome_config_set_int ("/Editor_Plugins/Use/gEdit", 1);
+     	gtk_widget_set_sensitive (GTK_WIDGET (prefs->plugin_list), TRUE);
+     	/*gtk_clist_clear (GTK_CLIST (prefs->plugin_list));*/
+     	
+     	/*for (i = 0; i < g_list_length (plugin_list); i++);
+  	   {
+  	    g_print ("bink %d",i);
+  	    plugins_data = g_list_nth_data (plugin_list, i);
+  	   
+  	    plugin_list = g_list_remove (plugin_list, plugins_data);
+ 	   }*/
+ 	   /*g_list_free (plugin_list);
+ 	   plugin_list = g_list_alloc();
+ 	   */
+ 	   plugin_list = NULL;
+ 	   
+ 	plugin_load_list("gEdit");
+ 	
+  		
+    }
+
+}
+
 static GtkWidget *plugins_page_new()
 {
   GtkWidget *main_vbox, *vbox, *hbox, *frame, *box;
@@ -450,7 +518,7 @@ static GtkWidget *plugins_page_new()
   gchar clist_plugins_data [5][80];
   gchar *clist_plugins [2];
   plugin_list_data *plugins_data;
-  int i;
+  int i, uP;
   
   static char *titles[] =
   {
@@ -461,7 +529,7 @@ static GtkWidget *plugins_page_new()
   gtk_container_border_width (GTK_CONTAINER (main_vbox), 4);
   gtk_widget_show (main_vbox);
   
-  frame = gtk_frame_new (_("Available Plugins"));
+  frame = gtk_frame_new (_("Plugins"));
   gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
   gtk_widget_show (frame);
   
@@ -474,10 +542,30 @@ static GtkWidget *plugins_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
   gtk_widget_show(hbox);
   
+
+  prefs->plugins_toggle = gtk_check_button_new_with_label ("Use Plugins");
+   uP = gnome_config_get_int ("/Editor_Plugins/Use/gEdit");
+  if (uP == -1)
+    uP = 0;
+    
+  gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->plugins_toggle),
+  					   uP);
+  gtk_signal_connect (GTK_OBJECT (prefs->plugins_toggle), "clicked",
+		      GTK_SIGNAL_FUNC (plugins_toggle), NULL);
+  
+  gtk_box_pack_start (GTK_BOX(hbox), prefs->plugins_toggle, FALSE, TRUE, 0);
+  gtk_widget_show (prefs->plugins_toggle);
+
 #ifdef ENABLE_NLS
   titles[0]=_(titles[0]);
   titles[1]=_(titles[1]);
 #endif
+  
+  
+  hbox = gtk_hbox_new(FALSE, 0);
+  gtk_container_border_width(GTK_CONTAINER(hbox), 10);
+  gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+  gtk_widget_show(hbox);
   
   prefs->plugin_list = gtk_clist_new_with_titles (2, titles);
   gtk_widget_show (prefs->plugin_list);
@@ -499,8 +587,7 @@ static GtkWidget *plugins_page_new()
   gtk_clist_set_column_auto_resize (GTK_CLIST (prefs->plugin_list), 0, TRUE);
   gtk_clist_set_column_auto_resize (GTK_CLIST (prefs->plugin_list), 1, TRUE);
   
-  
-  for (i = 0; i < g_list_length (plugin_list); i++)
+   for (i = 0; i < g_list_length (plugin_list) ; i++) 
      {
        plugins_data = g_list_nth_data (plugin_list, i);
        
@@ -561,7 +648,7 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
 
    prefs->pbox = (GNOME_PROPERTY_BOX (gnome_property_box_new ()));
-
+   prefs->gData = data;
   
 
   gtk_signal_connect (GTK_OBJECT (prefs->pbox), "destroy",
@@ -618,7 +705,8 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 
   gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
 		      GTK_SIGNAL_FUNC (properties_modified), prefs->pbox);
-  		      
+  
+  
   gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
                                     
 }

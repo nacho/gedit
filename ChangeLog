@@ -1,3 +1,28 @@
+1999-02-27 (15:49) Alex Roberts  <bse@dial.pipex.com>
+
+	* Eek.. so much i have done.. Here's a summary:
+	 
+	 * gE_prefs_box.c: Implemented 'No Plugins' toggle button, this erases
+	   all plugins from the "Plugins" menu, and sets a config flag for 
+	   using plugins to -1 and the Clist is deactived.
+	   When the toggle button is activated the linked
+	   list of plugins is reset and reloaded; The config flag is then set to
+	   1 and the Clist becomes active once again.
+	   When a plugin is added, the list of plugins is saved (incase gEdit is
+	   nuked).
+	   The toggle button isn't attached to the Apply preferences button, as
+	   weird stuff happens to the list and more plugins are added!
+	 
+	 * plugin.c: Checks for the -1 flag, if it IS -1 then the list of plugins
+	   is loaded, but no plugins are actually initialised and so the "Plugins"
+	   menu doesn't get populated.
+	   Commented out some g_free()'s, seems the variables partly and 
+	   partly->buff arent being malloc'ed properly, and so causing gEdit to
+	   segfault!
+	 
+	 * gE_about.c: Commented out the "#ifdef ENABLE_NLS", it seems to make 
+	   gEdit stop responding and not display the About box.
+
 1999-02-27 (12:22) Alex Roberts  <bse@dial.pipex.com>
 
 	* commands.c: gtk_editable_cut_clipboard doesnt need GTK_CURRENT_TIME

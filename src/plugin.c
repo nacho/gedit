@@ -688,16 +688,22 @@ static void plugin_get_more( gpointer data, gint source, GdkInputCondition condi
   if( partly->length - partly->sofar == 0 )
     {
       gdk_input_remove( partly->incall );
-      if( partly->finished )
-	partly->finished( partly->plug, partly->buff, partly->length, partly->data );
-      g_free( partly->buff );
-      g_free( partly );
+      if ( partly->finished )
+        {
+	 partly->finished( partly->plug, partly->buff, partly->length, partly->data );
+/*      if (partly->buff)
+        g_free( partly->buff );
+      if (partly)
+        g_free( partly );*/
+        }
     }
   else if( count == 0 )
     {
       gdk_input_remove( partly->incall );
-      g_free( partly->buff );
-      g_free( partly );
+/*      if (partly->buff)
+        g_free( partly->buff );
+      if (partly)
+        g_free( partly );*/
     }
 }
 
@@ -727,14 +733,18 @@ plugin_send_more( gpointer data, gint source, GdkInputCondition condition )
       gdk_input_remove( partly->incall );
       if( partly->finished )
 	partly->finished( partly->plug, partly->buff, partly->length, partly->data );
-      g_free( partly->buff );
-      g_free( partly );
+/*      if (partly->buff)
+        g_free( partly->buff );
+      if (partly)
+        g_free( partly );*/
     }
   else if( count == -1 )
     {
       gdk_input_remove( partly->incall );
-      g_free( partly->buff );
-      g_free( partly );
+/*      if (partly->buff)
+        g_free( partly->buff );
+      if (partly)
+        g_free( partly );*/
     }
 }
 
@@ -1106,39 +1116,74 @@ process_command( plugin *plug, gchar *buffer, int length, gpointer data )
 }
 
 /* New Gnome Config interface for Plugins.. */
-void plugin_load_list ()
+void plugin_load_list (gchar *app)
 {
   char *value;
   char *location;
   char *c, c2[20];
   plugin_list_data *pl_list;
-  int i, i2;
+  int i, i2, i3;
   
   gnome_config_push_prefix ("/Editor_Plugins/Use/");
+  
+  i3 = gnome_config_get_int (app);
+/*  g_print ("/Editor_Plugins/Use/%s = %d\n", app, i3);*/
+  
   i = gnome_config_get_int ("Use");
-  if (!i)
+  if (!i && !i3)
     {
       g_print ("plugins_load_list: No Plugins list found..\nUsing defaults..\n");
       plugin_query_all ( &pl_callbacks);
       
       plugin_save_list ();	/* Save the list of plugins now, in case the editor dies
       					   and the list doesn't get saved... */
+      gnome_config_set_int (app, 1);
+      
       return;
     }
-  
-  for (i2 = 0; i2 < i; i2++)
-     {
-       sprintf (c2, "%d_name", i2);
-       c = g_strdup (c2);
-       value = g_strdup (gnome_config_get_string (c));
+    
+  if (i3 == 1)
+    {
+     for (i2 = 0; i2 < i; i2++)
+        {
+         sprintf (c2, "%d_name", i2);
+         c = g_strdup (c2);
+         value = g_strdup (gnome_config_get_string (c));
 
-       sprintf (c2, "%d_location", i2);
-       c = g_strdup (c2);
-       location = g_strdup (gnome_config_get_string (c));
+         sprintf (c2, "%d_location", i2);
+         c = g_strdup (c2);
+         location = g_strdup (gnome_config_get_string (c));
        
-       custom_plugin_query (location, value, &pl_callbacks);
+         custom_plugin_query (location, value, &pl_callbacks);
+        }
      }
+     
+   if (i3 == -1)
+     {
+      	/* FIXME: Add plugins to clist.. but dont load them into the menu */
+      for (i2 = 0; i2 < i; i2++)
+         {
+          sprintf (c2, "%d_name", i2);
+          c = g_strdup (c2);
+          value = g_strdup (gnome_config_get_string (c));
 
+          sprintf (c2, "%d_location", i2);
+          c = g_strdup (c2);
+          location = g_strdup (gnome_config_get_string (c));
+       
+		if ((pl_list = g_malloc0 (sizeof (plugin_list_data))) == NULL)
+	  	  {
+	    	   g_print ("custom_plugin_query: Memory Allocation Error.\n");
+	    	   return;
+	  	  }	
+	  
+          	pl_list->name = g_strdup (value);
+		pl_list->location = g_strdup (location);
+		plugin_list = g_list_append (plugin_list, pl_list);
+         }
+     }
+   
+   
   gnome_config_pop_prefix ();
   gnome_config_sync ();
 }

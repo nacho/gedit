@@ -151,6 +151,6 @@ void plugin_get( plugin *, gchar *, gint length );
 void plugin_get_all( plugin *, gint length, plugin_callback *finished, gpointer data );
 void plugin_register( plugin *, plugin_callback_struct *, gint context );
 
-void plugin_load_list ();
+void plugin_load_list (gchar *app);
 void plugin_save_list ();
 #endif

@@ -38,14 +38,14 @@ void gE_about_box(GtkWidget *w, gpointer cbdata)
 		N_("       Martin Baulig"),
 		NULL
 	};
-
+/*
 #ifdef ENABLE_NLS
     {
 	    int i=0;
 	    while (authors[i] != NULL) authors[i]=_(authors[i]);
     }
 #endif
-
+*/
 	about = gnome_about_new ("gEdit", VERSION,
 			_("(C) 1998, 1999 Alex Roberts and Evan Lawrence"),
 			authors,
