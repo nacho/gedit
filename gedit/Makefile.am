@@ -7,19 +7,14 @@ INCLUDES =							\
 	-I$(top_srcdir)						\
 	-I$(srcdir)						\
 	$(GEDIT_CFLAGS)						\
+	$(WARN_CFLAGS)						\
+	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DDATADIR=\""$(datadir)"\"				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"		\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\"		\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
-
-if MAINTAINER_MODE
-INCLUDES +=							\
-	-DG_DISABLE_DEPRECATED					\
-	-DGDK_DISABLE_DEPRECATED				\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED
-endif
 
 noinst_LTLIBRARIES = libgedit.la
 

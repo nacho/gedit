@@ -4,15 +4,10 @@ INCLUDES = 							\
 	-I$(top_srcdir)						\
 	-I$(top_srcdir)/gedit 					\
 	$(GEDIT_CFLAGS) 					\
+	$(WARN_CFLAGS)						\
+	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	
-
-if MAINTAINER_MODE
-INCLUDES += 							\
-	-DG_DISABLE_DEPRECATED					\
-	-DGDK_DISABLE_DEPRECATED				\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED		
-endif
 
 noinst_LTLIBRARIES = libdialogs.la
 
