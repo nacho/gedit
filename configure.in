@@ -26,7 +26,7 @@ dnl Gettext stuff.
 dnl ================================================================
 GETTEXT_PACKAGE=gedit-2.0
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE")
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
 ALL_LINGUAS="ar be bg az ca cs da de el es et eu fi fr ga gl hi hu it ja ko lt lv ms nl nn no pl pt pt_BR ro ru sv sk sl ta tr uk vi wa zh_TW zh_CN"
 AM_GLIB_GNU_GETTEXT
 
@@ -54,10 +54,10 @@ fi
 AC_CHECK_LIB(aspell,main,
 	     AC_CHECK_LIB(pspell_aspell,main,
              PSPELL_LIBS="$PSPELL_LIBS -lpspell_aspell -laspell"
-             AC_DEFINE(HAVE_ASPELL_MODULE),,-laspell $PSPELL_LIBS),,)
+             AC_DEFINE(HAVE_ASPELL_MODULE,,[Use aspell]),,-laspell $PSPELL_LIBS),,)
 AC_CHECK_LIB(pspell_ispell,main,
              PSPELL_LIBS="$PSPELL_LIBS -lpspell_ispell"
-             AC_DEFINE(HAVE_ISPELL_MODULE),,$PSPELL_LIBS)
+             AC_DEFINE(HAVE_ISPELL_MODULE,,[Use ispell]),,$PSPELL_LIBS)
 
 AC_SUBST(PSPELL_LIBS)
 AC_SUBST(CFLAGS)
@@ -102,26 +102,26 @@ gedit. You can download the latest version from ftp://people.redhat.com/sopwith/
 dnl ================================================================
 dnl GEDIT_DATA_DIR - Sets the location of the data directory, where we install
 dnl source files added to projects (such as all the Gnome m4 macros).
-dnl This will substitute GEDIT_DATA_DIR in config.h (from acconfig.h).
+dnl This will substitute GEDIT_DATA_DIR in config.h.
 dnl ================================================================
 if test "x${datadir}" = 'x${prefix}/share'; then
   if test "x${prefix}" = "xNONE"; then
-    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${ac_default_prefix}/share/${PACKAGE}")
+    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${ac_default_prefix}/share/${PACKAGE}", [Directory of data files])
   else
-    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${prefix}/share/${PACKAGE}")
+    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${prefix}/share/${PACKAGE}", [Directory of data files])
   fi
 else
-  AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${datadir}/${PACKAGE}")
+  AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${datadir}/${PACKAGE}", [Directory of data files])
 fi
 
 dnl ================================================================
 dnl PIXMAPS 
 dnl ================================================================
 if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
+  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [Directory of pixmaps])
   pixmapsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
 else
-  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
+  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [Directory of pixmaps])
   pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
 fi
 
