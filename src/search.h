@@ -28,6 +28,7 @@ extern void search_cb(GtkWidget *w, gpointer cbdata);
 extern void search_replace_cb(GtkWidget *w, gpointer cbdata);
 extern void search_again_cb(GtkWidget *w, gpointer cbdata);
 extern void goto_line_cb(GtkWidget *w, gpointer cbwindow);
+extern void count_lines_cb (GtkWidget *w, gpointer cbwindow);
 
 #ifdef __cplusplus
 }

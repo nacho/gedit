@@ -1,3 +1,17 @@
+1998-12-10  Evan Lawrence <evan@worldpath.net>
+
+	* src/search.c:
+	  src/search.h:
+	  src/gE_document.c: Added the function count_lines_cb, and
+	  changed it so the line button on the status bar calls it instead
+	  of goto_line_cb. count_lines_cb displays the number of lines in
+	  the current document, and the current line number the cursor
+	  is on.
+
+	* src/menus.c: Added "Search for Line..." to the Search menu, and
+	  added the _'s to main items on the menu bar to allow for keyboard
+	  navigation. _This will probably break some internationalization_
+
 1998-12-07  Evan Lawrence <evan@worldpath.net>
 
 	* src/gE_files.c:

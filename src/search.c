@@ -108,6 +108,51 @@ goto_line_cb(GtkWidget *wgt, gpointer cbwindow)
 } /* goto_line_cb */
 
 
+
+/*
+ * PUBLIC: count_lines_cb
+ *
+ * public callback routine to count the total number of lines in the current
+ * document and the current line number, and display the info in a dialog.
+ */
+
+void count_lines_cb (GtkWidget *widget, gpointer cbwindow)
+{
+	gint total_lines, line_number, i;
+	gchar *msg, *c;
+	gchar *buttons[] = { GE_BUTTON_OK };
+	
+	gE_document *doc;
+	gE_window *w =  (gE_window *) cbwindow;
+	
+	g_assert (w != NULL);
+	doc = gE_document_current (w);
+	
+	g_assert (doc != NULL);
+	g_assert (doc->text != NULL);
+
+	total_lines = line_number = 1;
+	for (i = 1; i < gtk_text_get_length(GTK_TEXT(doc->text)) - 1; i++) {
+		c = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i - 1, i);
+		if (c == NULL)
+			break;
+		if (strcmp(c, "\n") == 0)
+		{
+			total_lines++;
+			if (i <= GTK_EDITABLE (doc->text)->current_pos)
+				line_number++;
+		}
+		g_free (c);
+	}
+	
+	msg = g_malloc0 (200);
+	sprintf (msg, "Total Lines: %i\nCurrent Line: %i", total_lines, line_number);
+	ge_dialog ("Line Information",
+		msg,
+		1, buttons,
+		1, NULL, NULL, TRUE);
+}
+
 static void
 seek_to_line(gE_document * doc, gint line_number)
 {
@@ -115,14 +160,12 @@ seek_to_line(gE_document * doc, gint line_number)
 	gchar *c;
 	gint i, total_lines = 0;
 
-	c = g_malloc0(4);
 	for (i = 0; i < gtk_text_get_length(GTK_TEXT(doc->text)); i++) {
 		c = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i, i + 1);
 		if (strcmp(c, "\n") == 0)
 			total_lines++;
+		g_free (c);
 	}
-
-	g_free(c);
 
 	if (total_lines < 3)
 		return;

@@ -173,7 +173,7 @@ gE_window_new(void)
 
 	tmp = gtk_button_new_with_label("Line");
 	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-		GTK_SIGNAL_FUNC(goto_line_cb), w);
+		GTK_SIGNAL_FUNC(count_lines_cb), w);
 	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
 	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 0);
 	gtk_widget_show(tmp);

@@ -22,9 +22,8 @@
 #include <config.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
-#define WITH_FOOT
-#include "xpm/foot.xpm"
 #endif
+
 #define PLUGIN_TEST 1
 #include "main.h"
 #include "commands.h"
@@ -233,15 +232,15 @@ GnomeUIInfo gedit_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_NEW,
           'N', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Open"),  NULL, file_open_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Open..."),  NULL, file_open_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN,
 	  'O', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Save"),  NULL, file_save_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE,
 	  'S', GDK_CONTROL_MASK, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Save as"),  NULL, file_save_as_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Save As..."),  NULL, file_save_as_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SAVE_AS },
-	{ GNOME_APP_UI_ITEM, N_("Print"),  NULL, file_print_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Print..."),  NULL, file_print_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PRINT },	
 	{ GNOME_APP_UI_ITEM, N_("Close"),  NULL, file_close_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
@@ -276,10 +275,12 @@ GnomeUIInfo gedit_edit_menu [] = {
 };	
 
 GnomeUIInfo gedit_search_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Search"),  NULL, search_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Search for Text..."),  NULL, search_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
-	{ GNOME_APP_UI_ITEM, N_("Search and Replace"),  NULL, search_replace_cb, (gpointer) GE_DATA, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Search for Line..."), NULL, goto_line_cb, (gpointer) GE_WINDOW, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+	{ GNOME_APP_UI_ITEM, N_("Search and Replace..."),  NULL, search_replace_cb, (gpointer) GE_DATA, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SRCHRPL },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Search Again"),  NULL, search_again_cb, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_BLANK },
@@ -369,21 +370,21 @@ GnomeUIInfo gedit_plugins_menu []= {
 #endif
 
 GnomeUIInfo gedit_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, N_("_File"), NULL, &gedit_file_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("Edit"), NULL, &gedit_edit_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, N_("_Edit"), NULL, &gedit_edit_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("Search"), NULL, &gedit_search_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, N_("_Search"), NULL, &gedit_search_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("Options"), NULL, &gedit_options_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, N_("_Options"), NULL, &gedit_options_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 #if PLUGIN_TEST
-	{ GNOME_APP_UI_SUBTREE, N_("Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, N_("_Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 #endif
-	{ GNOME_APP_UI_SUBTREE, N_("Window"), NULL, &gedit_window_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, N_("_Window"), NULL, &gedit_window_menu, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
-	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu, NULL, NULL,
+	{ GNOME_APP_UI_SUBTREE, N_("_Help"), NULL, &gedit_help_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 	GNOMEUIINFO_END
 };
