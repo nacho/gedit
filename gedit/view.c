@@ -73,6 +73,18 @@ static void gedit_view_set_line_wrap (View *view, gint line_wrap);
        void gedit_view_refresh (View *view);
 
 
+
+View *
+gedit_view_current (void)
+{
+	View *current_view = NULL;
+
+	if (mdi->active_view)
+		current_view = VIEW (mdi->active_view);
+ 
+	return current_view;
+}
+
 void
 view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
@@ -215,7 +227,7 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	text_to_insert = g_new0 (guchar, length+1);
 	strncpy (text_to_insert, insertion_text, length);
 
-	gedit_undo_add (text_to_insert, position, (position + length), INSERT, doc, view);
+	gedit_undo_add (text_to_insert, position, (position + length), GEDIT_UNDO_INSERT, doc, view);
 	views_insert (doc, position, text_to_insert, length, view);
 
 	g_free (text_to_insert);
@@ -266,7 +278,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	
 	doc = view->document;
 	buffer = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
-	gedit_undo_add (buffer, start_pos, end_pos, DELETE, doc, view);
+	gedit_undo_add (buffer, start_pos, end_pos, GEDIT_UNDO_DELETE, doc, view);
 	g_free (buffer);
 
 #ifdef ENABLE_SPLIT_SCREEN	

@@ -84,6 +84,9 @@ struct _ViewClass
 };
 
 
+/* THIS files are a mess, needs some cleaning ...*/
+View * gedit_view_current (void);
+
 /* General utils */
 guint	   gedit_view_get_type 		(void);
 GtkWidget* gedit_view_new 		(Document *doc);

@@ -1,3 +1,34 @@
+2000-06-02  Chema Celorio  <chema@celorio.com>
+
+	* undo.c (gedit_undo_merge): New function. Merges
+	a previous undo item with the new data. We now undo
+	words and not chars. This also saves memory because
+	of less gedit_undo struct's used.
+	(gedit_undo_free_list): new function. Plugs a memleak
+	(gedit_undo_add): verify if the data can be merged
+	and call gedit_free_list
+
+	* utils.h (gedit_debug): add newline to the undo macros,
+	we have to delete the newline from all the other files.
+
+	* undo.h (GEDIT_UNDO_DELETE): use unique enum's
+	and not DELETE & INSERT
+
+2000-06-01  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_current): new function we should use
+	this function now to add an abstraction layer for future
+	changes.
+
+	* undo.c (gedit_undo_add): plug a HUGe leak
+	(gedit_undo_do): plug another leak.
+	(gedit_undo_redo): adjust the current view, not undo->view
+	(gedit_undo_do): ditto
+
+	* undo.h (struct _gedit_undo): remove *view from _gedit_undo
+	structure, we don't need it anymore and saves memory.
+
+
 2000-06-01  Jason Leach  <leach@wam.umd.edu>
 
 	* dialogs/Makefile.am (glade_msgs): removed find-line.glade.h so

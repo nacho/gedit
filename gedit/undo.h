@@ -26,8 +26,8 @@
 #include "view.h"
 
 /* Actions */
-#define	INSERT	0
-#define	DELETE	1
+#define	GEDIT_UNDO_INSERT	0
+#define	GEDIT_UNDO_DELETE	1
 
 typedef struct _gedit_undo gedit_undo;
 
@@ -38,8 +38,8 @@ struct _gedit_undo
 	gint end_pos;
 	gint action;	/* whether the user has inserted or deleted */
 	gint status;	/* the changed status of the document used with this node */
-	View *view;
 	gfloat window_position;
+	gint mergeable;
 };
 
 extern void gedit_undo_add      (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc, View *view);

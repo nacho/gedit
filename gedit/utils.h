@@ -53,28 +53,28 @@ extern gint debug_recent;
 
 #define gedit_debug(str, section) \
     if (debug) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     else { \
     if (debug_view && section == DEBUG_VIEW) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_undo && section == DEBUG_UNDO) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_search && section == DEBUG_SEARCH) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_print && section == DEBUG_PRINT) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_prefs && section == DEBUG_PREFS) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_plugins && section == DEBUG_PLUGINS) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_file && section == DEBUG_FILE) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_document && section == DEBUG_DOCUMENT) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_commands && section == DEBUG_COMMANDS) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_recent && section == DEBUG_RECENT) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     }
 
 void gedit_set_title (Document *doc);
