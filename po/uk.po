@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version:  gEdit 0.9.4\n"
-"POT-Creation-Date: 2002-04-06 12:48+0300\n"
-"PO-Revision-Date: 2002-04-06 12:48+0200\n"
+"POT-Creation-Date: 2002-06-04 09:52+0300\n"
+"PO-Revision-Date: 2002-06-04 09:37+0200\n"
 "Last-Translator: Yuriy Syrota <yuri@renome.rovno.ua>\n"
 "Language-Team: Ukraine <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,15 +54,30 @@ msgstr "Це доповнення показує діалог, що містит
 msgid "Copyright (C) 2001-2002 Paolo Maggi"
 msgstr "Авторські права: ©  Паоло Маґґі, 2001-2002"
 
-#: plugins/cvschangelog/cvschangelog.c:235
+#: plugins/ASCII/asciitable.glade2.h:1
+msgid ""
+"If you wish to insert any of the characters in to the active \n"
+"document, select the character and click the \"Insert Char\" \n"
+"button or double click the character in the table."
+msgstr ""
+
+#: plugins/ASCII/asciitable.glade2.h:4
+msgid "Insert char"
+msgstr "Вставити символ"
+
+#: plugins/ASCII/asciitable.glade2.h:5
+msgid "gedit: ASCII table"
+msgstr "Таблиця ASCII"
+
+#: plugins/cvschangelog/cvschangelog.c:263
 msgid "CVS ChangeLog"
 msgstr "ChangeLog з CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:236
+#: plugins/cvschangelog/cvschangelog.c:264
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr "Доповнення, що відкриває ChangeLog у повідомленнях закріплення змін з CVS."
 
-#: plugins/cvschangelog/cvschangelog.c:238
+#: plugins/cvschangelog/cvschangelog.c:266
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Авторські права © 2002 - Джеймс Віллкокс"
 
@@ -152,20 +167,60 @@ msgid ""
 "Makes a diff file from two documents or files on disk.\n"
 "\n"
 "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n"
-""
 msgstr ""
 "Робить файл відмінностей між двома документами чи файлами на диску.\n"
 "\n"
 "Для докладнішої інформації про програму \"diff\" наберіть \"man diff\" в командному рядку.\n"
-""
 
 #: plugins/diff/diff.c:915
-msgid ""
-"Copyright (C) 2000 - 2001 Chema Celorio \n"
+msgid "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
-msgstr ""
-"Copyright © 2000 - 2001 Chema Celorio \n"
+msgstr "Copyright © 2000 - 2001 Chema Celorio \n"
 "Copyright © 2002 Paolo Maggi"
+
+#: plugins/diff/diff.glade2.h:1
+msgid "Choose the files to compare."
+msgstr "Виберіть файли для порівняння."
+
+#: plugins/diff/diff.glade2.h:2
+msgid "Compare files..."
+msgstr "Порівняти файли..."
+
+#: plugins/diff/diff.glade2.h:3
+msgid "F_rom document"
+msgstr "З _документа"
+
+#: plugins/diff/diff.glade2.h:4
+msgid "First"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:5
+msgid "From _document"
+msgstr "З _документа"
+
+#: plugins/diff/diff.glade2.h:6
+msgid "From a _file on disk"
+msgstr "З _файлу на диску"
+
+#: plugins/diff/diff.glade2.h:7
+msgid "From a file o_n disk"
+msgstr "З _файлу на диску"
+
+#: plugins/diff/diff.glade2.h:8
+msgid "Ignore _blanks (-b option)"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:9
+msgid "Note that this option is only supported by GNU diff"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:10
+msgid "Second"
+msgstr ""
+
+#: plugins/diff/diff.glade2.h:11
+msgid "Use the _unified output format (-u option)"
+msgstr ""
 
 #: plugins/docinfo/docinfo.c:145
 #: plugins/docinfo/docinfo.c:365
@@ -181,18 +236,56 @@ msgid "The word count plugin analyzes the current document and determines the nu
 msgstr "Доповнення для підрахунку слів аналізує поточний документ і визначає кількість слів, рядків, символів і непорожніх символів у ньому та показує результат."
 
 #: plugins/docinfo/docinfo.c:370
-#: plugins/sample/sample.c:151
+#: plugins/sample/sample.c:163
 #: plugins/shell_output/shell_output.c:436
-#: plugins/taglist/gedit-taglist-plugin.c:144
+#: plugins/taglist/gedit-taglist-plugin.c:164
 #: plugins/time/time.c:556
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Авторські права © 2002 - Паоло Маґґі"
 
-#: plugins/sample/sample.c:148
+#: plugins/docinfo/docinfo.glade2.h:1
+msgid "0"
+msgstr "0"
+
+#: plugins/docinfo/docinfo.glade2.h:2
+msgid "Bytes"
+msgstr ""
+
+#: plugins/docinfo/docinfo.glade2.h:3
+msgid "Characters (no spaces)"
+msgstr "Символи (без пропусків)"
+
+#: plugins/docinfo/docinfo.glade2.h:4
+msgid "Characters (with spaces)"
+msgstr "Символи (з пропусками)"
+
+#: plugins/docinfo/docinfo.glade2.h:5
+msgid "File Name"
+msgstr "Назва файла"
+
+#: plugins/docinfo/docinfo.glade2.h:6
+#: src/gedit-print.c:301
+msgid "Lines"
+msgstr "Рядків"
+
+#: plugins/docinfo/docinfo.glade2.h:7
+#, fuzzy
+msgid "Update"
+msgstr "По_новити"
+
+#: plugins/docinfo/docinfo.glade2.h:8
+msgid "Words"
+msgstr "Слова"
+
+#: plugins/docinfo/docinfo.glade2.h:9
+msgid "gedit: Document Info plugin"
+msgstr ""
+
+#: plugins/sample/sample.c:160
 msgid "User name"
 msgstr "Користувач"
 
-#: plugins/sample/sample.c:149
+#: plugins/sample/sample.c:161
 msgid "Inserts the user name at the cursor position."
 msgstr "Вставляє назву користувача в позицію курсора."
 
@@ -233,27 +326,51 @@ msgstr "Сталася помилка під час виконання вибр�
 msgid "Execute a program and insert its output in the current document at the current cursor position"
 msgstr "Виконати програму, і вставити її вивід у поточний документ у поточну позицію курсора"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:117
+#: plugins/shell_output/shell_output.glade2.h:1
+msgid "Specify the working directory and the command you want to run."
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:2
+msgid "_Shell command:"
+msgstr ""
+
+#: plugins/shell_output/shell_output.glade2.h:3
+msgid "_Working directory:"
+msgstr "_Робочий каталог:"
+
+#: plugins/shell_output/shell_output.glade2.h:4
+msgid "gedit: Shell Output plugin"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
 msgid "Tag list plugin"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:135
-msgid "Select the group of tab you want to use."
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tab you want to use"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:159
-msgid "Double-click on a tag to insert it in the current document."
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:170
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:187
+msgid "Double-click on a tag to insert it in the current document"
+msgstr ""
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:198
 msgid "Tags"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin.c:140
+#: plugins/taglist/gedit-taglist-plugin.c:160
 msgid "Tag list"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin.c:141
+#: plugins/taglist/gedit-taglist-plugin.c:161
 msgid "The tag list plugin provides a method to easily insert into a document commonly used tabs/strings without having to type them."
 msgstr ""
 
@@ -262,6 +379,7 @@ msgid "Available formats"
 msgstr "Доступні формати"
 
 #: plugins/time/time.c:300
+#: plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
 msgstr "Налаштувати доповнення дати й часу"
 
@@ -272,6 +390,10 @@ msgstr "Вставити дату й час"
 #: plugins/time/time.c:554
 msgid "Inserts current date and time at the cursor position."
 msgstr "Вставляє поточну дату й час в позицію курсора."
+
+#: plugins/time/time.glade2.h:2
+msgid "Select the format to use when inserting date/time."
+msgstr ""
 
 #: src/bonobo-mdi.c:489
 #: src/bonobo-mdi.c:569
@@ -290,77 +412,71 @@ msgid "_Goto line"
 msgstr "Перейти на _рядок"
 
 #: src/dialogs/gedit-dialog-goto-line.c:140
-msgid ""
-"Could not find the required widgets inside goto-line.glade2.\n"
-""
-msgstr ""
-"Не вдалося знайти вказані в goto-line.glade2 віджети.\n"
-""
+msgid "Could not find the required widgets inside goto-line.glade2.\n"
+msgstr "Не вдалося знайти вказані в goto-line.glade2 віджети.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:314
+#: src/dialogs/gedit-dialog-plugin-manager.c:318
 msgid "Module file name"
 msgstr "Назва файлу модуля"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:315
+#: src/dialogs/gedit-dialog-plugin-manager.c:319
 msgid "Author(s)"
 msgstr "Автори"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:446
-msgid ""
-"Could not find plugin-manager.glade2, reinstall gedit.\n"
-""
-msgstr ""
-"Не вдалося знайти plugin-manager.glade2, перевстановіть gedit.\n"
-""
+#: src/dialogs/gedit-dialog-plugin-manager.c:450
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "Не вдалося знайти plugin-manager.glade2, перевстановіть gedit.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:454
+#: src/dialogs/gedit-dialog-plugin-manager.c:458
 msgid "Plugin Manager"
 msgstr "Керування доповненнями"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:481
-msgid ""
-"Invalid glade file for plugin manager -- not all widgets found.\n"
-""
-msgstr ""
-"Невірний файл glade для керування доповненнями -- не всі віджети знайдено.\n"
-""
+#: src/dialogs/gedit-dialog-plugin-manager.c:485
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr "Невірний файл glade для керування доповненнями -- не всі віджети знайдено.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:578
+#: src/dialogs/gedit-dialog-plugin-manager.c:582
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Не вдалося створити діалог керування доповненнями"
 
-#: src/dialogs/gedit-dialog-replace.c:167
+#: src/dialogs/gedit-dialog-replace.c:171
+#: src/dialogs/replace.glade2.h:2
 #: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Замінити"
 
-#: src/dialogs/gedit-dialog-replace.c:178
+#: src/dialogs/gedit-dialog-replace.c:182
 msgid "Replace _All"
 msgstr "Замінити _все"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181
-#: src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:105
+#: src/dialogs/gedit-dialog-replace.c:185
+#: src/gedit-file-selector-util.c:108
+#: src/gedit-ui.xml.h:101
 msgid "_Replace"
 msgstr "Замінити"
 
-#: src/dialogs/gedit-dialog-replace.c:270
-#: src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:274
+#: src/gedit-ui.xml.h:24
 msgid "Find"
 msgstr "Знайти"
 
-#: src/dialogs/gedit-dialog-replace.c:469
-#: src/dialogs/gedit-dialog-replace.c:540
-#: src/dialogs/gedit-dialog-replace.c:710
+#: src/dialogs/gedit-dialog-replace.c:473
+#: src/dialogs/gedit-dialog-replace.c:544
+#: src/dialogs/gedit-dialog-replace.c:718
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Тексту \"%s\" не знайдено."
 
-#: src/dialogs/gedit-dialog-replace.c:719
+#: src/dialogs/gedit-dialog-replace.c:727
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Знайдено і замінено %d входжень."
+
+#: src/dialogs/gedit-dialog-uri.c:90
+#: src/dialogs/uri.glade2.h:2
+msgid "Open from URI"
+msgstr ""
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
@@ -368,12 +484,8 @@ msgstr ""
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:96
 #, fuzzy
-msgid ""
-"Could not find the required widgets inside program-location-dialog.glade2.\n"
-""
-msgstr ""
-"Не вдалося знайти вказані в goto-line.glade2 віджети.\n"
-""
+msgid "Could not find the required widgets inside program-location-dialog.glade2.\n"
+msgstr "Не вдалося знайти вказані в goto-line.glade2 віджети.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:102
 #, c-format
@@ -387,91 +499,427 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Вибраний файл не призначений для виконання."
 
-#: src/dialogs/gedit-preferences-dialog.c:221
+#: src/dialogs/gedit-preferences-dialog.c:226
 msgid "Toolbar"
 msgstr "Пенал"
 
-#: src/dialogs/gedit-preferences-dialog.c:222
+#: src/dialogs/gedit-preferences-dialog.c:227
+#: src/dialogs/gedit-preferences.glade2.h:38
 msgid "Status bar"
 msgstr "Панель стану"
 
-#: src/dialogs/gedit-preferences-dialog.c:225
+#: src/dialogs/gedit-preferences-dialog.c:230
+#: src/dialogs/gedit-preferences.glade2.h:17
 msgid "MDI"
 msgstr "MDI"
 
-#: src/dialogs/gedit-preferences-dialog.c:234
+#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Font & Colors"
 msgstr "Шрифти й кольори"
 
-#: src/dialogs/gedit-preferences-dialog.c:236
+#: src/dialogs/gedit-preferences-dialog.c:241
+#: src/dialogs/gedit-preferences.glade2.h:39
 msgid "Tabs"
 msgstr ""
 
-#: src/dialogs/gedit-preferences-dialog.c:237
+#: src/dialogs/gedit-preferences-dialog.c:242
+#: src/dialogs/gedit-preferences.glade2.h:62
 msgid "Wrap mode"
 msgstr "Режим загортання"
 
-#: src/dialogs/gedit-preferences-dialog.c:238
+#: src/dialogs/gedit-preferences-dialog.c:243
+#: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Line numbers"
 msgstr "Номери рядків"
 
-#: src/dialogs/gedit-preferences-dialog.c:240
+#: src/dialogs/gedit-preferences-dialog.c:245
+#: src/dialogs/gedit-preferences.glade2.h:31
 #: src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Зберегти"
 
-#: src/dialogs/gedit-preferences-dialog.c:241
-#: src/gedit-ui.xml.h:81
+#: src/dialogs/gedit-preferences-dialog.c:246
+#: src/dialogs/gedit-preferences.glade2.h:57
+#: src/gedit-ui.xml.h:79
 msgid "Undo"
 msgstr "Відмінити"
 
-#: src/dialogs/gedit-preferences-dialog.c:249
+#: src/dialogs/gedit-preferences-dialog.c:254
 msgid "Page"
 msgstr "Сторінка"
 
-#: src/dialogs/gedit-preferences-dialog.c:251
+#: src/dialogs/gedit-preferences-dialog.c:256
 msgid "Fonts"
 msgstr "Шрифти"
 
-#: src/dialogs/gedit-preferences-dialog.c:258
+#: src/dialogs/gedit-preferences-dialog.c:263
 msgid "Editor"
 msgstr "Редактор"
 
-#: src/dialogs/gedit-preferences-dialog.c:259
+#: src/dialogs/gedit-preferences-dialog.c:264
+#: src/dialogs/gedit-preferences.glade2.h:25
+#: src/gedit-print.c:292
 #: src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Друк"
 
-#: src/dialogs/gedit-preferences-dialog.c:261
+#: src/dialogs/gedit-preferences-dialog.c:266
 msgid "User interface"
 msgstr "Інтерфейс користувача"
 
-#: src/dialogs/gedit-preferences-dialog.c:328
+#: src/dialogs/gedit-preferences-dialog.c:333
 msgid "Cat_egories:"
 msgstr "Кат_егорії:"
 
-#: src/dialogs/gedit-preferences-dialog.c:352
+#: src/dialogs/gedit-preferences-dialog.c:357
 #: src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "Приорітети"
 
-#: src/dialogs/gedit-preferences-dialog.c:569
+#: src/dialogs/gedit-preferences-dialog.c:574
 msgid "Categories"
 msgstr "Категорії"
 
-#: src/dialogs/gnome-print-font-dialog.c:110
+#: src/dialogs/gedit-preferences-dialog.c:906
+msgid "Push this button to select the font to be used by the editor"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:909
+msgid "Push this button to configure text color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:911
+msgid "Push this button to configure background color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:913
+msgid "Push this button to configure color in which selected text should appear"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:915
+msgid "Push this button to configure color in which selected text should be marked"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1313
+msgid "Push this button to select the font to be used to print the body"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1315
+msgid "Push this button to select the font to be used to print the headers"
+msgstr ""
+
+#: src/dialogs/gedit-preferences-dialog.c:1317
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+msgid " _Wrap lines (at character boundaries)"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:2
+msgid " character(s)"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:3
+#, fuzzy
+msgid " line(s)"
+msgstr "Рядків"
+
+#: src/dialogs/gedit-preferences.glade2.h:4
+msgid "Always use _UTF-8 encoding (faster)"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:5
+msgid "Bottom"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:6
+msgid "Button style"
+msgstr "Стиль кнопок"
+
+#: src/dialogs/gedit-preferences.glade2.h:7
+msgid "Colors"
+msgstr "Кольори"
+
+#: src/dialogs/gedit-preferences.glade2.h:8
+#, fuzzy
+msgid "Create a _backup copy of files before saving"
+msgstr "Не вдалося створити резервну копію файлу."
+
+#: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gnome-print-font-picker.c:1014
+msgid "Font"
+msgstr "Шрифт"
+
+#: src/dialogs/gedit-preferences.glade2.h:10
+#, fuzzy
+msgid "Font used to print line _numbers:"
+msgstr "Перейти на вказаний рядок"
+
+#: src/dialogs/gedit-preferences.glade2.h:11
+msgid "Font used to print the _body:"
+msgstr "Шрифт для друку _тіла:"
+
+#: src/dialogs/gedit-preferences.glade2.h:12
+msgid "Fonts & Colors"
+msgstr "Шрифти й кольори"
+
+#: src/dialogs/gedit-preferences.glade2.h:13
+msgid "Icon and _text"
+msgstr "Піктограма і _текст"
+
+#: src/dialogs/gedit-preferences.glade2.h:14
+msgid "LOGO"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:15
+msgid "Left"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:18
+msgid "Modal"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:19
+msgid "Notebook"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:20
+msgid "Notebook _tab position:"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:21
+msgid "Pick the background color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:22
+#, fuzzy
+msgid "Pick the selected text color"
+msgstr "Стерти вибраний текст"
+
+#: src/dialogs/gedit-preferences.glade2.h:23
+#, fuzzy
+msgid "Pick the selection color"
+msgstr "Вирізати вибране"
+
+#: src/dialogs/gedit-preferences.glade2.h:24
+msgid "Pick the text color"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:26
+msgid "Print _line numbers every"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:27
+msgid "Print _page headers"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:28
+#, fuzzy
+msgid "Print fonts"
+msgstr "Налаштування друку"
+
+#: src/dialogs/gedit-preferences.glade2.h:29
+msgid "Right"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:30
+msgid "S_elected text color:"
+msgstr "Колір _вибраного тексту:"
+
+#: src/dialogs/gedit-preferences.glade2.h:32
+msgid "Se_lection color:"
+msgstr "Колір ви_бору:"
+
+#: src/dialogs/gedit-preferences.glade2.h:33
+msgid "Set _tabs width equivalent to  "
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:34
+msgid "Set limit on _undo actions to"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:35
+#, fuzzy
+msgid "Sho_w tooltips"
+msgstr "Показувати _підказки"
+
+#: src/dialogs/gedit-preferences.glade2.h:36
+#, fuzzy
+msgid "Show cursor _position"
+msgstr "Показувати позицію _курсора"
+
+#: src/dialogs/gedit-preferences.glade2.h:37
+#, fuzzy
+msgid "Show overwrite _mode"
+msgstr "Показувати режим _заміщення"
+
+#: src/dialogs/gedit-preferences.glade2.h:40
+msgid "The MDI (Multiple Document Interface) mode refers to the way more than one text document is displayed in gedit. \n"
+"If you choose the Notebook mode, you may then decide where you want the tabs to appear in the gedit window."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:42
+msgid "The font & colors settings let you choose the font and the colors to be used in the editor windows."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:43
+msgid "The line numbers setting lets you choose to display the line numbers on the left hand side of the window."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:44
+msgid "The print fonts settings let you choose the fonts to be used to print documents."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:45
+msgid "The print page settings let you customize how gedit prints documents."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:46
+msgid "The save settings let you customize how gedit saves files."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:47
+msgid "The status bar settings let you show or hide status bar and customize its appearance."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:48
+msgid "The tabs settings let you customize the tabs width."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:49
+msgid "The toolbar settings let you show or hide toolbar and customize its appearance."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:50
+msgid "The undo settings let you set the maximum number of actions that gedit can undo."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:51
+msgid "The wrap mode settings let you customize how lines have to be wrapped."
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:52
+msgid "Toolbars"
+msgstr "Пенали"
+
+#: src/dialogs/gedit-preferences.glade2.h:53
+msgid "Top"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:54
+msgid "Toplevel"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:55
+msgid "U_se current locale only if the file already use it"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:56
+msgid "U_se default theme colors"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:58
+msgid "Use current _locale when possible"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:59
+#, fuzzy
+msgid "When saving..."
+msgstr "Відкрити файл..."
+
+#: src/dialogs/gedit-preferences.glade2.h:60
+msgid "Wrap lines at _word boundaries"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:61
+msgid "Wrap lines at ch_aracter boundaries"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:63
+msgid "_According to system settings"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:64
+msgid "_Autosave current file every"
+msgstr "_Автоматично зберігати поточний файл кожні"
+
+#: src/dialogs/gedit-preferences.glade2.h:65
+msgid "_Background color:"
+msgstr "Колір _тла:"
+
+#: src/dialogs/gedit-preferences.glade2.h:66
+msgid "_Display line numbers"
+msgstr "Показувати _номери рядків"
+
+#: src/dialogs/gedit-preferences.glade2.h:67
+msgid "_Font used by the editor: "
+msgstr "_Шрифт редактора:"
+
+#: src/dialogs/gedit-preferences.glade2.h:68
+msgid "_Font used to print headers:"
+msgstr "_Шрифт для друку заголовків:"
+
+#: src/dialogs/gedit-preferences.glade2.h:69
+#: src/gedit-ui.xml.h:94
+msgid "_Icon"
+msgstr "_Піктограма"
+
+#: src/dialogs/gedit-preferences.glade2.h:70
+msgid "_MDI Mode:"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:71
+msgid "_Never wrap lines"
+msgstr "_Не загортати рядки"
+
+#: src/dialogs/gedit-preferences.glade2.h:72
+msgid "_Restore default fonts"
+msgstr "_Відновити початкові шрифти"
+
+#: src/dialogs/gedit-preferences.glade2.h:73
+msgid "_Show status bar"
+msgstr "Показати панель _стану"
+
+#: src/dialogs/gedit-preferences.glade2.h:74
+msgid "_Show toolbar"
+msgstr "Показати _пенал"
+
+#: src/dialogs/gedit-preferences.glade2.h:75
+msgid "_Text color:"
+msgstr "Колір _тексту:"
+
+#: src/dialogs/gedit-preferences.glade2.h:76
+msgid "_Use default theme font"
+msgstr "Шрифт _типової теми"
+
+#: src/dialogs/gedit-preferences.glade2.h:77
+msgid "action(s)"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:78
+#, fuzzy
+msgid "minutes"
+msgstr "Рядків"
+
+#: src/dialogs/gnome-print-font-dialog.c:107
+#, fuzzy
+msgid "_Insert a new preview phrase."
+msgstr "_Змінити фразу для перегляду..."
+
+#: src/dialogs/gnome-print-font-dialog.c:113
 msgid "Modify preview phrase..."
 msgstr "Змінити фразу попереднього перегляду..."
 
-#: src/dialogs/gnome-print-font-dialog.c:164
+#: src/dialogs/gnome-print-font-dialog.c:167
 msgid "Preview"
 msgstr "Перегляд"
 
-#: src/dialogs/gnome-print-font-dialog.c:177
+#: src/dialogs/gnome-print-font-dialog.c:180
 msgid "_Modify preview phrase..."
 msgstr "_Змінити фразу для перегляду..."
 
-#: src/dialogs/gnome-print-font-dialog.c:235
+#: src/dialogs/gnome-print-font-dialog.c:243
 msgid "Font Selection"
 msgstr "Вибір шрифта"
 
@@ -523,153 +971,240 @@ msgstr "Показувати розмір"
 msgid "Show size in font info mode"
 msgstr "Показувати розмір у режимі інформаці про шрифт."
 
-#: src/dialogs/gnome-print-font-picker.c:1014
-msgid "Font"
-msgstr "Шрифт"
+#. gnome_print_font_picker_update_font_info
+#: src/dialogs/goto-line.glade2.h:1
+msgid "Goto Line"
+msgstr "Перейти на рядок"
 
-#: src/gedit-commands.c:339
+#: src/dialogs/goto-line.glade2.h:2
+msgid "_Line number:"
+msgstr "_Номер рядка:"
+
+#: src/dialogs/plugin-manager.glade2.h:1
+#, fuzzy
+msgid "C_onfigure plugin"
+msgstr "Налаштувати програму"
+
+#: src/dialogs/plugin-manager.glade2.h:2
+#, fuzzy
+msgid "Configure the selected plugin"
+msgstr "Налаштувати доповнення дати й часу"
+
+#: src/dialogs/plugin-manager.glade2.h:3
+msgid "D_etails"
+msgstr "_Докладніше"
+
+#: src/dialogs/plugin-manager.glade2.h:4
+msgid "This is the Plugin Manager. Plugins are extra pieces of software that extend gedit capabilities. From here, you can choose which plugins you want to have loaded."
+msgstr ""
+
+#: src/dialogs/plugin-manager.glade2.h:5
+msgid "_Description"
+msgstr "_Опис"
+
+#: src/dialogs/plugin-manager.glade2.h:6
+msgid "dialog1"
+msgstr "діалог1"
+
+#: src/dialogs/program-location-dialog.glade2.h:1
+#, fuzzy
+msgid "Set program location..."
+msgstr "Відкрити файл..."
+
+#: src/dialogs/program-location-dialog.glade2.h:2
+msgid "_Location to search for:"
+msgstr ""
+
+#: src/dialogs/program-location-dialog.glade2.h:3
+msgid "label"
+msgstr "позначка"
+
+#: src/dialogs/replace.glade2.h:1
+msgid "Case sensi_tive"
+msgstr "_Реґістрова чутливість"
+
+#: src/dialogs/replace.glade2.h:3
+msgid "Replace _with: "
+msgstr "Замінити _на:"
+
+#: src/dialogs/replace.glade2.h:4
+#, fuzzy
+msgid "Search fro_m the beginning of the document"
+msgstr "Вибрати весь документ"
+
+#: src/dialogs/replace.glade2.h:5
+#, fuzzy
+msgid "Search from the c_ursor position"
+msgstr "Показувати позицію _курсора"
+
+#: src/dialogs/replace.glade2.h:6
+#, fuzzy
+msgid "_Search for: "
+msgstr "По_шук"
+
+#: src/dialogs/uri.glade2.h:1
+msgid "Enter the location (URI) of the file you would like to open:"
+msgstr ""
+
+#: src/gedit-commands.c:340
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "Рядка \"%s\" не знайдено."
 
-#: src/gedit-commands.c:421
+#: src/gedit-commands.c:422
 msgid "Impossible to update gedit settings."
 msgstr "Неможливо поновити параметри gedit."
 
-#: src/gedit-commands.c:518
+#: src/gedit-commands.c:491
+msgid "translator_credits"
+msgstr "Юрій Сирота"
+
+#: src/gedit-commands.c:516
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:521
+#: src/gedit-commands.c:519
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit -- це малий і легкий текстовий редактор для GNOME"
 
-#: src/gedit-document.c:521
-#: src/gedit-document.c:532
+#: src/gedit-document.c:549
+#: src/gedit-document.c:572
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:521
-#: src/gedit-document.c:532
+#: src/gedit-document.c:549
+#: src/gedit-document.c:572
 msgid "Untitled"
 msgstr "Неназваний"
 
-#: src/gedit-document.c:648
-#: src/gedit-document.c:754
+#: src/gedit-document.c:556
+#: src/gedit-document.c:579
+msgid "Invalid file name"
+msgstr "Неправильна назва файла"
+
+#: src/gedit-document.c:700
+#: src/gedit-document.c:806
 msgid "Invalid UTF-8 data"
 msgstr "Неправильні дані UTF-8"
 
-#: src/gedit-document.c:948
+#: src/gedit-document.c:1006
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr ""
+
+#: src/gedit-document.c:1052
+msgid "The file has too many symbolic links."
+msgstr "Файл має надто багато символьних посилань."
+
+#: src/gedit-document.c:1101
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr ""
 
-#: src/gedit-document.c:955
+#: src/gedit-document.c:1108
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 
-#: src/gedit-document.c:972
-msgid "Could not create the backup copy of the file."
-msgstr "Не вдалося створити резервну копію файлу."
+#: src/gedit-document.c:1120
+msgid "Invalid filename."
+msgstr "Неправильна назва файла."
 
-#: src/gedit-document.c:991
-msgid "Make sure that the path you provided exists, and that you have the appropriate write permissions."
-msgstr "Переконайтесь, що шлях, який ви ввели існує, і ви маєте необхідні права на запис."
-
-#: src/gedit-document.c:1029
-msgid ""
-"There is no enough disk space to save the file.\n"
-"Please, free some space on the disk and try again."
-msgstr ""
-"Недостатньо дискового простору для збереження файлу.\n"
+#: src/gedit-document.c:1198
+#, fuzzy
+msgid "There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
+msgstr "Недостатньо дискового простору для збереження файлу.\n"
 "Звільніть, будь ласка, місце на диску і спробуйте знову."
 
-#: src/gedit-document.c:1034
-msgid "The file is too big."
-msgstr "Файл надто великий."
+#: src/gedit-document.c:1203
+msgid "The disk where you are trying to save the file has a limitation on file sizes.  Please try saving a smaller file or saving it to a disk that does not have this limitation."
+msgstr ""
 
-#: src/gedit-document.c:1184
+#: src/gedit-document.c:1240
+#, fuzzy
+msgid "Could not create a backup file."
+msgstr "Не вдалося створити резервну копію файлу."
+
+#: src/gedit-document.c:1388
 msgid "It is not possible to revert an Untitled document"
 msgstr "Неможливо відновити документ Неназваний"
 
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:96
 #, c-format
-msgid ""
-"A file named ''%s'' already exists.\n"
+msgid "A file named ''%s'' already exists.\n"
 "Do you want to replace it with the one you are saving?"
-msgstr ""
-"Файл \"%s\" вже існує.\n"
+msgstr "Файл \"%s\" вже існує.\n"
 "Чи хочете ви замінити його тим, що записуєте?"
 
-#: src/gedit-file-selector-util.c:105
+#: src/gedit-file-selector-util.c:104
 msgid "Do_n't replace"
 msgstr "Не _заміняти"
 
-#: src/gedit-file-selector-util.c:459
+#: src/gedit-file-selector-util.c:484
 msgid "Select a filename to save"
 msgstr "Оберіть назву файлу"
 
-#: src/gedit-file.c:123
+#: src/gedit-file.c:128
 msgid "Open File ..."
 msgstr "Відкрити файл..."
 
-#: src/gedit-file.c:133
-#: src/gedit-file.c:634
+#: src/gedit-file.c:148
+#: src/gedit-file.c:763
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Завантажено файл \"%s\""
 
-#: src/gedit-file.c:243
-#: src/gedit-file.c:317
+#: src/gedit-file.c:279
+#: src/gedit-file.c:401
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Збереження файлу як \"%s\"..."
 
-#: src/gedit-file.c:264
-#: src/gedit-file.c:324
+#: src/gedit-file.c:300
+#: src/gedit-file.c:416
 msgid "The document has not been saved."
 msgstr "Документ не було збережено."
 
-#: src/gedit-file.c:277
-#: src/gedit-file.c:322
+#: src/gedit-file.c:315
+#: src/gedit-file.c:408
 #, c-format
 msgid "File '%s' saved."
 msgstr "Файл \"%s\" збережено."
 
-#: src/gedit-file.c:309
+#: src/gedit-file.c:383
 msgid "Save as ..."
 msgstr "Зберегти як..."
 
-#: src/gedit-file.c:469
+#: src/gedit-file.c:574
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Відновлення файлу \"%s\"..."
 
-#: src/gedit-file.c:482
+#: src/gedit-file.c:587
 msgid "The document has not been reverted."
 msgstr "Документ не було відновлено."
 
-#: src/gedit-file.c:492
+#: src/gedit-file.c:597
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Файл \"%s\" відновлено."
 
-#: src/gedit-file.c:535
+#: src/gedit-file.c:644
 #, c-format
 msgid "Loading %d file..."
 msgstr "Завантаження файлу \"%s\""
 
-#: src/gedit-file.c:571
+#: src/gedit-file.c:680
 #, c-format
 msgid "Loaded %i files"
 msgstr "Завантажено %i файлів"
 
-#: src/gedit-file.c:688
+#: src/gedit-file.c:821
 msgid "Could not read data from stdin."
 msgstr "Не вдалося зчитати дані з стандартного вводу."
 
-#: src/gedit-mdi.c:758
+#: src/gedit-mdi.c:759
 #, fuzzy, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -680,34 +1215,30 @@ msgstr ""
 "\n"
 "Ваші зміни буде втрачено, якщо ви їх не збережете."
 
-#: src/gedit-mdi.c:763
+#: src/gedit-mdi.c:764
 msgid "Do_n't save"
 msgstr "Не _зберігати"
 
-#: src/gedit-mdi.c:782
+#: src/gedit-mdi.c:783
 msgid "_Don't quit"
 msgstr "_Не виходити"
 
-#: src/gedit-mdi.c:786
+#: src/gedit-mdi.c:787
 msgid "_Don't close"
 msgstr "_Не закривати"
 
-#: src/gedit-mdi.c:873
+#: src/gedit-mdi.c:874
 msgid "(modified)"
 msgstr "(модифіковано)"
 
-#: src/gedit-mdi.c:879
+#: src/gedit-mdi.c:880
 msgid "(readonly)"
 msgstr "(лише зчитуваня)"
 
 #: src/gedit-plugins-engine.c:159
 #, c-format
-msgid ""
-"Error, unable to open module file '%s'\n"
-""
-msgstr ""
-"Помилка, неможливо відкрити файл модуля \"%s\"\n"
-""
+msgid "Error, unable to open module file '%s'\n"
+msgstr "Помилка, неможливо відкрити файл модуля \"%s\"\n"
 
 #: src/gedit-plugins-engine.c:174
 #, c-format
@@ -755,38 +1286,28 @@ msgstr "Помилка, неможливо деактивувати доповн
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Помилка, неможливо поновити інтерфейс користувача доповнення \"%s\""
 
-#: src/gedit-print.c:166
-msgid ""
-"gedit is unable to print since it cannot find\n"
+#: src/gedit-print.c:178
+msgid "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
-msgstr ""
-"Неможливо розпочати друк, через\n"
+msgstr "Неможливо розпочати друк, через\n"
 "неможливість віднайти необхідний шрифт."
 
-#: src/gedit-print.c:273
-msgid "gedit - Print Document"
-msgstr "gedit - друк документа"
-
-#: src/gedit-print.c:282
-msgid "Lines"
-msgstr "Рядків"
-
-#: src/gedit-print.c:338
+#: src/gedit-print.c:354
 #, c-format
 msgid "File: %s"
 msgstr "Файл: %s"
 
 #. Print right text
-#: src/gedit-print.c:343
+#: src/gedit-print.c:359
 #, c-format
 msgid "Page: %d"
 msgstr "Сторінка: %d"
 
-#: src/gedit-print.c:476
+#: src/gedit-print.c:492
 msgid "gedit - Print Preview"
 msgstr "gedit - попередній перегляд друку"
 
-#: src/gedit-print.c:552
+#: src/gedit-print.c:566
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -797,177 +1318,172 @@ msgstr ""
 "\n"
 "%s,"
 
-#: src/gedit-recent.c:496
-#, c-format
-msgid "Open %s"
-msgstr "Відкрити %s"
-
 #: src/gedit-ui.xml.h:1
 msgid "About this application"
 msgstr "Про цю програму"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr "Про..."
-
-#: src/gedit-ui.xml.h:3
 msgid "Add/Remove plugins"
 msgstr "Додати чи видалити доповнення"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
 msgstr "Н_алаштувати панель стану"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Змінити видимість панелі стану в поточному вікні"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Змінити видимість пеналу у поточному вікні"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Clos_e All"
 msgstr "Закрит_и все"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close"
 msgstr "Закрити"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close All"
 msgstr "Зкрити все"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close all open files"
 msgstr "Закрити всі поточні файли"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Close the current file"
 msgstr "Закрити поточний файл"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Configure the application"
 msgstr "Налаштувати програму"
 
-#: src/gedit-ui.xml.h:13
-msgid "Contents"
-msgstr "Вміст"
-
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:12
 msgid "Copy"
 msgstr "Скопіювати"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:13
 msgid "Copy the selection"
 msgstr "Скопіювати вибране"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:14
 msgid "Create a new document"
 msgstr "Створити новий документ"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:15
 msgid "Cu_t"
 msgstr "Ви_різати"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:16
 msgid "Customize"
 msgstr "Налаштувати"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:17
 msgid "Customize toolbars"
 msgstr "Налаштувати пенали"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:18
 msgid "Cut"
 msgstr "Вирізати"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:19
 msgid "Cut the selection"
 msgstr "Вирізати вибране"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:20
 msgid "Delete"
 msgstr "Стерти"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:21
 msgid "Delete the selected text"
 msgstr "Стерти вибраний текст"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:22
 msgid "Dump XML"
 msgstr "Скинути XML"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:23
 msgid "Dump the UI Xml description"
 msgstr "Скинути XML-опис інтерфейсу користувача"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:25
 msgid "Find Again"
 msgstr "Знайти знову"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:26
 msgid "Find Ne_xt"
 msgstr "Шукати _далі"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:27
 msgid "Go to a specific line number"
 msgstr "Перейти на вказаний рядок"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:28
 msgid "Goto _Line"
 msgstr "Перейти на _рядок"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:29
 msgid "Icon and _Text"
 msgstr "Піктограма і _текст"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:30
 msgid "Main toolbar"
 msgstr "Головний пенал"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:31
 msgid "New"
 msgstr "Новий"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:32
 msgid "Only show icons in the toolbar"
 msgstr "Показувати в пеналі лише піктограми"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:33
 msgid "Open"
 msgstr "Відкрити"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:34
 #, fuzzy
 msgid "Open Location..."
 msgstr "Відкрити файл..."
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:35
 #, fuzzy
 msgid "Open _Location..."
 msgstr "Відкрити файл..."
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:36
 msgid "Open a file"
 msgstr "Відкрити файл"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:37
 #, fuzzy
 msgid "Open a file from a specified location"
 msgstr "Відкрити з вказаного URI"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:38
 msgid "Open the gedit manual"
 msgstr "Відкрити посібник з gedit"
 
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:39
 msgid "Paste"
 msgstr "Вставити"
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:40
 msgid "Paste the clipboard"
 msgstr "Вставити вміст кишені"
+
+#: src/gedit-ui.xml.h:41
+msgid "Plugin _Manager"
+msgstr "Керування доповненнями"
+
+#: src/gedit-ui.xml.h:42
+msgid "Plugin _Manager..."
+msgstr "Керування _доповненнями..."
 
 #: src/gedit-ui.xml.h:43
 msgid "Pr_eferences..."
@@ -1090,146 +1606,126 @@ msgid "Show _Overwrite Mode"
 msgstr "Показувати режим _заміщення"
 
 #: src/gedit-ui.xml.h:77
-msgid "Show _Tooltips"
-msgstr "Показувати _підказки"
-
-#: src/gedit-ui.xml.h:78
 msgid "Show cursor position in the statusbar"
 msgstr "Показувати позицію курсора в панелі стану"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:78
 msgid "Show overwrite mode in the statusbar"
 msgstr "Показувати режим заміщення символів у панелі стану"
 
 #: src/gedit-ui.xml.h:80
-msgid "Show tooltips in the toolbar"
-msgstr "Показувати підказки в пеналі"
-
-#: src/gedit-ui.xml.h:82
 msgid "Undo the last action"
 msgstr "Відмінити останню операцію"
 
-#: src/gedit-ui.xml.h:83
-msgid "_About..."
-msgstr "_Про..."
+#: src/gedit-ui.xml.h:81
+msgid "_About"
+msgstr "_Про"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:82
 msgid "_Close"
 msgstr "_Закрити"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:83
 msgid "_Contents"
 msgstr "_Вміст"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:84
 msgid "_Copy"
 msgstr "_Скопіювати"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:85
 msgid "_Customize Toolbar"
 msgstr "На_лаштувати пенал"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:86
 msgid "_Debug"
 msgstr "Від_лагодження"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:87
 msgid "_Delete"
 msgstr "С_терти"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:88
 msgid "_Desktop Default"
 msgstr "_Типово для стільниці"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:89
 msgid "_Documents"
 msgstr "_Документи"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:90
 msgid "_Edit"
 msgstr "_Редагування"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:91
 msgid "_File"
 msgstr "_Файл"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:92
 msgid "_Find"
 msgstr "_Знайти"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:93
 msgid "_Help"
 msgstr "_Довідка"
 
-#: src/gedit-ui.xml.h:96
-msgid "_Icon"
-msgstr "_Піктограма"
-
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:95
 msgid "_New"
 msgstr "_Новий"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:96
 msgid "_Open..."
 msgstr "_Відкрити..."
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:97
 msgid "_Paste"
 msgstr "_Вставити"
 
-#: src/gedit-ui.xml.h:100
-msgid "_Plugin Manager"
-msgstr "Керування _доповненнями"
-
-#: src/gedit-ui.xml.h:101
-msgid "_Plugin Manager..."
-msgstr "Керування _доповненнями..."
-
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:98
 msgid "_Print..."
 msgstr "На_друкувати..."
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:99
 msgid "_Quit"
 msgstr "Ви_йти"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:100
 msgid "_Redo"
 msgstr "_Повернути"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:102
 msgid "_Revert"
 msgstr "Від_новити"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:103
 msgid "_Save"
 msgstr "_Зберегти"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:104
 msgid "_Search"
 msgstr "По_шук"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:105
 msgid "_Statusbar"
 msgstr "Панель _стану"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:106
 msgid "_Toolbar"
 msgstr "_Пенал"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:107
 msgid "_Tools"
 msgstr "_Інструменти"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:108
 msgid "_Undo"
 msgstr "Від_мінити"
 
-#: src/gedit-ui.xml.h:113
+#: src/gedit-ui.xml.h:109
 msgid "_View"
 msgstr "_ідображення"
 
-#: src/gedit-utils.c:839
+#: src/gedit-utils.c:842
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1237,32 +1733,32 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:846
+#: src/gedit-utils.c:849
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Не вдалося відкрити файл \"%s\" через те, що він містить зіпсовані дані."
 
-#: src/gedit-utils.c:857
+#: src/gedit-utils.c:860
 #, c-format
 msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 
-#: src/gedit-utils.c:865
+#: src/gedit-utils.c:868
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Неможливо відкрити файл: \"%s\"."
 
-#: src/gedit-utils.c:872
+#: src/gedit-utils.c:875
 #, c-format
 msgid "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "Не вдалося відкрити файл \"%s\" через те, що він містить дані у неправильному форматі."
 
-#: src/gedit-utils.c:879
+#: src/gedit-utils.c:882
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Не вдалося відкрити файл \"%s\" через те, що він надто великий."
 
-#: src/gedit-utils.c:886
+#: src/gedit-utils.c:889
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1270,12 +1766,12 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:893
+#: src/gedit-utils.c:896
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Не вдалося відкрити файл \"%s\" через відмову в доступі."
 
-#: src/gedit-utils.c:900
+#: src/gedit-utils.c:903
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1286,7 +1782,7 @@ msgstr ""
 "\n"
 "Закрийте, будь ласка, кілька файлів і спробуйте знову."
 
-#: src/gedit-utils.c:908
+#: src/gedit-utils.c:911
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1297,12 +1793,12 @@ msgstr ""
 "\n"
 "Переконайтеся, будь ласка, що ви ввели правильний шлях і спробуйте знову."
 
-#: src/gedit-utils.c:915
+#: src/gedit-utils.c:918
 #, c-format
 msgid "Not enough available memory to open the file \"%s\". Please, close some running application and try again."
 msgstr "Недостатньо доступної пам'яті для відкриття файлу \"%s\". Будь ласка, закрийте кілька запущених програм і спробуйте знову."
 
-#: src/gedit-utils.c:928
+#: src/gedit-utils.c:931
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1310,7 +1806,7 @@ msgid ""
 "Please, check that you typed the location correctly and that your proxy settings are correct and then try again."
 msgstr ""
 
-#: src/gedit-utils.c:941
+#: src/gedit-utils.c:944
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1318,7 +1814,7 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:948
+#: src/gedit-utils.c:951
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -1326,7 +1822,7 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: src/gedit-utils.c:955
+#: src/gedit-utils.c:958
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -1334,7 +1830,7 @@ msgid ""
 "Please, check that you typed the location correctly and try again."
 msgstr ""
 
-#: src/gedit-utils.c:963
+#: src/gedit-utils.c:966
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -1342,17 +1838,17 @@ msgid ""
 "Probably, you are trying to open a binary file."
 msgstr ""
 
-#: src/gedit-utils.c:1001
+#: src/gedit-utils.c:1004
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Неможливо відкрити файл \"%s\"."
 
-#: src/gedit-utils.c:1052
+#: src/gedit-utils.c:1055
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Не вдалося зберегти файл \"%s\"."
 
-#: src/gedit-utils.c:1056
+#: src/gedit-utils.c:1059
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -1363,7 +1859,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1109
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -1371,38 +1867,38 @@ msgid ""
 "Perhaps, it has recently been deleted."
 msgstr ""
 
-#: src/gedit-utils.c:1116
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "Не вдалося відновити файл \"%s\" через те, що він містить зіпсовані дані."
 
-#: src/gedit-utils.c:1127
+#: src/gedit-utils.c:1130
 #, c-format
 msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 
-#: src/gedit-utils.c:1135
-#: src/gedit-utils.c:1257
+#: src/gedit-utils.c:1138
+#: src/gedit-utils.c:1260
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Не вдалося відновити файл \"%s\"."
 
-#: src/gedit-utils.c:1142
+#: src/gedit-utils.c:1145
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains data in an invalid format."
 msgstr "Не вдалося відновити файл \"%s\" через те, що він містить дані у неправильному форматі."
 
-#: src/gedit-utils.c:1149
+#: src/gedit-utils.c:1152
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Не вдалося відновити файл \"%s\" через те, що він надто великий."
 
-#: src/gedit-utils.c:1156
+#: src/gedit-utils.c:1159
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Не вдалося відновити файл \"%s\" через відмову в доступі."
 
-#: src/gedit-utils.c:1163
+#: src/gedit-utils.c:1166
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -1410,12 +1906,12 @@ msgid ""
 "Please, close some open file and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1171
+#: src/gedit-utils.c:1174
 #, c-format
 msgid "Not enough available memory to revert the file \"%s\". Please, close some running application and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1184
+#: src/gedit-utils.c:1187
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1423,7 +1919,7 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1196
+#: src/gedit-utils.c:1199
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -1431,12 +1927,12 @@ msgid ""
 "Please, check that your proxy settings are correct and try again."
 msgstr ""
 
-#: src/gedit-utils.c:1203
+#: src/gedit-utils.c:1206
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 
-#: src/gedit-utils.c:1210
+#: src/gedit-utils.c:1213
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -1444,72 +1940,82 @@ msgid ""
 "Probably, you are trying to revert a binary file."
 msgstr ""
 
-#: src/gedit-utils.c:1219
+#: src/gedit-utils.c:1222
 msgid "It is not possible to revert an Untitled document."
 msgstr "Неможливо відновити неназваний документ."
 
-#: src/gedit-view.c:890
+#: src/gedit-view.c:896
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "Ряд. %d, Ст. %d"
 
-#: src/gedit-view.c:928
+#: src/gedit-view.c:934
 msgid "  OVR"
 msgstr "ЗАМ"
 
-#: src/gedit-view.c:930
+#: src/gedit-view.c:936
 msgid "  INS"
 msgstr "ВСТ"
 
-#: src/gedit2.c:68
+#: src/gedit2.c:69
 msgid "Show mdi debugging messages."
 msgstr "Показати повідомлення налагодження MDI."
 
-#: src/gedit2.c:71
+#: src/gedit2.c:72
 msgid "Show commands debugging messages."
 msgstr "Показати повідомлення налагодження командної підсистеми."
 
-#: src/gedit2.c:74
+#: src/gedit2.c:75
 msgid "Show document debugging messages."
 msgstr "Показати повідомлення налагодження документної підсистеми."
 
-#: src/gedit2.c:77
+#: src/gedit2.c:78
 msgid "Show file debugging messages."
 msgstr "Показати повідомлення налагодження файлової підсистеми."
 
-#: src/gedit2.c:80
+#: src/gedit2.c:81
 msgid "Show plugin debugging messages."
 msgstr "Показати повідомлення налагодження доповнень."
 
-#: src/gedit2.c:83
+#: src/gedit2.c:84
 msgid "Show prefs debugging messages."
 msgstr "Показати повідомлення налагодження налаштувань."
 
-#: src/gedit2.c:86
+#: src/gedit2.c:87
 msgid "Show printing debugging messages."
 msgstr "Показати повідомлення налагодження друку."
 
-#: src/gedit2.c:89
+#: src/gedit2.c:90
 msgid "Show search debugging messages."
 msgstr "Показати повідомлення налагодження пошуку."
 
-#: src/gedit2.c:92
+#: src/gedit2.c:93
 msgid "Show undo debugging messages."
 msgstr "Показати повідомлення налагодження відкату."
 
-#: src/gedit2.c:95
+#: src/gedit2.c:96
 msgid "Show view debugging messages."
 msgstr "Показати повідомлення налагодження відображення."
 
-#: src/gedit2.c:98
+#: src/gedit2.c:99
 msgid "Show recent debugging messages."
 msgstr "Показати останні повідомлення налагодження."
 
-#: src/gedit2.c:101
+#: src/gedit2.c:102
+#, fuzzy
+msgid "Show session management debugging messages."
+msgstr "Показати повідомлення налагодження документної підсистеми."
+
+#: src/gedit2.c:105
 msgid "Turn on all debugging messages."
 msgstr "Увімкнути всі повідомлення налагодження."
 
-#: src/gedit2.c:159
+#: src/gedit2.c:164
 msgid "The GNOME text editor"
 msgstr "Текстовий редактор GNOME"
+
+#: src/gnome-recent-view-bonobo.c:189
+#, c-format
+msgid "Open %s"
+msgstr "Відкрити %s"
 
