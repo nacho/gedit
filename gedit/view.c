@@ -496,42 +496,26 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	/* Control key related */
 	if (event->state & GDK_CONTROL_MASK)
 	{
-		switch (event->keyval)
-		{
-			/* This is nasty, NASTY NASTY !!!!!!!
-			   since it is dependent on the current languaje */
-		case 's':
-			file_save_cb (w, NULL);
-	    		break;
-		case 'p':
-	    		gedit_print_cb (w, NULL);
-	    		break;
-		case 'n':
-			return FALSE;
-			break;
-		case 'w':
-	    		file_close_cb (w, NULL);
-			/* If the user cancels the file_close action, the cut still happens*/
-			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
-			return TRUE;
-		case 'z':
-			/* Undo is getting called twice, 1 thru this function
-			   and 1 time thru the aceleratior. Chema 
-	    		gedit_undo_do (w, NULL);
-			*/
-	    		break;
-		case 'r':
-			/* Same as undo_do 
-	    		gedit_undo_redo (w, NULL);
-			*/
-	    		break;
-		case 'q':
-			file_quit_cb (w, NULL);
-	    		break;
-		default:
-	    		return TRUE;
-	    		break;
-		}
+                /* This keys, are used by gtktext and accelators
+                   for gedit. Stop the emmision if they are pressed
+                   so that gedit gets the key event and acts. There are
+                   other CTRL+? keys beeing used but since gtktext does
+                   not use them we don't need to stop the emision for them.
+                   Chema */
+                gchar keys_used [] = {'p', 'w'};
+                gint num;
+                gint i;
+
+                num = sizeof (keys_used) / sizeof (gchar);
+                for (i = 0; i < num; i++) {
+                        if (event->keyval == keys_used [i])
+                        {
+                                gtk_signal_emit_stop_by_name (GTK_OBJECT (w),
+                                                              "key_press_event");
+                                return FALSE;
+                        }
+                }
+
 	}
 
 	return TRUE;
