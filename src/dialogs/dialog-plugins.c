@@ -27,7 +27,7 @@ gedit_plugin_program_location_dialog (void)
 	GtkWidget *program_location_entry;
 	gchar * location = NULL;
 
-	gedit_debug ("", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_WINDOW, "");
 
 	gui = glade_xml_new (GEDIT_GLADEDIR "/program.glade", NULL);
 

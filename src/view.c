@@ -84,7 +84,7 @@ gedit_view_active (void)
 {
 	View *current_view = NULL;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	if (mdi->active_view)
 		current_view = VIEW (mdi->active_view);
@@ -99,7 +99,7 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	Document *doc = view->doc;
 	gint undo_state, redo_state;
 
-	gedit_debug ("start", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_VIEW, "start");
 
 	g_return_if_fail (view!=NULL);
 		
@@ -120,7 +120,8 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	gedit_view_set_undo (view, undo_state, redo_state);
 	gedit_view_set_undo (view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
 	gnome_app_install_menu_hints(view->app, gnome_mdi_get_child_menu_info(view->app));
-	gedit_debug ("end", DEBUG_DOCUMENT);
+
+	gedit_debug (DEBUG_VIEW, "end");
 }
 
 
@@ -129,7 +130,7 @@ gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
 {
 	View *view;
 	
-	gedit_debug ("---------", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	view = (View *) cbdata;
 	g_return_if_fail (view != NULL);
@@ -151,14 +152,14 @@ gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
 gfloat
 gedit_view_get_window_position (View *view)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 	return GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
 }
 
 void
 gedit_view_set_window_position (View *view, gfloat position)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
 				  position);
 }
@@ -170,7 +171,7 @@ gedit_view_set_window_position_from_lines (View *view, guint line, guint lines)
 	float upper;
 	float page_increment;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (line <= lines);
 	
@@ -188,7 +189,7 @@ gedit_views_insert (Document *doc, guint position, gchar * text, gint length, Vi
 	gint i;
 	View *nth_view;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (doc!=NULL);
 
@@ -211,7 +212,7 @@ gedit_views_insert (Document *doc, guint position, gchar * text, gint length, Vi
 void
 gedit_view_insert (View  *view, guint position, gchar * text, gint length)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	gtk_text_set_point (GTK_TEXT(view->text), position);
 	gtk_text_insert (GTK_TEXT (view->text), NULL,
@@ -225,7 +226,7 @@ gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View *view_ex
 	View *nth_view;
 	gint n;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (doc!=NULL);
 	g_return_if_fail (end_pos > start_pos);
@@ -248,7 +249,7 @@ gedit_view_delete (View *view, guint position, gint length)
 {
 	guint p1;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	p1 = gtk_text_get_point (GTK_TEXT (view->text));
 	gtk_text_set_point (GTK_TEXT(view->text), position);
@@ -263,7 +264,7 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 	Document *doc;
 	guchar *text_to_insert;
 
-	gedit_debug ("start", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	doc = view->doc;
 
@@ -280,8 +281,6 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 		gedit_views_insert (doc, position, text_to_insert, length, view);
 
 	g_free (text_to_insert);
-
-	gedit_debug ("end", DEBUG_VIEW);
 }
 
 
@@ -292,7 +291,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	Document *doc;
 	guchar *text_to_delete;
 
-	gedit_debug ("start", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (view != NULL);
 	doc = view->doc;
@@ -311,7 +310,6 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	else
 		gedit_views_delete (doc, start_pos, end_pos, view);
 
-	gedit_debug ("end", DEBUG_VIEW);
 }
 
 
@@ -326,7 +324,7 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	View *view;
 	Document *doc;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	view = (View *)data;
 	g_return_val_if_fail (view != NULL, FALSE);
@@ -407,7 +405,7 @@ gedit_view_class_init (ViewClass *klass)
 	
 	object_class = (GtkObjectClass *)klass;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 	
 	gedit_view_signals[CURSOR_MOVED_SIGNAL] =
 		gtk_signal_new ("cursor_moved",
@@ -438,7 +436,7 @@ gedit_view_init (View *view)
 	GdkColor *bg;
 	GdkColor *fg;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
@@ -631,7 +629,7 @@ gedit_view_new (Document *doc)
 	View *view;
 	guchar *document_buffer;
 
-	gedit_debug ("start", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	if (doc == NULL)
 		return NULL;
@@ -644,8 +642,6 @@ gedit_view_new (Document *doc)
 	document_buffer = gedit_document_get_buffer (view->doc);
 	gedit_view_insert (view, 0, document_buffer, FALSE);
 	g_free (document_buffer);
-
-	gedit_debug ("end", DEBUG_VIEW);
 
 	return GTK_WIDGET (view);
 }
@@ -671,7 +667,7 @@ gedit_view_set_split_screen (View *view, gint split_screen)
 void
 gedit_view_set_word_wrap (View *view, gint word_wrap)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	view->word_wrap = word_wrap;
 
@@ -686,7 +682,7 @@ gedit_view_set_readonly (View *view, gint readonly)
 {
 	gchar * doc_name;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 	
 	view->readonly = readonly;
 	gtk_text_set_editable (GTK_TEXT (view->text), !view->readonly);
@@ -715,7 +711,7 @@ gedit_view_set_font (View *view, gchar *fontname)
 	GtkStyle *style;
 	GdkFont *font = NULL;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 	
 	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET((view)->text)));
   	
@@ -741,7 +737,7 @@ gedit_view_set_font (View *view, gchar *fontname)
 void
 gedit_view_set_position (View *view, gint pos)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	gtk_text_set_point (GTK_TEXT (view->text), pos);
 	gtk_text_insert (GTK_TEXT(view->text), NULL, NULL, NULL, " ", 1);
@@ -757,7 +753,7 @@ gedit_view_get_position (View *view)
 {
 	guint start_pos, end_pos;
 	
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_val_if_fail (view!=NULL, 0);
 
@@ -799,7 +795,7 @@ gedit_view_set_line_wrap (View *view, gint line_wrap)
 void
 gedit_view_set_selection (View *view, guint start, guint end)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	if (start == 0 && end == 0)
 		gtk_text_set_point (GTK_TEXT(view->text), GTK_EDITABLE(GTK_TEXT(view->text))->selection_end_pos);
@@ -829,7 +825,7 @@ gedit_view_get_selection (View *view, guint *start, guint *end)
 {
 	guint start_pos, end_pos;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	start_pos = GTK_EDITABLE(view->text)->selection_start_pos;
         end_pos   = GTK_EDITABLE(view->text)->selection_end_pos;
@@ -868,7 +864,7 @@ gedit_view_add_cb (GtkWidget *widget, gpointer data)
 	View *view;
 	guchar * buffer;
 
-	gedit_debug ("start", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_VIEW, "");
 
 	view = gedit_view_active();
 
@@ -885,7 +881,6 @@ gedit_view_add_cb (GtkWidget *widget, gpointer data)
 		g_free (buffer);
 	}
 
-	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 void
@@ -894,7 +889,7 @@ gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 	Document *doc = DOCUMENT (data);
 	View *view;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_VIEW, "");
 
 	view = gedit_view_active();
 	
@@ -927,7 +922,7 @@ return;
 	*/
 	
 	/* FIXME: Disable by chema for 0.7.0 . this hack is not working correctly */
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	sprintf (col, "Column: %d",
 		 GTK_TEXT(VIEW(gedit_view_active())->text)->cursor_pos_x/7);
@@ -942,7 +937,7 @@ return;
 static gint
 gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	gedit_view_update_line_indicator ();
 	
@@ -952,7 +947,7 @@ gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 static gint
 gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 
 	gedit_view_update_line_indicator ();
 
@@ -1013,7 +1008,7 @@ gedit_view_load_widgets (View *view)
 	gint count, sub_count;
 	gint temp_undo, temp_redo;
 
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 	
 	g_return_if_fail (view->app != NULL);
 
@@ -1085,7 +1080,7 @@ gedit_view_load_widgets (View *view)
 void
 gedit_view_set_undo (View *view, gint undo_state, gint redo_state)
 {
-	gedit_debug ("", DEBUG_VIEW);
+	gedit_debug (DEBUG_VIEW, "");
 	
 	g_return_if_fail (view->toolbar != NULL);
 	g_return_if_fail (view->toolbar->undo_button != NULL);

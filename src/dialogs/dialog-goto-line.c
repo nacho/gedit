@@ -25,14 +25,14 @@ static void goto_line_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 static void
 goto_line_destroyed_cb (GtkWidget *widget, gint button)
 {
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 	goto_line_dialog = NULL;
 }
 
 static void
 goto_line_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 	goto_line_clicked_cb (dialog, 0);
 }
 
@@ -46,7 +46,7 @@ goto_line_clicked_cb (GtkWidget *widget, gint button)
 	GtkText *text = GTK_TEXT (view->text);
 	GtkWidget *entry;
 
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 	g_return_if_fail (doc != NULL);
 	
 	if (button == 0)
@@ -88,7 +88,7 @@ dialog_goto_line (void)
 	GtkWidget *entry;
 	GladeXML *gui; 
 
-	gedit_debug("\n", DEBUG_SEARCH);
+	gedit_debug(DEBUG_SEARCH, "");
 
 	if (goto_line_dialog!=NULL)
 	{

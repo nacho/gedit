@@ -107,7 +107,7 @@ filenames_dropped (GtkWidget        *widget, GdkDragContext   *context, gint x, 
 {
 	GList *names, *tmp_list;
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_SEARCH, "");
 	
 	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
 	tmp_list = names;

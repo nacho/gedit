@@ -52,7 +52,7 @@ plugin_load (const gchar *file)
 	PluginData *pd;
 	guint res;
 
-	gedit_debug ("", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 	
 	g_return_val_if_fail (file != NULL, NULL);
 
@@ -107,7 +107,7 @@ plugin_unload (PluginData *pd)
 	char *path;
 	GnomeApp *app;
 	
-	gedit_debug ("", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (pd != NULL);
 	
@@ -143,7 +143,7 @@ plugin_load_plugins_in_dir (char *dir)
 	DIR *d;
 	struct dirent *e;
 
-	gedit_debug ("", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 	
 	if ((d = opendir (dir)) == NULL)
 		return;
@@ -167,7 +167,7 @@ load_all_plugins (void)
 	char *pdir;
 	char const * const home = g_get_home_dir ();
 	
-	gedit_debug ("", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	/* load user plugins */
 	if (home != NULL)
@@ -192,7 +192,7 @@ void
 gedit_plugins_init (void)
 {
 
-	gedit_debug ("", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 	
 	if (!g_module_supported ())
 		return;
@@ -214,7 +214,7 @@ gedit_plugins_window_add (GnomeApp *app)
 	gchar       *path;
 	GnomeUIInfo *menu;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_if_fail (app != NULL);
 
@@ -246,14 +246,13 @@ gedit_plugins_window_add (GnomeApp *app)
 	
 	g_free (menu);
 
-	gedit_debug ("end", DEBUG_PLUGINS);
 }
 
 
 gchar*
 gedit_plugin_program_location_string (gchar *program_name)
 {
-	gedit_debug ("", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 	return g_strdup_printf ("/gedit/plugin_programs/%s", program_name);
 }
 
@@ -263,7 +262,7 @@ gedit_plugin_guess_program_location (gchar *program_name)
 	gchar * location = NULL;
 	gchar * config_string = NULL;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	config_string = gedit_plugin_program_location_string (program_name);
 
@@ -305,8 +304,6 @@ gedit_plugin_guess_program_location (gchar *program_name)
 		g_free (look_here[1]);
 	}
 
-	gedit_debug ("end", DEBUG_PLUGINS);
-
 	return location;
 }
 
@@ -315,14 +312,12 @@ gedit_plugin_program_location_clear (gchar *program_name)
 {
 	gchar *config_string;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	config_string = gedit_plugin_program_location_string (program_name);
 	gnome_config_set_string (config_string, "");
 	gnome_config_sync ();
 	g_free (config_string);
-
-	gedit_debug ("end", DEBUG_PLUGINS);
 }
 
 gchar *
@@ -332,7 +327,7 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 	gchar* config_string = NULL;
 	gint error_code = 100;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	if (!dont_guess)
 		program_location = gedit_plugin_guess_program_location (program_name);
@@ -350,10 +345,7 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 			dont_guess = FALSE;
 			/* If the user cancelled or pressed ESC */
 			if (program_location == NULL)
-			{
-				gedit_debug ("return NULL", DEBUG_PLUGINS);
 				return NULL;
-			}
 			continue;
 		}
 		
@@ -405,7 +397,6 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 		}
 		else
 		{
-			gedit_debug ("return NULL", DEBUG_PLUGINS);
 			return NULL;
 		}
 	}
@@ -416,7 +407,6 @@ gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint
 	gnome_config_sync ();
 	g_free (config_string);
 
-	gedit_debug ("end", DEBUG_PLUGINS);
 	return program_location;
 }
 
@@ -429,7 +419,7 @@ gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name)
 	gchar * old_location = NULL;
 	gchar * new_location = NULL;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	/* Save a copy of the old location, in case the user cancels the dialog */
 	config_string = gedit_plugin_program_location_string (program_name);
@@ -455,6 +445,5 @@ gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name)
 
 	g_free (old_location);
 
-	gedit_debug ("end", DEBUG_PLUGINS);
 	return new_location;
 }

@@ -27,17 +27,17 @@
 #define __UTILS_H__
 
 typedef enum {
-	DEBUG_VIEW,
-	DEBUG_UNDO,
-	DEBUG_SEARCH,
-	DEBUG_PRINT,
-	DEBUG_PREFS,
-	DEBUG_PLUGINS,
-	DEBUG_FILE,
-	DEBUG_DOCUMENT,
-	DEBUG_RECENT,	
-	DEBUG_COMMANDS,
-	DEBUG_WINDOW
+	GEDIT_DEBUG_VIEW,
+	GEDIT_DEBUG_UNDO,
+	GEDIT_DEBUG_SEARCH,
+	GEDIT_DEBUG_PRINT,
+	GEDIT_DEBUG_PREFS,
+	GEDIT_DEBUG_PLUGINS,
+	GEDIT_DEBUG_FILE,
+	GEDIT_DEBUG_DOCUMENT,
+	GEDIT_DEBUG_RECENT,
+	GEDIT_DEBUG_COMMANDS,
+	GEDIT_DEBUG_WINDOW
 }DebugSection;
 
 extern gint debug;
@@ -53,33 +53,17 @@ extern gint debug_commands;
 extern gint debug_recent;
 extern gint debug_window;
 
-#define gedit_debug(str, section) \
-    if (debug) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    else { \
-    if (debug_view && section == DEBUG_VIEW) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_undo && section == DEBUG_UNDO) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_search && section == DEBUG_SEARCH) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_print && section == DEBUG_PRINT) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_prefs && section == DEBUG_PREFS) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_plugins && section == DEBUG_PLUGINS) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_file && section == DEBUG_FILE) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_document && section == DEBUG_DOCUMENT) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_commands && section == DEBUG_COMMANDS) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_recent && section == DEBUG_RECENT) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    if (debug_window && section == DEBUG_WINDOW) \
-	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
-    }
+#define	DEBUG_VIEW	GEDIT_DEBUG_VIEW,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_UNDO	GEDIT_DEBUG_UNDO,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_SEARCH	GEDIT_DEBUG_SEARCH,  __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PRINT	GEDIT_DEBUG_PRINT,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PREFS	GEDIT_DEBUG_PREFS,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_PLUGINS	GEDIT_DEBUG_PLUGINS, __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_FILE	GEDIT_DEBUG_FILE,    __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_DOCUMENT	GEDIT_DEBUG_DOCUMENT,__FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_RECENT	GEDIT_DEBUG_RECENT,  __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_COMMANDS	GEDIT_DEBUG_COMMANDS,__FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_WINDOW	GEDIT_DEBUG_WINDOW,  __FILE__, __LINE__, __FUNCTION__
 
 static const struct poptOption options[] =
 {
@@ -141,5 +125,8 @@ typedef enum {
 } GeditProgramErrors;
 
 gint	gedit_utils_is_program (gchar * program, gchar* default_name);
+
+void
+gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...);
 
 #endif /* __UTILS_H__ */

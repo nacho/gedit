@@ -62,6 +62,7 @@ gtk_radio_button_select (GSList *group, int n)
 	if (n >= len || n < 0)
 	{
 		g_warning ("Cant' set the radio button. invalid number");
+		g_print ("n %i len %i\n", n, len);
 		return;
 	}
 	
@@ -104,7 +105,21 @@ gedit_flash_va (gchar *format, ...)
 	g_free (msg);
 }
 
+void
+gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...)
+{
+	va_list args;
+	gchar *msg;
 
+	g_return_if_fail (format != NULL);
+
+	va_start (args, format);
+	msg = g_strdup_vprintf (format, args);
+	va_end (args);
+
+	g_print ("%s:%d (%s) %s\n", file, line, function, msg);
+	g_free (msg);
+}
 
 /**
  * gedit_util_is_program: 
@@ -213,4 +228,5 @@ print_time (void)
 		 "Real time : ", field_width, real_time, " seconds");
 	return user_time;
 }
+
 

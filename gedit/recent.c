@@ -52,7 +52,7 @@ gedit_recent_history_get_list (void)
         gint max_entries, i;
         gboolean do_set = FALSE;
 
-	gedit_debug ("", DEBUG_RECENT);
+	gedit_debug (DEBUG_RECENT, "");
 	
 	if (gedit_recent_history_list)
 		return gedit_recent_history_list;
@@ -105,7 +105,7 @@ gedit_recent_history_update_list (gchar *filename)
         gboolean do_set = FALSE;
         gboolean found = FALSE;
 
-	gedit_debug ("", DEBUG_RECENT);
+	gedit_debug (DEBUG_RECENT, "");
 
         g_return_val_if_fail (filename != NULL, NULL);
 
@@ -157,7 +157,7 @@ gedit_recent_history_write_config (void)
         GList *l;
         gint max_entries, i = 0;
 
-	gedit_debug ("", DEBUG_RECENT);
+	gedit_debug (DEBUG_RECENT, "");
 
         if (gedit_recent_history_list == NULL)
 		return;
@@ -196,7 +196,7 @@ gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 	gchar *path;
 	int i;
 
-	gedit_debug ("", DEBUG_RECENT);
+	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (app != NULL);
 
@@ -249,7 +249,7 @@ gedit_recent_update_menus (GnomeApp *app, GList *recent_files)
 static void
 recent_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("", DEBUG_RECENT);
+	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (data != NULL);
 
@@ -274,7 +274,7 @@ gedit_recent_update (GnomeApp *app)
 {
 	GList *filelist = NULL;
 
-	gedit_debug ("", DEBUG_RECENT);
+	gedit_debug (DEBUG_RECENT, "");
 
 	filelist = gedit_recent_history_get_list ();
 
@@ -292,7 +292,7 @@ gedit_recent_add (char *file_name)
 {
 	gchar *del_name;
 
-	gedit_debug ("", DEBUG_RECENT);
+	gedit_debug (DEBUG_RECENT, "");
 
 	g_return_if_fail (file_name != NULL);
 

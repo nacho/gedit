@@ -131,7 +131,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 	PrintJobInfo *pji;
 	Document * doc = gedit_document_current();
 
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 	
 	if ( doc == NULL)
 		return;
@@ -273,7 +273,7 @@ file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 void
 file_print_preview_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	if (!gnome_mdi_get_active_view (mdi))
 		return;
@@ -295,7 +295,7 @@ print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 {
 	int current_page, current_line;
 	
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 	
 	pji->temp = g_malloc( pji->chars_per_line + 2);
 
@@ -476,7 +476,7 @@ print_ps_line (PrintJobInfo * pji, gint line, gint first_line)
 {
 	gfloat y;
 
-        gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	y = pji->page_height -  pji->margin_top - pji->header_height -
 	(pji->font_char_height*( (pji->current_line % pji->lines_per_page)+1 ));
@@ -520,7 +520,7 @@ gedit_print_verify_fonts (void)
 	GnomeFont *test_font;
 	guchar * test_font_name;
 
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	/* Courier */
 	test_font_name = g_strdup (GEDIT_PRINT_BODY_FONT);
@@ -567,7 +567,7 @@ gedit_print_verify_fonts (void)
 static gint
 print_set_pji (PrintJobInfo * pji, Document *doc)
 {
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	if (!gedit_print_verify_fonts())
 		return FALSE;
@@ -661,7 +661,7 @@ print_determine_lines (PrintJobInfo *pji, int real)
 	int dump_info_basic = FALSE;
 	int dump_text = FALSE;
 
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	/* here we modify real if !pji->wrapping */
 	if (real && !wrapping)
@@ -810,7 +810,7 @@ print_determine_lines (PrintJobInfo *pji, int real)
 static void
 print_start_job (PrintJobInfo *pji)
 {
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	print_set_orientation(pji);
 }
@@ -839,7 +839,7 @@ print_header (PrintJobInfo *pji, unsigned int page)
 	GnomeFont *font;
 	float x,y,len;
 	
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	font = gnome_font_new (GEDIT_PRINT_HEADER_FONT, 12);
 	gnome_print_setfont (pji->pc, font);
@@ -871,7 +871,7 @@ print_setfont (PrintJobInfo *pji)
 {
 	GnomeFont *font;
 
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 	
 	font = gnome_font_new (pji->font_name, pji->font_size);
 	gnome_print_setfont (pji->pc, font);
@@ -882,7 +882,7 @@ print_setfont (PrintJobInfo *pji)
 static void
 print_end_page (PrintJobInfo *pji)
 {
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	gnome_print_showpage (pji->pc);
 	print_set_orientation (pji);
@@ -891,13 +891,13 @@ print_end_page (PrintJobInfo *pji)
 static void
 print_end_job (GnomePrintContext *pc)
 {
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 }
 
 static void
 print_pji_destroy (PrintJobInfo *pji)
 {
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 
 	gtk_object_unref (GTK_OBJECT (pji->master));
 	g_free (pji->buffer);
@@ -909,7 +909,7 @@ print_pji_destroy (PrintJobInfo *pji)
 static void
 preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji)
 {
-	gedit_debug ("", DEBUG_PRINT);
+	gedit_debug (DEBUG_PRINT, "");
 }
 
 

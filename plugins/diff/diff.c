@@ -115,7 +115,6 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 	else
 	{
 		temp_file_1 = tmpfile();
-		if (temp_file_1
 	}
 
 	if (!state_2)
@@ -145,7 +144,7 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 	GtkWidget *label;
 	gchar * new_location;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 	dialog = userdata;
 
 	new_location = gedit_plugin_program_location_change (GEDIT_PLUGIN_PROGRAM,
@@ -165,7 +164,6 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 
 	gdk_window_raise (dialog->window);	
 
-	gedit_debug ("end", DEBUG_PLUGINS);
 }
 
 static void
@@ -208,21 +206,32 @@ gedit_plugin_diff_load_documents (GtkWidget ** options_menu, gint second_menu)
 
 }
 
-static void 
-gedit_plugin_diff_radio_button_toggled (GtkWidget *widget, gpointer userdata)
+static void
+gedit_plugin_diff_document_selected (GtkWidget *widget, GdkEvent *event, gpointer data)
 {
-	gint state_1;
-	gint state_2;
-     
-	state_1 = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(from_document_1)->group);
-	state_2 = gtk_radio_group_get_selected (GTK_RADIO_BUTTON(from_document_2)->group);
+	GtkRadioButton *radio_button = data;
 
-	gtk_widget_set_sensitive (file_entry_1, state_1);
-	gtk_widget_set_sensitive (document_list_1, !state_1);
-	gtk_widget_set_sensitive (file_entry_2, state_2);
-	gtk_widget_set_sensitive (document_list_2, !state_2);
+	g_return_if_fail (radio_button!=NULL);
+	
+	gtk_radio_button_select (radio_button->group, 0);
 }
-     
+
+static void
+gedit_plugin_diff_file_selected (GtkWidget *widget, gpointer data)
+{
+	GtkRadioButton *radio_button = data;
+
+	g_return_if_fail (radio_button!=NULL);
+	
+	gtk_radio_button_select (radio_button->group, 1);
+}
+
+static void
+gedit_plugin_diff_file_selected_event (GtkWidget *widget, GdkEvent *event, gpointer data)
+{
+	gedit_plugin_diff_file_selected (widget, data);
+}
+
 static void
 gedit_plugin_create_dialog (void)
 {
@@ -230,6 +239,10 @@ gedit_plugin_create_dialog (void)
 	GtkWidget *dialog;
 	GtkWidget *change_button;
 	GtkWidget *location_label;
+
+	GtkWidget *file_selector_combo_1;
+	GtkWidget *file_selector_combo_2;
+	
 	gchar * program_location;
 
 	program_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
@@ -259,12 +272,17 @@ gedit_plugin_create_dialog (void)
 	}
 
 	dialog          = glade_xml_get_widget (gui, "dialog");
+
 	from_document_1 = glade_xml_get_widget (gui, "from_document_1");
 	document_list_1 = glade_xml_get_widget (gui, "document_list_1");
 	file_entry_1    = glade_xml_get_widget (gui, "file_entry_1");
+	file_selector_combo_1 = glade_xml_get_widget (gui, "file_selector_combo_1");
+
 	from_document_2 = glade_xml_get_widget (gui, "from_document_2");
 	document_list_2 = glade_xml_get_widget (gui, "document_list_2");
 	file_entry_2    = glade_xml_get_widget (gui, "file_entry_2");
+	file_selector_combo_2 = glade_xml_get_widget (gui, "file_selector_combo_2");
+
 	location_label  = glade_xml_get_widget (gui, "location_label");
 	change_button   = glade_xml_get_widget (gui, "change_button");
 
@@ -291,21 +309,32 @@ gedit_plugin_create_dialog (void)
 	gtk_signal_connect (GTK_OBJECT (change_button), "clicked",
 			    GTK_SIGNAL_FUNC (gedit_plugin_change_location), dialog);
 
-	/* Connect the signals for the radio_buttons */
-	gtk_signal_connect (GTK_OBJECT (from_document_1), "toggled",
-			    GTK_SIGNAL_FUNC (gedit_plugin_diff_radio_button_toggled), NULL);
-	gtk_signal_connect (GTK_OBJECT (from_document_2), "toggled",
-			    GTK_SIGNAL_FUNC (gedit_plugin_diff_radio_button_toggled), NULL);
-
-	/* Fill the option menus */
+	/* Load and connect the document list */
+	gtk_signal_connect (GTK_OBJECT (document_list_1), "button_press_event",
+			    GTK_SIGNAL_FUNC (gedit_plugin_diff_document_selected),
+			    from_document_1);
+	gtk_signal_connect (GTK_OBJECT (document_list_2), "button_press_event",
+			    GTK_SIGNAL_FUNC (gedit_plugin_diff_document_selected),
+			    from_document_2);
+	
 	document_selected_1 = 0;
 	document_selected_2 = 0;
  	gedit_plugin_diff_load_documents (&document_list_1, FALSE);
  	gedit_plugin_diff_load_documents (&document_list_2, TRUE);
 
-	gtk_widget_set_sensitive (file_entry_1, FALSE);
-	gtk_widget_set_sensitive (file_entry_2, FALSE);
-	
+	gtk_signal_connect (GTK_OBJECT (file_entry_1), "browse_clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected),
+			    from_document_1);
+	gtk_signal_connect (GTK_OBJECT (file_selector_combo_1), "focus_in_event",
+			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected_event),
+			    from_document_1);
+	gtk_signal_connect (GTK_OBJECT (file_entry_2), "browse_clicked",
+			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected),
+			    from_document_2);
+	gtk_signal_connect (GTK_OBJECT (file_selector_combo_2), "focus_in_event",
+			    GTK_SIGNAL_FUNC (gedit_plugin_diff_file_selected_event),
+			    from_document_2);
+
 	/* Set the dialog parent and modal type */ 
 	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
 				 gedit_window_active());

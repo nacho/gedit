@@ -72,7 +72,7 @@ gtk_option_menu_get_active_index (GtkWidget *omenu)
 	GList *children;
 	gint i = 0;
 
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug(DEBUG_PREFS, "");
 
 	menu = GTK_MENU (gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu)));
 	active = gtk_menu_get_active (menu);
@@ -97,7 +97,7 @@ gtk_option_menu_get_active_index (GtkWidget *omenu)
 static void
 destroy_cb (void)
 {
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 	gtk_widget_destroy (GTK_WIDGET (propertybox));
 	propertybox = NULL;
 }
@@ -107,7 +107,7 @@ help_cb (void)
 {
 	GnomeHelpMenuEntry help_entry = { NULL, "properties.html" };
 
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 
 	help_entry.name = gnome_app_id;
 	gnome_help_display (NULL, &help_entry);
@@ -120,7 +120,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	GdkColor *c;
 	gint temp_mdi_mode;
 	
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 	
 	if (page == -1)
 		return;
@@ -264,14 +264,14 @@ gtk_toggle_button_update_label_sensitivity (GtkWidget *widget, gboolean sens)
 static void
 prefs_changed (GtkWidget *widget, gpointer data)
 {
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 	gnome_property_box_changed (GNOME_PROPERTY_BOX (propertybox));
 }
 
 static void
 prepare_general_page (GladeXML *gui)
 {
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 
 	statusbar = glade_xml_get_widget (gui, "statusbar");
 #ifdef ENABLE_SPLIT_SCREEN
@@ -376,7 +376,7 @@ undo_levels_toggled (GtkWidget *widget, gpointer data)
 static void
 prepare_documents_page (GladeXML *gui)
 {
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 	
 	mdimode = glade_xml_get_widget (gui, "mdimode");
 	tabpos = glade_xml_get_widget (gui, "tabpos");
@@ -435,7 +435,7 @@ prepare_fontscolors_page (GladeXML *gui)
 	GtkStyle *style;
 	GdkColor *c;
 
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 	
 	foreground = glade_xml_get_widget (gui, "foreground");
 	background = glade_xml_get_widget (gui, "background");
@@ -474,6 +474,8 @@ prepare_fontscolors_page (GladeXML *gui)
 static void
 print_lines_toggled (GtkWidget *widget, gpointer data)
 {
+	gedit_debug (DEBUG_PREFS, "");
+
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (print_lines)))
 	{
 		gtk_widget_set_sensitive (GTK_WIDGET (print_lines_spin_button), TRUE);
@@ -491,7 +493,7 @@ print_lines_toggled (GtkWidget *widget, gpointer data)
 static void
 prepare_printing_page (GladeXML *gui)
 {
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 
 	print_header = glade_xml_get_widget (gui, "printheader");
 	print_lines = glade_xml_get_widget (gui, "printlines");
@@ -550,7 +552,7 @@ prepare_printing_page (GladeXML *gui)
 static void
 prepare_pagesize_page (GladeXML *gui)
 {
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 
 	paperselector  = glade_xml_get_widget (gui, "paperselector");
 
@@ -566,7 +568,7 @@ prepare_pagesize_page (GladeXML *gui)
 static void
 dialog_prefs_impl (GladeXML *gui)
 {
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 	
 	propertybox = glade_xml_get_widget (gui, "propertybox");
 
@@ -608,7 +610,7 @@ dialog_prefs (void)
 {
 	static GladeXML *gui = NULL;
 
-	gedit_debug("", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 
 	if (!propertybox)
 	{

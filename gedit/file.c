@@ -98,7 +98,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	Document *currentdoc;
 	View *view;
 	
-	gedit_debug ("start", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 	
 	g_return_val_if_fail (fname != NULL, 1);
 
@@ -164,7 +164,6 @@ gedit_file_open (Document *doc, gchar *fname)
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	gedit_recent_add (fname);
 	gedit_recent_update (gedit_window_active_app());
-	gedit_debug ("end", DEBUG_FILE);
 
 	return 0;
 }
@@ -186,7 +185,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	gchar *tmpstr;
 	View *view;
 
-	gedit_debug ("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	g_return_val_if_fail (doc!=NULL, 1);
 	
@@ -282,7 +281,7 @@ void
 gedit_file_save_as (Document *doc)
 {
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	if (doc == NULL)
 		doc = gedit_document_current();
@@ -355,20 +354,21 @@ gedit_file_stdin (Document *doc)
 	guint pos = 0;
 	View *view;
 
-	gedit_debug ("start", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	fstat(STDIN_FILENO, &stats);
 	
 	if (stats.st_size  == 0)
 	{
-		gedit_debug ("size = 0. end", DEBUG_FILE);
+		
+		gedit_debug (DEBUG_FILE, "size = 0. end");
 		return 1;
 	}
 	
 	if ((tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE+1)) == NULL)
 	{
 		gnome_app_error (mdi->active_window, _("Could not allocate the required memory."));
-		gedit_debug ("mem alloc error. end", DEBUG_FILE);
+		gedit_debug (DEBUG_FILE, "mem alloca error. returning");
 		return 1;
 	}
 
@@ -411,7 +411,7 @@ file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
 	Document *doc;
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 	
 	gedit_flash (_(MSGBAR_FILE_NEW));
 
@@ -424,7 +424,7 @@ void
 file_open_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	gedit_close_all_flag_verify ("file_open_cb");
 
@@ -459,7 +459,7 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
 	Document *doc;
 	
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	gedit_close_all_flag_verify ("file_save_as_cb");
 	
@@ -475,7 +475,7 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 static gint
 delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 	
 	gtk_widget_hide (widget);
 	return TRUE;
@@ -484,7 +484,7 @@ delete_event_cb (GtkWidget *widget, GdkEventAny *event)
 static void
 cancel_cb (GtkWidget *w, gpointer data)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 	
 	gtk_widget_hide (data);
 }
@@ -494,7 +494,7 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	guchar * file_name;
 	
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	file_name = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(open_file_selector)));
 
@@ -511,7 +511,7 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 gint
 file_save_document (Document * doc)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	if (doc==NULL)
 		return FALSE;
@@ -533,7 +533,7 @@ file_save_cb (GtkWidget *widget, gpointer cbdata)
 {
 	Document *doc;
 	
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	gedit_close_all_flag_verify ("file_save_cb");
 
@@ -552,7 +552,7 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 	int i;
 	Document *doc;
 
-	gedit_debug ("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 	
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
@@ -570,7 +570,7 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	gint i;
 	View *nth_view;
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	doc = cbdata;
 
@@ -654,7 +654,7 @@ void
 file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
 
-	gedit_debug("start", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	if (mdi->active_child == NULL)
 		return;
@@ -668,7 +668,7 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("start", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	gedit_close_all_flag_status("File_close_all_cb. Before");
 	
@@ -686,32 +686,24 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 
 	gedit_window_set_widgets_sensitivity (FALSE);
 	
-	gedit_debug("end", DEBUG_FILE);
 }
 
 void
 file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("start", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_QUIT;
 	file_close_all_cb (NULL, NULL);
 
-	gedit_debug("1", DEBUG_FILE);
-	
 	if (gedit_document_current()!=NULL)
 		return;
-
-	gedit_debug("2", DEBUG_FILE);
 
 	/* We need to disconnect the signal because mdi "destroy" event
 	   is connected to file_quit_cb ( i.e. this function ). Chema */
 	gtk_signal_disconnect (GTK_OBJECT(mdi), gedit_mdi_destroy_signal);
 	
-	gedit_debug("3", DEBUG_FILE);
 	gtk_object_destroy (GTK_OBJECT (mdi));
-
-	gedit_debug("3", DEBUG_FILE);
 	gedit_prefs_save_settings ();
 	gedit_recent_history_write_config ();
 
@@ -725,7 +717,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	gchar * msg;
 	Document *doc = gedit_document_current ();
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug(DEBUG_FILE, "");
 
 	gedit_close_all_flag_verify ("file_save_cb");
 
@@ -775,7 +767,7 @@ gedit_file_create_popup (guchar *title)
 	int ret;
 	char *msg;
 
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug(DEBUG_FILE, "");
 	
 	msg = g_strdup_printf (_("The file ``%s'' does not exist.  Would you like to create it?"),
 			       title);
@@ -803,7 +795,7 @@ gedit_file_create_popup (guchar *title)
 void 
 gedit_close_all_flag_clear (void)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_FILE, "");
 
 	gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_NORMAL;
 	
@@ -812,7 +804,7 @@ gedit_close_all_flag_clear (void)
 static void
 gedit_close_all_flag_status (guchar * function)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug(DEBUG_FILE, "");
 
 	g_return_if_fail (function!=NULL);
 
@@ -836,7 +828,7 @@ gedit_close_all_flag_status (guchar * function)
 static void
 gedit_close_all_flag_verify (guchar *function)
 {
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug(DEBUG_FILE, "");
 
 	if (gedit_close_all_flag != GEDIT_CLOSE_ALL_FLAG_NORMAL)
 		g_warning ("The close all flag was set !!!!! Func: %s", function);

@@ -149,7 +149,7 @@ gedit_document_replace_text (Document *doc, guchar * text_to_insert, guint posit
 {
 	gchar *text_to_delete;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	text_to_delete = gedit_document_get_chars (doc, position, position + length);
 
@@ -186,7 +186,7 @@ gedit_document_set_readonly (Document *doc, gint readonly)
 	View * nth_view;
 	gint n;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	doc->readonly = readonly;
 		
@@ -235,7 +235,7 @@ gedit_document_get_tab_name (Document *doc)
 	int max_number = 0;
 	int i;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	if (doc->filename != NULL)
 	{
@@ -269,7 +269,7 @@ gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos)
 	GtkText * text;
 	View * view;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc!=NULL, NULL);
 	g_return_val_if_fail (end_pos > start_pos, NULL);
@@ -300,7 +300,7 @@ gedit_document_get_buffer (Document * doc)
 	GtkText * text;
 	View * view;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc!=NULL, NULL);
 	view = g_list_nth_data (doc->views, 0);
@@ -321,7 +321,7 @@ gedit_document_get_buffer_length (Document * doc)
 	guint length;
 	View * view;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (doc!=NULL, 0);
 	view = g_list_nth_data (doc->views, 0);
@@ -337,7 +337,7 @@ gedit_document_new (void)
 {
 	Document *doc;
 
-	gedit_debug ("start", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	doc = gtk_type_new (gedit_document_get_type ());
 
@@ -348,8 +348,6 @@ gedit_document_new (void)
 	
 	gedit_window_set_widgets_sensitivity (TRUE);
 
-	gedit_debug ("end", DEBUG_DOCUMENT);
-
 	return doc;
 }
 
@@ -358,7 +356,7 @@ gedit_document_new_with_title (gchar *title)
 {
 	Document *doc;
 	
-	gedit_debug ("start", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (title != NULL, NULL);
 	doc = gtk_type_new (gedit_document_get_type ());
@@ -371,7 +369,6 @@ gedit_document_new_with_title (gchar *title)
 
 	gedit_window_set_widgets_sensitivity (TRUE);
 
-	gedit_debug ("end", DEBUG_DOCUMENT);
 
 	return doc;
 }
@@ -381,7 +378,7 @@ gedit_document_new_with_file (gchar *file_name)
 {
 	Document *doc;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	doc = gedit_document_current();
 
@@ -411,7 +408,7 @@ gedit_document_current (void)
 static gchar *
 gedit_document_get_config_string (GnomeMDIChild *child)
 {
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
 }
 
@@ -422,11 +419,11 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 	gint ret;
 	gchar *fname, *msg;
 
-	gedit_debug ("start", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "start");
 	
 	if (!gedit_view_active())
 	{
-		gedit_debug ("returning, since views. are NULL", DEBUG_DOCUMENT);
+		gedit_debug (DEBUG_DOCUMENT, "returning since views are NULL");
 		return TRUE;
 	}
 
@@ -456,7 +453,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 		}
 	}
 
-	gedit_debug ("end", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "end");
 	return TRUE;
 }
 
@@ -465,7 +462,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 {
 	View  *new_view;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (child != NULL, NULL);
 	g_return_val_if_fail (GNOME_IS_MDI_CHILD (child), NULL);
@@ -483,7 +480,7 @@ gedit_document_destroy (GtkObject *obj)
 {
 	Document *doc = DOCUMENT (obj);
 
-	gedit_debug ("start", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 	
 	g_free (doc->filename);
 	gedit_undo_free_list (&doc->undo);
@@ -492,7 +489,6 @@ gedit_document_destroy (GtkObject *obj)
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
 
-	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 static void
@@ -504,7 +500,7 @@ gedit_document_class_init (DocumentClass *class)
 	object_class = (GtkObjectClass*)class;
 	child_class = GNOME_MDI_CHILD_CLASS (class);
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 	
 	object_class->destroy = gedit_document_destroy;
 	
@@ -513,13 +509,12 @@ gedit_document_class_init (DocumentClass *class)
 
 	parent_class = gtk_type_class (gnome_mdi_child_get_type ());
 
-	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
 static void
 gedit_document_init (Document *doc)
 {
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	doc->filename = NULL;
 	doc->changed = FALSE;
@@ -559,7 +554,7 @@ gedit_document_get_type (void)
 void
 gedit_mdi_init (void)
 {
-	gedit_debug ("start", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "start");
 
 	/*
 	mdi = GNOME_MDI (gnome_mdi_new ("gedit", "gedit "VESION));
@@ -591,7 +586,7 @@ gedit_mdi_init (void)
 	/* Loads the structure gedit_toolbar with the widgets */
 	gedit_window_set_toolbar_labels (mdi->active_window);
 
-	gedit_debug ("end", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "end");
 }
 
 void
@@ -599,7 +594,7 @@ gedit_document_load ( GList *file_list)
 {
 	gchar *file_name;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	gedit_file_stdin (NULL);
 
@@ -634,7 +629,7 @@ gedit_document_set_title (Document *doc)
 	gchar *title;
 	gchar *docname;
 
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 
 	if (doc == NULL)
 		return;
@@ -674,7 +669,7 @@ gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
 	Document *doc, *nth_doc;
 	gint n;
 
-	gedit_debug ("", DEBUG_FILE);
+	gedit_debug (DEBUG_DOCUMENT, "");
 	
 	doc = gedit_document_current();
 	if (!doc || !doc->filename)
@@ -773,7 +768,7 @@ gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state)
 	View *nth_view;
 	gint n;
 	
-	gedit_debug ("", DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_DOCUMENT, "");
 	
 	g_return_if_fail (IS_GE_DOCUMENT(doc));
 

@@ -8,14 +8,23 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "../../src/window.h"
-#include "../../src/document.h"
-#include "../../src/view.h"
-#include "../../src/plugin.h"
+#include "window.h"
+#include "document.h"
+#include "utils.h"
+
+#if 0
+  #include "../../src/view.h"
+  #include "../../src/plugin.h"
+#else
+  #include "view.h"
+  #include "plugin.h"
+#endif
 
 static void
 destroy_plugin (PluginData *pd)
 {
+	gedit_debug (DEBUG_PLUGINS, "");
+
 	g_free (pd->name);
 }
 
@@ -25,6 +34,8 @@ static void
 insert_hello (void)
 {
 	View *view = gedit_view_active();
+
+	gedit_debug (DEBUG_PLUGINS, "");
 
 	if (!view)
 	     return;
@@ -38,6 +49,7 @@ gint
 init_plugin (PluginData *pd)
 {
 	/* initialize */
+	gedit_debug (DEBUG_PLUGINS, "");
      
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Hello World");

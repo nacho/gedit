@@ -45,7 +45,7 @@ static void replace_text_clicked_cb (GtkWidget *widget, gint button);
 static void
 replace_text_destroyed_cb (GtkWidget *widget, gint button)
 {
-	gedit_debug("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 	gedit_search_end();
 	widget = NULL;
 }
@@ -55,14 +55,14 @@ static void
 replace_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
 	/* behave as if the user clicked Find/Find next button */
-	gedit_debug("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 	replace_text_clicked_cb (dialog, 1);
 }
 
 static void
 search_entry_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
-	gedit_debug("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 	replace_text_clicked_cb (dialog, 0);
 }
 
@@ -78,7 +78,7 @@ replace_text_clicked_cb (GtkWidget *widget, gint button)
 	
 	View *view;
 
-	gedit_debug("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (!search_verify_document())
 	{
@@ -276,7 +276,7 @@ dialog_replace (gint full)
 	GladeXML  *gui;
 	gchar * dialog_title;
 
-	gedit_debug("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_SEARCH, "");
 	
 	if (replace_text_dialog!=NULL)
 	{

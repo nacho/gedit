@@ -40,7 +40,7 @@ Preferences *settings = NULL;
 void 
 gedit_prefs_save_settings (void)
 {
-	gedit_debug ("start", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "start");
 	
 	gnome_config_push_prefix ("/gedit/Global/");
 
@@ -90,7 +90,7 @@ gedit_prefs_save_settings (void)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 
-	gedit_debug ("end", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "end");
 }
 
 /* Determine we use fonts or fontsets. If a fontset is supplied for
@@ -119,7 +119,7 @@ void
 gedit_prefs_load_settings (void)
 {
 	gchar * mdi_mode_string;
-	gedit_debug ("Loading preferencesn", DEBUG_PREFS);
+	gedit_debug (DEBUG_PREFS, "");
 
 	if (!settings)
 	{

@@ -49,7 +49,11 @@ gedit_undo_check_size (Document *doc)
 	gint n;
 	GeditUndoInfo *nth_undo;
 	
-	gedit_debug ("", DEBUG_UNDO);
+	gedit_debug (DEBUG_UNDO, "");
+
+	/*
+#define XTRA_DEBUG_INFO 
+	*/
 
 	if (settings->undo_levels < 1)
 		return;
@@ -101,7 +105,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 {
 	GeditUndoInfo *undo;
 
-	gedit_debug ("", DEBUG_UNDO);
+	gedit_debug (DEBUG_UNDO, "");
 
 	g_return_if_fail (end_pos > start_pos);
 
@@ -154,7 +158,7 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 	guchar * temp_string;
 	GeditUndoInfo * last_undo;
 	
-	gedit_debug ("", DEBUG_UNDO);
+	gedit_debug (DEBUG_UNDO, "");
 	/* This are the cases in which we will not merge :
 	   1. if (last_undo->mergeable == FALSE)
 	   [mergeable = FALSE when the size of the undo data was not 1.
@@ -175,34 +179,29 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 
 	if (!last_undo->mergeable)
 	{
-		gedit_debug ("Previous Cell is not mergeable...", DEBUG_UNDO);
 		return FALSE;
 	}
 
 	if (end_pos-start_pos != 1)
 	{
-		gedit_debug ("The size of the new data is not 1...", DEBUG_UNDO);
 		last_undo->mergeable = FALSE;
 		return FALSE;
 	}
 
 	if (text[0]=='\n')
 	{
-		gedit_debug ("The data is a new line...", DEBUG_UNDO);
 		last_undo->mergeable = FALSE;		
 		return FALSE;
 	}
 
 	if (action != last_undo->action)
 	{
-		gedit_debug ("The action is different...", DEBUG_UNDO);
 		last_undo->mergeable = FALSE;
 		return FALSE;
 	}
 
 	if (action == GEDIT_UNDO_ACTION_REPLACE_INSERT || action == GEDIT_UNDO_ACTION_REPLACE_DELETE)
 	{
-		gedit_debug ("We don't merge replaced strings...", DEBUG_UNDO);
 		last_undo->mergeable = FALSE;
 		return FALSE;
 	}
@@ -211,7 +210,6 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 	{
 		if (last_undo->start_pos!=end_pos && last_undo->start_pos != start_pos)
 		{
-			gedit_debug ("The text is not in the same position.", DEBUG_UNDO);
 			last_undo->mergeable = FALSE;			
 			return FALSE;
 		}
@@ -223,7 +221,6 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 			     (last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] ==' '
 			      || last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] == '\t'))
 			{
-				gedit_debug ("The text is a space/tab but the previous char is not...", DEBUG_UNDO);
 				last_undo->mergeable = FALSE;			
 				return FALSE;
 			}
@@ -240,7 +237,6 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 			     (last_undo->text [0] ==' '
 			      || last_undo->text [0] == '\t'))
 			{
-				gedit_debug ("The text is a space/tab but the previous char is not...", DEBUG_UNDO);
 				last_undo->mergeable = FALSE;			
 				return FALSE;
 			}
@@ -255,7 +251,6 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 	{
 		if (last_undo->end_pos != start_pos)
 		{
-			gedit_debug ("The text is not in the same position.", DEBUG_UNDO);
 			last_undo->mergeable = FALSE;			
 			return FALSE;
 		}
@@ -264,7 +259,6 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 		     (last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] ==' '
 		      || last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] == '\t'))
 		{
-			gedit_debug ("The text is a space/tab but the previous char is not...", DEBUG_UNDO);
 			last_undo->mergeable = FALSE;			
 			return FALSE;
 		}
@@ -294,13 +288,10 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 	Document *doc = gedit_document_current();
 	GeditUndoInfo *undo;
 
-	gedit_debug ("", DEBUG_UNDO);
+	gedit_debug (DEBUG_UNDO, "");
 
 	if (doc->undo == NULL)
-	{
-		gedit_debug ("There aren't any undo blocks. returning", DEBUG_UNDO);
 		return;
-	}
 	
 	g_return_if_fail (doc!=NULL);
 
@@ -368,7 +359,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	Document *doc = gedit_document_current();
 	GeditUndoInfo *redo;
 
-	gedit_debug ("", DEBUG_UNDO);
+	gedit_debug (DEBUG_UNDO, "");
 
 	if (doc->redo == NULL)
 		return;
@@ -439,7 +430,7 @@ gedit_undo_free_list (GList ** list_pointer)
 	GeditUndoInfo *nth_redo;
 	GList *list = * list_pointer;
 	
-	gedit_debug ("", DEBUG_UNDO);
+	gedit_debug (DEBUG_UNDO, "");
 
 	if (list==NULL)
 	{

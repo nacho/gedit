@@ -105,7 +105,7 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 	GtkWidget *label;
 	gchar * new_location;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 	dialog = userdata;
 
 	new_location = gedit_plugin_program_location_change (GEDIT_PLUGIN_PROGRAM,
@@ -126,7 +126,6 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 
 	gdk_window_raise (dialog->window);	
 
-	gedit_debug ("end", DEBUG_PLUGINS);
 }
 
 

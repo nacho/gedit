@@ -150,7 +150,7 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 	GtkWidget *label;
 	gchar * new_location;
 
-	gedit_debug ("start", DEBUG_PLUGINS);
+	gedit_debug (DEBUG_PLUGINS, "");
 	dialog = userdata;
 
 	new_location = gedit_plugin_program_location_change (GEDIT_PLUGIN_PROGRAM,
@@ -171,7 +171,6 @@ gedit_plugin_change_location (GtkWidget *button, gpointer userdata)
 
 	gdk_window_raise (dialog->window);	
 
-	gedit_debug ("end", DEBUG_PLUGINS);
 }
 
 static void
@@ -184,6 +183,8 @@ gedit_plugin_browse_create_dialog (void)
 	gchar *browser_location;
 	gchar *location_label_label;
 
+	gedit_debug (DEBUG_PLUGINS, "");
+	
         /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 	 it is used to display "you can not use the [name] plugin without this program... */
 	browser_location = gedit_plugin_program_location_get ("lynx", _("browse"), FALSE);

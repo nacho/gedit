@@ -86,7 +86,7 @@ search_verify_document (void)
 void
 gedit_search_start (void)
 {
-	gedit_debug("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 
 	gedit_search_info.view = gedit_view_active();
 	gedit_search_info.doc = gedit_document_current();
@@ -114,7 +114,7 @@ gedit_search_start (void)
 void
 gedit_search_end (void)
 {
-	gedit_debug("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 
 	switch (gedit_search_info.state) {
 	case SEARCH_IN_PROGRESS_NO:
@@ -162,7 +162,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	gchar *msg;
 	Document *doc;
 
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 
 	if (gedit_search_info.state != SEARCH_IN_PROGRESS_NO)
 	{
@@ -196,7 +196,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 void
 find_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 	dialog_replace (FALSE);
 }
 
@@ -276,14 +276,14 @@ find_again_execute (void)
 void
 find_again_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 	find_again_execute ();
 }
 
 void
 replace_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 	dialog_replace(TRUE);
 }
 
@@ -291,7 +291,7 @@ replace_cb (GtkWidget *widget, gpointer data)
 void
 goto_line_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 
 	if (!gedit_document_current())
 		return;
@@ -315,7 +315,7 @@ search_text_execute ( gulong starting_position,
 	gint text_length;
 	gint case_sensitive_mask;
 
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 
 #if 0
 	/* FIXME: why do we get starting_position as a gulong ??? chema. It should
@@ -371,7 +371,7 @@ pos_to_line (gint pos, gint *numlines)
 {
 	gulong lines = 1, i, current_line = 0;
 
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 
 	if (gedit_search_info.state !=  SEARCH_IN_PROGRESS_YES)
 		g_warning ("Search not started, watch out dude !\n");
@@ -397,7 +397,7 @@ line_to_pos (Document *doc, gint line, gint *lines)
 	gint current_line = 0, i;
 	guint pos;
 	
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 
 	pos = (gulong) gedit_search_info.buffer_length;
 
@@ -443,7 +443,7 @@ gedit_search_replace_all_execute ( View *view, guint start_pos, guchar *search_t
 	   p4 = pointer to the index in replace_text */
 	gint case_sensitive_mask;
 
-	gedit_debug ("", DEBUG_SEARCH);
+	gedit_debug (DEBUG_RECENT, "");
 	
 	g_return_val_if_fail (gedit_search_info.state == SEARCH_IN_PROGRESS_YES, 0);
 

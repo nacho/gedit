@@ -59,7 +59,7 @@ GeditToolbar *gedit_toolbar = NULL;
 GtkWindow *
 gedit_window_active (void)
 {
-	gedit_debug ("", DEBUG_WINDOW);
+	gedit_debug (DEBUG_WINDOW, "");
 	if (GTK_IS_WIDGET (mdi->active_window))
 		return GTK_WINDOW (mdi->active_window);
 	else
@@ -69,7 +69,7 @@ gedit_window_active (void)
 GnomeApp *
 gedit_window_active_app (void)
 {
-	gedit_debug ("", DEBUG_WINDOW);
+	gedit_debug (DEBUG_WINDOW, "");
 	return mdi->active_window;
 }
 
@@ -84,7 +84,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 	GtkWidget *statusbar;
 
-	gedit_debug ("", DEBUG_WINDOW);
+	gedit_debug (DEBUG_WINDOW, "");
 
 	/* Drag and drop support */
 	gtk_drag_dest_set (GTK_WIDGET(app),
@@ -124,7 +124,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 void
 gedit_window_set_auto_indent (gint auto_indent)
 {
-	gedit_debug ("", DEBUG_WINDOW);
+	gedit_debug (DEBUG_WINDOW, "");
 	settings->auto_indent = auto_indent;
 }
 
@@ -135,7 +135,7 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 	GdkPixmap *pixmap;
         GdkBitmap *mask;
 
-	gedit_debug ("", DEBUG_WINDOW);
+	gedit_debug (DEBUG_WINDOW, "");
 
 	gtk_widget_realize (window);
 	
@@ -152,7 +152,7 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 void
 gedit_window_set_status_bar (GnomeApp *app)
 {
-	gedit_debug ("", DEBUG_WINDOW);
+	gedit_debug (DEBUG_WINDOW, "");
 
 	
 	if (app->statusbar->parent)
@@ -181,7 +181,7 @@ gedit_window_set_toolbar_labels (GnomeApp *app)
 	GnomeDockItem *dock_item;
 	GtkToolbar *toolbar;
 	
-	gedit_debug ("", DEBUG_WINDOW);
+	gedit_debug (DEBUG_WINDOW, "");
 
 	g_return_if_fail (app != NULL);
 	
@@ -231,7 +231,7 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 	GdkColor *bg, *fg;
 
 	
-	gedit_debug("1", DEBUG_PREFS);
+	gedit_debug (DEBUG_WINDOW, "");
 
 	/* Set mdi mode */
 	if (mdi_mode_changed)
@@ -241,7 +241,6 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 
 	tab_pos (settings->tab_pos);
 
-	gedit_debug("2", DEBUG_PREFS);
 	/* Set style and font for each children */
 
 	/* We  need to change the toolbar style even if there aren't any documents open !!!
@@ -320,7 +319,7 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	GtkWidget *widget;
 	gint count = 0, sub_count = 0;
 	
-	gedit_debug("", DEBUG_FILE);
+	gedit_debug (DEBUG_WINDOW, "");
 
 	if (!sensitive && g_list_length (mdi->children) > 0)
 		return;
