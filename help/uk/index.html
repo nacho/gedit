@@ -1,0 +1,236 @@
+<html>
+<head><title>gEdit - текстовий редактор GNOME</title></head>
+
+<body>
+<h1>gEdit</h1>
+<h3>Copyright (c) 1998, 1999, 2000 <BR>
+Alex Roberts, Evan Lawrence, Jason Leach та Chema Celorio</h3>
+
+<P>Ця програма та документац╕я - в╕льне програмне забезпечення; you can redistribute
+it and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the License,
+or (at your option) any later version. This program is distributed in the
+hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&nbsp;
+Див╕ться GNU General Public License для детальн╕шо╖ ╕нформац╕╖.
+
+<P>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+59 Temple Place, Suite 330, Boston, MA&nbsp; 02111-1307&nbsp; USA
+
+<P>Для детальн╕шо╖ ╕нформац╕╖ див╕ться файл COPYING.
+
+<H2>
+<A NAME="toc"></A>1. Зм╕ст</H2>
+
+<OL>
+<LI>
+<A HREF="#toc">Зм╕ст</A></LI>
+
+<LI>
+<A HREF="#introduction">Вступ</A></LI>
+
+<LI>
+<A HREF="#use">Використання</A></LI>
+
+<LI>
+<A HREF="#feedback">Зворотн╕й зв'язок</A></LI>
+</OL>
+&nbsp;
+<H2>
+<A NAME="introduction"></A>2. Вступ</H2>
+<p>
+gEdit is a basic text editor that also allows you to perform most functions associated with text editing such as copying, pasting, and searching through a document. gEdit also has such functions as Reverse, which reverses all the text in a document, and Email, which allows you to mail the current document direcly through gEdit. gEdit unlike Microsoft's Notepad allows you to open multiple documents at a time and has a handy tabbed interface for switching between documents. gEdit like Notepad and many other text editors works with ASCII files, and offers no text formatting commands. 
+<p>
+
+<H2>
+<A NAME="use"></A>3. Використання</H2>
+Елементи ╕нтерфейсу:
+<br>
+Меню верхнього р╕вня:
+<ul>
+<li>Файл
+	<ul>
+	<li>Новий
+	 - Створю╓ новий файл.
+	<li>В╕дкрити
+	 - В╕дкрива╓ ╕снуючий файл.
+	<li>Зберегти
+	 - Збер╕га╓ поточний файл. If the file has already been named, saves with the existing name. If not, acts as Save As.
+	<li>Зберегти як
+	 - Saves the current file and prompts for the name and location to save the file in.
+	<li>Recent File List
+	 - Shows the last three files opened.
+	<li>Друкувати
+	 - Друку╓ поточний файл.
+	<li>Закрити
+	 - Закрива╓ поточний файл. Якщо файл було зм╕нено, просить п╕дтвердження запису файлу.
+	<li>Закрити все
+	 - Закрива╓ вс╕ в╕дкрит╕ файли. Просить п╕дтвердження запису зм╕нених файл╕в.
+	<li>Вийти
+	 - Виходить з gEdit та закрива╓ ус╕ в╕дкрит╕ файли. Просить п╕дтвердження запису зм╕нених файл╕в.
+	</ul>
+
+<li>Редагування
+	<ul>
+	<li>Вир╕зати
+	 - Cut moves the selected text to a temporary location where it can then be place in another location or locations.
+	<li>Скоп╕ювати
+	 - Copies the selected text to a temporary location where it can then be placed in another location or locations.
+	<li>Вставити
+	 - Places cut or copied text at the current location.
+	<li>Вибрати все
+	 - Вибира╓ весь текст в поточному докунт╕.
+	<li>Знайти рядок
+	 - Шука╓ рядок за номером. 
+	<li>Знайти
+	 - Шука╓ текст.
+	<li>Знайти знову
+	 - Runs the previous search again.
+	<li>Зам╕нити
+	 - Replaces text with alternate text.
+	</ul>
+
+<li>Доповнення (Див╕ться файл README.plugins для додатково╖ ╕нформац╕╖ про доповнення)
+	<ul>
+	<li>Test Selection
+	<li>Перев╕рка орфограф╕╖
+	<li>Reverse
+	<li>Project Manager
+	<li>Open Header|Code
+	<li>View In Browser
+	<li>Hello
+	<li>Email
+	<li>Diff
+	<li>Encryption
+	<li>CVS Diff
+	<li>Перетворити
+	<li>Browse
+	</ul>
+
+<li>Установки
+        <ul>
+	<li>Autoindent
+	 - Autoindent indents the new lines like the previous line.
+	<li>Statusbar
+	 - Shows a statusbar at the bottom of the screen. The statusbar shows what column you are currently on, and offers the line button which, when clicked, shows how many total lines the document contains and which line you are currently on.
+	<li>Wordwrap
+	 - Doesn't split a word at the end of the line, but starts the word on the next line.
+	<li>Linewrap
+	 - Keeps all text in the window by wrapping the current line at the window borders.
+	<li>Readonly
+	 - Робить файл доступним лише для зчитування.
+	<li>Розд╕лений екран
+	 - Allows you to look at different parts of the current document at the same time.
+	<li>Закладки документ╕в
+	 - Allows you to move the location of the tabs which show the currently open documents.
+	 <ul>
+		<li>Top
+		<li>Bottom
+		<li>Left 
+		<li>Right
+		<li>Show Tabs
+	 </ul>
+	<li>Зберегти установки
+	 - Збер╕га╓ установки.
+	<li>Preferences
+	 - Shows preferences.
+	</ul>
+
+<li>В╕кна
+	<ul>
+	<li>Створити нове в╕кно
+	 - В╕дкрива╓ ╕нше в╕кно gEdit з порожн╕м документом.
+	<li>Закрити це в╕кно
+	 - Закрива╓ поточне в╕кно gEdit.
+	<li>Список документ╕в
+	 - Показу╓ список в╕дкритих длокумент╕в.
+	</ul>
+
+<li>Дов╕дка
+	<ul>
+	<li>Про
+	 Да╓ основну ╕нформац╕ю про gEdit.
+	</ul>
+</ul>
+<p>
+Right-click context menus also allow you the following commands:
+<ul>
+<li>Cut
+ - Дивись вище.
+<li>Copy
+ - Дивись вище.
+<li>Paste
+ - Дивись вище.
+<li>Open in new window
+ - В╕дкрива╓ поточний файл у новому в╕кн╕.
+<li>Save
+ - Дивись вище.
+<li>Close
+ - Дивись вище.
+<li>Print
+ - Дивись вище.
+<li>Open (swap) .c/.h file
+ - Switches between two open files with the extension of either h or c.
+</ul>
+</ul>
+<br>
+Це список наявних клав╕атурних скорочень:
+<ul>
+<li>Control+Стр╕лка л╕воруч/Стр╕лка праворуч
+ - Пересува╓ курсор на одне слово л╕воруч чи праворуч.
+<li>Control+Delete
+ - Видаля╓ слово праворуч курсора.
+<li>Control+Backspace
+ - Видаля╓ слово л╕воруч курсора.
+<li>Control+C
+ - Коп╕ю╓ вибраний текст.
+<li>Control+X
+ - Вир╕за╓ вибраний текст.
+<li>Control+V
+ - Вставля╓ текст.
+<li>Control+Q
+ - Завершення. Робить те ж саме, що й пункт "Вийти" в меню "Файл".
+<li>Control+S
+ - Збер╕га╓ файл.
+<li>Control+A
+ - Пересува╓ курсор на початок рядка.
+<li>Control+B
+ - Пересува╓ курсор на одну позиц╕ю назад.
+<li>Control+D
+ - Видаля╓ символ праворуч курсора.
+<li>Control+F
+ - Пересува╓ курсор на один символ праворуч.
+<li>Control+K
+ - Видаля╓ все праворуч курсора в поточному рядку.
+<li>Control+L
+ - Показу╓ список в╕дкритих файл╕в.
+<li>Control+W
+ - Видаля╓ слово л╕воруч курсора.
+<li>Control+E
+ - Пересува╓ курсор на к╕нець поточного рядка.
+<li>Control+U
+ - Стира╓ поточний рядок.
+</ul>
+
+
+<H2>
+<A NAME="feedback"></A>4. Зворотн╕й зв'язок</H2>
+gEdit is being maintained by :<BR>
+<A HREF="mailto:bse@gedit.pn.org">Alex Roberts &lt;bse@gedit.pn.org></A><BR>
+<A HREF="mailto:leach@wam.umd.edu">Jason Leach  &lt;leach@wam.umd.edu></A><BR>
+<A HREF="mailto:bse@gedit.pn.org">Chema Celorio &lt;chema@celorio.com></A><BR>
+If you are having trouble installing and/or running gEdit, feel free to e-mail us.<BR>
+If you find a bug please report it with bug-buddy.<BR>
+
+<P>You can check the current status and/or get the latest stable release of
+gEdit via WWW at 
+<A HREF="http://gedit.pn.org">http://gedit.pn.org.</A>
+&nbsp; The most recent version is also available at the Gnome CVS repository
+in module <i>gedit</I>.
+
+<P>Comments, ideas and (most of all) bug reports (and especially patches)
+are very welcome at the above e-mail address.
+<BR>&nbsp;
+</BODY>
+</HTML>
