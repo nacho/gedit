@@ -566,8 +566,12 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 	g_return_val_if_fail (GTK_IS_IMAGE (image), NULL);
 	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), NULL);
 
-	if (theme == NULL)
+	if (theme == NULL) {
 		theme = gnome_icon_theme_new ();
+		gnome_icon_theme_set_allow_svg (theme, TRUE);
+	}
+
+	g_return_val_if_fail (theme != NULL, NULL);
 
 	raw_uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);	
 	

@@ -1211,10 +1211,19 @@ egg_recent_model_add_full (EggRecentModel * model, EggRecentItem *item)
 	GList *list = NULL;
 	gboolean ret = FALSE;
 	gboolean updated = FALSE;
+	char *uri;
 	time_t t;
 	
 	g_return_val_if_fail (model != NULL, FALSE);
 	g_return_val_if_fail (EGG_IS_RECENT_MODEL (model), FALSE);
+
+	uri = egg_recent_item_get_uri (item);
+	if (strncmp (uri, "recent-files://", strlen ("recent-files://")) == 0) {
+		g_free (uri);
+		return FALSE;
+	} else {
+		g_free (uri);
+	}
 
 	file = egg_recent_model_open_file (model);
 	g_return_val_if_fail (file != NULL, FALSE);
