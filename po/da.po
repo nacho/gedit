@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
 "POT-Creation-Date: 2000-06-15 11:24+0200\n"
-"PO-Revision-Date: 2000-06-25 03:04+02:00\n"
+"PO-Revision-Date: 2000-06-29 03:04+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Dansk/Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -17,15 +17,15 @@ msgstr ""
 
 #. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
 #. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/browse/browse.c:153 plugins/browse/browse.c:185
+#: plugins/browse/browse.c:191
 msgid "browse"
 msgstr "gennemse"
 
-#: plugins/browse/browse.c:243
+#: plugins/browse/browse.c:249
 msgid "Browse"
 msgstr "Gennemse"
 
-#: plugins/browse/browse.c:244
+#: plugins/browse/browse.c:250
 msgid "Web browse plugin"
 msgstr "Weblæser indstik"
 
@@ -62,55 +62,56 @@ msgstr "Decimal til oktal"
 msgid "Hex to Decimal"
 msgstr "Hexadecimal til decimal"
 
-#: plugins/diff/diff.c:59
-msgid "Choose a file"
-msgstr "Vælg en fil"
+#: plugins/diff/diff.c:109
+msgid "The two documents selected are the same"
+msgstr "De to valgte dokumenter er det samme"
 
-#: plugins/diff/diff.c:150
-msgid "Choose files to diff"
-msgstr "Vælg filer at køre diff på:"
+#: plugins/diff/diff.c:116
+msgid ""
+"The file selected does not exists\n"
+"\n"
+"Please provide a valid file"
+msgstr ""
+"Den valgte fil eksisterer ikke\n"
+"\n"
+"Venligst opgiv en gyldig fil"
 
-#: plugins/diff/diff.c:155
-msgid "Choose files to diff:"
-msgstr "Vælg filer at køre diff på:"
+#: plugins/diff/diff.c:127 plugins/diff/diff.c:139
+msgid "The document contains no text"
+msgstr "Dokumentet indeholder ingen tekst"
 
-#: plugins/diff/diff.c:164 plugins/diff/diff.c:172
-msgid "Browse..."
-msgstr "Gennemse..."
+#. FIXME: do better error reporting ... . Chema
+#: plugins/diff/diff.c:148
+msgid ""
+"gedit could not create a temp file.\n"
+"\n"
+msgstr ""
+"gedit kunne ikke oprette midlertidig fil.\n"
+"\n"
 
-#: plugins/diff/diff.c:177
-msgid "Calculate Diff"
-msgstr "Kalkulér diff"
+#: plugins/diff/diff.c:262 plugins/email/email.c:218 plugins/email/email.c:224
+#: src/document.c:261 src/print.c:581
+msgid "Untitled"
+msgstr "Unavngivet"
 
-#: plugins/diff/diff.c:199
+#: plugins/diff/diff.c:421
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:200
-msgid "Diff plugin."
-msgstr "Diff-indstik."
+#: plugins/diff/diff.c:422
+msgid "diff plugin"
+msgstr "Diff indstik"
 
-#: plugins/email/email.c:51
+#: plugins/email/email.c:60
 #, c-format
 msgid "Executing command : %s"
 msgstr "Kører kommando : %s"
 
-#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:104 plugins/email/email.c:144
-msgid "email"
-msgstr "e-post"
-
-#: plugins/email/email.c:205 plugins/email/email.c:211 src/document.c:261
-#: src/print.c:581
-msgid "Untitled"
-msgstr "Unavngivet"
-
-#: plugins/email/email.c:249
+#: plugins/email/email.c:262
 msgid "Email"
 msgstr "E-post"
 
-#: plugins/email/email.c:250
+#: plugins/email/email.c:263
 msgid "Email the current document"
 msgstr "Send nuværende dokument som epost"
 
@@ -155,19 +156,19 @@ msgstr "Sendmail fundet i :"
 msgid "label13"
 msgstr "etiket13"
 
-#: plugins/reverse/reverse.c:56
+#: plugins/reverse/reverse.c:70
 msgid "Reverse"
 msgstr "Reversér"
 
-#: plugins/reverse/reverse.c:57
+#: plugins/reverse/reverse.c:71
 msgid "Reverse text"
 msgstr "Reversér tekst"
 
-#: plugins/sample/sample.c:43
+#: plugins/sample/sample.c:55
 msgid "Hello World"
 msgstr "Hallo verden"
 
-#: plugins/sample/sample.c:44
+#: plugins/sample/sample.c:56
 msgid "Sample 'hello world' plugin."
 msgstr "'Hallo verden' eksempelindstik."
 
@@ -218,7 +219,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit er en lille og hurtig teksteditor til Gnome"
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:574
+#: src/dialogs/dialog-prefs.c:576
 msgid "gedit: Preferences"
 msgstr "gedit: Brugervalg"
 
@@ -322,7 +323,7 @@ msgstr "Tilstand:"
 msgid "Notebook Tab Position: "
 msgstr "Notesbog faneplacering "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:241
+#: src/dialogs/prefs.glade.h:28 src/menus.c:239
 msgid "Undo"
 msgstr "Fortryd"
 
@@ -415,7 +416,7 @@ msgstr "Papir"
 msgid "Replace"
 msgstr "Erstat"
 
-#: src/dialogs/replace.glade.h:8 src/menus.c:261
+#: src/dialogs/replace.glade.h:8 src/menus.c:259
 msgid "Find"
 msgstr "Find"
 
@@ -447,24 +448,24 @@ msgstr "_Forskel på små og store bogstaver"
 msgid "RO - "
 msgstr "KL - "
 
-#: src/document.c:437
+#: src/document.c:434
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "'%s' er blevet ændret. Ønsker du at gemme det?"
 
-#: src/document.c:648
+#: src/document.c:644
 msgid "(modified)"
 msgstr "(ændret)"
 
-#: src/document.c:650
+#: src/document.c:646
 msgid "(readonly)"
 msgstr "(skrivebeskyttet)"
 
-#: src/document.c:695 src/document.c:735
+#: src/document.c:691 src/document.c:731
 msgid "This file does not end with a valid extension\n"
 msgstr "Denne fil har ikke gyldig filtype\n"
 
-#: src/document.c:743
+#: src/document.c:739
 #, c-format
 msgid "The file %s was not found."
 msgstr "Filen %s blev ikke fundet."
@@ -516,7 +517,7 @@ msgstr ""
 "\n"
 "Sørg for at du har rettigheder til at åbne filen."
 
-#: src/file.c:215
+#: src/file.c:214
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -533,7 +534,7 @@ msgstr ""
 "Sørg for at stien, du angav, eksisterer og at du har de nødvendige "
 "skriverettigheder."
 
-#: src/file.c:229
+#: src/file.c:228
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -550,7 +551,7 @@ msgstr ""
 "På grund af en ukendt årsag (1). Rapportér venligst dette problem til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:244
+#: src/file.c:243
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -567,7 +568,7 @@ msgstr ""
 "På grund af en ukendt årsag (2). Rapportér venligst dette problem til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:331
+#: src/file.c:330
 msgid "Save As..."
 msgstr "Gem som..."
 
@@ -597,11 +598,11 @@ msgstr "Dokument er ikke blevet gemt."
 msgid "Error saving file!"
 msgstr "Gemning mislykkedes!"
 
-#: src/file.c:738
+#: src/file.c:730
 msgid "You can't revert an Untitled document\n"
 msgstr "Du kan ikke omgøre et dokument uden titel\n"
 
-#: src/file.c:751
+#: src/file.c:743
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -610,7 +611,7 @@ msgstr ""
 "Er du sikker på at du vil omgøre alle ændringer?\n"
 "(%s)"
 
-#: src/file.c:780
+#: src/file.c:772
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen `%s' eksisterer ikke. Vil du gerne oprette den?"
@@ -623,7 +624,7 @@ msgstr "Åbn (ombyt) .c/.h fil"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:60 src/menus.c:220
+#: src/menus.c:60 src/menus.c:218
 msgid "Create a new document"
 msgstr "Opret et nyt dokument"
 
@@ -687,124 +688,115 @@ msgstr "_Fjern visning"
 msgid "Remove view of the document"
 msgstr "Fjern visning af dokumentet"
 
-#: src/menus.c:196 src/plugin.c:126 src/plugin.c:224
+#: src/menus.c:194 src/plugin.c:82 src/plugin.c:372
 msgid "_Plugins"
 msgstr "_Indstik"
 
-#: src/menus.c:206
+#: src/menus.c:204
 msgid "_Documents"
 msgstr "_Dokumenter"
 
-#: src/menus.c:220
+#: src/menus.c:218
 msgid "New"
 msgstr "Ny"
 
-#: src/menus.c:224
+#: src/menus.c:222
 msgid "Open"
 msgstr "Åbn"
 
-#: src/menus.c:224
+#: src/menus.c:222
 msgid "Open a file"
 msgstr "Åbn en fil"
 
-#: src/menus.c:228
+#: src/menus.c:226
 msgid "Save"
 msgstr "Gem"
 
-#: src/menus.c:228
+#: src/menus.c:226
 msgid "Save the current file"
 msgstr "Gem den nuværende fil"
 
-#: src/menus.c:232
+#: src/menus.c:230
 msgid "Close"
 msgstr "Luk"
 
-#: src/menus.c:232
+#: src/menus.c:230
 msgid "Close the current file"
 msgstr "Luk den nuværende fil"
 
-#: src/menus.c:236
+#: src/menus.c:234
 msgid "Print"
 msgstr "Udskriv"
 
-#: src/menus.c:236
+#: src/menus.c:234
 msgid "Print the current file"
 msgstr "Udskriv den nuværende fil"
 
-#: src/menus.c:241
+#: src/menus.c:239
 msgid "Undo last operation"
 msgstr "Fortryd sidste handling"
 
-#: src/menus.c:245
+#: src/menus.c:243
 msgid "Redo"
 msgstr "Gentag"
 
-#: src/menus.c:245
+#: src/menus.c:243
 msgid "Redo last operation"
 msgstr "Gentag sidste handling"
 
-#: src/menus.c:249
+#: src/menus.c:247
 msgid "Cut"
 msgstr "Klip"
 
-#: src/menus.c:249
+#: src/menus.c:247
 msgid "Cut the selection"
 msgstr "Udklip det markerede"
 
-#: src/menus.c:253
+#: src/menus.c:251
 msgid "Copy"
 msgstr "Kopiér"
 
-#: src/menus.c:253
+#: src/menus.c:251
 msgid "Copy the selection"
 msgstr "Kopiér det markerede"
 
-#: src/menus.c:257
+#: src/menus.c:255
 msgid "Paste"
 msgstr "Indsæt"
 
-#: src/menus.c:257
+#: src/menus.c:255
 msgid "Paste the clipboard"
 msgstr "Indsæt indhold af klipbord"
 
-#: src/menus.c:261
+#: src/menus.c:259
 msgid "Search for a string"
 msgstr "Søg efter en tekst"
 
-#: src/menus.c:265
+#: src/menus.c:263
 msgid "Line"
 msgstr "Linje"
 
-#: src/menus.c:265
+#: src/menus.c:263
 msgid "Get the current and total lines"
 msgstr "Få nuværende og alle linjer"
 
-#: src/menus.c:270
+#: src/menus.c:268
 msgid "Exit"
 msgstr "Afslut"
 
-#: src/menus.c:270
+#: src/menus.c:268
 msgid "Exit the program"
 msgstr "Afslut programmet"
 
-#: src/plugin.c:70
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr "Fejl, kunne ikke åbne modulfil, %s"
+#: src/plugin.c:93
+msgid "Manager ..."
+msgstr "Behandler..."
 
-#: src/plugin.c:81
-msgid "Error, plugin does not contain init_plugin function."
-msgstr "Fejl, indstik indeholder ikke init_plugin-funktion."
+#: src/plugin.c:94
+msgid "Add/Remove installed plugins"
+msgstr "Tilføj/fjern installerede indstik"
 
-#: src/plugin.c:88
-msgid "Error, init_plugin returned an error"
-msgstr "Fejl, init_plugin returnerede fejl"
-
-#: src/plugin.c:116
-msgid "Error, plugin is still in use"
-msgstr "Fejl, indstik er stadig i brug"
-
-#: src/plugin.c:361
+#: src/plugin.c:188
 #, c-format
 msgid ""
 "The program %s could not be found.\n"
@@ -813,7 +805,7 @@ msgstr ""
 "Programmet %s blev ikke fundet.\n"
 "\n"
 
-#: src/plugin.c:376
+#: src/plugin.c:203
 #, c-format
 msgid ""
 "'%s' doesn't seem to exist.\n"
@@ -822,7 +814,7 @@ msgstr ""
 "'%s' ser ikke ud til at eksistere.\n"
 "\n"
 
-#: src/plugin.c:378
+#: src/plugin.c:205
 #, c-format
 msgid ""
 "'%s' seems to be a directory.\n"
@@ -833,7 +825,7 @@ msgstr ""
 "men '%s' blev ikke fundet i dette katalog.\n"
 "\n"
 
-#: src/plugin.c:381
+#: src/plugin.c:208
 #, c-format
 msgid ""
 "'%s' doesn't seem to be a program.\n"
@@ -842,7 +834,7 @@ msgstr ""
 "'%s' ser ikke ud til at være et program.\n"
 "\n"
 
-#: src/plugin.c:385
+#: src/plugin.c:212
 #, c-format
 msgid ""
 "%sYou won't be able to use the %s plugin without %s. \n"
@@ -850,6 +842,23 @@ msgid ""
 msgstr ""
 "%sDu vil ikke kunne bruge %s indstikket uden %s.\n"
 "Ønsker du at angive en ny placering for %s?"
+
+#: src/plugin.c:313
+#, c-format
+msgid "Error, unable to open module file, %s"
+msgstr "Fejl, kunne ikke åbne modulfil, %s"
+
+#: src/plugin.c:323
+msgid "Error, plugin does not contain init_plugin function."
+msgstr "Fejl, indstik indeholder ikke init_plugin-funktion."
+
+#: src/plugin.c:332
+msgid "Error, init_plugin returned an error"
+msgstr "Fejl, init_plugin returnerede fejl"
+
+#: src/plugin.c:362
+msgid "Error, plugin is still in use"
+msgstr "Fejl, indstik er stadig i brug"
 
 #: src/print.c:176
 msgid "Pages"
@@ -920,54 +929,54 @@ msgstr "Teksten ikke fundet."
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Kan ikke finde igen. Der er ingen tekststreng at søge efter."
 
-#: src/utils.h:87
+#: src/utils.h:71
 msgid "Show window debugging messages."
 msgstr "Vis aflusingsbeskeder for vindue."
 
-#: src/utils.h:90
+#: src/utils.h:74
 msgid "Show commands debugging messages."
 msgstr "Vis aflusingsbeskeder for kommandoer."
 
-#: src/utils.h:93
+#: src/utils.h:77
 msgid "Show document debugging messages."
 msgstr "Vis aflusingsbeskeder for dokumenter."
 
-#: src/utils.h:96
+#: src/utils.h:80
 msgid "Show file debugging messages."
 msgstr "Vis aflusingsbeskeder for filer."
 
-#: src/utils.h:99
+#: src/utils.h:83
 msgid "Show plugin debugging messages."
 msgstr "Vis aflusingsbeskeder for indstik."
 
-#: src/utils.h:102
+#: src/utils.h:86
 msgid "Show prefs debugging messages."
 msgstr "Vis aflusingsbeskeder for brugervalg."
 
-#: src/utils.h:105
+#: src/utils.h:89
 msgid "Show printing debugging messages."
 msgstr "Vis aflusingsbeskeder for udskrifter."
 
-#: src/utils.h:108
+#: src/utils.h:92
 msgid "Show search debugging messages."
 msgstr "Vis aflusingsbeskeder for søgning."
 
-#: src/utils.h:111
+#: src/utils.h:95
 msgid "Show undo debugging messages."
 msgstr "Vis aflusingsbeskeder for fortrydelsesfunktion."
 
-#: src/utils.h:114
+#: src/utils.h:98
 msgid "Show view debugging messages."
 msgstr "Vis aflusingsbeskeder for visning."
 
-#: src/utils.h:117
+#: src/utils.h:101
 msgid "Show recent debugging messages."
 msgstr "Vis aflusingsbeskeder for nylig brugte filer."
 
-#: src/utils.h:120
+#: src/utils.h:104
 msgid "Turn on all debugging messages."
 msgstr "Vis alle aflusingsbeskeder."
 
-#: src/view.c:895
+#: src/view.c:897
 msgid "You can't remove the last view of a document."
 msgstr "Du kan ikke fjerne forrige visning af et dokument."
