@@ -317,6 +317,7 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 	GnomeUIInfo *ui_info;
 	GnomeUIInfo *sub_ui_info;
 	GtkWidget *widget;
+	PluginData  *pd;
 	gint count = 0, sub_count = 0;
 	
 	gedit_debug (DEBUG_WINDOW, "");
@@ -392,13 +393,22 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 					widget =  sub_ui_info [sub_count].widget;
 					if (widget)
 						gtk_widget_set_sensitive (widget, sensitive);
-					else
-						g_print ("Is not widget");
 				}
 				sub_count++;
 			}
 		}
 		count++;
+	}
+
+	/* plugin menus */
+	for (count = 0; count < g_slist_length (plugin_list); count++)
+	{
+		pd = g_slist_nth_data (plugin_list, count);
+		if (!pd->needs_a_document)
+			continue;
+		widget = pd->menu_item;
+		if (widget)
+			gtk_widget_set_sensitive (widget, sensitive);
 	}
 
 	return;

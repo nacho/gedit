@@ -130,6 +130,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 			}
 		}
 
+		gedit_view_set_position (gedit_view_active (), 0);
                 /*
 		  gnome_config_push_prefix ("/Editor_Plugins/Browse/");
 		  gnome_config_set_string ("Url", url[0]);
@@ -248,6 +249,7 @@ init_plugin (PluginData *pd)
 	pd->name = _("Browse");
 	pd->desc = _("Web browse plugin");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
+	pd->needs_a_document = FALSE;
 
 	pd->private_data = (gpointer)gedit_plugin_browse_create_dialog;
 

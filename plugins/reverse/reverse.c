@@ -70,6 +70,7 @@ init_plugin (PluginData *pd)
 	pd->name = _("Reverse");
 	pd->desc = _("Reverse text");
 	pd->author = "Roberto Majadas <phoenix@nova.es>";
+	pd->needs_a_document = TRUE;
 	
 	pd->private_data = (gpointer)reverse;
 	

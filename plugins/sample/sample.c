@@ -55,6 +55,7 @@ init_plugin (PluginData *pd)
 	pd->name = _("Hello World");
 	pd->desc = _("Sample 'hello world' plugin.");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
+	pd->needs_a_document = TRUE;
 	
 	pd->private_data = (gpointer)insert_hello;
 	

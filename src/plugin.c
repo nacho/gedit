@@ -51,7 +51,7 @@ plugin_load (const gchar *file)
 {
 	PluginData *pd;
 	guint res;
-
+	
 	gedit_debug (DEBUG_PLUGINS, "");
 	
 	g_return_val_if_fail (file != NULL, NULL);
@@ -81,6 +81,8 @@ plugin_load (const gchar *file)
 		g_warning (_("Error, plugin does not contain init_plugin function."));
 		goto error;
 	}
+
+	pd->needs_a_document = TRUE;
 	
 	res = pd->init_plugin (pd);
 	if (res != PLUGIN_OK)
@@ -241,6 +243,9 @@ gedit_plugins_window_add (GnomeApp *app)
 
 	for (n = 0; n < g_slist_length (plugin_list); n++)
 	{
+		pd = g_slist_nth_data (plugin_list, n);
+
+		pd->menu_item = menu[n].widget;
 		g_free (menu[n].label);
 	}
 	
@@ -321,7 +326,7 @@ gedit_plugin_program_location_clear (gchar *program_name)
 }
 
 gchar *
-gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess)
+gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess, gint default_location)
 {
 	gchar* program_location = NULL;
 	gchar* config_string = NULL;

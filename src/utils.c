@@ -299,7 +299,8 @@ gedit_utils_create_temp_from_doc (Document *doc, gint number)
 void 
 gedit_utils_delete_temp (gchar* file_name)
 {
-	g_print ("Deleting temp file :%s \n", file_name);
+	if (unlink(file_name)!=0)
+		g_warning ("Could not delete temp file");
 }
 
 

@@ -24,6 +24,7 @@
 
 #include <gmodule.h>
 
+
 enum
 {
 	PLUGIN_OK,
@@ -45,6 +46,12 @@ struct _PluginData
 	gchar	*name;
 	gchar	*desc;
 	gchar	*author;
+
+	/* if the plugin needs an open document to
+	   work, and there aren't any open documents.
+	   set sentivity off in the plugins menu */
+	gint needs_a_document;
+	GtkWidget * menu_item;
 	
 	/* filled in by plugin */
 	void	*private_data;

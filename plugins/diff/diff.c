@@ -149,9 +149,6 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 		return;
 	}
 	
-	g_print ("File 1 %s\n", file_name_1);
-	g_print ("File 2 %s\n", file_name_2);
-
 	document = NULL;
 
 	if (pipe (fdpipe) == -1)
@@ -195,7 +192,7 @@ gedit_plugin_execute (GtkWidget *widget, gint button, gpointer data)
 		}
 	}
 
-
+	gedit_view_set_position (gedit_view_active (), 0);
 
 	if (!state_1)
 		gedit_utils_delete_temp (file_name_1);
@@ -317,8 +314,8 @@ gedit_plugin_create_dialog (void)
 	gchar * program_location;
 
 	program_location = gedit_plugin_program_location_get (GEDIT_PLUGIN_PROGRAM,
-							   GEDIT_PLUGIN_NAME,
-							   FALSE);
+							      GEDIT_PLUGIN_NAME,
+							      FALSE);
 	if (program_location == NULL)
 		return;
 
@@ -425,19 +422,9 @@ init_plugin (PluginData *pd)
 	pd->name = _("Diff");
 	pd->desc = _("diff plugin");
 	pd->author = "Chema Celorio";
+	pd->needs_a_document = FALSE;
 
 	pd->private_data = (gpointer)gedit_plugin_create_dialog;
 
 	return PLUGIN_OK;
 }
-
-
-#if 0
-void
-call_diff (GtkWidget *widget, gpointer data)
-{
-}
-
-
-
-#endif

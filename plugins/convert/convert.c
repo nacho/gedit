@@ -150,6 +150,7 @@ init_plugin (PluginData *pd)
 	pd->name = _("Convert");
 	pd->desc = _("Number Converter");
 	pd->author = "Alex Roberts <bse@error.fsnet.co.uk>";
+	pd->needs_a_document = FALSE;
 
 	pd->private_data = (gpointer) convert_plugin;
 
