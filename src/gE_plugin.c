@@ -138,7 +138,7 @@ gE_Plugin_Query (gchar *plugin_name)
 				     plugin_name);
 
 	new_plugin->config_path = g_strconcat
-		("=", PLUGINLIBDIR, "/", plugin_name, "/", "Plugin", NULL);
+		("=", PLUGINLIBDIR, "/", plugin_name, "=/", "Plugin", NULL);
 
 	dummy = g_string_new ("");
 
