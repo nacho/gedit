@@ -1,43 +1,48 @@
-# POT File for gEdit - Translated to Portuguese from Portugal (pt_PT)
+# gEdit - Translated to Portuguese (pt)
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Duarte Loreto <happyguy_pt@hotmail.com>, 2001.
 #
 #. Translator credits
-#: src/gedit-commands.c:450
+#: src/gedit-commands.c:447
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.4\n"
-"POT-Creation-Date: 2001-12-12 11:48+0100\n"
-"PO-Revision-Date: 2001-10-12 23:00+0000\n"
+"Project-Id-Version: 2.0\n"
+"POT-Creation-Date: 2001-12-29 03:33+0000\n"
+"PO-Revision-Date: 2001-12-29 03:35+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"Language-Team: Portuguese pt_PT\n"
+"Language-Team: Portuguese pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: gedit2.desktop.in.h:1
-#, fuzzy
 msgid "Gnome Text Editor"
-msgstr "Editor de texto"
+msgstr "Editor de Texto Gnome"
 
-#: gedit2.desktop.in.h:2 src/gedit-commands.c:461
+#: gedit2.desktop.in.h:2 src/gedit-commands.c:458
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
-#, fuzzy, c-format
+#: src/bonobo-mdi.c:482 src/bonobo-mdi.c:558 src/bonobo-mdi.c:1909
+#, c-format
 msgid "Activate %s"
-msgstr "_Activar todos"
+msgstr "Activar %s"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:335
-#, fuzzy
-msgid "The searched string has not been found."
-msgstr "Texto de procura não encontrado."
+#: src/dialogs/gedit-dialog-replace.c:457
+#: src/dialogs/gedit-dialog-replace.c:526
+#: src/dialogs/gedit-dialog-replace.c:681 src/gedit-commands.c:335
+#, c-format
+msgid "The string \"%s\" has not been found."
+msgstr "A expressão \"%s\" não foi encontrada"
+
+#: src/dialogs/gedit-dialog-replace.c:690
+#, c-format
+msgid "Found and replaced %d occurences."
+msgstr "Encontradas e substituidas %d ocorrências."
 
 #: src/gedit2.c:57
-#, fuzzy
 msgid "Show mdi debugging messages."
-msgstr "Mostrar mensagens de depuração de visualização."
+msgstr "Mostrar mensagens de depuração mdi."
 
 #: src/gedit2.c:60
 msgid "Show commands debugging messages."
@@ -84,44 +89,37 @@ msgid "Turn on all debugging messages."
 msgstr "Activar todas as mensagens de depuração."
 
 #: src/gedit2.c:145
-#, fuzzy
 msgid "The gnome text editor"
-msgstr "Editor de texto"
+msgstr "O editor de texto do gnome"
 
 #: src/gedit-commands.c:56
 msgid "Not yet implemented."
-msgstr ""
+msgstr "Ainda não imlementado."
 
-#: src/gedit-commands.c:407
+#: src/gedit-commands.c:404
 msgid "Impossible to update gedit settings."
-msgstr ""
+msgstr "Impossível actualizar definições do gedit."
 
-#: src/gedit-commands.c:464
-#, fuzzy
+#: src/gedit-commands.c:461
 msgid "A small and lightweight text editor for Gnome"
-msgstr "O gedit é um editor de texto pequeno e leve para o GNOME."
+msgstr "Um editor de texto pequeno e leve para o Gnome"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:453 src/gedit-document.c:464
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:448 src/gedit-document.c:459
+#: src/gedit-document.c:453 src/gedit-document.c:464
 msgid "Untitled"
 msgstr "Sem título"
 
-#: src/gedit-document.c:529 src/gedit-document.c:635
-#, fuzzy
+#: src/gedit-document.c:534 src/gedit-document.c:640
 msgid "Invalid UTF-8 data encountered reading file"
-msgstr ""
-"Ocorreu um erro ao abrir o ficheiro: \n"
-"\n"
-"%s"
+msgstr "Encontrados dados UTF-8 inválidos ao ler ficheiro"
 
-#: src/gedit-document.c:885
-#, fuzzy
+#: src/gedit-document.c:888
 msgid "It is not possible to revert an Untitled document"
-msgstr "Você não pode reverter um documento Sem Título\n"
+msgstr "Não é possível reverter um documento Sem Título"
 
 #: src/gedit-file.c:227 src/gedit-file.c:238
 #, c-format
@@ -138,45 +136,44 @@ msgid "Open File ..."
 msgstr "Abrir Ficheiro ..."
 
 #: src/gedit-file.c:367 src/gedit-file.c:413
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Ocorreu um erro ao abrir o ficheiro: \n"
+"Ocorreu um erro ao abrir o ficheiro \"%s\".\n"
 "\n"
-"%s"
+"%s."
 
 #: src/gedit-file.c:483 src/gedit-file.c:682
-#, fuzzy, c-format
+#, c-format
 msgid "Saving file '%s' ..."
-msgstr "Gravar Como..."
+msgstr "A gravar ficheiro '%s' ..."
 
 #: src/gedit-file.c:498 src/gedit-file.c:696 src/gedit-file.c:848
 msgid "Unknown error"
-msgstr ""
+msgstr "Erro desconhecido"
 
 #: src/gedit-file.c:505 src/gedit-file.c:703
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Ocorreu um erro ao fechar o ficheiro: \n"
+"Ocorreu um erro ao gravar o ficheiro \"%s\".\n"
 "\n"
-"%s"
+"%s."
 
 #: src/gedit-file.c:531 src/gedit-file.c:724
-#, fuzzy
 msgid "The document has not been saved."
 msgstr "O documento não foi gravado."
 
 #: src/gedit-file.c:541 src/gedit-file.c:731
 #, c-format
 msgid "File '%s' saved."
-msgstr ""
+msgstr "Ficheiro '%s' gravado."
 
 #: src/gedit-file.c:608
 msgid "Save As..."
@@ -188,48 +185,48 @@ msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
 msgstr ""
+"Já existe um ficheiro de nome ``%s'' no destino. Deseja substitui-lo com aquele "
+"que está a gravar?"
 
 #: src/gedit-file.c:664
-#, fuzzy
 msgid "_Replace"
-msgstr "Substituir"
+msgstr "Substitui_r"
 
 #: src/gedit-file.c:834
 #, c-format
 msgid "Reverting file '%s' ..."
-msgstr ""
+msgstr "A reverter ficheiro '%s' ..."
 
 #: src/gedit-file.c:855
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Ocorreu um erro ao abrir o ficheiro: \n"
+"Ocorreu um erro ao reverter o ficheiro \"%s\".\n"
 "\n"
-"%s"
+"%s."
 
 #: src/gedit-file.c:881
-#, fuzzy
 msgid "The document has not been reverted."
-msgstr "O documento não foi gravado."
+msgstr "O documento não foi revertido."
 
 #: src/gedit-file.c:891
 #, c-format
 msgid "File '%s' reverted."
-msgstr ""
+msgstr "Ficheiro '%s' revertido."
 
 #: src/gedit-file.c:1041
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
 "\n"
 "%s."
 msgstr ""
-"Ocorreu um erro ao abrir o ficheiro: \n"
+"Ocorreu um erro ao ler dados do stdin.\n"
 "\n"
-"%s"
+"%s."
 
 #: src/gedit-mdi.c:482
 #, c-format
@@ -238,10 +235,13 @@ msgid ""
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
+"Deseja gravar as alterações que efectuou ao documento ``%s''? \n"
+"\n"
+"As alterações serão perdidas se as não gravar."
 
 #: src/gedit-mdi.c:487
 msgid "_Don't save"
-msgstr ""
+msgstr "_Não gravar"
 
 #: src/gedit-mdi.c:567
 msgid "(modified)"
@@ -252,9 +252,9 @@ msgid "(readonly)"
 msgstr "(apenas leitura)"
 
 #: src/gedit-recent.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Open file %s"
-msgstr "Abrir um ficheiro"
+msgstr "Abrir ficheiro %s"
 
 #: src/gedit-recent.c:337
 #, c-format
@@ -619,9 +619,6 @@ msgstr "Incapaz de abrir ficheiros recentes: %s"
 
 #~ msgid "Search string not found"
 #~ msgstr "Texto de procura não encontrado"
-
-#~ msgid "Found and replaced %i occurrences."
-#~ msgstr "Entradas e substituidas %i ocorrências."
 
 #~ msgid "Could not allocate the memory for the Replace all request."
 #~ msgstr ""
