@@ -7,9 +7,9 @@
 gchar *s = N_("Appearance");
 gchar *s = N_("Show Statusbar");
 gchar *s = N_("Show splitscreen");
+gchar *s = N_("Display text on toolbar buttons");
 gchar *s = N_("Editor Behavior");
 gchar *s = N_("Enable Auto-indent");
-gchar *s = N_("Enable Wordwrap");
 gchar *s = N_("General");
 gchar *s = N_("MDI (Multiple Document Interface)");
 gchar *s = N_("Left\n"
