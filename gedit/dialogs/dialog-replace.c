@@ -226,30 +226,34 @@ action_replace_all (GeditReplaceDialog *dialog,
 		    gboolean case_sensitive)
 {
 	guchar *new_buffer = NULL;
+	gint cursor_position;
+	gint num_lines;
+	gint line;
 
 	gedit_debug (DEBUG_SEARCH, "");
 
 	start_pos -= strlen (search_text);
 	if (start_pos < 0)
 		start_pos = 0;
-	
+
+	cursor_position = gedit_view_get_position (dialog->view);
+		
 	dialog->replacements = gedit_replace_all_execute (dialog->view,
 							  start_pos,
 							  search_text,
 							  replace_text,
 							  case_sensitive,
+							  &cursor_position,
 							  &new_buffer);
 
 	if (dialog->replacements > 0)
 	{
-		gedit_document_delete_text (dialog->view->doc, 0,
-					    gedit_document_get_buffer_length(dialog->view->doc),
-					    TRUE);
-		gedit_document_insert_text (dialog->view->doc, new_buffer, 0, TRUE);
-		/* FIXME : use replace, for undo . !*/ 
-		/*
-		  gedit_document_replace_text (view->doc, new_buffer, 0, gedit_document_get_buffer_length(view->doc), TRUE);
-		*/
+		gedit_document_replace_text (dialog->view->doc, new_buffer,
+					     gedit_document_get_buffer_length (dialog->view->doc),
+					     0, TRUE);
+		line = gedit_search_pos_to_line (cursor_position, &num_lines);
+		gedit_view_set_window_position_from_lines (dialog->view, line, num_lines);
+		gedit_view_set_position (dialog->view, cursor_position);
 	} else
 		dialog->done = TRUE;
 

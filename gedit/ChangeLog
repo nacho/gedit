@@ -1,5 +1,28 @@
+2000-10-21  Chema Celorio  <chema@celorio.com>
+
+	* view.c (gedit_view_set_font): memleak
+	(gedit_view_destroy): new method
+	(gedit_view_finalize): remove
+
+	* document.c (gedit_document_destroy): memleak
+
+	* recent.c (gedit_recent_add_menu_item): memleak
+
 2000-10-20  Chema Celorio  <chema@celorio.com>
 
+	* search.c (gedit_search_pos_to_line): rename from pos_to_line
+	(gedit_replace_all_execute): add a parameter to cursor position
+
+	* dialogs/dialog-replace.c (action_replace_all): set the window
+	and cursor position after replace all.
+
+2000-10-20  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c (action_replace_all): use g_doc_replace_text
+	v.s. using g_doc_delte + g_doc_insert so that undo is a 1 step process
+
+2000-10-20  Chema Celorio  <chema@celorio.com>
+	
 	* search.c (gedit_replace_all_execute): I need to write 100 pages
 	of "I shall not use unsigned numbers ..."
 

@@ -428,9 +428,8 @@ gedit_file_info_cb (GtkWidget *widget, gpointer data)
 	
 }
 
-
-static gint
-pos_to_line (guint pos, gint *numlines)
+gint
+gedit_search_pos_to_line (guint pos, gint *numlines)
 {
 	gint lines = 1;
 	gint current_line = 0;
@@ -509,7 +508,7 @@ gedit_search_execute ( guint starting_position,
 		return FALSE;
 
 	if (return_the_line_number)
-		*line_found = pos_to_line ( p2, total_lines);
+		*line_found = gedit_search_pos_to_line ( p2, total_lines);
 
 	*pos_found = p2 - text_length + 1;
 
@@ -554,8 +553,12 @@ gedit_search_line_to_pos (gint line, gint *lines)
 
 #define GEDIT_EXTRA_REPLACEMENTS_ 4
 gint
-gedit_replace_all_execute (GeditView *view, gint start_pos, const guchar *search_text,
-			   const guchar *replace_text, gint case_sensitive,
+gedit_replace_all_execute (GeditView *view,
+			   gint start_pos,
+			   const guchar *search_text,
+			   const guchar *replace_text,
+			   gboolean case_sensitive,
+			   gint *cursor_position,
 			   guchar **buffer)
 {
 	guchar * buffer_in;
@@ -595,9 +598,9 @@ gedit_replace_all_execute (GeditView *view, gint start_pos, const guchar *search
 
 	delta = replace_text_length - search_text_length;
 	if (delta > 0)
-		buffer_out_length = buffer_in_length + 100 + (grow_factor) * delta ;
+		buffer_out_length = buffer_in_length + 1 + (grow_factor) * delta ;
 	else
-		buffer_out_length = buffer_in_length + 100;
+		buffer_out_length = buffer_in_length + 1;
 
 	buffer_out = g_malloc (buffer_out_length);
 
@@ -626,6 +629,9 @@ gedit_replace_all_execute (GeditView *view, gint start_pos, const guchar *search
 	/* Do the actual replace all */
 	while (p1 < buffer_in_length)
 	{
+		if (p1 == *cursor_position)
+			*cursor_position = p2;
+		
 		if (p2 > buffer_out_length - (delta*2)) /* Allocate for at least 2 more replacements */
 		{
 			if (delta < 1) {

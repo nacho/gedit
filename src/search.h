@@ -30,6 +30,10 @@ void gedit_search_start  (void);
 void gedit_search_end    (void);
 gint gedit_search_verify (void);
 
+/* FIXME: make non-global */
+gint gedit_search_pos_to_line (guint pos, gint *numlines);
+
+
 /* Callbacks */
 void gedit_find_cb (GtkWidget *widget, gpointer data);
 void gedit_find_again_cb (GtkWidget *widget, gpointer data);
@@ -47,18 +51,13 @@ gint gedit_search_execute (guint starting_position,
 			   gint  *line_found,
 			   gint  *total_lines,
 			   gboolean return_the_line_number);
-
 gint gedit_replace_all_execute (GeditView *view,
 				gint start_pos,
 				const guchar *search_text,
 				const guchar *replace_text,
-				gint case_sensitive,
+				gboolean case_sensitive,
+				gint *cursor_position,
 				guchar **buffer);
-
-
-
-
-
 
 
 #endif /* __GEDIT_SEARCH_H__ */

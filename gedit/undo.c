@@ -238,11 +238,11 @@ gedit_undo_add (const gchar *text, gint start_pos, gint end_pos,
 		view = gedit_view_active ();
 	
 	undo = g_new (GeditUndoInfo, 1);
-	undo->text = g_strdup (text);
+	undo->text      = g_strdup (text);
 	undo->start_pos = start_pos;
-	undo->end_pos = end_pos;
-	undo->action = action;
-	undo->status = doc->changed;
+	undo->end_pos   = end_pos;
+	undo->action    = action;
+	undo->status    = doc->changed;
 	undo->window_position = gedit_view_get_window_position (view);
 	if (end_pos-start_pos!=1 || text[0]=='\n')
 		undo->mergeable = FALSE;

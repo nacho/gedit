@@ -87,7 +87,7 @@ gedit_view_get_type (void)
  * View finalize function.
  **/
 static void 
-gedit_view_finalize (GtkObject *object)
+gedit_view_destroy (GtkObject *object)
 {
 	GeditView *view;
 
@@ -97,6 +97,10 @@ gedit_view_finalize (GtkObject *object)
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
+	g_free (view->toolbar);
+
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(* GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 /**
@@ -116,7 +120,7 @@ gedit_view_class_init (GeditViewClass *klass)
 
 	parent_class = gtk_type_class (gtk_vbox_get_type ());
 
-	object_class->finalize = gedit_view_finalize;
+	object_class->destroy = gedit_view_destroy;
 }
 
 /**
@@ -778,6 +782,7 @@ gedit_view_init (GeditView *view)
 
 	gtk_widget_show_all   (GTK_WIDGET (view));
 	gtk_widget_grab_focus (GTK_WIDGET (view->text));
+
 }
 
 
@@ -864,9 +869,10 @@ gedit_view_new (GeditDocument *doc)
 		return NULL;
 
 	view = gtk_type_new (gedit_view_get_type ());
-	view->doc = doc;
-	view->doc->views = g_list_append (doc->views, view);
+
 	view->app = NULL;
+	view->doc = doc;
+	doc->views = g_list_append (doc->views, view);
 
 	if (g_list_length (doc->views) > 1) {
 		document_buffer = gedit_document_get_buffer (view->doc);
@@ -910,6 +916,8 @@ gedit_view_set_font (GeditView *view, gchar *fontname)
 		g_warning ("Unable to load font ``%s''", fontname);
 
   	gtk_widget_set_style (GTK_WIDGET((view)->text), style);
+
+	gtk_style_unref (style);
 }
 
 

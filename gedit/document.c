@@ -157,9 +157,6 @@ gedit_document_replace_text (GeditDocument *doc, const guchar * text_to_insert,
 
 	g_return_if_fail (text_to_delete != NULL);
 
-	gedit_document_delete_text (doc, position, length, FALSE);
-	gedit_document_insert_text (doc, text_to_insert, position, FALSE);
-
 	if (undoable)
 	{
 		gint   text_to_delete_length;
@@ -183,8 +180,13 @@ gedit_document_replace_text (GeditDocument *doc, const guchar * text_to_insert,
 				NULL);
 	}
 
+	gedit_document_delete_text (doc, position, length, FALSE);
+	gedit_document_insert_text (doc, text_to_insert, position, FALSE);
+
+	
 	g_free (text_to_delete);
 }
+
 
 void
 gedit_document_set_readonly (GeditDocument *doc, gint readonly)
@@ -423,8 +425,8 @@ static gint
 remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 {
 	GtkWidget *msgbox;
-	gint ret;
 	gchar *fname, *msg;
+	gint ret;
 
 	gedit_debug (DEBUG_DOCUMENT, "start");
 	
@@ -438,7 +440,8 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 
 	if (doc->changed)
 	{
-		msg = g_strdup_printf (_("``%s'' has been modified.  Do you wish to save it?"), fname);
+		msg = g_strdup_printf (_("``%s'' has been modified.  Do you wish to save it?"),
+				       fname);
 		msgbox = gnome_message_box_new (msg,
 						GNOME_MESSAGE_BOX_QUESTION,
 						GNOME_STOCK_BUTTON_YES,
@@ -459,8 +462,9 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 			return FALSE;
 		}
 	}
-
+	
 	gedit_debug (DEBUG_DOCUMENT, "end");
+	
 	return TRUE;
 }
 
@@ -488,7 +492,8 @@ gedit_document_destroy (GtkObject *obj)
 	GeditDocument *doc = GEDIT_DOCUMENT (obj);
 
 	gedit_debug (DEBUG_DOCUMENT, "");
-	
+
+	g_list_free (doc->views);
 	g_free (doc->filename);
 	gedit_undo_free_list (&doc->undo);
 	gedit_undo_free_list (&doc->redo);

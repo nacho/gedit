@@ -206,6 +206,8 @@ gedit_recent_add_menu_item (GnomeApp *app, const gchar *file_name, const gchar *
 
 	gnome_app_insert_menus (GNOME_APP(app), path, menu);
 
+	g_free (menu->label);
+
 	g_free (menu);
 }
 
