@@ -290,11 +290,13 @@ gedit_document_new_with_file (gchar *filename)
 	{
 		if ((doc = gtk_type_new (gedit_document_get_type ())))
 		{
-			if (!gedit_file_open (doc, filename))
+			if (gedit_file_open (doc, filename))
 			{
 				/*g_free (filename);*/
 				return doc;
 			}
+			else
+				return NULL;
 		}
 
 		g_assert_not_reached ();
@@ -315,14 +317,16 @@ gedit_document_current (void)
 	return current_document;
 }
 
-static gchar *gedit_document_get_config_string (GnomeMDIChild *child)
+static gchar *
+gedit_document_get_config_string (GnomeMDIChild *child)
 {
 	/* FIXME: Is this correct? */
 	/*return g_strdup (GE_DOCUMENT(child)->filename);*/
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
 }
 
-GnomeMDIChild *gedit_document_new_from_config (gchar *file)
+GnomeMDIChild *
+gedit_document_new_from_config (gchar *file)
 {
 	gedit_document *doc;
 	

@@ -92,11 +92,10 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 		
-                	if ((gedit_file_save(doc, title)) != 0) {
-                	
-		  	  gnome_app_flash (mdi->active_window, _("Could not save file!"));
-		  	  return FALSE;
-			
+                	if ((gedit_file_save(doc, title)) != 0)
+			{
+				gedit_flash (_("Could not save file!"));
+				return FALSE;
 			}
 			return TRUE;
 	/* no */
@@ -231,11 +230,12 @@ filenames_dropped (GtkWidget * widget,
 
 /* ---- File Menu Callbacks ---- */
 
-void file_new_cb (GtkWidget *widget, gpointer cbdata)
+void
+file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_document *doc;
 
-	gnome_app_flash (mdi->active_window, MSGBAR_FILE_NEW);
+	gedit_flash (_(MSGBAR_FILE_NEW));
 	doc = gedit_document_new();
 	
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
@@ -421,8 +421,8 @@ file_save_cb (GtkWidget *widget, gpointer cbdata)
 			}
 			else if ((gedit_file_save(doc, doc->filename)) != 0)
 			{
-					gnome_app_flash (mdi->active_window, _("Read only file!"));
-					file_save_as_cb(widget, NULL);
+				gedit_flash (_("Read only file!"));
+				file_save_as_cb (widget, NULL);
 			}
 			g_free (fname);
 		}
@@ -441,40 +441,31 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 	gchar *fname, *title;
 	gedit_document *doc;
 
-        for (i = 0; i < g_list_length (mdi->children); i++) {
+        for (i = 0; i < g_list_length (mdi->children); i++)
+	{
+		doc = (gedit_document *)g_list_nth_data (mdi->children, i);
+		if (doc->changed)
+		{
+			fname = g_strdup(doc->filename);
+			if (fname == NULL)
+			{
+				title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
+				/*gtk_label_get((GtkLabel *)doc->tab_label, &title);*/
 
-          doc = (gedit_document *)g_list_nth_data (mdi->children, i);
-          if (doc->changed) {
-          
-            fname = g_strdup(doc->filename);
-
-            if (fname == NULL) {
-            
-	      title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
-	      /*gtk_label_get((GtkLabel *)doc->tab_label, &title);*/
-
-              file_save_all_as_cb(widget, title);
-	      g_free (title);
-            
-            } else {
-              
-             if ((gedit_file_save(doc, doc->filename)) != 0) {
-             
-               gnome_app_flash (mdi->active_window, _("Read only file!"));
-               file_save_all_as_cb(widget, NULL);
-               
-             }
-
-	    g_free (fname);
-             
-            }
-            
-          }
-          
+				file_save_all_as_cb(widget, title);
+				g_free (title);
+			}
+			else
+			{
+				if ((gedit_file_save(doc, doc->filename)) != 0)
+				{
+					gedit_flash (_("Read only file!"));
+					file_save_all_as_cb(widget, NULL);
+				}
+				g_free (fname);
+			}
+		}
         }
-        
-
-
 }
 
 /*
@@ -496,24 +487,23 @@ static void file_saveas_ok_sel(GtkWidget *w, gedit_data *data)
 	
 	doc = gedit_document_current();
 	
-	if (fname) {
-	
+	if (fname)
+	{
 	  if (gedit_file_save(doc, fname) != 0) 
-	    gnome_app_flash (mdi->active_window, _("Error saving file!"));
-	
+		  gedit_flash (_("Error saving file!"));
 	}
 
 	g_free (fname);
 	gtk_widget_destroy (GTK_WIDGET (ssel));
 	ssel = NULL;
 	
-} /* file_saveas_ok_sel */
+}
 
 /*
  * destroy the "save as" dialog box
  */
 static gint
-file_saveas_destroy(GtkWidget *w, GtkWidget **sel)
+file_saveas_destroy (GtkWidget *w, GtkWidget **sel)
 {
 
 	gtk_widget_destroy(*sel);
@@ -524,7 +514,7 @@ file_saveas_destroy(GtkWidget *w, GtkWidget **sel)
 }
 
 void
-file_save_as_cb(GtkWidget *widget, gpointer cbdata)
+file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
 
 	gchar *title;

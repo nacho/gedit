@@ -88,7 +88,11 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 			}
 			else
 			{
-				gnome_app_error (mdi->active_window, _("Can't open file!"));
+				gchar *errstr = g_strdup_printf (_("gedit was unable to open the file: "
+								   "\n\n %s \n\n"
+								   "Make sure that you have read access permissions for the file."), fname);
+
+				gnome_app_error (mdi->active_window, errstr);
 				return 0;
 			}
 		}
@@ -168,7 +172,7 @@ gedit_file_save (gedit_document *doc, gchar *fname)
 		view->changed_id = gtk_signal_connect (GTK_OBJECT(view->text), "changed",
 						       GTK_SIGNAL_FUNC(view_changed_cb), view);
 
-	gnome_app_flash (mdi->active_window, _(MSGBAR_FILE_SAVED));
+	gedit_flash (_(MSGBAR_FILE_SAVED));
 	
 	return 0;
 }

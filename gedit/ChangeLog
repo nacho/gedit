@@ -3,6 +3,10 @@
 	* gE_mdi.c (gedit_document_destroy): fixed a crash when gedit
 	tries to open a document without read permissions, and then when
 	you go to exit.
+	(gedit_document_new_with_file): enormous bugfix with having the
+	conditional on gedit_file_open be the exact opposite of what the
+	return values actually give you.  Will lead to a busted up gedit
+	when you try and open files you don't have access to.
 
 	* gE_window.c (gedit_window_set_status_bar): new function, it will
 	change your life (if your life is lacking dynamic control of
