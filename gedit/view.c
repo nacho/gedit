@@ -964,7 +964,9 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 			break;
 		case 'w':
 	    		file_close_cb (w, NULL);
-	    		break;
+			/* If the user cancels the file_close action, the cut still happens*/
+			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
+			return TRUE;
 		case 'z':
 			/* Undo is getting called twice, 1 thru this function
 			   and 1 time thru the aceleratior (I guess). Chema 

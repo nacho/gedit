@@ -198,6 +198,8 @@ gedit_window_set_toolbar_labels (GnomeApp *app)
 		break;
 	case 1:
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+		if (dock_item != NULL)
+			gtk_widget_queue_resize (GTK_WIDGET (dock_item)->parent);
 		break;
 	case 2:
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);
@@ -206,10 +208,6 @@ gedit_window_set_toolbar_labels (GnomeApp *app)
 		g_return_if_fail (FALSE);
 		break;
 	}
-	/* FIXME : when goint from text+icons to icons only the toolbar
-	   maintains it original width. We need to resize it .. Chema
-	gtk_widget_queue_resize (GTK_WIDGET(toolbar));
-	*/
 }
 
 
