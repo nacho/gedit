@@ -67,6 +67,47 @@ static void search_select            (gE_document *doc,
 static gint ask_replace ();
 static gint num_widechars	     (const gchar *str);
 
+/* find in files stuff */
+GtkWidget *find_in_files_dialog;
+static GtkWidget* create_find_in_files_dialog();
+static void show_search_result_window();
+static void find_in_files_dialog_button_cb 
+	(
+	GtkWidget 	*widget, 
+	gint 		button, 
+	gpointer 	data
+	);
+static void search_for_text_in_files 
+	(
+	gchar 		*text
+	);
+static GtkWidget* create_find_in_files_dialog();
+static gchar* get_line_as_text 
+	(
+	gE_view		*view, 
+	gint		pos
+	);
+static int find_in_file_search 
+	(
+	gE_view 	*view,
+	gchar 		*str
+	);
+static void search_for_text_in_files 
+	(
+	gchar 		*text 
+	);
+
+static void find_in_files_dialog_button_cb 
+	(
+	GtkWidget 	*widget, 
+	gint 		button, 
+	gpointer 	data
+	);
+
+static void show_search_result_window();
+
+/* END. find in files stuff */
+
 /* old stuff, remove soon */
 void search_replace_cb(GtkWidget *w, gpointer cbdata) { }
 void search_again_cb(GtkWidget * w, gpointer cbdata) { }
@@ -301,6 +342,261 @@ goto_line_cb (GtkWidget *widget, gpointer data)
 
 	gtk_widget_show (line_dialog);
 }
+
+/* 
+ *  All the find in files functions
+ *
+ */
+
+/* 
+ *  Callback sent from the menubar 
+ */
+void
+find_in_files_cb (GtkWidget *widget, gpointer data)
+{
+	
+	if (!find_in_files_dialog)
+	  find_in_files_dialog = create_find_in_files_dialog();
+
+
+	gtk_signal_connect (GTK_OBJECT (find_in_files_dialog), "clicked",
+					GTK_SIGNAL_FUNC (find_in_files_dialog_button_cb), 
+					NULL);
+
+	gtk_widget_show(find_in_files_dialog);
+
+}
+
+
+/* 
+ *  Create and return a dialog box for finding a text string in all open files.
+ */
+static GtkWidget*
+create_find_in_files_dialog()
+{
+	GtkWidget 	*dialog, 
+			*frame, 
+			*entry;
+	
+	dialog = gnome_dialog_new ( _("Find In Files"),
+							_("Search"),
+							GNOME_STOCK_BUTTON_CLOSE,
+							NULL);
+
+	frame = gtk_frame_new (_("Search for:"));
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), frame,
+					FALSE, FALSE, 0);
+	gtk_widget_show (frame);
+	
+	entry = gnome_entry_new("gedit_find_in_files");
+	gtk_container_add (GTK_CONTAINER (frame), entry);
+	gtk_widget_show (entry);	
+	
+	entry = gnome_entry_gtk_entry (GNOME_ENTRY(entry));
+	gtk_object_set_data (GTK_OBJECT (dialog), 
+					"find_in_files_text", 
+					entry);
+
+	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
+	
+	return dialog;
+}
+
+
+/*
+ * Return the line (as text) which view->text[pos] is located on.
+ */
+static gchar*
+get_line_as_text 
+(
+	gE_view	*view, 
+	gint 	pos
+)
+{
+	gchar 	*buffer;
+	gint 	start = pos,
+		end = pos;
+	
+	
+	while ( start > 0 )
+	{
+  	  buffer = gtk_editable_get_chars(GTK_EDITABLE(view->text), start-1, start);
+  	  start--;
+	  if ( !strcmp(buffer, "\n") )
+	    break;
+	}
+
+	while (end < gtk_text_get_length(GTK_TEXT(view->text)))
+	{
+	  buffer = gtk_editable_get_chars(GTK_EDITABLE(view->text), end , end+1);
+	  end++;
+	  if ( !strcmp(buffer, "\n") )
+	    break;
+	}
+
+	buffer = gtk_editable_get_chars(GTK_EDITABLE(view->text), start, end);
+	
+	return buffer;
+	  
+}
+
+/*
+ * Search for a text string in view->text. For each match append to the clist 
+ * filename, linenumber, line text. Return total number of matches 
+ */
+static int
+find_in_file_search 
+(
+	gE_view 		*view,
+	gchar 			*str
+)
+{
+	gint 	i, 
+		textlen, 
+		counter = 0, 
+		line = 0;
+	gchar 	*buffer;
+	gchar 	*insert[3];
+	
+	textlen = gtk_text_get_length(GTK_TEXT(view->text));
+
+	if ( gtk_text_get_length(GTK_TEXT(view->text) ) == 0) 
+	  return counter;
+	  
+	if (textlen < num_widechars (str)) 
+	  return counter;
+
+	for (i = 0; i <= ( textlen - num_widechars(str) ); i++) 
+	{	
+	  /* keep a count of the line number */
+	  buffer = gtk_editable_get_chars(GTK_EDITABLE(view->text), i , i+1);
+	  if ( buffer != NULL && !strcmp(buffer, "\n") )
+	    line++;
+
+
+	  if ( search (GTK_EDITABLE(view->text), str, i, FALSE) ) 
+	  {
+	    insert[0] = g_strdup_printf ("%s", GNOME_MDI_CHILD(view->document)->name);
+	    insert[1] = g_strdup_printf ("%d", line); 
+	    insert[2] = get_line_as_text(view, i);
+	    gtk_clist_append( (GtkCList *)search_result_clist, insert);	   
+
+	    counter++;
+	  }	 
+	  g_free (buffer);
+	}
+	return counter;	
+}
+
+
+
+/*
+ * Search all files in mdi->children list for specifice text string. Append to end 
+ * of the clist the total number matched found in all files.
+ */
+static void 
+search_for_text_in_files 
+(
+	gchar *text 
+)
+{
+	gchar 		*insert[3];
+	gE_document *doc;
+	gE_view 	*view;
+	gchar 		*fname;
+	int 		i, 
+			j = 0;
+	gint 		textlen;
+
+	if (strlen(text) == 0)
+	{
+	  insert[0] = "Search Results";
+	  insert[1] = "0";
+	  insert[2] = "";
+	  gtk_clist_append( (GtkCList *)search_result_clist, insert);	   
+	  return;
+	}	
+
+        for (i = 0; i < g_list_length (mdi->children); i++) 
+        {
+          doc = GE_DOCUMENT ( g_list_nth_data (mdi->children, i) );
+	  view = GE_VIEW ( g_list_nth_data(doc->views, 0) );
+	  j += find_in_file_search (view, text);
+        }
+
+	  insert[0] = "Search Results";
+	  insert[1] = g_strdup_printf ("%d", j); 
+	  insert[2] = "";
+	  gtk_clist_append( (GtkCList *)search_result_clist, insert);	   
+
+}
+
+
+/*
+ *  Find in files dialog button callbacks
+ */
+static void
+find_in_files_dialog_button_cb 
+(
+	GtkWidget *widget, 
+	gint button, 
+	gpointer data
+)
+{
+	GtkWidget *entry;
+	gchar *entry_text;
+	
+	switch(button)
+	{
+	  /* Search button */
+	  case 0:
+	    entry = gtk_object_get_data (GTK_OBJECT (widget), 
+								"find_in_files_text");
+	    entry_text = gtk_entry_get_text (GTK_ENTRY (entry));
+	    
+	    gtk_clist_clear ( GTK_CLIST(search_result_clist) );
+
+	    search_for_text_in_files (entry_text);
+	    
+	    show_search_result_window();
+	    
+	    break;
+	  
+	  /* Canel Button */
+	  case 1:
+	    gtk_signal_disconnect_by_func (GTK_OBJECT (widget),
+				GTK_SIGNAL_FUNC (find_in_files_dialog_button_cb),
+				NULL);
+	    gnome_dialog_close (GNOME_DIALOG (find_in_files_dialog));
+	    break;
+	}	  
+}
+
+/*
+ * Show the search_result_window.
+ */
+static void
+show_search_result_window()
+{
+	if (GTK_WIDGET_VISIBLE(search_result_window) == FALSE)
+	  gtk_widget_show ( search_result_window );
+}
+
+/*
+ * Hide the search_result_window
+ */
+void 
+remove_search_result_cb 
+(
+	GtkWidget *widget, 
+	gpointer data
+)
+{
+	gtk_widget_hide(search_result_window);
+} 
+
+/* end find in files functions */
+
 
 /*
  * PUBLIC: count_lines_cb

@@ -72,6 +72,12 @@ GnomeUIInfo gedit_edit_menu [] = {
 	  goto_line_cb, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
 
+	{ GNOME_APP_UI_ITEM, N_("Find _In Files..."),
+	  N_("Find text in all open files"),
+	  find_in_files_cb, NULL, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH
+	},
+
 	GNOMEUIINFO_MENU_FIND_ITEM(search_cb, NULL),
 
 	GNOMEUIINFO_MENU_REPLACE_ITEM(replace_cb, NULL),

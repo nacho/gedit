@@ -1,3 +1,65 @@
+Fri Sep  10 1999 	Kosta Arvanitis <kosta@uvic.ca>
+
+	* src/command.c:  (file_save_cb and file_save_all_cb) Re-added code to get
+	filename of doc being saved and passed it to dialog box callbacks. Code
+	was displaying NULL instead of filename.
+	
+	* below is the comments for the added functionality of Find In Files ...
+	
+	* src/gE_mdi.c:  Added the Find In Files option to the edit menu. Calls
+	the find_in_files_cb located in search.c
+	
+	* src/gE_window.h:   Added new extern GtkWidgets search_reult_window and
+	search_result_clist. The need to also be available to search.c. The are
+	defined in src/gE_window.c
+	
+	* src/gE_window.c:   Added function (create_find_in_files_result_window) to
+	create the new area for the search results. It contains a scrolled window
+	with a clist in it and a button to remove the window from the app. I want 
+	to change the button to look better. Any graphics people??
+	
+	* src/gE_window.c:  In function (gE_window_new) create the new window 
+	using the create_find_in_files_result_window and
+	pack it into the main app. Used gtk_box_pack instead of app_add_docked for 
+	cosmetic reasons. If anyone want it to be dockable you can try to change it.
+	 
+	
+	* src/search.[ch] grouped all find in files functions together.
+	
+	* src/search.[ch] (find_in_files_cb) New Function. Called by the edit menu
+	in gE_mdi.c. Creates the find in files dialog box.
+	
+	* src/search.[ch] (create_find_in_files_dialog) New Functions. Creates the
+	dialog box for searching all files.
+	
+	* src/search.[ch] (find_in_files_dialog_button_cb) New Function. Call
+	back for the above dialog box. If close was clicked the search dialog is 
+	destroyed. If search was clicked it initialize the search result window 
+	and perform the search.
+	
+	* src/search.[ch]:  (show_search_result_window) New Function. 
+	
+	* src/search.[ch]:  (remove_search_result_window) New Function. 	
+	
+	* src/search.[ch]: 	(search_for_text_in_files) New Function.
+	Call search function on all files in the mdi child list. Appending to the 
+	end of the search_result_clist number of matched found.
+	
+	* src/search.[ch]:	(find_in_file_search) New Function.
+	Search a given file for a given text string. Using already defined search
+	string everytime a match is found append to the search_result_clist the 
+	filename, line number, and the text of the line its on. Returns total number
+	of matches found in file.
+	
+	* src/search.[ch]:	(get_line_as_text) New Function.
+	Given a gE_view instance and the position of a specific index in it text
+	memeber; return the line (as text) of that index.
+	
+	* I think thats everything for the find in files. This is the first cut at
+	this. I will add options in the dialog box. A better looking button and 
+	hopefully callbacks form the clist that will take you staight to the text.
+	So far so good but dont hesistate to email me with suggestions.
+	
 Fri Sep 10 21:42:23 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_prefs.c: (gE_save_settings) Actually Save the tab position!

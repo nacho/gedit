@@ -37,15 +37,69 @@
 #include "menus.h"
 /*#include "toolbar.h"*/
 #include "gE_prefs.h"
-/*#include "search.h"*/
+#include "search.h"
 #include "gE_icon.xpm"
 
 extern GList *plugins;
 gE_window *window;
 extern GtkWidget  *col_label;
 
+GtkWidget *search_result_window;
+GtkWidget *search_result_clist;
+
 /* Prototype for setting the window icon */
 void gE_window_set_icon(GtkWidget *window, char *icon);
+
+/*
+ *  Create the find in all files search result window
+ *  but dont show it. packer is the widget to which it attaches too.
+ */
+static GtkWidget*
+create_find_in_files_result_window ()
+{
+	GtkWidget *wnd, *btn, *hbox;
+	gchar *titles[] = {"Filename", "Line", "Contents"};
+	int i;
+
+	search_result_clist = gtk_clist_new_with_titles(3, titles);
+	
+	for (i = 0; i < 3; i++) {
+
+	  gtk_clist_set_column_auto_resize ((GtkCList *)search_result_clist, i, TRUE);
+
+	}
+
+	wnd = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy ((GtkScrolledWindow *)wnd,
+								GTK_POLICY_NEVER,
+								GTK_POLICY_AUTOMATIC);
+
+
+	gtk_scrolled_window_add_with_viewport ( (GtkScrolledWindow *)wnd, 
+	search_result_clist);
+
+	gtk_widget_show(search_result_clist);
+	gtk_widget_show(wnd);
+
+
+	hbox = gtk_hbox_new (FALSE, 0);
+
+	btn = gtk_button_new_with_label ("x");
+
+	gtk_signal_connect (GTK_OBJECT(btn), "button_release_event",
+					GTK_SIGNAL_FUNC(remove_search_result_cb),
+					NULL);
+
+	gtk_box_pack_start (GTK_BOX (hbox), btn, FALSE, FALSE, 0);	
+
+	gtk_widget_show (btn);
+
+	gtk_box_pack_start (GTK_BOX (hbox), wnd, TRUE, TRUE, 0);
+
+	return hbox;
+
+}
+
 
 /*gE_window */
 void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
@@ -81,6 +135,14 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
 	/*gE_get_settings ();*/
+	
+	/* find in files result window  dont show it.*/
+	search_result_window = create_find_in_files_result_window();
+
+	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window, TRUE, TRUE, 0);
+
+	gtk_widget_hide(search_result_window);
+
 
 	g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);
 

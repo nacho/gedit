@@ -582,6 +582,7 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 	gchar *fname;
 	gE_document *doc;
 	gE_view *view;
+	gchar *title;
 
 	if (gE_document_current()) {
 	
@@ -592,9 +593,11 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 	  
  	    fname = doc->filename;
 
- 	    if (fname == NULL)
-	      file_save_as_cb(widget, NULL);
-	    else
+ 	    if (fname == NULL) {
+ 	    
+		title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
+		file_save_as_cb(widget, title);
+	    } else
 	      if ((gE_file_save(doc, doc->filename)) != 0) {
 	      
 		gnome_app_flash (mdi->active_window, _("Read only file!"));
@@ -630,7 +633,9 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
 
             if (fname == NULL) {
             
-              gtk_label_get((GtkLabel *)doc->tab_label, &title);
+	      title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
+	      /*gtk_label_get((GtkLabel *)doc->tab_label, &title);*/
+
               file_save_all_as_cb(widget, title);
             
             } else {
@@ -824,15 +829,20 @@ void
 file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 {
 
+	gE_document *doc;
+
 	if (gnome_mdi_remove_all (mdi, FALSE)) {
 	
           if (mdi->active_child == NULL) {
           
-	    if (!settings->close_doc)
-	      gE_document_new ();
-	    else
-	      g_print ("Er.. Unimplemented alternative!\n");
-	      
+	    /* if there are no open documents create a blank one */
+	    if (g_list_length(mdi->children) == 0) {
+
+		doc = gE_document_new ();
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
+	    }
+
 	  }
 	  
 	}

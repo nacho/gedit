@@ -36,6 +36,8 @@ extern "C" {
 #define MSGBAR_SELECT_ALL		"All Text Selected..."
 
 extern GtkWidget *col_label;
+extern GtkWidget *search_result_window;
+extern GtkWidget *search_result_clist;
 
 extern void gE_window_set_auto_indent (gint auto_indent);
 extern void gE_window_set_status_bar (gint show_status);
