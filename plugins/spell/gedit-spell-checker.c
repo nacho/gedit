@@ -74,7 +74,7 @@ enum {
 	LAST_SIGNAL
 };
 
-#define KNOWN_LANGUAGES 22
+#define KNOWN_LANGUAGES 23
 static GeditLanguage known_languages [KNOWN_LANGUAGES + 1] = 
 {
 	{"br", N_("Breton")},
@@ -99,6 +99,7 @@ static GeditLanguage known_languages [KNOWN_LANGUAGES + 1] =
 	{"pt_br", N_("Portuguese (Brazilian)")},
 	{"ru", N_("Russian")},
 	{"sv", N_("Swedish")},
+	{"uk", N_("Ukrainian")},
 	{NULL, NULL}
 };
 
