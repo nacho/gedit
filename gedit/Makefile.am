@@ -34,8 +34,7 @@ gedit_SOURCES = 	\
 	gedit.c		\
 	commands.c	\
 	commands.h	\
-	gE_window.c	\
-	gE_window.h	\
+	gedit-window.c gedit-window.h \
 	gE_view.c	\
 	gE_view.h	\
 	gE_mdi.c	\
@@ -50,7 +49,7 @@ gedit_SOURCES = 	\
 	gedit-print.c gedit-print.h \
 	gE_prefs.h	\
 	gedit-plugin.c gedit-plugin.h \
-	main.h		\
+	gedit.h		\
 	gedit-menus.c gedit-menus.h \
 	gedit-search.c gedit-search.h
 

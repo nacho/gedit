@@ -21,7 +21,7 @@
 #ifndef __GE_VIEW_H__
 #define __GE_VIEW_H__
 
-#include "main.h"
+#include "gedit.h"
 
 #define GE_VIEW(obj)		GTK_CHECK_CAST (obj, gedit_view_get_type (), gedit_view)
 #define GE_VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_view_get_type (), gedit_view_class)

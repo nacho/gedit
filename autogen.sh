@@ -8,7 +8,7 @@ export srcdir
 PKG_NAME="gEdit"
 
 (test -f $srcdir/makeconfig.pl \
-  && test -f $srcdir/src/main.h) || {
+  && test -f $srcdir/src/gedit.h) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level $PKG_NAME directory"
     exit 1

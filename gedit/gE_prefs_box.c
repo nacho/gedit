@@ -18,10 +18,10 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "main.h"
+#include "gedit.h"
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
-#include "gE_window.h"
+#include "gedit-window.h"
 #include "gE_view.h"
 #include "gE_mdi.h"
 

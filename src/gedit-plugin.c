@@ -24,7 +24,8 @@
 #include <gnome.h>
 #include <gmodule.h>
 #include <dirent.h> 
-#include "main.h"
+
+#include "gedit.h"
 #include "gedit-file-io.h"
 #include "gedit-plugin.h"
 

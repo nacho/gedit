@@ -19,7 +19,7 @@
 #ifndef __COMMANDS_H__
 #define __COMMANDS_H__
 
-#include "main.h"
+#include "gedit.h"
 
 #ifndef MAX_RECENT
 #define MAX_RECENT 4

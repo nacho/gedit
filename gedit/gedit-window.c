@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
@@ -21,11 +22,9 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "main.h"
-#include "gE_window.h"
+#include "gedit.h"
+#include "gedit-window.h"
 #include "gE_view.h"
-#include "gedit-file-io.h"
-#include "gE_prefs_box.h"
 #include "commands.h"
 #include "gE_mdi.h"
 #include "gedit-print.h"
@@ -36,6 +35,8 @@
 #include "gedit-plugin.h"
 #include "../pixmaps/gE_icon.xpm"
 
+/*#include "gedit-file-io.h"*/
+/*#include "gE_prefs_box.h"*/
 
 extern GList *plugins;
 gedit_window *window;
@@ -48,49 +49,52 @@ GtkWidget *search_result_clist;
 void gedit_window_set_icon (GtkWidget *window, char *icon);
 
 
-/*
- *  Create the find in all files search result window
- *  but dont show it. packer is the widget to which it attaches too.
+/**
+ * create_find_in_files_result_window:
  *
- *  I know the code is a little ugly but its the idea that Im trying to get 
- *  acrross. Cleaning up the code would be nice.
+ * Create the find in all files search result window but don't show it.
  */
 static GtkWidget*
-create_find_in_files_result_window ()
+create_find_in_files_result_window (void)
 {
 	GtkWidget *wnd, *btn, *top, *frame, *image, *label, *hsep;
-	gchar *titles[] = {"Filename", "Line", "Contents"};
+	gchar *titles[] = {
+		N_("Filename"),
+		N_("Line"),
+		N_("Contents") 
+	};
 	int i;
 	
-	search_result_clist = gtk_clist_new_with_titles(3, titles);
-	gtk_signal_connect(GTK_OBJECT(search_result_clist), 
-					"select_row",
-					GTK_SIGNAL_FUNC(search_result_clist_cb),
-					NULL);
+	search_result_clist = gtk_clist_new_with_titles (3, titles);
+	gtk_signal_connect (GTK_OBJECT(search_result_clist), 
+			    "select_row",
+			    GTK_SIGNAL_FUNC(search_result_clist_cb),
+			    NULL);
+
 	for (i = 0; i < 3; i++) 
-	  gtk_clist_set_column_auto_resize ((GtkCList *)search_result_clist, i, TRUE);
+		gtk_clist_set_column_auto_resize ((GtkCList *)search_result_clist, i, TRUE);
 
 	wnd = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy ((GtkScrolledWindow *)wnd,
-								GTK_POLICY_NEVER,
-								GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_add_with_viewport ( GTK_SCROLLED_WINDOW(wnd),
-										search_result_clist); 
-	gtk_widget_show(search_result_clist);
-	gtk_widget_show(wnd);
+					GTK_POLICY_NEVER,
+					GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW(wnd),
+					       search_result_clist); 
+	gtk_widget_show (search_result_clist);
+	gtk_widget_show (wnd);
 
-	btn = gtk_button_new();
+	btn = gtk_button_new ();
 
 	/*image = gnome_pixmap_new_from_file_at_size ("../xpm/tb_cancel.xpm", 15, 15);*/
 	image = gnome_stock_new_with_icon (GNOME_STOCK_PIXMAP_CLOSE);
 	
 	gtk_container_add (GTK_CONTAINER (btn), image);
 
-	gtk_button_set_relief ( GTK_BUTTON(btn), GTK_RELIEF_NONE);
+	gtk_button_set_relief (GTK_BUTTON(btn), GTK_RELIEF_NONE);
 	
 	gtk_signal_connect (GTK_OBJECT(btn), "clicked",
-					GTK_SIGNAL_FUNC(remove_search_result_cb),
-					NULL);
+			    GTK_SIGNAL_FUNC(remove_search_result_cb),
+			    NULL);
 
 	gtk_widget_show (image);
 	gtk_widget_show (btn);
@@ -98,17 +102,17 @@ create_find_in_files_result_window ()
 	frame = gtk_vbox_new (FALSE, 0);
 	top = gtk_hbox_new (FALSE, 0);	
 	
-	label = gtk_label_new ( " Search Results " );
+	label = gtk_label_new (" Search Results ");
 
-	gtk_label_set_justify ( GTK_LABEL(label), GTK_JUSTIFY_LEFT );
-	hsep = gtk_hseparator_new();
+	gtk_label_set_justify (GTK_LABEL(label), GTK_JUSTIFY_LEFT);
+	hsep = gtk_hseparator_new ();
 
 	gtk_box_pack_start (GTK_BOX (top), label, FALSE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (top), hsep, TRUE, TRUE, 0);		 	
-	gtk_box_pack_start (GTK_BOX (top), btn, FALSE, TRUE, 0);	 	
+	gtk_box_pack_start (GTK_BOX (top), hsep, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (top), btn, FALSE, TRUE, 0);
 	
-	gtk_box_pack_start (GTK_BOX (frame), top, FALSE, FALSE, 0);	 	
-	gtk_box_pack_start (GTK_BOX (frame), wnd, TRUE, TRUE, 0);	 		
+	gtk_box_pack_start (GTK_BOX (frame), top, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (frame), wnd, TRUE, TRUE, 0);
 
 	gtk_widget_show (hsep);
 	gtk_widget_show (label);
@@ -116,7 +120,6 @@ create_find_in_files_result_window ()
 
 	return frame;
 }
-
 
 void
 gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
@@ -248,22 +251,14 @@ child_switch (GnomeMDI *mdi, gedit_document *doc)
 	}
 }
 
-/*	umm.. FIXME?
-static gint
-gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
-{
-	window_close_cb(widget, data);
-	return TRUE;
-}
-*/
-
-/*
- * PRIVATE: doc_swaphc_cb
+/**
+ * doc_swaphc_cb:
+ * 
+ * if .c file is open, then open the related .h file
  *
- * if .c file is open open .h file 
- *
- * TODO: if a .h file is open, do we swap to a .c or a .cpp?  we should put a
- * check in there.  if both exist, then probably open both files.
+ * TODO: if a .h file is open, do we swap to a .c or a .cpp?  we
+ * should put a check in there.  if both exist, then probably open
+ * both files.
  */
 void
 doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
@@ -278,46 +273,45 @@ doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
 		return;
 
 	newfname = NULL;
-	len = strlen(doc->filename);
+	len = strlen (doc->filename);
 	
-	while (len) {
+	while (len)
+	{
 		if (doc->filename[len] == '.')
 			break;
 		len--;
 	}
 
 	len++;
-	if (doc->filename[len] == 'h') {
-
-		newfname = g_strdup(doc->filename);
+	if (doc->filename[len] == 'h')
+	{
+		newfname = g_strdup (doc->filename);
 		newfname[len] = 'c';
-
-	} else if (doc->filename[len] == 'H') {
-
-		newfname = g_strdup(doc->filename);
+	}
+	else if (doc->filename[len] == 'H')
+	{
+		newfname = g_strdup (doc->filename);
 		newfname[len] = 'C';
-
-	} else if (doc->filename[len] == 'c') {
-
-		newfname = g_strdup(doc->filename);
+	}
+	else if (doc->filename[len] == 'c')
+	{
+		newfname = g_strdup (doc->filename);
 		newfname[len] = 'h';
 
 		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "cpp") == 0)
 			newfname[len+1] = '\0';
-	
-	} else if (doc->filename[len] == 'C') {
+	}
+	else if (doc->filename[len] == 'C')
+	{
+		newfname = g_strdup (doc->filename);
 
-		newfname = g_strdup(doc->filename);
-
-		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "CPP") == 0) {
-
+		if (len < strlen(doc->filename) && strcmp(doc->filename + len, "CPP") == 0)
+		{
 			newfname[len] = 'H';
 			newfname[len+1] = '\0';
-
-		} else
-
+		}
+		else
 			newfname[len] = 'H';
-
 	}
 
 	if (!newfname)
@@ -329,3 +323,16 @@ doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 }
+
+
+/* Unused functions */
+#if 0
+
+static gint
+gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
+{
+	window_close_cb(widget, data);
+	return TRUE;
+}
+
+#endif 

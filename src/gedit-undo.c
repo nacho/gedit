@@ -21,10 +21,9 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "main.h"
+#include "gedit.h"
 #include "gedit-undo.h"
 #include "gedit-utils.h"
-
 #include "gE_mdi.h"
 #include "gE_view.h"
 

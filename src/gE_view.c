@@ -22,12 +22,12 @@
 #include <config.h>
 #include <gnome.h>
 #include "gE_view.h"
-#include "main.h"
+#include "gedit.h"
 #include "gedit-undo.h"
 #include "gE_mdi.h"
 #include "commands.h"
 #include "gE_prefs.h"
-#include "gE_window.h"
+#include "gedit-window.h"
 #include "gedit-print.h"
 #include "gedit-utils.h"
 

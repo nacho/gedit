@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=4 sts=0 sw=4:
  *
  * gEdit
@@ -17,8 +18,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __GE_WINDOW_H___
-#define __GE_WINDOW_H__
+#ifndef __GEDIT_WINDOW_H___
+#define __GEDIT_WINDOW_H__
 
 #define MSGBAR_CLEAR		" "
 #define MSGBAR_FILE_NEW		"New File..."
@@ -45,8 +46,8 @@ extern void child_switch (GnomeMDI *mdi, gedit_document *doc);
 
 #ifdef WITH_GMODULE_PLUGINS
 extern gedit_document *gE_document_new_container (gE_window *w, gchar *title,
-					       gint with_split_screen);
+						  gint with_split_screen);
 #endif
 
 
-#endif /* __GE_WINDOW_H__ */
+#endif /* __GEDIT_WINDOW_H__ */

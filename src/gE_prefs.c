@@ -20,7 +20,7 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "main.h"
+#include "gedit.h"
 #include "gE_prefs.h"
 #include "gE_mdi.h"
 

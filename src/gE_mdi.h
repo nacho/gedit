@@ -21,12 +21,9 @@
 #ifndef __GE_MDI_H__
 #define __GE_MDI_H__
 
-#include <gtk/gtk.h>
-#include <gdk/gdk.h>
-
 #include <gnome.h>
 
-#include "main.h"
+#include "gedit.h"
 
 BEGIN_GNOME_DECLS
 

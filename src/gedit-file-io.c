@@ -21,11 +21,12 @@
 #include <config.h>
 #include <gnome.h>
 #include <sys/stat.h> /* for stat() */
+
 #include "commands.h"
-#include "main.h"
+#include "gedit.h"
 #include "gE_mdi.h"
 #include "gE_view.h"
-#include "gE_window.h"
+#include "gedit-window.h"
 #include "gedit-file-io.h"
 #include "gedit-utils.h"
 

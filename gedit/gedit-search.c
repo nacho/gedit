@@ -20,8 +20,9 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "main.h"
-#include "gE_window.h"
+
+#include "gedit.h"
+#include "gedit-window.h"
 #include "gE_view.h"
 #include "gE_mdi.h"
 #include "gedit-search.h"

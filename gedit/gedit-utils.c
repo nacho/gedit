@@ -21,7 +21,7 @@
 
 #include <gnome.h>
 #include "gedit-utils.h"
-#include "main.h"
+#include "gedit.h"
 #include "gE_mdi.h"
 
 /**

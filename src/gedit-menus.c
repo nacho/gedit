@@ -22,7 +22,7 @@
 #include <gnome.h>
 
 #define PLUGIN_TEST 1
-#include "main.h"
+#include "gedit.h"
 #include "commands.h"
 #include "gedit-about.h"
 #include "gedit-file-io.h"
@@ -32,7 +32,7 @@
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
 #include "gE_view.h"
-#include "gE_window.h"
+#include "gedit-window.h"
 #include "gedit-search.h"
 
 /* Why do we need/use this stuff ??? - JEL */

@@ -22,25 +22,17 @@
  * Printing code by : Chema Celorio <chema@celorio.com>
  */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 #include <config.h>
 #include <gnome.h>
-#include <gtk/gtk.h>
-#include <time.h>
-#include "main.h"
+
+#include "gedit.h"
 #include "gedit-print.h"
 #include "gedit-file-io.h"
-#include "gE_window.h"
+#include "gedit-window.h"
 #include "gE_view.h"
 #include "gE_mdi.h"
 #include "commands.h"
 #include "gE_prefs.h"
-
 
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-printer.h>

@@ -20,14 +20,14 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "main.h"
+#include "gedit.h"
 #include "commands.h"
 #include "gE_mdi.h"
 #include "gE_prefs.h"
 #include "gedit-file-io.h"
 #include "gedit-menus.h"
 #include "gedit-plugin.h"
-#include "gE_window.h"
+#include "gedit-window.h"
 
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>

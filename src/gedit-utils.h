@@ -22,7 +22,7 @@
 #ifndef __GEDIT_UTILS_H__
 #define __GEDIT_UTILS_H__
 
-#include "main.h"
+#include "gedit.h"
 
 void gedit_set_title (gedit_document *doc);
 void gedit_flash     (gchar *msg);
