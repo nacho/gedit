@@ -44,7 +44,6 @@
 #include <libgnome/libgnome.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <eel/eel-vfs-extensions.h>
-#include <eel/eel-glib-extensions.h>
 
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 
@@ -1031,7 +1030,8 @@ get_info_cb (GnomeVFSAsyncHandle *handle,
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_return_if_fail (eel_g_list_exactly_one_item (results));
+	/* assert that the list has one and only one item */
+	g_return_if_fail (results != NULL && results->next == NULL);
 
 	doc = GEDIT_DOCUMENT (callback_data);
 	doc->priv->info_handle = NULL;
@@ -1351,7 +1351,6 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 
 	return TRUE;
 }
-
 
 gboolean 
 gedit_document_is_untouched (const GeditDocument *doc)

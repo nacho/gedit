@@ -110,6 +110,9 @@ about_button_cb (GtkWidget *button, GeditPluginManager *pm)
 				 NULL,
 				 pixbuf);
 
+	g_signal_connect (G_OBJECT (about), "destroy",
+			  G_CALLBACK (gtk_widget_destroyed), &about);
+
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
 
