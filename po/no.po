@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.5.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
+"POT-Creation-Date: 2005-03-08 12:06+0100\n"
 "PO-Revision-Date: 2005-02-10 00:25+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <i18n-nb@lister.ping.uio.no>\n"
@@ -43,7 +43,7 @@ msgstr "gedit automatiseringsfabrikk"
 msgid "Edit text files"
 msgstr "Rediger tekstfiler"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "Tekstredigering"
 
@@ -210,19 +210,26 @@ msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr ""
 "Maksimalt antall handlinger som gedit vil kunne angre eller gjenopprette."
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:33
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace vanlig 9"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -230,51 +237,61 @@ msgstr ""
 "Antall minutter før gedit lagrer endrede filer automatisk. Dette vil kun "
 "brukes hvis «Autolagre» er slått på."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "Skriv ut topptekst"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "Skriv ut linjenummer"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "Skriv ut syntaksutheving"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "Linjebrytingsmodus ved utskrift"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "Plassering av høyre marg"
 
-#: data/gedit.schemas.in.h:41
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
 msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans vanlig 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans vanlig 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "Valgt tekstfarge"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "Utvalgsfarge"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -284,7 +301,7 @@ msgstr ""
 "av kodinger for en fil. «CURRENT» er aktivt locale's koding. Kun gjenkjente "
 "kodinger vil brukes."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -297,7 +314,7 @@ msgstr ""
 "bryting ved ordgrenser og GTK_WRAP_CHAR hvis du ønsker bryting på tegnnivå. "
 "Merk at det skilles mellom store og små bokstaver."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -310,13 +327,13 @@ msgstr ""
 "bryting ved ordgrenser og «GTK_WRAP_CHAR» hvis du ønsker bryting på "
 "tegnnivå. Merk at det skilles mellom store og små bokstaver."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Spesifiserer skriften som skal brukes for et dokuments kropp ved utskrift."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -325,7 +342,7 @@ msgstr ""
 "Dette er et skriftnavn fra gnome-print og det erstattes av "
 "print_font_body_pango."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -333,7 +350,7 @@ msgstr ""
 "Spesifiserer skriften som skal brukes for linjenummer ved utskrift. Denne "
 "vil kun brukes hvis «Skriv ut linjenummer» er ulik null."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -343,7 +360,7 @@ msgstr ""
 "vil kun brukes hvis «Skriv ut linjenummer» er ulik null. Dette er et "
 "skriftnavn fra gnome-print og det vil erstattes av print_font_numbers_pango."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -351,7 +368,7 @@ msgstr ""
 "Spesifiserer skriften som skal brukes for topptekst ved utskrift av et "
 "dokument. Denne vil kun brukes hvis «Skriv ut topptekst» er slått på."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -362,7 +379,7 @@ msgstr ""
 "er et skriftnavn fra gnome-print og det vil erstattes av "
 "print_font_header_pango."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -370,21 +387,21 @@ msgstr ""
 "Spesifiserer maksimalt antall nylig åpnede filer som vil vises i «Nylig "
 "åpnede filer» undermenyen."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Spesifiserer antall mellomrom som vises i stedet for tabulatorer."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "Spesifiserer posisjonen for høyre marg."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "Statuslinjen er synlig"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -400,35 +417,35 @@ msgstr ""
 "ikoner. Merk at det skilles mellom store og små bokstaver så de må brukes "
 "eksakt som de er skrevet her."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "Fanestørrelse"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "Tekstfarge"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "Knappestil for verktøylinje"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "Verktøylinjen er synlig"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "Grense for angring av handlinger"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "Bruk forvalgte farger"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "Bruk forvalgt skrift"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -437,7 +454,7 @@ msgstr ""
 "Om gedit skal lagre endrede filer automatisk etter et tidsintervall. Du kan "
 "sette tidsintervallet med alternativet «Intervall for autolagring»."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -446,52 +463,52 @@ msgstr ""
 "filtypen for sikkerhetskopiene med alternativet «Filtype for "
 "sikkerhetskopier»."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Om gedit skal vise linjenummer i redigeringsområdet."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Om gedit skal vise høyre marg i redigeringsområdet."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "Om gedit skal aktivere automatisk indentering."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Om gedit skal aktivere automatisk syntaksutheving."
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Om gedit skal utheve tilhørende hakeparantes."
 
-#: data/gedit.schemas.in.h:75
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
 msgstr "Om gedit skal utheve aktiv linje."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Om gedig skal ta med en topptekst ved utskrift av dokumenter."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Om gedit skal sette inn mellomrom i stedet for tabulator."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Om gedit skal ta med en syntaksutheving ved utskrift av dokumenter."
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Om statuslinjen nederst i redigeringsvinduet skal være synlig."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Om verktøylinjen i redigeringsvinduet skal være synlig."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -503,7 +520,7 @@ msgstr ""
 "spesifisert i «Bakgrunnsfarge», «Tekstfarge», «Farge for markert tekst» og "
 "«Utvalgsfarge»."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -515,14 +532,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -625,7 +642,6 @@ msgstr[1] ""
 "før du lukker?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "V_elg dokumentene du vil lagre:"
 
@@ -1134,26 +1150,6 @@ msgstr "Skriv inn _lokasjon (URI) for filen du ønsker å åpne:"
 msgid "Open from URI"
 msgstr "Åpne fra URI"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Du har X dokumenter med endringer som "
-"ikke er lagret. </span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr "Hvis du ikke lagrer dokumentene dine vil alle endringene gå tapt."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "Ikke lagre _noen"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "_Lagre valgte"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit er en liten og lett tekst editor for GNOME skrivebordet"
@@ -1173,46 +1169,46 @@ msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
 msgstr "Ikke-lagret dokument"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "Ugyldig filnavn"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
 msgstr "Ugyldige UTF-8-data"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1658
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kunne ikke lese informasjon om symbolsk lenke %s"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1704
 msgid "The file has too many symbolic links."
 msgstr "Filen har for mange symbolske lenker."
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1787
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1794
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan ikke håndtere denne typen lokasjon i skrivemodus."
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1807
 msgid "Invalid filename."
 msgstr "Ugyldig filnavn."
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1956
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1220,7 +1216,7 @@ msgstr ""
 "Det er ikke nok plass på disken til å lagre filen.\n"
 "Vennligst frigjør plass og prøv igjen."
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1961
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1230,7 +1226,7 @@ msgstr ""
 "Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har "
 "denne begrensningen."
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2005
 msgid "Could not create a backup file."
 msgstr "Kunne ikke opprette sikkerhetskopi."
 
@@ -1360,7 +1356,7 @@ msgstr "Vietnamesisk"
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-encodings.c:433
+#: gedit/gedit-encodings.c:434
 msgid "Unknown"
 msgstr "Ukjent"
 
@@ -1406,35 +1402,35 @@ msgstr "Velg filer som skal åpnes"
 msgid "Select a filename to save"
 msgstr "Velg et filnavn for lagring"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "Åpne fil ..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Lagrer dokument «%s»..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokumentet «%s» er ikke lagret."
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokumentet «%s» er lagret."
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "Lagre som..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Forkast ikke-lagrede endringer i dokumentet «%s»?"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1444,12 +1440,12 @@ msgid_plural ""
 msgstr[0] "Endringer gjort i dokumentet det siste %ld sekundet vil å tapt."
 msgstr[1] "Endringer gjort i dokumentet de siste %ld sekundene vil gå tapt."
 
-#: gedit/gedit-file.c:543
+#: gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Endringer gjort i dokumentet det siste minuttet vil gå tapt."
 
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1462,7 +1458,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Endringer gjort i dokumentet det siste minuttet og %ld sekundene vil gå tapt."
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1472,7 +1468,7 @@ msgid_plural ""
 msgstr[0] "Endringer gjort i dokumentet det siste %ld minuttet vil gå tapt."
 msgstr[1] "Endringer gjort i dokumentet de siste %ld minuttene vil gå tapt."
 
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1480,7 +1476,7 @@ msgid_plural ""
 msgstr[0] "Endringer gjort i dokumentet den siste timen vil gå tapt."
 msgstr[1] "Endringer gjort i dokumentet de siste %d timene vil gå tapt."
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1493,70 +1489,70 @@ msgstr[0] ""
 msgstr[1] ""
 "Endringer gjort i dokumentet den siste timen og %d minuttene vil gå tapt."
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "Fo_rkast"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Feil under forkasting av endringer i fil «%s»."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Endringer i dokumentet «%s» ble ikke forkastet."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Endringer i dokumentet «%s» ble forkastet."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Forkaster endringer i dokument «%s»..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke lese data fra stdin."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "Forkaster endringer i fil:"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "Laster fil:"
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Feil under lasting av fil «%s»"
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Lastet fil «%s»"
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Lastet %d fil"
 msgstr[1] "Lastet %d filer"
 
-#: gedit/gedit-file.c:1266
+#: gedit/gedit-file.c:1288
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Opprettet fil «%s»"
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Laster fil «%s»..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1471
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1630,7 +1626,9 @@ msgstr "«%s» er en katalog"
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
-msgstr "Ikke nok minne tilgjengelig til å åpne filen. Vennligst lukk noen programmer og prøv igjen."
+msgstr ""
+"Ikke nok minne tilgjengelig til å åpne filen. Vennligst lukk noen programmer "
+"og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
 #, c-format
@@ -1706,7 +1704,9 @@ msgstr ""
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
-msgstr "Filen inneholder data i ugyldig format. Du prøver sannsynligvis å åpne en binærfil."
+msgstr ""
+"Filen inneholder data i ugyldig format. Du prøver sannsynligvis å åpne en "
+"binærfil."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1732,7 +1732,8 @@ msgstr "Du har for mange åpne filer. Vennligst lukk noen filer og prøv igjen."
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
-msgstr "Ikke nok minne tilgjengelig. Vennligst lukk noen programmer og prøv igjen."
+msgstr ""
+"Ikke nok minne tilgjengelig. Vennligst lukk noen programmer og prøv igjen."
 
 #: gedit/gedit-io-error-dialogs.c:499
 msgid ""
@@ -1839,19 +1840,19 @@ msgstr "Åpne «%s»"
 msgid "Open a recently used file"
 msgstr "Åpne nylig brukt fil"
 
-#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
+#: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
 msgid "Read Only"
 msgstr "Skrivebeskyttet"
 
-#: gedit/gedit-mdi.c:2068
+#: gedit/gedit-mdi.c:2095
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:2069
+#: gedit/gedit-mdi.c:2096
 msgid "Use Normal highlight mode"
 msgstr "Bruk normal uthevingsmodus"
 
-#: gedit/gedit-mdi.c:2145
+#: gedit/gedit-mdi.c:2172
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Bruk uthevingsmodus %s"
@@ -2313,39 +2314,39 @@ msgstr " (ugyldig Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln. %d, Kol. %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr "  SET"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 "Sett tegnkoding som skal brukes for å åpne filer gitt via kommandolinjen"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "Avslutt eksisterende instans av gedit"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Opprett et nytt toppvindu i en eksisterende instans av gedit"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Opprett et nytt dokument i en eksisterende instans av gedit"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Oppgitt koding «%s» er ikke gyldig\n"
@@ -3222,7 +3223,8 @@ msgid "Center"
 msgstr "Senter"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
+#, fuzzy
+msgid "Character encoding of linked resource"
 msgstr "Tegnkoding for lenket ressurs"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
@@ -3302,599 +3304,599 @@ msgid "Declare flag"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
+msgid "Defer attribute"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
 msgstr "Definisjonsbeskrivelse"
 
-#: plugins/taglist/HTML.tags.xml.in.h:50
+#: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr "Definisjonsliste"
 
-#: plugins/taglist/HTML.tags.xml.in.h:51
+#: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:52
+#: plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Deleted text"
 msgstr "Slettet tekst"
 
-#: plugins/taglist/HTML.tags.xml.in.h:53
+#: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Direction"
 msgstr "Retning"
 
-#: plugins/taglist/HTML.tags.xml.in.h:54
+#: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:55
+#: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr "Katalogliste"
 
-#: plugins/taglist/HTML.tags.xml.in.h:56
+#: plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Disabled"
 msgstr "Deaktivert"
 
-#: plugins/taglist/HTML.tags.xml.in.h:57
+#: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document base"
 msgstr "Dokumentbasis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:58
+#: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document body"
 msgstr "Dokumentkropp"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document head"
 msgstr "Topptekst for dokument"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document title"
 msgstr "Dokumenttittel"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document type"
 msgstr "Dokumenttype"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Element ID"
 msgstr "Element-ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:65
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr "Type koding"
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr "Figur"
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "Skriftnavn"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "For label"
 msgstr "For etikett"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "Tvunget linjeskift"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form"
 msgstr "Skjema"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame"
 msgstr "Ramme"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameborder"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset"
 msgstr "Rammesett"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
 msgstr "Kolonner for rammesett"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Generic span"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr "HTML - spesielle tegn"
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr "HTML - rotelement"
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:95
+#: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:96
+#: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:97
+#: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr "Overskrift"
 
-#: plugins/taglist/HTML.tags.xml.in.h:98
+#: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr "Overskrift 1"
 
-#: plugins/taglist/HTML.tags.xml.in.h:99
+#: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr "Overskrift 2"
 
-#: plugins/taglist/HTML.tags.xml.in.h:100
+#: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr "Overskrift 3"
 
-#: plugins/taglist/HTML.tags.xml.in.h:101
+#: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr "Overskrift 4"
 
-#: plugins/taglist/HTML.tags.xml.in.h:102
+#: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr "Overskrift 5"
 
-#: plugins/taglist/HTML.tags.xml.in.h:103
+#: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr "Overskrift 6"
 
-#: plugins/taglist/HTML.tags.xml.in.h:104
+#: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr "Høyde"
 
-#: plugins/taglist/HTML.tags.xml.in.h:105
+#: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr "Horisontal linjal"
 
-#: plugins/taglist/HTML.tags.xml.in.h:106
+#: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:107
+#: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:108
+#: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
 msgstr "Bilde"
 
-#: plugins/taglist/HTML.tags.xml.in.h:109
+#: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr "Bildekart"
 
-#: plugins/taglist/HTML.tags.xml.in.h:110
+#: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr "Område for bildekart"
 
-#: plugins/taglist/HTML.tags.xml.in.h:111
+#: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr "Navn på bildekart"
 
-#: plugins/taglist/HTML.tags.xml.in.h:112
+#: plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr "Kilde for bilde"
 
-#: plugins/taglist/HTML.tags.xml.in.h:113
+#: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline frame"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:114
+#: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:115
+#: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Inserted text"
 msgstr "Innsatt tekst"
 
-#: plugins/taglist/HTML.tags.xml.in.h:116
+#: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr "Instansdefinisjon"
 
-#: plugins/taglist/HTML.tags.xml.in.h:117
+#: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Italic text"
 msgstr "Kursiv tekst"
 
-#: plugins/taglist/HTML.tags.xml.in.h:118
+#: plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr "Java-applet"
 
-#: plugins/taglist/HTML.tags.xml.in.h:119
+#: plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "Etikett"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
+#: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
 msgstr "Språkkode"
 
-#: plugins/taglist/HTML.tags.xml.in.h:121
+#: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr "Stil for stor tekst"
 
-#: plugins/taglist/HTML.tags.xml.in.h:122
+#: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr "Lag"
 
-#: plugins/taglist/HTML.tags.xml.in.h:123
+#: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Link color"
 msgstr "Farge på lenke"
 
-#: plugins/taglist/HTML.tags.xml.in.h:124
+#: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr "Listeoppføring"
 
-#: plugins/taglist/HTML.tags.xml.in.h:125
+#: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:126
+#: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:127
+#: plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:128
+#: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Local change to font"
 msgstr "Lokal endring av skrift"
 
-#: plugins/taglist/HTML.tags.xml.in.h:129
+#: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long description link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:130
+#: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:131
+#: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
 msgstr "E-postlenke"
 
-#: plugins/taglist/HTML.tags.xml.in.h:132
+#: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:133
+#: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:134
+#: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr ""
-
 #: plugins/taglist/HTML.tags.xml.in.h:136
-msgid "Media-independent link"
+msgid "Maximum length of text field"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
+msgid "Media-independent link"
+msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
 msgstr "Menyliste"
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Name"
 msgstr "Navn"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr "Neste ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr "Ingen URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr "Ingen rammer"
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr "Ingen lag"
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr "Ingen linjeskift"
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No resize"
 msgstr "Ingen endring av størrelse"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr "Ingen skript"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr "Ingen skygge"
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr "Ingen orddeling"
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr "Merknad"
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object applet file"
 msgstr "Åpne applet-fil"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr "Referanse til objektdata"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnChange event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Option selector"
 msgstr "Valg av alternativ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Output media"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:179
+#: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr "Avsnitt"
 
-#: plugins/taglist/HTML.tags.xml.in.h:180
+#: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:181
+#: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:182
+#: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:183
+#: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Preformatted text"
 msgstr "Forhåndsformatert tekst"
 
-#: plugins/taglist/HTML.tags.xml.in.h:184
+#: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:185
+#: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:186
+#: plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Push button"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:187
+#: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Quote"
 msgstr "Sitat"
 
-#: plugins/taglist/HTML.tags.xml.in.h:188
+#: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Range"
 msgstr "Område"
 
-#: plugins/taglist/HTML.tags.xml.in.h:189
+#: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:190
+#: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:191
+#: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Reverse link"
 msgstr "Omvendt lenke"
 
-#: plugins/taglist/HTML.tags.xml.in.h:192
+#: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr "Rot"
 
-#: plugins/taglist/HTML.tags.xml.in.h:193
+#: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr "Rader"
 
-#: plugins/taglist/HTML.tags.xml.in.h:194
+#: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:195
+#: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:196
-msgid "Scope covered by header cells"
-msgstr ""
-
 #: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
+msgid "Scope covered by header cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
@@ -4549,11 +4551,11 @@ msgstr "_Sett inn dato/klokkeslett..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Sett inn dagens dato og klokkeslett i markørposisjonen"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "Tilgjengelige formater"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "Konfigurer tillegg for innsetting av dato/klokkeslett..."
 
@@ -4596,6 +4598,22 @@ msgstr "S_pør etter et format"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Br_uk egendefinert format"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+#~ "changes. </span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">Du har X dokumenter med endringer "
+#~ "som ikke er lagret. </span>"
+
+#~ msgid "If you don't save your documents, all your changes will be lost."
+#~ msgstr "Hvis du ikke lagrer dokumentene dine vil alle endringene gå tapt."
+
+#~ msgid "Save _None"
+#~ msgstr "Ikke lagre _noen"
+
+#~ msgid "_Save Selected"
+#~ msgstr "_Lagre valgte"
 
 #~ msgid "Irish (Gaeilge)"
 #~ msgstr "Irsk (Gaelisk)"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-12 10:29+0100\n"
+"POT-Creation-Date: 2005-03-08 12:06+0100\n"
 "PO-Revision-Date: 2005-02-12 14:00+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -51,7 +51,7 @@ msgstr "vytváracie rozhranie pre gedit automation"
 msgid "Edit text files"
 msgstr "Úprava textových súborov"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:306
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "Textový editor"
 
@@ -214,19 +214,26 @@ msgstr "Počet nedávnych súborov"
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Maximálny počet akcií, ktoré bude gedit schopný vrátiť späť."
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:33
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace štandardné 9"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -234,51 +241,61 @@ msgstr ""
 "Počet minút, po ktorých gedit automaticky uloží zmenené súbory. Toto "
 "nastavenie sa prejaví, iba ak máte zapnuté \"Automatické ukladanie\"."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "Tlačiť hlavičku"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "Tlačiť čísla riadkov"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "Zvýrazňovanie syntaxu pre tlač"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "Režim zalamovania riadkov pri tlači"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "Pozícia pravého okraja"
 
-#: data/gedit.schemas.in.h:41
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
 msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans štandardné 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans štandardné 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "Farba vybraného textu"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "Farba výberu"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -288,7 +305,7 @@ msgstr ""
 "súboru. \"CURRENT\" je aktuálne lokálne nastavenie. Použijú sa iba "
 "podporované kódovania."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -301,7 +318,7 @@ msgstr ""
 "zalamovanie na ľubovoľnom znaku. Uvedomte si, že tieto hodnoty rozlišujú "
 "veľkosť písmen, takže musia byť napísané presne tak, ako sú tu uvedené."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -315,12 +332,12 @@ msgstr ""
 "hodnoty rozlišujú veľkosť písmen, takže musia byť napísané presne tak, ako "
 "sú tu uvedené."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Určuje písmo používané pre telo dokumentu pri tlači."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -328,7 +345,7 @@ msgstr ""
 "Určuje písmo používané pre telo dokumentu pri tlači. Toto je názov písma "
 "gnome-print a nahrádza ho print_font_body_pango."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -336,7 +353,7 @@ msgstr ""
 "Určuje písmo pre čísla riadkov pri tlači. Toto nastavenie sa prejaví iba ak "
 "máte \"Tlačiť čísla riadkov\" nastavené na nenulovú hodnotu."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -346,7 +363,7 @@ msgstr ""
 "máte \"Tlačiť čísla riadkov\" nastavené na nenulovú hodnotu. Toto je názov "
 "písma gnome-print a nahrádza ho print_font_numbers_pango."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -354,7 +371,7 @@ msgstr ""
 "Určuje písmo pre hlavičku stránky pri tlači. Toto nastavenie sa prejaví, iba "
 "ak máte zapnuté \"Tlačiť hlavičku\"."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -364,28 +381,28 @@ msgstr ""
 "ak máte zapnuté \"Tlačiť hlavičku\". Toto je názov písma gnome-print a "
 "nahrádza ho print_font_header_pango."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 "Určuje maximálny počet nedávno otvorených súborov v menu \"Nedávne súbory\"."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Určuje počet medzier, ktoré sa zobrazia namiesto znakov Tab."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "Určuje pozíciu pravého okraja."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "Zobraziť stavový riadok"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -401,35 +418,35 @@ msgstr ""
 "tieto hodnoty rozlišujú veľkosť písmen, takže musia byť napísané presne tak, "
 "ako sú tu uvedené."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "Veľkosť tabulátora"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "Farba textu"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "Štýl tlačidiel panelu nástrojov"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "Zobraziť panel nástrojov"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "Počet akcií pre vrátenie späť"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "Použiť štandardné farby"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "Použiť štandardné písmo"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -438,7 +455,7 @@ msgstr ""
 "Či má gedit automaticky ukladať zmenené súbory po zadanom časovom intervale. "
 "Jeho hodnotu môžete zapnúť voľbou \"Interval automatického ukladania\"."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -446,52 +463,52 @@ msgstr ""
 "Či má gedit vytvárať záložné kópie súborov pri ukladaní. Ich príponu môžete "
 "nastaviť voľbou \"Prípona záložných súborov\"."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Či má gedit zobrazovať čísla riadkov."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Či má gedit zobraziť pravý okraj v editovacej oblasti."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "Či má gedit zapnúť automatické odsadzovanie."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Či má gedit zapnúť zvýrazňovanie syntaxu."
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Či má gedit zvýrazňovať zodpovedajúce zátvorky."
 
-#: data/gedit.schemas.in.h:75
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
 msgstr "Či má gedit zvýrazniť aktuálny riadok."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Či má gedit pri tlači zahrnúť aj hlavičku dokumentu."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Či má gedit namiesto tabulátorov vkladať medzery."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Či má gedit pri tlači zvýrazňovať syntax."
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Či sa má v dolnej časti okna editora zobrazovať stavový riadok."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Či má byť v oknách editora zobrazený panel nástrojov."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -502,7 +519,7 @@ msgstr ""
 "vypnutá, použijú sa farby nastavené v \"Farba pozadia\", \"Farba textu\", "
 "\"Farba označeného textu\" a \"Farba výberu\"."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -514,14 +531,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-2,ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-2,ISO-8859-15]"
 
@@ -635,7 +652,6 @@ msgstr[2] ""
 "uložiť pred zatvorením?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "Vyberte _súbory, ktoré chcete uložiť:"
 
@@ -1141,26 +1157,6 @@ msgstr "Zadajte u_miestnenie (URI) súboru, ktorý chcete otvoriť:"
 msgid "Open from URI"
 msgstr "Otvoriť pomocou URI"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Máte niekoľko dokumentov, ktoré "
-"obsahujú neuložené zmeny.</span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr "Ak dokumenty neuložíte, všetky zmeny budú stratené."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "_Nič neuložiť"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "Uložiť _označené"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit je malý a jednoduchý textový editor pre prostredie GNOME"
@@ -1182,46 +1178,46 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
 msgstr "Neuložený dokument"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "Neplatné meno súboru"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
 msgstr "Neplatné dáta UTF-8"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1658
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nepodarilo sa prečítať informácie o symbolickom odkaze %s"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1704
 msgid "The file has too many symbolic links."
 msgstr "Súbor obsazuje príliš veľa symbolických odkazov."
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1787
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit nedokáže spracovať miesta %s: v režime zápisu."
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1794
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "geditr nedokáže spracovať tento typ umiestnenia v režime zápisu."
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1807
 msgid "Invalid filename."
 msgstr "Neplatné meno súboru."
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1956
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1229,7 +1225,7 @@ msgstr ""
 "Nedostatok miesta pre uloženie súboru.\n"
 "Uvoľnite nejaké miesto na disku a skúste to znovu."
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1961
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1239,7 +1235,7 @@ msgstr ""
 "Skúste uložiť menší súbor alebo súbor skúste uložiť na disk, ktorý toto "
 "obmedzenie nemá."
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2005
 msgid "Could not create a backup file."
 msgstr "Nepodarilo sa vytvoriť záložnú kópiu súboru."
 
@@ -1369,7 +1365,7 @@ msgstr "Vietnamská"
 msgid "Thai"
 msgstr "Thajská"
 
-#: gedit/gedit-encodings.c:433
+#: gedit/gedit-encodings.c:434
 msgid "Unknown"
 msgstr "Neznáme"
 
@@ -1415,36 +1411,36 @@ msgstr "Vyberte súbory"
 msgid "Select a filename to save"
 msgstr "Vyberte meno súboru"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "Otvoriť súbor..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Ukladám dokument \"%s\"..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokument \"%s\" nebol uložený."
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokument \"%s\" bol uložený."
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "Uložiť ako..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 "Vrátiť späť obsah súboru a zrušiť tak neuložené zmeny v dokumente \"%s\"?"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1458,12 +1454,12 @@ msgstr[1] ""
 msgstr[2] ""
 "Zmeny v tomto dokumente za posledné %ld sekundy budú definitívne stratené."
 
-#: gedit/gedit-file.c:543
+#: gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Zmeny v tomto dokumente za poslednú minútu budú definitívne stratené."
 
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1481,7 +1477,7 @@ msgstr[2] ""
 "Zmeny v tomto dokumente za poslednú minútu a %ld sekundy budú definitívne "
 "stratené."
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1495,7 +1491,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Zmeny v tomto dokumente za posledné %ld minúty budú definitívne stratené."
 
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1507,7 +1503,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Zmeny v tomto dokumente za posledné %d hodiny budú definitívne stratené."
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1525,53 +1521,53 @@ msgstr[2] ""
 "Zmeny v tomto dokumente za poslednú hodinu a %d minúty budú definitívne "
 "stratené."
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Vrátiť"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Nastala chyba pri vracaní dokumentu \"%s\"."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument \"%s\" nebol vrátený."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument \"%s\" bol vrátený."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Vraciam obsah dokumentu \"%s\"..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "Nastala chyba pri čítaní zo štandardného vstupu."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "Vraciam obsah súboru:"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "Načítavam súbor:"
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Chyba pri načítavaní súboru \"%s\""
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Načítaný súbor \"%s\""
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1579,17 +1575,17 @@ msgstr[0] "Načítaných %d súborov"
 msgstr[1] "Načítaný %d súbor"
 msgstr[2] "Načítané %d súbory"
 
-#: gedit/gedit-file.c:1266
+#: gedit/gedit-file.c:1288
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Vytvorený súbor \"%s\""
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Načítavam súbor \"%s\"..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1471
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1765,14 +1761,16 @@ msgstr "gedit ho nemôže nájsť. Pravdepodobne bol nedávno odstránený."
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
-"Je otvorených príliš veľa súborov. Prosím, zatvorte niektoré otvorené súbory a skúste to znova."
+"Je otvorených príliš veľa súborov. Prosím, zatvorte niektoré otvorené súbory "
+"a skúste to znova."
 
 #: gedit/gedit-io-error-dialogs.c:456
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"Nedostatok dostupnej pamäte. Prosím, zatvorte niektoré bežiace aplikácie a skúste to znova."
+"Nedostatok dostupnej pamäte. Prosím, zatvorte niektoré bežiace aplikácie a "
+"skúste to znova."
 
 #: gedit/gedit-io-error-dialogs.c:499
 msgid ""
@@ -1790,7 +1788,9 @@ msgstr "Pokus o prihlásenie zlyhal."
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
-msgstr "Súbor obsahuje neplatné dáta UTF-8. Pravdepodobne sa pokúšate vrátiť binárny súbor."
+msgstr ""
+"Súbor obsahuje neplatné dáta UTF-8. Pravdepodobne sa pokúšate vrátiť binárny "
+"súbor."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
@@ -1877,19 +1877,19 @@ msgstr "Otvoriť '%s'"
 msgid "Open a recently used file"
 msgstr "Otvoriť nedávny súbor"
 
-#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
+#: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
 msgid "Read Only"
 msgstr "Len pre čítanie"
 
-#: gedit/gedit-mdi.c:2068
+#: gedit/gedit-mdi.c:2095
 msgid "Normal"
 msgstr "Normálny"
 
-#: gedit/gedit-mdi.c:2069
+#: gedit/gedit-mdi.c:2096
 msgid "Use Normal highlight mode"
 msgstr "Použiť normálny režim"
 
-#: gedit/gedit-mdi.c:2145
+#: gedit/gedit-mdi.c:2172
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Použiť režim %s"
@@ -2351,16 +2351,16 @@ msgstr " (neplatné Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  R %d, S %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr "  CEZ"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr "  VKL"
 
@@ -2384,7 +2384,7 @@ msgstr "Vytvoriť nové hlavné okno v už bežiacom gedit"
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Vytvoriť nový dokument v už bežiacom gedit"
 
-#: gedit/gedit2.c:161
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Zadané kódovanie \"%s\" nie je platné\n"
@@ -3348,600 +3348,601 @@ msgid "Declare flag"
 msgstr "Deklarovať príznak"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
+#, fuzzy
+msgid "Defer attribute"
+msgstr "vlastnosť"
+
+#: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
 msgstr "Popis definície"
 
-#: plugins/taglist/HTML.tags.xml.in.h:50
+#: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr "Zoznam definícií"
 
-#: plugins/taglist/HTML.tags.xml.in.h:51
+#: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr "Výraz definície"
 
-#: plugins/taglist/HTML.tags.xml.in.h:52
+#: plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Deleted text"
 msgstr "Odstránený text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:53
+#: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Direction"
 msgstr "Smer"
 
-#: plugins/taglist/HTML.tags.xml.in.h:54
+#: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr "Smerovosť"
 
-#: plugins/taglist/HTML.tags.xml.in.h:55
+#: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr "Zoznam priečinkov"
 
-#: plugins/taglist/HTML.tags.xml.in.h:56
+#: plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Disabled"
 msgstr "Zablokované"
 
-#: plugins/taglist/HTML.tags.xml.in.h:57
+#: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document base"
 msgstr "Základ dokumentu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:58
+#: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document body"
 msgstr "Telo dokumentu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document head"
 msgstr "Hlavička okumentu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document title"
 msgstr "Nadpis dokumentu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document type"
 msgstr "Typ dokumentu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Element ID"
 msgstr "ID elementu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr "Vložený objekt"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Zdôraznenie"
 
-#: plugins/taglist/HTML.tags.xml.in.h:65
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr "Typ kódovania"
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr "Obrázok"
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "Typ písma"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "For label"
 msgstr "Pre popis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "Vynútený koniec riadku"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form"
 msgstr "Formulár"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr "Riadiaca skupina formulára"
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr "Text popisu poľa formulára"
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr "Vstup formulára"
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr "Typ vstupu formulára"
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr "Metóda formulára"
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr "Dopredný odkaz"
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame"
 msgstr "Rámec"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr "Zdroj rámca"
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr "Cieľ rámca"
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameborder"
 msgstr "Okraj rámca"
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset"
 msgstr "Množina rámcov"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
 msgstr "Stľpce množiny rámcov"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr "Riadky množiny rámcov"
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr "Všeobecný vložený objekt"
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr "Všeobecné metainformácie"
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:90
 #, fuzzy
 msgid "Generic span"
 msgstr "Všeobecné"
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr "HTML - Špeciálne znaky"
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr "HTML - značky"
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr "Koreňový element HTML"
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr "Verzia HTML"
 
-#: plugins/taglist/HTML.tags.xml.in.h:95
+#: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr "Názov hlavičky HTML"
 
-#: plugins/taglist/HTML.tags.xml.in.h:96
+#: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr "ID bunky hlavičky"
 
-#: plugins/taglist/HTML.tags.xml.in.h:97
+#: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr "Nadpis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:98
+#: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr "Nadpis 1"
 
-#: plugins/taglist/HTML.tags.xml.in.h:99
+#: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr "Nadpis 2"
 
-#: plugins/taglist/HTML.tags.xml.in.h:100
+#: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr "Nadpis 3"
 
-#: plugins/taglist/HTML.tags.xml.in.h:101
+#: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr "Nadpis 4"
 
-#: plugins/taglist/HTML.tags.xml.in.h:102
+#: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr "Nadpis 5"
 
-#: plugins/taglist/HTML.tags.xml.in.h:103
+#: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr "Nadpis 6"
 
-#: plugins/taglist/HTML.tags.xml.in.h:104
+#: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr "Výška"
 
-#: plugins/taglist/HTML.tags.xml.in.h:105
+#: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:106
+#: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr "Vodorovná medzera"
 
-#: plugins/taglist/HTML.tags.xml.in.h:107
+#: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:108
+#: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
 msgstr "Obrázok"
 
-#: plugins/taglist/HTML.tags.xml.in.h:109
+#: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr "Obrazová mapa"
 
-#: plugins/taglist/HTML.tags.xml.in.h:110
+#: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr "Oblasť obrazovej mapy"
 
-#: plugins/taglist/HTML.tags.xml.in.h:111
+#: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr "Názov obrazovej mapy"
 
-#: plugins/taglist/HTML.tags.xml.in.h:112
+#: plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr "Zdroj obrázka"
 
-#: plugins/taglist/HTML.tags.xml.in.h:113
+#: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline frame"
 msgstr "Vložený rámec"
 
-#: plugins/taglist/HTML.tags.xml.in.h:114
+#: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr "Vložená vrstva"
 
-#: plugins/taglist/HTML.tags.xml.in.h:115
+#: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Inserted text"
 msgstr "Vložený text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:116
+#: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr "Definícia inštancie"
 
-#: plugins/taglist/HTML.tags.xml.in.h:117
+#: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Italic text"
 msgstr "Text kurzívou"
 
-#: plugins/taglist/HTML.tags.xml.in.h:118
+#: plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr "Java applet"
 
-#: plugins/taglist/HTML.tags.xml.in.h:119
+#: plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "Popis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
+#: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
 msgstr "Kód jazyka"
 
-#: plugins/taglist/HTML.tags.xml.in.h:121
+#: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr "Štýl veľkého textu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:122
+#: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr "Vrstva"
 
-#: plugins/taglist/HTML.tags.xml.in.h:123
+#: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Link color"
 msgstr "Farba odkazu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:124
+#: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr "Položka zoznamu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:125
+#: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:126
+#: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr "Zoznam podporovaných znakových sád"
 
-#: plugins/taglist/HTML.tags.xml.in.h:127
+#: plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr "Výpis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:128
+#: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Local change to font"
 msgstr "Miestna zmena písma"
 
-#: plugins/taglist/HTML.tags.xml.in.h:129
+#: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long description link"
 msgstr "Dlhý popis odkazu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:130
+#: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr "Dlhá citácia"
 
-#: plugins/taglist/HTML.tags.xml.in.h:131
+#: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
 msgstr "Poštový odkaz"
 
-#: plugins/taglist/HTML.tags.xml.in.h:132
+#: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:133
+#: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:134
+#: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:135
+#: plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Maximum length of text field"
 msgstr "Maximálna dĺžka textového poľa"
 
-#: plugins/taglist/HTML.tags.xml.in.h:136
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:137
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
 msgstr "Zoznam menu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
 msgstr "Viacriadkové textové pole"
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
 msgstr "Viacstĺpcové"
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
 msgstr "Viacnásobné"
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Name"
 msgstr "Meno"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr "Pomenovaná hodnota vlastnosti"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr "Nasledujúce ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr "Bez URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr "Bez vložených objektov"
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr "Bez rámcov"
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr "Bez vrstiev"
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr "Bez konca riadku"
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No resize"
 msgstr "Bez zmeny veľkosti"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr "Bez skriptu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr "Bez tieňa"
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr "Poznámka"
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object applet file"
 msgstr "Súbor appletu objektu"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr "Posun pre zarovnanie znaku"
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr "Udalosť OnBlur"
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnChange event"
 msgstr "Udalosť OnChange"
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr "Udalosť OnClick"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr "Udalosť OnDblClick"
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr "Udalosť OnFocus"
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr "Udalosť OnKeyDown"
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr "Udalosť OnKeyPress"
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr "Udalosť OnKeyUp"
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr "Udalosť OnLoad"
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr "Udalosť OnMouseDown"
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr "Udalosť OnMouseMove"
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr "Udalosť OnMouseOut"
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr "Udalosť OnMouseOver"
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr "Udalosť OnMouseUp"
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr "Udalosť OnReset"
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr "Udalosť OnSelect"
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr "Udalosť OnSubmit"
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr "Udalosť OnUnload"
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr "Skupina volieb"
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Option selector"
 msgstr "Výber voľby"
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr "Usporiadaný zoznam"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Output media"
 msgstr "Výstupné médium"
 
-#: plugins/taglist/HTML.tags.xml.in.h:179
+#: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr "Odstavec"
 
-#: plugins/taglist/HTML.tags.xml.in.h:180
+#: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr "Trieda odstavca"
 
-#: plugins/taglist/HTML.tags.xml.in.h:181
+#: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr "Štýl odstavca"
 
-#: plugins/taglist/HTML.tags.xml.in.h:182
+#: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr "Predformátovaný výpis"
 
-#: plugins/taglist/HTML.tags.xml.in.h:183
+#: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Preformatted text"
 msgstr "Predformátovaný text"
 
-#: plugins/taglist/HTML.tags.xml.in.h:184
+#: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:185
+#: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr "Správa výzvy"
 
-#: plugins/taglist/HTML.tags.xml.in.h:186
+#: plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Push button"
 msgstr "Tlačidlo"
 
-#: plugins/taglist/HTML.tags.xml.in.h:187
+#: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Quote"
 msgstr "Citát"
 
-#: plugins/taglist/HTML.tags.xml.in.h:188
+#: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Range"
 msgstr "Rozsah"
 
-#: plugins/taglist/HTML.tags.xml.in.h:189
+#: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr "Text a heslo len na čítanie"
 
-#: plugins/taglist/HTML.tags.xml.in.h:190
+#: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr "Redukovaná medzera"
 
-#: plugins/taglist/HTML.tags.xml.in.h:191
+#: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Reverse link"
 msgstr "Opačný odkaz"
 
-#: plugins/taglist/HTML.tags.xml.in.h:192
+#: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr "Koreň"
 
-#: plugins/taglist/HTML.tags.xml.in.h:193
+#: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr "Riadky"
 
-#: plugins/taglist/HTML.tags.xml.in.h:194
+#: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:195
+#: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr "Ukážkový výstup z programu, skripty"
 
-#: plugins/taglist/HTML.tags.xml.in.h:196
-msgid "Scope covered by header cells"
-msgstr ""
-
 #: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
+msgid "Scope covered by header cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
@@ -4644,3 +4645,19 @@ msgstr "_Pýtať sa na formát"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Použiť _vlastný formát"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+#~ "changes. </span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">Máte niekoľko dokumentov, ktoré "
+#~ "obsahujú neuložené zmeny.</span>"
+
+#~ msgid "If you don't save your documents, all your changes will be lost."
+#~ msgstr "Ak dokumenty neuložíte, všetky zmeny budú stratené."
+
+#~ msgid "Save _None"
+#~ msgstr "_Nič neuložiť"
+
+#~ msgid "_Save Selected"
+#~ msgstr "Uložiť _označené"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
+"POT-Creation-Date: 2005-03-08 12:06+0100\n"
 "PO-Revision-Date: 2005-01-29 17:04+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -46,7 +46,7 @@ msgstr "gedit 自动化工厂"
 msgid "Edit text files"
 msgstr "编辑文本文件"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "文本编辑器"
 
@@ -197,69 +197,86 @@ msgstr "最大当前文件数"
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "撤消或重复操作的最大值"
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:33
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr "文件修改后到自动保存的时间。只有当“自动保存”选项打开后才有效。"
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "打印页眉"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "打印行号"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "打印语法突出显示"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "打印时换行模式"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "右边距位置"
 
-#: data/gedit.schemas.in.h:41
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
 msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "选中文字颜色"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "选中范围背景色"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -268,7 +285,7 @@ msgstr ""
 "gedit 自动检测文件编码时所用的编码清单。“当前”为当前区域编码。只能使用可识别"
 "的编码。"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -280,7 +297,7 @@ msgstr ""
 "按单词换行，而“GTK_WRAP_CHAR”代表按字符换行。请注意，这些值是区分大小写的，所"
 "以请确定必须按照这里说明的大小写出现。"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -292,12 +309,12 @@ msgstr ""
 "行，“GTK_WRAP_WORD”代表按单词换行，而“GTK_WRAP_CHAR”代表按字符换行。请注意，"
 "这些值是区分大小写的，所以请确定必须按照这里说明的大小写出现。"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "设定打印时文档主体所用的字体。"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -305,13 +322,13 @@ msgstr ""
 "设定打印时文档主体所用的字体。这是 gnome-print 字体名称，将被 "
 "print_font_body_pango 替换。"
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。"
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -320,13 +337,13 @@ msgstr ""
 "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。这是 gnome-print "
 "字体名称，将被 print_font_body_pango 替换。"
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。"
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -335,27 +352,27 @@ msgstr ""
 "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。这是 gnome-print "
 "字体名称，将被 print_font_body_pango 替换。"
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr "设定最近打开文件数的最大值，这个将在“最近打开过的文件”子菜单中显示。"
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "设定用于代替制表符的空格数。"
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "指定右边距的位置。"
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "状态栏可见"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -369,35 +386,35 @@ msgstr ""
 "图标和文字，而“GEDIT_TOOLBAR_ICONS_BOTH_HORIZ”代表在图标旁边显示文字。请注"
 "意，这些值是区分大小写的，所以请确定必须按照这里说明的大小写出现。"
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "制表符长度"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "文本颜色"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "工具栏按钮风格"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "显示工具栏"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "撤消操作次数限制"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "使用默认颜色"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "使用默认字体"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -406,7 +423,7 @@ msgstr ""
 "gedit 是否每隔一段时间自动保存已修改的文件。您可以在“自动保存时间间隔”选项中"
 "设置该时间间隔。"
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -414,52 +431,52 @@ msgstr ""
 "gedit 是否为保存的文件创建备份文件。您可以在“备份文件扩展名”选项中设置备份文"
 "件的扩展名。"
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "gedit 是否在编辑区域显示行号。"
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "gedit 是否在编辑区域显示右边距。"
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "gedit 是否启用自动缩进。"
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "gedit 是否启用语法突出显示。"
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
 msgstr "gedit 是否启用突出显示匹配的括号。"
 
-#: data/gedit.schemas.in.h:75
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
 msgstr "gedit 是否应该突出显示当前行。"
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "gedit 是否在打印文档时包含文档头。"
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "gedit 是否要插入空格代替制表符。"
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "gedit 是否在打印文档时打印语法突出显示。"
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "是否显示编辑窗口底部的状态栏。"
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "是否在编辑窗口中显示工具栏。"
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -469,7 +486,7 @@ msgstr ""
 "是否要在编辑区域使用系统默认颜色。如果关闭了此选项，编辑区的颜色就可用“背景颜"
 "色”、“文字颜色”、“选中文字颜色”和“选中范围背景颜色”选项指定。"
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -480,14 +497,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[GB18030,GBK,GB2312,UTF-8]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[CURRENT,GB18030,GBK,GB2312,UTF-8,ISO-8859-15]"
 
@@ -568,7 +585,6 @@ msgid_plural ""
 msgstr[0] "还有 %d 个文档已做更改但尚未保存。关闭前先保存吗？"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "选择您想要保存的文档(_E)："
 
@@ -1072,25 +1088,6 @@ msgstr "输入您想打开文件的位置(URI)(_L)："
 msgid "Open from URI"
 msgstr "从 URI 打开"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">您有未保存更改的多个文档。</span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr "如果您不保存您的文档，您所做的全部更改都将丢失。"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "全部不保存(_N)"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "保存选中文档(_S)"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit 是 GNOME 桌面的小型文本编辑器"
@@ -1116,46 +1113,46 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
 msgstr "未保存文档"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "无效文件名"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
 msgstr "UTF-8 数据无效"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1658
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "无法读入 %s 的符号链接信息"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1704
 msgid "The file has too many symbolic links."
 msgstr "该文件有太多的符号链接。"
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1787
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit 无法在写入模式下处理 %s: 位置。"
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1794
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit 无法在写入模式下处理此类位置。"
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1807
 msgid "Invalid filename."
 msgstr "无效的文件名。"
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1956
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1163,7 +1160,7 @@ msgstr ""
 "没有足够的磁盘空间用于保存文件。\n"
 "请释放一些磁盘空间，然后重试。"
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1961
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1171,7 +1168,7 @@ msgid ""
 msgstr ""
 "磁盘有文件大小的限制，请保存较小的文件或者将文件保存到没有此限制的磁盘上。"
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2005
 msgid "Could not create a backup file."
 msgstr "gedit 无法创建一个临时文件。"
 
@@ -1301,7 +1298,7 @@ msgstr "越南语"
 msgid "Thai"
 msgstr "泰语"
 
-#: gedit/gedit-encodings.c:433
+#: gedit/gedit-encodings.c:434
 msgid "Unknown"
 msgstr "未知"
 
@@ -1347,35 +1344,35 @@ msgstr "选择要打开的文件"
 msgid "Select a filename to save"
 msgstr "选择要保存的文件名"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "打开文件..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "正在保存文档“%s”..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "文档“%s”尚未保存。"
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "文档“%s”已保存。"
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "另存为..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "还原对文档“%s”未保存的更改吗？"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1384,12 +1381,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:543
+#: gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "上一分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1399,7 +1396,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一分钟零 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1408,14 +1405,14 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "上 %d 小时内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1425,69 +1422,69 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一小时零 %d 分钟内对文档所做的更改将永久丢失。"
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "还原(_R)"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "还原文档“%s”出错。"
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "文档“%s”未还原。"
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "文档“%s”已还原。"
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "正在还原文档“%s”..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "无法从标准输入中读数据。"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "正在还原文件："
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "装入文件："
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "装入文件“%s”出错"
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "已载入文件“%s”"
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "已载入 %d 个文件"
 
-#: gedit/gedit-file.c:1266
+#: gedit/gedit-file.c:1288
 #, c-format
 msgid "Created file \"%s\""
 msgstr "已创建文件“%s”"
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "正在文件“%s”..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1471
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1751,19 +1748,19 @@ msgstr "打开“%s”"
 msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
-#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
+#: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
 msgid "Read Only"
 msgstr "只读"
 
-#: gedit/gedit-mdi.c:2068
+#: gedit/gedit-mdi.c:2095
 msgid "Normal"
 msgstr "普通"
 
-#: gedit/gedit-mdi.c:2069
+#: gedit/gedit-mdi.c:2096
 msgid "Use Normal highlight mode"
 msgstr "使用普通突出显示模式"
 
-#: gedit/gedit-mdi.c:2145
+#: gedit/gedit-mdi.c:2172
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
@@ -2225,38 +2222,38 @@ msgstr " (无效的 Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  行 %d，列 %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr " 覆盖"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr " 插入"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr "设置打开在命令行中列出的文件时所用的字符编码"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "退出一个 gedit 实例"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "在已存在的 gedit 实例中创建一个最上层窗口"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "在已存在的 gedit 实例中创建一个新文档"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "指定的编码“%s”无效\n"
@@ -3147,7 +3144,8 @@ msgid "Center"
 msgstr "居中"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
+#, fuzzy
+msgid "Character encoding of linked resource"
 msgstr "链接资源的字符编码"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
@@ -3227,599 +3225,601 @@ msgid "Declare flag"
 msgstr "声明标志"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
+#, fuzzy
+msgid "Defer attribute"
+msgstr "attribute"
+
+#: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
 msgstr "定义描述"
 
-#: plugins/taglist/HTML.tags.xml.in.h:50
+#: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr "定义列表"
 
-#: plugins/taglist/HTML.tags.xml.in.h:51
+#: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr "定义条款"
 
-#: plugins/taglist/HTML.tags.xml.in.h:52
+#: plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Deleted text"
 msgstr "删除的文本"
 
-#: plugins/taglist/HTML.tags.xml.in.h:53
+#: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Direction"
 msgstr "方向"
 
-#: plugins/taglist/HTML.tags.xml.in.h:54
+#: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:55
+#: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr "目录列表"
 
-#: plugins/taglist/HTML.tags.xml.in.h:56
+#: plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Disabled"
 msgstr "已禁用"
 
-#: plugins/taglist/HTML.tags.xml.in.h:57
+#: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document base"
 msgstr "文档基础"
 
-#: plugins/taglist/HTML.tags.xml.in.h:58
+#: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document body"
 msgstr "文档主体"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document head"
 msgstr "文档头"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document title"
 msgstr "文档标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document type"
 msgstr "文档类型"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Element ID"
 msgstr "元素 ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr "嵌入对象"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "强调"
 
-#: plugins/taglist/HTML.tags.xml.in.h:65
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr "编码类型"
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr "图形"
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "字体名"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "For label"
 msgstr "For 标签"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "强制换行"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form"
 msgstr "表单"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr "表单动作处理器"
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr "表单控件组"
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr "表单域标签文字"
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr "表单输入"
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr "表单输入类型"
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr "表单方式"
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr "转发链接"
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame"
 msgstr "框架"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr "边框渲染部件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr "框架源"
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr "框架目标"
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameborder"
 msgstr "框架边框"
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset"
 msgstr "框架集"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
 msgstr "框架集列"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr "框架集行"
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr "框架间距"
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr "通用嵌入对象"
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr "通用元信息"
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Generic span"
 msgstr "通用 span"
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr "HTML - 特殊字符"
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr "HTML - 标记"
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr "HTML 根元素"
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr "HTML 版本"
 
-#: plugins/taglist/HTML.tags.xml.in.h:95
+#: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr "HTTP 头名称"
 
-#: plugins/taglist/HTML.tags.xml.in.h:96
+#: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr "表头单元格 ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:97
+#: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr "标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:98
+#: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr "一级标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:99
+#: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr "二级标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:100
+#: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr "三级标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:101
+#: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr "四级标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:102
+#: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr "五级标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:103
+#: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr "六级标题"
 
-#: plugins/taglist/HTML.tags.xml.in.h:104
+#: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr "高度"
 
-#: plugins/taglist/HTML.tags.xml.in.h:105
+#: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr "水平线"
 
-#: plugins/taglist/HTML.tags.xml.in.h:106
+#: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr "水平空间"
 
-#: plugins/taglist/HTML.tags.xml.in.h:107
+#: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr "I18N 双向文字"
 
-#: plugins/taglist/HTML.tags.xml.in.h:108
+#: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
 msgstr "图像"
 
-#: plugins/taglist/HTML.tags.xml.in.h:109
+#: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr "图像映射"
 
-#: plugins/taglist/HTML.tags.xml.in.h:110
+#: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr "图像映射区域"
 
-#: plugins/taglist/HTML.tags.xml.in.h:111
+#: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr "图像映射名称"
 
-#: plugins/taglist/HTML.tags.xml.in.h:112
+#: plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr "图象源"
 
-#: plugins/taglist/HTML.tags.xml.in.h:113
+#: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline frame"
 msgstr "内嵌框架"
 
-#: plugins/taglist/HTML.tags.xml.in.h:114
+#: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr "内嵌层"
 
-#: plugins/taglist/HTML.tags.xml.in.h:115
+#: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Inserted text"
 msgstr "插入的文字"
 
-#: plugins/taglist/HTML.tags.xml.in.h:116
+#: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr "实例定义"
 
-#: plugins/taglist/HTML.tags.xml.in.h:117
+#: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Italic text"
 msgstr "斜体文字"
 
-#: plugins/taglist/HTML.tags.xml.in.h:118
+#: plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr "Java 小程序"
 
-#: plugins/taglist/HTML.tags.xml.in.h:119
+#: plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "标签"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
+#: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
 msgstr "语言代码"
 
-#: plugins/taglist/HTML.tags.xml.in.h:121
+#: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr "大文本样式"
 
-#: plugins/taglist/HTML.tags.xml.in.h:122
+#: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr "层"
 
-#: plugins/taglist/HTML.tags.xml.in.h:123
+#: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Link color"
 msgstr "链接颜色"
 
-#: plugins/taglist/HTML.tags.xml.in.h:124
+#: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr "列表项目"
 
-#: plugins/taglist/HTML.tags.xml.in.h:125
+#: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
 msgstr "列出上传文件的 MIME 类型"
 
-#: plugins/taglist/HTML.tags.xml.in.h:126
+#: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr "列出可接受的字符集"
 
-#: plugins/taglist/HTML.tags.xml.in.h:127
+#: plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr "列表"
 
-#: plugins/taglist/HTML.tags.xml.in.h:128
+#: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Local change to font"
 msgstr "字体的本地更改"
 
-#: plugins/taglist/HTML.tags.xml.in.h:129
+#: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long description link"
 msgstr "长描述链接"
 
-#: plugins/taglist/HTML.tags.xml.in.h:130
+#: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr "长引用"
 
-#: plugins/taglist/HTML.tags.xml.in.h:131
+#: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
 msgstr "邮寄链接"
 
-#: plugins/taglist/HTML.tags.xml.in.h:132
+#: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:133
+#: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr "边距像素宽度"
 
-#: plugins/taglist/HTML.tags.xml.in.h:134
+#: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr "字幕"
 
-#: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr "文本框的最多字符数"
-
 #: plugins/taglist/HTML.tags.xml.in.h:136
+#, fuzzy
+msgid "Maximum length of text field"
+msgstr "多行文本框"
+
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr "独立于媒体的链接"
 
-#: plugins/taglist/HTML.tags.xml.in.h:137
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
 msgstr "菜单列表"
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
 msgstr "多行文本框"
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
 msgstr "多列"
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
 msgstr "多个"
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Name"
 msgstr "名称"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr "命名属性值"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr "下一 ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr "无 URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr "无嵌入对象"
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr "无框架"
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr "无层"
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr "无换行"
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No resize"
 msgstr "不更改大小"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr "无脚本"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr "无阴影"
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr "无换行"
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr "备忘"
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object applet file"
 msgstr "对象小程序文件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr "对象数据引用"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr "对齐字符的偏移"
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr "OnBlur 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnChange event"
 msgstr "OnChange 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr "OnClick 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr "OnDblClick 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr "OnFocus 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr "OnKeyDown 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr "OnKeyPress 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr "OnKeyUp 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr "OnLoad 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr "OnMouseDown 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr "OnMouseMove 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr "OnMouseOut 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr "OnMouseOver 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr "OnMouseUp 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr "OnReset 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr "OnSelect 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr "OnSubmit 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr "OnUnload 事件"
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr "选项组"
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Option selector"
 msgstr "选择器"
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr "有序列表"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Output media"
 msgstr "输出介质"
 
-#: plugins/taglist/HTML.tags.xml.in.h:179
+#: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr "段落"
 
-#: plugins/taglist/HTML.tags.xml.in.h:180
+#: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr "段落类"
 
-#: plugins/taglist/HTML.tags.xml.in.h:181
+#: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr "段落样式"
 
-#: plugins/taglist/HTML.tags.xml.in.h:182
+#: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr "预格式化列表"
 
-#: plugins/taglist/HTML.tags.xml.in.h:183
+#: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Preformatted text"
 msgstr "预格式化文本"
 
-#: plugins/taglist/HTML.tags.xml.in.h:184
+#: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr "配置文件元信息字典"
 
-#: plugins/taglist/HTML.tags.xml.in.h:185
+#: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr "提示信息"
 
-#: plugins/taglist/HTML.tags.xml.in.h:186
+#: plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Push button"
 msgstr "按钮"
 
-#: plugins/taglist/HTML.tags.xml.in.h:187
+#: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Quote"
 msgstr "引用"
 
-#: plugins/taglist/HTML.tags.xml.in.h:188
+#: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Range"
 msgstr "范围"
 
-#: plugins/taglist/HTML.tags.xml.in.h:189
+#: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr "只读文字和密码"
 
-#: plugins/taglist/HTML.tags.xml.in.h:190
+#: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr "减少间距"
 
-#: plugins/taglist/HTML.tags.xml.in.h:191
+#: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Reverse link"
 msgstr "保留链接"
 
-#: plugins/taglist/HTML.tags.xml.in.h:192
+#: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr "根"
 
-#: plugins/taglist/HTML.tags.xml.in.h:193
+#: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr "行"
 
-#: plugins/taglist/HTML.tags.xml.in.h:194
+#: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:195
+#: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:196
-msgid "Scope covered by header cells"
-msgstr ""
-
 #: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
+msgid "Scope covered by header cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
@@ -4472,11 +4472,11 @@ msgstr "插入日期和时间(_S)..."
 msgid "Insert current date and time at the cursor position"
 msgstr "在光标处插入当前的日期和时间"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "可用格式"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "配置插入日期/时间插件..."
 
@@ -4519,6 +4519,24 @@ msgstr "提示可使用的格式(_P)"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+#~ "changes. </span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">您有未保存更改的多个文档。</span>"
+
+#~ msgid "If you don't save your documents, all your changes will be lost."
+#~ msgstr "如果您不保存您的文档，您所做的全部更改都将丢失。"
+
+#~ msgid "Save _None"
+#~ msgstr "全部不保存(_N)"
+
+#~ msgid "_Save Selected"
+#~ msgstr "保存选中文档(_S)"
+
+#~ msgid "Max text field chars"
+#~ msgstr "文本框的最多字符数"
 
 #~ msgid "Irish (Gaeilge)"
 #~ msgstr "爱尔兰语(Gaeilge)"

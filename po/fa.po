@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 20:53+0100\n"
+"POT-Creation-Date: 2005-03-08 12:06+0100\n"
 "PO-Revision-Date: 2005-03-02 17:59+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@farsiweb.info>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -44,7 +44,7 @@ msgstr "کارخانه‌ی خودکارسازی gedit"
 msgid "Edit text files"
 msgstr "ویرایش پرونده‌های متنی"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:312
 msgid "Text Editor"
 msgstr "ویرایشگر متن"
 
@@ -191,16 +191,16 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
-"فهرست متصل شونده‌های فعال. حاوی «مکان» متصل شونده‌های فعال است. "
-"برای به دست آوردن «مکان» یک متصل شونده‌ی به‌خصوص، پرونده‌ی «gedit-plugin.» را ببینید."
+"فهرست متصل شونده‌های فعال. حاوی «مکان» متصل شونده‌های فعال است. برای به دست "
+"آوردن «مکان» یک متصل شونده‌ی به‌خصوص، پرونده‌ی «gedit-plugin.» را ببینید."
 
 #: data/gedit.schemas.in.h:29
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
-"فهرست کدگذاری‌های نمایش داده شده در منوی کدگذاری نویسه‌ها در انتخاب‌گر "
-"باز کردن/ذخیره‌ی پرونده. تنها از کدگذاری‌های شناخته شده استفاده می‌شود."
+"فهرست کدگذاری‌های نمایش داده شده در منوی کدگذاری نویسه‌ها در انتخاب‌گر باز کردن/"
+"ذخیره‌ی پرونده. تنها از کدگذاری‌های شناخته شده استفاده می‌شود."
 
 #: data/gedit.schemas.in.h:30
 msgid "Maximum Recent Files"
@@ -208,21 +208,29 @@ msgstr "حداکثر تعداد پرونده‌های اخیر"
 
 #: data/gedit.schemas.in.h:31
 msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr "حداکثر تعداد اعمالی که gedit قادر خواهد بود برگرداند یا دوباره انجام دهد."
+msgstr ""
+"حداکثر تعداد اعمالی که gedit قادر خواهد بود برگرداند یا دوباره انجام دهد."
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
-#: data/gedit.schemas.in.h:33
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -230,61 +238,71 @@ msgstr ""
 "تعداد دقایقی که gedit پس از آن به طور خودکار پرونده‌های تغییر یافته را ذخیره "
 "خواهد کرد. تنها در صورتی کار می‌کند که گزینه‌ی «ذخیره‌سازی خودکار» روشن باشد."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "چاپ سرصفحه"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "چاپ شماره‌ی سطرها"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "چاپ پررنگ‌سازی نحوی"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "حالت پیچش سطری هنگام چاپ"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "موقعیت حاشیه‌ی راست"
 
-#: data/gedit.schemas.in.h:41
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
 msgstr "Sans 11"
 
-#: data/gedit.schemas.in.h:42
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
 msgstr "Sans 8"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "رنگ متن انتخاب شده"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "رنگ انتخاب‌ها"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
-"فهرست مرتب شده‌ی کدگذاری‌هایی که gedit برای تشخیص خودکار کدگذاری‌های "
-"پرونده‌ها به کار می‌گیرد.کدگذاری تنظیمات محلی جاری «CURRENT» است. تنها "
-"از کدگذاری‌های شناخته شده استفاده می‌شود."
+"فهرست مرتب شده‌ی کدگذاری‌هایی که gedit برای تشخیص خودکار کدگذاری‌های پرونده‌ها "
+"به کار می‌گیرد.کدگذاری تنظیمات محلی جاری «CURRENT» است. تنها از کدگذاری‌های "
+"شناخته شده استفاده می‌شود."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -292,13 +310,13 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
-"چگونگی پیچش سطرهای طولانی را برای چاپ مشخص می‌کند. برای نپیچاندن از "
-"‏«GTK_WRAP_NONE»، برای پیچش در محدوده‌ی کلمات از «GTK_WRAP_WORD»، و برای "
-"پیچش در محدوده‌ی تک‌تک نویسه‌ها از «GTK_WRAP_CHAR» استفاده کنید. توجه "
-"کنید که مقادیر به کوچک و بزرگی حروف حساس هستند، پس مراقب باشید که "
-"دقیقاً به شکلی که اینجا آمده‌اند وارد شوند."
+"چگونگی پیچش سطرهای طولانی را برای چاپ مشخص می‌کند. برای نپیچاندن "
+"از ‏«GTK_WRAP_NONE»، برای پیچش در محدوده‌ی کلمات از «GTK_WRAP_WORD»، و برای "
+"پیچش در محدوده‌ی تک‌تک نویسه‌ها از «GTK_WRAP_CHAR» استفاده کنید. توجه کنید که "
+"مقادیر به کوچک و بزرگی حروف حساس هستند، پس مراقب باشید که دقیقاً به شکلی که "
+"اینجا آمده‌اند وارد شوند."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -306,53 +324,54 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
-"چگونگی پیچش سطرهای طولانی را در محوطه‌ی ویرایش مشخص می‌کند. برای نپیچاندن از "
-"‏«GTK_WRAP_NONE»، برای پیچش در محدوده‌ی کلمات از «GTK_WRAP_WORD»، و برای "
-"پیچش در محدوده‌ی تک‌تک نویسه‌ها از «GTK_WRAP_CHAR» استفاده کنید. توجه "
-"کنید که مقادیر به کوچک و بزرگی حروف حساس هستند، پس مراقب باشید که "
-"دقیقاً به شکلی که اینجا آمده‌اند وارد شوند."
+"چگونگی پیچش سطرهای طولانی را در محوطه‌ی ویرایش مشخص می‌کند. برای نپیچاندن "
+"از ‏«GTK_WRAP_NONE»، برای پیچش در محدوده‌ی کلمات از «GTK_WRAP_WORD»، و برای "
+"پیچش در محدوده‌ی تک‌تک نویسه‌ها از «GTK_WRAP_CHAR» استفاده کنید. توجه کنید که "
+"مقادیر به کوچک و بزرگی حروف حساس هستند، پس مراقب باشید که دقیقاً به شکلی که "
+"اینجا آمده‌اند وارد شوند."
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "قلم مورد استفاده برای بدنه‌ی نوشتار را هنگام چاپ نوشتارها مشخص می‌کند."
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:68
 #, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
-"قلم مورد استفاده برای بدنه‌ی نوشتار را هنگام چاپ نوشتارها مشخص می‌کند."
-"این نام یک قلم gnome-print است و با print_font_body_pango جای‌گزین می‌شود."
+"قلم مورد استفاده برای بدنه‌ی نوشتار را هنگام چاپ نوشتارها مشخص می‌کند.این نام "
+"یک قلم gnome-print است و با print_font_body_pango جای‌گزین می‌شود."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
-"قلم مورد استفاده برای شماره‌ی سطرها هنگام چاپ را مشخص می‌کند. تنها در صورتی تأثیر "
-"دارد که گزینه‌ی «چاپ شماره‌ی سطرها» ناصفر باشد."
+"قلم مورد استفاده برای شماره‌ی سطرها هنگام چاپ را مشخص می‌کند. تنها در صورتی "
+"تأثیر دارد که گزینه‌ی «چاپ شماره‌ی سطرها» ناصفر باشد."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:70
 #, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
-"قلم مورد استفاده برای شماره‌ی سطرها هنگام چاپ را مشخص می‌کند. تنها در صورتی تأثیر "
-"دارد که گزینه‌ی «چاپ شماره‌ی سطرها» ناصفر باشد. این نام یک قلم gnome-print است و با print_font_body_pango جای‌گزین می‌شود."
+"قلم مورد استفاده برای شماره‌ی سطرها هنگام چاپ را مشخص می‌کند. تنها در صورتی "
+"تأثیر دارد که گزینه‌ی «چاپ شماره‌ی سطرها» ناصفر باشد. این نام یک قلم gnome-"
+"print است و با print_font_body_pango جای‌گزین می‌شود."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
-"قلم مورد استفاده برای سرصفحه‌ها هنگام چاپ نوشتار را مشخص می‌کند. تنها در "
-"صورتی کار ‌می‌کند که گزینه‌ی «چاپ سرصفحه» روشن باشد."
+"قلم مورد استفاده برای سرصفحه‌ها هنگام چاپ نوشتار را مشخص می‌کند. تنها در صورتی "
+"کار ‌می‌کند که گزینه‌ی «چاپ سرصفحه» روشن باشد."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:72
 #, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
@@ -360,32 +379,33 @@ msgid ""
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "قلم مورد استفاده برای سرصفحه‌ها هنگام چاپ نوشتار را مشخص می‌کند.  تنها در "
-"صورتی تأثیر ‌می‌کند که گزینه‌ی «چاپ سرصفحه»  روشن باشد. این نام یک قلم gnome-print است و با print_font_body_pango جای‌گزین می‌شود."
+"صورتی تأثیر ‌می‌کند که گزینه‌ی «چاپ سرصفحه»  روشن باشد. این نام یک قلم gnome-"
+"print است و با print_font_body_pango جای‌گزین می‌شود."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
-"حداکثر تعداد پرونده‌هایی را که اخیراً باز شده‌اند و در زیرمنوی «پرونده‌های "
-"اخیر» نمایش داده می‌شوند، مشخص می‌کند."
+"حداکثر تعداد پرونده‌هایی را که اخیراً باز شده‌اند و در زیرمنوی «پرونده‌های اخیر» "
+"نمایش داده می‌شوند، مشخص می‌کند."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "تعداد فاصله‌هایی که باید به جای نویسه‌ی جهش نمایش داده شود را مشخص می‌کند."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "موقعیت حاشیه‌ی راست را مشخص می کند."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "نوار وضعیت مرئی است"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -395,111 +415,106 @@ msgid ""
 "mentioned here."
 msgstr ""
 "سبک دکمه‌های نوار ابزار. مقادیر ممکن عبارتند از «GEDIT_TOOLBAR_SYSTEM» برای "
-"استفاده از سبک پیش‌فرض سیستم، «GEDIT_TOOLBAR_ICONS» برای نمایش فقط شمایل‌ها، "
-"‏«GEDIT_TOOLBAR_ICONS_AND_TEXT» برای نمایش شمایل‌ها و متن، و "
-"‏«GEDIT_TOOLBAR_ICONS_BOTH_HORIZ» برای نمایش متن دارای اولویت در کنار "
+"استفاده از سبک پیش‌فرض سیستم، «GEDIT_TOOLBAR_ICONS» برای نمایش فقط "
+"شمایل‌ها، ‏«GEDIT_TOOLBAR_ICONS_AND_TEXT» برای نمایش شمایل‌ها و متن، "
+"و ‏«GEDIT_TOOLBAR_ICONS_BOTH_HORIZ» برای نمایش متن دارای اولویت در کنار "
 "شمایل‌ها. به یاد داشته باشید که مقادیر به کوچک و بزرگی حروف حساس هستند، پس "
 "مراقب باشید که دقیقاً به شکلی که اینجا آمده‌اند وارد شوند."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "اندازه‌ی جدول‌بندی"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "رنگ متن"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "سبک دکمه‌های نوار ابزار"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "نوار ابزار مرئی است"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "تعداد اعمال قابل برگرداندن"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "استفاده از رنگ‌های پیش‌فرض"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "استفاده از قلم پیش‌فرض"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
 "این که آیا پرونده‌های تغییر داده شده پس از گذشت یک فاصله‌ی زمانی به طور خودکار "
-"ذخیره بشوند یا نه. این فاصله‌ی زمانی را می‌توان با گزینه‌ی «فواصل ذخیره‌سازی خودکار» "
-"تنظیم کرد."
+"ذخیره بشوند یا نه. این فاصله‌ی زمانی را می‌توان با گزینه‌ی «فواصل ذخیره‌سازی "
+"خودکار» تنظیم کرد."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 "این که آیا gedit برای پرونده‌هایی که ذخیره می‌کند نسخه‌ی پشتیبان ایجاد بکند یا "
-"نه. می‌توان پسوند پرونده‌ی پشتیبان را با گزینه‌ی «پسوند نسخه‌ی پشتیبان» "
-"تنظیم کرد."
+"نه. می‌توان پسوند پرونده‌ی پشتیبان را با گزینه‌ی «پسوند نسخه‌ی پشتیبان» تنظیم "
+"کرد."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "این که آیا  gedit شماره‌ی سطرها را در محوطه‌ی ویرایش نشان بدهد یا نه."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "این که آیا  gedit حاشیه‌ی راست را در محوطه‌ی ویرایش نشان بدهد یا نه."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "این که آیا gedit تورفتگی خودکار را به کار بیاندازد یا نه."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "این که آیا gedit پررنگ‌سازی نحوی را به کار بیاندازد یا نه."
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:91
 #, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr ""
-"این که آیا gedit پررنگ‌سازی قلاب متناظر را به کار بیاندازد یا نه."
+msgstr "این که آیا gedit پررنگ‌سازی قلاب متناظر را به کار بیاندازد یا نه."
 
-#: data/gedit.schemas.in.h:75
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
-msgstr ""
-"این که آیا gedit سطر فعلی را پررنگ بکند یا نه."
+msgstr "این که آیا gedit سطر فعلی را پررنگ بکند یا نه."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
-msgstr ""
-"این که آیا gedit هنگام چاپ نوشتارها سرصفحه هم چاپ بکند یا نه."
+msgstr "این که آیا gedit هنگام چاپ نوشتارها سرصفحه هم چاپ بکند یا نه."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
-msgstr ""
-"این که آیا gedit به جای نویسه‌ی جهش از فاصله استفاده بکند یا نه."
+msgstr "این که آیا gedit به جای نویسه‌ی جهش از فاصله استفاده بکند یا نه."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
-msgstr ""
-"این که آیا gedit هنگام چاپ نوشتار پررنگ‌سازی نحوی را هم چاپ کند یا نه."
+msgstr "این که آیا gedit هنگام چاپ نوشتار پررنگ‌سازی نحوی را هم چاپ کند یا نه."
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:96
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "این که آیا نوار وضعیت در پایین پنجره‌های ویرایش مرئی باشد یا نه."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "این که آیا نوار ابزار در پنجره‌های ویرایش مرئی باشد یا نه."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -510,30 +525,30 @@ msgstr ""
 "این گزینه خاموش باشد، رنگ‌های محوطه‌ی ویرایش رنگ‌هایی خواهد بود که در گزینه‌های "
 "«رنگ پس‌زمینه»، «رنگ متن»، «رنگ متن انتخاب شده» و «رنگ انتخاب» مشخص شده‌اند."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
 "\"Editor Font\" option will be used instead of the system font."
 msgstr ""
 "این که آیا برای ویرایش متن به جای قلم مخصوص gedit از قلم پیش‌فرض سیستم "
-"استفاده بشود یا نه.اگر این گزینه خاموش باشد، قلمی که در گزینه‌ی «قلم ویرایشگر»"
-" آمده است به جای قلم سیستم مورد استفاده قرار خواهد گرفت."
+"استفاده بشود یا نه.اگر این گزینه خاموش باشد، قلمی که در گزینه‌ی «قلم "
+"ویرایشگر» آمده است به جای قلم سیستم مورد استفاده قرار خواهد گرفت."
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[UTF-8]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,WINDOWS-1256,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "فعال کردن %s"
@@ -553,7 +568,8 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "اگر ذخیره نکنید، تغییرات %Ild ثانیه‌ی اخیر برای همیشه از دست خواهد رفت."
+msgstr[0] ""
+"اگر ذخیره نکنید، تغییرات %Ild ثانیه‌ی اخیر برای همیشه از دست خواهد رفت."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
 msgid ""
@@ -569,7 +585,8 @@ msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
 msgstr[0] ""
-"اگر ذخیره نکنید، تغییرات یک دقیقه و %Ild ثانیه‌ی اخیر برای همیشه از دست خواهد رفت."
+"اگر ذخیره نکنید، تغییرات یک دقیقه و %Ild ثانیه‌ی اخیر برای همیشه از دست خواهد "
+"رفت."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, c-format
@@ -578,9 +595,9 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "اگر ذخیره نکنید، تغییرات %Ild دقیقه‌ی اخیر برای همیشه از دست خواهد رفت."
+msgstr[0] ""
+"اگر ذخیره نکنید، تغییرات %Ild دقیقه‌ی اخیر برای همیشه از دست خواهد رفت."
 
-#. this message is a bug, %d absent in singular form
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
 #, fuzzy, c-format
@@ -598,13 +615,13 @@ msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
 msgstr[0] ""
-"اگر ذخیره نکنید، تغییرات یک ساعت و  %Id دقیقه‌ی اخیر برای همیشه از دست خواهد رفت."
+"اگر ذخیره نکنید، تغییرات یک ساعت و  %Id دقیقه‌ی اخیر برای همیشه از دست خواهد "
+"رفت."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
-msgstr ""
-"آیا پیش از بستن تغییرات در  نوشتار «%s» ذخیره شود؟"
+msgstr "آیا پیش از بستن تغییرات در  نوشتار «%s» ذخیره شود؟"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
@@ -615,10 +632,8 @@ msgstr[0] ""
 "%Id نوشتار با تغییرات ذخیره نشده موجود است. تغییرات پیش از بستن ذخیره شوند؟"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
-msgstr ""
-"_نوشتاری را که قصد ذخیره‌ی آن را دارید انتخاب کنید:"
+msgstr "_نوشتاری را که قصد ذخیره‌ی آن را دارید انتخاب کنید:"
 
 #. Secondary label
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:677
@@ -1121,32 +1136,9 @@ msgstr "_مکان (URI) پرونده‌ای را که می‌خواهید باز
 msgid "Open from URI"
 msgstr "باز کردن از URI"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">X نوشتار تغییریافته‌ ذخیره نشده‌اند. </"
-"span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr ""
-"اگر نوشتارهایتان را ذخیره نکنید، تمام تغییراتی که در آنها داده‌اید از دست "
-"خواهد رفت."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "_هیچ‌کدام ذخیره نشوند"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "انتخاب شده‌ها _ذخیره شوند"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr ""
-"‏gedit ویرایشگر متن کوچک و سبک‌وزنی برای محیط رومیزی گنوم است"
+msgstr "‏gedit ویرایشگر متن کوچک و سبک‌وزنی برای محیط رومیزی گنوم است"
 
 #. Translators: This is a special message that shouldn't be translated
 #. literally. It is used in the about box to give credits to
@@ -1165,47 +1157,46 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:656 gedit/gedit-document.c:674
+#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
 msgid "Unsaved Document"
 msgstr "نوشتار ذخیره نشده"
 
-#: gedit/gedit-document.c:662 gedit/gedit-document.c:709
+#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
 msgid "Invalid file name"
 msgstr "نام پرونده غیر مجاز است"
 
-#: gedit/gedit-document.c:849 gedit/gedit-document.c:1413
+#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
 msgstr "داده‌های UTF-8 غیر مجاز"
 
-#: gedit/gedit-document.c:1660
+#: gedit/gedit-document.c:1658
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "خواندن اطلاعات پیوند نمادین برای %s مقدور نیست"
 
-#: gedit/gedit-document.c:1706
+#: gedit/gedit-document.c:1704
 msgid "The file has too many symbolic links."
 msgstr "تعداد پیوندهای نمادین پرونده زیاد است."
 
-#: gedit/gedit-document.c:1789
+#: gedit/gedit-document.c:1787
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr ""
-"‏gedit نمی‌تواند با مکانهای ‎%s:‎ در حالت نوشتن کار کند."
+msgstr "‏gedit نمی‌تواند با مکانهای ‎%s:‎ در حالت نوشتن کار کند."
 
-#: gedit/gedit-document.c:1796
+#: gedit/gedit-document.c:1794
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit نمی‌تواند با ابن نوع مکان در حالت نوشتن کار کند."
 
-#: gedit/gedit-document.c:1809
+#: gedit/gedit-document.c:1807
 msgid "Invalid filename."
 msgstr "نام پرونده نامعتبر است."
 
-#: gedit/gedit-document.c:1958
+#: gedit/gedit-document.c:1956
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1213,17 +1204,17 @@ msgstr ""
 "برای ذخیره‌ی پرونده روی دیسک به قدر کافی فضا موجود نیست.\n"
 "لطفاً کمی فضا روی دیسک آزاد کنید و یک بار دیگر امتحان کنید."
 
-#: gedit/gedit-document.c:1963
+#: gedit/gedit-document.c:1961
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
 "دیسکی که می‌خواهید پرونده را روی آن ذخیره کنید محدودیت اندازه‌ی پرونده دارد."
-"لطفاً سعی کنید پرونده‌ی کوچک‌تری ذخیره کنید یا آن را روی دیسکی ذخیره کنید  "
-"که این محدودیت را ندارد."
+"لطفاً سعی کنید پرونده‌ی کوچک‌تری ذخیره کنید یا آن را روی دیسکی ذخیره کنید  که "
+"این محدودیت را ندارد."
 
-#: gedit/gedit-document.c:2007
+#: gedit/gedit-document.c:2005
 msgid "Could not create a backup file."
 msgstr "ایجاد پرونده‌ی پشتیبان ممکن نیست."
 
@@ -1278,7 +1269,7 @@ msgid "Arabic"
 msgstr "عربی"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "یونانی"
 
@@ -1287,12 +1278,12 @@ msgid "Hebrew Visual"
 msgstr "عبری دیداری"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "عبری"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "ترکی استانبولی"
 
@@ -1304,7 +1295,7 @@ msgstr "نُردی"
 msgid "Celtic"
 msgstr "سلتی"
 
-#: gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "رومانیایی"
 
@@ -1345,7 +1336,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "سیریلی/اوکراینی"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "ویتنامی"
 
@@ -1353,40 +1344,39 @@ msgstr "ویتنامی"
 msgid "Thai"
 msgstr "تایلندی"
 
-#: gedit/gedit-encodings.c:433
+#: gedit/gedit-encodings.c:434
 msgid "Unknown"
 msgstr "نامعلوم"
 
 #: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:303
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr ""
-"پرونده‌ای به نام«%s» از قبل موجود است.\n"
+msgstr "پرونده‌ای به نام«%s» از قبل موجود است.\n"
 
 #: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:307
 msgid "Do you want to replace it with the one you are saving?"
-msgstr "آیا می‌خواهید پرونده‌ای را که در حال ذخیره سازی آن هستید، جای‌گزین آن کنید؟"
+msgstr ""
+"آیا می‌خواهید پرونده‌ای را که در حال ذخیره سازی آن هستید، جای‌گزین آن کنید؟"
 
 #: gedit/gedit-file-selector-util.c:142
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr ""
-"پرونده‌ی «%s» فقط خواندنی است.\n"
+msgstr "پرونده‌ی «%s» فقط خواندنی است.\n"
 
 #: gedit/gedit-file-selector-util.c:143
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr ""
 "آیا می‌خواهید پرونده‌ای را که در حال ذخیره کردن آن هستید، جای‌گزین آن کنید؟"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
 msgid "All Files"
 msgstr "همه‌ی پرونده‌ها"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
 msgid "All Text Files"
 msgstr "همه‌ی پرونده‌های متنی"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
 msgid "_Character Coding:"
 msgstr "کدگذاری _نویسه‌ها:"
 
@@ -1402,35 +1392,35 @@ msgstr "پرونده‌هایی را که می‌خواهید باز شوند ا
 msgid "Select a filename to save"
 msgstr "نام پرونده را برای ذخیره‌سازی انتخاب کنید"
 
-#: gedit/gedit-file.c:191
+#: gedit/gedit-file.c:194
 msgid "Open File..."
 msgstr "باز کردن پرونده..."
 
-#: gedit/gedit-file.c:247 gedit/gedit-file.c:389
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "در حال ذخیره‌سازی نوشتار «%s»..."
 
-#: gedit/gedit-file.c:276 gedit/gedit-file.c:407
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "نوشتار «%s» ذخیره نشد."
 
-#: gedit/gedit-file.c:284 gedit/gedit-file.c:420
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "نوشتار «%s» ذخیره شد."
 
-#: gedit/gedit-file.c:371
+#: gedit/gedit-file.c:374
 msgid "Save as..."
 msgstr "ذخیره به نام..."
 
-#: gedit/gedit-file.c:525
+#: gedit/gedit-file.c:528
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "آیا تغییرات ذخیره نشده‌ی نوشتار «%s» بازگردانده شوند؟"
 
-#: gedit/gedit-file.c:534
+#: gedit/gedit-file.c:537
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1438,15 +1428,16 @@ msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 msgstr[0] ""
-"تغییرات اعمال شده روی نوشتار در %Ild ثانیه‌ی اخیر برای همیشه از دست خواهند رفت."
+"تغییرات اعمال شده روی نوشتار در %Ild ثانیه‌ی اخیر برای همیشه از دست خواهند "
+"رفت."
 
-#: gedit/gedit-file.c:543
+#: gedit/gedit-file.c:546
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "تغییرات اعمال شده روی نوشتار در یک دقیقه‌ی اخیر برای همیشه از دست خواهند رفت."
 
-#: gedit/gedit-file.c:549
+#: gedit/gedit-file.c:552
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1455,10 +1446,10 @@ msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
 msgstr[0] ""
-"تغییرات اعمال شده روی نوشتار در یک دقیقه و %Ild ثانیه‌ی اخیر برای همیشه از دست "
-"خواهند رفت."
+"تغییرات اعمال شده روی نوشتار در یک دقیقه و %Ild ثانیه‌ی اخیر برای همیشه از "
+"دست خواهند رفت."
 
-#: gedit/gedit-file.c:559
+#: gedit/gedit-file.c:562
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1466,10 +1457,10 @@ msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 msgstr[0] ""
-"تغییرات اعمال شده روی نوشتار در %Ild دقیقه‌ی اخیر برای همیشه از دست خواهند رفت."
+"تغییرات اعمال شده روی نوشتار در %Ild دقیقه‌ی اخیر برای همیشه از دست خواهند "
+"رفت."
 
-#. This message is a bug, %d absent in singular form
-#: gedit/gedit-file.c:574 gedit/gedit-file.c:595
+#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
 #, fuzzy, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1477,7 +1468,7 @@ msgid_plural ""
 msgstr[0] ""
 "تغییرات اعمال شده روی نوشتار در یک ساعت اخیر برای همیشه از دست خواهند رفت."
 
-#: gedit/gedit-file.c:580
+#: gedit/gedit-file.c:583
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1489,86 +1480,84 @@ msgstr[0] ""
 "تغییرات اعمال شده روی نوشتار در یک ساعت و %Id دقیقه‌ی اخیر برای همیشه از دست "
 "خواهند رفت."
 
-#: gedit/gedit-file.c:616 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "بازگشت"
 
-#: gedit/gedit-file.c:661
+#: gedit/gedit-file.c:664
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "خطا در بازگرداندن نوشتار «%s»."
 
-#: gedit/gedit-file.c:669
+#: gedit/gedit-file.c:672
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "نوشتار «%s» بازگردانده نشد."
 
-#: gedit/gedit-file.c:673
+#: gedit/gedit-file.c:676
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "نوشتار «%s» بازگردانده شد."
 
-#: gedit/gedit-file.c:701
+#: gedit/gedit-file.c:704
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "در حال بازگرداندن نوشتار «%s»..."
 
-#: gedit/gedit-file.c:824
+#: gedit/gedit-file.c:827
 msgid "Could not read data from stdin."
 msgstr "خواندن داده‌ها از stdin مقدور نیست."
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Reverting file:"
 msgstr "در حال بازگرداندن پرونده:"
 
-#: gedit/gedit-file.c:911
+#: gedit/gedit-file.c:914
 msgid "Loading file:"
 msgstr "در حال بار کردن پرونده:"
 
-#: gedit/gedit-file.c:1091 gedit/gedit-file.c:1313
+#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "خطا در بار کردن پرونده‌ی «%s»"
 
-#: gedit/gedit-file.c:1112
+#: gedit/gedit-file.c:1115
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "پرونده‌ی «%s» بارگذاری شد"
 
-#: gedit/gedit-file.c:1207
+#: gedit/gedit-file.c:1227
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "%Id پرونده بارگذاری شد"
 
-#: gedit/gedit-file.c:1266
+#: gedit/gedit-file.c:1288
 #, fuzzy, c-format
 msgid "Created file \"%s\""
-msgstr ""
-"پرونده‌ی «%s» ایجاد شد"
+msgstr "پرونده‌ی «%s» ایجاد شد"
 
-#: gedit/gedit-file.c:1284
+#: gedit/gedit-file.c:1306
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "در حال بار کردن پرونده‌ی «%s» ..."
 
-#: gedit/gedit-file.c:1437
+#: gedit/gedit-file.c:1471
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
-msgstr[0] ""
-"در حال بار کردن %Id پرونده..."
+msgstr[0] "در حال بار کردن %Id پرونده..."
 
 #: gedit/gedit-io-error-dialogs.c:84
 #, c-format
 msgid "Could not find the file \"%s\""
-msgstr ""
-"پرونده‌ی «%s» پیدا نشد"
+msgstr "پرونده‌ی «%s» پیدا نشد"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
 msgid "Please, check that you typed the location correctly and try again."
-msgstr "لطفاً مطمئن شوید که مکان را درست وارد کرده‌اید و یک بار دیگر امتحان کنید."
+msgstr ""
+"لطفاً مطمئن شوید که مکان را درست وارد کرده‌اید و یک بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1590,8 +1579,7 @@ msgstr "پرونده حاوی داده‌های مخدوش است."
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
 #, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr ""
-"‏gedit نمی‌تواند با مکان‌های ‎%s:‎ کار کند."
+msgstr "‏gedit نمی‌تواند با مکان‌های ‎%s:‎ کار کند."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
 msgid "gedit cannot handle this location."
@@ -1618,7 +1606,8 @@ msgstr "اجازه‌ی دسترسی داده نشد."
 msgid ""
 "there are too many open files. Please, close some open files and try again."
 msgstr ""
-"تعداد پرونده‌های باز زیاد است. لطفاً چند تا از پرونده‌های باز را ببندید و یک بار دیگر امتحان کنید."
+"تعداد پرونده‌های باز زیاد است. لطفاً چند تا از پرونده‌های باز را ببندید و یک "
+"بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
@@ -1630,8 +1619,8 @@ msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"حافظه‌ی کافی برای باز کردن پرونده،‌ موجود نیست. لطفاً چند برنامه‌ی در حال "
-"اجرا را ببندید و یک بار دیگر امتحان کنید."
+"حافظه‌ی کافی برای باز کردن پرونده،‌ موجود نیست. لطفاً چند برنامه‌ی در حال اجرا "
+"را ببندید و یک بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
 #, fuzzy, c-format
@@ -1639,7 +1628,8 @@ msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"میزبان«%s» پیدا نشد. لطفاً اطمینان حاصل کنید که تنظیمات وکیلتان درست است و یک بار دیگر امتحان کنید."
+"میزبان«%s» پیدا نشد. لطفاً اطمینان حاصل کنید که تنظیمات وکیلتان درست است و یک "
+"بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
@@ -1647,28 +1637,32 @@ msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"نام میزبان معتبرنبود. لطفاً اطمینان حاصل کنید که مکان را درست وارد کرده‌اید و یک بار دیگر امتحان کنید."
+"نام میزبان معتبرنبود. لطفاً اطمینان حاصل کنید که مکان را درست وارد کرده‌اید و "
+"یک بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:225
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"نام میزبان خالی بود. لطفا امتحان کنید که تنظیمات وکیلتان درست است و یک بار دیگر امتحان کنید."
+"نام میزبان خالی بود. لطفا امتحان کنید که تنظیمات وکیلتان درست است و یک بار "
+"دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:233
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"تلاش برای ورود به سیستم شکست خورد. لطفاً اطمینان حاصل کنید که مکان را درست وارد کرده باشید و یک بار دیگر امتحان کنید."
+"تلاش برای ورود به سیستم شکست خورد. لطفاً اطمینان حاصل کنید که مکان را درست "
+"وارد کرده باشید و یک بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:241
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
 msgstr ""
-"پرونده حاوی داده‌های نامعتبر است. احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را باز کنید."
+"پرونده حاوی داده‌های نامعتبر است. احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی "
+"را باز کنید."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
@@ -1680,8 +1674,9 @@ msgid ""
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"‏gedit نتوانست به طور خودکار کدگذاری نویسه‌ها را تشخیص دهد. لطفاً اطمینان حاصل کنید که نمی‌خواهید یک پرونده‌ی دودویی را باز کنید و با "
-"انتخاب کدگذاری نویسه‌ها در محاوره‌ی «باز کردن پرونده...» (یا «باز کردن مکان») یک بار دیگر امتحان کنید."
+"‏gedit نتوانست به طور خودکار کدگذاری نویسه‌ها را تشخیص دهد. لطفاً اطمینان حاصل "
+"کنید که نمی‌خواهید یک پرونده‌ی دودویی را باز کنید و با انتخاب کدگذاری نویسه‌ها "
+"در محاوره‌ی «باز کردن پرونده...» (یا «باز کردن مکان») یک بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
 #, c-format
@@ -1694,16 +1689,17 @@ msgid ""
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"لطفاً اطمینان حاصل کنید که نمی‌خواهید یک پرونده‌ی دودویی را باز کنید و "
-"کدگذاری نویسه‌ی درست را در محاوره‌ی «باز کردن پرونده...» (یا «باز کردن مکان») "
-"انتخاب کرده‌اید و یک بار دیگر امتحان کنید."
+"لطفاً اطمینان حاصل کنید که نمی‌خواهید یک پرونده‌ی دودویی را باز کنید و کدگذاری "
+"نویسه‌ی درست را در محاوره‌ی «باز کردن پرونده...» (یا «باز کردن مکان») انتخاب "
+"کرده‌اید و یک بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:315
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
 msgstr ""
-"پرونده حاوی داده‌های نامعتبر است. احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را باز کنید."
+"پرونده حاوی داده‌های نامعتبر است. احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی "
+"را باز کنید."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1724,21 +1720,24 @@ msgstr "gedit نمی‌تواند آن را پیدا کند. شاید پروند
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
-"تعداد پرونده‌های باز زیاد است. لطفاً چند پرونده‌ی باز را ببندید و یک بار دیگر امتحان کنید."
+"تعداد پرونده‌های باز زیاد است. لطفاً چند پرونده‌ی باز را ببندید و یک بار دیگر "
+"امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:456
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"حافظه‌ی موجود کافی نیست. لطفاً چند برنامه‌ی در حال اجرا را ببندید و یک بار دیگر امتحان کنید."
+"حافظه‌ی موجود کافی نیست. لطفاً چند برنامه‌ی در حال اجرا را ببندید و یک بار دیگر "
+"امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:499
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"نام میزبان خالی است. لطفا اطمینان حاصل کنید که تنظیمات وکیلتان درست است و یک بار دیگر امتحان کنید."
+"نام میزبان خالی است. لطفا اطمینان حاصل کنید که تنظیمات وکیلتان درست است و یک "
+"بار دیگر امتحان کنید."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
@@ -1749,7 +1748,8 @@ msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"پرونده حاوی داده‌های UTF-8 نامعتبر است. احتمالاً دارید سعی می‌کنید یک پرونده‌ی دودویی را برگردانید."
+"پرونده حاوی داده‌های UTF-8 نامعتبر است. احتمالاً دارید سعی می‌کنید یک پرونده‌ی "
+"دودویی را برگردانید."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
@@ -1778,8 +1778,7 @@ msgstr "نمی‌وان پرونده‌ی «%s»‌ را ایجاد کرد."
 
 #: gedit/gedit-io-error-dialogs.c:670
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"اطمینان حاصل کنید که اجازه‌ها‌ی مربوط به نوشتن را دارید."
+msgstr "اطمینان حاصل کنید که اجازه‌ها‌ی مربوط به نوشتن را دارید."
 
 #: gedit/gedit-io-error-dialogs.c:676
 msgid "The file name is too long."
@@ -1789,14 +1788,15 @@ msgstr "نام پرونده بیش از حد طولانی است."
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
-msgstr ""
-"جزئی از شاخه‌ی این نام پرونده وجود ندارد یا یک پیوند نمادین نامتصل است."
+msgstr "جزئی از شاخه‌ی این نام پرونده وجود ندارد یا یک پیوند نمادین نامتصل است."
 
 #: gedit/gedit-io-error-dialogs.c:689
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
-msgstr "روی دیسک فضای کافی برای ایجاد پرونده وجود ندارد. لطفاً مقداری فضا روی دیسک آزاد کنید و یک بار دیگر امتحان کنید."
+msgstr ""
+"روی دیسک فضای کافی برای ایجاد پرونده وجود ندارد. لطفاً مقداری فضا روی دیسک "
+"آزاد کنید و یک بار دیگر امتحان کنید."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1810,8 +1810,7 @@ msgstr "_انتقال به پنجره‌ی جدید"
 
 #: gedit/gedit-mdi-child.c:736
 msgid "Unicode (UTF-8)"
-msgstr ""
-"یونی‌کد (UTF-8)"
+msgstr "یونی‌کد (UTF-8)"
 
 #: gedit/gedit-mdi-child.c:746
 msgid "Name:"
@@ -1819,36 +1818,35 @@ msgstr "نام:"
 
 #: gedit/gedit-mdi-child.c:747
 msgid "MIME Type:"
-msgstr ""
-"نوع MIME:"
+msgstr "نوع MIME:"
 
 #: gedit/gedit-mdi-child.c:748
 msgid "Encoding:"
 msgstr "کدگذاری:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "باز کردن «%s»"
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "باز کردن پرونده‌ای که اخیراً به کار رفته"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
 msgid "Read Only"
 msgstr "فقط خواندنی"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2095
 msgid "Normal"
 msgstr "عادی"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2096
 msgid "Use Normal highlight mode"
 msgstr "استفاده از حالت پررنگ عادی"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2172
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "استفاده از حالت پررنگ %s"
@@ -1876,8 +1874,7 @@ msgstr "راه‌اندازی مدیر ترجیحات مقدور نیست."
 #: gedit/gedit-prefs-manager.c:1326
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
-msgstr ""
-" برای کلید %3$s انتظار «%1$s» می‌رفت ولی «%2$s» دیده شد"
+msgstr " برای کلید %3$s انتظار «%1$s» می‌رفت ولی «%2$s» دیده شد"
 
 #: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
 msgid "Print"
@@ -2311,38 +2308,38 @@ msgstr " (یونی‌کد نامعتبر)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:890
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  سطر %Id، ستون %Id"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:926
 msgid "  OVR"
 msgstr "  رونویسی"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:928
 msgid "  INS"
 msgstr "  درج"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "ترک یک نمونه‌ی موجود gedit"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "ایجاد یک پنجره‌ی سطح بالا در نمونه‌ی موجود gedit"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "ایجاد یک نوشتار جدید در نمونه‌ی موجود gedit"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:166
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "کدگذاری مشخص‌شده‌ی «%s» معتبر نیست\n"
@@ -2515,9 +2512,15 @@ msgstr "یک نسخه از  پرونده‌ در «%s» ذخیره نشد"
 msgid "You are trying to overwrite the original file"
 msgstr "شما دارید روی پرونده‌ی اصلی می‌نویسید"
 
-#: plugins/savecopy/savecopy.c:413
+#: plugins/savecopy/savecopy.c:470
 msgid "Save Copy..."
 msgstr "ذخیره‌ی یک نسخه..."
+
+#. translators: %s is a filename
+#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#, c-format
+msgid "%s (copy)"
+msgstr ""
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 msgid "Save a Copy"
@@ -2527,36 +2530,36 @@ msgstr "ذخیره‌ی یک نسخه"
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr "یک نسخه از نوشتار فعلی را روی یک مکان محلی یا دوردست ذخیره می‌کند."
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "_اجرای دستور..."
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr "اجرای یک دستور"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "متوقف شد"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "اجرای دستور"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "_اجرا"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "انجام شد"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "شکست خورد"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2566,7 +2569,7 @@ msgstr ""
 "\n"
 "لطفاً یک فرمان پوسته‌ی معتبر درج کنید."
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2576,11 +2579,11 @@ msgstr ""
 "\n"
 "لطفاً یک فرمان پوسته‌ی معتبر درج کنید."
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "در حال اجرای فرمان"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 msgid "An error occurred while running the selected command."
 msgstr "در حین اجرای فرمان انتخاب شده خطایی رخ داد."
 
@@ -2656,26 +2659,26 @@ msgstr "ترتیب _معکوس"
 msgid "_Sort"
 msgstr "_مرتب سازی"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(کلمه‌ای پیشنهاد نمی‌شود)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "_بیشتر..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "_نادیده گرفتن همه"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "ا_فزودن"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "پیشنهادات _املایی"
 
@@ -2695,131 +2698,313 @@ msgstr "(املای درست)"
 msgid "Completed spell checking"
 msgstr "تکمیل غلط‌یابی املایی"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr ""
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "عربی"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Belarusian"
+msgstr "بلغاری"
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr "بلغاری"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Bengali"
 msgstr "بنگالی"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr "برتانیایی"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "کاتالونیایی"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "چکی"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr "ویلزی"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "دانمارکی"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "آلمانی (آلمان)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "آلمانی (آلمان)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "آلمانی (سوئیس)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "انگلیسی (امریکا)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "انگلیسی (بریتانیا)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "انگلیسی (کانادا)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "اسپرانتو"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "اسپانیایی"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "رومانیایی"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "چاپ"
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
 msgstr "فنلاندی"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr "فارویی"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "فرانسوی (فرانسه)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "فرانسوی (سوئیس)"
 
-#: plugins/spell/gedit-spell-checker.c:99
-msgid "Irish (Gaeilge)"
-msgstr "ایرلندی (گیلی)"
+#: plugins/spell/gedit-spell-checker.c:105
+#, fuzzy
+msgid "Irish"
+msgstr "ترکی استانبولی"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:106
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "گرجی"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:110
+msgid "Hindi"
+msgstr "هندی"
+
+#: plugins/spell/gedit-spell-checker.c:111
+msgid "Croatian"
+msgstr "کرواتی"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:113
+#, fuzzy
+msgid "Hungarian"
+msgstr "بلغاری"
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
 msgstr "ایسلندی"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:117
 msgid "Italian"
 msgstr "ایتالیایی"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "ترکی استانبولی"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "سطر"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:121
+#, fuzzy
+msgid "Latvian"
+msgstr "کرواتی"
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:123
+#, fuzzy
+msgid "Maori"
+msgstr "فارسی"
+
+#: plugins/spell/gedit-spell-checker.c:124
+#, fuzzy
+msgid "Macedonian"
+msgstr "gedit"
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "نروژی"
+
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "هلندی"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "نروژی"
+
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
 msgstr "نروژی"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
 msgstr "لهستانی"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:134
 msgid "Portuguese (Portugal)"
 msgstr "پرتغالی (پرتغال)"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Brazilian)"
 msgstr "پرتغالی (برزیل)"
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "روسی"
 
-#: plugins/spell/gedit-spell-checker.c:108
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "اوکراینی"
+
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
 msgstr "اسلوواکی"
 
-#: plugins/spell/gedit-spell-checker.c:109
+#: plugins/spell/gedit-spell-checker.c:142
 msgid "Slovenian"
 msgstr "اسلووینیایی"
 
-#: plugins/spell/gedit-spell-checker.c:110
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "سوئدی"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "تایلندی"
+
+#: plugins/spell/gedit-spell-checker.c:146
+#, fuzzy
+msgid "Tetum"
+msgstr "متن"
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "اوکراینی"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "پیش‌فرض"
 
@@ -2978,8 +3163,7 @@ msgstr "لنگر"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
-"‏URI لنگر"
+msgstr "‏URI لنگر"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
 msgid "Applet class file code"
@@ -3015,8 +3199,7 @@ msgstr "پرونده‌ی بافت پس‌زمینه"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
-"‏URI پایه"
+msgstr "‏URI پایه"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
 msgid "Base font"
@@ -3051,7 +3234,8 @@ msgid "Center"
 msgstr "وسط"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
+#, fuzzy
+msgid "Character encoding of linked resource"
 msgstr "کدگذاری نویسه‌های منبع پیوند داده شده"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
@@ -3133,600 +3317,602 @@ msgid "Declare flag"
 msgstr "نشان دادن پرچم"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
+#, fuzzy
+msgid "Defer attribute"
+msgstr "مشخصه"
+
+#: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
 msgstr "شرح تعریف"
 
-#: plugins/taglist/HTML.tags.xml.in.h:50
+#: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr "فهرست تعاریف"
 
-#: plugins/taglist/HTML.tags.xml.in.h:51
+#: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr "عبارت تعریفی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:52
+#: plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Deleted text"
 msgstr "متن حذف شده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:53
+#: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Direction"
 msgstr "جهت"
 
-#: plugins/taglist/HTML.tags.xml.in.h:54
+#: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr "جهت داری"
 
-#: plugins/taglist/HTML.tags.xml.in.h:55
+#: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr "فهرست شاخه‌ها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:56
+#: plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Disabled"
 msgstr "از کار افتاده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:57
+#: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document base"
 msgstr "پایه‌ی نوشتار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:58
+#: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document body"
 msgstr "بدنه‌ی نوشتار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document head"
 msgstr "سرصفحه‌ی نوشتار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document title"
 msgstr "عنوان نوشتار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document type"
 msgstr "نوع نوشتار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Element ID"
 msgstr "شناسه‌ی عنصر"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr "شیء توکار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "تأکید"
 
-#: plugins/taglist/HTML.tags.xml.in.h:65
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr "نوع کدگذاری"
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr "شکل"
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "قیافه‌ی قلم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "For label"
 msgstr "برای برچسب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "سطرشکنی اجباری"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form"
 msgstr "فرم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr "گرداننده‌ی کنش‌های فرم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr "گروه کنترل‌های فرم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr "متن برچسب فیلد فرم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr "ورودی فرم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr "نوع ورودی فرم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr "متد فرم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr "پیوند به جلو"
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame"
 msgstr "چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr "اجزای کشیدنی چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr "مبدأ چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr "هدف چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameborder"
 msgstr "کادر چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset"
 msgstr "مجموعه‌چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
 msgstr "ستون‌های مجموعه‌چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr "سطرهای مجموعه‌چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr "فاصله‌گذاری چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr "شیء توکار عام"
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr "فوق‌اطلاعات عام"
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Generic span"
 msgstr "محدوده‌ی عام"
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr "HTML - نویسه‌های خاص"
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr "HTML - برچسب‌ها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr "عنصر ریشه‌ی HTML"
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr "نسخه‌ی HTML"
 
-#: plugins/taglist/HTML.tags.xml.in.h:95
+#: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr "نام سرصفحه‌ی HTTP"
 
-#: plugins/taglist/HTML.tags.xml.in.h:96
+#: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr "شناسه‌های خانه‌ی سرصفحه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:97
+#: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr "تیتر"
 
-#: plugins/taglist/HTML.tags.xml.in.h:98
+#: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr "تیتر ۱"
 
-#: plugins/taglist/HTML.tags.xml.in.h:99
+#: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr "تیتر ۲"
 
-#: plugins/taglist/HTML.tags.xml.in.h:100
+#: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr "تیتر ۳"
 
-#: plugins/taglist/HTML.tags.xml.in.h:101
+#: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr "تیتر ۴"
 
-#: plugins/taglist/HTML.tags.xml.in.h:102
+#: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr "تیتر ۵"
 
-#: plugins/taglist/HTML.tags.xml.in.h:103
+#: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr "تیتر ۶"
 
-#: plugins/taglist/HTML.tags.xml.in.h:104
+#: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr "ارتفاع"
 
-#: plugins/taglist/HTML.tags.xml.in.h:105
+#: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr "خط‌کش افقی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:106
+#: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr "فضای افقی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:107
+#: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr "زیرمتن اکیداً جهت‌دار الگوریتم دوجهته"
 
-#: plugins/taglist/HTML.tags.xml.in.h:108
+#: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
 msgstr "تصویر"
 
-#: plugins/taglist/HTML.tags.xml.in.h:109
+#: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr "نقشه‌ی تصویری"
 
-#: plugins/taglist/HTML.tags.xml.in.h:110
+#: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr "محوطه‌ی نقشه‌ی تصویری"
 
-#: plugins/taglist/HTML.tags.xml.in.h:111
+#: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr "نام نقشه‌ی تصویری"
 
-#: plugins/taglist/HTML.tags.xml.in.h:112
+#: plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr "مبدأ تصویر"
 
-#: plugins/taglist/HTML.tags.xml.in.h:113
+#: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline frame"
 msgstr "چارچوب درون‌برنامه‌ای"
 
-#: plugins/taglist/HTML.tags.xml.in.h:114
+#: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr "لایه‌ی درون‌برنامه‌ای"
 
-#: plugins/taglist/HTML.tags.xml.in.h:115
+#: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Inserted text"
 msgstr "متن درج شده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:116
+#: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr "تعریف مصداق"
 
-#: plugins/taglist/HTML.tags.xml.in.h:117
+#: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Italic text"
 msgstr "متن ایتالیک"
 
-#: plugins/taglist/HTML.tags.xml.in.h:118
+#: plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr "برنامک جاوا"
 
-#: plugins/taglist/HTML.tags.xml.in.h:119
+#: plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "برچسب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
+#: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
 msgstr "کد زبان"
 
-#: plugins/taglist/HTML.tags.xml.in.h:121
+#: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr "سبک متن درشت"
 
-#: plugins/taglist/HTML.tags.xml.in.h:122
+#: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr "لایه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:123
+#: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Link color"
 msgstr "رنگ پیوند"
 
-#: plugins/taglist/HTML.tags.xml.in.h:124
+#: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr "موردی از فهرست"
 
-#: plugins/taglist/HTML.tags.xml.in.h:125
+#: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
 msgstr "فهرست انواع MIME برای بارگذاری پرونده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:126
+#: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr "فهرست مجموعه نویسه‌های پشتیبانی شده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:127
+#: plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr "فهرست"
 
-#: plugins/taglist/HTML.tags.xml.in.h:128
+#: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Local change to font"
 msgstr "تغییر محلی قلم"
 
-#: plugins/taglist/HTML.tags.xml.in.h:129
+#: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long description link"
 msgstr "پیوند تشریحی بلند"
 
-#: plugins/taglist/HTML.tags.xml.in.h:130
+#: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr "نقل قول بلند"
 
-#: plugins/taglist/HTML.tags.xml.in.h:131
+#: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
 msgstr "پیوند نامه‌ای"
 
-#: plugins/taglist/HTML.tags.xml.in.h:132
+#: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr "ارتفاع نقطه‌‌ای حاشیه‌ها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:133
+#: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr "عرض نقطه‌ای حاشیه‌ها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:134
+#: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr "رژه‌ای"
 
-#: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr "حداکثر نویسه‌های فیلد متنی"
-
 #: plugins/taglist/HTML.tags.xml.in.h:136
+#, fuzzy
+msgid "Maximum length of text field"
+msgstr "فیلد متنی چندخطی"
+
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr "پیوند مستقل از رسانه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:137
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
 msgstr "فهرست منوها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
 msgstr "فیلد متنی چندخطی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
 msgstr "چندستونی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
 msgstr "چندتایی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Name"
 msgstr "نام"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr "مقدار ویژگی نام‌برده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr "شناسه‌ی بعد"
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr "بدون URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr "بدون شیء توکار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr "بدون چارچوب"
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr "بدون لایه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr "بدون سطرشکنی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No resize"
 msgstr "بدون تغییر اندازه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr "بدون دست‌نوشته"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr "بدون سایه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr "بدون پیچش کلمه‌ای"
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr "یادداشت"
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object applet file"
 msgstr "پرونده‌ی برنامک شیء"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr "مرجع داده‌ای شیء"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr "رویداد OnBlur"
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnChange event"
 msgstr "رویداد OnChange"
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr "رویداد OnClick"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr "رویداد OnDblClick"
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr "رویداد OnFocus"
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr "رویداد OnKeyDown"
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr "رویداد OnKeyPress"
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr "رویداد OnKeyUP"
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr "رویداد OnLoad"
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr "رویداد OnMouseDown"
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr "رویداد OnMouseMove"
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr "رویداد OnMouseOut"
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr "رویداد OnMouseOver"
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr "رویداد OnMouseUp"
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr "رویداد OnReset"
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr "رویداد OnSelect"
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr "رویداد OnSubmit"
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr "رویداد OnUnload"
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr "گروه گزینه‌ها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Option selector"
 msgstr "انتخاب‌گر گزینه‌ها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr "فهرست ترتیب‌دار"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Output media"
 msgstr "رسانه‌ی خروجی"
 
-#: plugins/taglist/HTML.tags.xml.in.h:179
+#: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr "بند"
 
-#: plugins/taglist/HTML.tags.xml.in.h:180
+#: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr "رده‌ی بند"
 
-#: plugins/taglist/HTML.tags.xml.in.h:181
+#: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr "سبک بند"
 
-#: plugins/taglist/HTML.tags.xml.in.h:182
+#: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr "فهرست پیش‌قالب‌بندی شده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:183
+#: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Preformatted text"
 msgstr "متن پیش‌قالب‌بندی شده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:184
+#: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:185
+#: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr "پیغام اعلان"
 
-#: plugins/taglist/HTML.tags.xml.in.h:186
+#: plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Push button"
 msgstr "دکمه‌ی فشاری"
 
-#: plugins/taglist/HTML.tags.xml.in.h:187
+#: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Quote"
 msgstr "نقل قول"
 
-#: plugins/taglist/HTML.tags.xml.in.h:188
+#: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Range"
 msgstr "محدوده"
 
-#: plugins/taglist/HTML.tags.xml.in.h:189
+#: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr "متن فقط‌خواندنی و گذرواژه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:190
+#: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr "فاصله‌گذاری کاهش‌یافته"
 
-#: plugins/taglist/HTML.tags.xml.in.h:191
+#: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Reverse link"
 msgstr "پیوند معکوس"
 
-#: plugins/taglist/HTML.tags.xml.in.h:192
+#: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr "ریشه"
 
-#: plugins/taglist/HTML.tags.xml.in.h:193
+#: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr "سطر"
 
-#: plugins/taglist/HTML.tags.xml.in.h:194
+#: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr "خط‌کشی‌های بین سطرها و ستون‌ها"
 
-#: plugins/taglist/HTML.tags.xml.in.h:195
+#: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:196
+#: plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Scope covered by header cells"
 msgstr "حوزه‌ی تحت پوشش خانه‌های سرصفحه"
-
-#: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
-msgstr "تعویق اجرای دست‌نوشته"
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Script language name"
@@ -4066,48 +4252,39 @@ msgstr "تاو یونانی"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
-"عنوان صفر (chapter)"
+msgstr "عنوان صفر (chapter)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
-"عنوان صفر (chapter*‎)"
+msgstr "عنوان صفر (chapter*‎)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
-"عنوان ۱ (section)"
+msgstr "عنوان ۱ (section)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
-"عنوان ۱ (section*‎)"
+msgstr "عنوان ۱ (section*‎)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
-"عنوان ۲ (subsection)"
+msgstr "عنوان ۲ (subsection)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
-"عنوان ۳ (*subsection)"
+msgstr "عنوان ۳ (*subsection)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
-"عنوان ۳ (subsubsection)"
+msgstr "عنوان ۳ (subsubsection)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
-"عنوان ۳ ‎(subsubsection*)‎"
+msgstr "عنوان ۳ ‎(subsubsection*)‎"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
-"عنوان ۴ (paragraph)"
+msgstr "عنوان ۴ (paragraph)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
@@ -4139,13 +4316,11 @@ msgstr "فهرست itemize"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
-"ریاضی (نمایش)"
+msgstr "ریاضی (نمایش)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
-"ریاضی (درخط)"
+msgstr "ریاضی (درخط)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
 msgid "Operator fraction"
@@ -4153,23 +4328,19 @@ msgstr "عملگر کسر"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
-"عملگر انتگرال (نمایش)"
+msgstr "عملگر انتگرال (نمایش)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
-"عملگر انتگرال (درخط)"
+msgstr "عملگر انتگرال (درخط)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
-"عملگر مجموع (نمایش)"
+msgstr "عملگر مجموع (نمایش)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
-"عملگر مجموع (درخط)"
+msgstr "عملگر مجموع (درخط)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
 msgid "Reference label"
@@ -4181,13 +4352,11 @@ msgstr "ارجاع ref"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
-msgstr ""
-"نماد ‎&gt;&gt;‎"
+msgstr "نماد ‎&gt;&gt;‎"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol &gt;="
-msgstr ""
-"نماد ‎&gt;=‎"
+msgstr "نماد ‎&gt;=‎"
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol &lt;&lt;"
@@ -4397,11 +4566,11 @@ msgstr "_درج تاریخ و زمان..."
 msgid "Insert current date and time at the cursor position"
 msgstr "درج تاریخ و زمان جاری در موقعیت مکان‌نما"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "قالب‌‌های موجود"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "پیکربندی متصل شونده‌ی درج تاریخ/ زمان..."
 
@@ -4445,6 +4614,33 @@ msgstr "_درخواست قالب"
 msgid "_Use custom format"
 msgstr "_استفاده از قالب سفارشی"
 
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
+#~ "changes. </span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">X نوشتار تغییریافته‌ ذخیره نشده‌اند. "
+#~ "</span>"
+
+#~ msgid "If you don't save your documents, all your changes will be lost."
+#~ msgstr ""
+#~ "اگر نوشتارهایتان را ذخیره نکنید، تمام تغییراتی که در آنها داده‌اید از دست "
+#~ "خواهد رفت."
+
+#~ msgid "Save _None"
+#~ msgstr "_هیچ‌کدام ذخیره نشوند"
+
+#~ msgid "_Save Selected"
+#~ msgstr "انتخاب شده‌ها _ذخیره شوند"
+
+#~ msgid "Irish (Gaeilge)"
+#~ msgstr "ایرلندی (گیلی)"
+
+#~ msgid "Max text field chars"
+#~ msgstr "حداکثر نویسه‌های فیلد متنی"
+
+#~ msgid "Script execution defer"
+#~ msgstr "تعویق اجرای دست‌نوشته"
+
 #, fuzzy
 #~ msgid "Document ID"
 #~ msgstr "نوشتارها"
@@ -4452,14 +4648,6 @@ msgstr "_استفاده از قالب سفارشی"
 #, fuzzy
 #~ msgid "Document version"
 #~ msgstr "نوشتارها"
-
-#, fuzzy
-#~ msgid "Link"
-#~ msgstr "سطر"
-
-#, fuzzy
-#~ msgid "Media"
-#~ msgstr "gedit"
 
 #~ msgid "Do_n't save"
 #~ msgstr "ذخیره _نشود"
@@ -4729,15 +4917,6 @@ msgstr "_استفاده از قالب سفارشی"
 
 #~ msgid "Executed command"
 #~ msgstr "دستور اجراشده"
-
-#~ msgid "Croatian"
-#~ msgstr "کرواتی"
-
-#~ msgid "Hindi"
-#~ msgstr "هندی"
-
-#~ msgid "Farsi"
-#~ msgstr "فارسی"
 
 #~ msgid "Gujarati"
 #~ msgstr "گجراتی"
