@@ -107,7 +107,7 @@ gedit_view_init (GeditView  *view)
 {
 	GtkWidget *sw; /* the scrolled window */
 	GdkColor background, text;
-	
+
 	/* FIXME
 	static GtkWidget *popup_menu = NULL;
 	*/
@@ -130,21 +130,30 @@ gedit_view_init (GeditView  *view)
 	g_return_if_fail (view->priv->text_view != NULL);
 
 	/*
-	 *  TODO: Set tab, fonts, wrap mode, colors, etc. according
-	 *  to preferences - Paolo 
+	 *  Set tab, fonts, wrap mode, colors, etc. according
+	 *  to preferences 
 	 */
-	gedit_view_set_font (view, settings->font);
+	if (!settings->use_default_font)
+		gedit_view_set_font (view, settings->font);
 
-	background.red = settings->bg [0];
-	background.green = settings->bg [1];
-	background.blue = settings->bg [2];
+	if (!settings->use_default_colors)
+	{
+		background.red = settings->bg [0];
+		background.green = settings->bg [1];
+		background.blue = settings->bg [2];
 
-	text.red = settings->fg [0];
-	text.green = settings->fg [1];
-	text.blue = settings->fg [2];
+		text.red = settings->fg [0];
+		text.green = settings->fg [1];
+		text.blue = settings->fg [2];
 
-	gedit_view_set_colors (view, &background, &text);
-	
+		gedit_view_set_colors (view, &background, &text);
+	}	
+
+	gedit_view_set_wrap_mode (view, settings->wrap_mode);
+
+	/* FIXME: uncomment when gedit_view_set_tab_size will work
+	gedit_view_set_tab_size (view, 8);
+	*/
 	gtk_box_pack_start (GTK_BOX (view), sw, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view->priv->text_view));
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
@@ -365,38 +374,62 @@ gedit_view_scroll_to_cursor (GeditView *view)
 void 
 gedit_view_set_colors (GeditView* view, GdkColor* backgroud, GdkColor* text)
 {
-	GtkStyle *style;
-
 	gedit_debug (DEBUG_VIEW, "");
 
-	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (view->priv->text_view)));
+	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	style->base[0] = *backgroud;
-	style->text[0] = *text;
+	gtk_widget_modify_base (GTK_WIDGET (view->priv->text_view), 
+				GTK_STATE_NORMAL, backgroud);
 
-	gtk_widget_set_style (GTK_WIDGET (view->priv->text_view), style);
-
-	g_object_unref (style);
+	gtk_widget_modify_text (GTK_WIDGET (view->priv->text_view), 
+				GTK_STATE_NORMAL, text);
 }
 
 void
 gedit_view_set_font (GeditView* view, const gchar* font_name)
 {
-	GtkStyle *style;
-	PangoFontDescription *font_desc;
+	PangoFontDescription *font_desc = NULL;
 
 	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
 
 	font_desc = pango_font_description_from_string (font_name);
 	g_return_if_fail (font_desc != NULL);
 	
-	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (view->priv->text_view)));
+	gtk_widget_modify_font (GTK_WIDGET (view->priv->text_view), font_desc);
 
-	pango_font_description_merge (style->font_desc, font_desc, TRUE);
+	pango_font_description_free (font_desc);
+}
 
-	gtk_widget_set_style (GTK_WIDGET (view->priv->text_view), style);
+void
+gedit_view_set_wrap_mode (GeditView* view, GtkWrapMode wrap_mode)
+{
+	gedit_debug (DEBUG_VIEW, "");
 
-	g_object_unref (style);
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+		
+	gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (view->priv->text_view), wrap_mode);
+}
+
+void
+gedit_view_set_tab_size (GeditView* view, gint tab_size)
+{
+	/* FIXME: it is broken */
+
+	PangoTabArray *tab_array;
+
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	tab_array = pango_tab_array_new_with_positions (1,
+                                             TRUE,
+                                             PANGO_TAB_LEFT, tab_size*10);
+
+	gtk_text_view_set_tabs (GTK_TEXT_VIEW (view->priv->text_view), tab_array);
+	pango_tab_array_free (tab_array);
+
 }
 
 

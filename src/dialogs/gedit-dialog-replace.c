@@ -28,13 +28,16 @@
  */
 
 #include <glade/glade-xml.h>
+#include <libgnome/libgnome.h>
 
 #include "gedit2.h"
 #include "gedit-mdi.h"
 #include "gedit-utils.h"
 #include "gedit-dialogs.h"
 #include "gedit-document.h"
+#include "gedit-mdi-child.h"
 #include "gedit-view.h"
+#include "gedit-debug.h"
 
 #define GEDIT_RESPONSE_FIND		101
 #define GEDIT_RESPONSE_REPLACE		102
@@ -78,6 +81,8 @@ dialog_replace_get_dialog (void)
 	GtkWindow *window;
 	GtkWidget *content;
 
+	gedit_debug (DEBUG_SEARCH, "");
+	
 	if (dialog != NULL)
 	{
 		return dialog;
@@ -132,6 +137,9 @@ dialog_replace_get_dialog (void)
 		return NULL;
 	}
 
+	/* FIXME: remove when we will support case sensitive search */
+	gtk_widget_set_sensitive (dialog->case_sensitive, FALSE);
+
 	gtk_widget_show (dialog->replace_hbox);
 
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
@@ -155,6 +163,8 @@ dialog_find_get_dialog (void)
 	GtkWidget *content;
 	GtkWidget *replace_hbox;
 	
+	gedit_debug (DEBUG_SEARCH, "");
+
 	if (dialog != NULL)
 	{
 		return dialog;
@@ -204,7 +214,10 @@ dialog_find_get_dialog (void)
 		    ("Could not find the required widgets inside replace.glade2.\n");
 		return NULL;
 	}
-
+	
+	/* FIXME: remove when we will support case sensitive search */
+	gtk_widget_set_sensitive (dialog->case_sensitive, FALSE);
+	
 	gtk_widget_hide (replace_hbox);
 
 
@@ -225,6 +238,8 @@ gedit_dialog_find (void)
 	GeditDialogFind *dialog;
 	gint response;
 
+	gedit_debug (DEBUG_SEARCH, "");
+
 	dialog = dialog_find_get_dialog ();
 	if (dialog == NULL) {
 		g_warning ("Could not create the Find dialog");
@@ -238,16 +253,20 @@ gedit_dialog_find (void)
 
 	gtk_widget_grab_focus (dialog->search_entry);
 
-	response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
+	do
+	{
+		response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
 
-	switch (response) {
-		case GEDIT_RESPONSE_FIND:
-			find_dlg_find_button_pressed (dialog);
-			break;
+		switch (response) {
+			case GEDIT_RESPONSE_FIND:
+				find_dlg_find_button_pressed (dialog);
+				break;
 
-		default:
-			gtk_widget_hide (dialog->dialog);
-	}
+			default:
+				gtk_widget_hide (dialog->dialog);
+		}
+
+	} while (GTK_WIDGET_VISIBLE (dialog->dialog));
 }
 
 void
@@ -255,6 +274,8 @@ gedit_dialog_replace (void)
 {
 	GeditDialogReplace *dialog;
 	gint response;
+
+	gedit_debug (DEBUG_SEARCH, "");
 
 	dialog = dialog_replace_get_dialog ();
 	if (dialog == NULL) {
@@ -299,8 +320,46 @@ gedit_dialog_replace (void)
 static void
 find_dlg_find_button_pressed (GeditDialogFind *dialog)
 {
-	/* FIXME */
-	gtk_widget_hide (dialog->dialog);
+	/* FIXME : there is no case sensitive */
+	GeditMDIChild *active_child;
+	GeditDocument *doc;
+	const gchar* search_string = NULL;
+	gboolean from_cursor;
+	gboolean case_sensitive;
+	
+	gedit_debug (DEBUG_SEARCH, "");
+
+	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_child != NULL);
+
+	doc = active_child->document;
+	g_return_if_fail (doc != NULL);
+			
+	search_string = gtk_entry_get_text (GTK_ENTRY (dialog->search_entry));		
+	g_return_if_fail (search_string != NULL);
+
+	if (strlen (search_string) <= 0)
+		return;
+	
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->position)))
+		from_cursor = FALSE;
+	else
+		from_cursor = TRUE;
+			
+	if (!gedit_document_find (doc, search_string, from_cursor, TRUE))
+	{	
+		GtkWidget *message_dlg;
+
+		message_dlg = gtk_message_dialog_new (
+				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_INFO,
+				GTK_BUTTONS_OK,
+				_("The searched string has not been found."));
+			
+		gtk_dialog_run (GTK_DIALOG (message_dlg));
+  		gtk_widget_destroy (message_dlg);
+	}
 }
 
 
@@ -308,18 +367,24 @@ static void
 replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 {
 	/* FIXME */
+	gedit_debug (DEBUG_SEARCH, "");
+
 }
 
 static void
 replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 {
 	/* FIXME */
+	gedit_debug (DEBUG_SEARCH, "");
+
 }
 
 static void
 replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 {
 	/* FIXME */
+	gedit_debug (DEBUG_SEARCH, "");
+
 	gtk_widget_hide (dialog->dialog);
 }
 

@@ -48,6 +48,8 @@ struct _GeditDocumentPrivate
 	gchar*	uri;
 	gint 	untitled_number;	
 
+	gchar*  last_searched_text;
+	
 	gboolean readonly;
 
 	GeditUndoManager* undo_manager;
@@ -275,6 +277,9 @@ gedit_document_finalize (GObject *object)
 		if (current_max_untitled_num == document->priv->untitled_number)
 			--current_max_untitled_num;	
 	}
+
+	if (document->priv->last_searched_text)
+		g_free (document->priv->last_searched_text);
 
 	g_object_unref (G_OBJECT (document->priv->undo_manager));
 	
@@ -1053,4 +1058,54 @@ gedit_document_goto_line (GeditDocument* doc, guint line)
 	gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc), &iter, line);
 
 	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+}
+
+gboolean
+gedit_document_find (GeditDocument* doc, const gchar* str, 
+		gboolean from_cursor, gboolean case_sensitive)
+{
+	GtkTextIter iter;
+	gboolean found = FALSE;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+	g_return_val_if_fail (str != NULL, FALSE);
+
+	/* FIXME: write support for case_sensitive */
+	
+	if (from_cursor)
+		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &iter,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+			                                      "insert"));
+	else		
+		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
+
+	if (*str != '\0')
+    	{
+      		GtkTextIter match_start, match_end;
+
+          	found = gtk_text_iter_forward_search (&iter, str,
+                                               GTK_TEXT_SEARCH_VISIBLE_ONLY |
+                                               GTK_TEXT_SEARCH_TEXT_ONLY,
+                                               &match_start, &match_end,
+                                               NULL);
+		if (found)
+		{
+			gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),
+					&match_start);
+
+			gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
+					"selection_bound", &match_end);
+		}
+
+		if (doc->priv->last_searched_text)
+			g_free (doc->priv->last_searched_text);
+
+		doc->priv->last_searched_text = g_strdup (str);
+	}
+
+	return found;
 }

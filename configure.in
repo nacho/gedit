@@ -1,14 +1,14 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(src/gedit2.c)
+AC_INIT(gedit2, 1.105.0, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_CONFIG_SRCDIR(src/gedit2.c)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
-AM_INIT_AUTOMAKE(gedit, 1.103.0)
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
 
 AC_PROG_INTLTOOL([0.11])
 
-GNOME_COMMON_INIT
 GNOME_PLATFORM_GNOME_2(yes, force)
 
 AM_PROG_LIBTOOL
@@ -17,8 +17,6 @@ AC_ISC_POSIX
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-
-AC_CHECK_HEADERS(os2.h)
 
 dnl ================================================================
 dnl Gettext stuff.
@@ -32,7 +30,8 @@ AM_GLIB_GNU_GETTEXT
 dnl
 dnl Start of pkg-config checks
 dnl
-PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 1.104.0 libglade-2.0 >= 1.99.2)
+PKG_CHECK_MODULES(GEDIT, libgnomeui-2.0 >= 1.106.0 libglade-2.0 >= 1.99.2
+                         libgnomeprintui-2.0 >= 1.106.0 )
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
 AC_SUBST(GEDIT_CFLAGS)

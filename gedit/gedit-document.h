@@ -138,6 +138,9 @@ void		gedit_document_begin_not_undoable_action 	(GeditDocument *doc);
 void		gedit_document_end_not_undoable_action		(GeditDocument *doc);
 
 void		gedit_document_goto_line 	(GeditDocument* doc, guint line);
+gboolean	gedit_document_find 		(GeditDocument* doc, const gchar* str, 
+						 gboolean from_cursor, 
+						 gboolean case_sensitive);
 
 #endif /* __GEDIT_DOCUMENT_H__ */
 

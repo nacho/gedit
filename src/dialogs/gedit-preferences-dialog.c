@@ -48,6 +48,7 @@
 #define SAVE_SETTINGS		7
 #define TABS_SETTINGS		3
 #define UNDO_SETTINGS		4
+#define WRAP_MODE_SETTINGS	8
 
 enum
 {
@@ -101,6 +102,10 @@ struct _GeditPreferencesDialogPrivate
 	/* Tabs page */
 	GtkWidget	*tabs_width_spinbutton;
 
+	/* Wrap mode page */
+	GtkWidget	*wrap_never_radiobutton;
+	GtkWidget	*wrap_word_radiobutton;
+	GtkWidget	*wrap_char_radiobutton;
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -142,6 +147,9 @@ static gboolean gedit_preferences_dialog_setup_undo_page (GeditPreferencesDialog
 static void gedit_preferences_dialog_undo_checkbutton_toggled (GtkToggleButton *button,
 	       						GeditPreferencesDialog *dlg);
 static gboolean gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static gboolean gedit_preferences_dialog_setup_logo_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+static gboolean gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, GladeXML *gui);
+
 
 static GtkDialogClass* parent_class = NULL;
 
@@ -160,14 +168,19 @@ static CategoriesTreeItem editor_behavior [] =
 	{_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
 /*	
  	{_("Save"), NULL, SAVE_SETTINGS },
-*/
 	{_("Tabs"), NULL, TABS_SETTINGS},
+*/	
 	{_("Undo"), NULL, UNDO_SETTINGS},
+	{_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
+
 	NULL
 };
 
 static CategoriesTreeItem print [] =
 {
+	{_("Page"), NULL, LOGO},
+	{_("Paper"), NULL, LOGO},
+
 	NULL
 };
 
@@ -457,6 +470,8 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_font_and_colors_page (dlg, gui);
 	gedit_preferences_dialog_setup_undo_page (dlg, gui);
 	gedit_preferences_dialog_setup_tabs_page (dlg, gui);
+	gedit_preferences_dialog_setup_logo_page (dlg, gui);
+	gedit_preferences_dialog_setup_wrap_mode_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -568,9 +583,11 @@ gedit_preferences_dialog_setup_statusbar_page (GeditPreferencesDialog *dlg, Glad
 	g_return_val_if_fail (dlg->priv->statusbar_hide_radiobutton, FALSE);
 
 	if (settings->show_status)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->statusbar_show_radiobutton), TRUE);
+		gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->statusbar_show_radiobutton), TRUE);
 	else
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->statusbar_hide_radiobutton), TRUE);
+		gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->statusbar_hide_radiobutton), TRUE);
 
 	return TRUE;
 }
@@ -746,6 +763,60 @@ gedit_preferences_dialog_setup_tabs_page (GeditPreferencesDialog *dlg, GladeXML 
 					   (guint) settings->tab_size);
 }
 
+static gboolean 
+gedit_preferences_dialog_setup_logo_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	GtkWidget *logo;
+	GValue value = { 0, };
+
+	static const char* logo_file = GNOME_ICONDIR "/gedit-logo.png";
+
+	gedit_debug (DEBUG_PREFS, "");
+
+	logo = 	glade_xml_get_widget (gui, "logo_pixmap");
+
+	g_return_val_if_fail (logo, FALSE);
+
+	g_value_init (&value, G_TYPE_STRING);
+	
+	g_value_set_static_string (&value, logo_file);
+	g_object_set_property (G_OBJECT (logo), "file" , &value);
+
+	g_value_unset (&value);
+}
+
+static gboolean 
+gedit_preferences_dialog_setup_wrap_mode_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	gedit_debug (DEBUG_PREFS, "");
+
+	dlg->priv->wrap_never_radiobutton = glade_xml_get_widget (gui, "wrap_never_radiobutton");
+	dlg->priv->wrap_word_radiobutton = glade_xml_get_widget (gui, "wrap_word_radiobutton");
+	dlg->priv->wrap_char_radiobutton = glade_xml_get_widget (gui, "wrap_char_radiobutton");
+
+	g_return_val_if_fail (dlg->priv->wrap_never_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->wrap_word_radiobutton, FALSE);
+	g_return_val_if_fail (dlg->priv->wrap_char_radiobutton, FALSE);
+
+	switch (settings->wrap_mode)
+	{
+		case GTK_WRAP_WORD:
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->wrap_word_radiobutton), TRUE);
+			break;
+		case GTK_WRAP_CHAR:
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->wrap_char_radiobutton), TRUE);
+			break;
+		default:
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (dlg->priv->wrap_never_radiobutton), TRUE);
+	}
+
+	return TRUE;
+}
+
+
 gboolean 
 gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 {
@@ -888,6 +959,14 @@ gedit_preferences_dialog_update_settings (GeditPreferencesDialog *dlg)
 			settings->font = g_strdup (font);
 		}
 	}
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->wrap_word_radiobutton)))
+		settings->wrap_mode = GTK_WRAP_WORD;
+	else
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->wrap_char_radiobutton)))
+		settings->wrap_mode = GTK_WRAP_CHAR;
+	else
+		settings->wrap_mode = GTK_WRAP_NONE;
 			
 	return TRUE;
 

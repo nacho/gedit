@@ -27,10 +27,14 @@
  * See the ChangeLog files for a list of changes. 
  */
 
+#include <libgnome/libgnome.h>
+#include <libgnomeprint/gnome-print.h>
+#include <libgnomeprintui/gnome-print-dialog.h>
+
 #include "gedit-print.h"
 #include "gedit-debug.h"
 
-#if 0
+
 static void 	gedit_print_real 	(gboolean preview);
 static gboolean	gedit_print_run_dialog 	(/*PrintJobInfo *pji*/);
 
@@ -66,7 +70,7 @@ gedit_print_run_dialog (/*PrintJobInfo *pji*/)
 							  _("Pages"));
 
 	gtk_dialog_run (GTK_DIALOG (dialog));
-
+#if 0
 	switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
 	case GNOME_PRINT_PRINT:
 		break;
@@ -93,13 +97,12 @@ gedit_print_run_dialog (/*PrintJobInfo *pji*/)
 
 	if (pji->range == GNOME_PRINT_RANGE_SELECTION)
 		gedit_print_range_is_selection (pji, start_pos, end_pos);
+#endif
 	gtk_widget_destroy (dialog);
 
 	return FALSE;
 }
- gedit_print_run_dialog (pji);
 
-#endif
 /**
  * gedit_print_real:
  * @preview: 
@@ -145,6 +148,7 @@ gedit_print_real (gboolean preview)
 	
 	gedit_print_job_info_destroy (pji);
 #endif
+	gedit_print_run_dialog ();
 }
 
 

@@ -81,5 +81,8 @@ void 		gedit_view_set_colors 		(GeditView* view,
 void 		gedit_view_set_font		(GeditView* view,
 						 const gchar* font_name);
 
+void		gedit_view_set_wrap_mode 	(GeditView* view, GtkWrapMode wrap_mode);
+void		gedit_view_set_tab_size  	(GeditView* view, gint tab_size);
+
 #endif /* __GEDIT_VIEW_H__ */
 

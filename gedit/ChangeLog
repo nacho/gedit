@@ -1,3 +1,48 @@
+2001-12-02  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-document.c: added last_searched_text to GeditDocumentPrivate
+        (gedit_document_finalize): free last_searched_text
+	(gedit_document_find): new function
+
+	* gedit-document.h (gedit_document_find): new prototype
+
+	* gedit-mdi.c (gedit_mdi_update_ui_according_to_preferences): set wrap mode too
+
+	* gedit-prefs.h : word_wrap -> wrap_mode
+
+	* gedit-prefs.c : #define DEFAULT_FONTSET removed. 
+	Definition of DEFAULT_FONT changed, now the default font is Sans 12
+	(gedit_prefs_save_settings): save wrap_mode
+	(gedit_prefs_load_settings): use g_new0 to allocate settings. Load wrap_mode. 
+	Fix a memory leak with font.
+
+	* gedit-print.c : some experiment with libgnomeprintui-2.0. It is really broken :-(
+
+	* gedit-ui.xml : hide Plugins and Debug menus
+
+	* gedit-view.c (gedit_view_init): use the preferrend wrap_mode when a GeditView is
+	created. Fixed a bug with colors and font preferences.
+	(gedit_view_set_colors): rewritten to use gtk_widget_modify_base and 
+	gtk_widget_modify_text
+	(gedit_view_set_font): rewritten to use gtk_widget_modify_font
+	(gedit_view_set_wrap_mode): new function
+	(gedit_view_set_tab_size): new function. ATTN: it is broken
+
+	* gedit-view.h: (gedit_view_set_wrap_mode): new prototype
+	(gedit_view_set_tab_size): new prototype
+
+	* dialogs/gedit-dialog-replace.c : gedit-mdi-child.h and gedit-debug.h #included
+	(find_dlg_find_button_pressed): implemented
+	(gedit_dialog_find): close correcly the find dlg
+
+	* dialogs/gedit-preferences-dialog.c : wrap mode page added.
+	Save and Tabs pages hidden. Paper and Page empty pages added.
+	(gedit_preferences_dialog_setup_logo_page): new function
+	(gedit_preferences_dialog_setup_wrap_mode_page): ditto
+	(gedit_preferences_dialog_update_settings): read data from wrap mode page too.
+	
+	* gedit-preferences.glade2 : wrap mode page added.
+
 2001-11-28  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-commands.c (gedit_cmd_settings_preferences): now it really update gedit settings
@@ -46,7 +91,7 @@
 	gedit-ui.xml in the rigth location
 
 	* gedit-menus.c: added FilePrint, FilePrintPreview and SettingsPreferences to
-	gedit_verbs []
+	igedit_verbs []
 
 	* gedit-prefs.[ch]: added two new preferences, i.e. use_default_font and use_default_colors
 

@@ -45,8 +45,7 @@
 
 GeditPreferences *settings = NULL;
 
-#define DEFAULT_FONT (const gchar*) "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
-#define DEFAULT_FONTSET "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
+#define DEFAULT_FONT (const gchar*) "Sans 12"
 
 void 
 gedit_prefs_save_settings (void)
@@ -66,7 +65,7 @@ gedit_prefs_save_settings (void)
 	gnome_config_set_int ("mdi_mode", settings->mdi_mode);
 
 	gnome_config_set_bool ("auto_indent", settings->auto_indent);
-	gnome_config_set_bool ("word_wrap", settings->word_wrap);
+	gnome_config_set_bool ("wrap_mode", settings->wrap_mode);
 	gnome_config_set_bool ("show_statusbar", settings->show_status);
 
 	gnome_config_set_int ("toolbar_labels", settings->toolbar_labels);
@@ -133,7 +132,7 @@ gedit_prefs_load_settings (void)
 
 	if (!settings)
 	{
-		settings = g_malloc (sizeof (GeditPreferences));
+		settings = g_new0 (GeditPreferences, 1);
 	}
 
 	gnome_config_push_prefix ("/gedit2/Global/");
@@ -144,7 +143,7 @@ gedit_prefs_load_settings (void)
 	g_free (mdi_mode_string);
 
 	settings->auto_indent = gnome_config_get_bool ("auto_indent");
-	settings->word_wrap = gnome_config_get_bool ("word_wrap");
+	settings->wrap_mode = gnome_config_get_bool ("wrap_mode");
 	settings->run = gnome_config_get_int ("run");
 	
 	settings->show_status = gnome_config_get_bool ("show_statusbar=TRUE"); 
@@ -179,7 +178,11 @@ gedit_prefs_load_settings (void)
 	if (settings->papersize == NULL)
 		settings->papersize = g_strdup (gnome_paper_name_default());
 #endif
+	if (settings->font != NULL)
+		g_free (settings->font);
+	
 	settings->font = gnome_config_get_string ("font");
+	
 	if (settings->font == NULL)
 		settings->font = g_strdup (DEFAULT_FONT);
 	

@@ -46,7 +46,7 @@ typedef enum {
 struct _GeditPreferences
 {
 	guint auto_indent;
-	gint  word_wrap;
+	gint  wrap_mode;
 	gint  toolbar_labels;
 	gint  show_tabs;
 	gint  tab_pos; /* Mdi Tab Position */
