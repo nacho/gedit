@@ -9,29 +9,325 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2002-07-08 11:49+0200\n"
-"PO-Revision-Date: 2002-07-08 11:58+0200\n"
+"POT-Creation-Date: 2002-07-15 12:35+0200\n"
+"PO-Revision-Date: 2002-07-15 12:42+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: GNOME_Gedit.server.in.h:1
+#: data/GNOME_Gedit.server.in.h:1
 msgid "gedit application"
 msgstr "aplikacja gedit"
 
-#: GNOME_Gedit.server.in.h:1
+#: data/GNOME_Gedit.server.in.h:1
 msgid "gedit automation factory"
 msgstr "generator automatyzacji programu gedit"
 
-#: gedit.desktop.in.h:1
+#: data/gedit.desktop.in.h:1
 msgid "Edit text files"
 msgstr "Edytor plików tekstowych"
 
-#: gedit.desktop.in.h:1
+#: data/gedit.desktop.in.h:1 src/gedit2.c:1
 msgid "Text Editor"
 msgstr "Edytor tekstu"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"A custom font that will be used for the editing area. This will only take "
+"effect if the \"Use Default Font\" option is turned off."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Auto Save"
+msgstr "Automatyczny zapis"
+
+#: data/gedit.schemas.in.h:1
+msgid "Auto Save Interval"
+msgstr "Okres pomiędzy automatycznymi zapisami"
+
+#: data/gedit.schemas.in.h:1
+msgid "Background Color"
+msgstr "Kolor _tła"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Background color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Background color for unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Backup Copy Extension"
+msgstr "Rozszerzenie kopii zapasowej"
+
+#: data/gedit.schemas.in.h:1
+msgid "Body Font for Printing"
+msgstr "Czcionka treści na wydruku"
+
+#: data/gedit.schemas.in.h:1
+msgid "Create Backup Copies"
+msgstr "Tworzenie kopii zapasowych"
+
+#: data/gedit.schemas.in.h:1
+msgid "Display Line Numbers"
+msgstr "Wyświetlanie numerów wierszy"
+
+#: data/gedit.schemas.in.h:1
+msgid "Editor Font"
+msgstr "Czcionka w edytorze"
+
+#: data/gedit.schemas.in.h:1
+msgid "Encoding for Saving"
+msgstr "Kodowanie używane przy zapisie"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Extension or suffix to use for backup file names. This will only take effect "
+"if the \"Create Backup Copies\" option is turned on."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Foreground color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Foreground color for the unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Header Font for Printing"
+msgstr "Czcionka nagłówka na wydruku"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"If this value is 0, then no line numbers will be inserted when printing a "
+"document. Otherwise, gedit will print line numbers every such number of "
+"lines."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Line Number Font for Printing"
+msgstr "Czcionka numerów wierszy na wydruku"
+
+#: data/gedit.schemas.in.h:1
+msgid "Line Wrapping Mode"
+msgstr "Tryb zawijania wierszy"
+
+#: data/gedit.schemas.in.h:1
+msgid "Maximum Recent Files"
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Maximum number of actions that gedit will be able to undo or redo."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Number of minutes after which gedit will automatically save modified files. "
+"This will only take effect if the \"Auto Save\" option is turned on."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Print Header"
+msgstr "Drukowanie nagłówków"
+
+#: data/gedit.schemas.in.h:1
+msgid "Print Line Numbers"
+msgstr "Drukowanie numerów wierszy"
+
+#: data/gedit.schemas.in.h:1
+msgid "Printing Line Wrapping Mode"
+msgstr "Tryb zawijania wierszy na wydruku"
+
+#: data/gedit.schemas.in.h:1
+msgid "Selected Text Color"
+msgstr "Kolor zaznaczonego tekstu"
+
+#: data/gedit.schemas.in.h:1
+msgid "Selection Color"
+msgstr "Kolor zaznaczenia"
+
+#: data/gedit.schemas.in.h:1
+msgid "Show Cursor Position"
+msgstr "Wyświetlanie położenia kursora"
+
+#: data/gedit.schemas.in.h:1
+msgid "Show Overwrite Mode"
+msgstr "Wyświetlanie trybu nadpisywania"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Status Bar is Visible"
+msgstr "Wyświetlanie paska stanu"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Tab Size"
+msgstr "Rozmiar tabulacji"
+
+#: data/gedit.schemas.in.h:1
+msgid "Text Color"
+msgstr "Kolor tekstu"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"The encoding method to use for saving files. Possible values are "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to "
+"convert the document it is saving to your current locale's encoding, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to try "
+"to use the original file encoding (new files in UTF8) and "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit to "
+"try to use the original file encoding (new files in current locale's "
+"encoding). If the conversion is successful, it will be used. Otherwise, "
+"UTF-8 will be used. Note that the values are case-sensitive, so make sure "
+"they appear exactly as mentioned here."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+#, fuzzy
+msgid "Toolbar Buttons Style"
+msgstr "Styl przycisku"
+
+#: data/gedit.schemas.in.h:1
+msgid "Toolbar is Visible"
+msgstr "Wyświetlanie paska narzędziowego"
+
+#: data/gedit.schemas.in.h:1
+msgid "Undo Actions Limit"
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Use Default Colors"
+msgstr "Używanie domyślnych kolorów"
+
+#: data/gedit.schemas.in.h:1
+msgid "Use Default Font"
+msgstr "Używanie domyślnej czcionki"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Whether gedit should automatically save modified files after a time "
+"interval. You can set the time interval with the \"Auto Save Interval\" "
+"option."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Whether gedit should create backup copies for the files it saves. You can "
+"set the backup file extension with the \"Backup Copy Extension\" option."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Whether gedit should display line numbers in the editing area."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Whether gedit should include a document header when printing documents."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Whether the status bar at the bottom of editing windows should be visible."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Whether the status bar should show the cursor position in editing windows. "
+"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
+"effect."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Whether the status bar should show the insert/overwrite mode in editing "
+"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
+"to take effect."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid "Whether the toolbar should be visible in editing windows."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Whether to use the system's default colors for the editing area. If this "
+"option is turned off, then the colors of the editing area will be those "
+"specified in the \"Background Color\", \"Text Color\", \"Selected Text "
+"Color\", and \"Selection Color\" options."
+msgstr ""
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"Whether to use the system's default font for editing text instead of a font "
+"specific to gedit. If this option is turned off, then the font named in the "
+"\"Editor Font\" option will be used instead of the system font."
+msgstr ""
 
 #: plugins/ASCII/ascii.c:1
 msgid "_ASCII Table"
@@ -364,6 +660,10 @@ msgid "Insert the shell output in the current document"
 msgstr "Wstawia wynik działania powłoki do dokumentu"
 
 #: plugins/shell_output/shell_output.c:1
+msgid "An error occurs while running the selected command."
+msgstr "Podczas uruchamiania wybranego polecenia wystąpił błąd."
+
+#: plugins/shell_output/shell_output.c:1
 #: plugins/shell_output/shell_output.c:1
 msgid "Shell output"
 msgstr "Wynik działania powłoki"
@@ -393,16 +693,15 @@ msgstr ""
 "Wprowadź poprawne polecenie powłoki."
 
 #: plugins/shell_output/shell_output.c:1
-msgid "An error occurs while running the selected command."
-msgstr "Podczas uruchamiania wybranego polecenia wystąpił błąd."
-
-#: plugins/shell_output/shell_output.c:1
-msgid ""
-"Execute a program and insert its output in the current document at the "
-"current cursor position"
+#, fuzzy
+msgid "Execute an external program and insert its output in a new document."
 msgstr ""
 "Wykonuje dowolny program i wstawia zawartość jego standardowego wyjścia do "
 "bieżącego dokumentu."
+
+#: plugins/shell_output/shell_output.glade2.h:1
+msgid "Capture the command _output"
+msgstr ""
 
 #: plugins/shell_output/shell_output.glade2.h:1
 msgid "Specify the working directory and the command you want to run."
@@ -513,42 +812,6 @@ msgstr "_Przejdź do wiersza"
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr "Nie można odnaleźć w pliku goto-line.glade2 wymaganych widgetów.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Plugin"
-msgstr "Wtyczka"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Load"
-msgstr "Wczytaj"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Module file name"
-msgstr "Nazwa pliku z modułem"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Author(s)"
-msgstr "Autorzy:"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
-"Nie można odnaleźć pliku plugin-menager.glade2, upewnij się, że gedit jest "
-"poprawnie zainstalowany.\n"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Plugin Manager"
-msgstr "Menedżer wtyczek"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-"Niepoprawny plik glade związany z menedżerem wtyczek -\n"
-" - nie zostały znalezione wszystkie widgety.\n"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:1
-msgid "Could not create the Plugin Manager dialog"
-msgstr "Nie można utworzyć okna menedżera wtyczek"
-
 #: src/dialogs/gedit-dialog-replace.c:1 src/dialogs/replace.glade2.h:1
 #: src/gedit-ui.xml.h:1
 msgid "Replace"
@@ -583,6 +846,34 @@ msgstr "Znaleziono i zmieniono %d wystąpień."
 #: src/dialogs/gedit-dialog-uri.c:1 src/dialogs/uri.glade2.h:1
 msgid "Open from URI"
 msgstr "Otwórz z URI"
+
+#: src/dialogs/gedit-plugin-manager.c:1
+msgid "Plugin"
+msgstr "Wtyczka"
+
+#: src/dialogs/gedit-plugin-manager.c:1
+msgid "Load"
+msgstr "Wczytaj"
+
+#: src/dialogs/gedit-plugin-manager.c:1
+msgid "Module file name"
+msgstr "Nazwa pliku z modułem"
+
+#: src/dialogs/gedit-plugin-manager.c:1
+msgid "Author(s)"
+msgstr "Autorzy:"
+
+#: src/dialogs/gedit-plugin-manager.c:1
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr ""
+"Nie można odnaleźć pliku plugin-menager.glade2, upewnij się, że gedit jest "
+"poprawnie zainstalowany.\n"
+
+#: src/dialogs/gedit-plugin-manager.c:1
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+"Niepoprawny plik glade związany z menedżerem wtyczek -\n"
+" - nie zostały znalezione wszystkie widgety.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:1
 msgid "Set program location ..."
@@ -650,6 +941,10 @@ msgid "Fonts"
 msgstr "Czcionki"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Manager"
+msgstr "Menedżer"
+
+#: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Editor"
 msgstr "Edytor"
 
@@ -658,6 +953,10 @@ msgstr "Edytor"
 #: src/gedit-ui.xml.h:1
 msgid "Print"
 msgstr "Wydrukuj"
+
+#: src/dialogs/gedit-preferences-dialog.c:1
+msgid "Plugins"
+msgstr "Wtyczki"
 
 #: src/dialogs/gedit-preferences-dialog.c:1
 msgid "Cat_egories:"
@@ -744,16 +1043,12 @@ msgid " line(s)"
 msgstr " wierszy"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
+msgid "Always use U_TF-8 encoding (faster)"
+msgstr "Używanie zawsze kodowania UTTF-8 (szybsze)"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Always use _UTF-8 encoding (faster)"
 msgstr "Używanie zawsze kodowania _UTF-8 (szybsze)"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Bottom"
-msgstr "Dół"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Button style"
-msgstr "Styl przycisku"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Colors"
@@ -781,32 +1076,8 @@ msgid "Fonts & Colors"
 msgstr "Czcionki i kolory"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Icon and _text"
-msgstr "Ikony i _tekst"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "LOGO"
 msgstr "LOGO"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Left"
-msgstr "Lewo"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "MDI"
-msgstr "MDI"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Modal"
-msgstr "Modalne"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Notebook"
-msgstr "Zakładki"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Notebook _tab position:"
-msgstr "Położenie _zakładek notatnika:"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Pick the background color"
@@ -825,6 +1096,10 @@ msgid "Pick the text color"
 msgstr "Wybór koloru tekstu"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
+msgid "Plugin manager"
+msgstr "Menedżer wtyczek"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Print _line numbers every"
 msgstr "Numery _wierszy co"
 
@@ -835,10 +1110,6 @@ msgstr "Drukowanie nagłówków _stron"
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Print fonts"
 msgstr "Czcionki na wydruku"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Right"
-msgstr "Prawo"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "S_elected text color:"
@@ -857,34 +1128,6 @@ msgid "Set limit on _undo actions to"
 msgstr "Ograniczenie liczby możliwych _cofnięć do"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Sho_w tooltips"
-msgstr "_Wyświetlanie podpowiedzi"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Show cursor _position"
-msgstr "Położenie _kursora"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Show overwrite _mode"
-msgstr "Wyświetlanie trybu _nadpisywania"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Status bar"
-msgstr "Pasek stanu"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid ""
-"The MDI (Multiple Document Interface) mode refers to the way more than one "
-"text document is displayed in gedit. \n"
-"If you choose the Notebook mode, you may then decide where you want the tabs "
-"to appear in the gedit window."
-msgstr ""
-"Tryb MDI (Interfejs Wielu Dokumentów) określa sposób w jaki program gedit ma "
-"wyświetlać wiele dokumentów.\n"
-"Jeśli zostanie wybrany tryb notatnika, wówczas można zdecydować gdzie w "
-"oknie gedita mają pojawiać się odpowiednie zakładki."
-
-#: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
@@ -899,6 +1142,14 @@ msgid ""
 msgstr ""
 "Ustawienia liczby wierszy pozwalają na wybranie opcji wyświetlania liczby "
 "wierszy z lewej strony okna."
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+#, fuzzy
+msgid ""
+"The plugin manager settings let you choose which plugins you want to have "
+"loaded."
+msgstr ""
+"Ustawienia trybu zawijania pozwalają na ustalenie sposobu zawijania wierszy."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
@@ -920,24 +1171,8 @@ msgstr ""
 "Ustawienia zapisu pozwalają na wybranie sposobu zapisu plików przez gedita."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
-msgid ""
-"The status bar settings let you show or hide status bar and customize its "
-"appearance."
-msgstr ""
-"Ustawienia paska stanu pozwalają na wybranie opcji wyświetlania lub "
-"ukrywania paska stanu oraz na określenie jego wyglądu."
-
-#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "The tabs settings let you customize the tabs width."
 msgstr "Ustawienia tabulacji pozwalają na ustalenie rozmiaru tabulacji."
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid ""
-"The toolbar settings let you show or hide toolbar and customize its "
-"appearance."
-msgstr ""
-"Ustawienia paska narzędziowego pozwalają na wybranie opcji wyświetlania lub "
-"ukrywania paska narzędziowego oraz na określenie jego wyglądu."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid ""
@@ -953,28 +1188,24 @@ msgstr ""
 "Ustawienia trybu zawijania pozwalają na ustalenie sposobu zawijania wierszy."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Toolbars"
-msgstr "Paski narzędziowe"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Top"
-msgstr "Góra"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Toplevel"
-msgstr "Okna nadrzędne"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "U_se current locale only if the file already uses it"
-msgstr "_Bieżące ustawienia lokalne tylko, gdy plik już ich używa"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
 msgid "U_se default theme colors"
 msgstr "Uży_wanie domyślnych kolorów motywu"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
-msgid "Use current _locale when possible"
+msgid "U_se original file encoding if possible"
+msgstr ""
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+msgid "Use cu_rrent locale's encoding if possible"
 msgstr "Używanie bieżących ustawień _lokalnych gdy to możliwe"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+msgid "Use current _locale's encoding if possible"
+msgstr "Używanie bieżących ustawień lo_kalnych gdy to możliwe"
+
+#: src/dialogs/gedit-preferences.glade2.h:1
+msgid "When creating a new file..."
+msgstr "Przy tworzeniu nowego pliku..."
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "When saving..."
@@ -987,10 +1218,6 @@ msgstr "Zawijanie wierszy na g_ranicach słów"
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "Wrap lines at ch_aracter boundaries"
 msgstr "Zawijanie wierszy na gr_anicach znaków"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "_According to system settings"
-msgstr "_Zgodnie z ustawieniami systemowymi"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "_Autosave current file every"
@@ -1012,14 +1239,6 @@ msgstr "_Czcionka używana wewnątrz edytora: "
 msgid "_Font used to print headers:"
 msgstr "_Czcionka używana przy nagłówkach:"
 
-#: src/dialogs/gedit-preferences.glade2.h:1 src/gedit-ui.xml.h:1
-msgid "_Icon"
-msgstr "_Ikony"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "_MDI Mode:"
-msgstr "Tryb _MDI:"
-
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "_Never wrap lines"
 msgstr "_Bez zawijania wierszy"
@@ -1027,14 +1246,6 @@ msgstr "_Bez zawijania wierszy"
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "_Restore default fonts"
 msgstr "_Przywróć domyślne czcionki"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "_Show status bar"
-msgstr "Wyświetlanie paska _stanu"
-
-#: src/dialogs/gedit-preferences.glade2.h:1
-msgid "_Show toolbar"
-msgstr "Wyświetlanie paska _narzędziowego"
 
 #: src/dialogs/gedit-preferences.glade2.h:1
 msgid "_Text color:"
@@ -1155,16 +1366,6 @@ msgstr "Konfiguruje wybraną wtyczkę"
 #: src/dialogs/plugin-manager.glade2.h:1
 msgid "D_etails"
 msgstr "_Szczegóły"
-
-#: src/dialogs/plugin-manager.glade2.h:1
-msgid ""
-"This is the Plugin Manager. Plugins are extra pieces of software that extend "
-"gedit capabilities. From here, you can choose which plugins you want to have "
-"loaded."
-msgstr ""
-"To jest Menedżer Wtyczek. Wtyczki to dodatkowe elementy oprogramowania "
-"rozszerzające funkcjonalność gedita. Z tego miejsca można wybrać, które z "
-"wtyczek mają być wczytywane."
 
 #: src/dialogs/plugin-manager.glade2.h:1
 msgid "_Description"
@@ -1497,10 +1698,6 @@ msgid "About this application"
 msgstr "Informacje o aplikacji"
 
 #: src/gedit-ui.xml.h:1
-msgid "Add/Remove plugins"
-msgstr "Dodaje/Usuwa wtyczki"
-
-#: src/gedit-ui.xml.h:1
 msgid "C_ustomize Statusbar"
 msgstr "D_opasuj pasek stanu"
 
@@ -1647,14 +1844,6 @@ msgstr "Wklej"
 #: src/gedit-ui.xml.h:1
 msgid "Paste the clipboard"
 msgstr "Wkleja zawartość schowka"
-
-#: src/gedit-ui.xml.h:1
-msgid "Plugin _Manager"
-msgstr "_Menedżer wtyczek"
-
-#: src/gedit-ui.xml.h:1
-msgid "Plugin _Manager..."
-msgstr "_Menedżer wtyczek..."
 
 #: src/gedit-ui.xml.h:1
 msgid "Pr_eferences..."
@@ -1839,6 +2028,10 @@ msgstr "_Znajdź"
 #: src/gedit-ui.xml.h:1
 msgid "_Help"
 msgstr "Pomo_c"
+
+#: src/gedit-ui.xml.h:1
+msgid "_Icon"
+msgstr "_Ikony"
 
 #: src/gedit-ui.xml.h:1
 msgid "_New"
@@ -2252,10 +2445,6 @@ msgstr "Tworzy nowe główne okno w ramach istniejącej instancji programu gedit
 #: src/gedit2.c:1
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Tworzy nowy dokument w ramach istniejącej instancji programu gedit"
-
-#: src/gedit2.c:1
-msgid "The GNOME text editor"
-msgstr "Edytor tekstu dla GNOME"
 
 #: src/gnome-recent-view-bonobo.c:1
 #, c-format
