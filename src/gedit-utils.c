@@ -1304,3 +1304,21 @@ gedit_utils_set_atk_relation (	GtkWidget *obj1,
 
 	g_object_unref (G_OBJECT (relation));
 }
+
+gboolean
+gedit_utils_uri_exists (const gchar* text_uri)
+{
+	GnomeVFSURI *uri;
+	gboolean res;
+	
+	g_return_val_if_fail (text_uri != NULL, FALSE);
+	
+	uri = gnome_vfs_uri_new (text_uri);
+	g_return_val_if_fail (uri != NULL, FALSE);
+
+	res = gnome_vfs_uri_exists (uri);
+
+	gnome_vfs_uri_unref (uri);
+
+	return res;
+}

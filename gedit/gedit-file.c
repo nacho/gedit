@@ -289,9 +289,23 @@ gedit_file_save (GeditMDIChild* child)
 
 	if (!gedit_document_get_modified (doc))	
 	{
+		gchar *raw_uri;
+		gboolean deleted = FALSE;
+		
 		gedit_debug (DEBUG_FILE, "Not modified");
 
-		return TRUE;
+		raw_uri = gedit_document_get_raw_uri (doc);
+		if (raw_uri != NULL)
+		{
+			if (gedit_document_is_readonly (doc))
+				deleted = FALSE;
+			else
+				deleted = !gedit_utils_uri_exists (raw_uri);
+		}
+		g_free (raw_uri);
+			
+		if (!deleted)
+			return TRUE;
 	}
 	
 	uri = gedit_document_get_uri (doc);

@@ -799,6 +799,8 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 {
 	GeditDocument* doc;
 	gboolean close = TRUE;
+	gchar *raw_uri;
+	gboolean deleted = FALSE;
 	
 	gedit_debug (DEBUG_MDI, "");
 
@@ -807,7 +809,17 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 
 	doc = GEDIT_MDI_CHILD (child)->document;
 
-	if (gedit_document_get_modified (doc))
+	raw_uri = gedit_document_get_raw_uri (doc); 
+	if (raw_uri != NULL)
+	{
+		if (gedit_document_is_readonly (doc))
+			deleted = FALSE;
+		else
+			deleted = !gedit_utils_uri_exists (raw_uri);
+	}
+	g_free (raw_uri);
+				
+	if (gedit_document_get_modified (doc) || deleted)
 	{
 		GtkWidget *msgbox, *w;
 		gchar *fname = NULL, *msg = NULL;

@@ -79,6 +79,9 @@ void gedit_utils_set_atk_name_description (GtkWidget *widget, const gchar *name,
 						const gchar *description);
 void gedit_utils_set_atk_relation (GtkWidget *obj1, GtkWidget *obj2,
 						AtkRelationType rel_type);
+
+gboolean gedit_utils_uri_exists (const gchar* text_uri);
+
 #endif /* __GEDIT_UTILS_H__ */
 
 
