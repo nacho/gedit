@@ -16,6 +16,7 @@
 #include "toolbar.h"
 #include "gE_document.h"
 #include "gE_about.h"
+#include "gE_print.h"
 
 #define GE_DATA		1
 #define GE_WINDOW	2

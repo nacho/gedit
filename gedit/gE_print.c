@@ -29,7 +29,7 @@
 #include "main.h"
 #include "commands.h"
 #include "gE_print.h"
-
+#include "gE_document.h"
 
 void print_destroy(GtkWidget *widget, gpointer data)
 {
@@ -52,7 +52,7 @@ void print_show_other(GtkWidget *widget, gpointer data)
 }
 */
 
-void _file_print(gpointer cbdata)
+void _file_print(GtkWidget *w, gpointer cbdata)
 {
     FILE *file;
     gE_document *current;
@@ -64,12 +64,10 @@ void _file_print(gpointer cbdata)
     char *var_ptr;
     
     gE_data *data = (gE_data *)cbdata;
-    gE_window *window;
- 	g_print("11..\n");       
- 
- 
+    gE_window *window = data->window;
+
     current = gE_document_current (window);
- 	g_print("11..\n"); 
+
 	strcpy(data->window->print_cmd,gtk_entry_get_text(GTK_ENTRY(print_cmd_entry)));
 
    	/* print using specified command */
@@ -124,7 +122,9 @@ void _file_print(gpointer cbdata)
 
         /* execute */
         system( tmpstring );
-    }
+	gtk_widget_destroy (print_dialog);
+	print_dialog = NULL;
+}
 
 
 /* ---- Print Function ---- */
@@ -137,7 +137,6 @@ GtkWidget *hsep;
 GtkWidget *button;
 GtkWidget *label;
 GtkWidget *print_command;
-GtkWidget *print_dialog;
 char print[256];
 gE_data *data = (gE_data *)cbdata;
 /*
@@ -156,15 +155,16 @@ gE_data *data = (gE_data *)cbdata;
    /*system("rm -f temp001");*/
    
    /* New Print Function -- It's a dialog! :) */
-   g_print("hmm...\n");
+
     print_dialog = gtk_window_new( GTK_WINDOW_TOPLEVEL );
-    gtk_widget_set_usize( print_dialog, 300, 175 );
+
     gtk_window_set_title( GTK_WINDOW( print_dialog ), "Print" );
     gtk_signal_connect( GTK_OBJECT( print_dialog ), "destroy",
                         GTK_SIGNAL_FUNC( print_destroy ), NULL );
 
     vbox = gtk_vbox_new( FALSE, 0 );
     gtk_container_add( GTK_CONTAINER( print_dialog ), vbox );
+    gtk_container_border_width (GTK_CONTAINER (print_dialog), 6);
     gtk_widget_show( vbox );
 
     hbox = gtk_hbox_new( FALSE, 0 );
@@ -199,18 +199,27 @@ gE_data *data = (gE_data *)cbdata;
     gtk_box_pack_start( GTK_BOX( vbox ), hbox, FALSE, TRUE, 5 );
     gtk_widget_show( hbox );
 
+#ifdef WITHOUT_GNOME
     button = gtk_button_new_with_label( "OK" );
+#else
+    button = gnome_stock_button (GNOME_STOCK_BUTTON_OK);
+#endif
     gtk_box_pack_start( GTK_BOX( hbox ), button, TRUE, TRUE, 15 );
     gtk_signal_connect( GTK_OBJECT( button ), "clicked",
-                        GTK_SIGNAL_FUNC( _file_print ), (gpointer)1 );
+                        GTK_SIGNAL_FUNC( _file_print ), data );
     gtk_widget_show( button );
 
+#ifdef WITHOUT_GNOME
     button = gtk_button_new_with_label( "Cancel" );
+#else
+    button = gnome_stock_button (GNOME_STOCK_BUTTON_CANCEL);
+#endif
     gtk_box_pack_start( GTK_BOX( hbox ), button, TRUE, TRUE, 15 );
     gtk_signal_connect( GTK_OBJECT( button ), "clicked",
-                        GTK_SIGNAL_FUNC( print_destroy ), NULL );
+                        GTK_SIGNAL_FUNC( print_destroy ), data->window );
     gtk_widget_show( button );
 
     gtk_widget_show( print_dialog );
 
 }
+

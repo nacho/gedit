@@ -31,7 +31,10 @@
 #include "main.h"
 #include "commands.h"
 #include "menus.h"
+#include "gE_print.h"
 #include "toolbar.h"
+
+#ifdef WITHOUT_GNOME
 #include "xpm/tb_new.xpm"
 #include "xpm/tb_open.xpm"
 #include "xpm/tb_save.xpm"
@@ -41,7 +44,7 @@
 #include "xpm/tb_copy.xpm"
 #include "xpm/tb_paste.xpm"
 #include "xpm/tb_search.xpm"
-
+#endif
 
 
 #ifdef WITHOUT_GNOME

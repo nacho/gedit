@@ -37,3 +37,4 @@ void file_print_cmd_callback (GtkWidget *widget, gpointer cbdata);
 #endif /* __cplusplus */
 
 #endif /* __GE_PRINT_H__ */
+
