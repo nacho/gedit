@@ -49,6 +49,8 @@
 #define BONOBO_MDI_CHILD_KEY 	"BonoboMDIChild"
 #define UI_COMPONENT_KEY 	"UIComponent"
 #define BOOK_KEY		"Book"
+#define VPANED_KEY		"VPaned"
+#define BOTTOM_PANE_KEY		"BottomPane"
 #define WINDOW_INFO_KEY		"BonoboMDIWindowInfo"
 
 static void            bonobo_mdi_class_init     (BonoboMDIClass  *);
@@ -844,10 +846,15 @@ book_create (BonoboMDI *mdi)
 {
 	GtkWidget *us;
 	GtkWidget *vbox;
+	GtkWidget *vpaned;
+	GtkWidget *bp;
 
 	gedit_debug (DEBUG_MDI, "");
 
 	g_return_val_if_fail (mdi->priv->active_window != NULL, NULL);
+	
+	vpaned = gtk_vpaned_new ();
+	g_return_val_if_fail (vpaned != NULL, NULL);
 	
 	vbox = gtk_vbox_new (FALSE, 0);
 	us = gtk_notebook_new ();
@@ -856,10 +863,19 @@ book_create (BonoboMDI *mdi)
 
 	gtk_box_pack_start (GTK_BOX (vbox), us, TRUE, TRUE, 0);	
 
-	gtk_widget_show_all (vbox);
+	gtk_paned_pack1 (GTK_PANED (vpaned), vbox, TRUE, FALSE);
 
-	bonobo_window_set_contents (mdi->priv->active_window, vbox);
+	bp = bonobo_mdi_get_bottom_pane_for_window (mdi->priv->active_window);
+
+	if (bp != NULL)
+		gtk_paned_pack2 (GTK_PANED (vpaned), bp, FALSE, FALSE);
+	
+	gtk_widget_show_all (vpaned);
+
+	bonobo_window_set_contents (mdi->priv->active_window, vpaned);
+	
 	g_object_set_data (G_OBJECT (mdi->priv->active_window), BOOK_KEY, us);
+	g_object_set_data (G_OBJECT (mdi->priv->active_window), VPANED_KEY, vpaned);
 	
 	gtk_widget_add_events (us, GDK_BUTTON1_MOTION_MASK);
 
@@ -2266,4 +2282,41 @@ bonobo_mdi_get_restoring_state (BonoboMDI *mdi)
 
 	priv = mdi->priv;
 	return priv->restoring_state;
+}
+
+void
+bonobo_mdi_set_bottom_pane_for_window (BonoboWindow *win, GtkWidget *pane)
+{
+	gpointer old_pane, vpaned;
+
+	g_return_if_fail (BONOBO_IS_WINDOW (win));
+
+	old_pane =  g_object_get_data (G_OBJECT (win), BOTTOM_PANE_KEY);
+	vpaned = g_object_get_data (G_OBJECT (win), VPANED_KEY);
+
+	if (old_pane != NULL)
+	{
+		g_return_if_fail (vpaned != NULL);
+		gtk_container_remove (GTK_CONTAINER (vpaned), GTK_WIDGET (old_pane));
+	}
+
+	if (pane != NULL)
+	{
+		if (vpaned != NULL)
+			gtk_paned_pack2 (GTK_PANED (vpaned), pane, FALSE, FALSE);
+
+		g_object_set_data (G_OBJECT (win), BOTTOM_PANE_KEY, pane);
+	}
+}
+
+GtkWidget *
+bonobo_mdi_get_bottom_pane_for_window (BonoboWindow *win)
+{
+	gpointer pane;
+
+	g_return_val_if_fail (BONOBO_IS_WINDOW (win), NULL);
+
+	pane =  g_object_get_data (G_OBJECT (win), BOTTOM_PANE_KEY);
+
+	return (pane != NULL) ? GTK_WIDGET (pane) : NULL;
 }

@@ -74,6 +74,7 @@ void 		gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi);
 void 		gedit_mdi_clear_active_window_statusbar (GeditMDI *mdi);
 
 EggRecentView	*gedit_mdi_get_recent_view_from_window (BonoboWindow* win);
+GtkWidget 	*gedit_mdi_get_output_window_from_window (BonoboWindow *win);
 
 #endif /* __GEDIT_MDI_H__ */
 

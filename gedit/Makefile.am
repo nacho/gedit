@@ -95,6 +95,8 @@ gedit_SOURCES = 			\
 	gedit-window-server.h		\
 	gedit-encodings.c		\
 	gedit-encodings.h		\
+	gedit-output-window.c		\
+	gedit-output-window.h		\
 	$(BUILT_SOURCES)
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)

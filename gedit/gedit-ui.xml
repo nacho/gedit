@@ -12,7 +12,8 @@
 	accel="*Control*S"/>
 	
 	<cmd name="FileSaveAll" _label="Save All"
-        _tip="Save all open files" pixtype="stock" pixname="gtk-save"/>
+        _tip="Save all open files" pixtype="stock" pixname="gtk-save"
+	accel="*Shift**Control*L"/>
 
         <cmd name="FileSaveAs" _label="Save As"
         _tip="Save the current file with a different name"
@@ -90,6 +91,9 @@
 	<cmd name="ViewStatusbar" _label="_Statusbar" type="toggle"
 	_tip="Change the visibility of the statusbar in the current window" state="0"/>
 
+	<cmd name="ViewOutputWindow" _label="_Output Window" type="toggle"
+	_tip="Change the visibility of the output window in the current window" state="0"/>
+
         <cmd name="ToolbarSystem" id="ToolbarSystem" _label="_Desktop Default" type="radio" 
          group="buttons" state = "1" _tip="Set toolbar button style according to desktop default"/>
 
@@ -98,6 +102,9 @@
 
 	<cmd name="ToolbarIconText" id="ToolbarIconText" _label="Icon and _Text" type="radio" 
 	 group="buttons" _tip ="Show both icons and texts in the toolbar"/>
+
+        <cmd name="ToolbarIconBothHoriz" id="ToolbarIconBothHoriz" _label="_Priority Text beside Icons" 
+	 type="radio" group="buttons" _tip ="Show prioritized text beside icons in the toolbar"/>
 
         <cmd name="SettingsPreferences" _label="Preferences" _tip="Configure the application"
 	  pixtype="stock" pixname="gtk-preferences"/>
@@ -205,6 +212,8 @@
 
 	<menuitem name="ViewStatusbar" id="ViewStatusbar" verb=""/>
 
+	<menuitem name="ViewOutputWindow" id="ViewOutputWindow" verb=""/>
+
 	<separator/>
 
 	<submenu name="CustomizeToolbar" _label="_Customize Toolbar">
@@ -214,6 +223,8 @@
 		<menuitem name="ToolbarIcon" verb=""/>
 
 		<menuitem name="ToolbarIconText" verb=""/>
+                 
+                <menuitem name="ToolbarIconBothHoriz" verb=""/>
 
 	</submenu>
 
@@ -305,9 +316,9 @@
 	behavior = "exclusive" in_new_band="1">
 	
 	<toolitem name="FileNew" verb=""/>
-	<toolitem name="FileOpen" verb=""/>
+	<toolitem name="FileOpen" verb="" priority="1"/>
 	<control name="FileOpenMenu" verb=""/>
-	<toolitem name="FileSave" verb=""/>
+	<toolitem name="FileSave" verb="" priority="1"/>
 
 	<separator/>
 
@@ -315,7 +326,7 @@
 	
 	<separator/>
 
-	<toolitem name="EditUndo" verb=""/>
+	<toolitem name="EditUndo" verb="" priority="1"/>
 	<toolitem name="EditRedo" verb=""/>
 
 	<separator/>

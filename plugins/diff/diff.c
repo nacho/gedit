@@ -53,6 +53,9 @@
 #include <gedit-utils.h>
 #include <gedit-debug.h>
 #include <gedit-file.h>
+#include <gedit-mdi.h>
+#include <gedit-output-window.h>
+
 
 #define DIFF_BASE_KEY 		"/apps/gedit-2/plugins/diff"
 #define DIFF_LOCATION_KEY	"/diff-program-location"
@@ -454,6 +457,138 @@ diff_real (void)
 	gtk_widget_destroy (dialog->dialog);
 }
 
+static void
+display_results (gchar *buffer, gchar *command_line, gboolean uf)
+{
+	gchar *p;
+	gunichar c;
+	GeditOutputWindow *ow;
+	gchar *line;
+	gchar *markup;
+
+	GSList *lines = NULL;
+	GSList *tmp;
+	
+	gedit_debug (DEBUG_PLUGINS, "Building list...");
+
+	if (strlen (buffer) <= 0)
+		return;
+
+	p = buffer;
+	c = g_utf8_get_char (p);
+
+	lines = g_slist_prepend (lines, p);
+	
+	while (c != '\0') {
+		if (c == '\n') {
+			gchar *old_p;
+			
+			old_p = p;
+
+			p = g_utf8_next_char (p);
+
+			*old_p = '\0';
+
+			lines = g_slist_prepend (lines, p);
+
+		} else
+			p = g_utf8_next_char (p);
+
+		c = g_utf8_get_char (p);
+	}
+
+	lines = g_slist_reverse (lines);
+
+	gedit_debug (DEBUG_PLUGINS, "Adding lines to the output window");
+
+	ow = GEDIT_OUTPUT_WINDOW (
+			gedit_mdi_get_output_window_from_window (gedit_get_active_window ()));
+	g_return_if_fail (ow != NULL);
+
+	gedit_output_window_clear (ow);
+
+	gtk_widget_show (GTK_WIDGET (ow));
+
+	line = g_markup_escape_text (command_line, -1);
+	markup = g_strdup_printf ("<i>%s</i>: <b>%s</b>", _("Executed command"), line);
+	gedit_output_window_append_line (ow, markup, FALSE);
+	gedit_output_window_append_line (ow, "", FALSE);
+	
+	g_free (line);
+	g_free (markup);
+	
+	tmp = lines;
+	
+	while (tmp != NULL)
+	{
+		line = g_markup_escape_text (tmp->data, -1);
+
+		if (!uf)
+		{
+			if (g_utf8_get_char (tmp->data) == '<')
+			{
+				markup = g_strdup_printf ("<span foreground=\"dark blue\">%s</span>", line);
+			}
+			else if (g_utf8_get_char (tmp->data) == '>')
+			{
+				markup = g_strdup_printf ("<span foreground=\"dark green\">%s</span>", line);
+			}
+			else if (g_unichar_isdigit (g_utf8_get_char (tmp->data)))
+			{
+				markup = g_strdup_printf (
+						"<span foreground=\"purple\" "
+						"weight=\"bold\">%s</span>", line);
+			}
+			else
+			{
+				markup = g_strdup (line);
+			}
+		}
+		else
+		{
+			if ((strcmp (tmp->data, "+++ ") == 0) ||
+			    (strcmp (tmp->data, "--- ") == 0) ||
+			    (strcmp (tmp->data, "Index: ") == 0) ||
+			    (strcmp (tmp->data, "diff ") == 0))
+			{
+				markup = g_strdup_printf (
+						"<span foreground=\"dark green\" "
+						"weight=\"bold\">%s</span>", line);
+			}
+			else if (g_utf8_get_char (tmp->data) == '@')
+			{
+				markup = g_strdup_printf (
+						"<span foreground=\"purple\" "
+						"weight=\"bold\">%s</span>", line);
+			}
+			else if (g_utf8_get_char (tmp->data) == '-')
+			{
+				markup = g_strdup_printf ("<span foreground=\"dark blue\">%s</span>", line);
+			}
+			else if (g_utf8_get_char (tmp->data) == '+')
+			{
+				markup = g_strdup_printf ("<span foreground=\"dark green\">%s</span>", line);
+			}
+			else
+			{
+				markup = g_strdup (line);
+			}
+		}
+
+		
+		gedit_debug (DEBUG_PLUGINS, markup);
+		
+		gedit_output_window_append_line (ow, markup, FALSE);
+		g_free (line);
+		g_free (markup);
+
+		tmp = g_slist_next (tmp);
+	}
+
+	g_slist_free (lines);
+}
+	
+
 static gboolean
 diff_execute (DiffDialog *dialog)
 {
@@ -611,6 +746,8 @@ diff_execute (DiffDialog *dialog)
 		goto finally;
 	}
 
+	/* FIXME: use g_shell_quote - Paolo */
+	
 	command_line = g_strdup_printf ("%s %s %s \"%s\" \"%s\"",
 					diff_program_location, 
 					uf ? "-u" : "", 
@@ -716,6 +853,9 @@ diff_execute (DiffDialog *dialog)
 			output_size = bytes_written;
 		}
 
+		display_results (output, command_line, uf);
+
+#if 0
 		gedit_file_new ();
 		
 		document = gedit_get_active_document ();
@@ -728,6 +868,7 @@ diff_execute (DiffDialog *dialog)
 		gedit_document_set_cursor (document, 0);
 		
 		gedit_document_end_not_undoable_action (document);
+#endif
 	}
 		
 	g_free (output);

@@ -933,8 +933,13 @@ gedit_prefs_manager_get_toolbar_buttons_style (void)
 	{
 		if (strcmp (str, "GEDIT_TOOLBAR_ICONS_AND_TEXT") == 0)
 			res = GEDIT_TOOLBAR_ICONS_AND_TEXT;
-		else
-			res = GEDIT_TOOLBAR_SYSTEM;
+		else 
+		{
+			if (strcmp (str, "GEDIT_TOOLBAR_ICONS_BOTH_HORIZ") == 0)
+				res = GEDIT_TOOLBAR_ICONS_BOTH_HORIZ;
+			else
+				res = GEDIT_TOOLBAR_SYSTEM;
+		}
 	}
 
 	g_free (str);
@@ -960,6 +965,9 @@ gedit_prefs_manager_set_toolbar_buttons_style (GeditToolbarSetting tbs)
 			str = "GEDIT_TOOLBAR_ICONS_AND_TEXT";
 			break;
 
+	        case GEDIT_TOOLBAR_ICONS_BOTH_HORIZ:
+			str = "GEDIT_TOOLBAR_ICONS_BOTH_HORIZ";
+			break;
 		default: /* GEDIT_TOOLBAR_SYSTEM */
 			str = "GEDIT_TOOLBAR_SYSTEM";
 	}

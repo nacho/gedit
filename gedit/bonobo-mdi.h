@@ -205,6 +205,9 @@ char *bonobo_mdi_generate_window_role (void);
 
 const BonoboMDIWindowInfo *bonobo_mdi_get_window_info		(BonoboWindow *win);
 
+void  bonobo_mdi_set_bottom_pane_for_window (BonoboWindow *win, GtkWidget *pane);
+GtkWidget *bonobo_mdi_get_bottom_pane_for_window (BonoboWindow *win);
+
 #endif /* _BONOBO_MDI_H_ */
 
 

@@ -264,7 +264,7 @@ static GeditEncoding encodings [] = {
 #endif
   
   { GEDIT_ENCODING_SHIFT_JIS,
-    "SHIFT-JIS", N_("Japanese") },
+    "SHIFT_JIS", N_("Japanese") },
   { GEDIT_ENCODING_TCVN,
     "TCVN", N_("Vietnamese") },
   { GEDIT_ENCODING_TIS_620,

@@ -1,3 +1,28 @@
+2002-10-27  Paolo Maggi <maggi@athena.polito.it>
+
+	* gedit-output-window.[ch]: new files
+
+	* Makefile.am (gedit_SOURCES): added gedit-output-window.[ch]
+
+	* bonobo-mdi.[ch] (bonobo_mdi_set_bottom_pane_for_window)
+	(bonobo_mdi_get_bottom_pane_for_window): new functions to manage
+	bottom panes
+
+	* gedit-encodings.c (encodings): s/SHIFT-JIS/"SHIFT_JIS
+
+	* gedit-file.c (gedit_file_save_as): set active view 
+
+	* gedit-mdi.[ch] (gedit_mdi_get_output_window_from_window):
+	new function
+
+	* gedit-mdi.c: added support for GEDIT_TOOLBAR_ICONS_BOTH_HORIZ,
+	added bottom pane
+
+	* gedit-prefs-manager.[ch]: support GEDIT_TOOLBAR_ICONS_BOTH_HORIZ
+
+	* gedit-ui.xml: set Ctrl+L as accellerator for Save All, set priority=1
+	for FileOpen, FileSave and FileUndo
+
 2002-10-15  Paolo Maggi  <maggi@athena.polito.it>
 
 	* dialogs/gedit-dialog-replace.c:

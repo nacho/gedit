@@ -50,6 +50,7 @@
 #include "gedit-view.h"
 #include "gedit-utils.h"
 #include "gedit-plugins-engine.h"
+#include "gedit-output-window.h"
 #include "recent-files/egg-recent-view-bonobo.h"
 #include "recent-files/egg-recent-view-gtk.h"
 #include "recent-files/egg-recent-model.h"
@@ -59,7 +60,8 @@
 
 #include <gconf/gconf-client.h>
 
-#define RECENT_KEY "GeditRecent"
+#define RECENT_KEY 		"GeditRecent"
+#define OUTPUT_WINDOW_KEY	"GeditOutputWindow"
 
 struct _GeditMDIPrivate
 {
@@ -76,6 +78,8 @@ struct _GeditWindowPrefs
 	gboolean statusbar_visible;
 	gboolean statusbar_show_cursor_position;
 	gboolean statusbar_show_overwrite_mode;
+
+	gboolean output_window_visible;
 };
 
 static void gedit_mdi_class_init 	(GeditMDIClass	*klass);
@@ -376,6 +380,7 @@ gedit_mdi_new (void)
 	return mdi;
 }
 
+
 static void
 gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 {
@@ -448,12 +453,19 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	
 	/* Set the toolbar style according to prefs */
 	gedit_mdi_set_app_toolbar_style (win);
+
+	gedit_menus_set_verb_state (ui_component, 
+				    "/commands/ViewOutputWindow",
+				    prefs->output_window_visible);
 		
 	/* Add listener fo the view menu */
 	bonobo_ui_component_add_listener (ui_component, "ViewToolbar", 
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
 			(gpointer)win);
 	bonobo_ui_component_add_listener (ui_component, "ViewStatusbar", 
+			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
+			(gpointer)win);
+	bonobo_ui_component_add_listener (ui_component, "ViewOutputWindow", 
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
 			(gpointer)win);
 
@@ -464,6 +476,9 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
 			(gpointer)win);
 	bonobo_ui_component_add_listener (ui_component, "ToolbarIconText", 
+			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
+			(gpointer)win);
+	bonobo_ui_component_add_listener (ui_component, "ToolbarIconBothHoriz", 
 			(BonoboUIListenerFn)gedit_mdi_view_menu_item_toggled_handler, 
 			(gpointer)win);
 
@@ -487,6 +502,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	g_object_set_data_full (G_OBJECT (win), RECENT_KEY, view,
 				g_object_unref);
 
+		
 	/* Set window state and size, but only if the session is not being restored */
 	if (!bonobo_mdi_get_restoring_state (mdi))
 	{
@@ -570,6 +586,27 @@ gedit_mdi_view_menu_item_toggled_handler (
 		goto save_prefs;
 	}
 
+	if (strcmp (path, "ViewOutputWindow") == 0)
+	{
+		if (s != prefs->output_window_visible)
+		{
+			GtkWidget *ow;
+
+			prefs->output_window_visible = s;
+			gedit_mdi_set_app_statusbar_style (win);
+
+			ow = gedit_mdi_get_output_window_from_window (win);
+
+			if (prefs->output_window_visible)
+				gtk_widget_show (ow);
+			else
+				gtk_widget_hide (ow);
+		}	
+
+		return;
+	}
+
+
 	if (s && (strcmp (path, "ToolbarSystem") == 0))
 	{
 		if (prefs->toolbar_buttons_style  != GEDIT_TOOLBAR_SYSTEM)
@@ -597,6 +634,17 @@ gedit_mdi_view_menu_item_toggled_handler (
 		if (prefs->toolbar_buttons_style != GEDIT_TOOLBAR_ICONS_AND_TEXT)
 		{
 			prefs->toolbar_buttons_style = GEDIT_TOOLBAR_ICONS_AND_TEXT;
+			gedit_mdi_set_app_toolbar_style (win);
+		}
+
+		goto save_prefs;
+	}
+
+	if (s && (strcmp (path, "ToolbarIconBothHoriz") == 0))
+	{
+		if (prefs->toolbar_buttons_style != GEDIT_TOOLBAR_ICONS_BOTH_HORIZ)
+		{
+			prefs->toolbar_buttons_style = GEDIT_TOOLBAR_ICONS_BOTH_HORIZ;
 			gedit_mdi_set_app_toolbar_style (win);
 		}
 
@@ -673,7 +721,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 {
 	BonoboUIComponent *ui_component;
 	GeditWindowPrefs *prefs = NULL;
-	
+
 	gedit_debug (DEBUG_MDI, "");
 	
 	g_return_if_fail (BONOBO_IS_WINDOW (win));
@@ -701,6 +749,9 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 				        "/commands/ToolbarIconText",
 				        prefs->toolbar_visible);
 	gedit_menus_set_verb_sensitive (ui_component, 
+				        "/commands/ToolbarIconBothHoriz",
+				        prefs->toolbar_visible);
+	gedit_menus_set_verb_sensitive (ui_component, 
 				        "/commands/ToolbarTooltips",
 				        prefs->toolbar_visible);
 
@@ -716,6 +767,10 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 				    "/commands/ToolbarIconText",
 				    prefs->toolbar_buttons_style == GEDIT_TOOLBAR_ICONS_AND_TEXT);
 
+	gedit_menus_set_verb_state (ui_component, 
+				    "/commands/ToolbarIconBothHoriz",
+				    prefs->toolbar_buttons_style == GEDIT_TOOLBAR_ICONS_BOTH_HORIZ);
+	
 	switch (prefs->toolbar_buttons_style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
@@ -738,6 +793,13 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 				ui_component, "/Toolbar", "look", "both", NULL);
 			
 			break;
+			
+		case GEDIT_TOOLBAR_ICONS_BOTH_HORIZ:
+			gedit_debug (DEBUG_MDI, "GEDIT: ICONS_BOTH_HORIZ");
+			bonobo_ui_component_set_prop (
+				ui_component, "/Toolbar", "look", "both_horiz", NULL);
+			
+			break;       
 		default:
 			goto error;
 			break;
@@ -1279,7 +1341,7 @@ gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 }
 
 EggRecentView *
-gedit_mdi_get_recent_view_from_window (BonoboWindow* win)
+gedit_mdi_get_recent_view_from_window (BonoboWindow *win)
 {
 	gpointer r;
 	gedit_debug (DEBUG_MDI, "");
@@ -1288,6 +1350,98 @@ gedit_mdi_get_recent_view_from_window (BonoboWindow* win)
 	
 	return (r != NULL) ? EGG_RECENT_VIEW (r) : NULL;
 }
+
+static void
+gedit_mdi_close_output_window_cb (GtkWidget *widget, gpointer user_data)
+{
+	BonoboWindow *bw;
+	
+	bw = BONOBO_WINDOW (user_data);
+
+	gtk_widget_hide (widget);
+}
+
+static void
+gedit_mdi_show_output_window_cb (GtkWidget *widget, gpointer user_data)
+{
+	BonoboWindow *bw;
+	GeditWindowPrefs *prefs;
+	BonoboUIComponent *ui_component;
+	
+	gedit_debug (DEBUG_MDI, "");
+	
+	bw = BONOBO_WINDOW (user_data);
+	g_return_if_fail (bw != NULL);
+	
+	ui_component = bonobo_mdi_get_ui_component_from_window (bw);
+	g_return_if_fail (ui_component != NULL);
+	
+	prefs = gedit_window_prefs_get_from_window (bw);
+	g_return_if_fail (prefs != NULL);
+	
+	prefs->output_window_visible = TRUE;
+	
+	gedit_menus_set_verb_state (ui_component, 
+				    "/commands/ViewOutputWindow",
+				    prefs->output_window_visible);
+}
+
+static void
+gedit_mdi_hide_output_window_cb (GtkWidget *widget, gpointer user_data)
+{
+	BonoboWindow *bw;
+	GeditWindowPrefs *prefs;
+	BonoboUIComponent *ui_component;
+	
+	gedit_debug (DEBUG_MDI, "");
+	
+	bw = BONOBO_WINDOW (user_data);
+	g_return_if_fail (bw != NULL);
+	
+	ui_component = bonobo_mdi_get_ui_component_from_window (bw);
+	g_return_if_fail (ui_component != NULL);
+
+	prefs = gedit_window_prefs_get_from_window (bw);
+	g_return_if_fail (prefs != NULL);
+
+	prefs->output_window_visible = FALSE;
+
+	gedit_menus_set_verb_state (ui_component, 
+				    "/commands/ViewOutputWindow",
+				    prefs->output_window_visible);
+}
+
+
+GtkWidget *
+gedit_mdi_get_output_window_from_window (BonoboWindow *win)
+{
+	gpointer r;
+	gedit_debug (DEBUG_MDI, "");
+
+	r = g_object_get_data (G_OBJECT (win), OUTPUT_WINDOW_KEY);
+
+	if (r == NULL)
+	{
+		GtkWidget *ow;
+
+		/* Add output window */
+		ow = gedit_output_window_new ();
+		bonobo_mdi_set_bottom_pane_for_window (BONOBO_WINDOW (win), ow);
+		gtk_widget_show_all (ow);
+		g_signal_connect (G_OBJECT (ow), "close_requested",
+			  G_CALLBACK (gedit_mdi_close_output_window_cb), win);
+		g_signal_connect (G_OBJECT (ow), "show",
+			  G_CALLBACK (gedit_mdi_show_output_window_cb), win);
+		g_signal_connect (G_OBJECT (ow), "hide",
+			  G_CALLBACK (gedit_mdi_hide_output_window_cb), win);
+		g_object_set_data (G_OBJECT (win), OUTPUT_WINDOW_KEY, ow);
+
+		return ow;
+	}
+	
+	return (r != NULL) ? GTK_WIDGET (r) : NULL;
+}
+
 
 
 static GeditWindowPrefs *
@@ -1305,6 +1459,8 @@ gedit_window_prefs_new (void)
 	prefs->statusbar_visible = gedit_prefs_manager_get_statusbar_visible ();
 	prefs->statusbar_show_cursor_position = gedit_prefs_manager_get_statusbar_show_cursor_position ();
 	prefs->statusbar_show_overwrite_mode = gedit_prefs_manager_get_statusbar_show_overwrite_mode ();
+
+	prefs->output_window_visible = FALSE;
 
 	return prefs;
 }

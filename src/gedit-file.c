@@ -373,6 +373,7 @@ gedit_file_save_as (GeditMDIChild *child)
 	gchar *file;
 	gboolean ret = FALSE;
 	GeditDocument *doc;
+	GtkWidget *view;
 	gchar *fname = NULL;
 	gchar *path = NULL;
 	gchar *raw_uri = NULL;
@@ -384,6 +385,18 @@ gedit_file_save_as (GeditMDIChild *child)
 	doc = child->document;
 	g_return_val_if_fail (doc != NULL, FALSE);
 
+	view = GTK_WIDGET (g_list_nth_data (
+			bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (child)), 0));
+	if (view != NULL)
+	{
+		GtkWindow *window;
+
+		window = GTK_WINDOW (bonobo_mdi_get_window_from_view (view));
+		gtk_window_present (window);
+
+		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+	}
+	
 	raw_uri = gedit_document_get_raw_uri (doc);
 
 	if (gedit_document_is_untitled (doc))
