@@ -718,7 +718,7 @@ file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 	g_assert(nb != NULL);
 	num = g_list_length(nb->children);
 	g_assert(num > 0);
-	gtk_widget_hide(data->window->notebook);
+	/*gtk_widget_hide(data->window->notebook);*/
 
 	for (i = 0; i < num; i++) {
 		close_doc_common(data);
@@ -730,7 +730,7 @@ file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 		}
 	}
 
-	gtk_widget_show(data->window->notebook);
+	/*gtk_widget_show(data->window->notebook);*/
 
 	data->flag = allclosed;
 
@@ -753,11 +753,12 @@ window_close_cb(GtkWidget *widget, gpointer cbdata)
 
 	g_assert(data != NULL);
 	g_assert(data->window != NULL);
-	gtk_widget_hide(data->window->window);
+	/*gtk_widget_hide(data->window->window);*/
 	flw_destroy(NULL, data);
 
 	data->flag = FALSE;	/* use flag to indicate all files closed */
 	file_close_all_cb(widget, cbdata);
+	gtk_widget_hide(data->window->window);
 
 	if (data->flag) {
 		gE_msgbar_clear((gpointer)(data->window));
@@ -766,6 +767,7 @@ window_close_cb(GtkWidget *widget, gpointer cbdata)
 		close_window_common(data->window);	/* may not return */
 
 		data->window = g_list_nth_data(window_list, 0);
+		gtk_widget_hide(data->window->window);
 	} else
 		gtk_widget_show(data->window->window);
 }
@@ -815,7 +817,7 @@ file_quit_cb(GtkWidget *widget, gpointer cbdata)
 	msgbox_close();
 	while (window_list) {
 		data->window = g_list_nth_data(window_list, 0);
-		gtk_widget_hide(data->window->window);
+		/*gtk_widget_hide(data->window->window);*/
 		window_close_cb(widget, data);
 		if (data->flag == FALSE)	/* cancelled by user */
 			return;
