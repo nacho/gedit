@@ -24,7 +24,7 @@ extern "C" {
 #endif /* __cplusplus */
 
 #define STRING_LENGTH_MAX	256
-#define GEDIT_ID	"gEdit 0.4.5"
+#define GEDIT_ID	"gEdit 0.4.8"
 
 #define UNKNOWN		"Unknown"
 #define UNTITLED	"Untitled"
