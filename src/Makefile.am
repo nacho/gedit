@@ -5,7 +5,7 @@ INCLUDES = -I$(includedir) 				\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
 	$(GNOME_INCLUDEDIR)
 
-EXTRA_DIST = KNOWNBUGS ChangeLog README INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm
+EXTRA_DIST = KNOWNBUGS ChangeLog README INSTALL gedit.1 gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm gedit.desktop
 
 man_MANS = gedit.1
 
