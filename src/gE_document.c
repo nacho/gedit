@@ -201,20 +201,13 @@ gE_window_new(void)
 	return w;
 } /* gE_window_new */
 
-void gE_window_toggle_statusbar (GtkWidget *w, gpointer cbwindow)
+void gE_window_set_status_bar (gE_window *window, gint show_status)
 {
-	gE_window *window = (gE_window *)cbwindow;
-
-	if (window->show_status == TRUE)
-	{
-		gtk_widget_hide (window->statusbox);
-		window->show_status = FALSE;
-	}
-	else
-	{
+	window->show_status = show_status;
+	if (show_status)
 		gtk_widget_show (window->statusbox);
-		window->show_status = TRUE;
-	}
+	else
+		gtk_widget_hide (window->statusbox);
 }
 
 gE_document
@@ -407,42 +400,40 @@ gE_document *gE_document_current(gE_window *window)
 	return current_document;
 }
 
-void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow)
-{
-	gE_document *doc;
-	gE_window *window = (gE_window *)cbwindow;
+#ifdef GTK_HAVE_FEATURES_1_1_0
 
-	doc = gE_document_current (window);
-	doc->word_wrap = !doc->word_wrap;
+void gE_document_set_split_screen (gE_document *doc, gint split_screen)
+{
+	if (split_screen)
+		gtk_widget_show (GTK_WIDGET (doc->split_screen)->parent);
+	else
+		gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
+}
+
+#endif	/* GTK_HAVE_FEATURES_1_1_0 */
+
+void gE_document_set_word_wrap (gE_document *doc, gint word_wrap)
+{
+	doc->word_wrap = doc->word_wrap;
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
 
-void gE_document_set_readonly (gE_document *doc, gint read_only)
+void gE_document_set_read_only (gE_document *doc, gint read_only)
 {
-	doc->read_only = read_only != 0;
+	doc->read_only = read_only;
 	gtk_text_set_editable (GTK_TEXT (doc->text), !doc->read_only);
 	if (doc->split_screen)
 		gtk_text_set_editable
 			(GTK_TEXT (doc->split_screen), !doc->read_only);
 }
 
-void gE_document_toggle_readonly (GtkWidget *w, gpointer cbwindow)
-{
-	gE_document *doc;
-	gE_window *window = (gE_window *)cbwindow;
-
-	doc = gE_document_current (window);
-	gE_document_set_readonly (doc, !doc->read_only);
-}
-
 #ifndef WITHOUT_GNOME
-void gE_document_toggle_scrollball (GtkWidget *w, gE_window *window)
+void gE_document_set_scroll_ball (gE_document *doc, gint scroll_ball)
 {
-	gE_document *doc = gE_document_current (window);
-	if (GTK_WIDGET_VISIBLE (doc->scrollball))
-		gtk_widget_hide (doc->scrollball);
-	else
+	if (scroll_ball)
 		gtk_widget_show (doc->scrollball);
+	else
+		gtk_widget_hide (doc->scrollball);
 }
 #endif
 

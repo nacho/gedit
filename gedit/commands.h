@@ -70,7 +70,15 @@ extern void doc_insert_text_cb(GtkWidget *editable,
 	char *insertion_text, int length, int *pos, gE_document *doc);
 extern void doc_delete_text_cb (GtkWidget *editable,
 	int start_pos, int end_pos, gE_document *doc);
-extern void options_toggle_split_screen (GtkWidget *widget, gE_window *window);
+#ifdef GTK_HAVE_FEATURES_1_1_0
+extern void options_toggle_split_screen_cb (GtkWidget *widget, gE_window *window);
+#endif
+extern void options_toggle_status_bar_cb (GtkWidget *widget, gE_window *window);
+extern void options_toggle_word_wrap_cb (GtkWidget *widget, gE_window *window);
+extern void options_toggle_read_only_cb (GtkWidget *widget, gE_window *window);
+#ifndef WITHOUT_GNOME
+extern void options_toggle_scroll_ball_cb (GtkWidget *widget, gE_window *window);
+#endif
 
 /* Functions needed to be made external for the plugins api */
 extern void popup_close_verify (gE_document *doc, gE_data *data);

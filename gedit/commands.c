@@ -1018,10 +1018,10 @@ recent_update_menus (gE_window *window, GList *recent_files)
 		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
 		data->window = window;
 		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
-		sprintf (menu->label, "%i. %s", i+1, g_list_nth_data (recent_files, i));
+		sprintf (menu->label, "%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
 		menu->type = GNOME_APP_UI_ITEM;
 		menu->hint = NULL;
-		menu->moreinfo = recent_cb;
+		menu->moreinfo = (gpointer) recent_cb;
 		menu->user_data = data;
 		menu->unused_data = NULL;
 		menu->pixmap_type = 0;
@@ -1117,13 +1117,42 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	gtk_text_thaw (GTK_TEXT (significant_other));
 }
 
-void options_toggle_split_screen (GtkWidget *widget, gE_window *window)
+void options_toggle_split_screen_cb (GtkWidget *widget, gE_window *window)
 {
 	gE_document *doc = gE_document_current (window);
-	if (GTK_WIDGET_VISIBLE (GTK_WIDGET (doc->split_screen)->parent))
-		gtk_widget_hide (GTK_WIDGET (doc->split_screen)->parent);
-	else
-		gtk_widget_show (GTK_WIDGET (doc->split_screen)->parent);
+	gint visible = GTK_WIDGET_VISIBLE
+		(GTK_WIDGET (doc->split_screen)->parent);
+	gE_document_set_split_screen (doc, !visible);
 }
 
 #endif	/* GTK_HAVE_FEATURES_1_1_0 */
+
+#ifndef WITHOUT_GNOME
+
+void options_toggle_scroll_ball_cb (GtkWidget *w, gE_window *window)
+{
+	gE_document *doc = gE_document_current (window);
+	gint visible = GTK_WIDGET_VISIBLE
+		(GTK_WIDGET (doc->scrollball));
+	gE_document_set_scroll_ball (doc, !visible);
+}
+
+#endif /* WITHOUT_GNOME */
+
+void options_toggle_read_only_cb (GtkWidget *widget, gE_window *window)
+{
+	gE_document *doc = gE_document_current (window);
+	gE_document_set_read_only (doc, !doc->read_only);
+}
+
+void options_toggle_word_wrap_cb (GtkWidget *widget, gE_window *window)
+{
+	gE_document *doc = gE_document_current (window);
+	gE_document_set_word_wrap (doc, !doc->word_wrap);
+}
+
+void options_toggle_status_bar_cb (GtkWidget *w, gE_window *window)
+{
+	gE_window_set_status_bar (window, !window->show_status);
+}
+

@@ -1,6 +1,47 @@
 1998-10-13  Martin Baulig  <martin@home-of-linux.org>
 
-	Added functionality to make documents readonly.
+	Moved callback functions from the `Options' menu into command.c
+	and called them `options_toggle_*_cb'. They call `gE_document_set_*'
+	functions in gE_document.c which provide the functionality the
+	callbacks formerly had.
+
+	This means we can more easily use the functionality of the menu
+	callbacks to turn things on and off.
+
+	* src/gE_document.c (gE_window_toggle_statusbar): Moved functionality
+	of this function into new `gE_window_set_status_bar'.
+	(gE_window_set_status_bar): New function taking a gE_window * and
+	a gint indicating whether to show or to hide the statusbar.
+	(gE_document_toggle_wordwrap): Moved functionality of this function
+	into new `gE_document_set_word_wrap'.
+	(gE_document_set_word_wrap): New function taking a gE_document * and
+	a gint indicating whether to turn word wrap on or off.
+	(gE_document_set_readonly): Renamed to `gE_document_set_read_only'.
+	(gE_document_set_read_only): Renamed from `gE_document_set_readonly'.
+	(gE_document_toggle_readonly): Moved to command.c and renamed to
+	`options_toggle_read_only'.
+	(gE_document_toggle_scrollball): Moved functionality of this function
+	into new `gE_document_set_scroll_ball'.
+	(gE_document_set_scroll_ball): New function taking a gE_document *
+ 	and a gint indicating whether to show or to hide the scrollball.
+	(gE_document_set_split_screen): New function taking a gE_document *
+ 	and a gint indicating whether to enable or disable the split screen.
+
+	* src/command.c (options_toggle_split_screen): Renamed to
+	`options_toggle_split_screen_cb'.
+	(options_toggle_split_screen_cb): Renamed from
+	`options_toggle_split_screen'.
+	(options_toggle_scroll_ball_cb): New callback function calling
+	`gE_document_set_scroll_ball'.
+	(options_toggle_word_wrap_cb): New callback function calling
+	`gE_document_set_word_wrap'.
+	(options_toggle_status_bar_cb): New callback function calling
+	`gE_document_set_status_bar'.
+
+	* src/menus.c: Call the new `options_toggle_*_cb' functions in
+	command.c rather than using the `gE_document_*' ones directly.
+
+1998-10-13  Martin Baulig  <martin@home-of-linux.org>
 
 	* src/main.h (gE_document): Added `read_only' flag.
 
