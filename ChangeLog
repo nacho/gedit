@@ -1,3 +1,30 @@
+1998-12-16  Evan Lawrence <evan@worldpath.net>
+
+	* xpm/tb*.xpm: Reduced all the toolbar xpms to 8 colors
+	  apiece, to reduce the load time.
+
+	* src/toolbar.c: Further cleanups to the toolbar code, getting
+	  it to resize properly, etc.
+
+	* src/gE_prefslib.c: Fixed one or two bugs in it. I forget
+	  what they were ATM :)
+
+	* src/gE_prefs_box.c: Fixed it so the OK button works properly in
+	  the GTK-only version now.
+
+	* THANKS: Added Christopher (raistlinn) to it, for his help
+	  yesterday.
+
+	* gedit.spec: Updated this for 0.4.8.
+
+	* src/gE_document.c: Bug fixes so the prefernces load properly in
+	  the gnome version now. Also fixed some resize problems that were
+	  bugging me in the gtk-only version.
+
+	* src/commands.c: Another bug fix, this time to keep the recent
+	  documents from overwriting Exit... This was a bug I introduced in one
+	  of my recent commits.
+
 1998-12-15  Alex Roberts <bse@dial.pipex.com>
 
 	* gedit.keys: new file, for mime stuff...
