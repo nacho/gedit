@@ -316,9 +316,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 
 
 	/* add a GeditRecent object */
-	/* FIXME: maybe max recent files should be a pref? */
 	recent = gedit_recent_new_with_ui_component ("gedit",
-						     4,
+						     gedit_settings->max_recents,
 						     ui_component,
 						     "/menu/File/Recents");
 	g_signal_connect (G_OBJECT (recent), "activate",

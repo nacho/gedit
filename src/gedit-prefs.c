@@ -88,6 +88,8 @@
 #define GEDIT_PREF_PRINT_FONT_HEADER	"/print-font-header"
 #define GEDIT_PREF_PRINT_FONT_NUMBERS	"/print-font-numbers"
 
+#define GEDIT_PREF_MAX_RECENTS		"/max-recents"
+
 
 GeditPreferences 	*gedit_settings 	= NULL;
 static GConfClient 	*gedit_gconf_client 	= NULL;
@@ -551,6 +553,15 @@ gedit_prefs_load_settings (void)
 	
 	if (gedit_settings->print_font_numbers == NULL)
 		gedit_settings->print_font_numbers = g_strdup (DEFAULT_PRINT_FONT_NUMBERS);
+
+	
+	gedit_settings->max_recents = gconf_client_get_int (
+				gedit_gconf_client,
+				GEDIT_BASE_KEY GEDIT_PREF_MAX_RECENTS,
+				NULL);
+
+	if (gedit_settings->max_recents <= 0)
+		gedit_settings->max_recents = 4;
 
 	gedit_debug (DEBUG_PREFS, "END");
 }

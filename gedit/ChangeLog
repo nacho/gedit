@@ -1,3 +1,13 @@
+2002-03-06  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-prefs.[ch]: added new max_recents pref
+
+	* gedit-mdi.c (gedit_mdi_app_created_handler):
+	use gedit_setting->max_recent
+
+	*gedit-recent.c: 
+	#define GEDIT_RECENT_BASE_KEY "/apps/gedit-2/recent-files"
+
 2002-03-05  Paolo Maggi  <maggi@athena.polito.it>
 
 	* Makefile.am: #defined DATADIR

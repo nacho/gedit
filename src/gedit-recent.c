@@ -32,7 +32,7 @@
 #include "gedit-recent.h"
 #include "gedit-debug.h"
 
-#define GEDIT_RECENT_BASE_KEY "/desktop/gnome/recent-files"
+#define GEDIT_RECENT_BASE_KEY "/apps/gedit-2/recent-files"
 #define GEDIT_RECENT_DEFAULT_LIMIT 10
 #define GEDIT_RECENT_GLOBAL_LIMIT_ENV "GEDIT_RECENT_GLOBAL_LIMIT"
 #define GEDIT_RECENT_VERB_NAME "-uri-"

@@ -109,6 +109,9 @@ struct _GeditPreferences
 	gchar		*print_font_body;
 	gchar		*print_font_header;
 	gchar		*print_font_numbers;
+
+	/* Max number of files in "Recent Files" menu */
+	gint		 max_recents;
 };
 
 extern GeditPreferences *gedit_settings;
