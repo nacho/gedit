@@ -10,14 +10,8 @@ EXTRA_DIST = BUGS FAQ ChangeLog README README.plugins \
 	intltool-extract.in intltool-merge.in intltool-update.in \
 	$(GEDIT_SCHEMA)
 
-#sysdir   = $(datadir)/gnome/apps/Applications
-#sys_in_files = gedit2.desktop.in
-#sys_DATA = $(sys_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-#mimedir = $(datadir)/mime-info
-#mime_in_files = gedit.keys.in
-#mime_DATA = $(mime_in_files:.keys.in=.keys)
 @INTLTOOL_KEYS_RULE@
 
 pixmapsdir = $(datadir)/pixmaps

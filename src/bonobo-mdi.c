@@ -1245,7 +1245,8 @@ static void app_create (BonoboMDI *mdi, gchar *layout_string)
 	/* Create Container: */
  	ui_container = bonobo_window_get_ui_container (bw);
 
-	config_path = g_strdup_printf ("/%s/UIConfig/kvps/", mdi->priv->mdi_name);
+	config_path = g_strdup_printf ("/%s/UIConfig/kvps", mdi->priv->mdi_name);
+
   	bonobo_ui_engine_config_set_path (bonobo_window_get_ui_engine (bw),
                                      config_path);
 	g_free (config_path);
@@ -2469,11 +2470,11 @@ bonobo_mdi_construct (BonoboMDI *mdi, gchar* name, gchar* title, GtkPositionType
 	g_return_if_fail (mdi->priv->mdi_name == NULL);
 	g_return_if_fail (mdi->priv->title == NULL);
 
-	if (name != NULL)
-		mdi->priv->mdi_name = g_strdup (name);
+	g_return_if_fail (name != NULL);
+	g_return_if_fail (title != NULL);
 
-	if (title != NULL)
-		mdi->priv->title = g_strdup (title);
+	mdi->priv->mdi_name = g_strdup (name);
+	mdi->priv->title = g_strdup (title);
 
 	mdi->priv->tab_pos = tab_pos;
 }
