@@ -13,11 +13,11 @@ pluginlib_DATA = $(plugin_FILES)
 CLEANFILES = $(plugin_FILES)
 
 INCLUDES = 						\
-	-I$(includedir)					\
+	-I$(top_srcdir)/src				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
-	$(GNOME_INCLUDEDIR)
+	-I$(includedir) $(GNOME_INCLUDEDIR)
 
 CPPFLAGS = \
 	-DBINDIR=\""$(bindir)"\" \

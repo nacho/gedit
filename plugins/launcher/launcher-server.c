@@ -2,7 +2,7 @@
 #include <config.h>
 #include <gnome.h>
 
-#include <gedit/gE_plugin.h>
+#include <gE_plugin.h>
 
 #include <launcher-impl.h>
 
@@ -13,6 +13,7 @@ gint edit_context = 0;
 gE_Plugin_Info gedit_plugin_info = {
 	"Document Launcher",
 	init_plugin,
+	NULL,
 };
 
 void

@@ -44,11 +44,13 @@ typedef struct _gE_Plugin_Object	gE_Plugin_Object;
 typedef struct _gE_Plugin_Info		gE_Plugin_Info;
 
 typedef void (*gE_Plugin_InitFunc)	(gE_Plugin_Object *, gint);
+typedef gboolean (*gE_Plugin_StartFunc)	(gE_Plugin_Object *, gint);
 
 struct _gE_Plugin_Info
 {
 	gchar *plugin_name;
 	gE_Plugin_InitFunc init_func;
+	gE_Plugin_StartFunc start_func;
 };
 
 struct _gE_Plugin_Object
@@ -101,7 +103,8 @@ extern void	gE_plugin_set_scroll_ball	(gint, gint);
 extern char *	gE_plugin_text_get		(gint);
 extern gboolean	gE_plugin_program_quit		(void);
 extern GtkText *gE_plugin_get_widget		(gint);
-GtkWidget *	gE_plugin_create_widget		(gint, gchar *, GtkWidget **);
+extern int	gE_plugin_create_widget		(gint, gchar *,
+						 GtkWidget **, GtkWidget **);
 
 #ifndef _IN_GEDIT
 

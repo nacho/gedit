@@ -200,10 +200,11 @@ int gE_plugin_document_open(gint context,gchar *fname)
 gboolean gE_plugin_document_close (gint docid)
 {
 	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
-	gE_data *data = g_malloc (sizeof (gE_data));
+	gE_data *data = g_new0 (gE_data, 1);
 	gboolean flag;
 
 	data->document = document;
+	data->window = document->window;
 
 	if (document->changed)
 		popup_close_verify (document, data);
@@ -317,18 +318,24 @@ gE_plugin_get_widget (gint docid)
 	return GTK_TEXT (document->text);
 }
 
-GtkWidget *
-gE_plugin_create_widget (gint docid, gchar *title, GtkWidget **split_screen)
+int
+gE_plugin_create_widget (gint context, gchar *title, GtkWidget **viewport,
+			 GtkWidget **split_screen)
 {
-	gE_window *window = g_hash_table_lookup (win_int_to_pointer, &docid);
+	gE_window *window = g_hash_table_lookup (win_int_to_pointer, &context);
 	gE_document *doc;
+	int *docid_ptr;
 
-	g_return_val_if_fail (window != NULL, NULL);
+	g_return_val_if_fail (window != NULL, 0);
 
 	doc = gE_document_new_container (window, title, split_screen != NULL);
 	if (split_screen) *split_screen = doc->split_viewport;
+	if (viewport) *viewport = doc->viewport;
 
-	return doc->viewport;
+	docid_ptr = (int *) g_hash_table_lookup (doc_pointer_to_int, doc);
+	g_return_val_if_fail (docid_ptr != NULL, 0);
+
+	return *docid_ptr;
 }
 
 #endif /* WITH_GMODULE_PLUGINS */

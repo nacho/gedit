@@ -212,10 +212,11 @@ gE_Plugin_Register (gE_Plugin_Object *plugin)
 gboolean
 gE_Plugin_Load (gE_Plugin_Object *plugin, gint context)
 {
-	printf ("LOAD: %p - %p\n", plugin, plugin->module);
-
 	if (plugin->module)
-		return TRUE;
+		if (plugin->info->start_func)
+			return plugin->info->start_func (plugin, context);
+		else
+			return FALSE;
 
 	/* Push config prefix. */
 
