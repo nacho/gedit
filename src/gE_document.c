@@ -238,10 +238,11 @@ gE_document
 	if (w->notebook == NULL) {
 		w->notebook = gtk_notebook_new();
 		gtk_notebook_set_scrollable(GTK_NOTEBOOK(w->notebook), TRUE);
-		gtk_signal_connect_after(GTK_OBJECT(w->notebook),
+/*		gtk_signal_connect_after(GTK_OBJECT(w->notebook),
 			"switch_page",
 			GTK_SIGNAL_FUNC(notebook_switch_page),
 			w);
+*/
 	}
 	
 	vpaned = gtk_vbox_new (TRUE, TRUE);
@@ -367,7 +368,7 @@ gE_document
 	gtk_notebook_set_page(GTK_NOTEBOOK(w->notebook),
 		g_list_length(GTK_NOTEBOOK(w->notebook)->children) - 1);
 
-	gtk_widget_grab_focus(doc->text);
+/*	gtk_widget_grab_focus(doc->text);*/
 
 	return doc;
 } /* gE_document_new */
