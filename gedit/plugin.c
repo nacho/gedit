@@ -137,6 +137,24 @@ gedit_plugins_menu_add (GnomeApp *app)
 
 }
 
+void
+gedit_plugin_save_settings (void)
+{
+	gint n;
+	gchar * config_string;
+	PluginData *nth_plugin;
+	
+	for (n = 0; n < g_list_length (plugins_list); n++)
+	{
+		nth_plugin = g_list_nth_data (plugins_list, n);
+		
+		config_string = g_strdup_printf ("/gedit/installed_plugins/%s=",
+						 g_basename(nth_plugin->file));
+		gnome_config_set_bool (config_string, nth_plugin->installed);
+		g_free (config_string);
+	}
+}
+	
 gchar *
 gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess)
 {
@@ -327,7 +345,7 @@ error:
 }
 
 #if 0
-/* Ot used, but we migth need it latter */
+/* NOt used, but we migth need it latter */
 static void
 gedit_plugin_unload (PluginData *pd)
 {

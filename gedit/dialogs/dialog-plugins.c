@@ -96,7 +96,7 @@ gedit_plugin_program_location_dialog (void)
 
 
 static void
-gedit_plugin_lists_thaw (void)
+gedit_plugin_manager_lists_thaw (void)
 {
 	gtk_clist_unselect_all (GTK_CLIST (installed_list));
 	gtk_clist_unselect_all (GTK_CLIST (available_list));
@@ -104,21 +104,17 @@ gedit_plugin_lists_thaw (void)
 	gtk_clist_thaw (GTK_CLIST (installed_list));
 	gtk_clist_thaw (GTK_CLIST (available_list));
 
-	/*
-	gtk_clist_sort (GTK_CLIST (installed_list));
-	gtk_clist_sort (GTK_CLIST (available_list));
-	*/
 }
 
 static void
-gedit_plugin_lists_freeze (void)
+gedit_plugin_manager_lists_freeze (void)
 {
 	gtk_clist_freeze (GTK_CLIST (installed_list));
 	gtk_clist_freeze (GTK_CLIST (available_list));
 }
 
 static gint 
-gedit_plugin_clist_compare_function (GtkCList *clist, GtkCListRow *row_1, GtkCListRow *row_2)
+gedit_plugin_manager_clist_compare_function (GtkCList *clist, GtkCListRow *row_1, GtkCListRow *row_2)
 {
 	gchar *string_1 = ((GtkCellText*)&(row_1->cell[clist->sort_column]))->text;
 	gchar *string_2 = ((GtkCellText*)&(row_2->cell[clist->sort_column]))->text;
@@ -134,7 +130,7 @@ gedit_plugin_manager_item_load (void)
 	PluginData *nth_plugin_data;
 	gchar * name[1];
 
-	gedit_plugin_lists_freeze();
+	gedit_plugin_manager_lists_freeze();
 	
 	for (n=0; n < g_list_length (plugins_list); n++)
 	{
@@ -157,9 +153,9 @@ gedit_plugin_manager_item_load (void)
 	}
 
 	gtk_clist_set_compare_func (GTK_CLIST (installed_list),
-				    (GtkCListCompareFunc) gedit_plugin_clist_compare_function);
+				    (GtkCListCompareFunc) gedit_plugin_manager_clist_compare_function);
 	gtk_clist_set_compare_func (GTK_CLIST (available_list),
-				    (GtkCListCompareFunc) gedit_plugin_clist_compare_function);
+				    (GtkCListCompareFunc) gedit_plugin_manager_clist_compare_function);
 	
 	gtk_clist_set_sort_column (GTK_CLIST (installed_list), 0);
 	gtk_clist_set_sort_column (GTK_CLIST (available_list), 0);
@@ -167,7 +163,8 @@ gedit_plugin_manager_item_load (void)
 	gtk_clist_set_auto_sort (GTK_CLIST (installed_list), TRUE);
 	gtk_clist_set_auto_sort (GTK_CLIST (available_list), TRUE);
 	
-	gedit_plugin_lists_thaw();
+	gedit_plugin_manager_lists_thaw();
+	
 
 }
 
@@ -183,7 +180,7 @@ gedit_plugin_manager_item_add (GtkWidget *widget, gpointer data)
 
 	selection_length = g_list_length (GTK_CLIST (available_list)->selection);
 
-	gedit_plugin_lists_freeze();
+	gedit_plugin_manager_lists_freeze();
 
 	for (n=0; n < selection_length; n++)
 	{
@@ -197,7 +194,7 @@ gedit_plugin_manager_item_add (GtkWidget *widget, gpointer data)
 		gtk_clist_set_row_data (GTK_CLIST (installed_list), row, item_data);
 	}
 
-	gedit_plugin_lists_thaw();
+	gedit_plugin_manager_lists_thaw();
 }
 
 static void
@@ -212,7 +209,7 @@ gedit_plugin_manager_item_remove (GtkWidget *widget, gpointer data)
 
 	selection_length = g_list_length (GTK_CLIST (installed_list)->selection);
 
-	gedit_plugin_lists_freeze();
+	gedit_plugin_manager_lists_freeze();
 
 	for (n=0; n < selection_length; n++)
 	{
@@ -226,7 +223,7 @@ gedit_plugin_manager_item_remove (GtkWidget *widget, gpointer data)
 		gtk_clist_set_row_data (GTK_CLIST (available_list), row, item_data);
 	}
 
-	gedit_plugin_lists_thaw();
+	gedit_plugin_manager_lists_thaw();
 }
 
 static void
@@ -241,7 +238,7 @@ gedit_plugin_manager_item_add_all (GtkWidget *widget, gpointer data)
 
 	rows = GTK_CLIST (available_list)->rows;
 
-	gedit_plugin_lists_freeze();
+	gedit_plugin_manager_lists_freeze();
 
 	for (row=rows-1; row >= 0; row--)
 	{
@@ -255,7 +252,7 @@ gedit_plugin_manager_item_add_all (GtkWidget *widget, gpointer data)
 		gtk_clist_set_row_data (GTK_CLIST (installed_list), row_inserted, item_data);
 	}
 	
-	gedit_plugin_lists_thaw();
+	gedit_plugin_manager_lists_thaw();
 }
 
 static void
@@ -270,7 +267,7 @@ gedit_plugin_manager_item_remove_all (GtkWidget *widget, gpointer data)
 
 	rows = GTK_CLIST (installed_list)->rows;
 
-	gedit_plugin_lists_freeze();
+	gedit_plugin_manager_lists_freeze();
 
 	for (row=rows-1; row >= 0; row--)
 	{
@@ -285,7 +282,7 @@ gedit_plugin_manager_item_remove_all (GtkWidget *widget, gpointer data)
 		gtk_clist_set_row_data (GTK_CLIST (available_list), row_inserted, item_data);
 	}
 
-	gedit_plugin_lists_thaw();
+	gedit_plugin_manager_lists_thaw();
 }
 
 static void

@@ -71,6 +71,8 @@ gint init_plugin (PluginData *pd);
 void			gedit_plugins_init (void);
 void			gedit_plugins_menu_add (GnomeApp *app);
 
+void			gedit_plugin_save_settings (void);
+
 gchar *			gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name, gint dont_guess);
 gchar *			gedit_plugin_program_location_change (gchar * program_name, gchar * plugin_name);
 

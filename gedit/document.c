@@ -777,5 +777,6 @@ gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state)
 		nth_view = VIEW (g_list_nth_data (doc->views, n));
 		gedit_view_set_undo (nth_view, undo_state, redo_state);
 	}
+	
 }
 

@@ -99,6 +99,8 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	Document *doc = view->doc;
 	gint undo_state, redo_state;
 
+	g_print ("View changed !!!!!!!!!\n");
+	
 	gedit_debug (DEBUG_VIEW, "start");
 
 	g_return_if_fail (view!=NULL);
@@ -109,6 +111,7 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	view->app = gedit_window_active_app();
 	
 	gedit_view_load_widgets (view);
+	
 	if (g_list_length(doc->undo) == 0)
 		undo_state = GEDIT_UNDO_STATE_FALSE;
 	else
@@ -1003,8 +1006,8 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 void
 gedit_view_load_widgets (View *view)
 {
-	GnomeUIInfo *toolbar_ui_info;
-	GnomeUIInfo *menu_ui_info;
+	GnomeUIInfo *toolbar_ui_info = NULL;
+	GnomeUIInfo *menu_ui_info = NULL;
 	gint count, sub_count;
 	gint temp_undo, temp_redo;
 
@@ -1020,12 +1023,16 @@ gedit_view_load_widgets (View *view)
 
 	if (view->toolbar)
 	{
+		g_print ("This view had a toolbar....");
+		return;
+		
 		temp_undo = view->toolbar->undo;
 		temp_redo = view->toolbar->redo;
 		g_free (view->toolbar);
 		view->toolbar->undo = temp_undo;
 		view->toolbar->redo = temp_redo;
 	}
+	g_print ("start scanning  ...\n");
 	
 	view->toolbar = g_malloc (sizeof (GeditToolbar));
 	view->toolbar->undo_button = NULL;
@@ -1037,9 +1044,25 @@ gedit_view_load_widgets (View *view)
 	while (toolbar_ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
 	{
 		if (toolbar_ui_info [count].moreinfo == gedit_undo_undo)
+		{
 			view->toolbar->undo_button = toolbar_ui_info[count].widget;
+#if 0			
+			g_print ("undo button found ..   count %i widget 0x%x  view 0x%x\n",
+				 count,
+				 (gint) toolbar_ui_info[count].widget,
+				 (gint) view);
+#endif			
+		}
 		if (toolbar_ui_info [count].moreinfo == gedit_undo_redo)
+		{
 			view->toolbar->redo_button = toolbar_ui_info[count].widget;
+#if 0			
+			g_print ("redo button found ..   count %i widget 0x%x view 0x%x\n",
+				 count,
+				 (gint) toolbar_ui_info[count].widget,
+				 (gint) view);
+#endif			
+		}
 		count++;
 	}
 	count = 0;
@@ -1055,14 +1078,32 @@ gedit_view_load_widgets (View *view)
 			while (sub_menu_ui_info[sub_count].type != GNOME_APP_UI_ENDOFINFO)
 			{
 				if (sub_menu_ui_info [sub_count].moreinfo == gedit_undo_undo)
+				{
 					view->toolbar->undo_menu_item = sub_menu_ui_info[sub_count].widget;
+					g_return_if_fail (GTK_IS_WIDGET(view->toolbar->undo_menu_item));
+					g_print ("<-undo menu item Widget 0x%x      view 0x%x toolbar: 0x%x\n",
+						 (gint) view->toolbar->undo_menu_item,
+						 (gint) view,
+						 (gint) view->toolbar);
+				}
 				if (sub_menu_ui_info [sub_count].moreinfo == gedit_undo_redo)
+				{
 					view->toolbar->redo_menu_item = sub_menu_ui_info[sub_count].widget;
+					g_return_if_fail (GTK_IS_WIDGET(view->toolbar->redo_menu_item));
+#if 0					
+					g_print ("<-redo menu item found count %i widget 0x%x view 0x%x toolbar: 0x%x\n",
+						 sub_count,
+						 (gint) view->toolbar->redo_menu_item,
+						 (gint) view,
+						 (gint) view->toolbar);
+#endif					
+				}
 				sub_count++;
 			}
 		}
 		else
 		{
+			g_print ("BORK !\n");
 			if (menu_ui_info [count].moreinfo == gedit_undo_undo)
 				view->toolbar->undo_menu_item = menu_ui_info[count].widget;
 			if (menu_ui_info [count].moreinfo == gedit_undo_redo)
@@ -1081,7 +1122,13 @@ void
 gedit_view_set_undo (View *view, gint undo_state, gint redo_state)
 {
 	gedit_debug (DEBUG_VIEW, "");
-	
+
+	g_print ("\nSet_undo. view:0x%x Widget: 0x%x  UNDO:%i  REDO:%i\n",
+		 (gint) view,
+		 (gint) view->toolbar->undo_menu_item,
+		 undo_state,
+		 redo_state);
+	g_return_if_fail (view != NULL);
 	g_return_if_fail (view->toolbar != NULL);
 	g_return_if_fail (view->toolbar->undo_button != NULL);
 	g_return_if_fail (view->toolbar->redo_button != NULL);
@@ -1091,7 +1138,7 @@ gedit_view_set_undo (View *view, gint undo_state, gint redo_state)
 	g_return_if_fail (GTK_IS_WIDGET (view->toolbar->redo_button));
 	g_return_if_fail (GTK_IS_WIDGET (view->toolbar->undo_menu_item));
 	g_return_if_fail (GTK_IS_WIDGET (view->toolbar->redo_menu_item));
-
+		 
 /*
   g_print ("Undo->button %i Redo->menu_button %i\n",
 		 (guint) view->toolbar->undo_button,

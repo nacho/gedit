@@ -90,6 +90,9 @@ gedit_prefs_save_settings (void)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 
+
+	gedit_plugin_save_settings ();
+	
 	gedit_debug (DEBUG_PREFS, "end");
 }
 
