@@ -1,5 +1,9 @@
 2000-06-02  Chema Celorio  <chema@celorio.com>
 
+	* undo.c (gedit_undo_check_size): implement.
+	checks the undo list size and deletes the objects
+	with levels < settings->undo_levels
+
 	* dialogs/dialog-prefs.c (apply_cb): added undo_levels_stuff
 	(undo_levels_toggled): new function
 	(prepare_documents_page): add undo levels stuff

@@ -34,6 +34,43 @@
 static void gedit_undo_free_list (GList **list_pointer);
 static gint gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guchar * text);
 
+static void
+gedit_undo_check_size (Document *doc)
+{
+	gint n;
+	gedit_undo *nth_undo;
+	
+	if (settings->undo_levels < 1)
+		return;
+	
+	/* No need to check for the redo list size, at least for now
+	   since the undo list gets freed on any call to gedit_undo_add */
+	if (g_list_length (doc->undo) > settings->undo_levels && settings->undo_levels > 0)
+	{
+		for (n=settings->undo_levels; n < g_list_length (doc->undo); n++)
+		{
+			nth_undo = g_list_nth_data (doc->undo, n);
+			doc->undo = g_list_remove (doc->undo, nth_undo);
+			g_free (nth_undo->text);
+			g_free (nth_undo);
+		}
+	}
+
+#if 0	
+	g_print("The undo list size is : %i taking %i bytes. Levels are set at :%i \n\n",
+		g_list_length (doc->undo),
+		g_list_length (doc->undo) * sizeof (gedit_undo),
+		settings->undo_levels);
+	for (n=0; n < g_list_length (doc->undo); n++)
+	{
+		nth_undo = g_list_nth_data (doc->undo, n);
+		if (nth_undo==NULL)
+			g_warning ("nth_undo==NULL");
+		g_print ("Level:%i Type :%i Text:%s Size:%i\n",
+			 n, nth_undo->action, nth_undo->text, nth_undo->end_pos - nth_undo->start_pos);
+	}
+#endif
+}
 
 void
 gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
@@ -62,11 +99,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 
 	doc->undo = g_list_prepend (doc->undo, undo);
 
-
-	g_print("The undo list size is : %i taking %i bytes. Levels are set at :%i \n\n",
-		g_list_length (doc->undo),
-		g_list_length (doc->undo) * sizeof (gedit_undo),
-		settings->undo_levels);
+	gedit_undo_check_size (doc);
 }
 
 
@@ -277,7 +310,6 @@ gedit_undo_free_list (GList ** list_pointer)
 		g_free (nth_redo);
 	}
 
-	g_print("Removed %i objects\n", n);
 	g_list_free (list);
 	*list_pointer = NULL;
 }
