@@ -5,23 +5,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2000-06-08 21:40+0200\n"
-"PO-Revision-Date: 2000-06-08 21:41+02:00\n"
+"POT-Creation-Date: 2000-06-12 20:19+0200\n"
+"PO-Revision-Date: 2000-06-12 20:20+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/browse/browse.c:170
+#: plugins/browse/browse.c:157
 msgid "Browse"
 msgstr "Bla gjennom"
 
-#: plugins/browse/browse.c:171
+#: plugins/browse/browse.c:158
 msgid "Web browse plugin"
 msgstr "Webleser tillegg"
 
-#: plugins/convert/convert.c:130
+#: plugins/convert/convert.c:150
 msgid "Convert"
 msgstr "Konverter"
 
@@ -30,7 +30,7 @@ msgstr "Konverter"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: plugins/convert/convert.c:131 plugins/convert/convert.glade.h:7
+#: plugins/convert/convert.c:151 plugins/convert/convert.glade.h:7
 msgid "Number Converter"
 msgstr "Tallkonverterer"
 
@@ -54,24 +54,24 @@ msgstr "Desimal til oktal"
 msgid "Hex to Decimal"
 msgstr "Heksadesimal til desimal"
 
-#: plugins/diff/diff.c:211
+#: plugins/diff/diff.c:199
 msgid "Diff"
 msgstr "Diff"
 
-#: plugins/diff/diff.c:212
+#: plugins/diff/diff.c:200
 msgid "Diff plugin."
 msgstr "Diff-tillegg."
 
-#: plugins/email/email.c:135 plugins/email/email.c:144 src/document.c:159
+#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:216
 #: src/print.c:475
 msgid "Untitled"
 msgstr "Navnløs"
 
-#: plugins/email/email.c:166
+#: plugins/email/email.c:172
 msgid "Email"
 msgstr "E-post"
 
-#: plugins/email/email.c:167
+#: plugins/email/email.c:173
 msgid "Email the current document"
 msgstr "Send aktivt dokument"
 
@@ -100,19 +100,19 @@ msgstr "Emne:"
 msgid "File to use as body of message: "
 msgstr "Fil som skal brukes til meldingskropp: "
 
-#: plugins/sample/sample.c:52
+#: plugins/sample/sample.c:43
 msgid "Hello World"
 msgstr "Hallo verden"
 
-#: plugins/sample/sample.c:53
+#: plugins/sample/sample.c:44
 msgid "Sample 'hello world' plugin."
 msgstr "Eksempel 'hallo verden' tillegg."
 
-#: plugins/time/time.c:97
+#: plugins/time/time.c:84
 msgid "Insert Time"
 msgstr "Sett inn tid"
 
-#: plugins/time/time.c:98
+#: plugins/time/time.c:85
 msgid "Inserts the current date and time"
 msgstr "Setter inn dagens dato og tid"
 
@@ -146,12 +146,12 @@ msgstr "gedit er en liten lettvekt tekst editor for GNOME/Gtk+"
 msgid "gedit: Preferences"
 msgstr "gedit: Brukervalg"
 
-#: src/dialogs/dialog-replace.c:172
+#: src/dialogs/dialog-replace.c:176
 #, c-format
 msgid "found and replaced %i occurrences."
 msgstr "fant og erstattet %i oppføringer."
 
-#: src/dialogs/dialog-replace.c:227 src/search.c:289
+#: src/dialogs/dialog-replace.c:241 src/search.c:288
 #, c-format
 msgid "Text found at line :%i"
 msgstr "Teksten funnet på linje :%i"
@@ -321,7 +321,7 @@ msgid "line(s)"
 msgstr "linje(r)"
 
 #: src/dialogs/prefs.glade.h:46
-msgid "_Potrait"
+msgid "_Portrait"
 msgstr "_Portrett"
 
 #: src/dialogs/prefs.glade.h:47
@@ -341,9 +341,9 @@ msgstr "Papir"
 msgid "Replace"
 msgstr "Erstatt"
 
-#: src/dialogs/replace.glade.h:8
-msgid "Find Next"
-msgstr "Finn neste"
+#: src/dialogs/replace.glade.h:8 src/menus.c:365
+msgid "Find"
+msgstr "Finn"
 
 #: src/dialogs/replace.glade.h:10
 msgid "Replace All"
@@ -371,16 +371,16 @@ msgstr "Sk_ill mellom store/små bokstaver"
 
 #. xgettext translators : RO = Read Only, it apears before
 #. the document "tab" in the mdi window like "R0 - file.txt"
-#: src/document.c:162
+#: src/document.c:219
 msgid "RO - "
 msgstr "RO - "
 
-#: src/document.c:344
+#: src/document.c:432
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' er endret. Vil du lagre den?"
 
-#: src/file.c:94
+#: src/file.c:98
 msgid ""
 "An error was encountered while opening the file.\n"
 "Please make sure the file exists."
@@ -388,7 +388,7 @@ msgstr ""
 "En feil oppstod under åpning av filen.\n"
 "Vennligst underøk in filen eksisterer."
 
-#: src/file.c:101
+#: src/file.c:105
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -407,11 +407,11 @@ msgstr ""
 "Vennligst underøk om filen er i bruk av en annen applikasjon og\n"
 "at filen ikke er tom."
 
-#: src/file.c:111 src/file.c:256
+#: src/file.c:115 src/file.c:336
 msgid "Could not allocate the required memory."
 msgstr "Kunne ikke hente nødvendig minne."
 
-#: src/file.c:117
+#: src/file.c:121
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -426,7 +426,7 @@ msgstr ""
 "\n"
 "Forsikre deg om at du har rettigheter til å åpne filen."
 
-#: src/file.c:171
+#: src/file.c:202
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -443,7 +443,7 @@ msgstr ""
 "Forsikre deg om at stien du oppga eksisterer, og at du har tilstrekkelige "
 "skriverettigheter."
 
-#: src/file.c:184
+#: src/file.c:215
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -460,7 +460,7 @@ msgstr ""
 "På grunn av en ukjent feil (1). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:198
+#: src/file.c:229
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -477,41 +477,41 @@ msgstr ""
 "På grunn av en ukjent feil (2). Vennligst rapportér problemet til "
 "submit@bugs.gnome.org"
 
-#: src/file.c:275
-msgid "Error in the pipe ."
-msgstr "Feil i røret."
-
-#: src/file.c:326
-msgid "Open File ..."
-msgstr "Åpne fil ..."
-
-#: src/file.c:367
+#: src/file.c:298
 msgid "Save As..."
 msgstr "Lagre som..."
 
-#: src/file.c:403
+#: src/file.c:355
+msgid "Error in the pipe ."
+msgstr "Feil i røret."
+
+#: src/file.c:406
+msgid "Open File ..."
+msgstr "Åpne fil ..."
+
+#: src/file.c:460
 #, c-format
 msgid "Loaded file %s"
 msgstr "Lastet fil %s"
 
-#: src/file.c:467
+#: src/file.c:545
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' er i ferd med å bli overskrevet. Vil du fortsette ?"
 
-#: src/file.c:478
+#: src/file.c:556
 msgid "Document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/file.c:487
+#: src/file.c:565
 msgid "Error saving file!"
 msgstr "Feil under lagring av fil!"
 
-#: src/file.c:560
+#: src/file.c:636
 msgid "You can't revert an Untitled document\n"
 msgstr "Du kan ikke forkaste et dokument uten tittel\n"
 
-#: src/file.c:573
+#: src/file.c:649
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -520,7 +520,7 @@ msgstr ""
 "Er du sikker på at du vil forkaste alle endringer?\n"
 "(%s)"
 
-#: src/file.c:602
+#: src/file.c:678
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Filen ``%s'' eksisterer ikke. Vil du opprette den?"
@@ -715,14 +715,10 @@ msgid "Paste the clipboard"
 msgstr "Lim inn utklippstavlen"
 
 #: src/menus.c:365
-msgid "Find"
-msgstr "Finn"
-
-#: src/menus.c:365
 msgid "Search for a string"
 msgstr "Søk etter en streng"
 
-#: src/menus.c:369 src/window.c:78
+#: src/menus.c:369 src/window.c:80
 msgid "Line"
 msgstr "Linje"
 
@@ -777,7 +773,7 @@ msgstr "_Fil/"
 msgid "_File"
 msgstr "_Fil"
 
-#: src/search.c:191
+#: src/search.c:190
 msgid ""
 "Can't count lines if another search operation is active, please close the "
 "search dialog."
@@ -785,7 +781,7 @@ msgstr ""
 "Kan ikke telle linjer hvis et annet søk er aktivt. Vennligst lukk den andre "
 "søkedialogen."
 
-#: src/search.c:206
+#: src/search.c:205
 #, c-format
 msgid ""
 "Filename: %s\n"
@@ -798,22 +794,25 @@ msgstr ""
 "Totalt antall linjer: %i\n"
 "Nåværende linje: %i"
 
-#: src/search.c:231
+#: src/search.c:230
 msgid "Text not found"
 msgstr "Teksten ble ikke funnet"
 
-#: src/search.c:236
+#: src/search.c:235
 msgid "Text not found."
 msgstr "Teksten ble ikke funnet."
 
-#: src/search.c:267
+#: src/search.c:266
 msgid "Can't find again. There is not a text string to search for."
 msgstr "Kan ikke søke igjen. Ingen tekststreng å søke etter."
 
-#: src/window.c:77
+#: src/window.c:79
 msgid "Filename"
 msgstr "Filnavn"
 
-#: src/window.c:79
+#: src/window.c:81
 msgid "Contents"
 msgstr "Innhold"
+
+#~ msgid "Find Next"
+#~ msgstr "Finn neste"
