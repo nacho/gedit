@@ -1262,7 +1262,7 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	bonobo_ui_component_freeze (ui_component, NULL);
 	
 	gedit_plugins_engine_update_plugins_ui (active_window, FALSE);
-
+	
 	if (active_child == NULL)
 	{
 		gedit_menus_set_verb_list_sensitive (ui_component, 
@@ -1274,6 +1274,9 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_all_sensible_verbs, TRUE);
 	}
+
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/DocumentsMoveToNewWindow",
+				(bonobo_mdi_n_children_for_window (active_window) > 1) ? TRUE : FALSE);
 
 	doc = GEDIT_MDI_CHILD (active_child)->document;
 	g_return_if_fail (doc != NULL);

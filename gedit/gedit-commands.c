@@ -399,6 +399,19 @@ gedit_cmd_settings_preferences (BonoboUIComponent *uic, gpointer user_data, cons
 	gtk_widget_show (dlg);
 }
 
+void
+gedit_cmd_documents_move_to_new_window (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
+{
+	GeditView *view;
+
+	gedit_debug (DEBUG_COMMANDS, "");
+
+	view = gedit_get_active_view ();
+	g_return_if_fail (view != NULL);
+
+	bonobo_mdi_move_view_to_new_window (BONOBO_MDI (gedit_mdi), GTK_WIDGET (view));
+}
+
 void 
 gedit_cmd_help_contents (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {

@@ -1,3 +1,15 @@
+2002-12-04  Paolo Maggi <maggi@athena.polito.it>
+
+	* gedit-commands.[ch] (gedit_cmd_documents_move_to_new_window): new function
+
+	* gedit-mdi.c (gedit_mdi_set_active_window_verbs_sensitivity): set the sensitivity
+	of DocumentsMoveToNewWindow verb
+
+	* gedit-menus.c: added DocumentsMoveToNewWindow to gedit_verbs and 
+	gedit_menus_no_docs_sensible_verb
+
+	* gedit-ui.xml: added a "Move to New Window" item to the Documents menu
+	
 2002-12-03  Paolo Maggi <maggi@athena.polito.it>
 
 	* gedit-commands.c (TO_BE_IMPLEMENTED): removed

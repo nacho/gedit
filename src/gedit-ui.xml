@@ -11,7 +11,7 @@
 	_tip="Save the current file" pixtype="stock" pixname="gtk-save"
 	accel="*Control*S"/>
 	
-	<cmd name="FileSaveAll" _label="Save All"
+	<cmd name="FileSaveAll" _label="_Save All"
         _tip="Save all open files" pixtype="stock" pixname="gtk-save"
 	accel="*Shift**Control*L"/>
 
@@ -43,7 +43,7 @@
 	_tip="Close the current file" pixtype="stock" pixname="gtk-close"
 	accel="*Control*W"/>
 
-	<cmd name="FileCloseAll" _label="Close All"
+	<cmd name="FileCloseAll" _label="_Close All"
 	_tip="Close all open files" pixtype="stock" pixname="gtk-close"
 	accel="*Shift**Control*W"/>
 
@@ -120,6 +120,7 @@
 	
 	<cmd name="BonoboCustomize" _label="Customize" _tip="Customize toolbars"/>
 
+	<cmd name="DocumentsMoveToNewWindow" _label="_Move to New Window" _tip="Move the current document to a new window"/>
 
 	<cmd name="HelpContents" _label="_Contents" _tip="Open the gedit manual"
 	accel="F1" pixtype="stock" pixname="gtk-help"/>
@@ -280,19 +281,25 @@
 
 	<placeholder name="DocumentsOps_2" delimit="top" />
 
-	<menuitem name="FileSaveAll" verb="" _label="_Save All"/>
+	<menuitem name="FileSaveAll" verb=""/> 
 
-	<menuitem name="FileCloseAll" verb="" _label="_Close All"/>
+	<menuitem name="FileCloseAll" verb=""/>
 
 	<placeholder name="DocumentsOps_3" />
 
-	<placeholder name="DocumentsOps_4" delimit="top"/>
+	<separator/>
+
+	<menuitem name="DocumentsMoveToNewWindow" verb=""/>
+
+	<placeholder name="DocumentsOps_4" />
+
+	<placeholder name="DocumentsOps_5" delimit="top"/>
 
 	<placeholder name="OpenDocuments" delimit="top"/>
  
-	<placeholder name="DocumentsOps_5" delimit="top"/>
+	<placeholder name="DocumentsOps_6" delimit="top"/>
 	
-	<placeholder name="DocumentsOps_6" delimit="top"/>	
+	<placeholder name="DocumentsOps_7" delimit="top"/>	
 
 </submenu>
 

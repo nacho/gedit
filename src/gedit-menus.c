@@ -62,6 +62,7 @@ BonoboUIVerb gedit_verbs [] = {
 	BONOBO_UI_VERB ("SearchReplace", gedit_cmd_search_replace),
 	BONOBO_UI_VERB ("SearchGoToLine", gedit_cmd_search_goto_line),
 	BONOBO_UI_VERB ("SettingsPreferences", gedit_cmd_settings_preferences),
+	BONOBO_UI_VERB ("DocumentsMoveToNewWindow", gedit_cmd_documents_move_to_new_window),
 	BONOBO_UI_VERB ("HelpContents", gedit_cmd_help_contents),
 	BONOBO_UI_VERB ("About", gedit_cmd_help_about),
 
@@ -101,7 +102,7 @@ gchar* gedit_menus_no_docs_sensible_verbs [] = {
 	"/commands/SearchFindAgain",
 	"/commands/SearchReplace",
 	"/commands/SearchGoToLine",
-
+	"/commands/DocumentsMoveToNewWindow",
 	NULL
 };
 
