@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit
  *
@@ -70,6 +69,8 @@ void	gedit_view_set_selection (View *view, guint  start, guint  end);
 gint	gedit_view_get_selection (View *view, guint *start, guint *end);
 void	gedit_view_add_cb (GtkWidget *widget, gpointer data);
 void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
+void	gedit_view_load_toolbar_widgets (View *view);
+void	gedit_view_set_undo (View *view, gint undo_state, gint redo_state);
 
 static void gedit_view_update_line_indicator (void);
 static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
@@ -94,18 +95,31 @@ void
 gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 {
 	View *view = gedit_view_current();
-	GnomeApp *app = gedit_window_active_app();
+	Document *doc = view->doc;
+	gint undo_state, redo_state;
 
 	gedit_debug ("start", DEBUG_DOCUMENT);
 
-	g_return_if_fail (app !=NULL);
 	g_return_if_fail (view!=NULL);
 		
 	gtk_widget_grab_focus (view->text);
 	gedit_document_set_title (view->doc);
-	gedit_debug ("install hints", DEBUG_DOCUMENT);
-	gnome_app_install_menu_hints (app,
-				      gnome_mdi_get_child_menu_info(app));
+
+	/*
+	view->gnome_app = gedit_window_active_app();
+	*/
+	
+	gedit_view_load_toolbar_widgets (view);
+	if (g_list_length(doc->undo) == 0)
+		undo_state = GEDIT_UNDO_STATE_FALSE;
+	else
+		undo_state = GEDIT_UNDO_STATE_TRUE;
+	if (g_list_length(doc->redo) == 0)
+		redo_state = GEDIT_UNDO_STATE_FALSE;
+	else
+		redo_state = GEDIT_UNDO_STATE_TRUE;
+	gedit_view_set_undo (view, undo_state, redo_state);
+	gedit_view_set_undo (view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
 
 	gedit_debug ("end", DEBUG_DOCUMENT);
 }
@@ -259,7 +273,7 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 	strncpy (text_to_insert, insertion_text, length);
 
 	if (undo)
-		gedit_undo_add (text_to_insert, position, (position + length), GEDIT_UNDO_INSERT, doc, view);
+		gedit_undo_add (text_to_insert, position, (position + length), GEDIT_UNDO_ACTION_INSERT, doc, view);
 	
 	if (!exclude_this_view)
 		gedit_views_insert (doc, position, text_to_insert, length, NULL);
@@ -285,7 +299,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 
 	text_to_delete = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
 	if (undo)
-		gedit_undo_add (text_to_delete, start_pos, end_pos, GEDIT_UNDO_DELETE, doc, view);
+		gedit_undo_add (text_to_delete, start_pos, end_pos, GEDIT_UNDO_ACTION_DELETE, doc, view);
 	g_free (text_to_delete);
 	
 	if (!exclude_this_view)
@@ -408,8 +422,8 @@ gedit_view_class_init (ViewClass *klass)
 	widget_class->size_request = gedit_view_size_request;
 	widget_class->expose_event = gedit_view_expose;
 	widget_class->realize = gedit_view_realize;
-	object_class->finalize = gedit_view_finalize;
-	parent_class = gtk_type_class (gtk_vbox_get_type ());*/
+	object_class->finalize = gedit_view_finalize;*/
+	parent_class = gtk_type_class (gtk_vbox_get_type ());
 }
 
 static void
@@ -450,7 +464,10 @@ gedit_view_init (View *view)
 	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
 
-	/* Hook the button & key pressed events */
+	/* Toolbar */
+	view->toolbar = NULL;
+
+        /* Hook the button & key pressed events */
 	gtk_signal_connect (GTK_OBJECT (view->text), "button_press_event",
 			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
 	gtk_signal_connect (GTK_OBJECT (view->text), "key_press_event",
@@ -583,7 +600,7 @@ gedit_view_get_type (void)
 	{
 		GtkTypeInfo gedit_view_info =
 		{
-	  		"gedit_view",
+	  		"gedit_view1",
 	  		sizeof (View),
 	  		sizeof (ViewClass),
 	  		(GtkClassInitFunc) gedit_view_class_init,
@@ -961,3 +978,111 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 
 	return TRUE;
 }
+
+
+/* WHY is this in gnome-mdi.c and not gnome-mdi.h ????????? Ask Jaka.
+   Chema */
+#define GNOME_MDI_TOOLBAR_INFO_KEY		"MDIToolbarUIInfo"
+/* FIXME : This is not nice. But we can't use the toolbar labels since
+ */
+void
+gedit_view_load_toolbar_widgets (View *view)
+{
+	GnomeUIInfo *toolbar_ui_info;
+	gint count;
+
+	gedit_debug ("", DEBUG_VIEW);
+
+	toolbar_ui_info = gtk_object_get_data (GTK_OBJECT (gedit_window_active_app()),
+					       GNOME_MDI_TOOLBAR_INFO_KEY);
+
+	if (!view->toolbar)
+	{
+		view->toolbar = g_malloc (sizeof (GeditToolbar));
+		view->toolbar->undo = FALSE;
+		view->toolbar->redo = FALSE;
+	}
+	
+	count = 0;
+	while (toolbar_ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
+	{
+		if (toolbar_ui_info [count].moreinfo == gedit_undo_undo)
+			view->toolbar->undo_button = toolbar_ui_info[count].widget;
+		if (toolbar_ui_info [count].moreinfo == gedit_undo_redo)
+			view->toolbar->redo_button = toolbar_ui_info[count].widget;
+		count++;
+	}
+
+	g_return_if_fail (view->toolbar->undo_button != NULL);
+	g_return_if_fail (view->toolbar->redo_button != NULL);
+}
+
+void
+gedit_view_set_undo (View *view, gint undo_state, gint redo_state)
+{
+	gedit_debug ("", DEBUG_VIEW);
+	
+	g_return_if_fail (view->toolbar != NULL);
+	g_return_if_fail (view->toolbar->undo_button != NULL);
+	g_return_if_fail (view->toolbar->redo_button != NULL);
+
+#if 0
+	g_print ("undo state %i redo state %i\n", undo_state, redo_state);
+	g_print ("view->toolbar->undo :%i view->toolbar->redo:%i FALSE:%i\n",
+		 view->toolbar->undo,
+		 view->toolbar->redo,
+		 FALSE);
+#endif	
+	/* Set undo */
+	switch (undo_state)
+	{
+	case GEDIT_UNDO_STATE_TRUE:
+		if (!view->toolbar->undo)
+		{
+			view->toolbar->undo = TRUE;
+			gtk_widget_set_sensitive (view->toolbar->undo_button, TRUE);
+		}
+		break;
+	case GEDIT_UNDO_STATE_FALSE:
+		if (view->toolbar->undo)
+		{
+			view->toolbar->undo = FALSE;
+			gtk_widget_set_sensitive (view->toolbar->undo_button, FALSE);
+		}
+		break;
+	case GEDIT_UNDO_STATE_UNCHANGED:
+		break;
+	case GEDIT_UNDO_STATE_REFRESH:
+		gtk_widget_set_sensitive (view->toolbar->undo_button, view->toolbar->undo);
+		break;
+	default:
+		g_warning ("Undo state not recognized");
+	}
+	
+	/* Set redo*/
+	switch (redo_state)
+	{
+	case GEDIT_UNDO_STATE_TRUE:
+		if (!view->toolbar->redo)
+		{
+			view->toolbar->redo = TRUE;
+			gtk_widget_set_sensitive (view->toolbar->redo_button, TRUE);
+		}
+		break;
+	case GEDIT_UNDO_STATE_FALSE:
+		if (view->toolbar->redo)
+		{
+			view->toolbar->redo = FALSE;
+			gtk_widget_set_sensitive (view->toolbar->redo_button, FALSE);
+		}
+		break;
+	case GEDIT_UNDO_STATE_UNCHANGED:
+		break;
+	case GEDIT_UNDO_STATE_REFRESH:
+		gtk_widget_set_sensitive (view->toolbar->redo_button, view->toolbar->redo);
+		break;
+	default:
+		g_warning ("Undo state not recognized");
+	}
+}
+		

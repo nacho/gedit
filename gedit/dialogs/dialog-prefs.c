@@ -63,8 +63,6 @@ static GtkWidget *undo_levels;
 static GtkWidget *undo_levels_spin_button;
 static GtkWidget *undo_levels_label;
 
-void gedit_window_refresh (void);
-
 static gint
 gtk_option_menu_get_active_index (GtkWidget *omenu)
 {
@@ -96,65 +94,6 @@ gtk_option_menu_get_active_index (GtkWidget *omenu)
 }
 
 
-void
-gedit_window_refresh (void)
-{
-	gint i, j;
-	View *view, *nth_view;
-	Document *doc;
-	GtkStyle *style;
-	GdkColor *bg, *fg;
-
-	gedit_debug("", DEBUG_PREFS);
-
-	view = gedit_view_current();
-			
-	gedit_window_set_status_bar (settings->show_status);
-	gedit_window_set_toolbar_labels ();
-
-	/* the "Default" mode is index 3, but GNOME_MDI_DEFAULT_MODE
-           is for some silly reason defined as 42 in gnome-mdi.h */
-	if (settings->mdi_mode != 3)
-		gnome_mdi_set_mode (mdi, settings->mdi_mode);
-	else
-		gnome_mdi_set_mode (mdi, GNOME_MDI_DEFAULT_MODE);
-
-	tab_pos (settings->tab_pos);
-
-	if (view==NULL)
-		return;
-
-	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
-
-	bg = &style->base[0];
-	bg->red = settings->bg[0];
-	bg->green = settings->bg[1];
-	bg->blue = settings->bg[2];
-
-	fg = &style->text[0];
-	fg->red = settings->fg[0];
-	fg->green = settings->fg[1];
-	fg->blue = settings->fg[2];
-
-	for (i = 0; i < g_list_length (mdi->children); i++)
-	{
-		doc = DOCUMENT (g_list_nth_data (mdi->children, i));
-  	
-		for (j = 0; j < g_list_length (doc->views); j++)
-		{
-			nth_view = g_list_nth_data (doc->views, j);
-			gedit_view_set_word_wrap (nth_view, settings->word_wrap);
-
-			gtk_widget_set_style (GTK_WIDGET (nth_view->text),
-					      style);
-			gedit_view_set_font (nth_view, settings->font);
-#ifdef ENABLE_SPLIT_SCREEN
-			gedit_view_set_split_screen ( nth_view, (gint) settings->splitscreen);
-#endif	
-		}
-	}
-}
-
 static void
 destroy_cb (void)
 {
@@ -179,6 +118,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 {
 	GtkStyle *style;
 	GdkColor *c;
+	gint temp_mdi_mode;
 	
 	gedit_debug("", DEBUG_PREFS);
 	
@@ -208,7 +148,6 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 		
 	}
 
-	g_print ("Toolbar Labels %i\n", settings->toolbar_labels);
 #endif
 
 #ifdef ENABLE_SPLIT_SCREEN
@@ -224,9 +163,6 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 		g_free (settings->font);
 #endif	
 	settings->font = g_strdup (gnome_font_picker_get_font_name (GNOME_FONT_PICKER (defaultfont)));
-	settings->mdi_mode = gtk_option_menu_get_active_index (mdimode);
-	settings->mdi_mode = settings->mdi_mode != 3 ? settings->mdi_mode : GNOME_MDI_DEFAULT_MODE;
-	settings->tab_pos = gtk_option_menu_get_active_index (tabpos);
 
 	if (gtk_radio_group_get_selected (GTK_RADIO_BUTTON(print_orientation_portrait_radio_button)->group)==0)
 		settings->print_orientation = PRINT_ORIENT_PORTRAIT;
@@ -274,7 +210,21 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
         settings->fg[2] = c->blue;
 
 	gtk_style_unref (style);
-	gedit_window_refresh ();
+
+
+	temp_mdi_mode = gtk_option_menu_get_active_index (mdimode);
+	temp_mdi_mode = temp_mdi_mode != 3 ? temp_mdi_mode : GNOME_MDI_DEFAULT_MODE;
+
+	if (settings->mdi_mode != temp_mdi_mode)
+	{
+		settings->mdi_mode = temp_mdi_mode;
+		gedit_window_refresh_all (TRUE);
+	}
+	else
+	{
+		gedit_window_refresh_all (FALSE);
+	}
+
 	gedit_prefs_save_settings ();
 }
 

@@ -31,8 +31,51 @@
 typedef struct _View	  View;
 typedef struct _ViewClass ViewClass;
 
+typedef struct _GeditToolbar GeditToolbar;
+
+struct _GeditToolbar
+{
+	/*
+	GtkWidget *new_button;
+	GtkWidget *open_button;
+	GtkWidget *save_button;
+	GtkWidget *close_button;
+	GtkWidget *print_button;
+	*/
+	GtkWidget *undo_button;
+	GtkWidget *redo_button;
+	/*
+	GtkWidget *cut_button;
+	GtkWidget *copy_button;
+	GtkWidget *paste_button;
+	GtkWidget *find_button;
+	GtkWidget *info_button;
+	GtkWidget *exit_button;
+	*/
+
+	/*
+	gint new : 1;
+	gint open : 1;
+	gint save : 1;
+	gint close : 1;
+	gint print : 1;
+	*/
+	gint undo : 1;
+	gint redo : 1;
+	/*
+	gint cut : 1;
+	gint copy : 1;
+	gint paste : 1;
+	gint find : 1;
+	gint info : 1;
+	gint exit : 1;
+	*/
+};
+
 struct _View
 {
+	GnomeApp *gnome_app;
+
 	GtkVBox box;
 	
 	Document *doc;
@@ -58,13 +101,17 @@ struct _View
 	guint word_wrap : 1;
 	guint line_wrap : 1;
 	guint readonly : 1;
-	
+
+	/* We need to have different toolbars
+	   since mdi_mode =TOP_LEVEL will have multiple
+	   toolbars. In most cases the widgets pointed by the
+	   different views will be the same. */
+	GeditToolbar *toolbar;
 };
 
 struct _ViewClass
 {
 	GtkVBoxClass parent_class;
-	
 	void (*cursor_moved)(View *view);
 };
 
@@ -99,5 +146,10 @@ void	gedit_view_set_selection	(View *view, guint start, guint end);
 gint	gedit_view_get_selection	(View *view, guint *start, guint *end);
 void	gedit_view_set_position		(View *view, gint pos);
 guint	gedit_view_get_position		(View *view);
+
+/* toolbar */
+void	gedit_view_load_toolbar_widgets (View *view);
+void	gedit_view_set_undo (View *view, gint undo_state, gint redo_state);
+
 
 #endif /* __VIEW_H__ */

@@ -64,6 +64,7 @@ void gedit_mdi_init (void);
 void gedit_document_load ( GList *file_list);
 void gedit_document_set_title (Document *doc);
 void gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data);
+void gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state);
 
 /**
  * gedit_document_insert_text: Inserts text to a document and hadles all the details like
@@ -166,14 +167,14 @@ gedit_document_replace_text (Document *doc, guchar * text_to_insert, guint posit
 		gedit_undo_add (text_to_delete,
 				position,
 				position + length,
-				GEDIT_UNDO_REPLACE_DELETE,
+				GEDIT_UNDO_ACTION_REPLACE_DELETE,
 				doc,
 				NULL);
 
 		gedit_undo_add (text_to_insert,
 				position,
 				position + text_to_insert_length,
-				GEDIT_UNDO_REPLACE_INSERT,
+				GEDIT_UNDO_ACTION_REPLACE_INSERT,
 				doc,
 				NULL);
 	}
@@ -345,7 +346,7 @@ gedit_document_new (void)
 
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-
+	
 	gedit_debug ("end", DEBUG_DOCUMENT);
 
 	return doc;
@@ -582,10 +583,7 @@ gedit_mdi_init (void)
 	gnome_mdi_open_toplevel (mdi);
 
 	/* Loads the structure gedit_toolbar with the widgets */
-	gedit_window_set_toolbar_labels ();
-	gedit_window_load_toolbar_widgets ();
-
-	gedit_window_set_status_bar ();
+	gedit_window_set_toolbar_labels (mdi->active_window);
 
 	gedit_debug ("end", DEBUG_DOCUMENT);
 }
@@ -749,3 +747,21 @@ gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data)
 	
 	gedit_document_new_with_file (new_file_name);
 }
+
+void
+gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state)
+{
+	View *nth_view;
+	gint n;
+	
+	gedit_debug ("", DEBUG_DOCUMENT);
+	
+	g_return_if_fail (doc!=NULL);
+
+	for ( n=0; n < g_list_length (doc->views); n++)
+	{
+		nth_view = g_list_nth_data (doc->views, n);
+		gedit_view_set_undo (nth_view, undo_state, redo_state);
+	}
+}
+

@@ -88,7 +88,7 @@ gedit_undo_check_size (Document *doc)
  * @text: 
  * @start_pos: 
  * @end_pos: 
- * @action: either GEDIT_UNDO_INSERT or GEDIT_UNDO_DELETE
+ * @action: either GEDIT_UNDO_ACTION_INSERT or GEDIT_UNDO_ACTION_DELETE
  * @doc: 
  * @view: The view so that we save the scroll bar position.
  * 
@@ -108,12 +108,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 	gedit_undo_free_list (&doc->redo);
 
 	/* Set the redo sensitivity */
-	if (gedit_toolbar->redo)
-	{
-		gedit_toolbar->redo = FALSE;
-		gtk_widget_set_sensitive (gedit_toolbar->redo_button, FALSE);
-	}
-
+	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_UNCHANGED, GEDIT_UNDO_STATE_FALSE);
 
 	if (gedit_undo_merge( doc->undo, start_pos, end_pos, action, text))
 		return;
@@ -137,12 +132,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 
 	gedit_undo_check_size (doc);
 
-	/* Undo add was succesfull, set the toolbar button sensitivity */
-	if (!gedit_toolbar->undo)
-	{
-		gedit_toolbar->undo = TRUE;
-		gtk_widget_set_sensitive (gedit_toolbar->undo_button, TRUE);
-	}
+	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_TRUE, GEDIT_UNDO_STATE_UNCHANGED);
 }
 
 
@@ -210,14 +200,14 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 		return FALSE;
 	}
 
-	if (action == GEDIT_UNDO_REPLACE_INSERT || action == GEDIT_UNDO_REPLACE_DELETE)
+	if (action == GEDIT_UNDO_ACTION_REPLACE_INSERT || action == GEDIT_UNDO_ACTION_REPLACE_DELETE)
 	{
 		gedit_debug ("We don't merge replaced strings...", DEBUG_UNDO);
 		last_undo->mergeable = FALSE;
 		return FALSE;
 	}
 
-	if (action == GEDIT_UNDO_DELETE)
+	if (action == GEDIT_UNDO_ACTION_DELETE)
 	{
 		if (last_undo->start_pos!=end_pos && last_undo->start_pos != start_pos)
 		{
@@ -261,7 +251,7 @@ gedit_undo_merge (GList *list, guint start_pos, guint end_pos, gint action, guch
 			last_undo->text = temp_string;
 		}
 	}
-	else if (action == GEDIT_UNDO_INSERT)
+	else if (action == GEDIT_UNDO_ACTION_INSERT)
 	{
 		if (last_undo->end_pos != start_pos)
 		{
@@ -330,45 +320,39 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 	gedit_view_set_window_position (gedit_view_current(), undo->window_position);
 
 	switch (undo->action){
-	case GEDIT_UNDO_DELETE:
+	case GEDIT_UNDO_ACTION_DELETE:
 		gedit_document_insert_text (doc, undo->text, undo->start_pos, FALSE);
 		break;
-	case GEDIT_UNDO_INSERT:
+	case GEDIT_UNDO_ACTION_INSERT:
 		gedit_document_delete_text (doc, undo->start_pos, undo->end_pos-undo->start_pos, FALSE);
 		break;
-	case GEDIT_UNDO_REPLACE_INSERT:
+	case GEDIT_UNDO_ACTION_REPLACE_INSERT:
 		gedit_document_delete_text (doc, undo->start_pos, undo->end_pos-undo->start_pos, FALSE);
 		/* "pull" another data structure from the list */
 		undo = g_list_nth_data (doc->undo, 0);
 		g_return_if_fail (undo!=NULL);
 		doc->redo = g_list_prepend (doc->redo, undo);
 		doc->undo = g_list_remove (doc->undo, undo);
-		g_return_if_fail (undo->action==GEDIT_UNDO_REPLACE_DELETE);
+		g_return_if_fail (undo->action==GEDIT_UNDO_ACTION_REPLACE_DELETE);
 		gedit_document_insert_text (doc, undo->text, undo->start_pos, FALSE);
 		break;
-	case GEDIT_UNDO_REPLACE_DELETE:
+	case GEDIT_UNDO_ACTION_REPLACE_DELETE:
 		g_warning ("This should not happen. UNDO_REPLACE_DELETE");
 		break;
 	default:
 		g_assert_not_reached ();
 	}
 
-	/* There are some problems with this. Chema 
+	/* FIXME: There are some problems with this. Chema 
 	if (doc->changed != undo->status)
 	{
 		doc->changed = undo->status;
 		gedit_document_set_title (doc);
 	}*/
-	if (!gedit_toolbar->redo)
-	{
-		gedit_toolbar->redo = TRUE;
-		gtk_widget_set_sensitive (gedit_toolbar->redo_button, TRUE);
-	}
+	
+	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_UNCHANGED, GEDIT_UNDO_STATE_TRUE);
 	if (g_list_length (doc->undo) == 0)
-	{
-		gedit_toolbar->undo = FALSE;
-		gtk_widget_set_sensitive (gedit_toolbar->undo_button, FALSE);
-	}
+		gedit_document_set_undo (doc, GEDIT_UNDO_STATE_FALSE, GEDIT_UNDO_STATE_UNCHANGED);
 }
 
 /**
@@ -405,23 +389,23 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	gedit_view_set_window_position (gedit_view_current(), redo->window_position);
 				  
 	switch (redo->action){
-	case GEDIT_UNDO_INSERT:
+	case GEDIT_UNDO_ACTION_INSERT:
 		gedit_document_insert_text (doc, redo->text, redo->start_pos, FALSE);
 		break;
-	case GEDIT_UNDO_DELETE:
+	case GEDIT_UNDO_ACTION_DELETE:
 		gedit_document_delete_text (doc, redo->start_pos, redo->end_pos-redo->start_pos, FALSE);
 		break;
-	case GEDIT_UNDO_REPLACE_DELETE:
+	case GEDIT_UNDO_ACTION_REPLACE_DELETE:
 		gedit_document_delete_text (doc, redo->start_pos, redo->end_pos-redo->start_pos, FALSE);
 		/* "pull" another data structure from the list */
 		redo = g_list_nth_data (doc->redo, 0);
 		g_return_if_fail (redo!=NULL);
 		doc->undo = g_list_prepend (doc->undo, redo);
 		doc->redo = g_list_remove (doc->redo, redo);
-		g_return_if_fail (redo->action==GEDIT_UNDO_REPLACE_INSERT);
+		g_return_if_fail (redo->action==GEDIT_UNDO_ACTION_REPLACE_INSERT);
 		gedit_document_insert_text (doc, redo->text, redo->start_pos, FALSE);
 		break;
-	case GEDIT_UNDO_REPLACE_INSERT:
+	case GEDIT_UNDO_ACTION_REPLACE_INSERT:
 		g_warning ("This should not happen. Redo: UNDO_REPLACE_INSERT");
 		break;
 	default:
@@ -436,16 +420,9 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	}
 	*/
 
-	if (!gedit_toolbar->undo)
-	{
-		gedit_toolbar->undo = TRUE;
-		gtk_widget_set_sensitive (gedit_toolbar->undo_button, TRUE);
-	}
+	gedit_document_set_undo (doc, GEDIT_UNDO_STATE_TRUE, GEDIT_UNDO_STATE_UNCHANGED);
 	if (g_list_length (doc->redo) == 0)
-	{
-		gedit_toolbar->redo = FALSE;
-		gtk_widget_set_sensitive (gedit_toolbar->redo_button, FALSE);
-	}
+		gedit_document_set_undo (doc, GEDIT_UNDO_STATE_UNCHANGED, GEDIT_UNDO_STATE_FALSE);
 }
 
 

@@ -47,10 +47,10 @@ GnomeApp *	gedit_window_active_app (void);
 
 void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 void	gedit_window_set_auto_indent (gint auto_indent);
-void	gedit_window_set_status_bar (void);
+void	gedit_window_set_status_bar (GnomeApp *app);
 void	gedit_window_refresh_toolbar (void);
-void	gedit_window_set_toolbar_labels (void);
-void	gedit_window_load_toolbar_widgets (void);
+void	gedit_window_refresh_all (gint mdi_mode_changed);
+void	gedit_window_set_toolbar_labels (GnomeApp *app);
 
 static void	gedit_window_set_icon (GtkWidget *window, char *icon);
 
@@ -100,11 +100,10 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 
 	/* Set the status bar */
 	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-	gnome_app_set_statusbar (GNOME_APP (mdi->active_window),
+	gnome_app_set_statusbar (app,
 				 GTK_WIDGET (statusbar));
-	if (settings->show_status)
-		gtk_widget_show (statusbar);
-	gnome_app_install_menu_hints (GNOME_APP (mdi->active_window),
+	gedit_window_set_status_bar (app);
+	gnome_app_install_menu_hints (app,
 				      gnome_mdi_get_menubar_info (mdi->active_window));
 
 	/* Set the window prefs. */
@@ -114,12 +113,11 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 
 	/* Add the recent files */
 	settings->num_recent = 0;
-	gedit_recent_update (GNOME_APP (app));
+	gedit_recent_update (app);
 
 	/* Add the plugins to the menus */
 	gedit_plugins_window_add (app);
 
-	
 
 }
 
@@ -152,124 +150,39 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 }
 
 void
-gedit_window_set_status_bar (void)
+gedit_window_set_status_bar (GnomeApp *app)
 {
 	gedit_debug ("", DEBUG_WINDOW);
 
-	if (mdi->active_window->statusbar->parent)
+	
+	if (app->statusbar->parent)
 	{
 		if (settings->show_status)
 			return;
-		gtk_widget_ref (mdi->active_window->statusbar);
-		gtk_container_remove (GTK_CONTAINER (mdi->active_window->statusbar->parent),
-				      mdi->active_window->statusbar);
+		gtk_widget_ref (app->statusbar);
+		gtk_container_remove (GTK_CONTAINER (app->statusbar->parent),
+				      app->statusbar);
 	}
 	else 
 	{
 		if (!settings->show_status)
 			return;
-		gtk_box_pack_start (GTK_BOX (mdi->active_window->vbox),
-				    mdi->active_window->statusbar,
+		gtk_box_pack_start (GTK_BOX (app->vbox),
+				    app->statusbar,
 				    FALSE, FALSE, 0);
-		gtk_widget_unref (GNOME_APP (mdi->active_window)->statusbar);
+		gtk_widget_unref (app->statusbar);
 	}
 }
 
-/* WHY is this in gnome-mdi.c and not gnome-mdi.h ????????? Ask Jaka.
-   Chema */
-#define GNOME_MDI_TOOLBAR_INFO_KEY		"MDIToolbarUIInfo"
-/* FIXME : This is not nice. But we can't use the toolbar labels since
- */
-void
-gedit_window_load_toolbar_widgets (void)
-{
-	GnomeUIInfo *toolbar_ui_info;
-	gint count;
-	
-	gedit_debug ("", DEBUG_WINDOW);
-
-	toolbar_ui_info = gtk_object_get_data (GTK_OBJECT (gedit_window_active()), GNOME_MDI_TOOLBAR_INFO_KEY);
-
-	if (!gedit_toolbar)
-		gedit_toolbar = g_malloc (sizeof (GeditToolbar));
-
-	count = 0;
-	while (toolbar_ui_info[count].type != GNOME_APP_UI_ENDOFINFO)
-	{
-		if (toolbar_ui_info [count].moreinfo == gedit_undo_undo)
-			gedit_toolbar->undo_button = toolbar_ui_info[count].widget;
-		if (toolbar_ui_info [count].moreinfo == gedit_undo_redo)
-			gedit_toolbar->redo_button = toolbar_ui_info[count].widget;
-		count++;
-	}
-
-	g_return_if_fail (gedit_toolbar->undo_button != NULL);
-	g_return_if_fail (gedit_toolbar->redo_button != NULL);
-
-	/* initialy both undo and redo are unsensitive */
-	gtk_widget_set_sensitive (gedit_toolbar->undo_button, FALSE);
-	gtk_widget_set_sensitive (gedit_toolbar->redo_button, FALSE);
-	gedit_toolbar->undo = FALSE;
-	gedit_toolbar->redo = FALSE;
-
-}
-
-#if 0
-void
-gedit_window_refresh_toolbar (void)
-{
-	GnomeApp *app;
-	GnomeDockItem *dock_item;
-
-	GtkToolbar *toolbar;
-
-	GList * toolbar_item;
-	GList *tooltip_item;
-
-	GtkToolbarChild *toolbar_child;
-	GtkTooltipsData *tooltip_data;
-
-	gchar *label;
-	
-	gedit_debug ("", DEBUG_WINDOW);
-
-	app = gedit_window_active_app();
-	g_return_if_fail (app != NULL);
-
-	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_TOOLBAR_NAME);
-	toolbar = GTK_TOOLBAR (gnome_dock_item_get_child (dock_item));
-	
-	toolbar_item = GTK_TOOLBAR (toolbar)->children;
-	tooltip_item = GTK_TOOLBAR (toolbar)->tooltips->tips_data_list;
-	
-	for ( ; toolbar_item; toolbar_item = toolbar_item->next)
-	{
-		toolbar_child = toolbar_item->data;
-		if (toolbar_child->type == GTK_TOOLBAR_CHILD_BUTTON)
-		{
-			gtk_label_get (GTK_LABEL(toolbar_child->label), &label);
-			g_print ("label: %s \n", label);
-		}
-		if (toolbar_child->type != GTK_TOOLBAR_CHILD_SPACE)
-		{
-			tooltip_data = tooltip_item->data;
-			g_print("t: %s\n", tooltip_data->tip_text);
-			tooltip_item = tooltip_item->next;
-		}
-	}
-}
-#endif
 
 void
-gedit_window_set_toolbar_labels (void)
+gedit_window_set_toolbar_labels (GnomeApp *app)
 {
-	GnomeApp *app;
 	GnomeDockItem *dock_item;
 	GtkToolbar *toolbar;
-
+	
 	gedit_debug ("", DEBUG_WINDOW);
 
-	app = mdi->active_window;
 	g_return_if_fail (app != NULL);
 	
 	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_TOOLBAR_NAME);
@@ -282,16 +195,83 @@ gedit_window_set_toolbar_labels (void)
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
 		break;
 	case 1:
-		g_print ("Icons only\n");
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
 		break;
 	case 2:
-		g_print ("Text and Icons\n");
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);
 		break;
 	default:
 		g_return_if_fail (FALSE);
 		break;
 	}
+	/* FIXME : when goint from text+icons to icons only the toolbar
+	   maintains it original width. We need to resize it .. Chema
+	gtk_widget_queue_resize (GTK_WIDGET(toolbar));
+	*/
 }
 
+
+void
+gedit_window_refresh_all (gint mdi_mode_changed)
+{
+	gint n, m;
+
+	Document *nth_doc;
+	GnomeApp *nth_app;
+	View     *mth_view;
+
+	GtkStyle *style;
+	GdkColor *bg, *fg;
+
+	
+	gedit_debug("", DEBUG_PREFS);
+
+	/* Set the toolbar and the status bar for each window. (mdi_mode = toplevel); */
+	for (n = 0; n < g_list_length (mdi->windows); n++)
+	{
+		nth_app = GNOME_APP (g_list_nth_data (mdi->windows, n));
+		gedit_window_set_status_bar (nth_app);
+		gedit_window_set_toolbar_labels (nth_app);
+	}
+
+	/* Set mdi mode */
+	if (mdi_mode_changed)
+	{
+		gnome_mdi_set_mode (mdi, settings->mdi_mode);
+	}
+	tab_pos (settings->tab_pos);
+
+	/* Set style and font for each children */
+	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
+
+	bg = &style->base[0];
+	bg->red = settings->bg[0];
+	bg->green = settings->bg[1];
+	bg->blue = settings->bg[2];
+
+	fg = &style->text[0];
+	fg->red = settings->fg[0];
+	fg->green = settings->fg[1];
+	fg->blue = settings->fg[2];
+
+	for (n = 0; n < g_list_length (mdi->children); n++)
+	{
+		nth_doc = DOCUMENT (g_list_nth_data (mdi->children, n));
+		gedit_document_set_undo (nth_doc, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
+
+		for (m = 0; m < g_list_length (nth_doc->views); m++)
+		{
+			mth_view = g_list_nth_data (nth_doc->views, m);
+			gedit_view_set_word_wrap (mth_view, settings->word_wrap);
+			gtk_widget_set_style (GTK_WIDGET (mth_view->text),
+					      style);
+			gedit_view_set_font (mth_view, settings->font);
+			if (mdi_mode_changed)
+				gedit_view_load_toolbar_widgets (mth_view);
+#ifdef ENABLE_SPLIT_SCREEN
+			gedit_view_set_split_screen ( mth_view, (gint) settings->splitscreen);
+#endif	
+		}
+	}
+
+}

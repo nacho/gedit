@@ -86,7 +86,6 @@ main (int argc, char **argv)
 	char **args;
 	poptContext ctx;
 	int i;
-	GnomeApp *app;
 	
 	GList *file_list = NULL;
 

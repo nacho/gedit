@@ -46,7 +46,7 @@ struct _Document
 	GtkWidget *tab_label;
 
 	/* flags. FIXME: use only one bit of the flags
-	   with << ask federico about it. Chema */
+	   with <<. Chema */
 	gint changed;
 	gint readonly;
 	gint untitled_number;
@@ -54,6 +54,7 @@ struct _Document
 	/* Undo/Redo Lists */
 	GList *undo;
 	GList *redo;
+
 };
 
 typedef enum {
@@ -91,5 +92,6 @@ void gedit_mdi_init (void);
 void gedit_document_load ( GList *file_list);
 void gedit_document_set_title (Document *doc);
 void gedit_document_swap_hc_cb (GtkWidget *widget, gpointer data);
+void gedit_document_set_undo (Document *doc, gint undo_state, gint redo_state);
 
 #endif /* __DOCUMENT_H__ */

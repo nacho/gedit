@@ -1,3 +1,10 @@
+2000-06-18  Chema Celorio  <chema@celorio.com>
+
+	* view.c: the toolbar is a view element not a window one
+	because if mdi_mode = TOPLEVEL, each view has it's own toolbar
+	* window.c: ditto
+	* document.c: ditto
+
 2000-06-17  Chema Celorio  <chema@celorio.com>
 
 	* dialogs/dialog-prefs.c: add toobar_labels group

@@ -38,9 +38,15 @@ Design questions ?
 [X] Add status barr message for the Plugins menu.
 [X] problems with translations .
 [X] fix the problem when using MDI toplevel window
+[X] the toolbar sensitiviti is set per view basis
+    since each document will have different undo levels and such
+    and since if mdi_mode = TOPLEVEl, each view will have it's own
+    toolbar
+[x] fix the problem with the Prefs windos + mdi_mode = TOPLEVEL
 [ ] Toolbar buttons text should be settable to gnomecc preference.
 [ ] add split window again
-[ ] fix the problem with the Prefs windos + mdi_mode = TOPLEVEL
+[ ] If you have a toolbar with text and set it to no text
+    it needs to get resized
 
 *** Chema maybe ***
 [ ] Try to fix the line & column pos
@@ -65,7 +71,7 @@ Design questions ?
 
 ** Unclaimed **
 [ ] check for the existence of sendmail and of diff. If they are
-    no found ask the user for the location and set it in settings->sendmail
+    not found ask the user for the location and set it in settings->sendmail
     & settings->diff. Same thing for the browse plugin
 [ ] Split screen ???
     Should we re-enable it ? Maybe.
