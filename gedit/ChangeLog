@@ -1,3 +1,24 @@
+2003-01-04  James Willcox  <jwillcox@gnome.org>
+
+	* recent-files/Makefile.am:
+	* recent-files/egg-recent-item.c: (egg_recent_item_set_uri),
+	(egg_recent_item_get_uri_for_display):
+	* recent-files/egg-recent-model.c: (egg_recent_model_update_item),
+	(egg_recent_model_filter):
+	* recent-files/egg-recent-view-bonobo.c:
+	(egg_recent_view_bonobo_set_model), (egg_recent_view_bonobo_init):
+	* recent-files/egg-recent-view-gtk.c:
+	(egg_recent_view_gtk_set_model), (egg_recent_view_gtk_init):
+
+	Update to latest recent-files stuff in libegg.  This fixes a crasher
+	bug.
+
+2003-01-03  James Willcox  <jwillcox@gnome.org>
+
+	* gedit2.c: (gedit_handle_automation_cmdline):
+
+	Tell the startup-notification stuff that we are all done.
+
 2003-01-02  Paolo Maggi <paolo.maggi@polito.it>
 
 	* gedit-plugins-engine.c: fixed bug #102343 (Plugins changes 

@@ -343,8 +343,10 @@ egg_recent_view_bonobo_set_model (EggRecentView *view_parent, EggRecentModel *mo
 	
 	view->model = model;
 	g_object_ref (view->model);
-	view->changed_cb_id = g_signal_connect (G_OBJECT (model), "changed",
-					G_CALLBACK (model_changed_cb), view);
+	view->changed_cb_id = g_signal_connect_object (G_OBJECT (model),
+						"changed",
+						G_CALLBACK (model_changed_cb),
+						view, 0);
 
 	egg_recent_model_changed (view->model);
 }
@@ -518,8 +520,8 @@ egg_recent_view_bonobo_init (EggRecentViewBonobo *view)
 	view->uid = egg_recent_util_get_unique_id ();
 #ifndef USE_STABLE_LIBGNOMEUI
 	view->theme = gnome_icon_theme_new ();
-	g_signal_connect (view->theme, "changed",
-			  G_CALLBACK (theme_changed_cb), view);
+	g_signal_connect_object (view->theme, "changed",
+				 G_CALLBACK (theme_changed_cb), view, 0);
 #endif
 
 	view->client = gconf_client_get_default ();

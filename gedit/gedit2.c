@@ -315,6 +315,10 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 
 	bonobo_object_release_unref (server, &env);
         CORBA_exception_free (&env);
+
+	/* we never popup a window, so tell startup-notification that
+	 * we're done */
+	gdk_notify_startup_complete ();
 }
 
 int
