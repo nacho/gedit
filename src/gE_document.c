@@ -206,6 +206,7 @@ gE_window_new(void)
 	gE_window_refresh (w);
 	
 	gtk_signal_emit_by_name (GTK_OBJECT (w->window), "check_resize");
+	gtk_widget_grab_focus (GTK_WIDGET (gE_document_current (w)->text));
 	return w;
 } /* gE_window_new */
 
