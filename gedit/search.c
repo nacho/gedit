@@ -246,7 +246,7 @@ void
 replace_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_debug ("\n", DEBUG_SEARCH);
-	g_print("I am a callback. But chema has not implemented my functionality. I need some love.....\n");
+	dialog_replace();
 }
 
 
@@ -314,7 +314,7 @@ search_text_execute ( gulong starting_position,
 	*pos_found = p2 - text_length;
 
 	if (VIEW (mdi->active_view) != gedit_search_info.view)
-		g_warning("View is not the same !!!!!!!!!!!!");
+		g_warning("View is not the same !!!!!!!!!!!! search.c:317");
 
 	return TRUE;
 }
@@ -389,6 +389,37 @@ update_text (GtkText *text, gint line, gint lines)
 
 	gtk_adjustment_set_value (GTK_ADJUSTMENT(text->vadj), adjustment);
 }
+
+
+void
+search_text_not_found_notify (GtkText *text)
+{
+	GnomeDialog *gnome_dialog;
+	gchar * msg;
+	
+	gedit_flash_va (_("Text not found"));
+	/* We need to set the cursor after the position of the last
+	   find so that we will not find it again. Chema */
+	if (GTK_EDITABLE(text)->selection_end_pos)
+	{
+		gtk_text_set_point (text, GTK_EDITABLE(text)->selection_end_pos);
+		gtk_editable_select_region (GTK_EDITABLE(text), 0, 0);
+		gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
+		gtk_text_backward_delete (text, 1);
+	}
+
+	msg = g_strdup (_("Text not found."));
+	gnome_dialog = gnome_message_box_new (msg,
+					      GNOME_MESSAGE_BOX_INFO,
+					      GNOME_STOCK_BUTTON_OK,
+					      NULL);
+	gnome_dialog_set_parent (GNOME_DIALOG (gnome_dialog),
+				 GTK_WINDOW (mdi->active_window));
+	gnome_dialog_run_and_close (gnome_dialog);
+
+	g_free (msg);
+}
+
 
 
 
@@ -989,7 +1020,7 @@ seek_to_line (Document *doc, gint line, gint numlines)
 	g_free (buf);
 	gtk_text_set_point (GTK_TEXT (view->text), a + 1);
 	gtk_editable_set_position (GTK_EDITABLE (view->text), a + 1);
-	gtk_editable_select_region (GTK_EDITABLE (view->text), a, b);
+	gtk_editable_select_regiond (GTK_EDITABLE (view->text), a, b);
 
 	if (numlines < 0) 
 		numlines = get_line_count (doc);

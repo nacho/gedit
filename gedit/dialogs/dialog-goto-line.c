@@ -8,74 +8,62 @@
 
 #include <config.h>
 #include <gnome.h>
-
 #include "document.h"
 #include "search.h"
 #include "view.h"
 #include "utils.h"
 #include "dialogs/dialogs.h"
-
 #include <glade/glade.h>
 
 GtkWidget *goto_line_dialog;
+
+static void goto_line_destroyed_cb (GtkWidget *widget, gint button);
+static void goto_line_clicked_cb (GtkWidget *widget, gint button);
+static void goto_line_activate_cb (GtkWidget *widget, GtkWidget * dialog);
 
 static void
 goto_line_destroyed_cb (GtkWidget *widget, gint button)
 {
 	gedit_debug("\n", DEBUG_SEARCH);
-	search_end();
 	goto_line_dialog = NULL;
 }
 
 static void
 goto_line_activate_cb (GtkWidget *widget, GtkWidget * dialog)
 {
-	GtkSpinButton *spinb;
-	gint line, lines = 0;
-	gulong pos;
-	View *view = VIEW (mdi->active_view);
-	Document *doc = gedit_document_current();
-	GtkText *text = GTK_TEXT (view->text);
-
 	gedit_debug("\n", DEBUG_SEARCH);
-	g_return_if_fail (doc != NULL);
-
-	spinb = GTK_SPIN_BUTTON (widget);
-
-	gtk_spin_button_update (GTK_SPIN_BUTTON (spinb));
-	line = (gint) gtk_spin_button_get_value_as_float (spinb);
-	pos = line_to_pos (doc, line, &lines);
-	update_text (text, line, lines);
-
-	gtk_text_set_point(text, pos);
-
-	gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
-	gtk_text_backward_delete (text, 1);
-
-	gnome_dialog_close (GNOME_DIALOG (dialog));
-
+	goto_line_clicked_cb (dialog, 0);
 }
 
 static void
 goto_line_clicked_cb (GtkWidget *widget, gint button)
 {
-	GtkWidget *spinb;
 	gint line, lines = 0;
 	gulong pos;
 	View *view = VIEW (mdi->active_view);
 	Document *doc = gedit_document_current();
 	GtkText *text = GTK_TEXT (view->text);
+	GtkWidget *entry;
 
 	gedit_debug("\n", DEBUG_SEARCH);
 	g_return_if_fail (doc != NULL);
 	
 	if (button == 0)
 	{
-		spinb = gtk_object_get_data (GTK_OBJECT (widget), "spinb");
-		g_assert (spinb != NULL);
-		line = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spinb));
 
+		entry = gtk_object_get_data (GTK_OBJECT (widget), "entry");
+
+		g_assert (entry!=NULL);
+
+		line = atoi (gtk_entry_get_text (GTK_ENTRY(entry)));
+
+		search_start();
 		pos = line_to_pos (doc, line, &lines);
+		search_end();
+
+		if (line > lines)
+			line = lines;
+
 		
 		update_text (text, line, lines);
 		gtk_text_set_point (text, pos);
@@ -93,16 +81,15 @@ goto_line_clicked_cb (GtkWidget *widget, gint button)
 void
 dialog_goto_line (void)
 {
-	GtkWidget *spinb;
-	GtkAdjustment *adj;
+	GtkWidget *entry;
 	GladeXML *gui; 
-	gint total_lines, line_number;
 
 	gedit_debug("\n", DEBUG_SEARCH);
 
 	if (goto_line_dialog!=NULL)
 	{
 		/* Should we reaise it instead ?? chema */
+		g_warning ("This should not happen ... dialog-goto-line.c:106");
 		gtk_widget_show (goto_line_dialog);
 		return;
 	}
@@ -118,32 +105,31 @@ dialog_goto_line (void)
 	}
 
 	goto_line_dialog = glade_xml_get_widget (gui, "dialog");
-	spinb = glade_xml_get_widget (gui, "spinb");
+	entry            = glade_xml_get_widget (gui, "entry");
 
-	if (!goto_line_dialog || !spinb)
+	if (!goto_line_dialog || !entry)
 	{
 		g_print ("Corrupted goto-line.glade detected, reinstall gedit.");
 		return;
 	}
 
-	search_start();
-	line_number = pos_to_line (gtk_editable_get_position (GTK_EDITABLE (VIEW (mdi->active_view)->text)),
-				   &total_lines);
+	/* Set data so that we can get this widget later */ 
+	gtk_object_set_data (GTK_OBJECT (goto_line_dialog), "entry", entry);
 
-	gtk_object_set_data (GTK_OBJECT (goto_line_dialog), "spinb", spinb);
-
-	adj = gtk_spin_button_get_adjustment (GTK_SPIN_BUTTON (spinb));
-
-	adj->upper = (gfloat) total_lines;
-	
+	/* How about conecting some signals .. */
 	gtk_signal_connect (GTK_OBJECT (goto_line_dialog), "clicked",
 			    GTK_SIGNAL_FUNC (goto_line_clicked_cb), goto_line_dialog);
 	gtk_signal_connect (GTK_OBJECT (goto_line_dialog), "destroy",
 			    GTK_SIGNAL_FUNC (goto_line_destroyed_cb), goto_line_dialog);
-	gtk_signal_connect (GTK_OBJECT (spinb), "activate",
+	gtk_signal_connect (GTK_OBJECT (entry), "activate",
 			    GTK_SIGNAL_FUNC (goto_line_activate_cb), goto_line_dialog);
 
+	/* And then a few more magic words */ 
 	gtk_window_set_modal (GTK_WINDOW (goto_line_dialog), TRUE);
+	gnome_dialog_set_parent (GNOME_DIALOG (goto_line_dialog),
+				 GTK_WINDOW (mdi->active_window));
 	gtk_widget_show_all (goto_line_dialog);
+
+	/* dont need gui anymore */
 	gtk_object_destroy (GTK_OBJECT (gui));
 }

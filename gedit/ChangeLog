@@ -1,3 +1,27 @@
+2000-05-24  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-replace.c: start the replace stuff.
+
+	* dialogs/dialog-search.c (search_text_clicked_cb): Improve fix
+	behaivor
+	(search_text_clicked_cb): let the user know that the search was
+	not successfull. I am still don't like the way we are doing so
+	but is better than nothing.
+
+2000-05-23  Chema Celorio  <chema@celorio.com>
+
+	* view.c (view_changed_cb): don't call set readonly
+	this was causing a mess with the "Untitled #" name for each view.
+
+	* file.c (gedit_file_save): after saving as, turn the
+	readonly flag off in all views. 
+
+	* document.c: change gedit_debug to the new form
+	(gedit_get_document_tab_name): fixed a small bug
+
+	* dialogs/dialog-goto-line.c (dialog_goto_line): set dialog's parent
+	* dialogs/dialog-search.c (dialog_find): ditto
+
 2000-05-23  Chema Celorio  <chema@celorio.com>
 
 	* dialogs/dialog-search.c (dialog_find): make window

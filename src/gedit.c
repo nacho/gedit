@@ -116,6 +116,8 @@ corba_exception (CORBA_Environment* ev)
 
 #endif /* HAVE_LIBGNORBA */
 
+void gedit_shutdown (void);
+
 void
 gedit_shutdown (void)
 {
@@ -133,6 +135,14 @@ main (int argc, char **argv)
 	int i;
 	GList *file_list = NULL;
 	Document *doc;
+
+#if 0
+	/* Pipes */
+	FILE *std_in;
+	gint chars_read;
+	gchar *buffer;
+	gint character_in;
+#endif	
 
 	/* Initialize i18n */
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
@@ -199,8 +209,26 @@ main (int argc, char **argv)
 			}
 		}
 	}
+
+
+#if 0
+	character_in = 'A';
+
+	std_in = fdopen (1, "r");
+	if (std_in==NULL)
+		g_print("Null\n");
+	buffer = g_malloc (10);
+
+	chars_read = 'a';
+	do
+		chars_read = fgetc (std_in);
+	while ( chars_read != 'a');
 	
-	gtk_main ();
+	buffer[chars_read]='\0';
+	g_print("Chars read :%i buffer\n%s", chars_read, buffer);
+#endif
+	
+	gtk_main();
 
 	return 0;
 }

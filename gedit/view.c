@@ -85,7 +85,10 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 
 	/* Set the title */
 	gedit_set_title (view->document);
+	/*
+	This was causing a "Untitled #? problem .. Chema 
 	gedit_view_set_read_only (view, view->document->readonly);
+	*/
 }
 
 /* 

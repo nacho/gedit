@@ -18,9 +18,9 @@
   <class>GnomeDialog</class>
   <name>dialog</name>
   <title>Goto Line</title>
-  <type>GTK_WINDOW_DIALOG</type>
-  <position>GTK_WIN_POS_MOUSE</position>
-  <modal>False</modal>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>True</modal>
   <allow_shrink>False</allow_shrink>
   <allow_grow>False</allow_grow>
   <auto_shrink>False</auto_shrink>
@@ -94,7 +94,6 @@
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
-	<focus_target>spinb</focus_target>
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>
@@ -103,25 +102,17 @@
       </widget>
 
       <widget>
-	<class>GtkSpinButton</class>
-	<name>spinb</name>
-	<tooltip>Enter the line number you wish to go to.</tooltip>
+	<class>GtkEntry</class>
+	<name>entry</name>
+	<width>70</width>
 	<can_default>True</can_default>
 	<has_default>True</has_default>
 	<can_focus>True</can_focus>
 	<has_focus>True</has_focus>
-	<climb_rate>1</climb_rate>
-	<digits>0</digits>
-	<numeric>True</numeric>
-	<update_policy>GTK_UPDATE_ALWAYS</update_policy>
-	<snap>False</snap>
-	<wrap>False</wrap>
-	<value>0</value>
-	<lower>0</lower>
-	<upper>0</upper>
-	<step>1</step>
-	<page>10</page>
-	<page_size>10</page_size>
+	<editable>True</editable>
+	<text_visible>True</text_visible>
+	<text_max_length>0</text_max_length>
+	<text></text>
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>

@@ -47,6 +47,8 @@ gint search_text_execute ( gulong starting_position,
 			   gint * total_lines,
 			   gint return_the_line_number);
 
+void search_text_not_found_notify (GtkText *text);
+
 /* Stopwatch functions */
 void start_time (void);
 double print_time (void);

@@ -5,15 +5,12 @@
  */
 
 gchar *s = N_("Replace");
+gchar *s = N_("Find Next");
 gchar *s = N_("Replace");
 gchar *s = N_("Replace All");
 gchar *s = N_("Search for: ");
 gchar *s = N_("Replace with: ");
-gchar *s = N_("Search from: ");
-gchar *s = N_("Cursor\n"
-              "Beginning of document\n"
-              "End of document\n"
-              "");
+gchar *s = N_("beginning of document");
+gchar *s = N_("cursor position");
 gchar *s = N_("Case sensitive");
-gchar *s = N_("Reverse search");
 gchar *s = N_("Ask before replacing");

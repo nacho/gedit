@@ -52,7 +52,7 @@ void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 
    gboolean popup_create_new_file (GtkWidget *w, gchar *title);
 static void file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
-static void file_saveas_ok_sel (GtkWidget *w, gedit_data *data);
+static void file_save_as_ok_sel (GtkWidget *w, gedit_data *data);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
 static void cancel_cb (GtkWidget *w, gpointer data);
 
@@ -309,7 +309,7 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
 				    "clicked",
-				    GTK_SIGNAL_FUNC (file_saveas_ok_sel),
+				    GTK_SIGNAL_FUNC (file_save_as_ok_sel),
 				    NULL);
 
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
@@ -402,13 +402,15 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 
 
 static void
-file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
+file_save_as_ok_sel (GtkWidget *w, gedit_data *data)
 {
 
 	Document *doc;
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
+	gint i;
+	View *nth_view;
 
-	gedit_debug("f:file_saveas_ok_sel\n", DEBUG_FILE);
+	gedit_debug("\n", DEBUG_FILE);
 	
 	doc = gedit_document_current();
 	if (!doc)
@@ -442,6 +444,13 @@ file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 	    
 	if (gedit_file_save(doc, fname) != 0) 
 		gedit_flash (_("Error saving file!"));
+
+	/* If file save was succesfull, then we should turn the readonly flag off */
+	for (i = 0; i < g_list_length (doc->views); i++)
+	{
+		nth_view = g_list_nth_data (doc->views, i);
+		gedit_view_set_read_only (nth_view, FALSE);
+	}
 
 	g_free (fname);
 }

@@ -60,7 +60,6 @@ search_text_clicked_cb (GtkWidget *widget, gint button)
 	gint text_length;
 	gchar * text_to_search_for;
 	
-
 	View *view;
 	GtkText *text;
 
@@ -126,18 +125,15 @@ search_text_clicked_cb (GtkWidget *widget, gint button)
 
 		if (!eureka)
 		{
-			gedit_flash_va (_("Text not found"));
+			search_text_not_found_notify (text);
 			return;
 		}
 
 		gedit_flash_va (_("Text found at line :%i"),line_found);
-
 		update_text (text, line_found, total_lines);
 		gtk_text_set_point (text, pos_found+1);
-
 		gtk_text_insert (text, NULL, NULL, NULL, " ", 1);
 		gtk_text_backward_delete (text, 1);
-		
 		gtk_editable_select_region (GTK_EDITABLE(text), pos_found+1, pos_found+1+text_length);
 
 		gtk_radio_button_select (GTK_RADIO_BUTTON(radio_button_1)->group, 1);
@@ -148,15 +144,10 @@ search_text_clicked_cb (GtkWidget *widget, gint button)
 void
 dialog_find (void)
 {
-/*	GtkWidget *dialog;*/ 
 	GtkWidget *text_entry;
 	GtkWidget *case_sensitive;
 	GtkWidget *radio_button_1;
-	/* GtkAdjustment *adj; */
-	GladeXML *gui;
-	/*
-  gint total_lines, line_number;
-*/
+	GladeXML  *gui;
 
 	gedit_debug("\n", DEBUG_SEARCH);
 
@@ -178,11 +169,10 @@ dialog_find (void)
 		return;
 	}
 
-	/* FIXME : change the "Find Next" label. */
 	search_text_dialog = glade_xml_get_widget (gui, "dialog");
 	text_entry     = glade_xml_get_widget (gui, "text_entry");
 	case_sensitive = glade_xml_get_widget (gui, "case_sensitive");
-	radio_button_1 = glade_xml_get_widget (gui, "start_search_from_radio_button_1");
+	radio_button_1 = glade_xml_get_widget (gui, "radio_button_1");
 	
 	if (!search_text_dialog || !text_entry || !case_sensitive || !radio_button_1)
 	{
@@ -203,7 +193,8 @@ dialog_find (void)
 	gtk_signal_connect (GTK_OBJECT (text_entry), "activate",
 			    GTK_SIGNAL_FUNC (search_text_entry_activate_cb), search_text_dialog);
 
-
+	gnome_dialog_set_parent (GNOME_DIALOG (search_text_dialog),
+				 GTK_WINDOW (mdi->active_window));
 	gtk_window_set_modal (GTK_WINDOW (search_text_dialog), TRUE);
 	gtk_widget_show_all (search_text_dialog);
 	gtk_object_destroy (GTK_OBJECT (gui));
