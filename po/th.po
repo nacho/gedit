@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-26 17:52+0100\n"
+"POT-Creation-Date: 2005-04-04 11:23+0200\n"
 "PO-Revision-Date: 2005-02-06 11:58+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
@@ -48,7 +48,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "แก้ไขแฟ้มข้อความ"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:322
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:362
 msgid "Text Editor"
 msgstr "เครื่องมือแก้ไขข้อความ"
 
@@ -661,13 +661,13 @@ msgstr "เปิดตำแหน่งแฟ้ม"
 msgid "There was an error displaying help: %s"
 msgstr "เกิดข้อผิดพลาดในการแสดงคำแนะนำ: %s"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:356
-#: gedit/dialogs/gedit-encodings-dialog.c:424
+#: gedit/dialogs/gedit-encodings-dialog.c:355
+#: gedit/dialogs/gedit-encodings-dialog.c:423
 msgid "_Description"
 msgstr "คำ_บรรยาย"
 
-#: gedit/dialogs/gedit-encodings-dialog.c:365
-#: gedit/dialogs/gedit-encodings-dialog.c:433
+#: gedit/dialogs/gedit-encodings-dialog.c:364
+#: gedit/dialogs/gedit-encodings-dialog.c:432
 msgid "_Encoding"
 msgstr "_รหัสอักขระ"
 
@@ -1158,20 +1158,20 @@ msgstr "อ่านข้อมูล symbolic link สำหรับ %s ไ�
 msgid "The file has too many symbolic links."
 msgstr "แฟ้มนี้มี symbolic link มากเกินไป"
 
-#: gedit/gedit-document.c:1787
+#: gedit/gedit-document.c:1788
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ไม่สามารถทำงาน %s: ที่พร้อมกันใน write mode ได้"
 
-#: gedit/gedit-document.c:1794
+#: gedit/gedit-document.c:1795
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ไม่สามารถทำงานที่ตำแหน่งนี้ใน write mode ได้"
 
-#: gedit/gedit-document.c:1807
+#: gedit/gedit-document.c:1808
 msgid "Invalid filename."
 msgstr "ชื่อแฟ้มไม่ถูกต้อง"
 
-#: gedit/gedit-document.c:1956
+#: gedit/gedit-document.c:1959
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1179,7 +1179,7 @@ msgstr ""
 "พื้นที่บนดิสก์เต็ม บันทึกข้อมูลไม่ได้\n"
 "กรุณาลบข้อมูลที่ไม่จำเป็นออกและทำการบันทึกอีกครั้ง"
 
-#: gedit/gedit-document.c:1961
+#: gedit/gedit-document.c:1964
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1187,7 +1187,7 @@ msgid ""
 msgstr ""
 "ดิสก์ที่คุณกำลังบันทึกแฟ้มมีข้อจำกัดด้านขนาดของแฟ้ม ลองบันทึกแฟ้มขนาดเล็กลงหรือบันทึกลงดิสก์อื่น"
 
-#: gedit/gedit-document.c:2005
+#: gedit/gedit-document.c:2008
 msgid "Could not create a backup file."
 msgstr "สร้างแฟ้มสำรองไม่ได้"
 
@@ -1773,19 +1773,19 @@ msgstr "เปิดเอกสาร '%s'"
 msgid "Open a recently used file"
 msgstr "เปิดแฟ้มที่เพิ่งถูกเปิด"
 
-#: gedit/gedit-mdi.c:1468 gedit/gedit-mdi.c:1470
+#: gedit/gedit-mdi.c:1467 gedit/gedit-mdi.c:1469
 msgid "Read Only"
 msgstr "(อ่านอย่างเดียว)"
 
-#: gedit/gedit-mdi.c:2095
+#: gedit/gedit-mdi.c:2094
 msgid "Normal"
 msgstr "ปกติ"
 
-#: gedit/gedit-mdi.c:2096
+#: gedit/gedit-mdi.c:2095
 msgid "Use Normal highlight mode"
 msgstr "ใช้โหมดเน้นแบบปกติ"
 
-#: gedit/gedit-mdi.c:2172
+#: gedit/gedit-mdi.c:2171
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "ใช้โหมดเน้นแบบ %s"
@@ -1815,38 +1815,38 @@ msgstr "ไม่สามารถกำหนดค่าเริ่มต้
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "คาดหวัง `%s' แต่ได้ `%s' สำหรับกุญแจ %s"
 
-#: gedit/gedit-print.c:217 gedit/gedit-ui.xml.h:37
+#: gedit/gedit-print.c:219 gedit/gedit-ui.xml.h:37
 msgid "Print"
 msgstr "พิมพ์"
 
-#: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
+#: gedit/gedit-print.c:228 plugins/docinfo/docinfo.glade2.h:7
 msgid "Lines"
 msgstr "บรรทัด"
 
-#: gedit/gedit-print.c:328
+#: gedit/gedit-print.c:330
 msgid "Preparing pages..."
 msgstr "กำลังเตรียมหน้ากระดาษ..."
 
-#: gedit/gedit-print.c:355
+#: gedit/gedit-print.c:357
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "กำลังให้แสงและเงาหน้า %d จาก %d..."
 
-#: gedit/gedit-print.c:357
+#: gedit/gedit-print.c:359
 #, c-format
 msgid "Printing page %d of %d..."
 msgstr "กำลังพิมพ์หน้า %d จาก %d..."
 
-#: gedit/gedit-print.c:379 gedit/gedit-ui.xml.h:40
+#: gedit/gedit-print.c:381 gedit/gedit-ui.xml.h:40
 msgid "Print preview"
 msgstr "แสดงตัวอย่างก่อนพิมพ์"
 
-#: gedit/gedit-print.c:549
+#: gedit/gedit-print.c:551
 #, c-format
 msgid "File: %s"
 msgstr "แฟ้ม: %s"
 
-#: gedit/gedit-print.c:555
+#: gedit/gedit-print.c:557
 msgid "Page %N of %Q"
 msgstr "หน้า %N จาก %Q หน้า"
 
@@ -2260,25 +2260,25 @@ msgstr "  ทับ"
 msgid "  INS"
 msgstr "  แทรก"
 
-#: gedit/gedit2.c:81
+#: gedit/gedit2.c:83
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 
-#: gedit/gedit2.c:84
+#: gedit/gedit2.c:86
 msgid "Quit an existing instance of gedit"
 msgstr ""
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:89
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr ""
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:92
 msgid "Create a new document in an existing instance of gedit"
 msgstr "สร้างเอกสารใหม่ในหน้าต่าง gedit ที่ใช้งานอยู่"
 
-#: gedit/gedit2.c:166
+#: gedit/gedit2.c:168
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr ""
@@ -2939,7 +2939,7 @@ msgstr ""
 msgid "Zulu"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:828
+#: plugins/spell/gedit-spell-checker.c:826
 msgid "Default"
 msgstr "ค่าปริยาย"
 
