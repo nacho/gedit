@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-03-26 08:45+0100\n"
-"PO-Revision-Date: 2002-03-26 08:48+0100\n"
+"POT-Creation-Date: 2002-04-11 14:30+0200\n"
+"PO-Revision-Date: 2002-04-11 14:21+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -256,25 +256,6 @@ msgstr "Sekund"
 msgid "Use the _unified output format (-u option)"
 msgstr "Bruk _unifisert format for utdata (-u flagg)"
 
-#: plugins/diff/diff.glade2.h:12 plugins/time/time.glade2.h:3
-#: src/dialogs/gedit-preferences.glade2.h:77 src/dialogs/goto-line.glade2.h:3
-#: src/dialogs/program-location-dialog.glade2.h:3 src/dialogs/uri.glade2.h:3
-msgid "gtk-cancel"
-msgstr "gtk-cancel"
-
-#: plugins/diff/diff.glade2.h:13 plugins/shell_output/shell_output.glade2.h:6
-#: plugins/time/time.glade2.h:4 src/dialogs/gedit-preferences.glade2.h:78
-#: src/dialogs/uri.glade2.h:4
-msgid "gtk-help"
-msgstr "gtk-help"
-
-#: plugins/diff/diff.glade2.h:14 plugins/shell_output/shell_output.glade2.h:7
-#: plugins/time/time.glade2.h:5 src/dialogs/gedit-preferences.glade2.h:79
-#: src/dialogs/goto-line.glade2.h:4
-#: src/dialogs/program-location-dialog.glade2.h:4
-msgid "gtk-ok"
-msgstr "gtk-ok"
-
 #: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
 msgstr "_Ordteller"
@@ -341,11 +322,6 @@ msgstr "Ord"
 #: plugins/docinfo/docinfo.glade2.h:9
 msgid "gedit: Document Info plugin"
 msgstr "gedit: Tillegg for dokumentinfo"
-
-#: plugins/docinfo/docinfo.glade2.h:10
-#: plugins/shell_output/shell_output.glade2.h:5 src/dialogs/replace.glade2.h:9
-msgid "gtk-close"
-msgstr "gtk-close"
 
 #: plugins/sample/sample.c:41
 msgid "Insert User _Name"
@@ -428,6 +404,22 @@ msgstr "Ar_beidskatalog:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Tillegg for utskrift fra skallet"
 
+#: plugins/taglist/gedit-taglist-plugin-window.c:117
+msgid "Tag list plugin"
+msgstr "Tillegg for tag-liste"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:135
+msgid "Select the group of tab you want to use."
+msgstr "Velg gruppen for fanen du vil bruke."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:159
+msgid "Double-click on a tag to insert it in the current document."
+msgstr "Dobbelklikk på en «tag» for å sette den inn i aktivt dokument."
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:170
+msgid "Tags"
+msgstr "Tags"
+
 #: plugins/taglist/gedit-taglist-plugin.c:44
 msgid "Tag _List"
 msgstr "«Tag»-liste"
@@ -447,22 +439,6 @@ msgid ""
 msgstr ""
 "Tag-listen gir deg en lett metode for å sette inn ofte brukte faner eller "
 "strenger uten å måtte skrive dem."
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:117
-msgid "Tag list plugin"
-msgstr "Tillegg for tag-liste"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:135
-msgid "Select the group of tab you want to use."
-msgstr "Velg gruppen for fanen du vil bruke."
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:159
-msgid "Double-click on a tag to insert it in the current document."
-msgstr "Dobbelklikk på en «tag» for å sette den inn i aktivt dokument."
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:170
-msgid "Tags"
-msgstr "Tags"
 
 #: plugins/time/time.c:45
 msgid "_Insert Date/Time"
@@ -543,7 +519,7 @@ msgstr ""
 msgid "Could not create the Plugin Manager dialog"
 msgstr "Kunne ikke opprette dialog for tilleggshåndterer"
 
-#: src/dialogs/gedit-dialog-replace.c:167 src/dialogs/replace.glade2.h:3
+#: src/dialogs/gedit-dialog-replace.c:167 src/dialogs/replace.glade2.h:2
 #: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Erstatt"
@@ -574,6 +550,10 @@ msgstr "Teksten «%s» ble ikke funnet."
 msgid "Found and replaced %d occurences."
 msgstr "Fant og erstattet %d oppføringer."
 
+#: src/dialogs/gedit-dialog-uri.c:86 src/dialogs/uri.glade2.h:2
+msgid "Open from URI"
+msgstr "Åpne fra URI"
+
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
 msgstr "Sett programlokasjon..."
@@ -601,79 +581,79 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Valgt fil er ikke kjørbar."
 
-#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences-dialog.c:221
 msgid "Toolbar"
 msgstr "Verktøylinje"
 
-#: src/dialogs/gedit-preferences-dialog.c:215
+#: src/dialogs/gedit-preferences-dialog.c:222
 #: src/dialogs/gedit-preferences.glade2.h:38
 msgid "Status bar"
 msgstr "Statuslinje"
 
-#: src/dialogs/gedit-preferences-dialog.c:218
+#: src/dialogs/gedit-preferences-dialog.c:225
 #: src/dialogs/gedit-preferences.glade2.h:17
 msgid "MDI"
 msgstr "MDI"
 
-#: src/dialogs/gedit-preferences-dialog.c:227
+#: src/dialogs/gedit-preferences-dialog.c:234
 msgid "Font & Colors"
 msgstr "Skrifter og farger"
 
-#: src/dialogs/gedit-preferences-dialog.c:229
+#: src/dialogs/gedit-preferences-dialog.c:236
 #: src/dialogs/gedit-preferences.glade2.h:39
 msgid "Tabs"
 msgstr "Faner"
 
-#: src/dialogs/gedit-preferences-dialog.c:230
+#: src/dialogs/gedit-preferences-dialog.c:237
 #: src/dialogs/gedit-preferences.glade2.h:62
 msgid "Wrap mode"
 msgstr "Brytningsmodus"
 
-#: src/dialogs/gedit-preferences-dialog.c:231
+#: src/dialogs/gedit-preferences-dialog.c:238
 #: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Line numbers"
 msgstr "Linjenummer"
 
-#: src/dialogs/gedit-preferences-dialog.c:233
+#: src/dialogs/gedit-preferences-dialog.c:240
 #: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Lagre"
 
-#: src/dialogs/gedit-preferences-dialog.c:234
+#: src/dialogs/gedit-preferences-dialog.c:241
 #: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:81
 msgid "Undo"
 msgstr "Angre"
 
-#: src/dialogs/gedit-preferences-dialog.c:242
+#: src/dialogs/gedit-preferences-dialog.c:249
 msgid "Page"
 msgstr "Side"
 
-#: src/dialogs/gedit-preferences-dialog.c:244
+#: src/dialogs/gedit-preferences-dialog.c:251
 msgid "Fonts"
 msgstr "Skrifter"
 
-#: src/dialogs/gedit-preferences-dialog.c:251
+#: src/dialogs/gedit-preferences-dialog.c:258
 msgid "Editor"
 msgstr "Editor"
 
-#: src/dialogs/gedit-preferences-dialog.c:252
+#: src/dialogs/gedit-preferences-dialog.c:259
 #: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Skriv ut"
 
-#: src/dialogs/gedit-preferences-dialog.c:254
+#: src/dialogs/gedit-preferences-dialog.c:261
 msgid "User interface"
 msgstr "Brukergrensesnitt"
 
-#: src/dialogs/gedit-preferences-dialog.c:321
+#: src/dialogs/gedit-preferences-dialog.c:328
 msgid "Cat_egories:"
 msgstr "Kat_egorier"
 
-#: src/dialogs/gedit-preferences-dialog.c:345 src/gedit-ui.xml.h:44
+#: src/dialogs/gedit-preferences-dialog.c:352 src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "Brukervalg"
 
-#: src/dialogs/gedit-preferences-dialog.c:512
+#: src/dialogs/gedit-preferences-dialog.c:569
 msgid "Categories"
 msgstr "Kategorier"
 
@@ -710,6 +690,7 @@ msgid "Create a _backup copy of files before saving"
 msgstr "Opprett en _sikkerhetskopi av filene før lagring"
 
 #: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
 msgstr "Skrift"
 
@@ -794,8 +775,8 @@ msgid "Set _tabs width equivalent to  "
 msgstr "Sett bredde på faner lik  "
 
 #: src/dialogs/gedit-preferences.glade2.h:34
-msgid "Set limit on _undo levels to"
-msgstr "Set grense på angrenivåer til"
+msgid "Set limit on _undo actions to"
+msgstr "Set grense på _angrenivåer til"
 
 #: src/dialogs/gedit-preferences.glade2.h:35
 msgid "Sho_w tooltips"
@@ -841,11 +822,15 @@ msgstr ""
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
-msgstr "Innstillinger for skriftvalg ved utskrift lar deg velge skrifter som skal brukes ved utskrift av dokumenter."
+msgstr ""
+"Innstillinger for skriftvalg ved utskrift lar deg velge skrifter som skal "
+"brukes ved utskrift av dokumenter."
 
 #: src/dialogs/gedit-preferences.glade2.h:45
 msgid "The print page settings let you customize how gedit prints documents."
-msgstr "Innstillinger for utskrift lar deg tilpasse hvordan gedit skriver ut dokumenter."
+msgstr ""
+"Innstillinger for utskrift lar deg tilpasse hvordan gedit skriver ut "
+"dokumenter."
 
 #: src/dialogs/gedit-preferences.glade2.h:46
 msgid "The save settings let you customize how gedit saves files."
@@ -925,7 +910,7 @@ msgid "_According to system settings"
 msgstr "I _følge systeminnstillingene"
 
 #: src/dialogs/gedit-preferences.glade2.h:64
-msgid "_Auto save current file every"
+msgid "_Autosave current file every"
 msgstr "_Autolagre aktiv fil hver(t)"
 
 #: src/dialogs/gedit-preferences.glade2.h:65
@@ -976,14 +961,91 @@ msgstr "_Tekstfarge:"
 msgid "_Use default theme font"
 msgstr "Br_uk forvalgt temaskrift"
 
-#: src/dialogs/gedit-preferences.glade2.h:80
-msgid "level(s)"
-msgstr "nivå(er)"
+#: src/dialogs/gedit-preferences.glade2.h:77
+msgid "action(s)"
+msgstr "handling(er)"
 
-#: src/dialogs/gedit-preferences.glade2.h:81
+#: src/dialogs/gedit-preferences.glade2.h:78
 msgid "minutes"
 msgstr "minutter"
 
+#: src/dialogs/gnome-print-font-dialog.c:110
+msgid "Modify preview phrase..."
+msgstr "Endre forhåndsvisningsfrase..."
+
+#: src/dialogs/gnome-print-font-dialog.c:164
+msgid "Preview"
+msgstr "Forhåndsvis"
+
+#: src/dialogs/gnome-print-font-dialog.c:177
+msgid "_Modify preview phrase..."
+msgstr "_Endre forhåndsvisningsfrase..."
+
+#: src/dialogs/gnome-print-font-dialog.c:235
+msgid "Font Selection"
+msgstr "Skriftutvalg"
+
+#: src/dialogs/gnome-print-font-picker.c:89
+msgid "sans 12"
+msgstr "sans 12"
+
+#: src/dialogs/gnome-print-font-picker.c:90
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzÆæØøÅå"
+
+#: src/dialogs/gnome-print-font-picker.c:91
+msgid "Pick a Font"
+msgstr "Velg en skrift"
+
+#: src/dialogs/gnome-print-font-picker.c:176
+msgid "Title"
+msgstr "Tittel"
+
+#: src/dialogs/gnome-print-font-picker.c:177
+msgid "The title of the selection dialog box"
+msgstr "Tittel på dialog for utvalg"
+
+#: src/dialogs/gnome-print-font-picker.c:197
+msgid "Font name"
+msgstr "Skriftnavn"
+
+#: src/dialogs/gnome-print-font-picker.c:198
+msgid "Name of the selected font"
+msgstr "Navn på valgt skrift"
+
+#: src/dialogs/gnome-print-font-picker.c:206
+msgid "Preview text"
+msgstr "Forhåndsvist tekst"
+
+#: src/dialogs/gnome-print-font-picker.c:207
+msgid "Preview text shown in the dialog"
+msgstr "Forhåndsvist tekst i dialogen"
+
+#: src/dialogs/gnome-print-font-picker.c:215
+msgid "Use font in label"
+msgstr "Bruk skrift i etikett"
+
+#: src/dialogs/gnome-print-font-picker.c:216
+msgid "Use font in the label in font info mode"
+msgstr "Bruk skriften i etiketten i skriftinformasjonsmodus"
+
+#: src/dialogs/gnome-print-font-picker.c:224
+msgid "Font size for label"
+msgstr "Skriftstørrelse for etikett"
+
+#: src/dialogs/gnome-print-font-picker.c:225
+msgid "Font size for label in font info mode"
+msgstr "Skriftstørrelse for etiket i skriftinformasjonsmodus"
+
+#: src/dialogs/gnome-print-font-picker.c:235
+msgid "Show size"
+msgstr "Vis størrelse"
+
+#: src/dialogs/gnome-print-font-picker.c:236
+msgid "Show size in font info mode"
+msgstr "Vis størrelse i skriftinformasjonsmodus"
+
+#. gnome_print_font_picker_update_font_info
 #: src/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
 msgstr "Gå til linje"
@@ -1030,7 +1092,7 @@ msgstr "Sett programlokasjon..."
 msgid "_Location to search for:"
 msgstr "_Lokasjon du vil søke etter"
 
-#: src/dialogs/program-location-dialog.glade2.h:5
+#: src/dialogs/program-location-dialog.glade2.h:3
 msgid "label"
 msgstr "etikett"
 
@@ -1038,93 +1100,25 @@ msgstr "etikett"
 msgid "Case sensi_tive"
 msgstr "Skiller mellom s_tore/små bokstaver"
 
-#: src/dialogs/replace.glade2.h:2
-msgid "Find Next"
-msgstr "Finn neste"
-
-#: src/dialogs/replace.glade2.h:4
-msgid "Replace All"
-msgstr "Erstatt alle"
-
-#: src/dialogs/replace.glade2.h:5
+#: src/dialogs/replace.glade2.h:3
 msgid "Replace _with: "
 msgstr "Erstatt _med: "
 
-#: src/dialogs/replace.glade2.h:6
+#: src/dialogs/replace.glade2.h:4
 msgid "Search fro_m the beginning of the document"
 msgstr "Søk fra begynnelsen av doku_mentet"
 
-#: src/dialogs/replace.glade2.h:7
+#: src/dialogs/replace.glade2.h:5
 msgid "Search from the c_ursor position"
 msgstr "Søk fra mar_kørposisjonen"
 
-#: src/dialogs/replace.glade2.h:8
+#: src/dialogs/replace.glade2.h:6
 msgid "_Search for: "
 msgstr "_Søk etter: "
 
 #: src/dialogs/uri.glade2.h:1
 msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "Skriv inn lokasjon (URI) for filen du ønsker å åpne:"
-
-#: src/dialogs/uri.glade2.h:2
-msgid "Open from URI"
-msgstr "Åpne fra URI"
-
-#: src/dialogs/uri.glade2.h:5
-msgid "gtk-open"
-msgstr "gtk-open"
-
-#: src/gedit2.c:68
-msgid "Show mdi debugging messages."
-msgstr "Vis feilsøkingsmeldinger for mdi."
-
-#: src/gedit2.c:71
-msgid "Show commands debugging messages."
-msgstr "Vis feilsøkingsmeldinger for kommandoer."
-
-#: src/gedit2.c:74
-msgid "Show document debugging messages."
-msgstr "Vis feilsøkingsmeldinger for dokumenter."
-
-#: src/gedit2.c:77
-msgid "Show file debugging messages."
-msgstr "Vis feilsøkingsmeldinger for filer."
-
-#: src/gedit2.c:80
-msgid "Show plugin debugging messages."
-msgstr "Vis feilsøkingsmeldinger for tillegg."
-
-#: src/gedit2.c:83
-msgid "Show prefs debugging messages."
-msgstr "Vis feilsøkingsmeldinger for brukervalg."
-
-#: src/gedit2.c:86
-msgid "Show printing debugging messages."
-msgstr "Vis feilsøkingsmeldinger for utskrift."
-
-#: src/gedit2.c:89
-msgid "Show search debugging messages."
-msgstr "Vis feilsøkingsmeldinger for søk."
-
-#: src/gedit2.c:92
-msgid "Show undo debugging messages."
-msgstr "Vis feilsøkingsmeldinger for angrefunksjon."
-
-#: src/gedit2.c:95
-msgid "Show view debugging messages."
-msgstr "Vis feilsøkingsmeldinger for visning."
-
-#: src/gedit2.c:98
-msgid "Show recent debugging messages."
-msgstr "Vis nylige feilsøkingsmeldinger."
-
-#: src/gedit2.c:101
-msgid "Turn on all debugging messages."
-msgstr "Slå på alle feilsøkingsmeldinger."
-
-#: src/gedit2.c:159
-msgid "The GNOME text editor"
-msgstr "GNOME tekstredigering"
 
 #: src/gedit-commands.c:56
 msgid "Not yet implemented."
@@ -1196,6 +1190,23 @@ msgstr "Filen er for stor."
 msgid "It is not possible to revert an Untitled document"
 msgstr "Du kan ikke forkaste et dokument uten tittel"
 
+#: src/gedit-file-selector-util.c:97
+#, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"En fil med navn «%s» eksisterer allerede.\n"
+"Vil du erstatte den med filen du lagrer?"
+
+#: src/gedit-file-selector-util.c:105
+msgid "Do_n't replace"
+msgstr "I_kke erstatt"
+
+#: src/gedit-file-selector-util.c:459
+msgid "Select a filename to save"
+msgstr "Velg et filnavn for lagring"
+
 #: src/gedit-file.c:123
 msgid "Open File ..."
 msgstr "Åpne fil ..."
@@ -1250,23 +1261,6 @@ msgstr "Lastet %i filer"
 #: src/gedit-file.c:688
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke lese data fra stdin."
-
-#: src/gedit-file-selector-util.c:97
-#, c-format
-msgid ""
-"A file named ''%s'' already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"En fil med navn «%s» eksisterer allerede.\n"
-"Vil du erstatte den med filen du lagrer?"
-
-#: src/gedit-file-selector-util.c:105
-msgid "Do_n't replace"
-msgstr "I_kke erstatt"
-
-#: src/gedit-file-selector-util.c:459
-msgid "Select a filename to save"
-msgstr "Velg et filnavn for lagring"
 
 #: src/gedit-mdi.c:758
 #, c-format
@@ -1405,11 +1399,11 @@ msgid "Add/Remove plugins"
 msgstr "Legg til/fjern tillegg"
 
 #: src/gedit-ui.xml.h:4
-msgid "C_ustomize Status Bar"
+msgid "C_ustomize Statusbar"
 msgstr "Tilpass stat_uslinjen"
 
 #: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the status bar in the current window"
+msgid "Change the visibility of the statusbar in the current window"
 msgstr "Endre synlighet for statuslinjen i aktivt vindu"
 
 #: src/gedit-ui.xml.h:6
@@ -1477,12 +1471,12 @@ msgid "Cut the selection"
 msgstr "Klipp ut utvalget"
 
 #: src/gedit-ui.xml.h:22
-msgid "Delete the selected text"
-msgstr "Slett valgt tekst"
+msgid "Delete"
+msgstr "Slett"
 
 #: src/gedit-ui.xml.h:23
-msgid "Deleted"
-msgstr "Slettet"
+msgid "Delete the selected text"
+msgstr "Slett valgt tekst"
 
 #: src/gedit-ui.xml.h:24
 msgid "Dump XML"
@@ -1793,7 +1787,7 @@ msgid "_Search"
 msgstr "_Søk"
 
 #: src/gedit-ui.xml.h:109
-msgid "_Status Bar"
+msgid "_Statusbar"
 msgstr "_Statuslinje"
 
 #: src/gedit-ui.xml.h:110
@@ -2095,3 +2089,55 @@ msgstr "  OVR"
 #: src/gedit-view.c:930
 msgid "  INS"
 msgstr "  SET"
+
+#: src/gedit2.c:68
+msgid "Show mdi debugging messages."
+msgstr "Vis feilsøkingsmeldinger for mdi."
+
+#: src/gedit2.c:71
+msgid "Show commands debugging messages."
+msgstr "Vis feilsøkingsmeldinger for kommandoer."
+
+#: src/gedit2.c:74
+msgid "Show document debugging messages."
+msgstr "Vis feilsøkingsmeldinger for dokumenter."
+
+#: src/gedit2.c:77
+msgid "Show file debugging messages."
+msgstr "Vis feilsøkingsmeldinger for filer."
+
+#: src/gedit2.c:80
+msgid "Show plugin debugging messages."
+msgstr "Vis feilsøkingsmeldinger for tillegg."
+
+#: src/gedit2.c:83
+msgid "Show prefs debugging messages."
+msgstr "Vis feilsøkingsmeldinger for brukervalg."
+
+#: src/gedit2.c:86
+msgid "Show printing debugging messages."
+msgstr "Vis feilsøkingsmeldinger for utskrift."
+
+#: src/gedit2.c:89
+msgid "Show search debugging messages."
+msgstr "Vis feilsøkingsmeldinger for søk."
+
+#: src/gedit2.c:92
+msgid "Show undo debugging messages."
+msgstr "Vis feilsøkingsmeldinger for angrefunksjon."
+
+#: src/gedit2.c:95
+msgid "Show view debugging messages."
+msgstr "Vis feilsøkingsmeldinger for visning."
+
+#: src/gedit2.c:98
+msgid "Show recent debugging messages."
+msgstr "Vis nylige feilsøkingsmeldinger."
+
+#: src/gedit2.c:101
+msgid "Turn on all debugging messages."
+msgstr "Slå på alle feilsøkingsmeldinger."
+
+#: src/gedit2.c:159
+msgid "The GNOME text editor"
+msgstr "GNOME tekstredigering"
