@@ -195,7 +195,7 @@ static gint
 point_to_line(gE_document * doc, gint point)
 {
 	gint i, lines;
-	gchar *c = g_malloc0(3);
+	gchar *c;
 
 	lines = 0;
 	i = point;
@@ -203,9 +203,9 @@ point_to_line(gE_document * doc, gint point)
 		c = gtk_editable_get_chars(GTK_EDITABLE(doc->text), i - 1, i);
 		if (strcmp(c, "\n") == 0)
 			lines++;
+		g_free (c);
 	}
 
-	g_free(c);
 	return lines;
 }
 

@@ -383,6 +383,7 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 				g_free (buffer);
 			}
 		}
+		g_free (buffer);
 	}
 
 	whitespace = g_malloc0 (newline_1 - i + 2);
@@ -391,7 +392,10 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 	{
 		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i, i+1);
 		if ((buffer[0] != 32) & (buffer[0] != 9))
+		{
+			g_free (buffer);
 			break;
+		}
 		strncat (whitespace, buffer, 1);
 		g_free (buffer);
 	}
@@ -642,6 +646,7 @@ void
 close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 {
 	int num, numdoc;
+	int *ptr;
 	gchar *title;
 	GtkNotebook *nb;
 	gE_window *w;
@@ -667,9 +672,10 @@ close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 		return;
 
 	/* Remove document from our hash tables */
-	g_free( g_hash_table_lookup(doc_pointer_to_int, doc) );
-	g_hash_table_remove(doc_int_to_pointer, g_hash_table_lookup(doc_pointer_to_int, doc));
+	ptr = g_hash_table_lookup(doc_pointer_to_int, doc);
+	g_hash_table_remove(doc_int_to_pointer, ptr);
 	g_hash_table_remove(doc_pointer_to_int, doc);
+	g_free (ptr);
 
 	/* remove notebook entry and item from document list */
 	num = gtk_notebook_current_page(nb);
@@ -795,13 +801,15 @@ window_close_cb(GtkWidget *widget, gpointer cbdata)
 static void
 close_window_common(gE_window *w)
 {
+	gint *ptr;
 	g_assert(w != NULL);
 	window_list = g_list_remove(window_list, (gpointer)w);
 
-	g_free( g_hash_table_lookup(win_pointer_to_int, w) );
-	g_hash_table_remove(win_int_to_pointer, g_hash_table_lookup(win_pointer_to_int, w));
+	ptr = g_hash_table_lookup(win_pointer_to_int, w);
+	g_hash_table_remove(win_int_to_pointer, ptr);
 	g_hash_table_remove(win_pointer_to_int, w);
-
+	g_free (ptr);
+	
 	if (w->files_list_window)
 		gtk_widget_destroy(w->files_list_window);
 	gtk_widget_destroy(w->window);
@@ -1013,8 +1021,10 @@ void recent_update (gE_window *window)
 		}
 	}
 	gnome_history_free_recently_used_list (gnome_recent_list);
-#endif /* Using GNOME */
+	window->num_recent = g_list_length (filelist);
 	
+#endif /* Using GNOME */
+
 	recent_update_menus (window, filelist);
 }
 

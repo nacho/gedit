@@ -181,6 +181,7 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 		gtk_editable_insert_text(GTK_EDITABLE(doc->split_screen),
 			buf, strlen(buf), &pos);
 		gtk_text_thaw(GTK_TEXT(doc->split_screen));
+		g_free (buf);
 	}
 #endif
 	

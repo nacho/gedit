@@ -90,8 +90,8 @@ gE_window_new(void)
 	w->save_fileselector = NULL;
 	w->open_fileselector = NULL;
 	w->documents = NULL;
-	w->search = g_malloc(sizeof(gE_search));
-	w->search->window = NULL;
+	w->search = g_malloc0(sizeof(gE_search));
+
 	w->auto_indent = TRUE;
 	w->show_tabs = TRUE;
 	w->tab_pos = GTK_POS_TOP;
@@ -280,12 +280,16 @@ gE_document
 
 	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 1);
 
+	/* QUESTION: Are you supposed to free the style when you're
+	   done assigning it to a widget? Purify says there's a mem
+	   leak here */
 	style = gtk_style_new();
 	gtk_widget_set_style(GTK_WIDGET(doc->text), style);
 
 	gtk_widget_set_rc_style(GTK_WIDGET(doc->text));
 	gtk_widget_ensure_style(GTK_WIDGET(doc->text));
-
+	g_free (style);
+		
 	gtk_signal_connect_object(GTK_OBJECT(doc->text), "event",
 		GTK_SIGNAL_FUNC(gE_document_popup_cb), GTK_OBJECT(w->popup));
 

@@ -376,6 +376,7 @@ int main (int argc, char **argv)
 		}
 	}
 
+	g_free (data);
 	/* Init plugins... */
 	plugins = NULL;
 

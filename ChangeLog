@@ -1,3 +1,16 @@
+1998-12-13  Evan Lawrence <evan@worldpath.net>
+	
+	* src/commands.c:
+	  src/gE_document.c:
+	  src/gE_files.c:
+	  src/gE_prefslib.c
+	  src/gedit.c:
+	  src/search.c: Fixed mem leaks, free mem reads, etc that yosh
+	  found with purify. Thanks man! :) There are still some mem leaks
+	  in plugin.c, and gE_plugin_api.c that Chris and I, respectively,
+	  need to fix.  If people could test the changes out to verify
+	  I didn't break anything, that would be great.
+
 Sat Dec 12 21:08:14 PST 1998 Manish Singh <yosh@gimp.org>
 
 	* src/plugin.c: correct off-by-one error in argv[0] allocation
