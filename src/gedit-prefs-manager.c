@@ -158,9 +158,9 @@
 #define GPM_DEFAULT_PRINT_WRAP_MODE	"GTK_WRAP_CHAR"
 #define GPM_DEFAULT_PRINT_LINE_NUMBERS	0 /* No numbers */
 
-#define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Monospace 9"
-#define GPM_DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Sans Normal 11"
-#define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Sans Normal 8"
+#define GPM_DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Monospace Regular 9"
+#define GPM_DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Sans Regular 11"
+#define GPM_DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Sans Regular 8"
 
 #define GPM_DEFAULT_MAX_RECENTS		5
 

@@ -49,6 +49,7 @@ typedef enum
 {
 
   GEDIT_ENCODING_ISO_8859_1,
+  GEDIT_ENCODING_ISO_8859_2,
   GEDIT_ENCODING_ISO_8859_3,
   GEDIT_ENCODING_ISO_8859_4,
   GEDIT_ENCODING_ISO_8859_5,
@@ -140,6 +141,8 @@ static GeditEncoding encodings [] = {
 
   { GEDIT_ENCODING_ISO_8859_1,
     "ISO-8859-1", N_("Western") },
+  { GEDIT_ENCODING_ISO_8859_2,
+   "ISO-8859-2", N_("Central European") },
   { GEDIT_ENCODING_ISO_8859_3,
     "ISO-8859-3", N_("South European") },
   { GEDIT_ENCODING_ISO_8859_4,
