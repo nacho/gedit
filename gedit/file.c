@@ -373,8 +373,8 @@ file_save_cb (GtkWidget *widget)
 	/* We want to save even if the doc has not been modified
 	   since the doc on disk might have been modified externally
 	   and the user wants to overwrite it. Chema */
-	if ( doc->filename == NULL )
-		file_save_as_cb( widget, NULL);
+	if (doc->filename == NULL)
+		file_save_as_cb (widget, NULL);
 	else
 		gedit_file_save (doc, NULL);
 }

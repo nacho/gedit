@@ -19,12 +19,14 @@ libdialogs_a_SOURCES = 		\
 	dialogs.h
 
 glade_DATA =		\
+	about.glade	\
 	find-line.glade \
 	prefs.glade	\
 	search.glade	\
 	replace.glade
 
 glade_msgs =			\
+	about.glade.h		\
 	find-line.glade.h	\
 	prefs.glade.h		\
 	search.glade.h		\

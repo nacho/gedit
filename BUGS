@@ -1,16 +1,13 @@
-Fixed BUGS have been moved to the bottom of the file.
-
-Known bugs in the current version of gEdit (as of April/2000):
-------	 Known BUGS ----------------------
+Known:
 
 	* "Replace All" bug (Bug #6140, #4105)
 
-------	  Known but small BUGS ----------------------
+Small:
 	
 	* If you delete with the delete key v.s. the
 	  backspace and the undo the cursor does reposition itself o.k.
 
-------	  To be confirmed BUGS ----------------------
+Unconfirmed:
 	
 	* Deleting a line will sometimes make the next line down dissappear,
 	  until you highlight it.
@@ -19,54 +16,60 @@ Known bugs in the current version of gEdit (as of April/2000):
 	* There are issues with auto indent and multiple views of a document
 	  ( we need to confirm if this is still a problem )
 
-	
-------	  FIXED BUGS	  ----------------------
-Done	* Get gmodules to build
+Done/Fixed:
 
-Done	* Should add version checking into configure.in such that it
+	* If you are working on a doc, click exit or close the
+	  window, you are asked if you want to save. If you click
+	  yes gedit exitst without saving.
+
+	* if you ./configure --prefix to somewhere other than
+          gnome-config --prefix, then the plugins won't be recognized.
+
+	* Get gmodules to build
+
+	* Should add version checking into configure.in such that it
           will warn the user if they don't have the latest glib/gtk or
           gnome-libs
       
-Fixed	* Lots of GnomeUI-Critical and Gtk-Warning messages when you
+	* Lots of GnomeUI-Critical and Gtk-Warning messages when you
           try to do "Open (swap) .c/.h file" for something that does
           not have a file that's .c/.h to swap with.
 
-Fixed	* Crash: Change your preferences to enable "Close Window After
+	* Crash: Change your preferences to enable "Close Window After
 	  Closing Last", then close all window tabs, then try to
 	  go to the Preferences.
 	
-Fixed	* You can't pull a menu by using the Alt+{menu key}
+	* You can't pull a menu by using the Alt+{menu key}
 	  alt+keys are doing different actions. We should disable
           the use of alt keys to modify the file, this is a simple
 	  text editor.
 	  (Bug #1478)
 
-Fixed	* The "recent files" listing will include files that no longer
+	* The "recent files" listing will include files that no longer
 	  exist, and when you go to select them from the list, there
 	  is no error message or any visual clue that the file is not
 	  going to be loaded because it no longer exists.
 
-Fixed   * If you open a file it gets the name Untitled, if you
-	  type something it changed to Untitled1. If you then
-	  open another file it get opened witht the name Untilted1
-	  if you type in the file it changes to Untitled2
+	* If you open a file it gets the name Untitled, if you type
+	  something it changed to Untitled1. If you then open another
+	  file it get opened witht the name Untilted1 if you type in
+	  the file it changes to Untitled2
 
-Fixed	* Revert is not working and thus it has been disabled.
+	* Revert is not working and thus it has been disabled.
 
-Fixed	* We need to be able to deal with a broken config file after
+	* We need to be able to deal with a broken config file after
           launching gedit. It seems to crash with some problems with
 	  the config file.
 	  (Many bug reports...)
 
-Fixed	* Need to fix the text wrapping when printing and
+	* Need to fix the text wrapping when printing and
 	  print previewing.
 
-Fixed	* CTRL + Q does not work
+	* CTRL + Q does not work
 
-Fixed	* Column counting does not work properly
-	 ( what a stupid bug this was !!!!!!)
+	* Column counting does not work properly
+	  (what a stupid bug this was !!!!!!)
 
-Fixed	* If you close with Ctrl + K you modifiy the document
+	* If you close with Ctrl + K you modifiy the document
 	  so you get asked if you want to save it even if the document
 	  has not been modified.
-
