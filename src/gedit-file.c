@@ -305,6 +305,7 @@ gedit_file_save (GeditMDIChild* child)
 		GnomeRecentModel *recent;
 		gchar *raw_uri;
 		gchar *canonical_uri;
+		gchar *canonical_uri_utf8;
 
 		gedit_debug (DEBUG_FILE, "OK");
 
@@ -317,12 +318,18 @@ gedit_file_save (GeditMDIChild* child)
 		
 		canonical_uri = gnome_vfs_x_make_uri_canonical (raw_uri);
 		g_return_val_if_fail (canonical_uri != NULL, TRUE);
+
+		/* canonical_uri is not valid utf8 */
 		
+		canonical_uri_utf8 = g_filename_to_utf8 (canonical_uri, -1, NULL, NULL, NULL);
+		g_return_val_if_fail (canonical_uri_utf8 != NULL, TRUE);
+
 		recent = gedit_recent_get_model ();
-		gnome_recent_model_add (recent, canonical_uri);
+		gnome_recent_model_add (recent, canonical_uri_utf8);
 
 		g_free (raw_uri);
 		g_free (canonical_uri);
+		g_free (canonical_uri_utf8);
 
 		return TRUE;
 	}
