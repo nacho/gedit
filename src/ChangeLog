@@ -1,11 +1,19 @@
+2000-04-03  Jason Leach  <leach@wam.umd.edu>
+
+	* gE_window.c (gedit_window_set_status_bar): new function, it will
+	change your life (if your life is lacking dynamic control of
+	enabling/disabling the statusbar)
+
+	* gE_prefs_box.c (gedit_apply): fixed a bug where everytime you
+	pressed OK in the preferences, it would run the apply callback
+	twice, that's like, way lame and stuff.
+
 2000-04-03  Chema Celorio  <chema@celorio.com>
-
-	* gedit-undo.c (views_insert): fixed a cursor
-	positioning problem when undoing
-	(views_delete): ditto
-	basiclly thaw gtk_text befor inserting/deleting
-	this keeps the cursor in the correct position
-
+	* gedit-undo.c (views_insert): fixed a cursor positioning problem
+	  when undoing
+	  (views_delete): ditto basiclly thaw gtk_text befor
+   	  inserting/deleting this keeps the cursor in the correct position
+	
 2000-04-02  Jason Leach  <leach@wam.umd.edu>
 
 	* gE_mdi.c (get_untitled_as_string): made static

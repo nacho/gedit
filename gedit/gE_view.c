@@ -73,13 +73,12 @@ GtkVBoxClass *parent_class = NULL;
 void
 view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
-/*	gchar MOD_label[255]; */
 	gchar *str;
 
 	gedit_view *view = (gedit_view *) cbdata;
 
 	if (view->document->changed)
-	  return;
+		return;
 	
 	view->document->changed = TRUE;
 	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);
@@ -87,14 +86,14 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	
 	str = g_malloc (strlen (GNOME_MDI_CHILD(view->document)->name) + 2);
 	
-	sprintf(str, "*%s", GNOME_MDI_CHILD(view->document)->name);
+	sprintf (str, "*%s", GNOME_MDI_CHILD(view->document)->name);
 	/*gtk_label_set(GTK_LABEL(doc->tab_label), MOD_label);*/
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->document), str);
 	
 	g_free (str);
 	
 	str = g_malloc0 (strlen (GEDIT_ID) +
-				 strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
+			 strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
 	sprintf (str, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name, GEDIT_ID);
 	gtk_window_set_title(GTK_WINDOW(mdi->active_window), str);
 	g_free(str);
@@ -427,18 +426,21 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 }
 
 void
-line_pos_cb(GtkWidget *w, gedit_data *data)
+line_pos_cb (GtkWidget *w, gedit_data *data)
 {
 	static char col [32];
-/*	GtkWidget *label; */
-	GnomeApp *app;
-	
-	app = gnome_mdi_get_active_window  (mdi);
-	
+
 	sprintf (col, "Column: %d",
-	 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->cursor_pos_x/6);
+		 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->cursor_pos_x/6);
 	
-	gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
+
+
+	if (settings->show_status)
+	{
+		GnomeApp *app = gnome_mdi_get_active_window (mdi);
+
+		gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
+	}
 }
 
 gint
@@ -942,36 +944,37 @@ gedit_view_refresh (gedit_view *view)
 {
 	gint i = gedit_view_get_length (view);
 
-	if (i > 0) {
-	
-	  gedit_view_set_position (view, i);
-	  gtk_text_backward_delete (GTK_TEXT(view->text), i);
-	  gtk_text_backward_delete (GTK_TEXT(view->split_screen), i);
-		
+	if (i > 0)
+	{
+		gedit_view_set_position (view, i);
+		gtk_text_backward_delete (GTK_TEXT(view->text), i);
+		gtk_text_backward_delete (GTK_TEXT(view->split_screen), i);
 	}
 
-	if (view->document->buf) {
-	
+	if (view->document->buf)
+	{
 #ifdef DEBUG
 	  	g_print ("gedit_view_refresh: inserting buffer..\n");
 #endif	  	
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
-						 NULL,
-						 NULL, view->document->buf->str,
-						 view->document->buf->len);
+				 NULL,
+				 NULL, view->document->buf->str,
+				 view->document->buf->len);
 
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
-						 NULL,
-						 NULL, view->document->buf->str,
-						 view->document->buf->len);
+				 NULL,
+				 NULL, view->document->buf->str,
+				 view->document->buf->len);
 		gtk_text_thaw (GTK_TEXT (view->text));
 		
 		gedit_view_set_position (view, 0);
 	}
 }
 
-#if 0 /* These functionis are defined but not used */
+
+/* These functionis are defined but not used */
+#if 0
 static void
 gedit_view_realize (GtkWidget *w)
 {
@@ -1015,7 +1018,8 @@ gedit_view_size_allocate (GtkWidget *w, GtkAllocation *alloc)
 	gtk_widget_size_allocate (view->vbox, &my_alloc);
 }
 
-static void gedit_view_size_request (GtkWidget *w, GtkRequisition *req)
+static void
+gedit_view_size_request (GtkWidget *w, GtkRequisition *req)
 {
 /*	gedit_view *view = GE_VIEW (w); */
 /*	GtkRequisition sb_req; */

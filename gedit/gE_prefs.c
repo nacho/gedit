@@ -52,12 +52,12 @@ gedit_save_settings (void)
 	gnome_config_set_string ("font", settings->font);
 
 	if (settings->print_cmd == "")
-	  gnome_config_set_string ("print command", "lpr -rs %s");
+		gnome_config_set_string ("print command", "lpr -rs %s");
 	else
-	  gnome_config_set_string ("print command", settings->print_cmd);
+		gnome_config_set_string ("print command", settings->print_cmd);
 	
 	if (!settings->run)
-	  settings->run = TRUE;
+		settings->run = TRUE;
 	
 	gnome_config_set_int ("run", (gint) settings->run);
 	
@@ -68,7 +68,6 @@ gedit_save_settings (void)
 void
 gedit_get_settings (void)
 {
-	 
 	gnome_config_push_prefix ("/gEdit/Global/");
 	 
 	mdi->tab_pos = gnome_config_get_int ("tab pos");
@@ -100,29 +99,27 @@ gedit_get_settings (void)
 	settings->font = gnome_config_get_string ("font");
 	if (settings->font == NULL) {
 	
-	  if (use_fontset)
-	     settings->font = DEFAULT_FONTSET;
-	   else
-	     settings->font = DEFAULT_FONT;
+		if (use_fontset)
+			settings->font = DEFAULT_FONTSET;
+		else
+			settings->font = DEFAULT_FONT;
 	
 	}
 	
 	settings->print_cmd = gnome_config_get_string ("print command=lpr %s"); 
 
 
-	if (settings->run) {
-	
-	  if (settings->show_status == FALSE)
-	    gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
-	
-	} else {
-	
-	 settings->show_status = TRUE;
-	 gnome_config_set_int ("show statusbar", (gboolean) settings->show_status);
-	
+	if (settings->run)
+	{
+		if (mdi->active_window && !settings->show_status)
+			gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
+	}
+	else {
+		settings->show_status = TRUE;
+		gnome_config_set_int ("show statusbar",
+				      (gboolean) settings->show_status);
 	}
 	
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
-	
 }

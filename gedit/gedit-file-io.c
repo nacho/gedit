@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
- * gEdit
+ * gEdit - File Input/Output routines
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -76,6 +76,8 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 						nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
 											   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
 				}
+
+				gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPEN), fname);
 
 				flash = g_strdup_printf ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 				gnome_app_flash (mdi->active_window, flash);

@@ -130,19 +130,12 @@ gedit_window_refresh (gedit_window *w)
 	GtkStyle *style;
 	GdkColor *bg, *fg;
 
-	/* FIXME: This function is basically borked right now... */
-
-	/*FIXME    if (w->show_status == 0)
-	       gtk_widget_hide (GTK_WIDGET (w->statusbar)->parent);
-     	else
-       	  gtk_widget_show (GTK_WIDGET (w->statusbar)->parent);
-	*/       
-	
 	gedit_view_set_split_screen (GE_VIEW (mdi->active_view),
-						  (gint) GE_VIEW (mdi->active_view)->splitscreen);
+				     (gint) GE_VIEW (mdi->active_view)->splitscreen);
    
-  
+
 	gedit_window_set_status_bar (settings->show_status);
+
 /*  
 	for (i = 0; i < NUM_MDI_MODES; i++) {
 	
@@ -172,28 +165,23 @@ gedit_window_refresh (gedit_window *w)
 	fg->green = settings->fg[1];
 	fg->blue = settings->fg[2];
 
-	for (i = 0; i < g_list_length (mdi->children); i++) {
-  
+	for (i = 0; i < g_list_length (mdi->children); i++)
+	{
 		doc = GE_DOCUMENT(g_list_nth_data (mdi->children, i));
   	
-		for (j = 0; j < g_list_length (doc->views); j++) {
- 	  
-			g_message ("i = %d, j = %d", i, j);
+		for (j = 0; j < g_list_length (doc->views); j++)
+		{
+/* 	  		g_message ("i = %d, j = %d", i, j); */
 			nth_view = g_list_nth_data (doc->views, j);
-
 			gedit_view_set_font (nth_view, settings->font);
 			gedit_view_set_word_wrap (nth_view, settings->word_wrap);
   	    
-			gtk_widget_set_style(GTK_WIDGET(nth_view->split_screen),
-									style);
-			gtk_widget_set_style(GTK_WIDGET(nth_view->text),
-									style);
-  	    
-  	  }
-
+			gtk_widget_set_style (GTK_WIDGET (nth_view->split_screen),
+					      style);
+			gtk_widget_set_style (GTK_WIDGET (nth_view->text),
+					      style);
+		}
 	}
-	
-
 }
 
 void
@@ -202,12 +190,14 @@ gedit_apply (GnomePropertyBox *pbox, gint page, gedit_data *data)
 	gint i;
 	GtkStyle *style;
 	GdkColor *c;
-/*	FILE *file; */
-/*	gchar *rc; */
+
+	/* if OK is pressed, lets not run this code twice */
+        if (page != -1)
+                return;
 
 	/* General Settings */
 	settings->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
-	settings->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);  
+	settings->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);
 	GE_VIEW (mdi->active_view)->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
 	settings->word_wrap = (GTK_TOGGLE_BUTTON (prefs->wordwrap)->active);
 
@@ -223,48 +213,43 @@ gedit_apply (GnomePropertyBox *pbox, gint page, gedit_data *data)
   
 	/* Document Settings */
 	if (GTK_TOGGLE_BUTTON (prefs->DButton1)->active)
-	  settings->close_doc = FALSE;
+		settings->close_doc = FALSE;
 	if (GTK_TOGGLE_BUTTON (prefs->DButton2)->active)
-	  settings->close_doc = TRUE;
+		settings->close_doc = TRUE;
 
-	for (i = 0; i < NUM_MDI_MODES; i++) {
-	
-	  if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active) {
-	
-            if (mdiMode != mdi_type[i]) {
-          
-              mdiMode = mdi_type[i];
-              gnome_mdi_set_mode (mdi, mdiMode);
-            }
-         
-            break;
-        
-          }
-          
+	for (i = 0; i < NUM_MDI_MODES; i++)
+	{
+		if (GTK_TOGGLE_BUTTON (prefs->mdi_type[i])->active)
+		{
+			if (mdiMode != mdi_type[i])
+			{
+				mdiMode = mdi_type[i];
+				gnome_mdi_set_mode (mdi, mdiMode);
+			}
+			break;
+		}
         }
-
 	
 	style = gtk_style_new ();
 	
 	c = &style->base[0];
 	
 	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (prefs->bgpick),
-							&c->red, &c->green, &c->blue, 0);
+				    &c->red, &c->green, &c->blue, 0);
 	settings->bg[0] = c->red;
 	settings->bg[1] = c->green;
 	settings->bg[2] = c->blue;
 	
-	
 	c = &style->text[0];
 	
 	gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (prefs->fgpick),
-							&c->red, &c->green, &c->blue, 0);
+				    &c->red, &c->green, &c->blue, 0);
 	settings->fg[0] = c->red;
 	settings->fg[1] = c->green;
 	settings->fg[2] = c->blue;
 	 
-	gedit_window_refresh(data->window);
-	gedit_save_settings();	
+	gedit_save_settings ();	
+	gedit_window_refresh (data->window);
 }
 
 void
@@ -754,7 +739,7 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 
 	if (!prefs) {
 
-	  return;
+		return;
 	
 	}
 
@@ -762,72 +747,73 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 	prefs->gData = data;
   
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "destroy",
-					GTK_SIGNAL_FUNC (cancel_cb), prefs);
+			    GTK_SIGNAL_FUNC (cancel_cb), prefs);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "delete_event",
-					GTK_SIGNAL_FUNC (gtk_false), NULL);
+			    GTK_SIGNAL_FUNC (gtk_false), NULL);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "apply",
-					GTK_SIGNAL_FUNC (gedit_apply), data);
+			    GTK_SIGNAL_FUNC (gedit_apply), data);
 
 	help_entry.name = gnome_app_id;
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "help",
-					GTK_SIGNAL_FUNC (gnome_help_pbox_display),
-					&help_entry);
+			    GTK_SIGNAL_FUNC (gnome_help_pbox_display),
+			    &help_entry);
 
 
 	/* General Settings */
-	label = gtk_label_new (_("General"));
-	gtk_notebook_append_page (GTK_NOTEBOOK( (prefs->pbox)->notebook),
-							general_page_new(), label);
+	gtk_notebook_append_page (GTK_NOTEBOOK((prefs->pbox)->notebook),
+				  general_page_new(),
+				  gtk_label_new _("General"));
 
 	/* Window Settings */
-	label = gtk_label_new (_("Window"));
 	gtk_notebook_append_page (GTK_NOTEBOOK ((prefs->pbox)->notebook),
-							window_page_new(), label);
+				  window_page_new(),
+				  gtk_label_new _("Window"));
 
 	/* Docuemnt Settings */
-	label = gtk_label_new (_("Document"));
 	gtk_notebook_append_page (GTK_NOTEBOOK( (prefs->pbox)->notebook),
-							doc_page_new(), label);
+				  doc_page_new(),
+				  gtk_label_new _("Document"));
  
   
 	get_prefs(data);
 
 
 	gtk_signal_connect (GTK_OBJECT (prefs->autoindent), "toggled",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+
 	gtk_signal_connect (GTK_OBJECT (prefs->status), "toggled",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->wordwrap), "toggled",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->split), "toggled",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->pcmd), "changed",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->preW), "changed",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->preH), "changed",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	for (i = 0; i < NUM_MDI_MODES; i++)
-	  gtk_signal_connect (GTK_OBJECT (prefs->mdi_type[i]), "clicked",
-					  GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+		gtk_signal_connect (GTK_OBJECT (prefs->mdi_type[i]), "clicked",
+				    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
   
 	gtk_signal_connect (GTK_OBJECT (prefs->DButton1), "toggled",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->DButton2), "toggled",
-					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
+			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
   
 /*
 	gtk_signal_connect (GTK_OBJECT (prefs->bgpick), "color_set",
@@ -837,5 +823,4 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 					GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 */
 	gtk_widget_show_all (GTK_WIDGET (prefs->pbox));
-                                    
 }

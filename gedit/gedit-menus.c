@@ -135,12 +135,12 @@ GnomeUIInfo gedit_settings_menu[] =
 				    N_("Toggle autoindent"),
 				    auto_indent_toggle_cb, (gpointer) GE_DATA,
 				    NULL),
-
-	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_STATUSBAR,
+*/
+	GNOMEUIINFO_TOGGLEITEM_DATA(N_("Toggle Statusbar"),
 				    N_("Toggle statusbar"),
 				    options_toggle_status_bar_cb,
 				    NULL, NULL),
-
+/*
 	GNOMEUIINFO_TOGGLEITEM_DATA(GE_TOGGLE_LABEL_WORDWRAP,
 				    N_("Toggle Wordwrap"),
 				    options_toggle_word_wrap_cb,

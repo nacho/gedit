@@ -1004,7 +1004,6 @@ options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 		(view, !GTK_WIDGET_VISIBLE (view->split_parent));
 }
 
-
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
@@ -1013,21 +1012,24 @@ options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 	gedit_view_set_read_only (view, !view->read_only);
 }
 
-void options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
+void
+options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 	
 	gedit_view_set_word_wrap (view, !view->word_wrap);
 }
 
-void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
+void
+options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 
 	gedit_view_set_line_wrap (view, !view->line_wrap);
 }
 
-void options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
+void
+options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 {
 	gedit_window_set_status_bar (!settings->show_status);
 }

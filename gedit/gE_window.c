@@ -130,18 +130,16 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 
 	gtk_drag_dest_set (GTK_WIDGET(app),
-		GTK_DEST_DEFAULT_MOTION |
-		GTK_DEST_DEFAULT_HIGHLIGHT |
-		GTK_DEST_DEFAULT_DROP,
-		drag_types, n_drag_types,
-		GDK_ACTION_COPY);
+			   GTK_DEST_DEFAULT_MOTION |
+			   GTK_DEST_DEFAULT_HIGHLIGHT |
+			   GTK_DEST_DEFAULT_DROP,
+			   drag_types, n_drag_types,
+			   GDK_ACTION_COPY);
 		
-	gtk_signal_connect (GTK_OBJECT (app),
-		"drag_data_received",
-		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
+	gtk_signal_connect (GTK_OBJECT (app), "drag_data_received",
+			    GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 
-
-	gedit_window_set_icon(GTK_WIDGET(app), "gE_icon");
+	gedit_window_set_icon (GTK_WIDGET(app), "gE_icon");
 
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
@@ -151,7 +149,8 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	/* find in files result window  dont show it.*/
 	search_result_window = create_find_in_files_result_window();
 
-	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window, TRUE, TRUE, 0); 
+	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window,
+			    TRUE, TRUE, 0); 
 
 	/* gtk_widget_hide(search_result_window); */
 
@@ -161,14 +160,15 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gedit_plugins_window_add (app);
 	
 	settings->num_recent = 0;
-	recent_update(GNOME_APP(app));
+	recent_update (GNOME_APP(app));
 
 	/* statusbar */
-	statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
-	gnome_app_set_statusbar (GNOME_APP(app),GTK_WIDGET (statusbar));
-		
-	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
-	
+	if (settings->show_status)
+	{
+		statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
+		gnome_app_set_statusbar (GNOME_APP(app), GTK_WIDGET (statusbar));
+		gnome_app_install_menu_hints (app, gnome_mdi_get_menubar_info(app));
+	}
 }
 
 void
@@ -199,35 +199,58 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 void
 gedit_window_set_status_bar (gint show_status)
 {
-
 	settings->show_status = show_status;
 
-	if (show_status)
-	  gtk_widget_show (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
-	else
-	  gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
+	if ( !mdi->active_window->statusbar )
+	{
+		GtkWidget *statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
 
+/*		mdi->active_window->statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER); */
+		gnome_app_set_statusbar (GNOME_APP (mdi->active_window),
+					 GTK_WIDGET (statusbar));
+		gnome_app_install_menu_hints (GNOME_APP (mdi->active_window),
+					      gnome_mdi_get_menubar_info (mdi->active_window));
+
+		mdi->active_window->statusbar = statusbar;
+	}
+	else if ( mdi->active_window->statusbar->parent )
+	{
+		gtk_widget_ref (mdi->active_window->statusbar);
+		gtk_container_remove (GTK_CONTAINER (mdi->active_window->statusbar->parent),
+				      mdi->active_window->statusbar);
+	}
+	else
+	{
+		gtk_box_pack_start (GTK_BOX (mdi->active_window->vbox),
+				    mdi->active_window->statusbar,
+				    FALSE, FALSE, 0);
+		gtk_widget_unref (GNOME_APP (mdi->active_window)->statusbar);
+	}
+
+/*
+	if (show_status)
+		gtk_widget_show (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar)); 
+	else
+		gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
+*/
 }
 
 void
 child_switch (GnomeMDI *mdi, gedit_document *doc)
 {
-
 	gchar *title;
 
-	if (gedit_document_current()) {
-	
-	  gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
-	  title = g_malloc0 (strlen (GEDIT_ID) +
-					 strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
-	  sprintf (title, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name,
-			GEDIT_ID);
+	if (gedit_document_current())
+	{
+		gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
+		title = g_malloc0 (strlen (GEDIT_ID) +
+				   strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
+		sprintf (title, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name,
+			 GEDIT_ID);
 	  
-	  gtk_window_set_title(GTK_WINDOW(mdi->active_window), title);
-	  g_free(title);
-	
+		gtk_window_set_title (GTK_WINDOW(mdi->active_window), title);
+		g_free (title);
 	}
-
 }
 
 /*	umm.. FIXME?

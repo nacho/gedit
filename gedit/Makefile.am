@@ -10,8 +10,6 @@ INCLUDES = -I$(includedir) -I$(top_srcdir) \
 plugindir = $(libexecdir)/go/plugins
 pluginlibdir = $(libexecdir)/gedit/plugins
 geditincludedir = $(includedir)/gedit
-gtkrcdir = $(datadir)
-gtkrc_DATA = geditrc
 
 EXTRA_gedit_SOURCES = gE_plugin.h gE_plugin.c
 
@@ -64,7 +62,7 @@ gedit_LDADD =	$(GNOME_LIBDIR) 	\
 		$(INTLLIBS) 		\
 		$(GNOME_PRINT_LIBS)
 
-EXTRA_DIST = $(gtkrc_DATA) 
+EXTRA_DIST =  
 
 CPPFLAGS = \
 	-DBINDIR=\""$(bindir)"\" \
