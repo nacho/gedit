@@ -106,8 +106,10 @@ GtkStyle *style;
   gdk_font_unref (style->font);
   style->font = gdk_font_load (w->font);
   
-  gtk_widget_push_style (style);     
+  gtk_widget_push_style (style);    
+  #ifdef GTK_HAVE_FEATURES_1_1_0	 
      gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->split_screen), style);
+  #endif
      gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->text), style);
   gtk_widget_pop_style ();
 
@@ -315,8 +317,10 @@ static GtkWidget *print_page_new()
 
 void font_sel_ok (GtkWidget	*w, GtkWidget *fsel)
 {
+#ifdef GTK_HAVE_FEATURES_1_1_0	
   gtk_entry_set_text(GTK_ENTRY(prefs->font),
        gtk_font_selection_dialog_get_font_name (GTK_FONT_SELECTION_DIALOG(fsel)));
+#endif
   gtk_widget_destroy (fsel);
 }
 
@@ -325,6 +329,7 @@ void font_sel_cancel (GtkWidget *w, GtkWidget *fsel)
   gtk_widget_destroy (fsel);
 }
 
+#ifdef GTK_HAVE_FEATURES_1_1_0	
 void font_sel()
 {
        GtkWidget *fs;
@@ -367,7 +372,7 @@ void font_sel()
         gtk_widget_destroy (prefs->fontsel);*/
         
 }
-      
+#endif /* GTK_HAVE_FEATURES_1_1_0 */
 
 static GtkWidget *font_page_new()
 {
@@ -397,6 +402,7 @@ static GtkWidget *font_page_new()
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
     
+  #ifdef GTK_HAVE_FEATURES_1_1_0	
   button = gtk_button_new_with_label ("Select Font");
   gtk_signal_connect (GTK_OBJECT(button), "clicked",
    			  GTK_SIGNAL_FUNC(font_sel),
@@ -404,7 +410,8 @@ static GtkWidget *font_page_new()
   
   gtk_box_pack_start(GTK_BOX(hbox), button, TRUE, TRUE, 0);
   gtk_widget_show(button);  
-
+  #endif
+  
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 0);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);

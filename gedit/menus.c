@@ -90,8 +90,10 @@ static GtkMenuEntry menu_items[] =
 		options_toggle_status_bar_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toggle Wordwrap", NULL,
 		options_toggle_word_wrap_cb, (gpointer)GE_WINDOW, NULL},
+#ifdef GTK_HAVE_FEATURES_1_1_0	
 	{"<Main>/Options/Toggle Linewrap", NULL,
 		options_toggle_line_wrap_cb, (gpointer)GE_WINDOW, NULL},
+#endif
 	{"<Main>/Options/Toggle ReadOnly", NULL,
 		options_toggle_read_only_cb, (gpointer)GE_WINDOW, NULL},
 #ifdef GTK_HAVE_FEATURES_1_1_0

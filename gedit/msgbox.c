@@ -71,8 +71,12 @@ mbprintf(const char *fmt, ...)
         va_list args;
 	gchar *buf;
 
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	va_start (args, fmt);
 	buf = g_strdup_vprintf (fmt, args);
+#else
+	buf = g_strdup(fmt);
+#endif
 
 	va_end (args);
 	msgbox_append (buf);
@@ -80,7 +84,10 @@ mbprintf(const char *fmt, ...)
 } /* mbprintf */
 
 static void
-log_handler(const gchar *log_domain, GLogLevelFlags log_level,
+log_handler(const gchar *log_domain, 
+#ifdef GTK_HAVE_FEATURES_1_1_0	
+GLogLevelFlags log_level,
+#endif
 	    const gchar *message, gpointer user_data)
 {
 	msgbox_append (message);
@@ -189,7 +196,9 @@ msgbox_create(void)
 	gtk_widget_grab_default(button);
 	gtk_widget_show(button);
 
+#ifdef GTK_HAVE_FEATURES_1_1_0	
 	g_log_set_handler(G_LOG_DOMAIN, LOGFLAGS, log_handler, NULL);
+#endif
 
 	mbprintf("Welcome to %s", GEDIT_ID);
 

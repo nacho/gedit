@@ -139,7 +139,11 @@ popup_close_verify(gE_document *doc, gE_data *data)
 	char *fname, *title, *msg;
 	char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL } ;
 
+#ifdef GTK_HAVE_FEATURES_1_1_0	
 	fname = (doc->filename) ? g_basename(doc->filename) : UNTITLED;
+#else
+	fname = doc->filename;
+#endif
 	
 	title = (char *)g_malloc(strlen(CLOSE_TITLE) + strlen(fname) + 5);
 	msg =   (char *)g_malloc(strlen(CLOSE_MSG) + strlen(fname) + 6);
@@ -510,13 +514,20 @@ file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
 	gchar *buffer;
 	gE_data *data = (gE_data *)cbdata;
 	int pos = 0;
+	#ifdef GTK_HAVE_FEATURES_1_1_0	
+	gchar *base;
+	#endif
 	
 	src_doc = gE_document_current (data->window);
 	buffer = gtk_editable_get_chars (GTK_EDITABLE (src_doc->text), 0, -1);
 	win = gE_window_new ();
 	dest_doc = gE_document_current (win);
 	dest_doc->filename = g_strdup (src_doc->filename);
+	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	gtk_label_set (GTK_LABEL (dest_doc->tab_label), (const char *)g_basename (dest_doc->filename));
+	#else
+	gtk_label_set (GTK_LABEL (dest_doc->tab_label), GTK_LABEL (src_doc->tab_label)->label);
+	#endif
 	gtk_editable_insert_text (GTK_EDITABLE (dest_doc->text), buffer, strlen (buffer), &pos);
 	dest_doc->changed = src_doc->changed;
 	close_doc_execute (src_doc, data);
@@ -1159,11 +1170,13 @@ void options_toggle_word_wrap_cb (GtkWidget *widget, gE_window *window)
 	gE_document_set_word_wrap (doc, !doc->word_wrap);
 }
 
+#ifdef GTK_HAVE_FEATURES_1_1_0	
 void options_toggle_line_wrap_cb (GtkWidget *widget, gE_window *window)
 {
 	gE_document *doc = gE_document_current (window);
 	gE_document_set_line_wrap (doc, !doc->line_wrap);
 }
+#endif
 
 void options_toggle_status_bar_cb (GtkWidget *w, gE_window *window)
 {

@@ -271,7 +271,9 @@ gE_document
 	doc->text = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(doc->text), !doc->read_only);
 	gtk_text_set_word_wrap(GTK_TEXT(doc->text), doc->word_wrap);
-	gtk_text_set_line_wrap(GTK_TEXT(doc->text), doc->line_wrap);
+	#ifdef GTK_HAVE_FEATURES_1_1_0	
+	 gtk_text_set_line_wrap(GTK_TEXT(doc->text), doc->line_wrap);
+	#endif
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->text), "button_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), w);
@@ -450,19 +452,23 @@ void gE_document_set_word_wrap (gE_document *doc, gint word_wrap)
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
 
+#ifdef GTK_HAVE_FEATURES_1_1_0	
 void gE_document_set_line_wrap (gE_document *doc, gint line_wrap)
 {
 	doc->line_wrap = line_wrap;
 	gtk_text_set_line_wrap (GTK_TEXT (doc->text), doc->line_wrap);
 }
+#endif
 
 void gE_document_set_read_only (gE_document *doc, gint read_only)
 {
 	doc->read_only = read_only;
 	gtk_text_set_editable (GTK_TEXT (doc->text), !doc->read_only);
-	if (doc->split_screen)
+	#ifdef GTK_HAVE_FEATURES_1_1_0	
+	 if (doc->split_screen)
 		gtk_text_set_editable
 			(GTK_TEXT (doc->split_screen), !doc->read_only);
+	#endif
 }
 
 #ifndef WITHOUT_GNOME

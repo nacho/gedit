@@ -111,9 +111,13 @@ extern gboolean gE_plugin_document_close(gint);
 extern void gE_plugin_set_auto_indent(gint, gint);
 extern void gE_plugin_set_status_bar(gint, gint);
 extern void gE_plugin_set_word_wrap(gint, gint);
+#ifdef GTK_HAVE_FEATURES_1_1_0
 extern void gE_plugin_set_line_wrap(gint, gint);
+#endif
 extern void gE_plugin_set_read_only(gint, gint);
+#ifdef GTK_HAVE_FEATURES_1_1_0
 extern void gE_plugin_set_split_screen(gint, gint);
+#endif
 
 #ifndef WITHOUT_GNOME
 extern void gE_plugin_set_scroll_ball(gint, gint);

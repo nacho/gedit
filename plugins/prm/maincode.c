@@ -30,7 +30,7 @@
 #include "client.h"
 #define INCLUDE_DIR1 "/usr/include"
 #define INCLUDE_DIR2 "/usr/local/include"
-/*///////////////////////// function defines   */
+/* ///////////////////////// function defines   */
 prj_manager_window* prj_create_window();
 void create_menubar(prj_manager_menubar *);
 void prj_create_signals(prj_manager_window *);
@@ -39,7 +39,7 @@ void fileopen_callback_ok(GtkWidget *o,gpointer ptr);
 void prj_create_treelist(gchar *fname,prj_manager_window *ptr);
 void prj_tree_callback_buttonclick (GtkWidget *pt,  GdkEventButton *ev,gpointer p);
 void prj_tree_callback_selchange(GtkCTree *pt,GtkCTreeNode *row,gint col,gpointer p);
-/*/////////////////////////////////////*/
+/* ///////////////////////////////////// */
 void destroy(GtkWidget *w,gpointer ptr)
 {
 	g_free((prj_manager_window *)ptr);

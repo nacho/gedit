@@ -38,6 +38,7 @@ static gchar *thanks[] = {
 	"Chris Lahey",
 	"Andy Kahn",
 	"Miguel de Icaza",
+	"Martin Baulig",
 	NULL
 };
 

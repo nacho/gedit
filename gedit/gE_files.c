@@ -161,7 +161,12 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 
 	/* misc settings */
 	doc->filename = fname;
+	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)g_basename(fname));
+	#else
+	gtk_label_set(GTK_LABEL(doc->tab_label), strrchr (fname, '/'));
+	#endif
+	
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
 #ifdef GTK_HAVE_FEATURES_1_1_0
@@ -253,8 +258,13 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 		g_free(doc->filename);
 	doc->filename = g_strdup(fname);
 	doc->changed = FALSE;
+	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	gtk_label_set(GTK_LABEL(doc->tab_label),
 		(const char *)g_basename(doc->filename));
+	#else
+	gtk_label_set(GTK_LABEL(doc->tab_label), strrchr(doc->filename, '/'));
+	#endif
+	
 	if (!doc->changed_id)
 		doc->changed_id =
 			gtk_signal_connect (
@@ -268,9 +278,15 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 	gtk_window_set_title (GTK_WINDOW (window->window), title);
 	g_free (title);
 
+	#ifdef GTK_HAVE_FEATURES_1_1_0	
 	flw_update_entry(window, doc,
 		gtk_notebook_current_page(GTK_NOTEBOOK(window->notebook)),
 		(char *)g_basename(fname));
+	#else
+	flw_update_entry(window, doc,
+		gtk_notebook_current_page(GTK_NOTEBOOK(window->notebook)),
+		strrchr(fname, '/'));	
+	#endif
 
 	mbprintf("saved %s", doc->filename);
 	gE_msgbar_set(window, MSGBAR_FILE_SAVED);
@@ -469,7 +485,11 @@ flw_append_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 	}
 
 	if (text && strlen(text) > 0) {
+	#ifdef GTK_HAVE_FEATURES_1_1_0
 		rownfo[2] =  (char *)g_basename(text);
+	#else
+		rownfo[2] = strrchr (text, '/');
+	#endif
 	} else {
 		rownfo[1] = UNKNOWN;
 		rownfo[2] = UNTITLED;
