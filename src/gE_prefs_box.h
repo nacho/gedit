@@ -22,4 +22,7 @@
 
 void gE_prefs_dialog (GtkWidget *widget, gpointer cbdata);
 
+void gE_property_box_new(GtkWidget *widget, gpointer cbdata);
+
+
 #endif
