@@ -1,31 +1,34 @@
 # Note that this is NOT a relocatable package
 %define ver      0.5.0
-%define rel      1
+%define rel      3
 %define prefix   /usr
 
-Summary:   gEdit 
+Summary:   gEdit is a small but powerful text editor for GNOME.
 Name:      gedit
 Version:   %ver
 Release:   %rel
 Copyright: GPL
-Group:     Editors
+Group:     Applications/Editors
 Source0:   gedit-%{PACKAGE_VERSION}.tar.gz
-URL:       http://gedit.pn.org
-BuildRoot: /tmp/gedit-%{PACKAGE_VERSION}-root
-Packager: Alex Roberts <bse@dial.pipex.com>
-Requires: gtk+ >= 1.0.7
-Requires: gnome-libs
-#Docdir: %{prefix}/doc
+URL:       http://gedit.pn.org/
+BuildRoot: /var/tmp/gedit-root
+Docdir: %{prefix}/doc
 
 %description
-gEdit is a small but powerful text editor for GTK+ and/or GNOME.
+gEdit is a small but powerful text editor designed expressly
+for GNOME.  It supports a split-screen mode and plugins that
+make it even more powerful.  Developers can develop their
+own plugins if they desire.
 
 %package devel
-Summary: gEdit is a small but powerful text editor for GTK+ and/or GNOME.
+Summary: Develop plugins for the gEdit editor
 Group: Editors
 
 %description devel
 gEdit is a small but powerful text editor for GTK+ and/or GNOME.
+This package allows you to develop plugins that work within
+gEdit.  Plugins can create new documents and manipulate documents
+in arbitrary ways.
  
 %prep
 %setup
@@ -43,7 +46,6 @@ fi
 
 %install
 rm -rf $RPM_BUILD_ROOT
-#install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d,X11/wmconfig}
 
 make prefix=$RPM_BUILD_ROOT%{prefix} install
 
@@ -70,11 +72,8 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/*
 
 %changelog
+* Sat Feb 06 1999 Michael Johnson <johnsonm@redhat.com>
+- Cleaned up a bit for Red Hat use
 
 * Thu Oct 22 1998 Alex Roberts <bse@dial.pipex.com>
-
 - First try at an RPM
-
-
-
-
