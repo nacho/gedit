@@ -83,6 +83,12 @@ gE_window_new(void)
 	GtkWidget *box1, *box2, *tmp;
 	gint *ptr; /* For plugin stuff. */
 
+	static GtkTargetEntry drag_types[] =
+	{
+		{ "text/uri-list", 0, 0 },
+	};
+	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
+
 	/* various initializations */
 	w = g_malloc0(sizeof(gE_window));
 	w->search = g_malloc0(sizeof(gE_search));
@@ -173,6 +179,15 @@ gE_window_new(void)
 	window_list = g_list_append(window_list, (gpointer) w);
 
 	gE_window_refresh (w);
+	
+	gtk_drag_dest_set (w->window,
+		GTK_DEST_DEFAULT_ALL,
+		drag_types, n_drag_types,
+		GDK_ACTION_COPY);
+		
+	gtk_signal_connect (GTK_OBJECT (w->window),
+		"drag_data_received",
+		GTK_SIGNAL_FUNC (filenames_dropped), w);
 	
 	gtk_signal_emit_by_name (GTK_OBJECT (w->window), "check_resize");
 	gtk_widget_grab_focus (GTK_WIDGET (gE_document_current (w)->text));
@@ -359,6 +374,22 @@ gE_document
 
 	return doc;
 } /* gE_document_new */
+
+
+gE_document *gE_document_new_with_file (gE_window *window, gchar *filename)
+{
+	gE_document *doc;
+	char *nfile, *name;
+
+	name = filename;
+	doc = gE_document_new(window);
+	nfile = g_malloc(strlen(name)+1);
+	strcpy(nfile, name);
+	gE_file_open (window, gE_document_current(window), nfile);
+
+	return doc;
+
+} /* gE_document_new_with_file */
 
 
 gE_document *gE_document_current(gE_window *window)

@@ -60,6 +60,16 @@ extern gint auto_indent_cb(GtkWidget *text, char *insertion_text, int length, in
 extern void auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata);
 extern gint gE_event_button_press(GtkWidget *w, GdkEventButton *, gE_window *);
 
+/* DND */
+extern void filenames_dropped (GtkWidget * widget,
+	GdkDragContext   *context,
+	gint              x,
+	gint              y,
+	GtkSelectionData *selection_data,
+	guint             info,
+	guint             time,
+	gE_window        *window);
+
 /* Recent documents */
 extern void recent_add (char *filename);
 extern void recent_update (gE_window *window);
@@ -70,9 +80,8 @@ extern void doc_insert_text_cb(GtkWidget *editable,
 	char *insertion_text, int length, int *pos, gE_document *doc);
 extern void doc_delete_text_cb (GtkWidget *editable,
 	int start_pos, int end_pos, gE_document *doc);
-#ifdef GTK_HAVE_FEATURES_1_1_0
+
 extern void options_toggle_split_screen_cb (GtkWidget *widget, gE_window *window);
-#endif
 extern void options_toggle_status_bar_cb (GtkWidget *widget, gE_window *window);
 extern void options_toggle_word_wrap_cb (GtkWidget *widget, gE_window *window);
 extern void options_toggle_line_wrap_cb (GtkWidget *widget, gE_window *window);

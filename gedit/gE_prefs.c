@@ -297,9 +297,7 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 	gE_prefs_set_int("tb relief", (gint) window->use_relief_toolbar);
 	gE_prefs_set_int("splitscreen", (gint) window->splitscreen);
 #endif
-#ifndef WITHOUT_GNOME
-	gE_prefs_set_int("scrollball", (gint) window->scrollball);
-#endif
+
 	gE_prefs_set_char("font", window->font);
 	if (window->print_cmd == "")
 		gE_prefs_set_char ("print command", "lpr -rs %s");

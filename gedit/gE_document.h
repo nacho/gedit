@@ -39,6 +39,7 @@ extern void gE_window_set_auto_indent (gE_window *window, gint auto_indent);
 extern void gE_window_set_status_bar (gE_window *window, gint show_status);
 extern gE_window *gE_window_new();
 extern gE_document *gE_document_new(gE_window *window);
+extern gE_document *gE_document_new_with_file (gE_window *window, gchar *filename);
 extern gE_document *gE_document_current(gE_window *window);
 extern void gE_document_set_word_wrap (gE_document *doc, gint word_wrap);
 #ifdef GTK_HAVE_FEATURES_1_1_0	

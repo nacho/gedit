@@ -440,6 +440,31 @@ gint gE_event_button_press (GtkWidget *w, GdkEventButton *event, gE_window *wind
 	return FALSE;
 }
 
+/* --- Drag and Drop Callback(s) --- */
+
+/* This is a modified routine from gnumeric. */
+
+void
+filenames_dropped (GtkWidget * widget,
+                   GdkDragContext   *context,
+                   gint              x,
+                   gint              y,
+                   GtkSelectionData *selection_data,
+                   guint             info,
+                   guint             time,
+                   gE_window        *window)
+{
+	GList *names, *tmp_list;
+
+	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
+	tmp_list = names;
+
+	while (tmp_list) {
+		gE_document_new_with_file (window, tmp_list->data);
+		tmp_list = tmp_list->next;
+	}
+}
+
 
 /* ---- File Menu Callbacks ---- */
 

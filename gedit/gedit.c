@@ -213,10 +213,6 @@ int main (int argc, char **argv)
 	window = gE_window_new();
 
 	data->window = window;
-
-	#ifdef DEBUG
-	  g_print("...\n");
-	#endif
 	
 	if (file_list){
 		gE_document *doc;
