@@ -143,7 +143,7 @@ struct _GeditPreferencesDialogPrivate
 	/* Plugin/Manager */
 	GtkWidget	*plugin_manager;
 
-	/* Load page */
+	/* Open page */
 	GtkWidget	*encodings_treeview;
 	GtkWidget	*add_enc_button;
 	GtkWidget	*remove_enc_button;
@@ -236,7 +236,7 @@ static CategoriesTreeItem editor_behavior [] =
 	{N_("Auto Indent"), NULL, AUTO_INDENT_SETTINGS},
 	{N_("Line Numbers"), NULL , LINE_NUMBERS_SETTINGS},
 	
-	{N_("Load"), NULL, LOAD_SETTINGS },
+	{N_("Open"), NULL, LOAD_SETTINGS },
  	{N_("Save"), NULL, SAVE_SETTINGS },
 	{N_("Undo"), NULL, UNDO_SETTINGS},
 

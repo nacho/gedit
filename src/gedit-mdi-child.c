@@ -211,7 +211,8 @@ gedit_mdi_child_real_state_changed (GeditMDIChild* child)
 	{
 		if (gedit_document_is_readonly (child->document)) 
 		{
-			tab_name = g_strdup_printf ("RO - %s", docname);
+			tab_name = g_strdup_printf ("%s - %s", docname, 
+						/*Read only*/ _("RO"));
 		} 
 		else 
 		{

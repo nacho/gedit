@@ -1,5 +1,19 @@
 2002-12-09  Paolo Maggi  <paolo.maggi@polito.it>
 
+	* gedit-mdi-child.c (gedit_mdi_child_real_state_changed):
+	s/RO - docname/docname - RO
+
+	* gedit-view.c (gedit_view_update_cursor_position_statusbar): fix 	
+	bug #95330 ("Col." status counts characters instead of columns)
+
+	* dialogs/gedit-preferences-dialog.c: the Load category is now 
+	called Open
+
+	* dialogs/gedit-preferences.glade2: ui-review related fixes
+
+
+2002-12-09  Paolo Maggi  <paolo.maggi@polito.it>
+
 	* gedit-commands.c:
 	* gedit-view.c: 
 	* gedit-undo-manager.c: fixed bug #99249 (Undo and redo should move 

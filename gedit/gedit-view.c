@@ -915,6 +915,9 @@ gedit_view_set_tab_size (GeditView* view, gint tab_size)
 	pango_tab_array_free (tab_array);
 
 	view->priv->tab_size = tab_size;
+	gedit_view_update_cursor_position_statusbar (
+			GTK_TEXT_BUFFER (gedit_view_get_document (view)),
+			view);	
 }
 
 void
@@ -990,14 +993,15 @@ gedit_view_set_overwrite_mode_statusbar (GeditView *view, GtkWidget* status)
 	if (status != NULL)
 		gedit_view_update_overwrite_mode_statusbar (view->priv->text_view, view);
 }
-
+			
 static void
 gedit_view_update_cursor_position_statusbar (GtkTextBuffer *buffer, GeditView* view)
 {
 	gchar *msg;
-	gint row, col;
+	gint row, col/*, chars*/;
 	GtkTextIter iter;
-
+	GtkTextIter start;
+	
 	gedit_debug (DEBUG_VIEW, "");
   
 	if (view->priv->cursor_position_statusbar == NULL)
@@ -1011,15 +1015,42 @@ gedit_view_update_cursor_position_statusbar (GtkTextBuffer *buffer, GeditView* v
 					  gtk_text_buffer_get_insert (buffer));
 	
 	row = gtk_text_iter_get_line (&iter);
-	col = gtk_text_iter_get_line_offset (&iter);
-	msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
+	
+	/*
+	chars = gtk_text_iter_get_line_offset (&iter);
+	*/
+	
+	start = iter;
+	gtk_text_iter_set_line_offset (&start, 0);
+	col = 0;
 
+	while (!gtk_text_iter_equal (&start, &iter))
+	{
+		if (gtk_text_iter_get_char (&start) == '\t')
+		{
+			col += (view->priv->tab_size - (col  % view->priv->tab_size));
+		}
+		else
+			++col;
+
+		gtk_text_iter_forward_char (&start);
+	}
+	
+	/*
+	if (col == chars)
+		msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
+	else
+		msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
+	*/
+
+	msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
+	
 	gtk_statusbar_push (GTK_STATUSBAR (view->priv->cursor_position_statusbar), 
 			    0, msg);
 
       	g_free (msg);
 }
-
+	
 static void
 gedit_view_cursor_moved (GtkTextBuffer     *buffer,
 			 const GtkTextIter *new_location,
