@@ -138,9 +138,9 @@ gedit_close_confirmation_dialog_init (GeditCloseConfirmationDialog *dlg)
 	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
-	gedit_dialog_add_button (GTK_DIALOG (dlg),
-				_("Close _without Saving"), GTK_STOCK_NO,
-				GTK_RESPONSE_NO);
+	gtk_dialog_add_button (GTK_DIALOG (dlg),
+			       _("Close _without Saving"),
+			       GTK_RESPONSE_NO);
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
