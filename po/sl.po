@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2001-01-20 23:56+0100\n"
+"POT-Creation-Date: 2001-02-08 22:15+0100\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -114,7 +114,7 @@ msgstr ""
 "\n"
 
 #: plugins/diff/diff.c:262 plugins/email/email.c:224 plugins/email/email.c:230
-#: src/document.c:269 src/print.c:703
+#: src/document.c:286 src/document.c:290
 msgid "Untitled"
 msgstr "Neimenovan"
 
@@ -310,7 +310,7 @@ msgstr "gedit: Nastavitve"
 msgid "Replace"
 msgstr "Zamenjaj"
 
-#: src/dialogs/dialog-replace.c:135 src/menus.c:266
+#: src/dialogs/dialog-replace.c:135 src/menus.c:283
 msgid "Find"
 msgstr "Poi¹èi"
 
@@ -417,7 +417,7 @@ msgstr "Naèin: "
 msgid "Notebook Tab Position: "
 msgstr "Mesto uhljev notesnika: "
 
-#: src/dialogs/prefs.glade.h:28 src/menus.c:245
+#: src/dialogs/prefs.glade.h:28 src/menus.c:261
 msgid "Undo"
 msgstr "Razveljavi"
 
@@ -578,43 +578,62 @@ msgstr "Name¹èeni vtièniki"
 msgid "Plugin description"
 msgstr "Opis vtiènika"
 
-#: src/document.c:251
+#: src/document.c:260 src/document.c:264
 msgid "RO - "
 msgstr "Le branje - "
 
-#: src/document.c:269
+#: src/document.c:286
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/document.c:443
+#: src/document.c:290
+msgid "%s %d*"
+msgstr "%s %d*"
+
+#: src/document.c:465
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "``%s'' je bil spremenjen.  Ga ¾elite shraniti?"
 
-#: src/document.c:652
+#. If you try to open a non existant remote file
+#: src/document.c:692
+msgid ""
+"An error was encountered while opening the file: \n"
+"\n"
+"%s\n"
+"\n"
+"Please make sure the file exists."
+msgstr ""
+"Ob odpiranju datoteke se je zgodila napaka: \n"
+"\n"
+"%s\n"
+"\n"
+"Prosim preverite ali datoteka obstaja."
+
+#: src/document.c:735
 #, c-format
 msgid "Untitled %i"
 msgstr "Neimenovan %i"
 
-#: src/document.c:658
+#: src/document.c:745 src/document.c:753
 msgid "(modified)"
 msgstr "(spremenjena)"
 
-#: src/document.c:660
+#: src/document.c:747 src/document.c:755
 msgid "(readonly)"
 msgstr "(le berljiva)"
 
-#: src/document.c:710 src/document.c:750
+#: src/document.c:806 src/document.c:846
 msgid "This file does not end with a valid extension\n"
 msgstr "Ime te datoteke nima velajvne pripone\n"
 
-#: src/document.c:758
+#: src/document.c:854
 #, c-format
 msgid "The file %s was not found."
 msgstr "Datoteka %s ni bila najdena."
 
-#: src/file.c:79
+#: src/file.c:84
 msgid ""
 "Hello Dear Translator :\n"
 "This is the unstable branch of gedit. \n"
@@ -630,7 +649,7 @@ msgstr ""
 "cvs -z3 co -r gedit-1-0 gedit\n"
 "Thank you. Chema"
 
-#: src/file.c:169
+#: src/file.c:198
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -639,53 +658,71 @@ msgstr ""
 "Ob odpiranju datoteke \"%s\" se je zgodila napaka.\n"
 "Prosim preverite ali datoteka obstaja."
 
-#: src/file.c:180
-#, c-format
+#: src/file.c:220
 msgid ""
-"An error was encountered while opening the file:\n"
+"An error was encountered while opening the file \"%s\".\n"
+"Could not allocate the required memory."
+msgstr ""
+"Ob odpiranju datoteke \"%s\" se je zgodila napaka.\n"
+"Nisem uspel rezervirati potrebnega pomnilnika."
+
+#: src/file.c:233
+msgid ""
+"An error was encountered while reading the file: \n"
 "\n"
 "%s\n"
 "\n"
+"Make sure that you have permissions for opening the file. "
+msgstr ""
+"Ob branju datoteke se je zgodila napaka: \n"
 "\n"
-"Please make sure the file is not being used by another application\n"
-"and that the file is not empty."
+"%s\n"
+"\n"
+"Preprièajte se, da imate dovoljenje za odprtje datoteke. "
+
+#: src/file.c:253
+msgid ""
+"An error was encountered while reading the file: \n"
+"\n"
+"%s"
 msgstr ""
 "Ob odpiranju datoteke se je zgodila napaka:\n"
 "\n"
-"%s\n"
-"\n"
-"\n"
-"Prosim preverite ali datoteke ne uporablja drug program\n"
-"in ali datoteka ni prazna."
+"%s"
 
-#: src/file.c:191 src/file.c:475
-msgid "Could not allocate the required memory."
-msgstr "Nisem mogel rezervirati ¾elenega spomina."
-
-#: src/file.c:197
-#, c-format
+#: src/file.c:274
 msgid ""
-"gedit was unable to open the file: \n"
+"Internal error reading the file: \n"
 "\n"
 "%s\n"
 "\n"
-"Make sure that you have permissions for opening the file."
+"Please, report this error to submit@bugs.gnome.org."
 msgstr ""
-"gedit ni uspel odpreti datoteke: \n"
+"Notranja napaka ob branju datoteke :\n"
 "\n"
-"%s\n"
+" %s \n"
 "\n"
-"Preprièajte se, da imate dovoljenje za odprtje datoteke."
+"Prosim sporoèite ta problem na submit@bugs.gnome.org"
 
-#: src/file.c:314
+#: src/file.c:291
+msgid ""
+"An error was encountered while closing the file: \n"
+"\n"
+"%s"
+msgstr ""
+"Ob zapiranju datoteke se je zgodila napaka:\n"
+"\n"
+"%s"
+
+#: src/file.c:471
 msgid "Save As..."
 msgstr "Shrani Kot..."
 
-#: src/file.c:373
+#: src/file.c:535
 msgid "The document contains no data."
 msgstr "Dokument ne vsebuje podatkov."
 
-#: src/file.c:384
+#: src/file.c:546
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -702,7 +739,7 @@ msgstr ""
 "Preprièajte se, èe pot, ki ste jo navedli obstaja in ali imate ustrezno "
 "dovoljenje za pisanje."
 
-#: src/file.c:397
+#: src/file.c:559
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -720,7 +757,7 @@ msgstr ""
 "submit@bugs.gnome.org"
 
 # c-format
-#: src/file.c:414
+#: src/file.c:576
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -737,42 +774,46 @@ msgstr ""
 "Zaradi neznanega razloga (2). Prosim sporoèite ta problem na naslov: "
 "submit@bugs.gnome.org"
 
-#: src/file.c:495
+#: src/file.c:675
+msgid "Could not allocate the required memory."
+msgstr "Nisem mogel rezervirati ¾elenega spomina."
+
+#: src/file.c:695
 msgid "Error in the pipe ."
 msgstr "Napaka v cevi ."
 
-#: src/file.c:606 src/file.c:613
+#: src/file.c:806 src/file.c:813
 #, c-format
 msgid "Loaded file %s"
 msgstr "Nalo¾ena datoteka %s"
 
-#: src/file.c:620
+#: src/file.c:820
 #, c-format
 msgid "Loaded %i files"
 msgstr "Nalo¾enih %i datotek"
 
-#: src/file.c:676
+#: src/file.c:886
 msgid "Open File ..."
 msgstr "Odpri datoteko ..."
 
-#: src/file.c:807
+#: src/file.c:1014
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "``%s'' bo prepisana. Ali ¾elite nadaljevati?"
 
-#: src/file.c:819
+#: src/file.c:1026
 msgid "Document has not been saved."
 msgstr "Dokument ¹e ni bil shranjen."
 
-#: src/file.c:829
+#: src/file.c:1036
 msgid "Error saving file!"
 msgstr "Napaka pri shranjevanju datoteke!"
 
-#: src/file.c:949
+#: src/file.c:1165
 msgid "You can't revert an Untitled document\n"
 msgstr "Ne morete razveljaviti neimenovanega dokumenta\n"
 
-#: src/file.c:962
+#: src/file.c:1178
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -781,7 +822,7 @@ msgstr ""
 "Ste preprièani, da ¾elite razveljaviti vse spremembe?\n"
 "(%s)"
 
-#: src/file.c:993
+#: src/file.c:1209
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Datoteka ``%s'' ne obstaja. Ali jo ¾elite ustvariti?"
@@ -794,7 +835,7 @@ msgstr "Odpri (zamenjaj) .s/.h datoteko"
 msgid "_New"
 msgstr "_Nova"
 
-#: src/menus.c:63 src/menus.c:224
+#: src/menus.c:63 src/menus.c:240
 msgid "Create a new document"
 msgstr "Ustvari nov dokument"
 
@@ -810,151 +851,159 @@ msgstr "Shrani vse odprte datoteke"
 msgid "Revert"
 msgstr "Povrni"
 
-#: src/menus.c:85
+#: src/menus.c:83
+msgid "Open from _URI..."
+msgstr "Odpri iz _URI-ja ..."
+
+#: src/menus.c:84
+msgid "Open a file from a specified URI"
+msgstr "Odpri datoteko iz navedenega URIja"
+
+#: src/menus.c:98
 msgid "Print pre_view"
 msgstr "Pre_dogled tiskanja"
 
-#: src/menus.c:85
+#: src/menus.c:98
 msgid "Print preview"
 msgstr "Predogled tiskanja"
 
-#: src/menus.c:89
+#: src/menus.c:102
 msgid "Print preview..."
 msgstr "Predogled tiskanja..."
 
-#: src/menus.c:90
+#: src/menus.c:103
 msgid "Preview data to be printed"
 msgstr "Predoglej si podatke, ki bodo natisnjeni"
 
-#: src/menus.c:97
+#: src/menus.c:110
 msgid "Close All"
 msgstr "Zapri vse"
 
-#: src/menus.c:98
+#: src/menus.c:111
 msgid "Close All Open Files"
 msgstr "Zapri vse odprte datoteke"
 
-#: src/menus.c:122
+#: src/menus.c:138
 msgid "Goto _Line..."
 msgstr "_Skoèi na vrstico..."
 
-#: src/menus.c:123
+#: src/menus.c:139
 msgid "Go to a specific line number"
 msgstr "Pojdi na doloèeno ¹tevilko vrstice"
 
-#: src/menus.c:138
+#: src/menus.c:154
 msgid "File _Info"
 msgstr "_Podatki o datoteki"
 
-#: src/menus.c:139
+#: src/menus.c:155
 msgid "Get the basic file info"
 msgstr "Dobi osnovne podatke o datoteki"
 
-#: src/menus.c:151
+#: src/menus.c:167
 msgid "_Add View"
 msgstr "_Dodaj Pogled"
 
-#: src/menus.c:152
+#: src/menus.c:168
 msgid "Add a new view of the document"
 msgstr "Dodaj nov pogled dokumenta"
 
-#: src/menus.c:154
+#: src/menus.c:170
 msgid "_Remove View"
 msgstr "_Odstrani Pogled"
 
-#: src/menus.c:155
+#: src/menus.c:171
 msgid "Remove view of the document"
 msgstr "Odstrani pogled na dokument"
 
-#: src/menus.c:198 src/plugin.c:90 src/plugin.c:401
+#: src/menus.c:214 src/plugin.c:90 src/plugin.c:402
 msgid "_Plugins"
 msgstr "_Vtièniki"
 
-#: src/menus.c:210
+#: src/menus.c:226
 msgid "_Documents"
 msgstr "_Dokumenti"
 
-#: src/menus.c:224
+#: src/menus.c:240
 msgid "New"
 msgstr "Nova"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open"
 msgstr "Odpri"
 
-#: src/menus.c:228
+#: src/menus.c:244
 msgid "Open a file"
 msgstr "Odpri datoteko"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save"
 msgstr "Shrani"
 
-#: src/menus.c:232
+#: src/menus.c:248
 msgid "Save the current file"
 msgstr "Shrani trenutno datoteko"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close"
 msgstr "Zapri"
 
-#: src/menus.c:236
+#: src/menus.c:252
 msgid "Close the current file"
 msgstr "Zapri trenutno datoteko"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print"
 msgstr "Natisni"
 
-#: src/menus.c:240
+#: src/menus.c:256
 msgid "Print the current file"
 msgstr "Natisni trenutno datoteko"
 
-#: src/menus.c:245
+#: src/menus.c:261
 msgid "Undo last operation"
 msgstr "Razveljavi zadnje dejanje"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo"
 msgstr "Obnovi"
 
-#: src/menus.c:249
+#: src/menus.c:265
 msgid "Redo last operation"
 msgstr "Obnovi zadnje dejanje"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut"
 msgstr "Izre¾i"
 
-#: src/menus.c:254
+#: src/menus.c:270
 msgid "Cut the selection"
 msgstr "Izre¾i izbrano"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: src/menus.c:258
+#: src/menus.c:274
 msgid "Copy the selection"
 msgstr "Kopiraj izbrano"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste"
 msgstr "Prilepi"
 
-#: src/menus.c:262
+#: src/menus.c:278
 msgid "Paste the clipboard"
 msgstr "Prilepi odlo¾i¹èe"
 
-#: src/menus.c:266
+#: src/menus.c:283
 msgid "Search for a string"
 msgstr "I¹èi niz"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit"
 msgstr "Izhod"
 
-#: src/menus.c:271
+#: src/menus.c:288
 msgid "Exit the program"
 msgstr "Izhod iz programa"
 
@@ -1022,11 +1071,11 @@ msgstr "Napaka, ne morem odpreti datoteke vtiènika, %s"
 msgid "Error, plugin does not contain init_plugin function."
 msgstr "Napaka, vtiènik ne vsebuje init_plugin funkcije."
 
-#: src/plugin.c:344
+#: src/plugin.c:345
 msgid "Error, init_plugin returned an error"
 msgstr "Napaka, funkcija init_plugin je vrnila napako"
 
-#: src/plugin.c:391
+#: src/plugin.c:392
 msgid "Error, plugin is still in use"
 msgstr "Napaka, vtiènik je ¹e vedno v uporabi"
 
@@ -1035,9 +1084,8 @@ msgid "Pages"
 msgstr "Strani"
 
 #: src/print.c:353
-#, c-format
-msgid "gedit (%s): Print Preview"
-msgstr "gedit (%s): Predogled tiskanja"
+msgid "gedit - [%s]: Print Preview"
+msgstr "gedit - [%s]: Predogled tiskanja"
 
 #: src/print.c:652 src/print.c:667
 #, c-format
@@ -1104,9 +1152,26 @@ msgstr ""
 "Current Line: %i\n"
 "Current Column: %i"
 
-#: src/view.c:963
+#: src/view.c:977
 msgid "You can't remove the last view of a document."
 msgstr "Ne morete razveljaviti neimenovanega dokumenta."
+
+#~ msgid ""
+#~ "An error was encountered while opening the file:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "Please make sure the file is not being used by another application\n"
+#~ "and that the file is not empty."
+#~ msgstr ""
+#~ "Ob odpiranju datoteke se je zgodila napaka:\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "\n"
+#~ "Prosim preverite ali datoteke ne uporablja drug program\n"
+#~ "in ali datoteka ni prazna."
 
 #~ msgid "b_eginning of document"
 #~ msgstr "z_aèetka dokumenta"
