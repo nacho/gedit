@@ -1,4 +1,36 @@
 ===========
+gedit 2.9.2
+===========
+
+Fixes
+=====
+- improve default language detection for the spell plugin (Paolo Maggi)
+- plug some memory leaks (Paolo Borelli)
+- fix a bug and a critical warning when adding an encoding (Loïc Minier)
+- listen to max-recents changes in gconf (Paolo Borelli)
+- open new files specified on the command line in the proper order. (Paolo Borelli)
+- Move to the new gtk api (about dialog, alerts etc) (Paolo Borelli)
+- Fix a crash loading remote files (Paolo Maggi)
+- Improve file naming in the window title (Paolo Maggi)
+  * modified documents are prefixed with a "*"
+  * the title of the window now has the format "filename (directory) - gedit"
+- Use Pango fonts when printing	(Owen Taylor)
+- Check if the metadata file exists before trying to parse it (Marco Pesenti Gritti)
+- Misc code cleanups (Paolo Borelli)
+
+
+New and updated translations
+============================
+- Kjartan Maraas (nb)
+- Martin Willemoes Hansen (da)
+- David Lodge (en_GB)                                                            
+- Meelad Zakaria (fa)
+- Vladimir Petkov (bg)
+- Laurent Dhima (sq)
+- Takeshi AIHANA (ja)
+
+
+===========
 gedit 2.9.1
 ===========
 
@@ -6,7 +38,7 @@ Fixes
 =====
 - Remove obsolete nautilus view (Paolo Borelli)
 - Fix compile with picky compilers (Marco Pesenti Gritti)
--  avoid duplicate key accel in the file chooser (Paolo Borelli)
+- avoid duplicate key accel in the file chooser (Paolo Borelli)
 - s/Untitled/Unsaved Document to be HIG v.2 compliant (Paolo Maggi)
 - enable some of plugins by default. The way active plugins are stored in
   gconf changed, you may have to re-select some of the plugins (Paolo Maggi)
@@ -20,7 +52,7 @@ Fixes
 New and updated translations
 ============================
 - Adam Weinberger (en_CA)
-- Miloslav Trmac (cs
+- Miloslav Trmac (cs)
 - Jordi Mallach (ca)
 - Mohammad DAMT (id
 - Christophe Merlet (fr)
