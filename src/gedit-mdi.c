@@ -773,6 +773,7 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 	
 	/* FIXME */
 	/* Drag and drop support */
+	/*
 	gtk_drag_dest_set (view,
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
@@ -783,7 +784,7 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 	g_signal_connect (G_OBJECT (view), "drag_data_received",
 			  G_CALLBACK (gedit_mdi_drag_data_received_handler), 
 			  NULL);
-
+*/
 	return TRUE;
 }
 

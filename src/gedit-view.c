@@ -509,7 +509,7 @@ gedit_view_new (GeditDocument *doc)
 	g_signal_connect (G_OBJECT (view->priv->text_view), 
 			  "drag_data_received", 
 			  G_CALLBACK (gedit_view_dnd_drop), 
-			  NULL);
+			  doc);
 
 	g_signal_connect (GTK_TEXT_BUFFER (doc), 
 			  "changed",
@@ -1081,7 +1081,9 @@ gedit_view_dnd_drop (GtkTextView *view,
 		g_snprintf (string, sizeof (string), "#%02X%02X%02X", vals[0], vals[1], vals[2]);
 		
 		gtk_text_view_get_iter_at_location (view, &iter, x, y);
-		gtk_text_buffer_insert (GTK_TEXT_BUFFER (view->buffer), &iter, string, strlen (string));
+
+		if (!gedit_document_is_readonly (GEDIT_DOCUMENT (data)))
+			gtk_text_buffer_insert (GTK_TEXT_BUFFER (view->buffer), &iter, string, strlen (string));
 
 		/*
 		 * FIXME: Check if the iter is inside a selection

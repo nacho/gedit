@@ -31,6 +31,7 @@
 #define __GEDIT_PREFERENCES_DIALOG_H__
 
 #include <gtk/gtk.h>
+#include "gedit-encodings.h"
 
 #define GEDIT_TYPE_PREFERENCES_DIALOG            (gedit_preferences_dialog_get_type ())
 #define GEDIT_PREFERENCES_DIALOG(obj)            (GTK_CHECK_CAST ((obj), GEDIT_TYPE_PREFERENCES_DIALOG, GeditPreferencesDialog))
@@ -61,5 +62,8 @@ struct  _GeditPreferencesDialogClass
 GtkType    	gedit_preferences_dialog_get_type 	(void) G_GNUC_CONST;
 
 GtkWidget*	gedit_preferences_dialog_new		(GtkWindow *parent);
+
+gboolean	gedit_preferences_dialog_add_encoding 	(GeditPreferencesDialog *dlg, 
+							 const GeditEncoding* enc);
 
 #endif /* __GEDIT_PREFERENCES_DIALOG_H__ */

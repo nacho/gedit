@@ -34,6 +34,8 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkwindow.h>
 
+#include <glib/gslist.h>
+
 #include "gedit-encodings.h"
 
 #include "gedit-debug.h"
@@ -41,7 +43,7 @@
 enum
 {
 	COLUMN_ENCODING_NAME = 0,
-	COLUMN_ENCODING_POINTER,
+	COLUMN_ENCODING_INDEX,
 	ENCODING_NUM_COLS
 };
 
@@ -52,6 +54,7 @@ struct _GeditEncodingsDialog {
 	GtkWidget *dialog;
 	
 	GtkWidget *encodings_treeview;
+	GtkTreeModel *model;
 
 	GeditPreferencesDialog *prefs_dlg;
 };
@@ -82,6 +85,9 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditEncodingsDialog *dia
 	switch (res_id) {
 		case GTK_RESPONSE_OK:
 			add_button_pressed (dialog);
+
+			gtk_widget_destroy (dialog->dialog);
+
 			break;
 			
 		case GTK_RESPONSE_HELP:
@@ -105,7 +111,46 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditEncodingsDialog *dia
 static void 
 add_button_pressed (GeditEncodingsDialog * dialog)
 {
-	/* TODO */
+	GValue value = {0, };
+	const GeditEncoding* enc;
+
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->encodings_treeview));
+	g_return_if_fail (selection != NULL);
+	
+	if (!gtk_tree_model_get_iter_first (dialog->model, &iter))
+		return;
+
+	if (gtk_tree_selection_iter_is_selected (selection, &iter))
+	{
+		gtk_tree_model_get_value (dialog->model, &iter,
+			    COLUMN_ENCODING_INDEX, &value);
+
+		enc = gedit_encoding_get_from_index (g_value_get_int (&value));
+		g_return_if_fail (enc != NULL);
+	
+		gedit_preferences_dialog_add_encoding (dialog->prefs_dlg, enc);
+	
+		g_value_unset (&value);
+	}
+
+	while (gtk_tree_model_iter_next (dialog->model, &iter))
+	{
+		if (gtk_tree_selection_iter_is_selected (selection, &iter))
+		{
+			gtk_tree_model_get_value (dialog->model, &iter,
+				    COLUMN_ENCODING_INDEX, &value);
+
+			enc = gedit_encoding_get_from_index (g_value_get_int (&value));
+			g_return_if_fail (enc != NULL);
+	
+			gedit_preferences_dialog_add_encoding (dialog->prefs_dlg, enc);
+	
+			g_value_unset (&value);
+		}
+	}
 }
 
 static GtkTreeModel*
@@ -114,15 +159,17 @@ create_encodings_treeview_model (void)
 	GtkListStore *store;
 	GtkTreeIter iter;
 	gint i;
-	
+	const GeditEncoding* enc;
+
 	gedit_debug (DEBUG_PREFS, "");
 
 	/* create list store */
-	store = gtk_list_store_new (ENCODING_NUM_COLS, G_TYPE_STRING, G_TYPE_POINTER);
+	store = gtk_list_store_new (ENCODING_NUM_COLS, G_TYPE_STRING, G_TYPE_INT);
 
-	for (i = 0; i < GEDIT_ENCODING_LAST; i++)
+	i = 0;
+	
+	while ((enc = gedit_encoding_get_from_index (i)) != NULL)
 	{
-		const GeditEncoding* enc;
 		gchar *name;
 
 		enc = gedit_encoding_get_from_index (i);
@@ -131,10 +178,11 @@ create_encodings_treeview_model (void)
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
 				    COLUMN_ENCODING_NAME, name,
-				    COLUMN_ENCODING_POINTER, enc,
+				    COLUMN_ENCODING_INDEX, i,
 				    -1);
-
 		g_free (name);
+
+		++i;
 	}
 	
 	return GTK_TREE_MODEL (store);
@@ -145,9 +193,9 @@ get_encodings_dialog (GeditPreferencesDialog *dlg)
 {
 	GladeXML *gui;
 	static GeditEncodingsDialog *dialog = NULL;	
-	GtkTreeModel *model;
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *cell;
+	GtkTreeSelection *selection;
 
 	gedit_debug (DEBUG_PREFS, "");
 
@@ -189,10 +237,10 @@ get_encodings_dialog (GeditPreferencesDialog *dlg)
 	g_signal_connect(G_OBJECT (dialog->dialog), "response",
 			 G_CALLBACK (dialog_response_handler), dialog);
 
-	model = create_encodings_treeview_model ();
-	g_return_val_if_fail (model != NULL, FALSE);
+	dialog->model = create_encodings_treeview_model ();
+	g_return_val_if_fail (dialog->model != NULL, FALSE);
 
-	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->encodings_treeview), model);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->encodings_treeview), dialog->model);
 
 	/* Add the encoding column */
 	cell = gtk_cell_renderer_text_new ();
@@ -203,6 +251,11 @@ get_encodings_dialog (GeditPreferencesDialog *dlg)
 
 	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dialog->encodings_treeview),
 			COLUMN_ENCODING_NAME);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->encodings_treeview));
+	g_return_val_if_fail (selection != NULL, NULL);
+
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
 	g_object_unref (gui);
 

@@ -44,7 +44,6 @@
 #include "gedit-utils.h"
 #include "gedit2.h"
 #include "gedit-plugin-manager.h"
-#include "gedit-encodings.h"
 
 #include "gedit-encodings-dialog.h"
 
@@ -74,6 +73,7 @@ enum
 {
 	COLUMN_ENCODING_NAME = 0,
 	COLUMN_ENCODING_POINTER,
+	COLUMN_INDEX,
 	ENCODING_NUM_COLS
 };
 
@@ -1888,11 +1888,12 @@ create_encodings_treeview_model (void)
 	GtkListStore *store;
 	GtkTreeIter iter;
 	GSList const *list;
+	gint i = 0;
 	
 	gedit_debug (DEBUG_PREFS, "");
 
 	/* create list store */
-	store = gtk_list_store_new (NUM_COLUMNS, G_TYPE_STRING, G_TYPE_POINTER);
+	store = gtk_list_store_new (ENCODING_NUM_COLS, G_TYPE_STRING, G_TYPE_POINTER, G_TYPE_INT);
 
 	/* add data to the list store */
 	list = gedit_prefs_manager_get_encodings ();
@@ -1909,10 +1910,13 @@ create_encodings_treeview_model (void)
 		gtk_list_store_set (store, &iter,
 				    COLUMN_ENCODING_NAME, name,
 				    COLUMN_ENCODING_POINTER, enc,
+				    COLUMN_INDEX, i,
 				    -1);
 
 		g_free (name);
+		
 		list = g_slist_next (list);
+		++i;
 	}
 	
 	return GTK_TREE_MODEL (store);
@@ -1970,6 +1974,59 @@ gedit_preferences_dialog_setup_load_page (GeditPreferencesDialog *dlg, GladeXML 
 
 	gtk_tree_view_set_search_column (GTK_TREE_VIEW (dlg->priv->encodings_treeview),
 			COLUMN_ENCODING_NAME);
+
+	return TRUE;
+}
+
+gboolean
+gedit_preferences_dialog_add_encoding (GeditPreferencesDialog *dlg, const GeditEncoding* enc)
+{
+	GtkTreeModel *model;
+
+	gboolean found = FALSE;
+	GtkTreeIter iter;
+	gchar *name;
+	GValue value = {0, };
+
+	gedit_debug (DEBUG_PREFS, "");
+	
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (dlg->priv->encodings_treeview));
+
+	if (gtk_tree_model_get_iter_first (model, &iter))
+	{
+		gtk_tree_model_get_value (model, &iter,
+			    COLUMN_ENCODING_POINTER, &value);
+
+		if (enc == g_value_get_pointer (&value))
+			found = TRUE;
+			
+		g_value_unset (&value);
+
+		while (gtk_tree_model_iter_next (model, &iter) && !found)
+		{
+			gtk_tree_model_get_value (model, &iter,
+				    COLUMN_ENCODING_POINTER, &value);
+
+			if (enc == g_value_get_pointer (&value))
+				found = TRUE;
+			
+				g_value_unset (&value);
+		}
+	}
+
+	if (found)
+		return FALSE;
+
+	name = gedit_encoding_to_string (enc);
+		
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    COLUMN_ENCODING_NAME, name,
+				    COLUMN_ENCODING_POINTER, enc,
+				    COLUMN_INDEX, gtk_tree_model_iter_n_children (model, NULL),
+				    -1);
+	g_free (name);
 
 	return TRUE;
 }
