@@ -182,6 +182,11 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
 	settings->word_wrap = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (wordwrap));
 
+#if 0 /* We are leaking memory here but it is crashing, I will continue tomorrow. */
+	g_print("Font : %s\n:", settings->font);
+	if (settings->font)
+		g_free (settings->font);
+#endif	
 	settings->font = g_strdup (gnome_font_picker_get_font_name (GNOME_FONT_PICKER (defaultfont)));
 
 	settings->mdi_mode = gtk_option_menu_get_active_index (mdimode);
@@ -224,6 +229,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
         settings->fg[1] = c->green;
         settings->fg[2] = c->blue;
 
+	gtk_style_unref (style);
 	gedit_window_refresh ();
 	gedit_save_settings ();
 }
@@ -313,6 +319,8 @@ prepare_fontscolors_page (GladeXML *gui)
 	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (foreground),
 				    c->red, c->green, c->blue, 0);
 
+	gtk_style_unref (style);
+	
 	if (settings->font)
 		gnome_font_picker_set_font_name (GNOME_FONT_PICKER (defaultfont),
 						 settings->font);

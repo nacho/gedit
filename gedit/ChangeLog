@@ -1,9 +1,15 @@
-<<<<<<< ChangeLog
+2000-05-01  Chema Celorio  <chema@celorio.com>
+
+	* dialogs/dialog-prefs.c (prepare_fontscolors_page): leak.
+	(apply_cb): leak.
+
+	* view.c (doc_delete_text_cb): leak
+
 2000-05-01  Chema Celorio  <chema@celorio.com>
 
 	* print.c (print_header): leak x 3
 	(print_ps_line): leak.
-=======
+
 2000-05-01  Jason Leach  <leach@wam.umd.edu>
 
 	* undo.c (gedit_undo_do): plugged a leak that happened everytime
@@ -20,7 +26,6 @@
 	with every document you opened.
 
 2000-05-01  Chema Celorio  <chema@celorio.com>
->>>>>>> 1.138
 
 	* document.c (gedit_document_new): leak
 
