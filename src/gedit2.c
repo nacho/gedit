@@ -157,7 +157,7 @@ gedit_load_file_list (CommandLineData *data)
 		gtk_main_iteration ();
 
 	/* Load files */
-	if (!gedit_file_open_uri_list (data->file_list, data->line_pos) && !res)
+	if (!gedit_file_open_uri_list (data->file_list, data->line_pos, TRUE) && !res)
 		/* If no file is opened then create a new empty untitled document */
 		gedit_file_new ();
 

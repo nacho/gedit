@@ -531,7 +531,7 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context
 	
 	gnome_vfs_uri_list_free (list);
 
-	gedit_file_open_uri_list (file_list, 0);	
+	gedit_file_open_uri_list (file_list, 0, FALSE);	
 	
 	if (file_list == NULL)
 		return;

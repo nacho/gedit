@@ -72,6 +72,9 @@ void gedit_utils_error_reporting_saving_file  (const gchar *uri,
 void gedit_utils_error_reporting_reverting_file (const gchar *uri, 
 					       GError *error,
 					       GtkWindow *parent);
+void gedit_utils_error_reporting_creating_file (const gchar *uri,
+						gint error_code,
+						GtkWindow *parent);
 
 gboolean g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2);
 

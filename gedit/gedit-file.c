@@ -664,7 +664,7 @@ gedit_file_make_uri_from_shell_arg (const char *location)
 }
 
 gboolean 
-gedit_file_open_uri_list (GList* uri_list, gint line)
+gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 {
 	gchar *full_path;
 	gboolean ret = FALSE;
@@ -689,13 +689,68 @@ gedit_file_open_uri_list (GList* uri_list, gint line)
 	for ( ; uri_list; uri_list = g_list_next (uri_list))
 	{
 		full_path = gedit_file_make_uri_from_shell_arg (uri_list->data);
+		
 		if (full_path != NULL) 
 		{
-			if (gedit_file_open_real (full_path, 
-					(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
+			if (!gedit_utils_uri_has_file_scheme (full_path) || gedit_utils_uri_exists (full_path))
 			{
-				++loaded_files;
-				ret |= TRUE;
+				if (gedit_file_open_real (full_path, 
+					(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
+				{
+					++loaded_files;
+					ret |= TRUE;
+				}
+			}
+			else
+			{
+				if (create)
+				{
+					GtkWidget *dialog;
+					gchar *str;
+					gboolean created = FALSE;
+					gchar *formatted_path;
+
+					formatted_path = eel_format_uri_for_display (full_path);
+					g_return_val_if_fail (formatted_path != NULL, FALSE);
+					
+					str = g_strdup_printf (_("The file \"%s\" does not exist. Would you like to create it?"),
+							       formatted_path);
+		
+					g_free (formatted_path);
+
+					dialog = gtk_message_dialog_new (
+						GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					   	GTK_MESSAGE_QUESTION,
+					   	GTK_BUTTONS_YES_NO,
+						str);
+
+					gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
+
+					gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+					if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+					{
+						created = gedit_utils_create_empty_file (full_path);
+
+						if (!created)	
+							gedit_utils_error_reporting_creating_file (full_path, errno, GTK_WINDOW (dialog));
+					}
+									
+					gtk_widget_destroy (dialog);
+
+					g_free (str);
+					
+					if (created)
+					{
+						if (gedit_file_open_real (full_path, 
+							(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
+						{
+							++loaded_files;
+							ret |= TRUE;
+						}
+					}
+				}
 			}
 			
 			g_free (full_path);

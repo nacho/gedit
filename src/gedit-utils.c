@@ -1249,6 +1249,100 @@ gedit_utils_error_reporting_reverting_file (
 	g_free (error_message);
 }
 
+void
+gedit_utils_error_reporting_creating_file (
+		const gchar *uri,
+		gint error_code,
+		GtkWindow *parent)
+{
+	gchar *error_message;
+	gchar *full_formatted_uri;
+       	gchar *uri_for_display	;
+	
+	GtkWidget *dialog;
+
+	g_return_if_fail (uri != NULL);
+	
+	full_formatted_uri = eel_format_uri_for_display (uri);
+
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
+			MAX_URI_IN_DIALOG_LENGTH);
+	g_free (full_formatted_uri);
+
+	switch (error_code)
+	{
+		case EEXIST: 
+			error_message = g_strdup_printf (_("The file \"%s\" already exists."),
+				uri_for_display);
+			break;
+
+		case EISDIR:
+			error_message = g_strdup_printf (
+				_("\"%s\" is a directory.\n\n"
+				  "Please, check that you typed the location correctly."),
+                         	uri_for_display);
+                	break;
+
+		case EACCES:
+		case EROFS:
+		case ETXTBSY:
+			error_message = g_strdup_printf (
+				_("Cannot create the file \"%s\".\n\n"
+				  "Make sure you have the appropriate write permissions."),
+				uri_for_display);
+			break;
+
+		case ENAMETOOLONG:
+			error_message = g_strdup_printf (
+				_("Cannot create the file \"%s\".\n\n"
+				  "The file name is too long."),
+				uri_for_display);
+			break;
+		
+		case ENOENT:
+			error_message = g_strdup_printf (
+				_("Cannot create the file \"%s\".\n\n"
+				  "A directory component in the file name does not exist or "
+		                  "is a dangling symbolic link."),
+				uri_for_display);	
+			break;
+
+
+		case ENOSPC:
+			error_message = g_strdup_printf (
+				 _("There is not enough disk space to create the file \"%s\".\n\n"
+				   "Please free some disk space and try again."),
+				 uri_for_display);
+			break;
+
+		default:
+			error_message = g_strdup_printf (_("Could not create the file \"%s\"."),
+							 uri_for_display);
+	}
+	
+	dialog = gtk_message_dialog_new (
+			parent,
+			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+		   	GTK_MESSAGE_ERROR,
+		   	GTK_BUTTONS_OK,
+			error_message);
+			
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	g_free (uri_for_display);
+	g_free (error_message);
+}
+
+
 /*
  * gedit_utils_set_atk_name_description
  * @widget : The Gtk widget for which name/description to be set
@@ -1409,12 +1503,12 @@ gedit_utils_create_empty_file (const gchar *uri)
 	if (!filename)
 		return FALSE;
 	
-	fd = open (filename, O_CREAT | O_EXCL);
+	fd = open (filename, O_CREAT | O_EXCL | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
 	g_free (filename);
 	
 	if (fd == -1)
 		return FALSE;
 	
-	close (fd);
+	return (close (fd) == 0);
 }

@@ -1,5 +1,13 @@
 2002-07-16  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-file.c (gedit_file_open_uri_list): if a file does not exists
+	and create == TRUE, create it (fixed bug #77557)
+
+	* gedit-utils.[ch] (gedit_utils_error_reporting_creating_file): new
+	function
+
+2002-07-16  Paolo Maggi  <maggi@athena.polito.it>
+
 	* gedit-utils.[ch] (gedit_utils_create_empty_file): new function
 
 	* gedit-file.c (gedit_file_open_uri_list): return FALSE if no file
