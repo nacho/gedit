@@ -5,38 +5,35 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.9.7\n"
-"POT-Creation-Date: 2001-12-05 01:33-0600\n"
-"PO-Revision-Date: 2001-10-13 19:06CET\n"
+"POT-Creation-Date: 2001-12-11 13:40+0100\n"
+"PO-Revision-Date: 2001-12-07 22:18CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"Language-Team: Slovak <sk-i18n@linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: gedit2.desktop.in.h:1
-#, fuzzy
 msgid "Gnome Text Editor"
-msgstr "Textový editor"
+msgstr "Textový editor GNOME"
 
 #: gedit2.desktop.in.h:2
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
-#, fuzzy, c-format
+#: src/bonobo-mdi.c:481 src/bonobo-mdi.c:557 src/bonobo-mdi.c:1908
+#, c-format
 msgid "Activate %s"
-msgstr "_Aktivovať všetky"
+msgstr "Aktivovať %s"
 
-#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
-#, fuzzy
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:333
 msgid "The searched string has not been found."
 msgstr "Hľadaný reťazec nenájdený."
 
 #: src/gedit2.c:57
-#, fuzzy
 msgid "Show mdi debugging messages."
-msgstr "Ukázať ladiace správy pohľadu."
+msgstr "Zobraziť ladiace správy mdi."
 
 #: src/gedit2.c:60
 msgid "Show commands debugging messages."
@@ -83,13 +80,12 @@ msgid "Turn on all debugging messages."
 msgstr "Zapnúť všetky ladiace správy."
 
 #: src/gedit2.c:145
-#, fuzzy
 msgid "The gnome text editor"
-msgstr "Textový editor"
+msgstr "Textový editor GNOME"
 
 #: src/gedit-commands.c:55
 msgid "Not yet implemented."
-msgstr ""
+msgstr "Ešte neimplementované."
 
 #: src/gedit-document.c:448 src/gedit-document.c:459
 #, c-format
@@ -100,18 +96,13 @@ msgstr "%s %d"
 msgid "Untitled"
 msgstr "Bez mena"
 
-#: src/gedit-document.c:511 src/gedit-document.c:610
-#, fuzzy
+#: src/gedit-document.c:529 src/gedit-document.c:635
 msgid "Invalid UTF-8 data encountered reading file"
-msgstr ""
-"Nastala chyba pri čítaní súboru:\n"
-"\n"
-"%s"
+msgstr "Pri čítaní súboru nájdený neplatný znak UTF-8"
 
-#: src/gedit-document.c:860
-#, fuzzy
+#: src/gedit-document.c:885
 msgid "It is not possible to revert an Untitled document"
-msgstr "Nemôžete sa vrátiť v dokumente bez mena.\n"
+msgstr "Nemôžete sa vrátiť v dokumente bez mena."
 
 #: src/gedit-file.c:227 src/gedit-file.c:238
 #, c-format
@@ -128,45 +119,45 @@ msgid "Open File ..."
 msgstr "Otvoriť súbor..."
 
 #: src/gedit-file.c:367 src/gedit-file.c:411
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Nastala chyba pri čítaní súboru:\n"
+"Nastala chyba pri otváraní súboru \"%s\".\n"
 "\n"
 "%s"
 
 #: src/gedit-file.c:479 src/gedit-file.c:676
-#, fuzzy, c-format
+#, c-format
 msgid "Saving file '%s' ..."
-msgstr "Uložiť ako..."
+msgstr "Ukladám súbor '%s'..."
 
-#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:822
-msgid "Unknow error"
-msgstr ""
+#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:834
+#, fuzzy
+msgid "Unknown error"
+msgstr "Neznáma chyba"
 
 #: src/gedit-file.c:501 src/gedit-file.c:697
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Nastala chyba pri zatváraní súboru:\n"
+"Nastala chyba pri íkladaní súboru \"%s\".\n"
 "\n"
 "%s"
 
 #: src/gedit-file.c:525 src/gedit-file.c:716
-#, fuzzy
 msgid "The document has not been saved."
 msgstr "Dokument nebol uložený."
 
 #: src/gedit-file.c:535 src/gedit-file.c:723
 #, c-format
 msgid "File '%s' saved."
-msgstr ""
+msgstr "Súbor '%s' uložený."
 
 #: src/gedit-file.c:602
 msgid "Save As..."
@@ -177,1012 +168,77 @@ msgstr "Uložiť ako..."
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
-msgstr ""
+msgstr "Súbor '%s' už na tomto mieste existuje. Chcete ho nahradiť?"
 
 #: src/gedit-file.c:658
-#, fuzzy
 msgid "_Replace"
-msgstr "Nahradiť"
+msgstr "Na_hradiť"
 
-#: src/gedit-file.c:808
+#: src/gedit-file.c:820
 #, c-format
 msgid "Reverting file '%s' ..."
-msgstr ""
+msgstr "Vraciam obsah súboru '%s'..."
 
-#: src/gedit-file.c:829
-#, fuzzy, c-format
+#: src/gedit-file.c:841
+#, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Nastala chyba pri čítaní súboru:\n"
+"Nastala chyba pri vracaní obsahu súboru \"%s\".\n"
 "\n"
 "%s"
 
-#: src/gedit-file.c:853
-#, fuzzy
+#: src/gedit-file.c:865
 msgid "The document has not been reverted."
-msgstr "Dokument nebol uložený."
+msgstr "Dokument nebol vrátený."
 
-#: src/gedit-file.c:863
+#: src/gedit-file.c:875
 #, c-format
 msgid "File '%s' reverted."
-msgstr ""
+msgstr "Súbor '%s' vrátený."
 
-#: src/gedit-file.c:1008
-#, fuzzy, c-format
+#: src/gedit-file.c:1025
+#, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
 "\n"
 "%s."
 msgstr ""
-"Nastala chyba pri čítaní súboru:\n"
+"Nastala chyba pri čítaní súboru zo štandardného vstupu.\n"
 "\n"
 "%s"
 
-#: src/gedit-mdi.c:484
+#: src/gedit-mdi.c:482
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
 "\n"
 "Your changes will be lost if you don't save them."
 msgstr ""
+"Chcete uložiť zmeny v dokumente '%s'?\n"
+"\n"
+"Vaše zmeny budú stratené, ak ich neuložíte."
 
-#: src/gedit-mdi.c:489
+#: src/gedit-mdi.c:487
 msgid "_Don't save"
-msgstr ""
+msgstr "_Neukladať"
 
-#: src/gedit-mdi.c:569
+#: src/gedit-mdi.c:567
 msgid "(modified)"
 msgstr "(zmenené)"
 
-#: src/gedit-mdi.c:575
+#: src/gedit-mdi.c:573
 msgid "(readonly)"
 msgstr "(len pre čítanie)"
 
 #: src/gedit-recent.c:269
-#, fuzzy, c-format
+#, c-format
 msgid "Open file %s"
-msgstr "Otvorí súbor"
+msgstr "Otvoriť súbor %s"
 
 #: src/gedit-recent.c:337
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "Nepodarilo sa otvoriť nedávny súbor: %s"
-
-#~ msgid "ASCII table"
-#~ msgstr "Tabuľka ASCII"
-
-#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-#~ msgstr "Tento modul zobrazuje dialóg s tabuľkou znakov ASCII."
-
-#~ msgid "Char"
-#~ msgstr "Znak"
-
-#~ msgid "Dec#"
-#~ msgstr "Des#"
-
-#~ msgid "Hex#"
-#~ msgstr "Hex#"
-
-#~ msgid ""
-#~ "If you wish to insert any of the characters in to the active \n"
-#~ "document, select the character and click the \"Insert Char\" \n"
-#~ "button or double click the character in the table."
-#~ msgstr ""
-#~ "Ak chcete vložiť ľubovoľný znak do aktívneho dokumentu,\n"
-#~ "vyberte znak stlačte \"Vložiť znak\" alebo na znak dvakrát\n"
-#~ "kliknite v tabuľke."
-
-#~ msgid "Insert char"
-#~ msgstr "Vložiť znak"
-
-#~ msgid "Name"
-#~ msgstr "Meno"
-
-#~ msgid "gedit: ASCII table"
-#~ msgstr "gedit: tabuľka ASCII"
-
-#~ msgid "Browse"
-#~ msgstr "Prehliadač"
-
-#~ msgid "Web browse plugin"
-#~ msgstr "Modul pre prehliadanie WWW"
-
-#~ msgid " _Change... "
-#~ msgstr "_Zmeniť..."
-
-#~ msgid "Enter the _URL to browse for:"
-#~ msgstr "Zadajte _URL, ktoré chcete zobraziť:"
-
-#~ msgid "Lynx found at: "
-#~ msgstr "Lynx nájdený v: "
-
-#~ msgid "gedit: Web Browse plugin"
-#~ msgstr "gedit: Modul pre prehliadanie WWW"
-
-#~ msgid "location"
-#~ msgstr "umiestnenie"
-
-#~ msgid "Convert"
-#~ msgstr "Prevod"
-
-#~ msgid "Number Converter"
-#~ msgstr "Prevod čísel"
-
-#~ msgid " Decimal to _Hex "
-#~ msgstr " Desiatková do šestnástkovej "
-
-#~ msgid " Decimal to _Octal "
-#~ msgstr " Desiatková do _osmičkovej"
-
-#~ msgid " Hex to Decima_l "
-#~ msgstr " Šestnástková do _desiatkovej"
-
-#~ msgid "_Converted value:"
-#~ msgstr "_Výsledná hodnota:"
-
-#~ msgid "_Value to be converted:"
-#~ msgstr "Prevádzaná _hodnota:"
-
-#~ msgid "gedit: Number Converter plugin"
-#~ msgstr "gedit: Modul pre prevod čísel"
-
-#~ msgid "diff"
-#~ msgstr "diff"
-
-#~ msgid "The two documents you selected are the same."
-#~ msgstr "Dva vybrané dokumenty sú rovnaké."
-
-#~ msgid ""
-#~ "The \"first\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Vybraný \"prvý\" súbor neexistuje.\n"
-#~ "\n"
-#~ "Prosím, zadajte platný súbor"
-
-#~ msgid ""
-#~ "The \"second\" file you selected does not exist.\n"
-#~ "\n"
-#~ "Please provide a valid file."
-#~ msgstr ""
-#~ "Vybraný \"druhý\" súbor neexistuje.\n"
-#~ "\n"
-#~ "Prosím, zadajte platný súbor"
-
-#~ msgid "The \"first\" document contains no text."
-#~ msgstr "\"Prvý\" dokument neobsahuje text."
-
-#~ msgid "The \"second\" document contains no text."
-#~ msgstr "\"Druhý\" dokument neobsahuje text."
-
-#~ msgid ""
-#~ "gedit could not create a temp file.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "gedit nemohol vytvoriť dočasný súbor.\n"
-#~ "\n"
-
-#~ msgid "Untitled %i"
-#~ msgstr "Bez mena %i"
-
-#~ msgid "Diff"
-#~ msgstr "Diff"
-
-#~ msgid "Makes a diff file from two documents or files"
-#~ msgstr "Vytvorí diff súbor z dvoch dokumentov alebo súborov"
-
-#~ msgid ""
-#~ "Makes a diff file from two documents or files on disk\n"
-#~ "For more info on diff, type \"man diff\" in a shell prompt\n"
-#~ msgstr ""
-#~ "Vytvorí diff súbor rozdielov z dvoch dokumentov alebo súborov na disku.\n"
-#~ "Pre ďalšie informácie o príkaze diff napíšte \"man diff\" na príkazovom "
-#~ "riadku\n"
-
-#~ msgid "Choose the files to compare"
-#~ msgstr "Vyberte, ktoré súbory porovnať"
-
-#~ msgid "Diff found at: "
-#~ msgstr "Diff nájdený v: "
-
-#~ msgid "First"
-#~ msgstr "Prvý"
-
-#~ msgid "From a file on disk"
-#~ msgstr "Zo súboru na disku"
-
-#~ msgid "From document"
-#~ msgstr "Z dokumentu"
-
-#~ msgid "Second"
-#~ msgstr "Druhý"
-
-#~ msgid "Select the \"first\" file..."
-#~ msgstr "Vyberte \"prvý\" súbor..."
-
-#~ msgid "Select the \"second\" file..."
-#~ msgstr "Vyberte \"Druhý\" súbor..."
-
-#~ msgid "Use the _unified output format (-u option)"
-#~ msgstr "Použiť _zjednotený výstupný formát (prepínač -u)"
-
-#~ msgid "gedit: Diff plugin"
-#~ msgstr "gedit: modul diff"
-
-#~ msgid ""
-#~ "No document exists.\n"
-#~ "The Document Info plugin is going be closed."
-#~ msgstr ""
-#~ "Neexistuje dokument.\n"
-#~ "Modul informácií o dokumente bude zatvorený."
-
-#~ msgid "Document info"
-#~ msgstr "Informácie o dokumente"
-
-#~ msgid "Get info on current document."
-#~ msgstr "Získanie informácií o aktuálnom dokumente"
-
-#~ msgid ""
-#~ "This plugin displays a pop-up dialog which contains basic information on "
-#~ "current document."
-#~ msgstr ""
-#~ "Tento modul zobrazuje dialóg so základnými informáciami o aktuálnom "
-#~ "dokumente."
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "Characters (no spaces)"
-#~ msgstr "Znaky (bez medzier)"
-
-#~ msgid "Characters (with spaces)"
-#~ msgstr "Znaky (s medzerami)"
-
-#~ msgid "Current column"
-#~ msgstr "Aktuálny stĺpec"
-
-#~ msgid "Current line"
-#~ msgstr "Aktuálny riadok"
-
-#~ msgid "File Name"
-#~ msgstr "Meno súboru"
-
-#~ msgid "Lines"
-#~ msgstr "Riadky"
-
-#~ msgid "Paragraphs"
-#~ msgstr "Odstavce"
-
-#~ msgid "Update"
-#~ msgstr "Aktualizovať"
-
-#~ msgid "Words"
-#~ msgstr "Slová"
-
-#~ msgid "gedit: Document Info plugin"
-#~ msgstr "gedit: Modul informácií o dokumente"
-
-#~ msgid "email"
-#~ msgstr "e-mail"
-
-#~ msgid "Executing command: %s"
-#~ msgstr "Vykonávam príkaz: %s"
-
-#~ msgid "Email"
-#~ msgstr "E-mail"
-
-#~ msgid "Email the current document"
-#~ msgstr "Poslať aktuálny dokument"
-
-#~ msgid ""
-#~ "Email the current document to a specified email address\n"
-#~ "gedit searches for sendmail to use this plugin."
-#~ msgstr ""
-#~ "Odošle aktuálny dokument na nejakú e-mailovú adresu.\n"
-#~ "Pre použitie tohoto modulu hľadá gedit program sendmail."
-
-#~ msgid "Change..."
-#~ msgstr "Zmeniť..."
-
-#~ msgid "F_rom:"
-#~ msgstr "_Od:"
-
-#~ msgid "File to use as body of message: "
-#~ msgstr "Súbor použitý ako telo správy:"
-
-#~ msgid "From:"
-#~ msgstr "Od:"
-
-#~ msgid "Sendmail found at:"
-#~ msgstr "Sendmail nájdený v: "
-
-#~ msgid "Subject:"
-#~ msgstr "Predmet:"
-
-#~ msgid "To:"
-#~ msgstr "Komu:"
-
-#~ msgid "_Subject:"
-#~ msgstr "_Predmet:"
-
-#~ msgid "_To:"
-#~ msgstr "_Komu:"
-
-#~ msgid "filename"
-#~ msgstr "meno súboru"
-
-#~ msgid "gedit: E-mail plugin"
-#~ msgstr "gedit: Modul pre poštu"
-
-#~ msgid "gedit: e-mail plugin"
-#~ msgstr "gedit: modul e-mail"
-
-#~ msgid "Reverse"
-#~ msgstr "Obracač"
-
-#~ msgid "Reverse text"
-#~ msgstr "Obráti text"
-
-#~ msgid "Hello World"
-#~ msgstr "Hello World"
-
-#~ msgid "Sample 'hello world' plugin."
-#~ msgstr "Ukážkový modul 'hello, world'."
-
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Príkaz shellu je prázdny.\n"
-#~ "\n"
-#~ "Prosím, zadajte platný príkaz."
-
-#~ msgid "Shell Output"
-#~ msgstr "Výstup shellu"
-
-#~ msgid "Insert the shell output in the document"
-#~ msgstr "Vloží výstup shellu do dokumentu"
-
-#~ msgid "Select the working directory..."
-#~ msgstr "Výber pracovného priečinku..."
-
-#~ msgid "Shell _command:"
-#~ msgstr "_Príkaz shellu:"
-
-#~ msgid "Specify the working directory and the command you want to run."
-#~ msgstr "Zadajte pracovný priečinok a príkaz, ktorý chcete vykonať."
-
-#~ msgid "_Working directory:"
-#~ msgstr "_Pracovný priečinok:"
-
-#~ msgid "gedit: Shell Output plugin"
-#~ msgstr "gedit: Modul Výstup shellu"
-
-#~ msgid "Sort"
-#~ msgstr "Triedenie"
-
-#~ msgid "Sort a document."
-#~ msgstr "Utriedi dokument"
-
-#~ msgid "Sort a document or selected text."
-#~ msgstr "Utriedi dokument alebo vybraný text."
-
-#~ msgid "1"
-#~ msgstr "1"
-
-#~ msgid "Case Sensitive"
-#~ msgstr "Rozlišovať veľkosť písmen"
-
-#~ msgid "Sort starting at column:"
-#~ msgstr "Začať triediť stĺpec:"
-
-#~ msgid "gedit: Sort plugin"
-#~ msgstr "gedit: Modul triedenia"
-
-#~ msgid "Insert Time"
-#~ msgstr "Vkladanie času"
-
-#~ msgid "Inserts the current date and time"
-#~ msgstr "Vloží aktuálny dátum a čas"
-
-#~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
-#~ msgstr "(C) 1998, 1999, 2000 Alex Roberts a Evan Lawrence"
-
-#~ msgid "gedit is a small and lightweight text editor for GNOME."
-#~ msgstr "gedit je malý a nenáročný textový editor pre GNOME."
-
-#~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
-#~ msgstr "Pre použitie modulu %s musíte zadať umiestnenie pre \"%s\"."
-
-#~ msgid "gedit: Preferences"
-#~ msgstr "gedit: Nastavenie"
-
-#~ msgid "Find"
-#~ msgstr "Nájsť"
-
-#~ msgid "Search string not found"
-#~ msgstr "Hľadaný text nenájdený"
-
-#~ msgid "Found and replaced %i occurrences."
-#~ msgstr "Nájdených a nahradených %i výskytov."
-
-#~ msgid "Could not allocate the memory for the Replace all request."
-#~ msgstr "Nemôžem naalokovať pamäť pre požiadavku Nahradiť všetky."
-
-#~ msgid "Goto Line"
-#~ msgstr "Prejsť na riadok"
-
-#~ msgid "Line number:"
-#~ msgstr "Číslo riadku:"
-
-#~ msgid "Author(s):"
-#~ msgstr "Autori:"
-
-#~ msgid "De_scription"
-#~ msgstr "_Popis"
-
-#~ msgid "De_tails"
-#~ msgstr "_Detaily"
-
-#~ msgid "File name:"
-#~ msgstr "Meno súboru:"
-
-#~ msgid "Plugins manager..."
-#~ msgstr "Správca modulov..."
-
-#~ msgid "Select the plugins to activate:"
-#~ msgstr "Vyberte modul, ktorý chcete aktivovať:"
-
-#~ msgid "_Deactivate all"
-#~ msgstr "_Deaktivovať všetky"
-
-#~ msgid "Add _header"
-#~ msgstr "Pridať _hlavičku"
-
-#~ msgid "Appearance"
-#~ msgstr "Vzhľad"
-
-#~ msgid "Bottom"
-#~ msgstr "Dole"
-
-#~ msgid "Colors"
-#~ msgstr "Farby"
-
-#~ msgid "Default"
-#~ msgstr "Štandard"
-
-#~ msgid "Documents"
-#~ msgstr "Dokumenty"
-
-#~ msgid "Editor Behavior"
-#~ msgstr "Chovanie editora"
-
-#~ msgid "Enable _Auto-indent"
-#~ msgstr "Povoliť _automatické odsadzovanie"
-
-#~ msgid "Enable word _wrapping"
-#~ msgstr "Povoliť _zalamovanie slov"
-
-#~ msgid "Fonts"
-#~ msgstr "Písma"
-
-#~ msgid "Fonts/Colors"
-#~ msgstr "Písma/Farby"
-
-#~ msgid "General"
-#~ msgstr "Všeobecné"
-
-#~ msgid "Left"
-#~ msgstr "Vľavo"
-
-#~ msgid "MDI (Multiple Document Interface)"
-#~ msgstr "MDI (Multiple Document Interface)"
-
-#~ msgid "Modal"
-#~ msgstr "Modálne"
-
-#~ msgid "Notebook"
-#~ msgstr "Notes"
-
-#~ msgid "Notebook _tab position: "
-#~ msgstr "Pozícia _záložiek notesa:"
-
-#~ msgid "Orientation"
-#~ msgstr "Orientácia"
-
-#~ msgid "Paper"
-#~ msgstr "Papier"
-
-#~ msgid "Pick a Font"
-#~ msgstr "Vyberte písmo"
-
-#~ msgid "Pick a color"
-#~ msgstr "Vyberte farbu"
-
-#~ msgid "Preferences"
-#~ msgstr "Nastavenie"
-
-#~ msgid "Print line _numbers every:"
-#~ msgstr "Tlačiť čís_la riadkov každých:"
-
-#~ msgid "Printing"
-#~ msgstr "Tlačím"
-
-#~ msgid "Right"
-#~ msgstr "Vpravo"
-
-#~ msgid "S_how statusbar"
-#~ msgstr "Zobraziť _stavový riadok"
-
-#~ msgid "Set limit on _undo levels to:"
-#~ msgstr "Nastaviť limit _vrátenia operácií na:"
-
-#~ msgid "Set toolbar according to _system settings"
-#~ msgstr "Nastaviť panel podľa _systému"
-
-#~ msgid "Set toolbar to _icons only"
-#~ msgstr "Nastaviť panel na iba ikony"
-
-#~ msgid "Set toolbar to icons with _text"
-#~ msgstr "Nastaviť panel na ikony s _textom"
-
-#~ msgid "Tab _width: "
-#~ msgstr "Ší_rka tabulátora:"
-
-#~ msgid "Top"
-#~ msgstr "Hore"
-
-#~ msgid "Toplevel"
-#~ msgstr "Najvyššia úroveň"
-
-#~ msgid "Undo"
-#~ msgstr "Vrátiť"
-
-#~ msgid "_Background: "
-#~ msgstr "_Pozadie: "
-
-#~ msgid "_Default font: "
-#~ msgstr "Š_tandardné písmo: "
-
-#~ msgid "_Foreground: "
-#~ msgstr "_Popredie: "
-
-#~ msgid "_Landscape"
-#~ msgstr "Na ší_rku"
-
-#~ msgid "_Mode: "
-#~ msgstr "_Mód: "
-
-#~ msgid "_Portrait"
-#~ msgstr "Na _výšku"
-
-#~ msgid "_level(s)"
-#~ msgstr "_úrovne"
-
-#~ msgid "l_ine(s)"
-#~ msgstr "_riadky"
-
-#~ msgid "_Location to search for:"
-#~ msgstr "Č_o hľadať:"
-
-#~ msgid "gedit: Browse for program location..."
-#~ msgstr "gedit: Hľadať umiestnenie programu..."
-
-#~ msgid "gedit: Set program location..."
-#~ msgstr "gedit: Nastaviť umiestnenie programu..."
-
-#~ msgid "label"
-#~ msgstr "popis"
-
-#~ msgid "Case _sensitive"
-#~ msgstr "Rozlišovať _veľkosť písmen"
-
-#~ msgid "Find Next"
-#~ msgstr "Hľadať ďalej"
-
-#~ msgid "Replace All"
-#~ msgstr "Nahradiť všetky"
-
-#~ msgid "Search from the _beginning of the document"
-#~ msgstr "Hľadať od _začiatku dokumentu"
-
-#~ msgid "Search from the _cursor position"
-#~ msgstr "Hľadať od pozície _kurzora:"
-
-#~ msgid "_Replace with: "
-#~ msgstr "_Nahradiť:"
-
-#~ msgid "_Search for: "
-#~ msgstr "_Hľadať: "
-
-#~ msgid "Enter the location (URI) of the file you would like to open:"
-#~ msgstr "Zadajte umiestnenie (URI) súboru, ktorý chcete otvoriť:"
-
-#~ msgid "Open"
-#~ msgstr "Otvoriť"
-
-#~ msgid "Open from URI"
-#~ msgstr "Otvoriť z URI"
-
-#~ msgid "RO - "
-#~ msgstr "RO - "
-
-#~ msgid "%s %d*"
-#~ msgstr "%s %d*"
-
-#~ msgid "``%s'' has been modified.  Do you want to save the changes?"
-#~ msgstr "``%s'' bol zmenený.  Chcete ho uložiť?"
-
-#~ msgid "This file does not end with a valid extension\n"
-#~ msgstr "Tento súbor nemá platnú príponu.\n"
-
-#~ msgid "The file %s was not found."
-#~ msgstr "Súbor %s nenájdený."
-
-#~ msgid ""
-#~ "An error was encountered while opening the file \"%s\".\n"
-#~ "Please make sure the file exists."
-#~ msgstr ""
-#~ "Nastala chyba pri otváraní súboru \"%s\".\n"
-#~ "Prosím, overte, že súbor existuje."
-
-#~ msgid ""
-#~ "An error was encountered while opening the file \"%s\".\n"
-#~ "Could not allocate the required memory."
-#~ msgstr ""
-#~ "Nastala chyba pri otváraní súboru \"%s\".\n"
-#~ "Nie je možné získať dostatok pamäte."
-
-#~ msgid ""
-#~ "An error was encountered while reading the file: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Make sure that you have permissions for opening the file. "
-#~ msgstr ""
-#~ "Nastala chyba pri čítaní súboru: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Overte, že máte práva pre otvorenie tohoto súboru."
-
-#~ msgid ""
-#~ "Internal error reading the file: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Please, report this error to submit@bugs.gnome.org."
-#~ msgstr ""
-#~ "Interná chyba pri čítaní súboru: \n"
-#~ "\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Prosím, oznámte tento problém na submit@bugs.gnome.org."
-
-#~ msgid "The document contains no data."
-#~ msgstr "Dokument neobsahuje nič."
-
-#~ msgid ""
-#~ "gedit was unable to save the file: \n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Make sure that the path you provided exists,and that you have the "
-#~ "appropriate write permissions."
-#~ msgstr ""
-#~ "gedit nemohol uložiť súbor: \n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Overte, že uvedená cesta existuje a že máte správne práva pre zápis."
-
-#~ msgid ""
-#~ "gedit was unable to save the file:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Because of an unknown reason (1). Please report this Problem to "
-#~ "submit@bugs.gnome.org"
-#~ msgstr ""
-#~ "gedit nemohol uložiť súbor:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "z neznámeho dôvodu (1). Prosím, oznámte tento problém na submit@bugs."
-#~ "gnome.org"
-
-#~ msgid ""
-#~ "gedit was unable to save the file:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "Because of an unknown reason (2). Please report this Problem to "
-#~ "submit@bugs.gnome.org"
-#~ msgstr ""
-#~ "gedit nemohol uložiť súbor:\n"
-#~ "\n"
-#~ " %s \n"
-#~ "\n"
-#~ "z neznámeho dôvodu (2). Prosím, oznámte tento problém na submit@bugs."
-#~ "gnome.org"
-
-#~ msgid "Could not allocate the required memory."
-#~ msgstr "Nepodarilo sa naalokovať požadovanú pamäť."
-
-#~ msgid "Error in the pipe."
-#~ msgstr "Chyba v rúre."
-
-#~ msgid "``%s'' is about to be overwritten. Do you want to continue ?"
-#~ msgstr "``%s'' bude prepísaný. Chcete pokračovať?"
-
-#~ msgid "Error saving file!"
-#~ msgstr "Chyba pri ukladaní súboru!"
-
-#~ msgid ""
-#~ "Are you sure you want to revert all changes?\n"
-#~ "(%s)"
-#~ msgstr ""
-#~ "Naozaj sa chcete vrátiť k pôvodnej verzii?\n"
-#~ "(%s)"
-
-#~ msgid "The file ``%s'' does not exist.  Would you like to create it?"
-#~ msgstr "Súbor ``%s'' neexistuje.  Chcete ho vytvoriť?"
-
-#~ msgid "Show window debugging messages."
-#~ msgstr "Ukázať okno s ladiacimi správami."
-
-#~ msgid "Cannot initialize gnome-vfs."
-#~ msgstr "Nie je možné inicializovať gnome-vfs."
-
-#~ msgid "Open (swap) .c/.h file"
-#~ msgstr "Otvorí (zamení) .c/.h súbory"
-
-#~ msgid "_New"
-#~ msgstr "_Nový"
-
-#~ msgid "Create a new document"
-#~ msgstr "Vytvorí nový dokument"
-
-#~ msgid "Sav_e All"
-#~ msgstr "Uložiť všetk_y"
-
-#~ msgid "Save All Open Files"
-#~ msgstr "Uloží všetky otvorené súbory"
-
-#~ msgid "_Revert"
-#~ msgstr "_Vrátiť"
-
-#~ msgid "Open from _URI..."
-#~ msgstr "Otvoriť z U_RI..."
-
-#~ msgid "Open a file from a specified URI"
-#~ msgstr "Otvorí súbor zo zadaného URI"
-
-#~ msgid "Print pre_view"
-#~ msgstr "_Ukážka"
-
-#~ msgid "Print preview"
-#~ msgstr "Ukážka"
-
-#~ msgid "Print pre_view..."
-#~ msgstr "Ukážka p_red tlačou..."
-
-#~ msgid "Preview data to be printed"
-#~ msgstr "Ukážka pred tlačou"
-
-#~ msgid "C_lose All"
-#~ msgstr "Zavr_ieť všetky"
-
-#~ msgid "Close All Open Files"
-#~ msgstr "Zavrie všetky otvorené súbory"
-
-#~ msgid "Goto _Line..."
-#~ msgstr "Prejsť na _riadok..."
-
-#~ msgid "Go to a specific line number"
-#~ msgstr "Prejde na daný riadok"
-
-#~ msgid "_Add View"
-#~ msgstr "_Pridať pohľad"
-
-#~ msgid "Add a new view of the document"
-#~ msgstr "Pridá nový pohľad dokumentu"
-
-#~ msgid "_Remove View"
-#~ msgstr "_Odstrániť pohľad"
-
-#~ msgid "Remove view of the document"
-#~ msgstr "Odstráni pohľad dokumentu"
-
-#~ msgid "Se_arch"
-#~ msgstr "_Nájsť"
-
-#~ msgid "_Plugins"
-#~ msgstr "_Moduly"
-
-#~ msgid "_Documents"
-#~ msgstr "_Dokumenty"
-
-#~ msgid "New"
-#~ msgstr "Nový"
-
-#~ msgid "Save"
-#~ msgstr "Uložiť"
-
-#~ msgid "Save the current file"
-#~ msgstr "Uloží aktuálny súbor"
-
-#~ msgid "Close"
-#~ msgstr "Zavrieť"
-
-#~ msgid "Close the current file"
-#~ msgstr "Zavrie aktuálny súbor"
-
-#~ msgid "Print"
-#~ msgstr "Tlačiť"
-
-#~ msgid "Print the current file"
-#~ msgstr "Vytlačí aktuálny súbor"
-
-#~ msgid "Undo last operation"
-#~ msgstr "Vráti poslednú akciu späť"
-
-#~ msgid "Redo"
-#~ msgstr "Opakovať"
-
-#~ msgid "Redo last operation"
-#~ msgstr "Opakuje naposledy vrátenú akciu"
-
-#~ msgid "Cut"
-#~ msgstr "Vystrihnúť"
-
-#~ msgid "Cut the selection"
-#~ msgstr "Vystrihne výber"
-
-#~ msgid "Copy"
-#~ msgstr "Kopírovať"
-
-#~ msgid "Copy the selection"
-#~ msgstr "Skopíruje výber"
-
-#~ msgid "Paste"
-#~ msgstr "Vložiť"
-
-#~ msgid "Paste the clipboard"
-#~ msgstr "Vloží obsah schránky"
-
-#~ msgid "Search for a string"
-#~ msgstr "Nájsť reťazec"
-
-#~ msgid "Exit"
-#~ msgstr "Koniec"
-
-#~ msgid "Exit the program"
-#~ msgstr "Ukončí program"
-
-#~ msgid "_Manager ..."
-#~ msgstr "_Správca..."
-
-#~ msgid "Manage available plugin modules"
-#~ msgstr "Správa dostupných modulov"
-
-#~ msgid ""
-#~ "The program %s could not be found.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Program %s nebol nájdený.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "'%s' doesn't seem to exist.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "'%s' asi neexistuje.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "'%s' seems to be a directory.\n"
-#~ "but '%s' could not be found inside it.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "'%s' vyzerá ako priečinok,\n"
-#~ "ale '%s' v ňom nie je.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "'%s' doesn't seem to be a program.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "'%s' nevyzerá ako program.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ "%sYou won't be able to use the %s plugin without %s. \n"
-#~ " Do you want to specify a new location for %s?"
-#~ msgstr ""
-#~ "%sModul %s nie je možné používať bez %s. \n"
-#~ " Chcete uviesť nové umiestnenie %s?"
-
-#~ msgid "Error, unable to open module file, %s"
-#~ msgstr "Chyba, nemôžem otvoriť súbor s modulom, %s"
-
-#~ msgid "Error, plugin does not contain init_plugin function."
-#~ msgstr "Chyba, modul neobsahuje funkciu init_plugin"
-
-#~ msgid "Error, init_plugin returned an error"
-#~ msgstr "Chyba, init_plugin vrátil chybu"
-
-#~ msgid "Error, plugin is still in use"
-#~ msgstr "Chyba, modul sa ešte používa"
-
-#~ msgid "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
-#~ msgstr "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-2"
-
-#~ msgid "Print Document"
-#~ msgstr "Tlač dokumentu"
-
-#~ msgid "Pages"
-#~ msgstr "Strany"
-
-#~ msgid "gedit: Print Preview\n"
-#~ msgstr "gedit: Ukážka pred tlačou\n"
-
-#~ msgid "Page: %i/%i"
-#~ msgstr "Strana: %i/%i"
-
-#~ msgid ""
-#~ "gedit could not find the font \"%s\".\n"
-#~ "gedit is unable to print without this font installed."
-#~ msgstr ""
-#~ "gedit nenašiel písmo \"%s\".\n"
-#~ "gedit nie je schopný tlačiť, ak toto písmo nie je nainštalované."
-
-#~ msgid "Printing .."
-#~ msgstr "Tlačím..."
-
-#~ msgid "Printing ..."
-#~ msgstr "Tlačím..."
-
-#~ msgid "_File/"
-#~ msgstr "_Súbor/"
-
-#~ msgid "_File"
-#~ msgstr "_Súbor"
-
-#~ msgid ""
-#~ "Can't count lines if another search operation is active, please close the "
-#~ "search dialog."
-#~ msgstr ""
-#~ "Nôžem spočítať riadky, ak prebieha iná vyhľadávacia operácia. Prosím, "
-#~ "zatvorte vyhľadávací dialóg."
-
-#~ msgid ""
-#~ "Filename: %s\n"
-#~ "\n"
-#~ "Total Characters: %i\n"
-#~ "Total Words: %i\n"
-#~ "Total Lines: %i\n"
-#~ "Total Paragraphs: %i\n"
-#~ "Total Bytes: %i\n"
-#~ "\n"
-#~ "Current Line: %i\n"
-#~ "Current Column: %i"
-#~ msgstr ""
-#~ "Meno súboru: %s\n"
-#~ "\n"
-#~ "Celkovo znakov: %i\n"
-#~ "Celkovo slov: %i\n"
-#~ "Celkovo riadkov: %i\n"
-#~ "Celkovo odstavcov: %i\n"
-#~ "Celkovo bajtov: %i\n"
-#~ "\n"
-#~ "Aktuálny riadok: %i\n"
-#~ "Aktuálny stĺpec: %i"
-
-#~ msgid "You can't remove the last view of a document."
-#~ msgstr "Nemô6ete odstrániť posledný pohľad dokumentu."
