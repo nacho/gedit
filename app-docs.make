@@ -24,7 +24,11 @@ app-dist-hook: index.html
 	-cp $(srcdir)/$(app)/*.css $(distdir)/$(app)
 	-cp $(srcdir)/$(app)/stylesheet-images/*.png \
 		$(distdir)/$(app)/stylesheet-images
+	-cp $(srcdir)/$(app)/stylesheet-images/*.gif \
+		$(distdir)/$(app)/stylesheet-images
 	-cp $(srcdir)/images/*.png \
+		$(distdir)/images
+	-cp $(srcdir)/images/*.gif \
 		$(distdir)/images
 
 install-data-am: index.html
