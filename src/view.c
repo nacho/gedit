@@ -140,12 +140,12 @@ insert_into_buffer (Document *doc, gchar *buffer, gint position)
 	}
 	else if (position == 0)
 	{
-		gedit_debug ("  pos==0, prepend\n", DEBUG_VIEW_DEEP);
+		gedit_debug ("  pos==0, prepend\n", DEBUG_VIEW);
 		doc->buf = g_string_prepend (doc->buf, buffer);
 	}
 	else
 	{
-		gedit_debug ("  pos!=0, append\n", DEBUG_VIEW_DEEP);
+		gedit_debug ("  pos!=0, append\n", DEBUG_VIEW);
 		doc->buf = g_string_append (doc->buf, buffer);
 	}
 	return 0;		
@@ -395,12 +395,12 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		return FALSE;
 	}
 
-	gedit_debug ("F:     entering if..\n", DEBUG_VIEW_DEEP);
+	gedit_debug ("F:     entering if..\n", DEBUG_VIEW);
 
 	/* Control key related */
 	if (event->state & GDK_CONTROL_MASK)
 	{
-		gedit_debug ("F:If successfull \n", DEBUG_VIEW_DEEP);
+		gedit_debug ("F:If successfull \n", DEBUG_VIEW);
 		switch (event->keyval)
 		{
 		case 's':
@@ -434,7 +434,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		}
 	}
 
-	gedit_debug ("F:      returning, gedit_event_key_press\n", DEBUG_VIEW_DEEP);
+	gedit_debug ("F:      returning, gedit_event_key_press\n", DEBUG_VIEW);
 
 	return TRUE;
 }
@@ -875,7 +875,7 @@ gedit_view_refresh (View *view)
 
 	if (view->document->buf)
 	{
-		gedit_debug ("F:gedit_view_refresh - Insering buffer \n", DEBUG_VIEW_DEEP);
+		gedit_debug ("F:gedit_view_refresh - Insering buffer \n", DEBUG_VIEW);
 
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,

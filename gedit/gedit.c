@@ -37,11 +37,19 @@
 #endif
 
 gint debug = 0;
+gint debug_print = 0;
+gint debug_file = 0;
 
 static const struct poptOption options[] =
 {
+	{ "debug-file", '\0', 0, &debug_file, 0,
+	  N_("Show file debugging messages."), NULL },
+
+	{ "debug-print", '\0', 0, &debug_print, 0,
+	  N_("Show printing debugging messages."), NULL },
+
 	{ "debug", '\0', 0, &debug, 0,
-	  N_("Turn on debugging messages."), NULL },
+	  N_("Turn on all debugging messages."), NULL },
 
 	{NULL, '\0', 0, NULL, 0}
 };

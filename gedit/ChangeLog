@@ -1,5 +1,11 @@
 2000-04-29  Jason Leach  <leach@wam.umd.edu>
 
+	* gedit.c (options): new command-line options --debug-print and
+	--debug-file, to show only sections of debugging messages.
+	
+	* utils.h (gedit_debug): added sectioning of DEBUG_PRINT and
+	DEBUG_FILE
+	
 	* all files: renamed gedit_debug_mess -> gedit_debug
 	
 	* gedit.c (options): new command-line option --debug to turn on

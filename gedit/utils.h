@@ -28,29 +28,29 @@
 
 typedef enum {
 	DEBUG_UNDO,
-	DEBUG_UNDO_DEEP,
 	DEBUG_VIEW,
-	DEBUG_VIEW_DEEP,
 	DEBUG_PLUGINS,
-	DEBUG_PLUGINS_DEEP,
 	DEBUG_FILE,
-	DEBUG_FILE_DEEP,
 	DEBUG_SEARCH,
-	DEBUG_SEARCH_DEEP,
 	DEBUG_PREFS,
-	DEBUG_PREFS_DEEP,
 	DEBUG_PRINT,
-	DEBUG_PRINT_DEEP,
 	DEBUG_DOCUMENT,
-	DEBUG_DOCUMENT_DEEP,
 	DEBUG_COMMANDS
 } DebugSection;
 
 extern gint debug;
+extern gint debug_print;
+extern gint debug_file;
 
 #define gedit_debug(str, num) \
     if (debug) \
-	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str)
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    else { \
+    if (debug_print && num == DEBUG_PRINT) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_file && num == DEBUG_FILE) \
+	printf ("%s:%d (%s) %s", __FILE__, __LINE__, __FUNCTION__, str); \
+    }
 
 void gedit_set_title (Document *doc);
 void gedit_flash     (gchar *msg);
