@@ -103,6 +103,11 @@ GnomeUIInfo gedit_edit_menu [] = {
 
 	GNOMEUIINFO_SEPARATOR,
 
+	{ GNOME_APP_UI_ITEM, N_("Find _Line..."),
+	  N_("Search for a line"),
+	  goto_line_cb, (gpointer) GE_WINDOW, NULL,
+	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_SEARCH },
+
 	GNOMEUIINFO_MENU_FIND_ITEM(search_cb, (gpointer) GE_DATA),
 
 	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(search_again_cb, (gpointer) GE_DATA),
