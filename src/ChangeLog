@@ -1,3 +1,11 @@
+2002-07-23  James Willcox  <jwillcox@cs.indiana.edu>
+
+	* gnome-recent-model.c:  Convert URIs to utf8 on the way in,
+	convert back to the C library representation on the way out.
+
+	* gnome-recent-view-bonobo.c (gnome_recent_view_bonobo_set_list):
+	Escape relevant parts of the XML.  (#88362)
+
 2002-07-22  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-file.c (gedit_file_open_uri_list): fix typo

@@ -412,12 +412,21 @@ gnome_recent_model_add (GnomeRecentModel * recent, const gchar * uri)
 {
 	GSList *uri_lst;
 	gchar *gconf_key;
+	gchar *utf8_uri;
+	GError *error = NULL;
 
 	g_return_val_if_fail (recent, FALSE);
 	g_return_val_if_fail (GNOME_IS_RECENT_MODEL (recent), FALSE);
 	g_return_val_if_fail (recent->gconf_client, FALSE);
 	g_return_val_if_fail (uri, FALSE);
 
+	utf8_uri = g_filename_to_utf8 (uri, -1, NULL, NULL, &error);
+	if (error) {
+		g_warning ("Couldn't add: %s", error->message);
+		g_error_free (error);
+		return FALSE;
+	}
+	
 	gconf_key = gnome_recent_model_gconf_key (recent);
 
 
@@ -427,10 +436,10 @@ gnome_recent_model_add (GnomeRecentModel * recent, const gchar * uri)
 
 	/* if this is already in our list, remove it */
 	uri_lst = gnome_recent_model_delete_from_list (recent, uri_lst,
-						       uri);
+						       utf8_uri);
 
 	/* prepend the new one */
-	uri_lst = g_slist_prepend (uri_lst, g_strdup (uri));
+	uri_lst = g_slist_prepend (uri_lst, g_strdup (utf8_uri));
 
 	/* if we're over the limit, delete from the end */
 	while (g_slist_length (uri_lst) > recent->limit)
@@ -524,6 +533,8 @@ gnome_recent_model_unescape_list (GnomeRecentModel *model, GSList *list)
 	GSList *tmp;
 	gchar *uri;
 	gchar *unescaped_uri;
+	gchar *ascii_uri;
+	GError *error = NULL;
 
 	tmp = list;
 
@@ -531,7 +542,17 @@ gnome_recent_model_unescape_list (GnomeRecentModel *model, GSList *list)
 		uri = (gchar *)tmp->data;
 
 		unescaped_uri = gnome_vfs_unescape_string_for_display (uri);
-		newlist = g_slist_prepend (newlist, unescaped_uri);
+
+		ascii_uri = g_filename_from_utf8 (unescaped_uri, -1,
+						  NULL, NULL, &error);
+		g_free (unescaped_uri);
+		if (error) {
+			g_warning ("Couldn't convert: %s", error->message);
+			g_error_free (error);
+			error = NULL;
+
+		} else
+			newlist = g_slist_prepend (newlist, ascii_uri);
 
 		tmp = tmp->next;
 	}

@@ -155,6 +155,9 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 	gchar *escaped_name = NULL;
 	gchar *item_path = NULL;
 	gchar *uri;
+	gchar *utf8_uri;
+	gchar *escaped_uri;
+	GError *error = NULL;
 	gchar *cmd;
 	gchar *appname;
 	GnomeRecentViewBonoboMenuData *md;
@@ -176,17 +179,27 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 	for (i = 1; i <= g_slist_length (list); ++i)
 	{
 		
+		uri = g_path_get_basename (g_slist_nth_data (list, i - 1));
+		utf8_uri = g_filename_to_utf8 (uri, -1, NULL,
+					       NULL, &error);
+		if (error) {
+			g_warning ("Could not display: %s", error->message);
+			g_error_free (error);
+			g_free (uri);
+			continue;
+		}
+
+		escaped_uri = g_markup_escape_text (utf8_uri, strlen (utf8_uri));
+			
 		/* this is what gets passed to our private "activate" callback */
 		md = (GnomeRecentViewBonoboMenuData *)g_malloc (sizeof (GnomeRecentViewBonoboMenuData));
 		md->view = view;
 		md->uri = g_strdup (g_slist_nth_data (list, i-1));
-
-		/* Maybe we should use a gnome-vfs call here?? */
-		uri = g_path_get_basename (g_slist_nth_data (list, i - 1));
 		
-		escaped_name = gnome_recent_util_escape_underlines (uri);
+		
+		escaped_name = gnome_recent_util_escape_underlines (escaped_uri);
 
-		tip =  g_strdup_printf (_("Open %s"), uri);
+		tip =  g_strdup_printf (_("Open %s"), escaped_uri);
 
 		verb_name = g_strdup_printf ("%s%s%d", appname,GNOME_RECENT_VERB_NAME, i);
 		cmd = g_strdup_printf ("<cmd name = \"%s\" /> ", verb_name);
@@ -237,6 +250,8 @@ gnome_recent_view_bonobo_set_list (GnomeRecentViewBonobo *view, GSList *list)
 		g_free (escaped_name);
 		g_free (item_path);
 		g_free (uri);
+		g_free (utf8_uri);
+		g_free (escaped_uri);
 		g_free (cmd);
 	}
 
