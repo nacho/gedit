@@ -37,6 +37,25 @@ GList *window_list;
 extern GList *plugins;
 
 
+void setup_callbacks( plugin_callback_struct *callbacks )
+{
+	callbacks->document.create = gE_plugin_document_create;
+	callbacks->text.append = gE_plugin_text_append;
+	callbacks->document.show = gE_plugin_document_show;
+	callbacks->document.current = gE_plugin_document_current;
+	callbacks->document.filename = gE_plugin_document_filename;
+	callbacks->text.get = gE_plugin_text_get;
+	callbacks->program.quit = gE_plugin_program_quit;
+	callbacks->program.reg = gE_plugin_program_register;
+
+	callbacks->document.open = NULL;
+	callbacks->document.close = NULL;
+	callbacks->text.get_selected_text = NULL;
+	callbacks->text.set_selected_text = NULL;
+	callbacks->document.get_position = NULL;
+	callbacks->document.get_selection = NULL;
+}
+
 gint file_open_wrapper (gE_data *data)
 {
 	char *nfile, *name;
@@ -101,15 +120,8 @@ void prog_init(char **file)
 
 	/* Init plugins... */
 	plugins = NULL;
-	
-	callbacks.document.create = gE_plugin_document_create;
-	callbacks.text.append = gE_plugin_text_append;
-	callbacks.document.show = gE_plugin_document_show;
-	callbacks.document.current = gE_plugin_document_current;
-	callbacks.document.filename = gE_plugin_document_filename;
-	callbacks.text.get = gE_plugin_text_get;
-	callbacks.program.quit = gE_plugin_program_quit;
-	callbacks.program.reg = gE_plugin_program_register;
+
+	setup_callbacks (&callbacks);
 	
 	plugin_query_all (&callbacks);
 	
@@ -123,6 +135,16 @@ main (int argc, char **argv)
 	/* gtk_set_locale (); */
 
 	gtk_init (&argc, &argv);
+
+
+	if (!gdk_threads_init())
+ 	{
+	        fprintf(stderr, "Could not initialize threads\n");
+	        exit(1);
+	}
+	
+	gdk_threads_enter();
+	
 
 	for (x = 1; x < argc; x++)
 	{
@@ -209,14 +231,7 @@ parse_an_arg (int key, char *arg, struct argp_state *state)
       
       plug = plugin_new( fullname );
       
-      callbacks.document.create = gE_plugin_document_create;
-      callbacks.text.append = gE_plugin_text_append;
-      callbacks.document.show = gE_plugin_document_show;
-      callbacks.document.current = gE_plugin_document_current;
-      callbacks.document.filename = gE_plugin_document_filename;
-      callbacks.text.get = gE_plugin_text_get;
-      callbacks.program.quit = NULL;
-      callbacks.program.reg = gE_plugin_program_register;
+      setup_callbacks (&callbacks);
       
       plugin_register( plug, &callbacks, 0 );
       
@@ -283,15 +298,8 @@ int main (int argc, char **argv)
 
 	/* Init plugins... */
 	plugins = NULL;
-	
-	callbacks.document.create = gE_plugin_document_create;
-	callbacks.text.append = gE_plugin_text_append;
-	callbacks.document.show = gE_plugin_document_show;
-	callbacks.document.current = gE_plugin_document_current;
-	callbacks.document.filename = gE_plugin_document_filename;
-	callbacks.text.get = gE_plugin_text_get;
-	callbacks.program.quit = gE_plugin_program_quit;
-	callbacks.program.reg = gE_plugin_program_register;
+
+	setup_callbacks (&callbacks);
 	
 	plugin_query_all (&callbacks);
 	

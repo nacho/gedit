@@ -33,7 +33,7 @@ int main( int argc, char *argv[] )
   int context;
   int i;
   gchar *buff;
-  client_info info;
+  client_info info = empty_info;
 
   info.menu_location = "[Plugins]Encryption";
 

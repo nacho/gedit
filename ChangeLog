@@ -1,3 +1,18 @@
+1998-09-22  Chris Lahey  <clahey@umich.edu>
+
+	* src/plugin.c, src/plugin.h: Copied from go.  Big changes.  Threaded now.
+
+	* src/gedit.c (setup_callbacks): Added setup_callbacks to put all
+	callback initialization in one place.
+	: Used the new function everywhere.
+	(main): Added thread initialization code.
+
+	* src/gE_plugin_api.c (gE_plugin_program_register): Initialized
+	suggested_accelerator to NULL just to make sure that nothing goes
+	wrong.
+
+	* src/commands.c: Changed include orders to get it to compile.
+
 1998-09-21  Alex Roberts  <bse@dial.pipex.com>
 
 	* msgbox.c: Fixed sigsegv... something wrong with:

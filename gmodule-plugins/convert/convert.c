@@ -70,7 +70,7 @@ int main( int argc, char *argv[] )
   GtkWidget *button;
   GtkWidget *dialog;
   GtkWidget *label;
-  client_info info;
+  client_info info = empty_info;
 
   info.menu_location = "[Plugins]Convert";
 

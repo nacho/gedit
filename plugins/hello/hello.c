@@ -32,7 +32,7 @@ static gint context;
 
 int main( int argc, char *argv[] )
 {
-  client_info info;
+  client_info info = empty_info;
   
   /* Location of the plugin in the 'Plugin's' menu in gEdit */
   info.menu_location = "[Plugins]Hello";
@@ -43,6 +43,8 @@ int main( int argc, char *argv[] )
 
 	/* The 'output' of the Plugin */
       printf("Hello World!\n");
+
+      client_finish( context );
  
   exit(0);
 }

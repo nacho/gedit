@@ -57,7 +57,7 @@ int main (int argc, char *argv[])
 	GtkWidget *hbox, *vbox;
 	gchar *filename, *from;
 	char *user, *hostname;
-	client_info info;
+	client_info info = empty_info;
 	struct passwd *pw;
 	
 	info.menu_location = "[Plugins]Email";

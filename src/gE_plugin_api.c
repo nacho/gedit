@@ -199,6 +199,7 @@ void gE_plugin_program_register (plugin_info *info)
   info->type = temp->type;
   info->menu_location = g_malloc0( strlen( temp->menu_location ) + 1 );
   strcpy( info->menu_location, temp->menu_location );
+  info->suggested_accelerator = NULL;
   info->plugin_name = g_malloc0( strlen( temp->plugin_name ) + 1 );
   strcpy( info->plugin_name, temp->plugin_name );
   plugins = g_list_append( plugins, info );

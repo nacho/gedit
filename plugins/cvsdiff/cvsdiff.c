@@ -35,7 +35,7 @@ int main( int argc, char *argv[] )
   int docid;
   int length;
   int context;
-  client_info info;
+  client_info info = empty_info;
 
   info.menu_location = "[Plugins]CVS Diff";
 

@@ -79,7 +79,7 @@ int main(int argc,char *argv[])
 {
 	prj_manager_window *ptr;
 	gint context;
-	client_info info;
+	client_info info = empty_info;
 	context=0;
 	
 	info.menu_location="[Plugins]Project Manager";

@@ -6,6 +6,8 @@ INCLUDES = -I$(includedir) 				\
 	-I../	\
 	$(GNOME_INCLUDEDIR)
 
+EXTRA_DIST = client.c client.h
+
 plugindir = $(libdir)/go/plugins
 
 if HAVE_GNOME

@@ -3,8 +3,9 @@
 INCLUDES = -I$(includedir) 				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
-	-I../	\
-	$(GNOME_INCLUDEDIR)
+	-I../						\
+	$(GNOME_INCLUDEDIR)				\
+	$(top_srcdir)/plugins/
 
 plugindir = $(libdir)/go/plugins
 
@@ -12,8 +13,8 @@ plugin_PROGRAMS = cvsdiff-plugin
 
 cvsdiff_plugin_SOURCES=	\
 	cvsdiff.c	\
-	client.c	\
-	client.h
+	$(top_srcdir)/plugins/client.c	\
+	$(top_srcdir)/plugins/client.h
 
 cvsdiff_plugin_LDFLAGS = `gtk-config --libs`
 

@@ -3,7 +3,8 @@
 INCLUDES = -I$(includedir) 				\
 	`gtk-config --cflags` 	\
 #	-DLOCALEDIR=\"$(datadir)/locale\"		\
-	-I../	
+	-I../						\
+	$(top_srcdir)/plugins/
 
 
 plugindir = $(libdir)/go/plugins
@@ -15,8 +16,8 @@ prm_plugin_SOURCES =	\
 	maincode.h	\
 	msgbox.c	\
 	msgbox.h	\
-	client.c	\
-	client.h
+	$(top_srcdir)/plugins/client.c	\
+	$(top_srcdir)/plugins/client.h
 
 prm_plugin_LDFLAGS = `gtk-config --libs`
 

@@ -55,7 +55,7 @@ int main( int argc, char *argv[] )
   GtkWidget *hbox;
   GtkWidget *button;
   GtkWidget *dialog;
-  client_info info;
+  client_info info = empty_info;
 
   info.menu_location = "[Plugins]Diff";
 

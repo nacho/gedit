@@ -4,7 +4,8 @@ INCLUDES = -I$(includedir) 				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
 	-DLOCALEDIR=\"$(datadir)/locale\"		\
 	-I../	\
-	$(GNOME_INCLUDEDIR)
+	$(GNOME_INCLUDEDIR)				\
+	$(top_srcdir)/plugins/
 
 plugindir = $(libdir)/go/plugins
 
@@ -12,8 +13,8 @@ plugin_PROGRAMS = diff-plugin
 
 diff_plugin_SOURCES =	\
 	diff.c		\
-	client.c	\
-	client.h
+	$(top_srcdir)/plugins/client.c	\
+	$(top_srcdir)/plugins/client.h
 
 diff_plugin_LDFLAGS = `gtk-config --libs`
 

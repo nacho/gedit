@@ -1,3 +1,18 @@
+1998-09-22  Chris Lahey  <clahey@umich.edu>
+
+	* client.c, client.h: Copied from go.  Added a
+	suggested_accelerator field to client_info.
+
+	* hello/hello.c (main): Initialized client_info info to
+	empty_info.  Added a client_finish call.
+
+	* (.*)/\1.c (main): Initialized client_info info to empty_info.
+
+	* .*/Makefile.am: Attempted to change so that it would load from
+	a single client.c and client.h.  Doesn't quite work yet.
+
+	* .*/client.h, .*/client.c: Removed.
+
 1998-09-07  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (plugindir): Move into $(libdir) -- plugins

@@ -189,7 +189,7 @@ void handled_word_callback(GtkWidget *spell, gpointer data)
 
 int main(int argc, char *argv[]){
 	gint context;
-	client_info info;
+	client_info info = empty_info;
 
   	info.menu_location = "[Plugins]Spell Check...";
 

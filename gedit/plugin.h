@@ -16,6 +16,7 @@
 #ifndef __PLUGIN_H__
 #define __PLUGIN_H__
 
+#include <pthread.h>
 #include <unistd.h>
 #include <glib.h>
 
@@ -23,7 +24,14 @@ typedef enum { PLUGIN_STANDARD } PluginType;
 
 typedef struct
 {
+  gint start;
+  gint end;
+} selection_range;
+
+typedef struct
+{
   gchar *menu_location;
+  gchar *suggested_accelerator;
   gchar *plugin_name;
   PluginType type;
 } plugin_info;
@@ -36,12 +44,24 @@ typedef struct
   gchar* (*filename) ( gint id );
   gint (*current) ( gint context );
   gboolean (*close) ( gint id );
+  gint (*get_position) ( gint id );
+  selection_range (*get_selection) ( gint id );
+  /*
+    void (*set_position) ( gint id, gint position );
+    void (*set_selection) ( gint id, selection_range selection );
+    void (*goto_line) ( gint id, gint line );
+  */
 } plugin_document_callbacks;
 
 typedef struct
 {
   void (*append) ( gint id, gchar *data, gint length );
   gchar* (*get) ( gint id );
+  gchar* (*get_selected_text) ( gint id );
+  gchar* (*set_selected_text) ( gint id, gchar *data, gint length );
+  /*
+    void (*delete_selected_text) ( gint id );
+  */
 } plugin_text_callbacks;
 
 typedef struct
@@ -66,7 +86,8 @@ typedef struct
   char *name;
   int in_call;
   plugin_callback_struct callbacks;
-  int docid;
+  int context;
+  pthread_t thread;
 } plugin;
 
 typedef void plugin_callback( plugin *, gchar *, int length, gpointer data );

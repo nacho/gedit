@@ -3,7 +3,7 @@
 
 int main (int argc, char *argv[])
 {
-	client_info info;
+	client_info info = empty_info;
 	selection_range range;
 	int docid, contextid, pos;
 	char *text;
