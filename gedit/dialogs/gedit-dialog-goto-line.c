@@ -162,7 +162,8 @@ dialog_goto_line_get_dialog (void)
 
 	if (!dialog->entry) {
 		g_warning (
-			_("Could not find the required widgets inside goto-line.glade2.\n"));
+			_("Could not find the required widgets inside %s."),
+			"goto-line.glade2");
 		g_object_unref (gui);
 		return NULL;
 	}

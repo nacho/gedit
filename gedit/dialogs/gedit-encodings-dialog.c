@@ -235,7 +235,8 @@ get_encodings_dialog (GeditPreferencesDialog *dlg)
 	    !dialog->encodings_treeview) 
 	{
 		g_warning (
-			_("Could not find the required widgets inside gedit-encodings-dialog.glade2.\n"));
+			_("Could not find the required widgets inside %s."),
+			"gedit-encodings-dialog.glade2");
 		g_object_unref (gui);
 		return NULL;
 	}

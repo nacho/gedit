@@ -93,8 +93,8 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 
 	if (!content || !program_location_entry || !label || !logo)
 	{
-		g_warning (_("Could not find the required widgets inside "
-			     "program-location-dialog.glade2.\n"));
+		g_warning (_("Could not find the required widgets inside %s."),
+			     "program-location-dialog.glade2");
 		return NULL;
 	}
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);

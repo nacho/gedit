@@ -226,7 +226,7 @@ get_languages_dialog (GeditSpellChecker *spell_checker)
 	    !dialog->languages_treeview) 
 	{
 		g_warning (
-			_("Could not find the required widgets inside languages-dialog.glade2.\n"));
+			_("Could not find the required widgets inside %s."), "languages-dialog.glade2.");
 		g_object_unref (gui);
 		return NULL;
 	}
