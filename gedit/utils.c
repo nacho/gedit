@@ -104,35 +104,6 @@ gedit_flash_va (gchar *format, ...)
 	g_free (msg);
 }
 
-void
-gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...)
-{
-	va_list args;
-	gchar *msg;
-
-	g_return_if_fail (format != NULL);
-
-	va_start (args, format);
-	msg = g_strdup_vprintf (format, args);
-	va_end (args);
-
-	if ( debug ||
-	     (debug_view     && section == GEDIT_DEBUG_VIEW)     ||
-	     (debug_undo     && section == GEDIT_DEBUG_UNDO)     ||
-	     (debug_search   && section == GEDIT_DEBUG_SEARCH)   ||
-	     (debug_print    && section == GEDIT_DEBUG_PRINT)    ||
-	     (debug_prefs    && section == GEDIT_DEBUG_PREFS)    ||
-	     (debug_plugins  && section == GEDIT_DEBUG_PLUGINS)  ||
-	     (debug_file     && section == GEDIT_DEBUG_FILE)     ||
-	     (debug_document && section == GEDIT_DEBUG_DOCUMENT) ||
-	     (debug_commands && section == GEDIT_DEBUG_COMMANDS) ||
-	     (debug_recent   && section == GEDIT_DEBUG_RECENT)   ||
-	     (debug_window   && section == GEDIT_DEBUG_WINDOW) )
-		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
-	
-	g_free (msg);
-}
-
 /**
  * gedit_util_is_program: 
  * @program: the program path to tests for

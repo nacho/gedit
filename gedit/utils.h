@@ -26,55 +26,13 @@
 #ifndef __GEDIT_UTILS_H__
 #define __GEDIT_UTILS_H__
 
-typedef enum {
-	GEDIT_DEBUG_VIEW,
-	GEDIT_DEBUG_UNDO,
-	GEDIT_DEBUG_SEARCH,
-	GEDIT_DEBUG_PRINT,
-	GEDIT_DEBUG_PREFS,
-	GEDIT_DEBUG_PLUGINS,
-	GEDIT_DEBUG_FILE,
-	GEDIT_DEBUG_DOCUMENT,
-	GEDIT_DEBUG_RECENT,
-	GEDIT_DEBUG_COMMANDS,
-	GEDIT_DEBUG_WINDOW
-}DebugSection;
-
-extern gint debug;
-extern gint debug_view;
-extern gint debug_undo;
-extern gint debug_search;
-extern gint debug_print;
-extern gint debug_prefs;
-extern gint debug_plugins;
-extern gint debug_file;
-extern gint debug_document;
-extern gint debug_commands;
-extern gint debug_recent;
-extern gint debug_window;
-
-/* __FUNCTION_ is not defined in Irix according to David Kaelbling <drk@sgi.com>*/
-#ifndef __GNUC__
-#define __FUNCTION__   ""
-#endif
-
-#define	DEBUG_VIEW	GEDIT_DEBUG_VIEW,    __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_UNDO	GEDIT_DEBUG_UNDO,    __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_SEARCH	GEDIT_DEBUG_SEARCH,  __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PRINT	GEDIT_DEBUG_PRINT,   __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PREFS	GEDIT_DEBUG_PREFS,   __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_PLUGINS	GEDIT_DEBUG_PLUGINS, __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_FILE	GEDIT_DEBUG_FILE,    __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_DOCUMENT	GEDIT_DEBUG_DOCUMENT,__FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_RECENT	GEDIT_DEBUG_RECENT,  __FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_COMMANDS	GEDIT_DEBUG_COMMANDS,__FILE__, __LINE__, __FUNCTION__
-#define	DEBUG_WINDOW	GEDIT_DEBUG_WINDOW,  __FILE__, __LINE__, __FUNCTION__
+#include "debug.h" /* Include this here so all the files currently
+                      doing #include "util.h" can use debug stuff */
 
 #define gedit_editable_active() GTK_EDITABLE(GEDIT_VIEW (gedit_view_active())->text)
 
 void	gedit_flash     (gchar *msg);
 void	gedit_flash_va  (gchar *format, ...);
-void	gedit_debug_mess (gchar *message, DebugSection type);
 
 /* Radio buttons utility functions */
 gint	gtk_radio_group_get_selected (GSList *radio_group);
@@ -90,7 +48,6 @@ typedef enum {
 
 gint	gedit_utils_is_program (gchar * program, gchar* default_name);
 
-void	gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...);
 void 	gedit_utils_delete_temp (gchar* file_name);
 gchar *	gedit_utils_create_temp_from_doc (GeditDocument *doc, gint number);
 void	gedit_utils_error_dialog (gchar *error_message, GtkWidget *widget);

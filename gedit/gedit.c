@@ -82,20 +82,6 @@ static const struct poptOption options[] =
 	{NULL, '\0', 0, NULL, 0}
 };
 
-
-gint debug = 0;
-gint debug_view = 0;
-gint debug_undo = 0;
-gint debug_search = 0;
-gint debug_prefs = 0;
-gint debug_print = 0;
-gint debug_plugins = 0;
-gint debug_file = 0;
-gint debug_document = 0;
-gint debug_commands = 0;
-gint debug_recent = 0;
-gint debug_window = 0;
-
 #ifdef HAVE_LIBGNORBA
 
 CORBA_ORB global_orb;

@@ -783,7 +783,7 @@ gedit_view_init (GeditView *view)
 		menu = gnome_popup_menu_new (popup_menu);
 		/* popup menu will not be destroyed when all the view are closed
 		 * FIXME: destroy popup before exiting the program*/
-		gtk_widget_ref(menu);
+		gtk_widget_ref (menu);
 	}
 
 	/* The same popup menu is attached to all views */

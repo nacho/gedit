@@ -30,34 +30,36 @@ gedit_SOURCES = 	\
 	auto.h		\
 	commands.c	\
 	commands.h	\
+	debug.c		\
+	debug.h		\
 	document.c	\
 	document.h	\
 	file.c 		\
 	file.h		\
 	gedit.c		\
-	menus.c 		\
-	menus.h 		\
-	plugin.c 		\
-	plugin.h 		\
+	menus.c 	\
+	menus.h 	\
+	plugin.c 	\
+	plugin.h 	\
 	prefs.c		\
 	prefs.h		\
-	print.c 		\
-	print.h 		\
+	print.c 	\
+	print.h 	\
 	print-doc.c	\
 	print-doc.h	\
 	print-util.c	\
 	print-util.h	\
-	recent.c		\
-	recent.h		\
-	search.c 		\
-	search.h		\
+	recent.c	\
+	recent.h	\
+	search.c 	\
+	search.h	\
 	undo.c 		\
 	undo.h		\
-	utils.c 		\
-	utils.h 		\
+	utils.c 	\
+	utils.h 	\
 	view.c		\
 	view.h		\
-	window.c 		\
+	window.c 	\
 	window.h
 
 
