@@ -541,6 +541,9 @@ void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 
 void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 {
+#ifndef WITHOUT_GNOME
+  static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
+#endif
   GtkWidget *label;
 
   
@@ -570,9 +573,13 @@ void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
   gtk_signal_connect (GTK_OBJECT (prefs->pbox), "delete_event",
 		      GTK_SIGNAL_FUNC (gtk_false), NULL);
 
-
   gtk_signal_connect (GTK_OBJECT (prefs->pbox), "apply",
 		      GTK_SIGNAL_FUNC (gE_apply), data);
+
+  help_entry.name = gnome_app_id;
+  gtk_signal_connect (GTK_OBJECT (prefs->pbox), "help",
+		      GTK_SIGNAL_FUNC (gnome_help_pbox_display),
+		      &help_entry);
 
 
   /* General Settings */
