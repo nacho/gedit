@@ -127,8 +127,9 @@ gedit_metadata_manager_shutdown (void)
 {
 	gedit_debug (DEBUG_METADATA, "");
 
-	g_return_if_fail (gedit_metadata_manager != NULL);
-	
+	if (gedit_metadata_manager == NULL)
+		return;
+
 	g_source_remove (gedit_metadata_manager->timeout_id);
 
 	gedit_metadata_manager_save (NULL);

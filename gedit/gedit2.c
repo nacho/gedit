@@ -52,7 +52,6 @@
 #include "gedit-plugins-engine.h"
 #include "gedit-application-server.h"
 #include "gedit-convert.h"
-#include "gedit-metadata-manager.h"
 
 #ifndef GNOME_ICONDIR
 #define GNOME_ICONDIR "" 
