@@ -53,7 +53,7 @@ typedef struct _DocInfoDialog DocInfoDialog;
 struct _DocInfoDialog {
 	GtkWidget *dialog;
 
-	GtkWidget *frame;
+	GtkWidget *file_name_label;
 	GtkWidget *lines_label;
 	GtkWidget *words_label;
 	GtkWidget *chars_label;
@@ -156,14 +156,14 @@ get_dialog ()
 
 	g_return_val_if_fail (content != NULL, NULL);
 
-	dialog->frame		= glade_xml_get_widget (gui, "frame");
+	dialog->file_name_label	= glade_xml_get_widget (gui, "file_name_label");
 	dialog->words_label	= glade_xml_get_widget (gui, "words_label");
 	dialog->bytes_label	= glade_xml_get_widget (gui, "bytes_label");
 	dialog->lines_label	= glade_xml_get_widget (gui, "lines_label");
 	dialog->chars_label	= glade_xml_get_widget (gui, "chars_label");
 	dialog->chars_ns_label	= glade_xml_get_widget (gui, "chars_ns_label");
 
-	g_return_val_if_fail (dialog->frame              != NULL, NULL);
+	g_return_val_if_fail (dialog->file_name_label    != NULL, NULL);
 	g_return_val_if_fail (dialog->words_label        != NULL, NULL);
 	g_return_val_if_fail (dialog->bytes_label        != NULL, NULL);
 	g_return_val_if_fail (dialog->lines_label        != NULL, NULL);
@@ -215,6 +215,7 @@ word_count_real (void)
 	gint 		 bytes = 0;
 	gint		 i;
 	gchar		*tmp_str;
+	gchar 		*file_name;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -272,8 +273,10 @@ word_count_real (void)
 	g_free (attrs);
 	g_free (text);
 
-	tmp_str = gedit_document_get_short_name (doc);
-	gtk_frame_set_label (GTK_FRAME (dialog->frame), tmp_str);
+	file_name = gedit_document_get_short_name (doc);
+	tmp_str = g_strdup_printf ("<span weight=\"bold\">%s</span>", file_name);
+	gtk_label_set_markup (GTK_LABEL (dialog->file_name_label), tmp_str);
+	g_free (file_name);
 	g_free (tmp_str);
 
 	tmp_str = g_strdup_printf("%d", lines);
