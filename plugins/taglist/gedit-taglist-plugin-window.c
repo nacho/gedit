@@ -453,7 +453,7 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 static gboolean 
 tag_list_window_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 {
-	if (event->keyval == GDK_Escape)
+	if ((event->keyval == GDK_F4) && (event->state & GDK_MOD1_MASK))
 	{
 		gtk_widget_destroy (GTK_WIDGET (tag_list_window->window));
 		return TRUE;
