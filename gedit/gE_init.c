@@ -81,7 +81,7 @@ void prog_init(char **file)
 	callbacks.document.current = gE_plugin_document_current;
 	callbacks.document.filename = gE_plugin_document_filename;
 	callbacks.text.get = gE_plugin_text_get;
-	callbacks.program.quit = NULL;
+	callbacks.program.quit = gE_plugin_program_quit;
 	callbacks.program.reg = gE_plugin_program_register;
 	
 	plugin_query_all (&callbacks);

@@ -21,6 +21,9 @@
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
+#else
+#include <time.h>
+#include <stdlib.h>
 #endif
 #include <stdio.h>
 #include <string.h>
@@ -139,7 +142,7 @@ GtkWidget *hsep;
 GtkWidget *button;
 GtkWidget *label;
 GtkWidget *print_command;
-char print[256];
+/* char print[256]; */
 gE_data *data = (gE_data *)cbdata;
 /*
      file_save_cmd_callback(NULL,NULL);*/
@@ -173,8 +176,7 @@ gE_data *data = (gE_data *)cbdata;
     gtk_box_pack_start( GTK_BOX( vbox ), hbox, FALSE, TRUE, 10 );
     gtk_widget_show( hbox );
 
-    label = gtk_label_new( "Enter print command below\n
-    					Remember to include '%s'" );
+    label = gtk_label_new( "Enter print command below\nRemember to include '%s'" );
     gtk_box_pack_start( GTK_BOX( hbox ), label, FALSE, TRUE, 5 );
     gtk_widget_show( label );
 

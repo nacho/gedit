@@ -802,6 +802,7 @@ void search_create (gE_window *window, gE_search *options, gint replace)
 	 
 	search_hbox = gtk_hbox_new(FALSE, 1);
 	options->search_entry = gtk_entry_new();
+
 	search_label = gtk_label_new (("Search:"));
 	options->start_at_cursor = gtk_radio_button_new_with_label (NULL, ("Start searching at cursor position"));
 	options->start_at_beginning = gtk_radio_button_new_with_label(

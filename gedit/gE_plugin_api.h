@@ -31,7 +31,7 @@ extern int gE_plugin_document_current( gint context );
 extern char *gE_plugin_document_filename( gint docid );
 extern char *gE_plugin_text_get( gint docid );
 extern void gE_plugin_program_register (plugin_info *info);
-extern void gE_plugin_program_quit (void);
+extern gboolean gE_plugin_program_quit (void);
 extern void add_plugins_to_window (plugin_info *info, gE_window *window);
 #ifdef __cplusplus
 }

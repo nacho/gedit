@@ -20,6 +20,9 @@
 #include <gtk/gtk.h>
 #include "main.h"
 #include "gE_plugin_api.h"
+#include "gE_document.h"
+#include "commands.h"
+
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
@@ -140,7 +143,7 @@ gboolean gE_plugin_program_quit ()
 	gE_data *data;
 	gE_window *window;
 	data = g_malloc0 (sizeof (gE_data));
-	window = g_list_nth (window_list, 1);
+	window = g_list_nth_data (window_list, 1);
 	data->window = window;
 	data->temp1 = window;
 	file_close_cmd_callback (NULL, data);

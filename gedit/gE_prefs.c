@@ -29,9 +29,10 @@
 #include <sys/types.h>	
 #include <glib.h>	
 
- #include "main.h"
- #include "gE_prefs.h"
- 
+#include "main.h"
+#include "gE_prefs.h"
+#include "toolbar.h"
+
 gE_prefs *prefs_window;
 	gE_prefs *prefs;
 

@@ -21,8 +21,9 @@
 #ifndef WITHOUT_GNOME
 #include <config.h>
 #include <gnome.h>
-#endif 
+#else
 #include "gE_icon.xpm"
+#endif
 #include "main.h"
 
 

@@ -30,7 +30,11 @@ typedef struct {
 	char *text;
 	char *tooltip_text;
 	char *tooltip_private_text;
+	#ifdef WITHOUT_GNOME
 	char **icon;
+	#else
+	char *icon;
+	#endif
 	GtkSignalFunc callback;
 } toolbar_data_t;
 
