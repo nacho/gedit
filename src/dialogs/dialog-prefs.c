@@ -127,9 +127,6 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->auto_indent = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (autoindent));
 	settings->show_status = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (statusbar));
-#if 0	
-	settings->toolbar_labels = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toolbar_labels));
-#else
 
 	switch (gtk_radio_group_get_selected (GTK_RADIO_BUTTON(toolbar_radio_button_1)->group))
 	{
@@ -147,8 +144,6 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 		break;
 		
 	}
-
-#endif
 
 #ifdef ENABLE_SPLIT_SCREEN
 	settings->splitscreen = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (splitscreen));
@@ -226,7 +221,17 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	}
 
 	gedit_prefs_save_settings ();
+
+#if 0	/* This is not working !! because it takes a while to
+	   set the new mdi windows and redraw them, so the raise
+	   or redraw take place before the mdi windows are drawn.
+	   Chema */
+	/* Raise the property box */
+	gtk_widget_queue_resize (GTK_WIDGET(pbox));
+	gtk_widget_queue_draw (GTK_WIDGET(pbox));
+#endif
 }
+
 
 static void
 gtk_toggle_button_update_label_sensitivity (GtkWidget *widget, gboolean sens)

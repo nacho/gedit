@@ -60,5 +60,6 @@ void		gedit_plugins_init       (void);
 void		plugin_unload            (PluginData *pd);
 gint		init_plugin (PluginData *pd);
 void		gedit_plugins_window_add (GnomeApp *app);
+gchar *		gedit_plugin_program_location_get (gchar *program_name, gchar *plugin_name);
 
 #endif /* __PLUGIN_H__ */

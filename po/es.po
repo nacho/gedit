@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2000-06-18 17:23-0500\n"
+"POT-Creation-Date: 2000-06-20 03:21-0500\n"
 "PO-Revision-Date: 2000-06-08 21:55+0100\n"
 "Last-Translator: Carlos Perelló Marín <carpema@hispalinux.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -84,16 +84,57 @@ msgstr "Archivo de diferencias"
 msgid "Diff plugin."
 msgstr "Extensión diff"
 
-#: plugins/email/email.c:136 plugins/email/email.c:145 src/document.c:261
+#: plugins/email/email.c:139
+msgid ""
+"The program sendmail could not be found.\n"
+"\n"
+msgstr ""
+
+#: plugins/email/email.c:154
+#, c-format
+msgid ""
+"'%s' doesn't seem to exist.\n"
+"\n"
+msgstr ""
+
+#: plugins/email/email.c:156
+#, c-format
+msgid ""
+"'%s' seems to be a directory.\n"
+"but 'sendmail' could not be found inside it.\n"
+"\n"
+msgstr ""
+
+#: plugins/email/email.c:159
+#, c-format
+msgid ""
+"'%s' doesn't seem to be a program.\n"
+"\n"
+msgstr ""
+
+#: plugins/email/email.c:163
+#, c-format
+msgid ""
+"%sYou won't be able to use the email plugin without sendmail. \n"
+" Do you want to specify a new location for sendmail?"
+msgstr ""
+
+#. xgettext translators : !!!!!!!!!!!---------> the name of the plugin only
+#. it is used to display "you can not use the [name] plugin without this program...
+#: plugins/email/email.c:260
+msgid "email"
+msgstr "email"
+
+#: plugins/email/email.c:309 plugins/email/email.c:316 src/document.c:261
 #: src/print.c:581
 msgid "Untitled"
 msgstr "SinNombre"
 
-#: plugins/email/email.c:172
+#: plugins/email/email.c:350
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: plugins/email/email.c:173
+#: plugins/email/email.c:351
 msgid "Email the current document"
 msgstr "Enviar el documento actual por correo"
 
@@ -121,6 +162,10 @@ msgstr "Tema:"
 #: plugins/email/email.glade.h:11
 msgid "File to use as body of message: "
 msgstr "Archivo a emplear como cuerpo del mensaje: "
+
+#: plugins/email/email.glade.h:12
+msgid "Sendmail found at : "
+msgstr ""
 
 #: plugins/reverse/reverse.c:56
 msgid "Reverse"
@@ -185,7 +230,7 @@ msgid "gedit is a small and lightweight text editor for GNOME."
 msgstr "gedit es un editor de texto pequeño y simple para GNOME."
 
 #. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:569
+#: src/dialogs/dialog-prefs.c:574
 msgid "gedit: Preferences"
 msgstr "gedit: Preferencias"
 
@@ -414,29 +459,29 @@ msgstr "_Distinguir mayúsculas y minúsculas"
 msgid "RO - "
 msgstr "SL - "
 
-#: src/document.c:430
+#: src/document.c:437
 #, c-format
 msgid "``%s'' has been modified.  Do you wish to save it?"
 msgstr "«%s» fue modificado. ¿Desea guardarlo?"
 
-#: src/document.c:641
+#: src/document.c:648
 msgid "(modified)"
 msgstr "(modificado)"
 
-#: src/document.c:643
+#: src/document.c:650
 msgid "(readonly)"
 msgstr "(solo lectura)"
 
-#: src/document.c:720
+#: src/document.c:695 src/document.c:735
 msgid "This file does not end with a valid extension\n"
 msgstr "Exte archivo no termina con una extension valida\n"
 
-#: src/document.c:728
+#: src/document.c:743
 #, c-format
 msgid "The file %s was not found."
 msgstr "El documento %s no fue encontrado."
 
-#: src/file.c:107
+#: src/file.c:109
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -445,7 +490,7 @@ msgstr ""
 "Ocurion un error al intentar abrir el archivo \"%s\".\n"
 "Asegúrese que el archivo existe."
 
-#: src/file.c:116
+#: src/file.c:118
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -464,11 +509,11 @@ msgstr ""
 "Por favor asegúrese que el archivo no está siendo usado por otro programa\n"
 "y que el archivo no es vacío."
 
-#: src/file.c:126 src/file.c:369
+#: src/file.c:128 src/file.c:370
 msgid "Could not allocate the required memory."
 msgstr "No se pudo asignar la memoria necesaria."
 
-#: src/file.c:132
+#: src/file.c:134
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -483,7 +528,7 @@ msgstr ""
 "\n"
 "Asegúrese que tiene los derechos de acceso necesarios para abrirlo."
 
-#: src/file.c:214
+#: src/file.c:215
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -500,7 +545,7 @@ msgstr ""
 "Asegúrese que el camino que indicó existe, y que Vd. tiene los derechos de "
 "acceso adecuados."
 
-#: src/file.c:228
+#: src/file.c:229
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -517,7 +562,7 @@ msgstr ""
 "Por una razón desconocida (1). Por favor informe de este problema a "
 "submit@bugs.gnome.org"
 
-#: src/file.c:243
+#: src/file.c:244
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -534,33 +579,33 @@ msgstr ""
 "Por una razón desconocida (2). Por favor informe de este problema a "
 "submit@bugs.gnome.org"
 
-#: src/file.c:330
+#: src/file.c:331
 msgid "Save As..."
 msgstr "Guardar como..."
 
-#: src/file.c:389
+#: src/file.c:390
 msgid "Error in the pipe ."
 msgstr "Error en el tubo ."
 
-#: src/file.c:444
+#: src/file.c:445
 msgid "Open File ..."
 msgstr "Abrir un archivo ..."
 
-#: src/file.c:502
+#: src/file.c:503
 #, c-format
 msgid "Loaded file %s"
 msgstr "Archivo %s cargado"
 
-#: src/file.c:593
+#: src/file.c:594
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "«%s» va a ser reemplazado. ¿Desea continuar?"
 
-#: src/file.c:605
+#: src/file.c:606
 msgid "Document has not been saved."
 msgstr "El documento no fue guardado..."
 
-#: src/file.c:615
+#: src/file.c:616
 msgid "Error saving file!"
 msgstr "¡Error al guardar el archivo!"
 
@@ -840,55 +885,55 @@ msgstr "Texto no encontrado."
 msgid "Can't find again. There is not a text string to search for."
 msgstr "No se puede buscar de nuevo. No hay ninguna cadena de texto a buscar."
 
-#: src/utils.h:87
+#: src/utils.h:94
 msgid "Show window debugging messages."
 msgstr "Desplegar mensajes de debugeo de Window"
 
-#: src/utils.h:90
+#: src/utils.h:97
 msgid "Show commands debugging messages."
 msgstr "Desplegar mensajes de debugeo de Command"
 
-#: src/utils.h:93
+#: src/utils.h:100
 msgid "Show document debugging messages."
 msgstr "Desplegar mensajes de debugeo de Document"
 
-#: src/utils.h:96
+#: src/utils.h:103
 msgid "Show file debugging messages."
 msgstr "Desplegar mensajes de debugeo de File"
 
-#: src/utils.h:99
+#: src/utils.h:106
 msgid "Show plugin debugging messages."
 msgstr "Desplegar mensajes de debugeo de Plugins"
 
-#: src/utils.h:102
+#: src/utils.h:109
 msgid "Show prefs debugging messages."
 msgstr "Desplegar mensajes de debugeo de Prefs"
 
-#: src/utils.h:105
+#: src/utils.h:112
 msgid "Show printing debugging messages."
 msgstr "Desplegar mensajes de debugeo de Print"
 
-#: src/utils.h:108
+#: src/utils.h:115
 msgid "Show search debugging messages."
 msgstr "Desplegar mensajes de debugeo de Search"
 
-#: src/utils.h:111
+#: src/utils.h:118
 msgid "Show undo debugging messages."
 msgstr "Desplegar mensajes de debugeo de Undo"
 
-#: src/utils.h:114
+#: src/utils.h:121
 msgid "Show view debugging messages."
 msgstr "Desplegar mensajes de debugeo de View"
 
-#: src/utils.h:117
+#: src/utils.h:124
 msgid "Show recent debugging messages."
 msgstr "Desplegar mensajes de debugeo de Recent"
 
-#: src/utils.h:120
+#: src/utils.h:127
 msgid "Turn on all debugging messages."
 msgstr "Desplegar todos los mensajes de debugeo"
 
-#: src/view.c:894
+#: src/view.c:895
 msgid "You can't remove the last view of a document."
 msgstr "No puede revertir un documento Sin título."
 

@@ -248,14 +248,16 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 	   the toolbar is loaded for every view that is open, because when mdi_mode = toplevel
 	   each view will have it's own undo & redo buttons that need to get shaded/unshaded
 	   Chema */
-	if (gedit_document_current()==NULL)
+	/* Set the toolbar and the status bar for each window. (mdi_mode = toplevel); */
+	for (n = 0; n < g_list_length (mdi->windows); n++)
 	{
-		GnomeApp *app = NULL;
-		app = g_list_nth_data (mdi->windows, 0);
-		if (app)
-			gedit_window_set_toolbar_labels (app);
-		return;
+		nth_app = GNOME_APP (g_list_nth_data (mdi->windows, n));
+		gedit_window_set_status_bar (nth_app);
+		gedit_window_set_toolbar_labels (nth_app);
 	}
+
+	if (gedit_document_current()==NULL)
+		return;
 		
 	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
 
@@ -293,13 +295,6 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 		}
 	}
 	
-	/* Set the toolbar and the status bar for each window. (mdi_mode = toplevel); */
-	for (n = 0; n < g_list_length (mdi->windows); n++)
-	{
-		nth_app = GNOME_APP (g_list_nth_data (mdi->windows, n));
-		gedit_window_set_status_bar (nth_app);
-		gedit_window_set_toolbar_labels (nth_app);
-	}
 }
 
 
@@ -336,8 +331,8 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 		    ui_info [count].moreinfo == file_close_cb   ||
 		    ui_info [count].moreinfo == file_print_cb   ||
 		    ui_info [count].moreinfo == file_save_cb    ||
-		    ui_info [count].moreinfo == gedit_undo_undo ||
-		    ui_info [count].moreinfo == gedit_undo_redo ||
+		    (ui_info [count].moreinfo == gedit_undo_undo && !sensitive)||
+		    (ui_info [count].moreinfo == gedit_undo_redo && !sensitive) ||
 		    ui_info [count].moreinfo == edit_cut_cb     ||
 		    ui_info [count].moreinfo == edit_copy_cb    ||
 		    ui_info [count].moreinfo == edit_paste_cb   ||
@@ -375,8 +370,8 @@ gedit_window_set_widgets_sensitivity (gint sensitive)
 				    sub_ui_info [sub_count].moreinfo == file_revert_cb  ||
 				    sub_ui_info [sub_count].moreinfo == file_print_cb   ||
 				    sub_ui_info [sub_count].moreinfo == file_print_preview_cb   ||
-				    sub_ui_info [sub_count].moreinfo == gedit_undo_undo ||
-				    sub_ui_info [sub_count].moreinfo == gedit_undo_redo ||
+				    (sub_ui_info [sub_count].moreinfo == gedit_undo_undo && !sensitive)||
+				    (sub_ui_info [sub_count].moreinfo == gedit_undo_redo && !sensitive)||
 				    sub_ui_info [sub_count].moreinfo == edit_cut_cb     ||
 				    sub_ui_info [sub_count].moreinfo == edit_copy_cb    ||
 				    sub_ui_info [sub_count].moreinfo == edit_paste_cb   ||

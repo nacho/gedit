@@ -32,159 +32,6 @@ email_finish (GtkWidget *w, gpointer data)
 	gnome_dialog_close (GNOME_DIALOG (w));
 }
 
-/**
- * gedit_plugin_email_sendmail_location_dialog:
- * @void: 
- * 
- * it displays and pop-up a dialog so that the user can specify a
- * location for sendmail.
- * 
- * Return Value: a string with the path specified by the user
- **/
-static gchar *
-gedit_plugin_email_sendmail_location_dialog (void)
-{
-	GladeXML *gui;
-	GtkWidget *sendmail_location_dialog;
-	GtkWidget *sendmail_location_entry;
-	gchar * location = NULL;
-
-	gui = glade_xml_new (GEDIT_GLADEDIR "/sendmail.glade", NULL);
-
-	if (!gui)
-	{
-		g_warning ("Could not find sendmail.glade");
-		return NULL;
-	}
-
-	sendmail_location_dialog = glade_xml_get_widget (gui, "sendmail_location_dialog");
-	sendmail_location_entry  = glade_xml_get_widget (gui, "sendmail_location_file_entry");
-
-	if (!sendmail_location_dialog || !sendmail_location_entry)
-	{
-		g_warning ("Could not get the sendmail location dialog from email.glade");
-		return NULL;
-	}
-
-	gnome_dialog_set_parent (GNOME_DIALOG(sendmail_location_dialog), gedit_window_active());
-	switch (gnome_dialog_run (GNOME_DIALOG (sendmail_location_dialog)))
-	{
-	case 0:
-		location = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY(sendmail_location_entry), FALSE);
-		gnome_dialog_close (GNOME_DIALOG(sendmail_location_dialog));
-		break;
-	case 1:
-		gnome_dialog_close (GNOME_DIALOG(sendmail_location_dialog));
-	default:
-		/* User pressed ESC or pressed NO*/
-		location = NULL;
-		break;
-	}
-
-	gtk_object_unref (GTK_OBJECT (gui));
-
-	return location;
-}
-
-static gchar*
-gedit_plugin_email_get_sendmail (void)
-{
-	gchar * sendmail = NULL;
-
-	/* get the program pointed by the config */
-	if (gnome_config_get_string ("/gedit/email_plugin/sendmail_location"))
-		sendmail = g_strdup (gnome_config_get_string ("/gedit/email_plugin/sendmail_location"));
-
-	/* If there was a program in the config, but it is no good. Clear "sendmail" */
-	if (sendmail)
-		if (gedit_utils_is_program (sendmail, "sendmail") != GEDIT_PROGRAM_OK)
-		{
-			g_free (sendmail);
-			sendmail = NULL;
-			gnome_config_set_string ("/gedit/email_plugin/sendmail_location", "");
-			gnome_config_sync ();
-		}
-
-	/* If we have no 1st choice yet, get from path */
-	if (!sendmail)
-		sendmail = g_strdup (gnome_is_program_in_path ("sendmail"));
-
-	/* If it isn't on path, look for common places */
-	if (!sendmail) {
-		if (g_file_exists ("/usr/sbin/sendmail"))
-			sendmail = g_strdup ("/usr/sbin/sendmail");
-		else if (g_file_exists ("/usr/lib/sendmail"))
-			sendmail = g_strdup ("/usr/lib/sendmail");
-	}
-
-	return sendmail;
-}
-
-static gchar *
-gedit_plugin_email_get_mailer_location (void)
-{
-	gchar* sendmail = NULL;
-	gint error_code;
-
-	sendmail = gedit_plugin_email_get_sendmail ();
-	
-	/* While "sendmail" is not valid, display error messages */
-	while ((error_code = gedit_utils_is_program (sendmail, "sendmail"))!=GEDIT_PROGRAM_OK)
-	{
-		gchar *message = NULL;
-		gchar *message_full;
-		GtkWidget *dialog;
-
-		if (sendmail == NULL)
-			message = g_strdup_printf (_("The program sendmail could not be found.\n\n"));
-		else if (error_code == GEDIT_PROGRAM_IS_INSIDE_DIRECTORY)
-		{
-			/* the user chose a directory and "sendmail" was found inside it */
-			message = g_strdup (sendmail);
-			if (sendmail)
-				g_free (sendmail);
-			sendmail = g_strdup_printf ("%s%s%s",
-						    message,
-						    (sendmail [strlen(sendmail)-1] == '/')?"":"/",
-						    "sendmail");
-			g_free (message);
-			continue;
-		}
-		else if (error_code == GEDIT_PROGRAM_NOT_EXISTS)
-			message = g_strdup_printf (_("'%s' doesn't seem to exist.\n\n"), sendmail);
-		else if (error_code == GEDIT_PROGRAM_IS_DIRECTORY)
-			message = g_strdup_printf (_("'%s' seems to be a directory.\n"
-						     "but 'sendmail' could not be found inside it.\n\n"), sendmail);
-		else if (error_code == GEDIT_PROGRAM_NOT_EXECUTABLE)
-			message = g_strdup_printf (_("'%s' doesn't seem to be a program.\n\n"), sendmail);
-		else
-			g_return_val_if_fail (FALSE, NULL);
-
-		message_full = g_strdup_printf (_("%sYou won't be able to use the email "
-						"plugin without sendmail. \n Do you want to "
-						"specify a new location for sendmail?"), message);
-		
-		dialog = gnome_question_dialog (message_full, NULL, NULL);
-		gnome_dialog_set_parent (GNOME_DIALOG(dialog), gedit_window_active());
-
-		g_free (message);
-		g_free (message_full);
-		if (GNOME_YES == gnome_dialog_run_and_close (GNOME_DIALOG (dialog)))
-		{
-			g_free (sendmail);
-			sendmail = g_strdup (gedit_plugin_email_sendmail_location_dialog ());
-			continue;
-		}
-		else
-			return NULL;
-	}
-
-	gnome_config_set_string ("/gedit/email_plugin/sendmail_location", sendmail);
-	gnome_config_sync ();
-	
-	return sendmail;
-}
-
 /* the function that actually does the work */
 static void
 email_clicked (GtkWidget *w, gint button, gpointer data)
@@ -254,8 +101,11 @@ email (void)
 
 	if (!doc)
 	     return;
-
-	mailer_location = gedit_plugin_email_get_mailer_location();
+	
+        /* xgettext translators : !!!!!!!!!!!---------> the name of the plugin only
+	 it is used to display "you can not use the [name] plugin without this program... */
+	mailer_location = gedit_plugin_program_location_get ("sendmail",  _("email"));
+	
 	if (mailer_location == NULL)
 		return;
 	

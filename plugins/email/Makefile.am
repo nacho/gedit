@@ -15,8 +15,8 @@ INCLUDES =						\
 	$(GNOME_INCLUDEDIR)
 
 gladedir = $(datadir)/gedit/glade
-glade_DATA = email.glade sendmail.glade
+glade_DATA = email.glade
 
-glade_msgs = email.glade.h sendmail.glade.h
+glade_msgs = email.glade.h 
 
 EXTRA_DIST = $(glade_DATA) $(glade_msgs)

@@ -33,7 +33,7 @@
 [X] Add status barr message for the Plugins menu.
 [X] problems with translations .
 [X] fix the problem when using MDI toplevel window
-[X] the toolbar sensitiviti is set per view basis
+[X] the toolbar sensitivity is set per view basis
     since each document will have different undo levels and such
     and since if mdi_mode = TOPLEVEl, each view will have it's own
     toolbar
@@ -50,17 +50,21 @@
 [X] fix the problem with changing undo levels. When reducing the size of the undo
     levels the undo stack becomes a mess.   
 [X] if you click apply to the prefs box and there aren't any docs open, gedit crashes
+[X] set sensitivity of the menu/toolbar items that needs a file opened to work.
+    In the toolbars -> save, close, print, cut, copy, past, search, get_lines,
+    In the menus -> save, save as, save all, revert, print, print_preview, close, close_all
+    we need a GList for all this widgets. 
+[X] if there aren't any docs and the status bar is turned on, it does not appear.
+[X] The word wrapping preference in the prefs. dialog box does not
+    modify the editor behaivor 
+[X] the undo and redo buttons do not get anshaded after you open a document
 [~] check for the existence of sendmail and of diff. If they are
     not found ask the user for the location and set it in settings->sendmail
     & settings->diff. Same thing for the browse plugin [lynx]
 	[X] email plugin
 	[ ] diff plugin
  	[ ] browse plugin
-[ ] set sensitivity of the menu/toolbar items that needs a file opened to work.
-    In the toolbars -> save, close, print, cut, copy, past, search, get_lines,
-    In the menus -> save, save as, save all, revert, print, print_preview, close, close_all
-    we need a GList for all this widgets. 
-[ ] if there aren't any docs and the status bar is turned on, it does not appear.
+[ ] plugin manager ** yak !
 
 
 *** Chema maybe ***
@@ -71,9 +75,6 @@
     *** mail jaka ? ?***
 [ ] Update README, HACKING, gedit.spec.in, AUTHORS etc..
     ***  yak! ****
-[ ] The word wrapping preference in the prefs. dialog box does not
-    modify the editor behaivor 
-    *** new text widget ??? ****
 [ ] Should we add the split window again ???
 
 
@@ -84,7 +85,6 @@
 [~] Insert Shell Output plugin
 [ ] Add to the diff plugin the ability to make the diff from
     an open document in gedit.
-[ ] Shade & Unshade the Undo & Redo buttons.
 
 
 ----------------------------------------------------------------------

@@ -1,5 +1,23 @@
 2000-06-20  Chema Celorio  <chema@celorio.com>
 
+	* plugin.h: add prototype
+
+	* plugin.c (gedit_plugin_program_location_get): new func.
+	(gedit_plugin_guess_program_location): new, func.
+
+	* dialogs/dialog-plugins.c (gedit_plugin_program_location_dialog): new file
+	new function. Move the code from the email plugin to here so that it can
+	be reused.
+
+	* window.c (gedit_window_set_widgets_sensitivity): fix a bug that made the
+	new documents unshade the undo && redo items.
+
+	* dialogs/dialog-prefs.c (apply_cb): raise the props box
+
+	* window.c (gedit_window_refresh_all): fix small bug
+
+2000-06-20  Chema Celorio  <chema@celorio.com>
+
 	* window.c (gedit_window_set_widgets_sensitivity): new function that turns
 	on and off the sensitivty of the menus & toolbar items.
 

@@ -6,4 +6,6 @@ void dialog_goto_line (void);
 void dialog_replace   (gint full);
 void dialog_prefs     (void);
 
+gchar * gedit_plugin_program_location_dialog (void);
+
 #endif /* __DIALOGS_H__ */
