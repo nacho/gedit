@@ -49,6 +49,7 @@
 #include "gedit-plugins-engine.h"
 #include "gedit-application-server.h"
 #include "gedit-convert.h"
+#include "gedit-metadata-manager.h"
 
 #ifndef GNOME_ICONDIR
 #define GNOME_ICONDIR "" 
@@ -78,6 +79,9 @@ static const struct poptOption options [] =
 {
 	{ "debug-utils", '\0', POPT_ARG_NONE, &debug_utils, 0,
 	  N_("Show utility debugging messages."), NULL },
+
+	{ "debug-metadata", '\0', POPT_ARG_NONE, &debug_utils, 0,
+	  N_("Show metadata debugging messages."), NULL },
 
 	{ "debug-mdi", '\0', POPT_ARG_NONE, &debug_mdi, 0,
 	  N_("Show mdi debugging messages."), NULL },
@@ -367,6 +371,7 @@ main (int argc, char **argv)
 	/* Load user preferences */
 	gedit_prefs_manager_app_init ();
 	gedit_recent_init ();
+	gedit_metadata_manager_init ();
 
 	/* Init plugins engine */
 	gedit_plugins_engine_init ();

@@ -44,7 +44,8 @@ typedef enum {
 	GEDIT_DEBUG_COMMANDS,
 	GEDIT_DEBUG_MDI,
 	GEDIT_DEBUG_SESSION,
-	GEDIT_DEBUG_UTILS
+	GEDIT_DEBUG_UTILS,
+	GEDIT_DEBUG_METADATA
 } GeditDebugSection;
 
 extern gint debug;
@@ -61,6 +62,7 @@ extern gint debug_recent;
 extern gint debug_mdi;
 extern gint debug_session;
 extern gint debug_utils;
+extern gint debug_metadata;
 
 /* __FUNCTION_ is not defined in Irix according to David Kaelbling <drk@sgi.com>*/
 #ifndef __GNUC__
@@ -80,6 +82,8 @@ extern gint debug_utils;
 #define	DEBUG_MDI	GEDIT_DEBUG_MDI,     __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_SESSION	GEDIT_DEBUG_SESSION, __FILE__, __LINE__, __FUNCTION__
 #define	DEBUG_UTILS	GEDIT_DEBUG_UTILS,   __FILE__, __LINE__, __FUNCTION__
+#define	DEBUG_METADATA	GEDIT_DEBUG_METADATA,__FILE__, __LINE__, __FUNCTION__
+
 
 void gedit_debug (gint section, gchar *file,
 		  gint line, gchar* function, gchar* format, ...);

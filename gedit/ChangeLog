@@ -1,3 +1,22 @@
+2003-05-13  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-metadata-manager.[ch]: new files
+
+	* Makefile.am: compile gedit-metadata-manager.[ch]
+
+	* gedit-document.c (gedit_document_finalize)(gedit_document_real_loaded):
+	save and restore cursor position, last searched and last replaced text
+	as metadata.
+
+	* gedit-file.c (gedit_file_exit): shutdown metadata manager
+	
+	* gedit-session.c (client_die_cb):  shutdown metadata manager
+
+	* gedit2.c (main): init metadata manager, added --debug-metadata to
+	command line parameters
+
+	* gedit-debug.[ch]: add support for debugging metadata
+
 2003-05-12  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-ui.xml: fixed bug #105378 - View > Customize Toolbar 

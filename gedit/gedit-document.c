@@ -52,6 +52,7 @@
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-convert.h"
+#include "gedit-metadata-manager.h"
 
 #include "gedit-marshal.h"
 
@@ -297,6 +298,28 @@ gedit_document_finalize (GObject *object)
 				document->priv->untitled_number);
 	}
 
+	if (document->priv->uri != NULL)
+	{
+		gchar *position;
+
+		position = g_strdup_printf ("%d", 
+					    gedit_document_get_cursor (document));
+		
+		gedit_metadata_manager_set (document->priv->uri,
+					    "position",
+					    position);
+
+		g_free (position);
+
+		gedit_metadata_manager_set (document->priv->uri,
+					    "last_searched_text", 
+					    document->priv->last_searched_text);
+
+		gedit_metadata_manager_set (document->priv->uri,
+					    "last_replaced_text", 
+					    document->priv->last_replace_text);
+	}
+
 	g_free (document->priv->uri);
 	g_free (document->priv->last_searched_text);
 	g_free (document->priv->last_replace_text);
@@ -456,9 +479,44 @@ gedit_document_real_name_changed (GeditDocument *document)
 static void 
 gedit_document_real_loaded (GeditDocument *document)
 {
+	gchar *data;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (document != NULL);
+	g_return_if_fail (document->priv->uri != NULL);
+
+	/* FIXME: commented since it does not work as expected - Paolo */
+	/*
+	data = gedit_metadata_manager_get (document->priv->uri,
+					   "position");
+	if (data != NULL)
+	{
+		gedit_document_set_cursor (document, atoi (data));
+
+		g_free (data);
+	}
+	*/
+
+	data = gedit_metadata_manager_get (document->priv->uri,
+					   "last_searched_text");
+	if (data != NULL)
+	{
+		gedit_document_set_last_searched_text (document,
+						       data);
+
+		g_free (data);
+	}
+
+	data = gedit_metadata_manager_get (document->priv->uri,
+					   "last_replaced_text");
+	if (data != NULL)
+	{
+		gedit_document_set_last_replace_text (document,
+						      data);
+
+		g_free (data);
+	}
 }
 
 static void 

@@ -51,6 +51,7 @@ gint debug_recent = 0;
 gint debug_mdi = 0;
 gint debug_session = 0;
 gint debug_utils = 0;
+gint debug_metadata = 0;
 
 void
 gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...)
@@ -68,7 +69,9 @@ gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* forma
 	    (debug_recent   && section == GEDIT_DEBUG_RECENT)   ||
 	    (debug_session  && section == GEDIT_DEBUG_SESSION)  ||
 	    (debug_mdi      && section == GEDIT_DEBUG_MDI)	||
-	    (debug_utils    && section == GEDIT_DEBUG_UTILS))
+	    (debug_utils    && section == GEDIT_DEBUG_UTILS)	||
+	    (debug_utils    && section == GEDIT_DEBUG_METADATA))
+
 	{
 		va_list args;
 		gchar *msg;

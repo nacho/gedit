@@ -70,7 +70,8 @@ LIB_H_FILES =				\
 	gedit-encodings.h		\
 	gedit-convert.h			\
 	gedit-debug.h			\
-	gedit-prefs-manager.h		
+	gedit-prefs-manager.h		\
+	gedit-metadata-manager.h	
 
 
 headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
@@ -116,6 +117,7 @@ libgedit_la_SOURCES = 			\
 	gedit-encodings.c		\
 	gedit-prefs-manager.c		\
 	gedit-prefs-manager-private.h	\
+	gedit-metadata-manager.c	\
 	$(LIB_H_FILES)
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
