@@ -397,24 +397,23 @@ void gE_get_settings(gE_window *window)
   gnome_config_pop_prefix ();
   gnome_config_sync ();
  
-  if (window->tab_pos == 0) window->tab_pos = 2;
   gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), window->tab_pos);
   
-  if (window->show_status != 1)
+  if (window->show_status == FALSE)
   {
     gtk_widget_hide (window->statusbox);
-    window->show_status = 0;
+    window->show_status = FALSE;
   }
  
-  if (window->have_toolbar == 1)
+  if (window->have_toolbar == TRUE)
     {
      tb_on_cb(NULL,window);
-     window->have_toolbar = 1;
+     window->have_toolbar = TRUE;
     }
-  if (window->have_toolbar == 0)
+  if (window->have_toolbar == FALSE)
     {
      tb_off_cb(NULL, window);
-     window->have_toolbar = 0;
+     window->have_toolbar = FALSE;
     }
   
 }

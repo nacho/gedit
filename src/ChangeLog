@@ -3,6 +3,57 @@
 	* The previous changes to the gnome menu code broke the
 	  menus for multiple windows.. Fixed that..
 
+1998-07-13  Andy Kahn <kahn@zk3.dec.com>
+
+	(all changes are not Gnome specific)
+
+	* fix "blinky" label in the about box (gtk-only version).  cleanup
+	  and simplify gE_about.c.
+
+	* for now, include pixmap file/description directly into code as
+	  default pixmap for toolbar.
+
+	  (new files: xpm/tb_cancel.xpm, xpm/tb_copy.xpm, xpm/tb_cut.xpm,
+	  xpm/tb_edit.xpm, xpm/tb_help.xpm, xpm/tb_new.xpm, xpm/tb_open.xpm,
+	  xpm/tb_paste.xpm, xpm/tb_print.xpm, xpm/tb_save.xpm,
+	  xpm/tb_search.xpm)
+
+	  TODO: allow user configurable path (saved in ~/.gedit) to load
+	  user-prefered toolbar pixmaps.
+
+	* for the statusbar label: add gE_msgbar_XXX() routines to manipulate
+	  the label.  remembers last label printed and auto-clears the label
+	  after a small timeout.
+
+	* cleanup main.h:
+	  	- drop unneeded includes.
+		- for WITHOUT_GNOME, define auto_indent, show_tabs,
+		show_status, and have_toolbar to be gboolean's instead of
+		gint's.  define tab_pos to be GtkPositionType instead of gint.
+		- move all function prototypes to their respective .h files.
+		(new files: gE_about.h, gE_document.h, gE_files.h)
+
+	* where applicable:
+		- use GTK_TOP_{TOP,BOTTOM,LEFT,RIGHT} for notebook tab
+		positioning instead of directly using the numeric values.
+		- use boolean defs TRUE/FALSE instead of 1/0.
+		- drop variable Ctime.  use GDK_CURRENT_TIME instead.
+		- include new .h files as needed.
+		- use gE_msgbar_XXX() routines as needed.
+		- add GPL notice, drop unused, cleanup prototypes.
+
+	* other misc changes (these should go into the log entry for each file
+	  when checked into CVS, but we're not doing that too well, so...) :
+	  gE_document.c:
+		- move destroy_window() to here.  rename to gE_destroy_window().
+		- make notebook_switch_page() static.
+		- move gE_show_version() to gedit.c
+	  gedit.c:
+	  	- include new .h files as needed.  drop unused cruft.
+		- move gE_show_version() (now static) here.
+		- move destroy_window() to gE_document.c.  rename to
+		gE_destroy_window().
+
 1998-07-12  Evan Lawrence <evan@worldpath.net>
 
 	* Made corrections to gnome menu code to get it to compile

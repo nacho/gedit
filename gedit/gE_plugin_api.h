@@ -1,4 +1,6 @@
-/* gEdit
+/* vi:set ts=4 sts=0 sw=4:
+ *
+ * gEdit
  * Copyright (C) 1998 Alex Roberts, Evan Lawrence, and Chris Lahey
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,14 +24,14 @@
 extern "C" {
 #endif /* __cplusplus */
   
-  int gE_plugin_document_create( gint context, gchar *title );
-  void gE_plugin_text_append( gint docid, gchar *buffer, gint length );
-  void gE_plugin_document_show( gint docid );
-  int gE_plugin_document_current( gint context );
-  char *gE_plugin_document_filename( gint docid );
-  char *gE_plugin_text_get( gint docid );
-  void gE_plugin_program_register (plugin_info *info);
-
+extern int gE_plugin_document_create( gint context, gchar *title );
+extern void gE_plugin_text_append( gint docid, gchar *buffer, gint length );
+extern void gE_plugin_document_show( gint docid );
+extern int gE_plugin_document_current( gint context );
+extern char *gE_plugin_document_filename( gint docid );
+extern char *gE_plugin_text_get( gint docid );
+extern void gE_plugin_program_register (plugin_info *info);
+extern void add_plugins_to_window (plugin_info *info, gE_window *window);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

@@ -16,15 +16,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GE_PREFS_H__
-#define __GE_PREFS_H__
+#ifndef __GE_ABOUT_H__
+#define __GE_ABOUT_H__
 
-extern gE_prefs *prefs_window;
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
 
-extern void gE_save_settings(gE_window *window, gchar *cmd);
-extern void gE_get_settings(gE_window *window);
-extern gE_prefs *gE_prefs_window();
-extern void gE_get_rc_file();
-extern void gE_rc_parse();
+extern void gE_about_box(GtkWidget *w, gpointer cbdata);
 
-#endif /* __GE_PREFS_H__ */
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif /* __GE_ABOUT_H__ */

@@ -32,35 +32,39 @@
 #include "commands.h"
 #include "menus.h"
 #include "toolbar.h"
+#include "xpm/tb_new.xpm"
+#include "xpm/tb_open.xpm"
+#include "xpm/tb_save.xpm"
+#include "xpm/tb_cancel.xpm"
+#include "xpm/tb_print.xpm"
+#include "xpm/tb_cut.xpm"
+#include "xpm/tb_copy.xpm"
+#include "xpm/tb_paste.xpm"
+#include "xpm/tb_search.xpm"
 
 
-/*
- * XXX fixme - should make xpm pathname configurable or at least set
- * in a static location (e.g., /usr/local/lib/gedit/xpm)
- */
- /* ^^^ Proper location would be $INSTALL_DIR/share/pixmaps/gedit ^^^ */
- 
+
 #ifdef WITHOUT_GNOME
 
 static toolbar_data_t toolbar_data[] = {
-	{ " New ", "Start a new file", "Toolbar/New", "xpm/tb_new.xpm",
+	{ " New ", "Start a new file", "Toolbar/New", tb_new_xpm,
 		(GtkSignalFunc)file_new_cmd_callback },
-	{ " Open ", "Open a file", "Toolbar/Open", "xpm/tb_open.xpm",
+	{ " Open ", "Open a file", "Toolbar/Open", tb_open_xpm,
 		(GtkSignalFunc)file_open_cmd_callback },
-	{ " Save ", "Save file", "Toolbar/Save", "xpm/tb_save.xpm",
+	{ " Save ", "Save file", "Toolbar/Save", tb_save_xpm,
 		(GtkSignalFunc)file_save_cmd_callback },
-	{ " Close ", "Close the current file", "Toolbar/Close", "xpm/tb_cancel.xpm",
+	{ " Close ", "Close the current file", "Toolbar/Close", cancel_xpm,
 		(GtkSignalFunc)file_close_cmd_callback },
-	{ " Print ", "Print file", "Toolbar/Print", "xpm/tb_print.xpm",
+	{ " Print ", "Print file", "Toolbar/Print", tb_print_xpm,
 		(GtkSignalFunc)file_print_cmd_callback },
 	{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ " Cut ", "Cut text", "Toolbar/Cut", "xpm/tb_cut.xpm",
+	{ " Cut ", "Cut text", "Toolbar/Cut", tb_cut_xpm,
 		(GtkSignalFunc)edit_cut_cmd_callback },
-	{ " Copy ", "Copy text", "Toolbar/Copy", "xpm/tb_copy.xpm",
+	{ " Copy ", "Copy text", "Toolbar/Copy", tb_copy_xpm,
 		(GtkSignalFunc)edit_copy_cmd_callback },
-	{ " Paste ", "Paste text", "Toolbar/Paste", "xpm/tb_paste.xpm",
+	{ " Paste ", "Paste text", "Toolbar/Paste", tb_paste_xpm,
 		(GtkSignalFunc)edit_paste_cmd_callback },
-	{ " Search ", "Search for text", "Toolbar/Search", "xpm/tb_search.xpm",
+	{ " Search ", "Search for text", "Toolbar/Search", tb_search_xpm,
 		(GtkSignalFunc)search_search_cmd_callback },
 	{ NULL, NULL, NULL, NULL, NULL }
 };
@@ -94,7 +98,7 @@ static toolbar_data_t toolbar_data[] = {
 
 
 #ifdef WITHOUT_GNOME
-static GtkWidget *new_pixmap(char *fname, GtkWidget *gdkw, GtkWidget *w);
+static GtkWidget *new_pixmap(char **icon, GtkWidget *gdkw, GtkWidget *w);
 #else
 static GtkWidget *new_pixmap(char *fname, GtkWidget *w);
 #endif
@@ -117,7 +121,7 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 #endif
 	toolbar = gtk_toolbar_new(GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 
-	while (tbdp->callback != NULL) {
+	while (tbdp->text != NULL) {
 		gtk_toolbar_append_item(
 			GTK_TOOLBAR(toolbar),
 #ifdef WITHOUT_GNOME
@@ -152,7 +156,7 @@ gE_create_toolbar(gE_window *gw, gE_data *data)
 	gnome_app_set_toolbar (GNOME_APP (gw->window), GTK_TOOLBAR(toolbar));
 #endif
 
-	gw->have_toolbar = 1;
+	gw->have_toolbar = TRUE;
 
 } /* gE_create_toolbar */
 
@@ -174,7 +178,7 @@ tb_on_cb(GtkWidget *w, gpointer cbwindow)
 	if (!GTK_WIDGET_VISIBLE (GNOME_APP (window->window)->toolbar->parent))
 		gtk_widget_show (GNOME_APP(window->window)->toolbar->parent);
 #endif
-	window->have_toolbar = 1;
+	window->have_toolbar = TRUE;
 }
 
 
@@ -199,7 +203,7 @@ tb_off_cb(GtkWidget *w, gpointer cbwindow)
 	if (GTK_WIDGET_VISIBLE (GNOME_APP(window->window)->toolbar->parent))
 		gtk_widget_hide (GNOME_APP(window->window)->toolbar->parent);
 #endif
-	window->have_toolbar = 0;
+	window->have_toolbar = FALSE;
 }
 
 
@@ -293,24 +297,21 @@ tb_tooltips_off_cb(GtkWidget *w, gpointer cbwindow)
  */
 static GtkWidget*
 #ifdef WITHOUT_GNOME
-new_pixmap(char *fname, GtkWidget *gtkw, GtkWidget *w)
+new_pixmap(char **icon, GtkWidget *gtkw, GtkWidget *w)
 #else
 new_pixmap(char *fname, GtkWidget *w)
 #endif
 {
-	GtkWidget *wpixmap;
 #ifdef WITHOUT_GNOME
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
 
-	pixmap = gdk_pixmap_create_from_xpm(gtkw->window, &mask,
-				&gtkw->style->bg[GTK_STATE_NORMAL], fname);
-	wpixmap = gtk_pixmap_new(pixmap, mask);
+	pixmap = gdk_pixmap_create_from_xpm_d(gtkw->window, &mask,
+				&gtkw->style->bg[GTK_STATE_NORMAL], icon);
+	return gtk_pixmap_new(pixmap, mask);
 #else
-	wpixmap = gnome_stock_pixmap_widget ((GtkWidget *) w, fname);
+	return gnome_stock_pixmap_widget ((GtkWidget *) w, fname);
 #endif
-
-	return wpixmap;
 } /* new pixmap */
 
 /* the end */

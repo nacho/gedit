@@ -7,6 +7,8 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
+#include "gE_document.h"
+#include "gE_files.h"
 #include "commands.h"
 
 /* Strips away the leading path... Should maybe be optional? */
@@ -66,7 +68,7 @@ gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 			                                           GTK_SIGNAL_FUNC(document_changed_callback), document);
 	
 
-		gtk_label_set (GTK_LABEL(window->statusbar), ("File Opened..."));
+		gE_msgbar_set(window, MSGBAR_FILE_OPENED);
 		
 		return 1;
 	}
@@ -93,7 +95,7 @@ gint gE_file_open(gE_window *window, gE_document *document, gchar *filename)
 	gtk_window_set_title (GTK_WINDOW (window->window), title);
 	g_free (title);
 
-	gtk_label_set (GTK_LABEL(window->statusbar), ("File Opened..."));
+	gE_msgbar_set(window, MSGBAR_FILE_OPENED);
 	return 0;
 }
 
@@ -135,7 +137,7 @@ gint gE_file_save(gE_window *window, gE_document *document, gchar *filename)
 	gtk_window_set_title (GTK_WINDOW (window->window), title);
 	g_free (title);
 	
-	gtk_label_set (GTK_LABEL(window->statusbar), ("File Saved..."));
+	gE_msgbar_set(window, MSGBAR_FILE_SAVED);
 	return 0;
 }
 

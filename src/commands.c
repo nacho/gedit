@@ -14,6 +14,9 @@
 #include "main.h"
 #include "commands.h"
 #include "menus.h"
+#include "gE_document.h"
+#include "gE_prefs.h"
+#include "gE_files.h"
 
 /* ---- Misc callbacks ---- */
 
@@ -177,8 +180,8 @@ void tab_top_cback (GtkWidget *widget, gpointer cbwindow)
 {
 	gE_window *window = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 2);
-	window->tab_pos = 2;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_TOP);
+	window->tab_pos = GTK_POS_TOP;
 }
 
 
@@ -186,24 +189,24 @@ void tab_bot_cback (GtkWidget *widget, gpointer cbwindow)
 {
 	gE_window *window = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 3);
-	window->tab_pos = 3;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_BOTTOM);
+	window->tab_pos = GTK_POS_BOTTOM;
 }
 
 void tab_lef_cback (GtkWidget *widget, gpointer cbwindow)
 {
 	gE_window *window = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 4);
-	window->tab_pos = 4;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_LEFT);
+	window->tab_pos = GTK_POS_LEFT;
 }
 
 void tab_rgt_cback (GtkWidget *widget, gpointer cbwindow)
 {
 	gE_window *window = (gE_window *)cbwindow;
 
-	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), 1);
-	window->tab_pos = 1;
+	gtk_notebook_set_tab_pos (GTK_NOTEBOOK(window->notebook), GTK_POS_RIGHT);
+	window->tab_pos = GTK_POS_RIGHT;
 }
 
 void tab_toggle_cback (GtkWidget *widget, gpointer cbwindow)
@@ -318,7 +321,7 @@ void file_new_cmd_callback (GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
-	gtk_label_set (GTK_LABEL(data->window->statusbar), ("New File..."));
+	gE_msgbar_set(data->window, MSGBAR_FILE_NEW);
 	gE_document_new(data->window);
 }
 
@@ -334,9 +337,9 @@ void file_newwindow_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	window->show_status = data->window->show_status;
 	window->tab_pos = data->window->tab_pos;
 	window->have_toolbar = data->window->have_toolbar;
-	#ifndef WITHOUT_GNOME
+#ifndef WITHOUT_GNOME
 	gE_get_settings (window);
-	#endif
+#endif
 }
 
 
@@ -416,7 +419,7 @@ void file_close_cmd_callback (GtkWidget *widget, gpointer cbdata)
 			if (doc->filename != NULL)
 				g_free (doc->filename);
 			g_free (doc);
-			gtk_label_set (GTK_LABEL(data->window->statusbar), ("File Closed..."));
+			gE_msgbar_set(data->window, MSGBAR_FILE_CLOSED);
 			if (data->temp1)
 				file_close_cmd_callback (widget, data);
 		}
@@ -502,7 +505,7 @@ char print[256];
 	strcat(print, gE_document_current(data->window)->filename);
 	system (print);   
 	
-   			gtk_label_set (GTK_LABEL(data->window->statusbar), ("File Printed..."));
+	gE_msgbar_set(data->window, MSGBAR_FILE_PRINTED);
    /*system("rm -f temp001");*/
 
 }
@@ -514,10 +517,13 @@ void edit_cut_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 #if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
-   gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text));
+	gtk_editable_cut_clipboard(
+		GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
-   gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text), Ctime);
+	gtk_editable_cut_clipboard(GTK_EDITABLE(
+		gE_document_current(data->window)->text), GDK_CURRENT_TIME);
 #endif
+	gE_msgbar_set(data->window, MSGBAR_CUT);
 }
 
 void edit_copy_cmd_callback (GtkWidget *widget, gpointer cbdata)
@@ -525,10 +531,13 @@ void edit_copy_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 #if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
-   gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text));
+	gtk_editable_copy_clipboard(
+		GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
-   gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text), Ctime);
+	gtk_editable_copy_clipboard(GTK_EDITABLE(
+		gE_document_current(data->window)->text), GDK_CURRENT_TIME);
 #endif
+	gE_msgbar_set(data->window, MSGBAR_COPY);
 }
 	
 void edit_paste_cmd_callback (GtkWidget *widget, gpointer cbdata)
@@ -536,19 +545,24 @@ void edit_paste_cmd_callback (GtkWidget *widget, gpointer cbdata)
 	gE_data *data = (gE_data *)cbdata;
 
 #if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
-   gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text));
+	gtk_editable_paste_clipboard(
+		GTK_EDITABLE(gE_document_current(data->window)->text));
 #else
-   gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(data->window)->text), Ctime);
+	gtk_editable_paste_clipboard(GTK_EDITABLE(
+			gE_document_current(data->window)->text), GDK_CURRENT_TIME);
 #endif
+	gE_msgbar_set(data->window, MSGBAR_PASTE);
 }
 
 void edit_selall_cmd_callback (GtkWidget *widget, gpointer cbdata)
 {
 	gE_data *data = (gE_data *)cbdata;
 
-   gtk_editable_select_region (GTK_EDITABLE(gE_document_current(data->window)->text),
-   			       0,
-			      (gtk_text_get_length(GTK_TEXT(gE_document_current(data->window)->text))));
+	gtk_editable_select_region(
+		GTK_EDITABLE(gE_document_current(data->window)->text), 0,
+		gtk_text_get_length(
+			GTK_TEXT(gE_document_current(data->window)->text)));
+	gE_msgbar_set(data->window, MSGBAR_SELECT_ALL);
 }
 
 

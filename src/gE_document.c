@@ -1,4 +1,6 @@
-/* gEdit
+/* vi:set ts=4 sts=0 sw=4:
+ *
+ * gEdit
  * Copyright (C) 1998 Alex Roberts and Evan Lawrence
  *
  * This program is free software; you can redistribute it and/or modify
@@ -26,6 +28,7 @@
 #include <gtk/gtk.h>
 #include <glib.h>
 #include "main.h"
+#include "gE_document.h"
 #define PLUGIN_TEST 1
 #if PLUGIN_TEST
 #include "plugin.h"
@@ -34,6 +37,16 @@
 #include "commands.h"
 #include "menus.h"
 #include "toolbar.h"
+
+static void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
+	gint num, gE_window *window);
+static void gE_msgbar_clear(gpointer data);
+static void gE_msgbar_timeout_add(gE_window *window);
+static void gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);
+
+static char *lastmsg = NULL;
+static gint msgbar_timeout_id;
+
 
 extern GList *plugins;
 
@@ -52,8 +65,9 @@ gE_window *gE_window_new()
   window->documents = NULL;
   window->search = g_malloc (sizeof(gE_search));
   window->search->window = NULL;
-  window->auto_indent = 1;
-  window->show_tabs = 1;
+  window->auto_indent = TRUE;
+  window->show_tabs = TRUE;
+  window->tab_pos = GTK_POS_TOP;
   
   data = g_malloc0 (sizeof (gE_data));
 
@@ -71,7 +85,7 @@ gE_window *gE_window_new()
   data->window = window;
 
   gtk_signal_connect (GTK_OBJECT (window->window), "delete_event",
-     		      GTK_SIGNAL_FUNC(destroy_window),
+     		      GTK_SIGNAL_FUNC(gE_destroy_window),
 		      data);
      
   gtk_window_set_wmclass ( GTK_WINDOW ( window->window ), "gEdit", "gedit" );
@@ -121,6 +135,7 @@ gE_window *gE_window_new()
       gtk_box_pack_start (GTK_BOX (box1), box2, FALSE, TRUE, 0);
 
       window->statusbar = gtk_label_new ("Welcome to gEdit");
+      gE_msgbar_timeout_add(window);
       gtk_box_pack_start (GTK_BOX (box2), window->statusbar, TRUE, TRUE, 0);
       gtk_misc_set_alignment (GTK_MISC (window->statusbar), 0.0, 0.5);
       gtk_widget_show (window->statusbar);
@@ -161,26 +176,17 @@ void gE_window_toggle_statusbar (GtkWidget *w, gpointer cbwindow)
 {
 	gE_window *window = (gE_window *)cbwindow;
 
-	if (window->show_status == 1)
+	if (window->show_status == TRUE)
 	{
 		gtk_widget_hide (window->statusbox);
-		window->show_status = 0;
+		window->show_status = FALSE;
 	}
 	else
 	{
 		gtk_widget_show (window->statusbox);
-		window->show_status = 1;
+		window->show_status = TRUE;
 	}
 }
-
-void gE_window_new_with_file(gE_window *window, char *filename)
-{
-
-	window = gE_window_new();
-	
-	gE_file_open(window, gE_document_current(window), filename);
-}
-
 
 gE_document *gE_document_new(gE_window *window)
 {
@@ -299,7 +305,9 @@ void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow)
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
 }
 
-void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page, gint num, gE_window *window)
+static void
+notebook_switch_page (GtkWidget *w, GtkNotebookPage *page,
+	gint num, gE_window *window)
 {
 	gE_document *doc;
 	gchar *title;
@@ -316,9 +324,60 @@ void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page, gint num, gE_win
 	g_free (title);
 	}
 }
-		
-void gE_show_version()
+
+static void
+gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 {
-	g_print ("%s\n", GEDIT_ID);
+	file_close_window_cmd_callback (widget, data);
 }
 
+
+/*
+ * PUBLIC: gE_messagebar_set
+ *
+ * sets the message/status bar.  remembers the last message set so that
+ * a duplicate one won't be set on top of the current one.
+ */
+void
+gE_msgbar_set(gE_window *window, char *msg)
+{
+	if (lastmsg == NULL || strcmp(lastmsg, msg)) {
+		gtk_label_set(GTK_LABEL(window->statusbar), msg);
+		if (lastmsg)
+			g_free(lastmsg);
+		lastmsg = g_strdup(msg);
+		gtk_timeout_remove(msgbar_timeout_id);
+		gE_msgbar_timeout_add(window);
+	}
+}
+
+
+/*
+ * PRIVATE: gE_msgbar_timeout_add
+ *
+ * automatically clears the text after 3 seconds
+ */
+static void
+gE_msgbar_timeout_add(gE_window *window)
+{
+	msgbar_timeout_id =
+		gtk_timeout_add(3000, (GtkFunction)gE_msgbar_clear, window);
+}
+
+
+/*
+ * PRIVATE: gE_msgbar_clear
+ *
+ * clears the text by using a space (" ").  apparently, Gtk has no
+ * provision for clearing a label widget.
+ */
+static void
+gE_msgbar_clear(gpointer data)
+{
+	gE_window *window = (gE_window *)data;
+
+	gE_msgbar_set(window, MSGBAR_CLEAR);
+	gtk_timeout_remove(msgbar_timeout_id);
+}
+
+/* the end */

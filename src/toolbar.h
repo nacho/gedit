@@ -30,7 +30,7 @@ typedef struct {
 	char *text;
 	char *tooltip_text;
 	char *tooltip_private_text;
-	char *icon;
+	char **icon;
 	GtkSignalFunc callback;
 } toolbar_data_t;
 

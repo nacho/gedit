@@ -26,37 +26,17 @@
 
 #include "main.h"
 #include "commands.h"
+#include "gE_init.h"
+#include "gE_document.h"
 #include "gE_prefs.h"
 #include "menus.h"
-#define PLUGIN_TEST 1
-#if PLUGIN_TEST
-#include "plugin.h"
-#include "gE_plugin_api.h"
-#endif
 
 GList *window_list;
 extern GList *plugins;
-char home[STRING_LENGTH_MAX];
-char *homea;
-char rc[STRING_LENGTH_MAX];
-char fname[STRING_LENGTH_MAX];
-
-void destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
-{
-  file_close_window_cmd_callback (widget, data);
-
-}
-
-
-void gE_quit ()
-{
-	gtk_exit (0);
-}	
-
-
-
 
 #ifdef WITHOUT_GNOME
+static void gE_show_version(void);
+
 int
 main (int argc, char **argv)
 {
@@ -111,8 +91,16 @@ main (int argc, char **argv)
 	gtk_main ();
 
 	return 0;
+} /* main */
+
+
+static void
+gE_show_version(void)
+{
+    g_print ("%s\n", GEDIT_ID);
 }
-#else
+
+#else	/* USING GNOME */
 static struct argp_option argp_options [] = {
 	{ NULL, 0, NULL, 0, NULL, 0 },
 };
@@ -152,7 +140,7 @@ int main (int argc, char **argv)
 	window = gE_window_new();
 
 	data->window = window;
-	window->show_status = 1;
+	window->show_status = TRUE;
 	gE_get_settings(window);
 
 	g_print("...\n");
@@ -193,5 +181,5 @@ int main (int argc, char **argv)
 	return 0;
 }
 
-#endif
+#endif	/* #ifdef WITHOUT_GNOME */
 

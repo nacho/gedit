@@ -19,6 +19,9 @@
 #include <gtk/gtk.h>
 #include <string.h>
 #include "main.h"
+#include "gE_init.h"
+#include "gE_files.h"
+#include "gE_document.h"
 #include "gE_plugin_api.h"
 
 extern GList *plugins;
@@ -54,8 +57,6 @@ void prog_init(char **file)
 	window = gE_window_new();
 	data->window = window;
 	if (*file != NULL) {
-		g_print("Opening files...\n");
-
 		doc = gE_document_current(window);
 		gtk_notebook_remove_page(GTK_NOTEBOOK(window->notebook),
 			gtk_notebook_current_page (GTK_NOTEBOOK(window->notebook)));

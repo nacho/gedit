@@ -13,6 +13,8 @@
 #include "main.h"
 #include "commands.h"
 #include "toolbar.h"
+#include "gE_document.h"
+#include "gE_about.h"
 
 #define GE_DATA		1
 #define GE_WINDOW	2
@@ -128,8 +130,10 @@ gE_menus_init (gE_window *window, gE_data *data)
 	menus_init (window, data);
 
 	if (menubar)
+	{
 		*menubar = subfactory->widget;
-
+		window->factory = subfactory;
+	}
 #ifdef GTK_HAVE_ACCEL_GROUP
 	if(accel)
 		*accel = subfactory->accel_group;
@@ -168,6 +172,14 @@ menus_init(gE_window *window, gE_data *data)
 	
 	gtk_menu_factory_add_subfactory(factory, subfactory, "<Main>");
 	menus_create(menu_items, nmenu_items);
+
+	for (i = 0; i < nmenu_items; i++) {
+		if (menu_items[i].callback_data == (gpointer) data)
+			menu_items[i].callback_data = (gpointer) GE_DATA;
+		if (menu_items[i].callback_data == (gpointer) window)
+			menu_items[i].callback_data = (gpointer) GE_WINDOW;
+	}
+
 }
 	    
 static void

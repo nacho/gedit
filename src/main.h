@@ -1,3 +1,21 @@
+/* vi:set ts=4 sts=0 sw=4:
+ *
+ * gEdit
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
@@ -5,8 +23,6 @@
 extern "C" {
 #endif /* __cplusplus */
 
-/* For size_t */
-#include <stdio.h>
 #define PLUGIN_TEST 1
 #if PLUGIN_TEST
 #include "plugin.h"
@@ -35,6 +51,7 @@ typedef struct _gE_window {
 	GtkWidget *statusbox;
 	GtkWidget *statusbar;
 	GtkWidget *menubar;
+	GtkMenuFactory *factory; /* <-- Auto-plugin detection needs this */
 	GtkWidget *toolbar;
 	GtkWidget *notebook;
 	GtkWidget *open_fileselector;
@@ -47,12 +64,19 @@ typedef struct _gE_window {
 #endif
 	GList *documents;
 	gE_search *search;
+#ifdef WITHOUT_GNOME
+	gboolean auto_indent;
+	gboolean show_tabs;
+	gboolean show_status;
+	gboolean have_toolbar;
+#else
 	gint auto_indent;
 	gint show_tabs;
 	gint show_status;
-	gint tab_pos;
-	gchar *print_cmd;
 	gint have_toolbar;
+#endif
+	gchar *print_cmd;
+	GtkPositionType tab_pos;
 #if PLUGIN_TEST
 	plugin *hello;
 #endif
@@ -91,46 +115,6 @@ typedef struct _gE_data {
 } gE_data;
 
 
-void prog_init(char **file);
-void destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data);
-
-#if PLUGIN_TEST
-  /* Plugins */
-  void start_plugin (GtkWidget *widget, gE_data *data);
-  void add_plugin_to_menu (gE_window *window, plugin_info *info);
-  void add_plugins_to_window (plugin_info *info, gE_window *window);
-#endif
-
-/* Preferences */
-void gE_save_settings(gE_window *window, gchar *cmd);
-void gE_get_settings(gE_window *window);
-gE_prefs *gE_prefs_window();
-void gE_get_rc_file();
-void gE_rc_parse();
-
-void gE_window_toggle_statusbar (GtkWidget *w, gpointer cbwindow);
-
-void gE_show_version();
-void gE_about_box();
-void gE_quit ();
-
-void gE_window_new_with_file(gE_window *window, char *filename);
-gE_window *gE_window_new();
-
-gE_document *gE_document_new(gE_window *window);
-gE_document *gE_document_current(gE_window *window);
-void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow);
-void notebook_switch_page (GtkWidget *w, GtkNotebookPage *page, gint num, gE_window *window);
-
-gint gE_file_open (gE_window *window, gE_document *document, gchar *filename);
-gint gE_file_save (gE_window *window, gE_document *document, gchar *filename);
-gint file_open_wrapper (gE_data *data);
-
-#if !( (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1) )
-size_t Ctime;
-#endif
-
-extern gE_prefs *prefs_window;
 extern GList *window_list;
 
 #ifdef __cplusplus

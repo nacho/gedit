@@ -59,7 +59,7 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	data->window = window;
 	entry->callback_data = data;
 	
-	gtk_menu_factory_add_entries((GtkMenuFactory *)(window->menubar), entry, 1);
+	gtk_menu_factory_add_entries((GtkMenuFactory *)(window->factory), entry, 1);
 #else
 	gchar *path;
 	GnomeUIInfo *menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
