@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.0.2\n"
-"POT-Creation-Date: 2002-12-13 05:47+0100\n"
-"PO-Revision-Date: 2002-12-13 13:48+0100\n"
+"POT-Creation-Date: 2002-12-17 05:45+0100\n"
+"PO-Revision-Date: 2002-12-17 14:53+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -696,7 +696,7 @@ msgstr "Znaků (s mezerami)"
 msgid "File Name"
 msgstr "Název souboru"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:315
 msgid "Lines"
 msgstr "Řádek"
 
@@ -1206,31 +1206,31 @@ msgstr "Jít na řádek"
 msgid "_Go to Line"
 msgstr "_Jít na řádek"
 
-#: src/dialogs/gedit-dialog-replace.c:130
-#: src/dialogs/gedit-dialog-replace.c:900 src/gedit-commands.c:362
+#: src/dialogs/gedit-dialog-replace.c:132
+#: src/dialogs/gedit-dialog-replace.c:1025 src/gedit-commands.c:362
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Text \"%s\" nebyl nalezen."
 
-#: src/dialogs/gedit-dialog-replace.c:238 src/dialogs/replace.glade2.h:4
+#: src/dialogs/gedit-dialog-replace.c:240 src/dialogs/replace.glade2.h:4
 #: src/gedit-ui.xml.h:51
 msgid "Replace"
 msgstr "Nahradit"
 
-#: src/dialogs/gedit-dialog-replace.c:249
+#: src/dialogs/gedit-dialog-replace.c:251
 msgid "Replace _All"
 msgstr "Nahradit vš_e"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:252 src/gedit-file-selector-util.c:129
+#: src/dialogs/gedit-dialog-replace.c:254 src/gedit-file-selector-util.c:129
 msgid "_Replace"
 msgstr "Nah_radit"
 
-#: src/dialogs/gedit-dialog-replace.c:368 src/gedit-ui.xml.h:22
+#: src/dialogs/gedit-dialog-replace.c:376 src/gedit-ui.xml.h:22
 msgid "Find"
 msgstr "Najít"
 
-#: src/dialogs/gedit-dialog-replace.c:909
+#: src/dialogs/gedit-dialog-replace.c:1034
 #, c-format
 msgid "Found and replaced %d occurences."
 msgstr "Bylo nalezeno a nahrazeno %d výskytů."
@@ -1338,7 +1338,7 @@ msgid "Editor"
 msgstr "Editor"
 
 #: src/dialogs/gedit-preferences-dialog.c:267
-#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:309
+#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:306
 #: src/gedit-ui.xml.h:41
 msgid "Print"
 msgstr "Tisk"
@@ -1612,8 +1612,8 @@ msgid "_Display line numbers"
 msgstr "Zobrazit čísla řá_dků"
 
 #: src/dialogs/gedit-preferences.glade2.h:58
-msgid "_Print headers"
-msgstr "_Tisknout záhlaví"
+msgid "_Print page headers"
+msgstr "_Tisknout záhlaví stránek"
 
 #: src/dialogs/gedit-preferences.glade2.h:59
 msgid "_Restore Default Fonts"
@@ -1632,24 +1632,20 @@ msgid "_Use default theme font"
 msgstr "Použít výchozí písmo témat_u"
 
 #: src/dialogs/gedit-preferences.glade2.h:63
-msgid "_Wrap lines (at character boundaries)"
-msgstr "_Zalamovat řádky (na hranicích znaků)"
-
-#: src/dialogs/gedit-preferences.glade2.h:64
 msgid "_action(s)"
 msgstr "_akce"
 
-#: src/dialogs/gedit-preferences.glade2.h:65
-msgid "_line(s)"
-msgstr "_řádek(ků)"
-
-#: src/dialogs/gedit-preferences.glade2.h:66
+#: src/dialogs/gedit-preferences.glade2.h:64
 msgid "_minutes"
 msgstr "_minuty"
 
-#: src/dialogs/gedit-preferences.glade2.h:67
+#: src/dialogs/gedit-preferences.glade2.h:65
 msgid "character(s)"
 msgstr "znak(ů)"
+
+#: src/dialogs/gedit-preferences.glade2.h:66
+msgid "li_ne(s)"
+msgstr "_řádek(ků)"
 
 #: src/dialogs/gnome-print-font-dialog.c:107
 msgid "_Insert a new preview phrase."
@@ -2089,7 +2085,7 @@ msgstr "Nelze inicializovat správce nastavení."
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Očekával jsem '%s', ale obdržel jsem '%s' pro klíč %s"
 
-#: src/gedit-print.c:191
+#: src/gedit-print.c:188
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -2097,22 +2093,22 @@ msgstr ""
 "GEdit nemůže tisknout, jelikož nemůže nalézt\n"
 "jedno z potřebných písem."
 
-#: src/gedit-print.c:377
+#: src/gedit-print.c:374
 #, c-format
 msgid "File: %s"
 msgstr "Soubor: %s"
 
 #. Print right text
-#: src/gedit-print.c:384
+#: src/gedit-print.c:381
 #, c-format
 msgid "Page: %d"
 msgstr "Stránka: %d"
 
-#: src/gedit-print.c:525
+#: src/gedit-print.c:522
 msgid "gedit - Print Preview"
 msgstr "GEdit - Náhled tisku"
 
-#: src/gedit-print.c:603
+#: src/gedit-print.c:600
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -2882,16 +2878,16 @@ msgstr "Nelze vytvořit soubor \"%s\"."
 #. else
 #. msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
 #.
-#: src/gedit-view.c:1046
+#: src/gedit-view.c:1045
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ř. %d, Slo. %d"
 
-#: src/gedit-view.c:1084
+#: src/gedit-view.c:1083
 msgid "  OVR"
 msgstr "  PŘE"
 
-#: src/gedit-view.c:1086
+#: src/gedit-view.c:1085
 msgid "  INS"
 msgstr "  VLO"
 
@@ -3122,6 +3118,9 @@ msgstr "Thajské"
 #: src/recent-files/egg-recent-vfs-utils.c:90
 msgid " (invalid Unicode)"
 msgstr " (neplatný Unicode)"
+
+#~ msgid "_Wrap lines (at character boundaries)"
+#~ msgstr "_Zalamovat řádky (na hranicích znaků)"
 
 #~ msgid "Compare two files..."
 #~ msgstr "Porovnat dva soubory..."
