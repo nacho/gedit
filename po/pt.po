@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 2.0\n"
-"POT-Creation-Date: 2002-05-16 01:37+0100\n"
-"PO-Revision-Date: 2002-05-16 01:39+0000\n"
+"POT-Creation-Date: 2002-05-29 02:54+0100\n"
+"PO-Revision-Date: 2002-05-29 02:59+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese pt <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -79,23 +79,24 @@ msgstr "Inserir caracter"
 msgid "gedit: ASCII table"
 msgstr "gedit: Tabela ASCII"
 
-#: plugins/cvschangelog/cvschangelog.c:44
+#. AFAIK, all cvs commit messages start with this
+#: plugins/cvschangelog/cvschangelog.c:48
 msgid "Open CVS Chan_geLogs"
 msgstr "Abrir Chan_geLogs de CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:47
+#: plugins/cvschangelog/cvschangelog.c:51
 msgid "Searches for ChangeLogs in the current document and opens them"
 msgstr "Procura ChangeLogs no documento actual e abre-os"
 
-#: plugins/cvschangelog/cvschangelog.c:235
+#: plugins/cvschangelog/cvschangelog.c:263
 msgid "CVS ChangeLog"
 msgstr "ChangeLog CVS"
 
-#: plugins/cvschangelog/cvschangelog.c:236
+#: plugins/cvschangelog/cvschangelog.c:264
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr "Um plugin que abre ChangeLogs encontrados em mensagens de CVS commit."
 
-#: plugins/cvschangelog/cvschangelog.c:238
+#: plugins/cvschangelog/cvschangelog.c:266
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr "Copyright (C) 2002 - James Willcox"
 
@@ -282,7 +283,7 @@ msgstr ""
 "número de palavras, linhas, caracteres e caracteres não-espaço deste, "
 "mostrando os resultados."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:151
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
 #: plugins/shell_output/shell_output.c:436
 #: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
 msgid "Copyright (C) 2002 - Paolo Maggi"
@@ -324,19 +325,19 @@ msgstr "Palavras"
 msgid "gedit: Document Info plugin"
 msgstr "gedit: plugin Informação Documento"
 
-#: plugins/sample/sample.c:41
+#: plugins/sample/sample.c:43
 msgid "Insert User _Name"
 msgstr "Inserir _Nome Utilizador"
 
-#: plugins/sample/sample.c:44
+#: plugins/sample/sample.c:46
 msgid "Insert the user name at the cursor position"
 msgstr "Insere o nome do utilizador na posição do cursor"
 
-#: plugins/sample/sample.c:148
+#: plugins/sample/sample.c:160
 msgid "User name"
 msgstr "Nome utilizador"
 
-#: plugins/sample/sample.c:149
+#: plugins/sample/sample.c:161
 msgid "Inserts the user name at the cursor position."
 msgstr "Insere o nome do utilizador na posição do cursor."
 
@@ -480,7 +481,7 @@ msgstr "Insere a data e hora actuais na posição do cursor."
 msgid "Select the format to use when inserting date/time."
 msgstr "Seleccionar o formato a utilizar ao inserir data/hora."
 
-#: src/bonobo-mdi.c:489 src/bonobo-mdi.c:569 src/bonobo-mdi.c:1721
+#: src/bonobo-mdi.c:489 src/bonobo-mdi.c:569 src/bonobo-mdi.c:1722
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
@@ -544,7 +545,7 @@ msgstr "Substituir Tod_as"
 
 #. Add Replace button
 #: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:101
 msgid "_Replace"
 msgstr "Substitui_r"
 
@@ -635,7 +636,7 @@ msgid "Save"
 msgstr "Gravar"
 
 #: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:81
+#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:79
 msgid "Undo"
 msgstr "Desfazer"
 
@@ -992,7 +993,7 @@ msgstr "_Fonte utilizada pelo editor: "
 msgid "_Font used to print headers:"
 msgstr "_Fonte utilizada para imprimir cabeçalhos:"
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:96
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:94
 msgid "_Icon"
 msgstr "_Ícone"
 
@@ -1290,66 +1291,66 @@ msgstr ""
 msgid "Do_n't replace"
 msgstr "_Não substituir"
 
-#: src/gedit-file-selector-util.c:481
+#: src/gedit-file-selector-util.c:484
 msgid "Select a filename to save"
 msgstr "Seleccione um nome de ficheiro a gravar"
 
-#: src/gedit-file.c:124
+#: src/gedit-file.c:128
 msgid "Open File ..."
 msgstr "Abrir Ficheiro ..."
 
-#: src/gedit-file.c:141 src/gedit-file.c:708
+#: src/gedit-file.c:148 src/gedit-file.c:763
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Carregado o ficheiro '%s'"
 
-#: src/gedit-file.c:264 src/gedit-file.c:351
+#: src/gedit-file.c:279 src/gedit-file.c:401
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "A gravar ficheiro '%s' ..."
 
-#: src/gedit-file.c:285 src/gedit-file.c:361
+#: src/gedit-file.c:300 src/gedit-file.c:416
 msgid "The document has not been saved."
 msgstr "O documento não foi gravado."
 
-#: src/gedit-file.c:299 src/gedit-file.c:358
+#: src/gedit-file.c:315 src/gedit-file.c:408
 #, c-format
 msgid "File '%s' saved."
 msgstr "Ficheiro '%s' gravado."
 
-#: src/gedit-file.c:340
+#: src/gedit-file.c:383
 msgid "Save as ..."
 msgstr "Gravar como ..."
 
-#: src/gedit-file.c:519
+#: src/gedit-file.c:574
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "A reverter ficheiro '%s' ..."
 
-#: src/gedit-file.c:532
+#: src/gedit-file.c:587
 msgid "The document has not been reverted."
 msgstr "O documento não foi revertido."
 
-#: src/gedit-file.c:542
+#: src/gedit-file.c:597
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Ficheiro '%s' revertido."
 
-#: src/gedit-file.c:589
+#: src/gedit-file.c:644
 #, c-format
 msgid "Loading %d file..."
 msgstr "A Carregar %i ficheiro..."
 
-#: src/gedit-file.c:625
+#: src/gedit-file.c:680
 #, c-format
 msgid "Loaded %i files"
 msgstr "Carregados %i ficheiros"
 
-#: src/gedit-file.c:766
+#: src/gedit-file.c:821
 msgid "Could not read data from stdin."
 msgstr "Incapaz de ler dados do stdin."
 
-#: src/gedit-mdi.c:763
+#: src/gedit-mdi.c:722
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1360,23 +1361,23 @@ msgstr ""
 "\n"
 "As alterações serão perdidas se as não gravar."
 
-#: src/gedit-mdi.c:768
+#: src/gedit-mdi.c:727
 msgid "Do_n't save"
 msgstr "_Não gravar"
 
-#: src/gedit-mdi.c:787
+#: src/gedit-mdi.c:746
 msgid "_Don't quit"
 msgstr "Não sai_r"
 
-#: src/gedit-mdi.c:791
+#: src/gedit-mdi.c:750
 msgid "_Don't close"
 msgstr "_Não fec_har"
 
-#: src/gedit-mdi.c:878
+#: src/gedit-mdi.c:837
 msgid "(modified)"
 msgstr "(modificado)"
 
-#: src/gedit-mdi.c:884
+#: src/gedit-mdi.c:843
 msgid "(readonly)"
 msgstr "(apenas leitura)"
 
@@ -1751,134 +1752,126 @@ msgid "Show _Overwrite Mode"
 msgstr "Mostrar Modo Sobrep_osição"
 
 #: src/gedit-ui.xml.h:77
-msgid "Show _Tooltips"
-msgstr "Mos_trar Dicas"
-
-#: src/gedit-ui.xml.h:78
 msgid "Show cursor position in the statusbar"
 msgstr "Mostrar posição do cursor na barra de estados"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:78
 msgid "Show overwrite mode in the statusbar"
 msgstr "Mostrar modo de sobreposição na barra de estados"
 
 #: src/gedit-ui.xml.h:80
-msgid "Show tooltips in the toolbar"
-msgstr "Mostrar dicas na barra de ferramentas"
-
-#: src/gedit-ui.xml.h:82
 msgid "Undo the last action"
 msgstr "Desfazer a última acção"
 
-#: src/gedit-ui.xml.h:83
-msgid "_About..."
-msgstr "_Sobre..."
+#: src/gedit-ui.xml.h:81
+msgid "_About"
+msgstr "_Sobre"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:82
 msgid "_Close"
 msgstr "Fe_char"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:83
 msgid "_Contents"
 msgstr "_Conteudos"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:84
 msgid "_Copy"
 msgstr "_Copiar"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:85
 msgid "_Customize Toolbar"
 msgstr "_Customizar Barras Ferramentas"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:86
 msgid "_Debug"
 msgstr "_Depurar"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:87
 msgid "_Delete"
 msgstr "_Apagar"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:88
 msgid "_Desktop Default"
 msgstr "Ambiente Trabalho _Defeito"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:89
 msgid "_Documents"
 msgstr "_Documentos"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:90
 msgid "_Edit"
 msgstr "_Editar"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:91
 msgid "_File"
 msgstr "_Ficheiro"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:92
 msgid "_Find"
 msgstr "_Procurar"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:93
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:95
 msgid "_New"
 msgstr "_Novo"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:96
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:97
 msgid "_Paste"
 msgstr "C_olar"
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:98
 msgid "_Print..."
 msgstr "Im_primir..."
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:99
 msgid "_Quit"
 msgstr "_Sair"
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:100
 msgid "_Redo"
 msgstr "_Refazer"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:102
 msgid "_Revert"
 msgstr "_Reverter"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:103
 msgid "_Save"
 msgstr "_Gravar"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:104
 msgid "_Search"
 msgstr "Procur_ar"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:105
 msgid "_Statusbar"
 msgstr "Barra de e_stados"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:106
 msgid "_Toolbar"
 msgstr "Barra Ferramen_tas"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:107
 msgid "_Tools"
 msgstr "_Ferramentas"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:108
 msgid "_Undo"
 msgstr "_Desfazer"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:109
 msgid "_View"
 msgstr "_Ver"
 
-#: src/gedit-utils.c:839
+#: src/gedit-utils.c:842
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1889,12 +1882,12 @@ msgstr ""
 "\n"
 "Verifique que inserio a localização correcta e tente novamente."
 
-#: src/gedit-utils.c:846
+#: src/gedit-utils.c:849
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "Incapaz de abrir o ficheiro \"%s\" porque contém dados corrompidos."
 
-#: src/gedit-utils.c:857
+#: src/gedit-utils.c:860
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -1902,24 +1895,24 @@ msgstr ""
 "Incapaz de abrir o ficheiro \"%s\" porque o gedit não consegue gerir %s: "
 "localizações."
 
-#: src/gedit-utils.c:865
+#: src/gedit-utils.c:868
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "Incapaz de abrir o ficheiro \"%s\""
 
-#: src/gedit-utils.c:872
+#: src/gedit-utils.c:875
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 "Incapaz de abrir o ficheiro \"%s\" porque contém dados num formato inválido."
 
-#: src/gedit-utils.c:879
+#: src/gedit-utils.c:882
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "Incapaz de abrir o ficheiro \"%s\" porque é demasiado grande."
 
-#: src/gedit-utils.c:886
+#: src/gedit-utils.c:889
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1930,12 +1923,12 @@ msgstr ""
 "\n"
 "Verifique que escreveu a localização correctamente e tente novamente."
 
-#: src/gedit-utils.c:893
+#: src/gedit-utils.c:896
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "Incapaz de abrir o ficheiro \"%s\" porque o acesso foi negado."
 
-#: src/gedit-utils.c:900
+#: src/gedit-utils.c:903
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1947,7 +1940,7 @@ msgstr ""
 "\n"
 "Feche alguns ficheiros abertos e tente novamente."
 
-#: src/gedit-utils.c:908
+#: src/gedit-utils.c:911
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1958,7 +1951,7 @@ msgstr ""
 "\n"
 "Verifique que escreveu correctamente a localização e tente novamente."
 
-#: src/gedit-utils.c:915
+#: src/gedit-utils.c:918
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -1967,7 +1960,7 @@ msgstr ""
 "Memória livre insuficiente para abrir o ficheiro \"%s\". Feche algumas "
 "aplicações em execução e tente novamente."
 
-#: src/gedit-utils.c:928
+#: src/gedit-utils.c:931
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1981,7 +1974,7 @@ msgstr ""
 "Verifique que escreveu a localização correctamente e de que as suas "
 "configurações de proxy estão correctas e depois tente novamente."
 
-#: src/gedit-utils.c:941
+#: src/gedit-utils.c:944
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1992,7 +1985,7 @@ msgstr ""
 "\n"
 "Verifique que escreveu correctamente a localização e tente novamente."
 
-#: src/gedit-utils.c:948
+#: src/gedit-utils.c:951
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2004,7 +1997,7 @@ msgstr ""
 "Verifique que as suas configurações de proxy estão correctas e tente "
 "novamente."
 
-#: src/gedit-utils.c:955
+#: src/gedit-utils.c:958
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2016,7 +2009,7 @@ msgstr ""
 "\n"
 "Verifique que escreveu correctamente a localização e tente novamente."
 
-#: src/gedit-utils.c:963
+#: src/gedit-utils.c:966
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2027,17 +2020,17 @@ msgstr ""
 "\n"
 "Provavelmente está a tentar abrir um ficheiro binário."
 
-#: src/gedit-utils.c:1001
+#: src/gedit-utils.c:1004
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "Incapaz de abrir o ficheiro \"%s\"."
 
-#: src/gedit-utils.c:1052
+#: src/gedit-utils.c:1055
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "Incapaz de gravar o ficheiro \"%s\"."
 
-#: src/gedit-utils.c:1056
+#: src/gedit-utils.c:1059
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2048,7 +2041,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1109
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2059,13 +2052,13 @@ msgstr ""
 "\n"
 "Talvez tenha sido apagado."
 
-#: src/gedit-utils.c:1116
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "Incapaz de reverter para o ficheiro \"%s\" pois contém dados corrompidos."
 
-#: src/gedit-utils.c:1127
+#: src/gedit-utils.c:1130
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2073,12 +2066,12 @@ msgstr ""
 "Incapaz de reverter o ficheiro \"%s\" porque o gedit não consegue gerir "
 "localizações %s:."
 
-#: src/gedit-utils.c:1135 src/gedit-utils.c:1257
+#: src/gedit-utils.c:1138 src/gedit-utils.c:1260
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "Incapaz de reverter o ficheiro \"%s\"."
 
-#: src/gedit-utils.c:1142
+#: src/gedit-utils.c:1145
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2086,17 +2079,17 @@ msgid ""
 msgstr ""
 "Incapaz de reverter o ficheiro \"%s\" pois contém dados num formato inválido."
 
-#: src/gedit-utils.c:1149
+#: src/gedit-utils.c:1152
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "Incapaz de reverter o ficheiro \"%s\" pois é demasiado grande."
 
-#: src/gedit-utils.c:1156
+#: src/gedit-utils.c:1159
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "Incapaz de reverter o ficheiro \"%s\" porque o acesso foi negado."
 
-#: src/gedit-utils.c:1163
+#: src/gedit-utils.c:1166
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2108,7 +2101,7 @@ msgstr ""
 "\n"
 "Feche alguns ficheiros abertos e tente novamente."
 
-#: src/gedit-utils.c:1171
+#: src/gedit-utils.c:1174
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2117,7 +2110,7 @@ msgstr ""
 "Memória livre insuficiente para reverter o ficheiro \"%s\". Feche algumas "
 "aplicações em execução e tente novamente."
 
-#: src/gedit-utils.c:1184
+#: src/gedit-utils.c:1187
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2130,7 +2123,7 @@ msgstr ""
 "Verifique que as suas configurações de proxy estão correctas e tente "
 "novamente."
 
-#: src/gedit-utils.c:1196
+#: src/gedit-utils.c:1199
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2141,13 +2134,13 @@ msgstr ""
 "\n"
 "Verifique que as configurações de proxy estão correctas e tente novamente."
 
-#: src/gedit-utils.c:1203
+#: src/gedit-utils.c:1206
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "Incapaz de reverter o ficheiro \"%s\" porque a tentativa de login falhou."
 
-#: src/gedit-utils.c:1210
+#: src/gedit-utils.c:1213
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2158,20 +2151,20 @@ msgstr ""
 "\n"
 "Provavelmente, está a tentar reverter um ficheiro binário."
 
-#: src/gedit-utils.c:1219
+#: src/gedit-utils.c:1222
 msgid "It is not possible to revert an Untitled document."
 msgstr "Não é possível reverter um documento Sem Título."
 
-#: src/gedit-view.c:928
+#: src/gedit-view.c:896
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr "  Ln %d, Col. %d"
 
-#: src/gedit-view.c:966
+#: src/gedit-view.c:934
 msgid "  OVR"
 msgstr "  OVR"
 
-#: src/gedit-view.c:968
+#: src/gedit-view.c:936
 msgid "  INS"
 msgstr "  INS"
 
@@ -2235,6 +2228,12 @@ msgstr "O editor de texto GNOME"
 #, c-format
 msgid "Open %s"
 msgstr "Abrir %s"
+
+#~ msgid "Show _Tooltips"
+#~ msgstr "Mos_trar Dicas"
+
+#~ msgid "Show tooltips in the toolbar"
+#~ msgstr "Mostrar dicas na barra de ferramentas"
 
 #~ msgid "Could not open backup file %s."
 #~ msgstr "Incapaz de abrir o ficheiro de cópia de segurança %s."
