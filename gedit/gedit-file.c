@@ -162,6 +162,14 @@ gedit_file_open (GeditMDIChild *active_child)
 			{
 				gchar *uri_utf8;
 				
+				if (gedit_utils_uri_has_file_scheme (files[i]))
+				{				
+					if (gedit_default_path != NULL)
+						g_free (gedit_default_path);
+
+					gedit_default_path = get_dirname_from_uri (files[i]);
+				}
+				
 				uri_utf8 = eel_format_uri_for_display (files[i]);	
 				if (uri_utf8 != NULL)
 				{
@@ -169,14 +177,7 @@ gedit_file_open (GeditMDIChild *active_child)
 
 					g_free (uri_utf8);
 				}
-
-				if (gedit_utils_uri_has_file_scheme (files[i]))
-				{				
-					if (gedit_default_path != NULL)
-						g_free (gedit_default_path);
-
-					gedit_default_path = get_dirname_from_uri (files[i]);
-				}				
+							
 			}
 			
 			gedit_debug (DEBUG_FILE, "File: %s", files[i]);
@@ -437,14 +438,14 @@ gedit_file_save_as (GeditMDIChild *child)
 		ret = gedit_file_save_as_real (file, child);
 		
 		if (ret)
-		{
-			if (file_utf8 != NULL)
-				gedit_utils_flash_va (_("File '%s' saved."), file_utf8);
-
+		{			
 			if (gedit_default_path != NULL)
 				g_free (gedit_default_path);
 
 			gedit_default_path = get_dirname_from_uri (file);
+
+			if (file_utf8 != NULL)
+				gedit_utils_flash_va (_("File '%s' saved."), file_utf8);
 		}
 		else
 			gedit_utils_flash_va (_("The document has not been saved."));
@@ -681,7 +682,7 @@ gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
 	l = g_list_length (uri_list);
 	
 	if (l > 1)
-		gedit_utils_flash_va (_("Loading %d file..."), l);
+		gedit_utils_flash_va (_("Loading %d files..."), l);
 
 	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
 
