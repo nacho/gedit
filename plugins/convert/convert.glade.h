@@ -4,9 +4,9 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Number Converter");
-gchar *s = N_("Converted Value:");
-gchar *s = N_("Value to be converted:");
-gchar *s = N_("Decimal to Hex");
-gchar *s = N_("Decimal to Octal");
-gchar *s = N_("Hex to Decimal");
+gchar *s = N_("gedit: Number Converter plugin");
+gchar *s = N_("_Value to be converted:");
+gchar *s = N_("_Converted value:");
+gchar *s = N_(" Decimal to _Hex ");
+gchar *s = N_(" Decimal to _Octal ");
+gchar *s = N_(" Hex to Decima_l ");

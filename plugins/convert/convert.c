@@ -25,8 +25,8 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-
-#include "../../src/plugin.h"
+#include "plugin.h"
+#include "window.h"
 
 static GtkWidget *from, *to;
 
@@ -73,17 +73,35 @@ conv_dec (GtkWidget *widget, gpointer data)
 
 	start = strtol (gtk_entry_get_text (GTK_ENTRY (from)), NULL, 16);
 
-	value = g_strdup_printf ("%lui", start);
+	value = g_strdup_printf ("%lu", start);
 	gtk_entry_set_text (GTK_ENTRY(to), value);
 
 	g_free (value);
 }
 
 static void
-destroy_convert_dialog (GtkWidget *widget, gpointer data)
+plugin_finish (GtkWidget *widget, gpointer data)
 {
-	gtk_widget_destroy (data);
+	gnome_dialog_close (GNOME_DIALOG (widget));
 }
+
+static void
+close_button_pressed (GtkWidget *widget, GtkWidget* data)
+{
+	gnome_dialog_close (GNOME_DIALOG (data));
+}
+
+static void
+help_button_pressed (GtkWidget *widget, gpointer data)
+{
+	/* FIXME: Paolo - change to point to the right help page */
+
+	static GnomeHelpMenuEntry help_entry = { "gedit", "plugins.html" };
+
+	gnome_help_display (NULL, &help_entry);
+}
+
+
 void
 convert_plugin (void)
 {
@@ -92,16 +110,16 @@ convert_plugin (void)
 	GtkWidget *dectohex;
 	GtkWidget *dectooct;
 	GtkWidget *hextodec;
-	GtkWidget *button;
-
-	gui = glade_xml_new (GEDIT_GLADEDIR "/convert.glade", NULL);
+	GtkWidget *close_button;
+	GtkWidget *help_button;
+	
+	gui = glade_xml_new (GEDIT_GLADEDIR "/convert.glade", "dialog1");
 
 	if (!gui)
 	{
 		g_warning ("Could not find convert.glade");
 		return;
 	}
-
 	
 	dialog		= glade_xml_get_widget (gui, "dialog1");
 	to 		= glade_xml_get_widget (gui, "to");
@@ -109,9 +127,17 @@ convert_plugin (void)
 	dectohex 	= glade_xml_get_widget (gui, "dectohex");
 	dectooct 	= glade_xml_get_widget (gui, "dectooct");
 	hextodec 	= glade_xml_get_widget (gui, "hextodec");
-	button		= glade_xml_get_widget (gui, "button6");
+	close_button	= glade_xml_get_widget (gui, "close_button");
+	help_button     = glade_xml_get_widget (gui, "help_button");
 
-
+	g_return_if_fail (dialog        != NULL);
+	g_return_if_fail (to            != NULL);
+	g_return_if_fail (from          != NULL);
+	g_return_if_fail (dectohex      != NULL);
+	g_return_if_fail (dectooct      != NULL);
+	g_return_if_fail (hextodec      != NULL);
+	g_return_if_fail (close_button  != NULL);
+	g_return_if_fail (help_button   != NULL);
 
 	gtk_signal_connect (GTK_OBJECT (dectohex),
 			    "clicked",
@@ -130,17 +156,21 @@ convert_plugin (void)
 
 	gtk_signal_connect (GTK_OBJECT (dialog),
 			    "destroy",
-			    GTK_SIGNAL_FUNC (destroy_convert_dialog),
-			    dialog);
-
-	gtk_signal_connect_object (GTK_OBJECT (button), "clicked",
-				   GTK_SIGNAL_FUNC (gtk_widget_destroy),
-				   GTK_OBJECT (dialog));
+			    GTK_SIGNAL_FUNC (plugin_finish),
+			    NULL);
+	
+	gtk_signal_connect (GTK_OBJECT (close_button), "clicked",
+			    GTK_SIGNAL_FUNC (close_button_pressed), dialog);
+	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
+			    GTK_SIGNAL_FUNC (help_button_pressed), NULL);
+	
+	/* Set the dialog parent and modal type */ 
+	gnome_dialog_set_parent      (GNOME_DIALOG (dialog), gedit_window_active());
+	gnome_dialog_set_default     (GNOME_DIALOG (dialog), 0);
 
 	gtk_widget_show_all (dialog);
 
 	gtk_object_unref (GTK_OBJECT (gui));
-
 }
 
 gint
