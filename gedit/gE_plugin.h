@@ -17,7 +17,24 @@
 #ifndef __GE_PLUGIN_H__
 #define __GE_PLUGIN_H__
 
-#include <unistd.h>
+/* If we are _IN_GEDIT, we include config.h to get WITH_GMODULE_PLUGINS
+ * only if we really have them.
+ *
+ * We need to declare WITH_GMODULE_PLUGINS here when included from a plugin.
+ */
+
+#ifdef _IN_GEDIT
+#include <config.h>
+#else
+#ifndef WITH_GMODULE_PLUGINS
+#define WITH_GMODULE_PLUGINS 1
+#endif
+#endif
+
+/* If we have gmodule plugins or if we are included from such a plugin ... */
+
+#ifdef WITH_GMODULE_PLUGINS
+
 #include <glib.h>
 #include <gmodule.h>
 
@@ -46,12 +63,44 @@ struct _gE_Plugin_Object
 	int context;
 };
 
+#ifdef _IN_GEDIT
+
+/* Only used internally in gEdit. Do not use this function in plugins ! */
+
 extern GList *gE_Plugin_List;
 
 extern void gE_Plugin_Query_All (void);
 extern gE_Plugin_Object *gE_Plugin_Query (gchar *);
 extern void gE_Plugin_Register (gE_Plugin_Object *);
 extern gboolean gE_Plugin_Load (gE_Plugin_Object *, gint);
+
+#endif /* _IN_GEDIT */
+
+#endif /* WITH_GMODULE_PLUGINS */
+
+/* The following functions can be used in plugins to access the functionality
+ * of gEdit. Please do not use other functions than the ones declared here. */
+
+extern int	gE_plugin_document_create	(gint, gchar *);
+extern void	gE_plugin_text_append		(gint, gchar *, gint);
+extern void	gE_plugin_text_insert		(gint, gchar *, gint, gint);
+extern void	gE_plugin_document_show		(gint);
+extern int	gE_plugin_document_current	(gint);
+extern char *	gE_plugin_document_filename	(gint);
+extern int	gE_plugin_document_open		(gint, gchar *);
+extern gboolean	gE_plugin_document_close	(gint);
+extern void	gE_plugin_set_auto_indent	(gint, gint);
+extern void	gE_plugin_set_status_bar	(gint, gint);
+extern void	gE_plugin_set_word_wrap		(gint, gint);
+extern void	gE_plugin_set_line_wrap		(gint, gint);
+extern void	gE_plugin_set_read_only		(gint, gint);
+extern void	gE_plugin_set_split_screen	(gint, gint);
+#ifndef WITHOUT_GNOME
+extern void	gE_plugin_set_scroll_ball	(gint, gint);
+#endif
+extern char *	gE_plugin_text_get		(gint);
+extern gboolean	gE_plugin_program_quit		(void);
+extern GtkText *gE_plugin_get_widget		(gint);
 
 #ifndef _IN_GEDIT
 

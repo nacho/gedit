@@ -1,4 +1,5 @@
-/* vi:set ts=4 sts=0 sw=4:
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*-
+ * vi:set ts=4 sts=0 sw=4:
  *
  * gEdit
  * Copyright (C) 1998 Alex Roberts, Evan Lawrence, and Chris Lahey
@@ -32,27 +33,11 @@ extern GHashTable *win_int_to_pointer;
 extern GHashTable *win_pointer_to_int;
 extern int last_assigned_integer;
 
-extern int gE_plugin_document_create( gint context, gchar *title );
-extern void gE_plugin_text_append( gint docid, gchar *buffer, gint length );
-extern void gE_plugin_text_insert( gint docid, gchar *buffer, gint length, gint position );
-extern void gE_plugin_document_show( gint docid );
-extern int gE_plugin_document_current( gint context );
-extern char *gE_plugin_document_filename( gint docid );
-extern int gE_plugin_document_open (gint context, gchar *fname);
-extern gboolean gE_plugin_document_close (gint docid);
-extern void gE_plugin_set_auto_indent (gint docid, gint auto_indent);
-extern void gE_plugin_set_status_bar (gint docid, gint status_bar);
-extern void gE_plugin_set_word_wrap (gint docid, gint word_wrap);
-extern void gE_plugin_set_line_wrap (gint docid, gint line_wrap);
-extern void gE_plugin_set_read_only (gint docid, gint read_only);
-extern void gE_plugin_set_split_screen (gint docid, gint split_screen);
-#ifndef WITHOUT_GNOME
-extern void gE_plugin_set_scroll_ball (gint docid, gint scroll_ball);
-#endif
-extern char *gE_plugin_text_get( gint docid );
+#include "gE_plugin.h"
+
 extern void gE_plugin_program_register (plugin_info *info);
-extern gboolean gE_plugin_program_quit (void);
 extern void add_plugins_to_window (plugin_info *info, gE_window *window);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

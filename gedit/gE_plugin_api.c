@@ -1,4 +1,6 @@
-/* gEdit
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*-
+ *
+ * gEdit
  * Copyright (C) 1998 Alex Roberts, Evan Lawrence, and Chris Lahey
  *
  * This program is free software; you can redistribute it and/or modify
@@ -305,3 +307,9 @@ void gE_plugin_program_register (plugin_info *info)
 
   g_list_foreach( window_list, (GFunc)add_plugin_to_menu, info );
 }
+
+GtkText *gE_plugin_get_widget( gint docid )
+{
+  return ((gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid))->text;
+}
+
