@@ -108,12 +108,11 @@ email (void)
 	hostname = getenv ("HOSTNAME");
 
 	if (gnome_config_get_string ("/Editor_Plugins/Email/From"))
-	  {
-	    gtk_entry_set_text (GTK_ENTRY (glade_xml_get_widget (gui, "from_entry")), 
-	    					gnome_config_get_string ("/Editor_Plugins/Email/From"));
-	  }
-	else
-	if (fullname && hostname)
+	{
+		gtk_entry_set_text (GTK_ENTRY (glade_xml_get_widget (gui, "from_entry")), 
+				    gnome_config_get_string ("/Editor_Plugins/Email/From"));
+	}
+	else if (fullname && hostname)
 	{
 		from = g_strdup_printf ("%s <%s@%s>",
 					fullname,
