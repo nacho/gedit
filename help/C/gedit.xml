@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY legal SYSTEM "legal.xml">
-  <!ENTITY appversion "2.2.1">
-  <!ENTITY manrevision "2.5">
-  <!ENTITY date "March 2003">
+  <!ENTITY appversion "2.2.2">
+  <!ENTITY manrevision "2.6">
+  <!ENTITY date "September 2003">
   <!ENTITY app "gedit">
 ]>
 <!-- 
@@ -22,6 +22,7 @@
   <articleinfo> 
 	 <title>&app; Manual V&manrevision;</title>
 	 <copyright> 
+		<year>2002</year>
 		<year>2003</year>
 		<holder>Sun Microsystems</holder> </copyright>
 	 <copyright> 
@@ -31,7 +32,7 @@
 <!-- translators: uncomment this:
 
   <copyright>
-   <year>2002</year>
+   <year>2003</year>
    <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
   </copyright>
 
@@ -56,14 +57,17 @@
 			 <address> <email>baudais@okstate.edu</email> </address>
 		  </affiliation>
 		</author> 
-                <othercredit role="reviewer">
-                <firstname>Baris</firstname>
-                <surname>Cicek (provided review comments from earlier revisions of the gedit application) </surname>
-                </othercredit>
-                <othercredit role="reviewer">
-                <firstname>Ajit</firstname>
-                <surname>George (provided input about plugins) </surname>
-                </othercredit>
+		<othercredit role="reviewer">
+			<firstname>Baris</firstname> 
+			<surname>Cicek provided review comments from earlier revisions of the gedit application.</surname> 
+			<contrib>Acknowledgements</contrib>
+      </othercredit>
+		<othercredit role="reviewer">
+			<firstname>Ajit</firstname> 
+			<surname>George provided input about plugins.</surname> 
+			<contrib></contrib>
+      </othercredit>
+
 
 <!-- This is appropriate place for other contributors: translators,
       maintainers,  etc. Commented out by default.
@@ -79,6 +83,33 @@
 -->
 	 </authorgroup>
 
+<!-- This is the appropriate place to acknowledge contributions from other writers or 
+     reviewers to the manual.
+	 <legalnotice> 
+		<title>Acknowledgements</title>
+		<informaltable frame="all"> 
+		<tgroup cols="2" colsep="1" rowsep="1"> 
+			<colspec colname="col1"/> 
+			<colspec colname="col2"/> 
+		<thead> 
+		<row valign="top">
+			<entry colname="col1" valign="top"><para>Contributor</para></entry>
+			<entry colname="col2" valign="top"><para>Contribution</para></entry> 
+		</row> 
+		</thead>
+		<tbody> 
+		<row valign="top"> 
+			<entry><para>Baris Cicek</para></entry> 
+			<entry><para>Provided review comments from earlier revisions of the gedit application.</para></entry> 
+		</row>   
+		<row valign="top"> 
+			<entry><para>Ajit George</para></entry> 
+			<entry><para>Provided input about plugins.</para></entry> 
+		</row>  
+		</tbody> 
+		</tgroup>
+		</informaltable> 
+	 </legalnotice> -->
 
 <!-- According to GNU FDL, revision history is mandatory if you are -->
 <!-- modifying/reusing someone else's document.  If not, you can omit it. -->
@@ -88,6 +119,14 @@
    		<revision> 
 		  <revnumber>&app; Manual V&manrevision;</revnumber>
 		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.5</revnumber>
+		  <date>March 2003</date> 
 		  <revdescription> 
 			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
@@ -161,8 +200,7 @@
 <!-- ============= Introduction ============================== -->
   <sect1 id="gedit-intro"> 
 	 <title>Introduction</title>
-	 <para>The <application>&app;</application> application is a simple text
-		editor. You can use <application>&app;</application> to create and edit text
+	 <para>The <application>&app;</application> application enables you to create and edit text
 		files. You can use <application>&app;</application> plugins to perform a
 		variety of tasks related to text-editing from within the
 		<application>&app;</application> window.</para>
@@ -535,17 +573,17 @@ open, then click <guibutton>Open</guibutton>.</para>
 		  steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose 
-				<menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go To
+				<menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go to
 				  Line</guimenuitem> </menuchoice>
-				to display the <guilabel>Go to line</guilabel> dialog.</para>
+				to display the <guilabel>Go to Line</guilabel> dialog.</para>
 		  </listitem>
 		  <listitem><para>Type the number of the line that you want to move the
 				cursor to in the <guilabel>Line number</guilabel> field.</para>
 		  </listitem>
-		  <listitem><para>Click <guibutton>Go to line</guibutton>. The application
+		  <listitem><para>Click <guibutton>Go to Line</guibutton>. The application
 				moves the cursor to the line number that you specify.</para>
 		  </listitem>
-		  <listitem><para>To close the <guilabel>Go to line</guilabel> dialog, click <guibutton>Close</guibutton>.</para>
+		  <listitem><para>To close the <guilabel>Go to Line</guilabel> dialog, click <guibutton>Close</guibutton>.</para>
 		  </listitem>
 		</orderedlist>
 	 </sect2>
@@ -601,24 +639,18 @@ open, then click <guibutton>Open</guibutton>.</para>
 				</listitem>
 								
 				</itemizedlist>
-				<!-- <para>Default: <guilabel>All</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Copies</guilabel> </term> 
 			 <listitem> 
 				<para>Use this spin box to specify the number of copies of the file that
 				you want to print.</para>
-				<!-- <para>Default: 1.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Collate</guilabel> </term> 
 			 <listitem> 
 				<para>If you are printing multiple copies of the file, select this option
 				to collate the printed copies.</para>
-				<!-- <para>Default: unselected.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -631,16 +663,12 @@ open, then click <guibutton>Open</guibutton>.</para>
 			 <listitem> 
 				<para>Use this drop-down list to select the printer to which you want
 				to print the file.</para>
-				<!-- <para>Default: <guilabel>Gnome default printer</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Settings</guilabel> </term> 
 			 <listitem> 
 				<para>Use this drop-down list to select the printer settings. To configure
 				the printer, click <guibutton>Configure</guibutton>.</para>
-				<!-- <para>Default: Default.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Location</guilabel> </term> 
@@ -651,8 +679,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				type the name of the output file in the text box provided. To print a file to a 
                                 location of your choice, choose <guilabel>Custom</guilabel>. Type the location you want 
                                 in the <guilabel>Custom</guilabel> text box.</para>
-				<!-- <para>Default: <guilabel>lpr</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -665,8 +691,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 			 <listitem> 
 				<para>Use this drop-down list to select the size of the paper to 
 				which you want to print the file.</para>
-				<!-- <para>Default: <guilabel>A4</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Width</guilabel> </term> 
@@ -674,30 +698,22 @@ open, then click <guibutton>Open</guibutton>.</para>
 				<para>Use this spin box to specify the width of the paper. Use the
 				adjacent drop-down list to change the 
 				measurement unit for specifying the paper size.</para>
-				<!-- <para>Default: 21.00 centimeters.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Height</guilabel> </term> 
 			 <listitem> 
 				<para>Use this spin box to specify the height of the paper.</para>
-				<!-- <para>Default: 29.70 centimeters.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Feed orientation</guilabel> </term> 
 			 <listitem> 
 				<para>Use this drop-down list to select the orientation 
                                 of the paper in the printer.</para>
-				<!-- <para>Default: <guilabel>Portrait</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Page orientation</guilabel> </term> 
 			 <listitem> 
 				<para>Use this drop-down list to select the page orientation.</para>
-				<!-- <para>Default: <guilabel>Portrait</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Layout</guilabel> </term> 
@@ -705,8 +721,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				<para>Use this drop-down list to select the page layout. A preview
 				of each layout that you select is displayed in the <guilabel>Preview</guilabel>
 				area.</para>
-				<!-- <para>Default: <guilabel>Plain</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		</variablelist>
@@ -749,17 +763,15 @@ open, then click <guibutton>Open</guibutton>.</para>
 		  <listitem>
 		  <para><guimenuitem>Show Cursor Position</guimenuitem></para>
 		  <para>Display the line number and column number where the cursor is located.</para>
-		  <!-- <para>Default: selected.</para> -->
 		  </listitem>
 		  <listitem>
 		  <para><guimenuitem>Show Overwrite Mode</guimenuitem></para>
 		  <para>Display the editing mode. If the editor is in insert mode, the statusbar contains the word INS. If the editor is in 
 		  overwrite mode, the statusbar contains the word OVR.</para>
-		  <!-- <para>Default: selected.</para> -->
 		  </listitem>
 		  </itemizedlist>
 	 <para>To display or hide the output window, choose <menuchoice> <guimenu>View</guimenu>
-		  <guimenuitem>Output window</guimenuitem> </menuchoice>.</para>
+		  <guimenuitem>Output Window</guimenuitem> </menuchoice>.</para>
 	 
 	 </sect2>
   </sect1>
@@ -794,23 +806,17 @@ open, then click <guibutton>Open</guibutton>.</para>
 		   <varlistentry> <term><guilabel>Use default theme font</guilabel> </term> 
 			 <listitem> 
 				<para>Select this option to use the default system font for the text in the <application>&app;</application> text window. </para>
-				<!-- <para>Default: unselected.</para>
- -->
 			 </listitem>
 		  	</varlistentry>			
 		   <varlistentry> <term><guilabel>Editor font</guilabel> </term> 
 			 <listitem> 
 				<para>This field displays the font that <application>&app;</application> uses to display text. 
 				Click on the button to specify the font type, style, and size to use for text. </para>
-				<!-- <para>Default: Courier Medium 12 point.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		   <varlistentry> <term><guilabel>Use default theme colors</guilabel> </term> 
 			 <listitem> 
 				<para>Select this option to use the default theme colors in the <application>&app;</application> text window. </para>
-				<!-- <para>Default: selected.</para>
- -->
 			 </listitem>
 		  	</varlistentry>			
 		  	<varlistentry> <term><guilabel>Text color</guilabel> </term> 
@@ -818,8 +824,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				<para>Click on the <guibutton>Text color</guibutton> button to
 				  display the color selector dialog. Select a color to use to display text in the <application>&app;</application>
 				text window. </para>
-				<!-- <para>Default: black.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Background color</guilabel> </term> 
@@ -827,8 +831,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				<para>Click on the <guibutton>Background color</guibutton> button to
 				  display the color selector dialog. Select a background color for the <application>&app;</application>
 				text window. </para>
-				<!-- <para>Default: white.</para>
- -->
 			 </listitem>
 		  	</varlistentry>			
 		  	<varlistentry> <term><guilabel>Selected text color</guilabel> </term> 
@@ -836,8 +838,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				<para>Click on the <guibutton>Selected text color</guibutton> button to
 				  display the color selector dialog. Select a color to use to display selected text.
 				</para>
-				<!-- <para>Default: white.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>Selection color</guilabel> </term> 
@@ -845,8 +845,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				<para>Click on the <guibutton>Selection color</guibutton> button to
 				  display the color selector dialog. Select a background color to use to highlight a text selection.
 				  </para>
-				<!-- <para>Default: blue.</para>
- -->
 			 </listitem>
 		  	</varlistentry>			
 			</variablelist>
@@ -860,8 +858,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				<para>Use this spin box to specify the width of the space that
 				  <application> &app;</application> inserts when you press the
 				  <keycap>Tab</keycap> key. </para>
-				<!-- <para>Default: 8 characters.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 	 		<varlistentry> <term><guilabel>Insert spaces instead of tabs</guilabel> </term> 
@@ -870,8 +866,6 @@ open, then click <guibutton>Open</guibutton>.</para>
 				  <application> &app;</application> inserts spaces instead of a tab character 
                                       when you press the
 				  <keycap>Tab</keycap> key. </para>
-				<!-- <para>Default: 8 characters.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -883,15 +877,11 @@ open, then click <guibutton>Open</guibutton>.</para>
 	 		<varlistentry> <term><guilabel>Enable text wrapping</guilabel> </term> 
 			 <listitem> <para>Select this option to wrap text onto the next line,
                          at a character level, when you reach the text window boundary. </para>
-				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 	 		<varlistentry> <term><guilabel>Do not split words over two lines</guilabel> </term> 
 			 <listitem> <para>Select this option to wrap text onto the next line,
                          at a word level, when you reach the text window boundary. </para>
-				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -903,8 +893,18 @@ open, then click <guibutton>Open</guibutton>.</para>
 	 		<varlistentry> <term><guilabel>Enable auto indentation</guilabel> </term> 
 			 <listitem> <para>Select this option to specify that the next line starts at the indentation level of the current line.
 </para>
-				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
- -->
+			 </listitem>
+		  	</varlistentry>
+			</variablelist>
+		</sect3>	 
+
+	 	<sect3 id="gedit-prefs-linenumbers">
+	 		<title>Line numbers</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Display line numbers</guilabel> </term> 
+			 <listitem> 
+				<para>Select this option to display line numbers on the left side of the 
+				<application>&app;</application> window. </para>
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -931,25 +931,12 @@ To modify the contents of the Supported encodings list, use the following button
 			     <listitem> <para> Click on <guibutton>Up</guibutton> to move an encoding to a higher position in the list.</para></listitem>
 			     <listitem> <para> Click on <guibutton>Down</guibutton> to move an encoding to a lower position in the list.</para></listitem>
 			    </itemizedlist>
-				<!-- <para>Default: <guilabel>selected</guilabel>.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
 		</sect3>	 
 
-	 	<sect3 id="gedit-prefs-linenumbers">
-	 		<title>Line numbers</title>
-			<variablelist>
-	 		<varlistentry> <term><guilabel>Display line numbers</guilabel> </term> 
-			 <listitem> 
-				<para>Select this option to display line numbers on the left side of the 
-				<application>&app;</application> window. </para>
-				<!-- <para>Default: unselected.</para> -->
-			 </listitem>
-		  	</varlistentry>
-			</variablelist>
-		</sect3>	 
+
 		
 	 	<sect3 id="gedit-prefs-save">
 	 		<title>Save</title>
@@ -958,14 +945,12 @@ To modify the contents of the Supported encodings list, use the following button
 			 <listitem> 
 				<para>Select this option to create a backup copy of a file each time you save the file. The backup 
 				copy of the file contains a tilde (~) at the end of the filename.</para>
-				<!-- <para>Default: selected.</para> -->
 			 </listitem>
 		  	</varlistentry>
 	 		<varlistentry> <term><guilabel>Autosave current file every</guilabel> </term> 
 			 <listitem> 
 				<para>Select this option to automatically save the current file at regular intervals. Use the spin box
 				to specify the interval at which you want to save the file.</para>
-				<!-- <para>Default: unselected, 10 minutes.</para> -->
 			 </listitem>
 		  	</varlistentry>
 	 		<varlistentry> <term><guilabel>When saving an existing file</guilabel> </term> 
@@ -986,7 +971,6 @@ To modify the contents of the Supported encodings list, use the following button
 				<para>Select this option to save a file using the current locale if the file was already saved in the current locale.</para>
 				</listitem>								
 				</itemizedlist>
-				<!-- <para>Default: <guilabel>Always use UTF-8 encoding (faster)</guilabel></para> -->
 			 </listitem>
 		  	</varlistentry>
 		  	<varlistentry> <term><guilabel>When saving a new file</guilabel> </term> 
@@ -1018,8 +1002,6 @@ To modify the contents of the Supported encodings list, use the following button
 				<para>Select this option to set a limit on the number of editing actions that you 
 				can undo. Use the spin box to specify the maximum number of actions that you
 				can undo. </para>
-				<!-- <para>Default: selected, 25 actions.</para>
- -->
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
@@ -1039,8 +1021,6 @@ To modify the contents of the Supported encodings list, use the following button
 			 <listitem> 
 				<para>Select this option to include a header on each page that you
 				  print. You cannot configure the header. </para>
-				<!-- <para>Default: selected.</para>
- -->
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry> <term><guilabel>Enable text wrapping</guilabel> </term> 
@@ -1048,8 +1028,6 @@ To modify the contents of the Supported encodings list, use the following button
 				<para>Select this option to automatically wrap text at a word level when you print
 				  a file. The application counts wrapped lines as one line for line numbering purposes.
 				  </para>
-				<!-- <para>Default: selected.</para>
- -->
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry> <term><guilabel>Print line numbers every</guilabel>
@@ -1058,8 +1036,6 @@ To modify the contents of the Supported encodings list, use the following button
 				<para>Select this option to include line numbers when you print a
 				  file. Use the spin box to specify how often to print the line numbers, for
 				  example every 5 lines, every 10 lines, and so on. </para>
-				<!-- <para>Default: unselected, 1 line.</para>
- -->
 			 </listitem>
 		  </varlistentry>
 		</variablelist>
@@ -1072,29 +1048,23 @@ To modify the contents of the Supported encodings list, use the following button
 			 <listitem> 
 				<para>Click on this button to select the font to use to print the body text of a 
 				file.</para>
-				<!-- <para>Default: Courier 9.0.</para>
- -->
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry> <term><guilabel>Page headers</guilabel> </term> 
 			 <listitem> 
 				<para>Click on this button to select the font to use to print the headers in a 
 				file.  </para>
-				<!-- <para>Default: Helvetica 11.0.</para>
- -->
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry> <term><guilabel>Line numbers</guilabel>
 			 </term> 
 			 <listitem> 
 				<para>Click on this button to select a font to use to print line numbers.</para>
-				<!-- <para>Default: Helvetica 8.0.</para>
- -->
 			 </listitem>
 		  </varlistentry>
 		</variablelist>
 		<para>To reset the fonts to the default fonts for printing a file from <application>&app;</application>
-		click on the <guibutton>Restore default fonts</guibutton> button.</para>
+		click on the <guibutton>Restore Default Fonts</guibutton> button.</para>
 		</sect3>
 		
 	 </sect2>	 
@@ -1108,12 +1078,12 @@ To modify the contents of the Supported encodings list, use the following button
  </sect1>
 <!-- ============= To Use the gedit Plugins ========================= -->
 	 <sect1 id="gedit-plugins"> 
-		<title>Plugins</title>
+		<title>Working with Plugins</title>
 		<para>A plugin is a supplementary program that enhances the functionality
 		  of an application. The <application>&app;</application> plugins enable you to
 		  perform a variety of functions related to text editing from within the
-		  <application> &app;</application> window. The following table lists the plugins
-		  that are available.</para>
+		  <application> &app;</application> window. The following table lists the
+		  <application> &app;</application> plugins.</para>
 		<informaltable frame="topbot"> 
 		<tgroup cols="2"> 
 			<colspec colname="col1"/> 
@@ -1130,14 +1100,14 @@ To modify the contents of the Supported encodings list, use the following button
 			<entry><para>Displays a dialog that contains an ASCII table. You can use the ASCII table to insert characters into a file.</para></entry> 
 		</row>  
 		<row valign="top"> 
+			<entry><para>Compare files</para></entry> 
+			<entry><para>Compares two files and displays the differences between the files in the Output window.
+			This plugin uses the <command>diff</command> command to compare the files.</para></entry> 
+		</row>
+		<row valign="top"> 
 			<entry><para>CVS ChangeLog</para></entry> 
 			<entry><para>Opens the log messages associated with CVS commit commands.</para></entry> 
 		</row> 
-		<row valign="top"> 
-			<entry><para>Compare files</para></entry> 
-			<entry><para>Compares two files and displays the differences between the files in the Output window.
-			This plugin uses the <application>diff</application> command to compare the files.</para></entry> 
-		</row>
 		<row valign="top"> 
 			<entry><para>Document Statistics</para></entry> 
 			<entry><para>Counts the number of lines, words, characters with spaces, characters without spaces, and bytes in the current file. The plugin
@@ -1162,7 +1132,8 @@ To modify the contents of the Supported encodings list, use the following button
 		<row valign="top">
 			<entry><para>Spell checker</para></entry> 
 			<entry><para>Checks the spelling in the selected text. You can configure <application>&app;</application> to check the spelling automatically, or you can check the spelling manually, in the specified language.</para></entry> 
-		</row> 
+		</row>
+
 		<row valign="top">
 			<entry><para>Tag list</para></entry> 
 			<entry><para>Displays a window that contains a list of common tags. You can use the window to 
@@ -1171,7 +1142,7 @@ To modify the contents of the Supported encodings list, use the following button
 		<row valign="top">
 			<entry><para>User name</para></entry> 
 			<entry><para>Inserts the username of the current user into the file. </para></entry> 
-		</row> 
+		</row>
 		</tbody> 
 		</tgroup>
 		</informaltable> 
@@ -1185,7 +1156,7 @@ To modify the contents of the Supported encodings list, use the following button
 		  </menuchoice>. Within the <guilabel>Plugins</guilabel> category, click on the <guilabel>Manager</guilabel> subcategory. 
 		  The <guilabel>Manager</guilabel> subcategory displays the following information:</para>
 		<itemizedlist> 
-		  <listitem><para>A list of the plugins that are available.</para>
+		  <listitem><para>A list of the plugins that you can use with <application>&app;</application>.</para>
 		  </listitem>
 		  <listitem><para>A <guibutton>Configure plugin</guibutton> button. You can use this button to open a 
 		  configuration dialog for the plugins that you can configure. For example, see <xref linkend="gedit-compare-files-configure"/> and <xref linkend="gedit-date-time-configure"/>.</para>
@@ -1215,14 +1186,14 @@ To modify the contents of the Supported encodings list, use the following button
 			<guimenuitem>ASCII Table</guimenuitem></menuchoice></para></entry> 
 		</row>  
 		<row valign="top"> 
+			<entry><para>Compare files</para></entry> 
+			<entry><para><menuchoice><guimenu>Tools</guimenu> 
+			<guimenuitem>Compare Files</guimenuitem></menuchoice></para></entry> 
+		</row>
+		<row valign="top"> 
 			<entry><para>CVS ChangeLog</para></entry> 
 			<entry><para><menuchoice><guimenu>File</guimenu> 
 			<guimenuitem>Open CVS ChangeLogs</guimenuitem></menuchoice></para></entry> 
-		</row> 
-		<row valign="top"> 
-			<entry><para>Compare files</para></entry> 
-			<entry><para><menuchoice><guimenu>Tools</guimenu> 
-			<guimenuitem>Compare files</guimenuitem></menuchoice></para></entry> 
 		</row>
 		<row valign="top"> 
 			<entry><para>Document Statistics</para></entry> 
@@ -1239,7 +1210,7 @@ To modify the contents of the Supported encodings list, use the following button
 		<row valign="top">
 			<entry><para>Insert Date/Time</para></entry> 
 			<entry><para><menuchoice><guimenu>Edit</guimenu> 
-			<guimenuitem>Insert Date/Time</guimenuitem></menuchoice></para></entry> 
+			<guimenuitem>Insert Date and Time</guimenuitem></menuchoice></para></entry> 
 		</row>
 		<row valign="top">
 			<entry><para>Shell command</para></entry> 
@@ -1299,8 +1270,7 @@ To modify the contents of the Supported encodings list, use the following button
 	<para>The ASCII table plugin displays a dialog that contains an ASCII table. You can use the ASCII table to insert characters into a file.
               To use the ASCII table plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the ASCII table plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin.  </para>
+		  <listitem><para>Load the ASCII table plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
 				<menuchoice> <guimenu>View</guimenu> <guimenuitem>ASCII Table</guimenuitem> </menuchoice>
@@ -1321,39 +1291,7 @@ To modify the contents of the Supported encodings list, use the following button
 		</orderedlist> 
 </sect2>
 
-<sect2 id="gedit-cvs-changelog-plugin">
-<title>CVS ChangeLog Plugin</title>
-	<para>The CVS ChangeLog plugin opens the log messages associated with CVS commit commands. This plugin allows you to easily paste text into the commit message from the ChangeLog file. To use the CVS ChangeLog plugin, perform the
-		  following steps:</para>
-		<orderedlist> 
-		  <listitem><para>Set <application>&app;</application> as your CVS editor. To do this, set the environment variable CVSEDITOR to <application>&app;</application>. For example, if using the <command>bash</command> shell, run the following command at the operating system prompt:
-                           <screen> <userinput>export CVSEDITOR=<application>&app;</application> </userinput> </screen>
-                           </para>
-		  </listitem>
-		  <listitem><para>Commit a file to CVS in the usual way. A <application>&app;</application> window opens, to allow you to enter the commit message.
-                           </para>
-		  </listitem>
-		  <listitem><para>Load the CVS ChangeLog plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
-		  </listitem>
-                  <listitem><para>Choose 
-				<menuchoice> <guimenu>File</guimenu> <guimenuitem>Open CVS ChangeLogs</guimenuitem> </menuchoice> to open all of the ChangeLog files referenced in the commit message. <application>&app;</application> opens each ChangeLog file in a new tab.</para>
-		  </listitem>
-		  <listitem><para>Copy the ChangeLog entries (that you want to add to the commit message) from the <application>&app;</application> ChangeLog files. 
-                           </para>
-		  </listitem>
-		  <listitem><para>Insert the copied ChangeLog entries in the <application>&app;</application> commit message tab.
-                           </para>
-		  </listitem>
-		  <listitem><para>Save your changes to the commit message, then close all files.
-                           </para>
-		  </listitem>
-		  <listitem><para>Quit <application>&app;</application>. See <xref linkend="gedit-quit"/> for
-                        information about how to quit <application>&app;</application>.
-                           </para>
-		  </listitem>
-		</orderedlist> 
-</sect2>
+
 
 <sect2 id="gedit-compare-files-plugin">
 <title>Compare Files Plugin</title>
@@ -1361,18 +1299,18 @@ To modify the contents of the Supported encodings list, use the following button
                         This plugin uses the <command>diff</command> command to compare the files.
               To use the Compare files plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Compare files plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Compare files plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
-				<menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Compare files</guimenuitem> </menuchoice>.
+				<menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Compare Files</guimenuitem> </menuchoice>.
 			 When you choose this option for the first time, you are prompted to confirm the location of the <command>diff</command> command. You are not prompted for this location again. See <xref linkend="gedit-compare-files-configure"/> for
                         information about how to change this location later.</para>
                            <para> Click <guibutton>OK</guibutton> to display the <guilabel>Compare Files</guilabel> dialog. To close the <guilabel>Compare Files</guilabel> dialog without comparing any files, click <guibutton>Cancel</guibutton>.
                                       To display context-sensitive help, click <guibutton>Help</guibutton>.
 </para>
 		  </listitem>
-		  <listitem><para>Specify the two files that you want to compare. To specify an open file, select it from the drop-down list. To specify a closed file, enter its location in the text box.
+		  <listitem><para>Specify the files that you want to compare. To specify an open file, select 
+		  the file from the drop-down list. To specify a closed file, enter the location of the file in the text box.
                            </para>
 		  </listitem>
 		  <listitem><para>To ignore changes in the amount of white space, select the <guilabel>Ignore blanks</guilabel> option.
@@ -1419,14 +1357,47 @@ To modify the contents of the Supported encodings list, use the following button
 </sect3>
 </sect2>
 
+<sect2 id="gedit-cvs-changelog-plugin">
+<title>CVS ChangeLog Plugin</title>
+	<para>The CVS ChangeLog plugin opens the log messages associated with CVS commit commands. 
+	This plugin allows you to easily paste text into the commit message from the ChangeLog file. 
+	To use the CVS ChangeLog plugin, perform the following steps:</para>
+		<orderedlist> 
+		  <listitem><para>Set the environment variable CVSEDITOR to <application>&app;</application>. 
+		  For example, if you are using the <command>bash</command> shell, run the following command 
+		  at the operating system prompt:
+                           <screen> <userinput>export CVSEDITOR=<application>&app;</application> </userinput> </screen>
+                           </para>
+		  </listitem>
+		  <listitem><para>Commit a file to CVS in the usual way. A <application>&app;</application> window opens, to allow you to enter the commit message.
+                           </para>
+		  </listitem>
+		  <listitem><para>Load the CVS ChangeLog plugin.</para>
+		  </listitem>
+                  <listitem><para>Choose 
+				<menuchoice> <guimenu>File</guimenu> <guimenuitem>Open CVS ChangeLogs</guimenuitem> </menuchoice> to open all of the ChangeLog files referenced in the commit message. <application>&app;</application> opens each ChangeLog file in a new tab.</para>
+		  </listitem>
+		  <listitem><para>Copy the ChangeLog entries (that you want to add to the commit message) from the <application>&app;</application> ChangeLog files. 
+                           </para>
+		  </listitem>
+		  <listitem><para>Insert the copied ChangeLog entries in the <application>&app;</application> commit message tab.
+                           </para>
+		  </listitem>
+		  <listitem><para>Save your changes to the commit message, then close all files.
+                           </para>
+		  </listitem>
+		  <listitem><para>Quit <application>&app;</application>. </para>
+		  </listitem>
+		</orderedlist> 
+</sect2>
+
 <sect2 id="gedit-document-statistics-plugin">
 <title>Document Statistics Plugin</title>
 	<para>The Document Statistics plugin counts the number of lines, words, characters with spaces, characters without spaces, and bytes in the current file. The plugin
                         displays the results in a <guilabel>Document Statistics</guilabel> dialog.
               To use the Document Statistics plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Document Statistics plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Document Statistics plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
 				<menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Document Statistics</guimenuitem> </menuchoice> to display the <guilabel>Document Statistics</guilabel> dialog. The <guilabel>Document Statistics</guilabel> dialog display the following information about the file:
@@ -1463,8 +1434,7 @@ To modify the contents of the Supported encodings list, use the following button
 	<para>The Indent lines plugin indents the selected lines, or removes the indentation from the selected lines.
               To use the Indent lines plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Indent lines plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Indent lines plugin. </para>
 		  </listitem>
 		  <listitem><para>Select the lines that you want to indent. To indent or unindent a single line, place the cursor anywhere on that line.
                            </para>
@@ -1485,11 +1455,10 @@ To modify the contents of the Supported encodings list, use the following button
 	<para>The Insert Date/Time plugin inserts the current date and time into a file.
               To use the Insert Date/Time plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Insert Date/Time plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Insert Date/Time plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
-				<menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Insert Date/Time</guimenuitem> </menuchoice>. </para>
+				<menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Insert Date and Time</guimenuitem> </menuchoice>. </para>
                                 <para>If you have not configured the Insert Date/Time plugin to automatically insert the date/time without prompting you for the format, <application>&app;</application> displays the <guilabel>Insert Date and Time</guilabel> dialog. Select the appropriate date/time format from the list. Click on <guibutton>Insert</guibutton> to close the <guilabel>Insert Date and Time</guilabel> dialog; <application>&app;</application> inserts the date/time at the cursor position in the current file. </para>
 				<para>If you have configured <application>&app;</application> to use one particular date/time format, the <guilabel>Insert Date and Time</guilabel> dialog is not displayed; the date/time is automatically entered at the cursor position in the current file. </para>
                                 <para>See <xref linkend="gedit-date-time-configure"/> for information about how to configure the Insert Date/Time plugin.</para>
@@ -1503,7 +1472,8 @@ To modify the contents of the Supported encodings list, use the following button
 		  <listitem> <para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</guimenuitem> </menuchoice>. 
                     </para>
 		  </listitem> 
-		  <listitem> <para>Within the <guilabel>Plugins</guilabel> category, click on the <guilabel>Manager</guilabel> subcategory.
+		  <listitem> <para>Within the <guilabel>Plugins</guilabel> category, click on the <guilabel>Manager</guilabel> 
+		  subcategory.
                     </para>
 		  </listitem> 
 		  <listitem> <para>Select the <guilabel>Insert Date/Time</guilabel> plugin.
@@ -1544,8 +1514,7 @@ To modify the contents of the Supported encodings list, use the following button
 by displaying the text output of the shell command in the output window. To use the Shell command plugin, perform the
 		  following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Shell command plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Shell command plugin. </para>
 		  </listitem>
 
 		  <listitem><para>Choose 
@@ -1605,8 +1574,7 @@ by displaying the text output of the shell command in the output window. To use 
 		  </note>
               <para>To use the Sort plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Sort plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Sort plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
 				<menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Sort</guimenuitem> </menuchoice> to display the <guilabel>Sort</guilabel> dialog.
@@ -1638,8 +1606,7 @@ by displaying the text output of the shell command in the output window. To use 
 	<para>The Spell checker plugin checks the spelling in the selected text. You can configure <application>&app;</application> to check the spelling automatically, or you can check the spelling manually, in the specified language. The language setting, and the autocheck spelling properties, apply per document.
               To use the Spell checker plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Spell checker plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Spell checker plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
 				<menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Set Language</guimenuitem> </menuchoice> to display the <guilabel>Set language</guilabel> dialog. Select the appropriate language from the list. Click <guibutton>OK</guibutton> to close the <guilabel>Set language</guilabel> dialog.
@@ -1701,8 +1668,7 @@ by displaying the text output of the shell command in the output window. To use 
                         insert a tag into a file.
               To use the Tag List plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the Tag List plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the Tag List plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
 				<menuchoice> <guimenu>View</guimenu> <guimenuitem>Tag List</guimenuitem> </menuchoice> to display the <guilabel>Tag list plugin</guilabel> window.
@@ -1735,8 +1701,7 @@ by displaying the text output of the shell command in the output window. To use 
 	<para>The User name plugin inserts the username of the current user into the file.
               To use the User name plugin, perform the following steps:</para>
 		<orderedlist> 
-		  <listitem><para>Load the User name plugin. See <xref linkend="gedit-install-plugins"/> for 
-			information about how to load a plugin. You only need to do this once; the plugin remains loaded until you explicitly remove it. See <xref linkend="gedit-remove-plugins"/> for information about how to remove a plugin. </para>
+		  <listitem><para>Load the User name plugin. </para>
 		  </listitem>
 		  <listitem><para>Choose 
 				<menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Insert User Name</guimenuitem> </menuchoice> to insert your username at the cursor position in the current file.
@@ -1745,12 +1710,5 @@ by displaying the text output of the shell command in the output window. To use 
 		</orderedlist> 
 </sect2>
   </sect1>
-<!-- ============= To Quit gedit ========================= -->
- <sect1 id="gedit-quit"> 
-		<title>Quitting</title>
-		<para>To quit <application>&app;</application>, choose <menuchoice>
-                         <guimenu>File</guimenu>
-                         <guimenuitem>Quit</guimenuitem>
-                  </menuchoice>.</para>
-</sect1>
+
 </article>
