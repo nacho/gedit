@@ -7,14 +7,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2004-03-22 19:26+0100\n"
-"PO-Revision-Date: 2003-08-07 04:43+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-06-12 02:39+0200\n"
+"PO-Revision-Date: 2004-06-12 16:29+0300\n"
 "Last-Translator: Evgeni Boevski <e_boevski@abv.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"Content-Transfer-Encoding: 8bit"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -110,16 +110,15 @@ msgstr "Показвай номера на редовете"
 
 #: data/gedit.schemas.in.h:13
 msgid "Display Right Margin"
-msgstr ""
+msgstr "Показва дясната граница"
 
 #: data/gedit.schemas.in.h:14
 msgid "Editor Font"
 msgstr "Шрифт на редкатора"
 
 #: data/gedit.schemas.in.h:15
-#, fuzzy
 msgid "Enable Syntax Highlighting"
-msgstr "Печатай синтактично оцветен текст"
+msgstr "Включва отбелязването на синтакс"
 
 #: data/gedit.schemas.in.h:16
 msgid "Encodings shown in menu"
@@ -218,7 +217,7 @@ msgstr "Режим с пренасяне при печат"
 
 #: data/gedit.schemas.in.h:33
 msgid "Right Margin Position"
-msgstr ""
+msgstr "Позиция на дясната граница"
 
 #: data/gedit.schemas.in.h:34
 msgid "Selected Text Color"
@@ -303,7 +302,7 @@ msgstr "Указва броя интервали, който да се изоб�
 
 #: data/gedit.schemas.in.h:44
 msgid "Specifies the position of the right margin."
-msgstr ""
+msgstr "Определя позицията на дясната граница."
 
 #: data/gedit.schemas.in.h:45
 msgid "Status Bar is Visible"
@@ -376,18 +375,16 @@ msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Дали gedit да изобразява номера на редове в областа за редактиране."
 
 #: data/gedit.schemas.in.h:57
-#, fuzzy
 msgid "Whether gedit should display the right margin in the editing area."
-msgstr "Дали gedit да изобразява номера на редове в областа за редактиране."
+msgstr "Дали gedit да изобразява дясната граница в областа за редактиране."
 
 #: data/gedit.schemas.in.h:58
 msgid "Whether gedit should enable auto indentation."
 msgstr "Дали gedit трябва да разрешава автоматично разделяна на абзаци"
 
 #: data/gedit.schemas.in.h:59
-#, fuzzy
 msgid "Whether gedit should enable syntax highlighting."
-msgstr "Дали gedit трябва да разрешава автоматично разделяна на абзаци"
+msgstr "Дали gedit трябва да отбелязва с различен цвят синтакс като програмед код например."
 
 #: data/gedit.schemas.in.h:60
 msgid "Whether gedit should include a document header when printing documents."
@@ -435,36 +432,34 @@ msgstr ""
 "специфичен за gedit. Ако тази опция е изключена, то ще бъде използван шрифта "
 "указан в опцията \"Шрифт на редактора\"."
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2061
+#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
 #, c-format
 msgid "Activate %s"
 msgstr "Активирай %s"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:1
-#, fuzzy
 msgid ""
 "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
 "changes. </span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Управление</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Имате Х документи с незапазени промени. </span>"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:2
 msgid "If you don't save your documents, all your changes will be lost."
-msgstr ""
+msgstr "Ако не запишете вашите документи, всичките ви промени ще бъдат загубени."
 
 #: gedit/dialogs/close_all_dialog.glade2.h:3
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:654
-#, fuzzy
 msgid "S_elect the documents you want to save:"
-msgstr "Изберете групата с етикети, която искате да използвате."
+msgstr "Изберете документите, които искате да запазите"
 
 #: gedit/dialogs/close_all_dialog.glade2.h:4
 msgid "Save _None"
 msgstr ""
 
 #: gedit/dialogs/close_all_dialog.glade2.h:5
-#, fuzzy
 msgid "_Save Selected"
-msgstr "_Запиши всички"
+msgstr "Запазва избраното"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:141
 msgid "Do_n't save"
@@ -475,79 +470,82 @@ msgstr "_Не записвай"
 msgid ""
 "If you don't save, changes from the last %ld second will be definitively "
 "lost."
-msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Ако не запишете, промените от последната %ld секунда ще бъдат загубени безвъзвратно."
+"Ако·не·запишете,·промените·от·последните·%ld·секунди·ще·бъдат·загубени·безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:370
 msgid ""
 "If you don't save, changes from the last minute will be definitively lost."
 msgstr ""
+"Ако не запишете, промените от последната минута ще бъдат загубени безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
 "definitively lost."
-msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Ако·не·запишете,·промените·от·последната минута и·%ld·секунда·ще·бъдат·загубени·безвъзвратно."
+"Ако не запишете, промените от последната минута и %ld секунди ще бъдат загубени безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:386
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be definitively "
 "lost."
-msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Ако не запишете, промените от последната·%ld минута ще бъдат загубени безвъзвратно."
+"Ако·не·запишете,·промените·от·последните %ld·минути·ще·бъдат·загубени·безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:401
 msgid ""
 "If you don't save, changes from the last hour will be definitively lost."
 msgstr ""
+"Ако·не·запишете,·промените·от·последния час·ще·бъдат·загубени·безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
 "definitively lost."
-msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Ако·не·запишете,·промените·от·последният час и %d·минута·ще·бъдат·загубени·безвъзвратно."
+"Ако не запишете, промените от последният час и·%d минути ще бъдат загубени безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:422
 #, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be definitively lost."
-msgid_plural ""
 "If you don't save, changes from the last %d hours will be definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Ако·не·запишете,·промените·от·последният %d·час·ще·бъдат·загубени·безвъзвратно."
+"Ако не запишете, промените от последните·%d часове ще бъдат загубени безвъзвратно."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:466
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
-msgstr ""
+msgstr "Записва промените по документа \"%s\" преди да бъде затворен?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:640
 #, c-format
 msgid ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr ""
+"Има %d документи с незапазени промени. Да бъдат ли записани преди затварянето?"
 
 #. Secondary label
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:671
 msgid "If you don't save, all your changes will be definitively lost."
-msgstr ""
+msgstr "Ако не го запишете, всичките ви промени ще бъдат загубени безвъзвратно."
 
 #: gedit/dialogs/gedit-dialog-goto-line.c:160
 msgid "Go to Line"
@@ -558,7 +556,7 @@ msgid "_Go to Line"
 msgstr "_Отиди на ред"
 
 #: gedit/dialogs/gedit-dialog-replace.c:136
-#: gedit/dialogs/gedit-dialog-replace.c:1121 gedit/gedit-commands.c:405
+#: gedit/dialogs/gedit-dialog-replace.c:1126 gedit/gedit-commands.c:405
 #, c-format
 msgid "The text \"%s\" was not found."
 msgstr "Текстът \"%s\" не е намерен."
@@ -581,12 +579,10 @@ msgstr "_Замени"
 msgid "Find"
 msgstr "Търси"
 
-#: gedit/dialogs/gedit-dialog-replace.c:1130
-#, fuzzy, c-format
+#: gedit/dialogs/gedit-dialog-replace.c:1135
+#, c-format
 msgid "Found and replaced %d occurrence."
-msgid_plural "Found and replaced %d occurrences."
-msgstr[0] "Намерени и заместени %d съвпадения."
-msgstr[1] "Намерени и заместени %d съвпадения."
+msgstr "Намерени и заместени %d съвпадения."
 
 #: gedit/dialogs/gedit-dialog-uri.c:91
 msgid "Open Location"
@@ -714,9 +710,9 @@ msgid ""
 "marked"
 msgstr "Натиснете бутона за да изберете цвета на маркировката."
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1082
+#: gedit/dialogs/gedit-preferences-dialog.c:1089
 msgid "Elements"
-msgstr ""
+msgstr "Елементи"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:1
 #: gedit/dialogs/page-setup-dialog.glade2.h:1
@@ -725,19 +721,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Auto Indentation</b>"
-msgstr "Автоматичен отстъп"
+msgstr "<b>Автоматичен отстъп</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Elements</b>"
-msgstr "<b>Шрифт</b>"
+msgstr "<b>Елементи</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>File Saving</b>"
-msgstr "<b>Режим с пренасяне</b>"
+msgstr "<b>Запис на файлове</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Font</b>"
@@ -749,14 +742,12 @@ msgid "<b>Line Numbers</b>"
 msgstr "<b>Номера на редовете</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:7
-#, fuzzy
 msgid "<b>Right Margin</b>"
-msgstr "<b>Режим с пренасяне</b>"
+msgstr "<b>Дясна граница</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:8
-#, fuzzy
 msgid "<b>Tabs</b>"
-msgstr "<b>дума</b>"
+msgstr "<b>Табове</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:9
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -764,18 +755,16 @@ msgid "<b>Text Wrapping</b>"
 msgstr "<b>Режим с пренасяне</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Undo</b>"
-msgstr "<b>Шрифт</b>"
+msgstr "<b>Връща</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Цветове</span>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:12
-#, fuzzy
 msgid "Bold"
-msgstr "_Тяло:"
+msgstr "Удебелен"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "Create a _backup copy of files before saving"
@@ -783,7 +772,7 @@ msgstr "Направи _резервно копие на файловете пр
 
 #: gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "D_isplay right margin"
-msgstr ""
+msgstr "Показва дясна граница"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:15
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
@@ -808,42 +797,36 @@ msgid "Font & Colors"
 msgstr "Шрифт и цветове"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:20
-#, fuzzy
 msgid "Highlight _mode:"
-msgstr "Режим на о_светяване"
+msgstr "Режим на отбелязване:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Insert _spaces instead of tabs"
 msgstr "Вмъквай _интервали вместо табулации"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
-#, fuzzy
 msgid "Italic"
-msgstr "Италиански"
+msgstr "Наклонен"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
-#, fuzzy
 msgid "Normal _text color:"
-msgstr "Цвят на текста:"
+msgstr "Нормален цвят на текста:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
-#, fuzzy
 msgid "Pick a color"
-msgstr "Избери цвят на текста"
+msgstr "Изберете цвят"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Pick the background color"
 msgstr "Избери цвят за фон"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:26
-#, fuzzy
 msgid "Pick the editor font"
-msgstr "Избери цвят на текста"
+msgstr "Изберете шрифта за редактора"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:27
-#, fuzzy
 msgid "Pick the normal text color"
-msgstr "Избери цвят на текста"
+msgstr "Изберете цвят за нормален текст"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the selected text color"
@@ -871,80 +854,71 @@ msgstr "Цвят на _маркираният текст:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Strikethrough"
-msgstr ""
+msgstr "Зачеркнат"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:35
-#, fuzzy
 msgid "Syntax Highlighting"
-msgstr "Печатай синтактично оцветен текст"
+msgstr "Отбелязване на синтакса"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "U_se default theme colors"
 msgstr "Използвай цветови теми по _подразбиране"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:37
-#, fuzzy
 msgid "Underline"
-msgstr "Отстъп надясно на редове"
+msgstr "Подчертава"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:38
-#, fuzzy
 msgid "View"
-msgstr "_Изглед"
+msgstr "Преглед"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:39
-#, fuzzy
 msgid "_Autosave files every"
-msgstr "Записвай автоматично текущия файл всеки"
+msgstr "Автоматично записва файловете всеки"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "_Background color:"
 msgstr "Цвят на фона:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:41
-#, fuzzy
 msgid "_Background:"
-msgstr "Цвят на фона:"
+msgstr "Фон:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Display line numbers"
 msgstr "Показвай номера на редовете"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:43
-#, fuzzy
 msgid "_Enable auto indentation"
-msgstr "Разреши автоматичнен отстъп"
+msgstr "Включва автоматичния отстъп"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:44
-#, fuzzy
 msgid "_Enable syntax highlighting"
-msgstr "Печатай с_интактично оцветен текст"
+msgstr "Включва отбелязването на синтакс"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Foreground:"
-msgstr ""
+msgstr "Текст:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Limit to"
-msgstr ""
+msgstr "Ограничава до"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Reset to Default "
-msgstr "_Настройки на десктопа"
+msgstr "Връща стандартни настройки"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:48
-#, fuzzy
 msgid "_Right margin at column:"
-msgstr "_Започни от колона:"
+msgstr "Дясна граница за колонка:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Tabs width:"
-msgstr ""
+msgstr "Ширина на табовете:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Unlimited undo"
-msgstr ""
+msgstr "Неограничено връщане назад"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Use default theme font"
@@ -955,9 +929,8 @@ msgid "_minutes"
 msgstr "_минути"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "act_ions"
-msgstr "_действие(я)"
+msgstr "_действия"
 
 #: gedit/dialogs/gnome-print-font-dialog.c:111
 msgid "_Insert a new preview phrase."
@@ -1105,9 +1078,8 @@ msgid "C_onfigure Plugin"
 msgstr "Конфигурация на модул"
 
 #: gedit/dialogs/plugin-manager.glade2.h:2
-#, fuzzy
 msgid "_About Plugin"
-msgstr "Конфигурация на модул"
+msgstr "Относно плъгина"
 
 #: gedit/dialogs/plugin-manager.glade2.h:3
 msgid "button1"
@@ -1182,13 +1154,13 @@ msgstr "Отвори от URI"
 #: gedit/gedit-commands.c:557
 msgid "translator_credits"
 msgstr "Евгени Боевски <e_boevski@abv.bg>"
+"Ростислав Райков <zbrox@i-space.org>"
 
 #: gedit/gedit-commands.c:582
 msgid "gedit"
 msgstr "gedit"
 
 #: gedit/gedit-commands.c:586
-#, fuzzy
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit е малък и лек текстов редактор за Gnome"
 
@@ -1379,51 +1351,44 @@ msgid "Thai"
 msgstr "Тайвански"
 
 #: gedit/gedit-file-selector-util.c:148
-#, fuzzy, c-format
+#, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr "Файлът \"%s\" вече съществува."
+msgstr "Файл с името \"%s\" вече съществува.\n"
 
 #: gedit/gedit-file-selector-util.c:149
-#, fuzzy
 msgid "Do you want to replace it with the one you are saving?"
-msgstr ""
-"Файл с име \"%s\" вече съществува.\n"
-"Желаете ли да го презапишете с файла, който записвате?"
+msgstr "Желаете ли да го замените с този, който записвате в момента?"
 
 #: gedit/gedit-file-selector-util.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr "Файлът \"%s\" вече съществува."
+msgstr "Файлът \"%s\" е само за четене.\n"
 
 #: gedit/gedit-file-selector-util.c:159
-#, fuzzy
 msgid "Do you want to try to replace it with the one you are saving?"
-msgstr ""
-"Файл с име \"%s\" е само за четене.\n"
-"Желаете ли да опитате да го заместите с файла, който записвате?"
+msgstr "Желаете ли да се опитате да го замените с този, който записвате сега?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:357
 msgid "All Files"
-msgstr ""
+msgstr "Всички файлове"
 
-#: gedit/gedit-file-selector-util.c:364
-#, fuzzy
+#: gedit/gedit-file-selector-util.c:365
 msgid "All Text Files"
-msgstr "Редактира текстови файлове"
+msgstr "Всички текстови файлове"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:383
 msgid "Ch_aracter Coding:"
 msgstr "Кодиране на си_мволите:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:529
 msgid "Select a file to open"
 msgstr "Избери файл за отваряне"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:555
 msgid "Select files to open"
 msgstr "Избери файлове за отваряне"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:587
 msgid "Select a filename to save"
 msgstr "Избери име на файл за запис"
 
@@ -1431,164 +1396,160 @@ msgstr "Избери име на файл за запис"
 msgid "Open File..."
 msgstr "Отвори файл..."
 
-#: gedit/gedit-file.c:272 gedit/gedit-file.c:421
-#, fuzzy, c-format
+#: gedit/gedit-file.c:272 gedit/gedit-file.c:425
+#, c-format
 msgid "Saving document \"%s\"..."
-msgstr "Запис на файл '%s'..."
+msgstr "Записва се документа \"%s\"..."
 
-#: gedit/gedit-file.c:300 gedit/gedit-file.c:442
-#, fuzzy, c-format
+#: gedit/gedit-file.c:300 gedit/gedit-file.c:446
+#, c-format
 msgid "The document \"%s\" has not been saved."
-msgstr "Документа не беше записан."
+msgstr "Документът \"%s\" не беше записан."
 
-#: gedit/gedit-file.c:314 gedit/gedit-file.c:434
-#, fuzzy, c-format
+#: gedit/gedit-file.c:314 gedit/gedit-file.c:438
+#, c-format
 msgid "The document \"%s\" has been saved."
-msgstr "Документа не беше записан."
+msgstr "Документът \"%s\" беше записан."
 
-#: gedit/gedit-file.c:400
+#: gedit/gedit-file.c:405
 msgid "Save as..."
 msgstr "Запиши като..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:604
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 
-#: gedit/gedit-file.c:609
+#: gedit/gedit-file.c:613
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be definitively "
 "lost."
-msgid_plural ""
 "Changes made to the document in the last %ld seconds will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Промените·направени·по·документа·в·последната %ld·секунда·ще·бъдат·загубени·безвъзвратно."
+"Промените направени по документа в последните·%ld секунди ще бъдат загубени безвъзвратно."
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:622
 msgid ""
 "Changes made to the document in the last minute will be definitively lost."
 msgstr ""
+"Промените направени по документа в последната минута ще бъдат загубени безвъзвратно."
 
-#: gedit/gedit-file.c:624
+#: gedit/gedit-file.c:628
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
 "definitively lost."
-msgid_plural ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Промените направени по документа в последната·минута и %ld секунда ще бъдат загубени безвъзвратно."
+"Промените·направени·по·документа·в·последната минута и %ld·секунди·ще·бъдат·загубени·безвъзвратно."
 
-#: gedit/gedit-file.c:634
+#: gedit/gedit-file.c:638
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be definitively "
 "lost."
-msgid_plural ""
 "Changes made to the document in the last %ld minutes will be definitively "
 "lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Промените направени по документа в последната·%ld минута ще бъдат загубени безвъзвратно."
+"Промените·направени·по·документа·в·последните %ld·минути·ще·бъдат·загубени·безвъзвратно."
 
-#: gedit/gedit-file.c:649
+#: gedit/gedit-file.c:653
 msgid ""
 "Changes made to the document in the last hour will be definitively lost."
 msgstr ""
+"Промените направени по документа в последният·час ще бъдат загубени безвъзвратно."
 
-#: gedit/gedit-file.c:655
+#: gedit/gedit-file.c:659
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
 "definitively lost."
-msgid_plural ""
 "Changes made to the document in the last hour and %d minutes will be "
 "definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Промените направени по документа в последният час и %d минута ще бъдат загубени безвъзвратно."
+"Промените·направени·по·документа·в·последният час и %d·минути·ще·бъдат·загубени·безвъзвратно."
 
-#: gedit/gedit-file.c:670
+#: gedit/gedit-file.c:674
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be definitively lost."
-msgid_plural ""
 "Changes made to the document in the last %d hours will be definitively lost."
-msgstr[0] ""
-msgstr[1] ""
+msgstr ""
+"Промените направени по документа в последният·%d час ще бъдат загубени безвъзвратно."
+"Промените·направени·по·документа·в·последните %d·часове·ще·бъдат·загубени·безвъзвратно."
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:697 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Възстанови"
 
-#: gedit/gedit-file.c:738
-#, fuzzy, c-format
+#: gedit/gedit-file.c:742
+#, c-format
 msgid "Error reverting the document \"%s\"."
-msgstr "Грешка при възстановяване на файл \"%s\"."
-
-#: gedit/gedit-file.c:745
-#, fuzzy, c-format
-msgid "The document \"%s\" has not been reverted."
-msgstr "Документа не беше възстановен."
+msgstr ""
 
 #: gedit/gedit-file.c:749
-#, fuzzy, c-format
+#, c-format
+msgid "The document \"%s\" has not been reverted."
+msgstr ""
+
+#: gedit/gedit-file.c:753
+#, c-format
 msgid "The document \"%s\" has been reverted."
-msgstr "Документа не беше възстановен."
+msgstr ""
 
-#: gedit/gedit-file.c:777
-#, fuzzy, c-format
+#: gedit/gedit-file.c:781
+#, c-format
 msgid "Reverting the document \"%s\"..."
-msgstr "Възстановяване на състоянието от файл '%s' ..."
+msgstr ""
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:916
 msgid "Could not read data from stdin."
 msgstr "Неуспех при четене на данни от stdin."
 
-#: gedit/gedit-file.c:962
+#: gedit/gedit-file.c:966
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Файлът \"%s\" не съществува. Искате ли да го създадете?"
 
-#: gedit/gedit-file.c:1085
-#, fuzzy
-msgid "Reverting file:"
-msgstr "Възстановяване на състоянието от файл '%s' ..."
-
 #: gedit/gedit-file.c:1089
-#, fuzzy
-msgid "Loading file:"
-msgstr "Зареждане на файлове %d ..."
-
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
-#, c-format
-msgid "Error loading file \"%s\""
+msgid "Reverting file:"
 msgstr ""
 
-#: gedit/gedit-file.c:1279
-#, fuzzy, c-format
+#: gedit/gedit-file.c:1093
+msgid "Loading file:"
+msgstr "Зарежда се файл:"
+
+#: gedit/gedit-file.c:1262 gedit/gedit-file.c:1421
+#, c-format
+msgid "Error loading file \"%s\""
+msgstr "Грешка при зареждане на файл \"%s\""
+
+#: gedit/gedit-file.c:1283
+#, c-format
 msgid "Loaded file \"%s\""
-msgstr "Зареден е файл '%s'"
+msgstr "Зареден е файла \"%s\""
 
-#: gedit/gedit-file.c:1356
-#, fuzzy, c-format
+#: gedit/gedit-file.c:1360
+#, c-format
 msgid "Loaded %d file"
-msgid_plural "Loaded %d files"
-msgstr[0] "Заредени са %i файла"
-msgstr[1] "Заредени са %i файла"
+msgstr "Зареден е %d файла"
 
-#: gedit/gedit-file.c:1390
-#, fuzzy, c-format
+#: gedit/gedit-file.c:1394
+#, c-format
 msgid "Loading file \"%s\"..."
-msgstr "Зареждане на файлове %d ..."
+msgstr "Зарежда се файла \"%s\"..."
 
-#: gedit/gedit-file.c:1537
-#, fuzzy, c-format
+#: gedit/gedit-file.c:1541
+#, c-format
 msgid "Loading %d file..."
-msgid_plural "Loading %d files..."
-msgstr[0] "Зареждане на файлове %d ..."
-msgstr[1] "Зареждане на файлове %d ..."
+msgstr "Зарежда се файла %d ..."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1610,22 +1571,21 @@ msgstr "Уникод (UTF-8)"
 
 #: gedit/gedit-mdi-child.c:773
 msgid "Name:"
-msgstr ""
+msgstr "Име:"
 
 #: gedit/gedit-mdi-child.c:774
 msgid "MIME Type:"
-msgstr ""
+msgstr "MIME вид:"
 
 #: gedit/gedit-mdi-child.c:775
-#, fuzzy
 msgid "Encoding:"
-msgstr "Кодови таблици"
+msgstr "Кодова таблица:"
 
 #. Translators: %s is a URI
 #: gedit/gedit-mdi.c:284 gedit/gedit-mdi.c:444
-#, fuzzy, c-format
+#, c-format
 msgid "Open '%s'"
-msgstr "Отвори"
+msgstr "Отваря '%s'"
 
 #: gedit/gedit-mdi.c:519
 msgid "Open a recently used file"
@@ -1839,9 +1799,8 @@ msgid "Go to _Line..."
 msgstr "Отиди на _ред..."
 
 #: gedit/gedit-ui.xml.h:23
-#, fuzzy
 msgid "Go to a specific line"
-msgstr "Отиди на конкретен ред"
+msgstr "Отива на конкретен ред"
 
 #: gedit/gedit-ui.xml.h:24
 msgid "Main toolbar"
@@ -1956,24 +1915,20 @@ msgid "Save the current file with a different name"
 msgstr "Запиши текущия файл с ново име"
 
 #: gedit/gedit-ui.xml.h:55
-#, fuzzy
 msgid "Search backwards for the same text"
-msgstr "Търси назад за същия стринг"
+msgstr "Търси назад за същия текст"
 
 #: gedit/gedit-ui.xml.h:56
-#, fuzzy
 msgid "Search for and replace text"
-msgstr "Търси стринг"
+msgstr "Търси и заменя текст"
 
 #: gedit/gedit-ui.xml.h:57
-#, fuzzy
 msgid "Search for text"
-msgstr "Търси за:"
+msgstr "Търси за текст"
 
 #: gedit/gedit-ui.xml.h:58
-#, fuzzy
 msgid "Search forwards for the same text"
-msgstr "Търси назад за същия стринг"
+msgstr "Търси напред за същия тескт"
 
 #: gedit/gedit-ui.xml.h:59
 msgid "Select All"
@@ -2329,13 +2284,13 @@ msgstr ""
 "кодова таблица в прозореца за избор на файл (местоположение)."
 
 #: gedit/gedit-utils.c:666
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
 "%s."
 msgstr ""
-"Грешка при отваряне на файл \"%s\".\n"
+"Не може да се отвари файла \"%s\".\n"
 "\n"
 "%s"
 
@@ -2777,7 +2732,6 @@ msgid "Executing command"
 msgstr "Изпълнение на команда"
 
 #: plugins/shell_output/shell_output.c:841
-#, fuzzy
 msgid "An error occured while running the selected command."
 msgstr "Грешка при изпълнението на избраната команда."
 
@@ -2813,7 +2767,6 @@ msgstr "_Работна директория:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Модул \"Изход на шел\""
 
-#. Key in case the plugin ever needs any settings
 #: plugins/sort/sort.c:27
 msgid "S_ort..."
 msgstr "_Сортиране..."
@@ -2982,9 +2935,8 @@ msgid "Swedish"
 msgstr "Шведски"
 
 #: plugins/spell/gedit-spell-checker.c:102
-#, fuzzy
 msgid "Ukrainian"
-msgstr "Кирилица/Украински"
+msgstr "Украински"
 
 #: plugins/spell/gedit-spell-checker.c:735
 msgid "Default"
@@ -3107,25 +3059,24 @@ msgstr "Проверка на правописа на текущия докум�
 msgid "Spell checker"
 msgstr "Проверка правопис"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:136
+#: plugins/taglist/gedit-taglist-plugin-window.c:139
 msgid "Tag list plugin"
 msgstr "Модул \"Списък с етикети\""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:154
+#: plugins/taglist/gedit-taglist-plugin-window.c:157
 msgid "Select the group of tags you want to use"
 msgstr "Изберете групата с етикети, която искате да използвате."
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:176
-#, fuzzy
+#: plugins/taglist/gedit-taglist-plugin-window.c:179
 msgid "Available Tag Lists"
-msgstr "Налични формати"
+msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:178
-#: plugins/taglist/gedit-taglist-plugin-window.c:199
+#: plugins/taglist/gedit-taglist-plugin-window.c:181
+#: plugins/taglist/gedit-taglist-plugin-window.c:202
 msgid "Tags"
 msgstr "Етикети"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:188
+#: plugins/taglist/gedit-taglist-plugin-window.c:191
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Кликнете два пъти на етикет за да го вмъкнете в текущия документ."
 
