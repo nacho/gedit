@@ -438,13 +438,12 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 {
 	GtkWidget *view;
 	GeditDocument *doc;
-	gint cursor = 0;
-	gint start;
-	gint end;
-	gboolean sel;
-	
+	GtkTextIter start, end;
+	GtkTextIter cursor;
+	gboolean sel = FALSE;
+
 	gedit_debug (DEBUG_PLUGINS, "");
-	
+
 	view = gedit_get_active_view ();
 	if (view == NULL)
 		return;
@@ -454,43 +453,53 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 
 	doc = gedit_view_get_document (GEDIT_VIEW (view));
 	g_return_if_fail (doc != NULL);
-	
-	sel = gedit_document_get_selection (doc, &start, &end);
-	
+
+
 	gedit_document_begin_user_action (doc);
-	
+
+	/* always insert the begin tag at the beginning of the selection
+	 * and the end tag at the end, if there is no selection they will
+	 * be automatically inserted at the cursor position.
+	 */
+
 	if (tag->begin != NULL)
 	{
-		if (sel)
-		{	
-			gedit_document_insert_text (doc, start, tag->begin, -1);
+		sel = gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
+						 	    &start, &end);
 
-			start += g_utf8_strlen (tag->begin, -1);
-			end += g_utf8_strlen (tag->begin, -1);
-		}
-		else
-		{
-			gedit_document_insert_text_at_cursor (doc, tag->begin, -1);
-			cursor = gedit_document_get_cursor (doc);
-		}
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &start, tag->begin, -1);
+
+		/* get iterators again since they have been invalidated and move
+		 * the cursor after the selection */
+		gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
+						      &start, &cursor);
 	}
-	
+
 	if (tag->end != NULL)
 	{
-		if (sel)
+		sel = gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),
+							    &start, &end);
+
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &end, tag->end, -1);
+
+		/* if there is no selection and we have a paired tag, move the
+		 * cursor between the pair, otherwise move it at the end */
+		if (!sel)
 		{
-			gedit_document_insert_text (doc, end, tag->end, -1);
+			gint offset;
+
+			offset = gtk_text_iter_get_offset (&end) -
+				 g_utf8_strlen (tag->end, -1);
+
+			gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc),
+							    &end, offset);
 		}
-		else
-		{
-			gedit_document_insert_text_at_cursor (doc, tag->end, -1);
-			gedit_document_set_cursor (doc, cursor);
-		}
+
+		cursor = end;
 	}
 
-	if (sel)
-		gedit_document_set_selection (doc, start, end);
-	
+	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &cursor);
+
 	gedit_document_end_user_action (doc);
 
 	if (focus_to_document)
