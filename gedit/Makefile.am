@@ -15,6 +15,8 @@ geditincludedir = $(includedir)/gedit
 gtkrcdir = $(datadir)
 gtkrc_DATA = geditrc
 
+EXTRA_gedit_SOURCES = gE_plugin.h gE_plugin.c
+
 if WITH_GMODULE_PLUGINS
 geditinclude_HEADERS = gE_plugin.h
 GMODULE_PLUGIN_SRCLIST = gE_plugin.h gE_plugin.c
@@ -50,8 +52,8 @@ gedit_SOURCES = 	\
 	toolbar.c	\
 	plugin.c        \
 	gE_plugin_api.c	\
-	gE_print.c \
-	gE_print.h \
+	gE_print.c	\
+	gE_print.h	\
 	gE_prefs.h	\
 	main.h		\
 	toolbar.h	\
