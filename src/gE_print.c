@@ -253,8 +253,14 @@ get_filename(gE_data *data)
 		sprintf(msg, " '%s' %s ", 
 			(doc->filename) ? doc->filename : UNTITLED, PRINT_MSG);
 
+		#ifdef WITHOUT_GNOME
 		ret = ge_dialog(title, msg, 3, buttons, 3, NULL, NULL, TRUE);
-
+		#else
+		ret = gnome_dialog_run_and_close ((GnomeDialog *)
+			gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, 
+				buttons[0], buttons[1], buttons[2], NULL)) + 1;
+		#endif
+		
 		g_free(msg);
 		g_free(title);
 

@@ -147,10 +147,16 @@ void count_lines_cb (GtkWidget *widget, gpointer cbwindow)
 	
 	msg = g_malloc0 (200);
 	sprintf (msg, "Total Lines: %i\nCurrent Line: %i", total_lines, line_number);
+	#ifdef WITHOUT_GNOME
 	ge_dialog ("Line Information",
 		msg,
 		1, buttons,
 		1, NULL, NULL, TRUE);
+	#else
+	gnome_dialog_run_and_close ((GnomeDialog *)
+		gnome_message_box_new (msg, GNOME_MESSAGE_BOX_INFO,
+			buttons[0], NULL));
+	#endif
 }
 
 static void

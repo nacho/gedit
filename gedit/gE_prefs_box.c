@@ -99,7 +99,7 @@ void cancel()
 void gE_window_refresh(gE_window *w)
 {
 GtkStyle *style;
-
+gint i;
 
     if (w->show_status == 0)
        gtk_widget_hide (w->statusbox);
@@ -120,10 +120,16 @@ GtkStyle *style;
   style->font = gdk_font_load (w->font);
   
   gtk_widget_push_style (style);    
-  #ifdef GTK_HAVE_FEATURES_1_1_0	 
-     gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->split_screen), style);
-  #endif
-     gtk_widget_set_style(GTK_WIDGET(gE_document_current(w)->text), style);
+  for (i = 0; i < g_list_length (w->documents); i++)
+  {
+  	#ifdef GTK_HAVE_FEATURES_1_1_0	 
+  	gtk_widget_set_style(GTK_WIDGET(
+  		((gE_document *) g_list_nth_data (w->documents, i))->split_screen), style);
+  	#endif
+  	gtk_widget_set_style(GTK_WIDGET(
+  		((gE_document *) g_list_nth_data (w->documents, i))->text), style);
+  }
+
   gtk_widget_pop_style ();
   	
   

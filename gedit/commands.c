@@ -142,7 +142,7 @@ popup_close_verify(gE_document *doc, gE_data *data)
 {
 	int ret;
 	char *fname, *title, *msg;
-	char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL } ;
+	char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL} ;
 
 #ifdef GTK_HAVE_FEATURES_1_1_0	
 	fname = (doc->filename) ? g_basename(doc->filename) : UNTITLED;
@@ -156,8 +156,14 @@ popup_close_verify(gE_document *doc, gE_data *data)
 	sprintf(title, "%s '%s'?", CLOSE_TITLE, fname);
 	sprintf(msg  , " '%s' %s ", fname, CLOSE_MSG);
 
+	#ifdef WITHOUT_GNOME
 	ret = ge_dialog(title, msg, 3, buttons, 3, NULL, NULL, TRUE);
-
+	#else
+	ret = gnome_dialog_run_and_close ((GnomeDialog *)
+		gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,
+			buttons[0], buttons[1], buttons[2], NULL)) + 1;
+	#endif
+	
 	g_free(title);
 	g_free(msg);
 

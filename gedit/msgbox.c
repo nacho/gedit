@@ -338,36 +338,26 @@ static void
 msgbox_truncate(void)
 {
 	guint i, num, err;
+	gchar *c;
 	gboolean found = FALSE;
 	GtkText *text = GTK_TEXT(msgbox.text);
 
 	g_return_if_fail(msgbox.toplev != NULL);
 	g_return_if_fail(msgbox.text != NULL);
 
-	for (num = 0, i = 0; i < text->gap_position; i++) {
-		if (text->text[i] == '\n') {
+	for (num = 0, i = 0; i < gtk_text_get_length (text); i++) {
+		c = gtk_editable_get_chars (GTK_EDITABLE (text), i, i + 1);
+		if (strcmp (c, "\n") == 0) {
 			num++;
 			if (num == (MAX_MSGS / 2)) {
 				i++;	/* skip over \n */
 				gtk_text_set_point(text, i);
 				found = TRUE;
+				g_free (c);
 				break;
 			}
 		}
-	}
-
-	if (!found) {
-		for (i = i + text->gap_size; i < text->text_end; i++) {
-			if (text->text[i] == '\n') {
-				num++;
-				if (num == (MAX_MSGS / 2)) {
-					i++;	/* skip over \n */
-					gtk_text_set_point(text, i);
-					found = TRUE;
-					break;
-				}
-			}
-		}
+		g_free (c);
 	}
 
 	g_assert(found == TRUE);

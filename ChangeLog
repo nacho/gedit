@@ -1,3 +1,18 @@
+1998-12-11  Evan Lawrence <evan@worldpath.net>
+
+	* src/commands.c:
+	  src/search.c:
+	  src/gE_print.c: Fixed up some dialogs to use gnome_dialog if gnome
+	  is being used.
+		
+	* src/gE_prefs_box.c: Fixed it so changes to the font take effect on
+	  *all* documents in the current window, not just the current document.
+
+	* src/msgbox.c: Fixed it up to use normal text widget routines to truncate
+	  the msgbox, and not do weird internal crap. Speaking of which, we should
+	  probably phase out the msgbox RSN, since it doesn't seem to have much of
+	  a purpose.
+  
 1998-12-10  Evan Lawrence <evan@worldpath.net>
 
 	* src/search.c:
