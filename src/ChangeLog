@@ -1,3 +1,28 @@
+2002-07-09  Paolo Maggi  <maggi@athena.polito.it>
+
+	The "Plugin Manager" is now a page in the "Preferences" dialog
+
+	* dialogs/gedit-plugin-manager.h: new file
+	* dialogs/gedit-dialog-plugin-manager.c -> gedit-plugin-manager.c
+
+	* dialogs/Makefile.am (libdialogs_a_SOURCES): added 
+	gedit-plugin-manager.[ch], removed gedit-dialog-plugin-manager.c
+	
+	* gedit-commands.[ch] (gedit_cmd_tools_plugin_manager): deleted
+
+	* gedit-menus.c (gedit_verbs): removed the PluginsManager entry
+
+	* gedit-ui.xml: removed the "Plugin Manager" menu item
+
+	* dialogs/gedit-dialogs.h (gedit_dialog_plugin_manager): removed
+
+	* dialogs/gedit-preferences-dialog.c: removed unused code, added the 
+	"Plugin Manager" page
+
+	* dialogs/gedit-preferences.glade2: cleaned up
+
+	* dialogs/plugin-manager.glade2: cleaned up
+
 2002-07-08  Paolo Maggi  <maggi@athena.polito.it>
 
 	* .cvsignore: Updated

@@ -6,8 +6,6 @@
     <property name="title" translatable="yes">dialog1</property>
     <property name="type">GTK_WINDOW_TOPLEVEL</property>
     <property name="modal">no</property>
-    <property name="default_width">400</property>
-    <property name="default_height">400</property>
     <property name="allow_shrink">no</property>
     <property name="allow_grow">yes</property>
     <property name="visible">no</property>
@@ -42,58 +40,11 @@
 
         <child>
           <widget class="GtkVBox" id="plugin_manager_dialog_content">
-            <property name="border_width">5</property>
             <property name="homogeneous">no</property>
             <property name="spacing">5</property>
             <property name="visible">yes</property>
-
-            <child>
-              <widget class="GtkHBox" id="hbox1">
-                <property name="homogeneous">no</property>
-                <property name="spacing">10</property>
-                <property name="visible">yes</property>
-
-                <child>
-                  <widget class="GtkImage" id="plugin_logo">
-                    <property name="xalign">0.0</property>
-                    <property name="yalign">0.5</property>
-                    <property name="xpad">0</property>
-                    <property name="ypad">0</property>
-                    <property name="visible">yes</property>
-                  </widget>
-                  <packing>
-                    <property name="padding">0</property>
-                    <property name="expand">no</property>
-                    <property name="fill">no</property>
-                  </packing>
-                </child>
-
-                <child>
-                  <widget class="GtkLabel" id="label1">
-                    <property name="label" translatable="yes">This is the Plugin Manager. Plugins are extra pieces of software that extend gedit capabilities. From here, you can choose which plugins you want to have loaded.</property>
-                    <property name="justify">GTK_JUSTIFY_LEFT</property>
-                    <property name="wrap">yes</property>
-                    <property name="xalign">0.0</property>
-                    <property name="yalign">0.5</property>
-                    <property name="xpad">0</property>
-                    <property name="ypad">0</property>
-                    <property name="visible">yes</property>
-                  </widget>
-                  <packing>
-                    <property name="padding">0</property>
-                    <property name="expand">yes</property>
-                    <property name="fill">yes</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="padding">0</property>
-                <property name="expand">no</property>
-                <property name="fill">no</property>
-              </packing>
-            </child>
-
-            <child>
+            
+	    <child>
               <widget class="GtkScrolledWindow" id="plugin_viewport">
                 <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                 <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
@@ -107,14 +58,14 @@
                 </child>
 
                 <child internal-child="hscrollbar">
-                  <widget class="GtkHScrollbar" id="convertwidget1">
+                  <widget class="GtkHScrollbar" id="pmconvertwidget1">
                     <property name="update_policy">GTK_UPDATE_CONTINUOUS</property>
                     <property name="visible">yes</property>
                   </widget>
                 </child>
 
                 <child internal-child="vscrollbar">
-                  <widget class="GtkVScrollbar" id="convertwidget2">
+                  <widget class="GtkVScrollbar" id="pmconvertwidget2">
                     <property name="update_policy">GTK_UPDATE_CONTINUOUS</property>
                     <property name="visible">yes</property>
                   </widget>
@@ -139,7 +90,7 @@
                     <property name="hadjustment">0 0 100 0 10 10</property>
                     <property name="vadjustment">0 0 100 0 10 10</property>
                     <property name="width">400</property>
-                    <property name="height">400</property>
+                    <property name="height">300</property>
                   </widget>
                   <packing>
                     <property name="padding">0</property>
@@ -182,8 +133,6 @@
                 <property name="scrollable">yes</property>
                 <property name="tab_hborder">2</property>
                 <property name="tab_vborder">2</property>
-                <property name="width-request">250</property>
-                <property name="height-request">30</property>
                 <property name="enable-popup">no</property>
                 <property name="visible">yes</property>
 
@@ -229,14 +178,14 @@
                     </child>
                    
                     <child internal-child="hscrollbar">
-                      <widget class="GtkHScrollbar" id="convertwidget21">
+                      <widget class="GtkHScrollbar" id="pmconvertwidget21">
                         <property name="update_policy">GTK_UPDATE_CONTINUOUS</property>
                         <property name="visible">yes</property>
                       </widget>
                     </child>
 
                     <child internal-child="vscrollbar">
-                      <widget class="GtkVScrollbar" id="convertwidget22">
+                      <widget class="GtkVScrollbar" id="pmconvertwidget22">
                         <property name="update_policy">GTK_UPDATE_CONTINUOUS</property>
                         <property name="visible">yes</property>
                       </widget>
@@ -250,7 +199,7 @@
                 </child>
 
                 <child>
-                  <widget class="GtkLabel" id="label2">
+                  <widget class="GtkLabel" id="pmlabel2">
                     <property name="label" translatable="yes">_Description</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>
@@ -267,7 +216,7 @@
                 </child>
 
                 <child>
-                  <widget class="GtkScrolledWindow" id="sw31">
+                  <widget class="GtkScrolledWindow" id="pmsw31">
                     <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                     <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
                     <property name="shadow_type">GTK_SHADOW_NONE</property>
@@ -275,12 +224,12 @@
                     <property name="border_width">5</property>
 
                     <child>
-                      <widget class="GtkViewport" id="vp1132">
+                      <widget class="GtkViewport" id="pmvp1132">
                         <property name="shadow_type">GTK_SHADOW_NONE</property>
                         <property name="visible">yes</property>
 
                         <child>
-                          <widget class="GtkVBox" id="vbox2">
+                          <widget class="GtkVBox" id="pmvbox2">
                             <property name="homogeneous">no</property>
                             <property name="spacing">0</property>
                             <property name="visible">yes</property>
@@ -361,14 +310,14 @@
                     </child>
 
                     <child internal-child="hscrollbar">
-                      <widget class="GtkHScrollbar" id="convertwidget321">
+                      <widget class="GtkHScrollbar" id="pmconvertwidget321">
                         <property name="update_policy">GTK_UPDATE_CONTINUOUS</property>
                         <property name="visible">yes</property>
                       </widget>
                     </child>
 
                     <child internal-child="vscrollbar">
-                      <widget class="GtkVScrollbar" id="convertwidget322">
+                      <widget class="GtkVScrollbar" id="pmconvertwidget322">
                         <property name="update_policy">GTK_UPDATE_CONTINUOUS</property>
                         <property name="visible">yes</property>
                       </widget>
@@ -382,7 +331,7 @@
                 </child>
         
                 <child>
-                  <widget class="GtkLabel" id="label3">
+                  <widget class="GtkLabel" id="pmlabel3">
                     <property name="label" translatable="yes">D_etails</property>
                     <property name="justify">GTK_JUSTIFY_CENTER</property>
                     <property name="wrap">no</property>

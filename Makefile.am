@@ -2,8 +2,7 @@
 
 SUBDIRS = src pixmaps po plugins help omf-install data
 
-EXTRA_DIST =	 		\						
-	BUGS			\
+EXTRA_DIST = BUGS		\
 	ChangeLog  		\
 	README 			\
 	TODO 			\

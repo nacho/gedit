@@ -40,8 +40,6 @@ void gedit_dialog_replace   (void);
 
 void gedit_dialog_open_uri  (void);
 
-void gedit_dialog_plugin_manager (void);
-
 gchar *gedit_plugin_program_location_dialog (gchar *program_name, 
 					     gchar *plugin_name, 
 					     GtkWindow *parent);

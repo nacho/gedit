@@ -43,26 +43,21 @@
 #include "gedit-view.h"
 #include "gedit-utils.h"
 #include "gedit2.h"
+#include "gedit-plugin-manager.h"
 
 #include "gnome-print-font-picker.h"
 
 /* To be syncronized with gedit-preferences.glade2 */
-#define LOGO			6
-#define	TOOLBAR_SETTINGS  	0
-#define	STATUS_BAR_SETTINGS 	1
-#define	FONT_COLORS_SETTINGS 	5
-#define MDI_SETTINGS		2
-#define SAVE_SETTINGS		7
-#define TABS_SETTINGS		3
-#define UNDO_SETTINGS		4
-#define WRAP_MODE_SETTINGS	8
-#define PRINT_SETTINGS		9
-#define LINE_NUMBERS_SETTINGS	10
-#define PRINT_FONTS_SETTINGS	11
-
-/*
-#define DEBUG_MDI_PREFS
-*/
+#define LOGO			3
+#define	FONT_COLORS_SETTINGS 	2
+#define SAVE_SETTINGS		4
+#define TABS_SETTINGS		0
+#define UNDO_SETTINGS		1
+#define WRAP_MODE_SETTINGS	5
+#define PRINT_SETTINGS		6
+#define LINE_NUMBERS_SETTINGS	7
+#define PRINT_FONTS_SETTINGS	8
+#define PLUGIN_MANAGER_SETTINGS 9
 
 enum
 {
@@ -79,29 +74,6 @@ struct _GeditPreferencesDialogPrivate
 
 	GtkTreeModel *categories_tree_model;
 
-#if 0
-	/* Toolbar page */
-	GtkWidget	*toolbar_show_checkbutton;
-	
-	GtkWidget	*toolbar_button_frame;
-	GtkWidget	*toolbar_system_radiobutton;
-	GtkWidget	*toolbar_icon_radiobutton;
-	GtkWidget	*toolbar_icon_text_radiobutton;
-	
-	GtkWidget	*toolbar_tooltips_checkbutton;
-
-	/* Statusbar page */
-	GtkWidget	*statusbar_show_checkbutton;
-	GtkWidget	*statusbar_cursor_position_checkbutton;
-	GtkWidget	*statusbar_overwrite_mode_checkbutton;
-#endif
-
-#ifdef DEBUG_MDI_PREFS	
-	/*MDI page */
-	GtkWidget	*mdi_mode_optionmenu;
-	GtkWidget	*mdi_tab_pos_optionmenu;
-	GtkWidget	*mdi_tab_pos_label;
-#endif
 	/* Font & Colors page */
 	GtkWidget	*default_font_checkbutton;
 	GtkWidget	*default_colors_checkbutton;
@@ -148,6 +120,10 @@ struct _GeditPreferencesDialogPrivate
 	GtkWidget	*headers_fontpicker;
 	GtkWidget	*numbers_fontpicker;
 	GtkWidget	*restore_default_fonts_button;
+
+	/* Plugin/Manager */
+	GtkWidget	*plugin_manager;
+	
 };
 
 typedef struct _CategoriesTreeItem	CategoriesTreeItem;
@@ -217,6 +193,8 @@ static void gedit_preferences_dialog_wrap_mode_radiobutton_toggled (GtkToggleBut
 								    GeditPreferencesDialog *dlg);
 static void gedit_preferences_dialog_display_line_numbers_checkbutton_toggled (GtkToggleButton *button,
 									       GeditPreferencesDialog *dlg);
+static gboolean gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg, 
+								    GladeXML *gui);
 
 static gint last_selected_page_num = FONT_COLORS_SETTINGS;
 static GtkDialogClass* parent_class = NULL;
@@ -245,11 +223,20 @@ static CategoriesTreeItem print [] =
 	{ NULL }
 };
 
+static CategoriesTreeItem plugins [] =
+{
+	{N_("Manager"), NULL, PLUGIN_MANAGER_SETTINGS},
+
+	{ NULL }
+};
+
+
 static CategoriesTreeItem toplevel [] =
 {
 	{N_("Editor"), editor_behavior, LOGO},
 	{N_("Print"), print, LOGO},
-	
+	{N_("Plugins"), plugins, LOGO},	
+
 	{ NULL }
 };
 
@@ -632,6 +619,7 @@ gedit_preferences_dialog_create_notebook (GeditPreferencesDialog *dlg)
 	gedit_preferences_dialog_setup_page_page (dlg, gui);
 	gedit_preferences_dialog_setup_line_numbers_page (dlg, gui);
 	gedit_preferences_dialog_setup_print_fonts_page (dlg, gui);
+	gedit_preferences_dialog_setup_plugin_manager_page (dlg, gui);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (dlg->priv->notebook), LOGO);
 	
@@ -1756,4 +1744,21 @@ gedit_preferences_dialog_setup_line_numbers_page (GeditPreferencesDialog *dlg, G
 	return TRUE;
 }
 
+static gboolean 
+gedit_preferences_dialog_setup_plugin_manager_page (GeditPreferencesDialog *dlg, GladeXML *gui)
+{
+	GtkWidget *plugin_manager_page;
+	GtkWidget *page_content;
 	
+	gedit_debug (DEBUG_PREFS, "");
+
+	plugin_manager_page = glade_xml_get_widget (gui, "plugin_manager_page");
+	g_return_val_if_fail (plugin_manager_page != NULL, FALSE);
+	
+	page_content = gedit_plugin_manager_get_page ();
+	g_return_val_if_fail (page_content != NULL, FALSE);
+	
+	gtk_box_pack_start (GTK_BOX (plugin_manager_page), page_content, TRUE, TRUE, 0);
+	
+	return TRUE;
+}

@@ -20,7 +20,8 @@ libdialogs_a_SOURCES = 			\
 	gedit-dialog-replace.c		\
 	gedit-preferences-dialog.h	\
 	gedit-preferences-dialog.c	\
-	gedit-dialog-plugin-manager.c	\
+	gedit-plugin-manager.c		\
+	gedit-plugin-manager.h	\
 	gedit-plugin-program-location-dialog.c \
 	gnome-print-font-picker.c	\
 	gnome-print-font-picker.h	\
