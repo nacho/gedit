@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2000-11-25 14:54+0000\n"
+"POT-Creation-Date: 2000-11-30 21:08+0000\n"
 "PO-Revision-Date: 2000-11-15 12:00+0300\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -614,7 +614,22 @@ msgstr "Tiedostolla ei ole oikeanlaista p‰‰tett‰\n"
 msgid "The file %s was not found."
 msgstr "Tiedostoa %s ei lˆytynyt."
 
-#: src/file.c:161
+#: src/file.c:79
+msgid ""
+"Hello Dear Translator :\n"
+"This is the unstable branch of gedit. \n"
+"I think you should be translating the gedit-1-0 branch. To get it from cvs "
+"type : \n"
+"cvs -z3 co -r gedit-1-0 gedit\n"
+"Thank you. Chema"
+msgstr "Tervehdys hyv‰ k‰‰nt‰j‰ :\n"
+"T‰m‰ on geditin ep‰vakaa haara. \n"
+"Luullakseni sinun pit‰isi olla k‰‰nt‰m‰ss‰ gedit-1-0 -haaraa. Saadaksesi"
+" sen cvs:st‰, komenna: \n"
+"cvs -z3 co -r gedit-1-0 gedit\n"
+"Kiitos. Chema"
+
+#: src/file.c:169
 #, c-format
 msgid ""
 "An error was encountered while opening the file \"%s\".\n"
@@ -623,7 +638,7 @@ msgstr ""
 "Virhe avattaessa tiedostoa \"%s\".\n"
 "Varmista, ett‰ tiedosto on olemassa."
 
-#: src/file.c:172
+#: src/file.c:180
 #, c-format
 msgid ""
 "An error was encountered while opening the file:\n"
@@ -642,11 +657,11 @@ msgstr ""
 "Varmista, ettei mik‰‰n muu sovellus k‰yt‰ tiedostoa,\n"
 "ja ettei tiedosto ole tyhj‰."
 
-#: src/file.c:183 src/file.c:467
+#: src/file.c:191 src/file.c:475
 msgid "Could not allocate the required memory."
 msgstr "Operaatiolle ei voitu varata tarvittavaa m‰‰r‰‰ muistia."
 
-#: src/file.c:189
+#: src/file.c:197
 #, c-format
 msgid ""
 "gedit was unable to open the file: \n"
@@ -661,15 +676,15 @@ msgstr ""
 "\n"
 "Varmista, ett‰ sinulla on lukuoikeudet tiedostoon."
 
-#: src/file.c:306
+#: src/file.c:314
 msgid "Save As..."
 msgstr "Tallenna nimell‰..."
 
-#: src/file.c:365
+#: src/file.c:373
 msgid "The document contains no data."
 msgstr "Asiakirja on tyhj‰"
 
-#: src/file.c:376
+#: src/file.c:384
 #, c-format
 msgid ""
 "gedit was unable to save the file: \n"
@@ -686,7 +701,7 @@ msgstr ""
 "Varmista, ett‰ antamasi polku on olemassa, ja ett‰ sinulla on asiaankuuluvat "
 "kirjoitusoikeudet."
 
-#: src/file.c:389
+#: src/file.c:397
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -703,7 +718,7 @@ msgstr ""
 "Syy tuntematon (1). Pyyd‰mme sinua ilmoittamaan ongelmasta osoitteeseen "
 "submit@bugs.gnome.org"
 
-#: src/file.c:406
+#: src/file.c:414
 #, c-format
 msgid ""
 "gedit was unable to save the file :\n"
@@ -720,42 +735,42 @@ msgstr ""
 "Syy tuntematon (2). Pyyd‰mme sinua ilmoittamaan ongelmasta osoitteeseen "
 "submit@bugs.gnome.org"
 
-#: src/file.c:487
+#: src/file.c:495
 msgid "Error in the pipe ."
 msgstr "Vika putkessa (pipe) ."
 
-#: src/file.c:598 src/file.c:605
+#: src/file.c:606 src/file.c:613
 #, c-format
 msgid "Loaded file %s"
 msgstr "Ladattu tiedosto %s"
 
-#: src/file.c:612
+#: src/file.c:620
 #, c-format
 msgid "Loaded %i files"
 msgstr "Ladattu %i tiedostoa"
 
-#: src/file.c:668
+#: src/file.c:676
 msgid "Open File ..."
 msgstr "Avaa tiedosto ..."
 
-#: src/file.c:799
+#: src/file.c:807
 #, c-format
 msgid "``%s'' is about to be overwritten. Do you want to continue ?"
 msgstr "Haluatko korvata tiedoston ``%s'' ?"
 
-#: src/file.c:811
+#: src/file.c:819
 msgid "Document has not been saved."
 msgstr "Asiakirjaa ei tallennettu."
 
-#: src/file.c:821
+#: src/file.c:829
 msgid "Error saving file!"
 msgstr "Virhe tallennettaessa tiedostoa!"
 
-#: src/file.c:941
+#: src/file.c:949
 msgid "You can't revert an Untitled document\n"
 msgstr "Et voi palauttaa Nimettˆm‰‰n asiakirjaan\n"
 
-#: src/file.c:954
+#: src/file.c:962
 #, c-format
 msgid ""
 "Are you sure you wish to revert all changes?\n"
@@ -764,7 +779,7 @@ msgstr ""
 "Haluatko varmasti palauttaa kaikki muutokset ennalleen?\n"
 "(%s)"
 
-#: src/file.c:985
+#: src/file.c:993
 #, c-format
 msgid "The file ``%s'' does not exist.  Would you like to create it?"
 msgstr "Tiedostoa ``%s'' ei ole olemassa.  Haluatko luoda sen?"
