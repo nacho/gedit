@@ -279,7 +279,12 @@ gedit_document_init (GeditDocument *document)
 	enc = gedit_encoding_get_utf8 ();
 		
 	document->priv->encoding = g_strdup (
-				gedit_encoding_get_charset (enc));			
+				gedit_encoding_get_charset (enc));
+
+	gedit_document_set_max_undo_levels (document,
+					    gedit_prefs_manager_get_undo_actions_limit ());    
+
+	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (document), FALSE);
 }
 
 static void
@@ -371,11 +376,6 @@ gedit_document_new (void)
   	
 	document->priv->untitled_number = gedit_document_get_untitled_number ();
 	g_return_val_if_fail (document->priv->untitled_number > 0, NULL);
-
-	gedit_document_set_max_undo_levels (document,
-					    gedit_prefs_manager_get_undo_actions_limit ());    
-
-	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (document), FALSE);
 		
 	return document;
 }
