@@ -56,6 +56,8 @@
 GeditMDI *gedit_mdi = NULL;
 BonoboObject *gedit_app_server = NULL;
 
+static guint32 startup_timestamp = 0;
+
 static gchar *encoding_charset = NULL;
 static gboolean quit_option = FALSE;
 static gboolean new_window_option = FALSE;
@@ -291,7 +293,7 @@ gedit_handle_automation (GnomeProgram *program)
 	g_free (stdin_data);
 
 	/* at the very least, we focus the active window */
-	GNOME_Gedit_Window_grabFocus (window, &env);
+	GNOME_Gedit_Window_grabFocus (window, startup_timestamp, &env);
 
 	bonobo_object_release_unref (server, &env);
         CORBA_exception_free (&env);
@@ -299,6 +301,42 @@ gedit_handle_automation (GnomeProgram *program)
 	/* we never popup a window, so tell startup-notification that
 	 * we're done */
 	gdk_notify_startup_complete ();
+}
+
+static guint32
+get_startup_timestamp ()
+{
+	const gchar *startup_id_env;
+	gchar *startup_id;
+	gchar *time_str;
+	gchar *end;
+	gulong retval;
+
+	/* we don't unset the env, since startup-notification
+	 * may still need it */
+	startup_id_env = g_getenv ("DESKTOP_STARTUP_ID");
+	if (startup_id_env == NULL)
+		goto error;
+
+	startup_id = g_strdup (startup_id_env);
+
+	time_str = g_strrstr (startup_id, "_TIME");
+	if (time_str == NULL)
+		goto error;
+
+	errno = 0;
+
+	/* Skip past the "_TIME" part */
+	time_str += 5;
+
+	retval = strtoul (time_str, &end, 0);
+	if (end == time_str || errno != 0)
+		goto error;
+
+	return (retval > 0) ? retval : 0;
+
+ error:
+	return 0;
 }
 
 int
@@ -313,6 +351,8 @@ main (int argc, char **argv)
 
 	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
 	textdomain (GETTEXT_PACKAGE);
+
+	startup_timestamp = get_startup_timestamp();
 
 	/* Initialize gnome program */
 	program = gnome_program_init ("gedit", VERSION,

@@ -26,7 +26,7 @@ module GNOME {
 			oneway void openURIList (in URIList locations,
 						 in string enc_charset,
 						 in long line_pos);
-			oneway void grabFocus ();
+			oneway void grabFocus (in long time_stamp);
 			Document newDocument (in boolean force);
 		};
 

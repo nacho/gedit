@@ -31,6 +31,8 @@
 #include <config.h>
 #endif
 
+#include <gdk/gdkx.h>
+
 #include <bonobo/bonobo-generic-factory.h>
 #include <bonobo/bonobo-main.h>
 #include <bonobo/bonobo-context.h>
@@ -113,11 +115,19 @@ impl_gedit_window_server_newDocument (PortableServer_Servant _servant,
 
 static void
 impl_gedit_window_server_grabFocus (PortableServer_Servant _servant,
-					 CORBA_Environment * ev)
+				    gint time_stamp,
+				    CORBA_Environment *ev)
 {
 	BonoboWindow *window;
 
 	window = gedit_get_active_window ();
+
+	/* fall back to roundtripping to the X server. lame. */
+	if (time_stamp <= 0)
+		time_stamp = gdk_x11_get_server_time (GTK_WIDGET (window)->window);
+
+	gdk_x11_window_set_user_time (GTK_WIDGET (window)->window,
+				      time_stamp);
 	gtk_window_present (GTK_WINDOW (window));
 }
 
