@@ -49,20 +49,6 @@ typedef struct _gE_search {
 	GtkWidget *line_item, *text_item;
 } gE_search;
 
-typedef struct _gE_text_popupmenu{
-	GtkWidget *menu;
-	GtkWidget *menu_swaphc;
-	GtkWidget *menu_separator1;
-	GtkWidget *menu_cut;
-	GtkWidget *menu_copy;
-	GtkWidget *menu_paste;
-	GtkWidget *menu_separator2;
-	GtkWidget *menu_open_in_new_win;
-	GtkWidget *menu_close;
-	GtkWidget *menu_save;
-	GtkWidget *menu_print;
-}gE_text_popupmenu;
-
 typedef struct _gE_window {
 	GtkWidget *window;
 	GtkWidget *statusbox;
@@ -84,7 +70,7 @@ typedef struct _gE_window {
 	GtkAcceleratorTable *accel;
 #endif
 	GList *documents;
-	gE_text_popupmenu *popup;
+	GtkWidget *popup;
 	gE_search *search;
 	int num_recent; /* Number of recently accessed documents in the 
 	                         Recent Documents menu */
@@ -120,6 +106,9 @@ typedef struct _gE_document {
 	gint changed;
 	gint word_wrap;
 	struct stat *sb;
+	#ifndef WITHOUT_GNOME
+	GtkWidget *scrollball;
+	#endif
 	#ifdef GTK_HAVE_FEATURES_1_1_0
 	gint split;
 	GtkWidget *split_screen;

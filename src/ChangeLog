@@ -1,25 +1,63 @@
+1998-08-10  Evan Lawrence <evan@worldpath.net>
+
+	* Committed Andy's patch (we do care Andy ;-)
+
+	* Added Toggle Scrollball option to the options menu...
+
+1998-08-10  Andy Kahn <kahn@zk3.dec.com>
+
+	* rewrite and improve popup-menu-on-right-mouse-click.  specifically:
+
+		- drop gE_text_popupmenu from main.h.  there is no good reason
+		to be storing every widget used to make the popup menu.  all
+		that is needed is a pointer to the top-level menu widget.
+
+		- make all the popup menu routines private only within
+		gE_document.c because they're never used anywhere else.
+
+		- use a table to generate the menu instead of individually
+		adding each one (eliminate repetitive code).
+
+		- when swapping .c and .h files, now swaps .cpp files and
+		handles upper/lower case too (e.g., swap .H and .C).
+
+	* menus.c: add ifdef GTK_HAVE_FEATURES_1_1_0 for the split-screen
+	menu entry.
+
+	* gE_document.c: code cleanup, reindendation.
+
+	* gE_files.c: drop unused variables from gE_file_open().
+
+	* rename file_open_in_new_win_cmd_callback to file_open_in_new_win_cb.
+	it's still a long name, but not ridiculously long. :)
+
+	* add dialog.[ch] to GTK.Makefile.am
+
+	* fix indendation in ChangeLog.
+
 1998-08-09  Evan Lawrence <evan@worldpath.net>
 
 	* Added "Open in new window" to the right-click popup-menu that calls
-	  file_open_in_new_win_cmd_callback, so that now you can be editting a file
-	  and immediately switch it over to its own window - will also help for when
-	  we implement DND to the desktop...
+	  file_open_in_new_win_cmd_callback, so that now you can be editting
+	  a file and immediately switch it over to its own window - will also
+	  help for when we implement DND to the desktop...
 
-	* Implemented (slightly buggy) split-screen support for users with gtk 1.1 
-	  - still needs proper prefs implemented, as it's always on at startup now...
+	* Implemented (slightly buggy) split-screen support for users with gtk
+	  1.1 - still needs proper prefs implemented, as it's always on at
+	  startup now...
 
 1998-08-08  Evan Lawrence <evan@worldpath.net>
 
-	* Committed Andy's patch below, after making the neccassary modifications
-	  to the toolbar routines to get the gnome version to work, and removed the
-	  plugin changes per Chris's request - he made some changes today that
-	  weren't taken into account in the patch...
+	* Committed Andy's patch below, after making the neccassary
+	  modifications to the toolbar routines to get the gnome version to
+	  work, and removed the plugin changes per Chris's request - he made
+	  some changes today that weren't taken into account in the patch...
 
 	* Added the patch from Mikael Hermansson that creates a popup menu
-	  when you right click on the text widget, after I moved a couple items around
-	  to (I hope - this is debatable) more logical position, and added a couple more
-	  functions (Save and Print.) Also added the proper internationalization support
-	  for the gnome version...
+	  when you right click on the text widget, after I moved a couple
+	  items around to (I hope - this is debatable) more logical position,
+	  and added a couple more functions (Save and Print.) Also added the
+	  proper internationalization support for the gnome version...
 
 1998-08-08  Andy Kahn <kahn@zk3.dec.com>
 

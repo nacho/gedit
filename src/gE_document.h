@@ -40,14 +40,14 @@ extern gE_window *gE_window_new();
 extern gE_document *gE_document_new(gE_window *window);
 extern gE_document *gE_document_current(gE_window *window);
 extern void gE_document_toggle_wordwrap (GtkWidget *w, gpointer cbwindow);
+#ifdef GTK_HAVE_FEATURES_1_1_0
+extern void gE_document_toggle_scrollball (GtkWidget *w, gE_window *window);
+#endif
 extern void gE_msgbar_set(gE_window *window, char *msg);
 extern void gE_msgbar_clear(gpointer data);
 extern void gE_msgbar_timeout_add(gE_window *window);
 extern void notebook_switch_page(GtkWidget *w, GtkNotebookPage *page,
     gint num, gE_window *window);
-void gE_window_create_popupmenu(gE_data *);
-void gE_document_cmd_callback_swaphc(GtkWidget *w,gE_window *window);
-gint gE_document_callback_showpopup(GtkWidget *widget,GdkEvent *ev); 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

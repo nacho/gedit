@@ -95,8 +95,15 @@ static GtkMenuEntry menu_items[] =
 		gE_window_toggle_statusbar, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toggle Wordwrap", NULL,
 		gE_document_toggle_wordwrap, (gpointer)GE_WINDOW, NULL},
+#ifdef GTK_HAVE_FEATURES_1_1_0
 	{"<Main>/Options/Toggle Split Screen", NULL,
 		options_toggle_split_screen, (gpointer)GE_WINDOW, NULL},
+#endif
+
+#ifndef WITHOUT_GNOME
+	{"<Main>/Options/Toggle Scrollball", NULL,
+		gE_document_toggle_scrollball, (gpointer) GE_WINDOW, NULL},
+#endif
 	{"<Main>/Options/<separator>", NULL, NULL, NULL},
 	{"<Main>/Options/Document Tabs", NULL, NULL, NULL},
 	{"<Main>/Options/Document Tabs/Top", NULL,
@@ -409,6 +416,9 @@ GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, gE_window_toggle_statusbar, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, gE_document_toggle_wordwrap, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Split Screen"), NULL, options_toggle_split_screen, (gpointer) GE_WINDOW, NULL },
+#ifndef WITHOUT_GNOME
+	{ GNOME_APP_UI_ITEM, N_("Toggle Scrollball"), NULL, gE_document_toggle_scrollball, (gpointer) GE_WINDOW, NULL },
+#endif
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_SUBTREE, N_("Document Tabs"), NULL, &gedit_tab_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Toolbar"), NULL, &gedit_toolbar_menu },
@@ -507,6 +517,10 @@ void gE_menus_init (gE_window *window, gE_data *data)
 #if 0
 	remove_callback_data (gedit_help_menu, window, data);
 #endif
+
+	/* Decrease the padding along the menubar */
+	gtk_container_border_width (GTK_CONTAINER (
+		GTK_WIDGET (GTK_WIDGET (GNOME_APP (window->window)->menubar)->parent)->parent), 0);
 }
 
 
