@@ -49,6 +49,8 @@
 #include "gedit-encodings.h"
 #include "gedit-debug.h"
 
+#define STDIN_DELAY_MICROSECONDS 100000
+
 /* =================================================== */
 /* Flash */
 
@@ -1548,13 +1550,19 @@ gedit_utils_get_stdin (void)
 {
 	GString * file_contents;
 	gchar *tmp_buf = NULL;
-	struct stat stats;
 	guint buffer_length;
 	GnomeVFSResult	res;
+	fd_set rfds;
+	struct timeval tv;
 	
-	fstat (STDIN_FILENO, &stats);
-	
-	if (stats.st_size  == 0)
+	FD_ZERO (&rfds);
+	FD_SET (0, &rfds);
+
+	/* wait for 1/4 of a second */
+	tv.tv_sec = 0;
+	tv.tv_usec = STDIN_DELAY_MICROSECONDS;
+
+	if (select (1, &rfds, NULL, NULL, &tv) != 1)
 		return NULL;
 
 	tmp_buf = g_new0 (gchar, GEDIT_STDIN_BUFSIZE + 1);

@@ -1,3 +1,10 @@
+2002-12-05  James Willcox  <jwillcox@gnome.org>
+
+	* gedit-utils.c: (gedit_utils_get_stdin):
+
+	Use select() to see if stuff is available for reading instead of
+	fstat().  This should be more reliable.
+
 2002-12-04  James Willcox  <jwillcox@gnome.org>
 
 	* dialogs/gedit-dialog-goto-line.c: (dialog_goto_line_get_dialog):
