@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2002-05-07 12:43+0200\n"
-"PO-Revision-Date: 2002-05-07 12:44+0200\n"
+"POT-Creation-Date: 2002-05-16 23:16+0200\n"
+"PO-Revision-Date: 2002-05-16 23:16+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -307,7 +307,7 @@ msgstr "Tegn (med mellomrom)"
 msgid "File Name"
 msgstr "Filnavn"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:282
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
 msgid "Lines"
 msgstr "Linjer"
 
@@ -531,7 +531,7 @@ msgid "Could not create the Plugin Manager dialog"
 msgstr "Kunne ikke opprette dialog for tilleggshåndterer"
 
 #: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:56
 msgid "Replace"
 msgstr "Erstatt"
 
@@ -540,12 +540,12 @@ msgid "Replace _All"
 msgstr "Erstatt _alle"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:109
-#: src/gedit-ui.xml.h:104
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
+#: src/gedit-ui.xml.h:103
 msgid "_Replace"
 msgstr "E_rstatt"
 
-#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:26
+#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
 msgid "Find"
 msgstr "Finn"
 
@@ -626,12 +626,12 @@ msgid "Line numbers"
 msgstr "Linjenummer"
 
 #: src/dialogs/gedit-preferences-dialog.c:245
-#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:63
+#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
 msgid "Save"
 msgstr "Lagre"
 
 #: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:83
+#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:81
 msgid "Undo"
 msgstr "Angre"
 
@@ -648,7 +648,8 @@ msgid "Editor"
 msgstr "Editor"
 
 #: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-ui.xml.h:47
+#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
+#: src/gedit-ui.xml.h:45
 msgid "Print"
 msgstr "Skriv ut"
 
@@ -660,7 +661,7 @@ msgstr "Brukergrensesnitt"
 msgid "Cat_egories:"
 msgstr "Kat_egorier"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:46
+#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
 msgid "Preferences"
 msgstr "Brukervalg"
 
@@ -983,7 +984,7 @@ msgstr "Skri_ft som brukes ved redigering: "
 msgid "_Font used to print headers:"
 msgstr "Skri_ft som brukes ved utskrift av topptekst:"
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:97
+#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:96
 msgid "_Icon"
 msgstr "_Ikon"
 
@@ -1203,42 +1204,46 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit er en liten lettvekt tekst editor for GNOME"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:533 src/gedit-document.c:544
+#: src/gedit-document.c:549 src/gedit-document.c:572
 msgid "Untitled"
 msgstr "Navnløs"
 
-#: src/gedit-document.c:660 src/gedit-document.c:766
+#: src/gedit-document.c:556 src/gedit-document.c:579
+msgid "Invalid file name"
+msgstr "Ugyldig filnavn"
+
+#: src/gedit-document.c:700 src/gedit-document.c:806
 msgid "Invalid UTF-8 data"
 msgstr "Ugyldige UTF-8-data"
 
-#: src/gedit-document.c:966
+#: src/gedit-document.c:1006
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kunne ikke lese informasjon om symbolsk lenke %s"
 
-#: src/gedit-document.c:1012
+#: src/gedit-document.c:1052
 msgid "The file has too many symbolic links."
 msgstr "Filen har for mange symbolske lenker."
 
-#: src/gedit-document.c:1061
+#: src/gedit-document.c:1101
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan ikke håndtere %s: lokasjoer i skrivemodus."
 
-#: src/gedit-document.c:1068
+#: src/gedit-document.c:1108
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit kan ikke håndtere denne typen lokasjon i skrivemodus."
 
-#: src/gedit-document.c:1080
+#: src/gedit-document.c:1120
 msgid "Invalid filename."
 msgstr "Ugyldig filnavn."
 
-#: src/gedit-document.c:1158
+#: src/gedit-document.c:1198
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1246,22 +1251,25 @@ msgstr ""
 "Det er ikke nok plass på disken til å lagre filen.\n"
 "Vennligst frigjør plass og prøv igjen."
 
-#: src/gedit-document.c:1163
+#: src/gedit-document.c:1203
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
-msgstr "Disken du prøver å lagre filen på har en begrensning på filstørrelse. Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har denne begrensningen."
+msgstr ""
+"Disken du prøver å lagre filen på har en begrensning på filstørrelse. "
+"Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har "
+"denne begrensningen."
 
-#: src/gedit-document.c:1200
+#: src/gedit-document.c:1240
 msgid "Could not create a backup file."
 msgstr "Kunne ikke opprette sikkerhetskopi."
 
-#: src/gedit-document.c:1348
+#: src/gedit-document.c:1388
 msgid "It is not possible to revert an Untitled document"
 msgstr "Du kan ikke forkaste et dokument uten tittel"
 
-#: src/gedit-file-selector-util.c:97
+#: src/gedit-file-selector-util.c:96
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1270,11 +1278,11 @@ msgstr ""
 "En fil med navn «%s» eksisterer allerede.\n"
 "Vil du erstatte den med filen du lagrer?"
 
-#: src/gedit-file-selector-util.c:105
+#: src/gedit-file-selector-util.c:104
 msgid "Do_n't replace"
 msgstr "I_kke erstatt"
 
-#: src/gedit-file-selector-util.c:459
+#: src/gedit-file-selector-util.c:481
 msgid "Select a filename to save"
 msgstr "Velg et filnavn for lagring"
 
@@ -1282,54 +1290,54 @@ msgstr "Velg et filnavn for lagring"
 msgid "Open File ..."
 msgstr "Åpne fil ..."
 
-#: src/gedit-file.c:134 src/gedit-file.c:636
+#: src/gedit-file.c:141 src/gedit-file.c:708
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Lastet fil «%s»"
 
-#: src/gedit-file.c:242 src/gedit-file.c:314
+#: src/gedit-file.c:264 src/gedit-file.c:351
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Lagrer fil «%s»..."
 
-#: src/gedit-file.c:263 src/gedit-file.c:321
+#: src/gedit-file.c:285 src/gedit-file.c:361
 msgid "The document has not been saved."
 msgstr "Dokumentet er ikke lagret."
 
-#: src/gedit-file.c:275 src/gedit-file.c:319
+#: src/gedit-file.c:299 src/gedit-file.c:358
 #, c-format
 msgid "File '%s' saved."
 msgstr "Fil «%s» lagret."
 
-#: src/gedit-file.c:306
+#: src/gedit-file.c:340
 msgid "Save as ..."
 msgstr "Lagre som..."
 
-#: src/gedit-file.c:464
+#: src/gedit-file.c:519
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Forkaster endringer i fil «%s»..."
 
-#: src/gedit-file.c:477
+#: src/gedit-file.c:532
 msgid "The document has not been reverted."
 msgstr "Endringer i dokumentet ble ikke forkastet."
 
-#: src/gedit-file.c:487
+#: src/gedit-file.c:542
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Forkastet endringer i fil «%s»."
 
-#: src/gedit-file.c:530
+#: src/gedit-file.c:589
 #, c-format
 msgid "Loading %d file..."
 msgstr "Laster %d fil..."
 
-#: src/gedit-file.c:566
+#: src/gedit-file.c:625
 #, c-format
 msgid "Loaded %i files"
 msgstr "Lastet %i filer"
 
-#: src/gedit-file.c:690
+#: src/gedit-file.c:766
 msgid "Could not read data from stdin."
 msgstr "Kunne ikke lese data fra stdin."
 
@@ -1414,7 +1422,7 @@ msgstr "Feil. Umulig å deaktivere tillegg «%s»"
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "Feil. Umulig å oppdatere ui for tillegg «%s»"
 
-#: src/gedit-print.c:166
+#: src/gedit-print.c:178
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -1422,26 +1430,22 @@ msgstr ""
 "gedit kan ikke skrive ut fordi en av skriftene\n"
 "ikke kan finnes."
 
-#: src/gedit-print.c:273
-msgid "gedit - Print Document"
-msgstr "gedit - Skriv ut dokument"
-
-#: src/gedit-print.c:338
+#: src/gedit-print.c:354
 #, c-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
 #. Print right text
-#: src/gedit-print.c:343
+#: src/gedit-print.c:359
 #, c-format
 msgid "Page: %d"
 msgstr "Side: %d"
 
-#: src/gedit-print.c:476
+#: src/gedit-print.c:492
 msgid "gedit - Print Preview"
 msgstr "gedit: Forhåndsvisning"
 
-#: src/gedit-print.c:552
+#: src/gedit-print.c:566
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1457,414 +1461,410 @@ msgid "About this application"
 msgstr "Om denne applikasjonen"
 
 #: src/gedit-ui.xml.h:2
-msgid "About..."
-msgstr "Om..."
-
-#: src/gedit-ui.xml.h:3
 msgid "Add/Remove plugins"
 msgstr "Legg til/fjern tillegg"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
 msgstr "Tilpass stat_uslinjen"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "Endre synlighet for statuslinjen i aktivt vindu"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "Endre synlighet for verktøylinen i aktivt vindu"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Clos_e All"
 msgstr "Lukk all_e"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close"
 msgstr "Lukk"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close All"
 msgstr "Lukk alle"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close all open files"
 msgstr "Lukk alle åpne filer"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Close the current file"
 msgstr "Lukk aktiv fil"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Configure the application"
 msgstr "Konfigurer applikasjonen"
 
-#: src/gedit-ui.xml.h:13
-msgid "Contents"
-msgstr "Innhold"
-
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:12
 msgid "Copy"
 msgstr "Kopier"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:13
 msgid "Copy the selection"
 msgstr "Kopier utvalget"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:14
 msgid "Create a new document"
 msgstr "Opprett et nytt dokument"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:15
 msgid "Cu_t"
 msgstr "Klipp u_t"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:16
 msgid "Customize"
 msgstr "Tilpass"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:17
 msgid "Customize toolbars"
 msgstr "Tilpass verktøylinjer"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:18
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:19
 msgid "Cut the selection"
 msgstr "Klipp ut utvalget"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:20
 msgid "Delete"
 msgstr "Slett"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:21
 msgid "Delete the selected text"
 msgstr "Slett valgt tekst"
 
-#: src/gedit-ui.xml.h:24
+#: src/gedit-ui.xml.h:22
 msgid "Dump XML"
 msgstr "Dump XML"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:23
 msgid "Dump the UI Xml description"
 msgstr "Dump UI-beskrivelse i XML"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:25
 msgid "Find Again"
 msgstr "Finn igjen"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:26
 msgid "Find Ne_xt"
 msgstr "Finn ne_ste"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:27
 msgid "Go to a specific line number"
 msgstr "Gå til en spesifikk linje"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:28
 msgid "Goto _Line"
 msgstr "Gå til _linje"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:29
 msgid "Icon and _Text"
 msgstr "Ikon og _tekst"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:30
 msgid "Main toolbar"
 msgstr "Hovedverktøylinje"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:31
 msgid "New"
 msgstr "Ny"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:32
 msgid "Only show icons in the toolbar"
 msgstr "Vis kun ikoner i verktøylinjen"
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:33
 msgid "Open"
 msgstr "Åpne"
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:34
 msgid "Open Location..."
 msgstr "Åpne lokasjon ..."
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:35
 msgid "Open _Location..."
 msgstr "Åpne _lokasjon ..."
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:36
 msgid "Open a file"
 msgstr "Åpne en fil"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:37
 msgid "Open a file from a specified location"
 msgstr "Åpne en fil fra en spesifisert lokasjon"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:38
 msgid "Open the gedit manual"
 msgstr "Åpne gedit-håndbok"
 
-#: src/gedit-ui.xml.h:41
+#: src/gedit-ui.xml.h:39
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/gedit-ui.xml.h:42
+#: src/gedit-ui.xml.h:40
 msgid "Paste the clipboard"
 msgstr "Lim inn utklippstavlen"
 
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:41
 msgid "Plugin _Manager"
 msgstr "Tilleggs_håndterer"
 
-#: src/gedit-ui.xml.h:44
+#: src/gedit-ui.xml.h:42
 msgid "Plugin _Manager..."
 msgstr "Tilleggs_håndterer..."
 
-#: src/gedit-ui.xml.h:45
+#: src/gedit-ui.xml.h:43
 msgid "Pr_eferences..."
 msgstr "Bruk_ervalg..."
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:46
 msgid "Print Previe_w"
 msgstr "Forhånds_visning av utskrift"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:47
 msgid "Print Preview"
 msgstr "Forhåndsvisning av utskrift"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:48
 msgid "Print Setup"
 msgstr "Skriveroppsett"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:49
 msgid "Print preview"
 msgstr "Forhåndsvisning"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:50
 msgid "Print the current file"
 msgstr "Skriv ut aktiv fil"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:51
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:52
 msgid "Quit the program"
 msgstr "Avslutt programmet"
 
-#: src/gedit-ui.xml.h:55
+#: src/gedit-ui.xml.h:53
 msgid "Recent _Files"
 msgstr "Sist åpnede _filer"
 
-#: src/gedit-ui.xml.h:56
+#: src/gedit-ui.xml.h:54
 msgid "Redo"
 msgstr "Gjenopprett"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:55
 msgid "Redo the undone action"
 msgstr "Gjenopprett forrige angrede handling"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:57
 msgid "Replace a string"
 msgstr "Erstatt en streng"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:58
 msgid "Revert"
 msgstr "Forkast"
 
-#: src/gedit-ui.xml.h:61
+#: src/gedit-ui.xml.h:59
 msgid "Revert to a saved version of the file"
 msgstr "Gå tilbake til lagret versjon av filen"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:60
 msgid "Sa_ve All"
 msgstr "La_gre alle"
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:62
 msgid "Save All"
 msgstr "Lagre alle"
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:63
 msgid "Save As"
 msgstr "Lagre som"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:64
 msgid "Save _As..."
 msgstr "L_agre som..."
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:65
 msgid "Save all open files"
 msgstr "Lagre alle åpne filer"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:66
 msgid "Save the current file"
 msgstr "Lagre aktiv fil"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:67
 msgid "Save the current file with a different name"
 msgstr "Lagre aktiv fil med et nytt navn"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:68
 msgid "Search again for the same string"
 msgstr "Søk på nytt etter samme streng"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:69
 msgid "Search for a string"
 msgstr "Søk etter en streng"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:70
 msgid "Select All"
 msgstr "Velg alt"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:71
 msgid "Select _All"
 msgstr "Velg _alt"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:72
 msgid "Select the entire document"
 msgstr "Velg hele dokumentet"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:73
 msgid "Set toolbar button style according to desktop default"
 msgstr "Sett verktøylinjen i henhold til forvalgt verdi for skrivebordet"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:74
 msgid "Setup the page settings for your current printer"
 msgstr "Sideoppsett for aktiv skriver"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:75
 msgid "Show _Cursor Position"
 msgstr "Vis mar_kørposisjonen"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:76
 msgid "Show _Overwrite Mode"
 msgstr "Vis _overskrivingsmodus"
 
-#: src/gedit-ui.xml.h:79
+#: src/gedit-ui.xml.h:77
 msgid "Show _Tooltips"
 msgstr "Vis verk_tøytips"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:78
 msgid "Show cursor position in the statusbar"
 msgstr "Vis markørposisjon i statuslinjen"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:79
 msgid "Show overwrite mode in the statusbar"
 msgstr "Vis overskrivingsmodus i statuslinjen"
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:80
 msgid "Show tooltips in the toolbar"
 msgstr "Vis verktøytips i verktøylinjen"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:82
 msgid "Undo the last action"
 msgstr "Angre forrige handling"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:83
 msgid "_About..."
 msgstr "_Om..."
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:84
 msgid "_Close"
 msgstr "_Lukk"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:85
+msgid "_Contents"
+msgstr "_Innhold"
+
+#: src/gedit-ui.xml.h:86
 msgid "_Copy"
 msgstr "_Kopier"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:87
 msgid "_Customize Toolbar"
 msgstr "_Tilpass verktøylinjen"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:88
 msgid "_Debug"
 msgstr "_Feilsøk"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:89
 msgid "_Delete"
 msgstr "_Slett"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:90
 msgid "_Desktop Default"
 msgstr "_Forvalgt verdi for skrivebord"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:91
 msgid "_Documents"
 msgstr "_Dokumenter"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:92
 msgid "_Edit"
 msgstr "R_ediger"
 
-#: src/gedit-ui.xml.h:94
+#: src/gedit-ui.xml.h:93
 msgid "_File"
 msgstr "_Fil"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:94
 msgid "_Find"
 msgstr "F_inn"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:95
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:97
 msgid "_New"
 msgstr "_Ny"
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:98
 msgid "_Open..."
 msgstr "_Åpne..."
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:99
 msgid "_Paste"
 msgstr "Li_m inn"
 
-#: src/gedit-ui.xml.h:101
+#: src/gedit-ui.xml.h:100
 msgid "_Print..."
 msgstr "S_kriv ut..."
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:101
 msgid "_Quit"
 msgstr "_Avslutt"
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:102
 msgid "_Redo"
 msgstr "_Gjenopprett"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:104
 msgid "_Revert"
 msgstr "Fo_rkast"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:105
 msgid "_Save"
 msgstr "_Lagre"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:106
 msgid "_Search"
 msgstr "_Søk"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:107
 msgid "_Statusbar"
 msgstr "_Statuslinje"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:108
 msgid "_Toolbar"
 msgstr "Verk_tøylinje"
 
-#: src/gedit-ui.xml.h:110
+#: src/gedit-ui.xml.h:109
 msgid "_Tools"
 msgstr "_Verktøy"
 
-#: src/gedit-ui.xml.h:111
+#: src/gedit-ui.xml.h:110
 msgid "_Undo"
 msgstr "_Angre"
 
-#: src/gedit-ui.xml.h:112
+#: src/gedit-ui.xml.h:111
 msgid "_View"
 msgstr "_Vis"
 
@@ -2152,54 +2152,63 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  SET"
 
-#: src/gedit2.c:68
+#: src/gedit2.c:69
 msgid "Show mdi debugging messages."
 msgstr "Vis feilsøkingsmeldinger for mdi."
 
-#: src/gedit2.c:71
+#: src/gedit2.c:72
 msgid "Show commands debugging messages."
 msgstr "Vis feilsøkingsmeldinger for kommandoer."
 
-#: src/gedit2.c:74
+#: src/gedit2.c:75
 msgid "Show document debugging messages."
 msgstr "Vis feilsøkingsmeldinger for dokumenter."
 
-#: src/gedit2.c:77
+#: src/gedit2.c:78
 msgid "Show file debugging messages."
 msgstr "Vis feilsøkingsmeldinger for filer."
 
-#: src/gedit2.c:80
+#: src/gedit2.c:81
 msgid "Show plugin debugging messages."
 msgstr "Vis feilsøkingsmeldinger for tillegg."
 
-#: src/gedit2.c:83
+#: src/gedit2.c:84
 msgid "Show prefs debugging messages."
 msgstr "Vis feilsøkingsmeldinger for brukervalg."
 
-#: src/gedit2.c:86
+#: src/gedit2.c:87
 msgid "Show printing debugging messages."
 msgstr "Vis feilsøkingsmeldinger for utskrift."
 
-#: src/gedit2.c:89
+#: src/gedit2.c:90
 msgid "Show search debugging messages."
 msgstr "Vis feilsøkingsmeldinger for søk."
 
-#: src/gedit2.c:92
+#: src/gedit2.c:93
 msgid "Show undo debugging messages."
 msgstr "Vis feilsøkingsmeldinger for angrefunksjon."
 
-#: src/gedit2.c:95
+#: src/gedit2.c:96
 msgid "Show view debugging messages."
 msgstr "Vis feilsøkingsmeldinger for visning."
 
-#: src/gedit2.c:98
+#: src/gedit2.c:99
 msgid "Show recent debugging messages."
 msgstr "Vis nylige feilsøkingsmeldinger."
 
-#: src/gedit2.c:101
+#: src/gedit2.c:102
+msgid "Show session management debugging messages."
+msgstr "Vis feilsøkingsmeldinger for sesjonshåndtering."
+
+#: src/gedit2.c:105
 msgid "Turn on all debugging messages."
 msgstr "Slå på alle feilsøkingsmeldinger."
 
-#: src/gedit2.c:159
+#: src/gedit2.c:164
 msgid "The GNOME text editor"
 msgstr "GNOME tekstredigering"
+
+#: src/gnome-recent-view-bonobo.c:189
+#, c-format
+msgid "Open %s"
+msgstr "Åpne %s"
