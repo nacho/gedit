@@ -63,7 +63,7 @@ plugin *plugin_new_with_query( gchar *plugin_name, gboolean query )
       close( new_plugin->pipe_to );
       close( new_plugin->pipe_from );
       close( new_plugin->pipe_data );
-      argv[0] = g_malloc0( 10 + strlen( new_plugin->name ) );
+      argv[0] = g_malloc0( 11 + strlen( new_plugin->name ) );
       sprintf( argv[0], "go-plugin-%s", new_plugin->name );
       argv[1] = g_strdup( "-go" );
       argv[2] = g_malloc0( 15 );
