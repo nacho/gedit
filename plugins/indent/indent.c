@@ -98,6 +98,11 @@ indent_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 	for (i = start_line; i <= end_line; i++) 
 	{
 		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc), &iter, i);
+
+		/* don't add indentation on empty lines */
+		if (gtk_text_iter_ends_line (&iter))
+			continue;
+
 		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, tab_buffer, -1);
 	}
 	
@@ -172,12 +177,10 @@ unindent_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 				gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &iter, &iter2);
 			}
 		}
-
 	}
 	
 	gedit_document_end_user_action (doc);
 }
-
 
 G_MODULE_EXPORT GeditPluginState
 update_ui (GeditPlugin *plugin, BonoboWindow *window)
@@ -269,7 +272,4 @@ init (GeditPlugin *pd)
 		
 	return PLUGIN_OK;
 }
-
-
-
 
