@@ -35,11 +35,12 @@ IDL_SOURCES = 				\
 	GNOME_Gedit-stubs.c		\
 	GNOME_Gedit-common.c		\
 	GNOME_Gedit-skels.c		\
-	GNOME_Gedit.h		
+	GNOME_Gedit.h
 
 BUILT_SOURCES = 			\
 	gedit-marshal.c			\
-	gedit-marshal.h	
+	gedit-marshal.h                 \
+	$(IDL_SOURCES)
 
 NON_INST_H_FILS =			\
 	gedit-application-server.h	\
@@ -85,7 +86,6 @@ header_DATA = 				\
 	$(LIB_H_FILES)
 
 gedit_SOURCES = 			\
-	$(IDL_SOURCES)			\
 	$(BUILT_SOURCES)		\
 	gedit2.c			\
 	gedit-mdi.c			\
@@ -133,8 +133,8 @@ gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"gedit-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
-$(IDL_SOURCES): $(IDL_FILE)
-	$(ORBIT_IDL) -I $(LIBBONOBO_IDL) -I $(BONOBO_ACTIVATION_IDL) $(IDL_FILE)
+$(IDL_SOURCES): $(IDL_FILE) $(ORBIT_IDL)
+	$(ORBIT_IDL) -I $(LIBBONOBO_IDL) -I $(BONOBO_ACTIVATION_IDL) $(srcdir)/$(IDL_FILE)
 
 ui_DATA = gedit-ui.xml
 uidir = $(datadir)/gedit-2/ui/
@@ -147,7 +147,10 @@ EXTRA_DIST = 				\
 	gedit-marshal.list		\
 	$(IDL_FILE)
 
-CLEANFILES = $(BUILT_SOURCES) $(IDL_SOURCES)
+CLEANFILES = $(BUILT_SOURCES)
+
+dist-hook:
+	cd $(distdir); rm -f $(BUILT_SOURCES)
 
 install-exec-local:
 	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
