@@ -131,7 +131,18 @@ gedit_file_open (GeditMDIChild *active_child)
 		for (i = 0; files[i]; ++i)
 		{
 			if (gedit_file_open_real (files[i], active_child))
-				gedit_utils_flash_va (_("Loaded file '%s'"), files[i]);
+			{
+				gchar *uri_utf8;
+
+				uri_utf8 = g_filename_to_utf8 (files[i], -1, NULL, NULL, NULL);
+
+				if (uri_utf8 != NULL)
+				{
+					gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);
+
+					g_free (uri_utf8);
+				}
+			}
 			
 			gedit_debug (DEBUG_FILE, "File: %s", files[i]);
 		}
@@ -144,13 +155,23 @@ static gboolean
 gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 {
 	GError *error = NULL;
-	gchar* uri;
+	gchar *uri;
+	gchar *uri_utf8;
 	GnomeRecentModel *recent;
 
 	gedit_debug (DEBUG_FILE, "File name: %s", file_name);
 
 	uri = gnome_vfs_x_make_uri_canonical (file_name);
 	g_return_val_if_fail (uri != NULL, FALSE);
+
+	uri_utf8 = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
+	if (uri_utf8 == NULL)
+	{
+		g_free (uri);
+
+		return FALSE;
+	}
+	
 	gedit_debug (DEBUG_FILE, "URI: %s", uri);
 
 	if (active_child == NULL ||
@@ -163,7 +184,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 		if (error)
 		{
-			gedit_utils_error_reporting_loading_file (uri, error,
+			gedit_utils_error_reporting_loading_file (uri_utf8, error,
 					GTK_WINDOW (gedit_get_active_window ()));
 			
 			g_error_free (error);
@@ -188,7 +209,7 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 
 		if (error)
 		{
-			gedit_utils_error_reporting_loading_file (uri, error,
+			gedit_utils_error_reporting_loading_file (uri_utf8, error,
 					GTK_WINDOW (gedit_get_active_window ()));
 			
 			g_error_free (error);
@@ -196,10 +217,11 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 			return FALSE;
 		}	
 	}
-
+	
 	recent = gedit_recent_get_model ();
-	gnome_recent_model_add (recent, uri);
+	gnome_recent_model_add (recent, uri_utf8);
 
+	g_free (uri_utf8);
 	g_free (uri);
 
 	gedit_debug (DEBUG_FILE, "END: %s\n", file_name);
@@ -268,6 +290,7 @@ gedit_file_save (GeditMDIChild* child)
 	}	
 	else
 	{
+		/* uri is a valid UT8 filename */
 		GnomeRecentModel *recent;
 
 		gedit_debug (DEBUG_FILE, "OK");
@@ -286,10 +309,11 @@ gedit_file_save (GeditMDIChild* child)
 gboolean
 gedit_file_save_as (GeditMDIChild *child)
 {
-	gchar* file;
+	gchar *file;
 	gboolean ret = FALSE;
 	GeditDocument *doc;
-	gchar* fname;
+	gchar *fname;
+	gchar *file_utf8;
 
 	gedit_debug (DEBUG_FILE, "");
 
@@ -309,20 +333,29 @@ gedit_file_save_as (GeditMDIChild *child)
 			fname);
 	g_free (fname);
 
-	if (file) 
+	file_utf8 = g_filename_to_utf8 (file, -1, NULL, NULL, NULL);
+
+	if (file != NULL) 
 	{
-		gedit_utils_flash_va (_("Saving file '%s' ..."), file);
+		if (file_utf8 != NULL)
+			gedit_utils_flash_va (_("Saving file '%s' ..."), file_utf8);
 		
 		ret = gedit_file_save_as_real (file, child);
 		
 		if (ret)
-			gedit_utils_flash_va (_("File '%s' saved."), file);
+		{
+			if (file_utf8 != NULL)
+				gedit_utils_flash_va (_("File '%s' saved."), file_utf8);
+		}
 		else
 			gedit_utils_flash_va (_("The document has not been saved."));
 
 		gedit_debug (DEBUG_FILE, "File: %s", file);
 		g_free (file);
 	}
+
+	if (file_utf8 != NULL)
+		g_free (file_utf8);
 
 	return ret;
 }
@@ -363,13 +396,25 @@ gedit_file_save_as_real (const gchar* file_name, GeditMDIChild *child)
 	}	
 	else
 	{
-		GnomeRecentModel *recent;
+		gchar *temp;
 
 		gedit_debug (DEBUG_FILE, "OK");
 
-		recent = gedit_recent_get_model ();
-		gnome_recent_model_add (recent, uri);
+		/* uri is not valid utf8 */
+		
+		temp = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
 
+		if (temp != NULL)
+		{
+			GnomeRecentModel *recent;
+
+			recent = gedit_recent_get_model ();
+			gnome_recent_model_add (recent, temp);
+
+			g_free (temp);
+		}
+
+		
 		g_free (uri);
 
 		return TRUE;
@@ -493,16 +538,20 @@ gedit_file_revert (GeditMDIChild *child)
 }
 
 static gchar *
-gedit_file_make_canonical_uri_from_shell_arg (const char *location)
+gedit_file_make_uri_from_shell_arg (const char *location)
 {
 	gchar* uri;
 	gchar* canonical_uri;
 	
-	gedit_debug (DEBUG_FILE, "");
+	gedit_debug (DEBUG_FILE, "LOCATION: %s", location);
 	
 	uri = gnome_vfs_x_make_uri_from_shell_arg (location);
 
-	canonical_uri = gnome_vfs_x_make_uri_canonical (uri);
+	gedit_debug (DEBUG_FILE, "URI: %s", uri);
+
+	canonical_uri = gnome_vfs_unescape_string_for_display (uri);
+
+	gedit_debug (DEBUG_FILE, "CANONICAL URI: %s", canonical_uri);
 
 	g_free (uri);
 
@@ -534,7 +583,7 @@ gedit_file_open_uri_list (GList* uri_list, gint line)
         /* create a file for each document in the parameter list */
 	for ( ; uri_list; uri_list = g_list_next (uri_list))
 	{
-		full_path = gedit_file_make_canonical_uri_from_shell_arg (uri_list->data);
+		full_path = gedit_file_make_uri_from_shell_arg (uri_list->data);
 		if (full_path != NULL) 
 		{
 			if (gedit_file_open_real (full_path, 
@@ -571,25 +620,31 @@ gedit_file_open_uri_list (GList* uri_list, gint line)
 gboolean 
 gedit_file_open_recent (GnomeRecentView *view, const gchar *uri, gpointer data)
 {
-	gboolean ret;
-	GnomeRecentModel *model;
+	gboolean ret = FALSE;
 	GeditView* active_view;
+	gchar *temp;
 
 	gedit_debug (DEBUG_FILE, "Open : %s", uri);
 
-	ret = gedit_file_open_single_uri (uri);
-	if (ret) {
-		model = gedit_recent_get_model ();
-		gnome_recent_model_add (model, uri);
+	temp = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+
+	if (temp != NULL)
+	{
+		ret = gedit_file_open_single_uri (temp);
+	
+		if (ret) {
+			GnomeRecentModel *model;
+
+			model = gedit_recent_get_model ();
+			gnome_recent_model_add (model, uri);
+		}
 	}
 		
-
 	active_view = gedit_get_active_view ();
 	if (active_view != NULL)
 		gtk_widget_grab_focus (GTK_WIDGET (active_view));
 
 	gedit_debug (DEBUG_FILE, "END");
-
 
 	return ret;
 }
@@ -633,7 +688,18 @@ gedit_file_open_single_uri (const gchar* uri)
 		ret = gedit_file_open_real (full_path, 
 					    (active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL);
 		if (ret)
-			gedit_utils_flash_va (_("Loaded file '%s'"), full_path);
+		{
+			gchar *uri_utf8;
+
+			uri_utf8 = g_filename_to_utf8 (full_path, -1, NULL, NULL, NULL);
+
+			if (uri_utf8 != NULL)
+			{
+				gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);
+
+				g_free (uri_utf8);
+			}
+		}
 
 		g_free (full_path);
 	}
