@@ -14,6 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -1366,9 +1367,9 @@ msgid "Thai"
 msgstr "Tai"
 
 #: gedit/gedit-file-selector-util.c:153
-#, fuzzy, c-format
+#, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr "Fail \"%s\" on juba olemas."
+msgstr "Fail nimega \"%s\" on juba olemas.\n"
 
 #: gedit/gedit-file-selector-util.c:154
 #, fuzzy
@@ -1378,9 +1379,9 @@ msgstr ""
 "Kas tahad seda asendada salvestatava failiga?"
 
 #: gedit/gedit-file-selector-util.c:163
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr "Fail \"%s\" on juba olemas."
+msgstr "Fail \"%s\" on kirjutuskaitsega.\n"
 
 #: gedit/gedit-file-selector-util.c:164
 #, fuzzy
@@ -1425,14 +1426,14 @@ msgid "Saving document \"%s\"..."
 msgstr "Faili '%s' salvestamine..."
 
 #: gedit/gedit-file.c:297 gedit/gedit-file.c:443
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has not been saved."
-msgstr "Dokumenti ei ole veel salvestatud."
+msgstr "Dokumenti \"%s\" ei salvestatud."
 
 #: gedit/gedit-file.c:311 gedit/gedit-file.c:435
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has been saved."
-msgstr "Dokumenti ei ole veel salvestatud."
+msgstr "Dokument \"%s\" salvestati."
 
 #: gedit/gedit-file.c:402
 msgid "Save as..."
@@ -1513,19 +1514,19 @@ msgid "Error reverting the document \"%s\"."
 msgstr "Ei saa faili \"%s\" taastada."
 
 #: gedit/gedit-file.c:752
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has not been reverted."
-msgstr "Dokumenti ei taastatud."
+msgstr "Dokumenti \"%s\" ei taastatud."
 
 #: gedit/gedit-file.c:756
-#, fuzzy, c-format
+#, c-format
 msgid "The document \"%s\" has been reverted."
-msgstr "Dokumenti ei taastatud."
+msgstr "Dokument \"%s\" taastati."
 
 #: gedit/gedit-file.c:784
-#, fuzzy, c-format
+#, c-format
 msgid "Reverting the document \"%s\"..."
-msgstr "Faili '%s' taastamine..."
+msgstr "Dokumendi \"%s\" taastamine..."
 
 #: gedit/gedit-file.c:911
 msgid "Could not read data from stdin."
@@ -1547,21 +1548,21 @@ msgid "Error loading file \"%s\""
 msgstr ""
 
 #: gedit/gedit-file.c:1252
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded file \"%s\""
-msgstr "Laetud fail '%s'"
+msgstr "Laetud fail \"%s\""
 
 #: gedit/gedit-file.c:1329
-#, fuzzy, c-format
+#, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
-msgstr[0] "Laetud fail '%s'"
-msgstr[1] "Laetud fail '%s'"
+msgstr[0] "Laetud %d fail"
+msgstr[1] "Laetud %d faili"
 
 #: gedit/gedit-file.c:1363
-#, fuzzy, c-format
+#, c-format
 msgid "Loading file \"%s\"..."
-msgstr "%d faili laadimine..."
+msgstr "Laen faili \"%s\"..."
 
 #: gedit/gedit-file.c:1510
 #, fuzzy, c-format
@@ -2311,12 +2312,14 @@ msgstr ""
 "korrektsed ja proovi uuesti."
 
 #: gedit/gedit-utils.c:666
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
 "\n"
 "%s."
-msgstr "Ei saa faili \"%s\" avada."
+msgstr "Faili \"%s\" ei saa avada.\n"
+"\n"
+"%s."
 
 #: gedit/gedit-utils.c:718
 #, c-format
