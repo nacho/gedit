@@ -17,14 +17,75 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include "client.h"
 #include <glib.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
-#include "client.h"
+#include <errno.h>
 
-static int getnumber( int fd )
+static gchar *
+get_physical_block( gint length, gint fd )
+{
+  gint bytes;
+  gchar *buffer, *start;
+  start = buffer = g_malloc0( length + 1 );
+  while( length > 0 )
+    {
+      do
+	{
+	  bytes = read( fd, buffer, length );
+	} while ( ( bytes == -1 ) && ( ( errno==EAGAIN ) || ( errno==EINTR ) ) );
+
+      if ( bytes == -1 )
+	{
+	  g_warning( "Plugin: Error reading from application\n" );
+	  return NULL;
+	}
+
+      if ( bytes == 0 )
+	{
+	  g_warning( "Plugin: Error EOF read?\n" );
+	  return NULL;
+	}
+
+      length -= bytes;
+      buffer += bytes;
+    }
+  return start;
+}
+
+static void
+send_physical_block( gchar *buffer, gint length, gint fd )
+{
+  gint bytes;
+  while( length > 0 )
+    {
+      do
+	{
+	  bytes = write( fd, buffer, length );
+	} while ( ( bytes == -1 ) && ( ( errno==EAGAIN ) || ( errno==EINTR ) ) );
+
+      if ( bytes == -1 )
+	{
+	  g_warning( "Plugin: Error writing to application\n" );
+	  return;
+	}
+
+      if ( bytes == 0 )
+	{
+	  g_warning( "Plugin: Error EOF write?\n" );
+	  return;
+	}
+
+      length -= bytes;
+      buffer += bytes;
+    }
+  return;
+}
+
+static int
+getnumber( int fd )
 {
   int number = 0;
   int length = sizeof( int );
@@ -38,7 +99,18 @@ static int getnumber( int fd )
   return number;
 }
 
-static gboolean getbool( int fd )
+static gchar *
+getblock( int fd )
+{
+  gchar *buffer = get_physical_block( getnumber( fd ), fd );
+#ifdef DEBUG
+  printf( "To: %s\n", buffer );
+#endif
+  return buffer;
+}
+
+static gboolean
+getbool( int fd )
 {
   unsigned char number = 0;
   if ( read( fd, &number, 1 ) )
@@ -51,12 +123,23 @@ static gboolean getbool( int fd )
   else return TRUE;
 }
 
-static void putnumber( int fd, int number )
+static void
+sendnumber( int fd, int number )
 {
   write( fd, &number, sizeof( number ) );
 #ifdef DEBUG
   printf( "From: %d\n", number );
 #endif
+}
+
+static void
+sendblock( int fd, gchar *buffer, gint length )
+{
+  sendnumber( fd, length );
+#ifdef DEBUG
+  printf( "From: %s\n", buffer );
+#endif
+  send_physical_block( buffer, length, fd );
 }
 
 static int fd;
@@ -84,7 +167,7 @@ gint client_init( gint *argc, gchar **argv[], client_info *info )
 #ifdef DEBUG
 	  printf( "From: r\n" );
 #endif
-	  putnumber( fdsend, strlen( info->menu_location ) );
+	  sendnumber( fdsend, strlen( info->menu_location ) );
 	  write( fdsend, info->menu_location, strlen( info->menu_location ) );
 #ifdef DEBUG
 	  printf( "From: %s\n", info->menu_location );
@@ -109,7 +192,7 @@ gint client_document_current( gint context )
   printf( "From: c\n" );
 #endif
   write( fdsend, "c", 1 );
-  putnumber( fdsend, context );
+  sendnumber( fdsend, context );
   return getnumber( fddata );
 }
 
@@ -121,7 +204,7 @@ gchar *client_document_filename( gint docid )
   printf( "From: f\n" );
 #endif
   write( fdsend, "f", 1 );
-  putnumber( fdsend, docid );
+  sendnumber( fdsend, docid );
   length = getnumber( fddata );
   filename = g_malloc0( length + 1 );
   filename[ read( fddata, filename, length ) ] = 0;
@@ -137,8 +220,8 @@ gint client_document_new( gint context, gchar *title )
   printf( "From: n\n" );
 #endif
   write( fdsend, "n", 1 );
-  putnumber( fdsend, context );
-  putnumber( fdsend, strlen( title ) );
+  sendnumber( fdsend, context );
+  sendnumber( fdsend, strlen( title ) );
   write( fdsend, title, strlen( title ) );
 #ifdef DEBUG
   printf( "From: %s\n", title );
@@ -152,8 +235,8 @@ gint client_document_open( gint context, gchar *title )
   printf( "From: o\n" );
 #endif
   write( fdsend, "o", 1 );
-  putnumber( fdsend, context );
-  putnumber( fdsend, strlen( title ) );
+  sendnumber( fdsend, context );
+  sendnumber( fdsend, strlen( title ) );
   write( fdsend, title, strlen( title ) );
 #ifdef DEBUG
   printf( "From: %s\n", title );
@@ -167,30 +250,18 @@ void client_text_append( gint docid, gchar *buff, gint length )
   printf( "From: a\n" );
 #endif
   write( fdsend, "a", 1 );
-  putnumber( fdsend, docid );
-  putnumber( fdsend, length );
-#ifdef DEBUG
-  printf( "From: %s\n", buff );
-#endif
-  write( fdsend, buff, length );
+  sendnumber( fdsend, docid );
+  sendblock( fdsend, buff, length );
 }
 
 gchar *client_text_get( gint docid )
 {
-  gchar *buffer;
-  gint length;
 #ifdef DEBUG
   printf( "From: g\n" );
 #endif
   write( fdsend, "g", 1 );
-  putnumber( fdsend, docid );
-  length = getnumber( fddata );
-  buffer = g_malloc0( length + 1 );
-  buffer[ read( fddata, buffer, length ) ] = 0;
-#ifdef DEBUG
-  printf( "To: %s\n", buffer );
-#endif
-  return buffer;
+  sendnumber( fdsend, docid );
+  return getblock( fddata );
 }
 
 void client_document_show( gint docid )
@@ -199,7 +270,7 @@ void client_document_show( gint docid )
   printf( "From: s\n" );
 #endif
   write( fdsend, "s", 1 );
-  putnumber( fdsend, docid );
+  sendnumber( fdsend, docid );
 }
 
 void client_finish( gint context )

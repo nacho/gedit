@@ -20,10 +20,10 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
 
-#ifdef __cplusplus__
+#ifdef __cplusplus
 extern "C"
 {
-#endif /* __cplusplus__ */
+#endif /* __cplusplus */
   
 #include <glib.h>
 
@@ -43,8 +43,8 @@ void client_finish( gint context );
 gchar *client_text_get( gint docid );
 gboolean client_program_quit();
 
-#ifdef __cplusplus__
+#ifdef __cplusplus
 }
-#endif /* __cplusplus__ */
+#endif /* __cplusplus */
 
 #endif /* __CLIENT_H__ */
