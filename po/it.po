@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit-it\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-28 21:03+0100\n"
-"PO-Revision-Date: 2005-02-28 21:10+0100\n"
+"POT-Creation-Date: 2005-03-03 23:14+0100\n"
+"PO-Revision-Date: 2005-03-03 23:18+0100\n"
 "Last-Translator: Roberto Rosselli Del Turco <rosselli@ling.unipi.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -585,18 +585,18 @@ msgid "Question"
 msgstr "Domanda"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:367
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
 msgstr[0] ""
-"Se non si salva, le modifiche apportate nell'ultimo minuto andranno perse "
+"Se non si salva, le modifiche apportate nell'ultimo %ld secondo andrà persa "
 "per sempre."
 msgstr[1] ""
-"Se non si salva, le modifiche apportate nell'ultimo minuto andranno perse "
-"per sempre."
+"Se non si salva, le modifiche apportate negli ultimi %ld secondi andranno "
+"perse per sempre."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:376
 msgid ""
@@ -2600,7 +2600,7 @@ msgstr "Salva copia..."
 #: ../plugins/savecopy/savecopy.c:502 ../plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (copia)"
 
 #: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 msgid "Save a Copy"
@@ -2782,7 +2782,7 @@ msgstr "Controllo ortografico completato"
 
 #: ../plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 #: ../plugins/spell/gedit-spell-checker.c:80
 msgid "Amharic"
@@ -2894,7 +2894,7 @@ msgstr "Gallego"
 
 #: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "Gaelico Manx"
 
 #: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Hindi"
@@ -2914,11 +2914,11 @@ msgstr "Ungherese"
 
 #: ../plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "Interlingua"
 
 #: ../plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesiano"
 
 #: ../plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2946,11 +2946,11 @@ msgstr "Lettone"
 
 #: ../plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
-msgstr ""
+msgstr "Malgascio"
 
 #: ../plugins/spell/gedit-spell-checker.c:123
 msgid "Maori"
-msgstr ""
+msgstr "Maori"
 
 #: ../plugins/spell/gedit-spell-checker.c:124
 msgid "Macedonian"
@@ -2986,7 +2986,7 @@ msgstr "Norvegese"
 
 #: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "Nyanja"
 
 #: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -3010,7 +3010,7 @@ msgstr "Russo"
 
 #: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "Kinyarwanda"
 
 #: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Sardinian"
@@ -3037,9 +3037,8 @@ msgid "Tamil"
 msgstr "Tamil"
 
 #: ../plugins/spell/gedit-spell-checker.c:146
-#, fuzzy
 msgid "Tetum"
-msgstr "Testo"
+msgstr "Tetum"
 
 #: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
@@ -3047,7 +3046,7 @@ msgstr "Tagalog"
 
 #: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tswana"
-msgstr ""
+msgstr "Tswana"
 
 #: ../plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
@@ -3730,9 +3729,8 @@ msgid "Marquee"
 msgstr "Marquee"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:136
-#, fuzzy
 msgid "Maximum length of text field"
-msgstr "Campo testo multiriga"
+msgstr "Massima lunghezza del campo testuale"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
@@ -4471,10 +4469,12 @@ msgid "Symbol infinity"
 msgstr "Simbolo infinito"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:64
+#, fuzzy
 msgid "Symbol mathspace ,"
 msgstr "Simbolo matematico: ,"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:65
+#, fuzzy
 msgid "Symbol mathspace ."
 msgstr "Simbolo matematico: ."
 
@@ -4492,7 +4492,7 @@ msgstr "Simbolo simeq"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr "Simbilo asterisco"
+msgstr "Simbolo asterisco"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
