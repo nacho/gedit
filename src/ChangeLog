@@ -1,3 +1,42 @@
+2000-04-08  Chema Celorio  <chema@celorio.com>
+
+	* file.c (file_saveas_ok_sel): ask user
+	before overwriting a file.
+	(popup_create_new_file): moved
+	from commands. and added a g_free call.
+
+	* gedit.c (main): fixed when you call gedit myfile.txt
+	and myfile.txt does not exists.
+
+	* commands.c (edit_cut_cb): removed the commented
+	functions that where moved to file.c
+	(popup_create_new_file): moved to file.c
+
+	* recent.c (recent_update): cleaned a bit
+	(recent_cb): FIXME: we need to delete a file
+	from the recent menu if an error was encountered
+	while trying to open it.
+
+	* commands.c: removed some prototpes that where not
+	longer used.
+	(popup_create_new_file): shut up a warning.
+	(gedit_shutdown): comment it out, looks like
+	it is not beeing used.
+
+	* recent.c : Include file.h
+	(recent_cb): rewrote.
+	
+	* view.c (view_changed_cb): call
+	gedit_view_set_read_only.
+
+	* file.c (gedit_file_open): Rewrote
+	(file_open_ok_sel): Don't report to the
+	user if there was an error, let file_open
+	do it.
+
+	* document.h (struct _Document): Added a read
+	only entry in the Document structure
+
 2000-04-06  Jason Leach  <leach@wam.umd.edu>
 
 	* prefs.c (gedit_window_refresh): fixed a problem jpr just

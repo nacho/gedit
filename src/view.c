@@ -60,7 +60,7 @@ void
 view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
 	View *view;
-
+	
 	gedit_debug_mess ("F:view_changed_cb\n", DEBUG_VIEW);
 	g_return_if_fail (cbdata != NULL);
 
@@ -74,7 +74,8 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	view->changed_id = FALSE;
 
 	/* Set the title */
-	gedit_set_title (view->document);
+	/*gedit_set_title (view->document);*/ 
+	gedit_view_set_read_only ( view, view->document->readonly);
 }
 
 /* 

@@ -25,11 +25,13 @@
 #include "document.h"
 #include "view.h"
 #include "prefs.h"
+#include "file.h"
 
 #ifndef MAX_RECENT
 #define MAX_RECENT 4
 #endif
 
+       void recent_update (GnomeApp *app);
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb (GtkWidget *w, gedit_data *data);
 
@@ -60,56 +62,51 @@ recent_update (GnomeApp *app)
 #endif
 #if 1
 	gnome_recent_list = gnome_history_get_recently_used ();
-	
-	if (g_list_length (gnome_recent_list) > 0)
-	{
-		for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--)
-		{
-			histentry = g_list_nth_data (gnome_recent_list, i);
-	     
-			if (strcmp ("gedit", histentry->creator) == 0)
-			{
-				/* This is to make sure you don't have more than one
-				   file of the same name in the recent list
-				*/
-	      
-				if (g_list_length (filelist) > 0)
-				{
-					for (j = g_list_length (filelist) - 1; j >= 0; j--)
-					{
-						if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
-						{
-							filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
-							nrecentdocs--;
-						}
-					}
-				}
 
-				filename = g_malloc0 (strlen (histentry->filename) + 1);
-				strcpy (filename, histentry->filename);
-				filelist = g_list_append (filelist, filename);
-				nrecentdocs++;
-				
-				/* For recent-directories, not yet fully implemented...
-		   
-				   end_path = strrchr (histentry->filename, '/');
-				   if (end_path) {
-		   
-				   for (i = 0; i < strlen (histentry->filename); i++)
-				   if ((histentry->filename + i) == end_path)
-				   break;
-				
-				   directory = g_malloc0 (i + 2);
-				   strcat (directory, histentry->filename, i);
-			
-				   }
-				*/
-                   
-				if (nrecentdocs == MAX_RECENT)
-/*				if (g_list_length (filelist) == MAX_RECENT) */
-					break;
+	if (g_list_length (gnome_recent_list) <= 0)
+	{
+		return;
+	}
+
+	for (i = g_list_length (gnome_recent_list) - 1; i >= 0; i--)
+	{
+		histentry = g_list_nth_data (gnome_recent_list, i);
+     
+		if (strcmp ("gedit", histentry->creator) != 0)
+			break;
+
+		/* FIXME : if file_1 is in the 3rd line of the recent
+		   files and I reopen it, it should be in the 1st line now.Chema*/
+		if (g_list_length (filelist) > 0)
+		{
+			for (j = g_list_length (filelist) - 1; j >= 0; j--)
+			{
+				if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
+				{
+					filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
+					nrecentdocs--;
+				}
 			}
 		}
+
+		filename = g_malloc0 (strlen (histentry->filename) + 1);
+		strcpy (filename, histentry->filename);
+		filelist = g_list_append (filelist, filename);
+		nrecentdocs++;
+				
+		/* For recent-directories, not yet fully implemented...
+		   end_path = strrchr (histentry->filename, '/');
+		   if (end_path) {
+		   for (i = 0; i < strlen (histentry->filename); i++)
+		   if ((histentry->filename + i) == end_path)
+		   break;
+		   directory = g_malloc0 (i + 2);
+		   strcat (directory, histentry->filename, i);
+		   }*/
+                   
+		if (nrecentdocs == MAX_RECENT)
+/*			if (g_list_length (filelist) == MAX_RECENT) */
+				break;
 	}
 	
 	gnome_history_free_recently_used_list (gnome_recent_list);
@@ -117,8 +114,6 @@ recent_update (GnomeApp *app)
 	
 	recent_update_menus (app, filelist);
 }
-
-/* Actually updates the recent-used menu... */
 
 static void
 recent_update_menus (GnomeApp *app, GList *recent_files)
@@ -136,9 +131,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	if (recent_files == NULL)
 		return;
 
-
 	/* insert a separator at the beginning */
-	
 	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
 	path = g_new (gchar, strlen (_("_File")) + strlen ("<Separator>") + 3 );
 	sprintf (path, "%s/%s", _("_File"), "<Separator>");
@@ -178,7 +171,6 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	g_free (path);
 }
 
-/* Callback for a users click on one of the recent docs in the File menu */
 static void
 recent_cb (GtkWidget *widget, gedit_data *data)
 {
@@ -186,24 +178,19 @@ recent_cb (GtkWidget *widget, gedit_data *data)
 	
 	g_return_if_fail (data != NULL);
 
+	doc = gedit_document_new_with_file (data->temp1);
 	if (doc)
 	{
-		if (doc->filename || VIEW(mdi->active_view)->changed)
-		{
-			doc = gedit_document_new_with_file (data->temp1);
-			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	    
-		}
-		else
-		{
-			/* FIXME.jel: add some conditional check and
-			   an else to handle the case where the file
-			   in the recent menu fails to open
-			   (deleted/moved/new permissions) */
-			gedit_file_open (doc, data->temp1);
-		}
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	}
+	else
+	{
+		/* FIXME :
+		   If an error was encountered the delete the entry
+		   from the menu ... Chema  */
+	}
+
 }
 
 /**
@@ -220,3 +207,24 @@ recent_add (char *filename)
 	gnome_history_recently_used (filename, "text/plain",
 				     "gedit", "gedit_document");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

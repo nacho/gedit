@@ -32,7 +32,7 @@
 #include "prefs.h"
 #include "view.h"
 
-#include "dialogs.h"
+#include "dialogs/dialogs.h"
 
 GnomeUIInfo popup_menu[] =
 {
@@ -70,7 +70,6 @@ GnomeUIInfo gedit_file_menu[] =
 				GNOME_STOCK_MENU_SAVE),
 
 	GNOMEUIINFO_MENU_SAVE_AS_ITEM (file_save_as_cb, NULL),
-
 	GNOMEUIINFO_MENU_REVERT_ITEM (file_revert_cb, NULL),
 /*
 	GNOMEUIINFO_ITEM_STOCK (N_("Revert"),
@@ -81,20 +80,17 @@ GnomeUIInfo gedit_file_menu[] =
 	GNOMEUIINFO_SEPARATOR, 
 
 	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
-
 	GNOMEUIINFO_ITEM (N_("Print preview..."),
 			  N_("Preview data to be printed"),
 			  file_print_preview_cb, NULL),
-	
+
 	GNOMEUIINFO_SEPARATOR, 
 
 	GNOMEUIINFO_MENU_CLOSE_ITEM (file_close_cb, NULL),
-
 	GNOMEUIINFO_ITEM_STOCK (N_("Close All"),
 				N_("Close All Open Files"),
 				file_close_all_cb,
 				GNOME_STOCK_MENU_CLOSE),
-
 	GNOMEUIINFO_MENU_EXIT_ITEM (file_quit_cb, NULL),
 
 	GNOMEUIINFO_END
@@ -377,7 +373,7 @@ GnomeUIInfo toolbar_data[] =
 GnomeUIInfo *
 gedit_menus_init (Window *window)
 {
-	/* sanity checks */
+
 	g_return_val_if_fail (window != NULL, NULL);
 
 	gnome_app_create_menus (GNOME_APP (mdi->active_window), gedit_menu);
@@ -395,7 +391,8 @@ find_line_cb (GtkWidget *widget, gpointer data)
 void
 replace_cb (GtkWidget *widget, gpointer data)
 {
-	dialog_replace ();
+        /* I broke this ... CHEMA :) */
+	/* dialog_replace ();*/
 }
 
 void
@@ -403,3 +400,5 @@ about_cb (GtkWidget *widget, gpointer data)
 {
 	dialog_about ();
 }
+
+

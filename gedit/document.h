@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* 
  * gedit
  * Copyright (C) 1998, 1999 Alex Roberts and Evan Lawrence
@@ -57,6 +58,8 @@ struct _Document
 	GList *undo;		/* Undo Stack */
 	GList *undo_top;	
 	GList *redo;		/* Redo Stack */
+
+	int  readonly;
 };
 
 

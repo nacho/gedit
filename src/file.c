@@ -25,7 +25,7 @@
 #include "gedit.h"
 #include "commands.h"
 #include "document.h"
-#include "view.h"
+#include "view.h" 
 #include "prefs.h"
 #include "file.h"
 #include "utils.h"
@@ -48,12 +48,16 @@ void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
 void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
 
+   gboolean popup_create_new_file (GtkWidget *w, gchar *title);
 static void file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
 static void file_saveas_ok_sel (GtkWidget *w, gedit_data *data);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
 static void cancel_cb (GtkWidget *w, gpointer data);
 
 /* TODO : add flash on all operations ....Chema*/
+/*        what happens when you open the same doc
+	  twice. I think we should add another view
+          of the same doc versus opening it twice. Chema*/
 
 /**
  * gedit_file_open:
@@ -65,74 +69,80 @@ static void cancel_cb (GtkWidget *w, gpointer data);
  * Return value: 0 on success, 1 on error.
  */
 /* TODO: lock/unlock file before/after. Jason*/
+/* ...  why would you want to lock it, lets say you               <---- read this Jason 
+   open /etc/lilo.conf and want to run lilo without
+   closing gedit ? maybe I am missing something. Chema */
 gint
 gedit_file_open (Document *doc, gchar *fname)
 {
-	gchar *tmp_buf, *flash;
+	gchar *tmp_buf;
 	struct stat stats;
-	gint i;
-	View *nth_view;
 	FILE *fp;
-
-	/* FIXME : this function is beeing called
-	   many times */
-
-	/* FIXME : deal with ReadOnly files,
-	   we should have a flag in Document
-	   to know if it is readonly */
+	Document *currentdoc;
+/*	gint i;
+	View *nth_view; diabled by chema */
+	
 	gedit_debug_mess ("F:Entering gedit_file_open ..\n", DEBUG_FILE);
 	g_return_val_if_fail (fname != NULL, 1);
-/*	g_return_val_if_fail (doc != NULL, 1); */
+	g_return_val_if_fail (doc != NULL, 1);
 
-	if (!stat(fname, &stats) && S_ISREG(stats.st_mode))
+
+	currentdoc = gedit_document_current();
+	if (currentdoc != NULL && currentdoc->filename == NULL && !currentdoc->changed )
 	{
-		doc->buf_size = stats.st_size;
-		if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL)
-		{
-			if ((fp = fopen (fname, "r")) != NULL)
-			{
-				doc->buf_size = fread (tmp_buf, 1, doc->buf_size, fp);
-				doc->buf = g_string_new (tmp_buf);
-				g_free (tmp_buf);
-
-				gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
-							  g_basename (fname));
-
-				fclose (fp);
-				doc->filename = g_strdup (fname);
-
-				for (i = 0; i < g_list_length (doc->views); i++)
-				{
-					nth_view = g_list_nth_data (doc->views, i);
-					gedit_view_refresh (nth_view);
-					gedit_set_title (nth_view->document);
-
-					/* Make the document readonly if you can't write to the file. */
-					gedit_view_set_read_only (nth_view, access (fname, W_OK) != 0);
-					if (!nth_view->changed_id)
-						nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
-											   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
-				}
-
-				gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname); 
-
-				/* update the recent files menu */
-				recent_add (fname);
-				recent_update (GNOME_APP (mdi->active_window));
-				return 0;
-			}
-			else
-			{
-				gchar *errstr = g_strdup_printf (_("gedit was unable to open the file: "
-								   "\n\n%s\n\n"
-								   "Make sure that you have read access permissions for the file."), fname);
-				gnome_app_error (mdi->active_window, errstr);
-				return 0;
-			}
-		}
+		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
+	}
+		
+	if ( stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
+	{
+		gnome_app_error (mdi->active_window, _("An error was encountered while opening the file."
+						       "\nPlease make sure the file exists."));
+		return 1;
 	}
 
-	return 1;
+	doc->buf_size = stats.st_size;
+
+	if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) == NULL)
+	{
+		gnome_app_error (mdi->active_window, _("Could not allocate the requrired memory."));
+		return 1;
+	}
+
+	if ((fp = fopen (fname, "r")) == NULL)
+	{
+		gchar *errstr = g_strdup_printf (_("gedit was unable to open the file: \n\n%s\n\n"
+						   "Make sure that you have permissions for opening the file."), fname);
+		gnome_app_error (mdi->active_window, errstr);
+		return 1;
+	}
+
+	doc->buf_size = fread (tmp_buf, 1, doc->buf_size, fp);
+	doc->buf = g_string_new (tmp_buf);
+	g_free (tmp_buf);
+	gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
+				  g_basename (fname));
+	fclose (fp);
+	
+	doc->filename = g_strdup (fname);
+	doc->readonly = access(fname, W_OK)?TRUE:FALSE;
+
+	/* FIXME: This never gets executed ... Chema */
+	/* I guess it it beeing done somewhere else   ...*/
+/*	for (i = 0; i < g_list_length (doc->views); i++) 
+	{
+		g_print("Chema hack !\n");
+		nth_view = g_list_nth_data (doc->views, 0);
+		gedit_view_refresh (nth_view);
+		gedit_set_title (nth_view->document);
+		gedit_view_set_read_only (nth_view, access(fname, W_OK)  != 0);
+		if (!nth_view->changed_id)
+			nth_view->changed_id = gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
+								   GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
+	}*/
+	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
+	recent_add (fname);
+	recent_update (GNOME_APP (mdi->active_window));
+	return 0;
 }
 
 /**
@@ -148,25 +158,16 @@ gedit_file_open (Document *doc, gchar *fname)
 gint
 gedit_file_save (Document *doc, gchar *fname)
 {
-	/* FIXME : deal with ReadOnly files,
-	   we should have a flag in Document
-	   to know if it is readonly, if it is
-	   just return or display a mesage */
 	FILE *fp;
 	gchar *tmpstr;
 	View *view = VIEW ( g_list_nth_data(doc->views, 0) );
-	/* Since all the views contain the same data, we can grab
-	   view #1. Chema */
+
 	gedit_debug_mess ("F:Entering gedit_file_save.\n", DEBUG_FILE);
 
 	if (fname == NULL)
 		fname = doc->filename;
 
-	/* sanity checks */
 	g_return_val_if_fail (doc != NULL, 1);
-	/* FIXME : We should not fail if we don't have
-	   a filename we should call save as.
-	   Chema */
 	g_return_val_if_fail (fname != NULL, 1);
 	
 	if ((fp = fopen (fname, "w")) == NULL)
@@ -327,24 +328,16 @@ static void
 file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	Document *doc;
-	gchar *filename;
 
 	gedit_debug_mess("file-io.c - file open ok sel\n", DEBUG_FILE);
 	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
 	{
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-
-		
 		gedit_flash_va (_("Loaded file %s"), doc->filename);
 	}
-	else
-		gnome_app_error (mdi->active_window, _("Can not open file!"));
 
 	gtk_widget_hide(GTK_WIDGET(open_file_selector));
-	/* FIXME : do not destroy it
-	gtk_widget_destroy(GTK_WIDGET(open_file_selector));
-	open_file_selector = NULL;*/
 	return;
 }
 
@@ -357,8 +350,13 @@ file_save_cb (GtkWidget *widget)
 		return;
 
 	doc = gedit_document_current ();
-
-	if (doc->changed)
+	/* if (doc->changed) */
+	/* We want to save even if the doc has not been modified
+	   since the doc on disk might have been modified externally
+	   and the user wants to overwrite it. Chema */
+	if ( doc->filename == NULL )
+		file_save_as_cb( widget, NULL);
+	else
 		gedit_file_save (doc, NULL);
 }
 
@@ -367,7 +365,6 @@ void
 file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 {
 	int i;
-	gchar *fname, *title;
 	Document *doc;
 
 	gedit_debug_mess ("F:Entering file_save_all_cb.\n", DEBUG_FILE);
@@ -387,15 +384,36 @@ file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 	Document *doc;
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
 
-	/* FIXME: we need to popup a window
-	   if the file is about to be overwritten */
 	doc = gedit_document_current();
+	gtk_widget_hide (GTK_WIDGET (save_file_selector));
+	save_file_selector = NULL;
 	
+        if (g_file_exists( fname ))
+	{
+		guchar * msg;
+		GtkWidget *msgbox;
+		gint ret;
+		msg = g_strdup_printf (_("``%s'' is about to be overwriten. Do you want to continue ?"), fname);
+		msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
+						GNOME_STOCK_BUTTON_NO, GNOME_STOCK_BUTTON_CANCEL, NULL);
+		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
+		ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+		g_free (msg);
+		switch (ret)
+		{
+		case 0:
+			break;
+		case 1:
+			gedit_flash (_("Document has not been saved."));
+			return;
+		default:
+			return;
+		}
+	}
+	    
 	if (gedit_file_save(doc, fname) != 0) 
 		gedit_flash (_("Error saving file!"));
 
-	gtk_widget_hide (GTK_WIDGET (save_file_selector));
-	save_file_selector = NULL;
 	g_free (fname);
 }
 
@@ -439,9 +457,8 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 
 	msg = g_strdup_printf ("Are you sure you wish to revert all changes?\n(%s)",
 			       doc->filename);
-
-	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION,
-					GNOME_STOCK_BUTTON_YES,	GNOME_STOCK_BUTTON_NO, NULL);
+	msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
+					GNOME_STOCK_BUTTON_NO, NULL);
 	gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
 	    	    
 	switch (gnome_dialog_run_and_close (GNOME_DIALOG (msgbox)))
@@ -456,5 +473,38 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 }
 
 
+gboolean
+popup_create_new_file (GtkWidget *w, gchar *title)
+{
+	GtkWidget *msgbox;
+	Document *doc;
+	int ret;
+	char *msg;
+
+	msg = g_strdup_printf (_("The file ``%s'' does not exist.  Would you like to create it?"),
+			       title);
+	msgbox = gnome_message_box_new (msg,
+					GNOME_MESSAGE_BOX_QUESTION,
+					GNOME_STOCK_BUTTON_YES,
+					GNOME_STOCK_BUTTON_NO,
+					NULL);
+	ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+	g_free (msg);
+	switch (ret)
+	{
+	case 0 : 
+		doc = gedit_document_new_with_title (title);
+		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
+		gedit_file_save (doc, title);
+		return TRUE;
+	case 1 : 
+		return FALSE;
+	}
+
+	g_assert_not_reached ();
+	return FALSE;
+}
+	
 
 

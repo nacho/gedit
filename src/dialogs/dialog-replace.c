@@ -26,7 +26,7 @@ static GtkWidget* create_replace_dialog (void);
 static void clicked_cb (GtkWidget *widget, gint button, Document *doc);
 static gint ask_replace (void);
 
-
+/*
 void
 dialog_replace (void)
 {
@@ -40,7 +40,7 @@ dialog_replace (void)
 	gtk_signal_connect (GTK_OBJECT (replace_dialog), "clicked",
 			    GTK_SIGNAL_FUNC (clicked_cb), doc);
 	gtk_widget_show (replace_dialog);
-}
+}*/
 
 /* Callback on the dialog's "clicked" signal */
 static void

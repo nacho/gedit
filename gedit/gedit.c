@@ -85,27 +85,20 @@ main (int argc, char **argv)
 	textdomain(PACKAGE);
 
 #ifdef HAVE_LIBGNORBA
-
 	global_ev = g_new0 (CORBA_Environment, 1);
-
 	CORBA_exception_init (global_ev);
 	global_orb = gnome_CORBA_init ("gedit", VERSION, &argc, argv,
 				       options, 0, &ctx, global_ev);
 	corba_exception (global_ev);
-	
 	root_poa = CORBA_ORB_resolve_initial_references
 		(global_orb, "RootPOA", global_ev);
 	corba_exception (global_ev);
-
 	root_poa_manager = PortableServer_POA__get_the_POAManager
 		(root_poa, global_ev);
 	corba_exception (global_ev);
-
 	PortableServer_POAManager_activate (root_poa_manager, global_ev);
 	corba_exception (global_ev);
-
 	name_service = gnome_name_service_get ();
-
 #else
 	gnome_init_with_popt_table ("gedit", VERSION, argc, argv, options, 0, &ctx);
 #endif /* HAVE_LIBGNORBA */
@@ -126,25 +119,23 @@ main (int argc, char **argv)
 	
 	poptFreeContext (ctx);
 	
-	/*data = g_malloc (sizeof (gedit_data));*/
 
-	/* Init plugins */
 	gedit_plugins_init ();
-
+	glade_gnome_init ();
 	gedit_mdi_init ();
-	
 	gedit_load_settings ();
 
 	gnome_mdi_open_toplevel (mdi);
 
 	doc = gedit_document_new ();
+
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 
 	if (file_list)
 	{
-		if (mdi->active_child == NULL)
-			return 1;
+		g_return_val_if_fail( mdi->active_child != NULL, -1);
+
 		gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
 		for (;file_list; file_list = file_list->next)
 		{
@@ -162,18 +153,13 @@ main (int argc, char **argv)
 				popup_create_new_file (NULL, file_list->data);
 			}
 		}
-                /* if there are no open documents create a blank one */
-		if (g_list_length(mdi->children) == 0)
-		{
-			doc = gedit_document_new ();
-			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		}
 	}
 	
-	
-	glade_gnome_init ();
 
 	gtk_main ();
+
 	return 0;
 }
+
+
+

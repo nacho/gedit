@@ -255,7 +255,11 @@ gedit_document_get_config_string (GnomeMDIChild *child)
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
 }
 
-GnomeMDIChild *
+/*
+  Seems that it is not beeing used
+  Chema
+  
+  GnomeMDIChild *
 gedit_document_new_from_config (gchar *file)
 {
 	Document *doc;
@@ -265,7 +269,7 @@ gedit_document_new_from_config (gchar *file)
         gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));        
         
 	return GNOME_MDI_CHILD (doc);
-}
+}*/
 
 void
 gedit_add_view (GtkWidget *w, gpointer data)
@@ -322,38 +326,38 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 	GtkWidget *msgbox;
 	int ret;
 	char *fname, *msg;
-	gedit_data *data = g_malloc (sizeof(gedit_data));
+	/*gedit_data *data = g_malloc (sizeof(gedit_data));*/
 
-	fname = GNOME_MDI_CHILD (doc)->name;
-	
-	msg = g_strdup_printf (_("``%s'' has been modified.  Do you wish to save it?"), fname);
-	
-	if (mdi->active_view)
+	fname = GNOME_MDI_CHILD(doc)->name;
+
+	if (!mdi->active_view)
 	{
-		if (doc->changed)
+		return TRUE;
+	}
+
+	if ((doc->changed)&&(!doc->readonly))
+	{
+		msg = g_strdup_printf (_("``%s'' has been modified.  Do you wish to save it?"), fname);
+		msgbox = gnome_message_box_new (msg,
+						GNOME_MESSAGE_BOX_QUESTION,
+						GNOME_STOCK_BUTTON_YES,
+						GNOME_STOCK_BUTTON_NO,
+						GNOME_STOCK_BUTTON_CANCEL,
+						NULL);
+		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
+		ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
+		g_free (msg);
+		switch (ret)
 		{
-			msgbox = gnome_message_box_new (msg,
-							GNOME_MESSAGE_BOX_QUESTION,
-							GNOME_STOCK_BUTTON_YES,
-							GNOME_STOCK_BUTTON_NO,
-							GNOME_STOCK_BUTTON_CANCEL,
-							NULL);
-	    							
-			gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
-			ret = gnome_dialog_run_and_close (GNOME_DIALOG (msgbox));
-	    	    
-			switch (ret)
-			{
-			case 0:
-				file_save_cb (NULL);
-				/* FIXME: why is this NULL ?? chema */
-			case 1:
-				return TRUE;
-			default:
-				return FALSE;
-			}
+		case 0:
+			file_save_cb (NULL);
+			/* FIXME: why is this NULL ?? chema */
+		case 1:
+			return TRUE;
+		default:
+			return FALSE;
 		}
-        }
+	}
 	
 	return TRUE;
 }
@@ -476,7 +480,6 @@ static void
 gedit_document_real_changed (Document *doc, gpointer change_data)
 {
 	/* FIXME! */
-	
 	g_print ("blarg\n");
 }
 #endif /* #if 0 */
