@@ -149,9 +149,6 @@ apply_cb (GnomePropertyBox *pbox, gint page, gedit_data *data)
 	VIEW (mdi->active_view)->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
 	settings->word_wrap = (GTK_TOGGLE_BUTTON (prefs->wordwrap)->active);
 
-	/* Print Settings */
-	settings->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
-  
 	/* Font Settings */
 	settings->font = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->font)));
 
@@ -208,7 +205,6 @@ get_prefs (gedit_data *data)
 	GtkStyle *style;
 	GdkColor *c;
   
-	gtk_entry_set_text (GTK_ENTRY (prefs->pcmd), settings->print_cmd);
 	gtk_entry_set_text (GTK_ENTRY (prefs->font), settings->font);
 
 	tmp = g_malloc (1);
@@ -489,27 +485,7 @@ doc_page_new (void)
   
 	/* End of Font Setttings */
 
-	/* Print Command */
-	frame = gtk_frame_new (_("Print Command"));
-	gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 4);
-	gtk_widget_show (frame);
-  
-	vbox = gtk_vbox_new(FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (frame), vbox);
-	gtk_widget_show (vbox);
-  
-	hbox = gtk_hbox_new(FALSE, 0);
-	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
-	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-	gtk_widget_show(hbox);
-  
-	prefs->pcmd = gtk_entry_new ();
-	gtk_box_pack_start(GTK_BOX(hbox), prefs->pcmd, TRUE, TRUE, 0);
-	gtk_widget_show (prefs->pcmd);
-	/* End Of Print Command */
-
 	return main_vbox;
-
 }
 
 
@@ -725,9 +701,6 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 	gtk_signal_connect (GTK_OBJECT (prefs->split), "toggled",
 			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
-	gtk_signal_connect (GTK_OBJECT (prefs->pcmd), "changed",
-			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
-
 	gtk_signal_connect (GTK_OBJECT (prefs->font), "changed",
 			    GTK_SIGNAL_FUNC (properties_changed), prefs->pbox);
 
@@ -786,11 +759,6 @@ gedit_save_settings (void)
 	gnome_config_set_int ("height", (gint) settings->height);
 	gnome_config_set_string ("font", settings->font);
 
-	if (settings->print_cmd == "")
-		gnome_config_set_string ("print_command", "lpr -rs %s");
-	else
-		gnome_config_set_string ("print_command", settings->print_cmd);
-	
 	if (!settings->run)
 		settings->run = TRUE;
 	
@@ -844,8 +812,6 @@ gedit_load_settings (void)
 	}
 	
 	tab_pos (mdi->tab_pos);
-
-	settings->print_cmd = gnome_config_get_string ("print_command=lpr %s"); 
 
 	if (settings->run)
 	{

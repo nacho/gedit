@@ -40,7 +40,6 @@ struct _Preference
 	gint  use_relief_toolbar;
 	gchar *font;
 	gint  splitscreen;
-	gchar *print_cmd;
 	gint  num_recent;	/* Number of recently accessed
 				   documents in the Recent Documents
 				   menu */
@@ -64,9 +63,6 @@ struct _PrefsData
 	/* Font Seleftion */
 	GtkWidget *fontsel;
 	GtkWidget *font;
-	
-	/* Print Settings */
-	GtkWidget *pcmd;
 	
 	/* General Settings */
 	GtkWidget *autoindent;

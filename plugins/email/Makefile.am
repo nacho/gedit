@@ -6,7 +6,11 @@ plugin_LTLIBRARIES = libemail.la
 
 libemail_la_SOURCES = email.c
 
-INCLUDES = -I../../src \
+gladedir = $(datadir)/gedit/glade
+
+INCLUDES =						\
+	-I../../src 					\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
-	-I$(includedir)	\
+	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
+	-I$(includedir)					\
 	$(GNOME_INCLUDEDIR)
