@@ -2,25 +2,383 @@
 # Copyright (C) 1998 Free Software Foundation, Inc.
 # Sung-Hyun Nam <namsh@lgic.co.kr>, 1998
 # Updated by Chideok Hwang <hwang@mizi.co.kr>, 2000, 2001
-# Updated by Young-Ho, Cha <ganadist@chollian.net>, 2000
+# Updated by Young-Ho, Cha <ganadist@chollian.net>, 2000, 2002
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit \n"
-"POT-Creation-Date: 2002-06-17 21:21+0900\n"
-"PO-Revision-Date: 2001-03-01 11:15+0900\n"
-"Last-Translator: Chideok Hwang <hwang@mizi.co.kr>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"Project-Id-Version: AC_PACKAGE_NAME AC_PACKAGE_VERSION\n"
+"POT-Creation-Date: 2002-07-12 10:31+0900\n"
+"PO-Revision-Date: 2002-07-12 01:31+0900\n"
+"Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
+"Language-Team: GTP Korean <gnome-kr-translation@gnome.or.kr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gedit.desktop.in.h:1
+#: data/GNOME_Gedit.server.in.h:1
+msgid "gedit application"
+msgstr "gedit 응용 프로그램"
+
+#: data/GNOME_Gedit.server.in.h:2
+msgid "gedit automation factory"
+msgstr "gedit 자동화 팩토리"
+
+#: data/gedit.desktop.in.h:1
 msgid "Edit text files"
 msgstr "텍스트 파일을 편집합니다"
 
-#: gedit.desktop.in.h:2
+#: data/gedit.desktop.in.h:2 src/gedit2.c:294
 msgid "Text Editor"
 msgstr "텍스트 편집기"
+
+#: data/gedit.schemas.in.h:1
+msgid ""
+"A custom font that will be used for the editing area. This will only take "
+"effect if the \"Use Default Font\" option is turned off."
+msgstr ""
+"편집 영역에서 사용자 글꼴이 사용됩니다. \"기본 글꼴 사용\" 옵션이 꺼져 있어야"
+"만 적용됩니다."
+
+#: data/gedit.schemas.in.h:2
+msgid "Auto Save"
+msgstr "자동 저장"
+
+#: data/gedit.schemas.in.h:3
+msgid "Auto Save Interval"
+msgstr "자동 저장 간격"
+
+#: data/gedit.schemas.in.h:4
+msgid "Background Color"
+msgstr "배경색"
+
+#: data/gedit.schemas.in.h:5
+msgid ""
+"Background color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"편집 영역에서 선택한 글자의 배경색을 설정합니다. \"기본 색상 사용\" 옵션이 꺼"
+"져 있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:6
+msgid ""
+"Background color for unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"편집 영역에서 선택되지 않은 글자의 배경색을 설정합니다. \"기본 색상 사용\" 옵"
+"션이 꺼져 있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:7
+msgid "Backup Copy Extension"
+msgstr "예비본 확장자"
+
+#: data/gedit.schemas.in.h:8
+msgid "Body Font for Printing"
+msgstr "인쇄용 본문 글꼴"
+
+#: data/gedit.schemas.in.h:9
+msgid "Create Backup Copies"
+msgstr "예비본 만들기"
+
+#: data/gedit.schemas.in.h:10
+msgid "Display Line Numbers"
+msgstr "줄 번호 보기"
+
+#: data/gedit.schemas.in.h:11
+msgid "Editor Font"
+msgstr "편집기 글꼴"
+
+#: data/gedit.schemas.in.h:12
+msgid "Encoding for Saving"
+msgstr "저장할 인코딩"
+
+#: data/gedit.schemas.in.h:13
+msgid ""
+"Extension or suffix to use for backup file names. This will only take effect "
+"if the \"Create Backup Copies\" option is turned on."
+msgstr ""
+"예비 파일 이름에 사용할 확장자나 꼬리표를 정합니다. \"예비본 만들기\" 옵션이 "
+"켜져 있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:14
+msgid ""
+"Foreground color for selected text in the editing area. This will only take "
+"effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"편집 영역에서 선택한 글자의 색상을 정합니다. \"기본 색상 사용\" 옵션이 꺼져 "
+"있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:15
+msgid ""
+"Foreground color for the unselected text in the editing area. This will only "
+"take effect if the \"Use Default Colors\" option is turned off."
+msgstr ""
+"편집 영역에서 선택하지 않은 글자의 색상을 정합니다. \"기본 색상 사용\" 옵션"
+"이 꺼져 있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:16
+msgid "Header Font for Printing"
+msgstr "인쇄용 머릿말 글꼴"
+
+#: data/gedit.schemas.in.h:17
+msgid ""
+"If this value is 0, then no line numbers will be inserted when printing a "
+"document. Otherwise, gedit will print line numbers every such number of "
+"lines."
+msgstr ""
+"값이 0 이면 문서를 인쇄할 때 줄 번호를 넣지 않습니다. 그 외의 값이면 매 줄에 "
+"줄 번호를 인쇄합니다."
+
+#: data/gedit.schemas.in.h:18
+msgid "Line Number Font for Printing"
+msgstr "인쇄용 줄 번호 글꼴"
+
+#: data/gedit.schemas.in.h:19
+msgid "Line Wrapping Mode"
+msgstr "줄 바꿈 모드"
+
+#: data/gedit.schemas.in.h:20
+msgid "Maximum Recent Files"
+msgstr "최근 파일 최대 개수"
+
+#: data/gedit.schemas.in.h:21
+msgid "Maximum number of actions that gedit will be able to undo or redo."
+msgstr "gedit에서 실행 취소나 재실행을 할 수 있는 최대 회수"
+
+#: data/gedit.schemas.in.h:22
+msgid ""
+"Number of minutes after which gedit will automatically save modified files. "
+"This will only take effect if the \"Auto Save\" option is turned on."
+msgstr ""
+"gedit에서 변경된 파일을 자동으로 저장하는 시간입니다.\"자동 저장\"옵션이 켜"
+"져 있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:23
+msgid "Print Header"
+msgstr "머릿말 인쇄"
+
+#: data/gedit.schemas.in.h:24
+msgid "Print Line Numbers"
+msgstr "줄 번호 인쇄"
+
+#: data/gedit.schemas.in.h:25
+msgid "Printing Line Wrapping Mode"
+msgstr "줄 바꿈 모드 인쇄"
+
+#: data/gedit.schemas.in.h:26
+msgid "Selected Text Color"
+msgstr "선택된 글자 색상"
+
+#: data/gedit.schemas.in.h:27
+msgid "Selection Color"
+msgstr "선택된 색상"
+
+#: data/gedit.schemas.in.h:28
+msgid "Show Cursor Position"
+msgstr "커서 위치 보기"
+
+#: data/gedit.schemas.in.h:29
+msgid "Show Overwrite Mode"
+msgstr "겹쳐쓰기 모드 보기"
+
+#: data/gedit.schemas.in.h:30
+msgid ""
+"Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
+"wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"인쇄할 때 긴 줄을 바꾸는 방법을 지정합니다. 줄 바꿈을 하지 않으려면 "
+"\"GTK_WRAP_NONE\"을, 단어 단위로 줄 바꿈을 하려면 \"GTK_WRAP_WORD\"를, 글자 "
+"단위로 줄 바꿈을 하려면 \"GTK_WRAP_CHAR\"을 사용하십시오. 대소문자를 가리기 "
+"때문에 여기에 적힌대로 완벽히 입력해야 합니다."
+
+#: data/gedit.schemas.in.h:31
+msgid ""
+"Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
+"for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
+"\"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that "
+"the values are case-sensitive, so make sure they appear exactly as mentioned "
+"here."
+msgstr ""
+"편집 영역에서 긴 줄을 바꾸는 방법을 지정합니다. 줄 바꿈을 하지 않으려면 "
+"\"GTK_WRAP_NONE\"을, 단어 단위로 줄 바꿈을 하려면 \"GTK_WRAP_WORD\"를, 글자 "
+"단위로 줄 바꿈을 하려면 \"GTK_WRAP_CHAR\"을 사용하십시오. 대소문자를 가리기 "
+"때문에 여기에 적힌대로 완벽히 입력해야 합니다."
+
+#: data/gedit.schemas.in.h:32
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
+msgstr "문서를 인쇄할 때 문서의 본문에 사용되는 글꼴을 지정합니다."
+
+#: data/gedit.schemas.in.h:33
+msgid ""
+"Specifies the font to use for line numbers when printing. This will only "
+"take effect if the \"Print Line Numbers\" option is non-zero."
+msgstr ""
+"인쇄할 때 줄 번호에 사용되는 글꼴을 지정합니다. \"줄 번호 인쇄\" 옵션이 0이 "
+"아닌 값일 때 적용됩니다."
+
+#: data/gedit.schemas.in.h:34
+msgid ""
+"Specifies the font to use for page headers when printing a document. This "
+"will only take effect if the \"Print Header\" option is turned on."
+msgstr ""
+"문서를 인쇄할 때 머릿말에 사용되는 글꼴을 지정합니다. \"머릿말 인쇄\" 옵션이 "
+"켜져 있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:35
+msgid ""
+"Specifies the maximum number of recently opened files that will be displayed "
+"in the \"Recent Files\" submenu."
+msgstr ""
+"\"최근 파일\" 메뉴에서 표시할 최근에 열린 파일의 최대 개수를 지정합니다."
+
+#: data/gedit.schemas.in.h:36
+msgid ""
+"Specifies the number of spaces that should be displayed instead of Tab "
+"characters."
+msgstr "탭 문자 대신에 표시할 공백 문자의 개수를 지정합니다."
+
+#: data/gedit.schemas.in.h:37
+msgid "Status Bar is Visible"
+msgstr "상태 막대 보임"
+
+#: data/gedit.schemas.in.h:38
+msgid ""
+"Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
+"to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
+"only, and \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" to display both icons and text. "
+"Note that the values are case-sensitive, so make sure they appear exactly as "
+"mentioned here."
+msgstr ""
+"도구 막대 버튼의 스타일을 지정합니다. 시스템의 기본 스타일을 사용하려면 "
+"\"GEDIT_TOOLBAR_SYSTEM\"을, 아이콘만 보이려면 \"GEDIT_TOOLBAR_ICONS\"를 아이"
+"콘과 글자를 모두 보이려면 \"GEDIT_TOOLBAR_ICONS_AND_TEXT\"를 값으로 사용할 "
+"수 있습니다.  대소문자를 가리기 때문에 여기에 적힌대로 완벽히 입력해야 합니"
+"다."
+
+#: data/gedit.schemas.in.h:39
+msgid "Tab Size"
+msgstr "탭 크기"
+
+#: data/gedit.schemas.in.h:40
+msgid "Text Color"
+msgstr "글자 색상"
+
+#: data/gedit.schemas.in.h:41
+msgid ""
+"The encoding method to use for saving files. Possible values are "
+"\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
+"\"GEDIT_SAVE_CURRENT_LOCALE_IF_POSSIBLE\" if you want gedit to try to "
+"convert the document it is saving to your current locale's encoding, "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\" if you want gedit to try "
+"to use the original file encoding (new files in UTF8) and "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\" if you want gedit to "
+"try to use the original file encoding (new files in current locale's "
+"encoding). If the conversion is successful, it will be used. Otherwise, UTF-"
+"8 will be used. Note that the values are case-sensitive, so make sure they "
+"appear exactly as mentioned here."
+msgstr ""
+"파일을 저장할 때 사용할 인코딩 방법을 지정합니다. 강제로 UTF-8 저장은 "
+"\"GEDIT_SAVE_ALWAYS_UTF8\"을, 문서를 현재 로케일의 인코딩으로 사용하려면 "
+"\"GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE\"을, 원래 파일의 인코딩으로 사용하"
+"려면 (새 파일은 UTF8) \"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE\"을, 원"
+"래 파일의 인코딩을 사용하려면 (새 파일은 현재 로케일에 따라) "
+"\"GEDIT_SAVE_ORIGINAL_FILE_ENCODING_IF_POSSIBLE_NCL\"로 설정 할 수 있습니다. "
+"저장에 실패하면 UTF-8로 저장이 됩니다. 대소문자를 가리기 때문에 여기에 적힌대"
+"로 완벽히 입력해야 합니다."
+
+#: data/gedit.schemas.in.h:42
+msgid "Toolbar Buttons Style"
+msgstr "도구 막대 버튼 스타일"
+
+#: data/gedit.schemas.in.h:43
+msgid "Toolbar is Visible"
+msgstr "도구 막대 보임"
+
+#: data/gedit.schemas.in.h:44
+msgid "Undo Actions Limit"
+msgstr "실행 취소 제한"
+
+#: data/gedit.schemas.in.h:45
+msgid "Use Default Colors"
+msgstr "기본 색상 사용"
+
+#: data/gedit.schemas.in.h:46
+msgid "Use Default Font"
+msgstr "기본 글꼴 사용"
+
+#: data/gedit.schemas.in.h:47
+msgid ""
+"Whether gedit should automatically save modified files after a time "
+"interval. You can set the time interval with the \"Auto Save Interval\" "
+"option."
+msgstr ""
+"gedit에서 변경한 파일을 일정 시간 간격마다 자동으로 저장하게 합니다. \"자동 "
+"저장 간격\"옵션에서 시간 간격을 설정할 수 있습니다."
+
+#: data/gedit.schemas.in.h:48
+msgid ""
+"Whether gedit should create backup copies for the files it saves. You can "
+"set the backup file extension with the \"Backup Copy Extension\" option."
+msgstr ""
+"gedit에서 파일을 저장할 때 예비본을 만들도록 합니다. 예비본 파일의 확장자는 "
+"\"예비본 확장자\" 옵션에서 설정할 수 있습니다."
+
+#: data/gedit.schemas.in.h:49
+msgid "Whether gedit should display line numbers in the editing area."
+msgstr "편집 영역에 줄 번호를 표시합니다."
+
+#: data/gedit.schemas.in.h:50
+msgid "Whether gedit should include a document header when printing documents."
+msgstr "문서를 인쇄할 때 문서 머릿말을 포함합니다."
+
+#: data/gedit.schemas.in.h:51
+msgid ""
+"Whether the status bar at the bottom of editing windows should be visible."
+msgstr "편집 창 아래에 상태막대를 보입니다."
+
+#: data/gedit.schemas.in.h:52
+msgid ""
+"Whether the status bar should show the cursor position in editing windows. "
+"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
+"effect."
+msgstr ""
+"편집 창의 커서 위치를 상태막대에 보입니다. \"상태 막대 보임\" 옵션이 켜져 있"
+"어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:53
+msgid ""
+"Whether the status bar should show the insert/overwrite mode in editing "
+"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
+"to take effect."
+msgstr ""
+"편집 창의 삽입/바꿈 모드를 상태막대에 보입니다. \"상태 막대 보임\" 옵션이 켜"
+"져 있어야만 적용됩니다."
+
+#: data/gedit.schemas.in.h:54
+msgid "Whether the toolbar should be visible in editing windows."
+msgstr "편집 창에서 도구막대를 보여줍니다."
+
+#: data/gedit.schemas.in.h:55
+msgid ""
+"Whether to use the system's default colors for the editing area. If this "
+"option is turned off, then the colors of the editing area will be those "
+"specified in the \"Background Color\", \"Text Color\", \"Selected Text Color"
+"\", and \"Selection Color\" options."
+msgstr ""
+"편집 영역에 시스템의 기본 색상을 사용합니다. 이 옵션이 꺼져 있으면 편집 영역"
+"의 색상에는 \"배경 색상\", \"글자 색상\", \"선택한 글자 색상\", 선택된 색상"
+"\" 옵션의 색상들이 사용됩니다."
+
+#: data/gedit.schemas.in.h:56
+msgid ""
+"Whether to use the system's default font for editing text instead of a font "
+"specific to gedit. If this option is turned off, then the font named in the "
+"\"Editor Font\" option will be used instead of the system font."
+msgstr ""
+"편집 영역에 gedit에서 지정한 글꼴 대신 시스템의 기본 글꼴을 사용합니다. 이 옵"
+"션이 꺼져 있으면 시스템 글꼴 대신 \"편집기 글꼴\" 옵션의 글꼴이 사용됩니다."
 
 #: plugins/ASCII/ascii.c:43
 msgid "_ASCII Table"
@@ -279,9 +637,9 @@ msgstr ""
 "단어 세기 플러그인은 현재 문서를 분석하여 단어, 줄, 글자, 비공백 문자의 개수"
 "를 알아내고 결과를 표시합니다."
 
-#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:163
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:175
 #: plugins/shell_output/shell_output.c:436
-#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:556
+#: plugins/taglist/gedit-taglist-plugin.c:164 plugins/time/time.c:568
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr "Copyright (C) 2002 - Paolo Maggi"
 
@@ -305,7 +663,7 @@ msgstr "글자 (공백 포함)"
 msgid "File Name"
 msgstr "파일 이름"
 
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:301
+#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:318
 msgid "Lines"
 msgstr "줄"
 
@@ -329,11 +687,11 @@ msgstr "사용자 이름 입력(_N)"
 msgid "Insert the user name at the cursor position"
 msgstr "커서 위치에 사용자 이름을 끼워넣습니다"
 
-#: plugins/sample/sample.c:160
+#: plugins/sample/sample.c:172
 msgid "User name"
 msgstr "사용자 이름"
 
-#: plugins/sample/sample.c:161
+#: plugins/sample/sample.c:173
 msgid "Inserts the user name at the cursor position."
 msgstr "커서 위치에 사용자 이름을 끼워넣습니다"
 
@@ -455,19 +813,19 @@ msgstr "날짜/시간을 입력(_I)"
 msgid "Insert current date and time at the cursor position"
 msgstr "커서 위치에 현재의 날짜와 시간을 끼워넣습니다"
 
-#: plugins/time/time.c:259
+#: plugins/time/time.c:271
 msgid "Available formats"
 msgstr "사용가능한 형식"
 
-#: plugins/time/time.c:300 plugins/time/time.glade2.h:1
+#: plugins/time/time.c:312 plugins/time/time.glade2.h:1
 msgid "Configure insert date/time plugin"
 msgstr "날짜/시간 입력 플러그인 설정"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:565
 msgid "Insert Date/Time"
 msgstr "날짜/시간을 입력"
 
-#: plugins/time/time.c:554
+#: plugins/time/time.c:566
 msgid "Inserts current date and time at the cursor position."
 msgstr "커서 위치에 현재의 날짜와 시간을 끼워넣습니다"
 
@@ -475,61 +833,26 @@ msgstr "커서 위치에 현재의 날짜와 시간을 끼워넣습니다"
 msgid "Select the format to use when inserting date/time."
 msgstr "날짜/시간 입력할 때 사용할 형식을 선택하십시오"
 
-#: src/bonobo-mdi.c:489 src/bonobo-mdi.c:569 src/bonobo-mdi.c:1721
+#: src/bonobo-mdi.c:517 src/bonobo-mdi.c:600 src/bonobo-mdi.c:1837
 #, c-format
 msgid "Activate %s"
 msgstr "%s 활성"
 
-#: src/dialogs/gedit-dialog-goto-line.c:114
+#: src/dialogs/gedit-dialog-goto-line.c:139
 msgid "Goto line..."
 msgstr "라인 찾아가기..."
 
 #. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:124
+#: src/dialogs/gedit-dialog-goto-line.c:149
 msgid "_Goto line"
 msgstr "라인 바로가기(_G)"
 
-#: src/dialogs/gedit-dialog-goto-line.c:140
+#: src/dialogs/gedit-dialog-goto-line.c:165
 msgid "Could not find the required widgets inside goto-line.glade2.\n"
 msgstr "goto-line.glade2 에서 필요한 위젯을 찾을 수 없습니다.\n"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:51
-msgid "Plugin"
-msgstr "플러그인"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:52
-msgid "Load"
-msgstr "읽음"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:318
-msgid "Module file name"
-msgstr "모듈 파일 이름"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:319
-msgid "Author(s)"
-msgstr "만든이"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:450
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr ""
-"plugin-manager.glade2 를 찾을 수 없습니다, gedit를 다시 설치하십시오.\n"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:458
-msgid "Plugin Manager"
-msgstr "플러그인 관리자"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:485
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-"플러그인 관리자용 glade 파일이 잘못되었습니다 -- 모든 위젯을 찾을 수 없습니"
-"다.\n"
-
-#: src/dialogs/gedit-dialog-plugin-manager.c:582
-msgid "Could not create the Plugin Manager dialog"
-msgstr "플러그인 관리자 대화상자를 만들 수 없습니다"
-
 #: src/dialogs/gedit-dialog-replace.c:171 src/dialogs/replace.glade2.h:2
-#: src/gedit-ui.xml.h:56
+#: src/gedit-ui.xml.h:53
 msgid "Replace"
 msgstr "바꾸기"
 
@@ -538,12 +861,12 @@ msgid "Replace _All"
 msgstr "전부 바꾸기(_A)"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:108
-#: src/gedit-ui.xml.h:101
+#: src/dialogs/gedit-dialog-replace.c:185 src/gedit-file-selector-util.c:121
+#: src/gedit-ui.xml.h:98
 msgid "_Replace"
 msgstr "바꾸기(_R)"
 
-#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:24
+#: src/dialogs/gedit-dialog-replace.c:274 src/gedit-ui.xml.h:23
 msgid "Find"
 msgstr "찾기"
 
@@ -562,6 +885,33 @@ msgstr "%d번 발견하고 치환되었습니다."
 #: src/dialogs/gedit-dialog-uri.c:90 src/dialogs/uri.glade2.h:2
 msgid "Open from URI"
 msgstr "URI로 열기"
+
+#: src/dialogs/gedit-plugin-manager.c:53
+msgid "Plugin"
+msgstr "플러그인"
+
+#: src/dialogs/gedit-plugin-manager.c:54
+msgid "Load"
+msgstr "읽음"
+
+#: src/dialogs/gedit-plugin-manager.c:320
+msgid "Module file name"
+msgstr "모듈 파일 이름"
+
+#: src/dialogs/gedit-plugin-manager.c:321
+msgid "Author(s)"
+msgstr "만든이"
+
+#: src/dialogs/gedit-plugin-manager.c:443
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr ""
+"plugin-manager.glade2 를 찾을 수 없습니다, gedit를 다시 설치하십시오.\n"
+
+#: src/dialogs/gedit-plugin-manager.c:466
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+"플러그인 관리자용 glade 파일이 잘못되었습니다 -- 모든 위젯을 찾을 수 없습니"
+"다.\n"
 
 #: src/dialogs/gedit-plugin-program-location-dialog.c:74
 msgid "Set program location ..."
@@ -588,114 +938,121 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "선택한 파일을 실행할 수 없습니다."
 
-#: src/dialogs/gedit-preferences-dialog.c:226
-msgid "Toolbar"
-msgstr "도구 막대"
-
-#: src/dialogs/gedit-preferences-dialog.c:227
-#: src/dialogs/gedit-preferences.glade2.h:38
-msgid "Status bar"
-msgstr "상태막대"
-
-#: src/dialogs/gedit-preferences-dialog.c:230
-#: src/dialogs/gedit-preferences.glade2.h:17
-msgid "MDI"
-msgstr "MDI"
-
-#: src/dialogs/gedit-preferences-dialog.c:239
+#: src/dialogs/gedit-preferences-dialog.c:207
 msgid "Font & Colors"
 msgstr "글꼴 & 색상"
 
-#: src/dialogs/gedit-preferences-dialog.c:241
-#: src/dialogs/gedit-preferences.glade2.h:39
+#: src/dialogs/gedit-preferences-dialog.c:209
+#: src/dialogs/gedit-preferences.glade2.h:28
 msgid "Tabs"
 msgstr "탭"
 
-#: src/dialogs/gedit-preferences-dialog.c:242
-#: src/dialogs/gedit-preferences.glade2.h:62
+#: src/dialogs/gedit-preferences-dialog.c:210
+#: src/dialogs/gedit-preferences.glade2.h:47
 msgid "Wrap mode"
 msgstr "줄 바꿈"
 
-#: src/dialogs/gedit-preferences-dialog.c:243
-#: src/dialogs/gedit-preferences.glade2.h:16
+#: src/dialogs/gedit-preferences-dialog.c:211
+#: src/dialogs/gedit-preferences.glade2.h:13
 msgid "Line numbers"
 msgstr "줄 번호"
 
-#: src/dialogs/gedit-preferences-dialog.c:245
-#: src/dialogs/gedit-preferences.glade2.h:31 src/gedit-ui.xml.h:61
+#: src/dialogs/gedit-preferences-dialog.c:213
+#: src/dialogs/gedit-preferences.glade2.h:24 src/gedit-ui.xml.h:58
 msgid "Save"
 msgstr "저장"
 
-#: src/dialogs/gedit-preferences-dialog.c:246
-#: src/dialogs/gedit-preferences.glade2.h:57 src/gedit-ui.xml.h:79
+#: src/dialogs/gedit-preferences-dialog.c:214
+#: src/dialogs/gedit-preferences.glade2.h:40 src/gedit-ui.xml.h:76
 msgid "Undo"
 msgstr "실행 취소"
 
-#: src/dialogs/gedit-preferences-dialog.c:254
+#: src/dialogs/gedit-preferences-dialog.c:222
 msgid "Page"
 msgstr "페이지"
 
-#: src/dialogs/gedit-preferences-dialog.c:256
+#: src/dialogs/gedit-preferences-dialog.c:224
 msgid "Fonts"
 msgstr "글꼴"
 
-#: src/dialogs/gedit-preferences-dialog.c:263
+#: src/dialogs/gedit-preferences-dialog.c:231
+msgid "Manager"
+msgstr "관리자"
+
+#: src/dialogs/gedit-preferences-dialog.c:239
 msgid "Editor"
 msgstr "편집기"
 
-#: src/dialogs/gedit-preferences-dialog.c:264
-#: src/dialogs/gedit-preferences.glade2.h:25 src/gedit-print.c:292
-#: src/gedit-ui.xml.h:45
+#: src/dialogs/gedit-preferences-dialog.c:240
+#: src/dialogs/gedit-preferences.glade2.h:19 src/gedit-print.c:309
+#: src/gedit-ui.xml.h:42
 msgid "Print"
 msgstr "인쇄"
 
-#: src/dialogs/gedit-preferences-dialog.c:266
-msgid "User interface"
-msgstr "사용자 인터페이스"
+#: src/dialogs/gedit-preferences-dialog.c:241
+msgid "Plugins"
+msgstr "플러그인"
 
-#: src/dialogs/gedit-preferences-dialog.c:333
+#: src/dialogs/gedit-preferences-dialog.c:308
 msgid "Cat_egories:"
 msgstr "분류(_E):"
 
-#: src/dialogs/gedit-preferences-dialog.c:357 src/gedit-ui.xml.h:44
+#: src/dialogs/gedit-preferences-dialog.c:330 src/gedit-ui.xml.h:41
 msgid "Preferences"
 msgstr "환경 설정"
 
-#: src/dialogs/gedit-preferences-dialog.c:574
+#: src/dialogs/gedit-preferences-dialog.c:569
 msgid "Categories"
 msgstr "분류"
 
-#: src/dialogs/gedit-preferences-dialog.c:906
+#: src/dialogs/gedit-preferences-dialog.c:800
 msgid "Push this button to select the font to be used by the editor"
 msgstr "버튼을 눌러서 편집기에서 사용할 글꼴을 선택하십시오"
 
-#: src/dialogs/gedit-preferences-dialog.c:909
+#: src/dialogs/gedit-preferences-dialog.c:803
 msgid "Push this button to configure text color"
 msgstr "버튼을 눌러서 글자 색상을 선택하십시오"
 
-#: src/dialogs/gedit-preferences-dialog.c:911
+#: src/dialogs/gedit-preferences-dialog.c:805
 msgid "Push this button to configure background color"
 msgstr "버튼을 눌러서 배경 색상을 선택하십시오"
 
-#: src/dialogs/gedit-preferences-dialog.c:913
+#: src/dialogs/gedit-preferences-dialog.c:807
 msgid ""
-"Push this button to configure color in which selected text should appear"
+"Push this button to configure the color in which the selected text should "
+"appear"
 msgstr "선택된 글자가 나타날 색상을 설정하려면 버튼을 누르십시오"
 
-#: src/dialogs/gedit-preferences-dialog.c:915
+#: src/dialogs/gedit-preferences-dialog.c:810
 msgid ""
-"Push this button to configure color in which selected text should be marked"
+"Push this button to configure the color in which the selected text should be "
+"marked"
 msgstr "선택된 글자의 배경 색상을 설정하려면 버튼을 누르십시오"
 
-#: src/dialogs/gedit-preferences-dialog.c:1313
+#: src/dialogs/gedit-preferences-dialog.c:1585
+#: src/dialogs/gedit-preferences-dialog.c:1587
+msgid "Courier 9"
+msgstr "Courier 9"
+
+#: src/dialogs/gedit-preferences-dialog.c:1594
+#: src/dialogs/gedit-preferences-dialog.c:1596
+msgid "Helvetica 11"
+msgstr "Helvetica 11"
+
+#: src/dialogs/gedit-preferences-dialog.c:1603
+#: src/dialogs/gedit-preferences-dialog.c:1605
+msgid "Helvetica 8"
+msgstr "Helvetica 8"
+
+#: src/dialogs/gedit-preferences-dialog.c:1726
 msgid "Push this button to select the font to be used to print the body"
 msgstr "이 버튼을 눌러서 본문 인쇄에 사용될 글꼴을 선택하십시오"
 
-#: src/dialogs/gedit-preferences-dialog.c:1315
+#: src/dialogs/gedit-preferences-dialog.c:1728
 msgid "Push this button to select the font to be used to print the headers"
 msgstr "이 버튼을 눌러서 글머리 인쇄에 사용될 글꼴을 선택하십시오"
 
-#: src/dialogs/gedit-preferences-dialog.c:1317
+#: src/dialogs/gedit-preferences-dialog.c:1730
 msgid "Push this button to select the font to be used to print line numbers"
 msgstr "이 버튼을 눌러서 줄 번호 인쇄에 사용될 글꼴을 선택하십시오"
 
@@ -712,286 +1069,209 @@ msgid " line(s)"
 msgstr "줄 마다 줄번호 인쇄"
 
 #: src/dialogs/gedit-preferences.glade2.h:4
+msgid "Always use U_TF-8 encoding (faster)"
+msgstr "항상 UTF-8 인코딩 사용(빠름) (_T)"
+
+#: src/dialogs/gedit-preferences.glade2.h:5
 msgid "Always use _UTF-8 encoding (faster)"
 msgstr "항상 UTF-8 인코딩 사용(빠름) (_U)"
 
-#: src/dialogs/gedit-preferences.glade2.h:5
-msgid "Bottom"
-msgstr "아래"
-
 #: src/dialogs/gedit-preferences.glade2.h:6
-msgid "Button style"
-msgstr "버튼 스타일"
-
-#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Colors"
 msgstr "색상"
 
-#: src/dialogs/gedit-preferences.glade2.h:8
+#: src/dialogs/gedit-preferences.glade2.h:7
 msgid "Create a _backup copy of files before saving"
 msgstr "저장하기 전에 백업을 만듭니다(_B)"
 
-#: src/dialogs/gedit-preferences.glade2.h:9
+#: src/dialogs/gedit-preferences.glade2.h:8
 #: src/dialogs/gnome-print-font-picker.c:1014
 msgid "Font"
 msgstr "글꼴"
 
-#: src/dialogs/gedit-preferences.glade2.h:10
+#: src/dialogs/gedit-preferences.glade2.h:9
 msgid "Font used to print line _numbers:"
 msgstr "줄 번호 인쇄할때 사용될 글꼴(_N):"
 
-#: src/dialogs/gedit-preferences.glade2.h:11
+#: src/dialogs/gedit-preferences.glade2.h:10
 msgid "Font used to print the _body:"
 msgstr "본문 인쇄할때 사용될 글꼴(_B):"
 
-#: src/dialogs/gedit-preferences.glade2.h:12
+#: src/dialogs/gedit-preferences.glade2.h:11
 msgid "Fonts & Colors"
 msgstr "글꼴 & 색상"
 
-#: src/dialogs/gedit-preferences.glade2.h:13
-msgid "Icon and _text"
-msgstr "아이콘과 글자(_T)"
-
-#: src/dialogs/gedit-preferences.glade2.h:14
+#: src/dialogs/gedit-preferences.glade2.h:12
 msgid "LOGO"
 msgstr "로고"
 
-#: src/dialogs/gedit-preferences.glade2.h:15
-msgid "Left"
-msgstr "왼쪽"
-
-#: src/dialogs/gedit-preferences.glade2.h:18
-msgid "Modal"
-msgstr "모달"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-msgid "Notebook"
-msgstr "노트북"
-
-#: src/dialogs/gedit-preferences.glade2.h:20
-msgid "Notebook _tab position:"
-msgstr "노트북 Tab 위치(_T):"
-
-#: src/dialogs/gedit-preferences.glade2.h:21
+#: src/dialogs/gedit-preferences.glade2.h:14
 msgid "Pick the background color"
 msgstr "배경 색상 고르기"
 
-#: src/dialogs/gedit-preferences.glade2.h:22
+#: src/dialogs/gedit-preferences.glade2.h:15
 msgid "Pick the selected text color"
 msgstr "선택한 문자 색상 고르기"
 
-#: src/dialogs/gedit-preferences.glade2.h:23
+#: src/dialogs/gedit-preferences.glade2.h:16
 msgid "Pick the selection color"
 msgstr "선택 색상 고르기"
 
-#: src/dialogs/gedit-preferences.glade2.h:24
+#: src/dialogs/gedit-preferences.glade2.h:17
 msgid "Pick the text color"
 msgstr "문자 색상 고르기"
 
-#: src/dialogs/gedit-preferences.glade2.h:26
+#: src/dialogs/gedit-preferences.glade2.h:18
+msgid "Plugin manager"
+msgstr "플러그인 관리자"
+
+#: src/dialogs/gedit-preferences.glade2.h:20
 msgid "Print _line numbers every"
 msgstr "매 "
 
-#: src/dialogs/gedit-preferences.glade2.h:27
+#: src/dialogs/gedit-preferences.glade2.h:21
 msgid "Print _page headers"
 msgstr "글머리 인쇄(_P)"
 
-#: src/dialogs/gedit-preferences.glade2.h:28
+#: src/dialogs/gedit-preferences.glade2.h:22
 msgid "Print fonts"
 msgstr "글꼴 인쇄"
 
-#: src/dialogs/gedit-preferences.glade2.h:29
-msgid "Right"
-msgstr "오른쪽"
-
-#: src/dialogs/gedit-preferences.glade2.h:30
+#: src/dialogs/gedit-preferences.glade2.h:23
 msgid "S_elected text color:"
 msgstr "선택된 글자 색상(_E):"
 
-#: src/dialogs/gedit-preferences.glade2.h:32
+#: src/dialogs/gedit-preferences.glade2.h:25
 msgid "Se_lection color:"
 msgstr "선택 색상(_L):"
 
-#: src/dialogs/gedit-preferences.glade2.h:33
+#: src/dialogs/gedit-preferences.glade2.h:26
 msgid "Set _tabs width equivalent to  "
 msgstr "탭 간격을 "
 
-#: src/dialogs/gedit-preferences.glade2.h:34
+#: src/dialogs/gedit-preferences.glade2.h:27
 msgid "Set limit on _undo actions to"
 msgstr "최대 실행 취소 단계 설정 :"
 
-#: src/dialogs/gedit-preferences.glade2.h:35
-msgid "Sho_w tooltips"
-msgstr "툴팁 보기(_W)"
-
-#: src/dialogs/gedit-preferences.glade2.h:36
-msgid "Show cursor _position"
-msgstr "커서 위치 보기(_P)"
-
-#: src/dialogs/gedit-preferences.glade2.h:37
-msgid "Show overwrite _mode"
-msgstr "겹쳐쓰기 모드 보기(_M)"
-
-#: src/dialogs/gedit-preferences.glade2.h:40
-msgid ""
-"The MDI (Multiple Document Interface) mode refers to the way more than one "
-"text document is displayed in gedit. \n"
-"If you choose the Notebook mode, you may then decide where you want the tabs "
-"to appear in the gedit window."
-msgstr ""
-"MDI (다중 문서 인터페이스) 모드는 gedit에서 하나 이상의 문서를 보여줄 수 있습"
-"니다.\n"
-"노트북 모드를 선택하면 gedit 창의 탭으로 표시 할 수 있습니다."
-
-#: src/dialogs/gedit-preferences.glade2.h:42
+#: src/dialogs/gedit-preferences.glade2.h:29
 msgid ""
 "The font & colors settings let you choose the font and the colors to be used "
 "in the editor windows."
 msgstr "편집기 창의 글꼴과 색상을 선택할 수 있습니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:43
+#: src/dialogs/gedit-preferences.glade2.h:30
 msgid ""
 "The line numbers setting lets you choose to display the line numbers on the "
 "left hand side of the window."
 msgstr "창의 왼쪽 기준으로 줄 번호를 표시합니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:44
+#: src/dialogs/gedit-preferences.glade2.h:31
+msgid ""
+"The plugin manager settings let you choose which plugins you want to have "
+"loaded."
+msgstr "플러그인 관리자 설정에서 사용하려는 플러그인을 선택할 수 있습니다."
+
+#: src/dialogs/gedit-preferences.glade2.h:32
 msgid ""
 "The print fonts settings let you choose the fonts to be used to print "
 "documents."
 msgstr "문서를 인쇄할 때 사용할 글꼴을 선택할 수 있습니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:45
+#: src/dialogs/gedit-preferences.glade2.h:33
 msgid "The print page settings let you customize how gedit prints documents."
 msgstr "gedit에서 문서를 인쇄하는 방법을 설정합니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:46
+#: src/dialogs/gedit-preferences.glade2.h:34
 msgid "The save settings let you customize how gedit saves files."
 msgstr "gedit에서 파일을 저장하는 방법을 설정합니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:47
-msgid ""
-"The status bar settings let you show or hide status bar and customize its "
-"appearance."
-msgstr "상태 막대의 보임 및 숨김과 모양새를 설정합니다."
-
-#: src/dialogs/gedit-preferences.glade2.h:48
+#: src/dialogs/gedit-preferences.glade2.h:35
 msgid "The tabs settings let you customize the tabs width."
 msgstr "탭 크기를 설정합니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:49
-msgid ""
-"The toolbar settings let you show or hide toolbar and customize its "
-"appearance."
-msgstr "도구 막대의 보임 및 숨김과 모양새를 설정합니다."
-
-#: src/dialogs/gedit-preferences.glade2.h:50
+#: src/dialogs/gedit-preferences.glade2.h:36
 msgid ""
 "The undo settings let you set the maximum number of actions that gedit can "
 "undo."
 msgstr "gedit 에서 사용 할 수 있는 최대 실행 취소 단계를 설정합니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:51
+#: src/dialogs/gedit-preferences.glade2.h:37
 msgid "The wrap mode settings let you customize how lines have to be wrapped."
 msgstr "줄 바꿈 설정을 합니다."
 
-#: src/dialogs/gedit-preferences.glade2.h:52
-msgid "Toolbars"
-msgstr "도구 막대"
-
-#: src/dialogs/gedit-preferences.glade2.h:53
-msgid "Top"
-msgstr "위"
-
-#: src/dialogs/gedit-preferences.glade2.h:54
-msgid "Toplevel"
-msgstr "Toplevel"
-
-#: src/dialogs/gedit-preferences.glade2.h:55
-msgid "U_se current locale only if the file already use it"
-msgstr "이미 파일이 사용하고 있을때 만 현재 로케일 사용(_S)"
-
-#: src/dialogs/gedit-preferences.glade2.h:56
+#: src/dialogs/gedit-preferences.glade2.h:38
 msgid "U_se default theme colors"
 msgstr "기본 테마 색상 사용(_S)"
 
-#: src/dialogs/gedit-preferences.glade2.h:58
-msgid "Use current _locale when possible"
+#: src/dialogs/gedit-preferences.glade2.h:39
+msgid "U_se original file encoding if possible"
+msgstr "가능하면 원래 파일의 인코딩 사용(_S)"
+
+#: src/dialogs/gedit-preferences.glade2.h:41
+msgid "Use cu_rrent locale's encoding if possible"
+msgstr "가능하면 현재 로케일 사용(_R)"
+
+#: src/dialogs/gedit-preferences.glade2.h:42
+msgid "Use current _locale's encoding if possible"
 msgstr "가능하면 현재 로케일 사용(_L)"
 
-#: src/dialogs/gedit-preferences.glade2.h:59
+#: src/dialogs/gedit-preferences.glade2.h:43
+msgid "When creating a new file..."
+msgstr "새로운 파일을 만들때..."
+
+#: src/dialogs/gedit-preferences.glade2.h:44
 msgid "When saving..."
 msgstr "저장할 때..."
 
-#: src/dialogs/gedit-preferences.glade2.h:60
+#: src/dialogs/gedit-preferences.glade2.h:45
 msgid "Wrap lines at _word boundaries"
 msgstr "단어끝에서 줄 바꿈(_W)"
 
-#: src/dialogs/gedit-preferences.glade2.h:61
+#: src/dialogs/gedit-preferences.glade2.h:46
 msgid "Wrap lines at ch_aracter boundaries"
 msgstr "글자끝에서 줄 바꿈(_A)"
 
-#: src/dialogs/gedit-preferences.glade2.h:63
-msgid "_According to system settings"
-msgstr "시스템 설정에 따름(_A)"
-
-#: src/dialogs/gedit-preferences.glade2.h:64
+#: src/dialogs/gedit-preferences.glade2.h:48
 msgid "_Autosave current file every"
 msgstr "현재 파일을 매"
 
-#: src/dialogs/gedit-preferences.glade2.h:65
+#: src/dialogs/gedit-preferences.glade2.h:49
 msgid "_Background color:"
 msgstr "배경색(_B):"
 
-#: src/dialogs/gedit-preferences.glade2.h:66
+#: src/dialogs/gedit-preferences.glade2.h:50
 msgid "_Display line numbers"
 msgstr "줄 번호 보기"
 
-#: src/dialogs/gedit-preferences.glade2.h:67
+#: src/dialogs/gedit-preferences.glade2.h:51
 msgid "_Font used by the editor: "
 msgstr "편집기에서 사용할 글꼴(_F): "
 
-#: src/dialogs/gedit-preferences.glade2.h:68
+#: src/dialogs/gedit-preferences.glade2.h:52
 msgid "_Font used to print headers:"
 msgstr "인쇄할때 글머리에 사용될 글꼴(_F):"
 
-#: src/dialogs/gedit-preferences.glade2.h:69 src/gedit-ui.xml.h:94
-msgid "_Icon"
-msgstr "아이콘(_I)"
-
-#: src/dialogs/gedit-preferences.glade2.h:70
-msgid "_MDI Mode:"
-msgstr "MDI 모드(_M):"
-
-#: src/dialogs/gedit-preferences.glade2.h:71
+#: src/dialogs/gedit-preferences.glade2.h:53
 msgid "_Never wrap lines"
 msgstr "줄바꾸지 않음(_N)"
 
-#: src/dialogs/gedit-preferences.glade2.h:72
+#: src/dialogs/gedit-preferences.glade2.h:54
 msgid "_Restore default fonts"
 msgstr "기본 글꼴 저장(_R)"
 
-#: src/dialogs/gedit-preferences.glade2.h:73
-msgid "_Show status bar"
-msgstr "상태막대 보기(_S)"
-
-#: src/dialogs/gedit-preferences.glade2.h:74
-msgid "_Show toolbar"
-msgstr "도구막대 보기(_S)"
-
-#: src/dialogs/gedit-preferences.glade2.h:75
+#: src/dialogs/gedit-preferences.glade2.h:55
 msgid "_Text color:"
 msgstr "글자 색상(_T):"
 
-#: src/dialogs/gedit-preferences.glade2.h:76
+#: src/dialogs/gedit-preferences.glade2.h:56
 msgid "_Use default theme font"
 msgstr "기본 테마 글꼴 사용(_U)"
 
-#: src/dialogs/gedit-preferences.glade2.h:77
+#: src/dialogs/gedit-preferences.glade2.h:57
 msgid "action(s)"
 msgstr "단계"
 
-#: src/dialogs/gedit-preferences.glade2.h:78
+#: src/dialogs/gedit-preferences.glade2.h:58
 msgid "minutes"
 msgstr "분마다 저장"
 
@@ -1097,19 +1377,10 @@ msgid "D_etails"
 msgstr "자세히(_E)"
 
 #: src/dialogs/plugin-manager.glade2.h:4
-msgid ""
-"This is the Plugin Manager. Plugins are extra pieces of software that extend "
-"gedit capabilities. From here, you can choose which plugins you want to have "
-"loaded."
-msgstr ""
-"이것은 플러그인 관리자 입니다. 플러그인은 gedit의 기능을 확장하는 소프트웨"
-"어  여기에서, 사용하려는 플러그인을 선택할 수 있습니다."
-
-#: src/dialogs/plugin-manager.glade2.h:5
 msgid "_Description"
 msgstr "설명(_D)"
 
-#: src/dialogs/plugin-manager.glade2.h:6
+#: src/dialogs/plugin-manager.glade2.h:5
 msgid "dialog1"
 msgstr "dialog1"
 
@@ -1149,74 +1420,70 @@ msgstr "찾을 문자열(_S): "
 msgid "Enter the location (URI) of the file you would like to open:"
 msgstr "열려고 하는 파일의 위치(URI)를 입력하십시오:"
 
-#: src/gedit-commands.c:57
+#: src/gedit-commands.c:56
 msgid "Not yet implemented."
 msgstr "아직 구현되지 않았습니다."
 
-#: src/gedit-commands.c:340
+#: src/gedit-commands.c:339
 #, c-format
 msgid "The string \"%s\" has not been found."
 msgstr "문자열 \"%s\"이 발견되지않음"
 
-#: src/gedit-commands.c:422
-msgid "Impossible to update gedit settings."
-msgstr "gedit 설정을 고칠 수 없습니다."
-
-#: src/gedit-commands.c:491
+#: src/gedit-commands.c:437
 msgid "translator_credits"
 msgstr ""
 "남성현 <namsh@lgic.co.kr>, 1998\n"
 "황치덕 <hwang@mizi.co.kr>, 2000, 20001\n"
 "차영호 <ganadist@chollian.net>, 2001"
 
-#: src/gedit-commands.c:516
+#: src/gedit-commands.c:462
 msgid "gedit"
 msgstr "gedit"
 
-#: src/gedit-commands.c:519
+#: src/gedit-commands.c:465
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "gedit은 그놈을 위한 작고 가벼운 텍스트 에디터입니다."
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:573 src/gedit-document.c:591
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:549 src/gedit-document.c:572
+#: src/gedit-document.c:573 src/gedit-document.c:591
 msgid "Untitled"
 msgstr "이름없음"
 
-#: src/gedit-document.c:556 src/gedit-document.c:579
+#: src/gedit-document.c:579 src/gedit-document.c:626
 msgid "Invalid file name"
 msgstr "잘못된 파일이름"
 
-#: src/gedit-document.c:700 src/gedit-document.c:806
+#: src/gedit-document.c:756 src/gedit-document.c:896
 msgid "Invalid UTF-8 data"
 msgstr "잘못된 UTF-8 데이터"
 
-#: src/gedit-document.c:1006
+#: src/gedit-document.c:1117
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "%s의 심벌릭 링크 정보를 읽을 수 없습니다"
 
-#: src/gedit-document.c:1052
+#: src/gedit-document.c:1163
 msgid "The file has too many symbolic links."
 msgstr "파일이 너무 많은 심벌릭 링크가 있습니다."
 
-#: src/gedit-document.c:1101
+#: src/gedit-document.c:1217
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit가 쓰기 모드에서 %s: 위치를 처리할 수 없습니다."
 
-#: src/gedit-document.c:1108
+#: src/gedit-document.c:1224
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit가 쓰기 모드에서 이런 종류의 위치를 처리할 수 없습니다."
 
-#: src/gedit-document.c:1120
+#: src/gedit-document.c:1245
 msgid "Invalid filename."
 msgstr "잘못된 파일이름."
 
-#: src/gedit-document.c:1198
+#: src/gedit-document.c:1358
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1224,7 +1491,7 @@ msgstr ""
 "파일을 저장하기 위한 디스크 공간이 부족합니다\n"
 "디스크 공간을 확보하고 다시 시도하십시오."
 
-#: src/gedit-document.c:1203
+#: src/gedit-document.c:1363
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1233,15 +1500,15 @@ msgstr ""
 "파일을 저장하려는 디스크에 파일 크기 제한이 걸려있습니다. 파일 크기를 줄이던"
 "지 크기 제한이 풀려있는 디스크에 저장하십시오."
 
-#: src/gedit-document.c:1240
+#: src/gedit-document.c:1402
 msgid "Could not create a backup file."
 msgstr "파일의 백업본을 만들수 없습니다."
 
-#: src/gedit-document.c:1388
+#: src/gedit-document.c:1550
 msgid "It is not possible to revert an Untitled document"
 msgstr "제목 없음 문서를 되돌릴 수는 없습니다"
 
-#: src/gedit-file-selector-util.c:96
+#: src/gedit-file-selector-util.c:109
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1250,70 +1517,70 @@ msgstr ""
 "파일 ''%s''가 이미 있습니다.\n"
 "파일을 바꾸시겠습니까?"
 
-#: src/gedit-file-selector-util.c:104
+#: src/gedit-file-selector-util.c:117
 msgid "Do_n't replace"
 msgstr "바꾸지 말기"
 
-#: src/gedit-file-selector-util.c:484
+#: src/gedit-file-selector-util.c:497
 msgid "Select a filename to save"
 msgstr "저장할 파일이름 선택"
 
-#: src/gedit-file.c:128
+#: src/gedit-file.c:150
 msgid "Open File ..."
 msgstr "파일 열기..."
 
-#: src/gedit-file.c:148 src/gedit-file.c:763
+#: src/gedit-file.c:168 src/gedit-file.c:803
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "파일 '%s' 읽음"
 
-#: src/gedit-file.c:279 src/gedit-file.c:401
+#: src/gedit-file.c:314 src/gedit-file.c:435
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "파일 '%s' 저장..."
 
-#: src/gedit-file.c:300 src/gedit-file.c:416
+#: src/gedit-file.c:335 src/gedit-file.c:450
 msgid "The document has not been saved."
 msgstr "문서가 저장되지 않음"
 
-#: src/gedit-file.c:315 src/gedit-file.c:408
+#: src/gedit-file.c:350 src/gedit-file.c:442
 #, c-format
 msgid "File '%s' saved."
 msgstr "파일 '%s' 저장됨."
 
-#: src/gedit-file.c:383
+#: src/gedit-file.c:417
 msgid "Save as ..."
 msgstr "다른 이름으로 저장..."
 
-#: src/gedit-file.c:574
+#: src/gedit-file.c:614
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "파일 '%s' 되돌리는 중..."
 
-#: src/gedit-file.c:587
+#: src/gedit-file.c:627
 msgid "The document has not been reverted."
 msgstr "문서를 되돌리지 못함"
 
-#: src/gedit-file.c:597
+#: src/gedit-file.c:637
 #, c-format
 msgid "File '%s' reverted."
 msgstr "파일 '%s' 되돌렸음."
 
-#: src/gedit-file.c:644
+#: src/gedit-file.c:684
 #, c-format
 msgid "Loading %d file..."
 msgstr "%d개의 파일을 읽어드림..."
 
-#: src/gedit-file.c:680
+#: src/gedit-file.c:720
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i개의 파일을 읽어드림"
 
-#: src/gedit-file.c:821
+#: src/gedit-file.c:861
 msgid "Could not read data from stdin."
 msgstr "표준 입력에서 데이터를 읽을 수 없습니다."
 
-#: src/gedit-mdi.c:759
+#: src/gedit-mdi.c:840
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document \"%s\"? \n"
@@ -1324,23 +1591,23 @@ msgstr ""
 "\n"
 "저장하지 않으면 변경점을 잃어버리게 됩니다."
 
-#: src/gedit-mdi.c:764
+#: src/gedit-mdi.c:845
 msgid "Do_n't save"
 msgstr "저장하지 않음(_N)"
 
-#: src/gedit-mdi.c:783
+#: src/gedit-mdi.c:864
 msgid "_Don't quit"
 msgstr "마치지 않음(_D)"
 
-#: src/gedit-mdi.c:787
+#: src/gedit-mdi.c:868
 msgid "_Don't close"
 msgstr "닫지 않음(_D)"
 
-#: src/gedit-mdi.c:877
+#: src/gedit-mdi.c:958
 msgid "(modified)"
 msgstr "(변경됨)"
 
-#: src/gedit-mdi.c:883
+#: src/gedit-mdi.c:964
 msgid "(readonly)"
 msgstr "(읽기 전용)"
 
@@ -1394,7 +1661,16 @@ msgstr "오류, 플러그인 '%s'를 비활성화 할 수 없습니다"
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "오류, 플러그인 '%s'의 UI를 새로 고칠 수 없습니다"
 
-#: src/gedit-print.c:178
+#: src/gedit-prefs-manager.c:319
+msgid "Cannot initialize preferences manager."
+msgstr "환경 설정 관리자를 초기화 할 수 없습니다."
+
+#: src/gedit-prefs-manager.c:1520
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr "키 %3$s에서 `%1$s' 예상했지만 `%2$s'를 받아옴"
+
+#: src/gedit-print.c:191
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
@@ -1402,22 +1678,22 @@ msgstr ""
 "gedit에서 인쇄할 때 필요한 글꼴이 없어서 \n"
 "인쇄할 수 없습니다."
 
-#: src/gedit-print.c:354
+#: src/gedit-print.c:377
 #, c-format
 msgid "File: %s"
 msgstr "파일: %s"
 
 #. Print right text
-#: src/gedit-print.c:359
+#: src/gedit-print.c:384
 #, c-format
 msgid "Page: %d"
 msgstr "페이지: %d"
 
-#: src/gedit-print.c:492
+#: src/gedit-print.c:517
 msgid "gedit - Print Preview"
 msgstr "gedit - 인쇄 미리보기"
 
-#: src/gedit-print.c:566
+#: src/gedit-print.c:591
 #, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1433,406 +1709,398 @@ msgid "About this application"
 msgstr "이 응용프로그램에 대한 정보"
 
 #: src/gedit-ui.xml.h:2
-msgid "Add/Remove plugins"
-msgstr "플러그인 추가/제거"
-
-#: src/gedit-ui.xml.h:3
 msgid "C_ustomize Statusbar"
 msgstr "상태 막대 고치기(_U)"
 
-#: src/gedit-ui.xml.h:4
+#: src/gedit-ui.xml.h:3
 msgid "Change the visibility of the statusbar in the current window"
 msgstr "현재 창의 상태 막대 보기 여부를 바꿉니다"
 
-#: src/gedit-ui.xml.h:5
+#: src/gedit-ui.xml.h:4
 msgid "Change the visibility of the toolbar in the current window"
 msgstr "현재 창의 도구 막대 보기 여부를 바끕니다"
 
-#: src/gedit-ui.xml.h:6
+#: src/gedit-ui.xml.h:5
 msgid "Clos_e All"
 msgstr "전부 닫기(_E)"
 
-#: src/gedit-ui.xml.h:7
+#: src/gedit-ui.xml.h:6
 msgid "Close"
 msgstr "닫기"
 
-#: src/gedit-ui.xml.h:8
+#: src/gedit-ui.xml.h:7
 msgid "Close All"
 msgstr "전부 닫기"
 
-#: src/gedit-ui.xml.h:9
+#: src/gedit-ui.xml.h:8
 msgid "Close all open files"
 msgstr "열려진 모든 파일을 닫습니다"
 
-#: src/gedit-ui.xml.h:10
+#: src/gedit-ui.xml.h:9
 msgid "Close the current file"
 msgstr "파일을 닫습니다"
 
-#: src/gedit-ui.xml.h:11
+#: src/gedit-ui.xml.h:10
 msgid "Configure the application"
 msgstr "프로그램을 설정합니다"
 
-#: src/gedit-ui.xml.h:12
+#: src/gedit-ui.xml.h:11
 msgid "Copy"
 msgstr "복사"
 
-#: src/gedit-ui.xml.h:13
+#: src/gedit-ui.xml.h:12
 msgid "Copy the selection"
 msgstr "선택 내용 복사하기"
 
-#: src/gedit-ui.xml.h:14
+#: src/gedit-ui.xml.h:13
 msgid "Create a new document"
 msgstr "새 문서를 생성합니다"
 
-#: src/gedit-ui.xml.h:15
+#: src/gedit-ui.xml.h:14
 msgid "Cu_t"
 msgstr "자르기(_T)"
 
-#: src/gedit-ui.xml.h:16
+#: src/gedit-ui.xml.h:15
 msgid "Customize"
 msgstr "고치기"
 
-#: src/gedit-ui.xml.h:17
+#: src/gedit-ui.xml.h:16
 msgid "Customize toolbars"
 msgstr "도구막대 고치기"
 
-#: src/gedit-ui.xml.h:18
+#: src/gedit-ui.xml.h:17
 msgid "Cut"
 msgstr "자르기"
 
-#: src/gedit-ui.xml.h:19
+#: src/gedit-ui.xml.h:18
 msgid "Cut the selection"
 msgstr "선택 내용 잘라내기"
 
-#: src/gedit-ui.xml.h:20
+#: src/gedit-ui.xml.h:19
 msgid "Delete"
 msgstr "지우기"
 
-#: src/gedit-ui.xml.h:21
+#: src/gedit-ui.xml.h:20
 msgid "Delete the selected text"
 msgstr "선택 내용 잘라내기"
 
-#: src/gedit-ui.xml.h:22
+#: src/gedit-ui.xml.h:21
 msgid "Dump XML"
 msgstr "XML 덤프"
 
-#: src/gedit-ui.xml.h:23
+#: src/gedit-ui.xml.h:22
 msgid "Dump the UI Xml description"
 msgstr "UI의 Xml 설명을 덤프합니다"
 
-#: src/gedit-ui.xml.h:25
+#: src/gedit-ui.xml.h:24
 msgid "Find Again"
 msgstr "다시 찾기"
 
-#: src/gedit-ui.xml.h:26
+#: src/gedit-ui.xml.h:25
 msgid "Find Ne_xt"
 msgstr "다음 찾기(_X)"
 
-#: src/gedit-ui.xml.h:27
+#: src/gedit-ui.xml.h:26
 msgid "Go to a specific line number"
 msgstr "주어진 특정 라인으로 갑니다"
 
-#: src/gedit-ui.xml.h:28
+#: src/gedit-ui.xml.h:27
 msgid "Goto _Line"
 msgstr "라인 바로가기(_L)"
 
-#: src/gedit-ui.xml.h:29
+#: src/gedit-ui.xml.h:28
 msgid "Icon and _Text"
 msgstr "아이콘과 글자(_T)"
 
-#: src/gedit-ui.xml.h:30
+#: src/gedit-ui.xml.h:29
 msgid "Main toolbar"
 msgstr "기본 도구막대"
 
-#: src/gedit-ui.xml.h:31
+#: src/gedit-ui.xml.h:30
 msgid "New"
 msgstr "새 문서"
 
-#: src/gedit-ui.xml.h:32
+#: src/gedit-ui.xml.h:31
 msgid "Only show icons in the toolbar"
 msgstr "도구막대에 아이콘만 보입니다"
 
-#: src/gedit-ui.xml.h:33
+#: src/gedit-ui.xml.h:32
 msgid "Open"
 msgstr "열기"
 
-#: src/gedit-ui.xml.h:34
+#: src/gedit-ui.xml.h:33
 msgid "Open Location..."
 msgstr "위치 열기..."
 
-#: src/gedit-ui.xml.h:35
+#: src/gedit-ui.xml.h:34
 msgid "Open _Location..."
 msgstr "위치 열기(_L)..."
 
-#: src/gedit-ui.xml.h:36
+#: src/gedit-ui.xml.h:35
 msgid "Open a file"
 msgstr "파일 열기"
 
-#: src/gedit-ui.xml.h:37
+#: src/gedit-ui.xml.h:36
 msgid "Open a file from a specified location"
 msgstr "지정된 위치에서 파일을 엽니다"
 
-#: src/gedit-ui.xml.h:38
+#: src/gedit-ui.xml.h:37
 msgid "Open the gedit manual"
 msgstr "gedit 설명서를 봅니다"
 
-#: src/gedit-ui.xml.h:39
+#: src/gedit-ui.xml.h:38
 msgid "Paste"
 msgstr "붙이기"
 
-#: src/gedit-ui.xml.h:40
+#: src/gedit-ui.xml.h:39
 msgid "Paste the clipboard"
 msgstr "클립보드에서 붙이기"
 
-#: src/gedit-ui.xml.h:41
-msgid "Plugin _Manager"
-msgstr "플러그인 관리자(_M)"
-
-#: src/gedit-ui.xml.h:42
-msgid "Plugin _Manager..."
-msgstr "플러그인 관리자(_M)..."
-
-#: src/gedit-ui.xml.h:43
+#: src/gedit-ui.xml.h:40
 msgid "Pr_eferences..."
 msgstr "환경 설정(_E)..."
 
-#: src/gedit-ui.xml.h:46
+#: src/gedit-ui.xml.h:43
 msgid "Print Previe_w"
 msgstr "인쇄 미리보기(_W)"
 
-#: src/gedit-ui.xml.h:47
+#: src/gedit-ui.xml.h:44
 msgid "Print Preview"
 msgstr "인쇄 미리보기"
 
-#: src/gedit-ui.xml.h:48
+#: src/gedit-ui.xml.h:45
 msgid "Print Setup"
 msgstr "인쇄 설정"
 
-#: src/gedit-ui.xml.h:49
+#: src/gedit-ui.xml.h:46
 msgid "Print preview"
 msgstr "인쇄 미리보기"
 
-#: src/gedit-ui.xml.h:50
+#: src/gedit-ui.xml.h:47
 msgid "Print the current file"
 msgstr "파일을 인쇄합니다"
 
-#: src/gedit-ui.xml.h:51
+#: src/gedit-ui.xml.h:48
 msgid "Quit"
 msgstr "마침"
 
-#: src/gedit-ui.xml.h:52
+#: src/gedit-ui.xml.h:49
 msgid "Quit the program"
 msgstr "프로그램을 마칩니다"
 
-#: src/gedit-ui.xml.h:53
+#: src/gedit-ui.xml.h:50
 msgid "Recent _Files"
 msgstr "최근 파일(_F)"
 
-#: src/gedit-ui.xml.h:54
+#: src/gedit-ui.xml.h:51
 msgid "Redo"
 msgstr "재실행"
 
-#: src/gedit-ui.xml.h:55
+#: src/gedit-ui.xml.h:52
 msgid "Redo the undone action"
 msgstr "마지막에했던 작업을 다시 합니다"
 
-#: src/gedit-ui.xml.h:57
+#: src/gedit-ui.xml.h:54
 msgid "Replace a string"
 msgstr "문자열 바꾸기"
 
-#: src/gedit-ui.xml.h:58
+#: src/gedit-ui.xml.h:55
 msgid "Revert"
 msgstr "되돌림"
 
-#: src/gedit-ui.xml.h:59
+#: src/gedit-ui.xml.h:56
 msgid "Revert to a saved version of the file"
 msgstr "저장 되었던 파일로 되돌립니다"
 
-#: src/gedit-ui.xml.h:60
+#: src/gedit-ui.xml.h:57
 msgid "Sa_ve All"
 msgstr "전부 저장(_V)"
 
-#: src/gedit-ui.xml.h:62
+#: src/gedit-ui.xml.h:59
 msgid "Save All"
 msgstr "전부 저장"
 
-#: src/gedit-ui.xml.h:63
+#: src/gedit-ui.xml.h:60
 msgid "Save As"
 msgstr "다른 이름으로 저장..."
 
-#: src/gedit-ui.xml.h:64
+#: src/gedit-ui.xml.h:61
 msgid "Save _As..."
 msgstr "다른 이름으로 저장(_A)..."
 
-#: src/gedit-ui.xml.h:65
+#: src/gedit-ui.xml.h:62
 msgid "Save all open files"
 msgstr "열려있는 모든 파일을 저장합니다"
 
-#: src/gedit-ui.xml.h:66
+#: src/gedit-ui.xml.h:63
 msgid "Save the current file"
 msgstr "파일을 저장합니다"
 
-#: src/gedit-ui.xml.h:67
+#: src/gedit-ui.xml.h:64
 msgid "Save the current file with a different name"
 msgstr "현재 파일을 다른 이름으로 저장합니다"
 
-#: src/gedit-ui.xml.h:68
+#: src/gedit-ui.xml.h:65
 msgid "Search again for the same string"
 msgstr "같은 문자열로 다시 검색합니다"
 
-#: src/gedit-ui.xml.h:69
+#: src/gedit-ui.xml.h:66
 msgid "Search for a string"
 msgstr "문자열 찾기"
 
-#: src/gedit-ui.xml.h:70
+#: src/gedit-ui.xml.h:67
 msgid "Select All"
 msgstr "전부 선택"
 
-#: src/gedit-ui.xml.h:71
+#: src/gedit-ui.xml.h:68
 msgid "Select _All"
 msgstr "전부 선택(_A)"
 
-#: src/gedit-ui.xml.h:72
+#: src/gedit-ui.xml.h:69
 msgid "Select the entire document"
 msgstr "전체 문서를 선택합니다"
 
-#: src/gedit-ui.xml.h:73
+#: src/gedit-ui.xml.h:70
 msgid "Set toolbar button style according to desktop default"
 msgstr "시스템 설정에 따라 도구막대 단추 형태를 설정합니다"
 
-#: src/gedit-ui.xml.h:74
+#: src/gedit-ui.xml.h:71
 msgid "Setup the page settings for your current printer"
 msgstr "현재 프린터를 위해 쪽 설정을 합니다"
 
-#: src/gedit-ui.xml.h:75
+#: src/gedit-ui.xml.h:72
 msgid "Show _Cursor Position"
 msgstr "커서 위치 보기(_C)"
 
-#: src/gedit-ui.xml.h:76
+#: src/gedit-ui.xml.h:73
 msgid "Show _Overwrite Mode"
 msgstr "겹쳐쓰기 모드 보기(_O)"
 
-#: src/gedit-ui.xml.h:77
+#: src/gedit-ui.xml.h:74
 msgid "Show cursor position in the statusbar"
 msgstr "상태 막대에 현재 커서 위치를 보입니다"
 
-#: src/gedit-ui.xml.h:78
+#: src/gedit-ui.xml.h:75
 msgid "Show overwrite mode in the statusbar"
 msgstr "상태 막대에 겹쳐쓰기 모드를 보입니다"
 
-#: src/gedit-ui.xml.h:80
+#: src/gedit-ui.xml.h:77
 msgid "Undo the last action"
 msgstr "마지막에 했던 작업을 취소합니다"
 
-#: src/gedit-ui.xml.h:81
+#: src/gedit-ui.xml.h:78
 msgid "_About"
 msgstr "이 프로그램은(_A)..."
 
-#: src/gedit-ui.xml.h:82
+#: src/gedit-ui.xml.h:79
 msgid "_Close"
 msgstr "닫기(_C)"
 
-#: src/gedit-ui.xml.h:83
+#: src/gedit-ui.xml.h:80
 msgid "_Contents"
 msgstr "차례(_C)"
 
-#: src/gedit-ui.xml.h:84
+#: src/gedit-ui.xml.h:81
 msgid "_Copy"
 msgstr "복사(_C)"
 
-#: src/gedit-ui.xml.h:85
+#: src/gedit-ui.xml.h:82
 msgid "_Customize Toolbar"
 msgstr "도구막대 설정(_C)"
 
-#: src/gedit-ui.xml.h:86
+#: src/gedit-ui.xml.h:83
 msgid "_Debug"
 msgstr "디버그(_D)"
 
-#: src/gedit-ui.xml.h:87
+#: src/gedit-ui.xml.h:84
 msgid "_Delete"
 msgstr "지움(_D)"
 
-#: src/gedit-ui.xml.h:88
+#: src/gedit-ui.xml.h:85
 msgid "_Desktop Default"
 msgstr "바탕화면 기본값(_D)"
 
-#: src/gedit-ui.xml.h:89
+#: src/gedit-ui.xml.h:86
 msgid "_Documents"
 msgstr "문서(_D)"
 
-#: src/gedit-ui.xml.h:90
+#: src/gedit-ui.xml.h:87
 msgid "_Edit"
 msgstr "편집(_E)"
 
-#: src/gedit-ui.xml.h:91
+#: src/gedit-ui.xml.h:88
 msgid "_File"
 msgstr "파일(_F)"
 
-#: src/gedit-ui.xml.h:92
+#: src/gedit-ui.xml.h:89
 msgid "_Find"
 msgstr "찾기(_F)"
 
-#: src/gedit-ui.xml.h:93
+#: src/gedit-ui.xml.h:90
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: src/gedit-ui.xml.h:95
+#: src/gedit-ui.xml.h:91
+msgid "_Icon"
+msgstr "아이콘(_I)"
+
+#: src/gedit-ui.xml.h:92
 msgid "_New"
 msgstr "새 문서(_N)"
 
-#: src/gedit-ui.xml.h:96
+#: src/gedit-ui.xml.h:93
 msgid "_Open..."
 msgstr "열기(_O)..."
 
-#: src/gedit-ui.xml.h:97
+#: src/gedit-ui.xml.h:94
 msgid "_Paste"
 msgstr "붙이기(_P)"
 
-#: src/gedit-ui.xml.h:98
+#: src/gedit-ui.xml.h:95
 msgid "_Print..."
 msgstr "인쇄(_P)..."
 
-#: src/gedit-ui.xml.h:99
+#: src/gedit-ui.xml.h:96
 msgid "_Quit"
 msgstr "마침(_Q)"
 
-#: src/gedit-ui.xml.h:100
+#: src/gedit-ui.xml.h:97
 msgid "_Redo"
 msgstr "재실행(_R)"
 
-#: src/gedit-ui.xml.h:102
+#: src/gedit-ui.xml.h:99
 msgid "_Revert"
 msgstr "되돌림(_R)"
 
-#: src/gedit-ui.xml.h:103
+#: src/gedit-ui.xml.h:100
 msgid "_Save"
 msgstr "저장(_S)"
 
-#: src/gedit-ui.xml.h:104
+#: src/gedit-ui.xml.h:101
 msgid "_Search"
 msgstr "찾기(_S)"
 
-#: src/gedit-ui.xml.h:105
+#: src/gedit-ui.xml.h:102
 msgid "_Statusbar"
 msgstr "상태막대(_S)"
 
-#: src/gedit-ui.xml.h:106
+#: src/gedit-ui.xml.h:103
 msgid "_Toolbar"
 msgstr "도구막대(_T)"
 
-#: src/gedit-ui.xml.h:107
+#: src/gedit-ui.xml.h:104
 msgid "_Tools"
 msgstr "도구(_T)"
 
-#: src/gedit-ui.xml.h:108
+#: src/gedit-ui.xml.h:105
 msgid "_Undo"
 msgstr "실행 취소(_U)"
 
-#: src/gedit-ui.xml.h:109
+#: src/gedit-ui.xml.h:106
 msgid "_View"
 msgstr "보기(_V)"
 
-#: src/gedit-utils.c:842
+#: src/gedit-utils.c:775
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -1843,35 +2111,35 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:849
+#: src/gedit-utils.c:782
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 깨진 데이터를 포함하고 있습니다."
 
-#: src/gedit-utils.c:860
+#: src/gedit-utils.c:793
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "파일 \"%s\"을(를) 열 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니다."
 
-#: src/gedit-utils.c:868
+#: src/gedit-utils.c:799
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "파일 \"%s\"을(를) 열 수 없습니다"
 
-#: src/gedit-utils.c:875
+#: src/gedit-utils.c:809
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 데이터에 잘못된 형식이 있습니다."
 
-#: src/gedit-utils.c:882
+#: src/gedit-utils.c:816
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 파일이 너무 큽니다."
 
-#: src/gedit-utils.c:889
+#: src/gedit-utils.c:823
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -1882,12 +2150,12 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:896
+#: src/gedit-utils.c:830
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다. 접근이 거부되었습니다."
 
-#: src/gedit-utils.c:903
+#: src/gedit-utils.c:837
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -1898,7 +2166,7 @@ msgstr ""
 "\n"
 "몇몇 파일을 닫은 후 다시 시도하십시오."
 
-#: src/gedit-utils.c:911
+#: src/gedit-utils.c:845
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -1909,7 +2177,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:918
+#: src/gedit-utils.c:852
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -1918,7 +2186,7 @@ msgstr ""
 "파일 \"%s\"을(를) 열기 위한 메모리가 부족합니다. 몇몇 응용 프로그램을 닫고 다"
 "시 시도하십시오."
 
-#: src/gedit-utils.c:931
+#: src/gedit-utils.c:878
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -1930,7 +2198,7 @@ msgstr ""
 "\n"
 "입력한 위치와 프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:944
+#: src/gedit-utils.c:893
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -1941,7 +2209,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:951
+#: src/gedit-utils.c:900
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -1952,7 +2220,7 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:958
+#: src/gedit-utils.c:907
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -1963,7 +2231,7 @@ msgstr ""
 "\n"
 "입력한 위치가 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:966
+#: src/gedit-utils.c:915
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -1974,17 +2242,17 @@ msgstr ""
 "\n"
 "이진 파일을 열려고 한 것 같습니다."
 
-#: src/gedit-utils.c:1004
+#: src/gedit-utils.c:953
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 열 수 없습니다."
 
-#: src/gedit-utils.c:1055
+#: src/gedit-utils.c:1004
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 저장할 수 없습니다."
 
-#: src/gedit-utils.c:1059
+#: src/gedit-utils.c:1008
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -1995,7 +2263,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1112
+#: src/gedit-utils.c:1061
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2006,24 +2274,24 @@ msgstr ""
 "\n"
 "최근에 지워졌을 것입니다."
 
-#: src/gedit-utils.c:1119
+#: src/gedit-utils.c:1068
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 깨진 데이터가 들어 있습니다."
 
-#: src/gedit-utils.c:1130
+#: src/gedit-utils.c:1079
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "파일 \"%s\"을(를) 되돌릴 수 없습니다. gedit가 %s: 위치를 처리할 수 없습니다."
 
-#: src/gedit-utils.c:1138 src/gedit-utils.c:1260
+#: src/gedit-utils.c:1085 src/gedit-utils.c:1225
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다."
 
-#: src/gedit-utils.c:1145
+#: src/gedit-utils.c:1095
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2031,17 +2299,17 @@ msgid ""
 msgstr ""
 "파일 \"%s\"을(를) 되돌릴 수 없습니다. 데이터에 잘못된 형식이 들어 있습니다."
 
-#: src/gedit-utils.c:1152
+#: src/gedit-utils.c:1102
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 파일이 너무 큽니다."
 
-#: src/gedit-utils.c:1159
+#: src/gedit-utils.c:1109
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 접근이 거부되었습니다."
 
-#: src/gedit-utils.c:1166
+#: src/gedit-utils.c:1116
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2052,7 +2320,7 @@ msgstr ""
 "\n"
 "몇몇 파일을 닫은 후 다시 시도하십시오."
 
-#: src/gedit-utils.c:1174
+#: src/gedit-utils.c:1124
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2061,7 +2329,7 @@ msgstr ""
 "파일 \"%s\"을(를) 되돌리려는데 메모리가 부족합니다. 몇몇 응용 프로그램을 닫"
 "은 후 다시 시도하십시오."
 
-#: src/gedit-utils.c:1187
+#: src/gedit-utils.c:1150
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2072,7 +2340,7 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:1199
+#: src/gedit-utils.c:1164
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2083,12 +2351,12 @@ msgstr ""
 "\n"
 "프록시 설정이 올바른지 확인하고 다시 시도하십시오."
 
-#: src/gedit-utils.c:1206
+#: src/gedit-utils.c:1171
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr "파일 \"%s\"을(를) 되돌릴 수 없습니다. 기록 준비가 실패하였습니다."
 
-#: src/gedit-utils.c:1213
+#: src/gedit-utils.c:1178
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2099,80 +2367,91 @@ msgstr ""
 "\n"
 "아마 이진 파일을 되돌릴려고 하는 것 같습니다."
 
-#: src/gedit-utils.c:1222
+#: src/gedit-utils.c:1187
 msgid "It is not possible to revert an Untitled document."
 msgstr "제목 없는 문서는 되돌릴 수 없습니다."
 
-#: src/gedit-view.c:896
+#: src/gedit-view.c:904
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr " %d 줄, %d칸"
 
-#: src/gedit-view.c:934
+#: src/gedit-view.c:942
 msgid "  OVR"
 msgstr " 바꿈"
 
-#: src/gedit-view.c:936
+#: src/gedit-view.c:944
 msgid "  INS"
 msgstr " 삽입"
 
-#: src/gedit2.c:69
+#: src/gedit2.c:75
 msgid "Show mdi debugging messages."
 msgstr "mdi 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:72
+#: src/gedit2.c:78
 msgid "Show commands debugging messages."
 msgstr "명령 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:75
+#: src/gedit2.c:81
 msgid "Show document debugging messages."
 msgstr "문서 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:78
+#: src/gedit2.c:84
 msgid "Show file debugging messages."
 msgstr "파일 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:81
+#: src/gedit2.c:87
 msgid "Show plugin debugging messages."
 msgstr "플러그인 디버깅 메세지를 봅니다"
 
-#: src/gedit2.c:84
+#: src/gedit2.c:90
 msgid "Show prefs debugging messages."
 msgstr "환경 설정 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:87
+#: src/gedit2.c:93
 msgid "Show printing debugging messages."
 msgstr "인쇄 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:90
+#: src/gedit2.c:96
 msgid "Show search debugging messages."
 msgstr "찾기 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:93
+#: src/gedit2.c:99
 msgid "Show undo debugging messages."
 msgstr "실행 취소 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:96
+#: src/gedit2.c:102
 msgid "Show view debugging messages."
 msgstr "보기 디버깅 메세지를 봅니다"
 
-#: src/gedit2.c:99
+#: src/gedit2.c:105
 msgid "Show recent debugging messages."
 msgstr "최근 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:102
+#: src/gedit2.c:108
 msgid "Show session management debugging messages."
 msgstr "세션 관리 디버깅 메세지를 봅니다."
 
-#: src/gedit2.c:105
+#: src/gedit2.c:111
 msgid "Turn on all debugging messages."
 msgstr "모든 디버깅 메세지를 켭니다."
 
-#: src/gedit2.c:164
-msgid "The GNOME text editor"
-msgstr "그놈 텍스트 편집기"
+#: src/gedit2.c:114
+msgid "Quit an existing instance of gedit"
+msgstr "실행 중인 gedit의 인스턴스를 마칩니다"
+
+#: src/gedit2.c:117
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "실행 중인 gedit의 인스턴스에서 새로운 최상위 창을 만듭니다"
+
+#: src/gedit2.c:120
+msgid "Create a new document in an existing instance of gedit"
+msgstr "실행 중인 gedit의 인스턴스에서 새로운 문서를 만듭니다"
 
 #: src/gnome-recent-view-bonobo.c:189
 #, c-format
 msgid "Open %s"
 msgstr "%s 열기"
+
+#~ msgid "U_se current locale only if the file already uses it"
+#~ msgstr "이미 파일이 사용하고 있을때 만 현재 로케일 사용(_S)"
