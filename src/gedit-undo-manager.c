@@ -43,7 +43,7 @@ typedef struct _GeditUndoDeleteAction		GeditUndoDeleteAction;
 
 typedef enum {
 	GEDIT_UNDO_ACTION_INSERT,
-	GEDIT_UNDO_ACTION_DELETE,
+	GEDIT_UNDO_ACTION_DELETE
 } GeditUndoActionType;
 
 /* 

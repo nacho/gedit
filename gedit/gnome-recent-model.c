@@ -91,7 +91,7 @@ enum {
 enum {
 	PROP_BOGUS,
 	PROP_APPNAME,
-	PROP_LIMIT,
+	PROP_LIMIT
 };
 
 static GType model_signals[LAST_SIGNAL] = { 0 };
