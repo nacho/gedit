@@ -14,84 +14,108 @@
 #include "window.h"
 #include "document.h"
 #include "plugin.h"
+#include "utils.h"
 
 /*Chema , echale un vistazo a este codigo que se me atraviesa . Lo que he hecho es meter en un
  buffer (buffer) todo el texto , buffer_position => posicion respecto al buffer y
  spelling_position posicion respecto al widget de texto . Mira haber si sabes donde falla */
 
-GtkWidget *dialog ;
-GtkWidget *spell ;
+GtkWidget *spell;
 
-Document *doc ;
-
-GString *buffer ;
-gint spelling_position = 0 ;
-gint buffer_position = 0 ;
+gchar *buffer;
+guint  buffer_length;
 
 static void
 destroy_plugin (PluginData *pd)
 {
+	gedit_debug (DEBUG_PLUGINS, "");
+
 	g_free (pd->name);
 }
 
 static void
-spell_check_finish ( GtkWidget *w , gpointer data )
+spell_check_finish ( GtkWidget *widget, gpointer data )
 {
-	g_string_free (buffer,TRUE);
-	gnome_dialog_close (GNOME_DIALOG (dialog));
-}
+	gedit_debug (DEBUG_PLUGINS, "");
 
-static gchar *
-spell_check_parse_word ( )
-{
-	GString  *tmp_buffer= g_string_new (NULL) ;
-	gchar c ;
-	
-	while (!isalnum (buffer->str[buffer_position]))
-	{
-		spelling_position = spelling_position + 1;
-		buffer_position = buffer_position + 1;
-		if (buffer_position > buffer->len)
-		{
-			return NULL ;
-		}
-
-	}
-
-	while (isalnum (c= buffer->str[buffer_position]) || c == '\'')
-	{
-		tmp_buffer = g_string_append_c (tmp_buffer , c );
-
-		buffer_position = buffer_position + 1;
-		if (buffer_position > buffer->len)
-		{
-			return NULL ;
-		}
-	}
-	
-	return g_strdup (tmp_buffer->str) ;
-	
+	if (buffer != NULL)
+		g_free (buffer);
+	buffer = NULL;
 }
 
 static void
+spell_check_cancel_clicked (GtkWidget *widget, gpointer data)
+{
+	gnome_dialog_close (GNOME_DIALOG (widget));
+}
+
+static gchar *
+spell_check_parse_word (void)
+{
+	static gint buffer_position;
+	gint word_length;
+	gchar *word;
+
+	
+	gedit_debug (DEBUG_PLUGINS, "");
+
+	word_length = 0;
+	while ( (buffer_position + word_length) <= buffer_length)
+	{
+		if (isalnum (buffer [buffer_position + word_length]))
+		{
+			word_length++;
+			continue;
+		}
+#if 0
+		g_print ("buff_pos:%i wordlenght:%i -%s-\n",
+			 buffer_position, word_length, word);
+#endif
+		word = g_strndup ( buffer + buffer_position, word_length);
+
+		/* We need to advance buffer_position to the start
+		   of the next word for the next time */
+		buffer_position += word_length;
+
+		while (!isalnum (buffer [buffer_position]))
+			buffer_position++;
+		
+		return word;
+	}
+
+	return NULL;
+}
+	
+static gint
 spell_check_start ( void )
 {
-	gint result =0 ;
-	gchar *word = NULL ;
+	gchar *word = NULL;
+	gint retval;
 
-	while ( !result )
-	{
-		if (NULL != (word = spell_check_parse_word ()))
-		{
-			result = gnome_spell_check (GNOME_SPELL(spell), word);
-			g_free (word);
-		}
-		else
-		{
-			result = 1;
-		}
-	}		
+	g_print ("Spell check start\n");
 	
+	word = spell_check_parse_word ();
+	g_print ("Word to check for : *%s*\n", word);
+
+	/* if we are done */
+	if (word == NULL)
+		return FALSE;
+
+	retval = 0;
+	
+	retval = gnome_spell_check (GNOME_SPELL(spell), word);
+
+	g_print ("retval %i\n", retval);
+
+	if (retval!=1)
+		g_print ("!!!!!!!!!!!!!!!!!"
+			 "!!!!!!!!!!!!!!!!!"
+			 "!!!!!!!!!!!!!!!!!"
+			 "!!!!!\n");
+	if (retval == 0)
+		return FALSE;
+	else
+		return TRUE;
 }
 
 
@@ -101,10 +125,22 @@ handled_word_cb ( GtkWidget *spell , gpointer data )
 	GString *word_to_change ;
 	GnomeSpellInfo *si = (GnomeSpellInfo *) GNOME_SPELL(spell)->spellinfo->data;
 	gint len ;
+	Document *doc = data;
+
+	gedit_debug (DEBUG_PLUGINS, "");
 	
+	g_return_if_fail (doc!=NULL);
+
+	g_print ("Returning from handled_word_cb\n");
+
+	gtk_idle_add ((GtkFunction) spell_check_start, NULL);
+
+	return;
+	
+#if 0
 	len = strlen (si->word);
 	
-	if(si->replacement)
+	if (si->replacement)
 	{
 	
                 word_to_change = g_string_new (si->replacement);
@@ -120,48 +156,73 @@ handled_word_cb ( GtkWidget *spell , gpointer data )
 
 	g_string_free (word_to_change,TRUE);
 
-	gtk_idle_add((GtkFunction) spell_check_start, NULL);
-
+	gtk_idle_add ((GtkFunction) spell_check_start, NULL);
+#endif
 }
 
 static void
-spell_check (void){
+spell_check (void)
+{
 
-     GladeXML *gui;
-     GtkWidget *cancel;
+	GladeXML *gui;
+	GtkWidget *cancel;
+	GtkWidget *dialog;
+	GtkWidget *dialog_vbox;
+	Document *doc;
     
-     doc = gedit_document_current ();
+	gedit_debug (DEBUG_PLUGINS, "");
 
-     if (doc == NULL)
-     {
-	     return ;
-     }
+	doc = gedit_document_current ();
 
-     buffer = g_string_new ( gedit_document_get_buffer (doc) );
-     
-     gui = glade_xml_new (GEDIT_GLADEDIR "/spell.glade",NULL);
+	if (doc == NULL)
+		return ;
 
-     if (!gui)
-     {
-	     g_warning ("Could not find spell.glade");
-	     return;
-     }
+	gui = glade_xml_new (GEDIT_GLADEDIR "/spell.glade",NULL);
 
-     dialog     = glade_xml_get_widget (gui,"spell_check_dialog");
-     cancel     = glade_xml_get_widget (gui,"cancel_button");     
-     spell      = glade_xml_get_widget (gui,"spell_widget");
-          
-     gtk_signal_connect (GTK_OBJECT ( cancel ) , "clicked" , GTK_SIGNAL_FUNC( spell_check_finish ) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( dialog ) , "delete_event" , GTK_SIGNAL_FUNC( spell_check_finish ) , NULL);
-     gtk_signal_connect (GTK_OBJECT ( spell ) , "handled_word" , GTK_SIGNAL_FUNC ( handled_word_cb ), NULL);
+	if (!gui)
+	{
+		g_warning ("Could not find spell.glade");
+		return;
+	}
 
-     gnome_dialog_set_parent (GNOME_DIALOG (dialog), gedit_window_active());
-     gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+	dialog      = glade_xml_get_widget (gui, "dialog");
+	cancel      = glade_xml_get_widget (gui, "cancel_button");
+	dialog_vbox = glade_xml_get_widget (gui, "vbox");
+	
 
-     gtk_widget_show_all (dialog);
-     gtk_object_destroy (GTK_OBJECT (gui));
+	g_return_if_fail (dialog_vbox != NULL);
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (cancel != NULL);
 
-     gtk_idle_add((GtkFunction) spell_check_start , NULL);
+	spell = gnome_spell_new();
+
+	g_return_if_fail (spell  != NULL);
+
+	gtk_box_pack_start (GTK_BOX (dialog_vbox),
+			    spell, FALSE, FALSE, FALSE);
+	gtk_widget_show (spell);
+
+	gtk_signal_connect (GTK_OBJECT (dialog), "clicked",
+			    GTK_SIGNAL_FUNC (spell_check_cancel_clicked), NULL);
+	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
+			    GTK_SIGNAL_FUNC (spell_check_finish), NULL);
+	gtk_signal_connect (GTK_OBJECT (spell), "handled_word",
+			    GTK_SIGNAL_FUNC (handled_word_cb), doc);
+
+	gnome_dialog_set_parent (GNOME_DIALOG (dialog), gedit_window_active());
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
+
+	buffer = gedit_document_get_buffer (doc);
+	buffer_length = strlen (buffer);
+
+	if (buffer_length < 1)
+		return;
+
+
+	gtk_widget_show_all (dialog);
+	gtk_object_destroy (GTK_OBJECT (gui));
+
+	gtk_idle_add ((GtkFunction) spell_check_start, NULL);
 }
 
 
@@ -169,7 +230,8 @@ spell_check (void){
 gint
 init_plugin (PluginData *pd)
 {
-	/* initialise */
+	gedit_debug (DEBUG_PLUGINS, "");
+
 	pd->destroy_plugin = destroy_plugin;
 	pd->name = _("Spell Check");
 	pd->desc = _("Spell Check");

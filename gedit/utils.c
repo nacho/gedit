@@ -117,7 +117,20 @@ gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* forma
 	msg = g_strdup_vprintf (format, args);
 	va_end (args);
 
-	g_print ("%s:%d (%s) %s\n", file, line, function, msg);
+	if ( debug ||
+	     (debug_view     && section == GEDIT_DEBUG_VIEW)     ||
+	     (debug_undo     && section == GEDIT_DEBUG_UNDO)     ||
+	     (debug_search   && section == GEDIT_DEBUG_SEARCH)   ||
+	     (debug_print    && section == GEDIT_DEBUG_PRINT)    ||
+	     (debug_prefs    && section == GEDIT_DEBUG_PREFS)    ||
+	     (debug_plugins  && section == GEDIT_DEBUG_PLUGINS)  ||
+	     (debug_file     && section == GEDIT_DEBUG_FILE)     ||
+	     (debug_document && section == GEDIT_DEBUG_DOCUMENT) ||
+	     (debug_commands && section == GEDIT_DEBUG_COMMANDS) ||
+	     (debug_recent   && section == GEDIT_DEBUG_RECENT)   ||
+	     (debug_window   && section == GEDIT_DEBUG_WINDOW) )
+		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
+	
 	g_free (msg);
 }
 

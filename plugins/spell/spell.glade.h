@@ -4,4 +4,3 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Spell Check");
