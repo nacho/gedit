@@ -6,5 +6,5 @@
 
 gchar *s = N_("gedit: Set program location...");
 gchar *s = N_("label");
-gchar *s = N_("_Location to search for :");
+gchar *s = N_("_Location to search for:");
 gchar *s = N_("gedit: Browse for program location...");
