@@ -1455,7 +1455,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 		saved_errno = errno;
 
 		if (create_backup_copy && rename (backup_filename, real_filename) != 0)
-			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, saved_errno,
+			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno,
 				     " ");
 		else
 			g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, saved_errno,
