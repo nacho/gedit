@@ -73,7 +73,7 @@ void gedit_utils_error_reporting_reverting_file (const gchar *uri,
 					       GError *error,
 					       GtkWindow *parent);
 
-gboolean g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2);
+gboolean g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2);
 
 void gedit_utils_set_atk_name_description (GtkWidget *widget, const gchar *name,
 						const gchar *description);
@@ -81,6 +81,7 @@ void gedit_utils_set_atk_relation (GtkWidget *obj1, GtkWidget *obj2,
 						AtkRelationType rel_type);
 
 gboolean gedit_utils_uri_exists (const gchar* text_uri);
+gchar *  gedit_utils_convert_search_text (const gchar *text);
 
 #endif /* __GEDIT_UTILS_H__ */
 

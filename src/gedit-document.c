@@ -1810,12 +1810,15 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	GtkTextIter iter;
 	gboolean found = FALSE;
 	GtkTextSearchFlags search_flags;
+	gchar *converted_str;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	g_return_val_if_fail (doc->priv != NULL, FALSE);
 	g_return_val_if_fail (str != NULL, FALSE);
+
+	converted_str = gedit_utils_convert_search_text (str);
 
 	search_flags = GTK_TEXT_SEARCH_VISIBLE_ONLY | GTK_TEXT_SEARCH_TEXT_ONLY;
 	
@@ -1843,11 +1846,11 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	else		
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 
-	if (*str != '\0')
+	if (*converted_str != '\0')
     	{
       		GtkTextIter match_start, match_end;
 
-          	found = gedit_text_iter_forward_search (&iter, str, search_flags,
+          	found = gedit_text_iter_forward_search (&iter, converted_str, search_flags,
                                         	&match_start, &match_end,
                                                	NULL);	
 		if (found)
@@ -1865,6 +1868,8 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 		doc->priv->last_searched_text = g_strdup (str);
 		doc->priv->last_search_was_case_sensitive = case_sensitive;
 	}
+
+	g_free (converted_str);
 
 	return found;
 }
@@ -1956,11 +1961,14 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 {
 	GtkTextIter iter;
 	GtkTextIter sel_bound;
+	gchar *converted_replace;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (replace != NULL);	
+
+	converted_replace = gedit_utils_convert_search_text (replace);
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
                                     &iter,
@@ -1991,10 +1999,10 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
                                     &iter,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					                      "insert"));
-	if (*replace != '\0')
+	if (*converted_replace != '\0')
 		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
 					&iter,
-					replace, strlen (replace));
+					converted_replace, strlen (converted_replace));
 
 	if (doc->priv->last_replace_text != NULL)
 		g_free (doc->priv->last_replace_text);
@@ -2002,6 +2010,7 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 	doc->priv->last_replace_text = g_strdup (replace);
 
 	gedit_document_end_user_action (doc);
+	g_free (converted_replace);
 }
 
 gboolean

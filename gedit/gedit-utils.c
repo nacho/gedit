@@ -377,7 +377,7 @@ finally_1:
  * n: len of the string in bytes
  */
 gboolean 
-g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2)
+g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2)
 {
 	gchar *casefold;
 	gchar *normalized_s1;
@@ -511,7 +511,7 @@ lines_match (const GtkTextIter *start,
       /* If it's not the first line, we have to match from the
        * start of the line.
        */
-      if (g_uft8_caselessnmatch (line_text, *lines, strlen (line_text), strlen (*lines)) == 0)
+      if (g_utf8_caselessnmatch (line_text, *lines, strlen (line_text), strlen (*lines)) == 0)
         found = line_text;
       else
         found = NULL;
@@ -1321,4 +1321,64 @@ gedit_utils_uri_exists (const gchar* text_uri)
 	gnome_vfs_uri_unref (uri);
 
 	return res;
+}
+
+gchar *
+gedit_utils_convert_search_text (const gchar *text)
+{
+	GString *str;
+	gint length;
+	gboolean drop_prev = FALSE;
+	const gchar *cur;
+	const gchar *end;
+	const gchar *prev;
+
+	g_return_val_if_fail (text != NULL, NULL);
+
+	length = strlen (text);
+
+	str = g_string_new ("");
+
+	cur = text;
+	end = text + length;
+	prev = NULL;
+	while (cur != end) {
+		const gchar *next;
+		next = g_utf8_next_char (cur);
+
+		if (prev && (*prev == '\\')) {
+			switch (*cur) {
+				case 'n':
+					str = g_string_append (str, "\n");
+				break;
+				case 'r':
+					str = g_string_append (str, "\r");
+				break;
+				case 't':
+					str = g_string_append (str, "\t");
+				break;
+				case '\\':
+					str = g_string_append (str, "\\");
+					drop_prev = TRUE;
+				break;
+				default:
+					str = g_string_append (str, "\\");
+					str = g_string_append (str, cur);
+				break;
+			}
+		} else if (*cur != '\\') {
+			str = g_string_append_len (str, cur, 1);
+		}
+
+		if (!drop_prev)
+			prev = cur;
+		else {
+			prev = NULL;
+			drop_prev = FALSE;
+		}
+
+		cur = next;
+	}
+
+	return g_string_free (str, FALSE);
 }

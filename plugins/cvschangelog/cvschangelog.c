@@ -38,6 +38,7 @@
 #include <gedit-file.h>
 #include <gedit-debug.h>
 #include <gedit-menus.h>
+#include <gedit-utils.h>
 
 #define GEDIT_CVSCHANGELOG_PLUGIN_PATH_STRING_SIZE 1
 
@@ -84,7 +85,8 @@ is_changelog (const gchar * path)
 
 	base = g_path_get_basename (path);
 
-	if (g_ascii_strcasecmp (base, "changelog") == 0)
+	if (g_utf8_caselessnmatch (base, "changelog",
+				   strlen (base), strlen ("changelog")))
 		ret = TRUE;
 
 	g_free (base);

@@ -1,3 +1,9 @@
+2002-07-15  James Willcox  <jwillcox@cs.indiana.edu>
+
+	* cvschangelog/cvschangelog.c (is_chnagelog):
+	Use g_utf8_caselessnmatch() instead of strcasecmp().  This plugin
+	is hopefully fully utf8 safe now.
+
 2002-07-14  James Willcox  <jwillcox@cs.indiana.edu>
 
         * cvschangelog/cvschangelog.c:  Fixed several rather embarrassing bugs

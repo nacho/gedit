@@ -1,3 +1,16 @@
+2002-07-15  James Willcox  <jwillcox@cs.indiana.edu>
+
+	* gedit-utils.[ch] (gedit_utils_convert_search_text):  Converts
+	things like "\n" into special characters.  Also, corrected
+	g_uft8_caselessnmatch() to g_utf8_caselessnmatch() and fixed
+	all references to the misspelled version.
+
+	* gedit-document.[ch]:  search using the converted string
+
+	* dialogs/gedit-dialog-replace.c
+	(replace_dlg_replace_button_pressed):  Compare to the converted
+	string to the selected text, instead of the user-specified string.
+
 2002-07-15  Paolo Maggi  <maggi@athena.polito.it>
 
 	* dialogs/gedit-preferences-dialog.c: fixed bug #88019

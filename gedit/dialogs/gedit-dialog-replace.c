@@ -44,6 +44,7 @@
 #include "gedit-mdi-child.h"
 #include "gedit-view.h"
 #include "gedit-debug.h"
+#include "gedit-utils.h"
 
 #define GEDIT_RESPONSE_FIND		101
 #define GEDIT_RESPONSE_REPLACE		102
@@ -574,6 +575,7 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	const gchar* search_string = NULL;
 	const gchar* replace_string = NULL;
 	gchar* selected_text = NULL;
+	gchar *converted_search_string = NULL;
 	gboolean case_sensitive;
 
 	gedit_debug (DEBUG_SEARCH, "");
@@ -615,10 +617,11 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	else
 		case_sensitive = FALSE;
 
+	converted_search_string = gedit_utils_convert_search_text (search_string);
+
 	if ((selected_text == NULL) ||
-	    (case_sensitive && (strcmp (selected_text, search_string) != 0)) ||
-	    (!case_sensitive && !g_uft8_caselessnmatch (selected_text, 
-						       search_string, 
+	    (case_sensitive && (strcmp (selected_text, converted_search_string)
+	     !=0)) || (!case_sensitive && !g_utf8_caselessnmatch (selected_text, search_string, 
 						       strlen (selected_text), 
 						       strlen (search_string)) != 0))
 	{
@@ -638,6 +641,7 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	}
 				
 	g_free (selected_text);
+	g_free (converted_search_string);
 		
 	gedit_debug (DEBUG_SEARCH, "Replace string: %s", replace_string ? replace_string : "NULL");
 
