@@ -33,7 +33,7 @@
 #include "gE_document.h"
 
 
-typedef struct _gE_prefs_dialog {
+typedef struct _gE_prefs_data {
 	GnomePropertyBox *pbox;
 
 	/* Font Seleftion */
@@ -96,8 +96,6 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
   data->window->print_cmd = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->pcmd)));
   
   /* Font Settings */
-  if ((gtk_entry_get_text (GTK_ENTRY(prefs->font))) != NULL)
-  {
     data->window->font = g_strdup (gtk_entry_get_text (GTK_ENTRY(prefs->font)));
   	if ((rc = gE_prefs_open_file ("gtkrc", "r")) == NULL)
 	{
@@ -118,7 +116,7 @@ void gE_apply(GnomePropertyBox *pbox, gint page, gE_data *data)
 	fprintf(file, "}\n");
 	fprintf(file, "widget_class \"*GtkText\" style \"text\"\n");
 	fclose(file);  
-  }
+
   gE_window_refresh(data->window);
   gE_save_settings(data->window, data->window);
   
@@ -218,17 +216,33 @@ static GtkWidget *print_page_new()
 }
 
 
-void font_sel_ok (GtkWidget	*w, GtkFontSelectionDialog *fsel)
+void font_sel_ok (GtkWidget	*w, GtkWidget *fsel)
 {
   gtk_entry_set_text(GTK_ENTRY(prefs->font),
-                     gtk_font_selection_dialog_get_font_name (fsel));
-  gtk_widget_destroy (GTK_WIDGET (fsel));
+       gtk_font_selection_dialog_get_font_name (GTK_FONT_SELECTION_DIALOG(fsel)));
+  gtk_widget_destroy (fsel);
+}
+
+void font_sel_cancel (GtkWidget *w, GtkWidget *fsel)
+{
+  gtk_widget_destroy (fsel);
 }
 
 void font_sel()
 {
+       GtkWidget *fs;
+        
+        fs = gtk_font_selection_dialog_new("Font");
+        gtk_font_selection_dialog_set_font_name(GTK_FONT_SELECTION_DIALOG(fs), 
+        gtk_entry_get_text(GTK_ENTRY(prefs->font)));
 
-  
+        gtk_signal_connect(GTK_OBJECT(GTK_FONT_SELECTION_DIALOG(fs)->ok_button), "clicked",
+                GTK_SIGNAL_FUNC(font_sel_ok), fs);
+        gtk_signal_connect(GTK_OBJECT(GTK_FONT_SELECTION_DIALOG(fs)->cancel_button), "clicked",
+                GTK_SIGNAL_FUNC(font_sel_cancel), fs);
+
+        gtk_widget_show(fs);
+/*  
   if (!prefs->fontsel)
     {
       prefs->fontsel = gtk_font_selection_dialog_new ("Select Font");
@@ -253,7 +267,8 @@ void font_sel()
       if (!GTK_WIDGET_VISIBLE (prefs->fontsel))
         gtk_widget_show (prefs->fontsel);
       else
-        gtk_widget_destroy (prefs->fontsel);
+        gtk_widget_destroy (prefs->fontsel);*/
+        
 }
       
 

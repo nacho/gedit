@@ -299,7 +299,7 @@ gE_save_settings(gE_window *window, gpointer cbwindow)
 	gE_prefs_set_int("toolbar", (gint) window->have_toolbar);
 	gE_prefs_set_int("tb text", (gint) window->have_tb_text);
 	gE_prefs_set_int("tb pix", (gint) window->have_tb_pix);
-
+	gE_prefs_set_char("font", window->font);
 	if (window->print_cmd == "")
 		gE_prefs_set_char ("print command", "lpr -rs %s");
 	else
@@ -315,7 +315,7 @@ void gE_get_settings(gE_window *w)
 	w->have_toolbar = gE_prefs_get_int("toolbar");
 	w->have_tb_text = gE_prefs_get_int("tb text");
 	w->have_tb_pix = gE_prefs_get_int("tb pix");
-
+	w->font = gE_prefs_get_char("font");
 	w->print_cmd = gE_prefs_get_char("print command");
 
 	gtk_notebook_set_tab_pos(GTK_NOTEBOOK(w->notebook), w->tab_pos);
