@@ -23,6 +23,9 @@
 #endif
 #include <gtk/gtk.h>
 #include <glib.h>
+#if PLUGIN_TEST
+#include "plugin.h"
+#endif
 #include "main.h"
 #include "menus.h"
 
@@ -130,6 +133,14 @@ GnomeUIInfo gedit_help_menu []= {
 	GNOMEUIINFO_END */
 };
 
+#if PLUGIN_TEST
+GnomeUIInfo gedit_plugins_menu []= {
+  { GNOME_APP_UI_ITEM, N_("Hello World"), NULL, send_hello, NULL, NULL,
+    GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL},
+  { GNOME_APP_UI_ENDOFINFO}
+};
+#endif
+
 GnomeUIInfo gedit_menu [] = {
 	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
@@ -139,6 +150,10 @@ GnomeUIInfo gedit_menu [] = {
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 	{ GNOME_APP_UI_SUBTREE, N_("Options"), NULL, &gedit_options_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+#if PLUGIN_TEST
+	{ GNOME_APP_UI_SUBTREE, N_("Plugins"), NULL, &gedit_plugins_menu, NULL, NULL,
+	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+#endif
 	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 	GNOMEUIINFO_END
@@ -162,6 +177,11 @@ gE_window *gE_window_new()
   window->search->window = NULL;
   window->auto_indent = 1;
   window->show_tabs = 1;
+  
+#if PLUGIN_TEST
+  window->hello = plugin_init( "/usr/local/bin/hello-plugin" );
+  g_print( "Starting plugin with pid #%d", window->hello->pid );
+#endif
 
 #ifdef WITHOUT_GNOME
   window->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -385,3 +405,10 @@ void gE_show_version()
 {
 	g_print ("%s\n", gEdit_ID);
 }
+
+#if PLUGIN_TEST
+void send_hello( GtkWidget *widget, gpointer data )
+{
+  plugin_send( main_window->hello, "Hello World\n", 12 );
+}
+#endif

@@ -57,6 +57,11 @@ void tab_lef_cback (GtkWidget *widget, gpointer data);
 void tab_rgt_cback (GtkWidget *widget, gpointer data);
 void tab_toggle_cback (GtkWidget *widget, gpointer data);
 
+#if PLUGIN_TEST
+  /* Plugins */
+  void send_hello (GtkWidget *widget, gpointer data);
+#endif
+
 /* Auto indent */
 void auto_indent_callback (GtkWidget *text, GdkEventKey *event);
 void auto_indent_toggle_callback (GtkWidget *w, gpointer data);
@@ -110,6 +115,9 @@ struct _gE_window {
 	gint show_status;
 	gint tab_pos;
 	gchar *print_cmd;
+#if PLUGIN_TEST
+  plugin *hello;
+#endif
 };
 
 struct _gE_document {

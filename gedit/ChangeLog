@@ -1,3 +1,18 @@
+1998-06-17  Chris Lahey  <clahey@umich.edu>
+
+	* plugin.h: 
+	* plugin.c: New files for plugins.
+	* hello.c: The test plugin.  Needs manual compilation still.
+	* gE_document.c, main.h: Changed to allow plugin test.  Changes
+	are #defined out unless PLUGIN_TEST is defined non-zero.
+
+	In general, this feature is not enabled by default.  This is the
+	very first draft, just to make sure the inter process stuff is
+	working.  To enable, compile hello.c and install it as
+	/usr/local/bin/hello-plugin, uncomment the two new files in
+	Makefile.am and define PLUGIN_TEST non-zero near the top of
+	gE_document.c and main.h.
+
 1998-06-10  Chris Lahey  <clahey@umich.edu>
 
 	* menus.c (get_main_menu): 
