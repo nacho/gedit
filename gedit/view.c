@@ -293,7 +293,12 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 
 	gedit_debug ("start", DEBUG_VIEW);
 
+	g_return_if_fail (view != NULL);
 	doc = view->doc;
+	g_return_if_fail (doc != NULL);
+
+	if (start_pos == end_pos )
+	     return;
 
 	text_to_delete = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
 	if (undo)
@@ -692,6 +697,7 @@ gedit_view_set_readonly (View *view, gint readonly)
 	
 	doc_name = gedit_document_get_tab_name (view->doc);
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (view->doc), doc_name);
+	gedit_document_set_title(view->doc);
 	g_free (doc_name);
 }
 

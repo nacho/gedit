@@ -219,7 +219,6 @@ gedit_document_text_changed_signal_connect (Document *doc)
 
 
 
-#define GEDIT_MIN_TAB_LENGTH 6
 /**
  * gedit_document_get_tab_name:
  * @doc: 
@@ -633,10 +632,15 @@ gedit_document_set_title (Document *doc)
 	if (doc == NULL)
 		return;
 
-	docname = GNOME_MDI_CHILD (doc)->name;
-
+	if (doc->filename == NULL)
+		docname = g_strdup_printf ("Untitled %i", doc->untitled_number);
+	else
+		docname = g_basename (doc->filename);
+		
 	if (doc->changed)
 		title = g_strdup_printf ("gedit: %s %s", docname, _("(modified)"));
+	else if (doc->readonly)
+		title = g_strdup_printf ("gedit: %s %s", docname, _("(readonly)"));
 	else
 		title = g_strdup_printf ("gedit: %s", docname);
 
