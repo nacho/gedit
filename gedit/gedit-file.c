@@ -182,6 +182,8 @@ gedit_file_open (GeditMDIChild *active_child)
 							
 			}
 			
+			gedit_debug (DEBUG_FILE, "Defaul path : %s", 
+				    (gedit_default_path == NULL) ? NULL : gedit_default_path); 
 			gedit_debug (DEBUG_FILE, "File: %s", files[i]);
 		}
 
