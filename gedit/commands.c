@@ -233,6 +233,25 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 
 /* --- Notebook Tab Stuff --- */
 
+void tab_pos (GtkPositionType pos)
+{
+	
+	gint i;
+	GnomeApp *app;
+	GtkWidget *book;
+	
+	
+	for (i = 0; i < g_list_length (mdi->windows); i++) {
+	
+	  app = g_list_nth_data (mdi->windows, i);
+	  
+	  book = app->contents;
+	  
+	  gtk_notebook_set_tab_pos (GTK_NOTEBOOK(book), pos);
+	  
+	}
+	
+}
    
 void
 tab_top_cb(GtkWidget *widget, gpointer cbwindow)
@@ -240,6 +259,9 @@ tab_top_cb(GtkWidget *widget, gpointer cbwindow)
 
 	mdi->tab_pos = GTK_POS_TOP;
 	settings->tab_pos = GTK_POS_TOP;
+	
+	tab_pos (GTK_POS_TOP);
+	
 }
 
 
@@ -249,6 +271,8 @@ tab_bot_cb(GtkWidget *widget, gpointer cbwindow)
 
 	mdi->tab_pos =  GTK_POS_BOTTOM;
 	settings->tab_pos = GTK_POS_BOTTOM;
+	
+	tab_pos (GTK_POS_BOTTOM);
 }
 
 void
@@ -257,6 +281,9 @@ tab_lef_cb(GtkWidget *widget, gpointer cbwindow)
 
 	mdi->tab_pos =  GTK_POS_LEFT;
 	settings->tab_pos = GTK_POS_LEFT;
+	
+	tab_pos (GTK_POS_LEFT);
+	
 }
 
 void
@@ -265,6 +292,9 @@ tab_rgt_cb(GtkWidget *widget, gpointer cbwindow)
 
 	mdi->tab_pos =  GTK_POS_RIGHT;
 	settings->tab_pos = GTK_POS_RIGHT;
+	
+	tab_pos (GTK_POS_RIGHT);
+	
 }
 /*
 void
