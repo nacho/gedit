@@ -70,8 +70,8 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	
 	data->temp1 = g_strdup (info->plugin_name);
 	data->window = window;
-	path = g_malloc0 (strlen ("Plugins/") + 1);
-	sprintf (path, "Plugins/");
+	path = g_new (gchar, strlen (_("Plugins") ) + 2 );
+	sprintf (path, "%s/", _("Plugins"));
 	menu->label = g_strdup (info->menu_location);
 	menu->type = GNOME_APP_UI_ITEM;
 	menu->hint = NULL;
