@@ -33,6 +33,7 @@
 #include <gtk/gtk.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
+#include <gconf/gconf-client.h>
 #include "egg-recent-model.h"
 #include "egg-recent-item.h"
 
@@ -40,8 +41,12 @@
 #define EGG_RECENT_MODEL_BUFFER_SIZE 8192
 
 #define EGG_RECENT_MODEL_MAX_ITEMS 500
-#define EGG_RECENT_MODEL_DEFAULT_LIMIT -1
+#define EGG_RECENT_MODEL_DEFAULT_LIMIT 10
 #define EGG_RECENT_MODEL_TIMEOUT_LENGTH 200
+
+#define EGG_RECENT_MODEL_KEY_DIR "/desktop/gnome/recent_files"
+#define EGG_RECENT_MODEL_DEFAULT_LIMIT_KEY EGG_RECENT_MODEL_KEY_DIR "/default_limit"
+#define EGG_RECENT_MODEL_EXPIRE_KEY EGG_RECENT_MODEL_KEY_DIR "/expire"
 
 struct _EggRecentModel {
 	GObject parent_instance;	/* We emit signals */
@@ -59,6 +64,12 @@ struct _EggRecentModel {
 	GHashTable *monitors;
 
 	GnomeVFSMonitorHandle *monitor;
+
+	GConfClient *client;
+	gboolean use_default_limit;
+
+	guint limit_change_notify_id;
+	guint expiration_change_notify_id;
 
 	guint changed_timeout;
 };
@@ -266,7 +277,7 @@ egg_recent_model_update_item (GList *items, EggRecentItem *item)
 
 		tmp_item_uri = egg_recent_item_get_uri (tmp_item);
 		
-		if (!strcmp (item_uri, tmp_item_uri)) {
+		if (gnome_vfs_uris_match (item_uri, tmp_item_uri)) {
 			/* Found it.  Update the timestamp and append
 			 * any new groups
 			 */
@@ -317,6 +328,7 @@ egg_recent_model_read_raw (EggRecentModel *model, FILE *file)
 
 	return g_string_free (string, FALSE);
 }
+
 
 
 static void
@@ -581,15 +593,15 @@ egg_recent_model_filter (EggRecentModel *model,
 		/* filter by URI scheme */
 		if (pass_mime_test && pass_group_test &&
 		    model->scheme_filter_values != NULL) {
-			gchar **split_uri;
+			gchar *scheme;
 			
-			split_uri = g_strsplit (uri, ":", 2);
+			scheme = gnome_vfs_get_uri_scheme (uri);
 
 			if (egg_recent_model_string_match
-				(model->scheme_filter_values, split_uri[0]))
+				(model->scheme_filter_values, scheme))
 				pass_scheme_test = TRUE;
 
-			g_strfreev (split_uri);
+			g_free (scheme);
 		} else
 			pass_scheme_test = TRUE;
 
@@ -626,6 +638,8 @@ egg_recent_model_monitor_list_cb (GnomeVFSMonitorHandle *handle,
 		g_hash_table_remove (model->monitors, monitor_uri);
 	}
 }
+
+
 
 static void
 egg_recent_model_monitor_list (EggRecentModel *model, GList *list)
@@ -695,6 +709,41 @@ egg_recent_model_monitor_cb (GnomeVFSMonitorHandle *handle,
 	}
 }
 
+static void
+egg_recent_model_monitor (EggRecentModel *model, gboolean should_monitor)
+{
+	GnomeVFSResult res;
+
+	if (should_monitor && model->monitor == NULL) {
+
+		res = gnome_vfs_monitor_add (&model->monitor, model->path,
+					     GNOME_VFS_MONITOR_FILE,
+					     egg_recent_model_monitor_cb,
+					     model);
+
+		if (res != GNOME_VFS_OK)
+			g_warning ("Unable to monitor XML document.  Notification "
+				   "of changes in recent documents list will not be"
+				   "available.");
+	} else if (!should_monitor && model->monitor != NULL) {
+		gnome_vfs_monitor_cancel (model->monitor);
+		model->monitor = NULL;
+	}
+}
+
+static void
+egg_recent_model_set_limit_internal (EggRecentModel *model, int limit)
+{
+	model->limit = limit;
+
+	if (limit <= 0)
+		egg_recent_model_monitor (model, FALSE);
+	else {
+		egg_recent_model_monitor (model, TRUE);
+		egg_recent_model_changed (model);
+	}
+}
+
 static GList *
 egg_recent_model_read (EggRecentModel *model, FILE *file)
 {
@@ -758,7 +807,6 @@ egg_recent_model_write (EggRecentModel *model, FILE *file, GList *list)
 	i=0;
 	while (list) {
 		gchar *uri;
-		gchar *uri_utf8;
 		gchar *mime_type;
 		gchar *escaped_uri;
 		time_t timestamp;
@@ -766,11 +814,9 @@ egg_recent_model_write (EggRecentModel *model, FILE *file, GList *list)
 
 
 		uri = egg_recent_item_get_uri (item);
-		uri_utf8 = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
-		escaped_uri = g_markup_escape_text (uri_utf8,
-						    strlen (uri_utf8));
+		escaped_uri = g_markup_escape_text (uri,
+						    strlen (uri));
 		g_free (uri);
-		g_free (uri_utf8);
 
 		mime_type = egg_recent_item_get_mime_type (item);
 		timestamp = egg_recent_item_get_timestamp (item);
@@ -883,6 +929,14 @@ static void
 egg_recent_model_finalize (GObject *object)
 {
 	EggRecentModel *model = EGG_RECENT_MODEL (object);
+
+	egg_recent_model_monitor (model, FALSE);
+
+	gconf_client_notify_remove (model->client,
+				model->limit_change_notify_id);
+	gconf_client_notify_remove (model->client,
+				model->expiration_change_notify_id);
+	g_object_unref (model->client);
 
 	g_free (model->path);
 	
@@ -1027,26 +1081,42 @@ egg_recent_model_class_init (EggRecentModelClass * klass)
 	klass->changed = NULL;
 }
 
+
+
 static void
-egg_recent_model_monitor (EggRecentModel *model, gboolean should_monitor)
+egg_recent_model_limit_changed (GConfClient *client, guint cnxn_id,
+				GConfEntry *entry, gpointer user_data)
 {
-	GnomeVFSResult res;
+	EggRecentModel *model;
+	GConfValue *value;
 
-	if (should_monitor && model->monitor == NULL) {
+	model = EGG_RECENT_MODEL (user_data);
 
-		res = gnome_vfs_monitor_add (&model->monitor, model->path,
-					     GNOME_VFS_MONITOR_FILE,
-					     egg_recent_model_monitor_cb,
-					     model);
+	g_return_if_fail (model != NULL);
 
-		if (res != GNOME_VFS_OK)
-			g_warning ("Unable to monitor XML document.  Notification "
-				   "of changes in recent documents list will not be"
-				   "available.");
-	} else if (!should_monitor && model->monitor != NULL) {
-		gnome_vfs_monitor_cancel (model->monitor);
-		model->monitor = NULL;
+	if (model->use_default_limit == FALSE)
+		return; /* ignore this key */
+
+	/* the key was unset, and the schema has apparently failed */
+	if (entry == NULL)
+		return;
+
+	value = gconf_entry_get_value (entry);
+
+	if (value->type != GCONF_VALUE_INT) {
+		g_warning ("Expected GConfValue of type integer, "
+			   "got something else");
 	}
+
+
+	egg_recent_model_set_limit_internal (model, gconf_value_get_int (value));
+}
+
+static void
+egg_recent_model_expiration_changed (GConfClient *client, guint cnxn_id,
+				     GConfEntry *entry, gpointer user_data)
+{
+
 }
 
 static void
@@ -1066,7 +1136,32 @@ egg_recent_model_init (EggRecentModel * model)
 	model->mime_filter_values = NULL;
 	model->group_filter_values = NULL;
 	model->scheme_filter_values = NULL;
+	
+	model->client = gconf_client_get_default ();
+	gconf_client_add_dir (model->client, EGG_RECENT_MODEL_KEY_DIR,
+			      GCONF_CLIENT_PRELOAD_ONELEVEL, NULL);
+
+	model->limit_change_notify_id = gconf_client_notify_add (model->client,
+					EGG_RECENT_MODEL_DEFAULT_LIMIT_KEY,
+					egg_recent_model_limit_changed,
+					model, NULL, NULL);
+
+	model->expiration_change_notify_id = gconf_client_notify_add
+				       (model->client,
+					EGG_RECENT_MODEL_EXPIRE_KEY,
+					egg_recent_model_expiration_changed,
+					model, NULL, NULL);
+					
+#if 0
+	/* keep this out, for now */
+	model->limit = gconf_client_get_int (model->client,
+				EGG_RECENT_MODEL_DEFAULT_LIMIT_KEY, NULL);
+	model->use_default_limit = TRUE;
+#endif
 	model->limit = EGG_RECENT_MODEL_DEFAULT_LIMIT;
+	model->use_default_limit = FALSE;
+
+	
 
 	model->monitors = g_hash_table_new_full (g_str_hash, g_str_equal,
 				(GDestroyNotify)g_free,
@@ -1087,13 +1182,12 @@ egg_recent_model_init (EggRecentModel * model)
  * Returns: a EggRecentModel object
  */
 EggRecentModel *
-egg_recent_model_new (EggRecentModelSort sort, int limit)
+egg_recent_model_new (EggRecentModelSort sort)
 {
 	EggRecentModel *model;
 
 	model = EGG_RECENT_MODEL (g_object_new (egg_recent_model_get_type (),
-				  "sort-type", sort,
-				  "limit", limit, NULL));
+				  "sort-type", sort, NULL));
 
 	g_return_val_if_fail (model, NULL);
 
@@ -1186,6 +1280,8 @@ egg_recent_model_add (EggRecentModel *model, const gchar *uri)
 	g_return_val_if_fail (uri != NULL, FALSE);
 
 	item = egg_recent_item_new_from_uri (uri);
+
+	g_return_val_if_fail (item != NULL, FALSE);
 
 	ret = egg_recent_model_add_full (model, item);
 
@@ -1297,6 +1393,8 @@ egg_recent_model_get_list (EggRecentModel *model)
 	return list;
 }
 
+
+
 /**
  * egg_recent_model_set_limit:
  * @model:  A EggRecentModel object.
@@ -1311,14 +1409,9 @@ egg_recent_model_get_list (EggRecentModel *model)
 void
 egg_recent_model_set_limit (EggRecentModel *model, int limit)
 {
-	model->limit = limit;
+	model->use_default_limit = FALSE;
 
-	if (limit <= 0)
-		egg_recent_model_monitor (model, FALSE);
-	else {
-		egg_recent_model_monitor (model, TRUE);
-		egg_recent_model_changed (model);
-	}
+	egg_recent_model_set_limit_internal (model, limit);
 }
 
 /**

@@ -28,6 +28,7 @@
 #include <gtk/gtk.h>
 #include <libbonoboui.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnomeui/gnome-icon-theme.h>
 #include "egg-recent-model.h"
 #include "egg-recent-view.h"
 #include "egg-recent-view-bonobo.h"
@@ -48,6 +49,8 @@ struct _EggRecentViewBonobo {
 
 	gboolean show_icons;
 	gboolean show_numbers;
+
+	GnomeIconTheme *theme;
 
 	EggRecentModel *model;
 };
@@ -144,7 +147,6 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 	gchar *tip = NULL;
 	gchar *escaped_name = NULL;
 	gchar *item_path = NULL;
-	gchar *uri;
 	gchar *base_uri;
 	gchar *utf8_uri;
 	gchar *cmd;
@@ -168,6 +170,10 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 	for (i = 1; i <= g_list_length (list); ++i)
 	{
 		EggRecentItem *item = (EggRecentItem *)g_list_nth_data (list, i-1);	
+
+		utf8_uri = egg_recent_item_get_uri_for_display (item);
+		if (utf8_uri == NULL)
+			continue;
 		
 		/* this is what gets passed to our private "activate" callback */
 		md = (EggRecentViewBonoboMenuData *)g_malloc (sizeof (EggRecentViewBonoboMenuData));
@@ -176,8 +182,6 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 		egg_recent_item_ref (md->item);
 
-		uri = egg_recent_item_get_uri (item);
-		utf8_uri = egg_recent_item_get_uri_for_display (item);
 		base_uri = g_path_get_basename (utf8_uri);
 	
 		escaped_name = egg_recent_util_escape_underlines (base_uri);
@@ -187,16 +191,26 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 		verb_name = g_strdup_printf ("%s-%d", view->uid, i);
 
 		if (view->show_icons) {
-			const gchar *stock_item;
+			GdkPixbuf *pixbuf;
 			gchar *mime_type;
+			gchar *uri;
+			gchar *pixbuf_xml;
 
 			mime_type = egg_recent_item_get_mime_type (item);
+			uri = egg_recent_item_get_uri (item);
 			
-			stock_item = egg_recent_util_get_stock_icon (mime_type);
+			pixbuf = egg_recent_util_get_icon (view->theme,
+							   uri, mime_type);
 
-			cmd = g_strdup_printf ("<cmd name=\"%s\" pixtype=\"stock\" pixname=\"%s\"/>", verb_name, stock_item);
+
+			/* Riiiiight.... */
+			pixbuf_xml = bonobo_ui_util_pixbuf_to_xml (pixbuf);
+			
+			cmd = g_strdup_printf ("<cmd name=\"%s\" pixtype=\"pixbuf\" pixname=\"%s\"/>", verb_name, pixbuf_xml);
 
 			g_free (mime_type);
+			g_free (uri);
+			g_free (pixbuf_xml);
 		} else
 			cmd = g_strdup_printf ("<cmd name=\"%s\"/> ",
 					       verb_name);
@@ -251,7 +265,6 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 		g_free (tip);
 		g_free (escaped_name);
 		g_free (item_path);
-		g_free (uri);
 		g_free (utf8_uri);
 		g_free (base_uri);
 		g_free (cmd);
@@ -366,6 +379,7 @@ egg_recent_view_bonobo_finalize (GObject *object)
 
 	g_object_unref (view->model);
 	g_object_unref (view->uic);
+	g_object_unref (view->theme);
 }
 
 static void
@@ -438,6 +452,7 @@ static void
 egg_recent_view_bonobo_init (EggRecentViewBonobo *view)
 {
 	view->uid = egg_recent_util_get_unique_id ();
+	view->theme = gnome_icon_theme_new ();
 }
 
 void

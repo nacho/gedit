@@ -40,7 +40,7 @@ void		egg_recent_item_unref (EggRecentItem *item);
 /* automatically fetches the mime type, etc */
 EggRecentItem * egg_recent_item_new_from_uri (const gchar *uri);
 
-void egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri);
+gboolean egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri);
 gchar * egg_recent_item_get_uri (const EggRecentItem *item);
 gchar * egg_recent_item_get_uri_utf8 (const EggRecentItem *item);
 gchar * egg_recent_item_get_uri_for_display (const EggRecentItem *item);

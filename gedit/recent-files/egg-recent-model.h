@@ -34,8 +34,7 @@ typedef enum {
 GType    egg_recent_model_get_type     (void);
 
 /* constructors */
-EggRecentModel * egg_recent_model_new (EggRecentModelSort sort,
-					   int limit);
+EggRecentModel * egg_recent_model_new (EggRecentModelSort sort);
 
 /* public methods */
 void     egg_recent_model_set_filter_mime_types (EggRecentModel *model,

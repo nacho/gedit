@@ -84,21 +84,20 @@ EggRecentItem *
 egg_recent_item_new_from_uri (const gchar *uri)
 {
 	EggRecentItem *item;
-	gchar *uri_utf8;
 
 	g_return_val_if_fail (uri != NULL, NULL);
 
 	item = egg_recent_item_new ();
 
-	egg_recent_item_set_uri (item ,uri);
+	if (!egg_recent_item_set_uri (item ,uri)) {
+		egg_recent_item_free (item);
+		return NULL;
+	}
 	
-	uri_utf8 = egg_recent_item_get_uri_utf8 (item);
-	item->mime_type = gnome_vfs_get_mime_type (uri_utf8);
+	item->mime_type = gnome_vfs_get_mime_type (item->uri);
 
 	if (!item->mime_type)
 		item->mime_type = g_strdup (GNOME_VFS_MIME_TYPE_UNKNOWN);
-
-	g_free (uri_utf8);
 
 	return item;
 }
@@ -180,17 +179,33 @@ egg_recent_item_new_valist (const gchar *uri, va_list args)
 }
 */
 
-void 
+gboolean
 egg_recent_item_set_uri (EggRecentItem *item, const gchar *uri)
 {
-	gchar *ascii_uri;
+	gchar *utf8_uri;
 
-	ascii_uri = g_filename_from_utf8 (uri, -1, NULL, NULL, NULL);
+	/* if G_BROKEN_FILENAMES is not set, this should succede */
+	if (g_utf8_validate (uri, -1, NULL)) {
+		item->uri = gnome_vfs_make_uri_from_input (uri);
+	} else {
+		utf8_uri = g_filename_to_utf8 (uri, -1, NULL, NULL, NULL);
 
-	if (ascii_uri != NULL)
-		item->uri = ascii_uri;
-	else
-		item->uri = g_strdup (uri);
+		if (utf8_uri == NULL) {
+			g_warning ("Couldn't convert URI to UTF-8");
+			return FALSE;
+		}
+
+		if (g_utf8_validate (utf8_uri, -1, NULL)) {
+			item->uri = gnome_vfs_make_uri_from_input (utf8_uri);
+		} else {
+			g_free (utf8_uri);
+			return FALSE;
+		}
+
+		g_free (utf8_uri);
+	}
+
+	return TRUE;
 }
 
 gchar * 
@@ -199,25 +214,19 @@ egg_recent_item_get_uri (const EggRecentItem *item)
 	return g_strdup (item->uri);
 }
 
-gchar *
+gchar * 
 egg_recent_item_get_uri_utf8 (const EggRecentItem *item)
 {
+	/* this could fail, but it's not likely, since we've already done it
+	 * once in set_uri()
+	 */
 	return g_filename_to_utf8 (item->uri, -1, NULL, NULL, NULL);
 }
 
 gchar *
 egg_recent_item_get_uri_for_display (const EggRecentItem *item)
 {
-	gchar *uri_utf8;
-	gchar *str;
-
-	uri_utf8 = egg_recent_item_get_uri_utf8 (item);
-
-	str = gnome_vfs_unescape_string_for_display (uri_utf8);
-
-	g_free (uri_utf8);
-
-	return str;
+	return gnome_vfs_format_uri_for_display (item->uri);
 }
 
 void 

@@ -354,6 +354,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	model = gedit_recent_get_model ();
 	view = EGG_RECENT_VIEW (egg_recent_view_bonobo_new (
 					ui_component, "/menu/File/Recents"));
+	egg_recent_view_bonobo_show_icons (EGG_RECENT_VIEW_BONOBO (view), TRUE);
 	egg_recent_view_set_model (view, model);
 	
 	g_signal_connect (G_OBJECT (view), "activate",
