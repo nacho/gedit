@@ -1,3 +1,11 @@
+2004-10-03  James Bowes  <bowes@cs.dal.ca>
+
+	* gedit-mdi.c: (gedit_mdi_init), (gedit_mdi_drag_motion_handler),
+	(gedit_mdi_drag_drop_handler), (gedit_mdi_add_view_handler),
+	(gedit_mdi_set_state): Allow dropping of files onto the text view
+	to open the file, even when the text view is read only. Fixes bug 
+	#89881
+
 2004-10-02  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit-file.[ch] (gedit_file_close): returns TRUE if the file has been

@@ -93,7 +93,17 @@ static void gedit_mdi_app_created_handler	(BonoboMDI *mdi, BonoboWindow *win);
 static void gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context, 
 		                                  gint x, gint y, 
 						  GtkSelectionData *selection_data, 
-				                  guint info, guint time);
+						  guint info, guint time);
+static gboolean gedit_mdi_drag_motion_handler    (GtkWidget        *widget,
+						  GdkDragContext   *context,
+						  gint              x,
+						  gint              y,
+						  guint             time);
+static gboolean gedit_mdi_drag_drop_handler      (GtkWidget        *widget,
+						  GdkDragContext   *context,
+						  gint              x,
+						  gint              y,
+						  guint             time);
 static void gedit_mdi_set_app_toolbar_style 	(BonoboWindow *win);
 static void gedit_mdi_set_app_statusbar_style 	(BonoboWindow *win);
 
@@ -783,6 +793,82 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget,
 	g_slist_free (file_list);
 }
 
+/*
+ * Override the gtk_text_view_drag_motion and drag_drop 
+ * functions to get URLs
+ *
+ * If the mime type is text/uri-list, then we will accept
+ * the potential drop, or request the data (depending on the
+ * function).
+ *
+ * If the drag context has any other mime type, then pass the
+ * information onto the GtkTextView's standard handlers.
+ * (widget_class->function_name).
+ *
+ * Fixes bug #89881
+ */
+
+static gboolean 
+gedit_mdi_drag_motion_handler (GtkWidget        *widget,
+			       GdkDragContext   *context,
+			       gint              x,
+			       gint              y,
+			       guint             time)
+{
+	GtkTargetList  *tl;
+	GtkWidgetClass *widget_class;
+	gboolean        result;
+
+	tl = gtk_target_list_new (drag_types, n_drag_types);
+
+	/* If this is a URL, deal with it here, or pass to the text view */
+	if (gtk_drag_dest_find_target (widget, context, tl) != GDK_NONE) 
+	{
+		gdk_drag_status (context, context->suggested_action, time);
+		result = TRUE;
+	} else
+	{
+		widget_class = GTK_WIDGET_GET_CLASS (widget);
+		result = (*widget_class->drag_motion) (widget, context, x, y, time);
+	}
+
+	gtk_target_list_unref (tl);
+
+	return result;
+}
+
+static gboolean 
+gedit_mdi_drag_drop_handler (GtkWidget        *widget,
+			     GdkDragContext   *context,
+			     gint              x,
+			     gint              y,
+			     guint             time)
+{
+	GtkTargetList  *tl;
+	GtkWidgetClass *widget_class;
+	gboolean        result;
+	GdkAtom         target;
+
+	tl = gtk_target_list_new (drag_types, n_drag_types);
+
+	/* If this is a URL, just get the drag data */
+	target = gtk_drag_dest_find_target (widget, context, tl);
+	if (target != GDK_NONE)
+	{
+		gtk_drag_get_data (widget, context, target, time);
+		result = TRUE;
+	}
+	else
+	{
+		widget_class = GTK_WIDGET_GET_CLASS (widget);
+		result = (*widget_class->drag_drop) (widget, context, x, y, time);
+	}
+
+	gtk_target_list_unref (tl);
+
+	return result;
+}
+
 static void
 gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 {
@@ -986,6 +1072,18 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 
 	g_signal_connect (G_OBJECT (text_view), "drag_data_received",
 			  G_CALLBACK (gedit_mdi_drag_data_received_handler), 
+			  NULL);
+	/*
+	 * Get signals before the standard text view functions to deal 
+	 * with urls for text files.
+	 */
+
+	g_signal_connect (G_OBJECT (text_view), "drag_motion",
+			  G_CALLBACK (gedit_mdi_drag_motion_handler), 
+			  NULL);
+
+	g_signal_connect (G_OBJECT (text_view), "drag_drop",
+			  G_CALLBACK (gedit_mdi_drag_drop_handler), 
 			  NULL);
 
 	return TRUE;
