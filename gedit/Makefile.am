@@ -61,8 +61,8 @@ gedit_SOURCES = 	\
 	gE_prefs.c	\
 	gE_prefs_box.c	\
 	gE_prefs_box.h	\
-	gE_print.c	\
-	gE_print.h	\
+	gedit-print.c	\
+	gedit-print.h	\
 	gE_prefs.h	\
 	gE_plugin.h \
 	gE_plugin.c \

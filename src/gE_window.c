@@ -26,18 +26,19 @@
 #include <glib.h>
 
 #include "main.h"
-#include "gedit_window.h"
-#include "gedit_view.h"
-#include "gedit_files.h"
-#include "gedit_prefs_box.h"
+#include "gE_window.h"
+#include "gE_view.h"
+#include "gE_files.h"
+#include "gE_prefs_box.h"
 #include "commands.h"
-#include "gedit_mdi.h"
-#include "gedit_print.h"
+#include "gE_mdi.h"
 #include "menus.h"
-#include "gedit_prefs.h"
+#include "gE_prefs.h"
 #include "search.h"
-#include "gedit_plugin.h"
+#include "gE_plugin.h"
 #include "../pixmaps/gedit_icon.xpm"
+
+#include "gedit_print.h"
 
 extern GList *plugins;
 gedit_window *window;
