@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 20:53+0100\n"
+"POT-Creation-Date: 2005-02-07 21:21+0100\n"
 "PO-Revision-Date: 2004-11-15 15:59+0330\n"
 "Last-Translator: Meelad Zakaria <meelad@bamdad.org>\n"
 "Language-Team: Persian <farsi@lists.sharif.edu>\n"
@@ -44,7 +44,7 @@ msgstr "کارخانه‌ی خودکارسازی gedit"
 msgid "Edit text files"
 msgstr "ویرایش پرونده‌های متنی"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "ویرایشگر متن"
 
@@ -529,7 +529,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "فعال کردن %s"
@@ -1281,7 +1281,7 @@ msgid "Arabic"
 msgstr "عربی"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "یونانی"
 
@@ -1290,12 +1290,12 @@ msgid "Hebrew Visual"
 msgstr "عبری دیداری"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "عبری"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "ترکی"
 
@@ -1307,7 +1307,7 @@ msgstr ""
 msgid "Celtic"
 msgstr "سلتی"
 
-#: gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "رومانیایی"
 
@@ -1348,7 +1348,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "سیریلی/اوکراینی"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "ویتنامی"
 
@@ -1379,15 +1379,15 @@ msgid "Do you want to try to replace it with the one you are saving?"
 msgstr ""
 "آیا می‌خواهید پرونده‌ای که در حال ذخیره کردن آن هستید را جای‌گزین آن کنید؟"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
 msgid "All Files"
 msgstr "همه‌ی پرونده‌ها"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
 msgid "All Text Files"
 msgstr "همه‌ی پرونده‌های متنی"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "کدگذاری نویسه‌ها:"
@@ -1893,29 +1893,29 @@ msgid "Encoding:"
 msgstr "کدگذاری:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "باز کردن «%s»"
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "باز کردن پرونده‌ای که اخیراً به کار رفته"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
 #, fuzzy
 msgid "Read Only"
 msgstr "(فقط خواندنی("
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2068
 msgid "Normal"
 msgstr "عادی"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2069
 msgid "Use Normal highlight mode"
 msgstr "استفاده از حالت پررنگ عادی"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2145
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "استفاده از حالت پررنگ %s"
@@ -2390,25 +2390,25 @@ msgstr ""
 msgid "  INS"
 msgstr ""
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "ترک یک نمونه‌ی موجود gedit"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "ایجاد یک پنجره‌ی سطح یک در نمونه‌ی موجود gedit"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "ایجاد یک نوشتار جدید در نمونه‌ی موجود gedit"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr ""
@@ -2583,10 +2583,16 @@ msgstr "ذخیره‌ی پرونده‌ی \"%s\" مقدور نیست"
 msgid "You are trying to overwrite the original file"
 msgstr ""
 
-#: plugins/savecopy/savecopy.c:413
+#: plugins/savecopy/savecopy.c:470
 #, fuzzy
 msgid "Save Copy..."
 msgstr "_هیچ‌کدام ذخیره نشوند"
+
+#. translators: %s is a filename
+#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#, c-format
+msgid "%s (copy)"
+msgstr ""
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 #, fuzzy
@@ -2598,36 +2604,36 @@ msgstr "ذخیره‌ی تمام پرونده‌های باز"
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr "مرتب سازی نوشتار یا انتخاب جاری."
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "اجرای دستور..."
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr "اجرای یک دستور"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "متوقف شد"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "اجرای دستور"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "اجرا"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "انجام شد"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "شکست خورد"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2637,7 +2643,7 @@ msgstr ""
 "\n"
 "لطفاً یک فرمان پوسته‌ی معتبر درج کنید."
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2647,11 +2653,11 @@ msgstr ""
 "\n"
 "لطفاً یک فرمان پوسته‌ی معتبر درج کنید."
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "در حال اجرای فرمان"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 #, fuzzy
 msgid "An error occurred while running the selected command."
 msgstr "در حین اجرای فرمان انتخاب شده، خطایی رخ داد."
@@ -2728,26 +2734,26 @@ msgstr "ترتیب معکوس"
 msgid "_Sort"
 msgstr "مرتب سازی"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(کلمه‌ای پیشنهاد نمی‌شود)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "بیشتر..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "نادیده گرفتن همه"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "افزودن"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "پیشنهادات املایی"
 
@@ -2767,133 +2773,312 @@ msgstr "(تصحیح املایی)"
 msgid "Completed spell checking"
 msgstr "تکمیل غلط‌یابی املایی"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr ""
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "عربی"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+msgid "Belarusian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 #, fuzzy
 msgid "Bengali"
 msgstr "بالتیک"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "کاتالونیایی"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "چکی"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "دانمارکی"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "آلمانی (آلمان)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "آلمانی (آلمان)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "آلمانی (سوئیس)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "انگلیسی (امریکا)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "انگلیسی (بریتانیا)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "انگلیسی (کانادا)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "اسپرانتو"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "اسپانیایی"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "رومانیایی"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "چاپ"
+
+#: plugins/spell/gedit-spell-checker.c:101
 #, fuzzy
 msgid "Finnish"
 msgstr "دانمارکی"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "فرانسوی (فرانسه)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "فرانسوی (سوئیس)"
 
-#: plugins/spell/gedit-spell-checker.c:99
-msgid "Irish (Gaeilge)"
-msgstr ""
-
-#: plugins/spell/gedit-spell-checker.c:100
-msgid "Icelandic"
-msgstr "ایسلندی"
-
-#: plugins/spell/gedit-spell-checker.c:101
-msgid "Italian"
-msgstr "ایتالیایی"
-
-#: plugins/spell/gedit-spell-checker.c:102
-msgid "Dutch"
-msgstr "هلندی"
-
-#: plugins/spell/gedit-spell-checker.c:103
-msgid "Norwegian"
-msgstr "نروژی"
-
-#: plugins/spell/gedit-spell-checker.c:104
-msgid "Polish"
-msgstr "لهستانی"
-
 #: plugins/spell/gedit-spell-checker.c:105
-msgid "Portuguese (Portugal)"
-msgstr "پرتغالی (پرتغال)"
+#, fuzzy
+msgid "Irish"
+msgstr "ترکی"
 
 #: plugins/spell/gedit-spell-checker.c:106
-msgid "Portuguese (Brazilian)"
-msgstr "پرتغالی (برزیل)"
-
-#: plugins/spell/gedit-spell-checker.c:107
-msgid "Russian"
-msgstr "روسی"
-
-#: plugins/spell/gedit-spell-checker.c:108
-msgid "Slovak"
+msgid "Scottish Gaelic"
 msgstr ""
 
-#: plugins/spell/gedit-spell-checker.c:109
-msgid "Slovenian"
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "گرجی"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
 msgstr ""
 
 #: plugins/spell/gedit-spell-checker.c:110
+msgid "Hindi"
+msgstr "هندی"
+
+#: plugins/spell/gedit-spell-checker.c:111
+msgid "Croatian"
+msgstr "کرواتی"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:113
+msgid "Hungarian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:116
+msgid "Icelandic"
+msgstr "ایسلندی"
+
+#: plugins/spell/gedit-spell-checker.c:117
+msgid "Italian"
+msgstr "ایتالیایی"
+
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "ترکی"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "سطر"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:121
+#, fuzzy
+msgid "Latvian"
+msgstr "کرواتی"
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:123
+#, fuzzy
+msgid "Maori"
+msgstr "فارسی"
+
+#: plugins/spell/gedit-spell-checker.c:124
+#, fuzzy
+msgid "Macedonian"
+msgstr "gedit"
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "نروژی"
+
+#: plugins/spell/gedit-spell-checker.c:129
+msgid "Dutch"
+msgstr "هلندی"
+
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "نروژی"
+
+#: plugins/spell/gedit-spell-checker.c:131
+msgid "Norwegian"
+msgstr "نروژی"
+
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:133
+msgid "Polish"
+msgstr "لهستانی"
+
+#: plugins/spell/gedit-spell-checker.c:134
+msgid "Portuguese (Portugal)"
+msgstr "پرتغالی (پرتغال)"
+
+#: plugins/spell/gedit-spell-checker.c:135
+msgid "Portuguese (Brazilian)"
+msgstr "پرتغالی (برزیل)"
+
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:138
+msgid "Russian"
+msgstr "روسی"
+
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "اوکراینی"
+
+#: plugins/spell/gedit-spell-checker.c:141
+msgid "Slovak"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:142
+msgid "Slovenian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "سوئدی"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "تایلندی"
+
+#: plugins/spell/gedit-spell-checker.c:146
+msgid "Tetum"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "اوکراینی"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "پیش‌فرض"
 
@@ -4595,14 +4780,6 @@ msgstr "استفاده از قالب سفارشی"
 #~ msgid "Document version"
 #~ msgstr "نوشتارها"
 
-#, fuzzy
-#~ msgid "Link"
-#~ msgstr "سطر"
-
-#, fuzzy
-#~ msgid "Media"
-#~ msgstr "gedit"
-
 #~ msgid "Do_n't save"
 #~ msgstr "ذخیره _نشود"
 
@@ -4871,15 +5048,6 @@ msgstr "استفاده از قالب سفارشی"
 
 #~ msgid "Executed command"
 #~ msgstr "دستور اجراشده"
-
-#~ msgid "Croatian"
-#~ msgstr "کرواتی"
-
-#~ msgid "Hindi"
-#~ msgstr "هندی"
-
-#~ msgid "Farsi"
-#~ msgstr "فارسی"
 
 #~ msgid "Gujarati"
 #~ msgstr "گجراتی"

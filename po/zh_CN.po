@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 20:53+0100\n"
+"POT-Creation-Date: 2005-02-07 21:21+0100\n"
 "PO-Revision-Date: 2005-01-29 17:04+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -46,7 +46,7 @@ msgstr "gedit 自动化工厂"
 msgid "Edit text files"
 msgstr "编辑文本文件"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "文本编辑器"
 
@@ -491,7 +491,7 @@ msgstr "[GB18030,GBK,GB2312,UTF-8]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[CURRENT,GB18030,GBK,GB2312,UTF-8,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "激活 %s"
@@ -1226,7 +1226,7 @@ msgid "Arabic"
 msgstr "阿拉伯语"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "希腊语"
 
@@ -1235,12 +1235,12 @@ msgid "Hebrew Visual"
 msgstr "可视希伯来语"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "希伯来语"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "土耳其语"
 
@@ -1252,7 +1252,7 @@ msgstr "日耳曼语"
 msgid "Celtic"
 msgstr "凯尔特语"
 
-#: gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "罗马尼亚语"
 
@@ -1293,7 +1293,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "西里尔语/乌克兰语"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "越南语"
 
@@ -1323,15 +1323,15 @@ msgstr "文件“%s”为只读。\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "您想要试着将其替换为您正在保存的文件吗？"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
 msgid "All Files"
 msgstr "全部文件"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
 msgid "All Text Files"
 msgstr "全部文本文件"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
 msgid "_Character Coding:"
 msgstr "字符编码(_C)："
 
@@ -1742,28 +1742,28 @@ msgid "Encoding:"
 msgstr "编码："
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "打开“%s”"
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
 msgid "Read Only"
 msgstr "只读"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2068
 msgid "Normal"
 msgstr "普通"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2069
 msgid "Use Normal highlight mode"
 msgstr "使用普通突出显示模式"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2145
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
@@ -2238,25 +2238,25 @@ msgstr " 覆盖"
 msgid "  INS"
 msgstr " 插入"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr "设置打开在命令行中列出的文件时所用的字符编码"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "退出一个 gedit 实例"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "在已存在的 gedit 实例中创建一个最上层窗口"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "在已存在的 gedit 实例中创建一个新文档"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "指定的编码“%s”无效\n"
@@ -2427,9 +2427,15 @@ msgstr "无法将文件的副本保存为“%s”"
 msgid "You are trying to overwrite the original file"
 msgstr "您正试图覆盖原始文件"
 
-#: plugins/savecopy/savecopy.c:413
+#: plugins/savecopy/savecopy.c:470
 msgid "Save Copy..."
 msgstr "保存副本..."
+
+#. translators: %s is a filename
+#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#, c-format
+msgid "%s (copy)"
+msgstr ""
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 msgid "Save a Copy"
@@ -2439,36 +2445,36 @@ msgstr "保存副本"
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr "将当前文档的副本保存到本地或远程位置。"
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "运行命令(_R)..."
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr "运行命令"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "停止"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "运行命令"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "运行(_R)"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "完成"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "失败"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2478,7 +2484,7 @@ msgstr ""
 "\n"
 "请输入一个有效的 shell 命令。"
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2488,11 +2494,11 @@ msgstr ""
 "\n"
 "请输入一个有效的 shell 命令。"
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "执行命令"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 msgid "An error occurred while running the selected command."
 msgstr "运行选定的命令时出错。"
 
@@ -2566,26 +2572,26 @@ msgstr "逆序排序(_R)"
 msgid "_Sort"
 msgstr "排序(_S)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(没有建议的单词)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "更多(_M)..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "全部忽略(_I)"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "添加(_A)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "拼写建议(_S)..."
 
@@ -2605,131 +2611,312 @@ msgstr "(正确的拼写)"
 msgid "Completed spell checking"
 msgstr "完成拼写检查"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr ""
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "阿拉伯语"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Belarusian"
+msgstr "保加利亚语"
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr "保加利亚语"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Bengali"
 msgstr "孟加拉语"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr "布里多尼语"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "加泰罗尼亚语"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "捷克语"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr "威尔士语"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "丹麦语"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "德语(德国)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "德语(德国)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "德语(瑞士)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "英语(美国)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "英语(英国)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "英语(加拿大)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "世界语"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "罗马尼亚语"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "打印"
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
 msgstr "芬兰语"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr "法罗语"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "法语(法国)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "法语(瑞士)"
 
-#: plugins/spell/gedit-spell-checker.c:99
-msgid "Irish (Gaeilge)"
-msgstr "爱尔兰语(Gaeilge)"
+#: plugins/spell/gedit-spell-checker.c:105
+#, fuzzy
+msgid "Irish"
+msgstr "土耳其语"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:106
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "格鲁吉亚语"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:110
+#, fuzzy
+msgid "Hindi"
+msgstr "查找"
+
+#: plugins/spell/gedit-spell-checker.c:111
+#, fuzzy
+msgid "Croatian"
+msgstr "加泰罗尼亚语"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:113
+#, fuzzy
+msgid "Hungarian"
+msgstr "保加利亚语"
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
 msgstr "冰岛语"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:117
 msgid "Italian"
 msgstr "意大利语"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "土耳其语"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "列表"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:121
+msgid "Latvian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:123
+msgid "Maori"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:124
+msgid "Macedonian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "挪威语"
+
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "荷兰语"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "挪威语"
+
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
 msgstr "挪威语"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
 msgstr "波兰语"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:134
 msgid "Portuguese (Portugal)"
 msgstr "葡萄牙语(葡萄牙)"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Brazilian)"
 msgstr "葡萄牙语(巴西)"
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "俄语"
 
-#: plugins/spell/gedit-spell-checker.c:108
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "乌克兰语"
+
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
 msgstr "斯洛伐克语"
 
-#: plugins/spell/gedit-spell-checker.c:109
+#: plugins/spell/gedit-spell-checker.c:142
 msgid "Slovenian"
 msgstr "斯洛文尼亚语"
 
-#: plugins/spell/gedit-spell-checker.c:110
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "瑞典语"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "泰语"
+
+#: plugins/spell/gedit-spell-checker.c:146
+#, fuzzy
+msgid "Tetum"
+msgstr "文本"
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "乌克兰语"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "默认"
 
@@ -4333,3 +4520,5 @@ msgstr "提示可使用的格式(_P)"
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
 
+#~ msgid "Irish (Gaeilge)"
+#~ msgstr "爱尔兰语(Gaeilge)"

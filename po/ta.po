@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 20:53+0100\n"
+"POT-Creation-Date: 2005-02-07 21:21+0100\n"
 "PO-Revision-Date: 2004-10-11 15:04+0530\n"
 "Last-Translator: Jayaradha N <jaya@pune.redhat.com>\n"
 "Language-Team: Tamil <zhakanini@yahoogroups.com>\n"
@@ -50,7 +50,7 @@ msgstr "gedit தானியக்க தொழிற்சாலை"
 msgid "Edit text files"
 msgstr "உரை கோப்புகளை தொகுக்கவும்"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "உரை பதிப்பான்"
 
@@ -532,7 +532,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "தூண்டு செய் %s"
@@ -1299,7 +1299,7 @@ msgid "Arabic"
 msgstr "அராபிக்"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "கிரீக்"
 
@@ -1308,12 +1308,12 @@ msgid "Hebrew Visual"
 msgstr "ஹீப்ரு காட்சி"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "ஹீப்ரு"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "துருக்கி"
 
@@ -1325,7 +1325,7 @@ msgstr "நோர்டிக்"
 msgid "Celtic"
 msgstr "செல்டிக்"
 
-#: gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "ரோமேனியன்"
 
@@ -1366,7 +1366,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "ஸைரெலிக்/யூக்கிரேனியன்"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "வியட்னாம்"
 
@@ -1396,15 +1396,15 @@ msgstr "\"%s\" கோப்பு வாசிப்பு-மட்டுமே
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "ஒன்றினை சேமித்துப் பின்னர் அதனை அகற்று விரும்பிகிறீர்களா? "
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
 msgid "All Files"
 msgstr "அனைத்து கோப்புகளும்"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
 msgid "All Text Files"
 msgstr "அனைத்து உரை கோப்புகளும்"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "(_a)குறிமுறை எழுத்து:"
@@ -1920,29 +1920,29 @@ msgid "Encoding:"
 msgstr "குறியீடு:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' திறக்கவும்"
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "சமீபத்தில் பயன்படுத்திய கோப்பு திறக்கவும்"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
 #, fuzzy
 msgid "Read Only"
 msgstr "(வாசிக்க மட்டும்)"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2068
 msgid "Normal"
 msgstr "சாதாரணம்"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2069
 msgid "Use Normal highlight mode"
 msgstr "இயல்பானத் தனிபடுத்து வகையைப் பயன்படுத்துக"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2145
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s தனிபடுத்துவதும் வகையைப் பயன்படுத்து"
@@ -2417,25 +2417,25 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr "கட்டளைவரில் குறிப்பிட்ட குறிமுறையுடன் கோப்பை திறக்குமாறு அமைக்கவும்"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "ஜிதிருத்தின் நிகழ்ச்சி வழியை வெளியிடு"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "ஜிதிருத்ததில் தற்பொழுது இருக்கும் புதிய உயர்நிலைச் சாளரத்தை உருவாக்கு"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "ஜிதிருத்ததில் தற்பொழுது இருக்கும் புதிய ஆவணத்தை உருவாக்கு"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "\"%s\"குறிமுறை செல்லாது\n"
@@ -2610,10 +2610,16 @@ msgstr "\"%s\" கோப்பு சேமிக்க முடியவில
 msgid "You are trying to overwrite the original file"
 msgstr ""
 
-#: plugins/savecopy/savecopy.c:413
+#: plugins/savecopy/savecopy.c:470
 #, fuzzy
 msgid "Save Copy..."
 msgstr "(_N)எதையும் சேமிக்கவேண்டாம்"
+
+#. translators: %s is a filename
+#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#, c-format
+msgid "%s (copy)"
+msgstr ""
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 #, fuzzy
@@ -2625,36 +2631,36 @@ msgstr "திறந்திருக்கும் அனைத்து க�
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr "இந்த ஆவணத்தை அல்லது தேர்வுசெய்ததை ஒழுங்குபடுத்துக."
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "(_R)கட்டளை செயல்படுத்துக..."
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr " கட்டளை செயல்படுத்துக"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "நிறுத்தப்பட்டது"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "கட்டளை செயல்படுத்துக"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "(_R)இயக்கு"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "முடிந்தது"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "தோல்வி"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2664,7 +2670,7 @@ msgstr ""
 "\n"
 "செல்லத்தக்க கட்டளை ஒன்றை உள்ளீடவும்."
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2674,11 +2680,11 @@ msgstr ""
 "\n"
 "செல்லத்தக்க கட்டளை ஒன்றை உள்ளிடவும்."
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "கட்டளை இயக்கப்படுகின்றது"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 msgid "An error occurred while running the selected command."
 msgstr "தேர்வு செய்த கட்டளையை செயல்படுத்தும்போது ஒரு பிழை நேர்ந்தது."
 
@@ -2752,26 +2758,26 @@ msgstr "(_R)வரிசையின் தலைகீழாக்கு"
 msgid "_Sort"
 msgstr "(_S)அடுக்கவும்"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(யோசித்த வார்த்தைகள் இல்லை)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "(_M)மேலும்..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "(_I)அனைத்தையும் புறக்கணிக்கவும்"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "(_A)சேர்"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "(_S)எழுத்துக் கூட்டல் யோசனைகள்"
 
@@ -2791,131 +2797,312 @@ msgstr "(சரியான எழுத்து)"
 msgid "Completed spell checking"
 msgstr "சொல் சரிபார்ப்பு முடிந்தது"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr ""
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "அராபிக்"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Belarusian"
+msgstr "பல்கேரியன்"
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr "பல்கேரியன்"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Bengali"
 msgstr "பெங்காலி"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr "பிரெடொன்"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "கடாலான்"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "செக்"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr "வெல்ஷ்"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "டேனிஷ்"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "ஜெர்மன் (ஜெர்மனி)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "ஜெர்மன் (ஜெர்மனி)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "ஜெர்மன் (சுவிஸ்)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "ஆங்கிலம் (அமேரிக்கா)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "ஆங்கிலம் (ப்பிரிடிஷ்)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "ஆங்கிலம் (கானாடா)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "எஸ்பரான்டொ"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "ஸ்பானிஷ்"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "ரோமேனியன்"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "அச்சிடு"
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
 msgstr "பீனிஷ்"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr "பாரோஇஸ்"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "ப்பிரென்ச் (ப்பிரான்ஸ்)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "ப்பிரென்ச் (சுவிஸ்)"
 
-#: plugins/spell/gedit-spell-checker.c:99
-msgid "Irish (Gaeilge)"
-msgstr "ஐரிஸ்(கால்கி)"
+#: plugins/spell/gedit-spell-checker.c:105
+#, fuzzy
+msgid "Irish"
+msgstr "துருக்கி"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:106
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "சியோர்ஜியன்"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:110
+#, fuzzy
+msgid "Hindi"
+msgstr "கண்டுபிடி"
+
+#: plugins/spell/gedit-spell-checker.c:111
+#, fuzzy
+msgid "Croatian"
+msgstr "கடாலான்"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:113
+#, fuzzy
+msgid "Hungarian"
+msgstr "பல்கேரியன்"
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
 msgstr "ஐஸ்லாண்டிக்"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:117
 msgid "Italian"
 msgstr "இத்தாலியன்"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "துருக்கி"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "வரிசைகள்"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:121
+msgid "Latvian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:123
+msgid "Maori"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:124
+#, fuzzy
+msgid "Macedonian"
+msgstr "gedit"
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "நாட்வேஜியன்"
+
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "டச்சு"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "நாட்வேஜியன்"
+
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
 msgstr "நாட்வேஜியன்"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
 msgstr "போலிஷ்"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:134
 msgid "Portuguese (Portugal)"
 msgstr "போர்துகீஸ் (போர்சுகல்)"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Brazilian)"
 msgstr "போர்துகீஸ் (பிரேசிலியன்)"
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "ரஷ்யன்"
 
-#: plugins/spell/gedit-spell-checker.c:108
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "யூக்கிரேனியன்"
+
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
 msgstr "ஸ்லோவாக்"
 
-#: plugins/spell/gedit-spell-checker.c:109
+#: plugins/spell/gedit-spell-checker.c:142
 msgid "Slovenian"
 msgstr "ஸ்லோவேனியன்"
 
-#: plugins/spell/gedit-spell-checker.c:110
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "சுவீடிஷ்"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "தாய்-மொழி"
+
+#: plugins/spell/gedit-spell-checker.c:146
+msgid "Tetum"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "யூக்கிரேனியன்"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "இயல்பான"
 
@@ -4611,6 +4798,9 @@ msgstr "(_P)வடிவத்திற்காக நினைவுபடு�
 msgid "_Use custom format"
 msgstr "(_U)தனிப்பயன் வடிவத்தை பயன்படுத்து"
 
+#~ msgid "Irish (Gaeilge)"
+#~ msgstr "ஐரிஸ்(கால்கி)"
+
 #, fuzzy
 #~ msgid "Document ID"
 #~ msgstr "(_D)ஆவணங்கள்"
@@ -4618,14 +4808,6 @@ msgstr "(_U)தனிப்பயன் வடிவத்தை பயன்ப
 #, fuzzy
 #~ msgid "Document version"
 #~ msgstr "(_D)ஆவணங்கள்"
-
-#, fuzzy
-#~ msgid "Link"
-#~ msgstr "வரிசைகள்"
-
-#, fuzzy
-#~ msgid "Media"
-#~ msgstr "gedit"
 
 #~ msgid "Do_n't save"
 #~ msgstr "(_n)சேமிக்க வேண்டாம்"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit (gnome-2-8)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 20:53+0100\n"
+"POT-Creation-Date: 2005-02-07 21:21+0100\n"
 "PO-Revision-Date: 2004-12-07 12:38+0200\n"
 "Last-Translator: Jarkko Ranta <jjranta@cc.joensuu.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -45,7 +45,7 @@ msgstr "gedit-automaatiotehdas"
 msgid "Edit text files"
 msgstr "Muokkaa tekstitiedostoja"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
@@ -533,7 +533,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "Käynnistä %s"
@@ -1315,7 +1315,7 @@ msgid "Arabic"
 msgstr "Arabialainen"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "Kreikkalainen"
 
@@ -1324,12 +1324,12 @@ msgid "Hebrew Visual"
 msgstr "Heprealainen kuvapohjainen"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "Heprealainen"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "Turkkilainen"
 
@@ -1341,7 +1341,7 @@ msgstr "Pohjoismainen"
 msgid "Celtic"
 msgstr "Kelttiläinen"
 
-#: gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "Romanialainen"
 
@@ -1382,7 +1382,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Kyrillinen/Ukrainalainen"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "Vietnamilainen"
 
@@ -1412,15 +1412,15 @@ msgstr "Sinulla on vain lukuoikeudet tiedostoon \"%s\".\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Haluatko yrittää korvata sen tiedostolla jota olet tallentamassa?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
 msgid "All Text Files"
 msgstr "Kaikki tekstitiedostot"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "_Merkistön koodaus:"
@@ -1958,29 +1958,29 @@ msgid "Encoding:"
 msgstr "Koodaustapa:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
 #, fuzzy
 msgid "Read Only"
 msgstr "(vain luku)"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2068
 msgid "Normal"
 msgstr "Tavallinen"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2069
 msgid "Use Normal highlight mode"
 msgstr "Käytä tavallista väritystä"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2145
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
@@ -2457,7 +2457,7 @@ msgstr "  PÄÄLLE"
 msgid "  INS"
 msgstr "  LISÄÄ"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -2465,19 +2465,19 @@ msgstr ""
 "Aseta merkistön koodaus jota haluat käyttää avatessasi komentorivillä "
 "luettelemiasi tiedostoja"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Lopeta käynnissä oleva gedit"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Luo uusi itsenäinen ikkuna käynnissä olevaan geditiin"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Luo uusi asiakirja jo käynnissä olevaan geditiin"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "Määritelty koodaus \"%s\" on epäkelpo\n"
@@ -2652,10 +2652,16 @@ msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
 msgid "You are trying to overwrite the original file"
 msgstr ""
 
-#: plugins/savecopy/savecopy.c:413
+#: plugins/savecopy/savecopy.c:470
 #, fuzzy
 msgid "Save Copy..."
 msgstr "Älä tallenna _mitään"
+
+#. translators: %s is a filename
+#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#, c-format
+msgid "%s (copy)"
+msgstr ""
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 #, fuzzy
@@ -2667,36 +2673,36 @@ msgstr "Tallenna kaikki avoimet tiedostot"
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr "Järjestä aktiivinen asiakirja tai valinta."
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "_Suorita komento..."
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr "Suorita komento"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "Pysäytetty"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "Suorita komento"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "_Suorita"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "Valmis"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "Epäonnistui"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2706,7 +2712,7 @@ msgstr ""
 "\n"
 "Anna kelvollinen komento."
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2716,11 +2722,11 @@ msgstr ""
 "\n"
 "Anna kelvollinen komento."
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "Suoritetaan komentoa"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 msgid "An error occurred while running the selected command."
 msgstr "Virhe suoritettaessa valittua komentoa."
 
@@ -2796,26 +2802,26 @@ msgstr "Käänteinen jä_rjestys"
 msgid "_Sort"
 msgstr "_Järjestä"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(ei suositeltavia sanoja)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "_Lisää..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "_Ohita kaikki"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "_Lisää"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "_Kirjoitusehdotuksia..."
 
@@ -2835,131 +2841,312 @@ msgstr "(oikea kirjoitusasu)"
 msgid "Completed spell checking"
 msgstr "Oikoluku on valmis"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr ""
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "Arabialainen"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Belarusian"
+msgstr "Bulgaria"
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr "Bulgaria"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Bengali"
 msgstr "Bengali"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr "Bretoni"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "Catalan"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "Tsekki"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr "Kymri"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "Tanska"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "Saksa (Saksa)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "Saksa (Saksa)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "Saksa (Sveitsi)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "Englanti (Amerikan)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "Englanti (Englannin)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "Englanti (Kanadan)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "Espanja"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "Romanialainen"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "Tulostus"
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
 msgstr "Suomi"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr "Fär-saaret"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "Ranska (Ranska)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "Ranska (Sveitsi)"
 
-#: plugins/spell/gedit-spell-checker.c:99
-msgid "Irish (Gaeilge)"
-msgstr "Iiri (Gaeilge)"
+#: plugins/spell/gedit-spell-checker.c:105
+#, fuzzy
+msgid "Irish"
+msgstr "Turkkilainen"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:106
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "Georgialainen"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:110
+#, fuzzy
+msgid "Hindi"
+msgstr "Etsi"
+
+#: plugins/spell/gedit-spell-checker.c:111
+#, fuzzy
+msgid "Croatian"
+msgstr "Catalan"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:113
+#, fuzzy
+msgid "Hungarian"
+msgstr "Bulgaria"
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
 msgstr "Islanti"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:117
 msgid "Italian"
 msgstr "Italia"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "Turkkilainen"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "Rivejä"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:121
+msgid "Latvian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:123
+msgid "Maori"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:124
+#, fuzzy
+msgid "Macedonian"
+msgstr "gedit"
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "Norja"
+
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "Hollanti"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "Norja"
+
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
 msgstr "Norja"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
 msgstr "Puola"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:134
 msgid "Portuguese (Portugal)"
 msgstr "Potugali (Portugalin)"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Brazilian)"
 msgstr "Portugali (Brasilian)"
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "Venäjä"
 
-#: plugins/spell/gedit-spell-checker.c:108
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "Ukraina"
+
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
 msgstr "Slovakia"
 
-#: plugins/spell/gedit-spell-checker.c:109
+#: plugins/spell/gedit-spell-checker.c:142
 msgid "Slovenian"
 msgstr "Slovenia"
 
-#: plugins/spell/gedit-spell-checker.c:110
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "Ruotsi"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "Thailainen"
+
+#: plugins/spell/gedit-spell-checker.c:146
+msgid "Tetum"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "Ukraina"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "Oletus"
 
@@ -4655,6 +4842,9 @@ msgstr "_Kysy muotoilua"
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
 
+#~ msgid "Irish (Gaeilge)"
+#~ msgstr "Iiri (Gaeilge)"
+
 #, fuzzy
 #~ msgid "Document ID"
 #~ msgstr "A_siakirjat"
@@ -4662,14 +4852,6 @@ msgstr "_Käytä mukautettua muotoilua"
 #, fuzzy
 #~ msgid "Document version"
 #~ msgstr "A_siakirjat"
-
-#, fuzzy
-#~ msgid "Link"
-#~ msgstr "Rivejä"
-
-#, fuzzy
-#~ msgid "Media"
-#~ msgstr "gedit"
 
 #~ msgid "Do_n't save"
 #~ msgstr "Ä_lä tallenna"

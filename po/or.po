@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.or\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 20:53+0100\n"
+"POT-Creation-Date: 2005-02-07 21:21+0100\n"
 "PO-Revision-Date: 2004-07-22 17:20+0530\n"
 "Last-Translator: Gora Mohanty <gora_mohanty@yahoo.co.in>\n"
 "Language-Team: Oriya <oriya-group@lists.sarovar.org>\n"
@@ -44,7 +44,7 @@ msgstr "ଡିଏଡିଟ୍ ସ୍ବୟଂତାଳନ କାରଖାନା"
 msgid "Edit text files"
 msgstr "ପାଠ୍ଯ ଫାଇଲଗୁଡ଼ିକୁ ସମ୍ପାଦନ କରନ୍ତୁ"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "ପାଠ୍ଯ ସମ୍ପାଦକ"
 
@@ -523,7 +523,7 @@ msgstr "[ଆଇ.ଏସ.ଓ.-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[ୟୁ.ଟି.ଏଫ.-୮,ସାମ୍ପ୍ରତିକ,ଆଇ.ଏସ.ଓ.-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "%sକୁ ସକ୍ରିୟ କରନ୍ତୁ"
@@ -1271,7 +1271,7 @@ msgid "Arabic"
 msgstr "ଆରବୀୟ"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "ଗ୍ରୀକ"
 
@@ -1280,12 +1280,12 @@ msgid "Hebrew Visual"
 msgstr "ହିବ୍ରୁ ଚାକ୍ଷୁଷ"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "ହିବ୍ରୁ"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "ତୁର୍କୀୟ"
 
@@ -1297,7 +1297,7 @@ msgstr "ନର୍ଡିକ"
 msgid "Celtic"
 msgstr "କେଳ୍ଟିକ୍"
 
-#: gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "ରୋମାନୀୟ"
 
@@ -1338,7 +1338,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "ସିରିଲିକ/ଇଉକ୍ରେନୀୟ"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "ଭିଏତନାମୀୟ"
 
@@ -1368,15 +1368,15 @@ msgstr "\"%s\" ଫାଇଲ କେବଳ ପଠନୀୟ.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "ଆପଣ ଏହାକୁ ସଂରକ୍ଷଣ କରାଯାଉଥିବା ଫାଇଲ ସହିତ ବଦଳାଇବା ପାଇଁ ଚେଷ୍ଟା କରିବାକୁ ଚାହାନ୍ତି କି?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:435
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
 msgid "All Files"
 msgstr "ସବୁ ଫାଇଲଗୁଡ଼ିକ"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:443
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
 msgid "All Text Files"
 msgstr "ସବୁ ପାଠ୍ଯ ଫାଇଲଗୁଡ଼ିକ"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:454
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
 #, fuzzy
 msgid "_Character Coding:"
 msgstr "ଅକ୍ଷର ସଙ୍କେତ (_a):"
@@ -1876,16 +1876,16 @@ msgid "Encoding:"
 msgstr "ସଙ୍କେତ:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' ଖୋଲନ୍ତୁ"
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "ସାମ୍ପ୍ରତିକ ବ୍ଯବହୃତ ହୋଇଥିବା ଏକ ଫାଇଲ ଖୋଲନ୍ତୁ"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
 #, fuzzy
 msgid "Read Only"
 msgstr "(କେବଳ ପଠନୀୟ)"
@@ -1897,15 +1897,15 @@ msgstr "(କେବଳ ପଠନୀୟ)"
 # gnome-session/gsm-client-row.c:50
 # #-#-#-#-#  gnome-session.HEAD.hi.po (gnome-session VERSION)  #-#-#-#-#
 # gnome-session/gsm-client-row.c:50
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2068
 msgid "Normal"
 msgstr "ସାଧାରଣ"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2069
 msgid "Use Normal highlight mode"
 msgstr "ସାଧାରଣ ବିଶେଷଦର୍ଶନ ଧାରା ବ୍ଯବହାର କରନ୍ତୁ"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2145
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s ବିଶେଷଦର୍ଶନ ଧାରା ବ୍ଯବହାର କରନ୍ତୁ"
@@ -2380,26 +2380,26 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
 "ପାଠ୍ଯ ନିର୍ଦ୍ଦେଶରେ ଉଲ୍ଲେଖିତ ଫାଇଲଗୁଡ଼ିକୁ ଖୋଲିବାରେ ବ୍ଯବହାର କରାଯିବା ଅକ୍ଷର ସଙ୍କେତ ବିନ୍ଯାସ କରନ୍ତୁ"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "ଜିଏଡିଟ୍ ର ଏକ ଅବସ୍ଥିତ ଉଦାହାରଣରୁ ବିଦାୟ ନିଅନ୍ତୁ"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "ଜିଏଡିଟ୍ ର ଏକ ଅବସ୍ଥିତ ଉଦାହାରଣରେ ଏକ ନୂଆ ଉଚ୍ଚସ୍ତ ସ୍ତରର ୱିଣ୍ଡୋ ସୃଷ୍ଟି କରନ୍ତୁ"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "ଜିଏଡିଟ୍ ର ଏକ ଅବସ୍ଥିତ ଉଦାହାରଣରେ ଏକ ନୂଆ ଦଲିଲ ସୃଷ୍ଟି କରନ୍ତୁ"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "ଉଲ୍ଲେଖିତ ସଙ୍କେତ \"%s\" ବୈଧ ନୁହେଁ\n"
@@ -2572,10 +2572,16 @@ msgstr "\"%s\" ଫାଇଲ ସଂରକ୍ଷିତ କରି ହେଲାନ�
 msgid "You are trying to overwrite the original file"
 msgstr ""
 
-#: plugins/savecopy/savecopy.c:413
+#: plugins/savecopy/savecopy.c:470
 #, fuzzy
 msgid "Save Copy..."
 msgstr "କିଛି ସଂରକ୍ଷଣ କରନ୍ତୁ ନାହିଁ (_N)"
+
+#. translators: %s is a filename
+#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#, c-format
+msgid "%s (copy)"
+msgstr ""
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 #, fuzzy
@@ -2587,36 +2593,36 @@ msgstr "ସବୁ ଖୋଲାଥିବା ଫାଇଲଗୁଡ଼ିକୁ ସ
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr "ସାମ୍ପ୍ରତିକ ଦଲିଲ ବା ବଛା ସଜାଡ଼ନ୍ତୁ"
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "ନିର୍ଦ୍ଦେଶ ଚଳାନ୍ତୁ... (_R)"
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr "ଏକ ନିର୍ଦ୍ଦେଶ ଚଳାନ୍ତୁ"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "ବିରତ ହୋଇଛି"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "ନିର୍ଦ୍ଦେଶ ଚଳାନ୍ତୁ"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "ଚଳାନ୍ତୁ (_R)"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "ସମାପ୍ତ"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "ଅସଫଳ"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2626,7 +2632,7 @@ msgstr ""
 "\n"
 "ଦୟା କରି ଏକ ବୈଧ ଶେଲ ନିର୍ଦ୍ଦେଶ ଭର୍ତ୍ତି କରନ୍ତୁ."
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2636,11 +2642,11 @@ msgstr ""
 "\n"
 "ଦୟା କରି ଏକ ବୈଧ ଶେଲ ନିର୍ଦ୍ଦେଶ ଭର୍ତ୍ତି କରନ୍ତୁ."
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "ନିର୍ଦ୍ଦେଶ ନିଷ୍ପାଦିତ ହେଉଛି"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 msgid "An error occurred while running the selected command."
 msgstr "ବଛା ନିର୍ଦ୍ଦେଶ ଚଳେଇବାରେ ତ୍ରୁଟି ହେଲା."
 
@@ -2715,26 +2721,26 @@ msgstr "ଓଲଟା କ୍ରମ (_R)"
 msgid "_Sort"
 msgstr "ସଜାଡ଼ନ୍ତୁ (_S)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(କିଛି ଶବ୍ଦ ପ୍ରସ୍ତାବ କରିବାକୁ ନାହିଁ)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "ଅଧିକ... (_M)"
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "ସବୁକୁ ଅଗ୍ରାହ୍ଯ କରନ୍ତୁ (_I)"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "ଯୋଗ କପନ୍ତୁ (_A)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "ବନାନ ପ୍ରସ୍ତାବ (_S)..."
 
@@ -2754,132 +2760,312 @@ msgstr "(ସଠିକ ବନାନ)"
 msgid "Completed spell checking"
 msgstr "ବନାନ ଯାଞ୍ଚ କରିବା ସମାପ୍ତ"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr ""
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "ଆରବୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Belarusian"
+msgstr "ବୁଲ୍ଗାରୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr "ବୁଲ୍ଗାରୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Bengali"
 msgstr "ବଙ୍ଗାଳୀ"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr "ବ୍ରିଟାନୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "କାଟାଲାନୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "ଚ଼େକୋସ୍ଲୋଭାକୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr "ୱେଲ୍ଷ"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "ଡେନମାର୍କୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "ଡର୍ମାନ (ଡର୍ମାନୀ)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "ଡର୍ମାନ (ଡର୍ମାନୀ)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "ଡର୍ମାନ (ସୁଇସ)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "ଇଂରାଜୀ (ଆମେରିକୀୟ)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "ଇଂରାଜୀ (ବ୍ରିଟେନୀୟ)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "ଇଂରାଜୀ (କାନାଡାୟ)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "ଏସ୍ପେରାନ୍ଟୋ"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "ସ୍ପେନୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "ରୋମାନୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "ମୁଦ୍ରଣ"
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
 msgstr "ଫିନଲେଣ୍ଡୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr "ଫାରୋଇସ"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "ଫରାସୀ (ଫ୍ରେଞ୍ଚ)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "ଫାରସୀ (ସୁଇସ)"
 
-#: plugins/spell/gedit-spell-checker.c:99
+#: plugins/spell/gedit-spell-checker.c:105
 #, fuzzy
-msgid "Irish (Gaeilge)"
-msgstr "ଆୟାରଲାଣ୍ଡୀୟ (ଗୈଲିକ)"
+msgid "Irish"
+msgstr "ତୁର୍କୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:106
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "ଜର୍ଜୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:110
+#, fuzzy
+msgid "Hindi"
+msgstr "ଖୋଜନ୍ତୁ"
+
+#: plugins/spell/gedit-spell-checker.c:111
+#, fuzzy
+msgid "Croatian"
+msgstr "କାଟାଲାନୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:113
+#, fuzzy
+msgid "Hungarian"
+msgstr "ବୁଲ୍ଗାରୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
 msgstr "ଆଇସଲାଣ୍ଡୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:117
 msgid "Italian"
 msgstr "ଇଟାଲୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "ତୁର୍କୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "ଧାଡ଼ିଗୁଡ଼ିକ"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:121
+msgid "Latvian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:123
+msgid "Maori"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:124
+#, fuzzy
+msgid "Macedonian"
+msgstr "ଜିଏଡିଟ୍"
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "ନରବେନୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "ଡଚ଼"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "ନରବେନୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
 msgstr "ନରବେନୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
 msgstr "ପୋଲୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:134
 msgid "Portuguese (Portugal)"
 msgstr "ପର୍ତ୍ତୁଗାଲୀୟ (ପର୍ତ୍ତୁଗାଲ)"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Brazilian)"
 msgstr "ପର୍ତ୍ତୁଗାଲୀୟ (ବ୍ରାଜିଲିନୀୟ)"
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "ରୁଷୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:108
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "ଇଉକ୍ରେନୀୟ"
+
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
 msgstr "ସ୍ଲୋଭାକୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:109
+#: plugins/spell/gedit-spell-checker.c:142
 msgid "Slovenian"
 msgstr "ସ୍ଲୋଭାକୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:110
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "ସୁଇଡେନୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "ଥାଇ"
+
+#: plugins/spell/gedit-spell-checker.c:146
+msgid "Tetum"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "ଇଉକ୍ରେନୀୟ"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ"
 
@@ -4583,20 +4769,16 @@ msgid "_Use custom format"
 msgstr "ଇଚ୍ଚାରୂପ ସଂରୂପ ବ୍ଯବହାର କରନ୍ତୁ (_U)"
 
 #, fuzzy
+#~ msgid "Irish (Gaeilge)"
+#~ msgstr "ଆୟାରଲାଣ୍ଡୀୟ (ଗୈଲିକ)"
+
+#, fuzzy
 #~ msgid "Document ID"
 #~ msgstr "ଦଲିଲଗୁଡ଼ିକ (_D)"
 
 #, fuzzy
 #~ msgid "Document version"
 #~ msgstr "ଦଲିଲଗୁଡ଼ିକ (_D)"
-
-#, fuzzy
-#~ msgid "Link"
-#~ msgstr "ଧାଡ଼ିଗୁଡ଼ିକ"
-
-#, fuzzy
-#~ msgid "Media"
-#~ msgstr "ଜିଏଡିଟ୍"
 
 #~ msgid "Do_n't save"
 #~ msgstr "ସଂରକ୍ଷଣ କରନ୍ତୁ ନାହିଁ (_n)"

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 00:20+0100\n"
+"POT-Creation-Date: 2005-02-07 21:21+0100\n"
 "PO-Revision-Date: 2005-01-25 17:56+0100\n"
 "Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -51,7 +51,7 @@ msgstr "gedit automatiseringsfabriek"
 msgid "Edit text files"
 msgstr "Tekstbestanden bewerken"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "Tekst-editor"
 
@@ -548,7 +548,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2121
 #, c-format
 msgid "Activate %s"
 msgstr "%s activeren"
@@ -690,7 +690,7 @@ msgid "Replace _All"
 msgstr "_Alles vervangen"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:266
+#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:316
 msgid "_Replace"
 msgstr "_Vervangen"
 
@@ -1243,20 +1243,20 @@ msgstr "Kon de symbolische verwijzing niet lezen voor %s"
 msgid "The file has too many symbolic links."
 msgstr "Het bestand heeft te veel sybolische verwijzingen."
 
-#: gedit/gedit-document.c:1788
+#: gedit/gedit-document.c:1789
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan geen %s: gebruiken in schrijfmodus."
 
-#: gedit/gedit-document.c:1795
+#: gedit/gedit-document.c:1796
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "de tekst-editor kan deze lokatie niet gebruiken in schrijfmodus."
 
-#: gedit/gedit-document.c:1808
+#: gedit/gedit-document.c:1809
 msgid "Invalid filename."
 msgstr "Ongeldige bestandsnaam."
 
-#: gedit/gedit-document.c:1922
+#: gedit/gedit-document.c:1958
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1264,7 +1264,7 @@ msgstr ""
 "Er is niet genoeg vrije schijfruimte om het bestand op te slaan.\n"
 "Maak wat schijfruimte vrij en probeer het opnieuw."
 
-#: gedit/gedit-document.c:1927
+#: gedit/gedit-document.c:1963
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1274,7 +1274,7 @@ msgstr ""
 "bestanden. Probeer het bestand kleiner te maken of sla het op een andere "
 "schijf op."
 
-#: gedit/gedit-document.c:1971
+#: gedit/gedit-document.c:2007
 msgid "Could not create a backup file."
 msgstr "Kan geen reservekopie van het bestand maken."
 
@@ -1329,7 +1329,7 @@ msgid "Arabic"
 msgstr "Arabisch"
 
 #: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "Grieks"
 
@@ -1338,12 +1338,12 @@ msgid "Hebrew Visual"
 msgstr "Hebreeuws visueel"
 
 #: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264
+#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "Hebreeuws"
 
 #: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262
+#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "Turks"
 
@@ -1355,7 +1355,7 @@ msgstr "Noors"
 msgid "Celtic"
 msgstr "Keltisch"
 
-#: gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "Roemeens"
 
@@ -1396,7 +1396,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Cyrillisch/Oekraïens"
 
 #: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270
+#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "Vietnamees"
 
@@ -1408,12 +1408,12 @@ msgstr "Thais"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:253
+#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:303
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Het bestand \"%s\" bestaat al.\n"
 
-#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:257
+#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:307
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Wilt u het vervangen door hetgeen dat u nu opslaat?"
 
@@ -1426,15 +1426,15 @@ msgstr "Het bestand \"%s\" is alleen-lezen.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Wilt u het proberen te vervangen door hetgeen dat u nu opslaat?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:374
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
 msgid "All Files"
 msgstr "Alle bestanden"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:382
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
 msgid "All Text Files"
 msgstr "Alle tekst bestanden"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
 msgid "_Character Coding:"
 msgstr "Te_kencodering:"
 
@@ -1679,8 +1679,9 @@ msgid "Access was denied."
 msgstr "Toegang is geweigerd."
 
 #: gedit/gedit-io-error-dialogs.c:143
+#, fuzzy
 msgid ""
-"there are too many open files. Please, close some open file and try again."
+"there are too many open files. Please, close some open files and try again."
 msgstr ""
 "er zijn te veel geopende bestanden. Sluit er eentje en probeer het opnieuw."
 
@@ -1690,9 +1691,10 @@ msgid "\"%s\" is a directory"
 msgstr "\"%s\" is een map"
 
 #: gedit/gedit-io-error-dialogs.c:157
+#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
-"application and try again."
+"applications and try again."
 msgstr ""
 "Er is niet genoeg geheugen om het bestand te openen. Sluit enkele actieve "
 "programma's en probeer het opnieuw."
@@ -1762,8 +1764,9 @@ msgstr ""
 
 # tryingto => trying to
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
+#, fuzzy
 msgid ""
-"Please, check that you are not tryingto open a binary file and that you "
+"Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
@@ -1773,9 +1776,10 @@ msgstr ""
 
 # Invalid data format?
 #: gedit/gedit-io-error-dialogs.c:315
+#, fuzzy
 msgid ""
-"The file contains data in an invalid data. Probably, you are trying to open "
-"a binary file."
+"The file contains data in an invalid format. Probably, you are trying to "
+"open a binary file."
 msgstr ""
 "Het bestand bevat gegevens in een ongeldig formaat. U probeert "
 "waarschijnlijk een binair bestand te openen."
@@ -1797,15 +1801,17 @@ msgstr ""
 "de tekst-editor kan het niet vinden. Mogelijk is het onlangs verwijderd."
 
 #: gedit/gedit-io-error-dialogs.c:449
+#, fuzzy
 msgid ""
-"There are too many open files. Please, close some open file and try again."
+"There are too many open files. Please, close some open files and try again."
 msgstr ""
 "Er zijn teveel geopende bestanden. Sluit een open bestand en probeer het "
 "opnieuw."
 
 #: gedit/gedit-io-error-dialogs.c:456
+#, fuzzy
 msgid ""
-"Not enough available memory. Please, close some running application and try "
+"Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
 "Er is niet genoeg geheugen. Sluit een actieve toepassing en probeer het "
@@ -1907,28 +1913,28 @@ msgid "Encoding:"
 msgstr "Codering:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' openen"
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "Een recent gebruikt bestand openen"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
 msgid "Read Only"
 msgstr "Alleen lezen"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2068
 msgid "Normal"
 msgstr "Normaal"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2069
 msgid "Use Normal highlight mode"
 msgstr "Normale oplichtingsmodus gebruiken"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2145
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Oplichtingsmodus %s gebruiken"
@@ -2392,20 +2398,20 @@ msgstr " (ongeldige Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:663
+#: gedit/gedit-view.c:843
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rg %d, Kol %d"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:881
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:883
 msgid "  INS"
 msgstr "  INV"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -2413,19 +2419,19 @@ msgstr ""
 "De karaktercodering voor het openen van bestanden vanaf de opdrachtregel "
 "instellen"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Een bestaande instantie van gedit afsluiten"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Een nieuw venster maken van een bestaande instantie van gedit"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Een nieuw document maken in een bestaande instantie van gedit"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "De aangegeven codering \"%s\" is ongeldig\n"
@@ -2585,25 +2591,33 @@ msgid "User name"
 msgstr "Gebruikersnaam"
 
 #: plugins/savecopy/savecopy.c:49
-msgid "Sa_ve Copy"
+#, fuzzy
+msgid "Sa_ve Copy..."
 msgstr "Kopie o_pslaan"
 
 #: plugins/savecopy/savecopy.c:52
 msgid "Save a copy of the current document"
 msgstr "Een kopie van het huidige document opslaan"
 
-#: plugins/savecopy/savecopy.c:212
-#, c-format
-msgid "Could not save a copy the file to \"%s\""
+#: plugins/savecopy/savecopy.c:262
+#, fuzzy, c-format
+msgid "Could not save a copy of the file to \"%s\""
 msgstr "Kan geen kopie van het bestand naar \"%s\" opslaan"
 
-#: plugins/savecopy/savecopy.c:311
+#: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
 msgstr "U tracht het originele bestand te overschrijven"
 
-#: plugins/savecopy/savecopy.c:362
-msgid "Save Copy"
+#: plugins/savecopy/savecopy.c:470
+#, fuzzy
+msgid "Save Copy..."
 msgstr "Kopie opslaan"
+
+#. translators: %s is a filename
+#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#, c-format
+msgid "%s (copy)"
+msgstr ""
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 msgid "Save a Copy"
@@ -2612,39 +2626,39 @@ msgstr "Een kopie opslaan"
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr ""
-"Slaat een kopie van het huidige document op naar een lokatie op deze computer "
-"of op afstand."
+"Slaat een kopie van het huidige document op naar een lokatie op deze "
+"computer of op afstand."
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "Opd_racht uitvoeren..."
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr "Opdracht uitvoeren"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "Gestopt"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "Opdracht uitvoeren"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "_Uitvoeren"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "Klaar"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "Mislukt"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2654,7 +2668,7 @@ msgstr ""
 "\n"
 "Gelieve een geldige shell-opdracht in te voeren."
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2664,11 +2678,11 @@ msgstr ""
 "\n"
 "Gelieve een geldige shell-opdracht in te geven."
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "Bezig met uitvoeren opdracht"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 msgid "An error occurred while running the selected command."
 msgstr ""
 "Er is een fout opgetreden tijdens het uitvoeren van de geselecteerde "
@@ -2746,26 +2760,26 @@ msgstr "Omgekee_rde volgorde"
 msgid "_Sort"
 msgstr "_Sorteren"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:351
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(geen woorden voorgesteld)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:375
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "_Meer..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:428
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "Alles _negeren"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:441
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "_Toevoegen"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:478
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "_Spelling-suggesties..."
 
@@ -2785,131 +2799,313 @@ msgstr "(correcte spelling)"
 msgid "Completed spell checking"
 msgstr "Spellingscontrole voltooid"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr ""
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "Arabisch"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Belarusian"
+msgstr "Bulgaars"
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr "Bulgaars"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Bengali"
 msgstr "Bengali"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr "Bretons"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "Catalaans"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "Tsjechisch"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr "Welsh"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "Deens"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "Duits (Duitsland)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "Duits (Duitsland)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "Duits (Zwitserland)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "Engels (Amerikaans)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "Engels (Brits)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "Engels (Canadees)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "Spaans"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "Roemeens"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "Afdrukken"
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
 msgstr "Fins"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr "Faroers"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "Frans (Frankrijk)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "Frans (Zwitserland)"
 
-#: plugins/spell/gedit-spell-checker.c:99
-msgid "Irish (Gaeilge)"
-msgstr "Iers (Gaeilge)"
+#: plugins/spell/gedit-spell-checker.c:105
+#, fuzzy
+msgid "Irish"
+msgstr "Turks"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:106
+msgid "Scottish Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "Georgisch"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:110
+#, fuzzy
+msgid "Hindi"
+msgstr "Zoeken"
+
+#: plugins/spell/gedit-spell-checker.c:111
+#, fuzzy
+msgid "Croatian"
+msgstr "Catalaans"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:113
+#, fuzzy
+msgid "Hungarian"
+msgstr "Bulgaars"
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
 msgstr "IJslands"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:117
 msgid "Italian"
 msgstr "Italiaans"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "Turks"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "Opsomming"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:121
+msgid "Latvian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:123
+msgid "Maori"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:124
+#, fuzzy
+msgid "Macedonian"
+msgstr "Media"
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "Noors"
+
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "Noors"
+
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
 msgstr "Noors"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
 msgstr "Pools"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:134
 msgid "Portuguese (Portugal)"
 msgstr "Portugees (Portugal)"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Brazilian)"
 msgstr "Portugees (Brazilië)"
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "Russisch"
 
-#: plugins/spell/gedit-spell-checker.c:108
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "Oekraïens"
+
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
 msgstr "Slowaaks"
 
-#: plugins/spell/gedit-spell-checker.c:109
+#: plugins/spell/gedit-spell-checker.c:142
 msgid "Slovenian"
 msgstr "Sloveens"
 
-#: plugins/spell/gedit-spell-checker.c:110
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "Zweeds"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "Thais"
+
+#: plugins/spell/gedit-spell-checker.c:146
+#, fuzzy
+msgid "Tetum"
+msgstr "Tekst"
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "Oekraïens"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr ""
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "Standaard"
 
@@ -3108,7 +3304,8 @@ msgid "Base URI"
 msgstr "Basis-URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-msgid "Base font size"
+#, fuzzy
+msgid "Base font"
 msgstr "Basis-lettergrootte"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
@@ -3254,156 +3451,158 @@ msgid "Disabled"
 msgstr "Uitgeschakeld"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-msgid "Document ID"
-msgstr "Document-ID"
-
-#: plugins/taglist/HTML.tags.xml.in.h:58
-msgid "Document base URI"
+#, fuzzy
+msgid "Document base"
 msgstr "Basis-URI van document"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document body"
 msgstr "Documentinhoud"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document head"
 msgstr "Documentkop"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document title"
 msgstr "Documenttitel"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document type"
 msgstr "Documenttype"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
-msgid "Document version"
-msgstr "Documentversie"
+#: plugins/taglist/HTML.tags.xml.in.h:62
+#, fuzzy
+msgid "Element ID"
+msgstr "Elementen"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
 msgstr "Ingebed object"
 
-#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Nadruk"
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Encode type"
 msgstr "Coderingstype"
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Figure"
 msgstr "Figuur"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Font face"
 msgstr "Lettertypenaam"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:68
 msgid "For label"
 msgstr "Voor label"
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Forced line break"
 msgstr "Gedwongen regelafbreking"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Form"
 msgstr "Formulier"
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form action handler"
 msgstr "Formulier-actieafhandeling"
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form control group"
 msgstr "Formuliercontrolegroep"
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form field label text"
 msgstr "Labeltekst formulierveld"
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form input"
 msgstr "Formulierinvoer"
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input type"
 msgstr "Formulierinvoertype"
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form method"
 msgstr "Formuliermethode"
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Forward link"
 msgstr "Voorwaartse verwijzing"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Frame"
 msgstr "Frame"
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame render parts"
 msgstr "Weergavegedeeltes frame"
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame source"
 msgstr "Framebron"
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame target"
 msgstr "Framedoel"
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frameborder"
 msgstr "Framerand"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameset"
 msgstr "Frameset"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset columns"
 msgstr "Framset-kolommen"
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset rows"
 msgstr "Frameset-rijen"
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Framespacing"
 msgstr "Framespatiëring"
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
 msgstr "Generiek ingebed object"
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
 msgstr "Generieke meta-informatie"
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic span"
 msgstr "Generieke span"
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HTML - Special Characters"
 msgstr "HTML - speciale tekens"
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Tags"
 msgstr "HTML - tags"
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML root element"
 msgstr "HTML topelement"
+
+#: plugins/taglist/HTML.tags.xml.in.h:94
+msgid "HTML version"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTTP header name"
@@ -3518,8 +3717,9 @@ msgid "Layer"
 msgstr "Laag"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-msgid "Link"
-msgstr "Verwijzing"
+#, fuzzy
+msgid "Link color"
+msgstr "Kies een kleur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
@@ -3571,179 +3771,180 @@ msgid "Max text field chars"
 msgstr "Max aantal tekens tekstveld"
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-msgid "Media"
-msgstr "Media"
-
-#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr "Media-onafhankelijke verwijzing"
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Multi-line text field"
 msgstr "Meerregelig tekstveld"
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multicolumn"
 msgstr "Multikolom"
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multiple"
 msgstr "Meerdere"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Name"
 msgstr "Naam"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Named property value"
 msgstr "Benoemde eigenschapswaarde"
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Next ID"
 msgstr "Volgend ID"
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "No URI"
 msgstr "Geen URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No embedded objects"
 msgstr "Geen ingebedde objecten"
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No frames"
 msgstr "Geen frames"
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No layers"
 msgstr "Geem lagen"
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No line break"
 msgstr "Geen regelafbreking"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No resize"
 msgstr "Niet herschalen"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No script"
 msgstr "Geen script"
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No shade"
 msgstr "Geen schaduw"
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No word wrap"
 msgstr "Geen regelterugloop"
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "Note"
 msgstr "Notitie"
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:154
 #, fuzzy
 msgid "Object applet file"
 msgstr "Bestand openen"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object data reference"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:158
 #, fuzzy
 msgid "OnChange event"
 msgstr "Lettervorm wijzigen"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnDblClick event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnFocus event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnKeyDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyPress event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnLoad event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnMouseDown event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseMove event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseOut event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOver event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseUp event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnReset event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnSelect event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSubmit event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnUnload event"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Option group"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:176
 #, fuzzy
 msgid "Option selector"
 msgstr "Lettertype-selectie"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Ordered list"
 msgstr ""
+
+#: plugins/taglist/HTML.tags.xml.in.h:178
+#, fuzzy
+msgid "Output media"
+msgstr "Uitvoerregels"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
@@ -3952,11 +4153,13 @@ msgid "Table caption"
 msgstr "Tabelbijschrift"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
-msgid "Table column"
-msgstr "Tabelkolom"
+#, fuzzy
+msgid "Table column group properties"
+msgstr "Tabelkolomgroep"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
-msgid "Table column group"
+#, fuzzy
+msgid "Table column properties"
 msgstr "Tabelkolomgroep"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
@@ -4524,6 +4727,21 @@ msgstr "_Vragen om een formaat"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Aangepast formaat gebr_uiken"
+
+#~ msgid "Irish (Gaeilge)"
+#~ msgstr "Iers (Gaeilge)"
+
+#~ msgid "Document ID"
+#~ msgstr "Document-ID"
+
+#~ msgid "Document version"
+#~ msgstr "Documentversie"
+
+#~ msgid "Link"
+#~ msgstr "Verwijzing"
+
+#~ msgid "Table column"
+#~ msgstr "Tabelkolom"
 
 #~ msgid "Do_n't save"
 #~ msgstr "Nie_t opslaan"
