@@ -149,21 +149,11 @@ gboolean	gedit_document_is_untitled 	(const GeditDocument* doc);
 gboolean	gedit_document_get_modified 	(const GeditDocument* doc);
 
 gboolean	gedit_document_get_deleted	(GeditDocument *doc);
-		
+
 void		gedit_document_insert_text	(GeditDocument *doc, 
 						 gint	        pos,
                                                  const gchar   *text,
                                                  gint           len);
-
-void		gedit_document_insert_text_at_cursor (GeditDocument *doc, 
-                                                 const gchar   *text,
-                                                 gint           len);
-
-void 		gedit_document_delete_text 	(GeditDocument *doc, 
-		                                 gint start, gint end);
-
-gchar*		gedit_document_get_chars 	(GeditDocument *doc, 
-					         gint start, gint end);
 
 /* Multi-level Undo/Redo operations */
 void		gedit_document_set_max_undo_levels (GeditDocument *doc, 

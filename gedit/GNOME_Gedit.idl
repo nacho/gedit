@@ -22,9 +22,6 @@ module GNOME {
 			void insert (in long offset, in string str,
 					    in long length)
 				raises (DocumentReadOnly);
-
-			void delete (in long offset, in long length)
-				raises (DocumentReadOnly);
 		};
 
 		interface Window : Bonobo::Unknown {

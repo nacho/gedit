@@ -69,7 +69,6 @@ impl_gedit_document_server_setLinePosition (PortableServer_Servant _servant,
 {
 	GeditDocumentServer *doc_server;
 
-
 	doc_server = GEDIT_DOCUMENT_SERVER (bonobo_object_from_servant (_servant));
 
 	gedit_document_goto_line (doc_server->doc, position);
@@ -93,30 +92,9 @@ impl_gedit_document_server_insert (PortableServer_Servant _servant,
 				     NULL);
 		return;
 	}
-		
+
 	gedit_document_insert_text (doc_server->doc, (gint)offset,
 				    (const gchar *)str, (gint)len);
-}
-
-static void
-impl_gedit_document_server_delete (PortableServer_Servant _servant,
-				   const CORBA_long offset,
-				   const CORBA_long len,
-				   CORBA_Environment *ev)
-{
-	GeditDocumentServer *doc_server;
-
-	doc_server = GEDIT_DOCUMENT_SERVER (bonobo_object_from_servant (_servant));
-
-	if (gedit_document_is_readonly (doc_server->doc)) {
-		g_warning ("Doc is readonly.  Sending exception.");
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_GNOME_Gedit_Document_DocumentReadOnly,
-				     NULL);
-		return;
-	}
-
-	gedit_document_delete_text (doc_server->doc, (gint)offset, (gint)len);
 }
 
 static void
@@ -132,7 +110,6 @@ gedit_document_server_class_init (GeditDocumentServerClass *klass)
         /* connect implementation callbacks */
 	epv->setLinePosition = impl_gedit_document_server_setLinePosition;
 	epv->insert          = impl_gedit_document_server_insert;
-	epv->delete          = impl_gedit_document_server_delete;
 }
 
 static void

@@ -2103,50 +2103,6 @@ gedit_document_insert_text (GeditDocument *doc, gint pos, const gchar *text, gin
 	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, text, len);
 }
 
-void 
-gedit_document_delete_text (GeditDocument *doc, gint start, gint end)
-{
-	GtkTextIter start_iter;
-	GtkTextIter end_iter;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (start >= 0);
-	g_return_if_fail ((end > start) || end < 0);
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
-
-	if (end < 0)
-		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
-	else
-		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
-
-	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter);
-}
-
-gchar*
-gedit_document_get_chars (GeditDocument *doc, gint start, gint end)
-{
-	GtkTextIter start_iter;
-	GtkTextIter end_iter;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
-
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
-	g_return_val_if_fail (start >= 0, NULL);
-	g_return_val_if_fail ((end > start) || (end < 0), NULL);
-
-	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &start_iter, start);
-
-	if (end < 0)
-		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end_iter);
-	else
-		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &end_iter, end);
-
-	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &start_iter, &end_iter, TRUE);
-}
-
 void
 gedit_document_set_max_undo_levels (GeditDocument *doc, gint max_undo_levels)
 {
