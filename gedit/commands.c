@@ -1044,7 +1044,7 @@ recent_update_menus (gE_window *window, GList *recent_files)
 	
 	if (window->num_recent > 0)
 		gnome_app_remove_menu_range (GNOME_APP (window->window), 
-		                                         "File/", 8, window->num_recent + 1);
+		                                         "_File/", 8, window->num_recent + 1);
 
 	if (recent_files == NULL)
 		return;
@@ -1053,8 +1053,8 @@ recent_update_menus (gE_window *window, GList *recent_files)
 	/* insert a separator at the beginning */
 	
 	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-	path = g_new (gchar, strlen (_("File")) + strlen ("<Separator>") + 3 );
-	sprintf (path, "%s/%s", _("File"), "<Separator>");
+	path = g_new (gchar, strlen (_("_File")) + strlen ("<Separator>") + 3 );
+	sprintf (path, "%s/%s", _("_File"), "<Separator>");
 	menu->type = GNOME_APP_UI_SEPARATOR;
 
 	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
