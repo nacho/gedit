@@ -410,17 +410,29 @@ FILE *temp;
 
 void edit_cut_cmd_callback (GtkWidget *widget, gpointer data)
 {
+#if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
+   gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text));
+#else
    gtk_editable_cut_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text), Ctime);
+#endif
 }
 
 void edit_copy_cmd_callback (GtkWidget *widget, gpointer data)
 {
+#if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
+   gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text));
+#else
    gtk_editable_copy_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text), Ctime);
+#endif
 }
 	
 void edit_paste_cmd_callback (GtkWidget *widget, gpointer data)
 {
+#if (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1)
+   gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text));
+#else
    gtk_editable_paste_clipboard (GTK_EDITABLE(gE_document_current(main_window)->text), Ctime);
+#endif
 }
 
 void edit_selall_cmd_callback (GtkWidget *widget, gpointer data)

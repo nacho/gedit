@@ -67,24 +67,24 @@ static toolbar_data_t toolbar_data[] = {
 #else
 
 static toolbar_data_t toolbar_data[] = {
-	{ " New ", "Start a new file", "Toolbar/New", GNOME_STOCK_PIXMAP_NEW,
+	{ N_(" New "), N_("Start a new file"), "Toolbar/New", GNOME_STOCK_PIXMAP_NEW,
 		(GtkSignalFunc)file_new_cmd_callback },
-	{ " Open ", "Open a file", "Toolbar/Open", GNOME_STOCK_PIXMAP_OPEN,
+	{ N_(" Open "), N_("Open a file"), "Toolbar/Open", GNOME_STOCK_PIXMAP_OPEN,
 		(GtkSignalFunc)file_open_cmd_callback },
-	{ " Save ", "Save file", "Toolbar/Save", GNOME_STOCK_PIXMAP_SAVE,
+	{ N_(" Save "), N_("Save file"), "Toolbar/Save", GNOME_STOCK_PIXMAP_SAVE,
 		(GtkSignalFunc)file_save_cmd_callback },
-	{ " Close ", "Close the current file", "Toolbar/Close", GNOME_STOCK_PIXMAP_CLOSE,
+	{ N_(" Close "), N_("Close the current file"), "Toolbar/Close", GNOME_STOCK_PIXMAP_CLOSE,
 		(GtkSignalFunc)file_close_cmd_callback },
-	{ " Print ", "Print file", "Toolbar/Print", GNOME_STOCK_PIXMAP_PRINT,
+	{ N_(" Print "), N_("Print file"), "Toolbar/Print", GNOME_STOCK_PIXMAP_PRINT,
 		(GtkSignalFunc)file_print_cmd_callback },
 	{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ " Cut ", "Cut text", "Toolbar/Cut", GNOME_STOCK_PIXMAP_CUT,
+	{ N_(" Cut "), N_("Cut text"), "Toolbar/Cut", GNOME_STOCK_PIXMAP_CUT,
 		(GtkSignalFunc)edit_cut_cmd_callback },
-	{ " Copy ", "Copy text", "Toolbar/Copy", GNOME_STOCK_PIXMAP_COPY,
+	{ N_(" Copy "), N_("Copy text"), "Toolbar/Copy", GNOME_STOCK_PIXMAP_COPY,
 		(GtkSignalFunc)edit_copy_cmd_callback },
-	{ " Paste ", "Paste text", "Toolbar/Paste", GNOME_STOCK_PIXMAP_PASTE,
+	{ N_(" Paste "), N_("Paste text"), "Toolbar/Paste", GNOME_STOCK_PIXMAP_PASTE,
 		(GtkSignalFunc)edit_paste_cmd_callback },
-	{ " Search ", "Search for text", "Toolbar/Search", GNOME_STOCK_PIXMAP_SEARCH,
+	{ N_(" Search "), N_("Search for text"), "Toolbar/Search", GNOME_STOCK_PIXMAP_SEARCH,
 		(GtkSignalFunc)search_search_cmd_callback },
 	{ NULL, NULL, NULL, NULL, NULL }
 };

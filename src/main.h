@@ -95,7 +95,9 @@ gint gE_file_open (gE_document *document, gchar *filename);
 gint gE_file_save (gE_document *document, gchar *filename);
 gint file_open_wrapper (char *name);
 
+#if !( (GTK_MAJOR_VERSION==1) && (GTK_MINOR_VERSION==1) )
 size_t Ctime;
+#endif
 
 extern gE_prefs *prefs_window;
 extern gE_window *main_window;
