@@ -554,9 +554,13 @@ gedit_view_doc_changed_handler (GtkTextBuffer *buffer, GeditView* view)
 
 	if (view->priv->old_lines != lines)
 	{
+		GdkWindow *w;
 		view->priv->old_lines = lines;
-		gdk_window_invalidate_rect (gtk_text_view_get_window (view->priv->text_view,
-					GTK_TEXT_WINDOW_LEFT), NULL, FALSE);
+
+		w = gtk_text_view_get_window (view->priv->text_view, GTK_TEXT_WINDOW_LEFT);
+
+		if (w != NULL)
+			gdk_window_invalidate_rect (w, NULL, FALSE);
 	}
 }
 
