@@ -1,13 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES = -I$(includedir) 				\
-	-I$(top_srcdir) 			 	\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DLOCALEDIR=\"$(datadir)/locale\" 		\
-	-I$(top_srcdir)/intl				\
-	-I$(top_builddir)/intl 				\
-	$(GNOME_INCLUDEDIR) 				\
-	$(GNOME_PRINT_CFLAGS)
+INCLUDES = -I$(includedir) -I$(top_srcdir) \
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
+	-DLOCALEDIR=\"$(datadir)/locale\" \
+	-I$(top_srcdir)/intl -I$(top_builddir)/intl \
+	$(GNOME_INCLUDEDIR) $(GNOME_PRINT_CFLAGS)
 
 ## This need to be two distinct directories
 plugindir = $(libexecdir)/go/plugins
@@ -60,8 +57,7 @@ gedit_SOURCES = 	\
 	gE_plugin.c \
 	main.h		\
 	toolbar.h	\
-	menus.h		\
-	menus.c		\
+	gedit-menus.c gedit-menus.h \
 	search.h	\
 	search.c	
 

@@ -55,6 +55,10 @@ gint remove_doc_cb (GnomeMDI *mdi, gedit_document *doc);
 void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 void add_view_cb (GnomeMDI *mdi, gedit_document *doc);
 gint add_child_cb (GnomeMDI *mdi, gedit_document *doc);
+
+gchar* gedit_get_document_tab_name (void);
+
+
 END_GNOME_DECLS
 
 #endif /* __GE_MDI_H__ */

@@ -20,11 +20,13 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+#include <config.h>
+
 #define STRING_LENGTH_MAX	256
 #define GEDIT_ID	"gEdit "VERSION
 
 #define UNKNOWN		N_("Unknown")
-#define UNTITLED	N_("Untitled")
+/*#define UNTITLED	N_("Untitled") */
 
 #define DEFAULT_FONT \
 	"-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
@@ -85,7 +87,6 @@ typedef struct _gedit_data {
 	gpointer temp1;
 	gpointer temp2;
 	gboolean flag;	/* general purpose flag to indicate if action completed */
-
 } gedit_data;
 
 typedef struct _gedit_function {
@@ -93,7 +94,6 @@ typedef struct _gedit_function {
 	gchar *tooltip_text;
 	gchar *icon;
 	GtkSignalFunc callback;
-
 } gedit_function;
 
 extern GList *window_list;

@@ -21,13 +21,6 @@
 #include <config.h>
 #include <gnome.h>
 
-/*
-#include <stdio.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include <glib.h>
-*/
-
 #include "main.h"
 #include "gE_window.h"
 #include "gE_view.h"
@@ -36,7 +29,7 @@
 #include "commands.h"
 #include "gE_mdi.h"
 #include "gedit-print.h"
-#include "menus.h"
+#include "gedit-menus.h"
 #include "gE_prefs.h"
 #include "search.h"
 #include "gE_plugin.h"
@@ -51,7 +44,7 @@ GtkWidget *search_result_window;
 GtkWidget *search_result_clist;
 
 /* Prototype for setting the window icon */
-void gedit_window_set_icon(GtkWidget *window, char *icon);
+void gedit_window_set_icon (GtkWidget *window, char *icon);
 
 
 /*
@@ -124,10 +117,9 @@ create_find_in_files_result_window ()
 }
 
 
-/*gedit_window */
-void gedit_window_new(GnomeMDI *mdi, GnomeApp *app)
+void
+gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 {
-
 	GtkWidget *statusbar;
 	
 	static GtkTargetEntry drag_types[] =
@@ -177,19 +169,18 @@ void gedit_window_new(GnomeMDI *mdi, GnomeApp *app)
 		
 	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
 	
-} /* gedit_window_new */
+}
 
-void gedit_window_set_auto_indent (gint auto_indent)
+void
+gedit_window_set_auto_indent (gint auto_indent)
 {
-
 	settings->auto_indent = auto_indent;
-
 }
 
 /* set the a window icon */
-void gedit_window_set_icon(GtkWidget *window, char *icon)
+void
+gedit_window_set_icon (GtkWidget *window, char *icon)
 {
-
 	GdkPixmap *pixmap;
         GdkBitmap *mask;
 
@@ -203,11 +194,10 @@ void gedit_window_set_icon(GtkWidget *window, char *icon)
 	
 	/* Not sure about this.. need to test in E 
 	gtk_widget_unrealize (window);*/
-
 }
 
-
-void gedit_window_set_status_bar (gint show_status)
+void
+gedit_window_set_status_bar (gint show_status)
 {
 
 	settings->show_status = show_status;
@@ -258,7 +248,7 @@ gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
  * check in there.  if both exist, then probably open both files.
  */
 void
-doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
+doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
 {
 
 	size_t len;
@@ -320,7 +310,4 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 	doc = gedit_document_new_with_file (newfname);
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-
-} /* doc_swaphc_cb */
-
-/* the end */
+}

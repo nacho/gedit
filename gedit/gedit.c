@@ -17,20 +17,23 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <unistd.h>
 #include <config.h>
 #include <gnome.h>
+
+/*
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include <gtk/gtk.h>
+*/
 
 #include "main.h"
 #include "commands.h"
 #include "gE_mdi.h"
 #include "gE_prefs.h"
 #include "gE_files.h"
-#include "menus.h"
+#include "gedit-menus.h"
 #include "toolbar.h"
 #include "gE_plugin.h"
 #include "gE_window.h"
@@ -89,7 +92,6 @@ corba_exception (CORBA_Environment* ev)
 int
 main (int argc, char **argv)
 {
-
 	gedit_document *doc;
 /*
 	gedit_window *window;

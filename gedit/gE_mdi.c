@@ -32,23 +32,17 @@
 #include "search.h"
 #include "gE_mdi.h"
 #include "gedit-print.h"
-#include "menus.h"
+#include "gedit-menus.h"
 
-/*
-#include <stdio.h>
-#include <sys/types.h>
-#include <string.h>
-#include <gtk/gtk.h>
-#include <glib.h>
-*/
 
 static void 	  gedit_document_class_init (gedit_document_class *);
 static void 	  gedit_document_init (gedit_document *);
-static GtkWidget *gedit_document_create_view (GnomeMDIChild *);
+static GtkWidget* gedit_document_create_view (GnomeMDIChild *);
 static void	  gedit_document_destroy (GtkObject *);
 /*static void	  gedit_document_real_changed (gedit_document *, gpointer); */
-static gchar *gedit_document_get_config_string (GnomeMDIChild *child);
-       gchar *get_untitled_as_string ();
+static gchar* gedit_document_get_config_string (GnomeMDIChild *child);
+
+gchar* gedit_get_document_tab_name (void);
 
 
 /* MDI Menus Stuff */
@@ -56,9 +50,8 @@ static gchar *gedit_document_get_config_string (GnomeMDIChild *child);
 #define GE_DATA		1
 #define GE_WINDOW	2
 
-GnomeUIInfo gedit_edit_menu [] = {
-
-
+GnomeUIInfo gedit_edit_menu[] =
+{
 	GNOMEUIINFO_MENU_UNDO_ITEM (gedit_undo_do, NULL),
 	GNOMEUIINFO_MENU_REDO_ITEM (gedit_undo_redo, NULL),
 
@@ -92,28 +85,25 @@ GnomeUIInfo gedit_edit_menu [] = {
 	GNOMEUIINFO_MENU_REPLACE_ITEM(replace_cb, NULL),
 	
 	GNOMEUIINFO_END
-	
 };
 
-GnomeUIInfo view_menu[] = {
-
+GnomeUIInfo view_menu[] =
+{
 	GNOMEUIINFO_ITEM_NONE (N_("_Add View"),
-					   N_("Add a new view of the document"), gedit_add_view),
+			       N_("Add a new view of the document"),
+			       gedit_add_view),
 	GNOMEUIINFO_ITEM_NONE (N_("_Remove View"),
-					   N_("Remove view of the document"), gedit_remove_view),
+			       N_("Remove view of the document"),
+			       gedit_remove_view),
 	GNOMEUIINFO_END
-	
 };
 
-GnomeUIInfo doc_menu[] = {
-
+GnomeUIInfo doc_menu[] =
+{
 	GNOMEUIINFO_MENU_EDIT_TREE(gedit_edit_menu),
 	GNOMEUIINFO_MENU_VIEW_TREE(view_menu),
 	GNOMEUIINFO_END
-	
 };
-
-
 
 enum {
 	LAST_SIGNAL
@@ -122,6 +112,7 @@ enum {
 typedef void (*gedit_document_signal) (GtkObject *, gpointer, gpointer);
 
 static GnomeMDIChildClass *parent_class = NULL;
+
 
 GtkType
 gedit_document_get_type (void)
@@ -151,46 +142,42 @@ gedit_document_get_type (void)
 static GtkWidget *
 gedit_document_create_view (GnomeMDIChild *child)
 {
-
 	GtkWidget *new_view;
 	
 	new_view = gedit_view_new (GE_DOCUMENT (child));
-
 
 	gedit_view_set_font (GE_VIEW(new_view), settings->font);
 	gtk_widget_queue_resize (GTK_WIDGET (new_view));
 	
 	return new_view;
-
 }
 
-static void gedit_document_destroy (GtkObject *obj)
+static void
+gedit_document_destroy (GtkObject *obj)
 {
-
 	gedit_document *doc;
 	
 	doc = GE_DOCUMENT(obj);
 	
 	if (doc->filename)
-	  g_free (doc->filename);
+		g_free (doc->filename);
 	
 	g_free (doc->buf->str);
 	doc->buf = NULL;
 	
 	if (doc->undo)
-	  g_list_free (doc->undo);
+		g_list_free (doc->undo);
 	
 	if (doc->redo)
-	  g_list_free (doc->redo);
+		g_list_free (doc->redo);
 	
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-	  (* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
-
+		(* GTK_OBJECT_CLASS (parent_class)->destroy)(GTK_OBJECT (doc));
 }
 
-static void gedit_document_class_init (gedit_document_class *class)
+static void
+gedit_document_class_init (gedit_document_class *class)
 {
-
 	GtkObjectClass 		*object_class;
 	GnomeMDIChildClass	*child_class;
 	
@@ -210,7 +197,6 @@ static void gedit_document_class_init (gedit_document_class *class)
 	/*class->document_changed = gedit_document_real_changed;*/
 	
 	parent_class = gtk_type_class (gnome_mdi_child_get_type ());
-	
 }
 
 void
@@ -226,6 +212,30 @@ gedit_document_init (gedit_document *doc)
 	gnome_mdi_child_set_menu_template (GNOME_MDI_CHILD (doc), doc_menu);
 }
 
+gchar*
+gedit_get_document_tab_name (void)
+{
+	gedit_document *doc;	
+	int counter = 0;
+	int i;
+	const char *UNTITLED = N_("Untitled");
+	
+        for (i = 0; i < g_list_length (mdi->children); i++)
+	{
+		doc = (gedit_document *)g_list_nth_data (mdi->children, i);
+	  
+		if (!doc->filename)
+			counter++;
+	}
+	
+        if (counter == 0)
+		return _(UNTITLED);
+        else
+		return _(g_strdup_printf("%s %d", UNTITLED, counter));
+	   
+	return NULL;
+}
+
 gedit_document *
 gedit_document_new (void)
 {
@@ -233,44 +243,19 @@ gedit_document_new (void)
 /*	int i; */
 
 	/* FIXME: Blarg!! */
-	if ((doc = gtk_type_new (gedit_document_get_type ()))) {
-	
-	  gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), get_untitled_as_string());
-	  
-	  doc->buf = g_string_sized_new (64);
-	  return doc;
+	if ((doc = gtk_type_new (gedit_document_get_type ()) != NULL))
+	{
+		gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
+					  gedit_get_document_tab_name());
+		
+		doc->buf = g_string_sized_new (64);
+		return doc;
 	}
 	
 	g_print ("Eeek.. bork!\n");
 	gtk_object_destroy (GTK_OBJECT(doc));
 	
 	return NULL;
-}
-
-gchar*
-get_untitled_as_string (void)
-{
-
-	gedit_document *doc;	
-	int counter = 0;
-	int i;
-	
-        for (i = 0; i < g_list_length (mdi->children); i++) {
-
-	  doc = (gedit_document *)g_list_nth_data (mdi->children, i);
-	  
-	  if (!doc->filename)
-	    counter++;
-
-	}
-	
-        if (counter == 0)
-          return _(UNTITLED);
-        else
-	   return (g_strdup_printf("%s %d", _(UNTITLED), counter));        
-	   
-	return NULL;
-
 }
 
 gedit_document *
@@ -280,14 +265,14 @@ gedit_document_new_with_title (gchar *title)
 	
 	/* FIXME: Blarg!! */
 	
-	if ((doc = gtk_type_new (gedit_document_get_type ()))) {
-	
-	  gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), title);
+	if ((doc = gtk_type_new (gedit_document_get_type ())))
+	{
+		gnome_mdi_child_set_name (GNOME_MDI_CHILD(doc),
+					  title);
 
-	  doc->buf = g_string_sized_new (64);
+		doc->buf = g_string_sized_new (64);
 	
-	  return doc;
-	  
+		return doc;
         }
 	
 	g_print ("An error occured!\n");
@@ -295,7 +280,6 @@ gedit_document_new_with_title (gchar *title)
 	
 	return NULL;
 }
-
 
 gedit_document *
 gedit_document_new_with_file (gchar *filename)
@@ -305,21 +289,18 @@ gedit_document_new_with_file (gchar *filename)
 /*	gchar *tmp_buf; */
 /*	FILE *fp; */
 
-	if (!stat(filename, &stats) && S_ISREG(stats.st_mode)) {
-	
-	  if ((doc = gtk_type_new (gedit_document_get_type ()))) {
-	  
-
-	    if (!gedit_file_open (doc, filename)) {
+	if (!stat(filename, &stats) && S_ISREG(stats.st_mode))
+	{
+	  if ((doc = gtk_type_new (gedit_document_get_type ())))
+	  {
+	    if (!gedit_file_open (doc, filename))
+	    {
 	    	/*g_free (filename);*/
 	    	return doc;
 	    }
-	
 	  }
-	
 	  g_print ("Eeek.. bork!\n");
 	  gtk_object_destroy (GTK_OBJECT(doc));
-	
 	}
 	return NULL;
 }
@@ -331,7 +312,7 @@ gedit_document_current (void)
 	gedit_document *current_document = NULL;
 
 	if (mdi->active_child)
-	  current_document = GE_DOCUMENT(mdi->active_child);
+		current_document = GE_DOCUMENT(mdi->active_child);
  
 	return current_document;
 }
@@ -354,7 +335,8 @@ GnomeMDIChild *gedit_document_new_from_config (gchar *file)
 	return GNOME_MDI_CHILD (doc);
 }
 
-void gedit_add_view (GtkWidget *w, gpointer data)
+void
+gedit_add_view (GtkWidget *w, gpointer data)
 {
 	GnomeMDIChild *child;
 	gedit_view *view;
@@ -376,12 +358,11 @@ void gedit_add_view (GtkWidget *w, gpointer data)
 	   
   
 	  gnome_mdi_add_view (mdi, child);
-   
 	}
-	
 }
 
-void gedit_remove_view (GtkWidget *w, gpointer data)
+void
+gedit_remove_view (GtkWidget *w, gpointer data)
 {
 	gedit_document *doc = GE_DOCUMENT (data);
 	
