@@ -10,13 +10,15 @@ INCLUDES = 						\
 
 noinst_LIBRARIES = libdialogs.a
 
-libdialogs_a_SOURCES = 			\
-	dialog-about.c			\
-	dialog-replace.c		\
+libdialogs_a_SOURCES = 		\
+	dialog-about.c		\
+	dialog-replace.c	\
+	dialog-search.c		\
 	dialog-find-line.c
 
 glade_DATA =		\
 	find-line.glade \
+	search.glade	\
 	replace.glade
 
 EXTRA_DIST = $(glade_DATA)

@@ -66,24 +66,28 @@ clicked_cb (GtkWidget *widget, gint button, Document *doc)
 		do {
 			pos = gedit_search_search (doc, str, pos, options);
 			if (pos == -1) break;
-			if (confirm) {
+			if (confirm)
+			{
 				search_select (doc, str, pos, options);
 				dowhat = ask_replace();
-				if (dowhat == 2)  break;
-				if (dowhat == 1) {
-					if ( !(options | SEARCH_BACKWARDS)) {
+				if (dowhat == 2) 
+					break;
+				if (dowhat == 1)
+				{
+					if (!(options | SEARCH_BACKWARDS))
 						pos += num_widechars (str);
-					}
+
 					continue;
 				}
 			}
 
 			gedit_search_replace (doc, pos, num_widechars (str),
 					      replace);
-			if ( !(options | SEARCH_BACKWARDS)) {
+			if (!(options | SEARCH_BACKWARDS))
 				pos += num_widechars (replace);
-			}
-		} while (button);
+
+		} while (button); /* FIXME: this is so busted, its an
+                                     infinite loop */
 	}
 	else
 	{

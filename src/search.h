@@ -1,5 +1,4 @@
-/* vi:set ts=8 sts=0 sw=8:
- *
+/* 
  * gedit
  *
  * This program is free software; you can redistribute it and/or modify
