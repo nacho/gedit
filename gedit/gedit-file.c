@@ -379,11 +379,17 @@ gedit_file_save_as (GeditMDIChild *child)
 
 	if (gedit_document_is_untitled (doc))
 	{
+		char *tmpstr;
+		
 		path = (gedit_default_path != NULL) ? 
 			g_strdup (gedit_default_path) : NULL;
 
-		/* FIXME: check the case in which "Untitled n" is a non-ascii string */
-		fname = gedit_document_get_uri (doc);		
+		tmpstr = gedit_document_get_uri (doc);
+		fname = g_filename_from_utf8 (tmpstr, -1, NULL, NULL, NULL);
+		if (!fname)
+			/* FIXME: should fname remain NULL in this case? - Paolo */		
+			fname = g_strdup ("Untitled"); /* Use ASCII */
+		g_free (tmpstr);
 	}
 	else
 	{
