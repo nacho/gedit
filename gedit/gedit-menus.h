@@ -93,8 +93,28 @@ void gedit_menus_add_menu_item_toggle_all (const gchar *path,
 		     BonoboUIListenerFn lt, 
 		     gpointer data);
 
+void gedit_menus_add_menu_item_radio (BonoboWindow *window, 
+		     const gchar *path,
+		     const gchar *name, 
+		     const gchar *group, 
+		     const gchar *label, 
+		     const gchar *tooltip, 
+		     BonoboUIListenerFn lt, 
+		     gpointer data);
+
+void gedit_menus_add_menu_item_radio_all (const gchar *path,
+		     const gchar *name, 
+		     const gchar *group, 
+		     const gchar *label, 
+		     const gchar *tooltip, 
+		     BonoboUIListenerFn lt, 
+		     gpointer data);
+
 #define gedit_menus_remove_menu_item_toggle 	gedit_menus_remove_menu_item
 #define gedit_menus_remove_menu_item_toggle_all	gedit_menus_remove_menu_item_all
+#define gedit_menus_remove_menu_item_radio 	gedit_menus_remove_menu_item
+#define gedit_menus_remove_menu_item_radio_all	gedit_menus_remove_menu_item_all
+
 
 void gedit_menus_add_submenu (BonoboWindow *window, 
 		     const gchar *path,

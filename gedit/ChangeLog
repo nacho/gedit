@@ -1,3 +1,23 @@
+2003-05-20  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-languages-manager.[ch]: new files
+	
+	* Makefile.am: compile new files, do not install
+	gedit-window-server.h
+	
+	* gedit-document.c: manage the "language" metadata,
+	(gedit_document_set_uri): set language using metadata info
+	if needed
+	(gedit_document_set_language)(gedit_document_get_language):
+	new functions
+	
+	* gedit-mdi.c: add the Highlight Mode submenu
+	
+	* gedit-menus.[ch] (gedit_menus_add_menu_item_radio)
+	(gedit_menus_add_menu_item_radio_all): nw functions
+	
+	* gedit-ui.xml: add the Highlight Mode submenu
+	
 2003-05-13  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* gedit-metadata-manager.[ch]: new files

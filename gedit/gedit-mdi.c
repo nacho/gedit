@@ -37,6 +37,9 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
 
+#include <gtksourceview/gtksourcelanguage.h>
+#include <gtksourceview/gtksourcelanguagesmanager.h>
+
 #include <string.h>
 
 #include "gedit-mdi.h"
@@ -54,6 +57,7 @@
 #include "recent-files/egg-recent-view-bonobo.h"
 #include "recent-files/egg-recent-view-gtk.h"
 #include "recent-files/egg-recent-model.h"
+#include "gedit-languages-manager.h"
 
 #include <bonobo/bonobo-ui-util.h>
 #include <bonobo/bonobo-control.h>
@@ -111,6 +115,8 @@ static void gedit_mdi_view_menu_item_toggled_handler (
 			Bonobo_UIComponent_EventType type,
 			const char                  *state,
 			BonoboWindow                *win);
+static void add_languages_menu (BonoboMDI *mdi, BonoboWindow *win);
+static void gedit_mdi_update_languages_menu (BonoboMDI *mdi);
 
 
 static GQuark window_prefs_id = 0;
@@ -520,6 +526,8 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 		else
 			gtk_window_unstick (GTK_WINDOW (win));
 	}
+
+	add_languages_menu (mdi, win);
 	
 	/* Add the plugins menus */
 	gedit_plugins_engine_update_plugins_ui (win, TRUE);
@@ -823,6 +831,7 @@ gedit_mdi_child_state_changed_handler (GeditMDIChild *child)
 	
 	gedit_mdi_set_active_window_title (BONOBO_MDI (gedit_mdi));
 	gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+	gedit_mdi_update_languages_menu (BONOBO_MDI (gedit_mdi));
 }
 
 static void 
@@ -1070,8 +1079,9 @@ static
 void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old_child)
 {
 	gedit_debug (DEBUG_MDI, "");
-
+		
 	gedit_mdi_set_active_window_title (mdi);	
+	gedit_mdi_update_languages_menu (mdi);
 }
 
 static 
@@ -1166,12 +1176,20 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	{
 		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_no_docs_sensible_verbs, FALSE);
+
+		bonobo_ui_component_set_prop (
+			ui_component, "/menu/View/HighlightMode", "sensitive", "0", NULL);
+
 		goto end;
 	}
 	else
 	{
 		gedit_menus_set_verb_list_sensitive (ui_component, 
 				gedit_menus_all_sensible_verbs, TRUE);
+
+		bonobo_ui_component_set_prop (
+			ui_component, "/menu/View/HighlightMode", "sensitive", "1", NULL);
+
 	}
 
 	gedit_menus_set_verb_sensitive (ui_component, "/commands/DocumentsMoveToNewWindow",
@@ -1420,3 +1438,319 @@ gedit_window_prefs_save (GeditWindowPrefs *prefs)
 		gedit_prefs_manager_set_statusbar_visible (prefs->statusbar_visible);
 
 }
+
+static gchar* 
+escape_underscores (const gchar* text)
+{
+	GString *str;
+	gint length;
+	const gchar *p;
+ 	const gchar *end;
+
+  	g_return_val_if_fail (text != NULL, NULL);
+
+    	length = strlen (text);
+
+	str = g_string_new ("");
+
+  	p = text;
+  	end = text + length;
+
+  	while (p != end)
+    	{
+      		const gchar *next;
+      		next = g_utf8_next_char (p);
+
+		switch (*p)
+        	{
+       			case '_':
+          			g_string_append (str, "__");
+          			break;
+        		default:
+          			g_string_append_len (str, p, next - p);
+          			break;
+        	}
+
+      		p = next;
+    	}
+
+	return g_string_free (str, FALSE);
+}
+
+static gchar* 
+replace_spaces_with_underscores (const gchar* text)
+{
+	GString *str;
+	gint length;
+	const gchar *p;
+ 	const gchar *end;
+
+  	g_return_val_if_fail (text != NULL, NULL);
+
+    	length = strlen (text);
+
+	str = g_string_new ("");
+
+  	p = text;
+  	end = text + length;
+
+  	while (p != end)
+    	{
+      		const gchar *next;
+      		next = g_utf8_next_char (p);
+
+		switch (*p)
+        	{
+       			case ' ':
+			case '\t':
+			case '+':
+          			g_string_append (str, "_");
+          			break;
+        		default:
+          			g_string_append_len (str, p, next - p);
+          			break;
+        	}
+
+      		p = next;
+    	}
+
+	return g_string_free (str, FALSE);
+}
+
+static void
+slist_deep_free (GSList *list)
+{
+	g_slist_foreach (list, (GFunc) g_free, NULL);
+	g_slist_free (list);
+}
+	
+static gboolean
+section_exists (GSList      *list,
+		const gchar *section)
+{
+	while (list != NULL)
+	{
+      		if (strcmp (list->data, section) == 0)
+			return TRUE;
+
+		list = g_slist_next (list);
+    	}
+
+  	return FALSE;
+}
+
+static gchar *
+get_base_path_for_language (GtkSourceLanguage *lang)
+{
+	gchar *safe_name;
+	gchar *section;
+	gchar *name;
+	gchar *path;
+
+	section = gtk_source_language_get_section (lang);
+	
+	safe_name = g_markup_escape_text (section, strlen (section));
+	name = replace_spaces_with_underscores (safe_name);
+		
+	path = g_strdup_printf ("/menu/View/HighlightMode/%s/", name);
+
+	g_free (safe_name);
+	g_free (name);
+	g_free (section);
+
+	return path;
+}
+	
+static void
+language_toggled_handler (
+			BonoboUIComponent           *ui_component,
+			const char                  *path,
+			Bonobo_UIComponent_EventType type,
+			const char                  *state,
+			GtkSourceLanguage           *lang)
+{
+	GeditDocument *doc;
+	gboolean s;
+
+       	s = (strcmp (state, "1") == 0);
+	
+	if (!s)
+		return;
+	
+	doc = gedit_get_active_document ();
+	g_return_if_fail (doc != NULL);
+
+	gedit_document_set_language (doc, lang);
+}
+
+
+static gchar *
+get_verb_name_for_language (GtkSourceLanguage *lang)
+{
+	gchar *lang_name;
+	gchar *safe_name;
+	gchar *name;
+	gchar *verb_name;
+
+	if (lang == NULL)
+		return g_strdup ("/commands/Normal");
+
+	lang_name = gtk_source_language_get_name (lang);
+	safe_name = g_markup_escape_text (lang_name, strlen (lang_name));
+	
+	name = replace_spaces_with_underscores (safe_name);
+
+	verb_name = g_strdup_printf ("/commands/%s", name);
+		
+	g_free (safe_name);
+	g_free (lang_name);
+	g_free (name);
+
+	return verb_name;
+}
+
+
+static void
+add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
+{
+	const GSList *languages;
+	GSList *sections = NULL;
+	const GSList *l;
+	GSList *s;
+
+	gedit_debug (DEBUG_MDI, "");
+
+	gedit_menus_add_menu_item_radio (win,
+					 "/menu/View/HighlightMode/",
+					 "Normal",
+					 "Langs",
+					 _("Normal"),
+					 _("Use Normal highlight mode"),
+					 (BonoboUIListenerFn)language_toggled_handler,
+					 NULL);
+					  
+	languages = gtk_source_languages_manager_get_available_languages (
+						gedit_get_languages_manager ());
+
+	l = languages;
+
+	while (l != NULL)
+	{
+		gchar *section;
+				
+		section = gtk_source_language_get_section (GTK_SOURCE_LANGUAGE (l->data));
+
+		if (!section_exists (sections, section))
+			sections = g_slist_prepend (sections, section);
+		else
+			g_free (section);
+
+		l = g_slist_next (l);
+	}
+
+	/*
+	sections = g_slist_sort (sections, (GCompareFunc)strcmp);
+	*/
+	sections = g_slist_reverse (sections);
+
+	s = sections;
+
+	while (s != NULL)
+	{
+		gchar *safe_name;
+		gchar *label;
+		gchar *name;
+
+		safe_name = g_markup_escape_text (s->data, strlen (s->data));
+		label = escape_underscores (safe_name);
+		name = replace_spaces_with_underscores (safe_name);
+		
+		gedit_menus_add_submenu (win, 
+					 "/menu/View/HighlightMode/",
+					 name,
+					 label);
+	
+		g_free (safe_name);
+		g_free (label);
+		g_free (name);
+		
+		s = g_slist_next (s);
+	}
+
+	slist_deep_free (sections);
+
+	l = languages;
+	
+	while (l != NULL)
+	{
+		gchar *path;
+		
+		gchar *lang_name;
+		gchar *safe_name;
+		gchar *label;
+		gchar *name;
+		gchar *tip;
+
+		path = get_base_path_for_language (l->data);
+
+		lang_name = gtk_source_language_get_name (l->data);
+		safe_name = g_markup_escape_text (lang_name, strlen (lang_name));
+		label = escape_underscores (safe_name);
+		name = replace_spaces_with_underscores (safe_name);
+
+		tip = g_strdup_printf (N_("Use %s highlight mode"), safe_name);
+
+		gedit_menus_add_menu_item_radio (win,
+					  path,
+					  name,
+					  "Langs",
+					  label,
+					  tip,
+					  (BonoboUIListenerFn)language_toggled_handler,
+					  l->data);
+
+		g_free (safe_name);
+		g_free (label);
+		g_free (name);
+		g_free (tip);
+		g_free (lang_name);
+
+		l = g_slist_next (l);
+	}		
+}
+
+static 
+void gedit_mdi_update_languages_menu (BonoboMDI *mdi)
+{
+	GtkSourceLanguage *lang;
+	BonoboMDIChild *active_child;
+	GeditDocument *doc;
+	gchar *verb_name;
+	BonoboWindow* active_window = NULL;
+	BonoboUIComponent *ui_component;
+	
+	gedit_debug (DEBUG_MDI, "");
+		
+	active_window = bonobo_mdi_get_active_window (mdi);
+
+	if (active_window == NULL)
+		return;
+	
+	ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
+	g_return_if_fail (ui_component != NULL);
+
+	active_child = bonobo_mdi_get_active_child (mdi);
+	if (active_child == NULL)
+		return;
+
+	doc = GEDIT_MDI_CHILD (active_child)->document;
+	g_return_if_fail (doc != NULL);
+
+	lang = gedit_document_get_language (doc);
+	verb_name = get_verb_name_for_language (lang);
+	
+	gedit_menus_set_verb_state (ui_component, verb_name, TRUE);
+
+	g_free (verb_name);
+}
+

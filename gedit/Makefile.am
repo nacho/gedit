@@ -47,7 +47,9 @@ NON_INST_H_FILS =			\
 	gedit-commands.h		\
 	gedit-file-selector-util.h 	\
 	gedit-plugins-engine.h		\
-	gedit-session.h			
+	gedit-session.h			\
+	gedit-languages-manager.h	\
+	gedit-window-server.h		
 
 INST_H_FILES =				\
 	gedit2.h			\
@@ -106,8 +108,8 @@ gedit_SOURCES = 			\
 	gedit-document-server.c		\
 	gedit-document-server.h		\
 	gedit-window-server.c		\
-	gedit-window-server.h		\
 	gedit-output-window.c		\
+	gedit-languages-manager.c	\
 	$(NON_INST_H_FILS)		\
 	$(INST_H_FILES)
 

@@ -45,14 +45,13 @@
 #include <eel/eel-vfs-extensions.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 
-#include <gtksourceview/gtksourcelanguagesmanager.h>
-
 #include "gedit-prefs-manager-app.h"
 #include "gedit-document.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
 #include "gedit-convert.h"
 #include "gedit-metadata-manager.h"
+#include "gedit-languages-manager.h"
 
 #include "gedit-marshal.h"
 
@@ -63,8 +62,6 @@
 #else
 #define GEDIT_MAX_PATH_LEN  2048
 #endif
-
-static GtkSourceLanguagesManager *language_manager = NULL;
 
 struct _GeditDocumentPrivate
 {
@@ -269,9 +266,6 @@ gedit_document_init (GeditDocument *document)
 	}
 	else
 		document->priv->encoding = NULL;
-
-	if (language_manager == NULL)
-		language_manager = gtk_source_languages_manager_new ();	
 }
 
 static void
@@ -301,6 +295,8 @@ gedit_document_finalize (GObject *object)
 	if (document->priv->uri != NULL)
 	{
 		gchar *position;
+		gchar *lang_name = NULL;
+		GtkSourceLanguage *lang;
 
 		position = g_strdup_printf ("%d", 
 					    gedit_document_get_cursor (document));
@@ -318,6 +314,17 @@ gedit_document_finalize (GObject *object)
 		gedit_metadata_manager_set (document->priv->uri,
 					    "last_replaced_text", 
 					    document->priv->last_replace_text);
+
+		lang = gedit_document_get_language (document);
+
+		if (lang != NULL)
+			lang_name = gtk_source_language_get_name (lang);
+	
+		gedit_metadata_manager_set (document->priv->uri,
+					    "language",
+					    lang_name == NULL ? "_NORMAL_" : lang_name);
+			
+		g_free (lang_name);
 	}
 
 	g_free (document->priv->uri);
@@ -480,7 +487,7 @@ static void
 gedit_document_real_loaded (GeditDocument *document)
 {
 	gchar *data;
-	
+
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (document != NULL);
@@ -857,12 +864,13 @@ gedit_document_is_untouched (const GeditDocument *doc)
 static void
 gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 {
-	gchar *mime_type;
-
+	GtkSourceLanguage *language;
+	gchar *data;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_return_if_fail (doc != NULL);
-	g_return_if_fail (doc->priv != NULL);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (uri != NULL);
 
 	if (doc->priv->uri == uri)
 		return;
@@ -880,34 +888,43 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		doc->priv->untitled_number = 0;
 	}
 
-	mime_type = gnome_vfs_get_mime_type (uri);
-	
-	if (mime_type != NULL)
+	data = gedit_metadata_manager_get (uri,
+					   "language");
+	if (data != NULL)
 	{
-		GtkSourceLanguage *language;
-		
-		language = 
-			gtk_source_languages_manager_get_language_from_mime_type (language_manager,
-										  mime_type);
-		if (language == NULL)
-		{
-			gedit_debug (DEBUG_DOCUMENT, "No language found for mime type `%s'\n", mime_type);
-
-			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), FALSE);
-		}
+		if (strcmp (data, "_NORMAL_") == 0)
+			language = NULL;
 		else
-		{
-			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), TRUE);
+			language = gedit_languages_manager_get_language_from_name (
+						gedit_get_languages_manager (),
+						data);
 
-			gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), language);
-		}
+		gedit_document_set_language (doc, language);
 
-		g_free (mime_type);
-
+		g_free (data);
 	}
 	else
 	{
-		g_warning ("Couldn't get mime type for file `%s'", uri);
+		gchar *mime_type;
+
+		mime_type = gnome_vfs_get_mime_type (uri);
+	
+		if (mime_type != NULL)
+		{
+			GtkSourceLanguage *language;
+			
+			language = gtk_source_languages_manager_get_language_from_mime_type (
+						gedit_get_languages_manager (),
+						mime_type);
+	
+			gedit_document_set_language (doc, language);
+	
+			g_free (mime_type);
+		}
+		else
+		{
+			g_warning ("Couldn't get mime type for file `%s'", uri);
+		}
 	}
 
 	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
@@ -2076,4 +2093,39 @@ gedit_document_set_selection (GeditDocument *doc, gint start, gint end)
 
 	gtk_text_buffer_move_mark_by_name (GTK_TEXT_BUFFER (doc),
 					"selection_bound", &start_iter);
+}
+
+void 
+gedit_document_set_language (GeditDocument *doc, GtkSourceLanguage *lang)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	if (lang != NULL)
+		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), TRUE);
+	else
+		gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (doc), FALSE);
+
+	gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (doc), lang);
+
+	if (doc->priv->uri != NULL)
+	{
+		gchar *lang_name = NULL;
+
+		if (lang != NULL)
+			lang_name = gtk_source_language_get_name (lang);
+		
+		gedit_metadata_manager_set (doc->priv->uri,
+					    "language",
+					    lang_name == NULL ? "_NORMAL_" : lang_name);
+
+		g_free (lang_name);
+	}
+}
+
+GtkSourceLanguage *
+gedit_document_get_language (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
+
+	return gtk_source_buffer_get_language (GTK_SOURCE_BUFFER (doc));
 }

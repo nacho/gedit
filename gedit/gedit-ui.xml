@@ -111,8 +111,6 @@
         <cmd name="SettingsPreferences" _label="Pr_eferences" _tip="Configure the application"
 	  pixtype="stock" pixname="gtk-preferences"/>
 
-	<cmd name="BonoboCustomize" _label="Customize" _tip="Customize toolbars"/>
-
 	<cmd name="DocumentsMoveToNewWindow" _label="_Move to New Window" _tip="Move the current document to a new window"/>
 
 	<cmd name="HelpContents" _label="_Contents" _tip="Open the gedit manual"
@@ -224,6 +222,11 @@
 
 	</submenu>
 
+	<separator/>
+
+	<submenu name="HighlightMode" _label="_Highlight Mode">
+	</submenu>
+
 	<placeholder name="ViewOps" delimit="top"/>
 
 </submenu>
@@ -303,7 +306,6 @@
 <submenu name="Debug" _label="_Debug" hidden="1">
 
 	<menuitem name="BonoboUIDump" verb=""/>
-	<menuitem name="BonoboCustomize" label ="Customize" verb=""/>
 </submenu>
 
 </menu>
