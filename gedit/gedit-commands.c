@@ -546,10 +546,18 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 
 	const gchar *copyright = "Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
 				 "Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
-				 "Copyright \xc2\xa9 2003-2004 Paolo Maggi";
+				 "Copyright \xc2\xa9 2003-2005 Paolo Maggi";
 
 	const gchar *comments = _("gedit is a small and lightweight text editor for the GNOME Desktop");
 
+	/* Translators: This is a special message that shouldn't be translated
+                literally. It is used in the about box to give credits to
+                the translators.
+                Thus, you should translate it to your name and email address.
+                You can also include other translators who have contributed to
+                this translation; in that case, please write them on separate
+                lines seperated by newlines (\n). */
+	const gchar *translator_credits = _("translator-credits");
 
 	gedit_debug (DEBUG_COMMANDS, "");
 
@@ -566,6 +574,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 
 	gtk_about_dialog_set_url_hook (activate_url, NULL, NULL);
 
+	
 	about = g_object_new (GTK_TYPE_ABOUT_DIALOG,
 			      "name", _("gedit"),
 			      "version", VERSION,
@@ -574,7 +583,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 			      "website", "http://www.gedit.org",
 			      "authors", authors,
 			      "documenters", documenters,
-			      "translator_credits", _("translator_credits"),
+			      "translator_credits", translator_credits,
 			      "logo", logo,
 			      NULL);
 
