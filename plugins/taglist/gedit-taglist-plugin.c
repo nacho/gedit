@@ -59,7 +59,6 @@ G_MODULE_EXPORT GeditPluginState
 update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
 	BonoboUIComponent *uic;
-	GeditDocument *doc;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 	
@@ -67,12 +66,7 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 
 	uic = gedit_get_ui_component_from_window (window);
 
-	doc = gedit_get_active_document ();
-
-	if ((doc == NULL) || (gedit_document_is_readonly (doc)))		
-		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, FALSE);
-	else
-		gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
+	gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
 
 	return PLUGIN_OK;
 }
