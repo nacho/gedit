@@ -118,16 +118,16 @@ void tab_pos (GtkPositionType pos)
 	GnomeApp *app;
 	GtkWidget *book;
 	
+	if (mdiMode == GNOME_MDI_NOTEBOOK)
+		for (i = 0; i < g_list_length (mdi->windows); i++) {
 	
-	for (i = 0; i < g_list_length (mdi->windows); i++) {
-	
-	  app = g_list_nth_data (mdi->windows, i);
+			app = g_list_nth_data (mdi->windows, i);
 	  
-	  book = app->contents;
+			book = app->contents;
 	  
-	  gtk_notebook_set_tab_pos (GTK_NOTEBOOK(book), pos);
+			gtk_notebook_set_tab_pos (GTK_NOTEBOOK(book), pos);
 	  
-	}
+		}
 	
 }
    
@@ -896,8 +896,9 @@ void recent_update (GnomeApp *app)
                    
 	       if (g_list_length (filelist) == MAX_RECENT)
 		 break;
-			 
+
              }
+
              
 	   }
 	   
@@ -959,10 +960,11 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	 (menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 	
 	 gnome_app_insert_menus (GNOME_APP(app), path, menu);
-	 g_free (g_list_nth_data (recent_files, i));
+	 g_free (g_list_nth_data (recent_files, i));	 
 	 
 	}
 	
+	g_free (menu);
 	settings->num_recent = g_list_length (recent_files);
 	g_list_free (recent_files);
 

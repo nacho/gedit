@@ -1,3 +1,26 @@
+Thu Nov 25 17:34:15 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* ommands.c: (tab_pos) Check whether the mdi mode is NOTEBOOK,
+	  if it is, then we can change the tab position.
+	
+	* gE_prefs.c: (get_settings) Removed the check for the MDI Mode
+	  flag, becuase if it doenst exist it's 0, and Notebook mode
+	  is 0.. instead of setting it to Notebook mode (which for 
+	  some reason set it to mode 42, which is the default mdoe, which
+	  is Modal (unless you changed the defualt in gnomecc)). Now
+	  we have notebook mode on startup =]
+
+Tue Nov 23 15:53:41 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_view.c: (gE_view_init) Fxied autoindent bug. the
+	  split-screen was doing signal_connect, where it should
+	  have been signal_connect_after. grr..
+	
+	* gedit.spec.in: Removed devel section.. and fixed the date
+	  on the last Log entry.
+	
+	* makeconfig.pl: 0.6.0 -> 0.6.1pre
+
 Wed Nov 17 16:36:35 GMT 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* gedit.spec.in: Added FAQ and the new TODO file to the docs

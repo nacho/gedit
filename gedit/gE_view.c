@@ -748,7 +748,7 @@ static void gE_view_init (gE_view *view)
 				                     GTK_SIGNAL_FUNC(doc_delete_text_cb),
 				                     (gpointer) view);
 
-	view->s_indent = gtk_signal_connect (GTK_OBJECT(view->split_screen), "insert_text",
+	view->s_indent = gtk_signal_connect_after (GTK_OBJECT(view->split_screen), "insert_text",
 	                                    GTK_SIGNAL_FUNC(auto_indent_cb),
 	                                    (gpointer) view);
 				
@@ -787,6 +787,7 @@ static void gE_view_init (gE_view *view)
 	gtk_widget_set_style(GTK_WIDGET(view->split_screen), style);
    	gtk_widget_set_style(GTK_WIDGET(view->text), style);
    	gtk_widget_pop_style ();
+   	
 
 	gtk_widget_show(view->split_screen);
 	gtk_text_set_point(GTK_TEXT(view->split_screen), 0);

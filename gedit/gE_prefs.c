@@ -80,8 +80,8 @@ void gE_get_settings()
 	settings->splitscreen = gnome_config_get_int("splitscreen");
 	settings->close_doc = gnome_config_get_int ("close doc");
 	mdiMode = gnome_config_get_int ("mdi mode");
-	if (!mdiMode)
-	  mdiMode = mdi_type[GNOME_MDI_NOTEBOOK];
+	/*if (!mdiMode)
+	  mdiMode = mdi_type[GNOME_MDI_NOTEBOOK];*/
 	   
 	settings->width = gnome_config_get_int ("width");
 	if (!settings->width)
