@@ -70,10 +70,10 @@ struct _GeditPreferencesDialog
 	GtkWidget	*default_font_checkbutton;
 	GtkWidget	*default_colors_checkbutton;
 	GtkWidget	*font_button;
-	GtkWidget	*text_colorpicker;
-	GtkWidget	*background_colorpicker;
-	GtkWidget	*sel_text_colorpicker;
-	GtkWidget	*selection_colorpicker;
+	GtkWidget	*text_colorbutton;
+	GtkWidget	*background_colorbutton;
+	GtkWidget	*seltext_colorbutton;
+	GtkWidget	*selection_colorbutton;
 	GtkWidget	*colors_table;
 	GtkWidget	*font_hbox;
 	
@@ -120,9 +120,9 @@ struct _GeditPreferencesDialog
 	GtkWidget	*underline_togglebutton;
 	GtkWidget	*strikethrough_togglebutton;
 	GtkWidget	*foreground_checkbutton;
-	GtkWidget	*foreground_colorpicker;
+	GtkWidget	*foreground_colorbutton;
 	GtkWidget	*background_checkbutton;
-	GtkWidget	*background_colorpicker_2;
+	GtkWidget	*background_colorbutton_2;
 	GtkWidget	*reset_button;
 
 	/* Plugins manager */
@@ -618,44 +618,38 @@ editor_font_button_font_set (GtkFontButton          *font_button,
 }
 
 static void 
-editor_color_picker_color_set (GnomeColorPicker      *cp, 
-			       guint                   r, 
-			       guint                   g,
-			       guint                   b,
-			       guint                   a,
+editor_color_button_color_set (GtkColorButton         *button, 
 			       GeditPreferencesDialog *dlg)
 {
 	GdkColor color;
 
-	color.red = r;
-	color.green = g;
-	color.blue = b;
+	gtk_color_button_get_color (button, &color);
 
-	if (cp == GNOME_COLOR_PICKER (dlg->background_colorpicker))
-	{
-		gedit_prefs_manager_set_background_color (color);
-		return;
-	}
-
-	if (cp == GNOME_COLOR_PICKER (dlg->text_colorpicker))
+	if (button == GTK_COLOR_BUTTON (dlg->text_colorbutton))
 	{
 		gedit_prefs_manager_set_text_color (color);
 		return;
 	}
 
-	if (cp == GNOME_COLOR_PICKER (dlg->selection_colorpicker))
+	if (button == GTK_COLOR_BUTTON (dlg->background_colorbutton))
 	{
-		gedit_prefs_manager_set_selection_color (color);
+		gedit_prefs_manager_set_background_color (color);
 		return;
 	}
 
-	if (cp == GNOME_COLOR_PICKER (dlg->sel_text_colorpicker))
+	if (button == GTK_COLOR_BUTTON (dlg->seltext_colorbutton))
 	{
 		gedit_prefs_manager_set_selected_text_color (color);
 		return;
 	}
 
-	g_return_if_fail (FALSE);	
+	if (button == GTK_COLOR_BUTTON (dlg->selection_colorbutton))
+	{
+		gedit_prefs_manager_set_selection_color (color);
+		return;
+	}
+
+	g_return_if_reached ();	
 }
 
 static void
@@ -663,26 +657,21 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 {
 	gboolean use_default_font;
 	gboolean use_default_colors;
-
-	GdkColor background_color;
-	GdkColor text_color;
-	GdkColor selection_color;
-	GdkColor selected_text_color;
-	
 	gchar *editor_font = NULL;
+	GdkColor color;
 
 	gedit_debug (DEBUG_PREFS, "");
 
 	gtk_tooltips_set_tip (dlg->tooltips, dlg->font_button, 
 			_("Push this button to select the font to be used by the editor"), NULL);
-	gtk_tooltips_set_tip (dlg->tooltips, dlg->text_colorpicker, 
+	gtk_tooltips_set_tip (dlg->tooltips, dlg->text_colorbutton, 
 			_("Push this button to configure text color"), NULL);
-	gtk_tooltips_set_tip (dlg->tooltips, dlg->background_colorpicker, 
+	gtk_tooltips_set_tip (dlg->tooltips, dlg->background_colorbutton, 
 			_("Push this button to configure background color"), NULL);
-	gtk_tooltips_set_tip (dlg->tooltips, dlg->sel_text_colorpicker, 
+	gtk_tooltips_set_tip (dlg->tooltips, dlg->seltext_colorbutton, 
 			_("Push this button to configure the color in which the selected "
 			  "text should appear"), NULL);
-	gtk_tooltips_set_tip (dlg->tooltips, dlg->selection_colorpicker, 
+	gtk_tooltips_set_tip (dlg->tooltips, dlg->selection_colorbutton, 
 			_("Push this button to configure the color in which the selected "
 			  "text should be marked"), NULL);
 
@@ -691,73 +680,52 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 	gedit_utils_set_atk_relation (dlg->default_font_checkbutton, dlg->font_button, 
                                                          ATK_RELATION_CONTROLLER_FOR);
 
-	/* read config value */
+	/* read current config and setup initial state */
 	use_default_font = gedit_prefs_manager_get_use_default_font ();
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->default_font_checkbutton),
+				      use_default_font);
+
 	use_default_colors = gedit_prefs_manager_get_use_default_colors ();
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->default_colors_checkbutton),
+				      use_default_colors);
 
-	background_color = gedit_prefs_manager_get_background_color ();
-	text_color = gedit_prefs_manager_get_text_color ();
-	selection_color = gedit_prefs_manager_get_selection_color ();
-	selected_text_color = gedit_prefs_manager_get_selected_text_color ();
-	
 	editor_font = gedit_prefs_manager_get_editor_font ();
-
-	/* setup the initial states */ 
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->background_colorpicker),
-				    background_color.red,
-				    background_color.green,  
-				    background_color.blue, 0);
-
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->text_colorpicker),
-				    text_color.red,
-				    text_color.green,
-				    text_color.blue, 0);
-
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->selection_colorpicker),
-				    selection_color.red,
-				    selection_color.green,
-				    selection_color.blue, 0);
-
-	gnome_color_picker_set_i16 (GNOME_COLOR_PICKER (dlg->sel_text_colorpicker),
-				    selected_text_color.red,
-				    selected_text_color.green,
-				    selected_text_color.blue, 0);
-
 	if (editor_font != NULL)
-	{
 		gtk_font_button_set_font_name (GTK_FONT_BUTTON (dlg->font_button),
 					       editor_font);
+	g_free (editor_font);
 
-		g_free (editor_font);
-	}
+	color = gedit_prefs_manager_get_text_color ();
+	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->text_colorbutton),
+				    &color);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-			(dlg->default_font_checkbutton), use_default_font);
+	color = gedit_prefs_manager_get_background_color ();
+	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->background_colorbutton),
+				    &color);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON 
-			(dlg->default_colors_checkbutton), use_default_colors);
+	color = gedit_prefs_manager_get_selected_text_color ();
+	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->seltext_colorbutton),
+				    &color);
+
+	color = gedit_prefs_manager_get_selection_color ();
+	gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->selection_colorbutton),
+				    &color);
 
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (dlg->default_font_checkbutton), "toggled", 
 			  G_CALLBACK (default_font_font_checkbutton_toggled), dlg);
-
 	g_signal_connect (G_OBJECT (dlg->default_colors_checkbutton), "toggled", 
 			  G_CALLBACK (default_font_colors_checkbutton_toggled), dlg);
-
 	g_signal_connect (G_OBJECT (dlg->font_button), "font_set", 
 			  G_CALLBACK (editor_font_button_font_set), dlg);
-
-	g_signal_connect (G_OBJECT (dlg->background_colorpicker), "color_set",
-			  G_CALLBACK (editor_color_picker_color_set), dlg);
-
-	g_signal_connect (G_OBJECT (dlg->text_colorpicker), "color_set",
-			  G_CALLBACK (editor_color_picker_color_set), dlg);
-
-	g_signal_connect (G_OBJECT (dlg->selection_colorpicker), "color_set",
-			  G_CALLBACK (editor_color_picker_color_set), dlg);
-
-	g_signal_connect (G_OBJECT (dlg->sel_text_colorpicker), "color_set",
-			  G_CALLBACK (editor_color_picker_color_set), dlg);
+	g_signal_connect (G_OBJECT (dlg->text_colorbutton), "color_set",
+			  G_CALLBACK (editor_color_button_color_set), dlg);
+	g_signal_connect (G_OBJECT (dlg->background_colorbutton), "color_set",
+			  G_CALLBACK (editor_color_button_color_set), dlg);
+	g_signal_connect (G_OBJECT (dlg->seltext_colorbutton), "color_set",
+			  G_CALLBACK (editor_color_button_color_set), dlg);
+	g_signal_connect (G_OBJECT (dlg->selection_colorbutton), "color_set",
+			  G_CALLBACK (editor_color_button_color_set), dlg);
 
 	/* Set initial widget sensitivity */
 	gtk_widget_set_sensitive (dlg->default_font_checkbutton, 
@@ -900,7 +868,7 @@ styles_cb (GtkWidget              *treeview,
 
 	if ((style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND) == GTK_SOURCE_TAG_STYLE_USE_FOREGROUND)
 	{
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->foreground_colorpicker),
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->foreground_colorbutton),
 					    &style->foreground);
 	}
 	else
@@ -908,11 +876,11 @@ styles_cb (GtkWidget              *treeview,
 		GdkColor text_color;
 		
 		text_color = gedit_prefs_manager_get_text_color ();
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->foreground_colorpicker),
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->foreground_colorbutton),
 					    &text_color);
 	}
 	
-	gtk_widget_set_sensitive (dlg->foreground_colorpicker, 
+	gtk_widget_set_sensitive (dlg->foreground_colorbutton, 
 				  style->mask & GTK_SOURCE_TAG_STYLE_USE_FOREGROUND);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->background_checkbutton),
@@ -920,7 +888,7 @@ styles_cb (GtkWidget              *treeview,
 	
 	if ((style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND) == GTK_SOURCE_TAG_STYLE_USE_BACKGROUND)
 	{
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->background_colorpicker_2),
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->background_colorbutton_2),
 					    &style->background);
 	}
 	else
@@ -928,11 +896,11 @@ styles_cb (GtkWidget              *treeview,
 		GdkColor background_color;
 		
 		background_color = gedit_prefs_manager_get_background_color ();
-		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->background_colorpicker_2),
+		gtk_color_button_set_color (GTK_COLOR_BUTTON (dlg->background_colorbutton_2),
 					    &background_color);
 	}
 
-	gtk_widget_set_sensitive (dlg->background_colorpicker_2, 
+	gtk_widget_set_sensitive (dlg->background_colorbutton_2, 
 				  style->mask & GTK_SOURCE_TAG_STYLE_USE_BACKGROUND);
 
 	gtk_widget_set_sensitive (dlg->reset_button, !style->is_default);
@@ -977,15 +945,15 @@ style_button_toggled (GtkToggleButton        *button,
 		GTK_TOGGLE_BUTTON (dlg->foreground_checkbutton)))
 	{
 		new_style->mask |= GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
-		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->foreground_colorpicker),
+		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->foreground_colorbutton),
 					    &new_style->foreground);
-		gtk_widget_set_sensitive (dlg->foreground_colorpicker,
+		gtk_widget_set_sensitive (dlg->foreground_colorbutton,
 					  TRUE);
 	}
 	else
 	{
 		new_style->mask &= ~GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
-		gtk_widget_set_sensitive (dlg->foreground_colorpicker,
+		gtk_widget_set_sensitive (dlg->foreground_colorbutton,
 					  FALSE);
 	}
 
@@ -993,15 +961,15 @@ style_button_toggled (GtkToggleButton        *button,
 		GTK_TOGGLE_BUTTON (dlg->background_checkbutton)))
 	{
 		new_style->mask |= GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
-		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->background_colorpicker_2),
+		gtk_color_button_get_color (GTK_COLOR_BUTTON (dlg->background_colorbutton_2),
 					    &new_style->background);
-		gtk_widget_set_sensitive (dlg->background_colorpicker_2,
+		gtk_widget_set_sensitive (dlg->background_colorbutton_2,
 					  TRUE);
 	}
 	else
 	{
 		new_style->mask &= ~GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
-		gtk_widget_set_sensitive (dlg->background_colorpicker_2,
+		gtk_widget_set_sensitive (dlg->background_colorbutton_2,
 					  FALSE);
 	}
 
@@ -1139,9 +1107,9 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 			  G_CALLBACK (style_button_toggled), dlg);
 	g_signal_connect (G_OBJECT (dlg->background_checkbutton), "toggled",
 			  G_CALLBACK (style_button_toggled), dlg);
-	g_signal_connect (G_OBJECT (dlg->foreground_colorpicker), "color_set",
+	g_signal_connect (G_OBJECT (dlg->foreground_colorbutton), "color_set",
 			  G_CALLBACK (style_color_set), dlg);
-	g_signal_connect (G_OBJECT (dlg->background_colorpicker_2), "color_set",
+	g_signal_connect (G_OBJECT (dlg->background_colorbutton_2), "color_set",
 			  G_CALLBACK (style_color_set), dlg);
 	g_signal_connect (G_OBJECT (dlg->reset_button), "clicked",
 			  G_CALLBACK (reset_button_clicked), dlg);
@@ -1197,12 +1165,12 @@ get_preferences_dialog (GtkWindow *parent)
 
 	dialog->default_font_checkbutton = glade_xml_get_widget (gui, "default_font_checkbutton");
 	dialog->default_colors_checkbutton = glade_xml_get_widget (gui, "default_colors_checkbutton");
-	
+
 	dialog->font_button = glade_xml_get_widget (gui, "font_button");
-	dialog->text_colorpicker = glade_xml_get_widget (gui, "text_colorpicker");
-	dialog->background_colorpicker = glade_xml_get_widget (gui, "background_colorpicker");
-	dialog->sel_text_colorpicker = glade_xml_get_widget (gui, "sel_text_colorpicker");
-	dialog->selection_colorpicker = glade_xml_get_widget (gui, "selection_colorpicker");
+	dialog->text_colorbutton = glade_xml_get_widget (gui, "text_colorbutton");
+	dialog->background_colorbutton = glade_xml_get_widget (gui, "background_colorbutton");
+	dialog->seltext_colorbutton = glade_xml_get_widget (gui, "seltext_colorbutton");
+	dialog->selection_colorbutton = glade_xml_get_widget (gui, "selection_colorbutton");
 
 	dialog->colors_table = glade_xml_get_widget (gui, "colors_table");
 	dialog->font_hbox = glade_xml_get_widget (gui, "font_hbox");	
@@ -1239,9 +1207,9 @@ get_preferences_dialog (GtkWindow *parent)
 	dialog->underline_togglebutton = glade_xml_get_widget (gui, "underline_togglebutton");
 	dialog->strikethrough_togglebutton = glade_xml_get_widget (gui, "strikethrough_togglebutton");
 	dialog->foreground_checkbutton = glade_xml_get_widget (gui, "foreground_checkbutton");
-	dialog->foreground_colorpicker = glade_xml_get_widget (gui, "foreground_colorpicker");
+	dialog->foreground_colorbutton = glade_xml_get_widget (gui, "foreground_colorbutton");
 	dialog->background_checkbutton = glade_xml_get_widget (gui, "background_checkbutton");
-	dialog->background_colorpicker_2 = glade_xml_get_widget (gui, "background_colorpicker_2");
+	dialog->background_colorbutton_2 = glade_xml_get_widget (gui, "background_colorbutton_2");
 	dialog->reset_button = glade_xml_get_widget (gui, "reset_button");
 
 	if (!dialog->dialog ||
@@ -1251,10 +1219,10 @@ get_preferences_dialog (GtkWindow *parent)
 	    !dialog->default_font_checkbutton ||
 	    !dialog->default_colors_checkbutton ||
 	    !dialog->font_button ||
-	    !dialog->text_colorpicker ||
-	    !dialog->background_colorpicker ||
-	    !dialog->sel_text_colorpicker ||
-	    !dialog->selection_colorpicker ||
+	    !dialog->text_colorbutton ||
+	    !dialog->background_colorbutton ||
+	    !dialog->seltext_colorbutton ||
+	    !dialog->selection_colorbutton ||
 	    !dialog->colors_table ||
 	    !dialog->font_hbox ||
 	    !dialog->right_margin_checkbutton ||
@@ -1282,9 +1250,9 @@ get_preferences_dialog (GtkWindow *parent)
 	    !dialog->underline_togglebutton ||
 	    !dialog->strikethrough_togglebutton ||
 	    !dialog->foreground_checkbutton ||
-	    !dialog->foreground_colorpicker ||
+	    !dialog->foreground_colorbutton ||
 	    !dialog->background_checkbutton ||
-	    !dialog->background_colorpicker_2 ||
+	    !dialog->background_colorbutton_2 ||
 	    !dialog->reset_button)
 	{
 		gedit_warning (parent,
