@@ -209,6 +209,7 @@ gedit_plugins_window_add (GnomeApp *app)
 		
 		gnome_app_insert_menus (app, path, menu);
 
+		g_free (menu->label);
 		g_free (path);
 	}
 }

@@ -179,21 +179,22 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 
 	/* insert a separator at the beginning */
 	menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
+
 	path = g_new (gchar, strlen (_("_File")) + strlen ("<Separator>") + 2);
 	sprintf (path, "%s/%s", _("_File"), "<Separator>");
-	menu->type = GNOME_APP_UI_SEPARATOR;
 
+	menu->type = GNOME_APP_UI_SEPARATOR;
 	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 	gnome_app_insert_menus (GNOME_APP(app), path, menu);
 
 	for (i = g_list_length (recent_files) - 1; i >= 0;  i--)
 	{
-		menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
-	
+/*		g_free(menu);
+		menu = g_malloc0 (2 * sizeof (GnomeUIInfo));*/
 		data = g_malloc0 (sizeof (gedit_data));
 		data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
-	
 		menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
+		
 		sprintf (menu->label, "_%i. %s", i+1, (gchar*)g_list_nth_data (recent_files, i));
 		menu->type = GNOME_APP_UI_ITEM;
 		menu->hint = NULL;
@@ -207,11 +208,11 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 		(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 	
 		gnome_app_insert_menus (GNOME_APP(app), path, menu);
+
 	}
 	
 	g_free (menu);
 	settings->num_recent = g_list_length (recent_files);
-
 	g_free (path);
 }
 

@@ -104,7 +104,7 @@ prefs_determine_use_fontset (void)
 	else
 		retval = FALSE;
 
-	gtk_widget_destroy (dummy_widget);
+	gtk_widget_unref (dummy_widget);
 
 	return retval;
 }
