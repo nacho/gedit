@@ -537,7 +537,7 @@ gedit_prefs_notebook_switch_page (GtkWidget *widget, gpointer data)
 static void
 dialog_prefs_impl (GladeXML *gui)
 {
-	static GnomeHelpMenuEntry help_entry = { NULL, "prefs.html" };
+	static GnomeHelpMenuEntry help_entry = { NULL, "prefs" };
 
 	gedit_debug (DEBUG_PREFS, "");
 
