@@ -557,6 +557,10 @@ dialog_prefs_impl (GladeXML *gui)
 			    "help",
 			    GTK_SIGNAL_FUNC (help_cb), NULL);
 
+	gnome_dialog_set_parent (GNOME_DIALOG (propertybox),
+				 gedit_window_active());
+	gtk_window_set_modal (GTK_WINDOW (propertybox), TRUE);
+
 	/* show everything */
 	gtk_widget_show_all (propertybox);
 }
@@ -564,20 +568,23 @@ dialog_prefs_impl (GladeXML *gui)
 void
 dialog_prefs (void)
 {
-	GladeXML *gui;
+	static GladeXML *gui = NULL;
 
 	gedit_debug("", DEBUG_PREFS);
 
-	gui = glade_xml_new (GEDIT_GLADEDIR "prefs.glade", NULL);
-
-	if (!gui)
+	if (!propertybox)
 	{
-		g_warning ("Could not find prefs.glade\n");
-		return;
-	}
+		gui = glade_xml_new (GEDIT_GLADEDIR "prefs.glade", NULL);
 
-	dialog_prefs_impl (gui);
-	gtk_object_unref (GTK_OBJECT (gui));
+		if (!gui)
+		{
+			g_warning ("Could not find prefs.glade\n");
+			return;
+		}
+		dialog_prefs_impl (gui);
+		gtk_object_unref (GTK_OBJECT (gui));
+	}
+	
 }
 
 

@@ -268,7 +268,6 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 }
 
 
-/* This is ugly. rewrite .. Chema */
 gboolean
 auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		int *pos, gpointer data)
@@ -278,24 +277,23 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	View *view;
 	Document *doc;
 
-
 	gedit_debug ("", DEBUG_VIEW);
 
-	g_return_val_if_fail (data != NULL, FALSE);
-
 	view = (View *)data;
-	newline_1 = 0;
+	g_return_val_if_fail (view != NULL, FALSE);
 
+	if (!settings->auto_indent)
+		return FALSE;
 	if ((length != 1) || (insertion_text[0] != '\n'))
 		return FALSE;
 	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
-		return FALSE;
-	if (!settings->auto_indent)
 		return FALSE;
 
 	doc = view->doc;
 
 	newlines = 0;
+	newline_1 = 0;
+	
 	for (i = *pos; i > 0; i--)
 	{
 		buffer = gtk_editable_get_chars (GTK_EDITABLE (text), i-1, i);
@@ -413,7 +411,7 @@ gedit_view_init (View *view)
 					GTK_POLICY_AUTOMATIC);
       	gtk_widget_show (view->window);
 
-        /* FIXME use settings->line_wrap and add scroll bars. Chema*/
+        /* FIXME use settings->line_wrap and add horz. scroll bars. Chema*/
 	view->line_wrap = 1;
 
 	view->text = gtk_text_new (NULL, NULL);
@@ -430,6 +428,7 @@ gedit_view_init (View *view)
 	/* Handle Auto Indent */
 	gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
 				  GTK_SIGNAL_FUNC (auto_indent_cb), view);
+	
 	gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
 			    GTK_SIGNAL_FUNC (doc_insert_text_cb), view);
 	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
@@ -872,7 +871,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		switch (event->keyval)
 		{
 		case 's':
-			file_save_cb (w);
+			file_save_cb (w, NULL);
 	    		break;
 		case 'p':
 	    		file_print_cb (w, NULL, FALSE);

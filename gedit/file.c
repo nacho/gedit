@@ -49,7 +49,8 @@ gint gedit_file_stdin (Document *doc);
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
-void file_save_cb (GtkWidget *widget);
+gint file_save_document (Document * doc);
+void file_save_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
 void file_close_cb(GtkWidget *widget, gpointer cbdata);
@@ -170,10 +171,16 @@ gedit_file_save (Document *doc, gchar *fname)
 {
 	FILE *fp;
 	gchar *tmpstr;
-	View *view = VIEW ( g_list_nth_data(doc->views, 0) );
+	View *view;
 
 	gedit_debug ("", DEBUG_FILE);
 
+	g_return_val_if_fail (doc!=NULL, 1);
+	
+	view  = VIEW ( g_list_nth_data(doc->views, 0) );
+	
+	g_return_val_if_fail (view!=NULL, 1);
+	
 	if (fname == NULL)
 	{
 		if (doc->filename == NULL)
@@ -457,22 +464,40 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 	return;
 }
 
-void
-file_save_cb (GtkWidget *widget)
+gint
+file_save_document (Document * doc)
 {
-	Document *doc;
-
 	gedit_debug("", DEBUG_FILE);
 
-	if (gnome_mdi_get_active_child(mdi) == NULL)
-		return;
+	if (doc==NULL)
+		return FALSE;
+
+	if (doc->filename == NULL)
+	{
+		file_save_as_cb (NULL, NULL);
+		return FALSE;
+	}
+	else
+	{
+		gedit_file_save (doc, NULL);
+		return TRUE;
+	}
+}
+
+void
+file_save_cb (GtkWidget *widget, gpointer cbdata)
+{
+	Document *doc;
+	
+	gedit_debug("", DEBUG_FILE);
 
 	doc = gedit_document_current ();
 
-	if (doc->filename == NULL)
-		file_save_as_cb (widget, NULL);
-	else
-		gedit_file_save (doc, NULL);
+	if (doc==NULL)
+		return;
+
+	file_save_document (doc);
+
 }
 
 
@@ -580,19 +605,17 @@ void
 file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_debug("", DEBUG_FILE);
+
+	file_close_all_cb (NULL, NULL);
 	
-	gedit_save_settings ();
-
-	if (gnome_mdi_remove_all (mdi, FALSE))
-		gtk_object_destroy (GTK_OBJECT (mdi));
-	else
+	if (gedit_document_current()!=NULL)
 		return;
-
+	
+	gtk_object_destroy (GTK_OBJECT (mdi));
 	gedit_save_settings ();
 	history_write_config ();
 
 	gtk_main_quit ();
-
 }
 
 void

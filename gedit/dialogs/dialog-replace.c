@@ -364,6 +364,7 @@ dialog_replace (gint full)
 		dialog_title = g_strdup ("Replace");
 	}
 	gtk_window_set_title ( GTK_WINDOW(replace_text_dialog), dialog_title);
+	
 	g_free (dialog_title);
 
 	gtk_object_unref (GTK_OBJECT (gui));

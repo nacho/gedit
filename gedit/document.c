@@ -420,12 +420,12 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 	
-	fname = GNOME_MDI_CHILD(doc)->name;
-
 	if (!gedit_view_current())
 	{
 		return TRUE;
 	}
+
+	fname = GNOME_MDI_CHILD(doc)->name;
 
 	if ((doc->changed)&&(!doc->readonly))
 	{
@@ -446,8 +446,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 			   treat as if he had selected CANCEL
 			   because we don't want him to loose his
 			   data. This is anoying, I know. Chema*/
-			file_save_cb (NULL);
-			return FALSE;
+			return file_save_document (doc);
 		case 1:
 			return TRUE;
 		default:

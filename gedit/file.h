@@ -46,7 +46,8 @@ gint gedit_file_create_popup (guchar *title);
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
-void file_save_cb (GtkWidget *widget);
+void file_save_cb (GtkWidget *widget, gpointer cbdata);
+gint file_save_document (Document * doc);
 void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
 void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
 void file_close_cb (GtkWidget *widget, gpointer cbdata);
