@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit\n"
+"Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-11 16:15+0200\n"
-"PO-Revision-Date: 2004-05-11 16:31+0200\n"
+"POT-Creation-Date: 2004-06-22 12:16+0200\n"
+"PO-Revision-Date: 2004-06-22 12:17+0200\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -623,7 +623,7 @@ msgid "Replace _All"
 msgstr "Zëvendëso _Gjithçka"
 
 #: gedit/dialogs/gedit-dialog-replace.c:286
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:134
 msgid "_Replace"
 msgstr "_Zëvendëso"
 
@@ -1409,45 +1409,49 @@ msgstr "Vietnamisht"
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-file-selector-util.c:148
+#: gedit/gedit-file-selector-util.c:140 gedit/gedit-file.c:700
+msgid "Question"
+msgstr "Pyetje"
+
+#: gedit/gedit-file-selector-util.c:153
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Një file me emrin \"%s\" ekziston.\n"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:154
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Dëshironi t'a mbishkruani me file që po ruani?"
 
-#: gedit/gedit-file-selector-util.c:158
+#: gedit/gedit-file-selector-util.c:163
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "File \"%s\" mund vetëm të lexohet.\n"
 
-#: gedit/gedit-file-selector-util.c:159
+#: gedit/gedit-file-selector-util.c:164
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Dëshironi të përpiqem t'a zevëndësoj me atë që jeni duke ruajtur?"
 
-#: gedit/gedit-file-selector-util.c:356
+#: gedit/gedit-file-selector-util.c:361
 msgid "All Files"
 msgstr "Të gjithë files"
 
-#: gedit/gedit-file-selector-util.c:364
+#: gedit/gedit-file-selector-util.c:369
 msgid "All Text Files"
 msgstr "Të gjithë files teksti"
 
-#: gedit/gedit-file-selector-util.c:382
+#: gedit/gedit-file-selector-util.c:387
 msgid "Ch_aracter Coding:"
 msgstr "Kodifikimi i gërm_ave:"
 
-#: gedit/gedit-file-selector-util.c:499
+#: gedit/gedit-file-selector-util.c:504
 msgid "Select a file to open"
 msgstr "Zgjidh file që duhet hapur"
 
-#: gedit/gedit-file-selector-util.c:525
+#: gedit/gedit-file-selector-util.c:530
 msgid "Select files to open"
 msgstr "Zgjidh files që duhen hapur"
 
-#: gedit/gedit-file-selector-util.c:552
+#: gedit/gedit-file-selector-util.c:557
 msgid "Select a filename to save"
 msgstr "Zgjidh emrin e file për të ruajtur"
 
@@ -1474,12 +1478,12 @@ msgstr "Dokumenti \"%s\" u ruajt."
 msgid "Save as..."
 msgstr "Ruaje si..."
 
-#: gedit/gedit-file.c:600
+#: gedit/gedit-file.c:601
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Dëshironi të ktheni ndryshimet e paruajtura tek dokumenti \"%s\"?"
 
-#: gedit/gedit-file.c:609
+#: gedit/gedit-file.c:610
 #, c-format
 msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1492,13 +1496,13 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %ld sekondat e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:618
+#: gedit/gedit-file.c:619
 msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Ndryshimet e kryera në dokument në minutën e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:624
+#: gedit/gedit-file.c:625
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1513,7 +1517,7 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në minutën e fundit dhe %ld sekonda do të "
 "humbasin përgjithmonë."
 
-#: gedit/gedit-file.c:634
+#: gedit/gedit-file.c:635
 #, c-format
 msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -1526,11 +1530,11 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %ld minutat e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:649
+#: gedit/gedit-file.c:650
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr "Ndryshimet e kryera në dokument në orën e fundit do të humbasin përgjithmonë."
 
-#: gedit/gedit-file.c:655
+#: gedit/gedit-file.c:656
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1545,7 +1549,7 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në orën e fundit dhe %d minuta do të "
 "humbasin përgjithmonë."
 
-#: gedit/gedit-file.c:670
+#: gedit/gedit-file.c:671
 #, c-format
 msgid "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
@@ -1556,70 +1560,70 @@ msgstr[1] ""
 "Ndryshimet e kryera në dokument në %d orët e fundit do të humbasin "
 "përgjithmonë."
 
-#: gedit/gedit-file.c:693 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:694 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Rikthe"
 
-#: gedit/gedit-file.c:738
+#: gedit/gedit-file.c:743
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Gabim gjatë rikthimit të dokumentit \"%s\"."
 
-#: gedit/gedit-file.c:745
+#: gedit/gedit-file.c:750
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokumenti \"%s\" nuk u rikthye."
 
-#: gedit/gedit-file.c:749
+#: gedit/gedit-file.c:754
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokumenti \"%s\" u rikthye."
 
-#: gedit/gedit-file.c:777
+#: gedit/gedit-file.c:782
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Duke rikthyer dokumentin '%s'..."
 
-#: gedit/gedit-file.c:912
+#: gedit/gedit-file.c:917
 msgid "Could not read data from stdin."
 msgstr "I pamundur leximi i të dhënave nga stdin."
 
-#: gedit/gedit-file.c:962
+#: gedit/gedit-file.c:967
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "File \"%s\" nuk ekziston. Dëshironi t'a krijoni?"
 
-#: gedit/gedit-file.c:1085
+#: gedit/gedit-file.c:1090
 msgid "Reverting file:"
 msgstr "Duke rikthyer file:"
 
-#: gedit/gedit-file.c:1089
+#: gedit/gedit-file.c:1094
 msgid "Loading file:"
 msgstr "Duke ngarkuar file:"
 
-#: gedit/gedit-file.c:1258 gedit/gedit-file.c:1417
+#: gedit/gedit-file.c:1263 gedit/gedit-file.c:1422
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Gabim gjatë ngarkimit të file \"%s\""
 
-#: gedit/gedit-file.c:1279
+#: gedit/gedit-file.c:1284
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Fie \"%s\" u ngarkua"
 
-#: gedit/gedit-file.c:1356
+#: gedit/gedit-file.c:1361
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "U ngarkua %d file"
 msgstr[1] "U ngarkua %d file"
 
-#: gedit/gedit-file.c:1390
+#: gedit/gedit-file.c:1395
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Duke ngarkuar file \"%s\"..."
 
-#: gedit/gedit-file.c:1537
+#: gedit/gedit-file.c:1542
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2669,8 +2673,8 @@ msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
 msgstr ""
-"Analizon dokumentin aktual dhe raporton numrin e fjalëve, rreshtave, "
-"dhe gërmave që ai përmban."
+"Analizon dokumentin aktual dhe raporton numrin e fjalëve, rreshtave, dhe "
+"gërmave që ai përmban."
 
 #: plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -3162,8 +3166,8 @@ msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
 msgstr ""
-"Afron një metodë për të shtuar me lehtësi në brendësi të një dokumenti "
-"tags/strings më të përdorur pa patur nevojë që t'i shkruash."
+"Afron një metodë për të shtuar me lehtësi në brendësi të një dokumenti tags/"
+"strings më të përdorur pa patur nevojë që t'i shkruash."
 
 #: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
