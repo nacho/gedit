@@ -116,7 +116,7 @@ dnl	if test "$vers" -lt 2000000; then
 dnl ******************************
 dnl gnome-vfs checking
 dnl ******************************
-AC_MSG_CHECKING(for gnome-vfs >= 0.6.2)
+AC_MSG_CHECKING(for gnome-vfs >= 0.1)
 if gnome-config --libs vfs > /dev/null 2>&1; then
    vers=`gnome-config --modversion vfs | sed -e "s/gnome-vfs-//" | awk -F. '{printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
    if test "$vers" -ge 1000000; then
