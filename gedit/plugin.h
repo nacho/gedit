@@ -21,20 +21,33 @@
 
 typedef struct
 {
+  (int *create_callback) ( gchar *title );
+  (void *append_callback) ( gint id, gchar *data, gint length );
+  (void *show_callback) ( gint id );
+} plugin_callback_struct;
+
+typedef struct
+{
   int pipe_to;
   int pipe_from;
   int pipe_data;
   int pid;
   char *name;
   int in_call;
+  plugin_callback_struct callbacks;
+  int docid;
 } plugin;
 
-plugin *plugin_new(gchar *);
-void plugin_send(plugin *, gchar *data, gint length);
-#if 0
-void receive_from_plug_in(plugin *);
-void send_as_plug_in(plugin *);
-void receieve_as_plug_in(plugin *);
-#endif
+typedef void plugin_callback( plugin *, gchar *, int length, gpointer data );
 
+plugin *plugin_new( gchar * );
+void plugin_send( plugin *, gchar *, gint length );
+void plugin_send_int( plugin *, gint );
+void plugin_send_data( plugin *, gchar *, gint length );
+void plugin_send_data_int( plugin *, gint );
+void plugin_get( plugin *, gchar *, gint length );
+void plugin_get_all( plugin *, gchar *, gint length, plugin_callback *finished, gpointer data );
+void plugin_register_document_create( plugin *, (int *) () )
+void plugin_register_document_append( plugin *, (void *) (int, char *, int) );
+void plugin_register_document_show( plugin *, (void *) (int) );
 #endif
