@@ -407,7 +407,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 			file_save_cb (w);
 	    		break;
 		case 'p':
-	    		file_print_cb (w, NULL);
+	    		file_print_cb (w, NULL, FALSE);
 	    		break;
 		case 'n':
 /*			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event"); */

@@ -21,7 +21,8 @@
 #ifndef __GEDIT_PRINT_H__
 #define __GEDIT_PRINT_H__
 
-void file_print_cb (GtkWidget *widget, gpointer cbdata);
+/*void file_print_cb (GtkWidget *widget, gpointer cbdata);*/
+void file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview);
 void file_print_preview_cb (GtkWidget *widget, gpointer data);
  
 #endif /* __GEDIT_PRINT_H__ */

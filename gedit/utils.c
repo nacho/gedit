@@ -130,8 +130,7 @@ gedit_debug_mess (gchar *message, DebugSection type)
 {
 #if 0
 	g_print(message);
-	return; 
-	
+	return;
 	switch (type)
 	{
 	case DEBUG_UNDO:

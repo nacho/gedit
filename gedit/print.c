@@ -35,12 +35,14 @@
 #include "prefs.h"
 #include "utils.h"
 
-#include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-printer.h>
-#include <libgnomeprint/gnome-print-preview.h>
+#include <libgnomeprint/gnome-print.h>
+#include <libgnomeprint/gnome-printer-dialog.h>
+
 #include <libgnomeprint/gnome-print-master.h>
 #include <libgnomeprint/gnome-print-master-preview.h>
-#include <libgnomeprint/gnome-printer-dialog.h>
+#include <libgnomeprint/gnome-print-preview.h>
+#include <libgnomeprint/gnome-print-dialog.h>
 
 typedef struct _PrintJobInfo {
 	/* gnome print stuff */
@@ -72,6 +74,13 @@ typedef struct _PrintJobInfo {
 	gint   chars_per_line;
 	guchar* temp;
 
+	/* Range stuff */
+	gint range;
+	gint print_first;
+	gint print_last;
+	gint print_this_page;
+	gint preview;
+	
 	/* Variables */
 	gint   file_offset;
 	gint   current_line;
@@ -83,10 +92,11 @@ typedef struct _PrintJobInfo {
 } PrintJobInfo;
 
 
-       void file_print_cb (GtkWidget *widget, gpointer cbdata);
+/*     void file_print_cb (GtkWidget *widget, gpointer cbdata);*/
+/* */
        void file_print_preview_cb (GtkWidget *widget, gpointer data);
-static void print_document (Document *doc, GnomePrinter *printer);
-static void print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data);
+static void print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer);
+/* tatic void print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data);*/
 static void print_line (PrintJobInfo *pji, int line, int will_continue);
 static void print_ps_line(PrintJobInfo * pji, int line);
 static int  print_determine_lines (PrintJobInfo *pji, int real);
@@ -97,7 +107,8 @@ static void print_setfont (PrintJobInfo *pji);
 static void end_page (PrintJobInfo *pji);
 static void end_job (GnomePrintContext *pc);
 static void preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji);
-static void set_pji ( PrintJobInfo * pji, Document *doc, GnomePrinter *printer);
+static void print_pji_destroy (PrintJobInfo *pji);
+static void set_pji ( PrintJobInfo * pji, Document *doc);
 
 
 /**
@@ -109,22 +120,100 @@ static void set_pji ( PrintJobInfo * pji, Document *doc, GnomePrinter *printer);
  * only routing global to the world (and Print Preview)
  **/
 void
-file_print_cb (GtkWidget *widget, gpointer data)
+file_print_cb (GtkWidget *widget, gpointer data, gint file_printpreview)
 {
-	Document  *doc;
 	GtkWidget *dialog;
+	GnomePrinter *printer;
+	PrintJobInfo *pji;
+	Document * doc = gedit_document_current();
 
 	gedit_debug_mess ("F:file_print_cb\n", DEBUG_PRINT);
 	
-	doc = gedit_document_current ();
-	if (doc==NULL)
+	if ( doc == NULL)
 		return;
 
-	dialog = gnome_printer_dialog_new ();
 
-	gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window));
-	gtk_signal_connect (GTK_OBJECT(dialog), "clicked", GTK_SIGNAL_FUNC (print_dialog_clicked_cb), doc);
-	gtk_widget_show_all (dialog);
+	pji = g_new0 (PrintJobInfo, 1);
+	pji->paper = gnome_paper_with_name (settings->papersize);
+	g_return_if_fail (pji->paper != NULL);
+	pji->master = gnome_print_master_new();
+	gnome_print_master_set_paper( pji->master, pji->paper);
+	pji->pc = gnome_print_master_get_context(pji->master);
+	g_return_if_fail(pji->pc != NULL);
+	
+	set_pji (pji, doc );
+
+	if (file_printpreview)
+	{
+		dialog = (GnomePrintDialog *)gnome_print_dialog_new ( (const char *)"Print Document", GNOME_PRINT_DIALOG_RANGE);
+		gnome_print_dialog_construct_range_page ( (GnomePrintDialog * )dialog,
+							  GNOME_PRINT_RANGE_ALL |
+							  GNOME_PRINT_RANGE_RANGE,
+							  1,
+							  pji->pages,
+							  "A",
+							  _("Pages")/* Translators: As in [Range] Pages from:[x]  to*/);
+
+		/* We need to calculate the number of pages
+		   before running the dialog */
+		switch (gnome_dialog_run (GNOME_DIALOG (dialog))) {
+		case GNOME_PRINT_PRINT:
+			break;
+		case GNOME_PRINT_PREVIEW:
+			pji->preview = TRUE;
+			break;
+		case -1:
+			return;
+		default:
+		gnome_dialog_close (GNOME_DIALOG (dialog));
+		return;
+		}
+		printer = gnome_print_dialog_get_printer (GNOME_PRINT_DIALOG (dialog));
+		/* Lets get print_first and print last page */
+		pji->range = gnome_print_dialog_get_range_page ( GNOME_PRINT_DIALOG (dialog), &pji->print_first, &pji->print_last);
+		gnome_dialog_close (GNOME_DIALOG (dialog));
+	}
+	else
+	{
+		pji->print_first = 1;
+		pji->print_last = pji->pages;
+		pji->preview = TRUE;
+		printer = NULL;
+	}
+
+	if (pji->preview)
+	{
+		GnomePrintMasterPreview *preview;
+		gchar *title;
+
+		print_document (doc, pji, NULL);
+		title = g_strdup_printf (_("gedit (%s): Print Preview"), pji->filename);
+		preview = gnome_print_master_preview_new (pji->master, title);
+		g_free (title);
+		gtk_signal_connect (GTK_OBJECT(preview), "destroy",
+				    GTK_SIGNAL_FUNC(preview_destroy_cb), pji);
+		gtk_widget_show(GTK_WIDGET(preview));
+	}
+	else
+	{
+		if (printer)
+			gnome_print_master_set_printer(pji->master, printer);
+		print_document (doc, pji, printer);
+		gnome_print_master_print (pji->master);
+	}
+	
+/*	if (printer)
+	{
+	}
+	else
+	{
+	}*/
+	
+	print_pji_destroy (pji);
+	
+/*	gnome_dialog_set_parent (GNOME_DIALOG(dialog), GTK_WINDOW(mdi->active_window));
+	gtk_signal_connect (GTK_OBJECT(dialog), "clicked", GTK_SIGNAL_FUNC (print_dialog_clicked_cb), dialog);
+	gtk_widget_show_all (dialog);*/
 }
 
 void
@@ -134,39 +223,13 @@ file_print_preview_cb (GtkWidget *widget, gpointer data)
 
 	if (!gnome_mdi_get_active_view (mdi))
 		return;
-	print_document (gedit_document_current(), NULL);
+	file_print_cb( NULL, NULL, FALSE);
 }
 
 
 static void
-print_dialog_clicked_cb (GtkWidget *widget, gint button, gpointer data)
+print_document (Document *doc, PrintJobInfo *pji, GnomePrinter *printer)
 {
-	gedit_debug_mess ("F:file_dialog_clicked_cb\n", DEBUG_PRINT);
-
-	if (!gedit_document_current ())
-	{
-		gnome_dialog_close(GNOME_DIALOG(widget));
-		return;
-	}
-
-	if (button == 0)
-	{
-		GnomePrinter *printer;
-		GnomePrinterDialog *dialog = GNOME_PRINTER_DIALOG(widget);
-		Document *doc = (Document *)data;
-
-		printer = gnome_printer_dialog_get_printer(dialog);
-
-		if (printer)
-			print_document(doc, printer);
-	}
-	gnome_dialog_close(GNOME_DIALOG(widget));
-}
-
-static void
-print_document (Document *doc, GnomePrinter *printer)
-{
-	PrintJobInfo *pji;
 	int i,j;
 	int will_continue_in_next = FALSE;
 #ifdef PRINT_DEBUG_ON
@@ -174,9 +237,6 @@ print_document (Document *doc, GnomePrinter *printer)
 #endif	
 	
 	gedit_debug_mess ("F:print_document\n", DEBUG_PRINT);
-
-	pji = g_new0 (PrintJobInfo, 1);
-	set_pji (pji, doc, printer);
 	
 #ifdef PRINT_DEBUG_ON
 	debugmsg = g_strdup_printf("Pages : %i Total Lines : %i Total Lines Real :%i\n", pji->pages, pji->total_lines, pji->total_lines_real);
@@ -192,10 +252,15 @@ print_document (Document *doc, GnomePrinter *printer)
 		debugmsg = g_strdup_printf("Printing page %i\n", i);
 		gedit_debug_mess (debugmsg, DEBUG_PRINT);
 		g_free (debugmsg);
-#endif		
-		if (settings->printheader)
+#endif
+		if (pji->range != GNOME_PRINT_RANGE_ALL)
+			pji->print_this_page=(i>=pji->print_first && i<=pji->print_last)?TRUE:FALSE;
+		else
+			pji->print_this_page=TRUE;
+		if (settings->printheader && pji->print_this_page)
 			print_header(pji, i);
-		print_setfont (pji);
+		if (pji->print_this_page)
+			print_setfont (pji);
 
 		/* in case the first line in the page is a continuation
 		   of the last line in the previous page. Chema */
@@ -220,7 +285,8 @@ print_document (Document *doc, GnomePrinter *printer)
 			if (pji->current_line % pji->lines_per_page == 0)
 				break;
 		}
-		end_page (pji);
+		if (pji->print_this_page)
+			end_page (pji);
 	}
 	end_job (pji->pc);
 	g_free (pji->temp);
@@ -228,26 +294,6 @@ print_document (Document *doc, GnomePrinter *printer)
 	gnome_print_context_close (pji->pc);
 	gnome_print_master_close (pji->master);
 
-	if (printer)
-	{
-		gnome_print_master_print (pji->master);
-  		gtk_object_unref (GTK_OBJECT(pji->master));
-		g_free (pji);
-	}
-	else
-	{
-		GnomePrintMasterPreview *preview;
-		gchar *title;
-
-		title = g_strdup_printf (_("gedit (%s): Print Preview"), pji->filename);
-		preview = gnome_print_master_preview_new (pji->master, title);
-		g_free (title);
-		gtk_signal_connect (GTK_OBJECT(preview), "destroy",
-				    GTK_SIGNAL_FUNC(preview_destroy_cb), pji);
-		gtk_widget_show(GTK_WIDGET(preview));
-	}
-	g_free (pji->buffer);
-	g_free (pji->filename);
 }
 
 static void
@@ -271,7 +317,7 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 	while( (pji->buffer[ pji->file_offset + i] != '\n' && (pji->file_offset+i) < pji->buffer_size))
 	{
 		if (i>pji->chars_per_line)
-			g_print("I1:%i\n", i);
+			g_print("Check failed i>pji->cpl %i\n", i);
 		pji->temp[i]=pji->buffer[ pji->file_offset + i];
 		i++;
 		if( i == pji->chars_per_line + 1 )
@@ -304,7 +350,7 @@ print_line (PrintJobInfo *pji, int line, int will_continue)
 		}
 	}
 	if (i>pji->chars_per_line)
-		g_print("I2:%i\n", i);
+		g_print("Check failed i>pji->cpl :%i\n", i);
 	pji->temp[i]=(guchar) '\0';
 	pji->file_offset = pji->file_offset + i + 1;
 	if (print_line && i > 0)
@@ -316,6 +362,9 @@ print_ps_line (PrintJobInfo * pji, int line)
 {
 	float y = pji->page_height -  pji->margin_top - pji->header_height -
 	(pji->font_char_height*( (pji->current_line++ % pji->lines_per_page)+1 ));
+
+	if (!pji->print_this_page)
+		return;
 
 	gnome_print_moveto (pji->pc, pji->margin_left, y);
 	gnome_print_show (pji->pc, pji->temp);
@@ -334,23 +383,13 @@ print_ps_line (PrintJobInfo * pji, int line)
 }
 
 static void
-set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
+set_pji (PrintJobInfo * pji, Document *doc)
 {
 #ifdef PRINT_DEBUG_ON
 	gchar * debugmsg;
 #endif	
-	pji->paper = gnome_paper_with_name (settings->papersize);
-
-	g_return_if_fail (pji->paper != NULL);
 	
-	pji->master = gnome_print_master_new();
-	gnome_print_master_set_paper( pji->master, pji->paper);
-
-	if (printer)
-		gnome_print_master_set_printer(pji->master, printer);
-
-	pji->pc = gnome_print_master_get_context(pji->master);
-	g_return_if_fail(pji->pc != NULL);
+	
 	pji->view = VIEW(mdi->active_view);
 	pji->doc = doc;
 	pji->buffer_size = gtk_text_get_length(GTK_TEXT(pji->view->text));
@@ -517,10 +556,22 @@ end_job (GnomePrintContext *pc)
 }
 
 static void
+print_pji_destroy (PrintJobInfo *pji)
+{
+	gtk_object_unref (GTK_OBJECT (pji->master));
+	g_free (pji->buffer);
+	g_free (pji->filename);
+	g_free (pji);
+}
+
+static void
 preview_destroy_cb (GtkObject *obj, PrintJobInfo *pji)
 {
 	gedit_debug_mess ("F:preview_destroy_cb\n", DEBUG_PRINT);
-
-	gtk_object_unref (GTK_OBJECT (pji->master));
-	g_free (pji);
 }
+
+
+
+
+
+
