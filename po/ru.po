@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.*\n"
-"POT-Creation-Date: 2001-11-18 00:13+0300\n"
+"POT-Creation-Date: 2001-12-05 01:33-0600\n"
 "PO-Revision-Date: 2001-11-18 00:21+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -20,10 +20,15 @@ msgstr "Текстовый редактор для GNOME"
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:476 src/bonobo-mdi.c:552 src/bonobo-mdi.c:1907
+#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
 #, c-format
 msgid "Activate %s"
 msgstr "Активировать %s"
+
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
+#, fuzzy
+msgid "The searched string has not been found."
+msgstr "Документ не был сохранен."
 
 #: src/gedit2.c:57
 msgid "Show mdi debugging messages."
@@ -77,20 +82,24 @@ msgstr "Включить все отладочные сообщения."
 msgid "The gnome text editor"
 msgstr "Текстовый редактор для GNOME"
 
-#: src/gedit-document.c:439 src/gedit-document.c:450
+#: src/gedit-commands.c:55
+msgid "Not yet implemented."
+msgstr ""
+
+#: src/gedit-document.c:448 src/gedit-document.c:459
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:439 src/gedit-document.c:450
+#: src/gedit-document.c:448 src/gedit-document.c:459
 msgid "Untitled"
 msgstr "Безымянное"
 
-#: src/gedit-document.c:502
+#: src/gedit-document.c:511 src/gedit-document.c:610
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr "При чтении файла были обнаружены неправильные данные UTF-8"
 
-#: src/gedit-document.c:765
+#: src/gedit-document.c:860
 msgid "It is not possible to revert an Untitled document"
 msgstr "Вы не можете восстановить неозаглавленный документ"
 
@@ -157,10 +166,13 @@ msgstr "Сохранить как..."
 msgid ""
 "A file named ``%s'' already exists in this location. Do you want to replace "
 "it with the one you are saving?"
-msgstr "Файл с именем \"%s\" уже есть в указанном месте. Хотите заменить его тем, который вы сохраняете?"
+msgstr ""
+"Файл с именем \"%s\" уже есть в указанном месте. Хотите заменить его тем, "
+"который вы сохраняете?"
 
 #: src/gedit-file.c:658
-msgid "Replace"
+#, fuzzy
+msgid "_Replace"
 msgstr "Заменить"
 
 #: src/gedit-file.c:808
@@ -188,7 +200,18 @@ msgstr "Документ не был восстановлен."
 msgid "File '%s' reverted."
 msgstr "Файл \"%s\" восстановлен."
 
-#: src/gedit-mdi.c:456
+#: src/gedit-file.c:1008
+#, fuzzy, c-format
+msgid ""
+"An error occurred while reading data from stdin.\n"
+"\n"
+"%s."
+msgstr ""
+"При сохранении файла \"%s\" возникла ошибка.\n"
+"\n"
+"%s"
+
+#: src/gedit-mdi.c:484
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -199,15 +222,15 @@ msgstr ""
 "\n"
 "Если изменения не сохранить, то они будут потеряны."
 
-#: src/gedit-mdi.c:461
+#: src/gedit-mdi.c:489
 msgid "_Don't save"
 msgstr "Не сохранять"
 
-#: src/gedit-mdi.c:541
+#: src/gedit-mdi.c:569
 msgid "(modified)"
 msgstr "(изменено)"
 
-#: src/gedit-mdi.c:547
+#: src/gedit-mdi.c:575
 msgid "(readonly)"
 msgstr "(только чтение)"
 

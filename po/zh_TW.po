@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.9.6\n"
-"POT-Creation-Date: 2001-11-13 15:17+0100\n"
+"POT-Creation-Date: 2001-12-05 01:33-0600\n"
 "PO-Revision-Date: 2001-08-08 19:46+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -14,1381 +14,1091 @@ msgstr ""
 "Content-Type: text/plain; charset=Big5\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: gedit.desktop.in.h:1
-msgid "Text editor"
+#: gedit2.desktop.in.h:1
+msgid "Gnome Text Editor"
 msgstr ""
 
-#: gedit.desktop.in.h:2
+#: gedit2.desktop.in.h:2
 msgid "gedit"
 msgstr "gedit"
 
-#: plugins/ASCII/ascii.c:268 plugins/ASCII/ascii.c:269
-msgid "ASCII table"
-msgstr ""
-
-#: plugins/ASCII/ascii.c:270
-msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr ""
-
-#: plugins/ASCII/asciitable.glade.h:1
-msgid "Char"
-msgstr ""
-
-#: plugins/ASCII/asciitable.glade.h:2
-msgid "Dec#"
-msgstr ""
-
-#: plugins/ASCII/asciitable.glade.h:3
-msgid "Hex#"
-msgstr ""
-
-#: plugins/ASCII/asciitable.glade.h:4
-msgid ""
-"If you wish to insert any of the characters in to the active \n"
-"document, select the character and click the \"Insert Char\" \n"
-"button or double click the character in the table."
-msgstr ""
-
-#: plugins/ASCII/asciitable.glade.h:7
-#, fuzzy
-msgid "Insert char"
-msgstr "插入時間"
-
-#: plugins/ASCII/asciitable.glade.h:8
-msgid "Name"
-msgstr ""
-
-#: plugins/ASCII/asciitable.glade.h:9
-msgid "gedit: ASCII table"
-msgstr ""
-
-# plugins/browse/browse.c:246
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/browse/browse.c:38 plugins/browse/browse.c:250
-msgid "Browse"
-msgstr "瀏覽"
-
-#: plugins/browse/browse.c:251 plugins/browse/browse.c:252
-msgid "Web browse plugin"
-msgstr "網頁瀏覽 Plugin"
-
-#: plugins/browse/browse.glade.h:1 plugins/diff/diff.glade.h:1
-#: plugins/email/email.glade.h:1
-msgid " _Change... "
-msgstr "改變(_C)…"
-
-#: plugins/browse/browse.glade.h:2
-msgid "Enter the _URL to browse for:"
-msgstr "輸入要瀏覽的 URL(_U)："
-
-#: plugins/browse/browse.glade.h:3
-msgid "Lynx found at: "
-msgstr "Lynx 在："
-
-#: plugins/browse/browse.glade.h:4
-msgid "gedit: Web Browse plugin"
-msgstr "gedit：網頁瀏覽 Plugin"
-
-#: plugins/browse/browse.glade.h:5 plugins/diff/diff.glade.h:12
-#: plugins/email/email.glade.h:14
-msgid "location"
-msgstr "位址"
-
-#: plugins/convert/convert.c:179
-msgid "Convert"
-msgstr "轉換"
-
-#: plugins/convert/convert.c:180 plugins/convert/convert.c:181
-msgid "Number Converter"
-msgstr "數字轉換器"
-
-#: plugins/convert/convert.glade.h:1
-msgid " Decimal to _Hex "
-msgstr "十進位到十六進位(_H)"
-
-#: plugins/convert/convert.glade.h:2
-msgid " Decimal to _Octal "
-msgstr "十進位到八進位(_O)"
-
-#: plugins/convert/convert.glade.h:3
-msgid " Hex to Decima_l "
-msgstr "十六進位到十進位(_l)"
-
-#: plugins/convert/convert.glade.h:4
-msgid "_Converted value:"
-msgstr "轉換了的數值(_C)："
-
-#: plugins/convert/convert.glade.h:5
-msgid "_Value to be converted:"
-msgstr "要轉換的數值(_V)："
-
-#: plugins/convert/convert.glade.h:6
-msgid "gedit: Number Converter plugin"
-msgstr "gedit：數字轉換器 plugin"
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/diff/diff.c:36
-msgid "diff"
-msgstr "檔案差異"
-
-#: plugins/diff/diff.c:126
-msgid "The two documents you selected are the same."
-msgstr "選擇的二個文件是相同的。"
-
-#: plugins/diff/diff.c:132
-msgid ""
-"The \"first\" file you selected does not exist.\n"
-"\n"
-"Please provide a valid file."
-msgstr ""
-"選擇的「第一件」文件不存在。\n"
-"\n"
-"請提供一個正確的檔案。"
-
-#: plugins/diff/diff.c:139
-msgid ""
-"The \"second\" file you selected does not exist.\n"
-"\n"
-"Please provide a valid file."
-msgstr ""
-"選擇的「第二件」文件不存在。\n"
-"\n"
-"請提供一個正確的檔案。"
-
-#: plugins/diff/diff.c:150
-msgid "The \"first\" document contains no text."
-msgstr "「第一件」文件沒有文字"
-
-#: plugins/diff/diff.c:162
-msgid "The \"second\" document contains no text."
-msgstr "「第二件」文件沒有文字"
-
-#. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:171
-msgid ""
-"gedit could not create a temp file.\n"
-"\n"
-msgstr ""
-"gedit 無法建立暫存檔案。\n"
-"\n"
-
-#: plugins/diff/diff.c:295 plugins/email/email.c:229 src/document.c:669
-#, c-format
-msgid "Untitled %i"
-msgstr "未命名 %i"
-
-#: plugins/diff/diff.c:496
-msgid "Diff"
-msgstr "檔案差異"
-
-#: plugins/diff/diff.c:497
-msgid "Makes a diff file from two documents or files"
-msgstr "從二個文件或檔案找尋差異"
-
-#: plugins/diff/diff.c:498
-msgid ""
-"Makes a diff file from two documents or files on disk\n"
-"For more info on diff, type \"man diff\" in a shell prompt\n"
-msgstr ""
-"從二個文件或檔案找尋差異\n"
-"若想要更多資訊，在命令殼提示輸入\"man diff\"\n"
-
-#: plugins/diff/diff.glade.h:2
-msgid "Choose the files to compare"
-msgstr "選擇要比較的檔案"
-
-#: plugins/diff/diff.glade.h:3
-msgid "Diff found at: "
-msgstr "檔案差異在："
-
-#: plugins/diff/diff.glade.h:4
-msgid "First"
-msgstr "第一個"
-
-#: plugins/diff/diff.glade.h:5
-msgid "From a file on disk"
-msgstr "從磁碟上的檔案"
-
-#: plugins/diff/diff.glade.h:6
-msgid "From document"
-msgstr "從文件"
-
-#: plugins/diff/diff.glade.h:7
-msgid "Second"
-msgstr "第二個"
-
-#: plugins/diff/diff.glade.h:8
-msgid "Select the \"first\" file..."
-msgstr "選擇「第一個」檔案…"
-
-#: plugins/diff/diff.glade.h:9
-msgid "Select the \"second\" file..."
-msgstr "選擇「第二個」檔案…"
-
-#: plugins/diff/diff.glade.h:10
-msgid "Use the _unified output format (-u option)"
-msgstr "使用統一的輸出格式（-u 選項）(_u)"
-
-#: plugins/diff/diff.glade.h:11
-msgid "gedit: Diff plugin"
-msgstr "gedit：檔案差異 Plugin"
-
-#: plugins/docinfo/docinfo.c:214
-msgid ""
-"No document exists.\n"
-"The Document Info plugin is going be closed."
-msgstr ""
-
-#: plugins/docinfo/docinfo.c:369
-#, fuzzy
-msgid "Document info"
-msgstr "文件"
-
-#: plugins/docinfo/docinfo.c:370
-#, fuzzy
-msgid "Get info on current document."
-msgstr "郵寄目前的文件"
-
-#: plugins/docinfo/docinfo.c:371
-msgid ""
-"This plugin displays a pop-up dialog which contains basic information on "
-"current document."
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:1
-msgid "0"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:2
-msgid "Characters (no spaces)"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:3
-msgid "Characters (with spaces)"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:4
-msgid "Current column"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:5
-msgid "Current line"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:6
-#, fuzzy
-msgid "File Name"
-msgstr "檔案名稱："
-
-#: plugins/docinfo/docinfo.glade.h:7
-#, fuzzy
-msgid "Lines"
-msgstr "行(_i)"
-
-#: plugins/docinfo/docinfo.glade.h:8
-msgid "Paragraphs"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:9
-msgid "Update"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:10
-msgid "Words"
-msgstr ""
-
-#: plugins/docinfo/docinfo.glade.h:11
-#, fuzzy
-msgid "gedit: Document Info plugin"
-msgstr "gedit：檔案差異 Plugin"
-
-#. xgettext translators: !!!!!!!!!!!---------> the name of the plugin only.
-#. it is used to display "you can not use the [name] plugin without this program...
-#: plugins/email/email.c:22
-msgid "email"
-msgstr "電子郵件"
-
-#: plugins/email/email.c:75
-#, c-format
-msgid "Executing command: %s"
-msgstr "執行指令：%s"
-
-#: plugins/email/email.c:275
-msgid "Email"
-msgstr "電子郵件"
-
-#: plugins/email/email.c:276
-msgid "Email the current document"
-msgstr "郵寄目前的文件"
-
-#: plugins/email/email.c:277
-msgid ""
-"Email the current document to a specified email address\n"
-"gedit searches for sendmail to use this plugin."
-msgstr ""
-"郵寄目前的文件到指定的電子郵件位址\n"
-"gedit 會搜尋 sendmail 以使用這個 plugin。"
-
-#: plugins/email/email.glade.h:2
-msgid "Change..."
-msgstr "改變…"
-
-#: plugins/email/email.glade.h:3
-msgid "F_rom:"
-msgstr "發信人(_r)："
-
-#: plugins/email/email.glade.h:4
-msgid "File to use as body of message: "
-msgstr "用以當作訊息主體的檔案："
-
-#: plugins/email/email.glade.h:5
-msgid "From:"
-msgstr "發信人："
-
-#: plugins/email/email.glade.h:6
-msgid "Sendmail found at:"
-msgstr "Sendmail 在："
-
-#: plugins/email/email.glade.h:7
-msgid "Subject:"
-msgstr "主題："
-
-#: plugins/email/email.glade.h:8
-msgid "To:"
-msgstr "收件人："
-
-#: plugins/email/email.glade.h:9
-msgid "_Subject:"
-msgstr "主題(_S)："
-
-#: plugins/email/email.glade.h:10
-msgid "_To:"
-msgstr "收件人(_T)："
-
-#: plugins/email/email.glade.h:11
-msgid "filename"
-msgstr "檔案名稱"
-
-#: plugins/email/email.glade.h:12
-msgid "gedit: E-mail plugin"
-msgstr "gedit：電子郵件 Plugin"
-
-#: plugins/email/email.glade.h:13
-msgid "gedit: e-mail plugin"
-msgstr "gedit：電子郵件 Plugin"
-
-#: plugins/reverse/reverse.c:69
-msgid "Reverse"
-msgstr "復原"
-
-#: plugins/reverse/reverse.c:70 plugins/reverse/reverse.c:71
-msgid "Reverse text"
-msgstr "復原文字"
-
-#: plugins/sample/sample.c:53
-msgid "Hello World"
-msgstr "Hello World"
-
-#: plugins/sample/sample.c:54 plugins/sample/sample.c:55
-msgid "Sample 'hello world' plugin."
-msgstr "'hello world' Plugin 範例"
-
-#: plugins/shell_output/shell_output.c:64
-msgid ""
-"The shell command entry is empty.\n"
-"\n"
-"Please, insert a valid shell command."
-msgstr ""
-"命令殼指令一欄是空的。\n"
-"\n"
-"請加入正確的命令殼指令。"
-
-#: plugins/shell_output/shell_output.c:213
-msgid "Shell Output"
-msgstr "命令殼輸出"
-
-#: plugins/shell_output/shell_output.c:214
-#: plugins/shell_output/shell_output.c:215
-msgid "Insert the shell output in the document"
-msgstr "將命令殼輸出插入到檔案中"
-
-#: plugins/shell_output/shell_output.glade.h:1
-msgid "Select the working directory..."
-msgstr "選擇執行指令的目錄…"
-
-#: plugins/shell_output/shell_output.glade.h:2
-msgid "Shell _command:"
-msgstr "輸入命令殼指令(_c)："
-
-#: plugins/shell_output/shell_output.glade.h:3
-msgid "Specify the working directory and the command you want to run."
-msgstr "指定想執行的指令及執行時的目錄。"
-
-#: plugins/shell_output/shell_output.glade.h:4
-msgid "_Working directory:"
-msgstr "執行指令的目錄(_W)："
-
-#: plugins/shell_output/shell_output.glade.h:5
-msgid "gedit: Shell Output plugin"
-msgstr "gedit：命令殼輸出 plugin"
-
-#: plugins/sort/sort.c:192
-msgid "Sort"
-msgstr ""
-
-#: plugins/sort/sort.c:193
-#, fuzzy
-msgid "Sort a document."
-msgstr "建立一個新的文件"
-
-#: plugins/sort/sort.c:194
-#, fuzzy
-msgid "Sort a document or selected text."
-msgstr "選擇的二個文件是相同的。"
-
-#: plugins/sort/sort.glade.h:1
-msgid "1"
-msgstr ""
-
-#: plugins/sort/sort.glade.h:2
-#, fuzzy
-msgid "Case Sensitive"
-msgstr "大小寫敏感(_s)"
-
-#: plugins/sort/sort.glade.h:3
-#, fuzzy
-msgid "Sort starting at column:"
-msgstr "找不到文字"
-
-#: plugins/sort/sort.glade.h:4
-#, fuzzy
-msgid "gedit: Sort plugin"
-msgstr "gedit：檔案差異 Plugin"
-
-#: plugins/time/time.c:83
-msgid "Insert Time"
-msgstr "插入時間"
-
-#: plugins/time/time.c:84 plugins/time/time.c:85
-msgid "Inserts the current date and time"
-msgstr "插入目前的日期與時間"
-
-#: src/dialogs/about.glade.h:1
-msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
-msgstr "(C) 1998, 1999, 2000 Alex Roberts 和 Evan Lawrence"
-
-#: src/dialogs/about.glade.h:2
-msgid "gedit is a small and lightweight text editor for GNOME."
-msgstr "gedit 是一個 GNOME 的小型輕量級的文字編輯器"
-
-#: src/dialogs/dialog-plugins.c:87
-#, c-format
-msgid "To use the %s plugin, you need to specify a location for \"%s\"."
-msgstr "要使用 %s plugin，您需要指定 \"%s\" 的位置。"
-
-#. glade won't let me set the title of the propertybox
-#: src/dialogs/dialog-prefs.c:578
-msgid "gedit: Preferences"
-msgstr "gedit：偏好設定"
-
-#: src/dialogs/dialog-replace.c:130 src/dialogs/replace.glade.h:3
-msgid "Replace"
-msgstr "取代"
-
-#: src/dialogs/dialog-replace.c:135 src/menus.c:298
-msgid "Find"
-msgstr "搜尋"
-
-#: src/dialogs/dialog-replace.c:332
-msgid "Search string not found"
-msgstr "找不到文字"
-
-#: src/dialogs/dialog-replace.c:337
-msgid "Search string not found."
-msgstr "找不到文字。"
-
-#: src/dialogs/dialog-replace.c:362
-#, c-format
-msgid "Found and replaced %i occurrences."
-msgstr "找到並取代了 %i 個字串。"
-
-#: src/dialogs/dialog-replace.c:373 src/dialogs/dialog-replace.c:376
-msgid "Could not allocate the memory for the Replace all request."
-msgstr "無法配置記憶體給「全部取代」這個動作。"
-
-#: src/dialogs/dialog-uri.c:143 src/file.c:823 src/file.c:830
-#, c-format
-msgid "Loaded file %s"
-msgstr "載入檔案 %s"
-
-#: src/dialogs/goto-line.glade.h:1
-msgid "Goto Line"
-msgstr "跳到某行"
-
-#: src/dialogs/goto-line.glade.h:2
-msgid "Line number:"
-msgstr "行號："
-
-#: src/dialogs/plugin-manager.glade.h:1
-msgid "Author(s):"
-msgstr "作者："
-
-#: src/dialogs/plugin-manager.glade.h:2
-msgid "De_scription"
-msgstr "描述(_s)"
-
-#: src/dialogs/plugin-manager.glade.h:3
-msgid "De_tails"
-msgstr "詳細資料(_t)"
-
-#: src/dialogs/plugin-manager.glade.h:4
-msgid "File name:"
-msgstr "檔案名稱："
-
-#: src/dialogs/plugin-manager.glade.h:5
-msgid "Plugins manager..."
-msgstr "Plugin 管理程式…"
-
-#: src/dialogs/plugin-manager.glade.h:6
-msgid "Select the plugins to activate:"
-msgstr "選擇要啟用的 plugin："
-
-#: src/dialogs/plugin-manager.glade.h:7
-msgid "_Activate all"
+#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
+#, fuzzy, c-format
+msgid "Activate %s"
 msgstr "全部啟用(_A)"
 
-#: src/dialogs/plugin-manager.glade.h:8
-msgid "_Deactivate all"
-msgstr "全部不啟用(_D)"
-
-#: src/dialogs/prefs.glade.h:1
-msgid "Add _header"
-msgstr "增加標頭(_h)"
-
-#: src/dialogs/prefs.glade.h:2
-msgid "Appearance"
-msgstr "外觀"
-
-#: src/dialogs/prefs.glade.h:3
-msgid "Bottom"
-msgstr ""
-
-#: src/dialogs/prefs.glade.h:4
-msgid "Colors"
-msgstr "顏色"
-
-#: src/dialogs/prefs.glade.h:5
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
 #, fuzzy
-msgid "Default"
-msgstr "預設字型(_D)："
+msgid "The searched string has not been found."
+msgstr "找不到文字。"
 
-#: src/dialogs/prefs.glade.h:6
-msgid "Documents"
-msgstr "文件"
-
-#: src/dialogs/prefs.glade.h:7
-msgid "Editor Behavior"
-msgstr "編輯器特性"
-
-#: src/dialogs/prefs.glade.h:8
-msgid "Enable _Auto-indent"
-msgstr "啟用自動縮排(_A)"
-
-#: src/dialogs/prefs.glade.h:9
-msgid "Enable word _wrapping"
-msgstr "啟用自動換行(_w)"
-
-#: src/dialogs/prefs.glade.h:10
-msgid "Fonts"
-msgstr "字型"
-
-#: src/dialogs/prefs.glade.h:11
-msgid "Fonts/Colors"
-msgstr "字型/顏色"
-
-#: src/dialogs/prefs.glade.h:12
-msgid "General"
-msgstr "一般"
-
-#: src/dialogs/prefs.glade.h:13
-msgid "Left"
-msgstr ""
-
-#: src/dialogs/prefs.glade.h:14
-msgid "MDI (Multiple Document Interface)"
-msgstr "MDI（多重文件介面）"
-
-#: src/dialogs/prefs.glade.h:15
-msgid "Modal"
-msgstr ""
-
-#: src/dialogs/prefs.glade.h:16
-msgid "Notebook"
-msgstr ""
-
-#: src/dialogs/prefs.glade.h:17
-msgid "Notebook _tab position: "
-msgstr "筆記本標籤位置(_t)："
-
-#: src/dialogs/prefs.glade.h:18
-msgid "Orientation"
-msgstr "方向"
-
-#: src/dialogs/prefs.glade.h:19
-msgid "Paper"
-msgstr "紙張大小"
-
-#: src/dialogs/prefs.glade.h:20
-msgid "Pick a Font"
-msgstr "選擇字型"
-
-#: src/dialogs/prefs.glade.h:21
-msgid "Pick a color"
-msgstr "選擇顏色"
-
-#: src/dialogs/prefs.glade.h:22
-msgid "Preferences"
-msgstr "偏好設定"
-
-#: src/dialogs/prefs.glade.h:23
-msgid "Print line _numbers every:"
-msgstr "每隔多少行列印行號(_n)："
-
-#: src/dialogs/prefs.glade.h:24
-msgid "Printing"
-msgstr "列印中"
-
-#: src/dialogs/prefs.glade.h:25
-msgid "Right"
-msgstr ""
-
-#: src/dialogs/prefs.glade.h:26
-msgid "S_how statusbar"
-msgstr "顯示狀態欄(_h)"
-
-#: src/dialogs/prefs.glade.h:27
-msgid "Set limit on _undo levels to:"
-msgstr "復原的最多次數設為："
-
-#: src/dialogs/prefs.glade.h:28
-msgid "Set toolbar according to _system settings"
-msgstr "依據系統設定設置工具列(_s)"
-
-#: src/dialogs/prefs.glade.h:29
-msgid "Set toolbar to _icons only"
-msgstr "將工具列設定成只有圖示(_i)"
-
-#: src/dialogs/prefs.glade.h:30
-msgid "Set toolbar to icons with _text"
-msgstr "將工具列設定成圖示與文字並存(_t)"
-
-#: src/dialogs/prefs.glade.h:31
-msgid "Tab _width: "
-msgstr "Tab 寬度(_w)："
-
-#: src/dialogs/prefs.glade.h:32
+#: src/gedit2.c:57
 #, fuzzy
-msgid "Top"
-msgstr "收件人："
+msgid "Show mdi debugging messages."
+msgstr "顯示觀看的偵錯訊息。"
 
-#: src/dialogs/prefs.glade.h:33
-msgid "Toplevel"
+#: src/gedit2.c:60
+msgid "Show commands debugging messages."
+msgstr "顯示指令的偵錯訊息。"
+
+#: src/gedit2.c:63
+msgid "Show document debugging messages."
+msgstr "顯示文件的偵錯訊息。"
+
+#: src/gedit2.c:66
+msgid "Show file debugging messages."
+msgstr "顯示檔案的偵錯訊息。"
+
+#: src/gedit2.c:69
+msgid "Show plugin debugging messages."
+msgstr "顯示 plugin 的偵錯訊息。"
+
+#: src/gedit2.c:72
+msgid "Show prefs debugging messages."
+msgstr "顯示偏好的偵錯訊息。"
+
+#: src/gedit2.c:75
+msgid "Show printing debugging messages."
+msgstr "顯示列印的偵錯訊息。"
+
+#: src/gedit2.c:78
+msgid "Show search debugging messages."
+msgstr "顯示搜尋的偵錯訊息。"
+
+#: src/gedit2.c:81
+msgid "Show undo debugging messages."
+msgstr "顯示回復的偵錯訊息。"
+
+#: src/gedit2.c:84
+msgid "Show view debugging messages."
+msgstr "顯示觀看的偵錯訊息。"
+
+#: src/gedit2.c:87
+msgid "Show recent debugging messages."
+msgstr "顯示最近的偵錯訊息。"
+
+#: src/gedit2.c:90
+msgid "Turn on all debugging messages."
+msgstr "顯示所有的偵錯訊息。"
+
+#: src/gedit2.c:145
+msgid "The gnome text editor"
 msgstr ""
 
-#: src/dialogs/prefs.glade.h:34 src/menus.c:276
-msgid "Undo"
-msgstr "復原"
+#: src/gedit-commands.c:55
+msgid "Not yet implemented."
+msgstr ""
 
-#: src/dialogs/prefs.glade.h:35
-msgid "_Background: "
-msgstr "背景(_B)："
-
-#: src/dialogs/prefs.glade.h:36
-msgid "_Default font: "
-msgstr "預設字型(_D)："
-
-#: src/dialogs/prefs.glade.h:37
-msgid "_Foreground: "
-msgstr "前景(_F)："
-
-#: src/dialogs/prefs.glade.h:38
-msgid "_Landscape"
-msgstr "橫向(_L)"
-
-#: src/dialogs/prefs.glade.h:39
-msgid "_Mode: "
-msgstr "模式(_M)："
-
-#: src/dialogs/prefs.glade.h:40
-msgid "_Portrait"
-msgstr "縱向(_P)"
-
-#: src/dialogs/prefs.glade.h:41
-msgid "_level(s)"
-msgstr "次數(_l)"
-
-#: src/dialogs/prefs.glade.h:42
-msgid "l_ine(s)"
-msgstr "行(_i)"
-
-#: src/dialogs/program.glade.h:1
-msgid "_Location to search for:"
-msgstr "搜尋的位置(_L)："
-
-#: src/dialogs/program.glade.h:2
-msgid "gedit: Browse for program location..."
-msgstr "gedit：瀏覽程式的位置…"
-
-#: src/dialogs/program.glade.h:3
-msgid "gedit: Set program location..."
-msgstr "gedit：設定程式位置…"
-
-#: src/dialogs/program.glade.h:4
-msgid "label"
-msgstr "標籤"
-
-#: src/dialogs/replace.glade.h:1
-msgid "Case _sensitive"
-msgstr "大小寫敏感(_s)"
-
-#: src/dialogs/replace.glade.h:2
-msgid "Find Next"
-msgstr "繼續搜尋"
-
-#: src/dialogs/replace.glade.h:4
-msgid "Replace All"
-msgstr "全部取代"
-
-#: src/dialogs/replace.glade.h:5
-msgid "Search from the _beginning of the document"
-msgstr "由文件的開頭開始搜尋"
-
-#: src/dialogs/replace.glade.h:6
-msgid "Search from the _cursor position"
-msgstr "由游標所在的位置開始搜尋(_c)"
-
-#: src/dialogs/replace.glade.h:7
-msgid "_Replace with: "
-msgstr "取代為(_R)："
-
-#: src/dialogs/replace.glade.h:8
-msgid "_Search for: "
-msgstr "搜尋目標(_S)："
-
-#: src/dialogs/uri.glade.h:1
-msgid "Enter the location (URI) of the file you would like to open:"
-msgstr "輸入要開啟的檔案位置或 URI："
-
-#: src/dialogs/uri.glade.h:2 src/menus.c:259
-msgid "Open"
-msgstr "開啟"
-
-#: src/dialogs/uri.glade.h:3
-msgid "Open from URI"
-msgstr "由 URI 開啟"
-
-#: src/document.c:267 src/document.c:271
-msgid "RO - "
-msgstr "唯讀 - "
-
-#: src/document.c:295
+#: src/gedit-document.c:448 src/gedit-document.c:459
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/document.c:295 src/document.c:299
+#: src/gedit-document.c:448 src/gedit-document.c:459
 msgid "Untitled"
 msgstr "未命名"
 
-#: src/document.c:299
-#, c-format
-msgid "%s %d*"
-msgstr "%s %d*"
+#: src/gedit-document.c:511 src/gedit-document.c:610
+#, fuzzy
+msgid "Invalid UTF-8 data encountered reading file"
+msgstr ""
+"讀取以下檔案時發生錯誤：\n"
+"\n"
+"%s"
 
-#: src/document.c:477
+#: src/gedit-document.c:860
+#, fuzzy
+msgid "It is not possible to revert an Untitled document"
+msgstr "您不能回復未命名的文件\n"
+
+#: src/gedit-file.c:227 src/gedit-file.c:238
+#, c-format
+msgid "Loaded file %s"
+msgstr "載入檔案 %s"
+
+#: src/gedit-file.c:248
+#, c-format
+msgid "Loaded %i files"
+msgstr "載入了 %i 個檔案"
+
+#: src/gedit-file.c:324
+msgid "Open File ..."
+msgstr "開啟檔案…"
+
+#: src/gedit-file.c:367 src/gedit-file.c:411
 #, fuzzy, c-format
-msgid "``%s'' has been modified.  Do you want to save the changes?"
-msgstr "`%s' 已經被修改。是否要儲存？"
-
-#: src/document.c:679 src/document.c:687
-msgid "(modified)"
-msgstr "(已變更)"
-
-#: src/document.c:681 src/document.c:689
-msgid "(readonly)"
-msgstr "(唯讀)"
-
-#: src/document.c:740 src/document.c:780
-msgid "This file does not end with a valid extension\n"
-msgstr "這個檔案沒有有效的延伸檔名\n"
-
-#: src/document.c:788
-#, c-format
-msgid "The file %s was not found."
-msgstr "找不到檔案 %s。"
-
-#: src/file.c:226
-#, c-format
 msgid ""
-"An error was encountered while opening the file \"%s\".\n"
-"Please make sure the file exists."
-msgstr ""
-"開啟檔案 \"%s\" 時發生錯誤.\n"
-"請確定檔案存在。"
-
-#: src/file.c:245
-#, c-format
-msgid ""
-"An error was encountered while opening the file \"%s\".\n"
-"Could not allocate the required memory."
-msgstr ""
-"開啟檔案 \"%s\" 時發生錯誤.\n"
-"無法配置所需的記憶體。"
-
-#: src/file.c:257
-#, c-format
-msgid ""
-"An error was encountered while reading the file: \n"
+"An error occurred while opening the file \"%s\".\n"
 "\n"
-"%s\n"
-"\n"
-"Make sure that you have permissions for opening the file. "
-msgstr ""
-"讀取以下檔案時發生錯誤：\n"
-"\n"
-"%s\n"
-"\n"
-"請確定您有權限開啟這個檔案。"
-
-#: src/file.c:277
-#, c-format
-msgid ""
-"An error was encountered while reading the file: \n"
-"\n"
-"%s"
+"%s."
 msgstr ""
 "讀取以下檔案時發生錯誤：\n"
 "\n"
 "%s"
 
-#: src/file.c:298
-#, c-format
-msgid ""
-"Internal error reading the file: \n"
-"\n"
-"%s\n"
-"\n"
-"Please, report this error to submit@bugs.gnome.org."
-msgstr ""
-"讀取檔案時出現內部錯誤：\n"
-"\n"
-"%s\n"
-"\n"
-"請回報這個問題給 submit@bugs.gnome.org。"
+#: src/gedit-file.c:479 src/gedit-file.c:676
+#, fuzzy, c-format
+msgid "Saving file '%s' ..."
+msgstr "另存新檔…"
 
-#: src/file.c:314
-#, c-format
+#: src/gedit-file.c:494 src/gedit-file.c:690 src/gedit-file.c:822
+msgid "Unknow error"
+msgstr ""
+
+#: src/gedit-file.c:501 src/gedit-file.c:697
+#, fuzzy, c-format
 msgid ""
-"An error was encountered while closing the file: \n"
+"An error occurred while saving the file \"%s\".\n"
 "\n"
-"%s"
+"%s."
 msgstr ""
 "關閉以下檔案時發生錯誤：\n"
 "\n"
 "%s"
 
-#: src/file.c:477
+#: src/gedit-file.c:525 src/gedit-file.c:716
+#, fuzzy
+msgid "The document has not been saved."
+msgstr "文件尚未儲存。"
+
+#: src/gedit-file.c:535 src/gedit-file.c:723
+#, c-format
+msgid "File '%s' saved."
+msgstr ""
+
+#: src/gedit-file.c:602
 msgid "Save As..."
 msgstr "另存新檔…"
 
-#: src/file.c:547
-msgid "The document contains no data."
-msgstr "文件沒有資料。"
-
-#: src/file.c:558
+#: src/gedit-file.c:653
 #, c-format
 msgid ""
-"gedit was unable to save the file: \n"
-"\n"
-" %s \n"
-"\n"
-"Make sure that the path you provided exists,and that you have the "
-"appropriate write permissions."
+"A file named ``%s'' already exists in this location. Do you want to replace "
+"it with the one you are saving?"
 msgstr ""
-"gedit 無法儲存檔案：\n"
-"\n"
-" %s \n"
-"\n"
-"請確定您提供的路徑存在，而且您有正確寫入權限。"
 
-#: src/file.c:572
+#: src/gedit-file.c:658
+#, fuzzy
+msgid "_Replace"
+msgstr "取代"
+
+#: src/gedit-file.c:808
 #, c-format
-msgid ""
-"gedit was unable to save the file:\n"
-"\n"
-" %s \n"
-"\n"
-"Because of an unknown reason (1). Please report this Problem to submit@bugs."
-"gnome.org"
+msgid "Reverting file '%s' ..."
 msgstr ""
-"gedit 無法儲存檔案：\n"
-"\n"
-" %s \n"
-"\n"
-"原因未知 (1)。請回報這個問題給 submit@bugs.gnome.org"
 
-#: src/file.c:590
-#, c-format
-msgid ""
-"gedit was unable to save the file:\n"
-"\n"
-" %s \n"
-"\n"
-"Because of an unknown reason (2). Please report this Problem to submit@bugs."
-"gnome.org"
-msgstr ""
-"gedit 無法儲存檔案：\n"
-"\n"
-" %s \n"
-"\n"
-"原因未知 (2)。請回報這個問題給 submit@bugs.gnome.org"
-
-#: src/file.c:692
-msgid "Could not allocate the required memory."
-msgstr "無法配置需要的記憶體"
-
-#: src/file.c:712
-msgid "Error in the pipe."
-msgstr "管線發生錯誤。"
-
-#: src/file.c:837
-#, c-format
-msgid "Loaded %i files"
-msgstr "載入了 %i 個檔案"
-
-#: src/file.c:903
-msgid "Open File ..."
-msgstr "開啟檔案…"
-
-#: src/file.c:1036
-#, c-format
-msgid "``%s'' is about to be overwritten. Do you want to continue ?"
-msgstr "`%s' 將要被覆寫。您是否要繼續？"
-
-#: src/file.c:1048
-msgid "Document has not been saved."
-msgstr "文件尚未儲存。"
-
-#: src/file.c:1058
-msgid "Error saving file!"
-msgstr "儲存檔案錯誤！"
-
-#: src/file.c:1187
-msgid "You can't revert an Untitled document\n"
-msgstr "您不能回復未命名的文件\n"
-
-#: src/file.c:1200
+#: src/gedit-file.c:829
 #, fuzzy, c-format
 msgid ""
-"Are you sure you want to revert all changes?\n"
-"(%s)"
+"An error occurred while reverting the file \"%s\".\n"
+"\n"
+"%s."
 msgstr ""
-"您是否確定要恢復全部的變更？\n"
-"(%s)"
+"讀取以下檔案時發生錯誤：\n"
+"\n"
+"%s"
 
-#: src/file.c:1231
+#: src/gedit-file.c:853
+#, fuzzy
+msgid "The document has not been reverted."
+msgstr "文件尚未儲存。"
+
+#: src/gedit-file.c:863
 #, c-format
-msgid "The file ``%s'' does not exist.  Would you like to create it?"
-msgstr "檔案 `%s' 不存在。您是否要建立它？"
+msgid "File '%s' reverted."
+msgstr ""
 
-#: src/gedit.c:47
-msgid "Show window debugging messages."
-msgstr "顯示視窗的偵錯訊息。"
+#: src/gedit-file.c:1008
+#, fuzzy, c-format
+msgid ""
+"An error occurred while reading data from stdin.\n"
+"\n"
+"%s."
+msgstr ""
+"讀取以下檔案時發生錯誤：\n"
+"\n"
+"%s"
 
-#: src/gedit.c:50
-msgid "Show commands debugging messages."
-msgstr "顯示指令的偵錯訊息。"
+#: src/gedit-mdi.c:484
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document ``%s''? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
 
-#: src/gedit.c:53
-msgid "Show document debugging messages."
-msgstr "顯示文件的偵錯訊息。"
+#: src/gedit-mdi.c:489
+msgid "_Don't save"
+msgstr ""
 
-#: src/gedit.c:56
-msgid "Show file debugging messages."
-msgstr "顯示檔案的偵錯訊息。"
+#: src/gedit-mdi.c:569
+msgid "(modified)"
+msgstr "(已變更)"
 
-#: src/gedit.c:59
-msgid "Show plugin debugging messages."
-msgstr "顯示 plugin 的偵錯訊息。"
+#: src/gedit-mdi.c:575
+msgid "(readonly)"
+msgstr "(唯讀)"
 
-#: src/gedit.c:62
-msgid "Show prefs debugging messages."
-msgstr "顯示偏好的偵錯訊息。"
-
-#: src/gedit.c:65
-msgid "Show printing debugging messages."
-msgstr "顯示列印的偵錯訊息。"
-
-#: src/gedit.c:68
-msgid "Show search debugging messages."
-msgstr "顯示搜尋的偵錯訊息。"
-
-#: src/gedit.c:71
-msgid "Show undo debugging messages."
-msgstr "顯示回復的偵錯訊息。"
-
-#: src/gedit.c:74
-msgid "Show view debugging messages."
-msgstr "顯示觀看的偵錯訊息。"
-
-#: src/gedit.c:77
-msgid "Show recent debugging messages."
-msgstr "顯示最近的偵錯訊息。"
-
-#: src/gedit.c:80
-msgid "Turn on all debugging messages."
-msgstr "顯示所有的偵錯訊息。"
-
-#: src/gedit.c:159
-msgid "Cannot initialize gnome-vfs."
-msgstr "無法初始化 gnome-vfs。"
-
-#: src/menus.c:54
-msgid "Open (swap) .c/.h file"
-msgstr "開啟（切換）.c/.h 檔案"
-
-#: src/menus.c:62
-msgid "_New"
-msgstr "新建(_N)"
-
-#: src/menus.c:63 src/menus.c:255
-msgid "Create a new document"
-msgstr "建立一個新的文件"
-
-#: src/menus.c:68
-msgid "Sav_e All"
-msgstr "全部儲存(_e)"
-
-#: src/menus.c:69
-msgid "Save All Open Files"
-msgstr "儲存所有開啟的檔案"
-
-#: src/menus.c:74
-msgid "_Revert"
-msgstr "復原(_R)"
-
-#: src/menus.c:83
-msgid "Open from _URI..."
-msgstr "由 URI 開啟(_U)…"
-
-#: src/menus.c:84
-msgid "Open a file from a specified URI"
-msgstr "由指定的 URI 開啟檔案"
-
-#: src/menus.c:98
-msgid "Print pre_view"
-msgstr "預覽列印(_v)"
-
-#: src/menus.c:98
-msgid "Print preview"
-msgstr "預覽列印"
-
-#: src/menus.c:102
-msgid "Print pre_view..."
-msgstr "預覽列印(_v)…"
-
-#: src/menus.c:103
-msgid "Preview data to be printed"
-msgstr "預覽要列印的資料"
-
-#: src/menus.c:110
-msgid "C_lose All"
-msgstr "關閉所有文件(_l)"
-
-#: src/menus.c:111
-msgid "Close All Open Files"
-msgstr "關閉所有開啟的檔案"
-
-#: src/menus.c:150
-msgid "Goto _Line..."
-msgstr "跳到行數(_L)…"
-
-#: src/menus.c:151
-msgid "Go to a specific line number"
-msgstr "跳到指定的行號"
-
-#: src/menus.c:173
-msgid "_Add View"
-msgstr "增加檢視(_A)"
-
-#: src/menus.c:174
-msgid "Add a new view of the document"
-msgstr "新增文件的檢視"
-
-#: src/menus.c:176
-msgid "_Remove View"
-msgstr "移除檢視(_R)"
-
-#: src/menus.c:177
-msgid "Remove view of the document"
-msgstr "移除文件的檢視"
-
-#: src/menus.c:220
-msgid "Se_arch"
-msgstr "搜尋目標(_a)"
-
-#: src/menus.c:229 src/plugin.c:90 src/plugin.c:402 src/window.c:499
-#: src/window.c:676
-msgid "_Plugins"
-msgstr "Plugin(_P)"
-
-#: src/menus.c:241
-msgid "_Documents"
-msgstr "文件(_D)"
-
-#: src/menus.c:255
-msgid "New"
-msgstr "新建"
-
-#: src/menus.c:259
-msgid "Open a file"
+#: src/gedit-recent.c:269
+#, fuzzy, c-format
+msgid "Open file %s"
 msgstr "開啟檔案"
 
-#: src/menus.c:263
-msgid "Save"
-msgstr "儲存"
-
-#: src/menus.c:263
-msgid "Save the current file"
-msgstr "儲存現在的檔案"
-
-#: src/menus.c:267
-msgid "Close"
-msgstr "關閉"
-
-#: src/menus.c:267
-msgid "Close the current file"
-msgstr "關閉現在的檔案"
-
-#: src/menus.c:271
-msgid "Print"
-msgstr "列印"
-
-#: src/menus.c:271
-msgid "Print the current file"
-msgstr "列印現在的檔案"
-
-#: src/menus.c:276
-msgid "Undo last operation"
-msgstr "復原最近一個動作"
-
-#: src/menus.c:280
-msgid "Redo"
-msgstr "取消復原"
-
-#: src/menus.c:280
-msgid "Redo last operation"
-msgstr "重新執行上一個動作"
-
-#: src/menus.c:285
-msgid "Cut"
-msgstr "剪下"
-
-#: src/menus.c:285
-msgid "Cut the selection"
-msgstr "剪下所圈選的範圍"
-
-#: src/menus.c:289
-msgid "Copy"
-msgstr "拷貝"
-
-#: src/menus.c:289
-msgid "Copy the selection"
-msgstr "拷貝所圈選的範圍"
-
-#: src/menus.c:293
-msgid "Paste"
-msgstr "貼上"
-
-#: src/menus.c:293
-msgid "Paste the clipboard"
-msgstr "貼上剪貼簿內容"
-
-#: src/menus.c:298
-msgid "Search for a string"
-msgstr "尋找一個字串"
-
-#: src/menus.c:303
-msgid "Exit"
-msgstr "離開"
-
-#: src/menus.c:303
-msgid "Exit the program"
-msgstr "離開本程式"
-
-#: src/plugin.c:107
-msgid "_Manager ..."
-msgstr "管理程式(_M)…"
-
-#: src/plugin.c:108
-msgid "Manage available plugin modules"
-msgstr "管理可用的 plugin 模組"
-
-#: src/plugin.c:195
-#, c-format
-msgid ""
-"The program %s could not be found.\n"
-"\n"
-msgstr ""
-"找不到程式 %s。\n"
-"\n"
-
-#: src/plugin.c:211
-#, c-format
-msgid ""
-"'%s' doesn't seem to exist.\n"
-"\n"
-msgstr ""
-"'%s' 似乎不存在。\n"
-"\n"
-
-#: src/plugin.c:213
-#, c-format
-msgid ""
-"'%s' seems to be a directory.\n"
-"but '%s' could not be found inside it.\n"
-"\n"
-msgstr ""
-"'%s' 似乎是一個目錄。\n"
-"但其中找不到 '%s'。\n"
-
-#: src/plugin.c:216
-#, c-format
-msgid ""
-"'%s' doesn't seem to be a program.\n"
-"\n"
-msgstr ""
-"'%s' 似乎不是一個程式。\n"
-"\n"
-
-#: src/plugin.c:220
-#, c-format
-msgid ""
-"%sYou won't be able to use the %s plugin without %s. \n"
-" Do you want to specify a new location for %s?"
-msgstr ""
-"%s 您不能使用 %s plugin 而沒有 %s。\n"
-"您是否要指定 %s 的新位置？"
-
-#: src/plugin.c:322
-#, c-format
-msgid "Error, unable to open module file, %s"
-msgstr "發生錯誤，無法開啟模組檔案，%s"
-
-#: src/plugin.c:332
-msgid "Error, plugin does not contain init_plugin function."
-msgstr "發生錯誤，plugin 沒有包含 init_plugin 函數。"
-
-#: src/plugin.c:345
-msgid "Error, init_plugin returned an error"
-msgstr "發生錯誤，init_plugin 回報了錯誤"
-
-#: src/plugin.c:392
-msgid "Error, plugin is still in use"
-msgstr "發生錯誤，plugin 仍在使用中"
-
-#: src/prefs.c:42
-msgid "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
-msgstr ""
-
-#: src/print.c:230
-msgid "Print Document"
-msgstr "列印文件"
-
-#: src/print.c:238
-msgid "Pages"
-msgstr "頁"
-
-#: src/print.c:286
-msgid "gedit: Print Preview\n"
-msgstr "gedit：預覽列印\n"
-
-#: src/print-doc.c:505
-#, c-format
-msgid "Page: %i/%i"
-msgstr "頁: %i/%i"
-
-#: src/print-util.c:222 src/print-util.c:237
-#, c-format
-msgid ""
-"gedit could not find the font \"%s\".\n"
-"gedit is unable to print without this font installed."
-msgstr ""
-"gedit 找不到字型 \"%s\"。\n"
-"gedit 無法在沒有安裝這個字型時列印。"
-
-#: src/print-util.c:278
-msgid "Printing .."
-msgstr "列印中 .."
-
-#: src/print-util.c:289
-msgid "Printing ..."
-msgstr "列印中 ..."
-
-#. xgettext translators: Use the name of the stock
-#. * Menu item for "File"	if it is not the same, we are going to
-#. * fail to insert the recent menu items.
-#: src/recent.c:549
-msgid "_File/"
-msgstr "檔案(_F)/"
-
-#. xgettext translators: Use the name of the stock Menu item for "File"
-#. if it is not the same, we are going to fail to insert the recent menu items.
-#: src/recent.c:558
-msgid "_File"
-msgstr "檔案(_F)"
-
-#: src/recent.c:580
+#: src/gedit-recent.c:337
 #, c-format
 msgid "Unable to open recent file: %s"
 msgstr "無法開啟最近開啟的檔案：%s"
 
-#: src/search.c:393
-msgid ""
-"Can't count lines if another search operation is active, please close the "
-"search dialog."
-msgstr "無法在有另一個搜尋操作運作時計算行數，請關閉搜尋對話窗。"
+#, fuzzy
+#~ msgid "Insert char"
+#~ msgstr "插入時間"
 
-#: src/search.c:410
-#, c-format
-msgid ""
-"Filename: %s\n"
-"\n"
-"Total Characters: %i\n"
-"Total Words: %i\n"
-"Total Lines: %i\n"
-"Total Paragraphs: %i\n"
-"Total Bytes: %i\n"
-"\n"
-"Current Line: %i\n"
-"Current Column: %i"
-msgstr ""
-"檔名: %s\n"
-"\n"
-"總字元數: %i\n"
-"總字數: %i\n"
-"總行數: %i\n"
-"總段落數: %i\n"
-"總位元組: %i\n"
-"\n"
-"目前行數: %i\n"
-"目前列數: %i"
+# plugins/browse/browse.c:246
+#~ msgid "Browse"
+#~ msgstr "瀏覽"
 
-#: src/view.c:949
-msgid "You can't remove the last view of a document."
-msgstr "您不能移除文件最後一個檢視。"
+#~ msgid "Web browse plugin"
+#~ msgstr "網頁瀏覽 Plugin"
+
+#~ msgid " _Change... "
+#~ msgstr "改變(_C)…"
+
+#~ msgid "Enter the _URL to browse for:"
+#~ msgstr "輸入要瀏覽的 URL(_U)："
+
+#~ msgid "Lynx found at: "
+#~ msgstr "Lynx 在："
+
+#~ msgid "gedit: Web Browse plugin"
+#~ msgstr "gedit：網頁瀏覽 Plugin"
+
+#~ msgid "location"
+#~ msgstr "位址"
+
+#~ msgid "Convert"
+#~ msgstr "轉換"
+
+#~ msgid "Number Converter"
+#~ msgstr "數字轉換器"
+
+#~ msgid " Decimal to _Hex "
+#~ msgstr "十進位到十六進位(_H)"
+
+#~ msgid " Decimal to _Octal "
+#~ msgstr "十進位到八進位(_O)"
+
+#~ msgid " Hex to Decima_l "
+#~ msgstr "十六進位到十進位(_l)"
+
+#~ msgid "_Converted value:"
+#~ msgstr "轉換了的數值(_C)："
+
+#~ msgid "_Value to be converted:"
+#~ msgstr "要轉換的數值(_V)："
+
+#~ msgid "gedit: Number Converter plugin"
+#~ msgstr "gedit：數字轉換器 plugin"
+
+#~ msgid "diff"
+#~ msgstr "檔案差異"
+
+#~ msgid "The two documents you selected are the same."
+#~ msgstr "選擇的二個文件是相同的。"
+
+#~ msgid ""
+#~ "The \"first\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr ""
+#~ "選擇的「第一件」文件不存在。\n"
+#~ "\n"
+#~ "請提供一個正確的檔案。"
+
+#~ msgid ""
+#~ "The \"second\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr ""
+#~ "選擇的「第二件」文件不存在。\n"
+#~ "\n"
+#~ "請提供一個正確的檔案。"
+
+#~ msgid "The \"first\" document contains no text."
+#~ msgstr "「第一件」文件沒有文字"
+
+#~ msgid "The \"second\" document contains no text."
+#~ msgstr "「第二件」文件沒有文字"
+
+#~ msgid ""
+#~ "gedit could not create a temp file.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "gedit 無法建立暫存檔案。\n"
+#~ "\n"
+
+#~ msgid "Untitled %i"
+#~ msgstr "未命名 %i"
+
+#~ msgid "Diff"
+#~ msgstr "檔案差異"
+
+#~ msgid "Makes a diff file from two documents or files"
+#~ msgstr "從二個文件或檔案找尋差異"
+
+#~ msgid ""
+#~ "Makes a diff file from two documents or files on disk\n"
+#~ "For more info on diff, type \"man diff\" in a shell prompt\n"
+#~ msgstr ""
+#~ "從二個文件或檔案找尋差異\n"
+#~ "若想要更多資訊，在命令殼提示輸入\"man diff\"\n"
+
+#~ msgid "Choose the files to compare"
+#~ msgstr "選擇要比較的檔案"
+
+#~ msgid "Diff found at: "
+#~ msgstr "檔案差異在："
+
+#~ msgid "First"
+#~ msgstr "第一個"
+
+#~ msgid "From a file on disk"
+#~ msgstr "從磁碟上的檔案"
+
+#~ msgid "From document"
+#~ msgstr "從文件"
+
+#~ msgid "Second"
+#~ msgstr "第二個"
+
+#~ msgid "Select the \"first\" file..."
+#~ msgstr "選擇「第一個」檔案…"
+
+#~ msgid "Select the \"second\" file..."
+#~ msgstr "選擇「第二個」檔案…"
+
+#~ msgid "Use the _unified output format (-u option)"
+#~ msgstr "使用統一的輸出格式（-u 選項）(_u)"
+
+#~ msgid "gedit: Diff plugin"
+#~ msgstr "gedit：檔案差異 Plugin"
+
+#, fuzzy
+#~ msgid "Document info"
+#~ msgstr "文件"
+
+#, fuzzy
+#~ msgid "Get info on current document."
+#~ msgstr "郵寄目前的文件"
+
+#, fuzzy
+#~ msgid "File Name"
+#~ msgstr "檔案名稱："
+
+#, fuzzy
+#~ msgid "Lines"
+#~ msgstr "行(_i)"
+
+#, fuzzy
+#~ msgid "gedit: Document Info plugin"
+#~ msgstr "gedit：檔案差異 Plugin"
+
+#~ msgid "email"
+#~ msgstr "電子郵件"
+
+#~ msgid "Executing command: %s"
+#~ msgstr "執行指令：%s"
+
+#~ msgid "Email"
+#~ msgstr "電子郵件"
+
+#~ msgid "Email the current document"
+#~ msgstr "郵寄目前的文件"
+
+#~ msgid ""
+#~ "Email the current document to a specified email address\n"
+#~ "gedit searches for sendmail to use this plugin."
+#~ msgstr ""
+#~ "郵寄目前的文件到指定的電子郵件位址\n"
+#~ "gedit 會搜尋 sendmail 以使用這個 plugin。"
+
+#~ msgid "Change..."
+#~ msgstr "改變…"
+
+#~ msgid "F_rom:"
+#~ msgstr "發信人(_r)："
+
+#~ msgid "File to use as body of message: "
+#~ msgstr "用以當作訊息主體的檔案："
+
+#~ msgid "From:"
+#~ msgstr "發信人："
+
+#~ msgid "Sendmail found at:"
+#~ msgstr "Sendmail 在："
+
+#~ msgid "Subject:"
+#~ msgstr "主題："
+
+#~ msgid "To:"
+#~ msgstr "收件人："
+
+#~ msgid "_Subject:"
+#~ msgstr "主題(_S)："
+
+#~ msgid "_To:"
+#~ msgstr "收件人(_T)："
+
+#~ msgid "filename"
+#~ msgstr "檔案名稱"
+
+#~ msgid "gedit: E-mail plugin"
+#~ msgstr "gedit：電子郵件 Plugin"
+
+#~ msgid "gedit: e-mail plugin"
+#~ msgstr "gedit：電子郵件 Plugin"
+
+#~ msgid "Reverse"
+#~ msgstr "復原"
+
+#~ msgid "Reverse text"
+#~ msgstr "復原文字"
+
+#~ msgid "Hello World"
+#~ msgstr "Hello World"
+
+#~ msgid "Sample 'hello world' plugin."
+#~ msgstr "'hello world' Plugin 範例"
+
+#~ msgid ""
+#~ "The shell command entry is empty.\n"
+#~ "\n"
+#~ "Please, insert a valid shell command."
+#~ msgstr ""
+#~ "命令殼指令一欄是空的。\n"
+#~ "\n"
+#~ "請加入正確的命令殼指令。"
+
+#~ msgid "Shell Output"
+#~ msgstr "命令殼輸出"
+
+#~ msgid "Insert the shell output in the document"
+#~ msgstr "將命令殼輸出插入到檔案中"
+
+#~ msgid "Select the working directory..."
+#~ msgstr "選擇執行指令的目錄…"
+
+#~ msgid "Shell _command:"
+#~ msgstr "輸入命令殼指令(_c)："
+
+#~ msgid "Specify the working directory and the command you want to run."
+#~ msgstr "指定想執行的指令及執行時的目錄。"
+
+#~ msgid "_Working directory:"
+#~ msgstr "執行指令的目錄(_W)："
+
+#~ msgid "gedit: Shell Output plugin"
+#~ msgstr "gedit：命令殼輸出 plugin"
+
+#, fuzzy
+#~ msgid "Sort a document."
+#~ msgstr "建立一個新的文件"
+
+#, fuzzy
+#~ msgid "Sort a document or selected text."
+#~ msgstr "選擇的二個文件是相同的。"
+
+#, fuzzy
+#~ msgid "Case Sensitive"
+#~ msgstr "大小寫敏感(_s)"
+
+#, fuzzy
+#~ msgid "Sort starting at column:"
+#~ msgstr "找不到文字"
+
+#, fuzzy
+#~ msgid "gedit: Sort plugin"
+#~ msgstr "gedit：檔案差異 Plugin"
+
+#~ msgid "Insert Time"
+#~ msgstr "插入時間"
+
+#~ msgid "Inserts the current date and time"
+#~ msgstr "插入目前的日期與時間"
+
+#~ msgid "(C) 1998, 1999, 2000 Alex Roberts and Evan Lawrence"
+#~ msgstr "(C) 1998, 1999, 2000 Alex Roberts 和 Evan Lawrence"
+
+#~ msgid "gedit is a small and lightweight text editor for GNOME."
+#~ msgstr "gedit 是一個 GNOME 的小型輕量級的文字編輯器"
+
+#~ msgid "To use the %s plugin, you need to specify a location for \"%s\"."
+#~ msgstr "要使用 %s plugin，您需要指定 \"%s\" 的位置。"
+
+#~ msgid "gedit: Preferences"
+#~ msgstr "gedit：偏好設定"
+
+#~ msgid "Find"
+#~ msgstr "搜尋"
+
+#~ msgid "Search string not found"
+#~ msgstr "找不到文字"
+
+#~ msgid "Found and replaced %i occurrences."
+#~ msgstr "找到並取代了 %i 個字串。"
+
+#~ msgid "Could not allocate the memory for the Replace all request."
+#~ msgstr "無法配置記憶體給「全部取代」這個動作。"
+
+#~ msgid "Goto Line"
+#~ msgstr "跳到某行"
+
+#~ msgid "Line number:"
+#~ msgstr "行號："
+
+#~ msgid "Author(s):"
+#~ msgstr "作者："
+
+#~ msgid "De_scription"
+#~ msgstr "描述(_s)"
+
+#~ msgid "De_tails"
+#~ msgstr "詳細資料(_t)"
+
+#~ msgid "File name:"
+#~ msgstr "檔案名稱："
+
+#~ msgid "Plugins manager..."
+#~ msgstr "Plugin 管理程式…"
+
+#~ msgid "Select the plugins to activate:"
+#~ msgstr "選擇要啟用的 plugin："
+
+#~ msgid "_Deactivate all"
+#~ msgstr "全部不啟用(_D)"
+
+#~ msgid "Add _header"
+#~ msgstr "增加標頭(_h)"
+
+#~ msgid "Appearance"
+#~ msgstr "外觀"
+
+#~ msgid "Colors"
+#~ msgstr "顏色"
+
+#, fuzzy
+#~ msgid "Default"
+#~ msgstr "預設字型(_D)："
+
+#~ msgid "Documents"
+#~ msgstr "文件"
+
+#~ msgid "Editor Behavior"
+#~ msgstr "編輯器特性"
+
+#~ msgid "Enable _Auto-indent"
+#~ msgstr "啟用自動縮排(_A)"
+
+#~ msgid "Enable word _wrapping"
+#~ msgstr "啟用自動換行(_w)"
+
+#~ msgid "Fonts"
+#~ msgstr "字型"
+
+#~ msgid "Fonts/Colors"
+#~ msgstr "字型/顏色"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "MDI (Multiple Document Interface)"
+#~ msgstr "MDI（多重文件介面）"
+
+#~ msgid "Notebook _tab position: "
+#~ msgstr "筆記本標籤位置(_t)："
+
+#~ msgid "Orientation"
+#~ msgstr "方向"
+
+#~ msgid "Paper"
+#~ msgstr "紙張大小"
+
+#~ msgid "Pick a Font"
+#~ msgstr "選擇字型"
+
+#~ msgid "Pick a color"
+#~ msgstr "選擇顏色"
+
+#~ msgid "Preferences"
+#~ msgstr "偏好設定"
+
+#~ msgid "Print line _numbers every:"
+#~ msgstr "每隔多少行列印行號(_n)："
+
+#~ msgid "Printing"
+#~ msgstr "列印中"
+
+#~ msgid "S_how statusbar"
+#~ msgstr "顯示狀態欄(_h)"
+
+#~ msgid "Set limit on _undo levels to:"
+#~ msgstr "復原的最多次數設為："
+
+#~ msgid "Set toolbar according to _system settings"
+#~ msgstr "依據系統設定設置工具列(_s)"
+
+#~ msgid "Set toolbar to _icons only"
+#~ msgstr "將工具列設定成只有圖示(_i)"
+
+#~ msgid "Set toolbar to icons with _text"
+#~ msgstr "將工具列設定成圖示與文字並存(_t)"
+
+#~ msgid "Tab _width: "
+#~ msgstr "Tab 寬度(_w)："
+
+#, fuzzy
+#~ msgid "Top"
+#~ msgstr "收件人："
+
+#~ msgid "Undo"
+#~ msgstr "復原"
+
+#~ msgid "_Background: "
+#~ msgstr "背景(_B)："
+
+#~ msgid "_Default font: "
+#~ msgstr "預設字型(_D)："
+
+#~ msgid "_Foreground: "
+#~ msgstr "前景(_F)："
+
+#~ msgid "_Landscape"
+#~ msgstr "橫向(_L)"
+
+#~ msgid "_Mode: "
+#~ msgstr "模式(_M)："
+
+#~ msgid "_Portrait"
+#~ msgstr "縱向(_P)"
+
+#~ msgid "_level(s)"
+#~ msgstr "次數(_l)"
+
+#~ msgid "l_ine(s)"
+#~ msgstr "行(_i)"
+
+#~ msgid "_Location to search for:"
+#~ msgstr "搜尋的位置(_L)："
+
+#~ msgid "gedit: Browse for program location..."
+#~ msgstr "gedit：瀏覽程式的位置…"
+
+#~ msgid "gedit: Set program location..."
+#~ msgstr "gedit：設定程式位置…"
+
+#~ msgid "label"
+#~ msgstr "標籤"
+
+#~ msgid "Case _sensitive"
+#~ msgstr "大小寫敏感(_s)"
+
+#~ msgid "Find Next"
+#~ msgstr "繼續搜尋"
+
+#~ msgid "Replace All"
+#~ msgstr "全部取代"
+
+#~ msgid "Search from the _beginning of the document"
+#~ msgstr "由文件的開頭開始搜尋"
+
+#~ msgid "Search from the _cursor position"
+#~ msgstr "由游標所在的位置開始搜尋(_c)"
+
+#~ msgid "_Replace with: "
+#~ msgstr "取代為(_R)："
+
+#~ msgid "_Search for: "
+#~ msgstr "搜尋目標(_S)："
+
+#~ msgid "Enter the location (URI) of the file you would like to open:"
+#~ msgstr "輸入要開啟的檔案位置或 URI："
+
+#~ msgid "Open"
+#~ msgstr "開啟"
+
+#~ msgid "Open from URI"
+#~ msgstr "由 URI 開啟"
+
+#~ msgid "RO - "
+#~ msgstr "唯讀 - "
+
+#~ msgid "%s %d*"
+#~ msgstr "%s %d*"
+
+#, fuzzy
+#~ msgid "``%s'' has been modified.  Do you want to save the changes?"
+#~ msgstr "`%s' 已經被修改。是否要儲存？"
+
+#~ msgid "This file does not end with a valid extension\n"
+#~ msgstr "這個檔案沒有有效的延伸檔名\n"
+
+#~ msgid "The file %s was not found."
+#~ msgstr "找不到檔案 %s。"
+
+#~ msgid ""
+#~ "An error was encountered while opening the file \"%s\".\n"
+#~ "Please make sure the file exists."
+#~ msgstr ""
+#~ "開啟檔案 \"%s\" 時發生錯誤.\n"
+#~ "請確定檔案存在。"
+
+#~ msgid ""
+#~ "An error was encountered while opening the file \"%s\".\n"
+#~ "Could not allocate the required memory."
+#~ msgstr ""
+#~ "開啟檔案 \"%s\" 時發生錯誤.\n"
+#~ "無法配置所需的記憶體。"
+
+#~ msgid ""
+#~ "An error was encountered while reading the file: \n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Make sure that you have permissions for opening the file. "
+#~ msgstr ""
+#~ "讀取以下檔案時發生錯誤：\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "請確定您有權限開啟這個檔案。"
+
+#~ msgid ""
+#~ "Internal error reading the file: \n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "Please, report this error to submit@bugs.gnome.org."
+#~ msgstr ""
+#~ "讀取檔案時出現內部錯誤：\n"
+#~ "\n"
+#~ "%s\n"
+#~ "\n"
+#~ "請回報這個問題給 submit@bugs.gnome.org。"
+
+#~ msgid "The document contains no data."
+#~ msgstr "文件沒有資料。"
+
+#~ msgid ""
+#~ "gedit was unable to save the file: \n"
+#~ "\n"
+#~ " %s \n"
+#~ "\n"
+#~ "Make sure that the path you provided exists,and that you have the "
+#~ "appropriate write permissions."
+#~ msgstr ""
+#~ "gedit 無法儲存檔案：\n"
+#~ "\n"
+#~ " %s \n"
+#~ "\n"
+#~ "請確定您提供的路徑存在，而且您有正確寫入權限。"
+
+#~ msgid ""
+#~ "gedit was unable to save the file:\n"
+#~ "\n"
+#~ " %s \n"
+#~ "\n"
+#~ "Because of an unknown reason (1). Please report this Problem to "
+#~ "submit@bugs.gnome.org"
+#~ msgstr ""
+#~ "gedit 無法儲存檔案：\n"
+#~ "\n"
+#~ " %s \n"
+#~ "\n"
+#~ "原因未知 (1)。請回報這個問題給 submit@bugs.gnome.org"
+
+#~ msgid ""
+#~ "gedit was unable to save the file:\n"
+#~ "\n"
+#~ " %s \n"
+#~ "\n"
+#~ "Because of an unknown reason (2). Please report this Problem to "
+#~ "submit@bugs.gnome.org"
+#~ msgstr ""
+#~ "gedit 無法儲存檔案：\n"
+#~ "\n"
+#~ " %s \n"
+#~ "\n"
+#~ "原因未知 (2)。請回報這個問題給 submit@bugs.gnome.org"
+
+#~ msgid "Could not allocate the required memory."
+#~ msgstr "無法配置需要的記憶體"
+
+#~ msgid "Error in the pipe."
+#~ msgstr "管線發生錯誤。"
+
+#~ msgid "``%s'' is about to be overwritten. Do you want to continue ?"
+#~ msgstr "`%s' 將要被覆寫。您是否要繼續？"
+
+#~ msgid "Error saving file!"
+#~ msgstr "儲存檔案錯誤！"
+
+#, fuzzy
+#~ msgid ""
+#~ "Are you sure you want to revert all changes?\n"
+#~ "(%s)"
+#~ msgstr ""
+#~ "您是否確定要恢復全部的變更？\n"
+#~ "(%s)"
+
+#~ msgid "The file ``%s'' does not exist.  Would you like to create it?"
+#~ msgstr "檔案 `%s' 不存在。您是否要建立它？"
+
+#~ msgid "Show window debugging messages."
+#~ msgstr "顯示視窗的偵錯訊息。"
+
+#~ msgid "Cannot initialize gnome-vfs."
+#~ msgstr "無法初始化 gnome-vfs。"
+
+#~ msgid "Open (swap) .c/.h file"
+#~ msgstr "開啟（切換）.c/.h 檔案"
+
+#~ msgid "_New"
+#~ msgstr "新建(_N)"
+
+#~ msgid "Create a new document"
+#~ msgstr "建立一個新的文件"
+
+#~ msgid "Sav_e All"
+#~ msgstr "全部儲存(_e)"
+
+#~ msgid "Save All Open Files"
+#~ msgstr "儲存所有開啟的檔案"
+
+#~ msgid "_Revert"
+#~ msgstr "復原(_R)"
+
+#~ msgid "Open from _URI..."
+#~ msgstr "由 URI 開啟(_U)…"
+
+#~ msgid "Open a file from a specified URI"
+#~ msgstr "由指定的 URI 開啟檔案"
+
+#~ msgid "Print pre_view"
+#~ msgstr "預覽列印(_v)"
+
+#~ msgid "Print preview"
+#~ msgstr "預覽列印"
+
+#~ msgid "Print pre_view..."
+#~ msgstr "預覽列印(_v)…"
+
+#~ msgid "Preview data to be printed"
+#~ msgstr "預覽要列印的資料"
+
+#~ msgid "C_lose All"
+#~ msgstr "關閉所有文件(_l)"
+
+#~ msgid "Close All Open Files"
+#~ msgstr "關閉所有開啟的檔案"
+
+#~ msgid "Goto _Line..."
+#~ msgstr "跳到行數(_L)…"
+
+#~ msgid "Go to a specific line number"
+#~ msgstr "跳到指定的行號"
+
+#~ msgid "_Add View"
+#~ msgstr "增加檢視(_A)"
+
+#~ msgid "Add a new view of the document"
+#~ msgstr "新增文件的檢視"
+
+#~ msgid "_Remove View"
+#~ msgstr "移除檢視(_R)"
+
+#~ msgid "Remove view of the document"
+#~ msgstr "移除文件的檢視"
+
+#~ msgid "Se_arch"
+#~ msgstr "搜尋目標(_a)"
+
+#~ msgid "_Plugins"
+#~ msgstr "Plugin(_P)"
+
+#~ msgid "_Documents"
+#~ msgstr "文件(_D)"
+
+#~ msgid "New"
+#~ msgstr "新建"
+
+#~ msgid "Save"
+#~ msgstr "儲存"
+
+#~ msgid "Save the current file"
+#~ msgstr "儲存現在的檔案"
+
+#~ msgid "Close"
+#~ msgstr "關閉"
+
+#~ msgid "Close the current file"
+#~ msgstr "關閉現在的檔案"
+
+#~ msgid "Print"
+#~ msgstr "列印"
+
+#~ msgid "Print the current file"
+#~ msgstr "列印現在的檔案"
+
+#~ msgid "Undo last operation"
+#~ msgstr "復原最近一個動作"
+
+#~ msgid "Redo"
+#~ msgstr "取消復原"
+
+#~ msgid "Redo last operation"
+#~ msgstr "重新執行上一個動作"
+
+#~ msgid "Cut"
+#~ msgstr "剪下"
+
+#~ msgid "Cut the selection"
+#~ msgstr "剪下所圈選的範圍"
+
+#~ msgid "Copy"
+#~ msgstr "拷貝"
+
+#~ msgid "Copy the selection"
+#~ msgstr "拷貝所圈選的範圍"
+
+#~ msgid "Paste"
+#~ msgstr "貼上"
+
+#~ msgid "Paste the clipboard"
+#~ msgstr "貼上剪貼簿內容"
+
+#~ msgid "Search for a string"
+#~ msgstr "尋找一個字串"
+
+#~ msgid "Exit"
+#~ msgstr "離開"
+
+#~ msgid "Exit the program"
+#~ msgstr "離開本程式"
+
+#~ msgid "_Manager ..."
+#~ msgstr "管理程式(_M)…"
+
+#~ msgid "Manage available plugin modules"
+#~ msgstr "管理可用的 plugin 模組"
+
+#~ msgid ""
+#~ "The program %s could not be found.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "找不到程式 %s。\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "'%s' doesn't seem to exist.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "'%s' 似乎不存在。\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "'%s' seems to be a directory.\n"
+#~ "but '%s' could not be found inside it.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "'%s' 似乎是一個目錄。\n"
+#~ "但其中找不到 '%s'。\n"
+
+#~ msgid ""
+#~ "'%s' doesn't seem to be a program.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "'%s' 似乎不是一個程式。\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "%sYou won't be able to use the %s plugin without %s. \n"
+#~ " Do you want to specify a new location for %s?"
+#~ msgstr ""
+#~ "%s 您不能使用 %s plugin 而沒有 %s。\n"
+#~ "您是否要指定 %s 的新位置？"
+
+#~ msgid "Error, unable to open module file, %s"
+#~ msgstr "發生錯誤，無法開啟模組檔案，%s"
+
+#~ msgid "Error, plugin does not contain init_plugin function."
+#~ msgstr "發生錯誤，plugin 沒有包含 init_plugin 函數。"
+
+#~ msgid "Error, init_plugin returned an error"
+#~ msgstr "發生錯誤，init_plugin 回報了錯誤"
+
+#~ msgid "Error, plugin is still in use"
+#~ msgstr "發生錯誤，plugin 仍在使用中"
+
+#~ msgid "Print Document"
+#~ msgstr "列印文件"
+
+#~ msgid "Pages"
+#~ msgstr "頁"
+
+#~ msgid "gedit: Print Preview\n"
+#~ msgstr "gedit：預覽列印\n"
+
+#~ msgid "Page: %i/%i"
+#~ msgstr "頁: %i/%i"
+
+#~ msgid ""
+#~ "gedit could not find the font \"%s\".\n"
+#~ "gedit is unable to print without this font installed."
+#~ msgstr ""
+#~ "gedit 找不到字型 \"%s\"。\n"
+#~ "gedit 無法在沒有安裝這個字型時列印。"
+
+#~ msgid "Printing .."
+#~ msgstr "列印中 .."
+
+#~ msgid "Printing ..."
+#~ msgstr "列印中 ..."
+
+#~ msgid "_File/"
+#~ msgstr "檔案(_F)/"
+
+#~ msgid "_File"
+#~ msgstr "檔案(_F)"
+
+#~ msgid ""
+#~ "Can't count lines if another search operation is active, please close the "
+#~ "search dialog."
+#~ msgstr "無法在有另一個搜尋操作運作時計算行數，請關閉搜尋對話窗。"
+
+#~ msgid ""
+#~ "Filename: %s\n"
+#~ "\n"
+#~ "Total Characters: %i\n"
+#~ "Total Words: %i\n"
+#~ "Total Lines: %i\n"
+#~ "Total Paragraphs: %i\n"
+#~ "Total Bytes: %i\n"
+#~ "\n"
+#~ "Current Line: %i\n"
+#~ "Current Column: %i"
+#~ msgstr ""
+#~ "檔名: %s\n"
+#~ "\n"
+#~ "總字元數: %i\n"
+#~ "總字數: %i\n"
+#~ "總行數: %i\n"
+#~ "總段落數: %i\n"
+#~ "總位元組: %i\n"
+#~ "\n"
+#~ "目前行數: %i\n"
+#~ "目前列數: %i"
+
+#~ msgid "You can't remove the last view of a document."
+#~ msgstr "您不能移除文件最後一個檢視。"
 
 #~ msgid "label12"
 #~ msgstr "標籤 12"

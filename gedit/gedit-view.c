@@ -105,6 +105,7 @@ gedit_view_class_init (GeditViewClass *klass)
 static void 
 gedit_view_init (GeditView  *view)
 {
+	GtkTextView *text_view;
 	GtkWidget *sw; /* the scrolled window */
 	GdkColor background, text;
 
@@ -125,9 +126,14 @@ gedit_view_init (GeditView  *view)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
-	
-	view->priv->text_view = GTK_TEXT_VIEW (gtk_text_view_new ());
-	g_return_if_fail (view->priv->text_view != NULL);
+
+	text_view = GTK_TEXT_VIEW (gtk_text_view_new ());
+	g_return_if_fail (text_view != NULL);
+	view->priv->text_view = text_view;
+	g_print ("Setting cursor visible");
+	g_object_set (G_OBJECT (text_view), "cursor_visible", TRUE, NULL);
+	g_object_set (G_OBJECT (text_view), "editable", TRUE, NULL);
+	g_print ("DONE:Setting cursor visible\n");	
 
 	/*
 	 *  Set tab, fonts, wrap mode, colors, etc. according
@@ -230,8 +236,8 @@ gedit_view_new (GeditDocument *doc)
 	g_object_ref (view->priv->document);
 
 	gtk_text_view_scroll_to_mark (view->priv->text_view,
-				gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "insert"),
-				0, TRUE, 0.0, 1.0);
+				      gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc), "insert"),
+				      0, TRUE, 0.0, 1.0);
 
 	gedit_debug (DEBUG_VIEW, "END");
 

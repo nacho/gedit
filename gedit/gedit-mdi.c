@@ -163,7 +163,8 @@ gedit_mdi_init (GeditMDI  *mdi)
 	gedit_debug (DEBUG_MDI, "END");
 }
 
-static void gedit_mdi_finalize	(GObject *object)
+static void
+gedit_mdi_finalize (GObject *object)
 {
 	GeditMDI *mdi;
 

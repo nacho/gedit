@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.7.1\n"
-"POT-Creation-Date: 2001-11-24 17:00+0100\n"
+"POT-Creation-Date: 2001-12-05 01:33-0600\n"
 "PO-Revision-Date: 2000-06-08 23:34+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -21,9 +21,15 @@ msgstr "Urejevalnik besedil GNOME"
 msgid "gedit"
 msgstr "gedit"
 
-#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1909
+#: src/bonobo-mdi.c:478 src/bonobo-mdi.c:554 src/bonobo-mdi.c:1902
+#, c-format
 msgid "Activate %s"
 msgstr "Aktiviraj %s"
+
+#: src/dialogs/gedit-dialog-replace.c:386 src/gedit-commands.c:332
+#, fuzzy
+msgid "The searched string has not been found."
+msgstr "Iskano besedilo ni bilo najdeno."
 
 #: src/gedit2.c:57
 msgid "Show mdi debugging messages."
@@ -77,21 +83,24 @@ msgstr "Vklopi prikazovanje vseh sporoèil za razhro¹èevanje."
 msgid "The gnome text editor"
 msgstr "Urejevalnik besedil GNOME"
 
-#: src/gedit-document.c:443 src/gedit-document.c:454
+#: src/gedit-commands.c:55
+msgid "Not yet implemented."
+msgstr ""
+
+#: src/gedit-document.c:448 src/gedit-document.c:459
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:443 src/gedit-document.c:454
+#: src/gedit-document.c:448 src/gedit-document.c:459
 msgid "Untitled"
 msgstr "Neimenovan"
 
-#: src/gedit-document.c:506 src/gedit-document.c:605
+#: src/gedit-document.c:511 src/gedit-document.c:610
 msgid "Invalid UTF-8 data encountered reading file"
-msgstr ""
-"Ob branju iz datoteke sem naletel na neveljavne podatke UTF-8"
+msgstr "Ob branju iz datoteke sem naletel na neveljavne podatke UTF-8"
 
-#: src/gedit-document.c:855
+#: src/gedit-document.c:860
 msgid "It is not possible to revert an Untitled document"
 msgstr "Ne morete razveljaviti neimenovanega dokumenta"
 
@@ -110,6 +119,7 @@ msgid "Open File ..."
 msgstr "Odpri datoteko ..."
 
 #: src/gedit-file.c:367 src/gedit-file.c:411
+#, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
 "\n"
@@ -120,6 +130,7 @@ msgstr ""
 "%s."
 
 #: src/gedit-file.c:479 src/gedit-file.c:676
+#, c-format
 msgid "Saving file '%s' ..."
 msgstr "Shranjujem datoteko '%s' ..."
 
@@ -128,6 +139,7 @@ msgid "Unknow error"
 msgstr "Neznana napaka"
 
 #: src/gedit-file.c:501 src/gedit-file.c:697
+#, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
 "\n"
@@ -160,7 +172,8 @@ msgstr ""
 "to, ki jo shranjujete?"
 
 #: src/gedit-file.c:658
-msgid "Replace"
+#, fuzzy
+msgid "_Replace"
 msgstr "Zamenjaj"
 
 #: src/gedit-file.c:808
@@ -169,6 +182,7 @@ msgid "Reverting file '%s' ..."
 msgstr "Povraèam datoteko '%s' ..."
 
 #: src/gedit-file.c:829
+#, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
 "\n"
@@ -188,6 +202,7 @@ msgid "File '%s' reverted."
 msgstr "Datoteka '%s' je bila povrnjena."
 
 #: src/gedit-file.c:1008
+#, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
 "\n"
@@ -197,7 +212,7 @@ msgstr ""
 "\n"
 "%s."
 
-#: src/gedit-mdi.c:456
+#: src/gedit-mdi.c:484
 #, c-format
 msgid ""
 "Do you want to save the changes you made to the document ``%s''? \n"
@@ -208,19 +223,20 @@ msgstr ""
 "\n"
 "V kolikor jih ne shranite, bodo va¹e spremembe izgubljene."
 
-#: src/gedit-mdi.c:461
+#: src/gedit-mdi.c:489
 msgid "_Don't save"
 msgstr "_Ne shrani"
 
-#: src/gedit-mdi.c:541
+#: src/gedit-mdi.c:569
 msgid "(modified)"
 msgstr "(spremenjena)"
 
-#: src/gedit-mdi.c:547
+#: src/gedit-mdi.c:575
 msgid "(readonly)"
 msgstr "(le berljiva)"
 
 #: src/gedit-recent.c:269
+#, c-format
 msgid "Open file %s"
 msgstr "Odpri datoteko %s"
 
@@ -483,9 +499,6 @@ msgstr "Ne morem odpreti nedavne datoteke: %s"
 
 #~ msgid "Search string not found"
 #~ msgstr "Iskano besedilo ni bilo najdeno"
-
-#~ msgid "Search string not found."
-#~ msgstr "Iskano besedilo ni bilo najdeno."
 
 #~ msgid "Found and replaced %i occurrences."
 #~ msgstr "Na¹el in zamenjal %i pojavitev."
