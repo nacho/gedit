@@ -627,6 +627,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="snap_to_ticks">no</property>
                             <property name="visible">yes</property>
                             <property name="adjustment">8 1 24 1 4 8</property>
+                            <accessibility>
+                             <atkrelation target="label98" type="labelled-by"/>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -718,6 +721,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>
                         <property name="use_underline">yes</property>
+                        <accessibility>
+                         <atkrelation target="undo_levels_spinbutton" type="controller-for"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -736,6 +742,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="snap_to_ticks">no</property>
                         <property name="visible">yes</property>
                         <property name="adjustment">25 1 250 1 10 10</property>
+                        <accessibility>
+                         <atkrelation target="undo_checkbutton" type="controlled-by"/>
+                         <atkrelation target="undo_levels_label" type="labelled-by"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -753,6 +763,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="xpad">0</property>
                         <property name="ypad">0</property>
                         <property name="visible">yes</property>
+                        <accessibility>
+                         <atkrelation target="undo_levels_spinbutton" type="label-for"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -827,6 +840,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
                             <property name="use_underline">yes</property>
+                            <accessibility>
+                             <atkrelation target="font_label" type="controller-for"/>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -850,6 +866,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="ypad">0</property>
                                 <property name="visible">yes</property>
                                 <property name="use_underline">yes</property>
+                                <accessibility>
+                                 <atkrelation target="default_font_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="padding">0</property>
@@ -893,6 +912,16 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
                             <property name="use_underline">yes</property>
+                            <accessibility>
+                              <atkrelation target="text_colorpicker" type="controller-for"/>
+                              <atkrelation target="background_colorpicker" type="controller-for"/>
+                              <atkrelation target="sel_text_colorpicker" type="controller-for"/>
+                              <atkrelation target="selection_colorpicker" type="controller-for"/>
+                              <atkrelation target="label24" type="controller-for"/>
+                              <atkrelation target="label25" type="controller-for"/>
+                              <atkrelation target="label26" type="controller-for"/>
+                              <atkrelation target="label27" type="controller-for"/>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -920,6 +949,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="mnemonic_widget">text_colorpicker</property>
                                 <property name="visible">yes</property>
                                 <property name="use_underline">yes</property>
+                                <accessibility>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -944,6 +976,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="mnemonic_widget">background_colorpicker</property>
                                 <property name="visible">yes</property>
                                 <property name="use_underline">yes</property>
+                                <accessibility>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -957,7 +992,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="label24">
+                              <widget class="GtkLabel" id="label26">
                                 <property name="label" translatable="yes">S_elected text color:</property>
                                 <property name="justify">GTK_JUSTIFY_CENTER</property>
                                 <property name="wrap">no</property>
@@ -968,6 +1003,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="mnemonic_widget">sel_text_colorpicker</property>
                                 <property name="visible">yes</property>
                                 <property name="use_underline">yes</property>
+                                <accessibility>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -981,7 +1019,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                               </packing>
                             </child>
                             <child>
-                              <widget class="GtkLabel" id="label25">
+                              <widget class="GtkLabel" id="label27">
                                 <property name="label" translatable="yes">Se_lection color:</property>
                                 <property name="justify">GTK_JUSTIFY_CENTER</property>
                                 <property name="wrap">no</property>
@@ -992,6 +1030,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="mnemonic_widget">selection_colorpicker</property>
                                 <property name="visible">yes</property>
                                 <property name="use_underline">yes</property>
+                                <accessibility>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">0</property>
@@ -1011,6 +1052,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="use_alpha">no</property>
                                 <property name="title" translatable="yes">Pick the background color</property>
                                 <property name="visible">yes</property>
+                                <accessibility>
+                                 <atkrelation target="label25" type="labelled-by"/>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1030,6 +1075,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="use_alpha">no</property>
                                 <property name="title" translatable="yes">Pick the text color</property>
                                 <property name="visible">yes</property>
+                                <accessibility>
+                                 <atkrelation target="label24" type="labelled-by"/>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1049,6 +1098,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="use_alpha">no</property>
                                 <property name="title" translatable="yes">Pick the selected text color</property>
                                 <property name="visible">yes</property>
+                                <accessibility>
+                                 <atkrelation target="label26" type="labelled-by"/>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1068,6 +1121,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                 <property name="use_alpha">no</property>
                                 <property name="title" translatable="yes">Pick the selection color</property>
                                 <property name="visible">yes</property>
+                                <accessibility>
+                                 <atkrelation target="label27" type="labelled-by"/>
+                                 <atkrelation target="default_colors_checkbutton" type="controlled-by"/>
+                                </accessibility>
                               </widget>
                               <packing>
                                 <property name="left_attach">1</property>
@@ -1218,6 +1275,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>
                         <property name="use_underline">yes</property>
+                        <accessibility>
+                         <atkrelation target="auto_save_spinbutton" type="controller-for"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -1236,6 +1296,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="snap_to_ticks">no</property>
                         <property name="visible">yes</property>
                         <property name="adjustment">8 1 100 1 10 10</property>
+                        <accessibility>
+                         <atkrelation target="auto_save_checkbutton" type="controlled-by"/>
+                         <atkrelation target="label97" type="labelled-by"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -1253,6 +1317,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="xpad">0</property>
                         <property name="ypad">0</property>
                         <property name="visible">yes</property>
+                        <accessibility>
+                         <atkrelation target="auto_save_spinbutton" type="label-for"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -1553,6 +1620,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="draw_indicator">yes</property>
                         <property name="visible">yes</property>
                         <property name="use_underline">yes</property>
+                        <accessibility>
+                         <atkrelation target="line_numbers_spinbutton" type="controller-for"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -1571,6 +1641,10 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="snap_to_ticks">no</property>
                         <property name="visible">yes</property>
                         <property name="adjustment">1 1 500 1 10 10</property>
+                        <accessibility>
+                         <atkrelation target="line_numbers_spinbutton" type="controlled-by"/>
+                         <atkrelation target="label97" type="labelled-by"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>
@@ -1588,6 +1662,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                         <property name="xpad">0</property>
                         <property name="ypad">0</property>
                         <property name="visible">yes</property>
+                        <accessibility>
+                         <atkrelation target="line_numbers_spinbutton" type="label-for"/>
+                        </accessibility>
                       </widget>
                       <packing>
                         <property name="padding">0</property>

@@ -35,6 +35,7 @@
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkdialog.h>
 #include <gtk/gtktextiter.h>
+#include <atk/atk.h>
 
 #define GTK_TEXT_SEARCH_CASE_INSENSITIVE (1 << 7)
 
@@ -74,6 +75,10 @@ void gedit_utils_error_reporting_reverting_file (const gchar *uri,
 
 gboolean g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2);
 
+void gedit_utils_set_atk_name_description (GtkWidget *widget, const gchar *name,
+						const gchar *description);
+void gedit_utils_set_atk_relation (GtkWidget *obj1, GtkWidget *obj2,
+						AtkRelationType rel_type);
 #endif /* __GEDIT_UTILS_H__ */
 
 

@@ -44,6 +44,7 @@
 #include <gedit-debug.h>
 #include <gedit2.h>
 #include <gedit-document.h>
+#include <gedit-utils.h>
 
 enum
 {
@@ -152,6 +153,15 @@ void taglist_window_show ()
 
 	/* Create tree view */
 	tag_list_window->tags_list = gtk_tree_view_new ();
+
+	gedit_utils_set_atk_name_description (tag_list_window->tag_groups_combo, 
+							_("Tag Groups Combo"), NULL);
+	gedit_utils_set_atk_name_description (tag_list_window->tags_list, 
+							_("Tags Name List"), NULL);
+	gedit_utils_set_atk_relation (tag_list_window->tag_groups_combo, tag_list_window->tags_list, 
+							ATK_RELATION_CONTROLLER_FOR);
+	gedit_utils_set_atk_relation (tag_list_window->tags_list, tag_list_window->tag_groups_combo, 
+							ATK_RELATION_CONTROLLED_BY);
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tag_list_window->tags_list), TRUE);
 
 	gtk_tooltips_set_tip (gtk_tooltips_new (),

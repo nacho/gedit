@@ -1278,3 +1278,61 @@ gedit_utils_error_reporting_reverting_file (
 	g_free (error_message);
 }
 
+/*
+ * gedit_utils_set_atk_name_description
+ * @widget : The Gtk widget for which name/description to be set
+ * @name : Atk name string
+ * @description : Atk description string
+ * Description : This function sets up name and description
+ * for a specified gtk widget.
+ */
+
+void
+gedit_utils_set_atk_name_description (	GtkWidget *widget, 
+					const gchar *name,
+					const gchar *description)
+{
+	AtkObject *aobj;
+
+	aobj = gtk_widget_get_accessible (widget);
+
+	if (!(GTK_IS_ACCESSIBLE (aobj)))
+		return;
+
+	if(name)
+		atk_object_set_name (aobj, name);
+
+	if(description)
+		atk_object_set_description (aobj, description);
+}
+/*
+ * gedit_set_atk__relation
+ * @obj1,@obj2 : specified widgets.
+ * @rel_type : the type of relation to set up.
+ * Description : This function establishes atk relation
+ * between 2 specified widgets.
+ */
+void
+gedit_utils_set_atk_relation (	GtkWidget *obj1, 
+				GtkWidget *obj2, 
+				AtkRelationType rel_type )
+{
+	AtkObject *atk_obj1, *atk_obj2;
+	AtkRelationSet *relation_set;
+	AtkObject *targets[1];
+	AtkRelation *relation;
+
+	atk_obj1 = gtk_widget_get_accessible (obj1);
+	atk_obj2 = gtk_widget_get_accessible (obj2);
+
+	if (!(GTK_IS_ACCESSIBLE (atk_obj1)) || !(GTK_IS_ACCESSIBLE (atk_obj2)))
+		return;
+
+	relation_set = atk_object_ref_relation_set (atk_obj1);
+	targets[0] = atk_obj2;
+
+	relation = atk_relation_new (targets, 1, rel_type);
+	atk_relation_set_add (relation_set, relation);
+
+	g_object_unref (G_OBJECT (relation));
+}

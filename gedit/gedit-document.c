@@ -1483,7 +1483,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 
           	found = gedit_text_iter_forward_search (&iter, str, search_flags,
                                         	&match_start, &match_end,
-                                               	NULL);
+                                               	NULL);	
 		if (found)
 		{
 			gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc),

@@ -103,7 +103,9 @@
                     <property name="label_xalign">0</property>
                     <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                     <property name="visible">yes</property>
-
+                    <accessibility>
+                     <atkrelation target="label3" type="labelled-by"/>
+                    </accessibility>
                     <child>
                       <widget class="GtkVBox" id="vbox6">
                         <property name="border_width">8</property>
@@ -119,6 +121,9 @@
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
                             <property name="use_underline">yes</property>
+                            <accessibility>
+                             <atkrelation target="frame3" type="member-of"/>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -134,6 +139,9 @@
                             <property name="height-request">23</property>
                             <property name="history">0</property>
                             <property name="visible">yes</property>
+                            <accessibility>
+                             <atkrelation target="frame3" type="member-of"/>
+                            </accessibility>
 
                             <child internal-child="menu">
                               <widget class="GtkMenu" id="convertwidget1">
@@ -157,6 +165,9 @@
                             <property name="visible">yes</property>
                             <property name="group">from_document_1</property>
                             <property name="use_underline">yes</property>
+                            <accessibility>
+                             <atkrelation target="frame3" type="member-of"/>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -171,6 +182,9 @@
                             <property name="directory_entry">no</property>
                             <property name="browse_dialog_title">Select the &quot;first&quot; file...</property>
                             <property name="visible">yes</property>
+                            <accessibility>
+                             <atkrelation target="frame3" type="member-of"/>
+                            </accessibility>
 
                             <child internal-child="entry">
                               <widget class="GtkEntry" id="file_selector_combo_1">
@@ -205,6 +219,9 @@
                     <property name="label_xalign">0</property>
                     <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                     <property name="visible">yes</property>
+                    <accessibility>
+                     <atkrelation target="label3" type="labelled-by"/>
+                    </accessibility>
 
                     <child>
                       <widget class="GtkVBox" id="vbox7">
@@ -221,6 +238,9 @@
                             <property name="draw_indicator">yes</property>
                             <property name="visible">yes</property>
                             <property name="use_underline">yes</property>
+                            <accessibility>
+                             <atkrelation target="frame2" type="member-of"/>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -236,6 +256,9 @@
                             <property name="height-request">23</property>
                             <property name="history">0</property>
                             <property name="visible">yes</property>
+                            <accessibility>
+                             <atkrelation target="frame2" type="member-of"/>
+                            </accessibility>
 
                             <child internal-child="menu">
                               <widget class="GtkMenu" id="convertwidget2">
@@ -259,6 +282,9 @@
                             <property name="visible">yes</property>
                             <property name="group">from_document_2</property>
                             <property name="use_underline">yes</property>
+                            <accessibility>
+                             <atkrelation target="frame2" type="member-of"/>
+                            </accessibility>
                           </widget>
                           <packing>
                             <property name="padding">0</property>
@@ -273,6 +299,9 @@
                             <property name="directory_entry">no</property>
                             <property name="browse_dialog_title">Select the &quot;second&quot; file...</property>
                             <property name="visible">yes</property>
+                            <accessibility>
+                               <atkrelation target="frame2" type="member-of"/>
+                            </accessibility>
 
                             <child internal-child="entry">
                               <widget class="GtkEntry" id="file_selector_combo_2">

@@ -30,6 +30,8 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 
+#include <config.h>
+
 #include <glade/glade-xml.h>
 
 #include "bonobo-mdi.h"
@@ -37,6 +39,7 @@
 #include "gedit-debug.h"
 #include "gedit-prefs.h"
 #include "gedit-view.h"
+#include "gedit-utils.h"
 #include "gedit2.h"
 
 #include "gnome-print-font-picker.h"
@@ -231,14 +234,14 @@ static CategoriesTreeItem user_interface [] =
 
 static CategoriesTreeItem editor_behavior [] =
 {
-	{_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
+	{N_("Font & Colors"), NULL, FONT_COLORS_SETTINGS},
 
-	{_("Tabs"), NULL, TABS_SETTINGS},
-	{_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
-	{_("Line numbers"), NULL , LINE_NUMBERS_SETTINGS},
+	{N_("Tabs"), NULL, TABS_SETTINGS},
+	{N_("Wrap mode"), NULL, WRAP_MODE_SETTINGS},
+	{N_("Line numbers"), NULL , LINE_NUMBERS_SETTINGS},
 	
- 	{_("Save"), NULL, SAVE_SETTINGS },
-	{_("Undo"), NULL, UNDO_SETTINGS},
+ 	{N_("Save"), NULL, SAVE_SETTINGS },
+	{N_("Undo"), NULL, UNDO_SETTINGS},
 
 
 	{ NULL }
@@ -246,17 +249,17 @@ static CategoriesTreeItem editor_behavior [] =
 
 static CategoriesTreeItem print [] =
 {
-	{_("Page"), NULL, PRINT_SETTINGS},
+	{N_("Page"), NULL, PRINT_SETTINGS},
 
-	{_("Fonts"), NULL, PRINT_FONTS_SETTINGS},
+	{N_("Fonts"), NULL, PRINT_FONTS_SETTINGS},
 
 	{ NULL }
 };
 
 static CategoriesTreeItem toplevel [] =
 {
-	{_("Editor"), editor_behavior, LOGO},
-	{_("Print"), print, LOGO},
+	{N_("Editor"), editor_behavior, LOGO},
+	{N_("Print"), print, LOGO},
 #if 0
 	{_("User interface"), user_interface, LOGO},
 #endif
@@ -422,7 +425,7 @@ gedit_preferences_dialog_create_categories_tree_model ()
 		gtk_tree_store_append (model, &iter, NULL);
 		
 		gtk_tree_store_set (model, &iter,
-			  CATEGORY_COLUMN, category->category,
+			  CATEGORY_COLUMN, gettext (category->category),
 			  PAGE_NUM_COLUMN, category->notebook_page,
 			  -1);
 		
@@ -434,7 +437,7 @@ gedit_preferences_dialog_create_categories_tree_model ()
 	  		gtk_tree_store_append (model, &child_iter, &iter);
 	  
 			gtk_tree_store_set (model, &child_iter,
-				CATEGORY_COLUMN, sub_category->category,
+				CATEGORY_COLUMN, gettext (sub_category->category),
 				PAGE_NUM_COLUMN, sub_category->notebook_page,
 			      -1);
 			      
@@ -897,8 +900,24 @@ gedit_preferences_dialog_setup_font_and_colors_page (GeditPreferencesDialog *dlg
 
 	g_return_val_if_fail (font_label, FALSE);
 
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->fontpicker, 
+			_("Push this button to select the font to be used by the editor"), NULL);
+
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->text_colorpicker, 
+			_("Push this button to configure text color"), NULL);
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->background_colorpicker, 
+			_("Push this button to configure background color"), NULL);
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->sel_text_colorpicker, 
+			_("Push this button to configure color in which selected text should appear"), NULL);
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->selection_colorpicker, 
+			_("Push this button to configure color in which selected text should be marked"), NULL);
+
 	gtk_label_set_mnemonic_widget (GTK_LABEL (font_label), dlg->priv->fontpicker);
-	
+	gedit_utils_set_atk_relation (dlg->priv->fontpicker, font_label, ATK_RELATION_LABELLED_BY);
+	gedit_utils_set_atk_relation (dlg->priv->fontpicker, dlg->priv->default_font_checkbutton, 
+                                                          ATK_RELATION_CONTROLLED_BY);
+	gedit_utils_set_atk_relation (dlg->priv->default_font_checkbutton, dlg->priv->fontpicker, 
+                                                         ATK_RELATION_CONTROLLER_FOR);
 	gtk_box_pack_start (GTK_BOX (dlg->priv->font_hbox), dlg->priv->fontpicker, TRUE, TRUE, 0);
 	
 	/* setup the initial states */ 
@@ -1235,6 +1254,7 @@ gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, Gl
 			
 	/* Body font picker */
 	dlg->priv->body_fontpicker = gnome_print_font_picker_new ();
+
 	gnome_print_font_picker_set_mode (
 			GNOME_PRINT_FONT_PICKER (dlg->priv->body_fontpicker), 
 			GNOME_PRINT_FONT_PICKER_MODE_FONT_INFO);
@@ -1286,6 +1306,20 @@ gedit_preferences_dialog_setup_print_fonts_page (GeditPreferencesDialog *dlg, Gl
 
 	gtk_label_set_mnemonic_widget (GTK_LABEL (numbers_font_label), 
 				       dlg->priv->numbers_fontpicker);
+
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->body_fontpicker, 
+		_("Push this button to select the font to be used to print the body"), NULL);
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->headers_fontpicker, 
+		_("Push this button to select the font to be used to print the headers"), NULL);
+	gtk_tooltips_set_tip (gtk_tooltips_new(), dlg->priv->numbers_fontpicker, 
+		_("Push this button to select the font to be used to print line numbers"), NULL);
+
+	gedit_utils_set_atk_relation (dlg->priv->body_fontpicker, body_font_label, 
+							ATK_RELATION_LABELLED_BY);
+	gedit_utils_set_atk_relation (dlg->priv->headers_fontpicker, headers_font_label, 
+							ATK_RELATION_LABELLED_BY);
+	gedit_utils_set_atk_relation (dlg->priv->numbers_fontpicker, numbers_font_label, 
+							ATK_RELATION_LABELLED_BY);
 
 	if (gedit_settings->print_font_body)
 		gnome_print_font_picker_set_font_name (

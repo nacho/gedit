@@ -37,6 +37,8 @@
 #include <gtk/gtkbutton.h>
 #include <gtk/gtkentry.h>
 #include <gtk/gtklabel.h>
+#include "gedit2.h"
+#include "gedit-utils.h"
 
 #include <libgnome/gnome-i18n.h>
 
@@ -102,8 +104,9 @@ gfsd_modify_preview_phrase (GtkButton *button, GnomePrintFontDialog *fontseldiag
 
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 4);
 
-	label = gtk_label_new_with_mnemonic ("_Insert a new preview phrase.");
+	label = gtk_label_new_with_mnemonic (_("_Insert a new preview phrase."));
 	gtk_label_set_mnemonic_widget (GTK_LABEL (label), entry);
+	gedit_utils_set_atk_relation (entry, label, ATK_RELATION_LABELLED_BY);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	g_object_set (G_OBJECT (label), "xalign", 0.0, "yalign", 0.5, NULL);
 		
@@ -210,6 +213,11 @@ gnome_print_font_dialog_init (GnomePrintFontDialog *fontseldiag)
 
 	fontseldiag->fontsel = gnome_font_selection_new ();
 	preview_frame = gnome_print_font_dialog_create_preview_frame (fontseldiag);
+
+	gedit_utils_set_atk_relation (preview_frame, fontseldiag->fontsel, 
+							ATK_RELATION_CONTROLLED_BY);
+	gedit_utils_set_atk_relation (fontseldiag->fontsel, preview_frame, 
+							ATK_RELATION_CONTROLLER_FOR);
 				
 	gtk_box_pack_start (GTK_BOX (vbox), fontseldiag->fontsel, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), preview_frame, TRUE, TRUE, 0);
