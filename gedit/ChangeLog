@@ -1,3 +1,16 @@
+2001-02-05  Paolo Maggi  <maggi@athena.polito.it>
+
+	* file.c: new variable  save_all_flag, new enum GeditSaveAllFlagStates
+	(save_all_continue): new function
+	(gedit_file_save_as): now it saves the right file and the save as dialog is modal
+	(gedit_file_save): active a document's view before saving the document
+	(file_save_all): now it really saves all the modified files
+	(file_open_cb): now the open dialog is modal
+	(gedit_file_save_as_ok_sel): call file_save_all when needed
+
+	* dialogs/dialog-uri.c (dialog_open_uri_get_dialog): the open from uri 
+	dialog is modal
+
 2001-02-02  Paolo Maggi  <maggi@athena.polito.it>
 
 	* file.c (file_save_all_cb): only call file_save_all

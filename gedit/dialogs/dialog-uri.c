@@ -88,6 +88,7 @@ dialog_open_uri_get_dialog (void)
 	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
 			    GTK_SIGNAL_FUNC (help_button_pressed), NULL);
 
+	gtk_window_set_modal       (GTK_WINDOW (open_uri_dialog), TRUE);
 	gnome_dialog_set_default     (GNOME_DIALOG (open_uri_dialog), 0);
 	gnome_dialog_editable_enters (GNOME_DIALOG (open_uri_dialog), GTK_EDITABLE (uri));
 	gnome_dialog_close_hides     (GNOME_DIALOG (open_uri_dialog), TRUE);

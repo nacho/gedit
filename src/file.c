@@ -88,6 +88,15 @@ static gchar * message_to_translators = N_("Hello Dear Translator :\n"
 					   "cvs -z3 co -r gedit-1-0 gedit\n"
 					   "Thank you. Chema");
 
+static void  save_all_continue (GtkWidget *widget, gpointer cbdata);
+
+typedef enum {
+	SAVE_ALL_RUNNING,
+	SAVE_ALL_ENDED
+} GeditSaveAllFlagStates;
+;
+
+static gint save_all_flag = SAVE_ALL_ENDED;
 
 typedef struct {
 	GeditDocument *doc;
@@ -373,7 +382,8 @@ gedit_file_selector_key_event (GtkFileSelection *fsel, GdkEventKey *event)
 static void
 gedit_file_save_as (GeditDocument *doc)
 {
-
+	static gint ok_signal = 0;
+	
 	gedit_debug (DEBUG_FILE, "");
 
 	if (doc == NULL)
@@ -413,16 +423,35 @@ gedit_file_save_as (GeditDocument *doc)
 				    GTK_SIGNAL_FUNC(gedit_close_all_flag_clear),
 				    NULL);
 
+		/* If this save as was the result of a save all, and the user cancels the
+		   save, clear the flag */
+		gtk_signal_connect(GTK_OBJECT(save_file_selector),
+				   "delete_event",
+				   GTK_SIGNAL_FUNC(save_all_continue),
+				   NULL);
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
+				    "clicked",
+				    GTK_SIGNAL_FUNC(save_all_continue),
+				    NULL);
+
 		/*
 		g_print ("1. Doc->filename %s untitled #%i\n", doc->filename, doc->untitled_number);
 		*/
 		/* OK clicked */
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
+		ok_signal = gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
 				    "clicked",
 				    GTK_SIGNAL_FUNC (gedit_file_save_as_ok_sel),
 				    doc);
 
 	}
+
+	gtk_signal_disconnect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button), ok_signal);
+
+	/* OK clicked */
+	ok_signal = gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
+			    "clicked",
+			    GTK_SIGNAL_FUNC (gedit_file_save_as_ok_sel),
+			    doc);
 
 	if (doc->filename == NULL)
 	{
@@ -435,8 +464,11 @@ gedit_file_save_as (GeditDocument *doc)
 		gtk_file_selection_set_filename (GTK_FILE_SELECTION (save_file_selector), 
 						 doc->filename);
 	}
-		
-	gtk_window_set_title (GTK_WINDOW(save_file_selector), _("Save As..."));
+
+	gtk_window_set_transient_for (GTK_WINDOW (save_file_selector), gedit_window_active ());
+
+	gtk_window_set_modal (GTK_WINDOW (save_file_selector), TRUE);
+	gtk_window_set_title (GTK_WINDOW (save_file_selector), _("Save As..."));
 
 	if (!GTK_WIDGET_VISIBLE (save_file_selector))
 	{
@@ -475,6 +507,11 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 	{
 		if (doc->filename == NULL)
 		{
+			GtkWidget *w = GTK_WIDGET (g_list_nth_data(doc->views, 0));
+			
+			if(w != NULL)
+				gnome_mdi_set_active_view (mdi, w);
+
 			gedit_file_save_as (doc);
 			return 1;
 		}
@@ -565,24 +602,44 @@ gedit_file_save (GeditDocument *doc, const gchar *fname)
 	return 0;
 }
 
+static void 
+save_all_continue (GtkWidget *widget, gpointer cbdata)
+{
+	if (save_all_flag == SAVE_ALL_RUNNING)
+		file_save_all ();
+}
 
 void 
 file_save_all (void)
 {
-	int i;
+	static gint last_file_saved = -1;
+	gint i;
 	GeditDocument *doc;
-
-	gedit_debug (DEBUG_FILE, "");
 	
-        for (i = 0; i < g_list_length (mdi->children); i++)
+	save_all_flag = SAVE_ALL_RUNNING;
+	
+	gedit_debug (DEBUG_FILE, "");		
+	
+        for (i = last_file_saved + 1; i < g_list_length (mdi->children); i++)
 	{
 		doc = (GeditDocument *)g_list_nth_data (mdi->children, i);
 		
 		if ((!doc->readonly && doc->changed))
 		{
+			gchar* fname = doc->filename;
+			
 			gedit_file_save (doc, NULL);
+			
+			if(fname == NULL)
+			{
+				last_file_saved = i;	
+				return;
+			}
 		}
 	}
+
+	last_file_saved = -1;
+	save_all_flag = SAVE_ALL_ENDED;
 }
 
 /**
@@ -823,7 +880,10 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 		gtk_entry_set_text (GTK_ENTRY(file_selector->selection_entry), "");
 	}
 
-	gtk_window_set_title (GTK_WINDOW(open_file_selector), _("Open File ..."));
+	gtk_window_set_transient_for (GTK_WINDOW (open_file_selector), gedit_window_active ());
+
+	gtk_window_set_modal (GTK_WINDOW (open_file_selector), TRUE);
+	gtk_window_set_title (GTK_WINDOW (open_file_selector), _("Open File ..."));
 
 	if (!GTK_WIDGET_VISIBLE (open_file_selector))
 	{
@@ -1006,6 +1066,11 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 		break;
 	default:
 		g_return_if_fail (FALSE);
+	}
+
+	if(save_all_flag == SAVE_ALL_RUNNING)
+	{
+		file_save_all();
 	}
 	
 	/* We need to set the revert menu item sensitivity if we where saving
