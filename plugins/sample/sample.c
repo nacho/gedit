@@ -1,24 +1,35 @@
-/* 
- * Sample plugin demo
- * Alex Roberts <bse@error.fsnet.co.uk>
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/*
+ * gedit
+ * Copyright (C) 1999-2001 Alex Roberts, Evan Lawrence, Jason Leach & Jose M Celorio
  *
- * Prints "Hello World" into the current document
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ *
+ * AUTHORS: 
+ *   Alex Roberts <bse@error.fsnet.co.uk>
+ *
  */
- 
+
 #include <config.h>
 #include <gnome.h>
 
 #include "window.h"
 #include "document.h"
 #include "utils.h"
-
-#if 0
-  #include "../../src/view.h"
-  #include "../../src/plugin.h"
-#else
-  #include "view.h"
-  #include "plugin.h"
-#endif
+#include "view.h"
+#include "plugin.h"
 
 static void
 destroy_plugin (PluginData *pd)
@@ -27,7 +38,12 @@ destroy_plugin (PluginData *pd)
 }
 
 
-/* the function that actually does the work */
+/**
+ * insert_hello:
+ * @void: 
+ * 
+ * The function that actualy does the work.
+ **/
 static void
 insert_hello (void)
 {
