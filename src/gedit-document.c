@@ -67,8 +67,6 @@ struct _GeditDocumentPrivate
 	GeditUndoManager *undo_manager;
 };
 
-static gint current_max_untitled_num = 0;
-
 enum {
 	NAME_CHANGED,
 	SAVED,
@@ -105,6 +103,52 @@ static gboolean gedit_document_auto_save_timeout (GeditDocument *doc);
 
 static GtkTextBufferClass *parent_class 	= NULL;
 static guint document_signals[LAST_SIGNAL] 	= { 0 };
+
+static GHashTable* allocated_untitled_numbers = NULL;
+
+static gint gedit_document_get_untitled_number (void);
+static void gedit_document_release_untitled_number (gint n);
+
+static gint
+gedit_document_get_untitled_number (void)
+{
+	gint i = 1;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	if (allocated_untitled_numbers == NULL)
+		allocated_untitled_numbers = g_hash_table_new (NULL, NULL);
+
+	g_return_val_if_fail (allocated_untitled_numbers != NULL, -1);
+	
+	while (TRUE)
+	{
+		if (g_hash_table_lookup (allocated_untitled_numbers, GINT_TO_POINTER (i)) == NULL)
+		{
+			g_hash_table_insert (allocated_untitled_numbers, 
+					     GINT_TO_POINTER (i),
+					     GINT_TO_POINTER (i));
+	
+			return i;
+		}
+		
+		++i;
+	}					
+}
+
+static void
+gedit_document_release_untitled_number (gint n)
+{
+	gboolean ret;
+	
+	g_return_if_fail (allocated_untitled_numbers != NULL);
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	ret = g_hash_table_remove (allocated_untitled_numbers, GINT_TO_POINTER (n));
+	g_return_if_fail (ret);	
+}
+
 
 
 GType
@@ -283,20 +327,19 @@ gedit_document_finalize (GObject *object)
 	if (document->priv->auto_save_timeout > 0)
 		g_source_remove (document->priv->auto_save_timeout);
 
+	if (document->priv->untitled_number > 0)
+	{
+		g_return_if_fail (document->priv->uri == NULL);
+		gedit_document_release_untitled_number (
+				document->priv->untitled_number);
+	}
+
 	if (document->priv->uri)
     	{
 		g_free (document->priv->uri);
       		document->priv->uri = NULL;
-
-		if (current_max_untitled_num == document->priv->untitled_number)
-			--current_max_untitled_num;
-    	}
-	else
-	{
-		if (current_max_untitled_num == document->priv->untitled_number)
-			--current_max_untitled_num;	
-	}
-
+	}		
+	
 	if (document->priv->last_searched_text)
 		g_free (document->priv->last_searched_text);
 
@@ -328,7 +371,9 @@ gedit_document_new (void)
 	document = GEDIT_DOCUMENT (g_object_new (GEDIT_TYPE_DOCUMENT, NULL));
 
 	g_return_val_if_fail (document->priv != NULL, NULL);
-  	document->priv->untitled_number = ++current_max_untitled_num;
+  	
+	document->priv->untitled_number = gedit_document_get_untitled_number ();
+	g_return_val_if_fail (document->priv->untitled_number > 0, NULL);
 
 	return document;
 }
@@ -338,9 +383,9 @@ gedit_document_new (void)
  * @uri: the URI of the file that has to be loaded
  * @error: return location for error or NULL
  * 
- * Creates a new untitled document.
+ * Creates a new document.
  *
- * Return value: a new untitled document
+ * Return value: a new document
  **/
 GeditDocument*
 gedit_document_new_with_uri (const gchar *uri, GError **error)
@@ -762,7 +807,12 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		g_free (doc->priv->uri);
 			
 	doc->priv->uri = g_strdup (uri);
-	doc->priv->untitled_number = 0;
+
+	if (doc->priv->untitled_number > 0)
+	{
+		gedit_document_release_untitled_number (doc->priv->untitled_number);
+		doc->priv->untitled_number = 0;
+	}
 	
 	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
 }

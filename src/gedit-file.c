@@ -88,7 +88,7 @@ gedit_file_close (GtkWidget *view)
 	g_return_if_fail (child != NULL);
 
 	if (g_list_length (bonobo_mdi_child_get_views (child)) > 1)
-	{
+	{		
 		ret = bonobo_mdi_remove_view (BONOBO_MDI (gedit_mdi), view, FALSE);
 		gedit_debug (DEBUG_COMMANDS, "View removed.");
 	}
@@ -102,7 +102,10 @@ gedit_file_close (GtkWidget *view)
 		gedit_mdi_set_active_window_title (BONOBO_MDI (gedit_mdi));
 
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
+	{
 		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+		gedit_mdi_clear_active_window_statusbar (gedit_mdi);
+	}
 }
 
 void
@@ -477,7 +480,10 @@ gedit_file_close_all (void)
 	ret = bonobo_mdi_remove_all (BONOBO_MDI (gedit_mdi), FALSE);
 
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
+	{
 		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
+		gedit_mdi_clear_active_window_statusbar (gedit_mdi); 
+	}
 
 	return ret;
 }

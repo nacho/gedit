@@ -1,5 +1,18 @@
 2002-02-22  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-mdi.[ch](gedit_mdi_clear_active_window_statusbar):
+	new function
+
+	* gedit-file.c (gedit_file_close): call 
+	gedit_mdi_clear_active_window_statusbar	
+	(gedit_file_close_all): ditto
+
+	* gedit-document.c (gedit_document_get_untitled_number)
+	(gedit_document_release_untitled_number): new function
+	Now the untitled numbers are assigned in a smarter way
+
+2002-02-22  Paolo Maggi  <maggi@athena.polito.it>
+
 	* gedit-file.c (gedit_file_new): active view  grabs focus 
 	(gedit_file_open_recent): ditto
 

@@ -830,7 +830,7 @@ gedit_view_set_cursor_position_statusbar (GeditView *view, GtkWidget* status)
 	gedit_debug (DEBUG_VIEW, "");
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
-	
+			
 	view->priv->cursor_position_statusbar = status;
 
 	if ((status != NULL) && (view->priv->document != NULL))

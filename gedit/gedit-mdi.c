@@ -5,6 +5,7 @@
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2002  Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -905,6 +906,31 @@ void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 
 	status = g_object_get_data (G_OBJECT (win), "OverwriteMode");	
 	gedit_view_set_overwrite_mode_statusbar (active_view, status);
+}
+
+void 
+gedit_mdi_clear_active_window_statusbar (GeditMDI *mdi)
+{
+	gpointer status;
+	BonoboWindow *win;
+
+	win = bonobo_mdi_get_active_window (BONOBO_MDI (mdi));
+	if (win == NULL)
+		return;
+
+	status = g_object_get_data (G_OBJECT (win), "CursorPosition");	
+	g_return_if_fail (status != NULL);
+	g_return_if_fail (GTK_IS_STATUSBAR (status));
+
+	/* clear any previous message, underflow is allowed */
+	gtk_statusbar_pop (GTK_STATUSBAR (status), 0); 
+
+	status = g_object_get_data (G_OBJECT (win), "OverwriteMode");	
+	g_return_if_fail (status != NULL);
+	g_return_if_fail (GTK_IS_STATUSBAR (status));
+
+	/* clear any previous message, underflow is allowed */
+	gtk_statusbar_pop (GTK_STATUSBAR (status), 0); 
 }
 
 void 
