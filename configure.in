@@ -92,11 +92,6 @@ dnl
 AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
 gedit. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))
 
-dnl
-dnl Check ngettext
-dnl
-
-AC_CHECK_FUNCS(ngettext,, AC_MSG_ERROR([ngettext function is required to build gedit.]))
 
 dnl ================================================================
 dnl GEDIT_DATA_DIR - Sets the location of the data directory, where we install
@@ -205,4 +200,4 @@ Configuration:
 
 "
 
-dnl cat $srcdir/message-of-doom
+cat $srcdir/message-of-doom
