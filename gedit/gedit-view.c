@@ -112,8 +112,10 @@ gedit_view_grab_focus (GtkWidget *widget)
 	
 	view = GEDIT_VIEW (widget);
 
+	GTK_TEXT_VIEW (view->priv->text_view)->disable_scroll_on_focus = TRUE;
 	gtk_widget_grab_focus (GTK_WIDGET (view->priv->text_view));
-	
+	GTK_TEXT_VIEW (view->priv->text_view)->disable_scroll_on_focus = FALSE;
+
 	/* Try to have a visible cursor */
 
 	/* FIXME: Remove this dirty hack to have the cursor visible when we will 
