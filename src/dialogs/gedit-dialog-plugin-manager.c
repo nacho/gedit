@@ -233,6 +233,10 @@ dialog_plugin_manager_populate_lists (GeditDialogPluginManager *dialog)
 		gtk_tree_selection_select_iter (selection, &iter);
 
 		gtk_tree_model_get (model, &iter, PLUGIN_MANAGER_NAME_COLUMN, &info, -1);
+
+		gtk_widget_set_sensitive (GTK_WIDGET (dialog->configure_button),
+				  gedit_plugins_engine_is_a_configurable_plugin (info->plugin));
+
 		dialog_plugin_manager_update_info (dialog, info);
 	}
 }
