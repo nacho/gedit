@@ -1,3 +1,12 @@
+2004-11-10  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit-file.c (unref_real) (unref_not_opened_children)
+	(open_files): unref the non opened children in an idle handler (fixes 
+	bug #156992: Crash loading remote file).
+
+	* gedit-mdi.c (gedit_mdi_set_active_window_verbs_sensitivity):
+	added a couple of FIXME comments.
+
 2004-11-09  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit-utils.[ch] (gedit_utils_replace_home_dir_with_tilde): new function

@@ -1159,6 +1159,30 @@ document_loaded_cb (GeditDocument *document,
 	open_files ();
 }
 
+static gboolean
+unref_real (const GSList *children)
+{
+	g_slist_foreach (children, (GFunc)g_object_unref, NULL);
+
+	return FALSE;
+}
+
+static void
+unref_not_opened_children ()
+{
+	GSList *children;
+
+	if (children_to_unref == NULL)
+		return;
+
+	children = g_slist_copy (children_to_unref);
+
+	g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
+			 (GSourceFunc)unref_real,
+			 children,
+			 (GDestroyNotify)g_slist_free);
+}
+
 static void
 open_files ()
 {
@@ -1187,7 +1211,7 @@ open_files ()
 		new_children = NULL;
 
 		/* Unref the children that were not opened to an error */
-		g_slist_foreach (children_to_unref, (GFunc)g_object_unref, NULL);
+		unref_not_opened_children ();
 		g_slist_free (children_to_unref);
 		children_to_unref = NULL;
 		

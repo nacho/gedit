@@ -1623,6 +1623,8 @@ end:
 			
 			bonobo_ui_component_set_prop (ui_component, 
 					"/menu/View/HighlightMode", "sensitive", "0", NULL);
+		
+			/* FIXME: disable the Recent Files menu - Paolo (Nov 10, 2004) */
 
 			break;
 
@@ -1632,6 +1634,8 @@ end:
 
 			bonobo_ui_component_set_prop (ui_component, 
 					"/menu/View/HighlightMode", "sensitive", "0", NULL);
+
+			/* FIXME: disable the Recent Files menu - Paolo (Nov 10, 2004) */
 
 			break;
 		default:
