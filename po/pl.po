@@ -9,14 +9,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
-"POT-Creation-Date: 2003-11-15 14:50+0100\n"
-"PO-Revision-Date: 2003-07-12 01:43+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-12-31 09:10+0100\n"
+"PO-Revision-Date: 2003-11-15 01:43+0100\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -488,7 +490,7 @@ msgstr ""
 "czcionka systemowa. Jeśli opcja jest nieaktywna, wówczas używana jest "
 "czcionka zdefiniowana w ustawieniu \"Czcionka w edytorze\"."
 
-#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1964
+#: gedit/bonobo-mdi.c:551 gedit/bonobo-mdi.c:1965
 #, c-format
 msgid "Activate %s"
 msgstr "Uaktywnij %s"
@@ -526,7 +528,7 @@ msgstr "Zmień _wszystkie"
 
 #. Add Replace button
 #: gedit/dialogs/gedit-dialog-replace.c:282
-#: gedit/gedit-file-selector-util.c:131
+#: gedit/gedit-file-selector-util.c:144
 msgid "_Replace"
 msgstr "Z_mień"
 
@@ -536,8 +538,11 @@ msgstr "Znajdź"
 
 #: gedit/dialogs/gedit-dialog-replace.c:1149
 #, c-format
-msgid "Found and replaced %d occurrences."
-msgstr "Znaleziono i zmieniono %d wystąpień."
+msgid "Found and replaced %d occurrence."
+msgid_plural "Found and replaced %d occurrences."
+msgstr[0] "Znaleziono i zmieniono %d wystąpienie."
+msgstr[1] "Znaleziono i zmieniono %d wystąpienia."
+msgstr[2] "Znaleziono i zmieniono %d wystąpień."
 
 #: gedit/dialogs/gedit-dialog-uri.c:87
 msgid "Open Location"
@@ -1169,47 +1174,47 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit jest niewielkim edytorem tekstu dla środowiska GNOME"
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:598 gedit/gedit-document.c:616
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:595 gedit/gedit-document.c:613
+#: gedit/gedit-document.c:598 gedit/gedit-document.c:616
 msgid "Untitled"
 msgstr "BezNazwy"
 
-#: gedit/gedit-document.c:601 gedit/gedit-document.c:648
+#: gedit/gedit-document.c:604 gedit/gedit-document.c:651
 msgid "Invalid file name"
 msgstr "Niepoprawna nazwa pliku"
 
-#: gedit/gedit-document.c:814 gedit/gedit-document.c:918
+#: gedit/gedit-document.c:817 gedit/gedit-document.c:921
 #: viewer/gedit-persist-stream.c:120
 msgid "Invalid UTF-8 data"
 msgstr "Niepoprawne dane UTF-8"
 
-#: gedit/gedit-document.c:1210
+#: gedit/gedit-document.c:1213
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nie można odczytać informacji o dowiązaniu symbolicznym związanym z %s"
 
-#: gedit/gedit-document.c:1256
+#: gedit/gedit-document.c:1259
 msgid "The file has too many symbolic links."
 msgstr "Plik posiada zbyt wiele dowiązań symbolicznych."
 
-#: gedit/gedit-document.c:1312
+#: gedit/gedit-document.c:1315
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit nie obsługuje położenia typu %s: w trybie zapisu."
 
-#: gedit/gedit-document.c:1319
+#: gedit/gedit-document.c:1322
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit nie może obsłużyć tego rodzaju położenia w trybie zapisu."
 
-#: gedit/gedit-document.c:1332
+#: gedit/gedit-document.c:1335
 msgid "Invalid filename."
 msgstr "Niepoprawna nazwa pliku"
 
-#: gedit/gedit-document.c:1444
+#: gedit/gedit-document.c:1447
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1217,7 +1222,7 @@ msgstr ""
 "Brak miejsca na dysku, aby zapisać plik.\n"
 "Zwolnij trochę miejsca i spróbuj ponownie."
 
-#: gedit/gedit-document.c:1449
+#: gedit/gedit-document.c:1452
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1227,11 +1232,11 @@ msgstr ""
 "Spróbuj zapisywać mniejsze pliki lub zapisywać je na dysku nie posiadającym "
 "tego typu ograniczeń."
 
-#: gedit/gedit-document.c:1493
+#: gedit/gedit-document.c:1496
 msgid "Could not create a backup file."
 msgstr "Nie można utworzyć kopii zapasowej pliku."
 
-#: gedit/gedit-document.c:1613
+#: gedit/gedit-document.c:1617
 msgid "It is not possible to revert an Untitled document"
 msgstr "Nie można przywrócić dokumentu bez określonej nazwy"
 
@@ -1360,68 +1365,68 @@ msgstr "Wietnamski"
 msgid "Thai"
 msgstr "Tajski"
 
-#: gedit/gedit-file-selector-util.c:149
+#: gedit/gedit-file-selector-util.c:162
 #, c-format
-msgid ""
-"A file named \"%s\" already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"Plik o nazwie \"%s\" już istnieje.\n"
-"Czy chcesz go zastąpić aktualnie zapisywanym plikiem?"
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Plik o nazwie \"%s\" już istnieje.\n"
 
-#: gedit/gedit-file-selector-util.c:160
+#: gedit/gedit-file-selector-util.c:163
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Czy chcesz go zastąpić aktualnie zapisywanym plikiem?"
+
+#: gedit/gedit-file-selector-util.c:172
 #, c-format
-msgid ""
-"The file \"%s\" is read-only.\n"
-"Do you want to try to replace it with the one you are saving?"
-msgstr ""
-"Plik o nazwie \"%s\" jest przeznaczony tylko do odczytu.\n"
-"Czy chcesz go zastąpić aktualnie zapisywanym plikiem?"
+msgid "The file \"%s\" is read-only.\n"
+msgstr "Plik o nazwie \"%s\" jest przeznaczony tylko do odczytu.\n"
 
-#: gedit/gedit-file-selector-util.c:283
+#: gedit/gedit-file-selector-util.c:173
+msgid "Do you want to try to replace it with the one you are saving?"
+msgstr "Czy chcesz spróbować zastąpić go aktualnie zapisywanym plikiem?"
+
+#: gedit/gedit-file-selector-util.c:445
 msgid "Ch_aracter Coding:"
 msgstr "Kodowanie _znaków:"
 
-#: gedit/gedit-file-selector-util.c:460
+#: gedit/gedit-file-selector-util.c:569
 msgid "Select a file to open"
 msgstr "Wybór pliku do otwarcia"
 
-#: gedit/gedit-file-selector-util.c:489
+#: gedit/gedit-file-selector-util.c:595
 msgid "Select files to open"
 msgstr "Wybór plików do otwarcia"
 
-#: gedit/gedit-file-selector-util.c:519
+#: gedit/gedit-file-selector-util.c:622
 msgid "Select a filename to save"
 msgstr "Wybór pliku do zapisu"
 
-#: gedit/gedit-file.c:155
+#: gedit/gedit-file.c:157
 msgid "Open File..."
 msgstr "Wybór pliku do odczytu..."
 
-#: gedit/gedit-file.c:182 gedit/gedit-file.c:899
+#: gedit/gedit-file.c:185 gedit/gedit-file.c:908
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Wczytano plik \"%s\""
 
-#: gedit/gedit-file.c:316 gedit/gedit-file.c:466
+#: gedit/gedit-file.c:323 gedit/gedit-file.c:472
 #, c-format
 msgid "Saving file '%s'..."
 msgstr "Zapisywanie pliku \"%s\"..."
 
-#: gedit/gedit-file.c:344 gedit/gedit-file.c:481
+#: gedit/gedit-file.c:351 gedit/gedit-file.c:487
 msgid "The document has not been saved."
 msgstr "Dokument nie został zapisany."
 
-#: gedit/gedit-file.c:358 gedit/gedit-file.c:478
+#: gedit/gedit-file.c:365 gedit/gedit-file.c:484
 #, c-format
 msgid "File '%s' saved."
 msgstr "Plik \"%s\" został zapisany."
 
-#: gedit/gedit-file.c:444
+#: gedit/gedit-file.c:451
 msgid "Save as..."
 msgstr "Wybór pliku do zapisu..."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:645
 #, c-format
 msgid ""
 "Do you want to revert to saved the document '%s'?\n"
@@ -1432,111 +1437,125 @@ msgstr ""
 "\n"
 "Cofnięcie tej operacji nie będzie możliwe."
 
-#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
+#: gedit/gedit-file.c:655 gedit/gedit-ui.xml.h:95
 msgid "_Revert"
 msgstr "_Przywróć"
 
-#: gedit/gedit-file.c:683
+#: gedit/gedit-file.c:689
 #, c-format
 msgid "Reverting file '%s'..."
 msgstr "Przywracanie pliku \"%s\"..."
 
-#: gedit/gedit-file.c:696
+#: gedit/gedit-file.c:702
 msgid "The document has not been reverted."
 msgstr "Dokument nie został przywrócony do wersji z pliku."
 
-#: gedit/gedit-file.c:706
+#: gedit/gedit-file.c:712
 #, c-format
-msgid "File '%s' reverted."
+msgid "File '%s' has been reverted."
 msgstr "Plik \"%s\" został przywrócony."
 
-#: gedit/gedit-file.c:732
+#: gedit/gedit-file.c:738
 #, c-format
-msgid "Loading %d files..."
-msgstr "Wczytywanie %d plików..."
+msgid "Loading %d file..."
+msgid_plural "Loading %d files..."
+msgstr[0] "Wczytywanie %d pliku..."
+msgstr[1] "Wczytywanie %d plików..."
+msgstr[2] "Wczytywanie %d plików..."
 
-#: gedit/gedit-file.c:768
+#: gedit/gedit-file.c:777
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "Plik \"%s\" nie istnieje. Czy chcesz go utworzyć?"
 
-#: gedit/gedit-file.c:823
+#: gedit/gedit-file.c:832
 #, c-format
 msgid "Loaded %i files"
 msgstr "Wczytano %i plików"
 
-#: gedit/gedit-file.c:957
+#: gedit/gedit-file.c:966
 msgid "Could not read data from stdin."
 msgstr "Nie można odczytać danych ze standardowego wejścia."
 
 #. Read only
-#: gedit/gedit-mdi-child.c:238
+#: gedit/gedit-mdi-child.c:246
 msgid "RO"
 msgstr "tylko do odczytu"
 
 #. Add the detach tab button
-#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:86
+#: gedit/gedit-mdi-child.c:582 gedit/gedit-ui.xml.h:86
 msgid "_Move to New Window"
 msgstr "_Otwórz w nowym oknie"
 
-#: gedit/gedit-mdi-child.c:664
+#: gedit/gedit-mdi-child.c:672
 msgid "Unknown"
 msgstr "Nieznane"
 
-#: gedit/gedit-mdi-child.c:672
+#: gedit/gedit-mdi-child.c:680
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
+#: gedit/gedit-mdi-child.c:687
+msgid "Name:"
+msgstr "Nazwa:"
+
+#: gedit/gedit-mdi-child.c:688
+msgid "MIME Type:"
+msgstr "Typ MIME:"
+
+#: gedit/gedit-mdi-child.c:689
+msgid "Encoding:"
+msgstr "Kodowanie:"
+
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:260 gedit/gedit-mdi.c:414
+#: gedit/gedit-mdi.c:263 gedit/gedit-mdi.c:417
 #, c-format
 msgid "Open '%s'"
 msgstr "Otwórz \"%s\""
 
-#: gedit/gedit-mdi.c:488
+#: gedit/gedit-mdi.c:491
 msgid "Open a recently used file"
 msgstr "Otwiera ostatnio używany plik"
 
-#: gedit/gedit-mdi.c:994
+#: gedit/gedit-mdi.c:1006
 #, c-format
-msgid ""
-"Do you want to save the changes you made to the document \"%s\"? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"Czy chcesz zapisać zmiany naniesione w dokumencie \"%s\"?\n"
-"\n"
-"Niezapisane zmiany zostaną utracone."
+msgid "Do you want to save the changes you made to the document \"%s\"?"
+msgstr "Czy chcesz zapisać zmiany naniesione w dokumencie \"%s\"?"
 
-#: gedit/gedit-mdi.c:999
-msgid "Do_n't save"
-msgstr "_Nie zapisuj"
+# FIXME 
+#: gedit/gedit-mdi.c:1014
+msgid "Your changes will be lost if you don't save them."
+msgstr "Niezapisane zmiany zostaną utracone."
 
-#: gedit/gedit-mdi.c:1018
+#: gedit/gedit-mdi.c:1022
 msgid "_Don't quit"
 msgstr "_Nie kończ"
 
-#: gedit/gedit-mdi.c:1022
+#: gedit/gedit-mdi.c:1026
 msgid "_Don't close"
 msgstr "_Nie zamykaj"
 
-#: gedit/gedit-mdi.c:1115
+#: gedit/gedit-mdi.c:1030
+msgid "Do_n't save"
+msgstr "_Nie zapisuj"
+
+#: gedit/gedit-mdi.c:1122
 msgid "(modified)"
 msgstr "(zmodyfikowany)"
 
-#: gedit/gedit-mdi.c:1121
+#: gedit/gedit-mdi.c:1128
 msgid "(readonly)"
 msgstr "(tylko do odczytu)"
 
-#: gedit/gedit-mdi.c:1716
+#: gedit/gedit-mdi.c:1734
 msgid "Normal"
 msgstr "Zwykły"
 
-#: gedit/gedit-mdi.c:1717
+#: gedit/gedit-mdi.c:1735
 msgid "Use Normal highlight mode"
 msgstr "Używa zwykłego trybu wyróżniania elementów składni"
 
-#: gedit/gedit-mdi.c:1793
+#: gedit/gedit-mdi.c:1811
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Używa trybu wyróżniania elementów składni %s"
@@ -1819,9 +1838,6 @@ msgstr "Przywróć"
 msgid "Revert to a saved version of the file"
 msgstr "Przywraca zapisaną wersję pliku"
 
-# FIXME
-# src/dialogs/gedit-preferences-dialog.c, src/gedit-ui.xml.h - "Zapisz"
-# src/dialogs/gedit-preferences.glade2.h - "Zapisywanie"
 #: gedit/gedit-ui.xml.h:49
 msgid "Save"
 msgstr "Zapisz"
@@ -3215,9 +3231,6 @@ msgstr "S_kopiuj tekst"
 #~ "Wciśnięcie tego przycisku umożliwia wybór czcionki używanej przy wydruku "
 #~ "nagłówków"
 
-#~ msgid "Encodings"
-#~ msgstr "Kodowania"
-
 #~ msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
 #~ msgstr "<span weight=\"bold\" size=\"x-large\">Czcionki</span>"
 
@@ -3316,9 +3329,6 @@ msgstr "S_kopiuj tekst"
 
 #~ msgid "Hex#"
 #~ msgstr "Hex"
-
-#~ msgid "Name"
-#~ msgstr "Nazwa"
 
 #~ msgid "ASCII Table"
 #~ msgstr "Tabela ASCII"
