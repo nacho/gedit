@@ -134,7 +134,7 @@ popup_close_verify(gE_document *doc, gE_data *data)
 	char *fname, *title, *msg;
 	char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL } ;
 
-	fname = (doc->filename) ? basename(doc->filename) : UNTITLED;
+	fname = (doc->filename) ? g_basename(doc->filename) : UNTITLED;
 	
 	title = (char *)g_malloc(strlen(CLOSE_TITLE) + strlen(fname) + 5);
 	msg =   (char *)g_malloc(strlen(CLOSE_MSG) + strlen(fname) + 6);
@@ -508,7 +508,7 @@ file_open_in_new_win_cb(GtkWidget *widget, gpointer cbdata)
 	win = gE_window_new ();
 	dest_doc = gE_document_current (win);
 	dest_doc->filename = g_strdup (src_doc->filename);
-	gtk_label_set (GTK_LABEL (dest_doc->tab_label), (const char *)basename (dest_doc->filename));
+	gtk_label_set (GTK_LABEL (dest_doc->tab_label), (const char *)g_basename (dest_doc->filename));
 	gtk_editable_insert_text (GTK_EDITABLE (dest_doc->text), buffer, strlen (buffer), &pos);
 	dest_doc->changed = src_doc->changed;
 	close_doc_execute (src_doc, data);

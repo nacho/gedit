@@ -161,7 +161,7 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 
 	/* misc settings */
 	doc->filename = fname;
-	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)basename(fname));
+	gtk_label_set(GTK_LABEL(doc->tab_label), (const char *)g_basename(fname));
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
 #ifdef GTK_HAVE_FEATURES_1_1_0
@@ -251,7 +251,7 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 	doc->filename = g_strdup(fname);
 	doc->changed = FALSE;
 	gtk_label_set(GTK_LABEL(doc->tab_label),
-		(const char *)basename(doc->filename));
+		(const char *)g_basename(doc->filename));
 	if (!doc->changed_id)
 		doc->changed_id =
 			gtk_signal_connect (
@@ -267,7 +267,7 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 
 	flw_update_entry(window, doc,
 		gtk_notebook_current_page(GTK_NOTEBOOK(window->notebook)),
-		(char *)basename(fname));
+		(char *)g_basename(fname));
 
 	mbprintf("saved %s", doc->filename);
 	gE_msgbar_set(window, MSGBAR_FILE_SAVED);
@@ -466,7 +466,7 @@ flw_append_entry(gE_window *w, gE_document *curdoc, int rownum, char *text)
 	}
 
 	if (text && strlen(text) > 0) {
-		rownfo[2] =  (char *)basename(text);
+		rownfo[2] =  (char *)g_basename(text);
 	} else {
 		rownfo[1] = UNKNOWN;
 		rownfo[2] = UNTITLED;
