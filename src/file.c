@@ -44,6 +44,7 @@ GtkWidget *open_file_selector = NULL;
 
 gint gedit_file_open (Document *doc, gchar *fname);
 gint gedit_file_save (Document *doc, gchar *fname);
+void gedit_file_save_as (Document *doc);
 gint gedit_file_stdin (Document *doc);
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
@@ -84,7 +85,8 @@ gedit_file_open (Document *doc, gchar *fname)
 	FILE *fp;
 	Document *currentdoc;
 	
-	gedit_debug ("", DEBUG_FILE);
+	gedit_debug ("start", DEBUG_FILE);
+	
 	g_return_val_if_fail (fname != NULL, 1);
 
 	currentdoc = gedit_document_current();
@@ -128,15 +130,20 @@ gedit_file_open (Document *doc, gchar *fname)
 		doc = gedit_document_new ();
 
 	doc->filename = g_strdup (fname);
-	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
-	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
-	doc->changed = FALSE;
 	doc->untitled_number = 0;
+
+	gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
+	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
+
+	doc->changed = FALSE;
+	gedit_document_set_title (doc);
 	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	recent_add (fname);
 	recent_update (gedit_window_active_app());
+
+	gedit_debug ("end", DEBUG_FILE);
 
 	return 0;
 }
@@ -161,7 +168,17 @@ gedit_file_save (Document *doc, gchar *fname)
 	gedit_debug ("", DEBUG_FILE);
 
 	if (fname == NULL)
-		fname = doc->filename;
+	{
+		if (doc->filename == NULL)
+		{
+			gedit_file_save_as (doc);
+			return 1;
+		}
+		else
+		{
+			fname = doc->filename;
+		}
+	}
 
 	g_return_val_if_fail (doc != NULL, 1);
 	g_return_val_if_fail (fname != NULL, 1);
@@ -214,13 +231,64 @@ gedit_file_save (Document *doc, gchar *fname)
 	doc->changed = FALSE;
 	doc->untitled_number = 0;
 	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
-	gedit_set_title (doc);
+	gedit_document_set_title (doc);
 
 	gtk_signal_connect (GTK_OBJECT(view->text), "changed",
 			    GTK_SIGNAL_FUNC(gedit_view_changed_cb), view);
 
 	gedit_flash (_(MSGBAR_FILE_SAVED));
 	return 0;
+}
+
+/**
+ * gedit_file_save_as:
+ * @doc: 
+ * 
+ * creates the save as dialog and connects the signals to
+ * the button
+ **/
+void
+gedit_file_save_as (Document *doc)
+{
+
+	gedit_debug("", DEBUG_FILE);
+
+	if (doc == NULL)
+		doc = gedit_document_current();
+
+	if (doc == NULL)
+		return;
+			
+	if (save_file_selector && GTK_WIDGET_VISIBLE (save_file_selector))
+		return;
+
+	if (save_file_selector == NULL)
+	{
+		save_file_selector = gtk_file_selection_new (NULL);
+		gtk_signal_connect(GTK_OBJECT(save_file_selector),
+				   "delete_event",
+				   GTK_SIGNAL_FUNC(delete_event_cb),
+				   save_file_selector);
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
+				    "clicked",
+				    GTK_SIGNAL_FUNC(cancel_cb),
+				    save_file_selector);
+		/* OK clicked */
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
+				    "clicked",
+				    GTK_SIGNAL_FUNC (gedit_file_save_as_ok_sel),
+				    doc);
+
+	}
+
+	gtk_window_set_title (GTK_WINDOW(save_file_selector), _("Save As..."));
+
+	if (!GTK_WIDGET_VISIBLE (save_file_selector))
+	{
+		gtk_window_position (GTK_WINDOW (save_file_selector), GTK_WIN_POS_MOUSE);
+		gtk_widget_show(save_file_selector);
+	}
+	return;
 }
 
 /**
@@ -277,7 +345,7 @@ gedit_file_stdin (Document *doc)
 	
 	fclose (stdin);
         doc->changed = TRUE;
-	gedit_set_title (doc);
+	gedit_document_set_title (doc);
 
 	/* Move the window to the top after inserting */
 	gedit_view_set_window_position (view, 0);
@@ -332,45 +400,22 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 	return;
 }
 
+
 void
 file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_debug("", DEBUG_FILE);
+	Document *doc;
 	
-	if (!gedit_document_current())
+	gedit_debug("", DEBUG_FILE);
+
+	doc = gedit_document_current();
+		
+	if (doc==NULL)
 		return;
 
-	if (save_file_selector && GTK_WIDGET_VISIBLE (save_file_selector))
-		return;
-
-	if (save_file_selector == NULL)
-	{
-		save_file_selector = gtk_file_selection_new (NULL);
-		gtk_signal_connect(GTK_OBJECT(save_file_selector),
-				   "delete_event",
-				   GTK_SIGNAL_FUNC(delete_event_cb),
-				   save_file_selector);
-
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
-				    "clicked",
-				    GTK_SIGNAL_FUNC (gedit_file_save_as_ok_sel),
-				    NULL);
-
-		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
-				    "clicked",
-				    GTK_SIGNAL_FUNC(cancel_cb),
-				    save_file_selector);
-	}
-
-	gtk_window_set_title (GTK_WINDOW(save_file_selector), _("Save As..."));
-
-	if (!GTK_WIDGET_VISIBLE (save_file_selector))
-	{
-		gtk_window_position (GTK_WINDOW (save_file_selector), GTK_WIN_POS_MOUSE);
-		gtk_widget_show(save_file_selector);
-	}
-	return;
+	gedit_file_save_as (doc);
 }
+
 
 static gint
 delete_event_cb (GtkWidget *widget, GdkEventAny *event)
@@ -435,7 +480,7 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
 		doc = (Document *)g_list_nth_data (mdi->children, i);
-		gedit_file_save( doc, NULL);
+		gedit_file_save (doc, NULL);
 	}
 }
 
@@ -444,25 +489,28 @@ static void
 gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 {
 	Document *doc;
-	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
+	gchar *filename;
 	gint i;
 	View *nth_view;
 
 	gedit_debug("", DEBUG_FILE);
+
+	doc = cbdata;
 	
-	doc = gedit_document_current();
 	if (!doc)
 		return;
+	
+	filename = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
 	
 	gtk_widget_hide (GTK_WIDGET (save_file_selector));
 	save_file_selector = NULL;
 	
-        if (g_file_exists (fname))
+        if (g_file_exists (filename))
 	{
 		guchar * msg;
 		GtkWidget *msgbox;
 		gint ret;
-		msg = g_strdup_printf (_("``%s'' is about to be overwritten. Do you want to continue ?"), fname);
+		msg = g_strdup_printf (_("``%s'' is about to be overwritten. Do you want to continue ?"), filename);
 		msgbox = gnome_message_box_new (msg, GNOME_MESSAGE_BOX_QUESTION, GNOME_STOCK_BUTTON_YES,
 						GNOME_STOCK_BUTTON_NO, GNOME_STOCK_BUTTON_CANCEL, NULL);
 		gnome_dialog_set_default (GNOME_DIALOG (msgbox), 2);
@@ -480,14 +528,14 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 		}
 	}
 	    
-	if (gedit_file_save(doc, fname) != 0)
+	if (gedit_file_save(doc, filename) != 0)
 	{
 		gedit_flash (_("Error saving file!"));
-		g_free (fname);
+		g_free (filename);
 		return;
 	}
 
-	g_free (fname);
+	g_free (filename);
 
         /* If file save was succesfull, then we should turn the readonly flag off */
 	for (i = 0; i < g_list_length (doc->views); i++)

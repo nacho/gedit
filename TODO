@@ -1,4 +1,38 @@
 ----------------------------------------------------------------------
+  gedit 0.8.0 
+----------------------------------------------------------------------
+** Chema **
+[X] Fix the save_all bug in which Untitled docs are not saved
+[X] Change the title of the Find dialog box to "Find"
+[X] insert/delete text should not work for readonly documents
+[X] Documents opened should not have the "(modified)" tag in the 
+    main window
+[ ] Fix the bug in which the user exits an if an Untitled doc is
+    open, gedit will not exit
+
+** Roberto **
+[ ] Insert Shell Output plugin
+[ ] Add to the diff plugin the ability to make the diff from
+    an open document in gedit.
+
+** Unclaimed **
+[ ] check for the existence of sendmail and of diff. If they are
+    no found ask the user for the location and set it in settings->sendmail
+    & settings->diff. Same thing for the browse plugin
+[ ] Fix the recent files feature, there are still some loose ends.
+    [ ] use full path so that we can locate the files when gedit
+        is executed from another directory
+    [ ] When savin and Untitled Document or "Saving as" add the doc 
+        to the list
+    [ ] If a document can't be loaded from the recent list because
+        of whatever reason, remove it.
+[ ] Split screen ???
+	Should we re-enable it ? Maybe.
+[ ] If you close a doc, the title of the window is set to gedit $version
+    and not gedit $ Document. When switching docs the Title is set twice
+    and flashes.
+
+----------------------------------------------------------------------
   gedit 0.7.9
 ----------------------------------------------------------------------
 
@@ -6,7 +40,7 @@
 [X] Add Page Range to the printing dialog
 [X] Print tab's as a set of spaces.
 [X] Added page_begin comment to navigate postscript files
-[~] Rewrite search.c
+[X] Rewrite search.c
     TODO for rewrite search.c
     [X] Add acelerators to the find dialog
     [X] Replace the "Find Next" tag with "Find" as needed
@@ -64,9 +98,6 @@
 [X] Piped input, such as doing "df | gedit" and getting a new document
     with the output of df
 
-** Unclaimed **
-[ ] Fix the recent files feature, there are still some loose ends.
-
 ** Kanikus will fix this one **
 [ ] Menu bug when a language translates "Files" == "File", so we don't
     insert all the open windows into the end of the user's File menu
@@ -85,12 +116,6 @@ apropiatelly
 [ ] Shade and unshade the file menu items apropiatelly, for example 
 a NULL filename does not have "Revert and Save" options. and when all
 docs are closed most toolbar functions do not work.
-[ ] rewrite view.c ( or even better: remove it )
-[ ] Add view set tabs NONE
-[ ] Plugins must check if the document is not ReadOnly before making
-modifications to it. There are also ways to crash gedit if you do like
-a) Pluggins->emal. b) Close the doc c) Hit <OK>. We need a global
-solution for this, since it affects the search funcitons too. Chema.
 [ ] Fix the bug in which gedit exitst when a file is modified. After
 the user hits "YES" to save the file, gedit does not exits.
 [ ] When creating a new file "gedit file_a.txt" we need to set the title

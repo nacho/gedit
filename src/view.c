@@ -106,8 +106,8 @@ gedit_view_changed_cb (GtkWidget *w, gpointer cbdata)
 	/* We are not connecting this singnal anymore ...  Chema 
 	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);*/
 
-	/* Set the title */
-	gedit_set_title (view->doc);
+	/* Set the title ( so that we add the "modified" string to it )*/
+	gedit_document_set_title (view->doc);
 	
 }
 

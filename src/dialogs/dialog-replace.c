@@ -262,6 +262,7 @@ dialog_replace (gint full)
 	GtkWidget *ask_before_replacing;
 	*/
 	GladeXML  *gui;
+	gchar * dialog_title;
 
 	gedit_debug("", DEBUG_SEARCH);
 	
@@ -323,6 +324,7 @@ dialog_replace (gint full)
 	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "case_sensitive", case_sensitive);
 	gtk_object_set_data (GTK_OBJECT (replace_text_dialog), "radio_button_1", radio_button_1);
 
+
 	gedit_search_start();
 	
 	gtk_signal_connect (GTK_OBJECT (replace_text_dialog), "clicked",
@@ -348,9 +350,17 @@ dialog_replace (gint full)
 		gtk_widget_hide (hbox_replace_with);
 		gtk_widget_hide (replace_button);
 		gtk_widget_hide (replace_all_button);
+		dialog_title = g_strdup ("Find");
 	}
+	else
+	{
+		dialog_title = g_strdup ("Replace");
+	}
+	gtk_window_set_title ( GTK_WINDOW(replace_text_dialog), dialog_title);
+	g_free (dialog_title);
 
 	gtk_object_unref (GTK_OBJECT (gui));
+
 
 	gnome_dialog_run (GNOME_DIALOG(replace_text_dialog));
 }

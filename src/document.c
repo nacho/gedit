@@ -60,7 +60,7 @@ static	void		gedit_document_init (Document *doc);
 
 void gedit_mdi_init (void);
 void gedit_document_load ( GList *file_list);
-
+void gedit_document_set_title (Document *doc);
 
 /**
  * gedit_document_insert_text: Inserts text to a document and hadles all the details like
@@ -82,6 +82,8 @@ gedit_document_insert_text (Document *doc, guchar *text, guint position, gint un
 	gint length;
 	gint exclude_this_view;
 
+	if (doc->readonly)
+	     return;
 	g_return_if_fail (text!=NULL);
 	view = g_list_nth_data (doc->views, 0);
 	g_return_if_fail (view!=NULL);
@@ -114,6 +116,9 @@ gedit_document_delete_text (Document *doc, guint position, gint length, gint und
 	GtkWidget *editable;
 	gint exclude_this_view;
 
+	if (doc->readonly)
+	     return;
+
 	view = g_list_nth_data (doc->views, 0);
 	g_return_if_fail (view!=NULL);
 	text_widget = GTK_TEXT (view->text);
@@ -141,6 +146,8 @@ gedit_document_set_readonly (Document *doc, gint readonly)
 
 }
 
+
+#define GEDIT_MIN_TAB_LENGTH 6
 /**
  * gedit_document_get_tab_name:
  * @doc: 
@@ -165,11 +172,13 @@ gedit_document_get_tab_name (Document *doc)
 
 	if (doc->filename != NULL)
 	{
-		return _(g_strdup_printf ("%s%s", doc->readonly?RO:"", g_basename(doc->filename)));
+		gchar * tab_name;
+		tab_name = g_strdup_printf ("%s%s", doc->readonly?RO:"", g_basename(doc->filename));
+		return tab_name;
 	}
 	else
 	{
-		if (doc->untitled_number == 0)
+	        if (doc->untitled_number == 0)
 		{
 			for (i = 0; i < g_list_length (mdi->children); i++)
 			{
@@ -316,13 +325,16 @@ child_changed_cb (GnomeMDI *mdi, Document *doc)
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
+	if (doc != doc)
+	     g_warning ("Doc != doc2. In child_changed\n");
+	
 	if (doc2)
 	{
 		view = gedit_view_current();
 		if (view==NULL)
 			return;
 		gtk_widget_grab_focus (view->text);
-		gedit_set_title (doc2);
+		gedit_document_set_title (doc2);
 	}
 }
 
@@ -502,6 +514,8 @@ gedit_document_load ( GList *file_list)
 {
 	Document *doc;
 
+	gedit_debug ("", DEBUG_DOCUMENT);
+
 	gedit_file_stdin (NULL);
 
         /* create a file for each document in the parameter list */
@@ -522,4 +536,33 @@ gedit_document_load ( GList *file_list)
 		gedit_document_new ();
 }
 
+
+/**
+ * gedit_set_title:
+ * @docname : Document name in a string, the new title
+ *
+ * Set the title to "$docname - $gedit_ver" and if the document has
+ * changed, lets show that it has. 
+ **/
+void
+gedit_document_set_title (Document *doc)
+{
+	gchar *title;
+	gchar *docname;
+
+	gedit_debug ("", DEBUG_DOCUMENT);
+	
+	g_return_if_fail (doc != NULL);
+
+	docname = GNOME_MDI_CHILD (doc)->name;
+
+	if (doc->changed)
+		title = g_strdup_printf ("gedit: %s (modified)", docname);
+	else
+		title = g_strdup_printf ("gedit: %s", docname);
+
+	gtk_window_set_title (gedit_window_active(), title);
+
+	g_free (title);
+}
 

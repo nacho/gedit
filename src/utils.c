@@ -68,33 +68,6 @@ gtk_radio_button_select (GSList *group, int n)
 
 
 /**
- * gedit_set_title:
- * @docname : Document name in a string, the new title
- *
- * Set the title to "$docname - $gedit_ver" and if the document has
- * changed, lets show that it has. 
- **/
-void
-gedit_set_title (Document *doc)
-{
-	gchar *title;
-	gchar *docname;
-
-	g_return_if_fail (doc != NULL);
-
-	docname = GNOME_MDI_CHILD (doc)->name;
-
-	if (doc->changed)
-		title = g_strdup_printf ("gedit: %s (modified)", docname);
-	else
-		title = g_strdup_printf ("gedit: %s", docname);
-
-	gtk_window_set_title (GTK_WINDOW (mdi->active_window), title);
-
-	g_free (title);
-}
-
-/**
  * gedit_flash:
  * @msg: Message to flash on the statusbar
  *

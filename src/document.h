@@ -78,5 +78,6 @@ GtkType gedit_document_get_type (void);
 
 void gedit_mdi_init (void);
 void gedit_document_load ( GList *file_list);
+void gedit_document_set_title (Document *doc);
 
 #endif /* __DOCUMENT_H__ */

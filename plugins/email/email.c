@@ -12,6 +12,7 @@
 
 #include "document.h"
 #include "plugin.h"
+#include "window.h"
 
 #ifndef MAILER
 #define MAILER "/usr/lib/sendmail"
@@ -152,6 +153,11 @@ email (void)
 
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
 			    GTK_SIGNAL_FUNC (email_finish), NULL);
+
+	/* Set the dialog parent and modal type */ 
+	gnome_dialog_set_parent (GNOME_DIALOG (dialog),
+				 gedit_window_active());
+	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
 	/* Show everything then free the GladeXML memmory */
 	gtk_widget_show_all (dialog);

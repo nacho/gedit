@@ -1,5 +1,26 @@
 2000-06-11  Chema Celorio  <chema@celorio.com>
 
+	* utils.c: remove gedit_set_title from here
+
+	* document.h: add new prototype
+
+	* document.c (gedit_document_set_title): move here, adn rename
+
+	* file.c (gedit_file_open): call insert_text first and then set
+	the readonly flag. 
+
+	* document.c (gedit_document_delete_text): if doc->readonly return
+	(gedit_document_insert_text): ditto
+
+	* file.c (gedit_file_save): call save as if doc->filename = NULL
+	(gedit_file_save_as): new function
+	(file_save_as_cb): call gedit_file_save_as
+
+	* dialogs/dialog-replace.c (dialog_replace): set the find & replace
+	dialog title accordingly
+
+2000-06-11  Chema Celorio  <chema@celorio.com>
+
 	* view.c (gedit_view_remove_cb): don't remove views if views # < 2
 	( this fixes a crash too )
 
