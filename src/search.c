@@ -59,7 +59,7 @@ GeditSearchInfo search_info;
 void
 gedit_find_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (!gedit_document_current())
 		return;
@@ -77,7 +77,7 @@ gedit_find_cb (GtkWidget *widget, gpointer data)
 void
 gedit_find_again_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (!gedit_document_current())
 		return;
@@ -95,7 +95,7 @@ gedit_find_again_cb (GtkWidget *widget, gpointer data)
 void
 gedit_replace_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (!gedit_document_current())
 		return;
@@ -114,7 +114,7 @@ gedit_replace_cb (GtkWidget *widget, gpointer data)
 void
 gedit_goto_line_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (!gedit_document_current())
 		return;
@@ -131,7 +131,7 @@ gedit_goto_line_cb (GtkWidget *widget, gpointer data)
 void
 gedit_search_start (void)
 {
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	search_info.view = gedit_view_active();
 
@@ -155,7 +155,7 @@ gedit_search_start (void)
 void
 gedit_search_end (void)
 {
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (search_info.state == SEARCH_IN_PROGRESS_NO) {
 		g_warning("This should not happen, gedit called end_search and search in progress = NO \n");
@@ -294,7 +294,7 @@ file_info ( gint pos,  gint *total_chars, gint *total_words, gint *total_lines,
 	gint lines = 1 ;
 	gint column = 0 ;
 	
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (search_info.state !=  SEARCH_IN_PROGRESS_YES)
 		g_warning ("Search not started, watch out dude !\n");
@@ -386,7 +386,7 @@ gedit_file_info_cb (GtkWidget *widget, gpointer data)
 	gchar *doc_name;
 	GeditDocument *doc;
 
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	if (search_info.state != SEARCH_IN_PROGRESS_NO)
 	{
@@ -436,7 +436,7 @@ gedit_search_pos_to_line (guint pos, gint *numlines)
 	gint current_line = 0;
 	gint i;
 
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	*numlines = 0;
 		
@@ -475,7 +475,7 @@ gedit_search_execute ( guint starting_position,
 	gint text_length;
 	gint case_sensitive_mask;
 
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 #if 0
 	/* FIXME: why do we get starting_position as a gulong ??? chema. It should
@@ -526,7 +526,7 @@ gedit_search_line_to_pos (gint line, gint *lines)
 	gint current_line = 0, i;
 	guint pos;
 	
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	pos = search_info.length;
 
@@ -578,7 +578,7 @@ gedit_replace_all_execute (GeditView *view,
 	gint case_sensitive_mask;
 	gint grow_factor = GEDIT_EXTRA_REPLACEMENTS_;
 
-	gedit_debug (DEBUG_RECENT, "");
+	gedit_debug (DEBUG_SEARCH, "");
 
 	g_return_val_if_fail (search_info.state == SEARCH_IN_PROGRESS_YES, 0);
 	g_return_val_if_fail (start_pos > -1, 0);
@@ -682,7 +682,7 @@ gedit_replace_all_execute (GeditView *view,
 
 	*buffer = buffer_out;
 
-	gedit_debug (DEBUG_RECENT, "end");
+	gedit_debug (DEBUG_SEARCH, "end");
 	
 	return replacements;
 }

@@ -41,8 +41,8 @@ struct _GeditToolbar
 	GtkWidget *undo_menu_item;
 	GtkWidget *redo_menu_item;
 
-	gint undo;
-	gint redo;
+	gboolean undo : 1;
+	gboolean redo : 1;
 };
 
 struct _GeditView
