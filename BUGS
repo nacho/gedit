@@ -1,9 +1,20 @@
-KNOWN:
+KNOWN BUGS :
 
-	When exiting gedit with modified docuements, gedit will ask
-	the user if he want to save any of the open documents. If
-	the user answers YES to any of the dialogs, gedit does not exit.
+	- When exiting gedit with modified docuements, ( or closing untitled
+	documents ) gedit will ask the user if he want to save any of
+	the open documents. If the user answers YES to any of the
+	dialogs, gedit does not exit.
 	
-PLUGINS:
-
-	Some plugins are not working correctly.
+	- In some languajes "FILE" menu gets translated with the same 
+	name as "FILES", this causes a mess with the files and the 
+	history files menus.
+	
+	- When deleting a line with the delete key and the window is 
+	in the bottom of the scrool region the text widget starts 
+	acting weird. At least the mess can be undone :-)
+	
+	- There have been been some reports with problems when pasting and
+	copying. We have not found a way of duplicating them. Please let us
+	know if there are still present or not since a lot of the code has been 
+	rewriten.
+	

@@ -1,3 +1,16 @@
+2000-06-09  Chema Celorio  <chema@celorio.com>
+
+	* window.c (gedit_window_set_status_bar): fix status bar bug
+
+	* utils.h (options): add DEBUG_WINDOW
+
+	* window.c: add calls to gedit_debug
+
+	* undo.c (gedit_undo_check_size): add call to gedit_debug
+
+	* dialogs/dialog-prefs.c (gtk_option_menu_get_active_index): remove
+	the \n in gedit_debug(....
+
 2000-06-08  Chema Celorio  <chema@celorio.com>
 
 	* file.c (gedit_file_stdin): use new function to set

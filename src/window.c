@@ -56,12 +56,14 @@ GnomeApp  * gedit_window_active_app (void);
 GtkWindow *
 gedit_window_active (void)
 {
+	gedit_debug ("", DEBUG_WINDOW);
 	return GTK_WINDOW (mdi->active_window);
 }
 
 GnomeApp *
 gedit_window_active_app (void)
 {
+	gedit_debug ("", DEBUG_WINDOW);
 	return mdi->active_window;
 }
 
@@ -79,6 +81,8 @@ create_find_in_files_result_window (void)
 		N_("Contents") 
 	};
 	int i;
+
+	gedit_debug ("", DEBUG_WINDOW);
 	
 	search_result_clist = gtk_clist_new_with_titles (3, titles);
 	gtk_signal_connect (GTK_OBJECT(search_result_clist), 
@@ -149,6 +153,8 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 
 	static gint n_drag_types = sizeof (drag_types) / sizeof (drag_types [0]);
 
+	gedit_debug ("", DEBUG_WINDOW);
+
 	gtk_drag_dest_set (GTK_WIDGET(app),
 			   GTK_DEST_DEFAULT_MOTION |
 			   GTK_DEST_DEFAULT_HIGHLIGHT |
@@ -196,6 +202,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 void
 gedit_window_set_auto_indent (gint auto_indent)
 {
+	gedit_debug ("", DEBUG_WINDOW);
 	settings->auto_indent = auto_indent;
 }
 
@@ -205,6 +212,8 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 {
 	GdkPixmap *pixmap;
         GdkBitmap *mask;
+
+	gedit_debug ("", DEBUG_WINDOW);
 
 	gtk_widget_realize (window);
 	
@@ -221,9 +230,13 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 void
 gedit_window_set_status_bar (gint show_status)
 {
+	gedit_debug ("", DEBUG_WINDOW);
+
 	if (show_status && GTK_WIDGET_MAPPED (mdi->active_window->statusbar))
 		return;
 
+	settings->show_status = show_status;
+	
 	if (!mdi->active_window->statusbar)
 	{
 		GtkWidget *statusbar = gnome_appbar_new (FALSE, TRUE, GNOME_PREFERENCES_USER);
@@ -267,7 +280,7 @@ doc_swaphc_cb (GtkWidget *widget, gpointer data)
 	char *newfname;
 	Document *doc;
 
-	gedit_debug ("NO MAMES !", DEBUG_FILE);
+	gedit_debug ("", DEBUG_FILE);
 	
 	doc = gedit_document_current();
 	if (!doc || !doc->filename)
@@ -335,6 +348,7 @@ doc_swaphc_cb (GtkWidget *widget, gpointer data)
 static gint
 gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
 {
+	gedit_debug ("", DEBUG_FILE);
 	window_close_cb (widget, data);
 	return TRUE;
 }

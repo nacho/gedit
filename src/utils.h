@@ -37,6 +37,7 @@ typedef enum {
 	DEBUG_DOCUMENT,
 	DEBUG_RECENT,	
 	DEBUG_COMMANDS,
+	DEBUG_WINDOW,
 } DebugSection;
 
 extern gint debug;
@@ -75,10 +76,15 @@ extern gint debug_recent;
 	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     if (debug_recent && section == DEBUG_RECENT) \
 	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
+    if (debug_recent && section == DEBUG_WINDOW) \
+	printf ("%s:%d (%s) %s\n", __FILE__, __LINE__, __FUNCTION__, str); \
     }
 
 static const struct poptOption options[] =
 {
+	{ "debug-window", '\0', 0, &debug_commands, 0,
+	  N_("Show window debugging messages."), NULL },
+
 	{ "debug-commands", '\0', 0, &debug_commands, 0,
 	  N_("Show commands debugging messages."), NULL },
 

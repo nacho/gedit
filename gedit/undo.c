@@ -50,6 +50,8 @@ gedit_undo_check_size (Document *doc)
 	gint n;
 	GeditUndoInfo *nth_undo;
 	
+	gedit_debug ("", DEBUG_UNDO);
+
 	if (settings->undo_levels < 1)
 		return;
 	

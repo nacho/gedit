@@ -207,5 +207,6 @@ options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 		return;
 
 	gedit_window_set_status_bar (!settings->show_status);
+
 }
 
