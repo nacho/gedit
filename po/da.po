@@ -6,21 +6,41 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 0.6.1\n"
-"POT-Creation-Date: 2000-03-08 19:59+0000\n"
-"PO-Revision-Date: 2000-03-04 20:02+01:00\n"
-"Last-Translator: Kenneth Christiansen <kenneth@ripen.dk>\n"
+"POT-Creation-Date: 2000-03-13 04:09+0100\n"
+"PO-Revision-Date: 2000-03-13 04:25+01:00\n"
+"Last-Translator: Birger Langkjer <birger.langkjer@image.dk>\n"
 "Language-Team: Dansk/Danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugins/sample/sample.c:64
+#: plugins/sample/sample.c:51
 msgid "Hello World"
-msgstr ""
+msgstr "Hallo verden"
 
-#: plugins/sample/sample.c:65
+#: plugins/sample/sample.c:52
 msgid "Sample 'hello world' plugin."
-msgstr ""
+msgstr "'Hallo verden' eksempelindstik."
+
+#: plugins/time/time.c:96
+msgid "Insert Time"
+msgstr "Indsæt tidspunkt"
+
+#: plugins/time/time.c:97
+msgid "Inserts the current date and time"
+msgstr "Indsætter nuværende dato og tidspunkt"
+
+#: plugins/email/email.c:101
+msgid "The gEdit Email Plugin"
+msgstr "gEdit epost-indstik"
+
+#: plugins/email/email.c:202
+msgid "Email"
+msgstr "Epost"
+
+#: plugins/email/email.c:203
+msgid "Email the current document"
+msgstr "Send nuværende dokument som epost"
 
 #: src/commands.c:91
 msgid "Could not save file!"
@@ -95,7 +115,7 @@ msgstr "Søg efter en linie"
 
 #: src/gE_mdi.c:81
 msgid "Find _In Files..."
-msgstr "Find _i filer..."
+msgstr "Find i fi_ler..."
 
 #: src/gE_mdi.c:82
 msgid "Find text in all open files"
@@ -125,19 +145,19 @@ msgstr " '%s' er blevet ændret. Ønsker du at gemme det?"
 #: src/gE_plugin.c:57
 #, c-format
 msgid "Error, unable to open module file, %s"
-msgstr ""
+msgstr "Fejl, kunne ikke åbne modulfil, %s"
 
 #: src/gE_plugin.c:67
 msgid "Error, plugin does not contain init_plugin function."
-msgstr ""
+msgstr "Fejl, indstik indeholder ikke init_plugin funktion."
 
 #: src/gE_plugin.c:74
 msgid "Error, init_plugin returned an error"
-msgstr ""
+msgstr "Fejl, init_plugin returnerede fejl"
 
 #: src/gE_plugin.c:98
 msgid "Error, plugin is still in use"
-msgstr ""
+msgstr "Fejl, indstik er stadig i brug"
 
 #: src/gE_plugin.c:108 src/gE_plugin.c:109 src/gE_plugin.c:181
 #: src/gE_plugin.c:182 src/menus.c:245
@@ -186,11 +206,11 @@ msgstr "Brug tekstombrydning"
 
 #: src/gE_prefs_box.c:403
 msgid "Text Background"
-msgstr ""
+msgstr "Tekstbaggrund"
 
 #: src/gE_prefs_box.c:424
 msgid "Text Foreground"
-msgstr ""
+msgstr "Tekstforgrund"
 
 #. Document Closing stuffs
 #: src/gE_prefs_box.c:487
@@ -205,7 +225,7 @@ msgstr "Nyt dokument når du har lukket det sidste"
 msgid "Close Window After Closing Last"
 msgstr "Luk vindue når du har lukket det sidste"
 
-#. End of docyment closing stuffs
+#. End of document closing stuff
 #. Font Settings (within Document Settings frame)
 #: src/gE_prefs_box.c:516
 msgid "Current Font"
@@ -246,7 +266,7 @@ msgstr "Nuværende højde:"
 msgid "Startup Height:"
 msgstr "Starthøjde:"
 
-#. MDI Mode settnigs
+#. MDI Mode settings
 #: src/gE_prefs_box.c:696
 msgid "MDI Mode"
 msgstr "MDI-tilstand"
@@ -261,7 +281,7 @@ msgstr "Generelt"
 msgid "Window"
 msgstr "Vindue"
 
-#. Docuemnt Settings
+#. Document Settings
 #: src/gE_prefs_box.c:776
 msgid "Document"
 msgstr "Dokument"
@@ -509,38 +529,3 @@ msgstr "Luk"
 msgid "Open (swap) .c/.h file"
 msgstr "Åbn (ombyt) .c/.h fil"
 
-#~ msgid "The gEdit Email Plugin"
-#~ msgstr "gEdit epost-indstik"
-
-#~ msgid "The gEdit Web Browse Plugin"
-#~ msgstr "gEdit webbrowser-indstik"
-
-#~ msgid "Plugin Selector"
-#~ msgstr "Indstiksvælger"
-
-#~ msgid "Name"
-#~ msgstr "Navn"
-
-#~ msgid "Location"
-#~ msgstr "Placering"
-
-#~ msgid "Plugins"
-#~ msgstr "Indstik"
-
-#~ msgid "Use Plugins"
-#~ msgstr "Anvend indstik"
-
-#~ msgid "Add"
-#~ msgstr "Tilføj"
-
-#~ msgid "Remove"
-#~ msgstr "Fjern"
-
-#~ msgid "Launch a plugin at startup"
-#~ msgstr "Aktivér et indstik ved start"
-
-#~ msgid "PLUGIN-NAME"
-#~ msgstr "PLUGIN-NAME"
-
-#~ msgid "Toggle Split Screen"
-#~ msgstr "Opdelt skærm til/fra"
