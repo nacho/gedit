@@ -186,8 +186,6 @@ gedit_document_release_untitled_number (gint n)
 	g_return_if_fail (ret);	
 }
 
-
-
 GType
 gedit_document_get_type (void)
 {
@@ -2096,7 +2094,6 @@ gedit_document_insert_text_at_cursor (GeditDocument *doc, const gchar *text, gin
 	gtk_text_buffer_insert_at_cursor (GTK_TEXT_BUFFER (doc), text, len);
 }
 
-
 void 
 gedit_document_delete_text (GeditDocument *doc, gint start, gint end)
 {
@@ -2248,7 +2245,6 @@ gedit_document_end_user_action (GeditDocument *doc)
 	gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (doc));
 }
 
-
 void
 gedit_document_goto_line (GeditDocument* doc, guint line)
 {
@@ -2342,7 +2338,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 	gedit_debug (DEBUG_DOCUMENT, "converted_str: %s", converted_str);
 
 	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
-	
+
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (flags))
 	{
 		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
@@ -2351,33 +2347,29 @@ gedit_document_find (GeditDocument* doc, const gchar* str, gint flags)
 	if (GEDIT_SEARCH_IS_FROM_CURSOR (flags))
 	{
 		GtkTextIter sel_bound;
-		
-		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), &iter,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "insert"));
-		
-		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), &sel_bound,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "selection_bound"));
-		
+
+		gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),			
+						      &iter,
+						      &sel_bound);
+
 		if (!GEDIT_SEARCH_IS_BACKWARDS (flags))
 			gtk_text_iter_order (&sel_bound, &iter);		
 		else
 			gtk_text_iter_order (&iter, &sel_bound);		
 	}
-	else		
+	else
 	{
 		if (GEDIT_SEARCH_IS_BACKWARDS (flags))
 		{
 			/* get an iterator at the end of the document */
-			gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc),
-							    &iter, -1);
+			gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc),
+						      &iter);
 		}
 		else
 		{
 			/* get an iterator at the beginning of the document */
-			gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc),
-							    &iter, 0);
+			gtk_text_buffer_get_start_iter (GTK_TEXT_BUFFER (doc),
+							&iter);
 		}
 	}
 	
@@ -2510,6 +2502,7 @@ gedit_document_find_prev (GeditDocument* doc, gint flags)
 gboolean 
 gedit_document_get_selection (GeditDocument *doc, gint *start, gint *end)
 {
+	gboolean ret;
 	GtkTextIter iter;
 	GtkTextIter sel_bound;
 
@@ -2517,15 +2510,10 @@ gedit_document_get_selection (GeditDocument *doc, gint *start, gint *end)
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &iter,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "insert"));
-		
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &sel_bound,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "selection_bound"));
+	ret = gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),			
+						    &iter,
+						    &sel_bound);
+
 	gtk_text_iter_order (&iter, &sel_bound);	
 
 	if (start != NULL)
@@ -2534,7 +2522,7 @@ gedit_document_get_selection (GeditDocument *doc, gint *start, gint *end)
 	if (end != NULL)
 		*end = gtk_text_iter_get_offset (&sel_bound); 
 
-	return !gtk_text_iter_equal (&sel_bound, &iter);	
+	return ret;
 }
 
 void
@@ -2547,48 +2535,33 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (replace != NULL);	
+	g_return_if_fail (replace != NULL);
 
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &iter,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "insert"));
-		
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &sel_bound,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "selection_bound"));
-
-	if (gtk_text_iter_equal (&sel_bound, &iter))
+	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc),			
+						   &iter,
+						   &sel_bound))
 	{
 		gedit_debug (DEBUG_DOCUMENT, "There is no selected text");
 
 		return;
 	}
-	
-	gtk_text_iter_order (&sel_bound, &iter);		
 
 	converted_replace = gedit_utils_convert_search_text (replace);
 
 	gedit_document_begin_user_action (doc);
 
-	gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc),
-				&iter,
-				&sel_bound);
+	gtk_text_buffer_delete_selection (GTK_TEXT_BUFFER (doc), FALSE, TRUE);
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &iter,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "insert"));
+			&iter,
+			gtk_text_buffer_get_insert (GTK_TEXT_BUFFER (doc)));
+
 	if (*converted_replace != '\0')
 		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
 					&iter,
 					converted_replace, strlen (converted_replace));
 
-	if (doc->priv->last_replace_text != NULL)
-		g_free (doc->priv->last_replace_text);
-
-	doc->priv->last_replace_text = g_strdup (replace);
+	gedit_document_set_last_replace_text (doc, replace);
 
 	gedit_document_end_user_action (doc);
 
@@ -2651,9 +2624,8 @@ gedit_document_get_cursor (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
-                                    &iter,
-                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-					                      "insert"));
+			&iter,
+			gtk_text_buffer_get_insert (GTK_TEXT_BUFFER (doc)));
 
 	return gtk_text_iter_get_offset (&iter); 
 }
@@ -2763,7 +2735,6 @@ gedit_document_set_encoding (GeditDocument *doc, const GeditEncoding *encoding)
 
 	/* FIXME: do we need a encoding changed signal ? - Paolo */
 	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
-
 }
 
 glong
