@@ -30,6 +30,7 @@
 #include <libbonoboui.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include "gedit-recent.h"
+#include "gedit-debug.h"
 
 #define GEDIT_RECENT_BASE_KEY "/desktop/gnome/gal-recent"
 #define GEDIT_RECENT_DEFAULT_LIMIT 10
@@ -128,7 +129,7 @@ gedit_recent_get_type (void)
 			NULL, /* class finalize */
 			NULL, /* class data */
 			sizeof (GeditRecent),
-			5,
+			0,
 			(GInstanceInitFunc) gedit_recent_init
 		};
 
@@ -808,7 +809,12 @@ gedit_recent_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 {
 	GeditRecentMenuData *md = (GeditRecentMenuData *) data;
 
+	gedit_debug (DEBUG_RECENT, "In menu callback");
+
 	g_return_if_fail (md);
+	g_return_if_fail (md->uri);
+	g_return_if_fail (md->recent);
+	g_return_if_fail (GEDIT_IS_RECENT (md->recent));
 
 	gedit_recent_add (md->recent, md->uri);
 	
@@ -817,6 +823,8 @@ gedit_recent_menu_cb (BonoboUIComponent *uic, gpointer data, const char *cname)
 			      md->uri);
 
 	g_free (md);
+
+	gedit_debug (DEBUG_RECENT, "...Done.");
 }
 
 
@@ -933,6 +941,10 @@ gedit_recent_notify_cb (GConfClient *client, guint cnxn_id,
 {
 	GSList *list=NULL;
 	GeditRecent *recent = user_data;
+
+	/* bail out if we don't have a menu */
+	if (!recent->uic)
+		return;
 
 	/* this means the key was unset (cleared) */
 	if (entry->value == NULL) {

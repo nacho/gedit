@@ -1153,5 +1153,10 @@ gedit_mdi_update_ui_according_to_preferences (GeditMDI *mdi)
 GeditRecent*
 gedit_mdi_get_recent_from_window (BonoboWindow* win)
 {
-	return GEDIT_RECENT (g_object_get_data (G_OBJECT (win), RECENT_KEY));
+	gpointer r;
+	gedit_debug (DEBUG_MDI, "");
+
+	r = g_object_get_data (G_OBJECT (win), RECENT_KEY);
+	
+	return (r != NULL) ? GEDIT_RECENT (r) : NULL;
 }
