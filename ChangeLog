@@ -23,6 +23,22 @@
 	INCLUDES, so the 'make' process isn't spaced apart all
 	goofy-looking.
 
+2000-03-29  Alex Roberts  <bse@error.fsnet.co.uk>
+
+	* src/gE_files.c: (gE_file_save) Removed a floating gtk_text_thaw,
+	  which fixes the bug where the cursor would vanish after saving.
+	  Also use a straight get_chars when saving. 
+	  (gE_file_open) set the titlebar after opening the file.
+	
+	* src/gE_mdi.c: (gE_docuement_new_with_file) Use gE_file_open to open
+	  the file after creating the gE_document. this brings back the recent
+	  documents functionality. whee. =]
+	
+	* src/commands.c: (file_open_ok_sel) Moved the set_read_only call to
+	  after all the file opening methods. we were only checking and setting
+	  this if the file was going into a new gE_docuemnt.
+
+
 2000-03-20  Pablo Saratxaga <pablo@mandrakesoft.com>
 	
 	* makeconfig.pl: added Lithuanian language (laso Greek, that was

@@ -61,7 +61,7 @@ gint
 gE_file_open (gE_document *doc, gchar *fname)
 {
 	char *nfile, *name;
-	gchar *tmp_buf, *flash;
+	gchar *tmp_buf, *flash, *str;
 	struct stat stats;
 	gint i;
 	gE_view *nth_view;
@@ -101,7 +101,7 @@ gE_file_open (gE_document *doc, gchar *fname)
 				else
 				{
 					gnome_app_error(mdi->active_window, _("Can't open file!"));
-					return NULL;
+					return 0;
 				}
 			}
 		}
@@ -141,28 +141,21 @@ gE_file_save(gE_document *doc, gchar *fname)
 	  
 	}
 	
-	gtk_text_thaw (GTK_TEXT(view->text));
-
-/*	 We dont need to get the chars, as the chars are there in the 
-  	  public buffer..
-  	  
 	tmpstr = gtk_editable_get_chars (GTK_EDITABLE (view->text), 0,
 		gtk_text_get_length (GTK_TEXT (view->text)));
-*/	
-	/* sync the buffer */
-		gE_view_buffer_sync (view);
-	
-			if (fputs (view->document->buf->str, fp) == EOF) {
+
+
+	if (fputs (tmpstr, fp) == EOF) {
 	
 	  perror("Error saving file");
 	  fclose(fp);
-	  /*g_free (tmpstr);*/
+	  g_free (tmpstr);
 	  
 	  return 1;
 	
 	}
 	
-	/*g_free (tmpstr);*/
+	g_free (tmpstr);
 	
 	if (fclose(fp) != 0) {
 	

@@ -152,42 +152,6 @@ void gE_view_list_insert (gE_view *view, gE_data *data)
 
 }
 
-void view_list_erase (gE_view *view, gE_data *data)
-{
-
-
-}
-
-gint insert_into_buffer (gE_document *doc, gchar *buffer, gint position)
-{
-
-	  		if ((doc->buf->len > 0) && (position < doc->buf->len) && (position)) {
-	
-#ifdef DEBUG
-	  g_message ("g_string_insert");
-#endif
-	  doc->buf = g_string_insert (doc->buf, position, buffer);
-	
-	} else if (position == 0) {
-
-#ifdef DEBUG		  
-	  g_message ("g_string_prepend");
-#endif
-	  doc->buf = g_string_prepend (doc->buf, buffer);
-	  
-	} else {
-	  
-#ifdef DEBUG
-	  g_message ("g_string_append");
-#endif
-	  doc->buf = g_string_append (doc->buf, buffer);
-	
-	}
-	
-	return 0;		
-
-}
-
 void
 doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length,
 	int *pos, gE_view *view)
@@ -238,13 +202,7 @@ doc_insert_text_cb(GtkWidget *editable, const guchar *insertion_text, int length
 	strncpy (buffer, insertion_text, length);
 
 	doc = view->document;
-/*
-#ifdef DEBUG
- 	g_message ("and the buffer is: %s, %d, %d.. buf->len %d", buffer, length, position, view->document->buf->len);
-#endif
 
-	insert_into_buffer (doc, buffer, position);
-*/
 	gE_undo_add (buffer, position, (position + length), INSERT, doc);
 
 	data = g_malloc0 (sizeof (gE_data));
@@ -299,27 +257,6 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	  return;
 	
 	doc = view->document;
-/*
-#ifdef DEBUG	
-	g_message ("start: %d end: %d len: %d", start_pos, end_pos, doc->buf->len);
-#endif	
-	if ((start_pos + end_pos) < doc->buf->len)
-	if (end_pos + (end_pos - start_pos) <= doc->buf->len) {
-	
-#ifdef DEBUG
-	  g_message ("g_string_erase");
-#endif
-	  doc->buf = g_string_erase (doc->buf, start_pos, (end_pos - start_pos));
-	  
-	} else {
-	  
-#ifdef DEBUG
-	  g_message ("g_string_truncate");
-#endif
-	  doc->buf = g_string_truncate (doc->buf, start_pos);
-	
-	}
-*/
 	buffer = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
 	gE_undo_add (buffer, start_pos, end_pos, DELETE, doc);
 
@@ -457,10 +394,6 @@ auto_indent_cb(GtkWidget *text, char *insertion_text, int length,
 		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
 			whitespace, strlen (whitespace));
 	
-/*		insert_into_buffer (doc, whitespace, i);
-*/
-		
-
 	}
 	
 	g_free (whitespace);
