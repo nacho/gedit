@@ -266,11 +266,6 @@ init (GeditPlugin* plugin)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	plugin->name = _("CVS ChangeLog");
-	plugin->desc = _("A plugin that opens ChangeLogs found in CVS commit messages.");
-	plugin->author = "James Willcox <jwillcox@cs.indiana.edu>";
-	plugin->copyright = _("Copyright (C) 2002 - James Willcox");
-
 	plugin->private_data = NULL;
 
 	return PLUGIN_OK;

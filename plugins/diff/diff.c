@@ -67,8 +67,9 @@
 #define MENU_ITEM_NAME		"Diff"	
 #define MENU_ITEM_TIP		N_("Makes a diff file from two documents or files")
 
-#define PLUGIN_NAME 		_("Compare files")
 #define DIFF_PROGRAM_NAME	"diff"
+
+static const gchar *plugin_name;
 
 typedef struct _DiffDialog DiffDialog;
 
@@ -104,7 +105,6 @@ G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState configure (GeditPlugin *p, GtkWidget *parent);
-G_MODULE_EXPORT GeditPluginState save_settings (GeditPlugin *pd);
 
 static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 static void diff_file_selected (GtkWidget *widget, gpointer data);
@@ -620,6 +620,20 @@ diff_execute (DiffDialog *dialog)
 	file_name_1 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (dialog->file_entry_1), FALSE);
 	file_name_2 = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (dialog->file_entry_2), FALSE);
 
+	if (file_name_1 != NULL)
+		gnome_entry_prepend_history (GNOME_ENTRY (
+						gnome_file_entry_gnome_entry (
+							GNOME_FILE_ENTRY (dialog->file_entry_1))), 
+					     TRUE, 
+					     file_name_1);
+	
+	if (file_name_2 != NULL)
+		gnome_entry_prepend_history (GNOME_ENTRY (
+						gnome_file_entry_gnome_entry (
+							GNOME_FILE_ENTRY (dialog->file_entry_2))), 
+					     TRUE, 
+					     file_name_2);
+
 	/* We need to:
 	   - if !state_1 & !state_2. Verify that the doc numbers are
 	   not the same. If they are display an err msg and return;
@@ -895,6 +909,20 @@ finally:
 	{
 		ignore_blanks = ib;
 		use_unified_format = uf;
+
+		g_return_val_if_fail (diff_gconf_client != NULL, TRUE);
+
+		gconf_client_set_bool (
+			diff_gconf_client,
+			DIFF_BASE_KEY UNIFIED_FORMAT_KEY,
+			use_unified_format,
+	      		NULL);
+
+		gconf_client_set_bool (
+			diff_gconf_client,
+			DIFF_BASE_KEY IGNORE_BLANKS,
+			ignore_blanks,
+	      		NULL);
 	}
 	
 	return ret;
@@ -940,9 +968,11 @@ configure_real (GtkWindow *parent)
 	gchar *temp;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
+
+	g_return_val_if_fail (diff_gconf_client != NULL, FALSE);
 	
 	temp = gedit_plugin_locate_program (DIFF_PROGRAM_NAME,
-					    PLUGIN_NAME, 
+					    plugin_name, 
 					    parent);
 
 	if (temp != NULL)
@@ -951,6 +981,12 @@ configure_real (GtkWindow *parent)
 			g_free (diff_program_location);
 		
 		diff_program_location = temp;
+
+		gconf_client_set_string (
+				diff_gconf_client,
+				DIFF_BASE_KEY DIFF_LOCATION_KEY,
+				diff_program_location,
+		      		NULL);
 	}
 	
 	return (diff_program_location != NULL);
@@ -986,41 +1022,14 @@ destroy (GeditPlugin *plugin)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	plugin->deactivate (plugin);
-
-	g_object_unref (G_OBJECT (diff_gconf_client));
-
-	return PLUGIN_OK;
-}
-
-G_MODULE_EXPORT GeditPluginState
-save_settings (GeditPlugin *pd)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	g_return_val_if_fail (diff_gconf_client != NULL, PLUGIN_ERROR);
-
-	if (diff_program_location != NULL)
-		gconf_client_set_string (
-				diff_gconf_client,
-				DIFF_BASE_KEY DIFF_LOCATION_KEY,
-				diff_program_location,
-		      		NULL);
-
-	gconf_client_set_bool (
-			diff_gconf_client,
-			DIFF_BASE_KEY UNIFIED_FORMAT_KEY,
-			use_unified_format,
-	      		NULL);
-
-	gconf_client_set_bool (
-			diff_gconf_client,
-			DIFF_BASE_KEY IGNORE_BLANKS,
-			ignore_blanks,
-	      		NULL);
-
 	gconf_client_suggest_sync (diff_gconf_client, NULL);
 
+	g_object_unref (G_OBJECT (diff_gconf_client));
+	diff_gconf_client = NULL;
+	
+	g_free (diff_program_location);
+	diff_program_location = NULL;
+	
 	return PLUGIN_OK;
 }
 
@@ -1062,14 +1071,9 @@ init (GeditPlugin *pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->name = PLUGIN_NAME;
-	pd->desc = _("Makes a diff file from two documents or files on disk.\n\n"
-		     "For more info on \"diff\" program, type \"man diff\" in a shell prompt.\n");
-	pd->author = "Chema Celorio <chema@celorio.com> and Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2000 - 2001 Chema Celorio \n"
-			  "Copyright (C) 2002 Paolo Maggi");
-	
 	pd->private_data = NULL;
+
+	plugin_name = pd->name;
 
 	diff_gconf_client = gconf_client_get_default ();
 	g_return_val_if_fail (diff_gconf_client != NULL, PLUGIN_ERROR);

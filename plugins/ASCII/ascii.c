@@ -486,13 +486,6 @@ init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
-     
-	pd->name = _("ASCII table");
-	pd->desc = _("This plugin displays a pop-up dialog which contains an ASCII Table.");
-	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2001-2002 Paolo Maggi");
-	
-	pd->private_data = NULL;
 		
 	return PLUGIN_OK;
 }

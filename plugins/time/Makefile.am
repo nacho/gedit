@@ -20,4 +20,10 @@ libtime_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = time.glade2
 
-EXTRA_DIST = $(glade_DATA)
+plugin_in_files = time.gedit-plugin.in
+
+%.gedit-plugin: %.gedit-plugin.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+
+plugin_DATA = $(plugin_in_files:.gedit-plugin.in=.gedit-plugin)
+
+EXTRA_DIST = $(glade_DATA) $(plugin_DATA)

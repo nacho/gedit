@@ -490,15 +490,6 @@ init (GeditPlugin * pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	pd->name = _("Sort");
-	pd->desc = _("Sort a document or selected text.");
-	pd->author =
-	    "Carlo Borreo <borreo@softhome.net>, Lee Mallabone <gnome@fonicmonkey.net> "
-	    "and Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright =
-	    _("Copyright (C) 2001 Carlo Borreo\n"
-	      "Copyright (C) 2002 Lee Mallabone and Paolo Maggi");
-
 	pd->private_data = NULL;
 
 	return PLUGIN_OK;

@@ -68,7 +68,6 @@
 #define MENU_ITEM_TIP_LANG	N_("Set the language of the current document")
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
-G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
@@ -743,14 +742,6 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 
 	return PLUGIN_OK;
 }
-
-G_MODULE_EXPORT GeditPluginState
-destroy (GeditPlugin *plugin)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	return PLUGIN_OK;
-}
 	
 G_MODULE_EXPORT GeditPluginState
 activate (GeditPlugin *pd)
@@ -816,12 +807,7 @@ init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
-     
-	pd->name = _("Spell checker");
-	pd->desc = _("Checks the spelling of the current document.");
-	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
-	
+     	
 	pd->private_data = NULL;
 
 	if (spell_checker_id == 0)

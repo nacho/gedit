@@ -157,7 +157,6 @@ G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState configure (GeditPlugin *p, GtkWidget *parent);
-G_MODULE_EXPORT GeditPluginState save_settings (GeditPlugin *pd);
 
 static GeditTimePluginPromptType
 get_prompt_type ()
@@ -964,18 +963,6 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 
 	return PLUGIN_OK;
 }
-
-G_MODULE_EXPORT GeditPluginState
-destroy (GeditPlugin *plugin)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	plugin->deactivate (plugin);
-
-	g_object_unref (G_OBJECT (time_gconf_client));
-
-	return PLUGIN_OK;
-}
 	
 G_MODULE_EXPORT GeditPluginState
 activate (GeditPlugin *pd)
@@ -1013,13 +1000,16 @@ deactivate (GeditPlugin *pd)
 }
 
 G_MODULE_EXPORT GeditPluginState
-save_settings (GeditPlugin *pd)
+destroy (GeditPlugin *pd)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	g_return_val_if_fail (time_gconf_client != NULL, PLUGIN_ERROR);
 
 	gconf_client_suggest_sync (time_gconf_client, NULL);
+
+	g_object_unref (G_OBJECT (time_gconf_client));
+	time_gconf_client = NULL;
 
 	return PLUGIN_OK;
 }
@@ -1029,12 +1019,7 @@ init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
-        
-	pd->name = _("Insert Date/Time");
-	pd->desc = _("Inserts current date and time at the cursor position.");
-	pd->author = "Paolo Maggi <maggi@athena.polito.it>, Lee Mallabone <gnome@fonicmonkey.net>";
-	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
-	
+
 	pd->private_data = NULL;
 		
 	time_gconf_client = gconf_client_get_default ();

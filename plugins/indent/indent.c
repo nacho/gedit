@@ -53,7 +53,6 @@
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_5/"
 
 G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
-G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
@@ -191,14 +190,6 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 }
 
 G_MODULE_EXPORT GeditPluginState
-destroy (GeditPlugin *plugin)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	return PLUGIN_OK;
-}
-	
-G_MODULE_EXPORT GeditPluginState
 activate (GeditPlugin *pd)
 {
 	GList *top_windows;
@@ -252,11 +243,6 @@ init (GeditPlugin *pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->name = _("Indent lines");
-	pd->desc = _("Indent or un-indent selected lines.");
-	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
-	
 	pd->private_data = NULL;
 		
 	return PLUGIN_OK;

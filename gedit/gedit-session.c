@@ -130,17 +130,26 @@ client_die_cb (GnomeClient *client, gpointer data)
 	if (!client->save_yourself_emitted)
 		gedit_file_close_all ();
 
-	gedit_plugins_engine_save_settings ();
+	gedit_debug (DEBUG_FILE, "All files closed.");
 	
-	gedit_prefs_manager_shutdown ();
-
-	/* FIXME: we should enable it, but it crashes here - Paolo */
-	/*
 	bonobo_mdi_destroy (BONOBO_MDI (gedit_mdi));
+	
+	gedit_debug (DEBUG_FILE, "Unref gedit_mdi.");
 
 	g_object_unref (G_OBJECT (gedit_mdi));
-	*/
-	
+
+	gedit_debug (DEBUG_FILE, "Unref gedit_mdi: DONE");
+
+	gedit_debug (DEBUG_FILE, "Unref gedit_app_server.");
+
+	bonobo_object_unref (gedit_app_server);
+
+	gedit_debug (DEBUG_FILE, "Unref gedit_app_server: DONE");
+
+	gedit_prefs_manager_shutdown ();
+
+	gedit_plugins_engine_shutdown ();
+
 	gtk_main_quit ();
 }
 

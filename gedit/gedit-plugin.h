@@ -46,6 +46,8 @@ typedef struct _GeditPlugin GeditPlugin;
 struct _GeditPlugin
 {
 	gchar	*file;
+	
+	gchar	*location;
 	GModule	*handle;
 
 	/* The following fields are compulsory */
@@ -61,7 +63,6 @@ struct _GeditPlugin
 
 	/* The following fields are optional */
 	GeditPluginState	(*configure)	(GeditPlugin *p, GtkWidget *parent);
-	GeditPluginState	(*save_settings)(GeditPlugin *p);
 	GeditPluginState	(*update_ui)	(GeditPlugin *p, BonoboWindow *w);
 	GeditPluginState	(*destroy)	(GeditPlugin *p);
 
@@ -69,8 +70,8 @@ struct _GeditPlugin
 	gpointer	private_data;
 };	
 	
-gchar* gedit_plugin_locate_program  (gchar *program_name, 
-				     gchar *plugin_name, 
+gchar* gedit_plugin_locate_program  (const gchar *program_name, 
+				     const gchar *plugin_name, 
 				     GtkWindow *parent);
 
 #endif  /* __GEDIT_PLUGIN_H__ */

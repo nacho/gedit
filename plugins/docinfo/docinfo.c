@@ -359,13 +359,6 @@ init (GeditPlugin *pd)
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
      
-	pd->name = _("Word count");
-	pd->desc = _("The word count plugin analyzes the current document and determines the number "
-		     "of words, lines, characters and non-space characters in it "
-		     "and display the result.");
-	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
-	
 	pd->private_data = NULL;
 		
 	return PLUGIN_OK;

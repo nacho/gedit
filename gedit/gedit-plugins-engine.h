@@ -46,7 +46,7 @@ struct _GeditPluginInfo
 };
 
 gboolean	 gedit_plugins_engine_init 		(void);
-void		 gedit_plugins_engine_save_settings 	(void);
+void		 gedit_plugins_engine_shutdown 		(void);
 
 const GList	*gedit_plugins_engine_get_plugins_list 	(void);
 
@@ -61,7 +61,7 @@ gboolean 	 gedit_plugins_engine_configure_plugin	(GeditPlugin *plugin, GtkWidget
  */
 void		 gedit_plugins_engine_update_plugins_ui	(BonoboWindow *window, gboolean new_window);
 
-gboolean	gedit_plugins_engine_is_a_configurable_plugin (GeditPlugin *plugin);
+gboolean	 gedit_plugins_engine_is_a_configurable_plugin (GeditPlugin *plugin);
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */
 

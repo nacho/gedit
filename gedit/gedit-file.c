@@ -561,10 +561,6 @@ gedit_file_exit (void)
 	gedit_debug (DEBUG_FILE, "All files closed.");
 	
 	bonobo_mdi_destroy (BONOBO_MDI (gedit_mdi));
-
-	gedit_plugins_engine_save_settings ();
-	
-	gedit_prefs_manager_shutdown ();
 	
 	gedit_debug (DEBUG_FILE, "Unref gedit_mdi.");
 
@@ -577,6 +573,10 @@ gedit_file_exit (void)
 	bonobo_object_unref (gedit_app_server);
 
 	gedit_debug (DEBUG_FILE, "Unref gedit_app_server: DONE");
+
+	gedit_prefs_manager_shutdown ();
+
+	gedit_plugins_engine_shutdown ();
 
 	gtk_main_quit ();
 }

@@ -139,12 +139,16 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 		{	
 			running = MAKE_IT_CLOSE;
 		
+			/*
 			g_print ("Kill Child: %d\n", dialog->child_pid);
+			*/
 
 			kill (dialog->child_pid, SIGKILL);	
 			wait (NULL);
 
+			/*
 			g_print ("Killed Child: %d\n", dialog->child_pid);
+			*/
 		}
 
 		if (dialog->is_capturing_output)
@@ -181,8 +185,6 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	g_print ("Res id: %d\n", res_id);
-	
 	switch (res_id) {
 		case GTK_RESPONSE_OK:
 			run_command_real (dialog);
@@ -209,12 +211,16 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog
 
 			gtk_widget_set_sensitive (dialog->stop_button, FALSE);
 
+			/*
 			g_print ("Kill Child: %d\n", dialog->child_pid);
+			*/
 
 			kill (dialog->child_pid, SIGKILL);
 			wait (NULL);
 			
+			/*
 			g_print ("Killed: %d\n", dialog->child_pid);
+			*/
 
 			break;
 
@@ -787,7 +793,9 @@ run_command_real (ShellOutputDialog *dialog)
 
 	g_strfreev (argv);
 
+	/*
 	g_print ("Child pid: %d\n", dialog->child_pid);
+	*/
 
 	if (retval)
 	{	
@@ -895,9 +903,8 @@ destroy (GeditPlugin *plugin)
 {
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	plugin->deactivate (plugin);
-
 	g_free (current_directory);
+	current_directory = NULL;
 
 	return PLUGIN_OK;
 }
@@ -956,12 +963,7 @@ init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
-     
-	pd->name = _("Shell command");
-	pd->desc = _("Execute an external program and eventually grabs its output in the output window.");
-	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
-	
+
 	pd->private_data = NULL;
 
 	current_directory = g_get_current_dir ();

@@ -321,7 +321,7 @@ plugin_manager_update_info (GeditPluginManager *dialog, GeditPluginInfo *info)
 	author = g_strdup_printf ("%s: %s", _("Author(s)"), info->plugin->author);
 	name = g_strdup_printf ("%s plugin", info->plugin->name);
 
-	gtk_label_set_text (GTK_LABEL (dialog->desc), info->plugin->desc);
+	gtk_label_set_markup (GTK_LABEL (dialog->desc), info->plugin->desc);
 	gtk_label_set_text (GTK_LABEL (dialog->author), author);
 	gtk_label_set_text (GTK_LABEL (dialog->filename), filename);
 	gtk_label_set_text (GTK_LABEL (dialog->copyright), info->plugin->copyright);

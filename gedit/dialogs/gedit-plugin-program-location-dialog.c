@@ -43,7 +43,7 @@ static void error_dialog (const gchar* str, GtkWindow *parent);
  * of program_name
  */
 gchar *
-gedit_plugin_program_location_dialog (gchar *program_name, gchar *plugin_name,
+gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *plugin_name,
 		GtkWindow *parent)
 {
 	GladeXML *gui;

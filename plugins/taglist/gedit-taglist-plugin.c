@@ -156,13 +156,7 @@ init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
-     
-	pd->name = _("Tag list");
-	pd->desc = _("The tag list plugin provides a method to easily insert into a document "
-		     "commonly used tabs/strings without having to type them.");
-	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
-	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
-	
+
 	pd->private_data = NULL;
 		
 	return PLUGIN_OK;

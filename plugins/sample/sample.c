@@ -168,12 +168,12 @@ init (GeditPlugin *pd)
 {
 	/* initialize */
 	gedit_debug (DEBUG_PLUGINS, "");
-     
+#if 0     
 	pd->name = _("User name");
 	pd->desc = _("Inserts the user name at the cursor position.");
 	pd->author = "Paolo Maggi <maggi@athena.polito.it>";
 	pd->copyright = _("Copyright (C) 2002 - Paolo Maggi");
-	
+#endif	
 	pd->private_data = NULL;
 		
 	return PLUGIN_OK;
