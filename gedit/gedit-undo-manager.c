@@ -553,6 +553,8 @@ gedit_undo_manager_delete_range_handler (GtkTextBuffer *buffer, GtkTextIter *sta
 	gedit_undo_manager_add_action (um, undo_action);
 
 	g_free (undo_action.action.delete.text);
+
+	gedit_debug (DEBUG_UNDO, "DONE");
 }
 
 static void 
@@ -630,6 +632,7 @@ gedit_undo_manager_add_action (GeditUndoManager *um, GeditUndoAction undo_action
 		g_signal_emit (G_OBJECT (um), undo_manager_signals [CAN_REDO], 0, FALSE);
 	}
 
+	gedit_debug (DEBUG_UNDO, "DONE");
 }
 
 static void 

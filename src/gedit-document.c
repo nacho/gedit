@@ -1553,6 +1553,12 @@ gedit_document_get_selected_text (GeditDocument *doc, gint *start, gint *end)
 	if (end != NULL)
 		*end = gtk_text_iter_get_offset (&sel_bound); 
 
+	if (gtk_text_iter_equal (&sel_bound, &iter))
+	{
+		gedit_debug (DEBUG_DOCUMENT, "There is no selected text");
+
+		return NULL;
+	}
 	return gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc), &iter, &sel_bound, TRUE);
 }
 
@@ -1589,6 +1595,7 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (replace != NULL);
+	g_return_if_fail (*replace != '\0');
 
 	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
                                     &iter,
@@ -1599,7 +1606,14 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
                                     &sel_bound,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
 					                      "selection_bound"));
-		
+
+	if (gtk_text_iter_equal (&sel_bound, &iter))
+	{
+		gedit_debug (DEBUG_DOCUMENT, "There is no selected text");
+
+		return;
+	}
+	
 	gtk_text_iter_order (&sel_bound, &iter);		
 
 	gedit_document_begin_user_action (doc);
@@ -1608,11 +1622,16 @@ gedit_document_replace_selected_text (GeditDocument *doc, const gchar *replace)
 				&iter,
 				&sel_bound);
 
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &iter,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "insert"));
+
 	gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
 				&iter,
 				replace, strlen (replace));
 
-	if (doc->priv->last_replace_text)
+	if (doc->priv->last_replace_text != NULL)
 		g_free (doc->priv->last_replace_text);
 
 	doc->priv->last_replace_text = g_strdup (replace);

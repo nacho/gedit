@@ -453,9 +453,9 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
-		case_sensitive = FALSE;
-	else
 		case_sensitive = TRUE;
+	else
+		case_sensitive = FALSE;
 			
 	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive))
 	{	
@@ -524,9 +524,9 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 
 	
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
-		case_sensitive = FALSE;
-	else
 		case_sensitive = TRUE;
+	else
+		case_sensitive = FALSE;
 			
 	if (!gedit_document_find (doc, search_string, from_cursor, case_sensitive))
 	{	
@@ -606,12 +606,26 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 
 	selected_text = gedit_document_get_selected_text (doc, NULL, NULL);
 
-	if (strcmp (selected_text, search_string) != 0)
+	gedit_debug (DEBUG_SEARCH, "Sel text: %s", selected_text);
+	gedit_debug (DEBUG_SEARCH, "Search string: %s", search_string);
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
+		case_sensitive = TRUE;
+	else
+		case_sensitive = FALSE;
+
+	if ((selected_text == NULL) ||
+	    (case_sensitive && (strcmp (selected_text, search_string) != 0)) ||
+	    (!case_sensitive && !g_uft8_caselessnmatch (selected_text, 
+						       search_string, 
+						       strlen (selected_text), 
+						       strlen (search_string)) != 0))
 	{
 		gedit_debug (DEBUG_SEARCH, "selected_text (%s) != search_string (%s)", 
 				selected_text, search_string);
 
-		g_free (selected_text);
+		if (selected_text != NULL)
+			g_free (selected_text);
 
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
 			GEDIT_RESPONSE_REPLACE, FALSE);
@@ -622,13 +636,12 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	}
 				
 	g_free (selected_text);
-	
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->case_sensitive)))
-		case_sensitive = TRUE;
-	else
-		case_sensitive = FALSE;
+		
+	gedit_debug (DEBUG_SEARCH, "Replace string: %s", replace_string);
 
 	gedit_document_replace_selected_text (doc, replace_string);
+
+	gedit_debug (DEBUG_SEARCH, "Replaced");
 
 	/* go ahead and find the next one */
 	if (!gedit_document_find (doc, search_string, TRUE, case_sensitive))
@@ -646,6 +659,8 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 		
 		gedit_view_scroll_to_cursor (active_view);
 	}
+
+	gedit_debug (DEBUG_SEARCH, "END");
 }
 
 

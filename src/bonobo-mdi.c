@@ -1160,7 +1160,7 @@ set_active_view (BonoboMDI *mdi, GtkWidget *view)
 		
 		mdi->priv->active_child = bonobo_mdi_get_child_from_view (view);
 		mdi->priv->active_window = bonobo_mdi_get_window_from_view (view);
-		
+	
 		gtk_widget_grab_focus (GTK_WIDGET (view));
 	}
 	
@@ -1422,9 +1422,11 @@ bonobo_mdi_remove_view (BonoboMDI *mdi, GtkWidget *view, gint force)
 
 	if (GTK_NOTEBOOK (book)->cur_page == NULL) 
 	{
-		if (g_list_length (mdi->priv->windows) > 1 || 
-		    mdi->priv->registered) 
+		if ((g_list_length (mdi->priv->windows) > 1) || 
+		    (mdi->priv->registered != NULL)) 
 		{
+			gedit_debug (DEBUG_VIEW, "Destroy window");
+
 			/* if this is NOT the last toplevel or a registered object
 		   	exists, destroy the toplevel */
 			mdi->priv->windows = g_list_remove (mdi->priv->windows, window);

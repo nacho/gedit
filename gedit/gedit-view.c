@@ -148,7 +148,7 @@ gedit_view_class_init (GeditViewClass *klass)
   	parent_class = g_type_class_peek_parent (klass);
 
   	object_class->finalize = gedit_view_finalize;
-	
+
 	GTK_WIDGET_CLASS (klass)->grab_focus = gedit_view_grab_focus;
 }
 

@@ -72,6 +72,7 @@ void gedit_utils_error_reporting_reverting_file (const gchar *uri,
 					       GError *error,
 					       GtkWindow *parent);
 
+gboolean g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2);
 
 #endif /* __GEDIT_UTILS_H__ */
 

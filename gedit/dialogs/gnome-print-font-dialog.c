@@ -89,7 +89,7 @@ gnome_print_font_dialog_get_type (void)
 	return font_dialog_type;
 
 }
-static gchar*
+static void
 gfsd_modify_preview_phrase (GtkButton *button, GnomePrintFontDialog *fontseldiag)
 {
 	GtkWidget *dialog;
@@ -140,9 +140,6 @@ gfsd_modify_preview_phrase (GtkButton *button, GnomePrintFontDialog *fontseldiag
 	}
 
 	gtk_widget_destroy (dialog);
-
-	/* FIXME: should it return something else? */
-	return NULL;
 }
 	
 

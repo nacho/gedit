@@ -321,8 +321,6 @@ gedit_dialog_add_button (GtkDialog *dialog, const gchar* text, const gchar* stoc
  */
 
 static gchar *g_utf8_strcasestr(const gchar *haystack, const gchar *needle);
-static gboolean g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n);
-
 
 static gchar *
 g_utf8_strcasestr(const gchar *haystack, const gchar *needle)
@@ -393,8 +391,8 @@ finally_1:
 /*
  * n: len of the string in bytes
  */
-static gboolean 
-g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n)
+gboolean 
+g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2)
 {
 	gchar *casefold;
 	gchar *normalized_s1;
@@ -405,13 +403,14 @@ g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n)
 	
 	g_return_val_if_fail (s1 != NULL, FALSE);
 	g_return_val_if_fail (s2 != NULL, FALSE);
-	g_return_val_if_fail (n > 0, FALSE);
+	g_return_val_if_fail (n1 > 0, FALSE);
+	g_return_val_if_fail (n2 > 0, FALSE);
 
-	casefold = g_utf8_casefold (s1, n);
+	casefold = g_utf8_casefold (s1, n1);
 	normalized_s1 = g_utf8_normalize (casefold, -1, G_NORMALIZE_ALL);
 	g_free (casefold);
 
-	casefold = g_utf8_casefold (s2, n);
+	casefold = g_utf8_casefold (s2, n2);
 	normalized_s2 = g_utf8_normalize (casefold, -1, G_NORMALIZE_ALL);
 	g_free (casefold);
 
@@ -425,7 +424,7 @@ g_uft8_caselessnmatch (const char *s1, const char *s2, gssize n)
 	
 finally_2:
 	g_free (normalized_s1);
-	g_free (normalized_s1);	
+	g_free (normalized_s2);	
 
 	return ret;
 }
@@ -527,7 +526,7 @@ lines_match (const GtkTextIter *start,
       /* If it's not the first line, we have to match from the
        * start of the line.
        */
-      if (g_uft8_caselessnmatch (line_text, *lines, strlen (*lines)) == 0)
+      if (g_uft8_caselessnmatch (line_text, *lines, strlen (line_text), strlen (*lines)) == 0)
         found = line_text;
       else
         found = NULL;
@@ -673,7 +672,7 @@ gedit_text_iter_forward_search (const GtkTextIter *iter,
   g_return_val_if_fail (iter != NULL, FALSE);
   g_return_val_if_fail (str != NULL, FALSE);
 
-  if ((flags & GTK_TEXT_SEARCH_CASE_INSENSITIVE) != 0)
+  if ((flags & GTK_TEXT_SEARCH_CASE_INSENSITIVE) == 0)
 	  return gtk_text_iter_forward_search (iter, str, flags,
 			 match_start, match_end, limit); 
 

@@ -924,7 +924,9 @@ void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 	if (active_view == NULL)
 		return;
 
+	/*
 	gtk_widget_grab_focus (active_view);
+	*/
 
 	status = g_object_get_data (G_OBJECT (win), "CursorPosition");	
 	gedit_view_set_cursor_position_statusbar (GEDIT_VIEW (active_view), status);
