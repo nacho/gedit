@@ -45,13 +45,13 @@
 #include <signal.h>
 #include <sys/wait.h>
 
-#include <gedit-plugin.h>
-#include <gedit-debug.h>
-#include <gedit-utils.h>
-#include <gedit-menus.h>
-#include <gedit-file.h>
-#include <gedit-mdi.h>
-#include <gedit-output-window.h>
+#include <gedit/gedit-plugin.h>
+#include <gedit/gedit-debug.h>
+#include <gedit/gedit-utils.h>
+#include <gedit/gedit-menus.h>
+#include <gedit/gedit-file.h>
+#include <gedit/gedit-mdi.h>
+#include <gedit/gedit-output-window.h>
 
 #define MENU_ITEM_LABEL		N_("_Run Command...")
 #define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_3/"

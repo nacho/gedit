@@ -14,11 +14,11 @@
 #include <string.h>
 #include <glade/glade-xml.h>
 
-#include <gedit-menus.h>
-#include <gedit-document.h>
-#include <gedit-debug.h>
-#include <gedit-view.h>
-#include <gedit-plugin.h>
+#include <gedit/gedit-menus.h>
+#include <gedit/gedit-document.h>
+#include <gedit/gedit-debug.h>
+#include <gedit/gedit-view.h>
+#include <gedit/gedit-plugin.h>
 
 /* Key in case the plugin ever needs any settings */
 #define SORT_BASE_KEY "/apps/gedit-2/plugins/sort"

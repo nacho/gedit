@@ -41,11 +41,11 @@
 #include "gedit-taglist-plugin.h"
 #include "gedit-taglist-plugin-window.h"
 
-#include <gedit-debug.h>
-#include <gedit2.h>
-#include <gedit-document.h>
-#include <gedit-utils.h>
-#include <gedit-menus.h>
+#include <gedit/gedit-debug.h>
+#include <gedit/gedit2.h>
+#include <gedit/gedit-document.h>
+#include <gedit/gedit-utils.h>
+#include <gedit/gedit-menus.h>
 
 enum
 {

@@ -40,7 +40,7 @@
 
 #include <libgnome/gnome-util.h>
 
-#include <gedit-debug.h>
+#include <gedit/gedit-debug.h>
 
 #include "gedit-taglist-plugin-parser.h"
 
