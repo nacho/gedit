@@ -205,9 +205,9 @@ static GeditEncoding encodings [] = {
     "IBM864", N_("Arabic") },
 
   { GEDIT_ENCODING_ISO_2022_JP,
-    "ISO2022JP", N_("Japanese") },
+    "ISO-2022-JP", N_("Japanese") },
   { GEDIT_ENCODING_ISO_2022_KR,
-    "ISO2022KR", N_("Korean") },
+    "ISO-2022-KR", N_("Korean") },
   { GEDIT_ENCODING_ISO_IR_111,
     "ISO-IR-111", N_("Cyrillic") },
   { GEDIT_ENCODING_JOHAB,
