@@ -1,3 +1,10 @@
+Sun Sep 12 19:30:12 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* src/gE_undo.c: (gE_undo_redo) Simple case of copying the undo code, and
+	  swapping some parts. so that the redo item goes onto the undo stack. the
+	  action check is also reversed, so that text deleted is deleted (instead
+	  of inserted).. oh the confusion. gEdit now has fully working undo/redo =)
+
 Sun Sep 12 19:22:19 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* src/gE_undo.c: (gE_undo_add) Nullify the redo stack after freeing it. no

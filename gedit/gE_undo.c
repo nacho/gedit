@@ -127,6 +127,69 @@ void gE_undo_do (GtkWidget *w, gpointer data)
 void gE_undo_redo (GtkWidget *w, gpointer data)
 {
 
+	gE_document *doc = gE_document_current();
+	gE_undo *redo;
+	
+	if (!doc->redo)
+	  return;
+	
+	/* The redo data we need is always at the top op the
+	   stack. So, therefore, the first one =) */
+	redo = g_list_nth_data (doc->redo, 0);
+
+	/* add this redo data to the top of the undo stack.. */
+	doc->undo = g_list_prepend (doc->undo, redo);
+	
+	/* remove the data from the redo stack */
+	doc->redo = g_list_remove (doc->redo, redo);
+	
+	/* Now we can do the undo proper.. */
+	
+	if (!redo->action) {
+		
+		/* We're inserting something that was deleted */
+		
+		g_message ("gE_undo_redo: Deleting..");
+		
+		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos)) {
+	
+			g_message ("g_string_insert");
+			doc->buf = g_string_insert (doc->buf, redo->start_pos, redo->text);
+	
+		} else if (redo->end_pos == 0) {
+	  
+			g_message ("g_string_prepend");
+			doc->buf = g_string_prepend (doc->buf, redo->text);
+	  
+		} else {
+	  
+			g_message ("g_string_append");
+			doc->buf = g_string_append (doc->buf, redo->text);
+	
+		}
+			
+		views_insert (doc, redo);
+
+	} else {
+	
+		/* We're deleteing somthing that had been inserted */
+		
+		if (redo->end_pos + (redo->end_pos - redo->start_pos) <= doc->buf->len) {
+	
+			g_message ("g_string_erase");
+			doc->buf = g_string_erase (doc->buf, redo->start_pos, (redo->end_pos - redo->start_pos));
+	  
+		} else {
+	  
+			g_message ("g_string_truncate");
+			doc->buf = g_string_truncate (doc->buf, redo->start_pos);
+	
+		}
+		
+		views_delete (doc, redo);
+		
+	}
+
 
 }
 
