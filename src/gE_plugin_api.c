@@ -40,6 +40,7 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.document.current = gE_plugin_document_current;
   callbacks.document.filename = gE_plugin_document_filename;
   callbacks.text.get = gE_plugin_text_get;
+  callbacks.program.quit = gE_plugin_program_quit;
   
   plugin_register( plug, &callbacks, GPOINTER_TO_INT( data->window ) );
 }
@@ -131,6 +132,19 @@ char *gE_plugin_text_get( gint docid )
 {
   gE_document *document = (gE_document *) GINT_TO_POINTER( docid );
   return gtk_editable_get_chars( GTK_EDITABLE( document->text ), 0, -1 );
+}
+
+
+gboolean gE_plugin_program_quit ()
+{
+	gE_data *data;
+	gE_window *window;
+	data = g_malloc0 (sizeof (gE_data));
+	window = g_list_nth (window_list, 1);
+	data->window = window;
+	data->temp1 = window;
+	file_close_cmd_callback (NULL, data);
+	return TRUE;
 }
 
 /* mercilessly lifted right out of go.. */

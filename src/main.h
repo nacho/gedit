@@ -69,13 +69,15 @@ typedef struct _gE_window {
 	gboolean show_tabs;
 	gboolean show_status;
 	gboolean have_toolbar;
+	gboolean have_tb_pix;
+	gboolean have_tb_text;
 #else
 	gint auto_indent;
 	gint show_tabs;
 	gint show_status;
 	gint have_toolbar;
-		gint have_tb_pix;
-		gint have_tb_text;
+	gint have_tb_pix;
+	gint have_tb_text;
 #endif
 	gchar *print_cmd;
 	GtkPositionType tab_pos;

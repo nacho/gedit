@@ -1,8 +1,5 @@
 Known bugs in the current version of gEdit:
 
-	* Occasionally crashes when you open eight or more files at a time.
-	  (This one may be fixed, but be warned)
-
 	* Changes to the font will not take effect until gEdit is restarted.
 	  
 	* The line number indicator is basically smashed, and the column
@@ -11,5 +8,8 @@ Known bugs in the current version of gEdit:
 	* If you try to print a new (Untitled) file, gEdit will sigsegv. (Save
 	  the file before printing)
 
+	* If you launch a plugin that starts a new document, then close
+	  the document while it's still writing to it, it will seg fault
+	  with a broken pipe error..
 
 
