@@ -45,7 +45,7 @@
 #include <gedit-debug.h>
 #include <gedit-menus.h>
 
-#define MENU_ITEM_LABEL		N_("In_sert Date/Time")
+#define MENU_ITEM_LABEL		N_("In_sert Date and Time...")
 #define MENU_ITEM_PATH		"/menu/Edit/EditOps_4/"
 #define MENU_ITEM_NAME		"PluginInsertDateAndTime"	
 #define MENU_ITEM_TIP		N_("Insert current date and time at the cursor position")
@@ -442,8 +442,6 @@ create_formats_list (GtkWidget *listview, const gchar* sel_format)
 
 	/* Create model, it also add model to the tree view */
 	create_model (listview, sel_format);
-	
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (listview), TRUE);
 	
 	/* the Available formats column */
 	cell = gtk_cell_renderer_text_new ();

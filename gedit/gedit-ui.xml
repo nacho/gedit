@@ -25,7 +25,8 @@
         pixtype="stock" pixname="gtk-revert-to-saved"/>
 	
 	<cmd name="FileOpenURI" _label="Open Location..."
-	_tip="Open a file from a specified location" pixtype="stock" pixname="gtk-open"/>
+	_tip="Open a file from a specified location" 
+	accel="*Control*L"/>
 
         <cmd name="FilePrint" _label="Print"
 	_tip="Print the current file" pixtype="stock" pixname="gtk-print"
@@ -106,7 +107,7 @@
         <cmd name="ToolbarIconBothHoriz" id="ToolbarIconBothHoriz" _label="_Priority Text beside Icons" 
 	 type="radio" group="buttons" _tip ="Show prioritized text beside icons in the toolbar"/>
 
-        <cmd name="SettingsPreferences" _label="Preferences" _tip="Configure the application"
+        <cmd name="SettingsPreferences" _label="Pr_eferences" _tip="Configure the application"
 	  pixtype="stock" pixname="gtk-preferences"/>
 
 	<cmd name="StatusBarCursorPosition" id="StatusBarCursorPosition" 
@@ -201,9 +202,11 @@
 
 	<placeholder name="EditOps_5" delimit="top"/>
 
+	<placeholder name="EditOps_6" delimit="top"/>
+
 	<separator/>
 
-	<menuitem name="SettingsPreferences" verb="" _label="Pr_eferences..."/>
+	<menuitem name="SettingsPreferences" verb=""/>
 
 </submenu>
 
@@ -244,17 +247,17 @@
 
 <submenu name="Search" _label="_Search">
 
-	<menuitem name="SearchFind" verb="" _label="_Find"/>
+	<menuitem name="SearchFind" verb="" _label="_Find..."/>
 
 	<menuitem name="SearchFindAgain" verb="" _label="Find Ne_xt"/>
 
-	<menuitem name="SearchReplace" verb="" _label="_Replace"/>
+	<menuitem name="SearchReplace" verb="" _label="_Replace..."/>
 
 	<placeholder name="SearchOps_1" delimit="top"/>
 
 	<separator/>
 
-	<menuitem name="SearchGoToLine" verb="" _label="Goto _Line"/>
+	<menuitem name="SearchGoToLine" verb="" _label="Go to _Line Number..."/>
 
 	<placeholder name="SearchOps_2" />
 
@@ -271,6 +274,8 @@
 	<placeholder name="ToolsOps_2" delimit="top"/>
 
 	<placeholder name="ToolsOps_3" delimit="top"/>
+
+	<placeholder name="ToolsOps_4" delimit="top"/>
 
 </submenu>
 

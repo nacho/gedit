@@ -80,7 +80,7 @@ dialog_open_uri_get_dialog (void)
 
 	dialog = g_new0 (GeditDialogOpenUri, 1);
 
-	dialog->dialog = gtk_dialog_new_with_buttons (_("Open from URI"),
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Open Location"),
 						      window,
 						      GTK_DIALOG_MODAL,
 						      GTK_STOCK_CANCEL,
