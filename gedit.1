@@ -1,40 +1,50 @@
-.TH GEDIT l "13 May 1998"
+.TH GEDIT l "08 Oct 2000"
 .SH NAME
-\fBgedit\fP \- GTK+ based text editor
+\fBgedit\fP \- simple text editor for Gnome
 .SH SYNTAX
 .B gedit
 .RI [ --help ]
 .RI [ --version ]
-.RI [ filename ]
-.RI [ filename ]
-.RI [ filename ]
-.RI etc...
+.RI [ --debug [-section]]
+.RI [ filename(s) ... ]
 .SH DESCRIPTION
 .B gedit
-is a text editor for the X Window System which uses the GTK+ widget set. It currently
-supports creation, openning, closing, and saving of multiple files, search and replace,
-an options interface, and loading of files via the command line. 
+is a text editor for the Gnome Desktop.
 .LP
 .SH OPTIONS
-This is pretty straightforward.
+
 .TP
-.B \-\-help
-.PD
+\fB\-\-help\fR
 Prints the command line options.
 .TP
-.B \-\-version
-.PD
-Prints the version of gedit that you're using.
+\fB\-\-version\fR
+Prints the version of gedit
 .TP
-.B filename
-.PD
+\fB\-\-debug[-section]
+Runs gedit in debug mode. In debug mode all the functions that are beeing called dump
+to the console the function names. Specific sections for debugging can be specified,
+the sections are : window, commands, document, file, plugins, prefs, print, search,
+undo, view and recent. Run gedit \-\-help  or more information.
+.TP
+\fB\-\-filename
 Specifies the file to open when gedit starts - if this is not specified, gedit will
-load a blank file with an Untitled label.
+load a blank file with an Untitled label. Multiple files can be loaded if they are
+separated by spaces.
+.SH PIPES
+Gedit acepts pipes, so it can be run after another command to load the ouptup into
+gedit. For example :
+.TP
+ls -l | gedit
+.PB
 .SH BUGS
 See the KNOWNBUGS file for a list of the bugs we know about but haven't bothered to
 fix yet, if you find a bug that isn't listed in that file, email us.
 
 .SH AUTHORS
+Chema Celorio (chema@celorio.com)
+.TP
+Jason Leach (leach@wam.umd.edu)
+.TP
 Alex Roberts (bse@dial.pipex.com)
 .TP
 Evan Lawrence (evan@worldpath.net)
