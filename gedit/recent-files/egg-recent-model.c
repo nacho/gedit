@@ -1212,7 +1212,6 @@ egg_recent_model_add_full (EggRecentModel * model, EggRecentItem *item)
 	gboolean ret = FALSE;
 	gboolean updated = FALSE;
 	time_t t;
-	gchar *uri;
 	
 	g_return_val_if_fail (model != NULL, FALSE);
 	g_return_val_if_fail (EGG_IS_RECENT_MODEL (model), FALSE);
@@ -1222,8 +1221,6 @@ egg_recent_model_add_full (EggRecentModel * model, EggRecentItem *item)
 
 	time (&t);
 	egg_recent_item_set_timestamp (item, t);
-
-	uri = egg_recent_item_get_uri (item);
 
 	if (egg_recent_model_lock_file (file)) {
 
