@@ -148,7 +148,7 @@ gedit_file_open (GeditMDIChild *active_child)
 	files = gedit_file_selector_open_multi (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			TRUE,
-		        _("Open File ..."), 
+		        _("Open File..."), 
 			NULL, 
 			gedit_default_path);
 	
@@ -306,7 +306,7 @@ gedit_file_save (GeditMDIChild* child, gboolean force)
 	uri = gedit_document_get_uri (doc);
 	g_return_val_if_fail (uri != NULL, FALSE);
 	
-	gedit_utils_flash_va (_("Saving file '%s' ..."), uri);	
+	gedit_utils_flash_va (_("Saving file '%s'..."), uri);	
 	
 	ret = gedit_document_save (doc, &error);
 
@@ -431,7 +431,7 @@ gedit_file_save_as (GeditMDIChild *child)
 	file = gedit_file_selector_save (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
 			FALSE,
-		        _("Save as ..."), 
+		        _("Save as..."), 
 			NULL, 
 			path,
 			fname);
@@ -452,7 +452,7 @@ gedit_file_save_as (GeditMDIChild *child)
 
 		file_utf8 = eel_format_uri_for_display (uri);
 		if (file_utf8 != NULL)
-			gedit_utils_flash_va (_("Saving file '%s' ..."), file_utf8);
+			gedit_utils_flash_va (_("Saving file '%s'..."), file_utf8);
 		
 		ret = gedit_file_save_as_real (uri, child);
 		
@@ -625,7 +625,7 @@ gedit_file_revert_dialog (const GeditDocument *doc)
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_QUESTION,
 					 GTK_BUTTONS_NONE,
-					 _("Do you want to revert to saved the document \"%s\" ?\n\n"
+					 _("Do you want to revert to saved the document '%s'?\n\n"
 					   "You will not be able to undo this operation."), 
 					 name);
 	g_free (name);
@@ -669,7 +669,7 @@ gedit_file_revert (GeditMDIChild *child)
 	uri = gedit_document_get_uri (doc);
 	g_return_val_if_fail (uri != NULL, FALSE);
 	
-	gedit_utils_flash_va (_("Reverting file '%s' ..."), uri);	
+	gedit_utils_flash_va (_("Reverting file '%s'..."), uri);	
 	
 	ret = gedit_document_revert (doc, &error);
 

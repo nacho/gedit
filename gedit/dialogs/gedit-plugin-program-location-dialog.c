@@ -71,7 +71,7 @@ gedit_plugin_program_location_dialog (const gchar *program_name, const gchar *pl
 		return NULL;
 	}
 
-	dialog = gtk_dialog_new_with_buttons (_("Set program location ..."),
+	dialog = gtk_dialog_new_with_buttons (_("Set program location..."),
 					      parent,
 					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_CANCEL,

@@ -778,10 +778,14 @@ change_all_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 void 
 gedit_spell_checker_dialog_set_completed (GeditSpellCheckerDialog *dlg)
 {
+	gchar *tmp;
+	
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 
+	tmp = g_strdup_printf("<b>%s</b>", _("Completed spell checking"));
 	gtk_label_set_label (GTK_LABEL (dlg->mispelled_word_label), 
-			_("<b>Completed spell checking</b>"));
+			     tmp);
+	g_free (tmp);
 
 	gtk_list_store_clear (GTK_LIST_STORE (dlg->suggestions_list_model));
 	gtk_entry_set_text (GTK_ENTRY (dlg->word_entry), "");
