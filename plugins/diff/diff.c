@@ -56,7 +56,7 @@ set_entry (GtkWidget *widget, gpointer data)
 static void
 open_file_sel (GtkWidget *widget, gpointer data)
 {
-	GtkWidget *file_sel = gtk_file_selection_new ("Choose a file");
+	GtkWidget *file_sel = gtk_file_selection_new (_("Choose a file"));
   
 	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (file_sel)->ok_button),
 			    "clicked",
@@ -147,12 +147,12 @@ diff_plugin (PluginData *pd)
 	GtkWidget *button;
 
 	dialog = gtk_dialog_new ();
-	gtk_window_set_title (GTK_WINDOW (dialog), "Choose files to diff" );
+	gtk_window_set_title (GTK_WINDOW (dialog), _("Choose files to diff") );
 	gtk_signal_connect (GTK_OBJECT (dialog), "destroy",
 			    GTK_SIGNAL_FUNC (done), NULL);
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (dialog)->vbox), GNOME_PAD);
 
-	label = gtk_label_new ("Choose files to diff:");
+	label = gtk_label_new (_("Choose files to diff:"));
 	gtk_box_pack_start (GTK_BOX( GTK_DIALOG( dialog)->vbox), label, FALSE, FALSE, 0);
 
 	hbox = gtk_hbox_new (FALSE, 0);
@@ -161,7 +161,7 @@ diff_plugin (PluginData *pd)
 	entry1 = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (hbox), entry1, TRUE, TRUE, 0);
 
-	button = gtk_button_new_with_label ("Browse...");
+	button = gtk_button_new_with_label (_("Browse..."));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
 			    GTK_SIGNAL_FUNC (open_file_sel), entry1);
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
@@ -169,12 +169,12 @@ diff_plugin (PluginData *pd)
 	entry2 = gtk_entry_new ();
 	gtk_box_pack_start (GTK_BOX (hbox), entry2, TRUE, TRUE, 0);
 
-	button = gtk_button_new_with_label ("Browse...");
+	button = gtk_button_new_with_label (_("Browse..."));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
 			    GTK_SIGNAL_FUNC (open_file_sel), entry2);
 	gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-	button = gtk_button_new_with_label ("Calculate Diff");
+	button = gtk_button_new_with_label (_("Calculate Diff"));
 	gtk_signal_connect (GTK_OBJECT (button), "clicked",
 			    GTK_SIGNAL_FUNC (call_diff), NULL);
 
