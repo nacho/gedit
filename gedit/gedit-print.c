@@ -102,7 +102,7 @@ static void set_pji ( gedit_PrintJobInfo * pji, gedit_document *doc, GnomePrinte
  *
  * calls gnome-print to create a print dialog box.
  * This should be the only routine global to
- * the world.
+ * the world. ( and print preview )
  */
 void
 file_print_cb (GtkWidget *widget, gpointer cbdata)
@@ -172,12 +172,14 @@ print_document (gedit_document *doc, GnomePrinter *printer)
 	gnome_print_context_close(pji->pc);
 	gnome_print_master_close(pji->master);
 
-	if(printer) {
+	if(printer)
+	{
 		gnome_print_master_print(pji->master);
   		gtk_object_unref(GTK_OBJECT(pji->master));
 		g_free(pji);
 	}
-	else {
+	else
+	{
 		GnomePrintMasterPreview *preview;
 		gchar *title;
 
@@ -331,6 +333,3 @@ preview_destroy_cb (GtkObject *obj, gedit_PrintJobInfo *pji)
 	gtk_object_unref(GTK_OBJECT(pji->master));
 	g_free (pji);
 }
-
-
-
