@@ -21,20 +21,20 @@
 #include <config.h>
 #include <gnome.h>
 #include "main.h"
-#include "gE_undo.h"
-#include "gE_mdi.h"
-#include "gE_view.h"
+#include "gedit_undo.h"
+#include "gedit_mdi.h"
+#include "gedit_view.h"
 
-void views_insert (gE_document *doc, gE_undo *undo);
-void views_delete (gE_document *doc, gE_undo *undo);
+void views_insert (gedit_document *doc, gE_undo *undo);
+void views_delete (gedit_document *doc, gE_undo *undo);
 
 void
-gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
-	     gE_document *doc)
+gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
+	     gedit_document *doc)
 {
-	gE_undo *undo;
+	gedit_undo *undo;
 	
-	undo = g_new(gE_undo, 1);
+	undo = g_new(gedit_undo, 1);
 	
 	undo->text = text;
 	undo->start_pos = start_pos;
@@ -51,17 +51,17 @@ gE_undo_add (gchar *text, gint start_pos, gint end_pos, gint action,
 	}
 
 #ifdef DEBUG
-	g_message ("gE_undo_add: Adding to Undo list..");
+	g_message ("gedit_undo_add: Adding to Undo list..");
 #endif	
 	doc->undo = g_list_prepend (doc->undo, undo);
 
 }
 
 void
-gE_undo_do (GtkWidget *w, gpointer data)
+gedit_undo_do (GtkWidget *w, gpointer data)
 {
-	gE_document *doc = gE_document_current();
-	gE_undo *undo;
+	gedit_document *doc = gE_document_current();
+	gedit_undo *undo;
 	
 	if (!doc->undo)
 	  return;
@@ -83,7 +83,7 @@ gE_undo_do (GtkWidget *w, gpointer data)
 		/* We're inserting something that was deleted */
 		
 #ifdef DEBUG
-		g_message ("gE_undo_do: Inserting..");
+		g_message ("gedit_undo_do: Inserting..");
 #endif
 		
 		if ((doc->buf->len > 0) && (undo->end_pos < doc->buf->len) && (undo->end_pos)) {
@@ -133,11 +133,11 @@ gE_undo_do (GtkWidget *w, gpointer data)
 
 }
 
-void gE_undo_redo (GtkWidget *w, gpointer data)
+void gedit_undo_redo (GtkWidget *w, gpointer data)
 {
 
-	gE_document *doc = gE_document_current();
-	gE_undo *redo;
+	gedit_document *doc = gE_document_current();
+	gedit_undo *redo;
 	
 	if (!doc->redo)
 	  return;
@@ -158,7 +158,7 @@ void gE_undo_redo (GtkWidget *w, gpointer data)
 		
 		/* We're inserting something that was deleted */
 #ifdef DEBUG		
-		g_message ("gE_undo_redo: Deleting..");
+		g_message ("gedit_undo_redo: Deleting..");
 #endif		
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos)) {
 #ifdef DEBUG
@@ -208,13 +208,13 @@ void gE_undo_redo (GtkWidget *w, gpointer data)
 }
 
 void
-views_insert (gE_document *doc, gE_undo *undo)
+views_insert (gedit_document *doc, gE_undo *undo)
 {
 
 	gint i;
 	gint p1;
 /*	p2; */
-	gE_view *view;
+	gedit_view *view;
 	
 	for (i = 0; i < g_list_length (doc->views); i++) {
 
@@ -247,10 +247,10 @@ views_insert (gE_document *doc, gE_undo *undo)
 	}  
 }
 
-void views_delete (gE_document *doc, gE_undo *undo)
+void views_delete (gedit_document *doc, gE_undo *undo)
 {
 
-	gE_view *nth_view;
+	gedit_view *nth_view;
 	gint n;
 	gint p1;
 	gint start_pos, end_pos;

@@ -24,14 +24,14 @@
 #define PLUGIN_TEST 1
 #include "main.h"
 #include "commands.h"
-#include "gE_about.h"
-#include "gE_files.h"
-#include "gE_mdi.h"
-#include "gE_print.h"
-#include "gE_prefs.h"
-#include "gE_prefs_box.h"
-#include "gE_view.h"
-#include "gE_window.h"
+#include "gedit_about.h"
+#include "gedit_files.h"
+#include "gedit_mdi.h"
+#include "gedit_print.h"
+#include "gedit_prefs.h"
+#include "gedit_prefs_box.h"
+#include "gedit_view.h"
+#include "gedit_window.h"
 #include "search.h"
 
 /*
@@ -39,7 +39,7 @@
 #include <strings.h>
 #include <stdio.h>
 #include "toolbar.h"
-#include "gE_prefs.h"
+#include "gedit_prefs.h"
 */
 
 
@@ -193,11 +193,11 @@ GnomeUIInfo gedit_settings_menu [] = {
 
 	{ GNOME_APP_UI_ITEM, N_("Sa_ve Settings"),
 	  N_("Save the current settings for future sessions"),
-	  gE_save_settings, (gpointer) GE_WINDOW, NULL },
+	  gedit_save_settings, (gpointer) GE_WINDOW, NULL },
 
 	GNOMEUIINFO_SEPARATOR, 
 
-	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gE_prefs_dialog, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gedit_prefs_dialog, (gpointer) GE_DATA),
 
 	GNOMEUIINFO_END
 
@@ -229,7 +229,7 @@ GnomeUIInfo gedit_help_menu []= {
 
 	GNOMEUIINFO_HELP ("gedit"),
 
-	GNOMEUIINFO_MENU_ABOUT_ITEM (gE_about_box, NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM (gedit_about_box, NULL),
 
 	GNOMEUIINFO_END
 };
@@ -257,7 +257,7 @@ GnomeUIInfo gedit_menu [] = {
 };
 
 GnomeUIInfo *
-gE_menus_init (gE_window *window, gE_data *data)
+gedit_menus_init (gE_window *window, gE_data *data)
 {
 
 	gnome_app_create_menus (GNOME_APP (mdi->active_window), gedit_menu);

@@ -23,18 +23,18 @@
 
 #include "main.h"
 
-#define GE_VIEW(obj)			GTK_CHECK_CAST (obj, gE_view_get_type (), gE_view)
-#define GE_VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gE_view_get_type (), gE_view_class)
-#define GE_IS_VIEW(obj)			GTK_CHECK_TYPE (obj, gE_view_get_type ())
+#define GE_VIEW(obj)			GTK_CHECK_CAST (obj, gedit_view_get_type (), gE_view)
+#define GE_VIEW_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_view_get_type (), gE_view_class)
+#define GE_IS_VIEW(obj)			GTK_CHECK_TYPE (obj, gedit_view_get_type ())
 
-typedef struct _gE_view gE_view;
-typedef struct _gE_view_class gE_view_class;
+typedef struct _gedit_view gE_view;
+typedef struct _gedit_view_class gE_view_class;
 
-struct _gE_view {
+struct _gedit_view {
 	/*GtkFixed fixed;*/
 	GtkVBox box;
 	
-	gE_document *document;
+	gedit_document *document;
 	
 	gchar *font;
 	
@@ -72,11 +72,11 @@ struct _gE_view {
 };
 
 
-struct _gE_view_class {
+struct _gedit_view_class {
 	/* dunno */
 	GtkVBoxClass parent_class;
 	
-	void (*cursor_moved)(gE_view *view);
+	void (*cursor_moved)(gedit_view *view);
 	
 };
 
@@ -84,15 +84,15 @@ struct _gE_view_class {
 /* Ok, i thought i might as well make at least ONE header look nice =) */
 
 /* General utils */
-guint 		gE_view_get_type 			();
-GtkWidget 	*gE_view_new 				(gE_document *doc);
+guint 		gedit_view_get_type 			();
+GtkWidget 	*gedit_view_new 				(gE_document *doc);
 
 /* View settings */
-void 		gE_view_set_font 			(gE_view *view, gchar *font);
-void 		gE_view_set_word_wrap 		(gE_view *view, gint word_wrap);
-void 		gE_view_set_line_wrap 		(gE_view *view, gint line_wrap);
-void 		gE_view_set_read_only 		(gE_view *view, gint read_only);
-void 		gE_view_set_split_screen 	(gE_view *view, gint split_screen);
+void 		gedit_view_set_font 			(gE_view *view, gchar *font);
+void 		gedit_view_set_word_wrap 		(gE_view *view, gint word_wrap);
+void 		gedit_view_set_line_wrap 		(gE_view *view, gint line_wrap);
+void 		gedit_view_set_read_only 		(gE_view *view, gint read_only);
+void 		gedit_view_set_split_screen 	(gE_view *view, gint split_screen);
 
 /* Should we have teh GtkText fucntions? */
 
@@ -102,33 +102,33 @@ void 		gE_view_set_split_screen 	(gE_view *view, gint split_screen);
  * always remove them later.. */
 
 /* This is a function to insert text into the buffer, used for the GList of views 
-   in a gE_document */
-void		gE_view_list_insert			(gE_view *view, gE_data *data);
+   in a gedit_document */
+void		gedit_view_list_insert			(gE_view *view, gE_data *data);
  
-void 		gE_view_insert_text 		(gE_view *view, const gchar *text,
+void 		gedit_view_insert_text 		(gE_view *view, const gchar *text,
 									 gint length, gint pos);
 
-void		gE_view_set_selection		(gE_view *view, gint start, gint end);
+void		gedit_view_set_selection		(gE_view *view, gint start, gint end);
 
-guint 		gE_view_get_position		(gE_view *view);
-void		gE_view_set_position		(gE_view *view, gint pos);
-guint 		gE_view_get_length 			(gE_view *view);
+guint 		gedit_view_get_position		(gE_view *view);
+void		gedit_view_set_position		(gE_view *view, gint pos);
+guint 		gedit_view_get_length 			(gE_view *view);
 
-void		gE_view_buffer_sync			(gE_view *view);
+void		gedit_view_buffer_sync			(gE_view *view);
 
 void 		view_changed_cb				(GtkWidget *w, gpointer cbdata);
 
-void		gE_view_set_group_type		(gE_view *view, guint type);
+void		gedit_view_set_group_type		(gE_view *view, guint type);
 
-void		gE_view_refresh				(gE_view *view);
+void		gedit_view_refresh				(gE_view *view);
 
-/*void gE_view_set_color (gE_view *view , teh Gdk colour thngies we need for a
+/*void gedit_view_set_color (gE_view *view , teh Gdk colour thngies we need for a
 								func like this..  ); */
 
 /* At some point in the future we will have an Un/Re-do feature */
 /*
-void gE_view_undo (gE_view *view);
-void gE_view_redo (gE_view *view);
+void gedit_view_undo (gE_view *view);
+void gedit_view_redo (gE_view *view);
 */
 
 #endif /* __GE_VIEW_H__ */

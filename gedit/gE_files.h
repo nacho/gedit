@@ -26,7 +26,7 @@ typedef enum {
 } flw_col_t;
 
 
-extern gint gE_file_open (gE_document *doc, gchar *fname);
-extern gint gE_file_save (gE_document *doc, gchar *fname);
+extern gint gedit_file_open (gE_document *doc, gchar *fname);
+extern gint gedit_file_save (gE_document *doc, gchar *fname);
 
 #endif /* __GE_FILES_H__ */

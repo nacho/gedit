@@ -23,13 +23,13 @@
 #define SEARCH_BACKWARDS	0x00000002
 
 /* interface */
-gint pos_to_line (gE_document *doc, gint pos, gint *numlines);
-gint line_to_pos (gE_document *doc, gint line, gint *numlines);
-gint get_line_count (gE_document *doc);
-void seek_to_line (gE_document *doc, gint line, gint numlines);
+gint pos_to_line (gedit_document *doc, gint pos, gint *numlines);
+gint line_to_pos (gedit_document *doc, gint line, gint *numlines);
+gint get_line_count (gedit_document *doc);
+void seek_to_line (gedit_document *doc, gint line, gint numlines);
 
-gint gE_search_search (gE_document *doc, gchar *str, gint pos, gulong options);
-void gE_search_replace (gE_document *doc, gint pos, gint len, gchar *replace);
+gint gedit_search_search (gE_document *doc, gchar *str, gint pos, gulong options);
+void gedit_search_replace (gE_document *doc, gint pos, gint len, gchar *replace);
 
 /* gui for interface */
 void search_cb (GtkWidget *widget, gpointer data);

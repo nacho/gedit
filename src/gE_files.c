@@ -22,11 +22,11 @@
 #include <gnome.h>
 #include <sys/stat.h>
 #include "main.h"
-#include "gE_window.h"
-#include "gE_view.h"
-#include "gE_files.h"
+#include "gedit_window.h"
+#include "gedit_view.h"
+#include "gedit_files.h"
 #include "commands.h"
-#include "gE_mdi.h"
+#include "gedit_mdi.h"
 
 /*
 #include <sys/types.h>
@@ -41,20 +41,20 @@
 
 
 /*
- * PUBLIC: gE_file_open
+ * PUBLIC: gedit_file_open
  *
  * opens the file and reads it into the text wigdget.
  *
  * TODO - lock/unlock file before/after
  */
 gint
-gE_file_open (gE_document *doc, gchar *fname)
+gedit_file_open (gE_document *doc, gchar *fname)
 {
 	gchar *name;
 	gchar *tmp_buf, *flash;
 	struct stat stats;
 	gint i;
-	gE_view *nth_view;
+	gedit_view *nth_view;
 	FILE *fp;
 /*	gchar *nfile; */
 /*	gchar *str; */
@@ -66,7 +66,7 @@ gE_file_open (gE_document *doc, gchar *fname)
 		doc->buf_size = stats.st_size;
 		if ((tmp_buf = g_new0 (gchar, doc->buf_size + 1)) != NULL) {
 			if ((doc->filename = g_strdup (fname)) != NULL) {
-                                /*gE_file_open (GE_DOCUMENT(doc));*/
+                                /*gedit_file_open (GE_DOCUMENT(doc));*/
 				if ((fp = fopen (fname, "r")) != NULL) {
 					doc->buf_size = fread (tmp_buf, 1, doc->buf_size,fp);
 					doc->buf = g_string_new (tmp_buf);
@@ -75,9 +75,9 @@ gE_file_open (gE_document *doc, gchar *fname)
 					fclose (fp);
 					for (i = 0; i < g_list_length (doc->views); i++) {
 						nth_view = g_list_nth_data (doc->views, i);
-						gE_view_refresh (nth_view);
+						gedit_view_refresh (nth_view);
                                                 /* Make the document readonly if you can't write to the file. */
-						gE_view_set_read_only (nth_view, access (fname, W_OK) != 0);
+						gedit_view_set_read_only (nth_view, access (fname, W_OK) != 0);
 						if (!nth_view->changed_id)
 							nth_view->changed_id =	gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
 												    GTK_SIGNAL_FUNC(view_changed_cb), nth_view);
@@ -104,7 +104,7 @@ gE_file_open (gE_document *doc, gchar *fname)
 
 
 /*
- * PUBLIC: gE_file_save
+ * PUBLIC: gedit_file_save
  *
  * saves the file.  uses a single fputs() call to save the file in one
  * sell fwoop.
@@ -112,14 +112,14 @@ gE_file_open (gE_document *doc, gchar *fname)
  * TODO - lock/unlock file before/after
  */
 gint
-gE_file_save (gE_document *doc, gchar *fname)
+gedit_file_save (gE_document *doc, gchar *fname)
 {
 	FILE *fp;
 /*	gchar *title; */
 	gchar *tmpstr;
-	gE_view *view = GE_VIEW(mdi->active_view);
+	gedit_view *view = GE_VIEW(mdi->active_view);
 
-	/* FIXME: not sure what to do with all the gE_window refs.. 
+	/* FIXME: not sure what to do with all the gedit_window refs.. 
 	          i'll comment them out for now.. 				    */
 
 	g_assert(doc != NULL);
@@ -169,8 +169,8 @@ gE_file_save (gE_document *doc, gchar *fname)
 	gnome_mdi_child_set_name (GNOME_MDI_CHILD (doc), g_basename(doc->filename));
 
 	tmpstr = g_malloc0 (strlen (GEDIT_ID) +
-					   strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
-	sprintf (tmpstr, "%s - %s", GNOME_MDI_CHILD (gE_document_current())->name, GEDIT_ID);
+					   strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
+	sprintf (tmpstr, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name, GEDIT_ID);
 	gtk_window_set_title(GTK_WINDOW(mdi->active_window), tmpstr);
 	g_free(tmpstr);
 
@@ -187,15 +187,15 @@ gE_file_save (gE_document *doc, gchar *fname)
 
 /* Defined but not used */
 #if 0 
-static void clear_text (gE_view *view);
+static void clear_text (gedit_view *view);
 
 static void
-clear_text (gE_view *view)
+clear_text (gedit_view *view)
 {
-	gint i = gE_view_get_length (view);
+	gint i = gedit_view_get_length (view);
 
 	if (i > 0) {
-		gE_view_set_position (view, i);
+		gedit_view_set_position (view, i);
 		gtk_text_backward_delete (GTK_TEXT(view->text), i);
 	}
 }

@@ -26,28 +26,28 @@
 #include <glib.h>
 
 #include "main.h"
-#include "gE_window.h"
-#include "gE_view.h"
-#include "gE_files.h"
-#include "gE_prefs_box.h"
+#include "gedit_window.h"
+#include "gedit_view.h"
+#include "gedit_files.h"
+#include "gedit_prefs_box.h"
 #include "commands.h"
-#include "gE_mdi.h"
-#include "gE_print.h"
+#include "gedit_mdi.h"
+#include "gedit_print.h"
 #include "menus.h"
-#include "gE_prefs.h"
+#include "gedit_prefs.h"
 #include "search.h"
-#include "gE_plugin.h"
-#include "../pixmaps/gE_icon.xpm"
+#include "gedit_plugin.h"
+#include "../pixmaps/gedit_icon.xpm"
 
 extern GList *plugins;
-gE_window *window;
+gedit_window *window;
 extern GtkWidget  *col_label;
 
 GtkWidget *search_result_window;
 GtkWidget *search_result_clist;
 
 /* Prototype for setting the window icon */
-void gE_window_set_icon(GtkWidget *window, char *icon);
+void gedit_window_set_icon(GtkWidget *window, char *icon);
 
 
 /*
@@ -120,8 +120,8 @@ create_find_in_files_result_window ()
 }
 
 
-/*gE_window */
-void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
+/*gedit_window */
+void gedit_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
 
 	GtkWidget *statusbar;
@@ -145,12 +145,12 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 		GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 
 
-	gE_window_set_icon(GTK_WIDGET(app), "gE_icon");
+	gedit_window_set_icon(GTK_WIDGET(app), "gE_icon");
 
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
-	/*gE_get_settings ();*/
+	/*gedit_get_settings ();*/
 	
 	/* find in files result window  dont show it.*/
 	search_result_window = create_find_in_files_result_window();
@@ -162,7 +162,7 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 
 	/*g_list_foreach(plugins, (GFunc) add_plugins_to_window, app);*/
 
-	gE_plugins_window_add (app);
+	gedit_plugins_window_add (app);
 	
 	settings->num_recent = 0;
 	recent_update(GNOME_APP(app));
@@ -173,9 +173,9 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 		
 	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
 	
-} /* gE_window_new */
+} /* gedit_window_new */
 
-void gE_window_set_auto_indent (gint auto_indent)
+void gedit_window_set_auto_indent (gint auto_indent)
 {
 
 	settings->auto_indent = auto_indent;
@@ -183,7 +183,7 @@ void gE_window_set_auto_indent (gint auto_indent)
 }
 
 /* set the a window icon */
-void gE_window_set_icon(GtkWidget *window, char *icon)
+void gedit_window_set_icon(GtkWidget *window, char *icon)
 {
 
 	GdkPixmap *pixmap;
@@ -193,7 +193,7 @@ void gE_window_set_icon(GtkWidget *window, char *icon)
 	
 	pixmap = gdk_pixmap_create_from_xpm_d (window->window, &mask,
                                 		&window->style->bg[GTK_STATE_NORMAL],
-                                		(char **)gE_icon);
+                                		(char **)gedit_icon);
 	
 	gdk_window_set_icon (window->window, NULL, pixmap, mask);
 	
@@ -203,7 +203,7 @@ void gE_window_set_icon(GtkWidget *window, char *icon)
 }
 
 
-void gE_window_set_status_bar (gint show_status)
+void gedit_window_set_status_bar (gint show_status)
 {
 
 	settings->show_status = show_status;
@@ -216,17 +216,17 @@ void gE_window_set_status_bar (gint show_status)
 }
 
 void
-child_switch (GnomeMDI *mdi, gE_document *doc)
+child_switch (GnomeMDI *mdi, gedit_document *doc)
 {
 
 	gchar *title;
 
-	if (gE_document_current()) {
+	if (gedit_document_current()) {
 	
 	  gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
 	  title = g_malloc0 (strlen (GEDIT_ID) +
-					 strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
-	  sprintf (title, "%s - %s", GNOME_MDI_CHILD (gE_document_current())->name,
+					 strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
+	  sprintf (title, "%s - %s", GNOME_MDI_CHILD (gedit_document_current())->name,
 			GEDIT_ID);
 	  
 	  gtk_window_set_title(GTK_WINDOW(mdi->active_window), title);
@@ -238,7 +238,7 @@ child_switch (GnomeMDI *mdi, gE_document *doc)
 
 /*	umm.. FIXME?
 static gint
-gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
+gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 {
 	window_close_cb(widget, data);
 	return TRUE;
@@ -259,9 +259,9 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 
 	size_t len;
 	char *newfname;
-	gE_document *doc;
+	gedit_document *doc;
 	
-	doc = gE_document_current();
+	doc = gedit_document_current();
 	if (!doc || !doc->filename)
 		return;
 
@@ -313,7 +313,7 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 
 	/* hmm maybe whe should check if the file exist before we try
 	 * to open.  this will be fixed later.... */
-	doc = gE_document_new_with_file (newfname);
+	doc = gedit_document_new_with_file (newfname);
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 

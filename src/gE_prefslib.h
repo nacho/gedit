@@ -17,22 +17,22 @@
  */
 
 
-struct _gE_pref {
+struct _gedit_pref {
 	char *name;
 	char *value;
 };
 
-typedef struct _gE_pref gE_pref;
+typedef struct _gedit_pref gE_pref;
 
-extern GList *gE_prefs;
+extern GList *gedit_prefs;
 
-char *gE_prefs_open_file (char *filename, char *rw);
-int gE_prefs_open ();
-void gE_prefs_close ();
-char *gE_prefs_get_data (char *name);
-char *gE_prefs_get_default (char *name);
-char *gE_prefs_get_char (char *name);
-void gE_prefs_set_data (char *name, char *value);
-void gE_prefs_set_char (char *name, char *value);
-int gE_prefs_get_int (char *name);
-void gE_prefs_set_int (char *name, int value);
+char *gedit_prefs_open_file (char *filename, char *rw);
+int gedit_prefs_open ();
+void gedit_prefs_close ();
+char *gedit_prefs_get_data (char *name);
+char *gedit_prefs_get_default (char *name);
+char *gedit_prefs_get_char (char *name);
+void gedit_prefs_set_data (char *name, char *value);
+void gedit_prefs_set_char (char *name, char *value);
+int gedit_prefs_get_int (char *name);
+void gedit_prefs_set_int (char *name, int value);

@@ -25,7 +25,7 @@
 #define	INSERT	0
 #define	DELETE	1
 
-typedef struct _gE_undo {
+typedef struct _gedit_undo {
 
 	gchar *text;		/* The text data */
 	
@@ -36,21 +36,21 @@ typedef struct _gE_undo {
 	gint action;	/* whether the user has inserted or deleted */
 	gint status;	/* the changed status of the document used with this node */
 
-} gE_undo;
+} gedit_undo;
 
 
 /* add an undo node */
-extern void gE_undo_add		(gchar*, gint, gint, gint, gE_document*);
+extern void gedit_undo_add		(gchar*, gint, gint, gint, gE_document*);
 
 /* clear the list */
-extern void gE_undo_reset	(GList*);
+extern void gedit_undo_reset	(GList*);
 
 /* callbacks to do the undo or the redo */
-extern void gE_undo_do		(GtkWidget*, gpointer);
-extern void gE_undo_redo	(GtkWidget*, gpointer);
+extern void gedit_undo_do		(GtkWidget*, gpointer);
+extern void gedit_undo_redo	(GtkWidget*, gpointer);
 
 /* let the user see the undo history of the docu,emt */
-extern void gE_undo_history	(GtkWidget*, gpointer*);
+extern void gedit_undo_history	(GtkWidget*, gpointer*);
 
 
 #endif /* __GE_UNDO_H__ */

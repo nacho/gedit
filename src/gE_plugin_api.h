@@ -29,9 +29,9 @@
    extern GHashTable *win_pointer_to_int;
    extern int last_assigned_integer;
 
-/*#include "gE_plugin.h"*/
+/*#include "gedit_plugin.h"*/
 
-   extern void gE_plugin_program_register(plugin_info * info);
+   extern void gedit_plugin_program_register(plugin_info * info);
    extern void add_plugins_to_window(plugin_info * info, GnomeApp *app);
 
 #endif				/* __GE_PLUGIN_API_H__ */

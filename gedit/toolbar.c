@@ -21,10 +21,10 @@
 #include <config.h>
 #include <gnome.h>
 #include "commands.h"
-#include "gE_files.h"
-#include "gE_prefs.h"
-#include "gE_print.h"
-#include "gE_prefs_box.h"
+#include "gedit_files.h"
+#include "gedit_prefs.h"
+#include "gedit_print.h"
+#include "gedit_prefs_box.h"
 #include "search.h"
 #include "toolbar.h"
 
@@ -70,16 +70,16 @@ GnomeUIInfo toolbar_data[] = {
 
 
 static GtkWidget *new_pixmap (char *fname, GtkWidget *w);
-static GtkWidget *toolbar_create_common (toolbar_data_t *tbdata, gE_data *data);
+static GtkWidget *toolbar_create_common (toolbar_data_t *tbdata, gedit_data *data);
 
 
 /**
- * gE_create_toolbar:
+ * gedit_create_toolbar:
  *
  * creates main toolbar that goes below menu bar
  */
 void
-gE_create_toolbar (gE_window *gw, gE_data *data)
+gedit_create_toolbar (gE_window *gw, gE_data *data)
 {
 	GtkWidget *toolbar;
 
@@ -89,7 +89,7 @@ gE_create_toolbar (gE_window *gw, gE_data *data)
 
 	settings->have_toolbar = TRUE;
 
-} /* gE_create_toolbar */
+} /* gedit_create_toolbar */
 
 
 
@@ -98,11 +98,11 @@ gE_create_toolbar (gE_window *gw, gE_data *data)
  *
  * common routine to create a toolbar.
  *
- * in: toolbar_data_t and pointer to callback data of gE_data type
+ * in: toolbar_data_t and pointer to callback data of gedit_data type
  * out: GtkWidget *toolbar
  */
 static GtkWidget *
-toolbar_create_common (toolbar_data_t *tbdata, gE_data *data)
+toolbar_create_common (toolbar_data_t *tbdata, gedit_data *data)
 {
 	GtkWidget *tb;
 	GtkWidget *parent = data->window->window;

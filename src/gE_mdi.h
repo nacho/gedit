@@ -29,32 +29,32 @@
 
 BEGIN_GNOME_DECLS
 
-#define GE_DOCUMENT(obj)			GTK_CHECK_CAST (obj, gE_document_get_type (), gE_document)
-#define GE_DOCUMENT_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gE_document_get_type (), gE_document_class)
-#define IS_GE_DOCUMENT(obj)			GTK_CHECK_TYPE (obj, gE_document_get_type ())
+#define GE_DOCUMENT(obj)			GTK_CHECK_CAST (obj, gedit_document_get_type (), gE_document)
+#define GE_DOCUMENT_CLASS(klass)	GTK_CHECK_CLASS_CAST (klass, gedit_document_get_type (), gE_document_class)
+#define IS_GE_DOCUMENT(obj)			GTK_CHECK_TYPE (obj, gedit_document_get_type ())
 
-typedef struct _gE_document_class 
+typedef struct _gedit_document_class 
 {
 	GnomeMDIChildClass parent_class;
 	
-	void (*document_changed)(gE_document *, gpointer);
+	void (*document_changed)(gedit_document *, gpointer);
 
-} gE_document_class;
+} gedit_document_class;
 
 #define NUM_MDI_MODES		4
 extern guint mdi_type [NUM_MDI_MODES];
 
-GtkType gE_document_get_type ();
-gE_document *gE_document_new ();
-gE_document *gE_document_new_with_title (gchar *title);
-gE_document *gE_document_new_with_file (gchar *filename);
-gE_document *gE_document_current ();
-void gE_add_view (GtkWidget *w, gpointer data);
-void gE_remove_view (GtkWidget *w, gpointer data);
-gint remove_doc_cb (GnomeMDI *mdi, gE_document *doc);
+GtkType gedit_document_get_type ();
+gedit_document *gE_document_new ();
+gedit_document *gE_document_new_with_title (gchar *title);
+gedit_document *gE_document_new_with_file (gchar *filename);
+gedit_document *gE_document_current ();
+void gedit_add_view (GtkWidget *w, gpointer data);
+void gedit_remove_view (GtkWidget *w, gpointer data);
+gint remove_doc_cb (GnomeMDI *mdi, gedit_document *doc);
 void mdi_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
-void add_view_cb (GnomeMDI *mdi, gE_document *doc);
-gint add_child_cb (GnomeMDI *mdi, gE_document *doc);
+void add_view_cb (GnomeMDI *mdi, gedit_document *doc);
+gint add_child_cb (GnomeMDI *mdi, gedit_document *doc);
 END_GNOME_DECLS
 
 #endif /* __GE_MDI_H__ */

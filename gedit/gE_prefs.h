@@ -19,12 +19,12 @@
 #ifndef __GE_PREFS_H__
 #define __GE_PREFS_H__
 
-extern void gE_save_settings (void);
-extern void gE_get_settings (void);
+extern void gedit_save_settings (void);
+extern void gedit_get_settings (void);
 
-typedef struct _gE_preference gE_preference;
+typedef struct _gedit_preference gE_preference;
 
-struct _gE_preference {
+struct _gedit_preference {
 
 	guint auto_indent;
 	gint  word_wrap;
@@ -55,6 +55,6 @@ struct _gE_preference {
 	gint close_doc;
 };
 
-extern gE_preference *settings;
+extern gedit_preference *settings;
 
 #endif /* __GE_PREFS_H__ */

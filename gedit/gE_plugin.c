@@ -29,24 +29,24 @@
 #include <string.h>
 
 #include "main.h"
-#include "gE_window.h"
-#include "gE_view.h"
-#include "gE_files.h"
+#include "gedit_window.h"
+#include "gedit_view.h"
+#include "gedit_files.h"
 #include "commands.h"
-#include "gE_mdi.h"
-#include "gE_plugin.h"
+#include "gedit_mdi.h"
+#include "gedit_plugin.h"
 
 GSList	*plugin_list = NULL;
 
-gE_Plugin_Data *plugin_load (const gchar *file)
+gedit_Plugin_Data *plugin_load (const gchar *file)
 {
-	gE_Plugin_Data	*pd;
+	gedit_Plugin_Data	*pd;
 	guint res;
 	
 	g_return_val_if_fail (file != NULL, NULL);
 	
 	
-	if (!(pd = g_new0 (gE_Plugin_Data, 1))) {
+	if (!(pd = g_new0 (gedit_Plugin_Data, 1))) {
 		g_print ("plugin allocation error");
 		return NULL;
 	}
@@ -86,7 +86,7 @@ gE_Plugin_Data *plugin_load (const gchar *file)
 	return NULL;
 }
 
-void plugin_unload (gE_Plugin_Data *pd) 
+void plugin_unload (gedit_Plugin_Data *pd) 
 {
 	int w, n;
 	char *path;
@@ -159,7 +159,7 @@ static void load_all_plugins ()
 	g_free (pdir);
 }
 
-void gE_plugins_init ()
+void gedit_plugins_init ()
 {
 	if (!g_module_supported ())
 		return;
@@ -168,9 +168,9 @@ void gE_plugins_init ()
 }
 
 
-void gE_plugins_window_add (GnomeApp *app)
+void gedit_plugins_window_add (GnomeApp *app)
 {
-	gE_Plugin_Data *pd;
+	gedit_Plugin_Data *pd;
 	gint	n;
 	gchar	*path;
 	GnomeUIInfo *menu = g_malloc0 (2 * sizeof (GnomeUIInfo));

@@ -19,11 +19,11 @@
 #include <config.h>
 #include <gnome.h>
 #include "main.h"
-#include "gE_prefs.h"
-#include "gE_prefs_box.h"
-#include "gE_window.h"
-#include "gE_view.h"
-#include "gE_mdi.h"
+#include "gedit_prefs.h"
+#include "gedit_prefs_box.h"
+#include "gedit_window.h"
+#include "gedit_view.h"
+#include "gedit_mdi.h"
 
 /*
 #include <gtk/gtk.h>
@@ -33,9 +33,9 @@
 #include <string.h>
 */
 
-typedef struct _gE_prefs_data gE_prefs_data;
+typedef struct _gedit_prefs_data gE_prefs_data;
 
-struct _gE_prefs_data {
+struct _gedit_prefs_data {
 	GnomePropertyBox *pbox;
 	
 	/* Font Seleftion */
@@ -53,7 +53,7 @@ struct _gE_prefs_data {
 	GtkWidget *bgpick;
 	GtkWidget *fgpick;
 	
-	gE_data *gData;
+	gedit_data *gData;
 	
 	/* MDI Settings */
 	GtkRadioButton *mdi_type [NUM_MDI_MODES];
@@ -82,7 +82,7 @@ struct _gE_prefs_data {
 
 
 static GtkWidget *fs;
-static gE_prefs_data *prefs;
+static gedit_prefs_data *prefs;
 GList *plugin_list;
 /*plugin_callback_struct pl_callbacks;*/
 extern GList *plugins;
@@ -122,11 +122,11 @@ cancel_cb (void)
 }
 
 void
-gE_window_refresh (gE_window *w)
+gedit_window_refresh (gE_window *w)
 {
 	gint i, j;
-	gE_view *nth_view;
-	gE_document *doc;
+	gedit_view *nth_view;
+	gedit_document *doc;
 	GtkStyle *style;
 	GdkColor *bg, *fg;
 
@@ -138,11 +138,11 @@ gE_window_refresh (gE_window *w)
        	  gtk_widget_show (GTK_WIDGET (w->statusbar)->parent);
 	*/       
 	
-	gE_view_set_split_screen (GE_VIEW (mdi->active_view),
+	gedit_view_set_split_screen (GE_VIEW (mdi->active_view),
 						  (gint) GE_VIEW (mdi->active_view)->splitscreen);
    
   
-	gE_window_set_status_bar (settings->show_status);
+	gedit_window_set_status_bar (settings->show_status);
 /*  
 	for (i = 0; i < NUM_MDI_MODES; i++) {
 	
@@ -181,8 +181,8 @@ gE_window_refresh (gE_window *w)
 			g_message ("i = %d, j = %d", i, j);
 			nth_view = g_list_nth_data (doc->views, j);
 
-			gE_view_set_font (nth_view, settings->font);
-			gE_view_set_word_wrap (nth_view, settings->word_wrap);
+			gedit_view_set_font (nth_view, settings->font);
+			gedit_view_set_word_wrap (nth_view, settings->word_wrap);
   	    
 			gtk_widget_set_style(GTK_WIDGET(nth_view->split_screen),
 									style);
@@ -197,7 +197,7 @@ gE_window_refresh (gE_window *w)
 }
 
 void
-gE_apply (GnomePropertyBox *pbox, gint page, gE_data *data)
+gedit_apply (GnomePropertyBox *pbox, gint page, gE_data *data)
 {
 	gint i;
 	GtkStyle *style;
@@ -263,12 +263,12 @@ gE_apply (GnomePropertyBox *pbox, gint page, gE_data *data)
 	settings->fg[1] = c->green;
 	settings->fg[2] = c->blue;
 	 
-	gE_window_refresh(data->window);
-	gE_save_settings();	
+	gedit_window_refresh(data->window);
+	gedit_save_settings();	
 }
 
 void
-get_prefs (gE_data *data)
+get_prefs (gedit_data *data)
 {
 	gint i;
 	gchar *tmp;
@@ -742,15 +742,15 @@ properties_changed (GtkWidget *widget, GnomePropertyBox *pbox)
 }
 
 void
-gE_prefs_dialog (GtkWidget *widget, gpointer cbdata)
+gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 {
 	static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
 	GtkWidget *label;
 	gint i;
   
-	gE_data *data = (gE_data *)cbdata;
+	gedit_data *data = (gE_data *)cbdata;
 
-	prefs = g_malloc (sizeof(gE_prefs_data));
+	prefs = g_malloc (sizeof(gedit_prefs_data));
 
 	if (!prefs) {
 
@@ -768,7 +768,7 @@ gE_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 					GTK_SIGNAL_FUNC (gtk_false), NULL);
 
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "apply",
-					GTK_SIGNAL_FUNC (gE_apply), data);
+					GTK_SIGNAL_FUNC (gedit_apply), data);
 
 	help_entry.name = gnome_app_id;
 	gtk_signal_connect (GTK_OBJECT (prefs->pbox), "help",

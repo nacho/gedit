@@ -20,8 +20,8 @@
 #include <config.h>
 #include <gnome.h>
 #include "main.h"
-#include "gE_prefs.h"
-#include "gE_mdi.h"
+#include "gedit_prefs.h"
+#include "gedit_mdi.h"
 
 /*
 #include <gtk/gtk.h> 
@@ -34,7 +34,7 @@
 
 
 void 
-gE_save_settings (void)
+gedit_save_settings (void)
 {
 	gnome_config_push_prefix ("/gEdit/Global/");
 
@@ -76,7 +76,7 @@ gE_save_settings (void)
 }
 
 void
-gE_get_settings (void)
+gedit_get_settings (void)
 {
 	 
 	gnome_config_push_prefix ("/gEdit/Global/");

@@ -26,21 +26,21 @@
 #include <glib.h>
 
 #include "main.h"
-#include "gE_document.h"
-#include "gE_view.h"
-#include "gE_files.h"
-#include "gE_prefs_box.h"
-#include "gE_plugin_api.h"
+#include "gedit_document.h"
+#include "gedit_view.h"
+#include "gedit_files.h"
+#include "gedit_prefs_box.h"
+#include "gedit_plugin_api.h"
 #include "commands.h"
-#include "gE_mdi.h"
-#include "gE_print.h"
+#include "gedit_mdi.h"
+#include "gedit_print.h"
 #include "menus.h"
 /*#include "toolbar.h"*/
-#include "gE_prefs.h"
+#include "gedit_prefs.h"
 #include "search.h"
 
 extern GList *plugins;
-gE_window *window;
+gedit_window *window;
 extern GtkWidget  *col_label;
 
 /* local definitions */
@@ -51,11 +51,11 @@ typedef struct {
 	GtkMenuCallback cb;
 } popup_t;
 
-/*static gint gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);*/
-static void gE_window_create_popupmenu(gE_data *);
+/*static gint gedit_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);*/
+static void gedit_window_create_popupmenu(gE_data *);
 /*static void doc_swaphc_cb(GtkWidget *w, gpointer cbdata);*/
-static gboolean gE_document_popup_cb(GtkWidget *widget,GdkEvent *ev); 
-static void gE_msgbar_timeout_add(gE_window *window);
+static gboolean gedit_document_popup_cb(GtkWidget *widget,GdkEvent *ev); 
+static void gedit_msgbar_timeout_add(gE_window *window);
 
 static popup_t popup_menu[] =
 {
@@ -75,8 +75,8 @@ static popup_t popup_menu[] =
 static char *lastmsg = NULL;
 static gint msgbar_timeout_id;
 
-/*gE_window */
-void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
+/*gedit_window */
+void gedit_window_new(GnomeMDI *mdi, GnomeApp *app)
 {
 	GtkWidget *statusbar;
 	
@@ -90,7 +90,7 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
 
-	gE_get_settings ();
+	gedit_get_settings ();
 
 	settings->num_recent = 0;
 	recent_update(GNOME_APP(app));
@@ -111,14 +111,14 @@ void gE_window_new(GnomeMDI *mdi, GnomeApp *app)
 	gnome_app_install_menu_hints(app, gnome_mdi_get_menubar_info(app));
 
 	
-} /* gE_window_new */
+} /* gedit_window_new */
 
-void gE_window_set_auto_indent (gint auto_indent)
+void gedit_window_set_auto_indent (gint auto_indent)
 {
 	settings->auto_indent = auto_indent;
 }
 
-void gE_window_set_status_bar (gint show_status)
+void gedit_window_set_status_bar (gint show_status)
 {
 	settings->show_status = show_status;
 	if (show_status)
@@ -129,17 +129,17 @@ void gE_window_set_status_bar (gint show_status)
 
 
 void
-child_switch (GnomeMDI *mdi, gE_document *doc)
+child_switch (GnomeMDI *mdi, gedit_document *doc)
 {
 	gchar *title;
 
-	if (gE_document_current())
+	if (gedit_document_current())
 	  {
 	    gtk_widget_grab_focus(GE_VIEW(mdi->active_view)->text);
 	    title = g_malloc0 (strlen (GEDIT_ID) +
-					   strlen (GNOME_MDI_CHILD (gE_document_current())->name) + 4);
+					   strlen (GNOME_MDI_CHILD (gedit_document_current())->name) + 4);
 	    sprintf (title, "%s - %s",
-		   GNOME_MDI_CHILD (gE_document_current())->name,
+		   GNOME_MDI_CHILD (gedit_document_current())->name,
 		   GEDIT_ID);
 	    gtk_window_set_title(GTK_WINDOW(mdi->active_window), title);
 	    g_free(title);
@@ -149,7 +149,7 @@ child_switch (GnomeMDI *mdi, gE_document *doc)
 }
 /*	umm.. FIXME?
 static gint
-gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
+gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 {
 	window_close_cb(widget, data);
 	return TRUE;
@@ -157,13 +157,13 @@ gE_destroy_window (GtkWidget *widget, GdkEvent *event, gE_data *data)
 */
 
 /*
- * PUBLIC: gE_messagebar_set
+ * PUBLIC: gedit_messagebar_set
  *
  * sets the message/status bar.  remembers the last message set so that
  * a duplicate one won't be set on top of the current one.
  */
 void
-gE_msgbar_set(char *msg)
+gedit_msgbar_set(char *msg)
 {
 /*	if (lastmsg == NULL || strcmp(lastmsg, msg)) {
 		gnome_appbar_set_status (GNOME_APPBAR (window->statusbar), msg);
@@ -171,7 +171,7 @@ gE_msgbar_set(char *msg)
 			g_free(lastmsg);
 		lastmsg = g_strdup(msg);
 		gtk_timeout_remove(msgbar_timeout_id);
-		gE_msgbar_timeout_add(window);
+		gedit_msgbar_timeout_add(window);
 	}
 */
 	gnome_app_flash (mdi->active_window, msg);
@@ -180,16 +180,16 @@ gE_msgbar_set(char *msg)
 
 
 /*
- * PRIVATE: gE_window_create_popupmenu
+ * PRIVATE: gedit_window_create_popupmenu
  *
  * Creates the popupmenu for the editor 
  */
 static void
-gE_window_create_popupmenu(gE_data *data)
+gedit_window_create_popupmenu(gE_data *data)
 {
 	GtkWidget *tmp;
 	popup_t *pp = popup_menu;
-	gE_window *window = data->window;
+	gedit_window *window = data->window;
 
 	window->popup = gtk_menu_new();
 	while (pp && pp->name != NULL) {
@@ -206,16 +206,16 @@ gE_window_create_popupmenu(gE_data *data)
 				GTK_SIGNAL_FUNC(pp->cb), data);
 		pp++;
 	}
-} /* gE_window_create_popupmenu */
+} /* gedit_window_create_popupmenu */
 
 
 /*
- * PRIVATE: gE_document_popup_cb
+ * PRIVATE: gedit_document_popup_cb
  *
  * shows popup when user clicks on 3 button on mouse
  */
 static gboolean
-gE_document_popup_cb(GtkWidget *widget, GdkEvent *ev)
+gedit_document_popup_cb(GtkWidget *widget, GdkEvent *ev)
 {
 	if (ev->type == GDK_BUTTON_PRESS) {
 		GdkEventButton *event = (GdkEventButton *)ev;
@@ -226,7 +226,7 @@ gE_document_popup_cb(GtkWidget *widget, GdkEvent *ev)
 		}
 	}
 	return FALSE;
-} /* gE_document_popup_cb */
+} /* gedit_document_popup_cb */
 
 
 /*
@@ -242,9 +242,9 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 {
 	size_t len;
 	char *newfname;
-	gE_document *doc;
+	gedit_document *doc;
 	
-	doc = gE_document_current();
+	doc = gedit_document_current();
 	if (!doc || !doc->filename)
 		return;
 
@@ -284,7 +284,7 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 
 	/* hmm maybe whe should check if the file exist before we try
 	 * to open.  this will be fixed later.... */
-	doc = gE_document_new_with_file (newfname);
+	doc = gedit_document_new_with_file (newfname);
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 } /* doc_swaphc_cb */
@@ -293,16 +293,16 @@ doc_swaphc_cb(GtkWidget *wgt, gpointer cbdata)
 
 #ifdef WITH_GMODULE_PLUGINS
 
-gE_document
-*gE_document_new_container(gE_window *w, gchar *title, gint with_split_screen)
+gedit_document
+*gedit_document_new_container(gE_window *w, gchar *title, gint with_split_screen)
 {
-	gE_document *doc;
+	gedit_document *doc;
 	GtkWidget *table, *vscrollbar, *vpaned, *vbox;
 
 	GtkStyle *style;
 	gint *ptr; /* For plugin stuff. */
 
-	doc = g_malloc0(sizeof(gE_document));
+	doc = g_malloc0(sizeof(gedit_document));
 
 	ptr = g_new(int, 1);
 	*ptr = ++last_assigned_integer;

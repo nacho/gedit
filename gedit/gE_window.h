@@ -36,15 +36,15 @@ extern GtkWidget *col_label;
 extern GtkWidget *search_result_window;
 extern GtkWidget *search_result_clist;
 
-extern void gE_window_set_auto_indent (gint auto_indent);
-extern void gE_window_set_status_bar (gint show_status);
-extern void gE_window_new (GnomeMDI *mdi, GnomeApp *app);
+extern void gedit_window_set_auto_indent (gint auto_indent);
+extern void gedit_window_set_status_bar (gint show_status);
+extern void gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 
 extern void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
-extern void child_switch (GnomeMDI *mdi, gE_document *doc);
+extern void child_switch (GnomeMDI *mdi, gedit_document *doc);
 
 #ifdef WITH_GMODULE_PLUGINS
-extern gE_document *gE_document_new_container (gE_window *w, gchar *title,
+extern gedit_document *gE_document_new_container (gE_window *w, gchar *title,
 					       gint with_split_screen);
 #endif
 

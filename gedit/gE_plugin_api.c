@@ -26,14 +26,14 @@
 
 #include "main.h"
 #ifdef WITH_GMODULE_PLUGINS
-#include "gE_plugin.h"
+#include "gedit_plugin.h"
 #endif
-#include "gE_plugin_api.h"
-#include "gE_window.h"
-#include "gE_view.h"
-#include "gE_files.h"
+#include "gedit_plugin_api.h"
+#include "gedit_window.h"
+#include "gedit_view.h"
+#include "gedit_files.h"
 #include "commands.h"
-#include "gE_mdi.h"
+#include "gedit_mdi.h"
 
 GList *plugins;
 GHashTable *win_int_to_pointer,
@@ -45,7 +45,7 @@ int last_assigned_integer;
 /* --- Accesory functions for gedit's handling of the plugins --- */
 
 void 
-start_plugin(GtkWidget * widget, gE_data * data)
+start_plugin(GtkWidget * widget, gedit_data * data)
 {
 
 	plugin_callback_struct callbacks;
@@ -54,32 +54,32 @@ start_plugin(GtkWidget * widget, gE_data * data)
 
 	memset(&callbacks, 0, sizeof(plugin_callback_struct));
 
-	callbacks.document.create = gE_plugin_document_create;
-	callbacks.text.append = gE_plugin_text_append;
-	callbacks.text.insert = gE_plugin_text_insert;
-	callbacks.document.show = gE_plugin_document_show;
-	callbacks.document.current = gE_plugin_document_current;
-	callbacks.document.filename = gE_plugin_document_filename;
-	callbacks.document.open = gE_plugin_document_open;
-	callbacks.document.close = gE_plugin_document_close;
-	callbacks.document.set_auto_indent = gE_plugin_set_auto_indent;
-	callbacks.document.set_status_bar = gE_plugin_set_status_bar;
-	callbacks.document.set_word_wrap = gE_plugin_set_word_wrap;
-	callbacks.document.set_line_wrap = gE_plugin_set_line_wrap;
-	callbacks.document.set_read_only = gE_plugin_set_read_only;
-	callbacks.document.set_split_screen = gE_plugin_set_split_screen;
+	callbacks.document.create = gedit_plugin_document_create;
+	callbacks.text.append = gedit_plugin_text_append;
+	callbacks.text.insert = gedit_plugin_text_insert;
+	callbacks.document.show = gedit_plugin_document_show;
+	callbacks.document.current = gedit_plugin_document_current;
+	callbacks.document.filename = gedit_plugin_document_filename;
+	callbacks.document.open = gedit_plugin_document_open;
+	callbacks.document.close = gedit_plugin_document_close;
+	callbacks.document.set_auto_indent = gedit_plugin_set_auto_indent;
+	callbacks.document.set_status_bar = gedit_plugin_set_status_bar;
+	callbacks.document.set_word_wrap = gedit_plugin_set_word_wrap;
+	callbacks.document.set_line_wrap = gedit_plugin_set_line_wrap;
+	callbacks.document.set_read_only = gedit_plugin_set_read_only;
+	callbacks.document.set_split_screen = gedit_plugin_set_split_screen;
 
-	callbacks.text.get = gE_plugin_text_get;
-	callbacks.program.quit = gE_plugin_program_quit;
+	callbacks.text.get = gedit_plugin_text_get;
+	callbacks.program.quit = gedit_plugin_program_quit;
 
 #if 0
 	callbacks.document.open = NULL;
 	callbacks.document.close = NULL;
 #endif
-	callbacks.text.get_selected_text = gE_plugin_text_get_selected_text;
-	callbacks.text.set_selected_text = gE_plugin_text_set_selected_text;
-	callbacks.document.get_position = gE_plugin_document_get_position;
-	callbacks.document.get_selection = gE_plugin_document_get_selection;
+	callbacks.text.get_selected_text = gedit_plugin_text_get_selected_text;
+	callbacks.text.set_selected_text = gedit_plugin_text_set_selected_text;
+	callbacks.document.get_position = gedit_plugin_document_get_position;
+	callbacks.document.get_selection = gedit_plugin_document_get_selection;
 
 	plugin_register(plug, &callbacks, *(int *) g_hash_table_lookup(win_pointer_to_int, mdi->active_window));
    
@@ -89,7 +89,7 @@ void
 add_plugin_to_menu(GnomeApp *app, plugin_info * info)
 {
 
-	gE_data *data = g_malloc0(sizeof(gE_data));
+	gedit_data *data = g_malloc0(sizeof(gE_data));
 
 	gchar *path;
 	GnomeUIInfo *menu = g_malloc0(2 * sizeof(GnomeUIInfo));
@@ -128,16 +128,16 @@ add_plugins_to_window(plugin_info * info, GnomeApp *app)
 /* Text related functions */
  
 void 
-gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
+gedit_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 {
 
-	gE_document *document = gE_document_current();
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_document *document = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
 	if (position >= gtk_text_get_length(GTK_TEXT(view->text)))
 	  position = gtk_text_get_length(GTK_TEXT(view->text));
 	
-	/*position = gE_view_get_position (view);*/
+	/*position = gedit_view_get_position (view);*/
 	position = GTK_TEXT(view->text)->cursor_pos_x/6;		gtk_text_freeze(GTK_TEXT(view->text));
 	gtk_editable_insert_text (GTK_EDITABLE (view->text), buffer, length, &position);
 	gtk_text_thaw(GTK_TEXT(view->text));
@@ -147,11 +147,11 @@ gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 }
 
 void 
-gE_plugin_text_append(gint docid, gchar * buffer, gint length)
+gedit_plugin_text_append(gint docid, gchar * buffer, gint length)
 {
 
-	gE_document *document = gE_document_current();
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_document *document = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
 	gint position;
    
 	position = gtk_text_get_length(GTK_TEXT(view->text));
@@ -164,22 +164,22 @@ gE_plugin_text_append(gint docid, gchar * buffer, gint length)
 }
 
 char *
-gE_plugin_text_get(gint docid)
+gedit_plugin_text_get(gint docid)
 {
 
-	gE_document *document = gE_document_current();
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_document *document = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
 	return gtk_editable_get_chars(GTK_EDITABLE(view->text), 0, -1);
 	
 }
 
 gchar *
-gE_plugin_text_get_selected_text (gint docid)
+gedit_plugin_text_get_selected_text (gint docid)
 {
 
-	gE_document *document = gE_document_current();
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_document *document = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
    
 	return gtk_editable_get_chars (GTK_EDITABLE (view->text),
 		GTK_EDITABLE (view->text)->selection_start_pos,
@@ -189,14 +189,14 @@ gE_plugin_text_get_selected_text (gint docid)
 
 
 void
-gE_plugin_text_set_selected_text (gint docid, gchar *text)
+gedit_plugin_text_set_selected_text (gint docid, gchar *text)
 {
 
 	GtkEditable *editable;
 	selection_range selection;
-	/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
- 	gE_document *document = gE_document_current();
-	gE_view *view = GE_VIEW (mdi->active_view);
+	/*   gedit_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+ 	gedit_document *document = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
 	g_return_if_fail (document != NULL);
 	editable = GTK_EDITABLE (view->text);
@@ -223,12 +223,12 @@ gE_plugin_text_set_selected_text (gint docid, gchar *text)
 /* Document related functions */
 
 int 
-gE_plugin_document_create(gint context, gchar * title)
+gedit_plugin_document_create(gint context, gchar * title)
 {
 
-	gE_document *doc;
+	gedit_document *doc;
    
-	doc = gE_document_new ();
+	doc = gedit_document_new ();
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
     
@@ -237,23 +237,23 @@ gE_plugin_document_create(gint context, gchar * title)
 }
 
 void 
-gE_plugin_document_show(gint docid)
+gedit_plugin_document_show(gint docid)
 {
 }
 
 int 
-gE_plugin_document_current(gint context)
+gedit_plugin_document_current(gint context)
 {
 
-  return *(int *) gE_document_current();
+  return *(int *) gedit_document_current();
 
 }
 
 gchar *
-gE_plugin_document_filename(gint docid)
+gedit_plugin_document_filename(gint docid)
 {
 
-	 gE_document *document = gE_document_current();
+	 gedit_document *document = gE_document_current();
 
 	if (document->filename == NULL)
 	  return "";
@@ -263,25 +263,25 @@ gE_plugin_document_filename(gint docid)
 }
 
 int 
-gE_plugin_document_open(gint context, gchar * fname)
+gedit_plugin_document_open(gint context, gchar * fname)
 {
 
 	gchar *newfname;
-	gE_document *doc;
+	gedit_document *doc;
 
 	newfname = g_strdup(fname);
-	doc = gE_document_new_with_file(newfname);
+	doc = gedit_document_new_with_file(newfname);
 
 	return *(int *) g_hash_table_lookup(doc_pointer_to_int, (doc));
 
 }
 
 gboolean 
-gE_plugin_document_close(gint docid)
+gedit_plugin_document_close(gint docid)
 {
 
-	gE_document *document = gE_document_current();
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_document *document = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
 	file_close_cb (NULL, NULL);
 
@@ -290,23 +290,23 @@ gE_plugin_document_close(gint docid)
 }
 
 gint
-gE_plugin_document_get_position (gint docid)
+gedit_plugin_document_get_position (gint docid)
 {
 
-   	gE_document *document = gE_document_current();
- 	gE_view *view = GE_VIEW (mdi->active_view);
+   	gedit_document *document = gE_document_current();
+ 	gedit_view *view = GE_VIEW (mdi->active_view);
    	
 	g_return_val_if_fail (document != NULL, 0);
-	return gE_view_get_position (view);
+	return gedit_view_get_position (view);
 }
 
 selection_range
-gE_plugin_document_get_selection (gint docid)
+gedit_plugin_document_get_selection (gint docid)
 {
 	GtkEditable *editable;
 	selection_range selection;
-   	gE_document *document = gE_document_current();
-	gE_view *view = GE_VIEW (mdi->active_view);
+   	gedit_document *document = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
    	   	
    	
 	selection.start = 0;
@@ -333,75 +333,75 @@ gE_plugin_document_get_selection (gint docid)
 /* Misc UI related functions */
 
 void 
-gE_plugin_set_auto_indent(gint docid, gint auto_indent)
+gedit_plugin_set_auto_indent(gint docid, gint auto_indent)
 {
 
-	gE_document *document = gE_document_current();
+	gedit_document *document = gE_document_current();
 
-	gE_window_set_auto_indent(auto_indent);
+	gedit_window_set_auto_indent(auto_indent);
 	
 }
 
 void 
-gE_plugin_set_status_bar(gint docid, gint status_bar)
+gedit_plugin_set_status_bar(gint docid, gint status_bar)
 {
 
-	gE_document *document = gE_document_current();
+	gedit_document *document = gE_document_current();
 
-	gE_window_set_status_bar(status_bar);
+	gedit_window_set_status_bar(status_bar);
 
 }
 
 void 
-gE_plugin_set_word_wrap(gint docid, gint word_wrap)
+gedit_plugin_set_word_wrap(gint docid, gint word_wrap)
 {
 
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
-	gE_view_set_word_wrap(view, word_wrap);
+	gedit_view_set_word_wrap(view, word_wrap);
 	
 }
 
 void 
-gE_plugin_set_line_wrap(gint docid, gint line_wrap)
+gedit_plugin_set_line_wrap(gint docid, gint line_wrap)
 {
 
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
-	gE_view_set_line_wrap(view, line_wrap);
+	gedit_view_set_line_wrap(view, line_wrap);
 	
 }
 
 void 
-gE_plugin_set_read_only(gint docid, gint read_only)
+gedit_plugin_set_read_only(gint docid, gint read_only)
 {
 
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
-	gE_view_set_read_only(view, read_only);
+	gedit_view_set_read_only(view, read_only);
 	
 }
 
 void 
-gE_plugin_set_split_screen(gint docid, gint split_screen)
+gedit_plugin_set_split_screen(gint docid, gint split_screen)
 {
-/*   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
-   gE_view *view = GE_VIEW (mdi->active_view);
+/*   gedit_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);*/
+   gedit_view *view = GE_VIEW (mdi->active_view);
 
-   gE_view_set_split_screen(view, split_screen);
+   gedit_view_set_split_screen(view, split_screen);
 }
 
 
 /* Program Related functions */
 
 gboolean 
-gE_plugin_program_quit()
+gedit_plugin_program_quit()
 {
 
-	gE_data *data;
-	gE_window *window;
+	gedit_data *data;
+	gedit_window *window;
 
-	data = g_malloc0(sizeof(gE_data));
+	data = g_malloc0(sizeof(gedit_data));
 	window = g_list_nth_data(window_list, 1);
 	data->window = window;
 	data->temp1 = window;
@@ -415,7 +415,7 @@ gE_plugin_program_quit()
 /* mercilessly lifted right out of go.. */
 
 void 
-gE_plugin_program_register(plugin_info * info)
+gedit_plugin_program_register(plugin_info * info)
 {
 
 	plugin_info *temp;

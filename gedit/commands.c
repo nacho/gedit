@@ -39,27 +39,27 @@
 
 
 #include "main.h"
-#include "gE_view.h"
+#include "gedit_view.h"
 #include "commands.h"
-#include "gE_mdi.h"
-#include "gE_window.h"
-#include "gE_prefs.h"
-#include "gE_files.h"
+#include "gedit_mdi.h"
+#include "gedit_window.h"
+#include "gedit_prefs.h"
+#include "gedit_files.h"
 #include "search.h"
 
 /*
-static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
-static void close_file_save_cancel_sel(GtkWidget *w, gE_data *data);
-static void close_file_save_no_sel(GtkWidget *w, gE_data *data);
-static void close_doc_common(gE_data *data);
-static void close_window_common(gE_window *w);
+static void close_file_save_yes_sel (GtkWidget *w, gedit_data *data);
+static void close_file_save_cancel_sel(GtkWidget *w, gedit_data *data);
+static void close_file_save_no_sel(GtkWidget *w, gedit_data *data);
+static void close_doc_common(gedit_data *data);
+static void close_window_common(gedit_window *w);
 */
 
 static gint file_saveas_destroy(GtkWidget *w, GtkWidget **sel);
 static gint file_cancel_sel (GtkWidget *w, GtkFileSelection *fs);
 static void file_sel_destroy (GtkWidget *w, GtkFileSelection *fs);
 static void recent_update_menus (GnomeApp *app, GList *recent_files);
-static void recent_cb(GtkWidget *w, gE_data *data);
+static void recent_cb(GtkWidget *w, gedit_data *data);
 
 /* static GtkWidget *open_fs, *save_fs; */
 GtkWidget *ssel = NULL;
@@ -72,7 +72,7 @@ int
 popup_create_new_file (GtkWidget *w, gchar *title)
 {
 	GtkWidget *msgbox;
-	gE_document *doc;
+	gedit_document *doc;
 	int ret;
 	char msg[100];
 	
@@ -88,11 +88,11 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	switch (ret) {
 	/* yes */
 	case 0 : 
-			doc = gE_document_new_with_title (title);
+			doc = gedit_document_new_with_title (title);
 			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 		
-                	if ((gE_file_save(doc, title)) != 0) {
+                	if ((gedit_file_save(doc, title)) != 0) {
                 	
 		  	  gnome_app_flash (mdi->active_window, _("Could not save file!"));
 		  	  return FALSE;
@@ -195,7 +195,7 @@ void
 auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
 {
 
-	gE_window_set_auto_indent (!settings->auto_indent);
+	gedit_window_set_auto_indent (!settings->auto_indent);
 	
 }
 
@@ -212,14 +212,14 @@ filenames_dropped (GtkWidget * widget,
                    guint             time)
 {
 	GList *names, *tmp_list;
-	gE_document *doc;
+	gedit_document *doc;
 
 	names = gnome_uri_list_extract_filenames ((char *)selection_data->data);
 	tmp_list = names;
 
 	while (tmp_list) {
 	
-		doc = gE_document_new_with_file ((gchar *)tmp_list->data);
+		doc = gedit_document_new_with_file ((gchar *)tmp_list->data);
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	        
@@ -233,10 +233,10 @@ filenames_dropped (GtkWidget * widget,
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gE_document *doc;
+	gedit_document *doc;
 
 	gnome_app_flash (mdi->active_window, MSGBAR_FILE_NEW);
-	doc = gE_document_new();
+	doc = gedit_document_new();
 	
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
@@ -263,7 +263,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 	gchar *nfile;
 /*	gchar *flash; */
 	struct stat sb;
-	gE_document *doc;
+	gedit_document *doc;
 
 	filename = g_malloc (strlen (gtk_file_selection_get_filename (GTK_FILE_SELECTION(osel))) + 1);
 	filename = g_strdup (gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel)));
@@ -283,12 +283,12 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 			return;
 		}
 
-		if (gE_document_current ())
+		if (gedit_document_current ())
 		{
-			doc = gE_document_current();
+			doc = gedit_document_current();
 			if (doc->filename || doc->changed)
 			{
-				doc = gE_document_new_with_file (filename);
+				doc = gedit_document_new_with_file (filename);
 				if(doc==NULL)
 				{
 					/*gnome_app_error(mdi->active_window, _("Can't open file!"));*/
@@ -304,10 +304,10 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 			}
 			else
 			{
-				gE_file_open (GE_DOCUMENT(doc), filename);
+				gedit_file_open (GE_DOCUMENT(doc), filename);
 			}
 			/* Make the document readonly if you can't write to the file. */
-			gE_view_set_read_only (GE_VIEW(mdi->active_view),
+			gedit_view_set_read_only (GE_VIEW(mdi->active_view),
 									 access (filename, W_OK) != 0);
 			
 			gtk_widget_hide (GTK_WIDGET(osel));
@@ -315,13 +315,13 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 		}
 		else
 		{
-			doc = gE_document_new_with_file (filename);
+			doc = gedit_document_new_with_file (filename);
 			if( doc==NULL )
 				g_print("FIXME : Could not open file ...(2012)\n");
 			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
                     /* Make the document readonly if you can't write to the file. */
-			gE_view_set_read_only (GE_VIEW(mdi->active_view), 
+			gedit_view_set_read_only (GE_VIEW(mdi->active_view), 
 									access (filename, W_OK) != 0);
 
 			gtk_widget_hide (GTK_WIDGET(osel));
@@ -401,13 +401,13 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 {
 
 	gchar *fname;
-	gE_document *doc;
-	gE_view *view;
+	gedit_document *doc;
+	gedit_view *view;
 	gchar *title;
 
-	if (gE_document_current()) {
+	if (gedit_document_current()) {
 	
-	  doc = gE_document_current();
+	  doc = gedit_document_current();
 	  view = GE_VIEW (mdi->active_view);
 	    
 	  if (doc->changed) {
@@ -420,7 +420,7 @@ void file_save_cb(GtkWidget *widget, gpointer cbdata)
 		file_save_as_cb(widget, title);
 	    	g_free (title);
 	    } else
-	      if ((gE_file_save(doc, doc->filename)) != 0) {
+	      if ((gedit_file_save(doc, doc->filename)) != 0) {
 	      
 		gnome_app_flash (mdi->active_window, _("Read only file!"));
 		file_save_as_cb(widget, NULL);
@@ -449,11 +449,11 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
 
 	int i;
 	gchar *fname, *title;
-	gE_document *doc;
+	gedit_document *doc;
 
         for (i = 0; i < g_list_length (mdi->children); i++) {
 
-          doc = (gE_document *)g_list_nth_data (mdi->children, i);
+          doc = (gedit_document *)g_list_nth_data (mdi->children, i);
           if (doc->changed) {
           
             fname = g_strdup(doc->filename);
@@ -468,7 +468,7 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
             
             } else {
               
-             if ((gE_file_save(doc, doc->filename)) != 0) {
+             if ((gedit_file_save(doc, doc->filename)) != 0) {
              
                gnome_app_flash (mdi->active_window, _("Read only file!"));
                file_save_all_as_cb(widget, NULL);
@@ -492,11 +492,11 @@ file_save_all_cb(GtkWidget *widget, gpointer cbdata)
  *
  * data->temp1 must be the file saveas dialog box
  */
-static void file_saveas_ok_sel(GtkWidget *w, gE_data *data)
+static void file_saveas_ok_sel(GtkWidget *w, gedit_data *data)
 {
 	
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(ssel)));
-	gE_document *doc;
+	gedit_document *doc;
 
 	if (mdi->active_child == NULL) {
 	  
@@ -504,11 +504,11 @@ static void file_saveas_ok_sel(GtkWidget *w, gE_data *data)
 	  return;
 	}		  	
 	
-	doc = gE_document_current();
+	doc = gedit_document_current();
 	
 	if (fname) {
 	
-	  if (gE_file_save(doc, fname) != 0) 
+	  if (gedit_file_save(doc, fname) != 0) 
 	    gnome_app_flash (mdi->active_window, _("Error saving file!"));
 	
 	}
@@ -566,7 +566,7 @@ static void file_save_all_as_ok_sel(GtkWidget *w, GtkFileSelection *fs)
 {
 
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(fs)));
-	gE_document *doc;
+	gedit_document *doc;
 
 	if (mdi->active_child == NULL) {
 	
@@ -574,11 +574,11 @@ static void file_save_all_as_ok_sel(GtkWidget *w, GtkFileSelection *fs)
 	  return;
 	}	  
 	
-	doc = gE_document_current();
+	doc = gedit_document_current();
 	
 	if (fname) {
 	
-	  if (gE_file_save(doc, fname) != 0) 
+	  if (gedit_file_save(doc, fname) != 0) 
 	    gnome_app_flash (mdi->active_window, _("Error saving file!"));
 	    
 	}
@@ -637,7 +637,7 @@ void
 file_close_cb(GtkWidget *widget, gpointer cbdata)
 {
 
-	gE_document *doc;
+	gedit_document *doc;
 	
 	if (mdi->active_child == NULL)
 	  return;
@@ -648,7 +648,7 @@ file_close_cb(GtkWidget *widget, gpointer cbdata)
 	  
 	    if (!settings->close_doc) {
 	    
-	      doc = gE_document_new ();
+	      doc = gedit_document_new ();
 	      gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	      gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	    
@@ -671,7 +671,7 @@ void
 file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 {
 
-	gE_document *doc;
+	gedit_document *doc;
 
 	if (gnome_mdi_remove_all (mdi, FALSE)) {
 	
@@ -680,7 +680,7 @@ file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 	    /* if there are no open documents create a blank one */
 	    if (g_list_length(mdi->children) == 0) {
 
-		doc = gE_document_new ();
+		doc = gedit_document_new ();
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 		gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
 	    }
@@ -691,7 +691,7 @@ file_close_all_cb(GtkWidget *widget, gpointer cbdata)
 
 }
 
-gint file_revert_do (gE_document *doc)
+gint file_revert_do (gedit_document *doc)
 {
 
 	GnomeMessageBox *msgbox;
@@ -716,7 +716,7 @@ gint file_revert_do (gE_document *doc)
 	switch (ret) {
 	        
 	case 0:
-			gE_file_open (doc, doc->filename);
+			gedit_file_open (doc, doc->filename);
 			return TRUE;
 	
 	case 1:
@@ -732,11 +732,11 @@ gint file_revert_do (gE_document *doc)
 /* File revertion callback */
 void file_revert_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gE_document *doc;
+	gedit_document *doc;
 	
-	if (gE_document_current ()) {
+	if (gedit_document_current ()) {
 	
-	  doc = gE_document_current ();
+	  doc = gedit_document_current ();
 	    
 	  if (doc->filename) {
 	  
@@ -766,7 +766,7 @@ void
 file_quit_cb(GtkWidget *widget, gpointer cbdata)
 {
 
-	gE_save_settings ();
+	gedit_save_settings ();
 
 	if (gnome_mdi_remove_all (mdi, FALSE)) {
 	
@@ -929,7 +929,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 {
 
 	GnomeUIInfo *menu;
-	gE_data *data;
+	gedit_data *data;
 	gchar *path;
 	int i;
 
@@ -955,7 +955,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	
 	 menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
 	
-	 data = g_malloc0 (sizeof (gE_data));
+	 data = g_malloc0 (sizeof (gedit_data));
 	 data->temp1 = g_strdup (g_list_nth_data (recent_files, i));
 	
 	 menu->label = g_new (gchar, strlen (g_list_nth_data (recent_files, i)) + 5);
@@ -986,24 +986,24 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 }
 
 static void
-recent_cb(GtkWidget *w, gE_data *data)
+recent_cb(GtkWidget *w, gedit_data *data)
 {
 
-	gE_document *doc;
+	gedit_document *doc;
 	
-	if ((doc = gE_document_current ())) {
+	if ((doc = gedit_document_current ())) {
 	
 	  if (doc->filename || GE_VIEW(mdi->active_view)->changed) {
-            doc = gE_document_new_with_file (data->temp1);
+            doc = gedit_document_new_with_file (data->temp1);
 	    gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	    gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	    
 	  } else {
 	  
-	   /*doc = gE_document_new_with_file (data->temp1);
+	   /*doc = gedit_document_new_with_file (data->temp1);
 	   gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	   gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));*/
-	   gE_file_open (doc, data->temp1);
+	   gedit_file_open (doc, data->temp1);
 	   
 	  }
 	
@@ -1015,13 +1015,13 @@ recent_cb(GtkWidget *w, gE_data *data)
 void
 options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 {
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_view *view = GE_VIEW (mdi->active_view);
 /*	gint visible; */
 
 	if (!view->split_parent)
 	  return;
 
-	gE_view_set_split_screen
+	gedit_view_set_split_screen
 		(view, !GTK_WIDGET_VISIBLE (view->split_parent));
 }
 
@@ -1029,26 +1029,26 @@ options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_view *view = GE_VIEW (mdi->active_view);
 	
-	gE_view_set_read_only (view, !view->read_only);
+	gedit_view_set_read_only (view, !view->read_only);
 }
 
 void options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_view *view = GE_VIEW (mdi->active_view);
 	
-	gE_view_set_word_wrap (view, !view->word_wrap);
+	gedit_view_set_word_wrap (view, !view->word_wrap);
 }
 
 void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	gE_view *view = GE_VIEW (mdi->active_view);
+	gedit_view *view = GE_VIEW (mdi->active_view);
 
-	gE_view_set_line_wrap (view, !view->line_wrap);
+	gedit_view_set_line_wrap (view, !view->line_wrap);
 }
 
 void options_toggle_status_bar_cb (GtkWidget *w, gpointer data)
 {
-	gE_window_set_status_bar (!settings->show_status);
+	gedit_window_set_status_bar (!settings->show_status);
 }

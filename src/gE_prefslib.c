@@ -28,21 +28,21 @@
 #include <unistd.h>
 #include <gnome.h>
 
-#include "gE_prefslib.h"
-GList *gE_prefs = NULL;
+#include "gedit_prefslib.h"
+GList *gedit_prefs = NULL;
 
-FILE *gE_prefs_open_temp (char **filename)
+FILE *gedit_prefs_open_temp (char **filename)
 {
 	FILE *fp;
 	char *fn;
 	
-	if ((fn = gE_prefs_get_char ("Tempfile")) == NULL)
+	if ((fn = gedit_prefs_get_char ("Tempfile")) == NULL)
 		if ((fn = getenv ("GETEMPFILE")) == NULL)
-			fn = g_strdup ("/tmp/gE_temp");
+			fn = g_strdup ("/tmp/gedit_temp");
 
 	if ((fp = fopen (fn, "w")) == NULL)
 	{
-		printf ("gE_prefs_open_temp: Unable to open temporary file %s for writing.\n", fn);
+		printf ("gedit_prefs_open_temp: Unable to open temporary file %s for writing.\n", fn);
 		return NULL;
 	}
 	
@@ -51,13 +51,13 @@ FILE *gE_prefs_open_temp (char **filename)
 }
 
 /* 
-   char *gE_prefs_open_file (char *filename)
+   char *gedit_prefs_open_file (char *filename)
    Prepends the path of the rc file directory to the filename specified by
    char *filename, creates the rc file directory if need be, and returns a pointer
    to the full pathname.
 */
  
-char *gE_prefs_open_file (char *filename, char *rw)
+char *gedit_prefs_open_file (char *filename, char *rw)
 {
 	FILE *f;
 	char *homedir, *gedit_dir, *gedit_dir_old, *fn;
@@ -70,7 +70,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 	{
 		if ((homedir = getenv ("HOME")) == NULL)
 		{
-			printf ("gE_prefs_open_file: Couldn't get home directory path.\n");
+			printf ("gedit_prefs_open_file: Couldn't get home directory path.\n");
 			return NULL;
 		}
 		gedit_dir = g_malloc0 (strlen (homedir) + strlen ("/.gedit") + 1);
@@ -82,7 +82,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 		printf ("Creating preferences directory...\n");
 		if (mkdir (gedit_dir, mode) == -1)
 		{
-			printf ("gE_prefs_open_file: Couldn't create preferences directory.\n");
+			printf ("gedit_prefs_open_file: Couldn't create preferences directory.\n");
 			return NULL;
 		}
 		stat (gedit_dir, &gedit_stats);
@@ -95,7 +95,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 		printf ("Moving outdated preferences file away...\n");
 		if (rename (gedit_dir, gedit_dir_old) == -1)
 		{
-			printf ("gE_prefs_open_file: Couldn't rename outdated preferences file, please move %s out of the way.\n", gedit_dir);
+			printf ("gedit_prefs_open_file: Couldn't rename outdated preferences file, please move %s out of the way.\n", gedit_dir);
 			g_free (gedit_dir);
 			g_free (gedit_dir_old);
 			return NULL;
@@ -110,7 +110,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 		printf ("Creating preferences directory...\n");
 		if (mkdir (gedit_dir, mode) == -1)
 		{
-			printf ("gE_prefs_open_file: Couldn't create preferences directory.\n");
+			printf ("gedit_prefs_open_file: Couldn't create preferences directory.\n");
 			return NULL;
 		}
 	}
@@ -124,7 +124,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 		printf ("Creating new rc file \"%s\"...\n", filename);
 		if ((f = fopen (fn, "w")) == NULL)
 		{
-			printf ("gE_prefs_open_file: Couldn't create rc file.\n");
+			printf ("gedit_prefs_open_file: Couldn't create rc file.\n");
 			return NULL;
 		}
 		else
@@ -139,22 +139,22 @@ char *gE_prefs_open_file (char *filename, char *rw)
 
 
 
-int gE_prefs_open ()
+int gedit_prefs_open ()
 {
-	gE_pref *new = NULL;
+	gedit_pref *new = NULL;
 	FILE *fp;
 	char line[256];
 	gchar *ptr, *ptr2, *filename;
 
-	if ((filename = gE_prefs_open_file ("geditrc", "r")) == NULL)
+	if ((filename = gedit_prefs_open_file ("geditrc", "r")) == NULL)
 	{
-		g_print ("gE_prefs_open: There was an error openning the prefs file.\n");
+		g_print ("gedit_prefs_open: There was an error openning the prefs file.\n");
 		return -1;
 	}
 
 	if ((fp = fopen (filename, "r")) == NULL)
 	{
-		printf ("gE_prefs_open: There was an error openning the prefs file.\n");
+		printf ("gedit_prefs_open: There was an error openning the prefs file.\n");
 		g_free (filename);
 		return -1;
 	}
@@ -162,7 +162,7 @@ int gE_prefs_open ()
 
 	while (fgets(line, 256, fp))
 	{
-		new = g_malloc0(sizeof(gE_pref));
+		new = g_malloc0(sizeof(gedit_pref));
 		ptr = ptr2 = g_strdup (line);
 
 		while (*ptr2 != '\0' && *ptr2 != '=' && *ptr2 != '\n')
@@ -171,7 +171,7 @@ int gE_prefs_open ()
 		if (*ptr2 == '\0')
 		{
 			fclose(fp);
-			printf("gE_prefs_open: Error in config file.\n");
+			printf("gedit_prefs_open: Error in config file.\n");
 			return -1;
 		}
 		else
@@ -185,50 +185,50 @@ int gE_prefs_open ()
 			strncpy(new->value, ptr2, strlen (ptr2) - 1);
 		}
          	
-		gE_prefs = g_list_append (gE_prefs, new);
+		gedit_prefs = g_list_append (gE_prefs, new);
 	}
 
 	fclose(fp);
 	return 0;
 }
 
-void gE_prefs_close ()
+void gedit_prefs_close ()
 {
 	FILE *temp_fp;
 	int i;
-	gE_pref *pref;
+	gedit_pref *pref;
  	char *temp_fn, *prefs_fn, *command;
  	
-	if ((temp_fp = gE_prefs_open_temp (&temp_fn)) == NULL)
+	if ((temp_fp = gedit_prefs_open_temp (&temp_fn)) == NULL)
 	{
-		printf ("gE_prefs_close: Couldn't open temporary file for writing.\n");
+		printf ("gedit_prefs_close: Couldn't open temporary file for writing.\n");
 		return;
 	}
 
-	for (i = 0; i < g_list_length (gE_prefs); i++)
+	for (i = 0; i < g_list_length (gedit_prefs); i++)
 	{
-		pref = g_list_nth_data (gE_prefs, i);
+		pref = g_list_nth_data (gedit_prefs, i);
 		fprintf(temp_fp, "%s=%s\n", pref->name, pref->value);
 	}
 
-	for (i = g_list_length (gE_prefs) - 1; i >= 0; i--)
+	for (i = g_list_length (gedit_prefs) - 1; i >= 0; i--)
 	{
-		pref = g_list_nth_data (gE_prefs, i);
-		gE_prefs = g_list_remove (gE_prefs, pref);
+		pref = g_list_nth_data (gedit_prefs, i);
+		gedit_prefs = g_list_remove (gE_prefs, pref);
 		g_free(pref);
 	}
 
 	fclose(temp_fp);
 	
-	if ((prefs_fn = gE_prefs_open_file ("geditrc", "w")) == NULL)
+	if ((prefs_fn = gedit_prefs_open_file ("geditrc", "w")) == NULL)
 	{
-		printf ("gE_prefs_close: Couldn't open prefs file for writing.\n");
+		printf ("gedit_prefs_close: Couldn't open prefs file for writing.\n");
 		return;
 	}
 	
 	if (unlink (prefs_fn) == -1)
 	{
-		printf ("gE_prefs_close: Couldn't delete old temporary file.\n");
+		printf ("gedit_prefs_close: Couldn't delete old temporary file.\n");
 		g_free (temp_fn);
 		g_free (prefs_fn);
 		return;
@@ -239,7 +239,7 @@ void gE_prefs_close ()
 		sprintf (command, "cp %s %s", temp_fn, prefs_fn);
 		if (system (command) == -1)
 		{
-			printf ("gE_prefs_close: Couldn't move temporary file %s to %s.\n", temp_fn, prefs_fn);
+			printf ("gedit_prefs_close: Couldn't move temporary file %s to %s.\n", temp_fn, prefs_fn);
 			g_free (temp_fn);
 			g_free (prefs_fn);
 			g_free (command);
@@ -254,7 +254,7 @@ void gE_prefs_close ()
 }
 
 
-char *gE_prefs_get_data (char *name)
+char *gedit_prefs_get_data (char *name)
 {
 
 	char *value;
@@ -263,12 +263,12 @@ char *gE_prefs_get_data (char *name)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 	if (value == NULL)
-		value = gE_prefs_get_default (name);
+		value = gedit_prefs_get_default (name);
 	return value;
 
 }
 
-void gE_prefs_set_data (char *name, char *value)
+void gedit_prefs_set_data (char *name, char *value)
 {
 
 	gnome_config_push_prefix ("/gEdit/Global/");
@@ -279,12 +279,12 @@ void gE_prefs_set_data (char *name, char *value)
 }
 
 
-char *gE_prefs_get_default (char *name)
+char *gedit_prefs_get_default (char *name)
 {
 	int i;
 	char *value;
 
-	static gE_pref gE_prefs_defaults [] = {
+	static gedit_pref gE_prefs_defaults [] = {
 		{ "tab pos", "2" },
 		{ "auto indent", "0" },
 		{ "toolbar", "1" },
@@ -298,11 +298,11 @@ char *gE_prefs_get_default (char *name)
 	};
 
 	i = 0;
-	while (gE_prefs_defaults[i].name != NULL)
+	while (gedit_prefs_defaults[i].name != NULL)
 	{
-		if (strcmp (name, gE_prefs_defaults[i].name) == 0)
+		if (strcmp (name, gedit_prefs_defaults[i].name) == 0)
 		{
-			value = g_strdup (gE_prefs_defaults[i].value);
+			value = g_strdup (gedit_prefs_defaults[i].value);
 			return value;
 		}
 		i++;
@@ -311,17 +311,17 @@ char *gE_prefs_get_default (char *name)
 }
 
 
-char *gE_prefs_get_char(char *name) 
+char *gedit_prefs_get_char(char *name) 
 {
-	return gE_prefs_get_data (name);
+	return gedit_prefs_get_data (name);
 }
 
-void gE_prefs_set_char(char *name, char *value) 
+void gedit_prefs_set_char(char *name, char *value) 
 {
-	gE_prefs_set_data (name, value);
+	gedit_prefs_set_data (name, value);
 }
 
-int gE_prefs_get_int(char *name)
+int gedit_prefs_get_int(char *name)
 {
 
 	int i;
@@ -332,7 +332,7 @@ int gE_prefs_get_int(char *name)
 	gnome_config_sync ();
 /*	if (i == NULL)
 	  {
-		value = gE_prefs_get_data (name);
+		value = gedit_prefs_get_data (name);
 		i = atoi (value);
 		g_free(value);
 	  }
@@ -341,7 +341,7 @@ int gE_prefs_get_int(char *name)
 	
 }
 
-void gE_prefs_set_int(char *name, int value) 
+void gedit_prefs_set_int(char *name, int value) 
 {
 
 	gnome_config_push_prefix ("/gEdit/Global/");

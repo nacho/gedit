@@ -31,7 +31,7 @@
 #define DEFAULT_FONTSET \
 	"-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
 
-typedef struct _gE_window {
+typedef struct _gedit_window {
 	GtkWidget *window;
 	GtkWidget *statusbox;
 	GtkWidget *statusbar;
@@ -50,11 +50,11 @@ typedef struct _gE_window {
 
 	GtkPositionType tab_pos;
 
-} gE_window;
+} gedit_window;
 
-extern gE_window *window;
+extern gedit_window *window;
 
-typedef struct _gE_document {
+typedef struct _gedit_document {
 
 	GnomeMDIChild mdi_child;
 	
@@ -77,27 +77,27 @@ typedef struct _gE_document {
 	GList *undo_top;	
 	GList *redo;		/* Redo Stack */
 
-} gE_document;
+} gedit_document;
 
-typedef struct _gE_data {
-	gE_window *window;
-	gE_document *document;
+typedef struct _gedit_data {
+	gedit_window *window;
+	gedit_document *document;
 	gpointer temp1;
 	gpointer temp2;
 	gboolean flag;	/* general purpose flag to indicate if action completed */
 
-} gE_data;
+} gedit_data;
 
-typedef struct _gE_function {
+typedef struct _gedit_function {
 	gchar *name;
 	gchar *tooltip_text;
 	gchar *icon;
 	GtkSignalFunc callback;
 
-} gE_function;
+} gedit_function;
 
 extern GList *window_list;
-GList *gE_documents;
+GList *gedit_documents;
 
 extern GnomeMDI *mdi;
 extern gint mdiMode;
