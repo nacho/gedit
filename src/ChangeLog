@@ -1,3 +1,15 @@
+2002-08-26  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-debug.c (gedit_debug): do not perform varargs processing 
+	when debug flags are not set
+
+	* gedit-undo-manager.c (gedit_undo_manager_get_number_of_groups): 
+	removed, uses num_of_groups variables to count the number of groups.
+	This should improve "replace all" performance on big files 
+	(bug #68720)
+
+	Thanks to Mukund <mukund.rajagopalan@wipro.com> for the patches
+
 2002-08-24  James Willcox  <jwillcox@gnome.org>
 
 	* GNOME_Gedit.idl:  Added "insert", "delete" "getCharCount", and

@@ -50,15 +50,6 @@ gint debug_session = 0;
 void
 gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* format, ...)
 {
-	va_list args;
-	gchar *msg;
-
-	g_return_if_fail (format != NULL);
-
-	va_start (args, format);
-	msg = g_strdup_vprintf (format, args);
-	va_end (args);
-
 	if (debug ||
 	    (debug_view     && section == GEDIT_DEBUG_VIEW)     ||
 	    (debug_undo     && section == GEDIT_DEBUG_UNDO)     ||
@@ -72,7 +63,17 @@ gedit_debug (gint section, gchar *file, gint line, gchar* function, gchar* forma
 	    (debug_recent   && section == GEDIT_DEBUG_RECENT)   ||
 	    (debug_session  && section == GEDIT_DEBUG_SESSION)  ||
 	    (debug_mdi      && section == GEDIT_DEBUG_MDI) )
-		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
+	{
+		va_list args;
+		gchar *msg;
+
+		g_return_if_fail (format != NULL);
+
+		va_start (args, format);
+		msg = g_strdup_vprintf (format, args);
+		va_end (args);
 	
-	g_free (msg);
+		g_print ("%s:%d (%s) %s\n", file, line, function, msg);
+		g_free (msg);
+	}
 }

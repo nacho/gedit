@@ -93,6 +93,8 @@ struct _GeditUndoManagerPrivate
 	gboolean	can_redo;
 
 	gint		running_not_undoable_actions;
+
+	gint		num_of_groups;
 };
 
 enum {
@@ -122,7 +124,6 @@ static void gedit_undo_manager_check_list_size 		(GeditUndoManager *um);
 
 static gboolean gedit_undo_manager_merge_action 	(GeditUndoManager *um, 
 		                                         GeditUndoAction *undo_action);
-static gint gedit_undo_manager_get_number_of_groups 	(GeditUndoManager *um);
 
 static GObjectClass 	*parent_class 				= NULL;
 static guint 		undo_manager_signals [LAST_SIGNAL] 	= { 0 };
@@ -206,6 +207,8 @@ gedit_undo_manager_init (GeditUndoManager *um)
 	um->priv->can_redo = FALSE;
 
 	um->priv->running_not_undoable_actions = 0;
+
+	um->priv->num_of_groups = 0;
 }
 
 static void
@@ -513,6 +516,9 @@ gedit_undo_manager_free_action_list (GeditUndoManager *um)
 		else
 			g_return_if_fail (FALSE);
 
+		if (undo_action->order_in_group == 1)
+			--um->priv->num_of_groups;
+
 		g_free (undo_action);
 	}
 
@@ -646,6 +652,9 @@ gedit_undo_manager_add_action (GeditUndoManager *um, GeditUndoAction undo_action
 		
 		++um->priv->actions_in_current_group;
 		action->order_in_group = um->priv->actions_in_current_group;
+
+		if (action->order_in_group == 1)
+			++um->priv->num_of_groups;
 	
 		um->priv->actions = g_list_prepend (um->priv->actions, action);
 	}
@@ -692,6 +701,9 @@ gedit_undo_manager_free_first_n_actions (GeditUndoManager *um, gint n)
 		else
 			g_return_if_fail (FALSE);
 
+		if (undo_action->order_in_group == 1)
+			--um->priv->num_of_groups;
+
 		g_free (undo_action);
 
 		um->priv->actions = g_list_delete_link (um->priv->actions, um->priv->actions);
@@ -716,7 +728,7 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 	if (undo_levels < 1)
 		return;
 
-	if (gedit_undo_manager_get_number_of_groups (um) > undo_levels)
+	if (um->priv->num_of_groups > undo_levels)
 	{
 		GeditUndoAction *undo_action;
 		GList* last;
@@ -733,6 +745,9 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 			else
 				g_return_if_fail (FALSE);
 
+			if (undo_action->order_in_group == 1)
+				--um->priv->num_of_groups;
+
 			g_free (undo_action);
 
 			um->priv->actions = g_list_delete_link (um->priv->actions, last);
@@ -742,8 +757,7 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 			undo_action = (GeditUndoAction*) last->data;
 
 		} while ((undo_action->order_in_group > 1) || 
-			 (gedit_undo_manager_get_number_of_groups (um) > 
-			  undo_levels));
+			 (um->priv->num_of_groups > undo_levels));
 	}	
 }
 
@@ -873,21 +887,4 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 	return TRUE;
 }
 
-static gint
-gedit_undo_manager_get_number_of_groups (GeditUndoManager *um)
-{
-	GList *list = um->priv->actions;
-  	gint num = 0;
-
-	gedit_debug (DEBUG_UNDO, "");
-  
-  	while (list)
-    	{
-      		if (((GeditUndoAction* ) list->data)->order_in_group == 1)
-			++num;
-      		list = list->next;
-    	}
-  
-  	return num;
-}
 
