@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 1.2.0\n"
-"POT-Creation-Date: 2002-07-19 16:59+0200\n"
+"POT-Creation-Date: 2002-07-23 21:00+0200\n"
 "PO-Revision-Date: 2002-07-19 15:59GMT-03:00\n"
 "Last-Translator: Pablo del Campo <pablodc@bigfoot.com>\n"
 "Language-Team: Español <traductores@es.gnome.org>\n"
@@ -876,7 +876,7 @@ msgstr "Insertar la fecha y hora actual en la posición del cursor."
 msgid "Select the format to use when inserting date/time."
 msgstr "Seleccione el formato a usar cuando se inserte la fecha/hora."
 
-#: src/bonobo-mdi.c:517 src/bonobo-mdi.c:600 src/bonobo-mdi.c:1837
+#: src/bonobo-mdi.c:522 src/bonobo-mdi.c:612 src/bonobo-mdi.c:1850
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
@@ -906,7 +906,7 @@ msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:121
+#: src/dialogs/gedit-dialog-replace.c:186 src/gedit-file-selector-util.c:126
 #: src/gedit-ui.xml.h:98
 msgid "_Replace"
 msgstr "_Reemplazar"
@@ -1546,29 +1546,29 @@ msgstr "Nombre de archivo inválido"
 msgid "Invalid UTF-8 data"
 msgstr "Datos UTF-8 inválidos"
 
-#: src/gedit-document.c:1146
+#: src/gedit-document.c:1149
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "No se ha podido leer la información del enlace simbólico para %s"
 
-#: src/gedit-document.c:1192
+#: src/gedit-document.c:1195
 msgid "The file has too many symbolic links."
 msgstr "El archivo tiene demasiados enlaces simbólicos."
 
-#: src/gedit-document.c:1246
+#: src/gedit-document.c:1249
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit no puede manejar %s direcciones en el modo escritura."
 
-#: src/gedit-document.c:1253
+#: src/gedit-document.c:1256
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit no puede manejar este tipo de dirección en el modo escritura."
 
-#: src/gedit-document.c:1274
+#: src/gedit-document.c:1269
 msgid "Invalid filename."
 msgstr "Nombre de archivo inválido."
 
-#: src/gedit-document.c:1387
+#: src/gedit-document.c:1382
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1576,7 +1576,7 @@ msgstr ""
 "No hay suficiente espacio en el disco para guardar el archivo.\n"
 "Por favor libere un poco de espacio en el disco e intente nuevamente."
 
-#: src/gedit-document.c:1392
+#: src/gedit-document.c:1387
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1586,15 +1586,15 @@ msgstr ""
 "los tamaños de archivo. Por favor intente guardar un archivo más pequeño o "
 "guardarlo en un disco que no posea estas limitaciones."
 
-#: src/gedit-document.c:1431
+#: src/gedit-document.c:1426
 msgid "Could not create a backup file."
 msgstr "No se ha podido crear un archivo de respaldo."
 
-#: src/gedit-document.c:1579
+#: src/gedit-document.c:1574
 msgid "It is not possible to revert an Untitled document"
 msgstr "No es posible recuperar un documento Sin Título"
 
-#: src/gedit-file-selector-util.c:109
+#: src/gedit-file-selector-util.c:114
 #, c-format
 msgid ""
 "A file named ''%s'' already exists.\n"
@@ -1603,11 +1603,11 @@ msgstr ""
 "Ya existe un archivo llamado «%s».\n"
 "¿Desea reemplazarlo con el que está guardando ahora?"
 
-#: src/gedit-file-selector-util.c:117
+#: src/gedit-file-selector-util.c:122
 msgid "Do_n't replace"
 msgstr "No ree_mplazar"
 
-#: src/gedit-file-selector-util.c:497
+#: src/gedit-file-selector-util.c:502
 msgid "Select a filename to save"
 msgstr "Seleccione el nombre de archivo a guardar"
 
@@ -1615,59 +1615,59 @@ msgstr "Seleccione el nombre de archivo a guardar"
 msgid "Open File ..."
 msgstr "Abrir un archivo ..."
 
-#: src/gedit-file.c:168 src/gedit-file.c:858
+#: src/gedit-file.c:176 src/gedit-file.c:811
 #, c-format
 msgid "Loaded file '%s'"
 msgstr "Archivo «%s» cargado"
 
-#: src/gedit-file.c:314 src/gedit-file.c:435
+#: src/gedit-file.c:304 src/gedit-file.c:420
 #, c-format
 msgid "Saving file '%s' ..."
 msgstr "Guardando el archivo «%s»..."
 
-#: src/gedit-file.c:335 src/gedit-file.c:450
+#: src/gedit-file.c:325 src/gedit-file.c:435
 msgid "The document has not been saved."
 msgstr "El documento no ha sido guardado"
 
-#: src/gedit-file.c:350 src/gedit-file.c:442
+#: src/gedit-file.c:338 src/gedit-file.c:432
 #, c-format
 msgid "File '%s' saved."
 msgstr "Se guardó el archivo «%s»."
 
-#: src/gedit-file.c:417
+#: src/gedit-file.c:399
 msgid "Save as ..."
 msgstr "Guardar como..."
 
-#: src/gedit-file.c:614
+#: src/gedit-file.c:606
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr "Recuperando el archivo «%s»..."
 
-#: src/gedit-file.c:627
+#: src/gedit-file.c:619
 msgid "The document has not been reverted."
 msgstr "El documento no ha sido recuperado."
 
-#: src/gedit-file.c:637
+#: src/gedit-file.c:629
 #, c-format
 msgid "File '%s' reverted."
 msgstr "Archivo «%s» recuperado."
 
-#: src/gedit-file.c:684
+#: src/gedit-file.c:655
 #, c-format
-msgid "Loading %d file..."
-msgstr "Cargando el archivo %d..."
+msgid "Loading %d files..."
+msgstr "Cargando %d archivos..."
 
-#: src/gedit-file.c:716
+#: src/gedit-file.c:687
 #, c-format
 msgid "The file \"%s\" does not exist. Would you like to create it?"
 msgstr "El archivo «%s» no existe. ¿Desea crearlo?"
 
-#: src/gedit-file.c:775
+#: src/gedit-file.c:746
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i archivos cargados"
 
-#: src/gedit-file.c:916
+#: src/gedit-file.c:869
 msgid "Could not read data from stdin."
 msgstr "No se ha podido leer datos desde la entrada estándar."
 
@@ -2193,7 +2193,7 @@ msgstr "_Deshacer"
 msgid "_View"
 msgstr "_Ver"
 
-#: src/gedit-utils.c:778
+#: src/gedit-utils.c:792
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2205,36 +2205,36 @@ msgstr ""
 "Por favor verifique que ha escrito la dirección correctamente e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:785
+#: src/gedit-utils.c:799
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "No se ha podido abrir el archivo «%s» porque contiene datos corruptos."
 
-#: src/gedit-utils.c:796
+#: src/gedit-utils.c:810
 #, c-format
 msgid "Could not open the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "No se ha podido abrir el archivo «%s» porque gedit no puede manejar %s "
 "direcciones."
 
-#: src/gedit-utils.c:802
+#: src/gedit-utils.c:816
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "No se ha podido abrir el archivo «%s»"
 
-#: src/gedit-utils.c:812
+#: src/gedit-utils.c:826
 #, c-format
 msgid "Could not open the file \"%s\" because it contains data in an invalid format."
 msgstr ""
 "No se ha podido abrir el archivo «%s» porque contiene datos en un formato "
 "inválido."
 
-#: src/gedit-utils.c:819
+#: src/gedit-utils.c:833
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "No se ha podido abrir el archivo «%s» porque es demasiado grande."
 
-#: src/gedit-utils.c:826
+#: src/gedit-utils.c:840
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2246,12 +2246,12 @@ msgstr ""
 "Por favor verifique que ha escrito la dirección correctamente e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:833
+#: src/gedit-utils.c:847
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "No se ha podido abrir el archivo «%s» porque el acceso fué denegado."
 
-#: src/gedit-utils.c:840
+#: src/gedit-utils.c:854
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2263,7 +2263,7 @@ msgstr ""
 "\n"
 "Por favor cierre algunos archivos e intente nuevamente."
 
-#: src/gedit-utils.c:848
+#: src/gedit-utils.c:862
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2275,7 +2275,7 @@ msgstr ""
 "Por favor verifique que ha escrito la dirección correctamente e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:855
+#: src/gedit-utils.c:869
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2284,7 +2284,7 @@ msgstr ""
 "No hay suficiente memoria disponible para abrir el archivo «%s». Por favor "
 "cierre algunas aplicaciones e intente nuevamente."
 
-#: src/gedit-utils.c:881
+#: src/gedit-utils.c:895
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2298,7 +2298,7 @@ msgstr ""
 "Por favor verifique que ha escrito la dirección correcta y que la "
 "configuración del proxy este correcta e intente nuevamente."
 
-#: src/gedit-utils.c:896
+#: src/gedit-utils.c:910
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2311,7 +2311,7 @@ msgstr ""
 "Por favor verifique que ha escrito la dirección correcta e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:903
+#: src/gedit-utils.c:917
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2324,7 +2324,7 @@ msgstr ""
 "Por favor verifique si la configuración del proxy es correcta e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:910
+#: src/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2337,7 +2337,7 @@ msgstr ""
 "Por favor verifique que ha escrito la dirección correcta e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:918
+#: src/gedit-utils.c:932
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2349,17 +2349,17 @@ msgstr ""
 "\n"
 "Probablemente usted este intentando abrir un archivo de tipo binario."
 
-#: src/gedit-utils.c:956
+#: src/gedit-utils.c:970
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "No se ha podido abrir el archivo «%s»."
 
-#: src/gedit-utils.c:1007
+#: src/gedit-utils.c:1021
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "No se ha podido guardar el archivo «%s»."
 
-#: src/gedit-utils.c:1011
+#: src/gedit-utils.c:1025
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2370,7 +2370,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-utils.c:1064
+#: src/gedit-utils.c:1078
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2382,26 +2382,26 @@ msgstr ""
 "\n"
 "Quizás haya sido borrado recientemente."
 
-#: src/gedit-utils.c:1071
+#: src/gedit-utils.c:1085
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "No se ha podido recuperar el archivo «%s» porque este contiene datos "
 "corruptos."
 
-#: src/gedit-utils.c:1082
+#: src/gedit-utils.c:1096
 #, c-format
 msgid "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
 msgstr ""
 "No se ha podido recuperar el archivo «%s» porque gedit no puede manejar %s "
 "direcciones."
 
-#: src/gedit-utils.c:1088 src/gedit-utils.c:1228
+#: src/gedit-utils.c:1102 src/gedit-utils.c:1242
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "No se ha podido recuperar el archivo «%s»."
 
-#: src/gedit-utils.c:1098
+#: src/gedit-utils.c:1112
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2410,17 +2410,17 @@ msgstr ""
 "No se ha podido recuperar el archivo «%s» porque contiene datos en un "
 "formato inválido."
 
-#: src/gedit-utils.c:1105
+#: src/gedit-utils.c:1119
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "No se ha podido recuperar el archivo «%s» porque es demasiado grande."
 
-#: src/gedit-utils.c:1112
+#: src/gedit-utils.c:1126
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "No se ha podido recuperar el archivo «%s» porque el acceso fue denegado."
 
-#: src/gedit-utils.c:1119
+#: src/gedit-utils.c:1133
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2432,7 +2432,7 @@ msgstr ""
 "\n"
 "Por favor cierre algunos archivos abiertos e intente nuevamente."
 
-#: src/gedit-utils.c:1127
+#: src/gedit-utils.c:1141
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2441,7 +2441,7 @@ msgstr ""
 "No hay suficiente memoria disponible para recuperar el archivo «%s». Por "
 "favor cierre algunas aplicaciones e intente nuevamente."
 
-#: src/gedit-utils.c:1153
+#: src/gedit-utils.c:1167
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2454,7 +2454,7 @@ msgstr ""
 "Por favor verifique que la configuración de su proxy este correcta e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:1167
+#: src/gedit-utils.c:1181
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2467,14 +2467,14 @@ msgstr ""
 "Por favor verifique que la configuración de su proxy este correcta e intente "
 "nuevamente."
 
-#: src/gedit-utils.c:1174
+#: src/gedit-utils.c:1188
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "No se ha podido recuperar el archivo «%s» porque el intento de registro ha "
 "fallado."
 
-#: src/gedit-utils.c:1181
+#: src/gedit-utils.c:1195
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2486,16 +2486,16 @@ msgstr ""
 "\n"
 "Probablemente usted este intentando recuperar un archivo de tipo binario."
 
-#: src/gedit-utils.c:1190
+#: src/gedit-utils.c:1204
 msgid "It is not possible to revert an Untitled document."
 msgstr "No es posible recuperar un documento Sin Título."
 
-#: src/gedit-utils.c:1279
+#: src/gedit-utils.c:1293
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "El archivo «%s» ya existe."
 
-#: src/gedit-utils.c:1285
+#: src/gedit-utils.c:1299
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2506,7 +2506,7 @@ msgstr ""
 "\n"
 "Por favor verifique que ha escrito la dirección correctamente."
 
-#: src/gedit-utils.c:1294
+#: src/gedit-utils.c:1308
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2517,7 +2517,7 @@ msgstr ""
 "\n"
 "Asegurece de poseer los permisos de escritura apropiados."
 
-#: src/gedit-utils.c:1301
+#: src/gedit-utils.c:1315
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2528,7 +2528,7 @@ msgstr ""
 "\n"
 "El nombre del archivo es demasiado largo."
 
-#: src/gedit-utils.c:1308
+#: src/gedit-utils.c:1322
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2541,7 +2541,7 @@ msgstr ""
 "Un componente del directorio en el nombre del archivo no existe o es un "
 "enlace simbólico estropeado."
 
-#: src/gedit-utils.c:1317
+#: src/gedit-utils.c:1331
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2552,7 +2552,7 @@ msgstr ""
 "\n"
 "Por favor libere un poco de espacio en el disco e intente nuevamente."
 
-#: src/gedit-utils.c:1323
+#: src/gedit-utils.c:1337
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "No se ha podido crear el archivo «%s»."
@@ -2636,7 +2636,7 @@ msgstr ""
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crea un documento nuevo en una instancia existente de gedit"
 
-#: src/gnome-recent-view-bonobo.c:189
+#: src/gnome-recent-view-bonobo.c:218
 #, c-format
 msgid "Open %s"
 msgstr "Abrir %s"
