@@ -362,24 +362,24 @@ get_text_secondary_label (GeditDocument *doc)
 	{
 		secondary_msg = g_strdup_printf (
 					ngettext ("If you don't save, changes from the last %ld second "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  "If you don't save, changes from the last %ld seconds "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  seconds),
 					seconds);
 	}
 	else if (seconds < 75) /* 55 <= seconds < 75 */
 	{
 		secondary_msg = g_strdup (_("If you don't save, changes from the last minute "
-					    "will be definitively lost."));
+					    "will be permanently lost."));
 	}
 	else if (seconds < 110) /* 75 <= seconds < 110 */
 	{
 		secondary_msg = g_strdup_printf (
 					ngettext ("If you don't save, changes from the last minute and %ld "
-						  "second will be definitively lost.",
+						  "second will be permanently lost.",
 						  "If you don't save, changes from the last minute and %ld "
-						  "seconds will be definitively lost.",
+						  "seconds will be permanently lost.",
 						  seconds - 60 ),
 					seconds - 60);
 	}
@@ -387,9 +387,9 @@ get_text_secondary_label (GeditDocument *doc)
 	{
 		secondary_msg = g_strdup_printf (
 					ngettext ("If you don't save, changes from the last %ld minute "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  "If you don't save, changes from the last %ld minutes "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  seconds / 60),
 					seconds / 60);
 	}
@@ -402,15 +402,15 @@ get_text_secondary_label (GeditDocument *doc)
 		if (minutes < 5)
 		{
 			secondary_msg = g_strdup (_("If you don't save, changes from the last hour "
-						    "will be definitively lost."));
+						    "will be permanently lost."));
 		}
 		else
 		{
 			secondary_msg = g_strdup_printf (
 					ngettext ("If you don't save, changes from the last hour and %d "
-						  "minute will be definitively lost.",
+						  "minute will be permanently lost.",
 						  "If you don't save, changes from the last hour and %d "
-						  "minutes will be definitively lost.",
+						  "minutes will be permanently lost.",
 						  minutes),
 					minutes);
 		}
@@ -423,9 +423,9 @@ get_text_secondary_label (GeditDocument *doc)
 
 		secondary_msg = g_strdup_printf (
 					ngettext ("If you don't save, changes from the last %d hour "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  "If you don't save, changes from the last %d hours "
-					    	  "will be definitively lost.",
+					    	  "will be permanently lost.",
 						  hours),
 					hours);
 	}
@@ -675,7 +675,7 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 
 	/* Secondary label */
 	secondary_label = gtk_label_new (_("If you don't save, "
-					   "all your changes will be definitively lost."));
+					   "all your changes will be permanently lost."));
 	gtk_box_pack_start (GTK_BOX (vbox2), secondary_label, FALSE, FALSE, 0);
 	gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
