@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit CVS20000908\n"
-"POT-Creation-Date: 2002-02-10 23:22+0100\n"
+"POT-Creation-Date: 2002-02-18 14:51+0100\n"
 "PO-Revision-Date: 2001-06-27 17:50+09:00\n"
 "Last-Translator: Yukihiro Nakai <nakai@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -23,54 +23,98 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: plugins/cvschangelog/cvschangelog.c:40
+#: plugins/ASCII/ascii.c:42
+#, fuzzy
+msgid "_ASCII table"
+msgstr "ASCIIテーブル"
+
+#: plugins/ASCII/ascii.c:45
+#, fuzzy
+msgid "Pop-up a dialog containing an ASCII Table"
+msgstr "このプラグインはASCIIテーブルのポップアップダイアログを表示します。"
+
+#: plugins/ASCII/ascii.c:325
+#, fuzzy
+msgid "Char"
+msgstr "文字"
+
+#: plugins/ASCII/ascii.c:332
+msgid "Dec#"
+msgstr "10進数"
+
+#: plugins/ASCII/ascii.c:339
+msgid "Hex#"
+msgstr "16進数"
+
+#: plugins/ASCII/ascii.c:346
+msgid "Name"
+msgstr "名前"
+
+#: plugins/ASCII/ascii.c:391 plugins/ASCII/ascii.c:512
+msgid "ASCII table"
+msgstr "ASCIIテーブル"
+
+#: plugins/ASCII/ascii.c:404
+#, fuzzy
+msgid "_Insert char"
+msgstr "文字の挿入"
+
+#: plugins/ASCII/ascii.c:513
+msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+msgstr "このプラグインはASCIIテーブルのポップアップダイアログを表示します。"
+
+#: plugins/ASCII/ascii.c:515
+msgid "Copyright (C) 2001-2002 Paolo Maggi"
+msgstr ""
+
+#: plugins/cvschangelog/cvschangelog.c:44
 msgid "Open _CVS ChangeLogs"
 msgstr ""
 
-#: plugins/cvschangelog/cvschangelog.c:43
+#: plugins/cvschangelog/cvschangelog.c:47
 msgid "Searches for ChangeLogs in the current document and opens them."
 msgstr ""
 
-#: plugins/cvschangelog/cvschangelog.c:231
+#: plugins/cvschangelog/cvschangelog.c:235
 msgid "CVS ChangeLog"
 msgstr ""
 
-#: plugins/cvschangelog/cvschangelog.c:232
+#: plugins/cvschangelog/cvschangelog.c:236
 msgid "A plugin that opens ChangeLogs found in CVS commit messages."
 msgstr ""
 
-#: plugins/cvschangelog/cvschangelog.c:234
+#: plugins/cvschangelog/cvschangelog.c:238
 msgid "Copyright (C) 2002 - James Willcox"
 msgstr ""
 
-#: plugins/diff/diff.c:57
+#: plugins/diff/diff.c:61
 #, fuzzy
 msgid "_Compare files..."
 msgstr "開く..."
 
-#: plugins/diff/diff.c:60
+#: plugins/diff/diff.c:64
 msgid "Makes a diff file from two documents or files"
 msgstr "2つのドキュメントまたはファイルからdiffファイルを作ります"
 
-#: plugins/diff/diff.c:62
+#: plugins/diff/diff.c:66
 #, fuzzy
 msgid "Compare files"
 msgstr "読み込み完了: %s"
 
 #. Create the dialog
-#: plugins/diff/diff.c:263
+#: plugins/diff/diff.c:267
 msgid "Compare two files..."
 msgstr ""
 
-#: plugins/diff/diff.c:277
+#: plugins/diff/diff.c:281
 msgid "C_ompare"
 msgstr ""
 
-#: plugins/diff/diff.c:487
+#: plugins/diff/diff.c:491
 msgid "The two documents you selected are the same."
 msgstr "選択された2つのドキュメントは一致しています。"
 
-#: plugins/diff/diff.c:495
+#: plugins/diff/diff.c:499
 msgid ""
 "The \"first\" file you selected does not exist.\n"
 "\n"
@@ -80,7 +124,7 @@ msgstr ""
 "\n"
 "正しいファイル名を入力してください。 "
 
-#: plugins/diff/diff.c:504
+#: plugins/diff/diff.c:508
 msgid ""
 "The \"second\" file you selected does not exist.\n"
 "\n"
@@ -90,46 +134,46 @@ msgstr ""
 "\n"
 "正しいファイル名を入力してください。 "
 
-#: plugins/diff/diff.c:512
+#: plugins/diff/diff.c:516
 #, fuzzy
 msgid "The two files you selected are the same."
 msgstr "選択された2つのドキュメントは一致しています。"
 
-#: plugins/diff/diff.c:529
+#: plugins/diff/diff.c:533
 msgid "The \"first\" document contains no text."
 msgstr "\"最初\"のドキュメントはテキストを含んでいません。"
 
-#: plugins/diff/diff.c:558
+#: plugins/diff/diff.c:562
 msgid "The \"second\" document contains no text."
 msgstr "\"2番目\"のドキュメントはテキストを含んでいません。"
 
 #. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:579
+#: plugins/diff/diff.c:583
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "gedit could not create a temporary file."
 msgstr ""
 
-#: plugins/diff/diff.c:597 plugins/diff/diff.c:610
+#: plugins/diff/diff.c:601 plugins/diff/diff.c:614
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "Error executing the diff command."
 msgstr ""
 
-#: plugins/diff/diff.c:632
+#: plugins/diff/diff.c:636
 msgid "No differences were found between the selected documents."
 msgstr ""
 
-#: plugins/diff/diff.c:673
+#: plugins/diff/diff.c:677
 msgid ""
 "Impossible to compare the selected documents.\n"
 "\n"
 "The result contains invalid UTF-8 data."
 msgstr ""
 
-#: plugins/diff/diff.c:897
+#: plugins/diff/diff.c:901
 #, fuzzy
 msgid ""
 "Makes a diff file from two documents or files on disk.\n"
@@ -140,86 +184,86 @@ msgstr ""
 "diffコマンドについての詳しい説明は、シェルプロンプトで\"man diff\"\n"
 "と入力してください。\n"
 
-#: plugins/diff/diff.c:900
+#: plugins/diff/diff.c:904
 msgid ""
 "Copyright (C) 2000 - 2001 Chema Celorio \n"
 "Copyright (C) 2002 Paolo Maggi"
 msgstr ""
 
-#: plugins/docinfo/docinfo.c:42
+#: plugins/docinfo/docinfo.c:46
 msgid "_Word Count"
 msgstr ""
 
-#: plugins/docinfo/docinfo.c:45
+#: plugins/docinfo/docinfo.c:49
 msgid "Get info on current document."
 msgstr "現在のドキュメントから情報を取得"
 
-#: plugins/docinfo/docinfo.c:141 plugins/docinfo/docinfo.c:361
+#: plugins/docinfo/docinfo.c:145 plugins/docinfo/docinfo.c:365
 msgid "Word count"
 msgstr ""
 
-#: plugins/docinfo/docinfo.c:152
+#: plugins/docinfo/docinfo.c:156
 #, fuzzy
 msgid "_Update"
 msgstr "更新"
 
-#: plugins/docinfo/docinfo.c:362
+#: plugins/docinfo/docinfo.c:366
 msgid ""
 "The word count plugin analyzes the current document and determines the "
 "number of words, lines, characters and non-space characters in it and "
 "display the result."
 msgstr ""
 
-#: plugins/docinfo/docinfo.c:366 plugins/sample/sample.c:140
-#: plugins/shell_output/shell_output.c:420
-#: plugins/taglist/gedit-taglist-plugin.c:139 plugins/time/time.c:533
+#: plugins/docinfo/docinfo.c:370 plugins/sample/sample.c:144
+#: plugins/shell_output/shell_output.c:424
+#: plugins/taglist/gedit-taglist-plugin.c:144 plugins/time/time.c:540
 msgid "Copyright (C) 2002 - Paolo Maggi"
 msgstr ""
 
-#: plugins/sample/sample.c:36
+#: plugins/sample/sample.c:40
 #, fuzzy
 msgid "_Hello World"
 msgstr "Hello World"
 
-#: plugins/sample/sample.c:39
+#: plugins/sample/sample.c:43
 #, fuzzy
 msgid "Prints Hello World."
 msgstr "Hello World"
 
-#: plugins/sample/sample.c:64
+#: plugins/sample/sample.c:68
 #, fuzzy
 msgid "Hello World "
 msgstr "Hello World"
 
-#: plugins/sample/sample.c:137
+#: plugins/sample/sample.c:141
 msgid "Hello World"
 msgstr "Hello World"
 
-#: plugins/sample/sample.c:138
+#: plugins/sample/sample.c:142
 msgid "Sample 'hello world' plugin."
 msgstr "'hello world'を出力するサンプルプラグインです。"
 
-#: plugins/shell_output/shell_output.c:40
+#: plugins/shell_output/shell_output.c:44
 #, fuzzy
 msgid "Insert shell _output"
 msgstr "シェルの出力をドキュメントに挿入します"
 
-#: plugins/shell_output/shell_output.c:43
+#: plugins/shell_output/shell_output.c:47
 #, fuzzy
 msgid "Insert the shell output in the current document."
 msgstr "シェルの出力をドキュメントに挿入します"
 
-#: plugins/shell_output/shell_output.c:147
-#: plugins/shell_output/shell_output.c:416
+#: plugins/shell_output/shell_output.c:151
+#: plugins/shell_output/shell_output.c:420
 #, fuzzy
 msgid "Shell output"
 msgstr "シェル出力"
 
-#: plugins/shell_output/shell_output.c:160
+#: plugins/shell_output/shell_output.c:164
 msgid "_Run"
 msgstr ""
 
-#: plugins/shell_output/shell_output.c:248
+#: plugins/shell_output/shell_output.c:252
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -229,7 +273,7 @@ msgstr ""
 "\n"
 "正しいシェルコマンドを入力して下さい。"
 
-#: plugins/shell_output/shell_output.c:277
+#: plugins/shell_output/shell_output.c:281
 #, fuzzy
 msgid ""
 "Error parsing the shell command.\n"
@@ -240,7 +284,7 @@ msgstr ""
 "\n"
 "正しいシェルコマンドを入力して下さい。"
 
-#: plugins/shell_output/shell_output.c:330
+#: plugins/shell_output/shell_output.c:334
 #, fuzzy
 msgid "An error occurs while running the selected command."
 msgstr ""
@@ -248,78 +292,78 @@ msgstr ""
 "\n"
 "%s"
 
-#: plugins/shell_output/shell_output.c:417
+#: plugins/shell_output/shell_output.c:421
 #, fuzzy
 msgid ""
 "Execute a program and insert its output in the current document at the "
 "current cursor position"
 msgstr "現在の時間をファイルに挿入"
 
-#: plugins/taglist/gedit-taglist-plugin.c:40
+#: plugins/taglist/gedit-taglist-plugin.c:44
 msgid "_Show tag list"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin.c:43
+#: plugins/taglist/gedit-taglist-plugin.c:47
 msgid "Show the tag list window."
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin.c:135
+#: plugins/taglist/gedit-taglist-plugin.c:140
 msgid "Tag list"
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin.c:136
+#: plugins/taglist/gedit-taglist-plugin.c:141
 msgid ""
 "The tag list plugin provides a method to easily insert into a document "
 "commonly used tabs/strings without having to type them."
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:113
+#: plugins/taglist/gedit-taglist-plugin-window.c:116
 #, fuzzy
 msgid "Tag list plugin"
 msgstr "gedit: Diffプラグイン"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:131
+#: plugins/taglist/gedit-taglist-plugin-window.c:134
 msgid "Select the group of tab you want to use."
 msgstr ""
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:155
+#: plugins/taglist/gedit-taglist-plugin-window.c:158
 #, fuzzy
 msgid "Double-click on a tag to insert it in the current document."
 msgstr "シェルの出力をドキュメントに挿入します"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:166
+#: plugins/taglist/gedit-taglist-plugin-window.c:169
 msgid "Tags"
 msgstr ""
 
-#: plugins/time/time.c:40
+#: plugins/time/time.c:44
 #, fuzzy
 msgid "_Insert Date/Time"
 msgstr "現在時刻"
 
-#: plugins/time/time.c:43
+#: plugins/time/time.c:47
 #, fuzzy
 msgid "Insert current date and time at the cursor position."
 msgstr "現在の時間をファイルに挿入"
 
-#: plugins/time/time.c:249
+#: plugins/time/time.c:256
 msgid "Available formats"
 msgstr ""
 
-#: plugins/time/time.c:290
+#: plugins/time/time.c:297
 msgid "Configure insert date/time plugin"
 msgstr ""
 
-#: plugins/time/time.c:530
+#: plugins/time/time.c:537
 #, fuzzy
 msgid "Insert Date/Time"
 msgstr "現在時刻"
 
-#: plugins/time/time.c:531
+#: plugins/time/time.c:538
 #, fuzzy
 msgid "Inserts the current date and time at the cursor position."
 msgstr "現在の時間をファイルに挿入"
 
-#: src/bonobo-mdi.c:519 src/bonobo-mdi.c:595 src/bonobo-mdi.c:1973
+#: src/bonobo-mdi.c:525 src/bonobo-mdi.c:601 src/bonobo-mdi.c:1997
 #, fuzzy, c-format
 msgid "Activate %s"
 msgstr "すべて有効にする(_A)"
@@ -358,20 +402,20 @@ msgstr "ファイル名"
 msgid "Author(s)"
 msgstr "作者:"
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:447
+#: src/dialogs/gedit-dialog-plugin-manager.c:446
 msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
 msgstr ""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:455
+#: src/dialogs/gedit-dialog-plugin-manager.c:454
 #, fuzzy
 msgid "Plugin Manager"
 msgstr "プラグインマネージャ..."
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:482
+#: src/dialogs/gedit-dialog-plugin-manager.c:481
 msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
 msgstr ""
 
-#: src/dialogs/gedit-dialog-plugin-manager.c:572
+#: src/dialogs/gedit-dialog-plugin-manager.c:571
 msgid "Could not create the Plugin Manager dialog"
 msgstr ""
 
@@ -386,7 +430,7 @@ msgid "Replace _All"
 msgstr "すべて置換"
 
 #. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:107
+#: src/dialogs/gedit-dialog-replace.c:181 src/gedit-file-selector-util.c:109
 #: src/gedit-ui.xml.h:85
 #, fuzzy
 msgid "_Replace"
@@ -492,8 +536,61 @@ msgstr ""
 msgid "Preferences"
 msgstr "設定"
 
-#: src/dialogs/gedit-preferences-dialog.c:468
+#: src/dialogs/gedit-preferences-dialog.c:470
 msgid "Categories"
+msgstr ""
+
+#: src/gedit2.c:68
+#, fuzzy
+msgid "Show mdi debugging messages."
+msgstr "表示のデバッグメッセージの表示。"
+
+#: src/gedit2.c:71
+msgid "Show commands debugging messages."
+msgstr "コマンドのデバッグメッセージの表示。"
+
+#: src/gedit2.c:74
+msgid "Show document debugging messages."
+msgstr "ドキュメントのデバッグメッセージの表示。"
+
+#: src/gedit2.c:77
+msgid "Show file debugging messages."
+msgstr "ファイルのデバッグメッセージの表示。"
+
+#: src/gedit2.c:80
+msgid "Show plugin debugging messages."
+msgstr "プラグインのデバッグメッセージの表示。"
+
+#: src/gedit2.c:83
+msgid "Show prefs debugging messages."
+msgstr "Show prefs debugging messages."
+
+#: src/gedit2.c:86
+msgid "Show printing debugging messages."
+msgstr "印刷のデバッグメッセージの表示。"
+
+#: src/gedit2.c:89
+msgid "Show search debugging messages."
+msgstr "検索のデバッグメッセージの表示。"
+
+#: src/gedit2.c:92
+msgid "Show undo debugging messages."
+msgstr "元に戻すときのデバッグメッセージの表示。"
+
+#: src/gedit2.c:95
+msgid "Show view debugging messages."
+msgstr "表示のデバッグメッセージの表示。"
+
+#: src/gedit2.c:98
+msgid "Show recent debugging messages."
+msgstr "最近使ったファイルのデバッグメッセージの表示。"
+
+#: src/gedit2.c:101
+msgid "Turn on all debugging messages."
+msgstr "すべてのデバッグメッセージを表示。"
+
+#: src/gedit2.c:161
+msgid "The gnome text editor"
 msgstr ""
 
 #: src/gedit-commands.c:56
@@ -514,16 +611,16 @@ msgstr ""
 msgid "gedit is a small and lightweight text editor for Gnome"
 msgstr "geditはGNOME/Gtk+用に作られた小型軽量のテキストエディタです"
 
-#: src/gedit-document.c:472 src/gedit-document.c:483
+#: src/gedit-document.c:476 src/gedit-document.c:487
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: src/gedit-document.c:472 src/gedit-document.c:483
+#: src/gedit-document.c:476 src/gedit-document.c:487
 msgid "Untitled"
 msgstr "名前無し"
 
-#: src/gedit-document.c:598 src/gedit-document.c:704
+#: src/gedit-document.c:602 src/gedit-document.c:708
 #, fuzzy
 msgid "Invalid UTF-8 data encountered reading file"
 msgstr ""
@@ -531,38 +628,21 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-document.c:1078
+#: src/gedit-document.c:1082
 #, fuzzy
 msgid "It is not possible to revert an Untitled document"
 msgstr "無題のドキュメントを元には戻せません。\n"
 
-#: src/gedit-file-selector-util.c:95
-#, c-format
-msgid ""
-"A file named ''%s'' already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-
-#: src/gedit-file-selector-util.c:103
-#, fuzzy
-msgid "Do_n't replace"
-msgstr "置換"
-
-#: src/gedit-file-selector-util.c:457
-#, fuzzy
-msgid "Select a filename to save"
-msgstr "有効にするプラグインの選択:"
-
-#: src/gedit-file.c:112
+#: src/gedit-file.c:116
 msgid "Open File ..."
 msgstr "開く..."
 
-#: src/gedit-file.c:122 src/gedit-file.c:762
+#: src/gedit-file.c:126 src/gedit-file.c:766
 #, fuzzy, c-format
 msgid "Loaded file '%s'"
 msgstr "読み込み完了: %s"
 
-#: src/gedit-file.c:158 src/gedit-file.c:206
+#: src/gedit-file.c:162 src/gedit-file.c:210
 #, fuzzy, c-format
 msgid ""
 "An error occurred while opening the file \"%s\".\n"
@@ -573,16 +653,16 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:275 src/gedit-file.c:374
+#: src/gedit-file.c:279 src/gedit-file.c:378
 #, fuzzy, c-format
 msgid "Saving file '%s' ..."
 msgstr "名前をつけて保存..."
 
-#: src/gedit-file.c:290 src/gedit-file.c:420 src/gedit-file.c:572
+#: src/gedit-file.c:294 src/gedit-file.c:424 src/gedit-file.c:576
 msgid "Unknown error"
 msgstr ""
 
-#: src/gedit-file.c:297 src/gedit-file.c:427
+#: src/gedit-file.c:301 src/gedit-file.c:431
 #, fuzzy, c-format
 msgid ""
 "An error occurred while saving the file \"%s\".\n"
@@ -593,27 +673,27 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:325 src/gedit-file.c:381
+#: src/gedit-file.c:329 src/gedit-file.c:385
 #, fuzzy
 msgid "The document has not been saved."
 msgstr "この文書は保存されていません。"
 
-#: src/gedit-file.c:335 src/gedit-file.c:379
+#: src/gedit-file.c:339 src/gedit-file.c:383
 #, c-format
 msgid "File '%s' saved."
 msgstr ""
 
-#: src/gedit-file.c:366
+#: src/gedit-file.c:370
 #, fuzzy
 msgid "Save as ..."
 msgstr "名前をつけて保存..."
 
-#: src/gedit-file.c:558
+#: src/gedit-file.c:562
 #, c-format
 msgid "Reverting file '%s' ..."
 msgstr ""
 
-#: src/gedit-file.c:579
+#: src/gedit-file.c:583
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reverting the file \"%s\".\n"
@@ -624,32 +704,32 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/gedit-file.c:607
+#: src/gedit-file.c:611
 #, fuzzy
 msgid "The document has not been reverted."
 msgstr "この文書は保存されていません。"
 
-#: src/gedit-file.c:617
+#: src/gedit-file.c:621
 #, c-format
 msgid "File '%s' reverted."
 msgstr ""
 
-#: src/gedit-file.c:660
+#: src/gedit-file.c:664
 #, fuzzy, c-format
 msgid "Loading %d file..."
 msgstr "%i ファイルを読み込みました"
 
-#: src/gedit-file.c:696
+#: src/gedit-file.c:700
 #, c-format
 msgid "Loaded %i files"
 msgstr "%i ファイルを読み込みました"
 
-#: src/gedit-file.c:717
+#: src/gedit-file.c:721
 #, fuzzy, c-format
 msgid "Loaded file %s"
 msgstr "読み込み完了: %s"
 
-#: src/gedit-file.c:816
+#: src/gedit-file.c:820
 #, fuzzy, c-format
 msgid ""
 "An error occurred while reading data from stdin.\n"
@@ -659,6 +739,23 @@ msgstr ""
 "ファイル \"%s\"の読み込み中にエラーが起きました: \n"
 "\n"
 "%s"
+
+#: src/gedit-file-selector-util.c:97
+#, c-format
+msgid ""
+"A file named ''%s'' already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+
+#: src/gedit-file-selector-util.c:105
+#, fuzzy
+msgid "Do_n't replace"
+msgstr "置換"
+
+#: src/gedit-file-selector-util.c:459
+#, fuzzy
+msgid "Select a filename to save"
+msgstr "有効にするプラグインの選択:"
 
 #: src/gedit-mdi.c:549
 #, c-format
@@ -688,88 +785,88 @@ msgstr "(修正されました)"
 msgid "(readonly)"
 msgstr "(書き込み禁止)"
 
-#: src/gedit-plugins-engine.c:155
+#: src/gedit-plugins-engine.c:159
 #, fuzzy, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "エラー: モジュール %s を開けません"
 
-#: src/gedit-plugins-engine.c:170
+#: src/gedit-plugins-engine.c:174
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
-#: src/gedit-plugins-engine.c:180
+#: src/gedit-plugins-engine.c:184
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
-#: src/gedit-plugins-engine.c:190
+#: src/gedit-plugins-engine.c:194
 #, fuzzy, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr "エラー: プラグインには init_plugin 関数が定義されていません"
 
-#: src/gedit-plugins-engine.c:220
+#: src/gedit-plugins-engine.c:224
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:228
+#: src/gedit-plugins-engine.c:232
 #, c-format
 msgid "Error, the plugin '%s' did not specified a name"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:308
+#: src/gedit-plugins-engine.c:312
 #, c-format
 msgid "Error, impossible to save settings of the plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:380 src/gedit-plugins-engine.c:438
+#: src/gedit-plugins-engine.c:384 src/gedit-plugins-engine.c:442
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:407
+#: src/gedit-plugins-engine.c:411
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr ""
 
-#: src/gedit-plugins-engine.c:479
+#: src/gedit-plugins-engine.c:483
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr ""
 
-#: src/gedit-print.c:162
+#: src/gedit-print.c:166
 msgid ""
 "gedit is unable to print since it cannot find\n"
 "one of the required fonts."
 msgstr ""
 
-#: src/gedit-print.c:269
+#: src/gedit-print.c:273
 #, fuzzy
 msgid "gedit - Print Document"
 msgstr "ドキュメントの印刷"
 
-#: src/gedit-print.c:278
+#: src/gedit-print.c:282
 msgid "Lines"
 msgstr "行"
 
-#: src/gedit-print.c:334
+#: src/gedit-print.c:338
 #, fuzzy, c-format
 msgid "File: %s"
 msgstr "ファイル(_F)"
 
 #. Print right text
-#: src/gedit-print.c:339
+#: src/gedit-print.c:343
 #, fuzzy, c-format
 msgid "Page: %d"
 msgstr "ページ: %i/%i"
 
-#: src/gedit-print.c:472
+#: src/gedit-print.c:476
 #, fuzzy
 msgid "gedit - Print Preview"
 msgstr "gedit 印刷プレビュー\n"
 
-#: src/gedit-print.c:548
+#: src/gedit-print.c:552
 #, fuzzy, c-format
 msgid ""
 "An error occurred while printing.\n"
@@ -1166,70 +1263,17 @@ msgstr "宛先(_T):"
 msgid "_Undo"
 msgstr "元に戻す"
 
-#: src/gedit-view.c:882
+#: src/gedit-view.c:886
 #, c-format
 msgid "  Ln %d, Col. %d"
 msgstr ""
 
-#: src/gedit-view.c:920
+#: src/gedit-view.c:924
 msgid "  OVR"
 msgstr ""
 
-#: src/gedit-view.c:922
+#: src/gedit-view.c:926
 msgid "  INS"
-msgstr ""
-
-#: src/gedit2.c:68
-#, fuzzy
-msgid "Show mdi debugging messages."
-msgstr "表示のデバッグメッセージの表示。"
-
-#: src/gedit2.c:71
-msgid "Show commands debugging messages."
-msgstr "コマンドのデバッグメッセージの表示。"
-
-#: src/gedit2.c:74
-msgid "Show document debugging messages."
-msgstr "ドキュメントのデバッグメッセージの表示。"
-
-#: src/gedit2.c:77
-msgid "Show file debugging messages."
-msgstr "ファイルのデバッグメッセージの表示。"
-
-#: src/gedit2.c:80
-msgid "Show plugin debugging messages."
-msgstr "プラグインのデバッグメッセージの表示。"
-
-#: src/gedit2.c:83
-msgid "Show prefs debugging messages."
-msgstr "Show prefs debugging messages."
-
-#: src/gedit2.c:86
-msgid "Show printing debugging messages."
-msgstr "印刷のデバッグメッセージの表示。"
-
-#: src/gedit2.c:89
-msgid "Show search debugging messages."
-msgstr "検索のデバッグメッセージの表示。"
-
-#: src/gedit2.c:92
-msgid "Show undo debugging messages."
-msgstr "元に戻すときのデバッグメッセージの表示。"
-
-#: src/gedit2.c:95
-msgid "Show view debugging messages."
-msgstr "表示のデバッグメッセージの表示。"
-
-#: src/gedit2.c:98
-msgid "Show recent debugging messages."
-msgstr "最近使ったファイルのデバッグメッセージの表示。"
-
-#: src/gedit2.c:101
-msgid "Turn on all debugging messages."
-msgstr "すべてのデバッグメッセージを表示。"
-
-#: src/gedit2.c:161
-msgid "The gnome text editor"
 msgstr ""
 
 #~ msgid "Save As..."
@@ -1242,12 +1286,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "_Manager"
 #~ msgstr "マネージャ(_M) ..."
-
-#~ msgid "ASCII table"
-#~ msgstr "ASCIIテーブル"
-
-#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-#~ msgstr "このプラグインはASCIIテーブルのポップアップダイアログを表示します。"
 
 #~ msgid "Browse"
 #~ msgstr "ブラウズ"
@@ -1328,12 +1366,6 @@ msgstr ""
 #~ msgid "Sort a document or selected text."
 #~ msgstr "ドキュメントか選択したテキストをソートします。"
 
-#~ msgid "Dec#"
-#~ msgstr "10進数"
-
-#~ msgid "Hex#"
-#~ msgstr "16進数"
-
 #~ msgid ""
 #~ "If you wish to insert any of the characters in to the active \n"
 #~ "document, select the character and click the \"Insert Char\" \n"
@@ -1342,12 +1374,6 @@ msgstr ""
 #~ "現在のドキュメントに何か文字を挿入したいときは \n"
 #~ "文字を選択して\"文字の挿入\"ボタンをクリックするか\n"
 #~ "テーブルの文字をダブルクリックして下さい。"
-
-#~ msgid "Insert char"
-#~ msgstr "文字の挿入"
-
-#~ msgid "Name"
-#~ msgstr "名前"
 
 #~ msgid "gedit: ASCII table"
 #~ msgstr "gedit: ASCIIテーブル"
