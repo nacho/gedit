@@ -63,7 +63,7 @@ char *gE_prefs_open_file (char *filename, char *rw)
 	char *homedir, *gedit_dir, *gedit_dir_old, *fn;
 	struct stat gedit_stats;
 	mode_t mode = 484;
-	
+
 	if ((gedit_dir = getenv ("GEPREFSDIR")) == NULL)
 	{
 		if ((homedir = getenv ("HOME")) == NULL)
@@ -114,7 +114,9 @@ char *gE_prefs_open_file (char *filename, char *rw)
 
 	fn = g_malloc0 (strlen (gedit_dir) + strlen (filename) +1);
 	sprintf (fn, "%s/%s", gedit_dir, filename);
-	g_free (gedit_dir);
+	/* g_free (gedit_dir); <-- Ok, can someone tell me why this makes gEdit
+				   sigsegv on startup in non-Gnome? Or is it 
+				   just me?! --Alex */
 
 	if (stat (fn, &gedit_stats) == -1)
 	{
@@ -145,7 +147,7 @@ int gE_prefs_open ()
 
 	if ((filename = gE_prefs_open_file ("geditrc", "r")) == NULL)
 	{
-		printf ("gE_prefs_open: There was an error openning the prefs file.\n");
+		g_print ("gE_prefs_open: There was an error openning the prefs file.\n");
 		return -1;
 	}
 
@@ -156,7 +158,7 @@ int gE_prefs_open ()
 		return -1;
 	}
 	g_free (filename);
-	
+
 	while (fgets(line, 256, fp))
 	{
 		new = g_malloc0(sizeof(gE_pref));
