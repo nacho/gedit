@@ -259,7 +259,10 @@ gedit_view_init (GeditView  *view)
 		      "margin", 80, 
 		      NULL);
 	*/
-	
+	g_object_set (G_OBJECT (view->priv->text_view),
+		      "smart-home-end", FALSE,
+		      NULL);
+
 	gtk_box_pack_start (GTK_BOX (view), sw, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (view->priv->text_view));
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
