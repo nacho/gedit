@@ -21,38 +21,22 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "gE_view.h"
+
 #include "gedit.h"
 #include "gedit-undo.h"
-#include "gE_mdi.h"
-#include "commands.h"
-#include "gE_prefs.h"
 #include "gedit-window.h"
 #include "gedit-print.h"
 #include "gedit-utils.h"
+#include "gedit-file-io.h"
+
+#include "gedit-menus.h" /* We need this because some functions
+			    modify menu entries. Chema */
+#include "gE_view.h"
+#include "gE_mdi.h"
+#include "commands.h"
+#include "gE_prefs.h"
 
 #define GE_DATA		1
-
-GnomeUIInfo popup_menu[] =
-{
-	GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, (gpointer) GE_DATA),
-        GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, (gpointer) GE_DATA),
-	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, (gpointer) GE_DATA),
-	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, (gpointer) GE_DATA),
-
-	GNOMEUIINFO_SEPARATOR,
-
-	GNOMEUIINFO_MENU_SAVE_ITEM (file_save_cb, NULL),
-	GNOMEUIINFO_MENU_CLOSE_ITEM (file_close_cb, NULL),
-	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
-
-	GNOMEUIINFO_SEPARATOR,
-
-	GNOMEUIINFO_ITEM_STOCK (N_("Open (swap) .c/.h file"), NULL,
-				doc_swaphc_cb, GNOME_STOCK_MENU_REFRESH),
-	
-	GNOMEUIINFO_END
-};
 
 enum {
 	CURSOR_MOVED_SIGNAL,
@@ -399,7 +383,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 		switch (event->keyval)
 		{
 		case 's':
-			file_save_cb (w, NULL);
+			file_save_cb (w);
 	    		break;
 		case 'p':
 	    		file_print_cb (w, (gpointer)data);
@@ -848,7 +832,7 @@ gedit_view_refresh (gedit_view *view)
 {
 	gint i = gedit_view_get_length (view);
 
-	gedit_debug_mess ("F:gedit_view_refresh\n", DEBUG_VIEW);
+	gedit_debug_mess ("F:gedit_view_refresh<------------------------\n", DEBUG_VIEW);
 
 	if (i > 0)
 	{

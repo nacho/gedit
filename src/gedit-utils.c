@@ -90,11 +90,39 @@ gedit_flash_va (gchar *format, ...)
  *
  * Print a debug message out to the console
  */
+
+/* NOTE ::
+   FIXME :
+   I know how evil this hack is :
+   chema. */
 void
 gedit_debug_mess (gchar *message, gint type)
 {
 #if 1
-	g_print (message);
+	int print = FALSE;
+	switch (type)
+	{
+	case DEBUG_UNDO:
+		break;
+	case DEBUG_UNDO_DEEP :
+		break;
+	case DEBUG_VIEW :
+		break;
+	case DEBUG_VIEW_DEEP:
+		break;
+	case DEBUG_PLUGINS:
+		break;
+	case DEBUG_PLUGINS_DEEP:
+		break;
+	case DEBUG_FILE:
+		print = TRUE;
+		break;
+	case DEBUG_FILE_DEEP:
+		print = TRUE;
+		break;
+	}
+	if ( print )
+		g_print (message);
 #endif
 }
 

@@ -23,21 +23,43 @@
 
 #define PLUGIN_TEST 1
 #include "gedit.h"
-#include "commands.h"
 #include "gedit-about.h"
 #include "gedit-file-io.h"
-#include "gE_mdi.h"
+#include "gedit-window.h"
+#include "gedit-search.h"
 #include "gedit-print.h"
 #include "gedit-undo.h"
+
+#include "commands.h"
+#include "gE_mdi.h"
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
 #include "gE_view.h"
-#include "gedit-window.h"
-#include "gedit-search.h"
 
 /* Why do we need/use this stuff ??? - JEL */
 #define GE_DATA		1
 #define GE_WINDOW	2
+
+GnomeUIInfo popup_menu[] =
+{
+	GNOMEUIINFO_MENU_CUT_ITEM (edit_cut_cb, (gpointer) GE_DATA),
+        GNOMEUIINFO_MENU_COPY_ITEM (edit_copy_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_PASTE_ITEM (edit_paste_cb, (gpointer) GE_DATA),
+	GNOMEUIINFO_MENU_SELECT_ALL_ITEM (edit_selall_cb, (gpointer) GE_DATA),
+
+	GNOMEUIINFO_SEPARATOR,
+
+	GNOMEUIINFO_MENU_SAVE_ITEM  (file_save_cb, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM (file_close_cb, NULL),
+	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
+
+	GNOMEUIINFO_SEPARATOR,
+
+	GNOMEUIINFO_ITEM_STOCK (N_("Open (swap) .c/.h file"), NULL,
+				doc_swaphc_cb, GNOME_STOCK_MENU_REFRESH),
+	
+	GNOMEUIINFO_END
+};
 
 
 GnomeUIInfo gedit_file_menu[] = {

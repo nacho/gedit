@@ -350,7 +350,8 @@ remove_doc_cb (GnomeMDI *mdi, gedit_document *doc)
 			switch (ret)
 			{
 			case 0:
-				file_save_cb (NULL, data);
+				file_save_cb (NULL);
+				/* FIXME: why is this NULL ?? chema */
 			case 1:
 				return TRUE;
 			default:

@@ -35,7 +35,9 @@ typedef enum {
 	DEBUG_VIEW,
 	DEBUG_VIEW_DEEP,
 	DEBUG_PLUGINS,
-	DEBUG_PLUGINS_DEEP
+	DEBUG_PLUGINS_DEEP,
+	DEBUG_FILE,
+	DEBUG_FILE_DEEP
 } gedit_debug_modes;
 
 void gedit_debug_mess (gchar *message, gint type);

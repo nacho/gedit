@@ -1,3 +1,40 @@
+2000-04-04  Chema Celorio  <chema@celorio.com>
+
+	* commands.c: Removed all the file-io
+	functions from here and the prototypes
+	from commands.h
+
+	* gE_view.c: removed popup_menu from
+	here.#included gedit-file-io.h because
+	sortcut key's uses some file functions.
+
+	* gedit-menus.c (popup_menu): moved
+	popup_menu to here
+	* gedit-menus.h (gedit_menus_init): moved
+	popup_menu to here and share it with the
+	outside world.
+
+	* gedit-file-io.c: Rewriten part of
+	the file-io functions, will continue ma~ana.
+	(delete_event_cb): added
+	(cancel_cb): added
+	(file_open_cb): rewriten
+	(file_open_ok_sel): rewriten, file opening
+	is not done here anymore, call gedit_doc_new_with_file
+	(file_cancel_sel): no longer needed replaced by a generic
+	cancel_cb
+
+2000-04-03  Chema Celorio  <chema@celorio.com>
+
+	* gedit-utils.c (gedit_debug_mess): Added
+	  switch to display only some types of
+	  messages.
+
+	* gedit-file-io.c: Moved file related functions
+	from commands.c to here
+	
+	* commands.c: .
+
 2000-04-03  Jason Leach  <leach@wam.umd.edu>
 
 	* gedit-print.c: took out some unecessary #include's

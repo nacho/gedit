@@ -25,5 +25,19 @@
 extern gint gedit_file_open (gedit_document *doc, gchar *fname);
 extern gint gedit_file_save (gedit_document *doc, gchar *fname);
 
+extern void file_new_cb (GtkWidget *widget, gpointer cbdata);
+
+extern void file_open_cb (GtkWidget *widget, gpointer cbdata);
+
+extern void file_save_cb (GtkWidget *widget);
+extern void file_save_as_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_save_all_as_cb (GtkWidget *widget, gpointer cbdata);
+
+extern void file_close_cb (GtkWidget *widget, gpointer cbdata);
+extern void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
+
 
 #endif /* __GEDIT_FILE_IO_H__ */
+
+
