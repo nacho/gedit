@@ -441,7 +441,14 @@ child_list_activated_cb (BonoboUIComponent *uic, gpointer user_data, const gchar
 		GList *views = bonobo_mdi_child_get_views (child);
 		
 		if (views)
+		{
+			GtkWindow *window;
+
+			window = GTK_WINDOW (bonobo_mdi_get_window_from_view (views->data));
+			gtk_window_present (window);
+
 			bonobo_mdi_set_active_view (mdi, views->data);
+		}
 		else
 			bonobo_mdi_add_view (mdi, child);
 	}
@@ -1318,8 +1325,7 @@ set_active_view (BonoboMDI *mdi, GtkWidget *view)
  * @view: A pointer to the view that is to become the active one.
  * 
  * Description:
- * Sets the active view to @view. It also raises the window containing it
- * and gives it focus.
+ * Sets the active view to @view.
  **/
 void 
 bonobo_mdi_set_active_view (BonoboMDI *mdi, GtkWidget *view)
@@ -1337,8 +1343,6 @@ bonobo_mdi_set_active_view (BonoboMDI *mdi, GtkWidget *view)
 	
 	window = GTK_WINDOW (bonobo_mdi_get_window_from_view (view));
 	
-	gtk_window_present (window);
-
 	set_active_view (mdi, view);
 
 	gedit_debug (DEBUG_MDI, "END");

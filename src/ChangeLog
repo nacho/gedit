@@ -1,3 +1,15 @@
+2002-08-15  Federico Mena Quintero  <federico@ximian.com>
+
+	Fixes part of #90133.
+
+	* bonobo-mdi.c (bonobo_mdi_set_active_view): Do not call
+	gtk_window_present(); it is better to do this case-by-case like
+	when setting the active view from a menu.  Calling present() on
+	every window will screw up session management as we don't want to
+	change the stacking order or virtual desktop that the window
+	manager will give us.
+	(child_list_activated_cb): Do call gtk_window_present() here.
+
 2002-08-14  Federico Mena Quintero  <federico@ximian.com>
 
 	* dialogs/gedit-plugin-manager.c (plugin_manager_construct_tree):
