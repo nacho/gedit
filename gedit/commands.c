@@ -911,6 +911,7 @@ gnome_app_remove_menu_range (GnomeApp *app,
 void recent_update (gE_window *window)
 {
 	GList *filelist = NULL;
+	GList *dirlist = NULL;
 #ifndef WITHOUT_GNOME
 	
 	GList *gnome_recent_list;
@@ -930,22 +931,28 @@ void recent_update (gE_window *window)
 			if (strcmp ("gEdit", histentry->creator) == 0)
 			{
 				/* This is to make sure you don't have more than one
-				   file of the same name in the recent list, but doesn't currently
-				   work right...
-
+				   file of the same name in the recent list
+				*/
 				if (g_list_length (filelist) > 0)
 					for (j = g_list_length (filelist) - 1; j >= 0; j--)
 						if (strcmp (histentry->filename, g_list_nth_data (filelist, j)) == 0)
-							duplicate = TRUE;
-				*/
+							filelist = g_list_remove (filelist, g_list_nth_data (filelist, j));
 
-				if (!duplicate)
+				filename = g_malloc0 (strlen (histentry->filename) + 1);
+				strcpy (filename, histentry->filename);
+				filelist = g_list_append (filelist, filename);
+
+/* For recent-directories, not yet fully implemented...
+				end_path = strrchr (histentry->filename, '/');
+				if (end_path)
 				{
-					filename = g_malloc0 (strlen (histentry->filename) + 1);
-					strcpy (filename, histentry->filename);
-					filelist = g_list_append (filelist, filename);
+					for (i = 0; i < strlen (histentry->filename); i++)
+						if ( (histentry->filename + i) == end_path)
+							break;
+					directory = g_malloc0 (i + 2);
+					strcat (directory, histentry->filename, i);
 				}
-				duplicate = FALSE;
+*/
 				if (g_list_length (filelist) == MAX_RECENT)
 					break;
 			}

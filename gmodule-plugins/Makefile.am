@@ -9,7 +9,7 @@ INCLUDES = -I$(includedir) 				\
 plugindir = $(prefix)/share/go/plugins
 
 
-plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin hello_plugin encrypt_plugin email-plugin
+plugin_PROGRAMS = diff-plugin cvsdiff-plugin reverse-plugin hello_plugin encrypt_plugin email-plugin spell-plugin
 
 diff_plugin_SOURCES =	\
 	diff.c		\
@@ -54,6 +54,14 @@ email_plugin_SOURCES =	\
 	client.h
 
 email_plugin_LDFLAGS = `gtk-config --libs`
+
+spell_plugin_SOURCES =	\
+	spell.c		\
+	client.c	\
+	client.h
+
+spell_plugin_LDFLAGS = `gtk-config --libs`
+spell_plugin_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \

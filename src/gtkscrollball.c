@@ -257,9 +257,14 @@ static gint gtk_scrollball_expose (GtkWidget *widget, GdkEventExpose *event) {
   gdk_draw_rectangle (widget->window, widget->style->fg_gc[5], 1, 0, 0, 
 		      widget->allocation.width, widget->allocation.height);
 
-  /* Draw our beautiful little arrows (which were triangles, but clahey didn't like em ;) */
+  if (GTK_SCROLLBALL(widget)->button == 0) {
+    lasthm=0;
+    lastvm=0;
+  }
 
-  if (GTK_SCROLLBALL(widget)->vadjust) {
+  /* Code to take out the arrows, and then we can expand the mini-window even more ;) */
+
+  /*  if (GTK_SCROLLBALL(widget)->vadjust) {
     gdk_draw_line (widget->window, widget->style->black_gc, 10, 0, 13, 3);
     gdk_draw_line (widget->window, widget->style->black_gc, 10, 0, 7, 3);
     if (GTK_SCROLLBALL(widget)->vmove < 0 || (GTK_SCROLLBALL(widget)->vmove==0 && lastvm < 0)) {
@@ -280,11 +285,6 @@ static gint gtk_scrollball_expose (GtkWidget *widget, GdkEventExpose *event) {
       lastvm = GTK_SCROLLBALL(widget)->vmove;
   }
   
-  if (GTK_SCROLLBALL(widget)->button == 0) {
-    lasthm=0;
-    lastvm=0;
-  }
-
   if (GTK_SCROLLBALL(widget)->hadjust) {
     gdk_draw_line (widget->window, widget->style->black_gc, 0, 10, 3, 13);
     gdk_draw_line (widget->window, widget->style->black_gc, 0, 10, 3, 7);
@@ -304,15 +304,56 @@ static gint gtk_scrollball_expose (GtkWidget *widget, GdkEventExpose *event) {
 
     if (GTK_SCROLLBALL(widget)->hmove != 0)
       lasthm = GTK_SCROLLBALL(widget)->hmove;
-  }
+      }*/
 
   /* And the stuff inside them.... a window to display the current location */
 
-  gdk_draw_rectangle (widget->window, widget->style->black_gc, 0, 4, 4, 12, 12);
+  /* The new code, which draws itself larger and scales... */
+
+  gdk_draw_rectangle (widget->window, widget->style->black_gc, 0, 0, 0, 
+		      widget->allocation.width-1, widget->allocation.height-1);
+  gdk_draw_rectangle (widget->window, widget->style->bg_gc[1], 1, 1, 1,
+		      widget->allocation.width-2, widget->allocation.height-2);
+      /*  gdk_draw_rectangle (widget->window, widget->style->white_gc, 1, 1, 1,
+  widget->allocation.width-2, widget->allocation.height-2);*/
+ 
+  if (GTK_SCROLLBALL(widget)->hadjust) {
+    mwwidth = ((GTK_SCROLLBALL(widget)->hadjust->page_size /
+	       (GTK_SCROLLBALL(widget)->hadjust->upper - GTK_SCROLLBALL(widget)->hadjust->lower))
+	       * (widget->allocation.width-2));
+    if (mwwidth <= 0)
+      mwwidth=1;
+
+    mwx = ((GTK_SCROLLBALL(widget)->hadjust->value /
+	   (GTK_SCROLLBALL(widget)->hadjust->upper - GTK_SCROLLBALL(widget)->hadjust->lower)) 
+	   * (widget->allocation.width - 2));
+  } else {
+    mwwidth = (widget->allocation.width - 2);
+    mwx = 0;
+  }
+
+  if (GTK_SCROLLBALL(widget)->vadjust) {
+    mwheight = ((GTK_SCROLLBALL(widget)->vadjust->page_size /
+		(GTK_SCROLLBALL(widget)->vadjust->upper - GTK_SCROLLBALL(widget)->vadjust->lower)) 
+		* (widget->allocation.height - 2));
+    if (mwheight <= 0)
+      mwheight=1;
+
+    mwy = ((GTK_SCROLLBALL(widget)->vadjust->value /
+	   (GTK_SCROLLBALL(widget)->vadjust->upper - GTK_SCROLLBALL(widget)->vadjust->lower)) * 
+	   (widget->allocation.height - 2));
+  } else {
+    mwheight = (widget->allocation.height - 2);
+    mwy = 0;
+  }
+
+  gdk_draw_rectangle (widget->window, widget->style->white_gc, 1, 1+mwx,1+mwy,mwwidth,mwheight); 
+  /* gdk_draw_rectangle (widget->window, widget->style->bg_gc[1], 1, 1+mwx,1+mwy,mwwidth,mwheight); */
+
+
+  /*  gdk_draw_rectangle (widget->window, widget->style->black_gc, 0, 4, 4, 12, 12);
   gdk_draw_rectangle (widget->window, widget->style->bg_gc[1], 1, 5, 5, 11, 11);
  
-  /* And the little mini-window which displays where we are w/ the window */
-
   if (GTK_SCROLLBALL(widget)->hadjust) {
     mwwidth = (GTK_SCROLLBALL(widget)->hadjust->page_size /
 	       (GTK_SCROLLBALL(widget)->hadjust->upper - GTK_SCROLLBALL(widget)->hadjust->lower)) * 11;
@@ -339,7 +380,7 @@ static gint gtk_scrollball_expose (GtkWidget *widget, GdkEventExpose *event) {
     mwy = 0;
   }
 
-  gdk_draw_rectangle (widget->window, widget->style->white_gc, 1, 5+mwx,5+mwy,mwwidth,mwheight);
+  gdk_draw_rectangle (widget->window, widget->style->white_gc, 1, 5+mwx,5+mwy,mwwidth,mwheight);*/
 
   return FALSE;
 }
