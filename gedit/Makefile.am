@@ -6,7 +6,7 @@ INCLUDES = -I$(includedir) -I$(top_srcdir)		\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
 	$(GNOME_INCLUDEDIR)
 
-plugindir = $(prefix)/share/go/plugins
+plugindir = $(libdir)/go/plugins
 
 bin_PROGRAMS = gedit
 
@@ -53,7 +53,7 @@ EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
-	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
-	-Wall -ansi -pedantic  \
-	#-DDEBUG
+	-DPLUGINDIR=\""$(plugindir)"\" \
+	-Wall -ansi -pedantic
+#	-DDEBUG
 

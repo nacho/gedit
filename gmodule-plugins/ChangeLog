@@ -1,3 +1,16 @@
+1998-09-07  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (plugindir): Move into $(libdir) -- plugins
+	are binaries, not arch-independent.
+	* convert/Makefile.am (plugindir): Likewise.
+	* cvsdiff/Makefile.am (plugindir): Likewise.
+	* diff/Makefile.am (plugindir): Likewise.
+	* email/Makefile.am (plugindir): Likewise.
+	* encrypt/Makefile.am (plugindir): Likewise.
+	* prm/Makefile.am (plugindir): Likewise.
+	* reverse/Makefile.am (plugindir): Likewise.
+	* spell/Makefile.am (plugindir): Likewise.
+
 1998-09-03  Alex Roberts  <bse@dial.pipex.com>
 
 	* convert/*: New plugin... Converts Dec->Hex/Oct, Hex->Dec

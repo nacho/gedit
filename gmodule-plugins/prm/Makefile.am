@@ -6,7 +6,7 @@ INCLUDES = -I$(includedir) 				\
 	-I../	
 
 
-plugindir = $(prefix)/share/go/plugins
+plugindir = $(libdir)/go/plugins
 
 plugin_PROGRAMS = prm-plugin
 
@@ -23,7 +23,7 @@ prm_plugin_LDFLAGS = `gtk-config --libs`
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
-	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
+	-DPLUGINDIR=\""$(plugindir)"\" \
 	-Wall -ansi -pedantic  \
 	-DPLUGIN
 

@@ -6,7 +6,7 @@ INCLUDES = -I$(includedir) 				\
 	-I../	\
 	$(GNOME_INCLUDEDIR)
 
-plugindir = $(prefix)/share/go/plugins
+plugindir = $(libdir)/go/plugins
 
 plugin_PROGRAMS = encrypt_plugin
 
@@ -14,12 +14,12 @@ encrypt_plugin_SOURCES =  \
 	encrypt.c		\
 	client.c	\
 	client.h	
-	
+
 encrypt_plugin_LDFLAGS = `gtk-config --libs`
 
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
-	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
-	-Wall -ansi -pedantic  \
-	#-DDEBUG
+	-DPLUGINDIR=\""$(plugindir)"\" \
+	-Wall -ansi -pedantic
+#	-DDEBUG

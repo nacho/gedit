@@ -6,7 +6,7 @@ INCLUDES = -I$(includedir) 				\
 	-I../	\
 	$(GNOME_INCLUDEDIR)
 
-plugindir = $(prefix)/share/go/plugins
+plugindir = $(libdir)/go/plugins
 
 plugin_PROGRAMS = cvsdiff-plugin
 
@@ -20,6 +20,6 @@ cvsdiff_plugin_LDFLAGS = `gtk-config --libs`
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
-	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
-	-Wall -ansi -pedantic  \
-	#-DDEBUG
+	-DPLUGINDIR=\""$(plugindir)"\" \
+	-Wall -ansi -pedantic 
+#	-DDEBUG

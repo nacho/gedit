@@ -6,7 +6,7 @@ INCLUDES = -I$(includedir) 				\
 	-I../	\
 	$(GNOME_INCLUDEDIR)
 
-plugindir = $(prefix)/share/go/plugins
+plugindir = $(libdir)/go/plugins
 
 if HAVE_GNOME
 spell = spell

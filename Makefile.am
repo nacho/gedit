@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-plugindir = $(prefix)/share/go/plugins
+plugindir = $(libdir)/go/plugins
 
 SUBDIRS = macros po intl src plugins
 

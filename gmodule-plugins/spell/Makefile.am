@@ -6,7 +6,7 @@ INCLUDES = -I$(includedir) 				\
 	-I../	\
 	$(GNOME_INCLUDEDIR)
 
-plugindir = $(prefix)/share/go/plugins
+plugindir = $(libdir)/go/plugins
 
 plugin_PROGRAMS = spell-plugin
 
@@ -21,6 +21,6 @@ spell_plugin_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
 CPPFLAGS = \
         -DBINDIR=\""$(bindir)"\" \
         -DDATADIR=\""$(datadir)"\" \
-	-DPLUGINDIR=\""$(prefix)/share/go/plugins"\" \
-	-Wall -ansi -pedantic  \
-	#-DDEBUG
+	-DPLUGINDIR=\""$(plugindir)"\" \
+	-Wall -ansi -pedantic
+#	-DDEBUG
