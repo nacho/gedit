@@ -388,6 +388,8 @@ preview_finished_cb (GtkSourcePrintJob *job, GeditPrintJobInfo *pji)
 	
  	g_object_unref (gjob);
 
+	gtk_widget_destroy (pji->dialog);
+
 	if (pji->preview == PREVIEW)
 		gedit_print_job_info_destroy (pji, FALSE);
 	else
@@ -395,8 +397,6 @@ preview_finished_cb (GtkSourcePrintJob *job, GeditPrintJobInfo *pji)
 		g_signal_handlers_disconnect_by_func (pji->pjob, (GCallback) page_cb, pji);
 		g_signal_handlers_disconnect_by_func (pji->pjob, (GCallback) preview_finished_cb, pji);
 	}
-
-	gtk_widget_destroy (pji->dialog);
 	
 	gtk_widget_show (preview);
 }
@@ -412,9 +412,9 @@ print_finished_cb (GtkSourcePrintJob *job, GeditPrintJobInfo *pji)
 	
  	g_object_unref (gjob);
 
-	gedit_print_job_info_destroy (pji, TRUE);
-
 	gtk_widget_destroy (pji->dialog);
+
+	gedit_print_job_info_destroy (pji, TRUE);
 }
 
 void 
