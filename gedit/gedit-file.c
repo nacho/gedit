@@ -37,7 +37,6 @@
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomevfs/gnome-vfs.h>
 
-#include <eel/eel-vfs-extensions.h>
 #include <eel/eel-alert-dialog.h>
 
 #include "gedit2.h"
@@ -63,7 +62,6 @@
 
 PROFILE (static GTimer *timer = NULL);
 
-static gchar 	*get_dirname_from_uri 		(const char          *uri);
 static void	 open_files 			(void);
 static void	 show_progress_bar 		(gchar               *uri, 
 						 gboolean             show, 
@@ -89,28 +87,6 @@ static gint		    times_called	= 0;
 static GtkWidget           *loading_window	= NULL;
 static GtkWidget           *progress_bar	= NULL;
 
-static gchar *
-get_dirname_from_uri (const char *uri)
-{
-	GnomeVFSURI *vfs_uri;
-	gchar *name;
-	gchar *res;
-
-	/* Make VFS version of URI. */
-	vfs_uri = gnome_vfs_uri_new (uri);
-	if (vfs_uri == NULL) {
-		return NULL;
-	}
-
-	/* Extract name part. */
-	name = gnome_vfs_uri_extract_dirname (vfs_uri);
-	gnome_vfs_uri_unref (vfs_uri);
-
-	res = g_strdup_printf ("file:///%s", name);
-	g_free (name);
-
-	return res;
-}
 
 void 
 gedit_file_new (void)
@@ -195,7 +171,7 @@ gedit_file_open (GeditMDIChild *active_child)
 
 		if ((raw_uri != NULL) && gedit_utils_uri_has_file_scheme (raw_uri))
 		{
-			default_path = get_dirname_from_uri (raw_uri);
+			default_path = gedit_utils_uri_get_dirname (raw_uri);
 		}
 
 		g_free (raw_uri);
@@ -365,10 +341,10 @@ gedit_file_save_as (GeditMDIChild *child)
 
 		if (gedit_utils_uri_has_file_scheme (raw_uri))
 		{
-			fname = eel_uri_get_basename (raw_uri);
+			fname = gedit_utils_uri_get_basename (raw_uri);
 			g_return_val_if_fail (fname != NULL, FALSE);
 
-			path = get_dirname_from_uri (raw_uri);
+			path = gedit_utils_uri_get_dirname (raw_uri);
 		}
 		else
 		{
@@ -430,7 +406,7 @@ gedit_file_save_as (GeditMDIChild *child)
 			if (gedit_default_path != NULL)
 				g_free (gedit_default_path);
 
-			gedit_default_path = get_dirname_from_uri (file_uri);
+			gedit_default_path = gedit_utils_uri_get_dirname (file_uri);
 
 			gedit_recent_add (uri);
 
@@ -1157,7 +1133,7 @@ document_loaded_cb (GeditDocument *document,
 		{
 			gchar *default_path;
 			
-			default_path = get_dirname_from_uri (uri);
+			default_path = gedit_utils_uri_get_dirname (uri);
 
 			if (default_path != NULL)
 			{

@@ -1334,7 +1334,8 @@ gedit_warning (GtkWindow *parent, gchar *format, ...)
 	g_free (str);
 }
 
-/* taken from eel, except that we use "…" instead of "..."*/
+/* the following functions are taken from eel */
+
 gchar *
 gedit_utils_str_middle_truncate (const char *string,
 				 guint truncate_length)
@@ -1344,6 +1345,7 @@ gedit_utils_str_middle_truncate (const char *string,
 	guint num_left_chars;
 	guint num_right_chars;
 
+	/* we use "…" instead of "..." */
 	const char delimter[] = "…";
 	const guint delimter_length = strlen (delimter);
 	const guint min_truncate_length = delimter_length + 2;
@@ -1380,7 +1382,6 @@ gedit_utils_str_middle_truncate (const char *string,
 	return truncated;
 }
 
-/* pinched from eel too */
 gchar *
 gedit_utils_make_valid_utf8 (const char *name)
 {
@@ -1419,3 +1420,44 @@ gedit_utils_make_valid_utf8 (const char *name)
 	return g_string_free (string, FALSE);
 }
 
+gchar *
+gedit_utils_uri_get_basename (const char *uri)
+{
+	GnomeVFSURI *vfs_uri;
+	char *name;
+
+	/* Make VFS version of URI. */
+	vfs_uri = gnome_vfs_uri_new (uri);
+	if (vfs_uri == NULL) {
+		return NULL;
+	}
+
+	/* Extract name part. */
+	name = gnome_vfs_uri_extract_short_name (vfs_uri);
+	gnome_vfs_uri_unref (vfs_uri);
+
+	return name;
+}
+
+gchar *
+gedit_utils_uri_get_dirname (const char *uri)
+{
+	GnomeVFSURI *vfs_uri;
+	gchar *name;
+	gchar *res;
+
+	/* Make VFS version of URI. */
+	vfs_uri = gnome_vfs_uri_new (uri);
+	if (vfs_uri == NULL) {
+		return NULL;
+	}
+
+	/* Extract name part. */
+	name = gnome_vfs_uri_extract_dirname (vfs_uri);
+	gnome_vfs_uri_unref (vfs_uri);
+
+	res = g_strdup_printf ("file:///%s", name);
+	g_free (name);
+
+	return res;
+}

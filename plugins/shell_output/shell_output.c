@@ -35,7 +35,6 @@
 #include <libgnome/gnome-i18n.h>
 #include <libgnome/gnome-help.h>
 #include <libgnomevfs/gnome-vfs.h>
-#include <eel/eel-vfs-extensions.h>
 #include <libgnomeui/gnome-entry.h>
 #include <libgnomeui/gnome-file-entry.h>
 
@@ -550,76 +549,83 @@ unescape_command_string (const gchar *text, GeditDocument *doc)
 	cur = text;
 	end = text + length;
 	prev = NULL;
-	while (cur != end) {
+	while (cur != end)
+	{
 		const gchar *next;
 		next = g_utf8_next_char (cur);
 
-		if (prev && (*prev == '%')) {
+		if (prev && (*prev == '%'))
+		{
 			switch (*cur) {
-				case 'f':
-				case 'F':
-					if (filename == NULL)
+			case 'f':
+			case 'F':
+				if (filename == NULL)
+				{
+					tmp = gedit_document_get_raw_uri (doc);
+					
+					if (tmp != NULL)
 					{
-						tmp = gedit_document_get_raw_uri (doc);
-						
-						if (tmp != NULL)
-						{
-							filename = gnome_vfs_get_local_path_from_uri (tmp);
+						filename = gnome_vfs_get_local_path_from_uri (tmp);
 
-							if (filename == NULL)
-								filename = tmp;
-							else
-								g_free (tmp);
-						}
-					}
-
-					if (filename != NULL)
-					{
-						gchar *qf;
-
-						qf = g_shell_quote (filename);
-						str = g_string_append (str, qf);
-						g_free (qf);
-					}
-				break;
-				case 'n':
-				case 'N':
-					if (basename == NULL)
-					{
-						tmp = gedit_document_get_raw_uri (doc);
-						
-						if (tmp != NULL)
-						{
-							basename = eel_uri_get_basename (tmp);
+						if (filename == NULL)
+							filename = tmp;
+						else
 							g_free (tmp);
-						}
 					}
+				}
 
-					if (basename != NULL)
+				if (filename != NULL)
+				{
+					gchar *qf;
+
+					qf = g_shell_quote (filename);
+					str = g_string_append (str, qf);
+					g_free (qf);
+				}
+			break;
+			case 'n':
+			case 'N':
+				if (basename == NULL)
+				{
+					tmp = gedit_document_get_raw_uri (doc);
+					
+					if (tmp != NULL)
 					{
-						gchar *qf;
-
-						qf = g_shell_quote (basename);
-						str = g_string_append (str, qf);
-						g_free (qf);
+						basename = gedit_utils_uri_get_basename (tmp);
+						g_free (tmp);
 					}
-				break;
-				case '%':
-					str = g_string_append (str, "%");
-					drop_prev = TRUE;
-				break;
-				default:
-					str = g_string_append (str, "%");
-					str = g_string_append (str, cur);
-				break;
+				}
+
+				if (basename != NULL)
+				{
+					gchar *qf;
+
+					qf = g_shell_quote (basename);
+					str = g_string_append (str, qf);
+					g_free (qf);
+				}
+			break;
+			case '%':
+				str = g_string_append (str, "%");
+				drop_prev = TRUE;
+			break;
+			default:
+				str = g_string_append (str, "%");
+				str = g_string_append (str, cur);
+			break;
 			}
-		} else if (*cur != '%') {
+		}
+		else if (*cur != '%')
+		{
 			str = g_string_append_len (str, cur, next - cur);
 		}
 
 		if (!drop_prev)
+		{
 			prev = cur;
-		else {
+		}
+		else
+		{
 			prev = NULL;
 			drop_prev = FALSE;
 		}

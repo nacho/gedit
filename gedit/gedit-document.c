@@ -665,8 +665,8 @@ gedit_document_get_short_name (const GeditDocument* doc)
 	{
 		gchar *basename;
 		gchar *utf8_basename;
-		
-		basename = eel_uri_get_basename (doc->priv->uri);
+
+		basename = gedit_utils_uri_get_basename (doc->priv->uri);
 
 		if (basename != NULL) 
 		{
