@@ -1,32 +1,13 @@
-<<<<<<< ChangeLog
-1999-03-10  Tomislav Vujec  <tvujec@carnet.hr>
+1999-04-04 (13:59) Alex Roberts  <bse@gedit.pn.org>
 
-	* aclocal-include.m4 (AM_ACLOCAL_INCLUDE): Add ACLOCAL_FLAGS in
-	ACLOCAL. This allows maintainer rules to work if any of the macros
-	change.
+	* README: Updated Mailing List and email address.
+		  Upped version number to 0.5.2
+	
+	* INSTALL
+	  makeconfig.pl: Upped version numbers to 0.5.2
+	
+	* gE_init.[ch]: Removed old, unused source files
 
-1999-03-10  Tomislav Vujec  <tvujec@carnet.hr>
-
-	* gnome.m4 (GNOME_INIT_HOOK): Wrapped position parameter in
-	testing for additional inits. It gets expanded while generating
-	configure, resulting in an empty parameter list - syntax error in
-	for statement.
-
-1999-03-09  Raja R Harinath  <harinath@cs.umn.edu>
-
-	* gnome.m4 (GNOME_INIT): Add a new paramater, which is passed to
-	GNOME_INIT_HOOK. 
-	(GNOME_INIT_HOOK): New parameter "additional inits".  This is a
-	list like "applets capplet", and the corresponding
-	GNOME_APPLETS_LIBS and GNOME_CAPPLETS_LIBS are defined.
-
-1998-03-01  Mark Crichton <crichton@gimp.org>
-
-	* gnome-objc-checks : Added HAVE_GNOME_OBJC conditional
-
-
-
-=======
 1999-04-03 (15:57) Alex Roberts  <bse@gedit.pn.org>
 
 	* commands.c: (child_switch) Fixed the function for GnomeMDI.. it now
