@@ -16,6 +16,7 @@ libdialogs_a_SOURCES = 		\
 	dialog-prefs.c		\
 	dialog-plugins.c	\
 	dialog-replace.c	\
+	dialog-uri.c		\
 	dialogs.h
 
 glade_DATA =			\
@@ -24,7 +25,8 @@ glade_DATA =			\
 	prefs.glade		\
 	replace.glade		\
 	program.glade		\
-	plugin-manager.glade	
+	plugin-manager.glade	\
+	uri.glade
 
 glade_msgs =			\
 	about.glade.h		\
@@ -32,6 +34,7 @@ glade_msgs =			\
 	prefs.glade.h		\
 	replace.glade.h		\
 	program.glade.h		\
-	plugin-manager.glade.h	
+	plugin-manager.glade.h	\
+	uri.glade.h
 
 EXTRA_DIST = $(glade_DATA) $(glade_msgs)

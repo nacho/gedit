@@ -1,3 +1,32 @@
+2001-01-30  Paolo Maggi  <maggi@athena.polito.it>
+	
+	* document.c: #included  <libgnomevfs/gnome-vfs.h>
+	(gedit_document_load): re-written to use gnome-vfs
+
+	* file.c: #include <libgnomevfs/gnome-vfs.h> and "dialogs/dialogs.h"
+	#defined PREALLOCATED_BUF_LEN 
+	(gedit_file_open): re-written to use gnome-vfs
+	(uri_open_cb): new function
+	(gedit_file_open_ok_sel): check if gedit_document_current() != NULL
+	before setting readonly flag
+
+	* file.h: added definition of uri_open_cb
+
+	* gedit.c: #included  <libgnomevfs/gnome-vfs.h>
+	(main): initialize gnome-vfs
+
+	* menus.c: added item "Open from _URI..." in File menu
+	
+	* dialogs/uri.glade: new file
+
+	* dialogs/uri.glade.h: new file
+
+	* dialogs/dialog-uri.c: new file
+	
+	* dialogs/Makefile.am: new files added
+
+	* dialogs/dialogs.h: added definition of gedit_dialog_open_uri 
+
 2001-01-26  Paolo Maggi  <maggi@athena.polito.it>
 
 	* menus.c: added a separator in the toolbar

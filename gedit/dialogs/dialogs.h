@@ -7,6 +7,8 @@ void gedit_dialog_replace   (gboolean replace);
 void gedit_find_again       (void);
 void gedit_dialog_prefs     (void);
 
+void gedit_dialog_open_uri (void);
+
 gchar * gedit_plugin_program_location_dialog (void);
 
 void gedit_plugin_manager_create (GtkWidget *widget, gpointer data);

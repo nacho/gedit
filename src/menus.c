@@ -75,8 +75,21 @@ GnomeUIInfo gedit_file_menu[] =
 				NULL,
 				file_revert_cb, 
 				GNOME_STOCK_MENU_REFRESH),
+
 	GNOMEUIINFO_SEPARATOR,
 	/* Recent files ... */
+	GNOMEUIINFO_SEPARATOR,
+	
+	GNOMEUIINFO_ITEM_STOCK (N_("Open from _URI..."),
+			  N_("Open a file from a specified URI"),
+			  uri_open_cb,
+			  GNOME_STOCK_MENU_OPEN),
+/*	
+	GNOMEUIINFO_ITEM_STOCK (N_("Save _to URI..."),
+			  N_("Save the current file to a specified URI"),
+			  NULL,
+			  GNOME_STOCK_MENU_SAVE_AS),
+*/	
 	GNOMEUIINFO_SEPARATOR,
 
 	GNOMEUIINFO_MENU_PRINT_ITEM (file_print_cb, NULL),
@@ -98,6 +111,9 @@ GnomeUIInfo gedit_file_menu[] =
 				N_("Close All Open Files"),
 				file_close_all_cb,
 				GNOME_STOCK_MENU_CLOSE),
+
+	GNOMEUIINFO_SEPARATOR, 
+
 	GNOMEUIINFO_MENU_EXIT_ITEM (file_quit_cb, NULL),
 
 	GNOMEUIINFO_END

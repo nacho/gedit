@@ -21,6 +21,7 @@
 
 #include <config.h>
 #include <gnome.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include "window.h"
 #include "undo.h"
@@ -398,7 +399,7 @@ gedit_document_new_with_file (const gchar *file_name)
 		return FALSE;
 	
 	gedit_window_set_widgets_sensitivity (TRUE);
-	
+
 	return TRUE;
 
 }
@@ -607,7 +608,8 @@ gboolean
 gedit_document_load ( GList *file_list)
 {
 	gchar *file_name;
-
+	gboolean can_be_created;
+	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
 	gedit_file_stdin (NULL);
@@ -615,11 +617,63 @@ gedit_document_load ( GList *file_list)
         /* create a file for each document in the parameter list */
 	for (;file_list; file_list = file_list->next)
 	{
-		file_name = gedit_file_convert_to_full_pathname (file_list->data);
-		if (g_file_exists (file_name))
-			gedit_document_new_with_file ((gchar *) file_name);
+		const gchar* scheme; 
+		GnomeVFSURI *uri = gnome_vfs_uri_new (file_list->data);
+		
+		if(uri == NULL) 
+		{
+			g_print("Wrong URI: %s\n", (gchar*)file_list->data);
+			continue;
+		}
+
+		scheme = gnome_vfs_uri_get_scheme(uri);
+		g_assert(scheme != NULL);
+
+		if (strcmp (scheme, "file") == 0)
+		{
+			gchar* tmp_str;
+			
+			can_be_created = TRUE;
+			
+			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
+			
+			file_name = gedit_file_convert_to_full_pathname (tmp_str);			
+			g_free(tmp_str);
+
+			gnome_vfs_uri_unref(uri);	
+			uri = gnome_vfs_uri_new (file_name);
+		}
 		else
-			gedit_file_create_popup ((guchar *) file_name);
+		{
+			/* FIXME: hide password */
+			can_be_created = FALSE;			
+			file_name = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);		
+		}
+
+		
+		if (gnome_vfs_uri_exists (uri))
+		{
+			gedit_document_new_with_file ((gchar *) file_name);
+		}
+		else	
+		{							
+			if (can_be_created)
+			{	
+				gedit_file_create_popup ((guchar *) file_name);
+			}
+			else
+			{	
+				/* If you try to open a non existant remote file */
+				gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file: \n\n%s\n\n"
+							"Please make sure the file exists."), file_name);
+	
+				gnome_app_warning (gedit_window_active_app(), errstr);
+				g_free (errstr);				
+			}
+		}
+
+		g_free (file_name);
+		gnome_vfs_uri_unref(uri);		
 	}
 
 	if (gedit_document_current() == NULL)
@@ -627,12 +681,11 @@ gedit_document_load ( GList *file_list)
 	
 	g_assert(gedit_window_active_app() != NULL);
 	g_assert(gedit_document_current() != NULL);
- 
-	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
 
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
+	
 	return FALSE;
 }
-
 
 /**
  * gedit_set_title:

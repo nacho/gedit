@@ -23,6 +23,8 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
+#include <libgnomevfs/gnome-vfs.h>
+
 #include "commands.h"
 #include "document.h"
 #include "prefs.h"
@@ -166,6 +168,11 @@ main (int argc, char **argv)
 		file_list = g_list_append (file_list, args[i]);
 	
 	poptFreeContext (ctx);
+
+	if (!gnome_vfs_init ()) {
+		g_error (_("Cannot initialize gnome-vfs."));
+		return 1;
+	}
 
 	glade_gnome_init ();
 	gedit_prefs_load_settings ();

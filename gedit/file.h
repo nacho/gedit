@@ -53,6 +53,7 @@ void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
 void file_close_cb (GtkWidget *widget, gpointer cbdata);
 void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
 void file_revert_cb (GtkWidget *widget, gpointer cbdata);
+void uri_open_cb (GtkWidget *widget, gpointer cbdata);
 
 void gedit_close_all_flag_clear (void);
 

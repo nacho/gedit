@@ -28,6 +28,8 @@
 #include <unistd.h>  /* for gedit_stdin_open () */
 #include <stdio.h>   /* for gedit_stdin_open () */
 
+#include <libgnomevfs/gnome-vfs.h>
+
 #include "commands.h"
 #include "document.h"
 #include "view.h" 
@@ -39,8 +41,10 @@
 #include "print.h"
 #include "undo.h"
 #include "search.h"
+#include "dialogs/dialogs.h"
 
 #define GEDIT_STDIN_BUFSIZE 1024
+#define PREALLOCATED_BUF_LEN 4096
 
 GtkWidget *save_file_selector = NULL;
 #if 0
@@ -58,6 +62,7 @@ void file_close_cb(GtkWidget *widget, gpointer cbdata);
 void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
 void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
+void uri_open_cb (GtkWidget *widget, gpointer cbdata);
 
        gint gedit_file_create_popup (const gchar *title);
 #if 0
@@ -147,97 +152,205 @@ gedit_document_insert_text_when_mapped (GeditDocument *doc, const gchar * tmp_bu
  *
  * Return value: 0 on success, 1 on error.
  */
+
 gint
 gedit_file_open (GeditDocument *doc, const gchar *fname)
 {
-	gchar *tmp_buf;
-	struct stat stats;
-	FILE *fp;
+	GnomeVFSFileInfo info;
+	GnomeVFSHandle *from_handle;
+	GnomeVFSResult  result;
+
+	GnomeVFSURI* uri;
+	const gchar* scheme;
+
+	GString *tmp_buf = NULL;
+		
 	GeditView *view;
-	
-	gint _debug;
-	
+			
 	gedit_debug (DEBUG_FILE, "");
 
 	g_return_val_if_fail (fname != NULL, 1);
-	if (doc != NULL) {
+	
+	if (doc != NULL) 
+	{
 		g_return_val_if_fail (doc->filename != fname, -1);
 	}
 
-	if (stat(fname, &stats) ||  !S_ISREG(stats.st_mode))
+	gnome_vfs_file_info_init (&info);
+	result = gnome_vfs_get_file_info (fname, 
+				 &info,
+				 (GNOME_VFS_FILE_INFO_GET_MIME_TYPE
+				 | GNOME_VFS_FILE_INFO_FOLLOW_LINKS));
+
+	if ((result != GNOME_VFS_OK) || 
+	    !(info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE) ||
+	    (info.type != GNOME_VFS_FILE_TYPE_REGULAR))
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file \"%s\"."
-							      "\nPlease make sure the file exists."), fname);
+					"\nPlease make sure the file exists."), fname);
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
+
+		if(result == GNOME_VFS_OK)
+			gnome_vfs_file_info_clear (&info);
+
 		return 1;
 	}
 
-#if 0
-	/* Disable this check, the users have requested that they need to open 0  bytes files */
-	if (stats.st_size  == 0)
+	if(info.valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
 	{
-		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file:\n\n%s\n\n"
-						    "\nPlease make sure the file is not being used by another application\n"
-						    "and that the file is not empty."), fname);
+		tmp_buf = g_string_sized_new (info.size + 1);
+	}
+	else
+	{
+		tmp_buf = g_string_sized_new (PREALLOCATED_BUF_LEN);
+	}
+
+	if (tmp_buf == NULL)
+	{
+		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file \"%s\"."
+						   "\nCould not allocate the required memory."), fname);
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
-		return 1;
-	}
-#endif	
+		gnome_vfs_file_info_clear (&info);
 
-	if ((tmp_buf = g_new0 (gchar, stats.st_size + 1)) == NULL)
-	{
-		gnome_app_error (gedit_window_active_app(), _("Could not allocate the required memory."));
-		return 1;
+		return 1;	
 	}
 
-	if ((fp = fopen (fname, "r")) == NULL)
+	result = gnome_vfs_open (&from_handle, fname, GNOME_VFS_OPEN_READ);
+
+	if (result != GNOME_VFS_OK)
 	{
-		gchar *errstr = g_strdup_printf (_("gedit was unable to open the file: \n\n%s\n\n"
-						   "Make sure that you have permissions for opening the file."), fname);
+		gchar *errstr = g_strdup_printf (_("An error was encountered while reading the file: \n\n%s\n\n"
+						   "Make sure that you have permissions for opening the file. "), 
+						   fname);
 		gnome_app_error (gedit_window_active_app(), errstr);
 		g_free (errstr);
+		g_string_free(tmp_buf, TRUE);
+		gnome_vfs_file_info_clear (&info);
+
+		return 1;
+	}
+	
+	while (1) 
+	{
+		GnomeVFSFileSize bytes_read;
+		guint8           data [1025];
+		
+		result = gnome_vfs_read (from_handle, data, 1024, &bytes_read);
+		
+		if ((result != GNOME_VFS_OK) && (result != GNOME_VFS_ERROR_EOF))
+		{
+			gchar *errstr = g_strdup_printf (_("An error was encountered while reading the file: \n\n%s"), 
+						   	fname);
+			gnome_app_error (gedit_window_active_app(), errstr);
+			g_free (errstr);
+			g_string_free(tmp_buf, TRUE);
+			gnome_vfs_file_info_clear (&info);
+
+			return 1;
+		}
+
+		if (bytes_read == 0)
+		{
+			break;
+		}
+		
+		if (bytes_read >  0 && bytes_read <= 1024)
+		{
+			data [bytes_read] = '\0';
+		}
+		else 
+		{
+			gchar *errstr = g_strdup_printf (_("Internal error reading the file: \n\n%s\n\n"
+							   "Please, report this error to submit@bugs.gnome.org."), fname);
+			gnome_app_error (gedit_window_active_app(), errstr);
+			g_free (errstr);
+			g_string_free(tmp_buf, TRUE);
+			gnome_vfs_file_info_clear (&info);
+
+			return 1;
+		}
+		
+		g_string_append(tmp_buf, data);
+	}
+
+	result = gnome_vfs_close (from_handle);
+	
+	if (result != GNOME_VFS_OK)
+	{
+		gchar *errstr = g_strdup_printf (_("An error was encountered while closing the file: \n\n%s"), 
+						   fname);
+		gnome_app_error (gedit_window_active_app(), errstr);
+		g_free (errstr);
+		g_string_free(tmp_buf, TRUE);
+		gnome_vfs_file_info_clear (&info);
+
 		return 1;
 	}
 
-	_debug = fread (tmp_buf, 1, stats.st_size, fp);
-	fclose (fp);
-
-	if (doc==NULL) {
+	if (doc==NULL) 
+	{
 		doc = gedit_document_new ();
 		doc->filename = g_strdup (fname);
 		doc->untitled_number = 0;
-		gedit_document_insert_text_when_mapped (doc, tmp_buf, 0, FALSE);
-		gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
-		g_free (tmp_buf);
-	} else {
+		gedit_document_insert_text_when_mapped (doc, tmp_buf->str, 0, FALSE);
+	} 
+	else 
+	{
 		if (doc->filename != NULL)
 			g_free (doc->filename);
 		doc->filename = g_strdup (fname);
 		doc->untitled_number = 0;
-		gedit_document_insert_text (doc, tmp_buf, 0, FALSE);
-		gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
+		gedit_document_insert_text (doc, tmp_buf->str, 0, FALSE);
 
 		/* Set the cursor position to the start */
 		view = g_list_nth_data (doc->views, 0);
 		g_return_val_if_fail (view!=NULL, 1);
 		gedit_view_set_position (view, 0);
-		g_free (tmp_buf);
 	}
 	
+	uri = gnome_vfs_uri_new (fname);
+	g_assert(uri != NULL);
+
+	scheme = gnome_vfs_uri_get_scheme(uri);
+	g_assert(scheme != NULL);
+	
+	/* FIXME: all remote files are marked as readonly */
+	if ((strcmp(scheme, "file") == 0))
+	{
+		gchar* tmp_str;
+
+		g_assert(GNOME_VFS_FILE_INFO_LOCAL (&info));
+			
+		tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
+		g_assert(tmp_str != NULL);
+
+		gedit_document_set_readonly (doc, access (tmp_str, W_OK) ? TRUE : FALSE);
+		
+		g_free(tmp_str);
+
+	}
+	else
+	{	
+		gedit_document_set_readonly (doc, TRUE);
+	}
+
+	gnome_vfs_uri_unref(uri);
+	
+	g_string_free (tmp_buf, TRUE);
+	gnome_vfs_file_info_clear (&info);
+
 	doc->changed = FALSE;
 	gedit_document_set_title (doc);
 	gedit_document_text_changed_signal_connect (doc);
-
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
 	gedit_recent_add (fname);
-	gedit_recent_update_all_windows (mdi);
+	gedit_recent_update_all_windows (mdi); 
 
 	return 0;
 }
-
 
 static gint
 gedit_file_selector_key_event (GtkFileSelection *fsel, GdkEventKey *event)
@@ -623,8 +736,13 @@ gedit_file_open_ok_sel (GtkWidget *widget, GtkWidget *file_selector_)
 	
 	gtk_widget_hide (GTK_WIDGET(file_selector));
 	
-	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
-	
+	if (gedit_document_current())
+	{
+		g_assert(gedit_window_active_app());
+		gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), 
+				gedit_document_current()->readonly);
+	}	
+
 	return;
 }
 
@@ -776,6 +894,11 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 	}
 }
 
+void 
+uri_open_cb (GtkWidget *widget, gpointer cbdata)
+{
+	gedit_dialog_open_uri ();
+}
 
 static void
 gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
