@@ -26,6 +26,7 @@
 #include "gE_mdi.h"
 #include "gE_view.h"
 
+int debug_ = 0;
 void views_insert (gedit_document *doc, gedit_undo *undo);
 void views_delete (gedit_document *doc, gedit_undo *undo);
 void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc);
@@ -37,7 +38,8 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_do
 {
 	gedit_undo *undo;
 
-	g_print("Entering undo_add.. start:%i end:%i action:%i\n", start_pos, end_pos, action);
+	if(debug_)
+		g_print("Entering undo_add.. start:%i end:%i action:%i\n", start_pos, end_pos, action);
 
 	undo = g_new(gedit_undo, 1);
 	
@@ -50,7 +52,8 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_do
 	/* nuke the redo list, if its available */
 	if (doc->redo)
 	{
-		g_print("About to free doc->redo...\n");
+		if(debug_)
+			g_print("About to free doc->redo...\n");
 		g_list_free (doc->redo);
 		doc->redo = NULL;
 	}
@@ -72,11 +75,13 @@ gedit_undo_do (GtkWidget *w, gpointer data)
 	doc->redo = g_list_prepend (doc->redo, undo);
 	doc->undo = g_list_remove (doc->undo, undo);
 
-	g_print("Entering undo_do..  start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
+	if(debug_)
+		g_print("Entering undo_do..  start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
 	
 	if (undo->action == DELETE )
 	{
-		g_print("undo do action DELETE ");
+		if(debug_)
+			g_print("undo do action DELETE ");
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (undo->end_pos < doc->buf->len) && (undo->end_pos))
 		{
@@ -119,7 +124,8 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	gedit_document *doc = gedit_document_current();
 	gedit_undo *redo;
 
-	g_print("Entering undo_redo..\n");
+	if(debug_)
+		g_print("Entering undo_redo..\n");
 	
 	if (!doc->redo)
 	  return;
@@ -131,8 +137,10 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	/* Now we can do the undo proper.. */
 	if ( redo->action == INSERT )
 	{
-		g_print("INSERT buggy ....  ...\n");
-		g_print("%s", redo->text);
+		if(debug_)
+			g_print("INSERT buggy ....  ...\n");
+		if(debug_)
+			g_print("%s", redo->text);
 		/* We're inserting something that was deleted */
 		if ((doc->buf->len > 0) && (redo->end_pos < doc->buf->len) && (redo->end_pos))
 		{
@@ -150,7 +158,8 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 	}
 	else if ( redo->action == DELETE )
 	{
-		g_print("DELETE ...\n");
+		if(debug_)
+			g_print("DELETE ...\n");
 		/* We're deleteing somthing that had been inserted */
 		if (redo->end_pos + (redo->end_pos - redo->start_pos) <= doc->buf->len)
 		{
@@ -177,7 +186,8 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 	gint p1;
 	gedit_view *view;
 
-	g_print("Entering views insert..\n");
+	if(debug_)
+		g_print("Entering views insert..\n");
 	
 	for (i = 0; i < g_list_length (doc->views); i++)
 	{
@@ -191,7 +201,6 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 				 NULL,
 				 undo->text,
 				 strlen(undo->text));
-
 		gtk_text_freeze (GTK_TEXT (view->split_screen));
 		p1 = gtk_text_get_point (GTK_TEXT (view->split_screen));
 		gtk_text_set_point (GTK_TEXT(view->split_screen), undo->start_pos);
@@ -218,7 +227,8 @@ views_delete (gedit_document *doc, gedit_undo *undo)
 	start_pos = undo->start_pos;
 	end_pos = undo->end_pos;
 
-	g_print("Entering views_del. start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
+	if(debug_)
+		g_print("Entering views_del. start:%i end:%i acction:%i\n", undo->start_pos, undo->end_pos, undo->action);
 
 	for (n = 0; n < g_list_length (doc->views); n++)
 	{
@@ -234,9 +244,17 @@ views_delete (gedit_document *doc, gedit_undo *undo)
 	        p1 = gtk_text_get_point (GTK_TEXT (nth_view->split_screen));
 		gtk_text_set_point (GTK_TEXT(nth_view->split_screen), start_pos);
 		gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
+		gtk_text_backward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
+		/* I have not tried it but WHY whould you use backward above and forward here ? Chema
 		gtk_text_forward_delete (GTK_TEXT (nth_view->split_screen), (end_pos - start_pos));
+		*/
 	}
 }
+
+
+
+
+
 
 
 
