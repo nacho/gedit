@@ -36,6 +36,7 @@
 
 #define MAX_MSGS	100
 
+#define LOGFLAGS	(G_LOG_LEVEL_MESSAGE|G_LOG_LEVEL_INFO|G_LOG_LEVEL_DEBUG)
 
 typedef struct {
 	GtkWidget *toplev;	/* toplevel window */
@@ -78,6 +79,12 @@ mbprintf(const char *fmt, ...)
 	g_free (buf);
 } /* mbprintf */
 
+void
+log_handler(const gchar *log_domain, GLogLevelFlags log_level,
+	    const gchar *message, gpointer user_data)
+{
+	msgbox_append (message);
+}
 
 /*
  * PUBLIC: msgbox_create
@@ -102,7 +109,7 @@ msgbox_create(void)
 
 	msgbox.num = 0;
 	msgbox.toplev = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_widget_set_name(msgbox.toplev, "messages");
+	gtk_widget_set_name(msgbox.toplev, "MessageBox");
 	gtk_widget_set_usize(msgbox.toplev, 500, 250);
 	gtk_window_set_policy(GTK_WINDOW(msgbox.toplev), TRUE, TRUE, FALSE);
 	gtk_window_set_title(GTK_WINDOW(msgbox.toplev), "gEdit Messages");
@@ -133,6 +140,9 @@ msgbox_create(void)
 		GTK_EXPAND | GTK_SHRINK | GTK_FILL,
 		GTK_EXPAND | GTK_SHRINK | GTK_FILL, 0, 0);
 	gtk_widget_show(text);
+
+	gtk_widget_set_name(msgbox.text, "Text");
+	gtk_widget_ensure_style(msgbox.text);
 
 	vscrollbar = gtk_vscrollbar_new(GTK_TEXT(text)->vadj);
 	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 0, 1,
@@ -178,6 +188,8 @@ msgbox_create(void)
 	GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
 	gtk_widget_grab_default(button);
 	gtk_widget_show(button);
+
+	g_log_set_handler(G_LOG_DOMAIN, LOGFLAGS, log_handler, NULL);
 
 	mbprintf("Welcome to %s", GEDIT_ID);
 

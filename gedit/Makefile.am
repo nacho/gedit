@@ -7,11 +7,13 @@ INCLUDES = -I$(includedir) -I$(top_srcdir)		\
 	$(GNOME_INCLUDEDIR)
 
 ## This need to be two distinct directories
-
 plugindir = $(libexecdir)/go/plugins
 pluginlibdir = $(libexecdir)/gedit/plugins
 
 geditincludedir = $(includedir)/gedit
+
+gtkrcdir = $(datadir)
+gtkrc_DATA = geditrc
 
 if WITH_GMODULE_PLUGINS
 geditinclude_HEADERS = gE_plugin.h
@@ -72,7 +74,7 @@ gedit_SOURCES = 	\
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(corba_libs) \
 	      $(libgnorba_libs) $(INTLLIBS)
 
-EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm
+EXTRA_DIST = gE-icon-1.xpm gE-icon-2.xpm gE_icon.xpm $(gtkrc_DATA)
 
 CPPFLAGS = \
 	-DBINDIR=\""$(bindir)"\" \
