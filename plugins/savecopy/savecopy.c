@@ -39,6 +39,9 @@
 
 #include <gedit/gedit-plugin.h>
 #include <gedit/gedit-debug.h>
+#include <gedit/gedit-convert.h>
+#include <gedit/gedit-encodings.h>
+#include <gedit/gedit-file-selector-utils.h>
 #include <gedit/gedit-menus.h>
 
 
@@ -55,8 +58,9 @@ G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
 G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
 
 static gchar *
-get_contents (GeditDocument *doc, GeditEncoding *encoding, GError *error)
+get_contents (GeditDocument *doc, GeditEncoding *encoding, GError **error)
 {
+	gchar *chars;
 	GtkTextIter start, end;
 
 	// TODO make sure \n at the end
@@ -80,7 +84,7 @@ get_contents (GeditDocument *doc, GeditEncoding *encoding, GError *error)
 			/* Conversion error */
 			g_propagate_error (error, conv_error);
 			g_free (chars);
-			return FALSE;
+			return NULL;
 		}
 		else
 		{
@@ -88,6 +92,8 @@ get_contents (GeditDocument *doc, GeditEncoding *encoding, GError *error)
 			chars = converted_file_contents;
 		}
 	}
+
+	return chars;
 }
 
 static GnomeVFSResult
@@ -114,16 +120,18 @@ write_to_file (GnomeVFSHandle *handle, gchar *data, GnomeVFSFileSize len)
 static gboolean
 real_save_copy (GeditDocument *doc,
 		const gchar *uri,
-		GeditEncoding *encoding,
+		const GeditEncoding *encoding,
 		GError **error)
 {
+	gchar *contents;
 	GnomeVFSHandle *handle;
 	mode_t saved_umask;
 	guint perms = 0;
+	GnomeVFSResult vfs_res;
 
-	contents = get_contents ()
+	contents = get_contents (doc, encoding, error);
 	if (contents == NULL)
-		error
+		return FALSE;
 
 	/* init default permissions */
 	saved_umask = umask(0);
@@ -148,7 +156,7 @@ real_save_copy (GeditDocument *doc,
 			     vfs_res,
 			     gnome_vfs_result_to_string (vfs_res));
 
-		goto out;
+		return FALSE;
 	}
 
 	vfs_res = write_to_file (handle, contents, strlen (contents));
@@ -160,8 +168,6 @@ real_save_copy (GeditDocument *doc,
 			     gnome_vfs_result_to_string (vfs_res));
 
 		gnome_vfs_close (handle);
-
-		goto out;
 	}
 
 	gnome_vfs_close (handle);
@@ -175,10 +181,7 @@ save_copy_cb (BonoboUIComponent *uic,
 	GeditDocument *doc;
 	gchar *file_uri;
 	gboolean ret = FALSE;
-	GtkWidget *view;
-	gchar *fname = NULL;
 	gchar *untitled_name = NULL;
-	gchar *path = NULL;
 	const GeditEncoding *encoding;
 
 	gedit_debug (DEBUG_PLUGINS, "");
@@ -198,7 +201,7 @@ save_copy_cb (BonoboUIComponent *uic,
 	{
 		untitled_name = gedit_document_get_short_name (doc);
 	}
-	g_return_val_if_fail (untitled_name != NULL, FALSE);
+	g_return_if_fail (untitled_name != NULL);
 
 	file_uri = gedit_file_selector_save (
 			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
@@ -214,12 +217,7 @@ save_copy_cb (BonoboUIComponent *uic,
 	if (file_uri != NULL) 
 	{
 		gchar *uri;
-		gchar *file_utf8;
 		GError *error = NULL;
-
-		file_utf8 = gnome_vfs_format_uri_for_display (file_uri);
-		if (file_utf8 != NULL)
-			gedit_utils_flash_va (_("Saving a copy of document \"%s\"..."), file_utf8);
 
 		uri = gnome_vfs_make_uri_canonical (file_uri);
 		g_return_val_if_fail (uri != NULL, FALSE);
@@ -227,7 +225,7 @@ save_copy_cb (BonoboUIComponent *uic,
 		ret = real_save_copy (doc, uri, encoding, &error);
 		if (!ret)
 		{
-			g_return_val_if_fail (error != NULL, FALSE);
+			g_return_if_fail (error != NULL);
 
 			gedit_error_reporting_saving_file (uri,
 							   error,
@@ -238,7 +236,6 @@ save_copy_cb (BonoboUIComponent *uic,
 
 		g_free (uri);
 		g_free (file_uri);
-		g_free (file_utf8);
 	}
 
 	return ret;
@@ -290,7 +287,7 @@ activate (GeditPlugin *plugin)
 				     MENU_ITEM_LABEL, MENU_ITEM_TIP, NULL,
 				     save_copy_cb);
 
-                pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
+                pd->update_ui (plugin, BONOBO_WINDOW (top_windows->data));
 
                 top_windows = g_list_next (top_windows);
         }
