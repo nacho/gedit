@@ -166,12 +166,21 @@ void plugin_query_all( plugin_callback_struct *callbacks )
 {
   DIR *dir = opendir( PLUGINDIR );
   struct dirent *direntry;
+  gchar *shortname;
+  
   while( direntry = readdir( dir ) )
     {
       plugin *plug;
-      plug = plugin_query( direntry->d_name );
-      plug->callbacks = *callbacks;
-      plugin_get_all( plug, 1, process_command, NULL );
+      if ( strrchr( direntry->d_name, '/' ) )
+	shortname = strrchr( direntry->d_name, '/' ) + 1;
+      else
+	shortname = direntry->d_name;     
+      if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) )
+	{
+	  plug = plugin_query( direntry->d_name );
+	  plug->callbacks = *callbacks;
+	  plugin_get_all( plug, 1, process_command, NULL );
+	}
     }
   closedir( dir );
 }
@@ -371,6 +380,7 @@ static void process_next( plugin *plug, gchar *buffer, int length, gpointer data
 	  info->menu_location = buffer + strlen( buffer ) + 1;
 	  info->plugin_name = plug->name;
 	  plug->callbacks.program.reg( info );
+	  g_free( info );
 	}
       plugin_get_all( plug, 1, process_command, NULL );
       break;

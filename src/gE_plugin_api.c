@@ -61,14 +61,14 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	gtk_menu_factory_add_entries (window->menubar, entry, 1);
 #else
 	gchar *path;
-	GnomeUIInfo *menu = g_malloc0 (sizeof (GnomeUIInfo));
+	GnomeUIInfo *menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
 	
 	data->temp1 = g_strdup (info->plugin_name);
 	data->window = window;
 	path = g_malloc0 (strlen ("Plugins/") + 1);
 	sprintf (path, "Plugins/");
 	menu->label = g_strdup (info->plugin_name);
-	menu->type = 1;
+	menu->type = GNOME_APP_UI_ITEM;
 	menu->hint = NULL;
 	menu->moreinfo = start_plugin;
 	menu->user_data = data;
@@ -76,6 +76,8 @@ void add_plugin_to_menu (gE_window *window, plugin_info *info)
 	menu->pixmap_type = 0;
 	menu->pixmap_info = NULL;
 	menu->accelerator_key = 0;
+
+	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 	
 	gnome_app_insert_menus_with_data (GNOME_APP(window->window), path, menu, data);
 #endif
