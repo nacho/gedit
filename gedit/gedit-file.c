@@ -590,6 +590,7 @@ static gboolean
 gedit_file_revert_dialog (GeditDocument *doc)
 {
 	GtkWidget *msgbox;
+	AtkObject *obj;
 	gint ret;
 	gchar *name;
 	gchar *primary_msg;
@@ -693,6 +694,10 @@ gedit_file_revert_dialog (GeditDocument *doc)
 			_("_Revert"), GTK_STOCK_REVERT_TO_SAVED, GTK_RESPONSE_YES);
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
+
+	obj = gtk_widget_get_accessible (msgbox);
+	if (GTK_IS_ACCESSIBLE (obj))
+		atk_object_set_name (obj, _("Question"));
 
 	gtk_window_set_resizable (GTK_WINDOW (msgbox), FALSE);
 

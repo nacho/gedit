@@ -91,6 +91,7 @@ replace_dialog (GtkWindow *parent,
 		const gchar *secondary_message)
 {
 	GtkWidget *msgbox;
+	AtkObject *obj;
 	gint ret;
 	gchar *full_formatted_uri;
        	gchar *uri_for_display	;
@@ -133,6 +134,10 @@ replace_dialog (GtkWindow *parent,
 			_("_Replace"), GTK_STOCK_REFRESH, GTK_RESPONSE_YES);
 
 	gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_CANCEL);
+
+	obj = gtk_widget_get_accessible (msgbox);
+	if (GTK_IS_ACCESSIBLE (obj))
+		atk_object_set_name (obj, _("Question"));
 
 	ret = gtk_dialog_run (GTK_DIALOG (msgbox));
 	gtk_widget_destroy (msgbox);
