@@ -1151,6 +1151,12 @@ void options_toggle_word_wrap_cb (GtkWidget *widget, gE_window *window)
 	gE_document_set_word_wrap (doc, !doc->word_wrap);
 }
 
+void options_toggle_line_wrap_cb (GtkWidget *widget, gE_window *window)
+{
+	gE_document *doc = gE_document_current (window);
+	gE_document_set_line_wrap (doc, !doc->line_wrap);
+}
+
 void options_toggle_status_bar_cb (GtkWidget *w, gE_window *window)
 {
 	gE_window_set_status_bar (window, !window->show_status);

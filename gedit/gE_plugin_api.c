@@ -57,6 +57,7 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.document.set_auto_indent = gE_plugin_set_auto_indent;
   callbacks.document.set_status_bar = gE_plugin_set_status_bar;
   callbacks.document.set_word_wrap = gE_plugin_set_word_wrap;
+  callbacks.document.set_line_wrap = gE_plugin_set_line_wrap;
   callbacks.document.set_read_only = gE_plugin_set_read_only;
   callbacks.document.set_split_screen = gE_plugin_set_split_screen;
 #ifndef WITHOUT_GNOME
@@ -234,6 +235,13 @@ void gE_plugin_set_word_wrap (gint docid, gint word_wrap)
 	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
 
 	gE_document_set_word_wrap (document, word_wrap);
+}
+
+void gE_plugin_set_line_wrap (gint docid, gint line_wrap)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+
+	gE_document_set_line_wrap (document, line_wrap);
 }
 
 void gE_plugin_set_read_only (gint docid, gint read_only)

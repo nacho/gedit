@@ -257,6 +257,7 @@ gE_document
 	GTK_WIDGET_UNSET_FLAGS(doc->tab_label, GTK_CAN_FOCUS);
 	doc->filename = NULL;
 	doc->word_wrap = TRUE;
+	doc->line_wrap = TRUE;
 	doc->read_only = FALSE;
 	gtk_widget_show(doc->tab_label);
 
@@ -270,6 +271,7 @@ gE_document
 	doc->text = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(doc->text), !doc->read_only);
 	gtk_text_set_word_wrap(GTK_TEXT(doc->text), doc->word_wrap);
+	gtk_text_set_line_wrap(GTK_TEXT(doc->text), doc->line_wrap);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->text), "button_press_event",
 		GTK_SIGNAL_FUNC(gE_event_button_press), w);
@@ -328,6 +330,7 @@ gE_document
 	doc->split_screen = gtk_text_new(NULL, NULL);
 	gtk_text_set_editable(GTK_TEXT(doc->split_screen), !doc->read_only);
 	gtk_text_set_word_wrap(GTK_TEXT(doc->split_screen), doc->word_wrap);
+	gtk_text_set_line_wrap(GTK_TEXT(doc->split_screen), doc->line_wrap);
 
 	gtk_signal_connect_after(GTK_OBJECT(doc->split_screen),
 		"button_press_event",
@@ -438,8 +441,14 @@ void gE_document_set_split_screen (gE_document *doc, gint split_screen)
 
 void gE_document_set_word_wrap (gE_document *doc, gint word_wrap)
 {
-	doc->word_wrap = doc->word_wrap;
+	doc->word_wrap = word_wrap;
 	gtk_text_set_word_wrap (GTK_TEXT (doc->text), doc->word_wrap);
+}
+
+void gE_document_set_line_wrap (gE_document *doc, gint line_wrap)
+{
+	doc->line_wrap = line_wrap;
+	gtk_text_set_line_wrap (GTK_TEXT (doc->text), doc->line_wrap);
 }
 
 void gE_document_set_read_only (gE_document *doc, gint read_only)

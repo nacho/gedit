@@ -101,6 +101,7 @@ typedef struct _gE_document {
 	gint changed_id;
 	gint changed;
 	gint word_wrap;
+	gint line_wrap;
 	gint read_only;
 	struct stat *sb;
 #ifndef WITHOUT_GNOME

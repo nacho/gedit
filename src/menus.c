@@ -90,6 +90,8 @@ static GtkMenuEntry menu_items[] =
 		options_toggle_status_bar_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toggle Wordwrap", NULL,
 		options_toggle_word_wrap_cb, (gpointer)GE_WINDOW, NULL},
+	{"<Main>/Options/Toggle Linewrap", NULL,
+		options_toggle_line_wrap_cb, (gpointer)GE_WINDOW, NULL},
 	{"<Main>/Options/Toggle ReadOnly", NULL,
 		options_toggle_read_only_cb, (gpointer)GE_WINDOW, NULL},
 #ifdef GTK_HAVE_FEATURES_1_1_0
@@ -316,6 +318,7 @@ GnomeUIInfo gedit_options_menu []= {
 	{ GNOME_APP_UI_ITEM, N_("Toggle Autoindent"),  NULL, auto_indent_toggle_cb, (gpointer) GE_DATA, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Statusbar"),  NULL, options_toggle_status_bar_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Wordwrap"),  NULL, options_toggle_word_wrap_cb, (gpointer) GE_WINDOW, NULL },
+	{ GNOME_APP_UI_ITEM, N_("Toggle Linewrap"),  NULL, options_toggle_line_wrap_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Readonly"),  NULL, options_toggle_read_only_cb, (gpointer) GE_WINDOW, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Toggle Split Screen"), NULL, options_toggle_split_screen_cb, (gpointer) GE_WINDOW, NULL },
 #ifndef WITHOUT_GNOME

@@ -52,6 +52,7 @@ typedef struct
   void (*set_auto_indent) ( gint id, gint auto_indent );
   void (*set_status_bar) ( gint id, gint status_bar );
   void (*set_word_wrap) ( gint id, gint word_wrap );
+  void (*set_line_wrap) ( gint id, gint line_wrap );
   void (*set_read_only) ( gint id, gint read_only );
   void (*set_split_screen) ( gint id, gint split_screen );
   void (*set_scroll_ball) ( gint id, gint scroll_ball );

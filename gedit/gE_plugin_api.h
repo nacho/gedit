@@ -43,6 +43,7 @@ extern gboolean gE_plugin_document_close (gint docid);
 extern void gE_plugin_set_auto_indent (gint docid, gint auto_indent);
 extern void gE_plugin_set_status_bar (gint docid, gint status_bar);
 extern void gE_plugin_set_word_wrap (gint docid, gint word_wrap);
+extern void gE_plugin_set_line_wrap (gint docid, gint line_wrap);
 extern void gE_plugin_set_read_only (gint docid, gint read_only);
 extern void gE_plugin_set_split_screen (gint docid, gint split_screen);
 #ifndef WITHOUT_GNOME
