@@ -61,11 +61,14 @@ enum {
 
 void line_pos_cb (GtkWidget *w, gedit_data *data);
 void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, gedit_view *view);
-static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
 
+static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
 GtkVBoxClass *parent_class = NULL;
 
-
+void view_changed_cb (GtkWidget *w, gpointer cbdata);
+void gedit_view_list_insert (gedit_view *view, gedit_data *data);
+void view_list_erase (gedit_view *view, gedit_data *data);
+gint insert_into_buffer (gedit_document *doc, gchar *buffer, gint position);
 
 /* Callback to the "changed" signal in the text widget */
 void
@@ -74,6 +77,7 @@ view_changed_cb (GtkWidget *w, gpointer cbdata)
 	gchar *str;
 	gedit_view *view;
 
+	gedit_debug_mess ("F:view_changed_cb\n", DEBUG_VIEW);
 	g_return_if_fail (cbdata != NULL);
 
 	view = (gedit_view *) cbdata;
@@ -100,6 +104,8 @@ gedit_view_list_insert (gedit_view *view, gedit_data *data)
 	gchar *buffer = (guchar *)data->temp2;
 	gint position = (gint)data->temp1;
 	gint length = strlen (buffer);
+
+	gedit_debug_mess ("F:gedit_view_list_insert\n", DEBUG_VIEW);
 	
 	if (view != GE_VIEW(mdi->active_view))
 	{
@@ -131,42 +137,29 @@ gedit_view_list_insert (gedit_view *view, gedit_data *data)
 void
 view_list_erase (gedit_view *view, gedit_data *data)
 {
-	/* FIXME: I'm empty */
+	gedit_debug_mess ("F:gedit_view_list_erase. FIXME: I am empty \n", DEBUG_VIEW);
 }
 
 gint
 insert_into_buffer (gedit_document *doc, gchar *buffer, gint position)
 {
-	if ((doc->buf->len > 0)
-	    && (position < doc->buf->len)
-	    && (position))
+
+	gedit_debug_mess ("F:insert_into_buffer\n", DEBUG_VIEW);
+
+	if ((doc->buf->len > 0) && (position < doc->buf->len) && (position))
 	{
-	
-#ifdef DEBUG
-	  g_message ("g_string_insert");
-#endif
-	  doc->buf = g_string_insert (doc->buf, position, buffer);
-	
+		doc->buf = g_string_insert (doc->buf, position, buffer);
 	}
 	else if (position == 0)
 	{
-
-#ifdef DEBUG		  
-	  g_message ("g_string_prepend");
-#endif
-	  doc->buf = g_string_prepend (doc->buf, buffer);
-	  
+		gedit_debug_mess ("  pos==0, prepend\n", DEBUG_VIEW_DEEP);
+		doc->buf = g_string_prepend (doc->buf, buffer);
 	}
 	else
 	{
-	  
-#ifdef DEBUG
-	  g_message ("g_string_append");
-#endif
-	  doc->buf = g_string_append (doc->buf, buffer);
-	
+		gedit_debug_mess ("  pos!=0, append\n", DEBUG_VIEW_DEEP);
+		doc->buf = g_string_append (doc->buf, buffer);
 	}
-	
 	return 0;		
 }
 
@@ -179,19 +172,15 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	gint position = *pos;
 	gedit_document *doc;
 	gedit_data *data;
-/*	gchar buf[96]; */
-/*	gedit_view *nth_view = NULL; */
-/*	GtkWidget *text; */
-/*	GnomeMDIChild *child; */
-/*	gint n, p1, p2; */
 
+	gedit_debug_mess ("F:doc_insert_text_cb\n", DEBUG_VIEW);
+	
 	if (!view->split_screen)
 		return;
 	
 	if (view->flag == editable)
 	{
 		view->flag = NULL;
-	  
 		return;
 	}
 	
@@ -205,38 +194,20 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	
 
 	view->flag = significant_other;	
-	/*buffer = g_strdup (insertion_text);
-	
-	if (length <= 96)
-	  buffer = buf;
-	else
-	  buffer = g_new (gchar, length);*/
-	
+
 	buffer = g_new0 (guchar, length + 1);
-	  
 	strncpy (buffer, insertion_text, length);
-
 	doc = view->document;
-
 	gedit_undo_add (buffer, position, (position + length), INSERT, doc);
-
 	data = g_malloc0 (sizeof (gedit_data));
-	
 	data->temp1 = (gint*) position;
 	data->temp2 = (guchar*) buffer;
-	
 	g_list_foreach (doc->views, (GFunc) gedit_view_list_insert, data);
- 
 	gtk_text_freeze (GTK_TEXT (significant_other));
-	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length,
-				  &position);
+	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
 	gtk_text_thaw (GTK_TEXT (significant_other));
-
 	gtk_text_set_point (GTK_TEXT (significant_other), position);
-	
 	g_free (data);
-
-	/*if (length > 96)  */
 	g_free (buffer);
 }
 
@@ -250,16 +221,15 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	gchar *buffer;
 	gint n;
 
+	gedit_debug_mess ("F:doc_delete_text_cb\n", DEBUG_VIEW);
+
 	if (!view->split_screen)
 		return;
 
 	if (view->flag == editable)
 	{
-
 		view->flag = NULL;
-
 		return;
-	
 	}
 	
 	if (editable == view->text)
@@ -272,17 +242,14 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	doc = view->document;
 	buffer = gtk_editable_get_chars (GTK_EDITABLE(editable), start_pos, end_pos);
 	gedit_undo_add (buffer, start_pos, end_pos, DELETE, doc);
-
 	view->flag = significant_other;
 	gtk_text_freeze (GTK_TEXT (significant_other));
 	gtk_editable_delete_text (GTK_EDITABLE (significant_other), start_pos, end_pos);
 	gtk_text_thaw (GTK_TEXT (significant_other));
 
-	
 	for (n = 0; n < g_list_length (doc->views); n++)
 	{
 		nth_view = g_list_nth_data (doc->views, n);
-	  
 		if (nth_view != GE_VIEW(mdi->active_view))
 		{
 			/* Disconnect the signals so we can safely update the other views */
@@ -290,22 +257,18 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 					       (gint)nth_view->delete);
 			gtk_signal_disconnect (GTK_OBJECT (nth_view->split_screen),
 					       (gint)nth_view->s_delete);
-		
 			gtk_text_freeze (GTK_TEXT (nth_view->text));
 			gtk_editable_delete_text (GTK_EDITABLE (nth_view->text), start_pos, end_pos);
 			gtk_text_thaw (GTK_TEXT (nth_view->text));
-		
 			gtk_text_freeze (GTK_TEXT (nth_view->split_screen));
 			gtk_editable_delete_text (GTK_EDITABLE (nth_view->split_screen),
 						  start_pos, end_pos);
 			gtk_text_thaw (GTK_TEXT (nth_view->split_screen));
-
 			/* Reconnect the signals, now the views have been updated */
 			nth_view->delete = gtk_signal_connect (GTK_OBJECT (nth_view->text),
 							       "delete_text",
 							       GTK_SIGNAL_FUNC(doc_delete_text_cb),
 							       view);
-							                   
 			nth_view->s_delete = gtk_signal_connect (GTK_OBJECT (nth_view->split_screen),
 								 "delete_text",
 								 GTK_SIGNAL_FUNC(doc_delete_text_cb),
@@ -315,19 +278,6 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 }
 
 
-/* ---- Auto-indent Callback(s) --- */
-/*
-void
-auto_indent_toggle_cb(GtkWidget *w, gpointer cbdata)
-{
-
-	gedit_data *data = (gedit_data *)cbdata;
-
-	gedit_window_set_auto_indent (!settings->auto_indent);
-
-}
-*/
-
 gint
 auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		int *pos, gpointer cbdata)
@@ -336,9 +286,9 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	gchar *buffer, *whitespace;
 	gedit_view *view = (gedit_view *)cbdata;
 	gedit_document *doc;
-/*	gedit_data *data; */
-	
-	
+
+	gedit_debug_mess ("F:auto_indent_cb\n", DEBUG_VIEW);
+
 	if ((length != 1) || (insertion_text[0] != '\n'))
 		return FALSE;
 	if (gtk_text_get_length (GTK_TEXT (text)) <=1)
@@ -401,7 +351,6 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		gtk_text_insert (GTK_TEXT (text), NULL, NULL, NULL,
 				 whitespace, strlen (whitespace));
 	}
-	
 	g_free (whitespace);
 
 	return TRUE;
@@ -412,13 +361,14 @@ line_pos_cb (GtkWidget *widget, gedit_data *data)
 {
 	static char col [32];
 
+	gedit_debug_mess ("F:line_pos_cb\n", DEBUG_VIEW);
+
 	sprintf (col, "Column: %d",
 		 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->cursor_pos_x/6);
 
 	if (settings->show_status)
 	{
 		GnomeApp *app = gnome_mdi_get_active_window (mdi);
-
 		gnome_appbar_set_status (GNOME_APPBAR(app->statusbar), col);
 	}
 }
@@ -429,11 +379,9 @@ gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 	gedit_data *data;
 	data = g_malloc0 (sizeof (gedit_data));
 
+	gedit_debug_mess ("F:gedit_event_button_press\n", DEBUG_VIEW);
+	
 	line_pos_cb (NULL, data);
-
-#ifdef DEBUG
-	g_print ("you pressed a button\n");
-#endif
 
 	return FALSE;
 }
@@ -444,8 +392,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	gint mask;
 	gedit_data *data = g_malloc0 (sizeof (gedit_data));
 
-	if (FALSE)
-		g_print("Key event pressed :%i\n", event->keyval);
+	gedit_debug_mess ("F:gedit_event_key_press\n", DEBUG_VIEW);
 
 	line_pos_cb (NULL, NULL);
 	
@@ -494,6 +441,8 @@ gedit_view_class_init (gedit_view_class *klass)
 	
 	object_class = (GtkObjectClass *)klass;
 	/*widget_class = (GtkWidgetClass *)klass;*/
+
+	gedit_debug_mess ("F:gedit_view_class_init.\n", DEBUG_VIEW);
 	
 	gedit_view_signals[CURSOR_MOVED_SIGNAL] = gtk_signal_new ("cursor_moved",
 								  GTK_RUN_FIRST,
@@ -521,6 +470,9 @@ gedit_view_init (gedit_view *view)
 	GdkColor *bg;
 	GdkColor *fg;
 	
+
+	gedit_debug_mess ("F:gedit_view_init.\n", DEBUG_VIEW);
+
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
 	gtk_widget_show (view->vbox);
@@ -694,7 +646,9 @@ guint
 gedit_view_get_type (void)
 {
 	static guint gedit_view_type = 0;
-	
+
+	gedit_debug_mess ("F:gedit_view_get_type.\n", DEBUG_VIEW);
+
 	if (!gedit_view_type) {
 
 	  GtkTypeInfo gedit_view_info = {
@@ -718,29 +672,24 @@ GtkWidget *
 gedit_view_new (gedit_document *doc)
 {
 	gedit_view *view = gtk_type_new (gedit_view_get_type ());
-	
+
+	gedit_debug_mess ("F:gedit_view_new\n", DEBUG_VIEW);
+
 	view->document = doc;
 	
-	if (view->document->buf) {
-	
-#ifdef DEBUG
-	  	g_print ("gedit_view_init: inserting buffer..\n");
-#endif	  	
+	if (view->document->buf)
+	{
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
 				 NULL, NULL,
 				 view->document->buf->str,
 				 view->document->buf->len);
-
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
 				 NULL, NULL,
 				 view->document->buf->str,
 				 view->document->buf->len);
-
 		gedit_view_set_position (view, 0);
-
 		gtk_text_thaw (GTK_TEXT (view->text));
-		
 	}
 	
 	view->document->views = g_list_append (doc->views, view);
@@ -754,6 +703,8 @@ gedit_view_new (gedit_document *doc)
 void
 gedit_view_set_group_type (gedit_view *view, guint type)
 {
+	gedit_debug_mess ("F:gedit_view_set_group_type\n", DEBUG_VIEW);
+
 	view->group_type = type;
 	gtk_widget_queue_resize (GTK_WIDGET (view));
 }
@@ -761,6 +712,8 @@ gedit_view_set_group_type (gedit_view *view, guint type)
 void
 gedit_view_set_split_screen (gedit_view *view, gint split_screen)
 {
+	gedit_debug_mess ("F:gedit_view_set_split_screen\n", DEBUG_VIEW);
+
 	if (!view->split_parent)
 		return;
 
@@ -775,6 +728,8 @@ gedit_view_set_split_screen (gedit_view *view, gint split_screen)
 void
 gedit_view_set_word_wrap (gedit_view *view, gint word_wrap)
 {
+	gedit_debug_mess ("F:gedit_view_set_word_wrap\n", DEBUG_VIEW);
+
 	view->word_wrap = word_wrap;
 
 	gtk_text_set_word_wrap (GTK_TEXT (view->text), word_wrap);
@@ -784,8 +739,9 @@ gedit_view_set_word_wrap (gedit_view *view, gint word_wrap)
 void
 gedit_view_set_line_wrap (gedit_view *view, gint line_wrap)
 {
-	view->line_wrap = line_wrap;
+	gedit_debug_mess ("F:gedit_view_set_line_wrap\n", DEBUG_VIEW);
 
+	view->line_wrap = line_wrap;
 	gtk_text_set_line_wrap (GTK_TEXT (view->text), view->line_wrap);
 }
 
@@ -794,6 +750,8 @@ gedit_view_set_read_only (gedit_view *view, gint read_only)
 {
 	gchar RO_label[255];
 
+	gedit_debug_mess ("F:gedit_view_set_read_only\n", DEBUG_VIEW);
+	
 	view->read_only = read_only;
 	gtk_text_set_editable (GTK_TEXT (view->text), !view->read_only);
 	
@@ -822,6 +780,8 @@ void
 gedit_view_set_font (gedit_view *view, gchar *font)
 {
 	GtkStyle *style;
+
+	gedit_debug_mess ("F:gedit_view_set_font\n", DEBUG_VIEW);
 	
 	style = gtk_style_copy(gtk_widget_get_style (GTK_WIDGET((view)->text)));
   	gdk_font_unref (style->font);
@@ -842,28 +802,32 @@ gedit_view_set_font (gedit_view *view, gchar *font)
 void
 gedit_view_set_position (gedit_view *view, gint pos)
 {
-	gtk_text_set_point (GTK_TEXT (view->text), pos);
+	gedit_debug_mess ("F:gedit_view_set_position\n", DEBUG_VIEW);
 
+	gtk_text_set_point (GTK_TEXT (view->text), pos);
 	gtk_text_set_point (GTK_TEXT (view->split_screen), pos);
 }
 
 guint
 gedit_view_get_position (gedit_view *view)
 {
+	gedit_debug_mess ("F:gedit_view_get_position\n", DEBUG_VIEW);
 	return gtk_text_get_point (GTK_TEXT (view->text));
 }
 
 guint
 gedit_view_get_length (gedit_view *view)
 {
+	gedit_debug_mess ("F:gedit_view_get_length\n", DEBUG_VIEW);
 	return gtk_text_get_length (GTK_TEXT (view->text));
 }
 
 void
 gedit_view_set_selection (gedit_view *view, gint start, gint end)
 {
-	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
+	gedit_debug_mess ("F:gedit_view_set_seletion\n", DEBUG_VIEW);
 	
+	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
 	gtk_editable_select_region (GTK_EDITABLE (view->text), start, end);
 }
 
@@ -874,6 +838,8 @@ gedit_view_buffer_sync (gedit_view *view)
 	gchar *buf;
 	gedit_document *doc = view->document;
 
+	gedit_debug_mess ("F:gedit_view_buffer_sync\n", DEBUG_VIEW);
+	
 	buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (view->text),
 						0, gedit_view_get_length (view)));
 
@@ -887,6 +853,8 @@ gedit_view_refresh (gedit_view *view)
 {
 	gint i = gedit_view_get_length (view);
 
+	gedit_debug_mess ("F:gedit_view_refresh\n", DEBUG_VIEW);
+
 	if (i > 0)
 	{
 		gedit_view_set_position (view, i);
@@ -896,9 +864,8 @@ gedit_view_refresh (gedit_view *view)
 
 	if (view->document->buf)
 	{
-#ifdef DEBUG
-	  	g_print ("gedit_view_refresh: inserting buffer..\n");
-#endif	  	
+		gedit_debug_mess ("F:gedit_view_refresh - Insering buffer \n", DEBUG_VIEW_DEEP);
+
 	  	gtk_text_freeze (GTK_TEXT (view->text));
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
 				 NULL,
@@ -914,59 +881,3 @@ gedit_view_refresh (gedit_view *view)
 		gedit_view_set_position (view, 0);
 	}
 }
-
-
-/* These functionis are defined but not used */
-#if 0
-static void
-gedit_view_realize (GtkWidget *w)
-{
-	if (GTK_WIDGET_CLASS (parent_class)->realize)
-				(* GTK_WIDGET_CLASS(parent_class)->realize)(w);  	
-}
-
-static void
-gedit_view_finalize (GtkObject *o)
-{
-		if (GTK_OBJECT_CLASS(parent_class)->finalize)
-			(* GTK_OBJECT_CLASS(parent_class)->finalize)(o);
-}
-
-static gint
-gedit_view_expose (GtkWidget *w, GdkEventExpose *event)
-{
-	if (GTK_WIDGET_CLASS (parent_class)->expose_event)
-		(* GTK_WIDGET_CLASS (parent_class)->expose_event)(w,event);
-	
-	return TRUE;
-}
-
-static void
-gedit_view_size_allocate (GtkWidget *w, GtkAllocation *alloc)
-{
-	gedit_view *view = GE_VIEW (w);
-	GtkAllocation my_alloc;
-	
-	w->allocation = *alloc;
-	
-	if (GTK_WIDGET_REALIZED (w))
-	  gdk_window_move_resize (w->window, alloc->x, alloc->y,
-	  						alloc->width, alloc->height);
-	
-
-	my_alloc.x = 1;
-	my_alloc.y = 1;
-	my_alloc.height = alloc->height - 2;
-	my_alloc.width = alloc->width - 2;
-	gtk_widget_size_allocate (view->vbox, &my_alloc);
-}
-
-static void
-gedit_view_size_request (GtkWidget *w, GtkRequisition *req)
-{
-/*	gedit_view *view = GE_VIEW (w); */
-/*	GtkRequisition sb_req; */
-	
-	GTK_WIDGET_CLASS (parent_class)->size_request(w, req);
-}
-#endif /* #if 0 */

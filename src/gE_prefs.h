@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
@@ -21,9 +22,9 @@
 
 typedef struct _gedit_preference gedit_preference;
 
-struct _gedit_preference {
-
-	guint auto_indent;
+struct _gedit_preference
+{
+guint auto_indent;
 	gint  word_wrap;
 	gint  show_tabs;
 	gint  tab_pos;

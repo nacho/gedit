@@ -28,4 +28,18 @@ void gedit_set_title (gedit_document *doc);
 void gedit_flash     (gchar *msg);
 void gedit_flash_va  (gchar *format, ...);
 
+/* DEBUGING tools */ 
+typedef enum {
+  DEBUG_UNDOREDO,
+  DEBUG_PLUGINS,
+  DEBUG_VIEW,
+  DEBUG_VIEW_DEEP
+} gedit_debug_modes;
+
+void gedit_debug_mess( gchar * message, gint type );
+
 #endif /* __GEDIT_UTILS_H__ */
+
+
+
+

@@ -82,3 +82,23 @@ gedit_flash_va (gchar *format, ...)
 	gedit_flash (msg);
 	g_free (msg);
 }
+
+/**
+ * gedit_debug_mess:
+ * @msg: Message to flash on the statusbar
+ *
+ * Flash a temporary message on the statusbar of gedit.
+ */
+void gedit_debug_mess( gchar * message, gint type )
+{
+     g_print( message);
+}
+
+
+
+
+
+
+
+
+

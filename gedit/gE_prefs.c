@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* vi:set ts=8 sts=0 sw=8:
  *
  * gEdit
@@ -97,24 +98,23 @@ gedit_load_settings (void)
 
 	 
 	settings->font = gnome_config_get_string ("font");
-	if (settings->font == NULL) {
-	
+	if (settings->font == NULL)
+	{
 		if (use_fontset)
 			settings->font = DEFAULT_FONTSET;
 		else
 			settings->font = DEFAULT_FONT;
-	
 	}
 	
 	settings->print_cmd = gnome_config_get_string ("print command=lpr %s"); 
-
 
 	if (settings->run)
 	{
 		if (mdi->active_window && !settings->show_status)
 			gtk_widget_hide (GTK_WIDGET (GNOME_APP(mdi->active_window)->statusbar));
 	}
-	else {
+	else
+	{
 		settings->show_status = TRUE;
 		gnome_config_set_int ("show statusbar",
 				      (gboolean) settings->show_status);
@@ -123,3 +123,13 @@ gedit_load_settings (void)
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 }
+
+
+
+
+
+
+
+
+
+
