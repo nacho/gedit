@@ -75,9 +75,9 @@ static toolbar_data_t toolbar_data[] = {
 		(GtkSignalFunc)edit_paste_cb },
 	{ " Search ", "Search for text", "Toolbar/Search", tb_search_xpm,
 		(GtkSignalFunc)search_cb },
-	{ " SPACE ", NULL, NULL, NULL, NULL },
+	/*{ " SPACE ", NULL, NULL, NULL, NULL },
 	{ " Prefs ", "Preferences", "Toolbar/Prefs", tb_prefs_xpm,
-		(GtkSignalFunc)gE_prefs_dialog },
+		(GtkSignalFunc)gE_prefs_dialog },*/
 	{ " SPACE ", NULL, NULL, NULL, NULL },
 	{ " Quit ", "Quit", "Toolbar/Quit", tb_exit_xpm,
 		(GtkSignalFunc)file_quit_cb },
@@ -108,9 +108,9 @@ static toolbar_data_t toolbar_data[] = {
 	{ N_(" Search "), N_("Search for text"), "Toolbar/Search",
 		GNOME_STOCK_PIXMAP_SEARCH, (GtkSignalFunc)search_cb },
 		{ " SPACE ", NULL, NULL, NULL, NULL },
-	{ N_(" Prefs "), N_("Preferences"), "Toolbar/Prefs",
+/*	{ N_(" Prefs "), N_("Preferences"), "Toolbar/Prefs",
 		GNOME_STOCK_PIXMAP_PREFERENCES, (GtkSignalFunc)gE_prefs_dialog },
-	{ " SPACE ", NULL, NULL, NULL, NULL },
+	{ " SPACE ", NULL, NULL, NULL, NULL },*/
 	{ N_(" Quit "), N_("Quit"), "Toolbar/Quit",
 		GNOME_STOCK_PIXMAP_EXIT, (GtkSignalFunc)file_quit_cb },
 	{ NULL, NULL, NULL, NULL, NULL }
