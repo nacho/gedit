@@ -35,6 +35,7 @@ typedef struct
   void (*show) ( gint id );
   gchar* (*filename) ( gint id );
   gint (*current) ( gint context );
+  void (*close) ( gint id );
 } plugin_document_callbacks;
 
 typedef struct

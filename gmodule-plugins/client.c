@@ -84,6 +84,15 @@ send_physical_block( gchar *buffer, gint length, gint fd )
   return;
 }
 
+static void
+sendcommand( gchar command, gint fd )
+{
+  send_physical_block( &command, sizeof( command ), fd );
+#ifdef DEBUG
+  printf( "From: %c\n", command );
+#endif
+}
+
 static int
 getnumber( int fd )
 {
@@ -163,20 +172,10 @@ gint client_init( gint *argc, gchar **argv[], client_info *info )
     {
       if( info->menu_location )
 	{
-	  write( fdsend, "r", 1 );
-#ifdef DEBUG
-	  printf( "From: r\n" );
-#endif
-	  sendnumber( fdsend, strlen( info->menu_location ) );
-	  write( fdsend, info->menu_location, strlen( info->menu_location ) );
-#ifdef DEBUG
-	  printf( "From: %s\n", info->menu_location );
-#endif	  
+	  sendcommand( 'r', fdsend );
+	  sendblock( fdsend, info->menu_location, strlen( info->menu_location ) );
 	}
-      write( fdsend, "d", 1 );
-#ifdef DEBUG
-      printf( "From: d\n" );
-#endif
+      sendcommand( 'd', fdsend );
       exit( 0 );
     }
   argv[4] = argv[0];
@@ -188,10 +187,7 @@ gint client_init( gint *argc, gchar **argv[], client_info *info )
 
 gint client_document_current( gint context )
 {
-#ifdef DEBUG
-  printf( "From: c\n" );
-#endif
-  write( fdsend, "c", 1 );
+  sendcommand( 'c', fdsend );
   sendnumber( fdsend, context );
   return getnumber( fddata );
 }
@@ -199,94 +195,62 @@ gint client_document_current( gint context )
 gchar *client_document_filename( gint docid )
 {
   gchar *filename;
-  gint length;
-#ifdef DEBUG
-  printf( "From: f\n" );
-#endif
-  write( fdsend, "f", 1 );
+  sendcommand( 'f', fdsend );
   sendnumber( fdsend, docid );
-  length = getnumber( fddata );
-  filename = g_malloc0( length + 1 );
-  filename[ read( fddata, filename, length ) ] = 0;
-#ifdef DEBUG
-  printf( "To: %s\n", filename );
-#endif
+  filename = getblock( fddata );
   return filename;
 }
 
 gint client_document_new( gint context, gchar *title )
 {
-#ifdef DEBUG
-  printf( "From: n\n" );
-#endif
-  write( fdsend, "n", 1 );
+  sendcommand( 'n', fdsend );
   sendnumber( fdsend, context );
-  sendnumber( fdsend, strlen( title ) );
-  write( fdsend, title, strlen( title ) );
-#ifdef DEBUG
-  printf( "From: %s\n", title );
-#endif
+  sendblock( fdsend, title, strlen( title ) );
   return getnumber( fddata );
 }
 
 gint client_document_open( gint context, gchar *title )
 {
-#ifdef DEBUG
-  printf( "From: o\n" );
-#endif
-  write( fdsend, "o", 1 );
+  sendcommand( 'o', fdsend );
   sendnumber( fdsend, context );
-  sendnumber( fdsend, strlen( title ) );
-  write( fdsend, title, strlen( title ) );
-#ifdef DEBUG
-  printf( "From: %s\n", title );
-#endif
+  sendblock( fdsend, title, strlen( title ) );
   return getnumber( fddata );
+}
+
+void client_document_close( gint docid )
+{
+  sendcommand( 'l', fdsend );
+  sendnumber( fdsend, docid );
 }
 
 void client_text_append( gint docid, gchar *buff, gint length )
 {
-#ifdef DEBUG
-  printf( "From: a\n" );
-#endif
-  write( fdsend, "a", 1 );
+  sendcommand( 'a', fdsend );
   sendnumber( fdsend, docid );
   sendblock( fdsend, buff, length );
 }
 
 gchar *client_text_get( gint docid )
 {
-#ifdef DEBUG
-  printf( "From: g\n" );
-#endif
-  write( fdsend, "g", 1 );
+  sendcommand( 'g', fdsend );
   sendnumber( fdsend, docid );
   return getblock( fddata );
 }
 
 void client_document_show( gint docid )
 {
-#ifdef DEBUG
-  printf( "From: s\n" );
-#endif
-  write( fdsend, "s", 1 );
+  sendcommand( 's', fdsend );
   sendnumber( fdsend, docid );
 }
 
 void client_finish( gint context )
 {
-#ifdef DEBUG
-  printf( "From: d\n" );
-#endif
-  write( fdsend, "d", 1 );
+  sendcommand( 'd', fdsend );
 }
 
 /* Returns true if program actually quit. */
 gboolean client_program_quit()
 {
-#ifdef DEBUG
-  printf( "From: q\n" );
-#endif
-  write( fdsend, "q", 1 );
+  sendcommand( 'q', fdsend );
   return getbool( fddata );
 }

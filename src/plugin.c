@@ -12,14 +12,14 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  */
-#include <stdio.h>
+#include "plugin.h"
 #include <unistd.h>
+#include <gtk/gtk.h>
 #include <string.h>
+#include <stdio.h>
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <dirent.h>
-#include <gtk/gtk.h>
-#include "plugin.h"
 
 static void process_command( plugin *plug, gchar *buffer, int length, gpointer data );
 
@@ -164,27 +164,28 @@ plugin *plugin_new_with_param( gchar *plugin_name, int argc, gchar *arg[] )
 
 void plugin_query_all( plugin_callback_struct *callbacks )
 {
-	DIR *dir = opendir( PLUGINDIR );
-	struct dirent *direntry;
-	gchar *shortname;
+  DIR *dir = opendir( PLUGINDIR );
+  struct dirent *direntry;
+  gchar *shortname;
 
-	if (dir) {
-		while ((direntry = readdir(dir)))
-		{
-			plugin *plug;
-			if ( strrchr( direntry->d_name, '/' ) )
-				shortname = strrchr( direntry->d_name, '/' ) + 1;
-			else
-				shortname = direntry->d_name;     
-			if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) )
-			{
-				plug = plugin_query( direntry->d_name );
-				plug->callbacks = *callbacks;
-				plugin_get_all( plug, 1, process_command, NULL );
-			}
-		}
-		closedir( dir );
+  if ( dir )
+    {
+      while ( ( direntry = readdir( dir ) ) )
+	{
+	  plugin *plug;
+	  if ( strrchr( direntry->d_name, '/' ) )
+	    shortname = strrchr( direntry->d_name, '/' ) + 1;
+	  else
+	    shortname = direntry->d_name;     
+	  if ( strcmp( shortname, "." ) && strcmp( shortname, ".." ) )
+	    {
+	      plug = plugin_query( direntry->d_name );
+	      plug->callbacks = *callbacks;
+	      plugin_get_all( plug, 1, process_command, NULL );
+	    }
 	}
+      closedir( dir );
+    }
 }
 
 void plugin_finish( plugin *the_plugin )
@@ -433,7 +434,14 @@ process_next( plugin *plug, gchar *buffer, int length, gpointer data )
 	}
       plugin_get_all( plug, 1, process_command, NULL );
       break;
-     }
+    case 17:
+      if ( plug->callbacks.document.close )
+	{	
+	  plug->callbacks.document.close( *( (int *) buffer ) );
+	}
+      plugin_get_all( plug, 1, process_command, NULL );
+      break;  
+    }
 }
 
 static void
@@ -462,7 +470,10 @@ process_command( plugin *plug, gchar *buffer, int length, gpointer data )
     case 'g': /* get */ /* Get docid */
       plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 8 ) );
       break;
-    case 'd':
+    case 'l':
+      plugin_get_all( plug, sizeof( int ), process_next, GINT_TO_POINTER( 17 ) );
+      break;
+    case 'd': /* done */
       plugin_finish( plug );
       g_free( plug );
       break;

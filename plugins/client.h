@@ -37,6 +37,7 @@ gint client_document_current( gint context );
 gchar *client_document_filename( gint docid );
 gint client_document_new( gint context, gchar *title );
 gint client_document_open( gint context, gchar *title );
+void client_document_close( gint docid );
 void client_text_append( gint docid, gchar *buff, gint length );
 void client_document_show( gint docid );
 void client_finish( gint context );
