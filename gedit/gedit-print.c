@@ -228,7 +228,6 @@ get_print_dialog (GeditPrintJobInfo *pji)
 	gtk_window_set_transient_for (GTK_WINDOW (dialog),
 				      GTK_WINDOW (gedit_get_active_window ()));
 
-	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE); 
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
 
@@ -479,8 +478,6 @@ gedit_print_real (GeditPrintJobInfo *pji,
 	}
 }
 
-
-
 void 
 gedit_print_preview (GeditDocument *doc)
 {
@@ -588,3 +585,4 @@ gedit_print_job_info_new (GeditDocument* doc)
 
 	return pji;
 }
+
