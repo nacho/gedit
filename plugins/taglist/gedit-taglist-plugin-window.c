@@ -435,7 +435,10 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 {
 	GeditView *view;
 	GeditDocument *doc;
-	gint cursor;
+	gint cursor = 0;
+	gint start;
+	gint end;
+	gboolean sel;
 	
 	gedit_debug (DEBUG_PLUGINS, "");
 	
@@ -449,18 +452,42 @@ insert_tag (Tag *tag, gboolean focus_to_document)
 	doc = gedit_view_get_document (view);
 	g_return_if_fail (doc != NULL);
 	
+	sel = gedit_document_get_selection (doc, &start, &end);
+	
 	gedit_document_begin_user_action (doc);
 	
 	if (tag->begin != NULL)
-		gedit_document_insert_text_at_cursor (doc, tag->begin, -1);
-	
-	cursor = gedit_document_get_cursor (doc);
+	{
+		if (sel)
+		{	
+			gedit_document_insert_text (doc, start, tag->begin, -1);
+
+			start += g_utf8_strlen (tag->begin, -1);
+			end += g_utf8_strlen (tag->begin, -1);
+		}
+		else
+		{
+			gedit_document_insert_text_at_cursor (doc, tag->begin, -1);
+			cursor = gedit_document_get_cursor (doc);
+		}
+	}
 	
 	if (tag->end != NULL)
-		gedit_document_insert_text_at_cursor (doc, tag->end, -1);
+	{
+		if (sel)
+		{
+			gedit_document_insert_text (doc, end, tag->end, -1);
+		}
+		else
+		{
+			gedit_document_insert_text_at_cursor (doc, tag->end, -1);
+			gedit_document_set_cursor (doc, cursor);
+		}
+	}
+
+	if (sel)
+		gedit_document_set_selection (doc, start, end);
 	
-	gedit_document_set_cursor (doc, cursor);
-	 
 	gedit_document_end_user_action (doc);
 
 	if (focus_to_document)
@@ -474,6 +501,12 @@ static gboolean
 tag_list_window_key_press_event_cb (GtkTreeView *tag_list, GdkEventKey *event)
 {
 	if ((event->keyval == 'w') && (event->state & GDK_CONTROL_MASK))
+	{
+		taglist_window_close ();
+		return TRUE;
+	}
+
+	if ((event->keyval == GDK_F8) && (event->state & GDK_SHIFT_MASK))
 	{
 		taglist_window_close ();
 		return TRUE;
