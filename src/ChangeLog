@@ -1,5 +1,16 @@
 2002-09-05  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-prefs-manager.[ch] (gedit_prefs_manager_save_window_size_and_state): new
+	function
+
+	* gedit-mdi.c (gedit_mdi_app_destroy_handler): use gedit_prefs_manager_save_window_size_and_state
+	(gedit_window_prefs_save): check if the prefs can be set before setting them
+
+	* gedit-file.c (gedit_file_exit): save the active window size and state if needed. Fixes
+	bug #90986
+
+2002-09-05  Paolo Maggi  <maggi@athena.polito.it>
+
 	* bonobo-mdi.c (app_close_book): give focus to the window before closing it.
 	(toplevel_focus): returns immediately if win == active_window
 	

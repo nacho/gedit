@@ -391,24 +391,12 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 static void
 gedit_mdi_app_destroy_handler (BonoboMDI *mdi, BonoboWindow *window)
 {
-	const BonoboMDIWindowInfo *window_info;
-
 	gedit_debug (DEBUG_MDI, "");
 	
 	g_return_if_fail (window != NULL);
 	g_return_if_fail (BONOBO_IS_WINDOW (window));
 
-	window_info = bonobo_mdi_get_window_info (window);
-	g_return_if_fail (window_info != NULL);
-	
-	if (gedit_prefs_manager_window_height_can_set ())
-		gedit_prefs_manager_set_window_height (window_info->height);
-
-	if (gedit_prefs_manager_window_width_can_set ())
-		gedit_prefs_manager_set_window_width (window_info->width);
-
-	if (gedit_prefs_manager_window_state_can_set ())
-		gedit_prefs_manager_set_window_state (window_info->state);
+	gedit_prefs_manager_save_window_size_and_state (window);
 }
 
 static void
@@ -1226,22 +1214,27 @@ gedit_window_prefs_save (GeditWindowPrefs *prefs)
 
 	g_return_if_fail (prefs != NULL);
 
-	if (prefs->toolbar_visible != gedit_prefs_manager_get_toolbar_visible ())
+	if ((prefs->toolbar_visible != gedit_prefs_manager_get_toolbar_visible ()) &&
+	     gedit_prefs_manager_toolbar_visible_can_set ())
 		gedit_prefs_manager_set_toolbar_visible (prefs->toolbar_visible);
 
-	if (prefs->toolbar_buttons_style != gedit_prefs_manager_get_toolbar_buttons_style ())
+	if ((prefs->toolbar_buttons_style != gedit_prefs_manager_get_toolbar_buttons_style ()) &&
+	    gedit_prefs_manager_toolbar_buttons_style_can_set ())
 		gedit_prefs_manager_set_toolbar_buttons_style (prefs->toolbar_buttons_style);
 
-	if (prefs->statusbar_visible != gedit_prefs_manager_get_statusbar_visible ())
+	if ((prefs->statusbar_visible != gedit_prefs_manager_get_statusbar_visible ()) &&
+	    gedit_prefs_manager_get_statusbar_visible ())
 		gedit_prefs_manager_set_statusbar_visible (prefs->statusbar_visible);
 
-	if (prefs->statusbar_show_cursor_position != 
-			gedit_prefs_manager_get_statusbar_show_cursor_position ())
+	if ((prefs->statusbar_show_cursor_position != 
+			gedit_prefs_manager_get_statusbar_show_cursor_position ()) &&
+	    gedit_prefs_manager_statusbar_show_cursor_position_can_set ())
 		gedit_prefs_manager_set_statusbar_show_cursor_position (
 				prefs->statusbar_show_cursor_position);
 
-	if (prefs->statusbar_show_overwrite_mode != 
-			gedit_prefs_manager_get_statusbar_show_overwrite_mode ())
+	if ((prefs->statusbar_show_overwrite_mode != 
+			gedit_prefs_manager_get_statusbar_show_overwrite_mode ()) &&
+	    gedit_prefs_manager_statusbar_show_overwrite_mode_can_set ())
 		gedit_prefs_manager_set_statusbar_show_overwrite_mode (
 				prefs->statusbar_show_overwrite_mode);
 }

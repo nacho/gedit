@@ -528,10 +528,17 @@ gedit_file_close_all (void)
 void
 gedit_file_exit (void)
 {
+	BonoboWindow *active_window;
+	
 	gedit_debug (DEBUG_FILE, "");
 	
 	if (!gedit_file_close_all ())
 		return;
+
+	active_window = gedit_get_active_window ();
+
+	if (active_window != NULL)
+		gedit_prefs_manager_save_window_size_and_state (active_window);
 
 	gedit_debug (DEBUG_FILE, "All files closed.");
 	

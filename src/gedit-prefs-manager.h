@@ -34,6 +34,8 @@
 #include <gtk/gtkenums.h>
 #include <glib/gslist.h>
 
+#include <bonobo/bonobo-window.h>
+
 #define GEDIT_BASE_KEY	"/apps/gedit-2"
 
 typedef enum {
@@ -213,6 +215,8 @@ gint		 	 gedit_prefs_manager_get_window_width		(void);
 gint		 	 gedit_prefs_manager_get_default_window_width	(void);
 void 			 gedit_prefs_manager_set_window_width		(gint ww);
 gboolean		 gedit_prefs_manager_window_width_can_set	(void);
+
+void			 gedit_prefs_manager_save_window_size_and_state (BonoboWindow *window);
 
 /* Encodings */
 GSList const		*gedit_prefs_manager_get_encodings		(void);
