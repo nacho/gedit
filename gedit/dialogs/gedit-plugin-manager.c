@@ -252,30 +252,32 @@ plugin_manager_populate_lists (GeditPluginManager *dialog)
 	const GList *plugins;
 	GtkListStore *model;
 	GtkTreeIter iter;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	plugins = dialog->plugins;
 
 	model = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (dialog->tree)));
 
-	while (plugins) {
+	while (plugins)
+	{
 		GeditPluginInfo *info;
 		info = (GeditPluginInfo *)plugins->data;
 
 		gtk_list_store_append (model, &iter);
-		gtk_list_store_set (model, &iter, NAME_COLUMN, info,
-				    ACTIVE_COLUMN,(info->state == GEDIT_PLUGIN_ACTIVATED),
+		gtk_list_store_set (model, &iter,
+				    NAME_COLUMN, info,
+				    ACTIVE_COLUMN, (info->state == GEDIT_PLUGIN_ACTIVATED),
 				    -1);
 
 		plugins = plugins->next;
 	}
 
-	if (gtk_tree_model_get_iter_root (GTK_TREE_MODEL (model), &iter))
+	if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (model), &iter))
 	{
 		GtkTreeSelection *selection;
 		GeditPluginInfo* info;
-		
+
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->tree));
 		g_return_if_fail (selection != NULL);
 		gtk_tree_selection_select_iter (selection, &iter);
@@ -335,7 +337,6 @@ plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model)
 	plugin_manager_set_active (iter, model, active);
 }
 
-
 static GeditPluginInfo *
 plugin_manager_get_selected_plugin (GeditPluginManager *dialog)
 {
@@ -375,7 +376,7 @@ plugin_manager_toggle_all (GeditPluginManager *dialog)
 
 	g_return_if_fail (model != NULL);
 
-	gtk_tree_model_get_iter_root (model, &iter);
+	gtk_tree_model_get_iter_first (model, &iter);
 
 	do {
 		plugin_manager_set_active (&iter, model, active);		
