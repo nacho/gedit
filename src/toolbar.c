@@ -285,13 +285,11 @@ tb_on_cb(GtkWidget *w, gpointer cbwindow)
 /*	if (window->files_list_window_toolbar &&
 		!GTK_WIDGET_VISIBLE(window->files_list_window_toolbar))
 		gtk_widget_show(window->files_list_window_toolbar);*/
-
+/*
 #ifndef WITHOUT_GNOME
-	/*if (!GTK_WIDGET_VISIBLE (GNOME_APP(window)->toolbar))*/
-	/*if (window-*/
 		gtk_widget_show (GNOME_APP(window->window)->toolbar->parent);
 #endif
-
+*/
 	window->have_toolbar = TRUE;
 
 }
@@ -318,15 +316,12 @@ tb_off_cb(GtkWidget *w, gpointer cbwindow)
 /*	if (window->files_list_window_toolbar &&
 		GTK_WIDGET_VISIBLE(window->files_list_window_toolbar))
 		gtk_widget_hide(window->files_list_window_toolbar);*/
-
+/*
 #ifndef WITHOUT_GNOME
-	/*
-	 * This is a bit of a hack to get the entire toolbar to disappear
-	 * instead of just the buttons
-	 */
 	if (GTK_WIDGET_VISIBLE (GNOME_APP(window->window)->toolbar->parent))
 		gtk_widget_hide (GNOME_APP(window->window)->toolbar->parent);
 #endif
+*/
 	window->have_toolbar = FALSE;
 }
 

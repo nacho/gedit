@@ -61,8 +61,8 @@ static GtkMenuEntry menu_items[] =
 	{"<Main>/File/Close All", NULL,
 		file_close_all_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/File/<separator>", NULL, NULL, NULL},
-	{"<Main>/File/Recent Documents/", NULL, NULL},
-	{"<Main>/File/<separator>", NULL, NULL, NULL},
+/*	{"<Main>/File/Recent Documents/", NULL, NULL},
+	{"<Main>/File/<separator>", NULL, NULL, NULL},*/
 	{"<Main>/File/Quit", "<control>Q",
 		file_quit_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Edit/Cut", "<control>X",
@@ -74,8 +74,10 @@ static GtkMenuEntry menu_items[] =
 	{"<Main>/Edit/<separator>", NULL, NULL, NULL},
 	{"<Main>/Edit/Select All", "<control>A",
 		edit_selall_cb, (gpointer)GE_DATA, NULL},
-	{"<Main>/Search/Search...", NULL,
+	{"<Main>/Search/Search For Text...", NULL,
 		search_cb, (gpointer)GE_DATA, NULL},
+	{"<Main>/Search/Search For Line...", NULL,
+		goto_line_cb, (gpointer) GE_WINDOW, NULL},
 	{"<Main>/Search/Search and Replace...", NULL,
 		search_replace_cb, (gpointer)GE_DATA, NULL},
 	{"<Main>/Search/Search Again", NULL,
@@ -298,9 +300,10 @@ GnomeUIInfo gedit_tab_menu []= {
 };
 
 GnomeUIInfo gedit_toolbar_menu []= {
-	{GNOME_APP_UI_ITEM, N_("Show Toolbar"), NULL, tb_on_cb, (gpointer) GE_WINDOW, NULL },
+/*	{GNOME_APP_UI_ITEM, N_("Show Toolbar"), NULL, tb_on_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_ITEM, N_("Hide Toolbar"), NULL, tb_off_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_SEPARATOR},
+*/
 	{GNOME_APP_UI_ITEM, N_("Pictures and Text"), NULL, tb_pic_text_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_ITEM, N_("Pictures only"), NULL, tb_pic_only_cb, (gpointer) GE_WINDOW, NULL },
 	{GNOME_APP_UI_ITEM, N_("Text only"), NULL, tb_text_only_cb, (gpointer) GE_WINDOW, NULL },
@@ -412,8 +415,8 @@ void gE_menus_init (gE_window *window, gE_data *data)
 	remove_callback_data (gedit_help_menu, window, data);
 
 	/* Decrease the padding along the menubar */
-	gtk_container_border_width (GTK_CONTAINER (
-		GTK_WIDGET (GTK_WIDGET (GNOME_APP (window->window)->menubar)->parent)->parent), 0);
+	/*gtk_container_border_width (GTK_CONTAINER (
+		GTK_WIDGET (GTK_WIDGET (GNOME_APP (window->window)->menubar)->parent)->parent), 0);*/
 }
 
 
