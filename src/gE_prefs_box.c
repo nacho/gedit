@@ -76,6 +76,7 @@ typedef struct _gE_prefs_data {
 } gE_prefs_data;
 
 static gE_prefs_data *prefs;
+static gE_Prop_Box *pbox;
 
 void cancel()
 {
@@ -193,20 +194,22 @@ static GtkWidget *general_page_new()
 {
   GtkWidget *vbox, *hbox;
 
-
+printf("gpn...\n");
   vbox = gtk_vbox_new(FALSE, 0);
-  /*gtk_container_border_width (GTK_CONTAINER (vbox), 10);*/
+  gtk_container_border_width (GTK_CONTAINER (vbox), 10);
   gtk_widget_show (vbox);
-  
+  printf("gpn..2.\n");
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
   gtk_widget_show(hbox);
-  
-  prefs->autoindent = gtk_check_button_new_with_label (N_("Autoindent"));
+  printf("gpn..3.\n");
+/*  prefs->autoindent = gtk_check_button_new_with_label ("Autoindent");
+  printf("gpn..3.1.\n");
   gtk_box_pack_start(GTK_BOX(hbox), prefs->autoindent, TRUE, TRUE, 0);
-  gtk_widget_show (prefs->autoindent);
-  
+    printf("gpn..3.2.\n");
+  gtk_widget_show (prefs->autoindent);*/
+  printf("gpn..4.\n");
   hbox = gtk_hbox_new(FALSE, 0);
   gtk_container_border_width(GTK_CONTAINER(hbox), 10);
   gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
@@ -387,11 +390,11 @@ void apply_close(gE_data *data)
 
 }
 
-void gE_property_box_new(GtkWidget *widget, gpointer cbdata)
+void gE_property_box_new(gE_data *data)
 {
   GtkWidget *hbox, *vbox, *label;
-  gE_Prop_Box *pbox;
-  gE_data *data = (gE_data *)cbdata;
+
+
  
   printf(".\n");
   pbox = g_malloc(sizeof(gE_Prop_Box));
@@ -414,30 +417,31 @@ printf(".!.\n");
 	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
 	gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 	gtk_widget_show(hbox);
-
+ printf("..\n");
   pbox->notebook = gtk_notebook_new();
   gtk_box_pack_start(GTK_BOX(hbox), pbox->notebook, TRUE, TRUE, 0);
-  gtk_widget_show (pbox->notebook);
- 
- 
+/*  gtk_widget_show (pbox->notebook);
+ */
+  printf("..\n");
   /* General Settings */
   label = gtk_label_new ("General");
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
-                                           general_page_new(), label);
-
+                                         general_page_new(), label);
+ printf(".t.\n");
   /* Print Settings */
   label = gtk_label_new ("Print");
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
-                                           print_page_new(), label);
-                                             
+                               print_page_new(), label);
+ printf("e..\n");                                             
   /* Font Settings */
   label = gtk_label_new ("Font");
   gtk_notebook_append_page ( GTK_NOTEBOOK (pbox->notebook),
                                            font_page_new(), label);
-   
+ gtk_widget_show (pbox->notebook);
+  printf("..e\n");  
   get_prefs(data); 
  
- 
+  printf("ARGH\n");
  
  	hbox = gtk_hbox_new(FALSE, 10);
 	gtk_container_border_width(GTK_CONTAINER(hbox), 10);
@@ -490,10 +494,15 @@ void properties_modified (GtkWidget *widget, GnomePropertyBox *pbox)
 
 void gE_prefs_dialog(GtkWidget *widget, gpointer cbdata)
 {
+#ifndef WITHOUT_GNOME
   GtkWidget *label;
+#endif
   
   gE_data *data = (gE_data *)cbdata;
   
+  #ifdef WITHOUT_GNOME
+    gE_property_box_new (data);
+  #endif
 #ifndef WITHOUT_GNOME
   if (prefs)
     {
