@@ -105,9 +105,7 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 	gtk_widget_grab_focus (view->text);
 	gedit_document_set_title (view->doc);
 
-	/*
-	view->gnome_app = gedit_window_active_app();
-	*/
+	view->app = gedit_window_active_app();
 	
 	gedit_view_load_toolbar_widgets (view);
 	if (g_list_length(doc->undo) == 0)
@@ -120,7 +118,7 @@ gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
 		redo_state = GEDIT_UNDO_STATE_TRUE;
 	gedit_view_set_undo (view, undo_state, redo_state);
 	gedit_view_set_undo (view, GEDIT_UNDO_STATE_REFRESH, GEDIT_UNDO_STATE_REFRESH);
-
+	gnome_app_install_menu_hints(view->app, gnome_mdi_get_child_menu_info(view->app));
 	gedit_debug ("end", DEBUG_DOCUMENT);
 }
 
@@ -438,25 +436,27 @@ gedit_view_init (View *view)
 
 	view->vbox = gtk_vbox_new (TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (view), view->vbox);
-	gtk_widget_show (view->vbox);
 	
 	/* create our paned window */
+#ifdef ENABLE_SPLIT_SCREEN
 	view->pane = gtk_vpaned_new ();
 	gtk_box_pack_start (GTK_BOX (view->vbox), view->pane, TRUE, TRUE, 0);
 	gtk_paned_set_handle_size (GTK_PANED (view->pane), 10);
 	gtk_paned_set_gutter_size (GTK_PANED (view->pane), 10);
-	gtk_widget_show (view->pane);
-	
+
+	gtk_paned_pack1 (GTK_PANED (view->pane), view->window, TRUE, TRUE);
+#else
 	/* Create the upper split screen */
 	view->window = gtk_scrolled_window_new (NULL, NULL);
-	gtk_paned_pack1 (GTK_PANED (view->pane), view->window, TRUE, TRUE);
+	gtk_box_pack_start (GTK_BOX (view->vbox), view->window, TRUE, TRUE, 0);
+#endif	
 	
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (view->window),
 					GTK_POLICY_NEVER,
 					GTK_POLICY_AUTOMATIC);
-      	gtk_widget_show (view->window);
 
         /* FIXME use settings->line_wrap and add horz. scroll bars. Chema*/
+
 	view->line_wrap = 1;
 
 	view->text = gtk_text_new (NULL, NULL);
@@ -491,7 +491,6 @@ gedit_view_init (View *view)
 		gtk_signal_connect (GTK_OBJECT(view->text), "changed",
 				    GTK_SIGNAL_FUNC (gedit_view_text_changed_cb), view);
 
-	gtk_widget_show (view->text);
 	gtk_text_set_point (GTK_TEXT(view->text), 0);
 	
 #ifdef ENABLE_SPLIT_SCREEN    
@@ -576,11 +575,14 @@ gedit_view_init (View *view)
         gnome_config_push_prefix ("/gedit/Global/");
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
-	
-	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
 
+	/*
+	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
+	*/
+
+	gtk_widget_show_all (view->vbox);
 	gtk_widget_grab_focus (view->text);
-	
+
 #ifdef ENABLE_SPLIT_SCREEN    
 	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
 	gtk_widget_show (view->split_screen);
@@ -631,6 +633,7 @@ gedit_view_new (Document *doc)
 	view = gtk_type_new (gedit_view_get_type ());
 	view->doc = doc;
 	view->doc->views = g_list_append (doc->views, view);
+	view->app = NULL;
 
 	document_buffer = gedit_document_get_buffer (view->doc);
 	gedit_view_insert (view, 0, document_buffer, FALSE);
@@ -993,7 +996,9 @@ gedit_view_load_toolbar_widgets (View *view)
 
 	gedit_debug ("", DEBUG_VIEW);
 
-	toolbar_ui_info = gtk_object_get_data (GTK_OBJECT (gedit_window_active_app()),
+	g_return_if_fail (view->app != NULL);
+
+	toolbar_ui_info = gtk_object_get_data (GTK_OBJECT (view->app),
 					       GNOME_MDI_TOOLBAR_INFO_KEY);
 
 	if (!view->toolbar)

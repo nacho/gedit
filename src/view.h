@@ -74,10 +74,10 @@ struct _GeditToolbar
 
 struct _View
 {
-	GnomeApp *gnome_app;
-
 	GtkVBox box;
 	
+	GnomeApp *app;
+
 	Document *doc;
 	
 	gchar *font;

@@ -1,3 +1,10 @@
+2000-06-18  Chema Celorio  <chema@celorio.com>
+
+	* sample/Makefile.am (INCLUDES): ditto
+
+	* time/Makefile.am (INCLUDES): --> DO not use ../../src in
+	the INCLUDES, use -I$(top_srcdir)/src
+
 2000-06-15  Roberto Majadas  <phoenix@nova.es>
 
 	* shell_output/shell_output.c : Fix memory problem

@@ -191,8 +191,10 @@ gedit_window_set_toolbar_labels (GnomeApp *app)
 	switch (settings->toolbar_labels)
 	{
 	case GEDIT_TOOLBAR_SYSTEM:
-		g_warning ("Implement get system settings for toolbar. Defaulting to no text!");
-		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+		if (gnome_preferences_get_toolbar_labels())
+			gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);
+		else
+			gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
 		break;
 	case 1:
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);

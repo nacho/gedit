@@ -6,7 +6,8 @@ plugin_LTLIBRARIES = libtime.la
 
 libtime_la_SOURCES = time.c
 
-INCLUDES = -I../../src \
+INCLUDES =						\
+	-I$(top_srcdir)/src				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)	\
 	$(GNOME_INCLUDEDIR)
