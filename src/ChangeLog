@@ -1,5 +1,16 @@
 2002-01-22  Paolo Maggi  <maggi@athena.polito.it>
 
+	* gedit-view.c (gedit_view_doc_readonly_changed_handler):
+	new static function
+	(gedit_view_new): connect to the readonly_changed signal
+	from doc
+
+	* gedit-document.c (gedit_document_set_readonly):
+	commented code to set not_editable tag. It is no more
+	needed
+
+2002-01-22  Paolo Maggi  <maggi@athena.polito.it>
+
 	* gedit-plugins-engine.[ch] (gedit_plugins_engine_configure_plugin):
 	new function
 

@@ -64,6 +64,9 @@ static void gedit_view_cursor_moved 	(GtkTextBuffer     *buffer,
 					 GtkTextMark       *mark,
 					 gpointer           data);
 static void gedit_view_update_overwrite_mode_statusbar (GtkTextView* w, GeditView* view);
+static void gedit_view_doc_readonly_changed_handler (GeditDocument *document, 
+						     gboolean readonly, 
+						     GeditView *view);
 
 static GtkVBoxClass *parent_class = NULL;
 
@@ -117,6 +120,18 @@ gedit_view_grab_focus (GtkWidget *widget)
 	g_object_set (G_OBJECT (view->priv->text_view), "cursor_visible", TRUE, NULL);
 	
 }
+
+static void
+gedit_view_doc_readonly_changed_handler (GeditDocument *document, gboolean readonly,
+		GeditView *view)
+{
+	gedit_debug (DEBUG_VIEW, "");
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	gtk_text_view_set_editable (view->priv->text_view, !readonly);	
+}
+
 
 static void
 gedit_view_class_init (GeditViewClass *klass)
@@ -494,7 +509,14 @@ gedit_view_new (GeditDocument *doc)
 			  "toggle_overwrite",/* cursor moved */
 			  G_CALLBACK (gedit_view_update_overwrite_mode_statusbar),
 			  view);
-	
+
+	g_signal_connect (doc,
+			  "readonly_changed",
+			  G_CALLBACK (gedit_view_doc_readonly_changed_handler),
+			  view);
+
+	gtk_text_view_set_editable (view->priv->text_view, !gedit_document_is_readonly (doc));	
+
 	gedit_debug (DEBUG_VIEW, "END");
 
 	return view;

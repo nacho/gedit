@@ -1091,6 +1091,7 @@ gedit_file_open_recent (GeditMDIChild *child, const gchar* uri)
 	if (ret)
 	{
 		gchar* t = gnome_vfs_x_format_uri_for_display (uri);
+		g_print ("* %s\t", t);
 		gedit_utils_flash_va (_("Loaded file %s"), t);
 		g_free (t);
 	}

@@ -406,6 +406,8 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 	if (document->priv->readonly == readonly) 
 		return;
 
+	/* No more needed - Remove it - Paolo */
+	/*
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (document), &start, 0);
       	gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (document), &end);
 
@@ -419,7 +421,8 @@ gedit_document_set_readonly (GeditDocument *document, gboolean readonly)
 		gtk_text_buffer_remove_tag_by_name (GTK_TEXT_BUFFER (document), 
 					NOT_EDITABLE_TAG_NAME, &start, &end);
 	}
-
+	*/
+	
 	document->priv->readonly = readonly;
 
 	g_signal_emit (G_OBJECT (document),
