@@ -9,15 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-25 20:53+0100\n"
-"PO-Revision-Date: 2005-01-15 13:23+0200\n"
+"POT-Creation-Date: 2005-01-29 15:54+0200\n"
+"PO-Revision-Date: 2005-01-29 21:11+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -161,11 +160,11 @@ msgstr "Antraštės šriftas spausdinimui"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "Paryškinti esamą eilutę"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "Paryškinti atitinkantį skliaustelį"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -211,7 +210,7 @@ msgstr "Maksimalus neseniai naudotų bylų skaičius"
 #: data/gedit.schemas.in.h:31
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr ""
-"Maksimalus skaičius veiksmų, kuriuos gedit galės atstatyti arba daryti iš "
+"Maksimalus veiksmų skaičius, kuriuos gedit galės atstatyti arba daryti iš "
 "naujo."
 
 #: data/gedit.schemas.in.h:32
@@ -608,8 +607,7 @@ msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] ""
-"Jeigu neišsaugosite, pakeitimai padaryti per paskutinę %d valandą bus "
-"prarasti."
+"Jeigu neišsaugosite, pakeitimai padaryti per paskutinę valandą bus prarasti."
 msgstr[1] ""
 "Jeigu neišsaugosite, pakeitimai padaryti per paskutines %d valandas bus "
 "prarasti."
@@ -1663,11 +1661,10 @@ msgid "Access was denied."
 msgstr "Priėjimas uždraustas."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open files and try again."
 msgstr ""
-"yra per daug atidarytų bylų. Uždarykite kokią nors atidarytą bylą ir "
+"yra per daug atidarytų bylų. Prašom, uždarykite keletą atidarytų bylų ir "
 "bandykite dar kartą."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
@@ -1676,13 +1673,12 @@ msgid "\"%s\" is a directory"
 msgstr "„%s“ yra aplankas"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"Neužtenka atminties atidaryti bylai. Uždarykite kokią nors šiuo metu "
-"veikiančią programą ir bandykite dar kartą."
+"Neužtenka atminties atidaryti bylai. Uždarykite kokias nors šiuo metu "
+"veikiančias programas ir bandykite dar kartą."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
 #, c-format
@@ -1746,23 +1742,22 @@ msgid "Could not open the file \"%s\" using the %s character coding"
 msgstr "Nepavyko atidaryti bylos „%s“ naudojant %s simbolių koduotę"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"Patikrinkite ar byla, kurią bandote atidaryti, tikrai yra tekstinė ir, ar "
-"simbolių koduotė lange „Atidaryti bylą...“ (arba „Atidaryti vietą“) buvo "
+"Patikrinkite ar byla, kurią bandote atidaryti, tikrai yra ne dvejetainė ir, "
+"ar simbolių koduotė lange „Atidaryti bylą...“ (arba „Atidaryti vietą“) buvo "
 "pasirinkta teisingai, ir bandykite dar kartą."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
 msgstr ""
-"Byloje yra netinkamų duomenų. Tikriausiai bandoma atidaryti ne tekstinė byla."
+"Byloje yra netinkamo formato duomenų. Tikriausiai bandoma atidaryti "
+"dvejetainę byla."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1780,21 +1775,19 @@ msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr "gedit jos neranda. Gali būti, kad ji neseniai buvo ištrinta."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
-"Yra per daug atidarytų bylų. Uždarykite kokią nors atidarytą bylą ir "
-"bandykite dar kartą."
+"Yra per daug atidarytų bylų. Uždarykite keletą atidarytų bylų ir bandykite "
+"dar kartą."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
 msgstr ""
-"Neužtenka atminties. Uždarykite kokią nors šiuo metu veikiančią programą ir "
-"bandykite dar kartą."
+"Neužtenka prieinamos atminties. Uždarykite keletą šiuo metu veikiančių programų "
+"ir bandykite dar kartą."
 
 #: gedit/gedit-io-error-dialogs.c:499
 msgid ""
@@ -1892,28 +1885,28 @@ msgid "Encoding:"
 msgstr "Koduotė:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:454
+#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
 #, c-format
 msgid "Open '%s'"
 msgstr "Atidaryti „%s“"
 
-#: gedit/gedit-mdi.c:529
+#: gedit/gedit-mdi.c:528
 msgid "Open a recently used file"
 msgstr "Atidaryti neseniai naudotą bylą"
 
-#: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
+#: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
 msgid "Read Only"
 msgstr "Tik skaitymui"
 
-#: gedit/gedit-mdi.c:2072
+#: gedit/gedit-mdi.c:2068
 msgid "Normal"
 msgstr "Įprastas"
 
-#: gedit/gedit-mdi.c:2073
+#: gedit/gedit-mdi.c:2069
 msgid "Use Normal highlight mode"
 msgstr "Naudoti įprastą paryškinimo režimą"
 
-#: gedit/gedit-mdi.c:2149
+#: gedit/gedit-mdi.c:2145
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Naudoti %s paryškinimo režimą"
@@ -2291,7 +2284,7 @@ msgstr "_Pagalba"
 
 #: gedit/gedit-ui.xml.h:83
 msgid "_Highlight Mode"
-msgstr "_Paryškinimo rėžimas"
+msgstr "_Paryškinimo režimas"
 
 #: gedit/gedit-ui.xml.h:84
 msgid "_Icons Only"
@@ -2576,9 +2569,9 @@ msgid "Save a copy of the current document"
 msgstr "Išsaugoti šio dokumento kopiją"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "Nepavyko išsaugoti bylos „%s“"
+msgstr "Nepavyko išsaugoti bylos „%s“ kopijos"
 
 #: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
@@ -3038,15 +3031,15 @@ msgstr "Lygiuotės simbolis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "Alternatyva"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "Inkaras"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "Inkaro adresas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
 msgid "Applet class file code"
@@ -3066,7 +3059,7 @@ msgstr "Autoriaus informacija"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
 msgid "Axis related headers"
-msgstr "Su ašimi susiję antraštės"
+msgstr "Su ašimis susijusios antraštės"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
@@ -3082,11 +3075,11 @@ msgstr "Fono tekstūros plytelė"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "Bazinis URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
 msgid "Base font"
-msgstr ""
+msgstr "Bazinis šriftas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
@@ -3109,9 +3102,8 @@ msgid "Box"
 msgstr "Dėžutė"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Central European"
+msgstr "Cell rowspan"
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Center"
@@ -3119,7 +3111,7 @@ msgstr "Vidurys"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Char enconding of linked resource"
-msgstr ""
+msgstr "Susijusio resurso simbolių koduotė"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
@@ -3131,11 +3123,11 @@ msgstr "Citata"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
-msgstr ""
+msgstr "Cite reason for change"
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "Class implementation ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Class list"
@@ -3143,7 +3135,7 @@ msgstr "Klasių sąrašas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Clear text flow control"
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
@@ -3155,7 +3147,7 @@ msgstr "Pasirinktų nuorodų spalva"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
-msgstr ""
+msgstr "Column span"
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
@@ -3195,7 +3187,7 @@ msgstr "Pakeitimo data ir laikas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "Deklaruoti žymę"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Definition description"
@@ -3230,13 +3222,12 @@ msgid "Disabled"
 msgstr "Išjungtas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document base"
-msgstr "Dokumento pagrindinis URI"
+msgstr "Dokumento pagrindas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document body"
-msgstr "Dokumento kūnas"
+msgstr "Dokumento karkasas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document head"
@@ -3251,13 +3242,12 @@ msgid "Document type"
 msgstr "Dokumento tipas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Element ID"
-msgstr "Elementai"
+msgstr "Elemento ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
-msgstr ""
+msgstr "Įterptas objektas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
@@ -3276,9 +3266,8 @@ msgid "Font face"
 msgstr "Šrifto pavadinimas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
 msgid "For label"
-msgstr "label"
+msgstr "Užrašui"
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Forced line break"
@@ -3314,7 +3303,7 @@ msgstr "Formos metodas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Forward link"
-msgstr ""
+msgstr "Forward link"
 
 #: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Frame"
@@ -3322,7 +3311,7 @@ msgstr "Kadras"
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame render parts"
-msgstr ""
+msgstr "Kadro vaizdavimo dalys"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame source"
@@ -3350,20 +3339,19 @@ msgstr "Kadrų rinkinio eilutės"
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Framespacing"
-msgstr ""
+msgstr "Erdvė tarp kadrų"
 
 #: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
-msgstr ""
+msgstr "Bendras įterptas objektas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
 msgstr "Bendra meta informacija"
 
 #: plugins/taglist/HTML.tags.xml.in.h:89
-#, fuzzy
 msgid "Generic span"
-msgstr "Bendras"
+msgstr "Generic span"
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "HREF URI"
@@ -3383,7 +3371,7 @@ msgstr "HTML šakninis elementas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML version"
-msgstr ""
+msgstr "HTML versija"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTTP header name"
@@ -3427,15 +3415,15 @@ msgstr "Aukštis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Horizontal rule"
-msgstr ""
+msgstr "Horizontali linija"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal space"
-msgstr ""
+msgstr "Hotrizontali erdvė"
 
 #: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "I18N BiDi over-ride"
-msgstr ""
+msgstr "I18N BiDi nepaisymas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Image"
@@ -3458,13 +3446,12 @@ msgid "Image source"
 msgstr "Paveikslėlio šaltinis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "Neteisingas bylos vardas"
+msgstr "Inline frame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
-msgstr ""
+msgstr "Inline layer"
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inserted text"
@@ -3472,7 +3459,7 @@ msgstr "Įterptas tekstas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
-msgstr ""
+msgstr "Instance definition"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Italic text"
@@ -3499,9 +3486,8 @@ msgid "Layer"
 msgstr "Sluoksnis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Link color"
-msgstr "Pasirink spalvą"
+msgstr "Nuorodos spalvą"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
@@ -3537,23 +3523,23 @@ msgstr "El.pašto nuoroda"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Margin pixel height"
-msgstr ""
+msgstr "Margin pixel height"
 
 #: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel width"
-msgstr ""
+msgstr "Margin pixel width"
 
 #: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Marquee"
-msgstr ""
+msgstr "Marquee"
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Max text field chars"
-msgstr ""
+msgstr "Daugiausiai simbolių teksto lauke"
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Media-independent link"
-msgstr ""
+msgstr "Media-independent link"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
@@ -3565,11 +3551,11 @@ msgstr "Kelių eilučių teksto laukelis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multicolumn"
-msgstr ""
+msgstr "Multicolumn"
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multiple"
-msgstr ""
+msgstr "Multiple"
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Name"
@@ -3589,7 +3575,7 @@ msgstr "Nėra URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No embedded objects"
-msgstr ""
+msgstr "Nėra įterptų objektų"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No frames"
@@ -3633,7 +3619,7 @@ msgstr "Objekto duomenų pasirėmimas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
-msgstr ""
+msgstr "Offset for alignment character"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
@@ -3720,9 +3706,8 @@ msgid "Ordered list"
 msgstr "Surikiuotas sąrašas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-#, fuzzy
 msgid "Output media"
-msgstr "Išvesties eilutės"
+msgstr "Output media"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
@@ -3738,11 +3723,11 @@ msgstr "Pastraipos stilius"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Preformatted listing"
-msgstr ""
+msgstr "Preformatted listing"
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted text"
-msgstr ""
+msgstr "Preformatted text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Profile metainfo dictionary"
@@ -3750,7 +3735,7 @@ msgstr "Profilio metaduomenų žodynas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Prompt message"
-msgstr ""
+msgstr "Prompt message"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Push button"
@@ -3770,7 +3755,7 @@ msgstr "Tik skaitomas tekstas ir slaptažodis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Reduced spacing"
-msgstr ""
+msgstr "Reduced spacing"
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reverse link"
@@ -3786,7 +3771,7 @@ msgstr "Eilutės"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rulings between rows and columns"
-msgstr ""
+msgstr "Rulings between rows and columns"
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Sample program output, scripts"
@@ -3794,7 +3779,7 @@ msgstr "Pavyzdinė programos išvestis, scenarijai"
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Scope covered by header cells"
-msgstr ""
+msgstr "Scope covered by header cells"
 
 #: plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Script execution defer"
@@ -3806,7 +3791,7 @@ msgstr "Scenarijaus kalbos pavadinimas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
-msgstr ""
+msgstr "Script statments"
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
@@ -3822,7 +3807,7 @@ msgstr "Pasirinkta"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
-msgstr ""
+msgstr "Serverinis paveikslėlių žemėlapis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
 msgid "Shape"
@@ -3830,11 +3815,11 @@ msgstr "Forma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
-msgstr ""
+msgstr "Short inline quotation"
 
 #: plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Single line prompt"
-msgstr ""
+msgstr "Single line prompt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
 msgid "Size"
@@ -3854,7 +3839,7 @@ msgstr "Garsas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
 msgid "Space"
-msgstr ""
+msgstr "Tarpas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
@@ -3862,19 +3847,19 @@ msgstr "Tarpu atskirtų archyvų sąrašas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
 msgid "Spacer"
-msgstr ""
+msgstr "Spacer"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
-msgstr ""
+msgstr "Spacing between cells"
 
 #: plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Spacing within cells"
-msgstr ""
+msgstr "Spacing within cells"
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
 msgid "Span"
-msgstr ""
+msgstr "Span"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
@@ -3882,7 +3867,7 @@ msgstr "Kvadratinė šaknis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
-msgstr ""
+msgstr "Standby load msg"
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Starting sequence number"
@@ -3926,17 +3911,15 @@ msgstr "Lentelės kūnas"
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Table caption"
-msgstr ""
+msgstr "Lentelės antraštė"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
-#, fuzzy
 msgid "Table column group properties"
-msgstr "Lentelės stulpelių grupė"
+msgstr "Lentelės stulpelių grupės savybės"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
-#, fuzzy
 msgid "Table column properties"
-msgstr "Lentelės stulpelių grupė"
+msgstr "Lentelės stulpelių savybės"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table data cell"
@@ -3964,23 +3947,23 @@ msgstr "Lentelės santrauka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Target - Blank"
-msgstr ""
+msgstr "Taikinys - tuščias"
 
 #: plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Target - Parent"
-msgstr ""
+msgstr "Taikinys - aukštesniame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Target - Self"
-msgstr ""
+msgstr "Taikinys - tame pačiame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Top"
-msgstr ""
+msgstr "Target - viršutiniame"
 
 #: plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "Teletype or monospace text style"
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
@@ -4000,7 +3983,7 @@ msgstr "Antraštė"
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "Topmargin in pixels"
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
@@ -4048,19 +4031,19 @@ msgstr "Plotis"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
-msgstr ""
+msgstr "Bibliography cite"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography item"
-msgstr ""
+msgstr "Bibliography item"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
-msgstr ""
+msgstr "Bibliography shortcite"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography thebibliography"
-msgstr ""
+msgstr "Bibliography thebibliography"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
@@ -4140,43 +4123,43 @@ msgstr "Graikiška tau"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "Antraštė 0 (skyrius)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "Antraštė 0 (skyrius*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "Antraštė 1 (skyrius)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "Antraštė 1 (skyrius*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "Antraštė 2 (poskyris)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "Antraštė 2 (poskyris*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "Antraštė 3 (poposkyris)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "antraštė 3 (poposkyris*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "Antraštė 4 (paragrafas)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
-msgstr ""
+msgstr "Antraštės priedas"
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
@@ -4204,11 +4187,11 @@ msgstr "Sąrašo elementų dydis"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "Maths (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "Maths (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
 msgid "Operator fraction"
@@ -4216,29 +4199,27 @@ msgstr "Operatoriaus trupmena"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "Operator integral (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "Operator integral (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Operator sum (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Operator sum (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "Nustatymai"
+msgstr "Reference label"
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "Nustatymai"
+msgstr "Reference ref"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
@@ -4258,7 +4239,7 @@ msgstr "Simbolis &lt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr "Ir simbolis"
+msgstr "Simbolis „ir“"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
@@ -4266,19 +4247,19 @@ msgstr "Konstantos simbolis"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "Symbol d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "Symbol d-by-dt-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "Symbol d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "Symbol dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
@@ -4298,19 +4279,19 @@ msgstr "Begalybės simbolis"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Symbol mathspace ,"
 
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Symbol mathspace ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Symbol mathspace _"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Symbol mathspace __"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
@@ -4322,19 +4303,19 @@ msgstr "Žvaigždės simbolis"
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "Typeface bold"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "Typeface italic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "Typeface slanted"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Typeface type"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
@@ -4354,55 +4335,55 @@ msgstr "XSLT - Funkcijos"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "ancestor"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "ancestor-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "attribute"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "child"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "descendant"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "descendant-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "following"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "following-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
 msgid "namespace"
-msgstr ""
+msgstr "namespace"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
 msgid "parent"
-msgstr ""
+msgstr "parent"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "preceding"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "preceding-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "self"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
