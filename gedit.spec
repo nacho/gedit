@@ -4,16 +4,16 @@
 %define prefix   /usr
 
 Summary:   gEdit 
-Name:      gEdit
+Name:      gedit
 Version:   %ver
 Release:   %rel
 Copyright: GPL
 Group:     Editors
-Source0:   gEdit-%{PACKAGE_VERSION}.tar.gz
+Source0:   gedit-%{PACKAGE_VERSION}.tar.gz
 URL:       http://gedit.pn.org
-BuildRoot: /tmp/gEdit-%{PACKAGE_VERSION}-root
+BuildRoot: /tmp/gedit-%{PACKAGE_VERSION}-root
 Packager: Alex Roberts <bse@dial.pipex.com>
-Requires: gtk+ >= 1.1.7
+Requires: gtk+ >= 1.0.7
 Requires: gnome-libs
 #Docdir: %{prefix}/doc
 
