@@ -234,8 +234,8 @@ void gE_prefs_close ()
 		g_free (prefs_fn);
 		return;
 	}
-	if (rename (temp_fn, prefs_fn) == -1)
-	{
+	/*if (rename (temp_fn, prefs_fn) == -1)
+	{*/
 		command = g_malloc0 (strlen (temp_fn) + strlen (prefs_fn) + 6);
 		sprintf (command, "cp %s %s", temp_fn, prefs_fn);
 		if (system (command) == -1)
@@ -248,7 +248,7 @@ void gE_prefs_close ()
 		}
 		g_free (command);
 		unlink (temp_fn);
-	}
+	/*}*/
 	/*g_free (temp_fn);*/
 	/*g_free (prefs_fn);*/
 
