@@ -1,3 +1,13 @@
+2001-05-27  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_convert_to_full_pathname): handle uris. Make static,
+	fix a bug.
+	(gedit_file_determine_read_only): split from file_open
+
+	* document.c (gedit_document_load): fix. Remove the file opening code from
+	here. move to file.c
+	* other files : cosmetic improvements
+
 2001-05-15  Paolo Maggi  <maggi@athena.polito.it>
 
 	* dialogs/gtkchecklist.c (gtk_check_list_finalize): memleak

@@ -166,7 +166,7 @@ main (int argc, char **argv)
 	gedit_mdi_init ();
 	gedit_close_all_flag_clear ();
 
-	gtk_init_add ((GtkFunction)gedit_document_load, (gpointer)file_list);
+	gtk_init_add ((GtkFunction)gedit_file_load_list, (gpointer)file_list);
 
 	gtk_main();
 

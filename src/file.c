@@ -47,10 +47,6 @@
 #define PREALLOCATED_BUF_LEN 4096
 
 GtkWidget *save_file_selector = NULL;
-#if 0
-/* Don't use public variables */
-GtkWidget *open_file_selector = NULL;
-#endif
 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
@@ -62,13 +58,9 @@ void file_close_cb(GtkWidget *widget, gpointer cbdata);
 void file_close_all_cb(GtkWidget *widget, gpointer cbdata);
 void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 void file_quit_cb (GtkWidget *widget, gpointer cbdata);
-void uri_open_cb (GtkWidget *widget, gpointer cbdata);
+void file_uri_open_cb (GtkWidget *widget, gpointer cbdata);
 
        gint gedit_file_create_popup (const gchar *title);
-#if 0
-/* don't add prototypes for public functions */
-static void gedit_file_open_ok_sel   (GtkWidget *widget, GtkFileSelection *files);
-#endif
 static void gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
 static void cancel_cb (GtkWidget *w, gpointer cbdata);
@@ -77,9 +69,6 @@ static void cancel_cb (GtkWidget *w, gpointer cbdata);
        void gedit_close_all_flag_clear (void);
 static void gedit_close_all_flag_status (guchar *function);
 static void gedit_close_all_flag_verify (guchar *function);
-
-gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
-
 
 static void  save_all_continue (GtkWidget *widget, gpointer cbdata);
 
@@ -137,14 +126,57 @@ gedit_document_insert_text_when_mapped (GeditDocument *doc, const gchar * tmp_bu
 
 }
 
-	
 
+/**
+ * gedit_file_determine_read_only:
+ * @doc: 
+ * @file_name: 
+ * 
+ * Determines if if the document must be opened in readonly mode or not
+ **/
+static void
+gedit_file_determine_read_only (GeditDocument *doc, const gchar *file_name, GnomeVFSFileInfo *info)
+{
+	GnomeVFSURI* uri;
+	const gchar* scheme;
+	
+	gedit_document_set_readonly (doc, TRUE);
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (file_name != NULL);
+
+	uri = gnome_vfs_uri_new (file_name);
+	if (uri != NULL)
+	{
+		scheme = gnome_vfs_uri_get_scheme (uri);
+
+		/* FIXME: all remote files are marked as readonly */
+		if ((scheme != NULL) && (strcmp (scheme, "file") == 0) && GNOME_VFS_FILE_INFO_LOCAL (info))
+		{
+			gchar* tmp_str;
+		        gchar* tmp_str2;
+												
+			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);				
+			tmp_str2 = gnome_vfs_unescape_string_for_display (tmp_str);
+	
+			if (tmp_str2 != NULL)
+				gedit_document_set_readonly (doc, access (tmp_str2, W_OK) ? TRUE : FALSE);
+
+			g_free (tmp_str2);
+			g_free (tmp_str);
+		}
+		
+		gnome_vfs_uri_unref (uri);
+	}
+}
+	
 
 /* TODO: add flash on all operations ....Chema*/
 /*        what happens when you open the same doc
 	  twice. I think we should add another view
           of the same doc versus opening it twice. Chema*/
 
+#define GEDIT_READ_BLOCK_SIZE 1024
 /**
  * gedit_file_open:
  * @doc: Document window to fill with text
@@ -154,29 +186,18 @@ gedit_document_insert_text_when_mapped (GeditDocument *doc, const gchar * tmp_bu
  *
  * Return value: 0 on success, 1 on error.
  */
-
 gint
 gedit_file_open (GeditDocument *doc, const gchar *fname)
 {
 	GnomeVFSFileInfo *info;
 	GnomeVFSHandle *from_handle;
 	GnomeVFSResult  result;
-
-	GnomeVFSURI* uri;
-	const gchar* scheme;
-
 	GString *tmp_buf = NULL;
-		
 	GeditView *view;
 			
 	gedit_debug (DEBUG_FILE, "");
 
 	g_return_val_if_fail (fname != NULL, 1);
-	
-	if (doc != NULL) 
-	{
-		g_return_val_if_fail (doc->filename != fname, -1);
-	}
 
 	gedit_flash_va ("%s %s", _(MSGBAR_LOADING_FILE), fname);
 	
@@ -205,14 +226,10 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		return 1;
 	}
 
-	if(info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
-	{
+	if (info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
 		tmp_buf = g_string_sized_new (info->size + 1);
-	}
 	else
-	{
 		tmp_buf = g_string_sized_new (PREALLOCATED_BUF_LEN);
-	}
 
 	if (tmp_buf == NULL)
 	{
@@ -226,7 +243,6 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 	}
 
 	result = gnome_vfs_open (&from_handle, fname, GNOME_VFS_OPEN_READ);
-
 	if (result != GNOME_VFS_OK)
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while reading the file: \n\n%s\n\n"
@@ -243,9 +259,9 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 	while (1) 
 	{
 		GnomeVFSFileSize bytes_read;
-		guint8           data [1025];
+		guint8           data [GEDIT_READ_BLOCK_SIZE + 1];
 		
-		result = gnome_vfs_read (from_handle, data, 1024, &bytes_read);
+		result = gnome_vfs_read (from_handle, data, GEDIT_READ_BLOCK_SIZE, &bytes_read);
 		
 		if ((result != GNOME_VFS_OK) && (result != GNOME_VFS_ERROR_EOF))
 		{
@@ -264,7 +280,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 			break;
 		}
 		
-		if (bytes_read >  0 && bytes_read <= 1024)
+		if (bytes_read >  0 && bytes_read <= GEDIT_READ_BLOCK_SIZE)
 		{
 			data [bytes_read] = '\0';
 		}
@@ -274,17 +290,16 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 							   "Please, report this error to submit@bugs.gnome.org."), fname);
 			gnome_app_error (gedit_window_active_app(), errstr);
 			g_free (errstr);
-			g_string_free(tmp_buf, TRUE);
+			g_string_free (tmp_buf, TRUE);
 			gnome_vfs_file_info_clear (info);
 
 			return 1;
 		}
 		
-		g_string_append(tmp_buf, data);
+		g_string_append (tmp_buf, data);
 	}
 
 	result = gnome_vfs_close (from_handle);
-	
 	if (result != GNOME_VFS_OK)
 	{
 		gchar *errstr = g_strdup_printf (_("An error was encountered while closing the file: \n\n%s"), 
@@ -297,7 +312,7 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 		return 1;
 	}
 
-	if (doc==NULL) 
+	if (doc == NULL) 
 	{
 		doc = gedit_document_new ();
 		doc->filename = g_strdup (fname);
@@ -319,36 +334,8 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 	}
 	
 
-	/* Conservatively set doc to readonly */
-	gedit_document_set_readonly (doc, TRUE);
+	gedit_file_determine_read_only (doc, fname, info);
 
-	uri = gnome_vfs_uri_new (fname);
-
-	if (uri != NULL)
-	{
-		scheme = gnome_vfs_uri_get_scheme(uri);
-
-		/* FIXME: all remote files are marked as readonly */
-		if ((scheme != NULL) && (strcmp (scheme, "file") == 0) && GNOME_VFS_FILE_INFO_LOCAL (info))
-		{
-			gchar* tmp_str;
-		        gchar* tmp_str2;
-												
-			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);				
-			tmp_str2 = gnome_vfs_unescape_string_for_display (tmp_str);
-	
-			if (tmp_str2 != NULL)
-			{
-				gedit_document_set_readonly (doc, access (tmp_str2, W_OK) ? TRUE : FALSE);
-			}			
-
-			g_free (tmp_str2);
-			g_free (tmp_str);
-		}
-		
-		gnome_vfs_uri_unref (uri);
-	}
-	
 	g_string_free (tmp_buf, TRUE);
 	gnome_vfs_file_info_clear (info);
 
@@ -1003,7 +990,7 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 
 
 void 
-uri_open_cb (GtkWidget *widget, gpointer cbdata)
+file_uri_open_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_dialog_open_uri ();
 }
@@ -1309,13 +1296,14 @@ gedit_close_all_flag_verify (guchar *function)
    2. /home/user/cvs/gedit/../../docs/file.txt		/home/user/docs/file.txt
    3. File name in: /home/chema/cvs/gedit/../../cvs/../docs/././././././temp_32avo.txt
    File name out: /home/chema/docs/temp_32avo.txt
+   4. Any file that contains a ":/" is asumed to be an uri and fin = fout
  *
  * 
  * Return Value: a pointer to a allocated string. The calling function is responsible
- *               o freeing the string
+ *               o freeing the string. NULL on error
  **/
-gchar *
-gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
+static gchar *
+gedit_file_convert_to_full_pathname (const gchar * file_name)
 {
 	gint file_name_in_length;
 	
@@ -1324,14 +1312,18 @@ gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
 
 	gint i, j=0;
 
-	g_return_val_if_fail (file_name_to_convert != NULL, NULL);
+	g_return_val_if_fail (file_name != NULL, NULL);
 
-	if (g_path_is_absolute(file_name_to_convert))
-		file_name_in = g_strdup (file_name_to_convert);
+	/* Is this a full URI and not a file ? */
+	if (strstr (file_name, ":/")!= NULL)
+		return g_strdup (file_name);
+
+	if (g_path_is_absolute (file_name))
+		file_name_in = g_strdup (file_name);
 	else
 		file_name_in = g_strdup_printf ("%s/%s",
 						g_get_current_dir(),
-						file_name_to_convert);
+						file_name);
 
 	file_name_in_length = strlen (file_name_in);
 	file_name_out = g_malloc (file_name_in_length + 1);
@@ -1352,6 +1344,8 @@ gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
 					while (file_name_out [j-1] != '/')
 						j--;
 					j--;
+					if (j <= 0)
+						return NULL;
 				}
 		}
 		
@@ -1369,6 +1363,40 @@ gedit_file_convert_to_full_pathname (const gchar * file_name_to_convert)
 	file_name_out [j] = '\0';
 
 	return file_name_out;
-
 } 
 
+
+/**
+ * gedit_file_load_list:
+ * @file_list: 
+ * 
+ * Loads a list of files.
+ * 
+ * Return Value: 
+ **/
+gboolean
+gedit_file_load_list (GList *file_list)
+{
+	gchar *full_path;
+	
+	gedit_debug (DEBUG_DOCUMENT, "");
+	
+	gedit_file_stdin (NULL);
+
+        /* create a file for each document in the parameter list */
+	for (;file_list; file_list = file_list->next)
+	{
+		full_path = gedit_file_convert_to_full_pathname (file_list->data);
+		if (full_path != NULL) {
+			gedit_file_open (NULL, full_path);
+			g_free (full_path);
+		}
+	}
+
+	if (gedit_document_current() == NULL)
+		gedit_document_new ();
+	
+	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), gedit_document_current()->readonly);
+	
+	return FALSE;
+}

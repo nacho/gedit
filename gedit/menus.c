@@ -82,7 +82,7 @@ GnomeUIInfo gedit_file_menu[] =
 	
 	GNOMEUIINFO_ITEM_STOCK (N_("Open from _URI..."),
 			  N_("Open a file from a specified URI"),
-			  uri_open_cb,
+			  file_uri_open_cb,
 			  GNOME_STOCK_MENU_OPEN),
 /*	
 	GNOMEUIINFO_ITEM_STOCK (N_("Save _to URI..."),

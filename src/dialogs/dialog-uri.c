@@ -34,136 +34,130 @@
 #include "window.h"
 #include "dialogs/dialogs.h"
 
+typedef struct _GeditDialogOpenUri GeditDialogOpenUri;
 
-static GtkWidget *open_uri_dialog = NULL;
+struct _GeditDialogOpenUri {
+	GtkWidget *dialog;
 
-static GtkWidget *open_button = NULL;
-static GtkWidget *cancel_button = NULL;
-static GtkWidget *help_button = NULL;
+	GtkWidget *open_button;
+	GtkWidget *cancel_button;
+	GtkWidget *help_button;
 
-static GtkWidget *uri = NULL;
-static GtkWidget *uri_list = NULL;
+	GtkWidget *uri;
+	GtkWidget *uri_list;
+};
 
-static void open_button_pressed (GtkWidget *widget, gpointer data);
-static void cancel_button_pressed (GtkWidget *widget, gpointer data);
-static void help_button_pressed (GtkWidget *widget, gpointer data);
+static void open_button_pressed   (GtkWidget *widget, GeditDialogOpenUri *dialog);
+static void cancel_button_pressed (GtkWidget *widget, GeditDialogOpenUri *dialog);
+static void help_button_pressed   (GtkWidget *widget, GeditDialogOpenUri *dialog);
 
-static gboolean
+static GeditDialogOpenUri *
 dialog_open_uri_get_dialog (void)
 {
+	static GeditDialogOpenUri *dialog = NULL;
 	GladeXML *gui;
 
+	if (dialog != NULL)
+		return dialog;
+	
 	gui = glade_xml_new (GEDIT_GLADEDIR "/uri.glade", "open_uri_dialog");
 
 	if (!gui) {
 		g_warning ("Could not find uri.glade, reinstall gedit.\n");
-		return FALSE;
+		return NULL;
 	}
 
-	open_uri_dialog = glade_xml_get_widget (gui, "open_uri_dialog");
-	open_button = glade_xml_get_widget (gui, "open_button");
-	cancel_button = glade_xml_get_widget (gui, "cancel_button");
-	help_button = glade_xml_get_widget (gui, "help_button");
+	dialog = g_new0 (GeditDialogOpenUri, 1);
 
-	uri = glade_xml_get_widget (gui, "uri");
-	uri_list = glade_xml_get_widget (gui, "uri_list");
+	dialog->dialog        = glade_xml_get_widget (gui, "open_uri_dialog");
+	dialog->open_button   = glade_xml_get_widget (gui, "open_button");
+	dialog->cancel_button = glade_xml_get_widget (gui, "cancel_button");
+	dialog->help_button   = glade_xml_get_widget (gui, "help_button");
+	dialog->uri           = glade_xml_get_widget (gui, "uri");
+	dialog->uri_list      = glade_xml_get_widget (gui, "uri_list");
 
 	
-	if (!open_uri_dialog ||
-	    !open_button || !cancel_button || !help_button ||
-	    !uri || !uri_list){
+	if (!dialog->dialog ||
+	    !dialog->open_button || !dialog->cancel_button || !dialog->help_button ||
+	    !dialog->uri || !dialog->uri_list){
 		g_print ("Could not find the required widgets inside uri.glade.\n");
-		return FALSE;
+		return NULL;
 	}
-	gtk_object_unref (GTK_OBJECT (gui));
 
 	/*
 	gnome_entry_load_history (GNOME_ENTRY (uri_list));
 	*/
 	
-	gtk_signal_connect (GTK_OBJECT (open_button), "clicked",
-			    GTK_SIGNAL_FUNC (open_button_pressed), NULL);
+	gtk_signal_connect (GTK_OBJECT (dialog->open_button), "clicked",
+			    GTK_SIGNAL_FUNC (open_button_pressed), dialog);
 
-	gtk_signal_connect (GTK_OBJECT (cancel_button), "clicked",
-			    GTK_SIGNAL_FUNC (cancel_button_pressed), NULL);
+	gtk_signal_connect (GTK_OBJECT (dialog->cancel_button), "clicked",
+			    GTK_SIGNAL_FUNC (cancel_button_pressed), dialog);
 
-	gtk_signal_connect (GTK_OBJECT (help_button), "clicked",
-			    GTK_SIGNAL_FUNC (help_button_pressed), NULL);
+	gtk_signal_connect (GTK_OBJECT (dialog->help_button), "clicked",
+			    GTK_SIGNAL_FUNC (help_button_pressed), dialog);
 
-	gtk_window_set_modal         (GTK_WINDOW (open_uri_dialog), TRUE);
-	gnome_dialog_set_default     (GNOME_DIALOG (open_uri_dialog), 0);
-	gnome_dialog_editable_enters (GNOME_DIALOG (open_uri_dialog), GTK_EDITABLE (uri));
-	gnome_dialog_close_hides     (GNOME_DIALOG (open_uri_dialog), TRUE);
+	gtk_window_set_modal         (GTK_WINDOW (dialog->dialog), TRUE);
+	gnome_dialog_set_default     (GNOME_DIALOG (dialog->dialog), 0);
+	gnome_dialog_editable_enters (GNOME_DIALOG (dialog->dialog), GTK_EDITABLE (dialog->uri));
+	gnome_dialog_close_hides     (GNOME_DIALOG (dialog->dialog), TRUE);
 
-	return TRUE;
+	return dialog;
 }
+
 
 void
 gedit_dialog_open_uri (void)
 {
-	if (open_uri_dialog == NULL)
-	{
-		if (!dialog_open_uri_get_dialog ())
-		{
-			return;
-		}
+	GeditDialogOpenUri *dialog;
+	
+	dialog = dialog_open_uri_get_dialog ();
+	if (dialog == NULL) {
+		g_warning ("Could not create the Open URI dialog");
+		return;
 	}
 
-	/* re-parent the dialog */
-	gnome_dialog_set_parent (GNOME_DIALOG (open_uri_dialog),
+	gnome_dialog_set_parent (GNOME_DIALOG (dialog->dialog),
 				 GTK_WINDOW (gedit_window_active_app()));
-
-	/* set the entry text to "" */
-	gtk_entry_set_text(GTK_ENTRY(uri), "");
-
-	gtk_widget_show (open_uri_dialog);
+	gtk_entry_set_text (GTK_ENTRY(dialog->uri), "");
+	
+	gtk_widget_show (dialog->dialog);
 	
 }
 
+
 static void
-open_button_pressed (GtkWidget *widget, gpointer data)
+open_button_pressed (GtkWidget *widget, GeditDialogOpenUri *dialog)
 {
 	gchar * file_name = NULL;
 
-	file_name = gtk_editable_get_chars (GTK_EDITABLE (uri), 0, -1);
-
-	if((file_name != NULL) && (strlen(file_name) != 0))
+	g_return_if_fail (dialog != NULL);
+	
+	file_name = gtk_editable_get_chars (GTK_EDITABLE (dialog->uri), 0, -1);
+	gtk_widget_hide (dialog->dialog);
+	
+	if (gedit_document_new_with_file (file_name))
 	{
-		gtk_widget_hide(open_uri_dialog);
-
-		if (gedit_document_new_with_file (file_name))
-		{
-			gnome_entry_append_history ( GNOME_ENTRY (uri_list), FALSE, file_name);	
-
-			gedit_flash_va (_("Loaded file %s"), file_name);
-			
-			if (gedit_document_current())
-			{
-				g_assert(gedit_window_active_app());
-				gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), 
-					gedit_document_current()->readonly);
-			}				
-		}
-	}
-	else
-	{
-		gtk_widget_hide(open_uri_dialog);
+		gnome_entry_append_history (GNOME_ENTRY (dialog->uri_list),
+					    FALSE, file_name);	
+		gedit_flash_va (_("Loaded file %s"), file_name);
+		gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), 
+							 gedit_document_current()->readonly);
 	}
 
 	g_free (file_name);
 }
 
 static void
-cancel_button_pressed (GtkWidget *widget, gpointer data)
+cancel_button_pressed (GtkWidget *widget, GeditDialogOpenUri *dialog)
 {
-	gtk_widget_hide(open_uri_dialog);
+	gtk_widget_hide (dialog->dialog);
 }
 
 static void
-help_button_pressed (GtkWidget *widget, gpointer data)
+help_button_pressed (GtkWidget *widget, GeditDialogOpenUri *dialog)
 {
-	/* FIXME: Paolo - change to point to the right help page */
-
+	/* FIXME: change to point to the right help page. Paolo */
 	static GnomeHelpMenuEntry help_entry = { "gedit", "index.html" };
 
 	gnome_help_display (NULL, &help_entry);

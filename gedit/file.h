@@ -54,11 +54,11 @@ void file_save_all_cb (GtkWidget *widget, gpointer cbdata);
 void file_close_cb (GtkWidget *widget, gpointer cbdata);
 void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
 void file_revert_cb (GtkWidget *widget, gpointer cbdata);
-void uri_open_cb (GtkWidget *widget, gpointer cbdata);
+void file_uri_open_cb (GtkWidget *widget, gpointer cbdata);
 
 void gedit_close_all_flag_clear (void);
 
-gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
+gboolean gedit_file_load_list (GList *file_list);
 
 #endif /* __FILE_H__ */
 
