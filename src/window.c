@@ -50,7 +50,7 @@ GnomeApp *	gedit_window_active_app (void);
 void	gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 void	gedit_window_set_auto_indent (gint auto_indent);
 void	gedit_window_set_status_bar (GnomeApp *app);
-void	gedit_window_refresh_all (gint mdi_mode_changed);
+void	gedit_window_refresh_all (gint mdi_mode_changed, gboolean tab_size_changed);
 void	gedit_window_set_toolbar_labels (GnomeApp *app);
 void	gedit_window_set_widgets_sensitivity (gint sensitive);
 
@@ -304,7 +304,7 @@ gedit_window_set_view_menu_sensitivity (GnomeApp *app)
 }
 
 void
-gedit_window_refresh_all (gint mdi_mode_changed)
+gedit_window_refresh_all (gint mdi_mode_changed, gboolean tab_size_changed)
 {
 	gint n, m;
 
@@ -361,6 +361,8 @@ gedit_window_refresh_all (gint mdi_mode_changed)
 		for (m = 0; m < g_list_length (nth_doc->views); m++)
 		{
 			mth_view = GEDIT_VIEW (g_list_nth_data (nth_doc->views, m));
+			if (tab_size_changed)
+				gedit_view_set_tab_size (mth_view, settings->tab_size);
 			if (mdi_mode_changed)
 			{
 				gtk_widget_grab_focus (GTK_WIDGET (mth_view->text));

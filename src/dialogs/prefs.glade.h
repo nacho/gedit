@@ -11,6 +11,7 @@ gchar *s = N_("Set toolbar to Icons only");
 gchar *s = N_("Set toolbar to Icons with text");
 gchar *s = N_("Editor Behavior");
 gchar *s = N_("Enable Auto-indent");
+gchar *s = N_("Tab width : ");
 gchar *s = N_("General");
 gchar *s = N_("MDI (Multiple Document Interface)");
 gchar *s = N_("Left\n"

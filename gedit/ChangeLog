@@ -1,3 +1,23 @@
+2001-02-11  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_save_as_ok_sel): remove g_asserts
+	that where crashing then exiting gedit and saving a file.
+
+	* view.c (gedit_view_set_tab_size): implement
+	(gedit_view_init): call _set_tab_size after creating the gtk_text
+	widget.
+
+	* window.c (gedit_window_refresh_all): call set_tab_size
+
+	* prefs.c (gedit_prefs_load_settings): tab size. Save load and
+	add to struct.
+
+	* dialogs/dialog-prefs.c (apply_cb): support for tab size
+
+	* window.c (gedit_window_refresh_all): add a tab size changed parameter
+
+	* file.c: remove message to translators
+
 2001-02-07  Paolo Maggi  <maggi@athena.polito.it>
 
 	* dialogs/dialog-uri.c (open_button_pressed):

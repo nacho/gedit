@@ -83,6 +83,7 @@ void	gedit_view_set_font		(GeditView *view, gchar *font);
 void	gedit_view_set_word_wrap	(GeditView *view, gint word_wrap);
 void	gedit_view_set_readonly		(GeditView *view, gint readonly);
 void	gedit_view_set_split_screen	(GeditView *view, gint split_screen);
+void    gedit_view_set_tab_size         (GeditView *view, gint tab_size);
 
 /* Scrolled window */
 gfloat	gedit_view_get_window_position	(GeditView *view);

@@ -51,6 +51,7 @@ static GtkWidget *toolbar_radio_button_2;
 static GtkWidget *toolbar_radio_button_3;
 
 static GtkWidget *mdimode;
+static GtkWidget *tabsize;
 static GtkWidget *tabpos;
 static GtkWidget *foreground;
 static GtkWidget *background;
@@ -112,6 +113,8 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	GtkStyle *style;
 	GdkColor *c;
 	gint temp_mdi_mode;
+	gint temp;
+	gboolean tab_size_changed = FALSE;
 	
 	gedit_debug (DEBUG_PREFS, "");
 	
@@ -120,6 +123,10 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->auto_indent = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (autoindent));
 	settings->show_status = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (statusbar));
+	temp = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tabsize));
+	if (settings->tab_size != temp)
+		tab_size_changed = TRUE;
+	settings->tab_size = temp;
 
 	switch (gtk_radio_group_get_selected (GTK_RADIO_BUTTON(toolbar_radio_button_1)->group))
 	{
@@ -199,11 +206,11 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 	if (settings->mdi_mode != temp_mdi_mode)
 	{
 		settings->mdi_mode = temp_mdi_mode;
-		gedit_window_refresh_all (TRUE);
+		gedit_window_refresh_all (TRUE, tab_size_changed);
 	}
 	else
 	{
-		gedit_window_refresh_all (FALSE);
+		gedit_window_refresh_all (FALSE, tab_size_changed);
 	}
 	
 
@@ -257,6 +264,7 @@ prepare_general_page (GladeXML *gui)
 	splitscreen = glade_xml_get_widget (gui, "splitscreen");
 #endif	
 	autoindent = glade_xml_get_widget (gui, "autoindent");
+	tabsize = glade_xml_get_widget (gui, "tabwidthspin");
 	toolbar_radio_button_1 = glade_xml_get_widget (gui, "toolbar_radio_button_1");
 	toolbar_radio_button_2 = glade_xml_get_widget (gui, "toolbar_radio_button_2");
 	toolbar_radio_button_3 = glade_xml_get_widget (gui, "toolbar_radio_button_3");
@@ -266,11 +274,12 @@ prepare_general_page (GladeXML *gui)
 	     !splitscreen ||
 #endif
 	     !autoindent ||
+	     !tabsize ||
 	     !toolbar_radio_button_1 ||
 	     !toolbar_radio_button_2 ||
 	     !toolbar_radio_button_3 )
 	{
-		g_warning ("Could not load widgets from prefs.glade correctly\n");
+		g_warning ("Could not load widgets from prefs.glade\n");
 		return;
 	}
 	     
@@ -284,6 +293,10 @@ prepare_general_page (GladeXML *gui)
 #endif
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (autoindent),
 				     settings->auto_indent);
+
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tabsize),
+				   (guint) settings->tab_size);
+		
 
 	switch (settings->toolbar_labels)
 	{
@@ -314,6 +327,11 @@ prepare_general_page (GladeXML *gui)
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
 	gtk_signal_connect (GTK_OBJECT(toolbar_radio_button_3), "toggled",
 			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+
+	gtk_signal_connect (GTK_OBJECT (GTK_SPIN_BUTTON (tabsize)->adjustment),
+			    "value_changed",
+			    GTK_SIGNAL_FUNC (prefs_changed), NULL);
+	
 }
 
 static void

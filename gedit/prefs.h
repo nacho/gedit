@@ -37,7 +37,8 @@ struct _Preferences
 	gint  word_wrap;
 	gint  toolbar_labels;
 	gint  show_tabs;
-	gint  tab_pos;
+	gint  tab_pos; /* Mdi Tab Position */
+	gint  tab_size; /* Tab size */
 	guint show_status;
 	gint  show_tooltips;
 	gint  have_toolbar;

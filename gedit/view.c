@@ -729,6 +729,7 @@ gedit_view_init (GeditView *view)
 	
 	/* Create and configure the GtkText Widget */
 	view->text = GTK_TEXT (gtk_text_new (NULL, NULL));
+	gedit_view_set_tab_size (view, settings->tab_size);
 	gtk_text_set_editable  (view->text, !view->readonly);
 	gtk_text_set_word_wrap (view->text, settings->word_wrap);
 	
@@ -1210,3 +1211,28 @@ gedit_view_set_undo (GeditView *view, gint undo_state, gint redo_state)
 	}
 }
 		
+
+/**
+ * gedit_view_set_tab_size:
+ * @view: 
+ * @tab_size: 
+ * 
+ * Set the gtk_text tab size
+ **/
+void
+gedit_view_set_tab_size (GeditView *view, gint tab_size)
+{
+	GList *l;
+	gint i;
+
+	g_return_if_fail (GEDIT_IS_VIEW (view));
+
+	l = GTK_TEXT (view->text)->tab_stops;
+	g_list_free (l);
+		
+	l = NULL;
+	for (i = 0; i < 10; i++)
+		l = g_list_prepend (l, GINT_TO_POINTER (tab_size));
+	GTK_TEXT (view->text)->tab_stops = l;
+
+}

@@ -81,13 +81,6 @@ static void gedit_close_all_flag_verify (guchar *function);
 gchar * gedit_file_convert_to_full_pathname (const gchar * fname);
 
 
-static gchar * message_to_translators = N_("Hello Dear Translator :\n"
-					   "This is the unstable branch of gedit. \n"
-					   "I think you should be translating "
-					   "the gedit-1-0 branch. To get it from cvs type : \n"
-					   "cvs -z3 co -r gedit-1-0 gedit\n"
-					   "Thank you. Chema");
-
 static void  save_all_continue (GtkWidget *widget, gpointer cbdata);
 
 typedef enum {
@@ -1077,8 +1070,10 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	   as from an Untitled doc */
 	gedit_window_set_view_menu_sensitivity (gedit_window_active_app());
 
+#if 1
 	g_assert(gedit_window_active_app() != NULL);
 	g_assert(gedit_document_current() != NULL);
+#endif	
 
 	gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), FALSE);	
 }
