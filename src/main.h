@@ -76,6 +76,10 @@ typedef struct _gE_document {
 
 	struct stat *sb;
 
+	/* Undo/Redo GLists */
+	GList *undo;		/* Undo Stack */
+	GList *redo;		/* Redo Stack */
+
 } gE_document;
 
 typedef struct _gE_data {
