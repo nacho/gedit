@@ -17,9 +17,10 @@ URL: http://gedit.sourceforge.net
 BuildRoot: /var/tmp/gedit-%{PACKAGE_VERSION}-root
 Docdir: %{prefix}/help
 
-Requires: gtk+ >= 1.2.7
-Requires: gnome-libs >= 1.0.55
-Requires: gnome-print >= 0.25
+Requires: gtk+ >= 1.2.9
+Requires: gnome-libs >= 1.2.13
+Requires: gnome-print >= 0.28
+Requires: libglade >= 0.16
 
 %description
 gedit is a small text editor for the GNOME desktop.
@@ -58,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/gedit/plugins/*
 
 %changelog
+* Wed Apr 18 2001 Jason Leach <leach@wam.umd.edu>
+- updates requirements to latest GNOME 1.4 stuff
+
 * Wed Mar 28 2001 Jason Leach <leach@wam.umd.edu>
 - updates to requirements and source url
 
