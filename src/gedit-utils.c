@@ -1106,8 +1106,8 @@ gedit_utils_error_reporting_reverting_file (
 	{
 		case GNOME_VFS_ERROR_NOT_FOUND:
 			error_message = g_strdup_printf (
-                        	_("Could not find the file \"%s\".\n\n"
-			   	  "Please, check that you typed the location correctly and try again."),
+                        	_("Could not revert the file \"%s\" because gedit cannot find it.\n\n"
+			   	  "Perhaps, it has recently been deleted."),
                          	uri_for_display);
 			break;
 
@@ -1150,14 +1150,7 @@ gedit_utils_error_reporting_reverting_file (
 			   	   "it is too big."),
 			 	uri_for_display);
 			break;	
-
-		case GNOME_VFS_ERROR_INVALID_URI:
-			error_message = g_strdup_printf (
-                        	_("\"%s\" is not a valid location.\n\n"
-				   "Please, check that you typed the location correctly and try again."),
-                         	uri_for_display);
-                	break;
-	
+			
 		case GNOME_VFS_ERROR_ACCESS_DENIED:
 			error_message = g_strdup_printf (
 				_("Could not revert the file \"%s\" because "
@@ -1172,14 +1165,7 @@ gedit_utils_error_reporting_reverting_file (
 				  "Please, close some open file and try again."),
                          	uri_for_display);
                 	break;
-
-		case GNOME_VFS_ERROR_IS_DIRECTORY:
-			error_message = g_strdup_printf (
-				_("\"%s\" is a directory.\n\n"
-				  "Please, check that you typed the location correctly and try again."),
-                         	uri_for_display);
-                	break;
-
+	
 		case GNOME_VFS_ERROR_NO_MEMORY:
 			error_message = g_strdup_printf (
 				_("Not enough available memory to revert the file \"%s\"."
@@ -1197,22 +1183,14 @@ gedit_utils_error_reporting_reverting_file (
                 	error_message = g_strdup_printf (
 				_("Could not revert the file \"%s\" because no host \"%s\" " 
 				  "could be found. \n\n"
-                		  "Please, check that you typed the location correctly "
-				  "and that your proxy settings are correct and then "
+                		  "Please, check that your proxy settings are correct and "
 				  "try again"),
 				uri_for_display,
 				gnome_vfs_uri_get_host_name (vfs_uri));
 
 			gnome_vfs_uri_unref (vfs_uri);
 			break;
-
-		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
-			error_message = g_strdup_printf (
-                        	_("Could not revert the file \"%s\" because the host name was invalid.\n\n"
-				   "Please, check that you typed the location correctly and try again."),
-                         	uri_for_display);
-                	break;
-
+            
 		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
 			error_message = g_strdup_printf (
 				_("Could not revert the file \"%s\" because the host name was empty.\n\n"
@@ -1223,8 +1201,7 @@ gedit_utils_error_reporting_reverting_file (
 		case GNOME_VFS_ERROR_LOGIN_FAILED:
 			error_message = g_strdup_printf (
 				_("Could not revert the file \"%s\" because the attempt to "
-				  "log in failed.\n\n"
-				  "Please, check that you typed the location correctly and try again."),
+				  "log in failed."),
 				uri_for_display);		
 			break;
 
@@ -1243,6 +1220,8 @@ gedit_utils_error_reporting_reverting_file (
 			break;
 
 		/*
+		case GNOME_VFS_ERROR_INVALID_URI:
+		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
 		case GNOME_VFS_ERROR_GENERIC:
 		case GNOME_VFS_ERROR_INTERNAL:
 		case GNOME_VFS_ERROR_BAD_PARAMETERS:
@@ -1270,6 +1249,8 @@ gedit_utils_error_reporting_reverting_file (
 		case GNOME_VFS_ERROR_SERVICE_OBSOLETE,
 		case GNOME_VFS_ERROR_PROTOCOL_ERROR,
 		case GNOME_VFS_NUM_ERRORS:
+		case GNOME_VFS_ERROR_IS_DIRECTORY:
+
 		*/
 		default:
 			error_message = g_strdup_printf (
