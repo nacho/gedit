@@ -256,6 +256,7 @@ static CategoriesTreeItem editor_behavior [] =
 	{ NULL }
 };
 
+#if 0
 static CategoriesTreeItem print [] =
 {
 	{N_("Page"), NULL, PRINT_SETTINGS},
@@ -264,6 +265,7 @@ static CategoriesTreeItem print [] =
 
 	{ NULL }
 };
+#endif
 
 static CategoriesTreeItem plugins [] =
 {
@@ -276,7 +278,9 @@ static CategoriesTreeItem plugins [] =
 static CategoriesTreeItem toplevel [] =
 {
 	{N_("Editor"), editor_behavior, LOGO},
+#if 0
 	{N_("Print"), print, LOGO},
+#endif
 	{N_("Plugins"), plugins, LOGO},	
 
 	{ NULL }
