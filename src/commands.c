@@ -57,7 +57,7 @@ static void recent_cb(GtkWidget *w, gE_data *data);
 
 static GtkWidget *open_fs, *save_fs;
 GtkWidget *ssel = NULL;
-GtkWidget *osel = NULL;
+static GtkWidget *osel = NULL;
 gchar *oname = NULL;
 
 /* handles changes in the text widget... */
@@ -411,7 +411,7 @@ void window_new_cb(GtkWidget *widget, gpointer cbdata)
 /*
  * file open callback : user selects "Ok"
  */
-static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
+static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 {
 	gchar *filename;
 	gchar *nfile;
@@ -419,27 +419,28 @@ static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
 	gE_document *doc;
 	GtkFileSelection *fs;
 
-
+g_warning ("Watch out!");
 	fs = GTK_FILE_SELECTION(osel);
 
 /*	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(osel));*/
 	filename = g_malloc (strlen (gtk_file_selection_get_filename (fs)));
 	strcpy (filename, gtk_file_selection_get_filename(fs));
+	gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel),"");
 	
 	if (filename != NULL) 
 	  {
 		if (stat(filename, &sb) == -1)
 			return;
 
-/*		if (S_ISDIR(sb.st_mode)) 
+		if (S_ISDIR(sb.st_mode)) 
 		  {
 			nfile = g_malloc0(strlen (filename) + 3);
 			sprintf(nfile, "%s/.", filename);
-			gtk_file_selection_set_filename(GTK_FILE_SELECTION(osel), nfile);
+			gtk_file_selection_set_filename(GTK_FILE_SELECTION(fs), nfile);
 			g_free(nfile);
 			return;
 		  }
-*/
+
 		 if (gE_document_current ())
 		   {
 		     doc = gE_document_current();
@@ -448,17 +449,24 @@ static void file_open_ok_sel(GtkWidget *widget, gE_data *data)
 		       doc = gE_document_new_with_file (filename);
 		     else
 		       gE_file_open (GE_DOCUMENT(doc), filename);
+		     
+		     gtk_widget_hide (GTK_WIDGET(osel));
+		     return;
 		   }
 		 else
 		   {
 		     doc = gE_document_new_with_file (filename);
+		     
+		     gtk_widget_hide (GTK_WIDGET(osel));
+		     return;
 		   }
 	
 		
 
 	  }
-	  
+	
 	gtk_widget_hide (GTK_WIDGET(osel));
+	return;
 	
 } /* file_open_ok_sel */
 
@@ -495,12 +503,12 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 		
 	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(osel));
 	
-	/*gtk_signal_connect(GTK_OBJECT(open_fs), "destroy",
-			(GtkSignalFunc)file_sel_destroy, open_fs);*/
+/*	gtk_signal_connect(GTK_OBJECT(open_fs), "destroy",
+			(GtkSignalFunc)file_sel_destroy, osel);*/
 			
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->ok_button), 
 				   "clicked", (GtkSignalFunc)file_open_ok_sel,
-				   NULL);
+				   osel);
 	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->cancel_button),
 				   "clicked", (GtkSignalFunc)file_cancel_sel,
 			       osel);
@@ -510,6 +518,8 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 		return;
 */
 	gtk_widget_show(osel);
+	
+	return;
 }
 
 
