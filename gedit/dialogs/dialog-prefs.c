@@ -152,6 +152,7 @@ destroy_cb (void)
 {
 	gedit_debug("", DEBUG_PREFS);
 	gtk_widget_destroy (GTK_WIDGET (propertybox));
+	propertybox = NULL;
 }
 
 static void
@@ -559,7 +560,6 @@ dialog_prefs_impl (GladeXML *gui)
 
 	gnome_dialog_set_parent (GNOME_DIALOG (propertybox),
 				 gedit_window_active());
-	gtk_window_set_modal (GTK_WINDOW (propertybox), TRUE);
 
 	/* show everything */
 	gtk_widget_show_all (propertybox);
@@ -584,16 +584,9 @@ dialog_prefs (void)
 		dialog_prefs_impl (gui);
 		gtk_object_unref (GTK_OBJECT (gui));
 	}
-	
+	else
+	{
+		gdk_window_show (propertybox->window);
+		gdk_window_raise (propertybox->window);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-

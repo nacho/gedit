@@ -37,8 +37,8 @@ typedef enum {
 	DEBUG_DOCUMENT,
 	DEBUG_RECENT,	
 	DEBUG_COMMANDS,
-	DEBUG_WINDOW,
-} DebugSection;
+	DEBUG_WINDOW
+}DebugSection;
 
 extern gint debug;
 extern gint debug_view;

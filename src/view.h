@@ -44,6 +44,8 @@ struct _View
 	GtkWidget *viewport;
 	GtkWidget *pane;
 	GtkWidget *window;
+
+	gint view_text_changed_signal;
 	
 #ifdef ENABLE_SPLIT_SCREEN	
 	gint split;
@@ -67,7 +69,8 @@ struct _ViewClass
 };
 
 /* callback */
-void	gedit_view_changed_cb	(GtkWidget *w, gpointer cbdata);
+void	gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata);
+void	gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 void	gedit_view_add_cb (GtkWidget *widget, gpointer data);
 void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
 

@@ -56,17 +56,24 @@ struct _Document
 	GList *redo;
 };
 
+typedef enum {
+	GEDIT_CLOSE_ALL_FLAG_NORMAL,
+	GEDIT_CLOSE_ALL_FLAG_CLOSE_ALL,
+	GEDIT_CLOSE_ALL_FLAG_QUIT
+}GeditCloseAllFlagStates;
 
 #define NUM_MDI_MODES 4
 extern guint mdi_type [NUM_MDI_MODES];
 extern GnomeMDI *mdi;
+gint gedit_close_all_flag;
+gint gedit_mdi_destroy_signal;
 
 void gedit_document_insert_text  (Document *doc, guchar *text, guint position,              gint undoable);
 void gedit_document_delete_text  (Document *doc,               guint position, gint length, gint undoable);
 void gedit_document_replace_text (Document *doc, guchar *text, guint position, gint length, gint undoable);
 
-
 void gedit_document_set_readonly (Document *doc, gint readonly);
+void gedit_document_text_changed_signal_connect (Document *doc);
 
 gchar*	gedit_document_get_tab_name (Document *doc);
 guchar* gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos);
@@ -75,7 +82,7 @@ guint	gedit_document_get_buffer_length (Document * doc);
 
 Document * gedit_document_new (void);
 Document * gedit_document_new_with_title (gchar *title);
-Document * gedit_document_new_with_file (gchar *filename);
+gint       gedit_document_new_with_file (gchar *file_name);
 Document * gedit_document_current (void);
 
 GtkType gedit_document_get_type (void);

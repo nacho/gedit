@@ -111,7 +111,6 @@ filenames_dropped (GtkWidget        *widget,
                    guint             time)
 {
 	GList *names, *tmp_list;
-	Document *doc;
 
 	gedit_debug("", DEBUG_FILE);
 	
@@ -120,7 +119,7 @@ filenames_dropped (GtkWidget        *widget,
 
 	while (tmp_list)
 	{
-		doc = gedit_document_new_with_file ((gchar *)tmp_list->data);
+		gedit_document_new_with_file ((gchar *)tmp_list->data);
 		tmp_list = tmp_list->next;
 	}
 }

@@ -127,6 +127,8 @@ main (int argc, char **argv)
 
 	gedit_document_load (file_list);
 
+	gedit_close_all_flag_clear ();
+
 	gtk_main();
 
 	return 0;

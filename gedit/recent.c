@@ -2,7 +2,7 @@
 /*
  * gedit
  *
- * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
+ * Copyright (C) 1998, 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach, Jose M Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,9 +37,9 @@ static void recent_update_menus (GnomeApp *app, GList *recent_files);
 static void recent_cb (GtkWidget *w, gpointer data);
        void recent_add (char *filename);
 
-static GList * history_get_list (void);
-gchar * history_update_list (gchar *filename);
-void history_write_config (void);
+static GList *	history_get_list (void);
+gchar *		history_update_list (gchar *filename);
+void		history_write_config (void);
 
 
 GList *history_list = NULL;
@@ -60,7 +60,8 @@ history_get_list (void)
 
         /* Get maximum number of history entries.  Write default value to 
          * config file if no entry exists. */
-        max_entries = gnome_config_get_int_with_default ("MaxFiles=4", &do_set);        if (do_set)
+        max_entries = gnome_config_get_int_with_default ("MaxFiles=4", &do_set);
+	if (do_set)
                 gnome_config_set_int ("MaxFiles", 4);
 
         /* Read the history filenames from the config file */
@@ -245,19 +246,12 @@ recent_cb (GtkWidget *widget, gpointer data)
 	g_return_if_fail (data != NULL);
 
 	doc = gedit_document_new_with_file (data);
-	/*
-	if (doc)
-	{
-		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-		gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-	}
-	else
-	{
-		g_print ("recent_cb(): file unable to open\n");
-		g_print ("*%s*\n", (gchar *) data);
-		FIXME: If an error was encountered the delete the
-		   entry from the menu 
-	}*/
+
+	if (!doc)
+		gedit_flash_va (_("Unable to open recent file : %s"), (gchar *) data);
+
+	/*FIXME: If an error was encountered the delete the
+	  entry from the menu. Chema */
 }
 
 /**

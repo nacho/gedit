@@ -339,11 +339,12 @@ gedit_undo_undo (GtkWidget *w, gpointer data)
 		g_assert_not_reached ();
 	}
 
+	/* There are some problems with this. Chema 
 	if (doc->changed != undo->status)
 	{
 		doc->changed = undo->status;
 		gedit_document_set_title (doc);
-	}
+		}*/
 }
 
 /**
@@ -403,11 +404,13 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 		g_assert_not_reached ();
 	}
 
+	/* There are some problems with this. Chema 
 	if (doc->changed != redo->status)
 	{
 		doc->changed = redo->status;
 		gedit_document_set_title (doc);
 	}
+	*/
 }
 
 

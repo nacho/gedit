@@ -1,3 +1,43 @@
+2000-06-13  Chema Celorio  <chema@celorio.com>
+
+	* file.c: finish fixing the BUG in which gedit will not
+	exit after a quit request is made from the user or a close
+	all encounters an Untitled document. This had to be done with
+	a hack to fix the problem that gnome_mdi_remove_all can't wait
+	for a save_as dialog encountered when saving Untitled documents.
+	(gedit_close_all_flag_status): new function
+	(gedit_close_all_flag_clear): new function
+	(gedit_close_all_flag_verify): new function
+
+2000-06-12  Chema Celorio  <chema@celorio.com>
+
+	* file.c (gedit_file_open): connect the text_changed signal after opening a file.
+
+	* document.c (gedit_document_new_with_file): return TRUE/FALSE upon succes/error
+	modified all the functions that called this one.
+
+	* view.c (gedit_view_update_line_indicator): new name for line_pos_cb.
+
+	* document.c (gedit_mdi_init): dont' connect to "child_changed"
+	connect to view_changed so that we set the title of the window
+	when switching to/from diferent views and not only diferent docs.
+
+	* file.c (file_quit_cb): disconect the "destroy" signal before
+	calling gedit_object_destroy. Because it was conected to this
+	function and it was beeing called twice.
+
+	* document.h: added a variable to hold the signal "destroy"
+	for mdi
+
+	* dialogs/dialog-prefs.c: don't make the dialog modal, if
+	it Settings->Preferences is called again show and raise
+	the
+
+	* file.c (gedit_dump_close_all_flag_status): new function
+	usefull for debuging, remove later.
+
+	* utils.h: add gedit_close_all_flag enums'
+
 2000-06-11  Chema Celorio  <chema@celorio.com>
 
 	* file.c (file_save_document): new function

@@ -39,6 +39,8 @@ void gedit_document_insert_text  (Document *doc, guchar *text, guint position,  
 void gedit_document_delete_text  (Document *doc,               guint position, gint length, gint undoable);
 void gedit_document_replace_text (Document *doc, guchar *text, guint position, gint length, gint undoable);
 void gedit_document_set_readonly (Document *doc, gint readonly);
+void gedit_document_text_changed_signal_connect (Document *doc);
+
 
 gchar*	gedit_document_get_tab_name (Document *doc);
 guchar* gedit_document_get_chars (Document *doc, guint start_pos, guint end_pos);
@@ -47,11 +49,10 @@ guint	gedit_document_get_buffer_length (Document * doc);
 
 Document * gedit_document_new (void);
 Document * gedit_document_new_with_title (gchar *title);
-Document * gedit_document_new_with_file (gchar *filename);
+gint       gedit_document_new_with_file (gchar *file_name);
 Document * gedit_document_current (void);
 
 static gchar*		gedit_document_get_config_string (GnomeMDIChild *child);
-static void		child_changed_cb (GnomeMDI *mdi, Document *doc);
 static gint		remove_child_cb (GnomeMDI *mdi, Document *doc);
 
 static	GtkWidget*	gedit_document_create_view (GnomeMDIChild *child);
@@ -195,6 +196,26 @@ gedit_document_set_readonly (Document *doc, gint readonly)
 	}
 
 }
+
+void
+gedit_document_text_changed_signal_connect (Document *doc)
+{
+	View *nth_view;
+	gint n;
+	
+	for (n = 0; n < g_list_length (doc->views); n++)
+	{
+		nth_view = g_list_nth_data (doc->views, n);
+
+		g_return_if_fail (nth_view != NULL);
+
+		nth_view->view_text_changed_signal =
+			gtk_signal_connect (GTK_OBJECT(nth_view->text), "changed",
+					    GTK_SIGNAL_FUNC (gedit_view_text_changed_cb), nth_view);
+	}  
+
+}
+
 
 
 #define GEDIT_MIN_TAB_LENGTH 6
@@ -353,8 +374,8 @@ gedit_document_new_with_title (gchar *title)
 	return doc;
 }
 
-Document *
-gedit_document_new_with_file (gchar *filename)
+gint
+gedit_document_new_with_file (gchar *file_name)
 {
 	Document *doc;
 
@@ -366,9 +387,11 @@ gedit_document_new_with_file (gchar *filename)
 		if (doc->changed || doc->filename)
 			doc = NULL;
 
-	gedit_file_open (doc, filename);
+	if (gedit_file_open (doc, file_name) == 1)
+		return FALSE;
+	else
+		return TRUE;
 
-	return doc;
 }
 
 Document *
@@ -389,34 +412,12 @@ gedit_document_get_config_string (GnomeMDIChild *child)
 	return g_strdup_printf ("%d", GPOINTER_TO_INT (gtk_object_get_user_data (GTK_OBJECT (child))));
 }
 
-static void
-child_changed_cb (GnomeMDI *mdi, Document *doc)
-{
-	Document *doc2 = gedit_document_current();
-	View *view;
-
-	gedit_debug ("", DEBUG_DOCUMENT);
-
-	if (doc != doc)
-	     g_warning ("Doc != doc2. In child_changed\n");
-	
-	if (doc2)
-	{
-		view = gedit_view_current();
-		if (view==NULL)
-			return;
-		gtk_widget_grab_focus (view->text);
-		gedit_document_set_title (doc2);
-	}
-}
-
 static gint
 remove_child_cb (GnomeMDI *mdi, Document *doc)
 {
 	GtkWidget *msgbox;
-	int ret;
-	char *fname, *msg;
-	/*gedit_data *data = g_malloc (sizeof(gedit_data));*/
+	gint ret;
+	gchar *fname, *msg;
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 	
@@ -427,7 +428,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 
 	fname = GNOME_MDI_CHILD(doc)->name;
 
-	if ((doc->changed)&&(!doc->readonly))
+	if (doc->changed)
 	{
 		msg = g_strdup_printf (_("``%s'' has been modified.  Do you wish to save it?"), fname);
 		msgbox = gnome_message_box_new (msg,
@@ -450,6 +451,7 @@ remove_child_cb (GnomeMDI *mdi, Document *doc)
 		case 1:
 			return TRUE;
 		default:
+			gedit_close_all_flag_clear();
 			return FALSE;
 		}
 	}
@@ -570,10 +572,11 @@ gedit_mdi_init (void)
 	/* connect signals */
 	gtk_signal_connect (GTK_OBJECT (mdi), "remove_child",
 			    GTK_SIGNAL_FUNC (remove_child_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT (mdi), "destroy",
-			    GTK_SIGNAL_FUNC (file_quit_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT (mdi), "child_changed",
-			    GTK_SIGNAL_FUNC (child_changed_cb), NULL);
+	gedit_mdi_destroy_signal =
+		gtk_signal_connect (GTK_OBJECT (mdi), "destroy",
+				    GTK_SIGNAL_FUNC (file_quit_cb), NULL);
+	gtk_signal_connect (GTK_OBJECT (mdi), "view_changed",
+			    GTK_SIGNAL_FUNC (gedit_view_changed_cb), NULL);
         gtk_signal_connect (GTK_OBJECT (mdi), "app_created",
 			    GTK_SIGNAL_FUNC (gedit_window_new), NULL);
 
@@ -620,6 +623,10 @@ gedit_document_set_title (Document *doc)
 {
 	gchar *title;
 	gchar *docname;
+	/*
+	gint i;
+	View *nth_view;
+	*/
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 	
@@ -632,6 +639,16 @@ gedit_document_set_title (Document *doc)
 	else
 		title = g_strdup_printf ("gedit: %s", docname);
 
+	/* 
+	for (i = 0; i < g_list_length (doc->views); i++)
+	{
+		nth_view = g_list_nth_data (doc->views, i);
+		if (nth_view == view_exclude)
+			continue;
+		
+		gedit_view_insert (nth_view, position, text, length);
+	}
+	*/
 	gtk_window_set_title (gedit_window_active(), title);
 
 	g_free (title);

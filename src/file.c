@@ -64,6 +64,11 @@ static void gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata);
 static gint delete_event_cb (GtkWidget *w, GdkEventAny *e);
 static void cancel_cb (GtkWidget *w, gpointer cbdata);
 
+/* Close all flag */
+       void gedit_close_all_flag_clear (void);
+static void gedit_close_all_flag_status (guchar *function);
+static void gedit_close_all_flag_verify (guchar *function);
+
 /* TODO : add flash on all operations ....Chema*/
 /*        what happens when you open the same doc
 	  twice. I think we should add another view
@@ -144,7 +149,8 @@ gedit_file_open (Document *doc, gchar *fname)
 
 	doc->changed = FALSE;
 	gedit_document_set_title (doc);
-	
+	gedit_document_text_changed_signal_connect (doc);
+
 	g_free (tmp_buf);
 	
 	gedit_flash_va ("%s %s", _(MSGBAR_FILE_OPENED), fname);
@@ -205,6 +211,7 @@ gedit_file_save (Document *doc, gchar *fname)
 						   "and that you have the appropriate write permissions."), fname);
 		gnome_app_error (mdi->active_window, errstr);
 		g_free (errstr);
+		gedit_close_all_flag_clear();
 		return 1;
 	}
 	
@@ -219,6 +226,7 @@ gedit_file_save (Document *doc, gchar *fname)
 		gnome_app_error (mdi->active_window, errstr);
 		fclose (fp);
 		g_free (errstr);
+		gedit_close_all_flag_clear();
 		return 1;
 	}
 	
@@ -233,6 +241,7 @@ gedit_file_save (Document *doc, gchar *fname)
 		gnome_app_error (mdi->active_window, errstr);
 		fclose (fp);
 		g_free (errstr);
+		gedit_close_all_flag_clear();
 		return 1;
 	}
 
@@ -247,12 +256,13 @@ gedit_file_save (Document *doc, gchar *fname)
 	gedit_document_set_readonly (doc, access (fname, W_OK) ? TRUE : FALSE);
 	gedit_document_set_title (doc);
 
-	gtk_signal_connect (GTK_OBJECT(view->text), "changed",
-			    GTK_SIGNAL_FUNC(gedit_view_changed_cb), view);
+	gedit_document_text_changed_signal_connect(doc);
 
 	gedit_flash (_(MSGBAR_FILE_SAVED));
+
 	return 0;
 }
+
 
 /**
  * gedit_file_save_as:
@@ -279,6 +289,7 @@ gedit_file_save_as (Document *doc)
 	if (save_file_selector == NULL)
 	{
 		save_file_selector = gtk_file_selection_new (NULL);
+		
 		gtk_signal_connect(GTK_OBJECT(save_file_selector),
 				   "delete_event",
 				   GTK_SIGNAL_FUNC(delete_event_cb),
@@ -287,6 +298,21 @@ gedit_file_save_as (Document *doc)
 				    "clicked",
 				    GTK_SIGNAL_FUNC(cancel_cb),
 				    save_file_selector);
+
+		/* If this save as was the result of a close all, and the user cancels the
+		   save, clear the flag */
+		gtk_signal_connect(GTK_OBJECT(save_file_selector),
+				   "delete_event",
+				   GTK_SIGNAL_FUNC(gedit_close_all_flag_clear),
+				   NULL);
+		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->cancel_button),
+				    "clicked",
+				    GTK_SIGNAL_FUNC(gedit_close_all_flag_clear),
+				    NULL);
+
+		/*
+		g_print ("1. Doc->filename %s untitled #%i\n", doc->filename, doc->untitled_number);
+		*/
 		/* OK clicked */
 		gtk_signal_connect (GTK_OBJECT(GTK_FILE_SELECTION(save_file_selector)->ok_button),
 				    "clicked",
@@ -380,6 +406,8 @@ file_new_cb (GtkWidget *widget, gpointer cbdata)
 	
 	gedit_flash (_(MSGBAR_FILE_NEW));
 
+	gedit_close_all_flag_verify ("file_new_cb");
+
 	doc = gedit_document_new ();
 }
 
@@ -388,7 +416,9 @@ file_open_cb (GtkWidget *widget, gpointer cbdata)
 {
 
 	gedit_debug("", DEBUG_FILE);
-	
+
+	gedit_close_all_flag_verify ("file_open_cb");
+
 	if (open_file_selector && GTK_WIDGET_VISIBLE (open_file_selector))
 		return;
 
@@ -422,6 +452,8 @@ file_save_as_cb (GtkWidget *widget, gpointer cbdata)
 	
 	gedit_debug("", DEBUG_FILE);
 
+	gedit_close_all_flag_verify ("file_save_as_cb");
+	
 	doc = gedit_document_current();
 		
 	if (doc==NULL)
@@ -451,15 +483,19 @@ cancel_cb (GtkWidget *w, gpointer data)
 static void
 gedit_file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
-	Document *doc;
-
+	guchar * file_name;
+	
 	gedit_debug("", DEBUG_FILE);
 
-	if ((doc = gedit_document_new_with_file((gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector))))) != NULL)
+	file_name = gtk_file_selection_get_filename (GTK_FILE_SELECTION (open_file_selector));
+
+	if (gedit_document_new_with_file (file_name))
 	{
-		gedit_flash_va (_("Loaded file %s"), doc->filename);
+		gedit_flash_va (_("Loaded file %s"), file_name);
 	}
 
+	g_free (file_name);
+	
 	gtk_widget_hide (GTK_WIDGET(open_file_selector));
 	return;
 }
@@ -474,7 +510,7 @@ file_save_document (Document * doc)
 
 	if (doc->filename == NULL)
 	{
-		file_save_as_cb (NULL, NULL);
+		gedit_file_save_as (doc);
 		return FALSE;
 	}
 	else
@@ -491,13 +527,14 @@ file_save_cb (GtkWidget *widget, gpointer cbdata)
 	
 	gedit_debug("", DEBUG_FILE);
 
+	gedit_close_all_flag_verify ("file_save_cb");
+
 	doc = gedit_document_current ();
 
 	if (doc==NULL)
 		return;
 
 	file_save_document (doc);
-
 }
 
 
@@ -528,7 +565,11 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	gedit_debug("", DEBUG_FILE);
 
 	doc = cbdata;
-	
+
+	/*
+	g_print ("Doc->filename %s untitled #%i\n", doc->filename, doc->untitled_number);
+	*/
+		 
 	if (!doc)
 		return;
 	
@@ -553,9 +594,11 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 		case 0:
 			break;
 		case 1:
+			gedit_close_all_flag_clear();
 			gedit_flash (_("Document has not been saved."));
 			return;
 		default:
+			gedit_close_all_flag_clear();
 			return;
 		}
 	}
@@ -564,6 +607,7 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 	{
 		gedit_flash (_("Error saving file!"));
 		g_free (filename);
+		gedit_close_all_flag_clear();
 		return;
 	}
 
@@ -576,7 +620,19 @@ gedit_file_save_as_ok_sel (GtkWidget *w, gpointer cbdata)
 		gedit_view_set_readonly (nth_view, FALSE);
 	}
 
-
+	gedit_close_all_flag_status ("gedit_file_save_ok_sel");
+	switch (gedit_close_all_flag){
+	case GEDIT_CLOSE_ALL_FLAG_NORMAL:
+		break;
+	case GEDIT_CLOSE_ALL_FLAG_CLOSE_ALL:
+		file_close_all_cb (NULL, NULL);
+		break;
+	case GEDIT_CLOSE_ALL_FLAG_QUIT:
+		file_quit_cb (NULL, NULL);
+		break;
+	default:
+		g_return_if_fail (FALSE);
+	}
 }
 
 
@@ -585,7 +641,7 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
 
 	gedit_debug("", DEBUG_FILE);
-	
+
 	if (mdi->active_child == NULL)
 		return;
 	gnome_mdi_remove_child (mdi, mdi->active_child, FALSE);
@@ -595,10 +651,19 @@ void
 file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_debug("", DEBUG_FILE);
+
+	gedit_close_all_flag_status("File_close_all_cb. Before");
+	
+	if (gedit_close_all_flag != GEDIT_CLOSE_ALL_FLAG_QUIT)
+		gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_CLOSE_ALL;
 	
 	if (mdi->active_child == NULL)
 		return;
 	gnome_mdi_remove_all (mdi, FALSE);
+
+	/* If this close all was successful, clear the flag */
+	if (gedit_document_current()==NULL)
+		gedit_close_all_flag_clear();
 }
 
 void
@@ -606,10 +671,15 @@ file_quit_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_debug("", DEBUG_FILE);
 
+	gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_QUIT;
 	file_close_all_cb (NULL, NULL);
 	
 	if (gedit_document_current()!=NULL)
 		return;
+
+	/* We need to disconnect the signal because mdi "destroy" event
+	   is connected to file_quit_cb ( i.e. this function ). Chema */
+	gtk_signal_disconnect (GTK_OBJECT(mdi), gedit_mdi_destroy_signal);
 	
 	gtk_object_destroy (GTK_OBJECT (mdi));
 	gedit_save_settings ();
@@ -626,7 +696,9 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 	Document *doc = gedit_document_current ();
 
 	gedit_debug("", DEBUG_FILE);
-	
+
+	gedit_close_all_flag_verify ("file_save_cb");
+
 	if (!doc)
 		return;
 
@@ -697,3 +769,46 @@ gedit_file_create_popup (guchar *title)
 	g_assert_not_reached ();
 	return FALSE;
 }
+
+void 
+gedit_close_all_flag_clear (void)
+{
+	gedit_debug("", DEBUG_FILE);
+
+	gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_NORMAL;
+	
+}
+
+static void
+gedit_close_all_flag_status (guchar * function)
+{
+	gedit_debug("", DEBUG_FILE);
+
+	g_return_if_fail (function!=NULL);
+
+	return;
+	
+	g_print("Close all flag state is : ");
+	switch (gedit_close_all_flag){
+	case GEDIT_CLOSE_ALL_FLAG_NORMAL:
+		g_print("NORMAL");
+		break;
+	case GEDIT_CLOSE_ALL_FLAG_CLOSE_ALL:
+		g_print("CLOSE ALL");
+		break;
+	case GEDIT_CLOSE_ALL_FLAG_QUIT:
+		g_print("QUIT");
+		break;
+	}
+	g_print("  %s \n", function);
+}
+
+static void
+gedit_close_all_flag_verify (guchar *function)
+{
+	gedit_debug("", DEBUG_FILE);
+
+	if (gedit_close_all_flag != GEDIT_CLOSE_ALL_FLAG_NORMAL)
+		g_warning ("The close all flag was set !!!!! Func: %s", function);
+}
+

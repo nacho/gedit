@@ -1,4 +1,9 @@
- ----------------------------------------------------------------------
+   - Design questions ?
+
+- Should we enable the split window ?
+- is document.c the place to have mdi_ini ?
+ 
+----------------------------------------------------------------------
   gedit 0.8.0 
 ----------------------------------------------------------------------
 ** Chema **
@@ -7,11 +12,16 @@
 [X] insert/delete text should not work for readonly documents
 [X] Documents opened should not have the "(modified)" tag in the 
     main window
-[ ] Fix the bug in which the user exits an if an Untitled doc is
+[X] Fix the bug in which the user exits an if an Untitled doc is
     open, gedit will not exit
 [X] Add undo data "replace" and gedit_document_replace() function
 [X] You should only be able to open 1 prefrences window
 [ ] Update README, HACKING, gedit.spec.in, AUTHORS etc..
+[ ] Add an Untitled file saved to the Recent file list
+[ ] Try to fix the line & column pos
+[ ] Fix the problem with the Main window title when switching
+    between different views of the same document
+[ ] After view_remove the main window title does not get updated
 
 ** Eric **
 [ ] New Documentation

@@ -41,36 +41,37 @@ enum {
 static gint gedit_view_signals[LAST_SIGNAL] = { 0 };
 GtkVBoxClass *parent_class = NULL;
 
-       void gedit_view_changed_cb (GtkWidget *w, gpointer cbdata);
-     gfloat gedit_view_get_window_position (View *view);
-       void gedit_view_set_window_position (View *view, gfloat position);
-       void gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
+void	gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata);
+void	gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view);
 
-static void views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
-static void views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
-       void gedit_view_insert (View  *view, guint position, gchar * text, gint length);
-       void gedit_view_delete (View *view, guint position, gint length);
+gfloat	gedit_view_get_window_position (View *view);
+void	gedit_view_set_window_position (View *view, gfloat position);
+void	gedit_view_set_window_position_from_lines (View *view, guint line, guint lines);
 
-       gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
-       void doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
-       void doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
-   gboolean auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
+static void	gedit_views_insert (Document *doc, guint position, gchar * text, gint lenth, View * view_exclude);
+static void	gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View * view_exclude);
 
+void		gedit_view_insert (View  *view, guint position, gchar * text, gint length);
+void		gedit_view_delete (View *view, guint position, gint length);
 
-guint gedit_view_get_type (void);
-GtkWidget * gedit_view_new (Document *doc);
+void		doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text, int length, int *pos, View *view, gint exclude_this_view, gint undo);
+void		doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos, View *view, gint exclude_this_view, gint undo);
+gboolean	auto_indent_cb (GtkWidget *text, char *insertion_text, int length, int *pos, gpointer data);
 
-       void gedit_view_set_word_wrap (View *view, gint word_wrap);
-       void gedit_view_set_readonly (View *view, gint readonly);
-       void gedit_view_set_font (View *view, gchar *fontname);
-       void gedit_view_set_position (View *view, gint pos);
-      guint gedit_view_get_position (View *view);
-       void gedit_view_set_selection (View *view, guint  start, guint  end);
-       gint gedit_view_get_selection (View *view, guint *start, guint *end);
-       void gedit_view_add_cb (GtkWidget *widget, gpointer data);
-       void gedit_view_remove_cb (GtkWidget *widget, gpointer data);
+guint		gedit_view_get_type (void);
+GtkWidget *	gedit_view_new (Document *doc);
 
-static void line_pos_cb (GtkWidget *widget, gpointer data);
+void	gedit_view_set_word_wrap (View *view, gint word_wrap);
+void	gedit_view_set_readonly (View *view, gint readonly);
+void	gedit_view_set_font (View *view, gchar *fontname);
+void	gedit_view_set_position (View *view, gint pos);
+guint	gedit_view_get_position (View *view);
+void	gedit_view_set_selection (View *view, guint  start, guint  end);
+gint	gedit_view_get_selection (View *view, guint *start, guint *end);
+void	gedit_view_add_cb (GtkWidget *widget, gpointer data);
+void	gedit_view_remove_cb (GtkWidget *widget, gpointer data);
+
+static void gedit_view_update_line_indicator (void);
 static gint gedit_event_button_press (GtkWidget *widget, GdkEventButton *event);
 static gint gedit_event_key_press (GtkWidget *w, GdkEventKey *event);
 static void gedit_view_class_init (ViewClass *klass);
@@ -90,21 +91,37 @@ gedit_view_current (void)
 }
 
 void
-gedit_view_changed_cb (GtkWidget *w, gpointer cbdata)
+gedit_view_changed_cb (GnomeMDI *mdi, GtkWidget *old_view)
+{
+	View *view;
+
+	gedit_debug ("", DEBUG_DOCUMENT);
+
+	view = gedit_view_current();
+	g_return_if_fail (view!=NULL);
+		
+	gtk_widget_grab_focus (view->text);
+	gedit_document_set_title (view->doc);
+}
+
+
+void
+gedit_view_text_changed_cb (GtkWidget *w, gpointer cbdata)
 {
 	View *view;
 	
-	gedit_debug ("", DEBUG_VIEW);
-	g_return_if_fail (cbdata != NULL);
+	gedit_debug ("---------", DEBUG_VIEW);
+
 	view = (View *) cbdata;
+	g_return_if_fail (view != NULL);
 
 	if (view->doc->changed)
 		return;
 	
 	view->doc->changed = TRUE;
 
-	/* We are not connecting this singnal anymore ...  Chema 
-	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->changed_id);*/
+	/* Disconect this signal */
+	gtk_signal_disconnect (GTK_OBJECT(view->text), (gint) view->view_text_changed_signal);
 
 	/* Set the title ( so that we add the "modified" string to it )*/
 	gedit_document_set_title (view->doc);
@@ -115,12 +132,14 @@ gedit_view_changed_cb (GtkWidget *w, gpointer cbdata)
 gfloat
 gedit_view_get_window_position (View *view)
 {
+	gedit_debug ("", DEBUG_VIEW);
 	return GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj)->value;
 }
 
 void
 gedit_view_set_window_position (View *view, gfloat position)
 {
+	gedit_debug ("", DEBUG_VIEW);
 	gtk_adjustment_set_value (GTK_ADJUSTMENT(GTK_TEXT(view->text)->vadj),
 				  position);
 }
@@ -131,6 +150,8 @@ gedit_view_set_window_position_from_lines (View *view, guint line, guint lines)
 	float position;
 	float upper;
 	float page_increment;
+
+	gedit_debug ("", DEBUG_VIEW);
 
 	g_return_if_fail (line <= lines);
 	
@@ -143,7 +164,7 @@ gedit_view_set_window_position_from_lines (View *view, guint line, guint lines)
 }
 
 void
-views_insert (Document *doc, guint position, gchar * text, gint length, View * view_exclude)
+gedit_views_insert (Document *doc, guint position, gchar * text, gint length, View * view_exclude)
 {
 	gint i;
 	View *nth_view;
@@ -152,9 +173,10 @@ views_insert (Document *doc, guint position, gchar * text, gint length, View * v
 
 	g_return_if_fail (doc!=NULL);
 
+	/* Why do we have to call view_text_changed_cb ? why is the "chaged" signal not calling it ?. Chema */
 	if (!doc->changed)
 		if (g_list_length (doc->views))
-			gedit_view_changed_cb (NULL, (gpointer) g_list_nth_data (doc->views, 0));
+			gedit_view_text_changed_cb (NULL, (gpointer) g_list_nth_data (doc->views, 0));
 	
 	for (i = 0; i < g_list_length (doc->views); i++)
 	{
@@ -170,9 +192,8 @@ views_insert (Document *doc, guint position, gchar * text, gint length, View * v
 void
 gedit_view_insert (View  *view, guint position, gchar * text, gint length)
 {
-	guint p1;
-	
-	p1 = gtk_text_get_point (GTK_TEXT (view->text));
+	gedit_debug ("", DEBUG_VIEW);
+
 	gtk_text_set_point (GTK_TEXT(view->text), position);
 	gtk_text_insert (GTK_TEXT (view->text), NULL,
 			 NULL, NULL, text,
@@ -180,7 +201,7 @@ gedit_view_insert (View  *view, guint position, gchar * text, gint length)
 }
 
 static void
-views_delete (Document *doc, guint start_pos, guint end_pos, View *view_exclude)
+gedit_views_delete (Document *doc, guint start_pos, guint end_pos, View *view_exclude)
 {
 	View *nth_view;
 	gint n;
@@ -208,6 +229,8 @@ gedit_view_delete (View *view, guint position, gint length)
 {
 	guint p1;
 
+	gedit_debug ("", DEBUG_VIEW);
+
 	p1 = gtk_text_get_point (GTK_TEXT (view->text));
 	gtk_text_set_point (GTK_TEXT(view->text), position);
 	gtk_text_forward_delete (GTK_TEXT (view->text), length);
@@ -233,9 +256,9 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,int length
 		gedit_undo_add (text_to_insert, position, (position + length), GEDIT_UNDO_INSERT, doc, view);
 	
 	if (!exclude_this_view)
-		views_insert (doc, position, text_to_insert, length, NULL);
+		gedit_views_insert (doc, position, text_to_insert, length, NULL);
 	else
-		views_insert (doc, position, text_to_insert, length, view);
+		gedit_views_insert (doc, position, text_to_insert, length, view);
 
 	g_free (text_to_insert);
 
@@ -260,14 +283,16 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 	g_free (text_to_delete);
 	
 	if (!exclude_this_view)
-		views_delete (doc, start_pos, end_pos, NULL);
+		gedit_views_delete (doc, start_pos, end_pos, NULL);
 	else
-		views_delete (doc, start_pos, end_pos, view);
+		gedit_views_delete (doc, start_pos, end_pos, view);
 
 	gedit_debug ("end", DEBUG_VIEW);
 }
 
 
+/* FIXME: rewrite this function. It's a bit dirty and it is dependant on the
+   text widget. Chema */
 gboolean
 auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 		int *pos, gpointer data)
@@ -418,7 +443,8 @@ gedit_view_init (View *view)
 	gtk_text_set_editable (GTK_TEXT(view->text), !view->readonly);
 	gtk_text_set_word_wrap (GTK_TEXT(view->text), settings->word_wrap);
 	gtk_text_set_line_wrap (GTK_TEXT(view->text), view->line_wrap);
-	
+
+	/* Hook the button & key pressed events */
 	gtk_signal_connect (GTK_OBJECT (view->text), "button_press_event",
 			    GTK_SIGNAL_FUNC (gedit_event_button_press), NULL);
 	gtk_signal_connect (GTK_OBJECT (view->text), "key_press_event",
@@ -428,7 +454,8 @@ gedit_view_init (View *view)
 	/* Handle Auto Indent */
 	gtk_signal_connect_after (GTK_OBJECT (view->text), "insert_text",
 				  GTK_SIGNAL_FUNC (auto_indent_cb), view);
-	
+
+	/* Connect the insert & delete text callbacks */
 	gtk_signal_connect (GTK_OBJECT (view->text), "insert_text",
 			    GTK_SIGNAL_FUNC (doc_insert_text_cb), view);
 	gtk_signal_connect (GTK_OBJECT (view->text), "delete_text",
@@ -437,8 +464,9 @@ gedit_view_init (View *view)
 
 	gtk_container_add (GTK_CONTAINER (view->window), view->text);
 
-	gtk_signal_connect (GTK_OBJECT(view->text), "changed",
-			    GTK_SIGNAL_FUNC (gedit_view_changed_cb), view);
+	view->view_text_changed_signal =
+		gtk_signal_connect (GTK_OBJECT(view->text), "changed",
+				    GTK_SIGNAL_FUNC (gedit_view_text_changed_cb), view);
 
 	gtk_widget_show (view->text);
 	gtk_text_set_point (GTK_TEXT(view->text), 0);
@@ -824,13 +852,15 @@ gedit_view_remove_cb (GtkWidget *widget, gpointer data)
 }
 
 static void
-line_pos_cb (GtkWidget *widget, gpointer data)
+gedit_view_update_line_indicator (void)
 {
 	static char col [32];
 
 	return;
+	/*
+	*/
 	
-	/* FIXME: Disable by chema for 0.7.0 . this hack is not working */
+	/* FIXME: Disable by chema for 0.7.0 . this hack is not working correctly */
 	gedit_debug ("", DEBUG_VIEW);
 
 	sprintf (col, "Column: %d", GTK_TEXT(VIEW(gedit_view_current())->text)->cursor_pos_x/7);
@@ -847,7 +877,7 @@ gedit_event_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	gedit_debug ("", DEBUG_VIEW);
 	
-	line_pos_cb (NULL, NULL);
+	gedit_view_update_line_indicator ();
 
 	return FALSE;
 }
@@ -857,7 +887,7 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
 	gedit_debug ("", DEBUG_VIEW);
 
-	line_pos_cb (NULL, NULL);
+	gedit_view_update_line_indicator ();
 
 	if (event->state & GDK_MOD1_MASK)
 	{

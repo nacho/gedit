@@ -338,7 +338,9 @@ doc_swaphc_cb (GtkWidget *widget, gpointer data)
 
 	/* hmm maybe whe should check if the file exist before we try
 	 * to open.  this will be fixed later....  */
-	doc = gedit_document_new_with_file (newfname);
+	/* This function will return FALSE/TRUE on ERROR/SUCCES.
+	   So you can add any dialog and stuff if you want. Chema */
+	gedit_document_new_with_file (newfname);
 }
 
 
