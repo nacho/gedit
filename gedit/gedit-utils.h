@@ -62,20 +62,6 @@ GtkWidget *gedit_dialog_add_button (GtkDialog *dialog,
 gchar *gedit_utils_str_middle_truncate (const gchar *string, 
 					guint truncate_length);
 
-void gedit_utils_error_reporting_loading_file (const gchar *uri, 
-					       const GeditEncoding *encoding,
-					       GError *error,
-					       GtkWindow *parent);
-void gedit_utils_error_reporting_saving_file  (const gchar *uri, 
-					       GError *error,
-					       GtkWindow *parent);
-void gedit_utils_error_reporting_reverting_file (const gchar *uri, 
-					       const GError *error,
-					       GtkWindow *parent);
-void gedit_utils_error_reporting_creating_file (const gchar *uri,
-						gint error_code,
-						GtkWindow *parent);
-
 gboolean g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2);
 
 void gedit_utils_set_atk_name_description (GtkWidget *widget, const gchar *name,

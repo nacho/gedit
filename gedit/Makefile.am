@@ -44,6 +44,7 @@ NON_INST_H_FILS =			\
 	bonobo-mdi-session.h		\
 	gedit-commands.h		\
 	gedit-file-selector-util.h 	\
+	gedit-io-error-dialogs.h	\
 	gedit-plugins-engine.h		\
 	gedit-session.h			\
 	gedit-languages-manager.h	\
@@ -99,6 +100,7 @@ gedit_SOURCES = 			\
 	bonobo-mdi-child.c		\
 	bonobo-mdi-session.c		\
 	gedit-file-selector-util.c 	\
+	gedit-io-error-dialogs.c	\
 	gedit-plugins-engine.c		\
 	gedit-plugin.c			\
 	gedit-prefs-manager-app.c	\

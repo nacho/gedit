@@ -44,6 +44,7 @@
 #include "gedit-mdi.h"
 #include "gedit-recent.h" 
 #include "gedit-file-selector-util.h"
+#include "gedit-io-error-dialogs.h"
 #include "gedit-plugins-engine.h"
 #include "recent-files/egg-recent-model.h"
 #include "gedit-prefs-manager-app.h"
@@ -266,8 +267,9 @@ gedit_file_save (GeditMDIChild* child, gboolean force)
 			bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
 		}
 
-		gedit_utils_error_reporting_saving_file (uri, error,
-					GTK_WINDOW (gedit_get_active_window ()));
+		gedit_error_reporting_saving_file (uri,
+						   error,
+						   GTK_WINDOW (gedit_get_active_window ()));
 
 		g_error_free (error);
 
@@ -395,8 +397,9 @@ gedit_file_save_as (GeditMDIChild *child)
 		{
 			g_return_val_if_fail (error != NULL, FALSE);
 
-			gedit_utils_error_reporting_saving_file (uri, error,
-						GTK_WINDOW (gedit_get_active_window ()));
+			gedit_error_reporting_saving_file (uri,
+							   error,
+							   GTK_WINDOW (gedit_get_active_window ()));
 
 			g_error_free (error);
 
@@ -659,8 +662,9 @@ document_reverted_cb (GeditDocument *document,
 
 		gedit_debug (DEBUG_DOCUMENT, "Error reverting file %s", uri_to_display);
 
-		gedit_utils_error_reporting_reverting_file (raw_uri, error,
-					GTK_WINDOW (gedit_get_active_window ()));
+		gedit_error_reporting_reverting_file (raw_uri,
+						      error,
+						      GTK_WINDOW (gedit_get_active_window ()));
 
 		gedit_utils_flash_va (_("The document \"%s\" has not been reverted."), uri_to_display);
 	}
@@ -1090,13 +1094,13 @@ document_loaded_cb (GeditDocument *document,
 
 		gedit_recent_remove (uri);
 
-		gedit_utils_error_reporting_loading_file (uri, encoding_to_use, (GError *)error,
-					GTK_WINDOW (gedit_get_active_window ()));
+		gedit_error_reporting_loading_file (uri,
+						    encoding_to_use,
+						    (GError *)error,
+						    GTK_WINDOW (gedit_get_active_window ()));
 
 		if (new_child != NULL)
-		{
 			children_to_unref = g_slist_prepend (children_to_unref, new_child);
-		}
 
 		gedit_debug (DEBUG_DOCUMENT, "Returning %s", uri_to_display);
 	}
@@ -1301,8 +1305,10 @@ open_files ()
 		if (new_child == NULL)
 		{
 			/* FIXME: this is a too generic error message - Paolo */
-			gedit_utils_error_reporting_loading_file (uri, encoding_to_use, NULL,
-					GTK_WINDOW (gedit_get_active_window ()));
+			gedit_error_reporting_loading_file (uri,
+							    encoding_to_use,
+							    NULL,
+							    GTK_WINDOW (gedit_get_active_window ()));
 
 			gedit_utils_flash_va (_("Error loading file \"%s\""), uri_to_display);
 
