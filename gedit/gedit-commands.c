@@ -568,7 +568,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 			      "version", VERSION,
 			      "copyright", copyright,
 			      "comments", comments,
-			      "website", "http://gedit.sourceforge.net",
+			      "website", "http://www.gedit.org",
 			      "authors", authors,
 			      "documenters", documenters,
 			      "translator_credits", _("translator_credits"),
