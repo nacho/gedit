@@ -132,14 +132,14 @@ gedit_close_confirmation_dialog_init (GeditCloseConfirmationDialog *dlg)
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 14);
 	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
-  
+
 	gtk_window_set_title (GTK_WINDOW (dlg), "");
-	
+
 	gtk_window_set_modal (GTK_WINDOW (dlg), TRUE);
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
 
 	gedit_dialog_add_button (GTK_DIALOG (dlg),
-				_("Do_n't save"), GTK_STOCK_NO,
+				_("Close _without Saving"), GTK_STOCK_NO,
 				GTK_RESPONSE_NO);
 
 	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
