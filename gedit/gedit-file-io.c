@@ -22,13 +22,12 @@
 #include <gnome.h>
 #include <sys/stat.h> /* for stat() */
 
-#include "commands.h"
+#include "gedit-window.h"
 #include "gedit.h"
-#include "gE_mdi.h"
+#include "commands.h"
+#include "gedit-document.h"
 #include "gE_view.h"
 #include "gE_prefs.h"
-
-#include "gedit-window.h"
 #include "gedit-file-io.h"
 #include "gedit-utils.h"
 
@@ -36,8 +35,8 @@ GtkWidget *save_file_selector = NULL;
 GtkWidget *open_file_selector = NULL;
 
 /* not yet rewriten . Chema */
-gint gedit_file_open (gedit_document *doc, gchar *fname);
-gint gedit_file_save (gedit_document *doc, gchar *fname);
+gint gedit_file_open (Document *doc, gchar *fname);
+gint gedit_file_save (Document *doc, gchar *fname);
 /* rewriten functions . Chema  ..*/ 
 void file_new_cb (GtkWidget *widget, gpointer cbdata);
 void file_open_cb (GtkWidget *widget, gpointer cbdata);
@@ -67,7 +66,7 @@ static void cancel_cb (GtkWidget *w, gpointer data);
  */
 /* TODO: lock/unlock file before/after. Jason*/
 gint
-gedit_file_open (gedit_document *doc, gchar *fname)
+gedit_file_open (Document *doc, gchar *fname)
 {
 	gchar *tmp_buf, *flash;
 	struct stat stats;
@@ -79,7 +78,7 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 	   many times */
 
 	/* FIXME : deal with ReadOnly files,
-	   we should have a flag in gedit_document
+	   we should have a flag in Document
 	   to know if it is readonly */
 	gedit_debug_mess ("F:Entering gedit_file_open ..\n", DEBUG_FILE);
 	g_return_val_if_fail (fname != NULL, 1);
@@ -147,10 +146,10 @@ gedit_file_open (gedit_document *doc, gchar *fname)
  * Return value: 0 on success, 1 on error.
  */
 gint
-gedit_file_save (gedit_document *doc, gchar *fname)
+gedit_file_save (Document *doc, gchar *fname)
 {
 	/* FIXME : deal with ReadOnly files,
-	   we should have a flag in gedit_document
+	   we should have a flag in Document
 	   to know if it is readonly, if it is
 	   just return or display a mesage */
 	FILE *fp;
@@ -235,7 +234,7 @@ gedit_file_save (gedit_document *doc, gchar *fname)
 void
 file_new_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_document *doc;
+	Document *doc;
 
 	gedit_flash (_(MSGBAR_FILE_NEW));
 	doc = gedit_document_new ();
@@ -327,7 +326,7 @@ cancel_cb (GtkWidget *w, gpointer data)
 static void
 file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
-	gedit_document *doc;
+	Document *doc;
 	gchar *filename;
 
 	gedit_debug_mess("file-io.c - file open ok sel\n", DEBUG_FILE);
@@ -352,7 +351,7 @@ file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 void
 file_save_cb (GtkWidget *widget)
 {
-	gedit_document *doc;
+	Document *doc;
 
 	if (gnome_mdi_get_active_child(mdi) == NULL)
 		return;
@@ -360,7 +359,7 @@ file_save_cb (GtkWidget *widget)
 	doc = gedit_document_current ();
 
 	if (doc->changed)
-		gedit_file_save( doc, NULL);
+		gedit_file_save (doc, NULL);
 }
 
 
@@ -369,13 +368,13 @@ file_save_all_cb (GtkWidget *widget, gpointer cbdata)
 {
 	int i;
 	gchar *fname, *title;
-	gedit_document *doc;
+	Document *doc;
 
 	gedit_debug_mess ("F:Entering file_save_all_cb.\n", DEBUG_FILE);
 	
         for (i = 0; i < g_list_length (mdi->children); i++)
 	{
-		doc = (gedit_document *)g_list_nth_data (mdi->children, i);
+		doc = (Document *)g_list_nth_data (mdi->children, i);
 		gedit_file_save( doc, NULL);
 	}
 }
@@ -385,7 +384,7 @@ static void
 file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 {
 
-	gedit_document *doc;
+	Document *doc;
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(save_file_selector)));
 
 	/* FIXME: we need to popup a window
@@ -436,7 +435,7 @@ file_revert_cb (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *msgbox;
 	gchar * msg;
-	gedit_document *doc = gedit_document_current ();
+	Document *doc = gedit_document_current ();
 
 	msg = g_strdup_printf ("Are you sure you wish to revert all changes?\n(%s)",
 			       doc->filename);

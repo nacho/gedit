@@ -20,9 +20,15 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "gedit.h"
+
+#include "gedit-window.h"
 #include "gE_prefs.h"
-#include "gE_mdi.h"
+#include "gedit-document.h"
+
+/*#include "gedit.h" */
+
+gboolean use_fontset = FALSE;
+gint mdiMode = GNOME_MDI_DEFAULT_MODE;
 
 void 
 gedit_save_settings (void)

@@ -17,8 +17,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-#ifndef __GE_PREFS_H__
-#define __GE_PREFS_H__
+#ifndef __GEDIT_PREFS_H__
+#define __GEDIT_PREFS_H__
+
+#define DEFAULT_FONT "-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-1"
+#define DEFAULT_FONTSET "-*-*-medium-r-normal-*-14-*-*-*-*-*-*-*,*"
 
 typedef struct _gedit_preference gedit_preference;
 
@@ -54,9 +57,10 @@ guint auto_indent;
 };
 
 extern gedit_preference *settings;
+extern gboolean use_fontset;
+extern gint mdiMode;
 
 extern void gedit_save_settings (void);
 extern void gedit_load_settings (void);
 
-
-#endif /* __GE_PREFS_H__ */
+#endif /* __GEDIT_PREFS_H__ */

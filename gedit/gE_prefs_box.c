@@ -18,17 +18,18 @@
 
 #include <config.h>
 #include <gnome.h>
+
+#include "gedit-window.h"
 #include "gedit.h"
 #include "gE_prefs.h"
 #include "gE_prefs_box.h"
-#include "gedit-window.h"
 #include "gE_view.h"
-#include "gE_mdi.h"
-
+#include "gedit-document.h"
 
 typedef struct _gedit_prefs_data gedit_prefs_data;
 
-struct _gedit_prefs_data {
+struct _gedit_prefs_data
+{
 	GnomePropertyBox *pbox;
 	
 	/* Font Seleftion */
@@ -115,11 +116,11 @@ cancel_cb (void)
 }
 
 void
-gedit_window_refresh (gedit_window *w)
+gedit_window_refresh (Window *w)
 {
 	gint i, j;
 	gedit_view *nth_view;
-	gedit_document *doc;
+	Document *doc;
 	GtkStyle *style;
 	GdkColor *bg, *fg;
 
@@ -160,7 +161,7 @@ gedit_window_refresh (gedit_window *w)
 
 	for (i = 0; i < g_list_length (mdi->children); i++)
 	{
-		doc = GE_DOCUMENT(g_list_nth_data (mdi->children, i));
+		doc = DOCUMENT (g_list_nth_data (mdi->children, i));
   	
 		for (j = 0; j < g_list_length (doc->views); j++)
 		{
@@ -707,13 +708,13 @@ properties_changed (GtkWidget *widget, GnomePropertyBox *pbox)
 }
 
 void
-gedit_prefs_dialog (GtkWidget *widget, gpointer data)
+gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 {
 	static GnomeHelpMenuEntry help_entry = { NULL, "properties" };
 	GtkWidget *label;
 	gint i;
 
-	gedit_data *data = (gedit_data *)data;
+	gedit_data *data = (gedit_data *)cbdata;
 
 	prefs = g_malloc (sizeof(gedit_prefs_data));
 

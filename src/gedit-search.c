@@ -21,10 +21,10 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "gedit.h"
 #include "gedit-window.h"
+#include "gedit.h"
 #include "gE_view.h"
-#include "gE_mdi.h"
+#include "gedit-document.h"
 #include "gedit-search.h"
 
 
@@ -41,14 +41,14 @@ static GtkWidget* create_replace_dialog (void);
 static void add_search_options (GtkWidget *dialog);
 static void line_dialog_button_cb    (GtkWidget   *widget,
                                       gint         button,
-                                      gedit_document *doc);
+                                      Document *doc);
 static void search_dialog_button_cb  (GtkWidget   *widget,
                                       gint         button,
-                                      gedit_document *doc);
+                                      Document *doc);
 static void replace_dialog_button_cb (GtkWidget   *widget,
                                       gint         button,
-                                      gedit_document *doc);
-static void get_search_options       (gedit_document *doc,
+                                      Document *doc);
+static void get_search_options       (Document *doc,
                                       GtkWidget   *widget,
                                       gchar      **txt,
                                       gulong      *options,
@@ -57,7 +57,7 @@ static gboolean search               (GtkEditable *text,
                                       gchar       *str,
                                       gint         pos,
                                       gulong       options);
-static void search_select            (gedit_document *doc,
+static void search_select            (Document *doc,
                                       gchar       *str,
                                       gint         pos,
                                       gulong       options);
@@ -110,7 +110,7 @@ static void destroy_clist_data (gpointer data);
  * Public interface. 
  */
 gint
-pos_to_line (gedit_document *doc, gint pos, gint *numlines)
+pos_to_line (Document *doc, gint pos, gint *numlines)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 	gulong lines = 0, i, current_line = 0;
@@ -133,7 +133,7 @@ pos_to_line (gedit_document *doc, gint pos, gint *numlines)
 }
 
 gint
-line_to_pos (gedit_document *doc, gint line, gint *numlines)
+line_to_pos (Document *doc, gint line, gint *numlines)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 	gulong lines = 1, i, current = 0;
@@ -158,7 +158,7 @@ line_to_pos (gedit_document *doc, gint line, gint *numlines)
 }
 
 gint
-get_line_count (gedit_document *doc)
+get_line_count (Document *doc)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 	gulong lines = 1, i;
@@ -179,7 +179,7 @@ get_line_count (gedit_document *doc)
 }
 
 void
-seek_to_line (gedit_document *doc, gint line, gint numlines)
+seek_to_line (Document *doc, gint line, gint numlines)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 	gfloat value, ln, tl;
@@ -202,7 +202,7 @@ seek_to_line (gedit_document *doc, gint line, gint numlines)
 }
 
 gint
-gedit_search_search (gedit_document *doc, gchar *str, gint pos, gulong options)
+gedit_search_search (Document *doc, gchar *str, gint pos, gulong options)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 	gint i, textlen;
@@ -239,7 +239,7 @@ gedit_search_search (gedit_document *doc, gchar *str, gint pos, gulong options)
  * This doesn NOT do any sanity checking
  */ 
 void
-gedit_search_replace (gedit_document *doc, gint pos, gint len, gchar *replace)
+gedit_search_replace (Document *doc, gint pos, gint len, gchar *replace)
 {
 	gedit_view *view = GE_VIEW (mdi->active_view);
 
@@ -253,7 +253,7 @@ gedit_search_replace (gedit_document *doc, gint pos, gint len, gchar *replace)
 void
 search_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_document *doc;
+	Document *doc;
 
 	doc = gedit_document_current ();
 
@@ -268,7 +268,7 @@ search_cb (GtkWidget *widget, gpointer data)
 void
 replace_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_document *doc;
+	Document *doc;
 
 	doc = gedit_document_current ();
 
@@ -285,7 +285,7 @@ goto_line_cb (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *spin;
 	GtkAdjustment *adj;
-	gedit_document *doc;
+	Document *doc;
 	gint linecount;
 	gedit_view *view = GE_VIEW (mdi->active_view);
 
@@ -474,7 +474,7 @@ find_in_file_search (gedit_view *view,
 static void 
 search_for_text_in_files (gchar *text)
 {
-	gedit_document *doc;
+	Document *doc;
 	gedit_view *view = NULL;
 	gint i;
 	gint j = 0;
@@ -487,8 +487,8 @@ search_for_text_in_files (gchar *text)
 
         for (i = 0; i < g_list_length (mdi->children); i++) 
         {
-		doc = GE_DOCUMENT ( g_list_nth_data (mdi->children, i) );
-		view = GE_VIEW ( g_list_nth_data(doc->views, 0) );
+		doc = DOCUMENT (g_list_nth_data (mdi->children, i));
+		view = GE_VIEW (g_list_nth_data(doc->views, 0));
 		j += find_in_file_search (view, text);
         }
 
@@ -591,7 +591,7 @@ void
 search_result_clist_cb (GtkWidget *list, gpointer func_data)
 {
 	gedit_view		*view;
-	gedit_document		*doc;
+	Document		*doc;
 	gedit_clist_data	*data;
 	GList			*sel;
 	gchar			*title;
@@ -611,8 +611,8 @@ search_result_clist_cb (GtkWidget *list, gpointer func_data)
 
 	for (i = 0; i < g_list_length (mdi->children); i++) 
         {
-		doc = GE_DOCUMENT ( g_list_nth_data (mdi->children, i) );
-		view = GE_VIEW ( g_list_nth_data(doc->views, 0) );
+		doc = DOCUMENT (g_list_nth_data (mdi->children, i));
+		view = GE_VIEW (g_list_nth_data(doc->views, 0));
             
 		title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
 	  
@@ -647,7 +647,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 {
 	gint total_lines, line_number;
 	gchar *msg;
-	gedit_document *doc;
+	Document *doc;
 
 	doc = gedit_document_current ();
 
@@ -826,7 +826,7 @@ create_replace_dialog (void)
  * callback for the goto line dialog
  */
 static void
-line_dialog_button_cb (GtkWidget *widget, gint button, gedit_document *doc)
+line_dialog_button_cb (GtkWidget *widget, gint button, Document *doc)
 {
 	GtkWidget *spin;
 	gint line, linecount;
@@ -854,7 +854,7 @@ line_dialog_button_cb (GtkWidget *widget, gint button, gedit_document *doc)
  * Search dialog
  */
 static void
-search_dialog_button_cb (GtkWidget *widget, gint button, gedit_document *doc)
+search_dialog_button_cb (GtkWidget *widget, gint button, Document *doc)
 {
 	gint pos;
 	gulong options = 0;
@@ -880,7 +880,7 @@ search_dialog_button_cb (GtkWidget *widget, gint button, gedit_document *doc)
  * Replace dialog
  */
 static void
-replace_dialog_button_cb (GtkWidget *widget, gint button, gedit_document *doc)
+replace_dialog_button_cb (GtkWidget *widget, gint button, Document *doc)
 {
 	GtkWidget *datalink;
 	gint pos, dowhat = 0;
@@ -935,7 +935,7 @@ replace_dialog_button_cb (GtkWidget *widget, gint button, gedit_document *doc)
  */
 
 static void
-get_search_options (gedit_document *doc, GtkWidget *widget,
+get_search_options (Document *doc, GtkWidget *widget,
 		    gchar **txt, gulong *options, gint *pos)
 {
 	GtkWidget *datalink;
@@ -995,7 +995,7 @@ search (GtkEditable *text, gchar *str, gint pos, gulong options)
 }
 
 static void
-search_select (gedit_document *doc, gchar *str, gint pos, gulong options)
+search_select (Document *doc, gchar *str, gint pos, gulong options)
 {
 	gint numwcs;
 	gedit_view *view = GE_VIEW (mdi->active_view);

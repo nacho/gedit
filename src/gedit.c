@@ -20,34 +20,26 @@
 #include <config.h>
 #include <gnome.h>
 
+#include "gedit-window.h"
 #include "gedit.h"
 #include "commands.h"
-#include "gE_mdi.h"
+#include "gedit-document.h"
 #include "gE_prefs.h"
 #include "gedit-file-io.h"
 #include "gedit-menus.h"
 #include "gedit-plugin.h"
-#include "gedit-window.h"
+
 
 #ifdef HAVE_LIBGNORBA
 #include <libgnorba/gnorba.h>
 #endif
 
-GList *window_list;
-GnomeMDI *mdi;
-gedit_window *window;
 gedit_preference *settings;
 
-gint mdiMode = GNOME_MDI_DEFAULT_MODE;
-/*gint mdiMode = GNOME_MDI_NOTEBOOK;*/
-gboolean use_fontset = FALSE;
-
-
-static const struct poptOption options[] = {
+static const struct poptOption options[] =
+{
 	{NULL, '\0', 0, NULL, 0}
 };
-
-static GList *file_list;
 
 #ifdef HAVE_LIBGNORBA
 
@@ -81,7 +73,7 @@ corba_exception (CORBA_Environment* ev)
 int
 main (int argc, char **argv)
 {
-	gedit_document *doc;
+	Document *doc;
 /*
 	gedit_window *window;
 	gedit_data *data;
@@ -90,6 +82,7 @@ main (int argc, char **argv)
 	poptContext ctx;
 	int i;
 	GtkWidget *dummy_widget;
+	GList *file_list = NULL;
 
 	bindtextdomain(PACKAGE, GNOMELOCALEDIR);
 	textdomain(PACKAGE);
@@ -136,50 +129,51 @@ main (int argc, char **argv)
 	for (i = 0; args && args[i]; i++)
 		file_list = g_list_append (file_list, args[i]);
 	
-	poptFreeContext(ctx);
-	
+	poptFreeContext (ctx);
 	
 	/*data = g_malloc (sizeof (gedit_data));*/
-	window_list = NULL;
 	settings = g_malloc (sizeof (gedit_preference));
 	
 	settings->num_recent = 0;
 
-	mdi = GNOME_MDI(gnome_mdi_new ("gEdit", GEDIT_ID));
+	mdi = GNOME_MDI (gnome_mdi_new ("gEdit", GEDIT_ID));
 	mdi->tab_pos = GTK_POS_TOP;
-	
+
 	gnome_mdi_set_menubar_template (mdi, gedit_menu);
 	gnome_mdi_set_toolbar_template (mdi, toolbar_data);
 	
 	gnome_mdi_set_child_menu_path (mdi, GNOME_MENU_FILE_STRING);
 	gnome_mdi_set_child_list_path (mdi, GNOME_MENU_FILES_PATH);
 	
-
-
 	/* Init plugins... */
 	gedit_plugins_init ();
 	
 	/* new plugins system init will be here */
 	/* connect signals -- FIXME -- We'll do the rest later */
-	gtk_signal_connect (GTK_OBJECT(mdi), "remove_child",
+
+	gtk_signal_connect (GTK_OBJECT (mdi), "remove_child",
 			    GTK_SIGNAL_FUNC (remove_doc_cb), NULL);
-	gtk_signal_connect (GTK_OBJECT(mdi), "destroy",
+
+	gtk_signal_connect (GTK_OBJECT (mdi), "destroy",
 			    GTK_SIGNAL_FUNC (file_quit_cb), NULL);
+
+	gtk_signal_connect (GTK_OBJECT (mdi), "child_changed",
+			    GTK_SIGNAL_FUNC (child_switch), NULL);
+
+        gtk_signal_connect (GTK_OBJECT (mdi), "app_created",
+			    GTK_SIGNAL_FUNC (gedit_window_new), NULL);
+
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "view_changed", GTK_SIGNAL_FUNC(mdi_view_changed_cb), NULL);*/
-	gtk_signal_connect(GTK_OBJECT(mdi), "child_changed",
-			   GTK_SIGNAL_FUNC(child_switch), NULL);
-        gtk_signal_connect(GTK_OBJECT(mdi), "app_created",
-			   GTK_SIGNAL_FUNC(gedit_window_new), NULL);
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_view", GTK_SIGNAL_FUNC(add_view_cb), NULL);*/
 /*	gtk_signal_connect(GTK_OBJECT(mdi), "add_child", GTK_SIGNAL_FUNC(add_child_cb), NULL);*/
+
 	gedit_load_settings ();
 	gnome_mdi_set_mode (mdi, mdiMode);	
-/*	gnome_mdi_set_mode (mdi, GNOME_MDI_NOTEBOOK);	*/
-	gnome_mdi_open_toplevel(mdi);
+	gnome_mdi_open_toplevel (mdi);
 
 	doc = gedit_document_new ();
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
+	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 
 	if (file_list)
 	{
@@ -207,7 +201,7 @@ main (int argc, char **argv)
 		{
 			doc = gedit_document_new ();
 			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-			gnome_mdi_add_view  (mdi, GNOME_MDI_CHILD (doc));
+			gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 		}
 	}
 	
@@ -216,7 +210,3 @@ main (int argc, char **argv)
 	gtk_main ();
 	return 0;
 }
-
-
-
-

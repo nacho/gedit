@@ -19,8 +19,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __GE_UNDO_H__
-#define __GE_UNDO_H__
+#ifndef __GEDIT_UNDO_H__
+#define __GEDIT_UNDO_H__
 
 /* Actions */
 #define	INSERT	0
@@ -34,10 +34,10 @@ typedef struct _gedit_undo {
 	gint status;	/* the changed status of the document used with this node */
 }gedit_undo;
 
-extern void gedit_undo_add      (gchar*, gint, gint, gint, gedit_document*);
+extern void gedit_undo_add      (gchar*, gint, gint, gint, Document*);
 extern void gedit_undo_reset	(GList*);
 extern void gedit_undo_do	(GtkWidget*, gpointer);
 extern void gedit_undo_redo	(GtkWidget*, gpointer);
 extern void gedit_undo_history	(GtkWidget*, gpointer*);
 
-#endif /* __GE_UNDO_H__ */
+#endif /* __GEDIT_UNDO_H__ */

@@ -22,11 +22,11 @@
 #include <config.h>
 #include <gnome.h>
 
-#include "gedit.h"
 #include "gedit-window.h"
+#include "gedit.h"
 #include "gE_view.h"
 #include "commands.h"
-#include "gE_mdi.h"
+#include "gedit-document.h"
 #include "gedit-print.h"
 #include "gedit-menus.h"
 #include "gE_prefs.h"
@@ -35,12 +35,12 @@
 #include "gedit-plugin.h"
 #include "../pixmaps/gE_icon.xpm"
 
-/*#include "gedit-file-io.h"*/
-/*#include "gE_prefs_box.h"*/
-
 extern GList *plugins;
-gedit_window *window;
 extern GtkWidget  *col_label;
+
+GList *window_list = NULL;
+
+/* Window *window; */
 
 GtkWidget *search_result_window;
 GtkWidget *search_result_clist;
@@ -143,7 +143,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gtk_signal_connect (GTK_OBJECT (app), "drag_data_received",
 			    GTK_SIGNAL_FUNC (filenames_dropped), NULL);
 
-	gedit_window_set_icon (GTK_WIDGET(app), "gE_icon");
+	gedit_window_set_icon (GTK_WIDGET (app), "gE_icon");
 
 	gtk_window_set_default_size (GTK_WINDOW(app), settings->width, settings->height);
 	gtk_window_set_policy (GTK_WINDOW (app), TRUE, TRUE, FALSE);
@@ -151,7 +151,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	/*gedit_load_settings ();*/
 	
 	/* find in files result window  dont show it.*/
-	search_result_window = create_find_in_files_result_window();
+	search_result_window = create_find_in_files_result_window ();
 
 	gtk_box_pack_start (GTK_BOX (app->vbox), search_result_window,
 			    TRUE, TRUE, 0); 
@@ -164,7 +164,7 @@ gedit_window_new (GnomeMDI *mdi, GnomeApp *app)
 	gedit_plugins_window_add (app);
 	
 	settings->num_recent = 0;
-	recent_update (GNOME_APP(app));
+	recent_update (GNOME_APP (app));
 
 	/* statusbar */
 	if (settings->show_status)
@@ -241,13 +241,14 @@ gedit_window_set_status_bar (gint show_status)
 
 
 void
-child_switch (GnomeMDI *mdi, gedit_document *doc)
+child_switch (GnomeMDI *mdi, Document *doc)
 {
-	if (gedit_document_current())
-	{
-		gtk_widget_grab_focus (GE_VIEW(mdi->active_view)->text);
+	Document *doc2 = gedit_document_current();
 
-		gedit_set_title (gedit_document_current());
+	if (doc2)
+	{
+		gtk_widget_grab_focus (GE_VIEW (mdi->active_view)->text);
+		gedit_set_title (doc2);
 	}
 }
 
@@ -261,14 +262,14 @@ child_switch (GnomeMDI *mdi, gedit_document *doc)
  * both files.
  */
 void
-doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
+doc_swaphc_cb (GtkWidget *widget, gpointer data)
 {
 
 	size_t len;
 	char *newfname;
-	gedit_document *doc;
+	Document *doc;
 
-	gedit_debug_mess("NO MAMES !", DEBUG_FILE);
+	gedit_debug_mess ("NO MAMES !", DEBUG_FILE);
 	
 	doc = gedit_document_current();
 	if (!doc || !doc->filename)
@@ -319,8 +320,13 @@ doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
 	if (!newfname)
 		return;
 
+	/* FIXME: Give a warning dialog that says the file doesn't
+	 *        exist */
+	if (!g_file_exists (newfname))
+		return;
+
 	/* hmm maybe whe should check if the file exist before we try
-	 * to open.  this will be fixed later.... */
+	 * to open.  this will be fixed later....  */
 	doc = gedit_document_new_with_file (newfname);
 	gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
@@ -333,7 +339,7 @@ doc_swaphc_cb (GtkWidget *wgt, gpointer cbdata)
 static gint
 gedit_destroy_window (GtkWidget *widget, GdkEvent *event, gedit_data *data)
 {
-	window_close_cb(widget, data);
+	window_close_cb (widget, data);
 	return TRUE;
 }
 

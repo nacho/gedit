@@ -5,104 +5,110 @@
  * Prints "Hello World" into the current document
  */
  
-#include <gnome.h>
 #include <config.h>
+#include <gnome.h>
+
+#include <pwd.h>
+
+/*
 #include <stdio.h>
 #include <string.h>
-#include <pwd.h>
 #include <sys/types.h>
 #include <stdlib.h>
 #include <glib.h>
+*/
 
-#include "../../src/main.h"
-#include "../../src/gE_mdi.h"
-#include "../../src/gE_plugin.h"
-
+#include "../../src/gedit-document.h"
+#include "../../src/gedit-plugin.h"
 
 #ifndef MAILER
 #define MAILER "/usr/lib/sendmail"
 #endif
+
 static GtkWidget *from_entry, *subject_entry, *to_entry;
 
 /* first the gE_plugin centric code */
 
-static void destroy_plugin (gE_Plugin_Data *pd)
+static void
+destroy_plugin (PluginData *pd)
 {
 	g_free (pd->name);
-	
 }
 
 static void
-email_finish (GtkWidget *w, gpointer data )
+email_finish (GtkWidget *w, gpointer data)
 {
-	gnome_dialog_close( GNOME_DIALOG( w ) );
-
+	gnome_dialog_close (GNOME_DIALOG (w));
 }
 
 /* the function that actually does the wrok */
-static void email_clicked (GtkWidget *w, gint button, gpointer data)
+static void
+email_clicked (GtkWidget *w, gint button, gpointer data)
 {
 	gint i;
-	gE_document *doc = gE_document_current();
+	Document *doc = gedit_document_current();
 	FILE *sendmail;
 	gchar *subject, *from, *to, *buffer, *command;
 	
-	if ( button == 0 )
-	  {
+	if (button == 0)
+	{
 	    
-	    to = gtk_entry_get_text (GTK_ENTRY (to_entry));
-	    from = gtk_entry_get_text (GTK_ENTRY (from_entry));
-	    subject = gtk_entry_get_text (GTK_ENTRY (subject_entry));
-	    buffer = strdup(doc->buf->str);
+		to = gtk_entry_get_text (GTK_ENTRY (to_entry));
+		from = gtk_entry_get_text (GTK_ENTRY (from_entry));
+		subject = gtk_entry_get_text (GTK_ENTRY (subject_entry));
+		buffer = strdup(doc->buf->str);
 	    
-	    command = g_malloc0 (strlen (MAILER) + strlen (to) + 2);
-	    sprintf (command, "%s %s", MAILER, to);
+		command = g_malloc0 (strlen (MAILER) + strlen (to) + 2);
+		sprintf (command, "%s %s", MAILER, to);
 	    
-	    if ((sendmail = popen (command, "w")) == NULL)
-	      {
-		printf ("Couldn't open stream to /usr/bin/sendmail\n");
+		if ((sendmail = popen (command, "w")) == NULL)
+		{
+			printf ("Couldn't open stream to /usr/bin/sendmail\n");
+			g_free (command);
+			g_free (buffer);
+			return;
+		}
+	    
 		g_free (command);
-		g_free (buffer);
-		return;
-	      }
 	    
-	    g_free (command);
+		fprintf (sendmail, "To: %s\n", to);
+		fprintf (sendmail, "From: %s\n", from);
+		fprintf (sendmail, "Subject: %s\n", subject);
+		fprintf (sendmail, "X-Mailer: gEdit email plugin v 0.2\n");
+		fflush (sendmail);
+		fprintf (sendmail, "%s\n", buffer);
+		fflush (sendmail);
 	    
-	    fprintf (sendmail, "To: %s\n", to);
-	    fprintf (sendmail, "From: %s\n", from);
-	    fprintf (sendmail, "Subject: %s\n", subject);
-	    fprintf (sendmail, "X-Mailer: gEdit email plugin v 0.2\n");
-	    fflush (sendmail);
-	    fprintf (sendmail, "%s\n", buffer);
-	    fflush (sendmail);
+		pclose (sendmail);
 	    
-	    pclose (sendmail);
-	    
-	    gnome_config_set_string ("/Editor_Plugins/Email/From", from);
-	    gnome_config_sync ();
-	  }
-	gnome_dialog_close( GNOME_DIALOG( w ) );
-			
+		gnome_config_set_string ("/Editor_Plugins/Email/From", from);
+		gnome_config_sync ();
+	}
+
+	gnome_dialog_close (GNOME_DIALOG (w));
 }
 	
-static void email ()
+static void
+email (void)
 {
-	GtkWidget *window, *from_label, *to_label, *subject_label,
-	  *file_label, *file;
+	GtkWidget *window, *from_label, *to_label, *subject_label;
+	GtkWidget *file_label, *file;
 	GtkWidget *hbox, *vbox;
 	gchar *filename, *from;
 	char *user, *hostname;
 	struct passwd *pw;
-	gE_document *doc = gE_document_current();
-	
-	if (!(filename = strdup (doc->filename))) 
+	Document *doc = gedit_document_current();
+
+	filename = g_strdup (doc->filename);
+	if (!filename)
 		return;
 
-	window = gnome_dialog_new( _( "The gEdit Email Plugin" ),
+	window = gnome_dialog_new (_("The gEdit Email Plugin"),
 				   GNOME_STOCK_BUTTON_OK,
 				   GNOME_STOCK_BUTTON_CANCEL,
-				   NULL );
-	gnome_dialog_set_default( GNOME_DIALOG( window ), 0 );
+				   NULL);
+
+	gnome_dialog_set_default (GNOME_DIALOG (window), 0);
 
 	gtk_signal_connect (GTK_OBJECT (window), "destroy", email_finish, NULL);
 	vbox = gtk_vbox_new (FALSE, 0);
@@ -127,11 +133,14 @@ static void email ()
 	user = getenv ("USER");
 	hostname = getenv ("HOSTNAME");
 	
-	if (gnome_config_get_string ("/Editor_Plugins/Email/From")) {
+	if (gnome_config_get_string ("/Editor_Plugins/Email/From"))
+	{
 		gtk_entry_set_text (GTK_ENTRY (from_entry), 
-	    					gnome_config_get_string ("/Editor_Plugins/Email/From"));
+				    gnome_config_get_string ("/Editor_Plugins/Email/From"));
 
-	} else if (user) {
+	}
+	else if (user)
+	{
 		pw = getpwnam (user);
 		if ((pw) && (hostname))
 		{
@@ -195,7 +204,7 @@ static void email ()
 	gtk_widget_show_all (window);
 }
 
-gint init_plugin (gE_Plugin_Data *pd)
+gint init_plugin (PluginData *pd)
 {
 	/* initialise */
 	pd->destroy_plugin = destroy_plugin;

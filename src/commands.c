@@ -29,11 +29,11 @@
 #include <time.h>
 #include <signal.h>
 
+#include "gedit-window.h"
 #include "gedit.h"
 #include "gE_view.h"
 #include "commands.h"
-#include "gE_mdi.h"
-#include "gedit-window.h"
+#include "gedit-document.h"
 #include "gE_prefs.h"
 #include "gedit-file-io.h"
 #include "gedit-search.h"
@@ -56,7 +56,7 @@ gboolean
 popup_create_new_file (GtkWidget *w, gchar *title)
 {
 	GtkWidget *msgbox;
-	gedit_document *doc;
+	Document *doc;
 	int ret;
 	char *msg;
 
@@ -174,7 +174,7 @@ filenames_dropped (GtkWidget        *widget,
                    guint             time)
 {
 	GList *names, *tmp_list;
-	gedit_document *doc;
+	Document *doc;
 
 	gedit_debug_mess("commands.c : filenames_dropped", DEBUG_FILE);
 	
@@ -210,7 +210,7 @@ static void
 file_saveas_ok_sel (GtkWidget *w, gedit_data *data)
 {
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(ssel)));
-	gedit_document *doc;
+	Document *doc;
 
 	if (mdi->active_child == NULL)
 	{
@@ -277,7 +277,7 @@ static void
 file_save_all_as_ok_sel (GtkWidget *w, GtkFileSelection *fs)
 {
 	gchar *fname = g_strdup(gtk_file_selection_get_filename (GTK_FILE_SELECTION(fs)));
-	gedit_document *doc;
+	Document *doc;
 
 	if (mdi->active_child == NULL)
 	{
@@ -340,7 +340,7 @@ file_save_all_as_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_document *doc;
+	Document *doc;
 	
 	if (mdi->active_child == NULL)
 		return;
@@ -367,7 +367,7 @@ file_close_cb (GtkWidget *widget, gpointer cbdata)
 void
 file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_document *doc;
+	Document *doc;
 
 	if (gnome_mdi_remove_all (mdi, FALSE))
 	{
@@ -385,7 +385,7 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 }
 
 gboolean
-file_revert_do (gedit_document *doc)
+file_revert_do (Document *doc)
 {
 	GtkWidget *msgbox;
 	gchar *msg;
@@ -423,7 +423,7 @@ file_revert_do (gedit_document *doc)
 void
 file_revert_cb (GtkWidget *widget, gpointer cbdata)
 {
-	gedit_document *doc;
+	Document *doc;
 	
 	doc = gedit_document_current ();
 
@@ -461,7 +461,7 @@ gedit_shutdown (GtkWidget *widget, gpointer data)
 /* ---- Clipboard Callbacks ---- */
 
 void
-edit_cut_cb (GtkWidget *widget, gpointer cbdata)
+edit_cut_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_cut_clipboard(GTK_EDITABLE(
 		GE_VIEW (mdi->active_view)->text));
@@ -470,7 +470,7 @@ edit_cut_cb (GtkWidget *widget, gpointer cbdata)
 }
 
 void
-edit_copy_cb (GtkWidget *widget, gpointer cbdata)
+edit_copy_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_copy_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
@@ -479,7 +479,7 @@ edit_copy_cb (GtkWidget *widget, gpointer cbdata)
 }
 	
 void
-edit_paste_cb (GtkWidget *widget, gpointer cbdata)
+edit_paste_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_paste_clipboard(
 		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
@@ -488,7 +488,7 @@ edit_paste_cb (GtkWidget *widget, gpointer cbdata)
 }
 
 void
-edit_selall_cb (GtkWidget *widget, gpointer cbdata)
+edit_selall_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_select_region(GTK_EDITABLE(GE_VIEW (mdi->active_view)->text), 0,
 				   gtk_text_get_length( GTK_TEXT(GE_VIEW (mdi->active_view)->text)));
@@ -603,7 +603,6 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	(menu + 1)->type = GNOME_APP_UI_ENDOFINFO;
 	gnome_app_insert_menus (GNOME_APP(app), path, menu);
 
-
 	for (i = g_list_length (recent_files) - 1; i >= 0;  i--)
 	{
 		menu = g_malloc0 (2 * sizeof (GnomeUIInfo));
@@ -639,7 +638,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 static void
 recent_cb (GtkWidget *widget, gedit_data *data)
 {
-	gedit_document *doc = gedit_document_current ();
+	Document *doc = gedit_document_current ();
 	
 	g_return_if_fail (data != NULL);
 

@@ -8,43 +8,39 @@
 #include <gnome.h>
 #include <config.h>
 
-#include "../../src/main.h"
-#include "../../src/gE_mdi.h"
+#include "../../src/gedit-window.h"
+#include "../../src/gedit-document.h"
 #include "../../src/gE_view.h"
-#include "../../src/gE_plugin.h"
+#include "../../src/gedit-plugin.h"
 
 
 /* first the gE_plugin centric code */
 
-static void destroy_plugin (gE_Plugin_Data *pd)
+static void destroy_plugin (PluginData *pd)
 {
 	g_free (pd->name);
-	
 }
 
 
 /* the function that actually does the wrok */
-static void insert_hello ()
+static void
+insert_hello (void)
 {
 	gint i;
-	gE_view *view = GE_VIEW (mdi->active_view);
-	gE_document *doc = gE_document_current();
-	
+	gedit_view *view = GE_VIEW (mdi->active_view);
+	Document *doc = gedit_document_current();
 		
-	i = gE_view_get_position (view);
+	i = gedit_view_get_position (view);
 
 	gtk_text_freeze (GTK_TEXT (view->text));
 	gtk_editable_insert_text (GTK_EDITABLE (view->text), "Hello World", 11, &i);
 	
 		
 	gtk_text_thaw (GTK_TEXT (view->text));
-		
-		
 }
 	
 
-
-gint init_plugin (gE_Plugin_Data *pd)
+gint init_plugin (PluginData *pd)
 {
 	/* initialise */
 	pd->destroy_plugin = destroy_plugin;

@@ -19,10 +19,13 @@
  * Utility functions by Jason Leach <leach@wam.umd.edu>
  */
 
+#include <config.h>
 #include <gnome.h>
-#include "gedit-utils.h"
+
+#include "gedit-window.h"
 #include "gedit.h"
-#include "gE_mdi.h"
+#include "gedit-utils.h"
+#include "gedit-document.h"
 
 /**
  * gedit_set_title:
@@ -33,7 +36,7 @@
  * changed, lets show that it has. 
  */
 void
-gedit_set_title (gedit_document *doc)
+gedit_set_title (Document *doc)
 {
 	gchar *title;
 
@@ -96,17 +99,16 @@ gedit_flash_va (gchar *format, ...)
    I know how evil this hack is :
    chema. */
 void
-gedit_debug_mess (gchar *message, gint type)
+gedit_debug_mess (gchar *message, DebugSection type)
 {
 #if 1
-	int print = FALSE;
 	switch (type)
 	{
 	case DEBUG_UNDO:
 		break;
-	case DEBUG_UNDO_DEEP :
+	case DEBUG_UNDO_DEEP:
 		break;
-	case DEBUG_VIEW :
+	case DEBUG_VIEW:
 		break;
 	case DEBUG_VIEW_DEEP:
 		break;
@@ -119,8 +121,7 @@ gedit_debug_mess (gchar *message, gint type)
 	case DEBUG_FILE_DEEP:
 		break;
 	}
-	if ( print )
-		g_print (message);
+	g_print (message);
 #endif
 }
 

@@ -33,6 +33,34 @@
 #define MSGBAR_PASTE		"Selection Pasted..."
 #define MSGBAR_SELECT_ALL	"All Text Selected..."
 
+#include "gedit-document.h"
+
+typedef struct _Window Window;
+
+struct _Window
+{
+	GtkWidget *window;
+	GtkWidget *statusbox;
+	GtkWidget *statusbar;
+	GtkWidget *menubar;
+	GtkWidget *toolbar;
+	GtkWidget *notebook;
+	GtkWidget *open_fileselector;
+	GtkWidget *save_fileselector;
+	GtkWidget *line_label, *col_label;
+	GtkWidget *files_list_window;
+	GtkWidget *files_list_window_data;
+	GtkWidget *files_list_window_toolbar;
+
+/*	GList *documents;	Pah.. i dunno.. */
+	GtkWidget *popup;
+
+	GtkPositionType tab_pos;
+};
+
+/*extern Window *window; */
+extern GList *window_list;
+
 extern GtkWidget *col_label;
 extern GtkWidget *search_result_window;
 extern GtkWidget *search_result_clist;
@@ -42,11 +70,11 @@ extern void gedit_window_set_status_bar (gint show_status);
 extern void gedit_window_new (GnomeMDI *mdi, GnomeApp *app);
 
 extern void doc_swaphc_cb (GtkWidget *w, gpointer cbdata);
-extern void child_switch (GnomeMDI *mdi, gedit_document *doc);
+extern void child_switch (GnomeMDI *mdi, Document *doc);
 
 #ifdef WITH_GMODULE_PLUGINS
-extern gedit_document *gE_document_new_container (gE_window *w, gchar *title,
-						  gint with_split_screen);
+extern Document *gedit_document_new_container (Window *w, gchar *title,
+					       gint with_split_screen);
 #endif
 
 

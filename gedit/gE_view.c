@@ -22,9 +22,9 @@
 #include <config.h>
 #include <gnome.h>
 
+#include "gedit-window.h"
 #include "gedit.h"
 #include "gedit-undo.h"
-#include "gedit-window.h"
 #include "gedit-print.h"
 #include "gedit-utils.h"
 #include "gedit-file-io.h"
@@ -32,7 +32,7 @@
 #include "gedit-menus.h" /* We need this because some functions
 			    modify menu entries. Chema */
 #include "gE_view.h"
-#include "gE_mdi.h"
+#include "gedit-document.h"
 #include "commands.h"
 #include "gE_prefs.h"
 
@@ -52,13 +52,13 @@ GtkVBoxClass *parent_class = NULL;
 void view_changed_cb (GtkWidget *w, gpointer cbdata);
 void gedit_view_list_insert (gedit_view *view, gedit_data *data);
 void view_list_erase (gedit_view *view, gedit_data *data);
-gint insert_into_buffer (gedit_document *doc, gchar *buffer, gint position);
+gint insert_into_buffer (Document *doc, gchar *buffer, gint position);
+
 
 /* Callback to the "changed" signal in the text widget */
 void
 view_changed_cb (GtkWidget *w, gpointer cbdata)
 {
-	gchar *str;
 	gedit_view *view;
 
 	gedit_debug_mess ("F:view_changed_cb\n", DEBUG_VIEW);
@@ -118,7 +118,7 @@ view_list_erase (gedit_view *view, gedit_data *data)
 }
 
 gint
-insert_into_buffer (gedit_document *doc, gchar *buffer, gint position)
+insert_into_buffer (Document *doc, gchar *buffer, gint position)
 {
 	gedit_debug_mess ("F:insert_into_buffer\n", DEBUG_VIEW);
 
@@ -146,7 +146,7 @@ doc_insert_text_cb (GtkWidget *editable, const guchar *insertion_text,
 	GtkWidget *significant_other;
 	guchar *buffer;
 	gint position = *pos;
-	gedit_document *doc;
+	Document *doc;
 	gedit_data *data;
 
 	gedit_debug_mess ("F:doc_insert_text_cb\n", DEBUG_VIEW);
@@ -190,7 +190,7 @@ doc_delete_text_cb (GtkWidget *editable, int start_pos, int end_pos,
 		    gedit_view *view)
 {
 	GtkWidget *significant_other;
-	gedit_document *doc;
+	Document *doc;
 	gedit_view *nth_view = NULL;
 	gchar *buffer;
 	gint n;
@@ -258,7 +258,7 @@ auto_indent_cb (GtkWidget *text, char *insertion_text, int length,
 	int i, newlines, newline_1;
 	gchar *buffer, *whitespace;
 	gedit_view *view;
-	gedit_document *doc;
+	Document *doc;
 
 	g_return_val_if_fail (data != NULL, FALSE);
 
@@ -368,7 +368,6 @@ gint
 gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 {
 	gint mask;
-	gedit_data *data = g_malloc0 (sizeof (gedit_data));
 
 	gedit_debug_mess ("F:gedit_event_key_press\n", DEBUG_VIEW);
 
@@ -377,6 +376,12 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 	mask = GDK_CONTROL_MASK | GDK_MOD1_MASK | GDK_MOD2_MASK |
 	       GDK_MOD3_MASK | GDK_MOD4_MASK | GDK_MOD5_MASK;
 	
+	if (event->state & GDK_MOD1_MASK)
+	{
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
+		return FALSE;
+	}
+
 	/* Control key related */
 	if (event->state & GDK_CONTROL_MASK)
 	{
@@ -386,8 +391,12 @@ gedit_event_key_press (GtkWidget *w, GdkEventKey *event)
 			file_save_cb (w);
 	    		break;
 		case 'p':
-	    		file_print_cb (w, (gpointer)data);
+	    		file_print_cb (w, NULL);
 	    		break;
+		case 'n':
+			gtk_signal_emit_stop_by_name (GTK_OBJECT (w), "key_press_event");
+			return FALSE;
+			break;
 		case 'w':
 	    		file_close_cb (w, NULL);
 	    		break;
@@ -422,13 +431,15 @@ gedit_view_class_init (gedit_view_class *klass)
 
 	gedit_debug_mess ("F:gedit_view_class_init.\n", DEBUG_VIEW);
 	
-	gedit_view_signals[CURSOR_MOVED_SIGNAL] = gtk_signal_new ("cursor_moved",
-								  GTK_RUN_FIRST,
-								  object_class->type,
-								  GTK_SIGNAL_OFFSET (gedit_view_class, cursor_moved),
-								  gtk_signal_default_marshaller,
-								  GTK_TYPE_NONE,
-								  0);
+	gedit_view_signals[CURSOR_MOVED_SIGNAL] =
+		gtk_signal_new ("cursor_moved",
+				GTK_RUN_FIRST,
+				object_class->type,
+				GTK_SIGNAL_OFFSET (gedit_view_class, cursor_moved),
+				gtk_signal_default_marshaller,
+				GTK_TYPE_NONE,
+				0);
+
 	gtk_object_class_add_signals (object_class, gedit_view_signals, LAST_SIGNAL);
 	klass->cursor_moved = NULL;
 	/*widget_class->size_allocate = gedit_view_size_allocate;
@@ -556,7 +567,7 @@ gedit_view_init (gedit_view *view)
 
 	view->split_parent = GTK_WIDGET (view->split_screen)->parent;
 
-	style = gtk_style_new();
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (mdi->active_window)));
   	gdk_font_unref (style->font);
 
 	bg = &style->base[0];
@@ -590,13 +601,13 @@ gedit_view_init (gedit_view *view)
 
 	}
 	
- 	gtk_widget_push_style (style);     
-	gtk_widget_set_style(GTK_WIDGET(view->split_screen), style);
-   	gtk_widget_set_style(GTK_WIDGET(view->text), style);
+ 	gtk_widget_push_style (style);
+	gtk_widget_set_style (GTK_WIDGET(view->split_screen), style);
+   	gtk_widget_set_style (GTK_WIDGET(view->text), style);
    	gtk_widget_pop_style ();
 
-	gtk_widget_show(view->split_screen);
-	gtk_text_set_point(GTK_TEXT(view->split_screen), 0);
+	gtk_widget_show (view->split_screen);
+	gtk_text_set_point (GTK_TEXT(view->split_screen), 0);
 
 	/* Popup Menu */
 	menu = gnome_popup_menu_new (popup_menu);
@@ -604,7 +615,7 @@ gedit_view_init (gedit_view *view)
 	gnome_popup_menu_attach (menu, view->split_screen, view);
 	
         gnome_config_push_prefix ("/gEdit/Global/");
-	view->splitscreen = gnome_config_get_int("splitscreen");
+	view->splitscreen = gnome_config_get_int ("splitscreen");
 	gnome_config_pop_prefix ();
 	gnome_config_sync ();
 	
@@ -613,7 +624,8 @@ gedit_view_init (gedit_view *view)
 	gtk_paned_set_position (GTK_PANED (view->pane), 1000);
 	/*gtk_fixed_put (GTK_FIXED (view), view->vbox, 0, 0);
 	gtk_widget_show (view->vbox);*/
-	gtk_widget_grab_focus(view->text);
+
+	gtk_widget_grab_focus (view->text);
 }
 
 guint
@@ -644,7 +656,7 @@ gedit_view_get_type (void)
 }
 
 GtkWidget *
-gedit_view_new (gedit_document *doc)
+gedit_view_new (Document *doc)
 {
 	gedit_view *view;
 
@@ -815,7 +827,7 @@ void
 gedit_view_buffer_sync (gedit_view *view) 
 {
 	gchar *buf;
-	gedit_document *doc = view->document;
+	Document *doc = view->document;
 
 	gedit_debug_mess ("F:gedit_view_buffer_sync\n", DEBUG_VIEW);
 	

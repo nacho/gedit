@@ -24,11 +24,7 @@
 
 #include "gedit.h"
 
-void gedit_set_title (gedit_document *doc);
-void gedit_flash     (gchar *msg);
-void gedit_flash_va  (gchar *format, ...);
 
-/* DEBUGING tools */ 
 typedef enum {
 	DEBUG_UNDO,
 	DEBUG_UNDO_DEEP,
@@ -38,9 +34,14 @@ typedef enum {
 	DEBUG_PLUGINS_DEEP,
 	DEBUG_FILE,
 	DEBUG_FILE_DEEP
-} gedit_debug_modes;
+} DebugSection;
 
-void gedit_debug_mess (gchar *message, gint type);
+
+void gedit_set_title (Document *doc);
+void gedit_flash     (gchar *msg);
+void gedit_flash_va  (gchar *format, ...);
+
+void gedit_debug_mess (gchar *message, DebugSection type);
 
 #endif /* __GEDIT_UTILS_H__ */
 

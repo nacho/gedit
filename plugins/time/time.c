@@ -4,30 +4,33 @@
  *
  * Prints "Hello World" into the current document
  */
- 
+
+#include <config.h> 
 #include <gnome.h>
-#include <config.h>
+
+/*
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
+*/
 
-#include "../../src/main.h"
-#include "../../src/gE_mdi.h"
+#include "../../src/gedit-window.h"
+#include "../../src/gedit-document.h"
 #include "../../src/gE_view.h"
-#include "../../src/gE_plugin.h"
+#include "../../src/gedit-plugin.h"
 
 
 /* first the gE_plugin centric code */
 
-static void destroy_plugin (gE_Plugin_Data *pd)
+static void destroy_plugin (PluginData *pd)
 {
 	g_free (pd->name);
-	
 }
 
 
 /* Gratiously ripped out of GIMP (app/general.c), with a fiew minor changes */
-char *get_time()
+char *
+get_time (void)
 {
 	static char static_buf[21];
   	gchar *tmp, *out = NULL;
@@ -45,20 +48,20 @@ char *get_time()
 	
   	/* date format derived from ISO 8601:1988 */
   	/*sprintf(tmp, "%04d-%02d-%02d%c%02d:%02d:%02d%c",
-	  	now->tm_year + 1900, now->tm_mon + 1, now->tm_mday,
-	  	' ',
-	  	now->tm_hour, now->tm_min, now->tm_sec,
-	  	'\000'); 
+	  now->tm_year + 1900, now->tm_mon + 1, now->tm_mday,
+	  ' ',
+	  now->tm_hour, now->tm_min, now->tm_sec,
+	  '\000'); 
 	
-	return tmp;
+	  return tmp;
 	*/
 	format = "%a %b %e %H:%M:%S %Z %Y";
 
 	do
-    	  {
-      	    out_length += 200;
-      	    out = (char *) realloc (out, out_length);
-    	  }
+	{
+		out_length += 200;
+		out = (char *) realloc (out, out_length);
+	}
   	while (strftime (out, out_length, format, now) == 0);
 
   	
@@ -66,30 +69,30 @@ char *get_time()
 }
 
 /* the function that actually does the wrok */
-static void insert_time ()
+static void
+insert_time (void)
 {
 	gint i;
-	gE_view *view = GE_VIEW (mdi->active_view);
-	gE_document *doc = gE_document_current();
+	gedit_view *view = GE_VIEW (mdi->active_view);
+	Document *doc = gedit_document_current();
 	static gchar *the_time;
   	
   	the_time = get_time();
 
-	i = gE_view_get_position (view);
+	i = gedit_view_get_position (view);
 
 	gtk_text_freeze (GTK_TEXT (view->text));
 	gtk_editable_insert_text (GTK_EDITABLE (view->text), the_time,
-						 strlen(the_time), &i);
+				  strlen(the_time), &i);
 	
 		
 	gtk_text_thaw (GTK_TEXT (view->text));
 		
 	g_free (the_time);
 }
-	
 
-
-gint init_plugin (gE_Plugin_Data *pd)
+gint
+init_plugin (PluginData *pd)
 {
 	/* initialise */
 	pd->destroy_plugin = destroy_plugin;

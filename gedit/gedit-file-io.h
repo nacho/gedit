@@ -21,10 +21,11 @@
 #ifndef __GEDIT_FILE_IO_H__
 #define __GEDIT_FILE_IO_H__
 
+#include "gedit-document.h"
 
 /* we should be able to not expose this functions ...*/
-extern gint gedit_file_open (gedit_document *doc, gchar *fname);
-extern gint gedit_file_save (gedit_document *doc, gchar *fname);
+extern gint gedit_file_open (Document *doc, gchar *fname);
+extern gint gedit_file_save (Document *doc, gchar *fname);
 
 extern void file_new_cb (GtkWidget *widget, gpointer cbdata);
 

@@ -21,6 +21,7 @@
 #ifndef __GE_VIEW_H__
 #define __GE_VIEW_H__
 
+#include "gedit-document.h"
 #include "gedit.h"
 
 #define GE_VIEW(obj)		GTK_CHECK_CAST (obj, gedit_view_get_type (), gedit_view)
@@ -30,12 +31,12 @@
 typedef struct _gedit_view gedit_view;
 typedef struct _gedit_view_class gedit_view_class;
 
-struct _gedit_view {
-
+struct _gedit_view
+{
 	/*GtkFixed fixed;*/
 	GtkVBox box;
 	
-	gedit_document *document;
+	Document *document;
 	
 	gchar *font;
 	
@@ -72,8 +73,8 @@ struct _gedit_view {
 	
 };
 
-struct _gedit_view_class {
-
+struct _gedit_view_class
+{
 	GtkVBoxClass parent_class;
 	
 	void (*cursor_moved)(gedit_view *view);
@@ -84,7 +85,7 @@ struct _gedit_view_class {
 
 /* General utils */
 guint		gedit_view_get_type 		(void);
-GtkWidget*	gedit_view_new 			(gedit_document *doc);
+GtkWidget*	gedit_view_new 			(Document *doc);
 
 /* View settings */
 void 		gedit_view_set_font 		(gedit_view *view, gchar *font);

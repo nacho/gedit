@@ -21,21 +21,22 @@
 
 #include <config.h>
 #include <gnome.h>
-#include "gedit.h"
+
+#include "gedit-window.h"
 #include "gedit-undo.h"
 #include "gedit-utils.h"
-#include "gE_mdi.h"
+#include "gedit-document.h"
 #include "gE_view.h"
 
-void views_insert (gedit_document *doc, gedit_undo *undo);
-void views_delete (gedit_document *doc, gedit_undo *undo);
-void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, gedit_document *doc);
+void views_insert (Document *doc, gedit_undo *undo);
+void views_delete (Document *doc, gedit_undo *undo);
+void gedit_undo_add (gchar *text, gint start_pos, gint end_pos, gint action, Document *doc);
 void gedit_undo_do (GtkWidget *w, gpointer data);
 void gedit_undo_redo (GtkWidget *w, gpointer data);
 
 void
 gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
-		gint action, gedit_document *doc)
+		gint action, Document *doc)
 {
 	gedit_undo *undo;
 
@@ -64,7 +65,7 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 void
 gedit_undo_do (GtkWidget *w, gpointer data)
 {
-	gedit_document *doc = gedit_document_current();
+	Document *doc = gedit_document_current();
 	gedit_undo *undo, *redo;
 
 	gedit_debug_mess ("F:      undo-gedit_undo_do\n", DEBUG_UNDO);
@@ -116,7 +117,7 @@ void
 gedit_undo_redo (GtkWidget *w, gpointer data)
 {
 
-	gedit_document *doc = gedit_document_current();
+	Document *doc = gedit_document_current();
 	gedit_undo *redo;
 
 	gedit_debug_mess ("F:      undo-gedit_undo_redo\n", DEBUG_UNDO);
@@ -160,9 +161,8 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 }
 
 void
-views_insert (gedit_document *doc, gedit_undo *undo)
+views_insert (Document *doc, gedit_undo *undo)
 {
-
 	gint i;
 	gint p1;
 	gedit_view *view;
@@ -190,7 +190,7 @@ views_insert (gedit_document *doc, gedit_undo *undo)
 }
 
 void
-views_delete (gedit_document *doc, gedit_undo *undo)
+views_delete (Document *doc, gedit_undo *undo)
 {
 	gedit_view *nth_view;
 	gint n;

@@ -1,5 +1,20 @@
 Known bugs in the current version of gEdit (as of April/2000):
 
+	* if you ./configure --prefix to somewhere other than
+          gnome-config --prefix, then the plugins won't be recognized.
+
+	* Should add version checking into configure.in such that it
+          will warn the user if they don't have the latest glib/gtk or
+          gnome-libs
+      
+	* Lots of GnomeUI-Critical and Gtk-Warning messages when you
+          try to do "Open (swap) .c/.h file" for something that does
+          not have a file that's .c/.h to swap with.
+
+	* Crash: Change your preferences to enable "Close Window After
+	  Closing Last", then close all window tabs, then try to
+	  go to the Preferences.
+	
 	* Need to fix the text wrapping when printing and
 	  print previewing.
 

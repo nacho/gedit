@@ -91,7 +91,7 @@ extern void options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data);
 extern void options_toggle_read_only_cb (GtkWidget *widget, gpointer data);
 
 /* Functions needed to be made external for the plugins api */
-extern void close_doc_execute (gedit_document *opt_doc, gpointer cbdata);
+extern void close_doc_execute (Document *opt_doc, gpointer cbdata);
 
 
 #endif /* __COMMANDS_H__ */

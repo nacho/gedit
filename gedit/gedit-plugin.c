@@ -25,9 +25,11 @@
 #include <gmodule.h>
 #include <dirent.h> 
 
+#include "gedit-window.h"
 #include "gedit.h"
 #include "gedit-file-io.h"
 #include "gedit-plugin.h"
+#include "gedit-document.h"
 
 
 GSList	*plugin_list = NULL;
@@ -107,11 +109,6 @@ plugin_unload (PluginData *pd)
 	n = g_slist_index (plugin_list, pd);
 	plugin_list = g_slist_remove (plugin_list, pd);
 	
-#if 0
-	path = g_new(gchar, strlen(_("_Plugins")) + 2);
-  	sprintf (path, "%s/", _("_Plugins"));
-#endif
-
 	path = g_strdup_printf ("%s/", _("_Plugins"));
 	
 	for (w = 0; w < g_list_length (mdi->windows); w++)
@@ -139,9 +136,8 @@ plugin_load_plugins_in_dir (char *dir)
 	{
 		if (strncmp (e->d_name + strlen (e->d_name) - 3, ".so", 3) == 0)
 		{
-			char *plugin;
-			
-			plugin = g_strconcat (dir, e->d_name, NULL);
+			char *plugin = g_strconcat (dir, e->d_name, NULL);
+
 			plugin_load (plugin);
 			g_free (plugin);
 		}
@@ -158,20 +154,22 @@ load_all_plugins (void)
 	/* load user plugins */
 	if (home != NULL)
 	{
-/*		pdir = gnome_util_prepend_user_home (".gedit/plugins/"); */
-		pdir = g_strconcat (home, "/.gedit/plugins/", NULL);
+		pdir = gnome_util_prepend_user_home (".gedit/plugins/");
+/*		pdir = g_strconcat (home, "/.gedit/plugins/", NULL); */
 		plugin_load_plugins_in_dir (pdir);
 		g_free (pdir);
 	}
 	
 	/* load system plgins */
 	pdir = gnome_unconditional_libdir_file ("gedit/plugins/");
+	g_print ("%s\n", pdir);
 	plugin_load_plugins_in_dir (pdir);
 	g_free (pdir);
 }
 
 /**
  * gedit_plugins_init:
+ *
  */
 void
 gedit_plugins_init (void)
@@ -183,7 +181,7 @@ gedit_plugins_init (void)
 }
 
 /**
- * gedit_plugisn_window_add:
+ * gedit_plugins_window_add:
  * @app:
  *
  *
@@ -203,9 +201,8 @@ gedit_plugins_window_add (GnomeApp *app)
 	for (n = 0; n < g_slist_length (plugin_list); n++)
 	{
 		pd = g_slist_nth_data (plugin_list, n);
-		
-		path = g_new0 (gchar, strlen (_("_Plugins")) + 2);
-		sprintf (path, "%s/", _("_Plugins"));
+
+		path = g_strdup_printf ("%s/", _("_Plugins"));
 		
 		menu->label = g_strdup (pd->name);
 		menu->type = GNOME_APP_UI_ITEM;

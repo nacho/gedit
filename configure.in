@@ -1,11 +1,10 @@
 AC_INIT(src/gedit.c)
+
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE(gedit, 0.7.0)
 
 AM_MAINTAINER_MODE
 AM_ACLOCAL_INCLUDE(macros)
-
-GNOME_INIT
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -13,24 +12,12 @@ AC_STDC_HEADERS
 AC_ARG_PROGRAM
 AM_PROG_LIBTOOL
 
+GNOME_INIT
+
+GNOME_COMPILE_WARNINGS
 GNOME_X_CHECKS
 
 dnl AM_CONDITIONAL(FALSE, test foo = bar)
-
-	    
-dnl Let the user enable the new GModule Plugins
-AC_ARG_WITH(gmodule-plugins,
-	    [  --with-gmodule-plugins  Enable GModule Plugins [default=no]],
-	    enable_gmodule_plugins="$withval", enable_gmodule_plugins=no)
-
-dnl We need to have GNOME to use them
-  have_gmodule_plugins=no
-  if test x$enable_gmodule_plugins = xyes ; then
-    AC_DEFINE(WITH_GMODULE_PLUGINS)
-    have_gmodule_plugins=yes
-  fi
-
-AM_CONDITIONAL(WITH_GMODULE_PLUGINS, test x$have_gmodule_plugins = xyes)
 
 dnl
 dnl Let the user disable ORBit even if it can be found
@@ -62,7 +49,42 @@ AM_CONDITIONAL(HAVE_LIBZVT, test x$have_libzvt = xyes)
 ALL_LINGUAS="cs da de el es fr ga gl hu it ja ko lt nl no pl pt pt_BR ru sv tr uk wa zh_TW.Big5 zh_CN.GB2312"
 AM_GNU_GETTEXT
 
-AM_PATH_GNOME_PRINT
+dnl ******************************
+dnl GnomePrint checking
+dnl ******************************
+AC_MSG_CHECKING(for GnomePrint libraries >= 0.16)
+if gnome-config --libs print > /dev/null 2>&1; then 
+    vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" | \
+        awk 'BEGIN { FS = "."; } { print $1 * 1000 + $2;}'`
+    if test "$vers" -ge 16; then
+        AC_MSG_RESULT(found)
+    else
+        AC_MSG_ERROR(You need at least GNOME print 0.16 for this version of GEdit)
+    fi
+else
+    AC_MSG_ERROR(Did not find GnomePrint installed)
+fi
+
+dnl ******************************
+dnl gtk+ checking
+dnl ******************************
+AC_MSG_CHECKING(for GTK >= 1.2.7)
+if gtk-config --version > /dev/null 2>&1; then 
+    dnl We need the "%d" in order not to get e-notation on hpux.
+    vers=`gtk-config --version | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+    if test "$vers" -ge 1002007; then
+        AC_MSG_RESULT(found)
+    else
+        AC_MSG_ERROR(You need at least GTK+ 1.2.7 for this version of GEdit)
+    fi
+else
+    AC_MSG_ERROR(Did not find GTK+ installed)
+fi
+
+GNOME_PRINT_LIBS=`gnome-config --libs print`
+GNOME_PRINT_CFLAGS=`gnome-config --cflags print`
+AC_SUBST(GNOME_PRINT_LIBS)
+AC_SUBST(GNOME_PRINT_CFLAGS)
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
@@ -78,14 +100,16 @@ help/Makefile
 help/C/Makefile
 help/no/Makefile
 pixmaps/Makefile
+plugins/email/Makefile
+plugins/time/Makefile
 src/Makefile
-dnl gmodule-plugins/Makefile
-dnl gmodule-plugins/idl/Makefile
-dnl gmodule-plugins/goad/Makefile
-dnl gmodule-plugins/client/Makefile
-dnl gmodule-plugins/shell/Makefile
-dnl gmodule-plugins/launcher/Makefile
-dnl gmodule-plugins/hello/Makefile
-dnl editor-plugins/Makefile
-dnl editor-plugins/prm/Makefile
 ],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
+
+
+echo "
+
+Configuration:
+
+        Source code location:   ${srcdir}
+        Compiler:               ${CC} 
+"

@@ -2,7 +2,7 @@
 
 #plugindir = $(libdir)/go/plugins
 
-SUBDIRS = macros po intl pixmaps src help
+SUBDIRS = macros po intl pixmaps plugins src help
 
 EXTRA_DIST = KNOWNBUGS FAQ ChangeLog README README.plugins \
 	INSTALL gedit.1 gedit.desktop \
@@ -18,8 +18,6 @@ mimedir = $(datadir)/mime-info
 mime_DATA = gedit.keys
 
 dist-hook: gedit.spec
-# mkdir $(distdir)/xpm
-# cp $(srcdir)/xpm/*.xpm $(distdir)/xpm
 	cp gedit.spec $(distdir)
 
 ## to automatically rebuild aclocal.m4 if any of the macros in `macros/' change
