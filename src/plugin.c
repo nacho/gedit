@@ -418,9 +418,6 @@ gedit_plugin_load_all (void)
 	if (home != NULL)
 	{
 		pdir = gnome_util_prepend_user_home (".gedit/plugins/");
-		/*
-		pdir = g_strconcat (home, "/.gedit/plugins/", NULL);
-		*/
 		gedit_plugin_load_dir (pdir);
 		g_free (pdir);
 	}
