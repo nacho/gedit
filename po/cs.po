@@ -1,16 +1,16 @@
 # Czech translation for gedit.
 # Copyright (C) 2002,2003 Free Software Foundation, Inc.
-# Copyright (C) 2003, 2004 Miloslav Trmac <mitr@volny.cz>
+# Copyright (C) 2003, 2004, 2005 Miloslav Trmac <mitr@volny.cz>
 # Michal Bukovjan <michal.bukovjan@openone.cz>, 2002.
 # Michal Bukovjan <bukm@centrum.cz>, 2003
-# Miloslav Trmac <mitr@volny.cz>, 2003, 2004.
+# Miloslav Trmac <mitr@volny.cz>, 2003, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-25 20:53+0100\n"
-"PO-Revision-Date: 2004-12-25 14:55+0100\n"
+"PO-Revision-Date: 2005-01-28 14:48+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -165,11 +165,11 @@ msgstr "Písmo záhlaví pro tisk"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "Zvýrazňovat aktuální řádek"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "Zvýrazňovat odpovídající závorku"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -476,14 +476,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "Jestli má gedit povolit zvýrazňování syntaxe."
 
 #: data/gedit.schemas.in.h:74
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Jestli má gedit povolit zvýrazňování syntaxe."
+msgstr "Jestli má gedit zvýrazňovat odpovídající závorku."
 
 #: data/gedit.schemas.in.h:75
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "Jestli má gedit tisknout zvýraznění syntaxe při tisku dokumentů."
+msgstr "Jestli má gedit zvýrazňovat aktuální řádek."
 
 #: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
@@ -547,9 +545,8 @@ msgid "Activate %s"
 msgstr "Aktivovat %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Zavřít okno s výstupem"
+msgstr "Zavřít _bez uložení"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -811,14 +808,12 @@ msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automatické odsazování</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Zalamování textu</b>"
+msgstr "<b>Odpovíající závorky</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Zalamování textu</b>"
+msgstr "<b>Aktuální řádek</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -895,7 +890,7 @@ msgstr "Písma a barvy"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "Zvýrazňovat _aktuální řádek"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -903,7 +898,7 @@ msgstr "_Režim zvýrazňování:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "Zvýrazňovat odpovídající závorku"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -1018,7 +1013,6 @@ msgid "_Right margin at column:"
 msgstr "_Pravý okraj ve sloupci:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "Šířka _tabelátorů:"
 
@@ -1205,7 +1199,6 @@ msgstr ""
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "Michal Bukovjan <bukm@centrum.cz>\n"
@@ -1684,7 +1677,6 @@ msgid "Access was denied."
 msgstr "Přístup byl odepřen."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open files and try again."
 msgstr ""
@@ -1697,7 +1689,6 @@ msgid "\"%s\" is a directory"
 msgstr "\"%s\" je adresář"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
@@ -1766,9 +1757,7 @@ msgstr ""
 msgid "Could not open the file \"%s\" using the %s character coding"
 msgstr "Nemohu otevřít soubor \"%s\" s kódováním znaků %s"
 
-# FIXME: s/tryingto/trying to/
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
@@ -1779,13 +1768,10 @@ msgstr ""
 "kódování znaků, a zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
-msgstr ""
-"Soubor obsahuje neplatná data. Pravděpodobně se pokoušíte otevřít binární "
-"soubor."
+msgstr "Soubor obsahuje data v neplatném formátu. Pravděpodobně se pokoušíte otevřít binární soubor."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1803,7 +1789,6 @@ msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr "gedit jej nemůže najít. Původní soubor byl možná nedávno smazán."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open files and try again."
 msgstr ""
@@ -1811,7 +1796,6 @@ msgstr ""
 "zkuste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
@@ -2590,39 +2574,33 @@ msgid "User name"
 msgstr "Jméno uživatele"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "_Kopírovat"
+msgstr "U_ložit kopii..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "Nastavení jazyka aktuálního dokumentu"
+msgstr "Uložit kopii aktuálního dokumentu"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "Nemohu uložit soubor \"%s\""
+msgstr "Nemohu uložit kopii souboru do \"%s\""
 
 #: plugins/savecopy/savecopy.c:361
-#, fuzzy
 msgid "You are trying to overwrite the original file"
-msgstr "Soubor, který se pokoušíte otevřít, není obyčejný soubor."
+msgstr "Pokoušíte se přepsat původní soubor"
 
 #: plugins/savecopy/savecopy.c:413
-#, fuzzy
 msgid "Save Copy..."
-msgstr "_Neukládat nic"
+msgstr "Uložit kopii..."
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "Uložit všechny otevřené soubory"
+msgstr "Uložit kopii"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Třídit aktuální dokument nebo výběr."
+msgstr "Uložit kopii aktuálního dokumentu do místního nebo vzdáleného umístění."
 
 #: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
@@ -3036,1478 +3014,1388 @@ msgid "Spell checker"
 msgstr "Kontrola pravopisu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "Dostupné formáty"
+msgstr "Zkrácená forma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "Arménské"
+msgstr "Zkratka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "Nad"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "Znak klávesové zkratky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "Zkratka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "řádků"
+msgstr "Zarovnání"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "Znak zarovnání"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "Alternativa"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "Ukotvení"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "URI ukotvení"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "Vyberte soubor, který otevřít"
+msgstr "Kód souboru třídy apletu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "Pole"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "Asociované informace"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "Automatické odsazování"
+msgstr "Informace o autorovi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "_Tisknout záhlaví stránek"
+msgstr "Hlavičky související s osami"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "BGSound"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "_Barva pozadí:"
+msgstr "Barva pozadí"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "Barva pozadí"
+msgstr "Dlaštice textury pozadí"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "URI základu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "Použít písmo v nadpisu"
+msgstr "Základní písmo"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
-msgstr ""
+msgstr "Chování"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "Blikající text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "Tučné"
+msgstr "Okraj"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "_Barva pozadí:"
+msgstr "Barva okraje"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "Obdélník"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Středoevropské"
+msgstr "Rozsah řádků buněk"
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "Obecné"
+msgstr "Vycentrovat"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Char enconding of linked resource"
-msgstr ""
+msgstr "Kódování znaků odkazovaného zdroje"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
-msgstr ""
+msgstr "Zaškrtnuto(stav)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "_akcí"
+msgstr "Citát"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
-msgstr ""
+msgstr "Citovaný důvod změny"
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "ID implementace třídy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "Seznam tagů"
+msgstr "Seznam tříd"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Zrušit řízení toku textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr ""
+msgstr "Typ obsahu kód"
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "Kopírovat vybrané řádky"
+msgstr "Barva vybraných odkazů"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
-msgstr ""
+msgstr "Rozsah sloupců"
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
-msgstr ""
+msgstr "Sloupce"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "_Obsah"
+msgstr "Poznámka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr ""
+msgstr "Fragment počítačového kódu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "_Obsah"
+msgstr "Schéma obsahu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "_Obsah"
+msgstr "Typ obsahu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "_Obsah"
+msgstr "Souřadnice"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
-msgstr ""
+msgstr "Kontejner DIV Style"
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
-msgstr ""
+msgstr "Kontejner DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "Datum a čas změny"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "Příznak deklarace"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "_Popis"
+msgstr "Popis definice"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
-msgstr ""
+msgstr "Seznam definic"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition term"
-msgstr ""
+msgstr "Definovaný pojem"
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
 msgid "Deleted text"
-msgstr "Smazat vybraný text"
+msgstr "Odstraněný text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Direction"
-msgstr "Bretonština"
+msgstr "Směr"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Directionality"
-msgstr ""
+msgstr "Směr"
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directory list"
-msgstr ""
+msgstr "Výpis adresáře"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Disabled"
-msgstr "Povoleno"
+msgstr "Zakázáno"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document base"
-msgstr "_Dokumenty"
+msgstr "Základ dokumentu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
 msgid "Document body"
-msgstr "_Dokumenty"
+msgstr "Tělo dokumentu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
 msgid "Document head"
-msgstr "_Dokumenty"
+msgstr "Hlavička dokumentu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Document title"
-msgstr "Statistika dokumentu"
+msgstr "Název dokumentu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document type"
-msgstr "_Dokumenty"
+msgstr "Typ dokumentu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Element ID"
-msgstr "Elementy"
+msgstr "ID Elementu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Embedded object"
-msgstr ""
+msgstr "Vložený objekt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
+msgstr "Zvýrazňení"
 
 #: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Encode type"
-msgstr ""
+msgstr "Typ kódování"
 
 #: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Figure"
-msgstr ""
+msgstr "Obrázek"
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
-#, fuzzy
 msgid "Font face"
-msgstr "Název písma"
+msgstr "Řez písma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
 msgid "For label"
-msgstr "label"
+msgstr "Popisek For"
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Forced line break"
-msgstr ""
+msgstr "Vynucený konec řádku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
-#, fuzzy
 msgid "Form"
-msgstr "Normální"
+msgstr "Formulář"
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form action handler"
-msgstr ""
+msgstr "Obsluha akce formuláře"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form control group"
-msgstr ""
+msgstr "Skupina ovládacího prvku formuláře"
 
 #: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form field label text"
-msgstr ""
+msgstr "Text popisku pole formuláře"
 
 #: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form input"
-msgstr ""
+msgstr "Vstup formuláře"
 
 #: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input type"
-msgstr ""
+msgstr "Typ vstupu formuláře"
 
 #: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form method"
-msgstr ""
+msgstr "Metoda formuláře"
 
 #: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Forward link"
-msgstr ""
+msgstr "Odkaz vpřed"
 
 #: plugins/taglist/HTML.tags.xml.in.h:78
-#, fuzzy
 msgid "Frame"
-msgstr "Název:"
+msgstr "Rám"
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame render parts"
-msgstr ""
+msgstr "Rám vykreslovat části"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame source"
-msgstr ""
+msgstr "Zdroj rámu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame target"
-msgstr ""
+msgstr "Cíl rámu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frameborder"
-msgstr ""
+msgstr "Okraj rámu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:83
-#, fuzzy
 msgid "Frameset"
-msgstr "Faerština"
+msgstr "Sada rámů"
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
 msgid "Frameset columns"
-msgstr "Začít ve _sloupci:"
+msgstr "Sloupce sady rámů"
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset rows"
-msgstr ""
+msgstr "Řádky sady rámů"
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Framespacing"
-msgstr ""
+msgstr "Rozsetup rámů"
 
 #: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Generic embedded object"
-msgstr ""
+msgstr "Obecný vložený objekt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic metainformation"
-msgstr ""
+msgstr "Obecné metainformace"
 
 #: plugins/taglist/HTML.tags.xml.in.h:89
-#, fuzzy
 msgid "Generic span"
-msgstr "Obecné"
+msgstr "Obecný rozsah"
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "HREF URI"
-msgstr ""
+msgstr "URI HREF"
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HTML - Special Characters"
-msgstr ""
+msgstr "HTML - Speciální znaky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Tags"
-msgstr ""
+msgstr "HTML - Tagy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML root element"
-msgstr ""
+msgstr "Kořenový element HTML"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML version"
-msgstr ""
+msgstr "Verze HTML"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTTP header name"
-msgstr ""
+msgstr "Název hlavičky HTTP"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Header cell ID's"
-msgstr ""
+msgstr "ID buňek hlavičky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Heading"
-msgstr ""
+msgstr "Nadpis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading 1"
-msgstr ""
+msgstr "Nadpis 1"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 2"
-msgstr ""
+msgstr "Nadpis 2"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 3"
-msgstr ""
+msgstr "Nadpis 3"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 4"
-msgstr ""
+msgstr "Nadpis 4"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 5"
-msgstr ""
+msgstr "Nadpis 5"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 6"
-msgstr ""
+msgstr "Nadpis 6"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Height"
-msgstr ""
+msgstr "Výška"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Horizontal rule"
-msgstr ""
+msgstr "Vodorovné pravítko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal space"
-msgstr ""
+msgstr "Vodorovné místo"
 
 #: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "I18N BiDi over-ride"
-msgstr ""
+msgstr "Změna I18N BiDi"
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Image"
-msgstr ""
+msgstr "Obrázek"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image map"
-msgstr ""
+msgstr "Mapa obrázku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map area"
-msgstr ""
+msgstr "Oblast mapy obrázku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map name"
-msgstr ""
+msgstr "Název mapy obrázku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image source"
-msgstr ""
+msgstr "Zdroj obrázku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "Chybný název souboru"
+msgstr "Vložený rám"
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
-msgstr ""
+msgstr "Vložená vrstva"
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Inserted text"
-msgstr "Vložit datum/čas"
+msgstr "Vložený text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
-msgstr ""
+msgstr "Definice instance"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Italic text"
-msgstr "Kurzíva"
+msgstr "Text kurzívou"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Java applet"
-msgstr ""
+msgstr "Aplet v Javě"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Label"
-msgstr "label"
+msgstr "Popisek"
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
 msgid "Language code"
-msgstr "Jazyky"
+msgstr "Kód jazyka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Large text style"
-msgstr ""
+msgstr "Styl velkého textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Layer"
-msgstr ""
+msgstr "Vrstva"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Link color"
-msgstr "Zvolte barvu"
+msgstr "Barva odkazu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
-msgstr ""
+msgstr "Položka seznamu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List of MIME types for file upload"
-msgstr ""
+msgstr "Seznam typů MIME pro odesílání souboru"
 
 #: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of supported character sets"
-msgstr ""
+msgstr "Seznam podporovaných znakových sad"
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Listing"
-msgstr ""
+msgstr "Výpis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "Zvolte písmo editoru"
+msgstr "Místní změna písma"
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
 msgid "Long description link"
-msgstr "_Popis"
+msgstr "Odkaz na dlouhý popis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long quotation"
-msgstr ""
+msgstr "Dlouhý citát"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Mail link"
-msgstr ""
+msgstr "Odkaz na poštu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Margin pixel height"
-msgstr ""
+msgstr "Výška okraje v pixelech"
 
 #: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel width"
-msgstr ""
+msgstr "Šířka okraje v pixelech"
 
 #: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Marquee"
-msgstr ""
+msgstr "Marquee"
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Max text field chars"
-msgstr ""
+msgstr "Maximum znaků textového pole"
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Media-independent link"
-msgstr ""
+msgstr "Odkaz nezávislý na médiu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Menu list"
-msgstr ""
+msgstr "Seznam menu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Multi-line text field"
-msgstr ""
+msgstr "Víceřádkové textové pole"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multicolumn"
-msgstr ""
+msgstr "Vícesloupcový"
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multiple"
-msgstr ""
+msgstr "Více"
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
-#, fuzzy
 msgid "Name"
-msgstr "Název:"
+msgstr "Název"
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Named property value"
-msgstr ""
+msgstr "Hodnota pojmenované vlastnosti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Next ID"
-msgstr ""
+msgstr "Následující ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "No URI"
-msgstr ""
+msgstr "Žádné URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No embedded objects"
-msgstr ""
+msgstr "Žádné vložené objekty"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No frames"
-msgstr ""
+msgstr "Žádné rámy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No layers"
-msgstr ""
+msgstr "Žádné vrstvy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No line break"
-msgstr ""
+msgstr "Žádný konec řádku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
-#, fuzzy
 msgid "No resize"
-msgstr "Ukázat velikost"
+msgstr "Žádné resize"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No script"
-msgstr ""
+msgstr "Žádný skript"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No shade"
-msgstr ""
+msgstr "Žádný stín"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No word wrap"
-msgstr ""
+msgstr "Žádné lámání řádků"
 
 #: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "Note"
-msgstr ""
+msgstr "Poznámka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
-#, fuzzy
 msgid "Object applet file"
-msgstr "Otevřít soubor"
+msgstr "Soubor apletu objektu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object data reference"
-msgstr ""
+msgstr "Odkaz na data objektu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Offset for alignment character"
-msgstr ""
+msgstr "Posun pro znak zarování"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "OnBlur event"
-msgstr ""
+msgstr "Událost OnBlur"
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
 msgid "OnChange event"
-msgstr "Změnit velikost písmen"
+msgstr "Událost OnClick"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnClick event"
-msgstr ""
+msgstr "Událost OnClick"
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnDblClick event"
-msgstr ""
+msgstr "Událost OnDblClick"
 
 #: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnFocus event"
-msgstr ""
+msgstr "Událost OnFocus"
 
 #: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnKeyDown event"
-msgstr ""
+msgstr "Událost OnKeyDown"
 
 #: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyPress event"
-msgstr ""
+msgstr "Událost OnKeyPress"
 
 #: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyUp event"
-msgstr ""
+msgstr "Událost OnKeyUp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnLoad event"
-msgstr ""
+msgstr "Událost OnLoad"
 
 #: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnMouseDown event"
-msgstr ""
+msgstr "Událost OnMouseDown"
 
 #: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseMove event"
-msgstr ""
+msgstr "Událost OnMouseMove"
 
 #: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseOut event"
-msgstr ""
+msgstr "Událost OnMouseOut"
 
 #: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOver event"
-msgstr ""
+msgstr "Událost OnMouseOver"
 
 #: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseUp event"
-msgstr ""
+msgstr "Událost OnMouseUp"
 
 #: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnReset event"
-msgstr ""
+msgstr "Událost OnReset"
 
 #: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnSelect event"
-msgstr ""
+msgstr "Událost OnSelect"
 
 #: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSubmit event"
-msgstr ""
+msgstr "Událost OnSubmit"
 
 #: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnUnload event"
-msgstr ""
+msgstr "Událost OnUnload"
 
 #: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Option group"
-msgstr ""
+msgstr "Skupina možností"
 
 #: plugins/taglist/HTML.tags.xml.in.h:176
-#, fuzzy
 msgid "Option selector"
-msgstr "Výběr písma"
+msgstr "Výběr možnosti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Ordered list"
-msgstr ""
+msgstr "Seřazený seznam"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-#, fuzzy
 msgid "Output media"
-msgstr "Řádky výstupu"
+msgstr "Výstupní médium"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
-msgstr ""
+msgstr "Odstavec"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph class"
-msgstr ""
+msgstr "Třída odstavce"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph style"
-msgstr ""
+msgstr "Styl odstavce"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Preformatted listing"
-msgstr ""
+msgstr "Předformátovaný výpis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
-#, fuzzy
 msgid "Preformatted text"
-msgstr "Text pro náhled"
+msgstr "Předformátovaný text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Profile metainfo dictionary"
-msgstr ""
+msgstr "Slovník metainformací o profilu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Prompt message"
-msgstr ""
+msgstr "Zpráva výzvy"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "button1"
+msgstr "Tlačítko"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Quote"
-msgstr "Konec"
+msgstr "Citát"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
 msgid "Range"
-msgstr "Změ_nit"
+msgstr "Rozsah"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
-msgstr ""
+msgstr "Text a heslo jen pro čtení"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Reduced spacing"
-msgstr ""
+msgstr "Zmenšené mezery"
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
 msgid "Reverse link"
-msgstr "_Obrácené pořadí"
+msgstr "Obrácený odkaz"
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Root"
-msgstr ""
+msgstr "Kořen"
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Rows"
-msgstr ""
+msgstr "Řádků"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rulings between rows and columns"
-msgstr ""
+msgstr "Čáry mezi řádky a sloupci"
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Sample program output, scripts"
-msgstr ""
+msgstr "Ukázkový výstup programu, skripty"
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Scope covered by header cells"
-msgstr ""
+msgstr "Rozsah pokrytý buňkami hlavičky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Script execution defer"
-msgstr ""
+msgstr "Odložení spuštění skriptu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "Nastavit jazyk"
+msgstr "Název skriptovacího jazyka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
-msgstr ""
+msgstr "Příkazy skriptu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
-msgstr ""
+msgstr "Posuvná lišta"
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "Vyberte soubor, který otevřít"
+msgstr "Vybratelná možnost"
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "_Uložit vybrané"
+msgstr "Vybráno"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
-msgstr ""
+msgstr "Mapa obrázku na straně serveru"
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "Uložit"
+msgstr "Tvar"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
-msgstr ""
+msgstr "Krátký vložený citát"
 
 #: plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Single line prompt"
-msgstr ""
+msgstr "Výzva na jednom řádku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "Velikost tabelátoru"
+msgstr "Velikost"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "Všechny textové soubory"
+msgstr "Styl malého textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
-msgstr ""
+msgstr "Měkký konec řádku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
-msgstr ""
+msgstr "Zvuk"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "Uložit"
+msgstr "Mezera"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
-msgstr ""
+msgstr "Mezerami oddělený seznam archívu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "Nahradit"
+msgstr "Rozestup"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
-msgstr ""
+msgstr "Rozestup mezi buňkami"
 
 #: plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Spacing within cells"
-msgstr ""
+msgstr "Rozestup v buňkách"
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "Španělština"
+msgstr "Rozsah"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
-msgstr ""
+msgstr "Odmocnina"
 
 #: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
-msgstr ""
+msgstr "Zpráva při čekání na načtení"
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "Tisknout _čísla řádků"
+msgstr "Počáteční číslo posloupnosti"
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "Přeškrtnuté"
+msgstr "Přeškrtnutý text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "Přeškrtnuté"
+msgstr "Styl přeškrtnutého textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
-msgstr ""
+msgstr "Silné zdůraznění"
 
 #: plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Style info"
-msgstr ""
+msgstr "Informace o stylu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Subscript"
-msgstr ""
+msgstr "Dolní index"
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "_Popis"
+msgstr "Horní index"
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
-msgstr ""
+msgstr "Pozice v pořadí Tab"
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "Povoleno"
+msgstr "Tabulka"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
-msgstr ""
+msgstr "Tělo tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
-#, fuzzy
 msgid "Table caption"
-msgstr "Otevřít umístění"
+msgstr "Nadpis tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column group properties"
-msgstr ""
+msgstr "Vlastnosti skupiny sloupců tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table column properties"
-msgstr ""
+msgstr "Vlastnosti sloupce tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table data cell"
-msgstr ""
+msgstr "Buňka dat tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table footer"
-msgstr ""
+msgstr "Patička tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Table header"
-msgstr ""
+msgstr "Hlavička tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table header cell"
-msgstr ""
+msgstr "Buňka hlavičky tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table row"
-msgstr ""
+msgstr "Řádek tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table summary"
-msgstr ""
+msgstr "Souhrn tabulky"
 
 #: plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Target - Blank"
-msgstr ""
+msgstr "Cíl - prázdný"
 
 #: plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Target - Parent"
-msgstr ""
+msgstr "Cíl - rodič"
 
 #: plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Target - Self"
-msgstr ""
+msgstr "Cíl - tentýž"
 
 #: plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Top"
-msgstr ""
+msgstr "Cíl - vršek"
 
 #: plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "Dálnopis nebo neproporcionální styl textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
 msgstr "Barva textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Text entered by user"
-msgstr ""
+msgstr "Text zadaný uživatelem"
 
 #: plugins/taglist/HTML.tags.xml.in.h:247
-#, fuzzy
 msgid "Title"
-msgstr "Začátky _slov velkými písměny"
+msgstr "Nadpis"
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "Horní okraj v pixelech"
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
-#, fuzzy
 msgid "Underlined text style"
-msgstr "Podtržené"
+msgstr "Styl podtrženého textu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "Podtržené"
+msgstr "Neseřazený seznam"
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
-msgstr ""
+msgstr "Používat mapu obrázku"
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
-msgstr ""
+msgstr "Hodnota"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
-msgstr ""
+msgstr "Interpretace hodnoty"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
-msgstr ""
+msgstr "Proměnná nebo parametr programu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "Svislé zarovnání buněk"
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "Vložit mezery"
+msgstr "Svislé místo"
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "Zvolte barvu výběru"
+msgstr "Barva navštíveného odkazu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
-msgstr ""
+msgstr "Šířka"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
-msgstr ""
+msgstr "Bibliografie cite"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography item"
-msgstr ""
+msgstr "Bibliografie item"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
-msgstr ""
+msgstr "Bibliografie shortcite"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography thebibliography"
-msgstr ""
+msgstr "Bibliografie thebibliography"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
-msgstr ""
+msgstr "Závorky &lt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
-msgstr ""
+msgstr "Závorky ()"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr ""
+msgstr "Závorky []"
 
 #: plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr ""
+msgstr "Závorky {}"
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "Vstup ze souboru"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "Písmo"
+msgstr "Poznámka pod čarou"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr ""
+msgstr "Funkce cosin"
 
 #: plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
-msgstr ""
+msgstr "Funkce e^"
 
 #: plugins/taglist/Latex.tags.xml.in.h:14
 msgid "Function exp"
-msgstr ""
+msgstr "Funkce exp"
 
 #: plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr ""
+msgstr "Funkce log"
 
 #: plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr ""
+msgstr "Funkce log10"
 
 #: plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
-msgstr ""
+msgstr "Funkce sine"
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "Řecké"
+msgstr "Řecká alfa"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "Řecké"
+msgstr "Řecká beta"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr ""
+msgstr "Řecké epsilon"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "Řecké"
+msgstr "Řecká gamma"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr ""
+msgstr "Řecké lambda"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "Řecké"
+msgstr "Řecké rho"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "Řecké"
+msgstr "Řecké tau"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "Hlavička 0 (chapter)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "Hlavička 0 (chapter*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "Hlavička 1 (section)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "Hlavička 1 (section*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "Hlavička 2 (subsection)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "Hlavička 2 (subsection*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "Hlavička 3 (subsubsection)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "Hlavička 3 (subsubsection*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "Hlavička 4 (odstavec)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
-msgstr ""
+msgstr "Příloha hlavičky"
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "Položka"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr ""
+msgstr "Položka s popiskem"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - Tagy"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "_Popis"
+msgstr "Seznam description"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
-msgstr ""
+msgstr "Seznam enumerate"
 
 #: plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
-msgstr ""
+msgstr "Seznam itemize"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "Matematika (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "Matematika (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "Otevřít umístění"
+msgstr "Operátor fraction"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "Operátor integral (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "Operátor integral (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Operátor sum (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Operátor sum (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "Nastavení"
+msgstr "Odkaz label"
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "Nastavení"
+msgstr "Odkaz ref"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
-msgstr ""
+msgstr "Symbol &gt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol &gt;="
-msgstr ""
+msgstr "Symbol &gt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol &lt;&lt;"
-msgstr ""
+msgstr "Symbol &lt;&lt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:53
 msgid "Symbol &lt;="
-msgstr ""
+msgstr "Symbol &lt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr ""
+msgstr "Symbol and"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr ""
+msgstr "Symbol const"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "Symbol d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "Symbol d-by-dt-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "Symbol d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "Symbol dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "Symbol equiv"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr ""
+msgstr "Symbol hyphen --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr ""
+msgstr "Symbol hyphen ---"
 
 #: plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr ""
+msgstr "Symbol infinity"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Symbol mathspace ,"
 
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Symbol mathspace ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Symbol mathspace _"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Symbol mathspace __"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr ""
+msgstr "Symbol simeq"
 
 #: plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr ""
+msgstr "Symbol star"
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "Řez písma bold"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "Řez písma italic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "Řez písma slanted"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Řez písma type"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "Text bez lámání řádků"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - Osy"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "Elementy"
+msgstr "XSLT - Elementy"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - Funkce"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "předek"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "předek-nebo-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "atribut"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "syn"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "potomek"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "potomek-nebo-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "následující"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "následující-sourozenec"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "Vložit mezery"
+msgstr "prostor jmen"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "Otevřít"
+msgstr "rodič"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "předcházející"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "předcházející-sourozenec"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "self"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
@@ -4608,22 +4496,6 @@ msgstr "Ze_ptat se na formát"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Použít vlastní _formát"
-
-#, fuzzy
-#~ msgid "Document ID"
-#~ msgstr "_Dokumenty"
-
-#, fuzzy
-#~ msgid "Document version"
-#~ msgstr "_Dokumenty"
-
-#, fuzzy
-#~ msgid "Link"
-#~ msgstr "Řádek"
-
-#, fuzzy
-#~ msgid "Media"
-#~ msgstr "gedit"
 
 #~ msgid "Do_n't save"
 #~ msgstr "_Neukládat"
