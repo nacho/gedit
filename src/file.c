@@ -70,7 +70,7 @@ gedit_file_open (Document *doc, gchar *fname)
 	gchar *tmp_buf, *flash;
 	struct stat stats;
 	gint i;
-	gedit_view *nth_view;
+	View *nth_view;
 	FILE *fp;
 
 	/* FIXME : this function is beeing called
@@ -153,7 +153,7 @@ gedit_file_save (Document *doc, gchar *fname)
 	   just return or display a mesage */
 	FILE *fp;
 	gchar *tmpstr;
-	gedit_view *view = GE_VIEW ( g_list_nth_data(doc->views, 0) );
+	View *view = VIEW ( g_list_nth_data(doc->views, 0) );
 	/* Since all the views contain the same data, we can grab
 	   view #1. Chema */
 	gedit_debug_mess ("F:Entering gedit_file_save.\n", DEBUG_FILE);

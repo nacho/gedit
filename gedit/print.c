@@ -49,7 +49,7 @@ typedef struct _PrintJobInfo {
 	/* document stuff */
 	Document *doc;
 	guchar *buffer;
-	gedit_view *view;
+	View *view;
 	guint buffer_size;
 	guchar *filename;
 	
@@ -228,7 +228,7 @@ set_pji (PrintJobInfo * pji, Document *doc, GnomePrinter *printer)
 
 	pji->pc = gnome_print_master_get_context(pji->master);
 	g_return_if_fail(pji->pc != NULL);
-	pji->view = GE_VIEW(mdi->active_view);
+	pji->view = VIEW(mdi->active_view);
 	pji->doc = doc;
 	pji->buffer_size = gtk_text_get_length(GTK_TEXT(pji->view->text));
 	pji->buffer = gtk_editable_get_chars(GTK_EDITABLE(pji->view->text),0,pji->buffer_size);

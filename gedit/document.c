@@ -85,7 +85,7 @@ gedit_document_create_view (GnomeMDIChild *child)
 	
 	new_view = gedit_view_new (DOCUMENT (child));
 
-	gedit_view_set_font (GE_VIEW(new_view), settings->font);
+	gedit_view_set_font (VIEW(new_view), settings->font);
 	gtk_widget_queue_resize (GTK_WIDGET (new_view));
 	
 	return new_view;
@@ -281,13 +281,13 @@ void
 gedit_add_view (GtkWidget *w, gpointer data)
 {
 	GnomeMDIChild *child;
-	gedit_view *view;
+	View *view;
 
 	if (mdi->active_view)
 	{
-		view = GE_VIEW (mdi->active_view);
+		view = VIEW (mdi->active_view);
 		g_print ("contents: %d\n",
-			 GTK_TEXT(GE_VIEW(mdi->active_view)->text)->first_line_start_index);
+			 GTK_TEXT(VIEW(mdi->active_view)->text)->first_line_start_index);
 	   
 		/* sync the buffer before adding the view */
 		gedit_view_buffer_sync (view);
@@ -307,7 +307,7 @@ gedit_remove_view (GtkWidget *w, gpointer data)
 		return;
 
 	/* First, we remove the view from the document's list */
-	doc->views = g_list_remove (doc->views, GE_VIEW (mdi->active_view));
+	doc->views = g_list_remove (doc->views, VIEW (mdi->active_view));
 	  
 	/* Now, we can remove the view proper */
 	gnome_mdi_remove_view (mdi, mdi->active_view, FALSE);
@@ -321,7 +321,7 @@ child_changed_cb (GnomeMDI *mdi, Document *doc)
 
 	if (doc2)
 	{
-		gtk_widget_grab_focus (GE_VIEW (mdi->active_view)->text);
+		gtk_widget_grab_focus (VIEW (mdi->active_view)->text);
 		gedit_set_title (doc2);
 	}
 }

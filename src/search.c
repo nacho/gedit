@@ -77,8 +77,8 @@ static void find_in_files_dialog_button_cb (GtkWidget *widget,
 static void search_for_text_in_files (gchar *text);
 static GtkWidget* create_find_in_files_dialog (void);
 
-static gchar* get_line_as_text (gedit_view *view, gint pos);
-static int find_in_file_search (gedit_view *view, gchar *str);
+static gchar* get_line_as_text (View *view, gint pos);
+static int find_in_file_search (View *view, gchar *str);
 static void search_for_text_in_files (gchar *text);
 
 static void find_in_files_dialog_button_cb (GtkWidget *widget, 
@@ -92,7 +92,7 @@ static void destroy_clist_data (gpointer data);
 gint
 pos_to_line (Document *doc, gint pos, gint *numlines)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	gulong lines = 0, i, current_line = 0;
 	gchar *c;
 
@@ -115,7 +115,7 @@ pos_to_line (Document *doc, gint pos, gint *numlines)
 gint
 line_to_pos (Document *doc, gint line, gint *numlines)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	gulong lines = 1, i, current = 0;
 	gchar *c;
 
@@ -140,7 +140,7 @@ line_to_pos (Document *doc, gint line, gint *numlines)
 gint
 get_line_count (Document *doc)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	gulong lines = 1, i;
 	gchar *c;
 
@@ -161,7 +161,7 @@ get_line_count (Document *doc)
 void
 seek_to_line (Document *doc, gint line, gint numlines)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 /*	gfloat value, ln, tl; */
 
 	int a, b;
@@ -217,7 +217,7 @@ seek_to_line (Document *doc, gint line, gint numlines)
 gint
 gedit_search_search (Document *doc, gchar *str, gint pos, gulong options)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	gint i, textlen;
 
 	textlen = gtk_text_get_length(GTK_TEXT(view->text));
@@ -254,7 +254,7 @@ gedit_search_search (Document *doc, gchar *str, gint pos, gulong options)
 void
 gedit_search_replace (Document *doc, gint pos, gint len, gchar *replace)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 
 	gtk_editable_delete_text (GTK_EDITABLE (view->text),
 				  pos, pos + len);
@@ -330,7 +330,7 @@ create_find_in_files_dialog (void)
 }
 
 static int
-get_start_index_of_line (gedit_view *view, gint pos)
+get_start_index_of_line (View *view, gint pos)
 {
 	gchar *buffer;
 
@@ -352,7 +352,7 @@ get_start_index_of_line (gedit_view *view, gint pos)
  * Return the line (as text) which view->text[pos] is located on.
  */
 static gchar*
-get_line_as_text (gedit_view *view, gint pos)
+get_line_as_text (View *view, gint pos)
 {
 	gchar *buffer;
 	gint   start = pos;
@@ -386,7 +386,7 @@ get_line_as_text (gedit_view *view, gint pos)
  * filename, linenumber, line text. Return total number of matches 
  */
 static int
-find_in_file_search (gedit_view *view, gchar *str)
+find_in_file_search (View *view, gchar *str)
 {
 	gint i;
 	gint textlen;
@@ -437,7 +437,7 @@ static void
 search_for_text_in_files (gchar *text)
 {
 	Document *doc;
-	gedit_view *view = NULL;
+	View *view = NULL;
 	gint i;
 	gint j = 0;
 
@@ -450,7 +450,7 @@ search_for_text_in_files (gchar *text)
         for (i = 0; i < g_list_length (mdi->children); i++) 
         {
 		doc = DOCUMENT (g_list_nth_data (mdi->children, i));
-		view = GE_VIEW (g_list_nth_data(doc->views, 0));
+		view = VIEW (g_list_nth_data(doc->views, 0));
 		j += find_in_file_search (view, text);
         }
 
@@ -469,7 +469,7 @@ find_in_files_dialog_button_cb (GtkWidget *widget,
 {
 	GtkWidget *entry;
 	gchar *entry_text;
-	gedit_view *view; 
+	View *view; 
 
 	switch(button)
 	{
@@ -493,7 +493,7 @@ find_in_files_dialog_button_cb (GtkWidget *widget,
 					       GTK_SIGNAL_FUNC (find_in_files_dialog_button_cb),
 					       NULL);
 		gnome_dialog_close (GNOME_DIALOG (find_in_files_dialog));
-		view = GE_VIEW (mdi->active_view);
+		view = VIEW (mdi->active_view);
 		gtk_window_set_focus (GTK_WINDOW(mdi->active_window),
 				      view->text);
 		break;
@@ -551,7 +551,7 @@ search_results_clist_insert (gchar *fname,
 void
 search_result_clist_cb (GtkWidget *list, gpointer func_data)
 {
-	gedit_view		*view;
+	View		*view;
 	Document		*doc;
 	gedit_clist_data	*data;
 	GList			*sel;
@@ -573,7 +573,7 @@ search_result_clist_cb (GtkWidget *list, gpointer func_data)
 	for (i = 0; i < g_list_length (mdi->children); i++) 
         {
 		doc = DOCUMENT (g_list_nth_data (mdi->children, i));
-		view = GE_VIEW (g_list_nth_data(doc->views, 0));
+		view = VIEW (g_list_nth_data(doc->views, 0));
             
 		title = g_strdup_printf ("%s", GNOME_MDI_CHILD(doc)->name);
 	  
@@ -612,7 +612,7 @@ count_lines_cb (GtkWidget *widget, gpointer data)
 	if (doc)
 	{
 		line_number = pos_to_line (doc,
-					   gtk_editable_get_position (GTK_EDITABLE (GE_VIEW (mdi->active_view)->text)),
+					   gtk_editable_get_position (GTK_EDITABLE (VIEW (mdi->active_view)->text)),
 					   &total_lines);
 	
 		
@@ -730,7 +730,7 @@ get_search_options (Document *doc, GtkWidget *widget,
 	GtkRadioButton *pos_but;
 	gint pos_type = 0;
 	GSList *from;
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	
 	datalink = gtk_object_get_data (GTK_OBJECT (widget), "case");
 	if (GTK_TOGGLE_BUTTON (datalink)->active)
@@ -788,7 +788,7 @@ void
 search_select (Document *doc, gchar *str, gint pos, gulong options)
 {
 	gint numwcs;
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	gint line, numlines;
 	
 	numwcs = num_widechars (str);

@@ -163,7 +163,6 @@ load_all_plugins (void)
 	
 	/* load system plgins */
 	pdir = gnome_unconditional_libdir_file ("gedit/plugins/");
-	g_print ("%s\n", pdir);
 	plugin_load_plugins_in_dir (pdir);
 	g_free (pdir);
 }

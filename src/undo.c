@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* 	- Undo/Redo interface
- *
+/*
  * gedit
  * Copyright (C) 1999 Alex Roberts and Evan Lawrence
  *
@@ -165,7 +164,7 @@ views_insert (Document *doc, gedit_undo *undo)
 {
 	gint i;
 	gint p1;
-	gedit_view *view;
+	View *view;
 
 	gedit_debug_mess ("F:      undo-views_insert\n", DEBUG_UNDO);
 	
@@ -192,7 +191,7 @@ views_insert (Document *doc, gedit_undo *undo)
 void
 views_delete (Document *doc, gedit_undo *undo)
 {
-	gedit_view *nth_view;
+	View *nth_view;
 	gint n;
 	gint p1;
 	gint start_pos, end_pos;

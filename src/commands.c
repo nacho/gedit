@@ -95,8 +95,6 @@ popup_create_new_file (GtkWidget *w, gchar *title)
 	} 
 }
 
-
-
 /* --- Notebook Tab Stuff --- */
 
 void
@@ -464,7 +462,7 @@ void
 edit_cut_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_cut_clipboard(GTK_EDITABLE(
-		GE_VIEW (mdi->active_view)->text));
+		VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_CUT);
 }
@@ -473,7 +471,7 @@ void
 edit_copy_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_copy_clipboard(
-		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
+		GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_COPY);
 }
@@ -482,7 +480,7 @@ void
 edit_paste_cb (GtkWidget *widget, gpointer data)
 {
 	gtk_editable_paste_clipboard(
-		GTK_EDITABLE(GE_VIEW (mdi->active_view)->text));
+		GTK_EDITABLE(VIEW (mdi->active_view)->text));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_PASTE);
 }
@@ -490,8 +488,8 @@ edit_paste_cb (GtkWidget *widget, gpointer data)
 void
 edit_selall_cb (GtkWidget *widget, gpointer data)
 {
-	gtk_editable_select_region(GTK_EDITABLE(GE_VIEW (mdi->active_view)->text), 0,
-				   gtk_text_get_length( GTK_TEXT(GE_VIEW (mdi->active_view)->text)));
+	gtk_editable_select_region(GTK_EDITABLE(VIEW (mdi->active_view)->text), 0,
+				   gtk_text_get_length( GTK_TEXT(VIEW (mdi->active_view)->text)));
 
 	gnome_app_flash (mdi->active_window, MSGBAR_SELECT_ALL);
 }
@@ -644,7 +642,7 @@ recent_cb (GtkWidget *widget, gedit_data *data)
 
 	if (doc)
 	{
-		if (doc->filename || GE_VIEW(mdi->active_view)->changed)
+		if (doc->filename || VIEW(mdi->active_view)->changed)
 		{
 			doc = gedit_document_new_with_file (data->temp1);
 			gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
@@ -680,7 +678,7 @@ recent_add (char *filename)
 void
 options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 
 	if (!view->split_parent)
 		return;
@@ -692,7 +690,7 @@ options_toggle_split_screen_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	
 	gedit_view_set_read_only (view, !view->read_only);
 }
@@ -700,7 +698,7 @@ options_toggle_read_only_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 	
 	gedit_view_set_word_wrap (view, !view->word_wrap);
 }
@@ -708,7 +706,7 @@ options_toggle_word_wrap_cb (GtkWidget *widget, gpointer data)
 void
 options_toggle_line_wrap_cb (GtkWidget *widget, gpointer data)
 {
-	gedit_view *view = GE_VIEW (mdi->active_view);
+	View *view = VIEW (mdi->active_view);
 
 	gedit_view_set_line_wrap (view, !view->line_wrap);
 }

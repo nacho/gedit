@@ -75,14 +75,13 @@ void
 gedit_window_refresh (Window *w)
 {
 	gint i, j;
-	gedit_view *nth_view;
+	View *nth_view;
 	Document *doc;
 	GtkStyle *style;
 	GdkColor *bg, *fg;
-	GdkFont *font = NULL;
 
-	gedit_view_set_split_screen (GE_VIEW (mdi->active_view),
-				     (gint) GE_VIEW (mdi->active_view)->splitscreen);
+	gedit_view_set_split_screen (VIEW (mdi->active_view),
+				     (gint) VIEW (mdi->active_view)->splitscreen);
 
 	gedit_window_set_status_bar (settings->show_status);
 
@@ -103,19 +102,7 @@ gedit_window_refresh (Window *w)
           
         }
 */
-	style = gtk_style_copy (gtk_widget_get_style (GE_VIEW (mdi->active_view)->text));
-
-	/* set the font */
-	if (use_fontset)
-		font = gdk_fontset_load (settings->font);
-	else
-		font = gdk_font_load (settings->font);
-
-	if (font != NULL)
-		style->font = font;
-	else
-		g_warning ("Couldn't load font ``%s''", settings->font);
-
+	style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
 
 	bg = &style->base[0];
 	bg->red = settings->bg[0];
@@ -135,13 +122,13 @@ gedit_window_refresh (Window *w)
 		{
 /* 	  		g_message ("i = %d, j = %d", i, j); */
 			nth_view = g_list_nth_data (doc->views, j);
-			gedit_view_set_font (nth_view, settings->font);
 			gedit_view_set_word_wrap (nth_view, settings->word_wrap);
   	    
 			gtk_widget_set_style (GTK_WIDGET (nth_view->split_screen),
 					      style);
 			gtk_widget_set_style (GTK_WIDGET (nth_view->text),
 					      style);
+			gedit_view_set_font (nth_view, settings->font);
 		}
 	}
 }
@@ -160,7 +147,7 @@ apply_cb (GnomePropertyBox *pbox, gint page, gedit_data *data)
 	/* General Settings */
 	settings->auto_indent = (GTK_TOGGLE_BUTTON (prefs->autoindent)->active);
 	settings->show_status = (GTK_TOGGLE_BUTTON (prefs->status)->active);
-	GE_VIEW (mdi->active_view)->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
+	VIEW (mdi->active_view)->splitscreen = (GTK_TOGGLE_BUTTON (prefs->split)->active);
 	settings->word_wrap = (GTK_TOGGLE_BUTTON (prefs->wordwrap)->active);
 
 	/* Print Settings */
@@ -239,7 +226,7 @@ get_prefs (gedit_data *data)
 
 	if (mdi->active_view)
 		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
-					     GE_VIEW (mdi->active_view)->splitscreen);
+					     VIEW (mdi->active_view)->splitscreen);
 	else
 		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (prefs->split),
 					     settings->splitscreen);
@@ -248,7 +235,7 @@ get_prefs (gedit_data *data)
   					   
 
 	if (mdi->active_view)
-		style = gtk_style_copy (gtk_widget_get_style (GE_VIEW (mdi->active_view)->text));
+		style = gtk_style_copy (gtk_widget_get_style (VIEW (mdi->active_view)->text));
 	else
 		style = gtk_style_new ();
 
@@ -715,17 +702,17 @@ gedit_prefs_dialog (GtkWidget *widget, gpointer cbdata)
 	/* General Settings */
 	gtk_notebook_append_page (GTK_NOTEBOOK((prefs->pbox)->notebook),
 				  general_page_new(),
-				  gtk_label_new _("General"));
+				  gtk_label_new (_("General")));
 
 	/* Window Settings */
 	gtk_notebook_append_page (GTK_NOTEBOOK ((prefs->pbox)->notebook),
 				  window_page_new(),
-				  gtk_label_new _("Window"));
+				  gtk_label_new (_("Window")));
 
 	/* Docuemnt Settings */
 	gtk_notebook_append_page (GTK_NOTEBOOK( (prefs->pbox)->notebook),
 				  doc_page_new(),
-				  gtk_label_new _("Document"));
+				  gtk_label_new (_("Document")));
  
   
 	get_prefs (data);

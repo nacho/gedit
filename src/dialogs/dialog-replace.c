@@ -20,6 +20,8 @@ static GtkWidget *replace_dialog;
 static GtkWidget* create_replace_dialog (void);
 static void replace_clicked_cb (GtkWidget *widget, gint button, Document *doc);
 
+static gint ask_replace (void);
+
 
 void
 dialog_replace (GtkWidget *widget, gpointer data)
@@ -141,4 +143,11 @@ create_replace_dialog (void)
 	gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
 
 	return dialog;
+}
+
+
+void
+dialog_replace_impl (void)
+{
+
 }

@@ -43,7 +43,6 @@ void remove_search_result_cb (GtkWidget *widget, gpointer data);
 void search_result_clist_cb (GtkWidget *list, gpointer func_data);
 
 void add_search_options (GtkWidget *dialog);
-gint ask_replace (void);
 gint num_widechars (const gchar *str);
 void get_search_options       (Document *doc,
 			       GtkWidget   *widget,
