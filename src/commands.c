@@ -944,8 +944,6 @@ void recent_update (GnomeApp *app)
 	       strcpy (filename, histentry->filename);
 	       filelist = g_list_append (filelist, filename);
 
-	       g_free (filename);
-
 	       /* For recent-directories, not yet fully implemented...
 		   
 	       end_path = strrchr (histentry->filename, '/');
@@ -1035,7 +1033,7 @@ recent_update_menus (GnomeApp *app, GList *recent_files)
 	g_list_free (recent_files);
 
 	if (path)
-	  g_free (path);	
+	  g_free (path);
 	
 }
 
