@@ -3,14 +3,14 @@
 #   Minor update by Wang Jian <lark@linux.net.cn>, 2001
 #   Sun Gl0n <gnome_int_l10n@ireland.sun.com>, 2002
 #   Miles Hoo <MilesHoo@sohu.com>, 2002
-#   Funda Wang <fundawang@linux.net.cn>, 2003
+#   Funda Wang <fundawang@linux.net.cn>, 2003-2005
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-12 00:20+0100\n"
-"PO-Revision-Date: 2004-08-19 12:57+0800\n"
+"PO-Revision-Date: 2005-01-24 22:18+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -57,9 +57,8 @@ msgid ""
 msgstr "编辑区使用的自定义字体。只有当“使用默认字体”选项关掉时才有效。"
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "激活 %s"
+msgstr "激活插件"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -149,11 +148,11 @@ msgstr "打印时页眉所用的字体"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "突出显示当前行"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "突出显示匹配的括号"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -180,6 +179,8 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"列出激活的插件。其中包含激活插件的“位置”。"
+"请参看 .gedit-plugin 文件以便获得给定插件的“位置”。"
 
 #: data/gedit.schemas.in.h:29
 msgid ""
@@ -201,9 +202,8 @@ msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #: data/gedit.schemas.in.h:33
-#, fuzzy
 msgid "Monospace 9"
-msgstr "Monospace 12"
+msgstr "Monospace 9"
 
 #: data/gedit.schemas.in.h:34
 msgid "Monospace Regular 9"
@@ -236,14 +236,12 @@ msgid "Right Margin Position"
 msgstr "右边距位置"
 
 #: data/gedit.schemas.in.h:41
-#, fuzzy
 msgid "Sans 11"
-msgstr "Sans Regular 11"
+msgstr "Sans 11"
 
 #: data/gedit.schemas.in.h:42
-#, fuzzy
 msgid "Sans 8"
-msgstr "西班牙语"
+msgstr "Sans 8"
 
 #: data/gedit.schemas.in.h:43
 msgid "Sans Regular 11"
@@ -300,11 +298,10 @@ msgid ""
 msgstr "设定打印时文档主体所用的字体。"
 
 #: data/gedit.schemas.in.h:51
-#, fuzzy
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "设定打印时文档主体所用的字体。"
+msgstr "设定打印时文档主体所用的字体。这是 gnome-print 字体名称，将被 print_font_body_pango 替换。"
 
 #: data/gedit.schemas.in.h:52
 msgid ""
@@ -313,12 +310,11 @@ msgid ""
 msgstr "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。"
 
 #: data/gedit.schemas.in.h:53
-#, fuzzy
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
-msgstr "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。"
+msgstr "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。这是 gnome-print 字体名称，将被 print_font_body_pango 替换。"
 
 #: data/gedit.schemas.in.h:54
 msgid ""
@@ -327,12 +323,11 @@ msgid ""
 msgstr "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。"
 
 #: data/gedit.schemas.in.h:55
-#, fuzzy
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
-msgstr "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。"
+msgstr "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。这是 gnome-print 字体名称，将被 print_font_body_pango 替换。"
 
 #: data/gedit.schemas.in.h:56
 msgid ""
@@ -430,14 +425,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "gedit 是否启用语法突出显示。"
 
 #: data/gedit.schemas.in.h:74
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "gedit 是否启用语法突出显示。"
+msgstr "gedit 是否启用突出显示匹配的括号。"
 
 #: data/gedit.schemas.in.h:75
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "gedit 是否在打印文档时打印语法突出显示。"
+msgstr "gedit 是否应该突出显示当前行。"
 
 #: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
@@ -483,14 +476,14 @@ msgstr ""
 #. menu in open/save file selector. Only recognized encodings are displayed.
 #: data/gedit.schemas.in.h:85
 msgid "[ISO-8859-15]"
-msgstr "[ISO-8859-15]"
+msgstr "[GB18030,GBK,GB2312,UTF-8]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
 #: data/gedit.schemas.in.h:89
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
-msgstr "[GB2312,GB18030,UTF-8,ISO-8859-15]"
+msgstr "[CURRENT,GB18030,GBK,GB2312,UTF-8,ISO-8859-15]"
 
 #: gedit/bonobo-mdi.c:564 gedit/bonobo-mdi.c:2060
 #, c-format
@@ -498,9 +491,8 @@ msgid "Activate %s"
 msgstr "激活 %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "关闭输出窗口"
+msgstr "不保存而关闭(_W)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -712,19 +704,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>自动缩进</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>文字折行</b>"
+msgstr "<b>括号匹配</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>文字折行</b>"
+msgstr "<b>当前行</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -748,7 +737,6 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>右边距</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
 msgstr "<b>跳格</b>"
 
@@ -802,7 +790,7 @@ msgstr "字体和颜色"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "突出显示当前行(_G)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -810,7 +798,7 @@ msgstr "突出显示模式(_M)："
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "突出显示匹配的括号"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -901,7 +889,6 @@ msgid "_Display line numbers"
 msgstr "显示行号(_D)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "启用自动缩进(_E)"
 
@@ -926,7 +913,6 @@ msgid "_Right margin at column:"
 msgstr "右边距于列(_R)："
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
 msgstr "跳格宽度(_T)："
 
@@ -1119,7 +1105,7 @@ msgstr ""
 "Wang Jian <lark@linux.net.cn>, 2001\n"
 "Sun Gl0n <gnome_int_l10n@ireland.sun.com>, 2002\n"
 "Miles Hoo <MilesHoo@sohu.com>, 2002\n"
-"Funda Wang <fundawang@linux.net.cn>, 2003,2004"
+"Funda Wang <fundawang@linux.net.cn>, 2003-2005"
 
 #: gedit/gedit-commands.c:579
 msgid "gedit"
@@ -1131,9 +1117,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:656 gedit/gedit-document.c:674
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "文档(_D)"
+msgstr "未保存文档"
 
 #: gedit/gedit-document.c:662 gedit/gedit-document.c:709
 msgid "Invalid file name"
@@ -1342,9 +1327,8 @@ msgid "All Text Files"
 msgstr "全部文本文件"
 
 #: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
-#, fuzzy
 msgid "_Character Coding:"
-msgstr "字符编码(_A)："
+msgstr "字符编码(_C)："
 
 #: gedit/gedit-file-selector-util.c:509
 msgid "Select a file to open"
@@ -1505,18 +1489,14 @@ msgid_plural "Loading %d files..."
 msgstr[0] "正在载入 %d 个文件..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "无法打开文件“%s”"
+msgstr "找不到文件“%s”"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"“%s”是目录。\n"
-"\n"
-"请检查键入的位置是否正确，然后重试。"
+msgstr "请检查键入的位置是否正确，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1532,153 +1512,122 @@ msgid "Could not open the file \"%s\""
 msgstr "无法打开文件“%s”"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "无法打开文件“%s”，因为它包含损坏的数据。"
+msgstr "文件包含损坏的数据。"
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit 无法在写入模式下处理 %s: 位置。"
+msgstr "gedit 无法处理 %s: 位置。"
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit 无法在写入模式下处理 %s: 位置。"
+msgstr "gedit 无法处理此位置。"
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr "无法打开文件“%s”，因为它包含格式无效的数据。"
+msgstr "文件包含格式无效的数据。"
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "该文件有太多的符号链接。"
+msgstr "文件太大。"
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "“%s”不是有效的位置"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "访问被拒绝。"
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid ""
 "there are too many open files. Please, close some open file and try again."
 msgstr ""
-"无法打开文件“%s”，因为已经打开太多的文件了。\n"
-"\n"
-"请关闭一些已打开的文件，然后重试。"
+"已经打开的文件太多。请关闭一些已打开的文件，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "“%s”是目录"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "application and try again."
-msgstr "内存不足，无法打开文件“%s”。请关闭一些正在运行的程序，然后重试。"
+msgstr "没有足够的剩余内存来打开文件。请关闭一些正在运行的程序，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"无法还原文件“%s”，因为因为找不到主机“%s”。\n"
-"\n"
-"请检查您的代理服务器设置是否正确，然后重试。"
+"找不到主机“%s”。请检查您的代理服务器设置是否正确，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"“%s”是无效位置。\n"
-"\n"
-"请检查键入的位置是否正确，然后重试。"
+"主机名无效。请检查键入的位置是否正确，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"无法打开文件“%s”，因为主机名为空。\n"
-"\n"
-"请检查代理服务器设置是否正确，然后重试。"
+"主机名为空。请检查代理服务器设置是否正确，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"无法找到文件“%s”。\n"
-"\n"
-"请检查键入的位置是否正确，然后重试。"
+"试图登录失败。请检查键入的位置是否正确，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
 msgstr ""
-"无法打开文件“%s”，原因是该文件包含无效的数据。\n"
-"\n"
-"可能您正在尝试打开一个二进制文件。"
+"文件包含无效的数据。可能您正在尝试打开一个二进制文件。"
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "您试图打开的文件不是普通文件。"
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
 msgstr ""
-"无法打开文件“%s”，原因是 gedit 无法自动检测其字符编码。\n"
-"\n"
-"请检查您是否正试图打开一个二进制文件，并在“打开文件...”(或“打开位置”)对话框中"
+"gedit 无法自动检测字符编码。请检查您是否正试图打开一个二进制文件，并在“打开文件...”(或“打开位置”)对话框中"
 "选择一种字符编码。"
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "无法打开文件“%s”，因为它太大。"
+msgstr "无法打开文件“%s”，因为其使用 %s 字符编码"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not tryingto open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
 msgstr ""
-"无法使用 %s 字符编码打开文件“%s”。\n"
-"\n"
 "请检查您是否正试图打开一个二进制文件，以及您在“打开文件...”(或“打开位置”)对话"
 "框中是否选择了正确的字符编码。然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid data. Probably, you are trying to open "
 "a binary file."
 msgstr ""
-"无法打开文件“%s”，原因是该文件包含无效的数据。\n"
-"\n"
-"可能您正在尝试打开一个二进制文件。"
+"文件包含无效的数据。可能您正在尝试打开一个二进制文件。"
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1687,122 +1636,92 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "无法还原文件“%s”。"
+msgstr "无法还原文件“%s”"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"无法还原文件“%s”，因为 gedit 找不到它。\n"
-"\n"
-"可能它已被删除。"
+msgstr "gedit 找不到它。可能它已被删除。"
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid ""
 "There are too many open files. Please, close some open file and try again."
 msgstr ""
-"无法打开文件“%s”，因为已经打开太多的文件了。\n"
-"\n"
-"请关闭一些已打开的文件，然后重试。"
+"已经打开的文件太多。请关闭一些已打开的文件，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running application and try "
 "again."
-msgstr "内存不足，无法打开文件“%s”。请关闭一些正在运行的程序，然后重试。"
+msgstr "没有足够的剩余内存。请关闭一些正在运行的程序，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"无法打开文件“%s”，因为主机名为空。\n"
-"\n"
-"请检查代理服务器设置是否正确，然后重试。"
+"主机名为空。请检查代理服务器设置是否正确，然后重试。"
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "试图登录失败。"
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
 msgstr ""
-"无法还原文件“%s”，因为它包含无效的 UTF-8 数据。\n"
-"\n"
-"可能您正在尝试还原一个二进制文件。"
+"文件包含无效的 UTF-8 数据。可能您正在尝试还原一个二进制文件。"
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "您不能还原一个未命名文档的内容。"
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "无法保存文件“%s”。"
+msgstr "无法保存文件“%s”"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "文件“%s”已经存在。"
+msgstr "文件“%s”已经存在"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"“%s”是一个目录。\n"
-"\n"
-"请检查您是否键入了正确的位置。"
+msgstr "请检查您是否键入了正确的位置。"
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "无法创建文件“%s”。"
+msgstr "无法创建文件“%s”"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
 msgstr ""
-"无法创建文件“%s”。\n"
-"\n"
 "请确保您有写入的权限。"
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
 msgstr ""
-"无法创建文件“%s”。\n"
-"\n"
 "文件名太长。"
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
 msgstr ""
-"无法创建文件“%s”。\n"
-"\n"
 "文件名中的某一级目录不存在或者是个目标不存在的符号链接。"
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"没有足够的磁盘空间来创建文件“%s”。\n"
-"\n"
-"请释放一些磁盘空间，然后重试。"
+"没有足够的磁盘空间来创建文件。请释放一些磁盘空间，然后重试。"
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1841,9 +1760,8 @@ msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
 #: gedit/gedit-mdi.c:1445 gedit/gedit-mdi.c:1447
-#, fuzzy
 msgid "Read Only"
-msgstr "(只读)"
+msgstr "只读"
 
 #: gedit/gedit-mdi.c:2072
 msgid "Normal"
@@ -2197,7 +2115,7 @@ msgstr "复制(_C)"
 
 #: gedit/gedit-ui.xml.h:75
 msgid "_Customize Toolbar"
-msgstr "定制工具栏(_C)"
+msgstr "自定义工具栏(_C)"
 
 #: gedit/gedit-ui.xml.h:76
 msgid "_Delete"
@@ -2305,7 +2223,7 @@ msgstr "查看(_V)"
 
 #: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (无效的 Unicode)"
 
 #.
 #. if (col == chars)
@@ -2353,13 +2271,13 @@ msgstr "指定的编码“%s”无效\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "您试图打开的文件包含无效的字节顺序。"
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
-msgstr ""
+msgstr "gedit 无法自动确定您想要打开的文件所用的编码。"
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2501,38 +2419,33 @@ msgid "User name"
 msgstr "用户名"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy"
-msgstr "复制(_C)"
+msgstr "保存副本(_V)"
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "设置当前文档的语言"
+msgstr "保存当前文档的副本"
 
 #: plugins/savecopy/savecopy.c:212
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy the file to \"%s\""
-msgstr "无法保存文件“%s”。"
+msgstr "无法将文件的副本保存为“%s”"
 
 #: plugins/savecopy/savecopy.c:311
 msgid "You are trying to overwrite the original file"
-msgstr ""
+msgstr "您正试图覆盖原始文件"
 
 #: plugins/savecopy/savecopy.c:362
-#, fuzzy
 msgid "Save Copy"
-msgstr "全部不保存(_N)"
+msgstr "保存副本"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "保存所有已打开的文件"
+msgstr "保存副本"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "将当前文档或选中的文字排序。"
+msgstr "将当前文档的副本保存到本地或远程位置。"
 
 #: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
@@ -2930,12 +2843,10 @@ msgid "The document is empty."
 msgstr "文档为空。"
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
 msgstr "选中的文字不包含拼错的单词。"
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
 msgstr "这个文档不包含拼错的单词。"
 
@@ -2948,35 +2859,32 @@ msgid "Spell checker"
 msgstr "拼写检查器"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "可用格式"
+msgstr "缩写格式"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "亚美尼亚语"
+msgstr "缩写"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "以上"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "辅助字符"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "缩写"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "行"
+msgstr "对齐"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "对齐字符"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
@@ -2984,29 +2892,27 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "锚"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "锚 URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "选择要打开的文件"
+msgstr "小程序类文件代码"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "数组"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "关联的新ch"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "自动缩进"
+msgstr "作者信息"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
 #, fuzzy
@@ -3015,71 +2921,63 @@ msgstr "打印页眉(_P)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "BGSound"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "背景颜色(_B)："
+msgstr "背景颜色"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "背景颜色"
+msgstr "背景纹理文件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "基 URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font size"
-msgstr "标签使用字体"
+msgstr "基本字体大小"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
-msgstr ""
+msgstr "行为"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "闪烁文字"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "粗体"
+msgstr "边框"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "背景颜色(_B)："
+msgstr "边框颜色"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "框"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "中欧"
+msgstr "单元格跨行"
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "常规"
+msgstr "居中"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Char enconding of linked resource"
-msgstr ""
+msgstr "链接资源的字符编码"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
-msgstr ""
+msgstr "已选中(状态)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "动作(_I)"
+msgstr "引用"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3087,12 +2985,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "类实现 ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "标记列表"
+msgstr "类列表"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
@@ -3100,25 +2997,23 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr ""
+msgstr "代码内容类型"
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "复制选中行"
+msgstr "选中链接的颜色"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
-msgstr ""
+msgstr "跨列"
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
-msgstr ""
+msgstr "列"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "目录(_C)"
+msgstr "注释"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
@@ -3130,53 +3025,48 @@ msgid "Content scheme"
 msgstr "目录(_C)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "目录(_C)"
+msgstr "内容类型"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "目录(_C)"
+msgstr "坐标"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
-msgstr ""
+msgstr "DIV 样式容器"
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
-msgstr ""
+msgstr "DIV 容器"
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "更改日期和时间"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "描述(_D)"
+msgstr "定义描述"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
-msgstr ""
+msgstr "定义列表"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition term"
-msgstr ""
+msgstr "定义条款"
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
 msgid "Deleted text"
-msgstr "删除选中的文本"
+msgstr "删除的文本"
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Direction"
-msgstr "布里多尼语"
+msgstr "方向"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Directionality"
@@ -3184,51 +3074,43 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directory list"
-msgstr ""
+msgstr "目录列表"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Disabled"
-msgstr "已启用"
+msgstr "已禁用"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document ID"
-msgstr "文档(_D)"
+msgstr "文档 ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
 msgid "Document base URI"
-msgstr "文档(_D)"
+msgstr "文档基础 URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
 msgid "Document body"
-msgstr "文档(_D)"
+msgstr "文档主体"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Document head"
-msgstr "文档(_D)"
+msgstr "文档头"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document title"
-msgstr "文档统计"
+msgstr "文档标题"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Document type"
-msgstr "文档(_D)"
+msgstr "文档类型"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
-#, fuzzy
 msgid "Document version"
-msgstr "文档(_D)"
+msgstr "文档版本"
 
 #: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
-msgstr ""
+msgstr "嵌入对象"
 
 #: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
@@ -3236,14 +3118,13 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
-msgstr ""
+msgstr "编码类型"
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
-msgstr ""
+msgstr "图形"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
 msgid "Font face"
 msgstr "字体名"
 
@@ -3257,9 +3138,8 @@ msgid "Forced line break"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
-#, fuzzy
 msgid "Form"
-msgstr "普通"
+msgstr "表单"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
@@ -3290,9 +3170,8 @@ msgid "Forward link"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
-#, fuzzy
 msgid "Frame"
-msgstr "名称："
+msgstr "框架"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
@@ -3430,41 +3309,36 @@ msgid "Image source"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "无效文件名"
+msgstr "内嵌框架"
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
-msgstr ""
+msgstr "内嵌层"
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Inserted text"
-msgstr "插入日期/时间"
+msgstr "插入的文字"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Italic text"
-msgstr "斜体"
+msgstr "斜体文字"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Java applet"
-msgstr ""
+msgstr "Java 小程序"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Label"
 msgstr "标签"
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
 msgid "Language code"
-msgstr "语言"
+msgstr "语言代码"
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Large text style"
@@ -3472,16 +3346,15 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Layer"
-msgstr ""
+msgstr "层"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Link"
-msgstr "行数"
+msgstr "链接"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
-msgstr ""
+msgstr "列表项目"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List of MIME types for file upload"
@@ -3493,12 +3366,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Listing"
-msgstr ""
+msgstr "列表"
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "选择编辑器字体"
+msgstr "字体的本地更改"
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
 #, fuzzy
@@ -3507,11 +3379,11 @@ msgstr "描述(_D)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long quotation"
-msgstr ""
+msgstr "长引用"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Mail link"
-msgstr ""
+msgstr "邮寄链接"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Margin pixel height"
@@ -3530,34 +3402,32 @@ msgid "Max text field chars"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-#, fuzzy
 msgid "Media"
-msgstr "gedit"
+msgstr "媒体"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
-msgstr ""
+msgstr "独立于媒体的链接"
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
-msgstr ""
+msgstr "菜单列表"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
-msgstr ""
+msgstr "多行文本框"
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
-msgstr ""
+msgstr "多列"
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
-msgstr ""
+msgstr "多个"
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
-#, fuzzy
 msgid "Name"
-msgstr "名称："
+msgstr "名称"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
@@ -3569,23 +3439,23 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
-msgstr ""
+msgstr "无 URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
-msgstr ""
+msgstr "无嵌入对象"
 
 #: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
-msgstr ""
+msgstr "无框架"
 
 #: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
-msgstr ""
+msgstr "无层"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
-msgstr ""
+msgstr "无换行"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
 #, fuzzy
@@ -3594,7 +3464,7 @@ msgstr "显示尺寸"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
-msgstr ""
+msgstr "无脚本"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
@@ -3602,20 +3472,19 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
-msgstr ""
+msgstr "无换行"
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
-msgstr ""
+msgstr "备忘"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
-#, fuzzy
 msgid "Object applet file"
-msgstr "打开一个文件"
+msgstr "对象小程序文件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
-msgstr ""
+msgstr "对象数据引用"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
@@ -3623,101 +3492,99 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
-msgstr ""
+msgstr "OnBlur 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
-#, fuzzy
 msgid "OnChange event"
-msgstr "更改大小写"
+msgstr "OnChange 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
-msgstr ""
+msgstr "OnClick 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
-msgstr ""
+msgstr "OnDblClick 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
-msgstr ""
+msgstr "OnFocus 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
-msgstr ""
+msgstr "OnKeyDown 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
-msgstr ""
+msgstr "OnKeyPress 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
-msgstr ""
+msgstr "OnKeyUp 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
-msgstr ""
+msgstr "OnLoad 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
-msgstr ""
+msgstr "OnMouseDown 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
-msgstr ""
+msgstr "OnMouseMove 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
-msgstr ""
+msgstr "OnMouseOut 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
-msgstr ""
+msgstr "OnMouseOver 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
-msgstr ""
+msgstr "OnMouseUp 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
-msgstr ""
+msgstr "OnReset 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
-msgstr ""
+msgstr "OnSelect 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
-msgstr ""
+msgstr "OnSubmit 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
-msgstr ""
+msgstr "OnUnload 事件"
 
 #: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
-msgstr ""
+msgstr "选项组"
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
-#, fuzzy
 msgid "Option selector"
-msgstr "字体选择"
+msgstr "选择器"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
-msgstr ""
+msgstr "有序列表"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Paragraph"
-msgstr ""
+msgstr "段落"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph class"
-msgstr ""
+msgstr "段落类"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph style"
-msgstr ""
+msgstr "段落样式"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Preformatted listing"
@@ -3737,19 +3604,16 @@ msgid "Prompt message"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "button1"
+msgstr "按钮"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Quote"
-msgstr "退出"
+msgstr "引用"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
 msgid "Range"
-msgstr "更改(_N)"
+msgstr "范围"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
@@ -3789,31 +3653,28 @@ msgid "Script execution defer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "设置语言"
+msgstr "脚本语言名称"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
-msgstr ""
+msgstr "脚本语句"
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
-msgstr ""
+msgstr "滚动条"
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "选择要打开的文件"
+msgstr "可选项"
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "保存选中文档(_S)"
+msgstr "选中"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
-msgstr ""
+msgstr "服务器端图像映射"
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
 #, fuzzy
@@ -3829,22 +3690,20 @@ msgid "Single line prompt"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "制表符长度"
+msgstr "大小"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "全部文本文件"
+msgstr "小文本样式"
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
-msgstr ""
+msgstr "软换行"
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
-msgstr ""
+msgstr "声音"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
 #, fuzzy
@@ -3862,65 +3721,59 @@ msgstr "替换"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
-msgstr ""
+msgstr "单元格间距"
 
 #: plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Spacing within cells"
-msgstr ""
+msgstr "单元格内间距"
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "西班牙语"
+msgstr "Span"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
-msgstr ""
+msgstr "平方根"
 
 #: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "打印行号(_L)"
+msgstr "起始序列号"
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "删除线"
+msgstr "删除线文字"
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "删除线"
+msgstr "删除线文字样式"
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
-msgstr ""
+msgstr "强调"
 
 #: plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Style info"
-msgstr ""
+msgstr "样式信息"
 
 #: plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Subscript"
-msgstr ""
+msgstr "上标"
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "描述(_D)"
+msgstr "下标"
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "已启用"
+msgstr "表格"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
@@ -3985,16 +3838,15 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
-msgstr ""
+msgstr "文本"
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
 msgstr "文本颜色"
 
 #: plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Text entered by user"
-msgstr ""
+msgstr "用户输入的文字"
 
 #: plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Title"
@@ -4006,7 +3858,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
 #, fuzzy
@@ -4014,9 +3866,8 @@ msgid "Underlined text style"
 msgstr "下划线"
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "下划线"
+msgstr "无序列表"
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
@@ -4024,11 +3875,11 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
-msgstr ""
+msgstr "值"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
-msgstr ""
+msgstr "值解释"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
@@ -4039,18 +3890,16 @@ msgid "Vertical cell alignment"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "插入空格"
+msgstr "垂直空间"
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "选择选中区域的背景色"
+msgstr "已浏览的链接颜色"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
@@ -4070,85 +3919,79 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
-msgstr ""
+msgstr "尖括号 &lt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
-msgstr ""
+msgstr "圆括号 ()"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr ""
+msgstr "方括号 []"
 
 #: plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr ""
+msgstr "大括号 {}"
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "文件输入"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "字体"
+msgstr "脚注"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr ""
+msgstr "cos 函数"
 
 #: plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
-msgstr ""
+msgstr "e^ 函数"
 
 #: plugins/taglist/Latex.tags.xml.in.h:14
 msgid "Function exp"
-msgstr ""
+msgstr "exp 函数"
 
 #: plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr ""
+msgstr "log 函数"
 
 #: plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr ""
+msgstr "log10 函数"
 
 #: plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
-msgstr ""
+msgstr "sin 函数"
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "希腊语"
+msgstr "α"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "希腊语"
+msgstr "β"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr ""
+msgstr "ε"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "希腊语"
+msgstr "γ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr ""
+msgstr "λ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "希腊语"
+msgstr "ρ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "希腊语"
+msgstr "τ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
@@ -4200,12 +4043,11 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - 标签"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "描述(_D)"
+msgstr "列表描述"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
@@ -4352,74 +4194,71 @@ msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "不可断文字"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - 轴"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "元素"
+msgstr "XSLT - 元素"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - 函数"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "ancestor"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "ancestor-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "attribute"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "child"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "descendant"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "descendant-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "following"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "following-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "插入空格"
+msgstr "namespace"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "打开"
+msgstr "parent"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "preceding"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "preceding-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "self"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
@@ -4519,233 +4358,3 @@ msgstr "提示可使用的格式(_P)"
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
 
-#~ msgid "Do_n't save"
-#~ msgstr "不保存(_N)"
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "如果您不保存，前 %d 个小时的所做的更改将永久丢失。"
-
-#~ msgid "Body font picker"
-#~ msgstr "主体字体拾取器"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the body of the "
-#~ "document"
-#~ msgstr "按下此按钮可以选择打印文档主体的字体"
-
-#~ msgid "Page headers font picker"
-#~ msgstr "页眉字体拾取器"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the page headers"
-#~ msgstr "按下此按钮可以选择打印页眉所用的字体"
-
-#~ msgid "Line numbers font picker"
-#~ msgstr "行号字体拾取器"
-
-#~ msgid "Push this button to select the font to be used to print line numbers"
-#~ msgstr "按下此按钮可以选择打印行号所用的字体"
-
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "前 %d 小时内对文档所做的更改将永久丢失。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-#~ msgstr "无法打开文件“%s”，因为 gedit 不能处理 %s: 位置。"
-
-#~ msgid "Could not open the file \"%s\" because access was denied."
-#~ msgstr "无法打开文件“%s”，因为访问被拒绝。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the host name was invalid.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "无法打开文件“%s”，因为主机名无效。\n"
-#~ "\n"
-#~ "请检查键入的位置是否正确，然后重试。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and that your proxy "
-#~ "settings are correct and then try again."
-#~ msgstr ""
-#~ "无法打开文件“%s”，因为找不到主机“%s”。\n"
-#~ "\n"
-#~ "请检查键入的位置和代理服务器设置是否正确，然后重试。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "无法打开文件“%s”，原因是登录尝试失败。\n"
-#~ "\n"
-#~ "请检查键入的位置是否正确，然后重试。"
-
-#~ msgid "Could not open the file \"%s\"."
-#~ msgstr "无法打开文件“%s”。"
-
-#~ msgid ""
-#~ "Could not open the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "无法打开文件“%s”。\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "Could not save the file \"%s\".\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "无法保存文件“%s”。\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
-#~ msgstr "无法还原文件“%s”，因为它包含损坏的数据。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
-#~ "locations."
-#~ msgstr "无法还原文件“%s”，因为 gedit 不能处理 %s: 位置。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because it contains data in an invalid "
-#~ "format."
-#~ msgstr "无法还原文件“%s”，因为它包含格式无效的数据。"
-
-#~ msgid "Could not revert the file \"%s\" because it is too big."
-#~ msgstr "无法还原文件“%s”，因为它太大。"
-
-#~ msgid "Could not revert the file \"%s\" because access was denied."
-#~ msgstr "无法还原文件“%s”，因为访问被拒绝。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because there are too many open files.\n"
-#~ "\n"
-#~ "Please, close some open file and try again."
-#~ msgstr ""
-#~ "无法还原文件“%s” 因为打开了太多的文件。\n"
-#~ "\n"
-#~ "请关闭一些已打开的文件，然后重试。"
-
-#~ msgid ""
-#~ "Not enough available memory to revert the file \"%s\". Please, close some "
-#~ "running application and try again."
-#~ msgstr ""
-#~ "没有足够的内存可用于还原文件“%s”。请关闭一些正在运行的程序，然后重试。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the host name was empty.\n"
-#~ "\n"
-#~ "Please, check that your proxy settings are correct and try again."
-#~ msgstr ""
-#~ "无法还原文件“%s”，因为主机名为空。\n"
-#~ "\n"
-#~ "请检查代理服务器设置是否正确，然后重试。"
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the attempt to log in failed."
-#~ msgstr "无法还原文件“%s”，因为登录尝试失败。"
-
-#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-#~ msgstr "找不到 plugin-manager.glade2，请重新安装 gedit。\n"
-
-#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-#~ msgstr "插件管理器的 glade 文件无效 -- 没有找到全部部件。\n"
-
-#~ msgid "_Insert a new preview phrase."
-#~ msgstr "插入一个新的预览短语(_I)。"
-
-#~ msgid "Modify preview phrase..."
-#~ msgstr "修改预览短语..."
-
-#~ msgid "Preview"
-#~ msgstr "预览"
-
-#~ msgid "_Modify preview phrase..."
-#~ msgstr "修改预览短语(_M)..."
-
-#~ msgid "Sans Regular 12"
-#~ msgstr "Sans Regular 12"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-
-#~ msgid "Pick a Font"
-#~ msgstr "选择字体"
-
-#~ msgid "The title of the selection dialog box"
-#~ msgstr "选择对话框的标题"
-
-#~ msgid "Name of the selected font"
-#~ msgstr "选中的字体名"
-
-#~ msgid "Preview text shown in the dialog"
-#~ msgstr "显示在对话框中的预览文本"
-
-#~ msgid "Use font in the label in font info mode"
-#~ msgstr "字体信息模式中标签是否使用字体"
-
-#~ msgid "Font size for label"
-#~ msgstr "标签字体尺寸"
-
-#~ msgid "Font size for label in font info mode"
-#~ msgstr "字体信息模式中标签使用的字体尺寸"
-
-#~ msgid "Show size in font info mode"
-#~ msgstr "字体信息模式中的显示尺寸"
-
-#~ msgid "(modified)"
-#~ msgstr "(已修改)"
-
-#~ msgid "Untitled"
-#~ msgstr "无标题"
-
-#~ msgid "Error, unable to open module file '%s'\n"
-#~ msgstr "错误：无法打开模块文件“%s”\n"
-
-#~ msgid "Error, plugin '%s' does not contain init function."
-#~ msgstr "错误：插件“%s”没有初始化函数。"
-
-#~ msgid "Error, plugin '%s' does not contain activate function."
-#~ msgstr "错误：插件“%s”没有激活函数。"
-
-#~ msgid "Error, plugin '%s' does not contain deactivate function."
-#~ msgstr "错误：插件“%s”没有取消激活函数。"
-
-#~ msgid "Error, impossible to initialize plugin '%s'"
-#~ msgstr "错误：无法初始化插件“%s”"
-
-#~ msgid "Error, impossible to destroy plugin '%s'"
-#~ msgstr "错误：无法去除插件“%s”"
-
-#~ msgid "Error, impossible to activate plugin '%s'"
-#~ msgstr "错误：无法启用插件“%s”"
-
-#~ msgid "Error, impossible to deactivate plugin '%s'"
-#~ msgstr "错误：无法停用插件“%s”"
-
-#~ msgid "Error, impossible to update ui of the plugin '%s'"
-#~ msgstr "错误：无法更新插件“%s”的 UI"
-
-#~ msgid "Save method not implemented for gedit viewer"
-#~ msgstr "gedit 查看器尚未实现的保存方式"
-
-#~ msgid "Copy the selected text to the clipboard"
-#~ msgstr "将选中文本复制到剪贴板"
-
-#~ msgid "_Copy Text"
-#~ msgstr "复制文字(_C)"
