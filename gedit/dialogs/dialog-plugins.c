@@ -112,9 +112,11 @@ gedit_plugin_manager_lists_thaw (void)
 	gtk_clist_unselect_all (GTK_CLIST (installed_list));
 	gtk_clist_unselect_all (GTK_CLIST (available_list));
 
+#if 0
 	g_print ("A:%i I:%i\n",
 		 GTK_CLIST (available_list)->rows,
 		 GTK_CLIST (installed_list)->rows);
+#endif	
 
 	/*
 	if (GTK_CLIST (available_list)->rows > 0)
@@ -260,8 +262,6 @@ gedit_plugin_manager_item_add_all (GtkWidget *widget, gpointer data)
 
 	rows = GTK_CLIST (available_list)->rows;
 
-	g_print ("Rows %i\n", rows);
-	
 	gedit_plugin_manager_lists_freeze();
 
 	for (row=rows-1; row >= 0; row--)
