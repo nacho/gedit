@@ -188,7 +188,7 @@ gedit_get_command_line_data (GnomeProgram *program)
 }
 
 static void
-gedit_handle_automation_cmdline (GnomeProgram *program)
+gedit_handle_automation (GnomeProgram *program)
 {
         CORBA_Environment env;
         GNOME_Gedit_Application server;
@@ -199,33 +199,30 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 	GSList *list;
 	gchar *stdin_data;
 	int i;
-	
+
         CORBA_exception_init (&env);
 
         server = bonobo_activation_activate_from_id ("OAFIID:GNOME_Gedit_Application",
                                                      0, NULL, &env);
 	g_return_if_fail (server != NULL);
 
-
 	if (quit_option)
-		GNOME_Gedit_Application_quit (server, &env);
-		
-	
-	if (new_window_option) 
-		GNOME_Gedit_Application_newWindow (server, &env);
-
-	if (new_document_option) 
 	{
-		window = GNOME_Gedit_Application_getActiveWindow (server, &env);
-		GNOME_Gedit_Window_newDocument (window, &env);
+		GNOME_Gedit_Application_quit (server, &env);
+		return;
 	}
 
-	data = gedit_get_command_line_data (program);
-
-	if (data) 
-	{
+	if (new_window_option) 
+		window = GNOME_Gedit_Application_newWindow (server, &env);
+	else
 		window = GNOME_Gedit_Application_getActiveWindow (server, &env);
 
+	if (new_document_option)
+		GNOME_Gedit_Window_newDocument (window, &env);
+
+	data = gedit_get_command_line_data (program);
+	if (data) 
+	{
 		/* convert the GList of files into a CORBA sequence */
 
 		uri_list = GNOME_Gedit_URIList__alloc ();
@@ -288,7 +285,6 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 		
 		if (converted_text != NULL)
 		{
-			window = GNOME_Gedit_Application_getActiveWindow (server, &env);
 			document = GNOME_Gedit_Window_newDocument (window, &env);
 
 			GNOME_Gedit_Document_insert (document, 0, converted_text,
@@ -301,13 +297,8 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 	if (stdin_data != NULL)
 		g_free (stdin_data);
 
-	if (!quit_option)
-	{
-		window = GNOME_Gedit_Application_getActiveWindow (server, &env);
-
-		/* at the very least, we focus the active window */
-		GNOME_Gedit_Window_grabFocus (window, &env);
-	}
+	/* at the very least, we focus the active window */
+	GNOME_Gedit_Window_grabFocus (window, &env);
 
 	bonobo_object_release_unref (server, &env);
         CORBA_exception_free (&env);
@@ -351,7 +342,7 @@ main (int argc, char **argv)
 		/* there is an instance already running, so send
 		 * commands to it if needed
 		 */
-                gedit_handle_automation_cmdline (program);
+                gedit_handle_automation (program);
 
                 /* and we're done */
                 exit (0);
