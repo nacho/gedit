@@ -911,6 +911,9 @@ gedit_preferences_dialog_setup_save_page (GeditPreferencesDialog *dlg, GladeXML 
 	g_return_val_if_fail (dlg->priv->locale_if_possible_radiobutton, FALSE);
 	g_return_val_if_fail (dlg->priv->locale_if_previous_radiobutton, FALSE);
 
+	/* FIXME */
+	gtk_widget_set_sensitive (dlg->priv->locale_if_previous_radiobutton, FALSE);
+	
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->priv->backup_copy_checkbutton),
 				      gedit_settings->create_backup_copy);
 

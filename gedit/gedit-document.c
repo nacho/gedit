@@ -797,6 +797,26 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri,
 
       	chars = gedit_document_get_buffer (doc);
 
+	if (gedit_settings->save_encoding == GEDIT_SAVE_CURRENT_LOCALE_WHEN_POSSIBLE)
+	{
+		GError *conv_error = NULL;
+		gchar* converted_file_contents = NULL;
+
+		converted_file_contents = g_locale_from_utf8 (chars, -1, NULL, NULL, 
+				&conv_error);
+
+		if (conv_error != NULL)
+		{
+			/* Conversion error */
+			g_error_free (conv_error);
+		}
+		else
+		{
+			g_free (chars);
+			chars = converted_file_contents;
+		}
+	}
+	
 	if (fputs (chars, file) == EOF || fclose (file) == EOF)
 	{
 		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, errno, g_strerror (errno));

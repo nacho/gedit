@@ -1,3 +1,22 @@
+2002-01-08  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-file-selector-util.[ch]: new files
+
+	* gedit-file.c (gedit_file_open): use gedit_file_selector_open
+
+	* gedit-undo-manager.c: fixed some UTF-8 related problem
+
+	* gedit-document.c (gedit_document_save_as_real): save using locale
+	encoding if requested
+
+2002-01-07  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-print.c (gedit_print_create_new_page):  new static function
+	(gedit_print_end_page): ditto
+	(gedit_print_paragraph): use gedit_print_create_new_page and 
+	gedit_print_end_page to create new pages
+	(gedit_print_document): ditto
+
 2002-01-07  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-print.c: now, it is possible to print line numbers

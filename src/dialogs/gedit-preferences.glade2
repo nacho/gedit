@@ -1422,7 +1422,7 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                             <property name="label_xalign">0</property>
                             <property name="shadow">GTK_SHADOW_ETCHED_IN</property>
                             <property name="visible">yes</property>
-                            <property name="sensitive">no</property>
+                            <property name="sensitive">yes</property>
 
                             <child>
                               <widget class="GtkVBox" id="vbox18">
@@ -1470,8 +1470,9 @@ If you choose the Notebook mode, you may then decide where you want the tabs to 
                                     <property name="label" translatable="yes">U_se current locale only if the file already use it</property>
                                     <property name="active">no</property>
                                     <property name="draw_indicator">yes</property>
-                                    <property name="visible">yes</property>
+                                    <property name="visible">no</property>
                                     <property name="use_underline">yes</property>
+                                    <property name="sensitive">yes</property>
                                     <property name="group">utf8_radiobutton</property>
                                   </widget>
                                   <packing>

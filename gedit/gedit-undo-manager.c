@@ -348,8 +348,7 @@ gedit_undo_manager_undo (GeditUndoManager *um)
 					um->priv->document, 
 					undo_action->action.delete.start, 
 					undo_action->action.delete.text,
-					abs (undo_action->action.delete.end - 
-						undo_action->action.delete.start));
+					strlen (undo_action->action.delete.text));
 				break;
 			case GEDIT_UNDO_ACTION_INSERT:
 				gedit_document_delete_text (
@@ -528,8 +527,13 @@ gedit_undo_manager_delete_range_handler (GtkTextBuffer *buffer, GtkTextIter *sta
 						GEDIT_DOCUMENT (buffer),
 						undo_action.action.delete.start,
 						undo_action.action.delete.end);
-	
+
+	/* FIXME: it is broken with non ASCII chars */
+	/*
 	if ((undo_action.action.delete.end - undo_action.action.delete.start) > 1)
+	*/
+	if ((strlen (undo_action.action.delete.text) > 1) ||
+	    (g_utf8_get_char (undo_action.action.delete.text  ) == '\n'))
 	       	undo_action.mergeable = FALSE;
 	else
 		undo_action.mergeable = TRUE;
@@ -694,7 +698,7 @@ gedit_undo_manager_check_list_size (GeditUndoManager *um)
 static gboolean 
 gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_action)
 {
-	/* FIXME: it is broken with not ASCII chars */
+	/* FIXME: it is broken with non ASCII chars */
 	
 	GeditUndoAction *last_action;
 	
@@ -719,7 +723,7 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 	}
 
 	if (undo_action->action_type == GEDIT_UNDO_ACTION_DELETE)
-	{
+	{				
 		if ((last_action->action.delete.start != undo_action->action.delete.start) &&
 		    (last_action->action.delete.start != undo_action->action.delete.end))
 		{
@@ -732,7 +736,7 @@ gedit_undo_manager_merge_action (GeditUndoManager *um, GeditUndoAction *undo_act
 			gchar *str;
 			
 #define L  (last_action->action.delete.end - last_action->action.delete.start - 1)
-			
+
 			/* Deleted with the delete key */
 			if ((undo_action->action.delete.text [0] != ' ') &&
 			    (undo_action->action.delete.text [0] != '\t') &&

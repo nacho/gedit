@@ -99,6 +99,10 @@ static void gedit_print_line 		(GeditPrintJobInfo *pji, const gchar *start,
 static gdouble gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, 
 		  			 const gchar *end, gdouble y);
 static void gedit_print_line_number (GeditPrintJobInfo *pji, gdouble y);
+static gdouble gedit_print_create_new_page (GeditPrintJobInfo *pji);
+static void gedit_print_end_page (GeditPrintJobInfo *pji);
+
+
 
 GQuark 
 gedit_print_error_quark ()
@@ -126,6 +130,8 @@ gedit_print_job_info_new (GeditDocument* doc, GError **error)
 	pji->doc = doc;
 	pji->preview = FALSE;
 	pji->range_type = GNOME_PRINT_RANGE_ALL;
+
+	pji->page_num = 0;
 
 	pji->page_width = A4_WIDTH;
 	pji->page_height = A4_HEIGHT;
@@ -345,6 +351,9 @@ gedit_print_header (GeditPrintJobInfo *pji, gint page_number)
 
 	g_free (l_text);
 	g_free (r_text);
+
+	gnome_print_setfont (pji->print_ctx, pji->font_body);
+
 }
 
 static void
@@ -357,6 +366,8 @@ gedit_print_document (GeditPrintJobInfo *pji)
 	gdouble y;
 	gint paragraph_delimiter_index;
 	gint next_paragraph_start;
+	gdouble fontheight;
+
 	gedit_debug (DEBUG_PRINT, "");	
 	
 	switch (pji->range_type)
@@ -372,24 +383,19 @@ gedit_print_document (GeditPrintJobInfo *pji)
 		default:
 			g_return_if_fail (FALSE);
 	}
-	
-	gnome_print_beginpage (pji->print_ctx, "1");
-	
-	pji->page_num = 1;
 
-	if (gedit_settings->print_header)
-	{
-		gedit_print_header (pji, 1);
-		y = pji->page_height - pji->margin_top - pji->header_height;
-	}
-	else
-		y = pji->page_height - pji->margin_top;
-	
+	y = gedit_print_create_new_page (pji);	
+
+	gnome_print_setfont (pji->print_ctx, pji->font_body);
+
 	pango_find_paragraph_boundary (text_to_print, -1, 
 			&paragraph_delimiter_index, &next_paragraph_start);
 
 	p = text_to_print;
 	end = text_to_print + paragraph_delimiter_index;
+
+	fontheight = gnome_font_get_ascender (pji->font_body) + 
+				gnome_font_get_descender (pji->font_body);
 
 	while (p < text_end)
 	{
@@ -408,7 +414,12 @@ gedit_print_document (GeditPrintJobInfo *pji)
 	
 			y -= 1.2 * gnome_font_get_size (pji->font_body);
 
-			/* FIXME: eventually create a new page */
+			if ((y - pji->margin_bottom) < fontheight)
+			{
+				gedit_print_end_page (pji);
+			
+				y = gedit_print_create_new_page (pji);
+			}
 		}
 		else
 		{	
@@ -820,22 +831,9 @@ gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, const gchar *
 		
 		if ((y - pji->margin_bottom) < fontheight)
 		{
-			gchar *pn_str;
-			gnome_print_showpage (pji->print_ctx);
-
-			++pji->page_num;
-			pn_str = g_strdup_printf ("%d", pji->page_num);
-			gnome_print_beginpage (pji->print_ctx, pn_str);
-
-			g_free (pn_str);
-
-			if (gedit_settings->print_header)
-			{	
-				gedit_print_header (pji, +pji->page_num);
-				y = pji->page_height - pji->margin_top - pji->header_height;
-			}
-			else
-				y = pji->page_height - pji->margin_top;
+			gedit_print_end_page (pji);
+			
+			y = gedit_print_create_new_page (pji);
 		}
 
 		if (!gedit_settings->print_wrap_lines)
@@ -845,3 +843,30 @@ gedit_print_paragraph (GeditPrintJobInfo *pji, const gchar *start, const gchar *
 	
 	return y;
 }
+
+static gdouble
+gedit_print_create_new_page (GeditPrintJobInfo *pji)
+{
+	gchar *pn_str;
+
+	++pji->page_num;
+	pn_str = g_strdup_printf ("%d", pji->page_num);
+	gnome_print_beginpage (pji->print_ctx, pn_str);
+
+	g_free (pn_str);
+
+	if (gedit_settings->print_header)
+	{	
+		gedit_print_header (pji, +pji->page_num);
+		return pji->page_height - pji->margin_top - pji->header_height;
+	}
+	else
+		return pji->page_height - pji->margin_top;
+}
+
+static void
+gedit_print_end_page (GeditPrintJobInfo *pji)
+{
+	gnome_print_showpage (pji->print_ctx);
+}
+	

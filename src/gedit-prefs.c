@@ -97,7 +97,7 @@ static GConfClient 	*gedit_gconf_client 	= NULL;
 
 #define DEFAULT_PRINT_FONT_BODY 	(const gchar*) "Courier 9"
 #define DEFAULT_PRINT_FONT_HEADER	(const gchar*) "Helvetica 11"
-#define DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Helvetica 9"
+#define DEFAULT_PRINT_FONT_NUMBERS	(const gchar*) "Helvetica 8"
 
 static gchar* 
 gedit_prefs_gdk_color_to_string (GdkColor color)

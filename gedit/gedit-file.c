@@ -40,7 +40,9 @@
 #include "gedit-mdi.h"
 #include "gedit-recent.h" 
 #include "gedit-prefs.h"
+#include "gedit-file-selector-util.h"
 
+#define USE_BONOBO_FILE_SEL_API	
 
 static gint gedit_file_selector_delete_event_handler (GtkWidget *widget, 
 						      GdkEventAny *event);
@@ -55,6 +57,7 @@ static void gedit_file_save_as_ok_button_clicked_handler (GtkWidget *widget,
 
 static GSList*  gedit_file_selector_get_filenames (GtkFileSelection *file_selector);
 static gboolean gedit_file_open_is_dir (GtkFileSelection *file_selector);
+
 static gboolean gedit_file_open_real (const gchar* file_name, GeditMDIChild* child);
 
 static GtkWidget *open_file_selector = NULL;
@@ -253,22 +256,16 @@ gedit_file_open_ok_button_clicked_handler (GtkWidget *widget, GeditMDIChild *act
 	gtk_widget_hide (GTK_WIDGET (file_selector));
 
 	gtk_main_quit ();
-	
-	/* FIXME
-	if (gedit_document_current())
-	{
-		g_return_if_fail(gedit_window_active_app());
-		gedit_window_set_widgets_sensitivity_ro (gedit_window_active_app(), 
-				gedit_document_current()->readonly);
-	}	
-	*/
-
+		
 	return;
 }
+
 
 void
 gedit_file_open (GeditMDIChild *active_child)
 {
+#ifndef USE_BONOBO_FILE_SEL_API
+
 	gint ok_signal_id = 0;
 	
 	gedit_debug (DEBUG_FILE, "");
@@ -335,6 +332,32 @@ gedit_file_open (GeditMDIChild *active_child)
 			ok_signal_id);
 
 	return;
+#else
+	gchar** files;
+	
+	gedit_debug (DEBUG_FILE, "");
+
+	files = gedit_file_selector_open_multi (
+			GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+			TRUE,
+		        _("Open File ..."), 
+			NULL, 
+			NULL);
+	
+	if (files) 
+	{
+		gint i;
+		for (i = 0; files[i]; ++i)
+		{
+			if (gedit_file_open_real (files[i], active_child))
+				gedit_utils_flash_va (_("Loaded file %s"), files[i]);
+			
+			gedit_debug (DEBUG_FILE, "File: %s", files[i]);
+		}
+
+		g_strfreev (files);
+	}
+#endif	
 }
 
 static gboolean
@@ -435,8 +458,6 @@ gedit_file_open_real (const gchar* file_name, GeditMDIChild* active_child)
 		}	
 	}
 
-	/* FIXME */
-
 	gedit_recent_add (uri);
 	gedit_recent_update_all_windows (BONOBO_MDI (gedit_mdi)); 
 	
@@ -464,7 +485,6 @@ gedit_file_save (GeditMDIChild* child)
 	
 	if (gedit_document_is_untitled (doc))
 	{
-		/* TODO */		
 		gedit_debug (DEBUG_FILE, "Untitled");
 
 		return gedit_file_save_as (child);
@@ -994,6 +1014,7 @@ gedit_file_open_single_uri (const gchar* uri)
 	return ret;
 }
 
+/* FIXME: it is broken */
 gboolean
 gedit_file_open_from_stdin (GeditMDIChild *active_child)
 {

@@ -47,6 +47,7 @@
 #include "gedit-view.h"
 
 #include <bonobo/bonobo-ui-util.h>
+#include <bonobo/bonobo-control.h>
 
 
 struct _GeditMDIPrivate
@@ -243,6 +244,30 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	/* Add the plugins to the menus */
 	gedit_plugins_menu_add (app);
 #endif
+
+#if 0 /* Here you can see how to add a control to the status bar */
+	{
+		guint id;
+		GtkWidget *widget = gtk_statusbar_new ();
+		BonoboControl *control = bonobo_control_new (widget);
+		
+		gtk_widget_set_size_request (widget, 150, 10);
+
+		id = gtk_statusbar_get_context_id (GTK_STATUSBAR (widget), "Prova");
+		gtk_statusbar_push (GTK_STATUSBAR (widget), id, " Line: 1 - Col: 2");
+		
+		gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (widget), FALSE);
+		
+		gtk_widget_show (widget);
+
+		bonobo_ui_component_object_set (bonobo_mdi_get_ui_component_from_window (win),
+			       			"/status/Position",
+						BONOBO_OBJREF (control),
+						NULL);
+
+		bonobo_object_unref (BONOBO_OBJECT (control));
+	}
+#endif 
 }
 
 static void 
