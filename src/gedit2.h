@@ -45,6 +45,9 @@ extern gboolean gedit_close_x_button_pressed;
 extern gboolean gedit_exit_button_pressed;
 extern BonoboObject *gedit_app_server;
 
+#define GBOOLEAN_TO_POINTER(i) ((gpointer)  ((i) ? 2 : 1))
+#define GPOINTER_TO_BOOLEAN(i) ((gboolean)  ((((gint)(i)) == 2) ? TRUE : FALSE))
+
 BonoboWindow* 		gedit_get_active_window 		(void);
 GeditDocument* 		gedit_get_active_document 		(void);
 GeditView* 		gedit_get_active_view 			(void);

@@ -34,6 +34,8 @@
 
 #include <gtk/gtkwindow.h>
 
+GQuark gedit_was_wrap_around_quark (void);
+
 void gedit_dialog_goto_line (void);
 void gedit_dialog_find 	    (void);
 void gedit_dialog_replace   (void);

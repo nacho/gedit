@@ -1,3 +1,28 @@
+2002-12-03  Paolo Maggi <maggi@athena.polito.it>
+
+	* gedit-commands.c (TO_BE_IMPLEMENTED): removed
+	(gedit_cmd_search_find_again): fixed to support "wrap around"
+
+	* gedit-document.c (gedit_document_find): fix a bug in the case
+	you are searching an entire word 
+	(gedit_document_find_again): added a from cursor parameter
+
+	* gedit-document.h (gedit_document_find_again): ditto
+
+	* gedit2.h (GBOOLEAN_TO_POINTER)(GPOINTER_TO_BOOLEAN): #defined
+
+	* dialogs/gedit-dialogs.h (gedit_was_wrap_around_quark): new function
+
+	* dialogs/gedit-dialog-replace.c: fixed according to ui-review
+
+	* dialogs/replace.glade2: ditto
+
+2002-12-03  Paolo Maggi <maggi@athena.polito.it>
+
+	* gedit-plugins-engine.c (gedit_plugins_engine_load): free 
+	gedit_plugin_file (fix bug #100021, thanks to Kjartan Maraas
+	and Martin Hostettler for the patch)
+
 2002-11-28  Paolo Maggi <maggi@athena.polito.it>
 
 	* gedit-plugins-engine.c (gedit_plugins_engine_activate_plugin)

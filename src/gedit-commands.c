@@ -47,16 +47,6 @@
 #include "dialogs/gedit-dialogs.h"
 #include "dialogs/gedit-preferences-dialog.h"
 
-#define TO_BE_IMPLEMENTED	{ GtkWidget *message_dlg; \
-				  message_dlg = gtk_message_dialog_new (	\
-			                          GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),	\
-			                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,	\
-			                          GTK_MESSAGE_INFO,	\
-			                          GTK_BUTTONS_OK,	\
-                                   		  _("Not yet implemented."));	\
-				  gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK); \
-	                          gtk_dialog_run (GTK_DIALOG (message_dlg));	\
-  	                          gtk_widget_destroy (message_dlg); }
 
 void 
 gedit_cmd_file_new (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
@@ -326,16 +316,31 @@ gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const g
 	last_searched_text = gedit_document_get_last_searched_text (doc);
 	if (last_searched_text != NULL)
 	{
-		if (!gedit_document_find_again (doc))
+		gpointer data;
+		gboolean was_wrap_around;
+		gboolean found;
+
+		data = g_object_get_qdata (G_OBJECT (doc), gedit_was_wrap_around_quark ());
+		if (data == NULL)
+			was_wrap_around = TRUE;
+		else
+			was_wrap_around = GPOINTER_TO_BOOLEAN (data);
+
+		found = gedit_document_find_again (doc, TRUE);
+
+		if (!found && was_wrap_around)
+			found = gedit_document_find_again (doc, FALSE);
+
+		if (!found)
 		{	
 			GtkWidget *message_dlg;
 
 			message_dlg = gtk_message_dialog_new (
-				GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
+				GTK_WINDOW (gedit_get_active_window ()),
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
 				GTK_BUTTONS_OK,
-				_("The string \"%s\" has not been found."), last_searched_text);
+				_("The text \"%s\" was not found."), last_searched_text);
 
 			gtk_dialog_set_default_response (GTK_DIALOG (message_dlg), GTK_RESPONSE_OK);
 
@@ -347,12 +352,10 @@ gedit_cmd_search_find_again (BonoboUIComponent *uic, gpointer user_data, const g
 		else
 			gedit_view_scroll_to_cursor (active_view);
 
+		g_free (last_searched_text);
 	}
 	else
-	{
-		g_free (last_searched_text);
 		gedit_dialog_find ();
-	}
 }
 
 
@@ -464,7 +467,8 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 				_("gedit is a small and lightweight text editor for Gnome"),
 				(const char **)authors,
 				(const char **)documenters,
-				strcmp (translator_credits, "translator_credits") != 0 ? (const char *)translator_credits : NULL,
+				strcmp (translator_credits, "translator_credits") != 0 ? 
+					(const char *)translator_credits : NULL,
 				pixbuf);
 
 	gtk_window_set_transient_for (GTK_WINDOW (about),

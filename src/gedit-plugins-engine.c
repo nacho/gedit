@@ -173,7 +173,7 @@ gedit_plugins_engine_load (const gchar *file)
 
 	GeditPlugin *plugin;
 
-	GeditPluginFile *gedit_plugin_file;
+	GeditPluginFile *gedit_plugin_file = NULL;
 	gchar *str;
 	
 	gboolean to_be_activated;
@@ -306,6 +306,8 @@ gedit_plugins_engine_load (const gchar *file)
 
 	gedit_debug (DEBUG_PLUGINS, "Plugin: %s (INSTALLED)", plugin->name);
 
+	gedit_plugin_file_free (gedit_plugin_file);
+
 	return plugin;
 
 error:
@@ -319,7 +321,8 @@ error:
 	g_free (plugin->copyright);
 	
 	g_free (plugin);
-	
+	gedit_plugin_file_free (gedit_plugin_file);
+
 	return NULL;
 }
 

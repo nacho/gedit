@@ -162,7 +162,8 @@ gboolean	gedit_document_find 		(GeditDocument* doc, const gchar* str,
 						 gboolean from_cursor, 
 						 gboolean case_sensitive,
 						 gboolean entire_word);
-gboolean	gedit_document_find_again	(GeditDocument* doc);
+gboolean	gedit_document_find_again	(GeditDocument* doc,
+						 gboolean from_cursor);
 
 void		gedit_document_replace_selected_text (GeditDocument *doc, 
 						      const gchar *replace);

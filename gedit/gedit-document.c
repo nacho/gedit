@@ -1786,18 +1786,29 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	else		
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 
+	found = FALSE;
+	
 	if (*converted_str != '\0')
     	{
       		GtkTextIter match_start, match_end;
 
-          	found = gedit_text_iter_forward_search (&iter, converted_str, search_flags,
-                                        	&match_start, &match_end,
-                                               	NULL);	
-
-		if (found && entire_word)
+		while (!found)
 		{
-			found = gtk_text_iter_starts_word (&match_start) && 
-				gtk_text_iter_ends_word (&match_end);
+          		found = gedit_text_iter_forward_search (&iter, converted_str, search_flags,
+                        	                	&match_start, &match_end,
+                                	               	NULL);	
+
+			if (found && entire_word)
+			{
+				found = gtk_text_iter_starts_word (&match_start) && 
+					gtk_text_iter_ends_word (&match_end);
+
+				if (!found) 
+					iter = match_end;
+
+			}
+			else
+				break;
 		}
 		
 		if (found)
@@ -1823,7 +1834,7 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 }
 
 gboolean
-gedit_document_find_again (GeditDocument* doc)
+gedit_document_find_again (GeditDocument* doc, gboolean from_cursor)
 {
 	gchar* last_searched_text;
 	gboolean found;
@@ -1838,8 +1849,12 @@ gedit_document_find_again (GeditDocument* doc)
 	if (last_searched_text == NULL)
 		return FALSE;
 	
-	found = gedit_document_find (doc, last_searched_text, TRUE, 
-				doc->priv->last_search_was_case_sensitive, doc->priv->last_search_was_entire_word);
+	found = gedit_document_find (doc, 
+				     last_searched_text, 
+				     from_cursor, 
+				     doc->priv->last_search_was_case_sensitive, 
+				     doc->priv->last_search_was_entire_word);
+
 	g_free (last_searched_text);
 
 	return found;
