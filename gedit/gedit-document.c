@@ -32,9 +32,6 @@
 #include <config.h>
 #endif
 
-#include <libgnome/libgnome.h>
-#include <libgnomevfs/gnome-vfs.h>
-
 #include <unistd.h>  
 #include <stdio.h>
 #include <string.h>
@@ -42,6 +39,9 @@
 #include <sys/stat.h>
 #include <sys/param.h>
 #include <fcntl.h>
+
+#include <libgnome/libgnome.h>
+#include <libgnomevfs/gnome-vfs.h>
 
 #include "gedit-prefs.h"
 #include "gnome-vfs-helpers.h"
