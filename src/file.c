@@ -66,8 +66,8 @@ static void cancel_cb (GtkWidget *w, gpointer data);
  *
  * Return value: 0 on success, 1 on error.
  */
-/* TODO: lock/unlock file before/after. Jason*/
-/* ...  why would you want to lock it, lets say you               <---- read this Jason 
+/* TODO: lock/unlock file before/after. */
+/* ...  why would you want to lock it, lets say you
    open /etc/lilo.conf and want to run lilo without
    closing gedit ? maybe I am missing something. Chema */
 gint

@@ -221,9 +221,7 @@ gedit_document_new_with_file (gchar *filename)
 	if (doc)
 	{
 		if (!gedit_file_open (doc, filename))
-		{
 			return doc;
-		}
 		else
 			return NULL;
 	}

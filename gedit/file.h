@@ -1,6 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* vi:set ts=4 sts=0 sw=4:
- *
+/*
  * gedit
  *
  * This program is free software; you can redistribute it and/or modify
@@ -18,8 +17,8 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef __GEDIT_FILE_IO_H__
-#define __GEDIT_FILE_IO_H__
+#ifndef __FILE_H__
+#define __FILE_H__
 
 #include "document.h"
 
@@ -40,6 +39,6 @@ extern void file_close_all_cb (GtkWidget *widget, gpointer cbdata);
 
 extern void file_revert_cb (GtkWidget *widget, gpointer cbdata);
 
-#endif /* __GEDIT_FILE_IO_H__ */
+#endif /* __FILE_H__ */
 
 

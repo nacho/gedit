@@ -20,7 +20,6 @@
 #include <config.h>
 #include <gnome.h>
 
-#define PLUGIN_TEST 1
 #include "window.h"
 #include "file.h"
 #include "search.h"
@@ -29,10 +28,8 @@
 
 #include "commands.h"
 #include "document.h"
-#include "prefs.h"
-#include "view.h"
-
 #include "dialogs/dialogs.h"
+
 
 GnomeUIInfo popup_menu[] =
 {

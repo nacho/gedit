@@ -201,13 +201,15 @@ gedit_window_set_icon (GtkWidget *window, char *icon)
 	gtk_widget_unrealize (window);*/
 }
 
+static gint status_showing = -1;
+
 void
 gedit_window_set_status_bar (gint show_status)
 {
-	if (settings->show_status == show_status)
+	if (status_showing == show_status)
 		return;
 	else
-		settings->show_status = show_status;
+		status_showing = show_status;
 
 	if (!mdi->active_window->statusbar)
 	{
@@ -220,12 +222,14 @@ gedit_window_set_status_bar (gint show_status)
 					      gnome_mdi_get_menubar_info (mdi->active_window));
 
 		mdi->active_window->statusbar = statusbar;
+		status_showing = TRUE;
 	}
 	else if (mdi->active_window->statusbar->parent)
 	{
 		gtk_widget_ref (mdi->active_window->statusbar);
 		gtk_container_remove (GTK_CONTAINER (mdi->active_window->statusbar->parent),
 				      mdi->active_window->statusbar);
+		status_showing = FALSE;
 	}
 	else
 	{
@@ -233,6 +237,7 @@ gedit_window_set_status_bar (gint show_status)
 				    mdi->active_window->statusbar,
 				    FALSE, FALSE, 0);
 		gtk_widget_unref (GNOME_APP (mdi->active_window)->statusbar);
+		status_showing = TRUE;
 	}
 
 /*

@@ -19,6 +19,11 @@
  * Prefs glade-ized and rewritten by Jason Leach <leach@wam.umd.edu>
  */
 
+/* TODO:
+ * [ ] I think we're leaking mem with setting styles and whatnot.
+ *
+ */
+
 #include <config.h>
 #include <gnome.h>
 #include <glade/glade.h>
@@ -114,7 +119,7 @@ gedit_window_refresh (void)
 		{
 			nth_view = g_list_nth_data (doc->views, j);
 			gedit_view_set_word_wrap (nth_view, settings->word_wrap);
-  	    
+
 			gtk_widget_set_style (GTK_WIDGET (nth_view->split_screen),
 					      style);
 			gtk_widget_set_style (GTK_WIDGET (nth_view->text),
@@ -142,6 +147,9 @@ help_cb (void)
 static void
 apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 {
+	GtkStyle *style;
+	GdkColor *c;
+
 	if (page == -1)
 		return;
 
@@ -157,8 +165,26 @@ apply_cb (GnomePropertyBox *pbox, gint page, gpointer data)
 
 	settings->tab_pos = gtk_option_menu_get_active_index (tabpos);
 
-	gedit_save_settings ();
+        style = gtk_style_new ();
+        
+        c = &style->base[0];
+        
+        gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (background),
+                                    &c->red, &c->green, &c->blue, 0);
+        settings->bg[0] = c->red;
+        settings->bg[1] = c->green;
+        settings->bg[2] = c->blue;
+        
+        c = &style->text[0];
+        
+        gnome_color_picker_get_i16 (GNOME_COLOR_PICKER (foreground),
+                                    &c->red, &c->green, &c->blue, 0);
+        settings->fg[0] = c->red;
+        settings->fg[1] = c->green;
+        settings->fg[2] = c->blue;
+
 	gedit_window_refresh ();
+	gedit_save_settings ();
 }
 
 static void
