@@ -163,8 +163,10 @@ GList *toplevels;
 					- Alex */
 	
 
-	cmd2 = gtk_entry_get_text(GTK_ENTRY (prefs->pcmd));
-	gE_save_settings(cmd2);
+	#ifndef WITHOUT_GNOME
+	 cmd2 = gtk_entry_get_text(GTK_ENTRY (prefs->pcmd));
+	 gE_save_settings(cmd2);
+	#endif
 
     gtk_widget_destroy(prefs_window->window);
     prefs_window->window = NULL;
@@ -371,6 +373,7 @@ void gE_save_settings(gchar *cmd)
   gnome_config_set_int ("tab pos", (gint) main_window->tab_pos);
   gnome_config_set_int ("auto indent", (gint) main_window->auto_indent);
   gnome_config_set_int ("show statusbar", (gint) main_window->show_status);
+  gnome_config_set_int ("toolbar", (gint) main_window->have_toolbar);
 
   if (main_window->print_cmd == "")
     gnome_config_set_string ("print command", "lpr -rs ");
@@ -390,6 +393,7 @@ void gE_get_settings()
   
   main_window->tab_pos = gnome_config_get_int ("tab pos");
   main_window->show_status = gnome_config_get_int ("show statusbar");
+  main_window->have_toolbar = gnome_config_get_int ("toolbar");
   
  main_window->print_cmd = gnome_config_get_string("print command");
 
@@ -406,6 +410,17 @@ void gE_get_settings()
     gtk_widget_hide (main_window->statusbox);
     main_window->show_status = 0;
   }
+ 
+  if (main_window->have_toolbar == 1)
+    {
+     tb_on_cb(NULL,NULL);
+     main_window->have_toolbar = 1;
+    }
+  if (main_window->have_toolbar == 0)
+    {
+     tb_off_cb(NULL, NULL);
+     main_window->have_toolbar = 0;
+    }
   
 }
 #endif

@@ -110,6 +110,7 @@ tb_on_cb(GtkWidget *w, gpointer data)
 {
 	if (!GTK_WIDGET_VISIBLE(main_window->toolbar))
 		gtk_widget_show (main_window->toolbar);
+	main_window->have_toolbar = 1;
 }
 
 
@@ -123,6 +124,7 @@ tb_off_cb(GtkWidget *w, gpointer data)
 {
 	if (GTK_WIDGET_VISIBLE(main_window->toolbar))
 		gtk_widget_hide (main_window->toolbar);
+	main_window->have_toolbar = 0;
 }
 
 

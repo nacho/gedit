@@ -79,6 +79,7 @@ void gE_get_rc_file();
 void gE_rc_parse();
 
 void gE_window_toggle_statusbar (GtkWidget *w, gpointer data);
+void gE_window_toggle_toolbar (GtkWidget *w, gpointer data);
 
 void gE_show_version();
 void gE_about_box();
@@ -123,6 +124,7 @@ struct _gE_window {
 	gint show_status;
 	gint tab_pos;
 	gchar *print_cmd;
+	gint have_toolbar;
 #if PLUGIN_TEST
   plugin *hello;
 #endif
