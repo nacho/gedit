@@ -286,22 +286,20 @@ gedit_document_new_with_file (gchar *filename)
 	gedit_document *doc;
 	struct stat stats;
 
-	if (!stat(filename, &stats) && S_ISREG(stats.st_mode))
+	if ((doc = gtk_type_new (gedit_document_get_type ())))
 	{
-		if ((doc = gtk_type_new (gedit_document_get_type ())))
+		if (!gedit_file_open (doc, filename))
 		{
-			if (gedit_file_open (doc, filename))
-			{
 				/*g_free (filename);*/
-				return doc;
-			}
-			else
-				return NULL;
+			return doc;
 		}
-
-		g_assert_not_reached ();
-		gtk_object_destroy (GTK_OBJECT(doc));
+		else
+			return NULL;
 	}
+
+	g_assert_not_reached ();
+	gtk_object_destroy (GTK_OBJECT(doc));
+
 
 	return NULL;
 }

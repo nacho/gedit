@@ -89,7 +89,7 @@ gedit_file_open (gedit_document *doc, gchar *fname)
 			else
 			{
 				gchar *errstr = g_strdup_printf (_("gedit was unable to open the file: "
-								   "\n\n %s \n\n"
+								   "\n\n%s\n\n"
 								   "Make sure that you have read access permissions for the file."), fname);
 				gnome_app_error (mdi->active_window, errstr);
 				return 0;

@@ -49,6 +49,12 @@ gedit_set_title (gedit_document *doc)
 	g_free (title);
 }
 
+/**
+ * gedit_flash:
+ * @msg: Message to flash on the statusbar
+ *
+ * Flash a temporary message on the statusbar of gedit.
+ */
 void
 gedit_flash (gchar *msg)
 {
@@ -57,6 +63,10 @@ gedit_flash (gchar *msg)
 	gnome_app_flash (mdi->active_window, msg);
 }
 
+/**
+ * gedit_flash_va:
+ * @format
+ */
 void
 gedit_flash_va (gchar *format, ...)
 {
