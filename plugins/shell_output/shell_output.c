@@ -21,8 +21,6 @@ static GtkWidget *directory;
 static GtkWidget *command;
 static GtkWidget *dialog;
 
-static gchar *directory_entry_path ;
-
 static void
 destroy_plugin (PluginData *pd)
 {
@@ -39,23 +37,32 @@ static void
 shell_output_scan_text (GtkWidget *w , gpointer data)
 {
 
-	Document *doc            = gedit_document_current ();
-	gchar    *buffer         = NULL ;
-	gchar    *command_string = NULL ;
-	gchar    **arg           = NULL;
+	Document *doc              = gedit_document_current ();
+	gchar    *buffer_in        = NULL ;
+	GString  *buffer_out       = g_string_new (NULL) ;
+	gchar    *command_string   = NULL ;
+	gchar    *directory_string = NULL ;
+	gchar    **arg             = NULL ;
 	gint     fdpipe [2];
 	gint     pid ;
-	gint     buffer_length_in , buffer_length_out ;
+	gint     buffer_length ;
 	gint     position ;
+	
 	
 	if ((command_string = gtk_entry_get_text (GTK_ENTRY (command)))==NULL)
 	{
 		return ;
 	}
 
-	directory_entry_path = gtk_entry_get_text (GTK_ENTRY (directory)) ;
-	printf ("%s\n",directory_entry_path);
-	
+	if ( (directory_string = gtk_entry_get_text (GTK_ENTRY (directory))) == NULL ) 
+	{
+		directory_string =  gnome_config_get_string ("/Editor_Plugins/shell_output/directory");
+	}
+	else
+	{
+		 gnome_config_set_string ("/Editor_Plugins/shell_output/directory", directory_string );
+		 gnome_config_sync ();
+	}
 	
 	if (pipe (fdpipe) == -1)
 	{
@@ -73,40 +80,43 @@ shell_output_scan_text (GtkWidget *w , gpointer data)
 		close (fdpipe[1]);
 
 		arg = g_strsplit (command_string," ",-1);
+
+		chdir (directory_string);
+			
 		execvp (*arg,arg);
+		
 		_exit (1);
 	}
 	close (fdpipe[1]);
+
 	g_strfreev (arg);
 
-	buffer_length_in = 1;
-	buffer_length_out = 0;
-	buffer = g_malloc (BUFFER_SIZE);
-
-	while (buffer_length_in > 0)
+	buffer_length = 1;
+	
+	while (buffer_length > 0)
 	{
+
+		buffer_in = g_malloc (BUFFER_SIZE);
+		memset ( buffer_in , 0 , BUFFER_SIZE );
 		
-		if ( (buffer_length_in = read (fdpipe[0], buffer , BUFFER_SIZE)) == BUFFER_SIZE )
+		if ( (buffer_length  = read (fdpipe[0], buffer_in , BUFFER_SIZE)) > 0  )
 		{
+			buffer_out = g_string_append ( buffer_out , buffer_in );
 			
-			buffer_length_out += buffer_length_in;
-			buffer = g_realloc (buffer , buffer_length_out + BUFFER_SIZE );
-		}
-		else
-		{
-			buffer_length_out += buffer_length_in;
-			buffer [buffer_length_out] = 0 ;
 		}
 
+		g_free ( buffer_in ) ;
 	}
 	
 	position = gedit_view_get_position (gedit_view_current ());
 	 
-	gedit_document_insert_text (doc, buffer, position , TRUE);
+	gedit_document_insert_text (doc, buffer_out->str , position , TRUE);
+
+	gedit_view_set_position (gedit_view_current (), position + buffer_out->len);
 			
 	gnome_dialog_close (GNOME_DIALOG (dialog));
-	g_free (buffer);
-	
+
+	g_string_free ( buffer_out , TRUE ) ;
 
 }
 
@@ -120,7 +130,7 @@ shell_output (void){
      GtkWidget *ok;
      GtkWidget *cancel;
     
-     
+
      gui = glade_xml_new (GEDIT_GLADEDIR "/shell_output.glade",NULL);
 
      if (!gui)
@@ -135,7 +145,7 @@ shell_output (void){
      command    = glade_xml_get_widget (gui,"command_entry");
      directory  = glade_xml_get_widget (gui,"directory_entry");
 
-     gtk_entry_set_text (GTK_ENTRY (directory) , directory_entry_path ) ;
+     gtk_entry_set_text (GTK_ENTRY (directory) ,  gnome_config_get_string ("/Editor_Plugins/shell_output/directory") ) ;
      
      gtk_signal_connect (GTK_OBJECT ( ok ) , "clicked" , GTK_SIGNAL_FUNC(shell_output_scan_text) , NULL);
      gtk_signal_connect (GTK_OBJECT ( command ) , "activate" , GTK_SIGNAL_FUNC(shell_output_scan_text) , NULL);
@@ -163,6 +173,7 @@ init_plugin (PluginData *pd)
 	
 	pd->private_data = (gpointer)shell_output;
 
-	directory_entry_path = g_get_current_dir ();
+	gnome_config_set_string ("/Editor_Plugins/shell_output/directory", g_get_current_dir () );
+	
 	return PLUGIN_OK;
 }
