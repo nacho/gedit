@@ -495,7 +495,7 @@ gedit_encoding_dialog_new (GtkWindow *transient_parent)
 }
 
 static void
-update_list ()
+update_list (void)
 {
 	g_return_if_fail (gedit_prefs_manager_shown_in_menu_encodings_can_set ());
 	
@@ -520,7 +520,7 @@ gedit_encodings_dialog_run (GtkWindow *parent)
 				break;
 			
 			case GTK_RESPONSE_OK:
-				update_list (dialog);
+				update_list ();
 				gtk_widget_hide (dialog);
 
 				break;
