@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-30 21:45+0000\n"
-"PO-Revision-Date: 2005-01-30 21:53+0100\n"
+"POT-Creation-Date: 2005-02-07 11:54+0000\n"
+"PO-Revision-Date: 2005-02-07 12:01+0100\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid "Edit text files"
 msgstr "Edit text files"
 
 #: data/gedit.desktop.in.in.h:2
-#: gedit/gedit2.c:328
+#: gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "Text Editor"
 
@@ -343,14 +343,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "Whether gedit should enable syntax highlighting."
 
 #: data/gedit.schemas.in.h:74
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "Whether gedit should enable syntax highlighting."
+msgstr "Whether gedit should highlight matching bracket."
 
 #: data/gedit.schemas.in.h:75
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "Whether gedit should print syntax highlighting when printing documents."
+msgstr "Whether gedit should highlight the current line."
 
 #: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
@@ -398,9 +396,8 @@ msgid "Activate %s"
 msgstr "Activate %s"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "Close the output window"
+msgstr "Close _without Saving"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -433,11 +430,11 @@ msgstr[1] "If you don't save, changes from the last %ld minutes will be permanen
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] "If you don't save, changes from the last hour will be permanently lost."
-msgstr[1] "If you don't save, changes from the last hour will be permanently lost."
+msgstr[1] "If you don't save, changes from the last %d hours will be permanently lost."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -603,19 +600,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
-msgstr "<b>Auto Indentation</b>"
+msgstr "<b>Automatic Indentation</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>Text Wrapping</b>"
+msgstr "<b>Bracket Matching</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>Text Wrapping</b>"
+msgstr "<b>Current Line</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -639,9 +633,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>Right Margin</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>Tabs</b>"
+msgstr "<b>Tab Stops</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -792,9 +785,8 @@ msgid "_Display line numbers"
 msgstr "_Display line numbers"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
-msgstr "_Enable auto indentation"
+msgstr "_Enable automatic indentation"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Enable syntax highlighting"
@@ -817,9 +809,8 @@ msgid "_Right margin at column:"
 msgstr "_Right margin at column:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
-msgstr "_Tabs width:"
+msgstr "_Tab width:"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:54
 msgid "_Unlimited undo"
@@ -999,12 +990,12 @@ msgstr "gedit is a small and lightweight text editor for the GNOME Desktop"
 #. You can also include other translators who have contributed to
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "Abigail Brady <morwen@evilmagi_c.org>\n"
 "Bastien Nocera <hadess@hadess.net>\n"
-"Gareth Owen <gowen72@yahoo.com>"
+"Gareth Owen <gowen72@yahoo.com>\n"
+"David Lodge <dave@cirt.net>"
 
 #: gedit/gedit-commands.c:579
 msgid "gedit"
@@ -1131,7 +1122,7 @@ msgstr "Arabic"
 
 #: gedit/gedit-encodings.c:160
 #: gedit/gedit-encodings.c:260
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "Greek"
 
@@ -1142,12 +1133,14 @@ msgstr "Hebrew Visual"
 #: gedit/gedit-encodings.c:164
 #: gedit/gedit-encodings.c:223
 #: gedit/gedit-encodings.c:264
+#: plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "Hebrew"
 
 #: gedit/gedit-encodings.c:166
 #: gedit/gedit-encodings.c:221
 #: gedit/gedit-encodings.c:262
+#: plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "Turkish"
 
@@ -1160,6 +1153,7 @@ msgid "Celtic"
 msgstr "Celtic"
 
 #: gedit/gedit-encodings.c:176
+#: plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "Romanian"
 
@@ -1208,6 +1202,7 @@ msgstr "Cyrillic/Ukrainian"
 #: gedit/gedit-encodings.c:245
 #: gedit/gedit-encodings.c:251
 #: gedit/gedit-encodings.c:270
+#: plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
@@ -1324,11 +1319,11 @@ msgstr[1] "Changes made to the document in the last %ld minutes will be permanen
 
 #: gedit/gedit-file.c:574
 #: gedit/gedit-file.c:595
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "Changes made to the document in the last hour will be permanently lost."
-msgstr[1] "Changes made to the document in the last hour will be permanently lost."
+msgstr[1] "Changes made to the document in the last %d hours will be permanently lost."
 
 #: gedit/gedit-file.c:580
 #, c-format
@@ -1410,19 +1405,15 @@ msgstr[0] "Loading %d file..."
 msgstr[1] "Loading %d files..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Could not open the file \"%s\""
+msgstr "Could not find the file \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:86
 #: gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
+msgstr "Please, check that you typed the location correctly and try again."
 
 #: gedit/gedit-io-error-dialogs.c:91
 #: gedit/gedit-io-error-dialogs.c:99
@@ -1447,33 +1438,29 @@ msgstr "Could not open the file \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:93
 #: gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "Could not open the file \"%s\" because it contains corrupted data."
+msgstr "The file contains corrupted data."
 
 #: gedit/gedit-io-error-dialogs.c:104
 #: gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "gedit cannot handle %s: locations in write mode."
+msgstr "gedit cannot handle %s: locations."
 
 #: gedit/gedit-io-error-dialogs.c:109
 #: gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "gedit cannot handle %s: locations in write mode."
+msgstr "gedit cannot handle this location."
 
 #: gedit/gedit-io-error-dialogs.c:118
 #: gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr "Could not open the file \"%s\" because it contains data in an invalid format."
+msgstr "The file contains data in an invalid format."
 
 #: gedit/gedit-io-error-dialogs.c:124
 #: gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "The file has too many symbolic links."
+msgstr "The file is too big."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
@@ -1486,12 +1473,8 @@ msgid "Access was denied."
 msgstr "Access was denied."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
 msgid "there are too many open files. Please, close some open files and try again."
-msgstr ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
+msgstr "there are too many open files. Please, close some open files and try again."
 
 #: gedit/gedit-io-error-dialogs.c:148
 #: gedit/gedit-io-error-dialogs.c:661
@@ -1500,88 +1483,55 @@ msgid "\"%s\" is a directory"
 msgstr "\"%s\" is a directory"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid "Not enough available memory to open the file. Please, close some running applications and try again."
-msgstr "Not enough available memory to open the file \"%s\". Please, close some running application and try again."
+msgstr "Not enough available memory to open the file. Please, close some running applications and try again."
 
 #: gedit/gedit-io-error-dialogs.c:185
 #: gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid "Host \"%s\" could not be found. Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
+msgstr "Host \"%s\" could not be found. Please, check that your proxy settings are correct and try again."
 
 #: gedit/gedit-io-error-dialogs.c:196
 #: gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid "Host name was invalid. Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
+msgstr "Host name was invalid. Please, check that you typed the location correctly and try again."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid "Host name was empty. Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
+msgstr "Host name was empty. Please, check that your proxy settings are correct and try again."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid "Attempt to log in failed. Please, check that you typed the location correctly and try again."
-msgstr ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
+msgstr "Attempt to log in failed. Please, check that you typed the location correctly and try again."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid "The file contains invalid data. Probably, you are trying to open a binary file."
-msgstr ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
+msgstr "The file contains invalid data. Probably, you are trying to open a binary file."
 
 #: gedit/gedit-io-error-dialogs.c:248
-#, fuzzy
 msgid "The file you are trying to open is not a regular file."
-msgstr "The file you are trying to open contains an invalid byte sequence."
+msgstr "The file you are trying to open is not a regular file."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid "gedit was not able to automatically detect the character coding. Please, check that you are not trying to open a binary file and try again selecting a character coding in the 'Open File...' (or 'Open Location') dialog."
-msgstr ""
-"Could not open the file \"%s\" because gedit has not been able to automatically detect the character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and try again selecting a character coding in the 'Open File...' (or 'Open Location') dialogue."
+msgstr "gedit was not able to automatically detect the character coding. Please, check that you are not trying to open a binary file and try again selecting a character coding in the 'Open File...' (or 'Open Location') dialogue."
 
 #: gedit/gedit-io-error-dialogs.c:302
 #: gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Could not open the file \"%s\" because it is too big."
+msgstr "Could not open the file \"%s\" using the %s character coding"
 
 #: gedit/gedit-io-error-dialogs.c:305
 #: gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid "Please, check that you are not trying to open a binary file and that you selected the right character coding in the 'Open File... ' (or 'Open Location') dialog and try again."
-msgstr ""
-"Could not open the file \"%s\" using the %s character coding.\n"
-"\n"
-"Please, check that you are not trying to open a binary file and that you selected the right character coding in the 'Open File...' (or 'Open Location') dialogue and try again."
+msgstr "Please, check that you are not trying to open a binary file and that you selected the right character coding in the 'Open File... ' (or 'Open Location') dialogue and try again."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid "The file contains data in an invalid format. Probably, you are trying to open a binary file."
-msgstr ""
-"Could not open the file \"%s\" because it contains invalid data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
+msgstr "The file contains data in an invalid format. Probably, you are trying to open a binary file."
 
 #: gedit/gedit-io-error-dialogs.c:397
 #: gedit/gedit-io-error-dialogs.c:404
@@ -1597,72 +1547,51 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518
 #: gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Could not revert the file \"%s\"."
+msgstr "Could not revert the file \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
+msgstr "gedit cannot find it. Perhaps, it has recently been deleted."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
 msgid "There are too many open files. Please, close some open files and try again."
-msgstr ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
+msgstr "There are too many open files. Please, close some open files and try again."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid "Not enough available memory. Please, close some running applications and try again."
-msgstr "Not enough available memory to open the file \"%s\". Please, close some running application and try again."
+msgstr "Not enough available memory. Please, close some running applications and try again."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid "The host name was empty. Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
+msgstr "The host name was empty. Please, check that your proxy settings are correct and try again."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
 msgstr "Attempt to log in failed."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid "The file contains invalid UTF-8 data. Probably, you are trying to revert a binary file."
-msgstr ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
+msgstr "The file contains invalid UTF-8 data. Probably, you are trying to revert a binary file."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "It is not possible to revert an Untitled document."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Could not save the file \"%s\"."
+msgstr "Could not save the file \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "The file \"%s\" already exists."
+msgstr "The file \"%s\" already exists"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
+msgstr "Please, check that you typed the location correctly."
 
 #: gedit/gedit-io-error-dialogs.c:668
 #: gedit/gedit-io-error-dialogs.c:674
@@ -2228,23 +2157,23 @@ msgstr "  OVR"
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid "Set the character encoding to be used to open the files listed on the command line"
 msgstr "Set the character encoding to be used to open the files listed on the command line"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Quit an existing instance of gedit"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Create a new toplevel window in an existing instance of gedit"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Create a new document in an existing instance of gedit"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "The specified encoding \"%s\" is not valid\n"
@@ -2430,36 +2359,36 @@ msgstr "Save all open files"
 msgid "Saves a copy of the current document to a local or remote location."
 msgstr "Sort the current document or selection."
 
-#: plugins/shell_output/shell_output.c:55
+#: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
 msgstr "_Run Command..."
 
-#: plugins/shell_output/shell_output.c:58
+#: plugins/shell_output/shell_output.c:59
 msgid "Run a command"
 msgstr "Run a command"
 
-#: plugins/shell_output/shell_output.c:159
-#: plugins/shell_output/shell_output.c:489
+#: plugins/shell_output/shell_output.c:156
+#: plugins/shell_output/shell_output.c:576
 msgid "Stopped"
 msgstr "Stopped"
 
-#: plugins/shell_output/shell_output.c:270
+#: plugins/shell_output/shell_output.c:355
 msgid "Run Command"
 msgstr "Run Command"
 
-#: plugins/shell_output/shell_output.c:289
+#: plugins/shell_output/shell_output.c:374
 msgid "_Run"
 msgstr "_Run"
 
-#: plugins/shell_output/shell_output.c:495
+#: plugins/shell_output/shell_output.c:582
 msgid "Done"
 msgstr "Done"
 
-#: plugins/shell_output/shell_output.c:497
+#: plugins/shell_output/shell_output.c:584
 msgid "Failed"
 msgstr "Failed"
 
-#: plugins/shell_output/shell_output.c:664
+#: plugins/shell_output/shell_output.c:754
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2469,7 +2398,7 @@ msgstr ""
 "\n"
 "Please, insert a valid shell command."
 
-#: plugins/shell_output/shell_output.c:683
+#: plugins/shell_output/shell_output.c:776
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2479,11 +2408,11 @@ msgstr ""
 "\n"
 "Please, insert a valid shell command."
 
-#: plugins/shell_output/shell_output.c:761
+#: plugins/shell_output/shell_output.c:854
 msgid "Executing command"
 msgstr "Executing command"
 
-#: plugins/shell_output/shell_output.c:829
+#: plugins/shell_output/shell_output.c:919
 msgid "An error occurred while running the selected command."
 msgstr "An error occurred while running the selected command."
 
@@ -2556,26 +2485,26 @@ msgstr "_Reverse order"
 msgid "_Sort"
 msgstr "_Sort"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:350
+#: plugins/spell/gedit-automatic-spell-checker.c:419
 #: plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
 msgstr "(no suggested words)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:374
+#: plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
 msgstr "_More..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:427
+#: plugins/spell/gedit-automatic-spell-checker.c:496
 msgid "_Ignore All"
 msgstr "_Ignore All"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:440
+#: plugins/spell/gedit-automatic-spell-checker.c:509
 msgid "_Add"
 msgstr "_Add"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:477
+#: plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "_Spelling Suggestions..."
 
@@ -2595,131 +2524,312 @@ msgstr "(correct spelling)"
 msgid "Completed spell checking"
 msgstr "Completed spell checking"
 
+#: plugins/spell/gedit-spell-checker.c:79
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
 #: plugins/spell/gedit-spell-checker.c:80
+#, fuzzy
+msgid "Amharic"
+msgstr "Arabic"
+
+#: plugins/spell/gedit-spell-checker.c:81
+msgid "Azerbaijani"
+msgstr "Azerbaijani"
+
+#: plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Belarusian"
+msgstr "Bulgarian"
+
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
 msgstr "Bulgarian"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "Bengali"
 msgstr "Bengali"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "Breton"
 msgstr "Breton"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "Catalan"
 msgstr "Catalan"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "Czech"
 msgstr "Czech"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "Welsh"
 msgstr "Welsh"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Danish"
 msgstr "Danish"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:90
+#, fuzzy
+msgid "German (Austria)"
+msgstr "German (Germany)"
+
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
 msgstr "German (Germany)"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "German (Swiss)"
 msgstr "German (Swiss)"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "English (American)"
 msgstr "English (American)"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "English (British)"
 msgstr "English (British)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "English (Canadian)"
 msgstr "English (Canadian)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Spanish"
 msgstr "Spanish"
 
-#: plugins/spell/gedit-spell-checker.c:95
+#: plugins/spell/gedit-spell-checker.c:99
+#, fuzzy
+msgid "Estonian"
+msgstr "Romanian"
+
+#: plugins/spell/gedit-spell-checker.c:100
+#, fuzzy
+msgid "Persian"
+msgstr "Print"
+
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
 msgstr "Finnish"
 
-#: plugins/spell/gedit-spell-checker.c:96
+#: plugins/spell/gedit-spell-checker.c:102
 msgid "Faroese"
 msgstr "Faroese"
 
-#: plugins/spell/gedit-spell-checker.c:97
+#: plugins/spell/gedit-spell-checker.c:103
 msgid "French (France)"
 msgstr "French (France)"
 
-#: plugins/spell/gedit-spell-checker.c:98
+#: plugins/spell/gedit-spell-checker.c:104
 msgid "French (Swiss)"
 msgstr "French (Swiss)"
 
-#: plugins/spell/gedit-spell-checker.c:99
-msgid "Irish (Gaeilge)"
-msgstr "Irish (Gaeilge)"
+#: plugins/spell/gedit-spell-checker.c:105
+#, fuzzy
+msgid "Irish"
+msgstr "Turkish"
 
-#: plugins/spell/gedit-spell-checker.c:100
+#: plugins/spell/gedit-spell-checker.c:106
+msgid "Scottish Gaelic"
+msgstr "Scottish Gaelic"
+
+#: plugins/spell/gedit-spell-checker.c:107
+#, fuzzy
+msgid "Gallegan"
+msgstr "Georgian"
+
+#: plugins/spell/gedit-spell-checker.c:108
+msgid "Manx Gaelic"
+msgstr "Manx Gaelic"
+
+#: plugins/spell/gedit-spell-checker.c:110
+#, fuzzy
+msgid "Hindi"
+msgstr "Find"
+
+#: plugins/spell/gedit-spell-checker.c:111
+#, fuzzy
+msgid "Croatian"
+msgstr "Catalan"
+
+#: plugins/spell/gedit-spell-checker.c:112
+msgid "Upper Sorbian"
+msgstr "Upper Sorbian"
+
+#: plugins/spell/gedit-spell-checker.c:113
+#, fuzzy
+msgid "Hungarian"
+msgstr "Bulgarian"
+
+#: plugins/spell/gedit-spell-checker.c:114
+msgid "Interlingua (IALA)"
+msgstr "Interlingua (IALA)"
+
+#: plugins/spell/gedit-spell-checker.c:115
+msgid "Indonesian"
+msgstr "Indonesian"
+
+#: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
 msgstr "Icelandic"
 
-#: plugins/spell/gedit-spell-checker.c:101
+#: plugins/spell/gedit-spell-checker.c:117
 msgid "Italian"
 msgstr "Italian"
 
-#: plugins/spell/gedit-spell-checker.c:102
+#: plugins/spell/gedit-spell-checker.c:118
+#, fuzzy
+msgid "Kurdish"
+msgstr "Turkish"
+
+#: plugins/spell/gedit-spell-checker.c:119
+#, fuzzy
+msgid "Latin"
+msgstr "Listing"
+
+#: plugins/spell/gedit-spell-checker.c:120
+msgid "Lithuanian"
+msgstr "Lithuanian"
+
+#: plugins/spell/gedit-spell-checker.c:121
+msgid "Latvian"
+msgstr "Latvian"
+
+#: plugins/spell/gedit-spell-checker.c:122
+msgid "Malagasy"
+msgstr "Malagasy"
+
+#: plugins/spell/gedit-spell-checker.c:123
+msgid "Maori"
+msgstr "Maori"
+
+#: plugins/spell/gedit-spell-checker.c:124
+msgid "Macedonian"
+msgstr "Macedonian"
+
+#: plugins/spell/gedit-spell-checker.c:125
+msgid "Mongolian"
+msgstr "Mongolian"
+
+#: plugins/spell/gedit-spell-checker.c:126
+msgid "Malay"
+msgstr "Malay"
+
+#: plugins/spell/gedit-spell-checker.c:127
+msgid "Maltese"
+msgstr "Maltese"
+
+#: plugins/spell/gedit-spell-checker.c:128
+#, fuzzy
+msgid "Norwegian Bokmal"
+msgstr "Norwegian"
+
+#: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "Dutch"
 
-#: plugins/spell/gedit-spell-checker.c:103
+#: plugins/spell/gedit-spell-checker.c:130
+#, fuzzy
+msgid "Norwegian Nynorsk"
+msgstr "Norwegian"
+
+#: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
 msgstr "Norwegian"
 
-#: plugins/spell/gedit-spell-checker.c:104
+#: plugins/spell/gedit-spell-checker.c:132
+msgid "Nyanja"
+msgstr "Nyanja"
+
+#: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
 msgstr "Polish"
 
-#: plugins/spell/gedit-spell-checker.c:105
+#: plugins/spell/gedit-spell-checker.c:134
 msgid "Portuguese (Portugal)"
 msgstr "Portuguese (Portugal)"
 
-#: plugins/spell/gedit-spell-checker.c:106
+#: plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Brazilian)"
 msgstr "Portuguese (Brazilian)"
 
-#: plugins/spell/gedit-spell-checker.c:107
+#: plugins/spell/gedit-spell-checker.c:136
+msgid "Quechua"
+msgstr "Quechua"
+
+#: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
 msgstr "Russian"
 
-#: plugins/spell/gedit-spell-checker.c:108
+#: plugins/spell/gedit-spell-checker.c:139
+msgid "Kinyarwanda"
+msgstr "Kinyarwanda"
+
+#: plugins/spell/gedit-spell-checker.c:140
+#, fuzzy
+msgid "Sardinian"
+msgstr "Ukrainian"
+
+#: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
 msgstr "Slovak"
 
-#: plugins/spell/gedit-spell-checker.c:109
+#: plugins/spell/gedit-spell-checker.c:142
 msgid "Slovenian"
 msgstr "Slovenian"
 
-#: plugins/spell/gedit-spell-checker.c:110
+#: plugins/spell/gedit-spell-checker.c:143
 msgid "Swedish"
 msgstr "Swedish"
 
-#: plugins/spell/gedit-spell-checker.c:111
+#: plugins/spell/gedit-spell-checker.c:144
+msgid "Swahili"
+msgstr "Swahili"
+
+#: plugins/spell/gedit-spell-checker.c:145
+#, fuzzy
+msgid "Tamil"
+msgstr "Thai"
+
+#: plugins/spell/gedit-spell-checker.c:146
+#, fuzzy
+msgid "Tetum"
+msgstr "Text"
+
+#: plugins/spell/gedit-spell-checker.c:147
+msgid "Tagalog"
+msgstr "Tagalog"
+
+#: plugins/spell/gedit-spell-checker.c:148
+msgid "Tswana"
+msgstr "Tswana"
+
+#: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
 msgstr "Ukrainian"
 
-#: plugins/spell/gedit-spell-checker.c:784
+#: plugins/spell/gedit-spell-checker.c:151
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: plugins/spell/gedit-spell-checker.c:153
+msgid "Walloon"
+msgstr "Walloon"
+
+#: plugins/spell/gedit-spell-checker.c:154
+msgid "Yiddish"
+msgstr "Yiddish"
+
+#: plugins/spell/gedit-spell-checker.c:155
+msgid "Zulu"
+msgstr "Zulu"
+
+#: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "Default"
 
@@ -4086,15 +4196,15 @@ msgstr "Header appendix"
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "Item"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr ""
+msgstr "Item with label"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - Tags"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
 #, fuzzy
@@ -4103,19 +4213,19 @@ msgstr "_Description"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
-msgstr ""
+msgstr "List enumerate"
 
 #: plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
-msgstr ""
+msgstr "List itemise"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "Maths (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "Maths (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
 #, fuzzy
@@ -4124,19 +4234,19 @@ msgstr "Open Location"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "Operator integral (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "Operator integral (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Operator sum (display)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Operator sum (inline)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
 #, fuzzy
@@ -4150,107 +4260,107 @@ msgstr "Preferences"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
-msgstr ""
+msgstr "Symbol &gt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol &gt;="
-msgstr ""
+msgstr "Symbol &gt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol &lt;&lt;"
-msgstr ""
+msgstr "Symbol &lt;&lt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:53
 msgid "Symbol &lt;="
-msgstr ""
+msgstr "Symbol &lt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr ""
+msgstr "Symbol and"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr ""
+msgstr "Symbol const"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "Symbol d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "Symbol d-by-dt-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "Symbol d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "Symbol dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "Symbol equiv"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr ""
+msgstr "Symbol hyphen --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr ""
+msgstr "Symbol hyphen ---"
 
 #: plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr ""
+msgstr "Symbol infinity"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Symbol mathspace ,"
 
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Symbol mathspace ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Symbol mathspace _"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Symbol mathspace __"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr ""
+msgstr "Symbol simeq"
 
 #: plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr ""
+msgstr "Symbol star"
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "Typeface bold"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "Typeface italic"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "Typeface slanted"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Typeface type"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "Unbreakable text"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - Axes"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
 #, fuzzy
@@ -4259,39 +4369,39 @@ msgstr "Elements"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - Functions"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "ancestor"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "ancestor-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "attribute"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "child"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "descendant"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "descendant-or-self"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "following"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "following-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
 #, fuzzy
@@ -4305,15 +4415,15 @@ msgstr "Open"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "preceding"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "preceding-sibling"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "self"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
