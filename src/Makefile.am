@@ -6,21 +6,21 @@ bin_PROGRAMS = gedit
 uidir = $(datadir)/gedit-2/ui/
 
 
-INCLUDES = \
-	-I$(top_srcdir) 				\
-	-I$(top_builddir) 				\
-	-I$(top_srcdir)/dialogs				\
-	$(GEDIT_CFLAGS) 				\
-	-DDATADIR=\""$(datadir)"\"			\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_LOCALEDIR=\""$(datadir)/locale"\" 	\
-	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\" 	\
-	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\" \
-	-DG_DISABLE_DEPRECATED				\
-	-DGDK_DISABLE_DEPRECATED			\
-	-DGTK_DISABLE_DEPRECATED			\
-	-DGDK_PIXBUF_DISABLE_DEPRECATED			\
+INCLUDES =							\
+	-I$(top_srcdir)						\
+	-I$(top_builddir)					\
+	-I$(top_srcdir)/dialogs					\
+	$(GEDIT_CFLAGS)						\
+	-DDATADIR=\""$(datadir)"\"				\
+	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"		\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
+	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\"		\
+	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
+	-DG_DISABLE_DEPRECATED					\
+	-DGDK_DISABLE_DEPRECATED				\
+	-DGTK_DISABLE_DEPRECATED				\
+	-DGDK_PIXBUF_DISABLE_DEPRECATED				\
 	-DGNOME_DISABLE_DEPRECATED
 
 gedit_LDFLAGS = -export-dynamic
