@@ -215,12 +215,20 @@ gedit_file_open (GeditDocument *doc, const gchar *fname)
 	    !(info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_TYPE) ||
 	    (info->type != GNOME_VFS_FILE_TYPE_REGULAR))
 	{
-		gchar *errstr = g_strdup_printf (_("An error was encountered while opening the file \"%s\"."
-					"\nPlease make sure the file exists."), fname);
-		gnome_app_error (gedit_window_active_app(), errstr);
-		g_free (errstr);
+		gchar *error_message;
 
-		if(result == GNOME_VFS_OK)
+		if (strstr (fname, ":/")== NULL) {
+			gedit_file_create_popup (fname);
+			return 0;
+		}
+			
+		error_message = g_strdup_printf (_("An error was encountered while opening the file \"%s\"."
+						   "\nPlease make sure the file exists."), fname);
+
+		gnome_app_error (gedit_window_active_app(), error_message);
+		g_free (error_message);
+
+		if (result == GNOME_VFS_OK)
 			gnome_vfs_file_info_clear (info);
 
 		return 1;
@@ -638,7 +646,7 @@ file_save_all (void)
 			
 			gedit_file_save (doc, NULL);
 			
-			if(fname == NULL)
+			if (fname == NULL)
 			{
 				last_file_saved = i;	
 				return;
@@ -1117,7 +1125,7 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 {
 	gedit_debug (DEBUG_FILE, "");
 
-	gedit_close_all_flag_status("File_close_all_cb. Before");
+	gedit_close_all_flag_status ("File_close_all_cb. Before");
 	
 	if (gedit_close_all_flag != GEDIT_CLOSE_ALL_FLAG_QUIT)
 		gedit_close_all_flag = GEDIT_CLOSE_ALL_FLAG_CLOSE_ALL;
@@ -1128,8 +1136,8 @@ file_close_all_cb (GtkWidget *widget, gpointer cbdata)
 	gnome_mdi_remove_all (mdi, FALSE);
 
 	/* If this close all was successful, clear the flag */
-	if (gedit_document_current()==NULL)
-		gedit_close_all_flag_clear();
+	if (gedit_document_current () == NULL)
+		gedit_close_all_flag_clear ();
 
 	gedit_window_set_widgets_sensitivity (FALSE);
 	

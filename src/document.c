@@ -500,7 +500,7 @@ remove_child_cb (GnomeMDI *mdi, GeditDocument *doc)
 		case 1:
 			return TRUE;
 		default:
-			gedit_close_all_flag_clear();
+			gedit_close_all_flag_clear ();
 			return FALSE;
 		}
 	}
