@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-10 13:49+0200\n"
+"POT-Creation-Date: 2004-10-29 21:30+0200\n"
 "PO-Revision-Date: 2004-08-21 19:14+0200\n"
 "Last-Translator: Jordi Mallach <jordi@sindominio.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -26,7 +26,7 @@ msgstr "Vista del gedit"
 msgid "Gedit View."
 msgstr "Vista del gedit."
 
-#: data/GNOME_Gedit.server.in.in.h:3 viewer/gedit-factory.c:53
+#: data/GNOME_Gedit.server.in.in.h:3
 msgid "Gedit viewer factory"
 msgstr "Factoria del visor del Gedit"
 
@@ -515,7 +515,7 @@ msgstr "_No ho desis"
 
 #
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
-#: gedit/gedit-file-selector-util.c:139 gedit/gedit-file.c:704
+#: gedit/gedit-file-selector-util.c:133 gedit/gedit-file.c:619
 msgid "Question"
 msgstr "Pregunta"
 
@@ -654,7 +654,7 @@ msgstr "Reempl_aça-ho tot"
 
 #
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:133
+#: gedit/gedit-file-selector-util.c:127
 msgid "_Replace"
 msgstr "_Reemplaça"
 
@@ -1213,7 +1213,7 @@ msgstr "C_onfigura el connector"
 #
 #: gedit/dialogs/plugin-manager.glade2.h:2
 msgid "_About Plugin"
-msgstr "Qu_an al Plugin"
+msgstr "Qu_an al connector"
 
 #: gedit/dialogs/plugin-manager.glade2.h:3
 msgid "button1"
@@ -1304,50 +1304,49 @@ msgstr "gedit"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "El gedit és un editor de text petit i lleuger pel GNOME Desktop"
 
-#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
+#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:634 gedit/gedit-document.c:652
+#: gedit/gedit-document.c:645 gedit/gedit-document.c:663
 msgid "Untitled"
 msgstr "Sense títol"
 
 #
-#: gedit/gedit-document.c:640 gedit/gedit-document.c:687
+#: gedit/gedit-document.c:651 gedit/gedit-document.c:698
 msgid "Invalid file name"
 msgstr "El nom del fitxer no és vàlid"
 
-#: gedit/gedit-document.c:838 gedit/gedit-document.c:1399
-#: viewer/gedit-persist-stream.c:120
+#: gedit/gedit-document.c:847 gedit/gedit-document.c:1395
 msgid "Invalid UTF-8 data"
 msgstr "Les dades UTF-8 no són vàlides"
 
-#: gedit/gedit-document.c:1725
+#: gedit/gedit-document.c:1696
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "No s'ha pogut llegir la informació de l'enllaç simbòlic per a %s"
 
-#: gedit/gedit-document.c:1771
+#: gedit/gedit-document.c:1742
 msgid "The file has too many symbolic links."
 msgstr "El fitxer té massa enllaços simbòlics."
 
-#: gedit/gedit-document.c:1827
+#: gedit/gedit-document.c:1800
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "El gedit no pot gestionar %s: ubicacions en el mode d'escriptura."
 
-#: gedit/gedit-document.c:1834
+#: gedit/gedit-document.c:1807
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr ""
 "El gedit no pot gestionar aquest tipus d'ubicació en el mode d'escriptura."
 
 #
-#: gedit/gedit-document.c:1847
+#: gedit/gedit-document.c:1820
 msgid "Invalid filename."
 msgstr "El nom del fitxer no és vàlid."
 
-#: gedit/gedit-document.c:1959
+#: gedit/gedit-document.c:1934
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1355,7 +1354,7 @@ msgstr ""
 "No hi ha suficient espai al disc per desar el fitxer.\n"
 "Allibereu espai de disc i torneu-ho a intentar."
 
-#: gedit/gedit-document.c:1964
+#: gedit/gedit-document.c:1939
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1366,7 +1365,7 @@ msgstr ""
 "tingui aquesta limitació."
 
 #
-#: gedit/gedit-document.c:2008
+#: gedit/gedit-document.c:1983
 msgid "Could not create a backup file."
 msgstr "No s'ha pogut crear una còpia de seguretat."
 
@@ -1497,83 +1496,83 @@ msgstr "Vietnamita"
 msgid "Thai"
 msgstr "Tailandès"
 
-#: gedit/gedit-file-selector-util.c:152
+#: gedit/gedit-file-selector-util.c:146
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "El fitxer \"%s\" ja existeix.\n"
 
-#: gedit/gedit-file-selector-util.c:153
+#: gedit/gedit-file-selector-util.c:147
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Voleu reemplaçar-lo pel que esteu desant?"
 
-#: gedit/gedit-file-selector-util.c:162
+#: gedit/gedit-file-selector-util.c:156
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
 msgstr "El fitxer \"%s\" és només de lectura.\n"
 
-#: gedit/gedit-file-selector-util.c:163
+#: gedit/gedit-file-selector-util.c:157
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Voleu intentar reemplaçar-lo pel que esteu desant?"
 
-#: gedit/gedit-file-selector-util.c:361
+#: gedit/gedit-file-selector-util.c:370
 msgid "All Files"
 msgstr "Tots els fitxers"
 
-#: gedit/gedit-file-selector-util.c:369
+#: gedit/gedit-file-selector-util.c:378
 msgid "All Text Files"
 msgstr "Tots els fitxers de text"
 
-#: gedit/gedit-file-selector-util.c:387
+#: gedit/gedit-file-selector-util.c:396
 msgid "Ch_aracter Coding:"
 msgstr "Codificació de c_aràcter:"
 
 #
-#: gedit/gedit-file-selector-util.c:533
+#: gedit/gedit-file-selector-util.c:541
 msgid "Select a file to open"
 msgstr "Seleccioneu un fitxer a obrir"
 
 #
-#: gedit/gedit-file-selector-util.c:559
+#: gedit/gedit-file-selector-util.c:566
 msgid "Select files to open"
 msgstr "Seleccioneu els fitxers a obrir"
 
 #
-#: gedit/gedit-file-selector-util.c:591
+#: gedit/gedit-file-selector-util.c:598
 msgid "Select a filename to save"
 msgstr "Seleccioneu el nom del fitxer a desar"
 
-#: gedit/gedit-file.c:215
+#: gedit/gedit-file.c:187
 msgid "Open File..."
 msgstr "Obre el fitxer..."
 
-#: gedit/gedit-file.c:271 gedit/gedit-file.c:424
+#: gedit/gedit-file.c:243 gedit/gedit-file.c:384
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "S'està desant el document «%s»..."
 
 #
-#: gedit/gedit-file.c:299 gedit/gedit-file.c:445
+#: gedit/gedit-file.c:271 gedit/gedit-file.c:401
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "No s'ha desat el document «%s»."
 
 #
-#: gedit/gedit-file.c:313 gedit/gedit-file.c:437
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:414
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "S'ha desat el document «%s»."
 
 #
-#: gedit/gedit-file.c:404
+#: gedit/gedit-file.c:366
 msgid "Save as..."
 msgstr "Anomena i desa..."
 
-#: gedit/gedit-file.c:605
+#: gedit/gedit-file.c:520
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Voleu recuperar els canvis no desats al document «%s»?"
 
-#: gedit/gedit-file.c:614
+#: gedit/gedit-file.c:529
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1585,14 +1584,14 @@ msgstr[0] ""
 msgstr[1] ""
 "Es perdran permanentment les modificacions realitzades els últims %ld segons."
 
-#: gedit/gedit-file.c:623
+#: gedit/gedit-file.c:538
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Es perdran permanentment les modificacions realitzades al document en "
 "l'últim minut."
 
-#: gedit/gedit-file.c:629
+#: gedit/gedit-file.c:544
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1607,7 +1606,7 @@ msgstr[1] ""
 "Es perdran permanentment les modificacions del document realitzades l'últim "
 "minut i %ld segons."
 
-#: gedit/gedit-file.c:639
+#: gedit/gedit-file.c:554
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1621,13 +1620,13 @@ msgstr[1] ""
 "Es perdran permanentment les modificacions del document realitzades els "
 "últims %ld minuts."
 
-#: gedit/gedit-file.c:654
+#: gedit/gedit-file.c:569
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Es perdran permanentment les modificacions realitzades al document en "
 "l'última hora."
 
-#: gedit/gedit-file.c:660
+#: gedit/gedit-file.c:575
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1642,7 +1641,7 @@ msgstr[1] ""
 "Es perdran permanentment les modificacions del document realitzades l'última "
 "hora i %d minuts."
 
-#: gedit/gedit-file.c:675
+#: gedit/gedit-file.c:590
 #, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
@@ -1653,69 +1652,69 @@ msgstr[0] ""
 msgstr[1] ""
 "Es perdran permanentment les modificacions realitzades les últimes %d hores."
 
-#: gedit/gedit-file.c:698 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:613 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Recupera"
 
-#: gedit/gedit-file.c:747
+#: gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "S'ha produït un error en recuperar el document \"%s\"."
 
 #
-#: gedit/gedit-file.c:754
+#: gedit/gedit-file.c:669
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "No s'ha recuperat el document \"%s\"."
 
 #
-#: gedit/gedit-file.c:758
+#: gedit/gedit-file.c:673
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "S'ha recuperat el document \"%s\"."
 
-#: gedit/gedit-file.c:786
+#: gedit/gedit-file.c:701
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "S'està recuperant el document \"%s\"..."
 
 #
-#: gedit/gedit-file.c:913
+#: gedit/gedit-file.c:824
 msgid "Could not read data from stdin."
 msgstr "No s'han pogut llegir les dades des d'stdin."
 
-#: gedit/gedit-file.c:1060
+#: gedit/gedit-file.c:926
 msgid "Reverting file:"
 msgstr "S'està recuperant el fitxer:"
 
-#: gedit/gedit-file.c:1060
+#: gedit/gedit-file.c:926
 msgid "Loading file:"
 msgstr "S'està carregant el fitxer:"
 
-#: gedit/gedit-file.c:1233 gedit/gedit-file.c:1392
+#: gedit/gedit-file.c:1099 gedit/gedit-file.c:1258
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "S'ha produït un error en carregar el fitxer «%s»"
 
 #
-#: gedit/gedit-file.c:1254
+#: gedit/gedit-file.c:1120
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "S'ha carregat el fitxer «%s»"
 
-#: gedit/gedit-file.c:1331
+#: gedit/gedit-file.c:1197
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "S'ha carregat %i fitxer"
 msgstr[1] "S'han carregat %i fitxers"
 
-#: gedit/gedit-file.c:1365
+#: gedit/gedit-file.c:1231
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "S'està carregant el fitxer \"%s\"..."
 
-#: gedit/gedit-file.c:1512
+#: gedit/gedit-file.c:1378
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1785,66 +1784,65 @@ msgid "Use %s highlight mode"
 msgstr "Utilitza el mode de ressaltat %s"
 
 #
-#: gedit/gedit-output-window.c:333
+#: gedit/gedit-output-window.c:378
 msgid "Close the output window"
 msgstr "Tanca la finestra de sortida"
 
-#: gedit/gedit-output-window.c:371
+#: gedit/gedit-output-window.c:416
 msgid "Copy selected lines"
 msgstr "Copia les línies seleccionades"
 
-#: gedit/gedit-output-window.c:391
+#: gedit/gedit-output-window.c:436
 msgid "Clear the output window"
 msgstr "Neteja la finestra de sortida"
 
-#: gedit/gedit-output-window.c:431
+#: gedit/gedit-output-window.c:476
 msgid "Output Lines"
 msgstr "Línies de sortida"
 
-#: gedit/gedit-plugins-engine.c:363
+#: gedit/gedit-plugins-engine.c:323
+#, c-format
+msgid "Error, impossible to destroy plugin '%s'"
+msgstr "S'ha produït un error, no es pot destruir el connector '%s'"
+
+#: gedit/gedit-plugins-engine.c:399
 #, c-format
 msgid "Error, unable to open module file '%s'\n"
 msgstr "S'ha produït un error, no es pot obrir el fitxer de mòdul '%s'\n"
 
-#: gedit/gedit-plugins-engine.c:373
+#: gedit/gedit-plugins-engine.c:409
 #, c-format
 msgid "Error, plugin '%s' does not contain init function."
 msgstr "S'ha produït un error, el connector '%s' no conté la funció init."
 
-#: gedit/gedit-plugins-engine.c:383
+#: gedit/gedit-plugins-engine.c:419
 #, c-format
 msgid "Error, plugin '%s' does not contain activate function."
 msgstr ""
 "S'ha produït un error, el connector '%s' no conté la funció d'activació."
 
-#: gedit/gedit-plugins-engine.c:393
+#: gedit/gedit-plugins-engine.c:429
 #, c-format
 msgid "Error, plugin '%s' does not contain deactivate function."
 msgstr ""
 "S'ha produït un error, el connector '%s' no conté la funció de desactivació."
 
-#: gedit/gedit-plugins-engine.c:418
+#: gedit/gedit-plugins-engine.c:454
 #, c-format
 msgid "Error, impossible to initialize plugin '%s'"
 msgstr "S'ha produït un error, no es pot inicialitzar el connector '%s'"
 
-#: gedit/gedit-plugins-engine.c:469
-#, c-format
-msgid "Error, impossible to destroy plugin '%s'"
-msgstr "S'ha produït un error, no es pot destruir el connector '%s'"
-
-#: gedit/gedit-plugins-engine.c:552 gedit/gedit-plugins-engine.c:640
-#: gedit/gedit-plugins-engine.c:765
+#: gedit/gedit-plugins-engine.c:492 gedit/gedit-plugins-engine.c:713
 #, c-format
 msgid "Error, impossible to activate plugin '%s'"
 msgstr "S'ha produït un error, no es pot activar el connector '%s'"
 
-#: gedit/gedit-plugins-engine.c:591 gedit/gedit-plugins-engine.c:783
+#: gedit/gedit-plugins-engine.c:545 gedit/gedit-plugins-engine.c:731
 #, c-format
 msgid "Error, impossible to deactivate plugin '%s'"
 msgstr "S'ha produït un error, no es pot desactivar el connector '%s'"
 
-#: gedit/gedit-plugins-engine.c:684
+#: gedit/gedit-plugins-engine.c:637
 #, c-format
 msgid "Error, impossible to update ui of the plugin '%s'"
 msgstr "S'ha produït un error, no es pot actualitzar ui del connector '%s'"
@@ -2334,7 +2332,7 @@ msgstr "_Desfés"
 msgid "_View"
 msgstr "_Vista"
 
-#: gedit/gedit-utils.c:425
+#: gedit/gedit-utils.c:422
 #, c-format
 msgid ""
 "Could not find the file \"%s\".\n"
@@ -2345,12 +2343,12 @@ msgstr ""
 "\n"
 "Comproveu que s'hagi escrit correctament la ubicació i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:433
+#: gedit/gedit-utils.c:430
 #, c-format
 msgid "Could not open the file \"%s\" because it contains corrupted data."
 msgstr "No s'ha pogut obrir el fitxer \"%s\" perquè conté dades corrompudes."
 
-#: gedit/gedit-utils.c:444
+#: gedit/gedit-utils.c:441
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit cannot handle %s: locations."
@@ -2358,12 +2356,12 @@ msgstr ""
 "No s'ha pogut obrir el fitxer \"%s\" perquè el gedit no pot gestionar "
 "ubicacions %s:."
 
-#: gedit/gedit-utils.c:450
+#: gedit/gedit-utils.c:447
 #, c-format
 msgid "Could not open the file \"%s\""
 msgstr "No s'ha pogut obrir el fitxer \"%s\""
 
-#: gedit/gedit-utils.c:460
+#: gedit/gedit-utils.c:457
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains data in an invalid format."
@@ -2371,12 +2369,12 @@ msgstr ""
 "No s'ha pogut obrir el fitxer \"%s\" perquè conté dades en un format no "
 "vàlid."
 
-#: gedit/gedit-utils.c:467
+#: gedit/gedit-utils.c:464
 #, c-format
 msgid "Could not open the file \"%s\" because it is too big."
 msgstr "No s'ha pogut obrir el fitxer \"%s\" perquè és massa gran."
 
-#: gedit/gedit-utils.c:474
+#: gedit/gedit-utils.c:471
 #, c-format
 msgid ""
 "\"%s\" is not a valid location.\n"
@@ -2387,12 +2385,12 @@ msgstr ""
 "\n"
 "Comproveu que la ubicació estigui ben escrita i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:482
+#: gedit/gedit-utils.c:479
 #, c-format
 msgid "Could not open the file \"%s\" because access was denied."
 msgstr "No s'ha pogut obrir el fitxer \"%s\" perquè s'ha negat l'accés."
 
-#: gedit/gedit-utils.c:489
+#: gedit/gedit-utils.c:486
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because there are too many open files.\n"
@@ -2402,7 +2400,7 @@ msgstr ""
 "No s'ha pogut obrir el fitxer \"%s\" perquè hi ha massa fitxers oberts.\n"
 "Tanqueu alguns fitxers oberts i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:497
+#: gedit/gedit-utils.c:494
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2413,7 +2411,7 @@ msgstr ""
 "\n"
 "Comproveu que la ubicació estigui ben escrita i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:505
+#: gedit/gedit-utils.c:502
 #, c-format
 msgid ""
 "Not enough available memory to open the file \"%s\". Please, close some "
@@ -2422,7 +2420,7 @@ msgstr ""
 "No hi ha prou memòria disponible per obrir el fitxer \"%s\". Tanqueu algunes "
 "de les aplicacions en marxa i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:525 gedit/gedit-utils.c:539 gedit/gedit-utils.c:566
+#: gedit/gedit-utils.c:522 gedit/gedit-utils.c:536 gedit/gedit-utils.c:563
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was invalid.\n"
@@ -2434,7 +2432,7 @@ msgstr ""
 "\n"
 "Comproveu que la ubicació estigui ben escrita i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:550
+#: gedit/gedit-utils.c:547
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2448,7 +2446,7 @@ msgstr ""
 "Comproveu que la ubicació estigui ben escrita i que els paràmetres del "
 "servidor intermediari siguin correctes i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:575
+#: gedit/gedit-utils.c:572
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the host name was empty.\n"
@@ -2461,7 +2459,7 @@ msgstr ""
 "Comproveu que els paràmetres del servidor intermediari siguin correctes i "
 "torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:584
+#: gedit/gedit-utils.c:581
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because the attempt to log in failed.\n"
@@ -2473,7 +2471,7 @@ msgstr ""
 "\n"
 "Comproveu que la ubicació estigui ben escrita i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:593 gedit/gedit-utils.c:666
+#: gedit/gedit-utils.c:590 gedit/gedit-utils.c:663
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because it contains invalid data.\n"
@@ -2484,12 +2482,12 @@ msgstr ""
 "\n"
 "Probablement esteu intentant obrir un fitxer binari."
 
-#: gedit/gedit-utils.c:602 gedit/gedit-utils.c:700
+#: gedit/gedit-utils.c:599 gedit/gedit-utils.c:697
 #, c-format
 msgid "Could not open the file \"%s\"."
 msgstr "No s'ha pogut obrir el fitxer «%s»."
 
-#: gedit/gedit-utils.c:642
+#: gedit/gedit-utils.c:639
 #, c-format
 msgid ""
 "Could not open the file \"%s\" because gedit has not been able to "
@@ -2506,7 +2504,7 @@ msgstr ""
 "seleccionant una codificació de caràcters al diàleg «Obre un fitxer...» (o "
 "«Obre una ubicació»)."
 
-#: gedit/gedit-utils.c:654 gedit/gedit-utils.c:684
+#: gedit/gedit-utils.c:651 gedit/gedit-utils.c:681
 #, c-format
 msgid ""
 "Could not open the file \"%s\" using the %s character coding.\n"
@@ -2522,7 +2520,7 @@ msgstr ""
 "seleccionant una codificació de caràcters al diàleg «Obre un fitxer...» (o "
 "«Obre una ubicació»)."
 
-#: gedit/gedit-utils.c:704
+#: gedit/gedit-utils.c:701
 #, c-format
 msgid ""
 "Could not open the file \"%s\".\n"
@@ -2533,12 +2531,12 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:756
+#: gedit/gedit-utils.c:753
 #, c-format
 msgid "Could not save the file \"%s\"."
 msgstr "No s'ha pogut desar el fitxer \"%s\"."
 
-#: gedit/gedit-utils.c:760
+#: gedit/gedit-utils.c:757
 #, c-format
 msgid ""
 "Could not save the file \"%s\".\n"
@@ -2549,7 +2547,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: gedit/gedit-utils.c:810
+#: gedit/gedit-utils.c:807
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot find it.\n"
@@ -2560,13 +2558,13 @@ msgstr ""
 "\n"
 "Potser s'ha suprimit recentment."
 
-#: gedit/gedit-utils.c:817
+#: gedit/gedit-utils.c:814
 #, c-format
 msgid "Could not revert the file \"%s\" because it contains corrupted data."
 msgstr ""
 "No s'ha pogut recuperar el fitxer \"%s\" perquè conté dades corrompudes."
 
-#: gedit/gedit-utils.c:828
+#: gedit/gedit-utils.c:825
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because gedit cannot handle %s: locations."
@@ -2574,13 +2572,13 @@ msgstr ""
 "No s'ha pogut recuperar el fitxer \"%s\" perquè el gedit no pot treballar "
 "amb ubicacions %s:."
 
-#: gedit/gedit-utils.c:834 gedit/gedit-utils.c:893 gedit/gedit-utils.c:904
-#: gedit/gedit-utils.c:988
+#: gedit/gedit-utils.c:831 gedit/gedit-utils.c:890 gedit/gedit-utils.c:901
+#: gedit/gedit-utils.c:985
 #, c-format
 msgid "Could not revert the file \"%s\"."
 msgstr "No s'ha pogut recuperar el fitxer \"%s\"."
 
-#: gedit/gedit-utils.c:844
+#: gedit/gedit-utils.c:841
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains data in an invalid "
@@ -2589,17 +2587,17 @@ msgstr ""
 "No s'ha pogut recuperar el fitxer \"%s\" perquè conté dades en un format no "
 "vàlid."
 
-#: gedit/gedit-utils.c:851
+#: gedit/gedit-utils.c:848
 #, c-format
 msgid "Could not revert the file \"%s\" because it is too big."
 msgstr "No s'ha pogut recuperar el fitxer \"%s\" perquè és massa gran."
 
-#: gedit/gedit-utils.c:858
+#: gedit/gedit-utils.c:855
 #, c-format
 msgid "Could not revert the file \"%s\" because access was denied."
 msgstr "No s'ha pogut recuperar el fitxer \"%s\" perquè s'ha negat l'accés."
 
-#: gedit/gedit-utils.c:865
+#: gedit/gedit-utils.c:862
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because there are too many open files.\n"
@@ -2610,7 +2608,7 @@ msgstr ""
 "\n"
 "Tanqueu-ne algun i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:873
+#: gedit/gedit-utils.c:870
 #, c-format
 msgid ""
 "Not enough available memory to revert the file \"%s\". Please, close some "
@@ -2619,7 +2617,7 @@ msgstr ""
 "No hi ha suficient memòria per recuperar el fitxer \"%s\". Tanqueu alguna "
 "aplicació en marxa i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:912
+#: gedit/gedit-utils.c:909
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
@@ -2632,7 +2630,7 @@ msgstr ""
 "Comproveu que els paràmetres del servidor intermediari siguin correctes i "
 "torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:927
+#: gedit/gedit-utils.c:924
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because the host name was empty.\n"
@@ -2645,14 +2643,14 @@ msgstr ""
 "Comproveu que els paràmetres del servidor intermediari siguin correctes i "
 "torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:934
+#: gedit/gedit-utils.c:931
 #, c-format
 msgid "Could not revert the file \"%s\" because the attempt to log in failed."
 msgstr ""
 "No s'ha pogut recuperar el fitxer \"%s\" perquè s'ha produït un error a "
 "l'intentar entrar."
 
-#: gedit/gedit-utils.c:941
+#: gedit/gedit-utils.c:938
 #, c-format
 msgid ""
 "Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
@@ -2665,16 +2663,16 @@ msgstr ""
 "Probablement esteu intentant recuperar un fitxer binari."
 
 #
-#: gedit/gedit-utils.c:950
+#: gedit/gedit-utils.c:947
 msgid "It is not possible to revert an Untitled document."
 msgstr "No es pot recuperar un document sense títol."
 
-#: gedit/gedit-utils.c:1039
+#: gedit/gedit-utils.c:1036
 #, c-format
 msgid "The file \"%s\" already exists."
 msgstr "El fitxer «%s» ja existeix."
 
-#: gedit/gedit-utils.c:1045
+#: gedit/gedit-utils.c:1042
 #, c-format
 msgid ""
 "\"%s\" is a directory.\n"
@@ -2686,7 +2684,7 @@ msgstr ""
 "Comproveu que la ubicació estigui ben escrita."
 
 #
-#: gedit/gedit-utils.c:1054
+#: gedit/gedit-utils.c:1051
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2697,7 +2695,7 @@ msgstr ""
 "\n"
 "Assegureu-vos que teniu els permisos d'escriptura necessaris."
 
-#: gedit/gedit-utils.c:1061
+#: gedit/gedit-utils.c:1058
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2708,7 +2706,7 @@ msgstr ""
 "\n"
 "El nom del fitxer és massa gran."
 
-#: gedit/gedit-utils.c:1068
+#: gedit/gedit-utils.c:1065
 #, c-format
 msgid ""
 "Cannot create the file \"%s\".\n"
@@ -2721,7 +2719,7 @@ msgstr ""
 "Un component del directori  del nom del fitxer no existeix o és un enllaç "
 "simbòlic trencat."
 
-#: gedit/gedit-utils.c:1077
+#: gedit/gedit-utils.c:1074
 #, c-format
 msgid ""
 "There is not enough disk space to create the file \"%s\".\n"
@@ -2732,10 +2730,14 @@ msgstr ""
 "\n"
 "Allibereu espai al disc i torneu-ho a intentar."
 
-#: gedit/gedit-utils.c:1083
+#: gedit/gedit-utils.c:1080
 #, c-format
 msgid "Could not create the file \"%s\"."
 msgstr "No s'ha pogut crear el fitxer «%s»."
+
+#: gedit/gedit-utils.c:1417
+msgid " (invalid Unicode)"
+msgstr " (Unicode invàlid)"
 
 #.
 #. if (col == chars)
@@ -2781,56 +2783,6 @@ msgstr "Crea un nou document en una instància existent del gedit"
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "La codificació especificada «%s» no és vàlida\n"
-
-#: plugins/changecase/changecase.c:43
-msgid "C_hange Case"
-msgstr "Ca_nvia les majúscules/minúscules"
-
-#: plugins/changecase/changecase.c:49
-msgid "All _Upper Case"
-msgstr "Tot en majúsc_ules"
-
-#: plugins/changecase/changecase.c:50
-msgid "All _Lower Case"
-msgstr "Tot en minúscu_les"
-
-#
-#: plugins/changecase/changecase.c:51
-msgid "_Invert Case"
-msgstr "_Inverteix les majúscules/minúscules"
-
-#
-#: plugins/changecase/changecase.c:52
-msgid "_Title Case"
-msgstr "Majúscules/minúscules del _títol"
-
-#
-#: plugins/changecase/changecase.c:54
-msgid "Change selected text to upper case"
-msgstr "Canvia el text seleccionat a majúscules"
-
-#
-#: plugins/changecase/changecase.c:55
-msgid "Change selected text to lower case"
-msgstr "Canvia el text seleccionat a minúscules"
-
-#
-#: plugins/changecase/changecase.c:56
-msgid "Invert the case of selected text"
-msgstr "Inverteix les majúscules/minúscules del text seleccionat"
-
-#: plugins/changecase/changecase.c:57
-msgid "Capitalize the first letter of each selected word"
-msgstr "Posa en majúscules la primera lletra de cada paraula seleccionada"
-
-#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
-msgid "Change Case"
-msgstr "Ca_nvia les majúscules/minúscules"
-
-#
-#: plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
-msgid "Changes the case of selected text."
-msgstr "Canvia les majúscules/minúscules del text seleccionat."
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -2936,36 +2888,36 @@ msgstr "Insereix el nom d'usuari a la posició del cursor"
 msgid "User name"
 msgstr "Nom del fitxer"
 
-#: plugins/shell_output/shell_output.c:56
+#: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
 msgstr "Executa una o_rdre..."
 
-#: plugins/shell_output/shell_output.c:59
+#: plugins/shell_output/shell_output.c:58
 msgid "Run a command"
 msgstr "Executa una ordre"
 
-#: plugins/shell_output/shell_output.c:161
-#: plugins/shell_output/shell_output.c:502
+#: plugins/shell_output/shell_output.c:159
+#: plugins/shell_output/shell_output.c:489
 msgid "Stopped"
 msgstr "Parat"
 
-#: plugins/shell_output/shell_output.c:282
+#: plugins/shell_output/shell_output.c:270
 msgid "Run Command"
 msgstr "Executa una ordre"
 
-#: plugins/shell_output/shell_output.c:301
+#: plugins/shell_output/shell_output.c:289
 msgid "_Run"
 msgstr "_Executa"
 
-#: plugins/shell_output/shell_output.c:508
+#: plugins/shell_output/shell_output.c:495
 msgid "Done"
 msgstr "Fet"
 
-#: plugins/shell_output/shell_output.c:510
+#: plugins/shell_output/shell_output.c:497
 msgid "Failed"
 msgstr "Ha fallat"
 
-#: plugins/shell_output/shell_output.c:676
+#: plugins/shell_output/shell_output.c:664
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2976,7 +2928,7 @@ msgstr ""
 "Si us plau, inseriu-ne una de vàlida."
 
 #
-#: plugins/shell_output/shell_output.c:695
+#: plugins/shell_output/shell_output.c:683
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2986,12 +2938,12 @@ msgstr ""
 "\n"
 "Inseriu-ne una de vàlida."
 
-#: plugins/shell_output/shell_output.c:773
+#: plugins/shell_output/shell_output.c:761
 msgid "Executing command"
 msgstr "S'està executant l'ordre"
 
 #
-#: plugins/shell_output/shell_output.c:841
+#: plugins/shell_output/shell_output.c:829
 msgid "An error occurred while running the selected command."
 msgstr "S'ha produït un error en executar l'ordre seleccionada."
 
@@ -3476,19 +3428,55 @@ msgstr "_Pregunta per un format"
 msgid "_Use custom format"
 msgstr "_Utilitza un format personalitzat"
 
-#: viewer/gedit-persist-stream.c:44
-msgid "Save method not implemented for gedit viewer"
-msgstr "El mètode de desat no està implementat per al visor de gedit"
+#~ msgid "C_hange Case"
+#~ msgstr "Ca_nvia les majúscules/minúscules"
+
+#~ msgid "All _Upper Case"
+#~ msgstr "Tot en majúsc_ules"
+
+#~ msgid "All _Lower Case"
+#~ msgstr "Tot en minúscu_les"
 
 #
-#: viewer/gedit-viewer-ui.xml.h:1
-msgid "Copy the selected text to the clipboard"
-msgstr "Copia el text seleccionat al portaretalls"
+#~ msgid "_Invert Case"
+#~ msgstr "_Inverteix les majúscules/minúscules"
 
 #
-#: viewer/gedit-viewer-ui.xml.h:2
-msgid "_Copy Text"
-msgstr "_Copia el text"
+#~ msgid "_Title Case"
+#~ msgstr "Majúscules/minúscules del _títol"
+
+#
+#~ msgid "Change selected text to upper case"
+#~ msgstr "Canvia el text seleccionat a majúscules"
+
+#
+#~ msgid "Change selected text to lower case"
+#~ msgstr "Canvia el text seleccionat a minúscules"
+
+#
+#~ msgid "Invert the case of selected text"
+#~ msgstr "Inverteix les majúscules/minúscules del text seleccionat"
+
+#~ msgid "Capitalize the first letter of each selected word"
+#~ msgstr "Posa en majúscules la primera lletra de cada paraula seleccionada"
+
+#~ msgid "Change Case"
+#~ msgstr "Ca_nvia les majúscules/minúscules"
+
+#
+#~ msgid "Changes the case of selected text."
+#~ msgstr "Canvia les majúscules/minúscules del text seleccionat."
+
+#~ msgid "Save method not implemented for gedit viewer"
+#~ msgstr "El mètode de desat no està implementat per al visor de gedit"
+
+#
+#~ msgid "Copy the selected text to the clipboard"
+#~ msgstr "Copia el text seleccionat al portaretalls"
+
+#
+#~ msgid "_Copy Text"
+#~ msgstr "_Copia el text"
 
 #~ msgid "The file \"%s\" does not exist. Would you like to create it?"
 #~ msgstr "El fitxer «%s» no existeix. Voleu crear-lo?"
@@ -3539,9 +3527,6 @@ msgstr "_Copia el text"
 
 #~ msgid "Turn on all debugging messages."
 #~ msgstr "Habilita tots els missatges de depuració."
-
-#~ msgid " (invalid Unicode)"
-#~ msgstr " (Unicode invàlid)"
 
 #~ msgid "Encoding for Saving"
 #~ msgstr "Codificació del desat"
