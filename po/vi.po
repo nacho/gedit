@@ -5,19 +5,36 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit for gnome v.2.1.x\n"
-"POT-Creation-Date: 2003-01-19 04:52+0100\n"
-"PO-Revision-Date: 2003-01-19 20:07+0700\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-03 12:14+0200\n"
+"PO-Revision-Date: 2003-07-24 15:15+0700\n"
 "Last-Translator: pclouds <pclouds@gmx.net>\n"
 "Language-Team: Gnome-Vi <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/GNOME_Gedit.server.in.h:1
+#: data/GNOME_Gedit.server.in.in.h:1
+msgid "Gedit View"
+msgstr "Khung xem Gedit"
+
+#: data/GNOME_Gedit.server.in.in.h:2
+msgid "Gedit View."
+msgstr "Khung xem Gedit."
+
+#: data/GNOME_Gedit.server.in.in.h:3 viewer/gedit-factory.c:53
+msgid "Gedit viewer factory"
+msgstr "Gedit viewer factory"
+
+#: data/GNOME_Gedit.server.in.in.h:4
+msgid "Source"
+msgstr "Mã nguồn"
+
+#: data/GNOME_Gedit.server.in.in.h:5
 msgid "gedit application"
 msgstr "ứng dụng gedit"
 
-#: data/GNOME_Gedit.server.in.h:2
+#: data/GNOME_Gedit.server.in.in.h:6
 msgid "gedit automation factory"
 msgstr "gedit automation factory"
 
@@ -25,7 +42,7 @@ msgstr "gedit automation factory"
 msgid "Edit text files"
 msgstr "Hiệu chỉnh file text"
 
-#: data/gedit.desktop.in.h:2 src/gedit2.c:340
+#: data/gedit.desktop.in.h:2 gedit/gedit2.c:363
 msgid "Text Editor"
 msgstr "Trình hiệu chỉnh text"
 
@@ -38,22 +55,26 @@ msgstr ""
 "tắt tùy chọn \"Dùng font mặc định\"."
 
 #: data/gedit.schemas.in.h:2
+msgid "Auto Detected Encodings"
+msgstr "Tự động dò tìm bảng mã"
+
+#: data/gedit.schemas.in.h:3
 msgid "Auto Save"
 msgstr "Tự động lưu"
 
-#: data/gedit.schemas.in.h:3
+#: data/gedit.schemas.in.h:4
 msgid "Auto Save Interval"
 msgstr "Khoảng tự động lưu"
 
-#: data/gedit.schemas.in.h:4
+#: data/gedit.schemas.in.h:5
 msgid "Auto indent"
 msgstr "Tự động thụt lề"
 
-#: data/gedit.schemas.in.h:5
+#: data/gedit.schemas.in.h:6
 msgid "Background Color"
 msgstr "Màu nền"
 
-#: data/gedit.schemas.in.h:6
+#: data/gedit.schemas.in.h:7
 msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -61,7 +82,7 @@ msgstr ""
 "Màu nền cho phần chữ được chọn trong vùng biên soạn. Chỉ có tác dụng nếu tắt "
 "tùy chọn \"Dùng màu mặc định\"."
 
-#: data/gedit.schemas.in.h:7
+#: data/gedit.schemas.in.h:8
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -69,37 +90,35 @@ msgstr ""
 "Màu nền cho phần chữ không chọn trong vùng biên soạn. Chỉ có tác dụng nếu "
 "tắt tùy chọn \"Dùng màu mặc định\"."
 
-#: data/gedit.schemas.in.h:8
+#: data/gedit.schemas.in.h:9
 msgid "Backup Copy Extension"
 msgstr "Phần mở rộng bản sao lưu"
 
-#: data/gedit.schemas.in.h:9
+#: data/gedit.schemas.in.h:10
 msgid "Body Font for Printing"
 msgstr "Font chính để in"
 
-#: data/gedit.schemas.in.h:10
+#: data/gedit.schemas.in.h:11
 msgid "Create Backup Copies"
 msgstr "Tạo bản sao lưu"
 
-#: data/gedit.schemas.in.h:11
+#: data/gedit.schemas.in.h:12
 msgid "Display Line Numbers"
 msgstr "Hiện số dòng"
 
-#: data/gedit.schemas.in.h:12
+#: data/gedit.schemas.in.h:13
 msgid "Editor Font"
 msgstr "Font bộ biên soạn"
 
-#: data/gedit.schemas.in.h:13
+#: data/gedit.schemas.in.h:14
 msgid "Encoding for Saving"
-msgstr "Dạng mã hóa khi lưu"
-
-#: data/gedit.schemas.in.h:14 src/dialogs/gedit-preferences-dialog.c:2292
-#: src/dialogs/gedit-encodings-dialog.c:257
-#: src/dialogs/gedit-encodings-dialog.glade2.h:2
-msgid "Encodings"
-msgstr "Mã hóa"
+msgstr "Bảng mã lưu"
 
 #: data/gedit.schemas.in.h:15
+msgid "Encodings shown in menu"
+msgstr "Bảng mã trong menu"
+
+#: data/gedit.schemas.in.h:16
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -107,7 +126,7 @@ msgstr ""
 "Phần mở rộng dùng cho tên tập tin sao lưu. Chỉ có tác dụng nếu bật tùy chọn "
 "\"Tạo bản sao lưu\"."
 
-#: data/gedit.schemas.in.h:16
+#: data/gedit.schemas.in.h:17
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -115,7 +134,7 @@ msgstr ""
 "Màu chữ cho phần chữ được chọn trong vùng biên soạn. Chỉ có tác dụng nếu tắt "
 "tùy chọn \"Dùng màu mặc định\"."
 
-#: data/gedit.schemas.in.h:17
+#: data/gedit.schemas.in.h:18
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -123,11 +142,11 @@ msgstr ""
 "Màu chữ cho phần chữ không được chọn trong vùng biên soạn. Chỉ có tác dụng "
 "nếu tắt tùy chọn \"Dùng màu mặc định\"."
 
-#: data/gedit.schemas.in.h:18
+#: data/gedit.schemas.in.h:19
 msgid "Header Font for Printing"
 msgstr "Font header để in"
 
-#: data/gedit.schemas.in.h:19
+#: data/gedit.schemas.in.h:20
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -136,35 +155,33 @@ msgstr ""
 "Nếu là 0 thì không chèn số dòng vào tài liệu khi in. Nếu không thì gedit sẽ "
 "in số dòng mỗi hàng."
 
-#: data/gedit.schemas.in.h:20
+#: data/gedit.schemas.in.h:21
 msgid "Insert spaces"
 msgstr "Chèn khoảng cách"
 
-#: data/gedit.schemas.in.h:21
+#: data/gedit.schemas.in.h:22
 msgid "Line Number Font for Printing"
 msgstr "Font số dòng để in"
 
-#: data/gedit.schemas.in.h:22
+#: data/gedit.schemas.in.h:23
 msgid "Line Wrapping Mode"
 msgstr "Chế độ cuộn dòng"
 
-#: data/gedit.schemas.in.h:23
-msgid ""
-"List of encodings used by gedit for reading files not encoded in UTF-8 or in "
-"the current locale encoding."
-msgstr ""
-"Danh sách mã hóa dùng cho Gedit để đọc tập tin không mã hóa theo UTF-8 hoặc "
-"theo mã hóa bản địa hiện thời."
-
 #: data/gedit.schemas.in.h:24
+msgid ""
+"List of encodings shown in Character Coding menu in open/save file selector. "
+"Only recognized encodings are used."
+msgstr "Danh sách bảng mã hiển thị trong Menu Bảng mã trong hộp thoại mở/lưu tập tin. Chỉ dùng những bảng mã được công nhận."
+
+#: data/gedit.schemas.in.h:25
 msgid "Maximum Recent Files"
 msgstr "Các tập tin gần đây tối đa"
 
-#: data/gedit.schemas.in.h:25
+#: data/gedit.schemas.in.h:26
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "Số tối đa các hành động Hoàn Lại/Làm Lại có thể thực hiện."
 
-#: data/gedit.schemas.in.h:26
+#: data/gedit.schemas.in.h:27
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -172,35 +189,38 @@ msgstr ""
 "Số phút sau khi gedit tự động lưu các thay đổi trong tập tin. Chỉ có tác "
 "dụng nế bật tùy chọn \"Tự động lưu\"."
 
-#: data/gedit.schemas.in.h:27
+#: data/gedit.schemas.in.h:28
 msgid "Print Header"
 msgstr "In header"
 
-#: data/gedit.schemas.in.h:28
+#: data/gedit.schemas.in.h:29
 msgid "Print Line Numbers"
 msgstr "In số dòng"
 
-#: data/gedit.schemas.in.h:29
+#: data/gedit.schemas.in.h:30
+msgid "Print Syntax Highlighting"
+msgstr "In tô sáng cú pháp"
+
+#: data/gedit.schemas.in.h:31
 msgid "Printing Line Wrapping Mode"
 msgstr "Chế độ cuộn dòng in"
 
-#: data/gedit.schemas.in.h:30
+#: data/gedit.schemas.in.h:32
 msgid "Selected Text Color"
 msgstr "Màu chữ được chọn"
 
-#: data/gedit.schemas.in.h:31
+#: data/gedit.schemas.in.h:33
 msgid "Selection Color"
 msgstr "Màu vùng chọn"
 
-#: data/gedit.schemas.in.h:32
-msgid "Show Cursor Position"
-msgstr "Hiện vị trí con trỏ"
-
-#: data/gedit.schemas.in.h:33
-msgid "Show Overwrite Mode"
-msgstr "Hiện chế độ ghi đè"
-
 #: data/gedit.schemas.in.h:34
+msgid ""
+"Sorted list of encodings used by gedit for auto-detecting the encoding of a "
+"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
+"are used."
+msgstr "Danh sách sắp xếp các bảng mã được dùng bởi gedit để tự động tìm bảng mã của tập tin. \"CURRENT\" là bảng mã locale hiện thời. Chỉ dùng những bảng mã được công nhận."
+
+#: data/gedit.schemas.in.h:35
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -212,7 +232,7 @@ msgstr ""
 "cuộn, \"GTK_WRAP_WORD\" nếu cuốn theo biên từ, và \"GTK_WRAP_CHAR\" nếu cuộn "
 "theo các ký tự. Chú ý các giá trị này cần viết hoa."
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:36
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -225,12 +245,12 @@ msgstr ""
 "\"GTK_WRAP_CHAR\" nếu cuộn theo các ký tự. Chú ý các giá trị này cần viết "
 "hoa."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:37
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Xác định font dùng khi in phần thân tài liệu."
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:38
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -238,14 +258,14 @@ msgstr ""
 "Xác định font dùng in số dòng. Chỉ có tác dụng nếu tùy chọn \"In số dòng\" "
 "khác không."
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:39
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
 "Xác định font để in header. Chỉ có tác dụng nếu bật tùy chọn \"In header\"."
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:40
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -253,17 +273,17 @@ msgstr ""
 "Xác định số tối đa các tập tin được mở gần đây sẽ được hiển thị trong menu "
 "con \"Các tập tin gần đây\"."
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:41
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Xác định số khoảng trắng được hiển thị thay vì ký tự Tab."
 
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:42
 msgid "Status Bar is Visible"
 msgstr "Hiện thanh trạng thái"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:43
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -279,15 +299,15 @@ msgstr ""
 "tượng. Chú ý là phải viết hoa các giá trị để đảm bảo chúng được hiển thị "
 "đúng như đã nói."
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:44
 msgid "Tab Size"
 msgstr "Cỡ tab"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:45
 msgid "Text Color"
 msgstr "Màu chữ"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:46
 msgid ""
 "The encoding method to use for saving files. Possible values are "
 "\"GEDIT_SAVE_ALWAYS_UTF8\" for mandatory UTF-8 saving, "
@@ -310,27 +330,27 @@ msgstr ""
 "gốc (tập tin mới sẽ dùng dạng tùy theo locale). Nếu chuyển đổi không thành "
 "công thì sẽ dùng UTF-8. Chú ý viết đúng chữ hoa."
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:47
 msgid "Toolbar Buttons Style"
 msgstr "Kiểu nút thanh công cụ"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:48
 msgid "Toolbar is Visible"
 msgstr "Hiện Thanh công cụ"
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:49
 msgid "Undo Actions Limit"
 msgstr "Giới hạn hoàn lại"
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:50
 msgid "Use Default Colors"
 msgstr "Dùng màu mặc định"
 
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:51
 msgid "Use Default Font"
 msgstr "Dùng font mặc định"
 
-#: data/gedit.schemas.in.h:51
+#: data/gedit.schemas.in.h:52
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -339,7 +359,7 @@ msgstr ""
 "Gedit nên tự động lưu các tập tin sau mỗi khoảng thời gian. Bạn có thể đặt "
 "khoảng thời gian với tùy chọn \"Khoảng tự động lưu\"."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:53
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -347,44 +367,30 @@ msgstr ""
 "Gedit nên tạo bản sao các tập tin khi lưu. Bạn có thể đặt phần mở rộng tập "
 "tin bằng tùy chọn \"Phần mở rộng bản sao lưu\"."
 
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:54
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Gedit hiển thị số dòng trong vùng biên soạn."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:55
 msgid "Whether gedit should enable auto indentation."
 msgstr "Cho Gedit bật chạy việc thụt lề tự động hay không."
 
-#: data/gedit.schemas.in.h:55
+#: data/gedit.schemas.in.h:56
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Gedit sẽ in header."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:57
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Cho Gedit chèn các dấu cách thay cho các tab hay không."
 
-#: data/gedit.schemas.in.h:57
-msgid ""
-"Whether the status bar at the bottom of editing windows should be visible."
-msgstr "Hiển thị thanh trạng thái ở đáy cửa sổ soạn thảo."
-
 #: data/gedit.schemas.in.h:58
-msgid ""
-"Whether the status bar should show the cursor position in editing windows. "
-"Make sure you turn on the \"Status Bar is Visible\" option for this to take "
-"effect."
-msgstr ""
-"Hiện vị trí con trỏ trong thanh trạng thái. Chỉ có tác dụng nếu bật tùy chọn "
-"\"Hiện thanh trạng thái\"."
+msgid "Whether gedit should print syntax highlighting when printing documents."
+msgstr "Gedit có nên in cú pháp được tô sáng hay không."
 
 #: data/gedit.schemas.in.h:59
 msgid ""
-"Whether the status bar should show the insert/overwrite mode in editing "
-"windows. Make sure you turn on the \"Status Bar is Visible\" option for this "
-"to take effect."
-msgstr ""
-"Hiện chế độ chèn/ghi đè trong thanh trạng thái. Chỉ có tác dụng nếu bật tùy "
-"chọn \"Hiện thanh trạng thái\"."
+"Whether the status bar at the bottom of editing windows should be visible."
+msgstr "Hiển thị thanh trạng thái ở đáy cửa sổ soạn thảo."
 
 #: data/gedit.schemas.in.h:60
 msgid "Whether the toolbar should be visible in editing windows."
@@ -411,259 +417,2082 @@ msgstr ""
 "tùy chọn này thì sẽ dùng tùy chọn \"Font bộ biên soạn\" thay thế font hệ "
 "thống."
 
-#: plugins/ASCII/ascii.c:43
-msgid "_ASCII Table"
-msgstr "Bảng _ASCII"
+#: gedit/bonobo-mdi.c:549 gedit/bonobo-mdi.c:1962
+#, c-format
+msgid "Activate %s"
+msgstr "Kích hoạt %s"
 
-#: plugins/ASCII/ascii.c:46
-msgid "Pop-up a dialog containing an ASCII Table"
-msgstr "Hiện hộp thoại chứa bảng mã ASCII"
+#: gedit/dialogs/gedit-dialog-goto-line.c:161
+msgid "Go to Line"
+msgstr "Đi tới Dòng"
 
-#: plugins/ASCII/ascii.c:303
-msgid "Char"
-msgstr "Ký tự"
+#. Add Goto Line button
+#: gedit/dialogs/gedit-dialog-goto-line.c:171
+msgid "_Go to Line"
+msgstr "_Đi tới Dòng"
 
-#: plugins/ASCII/ascii.c:310
-msgid "Dec#"
-msgstr "Thập phân#"
+#: gedit/dialogs/gedit-dialog-goto-line.c:187
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:100
+#: plugins/spell/gedit-spell-language-dialog.c:233
+#, c-format
+msgid "Could not find the required widgets inside %s."
+msgstr "Không thể tìm thấy widget yêu cầu trong %s."
 
-#: plugins/ASCII/ascii.c:317
-msgid "Hex#"
-msgstr "Thập lục phân#"
+#: gedit/dialogs/gedit-dialog-replace.c:136
+#: gedit/dialogs/gedit-dialog-replace.c:1141 gedit/gedit-commands.c:400
+#, c-format
+msgid "The text \"%s\" was not found."
+msgstr "Không tìm thấy đoạn text \"%s\"."
 
-#: plugins/ASCII/ascii.c:324
-msgid "Name"
-msgstr "Tên"
+#: gedit/dialogs/gedit-dialog-replace.c:269 gedit/dialogs/replace.glade2.h:4
+#: gedit/gedit-ui.xml.h:46
+msgid "Replace"
+msgstr "Thay thế"
 
-#: plugins/ASCII/ascii.c:369
-msgid "ASCII Table"
-msgstr "Bảng ASCII"
+#: gedit/dialogs/gedit-dialog-replace.c:280
+msgid "Replace _All"
+msgstr "Thay thế tất _cả"
 
-#: plugins/ASCII/ascii.c:382 plugins/ASCII/asciitable.glade2.h:2
-msgid "_Insert char"
-msgstr "_Chèn ký tự"
+#. Add Replace button
+#: gedit/dialogs/gedit-dialog-replace.c:283
+#: gedit/gedit-file-selector-util.c:131
+msgid "_Replace"
+msgstr "T_hay thế"
 
-#: plugins/ASCII/asciitable.glade2.h:1
-#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:1
-msgid "ASCII table"
-msgstr "Bảng ASCII"
+#: gedit/dialogs/gedit-dialog-replace.c:407 gedit/gedit-ui.xml.h:17
+msgid "Find"
+msgstr "_Tìm"
 
-#: plugins/ASCII/ascii.gedit-plugin.desktop.in.h:2
-msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
-msgstr "Plugin này hiển thị bảng mã ASCII"
+#: gedit/dialogs/gedit-dialog-replace.c:1150
+#, c-format
+msgid "Found and replaced %d occurrences."
+msgstr "Đã tìm thấy và thay thế %d lần."
 
-#. AFAIK, all cvs commit messages start with this
-#: plugins/cvschangelog/cvschangelog.c:49
-msgid "Open CVS Chan_geLogs"
-msgstr "Mở CVS ChangeLog"
+#: gedit/dialogs/gedit-dialog-uri.c:87
+msgid "Open Location"
+msgstr "Mở địa điểm"
 
-#: plugins/cvschangelog/cvschangelog.c:52
-msgid "Searches for ChangeLogs in the current document and opens them"
-msgstr "Tìm các ChangeLog trong tài liệu hiện thời và mở chúng"
+#: gedit/dialogs/gedit-encodings-dialog.c:76
+#, c-format
+msgid "There was an error displaying help: %s"
+msgstr "Lỗi hiển thị trợ giúp: %s"
 
-#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:1
-msgid "A plugin that opens ChangeLogs found in CVS commit messages."
-msgstr "Plugin mở các ChangeLog được tìm thấy trong thông báo commit của CVS."
+#: gedit/dialogs/gedit-encodings-dialog.c:381
+#: gedit/dialogs/gedit-encodings-dialog.c:449
+msgid "_Description"
+msgstr "Mô tả"
 
-#: plugins/cvschangelog/cvschangelog.gedit-plugin.desktop.in.h:2
-msgid "CVS ChangeLog"
-msgstr "CVS ChangeLog"
+#: gedit/dialogs/gedit-encodings-dialog.c:390
+#: gedit/dialogs/gedit-encodings-dialog.c:458
+msgid "_Encoding"
+msgstr "Bảng _mã"
 
-#: plugins/diff/diff.c:65
-msgid "Co_mpare Files..."
-msgstr "_So sánh tập tin..."
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:1
+msgid "A_vailable encodings:"
+msgstr "Bảng mã _hỗ trợ:"
 
-#: plugins/diff/diff.c:68
-msgid "Makes a diff file from two documents or files"
-msgstr "Tạo tập tin diff từ hai tài liệu hoặc hai tập tin"
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:2
+msgid "Character codings"
+msgstr "Bảng mã"
 
-#. Create the dialog
-#: plugins/diff/diff.c:271 plugins/diff/diff.gedit-plugin.desktop.in.h:1
-msgid "Compare Files"
-msgstr "So sánh tập tin"
+#: gedit/dialogs/gedit-encodings-dialog.glade2.h:3
+msgid "E_ncodings shown in menu:"
+msgstr "_Bảng mã trong menu:"
 
-#: plugins/diff/diff.c:285
-msgid "C_ompare"
-msgstr "_So sánh"
+#: gedit/dialogs/gedit-page-setup-dialog.c:490
+msgid "Body font picker"
+msgstr "Bộ chọn font body"
 
-#: plugins/diff/diff.c:513
-msgid "Executed command"
-msgstr "Lệnh được thực thi"
-
-#: plugins/diff/diff.c:652
-msgid "The two documents you selected are the same."
-msgstr "Hai tài liệu bạn đã chọn hoàn toàn giống nhau."
-
-#: plugins/diff/diff.c:660
+#: gedit/dialogs/gedit-page-setup-dialog.c:491
 msgid ""
-"The \"first\" file you selected does not exist.\n"
-"\n"
-"Please provide a valid file."
-msgstr ""
-"Tài liệu đầu tiên được chọn không tồn tại.\n"
-"\n"
-"Vui lòng chọn lại."
+"Push this button to select the font to be used to print the body of the "
+"document"
+msgstr "Nhấn nút này để chọn font được dùng khi in phần thân tài liệu"
 
-#: plugins/diff/diff.c:669
+#: gedit/dialogs/gedit-page-setup-dialog.c:492
+msgid "Page headers font picker"
+msgstr "Bộ chọn font header trang"
+
+#: gedit/dialogs/gedit-page-setup-dialog.c:493
 msgid ""
-"The \"second\" file you selected does not exist.\n"
-"\n"
-"Please provide a valid file."
-msgstr ""
-"Tài liệu thứ hai được chọn không tồn tại.\n"
-"\n"
-"Vui lòng chọn lại."
+"Push this button to select the font to be used to print the page headers"
+msgstr "Nhấn nút này để chọn font cần dùng khi in tiêu đề trang"
 
-#: plugins/diff/diff.c:677
-msgid "The two files you selected are the same."
-msgstr "Hai tập tin bạn chọn hoàn toàn giống nhau."
+#: gedit/dialogs/gedit-page-setup-dialog.c:494
+msgid "Line numbers font picker"
+msgstr "Bộ chọn font Số dòng"
 
-#: plugins/diff/diff.c:695
-msgid "The \"first\" document contains no text."
-msgstr "Tài liệu đầu tiên không chứa text."
+#: gedit/dialogs/gedit-page-setup-dialog.c:495
+#: gedit/dialogs/gedit-preferences-dialog.c:1888
+msgid "Push this button to select the font to be used to print line numbers"
+msgstr "Nhấn nút này để chọn fon cần dùng khi in số dòng"
 
-#: plugins/diff/diff.c:730
-msgid "The \"second\" document contains no text."
-msgstr "Tài liệu thứ hai không chứa text."
+#: gedit/dialogs/gedit-page-setup-dialog.c:587
+msgid "Could not find '"
+msgstr "Không thể tìm thấy '"
 
-#. FIXME: do better error reporting ... . Chema
-#: plugins/diff/diff.c:756
+#: gedit/dialogs/gedit-page-setup-dialog.c:587
+#: gedit/dialogs/gedit-page-setup-dialog.c:629
 msgid ""
-"Impossible to compare the selected documents.\n"
+"page-setup-dialog.glade2'.\n"
 "\n"
-"gedit could not create a temporary file."
+"Reinstall gedit."
 msgstr ""
-"Không thể so sánh những tài liệu được chọn.\n"
+"page-setup-dialog.glade2'.\n"
 "\n"
-"gedit không thể tạo tập tin tạm."
+"Hãy cài đặt lại gedit."
 
-#: plugins/diff/diff.c:776 plugins/diff/diff.c:789
+#: gedit/dialogs/gedit-page-setup-dialog.c:628
+msgid "Could not find the required widgets inside '"
+msgstr "Không thể tìm thấy widget yêu cầu trong '"
+
+#: gedit/dialogs/gedit-plugin-manager.c:53
+msgid "Plugin"
+msgstr "Plugin"
+
+#: gedit/dialogs/gedit-plugin-manager.c:54
+msgid "Enabled"
+msgstr "Bật"
+
+#: gedit/dialogs/gedit-plugin-manager.c:507
+msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
+msgstr "Không thể tìm thấy plugin-manager.glade2, hãy cài đặt lại gedit.\n"
+
+#: gedit/dialogs/gedit-plugin-manager.c:525
+msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
+msgstr ""
+"Tập tin glade của trình quản lý plugin không hợp lệ -- không có widget nào "
+"được tìm thấy.\n"
+
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:78
+#: gedit/dialogs/program-location-dialog.glade2.h:2
+msgid "Set program location..."
+msgstr "Định vị trí chương trình..."
+
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:106
+#, c-format
 msgid ""
-"Impossible to compare the selected documents.\n"
+"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
+"task.\n"
 "\n"
-"Error executing the diff command."
+"Please, specify the location of the <tt>%s</tt> program."
 msgstr ""
-"Không thể so sánh các tài liệu được chọn.\n"
+"Plugin %s dùng chương trình bên ngoài, gọi là <tt>%s</tt>, để thực công "
+"việc.\n"
 "\n"
-"Có lỗi khi thực hiện lệnh diff."
+"Vui lòng xác định vị trí của chương trình <tt>%s</tt>."
 
-#: plugins/diff/diff.c:811
-msgid "No differences were found between the selected documents."
-msgstr "Không có khác biệt nào giữa những tài liệu được chọn."
+#: gedit/dialogs/gedit-plugin-program-location-dialog.c:152
+msgid "The selected file is not executable."
+msgstr "Tập tin được chọn không phải là tập tin thực thi."
 
-#: plugins/diff/diff.c:852
+#: gedit/dialogs/gedit-preferences-dialog.c:243
+msgid "Font & Colors"
+msgstr "Font & Màu sắc"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:245
+#: gedit/dialogs/gedit-preferences.glade2.h:47
+msgid "Tabs"
+msgstr "Tab"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:246
+msgid "Wrap Mode"
+msgstr "Chế độ ngắt dòng"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:247
+msgid "Auto Indent"
+msgstr "Tự động thụt lề"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:248
+msgid "Line Numbers"
+msgstr "Số dòng"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:250 gedit/gedit-ui.xml.h:27
+msgid "Open"
+msgstr "Mở"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:252
+#: gedit/dialogs/gedit-preferences.glade2.h:42 gedit/gedit-ui.xml.h:50
+msgid "Save"
+msgstr "Lưu"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:253
+#: gedit/dialogs/gedit-preferences.glade2.h:50 gedit/gedit-ui.xml.h:68
+msgid "Undo"
+msgstr "Hoàn lại"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:262
+msgid "Page"
+msgstr "Trang"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:264
+#: gedit/dialogs/page-setup-dialog.glade2.h:6
+msgid "Fonts"
+msgstr "Font"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:272
+msgid "Manager"
+msgstr "Bộ quản lý"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:280
+msgid "Editor"
+msgstr "Trình hiệu chỉnh"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:282
+#: gedit/dialogs/gedit-preferences.glade2.h:38 gedit/gedit-print.c:217
+#: gedit/gedit-ui.xml.h:37
+msgid "Print"
+msgstr "In"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:284
+msgid "Plugins"
+msgstr "Plugin"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:356
+msgid "Cat_egories:"
+msgstr "_Phân loại:"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:378
+msgid "Preferences"
+msgstr "Thông số"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:618
+msgid "Categories"
+msgstr "Phân loại"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:853
+msgid "Push this button to select the font to be used by the editor"
+msgstr "Nhấn nút này để chọn font được dùng bởi bộ soạn thảo"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:856
+msgid "Push this button to configure text color"
+msgstr "Nhấn nút này để cấu hình màu chữ"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:858
+msgid "Push this button to configure background color"
+msgstr "Nhấn nút này để cấu hình màu nền"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:860
 msgid ""
-"Impossible to compare the selected documents.\n"
-"\n"
-"The result contains invalid UTF-8 data."
-msgstr ""
-"Không thể so sánh những tài liệu được chọn.\n"
-"\n"
-"Kết quả có chứa dữ liệu không phải là UTF-8."
+"Push this button to configure the color in which the selected text should "
+"appear"
+msgstr "Nhấn nút này để cấu hình màu hiển thị cho văn bản được chọn"
 
-#: plugins/diff/diff.glade2.h:1 plugins/shell_output/shell_output.glade2.h:1
-#: plugins/time/time.glade2.h:2 plugins/spell/spell-checker.glade2.h:1
-#: src/dialogs/replace.glade2.h:1 src/dialogs/uri.glade2.h:1
+#: gedit/dialogs/gedit-preferences-dialog.c:863
+msgid ""
+"Push this button to configure the color in which the selected text should be "
+"marked"
+msgstr "Nhấn nút này để cấy hình màu đánh dấu cho văn bản được chọn"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:1884
+msgid "Push this button to select the font to be used to print the body"
+msgstr "Nhấn nút này để chọn font được dùng khi in phần thân"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:1886
+msgid "Push this button to select the font to be used to print the headers"
+msgstr "Nhấn nút này để chọn font cần dùng khi in tiêu đề"
+
+#: gedit/dialogs/gedit-preferences-dialog.c:2335
+msgid "Encodings"
+msgstr "Bảng mã"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:1
+#: gedit/dialogs/page-setup-dialog.glade2.h:1
+#: plugins/docinfo/docinfo.glade2.h:1 plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
+
+#: gedit/dialogs/gedit-preferences.glade2.h:2
+msgid "<b>Font</b>"
+msgstr "<b>Phông chữ</b>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:3
+msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Thụt lề tự động</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:4
+msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Phông chữ &amp; Màu</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:5
+msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Phông chữ</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:6
+msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Số dòng</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:7
+msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Trình quản lý</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:8
+msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Mở</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:9
+msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Trang</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:10
+msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Lưu</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:11
+msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:12
+msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Hoàn tác</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:13
+msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
+msgstr "<span weight=\"bold\" size=\"x-large\">Chế độ ngắt dòng</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:14
+msgid "<span weight=\"bold\">Colors</span>"
+msgstr "<span weight=\"bold\">Màu</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "<span weight=\"bold\">When saving a new file...</span>"
+msgstr "<span weight=\"bold\">Khi đang lưu một tập tin mới...</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:16
+msgid "<span weight=\"bold\">When saving an existing file...</span>"
+msgstr "<span weight=\"bold\">Khi đang lưu tập tin đang tồn tại...</span>"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:17
+msgid "Add new encodings"
+msgstr "Thêm bảng mã mới"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:18
+msgid "Always use U_TF-8 encoding (faster)"
+msgstr "Luôn dùng bảng mã UTF-8 (nhanh hơn)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:19
+msgid "Always use _UTF-8 encoding (faster)"
+msgstr "Luôn dùng bảng mã _UTF-8 (nhanh hơn)"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:20
+msgid "Create a _backup copy of files before saving"
+msgstr "Tạo _bản sao của tập tin trước khi lưu"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:21
+#: gedit/dialogs/page-setup-dialog.glade2.h:4
+msgid "Do not _split words over two lines"
+msgstr "Không xẻ các từ ra quá hai dòng"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:22
+msgid "Editor _font: "
+msgstr "Phông chữ của trình biên soạn: "
+
+#: gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Enable _auto indentation"
+msgstr "Chạy tự _động thụt lề"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:24
+#: gedit/dialogs/page-setup-dialog.glade2.h:5
+msgid "Enable text _wrapping"
+msgstr "Bật chạy ngắt dòng văn bản"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:25
+msgid "Fonts & Colors"
+msgstr "Font & Màu sắc"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:26
+msgid "Insert _spaces instead of tabs"
+msgstr "Chèn các dấu trống thay cho các tab"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:27
+msgid "LOGO"
+msgstr "LOGO"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:28
+msgid "Line _numbers:"
+msgstr "S_ố dòng:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:29
+msgid "Line numbers"
+msgstr "Số dòng"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:30
+msgid "Move down"
+msgstr "Chuyển xuống"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:31
+msgid "Move up"
+msgstr "Chuyển lên"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:32
+msgid "Page he_aders:"
+msgstr "He_ader trang:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:33
+msgid "Pick the background color"
+msgstr "Chọn màu nền"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:34
+msgid "Pick the selected text color"
+msgstr "Chọn màu chữ trong vùng được chọn"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:35
+msgid "Pick the selection color"
+msgstr "Chọn màu vùng chọn"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:36
+msgid "Pick the text color"
+msgstr "Chọn màu chữ"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:37
+msgid "Plugin manager"
+msgstr "Bộ quản lý Plugin"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:39
+msgid "Print _line numbers every"
+msgstr "In số _dòng mỗi"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:40
+msgid "Print fonts"
+msgstr "Font in"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:41
+msgid "Remove an encoding"
+msgstr "Loại bỏ một bảng mã"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:43
+msgid "Se_lection color:"
+msgstr "Màu _vùng chọn:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:44
+msgid "Selecte_d text color:"
+msgstr "Màu chữ được _chọn:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:45
+msgid "Set _tabs width equivalent to"
+msgstr "Đặt độ rộng các _tab tương đương với"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:46
+msgid "Set limit on _undo actions to"
+msgstr "Đặt giới hạn mức hoàn lại là"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:48
+msgid "U_se default theme colors"
+msgstr "_Dùng màu theme mặc định"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:49
+msgid "U_se original file encoding if possible"
+msgstr "Dùng bảng mã n_guyên thủy nếu có thể"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:51
+msgid "Use cu_rrent locale's encoding if possible"
+msgstr "Dùng bảng mã locale hiện thời khi có thể"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:52
+msgid "Use current _locale's encoding if possible"
+msgstr "Dùng bảng mã _locale hiện thời khi có thể"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:53
+msgid "Wrap mode"
+msgstr "Chế độ cuốn"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:54
+msgid "_Autosave current file every"
+msgstr "_Tự động lưu tập tin hiện thời mỗi"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:55
+msgid "_Background color:"
+msgstr "Màu _nền:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:56
+#: gedit/dialogs/page-setup-dialog.glade2.h:12
+msgid "_Body:"
+msgstr "Th_ân:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:57
+msgid "_Display line numbers"
+msgstr "_Hiện số dòng"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:58
+#: gedit/dialogs/page-setup-dialog.glade2.h:15
+msgid "_Print page headers"
+msgstr "_In header trang"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:59
+#: gedit/dialogs/page-setup-dialog.glade2.h:16
+msgid "_Restore Default Fonts"
+msgstr "_Khôi phục phông chữ mặc định"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:60
+msgid "_Supported encodings:"
+msgstr "Bảng mã được h_ỗ trợ:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:61
+msgid "_Text color:"
+msgstr "Màu _chữ:"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:62
+msgid "_Use default theme font"
+msgstr "_Dùng font theme mặc định"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:63
+msgid "_action(s)"
+msgstr "_hành động"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:64
+msgid "_minutes"
+msgstr "ph_út"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:65
+msgid "character(s)"
+msgstr "ký tự"
+
+#: gedit/dialogs/gedit-preferences.glade2.h:66
+msgid "li_ne(s)"
+msgstr "d_òng"
+
+#: gedit/dialogs/gnome-print-font-dialog.c:111
+msgid "_Insert a new preview phrase."
+msgstr "_Chèn pha xem trước."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:117
+msgid "Modify preview phrase..."
+msgstr "Thay đổi pha xem trước..."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:171
+msgid "Preview"
+msgstr "Xem trước"
+
+#: gedit/dialogs/gnome-print-font-dialog.c:184
+msgid "_Modify preview phrase..."
+msgstr "_Thay đổi pha xem trước..."
+
+#: gedit/dialogs/gnome-print-font-dialog.c:247
+msgid "Font Selection"
+msgstr "Chọn font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:92
+msgid "Sans Regular 12"
+msgstr "Sans Regular 12"
+
+#: gedit/dialogs/gnome-print-font-picker.c:93
+msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
+
+#: gedit/dialogs/gnome-print-font-picker.c:94
+msgid "Pick a Font"
+msgstr "Chọn font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:179
+msgid "Title"
+msgstr "Tựa đề"
+
+#: gedit/dialogs/gnome-print-font-picker.c:180
+msgid "The title of the selection dialog box"
+msgstr "Tựa đề của hộp thoại chọn font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:200
+msgid "Font name"
+msgstr "Tên font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:201
+msgid "Name of the selected font"
+msgstr "Tên của font được chọn"
+
+#: gedit/dialogs/gnome-print-font-picker.c:209
+msgid "Preview text"
+msgstr "text xem thử"
+
+#: gedit/dialogs/gnome-print-font-picker.c:210
+msgid "Preview text shown in the dialog"
+msgstr "Text xem thử được hiển thị trong hộp thoại"
+
+#: gedit/dialogs/gnome-print-font-picker.c:218
+msgid "Use font in label"
+msgstr "Dùng font trong nhãn"
+
+#: gedit/dialogs/gnome-print-font-picker.c:219
+msgid "Use font in the label in font info mode"
+msgstr "Dùng font trong nhãn trong chế độ thông tin font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:227
+msgid "Font size for label"
+msgstr "Cỡ font của nhãn"
+
+#: gedit/dialogs/gnome-print-font-picker.c:228
+msgid "Font size for label in font info mode"
+msgstr "Cỡ font cho nhãn trong chế độ thông tin font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:238
+msgid "Show size"
+msgstr "Hiện kích thước"
+
+#: gedit/dialogs/gnome-print-font-picker.c:239
+msgid "Show size in font info mode"
+msgstr "Hiện kích thước trong chế độ thông tin font"
+
+#: gedit/dialogs/gnome-print-font-picker.c:1018
+msgid "Font"
+msgstr "Font"
+
+#. gnome_print_font_picker_update_font_info
+#: gedit/dialogs/goto-line.glade2.h:1
+msgid "Goto Line"
+msgstr "Đi tới dòng"
+
+#: gedit/dialogs/goto-line.glade2.h:2
+msgid "_Line number:"
+msgstr "Số _dòng:"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:2
+msgid "<b>Line Numbers</b>"
+msgstr "<b>Số dòng</b>"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:3
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>Cuộn chữ</b>"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:7
+msgid "General"
+msgstr "Chung"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:8
+msgid "He_aders and footers:"
+msgstr "He_ader và footer:"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:9
+msgid "Page Setup"
+msgstr "Thiết lập trang"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:10
+msgid "Print _line numbers"
+msgstr "In số _dòng"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:11
+msgid "Print s_yntax highlighting"
+msgstr "In tô _sáng cú pháp"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:13
+msgid "_Line numbers:"
+msgstr "Số _dòng:"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:14
+msgid "_Number every"
+msgstr "Số _dòng mỗi"
+
+#: gedit/dialogs/page-setup-dialog.glade2.h:17
+msgid "lines"
+msgstr "dòng"
+
+#: gedit/dialogs/plugin-manager.glade2.h:1
+msgid "About selected plugin"
+msgstr "Giới thiệu plugin được chọn"
+
+#: gedit/dialogs/plugin-manager.glade2.h:2
+msgid "C_onfigure Plugin"
+msgstr "Cấu _hình plugin"
+
+#: gedit/dialogs/plugin-manager.glade2.h:3
+msgid "Configure the selected plugin"
+msgstr "Cấu _hình plugin được chọn"
+
+#: gedit/dialogs/plugin-manager.glade2.h:4
+msgid "button1"
+msgstr "button1"
+
+#: gedit/dialogs/plugin-manager.glade2.h:5
+msgid "dialog1"
+msgstr "dialog1"
+
+#: gedit/dialogs/program-location-dialog.glade2.h:1
+msgid "Browse for program location..."
+msgstr "Định vị trí chương trình..."
+
+#: gedit/dialogs/program-location-dialog.glade2.h:3
+msgid "_Location to search for:"
+msgstr "_Vị trí cần tìm:"
+
+#: gedit/dialogs/program-location-dialog.glade2.h:4
+msgid "label"
+msgstr "nhãn"
+
+#: gedit/dialogs/replace.glade2.h:1 gedit/dialogs/uri.glade2.h:1
+#: plugins/shell_output/shell_output.glade2.h:1
+#: plugins/spell/spell-checker.glade2.h:1 plugins/time/time.glade2.h:2
 msgid "*"
 msgstr "*"
 
-#: plugins/diff/diff.glade2.h:2
-msgid "Choose the files to compare."
-msgstr "Chọn tập tin để so sánh."
+#: gedit/dialogs/replace.glade2.h:2 gedit/gedit-ui.xml.h:19
+msgid "Find Next"
+msgstr "Tìm ti_ếp"
 
-#: plugins/diff/diff.glade2.h:3
-msgid "Compare files..."
-msgstr "So sánh tập tin..."
+#: gedit/dialogs/replace.glade2.h:3
+msgid "Match _entire word only"
+msgstr "Chỉ khớp với to_àn bộ từ"
 
-#: plugins/diff/diff.glade2.h:4
-msgid "F_rom document"
-msgstr "_Từ tài liệu"
+#: gedit/dialogs/replace.glade2.h:5
+msgid "Replace All"
+msgstr "Thay thế toàn bộ"
 
-#: plugins/diff/diff.glade2.h:5
-msgid "First"
-msgstr "Đầu tiên"
+#: gedit/dialogs/replace.glade2.h:6
+msgid "Replace _with: "
+msgstr "Thay thế _bằng: "
 
-#: plugins/diff/diff.glade2.h:6
-msgid "First file from disk"
-msgstr "Tập tin đầu tiên từ đĩa"
+#: gedit/dialogs/replace.glade2.h:7
+msgid "Search _backwards"
+msgstr "Tìm n_gược"
 
-#: plugins/diff/diff.glade2.h:7
-msgid "First file from open document"
-msgstr "Tập tin đầu tiên từ tài liệu đang mở"
+#: gedit/dialogs/replace.glade2.h:8
+msgid "_Match case"
+msgstr "_Khớp chữ hoa/thường"
 
-#: plugins/diff/diff.glade2.h:8
-msgid "From _document"
-msgstr "Từ tài )liệu"
+#: gedit/dialogs/replace.glade2.h:9
+msgid "_Search for: "
+msgstr "_Tìm: "
 
-#: plugins/diff/diff.glade2.h:9
-msgid "From a _file on disk"
-msgstr "Từ _tập tin trên đĩa"
+#: gedit/dialogs/replace.glade2.h:10
+msgid "_Wrap around"
+msgstr "_Cuộn"
 
-#: plugins/diff/diff.glade2.h:10
-msgid "From a file o_n disk"
-msgstr "Từ tập tin t_rên đĩa"
+#: gedit/dialogs/uri.glade2.h:2
+msgid "Ch_aracter coding:"
+msgstr "_Bảng mã:"
 
-#: plugins/diff/diff.glade2.h:11
-msgid "Ignore _blanks (-b option)"
-msgstr "Bỏ qua _khoảng trắng (tuỳ chọn -b)"
+#: gedit/dialogs/uri.glade2.h:3
+msgid "Enter the _location (URI) of the file you would like to open:"
+msgstr "Nhập _vị trí (URI) của tập tin cần mở:"
 
-#: plugins/diff/diff.glade2.h:12
-msgid "Note that this option is only supported by GNU diff"
-msgstr "Chú ý là tùy chọn này chỉ được hỗ trợ bởi GNU diff"
+#: gedit/dialogs/uri.glade2.h:4
+msgid "Open from URI"
+msgstr "Mở từ URI"
 
-#: plugins/diff/diff.glade2.h:13
-msgid "Second"
-msgstr "Thứ hai"
+#: gedit/gedit-commands.c:562
+msgid "translator_credits"
+msgstr "Nguyễn Thái Ngọc Duy"
 
-#: plugins/diff/diff.glade2.h:14
-msgid "Second file from disk"
-msgstr "Tập tin thứ hai từ đĩa"
+#: gedit/gedit-commands.c:587
+msgid "gedit"
+msgstr "gedit"
 
-#: plugins/diff/diff.glade2.h:15
-msgid "Second file from open document"
-msgstr "Tập tin thứ hai từ tài liệu đang mở"
+#: gedit/gedit-commands.c:591
+msgid "gedit is a small and lightweight text editor for Gnome"
+msgstr "gedit là trình soạn thảo văn bản nhỏ gọn của Gnome"
 
-#: plugins/diff/diff.glade2.h:16
-msgid "Select the \"first\" file..."
-msgstr "Chọn tập tin \"thứ nhất\"..."
+#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+#, c-format
+msgid "%s %d"
+msgstr "%s %d"
 
-#: plugins/diff/diff.glade2.h:17
-msgid "Select the \"second\" file..."
-msgstr "Chọn tập tin \"thứ hai\"..."
+#: gedit/gedit-document.c:593 gedit/gedit-document.c:611
+msgid "Untitled"
+msgstr "Không tựa"
 
-#: plugins/diff/diff.glade2.h:18
-msgid "Select the first file to compare"
-msgstr "Chọn tập tin thứ nhất để so sánh"
+#: gedit/gedit-document.c:599 gedit/gedit-document.c:646
+msgid "Invalid file name"
+msgstr "Tên tập tin không hợp lệ"
 
-#: plugins/diff/diff.glade2.h:19
-msgid "Select the first open document to compare"
-msgstr "Chọn tài liệu đang mở thứ nhất để so sánh"
+#: gedit/gedit-document.c:812 gedit/gedit-document.c:916
+#: viewer/gedit-persist-stream.c:120
+msgid "Invalid UTF-8 data"
+msgstr "Dữ liệu UTF-8 không hợp lệ"
 
-#: plugins/diff/diff.glade2.h:20
-msgid "Select the second file to compare"
-msgstr "Chọn tập tin thứ hai để so sánh"
+#: gedit/gedit-document.c:1208
+#, c-format
+msgid "Could not read symbolic link information for %s"
+msgstr "Không thể đọc thông tin liên kết biểu tượng của %s"
 
-#: plugins/diff/diff.glade2.h:21
-msgid "Select the second open document to compare"
-msgstr "Chọn tài liệu đang mở thứ hai để só sánh"
+#: gedit/gedit-document.c:1254
+msgid "The file has too many symbolic links."
+msgstr "Tập tin có quá nhiều liên kết biểu tượng."
 
-#: plugins/diff/diff.glade2.h:22
-msgid "Use the _unified output format (-u option)"
-msgstr "Dùng dạng thức _unified (tùy chọn -u)"
+#: gedit/gedit-document.c:1310
+#, c-format
+msgid "gedit cannot handle %s: locations in write mode."
+msgstr "gedit không thể xử lý %s: địa điểm đang trong chế độ ghi."
 
-#: plugins/diff/diff.gedit-plugin.desktop.in.h:2
+#: gedit/gedit-document.c:1317
+msgid "gedit cannot handle this kind of location in write mode."
+msgstr "gedit không thể xử lý loại địa điểm này trong chế độ ghi."
+
+#: gedit/gedit-document.c:1330
+msgid "Invalid filename."
+msgstr "Tên tập tin không hợp lệ."
+
+#: gedit/gedit-document.c:1442
 msgid ""
-"The Compare Files plugin uses the <tt>diff</tt> program to compare two "
-"documents or files on disk.\n"
-"\n"
-"For more info on <tt>diff</tt> program, type <tt>man diff</tt> in a shell "
-"prompt."
+"There is not enough disk space to save the file.\n"
+"Please free some disk space and try again."
 msgstr ""
-"Plugin cho việc so sánh tập tin dùng <tt>diff</tt> chương trình để so sánh 2 "
-"tài liệu hay 2 tập tin trên đĩa.\n"
+"Không đủ chỗ trên đĩa để lưu tập tin.\n"
+"Vui lòng giải phóng thêm chỗ trống trên đĩa rồi thử lại."
+
+#: gedit/gedit-document.c:1447
+msgid ""
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr ""
+"Đĩa được dùng để lưu tập tin có giới hạn về kích thước tập tin. Vui lòng lưu "
+"một tập tin nhỏ hơn hoặc lưu tập tin này vào đĩa không đặt ra giới hạn trên."
+
+#: gedit/gedit-document.c:1491
+msgid "Could not create a backup file."
+msgstr "Không thể tạo tập tin sao lưu."
+
+#: gedit/gedit-document.c:1611
+msgid "It is not possible to revert an Untitled document"
+msgstr "Không thể hoàn nguyên tài liệu Untitled"
+
+#: gedit/gedit-encodings-option-menu.c:203
+msgid "Auto Detected"
+msgstr "Tự động dò"
+
+#: gedit/gedit-encodings-option-menu.c:223
+#: gedit/gedit-encodings-option-menu.c:244
+#, c-format
+msgid "Current Locale (%s)"
+msgstr "Locale hiện thời (%s)"
+
+#: gedit/gedit-encodings-option-menu.c:305
+msgid "Add or _Remove..."
+msgstr "Thêm hoặc _Xóa..."
+
+#: gedit/gedit-encodings.c:131 gedit/gedit-encodings.c:168
+#: gedit/gedit-encodings.c:170 gedit/gedit-encodings.c:172
+#: gedit/gedit-encodings.c:174
+msgid "Unicode"
+msgstr "Unicode"
+
+#: gedit/gedit-encodings.c:137 gedit/gedit-encodings.c:163
+#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:247
+msgid "Western"
+msgstr "Western"
+
+#: gedit/gedit-encodings.c:139 gedit/gedit-encodings.c:206
+#: gedit/gedit-encodings.c:243
+msgid "Central European"
+msgstr "Central European"
+
+#: gedit/gedit-encodings.c:141
+msgid "South European"
+msgstr "South European"
+
+#: gedit/gedit-encodings.c:143 gedit/gedit-encodings.c:159
+#: gedit/gedit-encodings.c:257
+msgid "Baltic"
+msgstr "Baltic"
+
+#: gedit/gedit-encodings.c:145 gedit/gedit-encodings.c:208
+#: gedit/gedit-encodings.c:221 gedit/gedit-encodings.c:225
+#: gedit/gedit-encodings.c:227 gedit/gedit-encodings.c:245
+msgid "Cyrillic"
+msgstr "Cyrillic"
+
+#: gedit/gedit-encodings.c:147 gedit/gedit-encodings.c:214
+#: gedit/gedit-encodings.c:255
+msgid "Arabic"
+msgstr "Ả Rập"
+
+#: gedit/gedit-encodings.c:149 gedit/gedit-encodings.c:249
+msgid "Greek"
+msgstr "Hy Lạp"
+
+#: gedit/gedit-encodings.c:151
+msgid "Hebrew Visual"
+msgstr "Hebrew Visual"
+
+#: gedit/gedit-encodings.c:153 gedit/gedit-encodings.c:212
+#: gedit/gedit-encodings.c:253
+msgid "Hebrew"
+msgstr "Do Thái"
+
+#: gedit/gedit-encodings.c:155 gedit/gedit-encodings.c:210
+#: gedit/gedit-encodings.c:251
+msgid "Turkish"
+msgstr "Thổ Nhĩ Kỳ"
+
+#: gedit/gedit-encodings.c:157
+msgid "Nordic"
+msgstr "Nordic"
+
+#: gedit/gedit-encodings.c:161
+msgid "Celtic"
+msgstr "Celtic"
+
+#: gedit/gedit-encodings.c:165
+msgid "Romanian"
+msgstr "Romanian"
+
+#: gedit/gedit-encodings.c:177
+msgid "Armenian"
+msgstr "Armenian"
+
+#: gedit/gedit-encodings.c:179 gedit/gedit-encodings.c:181
+#: gedit/gedit-encodings.c:190
+msgid "Chinese Traditional"
+msgstr "Trung Hoa Phồn Thể"
+
+#: gedit/gedit-encodings.c:183
+msgid "Cyrillic/Russian"
+msgstr "Cyrillic/Russian"
+
+#: gedit/gedit-encodings.c:186 gedit/gedit-encodings.c:217
+#: gedit/gedit-encodings.c:232
+msgid "Japanese"
+msgstr "Nhật"
+
+#: gedit/gedit-encodings.c:188 gedit/gedit-encodings.c:219
+#: gedit/gedit-encodings.c:223 gedit/gedit-encodings.c:238
+msgid "Korean"
+msgstr "Hàn Quốc"
+
+#: gedit/gedit-encodings.c:193 gedit/gedit-encodings.c:195
+#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:201
+msgid "Chinese Simplified"
+msgstr "Trung Hoa Giản Thể"
+
+#: gedit/gedit-encodings.c:199
+msgid "Georgian"
+msgstr "Georgian"
+
+#: gedit/gedit-encodings.c:229
+msgid "Cyrillic/Ukrainian"
+msgstr "Cyrillic/Ukrainian"
+
+#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:259
+msgid "Vietnamese"
+msgstr "Việt Nam"
+
+#: gedit/gedit-encodings.c:236
+msgid "Thai"
+msgstr "Thái"
+
+#: gedit/gedit-file-selector-util.c:149
+#, c-format
+msgid ""
+"A file named \"%s\" already exists.\n"
+"Do you want to replace it with the one you are saving?"
+msgstr ""
+"Tập tin có tên \"%s\" đã tồn tại rồi.\n"
+"Bạn có muốn thay thế nó bằng tập tin bạn đang lưu?"
+
+#: gedit/gedit-file-selector-util.c:160
+#, c-format
+msgid ""
+"The file \"%s\" is read-only.\n"
+"Do you want to try to replace it with the one you are saving?"
+msgstr ""
+"Tập tin có tên \"%s\" chỉ được đọc.\n"
+"Bạn có muốn thay thế nó bằng tập tin bạn đang lưu?"
+
+#: gedit/gedit-file-selector-util.c:283
+msgid "Ch_aracter Coding:"
+msgstr "Bảng _mã:"
+
+#: gedit/gedit-file-selector-util.c:460
+msgid "Select a file to open"
+msgstr "Chọn một tập tin để mở"
+
+#: gedit/gedit-file-selector-util.c:489
+msgid "Select files to open"
+msgstr "Chọn các tập tin để mở"
+
+#: gedit/gedit-file-selector-util.c:519
+msgid "Select a filename to save"
+msgstr "Chọn một tên tập tin để lưu"
+
+#: gedit/gedit-file.c:155
+msgid "Open File..."
+msgstr "Mở tập tin..."
+
+#: gedit/gedit-file.c:182 gedit/gedit-file.c:899
+#, c-format
+msgid "Loaded file '%s'"
+msgstr "Đã nạp tập tin '%s'"
+
+#: gedit/gedit-file.c:316 gedit/gedit-file.c:466
+#, c-format
+msgid "Saving file '%s'..."
+msgstr "Đang lưu tập tin '%s'..."
+
+#: gedit/gedit-file.c:344 gedit/gedit-file.c:481
+msgid "The document has not been saved."
+msgstr "Tài liệu chưa được lưu."
+
+#: gedit/gedit-file.c:358 gedit/gedit-file.c:478
+#, c-format
+msgid "File '%s' saved."
+msgstr "Tập tin '%s' đã được lưu."
+
+#: gedit/gedit-file.c:444
+msgid "Save as..."
+msgstr "Lưu là ..."
+
+#: gedit/gedit-file.c:639
+#, c-format
+msgid ""
+"Do you want to revert to saved the document '%s'?\n"
 "\n"
-"Để biết thêm thông tin về <tt>diff</tt> chương trình, hã gõ <tt>man diff</"
-"tt> tại dấu nhắc của shell."
+"You will not be able to undo this operation."
+msgstr ""
+"Có muốn chuyển đảo để lưu tài liệu \"%s\" không?\n"
+"\n"
+"Bạn sẽ không thể thực hiện hoàn tác."
+
+#: gedit/gedit-file.c:649 gedit/gedit-ui.xml.h:95
+msgid "_Revert"
+msgstr "_Chuyển đảo"
+
+#: gedit/gedit-file.c:683
+#, c-format
+msgid "Reverting file '%s'..."
+msgstr "Đang chuyển đảo tập tin '%s' ..."
+
+#: gedit/gedit-file.c:696
+msgid "The document has not been reverted."
+msgstr "Tài liệu chưa được hoàn nguyên."
+
+#: gedit/gedit-file.c:706
+#, c-format
+msgid "File '%s' reverted."
+msgstr "Đã hoàn nguyên tập tin '%s'."
+
+#: gedit/gedit-file.c:732
+#, c-format
+msgid "Loading %d files..."
+msgstr "Đang nạp %d tập tin..."
+
+#: gedit/gedit-file.c:768
+#, c-format
+msgid "The file \"%s\" does not exist. Would you like to create it?"
+msgstr "Tập tin \"%s\" không tồn tại. Bạn có muốn tạo nó không?"
+
+#: gedit/gedit-file.c:823
+#, c-format
+msgid "Loaded %i files"
+msgstr "Đã nạp %i tập tin"
+
+#: gedit/gedit-file.c:957
+msgid "Could not read data from stdin."
+msgstr "Không thể đọc dữ liệu từ stdin."
+
+#. Read only
+#: gedit/gedit-mdi-child.c:238
+msgid "RO"
+msgstr "Chỉ Đọc"
+
+#. Add the detach tab button
+#: gedit/gedit-mdi-child.c:574 gedit/gedit-ui.xml.h:86
+msgid "_Move to New Window"
+msgstr "Chuy_ển vào cửa sổ mới"
+
+#: gedit/gedit-mdi-child.c:664
+msgid "Unknown"
+msgstr "Không biết"
+
+#: gedit/gedit-mdi-child.c:672
+msgid "Unicode (UTF-8)"
+msgstr "Unicode (UTF-8)"
+
+#: gedit/gedit-mdi.c:450
+msgid "Open a recently used file"
+msgstr "Mở tập tin thường dùng"
+
+#: gedit/gedit-mdi.c:954
+#, c-format
+msgid ""
+"Do you want to save the changes you made to the document \"%s\"? \n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr ""
+"Bạn có muốn lưu các thay đổi bạn đã tạo ra trong tài liệu \"%s\"?\n"
+"\n"
+"Các thay đổi sẽ bị mất nếu bạn không lưu chúng lại."
+
+#: gedit/gedit-mdi.c:959
+msgid "Do_n't save"
+msgstr "_Không lưu"
+
+#: gedit/gedit-mdi.c:978
+msgid "_Don't quit"
+msgstr "Không _thoát"
+
+#: gedit/gedit-mdi.c:982
+msgid "_Don't close"
+msgstr "Không đón_g"
+
+#: gedit/gedit-mdi.c:1075
+msgid "(modified)"
+msgstr "(đã thay đổi)"
+
+#: gedit/gedit-mdi.c:1081
+msgid "(readonly)"
+msgstr "(chỉ đọc)"
+
+#: gedit/gedit-mdi.c:1676
+msgid "Normal"
+msgstr "Bình thường"
+
+#: gedit/gedit-mdi.c:1677
+msgid "Use Normal highlight mode"
+msgstr "Dùng chế độ tô sáng Bình thường"
+
+#: gedit/gedit-mdi.c:1753
+#, c-format
+msgid "Use %s highlight mode"
+msgstr "Dùng chế độ tô sáng %s"
+
+#: gedit/gedit-output-window.c:333
+msgid "Close the output window"
+msgstr "Đóng cửa sổ output"
+
+#: gedit/gedit-output-window.c:371
+msgid "Copy selected lines"
+msgstr "Sao chép các dòng được chọn"
+
+#: gedit/gedit-output-window.c:391
+msgid "Clear the output window"
+msgstr "Làm sạch cửa sổ output"
+
+#: gedit/gedit-output-window.c:431
+msgid "Output Lines"
+msgstr "Dòng output"
+
+#: gedit/gedit-plugins-engine.c:362
+#, c-format
+msgid "Error, unable to open module file '%s'\n"
+msgstr "Lỗi không thể mở tập tin module '%s'\n"
+
+#: gedit/gedit-plugins-engine.c:372
+#, c-format
+msgid "Error, plugin '%s' does not contain init function."
+msgstr "Lỗi, plugin '%s' không chứa hàm init."
+
+#: gedit/gedit-plugins-engine.c:382
+#, c-format
+msgid "Error, plugin '%s' does not contain activate function."
+msgstr "Lỗi, plugin '%s' không chứa hàm activate."
+
+#: gedit/gedit-plugins-engine.c:392
+#, c-format
+msgid "Error, plugin '%s' does not contain deactivate function."
+msgstr "Lỗi, plugin '%s' không chứa hàm deactivate."
+
+#: gedit/gedit-plugins-engine.c:417
+#, c-format
+msgid "Error, impossible to initialize plugin '%s'"
+msgstr "Lỗi, không thể khởi động plugin '%s'"
+
+#: gedit/gedit-plugins-engine.c:468
+#, c-format
+msgid "Error, impossible to destroy plugin '%s'"
+msgstr "Lỗi, không thể hủy plugin '%s'"
+
+#: gedit/gedit-plugins-engine.c:551 gedit/gedit-plugins-engine.c:639
+#: gedit/gedit-plugins-engine.c:764
+#, c-format
+msgid "Error, impossible to activate plugin '%s'"
+msgstr "Lỗi, không thể kích hoạt plugin '%s'"
+
+#: gedit/gedit-plugins-engine.c:590 gedit/gedit-plugins-engine.c:782
+#, c-format
+msgid "Error, impossible to deactivate plugin '%s'"
+msgstr "Lỗi, không thể dừng kích hoạt plugin '%s'"
+
+#: gedit/gedit-plugins-engine.c:683
+#, c-format
+msgid "Error, impossible to update ui of the plugin '%s'"
+msgstr "Lỗi, không thể cập nhật UI của plugin '%s'"
+
+#: gedit/gedit-prefs-manager.c:177
+msgid "Cannot initialize preferences manager."
+msgstr "Không thể khởi động bộ quản lý thông số."
+
+#: gedit/gedit-prefs-manager.c:1136
+#, c-format
+msgid "Expected `%s' got `%s' for key %s"
+msgstr "Yêu cầu `%s' là `%s' cho khóa %s"
+
+#: gedit/gedit-print.c:226 plugins/docinfo/docinfo.glade2.h:7
+msgid "Lines"
+msgstr "Dòng"
+
+#: gedit/gedit-print.c:331
+msgid "Preparing pages..."
+msgstr "Đang chuẩn bị trang..."
+
+#: gedit/gedit-print.c:358
+#, c-format
+msgid "Rendering page %d of %d..."
+msgstr "Đang vẽ trang %d trên %d..."
+
+#: gedit/gedit-print.c:360
+#, c-format
+msgid "Printing page %d of %d..."
+msgstr "Đang in trang %d trên %d..."
+
+#: gedit/gedit-print.c:382 gedit/gedit-ui.xml.h:40
+msgid "Print preview"
+msgstr "Xem thử bản in"
+
+#: gedit/gedit-print.c:550
+#, c-format
+msgid "File: %s"
+msgstr "Tập tin: %s"
+
+#: gedit/gedit-print.c:556
+msgid "Page %N of %Q"
+msgstr "Trang %N trên %Q"
+
+#: gedit/gedit-ui.xml.h:1
+msgid "About this application"
+msgstr "Giới thiệu về ứng dụng này"
+
+#: gedit/gedit-ui.xml.h:2
+msgid "Change the visibility of the output window in the current window"
+msgstr "Thay đổi việc hiển thị của cửa sổ output trong cửa sổ hiện thời"
+
+#: gedit/gedit-ui.xml.h:3
+msgid "Change the visibility of the statusbar in the current window"
+msgstr "Hiện hoặc ẩn thanh trạng thái trên cửa sổ hiện thời"
+
+#: gedit/gedit-ui.xml.h:4
+msgid "Change the visibility of the toolbar in the current window"
+msgstr "Hiện hoặc ẩn thanh công cụ trên cửa sổ hiện thời"
+
+#: gedit/gedit-ui.xml.h:5
+msgid "Close"
+msgstr "Đón_g"
+
+#: gedit/gedit-ui.xml.h:6
+msgid "Close all open files"
+msgstr "Đóng tất cả các tập tin đang mở"
+
+#: gedit/gedit-ui.xml.h:7
+msgid "Close the current file"
+msgstr "Đóng tập tin hiện thời"
+
+#: gedit/gedit-ui.xml.h:8
+msgid "Configure the application"
+msgstr "Cấu hình ứng dụng"
+
+#: gedit/gedit-ui.xml.h:9
+msgid "Copy"
+msgstr "Sao chép"
+
+#: gedit/gedit-ui.xml.h:10
+msgid "Copy the selection"
+msgstr "Sao chép vùng text được chọn"
+
+#: gedit/gedit-ui.xml.h:11
+msgid "Create a new document"
+msgstr "Tạo tài liệu mới"
+
+#: gedit/gedit-ui.xml.h:12
+msgid "Cu_t"
+msgstr "Cắ_t"
+
+#: gedit/gedit-ui.xml.h:13
+msgid "Cut"
+msgstr "Cắt"
+
+#: gedit/gedit-ui.xml.h:14
+msgid "Cut the selection"
+msgstr "Cắt vùng text được chọn"
+
+#: gedit/gedit-ui.xml.h:15
+msgid "Delete"
+msgstr "Xóa"
+
+#: gedit/gedit-ui.xml.h:16
+msgid "Delete the selected text"
+msgstr "Xóa vùng text được chọn"
+
+#: gedit/gedit-ui.xml.h:18
+msgid "Find Ne_xt"
+msgstr "Tìm t_iếp"
+
+#: gedit/gedit-ui.xml.h:20
+msgid "Find Pre_vious"
+msgstr "Tìm t_rước"
+
+#: gedit/gedit-ui.xml.h:21
+msgid "Find Previous"
+msgstr "Tìm trước"
+
+#: gedit/gedit-ui.xml.h:22
+msgid "Go to _Line..."
+msgstr "Đi tới _Dòng..."
+
+#: gedit/gedit-ui.xml.h:23
+msgid "Go to a specific line number"
+msgstr "Đi tới một dòng xác định"
+
+#: gedit/gedit-ui.xml.h:24
+msgid "Main toolbar"
+msgstr "Thanh Công cụ chính"
+
+#: gedit/gedit-ui.xml.h:25
+msgid "Move the current document to a new window"
+msgstr "Chuyển tài liệu hiện thời vào cửa sổ mới"
+
+#: gedit/gedit-ui.xml.h:26
+msgid "New"
+msgstr "Mới"
+
+#: gedit/gedit-ui.xml.h:28
+msgid "Open Location..."
+msgstr "Mở địa điểm..."
+
+#: gedit/gedit-ui.xml.h:29
+msgid "Open _Location..."
+msgstr "Mở đị_a điểm..."
+
+#: gedit/gedit-ui.xml.h:30
+msgid "Open a file"
+msgstr "Mở tập tin"
+
+#: gedit/gedit-ui.xml.h:31
+msgid "Open a file from a specified location"
+msgstr "Mở tập tin tại một địa điểm xác định"
+
+#: gedit/gedit-ui.xml.h:32
+msgid "Open the gedit manual"
+msgstr "Mở sổ tay gedit"
+
+#: gedit/gedit-ui.xml.h:33
+msgid "Page Set_up"
+msgstr "Thiết lập t_rang"
+
+#: gedit/gedit-ui.xml.h:34
+msgid "Paste"
+msgstr "Dán"
+
+#: gedit/gedit-ui.xml.h:35
+msgid "Paste the clipboard"
+msgstr "Dán từ clipboard"
+
+#: gedit/gedit-ui.xml.h:36
+msgid "Pr_eferences"
+msgstr "Tùy thích"
+
+#: gedit/gedit-ui.xml.h:38
+msgid "Print Previe_w..."
+msgstr "_Xem trước bản in..."
+
+#: gedit/gedit-ui.xml.h:39
+msgid "Print Preview"
+msgstr "_Xem trước bản in"
+
+#: gedit/gedit-ui.xml.h:41
+msgid "Print the current file"
+msgstr "In tập tin hiện thời"
+
+#: gedit/gedit-ui.xml.h:42
+msgid "Quit"
+msgstr "T_hoát"
+
+#: gedit/gedit-ui.xml.h:43
+msgid "Quit the program"
+msgstr "Kết thúc chương trình"
+
+#: gedit/gedit-ui.xml.h:44
+msgid "Redo"
+msgstr "Làm lại"
+
+#: gedit/gedit-ui.xml.h:45
+msgid "Redo the undone action"
+msgstr "Thực hiện lại hành động vừa rồi"
+
+#: gedit/gedit-ui.xml.h:47
+msgid "Replace a string"
+msgstr "Thay thế chuỗi"
+
+#: gedit/gedit-ui.xml.h:48
+msgid "Revert"
+msgstr "Hoàn nguyên"
+
+#: gedit/gedit-ui.xml.h:49
+msgid "Revert to a saved version of the file"
+msgstr "Hoàn nguyên phiên bản đã lưu của tập tin"
+
+#: gedit/gedit-ui.xml.h:51
+msgid "Save As"
+msgstr "Lưu là"
+
+#: gedit/gedit-ui.xml.h:52
+msgid "Save _As..."
+msgstr "Lư_u là..."
+
+#: gedit/gedit-ui.xml.h:53
+msgid "Save all open files"
+msgstr "Lưu mọi tập tin đang mở"
+
+#: gedit/gedit-ui.xml.h:54
+msgid "Save the current file"
+msgstr "Lưu tập tin hiện thời"
+
+#: gedit/gedit-ui.xml.h:55
+msgid "Save the current file with a different name"
+msgstr "Lưu tập tin hiện thời với tên khác"
+
+#: gedit/gedit-ui.xml.h:56
+msgid "Search again for the same string"
+msgstr "Tìm chuỗi tiếp"
+
+#: gedit/gedit-ui.xml.h:57
+msgid "Search backwards for the same string"
+msgstr "Tìm lùi cùng chuỗi"
+
+#: gedit/gedit-ui.xml.h:58
+msgid "Search for a string"
+msgstr "Tìm chuỗi"
+
+#: gedit/gedit-ui.xml.h:59
+msgid "Select All"
+msgstr "Chọn tất cả"
+
+#: gedit/gedit-ui.xml.h:60
+msgid "Select _All"
+msgstr "Chọn _tất cả"
+
+#: gedit/gedit-ui.xml.h:61
+msgid "Select the entire document"
+msgstr "Chọn toàn bộ tài liệu"
+
+#: gedit/gedit-ui.xml.h:62
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgstr "Chỉnh kiểu nút thanh công cụ như Tùy thích Menu và Thanh công cụ của desktop"
+
+#: gedit/gedit-ui.xml.h:63
+msgid "Setup the page settings"
+msgstr "Thiết lập thông số trang"
+
+#: gedit/gedit-ui.xml.h:64
+msgid "Show only icons in the toolbar"
+msgstr "Chỉ hiện biểu tượng trên thanh công cụ"
+
+#: gedit/gedit-ui.xml.h:65
+msgid "Show text below every icon in the toolbar"
+msgstr "Hiện văn bản dưới biểu tượng trên thanh công cụ"
+
+#: gedit/gedit-ui.xml.h:66
+msgid "Show text only beside important icons in the toolbar"
+msgstr "Chỉ hiện văn bản bên cạnh biểu tượng quan trọng trên thanh công cụ"
+
+#: gedit/gedit-ui.xml.h:67
+msgid "T_ext for Important Icons"
+msgstr "_Chữ cho hình quan trọng"
+
+#: gedit/gedit-ui.xml.h:69
+msgid "Undo the last action"
+msgstr "Hoàn lại hành động cuối cùng"
+
+#: gedit/gedit-ui.xml.h:70
+msgid "_About"
+msgstr "Giới thiệ_u"
+
+#: gedit/gedit-ui.xml.h:71
+msgid "_Close"
+msgstr "Đón_g"
+
+#: gedit/gedit-ui.xml.h:72
+msgid "_Close All"
+msgstr "_Đóng tất cả"
+
+#: gedit/gedit-ui.xml.h:73
+msgid "_Contents"
+msgstr "_Nội dung"
+
+#: gedit/gedit-ui.xml.h:74
+msgid "_Copy"
+msgstr "_Sao chép"
+
+#: gedit/gedit-ui.xml.h:75
+msgid "_Customize Toolbar"
+msgstr "_Tùy biến Thanh công cụ"
+
+#: gedit/gedit-ui.xml.h:76
+msgid "_Debug"
+msgstr "_Debug"
+
+#: gedit/gedit-ui.xml.h:77
+msgid "_Delete"
+msgstr "_Xóa"
+
+#: gedit/gedit-ui.xml.h:78
+msgid "_Desktop Default"
+msgstr "Mặc định của _desktop"
+
+#: gedit/gedit-ui.xml.h:79
+msgid "_Documents"
+msgstr "Tài _liệu"
+
+#: gedit/gedit-ui.xml.h:80
+msgid "_Edit"
+msgstr "_Hiệu chỉnh"
+
+#: gedit/gedit-ui.xml.h:81
+msgid "_File"
+msgstr "_Tập tin"
+
+#: gedit/gedit-ui.xml.h:82
+msgid "_Find..."
+msgstr "T_ìm..."
+
+#: gedit/gedit-ui.xml.h:83
+msgid "_Help"
+msgstr "Trợ _giúp"
+
+#: gedit/gedit-ui.xml.h:84
+msgid "_Highlight Mode"
+msgstr "_Chế độ tô sáng"
+
+#: gedit/gedit-ui.xml.h:85
+msgid "_Icons Only"
+msgstr "Chỉ _hình"
+
+#: gedit/gedit-ui.xml.h:87
+msgid "_New"
+msgstr "Tạo mớ_i"
+
+#: gedit/gedit-ui.xml.h:88
+msgid "_Open..."
+msgstr "_Mở..."
+
+#: gedit/gedit-ui.xml.h:89
+msgid "_Output Window"
+msgstr "Cửa sổ _Output"
+
+#: gedit/gedit-ui.xml.h:90
+msgid "_Paste"
+msgstr "_Dán"
+
+#: gedit/gedit-ui.xml.h:91
+msgid "_Print..."
+msgstr "_In..."
+
+#: gedit/gedit-ui.xml.h:92
+msgid "_Quit"
+msgstr "T_hoát"
+
+#: gedit/gedit-ui.xml.h:93
+msgid "_Redo"
+msgstr "_Làm lại"
+
+#: gedit/gedit-ui.xml.h:94
+msgid "_Replace..."
+msgstr "Thay th_ế..."
+
+#: gedit/gedit-ui.xml.h:96
+msgid "_Save"
+msgstr "_Lưu"
+
+#: gedit/gedit-ui.xml.h:97
+msgid "_Save All"
+msgstr "_Lưu tất cả"
+
+#: gedit/gedit-ui.xml.h:98
+msgid "_Search"
+msgstr "_Tìm"
+
+#: gedit/gedit-ui.xml.h:99
+msgid "_Statusbar"
+msgstr "Thanh t_rạng thái"
+
+#: gedit/gedit-ui.xml.h:100
+msgid "_Text for All Icons"
+msgstr "_Chữ cho mọi hình"
+
+#: gedit/gedit-ui.xml.h:101
+msgid "_Toolbar"
+msgstr "Thanh _Công cụ"
+
+#: gedit/gedit-ui.xml.h:102
+msgid "_Tools"
+msgstr "_Công cụ"
+
+#: gedit/gedit-ui.xml.h:103
+msgid "_Undo"
+msgstr "_Hoàn lại"
+
+#: gedit/gedit-ui.xml.h:104
+msgid "_View"
+msgstr "_Xem"
+
+#: gedit/gedit-utils.c:412
+#, c-format
+msgid ""
+"Could not find the file \"%s\".\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Không thể tìm thấy tập tin \"%s\".\n"
+"\n"
+"Vui lòng kiểm tra bạn đã nhập đúng vị trí chưa và thử lại."
+
+#: gedit/gedit-utils.c:420
+#, c-format
+msgid "Could not open the file \"%s\" because it contains corrupted data."
+msgstr "Không thể mở tập tin \"%s\" vì chứa dữ liệu hỏng."
+
+#: gedit/gedit-utils.c:431
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because gedit cannot handle %s: locations."
+msgstr "Không thể mỡ tập tin \"%s\" vì gedit không thể xử lý %s: vị trí."
+
+#: gedit/gedit-utils.c:437
+#, c-format
+msgid "Could not open the file \"%s\""
+msgstr "Không thể mở tập tin \"%s\""
+
+#: gedit/gedit-utils.c:447
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains data in an invalid format."
+msgstr "Không thể mở tập tin \"%s\" vì nó chứa dữ liệu ở dạng thức sai."
+
+#: gedit/gedit-utils.c:454
+#, c-format
+msgid "Could not open the file \"%s\" because it is too big."
+msgstr "Không thể mở tập tin \"%s\" vì nó quá lớn."
+
+#: gedit/gedit-utils.c:461
+#, c-format
+msgid ""
+"\"%s\" is not a valid location.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Địa điểm \"%s\" không hợp lệ.\n"
+"\n"
+"Vui lòng kiểm tra xem bạn đã nhập địa điểm đúng chưa rồi thử lại."
+
+#: gedit/gedit-utils.c:469
+#, c-format
+msgid "Could not open the file \"%s\" because access was denied."
+msgstr "Không thể mở tập tin \"%s\" vì truy cập bị từ chối."
+
+#: gedit/gedit-utils.c:476
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because there are too many open files.\n"
+"\n"
+"Please, close some open file and try again."
+msgstr ""
+"Không thể mở tập tin \"%s\" vì đã mở quá nhiều tập tin.\n"
+"\n"
+"Vui lòng đóng bớt vài tập tin rồi thử lại."
+
+#: gedit/gedit-utils.c:484
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"\"%s\" là một thư mục.\n"
+"\n"
+"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa rồi thử lại."
+
+#: gedit/gedit-utils.c:492
+#, c-format
+msgid ""
+"Not enough available memory to open the file \"%s\". Please, close some "
+"running application and try again."
+msgstr ""
+"Không đủ bộ nhớ để mở tập tin \"%s\". Vui lòng đóng bớt vài ứng dụng đang "
+"chạy rồi thử lại."
+
+#: gedit/gedit-utils.c:518
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
+"\n"
+"Please, check that you typed the location correctly and that your proxy "
+"settings are correct and then try again."
+msgstr ""
+"Không thể mở tập tin \"%s\" vì không tìm thấy máy chủ \"%s\".\n"
+"\n"
+"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa và thiết lập proxy của "
+"bạn đã đúng chưa rồi thử lại."
+
+#: gedit/gedit-utils.c:533
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was invalid.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Không thể mở tập tin \"%s\" vì tên máy chủ không hợp lệ.\n"
+"\n"
+"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa rồi thử lại."
+
+#: gedit/gedit-utils.c:542
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Không thể mở tập tin \"%s\" vì chưa có tên máy chủ.\n"
+"\n"
+"Vui lòng kiểm tra lại các thông số proxy của bạn rồi thử lại."
+
+#: gedit/gedit-utils.c:551
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because the attempt to log in failed.\n"
+"\n"
+"Please, check that you typed the location correctly and try again."
+msgstr ""
+"Không thể mở tập tin \"%s\" vì thất bại khi thử đăng nhập.\n"
+"\n"
+"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa rồi thử lại."
+
+#: gedit/gedit-utils.c:560 gedit/gedit-utils.c:628
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because it contains invalid data.\n"
+"\n"
+"Probably, you are trying to open a binary file."
+msgstr ""
+"Không thể mở tập tin \"%s\" vì nó chứa các dữ liệu không hợp lệ.\n"
+"\n"
+"Có lẽ do bạn đã thử mở một tập tin nhị phân."
+
+#: gedit/gedit-utils.c:604
+#, c-format
+msgid ""
+"Could not open the file \"%s\" because gedit has not been able to "
+"automatically detect the character coding.\n"
+"\n"
+"Please, check that you are not trying to open a binary file and try again "
+"selecting a character coding in the 'Open File...' (or 'Open Location') "
+"dialog."
+msgstr ""
+"Không thể mở tập tin \"%s\" vì gedit không thể tự động xác định bảng mã của tập tin.\n"
+"\n"
+"Vui lòng kiểm tra để chắc chắn bạn không mở một tập tin nhị phân, và thử chọn bảng mã trong hộp thoại 'Mở tập tin...' (hoặc 'Mở địa điểm')"
+
+#: gedit/gedit-utils.c:616 gedit/gedit-utils.c:646
+#, c-format
+msgid ""
+"Could not open the file \"%s\" using the %s character coding.\n"
+"\n"
+"Please, check that you are not trying to open a binary file and that you "
+"selected the right character coding in the 'Open File...' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"Không thể mở tập tin \"%s\" dùng mã ký tự %s\n"
+"\n"
+"Vui lòng kiểm tra xem bạn không phải đang mở một tập tin nhị phân, và bạn đã chọn đúng bảng mã trong hộp thoại 'Mở tập tin...' (hoặc 'Mở vị trí'). Sau đó hãy thử lại."
+
+#: gedit/gedit-utils.c:662
+#, c-format
+msgid "Could not open the file \"%s\"."
+msgstr "Không thể mở tập tin \"%s\"."
+
+#: gedit/gedit-utils.c:666
+#, c-format
+msgid ""
+"Could not open the file \"%s\".\n"
+"\n"
+"%s"
+msgstr ""
+"Không thể mở tập tin \"%s\".\n"
+"\n"
+"%s"
+
+#: gedit/gedit-utils.c:718
+#, c-format
+msgid "Could not save the file \"%s\"."
+msgstr "Không thể lưu tập tin \"%s\"."
+
+#: gedit/gedit-utils.c:722
+#, c-format
+msgid ""
+"Could not save the file \"%s\".\n"
+"\n"
+"%s"
+msgstr ""
+"Không thể lưu tập tin \"%s\".\n"
+"\n"
+"%s"
+
+#: gedit/gedit-utils.c:775
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot find it.\n"
+"\n"
+"Perhaps, it has recently been deleted."
+msgstr ""
+"Không thể hoàn nguyên tập tin \"%s\" vì gedit không tìm thấy nó.\n"
+"\n"
+"Có lẽ nó vừa mới bị xóa."
+
+#: gedit/gedit-utils.c:782
+#, c-format
+msgid "Could not revert the file \"%s\" because it contains corrupted data."
+msgstr "Không thể hoàn nguyên tập tin \"%s\" vì nó chứa dữ liệu hỏng."
+
+#: gedit/gedit-utils.c:793
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
+msgstr ""
+"Không thể hoàn nguyên tập tin \"%s\" vì gedit không thể xử lý %s: địa điểm."
+
+#: gedit/gedit-utils.c:799 gedit/gedit-utils.c:939
+#, c-format
+msgid "Could not revert the file \"%s\"."
+msgstr "Không thể hoàn nguyên tập tin \"%s\"."
+
+#: gedit/gedit-utils.c:809
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains data in an invalid "
+"format."
+msgstr ""
+"Không thể hoàn nguyên tập tin \"%s\" vì nó chứa dữ liệu trong dạng thức "
+"không hợp lệ."
+
+#: gedit/gedit-utils.c:816
+#, c-format
+msgid "Could not revert the file \"%s\" because it is too big."
+msgstr "Không thể hoàn nguyên tập tin \"%s\" vì nó quá lớn."
+
+#: gedit/gedit-utils.c:823
+#, c-format
+msgid "Could not revert the file \"%s\" because access was denied."
+msgstr "Không thể hoàn nguyên tập tin \"%s\" vì truy cập bị từ chối."
+
+#: gedit/gedit-utils.c:830
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because there are too many open files.\n"
+"\n"
+"Please, close some open file and try again."
+msgstr ""
+"Không thể hoàn nguyên tập tin \"%s\" vì có quá nhiều tập tin được mở.\n"
+"\n"
+"Vui lòng đóng bớt một số tập tin rồi thử lại."
+
+#: gedit/gedit-utils.c:838
+#, c-format
+msgid ""
+"Not enough available memory to revert the file \"%s\". Please, close some "
+"running application and try again."
+msgstr ""
+"Không đủ bộ nhớ để hoàn nguyên tập tin \"%s\". Vui lòng đóng bớt một số ứng "
+"dụng đang chạy rồi thử lại."
+
+#: gedit/gedit-utils.c:864
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Không thể hoàn nguyên tập tin \"%s\" vì không tìm thấy máy chủ \"%s\".\n"
+"\n"
+"Vui lòng kiểm tra lại các thiết lập proxy rồi thử lại."
+
+#: gedit/gedit-utils.c:878
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because the host name was empty.\n"
+"\n"
+"Please, check that your proxy settings are correct and try again."
+msgstr ""
+"Không thể hoàn nguyên tập tin \"%s\" vì chưa có tên máy chủ.\n"
+"\n"
+"Vui lòng kiểm tra lại thiết lập proxy rồi thử lại."
+
+#: gedit/gedit-utils.c:885
+#, c-format
+msgid "Could not revert the file \"%s\" because the attempt to log in failed."
+msgstr "Không thể hoàn nguyên tập tin \"%s\" vì đăng nhập thất bại."
+
+#: gedit/gedit-utils.c:892
+#, c-format
+msgid ""
+"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
+"\n"
+"Probably, you are trying to revert a binary file."
+msgstr ""
+"Không thể hoàn nguyên tập tin \"%s\" vì nó chứa dữ liệu UTF-8 không hợp lệ.\n"
+"\n"
+"Có lẽ do bạn đã cố hoàn nguyên một tập tin nhị phân."
+
+#: gedit/gedit-utils.c:901
+msgid "It is not possible to revert an Untitled document."
+msgstr "Không thể hoàn nguyên tài liệu \"Không tên\"."
+
+#: gedit/gedit-utils.c:990
+#, c-format
+msgid "The file \"%s\" already exists."
+msgstr "Tập tin \"%s\" đã có rồi."
+
+#: gedit/gedit-utils.c:996
+#, c-format
+msgid ""
+"\"%s\" is a directory.\n"
+"\n"
+"Please, check that you typed the location correctly."
+msgstr ""
+"\"%s\" là một thư mục.\n"
+"\n"
+"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa."
+
+#: gedit/gedit-utils.c:1005
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"Make sure you have the appropriate write permissions."
+msgstr ""
+"Không thể tạo tập tin \"%s\".\n"
+"\n"
+"Hãy chắc chắn rằng bạn có quyền truy cập ghi hợp lệ."
+
+#: gedit/gedit-utils.c:1012
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"The file name is too long."
+msgstr ""
+"Không thể tạo tập tin \"%s\".\n"
+"\n"
+"Tên tập tin quá dài."
+
+#: gedit/gedit-utils.c:1019
+#, c-format
+msgid ""
+"Cannot create the file \"%s\".\n"
+"\n"
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"Không thể tạo tập tin \"%s\".\n"
+"\n"
+"Thành phần thư mục trong tên tập tin không tồn tại hoặc là một liên kết lủng "
+"lẳng."
+
+#: gedit/gedit-utils.c:1028
+#, c-format
+msgid ""
+"There is not enough disk space to create the file \"%s\".\n"
+"\n"
+"Please free some disk space and try again."
+msgstr ""
+"Không đủ chỗ trên đĩa để lưu tập tin \"%s\".\n"
+"\n"
+"Vui lòng giải phóng thêm chỗ trống trên đĩa rồi thử lại."
+
+#: gedit/gedit-utils.c:1034
+#, c-format
+msgid "Could not create the file \"%s\"."
+msgstr "Không thể tạo tập tin \"%s\"."
+
+#.
+#. if (col == chars)
+#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
+#. else
+#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
+#.
+#: gedit/gedit-view.c:685
+#, c-format
+msgid "  Ln %d, Col %d"
+msgstr "  Dòng %d, Cột %d"
+
+#: gedit/gedit-view.c:723
+msgid "  OVR"
+msgstr " ĐÈ"
+
+#: gedit/gedit-view.c:725
+msgid "  INS"
+msgstr " CHÈN"
+
+#: gedit/gedit2.c:81
+msgid "Show utility debugging messages."
+msgstr "Hiện thông báo gỡ rối tiện ích."
+
+#: gedit/gedit2.c:84
+msgid "Show metadata debugging messages."
+msgstr ""
+
+#: gedit/gedit2.c:87
+msgid "Show mdi debugging messages."
+msgstr "Hiện thông báo debug mdi."
+
+#: gedit/gedit2.c:90
+msgid "Show commands debugging messages."
+msgstr "Hiện thông báo debug lệnh."
+
+#: gedit/gedit2.c:93
+msgid "Show document debugging messages."
+msgstr "Hiện thông báo debug tài liệu."
+
+#: gedit/gedit2.c:96
+msgid "Show file debugging messages."
+msgstr "Hiện thông báo debug tập tin."
+
+#: gedit/gedit2.c:99
+msgid "Show plugin debugging messages."
+msgstr "Hiện thông báo debug plugin."
+
+#: gedit/gedit2.c:102
+msgid "Show prefs debugging messages."
+msgstr "Hiện thông báo debug thông số."
+
+#: gedit/gedit2.c:105
+msgid "Show printing debugging messages."
+msgstr "Hiện thông báo debug in ấn."
+
+#: gedit/gedit2.c:108
+msgid "Show search debugging messages."
+msgstr "Hiện thông báo debug tìm kiếm."
+
+#: gedit/gedit2.c:111
+msgid "Show undo debugging messages."
+msgstr "Hiện thông báo debug hoàn lại."
+
+#: gedit/gedit2.c:114
+msgid "Show view debugging messages."
+msgstr "Hiện thông báo view debug."
+
+#: gedit/gedit2.c:117
+msgid "Show recent debugging messages."
+msgstr "Hiện thông báo recent debug."
+
+#: gedit/gedit2.c:120
+msgid "Show session management debugging messages."
+msgstr "Hiện thông báo debug quản lý session."
+
+#: gedit/gedit2.c:123
+msgid "Turn on all debugging messages."
+msgstr "Bật mọi thông báo debug."
+
+#: gedit/gedit2.c:126
+msgid "Quit an existing instance of gedit"
+msgstr "Thoát khỏi gedit"
+
+#: gedit/gedit2.c:129
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Tạp cửa sổ mới trong phiên bản gedit này"
+
+#: gedit/gedit2.c:132
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Tạo tài liệu mới trong phiên bản gedit này"
+
+#: gedit/recent-files/egg-recent-vfs-utils.c:90
+msgid " (invalid Unicode)"
+msgstr " (Unicode không hợp lệ)"
 
 #: plugins/docinfo/docinfo.c:46
 msgid "_Document Statistics"
@@ -682,42 +2511,6 @@ msgstr "Thống kê Tài liệu"
 msgid "_Update"
 msgstr "_Cập nhật"
 
-#: plugins/docinfo/docinfo.glade2.h:1
-msgid "0"
-msgstr "0"
-
-#: plugins/docinfo/docinfo.glade2.h:2
-msgid "Bytes"
-msgstr "Byte"
-
-#: plugins/docinfo/docinfo.glade2.h:3
-msgid "Characters (no spaces)"
-msgstr "Ký tự (không khoảng trắng)"
-
-#: plugins/docinfo/docinfo.glade2.h:4
-msgid "Characters (with spaces)"
-msgstr "Ký tự (có khoảng trắng)"
-
-#: plugins/docinfo/docinfo.glade2.h:5
-msgid "File Name"
-msgstr "Tên tập tin"
-
-#: plugins/docinfo/docinfo.glade2.h:6 src/gedit-print.c:373
-msgid "Lines"
-msgstr "Dòng"
-
-#: plugins/docinfo/docinfo.glade2.h:7
-msgid "Update"
-msgstr "Cập nhật"
-
-#: plugins/docinfo/docinfo.glade2.h:8
-msgid "Words"
-msgstr "Từ"
-
-#: plugins/docinfo/docinfo.glade2.h:9
-msgid "gedit: Document Info plugin"
-msgstr "gedit: Plugin Thông tin tài liệu"
-
 #: plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 msgid ""
 "The Document Statistics plugin analyzes the current document and determines "
@@ -727,6 +2520,62 @@ msgstr ""
 "Plugin thống kê tài liệu phân tích tài liệu hiện thời và xác định số từ, số "
 "dòng, số ký tự, và các ký tự không phải khoảng trắng trong tài liệu rồi hiển "
 "thị kết quả."
+
+#: plugins/docinfo/docinfo.glade2.h:2
+msgid "0"
+msgstr "0"
+
+#: plugins/docinfo/docinfo.glade2.h:3
+msgid "<span weight=\"bold\">File Name</span>"
+msgstr "<span weight=\"bold\">Tên tập tin</span>"
+
+#: plugins/docinfo/docinfo.glade2.h:4
+msgid "Bytes"
+msgstr "Byte"
+
+#: plugins/docinfo/docinfo.glade2.h:5
+msgid "Characters (no spaces)"
+msgstr "Ký tự (không khoảng trắng)"
+
+#: plugins/docinfo/docinfo.glade2.h:6
+msgid "Characters (with spaces)"
+msgstr "Ký tự (có khoảng trắng)"
+
+#: plugins/docinfo/docinfo.glade2.h:8
+msgid "Update"
+msgstr "Cập nhật"
+
+#: plugins/docinfo/docinfo.glade2.h:9
+msgid "Words"
+msgstr "Từ"
+
+#: plugins/docinfo/docinfo.glade2.h:10
+msgid "gedit: Document Info plugin"
+msgstr "gedit: Plugin Thông tin tài liệu"
+
+#: plugins/indent/indent.c:45
+msgid "_Indent"
+msgstr "Thụt l_ề"
+
+#: plugins/indent/indent.c:47
+msgid "Indent selected lines"
+msgstr "Thụt lề dòng được chọn"
+
+#: plugins/indent/indent.c:49
+msgid "U_nindent"
+msgstr "Th_ôi thụt lề"
+
+#: plugins/indent/indent.c:51
+msgid "Unindent selected lines"
+msgstr "Thôi thụt lề dòng được chọn"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
+msgid "Indent lines"
+msgstr "Dòng có thụt lề"
+
+#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
+msgid "Indent or un-indent selected lines."
+msgstr "Thụt lề hay thôi thụt lề dòng được chọn."
 
 #: plugins/sample/sample.c:43
 msgid "Insert User Na_me"
@@ -801,6 +2650,18 @@ msgstr ""
 msgid "Executing command"
 msgstr "Lệnh thực thi"
 
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+msgid ""
+"Execute an external program and eventually grabs its output in the output "
+"window."
+msgstr ""
+"Thự thi một chương trình ngoài và thậm chí bắt output của nó trong một cửa "
+"sổ output."
+
+#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid "Shell command"
+msgstr "Lệnh shell"
+
 #: plugins/shell_output/shell_output.glade2.h:2
 msgid "Co_mmand:"
 msgstr "_Lệnh:"
@@ -821,148 +2682,22 @@ msgstr "_Thư mục hiện thờu:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Plugin Đầu ra của shell"
 
-#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
-msgid ""
-"Execute an external program and eventually grabs its output in the output "
-"window."
-msgstr ""
-"Thự thi một chương trình ngoài và thậm chí bắt output của nó trong một cửa "
-"sổ output."
+#. Key in case the plugin ever needs any settings
+#: plugins/sort/sort.c:26
+msgid "S_ort..."
+msgstr "_Phân loại..."
 
-#: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
-msgid "Shell command"
-msgstr "Lệnh shell"
+#: plugins/sort/sort.c:29
+msgid "Sort the current document or selection."
+msgstr "Phân loại tài liệu hiện thời hay phần chọn."
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:136
-msgid "Tag list plugin"
-msgstr "Plugin danh sách tag"
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:1 plugins/sort/sort.glade2.h:3
+msgid "Sort"
+msgstr "Phân loại"
 
-#: plugins/taglist/gedit-taglist-plugin-window.c:154
-msgid "Select the group of tags you want to use"
-msgstr "Chọn nhóm các tag muốn dùng"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:176
-msgid "Tag Groups Combo"
-msgstr "Combo các nhóm tag"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:178
-msgid "Tags Name List"
-msgstr "Danh sách tên tag"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:188
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Nhấp đúp trên tag để chèn nó vào tài liệu hiện thời"
-
-#: plugins/taglist/gedit-taglist-plugin-window.c:199
-msgid "Tags"
-msgstr "Tag"
-
-#: plugins/taglist/gedit-taglist-plugin.c:46
-msgid "Tag _List"
-msgstr "_Danh sách tag"
-
-#.
-#. #define MENU_ITEM_NAME		"TagList"
-#.
-#: plugins/taglist/gedit-taglist-plugin.c:51
-msgid "Show the tag list window"
-msgstr "Hiện cửa sổ danh sách tag"
-
-#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid "Tag list"
-msgstr "Danh sách tag"
-
-#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
-msgid ""
-"The tag list plugin provides a method to easily insert into a document "
-"commonly used tags/strings without having to type them."
-msgstr ""
-"Plugin danh sách tag cung cấp một cách để chèn dễ dàng các tag/chuỗi thường "
-"dùng vào tài liệu mà không cần gõ vào."
-
-#: plugins/time/time.c:48
-msgid "In_sert Date and Time..."
-msgstr "Ch_èn Ngày & Giờ..."
-
-#: plugins/time/time.c:51
-msgid "Insert current date and time at the cursor position"
-msgstr "Chèn ngày, giờ hiện thời vào vị trí con trỏ hiện thời"
-
-#: plugins/time/time.c:448
-msgid "Available formats"
-msgstr "Dạng thức hỗ trợ"
-
-#: plugins/time/time.c:552
-msgid "Configure insert date/time plugin..."
-msgstr "Cấu hình chèn plugin ngày/giờ..."
-
-#: plugins/time/time.glade2.h:1 src/dialogs/gedit-preferences.glade2.h:1
-msgid "    "
-msgstr "    "
-
-#: plugins/time/time.glade2.h:3
-msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
-msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
-
-#: plugins/time/time.glade2.h:4
-msgid "<span weight=\"bold\"> When inserting date/time...</span>"
-msgstr "<span weight=\"bold\"> Khi đang chèn ngày-giờ...</span>"
-
-#: plugins/time/time.glade2.h:5
-msgid "Configure date/time plugin"
-msgstr "Cấu hình plugin ngày/giờ"
-
-#: plugins/time/time.glade2.h:6
-msgid "Insert Date and Time"
-msgstr "Chèn Ngày & Giờ"
-
-#: plugins/time/time.glade2.h:7
-msgid "Use the _selected format"
-msgstr "Dùng định dạng được chọn"
-
-#: plugins/time/time.glade2.h:8
-msgid "_Insert"
-msgstr "Ch_èn"
-
-#: plugins/time/time.glade2.h:9
-msgid "_Prompt for a format"
-msgstr "Nh_ắc nhở về định dạng"
-
-#: plugins/time/time.glade2.h:10
-msgid "_Use custom format"
-msgstr "_Dùng định dạng tùy chỉnh"
-
-#: plugins/time/time.gedit-plugin.desktop.in.h:1
-msgid "Insert Date/Time"
-msgstr "Chèn ngày/giờ"
-
-#: plugins/time/time.gedit-plugin.desktop.in.h:2
-msgid "Inserts current date and time at the cursor position."
-msgstr "Chèn ngày, giờ hiện thời vào vị trí con trỏ hiện thời."
-
-#: plugins/indent/indent.c:45
-msgid "_Indent"
-msgstr "Thụt l_ề"
-
-#: plugins/indent/indent.c:47
-msgid "Indent selected lines"
-msgstr "Thụt lề dòng được chọn"
-
-#: plugins/indent/indent.c:49
-msgid "U_nindent"
-msgstr "Th_ôi thụt lề"
-
-#: plugins/indent/indent.c:51
-msgid "Unindent selected lines"
-msgstr "Thôi thụt lề dòng được chọn"
-
-#: plugins/indent/indent.gedit-plugin.desktop.in.h:1
-msgid "Indent lines"
-msgstr "Dòng có thụt lề"
-
-#: plugins/indent/indent.gedit-plugin.desktop.in.h:2
-msgid "Indent or un-indent selected lines."
-msgstr "Thụt lề hay thôi thụt lề dòng được chọn."
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
+msgid "Sorts a document or selected text."
+msgstr "Phân loại tài liệu hay văn bản được chọn."
 
 #: plugins/sort/sort.glade2.h:1
 msgid "R_emove duplicates"
@@ -971,10 +2706,6 @@ msgstr "B_ỏ các đúp"
 #: plugins/sort/sort.glade2.h:2
 msgid "S_tart at column:"
 msgstr "_Bắt đầu tại cột:"
-
-#: plugins/sort/sort.glade2.h:3 plugins/sort/sort.gedit-plugin.desktop.in.h:1
-msgid "Sort"
-msgstr "Phân loại"
 
 #: plugins/sort/sort.glade2.h:4
 msgid "You cannot undo a sort operation"
@@ -992,30 +2723,26 @@ msgstr "Đ_ảo thứ tự"
 msgid "_Sort"
 msgstr "_Phân loại"
 
-#: plugins/sort/sort.gedit-plugin.desktop.in.h:2
-msgid "Sorts a document or selected text."
-msgstr "Phân loại tài liệu hay văn bản được chọn."
-
-#: plugins/spell/gedit-automatic-spell-checker.c:318
+#: plugins/spell/gedit-automatic-spell-checker.c:336
 #: plugins/spell/gedit-spell-checker-dialog.c:504
 msgid "(no suggested words)"
 msgstr "(không có từ để gợi ý)"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:342
+#: plugins/spell/gedit-automatic-spell-checker.c:360
 msgid "_More..."
 msgstr "H_ơn..."
 
 #. Ignore all
-#: plugins/spell/gedit-automatic-spell-checker.c:395
+#: plugins/spell/gedit-automatic-spell-checker.c:413
 msgid "_Ignore All"
 msgstr "Bỏ _qua toàn bộ"
 
 #. + Add to Dictionary
-#: plugins/spell/gedit-automatic-spell-checker.c:408
+#: plugins/spell/gedit-automatic-spell-checker.c:426
 msgid "_Add"
 msgstr "Th_êm"
 
-#: plugins/spell/gedit-automatic-spell-checker.c:445
+#: plugins/spell/gedit-automatic-spell-checker.c:463
 msgid "_Spelling Suggestions..."
 msgstr "Gợi ý ch_ính tả..."
 
@@ -1035,117 +2762,101 @@ msgstr "(đúng chính tả)"
 msgid "Completed spell checking"
 msgstr "Hoàn thành kiểm tra chính tả"
 
-#: plugins/spell/gedit-spell-checker.c:73
+#: plugins/spell/gedit-spell-checker.c:80
 msgid "Breton"
 msgstr "Breton"
 
-#: plugins/spell/gedit-spell-checker.c:74
+#: plugins/spell/gedit-spell-checker.c:81
 msgid "Catalan"
 msgstr "Catalan"
 
-#: plugins/spell/gedit-spell-checker.c:75
+#: plugins/spell/gedit-spell-checker.c:82
 msgid "Czech"
 msgstr "Czech"
 
-#: plugins/spell/gedit-spell-checker.c:76
+#: plugins/spell/gedit-spell-checker.c:83
 msgid "Danish"
 msgstr "Danish"
 
-#: plugins/spell/gedit-spell-checker.c:77
+#: plugins/spell/gedit-spell-checker.c:84
 msgid "German (Germany)"
 msgstr "German (Germany)"
 
-#: plugins/spell/gedit-spell-checker.c:78
+#: plugins/spell/gedit-spell-checker.c:85
 msgid "German (Swiss)"
 msgstr "German (Swiss)"
 
-#: plugins/spell/gedit-spell-checker.c:79
+#: plugins/spell/gedit-spell-checker.c:86
 msgid "English (American)"
 msgstr "English (American)"
 
-#: plugins/spell/gedit-spell-checker.c:80
+#: plugins/spell/gedit-spell-checker.c:87
 msgid "English (British)"
 msgstr "English (British)"
 
-#: plugins/spell/gedit-spell-checker.c:81
+#: plugins/spell/gedit-spell-checker.c:88
 msgid "English (Canadian)"
 msgstr "English (Canadian)"
 
-#: plugins/spell/gedit-spell-checker.c:82
+#: plugins/spell/gedit-spell-checker.c:89
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: plugins/spell/gedit-spell-checker.c:83
+#: plugins/spell/gedit-spell-checker.c:90
 msgid "Spanish"
 msgstr "Spanish"
 
-#: plugins/spell/gedit-spell-checker.c:84
+#: plugins/spell/gedit-spell-checker.c:91
 msgid "Faroese"
 msgstr "Faroese"
 
-#: plugins/spell/gedit-spell-checker.c:85
+#: plugins/spell/gedit-spell-checker.c:92
 msgid "French (France)"
 msgstr "French (France)"
 
-#: plugins/spell/gedit-spell-checker.c:86
+#: plugins/spell/gedit-spell-checker.c:93
 msgid "French (Swiss)"
 msgstr "French (Swiss)"
 
-#: plugins/spell/gedit-spell-checker.c:87
+#: plugins/spell/gedit-spell-checker.c:94
 msgid "Italian"
 msgstr "Italian"
 
-#: plugins/spell/gedit-spell-checker.c:88
+#: plugins/spell/gedit-spell-checker.c:95
 msgid "Dutch"
 msgstr "Dutch"
 
-#: plugins/spell/gedit-spell-checker.c:89
+#: plugins/spell/gedit-spell-checker.c:96
 msgid "Norwegian"
 msgstr "Norwegian"
 
-#: plugins/spell/gedit-spell-checker.c:90
+#: plugins/spell/gedit-spell-checker.c:97
 msgid "Polish"
 msgstr "Ba lan"
 
-#: plugins/spell/gedit-spell-checker.c:91
+#: plugins/spell/gedit-spell-checker.c:98
 msgid "Portuguese (Portugal)"
 msgstr "Portuguese (Portugal)"
 
-#: plugins/spell/gedit-spell-checker.c:92
+#: plugins/spell/gedit-spell-checker.c:99
 msgid "Portuguese (Brazilian)"
 msgstr "Portuguese (Brazilian)"
 
-#: plugins/spell/gedit-spell-checker.c:93
+#: plugins/spell/gedit-spell-checker.c:100
 msgid "Russian"
 msgstr "Russian"
 
-#: plugins/spell/gedit-spell-checker.c:94
+#: plugins/spell/gedit-spell-checker.c:101
 msgid "Swedish"
 msgstr "Swedish"
 
-#: plugins/spell/gedit-spell-checker.c:653
+#: plugins/spell/gedit-spell-checker.c:734
 msgid "Default"
 msgstr "Mặc định"
 
-#: plugins/spell/gedit-spell-language-dialog.c:229
-#: src/dialogs/gedit-dialog-goto-line.c:165
-#: src/dialogs/gedit-plugin-program-location-dialog.c:96
-#: src/dialogs/gedit-encodings-dialog.c:238
-#, c-format
-msgid "Could not find the required widgets inside %s."
-msgstr "Không thể tìm thấy widget yêu cầu trong %s."
-
-#: plugins/spell/gedit-spell-language-dialog.c:249
+#: plugins/spell/gedit-spell-language-dialog.c:253
 msgid "Languages"
 msgstr "Các ngôn ngữ"
-
-#: plugins/spell/spell.gedit-plugin.desktop.in.h:1
-msgid "Checks the spelling of the current document."
-msgstr "Kiểm tra chính tả của tài liệu hiện thời."
-
-#: plugins/spell/spell.gedit-plugin.desktop.in.h:2
-msgid "Spell checker"
-msgstr "Trình kiểm tra chính tả"
 
 #: plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -1211,15 +2922,6 @@ msgstr "Lờ _đi"
 msgid "_Suggestions:"
 msgstr "_Gợi ý:"
 
-#. Key in case the plugin ever needs any settings
-#: plugins/sort/sort.c:26
-msgid "S_ort..."
-msgstr "_Phân loại..."
-
-#: plugins/sort/sort.c:29
-msgid "Sort the current document or selection."
-msgstr "Phân loại tài liệu hiện thời hay phần chọn."
-
 #: plugins/spell/spell.c:51
 msgid "_Check Spelling"
 msgstr "Ki_ểm tra chính tả"
@@ -1244,1909 +2946,451 @@ msgstr "Lập ng_ôn ngữ"
 msgid "Set the language of the current document"
 msgstr "Lập ngôn ngữ của tài liệu hiện thời"
 
-#: plugins/spell/spell.c:549
+#: plugins/spell/spell.c:553
 msgid "The document is empty."
 msgstr "Tài liệu trống."
 
-#: plugins/spell/spell.c:567
+#: plugins/spell/spell.c:571
 msgid "The selected text does not contain mispelled words."
 msgstr "Văn bản được chọn không chứa các từ thiếu soát lỗi chính tả."
 
-#: plugins/spell/spell.c:568
+#: plugins/spell/spell.c:572
 msgid "The document does not contain mispelled words."
 msgstr "Tài liệu không chứa các từ thiếu soát lỗi chính tả."
 
-#: src/bonobo-mdi.c:549 src/bonobo-mdi.c:1962
-#, c-format
-msgid "Activate %s"
-msgstr "Kích hoạt %s"
-
-#: src/dialogs/gedit-dialog-goto-line.c:139
-msgid "Go to Line"
-msgstr "Đi tới Dòng"
-
-#. Add Goto Line button
-#: src/dialogs/gedit-dialog-goto-line.c:149
-msgid "_Go to Line"
-msgstr "_Đi tới Dòng"
-
-#: src/dialogs/gedit-dialog-replace.c:132
-#: src/dialogs/gedit-dialog-replace.c:1025 src/gedit-commands.c:363
-#, c-format
-msgid "The text \"%s\" was not found."
-msgstr "Không tìm thấy đoạn text \"%s\"."
-
-#: src/dialogs/gedit-dialog-replace.c:240 src/dialogs/replace.glade2.h:4
-#: src/gedit-ui.xml.h:51
-msgid "Replace"
-msgstr "Thay thế"
-
-#: src/dialogs/gedit-dialog-replace.c:251
-msgid "Replace _All"
-msgstr "Thay thế tất _cả"
-
-#. Add Replace button
-#: src/dialogs/gedit-dialog-replace.c:254 src/gedit-file-selector-util.c:129
-msgid "_Replace"
-msgstr "T_hay thế"
-
-#: src/dialogs/gedit-dialog-replace.c:376 src/gedit-ui.xml.h:22
-msgid "Find"
-msgstr "_Tìm"
-
-#: src/dialogs/gedit-dialog-replace.c:1034
-#, c-format
-msgid "Found and replaced %d occurences."
-msgstr "Đã tìm thấy và thay thế %d lần."
-
-#: src/dialogs/gedit-dialog-uri.c:83
-msgid "Open Location"
-msgstr "Mở vị trí"
-
-#: src/dialogs/gedit-plugin-manager.c:53
-msgid "Plugin"
-msgstr "Plugin"
-
-#: src/dialogs/gedit-plugin-manager.c:54
-msgid "Load"
-msgstr "Nạp"
-
-#: src/dialogs/gedit-plugin-manager.c:320
-msgid "Module file name"
-msgstr "Tên tập tin module"
-
-#: src/dialogs/gedit-plugin-manager.c:321
-msgid "Author(s)"
-msgstr "Tác giả"
-
-#: src/dialogs/gedit-plugin-manager.c:488
-msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-msgstr "Không thể tìm thấy plugin-manager.glade2, hãy cài đặt lại gedit.\n"
-
-#: src/dialogs/gedit-plugin-manager.c:511
-msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-msgstr ""
-"Tập tin glade của trình quản lý plugin không hợp lệ -- không có widget nào "
-"được tìm thấy.\n"
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:74
-#: src/dialogs/program-location-dialog.glade2.h:1
-msgid "Set program location..."
-msgstr "Định vị trí chương trình..."
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:102
-#, c-format
-msgid ""
-"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
-"task.\n"
-"\n"
-"Please, specify the location of the <tt>%s</tt> program."
-msgstr ""
-"Plugin %s dùng chương trình bên ngoài, gọi là <tt>%s</tt>, để thực công "
-"việc.\n"
-"\n"
-"Vui lòng xác định vị trí của chương trình <tt>%s</tt>."
-
-#: src/dialogs/gedit-plugin-program-location-dialog.c:148
-msgid "The selected file is not executable."
-msgstr "Tập tin được chọn không phải là tập tin thực thi."
-
-#: src/dialogs/gedit-preferences-dialog.c:234
-msgid "Font & Colors"
-msgstr "Font & Màu sắc"
-
-#: src/dialogs/gedit-preferences-dialog.c:236
-#: src/dialogs/gedit-preferences.glade2.h:47
-msgid "Tabs"
-msgstr "Tab"
-
-#: src/dialogs/gedit-preferences-dialog.c:237
-msgid "Wrap Mode"
-msgstr "Chế độ ngắt dòng"
-
-#: src/dialogs/gedit-preferences-dialog.c:238
-msgid "Auto Indent"
-msgstr "Tự động thụt lề"
-
-#: src/dialogs/gedit-preferences-dialog.c:239
-msgid "Line Numbers"
-msgstr "Số dòng"
-
-#: src/dialogs/gedit-preferences-dialog.c:241 src/gedit-ui.xml.h:32
-msgid "Open"
-msgstr "Mở"
-
-#: src/dialogs/gedit-preferences-dialog.c:242
-#: src/dialogs/gedit-preferences.glade2.h:42 src/gedit-ui.xml.h:55
-msgid "Save"
-msgstr "Lưu"
-
-#: src/dialogs/gedit-preferences-dialog.c:243
-#: src/dialogs/gedit-preferences.glade2.h:50 src/gedit-ui.xml.h:72
-msgid "Undo"
-msgstr "Hoàn lại"
-
-#: src/dialogs/gedit-preferences-dialog.c:251
-msgid "Page"
-msgstr "Trang"
-
-#: src/dialogs/gedit-preferences-dialog.c:253
-msgid "Fonts"
-msgstr "Font"
-
-#: src/dialogs/gedit-preferences-dialog.c:260
-msgid "Manager"
-msgstr "Bộ quản lý"
-
-#: src/dialogs/gedit-preferences-dialog.c:268
-msgid "Editor"
-msgstr "Trình hiệu chỉnh"
-
-#: src/dialogs/gedit-preferences-dialog.c:269
-#: src/dialogs/gedit-preferences.glade2.h:38 src/gedit-print.c:364
-#: src/gedit-ui.xml.h:41
-msgid "Print"
-msgstr "In"
-
-#: src/dialogs/gedit-preferences-dialog.c:270
-msgid "Plugins"
-msgstr "Plugin"
-
-#: src/dialogs/gedit-preferences-dialog.c:342
-msgid "Cat_egories:"
-msgstr "_Phân loại:"
-
-#: src/dialogs/gedit-preferences-dialog.c:364
-msgid "Preferences"
-msgstr "Thông số"
-
-#: src/dialogs/gedit-preferences-dialog.c:604
-msgid "Categories"
-msgstr "Phân loại"
-
-#: src/dialogs/gedit-preferences-dialog.c:837
-msgid "Push this button to select the font to be used by the editor"
-msgstr "Nhấn nút này để chọn font được dùng bởi bộ soạn thảo"
-
-#: src/dialogs/gedit-preferences-dialog.c:840
-msgid "Push this button to configure text color"
-msgstr "Nhấn nút này để cấu hình màu chữ"
-
-#: src/dialogs/gedit-preferences-dialog.c:842
-msgid "Push this button to configure background color"
-msgstr "Nhấn nút này để cấu hình màu nền"
-
-#: src/dialogs/gedit-preferences-dialog.c:844
-msgid ""
-"Push this button to configure the color in which the selected text should "
-"appear"
-msgstr "Nhấn nút này để cấu hình màu hiển thị cho văn bản được chọn"
-
-#: src/dialogs/gedit-preferences-dialog.c:847
-msgid ""
-"Push this button to configure the color in which the selected text should be "
-"marked"
-msgstr "Nhấn nút này để cấy hình màu đánh dấu cho văn bản được chọn"
-
-#: src/dialogs/gedit-preferences-dialog.c:1852
-msgid "Push this button to select the font to be used to print the body"
-msgstr "Nhấn nút này để chọn font được dùng khi in phần thân"
-
-#: src/dialogs/gedit-preferences-dialog.c:1854
-msgid "Push this button to select the font to be used to print the headers"
-msgstr "Nhấn nút này để chọn font cần dùng khi in tiêu đề"
-
-#: src/dialogs/gedit-preferences-dialog.c:1856
-msgid "Push this button to select the font to be used to print line numbers"
-msgstr "Nhấn nút này để chọn fon cần dùng khi in số dòng"
-
-#: src/dialogs/gedit-preferences.glade2.h:2
-msgid "<b>Font</b>"
-msgstr "<b>Phông chữ</b>"
-
-#: src/dialogs/gedit-preferences.glade2.h:3
-msgid "<span weight=\"bold\" size=\"x-large\">Auto Indent</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Thụt lề tự động</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:4
-msgid "<span weight=\"bold\" size=\"x-large\">Font &amp; Colors</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Phông chữ &amp; Màu</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:5
-msgid "<span weight=\"bold\" size=\"x-large\">Fonts</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Phông chữ</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:6
-msgid "<span weight=\"bold\" size=\"x-large\">Line Numbers</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Số dòng</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:7
-msgid "<span weight=\"bold\" size=\"x-large\">Manager</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Trình quản lý</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:8
-msgid "<span weight=\"bold\" size=\"x-large\">Open</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Mở</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:9
-msgid "<span weight=\"bold\" size=\"x-large\">Page</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Trang</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:10
-msgid "<span weight=\"bold\" size=\"x-large\">Save</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Lưu</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:11
-msgid "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Tabs</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:12
-msgid "<span weight=\"bold\" size=\"x-large\">Undo</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Hoàn tác</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:13
-msgid "<span weight=\"bold\" size=\"x-large\">Wrap Mode</span>"
-msgstr "<span weight=\"bold\" size=\"x-large\">Chế độ ngắt dòng</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:14
-msgid "<span weight=\"bold\">Colors</span>"
-msgstr "<span weight=\"bold\">Màu</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:15
-msgid "<span weight=\"bold\">When saving a new file...</span>"
-msgstr "<span weight=\"bold\">Khi đang lưu một tập tin mới...</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:16
-msgid "<span weight=\"bold\">When saving an existing file...</span>"
-msgstr "<span weight=\"bold\">Khi đang lưu tập tin đang tồn tại...</span>"
-
-#: src/dialogs/gedit-preferences.glade2.h:17
-msgid "Add new encodings"
-msgstr "Thêm mã hóa mới"
-
-#: src/dialogs/gedit-preferences.glade2.h:18
-msgid "Always use U_TF-8 encoding (faster)"
-msgstr "Luôn dùng mã hóa UTF-8 (nhanh hơn)"
-
-#: src/dialogs/gedit-preferences.glade2.h:19
-msgid "Always use _UTF-8 encoding (faster)"
-msgstr "Luôn dùng mã hóa _UTF-8 (nhanh hơn)"
-
-#: src/dialogs/gedit-preferences.glade2.h:20
-msgid "Create a _backup copy of files before saving"
-msgstr "Tạo _bản sao của tập tin trước khi lưu"
-
-#: src/dialogs/gedit-preferences.glade2.h:21
-msgid "Do not _split words over two lines"
-msgstr "Không xẻ các từ ra quá hai dòng"
-
-#: src/dialogs/gedit-preferences.glade2.h:22
-msgid "Editor _font: "
-msgstr "Phông chữ của trình biên soạn: "
-
-#: src/dialogs/gedit-preferences.glade2.h:23
-msgid "Enable _auto indentation"
-msgstr "Chạy tự _động thụt lề"
-
-#: src/dialogs/gedit-preferences.glade2.h:24
-msgid "Enable text _wrapping"
-msgstr "Bật chạy ngắt dòng văn bản"
-
-#: src/dialogs/gedit-preferences.glade2.h:25
-msgid "Fonts & Colors"
-msgstr "Font & Màu sắc"
-
-#: src/dialogs/gedit-preferences.glade2.h:26
-msgid "Insert _spaces instead of tabs"
-msgstr "Chèn các dấu trống thay cho các tab"
-
-#: src/dialogs/gedit-preferences.glade2.h:27
-msgid "LOGO"
-msgstr "LOGO"
-
-#: src/dialogs/gedit-preferences.glade2.h:28
-msgid "Line _numbers:"
-msgstr "S_ố dòng:"
-
-#: src/dialogs/gedit-preferences.glade2.h:29
-msgid "Line numbers"
-msgstr "Số dòng"
-
-#: src/dialogs/gedit-preferences.glade2.h:30
-msgid "Move down"
-msgstr "Chuyển xuống"
-
-#: src/dialogs/gedit-preferences.glade2.h:31
-msgid "Move up"
-msgstr "Chuyển lên"
-
-#: src/dialogs/gedit-preferences.glade2.h:32
-msgid "Page he_aders:"
-msgstr "He_ader trang:"
-
-#: src/dialogs/gedit-preferences.glade2.h:33
-msgid "Pick the background color"
-msgstr "Chọn màu nền"
-
-#: src/dialogs/gedit-preferences.glade2.h:34
-msgid "Pick the selected text color"
-msgstr "Chọn màu chữ trong vùng được chọn"
-
-#: src/dialogs/gedit-preferences.glade2.h:35
-msgid "Pick the selection color"
-msgstr "Chọn màu vùng chọn"
-
-#: src/dialogs/gedit-preferences.glade2.h:36
-msgid "Pick the text color"
-msgstr "Chọn màu chữ"
-
-#: src/dialogs/gedit-preferences.glade2.h:37
-msgid "Plugin manager"
-msgstr "Bộ quản lý Plugin"
-
-#: src/dialogs/gedit-preferences.glade2.h:39
-msgid "Print _line numbers every"
-msgstr "In số _dòng mỗi"
-
-#: src/dialogs/gedit-preferences.glade2.h:40
-msgid "Print fonts"
-msgstr "Font in"
-
-#: src/dialogs/gedit-preferences.glade2.h:41
-msgid "Remove an encoding"
-msgstr "Gỡ bỏ một mã hóa"
-
-#: src/dialogs/gedit-preferences.glade2.h:43
-msgid "Se_lection color:"
-msgstr "Màu _vùng chọn:"
-
-#: src/dialogs/gedit-preferences.glade2.h:44
-msgid "Selecte_d text color:"
-msgstr "Màu chữ được _chọn:"
-
-#: src/dialogs/gedit-preferences.glade2.h:45
-msgid "Set _tabs width equivalent to"
-msgstr "Đặt độ rộng các _tab tương đương với"
-
-#: src/dialogs/gedit-preferences.glade2.h:46
-msgid "Set limit on _undo actions to"
-msgstr "Đặt giới hạn mức hoàn lại là"
-
-#: src/dialogs/gedit-preferences.glade2.h:48
-msgid "U_se default theme colors"
-msgstr "_Dùng màu theme mặc định"
-
-#: src/dialogs/gedit-preferences.glade2.h:49
-msgid "U_se original file encoding if possible"
-msgstr "Dùng mã hóa n_guyên thủy nếu có thể"
-
-#: src/dialogs/gedit-preferences.glade2.h:51
-msgid "Use cu_rrent locale's encoding if possible"
-msgstr "Dùng mã hóa locale hiện thời khi có thể"
-
-#: src/dialogs/gedit-preferences.glade2.h:52
-msgid "Use current _locale's encoding if possible"
-msgstr "Dùng mã hóa _locale hiện thời khi có thể"
-
-#: src/dialogs/gedit-preferences.glade2.h:53
-msgid "Wrap mode"
-msgstr "Chế độ cuốn"
-
-#: src/dialogs/gedit-preferences.glade2.h:54
-msgid "_Autosave current file every"
-msgstr "_Tự động lưu tập tin hiện thời mỗi"
-
-#: src/dialogs/gedit-preferences.glade2.h:55
-msgid "_Background color:"
-msgstr "Màu _nền:"
-
-#: src/dialogs/gedit-preferences.glade2.h:56
-msgid "_Body:"
-msgstr "Th_ân:"
-
-#: src/dialogs/gedit-preferences.glade2.h:57
-msgid "_Display line numbers"
-msgstr "_Hiện số dòng"
-
-#: src/dialogs/gedit-preferences.glade2.h:58
-msgid "_Print page headers"
-msgstr "_In header trang"
-
-#: src/dialogs/gedit-preferences.glade2.h:59
-msgid "_Restore Default Fonts"
-msgstr "_Khôi phục phông chữ mặc định"
-
-#: src/dialogs/gedit-preferences.glade2.h:60
-msgid "_Supported encodings:"
-msgstr "Mã hóa được h_ỗ trợ:"
-
-#: src/dialogs/gedit-preferences.glade2.h:61
-msgid "_Text color:"
-msgstr "Màu _chữ:"
-
-#: src/dialogs/gedit-preferences.glade2.h:62
-msgid "_Use default theme font"
-msgstr "_Dùng font theme mặc định"
-
-#: src/dialogs/gedit-preferences.glade2.h:63
-msgid "_action(s)"
-msgstr "_hành động"
-
-#: src/dialogs/gedit-preferences.glade2.h:64
-msgid "_minutes"
-msgstr "ph_út"
-
-#: src/dialogs/gedit-preferences.glade2.h:65
-msgid "character(s)"
-msgstr "ký tự"
-
-#: src/dialogs/gedit-preferences.glade2.h:66
-msgid "li_ne(s)"
-msgstr "d_òng"
-
-#: src/dialogs/gnome-print-font-dialog.c:107
-msgid "_Insert a new preview phrase."
-msgstr "_Chèn pha xem trước."
-
-#: src/dialogs/gnome-print-font-dialog.c:113
-msgid "Modify preview phrase..."
-msgstr "Thay đổi pha xem trước..."
-
-#: src/dialogs/gnome-print-font-dialog.c:167
-msgid "Preview"
-msgstr "Xem trước"
-
-#: src/dialogs/gnome-print-font-dialog.c:180
-msgid "_Modify preview phrase..."
-msgstr "_Thay đổi pha xem trước..."
-
-#: src/dialogs/gnome-print-font-dialog.c:243
-msgid "Font Selection"
-msgstr "Chọn font"
-
-#: src/dialogs/gnome-print-font-picker.c:89
-msgid "Sans Regular 12"
-msgstr "Sans Regular 12"
-
-#: src/dialogs/gnome-print-font-picker.c:90
-msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-msgstr "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-
-#: src/dialogs/gnome-print-font-picker.c:91
-msgid "Pick a Font"
-msgstr "Chọn font"
-
-#: src/dialogs/gnome-print-font-picker.c:176
-msgid "Title"
-msgstr "Tựa đề"
-
-#: src/dialogs/gnome-print-font-picker.c:177
-msgid "The title of the selection dialog box"
-msgstr "Tựa đề của hộp thoại chọn font"
-
-#: src/dialogs/gnome-print-font-picker.c:197
-msgid "Font name"
-msgstr "Tên font"
-
-#: src/dialogs/gnome-print-font-picker.c:198
-msgid "Name of the selected font"
-msgstr "Tên của font được chọn"
-
-#: src/dialogs/gnome-print-font-picker.c:206
-msgid "Preview text"
-msgstr "text xem thử"
-
-#: src/dialogs/gnome-print-font-picker.c:207
-msgid "Preview text shown in the dialog"
-msgstr "Text xem thử được hiển thị trong hộp thoại"
-
-#: src/dialogs/gnome-print-font-picker.c:215
-msgid "Use font in label"
-msgstr "Dùng font trong nhãn"
-
-#: src/dialogs/gnome-print-font-picker.c:216
-msgid "Use font in the label in font info mode"
-msgstr "Dùng font trong nhãn trong chế độ thông tin font"
-
-#: src/dialogs/gnome-print-font-picker.c:224
-msgid "Font size for label"
-msgstr "Cỡ font của nhãn"
-
-#: src/dialogs/gnome-print-font-picker.c:225
-msgid "Font size for label in font info mode"
-msgstr "Cỡ font cho nhãn trong chế độ thông tin font"
-
-#: src/dialogs/gnome-print-font-picker.c:235
-msgid "Show size"
-msgstr "Hiện kích thước"
-
-#: src/dialogs/gnome-print-font-picker.c:236
-msgid "Show size in font info mode"
-msgstr "Hiện kích thước trong chế độ thông tin font"
-
-#: src/dialogs/gnome-print-font-picker.c:1015
-msgid "Font"
-msgstr "Font"
-
-#. gnome_print_font_picker_update_font_info
-#: src/dialogs/goto-line.glade2.h:1
-msgid "Goto Line"
-msgstr "Đi tới dòng"
-
-#: src/dialogs/goto-line.glade2.h:2
-msgid "_Line number:"
-msgstr "Số _dòng:"
-
-#: src/dialogs/plugin-manager.glade2.h:1
-msgid "C_onfigure plugin"
-msgstr "Cấu _hình plugin"
-
-#: src/dialogs/plugin-manager.glade2.h:2
-msgid "Configure the selected plugin"
-msgstr "Cấu _hình plugin được chọn"
-
-#: src/dialogs/plugin-manager.glade2.h:3
-msgid "De_tails"
-msgstr "_Chi tiết"
-
-#: src/dialogs/plugin-manager.glade2.h:4
-msgid "_Description"
-msgstr "Mô tả"
-
-#: src/dialogs/plugin-manager.glade2.h:5
-msgid "dialog1"
-msgstr "dialog1"
-
-#: src/dialogs/program-location-dialog.glade2.h:2
-msgid "_Location to search for:"
-msgstr "_Vị trí cần tìm:"
-
-#: src/dialogs/program-location-dialog.glade2.h:3
-msgid "label"
-msgstr "nhãn"
-
-#: src/dialogs/replace.glade2.h:2
-msgid "Find Next"
-msgstr "Tìm ti_ếp"
-
-#: src/dialogs/replace.glade2.h:3
-msgid "Match _entire word only"
-msgstr "Chỉ khớp với to_àn bộ từ"
-
-#: src/dialogs/replace.glade2.h:5
-msgid "Replace All"
-msgstr "Thay thế toàn bộ"
-
-#: src/dialogs/replace.glade2.h:6
-msgid "Replace _with: "
-msgstr "Thay thế _bằng: "
-
-#: src/dialogs/replace.glade2.h:7
-msgid "_Match case"
-msgstr "_Khớp chữ hoa/thường"
-
-#: src/dialogs/replace.glade2.h:8
-msgid "_Search for: "
-msgstr "_Tìm: "
-
-#: src/dialogs/replace.glade2.h:9
-msgid "_Wrap around"
-msgstr "_Cuộn"
-
-#: src/dialogs/uri.glade2.h:2
-msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Nhập _vị trí (URI) của tập tin cần mở:"
-
-#: src/dialogs/uri.glade2.h:3
-msgid "Open from URI"
-msgstr "Mở từ URI"
-
-#: src/gedit-commands.c:472
-msgid "translator_credits"
-msgstr "Nguyễn Thái Ngọc Duy"
-
-#: src/gedit-commands.c:497
-msgid "gedit"
-msgstr "gedit"
-
-#: src/gedit-commands.c:501
-msgid "gedit is a small and lightweight text editor for Gnome"
-msgstr "gedit là trình soạn thảo văn bản nhỏ gọn của Gnome"
-
-#: src/gedit-document.c:537 src/gedit-document.c:555
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: src/gedit-document.c:537 src/gedit-document.c:555
-msgid "Untitled"
-msgstr "Không tựa"
-
-#: src/gedit-document.c:543 src/gedit-document.c:590
-msgid "Invalid file name"
-msgstr "Tên tập tin không hợp lệ"
-
-#: src/gedit-document.c:702 src/gedit-document.c:786
-msgid "Invalid UTF-8 data"
-msgstr "Dữ liệu UTF-8 không hợp lệ"
-
-#: src/gedit-document.c:1016
-#, c-format
-msgid "Could not read symbolic link information for %s"
-msgstr "Không thể đọc thông tin liên kết biểu tượng của %s"
-
-#: src/gedit-document.c:1062
-msgid "The file has too many symbolic links."
-msgstr "Tập tin có quá nhiều liên kết biểu tượng."
-
-#: src/gedit-document.c:1118
-#, c-format
-msgid "gedit cannot handle %s: locations in write mode."
-msgstr "gedit không thể xử lý %s: địa điểm đang trong chế độ ghi."
-
-#: src/gedit-document.c:1125
-msgid "gedit cannot handle this kind of location in write mode."
-msgstr "gedit không thể xử lý loại địa điểm này trong chế độ ghi."
-
-#: src/gedit-document.c:1138
-msgid "Invalid filename."
-msgstr "Tên tập tin không hợp lệ."
-
-#: src/gedit-document.c:1278
-msgid ""
-"There is not enough disk space to save the file.\n"
-"Please free some disk space and try again."
-msgstr ""
-"Không đủ chỗ trên đĩa để lưu tập tin.\n"
-"Vui lòng giải phóng thêm chỗ trống trên đĩa rồi thử lại."
-
-#: src/gedit-document.c:1283
-msgid ""
-"The disk where you are trying to save the file has a limitation on file "
-"sizes.  Please try saving a smaller file or saving it to a disk that does "
-"not have this limitation."
-msgstr ""
-"Đĩa được dùng để lưu tập tin có giới hạn về kích thước tập tin. Vui lòng lưu "
-"một tập tin nhỏ hơn hoặc lưu tập tin này vào đĩa không đặt ra giới hạn trên."
-
-#: src/gedit-document.c:1327
-msgid "Could not create a backup file."
-msgstr "Không thể tạo tập tin sao lưu."
-
-#: src/gedit-document.c:1447
-msgid "It is not possible to revert an Untitled document"
-msgstr "Không thể hoàn nguyên tài liệu Untitled"
-
-#: src/gedit-file-selector-util.c:147
-#, c-format
-msgid ""
-"A file named \"%s\" already exists.\n"
-"Do you want to replace it with the one you are saving?"
-msgstr ""
-"Tập tin có tên \"%s\" đã tồn tại rồi.\n"
-"Bạn có muốn thay thế nó bằng tập tin bạn đang lưu?"
-
-#: src/gedit-file-selector-util.c:158
-#, c-format
-msgid ""
-"The file \"%s\" is read-only.\n"
-"Do you want to try to replace it with the one you are saving?"
-msgstr ""
-"Tập tin có tên \"%s\" chỉ được đọc.\n"
-"Bạn có muốn thay thế nó bằng tập tin bạn đang lưu?"
-
-#: src/gedit-file-selector-util.c:544
-msgid "Select a filename to save"
-msgstr "Chọn một tên tập tin để lưu"
-
-#: src/gedit-file.c:151
-msgid "Open File..."
-msgstr "Mở tập tin..."
-
-#: src/gedit-file.c:177 src/gedit-file.c:887
-#, c-format
-msgid "Loaded file '%s'"
-msgstr "Đã nạp tập tin '%s'"
-
-#: src/gedit-file.c:309 src/gedit-file.c:455
-#, c-format
-msgid "Saving file '%s'..."
-msgstr "Đang lưu tập tin '%s'..."
-
-#: src/gedit-file.c:337 src/gedit-file.c:470
-msgid "The document has not been saved."
-msgstr "Tài liệu chưa được lưu."
-
-#: src/gedit-file.c:351 src/gedit-file.c:467
-#, c-format
-msgid "File '%s' saved."
-msgstr "Tập tin '%s' đã được lưu."
-
-#: src/gedit-file.c:434
-msgid "Save as..."
-msgstr "Lưu là ..."
-
-#: src/gedit-file.c:628
-#, c-format
-msgid ""
-"Do you want to revert to saved the document '%s'?\n"
-"\n"
-"You will not be able to undo this operation."
-msgstr ""
-"Có muốn chuyển đảo để lưu tài liệu \"%s\" không?\n"
-"\n"
-"Bạn sẽ không thể thực hiện hoàn tác."
-
-#: src/gedit-file.c:638 src/gedit-ui.xml.h:99
-msgid "_Revert"
-msgstr "_Chuyển đảo"
-
-#: src/gedit-file.c:672
-#, c-format
-msgid "Reverting file '%s'..."
-msgstr "Đang chuyển đảo tập tin '%s' ..."
-
-#: src/gedit-file.c:685
-msgid "The document has not been reverted."
-msgstr "Tài liệu chưa được hoàn nguyên."
-
-#: src/gedit-file.c:695
-#, c-format
-msgid "File '%s' reverted."
-msgstr "Đã hoàn nguyên tập tin '%s'."
-
-#: src/gedit-file.c:721
-#, c-format
-msgid "Loading %d files..."
-msgstr "Đang nạp %d tập tin..."
-
-#: src/gedit-file.c:757
-#, c-format
-msgid "The file \"%s\" does not exist. Would you like to create it?"
-msgstr "Tập tin \"%s\" không tồn tại. Bạn có muốn tạo nó không?"
-
-#: src/gedit-file.c:812
-#, c-format
-msgid "Loaded %i files"
-msgstr "Đã nạp %i tập tin"
-
-#: src/gedit-file.c:945
-msgid "Could not read data from stdin."
-msgstr "Không thể đọc dữ liệu từ stdin."
-
-#. Read only
-#: src/gedit-mdi-child.c:215
-msgid "RO"
-msgstr "Chỉ Đọc"
-
-#. Add the detach tab button
-#: src/gedit-mdi-child.c:539 src/gedit-ui.xml.h:89
-msgid "_Move to New Window"
-msgstr "Chuy_ển vào cửa sổ mới"
-
-#: src/gedit-mdi.c:446
-msgid "Open a file."
-msgstr "Mở tập tin."
-
-#: src/gedit-mdi.c:1032
-#, c-format
-msgid ""
-"Do you want to save the changes you made to the document \"%s\"? \n"
-"\n"
-"Your changes will be lost if you don't save them."
-msgstr ""
-"Bạn có muốn lưu các thay đổi bạn đã tạo ra trong tài liệu \"%s\"?\n"
-"\n"
-"Các thay đổi sẽ bị mất nếu bạn không lưu chúng lại."
-
-#: src/gedit-mdi.c:1037
-msgid "Do_n't save"
-msgstr "_Không lưu"
-
-#: src/gedit-mdi.c:1056
-msgid "_Don't quit"
-msgstr "Không _thoát"
-
-#: src/gedit-mdi.c:1060
-msgid "_Don't close"
-msgstr "Không đón_g"
-
-#: src/gedit-mdi.c:1150
-msgid "(modified)"
-msgstr "(đã thay đổi)"
-
-#: src/gedit-mdi.c:1156
-msgid "(readonly)"
-msgstr "(chỉ đọc)"
-
-#: src/gedit-plugins-engine.c:362
-#, c-format
-msgid "Error, unable to open module file '%s'\n"
-msgstr "Lỗi không thể mở tập tin module '%s'\n"
-
-#: src/gedit-plugins-engine.c:372
-#, c-format
-msgid "Error, plugin '%s' does not contain init function."
-msgstr "Lỗi, plugin '%s' không chứa hàm init."
-
-#: src/gedit-plugins-engine.c:382
-#, c-format
-msgid "Error, plugin '%s' does not contain activate function."
-msgstr "Lỗi, plugin '%s' không chứa hàm activate."
-
-#: src/gedit-plugins-engine.c:392
-#, c-format
-msgid "Error, plugin '%s' does not contain deactivate function."
-msgstr "Lỗi, plugin '%s' không chứa hàm deactivate."
-
-#: src/gedit-plugins-engine.c:417
-#, c-format
-msgid "Error, impossible to initialize plugin '%s'"
-msgstr "Lỗi, không thể khởi động plugin '%s'"
-
-#: src/gedit-plugins-engine.c:468
-#, c-format
-msgid "Error, impossible to destroy plugin '%s'"
-msgstr "Lỗi, không thể hủy plugin '%s'"
-
-#: src/gedit-plugins-engine.c:551 src/gedit-plugins-engine.c:639
-#: src/gedit-plugins-engine.c:764
-#, c-format
-msgid "Error, impossible to activate plugin '%s'"
-msgstr "Lỗi, không thể kích hoạt plugin '%s'"
-
-#: src/gedit-plugins-engine.c:590 src/gedit-plugins-engine.c:782
-#, c-format
-msgid "Error, impossible to deactivate plugin '%s'"
-msgstr "Lỗi, không thể dừng kích hoạt plugin '%s'"
-
-#: src/gedit-plugins-engine.c:683
-#, c-format
-msgid "Error, impossible to update ui of the plugin '%s'"
-msgstr "Lỗi, không thể cập nhật UI của plugin '%s'"
-
-#: src/gedit-prefs-manager.c:335
-msgid "Cannot initialize preferences manager."
-msgstr "Không thể khởi động bộ quản lý thông số."
-
-#: src/gedit-prefs-manager.c:1756
-#, c-format
-msgid "Expected `%s' got `%s' for key %s"
-msgstr "Yêu cầu `%s' là `%s' cho khóa %s"
-
-#: src/gedit-print.c:254
-msgid ""
-"gedit is unable to print since it cannot find\n"
-"one of the required fonts."
-msgstr "gedit không thể in vì không tìm thấy font yêu cầu."
-
-#: src/gedit-print.c:432
-#, c-format
-msgid "File: %s"
-msgstr "Tập tin: %s"
-
-#. Print right text
-#: src/gedit-print.c:439
-#, c-format
-msgid "Page: %d"
-msgstr "Trang: %d"
-
-#: src/gedit-print.c:580
-msgid "gedit - Print Preview"
-msgstr "gedit - Xem trước bản in"
-
-#: src/gedit-print.c:658
-#, c-format
-msgid ""
-"An error occurred while printing.\n"
-"\n"
-"%s,"
-msgstr ""
-"Lỗi khi in.\n"
-"\n"
-"%s,"
-
-#: src/gedit-ui.xml.h:1
-msgid "About this application"
-msgstr "Giới thiệu về ứng dụng này"
-
-#: src/gedit-ui.xml.h:2
-msgid "C_ustomize Statusbar"
-msgstr "_Tùy biến thanh trạng thái"
-
-#: src/gedit-ui.xml.h:3
-msgid "Change the visibility of the output window in the current window"
-msgstr "Thay đổi việc hiển thị của cửa sổ output trong cửa sổ hiện thời"
-
-#: src/gedit-ui.xml.h:4
-msgid "Change the visibility of the statusbar in the current window"
-msgstr "Hiện hoặc ẩn thanh trạng thái trên cửa sổ hiện thời"
-
-#: src/gedit-ui.xml.h:5
-msgid "Change the visibility of the toolbar in the current window"
-msgstr "Hiện hoặc ẩn thanh công cụ trên cửa sổ hiện thời"
-
-#: src/gedit-ui.xml.h:6
-msgid "Close"
-msgstr "Đón_g"
-
-#: src/gedit-ui.xml.h:7
-msgid "Close all open files"
-msgstr "Đóng tất cả các tập tin đang mở"
-
-#: src/gedit-ui.xml.h:8
-msgid "Close the current file"
-msgstr "Đóng tập tin hiện thời"
-
-#: src/gedit-ui.xml.h:9
-msgid "Configure the application"
-msgstr "Cấu hình ứng dụng"
-
-#: src/gedit-ui.xml.h:10
-msgid "Copy"
-msgstr "Sao chép"
-
-#: src/gedit-ui.xml.h:11
-msgid "Copy the selection"
-msgstr "Sao chép vùng text được chọn"
-
-#: src/gedit-ui.xml.h:12
-msgid "Create a new document"
-msgstr "Tạo tài liệu mới"
-
-#: src/gedit-ui.xml.h:13
-msgid "Cu_t"
-msgstr "Cắ_t"
-
-#: src/gedit-ui.xml.h:14
-msgid "Customize"
-msgstr "Tùy biến"
-
-#: src/gedit-ui.xml.h:15
-msgid "Customize toolbars"
-msgstr "Tùy biến thanh Công cụ"
-
-#: src/gedit-ui.xml.h:16
-msgid "Cut"
-msgstr "Cắt"
-
-#: src/gedit-ui.xml.h:17
-msgid "Cut the selection"
-msgstr "Cắt vùng text được chọn"
-
-#: src/gedit-ui.xml.h:18
-msgid "Delete"
-msgstr "Xóa"
-
-#: src/gedit-ui.xml.h:19
-msgid "Delete the selected text"
-msgstr "Xóa vùng text được chọn"
-
-#: src/gedit-ui.xml.h:20
-msgid "Dump XML"
-msgstr "Kết xuất XML"
-
-#: src/gedit-ui.xml.h:21
-msgid "Dump the UI Xml description"
-msgstr "Kết xuất mô tả UI ra XML"
-
-#: src/gedit-ui.xml.h:23
-msgid "Find Again"
-msgstr "Tìm tiếp"
-
-#: src/gedit-ui.xml.h:24
-msgid "Find Ne_xt"
-msgstr "Tìm t_iếp"
-
-#: src/gedit-ui.xml.h:25
-msgid "Go to _Line..."
-msgstr "Đi tới _Dòng..."
-
-#: src/gedit-ui.xml.h:26
-msgid "Go to a specific line number"
-msgstr "Đi tới một dòng xác định"
-
-#: src/gedit-ui.xml.h:27
-msgid "Icon and _Text"
-msgstr "Biểu tượng và _Text"
-
-#: src/gedit-ui.xml.h:28
-msgid "Main toolbar"
-msgstr "Thanh Công cụ chính"
-
-#: src/gedit-ui.xml.h:29
-msgid "Move the current document to a new window"
-msgstr "Chuyển tài liệu hiện thời vào cửa sổ mới"
-
-#: src/gedit-ui.xml.h:30
-msgid "New"
-msgstr "Mới"
-
-#: src/gedit-ui.xml.h:31
-msgid "Only show icons in the toolbar"
-msgstr "Chỉ hiện biểu tượng trên thanh công cụ"
-
-#: src/gedit-ui.xml.h:33
-msgid "Open Location..."
-msgstr "Mở địa điểm..."
-
-#: src/gedit-ui.xml.h:34
-msgid "Open _Location..."
-msgstr "Mở đị_a điểm..."
-
-#: src/gedit-ui.xml.h:35
-msgid "Open a file"
-msgstr "Mở tập tin"
-
-#: src/gedit-ui.xml.h:36
-msgid "Open a file from a specified location"
-msgstr "Mở tập tin tại một địa điểm xác định"
-
-#: src/gedit-ui.xml.h:37
-msgid "Open the gedit manual"
-msgstr "Mở sổ tay gedit"
-
-#: src/gedit-ui.xml.h:38
-msgid "Paste"
-msgstr "Dán"
-
-#: src/gedit-ui.xml.h:39
-msgid "Paste the clipboard"
-msgstr "Dán từ clipboard"
-
-#: src/gedit-ui.xml.h:40
-msgid "Pr_eferences"
-msgstr "Tùy thích"
-
-#: src/gedit-ui.xml.h:42
-msgid "Print Previe_w..."
-msgstr "_Xem trước bản in..."
-
-#: src/gedit-ui.xml.h:43
-msgid "Print Preview"
-msgstr "_Xem trước bản in"
-
-#: src/gedit-ui.xml.h:44
-msgid "Print Setup"
-msgstr "Thiết lập in"
-
-#: src/gedit-ui.xml.h:45
-msgid "Print preview"
-msgstr "Xem thử bản in"
-
-#: src/gedit-ui.xml.h:46
-msgid "Print the current file"
-msgstr "In tập tin hiện thời"
-
-#: src/gedit-ui.xml.h:47
-msgid "Quit"
-msgstr "T_hoát"
-
-#: src/gedit-ui.xml.h:48
-msgid "Quit the program"
-msgstr "Kết thúc chương trình"
-
-#: src/gedit-ui.xml.h:49
-msgid "Redo"
-msgstr "Làm lại"
-
-#: src/gedit-ui.xml.h:50
-msgid "Redo the undone action"
-msgstr "Thực hiện lại hành động vừa rồi"
-
-#: src/gedit-ui.xml.h:52
-msgid "Replace a string"
-msgstr "Thay thế chuỗi"
-
-#: src/gedit-ui.xml.h:53
-msgid "Revert"
-msgstr "Hoàn nguyên"
-
-#: src/gedit-ui.xml.h:54
-msgid "Revert to a saved version of the file"
-msgstr "Hoàn nguyên phiên bản đã lưu của tập tin"
-
-#: src/gedit-ui.xml.h:56
-msgid "Save As"
-msgstr "Lưu là"
-
-#: src/gedit-ui.xml.h:57
-msgid "Save _As..."
-msgstr "Lư_u là..."
-
-#: src/gedit-ui.xml.h:58
-msgid "Save all open files"
-msgstr "Lưu mọi tập tin đang mở"
-
-#: src/gedit-ui.xml.h:59
-msgid "Save the current file"
-msgstr "Lưu tập tin hiện thời"
-
-#: src/gedit-ui.xml.h:60
-msgid "Save the current file with a different name"
-msgstr "Lưu tập tin hiện thời với tên khác"
-
-#: src/gedit-ui.xml.h:61
-msgid "Search again for the same string"
-msgstr "Tìm chuỗi tiếp"
-
-#: src/gedit-ui.xml.h:62
-msgid "Search for a string"
-msgstr "Tìm chuỗi"
-
-#: src/gedit-ui.xml.h:63
-msgid "Select All"
-msgstr "Chọn tất cả"
-
-#: src/gedit-ui.xml.h:64
-msgid "Select _All"
-msgstr "Chọn _tất cả"
-
-#: src/gedit-ui.xml.h:65
-msgid "Select the entire document"
-msgstr "Chọn toàn bộ tài liệu"
-
-#: src/gedit-ui.xml.h:66
-msgid "Set toolbar button style according to desktop default"
-msgstr "Chỉnh kiểu nút thanh công cụ như mặc định của desktop"
-
-#: src/gedit-ui.xml.h:67
-msgid "Setup the page settings for your current printer"
-msgstr "Thiết lập thông số trang cho máy in hiện thời"
-
-#: src/gedit-ui.xml.h:68
-msgid "Show _Cursor Position"
-msgstr "Hiện _vị trí con trỏ"
-
-#: src/gedit-ui.xml.h:69
-msgid "Show _Overwrite Mode"
-msgstr "Hiện chế độ _ghi đè"
-
-#: src/gedit-ui.xml.h:70
-msgid "Show cursor position in the statusbar"
-msgstr "Hiện vị trí con trỏ hiện thời trên thanh trạng thái"
-
-#: src/gedit-ui.xml.h:71
-msgid "Show overwrite mode in the statusbar"
-msgstr "Hiện chế độ ghi đè trên thanh trạng thái"
-
-#: src/gedit-ui.xml.h:73
-msgid "Undo the last action"
-msgstr "Hoàn lại hành động cuối cùng"
-
-#: src/gedit-ui.xml.h:74
-msgid "_About"
-msgstr "Giới thiệ_u"
-
-#: src/gedit-ui.xml.h:75
-msgid "_Close"
-msgstr "Đón_g"
-
-#: src/gedit-ui.xml.h:76
-msgid "_Close All"
-msgstr "_Đóng tất cả"
-
-#: src/gedit-ui.xml.h:77
-msgid "_Contents"
-msgstr "_Nội dung"
-
-#: src/gedit-ui.xml.h:78
-msgid "_Copy"
-msgstr "_Sao chép"
-
-#: src/gedit-ui.xml.h:79
-msgid "_Customize Toolbar"
-msgstr "_Tùy biến Thanh công cụ"
-
-#: src/gedit-ui.xml.h:80
-msgid "_Debug"
-msgstr "_Debug"
-
-#: src/gedit-ui.xml.h:81
-msgid "_Delete"
-msgstr "_Xóa"
-
-#: src/gedit-ui.xml.h:82
-msgid "_Desktop Default"
-msgstr "Mặc định của _desktop"
-
-#: src/gedit-ui.xml.h:83
-msgid "_Documents"
-msgstr "Tài _liệu"
-
-#: src/gedit-ui.xml.h:84
-msgid "_Edit"
-msgstr "_Hiệu chỉnh"
-
-#: src/gedit-ui.xml.h:85
-msgid "_File"
-msgstr "_Tập tin"
-
-#: src/gedit-ui.xml.h:86
-msgid "_Find..."
-msgstr "T_ìm..."
-
-#: src/gedit-ui.xml.h:87
-msgid "_Help"
-msgstr "Trợ _giúp"
-
-#: src/gedit-ui.xml.h:88
-msgid "_Icon"
-msgstr "_Biểu tượng"
-
-#: src/gedit-ui.xml.h:90
-msgid "_New"
-msgstr "Tạo mớ_i"
-
-#: src/gedit-ui.xml.h:91
-msgid "_Open..."
-msgstr "_Mở..."
-
-#: src/gedit-ui.xml.h:92
-msgid "_Output Window"
-msgstr "Cửa sổ _Output"
-
-#: src/gedit-ui.xml.h:93
-msgid "_Paste"
-msgstr "_Dán"
-
-#: src/gedit-ui.xml.h:94
-msgid "_Print..."
-msgstr "_In..."
-
-#: src/gedit-ui.xml.h:95
-msgid "_Priority Text beside Icons"
-msgstr "Ch_ữ ưu tiên cạnh biểu tượng"
-
-#: src/gedit-ui.xml.h:96
-msgid "_Quit"
-msgstr "T_hoát"
-
-#: src/gedit-ui.xml.h:97
-msgid "_Redo"
-msgstr "_Làm lại"
-
-#: src/gedit-ui.xml.h:98
-msgid "_Replace..."
-msgstr "Thay th_ế..."
-
-#: src/gedit-ui.xml.h:100
-msgid "_Save"
-msgstr "_Lưu"
-
-#: src/gedit-ui.xml.h:101
-msgid "_Save All"
-msgstr "_Lưu tất cả"
-
-#: src/gedit-ui.xml.h:102
-msgid "_Search"
-msgstr "_Tìm"
-
-#: src/gedit-ui.xml.h:103
-msgid "_Statusbar"
-msgstr "Thanh t_rạng thái"
-
-#: src/gedit-ui.xml.h:104
-msgid "_Toolbar"
-msgstr "Thanh _Công cụ"
-
-#: src/gedit-ui.xml.h:105
-msgid "_Tools"
-msgstr "_Công cụ"
-
-#: src/gedit-ui.xml.h:106
-msgid "_Undo"
-msgstr "_Hoàn lại"
-
-#: src/gedit-ui.xml.h:107
-msgid "_View"
-msgstr "_Xem"
-
-#: src/gedit-utils.c:795
-#, c-format
-msgid ""
-"Could not find the file \"%s\".\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Không thể tìm thấy tập tin \"%s\".\n"
-"\n"
-"Vui lòng kiểm tra bạn đã nhập đúng vị trí chưa và thử lại."
-
-#: src/gedit-utils.c:802
-#, c-format
-msgid "Could not open the file \"%s\" because it contains corrupted data."
-msgstr "Không thể mở tập tin \"%s\" vì chứa dữ liệu hỏng."
-
-#: src/gedit-utils.c:813
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because gedit cannot handle %s: locations."
-msgstr "Không thể mỡ tập tin \"%s\" vì gedit không thể xử lý %s: vị trí."
-
-#: src/gedit-utils.c:819
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Không thể mở tập tin \"%s\""
-
-#: src/gedit-utils.c:829
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains data in an invalid format."
-msgstr "Không thể mở tập tin \"%s\" vì nó chứa dữ liệu ở dạng thức sai."
-
-#: src/gedit-utils.c:836
-#, c-format
-msgid "Could not open the file \"%s\" because it is too big."
-msgstr "Không thể mở tập tin \"%s\" vì nó quá lớn."
-
-#: src/gedit-utils.c:843
-#, c-format
-msgid ""
-"\"%s\" is not a valid location.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Địa điểm \"%s\" không hợp lệ.\n"
-"\n"
-"Vui lòng kiểm tra xem bạn đã nhập địa điểm đúng chưa rồi thử lại."
-
-#: src/gedit-utils.c:850
-#, c-format
-msgid "Could not open the file \"%s\" because access was denied."
-msgstr "Không thể mở tập tin \"%s\" vì truy cập bị từ chối."
-
-#: src/gedit-utils.c:857
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Không thể mở tập tin \"%s\" vì đã mở quá nhiều tập tin.\n"
-"\n"
-"Vui lòng đóng bớt vài tập tin rồi thử lại."
-
-#: src/gedit-utils.c:865
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" là một thư mục.\n"
-"\n"
-"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa rồi thử lại."
-
-#: src/gedit-utils.c:872
-#, c-format
-msgid ""
-"Not enough available memory to open the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Không đủ bộ nhớ để mở tập tin \"%s\". Vui lòng đóng bớt vài ứng dụng đang "
-"chạy rồi thử lại."
-
-#: src/gedit-utils.c:898
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that you typed the location correctly and that your proxy "
-"settings are correct and then try again."
-msgstr ""
-"Không thể mở tập tin \"%s\" vì không tìm thấy máy chủ \"%s\".\n"
-"\n"
-"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa và thiết lập proxy của "
-"bạn đã đúng chưa rồi thử lại."
-
-#: src/gedit-utils.c:913
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was invalid.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Không thể mở tập tin \"%s\" vì tên máy chủ không hợp lệ.\n"
-"\n"
-"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa rồi thử lại."
-
-#: src/gedit-utils.c:920
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Không thể mở tập tin \"%s\" vì chưa có tên máy chủ.\n"
-"\n"
-"Vui lòng kiểm tra lại các thông số proxy của bạn rồi thử lại."
-
-#: src/gedit-utils.c:927
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because the attempt to log in failed.\n"
-"\n"
-"Please, check that you typed the location correctly and try again."
-msgstr ""
-"Không thể mở tập tin \"%s\" vì thất bại khi thử đăng nhập.\n"
-"\n"
-"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa rồi thử lại."
-
-#: src/gedit-utils.c:935
-#, c-format
-msgid ""
-"Could not open the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to open a binary file."
-msgstr ""
-"Không thể mở tập tin \"%s\" vì nó chứa các dữ liệu UTF-8 không hợp lệ.\n"
-"\n"
-"Có lẽ do bạn đã thử mở một tập tin nhị phân."
-
-#: src/gedit-utils.c:973
-#, c-format
-msgid "Could not open the file \"%s\"."
-msgstr "Không thể mở tập tin \"%s\"."
-
-#: src/gedit-utils.c:1024
-#, c-format
-msgid "Could not save the file \"%s\"."
-msgstr "Không thể lưu tập tin \"%s\"."
-
-#: src/gedit-utils.c:1028
-#, c-format
-msgid ""
-"Could not save the file \"%s\".\n"
-"\n"
-"%s"
-msgstr ""
-"Không thể lưu tập tin \"%s\".\n"
-"\n"
-"%s"
-
-#: src/gedit-utils.c:1081
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot find it.\n"
-"\n"
-"Perhaps, it has recently been deleted."
-msgstr ""
-"Không thể hoàn nguyên tập tin \"%s\" vì gedit không tìm thấy nó.\n"
-"\n"
-"Có lẽ nó vừa mới bị xóa."
-
-#: src/gedit-utils.c:1088
-#, c-format
-msgid "Could not revert the file \"%s\" because it contains corrupted data."
-msgstr "Không thể hoàn nguyên tập tin \"%s\" vì nó chứa dữ liệu hỏng."
-
-#: src/gedit-utils.c:1099
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because gedit cannot handle %s: locations."
-msgstr ""
-"Không thể hoàn nguyên tập tin \"%s\" vì gedit không thể xử lý %s: địa điểm."
-
-#: src/gedit-utils.c:1105 src/gedit-utils.c:1245
-#, c-format
-msgid "Could not revert the file \"%s\"."
-msgstr "Không thể hoàn nguyên tập tin \"%s\"."
-
-#: src/gedit-utils.c:1115
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains data in an invalid "
-"format."
-msgstr ""
-"Không thể hoàn nguyên tập tin \"%s\" vì nó chứa dữ liệu trong dạng thức "
-"không hợp lệ."
-
-#: src/gedit-utils.c:1122
-#, c-format
-msgid "Could not revert the file \"%s\" because it is too big."
-msgstr "Không thể hoàn nguyên tập tin \"%s\" vì nó quá lớn."
-
-#: src/gedit-utils.c:1129
-#, c-format
-msgid "Could not revert the file \"%s\" because access was denied."
-msgstr "Không thể hoàn nguyên tập tin \"%s\" vì truy cập bị từ chối."
-
-#: src/gedit-utils.c:1136
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because there are too many open files.\n"
-"\n"
-"Please, close some open file and try again."
-msgstr ""
-"Không thể hoàn nguyên tập tin \"%s\" vì có quá nhiều tập tin được mở.\n"
-"\n"
-"Vui lòng đóng bớt một số tập tin rồi thử lại."
-
-#: src/gedit-utils.c:1144
-#, c-format
-msgid ""
-"Not enough available memory to revert the file \"%s\". Please, close some "
-"running application and try again."
-msgstr ""
-"Không đủ bộ nhớ để hoàn nguyên tập tin \"%s\". Vui lòng đóng bớt một số ứng "
-"dụng đang chạy rồi thử lại."
-
-#: src/gedit-utils.c:1170
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because no host \"%s\" could be found.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Không thể hoàn nguyên tập tin \"%s\" vì không tìm thấy máy chủ \"%s\".\n"
-"\n"
-"Vui lòng kiểm tra lại các thiết lập proxy rồi thử lại."
-
-#: src/gedit-utils.c:1184
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because the host name was empty.\n"
-"\n"
-"Please, check that your proxy settings are correct and try again."
-msgstr ""
-"Không thể hoàn nguyên tập tin \"%s\" vì chưa có tên máy chủ.\n"
-"\n"
-"Vui lòng kiểm tra lại thiết lập proxy rồi thử lại."
-
-#: src/gedit-utils.c:1191
-#, c-format
-msgid "Could not revert the file \"%s\" because the attempt to log in failed."
-msgstr "Không thể hoàn nguyên tập tin \"%s\" vì đăng nhập thất bại."
-
-#: src/gedit-utils.c:1198
-#, c-format
-msgid ""
-"Could not revert the file \"%s\" because it contains invalid UTF-8 data.\n"
-"\n"
-"Probably, you are trying to revert a binary file."
-msgstr ""
-"Không thể hoàn nguyên tập tin \"%s\" vì nó chứa dữ liệu UTF-8 không hợp lệ.\n"
-"\n"
-"Có lẽ do bạn đã cố hoàn nguyên một tập tin nhị phân."
-
-#: src/gedit-utils.c:1207
-msgid "It is not possible to revert an Untitled document."
-msgstr "Không thể hoàn nguyên tài liệu \"Không tên\"."
-
-#: src/gedit-utils.c:1296
-#, c-format
-msgid "The file \"%s\" already exists."
-msgstr "Tập tin \"%s\" đã có rồi."
-
-#: src/gedit-utils.c:1302
-#, c-format
-msgid ""
-"\"%s\" is a directory.\n"
-"\n"
-"Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" là một thư mục.\n"
-"\n"
-"Vui lòng kiểm tra xem bạn đã nhập đúng địa điểm chưa."
-
-#: src/gedit-utils.c:1311
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"Make sure you have the appropriate write permissions."
-msgstr ""
-"Không thể tạo tập tin \"%s\".\n"
-"\n"
-"Hãy chắc chắn rằng bạn có quyền truy cập ghi hợp lệ."
-
-#: src/gedit-utils.c:1318
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"The file name is too long."
-msgstr ""
-"Không thể tạo tập tin \"%s\".\n"
-"\n"
-"Tên tập tin quá dài."
-
-#: src/gedit-utils.c:1325
-#, c-format
-msgid ""
-"Cannot create the file \"%s\".\n"
-"\n"
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
-msgstr ""
-"Không thể tạo tập tin \"%s\".\n"
-"\n"
-"Thành phần thư mục trong tên tập tin không tồn tại hoặc là một liên kết lủng "
-"lẳng."
-
-#: src/gedit-utils.c:1334
-#, c-format
-msgid ""
-"There is not enough disk space to create the file \"%s\".\n"
-"\n"
-"Please free some disk space and try again."
-msgstr ""
-"Không đủ chỗ trên đĩa để lưu tập tin \"%s\".\n"
-"\n"
-"Vui lòng giải phóng thêm chỗ trống trên đĩa rồi thử lại."
-
-#: src/gedit-utils.c:1340
-#, c-format
-msgid "Could not create the file \"%s\"."
-msgstr "Không thể tạo tập tin \"%s\"."
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:1
+msgid "Checks the spelling of the current document."
+msgstr "Kiểm tra chính tả của tài liệu hiện thời."
+
+#: plugins/spell/spell.gedit-plugin.desktop.in.h:2
+msgid "Spell checker"
+msgstr "Trình kiểm tra chính tả"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:136
+msgid "Tag list plugin"
+msgstr "Plugin danh sách tag"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:154
+msgid "Select the group of tags you want to use"
+msgstr "Chọn nhóm các tag muốn dùng"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:176
+msgid "Tag Groups Combo"
+msgstr "Combo các nhóm tag"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:178
+msgid "Tags Name List"
+msgstr "Danh sách tên tag"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:188
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Nhấp đúp trên tag để chèn nó vào tài liệu hiện thời"
+
+#: plugins/taglist/gedit-taglist-plugin-window.c:199
+msgid "Tags"
+msgstr "Tag"
+
+#: plugins/taglist/gedit-taglist-plugin.c:46
+msgid "Tag _List"
+msgstr "_Danh sách tag"
 
 #.
-#. if (col == chars)
-#. msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
-#. else
-#. msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
+#. #define MENU_ITEM_NAME		"TagList"
 #.
-#: src/gedit-view.c:1076
-#, c-format
-msgid "  Ln %d, Col. %d"
-msgstr " Dòng %d, Cột %d"
+#: plugins/taglist/gedit-taglist-plugin.c:51
+msgid "Show the tag list window"
+msgstr "Hiện cửa sổ danh sách tag"
 
-#: src/gedit-view.c:1114
-msgid "  OVR"
-msgstr " ĐÈ"
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+msgid "Tag list"
+msgstr "Danh sách tag"
 
-#: src/gedit-view.c:1116
-msgid "  INS"
-msgstr " CHÈN"
+#: plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+msgid ""
+"The tag list plugin provides a method to easily insert into a document "
+"commonly used tags/strings without having to type them."
+msgstr ""
+"Plugin danh sách tag cung cấp một cách để chèn dễ dàng các tag/chuỗi thường "
+"dùng vào tài liệu mà không cần gõ vào."
 
-#: src/gedit2.c:77
-msgid "Show utility debugging messages."
-msgstr "Hiện thông báo gỡ rối tiện ích."
+#: plugins/time/time.c:48
+msgid "In_sert Date and Time..."
+msgstr "Ch_èn Ngày & Giờ..."
 
-#: src/gedit2.c:80
-msgid "Show mdi debugging messages."
-msgstr "Hiện thông báo debug mdi."
+#: plugins/time/time.c:51
+msgid "Insert current date and time at the cursor position"
+msgstr "Chèn ngày, giờ hiện thời vào vị trí con trỏ hiện thời"
 
-#: src/gedit2.c:83
-msgid "Show commands debugging messages."
-msgstr "Hiện thông báo debug lệnh."
+#: plugins/time/time.c:448
+msgid "Available formats"
+msgstr "Dạng thức hỗ trợ"
 
-#: src/gedit2.c:86
-msgid "Show document debugging messages."
-msgstr "Hiện thông báo debug tài liệu."
+#: plugins/time/time.c:552
+msgid "Configure insert date/time plugin..."
+msgstr "Cấu hình chèn plugin ngày/giờ..."
 
-#: src/gedit2.c:89
-msgid "Show file debugging messages."
-msgstr "Hiện thông báo debug tập tin."
+#: plugins/time/time.gedit-plugin.desktop.in.h:1
+msgid "Insert Date/Time"
+msgstr "Chèn ngày/giờ"
 
-#: src/gedit2.c:92
-msgid "Show plugin debugging messages."
-msgstr "Hiện thông báo debug plugin."
+#: plugins/time/time.gedit-plugin.desktop.in.h:2
+msgid "Inserts current date and time at the cursor position."
+msgstr "Chèn ngày, giờ hiện thời vào vị trí con trỏ hiện thời."
 
-#: src/gedit2.c:95
-msgid "Show prefs debugging messages."
-msgstr "Hiện thông báo debug thông số."
+#: plugins/time/time.glade2.h:3
+msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
+msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
 
-#: src/gedit2.c:98
-msgid "Show printing debugging messages."
-msgstr "Hiện thông báo debug in ấn."
+#: plugins/time/time.glade2.h:4
+msgid "<span weight=\"bold\"> When inserting date/time...</span>"
+msgstr "<span weight=\"bold\"> Khi đang chèn ngày-giờ...</span>"
 
-#: src/gedit2.c:101
-msgid "Show search debugging messages."
-msgstr "Hiện thông báo debug tìm kiếm."
+#: plugins/time/time.glade2.h:5
+msgid "Configure date/time plugin"
+msgstr "Cấu hình plugin ngày/giờ"
 
-#: src/gedit2.c:104
-msgid "Show undo debugging messages."
-msgstr "Hiện thông báo debug hoàn lại."
+#: plugins/time/time.glade2.h:6
+msgid "Insert Date and Time"
+msgstr "Chèn Ngày & Giờ"
 
-#: src/gedit2.c:107
-msgid "Show view debugging messages."
-msgstr "Hiện thông báo view debug."
+#: plugins/time/time.glade2.h:7
+msgid "Use the _selected format"
+msgstr "Dùng định dạng được chọn"
 
-#: src/gedit2.c:110
-msgid "Show recent debugging messages."
-msgstr "Hiện thông báo recent debug."
+#: plugins/time/time.glade2.h:8
+msgid "_Insert"
+msgstr "Ch_èn"
 
-#: src/gedit2.c:113
-msgid "Show session management debugging messages."
-msgstr "Hiện thông báo debug quản lý session."
+#: plugins/time/time.glade2.h:9
+msgid "_Prompt for a format"
+msgstr "Nh_ắc nhở về định dạng"
 
-#: src/gedit2.c:116
-msgid "Turn on all debugging messages."
-msgstr "Bật mọi thông báo debug."
+#: plugins/time/time.glade2.h:10
+msgid "_Use custom format"
+msgstr "_Dùng định dạng tùy chỉnh"
 
-#: src/gedit2.c:119
-msgid "Quit an existing instance of gedit"
-msgstr "Thoát khỏi gedit"
+#: viewer/gedit-persist-stream.c:44
+msgid "Save method not implemented for gedit viewer"
+msgstr "Tính năng lưu chưa được cài đặt trong bộ xem gedit"
 
-#: src/gedit2.c:122
-msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr "Tạp cửa sổ mới trong phiên bản gedit này"
+#: viewer/gedit-viewer-ui.xml.h:1
+msgid "Copy the selected text to the clipboard"
+msgstr "Chép vùng chữ được chọn vào clipboard"
 
-#: src/gedit2.c:125
-msgid "Create a new document in an existing instance of gedit"
-msgstr "Tạo tài liệu mới trong phiên bản gedit này"
+#: viewer/gedit-viewer-ui.xml.h:2
+msgid "_Copy Text"
+msgstr "_Sao chép văn bản"
 
-#: src/gedit-output-window.c:333
-msgid "Close the output window"
-msgstr "Đóng cửa sổ output"
+#~ msgid "Show Cursor Position"
+#~ msgstr "Hiện vị trí con trỏ"
 
-#: src/gedit-output-window.c:371
-msgid "Copy selected lines"
-msgstr "Sao chép các dòng được chọn"
+#~ msgid "Show Overwrite Mode"
+#~ msgstr "Hiện chế độ ghi đè"
 
-#: src/gedit-output-window.c:391
-msgid "Clear the output window"
-msgstr "Làm sạch cửa sổ output"
+#~ msgid ""
+#~ "Whether the status bar should show the cursor position in editing "
+#~ "windows. Make sure you turn on the \"Status Bar is Visible\" option for "
+#~ "this to take effect."
+#~ msgstr ""
+#~ "Hiện vị trí con trỏ trong thanh trạng thái. Chỉ có tác dụng nếu bật tùy "
+#~ "chọn \"Hiện thanh trạng thái\"."
 
-#: src/gedit-output-window.c:431
-msgid "Output Lines"
-msgstr "Dòng output"
+#~ msgid ""
+#~ "Whether the status bar should show the insert/overwrite mode in editing "
+#~ "windows. Make sure you turn on the \"Status Bar is Visible\" option for "
+#~ "this to take effect."
+#~ msgstr ""
+#~ "Hiện chế độ chèn/ghi đè trong thanh trạng thái. Chỉ có tác dụng nếu bật "
+#~ "tùy chọn \"Hiện thanh trạng thái\"."
 
-#: src/dialogs/gedit-encodings-dialog.glade2.h:1
-msgid "Choose one or more e_ncodings:"
-msgstr "Chọn một hay nhiều mã hóa:"
+#~ msgid "_ASCII Table"
+#~ msgstr "Bảng _ASCII"
 
-#: src/gedit-encodings.c:143 src/gedit-encodings.c:169
-#: src/gedit-encodings.c:210 src/gedit-encodings.c:260
-#: src/gedit-encodings.c:285
-msgid "Western"
-msgstr "Western"
+#~ msgid "Pop-up a dialog containing an ASCII Table"
+#~ msgstr "Hiện hộp thoại chứa bảng mã ASCII"
 
-#: src/gedit-encodings.c:145 src/gedit-encodings.c:212
-#: src/gedit-encodings.c:240 src/gedit-encodings.c:281
-msgid "Central European"
-msgstr "Central European"
+#~ msgid "Char"
+#~ msgstr "Ký tự"
 
-#: src/gedit-encodings.c:147
-msgid "South European"
-msgstr "South European"
+#~ msgid "Dec#"
+#~ msgstr "Thập phân#"
 
-#: src/gedit-encodings.c:149 src/gedit-encodings.c:165
-#: src/gedit-encodings.c:295
-msgid "Baltic"
-msgstr "Baltic"
+#~ msgid "Hex#"
+#~ msgstr "Thập lục phân#"
 
-#: src/gedit-encodings.c:151 src/gedit-encodings.c:214
-#: src/gedit-encodings.c:227 src/gedit-encodings.c:231
-#: src/gedit-encodings.c:244 src/gedit-encodings.c:283
-msgid "Cyrillic"
-msgstr "Cyrillic"
+#~ msgid "Name"
+#~ msgstr "Tên"
 
-#: src/gedit-encodings.c:153 src/gedit-encodings.c:220
-#: src/gedit-encodings.c:238 src/gedit-encodings.c:293
-msgid "Arabic"
-msgstr "Arabic"
+#~ msgid "ASCII Table"
+#~ msgstr "Bảng ASCII"
 
-#: src/gedit-encodings.c:155 src/gedit-encodings.c:250
-#: src/gedit-encodings.c:287
-msgid "Greek"
-msgstr "Greek"
+#~ msgid "_Insert char"
+#~ msgstr "_Chèn ký tự"
 
-#: src/gedit-encodings.c:157
-msgid "Hebrew Visual"
-msgstr "Hebrew Visual"
+#~ msgid "ASCII table"
+#~ msgstr "Bảng ASCII"
 
-#: src/gedit-encodings.c:159 src/gedit-encodings.c:218
-#: src/gedit-encodings.c:256 src/gedit-encodings.c:291
-msgid "Hebrew"
-msgstr "Hebrew"
+#~ msgid "This plugin displays a pop-up dialog which contains an ASCII Table."
+#~ msgstr "Plugin này hiển thị bảng mã ASCII"
 
-#: src/gedit-encodings.c:161 src/gedit-encodings.c:216
-#: src/gedit-encodings.c:264 src/gedit-encodings.c:289
-msgid "Turkish"
-msgstr "Turkish"
+#~ msgid "Open CVS Chan_geLogs"
+#~ msgstr "Mở CVS ChangeLog"
 
-#: src/gedit-encodings.c:163
-msgid "Nordic"
-msgstr "Nordic"
+#~ msgid "Searches for ChangeLogs in the current document and opens them"
+#~ msgstr "Tìm các ChangeLog trong tài liệu hiện thời và mở chúng"
 
-#: src/gedit-encodings.c:167
-msgid "Celtic"
-msgstr "Celtic"
+#~ msgid "A plugin that opens ChangeLogs found in CVS commit messages."
+#~ msgstr ""
+#~ "Plugin mở các ChangeLog được tìm thấy trong thông báo commit của CVS."
 
-#: src/gedit-encodings.c:171 src/gedit-encodings.c:262
-msgid "Romanian"
-msgstr "Romanian"
+#~ msgid "CVS ChangeLog"
+#~ msgstr "CVS ChangeLog"
 
-#: src/gedit-encodings.c:174 src/gedit-encodings.c:176
-#: src/gedit-encodings.c:178 src/gedit-encodings.c:180
-msgid "Unicode"
-msgstr "Unicode"
+#~ msgid "Co_mpare Files..."
+#~ msgstr "_So sánh tập tin..."
 
-#: src/gedit-encodings.c:183
-msgid "Armenian"
-msgstr "Armenian"
+#~ msgid "Makes a diff file from two documents or files"
+#~ msgstr "Tạo tập tin diff từ hai tài liệu hoặc hai tập tin"
 
-#: src/gedit-encodings.c:185 src/gedit-encodings.c:187
-#: src/gedit-encodings.c:196
-msgid "Chinese Traditional"
-msgstr "Chinese Traditional"
+#~ msgid "Compare Files"
+#~ msgstr "So sánh tập tin"
 
-#: src/gedit-encodings.c:189
-msgid "Cyrillic/Russian"
-msgstr "Cyrillic/Russian"
+#~ msgid "C_ompare"
+#~ msgstr "_So sánh"
 
-#: src/gedit-encodings.c:192 src/gedit-encodings.c:223
-#: src/gedit-encodings.c:270
-msgid "Japanese"
-msgstr "Japanese"
+#~ msgid "Executed command"
+#~ msgstr "Lệnh được thực thi"
 
-#: src/gedit-encodings.c:194 src/gedit-encodings.c:225
-#: src/gedit-encodings.c:229 src/gedit-encodings.c:276
-msgid "Korean"
-msgstr "Korean"
+#~ msgid "The two documents you selected are the same."
+#~ msgstr "Hai tài liệu bạn đã chọn hoàn toàn giống nhau."
 
-#: src/gedit-encodings.c:199 src/gedit-encodings.c:201
-#: src/gedit-encodings.c:203 src/gedit-encodings.c:207
-msgid "Chinese Simplified"
-msgstr "Chinese Simplified"
+#~ msgid ""
+#~ "The \"first\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr ""
+#~ "Tài liệu đầu tiên được chọn không tồn tại.\n"
+#~ "\n"
+#~ "Vui lòng chọn lại."
 
-#: src/gedit-encodings.c:205
-msgid "Georgian"
-msgstr "Georgian"
+#~ msgid ""
+#~ "The \"second\" file you selected does not exist.\n"
+#~ "\n"
+#~ "Please provide a valid file."
+#~ msgstr ""
+#~ "Tài liệu thứ hai được chọn không tồn tại.\n"
+#~ "\n"
+#~ "Vui lòng chọn lại."
 
-#: src/gedit-encodings.c:233 src/gedit-encodings.c:266
-msgid "Cyrillic/Ukrainian"
-msgstr "Cyrillic/Ukrainian"
+#~ msgid "The two files you selected are the same."
+#~ msgstr "Hai tập tin bạn chọn hoàn toàn giống nhau."
 
-#: src/gedit-encodings.c:242
-msgid "Croatian"
-msgstr "Croatian"
+#~ msgid "The \"first\" document contains no text."
+#~ msgstr "Tài liệu đầu tiên không chứa text."
 
-#: src/gedit-encodings.c:246
-msgid "Hindi"
-msgstr "Hindi"
+#~ msgid "The \"second\" document contains no text."
+#~ msgstr "Tài liệu thứ hai không chứa text."
 
-#: src/gedit-encodings.c:248
-msgid "Farsi"
-msgstr "Farsi"
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "gedit could not create a temporary file."
+#~ msgstr ""
+#~ "Không thể so sánh những tài liệu được chọn.\n"
+#~ "\n"
+#~ "gedit không thể tạo tập tin tạm."
 
-#: src/gedit-encodings.c:252
-msgid "Gujarati"
-msgstr "Gujarati"
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "Error executing the diff command."
+#~ msgstr ""
+#~ "Không thể so sánh các tài liệu được chọn.\n"
+#~ "\n"
+#~ "Có lỗi khi thực hiện lệnh diff."
 
-#: src/gedit-encodings.c:254
-msgid "Gurmukhi"
-msgstr "Gurmukhi"
+#~ msgid "No differences were found between the selected documents."
+#~ msgstr "Không có khác biệt nào giữa những tài liệu được chọn."
 
-#: src/gedit-encodings.c:258
-msgid "Icelandic"
-msgstr "Icelandic"
+#~ msgid ""
+#~ "Impossible to compare the selected documents.\n"
+#~ "\n"
+#~ "The result contains invalid UTF-8 data."
+#~ msgstr ""
+#~ "Không thể so sánh những tài liệu được chọn.\n"
+#~ "\n"
+#~ "Kết quả có chứa dữ liệu không phải là UTF-8."
 
-#: src/gedit-encodings.c:272 src/gedit-encodings.c:278
-#: src/gedit-encodings.c:297
-msgid "Vietnamese"
-msgstr "Việt Nam"
+#~ msgid "Choose the files to compare."
+#~ msgstr "Chọn tập tin để so sánh."
 
-#: src/gedit-encodings.c:274
-msgid "Thai"
-msgstr "Thai"
+#~ msgid "Compare files..."
+#~ msgstr "So sánh tập tin..."
 
-#: src/recent-files/egg-recent-vfs-utils.c:90
-msgid " (invalid Unicode)"
-msgstr " (Unicode không hợp lệ)"
+#~ msgid "F_rom document"
+#~ msgstr "_Từ tài liệu"
+
+#~ msgid "First"
+#~ msgstr "Đầu tiên"
+
+#~ msgid "First file from disk"
+#~ msgstr "Tập tin đầu tiên từ đĩa"
+
+#~ msgid "First file from open document"
+#~ msgstr "Tập tin đầu tiên từ tài liệu đang mở"
+
+#~ msgid "From _document"
+#~ msgstr "Từ tài )liệu"
+
+#~ msgid "From a _file on disk"
+#~ msgstr "Từ _tập tin trên đĩa"
+
+#~ msgid "From a file o_n disk"
+#~ msgstr "Từ tập tin t_rên đĩa"
+
+#~ msgid "Ignore _blanks (-b option)"
+#~ msgstr "Bỏ qua _khoảng trắng (tuỳ chọn -b)"
+
+#~ msgid "Note that this option is only supported by GNU diff"
+#~ msgstr "Chú ý là tùy chọn này chỉ được hỗ trợ bởi GNU diff"
+
+#~ msgid "Second"
+#~ msgstr "Thứ hai"
+
+#~ msgid "Second file from disk"
+#~ msgstr "Tập tin thứ hai từ đĩa"
+
+#~ msgid "Second file from open document"
+#~ msgstr "Tập tin thứ hai từ tài liệu đang mở"
+
+#~ msgid "Select the \"first\" file..."
+#~ msgstr "Chọn tập tin \"thứ nhất\"..."
+
+#~ msgid "Select the \"second\" file..."
+#~ msgstr "Chọn tập tin \"thứ hai\"..."
+
+#~ msgid "Select the first file to compare"
+#~ msgstr "Chọn tập tin thứ nhất để so sánh"
+
+#~ msgid "Select the first open document to compare"
+#~ msgstr "Chọn tài liệu đang mở thứ nhất để so sánh"
+
+#~ msgid "Select the second file to compare"
+#~ msgstr "Chọn tập tin thứ hai để so sánh"
+
+#~ msgid "Select the second open document to compare"
+#~ msgstr "Chọn tài liệu đang mở thứ hai để só sánh"
+
+#~ msgid "Use the _unified output format (-u option)"
+#~ msgstr "Dùng dạng thức _unified (tùy chọn -u)"
+
+#~ msgid ""
+#~ "The Compare Files plugin uses the <tt>diff</tt> program to compare two "
+#~ "documents or files on disk.\n"
+#~ "\n"
+#~ "For more info on <tt>diff</tt> program, type <tt>man diff</tt> in a shell "
+#~ "prompt."
+#~ msgstr ""
+#~ "Plugin cho việc so sánh tập tin dùng <tt>diff</tt> chương trình để so "
+#~ "sánh 2 tài liệu hay 2 tập tin trên đĩa.\n"
+#~ "\n"
+#~ "Để biết thêm thông tin về <tt>diff</tt> chương trình, hã gõ <tt>man diff</"
+#~ "tt> tại dấu nhắc của shell."
+
+#~ msgid "File Name"
+#~ msgstr "Tên tập tin"
+
+#~ msgid "Load"
+#~ msgstr "Nạp"
+
+#~ msgid "Module file name"
+#~ msgstr "Tên tập tin module"
+
+#~ msgid "Author(s)"
+#~ msgstr "Tác giả"
+
+#~ msgid "De_tails"
+#~ msgstr "_Chi tiết"
+
+#~ msgid "Open a file."
+#~ msgstr "Mở tập tin."
+
+#~ msgid ""
+#~ "gedit is unable to print since it cannot find\n"
+#~ "one of the required fonts."
+#~ msgstr "gedit không thể in vì không tìm thấy font yêu cầu."
+
+#~ msgid "Page: %d"
+#~ msgstr "Trang: %d"
+
+#~ msgid "gedit - Print Preview"
+#~ msgstr "gedit - Xem trước bản in"
+
+#~ msgid ""
+#~ "An error occurred while printing.\n"
+#~ "\n"
+#~ "%s,"
+#~ msgstr ""
+#~ "Lỗi khi in.\n"
+#~ "\n"
+#~ "%s,"
+
+#~ msgid "C_ustomize Statusbar"
+#~ msgstr "_Tùy biến thanh trạng thái"
+
+#~ msgid "Customize"
+#~ msgstr "Tùy biến"
+
+#~ msgid "Customize toolbars"
+#~ msgstr "Tùy biến thanh Công cụ"
+
+#~ msgid "Dump XML"
+#~ msgstr "Kết xuất XML"
+
+#~ msgid "Dump the UI Xml description"
+#~ msgstr "Kết xuất mô tả UI ra XML"
+
+#~ msgid "Find Again"
+#~ msgstr "Tìm tiếp"
+
+#~ msgid "Icon and _Text"
+#~ msgstr "Biểu tượng và _Text"
+
+#~ msgid "Show _Cursor Position"
+#~ msgstr "Hiện _vị trí con trỏ"
+
+#~ msgid "Show _Overwrite Mode"
+#~ msgstr "Hiện chế độ _ghi đè"
+
+#~ msgid "Show cursor position in the statusbar"
+#~ msgstr "Hiện vị trí con trỏ hiện thời trên thanh trạng thái"
+
+#~ msgid "Show overwrite mode in the statusbar"
+#~ msgstr "Hiện chế độ ghi đè trên thanh trạng thái"
+
+#~ msgid "_Priority Text beside Icons"
+#~ msgstr "Ch_ữ ưu tiên cạnh biểu tượng"
+
+#~ msgid "Choose one or more e_ncodings:"
+#~ msgstr "Chọn một hay nhiều mã hóa:"
+
+#~ msgid "Croatian"
+#~ msgstr "Croatian"
+
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
+
+#~ msgid "Farsi"
+#~ msgstr "Farsi"
+
+#~ msgid "Gujarati"
+#~ msgstr "Gujarati"
+
+#~ msgid "Gurmukhi"
+#~ msgstr "Gurmukhi"
+
+#~ msgid "Icelandic"
+#~ msgstr "Icelandic"
 
 #~ msgid "Copyright (C) 2001-2002 Paolo Maggi"
 #~ msgstr "Copyright (C) 2001-2002 Paolo Maggi"
@@ -3296,19 +3540,11 @@ msgstr " (Unicode không hợp lệ)"
 #~ msgid "Plugin _Manager..."
 #~ msgstr "Bộ quản lý _plugin..."
 
-#~ msgid "Pr_eferences..."
-#~ msgstr "T_hông số..."
-
 #~ msgid "Recent _Files"
 #~ msgstr "Các _tập tin gần đây"
 
-#, fuzzy
 #~ msgid "Show _Tooltips"
 #~ msgstr "_Hiện tooltip"
-
-#, fuzzy
-#~ msgid "Show tooltips in the toolbar"
-#~ msgstr "Chỉ hiện biểu tượng trên thanh công cụ"
 
 #~ msgid "The GNOME text editor"
 #~ msgstr "Trình soạn thảo văn bản GNOME"
