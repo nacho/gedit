@@ -9,4 +9,5 @@ libreverse_la_SOURCES = reverse.c
 INCLUDES = -I$(top_srcdir)/src \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)	\
-	$(GNOME_INCLUDEDIR)
+	$(GNOME_INCLUDEDIR) \
+	$(EXTRA_GNOME_CFLAGS)

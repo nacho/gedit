@@ -10,7 +10,9 @@ INCLUDES = -I$(top_srcdir)/src \
 	   -DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	   -DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
 	   -I$(includedir)	\
-	   $(GNOME_INCLUDEDIR)
+		$(GNOME_INCLUDEDIR) \
+		$(EXTRA_GNOME_CFLAGS)
+
 
 gladedir = $(datadir)/gedit/glade
 glade_DATA = sort.glade

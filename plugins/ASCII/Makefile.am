@@ -12,6 +12,7 @@ INCLUDES =						\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-DGEDIT_GLADEDIR=\""$(gladedir)"\"		\
 	-I$(includedir)					\
+	$(EXTRA_GNOME_CFLAGS) \
 	$(GNOME_INCLUDEDIR)
 
 gladedir = $(datadir)/gedit/glade

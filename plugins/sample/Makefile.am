@@ -10,4 +10,6 @@ INCLUDES =						\
 	-I$(top_srcdir)/src 				\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir)					\
-	$(GNOME_INCLUDEDIR)
+	$(GNOME_INCLUDEDIR) \
+	$(EXTRA_GNOME_CFLAGS)
+
