@@ -107,8 +107,9 @@ gedit_plugins_menu_add (GnomeApp *app)
 	menu[0].label = _("Manager ...");
 	menu[0].hint  = _("Add/Remove installed plugins");
 	menu[0].moreinfo = gedit_plugin_manager_create;
-	menu[0].pixmap_type = GNOME_APP_PIXMAP_NONE;
-	
+	menu[0].pixmap_type = GNOME_APP_PIXMAP_STOCK;
+	menu[0].pixmap_info = GNOME_STOCK_MENU_BOOK_OPEN;
+
 	/* Add a Separator*/
 	menu[1].type = GNOME_APP_UI_SEPARATOR;
 
