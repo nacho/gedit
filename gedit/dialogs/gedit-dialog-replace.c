@@ -46,6 +46,7 @@
 #include "gedit-view.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
+#include "gedit-menus.h"
 
 #define GEDIT_RESPONSE_FIND		101
 #define GEDIT_RESPONSE_REPLACE		102
@@ -137,6 +138,31 @@ text_not_found_dialog (const gchar *text, GtkWindow *parent)
 	
 	gtk_dialog_run (GTK_DIALOG (message_dlg));
   	gtk_widget_destroy (message_dlg);
+}
+
+static void
+update_menu_items_sensitivity (void)
+{
+	BonoboWindow* active_window = NULL;
+	GeditDocument* doc = NULL;
+	BonoboUIComponent *ui_component;
+	gchar *lst;
+	
+	gedit_debug (DEBUG_SEARCH, "");
+	
+	active_window = gedit_get_active_window ();
+	g_return_if_fail (active_window != NULL);
+	
+	ui_component = bonobo_mdi_get_ui_component_from_window (active_window);
+	g_return_if_fail (ui_component != NULL);
+
+	doc = gedit_get_active_document ();
+	g_return_if_fail (doc != NULL);
+
+	lst = gedit_document_get_last_searched_text (doc);
+
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindAgain", lst != NULL);	
+	g_free (lst);
 }
 
 static void
@@ -790,6 +816,8 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 		gedit_view_scroll_to_cursor (active_view);
 	else
 		text_not_found_dialog (search_string, (GTK_WINDOW (dialog->dialog)));
+
+	update_menu_items_sensitivity ();
 }
 
 
@@ -851,6 +879,8 @@ replace_dlg_find_button_pressed (GeditDialogReplace *dialog)
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
 							GEDIT_RESPONSE_REPLACE, found);
+
+	update_menu_items_sensitivity ();
 }
 
 static void
@@ -961,6 +991,8 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
 							GEDIT_RESPONSE_REPLACE, found);	
 
+	update_menu_items_sensitivity ();
+
 	gedit_debug (DEBUG_SEARCH, "END");
 }
 
@@ -1014,7 +1046,9 @@ replace_dlg_replace_all_button_pressed (GeditDialogReplace *dialog)
 
 	replaced_items = gedit_document_replace_all (doc, search_string, replace_string, 
 						     case_sensitive, entire_word);
-		
+
+	update_menu_items_sensitivity ();
+
 	if (replaced_items <= 0)
 	{
 		message_dlg = gtk_message_dialog_new (

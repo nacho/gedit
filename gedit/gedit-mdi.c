@@ -250,9 +250,16 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 	EggRecentViewGtk *view;
 	EggRecentModel *model;
 	GtkWidget *button;
+	
+	static GtkTooltips *button_tooltip = NULL;
+
+	if (button_tooltip == NULL)
+		button_tooltip = gtk_tooltips_new ();
 
 	button = gtk_toggle_button_new ();
 	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+
+	gtk_tooltips_set_tip (button_tooltip, GTK_WIDGET (button), tooltip, NULL);
 
 	gtk_container_add (GTK_CONTAINER (button),
 			   gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT));
@@ -431,7 +438,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	/* Add custom Open button to toolbar */
 	gedit_mdi_add_open_button (GEDIT_MDI (mdi),
 				   ui_component, "/Toolbar/FileOpenMenu",
-				   _("Open a file."));
+				   _("Open a recently used file"));
 
 	prefs = gedit_window_prefs_new ();
 	gedit_window_prefs_attach_to_window (prefs, win);
@@ -1234,6 +1241,7 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	BonoboMDIChild* active_child = NULL;
 	GeditDocument* doc = NULL;
 	BonoboUIComponent *ui_component;
+	gchar *lst;
 	
 	gedit_debug (DEBUG_MDI, "");
 	
@@ -1269,6 +1277,11 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	doc = GEDIT_MDI_CHILD (active_child)->document;
 	g_return_if_fail (doc != NULL);
 	
+	lst = gedit_document_get_last_searched_text (doc);
+
+	gedit_menus_set_verb_sensitive (ui_component, "/commands/SearchFindAgain", lst != NULL);	
+	g_free (lst);
+		
 	if (gedit_document_is_readonly (doc))
 	{
 		gedit_menus_set_verb_list_sensitive (ui_component, 

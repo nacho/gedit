@@ -31,6 +31,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include <glade/glade-xml.h>
 #include <libgnome/libgnome.h>
 
@@ -106,6 +108,22 @@ entry_insert_text (GtkEditable *editable, const char *text, gint length, gint *p
 	}
 }
 
+static void 
+entry_changed (GtkEditable *editable, GeditDialogGotoLine *dialog)
+{
+	const gchar *line_string;
+	
+	line_string = gtk_entry_get_text (GTK_ENTRY (dialog->entry));		
+	g_return_if_fail (line_string != NULL);
+
+	if (strlen (line_string) <= 0)
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+			GTK_RESPONSE_OK, FALSE);
+	else
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+			GTK_RESPONSE_OK, TRUE);
+}
+
 static GeditDialogGotoLine *
 dialog_goto_line_get_dialog (void)
 {
@@ -144,7 +162,7 @@ dialog_goto_line_get_dialog (void)
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_CLOSE,
-						      GTK_RESPONSE_CANCEL,
+						      GTK_RESPONSE_CLOSE,
 						      NULL);
 
 	g_return_val_if_fail (dialog->dialog != NULL, NULL);
@@ -175,11 +193,17 @@ dialog_goto_line_get_dialog (void)
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog->dialog)->vbox),
 			    content, FALSE, FALSE, 0);
 
+	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
+			GTK_RESPONSE_OK, FALSE);
+
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog->dialog),
 					 GTK_RESPONSE_OK);
 
 	g_signal_connect (G_OBJECT (dialog->entry), "insert_text",
 			  G_CALLBACK (entry_insert_text), NULL);
+
+	g_signal_connect (G_OBJECT (dialog->entry), "changed",
+			  G_CALLBACK (entry_changed), dialog);
 
 	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
 			  G_CALLBACK (dialog_destroyed), &dialog);

@@ -634,7 +634,8 @@ gedit_view_update_cursor_position_statusbar (GtkTextBuffer *buffer, GeditView* v
 	guint row, col/*, chars*/;
 	GtkTextIter iter;
 	GtkTextIter start;
-	
+	guint tab_size;
+
 	gedit_debug (DEBUG_VIEW, "");
   
 	if (view->priv->cursor_position_statusbar == NULL)
@@ -657,17 +658,14 @@ gedit_view_update_cursor_position_statusbar (GtkTextBuffer *buffer, GeditView* v
 	gtk_text_iter_set_line_offset (&start, 0);
 	col = 0;
 
+	tab_size = gtk_source_view_get_tabs_width (
+					GTK_SOURCE_VIEW (view->priv->text_view));
+
 	while (!gtk_text_iter_equal (&start, &iter))
 	{
 		if (gtk_text_iter_get_char (&start) == '\t')
-		{
-			guint tab_size;
-		       
-			tab_size = gtk_source_view_get_tabs_width (
-					GTK_SOURCE_VIEW (view->priv->text_view));
 					
 			col += (tab_size - (col  % tab_size));
-		}
 		else
 			++col;
 
@@ -676,12 +674,12 @@ gedit_view_update_cursor_position_statusbar (GtkTextBuffer *buffer, GeditView* v
 	
 	/*
 	if (col == chars)
-		msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
+		msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
 	else
-		msg = g_strdup_printf (_("  Ln %d, Col. %d-%d"), row + 1, chars + 1, col + 1);
+		msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
 	*/
 
-	msg = g_strdup_printf (_("  Ln %d, Col. %d"), row + 1, col + 1);
+	msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
 	
 	gtk_statusbar_push (GTK_STATUSBAR (view->priv->cursor_position_statusbar), 
 			    0, msg);

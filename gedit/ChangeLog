@@ -1,7 +1,31 @@
+2003-04-23  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-view.c (gedit_view_update_cursor_position_statusbar):
+	s/Col./Col, fixes bugs #104439 and #105054
+
+	* gedit-mdi.c (gedit_mdi_set_active_window_verbs_sensitivity):
+	* dialogs/gedit-dialog-replace.c (update_menu_items_sensitivity)
+	(find_dlg_find_button_pressed)(replace_dlg_find_button_pressed)
+	(replace_dlg_replace_button_pressed)
+	(replace_dlg_replace_all_button_pressed): fixed part of bug #100818 -
+	Find Next should be greyed out if no previous find action has been 
+	performed
+
+	* dialogs/gedit-dialog-goto-line.c: enable the Go To Line button
+	only if the entry contains text
+
+	* gedit-ui.xml: set accell for the Go to Line verb (bug #100818)
+
 2003-04-16  Jordi Mallach  <jordi@sindominio.net>
 
 	* dialogs/gedit-dialog-replace.c
 	(replace_dlg_replace_all_button_pressed): corrected typo.
+
+2003-04-15  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* gedit-mdi.c (gedit_mdi_add_open_button)
+	(gedit_mdi_app_created_handler): partially fixes bug #102543 (patch by 
+	Christian Neumair <chris@gnome-de.org>)
 
 2003-04-15  Paolo Maggi  <paolo.maggi@polito.it>
 
