@@ -80,9 +80,11 @@ PROFILE (static GTimer *timer = NULL);
 struct _GeditDocumentPrivate
 {
 	gchar		    *uri;
-	gint 		     untitled_number;	
+	gint 		     untitled_number;
 
 	gchar		    *encoding;
+
+	gchar		    *mime_type;
 
 	gchar		    *last_searched_text;
 	gchar		    *last_replace_text;
@@ -307,6 +309,8 @@ gedit_document_init (GeditDocument *document)
 	document->priv->uri = NULL;
 	document->priv->untitled_number = 0;
 
+	document->priv->mime_type = g_strdup ("text/plain");
+
 	document->priv->readonly = FALSE;
 
 	document->priv->last_save_was_manually = TRUE;
@@ -392,6 +396,7 @@ gedit_document_finalize (GObject *object)
 	}
 
 	g_free (document->priv->uri);
+	g_free (document->priv->mime_type);
 	g_free (document->priv->last_searched_text);
 	g_free (document->priv->last_replace_text);
 	g_free (document->priv->encoding);
@@ -1079,6 +1084,12 @@ get_info_cb (GnomeVFSAsyncHandle *handle,
 		return;
 	}
 
+	/* store the mime type */
+	g_free (doc->priv->mime_type);
+	doc->priv->mime_type = info_result->file_info->mime_type ?
+			       g_strdup (info_result->file_info->mime_type) :
+			       g_strdup ("text/plain");
+
 	if (info_result->file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
 	{
 		doc->priv->temp_size = (gulong)info_result->file_info->size;
@@ -1120,6 +1131,8 @@ load_local (GeditDocument *doc)
 	res = gnome_vfs_get_file_info (doc->priv->temp_uri,
 				       info,
 				       GNOME_VFS_FILE_INFO_DEFAULT |
+				       GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
+				       GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
 				       GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
 
 	if (res != GNOME_VFS_OK)
@@ -1169,6 +1182,12 @@ load_local (GeditDocument *doc)
 
 		return FALSE;
 	}
+
+	/* store the mime type */
+	g_free (doc->priv->mime_type);
+	doc->priv->mime_type = info->mime_type ?
+			       g_strdup (info->mime_type) :
+			       g_strdup ("text/plain");
 
 	gnome_vfs_file_info_unref (info);
 
@@ -1320,6 +1339,8 @@ gedit_document_load (GeditDocument        *doc,
 		gnome_vfs_async_get_file_info (&doc->priv->info_handle,
 					       uri_list,
 					       GNOME_VFS_FILE_INFO_DEFAULT |
+					       GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
+					       GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
 					       GNOME_VFS_FILE_INFO_FOLLOW_LINKS,
 					       GNOME_VFS_PRIORITY_MAX,
 					       get_info_cb,
@@ -1437,34 +1458,10 @@ gedit_document_is_untouched (const GeditDocument *doc)
 		(!gtk_text_buffer_get_modified (GTK_TEXT_BUFFER (doc)));
 }
 
-/* FIXME: Remove this function when gnome-vfs will add an equivalent public
-   function - Paolo (Mar 05, 2004) */
-static gchar *
-get_slow_mime_type (const char *text_uri)
-{
-	GnomeVFSFileInfo *info;
-	char *mime_type;
-	GnomeVFSResult result;
-
-	info = gnome_vfs_file_info_new ();
-	result = gnome_vfs_get_file_info (text_uri, info,
-					  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-	if (info->mime_type == NULL || result != GNOME_VFS_OK) {
-		mime_type = NULL;
-	} else {
-		mime_type = g_strdup (info->mime_type);
-	}
-	gnome_vfs_file_info_unref (info);
-
-	return mime_type;
-}
-
 static void
 gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 {
-	GtkSourceLanguage *language;
+	GtkSourceLanguage *language = NULL;
 	gchar *data;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
@@ -1492,44 +1489,29 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 	{
 		gedit_debug (DEBUG_DOCUMENT, "Language: %s", data);
 
-		if (strcmp (data, "_NORMAL_") == 0)
-			language = NULL;
-		else
+		if (strcmp (data, "_NORMAL_") != 0)
 			language = gedit_languages_manager_get_language_from_id (
 						gedit_get_languages_manager (),
 						data);
-
-		gedit_document_set_language (doc, language);
 
 		g_free (data);
 	}
 	else
 	{
-		gchar *mime_type;
-
-		mime_type = get_slow_mime_type (uri);
-	
-		if (mime_type != NULL)
+		if (doc->priv->mime_type != NULL)
 		{
-			GtkSourceLanguage *language;
-			
-			gedit_debug (DEBUG_DOCUMENT, "MIME-TYPE: %s", mime_type);
-
 			language = gtk_source_languages_manager_get_language_from_mime_type (
 						gedit_get_languages_manager (),
-						mime_type);
-	
-			gedit_document_set_language (doc, language);
-	
-			g_free (mime_type);
+						doc->priv->mime_type);
 		}
 		else
 		{
-			g_warning ("Couldn't get mime type for file `%s'", uri);
+			/* should never happen */
+			g_warning ("gedit document %s has NULL mime_type", uri);
 		}
-
-		
 	}
+
+	gedit_document_set_language (doc, language);
 
 	g_signal_emit (G_OBJECT (doc), document_signals[NAME_CHANGED], 0);
 }
@@ -1738,10 +1720,33 @@ follow_symlinks (const gchar *filename, GError **error)
 	return NULL;
 }
 
+/* FIXME: Remove this function when gnome-vfs will add an equivalent public
+   function - Paolo (Mar 05, 2004) */
+static gchar *
+get_slow_mime_type (const char *text_uri)
+{
+	GnomeVFSFileInfo *info;
+	char *mime_type;
+	GnomeVFSResult result;
+
+	info = gnome_vfs_file_info_new ();
+	result = gnome_vfs_get_file_info (text_uri, info,
+					  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
+					  GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
+					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+	if (info->mime_type == NULL || result != GNOME_VFS_OK) {
+		mime_type = NULL;
+	} else {
+		mime_type = g_strdup (info->mime_type);
+	}
+	gnome_vfs_file_info_unref (info);
+
+	return mime_type;
+}
+
 /* FIXME: define new ERROR_CODE and remove the error 
  * strings from here -- Paolo
  */
-
 static gboolean	
 gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEncoding *encoding,
 			     gboolean create_backup_copy, GError **error)
@@ -1762,6 +1767,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 	gboolean add_cr;
 	GtkTextIter start_iter;
 	GtkTextIter end_iter;
+	gchar *detected_mime;
 	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -2007,6 +2013,11 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), FALSE);
 
+	/* update the mime type */
+	detected_mime = get_slow_mime_type (uri);
+	g_free (doc->priv->mime_type);
+	doc->priv->mime_type = detected_mime ? detected_mime : g_strdup ("text/plain");
+
 	retval = TRUE;
 
 	/* Done */
@@ -2021,6 +2032,19 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 	g_free (temp_filename);
 
 	return retval;
+}
+
+const gchar *
+gedit_document_get_mime_type (const GeditDocument* doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_val_if_fail (doc->priv != NULL, FALSE);
+
+	g_return_val_if_fail (doc->priv->mime_type != NULL, "text/plain");
+
+	return doc->priv->mime_type;
 }
 
 gboolean	

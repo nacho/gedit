@@ -127,6 +127,8 @@ gchar*		gedit_document_get_raw_uri 	(const GeditDocument *doc);
 gchar*		gedit_document_get_uri 		(const GeditDocument *doc);
 gchar*		gedit_document_get_short_name 	(const GeditDocument *doc);
 
+const gchar    *gedit_document_get_mime_type 	(const GeditDocument *doc);
+
 void		gedit_document_load 		(GeditDocument        *doc, 
 						 const gchar          *uri, 
 						 const GeditEncoding  *encoding);

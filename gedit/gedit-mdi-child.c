@@ -661,31 +661,6 @@ create_popup_menu (BonoboMDIChild *child, GtkWidget *view)
 }
 
 
-/* FIXME: Remove this function when gnome-vfs will add an equivalent public
-   function - Paolo (Mar 05, 2004) */
-static gchar *
-get_slow_mime_type (const char *text_uri)
-{
-	GnomeVFSFileInfo *info;
-	char *mime_type;
-	GnomeVFSResult result;
-
-	info = gnome_vfs_file_info_new ();
-	result = gnome_vfs_get_file_info (text_uri, info,
-					  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-	if (info->mime_type == NULL || result != GNOME_VFS_OK) {
-		mime_type = NULL;
-	} else {
-		mime_type = g_strdup (info->mime_type);
-	}
-	gnome_vfs_file_info_unref (info);
-
-	return mime_type;
-}
-
-
 /* FIXME: implementing theme changed handler */
 
 static GnomeIconTheme *theme = NULL;
@@ -695,7 +670,7 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 {
 	GdkPixbuf *pixbuf;
 	gchar *raw_uri;
-	gchar *mime_type = NULL;
+	const gchar *mime_type;
 	int icon_size;
 
 	gedit_debug (DEBUG_MDI, "");
@@ -710,13 +685,8 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 
 	g_return_val_if_fail (theme != NULL, NULL);
 
-	raw_uri = gedit_document_get_raw_uri (GEDIT_MDI_CHILD (child)->document);	
-	
-	if (raw_uri != NULL)
-		mime_type = get_slow_mime_type (raw_uri);
-
-	if (mime_type == NULL)
-		mime_type = g_strdup ("text/plain");
+	raw_uri = gedit_document_get_raw_uri (GEDIT_MDI_CHILD (child)->document);
+	mime_type = gedit_document_get_mime_type (GEDIT_MDI_CHILD (child)->document);
 
 	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (image),
 					   GTK_ICON_SIZE_MENU, NULL,
@@ -725,7 +695,6 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 					   mime_type, icon_size);
 
 	g_free (raw_uri);
-	g_free (mime_type);
 		
 	gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
 		
@@ -741,8 +710,7 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 	gchar *tip;
 	gchar *uri;
 	gchar *ruri;
-	gchar *raw_uri;
-	gchar *mime_type = NULL;
+	const gchar *mime_type;
 	const gchar *mime_description = NULL;
 	gchar *mime_full_description; 
 	gchar *encoding;
@@ -753,27 +721,15 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 	uri = gedit_document_get_uri (GEDIT_MDI_CHILD (child)->document);
 	g_return_if_fail (uri != NULL);
 
-	raw_uri = gedit_document_get_raw_uri (GEDIT_MDI_CHILD (child)->document);	
-	
-	if (raw_uri != NULL)
-		mime_type = get_slow_mime_type (raw_uri);
-
-	if (mime_type != NULL)
-		mime_description = gnome_vfs_mime_get_description (mime_type);
+	mime_type = gedit_document_get_mime_type (GEDIT_MDI_CHILD (child)->document);
+	mime_description = gnome_vfs_mime_get_description (mime_type);
 
 	if (mime_description == NULL)
-	{
-		if (mime_type != NULL)
-			mime_full_description = g_strdup (mime_type);
-		else
-			mime_full_description = g_strdup (_("Unknown"));
-	}	
+		mime_full_description = g_strdup (mime_type);
 	else
-	{
 		mime_full_description = g_strdup_printf ("%s (%s)", 
 				mime_description, mime_type);
-	}
-		
+
 	enc = gedit_document_get_encoding (GEDIT_MDI_CHILD (child)->document);
 
 	if (enc == NULL)
@@ -795,8 +751,6 @@ set_tooltip (GeditTooltips *tooltips, GtkWidget *widget, BonoboMDIChild *child)
 	g_free (tip);
 
 	g_free (ruri);
-	g_free (raw_uri);
-	g_free (mime_type);
 	g_free (encoding);
 	g_free (mime_full_description);
 }
