@@ -21,6 +21,7 @@
 #include "main.h"
 #include "gE_plugin_api.h"
 #include "gE_document.h"
+#include "gE_files.h"
 #include "commands.h"
 
 #ifndef WITHOUT_GNOME
@@ -42,6 +43,8 @@ void start_plugin( GtkWidget *widget, gE_data *data )
   callbacks.document.show = gE_plugin_document_show;
   callbacks.document.current = gE_plugin_document_current;
   callbacks.document.filename = gE_plugin_document_filename;
+  callbacks.document.open = gE_plugin_document_open;
+  callbacks.document.close = gE_plugin_document_close;
   callbacks.text.get = gE_plugin_text_get;
   callbacks.program.quit = gE_plugin_program_quit;
   
@@ -129,6 +132,39 @@ gchar *gE_plugin_document_filename( gint docid )
   	return "";
   else
   	return document->filename;
+}
+
+int gE_plugin_document_open(gint context,gchar *fname)
+{
+      gchar *newfname;
+      gE_document *doc;
+
+      newfname=g_strdup(fname);
+      doc=gE_document_new( GINT_TO_POINTER( context ) ) ;
+
+      gE_file_open(GINT_TO_POINTER( context ) ,doc,newfname);
+      return GPOINTER_TO_INT(doc);
+}
+
+int gE_plugin_document_close (gint docid)
+{
+	gE_document *document = (gE_document *) GINT_TO_POINTER (docid);
+	gE_data *data = g_malloc (sizeof (gE_data));
+	gboolean flag;
+
+	data->document = document;
+
+	if (document->changed)
+		popup_close_verify (document, data);
+	else {
+		close_doc_execute (document, data);
+		data->flag = TRUE;
+	}
+
+	flag = data->flag;
+	g_free (data);
+
+	return flag;	
 }
 
 char *gE_plugin_text_get( gint docid )

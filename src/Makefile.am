@@ -41,7 +41,9 @@ gedit_SOURCES = 	\
 	menus.h		\
 	menus.c		\
 	msgbox.h	\
-	msgbox.c
+	msgbox.c	\
+	gtkscrollball.h	\
+	gtkscrollball.c
 
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 

@@ -29,6 +29,8 @@ extern void gE_plugin_text_append( gint docid, gchar *buffer, gint length );
 extern void gE_plugin_document_show( gint docid );
 extern int gE_plugin_document_current( gint context );
 extern char *gE_plugin_document_filename( gint docid );
+extern int gE_plugin_document_open (gint context, gchar *fname);
+extern int gE_plugin_document_close (gint docid);
 extern char *gE_plugin_text_get( gint docid );
 extern void gE_plugin_program_register (plugin_info *info);
 extern gboolean gE_plugin_program_quit (void);

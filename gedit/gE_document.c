@@ -38,7 +38,7 @@
 #include "commands.h"
 #include "menus.h"
 #include "toolbar.h"
-
+#include "gtkscrollball.h"
 static void gE_destroy_window(GtkWidget *, GdkEvent *event, gE_data *data);
 
 static char *lastmsg = NULL;
@@ -193,7 +193,7 @@ gE_document
 *gE_document_new(gE_window *w)
 {
 	gE_document *doc;
-	GtkWidget *table, *hscrollbar, *vscrollbar;
+	GtkWidget *table, *vscrollbar, *scrollball;
 	GtkStyle *style;
 
 	doc = g_malloc0(sizeof(gE_document));
@@ -229,7 +229,7 @@ gE_document
 	gtk_signal_connect_after(GTK_OBJECT(doc->text), "key_press_event",
 		GTK_SIGNAL_FUNC(auto_indent_callback), w);
 
-	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(table), doc->text, 0, 1, 0, 2);
 	style = gtk_style_new();
 	/*
 	 * style->bg[GTK_STATE_NORMAL] = style->white;
@@ -248,17 +248,22 @@ gE_document
 	gtk_widget_show(doc->text);
 	gtk_text_set_point(GTK_TEXT(doc->text), 0);
 
-	hscrollbar = gtk_hscrollbar_new(GTK_TEXT(doc->text)->hadj);
+	/*hscrollbar = gtk_hscrollbar_new(GTK_TEXT(doc->text)->hadj);
 	gtk_table_attach(GTK_TABLE(table), hscrollbar, 0, 1, 1, 2,
-		GTK_EXPAND | GTK_FILL, GTK_FILL, 0, 0);
+		GTK_EXPAND | GTK_FILL, GTK_FILL, 0, 0);*/
 	/* gtk_widget_show (hscrollbar); */
 
 	vscrollbar = gtk_vscrollbar_new(GTK_TEXT(doc->text)->vadj);
-	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 0, 1,
+	gtk_table_attach(GTK_TABLE(table), vscrollbar, 1, 2, 1, 2,
 		GTK_FILL, GTK_EXPAND | GTK_FILL, 0, 0);
 
 	GTK_WIDGET_UNSET_FLAGS(vscrollbar, GTK_CAN_FOCUS);
 	gtk_widget_show(vscrollbar);
+
+	scrollball = gtk_scrollball_new (NULL, GTK_TEXT(doc->text)->vadj);
+	gtk_table_attach (GTK_TABLE (table), scrollball, 1, 2, 0, 1,
+	                  0, GTK_FILL, 0, 0);
+	gtk_widget_show (scrollball);
 
 	gtk_notebook_append_page(GTK_NOTEBOOK(w->notebook), table,
 		doc->tab_label);

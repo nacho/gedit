@@ -19,6 +19,9 @@
 #include "gE_about.h"
 #include "gE_print.h"
 #include "msgbox.h"
+#include "xpm/foot.xpm"
+
+#define WITH_FOOT
 
 #define GE_DATA		1
 #define GE_WINDOW	2
@@ -288,6 +291,17 @@ void menus_set_sensitive(char *path, int sensitive)
 void add_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 void remove_callback_data (GnomeUIInfo *menu, gE_window *window, gE_data *data);
 
+GnomeUIInfo gedit_program_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("About..."), NULL, gE_about_box, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
+	{ GNOME_APP_UI_ITEM, N_("Preferences..."), NULL, NULL, NULL, NULL,
+		GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PREF },
+	{ GNOME_APP_UI_SEPARATOR },
+        { GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, (gpointer) GE_DATA, NULL,
+          GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
+          'Q', GDK_CONTROL_MASK, NULL },
+        GNOMEUIINFO_END
+};
 
 GnomeUIInfo gedit_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New"),  NULL, file_new_cmd_callback, (gpointer) GE_DATA, NULL,
@@ -308,12 +322,18 @@ GnomeUIInfo gedit_file_menu [] = {
 	  'W', GDK_CONTROL_MASK, NULL },
 	{ GNOME_APP_UI_ITEM, N_("Close All"), NULL, file_close_all_cmd_callback, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
+
 	{ GNOME_APP_UI_SEPARATOR },
+
+#if 0
 	{ GNOME_APP_UI_ITEM, N_("Quit"),  NULL, file_quit_cmd_callback, (gpointer) GE_DATA, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_QUIT,
 	  'Q', GDK_CONTROL_MASK, NULL },
+#endif
+
 	GNOMEUIINFO_END
 };
+
 
 GnomeUIInfo gedit_edit_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("Cut"),  NULL, edit_cut_cmd_callback, (gpointer) GE_DATA, NULL,
@@ -392,6 +412,7 @@ GnomeUIInfo gedit_window_menu []={
 	{ GNOME_APP_UI_ENDOFINFO }
 };
 
+#if 0
 GnomeUIInfo gedit_help_menu []= {
 	{ GNOME_APP_UI_HELP, NULL, NULL, NULL, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL}, 
@@ -403,6 +424,8 @@ GnomeUIInfo gedit_help_menu []= {
 	
 };
 
+#endif
+
 #if PLUGIN_TEST
 GnomeUIInfo gedit_plugins_menu []= {
   { GNOME_APP_UI_ENDOFINFO}
@@ -410,6 +433,14 @@ GnomeUIInfo gedit_plugins_menu []= {
 #endif
 
 GnomeUIInfo gedit_menu [] = {
+	#ifdef WITH_FOOT
+	{ GNOME_APP_UI_SUBTREE, "", NULL, &gedit_program_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_DATA, foot_xpm, 0, 0, NULL },
+	#else
+	{ GNOME_APP_UI_SUBTREE, N_("Program"), NULL, &gedit_program_menu, NULL, NULL,
+		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+	#endif
+
 	{ GNOME_APP_UI_SUBTREE, N_("File"), NULL, &gedit_file_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
 	{ GNOME_APP_UI_SUBTREE, N_("Edit"), NULL, &gedit_edit_menu, NULL, NULL,
@@ -424,14 +455,16 @@ GnomeUIInfo gedit_menu [] = {
 #endif
 	{ GNOME_APP_UI_SUBTREE, N_("Window"), NULL, &gedit_window_menu, NULL, NULL,
 	  GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+#if 0
 	{ GNOME_APP_UI_SUBTREE, N_("Help"), NULL, &gedit_help_menu, NULL, NULL,
 		GNOME_APP_PIXMAP_NONE, NULL, 0, 0, NULL },
+#endif
 	GNOMEUIINFO_END
 };
 
 void gE_menus_init (gE_window *window, gE_data *data)
 {
-
+	add_callback_data (gedit_program_menu, window, data);
 	add_callback_data (gedit_file_menu, window, data);
 	add_callback_data (gedit_edit_menu, window, data);
 	add_callback_data (gedit_search_menu, window, data);
@@ -439,10 +472,13 @@ void gE_menus_init (gE_window *window, gE_data *data)
 	add_callback_data (gedit_toolbar_menu, window, data);
 	add_callback_data (gedit_options_menu, window, data);
 	add_callback_data (gedit_window_menu, window, data);
+#if 0
 	add_callback_data (gedit_help_menu, window, data);
+#endif
 
 	gnome_app_create_menus (GNOME_APP (window->window), gedit_menu);
 
+	remove_callback_data (gedit_program_menu, window, data);
 	remove_callback_data (gedit_file_menu, window, data);
 	remove_callback_data (gedit_edit_menu, window, data);
 	remove_callback_data (gedit_search_menu, window, data);
@@ -450,7 +486,9 @@ void gE_menus_init (gE_window *window, gE_data *data)
 	remove_callback_data (gedit_toolbar_menu, window, data);
 	remove_callback_data (gedit_options_menu, window, data);
 	remove_callback_data (gedit_window_menu, window, data);
+#if 0
 	remove_callback_data (gedit_help_menu, window, data);
+#endif
 }
 
 
