@@ -21,9 +21,9 @@
 
 typedef struct
 {
-  (int *create_callback) ( gchar *title );
-  (void *append_callback) ( gint id, gchar *data, gint length );
-  (void *show_callback) ( gint id );
+  int (*create_callback) ( gchar *title );
+  void (*append_callback) ( gint id, gchar *data, gint length );
+  void (*show_callback) ( gint id );
 } plugin_callback_struct;
 
 typedef struct
@@ -46,8 +46,6 @@ void plugin_send_int( plugin *, gint );
 void plugin_send_data( plugin *, gchar *, gint length );
 void plugin_send_data_int( plugin *, gint );
 void plugin_get( plugin *, gchar *, gint length );
-void plugin_get_all( plugin *, gchar *, gint length, plugin_callback *finished, gpointer data );
-void plugin_register_document_create( plugin *, (int *) () )
-void plugin_register_document_append( plugin *, (void *) (int, char *, int) );
-void plugin_register_document_show( plugin *, (void *) (int) );
+void plugin_get_all( plugin *, gint length, plugin_callback *finished, gpointer data );
+void plugin_register( plugin *, plugin_callback_struct * );
 #endif

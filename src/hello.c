@@ -34,7 +34,6 @@ int main( int argc, char *argv[] )
       while( undone > 0 )
 	{
 	  buff[ undone = read( fd, buff, 1024 ) ] = 0;
-	  sleep(10);
 	  printf( buff );
 	}
     }
