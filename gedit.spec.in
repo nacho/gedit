@@ -4,6 +4,7 @@
 %define prefix   /usr
 
 Summary: gedit is a small but powerful text editor for GNOME.
+Summary(es): gedit es un editor de texto para GNOME pequeño pero potente
 Name:      gedit
 Version:   %ver
 Release:   %rel
@@ -30,8 +31,21 @@ many more functions.
 
 GNOME is required to use gedit (Gnome-Libs and Gtk+).
 
+%description -l es
+gedit es un editor de texto pequeño pero potente diseñado
+expresamente para GNOME.
+
+Incluye prestaciones como pantallas partidas, una API de
+extensiones, la cual permite a gedit ser ampliado para
+soportar bastantes prestaciones, pero manteniendo pequeño
+su núcleo, edición de multiples documentos mediante el
+uso de bloc de notas con pestañas y muchas más funcionalidades.
+
+Necesita GNOME para emplear gedit (Gnome-Libs y Gtk+).
+
 %package devel
 Summary: Develop plugins for the gedit editor.
+Summary(es): Desarrollo de extensiones para el editor gedit.
 Group: Development/Libraries
 
 %description devel
@@ -39,6 +53,12 @@ gedit is a small but powerful text editor for GTK+ and/or GNOME.
 This package allows you to develop plugins that work within
 gedit.  Plugins can create new documents and manipulate documents
 in arbitrary ways.
+
+%description devel -l es
+gedit es un editor de texto pequeño pero potente para GTK+ y/o GNOME.
+Este paquete le permite desarrollar extensiones que funcionen dentro
+de gedit. Las extensiones pueden crear nuevos documentos y manipularlos
+de distintas formas.
 
 %prep
 %setup
@@ -71,6 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/gedit/plugins/*
 
 %changelog
+* Fri Jun 09 2000 Carlos Perelló Marín <carpema@hispalinux.es>
+- Added the Spanish description
+
 * Wed Apr 19 2000 Jason Leach <leach@wam.umd.edu>
 - Removed the prefix/libexec/* from files, we don't build plugins here
 anymore
