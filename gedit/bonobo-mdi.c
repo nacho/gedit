@@ -2251,6 +2251,16 @@ bonobo_mdi_get_active_window (BonoboMDI *mdi)
 	return mdi->priv->active_window;
 }
 
+/* this should not be used, except in the hack in gedit-application-server */
+void
+bonobo_mdi_set_active_window (BonoboMDI *mdi, BonoboWindow *win)
+{
+	g_return_if_fail (BONOBO_IS_MDI (mdi));
+	g_return_if_fail (BONOBO_IS_WINDOW (win));
+
+	toplevel_focus (win, NULL, mdi);
+}
+
 void 
 bonobo_mdi_set_ui_template (BonoboMDI *mdi, const gchar *xml, BonoboUIVerb verbs[])
 {

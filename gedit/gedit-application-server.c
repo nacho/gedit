@@ -132,7 +132,11 @@ impl_gedit_application_server_getWindowInWorkspace (PortableServer_Servant _serv
 			win = l->data;
 			ws = gedit_utils_get_window_workspace (GTK_WINDOW (win));
 			if (ws == workspace || ws == GEDIT_ALL_WORKSPACES)
+			{
+				/* make sure the window becomes the active_window */
+				bonobo_mdi_set_active_window (BONOBO_MDI (gedit_mdi), win);
 				break;
+			}
 
 			l = g_list_next (l);
 		}

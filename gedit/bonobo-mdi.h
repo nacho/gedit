@@ -171,6 +171,7 @@ BonoboMDIChild *bonobo_mdi_find_child         	(BonoboMDI *mdi,
 						 const gchar *name);
 
 BonoboWindow   *bonobo_mdi_get_active_window  	(BonoboMDI *mdi);
+void			bonobo_mdi_set_active_window    (BonoboMDI *mdi, BonoboWindow *win);
 
 void	      bonobo_mdi_set_restoring_state    (BonoboMDI *mdi,
 						 gboolean restoring_state);
