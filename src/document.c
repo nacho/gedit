@@ -666,16 +666,18 @@ gedit_document_load ( GList *file_list)
 		if ((scheme != NULL) && (strcmp (scheme, "file") == 0))
 		{
 			gchar* tmp_str;
+		        gchar* tmp_str2;
 			
 			can_be_created = TRUE;
 			
-			/*
-			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);	
-			*/
-			tmp_str = gnome_vfs_get_local_path_from_uri (file_list->data);
+			
+			tmp_str = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_TOPLEVEL_METHOD);				
+			tmp_str2 = gnome_vfs_unescape_string_for_display (tmp_str);
 
 			file_name = gedit_file_convert_to_full_pathname (tmp_str);			
+			
 			g_free(tmp_str);
+			g_free(tmp_str2);
 
 			gnome_vfs_uri_unref(uri);	
 			uri = gnome_vfs_uri_new (file_name);
