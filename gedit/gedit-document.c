@@ -536,6 +536,10 @@ gedit_document_get_raw_uri (const GeditDocument* doc)
 		return g_strdup (doc->priv->uri);
 }
 
+/* 
+ * Returns a well formatted (ready to display) URI in UTF-8 format 
+ * See: gedit_document_get_raw_uri to have a raw uri (non UTF-8)
+ */
 gchar*
 gedit_document_get_uri (const GeditDocument* doc)
 {
@@ -545,12 +549,17 @@ gedit_document_get_uri (const GeditDocument* doc)
 		return g_strdup_printf (_("%s %d"), _("Untitled"), doc->priv->untitled_number);
 	else
 	{
+		gchar *res;
 		gchar *uri = g_filename_to_utf8 (doc->priv->uri, -1, NULL, NULL, NULL);
 
 		if (uri == NULL)
 			return g_strdup (_("Invalid file name"));
 		
-		return uri;
+		res = gnome_vfs_x_format_uri_for_display (uri);
+
+		g_free (uri);
+
+		return res;
 	}
 }
 

@@ -290,17 +290,27 @@ gedit_file_save (GeditMDIChild* child)
 	}	
 	else
 	{
-		/* uri is a valid UT8 filename */
 		GnomeRecentModel *recent;
+		gchar *raw_uri;
+		gchar *canonical_uri;
 
 		gedit_debug (DEBUG_FILE, "OK");
 
 		gedit_utils_flash_va (_("File '%s' saved."), uri);
 
-		recent = gedit_recent_get_model ();
-		gnome_recent_model_add (recent, uri);
-
 		g_free (uri);
+
+		raw_uri = gedit_document_get_raw_uri (doc);
+		g_return_val_if_fail (raw_uri != NULL, TRUE);
+		
+		canonical_uri = gnome_vfs_x_make_uri_canonical (raw_uri);
+		g_return_val_if_fail (canonical_uri != NULL, TRUE);
+		
+		recent = gedit_recent_get_model ();
+		gnome_recent_model_add (recent, canonical_uri);
+
+		g_free (raw_uri);
+		g_free (canonical_uri);
 
 		return TRUE;
 	}
