@@ -32,7 +32,6 @@ gedit_SOURCES = 		\
 	file.c 			\
 	file.h		 	\
 	gedit.c			\
-	gedit.h			\
 	menus.c 		\
 	menus.h 		\
 	plugin.c 		\
