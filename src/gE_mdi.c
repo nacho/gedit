@@ -218,6 +218,9 @@ gE_document *gE_document_new ()
 	if ((doc = gtk_type_new (gE_document_get_type ())))
 	  {
 	    gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc), _(UNTITLED));
+	    
+	    doc->buf = g_string_new(" ");
+	    
 	    /* gE_documents = g_list_append(gE_documents, doc); */
 
 	  /*  gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
@@ -236,6 +239,7 @@ gE_document *gE_document_new_with_file (gchar *filename)
 {
 	gE_document *doc;
 	char *nfile, *name;
+	gchar *tmp_buf;
 	struct stat stats;
 	FILE *fp;
 
@@ -248,7 +252,7 @@ gE_document *gE_document_new_with_file (gchar *filename)
 	      {
    	        doc->buf_size = stats.st_size;
    	        
-   	        if ((doc->buf = g_malloc (doc->buf_size)) != NULL)
+   	        if ((tmp_buf = g_malloc (doc->buf_size)) != NULL)
    	          {
    	            if ((doc->filename = g_strdup (filename)) != NULL)
    	              {
@@ -256,7 +260,9 @@ gE_document *gE_document_new_with_file (gchar *filename)
    	                
    	                if ((fp = fopen (filename, "r")) != NULL)
    	                  {
-   	                    doc->buf_size = fread (doc->buf, 1, doc->buf_size,fp);
+   	                    doc->buf_size = fread (tmp_buf, 1, doc->buf_size,fp);
+   	                    doc->buf = g_string_new (tmp_buf);
+   	                    g_free (tmp_buf);
    	                	gnome_mdi_child_set_name(GNOME_MDI_CHILD(doc),
    	                	                          g_basename(filename));
    	                	

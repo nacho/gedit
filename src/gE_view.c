@@ -109,7 +109,7 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	gchar *buffer;
 	gint position = *pos;
 	gint n;
-	gE_document *temp;
+	gE_document *doc;
 	GnomeMDIChild *child;
 	/*GnomeMDIChild *temp = NULL;*/
 	gE_data *data;
@@ -143,6 +143,10 @@ doc_insert_text_cb(GtkWidget *editable, char *insertion_text, int length,
 	gtk_text_freeze (GTK_TEXT (significant_other));
 	gtk_editable_insert_text (GTK_EDITABLE (significant_other), buffer, length, &position);
 	gtk_text_thaw (GTK_TEXT (significant_other));
+	
+		
+	doc = view->document;
+	doc->buf = g_string_insert (doc->buf, position, buffer);
 	g_free (buffer);
 
 }
@@ -152,6 +156,7 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	gE_view *view)
 {
 	GtkWidget *significant_other;
+	gE_document *doc;
 	gE_data *data;
 
 	data = g_malloc0 (sizeof (gE_data));
@@ -179,6 +184,10 @@ doc_delete_text_cb(GtkWidget *editable, int start_pos, int end_pos,
 	gtk_text_freeze (GTK_TEXT (significant_other));
 	gtk_editable_delete_text (GTK_EDITABLE (significant_other), start_pos, end_pos);
 	gtk_text_thaw (GTK_TEXT (significant_other));
+	
+	doc = view->document;
+	doc->buf = g_string_erase (doc->buf, end_pos, start_pos);
+	
 }
 
 
@@ -540,20 +549,20 @@ GtkWidget *gE_view_new (gE_document *doc)
 	
 	view->document = doc;
 
-	if (view->document->buf_size)
+	if (view->document->buf->str)
 	{
 	  	g_print ("gE_view_init: inserting buffer..\n");
 	  	
 	  	/*gtk_text_freeze (GTK_TEXT (view->text));*/
 	  	gtk_text_insert (GTK_TEXT (view->text), NULL,
 						 &view->text->style->black,
-						 NULL, view->document->buf,
-						 view->document->buf_size);
+						 NULL, view->document->buf->str,
+						 view->document->buf->len);
 
 	  	gtk_text_insert (GTK_TEXT (view->split_screen), NULL,
 						 &view->split_screen->style->black,
-						 NULL, view->document->buf,
-						 view->document->buf_size);
+						 NULL, view->document->buf->str,
+						 view->document->buf->len);
 		/*gtk_text_thaw (GTK_TEXT (view->text));*/
 		
 		gE_view_set_position (view, 0);

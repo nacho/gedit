@@ -42,7 +42,7 @@
 #include "gE_prefs.h"
 #include "gE_files.h"
 #include "gE_plugin_api.h"
-#include "dialog.h"
+/*#include "dialog.h"*/
 #include "search.h"
 
 static void close_file_save_yes_sel (GtkWidget *w, gE_data *data);
@@ -133,7 +133,7 @@ popup_close_verify(gE_document *doc, gE_data *data)
 	GtkWidget *msgbox;
 	int ret;
 	char *fname, *msg;
-	char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL} ;
+	/*char *buttons[] = { GE_BUTTON_YES, GE_BUTTON_NO, GE_BUTTON_CANCEL} ;*/
 
 	fname = (doc->filename) ? g_basename(doc->filename) : _(UNTITLED);
 
@@ -308,12 +308,10 @@ filenames_dropped (GtkWidget * widget,
 	tmp_list = names;
 
 	while (tmp_list) {
-		doc = gE_document_new ();
+		doc = gE_document_new_with_file ((gchar *)tmp_list->data);
 		gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	        
-	        gE_file_open (doc, (gchar *)tmp_list->data);
-		
 		tmp_list = tmp_list->next;
 	}
 }
@@ -354,7 +352,7 @@ void window_new_cb(GtkWidget *widget, gpointer cbdata)
 /*
  * file open callback : user selects "Ok"
  */
-static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
+static void file_open_ok_sel (GtkWidget *widget, GtkFileSelection *files)
 {
 	gchar *filename;
 	gchar *nfile;
@@ -386,25 +384,24 @@ static void file_open_ok_sel(GtkWidget *widget, GtkFileSelection *files)
 		     
 		     if (doc->filename || GE_VIEW(mdi->active_view)->changed)
 		       {
-		         doc = gE_document_new ();
+		         doc = gE_document_new_with_file (filename);
 		         gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        		 gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	        		 
 	        	   }
-		     
+		     else
+		       {
 		         gE_file_open (GE_DOCUMENT(doc), filename);
-		      
+		       }
 		     
 		     gtk_widget_hide (GTK_WIDGET(osel));
 		     return;
 		   }
 		 else
 		   {
-		     doc = gE_document_new ();
+		     doc = gE_document_new_with_file (filename);
 		     gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        	 gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
-		     
-		     gE_file_open (GE_DOCUMENT (doc), filename);
 		     
 		     gtk_widget_hide (GTK_WIDGET(osel));
 		     return;
@@ -446,20 +443,23 @@ void file_open_cb(GtkWidget *widget, gpointer cbdata)
 	/*static GtkWidget *open_fileselector;*/
 	
 	if (osel == NULL)
-	  osel = gtk_file_selection_new(_("Open File..."));
+	  {
+	   osel = gtk_file_selection_new(_("Open File..."));
 		
 
-	gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(osel));
+	   gtk_file_selection_hide_fileop_buttons(GTK_FILE_SELECTION(osel));
 	
-	gtk_signal_connect(GTK_OBJECT(osel), "delete_event",
-			(GtkSignalFunc)file_sel_destroy, osel);
+	   gtk_signal_connect(GTK_OBJECT(osel), "delete_event",
+					  (GtkSignalFunc)file_sel_destroy, osel);
 			
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->ok_button), 
-				   "clicked", (GtkSignalFunc)file_open_ok_sel,
-				   osel);
-	gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->cancel_button),
-				   "clicked", (GtkSignalFunc)file_cancel_sel,
-			       osel);
+	   gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->ok_button), 
+				      "clicked", (GtkSignalFunc)file_open_ok_sel,
+				      osel);
+				      
+	   gtk_signal_connect(GTK_OBJECT(GTK_FILE_SELECTION(osel)->cancel_button),
+				      "clicked", (GtkSignalFunc)file_cancel_sel,
+			          osel);
+	  }
 
 
 /*	if (GTK_WIDGET_VISIBLE(open_fs))
@@ -925,18 +925,22 @@ recent_cb(GtkWidget *w, gE_data *data)
 	  {
 	    if (doc->filename || GE_VIEW(mdi->active_view)->changed)
 	      {
-	        doc = gE_document_new ();
+	        doc = gE_document_new_with_file (data->temp1);
 	        gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
 	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 	      }
 	    
-	        gE_file_open (doc, data->temp1);
+	       /* gE_file_open (doc, data->temp1); */
 	      
+	  
+	    else
+	      {
+	        /*doc = gE_document_new_with_file (data->temp1);
+	        gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
+	        gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));*/
+	        gE_file_open (doc, data->temp1);
+	      }
 	  }
-	else
-	  doc = gE_document_new_with_file (data->temp1);
-	  gnome_mdi_add_child (mdi, GNOME_MDI_CHILD (doc));
-	  gnome_mdi_add_view (mdi, GNOME_MDI_CHILD (doc));
 }
 
 

@@ -1,3 +1,49 @@
+Sun Aug  8 18:53:39 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* main.h: (gE_document) Made the buffer a GString.
+	
+	* gE_mdi.c: (gE_document_new_with_file) Open and insert the file into
+	  the GString buf, by loading the file into a temporary buffer then
+	  creating the GString and inserting this temporary buffer into it.
+	  (gE_document_new) Create an empty GString.
+	
+	* gE_view.c: (doc_insert_text_cb) Insert the text into the GString 
+	  buffer. THere's something wrong with this, maybe i'm accessing the
+	  GString in the wrnog manner.
+	  (doc_delete_text_cb) Erase the text from the GString buffer. Again,
+	  there appears to be something wrong with this..
+	  (gE_view_new) Check for the existance of text in the buffer, instead
+	  of checking for buf_len. And use the GString buffer length item instead
+	  of the buf_len.
+
+Sun Aug  8 17:58:18 BST 1999  Alex Roberts  <bse@gedit.pn.org>
+
+	* main.h: Added changed flags to the gE_document struct. changed should
+	  be on a per-document basis, not per-view.
+	
+	* commands.c: (recent_cb) Use a gE_documetn_new_with_file, so correct
+	  buffer status is achevied. Added braces aroimd the else statement..
+	  DOH! how did i miss that.. Aaaand, the toplevel if braces meant that
+	  if there was a doc, the recent file would only be opened if the
+	  doc was modified... and as we make sure tehres always a viisble
+	  docuemnt we should open the file into the current un-modified doc..
+	  (you got all that, right? ;) this fixes a nasty pointer error at exit.
+	
+	* commands.c: Removed include of dialog.h.
+	  (popup_close_verify) Removed char initialiser, which used references
+	  to dialog.h. The char itself isnt used in thisfunction anyway! (well,
+	  it may have done in a previous life).
+	
+	* commands.c: (filenames_dropped) (file_open_ok_sel)
+	  Use gE_docuemtn_new_with_file instead of document_new then using a
+	  gE_file_open.
+	
+	* commands.c: (file_open_cb) The signal connectors shoudl only be called
+	  when the dialog is being created, so the braces extend from the 
+	  selection_new function call to the widget_show. Now, if the widget 
+	  already exisits, it just gets displayed and not reinitialised. This 
+	  fixes the //// bug in the filename descriptor.
+
 Sun Aug 08 16:55:46 BST 1999  Alex Roberts  <bse@gedit.pn.org>
 
 	* makeconfig.pl: Upped version to 0.5.5pre
