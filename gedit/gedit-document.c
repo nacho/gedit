@@ -848,11 +848,8 @@ update_document_contents (GeditDocument        *doc,
 
 		gedit_document_begin_not_undoable_action (doc);
 
-		gedit_document_delete_text (doc, 0, -1);
-
 		/* Insert text in the buffer */
-		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
-		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, len);
+		gtk_text_buffer_set_text (GTK_TEXT_BUFFER (doc), converted_text, len);
 
 		PROFILE (
 			g_message ("Text inserted: %.3f", g_timer_elapsed (timer, NULL));
@@ -864,16 +861,6 @@ update_document_contents (GeditDocument        *doc,
 			 * file_contents and hence it must not be freed */
 			g_free (converted_text);
 		}
-
-		/* We had a newline in the buffer to begin with. (The buffer always contains
-   		 * a newline, so we delete to the end of the buffer to clean up. 
-		 * FIXME: Is this really needed? - Paolo (Jan 8, 2004) */
-		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
- 		gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &iter, &end);
-
-		/* Place the cursor at the start of the document or and old cursor position
-		 * if reverting */
-		gedit_document_set_cursor (doc, 0);
 
 		gedit_document_end_not_undoable_action (doc);
 
