@@ -3,6 +3,9 @@
 	* email/email.c (gedit_plugin_email_sendmail_location_dialog): check for the location
 	of sendmail before using the plugin. If sendmail is not found, display a dialog box
 	so that sendmail could be located.
+	(gedit_plugin_email_get_sendmail): new function
+	(gedit_is_program): new function.
+	( We should move this functions to a gnome-libs )
 
 	* sendmail.glade: new file
 	* sendmail.glade.h : new file

@@ -186,20 +186,27 @@ gedit_window_set_toolbar_labels (GnomeApp *app)
 	g_return_if_fail (app != NULL);
 	
 	dock_item = gnome_app_get_dock_item_by_name (app, GNOME_APP_TOOLBAR_NAME);
+	g_return_if_fail (dock_item != NULL);
+	
 	toolbar = GTK_TOOLBAR (gnome_dock_item_get_child (dock_item));
+	g_return_if_fail (toolbar != NULL);
 
 	switch (settings->toolbar_labels)
 	{
 	case GEDIT_TOOLBAR_SYSTEM:
 		if (gnome_preferences_get_toolbar_labels())
+		{
 			gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);
+		}
 		else
+		{
 			gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
+			gtk_widget_queue_resize (GTK_WIDGET (dock_item)->parent);
+		}
 		break;
 	case 1:
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_ICONS);
-		if (dock_item != NULL)
-			gtk_widget_queue_resize (GTK_WIDGET (dock_item)->parent);
+		gtk_widget_queue_resize (GTK_WIDGET (dock_item)->parent);
 		break;
 	case 2:
 		gtk_toolbar_set_style (toolbar, GTK_TOOLBAR_BOTH);

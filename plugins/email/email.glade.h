@@ -9,3 +9,4 @@ gchar *s = N_("From:");
 gchar *s = N_("To:");
 gchar *s = N_("Subject:");
 gchar *s = N_("File to use as body of message: ");
+gchar *s = N_("Sendmail found at : ");

@@ -1,5 +1,10 @@
 2000-06-19  Chema Celorio  <chema@celorio.com>
 
+	* window.c (gedit_window_refresh_all): queue_resize the toolbar when setting
+	to system settings and system setings = ICONS_ONLY
+
+2000-06-19  Chema Celorio  <chema@celorio.com>
+
 	* window.c (gedit_window_refresh_all): fix the bug in which the toolbars will
 	no get loaded when the mdi_mode is changed.
 
