@@ -72,6 +72,10 @@ static void gedit_view_doc_readonly_changed_handler (GeditDocument *document,
 						     GeditView *view);
 static gint gedit_view_calculate_real_tab_width (GeditView *view, gint tab_size);
 
+static void gedit_view_populate_popup (GtkTextView *textview, GtkMenu *menu, gpointer data);
+static void gedit_view_undo_activate_callback (GtkWidget *menu_item, GeditDocument *doc);
+static void gedit_view_redo_activate_callback (GtkWidget *menu_item, GeditDocument *doc);
+
 static GtkVBoxClass *parent_class = NULL;
 
 GType
@@ -342,10 +346,6 @@ gedit_view_init (GeditView  *view)
 	GtkTextView *text_view;
 	GtkWidget *sw; /* the scrolled window */
 	GdkColor background, text, selection, sel_text;
-
-	/* FIXME
-	static GtkWidget *popup_menu = NULL;
-	*/
 	
 	gedit_debug (DEBUG_VIEW, "");
 
@@ -399,21 +399,8 @@ gedit_view_init (GeditView  *view)
 
 	GTK_WIDGET_SET_FLAGS (GTK_WIDGET (view), GTK_CAN_FOCUS);
 
-#if 0
-	/* FIXME */
-	/* Popup Menu */
-	if (popup_menu == NULL) 
-	{
-		popup_menu = gnome_popup_menu_new (gedit_popup_menu);
-
-		/* popup menu will not be destroyed when all the view are closed
-		 * FIXME: destroy popup before exiting the program*/
-		gtk_widget_ref (popup_menu);
-	}
-
-	/* The same popup menu is attached to all views */
-	gnome_popup_menu_attach (popup_menu, GTK_WIDGET (view->priv->text_view), NULL);	
-#endif 
+	g_signal_connect (G_OBJECT (view->priv->text_view), "populate-popup",
+			  G_CALLBACK (gedit_view_populate_popup), view);
 }
 
 static void 
@@ -953,3 +940,63 @@ gedit_view_update_overwrite_mode_statusbar (GtkTextView* w, GeditView* view)
 
       	g_free (msg);
 }
+
+static void
+gedit_view_undo_activate_callback (GtkWidget *menu_item, GeditDocument *doc)
+{
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	if (gedit_document_can_undo (doc))
+		gedit_document_undo (doc);
+}
+
+static void
+gedit_view_redo_activate_callback (GtkWidget *menu_item, GeditDocument *doc)
+{
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	if (gedit_document_can_redo (doc))
+		gedit_document_redo (doc);
+}
+
+static void
+gedit_view_populate_popup (GtkTextView *textview, GtkMenu *menu, gpointer data) 
+{
+	GeditView *view;
+	GeditDocument *doc;
+	GtkWidget *menu_item;
+
+	g_return_if_fail (menu != NULL);
+	g_return_if_fail (GTK_IS_MENU_SHELL (menu));
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (GEDIT_IS_VIEW (data));
+
+	view = GEDIT_VIEW (data);
+
+	doc = gedit_view_get_document (view);
+	g_return_if_fail (doc != NULL);
+
+	/* Add the separator */
+	menu_item = gtk_separator_menu_item_new ();
+	gtk_widget_show (menu_item);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the redo button */
+	menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_REDO, NULL);
+	gtk_widget_set_sensitive (menu_item, gedit_document_can_redo (doc));
+	gtk_widget_show (menu_item);
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+		      	  G_CALLBACK (gedit_view_redo_activate_callback), doc);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);
+
+	/* Add the undo button */
+	menu_item = gtk_image_menu_item_new_from_stock (GTK_STOCK_UNDO, NULL);
+	gtk_widget_set_sensitive (menu_item, gedit_document_can_undo (doc));
+	g_signal_connect (G_OBJECT (menu_item), "activate",
+		      	  G_CALLBACK (gedit_view_undo_activate_callback), doc);
+	gtk_widget_show (menu_item);
+	gtk_menu_shell_prepend (GTK_MENU_SHELL (menu), menu_item);	
+}
+

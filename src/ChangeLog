@@ -1,3 +1,14 @@
+2002-05-23  Paolo Maggi <maggi@athena.polito.it>
+
+	* gedit-view.c: added Undo and Redo to the popup menu
+	(gedit_view_init): connected the populate-popup signal and removed
+	old commented code
+	(gedit_view_undo_activate_callback)(gedit_view_redo_activate_callback)
+	(gedit_view_populate_popup): new static functions
+
+	Note that since I'm using stock menu items, I'm not breaking the 
+	string freeze
+
 2002-05-22  Paolo Maggi <maggi@athena.polito.it>
 
 	* bonobo-mdi.c (app_close_book)(book_motion)(book_button_press)
