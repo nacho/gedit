@@ -53,7 +53,8 @@ struct _GeditDialogReplace {
 	GtkWidget *replace_entry;
 	GtkWidget *replace_hbox;
 	GtkWidget *case_sensitive;
-	GtkWidget *position;
+	GtkWidget *beginning;
+	GtkWidget *cursor;
 };
 
 struct _GeditDialogFind {
@@ -61,7 +62,8 @@ struct _GeditDialogFind {
 
 	GtkWidget *search_entry;
 	GtkWidget *case_sensitive;
-	GtkWidget *position;
+	GtkWidget *beginning;
+	GtkWidget *cursor;
 };
 
 static void find_dlg_find_button_pressed (GeditDialogFind * dialog);
@@ -122,15 +124,16 @@ dialog_replace_get_dialog (void)
 	dialog->replace_entry      = glade_xml_get_widget (gui, "replace_with_text_entry");
 	dialog->replace_hbox       = glade_xml_get_widget (gui, "hbox_replace_with");
 	dialog->case_sensitive     = glade_xml_get_widget (gui, "case_sensitive");
-	dialog->position           = glade_xml_get_widget (gui, "radio_button_1");
-
+	dialog->beginning          = glade_xml_get_widget (gui, "beginning_radio_button");
+	dialog->cursor		   = glade_xml_get_widget (gui, "cursor_radio_button");
 
 	if (!content			||
 	    !dialog->search_entry 	||
 	    !dialog->replace_entry  	|| 
 	    !dialog->replace_hbox 	||
 	    !dialog->case_sensitive 	||
-	    !dialog->position 	) 
+	    !dialog->cursor	 	||
+	    !dialog->beginning 	) 
 	{
 		g_print
 		    ("Could not find the required widgets inside replace.glade2.\n");
@@ -201,14 +204,17 @@ dialog_find_get_dialog (void)
 	replace_hbox       	   = glade_xml_get_widget (gui, "hbox_replace_with");
 	
 	dialog->case_sensitive     = glade_xml_get_widget (gui, "case_sensitive");
-	dialog->position           = glade_xml_get_widget (gui, "radio_button_1");
+	dialog->beginning          = glade_xml_get_widget (gui, "beginning_radio_button");
+	dialog->cursor		   = glade_xml_get_widget (gui, "cursor_radio_button");
+
 
 
 	if (!content			||
 	    !dialog->search_entry 	||
 	    !replace_hbox 		||
 	    !dialog->case_sensitive 	||
-	    !dialog->position 	) 
+            !dialog->cursor	 	||
+	    !dialog->beginning 	) 
 	{
 		g_print
 		    ("Could not find the required widgets inside replace.glade2.\n");
@@ -252,7 +258,8 @@ gedit_dialog_find (void)
 				       (BONOBO_MDI (gedit_mdi))));
 
 	gtk_widget_grab_focus (dialog->search_entry);
-
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);	
+	
 	do
 	{
 		response = gtk_dialog_run (GTK_DIALOG (dialog->dialog));
@@ -321,7 +328,9 @@ static void
 find_dlg_find_button_pressed (GeditDialogFind *dialog)
 {
 	/* FIXME : there is no case sensitive */
+
 	GeditMDIChild *active_child;
+	GeditView* active_view;
 	GeditDocument *doc;
 	const gchar* search_string = NULL;
 	gboolean from_cursor;
@@ -332,6 +341,9 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 	active_child = GEDIT_MDI_CHILD (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)));
 	g_return_if_fail (active_child != NULL);
 
+	active_view = GEDIT_VIEW (bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)));
+	g_return_if_fail (active_view != NULL);
+	
 	doc = active_child->document;
 	g_return_if_fail (doc != NULL);
 			
@@ -341,7 +353,7 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 	if (strlen (search_string) <= 0)
 		return;
 	
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->position)))
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->beginning)))
 		from_cursor = FALSE;
 	else
 		from_cursor = TRUE;
@@ -359,6 +371,13 @@ find_dlg_find_button_pressed (GeditDialogFind *dialog)
 			
 		gtk_dialog_run (GTK_DIALOG (message_dlg));
   		gtk_widget_destroy (message_dlg);
+
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->beginning), TRUE);		
+	}
+	else
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->cursor), TRUE);		
+		gedit_view_scroll_to_cursor (active_view);
 	}
 }
 

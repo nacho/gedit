@@ -1,3 +1,14 @@
+2001-12-03  Paolo Maggi  <maggi@athena.polito.it>
+
+	* gedit-document.c (gedit_document_find): when some text is selected and you
+	want to search beginning from the cursor position, start searching
+	from the end of the selection 
+
+	* dialogs/gedit-dialog-replace.c: added beginning and cursor to _GeditDialogFind
+	and _GeditDialogReplace
+	(find_dlg_find_button_pressed): set active "search from cursor" radiobutton
+	when needed
+
 2001-12-02  Paolo Maggi  <maggi@athena.polito.it>
 
 	* gedit-document.c: added last_searched_text to GeditDocumentPrivate

@@ -192,7 +192,7 @@
                 <property name="visible">yes</property>
 
                 <child>
-                  <widget class="GtkRadioButton" id="radio_button_1">
+                  <widget class="GtkRadioButton" id="beginning_radio_button">
                     <property name="can_focus">yes</property>
                     <property name="label" translatable="yes">Search fro_m the beginning of the document</property>
                     <property name="active">yes</property>
@@ -208,13 +208,13 @@
                 </child>
 
                 <child>
-                  <widget class="GtkRadioButton" id="radio_button_2">
+                  <widget class="GtkRadioButton" id="cursor_radio_button">
                     <property name="can_focus">yes</property>
                     <property name="label" translatable="yes">Search from the c_ursor position</property>
                     <property name="active">no</property>
                     <property name="draw_indicator">yes</property>
                     <property name="visible">yes</property>
-                    <property name="group">radio_button_1</property>
+                    <property name="group">beginning_radio_button</property>
                     <property name="use_underline">yes</property>
                   </widget>
                   <packing>

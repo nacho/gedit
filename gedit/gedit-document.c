@@ -1076,10 +1076,21 @@ gedit_document_find (GeditDocument* doc, const gchar* str,
 	/* FIXME: write support for case_sensitive */
 	
 	if (from_cursor)
+	{
+		GtkTextIter sel_bound;
+		
 		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
                                     &iter,
                                     gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
-			                                      "insert"));
+					                      "insert"));
+		
+		gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),			
+                                    &sel_bound,
+                                    gtk_text_buffer_get_mark (GTK_TEXT_BUFFER (doc),
+					                      "selection_bound"));
+		
+		gtk_text_iter_order (&sel_bound, &iter);		
+	}
 	else		
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 
