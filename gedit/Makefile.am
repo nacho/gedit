@@ -43,60 +43,63 @@ BUILT_SOURCES = 			\
 	gedit-marshal.c			\
 	gedit-marshal.h	
 
+headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
+header_DATA = 				\
+	gedit2.h			\
+	gedit-utils.h 			\
+	gedit-mdi.h			\
+	gedit-mdi-child.h		\
+	gedit-document.h 		\
+	gedit-view.h 			\
+	gedit-menus.h			\
+	gedit-debug.h 			\
+	gedit-file.h			\
+	gedit-commands.h		\
+	gedit-undo-manager.h		\
+	gedit-session.h			\
+	bonobo-mdi.h			\
+	gedit-print.h			\
+	bonobo-mdi-child.h		\
+	bonobo-mdi-session.h		\
+	gedit-file-selector-util.h 	\
+	gedit-plugins-engine.h		\
+	gedit-plugin.h			\
+	gedit-prefs-manager.h		\
+	gedit-recent.h			\
+	gedit-application-server.h	\
+	gedit-encodings.h		\
+	gedit-output-window.h
+
 gedit_SOURCES = 			\
 	$(IDL_SOURCES)			\
 	gedit2.c			\
-	gedit2.h			\
 	gedit-mdi.c			\
-	gedit-mdi.h			\
 	gedit-mdi-child.c		\
-	gedit-mdi-child.h		\
 	gedit-document.c 		\
-	gedit-document.h 		\
 	gedit-view.c 			\
-	gedit-view.h 			\
-	gedit-menus.h			\
 	gedit-menus.c			\
 	gedit-debug.c 			\
-	gedit-debug.h 			\
 	gedit-utils.c 			\
-	gedit-utils.h 			\
-	gedit-commands.h		\
 	gedit-commands.c		\
-	gedit-file.h			\
 	gedit-file.c			\
-	gedit-undo-manager.h		\
 	gedit-undo-manager.c		\
-	gedit-print.h			\
 	gedit-print.c			\
 	gedit-session.c			\
-	gedit-session.h			\
 	bonobo-mdi.c			\
-	bonobo-mdi.h			\
 	bonobo-mdi-child.c		\
-	bonobo-mdi-child.h		\
 	bonobo-mdi-session.c		\
-	bonobo-mdi-session.h		\
-	gedit-file-selector-util.h 	\
 	gedit-file-selector-util.c 	\
-	gedit-plugins-engine.h		\
 	gedit-plugins-engine.c		\
-	gedit-plugin.h			\
 	gedit-plugin.c			\
 	gedit-prefs-manager.c		\
-	gedit-prefs-manager.h		\
 	gedit-recent.c			\
-	gedit-recent.h			\
 	gedit-application-server.c	\
-	gedit-application-server.h	\
 	gedit-document-server.c		\
 	gedit-document-server.h		\
 	gedit-window-server.c		\
 	gedit-window-server.h		\
 	gedit-encodings.c		\
-	gedit-encodings.h		\
 	gedit-output-window.c		\
-	gedit-output-window.h		\
 	$(BUILT_SOURCES)
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)

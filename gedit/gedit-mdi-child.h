@@ -31,7 +31,7 @@
 #ifndef __GEDIT_MDI_CHILD_H__
 #define __GEDIT_MDI_CHILD_H__
 
-#include <bonobo-mdi.h>
+#include "bonobo-mdi.h"
 
 #include "gedit-document.h"
 

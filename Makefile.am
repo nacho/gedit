@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = gedit pixmaps po plugins help data
+SUBDIRS = gedit pixmaps po help data
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gedit-@GEDIT_MAJOR@.pc

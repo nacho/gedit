@@ -32,7 +32,7 @@
 #ifndef __GEDIT_MDI_H__
 #define __GEDIT_MDI_H__
 
-#include <bonobo-mdi.h>
+#include "bonobo-mdi.h"
 #include "gedit-recent.h"
 #include "recent-files/egg-recent-view.h"
 
