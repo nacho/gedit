@@ -625,7 +625,6 @@ gedit_document_set_title (Document *doc)
 {
 	gchar *title;
 	gchar *docname;
-	const char *MODIFIED = N_("(modified)");
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
@@ -635,7 +634,7 @@ gedit_document_set_title (Document *doc)
 	docname = GNOME_MDI_CHILD (doc)->name;
 
 	if (doc->changed)
-		title = g_strdup_printf ("gedit: %s %s", docname, MODIFIED);
+		title = g_strdup_printf ("gedit: %s %s", docname, _("(modified)"));
 	else
 		title = g_strdup_printf ("gedit: %s", docname);
 
