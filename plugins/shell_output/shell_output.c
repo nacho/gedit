@@ -104,7 +104,6 @@ static RunStatus running;
 
 static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 static ShellOutputDialog *get_dialog ();
-static void dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog);
 
 static void	run_command_cb (BonoboUIComponent *uic, gpointer user_data, 
 			       const gchar* verbname);
@@ -176,60 +175,50 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 }
 
 static void
-dialog_response_handler (GtkDialog *dlg, gint res_id,  ShellOutputDialog *dialog)
+dialog_response_handler (GtkDialog *dlg, gint res_id, ShellOutputDialog *dialog)
 {
 	GError *error = NULL;
-	
+
 	gedit_debug (DEBUG_PLUGINS, "");
 
 	switch (res_id) {
-		case GTK_RESPONSE_OK:
-			run_command_real (dialog);
-			
-			break;
-			
-		case GTK_RESPONSE_HELP:
-			/* FIXME: choose a better link id */
-			gnome_help_display ("gedit.xml", "gedit-pipe-output", &error);
-	
-			if (error != NULL)
-			{
-				g_warning (error->message);
+	case GTK_RESPONSE_OK:
+		run_command_real (dialog);
+		break;
 
-				g_error_free (error);
-			}
-
-			break;
-			
-		case GEDIT_RESPONSE_STOP:
-			g_return_if_fail (running == RUNNING);
-				
-			running = MAKE_IT_STOP;
-
-			gtk_widget_set_sensitive (dialog->stop_button, FALSE);
-
-			/*
-			g_print ("Kill Child: %d\n", dialog->child_pid);
-			*/
-
-			kill (dialog->child_pid, SIGKILL);
-			wait (NULL);
-			
-			/*
-			g_print ("Killed: %d\n", dialog->child_pid);
-			*/
-
-			break;
-
-		case GTK_RESPONSE_DELETE_EVENT:
-		case GTK_RESPONSE_NONE:
-			break;
-
-		default:
-			gtk_widget_destroy (dialog->dialog);
-
-			break;
+	case GTK_RESPONSE_HELP:
+		gnome_help_display ("gedit.xml", "gedit-shell-command-plugin", &error);
+		if (error != NULL)
+		{
+			g_warning (error->message);
+			g_error_free (error);
 		}
+		break;
+
+	case GEDIT_RESPONSE_STOP:
+		g_return_if_fail (running == RUNNING);
+
+		running = MAKE_IT_STOP;
+
+		gtk_widget_set_sensitive (dialog->stop_button, FALSE);
+
+		gedit_debug (DEBUG_PLUGINS, "Kill Child: %d\n", dialog->child_pid);
+
+		kill (dialog->child_pid, SIGKILL);
+		wait (NULL);
+
+		gedit_debug (DEBUG_PLUGINS, "Killed: %d\n", dialog->child_pid);
+
+		break;
+
+	case GTK_RESPONSE_DELETE_EVENT:
+	case GTK_RESPONSE_NONE:
+		break;
+
+	default:
+		gtk_widget_destroy (dialog->dialog);
+		break;
+	}
 }
 
 static ShellOutputDialog*
@@ -480,7 +469,6 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 			g_free (string);
 						
 		} while (g_io_channel_get_buffer_condition (ioc) == G_IO_IN);
-		
 	}
 
 	if ((condition != G_IO_IN) || not_running) 
@@ -539,7 +527,7 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 }
 
 static gchar *
-unescape_command_string_real (const gchar *text, GeditDocument *doc)
+unescape_command_string (const gchar *text, GeditDocument *doc)
 {
 	GString *str;
 	gint length;
@@ -643,12 +631,6 @@ unescape_command_string_real (const gchar *text, GeditDocument *doc)
 	g_free (basename);
 
 	return g_string_free (str, FALSE);
-}
-
-static gchar *
-unescape_command_string (const gchar *text, GeditDocument *doc)
-{
-	return unescape_command_string_real (text, doc);
 }
 
 static gboolean
