@@ -3,12 +3,12 @@
 %define rel      3
 %define prefix   /usr
 
-Summary:   gEdit is a small but powerful text editor for GNOME.
+Summary: gEdit is a small but powerful text editor for GNOME.
 Name:      gedit
 Version:   %ver
 Release:   %rel
 Copyright: GPL
-Group:     Applications/Editors
+Group: Applications/Editors
 Source0:   gedit-%{PACKAGE_VERSION}.tar.gz
 URL:       http://gedit.pn.org/
 BuildRoot: /var/tmp/gedit-%{PACKAGE_VERSION}-root
@@ -16,20 +16,26 @@ Docdir: %{prefix}/doc
 
 %description
 gEdit is a small but powerful text editor designed expressly
-for GNOME.  It supports a split-screen mode and plugins that
-make it even more powerful.  Developers can develop their
-own plugins if they desire.
+for GNOME.
+
+It includes such features as split-screen mode, a plugin
+API, which allows gEdit to be extended to support many
+features while remaining small at its core, multiple
+document editing through the use of a 'tabbed' notebook and
+many more functions.
+
+GNOME is required to use gEdit (Gnome-Libs and Gtk+).
 
 %package devel
-Summary: Develop plugins for the gEdit editor
-Group: Editors
+Summary: Develop plugins for the gEdit editor.
+Group: Development/Libraries
 
 %description devel
 gEdit is a small but powerful text editor for GTK+ and/or GNOME.
 This package allows you to develop plugins that work within
 gEdit.  Plugins can create new documents and manipulate documents
 in arbitrary ways.
- 
+
 %prep
 %setup
 
