@@ -81,10 +81,10 @@ start_plugin(GtkWidget * widget, gE_data * data)
    callbacks.document.open = NULL;
    callbacks.document.close = NULL;
 #endif
-   callbacks.text.get_selected_text = NULL;
-   callbacks.text.set_selected_text = NULL;
-   callbacks.document.get_position = NULL;
-   callbacks.document.get_selection = NULL;
+   callbacks.text.get_selected_text = gE_plugin_text_get_selected_text;
+   callbacks.text.set_selected_text = gE_plugin_text_set_selected_text;
+   callbacks.document.get_position = gE_plugin_document_get_position;
+   callbacks.document.get_selection = gE_plugin_document_get_selection;
 
 #ifdef WITH_GMODULE_PLUGINS
    if (info->type == PLUGIN_GMODULE) {
@@ -149,12 +149,9 @@ add_plugins_to_window(plugin_info * info, gE_window * window)
 
 /* --- Direct interface to the plugins API --- */
 
-int 
-gE_plugin_document_create(gint context, gchar * title)
-{
-   return *(int *) g_hash_table_lookup(doc_pointer_to_int, gE_document_new((gE_window *) g_hash_table_lookup(win_int_to_pointer, &context)));
-}
 
+/* Text related functions */
+ 
 void 
 gE_plugin_text_insert(gint docid, gchar * buffer, gint length, gint position)
 {
@@ -181,6 +178,57 @@ gE_plugin_text_append(gint docid, gchar * buffer, gint length)
    gtk_text_insert(text, NULL, NULL, NULL, buffer, length);
    gtk_text_thaw(text);
    document->changed = 1;
+}
+
+char *
+gE_plugin_text_get(gint docid)
+{
+   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
+
+   return gtk_editable_get_chars(GTK_EDITABLE(document->text), 0, -1);
+}
+
+gchar *
+gE_plugin_text_get_selected_text (gint docid)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+	return gtk_editable_get_chars (GTK_EDITABLE (document->text),
+		GTK_EDITABLE (document->text)->selection_start_pos,
+		GTK_EDITABLE (document->text)->selection_end_pos);
+}
+
+
+void
+gE_plugin_text_set_selected_text (gint docid, gchar *text)
+{
+	GtkEditable *editable;
+	selection_range selection;
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+	g_return_if_fail (document != NULL);
+	editable = GTK_EDITABLE (document->text);
+	if (editable->selection_start_pos <= editable->selection_end_pos)
+	{
+		selection.start = editable->selection_start_pos;
+		selection.end = editable->selection_end_pos;
+	}
+	else
+	{
+		selection.start = editable->selection_end_pos;
+		selection.end = editable->selection_start_pos;
+	}
+	gtk_editable_delete_selection (editable);
+	selection.end = selection.start;
+	gtk_editable_insert_text (editable, text, strlen (text),&selection.end);
+	gtk_editable_select_region (editable, selection.start, selection.end);
+}
+
+
+/* Document related functions */
+
+int 
+gE_plugin_document_create(gint context, gchar * title)
+{
+   return *(int *) g_hash_table_lookup(doc_pointer_to_int, gE_document_new((gE_window *) g_hash_table_lookup(win_int_to_pointer, &context)));
 }
 
 void 
@@ -240,6 +288,39 @@ gE_plugin_document_close(gint docid)
 
    return flag;
 }
+
+gint
+gE_plugin_document_get_position (gint docid)
+{
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+	g_return_val_if_fail (document != NULL, 0);
+	return GTK_EDITABLE(document->text)->current_pos;
+}
+
+selection_range
+gE_plugin_document_get_selection (gint docid)
+{
+	GtkEditable *editable;
+	selection_range selection;
+	gE_document *document = (gE_document *) g_hash_table_lookup (doc_int_to_pointer, &docid);
+	selection.start = 0;
+	selection.end = 0;
+	g_return_val_if_fail (document != NULL, selection);
+	editable = GTK_EDITABLE (document->text);
+	if (editable->selection_start_pos <= editable->selection_end_pos)
+	{
+		selection.start = editable->selection_start_pos;
+		selection.end = editable->selection_end_pos;
+	}
+	else
+	{
+		selection.start = editable->selection_end_pos;
+		selection.end = editable->selection_start_pos;
+	}
+	return selection;
+}
+
+/* Misc UI related functions */
 
 void 
 gE_plugin_set_auto_indent(gint docid, gint auto_indent)
@@ -304,13 +385,7 @@ gE_plugin_set_scroll_ball(gint docid, gint scroll_ball)
 
 #endif
 
-char *
-gE_plugin_text_get(gint docid)
-{
-   gE_document *document = (gE_document *) g_hash_table_lookup(doc_int_to_pointer, &docid);
-
-   return gtk_editable_get_chars(GTK_EDITABLE(document->text), 0, -1);
-}
+/* Program Related functions */
 
 gboolean 
 gE_plugin_program_quit()

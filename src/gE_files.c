@@ -198,7 +198,7 @@ gE_file_open(gE_window *w, gE_document *doc, gchar *fname)
 	title = g_malloc(strlen(GEDIT_ID) +
 			strlen(GTK_LABEL(doc->tab_label)->label) + 4);
 	sprintf(title, "%s - %s",
-		GEDIT_ID, GTK_LABEL (doc->tab_label)->label);
+		GTK_LABEL (doc->tab_label)->label, GEDIT_ID);
 	gtk_window_set_title(GTK_WINDOW (w->window), title);
 	g_free (title);
 
@@ -274,7 +274,7 @@ gE_file_save(gE_window *window, gE_document *doc, gchar *fname)
 	title = g_malloc0(strlen(GEDIT_ID) +
 			strlen(GTK_LABEL(doc->tab_label)->label) + 4);
 	sprintf(title, "%s - %s",
-			GEDIT_ID, GTK_LABEL (doc->tab_label)->label);
+			GTK_LABEL (doc->tab_label)->label, GEDIT_ID);
 	gtk_window_set_title (GTK_WINDOW (window->window), title);
 	g_free (title);
 

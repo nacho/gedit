@@ -161,19 +161,8 @@ gE_window_new(void)
 	gtk_misc_set_alignment(GTK_MISC(w->statusbar), 0.0, 0.5);
 
 	/* line and column indicators */
-	tmp = gtk_button_new_with_label("Line");
-	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
-		GTK_SIGNAL_FUNC(goto_line_cb), w);
-	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
-	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 1);
-	gtk_widget_show(tmp);
 
-	w->line_label = gtk_label_new("1");
-	gtk_box_pack_start(GTK_BOX(box2), w->line_label, FALSE, FALSE, 1);
-	gtk_widget_set_usize(w->line_label, 40, 0);
-	gtk_widget_show(w->line_label);
-
-	tmp = gtk_label_new("Column");
+	tmp = gtk_label_new("Column:");
 	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 1);
 	gtk_widget_show(tmp);
 
@@ -181,6 +170,13 @@ gE_window_new(void)
 	gtk_box_pack_start(GTK_BOX(box2), w->col_label, FALSE, FALSE, 1);
 	gtk_widget_set_usize(w->col_label, 40, 0);
 	gtk_widget_show(w->col_label);
+
+	tmp = gtk_button_new_with_label("Line");
+	gtk_signal_connect(GTK_OBJECT(tmp), "clicked",
+		GTK_SIGNAL_FUNC(goto_line_cb), w);
+	GTK_WIDGET_UNSET_FLAGS(tmp, GTK_CAN_FOCUS);
+	gtk_box_pack_start(GTK_BOX(box2), tmp, FALSE, FALSE, 0);
+	gtk_widget_show(tmp);
 
 	w->statusbox = box2;
 

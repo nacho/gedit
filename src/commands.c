@@ -405,18 +405,18 @@ auto_indent_cb(GtkWidget *text, GdkEventKey *event, gE_window *window)
 static void
 line_pos_cb(GtkWidget *w, gE_data *data)
 {
-	static char line [32];
+	/*static char line [32];*/
 	static char col [32];
 	GtkWidget *text = data->temp2;
 	int x;
 	
 	/*x = GTK_TEXT(text)->current_line->data;*/
 	
-	sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);
+	/*sprintf (line,"%d", GTK_TEXT(text)->cursor_pos_y/13);*/
 	/*sprintf(line,"%d", x);*/
 	sprintf (col, "%d", GTK_TEXT(text)->cursor_pos_x/7);
 	
-	gtk_label_set (GTK_LABEL(data->window->line_label), line);
+	/*gtk_label_set (GTK_LABEL(data->window->line_label), line);*/
 	gtk_label_set (GTK_LABEL(data->window->col_label), col);
 
 }
@@ -636,6 +636,7 @@ void
 close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 {
 	int num, numdoc;
+	gchar *title;
 	GtkNotebook *nb;
 	gE_window *w;
 	gE_document *doc;
@@ -697,6 +698,15 @@ close_doc_execute(gE_document *opt_doc, gpointer cbdata)
 			flw_append_entry(w, doc,
 				g_list_length(nb->children) - 1, NULL);
 	}
+	/* Set the title of the window to Current Document - GEDIT_ID */
+	
+	title = g_malloc0(strlen(GEDIT_ID) +
+		strlen(GTK_LABEL(gE_document_current(w)->tab_label)->label) + 4);
+	sprintf(title, "%s - %s",
+	 GTK_LABEL(gE_document_current(w)->tab_label)->label,
+	 GEDIT_ID);
+	gtk_window_set_title(GTK_WINDOW(w->window), title);
+	g_free(title);
 
 } /* close_doc_execute */
 

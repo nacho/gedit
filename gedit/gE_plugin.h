@@ -100,14 +100,21 @@ extern gboolean gE_Plugin_Load(gE_Plugin_Object *, gint);
  * Please do not use other functions than the ones declared here.
  */
 
-extern int gE_plugin_document_create(gint, gchar *);
 extern void gE_plugin_text_append(gint, gchar *, gint);
 extern void gE_plugin_text_insert(gint, gchar *, gint, gint);
+extern char *gE_plugin_text_get(gint);
+extern gchar *gE_plugin_text_get_selected_text (gint);
+extern void gE_plugin_text_set_selected_text (gint, gchar *);
+
+extern int gE_plugin_document_create(gint, gchar *);
 extern void gE_plugin_document_show(gint);
 extern int gE_plugin_document_current(gint);
 extern char *gE_plugin_document_filename(gint);
 extern int gE_plugin_document_open(gint, gchar *);
 extern gboolean gE_plugin_document_close(gint);
+extern gint gE_plugin_document_get_position  (gint);
+extern selection_range gE_plugin_document_get_selection (gint);
+
 extern void gE_plugin_set_auto_indent(gint, gint);
 extern void gE_plugin_set_status_bar(gint, gint);
 extern void gE_plugin_set_word_wrap(gint, gint);
@@ -123,7 +130,6 @@ extern void gE_plugin_set_split_screen(gint, gint);
 extern void gE_plugin_set_scroll_ball(gint, gint);
 
 #endif
-extern char *gE_plugin_text_get(gint);
 extern gboolean gE_plugin_program_quit(void);
 extern GtkText *gE_plugin_get_widget(gint);
 extern int gE_plugin_create_widget(gint, gchar *,
