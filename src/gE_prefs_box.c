@@ -76,7 +76,9 @@ typedef struct _gE_prefs_data {
 } gE_prefs_data;
 
 static gE_prefs_data *prefs;
+#ifdef WITHOUT_GNOME
 static gE_Prop_Box *pbox;
+#endif
 
 void cancel()
 {
