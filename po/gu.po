@@ -1,28 +1,28 @@
 # translation of gedit.HEAD.gu.po to Gujarati
-# Copyright (C) 2004 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
 # MagNet <magnet@magnet-i.com>, 2004.
-# Ankit Patel <ankit@redhat.com>, 2004.
+# Ankit Patel <ankit@redhat.com>, 2004, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-07 21:21+0100\n"
-"PO-Revision-Date: 2004-08-17 16:35+0530\n"
+"POT-Creation-Date: 2005-02-18 11:19+0100\n"
+"PO-Revision-Date: 2005-02-20 12:38+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
-"Language-Team: Gujarati\n"
+"Language-Team: Gujarati <gu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "<magnet@magnet-i.com>\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
 "\n"
 "\n"
 "\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
-msgstr "જીએડીટ દ્રશ્ય"
+msgstr "જીએડીટ દેખાવ"
 
 #: data/GNOME_Gedit.server.in.in.h:2
 msgid "Gedit View."
@@ -48,7 +48,7 @@ msgstr "જીએડીટ સ્વયંસંચાલિત યંત્ર 
 msgid "Edit text files"
 msgstr "લખાણ ફાઇલોમાં ફેરફાર કરો"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:306
 msgid "Text Editor"
 msgstr "લખાણ સંપાદક"
 
@@ -61,9 +61,8 @@ msgstr ""
 "આની અસર થશે."
 
 #: data/gedit.schemas.in.h:2
-#, fuzzy
 msgid "Active plugins"
-msgstr "%s કાર્યરત કરો"
+msgstr "સક્રિય પ્લગઈનો"
 
 #: data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -163,11 +162,11 @@ msgstr "છાપવા માટે હેડર ના ફોન્ટ"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "વર્તમાન લીટી પ્રકાશિત કરો"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "બંધબેસતો કૌંસ પ્રકાશિત કરો"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -194,7 +193,7 @@ msgstr "લીટી લપેટવાની સ્થિતિ"
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
-msgstr ""
+msgstr "સક્રિય પ્લગઈનોની યાદી. તે સક્રિય પ્લગઈનોની \"જગ્યા\" સમાવે છે. આપેલ પ્લગઈનની \"જગ્યા\" મેળવવા માટે .gedit-plugin ફાઈલ જુઓ."
 
 #: data/gedit.schemas.in.h:29
 msgid ""
@@ -212,20 +211,26 @@ msgstr "મહત્તમ હાલની ફાઇલો"
 msgid "Maximum number of actions that gedit will be able to undo or redo."
 msgstr "મહત્તમ ક્રિયાઓની સંખ્યા જે જીએડીટ રદ કરી શકે/ફરીથી કરી શકે."
 
-#: data/gedit.schemas.in.h:32
+#. Translators: This is the Editor Font.
+#. This is a Pango font
+#: data/gedit.schemas.in.h:34
 msgid "Monospace 12"
 msgstr "મોનોસ્પેસ ૧૨"
 
-#: data/gedit.schemas.in.h:33
-#, fuzzy
+#. Translators: This is the Body font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:37
 msgid "Monospace 9"
-msgstr "મોનોસ્પેસ ૧૨"
+msgstr "મોનોસ્પેસ ૯"
 
-#: data/gedit.schemas.in.h:34
+#. Translators: This is the Body font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_body_pango.
+#: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
 msgstr "નિયમિત મોનોસ્પેસ ૯"
 
-#: data/gedit.schemas.in.h:35
+#: data/gedit.schemas.in.h:42
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -233,53 +238,61 @@ msgstr ""
 "મિનિટ સંખ્યા જેના પછી જીએડીટ સ્વયં ફેરફાર કરેલ ફાઇલોનો સંગ્રહ કરે છે. જ્યારે \"Auto Save"
 "\" વિકલ્પ વર્તમાન હશે ત્યારે જ આની અસર થશે."
 
-#: data/gedit.schemas.in.h:36
+#: data/gedit.schemas.in.h:43
 msgid "Print Header"
 msgstr "હેડર છાપો"
 
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:44
 msgid "Print Line Numbers"
 msgstr "લીટી ક્રમાંક છાપો"
 
-#: data/gedit.schemas.in.h:38
+#: data/gedit.schemas.in.h:45
 msgid "Print Syntax Highlighting"
 msgstr "પ્રકાશિત વાક્યરચનાને છાપો"
 
-#: data/gedit.schemas.in.h:39
+#: data/gedit.schemas.in.h:46
 msgid "Printing Line Wrapping Mode"
 msgstr "લીટીઓની લપેટેલી સ્થિતિને છાપી રહ્યા છે"
 
-#: data/gedit.schemas.in.h:40
+#: data/gedit.schemas.in.h:47
 msgid "Right Margin Position"
 msgstr "જમણા હાંસિયાની સ્થિતિ"
 
-#: data/gedit.schemas.in.h:41
-#, fuzzy
+#. Translators: This is the Header font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:50
 msgid "Sans 11"
-msgstr "નિયમિત સાન્સ ૧૧"
+msgstr "સાન્સ ૧૧"
 
-#: data/gedit.schemas.in.h:42
-#, fuzzy
+#. Translators: This is the Line Number font for printing.
+#. This is a Pango font.
+#: data/gedit.schemas.in.h:53
 msgid "Sans 8"
-msgstr "સ્પેનીશ"
+msgstr "સાન્સ ૮"
 
-#: data/gedit.schemas.in.h:43
+#. Translators: This is the Header font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_header_pango.
+#: data/gedit.schemas.in.h:57
 msgid "Sans Regular 11"
 msgstr "નિયમિત સાન્સ ૧૧"
 
-#: data/gedit.schemas.in.h:44
+#. Translators: This is the Line Number font for printing.
+#. This is a gnome-print font name and replaced by
+#. print_font_numbers_pango.
+#: data/gedit.schemas.in.h:61
 msgid "Sans Regular 8"
 msgstr "નિયમિત સાન્સ ૮"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:62
 msgid "Selected Text Color"
 msgstr "પસંદ કરેલ લખાણનો રંગ"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:63
 msgid "Selection Color"
 msgstr "પસંદગી રંગ"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:64
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -288,7 +301,7 @@ msgstr ""
 "જીએડીટ માટે ફાઈલની સંગ્રહપદ્ધતિ આપોઆપ શોધવા માટે ક્રમમાં વપરાતી સંગ્રહપદ્ધતિઓની યાદી. "
 "\"CURRENT\" એ હાલની સ્થાનીય સંગ્રહપદ્ધતિ છે. માત્ર ઓળખીતી સંગ્રહપદ્ધતિઓ વપરાય છે."
 
-#: data/gedit.schemas.in.h:48
+#: data/gedit.schemas.in.h:65
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -301,7 +314,7 @@ msgstr ""
 "હોય તો \"GTK_WRAP_CHAR\" વાપરો. આ મુલ્યો અક્ષર પ્રત્યે સંવેદનશીલ છે આથી અહીં દર્શાવ્યા "
 "પ્રમાણે જ તે લખો."
 
-#: data/gedit.schemas.in.h:49
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -314,19 +327,17 @@ msgstr ""
 "અક્ષરની સીમાએ લપેટવુ હોય તો \"GTK_WRAP_CHAR\" વાપરો. આ મુલ્યો અક્ષર પ્રત્યે સંવેદનશીલ છે "
 "આથી અહીં દર્શાવ્યા પ્રમાણે જ તે લખો."
 
-#: data/gedit.schemas.in.h:50
-msgid ""
-"Specifies the font to use for a document's body when printing documents."
+#: data/gedit.schemas.in.h:67
+msgid "Specifies the font to use for a document's body when printing documents."
 msgstr "દસ્તાવેજ છાપતી વખતે દસ્તાવેજ ના બોડી માટે ઉપયોગ માં આવનાર ફોન્ટ દર્શાવો."
 
-#: data/gedit.schemas.in.h:51
-#, fuzzy
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
-msgstr "દસ્તાવેજ છાપતી વખતે દસ્તાવેજ ના બોડી માટે ઉપયોગ માં આવનાર ફોન્ટ દર્શાવો."
+msgstr "જ્યારે દસ્તાવેજો છાપી રહ્યા હોય ત્યારે દસ્તાવેજના ભાગો માટે ફોન્ટ સ્પષ્ટ કરે છે. આ gnome-print ફોન્ટ નામ છે અને print_font_body_pango થી બદલાય છે."
 
-#: data/gedit.schemas.in.h:52
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -334,17 +345,14 @@ msgstr ""
 "છાપતી વખતે લીટી ક્રમાંક માટે ઉપયોગ માં આવનાર ફોન્ટ દર્શાવો \"Print Line Numbers\" "
 "વિકલ્પ શુન્ય ન હોય ત્યારેજ તેની અસર થશે."
 
-#: data/gedit.schemas.in.h:53
-#, fuzzy
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
-msgstr ""
-"છાપતી વખતે લીટી ક્રમાંક માટે ઉપયોગ માં આવનાર ફોન્ટ દર્શાવો \"Print Line Numbers\" "
-"વિકલ્પ શુન્ય ન હોય ત્યારેજ તેની અસર થશે."
+msgstr "જ્યારે છાપી રહ્યા હોય ત્યારે લીટી ક્રમાંકો માટે વાપરવાના ફોન્ટ સ્પષ્ટ કરે છે. આ માત્ર જો \"લીટી ક્રમાંકો છાપો\" વિકલ્પ શૂન્ય નહિં હોય ત્યારે જ અસર લાવશે. આ gnome-print ફોન્ટ નામ છે અને print_font_numbers_pango થી બદલાય છે."
 
-#: data/gedit.schemas.in.h:54
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -352,38 +360,34 @@ msgstr ""
 "દસ્તાવેજ છાપતી વખતે પાના હેડર માટે ઉપયોગી ફોન્ટ દર્શાવો. જ્યારે \"Print Header\" "
 "વિકલ્પ વર્તમાન હશે ત્યારે જ તેની અસર થશે."
 
-#: data/gedit.schemas.in.h:55
-#, fuzzy
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
-msgstr ""
-"દસ્તાવેજ છાપતી વખતે પાના હેડર માટે ઉપયોગી ફોન્ટ દર્શાવો. જ્યારે \"Print Header\" "
-"વિકલ્પ વર્તમાન હશે ત્યારે જ તેની અસર થશે."
+msgstr "જ્યારે છાપી રહ્યા હોય ત્યારે પાનાં હેડરો માટે વાપરવાના ફોન્ટ સ્પષ્ટ કરે છે. આ જો \"હેડર છાપો\" વિકલ્પ ચાલુ હોય તો જ અસર લાવશે. આ gnome-print ફોન્ટ નામ છે અને print_font_header_pango થી બદલાય છે."
 
-#: data/gedit.schemas.in.h:56
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
-msgstr ""
-"\"Recent Files\" સબમેનુમાં પ્રદર્શિત થનાર હાલની મહત્તમ ખુલ્લી ફાઇલની સંખ્યા દર્શાવો."
+msgstr "\"Recent Files\" સબમેનુમાં પ્રદર્શિત થનાર હાલની મહત્તમ ખુલ્લી ફાઇલની સંખ્યા દર્શાવો."
 
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "ટેબ જગ્યાએ અક્ષરો પ્રદર્શિત થાય ત્યારે થતી ખાલી જગ્યાની સંખ્યા દર્શવે છે."
 
-#: data/gedit.schemas.in.h:58
+#: data/gedit.schemas.in.h:75
 msgid "Specifies the position of the right margin."
 msgstr "જમણા હાંસિયાની સ્થિતિ સ્પષ્ટ કરે છે."
 
-#: data/gedit.schemas.in.h:59
+#: data/gedit.schemas.in.h:76
 msgid "Status Bar is Visible"
 msgstr "સ્થિતિદર્શક પટ્ટી દ્રશ્યમાન છે"
 
-#: data/gedit.schemas.in.h:60
+#: data/gedit.schemas.in.h:77
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -398,35 +402,35 @@ msgstr ""
 "છે. આ મૂલ્ય અક્ષર પ્રત્યે સંવેદનશીલ છે તે નોંધી રાખો આથી અહીં બતાવ્યા પ્રમાણે જ તે દર્શવાય તે "
 "જરુરી છે."
 
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:78
 msgid "Tab Size"
 msgstr "ટેબનું માપ"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:79
 msgid "Text Color"
 msgstr "લખાણનો રંગ"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:80
 msgid "Toolbar Buttons Style"
 msgstr "સાધનદર્શક પટ્ટીના બટનની રીત"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:81
 msgid "Toolbar is Visible"
 msgstr "સાધનદર્શક પટ્ટી દ્રશ્યમાન છે"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:82
 msgid "Undo Actions Limit"
 msgstr "છેલ્લી ક્રિયાની સીમા રદ કરો"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:83
 msgid "Use Default Colors"
 msgstr "મૂળભુત રંગ વાપરો"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:84
 msgid "Use Default Font"
 msgstr "મૂળભુત ફોન્ટ વાપરો"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:85
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -435,7 +439,7 @@ msgstr ""
 "શું થોડા સમળગાળા પછી જીએડીટ ફેરફાર થયેલ ફાઇલો નો આપોઆપ સંગ્રહ કરશે? તમે \"Auto Save "
 "Interval\" દ્રશ્ય સમયગાળો આપી શકો છો."
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:86
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -443,54 +447,51 @@ msgstr ""
 "શું જીએડીટ તેણે સંગ્રહ કરેલ ફાઇલની બેક-અપ નકલ બનાવે છે? તમે \"Backup Copy Extension\" "
 "વિકલ્પ દ્વારા બેક-અપ ફાઇલ નો વિસ્તારક નક્કી કરી શકો છો."
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:87
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "શું જીએડીટ સંપાદક વિસ્તારમાં લીટી ક્રમાંકો દર્શાવી શકે."
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:88
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "શું જીએડીટ સંપાદક વિસ્તારમાં જમણો હાંસિયો દર્શાવી શકે."
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should enable auto indentation."
 msgstr "શું જીએડીટ સ્વયં હાંસ્યાથી અંતર સક્રિય કરી શકે."
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "શું જીએડીટ વાક્યરચનાને પ્રકાશિત કરવાનુ સક્રિય કરી શકે."
 
-#: data/gedit.schemas.in.h:74
-#, fuzzy
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
-msgstr "શું જીએડીટ વાક્યરચનાને પ્રકાશિત કરવાનુ સક્રિય કરી શકે."
+msgstr "શું જીએડીટ કૌંસ સરખાવવા માટે પ્રકાશિત થવું જોઈએ."
 
-#: data/gedit.schemas.in.h:75
-#, fuzzy
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should highlight the current line."
-msgstr "શંુ જીએડીટ દસ્તાવેજો છાપતી વખતે પ્રકાશિત વાક્યરચના છાપશે."
+msgstr "શું જીએડીટે વર્તમાન લીટી પ્રકાશિત કરવી જોઈએ."
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "શું જીએડીટ દસ્તાવેજ છાપતી વખતે દસ્તવેજ હેડર ઉમેરી શકે."
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "શું જીએડીટ ટેબની જગ્યાએ ખાલી જગ્યા ઉમેરી શકે."
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "શંુ જીએડીટ દસ્તાવેજો છાપતી વખતે પ્રકાશિત વાક્યરચના છાપશે."
 
-#: data/gedit.schemas.in.h:79
-msgid ""
-"Whether the status bar at the bottom of editing windows should be visible."
+#: data/gedit.schemas.in.h:96
+msgid "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "શું સંપાદક વિન્ડો નીચેની સ્થિતિદર્શકપટ્ટી દ્રશ્યમાન થઈ શકે."
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:97
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "શું ફેરફાર વિન્ડોમાં સાધનદર્શક પટ્ટી દ્રશ્યમાન થઈ શકે."
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -501,7 +502,7 @@ msgstr ""
 "વિસ્તારના રંગ \"Background Color\", \"Text Color\", \"Selected Text Color\", "
 "and \"Selection Color\" વિકલ્પમાં બતાવ્યા મુજબ હશે."
 
-#: data/gedit.schemas.in.h:82
+#: data/gedit.schemas.in.h:99
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -512,14 +513,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:106
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -529,9 +530,8 @@ msgid "Activate %s"
 msgstr "%s કાર્યરત કરો"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "આઉટપુટ વિન્ડો બંધ કરો"
+msgstr "સંગ્રહ કર્યા વિના બંધ કરો (_w)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -539,8 +539,7 @@ msgstr "પ્રશ્ન"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:367
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld second will be permanently lost."
+msgid "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
@@ -548,8 +547,7 @@ msgstr[0] "જો તમે સંગ્રહ કરો નહિ, તો છ�
 msgstr[1] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લી %ld સેકન્ડોના બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:376
-msgid ""
-"If you don't save, changes from the last minute will be permanently lost."
+msgid "If you don't save, changes from the last minute will be permanently lost."
 msgstr "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લી મિનિટના બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:382
@@ -560,15 +558,12 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] ""
-"જો તમે સંગ્રહ કરો નહિ, તો છેલ્લી મિનિટ અને %ld સેકન્ડના બદલાવો કાયમ માટે ખોવાઈ જશે."
-msgstr[1] ""
-"જો તમે સંગ્રહ કરો નહિ, તો છેલ્લી મિનિટ અને %ld સેકન્ડોના બદલાવો કાયમ માટે ખોવાઈ જશે."
+msgstr[0] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લી મિનિટ અને %ld સેકન્ડના બદલાવો કાયમ માટે ખોવાઈ જશે."
+msgstr[1] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લી મિનિટ અને %ld સેકન્ડોના બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:392
 #, c-format
-msgid ""
-"If you don't save, changes from the last %ld minute will be permanently lost."
+msgid "If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
@@ -577,12 +572,11 @@ msgstr[1] "જો તમે સંગ્રહ કરો નહિ, તો છ�
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
-#, fuzzy, c-format
+#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural ""
-"If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા કલાકના બદલાવો કાયમ માટે ખોવાઈ જશે."
-msgstr[1] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા કલાકના બદલાવો કાયમ માટે ખોવાઈ જશે."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "જો તમે સંગ્રહ કરો નહિં, તો છેલ્લા કલાકના બધા ફેરફારો કાયમ માટે નાશ થઈ જશે."
+msgstr[1] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા %d કલાકોના બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:413
 #, c-format
@@ -592,10 +586,8 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] ""
-"જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા કલાક અને %d મિનિટના બદલાવો કાયમ માટે ખોવાઈ જશે."
-msgstr[1] ""
-"જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા કલાક અને %d મિનિટોના બદલાવો કાયમ માટે ખોવાઈ જશે."
+msgstr[0] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા કલાક અને %d મિનિટના બદલાવો કાયમ માટે ખોવાઈ જશે."
+msgstr[1] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા કલાક અને %d મિનિટોના બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -605,15 +597,11 @@ msgstr "દસ્તાવેજ \"%s\" ને બંધ કરવા પહે�
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:643
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural ""
-"There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] ""
-"ત્યાં %d દસ્તાવેજ અસંગ્રહિત બદલાવો સાથે છે. બંધ કરવા પહેલા બદલાવો સંગ્રહવા માંગો છો?"
-msgstr[1] ""
-"ત્યાં %d દસ્તાવેજો અસંગ્રહિત બદલાવો સાથે છે. બંધ કરવા પહેલા બદલાવો સંગ્રહવા માંગો છો?"
+msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
+msgstr[0] "ત્યાં %d દસ્તાવેજ અસંગ્રહિત બદલાવો સાથે છે. બંધ કરવા પહેલા બદલાવો સંગ્રહવા માંગો છો?"
+msgstr[1] "ત્યાં %d દસ્તાવેજો અસંગ્રહિત બદલાવો સાથે છે. બંધ કરવા પહેલા બદલાવો સંગ્રહવા માંગો છો?"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:660
-#: gedit/dialogs/close_all_dialog.glade2.h:3
 msgid "S_elect the documents you want to save:"
 msgstr "તમે સંગ્રહવા માગતા હોય તે દસ્તાવેજ પસંદ કરોઃ  (_e)"
 
@@ -756,19 +744,16 @@ msgid "    "
 msgstr "    "
 
 #: gedit/dialogs/gedit-preferences.glade2.h:2
-#, fuzzy
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>આપોઆપ હાંસ્યાથી અંતર છોડો</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>લખાણ લપેટો</b>"
+msgstr "<b>કૌંસ સરખામણી</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>લખાણ લપેટો</b>"
+msgstr "<b>વર્તમાન લીટી</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -792,9 +777,8 @@ msgid "<b>Right Margin</b>"
 msgstr "<b>જમણો હાંસિયો</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:10
-#, fuzzy
 msgid "<b>Tab Stops</b>"
-msgstr "<b>ટેબો</b>"
+msgstr "<b>ટેબ અટકણો</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:11
 #: gedit/dialogs/page-setup-dialog.glade2.h:3
@@ -846,7 +830,7 @@ msgstr "ફોન્ટ અને રંગો"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "વર્તમાન લીટી પ્રકાશિત કરો (_g)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -854,7 +838,7 @@ msgstr "પ્રકાશિત સ્થિતિઃ  (_m)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "બંધબેસતો કૌંસ પ્રકાશિત કરો"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -945,7 +929,6 @@ msgid "_Display line numbers"
 msgstr "લીટી ક્રમાંક પ્રદર્શિત કરો (_D)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:47
-#, fuzzy
 msgid "_Enable automatic indentation"
 msgstr "આપોઆપ હાંસિયાથી અંતર સક્રિય કરો (_E)"
 
@@ -970,9 +953,8 @@ msgid "_Right margin at column:"
 msgstr "સ્તંભમાં જમણો હાંસિયોઃ  (_R)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
-#, fuzzy
 msgid "_Tab width:"
-msgstr "ટેબની પહોળાઈઃ  (_T)"
+msgstr "ટેબ પહોળાઈ (_T):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:54
 msgid "_Unlimited undo"
@@ -1124,26 +1106,6 @@ msgstr "તમે ખોલવા ઈચ્છતા હોય તે ફાઇ�
 msgid "Open from URI"
 msgstr "URI માંથી ખોલો"
 
-#: gedit/dialogs/close_all_dialog.glade2.h:1
-msgid ""
-"<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-"changes. </span>"
-msgstr ""
-"<span weight=\"bold\" size=\"x-large\">તમારી પાસે X દસ્તાવેજો અસંગ્રહિત બદલાવો "
-"સાથે છે</span>"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:2
-msgid "If you don't save your documents, all your changes will be lost."
-msgstr "જો તમે તમારા દસ્તાવેજો નો સંગ્રહ નહિ કરો તો, તમારા બધા બદલાવો ખોવાઈ જશે."
-
-#: gedit/dialogs/close_all_dialog.glade2.h:4
-msgid "Save _None"
-msgstr "કંઈ જ સંગ્રહો નહિ (_N)"
-
-#: gedit/dialogs/close_all_dialog.glade2.h:5
-msgid "_Save Selected"
-msgstr "પસંદિતનો સંગ્રહ કરો (_S)"
-
 #: gedit/gedit-commands.c:551
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "જીએડીટ એ જીનાેમ ડેસ્કટોપ માટેનું નાનુ અને હલકુ લખાણ સંપાદક છે"
@@ -1156,17 +1118,8 @@ msgstr "જીએડીટ એ જીનાેમ ડેસ્કટોપ મ�
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
-msgstr ""
-"નીરવ <nirav@magnet-i.com>\n"
-"અંકિત <ankit644@linux.net>\n"
-"અંકુર <ankur_surti@linux.net>\n"
-"અતિત <shahatit_84@linux.net>\n"
-"ભાવિન <bhavinshah@linux.net>\n"
-"કાર્તિક <kartik_mistry@linux.net>\n"
-"ખુશ્બુ <khushbu_hi21@yahoo.co.in>\n"
-"શ્વેતા <sweta2782@yahoo.co.in>."
+msgstr "અંકિત પટેલ <ankit644@yahoo.com>"
 
 #: gedit/gedit-commands.c:579
 msgid "gedit"
@@ -1178,9 +1131,8 @@ msgid "%s %d"
 msgstr "%s %d"
 
 #: gedit/gedit-document.c:656 gedit/gedit-document.c:674
-#, fuzzy
 msgid "Unsaved Document"
-msgstr "દસ્તાવેજો (_D)"
+msgstr "નહિં સંગ્રહાયેલ દસ્તાવેજો (_D)"
 
 #: gedit/gedit-document.c:662 gedit/gedit-document.c:709
 msgid "Invalid file name"
@@ -1395,9 +1347,8 @@ msgid "All Text Files"
 msgstr "બધી લખાણ ફાઇલો"
 
 #: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
-#, fuzzy
 msgid "_Character Coding:"
-msgstr "અક્ષર માટેનો કોડઃ  (_a)"
+msgstr "અક્ષર માટેનો કોડ (C):"
 
 #: gedit/gedit-file-selector-util.c:509
 msgid "Select a file to open"
@@ -1441,8 +1392,7 @@ msgstr "દસ્તાવેજ \"%s\" ના અસંગ્રહિત બ�
 
 #: gedit/gedit-file.c:534
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld second will be permanently lost."
+msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
@@ -1450,8 +1400,7 @@ msgstr[0] "દસ્તાવેજમાં છેલ્લી %ld સેકન
 msgstr[1] "દસ્તાવેજમાં છેલ્લી %ld સેકન્ડોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/gedit-file.c:543
-msgid ""
-"Changes made to the document in the last minute will be permanently lost."
+msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr "દસ્તાવેજમાં છેલ્લી મિનિટમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/gedit-file.c:549
@@ -1467,8 +1416,7 @@ msgstr[1] "દસ્તાવેજમાં છેલ્લી મિનિટ 
 
 #: gedit/gedit-file.c:559
 #, c-format
-msgid ""
-"Changes made to the document in the last %ld minute will be permanently lost."
+msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
@@ -1476,12 +1424,11 @@ msgstr[0] "દસ્તાવેજમાં છેલ્લી %ld મિનિ
 msgstr[1] "દસ્તાવેજમાં છેલ્લી %ld મિનિટોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/gedit-file.c:574 gedit/gedit-file.c:595
-#, fuzzy, c-format
+#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural ""
-"Changes made to the document in the last %d hours will be permanently lost."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "દસ્તાવેજમાં છેલ્લા કલાકમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
-msgstr[1] "દસ્તાવેજમાં છેલ્લા કલાકમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
+msgstr[1] "દસ્તાવેજમાં છેલ્લા %d કલાકોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
 #: gedit/gedit-file.c:580
 #, c-format
@@ -1548,9 +1495,9 @@ msgstr[0] "%d ફાઇલ લવાઈ ગઈ"
 msgstr[1] "%d ફાઇલો લવાઈ ગઈ"
 
 #: gedit/gedit-file.c:1266
-#, fuzzy, c-format
+#, c-format
 msgid "Created file \"%s\""
-msgstr "ફાઇલ \"%s\" લવાઈ ગઈ"
+msgstr "ફાઇલ \"%s\" બનાવી"
 
 #: gedit/gedit-file.c:1284
 #, c-format
@@ -1565,18 +1512,14 @@ msgstr[0] "%d ફાઇલ લાવી રહ્યા છે..."
 msgstr[1] "%d ફાઇલો લાવી રહ્યા છે..."
 
 #: gedit/gedit-io-error-dialogs.c:84
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find the file \"%s\""
-msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ"
+msgstr "\"%s\" ફાઇલ શોધી શક્યા નહિ"
 
 #: gedit/gedit-io-error-dialogs.c:86 gedit/gedit-io-error-dialogs.c:130
 #: gedit/gedit-io-error-dialogs.c:150
-#, fuzzy
 msgid "Please, check that you typed the location correctly and try again."
-msgstr ""
-"\"%s\" એ ડિરેક્ટરી છે \n"
-"\n"
-"મહેરબાની કરીને, તમે લખેલું સ્થાન ચકાસો અને ફરીથી પ્રયત્ન કરો."
+msgstr "મહેરબાની કરીને, તમે જગ્યા યોગ્ય રીતે છાપી છે કે નહિં તે ચકાસો અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:91 gedit/gedit-io-error-dialogs.c:99
 #: gedit/gedit-io-error-dialogs.c:116 gedit/gedit-io-error-dialogs.c:122
@@ -1592,157 +1535,110 @@ msgid "Could not open the file \"%s\""
 msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ"
 
 #: gedit/gedit-io-error-dialogs.c:93 gedit/gedit-io-error-dialogs.c:406
-#, fuzzy
 msgid "The file contains corrupted data."
-msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ કારણકે તે બગડેલી માહિતી ધરાવે છે."
+msgstr "ફાઈલ બગડેલ માહિતી સમાવે છે."
 
 #: gedit/gedit-io-error-dialogs.c:104 gedit/gedit-io-error-dialogs.c:417
-#, fuzzy, c-format
+#, c-format
 msgid "gedit cannot handle %s: locations."
-msgstr "જીએડીટ %s ને સંભાળી શકતું નથીઃ  સ્થાન લખી શકાય તેવી સ્થિતિમાં છે."
+msgstr "જીએડીટ %s: જગ્યાઓ નિયંત્રિત કરી શકતું નથી."
 
 #: gedit/gedit-io-error-dialogs.c:109 gedit/gedit-io-error-dialogs.c:422
-#, fuzzy
 msgid "gedit cannot handle this location."
-msgstr "જીએડીટ %s ને સંભાળી શકતું નથીઃ  સ્થાન લખી શકાય તેવી સ્થિતિમાં છે."
+msgstr "જીએડીટ આ જગ્યા નિયંત્રિત કરી શકતું નથી."
 
 #: gedit/gedit-io-error-dialogs.c:118 gedit/gedit-io-error-dialogs.c:431
-#, fuzzy
 msgid "The file contains data in an invalid format."
-msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ કારણકે તે અયોગ્ય બંધારણવાળી માહિતી ધરાવે છે."
+msgstr "ફાઈલ અયોગ્ય બંધારણવાળી માહિતી સમાવે છે."
 
 #: gedit/gedit-io-error-dialogs.c:124 gedit/gedit-io-error-dialogs.c:437
-#, fuzzy
 msgid "The file is too big."
-msgstr "ફાઇલ પાસે ઘણી બધી સાંકેતીક કડીઓ છે."
+msgstr "ફાઈલ ખૂબ મોટી છે."
 
 #: gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr ""
+msgstr "\"%s\" એ માન્ય જગ્યા નથી"
 
 #: gedit/gedit-io-error-dialogs.c:137 gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
-msgstr ""
+msgstr "વપરાશની પરવાનગી મળી ન હતી."
 
 #: gedit/gedit-io-error-dialogs.c:143
-#, fuzzy
-msgid ""
-"there are too many open files. Please, close some open files and try again."
-msgstr ""
-"\"%s\"ફાઇલ ખોલી શકાઈ નહિ કારણકે બીજી ઘણી ફાઇલો ખુલેલી છે.\n"
-"\n"
-"મહેરબાની કરીને, કેટલીક ખૂલેલી ફાઇલો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
+msgid "there are too many open files. Please, close some open files and try again."
+msgstr "ત્યાં ઘણી ખૂલેલી ફાઈલો છે. મહેરબાની કરીને, અમુક ખૂલેલી ફાઈલો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:148 gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" એ ડિરેક્ટરી છે"
 
 #: gedit/gedit-io-error-dialogs.c:157
-#, fuzzy
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
-msgstr ""
-"\"%s\" ફાઇલ ખોલવા માટે પર્યાપ્ત મેમરી પ્રાપ્ત નથી. મહેરબાની કરીને, કેટલાક ચાલુ "
-"કાર્ચક્રમો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
+msgstr "ફાઈલ ખોલવા માટે પૂરતી મેમરી ઉપલબ્ધ નથી. મહેરબાની કરીને, અમુક ચાલતા કાર્યક્રમો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:185 gedit/gedit-io-error-dialogs.c:483
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
-msgstr ""
-"\"%s\" ફાઇલને પહેલાની સ્થિતિમાં પાછી લાવી શકાઈ નથી કારણકે યજમાન \"%s\" નામ મળ્યુ "
-"નહિ.\n"
-"\n"
-"મહેરબાની કરીને, તમારા પ્રોક્સી સુયોજનો બરાબર છે તે તપાસો અને ફરીથી પ્રયત્ન કરો."
+msgstr "યજમાન \"%s\" મેળવી શકાય નથી. મહેરબાની કરીને, તમારા પ્રોક્સી સુયોજનો યોગ્ય છે અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:196 gedit/gedit-io-error-dialogs.c:207
 #: gedit/gedit-io-error-dialogs.c:217
-#, fuzzy
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
-msgstr ""
-"\"%s\" એ યોગ્ય સ્થાન નથી.\n"
-"\n"
-"મહેરબાની કરીને, ચકાસો કે તમે સ્થાન બરાબર લખ્યુ છે અને ફરીથી પ્રયત્ન કરો."
+msgstr "યજમાન નામ અયોગ્ય હતું. મહેરબાની કરીને, ચકાસો કે તમે જગ્યા યોગ્ય રીતે લખેલી છે અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:225
-#, fuzzy
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
-msgstr ""
-"\"%s\" ફાઇલ ખોલી શકાતી નથી કારણ કે યજમાન નામ ખાલી છે.\n"
-"\n"
-"મહેરબાની કરીને, ચકાસો કે તમારી પ્રોક્સી સુયોજનાઓ સાચી છે અને ફરીથી પ્રયત્ન કરો."
+msgstr "યજમાન નામ ખાલી હતું. મહેરબાની કરીને, ચકાસો કે તમારા પ્રોક્સી સુયોજનો યોગ્ય છે અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:233
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
-msgstr ""
-"\"%s\" ફાઇલ મળ શકી નથી.\n"
-"\n"
-"મહેરબાની કરીને તમે સ્થાન બરાબર લખ્યું છે તે તપાસો અને ફરીથી પ્રયત્ન કરો."
+msgstr "પ્રવેશ કરવામાં નિષ્ફળ. મહેરબાની કરીને, ચકાસો કે તમે જગ્યા યોગ્ય રીતે લખી છે અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:241
-#, fuzzy
 msgid ""
 "The file contains invalid data. Probably, you are trying to open a binary "
 "file."
-msgstr ""
-"\"%s\" ફાઇલ ખોલી શકાતી નથી કારણકે તે અયોગ્ય માહિતી ધરાવે છે.\n"
-"\n"
-"કદાચ તમે બાયનરી ફાઇલ ખોલવાનો પ્રયત્ન કરી રહ્યા છો."
+msgstr "ફાઈલ અયોગ્ય માહિતી સમાવે છે. કદાચ, તમે બાઈનરી ફાઈલ ખોલવાનો પ્રયત્ન કરી રહ્યા છો."
 
 #: gedit/gedit-io-error-dialogs.c:248
 msgid "The file you are trying to open is not a regular file."
-msgstr ""
+msgstr "તમે જે ફાઈલ ખોલવાનો પ્રયત્ન કરી રહ્યા હતા તે નિયમિત ફાઈલ નથી."
 
 #: gedit/gedit-io-error-dialogs.c:294
-#, fuzzy
 msgid ""
 "gedit was not able to automatically detect the character coding. Please, "
 "check that you are not trying to open a binary file and try again selecting "
 "a character coding in the 'Open File...' (or 'Open Location') dialog."
-msgstr ""
-"ફાઈલ \"%s\" ખોલી શકાઈ નહિ કારણકે જીઅેડીટ અક્ષર માટેના કોડને આપોઆપ શોધી શક્યુ નહિ.\n"
-"\n"
-"મહેરબાની કરીને, ચકાસો કે તમે બાયનરી ફાઈલ ખોલવાનો પ્રયાસ કરી રહ્યા નથી અને 'ફાઈલ "
-"ખોલો...' (અથવા 'સ્થાન ખોલો') સંવાદમાં અક્ષર માટેનો કોડ પસંદ કરી ફરીથી પ્રયાસ કરો."
+msgstr "જીએડીટ અક્ષર સંગ્રહપદ્ધતિ આપોઆપ શોધવામાં સમર્થ ન હતું. મહેરબાની કરીને, ચકાસો કે તમે બાઈનરી ફાઈલ તો ખોલવાનો પ્રયત્ન કરી રહ્યા નથી ને અને 'ફાઈલ ખોલો...' (અથવા 'જગ્યા ખોલો') સંવાદમાં અક્ષર સંગ્રહપદ્ધતિ પસંદ કરીને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:302 gedit/gedit-io-error-dialogs.c:328
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ કારણકે તે ખુબ મોટી છે."
+msgstr "ફાઈલ \"%s\" ને %s અક્ષર સંગ્રહપદ્ધતિની મદદથી શોધી શકાઈ નહિં"
 
 #: gedit/gedit-io-error-dialogs.c:305 gedit/gedit-io-error-dialogs.c:331
-#, fuzzy
 msgid ""
 "Please, check that you are not trying to open a binary file and that you "
 "selected the right character coding in the 'Open File... ' (or 'Open "
 "Location') dialog and try again."
-msgstr ""
-"%s અક્ષર માટેનો કોડ વાપરીને ફાઈલ \"%s\" ખોલી શકાઈ નહિ.\n"
-"\n"
-"મહેરબાની કરીને, ચકાસો કે તમે બાયનરી ફાઈલ ખોલવાનો પ્રયાસ કરી રહ્યા નથી અને 'ફાઈલ "
-"ખોલો...' (અથવા 'સ્થાન ખોલો') સંવાદમાં અક્ષર માટેનો સાચો કોડ પસંદ કર્યો છે અને ફરીથી "
-"પ્રયાસ કરો."
+msgstr "મહેરબાની કરીને, ચકાસો કે તમે બાઈનરી ફાઈલ તો ખોલવાનો પ્રયત્ન કરી રહ્યા હતા નહિં ને અને તમે 'ફાઈલ ખોલો... ' (અથવા 'જગ્યા ખોલો') સંવાદમાં સાચી અક્ષર સંગ્રહપદ્ધતિ પસંદ કરી હતી અને પછી ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
-msgstr ""
-"\"%s\" ફાઇલ ખોલી શકાતી નથી કારણકે તે અયોગ્ય માહિતી ધરાવે છે.\n"
-"\n"
-"કદાચ તમે બાયનરી ફાઇલ ખોલવાનો પ્રયત્ન કરી રહ્યા છો."
+msgstr "ફાઈલ અયોગ્ય બંધારણમાં માહિતી સમાવે છે. કદાચ, તમે બાઈનરી ફાઈલ ખોલવાનો પ્રયત્ન કરી રહ્યા છો."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1751,125 +1647,84 @@ msgstr ""
 #: gedit/gedit-io-error-dialogs.c:469 gedit/gedit-io-error-dialogs.c:497
 #: gedit/gedit-io-error-dialogs.c:505 gedit/gedit-io-error-dialogs.c:511
 #: gedit/gedit-io-error-dialogs.c:518 gedit/gedit-io-error-dialogs.c:557
-#, fuzzy, c-format
+#, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં પાછી લાવી શકાઈ નથી."
+msgstr "ફાઈલ \"%s\" પાછી ફેરવી શક્યા નહિં"
 
 #: gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr ""
-"\"%s\" ફાઇલને પહેલાની સ્થિતિમાં લાવી શકાઈ નથી કારણકે જીએડીટને તે મળતી નથી.\n"
-"\n"
-"તે કદાચ હમાણા જ કાઢી નખાઈ છે."
+msgstr "જીએડીટ તેને શોધી શકતું નથી. કદાચ, તે હમણાં જ કાઢી નંખાઈ હશે."
 
 #: gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
-msgid ""
-"There are too many open files. Please, close some open files and try again."
-msgstr ""
-"\"%s\"ફાઇલ ખોલી શકાઈ નહિ કારણકે બીજી ઘણી ફાઇલો ખુલેલી છે.\n"
-"\n"
-"મહેરબાની કરીને, કેટલીક ખૂલેલી ફાઇલો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
+msgid "There are too many open files. Please, close some open files and try again."
+msgstr "ત્યાં ઘણી ખૂલેલી ફાઈલો છે. મહેરબાની કરીને, અમુક ખૂલેલી ફાઈલો બંધ કરો અને ફરીથી પ્રય્તન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
 msgid ""
 "Not enough available memory. Please, close some running applications and try "
 "again."
-msgstr ""
-"\"%s\" ફાઇલ ખોલવા માટે પર્યાપ્ત મેમરી પ્રાપ્ત નથી. મહેરબાની કરીને, કેટલાક ચાલુ "
-"કાર્ચક્રમો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
+msgstr "પૂરતી મેમરી ઉપ્લબ્ધ નથી. મહેરબાની કરીને, અમુક ચાલતા કાર્યક્રમો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
-msgstr ""
-"\"%s\" ફાઇલ ખોલી શકાતી નથી કારણ કે યજમાન નામ ખાલી છે.\n"
-"\n"
-"મહેરબાની કરીને, ચકાસો કે તમારી પ્રોક્સી સુયોજનાઓ સાચી છે અને ફરીથી પ્રયત્ન કરો."
+msgstr "યજમાન નામ ખાલી હતું. મહેરબાની કરીને, ચકાસો કે તમારા પ્રોક્સી સુયોજનો બરાબર છે ને અને ફરીથી પ્રયત્ન કરો."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "પ્રવેશ કરવામાં નિષ્ફળ."
 
 #: gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
 msgid ""
 "The file contains invalid UTF-8 data. Probably, you are trying to revert a "
 "binary file."
-msgstr ""
-"\"%s\" ફાઇલને પહેલાની સ્થિતિમાં પાછી લાવી શકાઈ નથી કારણકે તે અયોગ્ય UTF-8 માહિતી "
-"ઘરાવે છે.\n"
-"\n"
-"કદાય તમે બાયનરી ફાઇલને પહેલાની સ્થિતિમાં લઈ જવાનો પ્રયત્ન કરી રહ્યા છો."
+msgstr "ફાઈલ અયોગ્ય UTF-8 માહિતી સમાવે છે. કદાચ, તમે બાઈનરી ફાઈલ પાછા જવાનો પ્રયત્ન કરી રહ્યા હશો."
 
 #: gedit/gedit-io-error-dialogs.c:520
 msgid "It is not possible to revert an Untitled document."
 msgstr "શીર્ષક વગરના દસ્તાવેજને પહેલાની સ્થિતિમાં લાવવો અશક્ય છે."
 
 #: gedit/gedit-io-error-dialogs.c:607
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file \"%s\""
-msgstr "\"%s\" ફાઇલનો સંગ્રહ થઈ શક્યો નહિ."
+msgstr "ફાઈલ \"%s\" નો સંગ્રહ કરી શક્યા નહિં"
 
 #: gedit/gedit-io-error-dialogs.c:656
-#, fuzzy, c-format
+#, c-format
 msgid "The file \"%s\" already exists"
-msgstr "\"%s\" ફાઇલ પહેલાથી હાજર છે."
+msgstr "ફાઈલ \"%s\" પહેલાથી જ હાજર છે"
 
 #: gedit/gedit-io-error-dialogs.c:662
-#, fuzzy
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"\"%s\" એ ડિરેક્ટરી છે \n"
-"\n"
-"મહેરબાની કરીને, તમે લખેલુ સ્થાન બરાબર છે તે ચકાસો."
+msgstr "મહેરબાની કરીને, ચકાસો કે તમે જગ્યા બરાબર લખેલી છે ને."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
 #: gedit/gedit-io-error-dialogs.c:694
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create the file \"%s\""
-msgstr "\"%s\" ફાઇલને બનાવી શકાઈ નથી."
+msgstr "ફાઈલ \"%s\" બનાવી શક્યા નહિં"
 
 #: gedit/gedit-io-error-dialogs.c:670
-#, fuzzy
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"\"%s\" ફાઇલ બનાવી શકાઈ નથી.\n"
-"\n"
-"તમારી પાસે લખવાની યાેગ્ય પરવાનગી છે તેની ખાતરી કરો."
+msgstr "ખાતરી કરો કે તમારી પાસે લખવાની યોગ્ય પરવાનગીઓ છે ને."
 
 #: gedit/gedit-io-error-dialogs.c:676
-#, fuzzy
 msgid "The file name is too long."
-msgstr ""
-"\"%s\" ફાઇલ બનાવી શકાઈ નથી.\n"
-"\n"
-"ફાઇલનું નામ ખુબજ મોટુ છે."
+msgstr "ફાઈલ નામ ખૂબ લાંબુ છે."
 
 #: gedit/gedit-io-error-dialogs.c:682
-#, fuzzy
 msgid ""
 "A directory component in the file name does not exist or is a dangling "
 "symbolic link."
-msgstr ""
-"\"%s\" ફાઇલ બનાવી શકાઈ નથી.\n"
-"\n"
-"ફાઇલના નામનો ડિરેક્ટરી ભાગ હાજર નથી અથવા ખરાબ સાંકેતીક કડી છે."
+msgstr "ફાઈલ નામનું ડિરેક્ટરી ઘટક અસ્તિત્વમાં નથી અથવા સાંકેતિક કડીઓ સમાવે છે."
 
 #: gedit/gedit-io-error-dialogs.c:689
-#, fuzzy
 msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
-msgstr ""
-"\"%s\" ફાઇલ બનાવવા પુરતી જગ્યા નથી.\n"
-"\n"
-"મહેરબાની કરીને, ડિસ્કની કેટલીક જગ્યા મુક્ત કરો અને ફરીથી પ્રયત્ન કરો."
+msgstr "ફાઈલ બનાવવા માટે ત્યાં પૂરતી ડિસ્ક જગ્યા નથી. મહેરબાની કરીને અમુક ડિસ્ક જગ્યા મુક્ત કરો અને ફરીથી પ્રયત્ન કરો."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -1908,9 +1763,8 @@ msgid "Open a recently used file"
 msgstr "હાલમાં વપરાયેલી એક ફાઇલ ખોલો"
 
 #: gedit/gedit-mdi.c:1443 gedit/gedit-mdi.c:1445
-#, fuzzy
 msgid "Read Only"
-msgstr "(ફક્ત વાંચી શકાય તેવુ)"
+msgstr "માત્ર વાંચી શકાય તેવું"
 
 #: gedit/gedit-mdi.c:2068
 msgid "Normal"
@@ -2210,8 +2064,7 @@ msgid "Select the entire document"
 msgstr "સંપૂર્ણ દસ્તાવેજ પસંદ કરો"
 
 #: gedit/gedit-ui.xml.h:62
-msgid ""
-"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgid "Set toolbar button style according to desktop Menu and Toolbar Preferences"
 msgstr "ડેસ્કટોપ મેનુ અને સાધનપટ્ટી પસંદગીઓ પ્રમાણે સાધનપટ્ટી બટન શૈલીને સુયોજિત કરો"
 
 #: gedit/gedit-ui.xml.h:63
@@ -2372,7 +2225,7 @@ msgstr "જુઓ (_V)"
 
 #: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (અયોગ્ય યુનિકોડ)"
 
 #.
 #. if (col == chars)
@@ -2382,52 +2235,51 @@ msgstr ""
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:843
+#: gedit/gedit-view.c:841
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  હરોળ %d, સ્તંભ %d"
 
-#: gedit/gedit-view.c:881
+#: gedit/gedit-view.c:877
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:883
+#: gedit/gedit-view.c:879
 msgid "  INS"
 msgstr "  INS"
 
-#: gedit/gedit2.c:86
+#: gedit/gedit2.c:81
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
-msgstr ""
-"આદેશ વાક્યમાં યાદી કરેલ ફાઈલોને ખોલવા માટે વપરાતી અક્ષરોની સંગ્રહપદ્ધતિ સુયોજિત કરો"
+msgstr "આદેશ વાક્યમાં યાદી કરેલ ફાઈલોને ખોલવા માટે વપરાતી અક્ષરોની સંગ્રહપદ્ધતિ સુયોજિત કરો"
 
-#: gedit/gedit2.c:89
+#: gedit/gedit2.c:84
 msgid "Quit an existing instance of gedit"
 msgstr "હાલના જીએડીટના નમૂનામાંથી બહાર નીકળો"
 
-#: gedit/gedit2.c:92
+#: gedit/gedit2.c:87
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "હાલના જીએડીટના નમૂનાની નવી ઉચ્ચસ્તરની વિન્ડો બનાવો"
 
-#: gedit/gedit2.c:95
+#: gedit/gedit2.c:90
 msgid "Create a new document in an existing instance of gedit"
 msgstr "હાલના જીએડીટના નમૂનામાં નવો દસ્તાવેજ બનાવો"
 
-#: gedit/gedit2.c:178
+#: gedit/gedit2.c:161
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
 msgstr "સ્પષ્ટ કરેલ સંગ્રહપદ્ધતિ \"%s\" એ માન્ય નથી\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "તમે જે ફાઈલ ખોલવાનો પ્રયત્ન કરી રહ્યા છો તે અયોગ્ય બાઈટ ક્રમ સમાવે છે."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
-msgstr ""
+msgstr "જીએડીટ તમે જે ફાઈલ ખોલવા માંગો છો તેની સંગ્રહપદ્ધતિ આપોઆપ નક્કી કરવામાં સમર્થ હતું નહિં."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2571,44 +2423,39 @@ msgid "User name"
 msgstr "વપરાશકર્તા નામ"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
 msgid "Sa_ve Copy..."
-msgstr "નકલ કરો (_C)"
+msgstr "નકલ સંગ્રહો (_v)..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "વર્તમાન દસ્તાવેજની ભાષા સુયોજિત કરો"
+msgstr "વર્તમાન દસ્તાવેજની નકલ સંગ્રહો"
 
 #: plugins/savecopy/savecopy.c:262
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "\"%s\" ફાઇલનો સંગ્રહ થઈ શક્યો નહિ."
+msgstr "ફાઈલની નકલ \"%s\" માં સંગ્રહી શક્યા નહિં"
 
 #: plugins/savecopy/savecopy.c:361
 msgid "You are trying to overwrite the original file"
-msgstr ""
+msgstr "તમે મૂળ ફાઈલ પર ફરીથી લખવાનો પ્રયત્ન કરી રહ્યા છો"
 
 #: plugins/savecopy/savecopy.c:470
-#, fuzzy
 msgid "Save Copy..."
-msgstr "કંઈ જ સંગ્રહો નહિ (_N)"
+msgstr "નકલ સંગ્રહો..."
 
 #. translators: %s is a filename
 #: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
 #, c-format
 msgid "%s (copy)"
-msgstr ""
+msgstr "%s (નકલ)"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "બધી ખુલેલી ફાઇલોનો સંગ્રહ કરો"
+msgstr "નકલ સંગ્રહો"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "વર્તમાન દસ્તાવેજ અથવા પસંદગીને ક્રમમાં ગોઠવો."
+msgstr "વર્તમાન દસ્તાવેજની નકલ સ્થાનિક અથવા દૂરસ્થ જગ્યાએ સંગ્રહે છે."
 
 #: plugins/shell_output/shell_output.c:56
 msgid "_Run Command..."
@@ -2780,21 +2627,19 @@ msgstr "જોડણી ચકાસણી પૂરી થઈ"
 
 #: plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "આફ્રીકન"
 
 #: plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "અરબી"
+msgstr "અમ્હારીક"
 
 #: plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
-msgstr ""
+msgstr "અઝરબૈજાની"
 
 #: plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Belarusian"
-msgstr "બલ્ગેરિયાઈ"
+msgstr "બેલારુસિયન"
 
 #: plugins/spell/gedit-spell-checker.c:83
 msgid "Bulgarian"
@@ -2825,9 +2670,8 @@ msgid "Danish"
 msgstr "ડેનીશ"
 
 #: plugins/spell/gedit-spell-checker.c:90
-#, fuzzy
 msgid "German (Austria)"
-msgstr "જર્મન (જર્મની)"
+msgstr "જર્મન (ઓસ્ટ્રિયા)"
 
 #: plugins/spell/gedit-spell-checker.c:91
 msgid "German (Germany)"
@@ -2858,14 +2702,12 @@ msgid "Spanish"
 msgstr "સ્પેનીશ"
 
 #: plugins/spell/gedit-spell-checker.c:99
-#, fuzzy
 msgid "Estonian"
-msgstr "રોમાની"
+msgstr "ઈસ્ટોનિયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:100
-#, fuzzy
 msgid "Persian"
-msgstr "છાપો"
+msgstr "પર્સિયન"
 
 #: plugins/spell/gedit-spell-checker.c:101
 msgid "Finnish"
@@ -2884,49 +2726,44 @@ msgid "French (Swiss)"
 msgstr "ફ્રેન્ચ (સ્વીસ)"
 
 #: plugins/spell/gedit-spell-checker.c:105
-#, fuzzy
 msgid "Irish"
-msgstr "તુર્કી"
+msgstr "ઈરીશ"
 
 #: plugins/spell/gedit-spell-checker.c:106
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "સ્કોટીશ ગાએલીક"
 
 #: plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Gallegan"
-msgstr "જ્યાેર્જિયાઈ"
+msgstr "ગેલેગન"
 
 #: plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "મેન્ક્સ ગાએલીક"
 
 #: plugins/spell/gedit-spell-checker.c:110
-#, fuzzy
 msgid "Hindi"
-msgstr "શોધો"
+msgstr "હિંદી"
 
 #: plugins/spell/gedit-spell-checker.c:111
-#, fuzzy
 msgid "Croatian"
-msgstr "કેટલૅન"
+msgstr "ક્રોએટીઅન"
 
 #: plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "ઉપરી સોર્બીયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Hungarian"
-msgstr "બલ્ગેરિયાઈ"
+msgstr "હંગેરીયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "ઈન્ટરલીન્ગુઆ (IALA)"
 
 #: plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
-msgstr ""
+msgstr "ઈન્ડોનેશિયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:116
 msgid "Icelandic"
@@ -2937,61 +2774,56 @@ msgid "Italian"
 msgstr "ઇટાલીયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
-msgstr "તુર્કી"
+msgstr "કુર્ડીશ"
 
 #: plugins/spell/gedit-spell-checker.c:119
-#, fuzzy
 msgid "Latin"
-msgstr "લીટીઓ"
+msgstr "લેટીન"
 
 #: plugins/spell/gedit-spell-checker.c:120
 msgid "Lithuanian"
-msgstr ""
+msgstr "લિથુઆનીયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:121
 msgid "Latvian"
-msgstr ""
+msgstr "લેટવીએન"
 
 #: plugins/spell/gedit-spell-checker.c:122
 msgid "Malagasy"
-msgstr ""
+msgstr "માલાગાસી"
 
 #: plugins/spell/gedit-spell-checker.c:123
 msgid "Maori"
-msgstr ""
+msgstr "માઓરી"
 
 #: plugins/spell/gedit-spell-checker.c:124
-#, fuzzy
 msgid "Macedonian"
-msgstr "જીએડીટ"
+msgstr "મેકેડોનીયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:125
 msgid "Mongolian"
-msgstr ""
+msgstr "મોંગોલિયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:126
 msgid "Malay"
-msgstr ""
+msgstr "મલય"
 
 #: plugins/spell/gedit-spell-checker.c:127
 msgid "Maltese"
-msgstr ""
+msgstr "માલ્ટીઝ"
 
 #: plugins/spell/gedit-spell-checker.c:128
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "નોર્વેજીન"
+msgstr "નોર્વેન બોકમાલ"
 
 #: plugins/spell/gedit-spell-checker.c:129
 msgid "Dutch"
 msgstr "ડચ"
 
 #: plugins/spell/gedit-spell-checker.c:130
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "નોર્વેજીન"
+msgstr "નોર્વેન ન્યોનાર્સ્ક"
 
 #: plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian"
@@ -2999,7 +2831,7 @@ msgstr "નોર્વેજીન"
 
 #: plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "ન્યાન્જા"
 
 #: plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -3015,7 +2847,7 @@ msgstr "પોર્ટુગીસ (બ્રાઝીલીયાઈ)"
 
 #: plugins/spell/gedit-spell-checker.c:136
 msgid "Quechua"
-msgstr ""
+msgstr "ક્વેચુઆ"
 
 #: plugins/spell/gedit-spell-checker.c:138
 msgid "Russian"
@@ -3023,12 +2855,11 @@ msgstr "રશિયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "કિન્યારવાન્ડા"
 
 #: plugins/spell/gedit-spell-checker.c:140
-#, fuzzy
 msgid "Sardinian"
-msgstr "યુક્રેનીયાઈ"
+msgstr "સાર્દીનીયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:141
 msgid "Slovak"
@@ -3044,24 +2875,23 @@ msgstr "સ્વેડીશ"
 
 #: plugins/spell/gedit-spell-checker.c:144
 msgid "Swahili"
-msgstr ""
+msgstr "સ્વાહીલી"
 
 #: plugins/spell/gedit-spell-checker.c:145
-#, fuzzy
 msgid "Tamil"
-msgstr "થાઈ"
+msgstr "તમિલ"
 
 #: plugins/spell/gedit-spell-checker.c:146
 msgid "Tetum"
-msgstr ""
+msgstr "ટેટમ"
 
 #: plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
-msgstr ""
+msgstr "ટાગાલોગ"
 
 #: plugins/spell/gedit-spell-checker.c:148
 msgid "Tswana"
-msgstr ""
+msgstr "ત્સવાના"
 
 #: plugins/spell/gedit-spell-checker.c:150
 msgid "Ukrainian"
@@ -3069,19 +2899,19 @@ msgstr "યુક્રેનીયાઈ"
 
 #: plugins/spell/gedit-spell-checker.c:151
 msgid "Uzbek"
-msgstr ""
+msgstr "ઉઝબેક"
 
 #: plugins/spell/gedit-spell-checker.c:153
 msgid "Walloon"
-msgstr ""
+msgstr "વલુન"
 
 #: plugins/spell/gedit-spell-checker.c:154
 msgid "Yiddish"
-msgstr ""
+msgstr "યીડીશ"
 
 #: plugins/spell/gedit-spell-checker.c:155
 msgid "Zulu"
-msgstr ""
+msgstr "ઝુલુ"
 
 #: plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
@@ -3189,14 +3019,12 @@ msgid "The document is empty."
 msgstr "દસ્તાવેજ ખાલી છે."
 
 #: plugins/spell/spell.c:643
-#, fuzzy
 msgid "The selected text does not contain misspelled words."
-msgstr "પસંદ કરેલ લખાણ ખોટા શબ્દો ધરાવતી નથી."
+msgstr "પસંદ કરેલ લખાણ ખોડી જોડણીવાળા શબ્દો સમાવતું નથી."
 
 #: plugins/spell/spell.c:644
-#, fuzzy
 msgid "The document does not contain misspelled words."
-msgstr "દસ્તાવેજ ખોટા શબ્દો ધરાવતી નથી."
+msgstr "દસ્તાવેજ ખોટી જોડણીવાળા શબ્દો સમાવતું નથી."
 
 #: plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
@@ -3207,1052 +3035,980 @@ msgid "Spell checker"
 msgstr "જોડણી ચકાસનાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "પ્રાપ્ત બંધારણો"
+msgstr "ટુંકાણ સ્વરૂપ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "અર્મેનિયાઈ"
+msgstr "ટુંકાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "ઉપર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "સુલભ કી અક્ષર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "સંજ્ઞા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "લીટીઓ"
+msgstr "ગોઠવણી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "ગોઠવાયેલ અક્ષર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "વૈકલ્પિક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "એન્કર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "એન્કર URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "ખોલવા માટે ફાઇલ પસંદ કરો"
+msgstr "એપ્લેટ ક્લાસ ફાઈલ કોડ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "એરે"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "સંબંધિત જાણકારી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "આપોઆપ હાંસિયાથી દૂર કરો"
+msgstr "લેખક જાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "પાનાના હેડરો છાપો (_P)"
+msgstr "અક્ષ સંબંધિત હેડરો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "BGSound"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "પાશ્વ ભાગનાે રંગઃ  (_B)"
+msgstr "પાશ્વ ભાગનો રંગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "પાશ્વ ભાગનો રંગ"
+msgstr "પાશ્વ ભાગ લખાણ તકતી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "આધારભૂત URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "લેબલમાં ફોન્ટ વાપરો"
+msgstr "આધારભૂત ફોન્ટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
-msgstr ""
+msgstr "વર્તણૂક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "ઝબૂકતું લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "ઘાટુ"
+msgstr "કિનાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "પાશ્વ ભાગનાે રંગઃ  (_B)"
+msgstr "કિનારી રંગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "બોક્સ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "મધ્ય યુરોપીય"
+msgstr "ખાના હરોળવિસ્તરણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "સામાન્ય"
+msgstr "કેન્દ્ર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
-msgid "Char enconding of linked resource"
-msgstr ""
+msgid "Character encoding of linked resource"
+msgstr "કડી થયેલ સ્રોતોની અક્ષર સંગ્રહપદ્ધતિ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
-msgstr ""
+msgstr "ચકાસાયેલ(સ્થિતિ)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "ક્રીયાઓ (_i)"
+msgstr "સાઈટેશન"
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
-msgstr ""
+msgstr "બદલવા માટે સાઈટ કારણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Class implementation ID"
-msgstr ""
+msgstr "વર્ગ અમલીકરણ ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "ટેગ યાદી"
+msgstr "વર્ગ યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
-msgstr ""
+msgstr "લખાણ પ્રવાહ નિયંત્રણ સાફ કરો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr ""
+msgstr "કોડ વિષયસૂચી પ્રકાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "પસંદ કરેલ લીટીઓની નકલ કરો"
+msgstr "પસંદ કરેલ કડીઓનો રંગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
-msgstr ""
+msgstr "સ્તંભ વિસ્તરણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
-msgstr ""
+msgstr "સ્તંભો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "વિષયસુચી (_C)"
+msgstr "ટિપ્પળી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr ""
+msgstr "કમ્પ્યૂટર કોડ ફ્રેગમેન્ટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "વિષયસુચી (_C)"
+msgstr "સમાવિષ્ટ પદ્ધતિ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "વિષયસુચી (_C)"
+msgstr "સમાવિષ્ટ પ્રકાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "વિષયસુચી (_C)"
+msgstr "યામાક્ષો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
-msgstr ""
+msgstr "DIV શૈલી સમાવનાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
-msgstr ""
+msgstr "DIV સમાવનાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "ફેરફારની તારીખ અને સમય"
 
 #: plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "નિશાની ઘોષિત કરો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
-msgid "Definition description"
-msgstr "વર્ણન (_D)"
+msgid "Defer attribute"
+msgstr "ડીફર લક્ષણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
-msgid "Definition list"
-msgstr ""
+msgid "Definition description"
+msgstr "વ્યાખ્યા વર્ણન"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
-msgid "Definition term"
-msgstr ""
+msgid "Definition list"
+msgstr "વ્યાખ્યા યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
-msgid "Deleted text"
-msgstr "પસંદ કરેલ લખાણને કાઢી નાખો"
+msgid "Definition term"
+msgstr "વ્યાખ્યા પદ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
-msgid "Direction"
-msgstr "બ્રિટન"
+msgid "Deleted text"
+msgstr "કાઢી નંખાયેલ લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
-msgid "Directionality"
-msgstr ""
+msgid "Direction"
+msgstr "દિશા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:55
-msgid "Directory list"
-msgstr ""
+msgid "Directionality"
+msgstr "દિશામાનપણું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
-msgid "Disabled"
-msgstr "સક્રિય કરાયેલ"
+msgid "Directory list"
+msgstr "ડિરેક્ટરી યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
-msgid "Document base"
-msgstr "દસ્તાવેજો (_D)"
+msgid "Disabled"
+msgstr "નિષ્ક્રિય કરાયેલ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
-msgid "Document body"
-msgstr "દસ્તાવેજો (_D)"
+msgid "Document base"
+msgstr "દસ્તાવેજ આધાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
-msgid "Document head"
-msgstr "દસ્તાવેજો (_D)"
+msgid "Document body"
+msgstr "દસ્તાવેજ ભાગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
-msgid "Document title"
-msgstr "દસ્તાવેજનુ ગણન"
+msgid "Document head"
+msgstr "દસ્તાવેજ હેડ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
-msgid "Document type"
-msgstr "દસ્તાવેજો (_D)"
+msgid "Document title"
+msgstr "દસ્તાવેજ શીર્ષક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
-msgid "Element ID"
-msgstr "ઘટકો"
+msgid "Document type"
+msgstr "દસ્તાવેજ પ્રકાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
+msgid "Element ID"
+msgstr "ઘટક ID"
+
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
-msgstr ""
+msgstr "જડિત વસ્તુ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
-
-#: plugins/taglist/HTML.tags.xml.in.h:65
-msgid "Encode type"
-msgstr ""
+msgstr "એમ્ફેસીઝ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:66
-msgid "Figure"
-msgstr ""
+msgid "Encode type"
+msgstr "એનકોડ પ્રકાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:67
-#, fuzzy
-msgid "Font face"
-msgstr "ફોન્ટ નામ"
+msgid "Figure"
+msgstr "આકૃતિ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
-msgid "For label"
-msgstr "લેબલ"
+msgid "Font face"
+msgstr "ફોન્ટ ફેસ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
-msgid "Forced line break"
-msgstr ""
+msgid "For label"
+msgstr "લેબલ માટે"
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
-#, fuzzy
-msgid "Form"
-msgstr "સામાન્ય"
+msgid "Forced line break"
+msgstr "દબણ થયેલ લાઈન અટકણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
-msgid "Form action handler"
-msgstr ""
+msgid "Form"
+msgstr "સ્વરૂપ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
-msgid "Form control group"
-msgstr ""
+msgid "Form action handler"
+msgstr "ફોર્મ ક્રિયા નિયંત્રક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:73
-msgid "Form field label text"
-msgstr ""
+msgid "Form control group"
+msgstr "ફોર્મ નિયંત્રણ જૂથ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:74
-msgid "Form input"
-msgstr ""
+msgid "Form field label text"
+msgstr "ફોર્મ ક્ષેત્ર લેબલ લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:75
-msgid "Form input type"
-msgstr ""
+msgid "Form input"
+msgstr "ફોર્મ ઈનપુટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:76
-msgid "Form method"
-msgstr ""
+msgid "Form input type"
+msgstr "ફોર્મ ઈનપુટ પ્રકાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:77
-msgid "Forward link"
-msgstr ""
+msgid "Form method"
+msgstr "ફોર્મ પદ્ધતિ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:78
-#, fuzzy
-msgid "Frame"
-msgstr "નામઃ "
+msgid "Forward link"
+msgstr "કડી આગળ ધપાવો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
-msgid "Frame render parts"
-msgstr ""
+msgid "Frame"
+msgstr "ચોકઠું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
-msgid "Frame source"
-msgstr ""
+msgid "Frame render parts"
+msgstr "ચોકઠુ ઓળખાવતા ભાગો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:81
-msgid "Frame target"
-msgstr ""
+msgid "Frame source"
+msgstr "ચોકઠા સ્રોત"
 
 #: plugins/taglist/HTML.tags.xml.in.h:82
-msgid "Frameborder"
-msgstr ""
+msgid "Frame target"
+msgstr "ચોકઠા લક્ષ્ય"
 
 #: plugins/taglist/HTML.tags.xml.in.h:83
-#, fuzzy
-msgid "Frameset"
-msgstr "ફેરોસ"
+msgid "Frameborder"
+msgstr "ચોકઠા કિનારી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
-msgid "Frameset columns"
-msgstr "ઊભી હરોળથી શરુઆત કરોઃ  (_t)"
+msgid "Frameset"
+msgstr "ચોકઠાસમૂહ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
-msgid "Frameset rows"
-msgstr ""
+msgid "Frameset columns"
+msgstr "ચોકઠાસમૂહ સ્તંભો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
-msgid "Framespacing"
-msgstr ""
+msgid "Frameset rows"
+msgstr "ચોકઠાસમૂહ હરોળો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:87
-msgid "Generic embedded object"
-msgstr ""
+msgid "Framespacing"
+msgstr "ચોકઠા જગ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:88
-msgid "Generic metainformation"
-msgstr ""
+msgid "Generic embedded object"
+msgstr "સામાન્ય જડિત વસ્તુ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:89
-#, fuzzy
-msgid "Generic span"
-msgstr "સામાન્ય"
+msgid "Generic metainformation"
+msgstr "સામાન્ય જાણકારીની જાણકારી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
-msgid "HREF URI"
-msgstr ""
+msgid "Generic span"
+msgstr "સામાન્ય વિસ્તરણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
-msgid "HTML - Special Characters"
-msgstr ""
+msgid "HREF URI"
+msgstr "HREF URI"
 
 #: plugins/taglist/HTML.tags.xml.in.h:92
-msgid "HTML - Tags"
-msgstr ""
+msgid "HTML - Special Characters"
+msgstr "HTML - વિશિષ્ટ અક્ષરો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:93
-msgid "HTML root element"
-msgstr ""
+msgid "HTML - Tags"
+msgstr "HTML - ટેગો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:94
-msgid "HTML version"
-msgstr ""
+msgid "HTML root element"
+msgstr "HTML રુટ ઘટક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:95
-msgid "HTTP header name"
-msgstr ""
+msgid "HTML version"
+msgstr "HTML આવૃત્તિ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:96
-msgid "Header cell ID's"
-msgstr ""
+msgid "HTTP header name"
+msgstr "HTTP હેડર નામ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:97
-msgid "Heading"
-msgstr ""
+msgid "Header cell ID's"
+msgstr "હેડર ખાના ID નું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:98
-msgid "Heading 1"
-msgstr ""
+msgid "Heading"
+msgstr "મથાળું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:99
-msgid "Heading 2"
-msgstr ""
+msgid "Heading 1"
+msgstr "મથાળું ૧"
 
 #: plugins/taglist/HTML.tags.xml.in.h:100
-msgid "Heading 3"
-msgstr ""
+msgid "Heading 2"
+msgstr "મથાળું ૨"
 
 #: plugins/taglist/HTML.tags.xml.in.h:101
-msgid "Heading 4"
-msgstr ""
+msgid "Heading 3"
+msgstr "મથાળું ૩"
 
 #: plugins/taglist/HTML.tags.xml.in.h:102
-msgid "Heading 5"
-msgstr ""
+msgid "Heading 4"
+msgstr "મથાળું ૪"
 
 #: plugins/taglist/HTML.tags.xml.in.h:103
-msgid "Heading 6"
-msgstr ""
+msgid "Heading 5"
+msgstr "મથાળું ૫"
 
 #: plugins/taglist/HTML.tags.xml.in.h:104
-msgid "Height"
-msgstr ""
+msgid "Heading 6"
+msgstr "મથાળું ૬"
 
 #: plugins/taglist/HTML.tags.xml.in.h:105
-msgid "Horizontal rule"
-msgstr ""
+msgid "Height"
+msgstr "ઊંચાઈ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:106
-msgid "Horizontal space"
-msgstr ""
+msgid "Horizontal rule"
+msgstr "આડો નિયમ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:107
-msgid "I18N BiDi over-ride"
-msgstr ""
+msgid "Horizontal space"
+msgstr "આડી જગ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:108
-msgid "Image"
-msgstr ""
+msgid "I18N BiDi over-ride"
+msgstr "I18N BiDi over-ride"
 
 #: plugins/taglist/HTML.tags.xml.in.h:109
-msgid "Image map"
-msgstr ""
+msgid "Image"
+msgstr "ઈમેજ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:110
-msgid "Image map area"
-msgstr ""
+msgid "Image map"
+msgstr "ઈમેજ નક્શો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:111
-msgid "Image map name"
-msgstr ""
+msgid "Image map area"
+msgstr "ઈમેજ નક્શા વિસ્તાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:112
-msgid "Image source"
-msgstr ""
+msgid "Image map name"
+msgstr "ઈમેજ નક્શા નામ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
-msgid "Inline frame"
-msgstr "અયોગ્ય ફાઇલ નામ"
+msgid "Image source"
+msgstr "ઈમેજ સ્રોત"
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
-msgid "Inline layer"
-msgstr ""
+msgid "Inline frame"
+msgstr "લીટીમાં ચોકઠું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
-msgid "Inserted text"
-msgstr "તારીખ/સમય ઊમેરો"
+msgid "Inline layer"
+msgstr "લીટીમાંનુ સ્તર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
-msgid "Instance definition"
-msgstr ""
+msgid "Inserted text"
+msgstr "દાખલ થયેલ લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
-msgid "Italic text"
-msgstr "ઇટાલીયાઈ"
+msgid "Instance definition"
+msgstr "બનાવ વ્યાખ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
-msgid "Java applet"
-msgstr ""
+msgid "Italic text"
+msgstr "ઈટાલીક લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
+msgid "Java applet"
+msgstr "જાવા એપ્લેટ"
+
+#: plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "લેબલ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
-msgid "Language code"
-msgstr "ભાષાઓ"
-
 #: plugins/taglist/HTML.tags.xml.in.h:121
-msgid "Large text style"
-msgstr ""
+msgid "Language code"
+msgstr "ભાષા કોડ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:122
-msgid "Layer"
-msgstr ""
+msgid "Large text style"
+msgstr "મોટી લખાણ શૈલી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
-msgid "Link color"
-msgstr "રંગ પસંદ કરો"
+msgid "Layer"
+msgstr "સ્તર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
-msgid "List item"
-msgstr ""
+msgid "Link color"
+msgstr "કડી રંગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:125
-msgid "List of MIME types for file upload"
-msgstr ""
+msgid "List item"
+msgstr "વસ્તુ યાદીત કરો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:126
-msgid "List of supported character sets"
-msgstr ""
+msgid "List of MIME types for file upload"
+msgstr "ફાઈલ અપલોડ કરવા માટે MIME પ્રકારોની યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:127
-msgid "Listing"
-msgstr ""
+msgid "List of supported character sets"
+msgstr "આધારભૂત અક્ષરોના સમૂહોની યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
-msgid "Local change to font"
-msgstr "સંપાદક ફોન્ટ પસંદ કરો"
+msgid "Listing"
+msgstr "યાદીકરણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
-msgid "Long description link"
-msgstr "વર્ણન (_D)"
+msgid "Local change to font"
+msgstr "ફોન્ટમાં સ્થાનિક ફેરફાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
-msgid "Long quotation"
-msgstr ""
+msgid "Long description link"
+msgstr "લાંબુ વર્ણન કડી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:131
-msgid "Mail link"
-msgstr ""
+msgid "Long quotation"
+msgstr "લાંબુ અવતરણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:132
-msgid "Margin pixel height"
-msgstr ""
+msgid "Mail link"
+msgstr "મેઈલ કડી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:133
-msgid "Margin pixel width"
-msgstr ""
+msgid "Margin pixel height"
+msgstr "હાંસિયાની પિક્સેલમાં ઊંચાઈ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:134
-msgid "Marquee"
-msgstr ""
+msgid "Margin pixel width"
+msgstr "હાંસિયાની પિક્સેલમાં પહોળાઈ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:135
-msgid "Max text field chars"
-msgstr ""
+msgid "Marquee"
+msgstr "સરકતું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-msgid "Media-independent link"
-msgstr ""
+msgid "Maximum length of text field"
+msgstr "લખાણ ક્ષેત્રની મહત્તમ લંબાઈ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
-msgid "Menu list"
-msgstr ""
+msgid "Media-independent link"
+msgstr "મીડિયા-સ્વતંત્ર કડી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:138
-msgid "Multi-line text field"
-msgstr ""
+msgid "Menu list"
+msgstr "મેનુ યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:139
-msgid "Multicolumn"
-msgstr ""
+msgid "Multi-line text field"
+msgstr "મલ્ટી-લાઈન લખાણ ક્ષેત્ર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:140
-msgid "Multiple"
-msgstr ""
+msgid "Multicolumn"
+msgstr "મલ્ટીકોલમ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:141
-#, fuzzy
-msgid "Name"
-msgstr "નામઃ "
+msgid "Multiple"
+msgstr "ઘણું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
-msgid "Named property value"
-msgstr ""
+msgid "Name"
+msgstr "નામ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
-msgid "Next ID"
-msgstr ""
+msgid "Named property value"
+msgstr "Named ગુણધર્મ કિંમત"
 
 #: plugins/taglist/HTML.tags.xml.in.h:144
-msgid "No URI"
-msgstr ""
+msgid "Next ID"
+msgstr "આગળનું ID"
 
 #: plugins/taglist/HTML.tags.xml.in.h:145
-msgid "No embedded objects"
-msgstr ""
+msgid "No URI"
+msgstr "કોઈ URI નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:146
-msgid "No frames"
-msgstr ""
+msgid "No embedded objects"
+msgstr "કોઈ જડિત વસ્તુઓ નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:147
-msgid "No layers"
-msgstr ""
+msgid "No frames"
+msgstr "કોઈ ચોકઠાઓ નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:148
-msgid "No line break"
-msgstr ""
+msgid "No layers"
+msgstr "કોઈ સ્તરો નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:149
-#, fuzzy
-msgid "No resize"
-msgstr "માપ દર્શાવો"
+msgid "No line break"
+msgstr "કોઈ લીટી અટકણો નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:150
-msgid "No script"
-msgstr ""
+msgid "No resize"
+msgstr "માપ બદલવું નહિં"
 
 #: plugins/taglist/HTML.tags.xml.in.h:151
-msgid "No shade"
-msgstr ""
+msgid "No script"
+msgstr "કોઈ સ્ક્રિપ્ટ નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:152
-msgid "No word wrap"
-msgstr ""
+msgid "No shade"
+msgstr "કોઈ શેડ નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:153
-msgid "Note"
-msgstr ""
+msgid "No word wrap"
+msgstr "કોઈ લખાણ લપેટવાનું નથી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:154
-#, fuzzy
-msgid "Object applet file"
-msgstr "ફાઇલ ખોલો"
+msgid "Note"
+msgstr "નોંધ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
-msgid "Object data reference"
-msgstr ""
+msgid "Object applet file"
+msgstr "ઓબ્જેક્ટ એપ્લેટ ફાઈલ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
-msgid "Offset for alignment character"
-msgstr ""
+msgid "Object data reference"
+msgstr "વસ્તુ માહિતી સંદર્ભ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:157
-msgid "OnBlur event"
-msgstr ""
+msgid "Offset for alignment character"
+msgstr "અક્ષરની ગોઠવણી માટેનો ઓફસેટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
-msgid "OnChange event"
-msgstr "કેસ બદલો"
+msgid "OnBlur event"
+msgstr "OnBlur ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
-msgid "OnClick event"
-msgstr ""
+msgid "OnChange event"
+msgstr "OnChange ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
-msgid "OnDblClick event"
-msgstr ""
+msgid "OnClick event"
+msgstr "OnClick ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:161
-msgid "OnFocus event"
-msgstr ""
+msgid "OnDblClick event"
+msgstr "OnDblClick ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:162
-msgid "OnKeyDown event"
-msgstr ""
+msgid "OnFocus event"
+msgstr "OnFocus ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:163
-msgid "OnKeyPress event"
-msgstr ""
+msgid "OnKeyDown event"
+msgstr "OnKeyDown ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:164
-msgid "OnKeyUp event"
-msgstr ""
+msgid "OnKeyPress event"
+msgstr "OnKeyPress ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:165
-msgid "OnLoad event"
-msgstr ""
+msgid "OnKeyUp event"
+msgstr "OnKeyUp ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:166
-msgid "OnMouseDown event"
-msgstr ""
+msgid "OnLoad event"
+msgstr "OnLoad ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:167
-msgid "OnMouseMove event"
-msgstr ""
+msgid "OnMouseDown event"
+msgstr "OnMouseDown ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:168
-msgid "OnMouseOut event"
-msgstr ""
+msgid "OnMouseMove event"
+msgstr "OnMouseMove ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:169
-msgid "OnMouseOver event"
-msgstr ""
+msgid "OnMouseOut event"
+msgstr "OnMouseOut ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:170
-msgid "OnMouseUp event"
-msgstr ""
+msgid "OnMouseOver event"
+msgstr "OnMouseOver ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:171
-msgid "OnReset event"
-msgstr ""
+msgid "OnMouseUp event"
+msgstr "OnMouseUp ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:172
-msgid "OnSelect event"
-msgstr ""
+msgid "OnReset event"
+msgstr "OnReset ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:173
-msgid "OnSubmit event"
-msgstr ""
+msgid "OnSelect event"
+msgstr "OnSelect ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:174
-msgid "OnUnload event"
-msgstr ""
+msgid "OnSubmit event"
+msgstr "OnSubmit ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:175
-msgid "Option group"
-msgstr ""
+msgid "OnUnload event"
+msgstr "OnUnload ઘટના"
 
 #: plugins/taglist/HTML.tags.xml.in.h:176
-#, fuzzy
-msgid "Option selector"
-msgstr "ફોન્ટ પસંદગી"
+msgid "Option group"
+msgstr "વિકલ્પ જૂથ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
-msgid "Ordered list"
-msgstr ""
+msgid "Option selector"
+msgstr "વિકલ્પ પસંદ કરનાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
-#, fuzzy
-msgid "Output media"
-msgstr "આઉટપુટ લીટીઓ"
+msgid "Ordered list"
+msgstr "ક્રમાંકિત યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:179
-msgid "Paragraph"
-msgstr ""
+msgid "Output media"
+msgstr "આઉટપુટ મીડિયા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:180
-msgid "Paragraph class"
-msgstr ""
+msgid "Paragraph"
+msgstr "ફકરો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:181
-msgid "Paragraph style"
-msgstr ""
+msgid "Paragraph class"
+msgstr "ફકરા વર્ગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:182
-msgid "Preformatted listing"
-msgstr ""
+msgid "Paragraph style"
+msgstr "ફકરા શૈલી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:183
-#, fuzzy
-msgid "Preformatted text"
-msgstr "લખાણનું પૂર્વદર્શન"
+msgid "Preformatted listing"
+msgstr "પૂર્વબંધારણીય યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:184
-msgid "Profile metainfo dictionary"
-msgstr ""
+msgid "Preformatted text"
+msgstr "પૂર્વબંધારણીય લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:185
-msgid "Prompt message"
-msgstr ""
+msgid "Profile metainfo dictionary"
+msgstr "રૂપરેખા જાણકારી શબ્દકોષ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
-msgid "Push button"
-msgstr "બટન૧"
+msgid "Prompt message"
+msgstr "પ્રોમ્પ્ટ સંદેશો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
-msgid "Quote"
-msgstr "બહાર નીકળો"
+msgid "Push button"
+msgstr "દબાવો બટન"
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
-msgid "Range"
-msgstr "બદલો (_n)"
+msgid "Quote"
+msgstr "અવતરણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
-msgid "ReadOnly text and password"
-msgstr ""
+msgid "Range"
+msgstr "વિસ્તાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:190
-msgid "Reduced spacing"
-msgstr ""
+msgid "ReadOnly text and password"
+msgstr "માત્ર વાંચી શકાય તેવું લખાણ અને પાસવર્ડ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
-msgid "Reverse link"
-msgstr "ઊંધો ક્રમ (_R)"
+msgid "Reduced spacing"
+msgstr "ઘટાડેલ જગ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
-msgid "Root"
-msgstr ""
+msgid "Reverse link"
+msgstr "ઊંધી કડી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:193
-msgid "Rows"
-msgstr ""
+msgid "Root"
+msgstr "રુટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:194
-msgid "Rulings between rows and columns"
-msgstr ""
+msgid "Rows"
+msgstr "હરોળો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:195
-msgid "Sample program output, scripts"
-msgstr ""
+msgid "Rulings between rows and columns"
+msgstr "હરોળો અને સ્તંભો વચ્ચે સરકી રહ્યા છીએ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:196
-msgid "Scope covered by header cells"
-msgstr ""
+msgid "Sample program output, scripts"
+msgstr "નમૂના કાર્યક્રમ આઉટપુટ, સ્ક્રિપ્ટો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:197
-msgid "Script execution defer"
-msgstr ""
+msgid "Scope covered by header cells"
+msgstr "હેડર ખાનાંઓ દ્વારા આવરાયેલ મર્યાદા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "ભાષા સુયોજિત કરો"
+msgstr "સ્ક્રિપ્ટ ભાષા નામ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
-msgstr ""
+msgstr "સ્ક્રિપ્ટ વિધાનો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
-msgstr ""
+msgstr "સરકપટ્ટી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "ખોલવા માટે ફાઇલ પસંદ કરો"
+msgstr "પસંદ કરી શકાય તેવું વિકલ્પ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "પસંદિતનો સંગ્રહ કરો (_S)"
+msgstr "પસંદ કરેલ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
-msgstr ""
+msgstr "સર્વર-બાજુ ઈમેજ નક્શો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "સંગ્રહ કરો"
+msgstr "આકાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
-msgstr ""
+msgstr "ટૂંકુ લીટીમાંનુ અવતરણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Single line prompt"
-msgstr ""
+msgstr "એક લીટી પ્રોમ્પ્ટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "ટેબનું માપ"
+msgstr "માપ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "બધી લખાણ ફાઇલો"
+msgstr "નાની લખાણ શૈલી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
-msgstr ""
+msgstr "નરમ લીટી અટકણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
-msgstr ""
+msgstr "ધ્વનિ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "સંગ્રહ કરો"
+msgstr "જગ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
-msgstr ""
+msgstr "જગ્યાથી અલગ પડેલ પેટી યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "બદલો"
+msgstr "જગ્યા છોડનાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
-msgstr ""
+msgstr "ખાનાંઓ વચ્ચે જગ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Spacing within cells"
-msgstr ""
+msgstr "ખાનાંઓ વચ્ચે જગ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "સ્પેનીશ"
+msgstr "વિસ્તારો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
-msgstr ""
+msgstr "વર્ગમૂળ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
-msgstr ""
+msgstr "સ્ટેન્ડબાય લોડ સંદેશો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "લીટી ક્રમાંકો છાપો (_l)"
+msgstr "શરૂઆતનો ક્રમ નંબર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "ચેકી નાખો"
+msgstr "લખાણ ચેકી નાંખો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "ચેકી નાખો"
+msgstr "લખાણ શૈલી ચેકી નાંખો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
-msgstr ""
+msgstr "મજબૂત સંજ્ઞા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Style info"
-msgstr ""
+msgstr "શૈલી જાણકારી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Subscript"
-msgstr ""
+msgstr "સબસ્ક્રિપ્ટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "વર્ણન (_D)"
+msgstr "સુપરસ્ક્રિપ્ટ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
-msgstr ""
+msgstr "ટેબ ક્રમ સ્થિતિ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "સક્રિય કરાયેલ"
+msgstr "કોષ્ટક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
-msgstr ""
+msgstr "કોષ્ટક ભાગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
-#, fuzzy
 msgid "Table caption"
-msgstr "જગ્યા ખોલો"
+msgstr "કોષ્ટક શીર્ષક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column group properties"
-msgstr ""
+msgstr "કોષ્ટક સ્તંભ જૂથ ગુણધર્મો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table column properties"
-msgstr ""
+msgstr "કોષ્ટક સ્તંભ જૂથ ગુણધર્મો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table data cell"
-msgstr ""
+msgstr "કોષ્ટક માહિતી ખાનું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table footer"
-msgstr ""
+msgstr "કોષ્ટક ફુટર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Table header"
-msgstr ""
+msgstr "કોષ્ટક હેડર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table header cell"
-msgstr ""
+msgstr "કોષ્ટક હેડર ખાનું"
 
 #: plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table row"
-msgstr ""
+msgstr "કોષ્ટક હરોળ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table summary"
-msgstr ""
+msgstr "કોષ્ટક સાર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Target - Blank"
-msgstr ""
+msgstr "લક્ષ્ય - ખાલી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Target - Parent"
-msgstr ""
+msgstr "લક્ષ્ય - પિતૃ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Target - Self"
-msgstr ""
+msgstr "લક્ષ્ય - જાતે"
 
 #: plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Top"
-msgstr ""
+msgstr "લક્ષ્ય - ઉપર"
 
 #: plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "ટેલીટાઈપ અથવા મોનોસ્પેસ લખાણ શૈલી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
-msgstr ""
+msgstr "લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
-msgstr "લખાણનો રંગ"
+msgstr "લખાણ રંગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Text entered by user"
-msgstr ""
+msgstr "વપરાશકર્તા દ્વારા દાખલ થયેલ લખાણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Title"
@@ -4260,424 +4016,407 @@ msgstr "શીર્ષક"
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
-msgstr ""
+msgstr "ઉપરનો હાંસિય પિક્સેલમાં"
 
 #: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
-#, fuzzy
 msgid "Underlined text style"
-msgstr "નીચે લીટી કરો"
+msgstr "નીચે લીટીવાળી લખાણ શૈલી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "નીચે લીટી કરો"
+msgstr "ક્રમમાં નહિં એવી યાદી"
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
-msgstr ""
+msgstr "ઈમેજ નક્શો વાપરો"
 
 #: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
-msgstr ""
+msgstr "કિંમત"
 
 #: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
-msgstr ""
+msgstr "કિંમત ઓળખ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
-msgstr ""
+msgstr "ચલ અથવા કાર્યક્રમ દલીલ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "ખાનાંની ઊભી ગોઠવણ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "જગ્યાઓ ઊમેરો"
+msgstr "ઊભી જગ્યા"
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "પસંદ કરવા માટેનો રંગ પસંદ કરો"
+msgstr "મુલાકાત લીધેલ કડીનો રંગ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
-msgstr ""
+msgstr "પહોળાઈ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography cite"
-msgstr ""
+msgstr "સંદર્ભગ્રંથ સાઈટ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography item"
-msgstr ""
+msgstr "સંદર્ભગ્રંથ વસ્તુ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
 msgid "Bibliography shortcite"
-msgstr ""
+msgstr "સંદર્ભગ્રંથ ટૂંકી સાઈટ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
 msgid "Bibliography thebibliography"
-msgstr ""
+msgstr "સંદર્ભગ્રંથ એક સંદર્ભ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
-msgstr ""
+msgstr "કૌંસ &lt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
-msgstr ""
+msgstr "કૌંસ ()"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr ""
+msgstr "કૌંસ []"
 
 #: plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr ""
+msgstr "કૌંસ {}"
 
 #: plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr ""
+msgstr "ફાઈલ ઈનપુટ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "ફોન્ટ"
+msgstr "ફુટનોંધ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr ""
+msgstr "વિધેય cosin"
 
 #: plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
-msgstr ""
+msgstr "વિધેય e^"
 
 #: plugins/taglist/Latex.tags.xml.in.h:14
 msgid "Function exp"
-msgstr ""
+msgstr "વિધેય exp"
 
 #: plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr ""
+msgstr "વિધેય log"
 
 #: plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr ""
+msgstr "વિધેય log10"
 
 #: plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
-msgstr ""
+msgstr "વિધેય sine"
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "ગ્રીક"
+msgstr "ગ્રાક આલ્ફા"
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "ગ્રીક"
+msgstr "ગ્રીક બીટા"
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
-msgstr ""
+msgstr "ગ્રીક epsilon"
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "ગ્રીક"
+msgstr "ગ્રીક ગામા"
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
-msgstr ""
+msgstr "ગ્રીક lambda"
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "ગ્રીક"
+msgstr "ગ્રીક હો"
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "ગ્રીક"
+msgstr "ગ્રીક ટાઉ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
-msgstr ""
+msgstr "હેડર ૦ (પ્રકરણ)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:26
 msgid "Header 0 (chapter*)"
-msgstr ""
+msgstr "હેડર ૦ (પ્રકરણ*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:27
 msgid "Header 1 (section)"
-msgstr ""
+msgstr "હેડર ૧ (વિભાગ)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:28
 msgid "Header 1 (section*)"
-msgstr ""
+msgstr "હેડર ૧ (વિભાગ*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:29
 msgid "Header 2 (subsection)"
-msgstr ""
+msgstr "હેડર ૨ (ઉપવિભાગ)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:30
 msgid "Header 2 (subsection*)"
-msgstr ""
+msgstr "હેડર ૨ (ઉપવિભાગ*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:31
 msgid "Header 3 (subsubsection)"
-msgstr ""
+msgstr "હેડર ૩ (ઉપઉપવિભાગ)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:32
 msgid "Header 3 (subsubsection*)"
-msgstr ""
+msgstr "હેડર ૩ (ઉપઉપવિભાગ*)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:33
 msgid "Header 4 (paragraph)"
-msgstr ""
+msgstr "હેડર ૪ (ફકરો)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:34
 msgid "Header appendix"
-msgstr ""
+msgstr "હેડર પરિશિષ્ટ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:35
 msgid "Item"
-msgstr ""
+msgstr "વસ્તુ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:36
 msgid "Item with label"
-msgstr ""
+msgstr "લેબલ સાથેની વસ્તુ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr ""
+msgstr "Latex - નિશાનીઓ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "વર્ણન (_D)"
+msgstr "યાદી વર્ણન"
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
-msgstr ""
+msgstr "યાદી ગણો"
 
 #: plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
-msgstr ""
+msgstr "વસ્તુઓની યાદી"
 
 #: plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "ગણિત (ડિસ્પ્લે)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "ગણિત (લીટીમાં)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "જગ્યા ખોલો"
+msgstr "કારક અપૂર્ણાંક"
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "કારક ઈન્ટીગ્રલ (ડિસ્પ્લે)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "કારક ઈન્ટીગ્રલ (લીટીમાં)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "કારક સરવાળો (ડિસ્પ્લે)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "કારક સરવાળો (લીટીમાં)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "પસંદગીઓ"
+msgstr "સંદર્ભ લેબલ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "પસંદગીઓ"
+msgstr "સંદર્ભ રેફ"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
-msgstr ""
+msgstr "સંજ્ઞા &gt;&gt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
 msgid "Symbol &gt;="
-msgstr ""
+msgstr "સંજ્ઞા &gt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
 msgid "Symbol &lt;&lt;"
-msgstr ""
+msgstr "સંજ્ઞા &lt;&lt;"
 
 #: plugins/taglist/Latex.tags.xml.in.h:53
 msgid "Symbol &lt;="
-msgstr ""
+msgstr "સંજ્ઞા &lt;="
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr ""
+msgstr "સંજ્ઞા અને"
 
 #: plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr ""
+msgstr "સંજ્ઞા const"
 
 #: plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr ""
+msgstr "સંજ્ઞા d-by-dt"
 
 #: plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr ""
+msgstr "સંજ્ઞા d-by-dt-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr ""
+msgstr "સંજ્ઞા d2-by-dt2-partial"
 
 #: plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr ""
+msgstr "સંજ્ઞા dagger"
 
 #: plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr ""
+msgstr "સંજ્ઞા equiv"
 
 #: plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr ""
+msgstr "સંજ્ઞા hyphen --"
 
 #: plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr ""
+msgstr "સંજ્ઞા hyphen ---"
 
 #: plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr ""
+msgstr "સંજ્ઞા infinity"
 
 #: plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "સંજ્ઞા mathspace ,"
 
 #: plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "સંજ્ઞા mathspace ."
 
 #: plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "સંજ્ઞા mathspace _"
 
 #: plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "સંજ્ઞા mathspace __"
 
 #: plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr ""
+msgstr "સંજ્ઞા simeq"
 
 #: plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr ""
+msgstr "સંજ્ઞા star"
 
 #: plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
-msgstr ""
+msgstr "ટાઈપફેસ ઘાટું"
 
 #: plugins/taglist/Latex.tags.xml.in.h:71
 msgid "Typeface italic"
-msgstr ""
+msgstr "ટાઈપફેસ ઈટાલીક"
 
 #: plugins/taglist/Latex.tags.xml.in.h:72
 msgid "Typeface slanted"
-msgstr ""
+msgstr "ટાઈપફેસ તીરછું"
 
 #: plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "ટાઈપફેસ પ્રકાર"
 
 #: plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
-msgstr ""
+msgstr "નહિં તોડી શકાય તેવું લખાણ"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
-msgstr ""
+msgstr "XSLT - અક્ષો"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "ઘટકો"
+msgstr "XSLT - ઘટકો"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
-msgstr ""
+msgstr "XSLT - વિધેયો"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:4
 msgid "ancestor"
-msgstr ""
+msgstr "એન્સેસ્ટર"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:5
 msgid "ancestor-or-self"
-msgstr ""
+msgstr "એન્સેસ્ટર-અથવા-જાતે"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr ""
+msgstr "લક્ષણ"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
-msgstr ""
+msgstr "બાળ"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:8
 msgid "descendant"
-msgstr ""
+msgstr "ઉતરતું"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:9
 msgid "descendant-or-self"
-msgstr ""
+msgstr "ઉતરતું-અથવા-જાતે"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:10
 msgid "following"
-msgstr ""
+msgstr "નીચેનું"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:11
 msgid "following-sibling"
-msgstr ""
+msgstr "નીચેનું-સકળાયેલું"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "જગ્યાઓ ઊમેરો"
+msgstr "નામ જગ્યા"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "ખોલો"
+msgstr "પિતૃ"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
-msgstr ""
+msgstr "પહેલાનું"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:15
 msgid "preceding-sibling"
-msgstr ""
+msgstr "પહેલાનું-સંકળાયેલું"
 
 #: plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
-msgstr ""
+msgstr "જાતે"
 
 #: plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
@@ -4731,11 +4470,11 @@ msgstr "તારીખ/સમય ઉમેરો... (_s)"
 msgid "Insert current date and time at the cursor position"
 msgstr "કર્સર સ્થાન પર વર્તમાન તારીખ અને સમય ઉમેરો"
 
-#: plugins/time/time.c:445
+#: plugins/time/time.c:455
 msgid "Available formats"
 msgstr "પ્રાપ્ત બંધારણો"
 
-#: plugins/time/time.c:553
+#: plugins/time/time.c:563
 msgid "Configure insert date/time plugin..."
 msgstr "સમય/તારીખ ઉમેરો પ્લગઈનને રુપરેખાંકિત કરો..."
 
@@ -4779,256 +4518,3 @@ msgstr "બંધારણ માટે પ્રોમ્પ્ટ (_P)"
 msgid "_Use custom format"
 msgstr "કસ્ટમ બંધારણ વાપરો (_U)"
 
-#~ msgid "Irish (Gaeilge)"
-#~ msgstr "ઈરીશ (ગાઈલેજ)"
-
-#, fuzzy
-#~ msgid "Document ID"
-#~ msgstr "દસ્તાવેજો (_D)"
-
-#, fuzzy
-#~ msgid "Document version"
-#~ msgstr "દસ્તાવેજો (_D)"
-
-#~ msgid "Do_n't save"
-#~ msgstr "સંગ્રહ કરો નહિ (_n)"
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "If you don't save, changes from the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા %d કલાકના બદલાવો કાયમ માટે ખોવાઈ જશે."
-#~ msgstr[1] "જો તમે સંગ્રહ કરો નહિ, તો છેલ્લા %d કલાકોના બદલાવો કાયમ માટે ખોવાઈ જશે."
-
-#~ msgid "Body font picker"
-#~ msgstr "ધડ માટેના ફોન્ટ પસંદ કરનાર"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the body of the "
-#~ "document"
-#~ msgstr "દસ્તાવેજનું ધડ છાપવા માટે વાપરવાના ફોન્ટ પસંદ કરવા આ બટન દબાવો"
-
-#~ msgid "Page headers font picker"
-#~ msgstr "પાનાની હેડરો માટેના ફોન્ટ પસંદ કરનાર"
-
-#~ msgid ""
-#~ "Push this button to select the font to be used to print the page headers"
-#~ msgstr "પાનાની હેડરો છાપવા માટે વાપરવાના ફોન્ટ પસંદ કરાવા આ બટન દબાવો"
-
-#~ msgid "Line numbers font picker"
-#~ msgstr "લીટી ક્રમાંકો માટે ફોન્ટ પસંદ કરનાર"
-
-#~ msgid "Push this button to select the font to be used to print line numbers"
-#~ msgstr "લીટી ક્રમાંકો છાપવા માટે વાપરવાના ફોન્ટ પસંદ કરાવા આ બટન દબાવો"
-
-#~ msgid ""
-#~ "Changes made to the document in the last %d hour will be permanently lost."
-#~ msgid_plural ""
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr[0] "દસ્તાવેજમાં છેલ્લા %d કલાકમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
-#~ msgstr[1] "દસ્તાવેજમાં છેલ્લા %d કલાકોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because gedit cannot handle %s: locations."
-#~ msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ કારણકે જીએડીટ %s સ્થાન સંભાળી શકતુ નથી."
-
-#~ msgid "Could not open the file \"%s\" because access was denied."
-#~ msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ કારણકે તેને પ્રાપ્ત કરવા માટે મનાઈ હતી."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the host name was invalid.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલ ખોલી શકાતી નથી કારણ કે યજમાન નામ અયોગ્ય છે.\n"
-#~ "\n"
-#~ "મહેરબાની કરીને, ચકાસો કે તમે લખેલુ સ્થાન બરાબર છે અને ફરીથી પ્રયત્ન કરો."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because no host \"%s\" could be found.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and that your proxy "
-#~ "settings are correct and then try again."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલ મળતી નથી કારણકે કાેઈ યજમાન \"%s\" મળી શક્યાે નહિ.\n"
-#~ "\n"
-#~ "મહેરબાની કરીને, ચકાસો કે તમે લખેલું સ્થાન અને પ્રોક્સી સુયોજના સાચા છે અને ફરીથી પ્રયત્ન "
-#~ "કરો."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\" because the attempt to log in failed.\n"
-#~ "\n"
-#~ "Please, check that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલ ખોલી શકાતી નથી કારણકે પ્રવેશ કરવાના પ્રયાસમાં નિષ્ફળ.\n"
-#~ "\n"
-#~ "મહેરબાની કરીને, ચકાસો કે તમે લખેલુ સ્થાન બરાબર છે અને ફરીથી પ્રયત્ન કરો."
-
-#~ msgid "Could not open the file \"%s\"."
-#~ msgstr "\"%s\" ફાઇલ ખોલી શકાઈ નહિ."
-
-#~ msgid ""
-#~ "Could not open the file \"%s\".\n"
-#~ "\n"
-#~ "%s."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલ ખોલી શકાઈ નહિ.\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "Could not save the file \"%s\".\n"
-#~ "\n"
-#~ "%s"
-#~ msgstr ""
-#~ "\"%s\" ફાઇલનો સંગ્રહ થઈ શક્યો નહિ.\n"
-#~ "\n"
-#~ "%s"
-
-#~ msgid "Could not revert the file \"%s\" because it contains corrupted data."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં લાવી શકાઈ નથી કારણકે તે બગડેલી માહિતી ધરાવે છે."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because gedit cannot handle %s: "
-#~ "locations."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં લાવી શકાઈ નથી કારણકે જીએડીટ %s સ્થાન સંભાળી શકતુ "
-#~ "નથીઃ  જગ્યાઓ."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because it contains data in an invalid "
-#~ "format."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં પાછી લાવી શકાઈ નથી કારણકે તે અયોગ્ય બંધારણમાં "
-#~ "માહિતી ઘરાવે છે."
-
-#~ msgid "Could not revert the file \"%s\" because it is too big."
-#~ msgstr "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં લાવી શકાઈ નથી કારણકે તે ખૂબ મોટી છે."
-
-#~ msgid "Could not revert the file \"%s\" because access was denied."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં લાવી શકાઈ નથી કારણકે તેને પ્રાપ્ત કરવા માટે મનાઈ "
-#~ "હતી."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because there are too many open files.\n"
-#~ "\n"
-#~ "Please, close some open file and try again."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં લાવી શકાઈ નથી કારણકે ઘણી બધી ફાઇલો ખુલેલી છે.\n"
-#~ "\n"
-#~ "મહેરબાની કરીને, થોડી ખૂલેલી ફાઇલો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
-
-#~ msgid ""
-#~ "Not enough available memory to revert the file \"%s\". Please, close some "
-#~ "running application and try again."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં લઈ જવા માટે પર્યાપ્ત મેમરી પ્રાપ્ત નથી. મહેરબાની "
-#~ "કરીને, કેટલાક ચાલુ કાર્યક્રમો બંધ કરો અને ફરીથી પ્રયત્ન કરો."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the host name was empty.\n"
-#~ "\n"
-#~ "Please, check that your proxy settings are correct and try again."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં પાછી લાવી શકાઈ નથી કારણકે યજમાન નામ ખાલી છે.\n"
-#~ "\n"
-#~ "મહેરબાની કરીને, તમારા પ્રોક્સી સુયોજનો બરાબર છે તે તપાસો અને ફરીથી પ્રયત્ન કરો."
-
-#~ msgid ""
-#~ "Could not revert the file \"%s\" because the attempt to log in failed."
-#~ msgstr ""
-#~ "\"%s\" ફાઇલને પહેલાની સ્થિતિમાં પાછી લાવી શકાઈ નથી કારણકે પ્રવેશ નિષ્ફળ ગયો."
-
-#~ msgid "Could not find plugin-manager.glade2, reinstall gedit.\n"
-#~ msgstr "plugin-manager.glade2 શોધી શકાઈ નહિ, જીએડીટ ફરીથી સ્થાપિત કરો.\n"
-
-#~ msgid "Invalid glade file for plugin manager -- not all widgets found.\n"
-#~ msgstr "પ્લગઈન સંચાલક માટે અયોગ્ય ગ્લેડ ફાઇલ -- બધા વિજેટો મળતા નથી.\n"
-
-#~ msgid "_Insert a new preview phrase."
-#~ msgstr "નવો પૂર્વદર્શન મહાવરો ઊમેરો. (_I)"
-
-#~ msgid "Modify preview phrase..."
-#~ msgstr "પૂર્વદર્શન મહાવરાને બદલો..."
-
-#~ msgid "Preview"
-#~ msgstr "પૂર્વદર્શન"
-
-#~ msgid "_Modify preview phrase..."
-#~ msgstr "પૂર્વદર્શન મહાવરાને બદલો... (_M)"
-
-#~ msgid "Sans Regular 12"
-#~ msgstr "નિયમિત સાન્સ ૧૨"
-
-#~ msgid "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
-#~ msgstr "કખગઘચ"
-
-#~ msgid "Pick a Font"
-#~ msgstr "ફોન્ટ પસંદ કરો"
-
-#~ msgid "The title of the selection dialog box"
-#~ msgstr "પસંદગી સંવાદ પેટીનું શીર્ષક"
-
-#~ msgid "Name of the selected font"
-#~ msgstr "પસંદ કરેલ ફોન્ટનું નામ"
-
-#~ msgid "Preview text shown in the dialog"
-#~ msgstr "સંવાદમાં પ્રદર્શિત લખાણનું પૂર્વદર્શન"
-
-#~ msgid "Use font in the label in font info mode"
-#~ msgstr "ફોન્ટની જાણકારી સ્થિતિમાં લેબલ માટે ફોન્ટ વાપરો"
-
-#~ msgid "Font size for label"
-#~ msgstr "લેબલ માટે ફોન્ટનું માપ"
-
-#~ msgid "Font size for label in font info mode"
-#~ msgstr "ફોન્ટની જાણકારી સ્થિતિમાં લેબલ માટે ફોન્ટનું માપ"
-
-#~ msgid "Show size in font info mode"
-#~ msgstr "ફોન્ટની જાણકારી સ્થિતિમાં માપ દર્શાવો"
-
-#~ msgid "(modified)"
-#~ msgstr "(ફેરફાર કરેલ)"
-
-#~ msgid "Untitled"
-#~ msgstr "શીર્ષક વગરનું"
-
-#~ msgid "Error, unable to open module file '%s'\n"
-#~ msgstr "ભૂલ, '%s' મોડ્યુલ ફાઇલ ખોલવામાં અસમર્થ\n"
-
-#~ msgid "Error, plugin '%s' does not contain init function."
-#~ msgstr "ભૂલ, '%s' પ્લગઈન init વિધેય ધરાવતું નથી."
-
-#~ msgid "Error, plugin '%s' does not contain activate function."
-#~ msgstr "ભૂલ, '%s' પ્લગઈન સક્રિય કરવા માટેનુ વિધેય ધરાવતું નથી."
-
-#~ msgid "Error, plugin '%s' does not contain deactivate function."
-#~ msgstr "ભૂલ, '%s' પ્લગઈન નિષ્ક્રિય કરવા માટેનુ વિધેય ધરાવતું નથી."
-
-#~ msgid "Error, impossible to initialize plugin '%s'"
-#~ msgstr "ભૂલ, '%s' પ્લગઈનનો પ્રારંભ અશક્ય છે"
-
-#~ msgid "Error, impossible to destroy plugin '%s'"
-#~ msgstr "ભૂલ, '%s' પ્લગઈનનો નાશ કરવો અશક્ય છે"
-
-#~ msgid "Error, impossible to activate plugin '%s'"
-#~ msgstr "ભૂલ, '%s' પ્લગઈનને સક્રિય કરવું અશક્ય છે"
-
-#~ msgid "Error, impossible to deactivate plugin '%s'"
-#~ msgstr "ભૂલ, '%s' પ્લગઈનને નિષ્ક્રિય કરવું અશક્ય છે"
-
-#~ msgid "Error, impossible to update ui of the plugin '%s'"
-#~ msgstr "ભૂલ, '%s' પ્લગઈનના ui ને સુધારવુ અશક્ય છે"
-
-#~ msgid "Save method not implemented for gedit viewer"
-#~ msgstr "જીએડીટ દર્શક માટે નહિ બનાવાઈ હોય તે પદ્ધતિ સંગ્રહો"
-
-#~ msgid "Copy the selected text to the clipboard"
-#~ msgstr "પસંદ કરેલ લખાણ ક્લિપબોર્ડમાં નકલ કરો"
-
-#~ msgid "_Copy Text"
-#~ msgstr "લખાણની નકલ કરો (_C)"
