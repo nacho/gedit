@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit-0.7.1\n"
-"POT-Creation-Date: 2000-04-28 00:20+0200\n"
-"PO-Revision-Date: 2000-04-28 00:23+02:00\n"
+"POT-Creation-Date: 2000-04-29 19:04+0200\n"
+"PO-Revision-Date: 2000-04-29 19:27+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid "Diff plugin."
 msgstr "Diff-tillegg."
 
 #: plugins/email/email.c:131 plugins/email/email.c:138 src/document.c:160
-#: src/print.c:435
+#: src/print.c:404
 msgid "Untitled"
 msgstr "Navnløs"
 
@@ -164,7 +164,7 @@ msgstr "Utseende"
 #. auto_indent_toggle_cb, NULL,
 #. NULL),
 #.
-#: src/dialogs/prefs.glade.h:8 src/menus.c:213
+#: src/dialogs/prefs.glade.h:8 src/menus.c:211
 msgid "Show Statusbar"
 msgstr "Vis statuslinje"
 
@@ -273,8 +273,8 @@ msgid "Add header"
 msgstr "Legg til header"
 
 #: src/dialogs/prefs.glade.h:40
-msgid "Wrap long lines at the page width"
-msgstr "Bryt lange linjer ved sidens bredde"
+msgid "Enable word wrapping"
+msgstr "Slå på ordbryting"
 
 #: src/dialogs/prefs.glade.h:41
 msgid "Print line numbers every:"
@@ -329,7 +329,7 @@ msgstr "Baklengs søk"
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:368
+#: src/dialogs/search.glade.h:7 src/dialogs/search.glade.h:8 src/menus.c:366
 msgid "Find"
 msgstr "Finn"
 
@@ -476,7 +476,7 @@ msgstr "Åpne (bytt) .c/.h fil"
 msgid "_New"
 msgstr "_Ny"
 
-#: src/menus.c:61 src/menus.c:327
+#: src/menus.c:61 src/menus.c:325
 msgid "Create a new document"
 msgstr "Opprett et nytt dokument"
 
@@ -509,6 +509,14 @@ msgstr "Lukk alt"
 msgid "Close All Open Files"
 msgstr "Lukk alle åpne filer"
 
+#: src/menus.c:114
+msgid "Find _In Files..."
+msgstr "Finn _i filer..."
+
+#: src/menus.c:115
+msgid "Find text in all open files"
+msgstr "Finn tekst i alle åpne filer"
+
 #: src/menus.c:127
 msgid "Goto _Line..."
 msgstr "Gå til _linje..."
@@ -533,108 +541,144 @@ msgstr "Fje_rn visning"
 msgid "Remove view of the document"
 msgstr "Fjern visning for dokumentet"
 
-#: src/menus.c:214
+#: src/menus.c:163
+msgid "_Top"
+msgstr "_Øverst"
+
+#: src/menus.c:164
+msgid "Put the document tabs at the top"
+msgstr "Plasser dokumentfanene øverst"
+
+#: src/menus.c:169
+msgid "_Bottom"
+msgstr "_Nederst"
+
+#: src/menus.c:170
+msgid "Put the document tabs at the bottom"
+msgstr "Plasser dokumentfanene nederst"
+
+#: src/menus.c:175
+msgid "_Left"
+msgstr "_Venstre"
+
+#: src/menus.c:176
+msgid "Put the document tabs on the left"
+msgstr "Plasser dokumentfanene til venstre"
+
+#: src/menus.c:181
+msgid "_Right"
+msgstr "_Høyre"
+
+#: src/menus.c:182
+msgid "Put the document tabs on the right"
+msgstr "Plasser dokumentfanene til høyre"
+
+#: src/menus.c:190
+msgid "Toggle the presence of the document tabs"
+msgstr "Slå av/på visning av dokumentfanene"
+
+#: src/menus.c:212
 msgid ""
 "Enable or disable the statusbar at the bottom of this application window."
 msgstr "Slå på eller av statuslinjen nederst i applikasjonsvinduet."
 
-#: src/menus.c:310 src/plugin.c:111 src/plugin.c:201
+#: src/menus.c:308 src/plugin.c:111 src/plugin.c:201
 msgid "_Plugins"
 msgstr "_Tillegg"
 
-#: src/menus.c:327
+#: src/menus.c:325
 msgid "New"
 msgstr "Ny"
 
-#: src/menus.c:331
+#: src/menus.c:329
 msgid "Open"
 msgstr "Åpne"
 
-#: src/menus.c:331
+#: src/menus.c:329
 msgid "Open a file"
 msgstr "Åpne en fil"
 
-#: src/menus.c:335
+#: src/menus.c:333
 msgid "Save"
 msgstr "Lagre"
 
-#: src/menus.c:335
+#: src/menus.c:333
 msgid "Save the current file"
 msgstr "Lagre aktiv fil"
 
-#: src/menus.c:339
+#: src/menus.c:337
 msgid "Close"
 msgstr "Lukk"
 
-#: src/menus.c:339
+#: src/menus.c:337
 msgid "Close the current file"
 msgstr "Lukk aktiv fil"
 
-#: src/menus.c:343
+#: src/menus.c:341
 msgid "Print"
 msgstr "Skriv ut"
 
-#: src/menus.c:343
+#: src/menus.c:341
 msgid "Print the current file"
 msgstr "Skriv ut aktiv fil"
 
-#: src/menus.c:348
+#: src/menus.c:346
 msgid "Undo"
 msgstr "Angre"
 
-#: src/menus.c:348
+#: src/menus.c:346
 msgid "Undo last operation"
 msgstr "Angre forrige operasjon"
 
-#: src/menus.c:352
+#: src/menus.c:350
 msgid "Redo"
 msgstr "Gjenopprett"
 
-#: src/menus.c:352
+#: src/menus.c:350
 msgid "Redo last operation"
 msgstr "Gjenopprett forrige operasjon"
 
-#: src/menus.c:356
+#: src/menus.c:354
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: src/menus.c:356
+#: src/menus.c:354
 msgid "Cut the selection"
 msgstr "Klipp ut utvalget"
 
-#: src/menus.c:360
+#: src/menus.c:358
 msgid "Copy"
 msgstr "Kopiér"
 
-#: src/menus.c:360
+#: src/menus.c:358
 msgid "Copy the selection"
 msgstr "Kopiér utvalget"
 
-#: src/menus.c:364
+#: src/menus.c:362
 msgid "Paste"
 msgstr "Lim inn"
 
-#: src/menus.c:364
+#: src/menus.c:362
 msgid "Paste the clipboard"
 msgstr "Lim inn utklippstavlen"
 
-#: src/menus.c:368
+#: src/menus.c:366
 msgid "Search for a string"
 msgstr "Søk etter en streng"
 
-#: src/menus.c:372 src/window.c:55
+#: src/menus.c:370 src/window.c:55
 msgid "Line"
 msgstr "Linje"
 
-#: src/menus.c:372
+#: src/menus.c:370
 msgid "Get the current and total lines"
 msgstr "Hent nåværende og totalt antall linjer"
 
-#: src/menus.c:377
+#: src/menus.c:375
 msgid "Exit"
 msgstr "Avslutt"
 
-#: src/menus.c:377
+#: src/menus.c:375
 msgid "Exit the program"
 msgstr "Avslutt programmet"
 
@@ -655,16 +699,16 @@ msgstr "Feil, init_plugin returnerte en feil"
 msgid "Error, plugin is still in use"
 msgstr "Feil, tillegg er fremdeles i bruk"
 
-#: src/print.c:156
+#: src/print.c:148
 msgid "Pages"
 msgstr "Sider"
 
-#: src/print.c:196
+#: src/print.c:187
 #, c-format
 msgid "gedit (%s): Print Preview"
 msgstr "gedit (%s): Utskriftsforhåndsvisning"
 
-#: src/print.c:547
+#: src/print.c:520
 #, c-format
 msgid "Page: %i/%i"
 msgstr "Side: %i %i"
