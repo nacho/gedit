@@ -63,7 +63,7 @@
 #define IGNORE_BLANKS		"/ignore-blanks"
 
 #define MENU_ITEM_LABEL		N_("Co_mpare Files...")
-#define MENU_ITEM_PATH		"/menu/File/FileOps_2/"
+#define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_3/"
 #define MENU_ITEM_NAME		"Diff"	
 #define MENU_ITEM_TIP		N_("Makes a diff file from two documents or files")
 

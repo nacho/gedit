@@ -53,12 +53,10 @@
 #include <gedit-mdi.h>
 #include <gedit-output-window.h>
 
-#define MENU_ITEM_LABEL		N_("_Execute Shell Command...")
+#define MENU_ITEM_LABEL		N_("_Run Command...")
 #define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_3/"
 #define MENU_ITEM_NAME		"PluginShellOutput"	
-#define MENU_ITEM_TIP		N_("Execute a shell command")
-
-#define SHELL_OUTPUT_LOGO "/shell-output-logo.png"
+#define MENU_ITEM_TIP		N_("Run a command")
 
 typedef struct _ShellOutputDialog ShellOutputDialog;
 
@@ -72,7 +70,6 @@ typedef enum {
 struct _ShellOutputDialog {
 	GtkWidget *dialog;
 
-	GtkWidget *logo;
 	GtkWidget *command;
 	GtkWidget *command_list;
 	GtkWidget *command_label;
@@ -302,7 +299,7 @@ get_dialog (void)
 	dialog->toplevel_window = window;
 
 
-	dialog->dialog = gtk_dialog_new_with_buttons (_("Shell output"),
+	dialog->dialog = gtk_dialog_new_with_buttons (_("Run Command"),
 						      window,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_HELP,
@@ -324,8 +321,6 @@ get_dialog (void)
 
 	g_return_val_if_fail (content != NULL, NULL);
 
-	dialog->logo		= glade_xml_get_widget (gui, "logo");
- 
 	dialog->command    	= glade_xml_get_widget (gui, "command_entry");
 	dialog->command_list   	= glade_xml_get_widget (gui, "command_entry_list");
 
@@ -336,7 +331,6 @@ get_dialog (void)
 	dialog->command_label  	= glade_xml_get_widget (gui, "command_label");
 	dialog->directory_label	= glade_xml_get_widget (gui, "directory_label");
 
-	g_return_val_if_fail (dialog->logo != NULL, NULL);
 	g_return_val_if_fail (dialog->command != NULL, NULL);
 	g_return_val_if_fail (dialog->command_label != NULL, NULL);
 	g_return_val_if_fail (dialog->command_list != NULL, NULL);
@@ -344,9 +338,6 @@ get_dialog (void)
 	g_return_val_if_fail (dialog->directory_fileentry != NULL, NULL);
 	g_return_val_if_fail (dialog->directory_label != NULL, NULL);
 	g_return_val_if_fail (dialog->capture_output != NULL, NULL);
-
-	/* stick the shell_output logo in there */
-	gtk_image_set_from_file (GTK_IMAGE (dialog->logo), GNOME_ICONDIR SHELL_OUTPUT_LOGO);
 
 	gtk_entry_set_text (GTK_ENTRY (dialog->directory), current_directory);
 

@@ -23,8 +23,8 @@
 /* Key in case the plugin ever needs any settings */
 #define SORT_BASE_KEY "/apps/gedit-2/plugins/sort"
 
-#define MENU_ITEM_LABEL		N_("Sor_t...")
-#define MENU_ITEM_PATH		"/menu/File/FileOps_2/"
+#define MENU_ITEM_LABEL		N_("S_ort...")
+#define MENU_ITEM_PATH		"/menu/Edit/EditOps_6/"
 #define MENU_ITEM_NAME		"Sort"
 #define MENU_ITEM_TIP		N_("Sort the current document or selection.")
 
