@@ -804,12 +804,12 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 	/*
 	if (close)
 	{
-		gtk_signal_disconnect_by_func (GTK_OBJECT (child), 
-				       G_CALLBACK (gedit_mdi_child_state_changed_handler),
-				       NULL);
-		gtk_signal_disconnect_by_func (GTK_OBJECT (child), 
-				       G_CALLBACK (gedit_mdi_child_undo_redo_state_changed_handler),
-				       NULL);
+		g_signal_handlers_disconnect_by_func (child, 
+						      G_CALLBACK (gedit_mdi_child_state_changed_handler),
+						      NULL);
+		g_signal_handlers_disconnect_by_func (GTK_OBJECT (child), 
+						      G_CALLBACK (gedit_mdi_child_undo_redo_state_changed_handler),
+						      NULL);
 	}
 	*/
 	

@@ -331,7 +331,7 @@ bonobo_mdi_destroy (GtkObject *object)
 	   upon mdi creation. */
 	/*
 	if(G_OBJECT (object)->ref_count > 0 && !GTK_OBJECT_DESTROYED (object))
-		gtk_object_unref (object);
+		g_object_unref (G_OBJECT (object));
 	*/
 
 	if(GTK_OBJECT_CLASS (parent_class)->destroy)
@@ -1082,10 +1082,10 @@ static void app_set_view
 	
 
 	/* free previous child ui-info */
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
+	ui_info = g_object_get_data(G_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
 	if(ui_info != NULL) {
 		free_ui_info_tree(ui_info);
-		gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, NULL);
+		g_object_set_data(G_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, NULL);
 	}
 	ui_info = NULL;
 	
@@ -1093,7 +1093,7 @@ static void app_set_view
 		parent = gnome_app_find_menu_pos(app->menubar, mdi->child_menu_path, &pos);
 
 	/* remove old child-specific menus */
-	items = GPOINTER_TO_INT(gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY));
+	items = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY));
 	if(items > 0 && parent) {
 		GtkWidget *widget;
 
@@ -1145,7 +1145,7 @@ static void app_set_view
 			if( child->menu_template &&
 				( (ui_info = copy_ui_info_tree(child->menu_template)) != NULL) ) {
 				gnome_app_insert_menus_with_data(app, mdi->child_menu_path, ui_info, child);
-				gtk_object_set_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
+				g_object_set_data(G_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY, ui_info);
 				items = count_ui_info_items(ui_info);
 			}
 			else {
@@ -1174,7 +1174,7 @@ static void app_set_view
 	else
 		gtk_window_set_title (GTK_WINDOW (win), mdi->priv->title);
 #if 0
-	gtk_object_set_data (GTK_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
+	g_object_set_data (G_OBJECT(app), GNOME_MDI_ITEM_COUNT_KEY, GINT_TO_POINTER(items));
 	
 	if (parent)
 		gtk_widget_queue_resize (parent);
@@ -1191,15 +1191,15 @@ app_destroy (BonoboWindow *win, BonoboMDI *mdi)
 #if 0
 	/* free stuff that got allocated for this BonoboWindow */
 
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_MENUBAR_INFO_KEY);
+	ui_info = g_object_get_data(G_OBJECT(app), GNOME_MDI_MENUBAR_INFO_KEY);
 	if(ui_info)
 		free_ui_info_tree(ui_info);
 	
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_TOOLBAR_INFO_KEY);
+	ui_info = g_object_get_data(G_OBJECT(app), GNOME_MDI_TOOLBAR_INFO_KEY);
 	if(ui_info)
 		free_ui_info_tree(ui_info);
 	
-	ui_info = gtk_object_get_data(GTK_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
+	ui_info = g_object_get_data(G_OBJECT(app), GNOME_MDI_CHILD_MENU_INFO_KEY);
 	if(ui_info)
 		free_ui_info_tree(ui_info);
 #endif
