@@ -44,8 +44,12 @@
 #define MISSING_WIDGETS N_("Could not find the required widgets inside\"%s\". Please, reinstall gedit.")
 
 
-void	gedit_utils_flash     (gchar *msg);
+void	gedit_utils_flash     (const gchar *msg);
 void	gedit_utils_flash_va  (gchar *format, ...);
+
+void	gedit_utils_set_status    (const gchar *msg);
+void	gedit_utils_set_status_va (gchar *format, ...);
+
 
 gboolean gedit_utils_is_uri_read_only (const gchar* uri);
 gboolean gedit_utils_uri_has_file_scheme (const gchar *uri);
@@ -66,7 +70,7 @@ void gedit_utils_error_reporting_saving_file  (const gchar *uri,
 					       GError *error,
 					       GtkWindow *parent);
 void gedit_utils_error_reporting_reverting_file (const gchar *uri, 
-					       GError *error,
+					       const GError *error,
 					       GtkWindow *parent);
 void gedit_utils_error_reporting_creating_file (const gchar *uri,
 						gint error_code,

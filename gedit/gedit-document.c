@@ -5,6 +5,7 @@
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2002, 2003, 2004 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2004. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -43,6 +44,8 @@
 #include <libgnome/libgnome.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <eel/eel-vfs-extensions.h>
+#include <eel/eel-glib-extensions.h>
+
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 
 #include "gedit-prefs-manager-app.h"
@@ -57,6 +60,16 @@
 
 #include <gtksourceview/gtksourceiter.h>
 
+#undef ENABLE_PROFILE 
+
+#ifdef ENABLE_PROFILE
+#define PROFILE(x) x
+#else
+#define PROFILE(x)
+#endif
+
+PROFILE (static GTimer *timer = NULL);
+
 #ifdef MAXPATHLEN
 #define GEDIT_MAX_PATH_LEN  MAXPATHLEN
 #elif defined (PATH_MAX)
@@ -67,28 +80,37 @@
 
 struct _GeditDocumentPrivate
 {
-	gchar		*uri;
-	gint 		 untitled_number;	
+	gchar		    *uri;
+	gint 		     untitled_number;	
 
-	gchar		*encoding;
+	gchar		    *encoding;
 
-	gchar		*last_searched_text;
-	gchar		*last_replace_text;
-	gboolean  	 last_search_was_case_sensitive;
-	gboolean  	 last_search_was_entire_word;
+	gchar		    *last_searched_text;
+	gchar		    *last_replace_text;
+	gboolean  	     last_search_was_case_sensitive;
+	gboolean  	     last_search_was_entire_word;
 
-	guint		 auto_save_timeout;
-	gboolean	 last_save_was_manually; 
+	guint		     auto_save_timeout;
+	gboolean	     last_save_was_manually; 
 
-	GTimeVal 	 time_of_last_save_or_load;
+	GTimeVal 	     time_of_last_save_or_load;
 
-	gboolean 	 readonly;
+	gboolean 	     readonly;
+
+	/* Info needed for implementing async loading */
+	EelReadFileHandle   *read_handle;
+	GnomeVFSAsyncHandle *info_handle;
+
+	const GeditEncoding *temp_encoding;
+	gchar		    *temp_uri;
+	gulong		     temp_size;
 };
 
 enum {
 	NAME_CHANGED,
 	SAVED,
 	LOADED,
+	LOADING,
 	READONLY_CHANGED,
 	CAN_FIND_AGAIN,
 	LAST_SIGNAL
@@ -99,7 +121,8 @@ static void gedit_document_init 		(GeditDocument 		*document);
 static void gedit_document_finalize 		(GObject 		*object);
 
 static void gedit_document_real_name_changed		(GeditDocument *document);
-static void gedit_document_real_loaded			(GeditDocument *document);
+static void gedit_document_real_loaded			(GeditDocument *document,
+							 const GError  *error);
 static void gedit_document_real_saved			(GeditDocument *document);
 static void gedit_document_real_readonly_changed	(GeditDocument *document,
 							 gboolean readonly);
@@ -226,9 +249,23 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GeditDocumentClass, loaded),
 			      NULL, NULL,
-			      gedit_marshal_VOID__VOID,
+			      gedit_marshal_VOID__POINTER,
 			      G_TYPE_NONE,
-			      0);
+			      1,
+			      G_TYPE_POINTER);
+
+	document_signals[LOADING] =
+   		g_signal_new ("loading",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, loading),
+			      NULL, NULL,
+			      gedit_marshal_VOID__ULONG_ULONG,
+			      G_TYPE_NONE,
+			      2,
+			      G_TYPE_ULONG,
+			      G_TYPE_ULONG);
+
 	
 	document_signals[SAVED] =
    		g_signal_new ("saved",
@@ -359,6 +396,7 @@ gedit_document_finalize (GObject *object)
 	g_free (document->priv->encoding);
 
 	g_free (document->priv);
+	document->priv = NULL;
 	
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
@@ -398,8 +436,7 @@ gedit_document_new (void)
  **/
 GeditDocument*
 gedit_document_new_with_uri (const gchar          *uri,  
-			     const GeditEncoding  *encoding, 
-			     GError              **error)
+			     const GeditEncoding  *encoding)
 {
  	GeditDocument *document;
 
@@ -412,13 +449,7 @@ gedit_document_new_with_uri (const gchar          *uri,
 	g_return_val_if_fail (document->priv != NULL, NULL);
 	document->priv->uri = g_strdup (uri);
 
-	if (!gedit_document_load (document, uri, encoding, error))
-	{
-		gedit_debug (DEBUG_DOCUMENT, "ERROR");
-
-		g_object_unref (document);
-		return NULL;
-	}
+	gedit_document_load (document, uri, encoding);
 	
 	return document;
 }
@@ -509,13 +540,17 @@ gedit_document_real_name_changed (GeditDocument *document)
 }
 
 static void 
-gedit_document_real_loaded (GeditDocument *document)
+gedit_document_real_loaded (GeditDocument *document, const GError *error)
 {
 	gchar *data;
 
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_return_if_fail (document != NULL);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (document));
+
+	if (error != NULL)
+		return;
+
 	g_return_if_fail (document->priv->uri != NULL);
 
 	/* FIXME: commented since it does not work as expected - Paolo */
@@ -717,65 +752,47 @@ gedit_document_auto_save (GeditDocument* doc, GError **error)
 	return TRUE;
 }
 
-/**
- * gedit_document_load:
- * @doc: a GeditDocument
- * @uri: the URI of the file that has to be loaded
- * @error: return location for error or NULL
- * 
- * Read a document from a file
- *
- * Return value: TRUE if the file is correctly loaded
- **/
-gboolean
-gedit_document_load (GeditDocument        *doc, 
-		     const gchar          *uri, 
-		     const GeditEncoding  *encoding,
-		     GError              **error)
+/* NOTE: thie function frees file_contents */
+static gboolean
+update_document_contents (GeditDocument        *doc, 
+			  const gchar          *uri,
+		          const gchar          *file_contents,
+			  gint                  file_size,
+			  const GeditEncoding  *encoding,
+			  GError              **error)
 {
-	gchar* file_contents;
-	GnomeVFSResult res;
-   	gint file_size;
 	GtkTextIter iter, end;
+
+	PROFILE (
+		g_message ("Delete previous text %s: %.3f", uri, g_timer_elapsed (timer, NULL));
+	)
 	
-	gedit_debug (DEBUG_DOCUMENT, "File to load: %s", uri);
-
-	g_return_val_if_fail (doc != NULL, FALSE);
-	g_return_val_if_fail (uri != NULL, FALSE);
-
-	res = gnome_vfs_read_entire_file (uri, &file_size, &file_contents);
-
-	gedit_debug (DEBUG_DOCUMENT, "End reading %s (result: %s)", uri, gnome_vfs_result_to_string (res));
-	
-	if (res != GNOME_VFS_OK)
-	{
-		g_set_error (error, 
-			     GEDIT_DOCUMENT_IO_ERROR, 
-			     res,
-			     gnome_vfs_result_to_string (res));
-		return FALSE;
-	}
+	PROFILE (
+		g_message ("Deleted: %.3f", g_timer_elapsed (timer, NULL));
+	)
 
 	if (file_size > 0)
 	{
 		GError *conv_error = NULL;
-		gchar *converted_text;
-		gint len = -1;
+		gchar  *converted_text;
+		gint    len = -1;
+
+		g_return_val_if_fail (file_contents != NULL, FALSE);
 
 		if (encoding == gedit_encoding_get_utf8 ())
 		{
 			if (g_utf8_validate (file_contents, file_size, NULL))
 			{
-				converted_text = file_contents;
+				converted_text = (gchar *)file_contents;
 				len = file_size;
 				file_contents = NULL;
 			}
 			else
 			{
 				converted_text = NULL;
-				g_set_error (&conv_error, GEDIT_CONVERT_ERROR, 
-					GEDIT_CONVERT_ERROR_ILLEGAL_SEQUENCE,
-					"The file you are trying to open contain an invalid byte sequence.");
+				conv_error = g_error_new (GEDIT_CONVERT_ERROR, 
+						          GEDIT_CONVERT_ERROR_ILLEGAL_SEQUENCE,
+							  "Invalid byte sequence");
 			}
 		}
 		else
@@ -825,33 +842,51 @@ gedit_document_load (GeditDocument        *doc,
 			else
 				g_propagate_error (error, conv_error);
 
-			g_free (file_contents);
-
 			return FALSE;
 		}
 
+		PROFILE (
+			g_message ("Text converted: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
 		gedit_document_begin_not_undoable_action (doc);
+
+		gedit_document_delete_text (doc, 0, -1);
+
 		/* Insert text in the buffer */
 		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
 		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, converted_text, len);
-		g_free (converted_text);
+
+		PROFILE (
+			g_message ("Text inserted: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
+		if (file_contents != NULL)
+		{
+			/* If file_contents == NULL then converted_text is only an alias of
+			 * file_contents and hence it must not be freed */
+			g_free (converted_text);
+		}
 
 		/* We had a newline in the buffer to begin with. (The buffer always contains
-   		 * a newline, so we delete to the end of the buffer to clean up. */
+   		 * a newline, so we delete to the end of the buffer to clean up. 
+		 * FIXME: Is this really needed? - Paolo (Jan 8, 2004) */
 		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc), &end);
  		gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &iter, &end);
 
-		/* Place the cursor at the start of the document */
-		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
-		gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
+		/* Place the cursor at the start of the document or and old cursor position
+		 * if reverting */
+		gedit_document_set_cursor (doc, 0);
 
 		gedit_document_end_not_undoable_action (doc);
+
+		PROFILE (
+			g_message ("Text inserted all: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
 	}
 	else
 		encoding = gedit_encoding_get_utf8 ();
-
-	if (file_contents != NULL)
-		g_free (file_contents);
 
 	if (gedit_utils_is_uri_read_only (uri))
 	{
@@ -873,10 +908,361 @@ gedit_document_load (GeditDocument        *doc,
 	gedit_document_set_encoding (doc, encoding);
 
 	g_get_current_time (&doc->priv->time_of_last_save_or_load);
+	
+	return TRUE;
+}
 
-	g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0);
+static void
+reset_temp_data (GeditDocument *doc)
+{
+	g_free (doc->priv->temp_uri);
+	
+	doc->priv->temp_uri = NULL;
+	doc->priv->temp_encoding = NULL;
+	doc->priv->temp_size = 0;
+	
+	doc->priv->read_handle = NULL;
+	doc->priv->info_handle = NULL;
+}
+
+static void
+file_loaded_cb (GnomeVFSResult    result,
+                GnomeVFSFileSize  file_size,
+                gchar            *file_contents,
+                gpointer          callback_data)
+{
+	GError *error = NULL;
+	gboolean ret;
+	GeditDocument *doc;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	doc = GEDIT_DOCUMENT (callback_data);
+	
+	/*
+	g_print ("Loaded URI: %s\n", doc->priv->temp_uri);
+	g_print ("Final file size: %d\n", (int)file_size);
+	*/
+
+	PROFILE (
+		g_message ("Loaded Document %s: %.3f", doc->priv->temp_uri, g_timer_elapsed (timer, NULL));
+	)
+
+	if (result != GNOME_VFS_OK) 
+	{
+		reset_temp_data (doc);
+		
+		g_free (file_contents);
+
+		error = g_error_new (GEDIT_DOCUMENT_IO_ERROR,
+				     result,
+				     gnome_vfs_result_to_string (result));
+
+		g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0, error);
+
+		g_error_free (error);
+
+                return;
+        }
+
+	ret = update_document_contents (doc, 
+					doc->priv->temp_uri, 
+					file_contents, 
+					file_size, 
+					doc->priv->temp_encoding, 
+					&error);
+
+	PROFILE (
+		g_message ("Update Document %s: %.3f", doc->priv->uri, g_timer_elapsed (timer, NULL));
+	)
+
+	if (error) 
+	{
+		g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0, error);
+
+		g_error_free (error);
+	}
+	else
+	{
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADED], 
+			       0, 
+			       NULL);
+	}
+
+	PROFILE ({
+		g_message ("Return from signal LAODED %s: %.3f", doc->priv->uri, g_timer_elapsed (timer, NULL));
+		g_timer_destroy (timer);
+	})
+
+	reset_temp_data (doc);
+
+	g_free (file_contents);	
+}
+
+static gboolean
+read_more_cb (GnomeVFSFileSize  file_size,
+	      const char       *file_contents,
+	      gpointer          callback_data)
+{
+	GeditDocument *doc;
+
+	doc = GEDIT_DOCUMENT (callback_data);
+
+	/*
+	g_print ("Loading URI: %s\n", doc->priv->temp_uri);
+	g_print ("File size: %ld/%ld\n", (gulong)file_size, doc->priv->temp_size);
+	*/
+
+	g_signal_emit (G_OBJECT (doc), 
+		       document_signals[LOADING], 
+		       0, 
+		       (gulong)file_size,
+		       doc->priv->temp_size);
 
 	return TRUE;
+}
+
+static void
+get_info_cb (GnomeVFSAsyncHandle *handle,
+	     GList               *results,
+	     gpointer             callback_data)
+{
+	GeditDocument *doc;
+	GnomeVFSGetFileInfoResult *info_result;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	g_return_if_fail (eel_g_list_exactly_one_item (results));
+
+	doc = GEDIT_DOCUMENT (callback_data);
+	doc->priv->info_handle = NULL;
+
+	info_result = (GnomeVFSGetFileInfoResult *)results->data;
+	g_return_if_fail (info_result != NULL);
+
+	if (info_result->result != GNOME_VFS_OK)
+	{
+		GError *error = NULL;
+		
+		gedit_debug (DEBUG_DOCUMENT, "Error reading %s : %s",
+			     doc->priv->temp_uri,
+			     gnome_vfs_result_to_string (info_result->result));
+
+		reset_temp_data (doc);
+
+		error =  g_error_new (GEDIT_DOCUMENT_IO_ERROR, 
+				      info_result->result,
+				      gnome_vfs_result_to_string (info_result->result));
+
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADED], 
+			       0, 
+			       error);
+
+		g_error_free (error);
+		
+		return;
+	}
+
+	if (info_result->file_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_SIZE)
+	{
+		doc->priv->temp_size = (gulong)info_result->file_info->size;
+	}
+	else
+	{
+		doc->priv->temp_size = 0;
+	}
+	
+	PROFILE (
+		g_message ("Got Info on Document %s: %.3f", 
+			doc->priv->temp_uri, g_timer_elapsed (timer, NULL));
+	)
+
+	doc->priv->read_handle = eel_read_file_async (doc->priv->temp_uri, 
+						      GNOME_VFS_PRIORITY_MAX,
+						      file_loaded_cb,
+						      read_more_cb,
+						      doc);
+}
+
+static gboolean
+load_local (GeditDocument *doc)
+{
+	GError *error = NULL;
+	GnomeVFSResult res;
+	gint file_size;
+	gchar *file_contents;
+	gboolean ret;
+	
+	PROFILE (
+		g_message ("Start loading entire file %s: %.3f", 
+			doc->priv->uri, g_timer_elapsed (timer, NULL));
+	)
+
+	res = gnome_vfs_read_entire_file (doc->priv->temp_uri, 
+					  &file_size, 
+					  &file_contents);
+
+	if (res != GNOME_VFS_OK)
+	{		
+		reset_temp_data (doc);
+		
+		g_free (file_contents);
+
+		error = g_error_new (GEDIT_DOCUMENT_IO_ERROR, 
+				     res,
+				     gnome_vfs_result_to_string (res));
+
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADED], 
+			       0, 
+			       error);
+
+		g_error_free (error);
+		
+		return FALSE;
+	}
+
+	ret = update_document_contents (doc, 
+					doc->priv->temp_uri, 
+					file_contents, 
+					file_size, 
+					doc->priv->temp_encoding, 
+					&error);
+
+	PROFILE (
+		g_message ("Update Document %s: %.3f", doc->priv->uri, g_timer_elapsed (timer, NULL));
+	)
+
+	reset_temp_data (doc);
+
+	if (error) 
+	{
+		g_signal_emit (G_OBJECT (doc), document_signals[LOADED], 0, error);
+
+		g_error_free (error);
+	}
+	else
+	{
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADED], 
+			       0, 
+			       NULL);
+	}
+
+	PROFILE ({
+		g_message ("Return from signal LAODED : %.3f",  
+			   g_timer_elapsed (timer, NULL));
+		g_timer_destroy (timer);
+	})
+
+	g_free (file_contents);
+
+	return FALSE;
+}
+
+static gboolean
+emit_invalid_uri (GeditDocument *doc)
+{
+	GError *error = NULL;
+	GnomeVFSResult res;
+
+	reset_temp_data (doc);
+	
+	res = GNOME_VFS_ERROR_INVALID_URI;
+
+	error = g_error_new (GEDIT_DOCUMENT_IO_ERROR, 
+			     res,
+			     gnome_vfs_result_to_string (res));
+
+	g_signal_emit (G_OBJECT (doc), 
+		       document_signals[LOADED], 
+		       0, 
+		       error);
+
+	g_error_free (error);
+		
+	return FALSE;
+}
+
+/**
+ * gedit_document_load:
+ * @doc: a GeditDocument
+ * @uri: the URI of the file that has to be loaded
+ * 
+ * Read a document from a file
+ *
+ * Return value: TRUE if the file is correctly loaded
+ **/
+void
+gedit_document_load (GeditDocument        *doc, 
+		     const gchar          *uri, 
+		     const GeditEncoding  *encoding)
+{	
+	GnomeVFSURI *u;
+		
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (uri != NULL);
+
+	PROFILE ({
+		timer = g_timer_new ();
+		g_message ("Start loading %s", uri);
+	})
+
+	gedit_debug (DEBUG_DOCUMENT, "File to load: %s", uri);
+
+	u = gnome_vfs_uri_new (uri);
+	if (u == NULL)
+	{
+		g_timeout_add_full (G_PRIORITY_HIGH,
+				    0,
+				    (GSourceFunc)emit_invalid_uri,
+				    doc,
+				    NULL);
+
+		return;
+	}
+
+	doc->priv->temp_encoding = encoding;
+	doc->priv->temp_uri = g_strdup (uri);
+
+	if (!eel_vfs_has_capability (doc->priv->temp_uri, EEL_VFS_CAPABILITY_IS_REMOTE_AND_SLOW))
+	{
+		doc->priv->temp_size = 0;
+
+		g_timeout_add_full (G_PRIORITY_HIGH,
+				    0,
+				    (GSourceFunc)load_local,
+				    doc,
+				    NULL);
+
+		gnome_vfs_uri_unref (u);
+	}
+	else
+	{
+		GList *uri_list = NULL;
+
+		uri_list = g_list_prepend (uri_list, u);
+	
+		gnome_vfs_async_get_file_info (&doc->priv->info_handle,
+					       uri_list,
+					       GNOME_VFS_FILE_INFO_DEFAULT |
+					       GNOME_VFS_FILE_INFO_FOLLOW_LINKS,
+					       GNOME_VFS_PRIORITY_MAX,
+					       get_info_cb,
+					       doc);
+
+		g_signal_emit (G_OBJECT (doc), 
+			       document_signals[LOADING], 
+			       0, 
+			       0,
+			       0);
+
+		gnome_vfs_uri_unref (u);
+		
+		g_list_free (uri_list);
+	}
 }
 
 gboolean
@@ -963,7 +1349,7 @@ gedit_document_load_from_stdin (GeditDocument* doc, GError **error)
 	gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc), TRUE);
 	g_get_current_time (&doc->priv->time_of_last_save_or_load);
 
-	g_signal_emit (G_OBJECT (doc), document_signals [LOADED], 0);
+	g_signal_emit (G_OBJECT (doc), document_signals [LOADED], 0, NULL);
 
 	return TRUE;
 }
@@ -1640,49 +2026,17 @@ gedit_document_get_line_count (const GeditDocument *doc)
 	return gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
 }
 
-/* FIXME: should we restore the cursor position too? - Paolo */
-gboolean 
-gedit_document_revert (GeditDocument *doc,  GError **error)
+void 
+gedit_document_revert (GeditDocument *doc)
 {
-	gchar* buffer = NULL;
-	
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_if_fail (doc != NULL);
+	g_return_if_fail (!gedit_document_is_untitled (doc));
 
-	if (gedit_document_is_untitled (doc))
-	{
-		g_set_error (error, GEDIT_DOCUMENT_IO_ERROR, GEDIT_ERROR_UNTITLED,
-			_("It is not possible to revert an Untitled document"));
-		return FALSE;
-	}
-			
-	buffer = gedit_document_get_chars (doc, 0, -1);
+	gedit_document_load (doc, doc->priv->uri, gedit_document_get_encoding (doc));
 
-	gedit_document_begin_not_undoable_action (doc);
-
-	gedit_document_delete_text (doc, 0, -1);
-
-	if (!gedit_document_load (doc, doc->priv->uri, gedit_document_get_encoding (doc), error))
-	{
-		GtkTextIter iter;
-		
-		/* Insert text in the buffer */
-		gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), &iter, 0);
-		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, buffer, -1);
-
-		g_free (buffer);
-
-		gedit_document_end_not_undoable_action (doc);
-
-		return FALSE;
-	}
-
-	gedit_document_end_not_undoable_action (doc);
-
-	g_free (buffer);
-
-	return TRUE;
+	return;
 }
 
 void 
@@ -2253,7 +2607,8 @@ gedit_document_get_line_at_offset (const GeditDocument *doc, guint offset)
 	return gtk_text_iter_get_line (&iter);
 }
 
-gint gedit_document_get_cursor (GeditDocument *doc)
+gint 
+gedit_document_get_cursor (GeditDocument *doc)
 {
 	GtkTextIter iter;
 	

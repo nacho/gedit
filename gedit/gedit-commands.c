@@ -61,7 +61,7 @@ void
 gedit_cmd_file_open (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname)
 {
 	BonoboMDIChild *active_child;
-	GeditView *active_view;
+	/* GeditView *active_view; */
 	
 	gedit_debug (DEBUG_COMMANDS, "");
 
@@ -69,10 +69,13 @@ gedit_cmd_file_open (BonoboUIComponent *uic, gpointer user_data, const gchar* ve
 
 	gedit_file_open ((GeditMDIChild*) active_child);
 
+	/* FIXME */
+	/*
 	active_view = gedit_get_active_view ();
 
 	if (active_view != NULL)
 		gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	*/
 }
 
 void 

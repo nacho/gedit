@@ -34,6 +34,7 @@
 
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksourcebuffer.h>
+#include <libgnomevfs/gnome-vfs-result.h>
 
 #include <gedit/gedit-encodings.h>
 
@@ -83,20 +84,26 @@ struct _GeditDocumentClass
 	GtkSourceBufferClass parent_class;
 
 	/* File name (uri) changed */
-	void (* name_changed)		(GeditDocument *document);
+	void (* name_changed)		(GeditDocument    *document);
 
+	/* Connect to the followinf two signals for loading and reverting */
 	/* Document loaded */
-	void (* loaded)			(GeditDocument *document);
+	void (* loaded)			(GeditDocument    *document,
+					 const GError     *error);
+
+	void (* loading)		(GeditDocument    *document,
+					 gulong            size,
+					 gulong            total_size);
 
 	/* Document saved */
-	void (* saved)  		(GeditDocument *document);	
+	void (* saved)  		(GeditDocument    *document);	
 
 	/* Readonly flag changed */
-	void (* readonly_changed)	(GeditDocument *document,
-					 gboolean readonly);
+	void (* readonly_changed)	(GeditDocument    *document,
+					 gboolean          readonly);
 
 	/* Find state udpated */
-	void (* can_find_again) 	(GeditDocument *document);
+	void (* can_find_again) 	(GeditDocument    *document);
 };
 
 #define GEDIT_ERROR_INVALID_UTF8_DATA 	1024
@@ -109,8 +116,7 @@ GType        	gedit_document_get_type      	(void) G_GNUC_CONST;
 
 GeditDocument*	gedit_document_new 		(void);
 GeditDocument* 	gedit_document_new_with_uri 	(const gchar          *uri, 
-						 const GeditEncoding  *encoding,
-						 GError              **error);
+						 const GeditEncoding  *encoding);
 
 void 		gedit_document_set_readonly 	(GeditDocument        *doc, 
 						 gboolean              readonly);
@@ -120,10 +126,9 @@ gchar*		gedit_document_get_raw_uri 	(const GeditDocument *doc);
 gchar*		gedit_document_get_uri 		(const GeditDocument *doc);
 gchar*		gedit_document_get_short_name 	(const GeditDocument *doc);
 
-gboolean	gedit_document_load 		(GeditDocument        *doc, 
+void		gedit_document_load 		(GeditDocument        *doc, 
 						 const gchar          *uri, 
-						 const GeditEncoding  *encoding,
-						 GError              **error);
+						 const GeditEncoding  *encoding);
 
 gboolean	gedit_document_load_from_stdin 	(GeditDocument        *doc, 
 						 GError              **error);
@@ -142,7 +147,7 @@ gboolean	gedit_document_save_a_copy_as 	(GeditDocument        *doc,
 						 const GeditEncoding  *encoding,
 						 GError              **error);
 
-gboolean 	gedit_document_revert 		(GeditDocument *doc,  GError **error);
+void	 	gedit_document_revert 		(GeditDocument *doc);
 
 gboolean	gedit_document_is_untitled 	(const GeditDocument* doc);
 gboolean	gedit_document_get_modified 	(const GeditDocument* doc);

@@ -5,6 +5,7 @@
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  * Copyright (C) 2000, 2003 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2004 Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +24,7 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2004. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -37,11 +38,13 @@
 #include <libgnomevfs/gnome-vfs.h>
 
 #include <eel/eel-vfs-extensions.h>
+#include <eel/eel-alert-dialog.h>
 #include <eel/eel-string.h>
 
 #include "gedit2.h"
 #include "gedit-file.h"
 #include "gedit-debug.h"
+#include "gedit-document.h"
 #include "gedit-utils.h"
 #include "gedit-mdi.h"
 #include "gedit-recent.h" 
@@ -51,15 +54,51 @@
 #include "gedit-prefs-manager-app.h"
 #include "gedit-metadata-manager.h"
 
-static gchar 	*get_dirname_from_uri 		(const char *uri);
-static gboolean  gedit_file_open_real 		(const gchar* file_name, 
+#undef ENABLE_PROFILE 
+
+#ifdef ENABLE_PROFILE
+#define PROFILE(x) x
+#else
+#define PROFILE(x)
+#endif
+
+PROFILE (static GTimer *timer = NULL);
+
+static gchar 	*get_dirname_from_uri 		(const char          *uri);
+
+static gboolean  gedit_file_save_as_real 	(const gchar         *file_name, 
 						 const GeditEncoding *encoding,
-						 GeditMDIChild* child);
-static gboolean  gedit_file_save_as_real 	(const gchar* file_name, 
-						 const GeditEncoding *encoding,
-						 GeditMDIChild *child);
+						 GeditMDIChild       *child);
+static gboolean	 gedit_file_open_uri_list_real 	(GSList              *uri_list, 
+						 const GeditEncoding *encoding, 
+						 gboolean             create);
+static void	 open_files 			(void);
+static void	 show_progress_bar 		(gchar               *uri, 
+						 gboolean             show, 
+						 gboolean             reverting);
+static void 	 document_loading_cb 		(GeditDocument       *document,
+						 gulong               size,
+		     				 gulong               total_size,
+		     				 gboolean             reverting);
+static void	 grab_mouse 			(void);
+static void	 ungrab_mouse 			(void);
+
 
 static gchar* gedit_default_path = NULL;
+
+/* Global variables for managing async loading */
+static gint                 num_of_uris_to_open = 0;
+static gint                 opened_uris 	= 0;
+static GSList              *uris_to_open 	= NULL;
+static const GeditEncoding *encoding_to_use 	= NULL;
+static gint                 line 		= -1;
+static GSList              *new_children 	= NULL;
+static GSList		   *children_to_unref	= NULL;
+static GtkWidget           *grab_widget 	= NULL;
+static gint		    times_called	= 0;
+
+static GtkWidget           *loading_window	= NULL;
+static GtkWidget           *progress_bar	= NULL;
 
 static gchar *
 get_dirname_from_uri (const char *uri)
@@ -79,7 +118,6 @@ get_dirname_from_uri (const char *uri)
 
 	return name;
 }
-
 
 void 
 gedit_file_new (void)
@@ -129,11 +167,6 @@ gedit_file_close (GtkWidget *view)
 		gedit_debug (DEBUG_COMMANDS, "Child removed.");
 	}
 
-	/*
-	if (ret)
-		gedit_mdi_set_active_window_title (BONOBO_MDI (gedit_mdi));
-	*/
-
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
 	{
 		gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
@@ -147,131 +180,42 @@ void
 gedit_file_open (GeditMDIChild *active_child)
 {
 	const GeditEncoding *encoding = NULL;
-	GSList *files;
+	GSList              *files;
+	gchar               *default_path;
 	
 	gedit_debug (DEBUG_FILE, "");
+
+	default_path = NULL;
+	
+	if (active_child != NULL)
+	{
+		GeditDocument *doc;
+		gchar *raw_uri;
+
+		doc = active_child->document;
+		g_return_if_fail (doc != NULL);
+
+		raw_uri = gedit_document_get_raw_uri (doc);
+
+		if ((raw_uri != NULL) && gedit_utils_uri_has_file_scheme (raw_uri))
+		{
+			default_path = get_dirname_from_uri (raw_uri);
+		}
+
+		g_free (raw_uri);
+	}
 
 	files = gedit_file_selector_open_multi (
 			GTK_WINDOW (gedit_get_active_window ()),
 			TRUE,
 		        _("Open File..."), 
-			gedit_default_path,
+			default_path,
 			&encoding);
-	
-	if (files) 
-	{
-		GSList *iter;
 
-		iter = files;
-		while (iter != NULL)
-		{
-			gedit_debug (DEBUG_FILE, "%s", iter->data);
+	gedit_file_open_uri_list_real (files, encoding, TRUE);
 
-			if (gedit_file_open_real (iter->data, encoding, active_child))
-			{
-				gchar *uri_utf8;
-				
-				if (gedit_utils_uri_has_file_scheme (iter->data))
-				{				
-					if (gedit_default_path != NULL)
-						g_free (gedit_default_path);
-
-					gedit_default_path = get_dirname_from_uri (iter->data);
-				}
-				
-				uri_utf8 = eel_format_uri_for_display (iter->data);	
-				if (uri_utf8 != NULL)
-				{
-					gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);
-
-					g_free (uri_utf8);
-				}
-							
-			}
-			
-			gedit_debug (DEBUG_FILE, "Defaul path : %s", 
-				    (gedit_default_path == NULL) ? NULL : gedit_default_path); 
-			gedit_debug (DEBUG_FILE, "File: %s", iter->data);
-
-			g_free (iter->data);
-
-			iter = g_slist_next (iter);
-		}
-
-		g_slist_free (files);
-	}
-}
-
-static gboolean
-gedit_file_open_real (const gchar* file_name, const GeditEncoding *encoding, GeditMDIChild* active_child)
-{
-	EggRecentItem *item;
-	GError *error = NULL;
-	gchar *uri;
-	
-	EggRecentModel *recent;
-
-	gedit_debug (DEBUG_FILE, "File name: %s", file_name);
-
-	uri = eel_make_uri_canonical (file_name);
-	g_return_val_if_fail (uri != NULL, FALSE);
-	gedit_debug (DEBUG_FILE, "Canonical uri: %s", uri);
-	
-	if (active_child == NULL ||
-	    !gedit_document_is_untouched (active_child->document))	     
-	{
-		gint ret;
-		GeditMDIChild* new_child = NULL;
-
-		new_child = gedit_mdi_child_new_with_uri (uri, encoding, &error);
-
-		if (error)
-		{
-			gedit_utils_error_reporting_loading_file (uri, encoding, error,
-					GTK_WINDOW (gedit_get_active_window ()));
-			
-			g_error_free (error);
-			g_free (uri);
-			return FALSE;
-		}	
-			
-		g_return_val_if_fail (new_child != NULL, FALSE);
-		g_return_val_if_fail (gedit_mdi != NULL, FALSE);
-
-		ret = bonobo_mdi_add_child (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
-		g_return_val_if_fail (ret != FALSE, FALSE);
-		gedit_debug (DEBUG_FILE, "Child added.");
-
-		ret = bonobo_mdi_add_view (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
-		g_return_val_if_fail (ret != FALSE, FALSE);
-		gedit_debug (DEBUG_FILE, "View added.");
-	}
-	else
-	{		
-		gedit_document_load (active_child->document, uri, encoding, &error);
-
-		if (error)
-		{
-			gedit_utils_error_reporting_loading_file (uri, encoding, error,
-					GTK_WINDOW (gedit_get_active_window ()));
-			
-			g_error_free (error);
-			g_free (uri);
-			return FALSE;
-		}	
-	}
-	
-	recent = gedit_recent_get_model ();
-	item = egg_recent_item_new_from_uri (uri);
-	egg_recent_item_add_group (item, "gedit");
-	egg_recent_model_add_full (recent, item);
-	egg_recent_item_unref (item);
-
-	g_free (uri);
-
-	gedit_debug (DEBUG_FILE, "END: %s\n", file_name);
-
-	return TRUE;
+	g_slist_free (files);
+	g_free (default_path);
 }
 
 gboolean 
@@ -320,7 +264,7 @@ gedit_file_save (GeditMDIChild* child, gboolean force)
 	uri = gedit_document_get_uri (doc);
 	g_return_val_if_fail (uri != NULL, FALSE);
 	
-	gedit_utils_flash_va (_("Saving file '%s'..."), uri);	
+	gedit_utils_flash_va (_("Saving document \"%s\"..."), uri);	
 	
 	ret = gedit_document_save (doc, &error);
 
@@ -348,7 +292,7 @@ gedit_file_save (GeditMDIChild* child, gboolean force)
 
 		g_error_free (error);
 
-		gedit_utils_flash_va (_("The document has not been saved."));
+		gedit_utils_flash_va (_("The document \"%s\" has not been saved."), uri);
 
 		g_free (uri);
 
@@ -362,7 +306,7 @@ gedit_file_save (GeditMDIChild* child, gboolean force)
 		
 		gedit_debug (DEBUG_FILE, "OK");
 
-		gedit_utils_flash_va (_("File '%s' saved."), uri);
+		gedit_utils_flash_va (_("The document \"%s\" has been saved."), uri);
 
 		g_free (uri);
 
@@ -469,7 +413,7 @@ gedit_file_save_as (GeditMDIChild *child)
 
 		file_utf8 = eel_format_uri_for_display (uri);
 		if (file_utf8 != NULL)
-			gedit_utils_flash_va (_("Saving file '%s'..."), file_utf8);
+			gedit_utils_flash_va (_("Saving document \"%s\"..."), file_utf8);
 		
 		ret = gedit_file_save_as_real (uri, encoding, child);
 		
@@ -481,10 +425,19 @@ gedit_file_save_as (GeditMDIChild *child)
 			gedit_default_path = get_dirname_from_uri (file);
 
 			if (file_utf8 != NULL)
-				gedit_utils_flash_va (_("File '%s' saved."), file_utf8);
+			{
+				gedit_utils_flash_va (_("The document \"%s\" has been saved."), 
+						      file_utf8);
+			}
 		}
 		else
-			gedit_utils_flash_va (_("The document has not been saved."));
+		{
+			if (file_utf8 != NULL)
+			{
+				gedit_utils_flash_va (_("The document \"%s\" has not been saved."),
+						      file_utf8);
+			}
+		}
 
 		gedit_debug (DEBUG_FILE, "File: %s", file);
 		g_free (uri);
@@ -549,14 +502,13 @@ gedit_file_save_as_real (const gchar* file_name, const GeditEncoding *encoding, 
 	}
 }
 
-
 gboolean
 gedit_file_close_all (void)
 {
 	gboolean ret;
 	gedit_debug (DEBUG_FILE, "");
 
-	ret = bonobo_mdi_remove_all (BONOBO_MDI (gedit_mdi), FALSE);
+	ret = gedit_mdi_remove_all (gedit_mdi);
 
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) == NULL)
 	{
@@ -617,7 +569,7 @@ gedit_file_save_all (void)
 		gedit_file_save (child, FALSE);	
 	}
 
-	if (view !=  bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)))
+	if (view != bonobo_mdi_get_active_view (BONOBO_MDI (gedit_mdi)))
 	{
 		GtkWindow *window;
 
@@ -630,22 +582,103 @@ gedit_file_save_all (void)
 
 /* Displays a confirmation dialog for whether to revert a file. */
 static gboolean
-gedit_file_revert_dialog (const GeditDocument *doc)
+gedit_file_revert_dialog (GeditDocument *doc)
 {
 	GtkWidget *msgbox;
 	gint ret;
 	gchar *name;
+	gchar *primary_msg;
+	gchar *secondary_msg;
+	glong seconds;
 
 	name = gedit_document_get_short_name (doc);
-
-	msgbox = gtk_message_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
-					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_QUESTION,
-					 GTK_BUTTONS_NONE,
-					 _("Do you want to revert to saved the document '%s'?\n\n"
-					   "You will not be able to undo this operation."), 
-					 name);
+	primary_msg = g_strdup_printf (_("Revert unsaved changes to document \"%s\"?"),
+	                               name);
 	g_free (name);
+
+	seconds = MAX (1, gedit_document_get_seconds_since_last_save_or_load (doc));
+
+	if (seconds < 55)	
+	{
+		secondary_msg = g_strdup_printf (
+					ngettext ("Changes made to the document in the last %ld second "
+					    	  "will be definitively lost.",
+						  "Changes made to the document in the last %ld seconds "
+					    	  "will be definitively lost.",
+						  seconds),
+					seconds);
+	}
+	else if (seconds < 75) /* 55 <= seconds < 75 */
+	{
+		secondary_msg = g_strdup (_("Changes made to the document in the last minute "
+					    "will be definitively lost."));
+	}
+	else if (seconds < 110) /* 75 <= seconds < 110 */
+	{
+		secondary_msg = g_strdup_printf (
+					ngettext ("Changes made to the document in the last minute and "
+						  "%ld second will be definitively lost.",
+						  "Changes made to the document in the last minute and "
+						  "%ld seconds will be definitively lost.",
+						  seconds - 60 ),
+					seconds - 60);
+	}
+	else if (seconds < 3600)
+	{
+		secondary_msg = g_strdup_printf (
+					ngettext ("Changes made to the document in the last %ld minute "
+					    	  "will be definitively lost.",
+						  "Changes made to the document in the last %ld minutes "
+					    	  "will be definitively lost.",
+						  seconds / 60),
+					seconds / 60);
+	}
+	else if (seconds < 7200)
+	{
+		gint minutes;
+		seconds -= 3600;
+
+		minutes = seconds / 60;
+		if (minutes < 5)
+		{
+			secondary_msg = g_strdup (_("Changes made to the document in the last hour "
+						    "will be definitively lost."));
+		}
+		else
+		{
+			secondary_msg = g_strdup_printf (
+					ngettext ("Changes made to the document in the last hour and "
+						  "%d minute will be definitively lost.",
+						  "Changes made to the document in the last hour and "
+						  "%d minutes will be definitively lost.",
+						  minutes),
+					minutes);
+		}
+	}
+	else
+	{
+		gint hours;
+
+		hours = seconds / 3600;
+
+		secondary_msg = g_strdup_printf (
+					ngettext ("Changes made to the document in the last %d hour "
+					    	  "will be definitively lost.",
+						  "Changes made to the document in the last %d hours "
+					    	  "will be definitively lost.",
+						  hours),
+					hours);
+	}
+
+	msgbox = eel_alert_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
+				       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				       GTK_MESSAGE_QUESTION,
+				       GTK_BUTTONS_NONE,
+				       primary_msg,
+				       secondary_msg, 
+				       NULL);
+	g_free (primary_msg);
+	g_free (secondary_msg);
 
 	/* Add Cancel button */
 	gtk_dialog_add_button (GTK_DIALOG (msgbox), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
@@ -665,173 +698,98 @@ gedit_file_revert_dialog (const GeditDocument *doc)
 	return (ret == GTK_RESPONSE_YES);
 }
 
-gboolean
+static void 
+document_reverted_cb (GeditDocument *document,
+		      const GError  *error)
+{
+	gchar *uri_to_display;
+	gchar *raw_uri;
+	
+	raw_uri = gedit_document_get_raw_uri (document);
+	g_return_if_fail (raw_uri != NULL);
+	
+	uri_to_display = gedit_document_get_uri (document);
+	g_return_if_fail (uri_to_display != NULL);
+
+	show_progress_bar (NULL, FALSE, FALSE);
+	times_called = 0;
+
+	PROFILE (
+		g_message ("Received 'loaded' signal: %.3f", g_timer_elapsed (timer, NULL));
+	)
+
+	g_signal_handlers_disconnect_by_func (G_OBJECT (document),
+				  	      G_CALLBACK (document_loading_cb),
+				  	      (gpointer)TRUE);
+
+	g_signal_handlers_disconnect_by_func (G_OBJECT (document),
+				  	      G_CALLBACK (document_reverted_cb),
+				  	      NULL);
+
+	gedit_utils_set_status (NULL);
+
+	ungrab_mouse ();
+
+	if (error != NULL)
+	{
+		gedit_utils_flash_va (_("Error reverting the document \"%s\"."), uri_to_display);
+
+		gedit_debug (DEBUG_DOCUMENT, "Error reverting file %s", uri_to_display);
+
+		gedit_utils_error_reporting_reverting_file (raw_uri, error,
+					GTK_WINDOW (gedit_get_active_window ()));
+
+		gedit_utils_flash_va (_("The document \"%s\" has not been reverted."), uri_to_display);
+	}
+	else
+	{
+		gedit_utils_flash_va (_("The document \"%s\" has been reverted."), uri_to_display);
+	}
+
+	g_free (uri_to_display);
+	g_free (raw_uri);
+}
+
+void
 gedit_file_revert (GeditMDIChild *child)
 {
-	gint ret;
-	GeditDocument* doc = NULL;
-	GError *error = NULL;
-	gchar* uri = NULL;
+	GeditDocument *doc = NULL;
+	gchar *uri = NULL;
 
 	gedit_debug (DEBUG_FILE, "");
 
-	g_return_val_if_fail (child != NULL, FALSE);
+	g_return_if_fail (child != NULL);
 	
 	doc = child->document;
-	g_return_val_if_fail (doc != NULL, FALSE);
+	g_return_if_fail (doc != NULL);
 	
 	if (!gedit_file_revert_dialog (doc))
-		return FALSE;
+		return;
 	
 	uri = gedit_document_get_uri (doc);
-	g_return_val_if_fail (uri != NULL, FALSE);
+	g_return_if_fail (uri != NULL);
 	
-	gedit_utils_flash_va (_("Reverting file '%s'..."), uri);	
+	gedit_utils_flash_va (_("Reverting the document \"%s\"..."), uri);	
 	
-	ret = gedit_document_revert (doc, &error);
-
-	if (!ret)
-	{
-		g_return_val_if_fail (error != NULL, FALSE);
-
-		gedit_utils_error_reporting_reverting_file (uri, error,
-					GTK_WINDOW (gedit_get_active_window ()));
-
-		g_error_free (error);
-
-		gedit_utils_flash_va (_("The document has not been reverted."));
-
-		g_free (uri);
-
-		return FALSE;
-	}	
-	else
-	{
-		gedit_debug (DEBUG_FILE, "OK");
-
-		gedit_utils_flash_va (_("File '%s' has been reverted."), uri);
-
-		g_free (uri);
-
-		return TRUE;
-	}
+	g_signal_connect (G_OBJECT (doc),
+			  "loading",
+			  G_CALLBACK (document_loading_cb),
+			  (gpointer)TRUE);
+				  
+	g_signal_connect (G_OBJECT (doc),
+			  "loaded",
+			  G_CALLBACK (document_reverted_cb),
+			  NULL);
+	
+	gedit_document_revert (doc);
 }
 
 gboolean 
-gedit_file_open_uri_list (GList* uri_list, gint line, gboolean create)
+gedit_file_open_uri_list (GSList* uri_list, gint l, gboolean create)
 {
-	gchar *full_path;
-	gboolean ret = FALSE;
-	gint loaded_files = 0;
-	BonoboMDIChild *active_child = NULL;
-	GeditView* view = NULL;
-	gint l;
+	line = l;
 	
-	gedit_debug (DEBUG_FILE, "");
-	
-	if (uri_list == NULL) 
-		return FALSE;
-
-	l = g_list_length (uri_list);
-	
-	if (l > 1)
-		gedit_utils_flash_va (ngettext("Loading %d file...",
-					       "Loading %d files...", 
-					       l), 
-				      l);
-
-	active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
-
-        /* create a file for each document in the parameter list */
-	for ( ; uri_list; uri_list = g_list_next (uri_list))
-	{
-		full_path = eel_make_uri_from_shell_arg (uri_list->data);
-	
-		if (full_path != NULL) 
-		{
-			if (!gedit_utils_uri_has_file_scheme (full_path) || gedit_utils_uri_exists (full_path))
-			{
-				if (gedit_file_open_real (full_path,  NULL,
-					(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
-				{
-					++loaded_files;
-					ret |= TRUE;
-				}
-			}
-			else
-			{
-				if (create)
-				{
-					GtkWidget *dialog;
-					gboolean created = FALSE;
-					gchar *formatted_path;
-
-					formatted_path = eel_format_uri_for_display (full_path);
-					g_return_val_if_fail (formatted_path != NULL, FALSE);
-					
-					dialog = gtk_message_dialog_new (
-						GTK_WINDOW (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi))),
-						GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					   	GTK_MESSAGE_QUESTION,
-					   	GTK_BUTTONS_YES_NO,
-						_("The file \"%s\" does not exist. Would you like to create it?"),
-						formatted_path);
-
-					g_free (formatted_path);
-
-					gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
-
-					gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-					if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-					{
-						created = gedit_utils_create_empty_file (full_path);
-
-						if (!created)	
-							gedit_utils_error_reporting_creating_file (full_path, errno, GTK_WINDOW (dialog));
-					}
-									
-					gtk_widget_destroy (dialog);
-
-					if (created)
-					{
-						if (gedit_file_open_real (full_path, NULL /*FIXME */, 
-							(active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL))
-						{
-							++loaded_files;
-							ret |= TRUE;
-						}
-					}
-				}
-			}
-			
-			g_free (full_path);
-		}
-
-		if (view == NULL)
-			view = gedit_get_active_view ();
-	}
-
-	if (view != NULL)
-	{
-		GeditDocument *doc;
-		GtkWindow *window;
-
-		doc = gedit_view_get_document (view);
-		g_return_val_if_fail (doc, FALSE);
-		
-		gedit_document_goto_line (doc, MAX (0, line - 1));
-
-		window = GTK_WINDOW (bonobo_mdi_get_window_from_view (GTK_WIDGET (view)));
-		gtk_window_present (window);
-
-		bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), GTK_WIDGET (view));		
-	}
-
-	if (loaded_files > 1)
-		gedit_utils_flash_va (_("Loaded %i files"), loaded_files);
-
-	return ret;
+	gedit_file_open_uri_list_real (uri_list, NULL, create);
 }
 
 gboolean 
@@ -880,41 +838,21 @@ gedit_file_open_recent (EggRecentView *view, EggRecentItem *item, gpointer data)
 gboolean 
 gedit_file_open_single_uri (const gchar* uri, const GeditEncoding *encoding)
 {
+	GSList *uri_list;
 	gchar *full_path;
-	gboolean ret = TRUE;
 
 	gedit_debug (DEBUG_FILE, "");
 	
-	if (uri == NULL) return FALSE;
+	if (uri == NULL) 
+		return FALSE;
 	
 	full_path = eel_make_uri_from_input (uri);
 
-	if (full_path != NULL) 
-	{
-		BonoboMDIChild *active_child = NULL;
+	uri_list = g_slist_prepend (NULL, full_path);
+	
+	gedit_file_open_uri_list_real (uri_list, encoding, FALSE);
 
-		active_child = bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi));
-		
-		ret = gedit_file_open_real (full_path, encoding,
-					    (active_child != NULL) ? GEDIT_MDI_CHILD (active_child): NULL);
-		if (ret)
-		{
-			gchar *uri_utf8;
-
-			uri_utf8 = eel_format_uri_for_display (full_path);
-			
-			if (uri_utf8 != NULL)
-			{
-				gedit_utils_flash_va (_("Loaded file '%s'"), uri_utf8);
-
-				g_free (uri_utf8);
-			}
-		}
-
-		g_free (full_path);
-	}
-
-	return ret;
+	return TRUE;
 }
 
 /* FIXME: it is broken */
@@ -993,5 +931,687 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 	}
 	
 	return ret;
+}
+
+static void
+grab_mouse ()
+{
+	GdkCursor *cursor;
+	GList *windows;
+
+	if (grab_widget == NULL)
+	{
+		
+		GdkScreen *screen;
+
+		screen = gtk_widget_get_screen (GTK_WIDGET (gedit_get_active_window ()));
+		grab_widget = gtk_invisible_new_for_screen (screen);
+		
+	}
+
+	gtk_widget_show (grab_widget);
+		
+	cursor = gdk_cursor_new_for_display (
+			gtk_widget_get_display (grab_widget),
+			GDK_WATCH);
+		
+	windows = bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi));
+	while (windows != NULL)
+	{
+		GtkWidget *win;
+
+		g_return_if_fail (windows->data != NULL);
+		
+		win = GTK_WIDGET (windows->data);
+		
+		gdk_window_set_cursor (win->window, cursor);
+
+		windows = g_list_next (windows);
+	}
+
+	gdk_cursor_unref (cursor);
+	
+	gtk_grab_add (grab_widget);
+}
+
+static void
+ungrab_mouse ()
+{
+	GList *windows;
+	
+	g_return_if_fail (grab_widget != NULL);
+	  
+	gtk_grab_remove (grab_widget);
+
+	windows = bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi));
+	while (windows != NULL)
+	{
+		GtkWidget *win;
+
+		g_return_if_fail (windows->data != NULL);
+		
+		win = GTK_WIDGET (windows->data);
+		
+		gdk_window_set_cursor (win->window, NULL);
+
+		windows = g_list_next (windows);
+	}
+}
+
+static gboolean
+create_new_file (const gchar *uri)
+{
+	GtkWidget *dialog;
+	gboolean   created;
+	gchar     *formatted_uri;
+
+	formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	g_return_val_if_fail (formatted_uri != NULL, FALSE);
+			
+	created = FALSE;
+
+	/* FIXME: Is it conforming to GNOME HIG ? - Paolo (Jan 02, 2004) */	
+	dialog = gtk_message_dialog_new (GTK_WINDOW (gedit_get_active_window ()),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_YES_NO,
+					 _("The file \"%s\" does not exist. Would you like to create it?"),
+					 formatted_uri);
+
+	g_free (formatted_uri);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_NO);
+
+	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+	{
+		created = gedit_utils_create_empty_file (uri);
+
+		if (!created)
+		{
+			gedit_utils_error_reporting_creating_file (uri, 
+								   errno, 
+								   GTK_WINDOW (dialog));
+		}
+	}
+									
+	gtk_widget_destroy (dialog);
+
+	return created;
+}
+
+static gboolean
+update_recent_files_real (const gchar *uri)
+{
+	EggRecentModel *recent;
+	EggRecentItem  *item;
+
+	recent = gedit_recent_get_model ();
+	item = egg_recent_item_new_from_uri (uri);
+	egg_recent_item_add_group (item, "gedit");
+	egg_recent_model_add_full (recent, item);
+	egg_recent_item_unref (item);
+
+	return FALSE;
+}
+
+static void
+update_recent_files (const gchar *uri)
+{
+	g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
+			 (GSourceFunc)update_recent_files_real,
+			 g_strdup (uri),
+			 (GDestroyNotify)g_free);
+}
+
+static gboolean
+remove_recent_file_real (const gchar *uri)
+{
+	EggRecentModel *recent;
+
+	recent = gedit_recent_get_model ();
+	egg_recent_model_delete (recent, uri);
+
+	return FALSE;
+}
+
+static void
+remove_recent_file (const gchar *uri)
+{
+	g_idle_add_full (G_PRIORITY_DEFAULT_IDLE,
+			 (GSourceFunc)remove_recent_file_real,
+			 g_strdup (uri),
+			 (GDestroyNotify)g_free);
+}
+
+
+#define MAX_URI_IN_DIALOG_LENGTH 50
+
+static void
+show_loading_dialog (GtkWindow *parent, gchar *uri, gboolean reverting)
+{
+	GtkWidget *frame;
+	GtkWidget *hbox;
+	GtkWidget *image;
+	GtkWidget *vbox;
+	GtkWidget *label;
+	gchar *str;
+	gchar *uri_for_display;
+	gchar *full_formatted_uri;
+	GdkCursor *cursor;
+
+	g_return_if_fail (GTK_IS_WINDOW (parent));
+	g_return_if_fail (uri != NULL);
+
+	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+
+	/* Truncate the URI so it doesn't get insanely wide.  */
+        uri_for_display = eel_str_middle_truncate (full_formatted_uri, 
+						   MAX_URI_IN_DIALOG_LENGTH);
+	g_free (full_formatted_uri);
+
+	g_return_if_fail (uri_for_display != NULL);
+
+	loading_window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_modal (GTK_WINDOW (loading_window), TRUE);
+	gtk_window_set_resizable (GTK_WINDOW (loading_window), FALSE);
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (loading_window), TRUE);
+	gtk_window_set_position (GTK_WINDOW (loading_window), GTK_WIN_POS_CENTER_ON_PARENT);
+		
+	gtk_window_set_decorated (GTK_WINDOW (loading_window), FALSE); 
+	gtk_window_set_transient_for (GTK_WINDOW (loading_window), parent);
+
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+	gtk_container_add (GTK_CONTAINER (loading_window), frame);
+
+	hbox = gtk_hbox_new (FALSE, 12);
+ 	gtk_container_add (GTK_CONTAINER (frame), hbox);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), 12);
+
+	image = gtk_image_new_from_stock ("gtk-open", GTK_ICON_SIZE_DIALOG);
+	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+
+	vbox = gtk_vbox_new (FALSE, 12);
+	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+
+	if (reverting)
+	{
+		str = g_strdup_printf ("<b>%s</b>\n%s", _("Reverting file:"), uri_for_display);
+	}
+	else
+	{
+		str = g_strdup_printf ("<b>%s</b>\n%s", _("Loading file:"), uri_for_display);		
+	}
+	
+	label = gtk_label_new (str);
+	g_free (uri_for_display);
+	g_free (str);
+	
+	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+	progress_bar = gtk_progress_bar_new ();
+	gtk_box_pack_start (GTK_BOX (vbox), progress_bar, FALSE, FALSE, 0);
+
+	gtk_widget_show_all (loading_window);
+
+	cursor = gdk_cursor_new_for_display (
+			gtk_widget_get_display (loading_window),
+			GDK_WATCH);
+				
+	gdk_window_set_cursor (GTK_WIDGET (loading_window)->window,
+			       cursor);
+
+	gdk_cursor_unref (cursor);	
+}
+
+static void
+show_progress_bar (gchar *uri, gboolean show, gboolean reverting)
+{
+	if (show)
+	{
+		BonoboWindow *win;
+
+		if (loading_window != NULL)
+			return;
+		
+		win = gedit_get_active_window ();
+		g_return_if_fail (win != NULL);
+
+		show_loading_dialog (GTK_WINDOW (win), uri, reverting);
+	}
+	else
+	{
+		if (loading_window == NULL)
+			return;
+
+		gtk_object_destroy (GTK_OBJECT (loading_window));
+		loading_window = NULL;
+		progress_bar = NULL;
+	}
+}
+
+static void
+set_progress_bar (gulong size, gulong total_size)
+{
+	if (progress_bar == NULL)
+		return;
+
+	if (total_size == 0)
+	{
+		gtk_progress_bar_pulse (GTK_PROGRESS_BAR (progress_bar));		
+	}
+	else
+	{
+		gdouble frac;
+
+		frac = (gdouble)size / (gdouble)total_size;
+
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress_bar),
+					       frac);
+	}
+}
+
+
+static void 
+document_loading_cb (GeditDocument *document,
+		     gulong         size,
+		     gulong         total_size,
+		     gboolean       reverting)
+{
+	static GTimer *d_timer = NULL;
+	
+	gchar *uri;
+	double et;
+
+	uri = (gchar*)uris_to_open->data;
+	g_return_if_fail (uri != NULL);
+
+	if (d_timer == NULL)
+	{
+		d_timer = g_timer_new ();
+	}
+	else
+	{
+		if (times_called == 0)
+		{
+			g_timer_reset (d_timer);
+		}
+	}
+
+	et = g_timer_elapsed (d_timer, NULL);
+
+	if (times_called == 1)
+	{
+		if ((total_size == 0) || (total_size > 51200UL) /* 50 KB */)
+		{
+			show_progress_bar (uri, TRUE, reverting);
+		}
+	}
+	else
+	{
+		if ((times_called == 3) && (total_size != 0))
+		{
+			gdouble total_time;
+
+			/* et : total_time = size : total_size */
+			total_time = (et * total_size)/size;
+
+			if ((total_time - et) > 3.0)
+			{
+				show_progress_bar (uri, TRUE, reverting);
+			}
+		}
+		else
+		{
+			if (et > 3.0)
+			{
+				show_progress_bar (uri, TRUE, reverting);
+			}
+		}
+	}
+
+	set_progress_bar (size, total_size);
+
+	times_called++;
+}
+
+static void 
+document_loaded_cb (GeditDocument *document,
+		    const GError  *error,
+		    GeditMDIChild *new_child)
+{
+	gchar *uri;
+	gchar *uri_to_display;
+	
+	uri = (gchar*)uris_to_open->data;
+	g_return_if_fail (uri != NULL);
+
+	show_progress_bar (NULL, FALSE, FALSE);
+	times_called = 0;
+
+	PROFILE (
+		g_message ("Received 'loaded' signal: %.3f", g_timer_elapsed (timer, NULL));
+	)
+
+	g_signal_handlers_disconnect_by_func (G_OBJECT (document),
+				  	      G_CALLBACK (document_loading_cb),
+				  	      (gpointer)FALSE);
+
+	g_signal_handlers_disconnect_by_func (G_OBJECT (document),
+				  	      G_CALLBACK (document_loaded_cb),
+				  	      new_child);
+
+	uri_to_display = gnome_vfs_format_uri_for_display (uri);
+
+	if (error != NULL)
+	{
+		gedit_utils_set_status (NULL);
+		gedit_utils_flash_va (_("Error loading file \"%s\""), uri_to_display);
+
+		gedit_debug (DEBUG_DOCUMENT, "Error loading file %s", uri_to_display);
+
+		remove_recent_file (uri);
+
+		ungrab_mouse ();
+		
+		gedit_utils_error_reporting_loading_file (uri, encoding_to_use, (GError *)error,
+					GTK_WINDOW (gedit_get_active_window ()));
+
+		grab_mouse ();
+
+		if (new_child != NULL)
+		{
+			children_to_unref = g_slist_prepend (children_to_unref, new_child);
+		}
+
+		gedit_debug (DEBUG_DOCUMENT, "Returning %s", uri_to_display);
+	}
+	else
+	{	
+		opened_uris++;
+
+		gedit_utils_set_status (NULL);
+		gedit_utils_flash_va (_("Loaded file \"%s\""), uri_to_display);
+
+		gedit_document_goto_line (document, MAX (0, line - 1));
+
+		if (new_child != NULL)
+		{
+			bonobo_mdi_add_child (BONOBO_MDI (gedit_mdi), BONOBO_MDI_CHILD (new_child));
+			gedit_debug (DEBUG_FILE, "Child added.");
+
+			new_children = g_slist_prepend (new_children, new_child);
+		}
+	
+		if (gedit_utils_uri_has_file_scheme (uri))
+		{
+			gchar *default_path;
+			
+			default_path = get_dirname_from_uri (uri);
+
+			if (default_path != NULL)
+			{
+				g_free (gedit_default_path);
+				
+				gedit_default_path = default_path;
+			}
+		}
+
+		PROFILE (
+			g_message ("Updated gedit_default_path: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
+		update_recent_files (uri);	
+	}
+
+	g_free (uri_to_display);
+	
+	/* Load the next file in the uris_to_open list */
+	g_free (uri);
+	uris_to_open = g_slist_delete_link (uris_to_open, uris_to_open);
+
+	open_files ();
+}
+
+static void
+open_files ()
+{
+	GeditDocument  *active_document;
+	
+	gchar          *uri;
+	gchar          *uri_to_display;
+
+	if (uris_to_open == NULL)
+	{		
+		/* Add all the views in the right order */
+		new_children = g_slist_reverse (new_children);
+
+		PROFILE (
+			g_message ("Document Loaded: %.3f", g_timer_elapsed (timer, NULL));
+		)
+		
+		bonobo_mdi_add_views (BONOBO_MDI (gedit_mdi),
+				      new_children);
+	
+		PROFILE (
+			g_message ("View added: %.3f", g_timer_elapsed (timer, NULL));
+		)
+	
+		g_slist_free (new_children);
+		new_children = NULL;
+
+		/* Unref the children that were not opened to an error */
+		g_slist_foreach (children_to_unref, (GFunc)g_object_unref, NULL);
+		g_slist_free (children_to_unref);
+		children_to_unref = NULL;
+		
+		ungrab_mouse ();
+
+		if (num_of_uris_to_open > 1)
+		{
+			gedit_utils_set_status (NULL);
+			gedit_utils_flash_va (ngettext("Loaded %d file",
+						       "Loaded %d files", 
+						       opened_uris), 
+					      opened_uris);
+		}
+
+		/* Clean up temp variables */
+		num_of_uris_to_open = 0;
+		opened_uris = 0;
+		encoding_to_use = NULL;
+		line = -1;
+
+		PROFILE (
+			g_message ("Done all: %.3f", g_timer_elapsed (timer, NULL));
+			g_timer_destroy (timer);
+		)
+
+		return;
+	}
+	
+	uri = (gchar*)uris_to_open->data;
+	g_return_if_fail (uri != NULL);
+	
+	gedit_debug (DEBUG_FILE, "File name: %s", uri);
+
+	active_document = gedit_get_active_document ();
+	
+	uri_to_display = gnome_vfs_format_uri_for_display (uri);
+
+	PROFILE (
+		g_message ("URI to open: %.3f", g_timer_elapsed (timer, NULL));
+	)
+
+	gedit_utils_set_status_va (_("Loading file \"%s\"..."), uri_to_display);
+
+	PROFILE (
+		g_message ("URI to open (after flash): %.3f", g_timer_elapsed (timer, NULL));
+	)
+
+	if (active_document == NULL ||
+	    !gedit_document_is_untouched (active_document))	     
+	{
+		GeditMDIChild *new_child;
+		
+		PROFILE (
+			g_message ("Create new_child: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
+		new_child = gedit_mdi_child_new_with_uri (uri, encoding_to_use);
+
+		PROFILE (
+			g_message ("new_child created: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
+		if (new_child == NULL)
+		{
+			ungrab_mouse ();
+
+			/* FIXME: this is a too generic error message - Paolo */
+			gedit_utils_error_reporting_loading_file (uri, encoding_to_use, NULL,
+					GTK_WINDOW (gedit_get_active_window ()));
+
+			grab_mouse ();
+			 
+			gedit_utils_flash_va (_("Error loading file \"%s\""), uri_to_display);
+
+			g_free (uri_to_display);
+			g_free (uri);
+			 
+			uris_to_open = g_slist_delete_link (uris_to_open, uris_to_open);
+
+			open_files ();
+
+			return;
+		}
+
+		g_signal_connect (G_OBJECT (new_child->document),
+				  "loading",
+				  G_CALLBACK (document_loading_cb),
+				  (gpointer)FALSE);
+				  
+		g_signal_connect (G_OBJECT (new_child->document),
+				  "loaded",
+				  G_CALLBACK (document_loaded_cb),
+				  new_child);
+
+		g_return_if_fail (gedit_mdi != NULL);
+	}
+	else
+	{	
+		PROFILE (
+			g_message ("Load file: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
+		g_signal_connect (G_OBJECT (active_document),
+				  "loading",
+				  G_CALLBACK (document_loading_cb),
+				  (gpointer)FALSE);
+				  
+		g_signal_connect (G_OBJECT (active_document),
+				  "loaded",
+				  G_CALLBACK (document_loaded_cb),
+				  NULL);
+
+		gedit_document_load (active_document, uri, encoding_to_use);
+
+		PROFILE (
+			g_message ("Start loading: %.3f", g_timer_elapsed (timer, NULL));
+		)
+
+	}
+	
+	g_free (uri_to_display);
+}
+
+/* Note that all the uris will be opened with the same encoding */
+static gboolean
+gedit_file_open_uri_list_real (GSList *uri_list, const GeditEncoding *encoding, gboolean create)
+{
+	gedit_debug (DEBUG_FILE, "");
+	
+	if (uri_list == NULL)
+		return TRUE;
+
+	g_return_val_if_fail (uris_to_open == NULL, FALSE);
+
+	g_return_val_if_fail (new_children == NULL, FALSE);
+	g_return_val_if_fail (children_to_unref == NULL, FALSE);
+
+	g_return_val_if_fail (num_of_uris_to_open == 0, FALSE);
+	g_return_val_if_fail (opened_uris == 0, FALSE);
+	g_return_val_if_fail (encoding_to_use == NULL, FALSE);
+	
+	g_return_val_if_fail (times_called == 0, FALSE);
+
+	g_return_val_if_fail (loading_window == NULL, FALSE);
+	g_return_val_if_fail (progress_bar == NULL, FALSE);
+
+	PROFILE (
+		timer = g_timer_new ();
+	)
+
+	while (uri_list != NULL)
+	{
+		gchar *uri;
+
+		uri = gnome_vfs_make_uri_canonical ((const gchar*)uri_list->data);
+		
+		gedit_debug (DEBUG_FILE, "URI: %s", uri);
+
+		if (uri != NULL)
+		{
+			if (!gedit_utils_uri_has_file_scheme (uri) || 
+			     gedit_utils_uri_exists (uri))
+			{
+				uris_to_open = g_slist_prepend (uris_to_open, uri);
+			}
+			else
+			{
+				if (create)
+				{
+					if (create_new_file (uri))
+					{
+						uris_to_open = g_slist_prepend (uris_to_open, uri);
+					}
+				}
+				else
+				{
+					uris_to_open = g_slist_prepend (uris_to_open, uri);
+				}
+			}		
+		}	
+			
+		uri_list = g_slist_next (uri_list);
+	}
+
+	uris_to_open = g_slist_reverse (uris_to_open);
+
+	if (uris_to_open != NULL)
+	{
+		num_of_uris_to_open = g_slist_length (uris_to_open);
+
+		if (num_of_uris_to_open > 1)
+		{
+			gedit_utils_set_status_va (ngettext("Loading %d file...",
+							    "Loading %d files...", 
+							    num_of_uris_to_open),
+						   num_of_uris_to_open);
+		}
+
+		encoding_to_use = encoding;
+		
+		grab_mouse ();
+		
+		open_files ();
+	}
+
+	return TRUE;
 }
 

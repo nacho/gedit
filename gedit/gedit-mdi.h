@@ -68,6 +68,8 @@ GeditMDI*	gedit_mdi_new		(void);
 
 void		gedit_mdi_set_active_window_title (BonoboMDI *mdi);
 
+gboolean 	gedit_mdi_remove_all 		  (GeditMDI *mdi);
+
 /* FIXME: should be static ??? */
 void 		gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi);
 
@@ -75,6 +77,11 @@ void 		gedit_mdi_clear_active_window_statusbar (GeditMDI *mdi);
 
 EggRecentView	*gedit_mdi_get_recent_view_from_window (BonoboWindow* win);
 GtkWidget 	*gedit_mdi_get_output_window_from_window (BonoboWindow *win);
+
+GtkWidget	*gedit_mdi_get_progress_bar_from_window (BonoboWindow *win);
+void		 gedit_mdi_show_progress_bar_for_window (BonoboWindow *win,
+							  gboolean show);
+
 
 #endif /* __GEDIT_MDI_H__ */
 

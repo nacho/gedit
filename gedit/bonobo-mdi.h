@@ -60,7 +60,8 @@ typedef struct {
 	gboolean	(*add_child)		(BonoboMDI *mdi, BonoboMDIChild *child); 
 	gboolean	(*remove_child)		(BonoboMDI *mdi, BonoboMDIChild *child); 
 	gboolean	(*add_view)		(BonoboMDI *mdi, GtkWidget *view); 
-	gboolean	(*remove_view)		(BonoboMDI *mdi, GtkWidget *view); 
+	gboolean	(*remove_view)		(BonoboMDI *mdi, GtkWidget *view);
+	gboolean	(*remove_views)		(BonoboMDI *mdi, BonoboWindow *window); 
 	void 		(*child_changed)	(BonoboMDI *mdi, BonoboMDIChild *child);
 	void 		(*view_changed)		(BonoboMDI *mdi, GtkWidget *view);
 	void 		(*top_window_created)	(BonoboMDI *mdi, BonoboWindow *window);
@@ -138,6 +139,8 @@ void          bonobo_mdi_set_child_list_path 	(BonoboMDI *mdi,
 /* manipulating views */
 gboolean      bonobo_mdi_add_view            	(BonoboMDI *mdi, 
 						 BonoboMDIChild *child);
+gint	      bonobo_mdi_add_views 		(BonoboMDI *mdi, 
+						 GSList *children);
 gboolean      bonobo_mdi_add_toplevel_view   	(BonoboMDI *mdi, 
 						 BonoboMDIChild *child,
 						 const char *window_role);
@@ -186,7 +189,7 @@ void          bonobo_mdi_unregister          	(BonoboMDI *mdi,
 						 GObject *object);
 
 /*
- * convenience functions for retrieveing BonoboMDIChild and BonoboApp
+ * convenience functions for retrieveing BonoboMDIChild and BonoboWindow
  * objects associated with a particular view and for retrieveing the
  * visible view of a certain BonoboWindow.
  */
@@ -195,8 +198,12 @@ BonoboMDIChild		*bonobo_mdi_get_child_from_view     	(GtkWidget *view);
 GtkWidget		*bonobo_mdi_get_view_from_window	(BonoboMDI *mdi, 
 								 BonoboWindow *window);
 
+GList			*bonobo_mdi_get_views_from_window	(BonoboMDI *mdi, 
+								 BonoboWindow *window);
+
 GList          		*bonobo_mdi_get_children		(BonoboMDI *mdi);
 GList          		*bonobo_mdi_get_windows			(BonoboMDI *mdi);
+GList 			*bonobo_mdi_get_views 			(BonoboMDI *mdi);
 
 BonoboUIComponent 	*bonobo_mdi_get_ui_component_from_window (BonoboWindow *win);
 

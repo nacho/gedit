@@ -33,6 +33,8 @@ libdialogs_la_SOURCES = 			\
 	gedit-encodings-dialog.h	\
 	gedit-page-setup-dialog.c	\
 	gedit-page-setup-dialog.h	\
+	gedit-close-confirmation-dialog.c \
+	gedit-close-confirmation-dialog.h \
 	gedit-dialogs.h		
 
 glade_DATA =				\

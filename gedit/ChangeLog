@@ -1,3 +1,46 @@
+2004-01-12  Paolo Maggi  <paolo.maggi@polito.it> 
+
+	Implemented async loading of remote files.
+
+	New Close All dialog (thanks to Paolo Borelli for his
+	help)
+
+	HIG-fication of the revert dialog (thanks to Paolo Borelli 
+	for his	help)
+
+	This is a very big patch and I'm too lazy to fill a more
+	detaild ChangeLog entry.
+
+	Modified files:
+	
+	* bonobo-mdi.c
+	* bonobo-mdi.h
+	* gedit-commands.c
+	* gedit-document.c
+	* gedit-document.h
+	* gedit-file.c
+	* gedit-file.h
+	* gedit-marshal.list
+	* gedit-mdi-child.c
+	* gedit-mdi-child.h
+	* gedit-mdi.c
+	* gedit-mdi.h
+	* gedit-session.c
+	* gedit-ui.xml
+	* gedit-utils.c
+	* gedit-utils.h
+	* gedit-view.c
+	* gedit-window-server.c
+	* gedit2.c
+	* dialogs/Makefile.am
+	
+	New files:
+	* dialogs/gedit-close-confirmation-dialog.c
+	* dialogs/gedit-close-confirmation-dialog.h
+	* dialogs/close_all_dialog.glade2
+
+
+	
 2004-01-06  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-mdi.c: factor out gedit_document_get_deleted.

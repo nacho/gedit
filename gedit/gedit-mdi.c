@@ -59,6 +59,7 @@
 #include "recent-files/egg-recent-view-gtk.h"
 #include "recent-files/egg-recent-model.h"
 #include "gedit-languages-manager.h"
+#include "dialogs/gedit-close-confirmation-dialog.h"
 
 #include <eel/eel-alert-dialog.h>
 
@@ -102,7 +103,9 @@ static void gedit_mdi_set_app_statusbar_style 	(BonoboWindow *win);
 static gint gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child);
 static gint gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view);
 static gint gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child);
-static gint gedit_mdi_remove_view_handler (BonoboMDI *mdi, GtkWidget *view);
+
+static gboolean gedit_mdi_remove_view_handler  (BonoboMDI *mdi, GtkWidget *view);
+static gboolean gedit_mdi_remove_views_handler (BonoboMDI *mdi, BonoboWindow *window);
 
 static void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view);
 static void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old_child);
@@ -348,6 +351,8 @@ gedit_mdi_init (GeditMDI  *mdi)
 			  G_CALLBACK (gedit_mdi_remove_child_handler), NULL);
 	g_signal_connect (G_OBJECT (mdi), "remove_view",
 			  G_CALLBACK (gedit_mdi_remove_view_handler), NULL);
+	g_signal_connect (G_OBJECT (mdi), "remove_views",
+			  G_CALLBACK (gedit_mdi_remove_views_handler), NULL);
 
 	g_signal_connect (G_OBJECT (mdi), "child_changed",
 			  G_CALLBACK (gedit_mdi_child_changed_handler), NULL);
@@ -484,7 +489,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	bonobo_object_unref (BONOBO_OBJECT (control));
 
 	g_object_set_data (G_OBJECT (win), "OverwriteMode", widget);
-
+	
 	/* Add custom Open button to toolbar */
 	gedit_mdi_add_open_button (GEDIT_MDI (mdi),
 				   ui_component, "/Toolbar/FileOpenMenu",
@@ -703,7 +708,7 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context
 				      guint info, guint time)
 {
 	GList *list = NULL;
-	GList *file_list = NULL;
+	GSList *file_list = NULL;
 	GList *p = NULL;
 	
 	gedit_debug (DEBUG_MDI, "");
@@ -716,24 +721,24 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget, GdkDragContext *context
 
 	while (p != NULL)
 	{
-		file_list = g_list_append (file_list, 
+		file_list = g_slist_prepend (file_list, 
 				gnome_vfs_uri_to_string ((const GnomeVFSURI*)(p->data), 
 				GNOME_VFS_URI_HIDE_NONE));
-		p = p->next;
+
+		p = g_list_next (p);
 	}
 	
 	gnome_vfs_uri_list_free (list);
 
-	gedit_file_open_uri_list (file_list, 0, FALSE);	
-	
+	file_list = g_slist_reverse (file_list);
+
 	if (file_list == NULL)
 		return;
 
-	for (p = file_list; p != NULL; p = p->next) {
-		g_free (p->data);
-	}
+	gedit_file_open_uri_list (file_list, 0, FALSE);	
 	
-	g_list_free (file_list);
+	g_slist_foreach (file_list, (GFunc)g_free, NULL);	
+	g_slist_free (file_list);
 }
 
 static void
@@ -944,6 +949,7 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 	return TRUE;
 }
 
+
 static gint 
 gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 {
@@ -955,127 +961,275 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 	g_return_val_if_fail (child != NULL, FALSE);
 	g_return_val_if_fail (GEDIT_MDI_CHILD (child)->document != NULL, FALSE);
 
+	if (gedit_mdi_child_get_closing (GEDIT_MDI_CHILD (child)))
+	{
+		return TRUE;
+	}
+
 	doc = GEDIT_MDI_CHILD (child)->document;
 
 	if (gedit_document_get_modified (doc) || gedit_document_get_deleted (doc))
 	{
-		GtkWidget *msgbox, *w;
-		gchar *fname = NULL; 
-		gchar *msg = NULL;
-		gint ret;
-		gboolean exiting;
-
-		w = GTK_WIDGET (g_list_nth_data (bonobo_mdi_child_get_views (child), 0));
+		GtkWidget *view;
+		GtkWindow *window;
+		gboolean   save;
+		GtkWidget *dlg;
+		
+		window = NULL;
+		view = GTK_WIDGET (g_list_nth_data (bonobo_mdi_child_get_views (child), 0));
 			
-		if(w != NULL)
+		if (view != NULL)
 		{
-			GtkWindow *window;
-
-			window = GTK_WINDOW (bonobo_mdi_get_window_from_view (w));
+			window = GTK_WINDOW (bonobo_mdi_get_window_from_view (view));
 			gtk_window_present (window);
 			
-			bonobo_mdi_set_active_view (mdi, w);
+			bonobo_mdi_set_active_view (mdi, view);
 		}
 
-		if (gedit_close_x_button_pressed)
-			exiting = FALSE;
-		else if (gedit_exit_button_pressed)
-			exiting = TRUE;
-		else
-		{
-			/* Delete event generated */
-			if (g_list_length (bonobo_mdi_get_windows (BONOBO_MDI (gedit_mdi))) == 1)
-				exiting = TRUE;
-			else
-				exiting = FALSE;
-		}
-
-		fname = gedit_document_get_short_name (doc);
-		msg = g_strdup_printf (_("Do you want to save the changes you made to the document \"%s\"?"),
-					fname);
-
-		msgbox = eel_alert_dialog_new (GTK_WINDOW (bonobo_mdi_get_active_window (mdi)),
-				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_QUESTION,
-				GTK_BUTTONS_NONE,
-				msg,
-				_("Your changes will be lost if you don't save them."),
-				NULL);
-		g_free (msg);
-		g_free (fname);
-
-#if 0		
-		if (exiting)
-			gedit_dialog_add_button (GTK_DIALOG (msgbox),
-					_("_Don't quit"), GTK_STOCK_NO,
-                	             	GTK_RESPONSE_NO);
-		else
-			gedit_dialog_add_button (GTK_DIALOG (msgbox),
-					_("_Don't close"), GTK_STOCK_NO,
-                	             	GTK_RESPONSE_NO);
-#endif
-		gedit_dialog_add_button (GTK_DIALOG (msgbox),
-				_("Do_n't save"), GTK_STOCK_NO,
-				GTK_RESPONSE_NO);
-
-		gtk_dialog_add_buttons (GTK_DIALOG (msgbox),
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					GTK_STOCK_SAVE, GTK_RESPONSE_YES, NULL);
-
-		gtk_dialog_set_default_response	(GTK_DIALOG (msgbox), GTK_RESPONSE_YES);
-
-		/* gtk_widget_show (msgbox); */
-		gtk_window_present (GTK_WINDOW (msgbox));
-
-		ret = gtk_dialog_run (GTK_DIALOG (msgbox));
+		dlg = gedit_close_confirmation_dialog_new_single (window, doc);
 		
-		switch (ret)
+		save = gedit_close_confirmation_dialog_run (GEDIT_CLOSE_CONFIRMATION_DIALOG (dlg));
+		
+		gtk_widget_hide (dlg);
+
+		if (save)
 		{
-			case GTK_RESPONSE_YES:
-				close = gedit_file_save (GEDIT_MDI_CHILD (child), TRUE);
-				break;
-			case GTK_RESPONSE_NO:
+			GSList *sel_docs;
+
+			sel_docs = gedit_close_confirmation_dialog_get_selected_documents (
+						GEDIT_CLOSE_CONFIRMATION_DIALOG (dlg));
+
+			if (sel_docs == NULL)
+			{
 				close = TRUE;
-				break;
-			default:
-				close = FALSE;
+			}
+			else
+			{
+				close = gedit_file_save (GEDIT_MDI_CHILD (child), TRUE);
+
+				g_slist_free (sel_docs);
+			}
+		}
+		else
+		{
+			close = FALSE;
 		}
 
-		gtk_widget_destroy (msgbox);
+		gtk_widget_destroy (dlg);
 
 		gedit_debug (DEBUG_MDI, "CLOSE: %s", close ? "TRUE" : "FALSE");
 	}
-	
-	/* FIXME: there is a bug if you "close all" >1 docs, don't save the document
-	 * and then don't close the last one.
-	 */
-	/* Disable to avoid the bug */
-	/*
-	if (close)
-	{
-		g_signal_handlers_disconnect_by_func (child, 
-						      G_CALLBACK (gedit_mdi_child_state_changed_handler),
-						      NULL);
-		g_signal_handlers_disconnect_by_func (GTK_OBJECT (child), 
-						      G_CALLBACK (gedit_mdi_child_undo_redo_state_changed_handler),
-						      NULL);
-		g_signal_handlers_disconnect_by_func (child, 
-						      G_CALLBACK (gedit_mdi_child_find_state_changed_handler),
-						      NULL);
-	}
-	*/
-	
+		
 	return close;
 }
 
-static gint 
-gedit_mdi_remove_view_handler (BonoboMDI *mdi,  GtkWidget *view)
+static gboolean
+gedit_mdi_remove_view_handler (BonoboMDI *mdi, GtkWidget *view)
 {
 	gedit_debug (DEBUG_MDI, "");
 
 	return TRUE;
 }
 
+static gboolean
+gedit_mdi_can_remove_views (GList *views, BonoboWindow *window)
+{
+	GList *l;
+	GSList *unsaved_docs;
+	GtkWidget *dlg;
+	gboolean close;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	if (window == NULL)
+	{
+		window = gedit_get_active_window ();
+	}
+
+	unsaved_docs = NULL;
+
+	l = views;
+	while (l != NULL)
+	{
+		GeditView *view;
+		GeditDocument *doc;
+		gchar *raw_uri;
+		gboolean deleted;
+		
+		view = GEDIT_VIEW (l->data);
+		
+		doc = gedit_view_get_document (view);
+		g_return_val_if_fail (doc != NULL, FALSE);
+		
+		deleted = FALSE;
+		
+		raw_uri = gedit_document_get_raw_uri (doc); 
+		if (raw_uri != NULL)
+		{
+			if (gedit_document_is_readonly (doc))
+				deleted = FALSE;
+			else
+				deleted = !gedit_utils_uri_exists (raw_uri);
+		}
+		g_free (raw_uri);
+
+		if (gedit_document_get_modified (doc) || deleted)
+		{
+			unsaved_docs = g_slist_prepend (unsaved_docs, doc);
+		}
+
+		l = g_list_next (l);
+	}
+	
+	if (unsaved_docs == NULL)
+	{
+		l = views;
+		while (l != NULL)
+		{
+			GeditView *view;
+			BonoboMDIChild *child;
+			
+			view = GEDIT_VIEW (l->data);
+
+			child =	bonobo_mdi_get_child_from_view (GTK_WIDGET (view));
+			g_return_val_if_fail (child != NULL, FALSE);
+			
+			gedit_mdi_child_set_closing (GEDIT_MDI_CHILD (child),
+						     TRUE);
+						     
+			l = g_list_next (l);
+		}
+		
+		return TRUE;
+	}
+
+	unsaved_docs = g_slist_reverse (unsaved_docs);
+
+	if (g_slist_length (unsaved_docs) == 1)
+	{
+		GtkWidget *view;
+		GeditMDIChild *child;
+
+		child = gedit_mdi_child_get_from_document (GEDIT_DOCUMENT (unsaved_docs->data));
+
+		view = GTK_WIDGET (g_list_nth_data (
+					bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (child)), 0));
+			
+		if (view != NULL)
+		{
+			window = bonobo_mdi_get_window_from_view (view);
+			gtk_window_present (GTK_WINDOW (window));
+			
+			bonobo_mdi_set_active_view (BONOBO_MDI (gedit_mdi), view);
+		}
+	}	
+	
+	dlg = gedit_close_confirmation_dialog_new (GTK_WINDOW (window), unsaved_docs);
+
+	close = gedit_close_confirmation_dialog_run (GEDIT_CLOSE_CONFIRMATION_DIALOG (dlg));
+		
+	gtk_widget_hide (dlg);
+
+	if (close)
+	{
+		GSList *sel_docs;
+
+		sel_docs = gedit_close_confirmation_dialog_get_selected_documents
+				(GEDIT_CLOSE_CONFIRMATION_DIALOG (dlg));
+
+		if (sel_docs != NULL)
+		{
+			GSList *sl;
+
+			sl = sel_docs;
+			while (sl != NULL)
+			{
+				GeditMDIChild *child;
+				GeditDocument *doc;
+
+				doc = GEDIT_DOCUMENT (sl->data);
+				child = gedit_mdi_child_get_from_document (doc);
+				g_return_val_if_fail (child != NULL, FALSE);
+				
+				close &= gedit_file_save (child, FALSE);
+				
+				sl = g_slist_next (sl);
+			}
+
+			g_slist_free (sel_docs);
+		}
+	}
+
+	gtk_widget_destroy (dlg);
+
+	if (close)
+	{
+		l = views;
+		while (l != NULL)
+		{
+			GeditView *view;
+			BonoboMDIChild *child;
+			
+			view = GEDIT_VIEW (l->data);
+
+			child =	bonobo_mdi_get_child_from_view (GTK_WIDGET (view));
+			g_return_val_if_fail (child != NULL, FALSE);
+			
+			gedit_mdi_child_set_closing (GEDIT_MDI_CHILD (child),
+						     TRUE);
+						     
+			l = g_list_next (l);
+		}
+	
+	}
+
+	g_slist_free (unsaved_docs);
+
+	return close;
+}
+
+static gboolean
+gedit_mdi_remove_views_handler (BonoboMDI *mdi, BonoboWindow *window)
+{
+	GList *views;
+	gboolean ret;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	views = bonobo_mdi_get_views_from_window (mdi, window);
+
+	ret = gedit_mdi_can_remove_views (views, window);
+
+	g_list_free (views);
+
+	return ret;
+}
+
+gboolean 
+gedit_mdi_remove_all (GeditMDI *mdi)
+{
+	GList *views;
+	gboolean ret;
+	
+	gedit_debug (DEBUG_MDI, "");
+
+	g_return_val_if_fail (GEDIT_IS_MDI (mdi), FALSE);
+
+	views = bonobo_mdi_get_views (BONOBO_MDI (mdi));
+
+	ret = gedit_mdi_can_remove_views (views, NULL);
+
+	g_list_free (views);
+
+	if (ret)
+	{
+		ret = bonobo_mdi_remove_all (BONOBO_MDI (mdi),
+					     TRUE);
+	}
+
+	return ret;
+}
+	
 #define MAX_URI_IN_TITLE_LENGTH 75
 
 void 
@@ -1852,4 +2006,5 @@ void gedit_mdi_update_languages_menu (BonoboMDI *mdi)
 
 	g_free (verb_name);
 }
+
 

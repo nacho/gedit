@@ -63,20 +63,24 @@ impl_gedit_window_server_openURIList (PortableServer_Servant _servant,
 				   const GNOME_Gedit_URIList * uris,
 				   CORBA_Environment * ev)
 {
-	GList *list = NULL;
+	GSList *list = NULL;
 	guint i;
 
 	/* convert from CORBA_sequence into GList */
-	for (i=0; i < uris->_length; i++) {
-		list = g_list_append (list, g_strdup (uris->_buffer[i]));
+	for (i = 0; i < uris->_length; i++) 
+	{
+		list = g_slist_prepend (list, g_strdup (uris->_buffer[i]));
 	}
 
-	if (list) {
+	list = g_slist_reverse (list);
+
+	if (list != NULL) 
+	{
 		gedit_file_open_uri_list (list, 0, TRUE);
-	}
 
-	g_list_foreach (list, (GFunc)g_free, NULL);
-	g_list_free (list);
+		g_slist_foreach (list, (GFunc)g_free, NULL);
+		g_slist_free (list);
+	}
 }
 
 static GNOME_Gedit_Document

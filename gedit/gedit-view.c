@@ -299,9 +299,9 @@ gedit_view_finalize (GObject *object)
 	g_object_unref (view->priv->document);
 	view->priv->document = NULL;
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-
 	g_free (view->priv);
+
+	G_OBJECT_CLASS (parent_class)->finalize (object);
 
 	gedit_debug (DEBUG_VIEW, "END");
 }

@@ -38,7 +38,7 @@
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
 #include <libgnomeui/gnome-window-icon.h>
-#include <eel/eel-vfs-extensions.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include "gedit2.h"
 #include "gedit-mdi.h"
@@ -69,7 +69,7 @@ typedef struct _CommandLineData CommandLineData;
 
 struct _CommandLineData
 {
-	GList* file_list;
+	GSList* file_list;
 	gint line_pos;
 };
 
@@ -156,25 +156,25 @@ gedit_load_file_list (CommandLineData *data)
 {	
 	gboolean res;
 
-	res = gedit_file_open_from_stdin (NULL);
-
-	if (!data) 
-	{
-		if (!res)
-			gedit_file_new ();
-		return;
-	}
-	
 	/* Update UI */
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
 
-	/* Load files */
-	if (!gedit_file_open_uri_list (data->file_list, data->line_pos, TRUE) && !res)
-		/* If no file is opened then create a new empty untitled document */
-		gedit_file_new ();
+	gedit_file_new ();
 
-	g_list_free (data->file_list);
+	res = gedit_file_open_from_stdin (NULL);
+
+	if (data == NULL) 
+	{
+		return;
+	}
+	
+	/* Load files */
+	gedit_file_open_uri_list (data->file_list, data->line_pos, TRUE);
+	
+	g_slist_foreach (data->file_list, (GFunc)g_free, NULL);
+	g_slist_free (data->file_list);
+	
 	g_free (data);
 }
 
@@ -195,20 +195,27 @@ gedit_get_command_line_data (GnomeProgram *program)
 
 	args = (char**) poptGetArgs(ctx);
 
-
 	if (args) 
 	{	
 		data = g_new0 (CommandLineData, 1);
+		
 		for (i = 0; args[i]; i++) 
 		{
-			if (*args[i] == '+') 
+			if (*args[i] == '+')
+			{	
 				data->line_pos = atoi (args[i] + 1);		
+			}
 			else
-				data->file_list = g_list_append (data->file_list, 
-								 eel_make_uri_from_shell_arg (args[i]));
+			{
+				data->file_list = 
+					g_slist_prepend (data->file_list, 
+							 gnome_vfs_make_uri_from_shell_arg (args[i]));
+			}
 		}
+
+		data->file_list = g_slist_reverse (data->file_list);
 	}
-	
+		
 	return data;
 }
 
@@ -223,7 +230,7 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 	GNOME_Gedit_Document document;
 	CommandLineData *data;
 	GNOME_Gedit_URIList *uri_list;
-	GList *list;
+	GSList *list;
 	gchar *stdin_data;
 	int i;
 	
@@ -256,7 +263,7 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 		/* convert the GList of files into a CORBA sequence */
 
 		uri_list = GNOME_Gedit_URIList__alloc ();
-		uri_list->_maximum = g_list_length (data->file_list);
+		uri_list->_maximum = g_slist_length (data->file_list);
 		uri_list->_length = uri_list->_maximum;
 		uri_list->_buffer = CORBA_sequence_GNOME_Gedit_URI_allocbuf (uri_list->_length);
 
@@ -276,8 +283,8 @@ gedit_handle_automation_cmdline (GnomeProgram *program)
 
 		GNOME_Gedit_Document_setLinePosition (document, data->line_pos, &env);
 
-		g_list_foreach (data->file_list, (GFunc)g_free, NULL);
-		g_list_free (data->file_list);
+		g_slist_foreach (data->file_list, (GFunc)g_free, NULL);
+		g_slist_free (data->file_list);
 		g_free (data);
 	}
 

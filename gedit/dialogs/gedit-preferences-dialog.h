@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-page-setup-dialog.c
+ * gedit-preferences-dialog.c
  * This file is part of gedit
  *
  * Copyright (C) 2001-2003 Paolo Maggi 

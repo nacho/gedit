@@ -55,7 +55,7 @@
 
 struct _GeditMDIChildPrivate
 {
-	gint dummy;
+	gboolean closing;
 };
 
 enum {
@@ -186,6 +186,8 @@ gedit_mdi_child_init (GeditMDIChild  *child)
 
 	child->priv = g_new0 (GeditMDIChildPrivate, 1);
 
+	child->priv->closing = FALSE;
+	
 	gedit_debug (DEBUG_MDI, "END");
 }
 
@@ -350,23 +352,25 @@ gedit_mdi_child_new (void)
 	gedit_mdi_child_connect_signals (child);
 	
 	gedit_debug (DEBUG_MDI, "END");
+
+	g_object_set_data (G_OBJECT (child->document), "mdi-child", child);
 	
 	return child;
 }
 
 GeditMDIChild*
-gedit_mdi_child_new_with_uri (const gchar *uri, const GeditEncoding *encoding, GError **error)
+gedit_mdi_child_new_with_uri (const gchar *uri, const GeditEncoding *encoding)
 {
 	GeditMDIChild *child;
 	GeditDocument* doc;
 	
 	gedit_debug (DEBUG_MDI, "");
 
-	doc = gedit_document_new_with_uri (uri, encoding, error);
+	doc = gedit_document_new_with_uri (uri, encoding);
 
 	if (doc == NULL)
 	{
-		gedit_debug (DEBUG_MDI, "ERROR: %s", (*error)->message);
+		gedit_debug (DEBUG_MDI, "ERROR");
 		return NULL;
 	}
 
@@ -381,10 +385,23 @@ gedit_mdi_child_new_with_uri (const gchar *uri, const GeditEncoding *encoding, G
 	gedit_mdi_child_connect_signals (child);
 
 	gedit_debug (DEBUG_MDI, "END");
-	
+
+	g_object_set_data (G_OBJECT (doc), "mdi-child", child);
+
 	return child;
 }
-		
+	
+GeditMDIChild *
+gedit_mdi_child_get_from_document (GeditDocument *doc)
+{
+	gpointer data;
+
+	data = g_object_get_data (G_OBJECT (doc), "mdi-child");
+	g_return_val_if_fail (data != NULL, NULL);
+
+	return GEDIT_MDI_CHILD (data);
+}
+
 static GtkWidget *
 gedit_mdi_child_create_view (BonoboMDIChild *child)
 {
@@ -397,7 +414,9 @@ gedit_mdi_child_create_view (BonoboMDIChild *child)
 
 	new_view = gedit_view_new (GEDIT_MDI_CHILD (child)->document);
 
+	/*
 	gtk_widget_show_all (GTK_WIDGET (new_view));
+	*/
 
 	return GTK_WIDGET (new_view);
 }
@@ -826,3 +845,20 @@ gedit_mdi_child_set_label (BonoboMDIChild *child, GtkWidget *view,  GtkWidget *o
 
 	return ret;
 }
+
+void		
+gedit_mdi_child_set_closing (GeditMDIChild *child,
+			     gboolean       closing)
+{
+	g_return_if_fail (GEDIT_IS_MDI_CHILD (child));
+
+	child->priv->closing = closing;	
+}
+
+gboolean gedit_mdi_child_get_closing (GeditMDIChild *child)
+{
+	g_return_val_if_fail (GEDIT_IS_MDI_CHILD (child), FALSE);
+
+	return child->priv->closing;	
+}
+

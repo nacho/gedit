@@ -171,7 +171,7 @@ bonobo_window_flash (BonoboWindow * win, const gchar * flash)
  * Flash a temporary message on the statusbar of gedit.
  **/
 void
-gedit_utils_flash (gchar *msg)
+gedit_utils_flash (const gchar *msg)
 {
 	g_return_if_fail (msg != NULL);
 	
@@ -197,6 +197,49 @@ gedit_utils_flash_va (gchar *format, ...)
 	gedit_utils_flash (msg);
 	g_free (msg);
 }
+
+void
+gedit_utils_set_status (const gchar *msg)
+{
+	BonoboWindow *win;
+	BonoboUIComponent *ui_component;
+
+	win = gedit_get_active_window ();
+  	g_return_if_fail (BONOBO_IS_WINDOW (win));
+  	
+	ui_component = bonobo_mdi_get_ui_component_from_window (win);
+	g_return_if_fail (ui_component != NULL);
+	
+	if (current_mi != NULL)
+	{
+		g_source_remove (current_mi->timeoutid);
+		remove_message_timeout (current_mi);
+	}
+	
+	if (bonobo_ui_component_path_exists (ui_component, "/status", NULL))
+	{
+		bonobo_ui_component_set_status (ui_component, (msg != NULL) ? msg : " ", NULL);
+    		
+		current_mi =  NULL;
+  	}   
+}
+
+void
+gedit_utils_set_status_va (gchar *format, ...)
+{
+	va_list args;
+	gchar *msg;
+
+	g_return_if_fail (format != NULL);
+
+	va_start (args, format);
+	msg = g_strdup_vprintf (format, args);
+	va_end (args);
+
+	gedit_utils_set_status (msg);
+	g_free (msg);
+}
+
 
 gboolean
 gedit_utils_uri_has_file_scheme (const gchar *uri)
@@ -339,7 +382,6 @@ gedit_utils_error_reporting_loading_file (
 	GtkWidget *dialog;
 
 	g_return_if_fail (uri != NULL);
-	g_return_if_fail (error != NULL);
 	
 	full_formatted_uri = eel_format_uri_for_display (uri);
 
@@ -356,7 +398,7 @@ gedit_utils_error_reporting_loading_file (
 	else
 		encoding_name = g_strdup ("UTF-8");
 	
-	if (error->domain == GEDIT_DOCUMENT_IO_ERROR)
+	if ((error != NULL) && (error->domain == GEDIT_DOCUMENT_IO_ERROR))
 	{
 		switch (error->code)
 		{
@@ -517,6 +559,11 @@ gedit_utils_error_reporting_loading_file (
 
 				break;
 
+			case GNOME_VFS_ERROR_GENERIC:
+				error_message = g_strdup_printf (
+                        			_("Could not open the file \"%s\"."),
+					 	uri_for_display);
+				break;
 			/*
 			case GNOME_VFS_ERROR_GENERIC:
 			case GNOME_VFS_ERROR_INTERNAL:
@@ -610,13 +657,13 @@ gedit_utils_error_reporting_loading_file (
 	
 	if (error_message == NULL)
 	{
-		if (error->message == NULL)
+		if ((error == NULL) || (error->message == NULL))
 			error_message = g_strdup_printf (
                         			_("Could not open the file \"%s\"."),
 					 	uri_for_display);
 		else
 			error_message = g_strdup_printf (
-                        			_("Could not open the file \"%s\".\n\n%s"),
+                        			_("Could not open the file \"%s\".\n\n%s."),
 					 	uri_for_display, error->message);
 
 	}
@@ -696,7 +743,7 @@ gedit_utils_error_reporting_saving_file (
 void
 gedit_utils_error_reporting_reverting_file (
 		const gchar *uri,
-		GError *error,
+		const GError *error,
 		GtkWindow *parent)
 {
 	gchar *scheme_string;
@@ -711,7 +758,7 @@ gedit_utils_error_reporting_reverting_file (
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (error != NULL);
 	
-	full_formatted_uri = eel_format_uri_for_display (uri);
+	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain

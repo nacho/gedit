@@ -71,10 +71,15 @@ struct _GeditMDIChildClass
 
 GtkType        	gedit_mdi_child_get_type 	(void) G_GNUC_CONST;
 
-GeditMDIChild*	gedit_mdi_child_new		(void);
-GeditMDIChild*  gedit_mdi_child_new_with_uri 	(const gchar          *uri, 
-						 const GeditEncoding  *encoding,
-						 GError              **error);
+GeditMDIChild  *gedit_mdi_child_new		(void);
+GeditMDIChild  *gedit_mdi_child_new_with_uri 	(const gchar          *uri, 
+						 const GeditEncoding  *encoding);
+
+GeditMDIChild  *gedit_mdi_child_get_from_document (GeditDocument *doc);
+
+void		gedit_mdi_child_set_closing	(GeditMDIChild        *child,
+						 gboolean              closing);
+gboolean	gedit_mdi_child_get_closing	(GeditMDIChild        *child);
 
 #endif /* __GEDIT_MDI_CHILD_H__ */
 

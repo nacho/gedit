@@ -211,7 +211,6 @@ static BonoboMDIChild *
 mdi_child_create_cb (const gchar *str)
 {
 	GeditMDIChild *child;
-	GError *error = NULL;
 
 	gedit_debug (DEBUG_SESSION, "");
 
@@ -221,18 +220,12 @@ mdi_child_create_cb (const gchar *str)
 		gedit_debug (DEBUG_SESSION, "URI: %s", str);
 
 		/* FIXME */
-		child = gedit_mdi_child_new_with_uri (str, NULL, &error);
+		child = gedit_mdi_child_new_with_uri (str, NULL);
 	}
 	else
 		child = gedit_mdi_child_new ();
 
-	if (error != NULL) {
-		/* FIXME: we are restoring the session; where should we report errors? */
-		g_error_free (error);
-		return NULL;
-	}
-
-	return BONOBO_MDI_CHILD (child);
+	return (child == NULL) ? NULL : BONOBO_MDI_CHILD (child);
 }
 
 /**
