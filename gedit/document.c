@@ -161,7 +161,7 @@ gedit_document_get_tab_name (Document *doc)
 	int max_number = 0;
 	int i;
 	const char *UNTITLED = N_("Untitled");
-	const char *RO = N_("RO - "); /* translators : RO = Read Only */
+	const char *RO = N_("RO - "); /* xgettext translators : RO = Read Only */
 
 	gedit_debug ("", DEBUG_DOCUMENT);
 
