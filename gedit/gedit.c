@@ -16,6 +16,12 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <unistd.h>
+#define __need_sigset_t
+#include <signal.h>
+#define __need_timespec
+#include <time.h>
+/*#include <signal.h>*/
 #include <config.h>
 #ifndef WITHOUT_GNOME
 #include <gnome.h>
@@ -190,7 +196,9 @@ main (int argc, char **argv)
 	gtk_main ();
 
 	gE_prefs_close ();
+	gdk_threads_leave();
 	return 0;
+
 } /* main */
 
 

@@ -49,6 +49,12 @@ static void open_file_sel( GtkWidget *widget, gpointer data )
   gtk_widget_show_all( file_sel );
 }
 
+static void done( GtkWidget *widget, gpointer data )
+{
+  client_finish(context);
+  gtk_main_quit();
+}
+
 int main( int argc, char *argv[] )
 {
   GtkWidget *label;
@@ -65,7 +71,7 @@ int main( int argc, char *argv[] )
 
   dialog = gtk_dialog_new();
   gtk_window_set_title( GTK_WINDOW( dialog ), "Choose files to diff" );
-  gtk_signal_connect( GTK_OBJECT( dialog ), "destroy", gtk_main_quit, NULL );
+  gtk_signal_connect( GTK_OBJECT( dialog ), "destroy", GTK_SIGNAL_FUNC( done ), NULL );
   gtk_container_border_width( GTK_CONTAINER( GTK_DIALOG( dialog )->vbox ), 10 );
 
   label = gtk_label_new( "Choose files to diff:" );
@@ -93,7 +99,7 @@ int main( int argc, char *argv[] )
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->action_area ), button, FALSE, TRUE, 0 );
 
   button = gtk_button_new_with_label( "Cancel" );
-  gtk_signal_connect( GTK_OBJECT( button ), "clicked", gtk_main_quit, NULL );
+  gtk_signal_connect( GTK_OBJECT( button ), "clicked", GTK_SIGNAL_FUNC( done ), NULL );
   gtk_box_pack_start( GTK_BOX( GTK_DIALOG( dialog )->action_area ), button, FALSE, TRUE, 0 );
 
   gtk_widget_show_all( dialog );

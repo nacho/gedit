@@ -254,14 +254,14 @@ void plugin_real_get( plugin *the_plugin, gchar *buffer, gint length )
 
       if ( bytes == -1 )
 	{
-	  g_warning( "Go: Error reading from plugin\n" );
+	  g_warning( "Go: Error reading from plugin." );
 	  *start = 0;
 	  return;
 	}
 
       if ( bytes == 0 )
 	{
-	  g_warning( "Go: Error EOF read?\n" );
+	  g_warning( "Go: Error EOF read?" );
 	  *start = 0;
 	  return;
 	}
@@ -296,7 +296,7 @@ static void *plugin_parse(plugin *plug)
 
   while( 1 )
     {
-      plugin_get( plug, &command, 1 );
+      plugin_real_get( plug, &command, 1 );
 
       switch(command)
 	{
@@ -329,7 +329,7 @@ static void *plugin_parse(plugin *plug)
 	  g_free( plug );
 	  return NULL;                            /* Exit point. */
 	case 'e':
-	  plugin_get( plug, &command, 1 );
+	  plugin_real_get( plug, &command, 1 );
 	  switch(command)
 	    {
 	    case 'r':
@@ -372,7 +372,7 @@ static void *plugin_parse(plugin *plug)
 	      if( buffer != NULL )
 		{
 		  plugin_send_data_with_length( plug, buffer, strlen( buffer ) );
-		  /*		  g_free( buffer );*/
+		  g_free( buffer );
 		}
 	      else
 		plugin_send_data_with_length( plug, "", 0 );
@@ -529,6 +529,11 @@ static void *plugin_parse(plugin *plug)
 	    gdk_threads_leave();
 	  }
 	  break;
+	case 0:
+	  g_warning("Go: Bad read.  Plugin died?");
+	  plugin_finish( plug );
+	  g_free( plug );
+	  return NULL;                            /* Exit point. */	  
 	default:
 	  break;
 	}
