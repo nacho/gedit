@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-29 12:47+0100\n"
-"PO-Revision-Date: 2005-01-29 13:49+0100\n"
+"POT-Creation-Date: 2005-02-02 07:55+0100\n"
+"PO-Revision-Date: 2005-02-02 08:12+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "vytváracie rozhranie pre gedit automation"
 msgid "Edit text files"
 msgstr "Úprava textových súborov"
 
-#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:328
+#: data/gedit.desktop.in.in.h:2 gedit/gedit2.c:323
 msgid "Text Editor"
 msgstr "Textový editor"
 
@@ -1736,16 +1736,15 @@ msgid ""
 "Location') dialog and try again."
 msgstr ""
 "Prosím skontrolujte, či sa nepokúšate otvoriť binárny súbor a že ste si "
-"zvolili správne kódovanie znakov v dialógovom okne 'Otvoriť súbor... ' "
-"(alebo 'Otvoriť miesto') a skúste znova."
+"zvolili správne kódovanie znakov v dialógovom okne 'Otvoriť súbor... "
+"' (alebo 'Otvoriť miesto') a skúste znova."
 
 #: gedit/gedit-io-error-dialogs.c:315
 msgid ""
 "The file contains data in an invalid format. Probably, you are trying to "
 "open a binary file."
 msgstr ""
-"Súbor obsahuje dáta v neplatnom formáte. "
-"Možno chcete otvoriť binárny súbor."
+"Súbor obsahuje dáta v neplatnom formáte. Možno chcete otvoriť binárny súbor."
 
 #: gedit/gedit-io-error-dialogs.c:397 gedit/gedit-io-error-dialogs.c:404
 #: gedit/gedit-io-error-dialogs.c:410 gedit/gedit-io-error-dialogs.c:429
@@ -1786,18 +1785,16 @@ msgstr ""
 "bežiace aplikácie a skúste to znovu."
 
 #: gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
 msgid ""
 "The host name was empty. Please, check that your proxy settings are correct "
 "and try again."
 msgstr ""
-"Nepodarilo sa otvoriť súbor \"%s\", pretože je hostiteľ prázdny.\n"
-"\n"
-"Prosím, overte nastavenie proxy a skúste to znovu."
+"Názov hostiteľa bol prázdny. Prosím skontrolujte, že vaše nastavenia proxy "
+"sú správne a skúste znova."
 
 #: gedit/gedit-io-error-dialogs.c:507
 msgid "Attempt to log in failed."
-msgstr ""
+msgstr "Pokus o prihlásenie zlyhal."
 
 #: gedit/gedit-io-error-dialogs.c:513
 #, fuzzy
@@ -1826,8 +1823,7 @@ msgstr "Súbor \"%s\" už existuje"
 
 #: gedit/gedit-io-error-dialogs.c:662
 msgid "Please, check that you typed the location correctly."
-msgstr ""
-"Prosím overte, že ste zadali správne umiestnenie."
+msgstr "Prosím overte, že ste zadali správne umiestnenie."
 
 #: gedit/gedit-io-error-dialogs.c:668 gedit/gedit-io-error-dialogs.c:674
 #: gedit/gedit-io-error-dialogs.c:680 gedit/gedit-io-error-dialogs.c:687
@@ -1838,13 +1834,11 @@ msgstr "Nie je možné vytvoriť súbor \"%s\""
 
 #: gedit/gedit-io-error-dialogs.c:670
 msgid "Make sure you have the appropriate write permissions."
-msgstr ""
-"Overte, že máte dostatočné práva pre zápis."
+msgstr "Overte, že máte dostatočné práva pre zápis."
 
 #: gedit/gedit-io-error-dialogs.c:676
 msgid "The file name is too long."
-msgstr ""
-"Meno súboru je príliš dlhé."
+msgstr "Meno súboru je príliš dlhé."
 
 #: gedit/gedit-io-error-dialogs.c:682
 msgid ""
@@ -1859,8 +1853,8 @@ msgid ""
 "There is not enough disk space to create the file. Please free some disk "
 "space and try again."
 msgstr ""
-"Nedostatok miesta pre vytvorenie súboru. "
-"Uvoľnite nejaké miesto na disku a skúste to znovu."
+"Nedostatok miesta pre vytvorenie súboru. Uvoľnite nejaké miesto na disku a "
+"skúste to znovu."
 
 #. Read only
 #: gedit/gedit-mdi-child.c:248
@@ -2362,7 +2356,7 @@ msgstr "_Zobraziť"
 
 #: gedit/gedit-utils.c:691
 msgid " (invalid Unicode)"
-msgstr ""
+msgstr " (neplatné Unicode)"
 
 #.
 #. if (col == chars)
@@ -2385,38 +2379,41 @@ msgstr "  CEZ"
 msgid "  INS"
 msgstr "  VKL"
 
-#: gedit/gedit2.c:87
+#: gedit/gedit2.c:86
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
+"Nastaviť kódovanie znakov, ktoré bude použité na otvorenie súborov "
+"uvedené v príkazovom riadku"
 
-#: gedit/gedit2.c:90
+#: gedit/gedit2.c:89
 msgid "Quit an existing instance of gedit"
 msgstr "Ukončiť bežiaci gedit"
 
-#: gedit/gedit2.c:93
+#: gedit/gedit2.c:92
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Vytvoriť nové hlavné okno v už bežiacom gedit"
 
-#: gedit/gedit2.c:96
+#: gedit/gedit2.c:95
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Vytvoriť nový dokument v už bežiacom gedit"
 
-#: gedit/gedit2.c:183
+#: gedit/gedit2.c:178
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
-msgstr ""
+msgstr "Zadané kódovanie \"%s\" nie je platné\n"
 
 #: gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+msgstr "Súbor, ktorý sa pokúšate otvoriť, obsahuje neplatnú postupnosť bajtov."
 
 #: gedit/gedit-convert.c:160 gedit/gedit-convert.c:204
 msgid ""
 "gedit was not able to automatically determine the encoding of the file you "
 "want to open."
 msgstr ""
+"gedit nemohol automaticky určiť kódovanie súboru, ktorý chcete otvoriť."
 
 #: plugins/changecase/changecase.c:43
 msgid "C_hange Case"
@@ -2454,7 +2451,7 @@ msgstr "Odstráni vybraný text"
 
 #: plugins/changecase/changecase.c:57
 msgid "Capitalize the first letter of each selected word"
-msgstr ""
+msgstr "Zmeniť prvé písmeno každého označeného slova na veľké"
 
 #: plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
@@ -2652,7 +2649,9 @@ msgstr "Nastala chyba pročas spustenia zvoleného príkazu."
 msgid ""
 "Executes an external program and, if required, displays its output in the "
 "output window."
-msgstr "Spustí externý program a zobrazí jeho výstup vo výstupnom okne, aj je to požadované."
+msgstr ""
+"Spustí externý program a zobrazí jeho výstup vo výstupnom okne, aj je to "
+"požadované."
 
 #: plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
 msgid "Shell command"
@@ -3106,9 +3105,8 @@ msgid "Box"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "Stredoeurópska"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Center"
@@ -3116,7 +3114,7 @@ msgstr "Vystredené"
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Char enconding of linked resource"
-msgstr ""
+msgstr "Kódovanie znakov spojeného zdroja"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked(state)"
@@ -3147,9 +3145,8 @@ msgid "Code content type"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "Kopírovať vybrané riadky"
+msgstr "Farba zvoleného odkazu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
@@ -3165,12 +3162,11 @@ msgstr "Komentár"
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr ""
+msgstr "Úryvok počítačového kódu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "_Obsah"
+msgstr "Schéma obsahu"
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Content type"
@@ -3186,7 +3182,7 @@ msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:46
 msgid "DIV container"
-msgstr ""
+msgstr "Kontajner DIV"
 
 #: plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
@@ -3206,7 +3202,7 @@ msgstr "Zoznam definícií"
 
 #: plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition term"
-msgstr ""
+msgstr "Výraz definície"
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Deleted text"
@@ -3259,7 +3255,7 @@ msgstr "Vložený objekt"
 
 #: plugins/taglist/HTML.tags.xml.in.h:64 plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
+msgstr "Zdôraznenie"
 
 #: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Encode type"
