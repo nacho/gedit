@@ -210,8 +210,6 @@ gnome_print_font_dialog_init (GnomePrintFontDialog *fontseldiag)
 	
 	gtk_container_set_border_width (GTK_CONTAINER (fontseldiag), 4);
 
-	gtk_window_set_resizable (GTK_WINDOW (fontseldiag), FALSE);
-
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 4);
 
@@ -224,7 +222,7 @@ gnome_print_font_dialog_init (GnomePrintFontDialog *fontseldiag)
 							ATK_RELATION_CONTROLLER_FOR);
 				
 	gtk_box_pack_start (GTK_BOX (vbox), fontseldiag->fontsel, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), preview_frame, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), preview_frame, FALSE, FALSE, 0);
 
 	font = gnome_font_selection_get_font (GNOME_FONT_SELECTION (fontseldiag->fontsel));
 	gnome_font_preview_set_font (GNOME_FONT_PREVIEW (fontseldiag->preview), font);
