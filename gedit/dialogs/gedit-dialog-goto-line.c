@@ -175,7 +175,7 @@ dialog_goto_line_get_dialog (void)
 					 GTK_RESPONSE_OK);
 
 	g_signal_connect (G_OBJECT (dialog->entry), "insert_text",
-			  G_CALLBACK (entry_insert_text), dialog);
+			  G_CALLBACK (entry_insert_text), NULL);
 
 	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
 			  G_CALLBACK (dialog_destroyed), &dialog);

@@ -38,7 +38,7 @@
 #include <libgnome/gnome-help.h>
 #include <libgnomeui/gnome-file-entry.h>
 #include <gconf/gconf-client.h>
-#include <eel/eel-vfs-extensions.h>
+#include <libgnomevfs/gnome-vfs-utils.h>
 
 #include <unistd.h> /* getpid and unlink */
 #include <stdlib.h> /* rand   */
@@ -594,8 +594,10 @@ diff_execute (DiffDialog *dialog)
 {
 	gint state_1;
 	gint state_2;
-	gchar * file_name_1;
-	gchar * file_name_2;
+	gchar *file_name_1;
+	gchar *file_name_2;
+	gchar *qfn1;
+	gchar *qfn2;
 	
 	GeditDocument *document;
 	
@@ -684,8 +686,7 @@ diff_execute (DiffDialog *dialog)
 		gchar *uri;
 		gchar *sn;
 		
-		if (file_name_1 != NULL)
-			g_free (file_name_1);
+		g_free (file_name_1);
 
 		document = (GeditDocument *)g_list_nth_data (dialog->open_docs, 
 				dialog->document_selected_1);
@@ -702,7 +703,7 @@ diff_execute (DiffDialog *dialog)
 		gedit_debug (DEBUG_PLUGINS, "file_name_1: %s", file_name_1);
 		g_free (sn);
 		
-		uri = eel_make_uri_canonical (file_name_1);
+		uri = gnome_vfs_get_uri_from_local_path (file_name_1);
 		g_return_val_if_fail (uri != NULL, FALSE);
 		
 		if (!gedit_document_save_a_copy_as (document, uri, NULL))
@@ -719,8 +720,7 @@ diff_execute (DiffDialog *dialog)
 		gchar *sn;
 		gchar *uri;
 
-		if (file_name_2 != NULL)
-			g_free (file_name_2);
+		g_free (file_name_2);
 		
 		document = (GeditDocument *)g_list_nth_data (dialog->open_docs, 
 				dialog->document_selected_2);
@@ -738,7 +738,7 @@ diff_execute (DiffDialog *dialog)
 		gedit_debug (DEBUG_PLUGINS, "file_name_2: %s", file_name_2);
 		g_free (sn);
 		
-		uri = eel_make_uri_canonical (file_name_2);
+		uri = gnome_vfs_get_uri_from_local_path (file_name_2);
 		g_return_val_if_fail (uri != NULL, FALSE);
 
 		if (!gedit_document_save_a_copy_as (document, uri, NULL))
@@ -760,14 +760,18 @@ diff_execute (DiffDialog *dialog)
 		goto finally;
 	}
 
-	/* FIXME: use g_shell_quote - Paolo */
+	qfn1 = g_shell_quote (file_name_1);
+	qfn2 = g_shell_quote (file_name_2);
 	
-	command_line = g_strdup_printf ("%s %s %s \"%s\" \"%s\"",
+	command_line = g_strdup_printf ("%s %s %s %s %s",
 					diff_program_location, 
 					uf ? "-u" : "", 
 					ib ? "-i" : "", 
-					file_name_1, 
-					file_name_2);
+					qfn1, 
+					qfn2);
+	
+	g_free (qfn1);
+	g_free (qfn2);
 	
 	gedit_debug (DEBUG_PLUGINS, "Command line: %s", command_line);
 
@@ -868,21 +872,6 @@ diff_execute (DiffDialog *dialog)
 		}
 
 		display_results (output, command_line, uf);
-
-#if 0
-		gedit_file_new ();
-		
-		document = gedit_get_active_document ();
-		g_return_val_if_fail (document != NULL, FALSE);
-
-		gedit_document_begin_not_undoable_action (document);
-		
-		/* Insert text in the buffer */
-		gedit_document_insert_text (document, 0, output, output_size);
-		gedit_document_set_cursor (document, 0);
-		
-		gedit_document_end_not_undoable_action (document);
-#endif
 	}
 		
 	g_free (output);
@@ -891,19 +880,16 @@ diff_execute (DiffDialog *dialog)
 	
 finally:
 	
-	if (!state_1)
+	if (!state_1 && (file_name_1 != NULL))
 		unlink (file_name_1);
-	if (!state_2)
+	
+	if (!state_2 && (file_name_2 != NULL))
 		unlink (file_name_2);
 
-	if (file_name_1 != NULL)
-		g_free (file_name_1);
+	g_free (file_name_1);
+	g_free (file_name_2);
 
-	if (file_name_2 != NULL)
-		g_free (file_name_2);
-
-	if (command_line != NULL)
-		g_free (command_line);
+	g_free (command_line);
 
 	if (ret)
 	{
