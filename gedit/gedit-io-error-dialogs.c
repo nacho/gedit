@@ -242,6 +242,12 @@ gedit_error_reporting_loading_file (const gchar *uri,
 						      "Probably, you are trying to open a binary file."));
 			break;
 
+		case GEDIT_ERROR_NOT_REGULAR_FILE:
+			error_message = g_strdup_printf (_("Could not open the file \"%s\""),
+							 uri_for_display);
+			message_details = g_strdup (_("The file you are trying to open is not a regular file."));
+			break;
+
 		case GNOME_VFS_ERROR_GENERIC:
 			error_message = g_strdup_printf (_("Could not open the file \"%s\""),
 							 uri_for_display);
