@@ -1,3 +1,22 @@
+2003-10-20  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* shell_output/Makefile.am (INCLUDES): remove -DGTK_DISABLE_DEPRECATED
+	and -DGNOME_DISABLE_DEPRECATED
+
+	* taglist/Makefile.am (INCLUDES): remove -DGTK_DISABLE_DEPRECATED
+
+2003-10-16  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* shell_output/shell_output.c (handle_command_output): 
+	on some systems EOF is indicating by G_IO_IN and a 
+	zero-length read, and not by G_IO_HUP (fixes bug #121377,
+	thanks to Laurent Vivier <Laurent.Vivier@bull.net>)
+
+	* shell_output/shell_output.c (handle_command_output): 
+	handle the 'pos' return value from g_io_channel_read_line() 
+	correctly (fixes bug #124052, patch by 
+	Owen Taylor <otaylor@redhat.com>)
+
 2003-09-30  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* spell/gedit-spell-checker.c: the spell plugin now 

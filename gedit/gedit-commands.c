@@ -579,7 +579,7 @@ gedit_cmd_help_about (BonoboUIComponent *uic, gpointer user_data, const gchar* v
 				"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
 				"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
 				"Copyright \xc2\xa9 2003 Paolo Maggi",
-				_("gedit is a small and lightweight text editor for Gnome"),
+				_("gedit is a small and lightweight text editor for the GNOME Desktop"),
 				(const char **)authors,
 				(const char **)documenters,
 				strcmp (translator_credits, "translator_credits") != 0 ? 

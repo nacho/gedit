@@ -1,3 +1,14 @@
+2003-10-20  Paolo Maggi  <paolo.maggi@polito.it> 
+
+	* gedit-commands.c (gedit_cmd_help_about): s/Gnome/the GNOME Desktop
+
+2003-10-20  Paolo Maggi  <paolo.maggi@polito.it>
+
+	* Makefile.am (INCLUDES): remove -DGTK_DISABLE_DEPRECATED and
+	-DGNOME_DISABLE_DEPRECATED
+	
+	* dialogs/Makefile.am: ditto
+
 2003-09-26  Paolo Maggi  <paolo.maggi@polito.it>
 
 	*  plugin-manager.glade2: added a label to the About Plugin button
@@ -22,7 +33,6 @@
  	Thanks to Balamurali Viswanathan <balamurali.viswanathan@wipro.com> for
  	the initial patch.
  
-
 2003-09-18  Paolo Maggi  <paolo.maggi@polito.it>
 
 	* dialogs/gedit-preferences.glade2:

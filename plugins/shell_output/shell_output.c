@@ -384,17 +384,17 @@ static gboolean
 handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data) 
 {
 	gboolean not_running = FALSE;
-
+	
 	ShellOutputDialog *dialog = (ShellOutputDialog *)data;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
-	if ((condition == G_IO_IN) || (condition == G_IO_IN + G_IO_HUP)) { 
-	
+	if ((condition & G_IO_IN) != 0)
+	{       
 		GError	*error = NULL;
 		gchar   *string = NULL;
-		gint	 len = 0;
-		gint	 pos = 0;
+		gsize	 len = 0;
+		gsize	 pos = 0;
 		gchar 	*line;
 	
 		gedit_debug (DEBUG_PLUGINS, "1");
@@ -407,7 +407,6 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 		do 
 		{
 			gint  	 status;
-			gchar 	*p;
 
 			
 			if (running != RUNNING) 
@@ -422,6 +421,15 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 			{
 				status = g_io_channel_read_line (ioc, &string, &len, &pos, &error);
 				
+				if (len == 0)
+ 				{
+ 					/* G_IO_IN + EOF = G_IO_HUP
+ 					 * -> the pipe is broken
+ 					 */
+					not_running = TRUE;
+					break;
+				}
+				
 				while (gtk_events_pending ()) 
 				{
 					if (running == MAKE_IT_CLOSE) 
@@ -435,6 +443,9 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 
 				
 			} while (status == G_IO_STATUS_AGAIN);
+			
+			if (not_running)
+				break;
 			
 			if (status != G_IO_STATUS_NORMAL) 
 			{
@@ -456,11 +467,7 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 				
 			gedit_debug (DEBUG_PLUGINS, "1.3");
 
-			p = g_utf8_offset_to_pointer (string, pos);
-
-			*p = '\0';
-	
-			line = g_markup_escape_text (string, -1);
+			line = g_markup_escape_text (string, pos);
 
 			if (ioc == dialog->ioc_stdout)	
 			{
