@@ -28,3 +28,6 @@ gedit_SOURCES = 	\
 #gedit_LDADD = -lm -lgtk -lgdk -lglib -lXext -lX11 -L/usr/X11R6/lib -L/usr/local/lib
 
 gedit_LDADD = $(GNOME_LIBDIR) $(GNOMEUI_LIBS) $(INTLLIBS)
+
+sysdir   = $(datadir)/apps/Applications
+sys_DATA = gedit.desktop
