@@ -1,18 +1,18 @@
 # gedit ja.po.
-# Copyright (C) 1999,2000,2002-2004 Free Software Foundation, Inc.
+# Copyright (C) 1999,2000,2002-2005 Free Software Foundation, Inc.
 # Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>, 1999
 # Yuusuke Tahara <tahara@gnome.gr.jp>
 # Yukihiro Nakai <nakai@gnome.gr.jp>
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2002.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
-# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2004.
+# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-12 00:20+0100\n"
-"PO-Revision-Date: 2004-12-22 13:40+0900\n"
+"POT-Creation-Date: 2005-01-15 13:51+0900\n"
+"PO-Revision-Date: 2005-01-15 13:49+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -162,11 +162,11 @@ msgstr "印刷時のヘッダに使用するフォント"
 
 #: data/gedit.schemas.in.h:22
 msgid "Highlight Current Line"
-msgstr ""
+msgstr "現在の行の強調表示"
 
 #: data/gedit.schemas.in.h:23
 msgid "Highlight Matching Bracket"
-msgstr ""
+msgstr "対応するカッコの強調表示"
 
 #: data/gedit.schemas.in.h:24
 msgid ""
@@ -466,14 +466,12 @@ msgid "Whether gedit should enable syntax highlighting."
 msgstr "強調表示を有効にするかどうかを指定します。"
 
 #: data/gedit.schemas.in.h:74
-#, fuzzy
 msgid "Whether gedit should highlight matching bracket."
-msgstr "強調表示を有効にするかどうかを指定します。"
+msgstr "対応するカッコを強調表示するかどうかを指定します。"
 
 #: data/gedit.schemas.in.h:75
-#, fuzzy
 msgid "Whether gedit should highlight the current line."
-msgstr "ドキュメントを印刷する際に強調表示も印刷するかどうかを指定します。"
+msgstr "カーソル行を強調表示するかどうかを指定します。"
 
 #: data/gedit.schemas.in.h:76
 msgid "Whether gedit should include a document header when printing documents."
@@ -537,9 +535,8 @@ msgid "Activate %s"
 msgstr "%s をアクティブにします"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:142
-#, fuzzy
 msgid "Close _without Saving"
-msgstr "この出力ウィンドウを閉じます"
+msgstr "保存せずに閉じる(_W)"
 
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -766,14 +763,12 @@ msgid "<b>Automatic Indentation</b>"
 msgstr "<b>自動インデント</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:3
-#, fuzzy
 msgid "<b>Bracket Matching</b>"
-msgstr "<b>テキストの折り返し</b>"
+msgstr "<b>対応するカッコ</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:4
-#, fuzzy
 msgid "<b>Current Line</b>"
-msgstr "<b>テキストの折り返し</b>"
+msgstr "<b>カーソルがある行</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:5
 msgid "<b>Elements</b>"
@@ -850,7 +845,7 @@ msgstr "フォントと色"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Hi_ghlight current line"
-msgstr ""
+msgstr "現在の行を強調表示する(_G)"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:23
 msgid "Highlight _mode:"
@@ -858,7 +853,7 @@ msgstr "強調表示モード(_M):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Highlight matching bracket"
-msgstr ""
+msgstr "対応するカッコを強調表示する"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Insert _spaces instead of tabs"
@@ -974,7 +969,7 @@ msgstr "列の右マージン(_R):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_Tab width:"
-msgstr ""
+msgstr "タブの幅(_T):"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:54
 msgid "_Unlimited undo"
@@ -1159,7 +1154,6 @@ msgstr ""
 #. this translation; in that case, please write them on separate
 #. lines seperated by newlines (\n).
 #: gedit/gedit-commands.c:560
-#, fuzzy
 msgid "translator-credits"
 msgstr ""
 "相花 毅 <aihana@gnome.gr.jp>\n"
@@ -1382,15 +1376,15 @@ msgstr "ファイル \"%s\" は読み込み専用です。\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "このファイルで上書きしてみますか？"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:374
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:385
 msgid "All Files"
 msgstr "全てのファイル"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:382
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:393
 msgid "All Text Files"
 msgstr "全てのテキスト・ファイル"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:393
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:404
 msgid "_Character Coding:"
 msgstr "文字コード(_C):"
 
@@ -2319,16 +2313,16 @@ msgstr " (Unicode が不正です)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:663
+#: gedit/gedit-view.c:843
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "(%d 行, %d 列)"
 
-#: gedit/gedit-view.c:701
+#: gedit/gedit-view.c:881
 msgid "  OVR"
 msgstr " [上書き]"
 
-#: gedit/gedit-view.c:703
+#: gedit/gedit-view.c:883
 msgid "  INS"
 msgstr " [挿入]"
 
@@ -2509,39 +2503,33 @@ msgid "User name"
 msgstr "ユーザ名"
 
 #: plugins/savecopy/savecopy.c:49
-#, fuzzy
-msgid "Sa_ve Copy"
-msgstr "コピー(_C)"
+msgid "Sa_ve Copy..."
+msgstr "複製の保存(_V)..."
 
 #: plugins/savecopy/savecopy.c:52
-#, fuzzy
 msgid "Save a copy of the current document"
-msgstr "このドキュメントの言語を設定します"
+msgstr "このドキュメントの複製を保存します"
 
 #: plugins/savecopy/savecopy.c:212
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save a copy the file to \"%s\""
-msgstr "ファイル \"%s\" を保存できませんでした"
+msgstr "ファイルの複製を \"%s\" へ保存できませんでした"
 
 #: plugins/savecopy/savecopy.c:311
-#, fuzzy
 msgid "You are trying to overwrite the original file"
-msgstr "開こうとしているファイルは通常のファイルではありません。"
+msgstr "オリジナルのファイルに上書きしようとしています"
 
-#: plugins/savecopy/savecopy.c:362
-#, fuzzy
-msgid "Save Copy"
-msgstr "何も保存しない(_N)"
+#: plugins/savecopy/savecopy.c:363
+msgid "Save Copy..."
+msgstr "複製の保存..."
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Save a Copy"
-msgstr "開いている全てのファイルを保存します"
+msgstr "複製の保存"
 
 #: plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Saves a copy of the current document to a local or remote location."
-msgstr "このドキュメントまたは選択範囲を並べ替えます"
+msgstr "現在編集中のドキュメントの複製をローカル/リモートの場所に保存します。"
 
 #: plugins/shell_output/shell_output.c:55
 msgid "_Run Command..."
@@ -2956,84 +2944,76 @@ msgid "Spell checker"
 msgstr "スペル・チェッカ"
 
 #: plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "利用可能なフォーマット"
+msgstr "<ABBR> 略語/頭文字を表す"
 
 #: plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "アルメニア語"
+msgstr "ABBR= 略語/頭文字を表す"
 
 #: plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "<ABOVE> 上の枠だけを表示する"
 
 #: plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "<ACCESSKEY> ショートカット・キーの割り当て"
 
 #: plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "<ACRONYM> 略語/頭文字を表す"
 
 #: plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "行"
+msgstr "ALIGN= 配置"
 
 #: plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
-msgstr ""
+msgstr "CHAR= 位置揃えする文字"
 
 #: plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "ALT= 代替文字"
 
 #: plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "<A> アンカー"
 
 #: plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "<A HREF=> URI 付きアンカー"
 
 #: plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "開くファイルの選択"
+msgstr "CODE= アプレット・クラスのファイル"
 
 #: plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "<ARRAY>"
 
 #: plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "CONTENT= 関連する情報"
 
 #: plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "自動インデント"
+msgstr "<ADDRESS> 作者の情報"
 
 #: plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "ページ・ヘッダを印刷する(_P)"
+msgstr "AXIS= "
 
 #: plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "<BGSOUND> バックグラウンド音楽"
 
 #: plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "背景色(_B): "
+msgstr "BGCOLOR= 背景の色"
 
 #: plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "背景色"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
@@ -3052,28 +3032,24 @@ msgid "Blinking text"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "太字"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "背景色(_B): "
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "中央ヨーロッパ"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "全般"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Char enconding of linked resource"
@@ -3084,9 +3060,8 @@ msgid "Checked(state)"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "回(_I)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3097,9 +3072,8 @@ msgid "Class implementation ID"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "タグ一覧"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
@@ -3110,9 +3084,8 @@ msgid "Code content type"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "選択した行をコピーします"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
@@ -3123,28 +3096,24 @@ msgid "Columns"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "目次(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "目次(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "目次(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "目次(_C)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3163,9 +3132,8 @@ msgid "Declare flag"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Definition description"
-msgstr "説明(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition list"
@@ -3176,14 +3144,12 @@ msgid "Definition term"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:52
-#, fuzzy
 msgid "Deleted text"
-msgstr "選択したテキストを削除します"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Direction"
-msgstr "ブルターニュ語"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Directionality"
@@ -3194,44 +3160,36 @@ msgid "Directory list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Disabled"
-msgstr "有効"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Document ID"
-msgstr "ドキュメント(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:58
-#, fuzzy
 msgid "Document base URI"
-msgstr "ドキュメント(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:59
-#, fuzzy
 msgid "Document body"
-msgstr "ドキュメント(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Document head"
-msgstr "ドキュメント(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document title"
-msgstr "ドキュメントの統計"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Document type"
-msgstr "ドキュメント(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:63
-#, fuzzy
 msgid "Document version"
-msgstr "ドキュメント(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
@@ -3250,23 +3208,20 @@ msgid "Figure"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:68
-#, fuzzy
 msgid "Font face"
-msgstr "保存しない(_N)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:69
-#, fuzzy
 msgid "For label"
-msgstr "label"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:71
-#, fuzzy
 msgid "Form"
-msgstr "通常"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
@@ -3297,9 +3252,8 @@ msgid "Forward link"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:79
-#, fuzzy
 msgid "Frame"
-msgstr "名前:"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
@@ -3318,14 +3272,12 @@ msgid "Frameborder"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:84
-#, fuzzy
 msgid "Frameset"
-msgstr "ファロエズ語"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:85
-#, fuzzy
 msgid "Frameset columns"
-msgstr "開始行(_T):"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
@@ -3344,9 +3296,8 @@ msgid "Generic metainformation"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:90
-#, fuzzy
 msgid "Generic span"
-msgstr "全般"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
@@ -3437,41 +3388,36 @@ msgid "Image source"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Inline frame"
-msgstr "ファイル名が無効です"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline layer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Inserted text"
-msgstr "日付/時間の挿入"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Instance definition"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Italic text"
-msgstr "斜体"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Java applet"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Label"
-msgstr "label"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:120
-#, fuzzy
 msgid "Language code"
-msgstr "言語"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Large text style"
@@ -3482,9 +3428,8 @@ msgid "Layer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Link"
-msgstr "行"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "List item"
@@ -3503,14 +3448,12 @@ msgid "Listing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:128
-#, fuzzy
 msgid "Local change to font"
-msgstr "エディタで使用するフォントの取得"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:129
-#, fuzzy
 msgid "Long description link"
-msgstr "説明(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long quotation"
@@ -3537,9 +3480,8 @@ msgid "Max text field chars"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:136
-#, fuzzy
 msgid "Media"
-msgstr "gedit"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
@@ -3562,9 +3504,8 @@ msgid "Multiple"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:142
-#, fuzzy
 msgid "Name"
-msgstr "名前:"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
@@ -3615,9 +3556,8 @@ msgid "Note"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:155
-#, fuzzy
 msgid "Object applet file"
-msgstr "ファイルを開きます"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
@@ -3632,9 +3572,8 @@ msgid "OnBlur event"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:159
-#, fuzzy
 msgid "OnChange event"
-msgstr "大/小文字の変更"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
@@ -3705,9 +3644,8 @@ msgid "Option group"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:177
-#, fuzzy
 msgid "Option selector"
-msgstr "選択範囲をコピーします"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
@@ -3742,19 +3680,16 @@ msgid "Prompt message"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:186
-#, fuzzy
 msgid "Push button"
-msgstr "button1"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Quote"
-msgstr "終了"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:188
-#, fuzzy
 msgid "Range"
-msgstr "変更(_N)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "ReadOnly text and password"
@@ -3765,9 +3700,8 @@ msgid "Reduced spacing"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
 msgid "Reverse link"
-msgstr "逆順にする(_R)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Root"
@@ -3794,9 +3728,8 @@ msgid "Script execution defer"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:198
-#, fuzzy
 msgid "Script language name"
-msgstr "言語の設定"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
@@ -3807,23 +3740,20 @@ msgid "Scrollbar"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Selectable option"
-msgstr "開くファイルの選択"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:202
-#, fuzzy
 msgid "Selected"
-msgstr "選択したものを保存(_S)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Shape"
-msgstr "保存"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -3834,14 +3764,12 @@ msgid "Single line prompt"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Size"
-msgstr "タブのサイズ"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:208
-#, fuzzy
 msgid "Small text style"
-msgstr "全てのテキスト・ファイル"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
@@ -3852,18 +3780,16 @@ msgid "Sound"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:212
-#, fuzzy
 msgid "Space"
-msgstr "保存"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:214
-#, fuzzy
 msgid "Spacer"
-msgstr "置換"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
@@ -3874,9 +3800,8 @@ msgid "Spacing within cells"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Span"
-msgstr "スペイン語"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
@@ -3887,19 +3812,16 @@ msgid "Standby load msg"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "行番号を印刷する(_L)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:221
-#, fuzzy
 msgid "Strike-through text"
-msgstr "打ち消し線"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:222
-#, fuzzy
 msgid "Strike-through text style"
-msgstr "打ち消し線"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
@@ -3914,27 +3836,24 @@ msgid "Subscript"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:226
-#, fuzzy
 msgid "Superscript"
-msgstr "説明(_D)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:228
-#, fuzzy
 msgid "Table"
-msgstr "有効"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:230
-#, fuzzy
 msgid "Table caption"
-msgstr "場所を開く"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column"
@@ -3993,18 +3912,16 @@ msgid "Text"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:245
-#, fuzzy
 msgid "Text color"
-msgstr "テキストの色"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Text entered by user"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:247
-#, fuzzy
 msgid "Title"
-msgstr "先頭文字を大文字にする(_T)"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
@@ -4015,14 +3932,12 @@ msgid "URL"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:250
-#, fuzzy
 msgid "Underlined text style"
-msgstr "下線"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:251
-#, fuzzy
 msgid "Unordered list"
-msgstr "下線"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
@@ -4045,14 +3960,12 @@ msgid "Vertical cell alignment"
 msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:257
-#, fuzzy
 msgid "Vertical space"
-msgstr "空白の挿入"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:258
-#, fuzzy
 msgid "Visited link color"
-msgstr "選択範囲の色の取得"
+msgstr ""
 
 #: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
@@ -4095,9 +4008,8 @@ msgid "File input"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "フォント"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
@@ -4124,37 +4036,32 @@ msgid "Function sine"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "ギリシア語"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "ギリシア語"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "ギリシア語"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "ギリシア語"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "ギリシア語"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
@@ -4209,9 +4116,8 @@ msgid "Latex - Tags"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "説明(_D)"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
@@ -4230,9 +4136,8 @@ msgid "Maths (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "場所を開く"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
@@ -4251,14 +4156,12 @@ msgid "Operator sum (inline)"
 msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "設定"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "設定"
+msgstr ""
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol &gt;&gt;"
@@ -4365,9 +4268,8 @@ msgid "XSLT - Axes"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:2
-#, fuzzy
 msgid "XSLT - Elements"
-msgstr "要素"
+msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:3
 msgid "XSLT - Functions"
@@ -4406,14 +4308,12 @@ msgid "following-sibling"
 msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
-msgstr "空白の挿入"
+msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "開く"
+msgstr ""
 
 #: plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
