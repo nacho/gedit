@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit
- * Copyright (C) 1999 Alex Roberts and Evan Lawrence
+ * Copyright (C) 1999, 2000 Alex Roberts, Evan Lawrence, Jason Leach & Jose M Celorio
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -42,6 +42,8 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 
 	gedit_debug ("", DEBUG_UNDO);
 
+	gedit_undo_free_list (&doc->redo);
+
 	if (doc->undo)
 	{
 		last_undo = g_list_nth_data (doc->undo, 0);
@@ -63,11 +65,12 @@ gedit_undo_add (gchar *text, gint start_pos, gint end_pos,
 
 	doc->undo = g_list_prepend (doc->undo, undo);
 
-	gedit_undo_free_list (&doc->redo);
-	
+
+	/*
 	g_print("The undo list size is : %i taking %i bytes \n\n",
 		g_list_length (doc->undo),
 		g_list_length (doc->undo) * sizeof (gedit_undo));
+	*/
 }
 
 
@@ -100,14 +103,6 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 	   5. If the type (action) of undo is different
 	Chema */
 
-	g_print ("Is this cell mergeable ? \"%s\"\n", text);
-	
-	if (action == GEDIT_UNDO_DELETE)
-	{
-		gedit_debug ("We are not merging DELETE's yet...", DEBUG_UNDO);
-		return FALSE;
-	}
-
 	if (!last_undo->mergeable)
 	{
 		gedit_debug ("Previous Cell is not mergeable...", DEBUG_UNDO);
@@ -126,15 +121,6 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 		return FALSE;
 	}
 
-	if ( text[0]!=' ' && text[0]!='\t' &&
-	     (last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] ==' '
-	      || last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] == '\t'))
-	{
-		gedit_debug ("The text is a space/tab but the previous text is not...", DEBUG_UNDO);
-		return FALSE;
-	}
-
-	g_print ("***%c***\n", last_undo->text [last_undo->end_pos-last_undo->start_pos-1]);
 
 	if (action != last_undo->action)
 	{
@@ -142,27 +128,51 @@ gedit_undo_merge (gedit_undo *last_undo, guint start_pos, guint end_pos, gint ac
 		return FALSE;
 	}
 
-	g_print ("Merge this cells here \n");
+	if (action == GEDIT_UNDO_DELETE)
+	{
+		if (last_undo->start_pos != end_pos)
+		{
+			gedit_debug ("The text is not in the same position.", DEBUG_UNDO);
+			return FALSE;
+		}
+		
+		if ( text[0]!=' ' && text[0]!='\t' &&
+		     (last_undo->text [0] ==' '
+		      || last_undo->text [0] == '\t'))
+		{
+			gedit_debug ("The text is a space/tab but the previous char is not...", DEBUG_UNDO);
+			return FALSE;
+		}
 
-	g_print("last undo. text:\"%s\" start_pos:%i end_pos:%i\n",
-		last_undo->text,
-		last_undo->start_pos,
-		last_undo->end_pos);
-	g_print("NOW .      text:\"%s\" start_pos:%i end_pos:%i\n",
-		text,
-		start_pos,
-		end_pos);
+		temp_string = g_strdup_printf ("%s%s", text, last_undo->text);
+		g_free (last_undo->text);
+		last_undo->start_pos = start_pos;
+		last_undo->text = temp_string;
+	}
+	else if (action == GEDIT_UNDO_INSERT)
+	{
+		if (last_undo->end_pos != start_pos)
+		{
+			gedit_debug ("The text is not in the same position.", DEBUG_UNDO);
+			return FALSE;
+		}
 
+		if ( text[0]!=' ' && text[0]!='\t' &&
+		     (last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] ==' '
+		      || last_undo->text [last_undo->end_pos-last_undo->start_pos - 1] == '\t'))
+		{
+			gedit_debug ("The text is a space/tab but the previous char is not...", DEBUG_UNDO);
+			return FALSE;
+		}
 
-	temp_string = g_strdup_printf ("%s%s", last_undo->text, text);
-	g_free (last_undo->text);
-	last_undo->end_pos = end_pos;
-	last_undo->text = temp_string;
-	
-	g_print("last AFTR. text:\"%s\" start_pos:%i end_pos:%i\n",
-		last_undo->text,
-		last_undo->start_pos,
-		last_undo->end_pos);
+		temp_string = g_strdup_printf ("%s%s", last_undo->text, text);
+		g_free (last_undo->text);
+		last_undo->end_pos = end_pos;
+		last_undo->text = temp_string;
+	}
+	else
+		g_assert_not_reached();
+
 
 	return TRUE;
 }
@@ -208,10 +218,7 @@ gedit_undo_redo (GtkWidget *w, gpointer data)
 
 	gedit_debug ("", DEBUG_UNDO);
 
-	if (doc==NULL)
-		return;
-
-	if (!doc->redo)
+	if (doc==NULL || doc->redo==NULL)
 		return;
 	
 	redo = g_list_nth_data (doc->redo, 0);
@@ -251,7 +258,6 @@ gedit_undo_free_list (GList ** list_pointer)
 	
 	for (n=0; n < g_list_length (list); n++)
 	{
-		g_print ("N = %i\n",n);
 		nth_redo = g_list_nth_data (list, n);
 		if (nth_redo==NULL)
 			g_warning ("nth_redo==NULL");
@@ -259,6 +265,7 @@ gedit_undo_free_list (GList ** list_pointer)
 		g_free (nth_redo);
 	}
 
+	g_print("Removed %i objects\n", n);
 	g_list_free (list);
 	*list_pointer = NULL;
 }

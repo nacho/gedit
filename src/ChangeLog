@@ -1,5 +1,11 @@
 2000-06-02  Chema Celorio  <chema@celorio.com>
 
+	* undo.c (gedit_undo_merge): check if the position
+	of the undo text is the same as the last_undo
+	(gedit_undo_merge): merge GEDIT_UNDO_DELETE too.
+
+2000-06-02  Chema Celorio  <chema@celorio.com>
+
 	* undo.c (gedit_undo_merge): New function. Merges
 	a previous undo item with the new data. We now undo
 	words and not chars. This also saves memory because
