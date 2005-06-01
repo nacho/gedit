@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-05-29 04:38+0000\n"
-"PO-Revision-Date: 2005-05-29 12:27+0300\n"
+"PO-Revision-Date: 2005-06-01 23:04+0300\n"
 "Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -542,7 +542,7 @@ msgstr ""
 #. menu in open/save file selector. Only recognized encodings are displayed.
 #: ../data/gedit.schemas.in.h:102
 msgid "[ISO-8859-15]"
-msgstr "[ISO-8859-15]"
+msgstr "[ISO-8859-15,ISO-8859-1]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
@@ -1185,6 +1185,7 @@ msgstr ""
 "Jarkko Ranta, 2000-2004\n"
 "Sami Pesonen, 2005\n"
 "Ilkka Tuohela, 2005\n"
+"Lauri Nurmi, 2005\n"
 "\n"
 "http://www.gnome.fi/"
 
@@ -1207,7 +1208,7 @@ msgstr "Epäkelpo tiedostonimi"
 
 #: ../gedit/gedit-document.c:859 ../gedit/gedit-document.c:1411
 msgid "Invalid UTF-8 data"
-msgstr "Viallista UTF-8 dataa"
+msgstr "Viallista UTF-8-dataa"
 
 #: ../gedit/gedit-document.c:1658
 #, c-format
@@ -1222,7 +1223,7 @@ msgstr "Tiedostolla on liian monta symbolista linkkiä."
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr ""
-"gedit ei pysty käsittelemään sijaintia %s: sijainti kirjoitusoikeuksin."
+"gedit ei pysty käsittelemään %s: -sijainteja kirjoitustilassa."
 
 #: ../gedit/gedit-document.c:1795
 msgid "gedit cannot handle this kind of location in write mode."
@@ -1611,7 +1612,7 @@ msgstr "Tiedostoa \"%s\" ei löytynyt"
 #: ../gedit/gedit-io-error-dialogs.c:86 ../gedit/gedit-io-error-dialogs.c:130
 #: ../gedit/gedit-io-error-dialogs.c:150
 msgid "Please, check that you typed the location correctly and try again."
-msgstr "Tarkista·että·kirjoitit·osoitteen·oikein·ja·yritä·uudelleen."
+msgstr "Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
 
 #: ../gedit/gedit-io-error-dialogs.c:91 ../gedit/gedit-io-error-dialogs.c:99
 #: ../gedit/gedit-io-error-dialogs.c:116 ../gedit/gedit-io-error-dialogs.c:122
@@ -1742,7 +1743,7 @@ msgid ""
 "Location') dialog and try again."
 msgstr ""
 "Tarkista ettet yritä avata binääritiedostoa ja että olet valinnut oikean "
-"koodaustavan 'Avaa tiedosto...' (tai 'Avaa sijainti') -ikkunassa ja yritä "
+"koodaustavan \"Avaa tiedosto...\" (tai \"Avaa sijainti\") -ikkunassa ja yritä "
 "uudestaan."
 
 #: ../gedit/gedit-io-error-dialogs.c:315
@@ -4239,7 +4240,7 @@ msgstr "Alaviite"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
-msgstr "Funktio cosin"
+msgstr "Funktio cos"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:13
 msgid "Function e^"
@@ -4511,7 +4512,7 @@ msgstr "kantaisä-tai-itse"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:6
 msgid "attribute"
-msgstr "attribuutti"
+msgstr "määre"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:7
 msgid "child"
