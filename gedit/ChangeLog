@@ -1,3 +1,21 @@
+2005-06-08  Ray Strode  <rstrode@redhat.com>
+
+	* gedit-file-selector-util.c: (replace_dialog):
+
+	* gedit-file.c: (gedit_file_revert_dialog):
+	(gedit_file_open_from_stdin):
+
+	* gedit-io-error-dialogs.c: 
+	(gedit_error_reporting_loading_file):
+	(gedit_error_reporting_reverting_file):
+	(gedit_error_reporting_saving_file):
+	(gedit_error_reporting_creating_file):
+
+	* gedit-utils.c: (gedit_warning): add "%s" as
+	format string to message dialog functions
+
+	Pass format string to message dialog functions (bug 306800).
+
 2005-06-06  Paolo Borelli  <pborelli@katamail.com>
 
 	* dialogs/gedit-close-confirmation-dialog.c: make labels
