@@ -101,9 +101,9 @@ replace_dialog (GtkWindow *parent,
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_QUESTION,
 					 GTK_BUTTONS_NONE,
-					 message_with_uri);
+					 "%s", message_with_uri);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  secondary_message);
+						  "%s", secondary_message);
 
 	g_free (message_with_uri);
 

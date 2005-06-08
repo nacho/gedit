@@ -607,9 +607,9 @@ gedit_file_revert_dialog (GeditDocument *doc)
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_QUESTION,
 					 GTK_BUTTONS_NONE,
-					 primary_msg);
+					 "%s", primary_msg);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  secondary_msg);
+						  "%s", secondary_msg);
 	g_free (primary_msg);
 	g_free (secondary_msg);
 
@@ -831,7 +831,7 @@ gedit_file_open_from_stdin (GeditMDIChild *active_child)
 				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 			   	GTK_MESSAGE_ERROR,
 			   	GTK_BUTTONS_OK,
-				errstr);
+				"%s", errstr);
 
 		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 

@@ -348,10 +348,10 @@ gedit_error_reporting_loading_file (const gchar *uri,
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
-					 error_message);
+					 "%s", error_message);
 
 	if (message_details != NULL)
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", 
 							  message_details);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
@@ -563,10 +563,10 @@ gedit_error_reporting_reverting_file (const gchar *uri,
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
-					 error_message);
+					 "%s", error_message);
 
 	if (message_details != NULL)
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s",
 							  message_details);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
@@ -611,10 +611,10 @@ gedit_error_reporting_saving_file (const gchar *uri,
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
-					 error_message);
+					 "%s", error_message);
 
 	if (error->message != NULL && strcmp (error->message, " ") != 0)
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s",
 							  error->message);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
@@ -699,10 +699,11 @@ gedit_error_reporting_creating_file (const gchar *uri,
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					 GTK_MESSAGE_ERROR,
 					 GTK_BUTTONS_OK,
+					 "%s",
 					 error_message);
 
 	if (message_details != NULL)
-		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s",
 							  message_details);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);

@@ -598,7 +598,7 @@ gedit_warning (GtkWindow *parent, gchar *format, ...)
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		   	GTK_MESSAGE_ERROR,
 		   	GTK_BUTTONS_OK,
-			str);
+			"%s", str);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
