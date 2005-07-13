@@ -70,7 +70,7 @@ struct _GeditMetadataManager
 	GHashTable	*items;
 };
 
-static void gedit_metadata_manager_save (gpointer data);
+static gboolean gedit_metadata_manager_save (gpointer data);
 
 
 static GeditMetadataManager *gedit_metadata_manager = NULL;
@@ -465,7 +465,7 @@ resize_items ()
 	}
 }
 
-static void
+static gboolean
 gedit_metadata_manager_save (gpointer data)
 {	
 	xmlDocPtr  doc;
@@ -475,7 +475,7 @@ gedit_metadata_manager_save (gpointer data)
 	gedit_debug (DEBUG_METADATA, "");
 	
 	if (!gedit_metadata_manager->modified)
-		return;
+		return TRUE;
 
 	resize_items ();
 		
@@ -483,7 +483,7 @@ gedit_metadata_manager_save (gpointer data)
 
 	doc = xmlNewDoc ("1.0");
 	if (doc == NULL)
-		return;
+		return TRUE;
 
 	/* Create metadata root */
 	root = xmlNewDocNode (doc, NULL, "metadata", NULL);
@@ -502,5 +502,7 @@ gedit_metadata_manager_save (gpointer data)
 	gedit_metadata_manager->modified = FALSE;
 
 	gedit_debug (DEBUG_METADATA, "DONE");
+
+	return TRUE;
 }
 

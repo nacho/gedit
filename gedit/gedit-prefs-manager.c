@@ -314,8 +314,8 @@ gconf_client_get_color_with_default (GConfClient* client, const gchar* key,
                       		     const gchar* def, GError** err)
 {
 	gchar *str_color = NULL;
-	GdkColor color;
-	
+	GdkColor color = {0, };
+
 	gedit_debug (DEBUG_PREFS, "");
 
       	g_return_val_if_fail (client != NULL, color);
@@ -364,7 +364,7 @@ gconf_client_set_color (GConfClient* client, const gchar* key,
 static GdkColor
 gedit_prefs_manager_get_color (const gchar* key, const gchar* def)
 {
-	GdkColor color;
+	GdkColor color = {0, };
 
 	gedit_debug (DEBUG_PREFS, "");
 
