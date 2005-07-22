@@ -502,16 +502,11 @@ gedit_view_copy_clipboard (GeditView *view)
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view->priv->text_view));
 	g_return_if_fail (buffer != NULL);
-	
-  	gtk_text_buffer_copy_clipboard (buffer,
+
+	gtk_text_buffer_copy_clipboard (buffer,
 				gtk_clipboard_get (GDK_NONE));
 
-	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
-				      gtk_text_buffer_get_insert (buffer),
-				      GEDIT_VIEW_SCROLL_MARGIN,
-				      FALSE,
-				      0.0,
-				      0.0);
+	/* on copy do not scroll, we are already on screen */
 }
 
 void
