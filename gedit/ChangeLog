@@ -1,3 +1,9 @@
+2005-07-22  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit-prefs-manager.c (gconf_client_get_string_with_default):
+	fixed bug #303943 (gedit crash). We were executing "*err = error" with
+	err = NULL.
+
 2005-07-22  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-view.c: do not scroll on copy.

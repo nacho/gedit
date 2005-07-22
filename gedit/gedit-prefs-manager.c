@@ -526,7 +526,7 @@ DEFINE_BOOL_PREF (create_backup_copy,
 		  GPM_DEFAULT_CREATE_BACKUP_COPY);
 
 /* Backup extension. This is configurable only using gconftool or gconf-editor */
-gchar*	 		\
+gchar *
 gedit_prefs_manager_get_backup_extension (void)
 {
 	gedit_debug (DEBUG_PREFS, "");
@@ -1388,7 +1388,7 @@ gconf_client_get_string_with_default (GConfClient* client, const gchar* key,
   else
     {
       if (error != NULL)
-        *err = error;
+        handle_error (client, error, err);
       return def ? g_strdup (def) : NULL;
     }
 }
