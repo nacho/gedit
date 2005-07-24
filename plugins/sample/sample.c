@@ -109,7 +109,7 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
 
 	mdi = gedit_get_mdi ();
-	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
+	g_return_val_if_fail (mdi != NULL, PLUGIN_ERROR);
 
 	uic = gedit_get_ui_component_from_window (window);
 
