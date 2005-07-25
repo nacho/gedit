@@ -79,8 +79,8 @@ gedit_debug_init ()
 }
 
 void
-gedit_debug (GeditDebugSection section, gchar *file,
-	     gint line, gchar* function, gchar* format, ...)
+gedit_debug (GeditDebugSection section, const gchar *file,
+	     gint line, const gchar* function, const gchar* format, ...)
 {
 	if  (debug & section)
 	{

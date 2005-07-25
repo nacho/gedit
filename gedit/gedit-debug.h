@@ -31,6 +31,16 @@
 #ifndef __GEDIT_DEBUG_H__
 #define __GEDIT_DEBUG_H__
 
+
+/* G_GNUC_FUNCTION works only with gcc < 3 at the moment... */
+#if defined (__GNUC__) && (__GNUC__ < 3)
+#define GEDIT_FUNCTION         __FUNCTION__
+#elif defined (__GNUC__)
+#define GEDIT_FUNCTION         __func__
+#else   /* !__GNUC__ */
+#define GEDIT_FUNCTION         ""
+#endif  /* !__GNUC__ */
+
 /*
  * Set an environmental var of the same name to turn on
  * debugging output. Setting GEDIT_DEBUG will turn on all
@@ -55,24 +65,24 @@ typedef enum {
 } GeditDebugSection;
 
 
-#define	DEBUG_VIEW	GEDIT_DEBUG_VIEW,    __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_UNDO	GEDIT_DEBUG_UNDO,    __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_SEARCH	GEDIT_DEBUG_SEARCH,  __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_PRINT	GEDIT_DEBUG_PRINT,   __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_PREFS	GEDIT_DEBUG_PREFS,   __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_PLUGINS	GEDIT_DEBUG_PLUGINS, __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_FILE	GEDIT_DEBUG_FILE,    __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_DOCUMENT	GEDIT_DEBUG_DOCUMENT,__FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_RECENT	GEDIT_DEBUG_RECENT,  __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_COMMANDS	GEDIT_DEBUG_COMMANDS,__FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_MDI	GEDIT_DEBUG_MDI,     __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_SESSION	GEDIT_DEBUG_SESSION, __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_UTILS	GEDIT_DEBUG_UTILS,   __FILE__, __LINE__, G_GNUC_FUNCTION
-#define	DEBUG_METADATA	GEDIT_DEBUG_METADATA,__FILE__, __LINE__, G_GNUC_FUNCTION
+#define	DEBUG_VIEW	GEDIT_DEBUG_VIEW,    __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_UNDO	GEDIT_DEBUG_UNDO,    __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_SEARCH	GEDIT_DEBUG_SEARCH,  __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_PRINT	GEDIT_DEBUG_PRINT,   __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_PREFS	GEDIT_DEBUG_PREFS,   __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_PLUGINS	GEDIT_DEBUG_PLUGINS, __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_FILE	GEDIT_DEBUG_FILE,    __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_DOCUMENT	GEDIT_DEBUG_DOCUMENT,__FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_RECENT	GEDIT_DEBUG_RECENT,  __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_COMMANDS	GEDIT_DEBUG_COMMANDS,__FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_MDI	GEDIT_DEBUG_MDI,     __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_SESSION	GEDIT_DEBUG_SESSION, __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_UTILS	GEDIT_DEBUG_UTILS,   __FILE__, __LINE__, GEDIT_FUNCTION
+#define	DEBUG_METADATA	GEDIT_DEBUG_METADATA,__FILE__, __LINE__, GEDIT_FUNCTION
 
 void gedit_debug_init (void);
 
-void gedit_debug (GeditDebugSection section, gchar *file,
-		  gint line, gchar* function, gchar* format, ...);
+void gedit_debug (GeditDebugSection section, const gchar *file,
+		  gint line, const gchar* function, const gchar* format, ...);
 
 #endif /* __GEDIT_DEBUG_H__ */
