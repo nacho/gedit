@@ -68,7 +68,7 @@ char  *gedit_file_selector_save       (GtkWindow  *parent,
 					gboolean    enable_vfs,
 					const char *title,
 					const char *default_path,
-					const char *default_filename,
+					const char *default_uri,
 					const char *untitled_name,
 					const GeditEncoding **encoding);
 

@@ -1,3 +1,19 @@
+2005-07-27  Federico Mena Quintero  <federico@ximian.com>
+ 
+ 	Fixes bug #311187:
+ 
+ 	* gedit-file-selector-util.c (gedit_file_selector_save): Take a
+ 	full URI instead of a basename for "default_filename"; actually,
+ 	renamed this argument to "default_uri".
+ 	(run_file_selector): Likewise.
+ 	(create_gtk_selector): Likewise.  Also, just call
+ 	gtk_file_chooser_set_uri() with the default_uri if it is
+ 	available.
+ 
+ 	* gedit-file.c (gedit_file_save_as): Use the document's raw URI if
+ 	we already have it and it is a file:/// URI --- don't split into
+ 	dirname and basename.
+
 2005-07-23  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit-debug.h: fix printing the function name.

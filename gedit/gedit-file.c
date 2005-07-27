@@ -306,7 +306,7 @@ gedit_file_save_as (GeditMDIChild *child)
 	gboolean ret = FALSE;
 	GeditDocument *doc;
 	GtkWidget *view;
-	gchar *fname = NULL;
+	gchar *uri = NULL;
 	gchar *untitled_name = NULL;
 	gchar *path = NULL;
 	const GeditEncoding *encoding;
@@ -349,21 +349,19 @@ gedit_file_save_as (GeditMDIChild *child)
 
 		if (gedit_utils_uri_has_file_scheme (raw_uri))
 		{
-			fname = gedit_utils_uri_get_basename (raw_uri);
-			g_return_val_if_fail (fname != NULL, FALSE);
-
+			uri = raw_uri;
 			path = gedit_utils_uri_get_dirname (raw_uri);
 		}
 		else
 		{
+			g_free (raw_uri);
+
 			untitled_name = gedit_document_get_short_name (doc);
 			g_return_val_if_fail (untitled_name != NULL, FALSE);
 
 			path = (gedit_default_path != NULL) ? 
 				g_strdup (gedit_default_path) : NULL;
 		}
-
-		g_free (raw_uri);
 	}
 
 	encoding = gedit_document_get_encoding (doc);
@@ -373,11 +371,11 @@ gedit_file_save_as (GeditMDIChild *child)
 			FALSE,
 		        _("Save as..."), 
 			path,
-			fname,
+			uri,
 			untitled_name,
 			&encoding);
 
-	g_free (fname);
+	g_free (uri);
 	g_free (untitled_name);
 	g_free (path);
 

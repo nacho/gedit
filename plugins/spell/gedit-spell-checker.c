@@ -371,7 +371,7 @@ get_language_from_abrev (const gchar *abrev)
 	{
 		const GeditLanguage *l = (const GeditLanguage *)langs->data;
 
-		if (g_ascii_strncasecmp (abrev, l->abrev, strlen(l->abrev)) == 0)
+		if (g_ascii_strncasecmp (abrev, l->abrev, strlen (l->abrev)) == 0)
 			return l;
 
 		langs = g_slist_next (langs);
@@ -600,7 +600,7 @@ gedit_spell_checker_check_word (GeditSpellChecker *spell,
 			res = TRUE;
 			break;
 		default:
-			g_return_val_if_fail (FALSE, FALSE);
+			g_return_val_if_reached (FALSE);
 	}
 
 	return res;

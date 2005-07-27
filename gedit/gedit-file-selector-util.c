@@ -312,7 +312,7 @@ create_gtk_selector (GtkWindow *parent,
 		     FileselMode mode,
 		     const char *title,
 		     const char *default_path,
-		     const char *default_filename,
+		     const char *default_uri,
 		     const char *untitled_name,
 		     gboolean use_encoding,
 		     const GeditEncoding *encoding)
@@ -400,27 +400,16 @@ create_gtk_selector (GtkWindow *parent,
 	}
 	else
 	{
-		if (default_filename == NULL)
+		if (default_uri == NULL)
 		{
 			if (default_path != NULL)
-			{
 				gtk_file_chooser_set_current_folder_uri (GTK_FILE_CHOOSER (filesel), default_path);
-			}
 
 			g_return_val_if_fail (untitled_name != NULL, GTK_WINDOW (filesel));
 			gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (filesel), untitled_name);
 		}
 		else
-		{
-			if (default_path != NULL)
-			{
-				gchar *uri;
-
-				uri = g_strconcat (default_path, "/", default_filename, NULL);
-				gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (filesel), uri);
-				g_free (uri);
-			}
-		}
+			gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (filesel), default_uri);
 	}
 
 	if (mode == FILESEL_OPEN_MULTI) 
@@ -435,7 +424,7 @@ run_file_selector (GtkWindow  *parent,
 		   FileselMode mode, 
 		   const char *title,
 		   const char *default_path, 
-		   const char *default_filename,
+		   const char *default_uri,
 		   const char *untitled_name,
 		   const GeditEncoding **encoding)
 
@@ -448,7 +437,7 @@ run_file_selector (GtkWindow  *parent,
 				      mode,
 				      title,
 				      default_path, 
-				      default_filename, 
+				      default_uri, 
 				      untitled_name,
 				      (encoding != NULL),
 				      (encoding != NULL) ? *encoding : NULL);
@@ -541,11 +530,15 @@ gedit_file_selector_open_multi (GtkWindow  *parent,
  * @enable_vfs: if FALSE, restrict files to local paths.
  * @title: optional window title to use
  * @default_path: optional directory to start in (must be an URI)
- * @default_filename: optional file name to default to
+ * @default_uri: optional URI to default to
  * @untitled_name: optional untitled name (valid UTF-8)
  *
  * Creates and shows a modal save file dialog, waiting for the user to
  * select a file or cancel before returning.
+ *
+ * If @default_uri is %NULL, then only @default_path and @untitled_name will be
+ * used.  Otherwise, only the @default_uri will be used; the starting directory
+ * will correspond to the last directory component of that URI.
  *
  * Return value: the URI of the file selected, or NULL if cancel
  * was pressed.
@@ -555,14 +548,14 @@ gedit_file_selector_save (GtkWindow  *parent,
 			   gboolean    enable_vfs,
 			   const char *title,
 			   const char *default_path, 
-			   const char *default_filename,
+			   const char *default_uri,
 			   const char *untitled_name,
 			   const GeditEncoding **encoding)
 {
-	g_return_val_if_fail (((default_filename != NULL) && (untitled_name == NULL)) ||
-                              ((default_filename == NULL) && (untitled_name != NULL)), NULL);
+	g_return_val_if_fail (((default_uri != NULL) && (untitled_name == NULL)) ||
+                              ((default_uri == NULL) && (untitled_name != NULL)), NULL);
 
 	return run_file_selector (parent, enable_vfs, FILESEL_SAVE,
 				  title ? title : _("Select a filename to save"),
-				  default_path, default_filename, untitled_name, encoding);
+				  default_path, default_uri, untitled_name, encoding);
 }
