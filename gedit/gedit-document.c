@@ -82,6 +82,9 @@ struct _GeditDocumentPrivate
 	gchar		    *uri;
 	gint 		     untitled_number;
 
+	gchar               *uri_for_display;
+	gchar		    *short_name_for_display;
+
 	gchar		    *encoding;
 
 	gchar		    *mime_type;
@@ -300,6 +303,93 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      0);
 }
 
+/* This function has been borrowed from Nautilus */
+static gchar *
+get_uri_shortname_for_display (GnomeVFSURI *uri)
+{
+	char *utf8_name, *name, *tmp;
+	char *text_uri, *local_file;
+	gboolean validated;
+	const char *method;
+
+	gedit_debug (DEBUG_DOCUMENT, "");
+
+	validated = FALSE;
+	name = gnome_vfs_uri_extract_short_name (uri);
+	if (name == NULL)
+	{
+		name = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_PASSWORD);
+	}
+	else if (g_ascii_strcasecmp (uri->method_string, "file") == 0)
+	{
+		text_uri = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_PASSWORD);
+		local_file = gnome_vfs_get_local_path_from_uri (text_uri);
+		name = g_filename_display_basename (local_file);
+		g_free (local_file);
+		g_free (text_uri);
+		validated = TRUE;
+	} 
+	else if (!gnome_vfs_uri_has_parent (uri)) 
+	{
+		method = uri->method_string;
+		
+		if (name == NULL ||
+		    strcmp (name, GNOME_VFS_URI_PATH_STR) == 0) 
+		{
+			g_free (name);
+			name = g_strdup (method);
+		} 
+		else 
+		{
+			tmp = name;
+			name = g_strdup_printf ("%s: %s", method, name);
+			g_free (tmp);
+		}
+	}
+
+	if (!validated && !g_utf8_validate (name, -1, NULL)) 
+	{
+		utf8_name = gedit_utils_make_valid_utf8 (name);
+		g_free (name);
+		name = utf8_name;
+	}
+
+	return name;
+}
+
+static void
+update_uri_for_display (GeditDocument *doc)
+{
+	gedit_debug (DEBUG_DOCUMENT, "");	
+
+	g_free (doc->priv->uri_for_display);
+	g_free (doc->priv->short_name_for_display);
+
+	if (doc->priv->uri == NULL)
+	{
+		doc->priv->uri_for_display = g_strdup_printf (_("%s %d"), _("Unsaved Document"), 
+							      doc->priv->untitled_number);	      
+		doc->priv->short_name_for_display = g_strdup (doc->priv->uri_for_display);
+	}
+	else
+	{
+		GnomeVFSURI *vfs_uri;
+
+		vfs_uri = gnome_vfs_uri_new (doc->priv->uri);
+
+		doc->priv->uri_for_display = gnome_vfs_format_uri_for_display (doc->priv->uri);
+
+		if (vfs_uri == NULL)
+			doc->priv->short_name_for_display = g_strdup (doc->priv->uri_for_display);
+		else
+		{
+			doc->priv->short_name_for_display = get_uri_shortname_for_display (vfs_uri);
+
+			gnome_vfs_uri_unref (vfs_uri);
+		}
+	}
+}
+
 static void
 gedit_document_init (GeditDocument *document)
 {
@@ -409,6 +499,8 @@ gedit_document_finalize (GObject *object)
 	}
 
 	g_free (document->priv->uri);
+	g_free (document->priv->uri_for_display);
+	g_free (document->priv->short_name_for_display);
 	g_free (document->priv->mime_type);
 	g_free (document->priv->last_searched_text);
 	g_free (document->priv->last_replace_text);
@@ -643,7 +735,7 @@ gedit_document_real_can_find_again (GeditDocument *document)
 
 
 gchar*
-gedit_document_get_raw_uri (const GeditDocument* doc)
+gedit_document_get_raw_uri (GeditDocument *doc)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 
@@ -658,66 +750,31 @@ gedit_document_get_raw_uri (const GeditDocument* doc)
  * See: gedit_document_get_raw_uri to have a raw uri (non UTF-8)
  */
 gchar*
-gedit_document_get_uri (const GeditDocument* doc)
+gedit_document_get_uri (GeditDocument *doc)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 
-	if (doc->priv->uri == NULL)
-		return g_strdup_printf (_("%s %d"), _("Unsaved Document"), doc->priv->untitled_number);
-	else
-	{
-		gchar *res;
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), "");
 
-		res = gnome_vfs_format_uri_for_display (doc->priv->uri);
-		g_return_val_if_fail (res != NULL, g_strdup (_("Invalid file name")));
-		
-		return res;
-	}
+	if (doc->priv->uri_for_display == NULL)
+		update_uri_for_display (doc);
+
+	g_return_val_if_fail (doc->priv->uri_for_display != NULL,  g_strdup (""));
+
+	return g_strdup (doc->priv->uri_for_display);
 }
 
 gchar*
-gedit_document_get_short_name (const GeditDocument* doc)
+gedit_document_get_short_name (GeditDocument *doc)
 {
-	gedit_debug (DEBUG_DOCUMENT, "");
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), "");
 
-	if (doc->priv->uri == NULL)
-		return g_strdup_printf (_("%s %d"), _("Unsaved Document"), doc->priv->untitled_number);
-	else
-	{
-		gchar *basename;
-		gchar *utf8_basename;
+	if (doc->priv->short_name_for_display == NULL)
+		update_uri_for_display (doc);
 
-		basename = gedit_utils_uri_get_basename (doc->priv->uri);
-
-		if (basename != NULL) 
-		{
-			gboolean filenames_are_locale_encoded;
-		       	filenames_are_locale_encoded = g_getenv ("G_BROKEN_FILENAMES") != NULL;
-
-			if (filenames_are_locale_encoded) 
-			{
-				utf8_basename = g_locale_to_utf8 (basename, -1, NULL, NULL, NULL);
-				
-				if (utf8_basename != NULL) 
-				{
-					g_free (basename);
-					return utf8_basename;
-				} 
-			}
-			else 
-			{
-				if (g_utf8_validate (basename, -1, NULL)) 
-					return basename;
-			}
-			
-			/* there are problems */
-			utf8_basename = gedit_utils_make_valid_utf8 (basename);
-			g_free (basename);
-			return utf8_basename;
-		}
-		else
-			return 	g_strdup (_("Invalid file name"));
-	}
+	g_return_val_if_fail (doc->priv->short_name_for_display != NULL, g_strdup (""));
+	
+ 	return g_strdup (doc->priv->short_name_for_display);
 }
 
 GQuark 
@@ -1485,6 +1542,9 @@ gedit_document_set_uri (GeditDocument* doc, const gchar* uri)
 		doc->priv->untitled_number = 0;
 	}
 
+	/* Update uri_for_display and short_name_for_display */
+	update_uri_for_display (doc);
+
 	data = gedit_metadata_manager_get (uri, "language");
 
 	if (data != NULL)
@@ -2060,7 +2120,7 @@ gedit_document_save_as_real (GeditDocument* doc, const gchar *uri, const GeditEn
 }
 
 const gchar *
-gedit_document_get_mime_type (const GeditDocument* doc)
+gedit_document_get_mime_type (GeditDocument *doc)
 {
 	gedit_debug (DEBUG_DOCUMENT, "");
 

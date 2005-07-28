@@ -1,3 +1,20 @@
+2005-07-28  Paolo Maggi <paolo@gnome.org>
+
+	Fixed bug #166903 (this fix has been backported from the
+	new_mdi branch).
+
+	* gedit-document.c (get_uri_shortname_for_display)
+	(update_uri_for_display): new functions
+	(gedit_document_finalize): free new variables uri_for_display 
+	and short_name_for_display
+	(gedit_document_get_raw_uri): removed "const" 
+	(gedit_document_get_uri): rewritten
+	(gedit_document_get_short_name): ditto
+	(gedit_document_set_uri): call update_uri_for_display
+	(gedit_document_get_mime_type): removed "const".
+
+	* gedit-document.h: removed some "const *" from prototypes.
+
 2005-07-27  Federico Mena Quintero  <federico@ximian.com>
  
  	Fixes bug #311187:

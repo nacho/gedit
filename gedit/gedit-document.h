@@ -124,11 +124,11 @@ void 		gedit_document_set_readonly 	(GeditDocument        *doc,
 						 gboolean              readonly);
 gboolean	gedit_document_is_readonly 	(GeditDocument        *doc);
 
-gchar*		gedit_document_get_raw_uri 	(const GeditDocument *doc);
-gchar*		gedit_document_get_uri 		(const GeditDocument *doc);
-gchar*		gedit_document_get_short_name 	(const GeditDocument *doc);
+gchar*		gedit_document_get_raw_uri 	(GeditDocument        *doc);
+gchar*		gedit_document_get_uri 		(GeditDocument        *doc);
+gchar*		gedit_document_get_short_name 	(GeditDocument        *doc);
 
-const gchar    *gedit_document_get_mime_type 	(const GeditDocument *doc);
+const gchar    *gedit_document_get_mime_type 	(GeditDocument        *doc);
 
 void		gedit_document_load 		(GeditDocument        *doc, 
 						 const gchar          *uri, 
