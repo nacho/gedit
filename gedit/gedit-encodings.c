@@ -3,7 +3,7 @@
  * gedit-encodings.c
  * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2005 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  */
  
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -81,6 +81,8 @@ typedef enum
   GEDIT_ENCODING_CP_866,
 
   GEDIT_ENCODING_EUC_JP,
+  GEDIT_ENCODING_EUC_JP_MS,
+  GEDIT_ENCODING_CP932,
   GEDIT_ENCODING_EUC_KR,
   GEDIT_ENCODING_EUC_TW,
 
@@ -195,6 +197,11 @@ static GeditEncoding encodings [] = {
 
   { GEDIT_ENCODING_EUC_JP,
     "EUC-JP", N_("Japanese") },
+  { GEDIT_ENCODING_EUC_JP_MS,
+    "EUC-JP-MS", N_("Japanese") },
+  { GEDIT_ENCODING_CP932,
+    "CP932", N_("Japanese") },
+
   { GEDIT_ENCODING_EUC_KR,
     "EUC-KR", N_("Korean") },
   { GEDIT_ENCODING_EUC_TW,
