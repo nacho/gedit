@@ -399,7 +399,9 @@ create_model (GtkWidget *listview, const gchar *sel_format)
 		++i;
 	}
 
-	/* fall back to selecting the first iter */
+	/* Fall back to selecting the first iter. This covers the case when sf is not a format in
+	 * formats[] since the /apps/gedit-2/plugins/time/selected_format is broken or contains an
+	 * unknown format. */
 	if (!gtk_tree_selection_get_selected (selection, NULL, NULL))
 	{
 		gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter);
@@ -910,24 +912,23 @@ time_world_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
 static gint
 get_format_from_list (GtkWidget *listview)
 {
-	GtkTreeModel *model;
+	GtkTreeModel *model = NULL;
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
-        gint selected_value;
+	gint selected_value = 0;
 
 	gedit_debug (DEBUG_PLUGINS, "");
-
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (listview));
-	g_return_val_if_fail (model != NULL, 0);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (listview));
 	g_return_val_if_fail (selection != NULL, 0);
 
-	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+	if (gtk_tree_selection_get_selected (selection, &model, &iter))
 	{
+		g_return_val_if_fail (model != NULL, 0);
 		gtk_tree_model_get (model, &iter, COLUMN_INDEX, &selected_value, -1);
 	}
-	gedit_debug (DEBUG_PLUGINS, "");
+	else
+		g_return_val_if_reached (0);
 
         return selected_value;
 }

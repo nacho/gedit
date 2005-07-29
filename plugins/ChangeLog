@@ -1,3 +1,10 @@
+2005-07-29  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #166350 (Gedit crashed when insert date and time)
+
+	* time/time.c (get_format_from_list): return 0 if no format
+	is selected (should never happen). 
+
 2005-07-24  Paolo Borelli  <pborelli@katamail.com>
 
 	* sample/sample.c: check the right pointer. Patch from Ike Gingerich.
