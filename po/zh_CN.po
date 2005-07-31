@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-07 12:32+0000\n"
-"PO-Revision-Date: 2005-05-08 03:30+0800\n"
+"POT-Creation-Date: 2005-07-30 15:01+0000\n"
+"PO-Revision-Date: 2005-07-31 00:02+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -578,19 +578,19 @@ msgstr[0] "如果您不保存，上一小时零 %d 分钟所做的更改将永�
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "在关闭前先将更改保存到文档“%s”吗？"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:645
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "还有 %d 个文档已做更改但尚未保存。关闭前先保存吗？"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:662
 msgid "S_elect the documents you want to save:"
 msgstr "选择您想要保存的文档(_E)："
 
 #. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:677
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:679
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "如果您不保存，您所做的全部更改都将永久丢失。"
 
@@ -1114,46 +1114,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:370
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:370
 msgid "Unsaved Document"
 msgstr "未保存文档"
 
-#: ../gedit/gedit-document.c:672 ../gedit/gedit-document.c:719
-msgid "Invalid file name"
-msgstr "无效文件名"
-
-#: ../gedit/gedit-document.c:859 ../gedit/gedit-document.c:1411
+#: ../gedit/gedit-document.c:916 ../gedit/gedit-document.c:1468
 msgid "Invalid UTF-8 data"
 msgstr "UTF-8 数据无效"
 
-#: ../gedit/gedit-document.c:1658
+#: ../gedit/gedit-document.c:1718
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "无法读入 %s 的符号链接信息"
 
-#: ../gedit/gedit-document.c:1704
+#: ../gedit/gedit-document.c:1764
 msgid "The file has too many symbolic links."
 msgstr "该文件有太多的符号链接。"
 
-#: ../gedit/gedit-document.c:1788
+#: ../gedit/gedit-document.c:1848
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit 无法在写入模式下处理 %s: 位置。"
 
-#: ../gedit/gedit-document.c:1795
+#: ../gedit/gedit-document.c:1855
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit 无法在写入模式下处理此类位置。"
 
-#: ../gedit/gedit-document.c:1808
+#: ../gedit/gedit-document.c:1868
 msgid "Invalid filename."
 msgstr "无效的文件名。"
 
-#: ../gedit/gedit-document.c:1959
+#: ../gedit/gedit-document.c:2019
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1161,7 +1157,7 @@ msgstr ""
 "没有足够的磁盘空间用于保存文件。\n"
 "请释放一些磁盘空间，然后重试。"
 
-#: ../gedit/gedit-document.c:1964
+#: ../gedit/gedit-document.c:2024
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1169,7 +1165,7 @@ msgid ""
 msgstr ""
 "磁盘有文件大小的限制，请保存较小的文件或者将文件保存到没有此限制的磁盘上。"
 
-#: ../gedit/gedit-document.c:2008
+#: ../gedit/gedit-document.c:2068
 msgid "Could not create a backup file."
 msgstr "gedit 无法创建一个临时文件。"
 
@@ -1181,125 +1177,126 @@ msgstr "自动检测"
 #: ../gedit/gedit-encodings-option-menu.c:246
 #, c-format
 msgid "Current Locale (%s)"
-msgstr "当前区域(%s)"
+msgstr "当前语系(%s)"
 
 #: ../gedit/gedit-encodings-option-menu.c:307
 msgid "Add or _Remove..."
 msgstr "添加或删除(_R)..."
 
-#: ../gedit/gedit-encodings.c:134 ../gedit/gedit-encodings.c:179
-#: ../gedit/gedit-encodings.c:181 ../gedit/gedit-encodings.c:183
-#: ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:181
+#: ../gedit/gedit-encodings.c:183 ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:187
 msgid "Unicode"
 msgstr "Unicode"
 
-#: ../gedit/gedit-encodings.c:148 ../gedit/gedit-encodings.c:174
-#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:176
+#: ../gedit/gedit-encodings.c:222 ../gedit/gedit-encodings.c:265
 msgid "Western"
 msgstr "西欧"
 
-#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:217
-#: ../gedit/gedit-encodings.c:254
+#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:224
+#: ../gedit/gedit-encodings.c:261
 msgid "Central European"
 msgstr "中欧"
 
-#: ../gedit/gedit-encodings.c:152
+#: ../gedit/gedit-encodings.c:154
 msgid "South European"
 msgstr "南欧"
 
-#: ../gedit/gedit-encodings.c:154 ../gedit/gedit-encodings.c:170
-#: ../gedit/gedit-encodings.c:268
+#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:275
 msgid "Baltic"
 msgstr "波罗的语"
 
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:219
-#: ../gedit/gedit-encodings.c:232 ../gedit/gedit-encodings.c:236
-#: ../gedit/gedit-encodings.c:238 ../gedit/gedit-encodings.c:256
+#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:226
+#: ../gedit/gedit-encodings.c:239 ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:263
 msgid "Cyrillic"
 msgstr "西里尔语"
 
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:225
-#: ../gedit/gedit-encodings.c:266
+#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:232
+#: ../gedit/gedit-encodings.c:273
 msgid "Arabic"
 msgstr "阿拉伯语"
 
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:260
+#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:267
 #: ../plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "希腊语"
 
-#: ../gedit/gedit-encodings.c:162
+#: ../gedit/gedit-encodings.c:164
 msgid "Hebrew Visual"
 msgstr "可视希伯来语"
 
-#: ../gedit/gedit-encodings.c:164 ../gedit/gedit-encodings.c:223
-#: ../gedit/gedit-encodings.c:264 ../plugins/spell/gedit-spell-checker.c:109
+#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:230
+#: ../gedit/gedit-encodings.c:271 ../plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "希伯来语"
 
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:221
-#: ../gedit/gedit-encodings.c:262 ../plugins/spell/gedit-spell-checker.c:149
+#: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
+#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "土耳其语"
 
-#: ../gedit/gedit-encodings.c:168
+#: ../gedit/gedit-encodings.c:170
 msgid "Nordic"
 msgstr "日耳曼语"
 
-#: ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:174
 msgid "Celtic"
 msgstr "凯尔特语"
 
-#: ../gedit/gedit-encodings.c:176 ../plugins/spell/gedit-spell-checker.c:137
+#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "罗马尼亚语"
 
-#: ../gedit/gedit-encodings.c:188
+#: ../gedit/gedit-encodings.c:190
 msgid "Armenian"
 msgstr "亚美尼亚语"
 
-#: ../gedit/gedit-encodings.c:190 ../gedit/gedit-encodings.c:192
-#: ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:192 ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:208
 msgid "Chinese Traditional"
 msgstr "繁体中文"
 
-#: ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:196
 msgid "Cyrillic/Russian"
 msgstr "西里尔语/俄语"
 
-#: ../gedit/gedit-encodings.c:197 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:203 ../gedit/gedit-encodings.c:235
+#: ../gedit/gedit-encodings.c:250
 msgid "Japanese"
 msgstr "日语"
 
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:230
-#: ../gedit/gedit-encodings.c:234 ../gedit/gedit-encodings.c:249
+#: ../gedit/gedit-encodings.c:206 ../gedit/gedit-encodings.c:237
+#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:256
 msgid "Korean"
 msgstr "朝鲜语"
 
-#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:206
-#: ../gedit/gedit-encodings.c:208 ../gedit/gedit-encodings.c:212
+#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:213
+#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:219
 msgid "Chinese Simplified"
 msgstr "简体中文"
 
-#: ../gedit/gedit-encodings.c:210
+#: ../gedit/gedit-encodings.c:217
 msgid "Georgian"
 msgstr "格鲁吉亚语"
 
-#: ../gedit/gedit-encodings.c:240
+#: ../gedit/gedit-encodings.c:247
 msgid "Cyrillic/Ukrainian"
 msgstr "西里尔语/乌克兰语"
 
-#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:251
-#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "越南语"
 
-#: ../gedit/gedit-encodings.c:247
+#: ../gedit/gedit-encodings.c:254
 msgid "Thai"
 msgstr "泰语"
 
-#: ../gedit/gedit-encodings.c:434
+#: ../gedit/gedit-encodings.c:441
 msgid "Unknown"
 msgstr "未知"
 
@@ -1333,15 +1330,15 @@ msgstr "全部文本文件"
 msgid "_Character Coding:"
 msgstr "字符编码(_C)："
 
-#: ../gedit/gedit-file-selector-util.c:509
+#: ../gedit/gedit-file-selector-util.c:498
 msgid "Select a file to open"
 msgstr "选择要打开的文件"
 
-#: ../gedit/gedit-file-selector-util.c:534
+#: ../gedit/gedit-file-selector-util.c:523
 msgid "Select files to open"
 msgstr "选择要打开的文件"
 
-#: ../gedit/gedit-file-selector-util.c:566
+#: ../gedit/gedit-file-selector-util.c:559
 msgid "Select a filename to save"
 msgstr "选择要保存的文件名"
 
@@ -1349,31 +1346,31 @@ msgstr "选择要保存的文件名"
 msgid "Open File..."
 msgstr "打开文件..."
 
-#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:392
+#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "正在保存文档“%s”..."
 
-#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:410
+#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "文档“%s”尚未保存。"
 
-#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:423
+#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "文档“%s”已保存。"
 
-#: ../gedit/gedit-file.c:374
+#: ../gedit/gedit-file.c:372
 msgid "Save as..."
 msgstr "另存为..."
 
-#: ../gedit/gedit-file.c:528
+#: ../gedit/gedit-file.c:526
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "还原对文档“%s”未保存的更改吗？"
 
-#: ../gedit/gedit-file.c:537
+#: ../gedit/gedit-file.c:535
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1382,12 +1379,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-file.c:546
+#: ../gedit/gedit-file.c:544
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "上一分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-file.c:552
+#: ../gedit/gedit-file.c:550
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1397,7 +1394,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一分钟零 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-file.c:562
+#: ../gedit/gedit-file.c:560
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1406,14 +1403,14 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-file.c:577 ../gedit/gedit-file.c:598
+#: ../gedit/gedit-file.c:575 ../gedit/gedit-file.c:596
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "上 %d 小时内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-file.c:583
+#: ../gedit/gedit-file.c:581
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1423,69 +1420,69 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一小时零 %d 分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-file.c:619 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-file.c:617 ../gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "还原(_R)"
 
-#: ../gedit/gedit-file.c:664
+#: ../gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "还原文档“%s”出错。"
 
-#: ../gedit/gedit-file.c:672
+#: ../gedit/gedit-file.c:670
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "文档“%s”未还原。"
 
-#: ../gedit/gedit-file.c:676
+#: ../gedit/gedit-file.c:674
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "文档“%s”已还原。"
 
-#: ../gedit/gedit-file.c:704
+#: ../gedit/gedit-file.c:702
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "正在还原文档“%s”..."
 
-#: ../gedit/gedit-file.c:827
+#: ../gedit/gedit-file.c:825
 msgid "Could not read data from stdin."
 msgstr "无法从标准输入中读数据。"
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Reverting file:"
 msgstr "正在还原文件："
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Loading file:"
 msgstr "装入文件："
 
-#: ../gedit/gedit-file.c:1094 ../gedit/gedit-file.c:1335
+#: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "装入文件“%s”出错"
 
-#: ../gedit/gedit-file.c:1115
+#: ../gedit/gedit-file.c:1113
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "已载入文件“%s”"
 
-#: ../gedit/gedit-file.c:1227
+#: ../gedit/gedit-file.c:1225
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "已载入 %d 个文件"
 
-#: ../gedit/gedit-file.c:1288
+#: ../gedit/gedit-file.c:1286
 #, c-format
 msgid "Created file \"%s\""
 msgstr "已创建文件“%s”"
 
-#: ../gedit/gedit-file.c:1306
+#: ../gedit/gedit-file.c:1304
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "正在文件“%s”..."
 
-#: ../gedit/gedit-file.c:1471
+#: ../gedit/gedit-file.c:1469
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2210,7 +2207,7 @@ msgstr "撤消(_U)"
 msgid "_View"
 msgstr "查看(_V)"
 
-#: ../gedit/gedit-utils.c:695
+#: ../gedit/gedit-utils.c:686
 msgid " (invalid Unicode)"
 msgstr " (无效的 Unicode)"
 
@@ -2222,16 +2219,16 @@ msgstr " (无效的 Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:890
+#: ../gedit/gedit-view.c:885
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  行 %d，列 %d"
 
-#: ../gedit/gedit-view.c:926
+#: ../gedit/gedit-view.c:921
 msgid "  OVR"
 msgstr " 覆盖"
 
-#: ../gedit/gedit-view.c:928
+#: ../gedit/gedit-view.c:923
 msgid "  INS"
 msgstr " 插入"
 
@@ -2719,11 +2716,11 @@ msgstr "苏格兰盖尔语"
 
 #: ../plugins/spell/gedit-spell-checker.c:107
 msgid "Gallegan"
-msgstr ""
+msgstr "加利西亚语"
 
 #: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "马恩岛盖尔语"
 
 #: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Hindi"
@@ -2815,7 +2812,7 @@ msgstr "挪威语"
 
 #: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Nyanja"
-msgstr ""
+msgstr "尼扬贾语"
 
 #: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Polish"
@@ -2839,7 +2836,7 @@ msgstr "俄语"
 
 #: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "墓尼阿万达语"
 
 #: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Sardinian"
@@ -2867,7 +2864,7 @@ msgstr "泰米尔语"
 
 #: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Tetum"
-msgstr ""
+msgstr "特塔姆语"
 
 #: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Tagalog"
@@ -4453,11 +4450,11 @@ msgstr "插入日期和时间(_S)..."
 msgid "Insert current date and time at the cursor position"
 msgstr "在光标处插入当前的日期和时间"
 
-#: ../plugins/time/time.c:455
+#: ../plugins/time/time.c:457
 msgid "Available formats"
 msgstr "可用格式"
 
-#: ../plugins/time/time.c:563
+#: ../plugins/time/time.c:565
 msgid "Configure insert date/time plugin..."
 msgstr "配置插入日期/时间插件..."
 
