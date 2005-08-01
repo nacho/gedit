@@ -4,16 +4,16 @@
 # This file is distributed under the same license as the gedit package.
 # Evgeni Boevski <linkej@yahoo.com>, 2003.
 # Rostislav Raykov <zbrox@i-space.org>, 2004, 2005,
-# Vladimir Petkov <vpetkov@i-space.org> 2004.
-# Vladimir Petkov <vpetkov@i-space.org>, 2005.
+# Vladimir Petkov <vpetkov@i-space.org> 2004. 2005
+# Rostislav Raykov <zbrox@i-space.org>, 2005.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.10 branch gnome 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 13:59+0300\n"
-"PO-Revision-Date: 2005-05-12 09:46+0300\n"
+"POT-Creation-Date: 2005-08-01 21:25+0300\n"
+"PO-Revision-Date: 2005-08-01 21:23+0300\n"
 "Last-Translator: Rostislav Raykov <zbrox@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgid "Gedit viewer factory"
 msgstr "Фабрика на компонента за преглед на Gedit"
 
 #: ../data/GNOME_Gedit.server.in.in.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:211
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "Source"
 msgstr "Източник"
 
@@ -128,7 +128,7 @@ msgstr "Шрифт на редкатора"
 
 #: ../data/gedit.schemas.in.h:16
 msgid "Enable Syntax Highlighting"
-msgstr "Включване на отбелязването на синтакс"
+msgstr "Включване на отбелязването на синтаксиса"
 
 #: ../data/gedit.schemas.in.h:17
 msgid "Encodings shown in menu"
@@ -488,7 +488,7 @@ msgstr "Дали gedit трябва да разрешава автоматичн
 
 #: ../data/gedit.schemas.in.h:90
 msgid "Whether gedit should enable syntax highlighting."
-msgstr "Дали gedit трябва да отбелязва с различен цвят синтаксис."
+msgstr "Дали gedit трябва да отбелязва с различен цвят синтаксиса."
 
 #: ../data/gedit.schemas.in.h:91
 msgid "Whether gedit should highlight matching bracket."
@@ -564,7 +564,7 @@ msgstr "Активиране на %s"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:142
 msgid "Close _without Saving"
-msgstr "Затваряне без да се запазват промените"
+msgstr "Без запазване"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:152
 msgid "Question"
@@ -578,17 +578,17 @@ msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
 msgstr[0] ""
-"Ако не запишете, промените от последната %ld секунда ще бъдат загубени "
+"Ако не запазите файла, промените от последната %ld секунда ще бъдат загубени "
 "безвъзвратно."
 msgstr[1] ""
-"Ако не запишете, промените от последните %ld секунди ще бъдат загубени "
+"Ако не запазите файла, промените от последните %ld секунди ще бъдат загубени "
 "безвъзвратно."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:376
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr ""
-"Ако не запишете, промените от последната минута ще бъдат загубени "
+"Ако не запазите файла, промените от последната минута ще бъдат загубени "
 "безвъзвратно."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:382
@@ -600,10 +600,10 @@ msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
 msgstr[0] ""
-"Ако не запишете, промените от последната минута и %ld секунда ще бъдат "
+"Ако не запазите файла, промените от последната минута и %ld секунда ще бъдат "
 "загубени безвъзвратно."
 msgstr[1] ""
-"Ако не запишете, промените от последната минута и %ld секунди ще бъдат "
+"Ако не запазите файла, промените от последната минута и %ld секунди ще бъдат "
 "загубени безвъзвратно."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:392
@@ -614,10 +614,10 @@ msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
 msgstr[0] ""
-"Ако не запишете, промените от последната %ld минута ще бъдат загубени "
+"Ако не запазите файла, промените от последната %ld минута ще бъдат загубени "
 "безвъзвратно."
 msgstr[1] ""
-"Ако не запишете, промените от последните %ld минути ще бъдат загубени "
+"Ако не запазите файла, промените от последните %ld минути ще бъдат загубени "
 "безвъзвратно."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:407
@@ -627,9 +627,10 @@ msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] ""
-"Ако не запишете, промените от последния час ще бъдат загубени безвъзвратно."
+"Ако не запазите файла, промените от последния час ще бъдат загубени "
+"безвъзвратно."
 msgstr[1] ""
-"Ако не запишете, промените от последните %d часа ще бъдат загубени "
+"Ако не запазите файла, промените от последните %d часа ще бъдат загубени "
 "безвъзвратно."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:413
@@ -641,11 +642,11 @@ msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
 msgstr[0] ""
-"Ако не запишете, промените от последния час и %d минута ще бъдат загубени "
-"безвъзвратно."
+"Ако не запазите файла, промените от последния час и %d минута ще бъдат "
+"загубени безвъзвратно."
 msgstr[1] ""
-"Ако не запишете, промените от последния час и %d минути ще бъдат загубени "
-"безвъзвратно."
+"Ако не запазите файла, промените от последния час и %d минути ще бъдат "
+"загубени безвъзвратно."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
 #, c-format
@@ -659,9 +660,9 @@ msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
-"Има %d документ с незапазени промени. Да бъде ли записан преди затварянето?"
+"Има %d документ с незапазени промени. Да бъде ли запазен преди затварянето?"
 msgstr[1] ""
-"Има %d документи с незапазени промени. Да бъдат ли записани преди "
+"Има %d документи с незапазени промени. Да бъдат ли запазени преди "
 "затварянето?"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:662
@@ -671,7 +672,8 @@ msgstr "Избор докум_ентите, които искате да зап�
 #. Secondary label
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:679
 msgid "If you don't save, all your changes will be permanently lost."
-msgstr "Ако не запишете, всичките ви промени ще бъдат загубени безвъзвратно."
+msgstr ""
+"Ако не запазите файла, всичките ви промени ще бъдат загубени безвъзвратно."
 
 #: ../gedit/dialogs/gedit-dialog-goto-line.c:184
 msgid "Go to Line"
@@ -749,7 +751,7 @@ msgstr "Модул"
 
 #: ../gedit/dialogs/gedit-plugin-manager.c:56
 msgid "Enabled"
-msgstr "Разрешено"
+msgstr "Активен"
 
 #: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:86
 #: ../gedit/dialogs/program-location-dialog.glade2.h:2
@@ -964,7 +966,7 @@ msgstr "Зачеркнато"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "Syntax Highlighting"
-msgstr "Отбелязване на синтакса"
+msgstr "Отбелязване на синтаксиса"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "U_se default theme colors"
@@ -1000,7 +1002,7 @@ msgstr "Включване на автоматичния отстъп"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Enable syntax highlighting"
-msgstr "Включване на отбелязването на синтакс"
+msgstr "Включване на отбелязването на синтаксиса"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Foreground:"
@@ -1084,7 +1086,7 @@ msgstr "_Номериране на всеки"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:15
 msgid "_Print page headers"
-msgstr "_Печатане на колон титулите"
+msgstr "_Печатане на колонтитулите"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:16
 msgid "_Restore Default Fonts"
@@ -1096,7 +1098,7 @@ msgstr "реда"
 
 #: ../gedit/dialogs/plugin-manager.glade2.h:1
 msgid "C_onfigure Plugin"
-msgstr "Конфигурация на модул"
+msgstr "Настройки на модул"
 
 #: ../gedit/dialogs/plugin-manager.glade2.h:2
 msgid "_About Plugin"
@@ -1198,46 +1200,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:370
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:370
 msgid "Unsaved Document"
 msgstr "Незапазени документи"
 
-#: ../gedit/gedit-document.c:672 ../gedit/gedit-document.c:719
-msgid "Invalid file name"
-msgstr "Невалидно име на файл"
-
-#: ../gedit/gedit-document.c:859 ../gedit/gedit-document.c:1411
+#: ../gedit/gedit-document.c:916 ../gedit/gedit-document.c:1468
 msgid "Invalid UTF-8 data"
 msgstr "Грешни UTF-8 данни"
 
-#: ../gedit/gedit-document.c:1658
+#: ../gedit/gedit-document.c:1718
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Неуспех при четене на информация от символична връзка за %s"
 
-#: ../gedit/gedit-document.c:1704
+#: ../gedit/gedit-document.c:1764
 msgid "The file has too many symbolic links."
 msgstr "Файлът има прекалено много символични връзки."
 
-#: ../gedit/gedit-document.c:1788
+#: ../gedit/gedit-document.c:1848
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit не може да използва %s: местоположения в режим запис."
 
-#: ../gedit/gedit-document.c:1795
+#: ../gedit/gedit-document.c:1855
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit не може да използва такива местоположения в режим запис."
 
-#: ../gedit/gedit-document.c:1808
+#: ../gedit/gedit-document.c:1868
 msgid "Invalid filename."
 msgstr "Невалидно име на файл."
 
-#: ../gedit/gedit-document.c:1959
+#: ../gedit/gedit-document.c:2019
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1245,7 +1243,7 @@ msgstr ""
 "На диска няма достатъчно място за запис на файла.\n"
 "Освободете място и опитайте пак."
 
-#: ../gedit/gedit-document.c:1964
+#: ../gedit/gedit-document.c:2024
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1254,7 +1252,7 @@ msgstr ""
 "Дискът, на който записвате има ограничение за размера на файловете. "
 "Пробвайте да запазите по-малък файл или използвайте диск без ограничения."
 
-#: ../gedit/gedit-document.c:2008
+#: ../gedit/gedit-document.c:2068
 msgid "Could not create a backup file."
 msgstr "Неуспех при създаването на резервно копие на файла."
 
@@ -1272,119 +1270,120 @@ msgstr "Текущ локал (%s)"
 msgid "Add or _Remove..."
 msgstr "Добавяне или п_ремахване..."
 
-#: ../gedit/gedit-encodings.c:134 ../gedit/gedit-encodings.c:179
-#: ../gedit/gedit-encodings.c:181 ../gedit/gedit-encodings.c:183
-#: ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:181
+#: ../gedit/gedit-encodings.c:183 ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:187
 msgid "Unicode"
 msgstr "Уникод"
 
-#: ../gedit/gedit-encodings.c:148 ../gedit/gedit-encodings.c:174
-#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:176
+#: ../gedit/gedit-encodings.c:222 ../gedit/gedit-encodings.c:265
 msgid "Western"
 msgstr "Западен"
 
-#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:217
-#: ../gedit/gedit-encodings.c:254
+#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:224
+#: ../gedit/gedit-encodings.c:261
 msgid "Central European"
 msgstr "Централно европейски"
 
-#: ../gedit/gedit-encodings.c:152
+#: ../gedit/gedit-encodings.c:154
 msgid "South European"
 msgstr "Южно европейски"
 
-#: ../gedit/gedit-encodings.c:154 ../gedit/gedit-encodings.c:170
-#: ../gedit/gedit-encodings.c:268
+#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:275
 msgid "Baltic"
 msgstr "Балтийски"
 
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:219
-#: ../gedit/gedit-encodings.c:232 ../gedit/gedit-encodings.c:236
-#: ../gedit/gedit-encodings.c:238 ../gedit/gedit-encodings.c:256
+#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:226
+#: ../gedit/gedit-encodings.c:239 ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:263
 msgid "Cyrillic"
 msgstr "Кирилица"
 
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:225
-#: ../gedit/gedit-encodings.c:266
+#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:232
+#: ../gedit/gedit-encodings.c:273
 msgid "Arabic"
 msgstr "Арабски"
 
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:260
+#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:267
 #: ../plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "Гръцки"
 
-#: ../gedit/gedit-encodings.c:162
+#: ../gedit/gedit-encodings.c:164
 msgid "Hebrew Visual"
 msgstr "Иврит видим"
 
-#: ../gedit/gedit-encodings.c:164 ../gedit/gedit-encodings.c:223
-#: ../gedit/gedit-encodings.c:264 ../plugins/spell/gedit-spell-checker.c:109
+#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:230
+#: ../gedit/gedit-encodings.c:271 ../plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "Иврит"
 
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:221
-#: ../gedit/gedit-encodings.c:262 ../plugins/spell/gedit-spell-checker.c:149
+#: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
+#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "Турски"
 
-#: ../gedit/gedit-encodings.c:168
+#: ../gedit/gedit-encodings.c:170
 msgid "Nordic"
 msgstr "Скандинавски"
 
-#: ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:174
 msgid "Celtic"
 msgstr "Келтски"
 
-#: ../gedit/gedit-encodings.c:176 ../plugins/spell/gedit-spell-checker.c:137
+#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "Румънски"
 
-#: ../gedit/gedit-encodings.c:188
+#: ../gedit/gedit-encodings.c:190
 msgid "Armenian"
 msgstr "Американски"
 
-#: ../gedit/gedit-encodings.c:190 ../gedit/gedit-encodings.c:192
-#: ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:192 ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:208
 msgid "Chinese Traditional"
 msgstr "Китайски традиционен"
 
-#: ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:196
 msgid "Cyrillic/Russian"
 msgstr "Кирилица/Руска"
 
-#: ../gedit/gedit-encodings.c:197 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:203 ../gedit/gedit-encodings.c:235
+#: ../gedit/gedit-encodings.c:250
 msgid "Japanese"
 msgstr "Японски"
 
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:230
-#: ../gedit/gedit-encodings.c:234 ../gedit/gedit-encodings.c:249
+#: ../gedit/gedit-encodings.c:206 ../gedit/gedit-encodings.c:237
+#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:256
 msgid "Korean"
 msgstr "Корейски"
 
-#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:206
-#: ../gedit/gedit-encodings.c:208 ../gedit/gedit-encodings.c:212
+#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:213
+#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:219
 msgid "Chinese Simplified"
 msgstr "Китайски опростен"
 
-#: ../gedit/gedit-encodings.c:210
+#: ../gedit/gedit-encodings.c:217
 msgid "Georgian"
 msgstr "Грузински"
 
-#: ../gedit/gedit-encodings.c:240
+#: ../gedit/gedit-encodings.c:247
 msgid "Cyrillic/Ukrainian"
 msgstr "Кирилица/Украинска"
 
-#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:251
-#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "Виетнамски"
 
-#: ../gedit/gedit-encodings.c:247
+#: ../gedit/gedit-encodings.c:254
 msgid "Thai"
 msgstr "Тайвански"
 
-#: ../gedit/gedit-encodings.c:434
+#: ../gedit/gedit-encodings.c:441
 msgid "Unknown"
 msgstr "Неизвестен"
 
@@ -1418,15 +1417,15 @@ msgstr "Всички текстови файлове"
 msgid "_Character Coding:"
 msgstr "Кодиране на си_мволите:"
 
-#: ../gedit/gedit-file-selector-util.c:509
+#: ../gedit/gedit-file-selector-util.c:498
 msgid "Select a file to open"
 msgstr "Избор на файл за отваряне"
 
-#: ../gedit/gedit-file-selector-util.c:534
+#: ../gedit/gedit-file-selector-util.c:523
 msgid "Select files to open"
 msgstr "Избор на файлове за отваряне"
 
-#: ../gedit/gedit-file-selector-util.c:566
+#: ../gedit/gedit-file-selector-util.c:559
 msgid "Select a filename to save"
 msgstr "Избор на име на файл за запис"
 
@@ -1434,31 +1433,31 @@ msgstr "Избор на име на файл за запис"
 msgid "Open File..."
 msgstr "Отваряне на файл..."
 
-#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:392
+#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Запазва се документа \"%s\"..."
 
-#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:410
+#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Документът \"%s\" не беше запазен."
 
-#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:423
+#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Документът \"%s\" беше запазен."
 
-#: ../gedit/gedit-file.c:374
+#: ../gedit/gedit-file.c:372
 msgid "Save as..."
 msgstr "Запазване като..."
 
-#: ../gedit/gedit-file.c:528
+#: ../gedit/gedit-file.c:526
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Възвръщане на незапазените промени на документ \"%s\"?"
 
-#: ../gedit/gedit-file.c:537
+#: ../gedit/gedit-file.c:535
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1472,14 +1471,14 @@ msgstr[1] ""
 "Промените направени по документа в последните %ld секунди ще бъдат загубени "
 "безвъзвратно."
 
-#: ../gedit/gedit-file.c:546
+#: ../gedit/gedit-file.c:544
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Промените направени по документа в последната минута ще бъдат загубени "
 "безвъзвратно."
 
-#: ../gedit/gedit-file.c:552
+#: ../gedit/gedit-file.c:550
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1494,7 +1493,7 @@ msgstr[1] ""
 "Промените направени по документа в последната минута и %ld секунди ще бъдат "
 "загубени безвъзвратно."
 
-#: ../gedit/gedit-file.c:562
+#: ../gedit/gedit-file.c:560
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1508,7 +1507,7 @@ msgstr[1] ""
 "Промените направени по документа в последните %ld минути ще бъдат загубени "
 "безвъзвратно."
 
-#: ../gedit/gedit-file.c:577 ../gedit/gedit-file.c:598
+#: ../gedit/gedit-file.c:575 ../gedit/gedit-file.c:596
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1520,7 +1519,7 @@ msgstr[1] ""
 "Промените направени по документа в последнитя %d часа ще бъдат загубени "
 "безвъзвратно."
 
-#: ../gedit/gedit-file.c:583
+#: ../gedit/gedit-file.c:581
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1535,70 +1534,70 @@ msgstr[1] ""
 "Промените направени по документа в последния час и %d минути ще бъдат "
 "загубени безвъзвратно."
 
-#: ../gedit/gedit-file.c:619 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-file.c:617 ../gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Възстановяване"
 
-#: ../gedit/gedit-file.c:664
+#: ../gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Грешка при възстановяването на документа %s\"."
 
-#: ../gedit/gedit-file.c:672
+#: ../gedit/gedit-file.c:670
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Документът \"%s\" не беше възстановен."
 
-#: ../gedit/gedit-file.c:676
+#: ../gedit/gedit-file.c:674
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Документът \"%s\" беше възстановен."
 
-#: ../gedit/gedit-file.c:704
+#: ../gedit/gedit-file.c:702
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Възстановяване на документа \"%s\"..."
 
-#: ../gedit/gedit-file.c:827
+#: ../gedit/gedit-file.c:825
 msgid "Could not read data from stdin."
 msgstr "Неуспех при четене на данни от stdin."
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Reverting file:"
 msgstr "Възстановяване на файл:"
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Loading file:"
 msgstr "Зареждане на файл:"
 
-#: ../gedit/gedit-file.c:1094 ../gedit/gedit-file.c:1335
+#: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Грешка при зареждане на файл \"%s\""
 
-#: ../gedit/gedit-file.c:1115
+#: ../gedit/gedit-file.c:1113
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Зареден е файлът \"%s\""
 
-#: ../gedit/gedit-file.c:1227
+#: ../gedit/gedit-file.c:1225
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Зареден е %d файл"
 msgstr[1] "Заредени са %d файла"
 
-#: ../gedit/gedit-file.c:1288
+#: ../gedit/gedit-file.c:1286
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Създаден е файлът \"%s\""
 
-#: ../gedit/gedit-file.c:1306
+#: ../gedit/gedit-file.c:1304
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Зарежда се файлът \"%s\"..."
 
-#: ../gedit/gedit-file.c:1471
+#: ../gedit/gedit-file.c:1469
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -2240,7 +2239,7 @@ msgstr "_Копиране"
 
 #: ../gedit/gedit-ui.xml.h:75
 msgid "_Customize Toolbar"
-msgstr "Настроки на ле_нтата с инструменти"
+msgstr "Настройки на ле_нтата с инструменти"
 
 #: ../gedit/gedit-ui.xml.h:76
 msgid "_Delete"
@@ -2248,7 +2247,7 @@ msgstr "Из_триване"
 
 #: ../gedit/gedit-ui.xml.h:77
 msgid "_Desktop Default"
-msgstr "_Настройки на работния плот"
+msgstr "_По подразбиране"
 
 #: ../gedit/gedit-ui.xml.h:78
 msgid "_Documents"
@@ -2288,7 +2287,7 @@ msgstr "_Отваряне..."
 
 #: ../gedit/gedit-ui.xml.h:88
 msgid "_Output Window"
-msgstr "_Изходен прозорец"
+msgstr "_Изходни съобщения"
 
 #: ../gedit/gedit-ui.xml.h:89
 msgid "_Paste"
@@ -2346,7 +2345,7 @@ msgstr "_Отмяна"
 msgid "_View"
 msgstr "_Изглед"
 
-#: ../gedit/gedit-utils.c:695
+#: ../gedit/gedit-utils.c:686
 msgid " (invalid Unicode)"
 msgstr "(невалиден Уникод)"
 
@@ -2358,16 +2357,16 @@ msgstr "(невалиден Уникод)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:890
+#: ../gedit/gedit-view.c:885
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ред %d, Кол. %d"
 
-#: ../gedit/gedit-view.c:926
+#: ../gedit/gedit-view.c:921
 msgid "  OVR"
 msgstr "  OVR"
 
-#: ../gedit/gedit-view.c:928
+#: ../gedit/gedit-view.c:923
 msgid "  INS"
 msgstr "  INS"
 
@@ -2410,7 +2409,7 @@ msgstr ""
 
 #: ../plugins/changecase/changecase.c:43
 msgid "C_hange Case"
-msgstr "Сменяне на капитализацията"
+msgstr "Пр_омяна на регистъра"
 
 #: ../plugins/changecase/changecase.c:49
 msgid "All _Upper Case"
@@ -2661,7 +2660,7 @@ msgstr "Изберете работната директория..."
 
 #: ../plugins/shell_output/shell_output.glade2.h:4
 msgid "_Show results in Output Window"
-msgstr "_Показване на резултатите в изходен прозорец"
+msgstr "_Показване на изходните резултати в прозорец"
 
 #: ../plugins/shell_output/shell_output.glade2.h:5
 msgid "_Working directory:"
@@ -3126,7 +3125,7 @@ msgstr "Проверява текущия документ за некорект
 
 #: ../plugins/spell/spell.c:57
 msgid "_Autocheck Spelling"
-msgstr "_Автоматична проверка"
+msgstr "_Автоматична проверка на правописа"
 
 #: ../plugins/spell/spell.c:60
 msgid "Automatically spell-check the current document"
@@ -3348,844 +3347,847 @@ msgstr "Дата и време на промяна"
 msgid "Declare flag"
 msgstr "Declare flag"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:49
+#. Translators: DEFER is an optional attribute of the <script> tag.
+#. It indicates that the script is not going to generate any document
+#. content. The browser can continue parsing and drawing the page.
+#: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Defer attribute"
 msgstr "Defer attribute"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:50
+#: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Definition description"
 msgstr "Описание на определение"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:51
+#: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Definition list"
 msgstr "Списък с определения"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:52
+#: ../plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Definition term"
 msgstr "Дефиниция"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:53
+#: ../plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Deleted text"
 msgstr "Изтрит текст"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:54
+#: ../plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Direction"
 msgstr "Посока"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:55
+#: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Directionality"
 msgstr "Directionality"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:56
+#: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Directory list"
 msgstr "Списък с папки"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Disabled"
 msgstr "Изключено"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:58
+#: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document base"
 msgstr "База на документа"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:59
+#: ../plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document body"
 msgstr "Тялото на документа"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:60
+#: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Document head"
 msgstr "Главница на документа"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:61
+#: ../plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Document title"
 msgstr "Заглавие на документа"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:62
+#: ../plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Document type"
 msgstr "Вид на документа"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:63
+#: ../plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Element ID"
 msgstr "ID на елемента"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:64
+#: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Embedded object"
 msgstr "Вграден обект"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:65
+#: ../plugins/taglist/HTML.tags.xml.in.h:68
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Emphasis"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:66
+#: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Encode type"
 msgstr "Тип кодиране"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:67
+#: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Figure"
 msgstr "Фигура"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:68
+#: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Font face"
 msgstr "Име на шрифт"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:69
+#: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "For label"
 msgstr "За етикет"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:70
+#: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Forced line break"
 msgstr "Forced line break"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:71
+#: ../plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form"
 msgstr "Формуляр"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:72
+#: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form action handler"
 msgstr "Form action handler"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:73
+#: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form control group"
 msgstr "Form control group"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:74
+#: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form field label text"
 msgstr "Form field label text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Form input"
 msgstr "Form input"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:76
+#: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Form input type"
 msgstr "Вид на входа на формуляра"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:77
+#: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Form method"
 msgstr "Метод на формуляра"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:78
+#: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Forward link"
 msgstr "Препращане на връзка"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:79
+#: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame"
 msgstr "Frame"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:80
+#: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frame render parts"
 msgstr "Frame render parts"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:81
+#: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frame source"
 msgstr "Frame source"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:82
+#: ../plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frame target"
 msgstr "Frame target"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:83
+#: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameborder"
 msgstr "Frameborder"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:84
+#: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Frameset"
 msgstr "Frameset"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:85
+#: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Frameset columns"
 msgstr "Frameset columns"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:86
+#: ../plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Frameset rows"
 msgstr "Frameset rows"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:87
+#: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Framespacing"
 msgstr "Framespacing"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:88
+#: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "Generic embedded object"
 msgstr "Общ вграден обект"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:89
+#: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Generic metainformation"
 msgstr "Обща мета-информация"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:90
+#: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Generic span"
 msgstr "Generic span"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:91
+#: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:92
+#: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML - Special Characters"
 msgstr "HTML - Специални символи"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:93
+#: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTML - Tags"
 msgstr "HTML - Тагове"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:94
+#: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "HTML root element"
 msgstr "HTML root element"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:95
+#: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "HTML version"
 msgstr "Версия на HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:96
+#: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "HTTP header name"
 msgstr "HTTP header name"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:97
+#: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Header cell ID's"
 msgstr "Header cell ID's"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:98
+#: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading"
 msgstr "Глава"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:99
+#: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 1"
 msgstr "Поразделение 1"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:100
+#: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 2"
 msgstr "Подразделение 2"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:101
+#: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 3"
 msgstr "Подразделение 3"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:102
+#: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Heading 4"
 msgstr "Подразделение 4"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:103
+#: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Heading 5"
 msgstr "Подразделение 5"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:104
+#: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Heading 6"
 msgstr "Подразделение 6"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:105
+#: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Height"
 msgstr "Височина"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:106
+#: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Horizontal rule"
 msgstr "Хоризонтално правило"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:107
+#: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Horizontal space"
 msgstr "Horizontal space"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:108
+#: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "I18N BiDi over-ride"
 msgstr "I18N BiDi over-ride"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:109
+#: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image"
 msgstr "Изображение"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:110
+#: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image map"
 msgstr "Разграфено изображение"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:111
+#: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Image map area"
 msgstr "Район на разграфеното изображение"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:112
+#: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Image map name"
 msgstr "Име на разграфеното изображение"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:113
+#: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Image source"
 msgstr "Източник на изображението"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:114
+#: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Inline frame"
 msgstr "Вътрешна рамка"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:115
+#: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Inline layer"
 msgstr "Inline layer"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:116
+#: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Inserted text"
 msgstr "Вмъкнат текст"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:117
+#: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Instance definition"
 msgstr "Instance definition"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:118
+#: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Italic text"
 msgstr "Наклонен текст"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:119
+#: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Java applet"
 msgstr "Java аплет"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:120
+#: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Label"
 msgstr "Етикет"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:121
+#: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Language code"
 msgstr "Езиков код"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:122
+#: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Large text style"
 msgstr "Едър текст"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:123
+#: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Layer"
 msgstr "Слой"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:124
+#: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Link color"
 msgstr "Цвят на препратката"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:125
+#: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "List item"
 msgstr "Елемент от списък"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:126
+#: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "List of MIME types for file upload"
 msgstr "Списък с MIME типове за качване на файлове"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:127
+#: ../plugins/taglist/HTML.tags.xml.in.h:130
 msgid "List of supported character sets"
 msgstr "Списък с поддържаните кодови таблици."
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:128
+#: ../plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Listing"
 msgstr "Listing"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:129
+#: ../plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Local change to font"
 msgstr "Локална промяна на шрифта"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:130
+#: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Long description link"
 msgstr "Връзка с дълго описание"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Long quotation"
 msgstr "Дълъг цитат"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Mail link"
 msgstr "Препратка към ел. поща"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:133
+#: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Margin pixel height"
 msgstr "Височина на границата в пиксели"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:134
+#: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Margin pixel width"
 msgstr "Ширина на границата в пиксели"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:135
+#: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Marquee"
 msgstr "Marquee"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:136
+#: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Maximum length of text field"
 msgstr "Максимална дължина на текстово поле"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:137
+#: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Media-independent link"
 msgstr "Media-independent link"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:138
+#: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Menu list"
 msgstr "Menu list"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:139
+#: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Multi-line text field"
 msgstr "Текстово поле с много редове"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:140
+#: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Multicolumn"
 msgstr "Многоколонно"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:141
+#: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Multiple"
 msgstr "Множество"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:142
+#: ../plugins/taglist/HTML.tags.xml.in.h:145
 msgid "Name"
 msgstr "Име"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:143
+#: ../plugins/taglist/HTML.tags.xml.in.h:146
 msgid "Named property value"
 msgstr "Именувана стойност на свойство"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:144
+#: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Next ID"
 msgstr "Следващо ID"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:145
+#: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No URI"
 msgstr "Без адрес"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No embedded objects"
 msgstr "Няма вградени обекти"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:147
+#: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No frames"
 msgstr "Без рамки"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:148
+#: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No layers"
 msgstr "Няма слоеве"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:149
+#: ../plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No line break"
 msgstr "Няма нов ред"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:150
+#: ../plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No resize"
 msgstr "Без оразмеряване"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:151
+#: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "No script"
 msgstr "Няма скрипт"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:152
+#: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "No shade"
 msgstr "Няма сянка"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "No word wrap"
 msgstr "Без обвиване на текста"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:154
+#: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Note"
 msgstr "Бележка"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:155
+#: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Object applet file"
 msgstr "Object applet file"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:156
+#: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Object data reference"
 msgstr "Object data reference"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:157
+#: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Offset for alignment character"
 msgstr "Offset for alignment character"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:158
+#: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnBlur event"
 msgstr "OnBlur event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:159
+#: ../plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnChange event"
 msgstr "Събитие при промяна"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:160
+#: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnClick event"
 msgstr "Събитието при кликване"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:161
+#: ../plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnDblClick event"
 msgstr "OnDblClick event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:162
+#: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnFocus event"
 msgstr "Събитето \"На фокус\""
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:163
+#: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnKeyDown event"
 msgstr "OnKeyDown event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:164
+#: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnKeyPress event"
 msgstr "OnKeyPress event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:165
+#: ../plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnKeyUp event"
 msgstr "OnKeyUp event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:166
+#: ../plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnLoad event"
 msgstr "Събитието \"При зареждане\""
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:167
+#: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseDown event"
 msgstr "OnMouseDown event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:168
+#: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseMove event"
 msgstr "Събитието \"При движение на мишката\""
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:169
+#: ../plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnMouseOut event"
 msgstr "OnMouseOut event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:170
+#: ../plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnMouseOver event"
 msgstr "OnMouseOver event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:171
+#: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnMouseUp event"
 msgstr "OnMouseUp event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:172
+#: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnReset event"
 msgstr "OnReset event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:173
+#: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "OnSelect event"
 msgstr "Събитието при избиране"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:174
+#: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "OnSubmit event"
 msgstr "OnSubmit event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:175
+#: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "OnUnload event"
 msgstr "OnUnload event"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:176
+#: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Option group"
 msgstr "Option group"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:177
+#: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Option selector"
 msgstr "Избор на опция"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:178
+#: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Ordered list"
 msgstr "Подреден списък"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:179
+#: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Output media"
 msgstr "Output media"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:180
+#: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Paragraph"
 msgstr "Параграф"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:181
+#: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Paragraph class"
 msgstr "Параграфен клас"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:182
+#: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Paragraph style"
 msgstr "Стил на параграф"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:183
+#: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Preformatted listing"
 msgstr "Preformatted listing"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:184
+#: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Preformatted text"
 msgstr "Преформатиран текст"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:185
+#: ../plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Profile metainfo dictionary"
 msgstr "Profile metainfo dictionary"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:186
+#: ../plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Prompt message"
 msgstr "Prompt message"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:187
+#: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Push button"
 msgstr "Бутон"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:188
+#: ../plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Quote"
 msgstr "Цитат"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:189
+#: ../plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Range"
 msgstr "Диапазон"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:190
+#: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "ReadOnly text and password"
 msgstr "Текст и парола само за четене"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:191
+#: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Reduced spacing"
 msgstr "Reduced spacing"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Reverse link"
 msgstr "Обратна връзка"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:193
+#: ../plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Root"
 msgstr "Root"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:194
+#: ../plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Rows"
 msgstr "Редове"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:195
+#: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Rulings between rows and columns"
 msgstr "Rulings между редове и колони"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:196
+#: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Sample program output, scripts"
 msgstr "Примерен изход на програмата, скриптове"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:197
+#: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scope covered by header cells"
 msgstr "Обхват, покриващ от колонтитулните клетки"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:198
+#: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "Script language name"
 msgstr "Име на скрипт езика"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:199
+#: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "Script statments"
 msgstr "Script statments"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:200
+#: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Scrollbar"
 msgstr "Лента за скролиране"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:201
+#: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "Selectable option"
 msgstr "Опция с възможност за избор"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:202
+#: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Selected"
 msgstr "Избрано"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:203
+#: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Server-side image map"
 msgstr "Server-side image map"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:204
+#: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "Shape"
 msgstr "Форма"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:205
+#: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "Short inline quotation"
 msgstr "Short inline quotation"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:206
+#: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Single line prompt"
 msgstr "Single line prompt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:207
+#: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Size"
 msgstr "Размер"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:208
+#: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "Small text style"
 msgstr "Малък текст"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:209
+#: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "Soft line break"
 msgstr "Soft line break"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:210
+#: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Sound"
 msgstr "Звук"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:212
+#: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Space"
 msgstr "Интервал"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:213
+#: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Space separated archive list"
 msgstr "Space separated archive list"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
+#: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "Spacer"
 msgstr "Отстояние"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:215
+#: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Spacing between cells"
 msgstr "Разстояние между клетките"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:216
+#: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Spacing within cells"
 msgstr "Разстоянието между клетките"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:217
+#: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Span"
 msgstr "Span"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:218
+#: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Square root"
 msgstr "Корен квадратен"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:219
+#: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Standby load msg"
 msgstr "Съобщение при изчакване за зареждане"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:220
+#: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Starting sequence number"
 msgstr "Начално число на поредицата"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:221
+#: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Strike-through text"
 msgstr "Зачеркнат текстов стил"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:222
+#: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Strike-through text style"
 msgstr "Зачертан текстов стил"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:223
+#: ../plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Strong emphasis"
 msgstr "Силна емфатичност"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:224
+#: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Style info"
 msgstr "Информация за стила"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:225
+#: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Subscript"
 msgstr "Subscript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:226
+#: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Superscript"
 msgstr "Superscript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:227
+#: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Tab order position"
 msgstr "Tab order position"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:228
+#: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table"
 msgstr "Таблица"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:229
+#: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table body"
 msgstr "Тяло на таблица"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:230
+#: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table caption"
 msgstr "Заглавие на таблицата"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:231
+#: ../plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table column group properties"
 msgstr "Table column group properties"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:232
+#: ../plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Table column properties"
 msgstr "Настройки на колоните на таблица"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:233
+#: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table data cell"
 msgstr "Таблична клетка с информация"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:234
+#: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table footer"
 msgstr "Колонтитул на таблица"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:235
+#: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table header"
 msgstr "Горен колонтитул на таблицата"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:236
+#: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Table header cell"
 msgstr "Клетка с колонтитул на таблицата"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:237
+#: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Table row"
 msgstr "Ред на таблица"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:238
+#: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Table summary"
 msgstr "Обобщение на таблицата"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:239
+#: ../plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Blank"
 msgstr "Цел - Нов празен прозорец"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:240
+#: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Target - Parent"
 msgstr "Target - Parent"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:241
+#: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Target - Self"
 msgstr "Цел - Същият прозорец"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:242
+#: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Target - Top"
 msgstr "Цел - Горен прозорец"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:243
+#: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Teletype or monospace text style"
 msgstr "Teletype or monospace text style"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:244
+#: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Text"
 msgstr "Текст"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:245
+#: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Text color"
 msgstr "Цвят на текста"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:246
+#: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Text entered by user"
 msgstr "Текст въведен от потребителя"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:247
+#: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Title"
 msgstr "Заглавие"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:248
+#: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Topmargin in pixels"
 msgstr "Горната граница в пиксели"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:249
+#: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "URL"
 msgstr "URL"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:250
+#: ../plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Underlined text style"
 msgstr "Подчертан текстов стил"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:251
+#: ../plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Unordered list"
 msgstr "Неподреден списък"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:252
+#: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Use image map"
 msgstr "Използване на разграфено изображение"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:253
+#: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Value"
 msgstr "Стойност"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:254
+#: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Value interpretation"
 msgstr "Интерпретация на стойности"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:255
+#: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Variable or program argument"
 msgstr "Аргумент на променлива или програма"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:256
+#: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Vertical cell alignment"
 msgstr "Вертикално подравняване на клетките"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:257
+#: ../plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Vertical space"
 msgstr "Вертикално пространство"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:258
+#: ../plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Visited link color"
 msgstr "Цвят на посетените препратки"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:259
+#: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Width"
 msgstr "Ширина"
 
@@ -4206,20 +4208,20 @@ msgid "Bibliography thebibliography"
 msgstr "Bibliography thebibliography"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
-msgid "Brackets &lt;&gt;"
-msgstr "&lt;&gt; скоби"
+msgid "Brackets ()"
+msgstr "Кръгли скоби „(“ „)“"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:6
-msgid "Brackets ()"
-msgstr "() скоби"
+msgid "Brackets <>"
+msgstr "Счупени скоби „<“ „>“"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
-msgstr "[] скоби"
+msgstr "Квадратни скоби „[“ „]“"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:8
 msgid "Brackets {}"
-msgstr "{ } скоби"
+msgstr "Фигурни скоби „{“ „}“"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
@@ -4382,84 +4384,84 @@ msgid "Reference ref"
 msgstr "Reference ref"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:50
-msgid "Symbol &gt;&gt;"
-msgstr "Символа &gt;&gt;"
+msgid "Symbol <<"
+msgstr "Символът <<"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:51
-msgid "Symbol &gt;="
-msgstr "Символа &gt;="
+msgid "Symbol <="
+msgstr "Символът <="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:52
-msgid "Symbol &lt;&lt;"
-msgstr "Символа &lt;&lt;"
+msgid "Symbol >="
+msgstr "Символът >="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:53
-msgid "Symbol &lt;="
-msgstr "Символа &lt;="
+msgid "Symbol >>"
+msgstr "Символът >>"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
-msgstr "Символа \"и\""
+msgstr "Символът and"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:55
 msgid "Symbol const"
-msgstr "Символа const"
+msgstr "Символът const"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:56
 msgid "Symbol d-by-dt"
-msgstr "Символа d-by-dt"
+msgstr "Символът d-by-dt"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:57
 msgid "Symbol d-by-dt-partial"
-msgstr "Символа d-by-dt-partial"
+msgstr "Символът d-by-dt-partial"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:58
 msgid "Symbol d2-by-dt2-partial"
-msgstr "Символа d2-by-dt2-partial"
+msgstr "Символът d2-by-dt2-partial"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:59
 msgid "Symbol dagger"
-msgstr "Символа dagger"
+msgstr "Символът dagger"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:60
 msgid "Symbol equiv"
-msgstr "Символа equiv"
+msgstr "Символът equiv"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:61
 msgid "Symbol hyphen --"
-msgstr "Символа hyphen --"
+msgstr "Символът hyphen --"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:62
 msgid "Symbol hyphen ---"
-msgstr "Символа hyphen ---"
+msgstr "Символът hyphen ---"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:63
 msgid "Symbol infinity"
-msgstr "Символа infinity"
+msgstr "Символът infinity"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr "Символа mathspace ,"
+msgstr "Символът mathspace ,"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr "Символа mathspace ."
+msgstr "Символът mathspace ."
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr "Символа mathspace _"
+msgstr "Символът mathspace _"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr "Символа mathspace __"
+msgstr "Символът mathspace __"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
-msgstr "Символа simeq"
+msgstr "Символът simeq"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:69
 msgid "Symbol star"
-msgstr "Символа звезда"
+msgstr "Символът звезда"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:70
 msgid "Typeface bold"
@@ -4597,11 +4599,11 @@ msgstr "В_мъкване на дата/време..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Вмъкване на текущите дата и час на позицията на курсора."
 
-#: ../plugins/time/time.c:455
+#: ../plugins/time/time.c:457
 msgid "Available formats"
 msgstr "Налични формати"
 
-#: ../plugins/time/time.c:563
+#: ../plugins/time/time.c:565
 msgid "Configure insert date/time plugin..."
 msgstr "Настройка на модула дата/време..."
 
@@ -4644,92 +4646,3 @@ msgstr "_Посочване на формат"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Използване на потребителски формат"
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %ld second will be permanently "
-#~ "lost.If you don't save, changes from the last %ld seconds will be "
-#~ "permanently lost."
-#~ msgstr ""
-#~ "Ако не запишете, промените от последната %ld секунда ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последните %ld секунди ще "
-#~ "бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "If you don't save, changes from the last minute and %ld second will be "
-#~ "permanently lost.If you don't save, changes from the last minute and %ld "
-#~ "seconds will be permanently lost."
-#~ msgstr ""
-#~ "Ако не запишете, промените от последната минута и %ld секунда ще бъдат "
-#~ "загубени безвъзвратно.Ако не запишете, промените от последната минута и %"
-#~ "ld секунди ще бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "If you don't save, changes from the last %ld minute will be permanently "
-#~ "lost.If you don't save, changes from the last %ld minutes will be "
-#~ "permanently lost."
-#~ msgstr ""
-#~ "Ако не запишете, промените от последната %ld минута ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последните %ld минути ще бъдат "
-#~ "загубени безвъзвратно."
-
-#~ msgid ""
-#~ "If you don't save, changes from the last hour will be permanently lost.If "
-#~ "you don't save, changes from the last %d hours will be permanently lost."
-#~ msgstr ""
-#~ "Ако не запишете, промените от последния час ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последните %d часа ще бъдат "
-#~ "загубени безвъзвратно."
-
-#~ msgid ""
-#~ "If you don't save, changes from the last hour and %d minute will be "
-#~ "permanently lost.If you don't save, changes from the last hour and %d "
-#~ "minutes will be permanently lost."
-#~ msgstr ""
-#~ "Ако не запишете, промените от последния час и %d минута ще бъдат загубени "
-#~ "безвъзвратно.Ако не запишете, промените от последния час и %d минути ще "
-#~ "бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "Changes made to the document in the last %ld second will be permanently "
-#~ "lost.Changes made to the document in the last %ld seconds will be "
-#~ "permanently lost."
-#~ msgstr ""
-#~ "Промените направени по документа в последната %ld секунда ще бъдат "
-#~ "загубени безвъзвратно.Промените направени по документа в последните %ld "
-#~ "секунди ще бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "Changes made to the document in the last minute and %ld second will be "
-#~ "permanently lost.Changes made to the document in the last minute and %ld "
-#~ "seconds will be permanently lost."
-#~ msgstr ""
-#~ "Промените направени по документа в последната минута и %ld секунда ще "
-#~ "бъдат загубени безвъзвратно.Промените направени по документа в последната "
-#~ "минута и %ld секунди ще бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "Changes made to the document in the last %ld minute will be permanently "
-#~ "lost.Changes made to the document in the last %ld minutes will be "
-#~ "permanently lost."
-#~ msgstr ""
-#~ "Промените направени по документа в последната %ld минута ще бъдат "
-#~ "загубени безвъзвратно.Промените направени по документа в последните %ld "
-#~ "минути ще бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "Changes made to the document in the last hour will be permanently lost."
-#~ "Changes made to the document in the last %d hours will be permanently "
-#~ "lost."
-#~ msgstr ""
-#~ "Промените направени по документа в последния час ще бъдат загубени "
-#~ "безвъзвратно.Промените направени по документа в последните %d часа ще "
-#~ "бъдат загубени безвъзвратно."
-
-#~ msgid ""
-#~ "Changes made to the document in the last hour and %d minute will be "
-#~ "permanently lost.Changes made to the document in the last hour and %d "
-#~ "minutes will be permanently lost."
-#~ msgstr ""
-#~ "Промените направени по документа в последния час и %d минута ще бъдат "
-#~ "загубени безвъзвратно.Промените направени по документа в последния час и %"
-#~ "d минути ще бъдат загубени безвъзвратно."
