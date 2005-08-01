@@ -290,6 +290,9 @@ open_button_pressed_cb (GtkWidget *widget,
 		egg_recent_view_gtk_show_numbers (view, FALSE);
 		egg_recent_view_gtk_set_tooltip_func (view, tooltip_func, NULL);
 
+		/* elipsize if if gets too large */
+		egg_recent_view_gtk_set_label_width (view, 50);
+
 		egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
 	}
 
