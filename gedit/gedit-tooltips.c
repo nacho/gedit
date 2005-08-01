@@ -267,6 +267,10 @@ gedit_tooltips_force_window (GeditTooltips * tooltips)
 					 TRUE);
 		gtk_misc_set_alignment (GTK_MISC (tooltips->tip_label),
 					0.5, 0.5);
+		gtk_label_set_ellipsize (GTK_LABEL (tooltips->tip_label), 
+					 PANGO_ELLIPSIZE_MIDDLE);
+		gtk_label_set_max_width_chars (GTK_LABEL (tooltips->tip_label),
+					       125);
 		gtk_widget_show (tooltips->tip_label);
 
 		gtk_container_add (GTK_CONTAINER (tooltips->tip_window),

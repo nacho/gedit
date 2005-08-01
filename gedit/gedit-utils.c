@@ -606,49 +606,49 @@ gedit_warning (GtkWindow *parent, gchar *format, ...)
 /* the following functions are taken from eel */
 
 gchar *
-gedit_utils_str_middle_truncate (const char *string,
-				 guint truncate_length)
+gedit_utils_str_middle_truncate (const gchar *string,
+				 guint        truncate_length)
 {
-	char *truncated;
-	guint length;
-	guint num_left_chars;
-	guint num_right_chars;
+	GString     *truncated;
+	guint        length;
+	guint        n_chars;
+	guint        num_left_chars;
+	guint        right_offset;
+	guint        delimiter_length;
+	const gchar *delimiter = "\342\200\246";
 
-	/* we use "…" instead of "..." */
-	const char delimter[] = "…";
-	const guint delimter_length = strlen (delimter);
-	const guint min_truncate_length = delimter_length + 2;
+	g_return_val_if_fail (string != NULL, NULL);
 
-	if (string == NULL) {
-		return NULL;
-	}
+	length = strlen (string);
+
+	g_return_val_if_fail (g_utf8_validate (string, length, NULL), NULL);
 
 	/* It doesnt make sense to truncate strings to less than
 	 * the size of the delimiter plus 2 characters (one on each
 	 * side)
 	 */
-	if (truncate_length < min_truncate_length) {
+	delimiter_length = g_utf8_strlen (delimiter, -1);
+	if (truncate_length < (delimiter_length + 2)) {
 		return g_strdup (string);
 	}
 
-	length = strlen (string);
+	n_chars = g_utf8_strlen (string, length);
 
 	/* Make sure the string is not already small enough. */
-	if (length <= truncate_length) {
+	if (n_chars <= truncate_length) {
 		return g_strdup (string);
 	}
 
 	/* Find the 'middle' where the truncation will occur. */
-	num_left_chars = (truncate_length - delimter_length) / 2;
-	num_right_chars = truncate_length - num_left_chars - delimter_length + 1;
+	num_left_chars = (truncate_length - delimiter_length) / 2;
+	right_offset = n_chars - truncate_length + num_left_chars + delimiter_length;
 
-	truncated = g_new (char, truncate_length + 1);
-
-	strncpy (truncated, string, num_left_chars);
-	strncpy (truncated + num_left_chars, delimter, delimter_length);
-	strncpy (truncated + num_left_chars + delimter_length, string + length - num_right_chars + 1, num_right_chars);
-	
-	return truncated;
+	truncated = g_string_new_len (string,
+				      g_utf8_offset_to_pointer (string, num_left_chars) - string);
+	g_string_append (truncated, delimiter);
+	g_string_append (truncated, g_utf8_offset_to_pointer (string, right_offset));
+		
+	return g_string_free (truncated, FALSE);
 }
 
 gchar *
