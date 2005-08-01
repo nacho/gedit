@@ -1167,6 +1167,9 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 	const GSList *languages, *l;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
+	GeditDocument *current_document;
+	GtkSourceLanguage *current_document_language;
+	gint selected_language, current_item;
 
 	/* Set initial state */
 	hl_enabled = gedit_prefs_manager_get_enable_syntax_highlighting ();
@@ -1206,6 +1209,16 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 
 	l = languages;
 
+	current_document = gedit_get_active_document ();
+	if (current_document != NULL) 
+		current_document_language = gedit_document_get_language (
+						current_document);
+	else 
+		current_document_language = NULL;
+
+	selected_language = 0;
+	current_item = 0;
+	
 	while (l != NULL)
 	{
 		GtkSourceLanguage *lang = GTK_SOURCE_LANGUAGE (l->data);
@@ -1220,12 +1233,19 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 		
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 
+		if (current_document_language == lang)
+			selected_language = current_item;
+
+		++current_item;
+		
 		l = g_slist_next (l);
 	}
 	
 	gtk_widget_show_all (menu);
 	
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (dlg->hl_mode_optionmenu), menu);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (dlg->hl_mode_optionmenu), 
+				     selected_language);
 
 	g_signal_connect (G_OBJECT (dlg->enable_syntax_hl_checkbutton), "toggled",
 			  G_CALLBACK (enable_syntax_hl_button_toggled), dlg);
@@ -1259,7 +1279,11 @@ setup_plugins_page (GeditPreferencesDialog *dlg)
 	page_content = gedit_plugin_manager_get_page ();
 	g_return_if_fail (page_content != NULL);
 	
-	gtk_box_pack_start (GTK_BOX (dlg->plugin_manager_place_holder), page_content, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (dlg->plugin_manager_place_holder), 
+			    page_content, 
+			    TRUE, 
+			    TRUE, 
+			    0);
 
 }
 
