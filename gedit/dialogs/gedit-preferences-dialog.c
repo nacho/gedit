@@ -842,7 +842,7 @@ language_changed_cb (GtkOptionMenu *optionmenu,
 	GtkTreeIter iter;
 	GtkTreePath *path;
 
-	languages = gtk_source_languages_manager_get_available_languages (
+	languages = gedit_languages_manager_get_available_languages_sorted (
 						gedit_get_languages_manager ());
 
 	lang = g_slist_nth_data ((GSList*)languages, gtk_option_menu_get_history (optionmenu));
@@ -886,7 +886,7 @@ get_selected_language (GeditPreferencesDialog *dlg)
 	const GSList *languages;
 	GtkSourceLanguage *lang;
 	
-	languages = gtk_source_languages_manager_get_available_languages (
+	languages = gedit_languages_manager_get_available_languages_sorted (
 						gedit_get_languages_manager ());
 	lang = g_slist_nth_data ((GSList*)languages,
 		gtk_option_menu_get_history (GTK_OPTION_MENU (dlg->hl_mode_optionmenu)));
@@ -1201,7 +1201,7 @@ setup_syntax_highlighting_page (GeditPreferencesDialog *dlg)
 	/* Add languages to optionmenu. */
 	menu = gtk_menu_new ();
 
-	languages = gtk_source_languages_manager_get_available_languages (
+	languages = gedit_languages_manager_get_available_languages_sorted (
 						gedit_get_languages_manager ());
 
 	l = languages;

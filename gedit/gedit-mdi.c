@@ -2080,9 +2080,8 @@ get_verb_name_for_language (GtkSourceLanguage *lang)
 static void
 add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
 {
-	const GSList *languages;
+	const GSList *languages, *l;
 	GSList *sections = NULL;
-	const GSList *l;
 	GSList *s;
 
 	gedit_debug (DEBUG_MDI, "");
@@ -2096,15 +2095,15 @@ add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
 					 (BonoboUIListenerFn)language_toggled_handler,
 					 NULL);
 					  
-	languages = gtk_source_languages_manager_get_available_languages (
+	languages = gedit_languages_manager_get_available_languages_sorted ( 
 						gedit_get_languages_manager ());
-
+	
 	l = languages;
 
 	while (l != NULL)
 	{
 		gchar *section;
-				
+
 		section = gtk_source_language_get_section (GTK_SOURCE_LANGUAGE (l->data));
 
 		if (!section_exists (sections, section))
@@ -2187,7 +2186,7 @@ add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
 		g_free (path);
 
 		l = g_slist_next (l);
-	}		
+	}
 }
 
 static 

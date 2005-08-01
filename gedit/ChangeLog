@@ -1,3 +1,20 @@
+2005-08-01  Guillaume Desmottes <cass@skynet.be>
+
+	Fixed bug #308237 (sort the languages list alphabetically)
+
+	* gedit-languages-manager.h: new function
+	gedit_languages_manager_get_available_languages_sorted
+	
+	* gedit-languages-manager.c: new functions
+	gedit_languages_manager_get_available_languages_sorted
+	and language_compare. Add two global variables: languages_list 
+	and languages_list_sorted
+	
+	* gedit-mdi.c: use gedit_languages_manager_get_available_languages_sorted
+	instead of gtk_source_languages_manager_get_available_languages
+	
+	* dialogs/gedit-preferences-dialog.c: ditto
+
 2005-08-01  Paolo Borelli  <pborelli@katamail.com>
 
 	* recent-files/*: sync to libegg.

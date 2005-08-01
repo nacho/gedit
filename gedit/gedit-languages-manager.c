@@ -41,6 +41,8 @@
 
 static GtkSourceLanguagesManager *language_manager = NULL;
 static GConfClient 		 *gconf_client = NULL;
+static const GSList 		 *languages_list = NULL;
+static GSList			 *languages_list_sorted = NULL;
 
 
 GtkSourceLanguagesManager *
@@ -323,3 +325,36 @@ gedit_language_init_tag_styles (GtkSourceLanguage *language)
 	initialized_languages =	g_slist_prepend (initialized_languages, language);
 }
 
+static gint
+language_compare (gconstpointer a, gconstpointer b)
+{
+	GtkSourceLanguage *lang_a = GTK_SOURCE_LANGUAGE (a);
+	GtkSourceLanguage *lang_b = GTK_SOURCE_LANGUAGE (b);
+	gchar *name_a = gtk_source_language_get_name (lang_a);
+	gchar *name_b = gtk_source_language_get_name (lang_b);
+	gint res;
+	
+	res = g_utf8_collate (name_a, name_b);
+		
+	g_free (name_a);
+	g_free (name_b);	
+	
+	return res;
+}
+
+const GSList*
+gedit_languages_manager_get_available_languages_sorted (GtkSourceLanguagesManager *lm)
+{
+	const GSList *languages;
+
+	languages = gtk_source_languages_manager_get_available_languages (lm);
+
+	if ((languages_list_sorted == NULL) || (languages != languages_list))
+	{
+		languages_list = languages;
+		languages_list_sorted = g_slist_copy ((GSList*)languages);
+		languages_list_sorted = g_slist_sort (languages_list_sorted, (GCompareFunc)language_compare);
+	}
+
+	return languages_list_sorted;
+}
