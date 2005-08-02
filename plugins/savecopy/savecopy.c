@@ -89,6 +89,56 @@ write_to_file (GnomeVFSHandle *handle, gchar *data, GnomeVFSFileSize len)
 	return res;
 }
 
+/* try to set the permission mask to the same as the one of the
+ * original copy of the file (if it exists).
+ */
+static void
+set_perms_same_as_local_file (GeditDocument *doc, guint *perms)
+{
+	gchar *uri;
+	GnomeVFSFileInfo *info;
+	GnomeVFSResult vfs_res;
+	guint orig;
+
+	uri = gedit_document_get_raw_uri (doc);
+
+	/* non local stuff may be slow and most vfs methods
+	 * do not handle permissions anyway...
+	 */
+	if (!gedit_utils_uri_has_file_scheme (uri))
+		return;
+
+	info = gnome_vfs_file_info_new ();
+	vfs_res = gnome_vfs_get_file_info (uri,
+					   info,
+					   GNOME_VFS_FILE_INFO_DEFAULT |
+					   GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+
+	if (vfs_res != GNOME_VFS_OK)
+		return;
+
+	if (!info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS)
+		return;
+
+	/* How am I supposed to use bitfield operations to combine perms (which
+	 * is an int) and info->permissions which is an GnomeVFS enum?? AFAICS from
+	 * the docs the first 32 bits of info->permissions corresponds to perms.
+	 * Beside note that we only wants the read/write/exec fields not UID etc.
+	 */
+	orig = (guint) (info->permissions &
+			(GNOME_VFS_PERM_USER_ALL  |
+			 GNOME_VFS_PERM_GROUP_ALL |
+			 GNOME_VFS_PERM_OTHER_ALL));
+
+	/* zero the perms bits... */
+	*perms &= ~(GNOME_VFS_PERM_USER_ALL  |
+		    GNOME_VFS_PERM_GROUP_ALL |
+		    GNOME_VFS_PERM_OTHER_ALL);
+
+	/* ...and then set them */
+	*perms |= orig;
+}
+
 /* No backups and it overwrites an existing file */
 static gboolean
 real_save_copy (GeditDocument *doc,
@@ -157,6 +207,9 @@ real_save_copy (GeditDocument *doc,
 		 GNOME_VFS_PERM_OTHER_WRITE) &
 		~saved_umask;
 	umask (saved_umask);
+
+	/* try to set the permissions similar to the local copy */
+	set_perms_same_as_local_file (doc, &perms);
 
 	vfs_res = gnome_vfs_create (&handle,
 				    uri,
