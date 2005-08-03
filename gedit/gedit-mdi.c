@@ -237,6 +237,8 @@ menu_position_under_widget (GtkMenu *menu, int *x, int *y,
 	*y = CLAMP (*y, 0, MAX (0, screen_height - requisition.height));
 }
 
+#define MAX_URI_LEN 100
+
 static void
 tooltip_func (GtkTooltips   *tooltips,
 	      GtkWidget     *menu,
@@ -245,14 +247,19 @@ tooltip_func (GtkTooltips   *tooltips,
 {
 	gchar *tip;
 	gchar *uri_for_display;
+	gchar *trunc_uri;
 
 	uri_for_display = egg_recent_item_get_uri_for_display (item);
 	g_return_if_fail (uri_for_display != NULL);
 
-	/* Translators: %s is a URI */
-	tip = g_strdup_printf (_("Open '%s'"), uri_for_display);
-
+	trunc_uri = gedit_utils_str_middle_truncate (uri_for_display, 
+						     MAX_URI_LEN);
 	g_free (uri_for_display);
+							     
+	/* Translators: %s is a URI */
+	tip = g_strdup_printf (_("Open '%s'"), trunc_uri);
+
+	g_free (trunc_uri);
 
 	gtk_tooltips_set_tip (tooltips, GTK_WIDGET (menu), tip, NULL);
 
