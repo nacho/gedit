@@ -38,6 +38,8 @@
 #include "egg-recent-util.h"
 #include "egg-recent-item.h"
 
+#define DEFAULT_LABEL_WIDTH 30
+
 struct _EggRecentViewBonobo {
 	GObject parent_instance;	/* We emit signals */
 
@@ -61,6 +63,8 @@ struct _EggRecentViewBonobo {
 	EggRecentModel *model;
 	GConfClient *client;
 	GtkIconSize icon_size;
+	
+	gint label_width;	
 };
 
 
@@ -82,7 +86,8 @@ enum {
 	PROP_UI_COMPONENT,
 	PROP_MENU_PATH,
 	PROP_SHOW_ICONS,
-	PROP_SHOW_NUMBERS
+	PROP_SHOW_NUMBERS,
+	PROP_LABEL_WIDTH	
 };
 
 static guint egg_recent_view_bonobo_signals[LAST_SIGNAL] = { 0 };
@@ -144,6 +149,49 @@ egg_recent_view_bonobo_menu_data_destroy_cb (gpointer data, GClosure *closure)
 	g_free (md);
 }
 
+static gchar *
+str_end_truncate (const gchar *string,
+		  guint        truncate_length)
+{
+	gchar       *truncate;
+	guint        n_chars;
+	guint        num_left_chars;
+	guint        delimiter_chars;
+	guint	     delimiter_length;
+	const gchar *delimiter = "\342\200\246";
+	
+	g_return_val_if_fail (string != NULL, NULL);
+	g_return_val_if_fail (g_utf8_validate (string, -1, NULL), NULL);
+
+	n_chars = g_utf8_strlen (string, -1);
+
+	/* Make sure the string is not already small enough. */
+	if (n_chars <= truncate_length) {
+		return g_strdup (string);
+	}
+	
+	/* It doesn't make sense to truncate strings to less than
+	 * the size of the delimiter plus 2 characters (one on each
+	 * side)
+	 */
+	delimiter_length = strlen (delimiter);
+	delimiter_chars = g_utf8_strlen (delimiter, delimiter_length);
+	if (truncate_length < (delimiter_chars + 2)) {
+		return g_strdup (string);
+	}
+
+
+	/* Find the position where the truncation will occur. */
+	num_left_chars = (truncate_length - delimiter_chars);
+	
+	truncate = g_new0 (gchar, 
+			   (g_utf8_offset_to_pointer (string, num_left_chars) - string) + delimiter_length + 1);
+
+	g_utf8_strncpy (truncate, string, num_left_chars);
+	g_utf8_strncpy (g_utf8_offset_to_pointer (truncate, num_left_chars), delimiter, delimiter_chars);
+		
+	return truncate;		   
+}
 
 static void
 egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
@@ -178,6 +226,7 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 	for (i = 1; i <= g_list_length (list); ++i)
 	{
+		gchar *temp_base_uri;
 		EggRecentItem *item = (EggRecentItem *)g_list_nth_data (list, i-1);	
 
 		utf8_uri = egg_recent_item_get_uri_for_display (item);
@@ -191,7 +240,9 @@ egg_recent_view_bonobo_set_list (EggRecentViewBonobo *view, GList *list)
 
 		egg_recent_item_ref (md->item);
 
-		base_uri = g_path_get_basename (utf8_uri);
+		temp_base_uri = egg_recent_item_get_short_name (item);
+		base_uri = str_end_truncate (temp_base_uri, view->label_width);
+		g_free (temp_base_uri);
 		xml_escaped_name = g_markup_escape_text (base_uri,
 							 strlen (base_uri));
 	
@@ -382,11 +433,17 @@ egg_recent_view_bonobo_set_property (GObject *object,
 		case PROP_SHOW_ICONS:
 			egg_recent_view_bonobo_show_icons (view,
 						g_value_get_boolean (value));
-		default:
+		break;
 		case PROP_SHOW_NUMBERS:
 			egg_recent_view_bonobo_show_numbers (view,
 						g_value_get_boolean (value));
-		break;
+		break;						
+		case PROP_LABEL_WIDTH:
+		        egg_recent_view_bonobo_set_label_width (view,
+						g_value_get_int (value));
+		break;						
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
 	}
 }
@@ -412,6 +469,9 @@ egg_recent_view_bonobo_get_property (GObject *object,
 		break;
 		case PROP_SHOW_NUMBERS:
 			g_value_set_boolean (value, view->show_numbers);
+		break;
+		case PROP_LABEL_WIDTH:
+			g_value_set_int (value, view->label_width);
 		break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -487,7 +547,15 @@ egg_recent_view_bonobo_class_init (EggRecentViewBonoboClass * klass)
 					   TRUE,
 					   G_PARAM_READWRITE));
 
-
+	g_object_class_install_property (object_class,
+					 PROP_LABEL_WIDTH,
+					 g_param_spec_int ("label-width",
+					   "Label Width",
+					   "The desired width of the menu label, in characters",
+					   -1,
+					   G_MAXINT,
+					   DEFAULT_LABEL_WIDTH,
+					   G_PARAM_READWRITE));
 
 	klass->activate = NULL;
 }
@@ -554,6 +622,8 @@ egg_recent_view_bonobo_init (EggRecentViewBonobo *view)
 	view->tooltip_func_data = NULL;
 
 	view->icon_size = GTK_ICON_SIZE_MENU;
+	
+	view->label_width = DEFAULT_LABEL_WIDTH;	
 }
 
 void
@@ -590,6 +660,23 @@ egg_recent_view_bonobo_show_numbers (EggRecentViewBonobo *view, gboolean show)
 
 	if (view->model)
 		egg_recent_model_changed (view->model);
+}
+
+void
+egg_recent_view_bonobo_set_label_width (EggRecentViewBonobo *view,
+				        gint                 chars)
+{
+	g_return_if_fail (EGG_IS_RECENT_VIEW_BONOBO (view));
+
+	view->label_width = chars;
+}
+
+gint
+egg_recent_view_bonobo_get_label_width (EggRecentViewBonobo *view)
+{
+	g_return_val_if_fail (EGG_IS_RECENT_VIEW_BONOBO (view), -1);
+
+	return view->label_width;
 }
 
 void

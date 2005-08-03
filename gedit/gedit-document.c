@@ -303,34 +303,40 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      0);
 }
 
-/* This function has been borrowed from Nautilus */
 static gchar *
 get_uri_shortname_for_display (GnomeVFSURI *uri)
 {
-	char *utf8_name, *name, *tmp;
-	char *text_uri, *local_file;
-	gboolean validated;
-	const char *method;
-
-	gedit_debug (DEBUG_DOCUMENT, "");
+	gchar    *name;	
+	gboolean  validated;
 
 	validated = FALSE;
 	name = gnome_vfs_uri_extract_short_name (uri);
+	
 	if (name == NULL)
 	{
 		name = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_PASSWORD);
 	}
 	else if (g_ascii_strcasecmp (uri->method_string, "file") == 0)
 	{
+		gchar *text_uri;
+		gchar *local_file;
 		text_uri = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_PASSWORD);
 		local_file = gnome_vfs_get_local_path_from_uri (text_uri);
-		name = g_filename_display_basename (local_file);
+		
+		if (local_file != NULL)
+		{
+			g_free (name);
+			name = g_filename_display_basename (local_file);
+			validated = TRUE;
+		}
+		
 		g_free (local_file);
 		g_free (text_uri);
-		validated = TRUE;
 	} 
 	else if (!gnome_vfs_uri_has_parent (uri)) 
 	{
+		const gchar *method;
+		
 		method = uri->method_string;
 		
 		if (name == NULL ||
@@ -341,6 +347,8 @@ get_uri_shortname_for_display (GnomeVFSURI *uri)
 		} 
 		else 
 		{
+			gchar *tmp;
+			
 			tmp = name;
 			name = g_strdup_printf ("%s: %s", method, name);
 			g_free (tmp);
@@ -349,6 +357,8 @@ get_uri_shortname_for_display (GnomeVFSURI *uri)
 
 	if (!validated && !g_utf8_validate (name, -1, NULL)) 
 	{
+		gchar *utf8_name;
+		
 		utf8_name = gedit_utils_make_valid_utf8 (name);
 		g_free (name);
 		name = utf8_name;
