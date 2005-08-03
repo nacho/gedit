@@ -341,8 +341,6 @@ gedit_view_init (GeditView  *view)
 
 	g_signal_connect (G_OBJECT (view->priv->text_view), "move-cursor",
 			  G_CALLBACK (gedit_view_move_cursor), view);
-
-	
 }
 
 static void 
@@ -376,28 +374,21 @@ gedit_view_finalize (GObject *object)
 }
 
 static gboolean
-gedit_view_expose (GtkTextView *widget, GdkEventExpose *event,
-                   GeditView *view)
+scroll_to_cursor (GtkTextView *view)
 {
-	GtkTextBuffer* buffer = NULL;
+	GtkTextBuffer *buffer = NULL;
 
 	gedit_debug (DEBUG_VIEW, "");
 
-	g_return_val_if_fail (GEDIT_IS_VIEW (view), FALSE);
-	
-	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view->priv->text_view));
+	buffer = gtk_text_view_get_buffer (view);
 	g_return_val_if_fail (buffer != NULL, FALSE);
 
-	gtk_text_view_scroll_to_mark (GTK_TEXT_VIEW (view->priv->text_view),
+	gtk_text_view_scroll_to_mark (view,
 				      gtk_text_buffer_get_insert (buffer),
 				      0.25,
 				      FALSE,
 				      0.0,
 				      0.0);
-
-	g_signal_handlers_disconnect_by_func (widget, 
-					      G_CALLBACK  (gedit_view_expose), 
-					      view);
 
 	return FALSE;
 }
@@ -454,10 +445,14 @@ gedit_view_new (GeditDocument *doc)
 			  G_CALLBACK (gedit_view_doc_readonly_changed_handler),
 			  view);
 
-	g_signal_connect_after (GTK_TEXT_VIEW (view->priv->text_view),
-			  "expose-event",
-			  G_CALLBACK (gedit_view_expose),
-			  view);
+	/* Make sure that the view is scrolled to the cursor so
+	 * that "gedit +100 foo.txt" works.
+	 * We would like to this in the expose handler so that
+	 * it would look instantaneous, but this isn't currently
+	 * possible: see bug #172277 and bug #311728.
+	 * So we need to do this in an idle handler.
+	 */
+	g_idle_add ((GSourceFunc) scroll_to_cursor, view->priv->text_view);
 
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (view->priv->text_view), 
 				    !gedit_document_is_readonly (doc));	
@@ -532,7 +527,6 @@ gedit_view_paste_clipboard (GeditView *view)
 				      FALSE,
 				      0.0,
 				      0.0);
-
 }
 
 void
