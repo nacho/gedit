@@ -2078,23 +2078,31 @@ bonobo_mdi_open_toplevel (BonoboMDI *mdi, const char *window_role)
 static void 
 bonobo_mdi_update_child (BonoboMDI *mdi, BonoboMDIChild *child)
 {
-	GtkWidget *view, *title;
 	GList *view_node;
-	GList *win_node;
-	gchar* child_name, *path, *path_cmd, *tip, *escaped_name;
+	gchar *child_name, *safe_name, *tip, *escaped_name;
 
 	gedit_debug (DEBUG_MDI, "");
 
-	g_return_if_fail (mdi != NULL);
 	g_return_if_fail (BONOBO_IS_MDI (mdi));
-	g_return_if_fail (child != NULL);
 	g_return_if_fail (BONOBO_IS_MDI_CHILD (child));
 
 	view_node = bonobo_mdi_child_get_views (child);
 	
+	child_name = bonobo_mdi_child_get_name (child);
+
+	safe_name = g_markup_escape_text (child_name, strlen (child_name));
+	g_return_if_fail (safe_name != NULL);
+
+	escaped_name = escape_underscores (safe_name);
+	g_return_if_fail (escaped_name != NULL);
+
+	tip =  g_strdup_printf (_("Activate %s"), safe_name);
+	
 	while (view_node) 
 	{
 		GtkWidget *tab_label; 
+		GtkWidget *view;
+		GtkWidget *title;
 		
 		view = GTK_WIDGET (view_node->data);
 
@@ -2104,41 +2112,36 @@ bonobo_mdi_update_child (BonoboMDI *mdi, BonoboMDIChild *child)
 		
 		gtk_notebook_set_tab_label (GTK_NOTEBOOK (view->parent), view, title);
 		
+		if (mdi->priv->child_list_path != NULL)
+		{
+			GList *win_node;
+			gchar *path;
+					
+			win_node = bonobo_mdi_get_windows (mdi);
+			path = g_strdup_printf ("%sView_%p", mdi->priv->child_list_path, view);			
+
+			while (win_node)
+			{
+				BonoboUIComponent *ui_component;
+				ui_component = bonobo_mdi_get_ui_component_from_window (BONOBO_WINDOW (win_node->data));
+			
+				if (bonobo_ui_component_path_exists (ui_component, path, NULL))
+				{	
+					bonobo_ui_component_set_prop (ui_component, path, "label", escaped_name, NULL);
+					bonobo_ui_component_set_prop (ui_component, path, "tip", tip, NULL);
+				}
+				
+				win_node = g_list_next (win_node);
+			}	
+				
+			g_free (path);		
+		}
+		
 		view_node = g_list_next (view_node);
 	}
-
-	/* Update child list menus */	
-	if(mdi->priv->child_list_path == NULL)
-	{
-		gedit_debug (DEBUG_MDI, "END1");
-
-		return;
-	}
 	
-	win_node = mdi->priv->windows;
-
-	child_name = bonobo_mdi_child_get_name (child);
-	escaped_name = escape_underscores (child_name);
-	path = g_strdup_printf ("%sChild_%p", mdi->priv->child_list_path, child);
-	path_cmd =  g_strdup_printf ("/commands/Child_%p", child);
-	tip = g_strdup_printf (_("Activate %s"), child_name);
-			
-	while (win_node) 
-	{
-		BonoboUIComponent *ui_component;
-		
-		ui_component = BONOBO_UI_COMPONENT (
-			g_object_get_data (G_OBJECT (win_node->data), UI_COMPONENT_KEY));
-
-		bonobo_ui_component_set_prop (ui_component, path, "label", escaped_name, NULL);
-		bonobo_ui_component_set_prop (ui_component, path, "tip", tip, NULL);
-
-		win_node = g_list_next (win_node);
-	}
-
 	g_free (escaped_name);
-	g_free (path);
-	g_free (path_cmd);
+	g_free (safe_name);
 	g_free (tip);
 	g_free (child_name);
 
