@@ -202,6 +202,8 @@ word_count_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbname
 	word_count_real ();
 }
 
+#define MAX_DOC_NAME_LENGTH 40
+
 static void
 word_count_real (void)
 {
@@ -219,6 +221,7 @@ word_count_real (void)
 	gint		 i;
 	gchar		*tmp_str;
 	gchar 		*file_name;
+	gchar		*trunc_name;
 
 	gedit_debug (DEBUG_PLUGINS, "");
 
@@ -274,9 +277,16 @@ word_count_real (void)
 	g_free (text);
 
 	file_name = gedit_document_get_short_name (doc);
-	tmp_str = g_strdup_printf ("<span weight=\"bold\">%s</span>", file_name);
-	gtk_label_set_markup (GTK_LABEL (dialog->file_name_label), tmp_str);
+	/* Truncate the name so it doesn't get insanely wide. */
+	trunc_name = gedit_utils_str_middle_truncate (file_name, 
+						      MAX_DOC_NAME_LENGTH);
 	g_free (file_name);
+
+	tmp_str = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>", trunc_name);
+	
+	gtk_label_set_markup (GTK_LABEL (dialog->file_name_label), tmp_str);
+	
+	g_free (trunc_name);
 	g_free (tmp_str);
 
 	tmp_str = g_strdup_printf("%d", lines);
