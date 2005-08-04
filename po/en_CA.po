@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-04 13:23+0200\n"
-"PO-Revision-Date: 2005-02-17 23:18-0500\n"
+"POT-Creation-Date: 2005-08-04 19:14-0400\n"
+"PO-Revision-Date: 2005-08-04 23:18-0500\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -224,7 +224,7 @@ msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and replaced by
+#. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
 #: data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
@@ -549,7 +549,7 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2124
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2099
 #, c-format
 msgid "Activate %s"
 msgstr "Activate %s"
@@ -640,7 +640,7 @@ msgstr[1] ""
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Save the changes to document \"%s\" before closing?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:645
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -650,12 +650,12 @@ msgstr[0] ""
 msgstr[1] ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:662
 msgid "S_elect the documents you want to save:"
 msgstr "S_elect the documents you want to save:"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:679
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "If you don't save, all your changes will be permanently lost."
 
@@ -683,7 +683,7 @@ msgid "Replace _All"
 msgstr "Replace _All"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:316
+#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:369
 msgid "_Replace"
 msgstr "_Replace"
 
@@ -787,7 +787,7 @@ msgstr ""
 "Push this button to configure the colour in which the selected text should "
 "be marked"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1189
+#: gedit/dialogs/gedit-preferences-dialog.c:1192
 msgid "Elements"
 msgstr "Elements"
 
@@ -1179,46 +1179,42 @@ msgstr "Maintainer: Adam Weinberger <adamw@gnome.org>"
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
+#: gedit/gedit-document.c:380
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
+#: gedit/gedit-document.c:380
 msgid "Unsaved Document"
 msgstr "Unsaved Document"
 
-#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
-msgid "Invalid file name"
-msgstr "Invalid file name"
-
-#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
+#: gedit/gedit-document.c:926 gedit/gedit-document.c:1478
 msgid "Invalid UTF-8 data"
 msgstr "Invalid UTF-8 data"
 
-#: gedit/gedit-document.c:1658
+#: gedit/gedit-document.c:1728
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Could not read symbolic link information for %s"
 
-#: gedit/gedit-document.c:1704
+#: gedit/gedit-document.c:1774
 msgid "The file has too many symbolic links."
 msgstr "The file has too many symbolic links."
 
-#: gedit/gedit-document.c:1788
+#: gedit/gedit-document.c:1858
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit cannot handle %s: locations in write mode."
 
-#: gedit/gedit-document.c:1795
+#: gedit/gedit-document.c:1865
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit cannot handle this kind of location in write mode."
 
-#: gedit/gedit-document.c:1808
+#: gedit/gedit-document.c:1878
 msgid "Invalid filename."
 msgstr "Invalid filename."
 
-#: gedit/gedit-document.c:1959
+#: gedit/gedit-document.c:2029
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1226,7 +1222,7 @@ msgstr ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
 
-#: gedit/gedit-document.c:1964
+#: gedit/gedit-document.c:2034
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1236,7 +1232,7 @@ msgstr ""
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 
-#: gedit/gedit-document.c:2008
+#: gedit/gedit-document.c:2078
 msgid "Could not create a backup file."
 msgstr "Could not create a backup file."
 
@@ -1254,128 +1250,129 @@ msgstr "Current Locale (%s)"
 msgid "Add or _Remove..."
 msgstr "Add or _Remove..."
 
-#: gedit/gedit-encodings.c:134 gedit/gedit-encodings.c:179
-#: gedit/gedit-encodings.c:181 gedit/gedit-encodings.c:183
-#: gedit/gedit-encodings.c:185
+#: gedit/gedit-encodings.c:136 gedit/gedit-encodings.c:181
+#: gedit/gedit-encodings.c:183 gedit/gedit-encodings.c:185
+#: gedit/gedit-encodings.c:187
 msgid "Unicode"
 msgstr "Unicode"
 
-#: gedit/gedit-encodings.c:148 gedit/gedit-encodings.c:174
-#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:258
+#: gedit/gedit-encodings.c:150 gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:222 gedit/gedit-encodings.c:265
 msgid "Western"
 msgstr "Western"
 
-#: gedit/gedit-encodings.c:150 gedit/gedit-encodings.c:217
-#: gedit/gedit-encodings.c:254
+#: gedit/gedit-encodings.c:152 gedit/gedit-encodings.c:224
+#: gedit/gedit-encodings.c:261
 msgid "Central European"
 msgstr "Central European"
 
-#: gedit/gedit-encodings.c:152
+#: gedit/gedit-encodings.c:154
 msgid "South European"
 msgstr "South European"
 
-#: gedit/gedit-encodings.c:154 gedit/gedit-encodings.c:170
-#: gedit/gedit-encodings.c:268
+#: gedit/gedit-encodings.c:156 gedit/gedit-encodings.c:172
+#: gedit/gedit-encodings.c:275
 msgid "Baltic"
 msgstr "Baltic"
 
-#: gedit/gedit-encodings.c:156 gedit/gedit-encodings.c:219
-#: gedit/gedit-encodings.c:232 gedit/gedit-encodings.c:236
-#: gedit/gedit-encodings.c:238 gedit/gedit-encodings.c:256
+#: gedit/gedit-encodings.c:158 gedit/gedit-encodings.c:226
+#: gedit/gedit-encodings.c:239 gedit/gedit-encodings.c:243
+#: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:263
 msgid "Cyrillic"
 msgstr "Cyrillic"
 
-#: gedit/gedit-encodings.c:158 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:266
+#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:273
 msgid "Arabic"
 msgstr "Arabic"
 
-#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
+#: gedit/gedit-encodings.c:162 gedit/gedit-encodings.c:267
 #: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "Greek"
 
-#: gedit/gedit-encodings.c:162
+#: gedit/gedit-encodings.c:164
 msgid "Hebrew Visual"
 msgstr "Hebrew Visual"
 
-#: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
+#: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:230
+#: gedit/gedit-encodings.c:271 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "Hebrew"
 
-#: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
+#: gedit/gedit-encodings.c:168 gedit/gedit-encodings.c:228
+#: gedit/gedit-encodings.c:269 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "Turkish"
 
-#: gedit/gedit-encodings.c:168
+#: gedit/gedit-encodings.c:170
 msgid "Nordic"
 msgstr "Nordic"
 
-#: gedit/gedit-encodings.c:172
+#: gedit/gedit-encodings.c:174
 msgid "Celtic"
 msgstr "Celtic"
 
-#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
+#: gedit/gedit-encodings.c:178 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "Romanian"
 
-#: gedit/gedit-encodings.c:188
+#: gedit/gedit-encodings.c:190
 msgid "Armenian"
 msgstr "Armenian"
 
-#: gedit/gedit-encodings.c:190 gedit/gedit-encodings.c:192
-#: gedit/gedit-encodings.c:201
+#: gedit/gedit-encodings.c:192 gedit/gedit-encodings.c:194
+#: gedit/gedit-encodings.c:208
 msgid "Chinese Traditional"
 msgstr "Chinese Traditional"
 
-#: gedit/gedit-encodings.c:194
+#: gedit/gedit-encodings.c:196
 msgid "Cyrillic/Russian"
 msgstr "Cyrillic/Russian"
 
-#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:228
-#: gedit/gedit-encodings.c:243
+#: gedit/gedit-encodings.c:199 gedit/gedit-encodings.c:201
+#: gedit/gedit-encodings.c:203 gedit/gedit-encodings.c:235
+#: gedit/gedit-encodings.c:250
 msgid "Japanese"
 msgstr "Japanese"
 
-#: gedit/gedit-encodings.c:199 gedit/gedit-encodings.c:230
-#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:249
+#: gedit/gedit-encodings.c:206 gedit/gedit-encodings.c:237
+#: gedit/gedit-encodings.c:241 gedit/gedit-encodings.c:256
 msgid "Korean"
 msgstr "Korean"
 
-#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:206
-#: gedit/gedit-encodings.c:208 gedit/gedit-encodings.c:212
+#: gedit/gedit-encodings.c:211 gedit/gedit-encodings.c:213
+#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:219
 msgid "Chinese Simplified"
 msgstr "Chinese Simplified"
 
-#: gedit/gedit-encodings.c:210
+#: gedit/gedit-encodings.c:217
 msgid "Georgian"
 msgstr "Georgian"
 
-#: gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:247
 msgid "Cyrillic/Ukrainian"
 msgstr "Cyrillic/Ukrainian"
 
-#: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
+#: gedit/gedit-encodings.c:252 gedit/gedit-encodings.c:258
+#: gedit/gedit-encodings.c:277 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "Vietnamese"
 
-#: gedit/gedit-encodings.c:247
+#: gedit/gedit-encodings.c:254
 msgid "Thai"
 msgstr "Thai"
 
-#: gedit/gedit-encodings.c:434
+#: gedit/gedit-encodings.c:441
 msgid "Unknown"
 msgstr "Unknown"
 
-#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:303
+#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:356
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "A file named \"%s\" already exists.\n"
 
-#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:307
+#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:360
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Do you want to replace it with the one you are saving?"
 
@@ -1388,27 +1385,27 @@ msgstr "The file \"%s\" is read-only.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Do you want to try to replace it with the one you are saving?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:584
 msgid "All Files"
 msgstr "All Files"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:592
 msgid "All Text Files"
 msgstr "All Text Files"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:603
 msgid "_Character Coding:"
 msgstr "_Character Coding:"
 
-#: gedit/gedit-file-selector-util.c:509
+#: gedit/gedit-file-selector-util.c:498
 msgid "Select a file to open"
 msgstr "Select a file to open"
 
-#: gedit/gedit-file-selector-util.c:534
+#: gedit/gedit-file-selector-util.c:523
 msgid "Select files to open"
 msgstr "Select files to open"
 
-#: gedit/gedit-file-selector-util.c:566
+#: gedit/gedit-file-selector-util.c:559
 msgid "Select a filename to save"
 msgstr "Select a filename to save"
 
@@ -1416,31 +1413,31 @@ msgstr "Select a filename to save"
 msgid "Open File..."
 msgstr "Open File..."
 
-#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:390
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Saving document \"%s\"..."
 
-#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:408
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "The document \"%s\" has not been saved."
 
-#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:421
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "The document \"%s\" has been saved."
 
-#: gedit/gedit-file.c:374
+#: gedit/gedit-file.c:372
 msgid "Save as..."
 msgstr "Save as..."
 
-#: gedit/gedit-file.c:528
+#: gedit/gedit-file.c:526
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "Revert unsaved changes to document \"%s\"?"
 
-#: gedit/gedit-file.c:537
+#: gedit/gedit-file.c:535
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1453,13 +1450,13 @@ msgstr[1] ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:544
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Changes made to the document in the last minute will be permanently lost."
 
-#: gedit/gedit-file.c:552
+#: gedit/gedit-file.c:550
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1474,7 +1471,7 @@ msgstr[1] ""
 "Changes made to the document in the last minute and %ld seconds will be "
 "permanently lost."
 
-#: gedit/gedit-file.c:562
+#: gedit/gedit-file.c:560
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1487,7 +1484,7 @@ msgstr[1] ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 
-#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
+#: gedit/gedit-file.c:575 gedit/gedit-file.c:596
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1497,7 +1494,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Changes made to the document in the last %d hours will be permanently lost."
 
-#: gedit/gedit-file.c:583
+#: gedit/gedit-file.c:581
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1512,70 +1509,70 @@ msgstr[1] ""
 "Changes made to the document in the last hour and %d minutes will be "
 "permanently lost."
 
-#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:617 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Revert"
 
-#: gedit/gedit-file.c:664
+#: gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Error reverting the document \"%s\"."
 
-#: gedit/gedit-file.c:672
+#: gedit/gedit-file.c:670
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "The document \"%s\" has not been reverted."
 
-#: gedit/gedit-file.c:676
+#: gedit/gedit-file.c:674
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "The document \"%s\" has been reverted."
 
-#: gedit/gedit-file.c:704
+#: gedit/gedit-file.c:702
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Reverting the document \"%s\"..."
 
-#: gedit/gedit-file.c:827
+#: gedit/gedit-file.c:825
 msgid "Could not read data from stdin."
 msgstr "Could not read data from stdin."
 
-#: gedit/gedit-file.c:914
+#: gedit/gedit-file.c:912
 msgid "Reverting file:"
 msgstr "Reverting file:"
 
-#: gedit/gedit-file.c:914
+#: gedit/gedit-file.c:912
 msgid "Loading file:"
 msgstr "Loading file:"
 
-#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
+#: gedit/gedit-file.c:1092 gedit/gedit-file.c:1333
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Error loading file \"%s\""
 
-#: gedit/gedit-file.c:1115
+#: gedit/gedit-file.c:1113
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Loaded file \"%s\""
 
-#: gedit/gedit-file.c:1227
+#: gedit/gedit-file.c:1225
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Loaded %d file"
 msgstr[1] "Loaded %d files"
 
-#: gedit/gedit-file.c:1288
+#: gedit/gedit-file.c:1286
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Created file \"%s\""
 
-#: gedit/gedit-file.c:1306
+#: gedit/gedit-file.c:1304
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Loading file \"%s\"..."
 
-#: gedit/gedit-file.c:1471
+#: gedit/gedit-file.c:1469
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1854,28 +1851,28 @@ msgid "Encoding:"
 msgstr "Encoding:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:260 gedit/gedit-mdi.c:463
 #, c-format
 msgid "Open '%s'"
 msgstr "Open '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:538
 msgid "Open a recently used file"
 msgstr "Open a recently used file"
 
-#: gedit/gedit-mdi.c:1467 gedit/gedit-mdi.c:1469
+#: gedit/gedit-mdi.c:1477 gedit/gedit-mdi.c:1479
 msgid "Read Only"
 msgstr "Read-Only"
 
-#: gedit/gedit-mdi.c:2094
+#: gedit/gedit-mdi.c:2103
 msgid "Normal"
 msgstr "Normal"
 
-#: gedit/gedit-mdi.c:2095
+#: gedit/gedit-mdi.c:2104
 msgid "Use Normal highlight mode"
 msgstr "Use Normal highlight mode"
 
-#: gedit/gedit-mdi.c:2171
+#: gedit/gedit-mdi.c:2180
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Use %s highlight mode"
@@ -2326,7 +2323,7 @@ msgstr "_Undo"
 msgid "_View"
 msgstr "_View"
 
-#: gedit/gedit-utils.c:695
+#: gedit/gedit-utils.c:686
 msgid " (invalid Unicode)"
 msgstr " (invalid Unicode)"
 
@@ -2338,16 +2335,16 @@ msgstr " (invalid Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:890
+#: gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ln %d, Col %d"
 
-#: gedit/gedit-view.c:926
+#: gedit/gedit-view.c:915
 msgid "  OVR"
 msgstr "  OVR"
 
-#: gedit/gedit-view.c:928
+#: gedit/gedit-view.c:917
 msgid "  INS"
 msgstr "  INS"
 
@@ -2537,21 +2534,21 @@ msgstr "Sa_ve Copy..."
 msgid "Save a copy of the current document"
 msgstr "Save a copy of the current document"
 
-#: plugins/savecopy/savecopy.c:262
+#: plugins/savecopy/savecopy.c:315
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "Could not save a copy of the file to \"%s\""
 
-#: plugins/savecopy/savecopy.c:361
+#: plugins/savecopy/savecopy.c:414
 msgid "You are trying to overwrite the original file"
 msgstr "You are trying to overwrite the original file"
 
-#: plugins/savecopy/savecopy.c:470
+#: plugins/savecopy/savecopy.c:523
 msgid "Save Copy..."
 msgstr "Save Copy..."
 
 #. translators: %s is a filename
-#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#: plugins/savecopy/savecopy.c:555 plugins/savecopy/savecopy.c:565
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (copy)"
@@ -3082,8 +3079,8 @@ msgid "Language:"
 msgstr "Language:"
 
 #: plugins/spell/spell-checker.glade2.h:12
-msgid "Mispelled word:"
-msgstr "Mispelled word:"
+msgid "Misspelled word:"
+msgstr "Misspelled word:"
 
 #: plugins/spell/spell-checker.glade2.h:13
 msgid "User dictionary:"
@@ -3254,7 +3251,7 @@ msgid "Character encoding of linked resource"
 msgstr "Character encoding of linked resource"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
-msgid "Checked(state)"
+msgid "Checked (state)"
 msgstr "Checked (state)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
@@ -4170,20 +4167,20 @@ msgid "Width"
 msgstr "Width"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
-msgid "Bibliography cite"
-msgstr "Bibliography cite"
+msgid "Bibliography (cite)"
+msgstr "Bibliography (cite)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
-msgid "Bibliography item"
-msgstr "Bibliography item"
+msgid "Bibliography (item)"
+msgstr "Bibliography (item)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
-msgid "Bibliography shortcite"
-msgstr "Bibliography shortcite"
+msgid "Bibliography (shortcite)"
+msgstr "Bibliography (shortcite)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
-msgid "Bibliography thebibliography"
-msgstr "Bibliography thebibliography"
+msgid "Bibliography (thebibliography)"
+msgstr "Bibliography (thebibliography)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
@@ -4577,11 +4574,11 @@ msgstr "In_sert Date and Time..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Insert current date and time at the cursor position"
 
-#: plugins/time/time.c:455
+#: plugins/time/time.c:457
 msgid "Available formats"
 msgstr "Available formats"
 
-#: plugins/time/time.c:563
+#: plugins/time/time.c:565
 msgid "Configure insert date/time plugin..."
 msgstr "Configure insert date/time plugin..."
 
