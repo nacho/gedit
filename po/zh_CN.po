@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-30 15:01+0000\n"
-"PO-Revision-Date: 2005-07-31 00:02+0800\n"
+"POT-Creation-Date: 2005-08-05 06:11+0000\n"
+"PO-Revision-Date: 2005-08-05 16:54+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -211,7 +211,7 @@ msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and replaced by
+#. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
 #: ../data/gedit.schemas.in.h:41
 msgid "Monospace Regular 9"
@@ -509,7 +509,7 @@ msgstr "[GB18030,GBK,GB2312,UTF-8]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[CURRENT,GB18030,GBK,GB2312,UTF-8,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2124
+#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
 #, c-format
 msgid "Activate %s"
 msgstr "激活 %s"
@@ -618,7 +618,7 @@ msgid "Replace _All"
 msgstr "全部替换(_A)"
 
 #: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:316
+#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
 msgid "_Replace"
 msgstr "替换(_R)"
 
@@ -716,7 +716,7 @@ msgid ""
 "marked"
 msgstr "按下此按钮可以配置选中文本的背景色"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1189
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1192
 msgid "Elements"
 msgstr "元素"
 
@@ -1114,42 +1114,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:370
+#: ../gedit/gedit-document.c:380
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:370
+#: ../gedit/gedit-document.c:380
 msgid "Unsaved Document"
 msgstr "未保存文档"
 
-#: ../gedit/gedit-document.c:916 ../gedit/gedit-document.c:1468
+#: ../gedit/gedit-document.c:926 ../gedit/gedit-document.c:1478
 msgid "Invalid UTF-8 data"
 msgstr "UTF-8 数据无效"
 
-#: ../gedit/gedit-document.c:1718
+#: ../gedit/gedit-document.c:1728
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "无法读入 %s 的符号链接信息"
 
-#: ../gedit/gedit-document.c:1764
+#: ../gedit/gedit-document.c:1774
 msgid "The file has too many symbolic links."
 msgstr "该文件有太多的符号链接。"
 
-#: ../gedit/gedit-document.c:1848
+#: ../gedit/gedit-document.c:1858
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit 无法在写入模式下处理 %s: 位置。"
 
-#: ../gedit/gedit-document.c:1855
+#: ../gedit/gedit-document.c:1865
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit 无法在写入模式下处理此类位置。"
 
-#: ../gedit/gedit-document.c:1868
+#: ../gedit/gedit-document.c:1878
 msgid "Invalid filename."
 msgstr "无效的文件名。"
 
-#: ../gedit/gedit-document.c:2019
+#: ../gedit/gedit-document.c:2029
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1157,7 +1157,7 @@ msgstr ""
 "没有足够的磁盘空间用于保存文件。\n"
 "请释放一些磁盘空间，然后重试。"
 
-#: ../gedit/gedit-document.c:2024
+#: ../gedit/gedit-document.c:2034
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1165,7 +1165,7 @@ msgid ""
 msgstr ""
 "磁盘有文件大小的限制，请保存较小的文件或者将文件保存到没有此限制的磁盘上。"
 
-#: ../gedit/gedit-document.c:2068
+#: ../gedit/gedit-document.c:2078
 msgid "Could not create a backup file."
 msgstr "gedit 无法创建一个临时文件。"
 
@@ -1300,12 +1300,12 @@ msgstr "泰语"
 msgid "Unknown"
 msgstr "未知"
 
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:303
+#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "名为“%s”的文件已经存在。\n"
 
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:307
+#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "您想要将其替换为您正在保存的文件吗？"
 
@@ -1318,15 +1318,15 @@ msgstr "文件“%s”为只读。\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "您想要试着将其替换为您正在保存的文件吗？"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:531
+#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
 msgid "All Files"
 msgstr "全部文件"
 
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:539
+#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
 msgid "All Text Files"
 msgstr "全部文本文件"
 
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:550
+#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
 msgid "_Character Coding:"
 msgstr "字符编码(_C)："
 
@@ -1736,28 +1736,28 @@ msgid "Encoding:"
 msgstr "编码："
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:253 ../gedit/gedit-mdi.c:453
+#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
 #, c-format
 msgid "Open '%s'"
 msgstr "打开“%s”"
 
-#: ../gedit/gedit-mdi.c:528
+#: ../gedit/gedit-mdi.c:538
 msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
-#: ../gedit/gedit-mdi.c:1467 ../gedit/gedit-mdi.c:1469
+#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
 msgid "Read Only"
 msgstr "只读"
 
-#: ../gedit/gedit-mdi.c:2094
+#: ../gedit/gedit-mdi.c:2103
 msgid "Normal"
 msgstr "普通"
 
-#: ../gedit/gedit-mdi.c:2095
+#: ../gedit/gedit-mdi.c:2104
 msgid "Use Normal highlight mode"
 msgstr "使用普通突出显示模式"
 
-#: ../gedit/gedit-mdi.c:2171
+#: ../gedit/gedit-mdi.c:2180
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
@@ -2219,16 +2219,16 @@ msgstr " (无效的 Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:885
+#: ../gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  行 %d，列 %d"
 
-#: ../gedit/gedit-view.c:921
+#: ../gedit/gedit-view.c:915
 msgid "  OVR"
 msgstr " 覆盖"
 
-#: ../gedit/gedit-view.c:923
+#: ../gedit/gedit-view.c:917
 msgid "  INS"
 msgstr " 插入"
 
@@ -2412,21 +2412,21 @@ msgstr "保存副本(_V)..."
 msgid "Save a copy of the current document"
 msgstr "保存当前文档的副本"
 
-#: ../plugins/savecopy/savecopy.c:262
+#: ../plugins/savecopy/savecopy.c:315
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "无法将文件的副本保存为“%s”"
 
-#: ../plugins/savecopy/savecopy.c:361
+#: ../plugins/savecopy/savecopy.c:414
 msgid "You are trying to overwrite the original file"
 msgstr "您正试图覆盖原始文件"
 
-#: ../plugins/savecopy/savecopy.c:470
+#: ../plugins/savecopy/savecopy.c:523
 msgid "Save Copy..."
 msgstr "保存副本..."
 
 #. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:502 ../plugins/savecopy/savecopy.c:512
+#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (副本)"
@@ -2956,7 +2956,7 @@ msgid "Language:"
 msgstr "语言："
 
 #: ../plugins/spell/spell-checker.glade2.h:12
-msgid "Mispelled word:"
+msgid "Misspelled word:"
 msgstr "拼错的单词："
 
 #: ../plugins/spell/spell-checker.glade2.h:13
@@ -3128,7 +3128,7 @@ msgid "Character encoding of linked resource"
 msgstr "链接资源的字符编码"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
-msgid "Checked(state)"
+msgid "Checked (state)"
 msgstr "已选中(状态)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
@@ -4045,20 +4045,20 @@ msgid "Width"
 msgstr "宽度"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
-msgid "Bibliography cite"
-msgstr "文献引用"
+msgid "Bibliography (cite)"
+msgstr "文献引用(cite)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:2
-msgid "Bibliography item"
-msgstr "文献项目"
+msgid "Bibliography (item)"
+msgstr "文献项目(item)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:3
-msgid "Bibliography shortcite"
-msgstr "文献短引"
+msgid "Bibliography (shortcite)"
+msgstr "文献短引(shortcite)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:4
-msgid "Bibliography thebibliography"
-msgstr "文献嵌套引用"
+msgid "Bibliography (thebibliography)"
+msgstr "文献嵌套引用(thebibliography)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
@@ -4497,4 +4497,3 @@ msgstr "提示可使用的格式(_P)"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
-
