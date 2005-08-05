@@ -1,3 +1,17 @@
+2005-08-05  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #101281: [ui-review] Undo preference dialog
+
+	Based on a patch by Michael Terry <mike@mterry.name>
+
+	* dialogs/gedit-preferences-dialog.c (setup_editor_page)
+	(get_preferences_dialog): removed code releated the the "Undo" 
+	preferences
+
+	* dialogs/gedit-preferences.glade2: removed "Undo" preferences
+
+	* gedit-prefs-manager.h: updated to reflect changes to gedit.schemas.in
+
 ==== gedit 2.10.4 ====
 
 2005-08-04  Paolo Maggi  <paolo@gnome.org>

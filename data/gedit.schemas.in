@@ -165,9 +165,23 @@
       <type>int</type>
       <default>25</default>
       <locale name="C">
-	<short>Undo Actions Limit</short>
+	<short>Undo Actions Limit (DEPRECATED)</short>
 	<long>Maximum number of actions that gedit will be able to
-	undo or redo.</long>
+	undo or redo. Use "-1" for unlimited number of actions. 
+	Deprecated since 2.12.0</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/undo/max_undo_actions</key>
+      <applyto>/apps/gedit-2/preferences/editor/undo/max_undo_actions</applyto>
+      <owner>gedit</owner>
+      <type>int</type>
+      <default>2000</default>
+      <locale name="C">
+	<short>Max Number of Undo Actions</short>
+	<long>Maximum number of actions that gedit will be able to
+	undo or redo. Use "-1" for unlimited number of actions.</long>
       </locale>
     </schema>
 

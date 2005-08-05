@@ -58,7 +58,7 @@
 #define GPM_AUTO_SAVE_INTERVAL		GPM_SAVE_DIR "/auto_save_interval"
 
 #define GPM_UNDO_DIR			GPM_PREFS_DIR  "/editor/undo"
-#define GPM_UNDO_ACTIONS_LIMIT		GPM_UNDO_DIR "/undo_actions_limit"
+#define GPM_UNDO_ACTIONS_LIMIT		GPM_UNDO_DIR "/max_undo_actions"
 
 #define GPM_WRAP_MODE_DIR		GPM_PREFS_DIR "/editor/wrap_mode"
 #define GPM_WRAP_MODE			GPM_WRAP_MODE_DIR "/wrap_mode"
@@ -141,7 +141,7 @@
 #define GPM_DEFAULT_AUTO_SAVE		0 /* FALSE */
 #define GPM_DEFAULT_AUTO_SAVE_INTERVAL	10 /* minutes */
 
-#define GPM_DEFAULT_UNDO_ACTIONS_LIMIT	25 /* actions */
+#define GPM_DEFAULT_UNDO_ACTIONS_LIMIT	2000 /* actions */
 
 #define GPM_DEFAULT_WRAP_MODE		"GTK_WRAP_WORD"
 

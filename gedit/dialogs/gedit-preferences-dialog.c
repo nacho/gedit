@@ -76,12 +76,6 @@ struct _GeditPreferencesDialog
 	GtkWidget	*colors_table;
 	GtkWidget	*font_hbox;
 	
-	/* Undo*/
-	GtkWidget	*undo_box;
-	GtkWidget	*limited_undo_radiobutton;
-	GtkWidget	*unlimited_undo_radiobutton;
-	GtkWidget	*undo_levels_spinbutton;
-
 	/* Tabs */
 	GtkWidget	*tabs_width_spinbutton;
 	GtkWidget	*insert_spaces_checkbutton;
@@ -256,56 +250,9 @@ auto_save_spinbutton_value_changed (GtkSpinButton          *spin_button,
 }
 
 static void
-limited_undo_radiobutton_toggled (GtkToggleButton *button, GeditPreferencesDialog *dlg)
-{
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->limited_undo_radiobutton));
-
-	if (gtk_toggle_button_get_active (button))
-	{
-		gint undo_levels;
-		
-		gtk_widget_set_sensitive (dlg->undo_levels_spinbutton, 
-					  gedit_prefs_manager_undo_actions_limit_can_set());
-		
-		undo_levels = gtk_spin_button_get_value_as_int (
-				GTK_SPIN_BUTTON (dlg->undo_levels_spinbutton));
-		g_return_if_fail (undo_levels >= 1);
-
-		gedit_prefs_manager_set_undo_actions_limit (undo_levels);
-	}
-	else	
-	{
-		gtk_widget_set_sensitive (dlg->undo_levels_spinbutton, FALSE);
-
-		gedit_prefs_manager_set_undo_actions_limit (-1);
-	}
-}
-
-static void
-undo_levels_spinbutton_value_changed (GtkSpinButton          *spin_button,
-				      GeditPreferencesDialog *dlg)
-{
-	gint undo_levels;
-
-	gedit_debug (DEBUG_PREFS, "");
-
-	g_return_if_fail (spin_button == GTK_SPIN_BUTTON (dlg->undo_levels_spinbutton));
-
-	undo_levels = gtk_spin_button_get_value_as_int (
-				GTK_SPIN_BUTTON (dlg->undo_levels_spinbutton));
-	g_return_if_fail (undo_levels >= 1);
-
-	gedit_prefs_manager_set_undo_actions_limit (undo_levels);
-}
-
-static void
 setup_editor_page (GeditPreferencesDialog *dlg)
 {
 	gboolean auto_save;
-	gint undo_levels;
-	gboolean can_set;
 	gint auto_save_interval;
 
 	gedit_debug (DEBUG_PREFS, "");
@@ -334,21 +281,6 @@ setup_editor_page (GeditPreferencesDialog *dlg)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->auto_save_spinbutton),
 				   auto_save_interval);
 
-	undo_levels = gedit_prefs_manager_get_undo_actions_limit ();
-	
-	if (undo_levels > 0)
-	{
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dlg->undo_levels_spinbutton),
-					   (guint) undo_levels);
-
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->limited_undo_radiobutton), 
-				              TRUE);
-	}
-	else
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dlg->unlimited_undo_radiobutton), 
-				              TRUE);
-
-
 	/* Set widget sensitivity */
 	gtk_widget_set_sensitive (dlg->tabs_width_hbox, 
 				  gedit_prefs_manager_tabs_size_can_set ());
@@ -367,11 +299,6 @@ setup_editor_page (GeditPreferencesDialog *dlg)
 	gtk_widget_set_sensitive (dlg->auto_save_spinbutton, 
 			          auto_save &&
 				  gedit_prefs_manager_auto_save_interval_can_set ());
-
-	can_set = gedit_prefs_manager_undo_actions_limit_can_set ();
-
-	gtk_widget_set_sensitive (dlg->undo_box, can_set);
-	gtk_widget_set_sensitive (dlg->undo_levels_spinbutton, can_set && (undo_levels > 0));
 
 	/* Connect signal */
 	g_signal_connect (G_OBJECT (dlg->tabs_width_spinbutton), "value_changed",
@@ -397,14 +324,6 @@ setup_editor_page (GeditPreferencesDialog *dlg)
 	g_signal_connect (G_OBJECT (dlg->auto_save_spinbutton), "value_changed",
 			  G_CALLBACK (auto_save_spinbutton_value_changed),
 			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->limited_undo_radiobutton), "toggled", 
-		  	  G_CALLBACK (limited_undo_radiobutton_toggled), 
-			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->undo_levels_spinbutton), "value_changed",
-		  	  G_CALLBACK (undo_levels_spinbutton_value_changed),
-		  	  dlg);
 }
 
 static void
@@ -1352,11 +1271,6 @@ get_preferences_dialog (GtkWindow *parent)
 	dialog->auto_save_checkbutton = glade_xml_get_widget (gui, "auto_save_checkbutton");
 	dialog->auto_save_spinbutton = glade_xml_get_widget (gui, "auto_save_spinbutton");
 
-	dialog->limited_undo_radiobutton = glade_xml_get_widget (gui, "limited_undo_radiobutton");
-	dialog->unlimited_undo_radiobutton = glade_xml_get_widget (gui, "unlimited_undo_radiobutton");
-	dialog->undo_levels_spinbutton = glade_xml_get_widget (gui, "undo_levels_spinbutton");
-	dialog->undo_box = glade_xml_get_widget (gui, "undo_box");
-
 	dialog->plugin_manager_place_holder = glade_xml_get_widget (gui, "plugin_manager_place_holder");
 
 	dialog->enable_syntax_hl_checkbutton = glade_xml_get_widget (gui, "enable_syntax_hl_checkbutton");
@@ -1400,10 +1314,6 @@ get_preferences_dialog (GtkWindow *parent)
 	    !dialog->backup_copy_checkbutton ||
 	    !dialog->auto_save_checkbutton ||
 	    !dialog->auto_save_spinbutton ||
-	    !dialog->limited_undo_radiobutton ||
-	    !dialog->unlimited_undo_radiobutton ||
-	    !dialog->undo_levels_spinbutton ||
-	    !dialog->undo_box ||
 	    !dialog->plugin_manager_place_holder ||
 	    !dialog->enable_syntax_hl_checkbutton ||
 	    !dialog->hl_vbox ||
