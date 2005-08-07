@@ -11,14 +11,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-04 13:23+0200\n"
-"PO-Revision-Date: 2005-07-25 12:39+0700\n"
+"POT-Creation-Date: 2005-08-07 14:03+0700\n"
+"PO-Revision-Date: 2005-08-07 13:49+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: data/GNOME_Gedit.server.in.in.h:1
 msgid "Gedit View"
@@ -32,7 +32,8 @@ msgstr "มุมมอง Gedit"
 msgid "Gedit viewer factory"
 msgstr "โปรแกรม Gedit viewer"
 
-#: data/GNOME_Gedit.server.in.in.h:4 plugins/taglist/HTML.tags.xml.in.h:211
+#: data/GNOME_Gedit.server.in.in.h:4
+#: plugins/taglist/HTML.tags.xml.in.h:214
 msgid "Source"
 msgstr "ที่มา"
 
@@ -200,93 +201,109 @@ msgstr ""
 "จะแสดงเฉพาะรหัสที่รู้จักเท่านั้น"
 
 #: data/gedit.schemas.in.h:30
+msgid "Max Number of Undo Actions"
+msgstr "จำนวนปฏิบัติการสูงสุดของการเรียกคืน"
+
+#: data/gedit.schemas.in.h:31
 msgid "Maximum Recent Files"
 msgstr "จำนวนสูงสุดของแฟ้มล่าสุด"
 
-#: data/gedit.schemas.in.h:31
-msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr "จำนวนครั้งสูงสุดของการปฏิบัติการที่ gedit จะสามารถเรียกคืนการทำหรือทำซ้ำได้"
+#: data/gedit.schemas.in.h:32
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions."
+msgstr ""
+"จำนวนครั้งสูงสุดของการปฏิบัติการที่ gedit จะสามารถเรียกคืนการทำหรือทำซ้ำได้  ใช้ค่า \"-1\" "
+"จะหมายถึงไม่จำกัดจำนวน"
+
+#: data/gedit.schemas.in.h:33
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions. Deprecated since 2.12.0"
+msgstr ""
+"จำนวนครั้งสูงสุดของการปฏิบัติการที่ gedit จะสามารถเรียกคืนการทำหรือทำซ้ำได้  ใช้ค่า \"-1\" "
+"จะหมายถึงไม่จำกัดจำนวน  คีย์นี้เลิกใช้แล้วตั้งแต่รุ่น 2.12.0"
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: data/gedit.schemas.in.h:34
+#: data/gedit.schemas.in.h:36
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: data/gedit.schemas.in.h:37
+#: data/gedit.schemas.in.h:39
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and replaced by
+#. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: data/gedit.schemas.in.h:41
+#: data/gedit.schemas.in.h:43
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: data/gedit.schemas.in.h:42
+#: data/gedit.schemas.in.h:44
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr "ระยะเวลาเป็นนาทีที่ Gedit จะบันทึกแฟ้ม มีผลใช้ต่อเมื่อใช้ตัวเลือก \"บันทึกข้อมูลอัตโนมัติ\""
 
-#: data/gedit.schemas.in.h:43
+#: data/gedit.schemas.in.h:45
 msgid "Print Header"
 msgstr "แบบของหัวกระดาษสำหรับพิมพ์"
 
-#: data/gedit.schemas.in.h:44
+#: data/gedit.schemas.in.h:46
 msgid "Print Line Numbers"
 msgstr "พิมพ์เลขเส้นบรรทัด"
 
-#: data/gedit.schemas.in.h:45
+#: data/gedit.schemas.in.h:47
 msgid "Print Syntax Highlighting"
 msgstr "พิมพ์เป็นตัวเน้นสำหรับชื่อไวยากรณ์"
 
-#: data/gedit.schemas.in.h:46
+#: data/gedit.schemas.in.h:48
 msgid "Printing Line Wrapping Mode"
 msgstr "พิมพ์โดยใช้โหมดตัดบรรทัด"
 
-#: data/gedit.schemas.in.h:47
+#: data/gedit.schemas.in.h:49
 msgid "Right Margin Position"
 msgstr "ตำแหน่งกั้นหน้าขวา"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: data/gedit.schemas.in.h:50
+#: data/gedit.schemas.in.h:52
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: data/gedit.schemas.in.h:53
+#: data/gedit.schemas.in.h:55
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: data/gedit.schemas.in.h:57
+#: data/gedit.schemas.in.h:59
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: data/gedit.schemas.in.h:61
+#: data/gedit.schemas.in.h:63
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: data/gedit.schemas.in.h:62
+#: data/gedit.schemas.in.h:64
 msgid "Selected Text Color"
 msgstr "สีข้อความที่เลือก"
 
-#: data/gedit.schemas.in.h:63
+#: data/gedit.schemas.in.h:65
 msgid "Selection Color"
 msgstr "สีของส่วนที่ถูกเลือก"
 
-#: data/gedit.schemas.in.h:64
+#: data/gedit.schemas.in.h:66
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -295,7 +312,7 @@ msgstr ""
 "ลำดับของรหัสอักขระที่ gedit ใช้ตรวจสอบรหัสอักขระของแฟ้มโดยอัตโนมัติ ค่า \"CURRENT\" "
 "หมายถึงรหัสตามข้อกำหนดท้องถิ่นในขณะนั้น gedit จะใช้เฉพาะรหัสที่รู้จักเท่านั้น"
 
-#: data/gedit.schemas.in.h:65
+#: data/gedit.schemas.in.h:67
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -307,7 +324,7 @@ msgstr ""
 "หรือตัดบรรทัดเมื่อจบคำเลือก \"GTK_WRAP_WORD\" หรือตัดบรรทัดที่ระดับตัวอักษรเลือก "
 "\"GTK_WRAP_CHAR\" หมายเหตุ ตัวพิมพ์เล็ก-ใหญ่มีความหมายต่างกัน"
 
-#: data/gedit.schemas.in.h:66
+#: data/gedit.schemas.in.h:68
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -319,12 +336,12 @@ msgstr ""
 "หรือตัดบรรทัดเมื่อจบคำเลือก \"GTK_WRAP_WORD\" หรือตัดบรรทัดที่ระดับตัวอักษรเลือก "
 "\"GTK_WRAP_CHAR\" หมายเหตุ ตัวพิมพ์เล็ก-ใหญ่มีความหมายต่างกัน"
 
-#: data/gedit.schemas.in.h:67
+#: data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "กำหนดแบบอักษรที่จะใช้สำหรับเวลาพิมพ์"
 
-#: data/gedit.schemas.in.h:68
+#: data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -332,7 +349,7 @@ msgstr ""
 "กำหนดแบบอักษรที่จะใช้สำหรับพิมพ์เนื้อหาเอกสารคีย์นี้ใช้รูปแบบชื่อฟอนต์ของ gnome-print "
 "และถูกแทนที่ด้วย print_font_body_pango แล้ว"
 
-#: data/gedit.schemas.in.h:69
+#: data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -340,7 +357,7 @@ msgstr ""
 "เลือกแบบอักษรสำหรับส่วนของเลขบรรทัดที่จะใช้สำหรับเวลาพิมพ์ มีผลใช้เมื่อ \"พิมพ์เลขบรรทัด\" "
 "ไม่มีค่าเป็นศูนย์"
 
-#: data/gedit.schemas.in.h:70
+#: data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -350,13 +367,13 @@ msgstr ""
 "เท่านั้นคีย์นี้ใช้รูปแบบชื่อฟอนต์ของ gnome-print และถูกแทนที่ด้วย print_font_numbers_pango "
 "แล้ว"
 
-#: data/gedit.schemas.in.h:71
+#: data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr "เลือกแบบอักษรสำหรับส่วนหัวกระดาษตอนพิมพ์ มีผลเมื่อเลือกใช้ \"พิมพ์หัวกระดาษ\""
 
-#: data/gedit.schemas.in.h:72
+#: data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -365,27 +382,27 @@ msgstr ""
 "กำหนดแบบอักษรสำหรับพิมพ์หัวกระดาษ มีผลเมื่อเลือกใช้ \"พิมพ์หัวกระดาษ\" "
 "เท่านั้นคีย์นี้ใช้รูปแบบชื่อฟอนต์ของ gnome-print และถูกแทนที่ด้วย print_font_header_pango แล้ว"
 
-#: data/gedit.schemas.in.h:73
+#: data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr "กำหนดจำนวนชื่อแฟ้มที่เคยแก้ไขและแสดงในเมนูย่อย \"แฟ้มล่าสุด\""
 
-#: data/gedit.schemas.in.h:74
+#: data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "กำหนดจำนวนช่องว่างเพื่อแสดงแทนอักษรแท็บ"
 
-#: data/gedit.schemas.in.h:75
+#: data/gedit.schemas.in.h:77
 msgid "Specifies the position of the right margin."
 msgstr "กำหนดตำแหน่งของกั้นหน้าขวา"
 
-#: data/gedit.schemas.in.h:76
+#: data/gedit.schemas.in.h:78
 msgid "Status Bar is Visible"
 msgstr "มองเห็นแถบบอกสถานะการทำงาน"
 
-#: data/gedit.schemas.in.h:77
+#: data/gedit.schemas.in.h:79
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -400,35 +417,35 @@ msgstr ""
 "\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" เพื่อแสดงข้อความเฉพาะบางไอคอน "
 "ค่าทั้งหมดจะต้องเป็นอักษรตัวใหญ่ดังแสดงที่นี่"
 
-#: data/gedit.schemas.in.h:78
+#: data/gedit.schemas.in.h:80
 msgid "Tab Size"
 msgstr "ขนาดของแท็บ"
 
-#: data/gedit.schemas.in.h:79
+#: data/gedit.schemas.in.h:81
 msgid "Text Color"
 msgstr "สีของข้อความ"
 
-#: data/gedit.schemas.in.h:80
+#: data/gedit.schemas.in.h:82
 msgid "Toolbar Buttons Style"
 msgstr "รูปแบบของปุ่มแถบเครื่องมือ"
 
-#: data/gedit.schemas.in.h:81
+#: data/gedit.schemas.in.h:83
 msgid "Toolbar is Visible"
 msgstr "มองเห็นแถบเครื่องมือ"
 
-#: data/gedit.schemas.in.h:82
-msgid "Undo Actions Limit"
-msgstr "จำนวนจำกัดของการเรียกคืนการทำ"
+#: data/gedit.schemas.in.h:84
+msgid "Undo Actions Limit (DEPRECATED)"
+msgstr "จำนวนจำกัดของการเรียกคืนการทำ (เลิกใช้แล้ว)"
 
-#: data/gedit.schemas.in.h:83
+#: data/gedit.schemas.in.h:85
 msgid "Use Default Colors"
 msgstr "ใช้สีปริยาย"
 
-#: data/gedit.schemas.in.h:84
+#: data/gedit.schemas.in.h:86
 msgid "Use Default Font"
 msgstr "ใช้แบบอักษรปริยาย"
 
-#: data/gedit.schemas.in.h:85
+#: data/gedit.schemas.in.h:87
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -437,7 +454,7 @@ msgstr ""
 "ให้ gedit บันทึกการแก้ไขโดยอัตโนมัติเป็นช่วงๆ หรือไม่ "
 "คุณสามารถกำหนดช่วงเวลาการบันทึกได้โดยตั้งค่าตัวเลือก \"ช่วงเวลาการบันทึกข้อมูลอัตโนมัติ\""
 
-#: data/gedit.schemas.in.h:86
+#: data/gedit.schemas.in.h:88
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -445,52 +462,52 @@ msgstr ""
 "ให้ gedit สร้างสำเนาชุดสำรองของแฟ้มที่บันทึกหรือไม่ "
 "คุณสามารถกำหนดนามสกุลแฟ้มได้โดยตั้งค่าตัวเลือก \"นามสกุลของแฟ้มสำรอง\""
 
-#: data/gedit.schemas.in.h:87
+#: data/gedit.schemas.in.h:89
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "ให้ gedit แสดงเลขบรรทัดในพื้นที่แก้ไข"
 
-#: data/gedit.schemas.in.h:88
+#: data/gedit.schemas.in.h:90
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "ให้ gedit แสดงกั้นหน้าขวาในพื้นที่แก้ไข"
 
-#: data/gedit.schemas.in.h:89
+#: data/gedit.schemas.in.h:91
 msgid "Whether gedit should enable auto indentation."
 msgstr "ให้ gedit ย่อหน้าให้โดยอัตโนมัติ"
 
-#: data/gedit.schemas.in.h:90
+#: data/gedit.schemas.in.h:92
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "ให้ gedit เน้นข้อความตามไวยากรณ์ของเนื้อหา"
 
-#: data/gedit.schemas.in.h:91
+#: data/gedit.schemas.in.h:93
 msgid "Whether gedit should highlight matching bracket."
 msgstr "กำหนดให้ gedit เน้นวงเล็บที่เข้าคู่กัน"
 
-#: data/gedit.schemas.in.h:92
+#: data/gedit.schemas.in.h:94
 msgid "Whether gedit should highlight the current line."
 msgstr "กำหนดให้ gedit เน้นบรรทัดปัจจุบัน"
 
-#: data/gedit.schemas.in.h:93
+#: data/gedit.schemas.in.h:95
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "ให้ gedit พิมพ์หัวกระดาษด้วย"
 
-#: data/gedit.schemas.in.h:94
+#: data/gedit.schemas.in.h:96
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "ให้ gedit ใส่ช่องว่างแทนแท็บ"
 
-#: data/gedit.schemas.in.h:95
+#: data/gedit.schemas.in.h:97
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "gedit ควรพิมพ์ไวยากรณ์เป็นตัวเน้นหรือไม่"
 
-#: data/gedit.schemas.in.h:96
+#: data/gedit.schemas.in.h:98
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "ให้แสดงแถบบอกสถานะการทำงานตรงส่วนล่างของหน้าต่าง"
 
-#: data/gedit.schemas.in.h:97
+#: data/gedit.schemas.in.h:99
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "ให้มองเห็นแถบเครื่องมือในหน้าต่างที่ใช้แก้ไขแฟ้ม"
 
-#: data/gedit.schemas.in.h:98
+#: data/gedit.schemas.in.h:100
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -500,7 +517,7 @@ msgstr ""
 "ใช้ค่าสีปริยายสำหรับพื้นที่แก้ไขหรือไม่ ถ้าไม่ใช้ตัวเลือกนี้สีสำหรับพื้นที่แก้ไขจะเป็นไปตามค่าที่ตั้งไว้ใน "
 "\"สีของพื้นหลัง\", \"สีของข้อความ\", \"สีของข้อความที่เลือก\" และ \"สีของการเลือก\""
 
-#: data/gedit.schemas.in.h:99
+#: data/gedit.schemas.in.h:101
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -511,18 +528,18 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: data/gedit.schemas.in.h:102
+#: data/gedit.schemas.in.h:104
 msgid "[ISO-8859-15]"
 msgstr "[TIS-620]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: data/gedit.schemas.in.h:106
+#: data/gedit.schemas.in.h:108
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,TIS-620]"
 
-#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2124
+#: gedit/bonobo-mdi.c:548 gedit/bonobo-mdi.c:2099
 #, c-format
 msgid "Activate %s"
 msgstr "เริ่มใช้ %s"
@@ -574,8 +591,7 @@ msgstr[1] "ถ้าคุณไม่บันทึก การแก้ไ�
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:407
 #: gedit/dialogs/gedit-close-confirmation-dialog.c:428
 #, c-format
-msgid ""
-"If you don't save, changes from the last hour will be permanently lost."
+msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] "ถ้าคุณไม่บันทึก การแก้ไขทั้งหมดในชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
@@ -597,21 +613,20 @@ msgstr[1] "ถ้าคุณไม่บันทึก การแก้ไ�
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "บันทึกการเปลี่ยนแปลงในเอกสาร \"%s\" ก่อนปิดหรือไม่?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:645
 #, c-format
-msgid ""
-"There is %d document with unsaved changes. Save changes before closing?"
+msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "มีเอกสารทั้งหมด %d ฉบับถูกแก้ไขโดยยังไม่บันทึก คุณต้องการบันทึกก่อนปิดหรือไม่?"
 msgstr[1] "มีเอกสารทั้งหมด %d ฉบับถูกแก้ไขโดยยังไม่บันทึก คุณต้องการบันทึกก่อนปิดหรือไม่?"
 
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:662
 msgid "S_elect the documents you want to save:"
 msgstr "เ_ลือกเอกสารที่คุณต้องการจะบันทึก"
 
 #. Secondary label
-#: gedit/dialogs/gedit-close-confirmation-dialog.c:677
+#: gedit/dialogs/gedit-close-confirmation-dialog.c:679
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "ถ้าคุณไม่บันทึก การแก้ไขที่ผ่านมาจะสูญหายอย่างถาวร"
 
@@ -629,8 +644,8 @@ msgstr "ไ_ปที่บรรทัด"
 msgid "The text \"%s\" was not found."
 msgstr "ค้นหาข้อความ \"%s\" ไม่เจอ"
 
-#: gedit/dialogs/gedit-dialog-replace.c:269 gedit/dialogs/replace.glade2.h:4
-#: gedit/gedit-ui.xml.h:46
+#: gedit/dialogs/gedit-dialog-replace.c:269
+#: gedit/dialogs/replace.glade2.h:4 gedit/gedit-ui.xml.h:46
 msgid "Replace"
 msgstr "แทนที่"
 
@@ -639,7 +654,7 @@ msgid "Replace _All"
 msgstr "แทนที่ทั้งห_มด"
 
 #: gedit/dialogs/gedit-dialog-replace.c:285
-#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:316
+#: gedit/gedit-file-selector-util.c:114 plugins/savecopy/savecopy.c:369
 msgid "_Replace"
 msgstr "แ_ทนที่"
 
@@ -714,31 +729,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "แฟ้มที่เลือกไม่สามารถปฏิบัติการได้"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:730
+#: gedit/dialogs/gedit-preferences-dialog.c:649
 msgid "Push this button to select the font to be used by the editor"
 msgstr "กดปุ่มนี้เพื่อเลือกแบบอักษรที่จะใช้ใน gedit"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:732
+#: gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to configure text color"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีตัวอักษร"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:734
+#: gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure background color"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีของพื้นหลัง"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:736
+#: gedit/dialogs/gedit-preferences-dialog.c:655
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีของอักษรที่ถูกเน้น"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:739
+#: gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "กดปุ่มนี้เพื่อกำหนดค่าสีที่ใช้เน้นตัวอักษรที่ถูกเลือก"
 
-#: gedit/dialogs/gedit-preferences-dialog.c:1189
+#: gedit/dialogs/gedit-preferences-dialog.c:1111
 msgid "Elements"
 msgstr "องค์ประกอบ"
 
@@ -791,191 +806,175 @@ msgid "<b>Text Wrapping</b>"
 msgstr "<b>การตัดบรรทัด</b>"
 
 #: gedit/dialogs/gedit-preferences.glade2.h:12
-msgid "<b>Undo</b>"
-msgstr "<b>เรียกคืน</b>"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">สี</span>"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:14
+#: gedit/dialogs/gedit-preferences.glade2.h:13
 #: plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "ตัวหนา"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:15
+#: gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "สร้างสำเนาแฟ้ม_สำรองก่อนที่จะบันทึกข้อมูล"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "D_isplay right margin"
+#: gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "Display right _margin"
 msgstr "แ_สดงกั้นขวา"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:17
+#: gedit/dialogs/gedit-preferences.glade2.h:16
 #: gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "ไ_ม่แยกคำคำเดียวเป็นสองบรรทัด"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:18
+#: gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor"
 msgstr "เครื่องมือแก้ไข"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:19
+#: gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Editor _font: "
 msgstr "แ_บบอักษรของเครื่องมือแก้ไข:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:20
+#: gedit/dialogs/gedit-preferences.glade2.h:19
 #: gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "เปิดใช้การ_ตัดบรรทัด"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:21
+#: gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "Font & Colors"
 msgstr "แบบอักษรและสี"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:22
+#: gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Hi_ghlight current line"
 msgstr "เ_น้นบรรทัดปัจจุบัน"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:23
+#: gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Highlight _mode:"
 msgstr "โห_มดเน้น"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:24
-msgid "Highlight matching bracket"
+#: gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Highlight matching _bracket"
 msgstr "เน้น_วงเล็บที่เข้าคู่กัน"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:25
+#: gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "แทนที่แท็บด้วย_ช่องว่าง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:26
+#: gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Italic"
 msgstr "ตัวเอียง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:27
+#: gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Normal _text color:"
 msgstr "สีของ_ตัวอักษรปกติ"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:28
+#: gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Pick a color"
 msgstr "เลือกสีของตัวอักษร"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:29
+#: gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the background color"
 msgstr "เลือกสีของพื้นหลัง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:30
+#: gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the editor font"
 msgstr "เลือกฟอนต์สำหรับพื้นที่แก้ไข"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:31
+#: gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Pick the normal text color"
 msgstr "เลือกสีของตัวอักษรปกติ"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:32
+#: gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Pick the selected text color"
 msgstr "เลือกสีสำหรับอักษรที่ถูกเน้น"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:33
+#: gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Pick the selection color"
 msgstr "เลือกสีของการเลือก"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:34
+#: gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Plugins"
 msgstr "ปลั๊กอิน"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:35
+#: gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Preferences"
 msgstr "การปรับแต่ง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:36
+#: gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Se_lection color:"
 msgstr "สีของการเลือ_ก"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:37
+#: gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "Selecte_d text color:"
 msgstr "สีของอักษรที่ถูกเ_ลือก"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:38
+#: gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Strikethrough"
 msgstr "ขีดฆ่า"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:39
+#: gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "Syntax Highlighting"
 msgstr "การเน้นข้อความตามไวยากรณ์เนื้อหา"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:40
+#: gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "U_se default theme colors"
 msgstr "ใช้_สีปริยายของชุดตกแต่ง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:41
+#: gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "Underline"
 msgstr "ขีดเส้นใต้"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:42
+#: gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "View"
 msgstr "มุมมอง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:43
+#: gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Autosave files every"
 msgstr "_บันทึกแฟ้มปัจจุบันโดยอัตโนมัติทุกๆ"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:44
+#: gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Background color:"
 msgstr "สีของ_พื้นหลัง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:45
+#: gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background:"
 msgstr "_พื้นหลัง"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:46
+#: gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Display line numbers"
 msgstr "แสดงเ_ลขบรรทัด"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:47
+#: gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Enable automatic indentation"
 msgstr "เปิดใช้การเยื้อง_ย่อหน้าโดยอัตโนมัติ"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:48
+#: gedit/dialogs/gedit-preferences.glade2.h:47
 msgid "_Enable syntax highlighting"
 msgstr "_เปิดการใช้งานการเน้นข้อความตามไวยากรณ์เนื้อหา"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:49
+#: gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Foreground:"
 msgstr "_ตัวอักษร:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:50
-msgid "_Limit to"
-msgstr "_จำกัดไว้ที่"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:51
+#: gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Reset to Default "
 msgstr "ค่า_ปริยาย"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:52
+#: gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Right margin at column:"
 msgstr "กั้นขวาเริ่มจาก_คอลัมน์ที่:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:53
+#: gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Tab width:"
 msgstr "ความกว้างแ_ท็บ:"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:54
-msgid "_Unlimited undo"
-msgstr "เรียกคืนไ_ม่จำกัด"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:55
+#: gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_Use default theme font"
 msgstr "ใช้แบบอักษรของชุดตกแต่ง_ปริยาย"
 
-#: gedit/dialogs/gedit-preferences.glade2.h:56
+#: gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_minutes"
 msgstr "_นาที"
-
-#: gedit/dialogs/gedit-preferences.glade2.h:57
-msgid "act_ions"
-msgstr "_คำสั่ง"
 
 #: gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
@@ -1134,46 +1133,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
+#: gedit/gedit-document.c:380
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: gedit/gedit-document.c:666 gedit/gedit-document.c:684
+#: gedit/gedit-document.c:380
 msgid "Unsaved Document"
 msgstr "เอกสารยังไม่บันทึก"
 
-#: gedit/gedit-document.c:672 gedit/gedit-document.c:719
-msgid "Invalid file name"
-msgstr "ชื่อแฟ้มไม่ถูกต้อง"
-
-#: gedit/gedit-document.c:859 gedit/gedit-document.c:1411
+#: gedit/gedit-document.c:926 gedit/gedit-document.c:1478
 msgid "Invalid UTF-8 data"
 msgstr "ข้อมูล UTF-8 ไม่ถูกต้อง"
 
-#: gedit/gedit-document.c:1658
+#: gedit/gedit-document.c:1728
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "อ่านข้อมูล symbolic link สำหรับ %s ไม่ได้"
 
-#: gedit/gedit-document.c:1704
+#: gedit/gedit-document.c:1774
 msgid "The file has too many symbolic links."
 msgstr "แฟ้มนี้มี symbolic link มากเกินไป"
 
-#: gedit/gedit-document.c:1788
+#: gedit/gedit-document.c:1858
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit ไม่สามารถทำงาน %s: ที่พร้อมกันใน write mode ได้"
 
-#: gedit/gedit-document.c:1795
+#: gedit/gedit-document.c:1865
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ไม่สามารถทำงานที่ตำแหน่งนี้ใน write mode ได้"
 
-#: gedit/gedit-document.c:1808
+#: gedit/gedit-document.c:1878
 msgid "Invalid filename."
 msgstr "ชื่อแฟ้มไม่ถูกต้อง"
 
-#: gedit/gedit-document.c:1959
+#: gedit/gedit-document.c:2029
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1181,7 +1176,7 @@ msgstr ""
 "พื้นที่บนดิสก์เต็ม บันทึกข้อมูลไม่ได้\n"
 "กรุณาลบข้อมูลที่ไม่จำเป็นออกและทำการบันทึกอีกครั้ง"
 
-#: gedit/gedit-document.c:1964
+#: gedit/gedit-document.c:2034
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1189,7 +1184,7 @@ msgid ""
 msgstr ""
 "ดิสก์ที่คุณกำลังบันทึกแฟ้มมีข้อจำกัดด้านขนาดของแฟ้ม ลองบันทึกแฟ้มขนาดเล็กลงหรือบันทึกลงดิสก์อื่น"
 
-#: gedit/gedit-document.c:2008
+#: gedit/gedit-document.c:2078
 msgid "Could not create a backup file."
 msgstr "สร้างแฟ้มสำรองไม่ได้"
 
@@ -1207,128 +1202,129 @@ msgstr "รหัสท้องถิ่นปัจจุบัน (%s)"
 msgid "Add or _Remove..."
 msgstr "เพิ่มหรือ_ลบออก..."
 
-#: gedit/gedit-encodings.c:134 gedit/gedit-encodings.c:179
-#: gedit/gedit-encodings.c:181 gedit/gedit-encodings.c:183
-#: gedit/gedit-encodings.c:185
+#: gedit/gedit-encodings.c:136 gedit/gedit-encodings.c:181
+#: gedit/gedit-encodings.c:183 gedit/gedit-encodings.c:185
+#: gedit/gedit-encodings.c:187
 msgid "Unicode"
 msgstr "ยูนิโค้ด"
 
-#: gedit/gedit-encodings.c:148 gedit/gedit-encodings.c:174
-#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:258
+#: gedit/gedit-encodings.c:150 gedit/gedit-encodings.c:176
+#: gedit/gedit-encodings.c:222 gedit/gedit-encodings.c:265
 msgid "Western"
 msgstr "ตะวันตก"
 
-#: gedit/gedit-encodings.c:150 gedit/gedit-encodings.c:217
-#: gedit/gedit-encodings.c:254
+#: gedit/gedit-encodings.c:152 gedit/gedit-encodings.c:224
+#: gedit/gedit-encodings.c:261
 msgid "Central European"
 msgstr "ยุโรปตอนกลาง"
 
-#: gedit/gedit-encodings.c:152
+#: gedit/gedit-encodings.c:154
 msgid "South European"
 msgstr "ยุโรปตอนใต้"
 
-#: gedit/gedit-encodings.c:154 gedit/gedit-encodings.c:170
-#: gedit/gedit-encodings.c:268
+#: gedit/gedit-encodings.c:156 gedit/gedit-encodings.c:172
+#: gedit/gedit-encodings.c:275
 msgid "Baltic"
 msgstr "ภาษาบอลติก"
 
-#: gedit/gedit-encodings.c:156 gedit/gedit-encodings.c:219
-#: gedit/gedit-encodings.c:232 gedit/gedit-encodings.c:236
-#: gedit/gedit-encodings.c:238 gedit/gedit-encodings.c:256
+#: gedit/gedit-encodings.c:158 gedit/gedit-encodings.c:226
+#: gedit/gedit-encodings.c:239 gedit/gedit-encodings.c:243
+#: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:263
 msgid "Cyrillic"
 msgstr "ภาษาไซริลลิก"
 
-#: gedit/gedit-encodings.c:158 gedit/gedit-encodings.c:225
-#: gedit/gedit-encodings.c:266
+#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:232
+#: gedit/gedit-encodings.c:273
 msgid "Arabic"
 msgstr "ภาษาอารบิก"
 
-#: gedit/gedit-encodings.c:160 gedit/gedit-encodings.c:260
+#: gedit/gedit-encodings.c:162 gedit/gedit-encodings.c:267
 #: plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "ภาษากรีก"
 
-#: gedit/gedit-encodings.c:162
+#: gedit/gedit-encodings.c:164
 msgid "Hebrew Visual"
 msgstr "ภาษาฮิบรูวิชวล"
 
-#: gedit/gedit-encodings.c:164 gedit/gedit-encodings.c:223
-#: gedit/gedit-encodings.c:264 plugins/spell/gedit-spell-checker.c:109
+#: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:230
+#: gedit/gedit-encodings.c:271 plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "ภาษาฮิบรู"
 
-#: gedit/gedit-encodings.c:166 gedit/gedit-encodings.c:221
-#: gedit/gedit-encodings.c:262 plugins/spell/gedit-spell-checker.c:149
+#: gedit/gedit-encodings.c:168 gedit/gedit-encodings.c:228
+#: gedit/gedit-encodings.c:269 plugins/spell/gedit-spell-checker.c:149
 msgid "Turkish"
 msgstr "ภาษาตุรกี"
 
-#: gedit/gedit-encodings.c:168
+#: gedit/gedit-encodings.c:170
 msgid "Nordic"
 msgstr "ภาษานอร์ดิก"
 
-#: gedit/gedit-encodings.c:172
+#: gedit/gedit-encodings.c:174
 msgid "Celtic"
 msgstr "ภาษาเซลติก"
 
-#: gedit/gedit-encodings.c:176 plugins/spell/gedit-spell-checker.c:137
+#: gedit/gedit-encodings.c:178 plugins/spell/gedit-spell-checker.c:137
 msgid "Romanian"
 msgstr "ภาษาโรมาเนีย"
 
-#: gedit/gedit-encodings.c:188
+#: gedit/gedit-encodings.c:190
 msgid "Armenian"
 msgstr "ภาษาอาร์เมเนียน"
 
-#: gedit/gedit-encodings.c:190 gedit/gedit-encodings.c:192
-#: gedit/gedit-encodings.c:201
+#: gedit/gedit-encodings.c:192 gedit/gedit-encodings.c:194
+#: gedit/gedit-encodings.c:208
 msgid "Chinese Traditional"
 msgstr "ภาษาจีนดั้งเดิม"
 
-#: gedit/gedit-encodings.c:194
+#: gedit/gedit-encodings.c:196
 msgid "Cyrillic/Russian"
 msgstr "ภาษาไซริลลิก/รัสเซีย"
 
-#: gedit/gedit-encodings.c:197 gedit/gedit-encodings.c:228
-#: gedit/gedit-encodings.c:243
+#: gedit/gedit-encodings.c:199 gedit/gedit-encodings.c:201
+#: gedit/gedit-encodings.c:203 gedit/gedit-encodings.c:235
+#: gedit/gedit-encodings.c:250
 msgid "Japanese"
 msgstr "ภาษาญี่ปุ่น"
 
-#: gedit/gedit-encodings.c:199 gedit/gedit-encodings.c:230
-#: gedit/gedit-encodings.c:234 gedit/gedit-encodings.c:249
+#: gedit/gedit-encodings.c:206 gedit/gedit-encodings.c:237
+#: gedit/gedit-encodings.c:241 gedit/gedit-encodings.c:256
 msgid "Korean"
 msgstr "ภาษาเกาหลี"
 
-#: gedit/gedit-encodings.c:204 gedit/gedit-encodings.c:206
-#: gedit/gedit-encodings.c:208 gedit/gedit-encodings.c:212
+#: gedit/gedit-encodings.c:211 gedit/gedit-encodings.c:213
+#: gedit/gedit-encodings.c:215 gedit/gedit-encodings.c:219
 msgid "Chinese Simplified"
 msgstr "ภาษาจีนประยุกต์"
 
-#: gedit/gedit-encodings.c:210
+#: gedit/gedit-encodings.c:217
 msgid "Georgian"
 msgstr "ภาษาจอร์เจีย"
 
-#: gedit/gedit-encodings.c:240
+#: gedit/gedit-encodings.c:247
 msgid "Cyrillic/Ukrainian"
 msgstr "ภาษาไซริลลิก/ยูเครน"
 
-#: gedit/gedit-encodings.c:245 gedit/gedit-encodings.c:251
-#: gedit/gedit-encodings.c:270 plugins/spell/gedit-spell-checker.c:152
+#: gedit/gedit-encodings.c:252 gedit/gedit-encodings.c:258
+#: gedit/gedit-encodings.c:277 plugins/spell/gedit-spell-checker.c:152
 msgid "Vietnamese"
 msgstr "ภาษาเวียดนาม"
 
-#: gedit/gedit-encodings.c:247
+#: gedit/gedit-encodings.c:254
 msgid "Thai"
 msgstr "ภาษาไทย"
 
-#: gedit/gedit-encodings.c:434
+#: gedit/gedit-encodings.c:441
 msgid "Unknown"
 msgstr "ไม่รู้จัก"
 
-#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:303
+#: gedit/gedit-file-selector-util.c:132 plugins/savecopy/savecopy.c:356
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "มีแฟ้มชื่อ \"%s\" อยู่ก่อนแล้ว\n"
 
-#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:307
+#: gedit/gedit-file-selector-util.c:133 plugins/savecopy/savecopy.c:360
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "คุณต้องการที่จะทับมันด้วยข้อมูลที่คุณจะบันทึกหรือไม่?"
 
@@ -1341,27 +1337,27 @@ msgstr "แฟ้ม \"%s\" อ่านได้อย่างเดียว.
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "คุณต้องการที่จะพยายามแทนที่มันด้วยข้อมูลที่คุณต้องการจะบันทึกหรือไม่?"
 
-#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:531
+#: gedit/gedit-file-selector-util.c:338 plugins/savecopy/savecopy.c:584
 msgid "All Files"
 msgstr "ทุกแฟ้ม"
 
-#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:539
+#: gedit/gedit-file-selector-util.c:346 plugins/savecopy/savecopy.c:592
 msgid "All Text Files"
 msgstr "แฟ้มข้อความทั้งหมด"
 
-#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:550
+#: gedit/gedit-file-selector-util.c:364 plugins/savecopy/savecopy.c:603
 msgid "_Character Coding:"
 msgstr "_รหัสอักขระ:"
 
-#: gedit/gedit-file-selector-util.c:509
+#: gedit/gedit-file-selector-util.c:498
 msgid "Select a file to open"
 msgstr "เลือกแฟ้มที่จะเปิด"
 
-#: gedit/gedit-file-selector-util.c:534
+#: gedit/gedit-file-selector-util.c:523
 msgid "Select files to open"
 msgstr "เลือกแฟ้มที่จะเปิด"
 
-#: gedit/gedit-file-selector-util.c:566
+#: gedit/gedit-file-selector-util.c:559
 msgid "Select a filename to save"
 msgstr "เลือกชื่อแฟ้มที่จะบันทึก"
 
@@ -1369,31 +1365,31 @@ msgstr "เลือกชื่อแฟ้มที่จะบันทึก
 msgid "Open File..."
 msgstr "เปิดแฟ้ม..."
 
-#: gedit/gedit-file.c:250 gedit/gedit-file.c:392
+#: gedit/gedit-file.c:250 gedit/gedit-file.c:390
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "กำลังบันทึกแฟ้ม \"%s\"..."
 
-#: gedit/gedit-file.c:279 gedit/gedit-file.c:410
+#: gedit/gedit-file.c:279 gedit/gedit-file.c:408
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "เอกสาร \"%s\" ไม่ถูกบันทึก"
 
-#: gedit/gedit-file.c:287 gedit/gedit-file.c:423
+#: gedit/gedit-file.c:287 gedit/gedit-file.c:421
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "เอกสาร \"%s\" ถูกบันทึก"
 
-#: gedit/gedit-file.c:374
+#: gedit/gedit-file.c:372
 msgid "Save as..."
 msgstr "บันทึกเป็น..."
 
-#: gedit/gedit-file.c:528
+#: gedit/gedit-file.c:526
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr "ยกเลิกการแก้ไขเอกสาร \"%s\" เพื่อย้อนกลับสู่สภาพเดิมหรือไม่?"
 
-#: gedit/gedit-file.c:537
+#: gedit/gedit-file.c:535
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1403,12 +1399,12 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารใน %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารใน %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:546
+#: gedit/gedit-file.c:544
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "การแก้ไขทั้งหมดในเอกสารในช่วงนาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:552
+#: gedit/gedit-file.c:550
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1419,7 +1415,7 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารในนาทีกับอีก %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารในนาทีกับอีก %ld วินาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:562
+#: gedit/gedit-file.c:560
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1429,16 +1425,15 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารใน %ld นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารใน %ld นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:577 gedit/gedit-file.c:598
+#: gedit/gedit-file.c:575 gedit/gedit-file.c:596
 #, c-format
-msgid ""
-"Changes made to the document in the last hour will be permanently lost."
+msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารในชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารใน %d ชั่วโมงที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:583
+#: gedit/gedit-file.c:581
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1449,70 +1444,70 @@ msgid_plural ""
 msgstr[0] "การแก้ไขทั้งหมดในเอกสารในช่วงชั่วโมงกับอีก %d นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 msgstr[1] "การแก้ไขทั้งหมดในเอกสารในช่วงชั่วโมงกับอีก %d นาทีที่ผ่านมาจะสูญหายอย่างถาวร"
 
-#: gedit/gedit-file.c:619 gedit/gedit-ui.xml.h:94
+#: gedit/gedit-file.c:617 gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "คืน_กลับ"
 
-#: gedit/gedit-file.c:664
+#: gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "ไม่สามารถแปลงแฟ้มชื่อ \"%s\" กลับได้"
 
-#: gedit/gedit-file.c:672
+#: gedit/gedit-file.c:670
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "เอกสาร\"%s\"ไม่ได้แปลงกลับ"
 
-#: gedit/gedit-file.c:676
+#: gedit/gedit-file.c:674
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "เอกสาร\"%s\"ได้แปลงกลับ"
 
-#: gedit/gedit-file.c:704
+#: gedit/gedit-file.c:702
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "กำลังแปลงแฟ้ม \"%s\" กลับ.."
 
-#: gedit/gedit-file.c:827
+#: gedit/gedit-file.c:825
 msgid "Could not read data from stdin."
 msgstr "อ่านข้อมูลจาก stdin ไม่ได้"
 
-#: gedit/gedit-file.c:914
+#: gedit/gedit-file.c:912
 msgid "Reverting file:"
 msgstr "กำลังแปลงแฟ้มกลับ.."
 
-#: gedit/gedit-file.c:914
+#: gedit/gedit-file.c:912
 msgid "Loading file:"
 msgstr "กำลังอ่านแฟ้ม..."
 
-#: gedit/gedit-file.c:1094 gedit/gedit-file.c:1335
+#: gedit/gedit-file.c:1092 gedit/gedit-file.c:1333
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "เกิดข้อผิดพลาดขณะอ่านแฟ้ม \"%s\""
 
-#: gedit/gedit-file.c:1115
+#: gedit/gedit-file.c:1113
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "อ่านแฟ้ม \"%s\""
 
-#: gedit/gedit-file.c:1227
+#: gedit/gedit-file.c:1225
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "อ่านทั้งหมด %d แฟ้ม"
 msgstr[1] "อ่านทั้งหมด %d แฟ้ม"
 
-#: gedit/gedit-file.c:1288
+#: gedit/gedit-file.c:1286
 #, c-format
 msgid "Created file \"%s\""
 msgstr "สร้างแฟ้ม \"%s\""
 
-#: gedit/gedit-file.c:1306
+#: gedit/gedit-file.c:1304
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "กำลังอ่านแฟ้ม \"%s\"..."
 
-#: gedit/gedit-file.c:1471
+#: gedit/gedit-file.c:1469
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1767,28 +1762,28 @@ msgid "Encoding:"
 msgstr "รหัสอักขระ:"
 
 #. Translators: %s is a URI
-#: gedit/gedit-mdi.c:253 gedit/gedit-mdi.c:453
+#: gedit/gedit-mdi.c:260 gedit/gedit-mdi.c:463
 #, c-format
 msgid "Open '%s'"
 msgstr "เปิดเอกสาร '%s'"
 
-#: gedit/gedit-mdi.c:528
+#: gedit/gedit-mdi.c:538
 msgid "Open a recently used file"
 msgstr "เปิดแฟ้มที่เพิ่งถูกเปิด"
 
-#: gedit/gedit-mdi.c:1467 gedit/gedit-mdi.c:1469
+#: gedit/gedit-mdi.c:1477 gedit/gedit-mdi.c:1479
 msgid "Read Only"
 msgstr "(อ่านอย่างเดียว)"
 
-#: gedit/gedit-mdi.c:2094
+#: gedit/gedit-mdi.c:2103
 msgid "Normal"
 msgstr "ปกติ"
 
-#: gedit/gedit-mdi.c:2095
+#: gedit/gedit-mdi.c:2104
 msgid "Use Normal highlight mode"
 msgstr "ใช้โหมดเน้นแบบปกติ"
 
-#: gedit/gedit-mdi.c:2171
+#: gedit/gedit-mdi.c:2180
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "ใช้โหมดเน้นแบบ %s"
@@ -2238,7 +2233,7 @@ msgstr "เรี_ยกคืน"
 msgid "_View"
 msgstr "_มุมมอง"
 
-#: gedit/gedit-utils.c:695
+#: gedit/gedit-utils.c:686
 msgid " (invalid Unicode)"
 msgstr " (ยูนิโค้ดที่ไม่ถูกต้อง)"
 
@@ -2250,16 +2245,16 @@ msgstr " (ยูนิโค้ดที่ไม่ถูกต้อง)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: gedit/gedit-view.c:890
+#: gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  บรรทัด %d, คอลัมน์ %d"
 
-#: gedit/gedit-view.c:926
+#: gedit/gedit-view.c:915
 msgid "  OVR"
 msgstr "  ทับ"
 
-#: gedit/gedit-view.c:928
+#: gedit/gedit-view.c:917
 msgid "  INS"
 msgstr "  แทรก"
 
@@ -2267,8 +2262,7 @@ msgstr "  แทรก"
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
-msgstr ""
-"กำหนดรหัสอักขระที่จะใช้เปิดแฟ้มที่ระบุในบรรทัดคำสั่ง"
+msgstr "กำหนดรหัสอักขระที่จะใช้เปิดแฟ้มที่ระบุในบรรทัดคำสั่ง"
 
 #: gedit/gedit2.c:86
 msgid "Quit an existing instance of gedit"
@@ -2445,21 +2439,21 @@ msgstr "บันทึก_สำเนา..."
 msgid "Save a copy of the current document"
 msgstr "บันทึกสำเนาของเอกสารปัจจุบัน"
 
-#: plugins/savecopy/savecopy.c:262
+#: plugins/savecopy/savecopy.c:315
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "ไม่สามารถบันทึกสำเนาของแฟ้มในชื่อ \"%s\" ได้"
 
-#: plugins/savecopy/savecopy.c:361
+#: plugins/savecopy/savecopy.c:414
 msgid "You are trying to overwrite the original file"
 msgstr "คุณกำลังพยายามเขียนทับแฟ้มเดิม"
 
-#: plugins/savecopy/savecopy.c:470
+#: plugins/savecopy/savecopy.c:523
 msgid "Save Copy..."
 msgstr "บันทึกสำเนา..."
 
 #. translators: %s is a filename
-#: plugins/savecopy/savecopy.c:502 plugins/savecopy/savecopy.c:512
+#: plugins/savecopy/savecopy.c:555 plugins/savecopy/savecopy.c:565
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (สำเนา)"
@@ -2567,7 +2561,8 @@ msgstr "เ_รียงลำดับ..."
 msgid "Sort the current document or selection."
 msgstr "เรียงลำดับในเอกสารปัจจุบันหรือส่วนที่เลือก"
 
-#: plugins/sort/sort.gedit-plugin.desktop.in.h:1 plugins/sort/sort.glade2.h:3
+#: plugins/sort/sort.gedit-plugin.desktop.in.h:1
+#: plugins/sort/sort.glade2.h:3
 msgid "Sort"
 msgstr "เรียงลำดับ"
 
@@ -2988,8 +2983,8 @@ msgid "Language:"
 msgstr "ภาษา:"
 
 #: plugins/spell/spell-checker.glade2.h:12
-msgid "Mispelled word:"
-msgstr "คำที่สะกดผิด"
+msgid "Misspelled word:"
+msgstr "คำที่สะกดผิด:"
 
 #: plugins/spell/spell-checker.glade2.h:13
 msgid "User dictionary:"
@@ -3160,7 +3155,7 @@ msgid "Character encoding of linked resource"
 msgstr "รหัสอักขระของข้อมูลเป้าหมายลิงก์"
 
 #: plugins/taglist/HTML.tags.xml.in.h:30
-msgid "Checked(state)"
+msgid "Checked (state)"
 msgstr "เลือกอยู่ (สถานะ)"
 
 #: plugins/taglist/HTML.tags.xml.in.h:31
@@ -3235,869 +3230,873 @@ msgstr "วันและเวลาที่แก้ไข"
 msgid "Declare flag"
 msgstr "แฟล็กประกาศ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:49
+#. Translators: DEFER is an optional attribute of the <script> tag.
+#. It indicates that the script is not going to generate any document
+#. content. The browser can continue parsing and drawing the page.
+#: plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Defer attribute"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:50
+#: plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Definition description"
 msgstr "นิยาม: คำบรรยาย"
 
-#: plugins/taglist/HTML.tags.xml.in.h:51
+#: plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Definition list"
 msgstr "นิยาม: รายการ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:52
+#: plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Definition term"
 msgstr "นิยาม: หัวข้อ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:53
+#: plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Deleted text"
 msgstr "ลบข้อความที่ลบ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:54
+#: plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Direction"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:55
+#: plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Directionality"
 msgstr "ทิศทางการเขียน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:56
+#: plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Directory list"
 msgstr "รายการสารบบ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:57
+#: plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Disabled"
 msgstr "ไม่ทำงาน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:58
+#: plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document base"
 msgstr "URI ฐานของเอกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:59
+#: plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document body"
 msgstr "เนื้อเอกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:60
+#: plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Document head"
 msgstr "หัวเอกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:61
+#: plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Document title"
 msgstr "หัวเรื่องเอกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:62
+#: plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Document type"
 msgstr "ชนิดโครงสร้างเอกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:63
+#: plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Element ID"
 msgstr "ID ขององค์ประกอบ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:64
+#: plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Embedded object"
 msgstr "อ็อบเจกต์ฝังตัว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:65 plugins/taglist/Latex.tags.xml.in.h:9
+#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "ตัวเน้น"
 
-#: plugins/taglist/HTML.tags.xml.in.h:66
+#: plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Encode type"
 msgstr "ชนิดของรูปแบบข้อมูล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:67
+#: plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Figure"
 msgstr "รูป"
 
-#: plugins/taglist/HTML.tags.xml.in.h:68
+#: plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Font face"
 msgstr "ชื่อแบบอักษร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:69
+#: plugins/taglist/HTML.tags.xml.in.h:72
 msgid "For label"
 msgstr "ฉลากสำหรับ..."
 
-#: plugins/taglist/HTML.tags.xml.in.h:70
+#: plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Forced line break"
 msgstr "ตัดบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:71
+#: plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form"
 msgstr "แบบฟอร์ม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:72
+#: plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form action handler"
 msgstr "แบบฟอร์ม: ตัวประมวลผล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:73
+#: plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form control group"
 msgstr "แบบฟอร์ม: แบ่งส่วน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:74
+#: plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form field label text"
 msgstr "แบบฟอร์ม: ฉลากข้อมูล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:75
+#: plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Form input"
 msgstr "แบบฟอร์ม: รับข้อมูล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:76
+#: plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Form input type"
 msgstr "แบบฟอร์ม: รับข้อมูลระบุชนิด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:77
+#: plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Form method"
 msgstr "แบบฟอร์มระบุวิธีส่งข้อมูล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:78
+#: plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Forward link"
 msgstr "ลิงก์ออกไป"
 
-#: plugins/taglist/HTML.tags.xml.in.h:79
+#: plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame"
 msgstr "เฟรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:80
+#: plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frame render parts"
 msgstr "เส้นกรอบตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:81
+#: plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frame source"
 msgstr "เฟรมระบุแหล่งเนื้อหา"
 
-#: plugins/taglist/HTML.tags.xml.in.h:82
+#: plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frame target"
 msgstr "เฟรมเป้าหมาย"
 
-#: plugins/taglist/HTML.tags.xml.in.h:83
+#: plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameborder"
 msgstr "เส้นกั้นเฟรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:84
+#: plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Frameset"
 msgstr "ชุดเฟรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:85
+#: plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Frameset columns"
 msgstr "ชุดเฟรมระบุจำนวนคอลัมน์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:86
+#: plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Frameset rows"
 msgstr "ชุดเฟรมระบุจำนวนแถว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:87
+#: plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Framespacing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:88
+#: plugins/taglist/HTML.tags.xml.in.h:91
 msgid "Generic embedded object"
 msgstr "อ็อบเจกต์ฝังตัว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:89
+#: plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Generic metainformation"
 msgstr "ข้อมูลกำกับ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:90
+#: plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Generic span"
 msgstr "span"
 
-#: plugins/taglist/HTML.tags.xml.in.h:91
+#: plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: plugins/taglist/HTML.tags.xml.in.h:92
+#: plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML - Special Characters"
 msgstr "HTML - อักขระพิเศษ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:93
+#: plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTML - Tags"
 msgstr "HTML - แท็ก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:94
+#: plugins/taglist/HTML.tags.xml.in.h:97
 msgid "HTML root element"
 msgstr "องค์ประกอบราก HTML"
 
-#: plugins/taglist/HTML.tags.xml.in.h:95
+#: plugins/taglist/HTML.tags.xml.in.h:98
 msgid "HTML version"
 msgstr "รุ่น HTML"
 
-#: plugins/taglist/HTML.tags.xml.in.h:96
+#: plugins/taglist/HTML.tags.xml.in.h:99
 msgid "HTTP header name"
 msgstr "ข้อมูลส่วนหัว HTTP"
 
-#: plugins/taglist/HTML.tags.xml.in.h:97
+#: plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Header cell ID's"
 msgstr "รายชื่อช่องหัวตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:98
+#: plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading"
 msgstr "หัวเรื่อง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:99
+#: plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 1"
 msgstr "หัวเรื่อง 1"
 
-#: plugins/taglist/HTML.tags.xml.in.h:100
+#: plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 2"
 msgstr "หัวเรื่อง 2"
 
-#: plugins/taglist/HTML.tags.xml.in.h:101
+#: plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 3"
 msgstr "หัวเรื่อง 3"
 
-#: plugins/taglist/HTML.tags.xml.in.h:102
+#: plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Heading 4"
 msgstr "หัวเรื่อง 4"
 
-#: plugins/taglist/HTML.tags.xml.in.h:103
+#: plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Heading 5"
 msgstr "หัวเรื่อง 5"
 
-#: plugins/taglist/HTML.tags.xml.in.h:104
+#: plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Heading 6"
 msgstr "หัวเรื่อง 6"
 
-#: plugins/taglist/HTML.tags.xml.in.h:105
+#: plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Height"
 msgstr "ความสูง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:106
+#: plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Horizontal rule"
 msgstr "เส้นขีดนอน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:107
+#: plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Horizontal space"
 msgstr "ช่องไฟตามแนวนอน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:108
+#: plugins/taglist/HTML.tags.xml.in.h:111
 msgid "I18N BiDi over-ride"
 msgstr "ระบุทิศทางตัวเขียน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:109
+#: plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image"
 msgstr "รูปภาพ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:110
+#: plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image map"
 msgstr "แผนที่รูปภาพ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:111
+#: plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Image map area"
 msgstr "แผนที่รูปภาพ: พื้นที่"
 
-#: plugins/taglist/HTML.tags.xml.in.h:112
+#: plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Image map name"
 msgstr "แผนที่รูปภาพระบุชื่อ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:113
+#: plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Image source"
 msgstr "รูปภาพระบุแหล่ง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:114
+#: plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Inline frame"
 msgstr "เฟรมในบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:115
+#: plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Inline layer"
 msgstr "เลเยอร์ในบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:116
+#: plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Inserted text"
 msgstr "ข้อความที่แทรก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:117
+#: plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Instance definition"
 msgstr "ยกตัวอย่าง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:118
+#: plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Italic text"
 msgstr "ตัวเอียง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:119
+#: plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Java applet"
 msgstr "แอพเพล็ตจาวา"
 
-#: plugins/taglist/HTML.tags.xml.in.h:120
+#: plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Label"
 msgstr "ฉลาก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:121
+#: plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Language code"
 msgstr "ภาษา"
 
-#: plugins/taglist/HTML.tags.xml.in.h:122
+#: plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Large text style"
 msgstr "ตัวอักษรใหญ่"
 
-#: plugins/taglist/HTML.tags.xml.in.h:123
+#: plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Layer"
 msgstr "เลเยอร์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:124
+#: plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Link color"
 msgstr "สีของลิงก์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:125
+#: plugins/taglist/HTML.tags.xml.in.h:128
 msgid "List item"
 msgstr "ข้อมูลในรายการ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:126
+#: plugins/taglist/HTML.tags.xml.in.h:129
 msgid "List of MIME types for file upload"
 msgstr "MIME type ที่ยอมรับสำหรับอัปโหลดแฟ้ม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:127
+#: plugins/taglist/HTML.tags.xml.in.h:130
 msgid "List of supported character sets"
 msgstr "รหัสอักขระที่แบบฟอร์มสนับสนุน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:128
+#: plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Listing"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:129
+#: plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Local change to font"
 msgstr "แบบอักษร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:130
+#: plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Long description link"
 msgstr "คำบรรยายรูปแบบยาว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:131
+#: plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Long quotation"
 msgstr "อ้างคำพูดแบบยาว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:132
+#: plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Mail link"
 msgstr "ลิงก์ชนิดเมล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:133
+#: plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Margin pixel height"
 msgstr "ความสูงของขอบเฟรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:134
+#: plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Margin pixel width"
 msgstr "ความกว้างของขอบเฟรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:135
+#: plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Marquee"
 msgstr "ตัววิ่ง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:136
+#: plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Maximum length of text field"
 msgstr "ความยาวสูงสุดของช่องกรอกข้อความ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:137
+#: plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Media-independent link"
 msgstr "ลิงก์ที่หัวเอกสาร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:138
+#: plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Menu list"
 msgstr "รายการเมนู"
 
-#: plugins/taglist/HTML.tags.xml.in.h:139
+#: plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Multi-line text field"
 msgstr "ช่องกรอกข้อความหลายบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:140
+#: plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Multicolumn"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:141
+#: plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Multiple"
 msgstr "เลือกได้หลายตัวเลือก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:142
+#: plugins/taglist/HTML.tags.xml.in.h:145
 msgid "Name"
 msgstr "ชื่อ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:143
+#: plugins/taglist/HTML.tags.xml.in.h:146
 msgid "Named property value"
 msgstr "คุณสมบัติอ็อบเจกต์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:144
+#: plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Next ID"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:145
+#: plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No URI"
 msgstr "ไม่มีลิงก์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:146
+#: plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No embedded objects"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:147
+#: plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No frames"
 msgstr "ไม่สนับสนุนเฟรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:148
+#: plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No layers"
 msgstr "ไม่สนับสนุนเลเยอร์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:149
+#: plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No line break"
 msgstr "ไม่แบ่งบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:150
+#: plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No resize"
 msgstr "ไม่ให้เปลี่ยนขนาดเฟรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:151
+#: plugins/taglist/HTML.tags.xml.in.h:154
 msgid "No script"
 msgstr "ไม่สนับสนุนสคริปต์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:152
+#: plugins/taglist/HTML.tags.xml.in.h:155
 msgid "No shade"
 msgstr "ไม่มีเงา"
 
-#: plugins/taglist/HTML.tags.xml.in.h:153
+#: plugins/taglist/HTML.tags.xml.in.h:156
 msgid "No word wrap"
 msgstr "ไม่ตัดบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:154
+#: plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Note"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:155
+#: plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Object applet file"
 msgstr "แฟ้มอ็อบเจกต์แอพเพล็ต"
 
-#: plugins/taglist/HTML.tags.xml.in.h:156
+#: plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Object data reference"
 msgstr "ข้อมูลอ็อบเจกต์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:157
+#: plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Offset for alignment character"
 msgstr "ตำแหน่งของอักขระสำหรับจัดเรียงแนว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:158
+#: plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnBlur event"
 msgstr "เหตุการณ์ OnBlur"
 
-#: plugins/taglist/HTML.tags.xml.in.h:159
+#: plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnChange event"
 msgstr "เหตุการณ์ OnChange"
 
-#: plugins/taglist/HTML.tags.xml.in.h:160
+#: plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnClick event"
 msgstr "เหตุการณ์ OnClick"
 
-#: plugins/taglist/HTML.tags.xml.in.h:161
+#: plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnDblClick event"
 msgstr "เหตุการณ์ OnDblClick"
 
-#: plugins/taglist/HTML.tags.xml.in.h:162
+#: plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnFocus event"
 msgstr "เหตุการณ์ OnFocus"
 
-#: plugins/taglist/HTML.tags.xml.in.h:163
+#: plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnKeyDown event"
 msgstr "เหตุการณ์ OnKeyDown"
 
-#: plugins/taglist/HTML.tags.xml.in.h:164
+#: plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnKeyPress event"
 msgstr "เหตุการณ์ OnKeyPress"
 
-#: plugins/taglist/HTML.tags.xml.in.h:165
+#: plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnKeyUp event"
 msgstr "เหตุการณ์ OnKeyUp"
 
-#: plugins/taglist/HTML.tags.xml.in.h:166
+#: plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnLoad event"
 msgstr "เหตุการณ์ OnLoad"
 
-#: plugins/taglist/HTML.tags.xml.in.h:167
+#: plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseDown event"
 msgstr "เหตุการณ์ OnMouseDown"
 
-#: plugins/taglist/HTML.tags.xml.in.h:168
+#: plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseMove event"
 msgstr "เหตุการณ์ OnMouseMove"
 
-#: plugins/taglist/HTML.tags.xml.in.h:169
+#: plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnMouseOut event"
 msgstr "เหตุการณ์ OnMouseOut"
 
-#: plugins/taglist/HTML.tags.xml.in.h:170
+#: plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnMouseOver event"
 msgstr "เหตุการณ์ OnMouseOver"
 
-#: plugins/taglist/HTML.tags.xml.in.h:171
+#: plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnMouseUp event"
 msgstr "เหตุการณ์ OnMouseUp"
 
-#: plugins/taglist/HTML.tags.xml.in.h:172
+#: plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnReset event"
 msgstr "เหตุการณ์ OnReset"
 
-#: plugins/taglist/HTML.tags.xml.in.h:173
+#: plugins/taglist/HTML.tags.xml.in.h:176
 msgid "OnSelect event"
 msgstr "เหตุการณ์ OnSelect"
 
-#: plugins/taglist/HTML.tags.xml.in.h:174
+#: plugins/taglist/HTML.tags.xml.in.h:177
 msgid "OnSubmit event"
 msgstr "เหตุการณ์ OnSubmit"
 
-#: plugins/taglist/HTML.tags.xml.in.h:175
+#: plugins/taglist/HTML.tags.xml.in.h:178
 msgid "OnUnload event"
 msgstr "เหตุการณ์ OnUnload"
 
-#: plugins/taglist/HTML.tags.xml.in.h:176
+#: plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Option group"
 msgstr "กลุ่มตัวเลือก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:177
+#: plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Option selector"
 msgstr "ช่องรับข้อมูลแบบตัวเลือก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:178
+#: plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Ordered list"
 msgstr "รายการเรียงเลข"
 
-#: plugins/taglist/HTML.tags.xml.in.h:179
+#: plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Output media"
 msgstr "อุปกรณ์แสดงผล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:180
+#: plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Paragraph"
 msgstr "ย่อหน้า"
 
-#: plugins/taglist/HTML.tags.xml.in.h:181
+#: plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Paragraph class"
 msgstr "ย่อหน้าระบุคลาส"
 
-#: plugins/taglist/HTML.tags.xml.in.h:182
+#: plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Paragraph style"
 msgstr "ย่อหน้าระบุสไตล์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:183
+#: plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Preformatted listing"
 msgstr "ข้อความจัดรูปแบบตายตัว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:184
+#: plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Preformatted text"
 msgstr "ข้อความจัดย่อหน้าตายตัว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:185
+#: plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Profile metainfo dictionary"
 msgstr "ข้อมูลกำกับที่กำหนดไว้แล้ว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:186
+#: plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Prompt message"
 msgstr "ข้อความบอกบท"
 
-#: plugins/taglist/HTML.tags.xml.in.h:187
+#: plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Push button"
 msgstr "ปุ่มกด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:188
+#: plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Quote"
 msgstr "อ้างคำพูด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:189
+#: plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Range"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:190
+#: plugins/taglist/HTML.tags.xml.in.h:193
 msgid "ReadOnly text and password"
 msgstr "ข้อความและรหัสผ่านห้ามแก้ไข"
 
-#: plugins/taglist/HTML.tags.xml.in.h:191
+#: plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Reduced spacing"
 msgstr "เรียงบรรทัดชิดกัน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:192
+#: plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Reverse link"
 msgstr "ลิงก์เข้ามา"
 
-#: plugins/taglist/HTML.tags.xml.in.h:193
+#: plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Root"
 msgstr "ราก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:194
+#: plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Rows"
 msgstr "จำนวนแถว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:195
+#: plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Rulings between rows and columns"
 msgstr "การตีเส้นตารางระหว่างแถวและคอลัมน์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:196
+#: plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Sample program output, scripts"
 msgstr "ตัวอย่างผลลัพธ์ของโปรแกรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:197
+#: plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scope covered by header cells"
 msgstr "ขอบเขตของเซลล์หัวตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:198
+#: plugins/taglist/HTML.tags.xml.in.h:201
 msgid "Script language name"
 msgstr "ภาษาของสคริปต์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:199
+#: plugins/taglist/HTML.tags.xml.in.h:202
 msgid "Script statments"
 msgstr "ถ้อยแถลงสคริปต์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:200
+#: plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Scrollbar"
 msgstr "แถบเลื่อน"
 
-#: plugins/taglist/HTML.tags.xml.in.h:201
+#: plugins/taglist/HTML.tags.xml.in.h:204
 msgid "Selectable option"
 msgstr "ตัวเลือกสำหรับเลือก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:202
+#: plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Selected"
 msgstr "เลือกไว้"
 
-#: plugins/taglist/HTML.tags.xml.in.h:203
+#: plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Server-side image map"
 msgstr "แผนที่รูปภาพที่ฝั่งเซิร์ฟเวอร์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:204
+#: plugins/taglist/HTML.tags.xml.in.h:207
 msgid "Shape"
 msgstr "รูปร่างของพื้นที่"
 
-#: plugins/taglist/HTML.tags.xml.in.h:205
+#: plugins/taglist/HTML.tags.xml.in.h:208
 msgid "Short inline quotation"
 msgstr "อ้างคำพูดแบบสั้นในบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:206
+#: plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Single line prompt"
 msgstr "ช่องรับข้อมูลบรรทัดเดียว (ตกรุ่นแล้ว)"
 
-#: plugins/taglist/HTML.tags.xml.in.h:207
+#: plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Size"
 msgstr "ขนาด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:208
+#: plugins/taglist/HTML.tags.xml.in.h:211
 msgid "Small text style"
 msgstr "ตัวอักษรเล็ก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:209
+#: plugins/taglist/HTML.tags.xml.in.h:212
 msgid "Soft line break"
 msgstr "จุดตัดบรรทัด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:210
+#: plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Sound"
 msgstr "เสียง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:212
+#: plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Space"
 msgstr "ช่องว่าง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:213
+#: plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Space separated archive list"
 msgstr "แหล่งเก็บคลาส"
 
-#: plugins/taglist/HTML.tags.xml.in.h:214
+#: plugins/taglist/HTML.tags.xml.in.h:217
 msgid "Spacer"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:215
+#: plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Spacing between cells"
 msgstr "ช่องไฟระหว่างช่องตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:216
+#: plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Spacing within cells"
 msgstr "ช่องไฟภายในช่องตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:217
+#: plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Span"
 msgstr "Span"
 
-#: plugins/taglist/HTML.tags.xml.in.h:218
+#: plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Square root"
 msgstr "รากที่สอง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:219
+#: plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Standby load msg"
 msgstr "ข้อความระหว่างรอโหลดอ็อบเจกต์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:220
+#: plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Starting sequence number"
 msgstr "เลขลำดับแรกของรายการ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:221
+#: plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Strike-through text"
 msgstr "ขีดฆ่า (strike)"
 
-#: plugins/taglist/HTML.tags.xml.in.h:222
+#: plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Strike-through text style"
 msgstr "ขีดฆ่า (s)"
 
-#: plugins/taglist/HTML.tags.xml.in.h:223
+#: plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Strong emphasis"
 msgstr "เน้นตัวเข้ม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:224
+#: plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Style info"
 msgstr "สไตล์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:225
+#: plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Subscript"
 msgstr "ตัวห้อย"
 
-#: plugins/taglist/HTML.tags.xml.in.h:226
+#: plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Superscript"
 msgstr "ตัวยก"
 
-#: plugins/taglist/HTML.tags.xml.in.h:227
+#: plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Tab order position"
 msgstr "ลำดับการเข้าถึงด้วยปุ่มแท็บ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:228
+#: plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table"
 msgstr "ตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:229
+#: plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table body"
 msgstr "ตาราง: เนื้อหา"
 
-#: plugins/taglist/HTML.tags.xml.in.h:230
+#: plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table caption"
 msgstr "ตาราง: หัวเรื่องตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:231
+#: plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table column group properties"
 msgstr "ตาราง: กลุ่มคอลัมน์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:232
+#: plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Table column properties"
 msgstr "ตาราง: คอลัมน์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:233
+#: plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table data cell"
 msgstr "ตาราง: ช่องข้อมูลตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:234
+#: plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table footer"
 msgstr "ตาราง: ท้ายกระดาษ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:235
+#: plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table header"
 msgstr "ตาราง: หัวกระดาษ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:236
+#: plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Table header cell"
 msgstr "ตาราง: ช่องข้อมูลหัวตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:237
+#: plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Table row"
 msgstr "ตาราง: แถว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:238
+#: plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Table summary"
 msgstr "ตาราง: ข้อมูลสังเขป"
 
-#: plugins/taglist/HTML.tags.xml.in.h:239
+#: plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Blank"
 msgstr "ลิงก์เปิดในหน้าต่างใหม่"
 
-#: plugins/taglist/HTML.tags.xml.in.h:240
+#: plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Target - Parent"
 msgstr "ลิงก์เปิดในชุดเฟรมแม่"
 
-#: plugins/taglist/HTML.tags.xml.in.h:241
+#: plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Target - Self"
 msgstr "ลิงก์เปิดในเฟรมเดิม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:242
+#: plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Target - Top"
 msgstr "ลิงก์เปิดเต็มหน้าต่างเดิม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:243
+#: plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Teletype or monospace text style"
 msgstr "ตัวอักษรพิมพ์ดีด"
 
-#: plugins/taglist/HTML.tags.xml.in.h:244
+#: plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Text"
 msgstr ""
 
-#: plugins/taglist/HTML.tags.xml.in.h:245
+#: plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Text color"
 msgstr "สีตัวอักษร"
 
-#: plugins/taglist/HTML.tags.xml.in.h:246
+#: plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Text entered by user"
 msgstr "ข้อความป้อนโดยผู้ใช้"
 
-#: plugins/taglist/HTML.tags.xml.in.h:247
+#: plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Title"
 msgstr "ชื่อเรื่อง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:248
+#: plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Topmargin in pixels"
 msgstr "ระยะเว้นขอบบนเป็นพิกเซล"
 
-#: plugins/taglist/HTML.tags.xml.in.h:249
+#: plugins/taglist/HTML.tags.xml.in.h:252
 msgid "URL"
 msgstr "URL"
 
-#: plugins/taglist/HTML.tags.xml.in.h:250
+#: plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Underlined text style"
 msgstr "ตัวขีดเส้นใต้"
 
-#: plugins/taglist/HTML.tags.xml.in.h:251
+#: plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Unordered list"
 msgstr "รายการไม่เรียงเลข"
 
-#: plugins/taglist/HTML.tags.xml.in.h:252
+#: plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Use image map"
 msgstr "ใช้แผนที่รูปภาพ"
 
-#: plugins/taglist/HTML.tags.xml.in.h:253
+#: plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Value"
 msgstr "ค่า"
 
-#: plugins/taglist/HTML.tags.xml.in.h:254
+#: plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Value interpretation"
 msgstr "การใช้ค่าคุณสมบัติอ็อบเจกต์"
 
-#: plugins/taglist/HTML.tags.xml.in.h:255
+#: plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Variable or program argument"
 msgstr "ตัวแปรหรืออาร์กิวเมนต์ของโปรแกรม"
 
-#: plugins/taglist/HTML.tags.xml.in.h:256
+#: plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Vertical cell alignment"
 msgstr "การจัดเรียงแนวตามแนวดิ่งในช่องตาราง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:257
+#: plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Vertical space"
 msgstr "ช่องไฟตามแนวตั้ง"
 
-#: plugins/taglist/HTML.tags.xml.in.h:258
+#: plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Visited link color"
 msgstr "สีของลิงก์ที่อ่านแล้ว"
 
-#: plugins/taglist/HTML.tags.xml.in.h:259
+#: plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Width"
 msgstr "ความกว้าง"
 
 #: plugins/taglist/Latex.tags.xml.in.h:1
-msgid "Bibliography cite"
-msgstr "บรรณานุกรม: cite"
+msgid "Bibliography (cite)"
+msgstr "บรรณานุกรม (cite)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:2
-msgid "Bibliography item"
-msgstr "บรรณานุกรม: bibitem"
+msgid "Bibliography (item)"
+msgstr "บรรณานุกรม (bibitem)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:3
-msgid "Bibliography shortcite"
-msgstr "บรรณานุกรม: shortcite"
+msgid "Bibliography (shortcite)"
+msgstr "บรรณานุกรม (shortcite)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:4
-msgid "Bibliography thebibliography"
-msgstr "บรรณานุกรม: thebibliography"
+msgid "Bibliography (thebibliography)"
+msgstr "บรรณานุกรม (thebibliography)"
 
 #: plugins/taglist/Latex.tags.xml.in.h:5
-msgid "Brackets &lt;&gt;"
-msgstr "วงเล็บ &lt;&gt;"
-
-#: plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
 msgstr "วงเล็บ ()"
+
+#: plugins/taglist/Latex.tags.xml.in.h:6
+msgid "Brackets <>"
+msgstr "วงเล็บ <>"
 
 #: plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
@@ -4268,20 +4267,20 @@ msgid "Reference ref"
 msgstr "อ้างอิง: ref"
 
 #: plugins/taglist/Latex.tags.xml.in.h:50
-msgid "Symbol &gt;&gt;"
-msgstr "เครื่องหมาย &gt;&gt;"
+msgid "Symbol <<"
+msgstr "เครื่องหมาย <<"
 
 #: plugins/taglist/Latex.tags.xml.in.h:51
-msgid "Symbol &gt;="
-msgstr "เครื่องหมาย &gt;="
+msgid "Symbol <="
+msgstr "เครื่องหมาย <="
 
 #: plugins/taglist/Latex.tags.xml.in.h:52
-msgid "Symbol &lt;&lt;"
-msgstr "เครื่องหมาย &lt;&lt;"
+msgid "Symbol >="
+msgstr "เครื่องหมาย >="
 
 #: plugins/taglist/Latex.tags.xml.in.h:53
-msgid "Symbol &lt;="
-msgstr "เครื่องหมาย &lt;="
+msgid "Symbol >>"
+msgstr "เครื่องหมาย >>"
 
 #: plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
@@ -4481,11 +4480,11 @@ msgstr "แทรก_วันที่และเวลา..."
 msgid "Insert current date and time at the cursor position"
 msgstr "แทรกวันที่และเวลาปัจจุบันที่ตำแหน่งเคอร์เซอร์"
 
-#: plugins/time/time.c:455
+#: plugins/time/time.c:457
 msgid "Available formats"
 msgstr "รูปแบบที่มีให้เลือก"
 
-#: plugins/time/time.c:563
+#: plugins/time/time.c:565
 msgid "Configure insert date/time plugin..."
 msgstr "กำหนดค่าปลั๊กอินสำหรับวันที่และเวลา..."
 
@@ -4528,6 +4527,33 @@ msgstr "_ถามรูปแบบ"
 #: plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "ใช้รูปแบบ_กำหนดเอง"
+
+#~ msgid "<b>Undo</b>"
+#~ msgstr "<b>เรียกคืน</b>"
+
+#~ msgid "_Limit to"
+#~ msgstr "_จำกัดไว้ที่"
+
+#~ msgid "_Unlimited undo"
+#~ msgstr "เรียกคืนไ_ม่จำกัด"
+
+#~ msgid "act_ions"
+#~ msgstr "_คำสั่ง"
+
+#~ msgid "Invalid file name"
+#~ msgstr "ชื่อแฟ้มไม่ถูกต้อง"
+
+#~ msgid "Brackets &lt;&gt;"
+#~ msgstr "วงเล็บ &lt;&gt;"
+
+#~ msgid "Symbol &gt;&gt;"
+#~ msgstr "เครื่องหมาย &gt;&gt;"
+
+#~ msgid "Symbol &gt;="
+#~ msgstr "เครื่องหมาย &gt;="
+
+#~ msgid "Symbol &lt;&lt;"
+#~ msgstr "เครื่องหมาย &lt;&lt;"
 
 #~ msgid ""
 #~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
