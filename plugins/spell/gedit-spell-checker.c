@@ -448,7 +448,8 @@ lazy_init (GeditSpellChecker *spell, const GeditLanguage *language, GError **err
 	{
 		const GSList *langs;
 		langs = gedit_spell_checker_get_available_languages ();
-		spell->active_lang = (const GeditLanguage *)langs->data;
+		if (langs != NULL)
+			spell->active_lang = (const GeditLanguage *)langs->data;
 	}
 
 	if (spell->active_lang != NULL)
