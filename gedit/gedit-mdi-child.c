@@ -35,6 +35,7 @@
 #include <glib/gi18n.h>
 #include <libgnomeui/gnome-popup-menu.h>
 #include <libgnomeui/gnome-icon-theme.h>
+#include <libgnomeui/gnome-icon-lookup.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomevfs/gnome-vfs-mime-utils.h>
 #include <libgnomevfs/gnome-vfs-mime-handlers.h>
@@ -665,6 +666,72 @@ create_popup_menu (BonoboMDIChild *child, GtkWidget *view)
 
 static GnomeIconTheme *theme = NULL;
 
+/* egg has switched to GtkIconTheme, use a local copy */
+static GdkPixbuf *
+load_icon_file (char          *filename,
+		guint          nominal_size)
+{
+	GdkPixbuf *pixbuf, *scaled_pixbuf;
+	guint width, height;
+
+	pixbuf = gdk_pixbuf_new_from_file_at_size (filename, nominal_size, nominal_size, NULL);
+
+	if (pixbuf == NULL) {
+		return NULL;
+	}
+	
+	width = gdk_pixbuf_get_width (pixbuf); 
+	height = gdk_pixbuf_get_height (pixbuf);
+	/* if the icon is larger than the nominal size, scale down */
+	if (MAX (width, height) > nominal_size) {
+		if (width > height) {
+			height = height * nominal_size / width;
+			width = nominal_size;
+		} else {
+			width = width * nominal_size / height;
+			height = nominal_size;
+		}
+		scaled_pixbuf = gdk_pixbuf_scale_simple
+			(pixbuf, width, height, GDK_INTERP_BILINEAR);
+		g_object_unref (pixbuf);
+		pixbuf = scaled_pixbuf;
+	}
+
+	return pixbuf;
+}
+
+static GdkPixbuf *
+my_egg_recent_util_get_icon (GnomeIconTheme *theme, const gchar *uri,
+			  const gchar *mime_type, int size)
+{
+	gchar *icon;
+	gchar *filename;
+	const GnomeIconData *icon_data;
+	GdkPixbuf *pixbuf;
+	
+	icon = gnome_icon_lookup (theme, NULL, uri, NULL, NULL,
+				  mime_type, 0, NULL);
+	
+
+	g_return_val_if_fail (icon != NULL, NULL);
+
+	filename = gnome_icon_theme_lookup_icon (theme, icon,
+						 size,
+						 &icon_data,
+						 NULL);
+	g_free (icon);
+
+	if (filename == NULL) {
+		return NULL;
+	}
+
+	pixbuf = load_icon_file (filename, size);
+	g_free (filename);
+	
+	
+	return pixbuf;
+}
+
 static GtkWidget *
 set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 {
@@ -691,7 +758,7 @@ set_tab_icon (GtkWidget *image, BonoboMDIChild *child)
 	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (image),
 					   GTK_ICON_SIZE_MENU, NULL,
 					   &icon_size);
-	pixbuf = egg_recent_util_get_icon (theme, raw_uri,
+	pixbuf = my_egg_recent_util_get_icon (theme, raw_uri,
 					   mime_type, icon_size);
 
 	g_free (raw_uri);
