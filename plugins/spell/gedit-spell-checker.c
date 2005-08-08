@@ -123,6 +123,7 @@ static GeditLanguage known_languages [] =
 	{"mi", N_("Maori")},
 	{"mk", N_("Macedonian")},
 	{"mn", N_("Mongolian")},
+	{"mr", N_("Marathi")},
 	{"ms", N_("Malay")},
 	{"mt", N_("Maltese")},
 	{"nb", N_("Norwegian Bokmal")},
