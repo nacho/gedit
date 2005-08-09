@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-15 20:26+0200\n"
-"PO-Revision-Date: 2005-06-15 20:55+0200\n"
+"POT-Creation-Date: 2005-08-09 22:53+0200\n"
+"PO-Revision-Date: 2005-08-10 00:04+0200\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -198,6 +198,9 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
+"Zoznam aktívnych zásuvných modulov. Obsahuje \"Umiestnenie\" aktívnych "
+"zásuvných modulov. Pozrite si súbor .gedit-plugin, aby ste získali \"Umiestnenie\" "
+"daného zásuvného modulu."
 
 #: ../data/gedit.schemas.in.h:29
 msgid ""
@@ -208,33 +211,47 @@ msgstr ""
 "súboru. Použijú sa iba známe kódovania."
 
 #: ../data/gedit.schemas.in.h:30
+msgid "Max Number of Undo Actions"
+msgstr "Maximálna počet obnoviteľných akcií"
+
+#: ../data/gedit.schemas.in.h:31
 msgid "Maximum Recent Files"
 msgstr "Počet nedávnych súborov"
 
-#: ../data/gedit.schemas.in.h:31
-msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr "Maximálny počet akcií, ktoré bude gedit schopný vrátiť späť."
+#: ../data/gedit.schemas.in.h:32
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions."
+msgstr "Maximálny počet akcií, ktoré bude gedit schopný vrátiť späť alebo opätovne spraviť. "
+"Použite \"-1\" pre neobmedzený počet akcií."
+
+#: ../data/gedit.schemas.in.h:33
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions. Deprecated since 2.12.0"
+msgstr "Maximálny počet akcií, ktoré bude gedit schopný vrátiť späť alebo opätovne spraviť. "
+"Použite \"-1\" pre neobmedzený počet akcií. Zastaralé od 2.12.0"
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:34
+#: ../data/gedit.schemas.in.h:36
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:37
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and replaced by
+#. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:43
 msgid "Monospace Regular 9"
 msgstr "Monospace štandardné 9"
 
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:44
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -242,61 +259,61 @@ msgstr ""
 "Počet minút, po ktorých gedit automaticky uloží zmenené súbory. Toto "
 "nastavenie sa prejaví, iba ak máte zapnuté \"Automatické ukladanie\"."
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:45
 msgid "Print Header"
 msgstr "Tlačiť hlavičku"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:46
 msgid "Print Line Numbers"
 msgstr "Tlačiť čísla riadkov"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:47
 msgid "Print Syntax Highlighting"
 msgstr "Zvýrazňovanie syntaxu pre tlač"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:48
 msgid "Printing Line Wrapping Mode"
 msgstr "Režim zalamovania riadkov pri tlači"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:49
 msgid "Right Margin Position"
 msgstr "Pozícia pravého okraja"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:52
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:53
+#: ../data/gedit.schemas.in.h:55
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans Regular 11"
 msgstr "Sans štandardné 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 8"
 msgstr "Sans štandardné 8"
 
-#: ../data/gedit.schemas.in.h:62
+#: ../data/gedit.schemas.in.h:64
 msgid "Selected Text Color"
 msgstr "Farba vybraného textu"
 
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:65
 msgid "Selection Color"
 msgstr "Farba výberu"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:66
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -306,7 +323,7 @@ msgstr ""
 "súboru. \"CURRENT\" je aktuálne lokálne nastavenie. Použijú sa iba "
 "podporované kódovania."
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -319,7 +336,7 @@ msgstr ""
 "zalamovanie na ľubovoľnom znaku. Uvedomte si, že tieto hodnoty rozlišujú "
 "veľkosť písmen, takže musia byť napísané presne tak, ako sú tu uvedené."
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -333,12 +350,12 @@ msgstr ""
 "hodnoty rozlišujú veľkosť písmen, takže musia byť napísané presne tak, ako "
 "sú tu uvedené."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Určuje písmo používané pre telo dokumentu pri tlači."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -346,7 +363,7 @@ msgstr ""
 "Určuje písmo používané pre telo dokumentu pri tlači. Toto je názov písma "
 "gnome-print a nahrádza ho print_font_body_pango."
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -354,7 +371,7 @@ msgstr ""
 "Určuje písmo pre čísla riadkov pri tlači. Toto nastavenie sa prejaví iba ak "
 "máte \"Tlačiť čísla riadkov\" nastavené na nenulovú hodnotu."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -364,7 +381,7 @@ msgstr ""
 "máte \"Tlačiť čísla riadkov\" nastavené na nenulovú hodnotu. Toto je názov "
 "písma gnome-print a nahrádza ho print_font_numbers_pango."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -372,7 +389,7 @@ msgstr ""
 "Určuje písmo pre hlavičku stránky pri tlači. Toto nastavenie sa prejaví, iba "
 "ak máte zapnuté \"Tlačiť hlavičku\"."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -382,28 +399,28 @@ msgstr ""
 "ak máte zapnuté \"Tlačiť hlavičku\". Toto je názov písma gnome-print a "
 "nahrádza ho print_font_header_pango."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 "Určuje maximálny počet nedávno otvorených súborov v menu \"Nedávne súbory\"."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Určuje počet medzier, ktoré sa zobrazia namiesto znakov Tab."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid "Specifies the position of the right margin."
 msgstr "Určuje pozíciu pravého okraja."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid "Status Bar is Visible"
 msgstr "Zobraziť stavový riadok"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -419,35 +436,35 @@ msgstr ""
 "tieto hodnoty rozlišujú veľkosť písmen, takže musia byť napísané presne tak, "
 "ako sú tu uvedené."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid "Tab Size"
 msgstr "Veľkosť tabulátora"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid "Text Color"
 msgstr "Farba textu"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid "Toolbar Buttons Style"
 msgstr "Štýl tlačidiel panelu nástrojov"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid "Toolbar is Visible"
 msgstr "Zobraziť panel nástrojov"
 
-#: ../data/gedit.schemas.in.h:82
-msgid "Undo Actions Limit"
-msgstr "Počet akcií pre vrátenie späť"
+#: ../data/gedit.schemas.in.h:84
+msgid "Undo Actions Limit (DEPRECATED)"
+msgstr "Limit akcií pre vrátenie späť (ZASTARALÉ)"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Use Default Colors"
 msgstr "Použiť štandardné farby"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid "Use Default Font"
 msgstr "Použiť štandardné písmo"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -456,7 +473,7 @@ msgstr ""
 "Či má gedit automaticky ukladať zmenené súbory po zadanom časovom intervale. "
 "Jeho hodnotu môžete zapnúť voľbou \"Interval automatického ukladania\"."
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -464,52 +481,52 @@ msgstr ""
 "Či má gedit vytvárať záložné kópie súborov pri ukladaní. Ich príponu môžete "
 "nastaviť voľbou \"Prípona záložných súborov\"."
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Či má gedit zobrazovať čísla riadkov."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Či má gedit zobraziť pravý okraj v editovacej oblasti."
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Whether gedit should enable auto indentation."
 msgstr "Či má gedit zapnúť automatické odsadzovanie."
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Či má gedit zapnúť zvýrazňovanie syntaxu."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Či má gedit zvýrazňovať zodpovedajúce zátvorky."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should highlight the current line."
 msgstr "Či má gedit zvýrazniť aktuálny riadok."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Či má gedit pri tlači zahrnúť aj hlavičku dokumentu."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Či má gedit namiesto tabulátorov vkladať medzery."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Či má gedit pri tlači zvýrazňovať syntax."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Či sa má v dolnej časti okna editora zobrazovať stavový riadok."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Či má byť v oknách editora zobrazený panel nástrojov."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:100
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -520,7 +537,7 @@ msgstr ""
 "vypnutá, použijú sa farby nastavené v \"Farba pozadia\", \"Farba textu\", "
 "\"Farba označeného textu\" a \"Farba výberu\"."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:101
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -532,18 +549,18 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-2,ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-2,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2124
+#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
 #, c-format
 msgid "Activate %s"
 msgstr "Aktivovať %s"
@@ -685,7 +702,7 @@ msgid "Replace _All"
 msgstr "Nahradiť _všetko"
 
 #: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:316
+#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
 msgid "_Replace"
 msgstr "Na_hradiť"
 
@@ -761,31 +778,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Vybraný súbor nie je spustiteľný."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:730
+#: ../gedit/dialogs/gedit-preferences-dialog.c:649
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Stlačením tohto tlačidla vyberiete písmo, ktoré editor používa"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:732
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to configure text color"
 msgstr "Týmto tlačidlom nastavíte farbu textu"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:734
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure background color"
 msgstr "Týmto tlačidlom nastavíte farbu pozadia"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:736
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Týmto tlačidlom nastavíte farbu, ktorá sa použije pre označený text"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:739
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Týmto tlačidlom nastavíte farbu, ktorá sa použije pre vybraný text"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1189
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
 msgid "Elements"
 msgstr "Elementy"
 
@@ -838,191 +855,175 @@ msgid "<b>Text Wrapping</b>"
 msgstr "<b>Zalamovanie textu</b>"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:12
-msgid "<b>Undo</b>"
-msgstr "<b>Vrátenie späť</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Farby</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "Tučné"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "Nepodarilo sa vytvoriť _záložnú kópiu súboru."
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "D_isplay right margin"
-msgstr "Zobraziť _pravý okraj"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "Display right _margin"
+msgstr "Zobraziť pravý _okraj"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences.glade2.h:16
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "_Nerozdeľovať slová na viac riadkov"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor"
 msgstr "Editor"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
+#: ../gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Editor _font: "
 msgstr "Písmo _editora:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences.glade2.h:19
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Povoliť _zalamovanie"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "Font & Colors"
 msgstr "Písmo & farby"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Hi_ghlight current line"
 msgstr "Zvý_razniť aktuálny riadok"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Highlight _mode:"
 msgstr "Režim _zvýrazňovania:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
-msgid "Highlight matching bracket"
-msgstr "Zvýrazniť zodpovedajúcu zátvorku"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Highlight matching _bracket"
+msgstr "Zvýrazniť zodpovedajúcu _zátvorku"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "Vložiť _medzery miesto tabulátorov"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Italic"
 msgstr "Kurzíva"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Normal _text color:"
 msgstr "Farba normálneho _textu:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Pick a color"
 msgstr "Vyberte farbu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the background color"
 msgstr "Vyberte farbu pozadia"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the editor font"
 msgstr "Vyberte písmo textu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Pick the normal text color"
 msgstr "Vyberte farbu normálneho textu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Pick the selected text color"
 msgstr "Vyberte farbu označeného textu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Pick the selection color"
 msgstr "Vyberte farbu výberu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Plugins"
 msgstr "Moduly"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Preferences"
 msgstr "Nastavenie"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Se_lection color:"
 msgstr "Farba vý_beru:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "Selecte_d text color:"
 msgstr "Farba _vybraného textu:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Strikethrough"
 msgstr "Prečiarknuté"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "Syntax Highlighting"
 msgstr "Zvýrazňovanie syntaxu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "U_se default theme colors"
 msgstr "Použiť š_tandardné farby témy"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "Underline"
 msgstr "Podčiarknuté"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "View"
 msgstr "Zobraziť"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Autosave files every"
 msgstr "_Automaticky ukladať každých"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Background color:"
 msgstr "Farba _pozadia:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background:"
 msgstr "_Pozadie:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Display line numbers"
 msgstr "_Zobraziť čísla riadkov"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Enable automatic indentation"
 msgstr "_Povoliť automatické odsadzovanie"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences.glade2.h:47
 msgid "_Enable syntax highlighting"
 msgstr "Povoliť z_výrazňovanie syntaxu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Foreground:"
 msgstr "P_opredie:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
-msgid "_Limit to"
-msgstr "_Obmedziť na"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Reset to Default "
 msgstr "Š_tandardné nastavenie"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Right margin at column:"
 msgstr "Pravý okraj na _stĺpci:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Tab width:"
 msgstr "Šírka _tabulátorov:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:54
-msgid "_Unlimited undo"
-msgstr "Vrátenie späť _bez obmedzenia"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:55
+#: ../gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_Use default theme font"
 msgstr "_Použiť štandardné písmo témy"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:56
+#: ../gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_minutes"
 msgstr "_minút"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:57
-msgid "act_ions"
-msgstr "_akcií"
 
 #: ../gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
@@ -1179,46 +1180,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:380
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:380
 msgid "Unsaved Document"
 msgstr "Neuložený dokument"
 
-#: ../gedit/gedit-document.c:672 ../gedit/gedit-document.c:719
-msgid "Invalid file name"
-msgstr "Neplatné meno súboru"
-
-#: ../gedit/gedit-document.c:859 ../gedit/gedit-document.c:1411
+#: ../gedit/gedit-document.c:926 ../gedit/gedit-document.c:1478
 msgid "Invalid UTF-8 data"
 msgstr "Neplatné dáta UTF-8"
 
-#: ../gedit/gedit-document.c:1658
+#: ../gedit/gedit-document.c:1728
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Nepodarilo sa prečítať informácie o symbolickom odkaze %s"
 
-#: ../gedit/gedit-document.c:1704
+#: ../gedit/gedit-document.c:1774
 msgid "The file has too many symbolic links."
 msgstr "Súbor obsazuje príliš veľa symbolických odkazov."
 
-#: ../gedit/gedit-document.c:1788
+#: ../gedit/gedit-document.c:1858
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit nedokáže spracovať miesta %s: v režime zápisu."
 
-#: ../gedit/gedit-document.c:1795
+#: ../gedit/gedit-document.c:1865
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "geditr nedokáže spracovať tento typ umiestnenia v režime zápisu."
 
-#: ../gedit/gedit-document.c:1808
+#: ../gedit/gedit-document.c:1878
 msgid "Invalid filename."
 msgstr "Neplatné meno súboru."
 
-#: ../gedit/gedit-document.c:1959
+#: ../gedit/gedit-document.c:2029
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1226,7 +1223,7 @@ msgstr ""
 "Nedostatok miesta pre uloženie súboru.\n"
 "Uvoľnite nejaké miesto na disku a skúste to znovu."
 
-#: ../gedit/gedit-document.c:1964
+#: ../gedit/gedit-document.c:2034
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1236,7 +1233,7 @@ msgstr ""
 "Skúste uložiť menší súbor alebo súbor skúste uložiť na disk, ktorý toto "
 "obmedzenie nemá."
 
-#: ../gedit/gedit-document.c:2008
+#: ../gedit/gedit-document.c:2078
 msgid "Could not create a backup file."
 msgstr "Nepodarilo sa vytvoriť záložnú kópiu súboru."
 
@@ -1254,128 +1251,129 @@ msgstr "Aktuálne lokálne nastavenie (%s)"
 msgid "Add or _Remove..."
 msgstr "Pridať alebo o_dstrániť..."
 
-#: ../gedit/gedit-encodings.c:134 ../gedit/gedit-encodings.c:179
-#: ../gedit/gedit-encodings.c:181 ../gedit/gedit-encodings.c:183
-#: ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:181
+#: ../gedit/gedit-encodings.c:183 ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:187
 msgid "Unicode"
 msgstr "Unicode"
 
-#: ../gedit/gedit-encodings.c:148 ../gedit/gedit-encodings.c:174
-#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:176
+#: ../gedit/gedit-encodings.c:222 ../gedit/gedit-encodings.c:265
 msgid "Western"
 msgstr "Západná"
 
-#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:217
-#: ../gedit/gedit-encodings.c:254
+#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:224
+#: ../gedit/gedit-encodings.c:261
 msgid "Central European"
 msgstr "Stredoeurópska"
 
-#: ../gedit/gedit-encodings.c:152
+#: ../gedit/gedit-encodings.c:154
 msgid "South European"
 msgstr "Juhoevrópska"
 
-#: ../gedit/gedit-encodings.c:154 ../gedit/gedit-encodings.c:170
-#: ../gedit/gedit-encodings.c:268
+#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:275
 msgid "Baltic"
 msgstr "Pobaltská"
 
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:219
-#: ../gedit/gedit-encodings.c:232 ../gedit/gedit-encodings.c:236
-#: ../gedit/gedit-encodings.c:238 ../gedit/gedit-encodings.c:256
+#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:226
+#: ../gedit/gedit-encodings.c:239 ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:263
 msgid "Cyrillic"
 msgstr "Azbuka"
 
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:225
-#: ../gedit/gedit-encodings.c:266
+#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:232
+#: ../gedit/gedit-encodings.c:273
 msgid "Arabic"
 msgstr "Arabská"
 
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:260
+#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:267
 #: ../plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "Grécka"
 
-#: ../gedit/gedit-encodings.c:162
+#: ../gedit/gedit-encodings.c:164
 msgid "Hebrew Visual"
 msgstr "Hebrejská"
 
-#: ../gedit/gedit-encodings.c:164 ../gedit/gedit-encodings.c:223
-#: ../gedit/gedit-encodings.c:264 ../plugins/spell/gedit-spell-checker.c:109
+#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:230
+#: ../gedit/gedit-encodings.c:271 ../plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "Hebrejská"
 
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:221
-#: ../gedit/gedit-encodings.c:262 ../plugins/spell/gedit-spell-checker.c:149
+#: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
+#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
 msgid "Turkish"
 msgstr "Turecká"
 
-#: ../gedit/gedit-encodings.c:168
+#: ../gedit/gedit-encodings.c:170
 msgid "Nordic"
 msgstr "Severská"
 
-#: ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:174
 msgid "Celtic"
 msgstr "Keltská"
 
-#: ../gedit/gedit-encodings.c:176 ../plugins/spell/gedit-spell-checker.c:137
+#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
 msgid "Romanian"
 msgstr "Rumunská"
 
-#: ../gedit/gedit-encodings.c:188
+#: ../gedit/gedit-encodings.c:190
 msgid "Armenian"
 msgstr "Arménska"
 
-#: ../gedit/gedit-encodings.c:190 ../gedit/gedit-encodings.c:192
-#: ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:192 ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:208
 msgid "Chinese Traditional"
 msgstr "Tradičná čínska"
 
-#: ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:196
 msgid "Cyrillic/Russian"
 msgstr "Azbuka/Ruská"
 
-#: ../gedit/gedit-encodings.c:197 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:203 ../gedit/gedit-encodings.c:235
+#: ../gedit/gedit-encodings.c:250
 msgid "Japanese"
 msgstr "Japonská"
 
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:230
-#: ../gedit/gedit-encodings.c:234 ../gedit/gedit-encodings.c:249
+#: ../gedit/gedit-encodings.c:206 ../gedit/gedit-encodings.c:237
+#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:256
 msgid "Korean"
 msgstr "Kórejská"
 
-#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:206
-#: ../gedit/gedit-encodings.c:208 ../gedit/gedit-encodings.c:212
+#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:213
+#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:219
 msgid "Chinese Simplified"
 msgstr "Zjednodušená čínska"
 
-#: ../gedit/gedit-encodings.c:210
+#: ../gedit/gedit-encodings.c:217
 msgid "Georgian"
 msgstr "Gruzínska"
 
-#: ../gedit/gedit-encodings.c:240
+#: ../gedit/gedit-encodings.c:247
 msgid "Cyrillic/Ukrainian"
 msgstr "Azbuka/Ukrajinská"
 
-#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:251
-#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
 msgid "Vietnamese"
 msgstr "Vietnamská"
 
-#: ../gedit/gedit-encodings.c:247
+#: ../gedit/gedit-encodings.c:254
 msgid "Thai"
 msgstr "Thajská"
 
-#: ../gedit/gedit-encodings.c:434
+#: ../gedit/gedit-encodings.c:441
 msgid "Unknown"
 msgstr "Neznáme"
 
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:303
+#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Súbor \"%s\" už existuje.\n"
 
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:307
+#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Chcete ho nahradiť?"
 
@@ -1388,27 +1386,27 @@ msgstr "Súbor \"%s\" je prístupný iba na čítanie.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Chcete sa pokúsiť ho nahradiť?"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:531
+#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
 msgid "All Files"
 msgstr "Všetky súbory"
 
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:539
+#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
 msgid "All Text Files"
 msgstr "Všetky textové súbory"
 
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:550
+#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
 msgid "_Character Coding:"
 msgstr "Kódovanie _znakov:"
 
-#: ../gedit/gedit-file-selector-util.c:509
+#: ../gedit/gedit-file-selector-util.c:498
 msgid "Select a file to open"
 msgstr "Vyberte súbor"
 
-#: ../gedit/gedit-file-selector-util.c:534
+#: ../gedit/gedit-file-selector-util.c:523
 msgid "Select files to open"
 msgstr "Vyberte súbory"
 
-#: ../gedit/gedit-file-selector-util.c:566
+#: ../gedit/gedit-file-selector-util.c:559
 msgid "Select a filename to save"
 msgstr "Vyberte meno súboru"
 
@@ -1416,32 +1414,32 @@ msgstr "Vyberte meno súboru"
 msgid "Open File..."
 msgstr "Otvoriť súbor..."
 
-#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:392
+#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Ukladám dokument \"%s\"..."
 
-#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:410
+#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Dokument \"%s\" nebol uložený."
 
-#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:423
+#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Dokument \"%s\" bol uložený."
 
-#: ../gedit/gedit-file.c:374
+#: ../gedit/gedit-file.c:372
 msgid "Save as..."
 msgstr "Uložiť ako..."
 
-#: ../gedit/gedit-file.c:528
+#: ../gedit/gedit-file.c:526
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 "Vrátiť späť obsah súboru a zrušiť tak neuložené zmeny v dokumente \"%s\"?"
 
-#: ../gedit/gedit-file.c:537
+#: ../gedit/gedit-file.c:535
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1455,12 +1453,12 @@ msgstr[1] ""
 msgstr[2] ""
 "Zmeny v tomto dokumente za posledné %ld sekundy budú definitívne stratené."
 
-#: ../gedit/gedit-file.c:546
+#: ../gedit/gedit-file.c:544
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Zmeny v tomto dokumente za poslednú minútu budú definitívne stratené."
 
-#: ../gedit/gedit-file.c:552
+#: ../gedit/gedit-file.c:550
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1478,7 +1476,7 @@ msgstr[2] ""
 "Zmeny v tomto dokumente za poslednú minútu a %ld sekundy budú definitívne "
 "stratené."
 
-#: ../gedit/gedit-file.c:562
+#: ../gedit/gedit-file.c:560
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1492,7 +1490,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Zmeny v tomto dokumente za posledné %ld minúty budú definitívne stratené."
 
-#: ../gedit/gedit-file.c:577 ../gedit/gedit-file.c:598
+#: ../gedit/gedit-file.c:575 ../gedit/gedit-file.c:596
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1504,7 +1502,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Zmeny v tomto dokumente za posledné %d hodiny budú definitívne stratené."
 
-#: ../gedit/gedit-file.c:583
+#: ../gedit/gedit-file.c:581
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1522,53 +1520,53 @@ msgstr[2] ""
 "Zmeny v tomto dokumente za poslednú hodinu a %d minúty budú definitívne "
 "stratené."
 
-#: ../gedit/gedit-file.c:619 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-file.c:617 ../gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Vrátiť"
 
-#: ../gedit/gedit-file.c:664
+#: ../gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Nastala chyba pri vracaní dokumentu \"%s\"."
 
-#: ../gedit/gedit-file.c:672
+#: ../gedit/gedit-file.c:670
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Dokument \"%s\" nebol vrátený."
 
-#: ../gedit/gedit-file.c:676
+#: ../gedit/gedit-file.c:674
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Dokument \"%s\" bol vrátený."
 
-#: ../gedit/gedit-file.c:704
+#: ../gedit/gedit-file.c:702
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Vraciam obsah dokumentu \"%s\"..."
 
-#: ../gedit/gedit-file.c:827
+#: ../gedit/gedit-file.c:825
 msgid "Could not read data from stdin."
 msgstr "Nastala chyba pri čítaní zo štandardného vstupu."
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Reverting file:"
 msgstr "Vraciam obsah súboru:"
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Loading file:"
 msgstr "Načítavam súbor:"
 
-#: ../gedit/gedit-file.c:1094 ../gedit/gedit-file.c:1335
+#: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Chyba pri načítavaní súboru \"%s\""
 
-#: ../gedit/gedit-file.c:1115
+#: ../gedit/gedit-file.c:1113
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Načítaný súbor \"%s\""
 
-#: ../gedit/gedit-file.c:1227
+#: ../gedit/gedit-file.c:1225
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
@@ -1576,17 +1574,17 @@ msgstr[0] "Načítaných %d súborov"
 msgstr[1] "Načítaný %d súbor"
 msgstr[2] "Načítané %d súbory"
 
-#: ../gedit/gedit-file.c:1288
+#: ../gedit/gedit-file.c:1286
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Vytvorený súbor \"%s\""
 
-#: ../gedit/gedit-file.c:1306
+#: ../gedit/gedit-file.c:1304
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Načítavam súbor \"%s\"..."
 
-#: ../gedit/gedit-file.c:1471
+#: ../gedit/gedit-file.c:1469
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1843,54 +1841,54 @@ msgstr ""
 "skúste to znovu."
 
 #. Read only
-#: ../gedit/gedit-mdi-child.c:248
+#: ../gedit/gedit-mdi-child.c:249
 msgid "RO"
 msgstr "RO"
 
 #. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:649 ../gedit/gedit-ui.xml.h:85
+#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
 msgstr "_Presun do nového okna"
 
-#: ../gedit/gedit-mdi-child.c:736
+#: ../gedit/gedit-mdi-child.c:803
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-mdi-child.c:746
+#: ../gedit/gedit-mdi-child.c:813
 msgid "Name:"
 msgstr "Meno:"
 
-#: ../gedit/gedit-mdi-child.c:747
+#: ../gedit/gedit-mdi-child.c:814
 msgid "MIME Type:"
 msgstr "Typ MIME:"
 
-#: ../gedit/gedit-mdi-child.c:748
+#: ../gedit/gedit-mdi-child.c:815
 msgid "Encoding:"
 msgstr "Kódovanie:"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:253 ../gedit/gedit-mdi.c:453
+#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
 #, c-format
 msgid "Open '%s'"
 msgstr "Otvoriť '%s'"
 
-#: ../gedit/gedit-mdi.c:528
+#: ../gedit/gedit-mdi.c:538
 msgid "Open a recently used file"
 msgstr "Otvoriť nedávny súbor"
 
-#: ../gedit/gedit-mdi.c:1467 ../gedit/gedit-mdi.c:1469
+#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
 msgid "Read Only"
 msgstr "Len pre čítanie"
 
-#: ../gedit/gedit-mdi.c:2094
+#: ../gedit/gedit-mdi.c:2103
 msgid "Normal"
 msgstr "Normálny"
 
-#: ../gedit/gedit-mdi.c:2095
+#: ../gedit/gedit-mdi.c:2104
 msgid "Use Normal highlight mode"
 msgstr "Použiť normálny režim"
 
-#: ../gedit/gedit-mdi.c:2171
+#: ../gedit/gedit-mdi.c:2180
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Použiť režim %s"
@@ -2340,7 +2338,7 @@ msgstr "Vrátiť _späť"
 msgid "_View"
 msgstr "_Zobraziť"
 
-#: ../gedit/gedit-utils.c:695
+#: ../gedit/gedit-utils.c:686
 msgid " (invalid Unicode)"
 msgstr " (neplatné Unicode)"
 
@@ -2352,16 +2350,16 @@ msgstr " (neplatné Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:890
+#: ../gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  R %d, S %d"
 
-#: ../gedit/gedit-view.c:926
+#: ../gedit/gedit-view.c:915
 msgid "  OVR"
 msgstr "  CEZ"
 
-#: ../gedit/gedit-view.c:928
+#: ../gedit/gedit-view.c:917
 msgid "  INS"
 msgstr "  VKL"
 
@@ -2463,13 +2461,12 @@ msgid "_Update"
 msgstr "_Obnoviť"
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
 msgstr ""
-"Modul Štatistika dokumentu alalyzuje aktuálny dokument a určí počet slov, "
-"riadkov, znakov a tlačiteľných znakov a výsledok zobrazí."
+"Analyzuje aktuálny dokument a oznámi počet slov, "
+"riadkov, znakov a nemedzerových znakov v ňom."
 
 #: ../plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -2551,21 +2548,21 @@ msgstr "_Uložiť kópiu..."
 msgid "Save a copy of the current document"
 msgstr "Uložiť kópiu aktuálneho dokumentu"
 
-#: ../plugins/savecopy/savecopy.c:262
+#: ../plugins/savecopy/savecopy.c:315
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "Nepodarilo sa uložiť kópiu súboru do \"%s\""
 
-#: ../plugins/savecopy/savecopy.c:361
+#: ../plugins/savecopy/savecopy.c:414
 msgid "You are trying to overwrite the original file"
 msgstr "Snažíte sa prepísať originálny súbor"
 
-#: ../plugins/savecopy/savecopy.c:470
+#: ../plugins/savecopy/savecopy.c:523
 msgid "Save Copy..."
 msgstr "Uložiť kópiu..."
 
 #. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:502 ../plugins/savecopy/savecopy.c:512
+#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (kópia)"
@@ -2749,11 +2746,11 @@ msgstr "Kontrola pravopisu dokončená"
 
 #: ../plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
-msgstr ""
+msgstr "Juhoafrický"
 
 #: ../plugins/spell/gedit-spell-checker.c:80
 msgid "Amharic"
-msgstr ""
+msgstr "Amharský"
 
 #: ../plugins/spell/gedit-spell-checker.c:81
 msgid "Azerbaijani"
@@ -2857,15 +2854,15 @@ msgstr "Škótska gaelština"
 
 #: ../plugins/spell/gedit-spell-checker.c:107
 msgid "Gallegan"
-msgstr ""
+msgstr "Haličský"
 
 #: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Manx Gaelic"
-msgstr ""
+msgstr "Manská gaelština"
 
 #: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Hindi"
-msgstr ""
+msgstr "Hindsky"
 
 #: ../plugins/spell/gedit-spell-checker.c:111
 msgid "Croatian"
@@ -2873,7 +2870,7 @@ msgstr "Chorvátsky"
 
 #: ../plugins/spell/gedit-spell-checker.c:112
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "Horná sorbština"
 
 #: ../plugins/spell/gedit-spell-checker.c:113
 msgid "Hungarian"
@@ -2881,7 +2878,7 @@ msgstr "Maďarský"
 
 #: ../plugins/spell/gedit-spell-checker.c:114
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "Medzijazyk (IALA)"
 
 #: ../plugins/spell/gedit-spell-checker.c:115
 msgid "Indonesian"
@@ -2928,114 +2925,118 @@ msgid "Mongolian"
 msgstr "Mongolský"
 
 #: ../plugins/spell/gedit-spell-checker.c:126
+msgid "Marathi"
+msgstr "Marathi"
+
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Malay"
 msgstr "Malajský"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Maltese"
 msgstr "Maltézsky"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Norwegian Bokmal"
 msgstr "Nórsky Bokmal"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Dutch"
 msgstr "Holandský"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Nynorsk"
 msgstr "Nórsky Nynorsk"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Norwegian"
 msgstr "Nórsky"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Nyanja"
 msgstr "Nyanja"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Polish"
 msgstr "Poľský"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Portugal)"
 msgstr "Portugalský (Portugalsko)"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Portuguese (Brazilian)"
 msgstr "Portugalský (Brazísky)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Quechua"
 msgstr "Quechua"
 
-#: ../plugins/spell/gedit-spell-checker.c:138
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Russian"
 msgstr "Ruský"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Kinyarwanda"
 msgstr "Kinyarwanda"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Sardinian"
 msgstr "Sardinský"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Slovak"
 msgstr "Slovenský"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Slovenian"
 msgstr "Slovinský"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Swedish"
 msgstr "Švédsky"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Swahili"
 msgstr "Svahilský"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Tamil"
 msgstr "Tamilský"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Tetum"
 msgstr "Tetum"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tswana"
 msgstr "Tswana"
 
-#: ../plugins/spell/gedit-spell-checker.c:150
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Ukrainian"
 msgstr "Ukrajinský"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:152
 msgid "Uzbek"
 msgstr "Uzbecký"
 
-#: ../plugins/spell/gedit-spell-checker.c:153
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Walloon"
 msgstr "Valónsky"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:155
 msgid "Yiddish"
 msgstr "Jidiš"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Zulu"
 msgstr "Zulu"
 
-#: ../plugins/spell/gedit-spell-checker.c:826
+#: ../plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "Štandardný"
 
@@ -3097,7 +3098,7 @@ msgid "Language:"
 msgstr "Jazyk:"
 
 #: ../plugins/spell/spell-checker.glade2.h:12
-msgid "Mispelled word:"
+msgid "Misspelled word:"
 msgstr "Nesprávne slovo:"
 
 #: ../plugins/spell/spell-checker.glade2.h:13
@@ -3170,7 +3171,7 @@ msgstr "Nad"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
-msgstr ""
+msgstr "Kľúčový znak prístupnosti"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
@@ -3213,9 +3214,8 @@ msgid "Author info"
 msgstr "Informácie o autorovi"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "Tlačiť _hlavičku stránky"
+msgstr "Hlavičky podľa osi"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
@@ -3227,7 +3227,7 @@ msgstr "Farba pozadia"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:18
 msgid "Background texture tile"
-msgstr ""
+msgstr "Súbor textúry pozadia"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
@@ -3255,11 +3255,11 @@ msgstr "Farba okraja"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "Box"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Cell rowspan"
-msgstr ""
+msgstr "Rozpätie riadku bunky"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Center"
@@ -3270,8 +3270,8 @@ msgid "Character encoding of linked resource"
 msgstr "Kódovanie znakov zviazaného zdroja"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
-msgid "Checked(state)"
-msgstr "Označený(stav)"
+msgid "Checked (state)"
+msgstr "Označený (stav)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Citation"
@@ -3291,11 +3291,11 @@ msgstr "Zoznam tried"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
-msgstr ""
+msgstr "Riadenie toku čistého textu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr ""
+msgstr "Typ obsahu kódu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Color of selected links"
@@ -3303,7 +3303,7 @@ msgstr "Farba zvoleného odkazu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
-msgstr ""
+msgstr "Rozpätie stĺpca"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:39
 msgid "Columns"
@@ -3346,9 +3346,8 @@ msgid "Declare flag"
 msgstr "Deklarovať príznak"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:49
-#, fuzzy
 msgid "Defer attribute"
-msgstr "vlastnosť"
+msgstr "Odložená vlastnosť"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
@@ -3441,7 +3440,7 @@ msgstr "Formulár"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
-msgstr ""
+msgstr "Obsluha akcie formulára"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
@@ -3473,7 +3472,7 @@ msgstr "Rámec"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
-msgstr ""
+msgstr "Časti vykreslenia rámca"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
@@ -3501,7 +3500,7 @@ msgstr "Riadky množiny rámcov"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
-msgstr ""
+msgstr "Rámcová medzera"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
@@ -3512,9 +3511,8 @@ msgid "Generic metainformation"
 msgstr "Všeobecné metainformácie"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:90
-#, fuzzy
 msgid "Generic span"
-msgstr "Všeobecné"
+msgstr "Všeobecné rozpätie"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
@@ -3586,7 +3584,7 @@ msgstr "Vodorovná medzera"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
-msgstr ""
+msgstr "Obojsmerné nahradenie I18N"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
@@ -3694,7 +3692,7 @@ msgstr "Šírka okraja v bodoch"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
-msgstr ""
+msgstr "Markíza"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Maximum length of text field"
@@ -3702,7 +3700,7 @@ msgstr "Maximálna dĺžka textového poľa"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
-msgstr ""
+msgstr "Odkaz nezávislý od média"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
@@ -3778,7 +3776,7 @@ msgstr "Súbor appletu objektu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
-msgstr ""
+msgstr "Odkaz údajov objektu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
@@ -3894,7 +3892,7 @@ msgstr "Predformátovaný text"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
-msgstr ""
+msgstr "Slovník metainformácií profilu"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
@@ -3934,7 +3932,7 @@ msgstr "Riadky"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
-msgstr ""
+msgstr "Vedenie medzi riadkami a stĺpcami"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
@@ -3942,7 +3940,7 @@ msgstr "Ukážkový výstup z programu, skripty"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Scope covered by header cells"
-msgstr ""
+msgstr "Rozsah pokrytý bunkami hlavičky"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Script language name"
@@ -3970,7 +3968,7 @@ msgstr "Obrazová mapa na serveri"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "Shape"
-msgstr ""
+msgstr "Tvar"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
@@ -4018,7 +4016,7 @@ msgstr "Medzera vnútri buniek"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "Span"
-msgstr ""
+msgstr "Rozpätie"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
@@ -4026,7 +4024,7 @@ msgstr "Druhá odmocnina"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
-msgstr ""
+msgstr "Správa pozastavenia načítavania"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Starting sequence number"
@@ -4122,7 +4120,7 @@ msgstr "Cieľ - vrch"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Teletype or monospace text style"
-msgstr ""
+msgstr "Štýl textu ďalekopisu alebo s rovnakým odstupom"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
@@ -4189,20 +4187,20 @@ msgid "Width"
 msgstr "Šírka"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
-msgid "Bibliography cite"
-msgstr "Citácia literatúry"
+msgid "Bibliography (cite)"
+msgstr "Literatúra (citácia)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:2
-msgid "Bibliography item"
-msgstr "Položka literatúry"
+msgid "Bibliography (item)"
+msgstr "Literatúra (položka)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:3
-msgid "Bibliography shortcite"
-msgstr "Krátka citácia literatúry"
+msgid "Bibliography (shortcite)"
+msgstr "Literatúra (krátka citácia)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:4
-msgid "Bibliography thebibliography"
-msgstr "Literatúra thebibliography"
+msgid "Bibliography (thebibliography)"
+msgstr "Literatúra (thebibliography)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
@@ -4338,19 +4336,19 @@ msgstr "Popis zoznamu"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:39
 msgid "List enumerate"
-msgstr ""
+msgstr "Vymenovať zoznam"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
-msgstr ""
+msgstr "Rozviesť zoznam"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:41
 msgid "Maths (display)"
-msgstr ""
+msgstr "Matematika (zobraziť)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:42
 msgid "Maths (inline)"
-msgstr ""
+msgstr "MAtematika (včleniť)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:43
 msgid "Operator fraction"
@@ -4358,19 +4356,19 @@ msgstr "Operátor zlomku"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
-msgstr ""
+msgstr "Operátor integrálu (zobraziť)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:45
 msgid "Operator integral (inline)"
-msgstr ""
+msgstr "Operátor integrálu (včleniť)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:46
 msgid "Operator sum (display)"
-msgstr ""
+msgstr "Operátor sumy (zobraziť)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:47
 msgid "Operator sum (inline)"
-msgstr ""
+msgstr "Operátor sumy (včleniť)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:48
 msgid "Reference label"
@@ -4438,19 +4436,19 @@ msgstr "Symbol nekonečno"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:64
 msgid "Symbol mathspace ,"
-msgstr ""
+msgstr "Matematický symbol ,"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:65
 msgid "Symbol mathspace ."
-msgstr ""
+msgstr "Matematický symbol ."
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:66
 msgid "Symbol mathspace _"
-msgstr ""
+msgstr "Matematický symbol _"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:67
 msgid "Symbol mathspace __"
-msgstr ""
+msgstr "Matematický symbol __"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:68
 msgid "Symbol simeq"
@@ -4474,7 +4472,7 @@ msgstr "Typ písma šikmý"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:73
 msgid "Typeface type"
-msgstr ""
+msgstr "Typ typu písma"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:74
 msgid "Unbreakable text"
@@ -4577,17 +4575,16 @@ msgid "Show the tag list window"
 msgstr "Zobraziť okno zoznamu značiek"
 
 #: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
 msgstr ""
-"Zoznam tagov poskytuje metódu pre jednoduché vkladanie často používaných "
-"textov do dokumentu bez zbytočného písania."
+"Poskytuje metódu pre jednoduché vkladanie často používaných "
+"značiek/textov do dokumentu bez zbytočného písania."
 
 #: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
-msgstr "Zoznam tagov"
+msgstr "Zoznam značiek"
 
 #: ../plugins/time/time.c:49
 msgid "In_sert Date and Time..."
@@ -4597,11 +4594,11 @@ msgstr "Vl_ožiť dátum a čas..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Vloží aktuálny dátum a čas na aktuálnu pozíciu kurzoru."
 
-#: ../plugins/time/time.c:455
+#: ../plugins/time/time.c:457
 msgid "Available formats"
 msgstr "Dostupné formáty"
 
-#: ../plugins/time/time.c:563
+#: ../plugins/time/time.c:565
 msgid "Configure insert date/time plugin..."
 msgstr "Nastaviť modul pre vkladanie dátumu/času..."
 
@@ -4644,19 +4641,3 @@ msgstr "_Pýtať sa na formát"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Použiť _vlastný formát"
-
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-#~ "changes. </span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Máte niekoľko dokumentov, ktoré "
-#~ "obsahujú neuložené zmeny.</span>"
-
-#~ msgid "If you don't save your documents, all your changes will be lost."
-#~ msgstr "Ak dokumenty neuložíte, všetky zmeny budú stratené."
-
-#~ msgid "Save _None"
-#~ msgstr "_Nič neuložiť"
-
-#~ msgid "_Save Selected"
-#~ msgstr "Uložiť _označené"
