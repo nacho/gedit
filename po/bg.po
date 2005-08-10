@@ -3,7 +3,7 @@
 # Copyright (C) 2004 Free Software Foundation
 # This file is distributed under the same license as the gedit package.
 # Evgeni Boevski <linkej@yahoo.com>, 2003.
-# Rostislav Raykov <zbrox@i-space.org>, 2004, 2005,
+# Rostislav "zbrox" Raykov <zbrox@i-space.org>, 2004, 2005,
 # Vladimir Petkov <vpetkov@i-space.org> 2004. 2005
 # Rostislav Raykov <zbrox@i-space.org>, 2005.
 # 
@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.10 branch gnome 2.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-01 21:25+0300\n"
-"PO-Revision-Date: 2005-08-01 21:23+0300\n"
-"Last-Translator: Rostislav Raykov <zbrox@i-space.org>\n"
+"POT-Creation-Date: 2005-08-10 20:15+0300\n"
+"PO-Revision-Date: 2005-08-10 20:15+0300\n"
+"Last-Translator: Rostislav \"zbrox\" Raykov <zbrox@i-space.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +60,7 @@ msgid ""
 "effect if the \"Use Default Font\" option is turned off."
 msgstr ""
 "Шрифт избран от потребителя, който ще бъде използван за текстовата област. "
-"Има ефект само при изключена опция \"Използване на шрифта по подразбиране\"."
+"Има ефект само при изключена опция „Използване на шрифта по подразбиране“."
 
 #: ../data/gedit.schemas.in.h:2
 msgid "Active plugins"
@@ -92,7 +92,7 @@ msgid ""
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 "Цвета на фона за избран текст в текстовата област. Има ефект само при "
-"изключена опция \"Използване на стандартните цветове\"."
+"изключена опция „Използване на стандартните цветове“."
 
 #: ../data/gedit.schemas.in.h:9
 msgid ""
@@ -100,7 +100,7 @@ msgid ""
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 "Цвета на фона за неизбран текст в текстовата област. Има ефект само при "
-"изключена опция \"Използване на стандартните цветове\"."
+"изключена опция „Използване на стандартните цветове“."
 
 #: ../data/gedit.schemas.in.h:10
 msgid "Backup Copy Extension"
@@ -140,7 +140,7 @@ msgid ""
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
 "Файлово разширение, което да се използва при създаването на резервни копия. "
-"Има ефект само при включена опция \"Създаване на резервни копия\"."
+"Има ефект само при включена опция „Създаване на резервни копия“."
 
 #: ../data/gedit.schemas.in.h:19
 msgid ""
@@ -148,7 +148,7 @@ msgid ""
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 "Цвета на избран текст в текстовата област. Има ефект само при изключена "
-"опция \"Използване само на стандартните цветове\"."
+"опция „Използване само на стандартните цветове“."
 
 #: ../data/gedit.schemas.in.h:20
 msgid ""
@@ -156,7 +156,7 @@ msgid ""
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr ""
 "Цвета на неизбран текст в текстовата област. Има ефект само при изключена "
-"опция \"Използване само на стандартните цветове\"."
+"опция „Използване само на стандартните цветове“."
 
 #: ../data/gedit.schemas.in.h:21
 msgid "Header Font for Printing"
@@ -196,9 +196,9 @@ msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
-"Списък на активните модули. Съдържа \"местоположението\" на активните "
-"модули. Погледнете файлът .gedit-plugin, за да намерите \"местоположението\" "
-"на даден модул."
+"Списък на активните модули. Съдържа „местоположението“ на активните модули. "
+"Погледнете файлът .gedit-plugin, за да намерите „местоположението“ на даден "
+"модул."
 
 #: ../data/gedit.schemas.in.h:29
 msgid ""
@@ -209,107 +209,122 @@ msgstr ""
 "отваряне/запазване на файл. Използват се само познати кодови таблици."
 
 #: ../data/gedit.schemas.in.h:30
+msgid "Max Number of Undo Actions"
+msgstr "Максимален брой връщания назад"
+
+#: ../data/gedit.schemas.in.h:31
 msgid "Maximum Recent Files"
 msgstr "Максимален брой скоро използвани файлове"
 
-#: ../data/gedit.schemas.in.h:31
-msgid "Maximum number of actions that gedit will be able to undo or redo."
+#: ../data/gedit.schemas.in.h:32
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions."
 msgstr ""
 "Максимален брой на действията, които gedit ще може да отмени или направи "
-"отново."
+"отново. Използвайте „-1“ за безброй действия."
+
+#: ../data/gedit.schemas.in.h:33
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions. Deprecated since 2.12.0"
+msgstr ""
+"Максимален брой на действията, които gedit ще може да отмени или направи "
+"отново. Използвайте „-1“ за неограничен брой действия. Ненужно от 2.21.0 "
+"нататък"
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:34
+#: ../data/gedit.schemas.in.h:36
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:37
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 9"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and replaced by
+#. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:43
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:44
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
 "Брой минути след които gedit ще запише автоматично, променените файлове. Има "
-"ефект само при включена опция \"Автоматично запазване\"."
+"ефект само при включена опция „Автоматично запазване“."
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:45
 msgid "Print Header"
 msgstr "Горен колонтитул на страницата"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:46
 msgid "Print Line Numbers"
 msgstr "Печатане на номера на редове"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:47
 msgid "Print Syntax Highlighting"
 msgstr "Печатане на синтактично оцветен текст"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:48
 msgid "Printing Line Wrapping Mode"
 msgstr "Режим с пренасяне при печат"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:49
 msgid "Right Margin Position"
 msgstr "Позиция на дясната граница"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:52
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:53
+#: ../data/gedit.schemas.in.h:55
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:62
+#: ../data/gedit.schemas.in.h:64
 msgid "Selected Text Color"
 msgstr "Цвят на избрания текст"
 
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:65
 msgid "Selection Color"
 msgstr "Цвят на избраното"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:66
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
 "Подреден списък с кодови таблици, използвани от gedit за автоматично "
-"откриване на кодирането на файл. \"ТЕКУЩО\" е текущото кодиране на локала. "
+"откриване на кодирането на файл. „ТЕКУЩО“ е текущото кодиране на локала. "
 "Използват се само познати кодови таблици."
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -318,12 +333,12 @@ msgid ""
 "here."
 msgstr ""
 "Указване как да се пренасят дългите редове при печат. Използвайте "
-"\"GTK_WRAP_NONE\" за режим без пренос, \"GTK_WRAP_WORD\" за пренос на "
-"границите на думи, и \"GTK_WRAP_CHAR\" за пренос при всеки знак. Имайте "
-"предвид, че стойностите са зависими от регистъра на буквите, така че се "
-"уверете, че са изписани точно, както ги виждате тук."
+"„GTK_WRAP_NONE“ за режим без пренос, „GTK_WRAP_WORD“ за пренос на границите "
+"на думи, и „GTK_WRAP_CHAR“ за пренос при всеки знак. Имайте предвид, че "
+"стойностите са зависими от регистъра на буквите, така че се уверете, че са "
+"изписани точно, както ги виждате тук."
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -332,18 +347,18 @@ msgid ""
 "here."
 msgstr ""
 "Указване как да се пренасят дългите редове в областта за редкатиране. "
-"Използвайте \"GTK_WRAP_NONE\" за режим без пренос, \"GTK_WRAP_WORD\" за "
-"пренос на границите на думи, и \"GTK_WRAP_CHAR\" за пренос при всеки знак. "
-"Имайте предвид, че стойностите са зависими от регистъра на буквите, така че "
-"се уверете, че са изписани точно, както ги виждате тук."
+"Използвайте „GTK_WRAP_NONE“ за режим без пренос, „GTK_WRAP_WORD“ за пренос "
+"на границите на думи, и „GTK_WRAP_CHAR“ за пренос при всеки знак. Имайте "
+"предвид, че стойностите са зависими от регистъра на буквите, така че се "
+"уверете, че са изписани точно, както ги виждате тук."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Указване на шрифта, който да се използва за тялото на документа при печат."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -351,67 +366,67 @@ msgstr ""
 "Указване на шрифта, който да се използва за тялото на документа при печат. "
 "Това е име на шрифт от gnome-print и е заменен от print_font_body_pango."
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
 "Указване на шрифта, който да се използва за номерата на редове при печат. "
-"Има ефект само, когато опцията \"Печатане номера на редове\" е различна от "
+"Има ефект само, когато опцията „Печатане номера на редове“ е различна от "
 "нула."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
 "Указване на шрифта, който да се използва за номерата на редове при печат. "
-"Има ефект само, когато опцията \"Печатане номера на редове\" е различна от "
+"Има ефект само, когато опцията „Печатане номера на редове“ е различна от "
 "нула. Това е име на фонт от gnome-print и е заменен от "
 "print_font_numbers_pango."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
 "Указване на шрифта, който да се използва за главницата при печат.Има ефект "
-"само при включена опция \"Печатане на горен колонтитул\"."
+"само при включена опция „Печатане на горен колонтитул“."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "Указване на шрифта, който да се използва за главницата при печат. Има ефект "
-"само при включена опция \"Печатане на горен колонтитул\". Това е име на фонт "
+"само при включена опция „Печатане на горен колонтитул“. Това е име на фонт "
 "от gnome-print и е заменен от print_font_header_pango."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 "Указване на максималния брой последни файлове, който ще бъде показани в "
-"подменюто \"Последни файлове\"."
+"подменюто „Последни файлове“."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Указване броя интервали, който да се изобразят вместо знаците Tab."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid "Specifies the position of the right margin."
 msgstr "Определяне на позицията на дясната граница."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid "Status Bar is Visible"
 msgstr "Лентата на състоянието е видима"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -421,108 +436,106 @@ msgid ""
 "mentioned here."
 msgstr ""
 "Вид на бутоните от лентата с инструменти. Възможни стойности са "
-"\"GEDIT_TOOLBAR_SYSTEM\" за използване на стила по подразбиране на "
-"системата, \"GEDIT_TOOLBAR_ICONS\" за икони без текст, "
-"\"GEDIT_TOOLBAR_ICONS_AND_TEXT\" за икони с текст и "
-"\"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" за икони с приоритетен текст отстрани. "
-"Имайте предвид, че стойностите са зависими от регистъра на буквите, така че "
-"се уверете, че са изписани точно, както ги виждате тук."
+"„GEDIT_TOOLBAR_SYSTEM“ за използване на стила по подразбиране на системата, "
+"„GEDIT_TOOLBAR_ICONS“ за икони без текст, „GEDIT_TOOLBAR_ICONS_AND_TEXT“ за "
+"икони с текст и „GEDIT_TOOLBAR_ICONS_BOTH_HORIZ“ за икони с приоритетен "
+"текст отстрани. Имайте предвид, че стойностите са зависими от регистъра на "
+"буквите, така че се уверете, че са изписани точно, както ги виждате тук."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid "Tab Size"
 msgstr "Размер на таба"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid "Text Color"
 msgstr "Цвят на текста"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid "Toolbar Buttons Style"
 msgstr "Вид на бутоните от лентата с инструменти"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid "Toolbar is Visible"
 msgstr "Лентата с инструменти е видима"
 
-#: ../data/gedit.schemas.in.h:82
-msgid "Undo Actions Limit"
-msgstr "Брой команди отмени"
+#: ../data/gedit.schemas.in.h:84
+msgid "Undo Actions Limit (DEPRECATED)"
+msgstr "Брой отмени на команди (НЕНУЖНО В НОВИТЕ ВЕРСИИ)"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Use Default Colors"
 msgstr "Използване на цветове по подразбиране"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid "Use Default Font"
 msgstr "Използване на шрифта по подразбиране"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
 "Дали gedit да записва модифицираните файлове след определен интервал време. "
-"Можете да укажете интервала в опцията \"Интервал за автоматичното запазване"
-"\"."
+"Можете да укажете интервала в опцията „Интервал за автоматичното запазване“."
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 "Дали gedit да създава резервни копия на файловете, които записва. Можете да "
-"укажете разширението за копията в опцията \"Разширение на резервните копия\"."
+"укажете разширението за копията в опцията „Разширение на резервните копия“."
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Дали gedit да изобразява номера на редове в областта за редактиране."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Дали gedit да изобразява дясната граница в областта за редактиране."
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Whether gedit should enable auto indentation."
 msgstr "Дали gedit трябва да разрешава автоматично разделяна на абзаци"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Дали gedit трябва да отбелязва с различен цвят синтаксиса."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Дали gedit трябва да отбелязва отваряне и затваряне на скоби"
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should highlight the current line."
 msgstr "Дали gedit да отбелязва текущия ред"
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Дали gedit да включва главница на документа при печат."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Дали gedit да вмъква интервали вместо табулации."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Дали gedit да печата синтактично оцветен текст или да пренебрегва цветовете."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Дали линията за статус в долната част на прозореца за редактиране да е "
 "видима."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Дали лентата с инструменти да е видима в прозорците за редактиране."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:100
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -531,10 +544,10 @@ msgid ""
 msgstr ""
 "Дали да се използват цветовете по подразбиране в областта за редактиране. "
 "Ако тази опция е изключена, то цветовете на областта за редактиране ще бъдат "
-"тези указани в опциите \"Фонов цвят\", \"Цвят на текст\", \"Цвят на избран "
-"текст\", и \"Цвят на маркировката за избор\"."
+"тези указани в опциите „Фонов цвят“, „Цвят на текст“, „Цвят на избран "
+"текст“, и „Цвят на маркировката за избор“."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:101
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -542,22 +555,22 @@ msgid ""
 msgstr ""
 "Дали да се използва системния шрифт по подразбиране за текста или шрифт "
 "специфичен за gedit. Ако тази опция е изключена, то ще бъде използван шрифта "
-"указан в опцията \"Шрифт на редактора\"."
+"указан в опцията „Шрифт на редактора“."
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2124
+#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
 #, c-format
 msgid "Activate %s"
 msgstr "Активиране на %s"
@@ -652,7 +665,7 @@ msgstr[1] ""
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr ""
-"Искате ли да запазите промените по документа \"%s\" преди да бъде затворен?"
+"Искате ли да запазите промените по документа „%s“ преди да бъде затворен?"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:645
 #, c-format
@@ -687,7 +700,7 @@ msgstr "_Отиване на ред"
 #: ../gedit/dialogs/gedit-dialog-replace.c:1140 ../gedit/gedit-commands.c:383
 #, c-format
 msgid "The text \"%s\" was not found."
-msgstr "Текстът \"%s\" не е намерен."
+msgstr "Текстът „%s“ не е намерен."
 
 #: ../gedit/dialogs/gedit-dialog-replace.c:269
 #: ../gedit/dialogs/replace.glade2.h:4 ../gedit/gedit-ui.xml.h:46
@@ -699,7 +712,7 @@ msgid "Replace _All"
 msgstr "Замяна на _всички"
 
 #: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:316
+#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
 msgid "_Replace"
 msgstr "_Замяна"
 
@@ -775,19 +788,19 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Избраният файл не е изпълним."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:730
+#: ../gedit/dialogs/gedit-preferences-dialog.c:649
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Натиснете бутона, за да изберете какъв шрифт използва редактора"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:732
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to configure text color"
 msgstr "Натиснете бутона, за да изберете цвят на текста"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:734
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure background color"
 msgstr "Натиснете бутона за избор на цвят за фон"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:736
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -795,13 +808,13 @@ msgstr ""
 "Натиснете бутона, за да изберете цвета, в който ще се оцветява маркирания "
 "текст"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:739
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Натиснете бутона за да изберете цвета на маркировката"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1189
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
 msgid "Elements"
 msgstr "Елементи"
 
@@ -854,191 +867,175 @@ msgid "<b>Text Wrapping</b>"
 msgstr "<b>Режим с пренасяне</b>"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:12
-msgid "<b>Undo</b>"
-msgstr "<b>Връщане</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Цветове</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "Удебелено"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "Създаване на _резервно копие на файловете преди запазване"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "D_isplay right margin"
-msgstr "Показване на дясна граница"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "Display right _margin"
+msgstr "Показване на _дясна граница"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences.glade2.h:16
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Без разделяне на думите на два реда"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor"
 msgstr "Редактор"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
+#: ../gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Editor _font: "
 msgstr "Шри_фт на редкатора: "
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences.glade2.h:19
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Разрешаване на режим с _пренасяне"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "Font & Colors"
 msgstr "Шрифт и цветове"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Hi_ghlight current line"
 msgstr "Отбелязване на текущия ред"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Highlight _mode:"
 msgstr "Режим на отбелязване:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
-msgid "Highlight matching bracket"
-msgstr "Осветяване на съответстващите скоби"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Highlight matching _bracket"
+msgstr "Осветяване на съответства_щите скоби"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "Вмъкване на _интервали вместо табулации"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Italic"
 msgstr "Наклонено"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Normal _text color:"
 msgstr "Нормален цвят на текста:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Pick a color"
 msgstr "Избор на цвят"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the background color"
 msgstr "Избор на цвят за фон"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the editor font"
 msgstr "Избор на шрифт за редактора"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Pick the normal text color"
 msgstr "Избор на цвят за нормаления текст"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Pick the selected text color"
 msgstr "Избор на цвят за маркирания текст"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Pick the selection color"
 msgstr "Избор на цвят за селекциите"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Plugins"
 msgstr "Модули"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Preferences"
 msgstr "Предпочитани настройки"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Se_lection color:"
 msgstr "Цвят на _селекциите:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "Selecte_d text color:"
 msgstr "Цвят на _маркираният текст:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Strikethrough"
 msgstr "Зачеркнато"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "Syntax Highlighting"
 msgstr "Отбелязване на синтаксиса"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "U_se default theme colors"
 msgstr "Използване на цветови теми по _подразбиране"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "Underline"
 msgstr "Подчертаване"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "View"
 msgstr "Изглед"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Autosave files every"
 msgstr "_Автоматично запазване на файловете на всеки"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Background color:"
 msgstr "Фонов цвят:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background:"
 msgstr "Фон:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Display line numbers"
 msgstr "Показване на номера на редовете"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Enable automatic indentation"
 msgstr "Включване на автоматичния отстъп"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences.glade2.h:47
 msgid "_Enable syntax highlighting"
 msgstr "Включване на отбелязването на синтаксиса"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Foreground:"
 msgstr "Текст:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
-msgid "_Limit to"
-msgstr "Ограничаване до"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Reset to Default "
 msgstr "Връщане на стандартни настройки "
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Right margin at column:"
 msgstr "Дясна граница за колонка:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Tab width:"
 msgstr "Ширина на табулацията:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:54
-msgid "_Unlimited undo"
-msgstr "Неограничено връщане назад"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:55
+#: ../gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_Use default theme font"
 msgstr "Използване на шрифта на темата по подразбиране"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:56
+#: ../gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_minutes"
 msgstr "_минути"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:57
-msgid "act_ions"
-msgstr "_действия"
 
 #: ../gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
@@ -1188,8 +1185,8 @@ msgstr "gedit е малък и лек текстов редактор за Gnome
 #: ../gedit/gedit-commands.c:560
 msgid "translator-credits"
 msgstr ""
-"Владимир \"Kaladan\" Петков <vpetkov@i-space.org>\n"
-"Ростислав \"zbrox\" Райков <zbrox@i-space.org>\n"
+"Владимир „Kaladan“ Петков <vpetkov@i-space.org>\n"
+"Ростислав „zbrox“ Райков <zbrox@i-space.org>\n"
 "Евгени Боевски <e_boevski@abv.bg>\n"
 "\n"
 "Проектът за превод на GNOME има нужда от подкрепа.\n"
@@ -1200,42 +1197,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:370
+#: ../gedit/gedit-document.c:380
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:370
+#: ../gedit/gedit-document.c:380
 msgid "Unsaved Document"
 msgstr "Незапазени документи"
 
-#: ../gedit/gedit-document.c:916 ../gedit/gedit-document.c:1468
+#: ../gedit/gedit-document.c:926 ../gedit/gedit-document.c:1478
 msgid "Invalid UTF-8 data"
 msgstr "Грешни UTF-8 данни"
 
-#: ../gedit/gedit-document.c:1718
+#: ../gedit/gedit-document.c:1728
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Неуспех при четене на информация от символична връзка за %s"
 
-#: ../gedit/gedit-document.c:1764
+#: ../gedit/gedit-document.c:1774
 msgid "The file has too many symbolic links."
 msgstr "Файлът има прекалено много символични връзки."
 
-#: ../gedit/gedit-document.c:1848
+#: ../gedit/gedit-document.c:1858
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit не може да използва %s: местоположения в режим запис."
 
-#: ../gedit/gedit-document.c:1855
+#: ../gedit/gedit-document.c:1865
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit не може да използва такива местоположения в режим запис."
 
-#: ../gedit/gedit-document.c:1868
+#: ../gedit/gedit-document.c:1878
 msgid "Invalid filename."
 msgstr "Невалидно име на файл."
 
-#: ../gedit/gedit-document.c:2019
+#: ../gedit/gedit-document.c:2029
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1243,7 +1240,7 @@ msgstr ""
 "На диска няма достатъчно място за запис на файла.\n"
 "Освободете място и опитайте пак."
 
-#: ../gedit/gedit-document.c:2024
+#: ../gedit/gedit-document.c:2034
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1252,7 +1249,7 @@ msgstr ""
 "Дискът, на който записвате има ограничение за размера на файловете. "
 "Пробвайте да запазите по-малък файл или използвайте диск без ограничения."
 
-#: ../gedit/gedit-document.c:2068
+#: ../gedit/gedit-document.c:2078
 msgid "Could not create a backup file."
 msgstr "Неуспех при създаването на резервно копие на файла."
 
@@ -1321,7 +1318,7 @@ msgid "Hebrew"
 msgstr "Иврит"
 
 #: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:149
+#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
 msgid "Turkish"
 msgstr "Турски"
 
@@ -1333,7 +1330,7 @@ msgstr "Скандинавски"
 msgid "Celtic"
 msgstr "Келтски"
 
-#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:137
+#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
 msgid "Romanian"
 msgstr "Румънски"
 
@@ -1375,7 +1372,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Кирилица/Украинска"
 
 #: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
-#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
 msgid "Vietnamese"
 msgstr "Виетнамски"
 
@@ -1387,33 +1384,33 @@ msgstr "Тайвански"
 msgid "Unknown"
 msgstr "Неизвестен"
 
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:303
+#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
-msgstr "Файл с името \"%s\" вече съществува.\n"
+msgstr "Файл с името „%s“ вече съществува.\n"
 
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:307
+#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Желаете ли да го замените с този, който записвате в момента?"
 
 #: ../gedit/gedit-file-selector-util.c:142
 #, c-format
 msgid "The file \"%s\" is read-only.\n"
-msgstr "Файлът \"%s\" е само за четене.\n"
+msgstr "Файлът „%s“ е само за четене.\n"
 
 #: ../gedit/gedit-file-selector-util.c:143
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Желаете ли да се опитате да го замените с този, който записвате сега?"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:531
+#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
 msgid "All Files"
 msgstr "Всички файлове"
 
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:539
+#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
 msgid "All Text Files"
 msgstr "Всички текстови файлове"
 
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:550
+#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
 msgid "_Character Coding:"
 msgstr "Кодиране на си_мволите:"
 
@@ -1436,17 +1433,17 @@ msgstr "Отваряне на файл..."
 #: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
 #, c-format
 msgid "Saving document \"%s\"..."
-msgstr "Запазва се документа \"%s\"..."
+msgstr "Запазва се документа „%s“..."
 
 #: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
 #, c-format
 msgid "The document \"%s\" has not been saved."
-msgstr "Документът \"%s\" не беше запазен."
+msgstr "Документът „%s“ не беше запазен."
 
 #: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
 #, c-format
 msgid "The document \"%s\" has been saved."
-msgstr "Документът \"%s\" беше запазен."
+msgstr "Документът „%s“ беше запазен."
 
 #: ../gedit/gedit-file.c:372
 msgid "Save as..."
@@ -1455,7 +1452,7 @@ msgstr "Запазване като..."
 #: ../gedit/gedit-file.c:526
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
-msgstr "Възвръщане на незапазените промени на документ \"%s\"?"
+msgstr "Възвръщане на незапазените промени на документ „%s“?"
 
 #: ../gedit/gedit-file.c:535
 #, c-format
@@ -1541,22 +1538,22 @@ msgstr "_Възстановяване"
 #: ../gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
-msgstr "Грешка при възстановяването на документа %s\"."
+msgstr "Грешка при възстановяването на документа „%s“."
 
 #: ../gedit/gedit-file.c:670
 #, c-format
 msgid "The document \"%s\" has not been reverted."
-msgstr "Документът \"%s\" не беше възстановен."
+msgstr "Документът „%s“ не беше възстановен."
 
 #: ../gedit/gedit-file.c:674
 #, c-format
 msgid "The document \"%s\" has been reverted."
-msgstr "Документът \"%s\" беше възстановен."
+msgstr "Документът „%s“ беше възстановен."
 
 #: ../gedit/gedit-file.c:702
 #, c-format
 msgid "Reverting the document \"%s\"..."
-msgstr "Възстановяване на документа \"%s\"..."
+msgstr "Възстановяване на документа „%s“..."
 
 #: ../gedit/gedit-file.c:825
 msgid "Could not read data from stdin."
@@ -1573,12 +1570,12 @@ msgstr "Зареждане на файл:"
 #: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
 #, c-format
 msgid "Error loading file \"%s\""
-msgstr "Грешка при зареждане на файл \"%s\""
+msgstr "Грешка при зареждане на файл „%s“"
 
 #: ../gedit/gedit-file.c:1113
 #, c-format
 msgid "Loaded file \"%s\""
-msgstr "Зареден е файлът \"%s\""
+msgstr "Зареден е файлът „%s“"
 
 #: ../gedit/gedit-file.c:1225
 #, c-format
@@ -1590,12 +1587,12 @@ msgstr[1] "Заредени са %d файла"
 #: ../gedit/gedit-file.c:1286
 #, c-format
 msgid "Created file \"%s\""
-msgstr "Създаден е файлът \"%s\""
+msgstr "Създаден е файлът „%s“"
 
 #: ../gedit/gedit-file.c:1304
 #, c-format
 msgid "Loading file \"%s\"..."
-msgstr "Зарежда се файлът \"%s\"..."
+msgstr "Зарежда се файлът „%s“..."
 
 #: ../gedit/gedit-file.c:1469
 #, c-format
@@ -1607,7 +1604,7 @@ msgstr[1] "Зареждат се %d файла ..."
 #: ../gedit/gedit-io-error-dialogs.c:84
 #, c-format
 msgid "Could not find the file \"%s\""
-msgstr "Не може да бъде открит файла \"%s\""
+msgstr "Не може да бъде открит файла „%s“"
 
 #: ../gedit/gedit-io-error-dialogs.c:86 ../gedit/gedit-io-error-dialogs.c:130
 #: ../gedit/gedit-io-error-dialogs.c:150
@@ -1625,7 +1622,7 @@ msgstr "Проверете дали сте написали местополож
 #: ../gedit/gedit-io-error-dialogs.c:341
 #, c-format
 msgid "Could not open the file \"%s\""
-msgstr "Грешка при отваряне на файл \"%s\""
+msgstr "Грешка при отваряне на файл „%s“"
 
 #: ../gedit/gedit-io-error-dialogs.c:93 ../gedit/gedit-io-error-dialogs.c:406
 msgid "The file contains corrupted data."
@@ -1651,7 +1648,7 @@ msgstr "Файлът е прекалено голям."
 #: ../gedit/gedit-io-error-dialogs.c:128
 #, c-format
 msgid "\"%s\" is not a valid location"
-msgstr "\"%s\" не е валидно местонахождение."
+msgstr "„%s“ не е валидно местонахождение."
 
 #: ../gedit/gedit-io-error-dialogs.c:137 ../gedit/gedit-io-error-dialogs.c:443
 msgid "Access was denied."
@@ -1667,7 +1664,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-dialogs.c:148 ../gedit/gedit-io-error-dialogs.c:661
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr "\"%s\" е папка"
+msgstr "„%s“ е папка"
 
 #: ../gedit/gedit-io-error-dialogs.c:157
 msgid ""
@@ -1682,8 +1679,7 @@ msgstr ""
 msgid ""
 "Host \"%s\" could not be found. Please, check that your proxy settings are "
 "correct and try again."
-msgstr ""
-"Не е намерен хоста \"%s\" Проверете прокси настройките и пробвайте пак."
+msgstr "Не е намерен хоста „%s“ Проверете прокси настройките и пробвайте пак."
 
 #: ../gedit/gedit-io-error-dialogs.c:196 ../gedit/gedit-io-error-dialogs.c:207
 #: ../gedit/gedit-io-error-dialogs.c:217
@@ -1734,7 +1730,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-dialogs.c:302 ../gedit/gedit-io-error-dialogs.c:328
 #, c-format
 msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Не може да се отвори файлът \"%s\", използвайки се %s кодова таблица."
+msgstr "Не може да се отвори файлът „%s“, използвайки се %s кодова таблица."
 
 #: ../gedit/gedit-io-error-dialogs.c:305 ../gedit/gedit-io-error-dialogs.c:331
 msgid ""
@@ -1762,7 +1758,7 @@ msgstr ""
 #: ../gedit/gedit-io-error-dialogs.c:518 ../gedit/gedit-io-error-dialogs.c:557
 #, c-format
 msgid "Could not revert the file \"%s\""
-msgstr "Не може да се възстановяви файла \"%s\"."
+msgstr "Не може да се възстановяви файла „%s“."
 
 #: ../gedit/gedit-io-error-dialogs.c:399
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
@@ -1807,12 +1803,12 @@ msgstr "Невъзможно възстановяването на неозаг�
 #: ../gedit/gedit-io-error-dialogs.c:607
 #, c-format
 msgid "Could not save the file \"%s\""
-msgstr "Не може да се запише файла \"%s\"."
+msgstr "Не може да се запише файла „%s“."
 
 #: ../gedit/gedit-io-error-dialogs.c:656
 #, c-format
 msgid "The file \"%s\" already exists"
-msgstr "Файлът \"%s\" вече съществува."
+msgstr "Файлът „%s“ вече съществува."
 
 #: ../gedit/gedit-io-error-dialogs.c:662
 msgid "Please, check that you typed the location correctly."
@@ -1823,7 +1819,7 @@ msgstr "Проверете дали сте въвели коректното м�
 #: ../gedit/gedit-io-error-dialogs.c:694
 #, c-format
 msgid "Could not create the file \"%s\""
-msgstr "Файлът \"%s\" не може да бъде създаден."
+msgstr "Файлът „%s“ не може да бъде създаден."
 
 #: ../gedit/gedit-io-error-dialogs.c:670
 msgid "Make sure you have the appropriate write permissions."
@@ -1848,54 +1844,54 @@ msgstr ""
 "Няма достатъчно място за запис на файла. Освободете място и опитайте пак."
 
 #. Read only
-#: ../gedit/gedit-mdi-child.c:248
+#: ../gedit/gedit-mdi-child.c:249
 msgid "RO"
 msgstr "Четене"
 
 #. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:649 ../gedit/gedit-ui.xml.h:85
+#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
 msgstr "Пре_местване в нов прозорец"
 
-#: ../gedit/gedit-mdi-child.c:736
+#: ../gedit/gedit-mdi-child.c:803
 msgid "Unicode (UTF-8)"
 msgstr "Уникод (UTF-8)"
 
-#: ../gedit/gedit-mdi-child.c:746
+#: ../gedit/gedit-mdi-child.c:813
 msgid "Name:"
 msgstr "Име:"
 
-#: ../gedit/gedit-mdi-child.c:747
+#: ../gedit/gedit-mdi-child.c:814
 msgid "MIME Type:"
 msgstr "MIME тип:"
 
-#: ../gedit/gedit-mdi-child.c:748
+#: ../gedit/gedit-mdi-child.c:815
 msgid "Encoding:"
 msgstr "Кодова таблица:"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:253 ../gedit/gedit-mdi.c:453
+#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
 #, c-format
 msgid "Open '%s'"
-msgstr "Отваряне на \"%s\""
+msgstr "Отваряне на „%s“"
 
-#: ../gedit/gedit-mdi.c:528
+#: ../gedit/gedit-mdi.c:538
 msgid "Open a recently used file"
 msgstr "Отваряне на скоро използван файл"
 
-#: ../gedit/gedit-mdi.c:1467 ../gedit/gedit-mdi.c:1469
+#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
 msgid "Read Only"
 msgstr "(само за четене)"
 
-#: ../gedit/gedit-mdi.c:2094
+#: ../gedit/gedit-mdi.c:2103
 msgid "Normal"
 msgstr "Нормален"
 
-#: ../gedit/gedit-mdi.c:2095
+#: ../gedit/gedit-mdi.c:2104
 msgid "Use Normal highlight mode"
 msgstr "Използване на нормален режим на осветяване"
 
-#: ../gedit/gedit-mdi.c:2171
+#: ../gedit/gedit-mdi.c:2180
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Използване на %s режим на осветяване"
@@ -1923,7 +1919,7 @@ msgstr "Управлението на настройки не може да бъ
 #: ../gedit/gedit-prefs-manager.c:1326
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
-msgstr "Очаквано \"%s\", получено \"%s\" за ключ %s"
+msgstr "Очаквано „%s“, получено „%s“ за ключ %s"
 
 #: ../gedit/gedit-print.c:219 ../gedit/gedit-ui.xml.h:37
 msgid "Print"
@@ -2357,16 +2353,16 @@ msgstr "(невалиден Уникод)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:885
+#: ../gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ред %d, Кол. %d"
 
-#: ../gedit/gedit-view.c:921
+#: ../gedit/gedit-view.c:915
 msgid "  OVR"
 msgstr "  OVR"
 
-#: ../gedit/gedit-view.c:923
+#: ../gedit/gedit-view.c:917
 msgid "  INS"
 msgstr "  INS"
 
@@ -2393,7 +2389,7 @@ msgstr "Създаване на нов документ в работещ gedit"
 #: ../gedit/gedit2.c:168
 #, c-format
 msgid "The specified encoding \"%s\" is not valid\n"
-msgstr "Избраната кодова таблица \"%s\" не е валидна\n"
+msgstr "Избраната кодова таблица „%s“ не е валидна\n"
 
 #: ../gedit/gedit-convert.c:91
 msgid "The file you are trying to open contains an invalid byte sequence."
@@ -2504,7 +2500,7 @@ msgstr "Думи"
 
 #: ../plugins/docinfo/docinfo.glade2.h:10
 msgid "gedit: Document Info plugin"
-msgstr "gedit: Модул \"Информация за документа\""
+msgstr "gedit: Модул „Информация за документа“"
 
 #: ../plugins/indent/indent.c:45
 msgid "_Indent"
@@ -2554,21 +2550,21 @@ msgstr "Запазване на копие..."
 msgid "Save a copy of the current document"
 msgstr "Запазване на копие на текущия документ"
 
-#: ../plugins/savecopy/savecopy.c:262
+#: ../plugins/savecopy/savecopy.c:315
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
-msgstr "Не може да се запази копие на файла в \"%s\""
+msgstr "Не може да се запази копие на файла в „%s“"
 
-#: ../plugins/savecopy/savecopy.c:361
+#: ../plugins/savecopy/savecopy.c:414
 msgid "You are trying to overwrite the original file"
 msgstr "Опитвате се да презапишете оригиналния файл."
 
-#: ../plugins/savecopy/savecopy.c:470
+#: ../plugins/savecopy/savecopy.c:523
 msgid "Save Copy..."
 msgstr "Запазване на копие..."
 
 #. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:502 ../plugins/savecopy/savecopy.c:512
+#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (копие)"
@@ -2668,7 +2664,7 @@ msgstr "_Работна директория:"
 
 #: ../plugins/shell_output/shell_output.glade2.h:6
 msgid "gedit: Shell Output plugin"
-msgstr "gedit: Модул \"Изход на обвивка\""
+msgstr "gedit: Модул „Изход на обвивка“"
 
 #: ../plugins/sort/sort.c:29
 msgid "S_ort..."
@@ -2931,114 +2927,118 @@ msgid "Mongolian"
 msgstr "монголски"
 
 #: ../plugins/spell/gedit-spell-checker.c:126
+msgid "Marathi"
+msgstr "марати"
+
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Malay"
 msgstr "малайски"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Maltese"
 msgstr "малтийски"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Norwegian Bokmal"
 msgstr "норвежки бокмал"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Dutch"
 msgstr "датски"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Nynorsk"
 msgstr "норвежки нинорск"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Norwegian"
 msgstr "норвежки"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Nyanja"
 msgstr "Нианя"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Polish"
 msgstr "полски"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Portugal)"
 msgstr "португалски (Португалия)"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Portuguese (Brazilian)"
 msgstr "португалски (Бразилия)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Quechua"
 msgstr "куечуа"
 
-#: ../plugins/spell/gedit-spell-checker.c:138
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Russian"
 msgstr "руски"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Kinyarwanda"
 msgstr "киниуарванда"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Sardinian"
 msgstr "сардински"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Slovak"
 msgstr "словашки"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Slovenian"
 msgstr "словенски"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Swedish"
 msgstr "шведски"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Swahili"
 msgstr "суахили"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Tamil"
 msgstr "тамилски"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Tetum"
 msgstr "тетум"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tagalog"
 msgstr "тагалог"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tswana"
 msgstr "тсвана"
 
-#: ../plugins/spell/gedit-spell-checker.c:150
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Ukrainian"
 msgstr "украински"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:152
 msgid "Uzbek"
 msgstr "узбекски"
 
-#: ../plugins/spell/gedit-spell-checker.c:153
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Walloon"
 msgstr "валон"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:155
 msgid "Yiddish"
 msgstr "йидиш"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Zulu"
 msgstr "зулу"
 
-#: ../plugins/spell/gedit-spell-checker.c:826
+#: ../plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "Стандартен"
 
@@ -3100,7 +3100,7 @@ msgid "Language:"
 msgstr "Език:"
 
 #: ../plugins/spell/spell-checker.glade2.h:12
-msgid "Mispelled word:"
+msgid "Misspelled word:"
 msgstr "Сгрешена дума:"
 
 #: ../plugins/spell/spell-checker.glade2.h:13
@@ -3272,8 +3272,8 @@ msgid "Character encoding of linked resource"
 msgstr "Кодова таблица на свързания ресурс"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
-msgid "Checked(state)"
-msgstr "Checked(state)"
+msgid "Checked (state)"
+msgstr "Отбелязано (състояние)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Citation"
@@ -3805,7 +3805,7 @@ msgstr "OnDblClick event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnFocus event"
-msgstr "Събитето \"На фокус\""
+msgstr "Събитето „На фокус“"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnKeyDown event"
@@ -3821,7 +3821,7 @@ msgstr "OnKeyUp event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnLoad event"
-msgstr "Събитието \"При зареждане\""
+msgstr "Събитието „При зареждане“"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseDown event"
@@ -3829,7 +3829,7 @@ msgstr "OnMouseDown event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseMove event"
-msgstr "Събитието \"При движение на мишката\""
+msgstr "Събитието „При движение на мишката“"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnMouseOut event"
@@ -4192,20 +4192,20 @@ msgid "Width"
 msgstr "Ширина"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
-msgid "Bibliography cite"
-msgstr "Цитат от библиография"
+msgid "Bibliography (cite)"
+msgstr "Библиография (цитат)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:2
-msgid "Bibliography item"
-msgstr "Елемент от библиография"
+msgid "Bibliography (item)"
+msgstr "Библиография (елемент)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:3
-msgid "Bibliography shortcite"
-msgstr "Bibliography shortcite"
+msgid "Bibliography (shortcite)"
+msgstr "Библиография (кратък цитат)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:4
-msgid "Bibliography thebibliography"
-msgstr "Bibliography thebibliography"
+msgid "Bibliography (thebibliography)"
+msgstr "Библиография (библиографията)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets ()"
@@ -4245,11 +4245,11 @@ msgstr "Function exp"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:15
 msgid "Function log"
-msgstr "Функция \"логаритъм\""
+msgstr "Функция „логаритъм“"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:16
 msgid "Function log10"
-msgstr "Функция \"десетичен логаритъм\""
+msgstr "Функция „десетичен логаритъм“"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:17
 msgid "Function sine"
@@ -4549,7 +4549,7 @@ msgstr "self"
 
 #: ../plugins/taglist/gedit-taglist-plugin-window.c:146
 msgid "Tag list plugin"
-msgstr "Модул \"Списък с етикети\""
+msgstr "Модул „Списък с етикети“"
 
 #: ../plugins/taglist/gedit-taglist-plugin-window.c:167
 msgid "Select the group of tags you want to use"
