@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-05 06:11+0000\n"
-"PO-Revision-Date: 2005-08-05 16:54+0800\n"
+"POT-Creation-Date: 2005-08-10 22:12+0000\n"
+"PO-Revision-Date: 2005-08-11 12:43+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -191,93 +191,105 @@ msgstr ""
 "在打开/保存文件选择器中的字符代码菜单中显示的编码列表。只使用可识别的编码。"
 
 #: ../data/gedit.schemas.in.h:30
+msgid "Max Number of Undo Actions"
+msgstr "撤消操作的最多数量"
+
+#: ../data/gedit.schemas.in.h:31
 msgid "Maximum Recent Files"
 msgstr "最大当前文件数"
 
-#: ../data/gedit.schemas.in.h:31
-msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr "撤消或重复操作的最大值"
+#: ../data/gedit.schemas.in.h:32
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions."
+msgstr "gedit 撤消或重做操作的最多次数。使用“-1”代表无限制。"
+
+#: ../data/gedit.schemas.in.h:33
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions. Deprecated since 2.12.0"
+msgstr "gedit 撤消或重做操作的最多次数。使用“-1”代表无限制。2.12.0 之后不再使用"
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:34
+#: ../data/gedit.schemas.in.h:36
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:37
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:43
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:44
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr "文件修改后到自动保存的时间。只有当“自动保存”选项打开后才有效。"
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:45
 msgid "Print Header"
 msgstr "打印页眉"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:46
 msgid "Print Line Numbers"
 msgstr "打印行号"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:47
 msgid "Print Syntax Highlighting"
 msgstr "打印语法突出显示"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:48
 msgid "Printing Line Wrapping Mode"
 msgstr "打印时换行模式"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:49
 msgid "Right Margin Position"
 msgstr "右边距位置"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:52
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:53
+#: ../data/gedit.schemas.in.h:55
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:62
+#: ../data/gedit.schemas.in.h:64
 msgid "Selected Text Color"
 msgstr "选中文字颜色"
 
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:65
 msgid "Selection Color"
 msgstr "选中范围背景色"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:66
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -286,7 +298,7 @@ msgstr ""
 "gedit 自动检测文件编码时所用的编码清单。“当前”为当前区域编码。只能使用可识别"
 "的编码。"
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -298,7 +310,7 @@ msgstr ""
 "按单词换行，而“GTK_WRAP_CHAR”代表按字符换行。请注意，这些值是区分大小写的，所"
 "以请确定必须按照这里说明的大小写出现。"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -310,12 +322,12 @@ msgstr ""
 "行，“GTK_WRAP_WORD”代表按单词换行，而“GTK_WRAP_CHAR”代表按字符换行。请注意，"
 "这些值是区分大小写的，所以请确定必须按照这里说明的大小写出现。"
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "设定打印时文档主体所用的字体。"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -323,13 +335,13 @@ msgstr ""
 "设定打印时文档主体所用的字体。这是 gnome-print 字体名称，将被 "
 "print_font_body_pango 替换。"
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。"
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -338,13 +350,13 @@ msgstr ""
 "设定打印时行号所用的字体。只有当“打印行号”选项打开时才有效。这是 gnome-print "
 "字体名称，将被 print_font_body_pango 替换。"
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。"
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -353,27 +365,27 @@ msgstr ""
 "设定打印时页眉所用的字体。只有当“打印页眉”选项打开时才有效。这是 gnome-print "
 "字体名称，将被 print_font_body_pango 替换。"
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr "设定最近打开文件数的最大值，这个将在“最近打开过的文件”子菜单中显示。"
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "设定用于代替制表符的空格数。"
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid "Specifies the position of the right margin."
 msgstr "指定右边距的位置。"
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid "Status Bar is Visible"
 msgstr "状态栏可见"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -387,35 +399,35 @@ msgstr ""
 "图标和文字，而“GEDIT_TOOLBAR_ICONS_BOTH_HORIZ”代表在图标旁边显示文字。请注"
 "意，这些值是区分大小写的，所以请确定必须按照这里说明的大小写出现。"
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid "Tab Size"
 msgstr "制表符长度"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid "Text Color"
 msgstr "文本颜色"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid "Toolbar Buttons Style"
 msgstr "工具栏按钮风格"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid "Toolbar is Visible"
 msgstr "显示工具栏"
 
-#: ../data/gedit.schemas.in.h:82
-msgid "Undo Actions Limit"
-msgstr "撤消操作次数限制"
+#: ../data/gedit.schemas.in.h:84
+msgid "Undo Actions Limit (DEPRECATED)"
+msgstr "撤消操作次数限制(不再使用)"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Use Default Colors"
 msgstr "使用默认颜色"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid "Use Default Font"
 msgstr "使用默认字体"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -424,7 +436,7 @@ msgstr ""
 "gedit 是否每隔一段时间自动保存已修改的文件。您可以在“自动保存时间间隔”选项中"
 "设置该时间间隔。"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -432,52 +444,52 @@ msgstr ""
 "gedit 是否为保存的文件创建备份文件。您可以在“备份文件扩展名”选项中设置备份文"
 "件的扩展名。"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "gedit 是否在编辑区域显示行号。"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "gedit 是否在编辑区域显示右边距。"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Whether gedit should enable auto indentation."
 msgstr "gedit 是否启用自动缩进。"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "gedit 是否启用语法突出显示。"
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should highlight matching bracket."
 msgstr "gedit 是否启用突出显示匹配的括号。"
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should highlight the current line."
 msgstr "gedit 是否应该突出显示当前行。"
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "gedit 是否在打印文档时包含文档头。"
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "gedit 是否要插入空格代替制表符。"
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "gedit 是否在打印文档时打印语法突出显示。"
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "是否显示编辑窗口底部的状态栏。"
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "是否在编辑窗口中显示工具栏。"
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:100
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -487,7 +499,7 @@ msgstr ""
 "是否要在编辑区域使用系统默认颜色。如果关闭了此选项，编辑区的颜色就可用“背景颜"
 "色”、“文字颜色”、“选中文字颜色”和“选中范围背景颜色”选项指定。"
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:101
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -498,14 +510,14 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid "[ISO-8859-15]"
 msgstr "[GB18030,GBK,GB2312,UTF-8]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[CURRENT,GB18030,GBK,GB2312,UTF-8,ISO-8859-15]"
 
@@ -692,31 +704,31 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "选中的文件不可执行。"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:730
+#: ../gedit/dialogs/gedit-preferences-dialog.c:649
 msgid "Push this button to select the font to be used by the editor"
 msgstr "按下此按钮可以选择编辑器所用的字体"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:732
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to configure text color"
 msgstr "按下此按钮可以配置文本颜色"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:734
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure background color"
 msgstr "按下此按钮可以配置背景色"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:736
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "按下此按钮可以配置选中文本的颜色"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:739
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "按下此按钮可以配置选中文本的背景色"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1192
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
 msgid "Elements"
 msgstr "元素"
 
@@ -769,191 +781,175 @@ msgid "<b>Text Wrapping</b>"
 msgstr "<b>文字折行</b>"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:12
-msgid "<b>Undo</b>"
-msgstr "<b>撤消</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">颜色</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "粗体"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "在保存之前创建一个备份文件(_B)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "D_isplay right margin"
-msgstr "显示右边距(_I)"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "Display right _margin"
+msgstr "显示右边距(_M)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences.glade2.h:16
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "不将一个单词拆在两行(_S)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor"
 msgstr "编辑器"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
+#: ../gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Editor _font: "
 msgstr "编辑器字体(_F)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences.glade2.h:19
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "启用自动换行(_W)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "Font & Colors"
 msgstr "字体和颜色"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Hi_ghlight current line"
 msgstr "突出显示当前行(_G)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Highlight _mode:"
 msgstr "突出显示模式(_M)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
-msgid "Highlight matching bracket"
-msgstr "突出显示匹配的括号"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Highlight matching _bracket"
+msgstr "突出显示匹配的括号(_B)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "插入空格代替制表符(_S)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Italic"
 msgstr "斜体"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Normal _text color:"
 msgstr "普通文本颜色(_T)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Pick a color"
 msgstr "选择颜色"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the background color"
 msgstr "选择背景颜色"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the editor font"
 msgstr "选择编辑器字体"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Pick the normal text color"
 msgstr "选择普通文本颜色"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Pick the selected text color"
 msgstr "选择选中文本的颜色"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Pick the selection color"
 msgstr "选择选中区域的背景色"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Plugins"
 msgstr "插件"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Preferences"
 msgstr "首选项"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Se_lection color:"
 msgstr "选中区颜色(_L)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "Selecte_d text color:"
 msgstr "选中文本的颜色(_D)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Strikethrough"
 msgstr "删除线"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "Syntax Highlighting"
 msgstr "语法突出显示"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "U_se default theme colors"
 msgstr "使用默认主题颜色(_S)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "Underline"
 msgstr "下划线"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "View"
 msgstr "查看"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Autosave files every"
 msgstr "自动保存文件，每隔(_A)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Background color:"
 msgstr "背景颜色(_B)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background:"
 msgstr "背景(_B)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Display line numbers"
 msgstr "显示行号(_D)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Enable automatic indentation"
 msgstr "启用自动缩进(_E)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences.glade2.h:47
 msgid "_Enable syntax highlighting"
 msgstr "启用语法突出显示(_E)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Foreground:"
 msgstr "前景(_F)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
-msgid "_Limit to"
-msgstr "限制为(_L)"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Reset to Default "
 msgstr "重置为默认值(_R)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Right margin at column:"
 msgstr "右边距于列(_R)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Tab width:"
 msgstr "跳格宽度(_T)："
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:54
-msgid "_Unlimited undo"
-msgstr "无限制撤消(_U)"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:55
+#: ../gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_Use default theme font"
 msgstr "使用默认主题字体(_U)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:56
+#: ../gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_minutes"
 msgstr "分钟(_M)"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:57
-msgid "act_ions"
-msgstr "动作(_I)"
 
 #: ../gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
@@ -1234,7 +1230,7 @@ msgid "Hebrew"
 msgstr "希伯来语"
 
 #: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:149
+#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
 msgid "Turkish"
 msgstr "土耳其语"
 
@@ -1246,7 +1242,7 @@ msgstr "日耳曼语"
 msgid "Celtic"
 msgstr "凯尔特语"
 
-#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:137
+#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
 msgid "Romanian"
 msgstr "罗马尼亚语"
 
@@ -1288,7 +1284,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "西里尔语/乌克兰语"
 
 #: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
-#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
 msgid "Vietnamese"
 msgstr "越南语"
 
@@ -1710,28 +1706,28 @@ msgid ""
 msgstr "没有足够的磁盘空间来创建文件。请释放一些磁盘空间，然后重试。"
 
 #. Read only
-#: ../gedit/gedit-mdi-child.c:248
+#: ../gedit/gedit-mdi-child.c:249
 msgid "RO"
 msgstr "只读"
 
 #. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:649 ../gedit/gedit-ui.xml.h:85
+#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
 msgstr "移动到新窗口(_M)"
 
-#: ../gedit/gedit-mdi-child.c:736
+#: ../gedit/gedit-mdi-child.c:803
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-mdi-child.c:746
+#: ../gedit/gedit-mdi-child.c:813
 msgid "Name:"
 msgstr "名称："
 
-#: ../gedit/gedit-mdi-child.c:747
+#: ../gedit/gedit-mdi-child.c:814
 msgid "MIME Type:"
 msgstr "MIME 类型："
 
-#: ../gedit/gedit-mdi-child.c:748
+#: ../gedit/gedit-mdi-child.c:815
 msgid "Encoding:"
 msgstr "编码："
 
@@ -1980,11 +1976,11 @@ msgstr "退出程序"
 
 #: ../gedit/gedit-ui.xml.h:44
 msgid "Redo"
-msgstr "重复"
+msgstr "重做"
 
 #: ../gedit/gedit-ui.xml.h:45
 msgid "Redo the undone action"
-msgstr "重复已撤消的操作"
+msgstr "重做已撤消的操作"
 
 #: ../gedit/gedit-ui.xml.h:47
 msgid "Revert"
@@ -2165,7 +2161,7 @@ msgstr "退出(_Q)"
 
 #: ../gedit/gedit-ui.xml.h:92
 msgid "_Redo"
-msgstr "重复(_R)"
+msgstr "重做(_R)"
 
 #: ../gedit/gedit-ui.xml.h:93
 msgid "_Replace..."
@@ -2787,114 +2783,118 @@ msgid "Mongolian"
 msgstr "蒙古语"
 
 #: ../plugins/spell/gedit-spell-checker.c:126
+msgid "Marathi"
+msgstr "马拉地语"
+
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Malay"
 msgstr "马来语"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Maltese"
 msgstr "马耳他语"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Norwegian Bokmal"
 msgstr "挪威博克马尔语"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Dutch"
 msgstr "荷兰语"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Nynorsk"
 msgstr "挪威尼诺斯克语"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Norwegian"
 msgstr "挪威语"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Nyanja"
 msgstr "尼扬贾语"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Polish"
 msgstr "波兰语"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Portugal)"
 msgstr "葡萄牙语(葡萄牙)"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Portuguese (Brazilian)"
 msgstr "葡萄牙语(巴西)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Quechua"
 msgstr "盖丘亚语"
 
-#: ../plugins/spell/gedit-spell-checker.c:138
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Russian"
 msgstr "俄语"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Kinyarwanda"
 msgstr "墓尼阿万达语"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Sardinian"
 msgstr "撒丁语"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Slovak"
 msgstr "斯洛伐克语"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Slovenian"
 msgstr "斯洛文尼亚语"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Swedish"
 msgstr "瑞典语"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Swahili"
 msgstr "斯瓦希里语"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Tamil"
 msgstr "泰米尔语"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Tetum"
 msgstr "特塔姆语"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tagalog"
 msgstr "塔加路语"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tswana"
 msgstr "茨瓦纳语"
 
-#: ../plugins/spell/gedit-spell-checker.c:150
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Ukrainian"
 msgstr "乌克兰语"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:152
 msgid "Uzbek"
 msgstr "乌兹别克语"
 
-#: ../plugins/spell/gedit-spell-checker.c:153
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Walloon"
 msgstr "瓦隆语"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:155
 msgid "Yiddish"
 msgstr "意第绪语"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Zulu"
 msgstr "祖鲁语"
 
-#: ../plugins/spell/gedit-spell-checker.c:826
+#: ../plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "默认"
 
@@ -4497,3 +4497,4 @@ msgstr "提示可使用的格式(_P)"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
+
