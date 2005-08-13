@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-29 04:38+0000\n"
-"PO-Revision-Date: 2005-06-01 23:04+0300\n"
-"Last-Translator: Lauri Nurmi <lanurmi@iki.fi>\n"
+"POT-Creation-Date: 2005-08-13 08:32+0300\n"
+"PO-Revision-Date: 2005-08-13 08:32+0300\n"
+"Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgid "Gedit viewer factory"
 msgstr "Geditin katselintehdas"
 
 #: ../data/GNOME_Gedit.server.in.in.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:211
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "Source"
 msgstr "Lähde"
 
@@ -208,33 +208,50 @@ msgstr ""
 "käytettävissä."
 
 #: ../data/gedit.schemas.in.h:30
+msgid "Max Number of Undo Actions"
+msgstr "Peruttavien toimintojen enimmäismäärä"
+
+#: ../data/gedit.schemas.in.h:31
 msgid "Maximum Recent Files"
 msgstr "Pikavalintojen enimmäismäärä"
 
-#: ../data/gedit.schemas.in.h:31
-msgid "Maximum number of actions that gedit will be able to undo or redo."
-msgstr "Suurin määrä toimintoja jotka gedit voi kumota tai tehdä uudestaan."
+#: ../data/gedit.schemas.in.h:32
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions."
+msgstr ""
+"Suurin määrä toimintoja jotka gedit voi kumota tai tehdä uudestaan. Arvo "
+"\"-1\" tarkoittaa rajatonta määrää."
+
+#: ../data/gedit.schemas.in.h:33
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions. Deprecated since 2.12.0"
+msgstr ""
+"Suurin määrä toimintoja jotka gedit voi kumota tai tehdä uudestaan. Arvo "
+"\"-1\" tarkoittaa rajatonta määrää. Tämä avain on vanhentunut versiosta "
+"2.12.0 alkaen."
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:34
+#: ../data/gedit.schemas.in.h:36
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:37
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and replaced by
+#. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:43
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:44
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -243,61 +260,61 @@ msgstr ""
 "tiedostot. Tämä on voimassa ainoastaan mikäli asetus \"Automaattitallennus\" "
 "on päällä."
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:45
 msgid "Print Header"
 msgstr "Tulosta otsikkotiedot"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:46
 msgid "Print Line Numbers"
 msgstr "Tulosta rivinumerot"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:47
 msgid "Print Syntax Highlighting"
 msgstr "Tulosta syntaksiväritys"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:48
 msgid "Printing Line Wrapping Mode"
 msgstr "Tulostuksen rivitystapa"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:49
 msgid "Right Margin Position"
 msgstr "Oikean reunuksen sijainti"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:52
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:53
+#: ../data/gedit.schemas.in.h:55
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:62
+#: ../data/gedit.schemas.in.h:64
 msgid "Selected Text Color"
 msgstr "Valitun tekstin väri"
 
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:65
 msgid "Selection Color"
 msgstr "Valintaväri"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:66
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -307,7 +324,7 @@ msgstr ""
 "\"NYKYINEN\" on nykyisten maa-asetusten mukainen koodaustapa. Vain "
 "tunnettuja koodaustapoja voidaan käyttää."
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -321,7 +338,7 @@ msgstr ""
 "kohdalta. Huomaa että kirjainkoko merkitsee arvoissa, joten varmista että "
 "kirjoitat arvon täsmälleen kuten tässä on neuvottu."
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -335,12 +352,12 @@ msgstr ""
 "kohdalta. Huomaa että kirjainkoko merkitsee arvoissa, joten varmista että "
 "kirjoitat arvon täsmälleen kuten tässä on neuvottu."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Määrittää tulostettaessa käytettävän tekstikirjasimen."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -348,7 +365,7 @@ msgstr ""
 "Määrittää tulostettaessa käytettävän tekstikirjasimen. Tämä on gnome-print "
 "kirjasimen nimi ja print_font_body_pango korvaa sen."
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -357,7 +374,7 @@ msgstr ""
 "voimassa ainoastaan, mikäli asetuksen \"Tulosta rivinumerot\" arvo on muu "
 "kuin nolla."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -368,7 +385,7 @@ msgstr ""
 "kuin nolla. Tämä on gnome-print kirjasimen nimi ja print_font_numbers_pango "
 "korvaa sen."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -376,7 +393,7 @@ msgstr ""
 "Määrittää tulostettaessa käytettävän otsikkotiedon kirjasimen. Tämä on "
 "voimassa ainoastaan, mikäli asetus \"Tulosta otsikkotiedot\" on päällä."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -386,7 +403,7 @@ msgstr ""
 "voimassa ainoastaan, mikäli asetus \"Tulosta otsikkotiedot\" on päällä. Tämä "
 "on gnome-print kirjasimen nimi ja print_font_header_pango korvaa sen."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -394,21 +411,21 @@ msgstr ""
 "Määrittää kohdassa \"Pikavalinnat\" näytettävien äskettäin käytettyjen "
 "tiedostojen maksimimäärän."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Määrittää tyhjeiden määrän jota käytetään sarkainmerkkien sijaan."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid "Specifies the position of the right margin."
 msgstr "Määrittää oikean reunuksen sijainnin."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid "Status Bar is Visible"
 msgstr "Tilarivi näytetään"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -424,35 +441,35 @@ msgstr ""
 "kuvakkeiden vieressä). Huomaa että kirjainkoko merkitsee arvoissa, joten "
 "varmista että kirjoitat arvon täsmälleen kuten tässä on neuvottu."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid "Tab Size"
 msgstr "Sarkaimen koko"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid "Text Color"
 msgstr "Tekstiväri"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid "Toolbar Buttons Style"
 msgstr "Työkalupalkin painiketyyli"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid "Toolbar is Visible"
 msgstr "Työkalupalkki näytetään"
 
-#: ../data/gedit.schemas.in.h:82
-msgid "Undo Actions Limit"
-msgstr "Kumoamiskertojen enimmäismäärä"
+#: ../data/gedit.schemas.in.h:84
+msgid "Undo Actions Limit (DEPRECATED)"
+msgstr "Kumoamiskertojen enimmäismäärä (VANHENTUNUT)"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Use Default Colors"
 msgstr "Käytä oletusvärejä"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid "Use Default Font"
 msgstr "Käytä oletuskirjasinta"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -462,7 +479,7 @@ msgstr ""
 "aikavälein. Voit asettaa aikavälin asetuksella \"Automaattisen tallennuksen "
 "aikaväli\"."
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -471,52 +488,52 @@ msgstr ""
 "asettaa tiedostonimen laajennoksen asetuksella \"Varmuuskopion nimilaajenne"
 "\"."
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Määrittää näyttääkö gedit rivinumerot muokkausalueella."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Määrittää näyttääkö gedit oikean reunuksen muokkausalueella."
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Whether gedit should enable auto indentation."
 msgstr "Määrittää käyttääkö gedit automaattisisennystä."
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Määrittää käyttääkö gedit syntaksiväritystä."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Määrittää korostaako gedit vastaavaa sulkua."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should highlight the current line."
 msgstr "Määrittää korostaako gedit nykyistä riviä."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Määrittää lisääkö gedit asiakirjojen otsikot tulosteisiin."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Määrittää lisääkö gedit sarkaimien sijaan välilyöntejä."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Määrittää käyttääkö gedit syntaksiväritystä tulostettaessa."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Määrittää näytetäänkö muokkausikkunan alalaidassa tilarivi."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Määrittää näytetäänkö muokkausikkunoissa työkalupalkki."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:100
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -528,7 +545,7 @@ msgstr ""
 "\"Tekstiväri\", \"Valitun tekstin väri\" ja \"Valintaväri\" määriteltyjä "
 "värejä."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:101
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -540,18 +557,18 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15,ISO-8859-1]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2124
+#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
 #, c-format
 msgid "Activate %s"
 msgstr "Käynnistä %s"
@@ -645,7 +662,7 @@ msgstr[1] ""
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Tallennetaanko muutokset asiakirjaan \"%s\" ennen sulkemista?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:643
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:645
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -657,12 +674,12 @@ msgstr[1] ""
 "Sinulla on avoinna %d asiakirja jossa on tallentamattomia muutoksia. "
 "Tallennetaanko muutokset ennen sulkemista?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:660
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:662
 msgid "S_elect the documents you want to save:"
 msgstr "Valits_e asiakirjat jotka haluat tallentaa:"
 
 #. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:677
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:679
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Mikäli et tallenna, kaikki tekemäsi muutokset menetetään lopullisesti."
 
@@ -690,7 +707,7 @@ msgid "Replace _All"
 msgstr "Korvaa k_aikki"
 
 #: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:316
+#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
 msgid "_Replace"
 msgstr "Ko_rvaa"
 
@@ -766,26 +783,26 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Valittu tiedosto ei ole suorituskelpoinen."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:730
+#: ../gedit/dialogs/gedit-preferences-dialog.c:649
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Napsauta tästä valitaksesi muokkaimessa käytettävän kirjasimen"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:732
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to configure text color"
 msgstr "Napsauta tästä asettaaksesi tekstivärin"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:734
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure background color"
 msgstr "Napsauta tästä asettaaksesi taustavärin"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:736
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Napsauta tätä asettaaksesi värin jolla valittuna oleva teksti esitetään"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:739
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -793,7 +810,7 @@ msgstr ""
 "Napsauta tätä asettaaksesi värin jolla valittuna olevan tekstin tausta "
 "väritetään"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1189
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
 msgid "Elements"
 msgstr "Elementit"
 
@@ -846,191 +863,175 @@ msgid "<b>Text Wrapping</b>"
 msgstr "<b>Tekstin rivitys</b>"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:12
-msgid "<b>Undo</b>"
-msgstr "<b>Kumoaminen</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Värit</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "Lihavoitu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "Luo tiedostoista _varmuuskopio ennen tallentamista"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "D_isplay right margin"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "Display right _margin"
 msgstr "Näytä o_ikea reunus"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences.glade2.h:16
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Älä jaa _sanoja yli kahdelle riville"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor"
 msgstr "Muokkain"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
+#: ../gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Editor _font: "
 msgstr "Muokkaimen _kirjasin: "
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences.glade2.h:19
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Käytä _rivitystä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "Font & Colors"
 msgstr "Kirjasimet & Värit"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Hi_ghlight current line"
 msgstr "_Korosta nykyinen rivi"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Highlight _mode:"
 msgstr "_Väritystila:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
-msgid "Highlight matching bracket"
-msgstr "Korosta vastaava sulku"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Highlight matching _bracket"
+msgstr "Korosta _vastaava sulku"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "Lisää _tyhjeitä sarkaimien sijaan"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Italic"
 msgstr "Kursiivi"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Normal _text color:"
 msgstr "Normaali tekstiväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Pick a color"
 msgstr "Valitse väri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the background color"
 msgstr "Valitse taustaväri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the editor font"
 msgstr "Valitse muokkaimen kirjasin"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Pick the normal text color"
 msgstr "Valitse normaali tekstiväri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Pick the selected text color"
 msgstr "Valitse valitun tekstin väri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Pick the selection color"
 msgstr "Valitse valintaväri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Plugins"
 msgstr "Liitännäiset"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Se_lection color:"
 msgstr "V_alintaväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "Selecte_d text color:"
 msgstr "Valitun _tekstin väri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Strikethrough"
 msgstr "Lävistetty"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "Syntax Highlighting"
 msgstr "Syntaksiväritys"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "U_se default theme colors"
 msgstr "Käy_tä oletusteeman värejä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "Underline"
 msgstr "Alleviivattu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "View"
 msgstr "Näytä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Autosave files every"
 msgstr "Tallenna tiedostot _automaattisesti joka"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Background color:"
 msgstr "_Taustaväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background:"
 msgstr "_Tausta:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Display line numbers"
 msgstr "Näytä rivi_numerot"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Enable automatic indentation"
 msgstr "Käytä auto_maattisisennystä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences.glade2.h:47
 msgid "_Enable syntax highlighting"
 msgstr "Käytä s_yntaksiväritystä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Foreground:"
 msgstr "_Edustaväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
-msgid "_Limit to"
-msgstr "_Raja"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Reset to Default "
 msgstr "_Aseta oletukseksi"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Right margin at column:"
 msgstr "Oikea _reunus sarakkeessa:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Tab width:"
 msgstr "_Sarkainleveys:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:54
-msgid "_Unlimited undo"
-msgstr "_Loppumattomat kumoamiskerrat"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:55
+#: ../gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_Use default theme font"
 msgstr "_Käytä teeman oletuskirjasinta"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:56
+#: ../gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_minutes"
 msgstr "_minuuttia"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:57
-msgid "act_ions"
-msgstr "toim_intoa"
 
 #: ../gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
@@ -1193,47 +1194,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:380
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:666 ../gedit/gedit-document.c:684
+#: ../gedit/gedit-document.c:380
 msgid "Unsaved Document"
 msgstr "Tallentamaton asiakirja"
 
-#: ../gedit/gedit-document.c:672 ../gedit/gedit-document.c:719
-msgid "Invalid file name"
-msgstr "Epäkelpo tiedostonimi"
-
-#: ../gedit/gedit-document.c:859 ../gedit/gedit-document.c:1411
+#: ../gedit/gedit-document.c:926 ../gedit/gedit-document.c:1478
 msgid "Invalid UTF-8 data"
 msgstr "Viallista UTF-8-dataa"
 
-#: ../gedit/gedit-document.c:1658
+#: ../gedit/gedit-document.c:1728
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Symbolisen linkin tietojen lukeminen kohteelle %s epäonnistui"
 
-#: ../gedit/gedit-document.c:1704
+#: ../gedit/gedit-document.c:1774
 msgid "The file has too many symbolic links."
 msgstr "Tiedostolla on liian monta symbolista linkkiä."
 
-#: ../gedit/gedit-document.c:1788
+#: ../gedit/gedit-document.c:1858
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
-msgstr ""
-"gedit ei pysty käsittelemään %s: -sijainteja kirjoitustilassa."
+msgstr "gedit ei pysty käsittelemään %s: -sijainteja kirjoitustilassa."
 
-#: ../gedit/gedit-document.c:1795
+#: ../gedit/gedit-document.c:1865
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "gedit ei pysty käsittelemään tällaista sijaintia kirjoitustilassa."
 
-#: ../gedit/gedit-document.c:1808
+#: ../gedit/gedit-document.c:1878
 msgid "Invalid filename."
 msgstr "Epäkelpo tiedostonimi."
 
-#: ../gedit/gedit-document.c:1959
+#: ../gedit/gedit-document.c:2029
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1241,7 +1237,7 @@ msgstr ""
 "Levyllä ei ole tarpeeksi tilaa tiedoston tallentamiseksi.\n"
 "Vapauta levytilaa ja yritä uudelleen."
 
-#: ../gedit/gedit-document.c:1964
+#: ../gedit/gedit-document.c:2034
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1251,7 +1247,7 @@ msgstr ""
 "Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
 "rajoitusta."
 
-#: ../gedit/gedit-document.c:2008
+#: ../gedit/gedit-document.c:2078
 msgid "Could not create a backup file."
 msgstr "Tiedoston varmuuskopiointi ei onnistunut."
 
@@ -1269,128 +1265,129 @@ msgstr "Nykyiset maa-asetukset (%s)"
 msgid "Add or _Remove..."
 msgstr "Lisää tai _poista..."
 
-#: ../gedit/gedit-encodings.c:134 ../gedit/gedit-encodings.c:179
-#: ../gedit/gedit-encodings.c:181 ../gedit/gedit-encodings.c:183
-#: ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:181
+#: ../gedit/gedit-encodings.c:183 ../gedit/gedit-encodings.c:185
+#: ../gedit/gedit-encodings.c:187
 msgid "Unicode"
 msgstr "Unicode"
 
-#: ../gedit/gedit-encodings.c:148 ../gedit/gedit-encodings.c:174
-#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:176
+#: ../gedit/gedit-encodings.c:222 ../gedit/gedit-encodings.c:265
 msgid "Western"
 msgstr "Länsimainen"
 
-#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:217
-#: ../gedit/gedit-encodings.c:254
+#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:224
+#: ../gedit/gedit-encodings.c:261
 msgid "Central European"
 msgstr "Keskieurooppalainen"
 
-#: ../gedit/gedit-encodings.c:152
+#: ../gedit/gedit-encodings.c:154
 msgid "South European"
 msgstr "Eteläeurooppalainen"
 
-#: ../gedit/gedit-encodings.c:154 ../gedit/gedit-encodings.c:170
-#: ../gedit/gedit-encodings.c:268
+#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:275
 msgid "Baltic"
 msgstr "Balttilainen"
 
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:219
-#: ../gedit/gedit-encodings.c:232 ../gedit/gedit-encodings.c:236
-#: ../gedit/gedit-encodings.c:238 ../gedit/gedit-encodings.c:256
+#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:226
+#: ../gedit/gedit-encodings.c:239 ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:263
 msgid "Cyrillic"
 msgstr "Kyrillinen"
 
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:225
-#: ../gedit/gedit-encodings.c:266
+#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:232
+#: ../gedit/gedit-encodings.c:273
 msgid "Arabic"
 msgstr "arabia"
 
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:260
+#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:267
 #: ../plugins/spell/gedit-spell-checker.c:93
 msgid "Greek"
 msgstr "kreikka"
 
-#: ../gedit/gedit-encodings.c:162
+#: ../gedit/gedit-encodings.c:164
 msgid "Hebrew Visual"
 msgstr "Heprealainen kuvapohjainen"
 
-#: ../gedit/gedit-encodings.c:164 ../gedit/gedit-encodings.c:223
-#: ../gedit/gedit-encodings.c:264 ../plugins/spell/gedit-spell-checker.c:109
+#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:230
+#: ../gedit/gedit-encodings.c:271 ../plugins/spell/gedit-spell-checker.c:109
 msgid "Hebrew"
 msgstr "heprea"
 
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:221
-#: ../gedit/gedit-encodings.c:262 ../plugins/spell/gedit-spell-checker.c:149
+#: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
+#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
 msgid "Turkish"
 msgstr "turkki"
 
-#: ../gedit/gedit-encodings.c:168
+#: ../gedit/gedit-encodings.c:170
 msgid "Nordic"
 msgstr "Pohjoismainen"
 
-#: ../gedit/gedit-encodings.c:172
+#: ../gedit/gedit-encodings.c:174
 msgid "Celtic"
 msgstr "Kelttiläinen"
 
-#: ../gedit/gedit-encodings.c:176 ../plugins/spell/gedit-spell-checker.c:137
+#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
 msgid "Romanian"
 msgstr "romania"
 
-#: ../gedit/gedit-encodings.c:188
+#: ../gedit/gedit-encodings.c:190
 msgid "Armenian"
 msgstr "armenia"
 
-#: ../gedit/gedit-encodings.c:190 ../gedit/gedit-encodings.c:192
-#: ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:192 ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:208
 msgid "Chinese Traditional"
 msgstr "Perinteinen kiinalainen"
 
-#: ../gedit/gedit-encodings.c:194
+#: ../gedit/gedit-encodings.c:196
 msgid "Cyrillic/Russian"
 msgstr "Kyrillinen/Venäläinen"
 
-#: ../gedit/gedit-encodings.c:197 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:201
+#: ../gedit/gedit-encodings.c:203 ../gedit/gedit-encodings.c:235
+#: ../gedit/gedit-encodings.c:250
 msgid "Japanese"
 msgstr "japani"
 
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:230
-#: ../gedit/gedit-encodings.c:234 ../gedit/gedit-encodings.c:249
+#: ../gedit/gedit-encodings.c:206 ../gedit/gedit-encodings.c:237
+#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:256
 msgid "Korean"
 msgstr "korea"
 
-#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:206
-#: ../gedit/gedit-encodings.c:208 ../gedit/gedit-encodings.c:212
+#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:213
+#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:219
 msgid "Chinese Simplified"
 msgstr "Yksinkertaistettu kiinalainen"
 
-#: ../gedit/gedit-encodings.c:210
+#: ../gedit/gedit-encodings.c:217
 msgid "Georgian"
 msgstr "georgia"
 
-#: ../gedit/gedit-encodings.c:240
+#: ../gedit/gedit-encodings.c:247
 msgid "Cyrillic/Ukrainian"
 msgstr "Kyrillinen/Ukrainalainen"
 
-#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:251
-#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
+#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
 msgid "Vietnamese"
 msgstr "vietnam"
 
-#: ../gedit/gedit-encodings.c:247
+#: ../gedit/gedit-encodings.c:254
 msgid "Thai"
 msgstr "thai"
 
-#: ../gedit/gedit-encodings.c:434
+#: ../gedit/gedit-encodings.c:441
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:303
+#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Tiedosto nimeltä \"%s\" on jo olemassa.\n"
 
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:307
+#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Haluatko korvata sen tiedostolla jota olet tallentamassa?"
 
@@ -1403,27 +1400,27 @@ msgstr "Sinulla on vain lukuoikeudet tiedostoon \"%s\".\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Haluatko yrittää korvata sen tiedostolla jota olet tallentamassa?"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:531
+#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:539
+#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
 msgid "All Text Files"
 msgstr "Kaikki tekstitiedostot"
 
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:550
+#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
 msgid "_Character Coding:"
 msgstr "_Merkistön koodaus:"
 
-#: ../gedit/gedit-file-selector-util.c:509
+#: ../gedit/gedit-file-selector-util.c:498
 msgid "Select a file to open"
 msgstr "Valitse avattava tiedosto"
 
-#: ../gedit/gedit-file-selector-util.c:534
+#: ../gedit/gedit-file-selector-util.c:523
 msgid "Select files to open"
 msgstr "Valitse avattavat tiedostot"
 
-#: ../gedit/gedit-file-selector-util.c:566
+#: ../gedit/gedit-file-selector-util.c:559
 msgid "Select a filename to save"
 msgstr "Valitse tiedostonimi jolla tallennetaan"
 
@@ -1431,33 +1428,33 @@ msgstr "Valitse tiedostonimi jolla tallennetaan"
 msgid "Open File..."
 msgstr "Avaa tiedosto..."
 
-#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:392
+#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
 #, c-format
 msgid "Saving document \"%s\"..."
 msgstr "Tallennetaan asiakirjaa \"%s\"..."
 
-#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:410
+#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
 #, c-format
 msgid "The document \"%s\" has not been saved."
 msgstr "Asiakirjaa \"%s\" ei ole tallennettu."
 
-#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:423
+#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
 #, c-format
 msgid "The document \"%s\" has been saved."
 msgstr "Asiakirja \"%s\" on tallennettu."
 
-#: ../gedit/gedit-file.c:374
+#: ../gedit/gedit-file.c:372
 msgid "Save as..."
 msgstr "Tallenna nimellä..."
 
-#: ../gedit/gedit-file.c:528
+#: ../gedit/gedit-file.c:526
 #, c-format
 msgid "Revert unsaved changes to document \"%s\"?"
 msgstr ""
 "Haluatko palauttaa asiakirjan \"%s\" ja kumota tallentamisen jälkeen tehdyt "
 "muutokset?"
 
-#: ../gedit/gedit-file.c:537
+#: ../gedit/gedit-file.c:535
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1471,14 +1468,14 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisten %ld sekunnin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:546
+#: ../gedit/gedit-file.c:544
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin aikana menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-file.c:552
+#: ../gedit/gedit-file.c:550
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1493,7 +1490,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin ja %ld sekunnin "
 "aikana menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:562
+#: ../gedit/gedit-file.c:560
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1507,7 +1504,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisten %ld minuutin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:577 ../gedit/gedit-file.c:598
+#: ../gedit/gedit-file.c:575 ../gedit/gedit-file.c:596
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1519,7 +1516,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-file.c:583
+#: ../gedit/gedit-file.c:581
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1534,70 +1531,70 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen tunnin ja %d minuutin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:619 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-file.c:617 ../gedit/gedit-ui.xml.h:94
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
-#: ../gedit/gedit-file.c:664
+#: ../gedit/gedit-file.c:662
 #, c-format
 msgid "Error reverting the document \"%s\"."
 msgstr "Tiedoston \"%s\" palauttaminen epäonnistui."
 
-#: ../gedit/gedit-file.c:672
+#: ../gedit/gedit-file.c:670
 #, c-format
 msgid "The document \"%s\" has not been reverted."
 msgstr "Asiakirjaa \"%s\" ei palautettu."
 
-#: ../gedit/gedit-file.c:676
+#: ../gedit/gedit-file.c:674
 #, c-format
 msgid "The document \"%s\" has been reverted."
 msgstr "Asiakirja \"%s\" on palautettu."
 
-#: ../gedit/gedit-file.c:704
+#: ../gedit/gedit-file.c:702
 #, c-format
 msgid "Reverting the document \"%s\"..."
 msgstr "Palautetaan asiakirjaa \"%s\"..."
 
-#: ../gedit/gedit-file.c:827
+#: ../gedit/gedit-file.c:825
 msgid "Could not read data from stdin."
 msgstr "Virhe luettaessa dataa stdin:istä."
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Reverting file:"
 msgstr "Palautetaan tiedostoa:"
 
-#: ../gedit/gedit-file.c:914
+#: ../gedit/gedit-file.c:912
 msgid "Loading file:"
 msgstr "Ladataan tiedostoa:"
 
-#: ../gedit/gedit-file.c:1094 ../gedit/gedit-file.c:1335
+#: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
 #, c-format
 msgid "Error loading file \"%s\""
 msgstr "Tiedoston \"%s\" lataaminen epäonnistui"
 
-#: ../gedit/gedit-file.c:1115
+#: ../gedit/gedit-file.c:1113
 #, c-format
 msgid "Loaded file \"%s\""
 msgstr "Ladattu tiedosto \"%s\""
 
-#: ../gedit/gedit-file.c:1227
+#: ../gedit/gedit-file.c:1225
 #, c-format
 msgid "Loaded %d file"
 msgid_plural "Loaded %d files"
 msgstr[0] "Ladattu %d tiedosto"
 msgstr[1] "Ladattu %d tiedostoa"
 
-#: ../gedit/gedit-file.c:1288
+#: ../gedit/gedit-file.c:1286
 #, c-format
 msgid "Created file \"%s\""
 msgstr "Luotu tiedosto \"%s\""
 
-#: ../gedit/gedit-file.c:1306
+#: ../gedit/gedit-file.c:1304
 #, c-format
 msgid "Loading file \"%s\"..."
 msgstr "Ladataan tiedostoa \"%s\"..."
 
-#: ../gedit/gedit-file.c:1471
+#: ../gedit/gedit-file.c:1469
 #, c-format
 msgid "Loading %d file..."
 msgid_plural "Loading %d files..."
@@ -1743,8 +1740,8 @@ msgid ""
 "Location') dialog and try again."
 msgstr ""
 "Tarkista ettet yritä avata binääritiedostoa ja että olet valinnut oikean "
-"koodaustavan \"Avaa tiedosto...\" (tai \"Avaa sijainti\") -ikkunassa ja yritä "
-"uudestaan."
+"koodaustavan \"Avaa tiedosto...\" (tai \"Avaa sijainti\") -ikkunassa ja "
+"yritä uudestaan."
 
 #: ../gedit/gedit-io-error-dialogs.c:315
 msgid ""
@@ -1853,54 +1850,54 @@ msgstr ""
 "levytilaa ja yritä uudelleen."
 
 #. Read only
-#: ../gedit/gedit-mdi-child.c:248
+#: ../gedit/gedit-mdi-child.c:249
 msgid "RO"
 msgstr "LUKU"
 
 #. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:649 ../gedit/gedit-ui.xml.h:85
+#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
 msgstr "_Siirrä uuteen ikkunaan"
 
-#: ../gedit/gedit-mdi-child.c:736
+#: ../gedit/gedit-mdi-child.c:803
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-mdi-child.c:746
+#: ../gedit/gedit-mdi-child.c:813
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../gedit/gedit-mdi-child.c:747
+#: ../gedit/gedit-mdi-child.c:814
 msgid "MIME Type:"
 msgstr "MIME-tyyppi:"
 
-#: ../gedit/gedit-mdi-child.c:748
+#: ../gedit/gedit-mdi-child.c:815
 msgid "Encoding:"
 msgstr "Koodaustapa:"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:253 ../gedit/gedit-mdi.c:453
+#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: ../gedit/gedit-mdi.c:528
+#: ../gedit/gedit-mdi.c:538
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: ../gedit/gedit-mdi.c:1467 ../gedit/gedit-mdi.c:1469
+#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
 msgid "Read Only"
 msgstr "Vain luku"
 
-#: ../gedit/gedit-mdi.c:2094
+#: ../gedit/gedit-mdi.c:2103
 msgid "Normal"
 msgstr "Tavallinen"
 
-#: ../gedit/gedit-mdi.c:2095
+#: ../gedit/gedit-mdi.c:2104
 msgid "Use Normal highlight mode"
 msgstr "Käytä tavallista väritystä"
 
-#: ../gedit/gedit-mdi.c:2171
+#: ../gedit/gedit-mdi.c:2180
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
@@ -2352,7 +2349,7 @@ msgstr "K_umoa"
 msgid "_View"
 msgstr "_Näytä"
 
-#: ../gedit/gedit-utils.c:695
+#: ../gedit/gedit-utils.c:686
 msgid " (invalid Unicode)"
 msgstr " (epäkelpoa Unicodea)"
 
@@ -2364,16 +2361,16 @@ msgstr " (epäkelpoa Unicodea)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:890
+#: ../gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rvi %d, Srke %d"
 
-#: ../gedit/gedit-view.c:926
+#: ../gedit/gedit-view.c:915
 msgid "  OVR"
 msgstr "  PÄÄLLE"
 
-#: ../gedit/gedit-view.c:928
+#: ../gedit/gedit-view.c:917
 msgid "  INS"
 msgstr "  LISÄÄ"
 
@@ -2562,21 +2559,21 @@ msgstr "Ta_llenna kopio..."
 msgid "Save a copy of the current document"
 msgstr "Tallenna nykyisestä asiakirjasta kopio"
 
-#: ../plugins/savecopy/savecopy.c:262
+#: ../plugins/savecopy/savecopy.c:315
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "Kopion tallentaminen epäonnistui kohteeseen \"%s\""
 
-#: ../plugins/savecopy/savecopy.c:361
+#: ../plugins/savecopy/savecopy.c:414
 msgid "You are trying to overwrite the original file"
 msgstr "Olet kirjoittamassa alkuperäisen tiedoston yli"
 
-#: ../plugins/savecopy/savecopy.c:470
+#: ../plugins/savecopy/savecopy.c:523
 msgid "Save Copy..."
 msgstr "Tallenna kopio..."
 
 #. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:502 ../plugins/savecopy/savecopy.c:512
+#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (kopio)"
@@ -2940,115 +2937,119 @@ msgid "Mongolian"
 msgstr "mongoli"
 
 #: ../plugins/spell/gedit-spell-checker.c:126
+msgid "Marathi"
+msgstr "marathi"
+
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Malay"
 msgstr "malaiji"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Maltese"
 msgstr "malta"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Norwegian Bokmal"
 msgstr "norja (bokmål)"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Dutch"
 msgstr "hollanti"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Nynorsk"
 msgstr "norja (uusnorja)"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Norwegian"
 msgstr "norja"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Nyanja"
 msgstr "njandža"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Polish"
 msgstr "puola"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Portugal)"
 msgstr "portugali (Portugali)"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Portuguese (Brazilian)"
 msgstr "portugali (Brasilia)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Quechua"
 msgstr "ketšua"
 
-#: ../plugins/spell/gedit-spell-checker.c:138
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Russian"
 msgstr "venäjä"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Kinyarwanda"
 msgstr "ruanda"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Sardinian"
 msgstr "sardi"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Slovak"
 msgstr "slovakki"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Slovenian"
 msgstr "sloveeni"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Swedish"
 msgstr "ruotsi"
 
 # suahili
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Swahili"
 msgstr "swahili"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Tamil"
 msgstr "tamili"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Tetum"
 msgstr "tetum"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tagalog"
 msgstr "tagalog"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tswana"
 msgstr "tswana"
 
-#: ../plugins/spell/gedit-spell-checker.c:150
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Ukrainian"
 msgstr "ukraina"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:152
 msgid "Uzbek"
 msgstr "uzbekki"
 
-#: ../plugins/spell/gedit-spell-checker.c:153
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Walloon"
 msgstr "valloni"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:155
 msgid "Yiddish"
 msgstr "jiddiš"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Zulu"
 msgstr "zulu"
 
-#: ../plugins/spell/gedit-spell-checker.c:826
+#: ../plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "Oletus"
 
@@ -3110,7 +3111,7 @@ msgid "Language:"
 msgstr "Kieli:"
 
 #: ../plugins/spell/spell-checker.glade2.h:12
-msgid "Mispelled word:"
+msgid "Misspelled word:"
 msgstr "Väärinkirjoitettu sana:"
 
 #: ../plugins/spell/spell-checker.glade2.h:13
@@ -3282,8 +3283,8 @@ msgid "Character encoding of linked resource"
 msgstr "Linkitetyn lähteen merkistön koodaustavat"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
-msgid "Checked(state)"
-msgstr "Valittu(tila)"
+msgid "Checked (state)"
+msgstr "Valittu (tila)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Citation"
@@ -3357,870 +3358,873 @@ msgstr "Muutokset päiväys ja kellonaika"
 msgid "Declare flag"
 msgstr "Määrittelylippu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:49
+#. Translators: DEFER is an optional attribute of the <script> tag.
+#. It indicates that the script is not going to generate any document
+#. content. The browser can continue parsing and drawing the page.
+#: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Defer attribute"
 msgstr "Defer-attribuutti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:50
+#: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Definition description"
 msgstr "Määrittelyn kuvaus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:51
+#: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Definition list"
 msgstr "Määrittelylista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:52
+#: ../plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Definition term"
 msgstr "Määrittelyn termi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:53
+#: ../plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Deleted text"
 msgstr "Poistettu teksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:54
+#: ../plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Direction"
 msgstr "Suunta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:55
+#: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Directionality"
 msgstr "Suunnallisuus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:56
+#: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Directory list"
 msgstr "Hakemistolista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Disabled"
 msgstr "Pois käytöstä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:58
+#: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document base"
 msgstr "Asiakirjan perus URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:59
+#: ../plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document body"
 msgstr "Asiakirjan runko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:60
+#: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Document head"
 msgstr "Asiakirjan otsikkotiedot"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:61
+#: ../plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Document title"
 msgstr "Asiakirjan otsikko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:62
+#: ../plugins/taglist/HTML.tags.xml.in.h:65
 msgid "Document type"
 msgstr "Asiakirjan tyyppi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:63
+#: ../plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Element ID"
 msgstr "Elementtitunniste"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:64
+#: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Embedded object"
 msgstr "Upotettu olio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:65
+#: ../plugins/taglist/HTML.tags.xml.in.h:68
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Korostus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:66
+#: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Encode type"
 msgstr "Koodaustapa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:67
+#: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Figure"
 msgstr "Kaava"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:68
+#: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Font face"
 msgstr "Kirjasintyyli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:69
+#: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "For label"
 msgstr "Otsikkoa varten"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:70
+#: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Forced line break"
 msgstr "Pakotettu rivinvaihto"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:71
+#: ../plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form"
 msgstr "Kaavake"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:72
+#: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form action handler"
 msgstr "Lomakkeen tehtäväkäsittelijä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:73
+#: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form control group"
 msgstr "Lomakkeen ohjainryhmä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:74
+#: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form field label text"
 msgstr "Lomakkeen kentän nimiketeksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Form input"
 msgstr "Lomakkeen syöte"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:76
+#: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Form input type"
 msgstr "Lomakkeen syötteen tyyppi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:77
+#: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Form method"
 msgstr "Lomakkeen metodi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:78
+#: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Forward link"
 msgstr "Linkki eteenpäin"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:79
+#: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame"
 msgstr "Kehys"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:80
+#: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frame render parts"
 msgstr "Raamin piirrettävät osat"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:81
+#: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frame source"
 msgstr "Raamin lähde"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:82
+#: ../plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frame target"
 msgstr "Raamin kohde"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:83
+#: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameborder"
 msgstr "Raamin reuna"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:84
+#: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Frameset"
 msgstr "Kehykset"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:85
+#: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Frameset columns"
 msgstr "Kehysjoukon sarakkeet"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:86
+#: ../plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Frameset rows"
 msgstr "Kehysjoukon rivit"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:87
+#: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Framespacing"
 msgstr "Raamien välien koko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:88
+#: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "Generic embedded object"
 msgstr "Yleinen upotettu objekti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:89
+#: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Generic metainformation"
 msgstr "Yleinen metatieto"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:90
+#: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Generic span"
 msgstr "Yleinen alue"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:91
+#: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HREF URI"
 msgstr "HREF URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:92
+#: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML - Special Characters"
 msgstr "HTML - Erikoismerkit"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:93
+#: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTML - Tags"
 msgstr "HTML - Tagit"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:94
+#: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "HTML root element"
 msgstr "HTMLn juurielementti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:95
+#: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "HTML version"
 msgstr "HTML-versio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:96
+#: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "HTTP header name"
 msgstr "HTTP-otsakkeen nimi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:97
+#: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Header cell ID's"
 msgstr "Otsakkeen solutunnisteet"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:98
+#: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading"
 msgstr "Otsikko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:99
+#: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 1"
 msgstr "Otsikko 1"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:100
+#: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 2"
 msgstr "Otsikko 2"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:101
+#: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 3"
 msgstr "Otsikko 3"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:102
+#: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Heading 4"
 msgstr "Otsikko 4"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:103
+#: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Heading 5"
 msgstr "Otsikko 5"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:104
+#: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Heading 6"
 msgstr "Otsikko 6"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:105
+#: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Height"
 msgstr "Korkeus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:106
+#: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Horizontal rule"
 msgstr "Vaakaviiva"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:107
+#: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Horizontal space"
 msgstr "Vaakasuuntainen tyhjä tila"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:108
+#: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "I18N BiDi over-ride"
 msgstr "I18N kaksisuuntaisuuden ohitus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:109
+#: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image"
 msgstr "Kuva"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:110
+#: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image map"
 msgstr "Kuvakartta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:111
+#: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Image map area"
 msgstr "Kuvakartan alue"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:112
+#: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Image map name"
 msgstr "Kuvakartan nimi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:113
+#: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Image source"
 msgstr "Kuvan lähde"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:114
+#: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Inline frame"
 msgstr "Sisäkkäinen kehys"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:115
+#: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Inline layer"
 msgstr "Sisäkkäinen kerros"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:116
+#: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Inserted text"
 msgstr "Lisätty teksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:117
+#: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Instance definition"
 msgstr "Instanssin määritelmä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:118
+#: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Italic text"
 msgstr "Kursivoitu teksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:119
+#: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Java applet"
 msgstr "Java-sovelma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:120
+#: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Label"
 msgstr "Otsikko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:121
+#: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Language code"
 msgstr "Kielikoodi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:122
+#: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Large text style"
 msgstr "Iso tekstityyli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:123
+#: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Layer"
 msgstr "Kerros"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:124
+#: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Link color"
 msgstr "Linkin väri"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:125
+#: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "List item"
 msgstr "Luettelon kohta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:126
+#: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "List of MIME types for file upload"
 msgstr "Sisään tuotavien tiedostojen MIME-tyypit"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:127
+#: ../plugins/taglist/HTML.tags.xml.in.h:130
 msgid "List of supported character sets"
 msgstr "Lista tuetuista merkistöistä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:128
+#: ../plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Listing"
 msgstr "Listaus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:129
+#: ../plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Local change to font"
 msgstr "Paikallinen muutos kirjasimeen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:130
+#: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Long description link"
 msgstr "Linkki pitkään kuvaukseen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Long quotation"
 msgstr "Pitkä lainaus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Mail link"
 msgstr "Sähköpostilinkki"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:133
+#: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Margin pixel height"
 msgstr "Reunuksen korkeus pikseleissä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:134
+#: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Margin pixel width"
 msgstr "Reunuksen leveys pikseleissä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:135
+#: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Marquee"
 msgstr "Marquee"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:136
+#: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Maximum length of text field"
 msgstr "Tekstikentän enimmäisleveys"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:137
+#: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Media-independent link"
 msgstr "Media-riippumaton linkki"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:138
+#: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Menu list"
 msgstr "Otsikkolista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:139
+#: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Multi-line text field"
 msgstr "Monirivinen tekstikenttä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:140
+#: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Multicolumn"
 msgstr "Monisarakkeinen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:141
+#: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Multiple"
 msgstr "Useita"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:142
+#: ../plugins/taglist/HTML.tags.xml.in.h:145
 msgid "Name"
 msgstr "Nimi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:143
+#: ../plugins/taglist/HTML.tags.xml.in.h:146
 msgid "Named property value"
 msgstr "Nimetty ominaisuusarvo"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:144
+#: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Next ID"
 msgstr "Seuraava ID"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:145
+#: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No URI"
 msgstr "Ei URI:tä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No embedded objects"
 msgstr "Ei upotettuja objekteja"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:147
+#: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No frames"
 msgstr "Ei kehyksiä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:148
+#: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No layers"
 msgstr "Ei kerroksia"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:149
+#: ../plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No line break"
 msgstr "Ei rivinvaihtoja"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:150
+#: ../plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No resize"
 msgstr "Ei koonmuutosta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:151
+#: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "No script"
 msgstr "Ei skriptiä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:152
+#: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "No shade"
 msgstr "Ei varjostusta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "No word wrap"
 msgstr "Ei rivitystä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:154
+#: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Note"
 msgstr "Huomautus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:155
+#: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Object applet file"
 msgstr "Oliosovelman tiedosto"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:156
+#: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Object data reference"
 msgstr "Oliotiedon viite"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:157
+#: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Offset for alignment character"
 msgstr "Sisennyskirjaimen siirtymä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:158
+#: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnBlur event"
 msgstr "OnBlur-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:159
+#: ../plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnChange event"
 msgstr "OnChange-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:160
+#: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnClick event"
 msgstr "OnClick-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:161
+#: ../plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnDblClick event"
 msgstr "OnDblClick-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:162
+#: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnFocus event"
 msgstr "OnFocus-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:163
+#: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnKeyDown event"
 msgstr "OnKeyDown-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:164
+#: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnKeyPress event"
 msgstr "OnKeyPress-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:165
+#: ../plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnKeyUp event"
 msgstr "OnKeyUp-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:166
+#: ../plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnLoad event"
 msgstr "OnLoad-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:167
+#: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseDown event"
 msgstr "OnMouseDown-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:168
+#: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseMove event"
 msgstr "OnMouseMove-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:169
+#: ../plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnMouseOut event"
 msgstr "OnMouseOut-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:170
+#: ../plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnMouseOver event"
 msgstr "OnMouseOver-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:171
+#: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnMouseUp event"
 msgstr "OnMouseUp-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:172
+#: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnReset event"
 msgstr "OnReset-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:173
+#: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "OnSelect event"
 msgstr "OnSelect-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:174
+#: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "OnSubmit event"
 msgstr "OnSubmit-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:175
+#: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "OnUnload event"
 msgstr "OnUnload-tapahtuma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:176
+#: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Option group"
 msgstr "Valintaryhmä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:177
+#: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Option selector"
 msgstr "Valinnan valitsin"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:178
+#: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Ordered list"
 msgstr "Järjestetty lista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:179
+#: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Output media"
 msgstr "Esitysmedia"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:180
+#: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Paragraph"
 msgstr "Kappale"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:181
+#: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Paragraph class"
 msgstr "Kappaleen luokka"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:182
+#: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Paragraph style"
 msgstr "Kappaleen tyyli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:183
+#: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Preformatted listing"
 msgstr "Esimuotoiltu listaus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:184
+#: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Preformatted text"
 msgstr "Esimuotoiltu teksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:185
+#: ../plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Profile metainfo dictionary"
 msgstr "Profiilin metatiedon sanakirja"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:186
+#: ../plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Prompt message"
 msgstr "Kysymysviesti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:187
+#: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "Push button"
 msgstr "Painike"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:188
+#: ../plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Quote"
 msgstr "Lainaus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:189
+#: ../plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Range"
 msgstr "Alue"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:190
+#: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "ReadOnly text and password"
 msgstr "Vain luettava teksti ja salasanat"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:191
+#: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Reduced spacing"
 msgstr "Pienennetty välistys"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Reverse link"
 msgstr "Käänteinen linkkki"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:193
+#: ../plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Root"
 msgstr "Juuri"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:194
+#: ../plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Rows"
 msgstr "Rivejä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:195
+#: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Rulings between rows and columns"
 msgstr "Rivien ja sarakkeiden väliset viivat"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:196
+#: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Sample program output, scripts"
 msgstr "Ohjelman tulosteen esimerkki ja skriptit"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:197
+#: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scope covered by header cells"
 msgstr "Otsikkosolujen kohdealue"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:198
+#: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "Script language name"
 msgstr "Skriptikielen nimi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:199
+#: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "Script statments"
 msgstr "Skriptin lausekkeita"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:200
+#: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Scrollbar"
 msgstr "Vierityspalkki"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:201
+#: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "Selectable option"
 msgstr "Valittavissa oleva vaihtoehto"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:202
+#: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Selected"
 msgstr "Valittu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:203
+#: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Server-side image map"
 msgstr "Palvelimella oleva kuvakartta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:204
+#: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "Shape"
 msgstr "Muoto"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:205
+#: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "Short inline quotation"
 msgstr "Lyhyt sisäkkäinen lainaus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:206
+#: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Single line prompt"
 msgstr "Yhden rivin kehote"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:207
+#: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Size"
 msgstr "Koko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:208
+#: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "Small text style"
 msgstr "Pienen tekstin tyyli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:209
+#: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "Soft line break"
 msgstr "Pehmeä rivinvaihto"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:210
+#: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Sound"
 msgstr "Ääni"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:212
+#: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Space"
 msgstr "Välilyönti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:213
+#: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Space separated archive list"
 msgstr "Välilyönnillä erotettu arkistolista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
+#: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "Spacer"
 msgstr "Välje"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:215
+#: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Spacing between cells"
 msgstr "Solujen välinen tila"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:216
+#: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Spacing within cells"
 msgstr "Solujen välinen tila"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:217
+#: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Span"
 msgstr "Väli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:218
+#: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Square root"
 msgstr "Neliöjuuri"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:219
+#: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Standby load msg"
 msgstr "Latausviesti kun ei käytössä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:220
+#: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Starting sequence number"
 msgstr "Aloittava järjestysnumero"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:221
+#: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Strike-through text"
 msgstr "Lävistetty teksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:222
+#: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Strike-through text style"
 msgstr "Lävistetty tekstityyli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:223
+#: ../plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Strong emphasis"
 msgstr "Voimakas korostus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:224
+#: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Style info"
 msgstr "Tyylin tiedot"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:225
+#: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Subscript"
 msgstr "Alaviite"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:226
+#: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Superscript"
 msgstr "Yläviite"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:227
+#: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Tab order position"
 msgstr "Tabulaattorijärjestys"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:228
+#: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table"
 msgstr "Taulukko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:229
+#: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table body"
 msgstr "Taulukon runko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:230
+#: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table caption"
 msgstr "Taulukon erotin"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:231
+#: ../plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table column group properties"
 msgstr "Taulukon sarakeryhmän ominaisuudet"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:232
+#: ../plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Table column properties"
 msgstr "Taulukon sarakkeen ominaisuudet"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:233
+#: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table data cell"
 msgstr "Taulukon tietoalkio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:234
+#: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table footer"
 msgstr "Taulukon alatunniste"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:235
+#: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table header"
 msgstr "Taulukon ylätunniste"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:236
+#: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Table header cell"
 msgstr "Taulukon otsikkoalkio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:237
+#: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Table row"
 msgstr "Taulukon rivi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:238
+#: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Table summary"
 msgstr "Taulukon kooste"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:239
+#: ../plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Blank"
 msgstr "Kohde - Tyhjä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:240
+#: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Target - Parent"
 msgstr "Kohde - Ylempi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:241
+#: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Target - Self"
 msgstr "Kohde - Sama ikkuna"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:242
+#: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Target - Top"
 msgstr "Kohde - Ylin"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:243
+#: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Teletype or monospace text style"
 msgstr "Tasavälinen tekstityyli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:244
+#: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Text"
 msgstr "Teksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:245
+#: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Text color"
 msgstr "Tekstiväri"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:246
+#: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Text entered by user"
 msgstr "Käyttäjän syöttämä teksti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:247
+#: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Title"
 msgstr "Otsikko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:248
+#: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Topmargin in pixels"
 msgstr "Yläreunus pikseleissä"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:249
+#: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "URL"
 msgstr "URL"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:250
+#: ../plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Underlined text style"
 msgstr "Alleviivattu tekstityyli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:251
+#: ../plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Unordered list"
 msgstr "Järjestelemätön luettelo"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:252
+#: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Use image map"
 msgstr "Käytä kuvakarttaa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:253
+#: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Value"
 msgstr "Arvo"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:254
+#: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Value interpretation"
 msgstr "Arvon tulkinta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:255
+#: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Variable or program argument"
 msgstr "Muuttuva tai ohjelman argumentti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:256
+#: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Vertical cell alignment"
 msgstr "Pystysuora alkioiden kohdistus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:257
+#: ../plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Vertical space"
 msgstr "Pystytyhje"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:258
+#: ../plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Visited link color"
 msgstr "Vieraillun linkin väri"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:259
+#: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Width"
 msgstr "Leveys"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
-msgid "Bibliography cite"
-msgstr "Kirjallisuusluettelo lainaus"
+msgid "Bibliography (cite)"
+msgstr "Kirjallisuusluettelo (lainaus)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:2
-msgid "Bibliography item"
-msgstr "Kirjallisuusluettelo kohta"
+msgid "Bibliography (item)"
+msgstr "Kirjallisuusluettelo (kohta)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:3
-msgid "Bibliography shortcite"
-msgstr "Kirjallisuusluettelo lyhyt lainaus"
+msgid "Bibliography (shortcite)"
+msgstr "Kirjallisuusluettelo (lyhyt lainaus)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:4
-msgid "Bibliography thebibliography"
-msgstr "Kirjallisuusluettelo thebibliography"
+msgid "Bibliography (thebibliography)"
+msgstr "Kirjallisuusluettelo (thebibliography)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
-msgid "Brackets &lt;&gt;"
-msgstr "Sulkeet &lt;&gt;"
-
-#: ../plugins/taglist/Latex.tags.xml.in.h:6
 msgid "Brackets ()"
 msgstr "Sulkeet ()"
+
+#: ../plugins/taglist/Latex.tags.xml.in.h:6
+msgid "Brackets <>"
+msgstr "Sulkeet <>"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
@@ -4391,20 +4395,20 @@ msgid "Reference ref"
 msgstr "Viittaus (ref)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:50
-msgid "Symbol &gt;&gt;"
-msgstr "Symboli &gt;&gt;"
+msgid "Symbol <<"
+msgstr "Symboli <<"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:51
-msgid "Symbol &gt;="
-msgstr "Symboli &gt;="
+msgid "Symbol <="
+msgstr "Symboli <="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:52
-msgid "Symbol &lt;&lt;"
-msgstr "Symboli &lt;&lt;"
+msgid "Symbol >="
+msgstr "Symboli >="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:53
-msgid "Symbol &lt;="
-msgstr "Symboli &lt;="
+msgid "Symbol >>"
+msgstr "Symboli >>"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
@@ -4606,11 +4610,11 @@ msgstr "Li_sää päiväys/aika..."
 msgid "Insert current date and time at the cursor position"
 msgstr "Lisää päiväys ja aika kohdistimen kohdalle"
 
-#: ../plugins/time/time.c:455
+#: ../plugins/time/time.c:457
 msgid "Available formats"
 msgstr "Käytettävissä olevat muodot"
 
-#: ../plugins/time/time.c:563
+#: ../plugins/time/time.c:565
 msgid "Configure insert date/time plugin..."
 msgstr "Muokkaa päiväys/aika -liitännäisen asetuksia..."
 
@@ -4653,6 +4657,33 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid "<b>Undo</b>"
+#~ msgstr "<b>Kumoaminen</b>"
+
+#~ msgid "_Limit to"
+#~ msgstr "_Raja"
+
+#~ msgid "_Unlimited undo"
+#~ msgstr "_Loppumattomat kumoamiskerrat"
+
+#~ msgid "act_ions"
+#~ msgstr "toim_intoa"
+
+#~ msgid "Invalid file name"
+#~ msgstr "Epäkelpo tiedostonimi"
+
+#~ msgid "Brackets &lt;&gt;"
+#~ msgstr "Sulkeet &lt;&gt;"
+
+#~ msgid "Symbol &gt;&gt;"
+#~ msgstr "Symboli &gt;&gt;"
+
+#~ msgid "Symbol &gt;="
+#~ msgstr "Symboli &gt;="
+
+#~ msgid "Symbol &lt;&lt;"
+#~ msgstr "Symboli &lt;&lt;"
 
 #~ msgid "Afar"
 #~ msgstr "afar"
@@ -5321,9 +5352,6 @@ msgstr "_Käytä mukautettua muotoilua"
 #~ msgid "Austronesian (Other)"
 #~ msgstr "muut austronesialaiset kielet"
 
-#~ msgid "Marathi"
-#~ msgstr "marathi"
-
 #~ msgid "Masai"
 #~ msgstr "masai"
 
@@ -5808,7 +5836,6 @@ msgstr "_Käytä mukautettua muotoilua"
 #~ msgid "Wolof"
 #~ msgstr "wolof"
 
-#, fuzzy
 #~ msgid "Kalmyk; Oirat"
 #~ msgstr "kalmukki"
 
