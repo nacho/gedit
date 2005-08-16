@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-01 06:05+0000\n"
-"PO-Revision-Date: 2005-03-06 18:09+0100\n"
-"Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
+"POT-Creation-Date: 2005-08-13 14:11+0000\n"
+"PO-Revision-Date: 2005-08-13 19:50+0100\n"
+"Last-Translator: Reinout van Schouwen <reinout@cs.vu.nl>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -217,34 +217,49 @@ msgstr ""
 "gebruikt."
 
 #: ../data/gedit.schemas.in.h:30
+msgid "Max Number of Undo Actions"
+msgstr "Max. aantal keren ongedaan maken"
+
+#: ../data/gedit.schemas.in.h:31
 msgid "Maximum Recent Files"
 msgstr "Maximaal aantal recente bestanden"
 
-#: ../data/gedit.schemas.in.h:31
-msgid "Maximum number of actions that gedit will be able to undo or redo."
+#: ../data/gedit.schemas.in.h:32
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions."
 msgstr ""
-"Maximaal aantal acties dat gedit ongedaan kan maken of opnieuw kan doen."
+"Maximaal aantal acties dat gedit ongedaan kan maken of opnieuw kan doen. "
+"Gebruik \"-1\" voor een ongelimiteerd aantal acties."
+
+#: ../data/gedit.schemas.in.h:33
+msgid ""
+"Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
+"\" for unlimited number of actions. Deprecated since 2.12.0"
+msgstr ""
+"Maximaal aantal acties dat gedit ongedaan kan maken of opnieuw kan doen. "
+"Gebruik \"-1\" voor een ongelimiteerd aantal acties. Ontraden sinds 2.12.0"
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:34
+#: ../data/gedit.schemas.in.h:36
 msgid "Monospace 12"
 msgstr "Vaste spatiëring 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:37
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 9"
 msgstr "Vaste spatiëring 9"
 
 #. Translators: This is the Body font for printing.
-#. This is a gnome-print font name and replaced by
+#. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:43
 msgid "Monospace Regular 9"
 msgstr "Vaste spatiëring Normaal 9"
 
-#: ../data/gedit.schemas.in.h:42
+#: ../data/gedit.schemas.in.h:44
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -252,61 +267,61 @@ msgstr ""
 "Aantal minuten waarna gedit bewerkte bestanden automatisch opslaat. Dit "
 "heeft alleen effect wanneer de optie \"Automatisch opslaan\" actief is."
 
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:45
 msgid "Print Header"
 msgstr "Paginakoppen afdrukken"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:46
 msgid "Print Line Numbers"
 msgstr "Regelnummers afdrukken"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:47
 msgid "Print Syntax Highlighting"
 msgstr "Syntaxiskleuring afdrukken"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:48
 msgid "Printing Line Wrapping Mode"
 msgstr "Regels afbreken bij afdrukken"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:49
 msgid "Right Margin Position"
 msgstr "Positie van rechterkantlijn"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:52
 msgid "Sans 11"
 msgstr "Schreefloos 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:53
+#: ../data/gedit.schemas.in.h:55
 msgid "Sans 8"
 msgstr "Schreefloos 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans Regular 11"
 msgstr "Schreefloos Normaal 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 8"
 msgstr "Schreefloos Normaal 8"
 
-#: ../data/gedit.schemas.in.h:62
+#: ../data/gedit.schemas.in.h:64
 msgid "Selected Text Color"
 msgstr "Kleur van geselecteerde tekst"
 
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:65
 msgid "Selection Color"
 msgstr "Selectiekleur"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:66
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -316,7 +331,7 @@ msgstr ""
 "bepalen van bestandscoderingen. \"CURRENT\" is de huidige codering behorend "
 "bij de taalregio. Alleen erkende coderingen worden gebruikt."
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -330,7 +345,7 @@ msgstr ""
 "Hoofdlettergevoelig zijn. Zorg er dus voor dat ze exact zo zijn als hier "
 "weergegeven."
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -344,13 +359,13 @@ msgstr ""
 "waarden Hoofdlettergevoelig zijn. Zorg er dus voor dat ze exact zo zijn als "
 "hier weergegeven."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:69
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Het lettertype om te gebruiken voor de inhoud van documenten bij afdrukken."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -359,7 +374,7 @@ msgstr ""
 "het afdrukken ervan. Dit is een gnome-print lettertypenaam en wordt "
 "vervangen door print_font_body_pango."
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -368,7 +383,7 @@ msgstr ""
 "afdrukken. Dit heeft alleen effect indien de optie \"Regelnummers afdrukken"
 "\" is ingeschakeld."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -379,7 +394,7 @@ msgstr ""
 "\" is ingeschakeld. Dit is een gnome-print lettertypenaam en wordt vervangen "
 "door print_font_numbers_pango."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -388,7 +403,7 @@ msgstr ""
 "afdrukken. Dit heeft alleen effect indien de optie \"Paginakoppen afdrukken"
 "\" is ingeschakeld."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -399,7 +414,7 @@ msgstr ""
 "\" is ingeschakeld. Dit is een gnome-print lettertypenaam en wordt vervangen "
 "door print_font_header_pango."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -407,22 +422,22 @@ msgstr ""
 "Het maximum aantal van recent geopende bestanden dat wordt weergegeven in "
 "het deelmenu \"Recente bestanden\"."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "Het aantal spaties dat moet weergegeven op de plaats van Tab karakters. "
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid "Specifies the position of the right margin."
 msgstr "Geeft positie van rechterkantlijn aan."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid "Status Bar is Visible"
 msgstr "Statusbalk is zichtbaar"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -439,44 +454,44 @@ msgstr ""
 "weer te geven. Let op dat de waarden hoofdlettergevoelig zijn. Zorg er dus "
 "voor dat ze precies zo verschijnen zoals ze hier worden genoemd. "
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid "Tab Size"
 msgstr "Tabgrootte"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid "Text Color"
 msgstr "Tekstkleur"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid "Toolbar Buttons Style"
 msgstr "Werkbalk-knoppenstijl"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid "Toolbar is Visible"
 msgstr "Werkbalk zichtbaar"
 
-#: ../data/gedit.schemas.in.h:82
-msgid "Undo Actions Limit"
-msgstr "Aantal ongedaan te maken acties"
+#: ../data/gedit.schemas.in.h:84
+msgid "Undo Actions Limit (DEPRECATED)"
+msgstr "Limiet op aantal ongedaan maken-acties (ONTRADEN)"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Use Default Colors"
 msgstr "Standaardkleuren gebruiken"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid "Use Default Font"
 msgstr "Standaardlettertype gebruiken"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
 "Automatisch opslaan van veranderde bestanden na een bepaalde tijd. U kunt "
-"het interval instellen met de optie \"Auto Opslaan Interval\"."
+"het interval instellen met de optie \"Automatisch opslaan-interval\"."
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -485,52 +500,52 @@ msgstr ""
 "reservekopieen kunt U instellen met de optie \"Achtervoegsel voor "
 "reservekopie\"."
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Weergeven regelnummers in het bewerkingsgedeelte."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Weergeven rechterkantlijn in het bewerkingsgedeelte"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Whether gedit should enable auto indentation."
 msgstr "Automatisch inspringen inschakelen"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Syntaxiskleuring inschakelen"
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Overeenkomstige haakjesmarkering inschakelen"
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should highlight the current line."
 msgstr "Markering van de huidige regel inschakelen"
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Documentkoppen invoegen bij het afdrukken van documenten."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Spaties in plaats van tabs invoegen."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Syntaxiskleuring gebruiken bij het afdrukken van documenten."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Zichtbaarheid van statusbalk onderaan bewerkingsvensters."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Zichtbaarheid van werkbalk in bewerkingsvensters."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:100
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -542,7 +557,7 @@ msgstr ""
 "die aangegeven zijn in de opties \"Achtergrondkleur\", \"Tekstkleur\", "
 "\"Geselecteerde tekstkleur\", en \"Selectiekleur\"."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:101
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -555,18 +570,18 @@ msgstr ""
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2124
+#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
 #, c-format
 msgid "Activate %s"
 msgstr "%s activeren"
@@ -707,7 +722,7 @@ msgid "Replace _All"
 msgstr "_Alles vervangen"
 
 #: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:316
+#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
 msgid "_Replace"
 msgstr "_Vervangen"
 
@@ -783,20 +798,20 @@ msgstr ""
 msgid "The selected file is not executable."
 msgstr "Het geselecteerde bestand is niet uitvoerbaar."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:730
+#: ../gedit/dialogs/gedit-preferences-dialog.c:649
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Druk op deze knop om het lettertype te selecteren dat de editor gebruikt"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:732
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to configure text color"
 msgstr "Druk op deze knop om de kleur van de text te kiezen"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:734
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure background color"
 msgstr "Druk op deze knop om de achtergrondkleur te configureren"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:736
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -804,7 +819,7 @@ msgstr ""
 "Druk op deze knop om de kleur te kiezen waarin geselecteerde tekst "
 "weergegeven zal worden"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:739
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -812,7 +827,7 @@ msgstr ""
 "Druk op deze knop om de kleur te kiezen waarin geselecteerde tekst "
 "gemarkeerd zal worden"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1189
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
 msgid "Elements"
 msgstr "Elementen"
 
@@ -865,191 +880,175 @@ msgid "<b>Text Wrapping</b>"
 msgstr "<b>Regelafbreking</b>"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:12
-msgid "<b>Undo</b>"
-msgstr "<b>Ongedaan maken</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Kleuren</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences.glade2.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "Vet"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences.glade2.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "_Reservekopie maken van bestanden voor het opslaan"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-msgid "D_isplay right margin"
-msgstr "Rechterkantl_ijn weergeven"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+msgid "Display right _margin"
+msgstr "Rechter_kantlijn weergeven"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences.glade2.h:16
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:4
 msgid "Do not _split words over two lines"
 msgstr "Woorden niet over twee regels _splitsen"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences.glade2.h:17
 msgid "Editor"
 msgstr "Editor"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
+#: ../gedit/dialogs/gedit-preferences.glade2.h:18
 msgid "Editor _font: "
 msgstr "Editor_lettertype:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences.glade2.h:19
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
 msgstr "Regela_fbreking inschakelen"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "Font & Colors"
 msgstr "Lettertype & kleuren"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences.glade2.h:21
 msgid "Hi_ghlight current line"
 msgstr "Huidi_ge regel markeren"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences.glade2.h:22
 msgid "Highlight _mode:"
 msgstr "_Tekstkleuring:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
-msgid "Highlight matching bracket"
-msgstr "Overeenkomstig haakje markeren"
+#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+msgid "Highlight matching _bracket"
+msgstr "Overeenkomstig h_aakje markeren"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences.glade2.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "_Spaties invoegen in plaats van tabs"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences.glade2.h:25
 msgid "Italic"
 msgstr "Schuingedrukt"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences.glade2.h:26
 msgid "Normal _text color:"
 msgstr "Normale _tekstkleur:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences.glade2.h:27
 msgid "Pick a color"
 msgstr "Kies een kleur"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences.glade2.h:28
 msgid "Pick the background color"
 msgstr "Kies de achtergrondkleur"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences.glade2.h:29
 msgid "Pick the editor font"
 msgstr "Kies het editor-lettertype"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences.glade2.h:30
 msgid "Pick the normal text color"
 msgstr "Kies de normale tekstkleur"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences.glade2.h:31
 msgid "Pick the selected text color"
 msgstr "Kies de geselecteerde-tekstkleur"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences.glade2.h:32
 msgid "Pick the selection color"
 msgstr "Kies de selectie kleur"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences.glade2.h:33
 msgid "Plugins"
 msgstr "Plugins"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences.glade2.h:34
 msgid "Preferences"
 msgstr "Voorkeuren"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences.glade2.h:35
 msgid "Se_lection color:"
 msgstr "Se_lectiekleur:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences.glade2.h:36
 msgid "Selecte_d text color:"
 msgstr "_Tekstselectie kleur:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences.glade2.h:37
 msgid "Strikethrough"
 msgstr "Doorgestreept"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences.glade2.h:38
 msgid "Syntax Highlighting"
 msgstr "Syntaxiskleuring"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences.glade2.h:39
 msgid "U_se default theme colors"
 msgstr "_Standaard themakleuren gebruiken"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences.glade2.h:40
 msgid "Underline"
 msgstr "Onderstrepen"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences.glade2.h:41
 msgid "View"
 msgstr "Beeld"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences.glade2.h:42
 msgid "_Autosave files every"
 msgstr "_Automatisch bestanden opslaan elke"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences.glade2.h:43
 msgid "_Background color:"
 msgstr "A_chtergrondkleur:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences.glade2.h:44
 msgid "_Background:"
 msgstr "A_chtergrond:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences.glade2.h:45
 msgid "_Display line numbers"
 msgstr "Regelnummers _weergeven"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences.glade2.h:46
 msgid "_Enable automatic indentation"
 msgstr "_Automatisch inspringen inschakelen"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences.glade2.h:47
 msgid "_Enable syntax highlighting"
 msgstr "S_yntaxiskleuring inschakelen"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences.glade2.h:48
 msgid "_Foreground:"
 msgstr "_Voorgrond:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
-msgid "_Limit to"
-msgstr "_Beperken tot"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences.glade2.h:49
 msgid "_Reset to Default "
 msgstr "_Terugzetten naar standaard"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences.glade2.h:50
 msgid "_Right margin at column:"
 msgstr "_Rechterkantlijn in kolom:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences.glade2.h:51
 msgid "_Tab width:"
 msgstr "_Tabgrootte:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:54
-msgid "_Unlimited undo"
-msgstr "_Ongelimiteerd ongedaan maken"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:55
+#: ../gedit/dialogs/gedit-preferences.glade2.h:52
 msgid "_Use default theme font"
 msgstr "Gebr_uik standaard thema lettertype"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:56
+#: ../gedit/dialogs/gedit-preferences.glade2.h:53
 msgid "_minutes"
 msgstr "_minuten"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:57
-msgid "act_ions"
-msgstr "_acties"
 
 #: ../gedit/dialogs/goto-line.glade2.h:1
 msgid "Goto Line"
@@ -1215,42 +1214,42 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-document.c:370
+#: ../gedit/gedit-document.c:380
 #, c-format
 msgid "%s %d"
 msgstr "%s %d"
 
-#: ../gedit/gedit-document.c:370
+#: ../gedit/gedit-document.c:380
 msgid "Unsaved Document"
 msgstr "Niet-opgeslagen document"
 
-#: ../gedit/gedit-document.c:916 ../gedit/gedit-document.c:1468
+#: ../gedit/gedit-document.c:926 ../gedit/gedit-document.c:1478
 msgid "Invalid UTF-8 data"
 msgstr "Ongeldige UTF-8 data"
 
-#: ../gedit/gedit-document.c:1718
+#: ../gedit/gedit-document.c:1728
 #, c-format
 msgid "Could not read symbolic link information for %s"
 msgstr "Kon de symbolische verwijzing niet lezen voor %s"
 
-#: ../gedit/gedit-document.c:1764
+#: ../gedit/gedit-document.c:1774
 msgid "The file has too many symbolic links."
 msgstr "Het bestand heeft te veel sybolische verwijzingen."
 
-#: ../gedit/gedit-document.c:1848
+#: ../gedit/gedit-document.c:1858
 #, c-format
 msgid "gedit cannot handle %s: locations in write mode."
 msgstr "gedit kan geen %s: gebruiken in schrijfmodus."
 
-#: ../gedit/gedit-document.c:1855
+#: ../gedit/gedit-document.c:1865
 msgid "gedit cannot handle this kind of location in write mode."
 msgstr "de tekst-editor kan deze locatie niet gebruiken in schrijfmodus."
 
-#: ../gedit/gedit-document.c:1868
+#: ../gedit/gedit-document.c:1878
 msgid "Invalid filename."
 msgstr "Ongeldige bestandsnaam."
 
-#: ../gedit/gedit-document.c:2019
+#: ../gedit/gedit-document.c:2029
 msgid ""
 "There is not enough disk space to save the file.\n"
 "Please free some disk space and try again."
@@ -1258,7 +1257,7 @@ msgstr ""
 "Er is niet genoeg vrije schijfruimte om het bestand op te slaan.\n"
 "Maak wat schijfruimte vrij en probeer het opnieuw."
 
-#: ../gedit/gedit-document.c:2024
+#: ../gedit/gedit-document.c:2034
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1268,7 +1267,7 @@ msgstr ""
 "bestanden. Probeer het bestand kleiner te maken of sla het op een andere "
 "schijf op."
 
-#: ../gedit/gedit-document.c:2068
+#: ../gedit/gedit-document.c:2078
 msgid "Could not create a backup file."
 msgstr "Kan geen reservekopie van het bestand maken."
 
@@ -1337,7 +1336,7 @@ msgid "Hebrew"
 msgstr "Hebreeuws"
 
 #: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:149
+#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
 msgid "Turkish"
 msgstr "Turks"
 
@@ -1349,7 +1348,7 @@ msgstr "Noors"
 msgid "Celtic"
 msgstr "Keltisch"
 
-#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:137
+#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
 msgid "Romanian"
 msgstr "Roemeens"
 
@@ -1391,7 +1390,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Cyrillisch/Oekraïens"
 
 #: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
-#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
 msgid "Vietnamese"
 msgstr "Vietnamees"
 
@@ -1403,12 +1402,12 @@ msgstr "Thais"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:303
+#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
 #, c-format
 msgid "A file named \"%s\" already exists.\n"
 msgstr "Het bestand \"%s\" bestaat al.\n"
 
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:307
+#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
 msgid "Do you want to replace it with the one you are saving?"
 msgstr "Wilt u het vervangen door hetgeen dat u nu opslaat?"
 
@@ -1421,15 +1420,15 @@ msgstr "Het bestand \"%s\" is alleen-lezen.\n"
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Wilt u het proberen te vervangen door hetgeen dat u nu opslaat?"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:531
+#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
 msgid "All Files"
 msgstr "Alle bestanden"
 
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:539
+#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
 msgid "All Text Files"
 msgstr "Alle tekst bestanden"
 
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:550
+#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
 msgid "_Character Coding:"
 msgstr "Te_kencodering:"
 
@@ -1874,54 +1873,54 @@ msgstr ""
 "wat ruimte vrij en probeer het opnieuw."
 
 #. Read only
-#: ../gedit/gedit-mdi-child.c:248
+#: ../gedit/gedit-mdi-child.c:249
 msgid "RO"
 msgstr "AL"
 
 #. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:649 ../gedit/gedit-ui.xml.h:85
+#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
 msgstr "Ver_plaatsen naar nieuw venster"
 
-#: ../gedit/gedit-mdi-child.c:736
+#: ../gedit/gedit-mdi-child.c:803
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-mdi-child.c:746
+#: ../gedit/gedit-mdi-child.c:813
 msgid "Name:"
 msgstr "Naam:"
 
-#: ../gedit/gedit-mdi-child.c:747
+#: ../gedit/gedit-mdi-child.c:814
 msgid "MIME Type:"
 msgstr "MIME-type:"
 
-#: ../gedit/gedit-mdi-child.c:748
+#: ../gedit/gedit-mdi-child.c:815
 msgid "Encoding:"
 msgstr "Codering:"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:253 ../gedit/gedit-mdi.c:453
+#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' openen"
 
-#: ../gedit/gedit-mdi.c:528
+#: ../gedit/gedit-mdi.c:538
 msgid "Open a recently used file"
 msgstr "Een recent gebruikt bestand openen"
 
-#: ../gedit/gedit-mdi.c:1467 ../gedit/gedit-mdi.c:1469
+#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
 msgid "Read Only"
 msgstr "Alleen lezen"
 
-#: ../gedit/gedit-mdi.c:2094
+#: ../gedit/gedit-mdi.c:2103
 msgid "Normal"
 msgstr "Normaal"
 
-#: ../gedit/gedit-mdi.c:2095
+#: ../gedit/gedit-mdi.c:2104
 msgid "Use Normal highlight mode"
 msgstr "Normale oplichtingsmodus gebruiken"
 
-#: ../gedit/gedit-mdi.c:2171
+#: ../gedit/gedit-mdi.c:2180
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Oplichtingsmodus %s gebruiken"
@@ -2385,16 +2384,16 @@ msgstr " (ongeldige Unicode)"
 #.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:885
+#: ../gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rg %d, Kol %d"
 
-#: ../gedit/gedit-view.c:921
+#: ../gedit/gedit-view.c:915
 msgid "  OVR"
 msgstr "  OVR"
 
-#: ../gedit/gedit-view.c:923
+#: ../gedit/gedit-view.c:917
 msgid "  INS"
 msgstr "  INV"
 
@@ -2585,21 +2584,21 @@ msgstr "Kopie o_pslaan..."
 msgid "Save a copy of the current document"
 msgstr "Een kopie van het huidige document opslaan"
 
-#: ../plugins/savecopy/savecopy.c:262
+#: ../plugins/savecopy/savecopy.c:315
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "Kan geen kopie van het bestand naar \"%s\" opslaan"
 
-#: ../plugins/savecopy/savecopy.c:361
+#: ../plugins/savecopy/savecopy.c:414
 msgid "You are trying to overwrite the original file"
 msgstr "U tracht het originele bestand te overschrijven"
 
-#: ../plugins/savecopy/savecopy.c:470
+#: ../plugins/savecopy/savecopy.c:523
 msgid "Save Copy..."
 msgstr "Kopie opslaan..."
 
 #. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:502 ../plugins/savecopy/savecopy.c:512
+#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (kopie)"
@@ -2966,114 +2965,118 @@ msgid "Mongolian"
 msgstr "Mongools"
 
 #: ../plugins/spell/gedit-spell-checker.c:126
+msgid "Marathi"
+msgstr "Marathi"
+
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Malay"
 msgstr "Malay"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Maltese"
 msgstr "Maltees"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Norwegian Bokmal"
 msgstr "Noors Bokmål"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Dutch"
 msgstr "Nederlands"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Nynorsk"
 msgstr "Noors Nynorsk"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Norwegian"
 msgstr "Noors"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Nyanja"
 msgstr "Nyanja"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Polish"
 msgstr "Pools"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Portuguese (Portugal)"
 msgstr "Portugees (Portugal)"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Portuguese (Brazilian)"
 msgstr "Portugees (Brazilië)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Quechua"
 msgstr "Quechua"
 
-#: ../plugins/spell/gedit-spell-checker.c:138
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Russian"
 msgstr "Russisch"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Kinyarwanda"
 msgstr "Kinyarwanda"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Sardinian"
 msgstr "Sardinisch"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Slovak"
 msgstr "Slowaaks"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Slovenian"
 msgstr "Sloveens"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Swedish"
 msgstr "Zweeds"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Swahili"
 msgstr "Swahili"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Tetum"
 msgstr "Tetum"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tagalog"
 msgstr "Tagalog"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tswana"
 msgstr "Tswana"
 
-#: ../plugins/spell/gedit-spell-checker.c:150
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Ukrainian"
 msgstr "Oekraïens"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:152
 msgid "Uzbek"
 msgstr "Oezbeeks"
 
-#: ../plugins/spell/gedit-spell-checker.c:153
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Walloon"
 msgstr "Waals"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:155
 msgid "Yiddish"
 msgstr "Jiddisch"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Zulu"
 msgstr "Zulu"
 
-#: ../plugins/spell/gedit-spell-checker.c:826
+#: ../plugins/spell/gedit-spell-checker.c:828
 msgid "Default"
 msgstr "Standaard"
 
@@ -3135,7 +3138,7 @@ msgid "Language:"
 msgstr "Taal:"
 
 #: ../plugins/spell/spell-checker.glade2.h:12
-msgid "Mispelled word:"
+msgid "Misspelled word:"
 msgstr "Incorrect gespeld woord:"
 
 #: ../plugins/spell/spell-checker.glade2.h:13
@@ -3308,8 +3311,8 @@ msgid "Character encoding of linked resource"
 msgstr "Tekencodering van bron waarnaar verwezen wordt"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
-msgid "Checked(state)"
-msgstr "Aangekruist(status)"
+msgid "Checked (state)"
+msgstr "Aangekruist (status)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Citation"
@@ -4231,7 +4234,7 @@ msgstr "Verticale celuitlijning"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Vertical space"
-msgstr "Verticale spatie"
+msgstr "Verticale ruimte"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Visited link color"
@@ -4242,20 +4245,20 @@ msgid "Width"
 msgstr "Breedte"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
-msgid "Bibliography cite"
-msgstr "Bibliografie-citaat"
+msgid "Bibliography (cite)"
+msgstr "Bibliografie (cite)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:2
-msgid "Bibliography item"
-msgstr "Bibliografie-item"
+msgid "Bibliography (item)"
+msgstr "Bibliografie (item)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:3
-msgid "Bibliography shortcite"
-msgstr "Bibliografie shortcite"
+msgid "Bibliography (shortcite)"
+msgstr "Bibliografie (shortcite)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:4
-msgid "Bibliography thebibliography"
-msgstr "Bibliografie thebibliography"
+msgid "Bibliography (thebibliography)"
+msgstr "Bibliografie (thebibliography)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
 msgid "Brackets &lt;&gt;"
@@ -4698,6 +4701,18 @@ msgstr "_Vragen om een formaat"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Aangepast formaat gebr_uiken"
+
+#~ msgid "<b>Undo</b>"
+#~ msgstr "<b>Ongedaan maken</b>"
+
+#~ msgid "_Limit to"
+#~ msgstr "_Beperken tot"
+
+#~ msgid "_Unlimited undo"
+#~ msgstr "_Ongelimiteerd ongedaan maken"
+
+#~ msgid "act_ions"
+#~ msgstr "_acties"
 
 #~ msgid "Invalid file name"
 #~ msgstr "Ongeldige bestandsnaam"
