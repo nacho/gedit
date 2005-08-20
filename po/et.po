@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-08-17 14:12+0000\n"
-"PO-Revision-Date: 2005-08-17 22:54+0300\n"
+"PO-Revision-Date: 2005-08-20 12:21+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -200,11 +200,11 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:30
 msgid "Max Number of Undo Actions"
-msgstr ""
+msgstr "Suurim unustatud toimingute arv"
 
 #: ../data/gedit.schemas.in.h:31
 msgid "Maximum Recent Files"
-msgstr "Maksimaalne hiljutiste failide arv"
+msgstr "Suurim hiljutiste failide arv"
 
 #: ../data/gedit.schemas.in.h:32
 msgid ""
@@ -799,7 +799,7 @@ msgstr ""
 #: ../gedit/dialogs/gedit-preferences.glade2.h:11
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:3
 msgid "<b>Text Wrapping</b>"
-msgstr "<b>Teksti murdmine</b>"
+msgstr "<b>Tekstimurdmine</b>"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:12
 msgid "<span weight=\"bold\">Colors</span>"
@@ -834,7 +834,7 @@ msgstr "Redaktori _kirjatüüp: "
 #: ../gedit/dialogs/gedit-preferences.glade2.h:19
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:5
 msgid "Enable text _wrapping"
-msgstr ""
+msgstr "_Tekstmurdmine lubatud"
 
 #: ../gedit/dialogs/gedit-preferences.glade2.h:20
 msgid "Font & Colors"
@@ -998,35 +998,41 @@ msgstr "Lehekülje sätted"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:10
 msgid "Print _line numbers"
-msgstr "Prindi _reanumbrid"
+msgstr "_Reanumbrite printimine"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:11
 msgid "Print s_yntax highlighting"
-msgstr ""
+msgstr "_Esiletõstetud süntaksi printimine"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:12
 msgid "_Body:"
-msgstr ""
+msgstr "S_isu:"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:13
 msgid "_Line numbers:"
 msgstr "_Reanumbrid:"
 
+#. Tõlkijatele: See on string aknast "Lehekülje sätted" ja kogu string
+#. sobitatakse kokku kahest stringist ja numbrisisestuse kastist:
+#.   Number every [N] lines --> Nummerdamine üle [N] rea
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:14
 msgid "_Number every"
-msgstr ""
+msgstr "_Nummerdamine üle"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:15
 msgid "_Print page headers"
-msgstr "_Prindi lehe päised"
+msgstr "Lehe _päisete printimine"
 
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:16
 msgid "_Restore Default Fonts"
 msgstr "_Taasta vaikimisi kirjatüübid"
 
+#. Tõlkijatele: See on string aknast "Lehekülje sätted" ja kogu string
+#. sobitatakse kokku kahest stringist ja numbrisisestuse kastist:
+#.   Number every [N] lines --> Nummerdamine üle [N] rea
 #: ../gedit/dialogs/page-setup-dialog.glade2.h:17
 msgid "lines"
-msgstr "ridu"
+msgstr "rea"
 
 #: ../gedit/dialogs/plugin-manager.glade2.h:1
 msgid "C_onfigure Plugin"
@@ -1762,7 +1768,7 @@ msgstr ""
 #. Add the detach tab button
 #: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
 msgid "_Move to New Window"
-msgstr ""
+msgstr "_Tõsta uude aknasse"
 
 #: ../gedit/gedit-mdi-child.c:803
 msgid "Unicode (UTF-8)"
@@ -1852,7 +1858,7 @@ msgstr "Lehekülje %d/%d renderdamine..."
 #: ../gedit/gedit-print.c:359
 #, c-format
 msgid "Printing page %d of %d..."
-msgstr "Lehekülje %d/%d trükkimine..."
+msgstr "Lehekülje %d/%d printimine..."
 
 #: ../gedit/gedit-print.c:381 ../gedit/gedit-ui.xml.h:40
 msgid "Print preview"
@@ -2267,7 +2273,7 @@ msgstr " (vigane Unocode)"
 #: ../gedit/gedit-view.c:879
 #, c-format
 msgid "  Ln %d, Col %d"
-msgstr "  Rid %d, vrg %d"
+msgstr "  Rida %d, veerg %d"
 
 #: ../gedit/gedit-view.c:915
 msgid "  OVR"
@@ -4490,7 +4496,7 @@ msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
 msgstr ""
-"Enamkasutatavate siltide/stringide dokumendile lisamise hõlbustamine, nii et "
+"Enamkasutatavate siltide/stringide dokumendile lisamise hõlbustamine nii, et "
 "neid ei peaks käsitsi sisestama."
 
 #: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
