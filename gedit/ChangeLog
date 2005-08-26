@@ -1,3 +1,12 @@
+2005-08-26  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #166189: Encoding should not be remembered when auto-detected
+	
+	* gedit-document.c (update_document_contents)
+	(gedit_document_set_uri) (gedit_document_save_as)
+	(gedit_document_get_encoding): merged set_encoding and set_uri, do not
+	remember encoding in metadata when encoding has been auto-detected.
+
 ==== gedit 2.11.92 ====
 
 ==== gedit 2.11.91 ====
