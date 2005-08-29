@@ -1,3 +1,10 @@
+2005-08-29  Paolo Maggi  <paolo@gnome.org>
+
+	* dialogs/gedit-dialog-replace.c
+	(replace_dlg_replace_button_pressed): use converted_search_string instead
+	of search_string when calling g_utf8_caselessnmatch. Do not leak
+	converted_search_string
+
 2005-08-26  Paolo Maggi  <paolo@gnome.org>
 
 	Fixed bug #166189: Encoding should not be remembered when auto-detected

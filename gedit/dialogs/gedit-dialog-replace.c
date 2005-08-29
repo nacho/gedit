@@ -1013,16 +1013,16 @@ replace_dlg_replace_button_pressed (GeditDialogReplace *dialog)
 
 	if ((selected_text == NULL) ||
 	    (case_sensitive && (strcmp (selected_text, converted_search_string) != 0)) || 
-	    (!case_sensitive && !g_utf8_caselessnmatch (selected_text, search_string, 
+	    (!case_sensitive && !g_utf8_caselessnmatch (selected_text, converted_search_string, 
 						        strlen (selected_text), 
-						        strlen (search_string)) != 0))
+						        strlen (converted_search_string)) != 0))
 	{
 		gedit_debug (DEBUG_SEARCH, "selected_text (%s) != search_string (%s)", 
 			     selected_text ? selected_text : "NULL",
 			     search_string ? search_string : "NULL");
 
-		if (selected_text != NULL)
-			g_free (selected_text);
+		g_free (selected_text);
+		g_free (converted_search_string);
 
 		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog->dialog), 
 			GEDIT_RESPONSE_REPLACE, FALSE);
