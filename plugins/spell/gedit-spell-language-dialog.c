@@ -34,8 +34,11 @@
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
 #include <gtk/gtk.h>
+#include <libgnome/gnome-help.h>
+#include <gedit/gedit-utils.h>
 
 #include "gedit-spell-language-dialog.h"
+
 
 enum
 {
@@ -74,6 +77,8 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 static void
 dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditSpellLanguageDialog *dialog)
 {
+	GError *error = NULL;
+
 	switch (res_id) {
 		case GTK_RESPONSE_OK:
 			ok_button_pressed (dialog);
@@ -83,11 +88,14 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditSpellLanguageDialog 
 			break;
 			
 		case GTK_RESPONSE_HELP:
-			
-			/* FIXME */
-
+			gnome_help_display ("gedit.xml", "gedit-spell-checker-plugin", &error);
+			if (error != NULL)
+			{
+				gedit_warning (GTK_WINDOW (dlg), error->message);
+				g_error_free (error);
+			}
 			break;
-	
+
 		default:
 			gtk_widget_destroy (dialog->dialog);
 	}
