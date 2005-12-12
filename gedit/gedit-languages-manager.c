@@ -3,7 +3,7 @@
  * gedit-languages-manager.c
  * This file is part of gedit
  *
- * Copyright (C) 2003 - Paolo Maggi 
+ * Copyright (C) 2003-2005 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,11 @@
  */
  
 /*
- * Modified by the gedit Team, 2003. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2003-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 /* FIXME: Monitor gconf keys */
@@ -40,9 +42,9 @@
 
 
 static GtkSourceLanguagesManager *language_manager = NULL;
-static GConfClient 		 *gconf_client = NULL;
-static const GSList 		 *languages_list = NULL;
-static GSList			 *languages_list_sorted = NULL;
+static GConfClient *gconf_client = NULL;
+static const GSList *languages_list = NULL;
+static GSList *languages_list_sorted = NULL;
 
 
 GtkSourceLanguagesManager *
@@ -207,13 +209,10 @@ string_to_tag_style (const gchar *string)
 	if ((style->strikethrough < 0) || (style->strikethrough > 1))
 		goto error;
 
-	g_strfreev (items);
-
 	return style;
 
 error:
 	gtk_source_tag_style_free (style);
-	g_strfreev (items);
 
 	return NULL;
 }
@@ -358,3 +357,4 @@ gedit_languages_manager_get_available_languages_sorted (GtkSourceLanguagesManage
 
 	return languages_list_sorted;
 }
+

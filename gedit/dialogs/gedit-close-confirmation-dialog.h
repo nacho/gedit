@@ -2,7 +2,7 @@
  * gedit-close-confirmation-dialog.h
  * This file is part of gedit
  *
- * Copyright (C) 2004 GNOME Foundation 
+ * Copyright (C) 2004-2005 GNOME Foundation 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  */
 
 /*
- * Modified by the gedit Team, 2004. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2004-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  */
@@ -58,12 +58,15 @@ struct _GeditCloseConfirmationDialogClass
 GType 		 gedit_close_confirmation_dialog_get_type		(void) G_GNUC_CONST;
 
 GtkWidget	*gedit_close_confirmation_dialog_new			(GtkWindow     *parent,
-									 GSList        *unsaved_documents);
+									 GList         *unsaved_documents,
+									 gboolean       logout_mode);
 GtkWidget 	*gedit_close_confirmation_dialog_new_single 		(GtkWindow     *parent, 
-									 GeditDocument *doc);
+									 GeditDocument *doc,
+ 									 gboolean       logout_mode);
 
-gboolean 	 gedit_close_confirmation_dialog_run 			(GeditCloseConfirmationDialog *dlg);
-GSList 		*gedit_close_confirmation_dialog_get_selected_documents	(GeditCloseConfirmationDialog *dlg);
+const GList	*gedit_close_confirmation_dialog_get_unsaved_documents  (GeditCloseConfirmationDialog *dlg);
+
+const GList	*gedit_close_confirmation_dialog_get_selected_documents	(GeditCloseConfirmationDialog *dlg);
 
 #endif /* __GEDIT_CLOSE_CONFIRMATION_DIALOG_H__ */
 

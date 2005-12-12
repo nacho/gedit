@@ -8,16 +8,16 @@ header_DATA =				\
         egg-recent-model.h		\
         egg-recent-item.h		\
         egg-recent-view.h		\
-        egg-recent-view-bonobo.h	\
         egg-recent-view-gtk.h		\
+        egg-recent-view-uimanager.h	\
 	egg-recent-util.h
 
 EGG_FILES =				\
         egg-recent-model.c		\
         egg-recent-item.c		\
         egg-recent-view.c		\
-        egg-recent-view-bonobo.c	\
         egg-recent-view-gtk.c		\
+        egg-recent-view-uimanager.c	\
         egg-recent-util.c		\
 	$(header_DATA)
 

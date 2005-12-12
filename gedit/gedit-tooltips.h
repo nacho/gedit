@@ -29,11 +29,7 @@
 
 #include <gtk/gtkwidget.h>
 
-
-#ifdef __cplusplus
-extern "C" {
-#endif				/* __cplusplus */
-
+G_BEGIN_DECLS
 
 #define GEDIT_TYPE_TOOLTIPS                  (gedit_tooltips_get_type ())
 #define GEDIT_TOOLTIPS(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GEDIT_TYPE_TOOLTIPS, GeditTooltips))
@@ -81,6 +77,7 @@ struct _GeditTooltipsClass {
 };
 
 GType gedit_tooltips_get_type (void) G_GNUC_CONST;
+
 GeditTooltips *gedit_tooltips_new (void);
 
 void gedit_tooltips_enable (GeditTooltips * tooltips);
@@ -96,8 +93,6 @@ void gedit_tooltips_force_window (GeditTooltips * tooltips);
 
 void _gedit_tooltips_toggle_keyboard_mode (GtkWidget * widget);
 
-#ifdef __cplusplus
+G_END_DECLS
 
-}
-#endif				/* __cplusplus */
 #endif				/* __GEDIT_TOOLTIPS_H__ */

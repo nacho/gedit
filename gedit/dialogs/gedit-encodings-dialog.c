@@ -1,9 +1,8 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-encodings-dialog.c
  * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2005 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +21,11 @@
  */
 
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -35,15 +36,52 @@
 
 #include <glib/gslist.h>
 #include <glib/gi18n.h>
-#include <glade/glade-xml.h>
-#include <libgnome/gnome-help.h>
 #include <gtk/gtk.h>
 
 #include "gedit-encodings-dialog.h"
 #include "gedit-encodings.h"
 #include "gedit-prefs-manager.h"
+#include "gedit-utils.h"
 #include "gedit-debug.h"
+#include "gedit-help.h"
 
+#define GEDIT_ENCODINGS_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+						   GEDIT_TYPE_ENCODINGS_DIALOG,           \
+						   GeditEncodingsDialogPrivate))
+
+struct _GeditEncodingsDialogPrivate
+{
+	GtkListStore	*available_liststore;
+	GtkListStore	*displayed_liststore;
+	GtkWidget	*available_treeview;
+	GtkWidget	*displayed_treeview;
+	GtkWidget	*add_button;
+	GtkWidget	*remove_button;
+
+	GSList		*show_in_menu_list;
+};
+
+G_DEFINE_TYPE(GeditEncodingsDialog, gedit_encodings_dialog, GTK_TYPE_DIALOG)
+
+static void
+gedit_encodings_dialog_finalize (GObject *object)
+{
+	GeditEncodingsDialogPrivate *priv = GEDIT_ENCODINGS_DIALOG (object)->priv;
+
+	g_slist_free (priv->show_in_menu_list);
+
+	G_OBJECT_CLASS (gedit_encodings_dialog_parent_class)->finalize (object);
+}
+
+static void
+gedit_encodings_dialog_class_init (GeditEncodingsDialogClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->finalize = gedit_encodings_dialog_finalize;
+
+	g_type_class_add_private (object_class, sizeof (GeditEncodingsDialogPrivate));
+}
 
 enum {
 	COLUMN_NAME,
@@ -51,44 +89,11 @@ enum {
 	N_COLUMNS
 };
 
-static GSList *show_in_menu_list = NULL;
-
 static void
-show_help (GtkWidget *window)
-{
-	GError *err;
-	err = NULL;
-
-	gnome_help_display ("gedit", NULL, &err);
-
-	if (err)
-	{
-		GtkWidget *dialog;
-
-		dialog = gtk_message_dialog_new (GTK_WINDOW (window),
-						 GTK_DIALOG_DESTROY_WITH_PARENT,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 _("There was an error displaying help: %s"),
-						 err->message);
- 
-		g_signal_connect (G_OBJECT (dialog), 
-				  "response", 
-				  G_CALLBACK (gtk_widget_destroy), 
-				  NULL);
-
-		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-
-		gtk_widget_show (dialog);
-
-		g_error_free (err);
-	}
-}
-
-static void
-count_selected_items_func (GtkTreeModel * model,
-			   GtkTreePath * path,
-			   GtkTreeIter * iter, gpointer data)
+count_selected_items_func (GtkTreeModel *model,
+			   GtkTreePath  *path,
+			   GtkTreeIter  *iter, 
+			   gpointer      data)
 {
 	int *count = data;
 
@@ -96,51 +101,38 @@ count_selected_items_func (GtkTreeModel * model,
 }
 
 static void
-available_selection_changed_callback (GtkTreeSelection * selection,
-				      void *data)
+available_selection_changed_callback (GtkTreeSelection     *selection,
+				      GeditEncodingsDialog *dialogs)
 {
 	int count;
-	GtkWidget *add_button;
-	GtkWidget *dialog;
-
-	dialog = data;
 
 	count = 0;
 	gtk_tree_selection_selected_foreach (selection,
 					     count_selected_items_func,
 					     &count);
 
-	add_button =
-	    g_object_get_data (G_OBJECT (dialog), "encoding-dialog-add");
-
-	gtk_widget_set_sensitive (add_button, count > 0);
+	gtk_widget_set_sensitive (dialogs->priv->add_button, count > 0);
 }
 
 static void
-displayed_selection_changed_callback (GtkTreeSelection * selection,
-				      void *data)
+displayed_selection_changed_callback (GtkTreeSelection     *selection,
+				      GeditEncodingsDialog *dialogs)
 {
 	int count;
-	GtkWidget *remove_button;
-	GtkWidget *dialog;
-
-	dialog = data;
 
 	count = 0;
 	gtk_tree_selection_selected_foreach (selection,
 					     count_selected_items_func,
 					     &count);
 
-	remove_button = g_object_get_data (G_OBJECT (dialog),
-					   "encoding-dialog-remove");
-
-	gtk_widget_set_sensitive (remove_button, count > 0);
+	gtk_widget_set_sensitive (dialogs->priv->remove_button, count > 0);
 }
 
 static void
 get_selected_encodings_func (GtkTreeModel *model,
-			     GtkTreePath *path,
-			     GtkTreeIter *iter, gpointer data)
+			     GtkTreePath  *path,
+			     GtkTreeIter  *iter, 
+			     gpointer      data)
 {
 	GSList **list = data;
 	gchar *charset;
@@ -156,20 +148,19 @@ get_selected_encodings_func (GtkTreeModel *model,
 }
 
 static void
-update_shown_in_menu_tree_model (GtkListStore * store, GSList *list)
+update_shown_in_menu_tree_model (GtkListStore *store,
+				 GSList       *list)
 {
 	GtkTreeIter iter;
-	
-	gedit_debug (DEBUG_PREFS, "");
 
 	gtk_list_store_clear (store);
 
 	while (list != NULL)
 	{
-		const GeditEncoding* enc;
+		const GeditEncoding *enc;
 
 		enc = (const GeditEncoding*) list->data;
-		
+
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
 				    COLUMN_CHARSET,
@@ -178,23 +169,18 @@ update_shown_in_menu_tree_model (GtkListStore * store, GSList *list)
 				    gedit_encoding_get_name (enc), -1);
 
 		list = g_slist_next (list);
-	}	
+	}
 }
 
 static void
-add_button_clicked_callback (GtkWidget * button, void *data)
+add_button_clicked_callback (GtkWidget            *button,
+			     GeditEncodingsDialog *dialog)
 {
-	GtkWidget *dialog;
-	GtkWidget *treeview;
 	GtkTreeSelection *selection;
 	GSList *encodings;
 	GSList *tmp;
 
-	dialog = data;
-
-	treeview = g_object_get_data (G_OBJECT (dialog),
-				      "encoding-dialog-available-treeview");
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->available_treeview));
 
 	encodings = NULL;
 	gtk_tree_selection_selected_foreach (selection,
@@ -204,34 +190,28 @@ add_button_clicked_callback (GtkWidget * button, void *data)
 	tmp = encodings;
 	while (tmp != NULL)
 	{
-		if (g_slist_find (show_in_menu_list, tmp->data) == NULL)
-			show_in_menu_list = g_slist_prepend (show_in_menu_list, tmp->data);
+		if (g_slist_find (dialog->priv->show_in_menu_list, tmp->data) == NULL)
+			dialog->priv->show_in_menu_list = g_slist_prepend (dialog->priv->show_in_menu_list,
+									   tmp->data);
 
 		tmp = g_slist_next (tmp);
 	}
 
 	g_slist_free (encodings);
 
-	update_shown_in_menu_tree_model (
-			GTK_LIST_STORE (
-				g_object_get_data (G_OBJECT (dialog), "encoding-dialog-displayed-liststore")),
-			show_in_menu_list);
+	update_shown_in_menu_tree_model (GTK_LIST_STORE (dialog->priv->displayed_liststore),
+					 dialog->priv->show_in_menu_list);
 }
 
 static void
-remove_button_clicked_callback (GtkWidget * button, void *data)
+remove_button_clicked_callback (GtkWidget            *button,
+				GeditEncodingsDialog *dialog)
 {
-	GtkWidget *dialog;
-	GtkWidget *treeview;
 	GtkTreeSelection *selection;
 	GSList *encodings;
 	GSList *tmp;
 
-	dialog = data;
-
-	treeview = g_object_get_data (G_OBJECT (dialog),
-				      "encoding-dialog-displayed-treeview");
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->priv->displayed_treeview));
 
 	encodings = NULL;
 	gtk_tree_selection_selected_foreach (selection,
@@ -241,51 +221,42 @@ remove_button_clicked_callback (GtkWidget * button, void *data)
 	tmp = encodings;
 	while (tmp != NULL) 
 	{
-		show_in_menu_list = g_slist_remove (show_in_menu_list, tmp->data);
+		dialog->priv->show_in_menu_list = g_slist_remove (dialog->priv->show_in_menu_list,
+								  tmp->data);
 
 		tmp = g_slist_next (tmp);
 	}
 
 	g_slist_free (encodings);
 
-	update_shown_in_menu_tree_model (
-			GTK_LIST_STORE (
-				g_object_get_data (G_OBJECT (dialog), "encoding-dialog-displayed-liststore")),
-			show_in_menu_list);
+	update_shown_in_menu_tree_model (GTK_LIST_STORE (dialog->priv->displayed_liststore),
+					 dialog->priv->show_in_menu_list);
 }
 
 static void
-dialog_destroyed (void *data, GObject * where_object_was)
-{
-	if (show_in_menu_list != NULL)
-		g_slist_free (show_in_menu_list);
-
-	show_in_menu_list = NULL;
-}
-
-static void
-init_shown_in_menu_tree_model (GtkListStore * store)
+init_shown_in_menu_tree_model (GeditEncodingsDialog *dialog)
 {
 	GtkTreeIter iter;
 	GSList *list, *tmp;
 
-	gedit_debug (DEBUG_PREFS, "");
-
 	/* add data to the list store */
 	list = gedit_prefs_manager_get_shown_in_menu_encodings ();
-	
+
 	tmp = list;
-	
+
 	while (tmp != NULL)
 	{
-		const GeditEncoding* enc;
+		const GeditEncoding *enc;
 
-		enc = (const GeditEncoding*) tmp->data;
-		
-		show_in_menu_list = g_slist_prepend (show_in_menu_list, tmp->data);
-		
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter,
+		enc = (const GeditEncoding *) tmp->data;
+
+		dialog->priv->show_in_menu_list = g_slist_prepend (dialog->priv->show_in_menu_list,
+								   tmp->data);
+
+		gtk_list_store_append (dialog->priv->displayed_liststore,
+				       &iter);
+		gtk_list_store_set (dialog->priv->displayed_liststore,
+				    &iter,
 				    COLUMN_CHARSET,
 				    gedit_encoding_get_charset (enc),
 				    COLUMN_NAME,
@@ -297,85 +268,126 @@ init_shown_in_menu_tree_model (GtkListStore * store)
 	g_slist_free (list);
 }
 
-static GtkWidget *
-gedit_encoding_dialog_new (GtkWindow *transient_parent)
+static void 
+response_handler (GtkDialog            *dialog,
+		  gint                  response_id,
+                  GeditEncodingsDialog *dlg)
 {
-	GladeXML *xml;
-	GtkWidget *w;
+	if (response_id == GTK_RESPONSE_HELP)
+	{
+		gedit_help_display (GTK_WINDOW (dialog), "gedit", NULL);
+		g_signal_stop_emission_by_name (dialog, "response");
+		return;
+	}
+
+	if (response_id == GTK_RESPONSE_OK)
+	{
+		g_return_if_fail (gedit_prefs_manager_shown_in_menu_encodings_can_set ());
+		gedit_prefs_manager_set_shown_in_menu_encodings (dlg->priv->show_in_menu_list);
+	}
+}
+
+static void
+gedit_encodings_dialog_init (GeditEncodingsDialog *dlg)
+{
+	GtkWidget *content;
 	GtkCellRenderer *cell_renderer;
-	int i;
 	GtkTreeModel *sort_model;
-	GtkListStore *tree;
 	GtkTreeViewColumn *column;
 	GtkTreeIter parent_iter;
 	GtkTreeSelection *selection;
-	GtkWidget *dialog;
 	const GeditEncoding *enc;
+	GtkWidget *error_widget;
+	int i;
+	gboolean ret;
 
-	xml = glade_xml_new (GEDIT_GLADEDIR "gedit-encodings-dialog.glade2",
-			     "encodings-dialog", NULL);
+	dlg->priv = GEDIT_ENCODINGS_DIALOG_GET_PRIVATE (dlg);
+	
+	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
+				GTK_STOCK_CANCEL, 
+				GTK_RESPONSE_CANCEL,
+				GTK_STOCK_OK,
+				GTK_RESPONSE_OK,
+				GTK_STOCK_HELP,
+				GTK_RESPONSE_HELP,
+				NULL);
 
-	if (!xml) 
+	gtk_window_set_title (GTK_WINDOW (dlg), _("Character Codings"));
+	gtk_window_set_default_size (GTK_WINDOW (dlg), 650, 400);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
+					 GTK_RESPONSE_OK);
+
+	g_signal_connect (dlg,
+			  "response",
+			  G_CALLBACK (response_handler),
+			  dlg);
+
+	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-encodings-dialog.glade",
+					     "encodings-dialog-contents",
+					     &error_widget,
+					     "encodings-dialog-contents", &content,
+					     "add-button", &dlg->priv->add_button,
+					     "remove-button", &dlg->priv->remove_button,
+					     "available-treeview", &dlg->priv->available_treeview,
+					     "displayed-treeview", &dlg->priv->displayed_treeview,
+					     NULL);
+
+	if (!ret)
 	{
-		g_warning ("Could not find gedit-encodings-dialog.glade2, reinstall gedit.\n");
-		return NULL;
+		gtk_widget_show (error_widget);
+
+		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+					     error_widget);
+
+		return;
 	}
 
-	/* The dialog itself */
-	dialog = glade_xml_get_widget (xml, "encodings-dialog");
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+			    content, TRUE, TRUE, 0);
 
-	if (transient_parent != NULL)
-		gtk_window_set_transient_for (GTK_WINDOW (dialog), transient_parent);
-
-	/* buttons */
-	w = glade_xml_get_widget (xml, "add-button");
-	g_object_set_data (G_OBJECT (dialog), "encoding-dialog-add", w);
-
-	g_signal_connect (G_OBJECT (w), "clicked",
+	g_signal_connect (dlg->priv->add_button,
+			  "clicked",
 			  G_CALLBACK (add_button_clicked_callback),
-			  dialog);
-
-	w = glade_xml_get_widget (xml, "remove-button");
-	g_object_set_data (G_OBJECT (dialog), "encoding-dialog-remove", w);
-
-	g_signal_connect (G_OBJECT (w), "clicked",
+			  dlg);
+	g_signal_connect (dlg->priv->remove_button,
+			  "clicked",
 			  G_CALLBACK (remove_button_clicked_callback),
-			  dialog);
+			  dlg);
 
 	/* Tree view of available encodings */
+	dlg->priv->available_liststore = gtk_list_store_new (N_COLUMNS,
+							     G_TYPE_STRING,
+							     G_TYPE_STRING);
 
-	w = glade_xml_get_widget (xml, "available-treeview");
-	g_object_set_data (G_OBJECT (dialog),
-			   "encoding-dialog-available-treeview", w);
-
-	tree = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
-
-	/* Column 1 */
 	cell_renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("_Description"),
 							   cell_renderer,
 							   "text", COLUMN_NAME,
 							   NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (w), column);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->available_treeview),
+				     column);
 	gtk_tree_view_column_set_sort_column_id (column, COLUMN_NAME);
 
-	/* Column 2 */
 	cell_renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("_Encoding"),
 							   cell_renderer,
 							   "text",
 							   COLUMN_CHARSET,
 							   NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (w), column);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->available_treeview),
+				     column);
 	gtk_tree_view_column_set_sort_column_id (column, COLUMN_CHARSET);
 
 	/* Add the data */
-
 	i = 0;
 	while ((enc = gedit_encoding_get_from_index (i)) != NULL) 
 	{
-		gtk_list_store_append (tree, &parent_iter);
-		gtk_list_store_set (tree, &parent_iter,
+		gtk_list_store_append (dlg->priv->available_liststore,
+				       &parent_iter);
+		gtk_list_store_set (dlg->priv->available_liststore,
+				    &parent_iter,
 				    COLUMN_CHARSET,
 				    gedit_encoding_get_charset (enc),
 				    COLUMN_NAME,
@@ -385,128 +397,83 @@ gedit_encoding_dialog_new (GtkWindow *transient_parent)
 	}
 
 	/* Sort model */
-	sort_model =
-	    gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (tree));
-
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
-					      (sort_model), COLUMN_NAME,
+	sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (dlg->priv->available_liststore));
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (sort_model),
+					      COLUMN_NAME,
 					      GTK_SORT_ASCENDING);
 
-	gtk_tree_view_set_model (GTK_TREE_VIEW (w), sort_model);
-	g_object_unref (G_OBJECT (tree));
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->available_treeview),
+				 sort_model);
+	g_object_unref (G_OBJECT (dlg->priv->available_liststore));
 	g_object_unref (G_OBJECT (sort_model));
 
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (w));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->available_treeview));
 	gtk_tree_selection_set_mode (GTK_TREE_SELECTION (selection),
 				     GTK_SELECTION_MULTIPLE);
 
-	available_selection_changed_callback (selection, dialog);
-	g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK
-			  (available_selection_changed_callback), dialog);
+	available_selection_changed_callback (selection, dlg);
+	g_signal_connect (selection,
+			  "changed",
+			  G_CALLBACK (available_selection_changed_callback),
+			  dlg);
 
 	/* Tree view of selected encodings */
+	dlg->priv->displayed_liststore = gtk_list_store_new (N_COLUMNS,
+							     G_TYPE_STRING,
+							     G_TYPE_STRING);
 
-	w = glade_xml_get_widget (xml, "displayed-treeview");
-	g_object_set_data (G_OBJECT (dialog),
-			   "encoding-dialog-displayed-treeview", w);
-
-	tree =
-	    gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
-
-	g_object_set_data (G_OBJECT (dialog),
-			   "encoding-dialog-displayed-liststore", tree);
-
-	/* Column 1 */
 	cell_renderer = gtk_cell_renderer_text_new ();
-	column =
-	    gtk_tree_view_column_new_with_attributes (_("_Description"),
-						      cell_renderer,
-						      "text", COLUMN_NAME,
-						      NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (w), column);
+	column = gtk_tree_view_column_new_with_attributes (_("_Description"),
+							   cell_renderer,
+							   "text", COLUMN_NAME,
+							   NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->displayed_treeview),
+				     column);
 	gtk_tree_view_column_set_sort_column_id (column, COLUMN_NAME);
 
-	/* Column 2 */
 	cell_renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes (_("_Encoding"),
 							   cell_renderer,
 							   "text",
 							   COLUMN_CHARSET,
 							   NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (w), column);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (dlg->priv->displayed_treeview),
+				     column);
 	gtk_tree_view_column_set_sort_column_id (column, COLUMN_CHARSET);
 
 	/* Add the data */
-	init_shown_in_menu_tree_model (tree);
-	
+	init_shown_in_menu_tree_model (dlg);
+
 	/* Sort model */
-	sort_model =
-	    gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (tree));
+	sort_model = gtk_tree_model_sort_new_with_model (GTK_TREE_MODEL (dlg->priv->displayed_liststore));
 
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE
 					      (sort_model), COLUMN_NAME,
 					      GTK_SORT_ASCENDING);
 
-	gtk_tree_view_set_model (GTK_TREE_VIEW (w), sort_model);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (dlg->priv->displayed_treeview),
+				 sort_model);
 	g_object_unref (G_OBJECT (sort_model));
-	g_object_unref (G_OBJECT (tree));
+	g_object_unref (G_OBJECT (dlg->priv->displayed_liststore));
 
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (w));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dlg->priv->displayed_treeview));
 	gtk_tree_selection_set_mode (GTK_TREE_SELECTION (selection),
 				     GTK_SELECTION_MULTIPLE);
 
-	displayed_selection_changed_callback (selection, dialog);
-	g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK
-			  (displayed_selection_changed_callback), dialog);
-
-	g_object_unref (G_OBJECT (xml));
-
-	g_object_weak_ref (G_OBJECT (dialog), dialog_destroyed, NULL);
-
-	return dialog;
+	displayed_selection_changed_callback (selection, dlg);
+	g_signal_connect (selection,
+			  "changed",
+			  G_CALLBACK (displayed_selection_changed_callback),
+			  dlg);
 }
 
-static void
-update_list (void)
+GtkWidget *
+gedit_encodings_dialog_new (void)
 {
-	g_return_if_fail (gedit_prefs_manager_shown_in_menu_encodings_can_set ());
-	
-	gedit_prefs_manager_set_shown_in_menu_encodings (show_in_menu_list);
-}
+	GtkWidget *dlg;
 
-gboolean
-gedit_encodings_dialog_run (GtkWindow *parent)
-{
-	gint id;
-	GtkWidget *dialog;
-       
-	dialog	= gedit_encoding_dialog_new (parent);
+	dlg = GTK_WIDGET (g_object_new (GEDIT_TYPE_ENCODINGS_DIALOG, NULL));
 
-	do
-	{
-		id = gtk_dialog_run (GTK_DIALOG (dialog));
-
-		switch (id) {
-			case GTK_RESPONSE_HELP:
-				show_help (dialog);
-				break;
-			
-			case GTK_RESPONSE_OK:
-				update_list ();
-				gtk_widget_hide (dialog);
-
-				break;
-
-			default:
-				gtk_widget_hide (dialog);
-		}
-		
-	} while (GTK_WIDGET_VISIBLE (dialog));
-
-	gtk_widget_destroy (dialog);
-
-	return (id == GTK_RESPONSE_OK);
+	return dlg;
 }
 

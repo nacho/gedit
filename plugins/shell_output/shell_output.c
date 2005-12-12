@@ -33,7 +33,6 @@
 
 #include <glib/gi18n.h>
 #include <glade/glade-xml.h>
-#include <libgnome/gnome-help.h>
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomeui/gnome-entry.h>
 #include <libgnomeui/gnome-file-entry.h>
@@ -52,6 +51,7 @@
 #include <gedit/gedit-mdi.h>
 #include <gedit/gedit-output-window.h>
 #include <gedit/gedit-metadata-manager.h>
+#include <gedit/gedit-help.h>
 
 #define MENU_ITEM_LABEL		N_("_Run Command...")
 #define MENU_ITEM_PATH		"/menu/Tools/ToolsOps_3/"
@@ -121,7 +121,7 @@ G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
 static void
 dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 {
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 
 	if (dialog_pointer != NULL)
 	{
@@ -173,9 +173,7 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 static void
 dialog_response_handler (GtkDialog *dlg, gint res_id, ShellOutputDialog *dialog)
 {
-	GError *error = NULL;
-
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 
 	switch (res_id) {
 	case GTK_RESPONSE_OK:
@@ -183,12 +181,9 @@ dialog_response_handler (GtkDialog *dlg, gint res_id, ShellOutputDialog *dialog)
 		break;
 
 	case GTK_RESPONSE_HELP:
-		gnome_help_display ("gedit.xml", "gedit-shell-command-plugin", &error);
-		if (error != NULL)
-		{
-			g_warning (error->message);
-			g_error_free (error);
-		}
+		gedit_help_display (GTK_WINDOW (dlg),
+				    "gedit.xml",
+				    "gedit-shell-command-plugin");
 		break;
 
 	case GEDIT_RESPONSE_STOP:
@@ -198,12 +193,12 @@ dialog_response_handler (GtkDialog *dlg, gint res_id, ShellOutputDialog *dialog)
 
 		gtk_widget_set_sensitive (dialog->stop_button, FALSE);
 
-		gedit_debug (DEBUG_PLUGINS, "Kill Child: %d\n", dialog->child_pid);
+		gedit_debug_message (DEBUG_PLUGINS, "Kill Child: %d\n", dialog->child_pid);
 
 		kill (dialog->child_pid, SIGKILL);
 		wait (NULL);
 
-		gedit_debug (DEBUG_PLUGINS, "Killed: %d\n", dialog->child_pid);
+		gedit_debug_message (DEBUG_PLUGINS, "Killed: %d\n", dialog->child_pid);
 
 		break;
 
@@ -310,7 +305,7 @@ get_dialog (void)
 	GtkWidget *content;
 	gchar *working_directory;
 
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 
 	window = GTK_WINDOW (gedit_get_active_window ());
 
@@ -427,7 +422,7 @@ run_command_cb (BonoboUIComponent *uic, gpointer user_data, const gchar* verbnam
 {
 	ShellOutputDialog *dialog;
 
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 
 	dialog = get_dialog ();
 	if (!dialog)
@@ -441,7 +436,7 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 	
 	ShellOutputDialog *dialog = (ShellOutputDialog *)data;
 
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 
 	if ((condition & G_IO_IN) != 0)
 	{       
@@ -451,12 +446,12 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 		gsize	 pos = 0;
 		gchar 	*line;
 	
-		gedit_debug (DEBUG_PLUGINS, "1");
+		gedit_debug_message (DEBUG_PLUGINS, "1");
 	
 		if (!ioc->is_readable)
 			return TRUE;
 
-		gedit_debug (DEBUG_PLUGINS, "1.1");
+		gedit_debug_message (DEBUG_PLUGINS, "1.1");
 
 		do 
 		{
@@ -469,7 +464,7 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 				break;
 			}
 				
-			gedit_debug (DEBUG_PLUGINS, "1.2");
+			gedit_debug_message (DEBUG_PLUGINS, "1.2");
 		
 			do 
 			{
@@ -503,7 +498,7 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 			
 			if (status != G_IO_STATUS_NORMAL) 
 			{
-				gedit_debug (DEBUG_PLUGINS, "1.2.1");
+				gedit_debug_message (DEBUG_PLUGINS, "1.2.1");
 
 				if (error != NULL) 
 				{
@@ -519,7 +514,7 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 			if (len <= 0)
 				continue;
 				
-			gedit_debug (DEBUG_PLUGINS, "1.3");
+			gedit_debug_message (DEBUG_PLUGINS, "1.3");
 
 			line = g_markup_escape_text (string, pos);
 
@@ -562,7 +557,7 @@ handle_command_output (GIOChannel *ioc, GIOCondition condition, gpointer data)
 		gchar *line;
 		gboolean done = FALSE;
 		
-		gedit_debug (DEBUG_PLUGINS, "2");
+		gedit_debug_message (DEBUG_PLUGINS, "2");
 
 		g_io_channel_shutdown (ioc, TRUE, NULL);
 
@@ -740,7 +735,7 @@ run_command_real (ShellOutputDialog *dialog)
 	gboolean capture_output;
 	GeditDocument *doc;
 	
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 	
 	g_return_val_if_fail (dialog != NULL, FALSE);
 
@@ -928,7 +923,7 @@ run_command_real (ShellOutputDialog *dialog)
 G_MODULE_EXPORT GeditPluginState
 destroy (GeditPlugin *plugin)
 {
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 
 	g_free (current_dir);
 	current_dir = NULL;
@@ -941,7 +936,7 @@ update_ui (GeditPlugin *plugin, BonoboWindow *window)
 {
 	BonoboUIComponent *uic;
 	
-	gedit_debug (DEBUG_PLUGINS, "");	
+	gedit_debug (DEBUG_PLUGINS);	
 	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
 
 	uic = gedit_get_ui_component_from_window (window);
@@ -955,7 +950,7 @@ G_MODULE_EXPORT GeditPluginState
 activate (GeditPlugin *pd)
 {
 	GList *top_windows;
-        gedit_debug (DEBUG_PLUGINS, "");
+        gedit_debug (DEBUG_PLUGINS);
 
         top_windows = gedit_get_top_windows ();
         g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
@@ -978,7 +973,7 @@ activate (GeditPlugin *pd)
 G_MODULE_EXPORT GeditPluginState
 deactivate (GeditPlugin *pd)
 {
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 	
 	gedit_menus_remove_menu_item_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
 
@@ -989,7 +984,7 @@ G_MODULE_EXPORT GeditPluginState
 init (GeditPlugin *pd)
 {
 	/* initialize */
-	gedit_debug (DEBUG_PLUGINS, "");
+	gedit_debug (DEBUG_PLUGINS);
 
 	pd->private_data = NULL;
 

@@ -3,7 +3,7 @@
  * gedit-encodings-option-menu.h
  * This file is part of gedit
  *
- * Copyright (C) 2003 - Paolo Maggi
+ * Copyright (C) 2003-2005 - Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,16 +22,18 @@
  */
  
 /*
- * Modified by the gedit Team, 2003. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2003-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifndef __GEDIT_ENCODINGS_OPTION_MENU_H__
 #define __GEDIT_ENCODINGS_OPTION_MENU_H__
 
 #include <gtk/gtkoptionmenu.h>
-#include "gedit-encodings.h"
+#include <gedit/gedit-encodings.h>
 
 G_BEGIN_DECLS
 

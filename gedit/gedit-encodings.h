@@ -1,9 +1,8 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-encodings.h
  * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2005 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,18 +21,29 @@
  */
  
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifndef __GEDIT_ENCODINGS_H__
 #define __GEDIT_ENCODINGS_H__
 
 #include <glib.h>
+#include <glib-object.h>
+
+G_BEGIN_DECLS
 
 typedef struct _GeditEncoding GeditEncoding;
 
+#define GEDIT_TYPE_ENCODING     (gedit_encoding_get_type ())
+
+GType              	 gedit_encoding_get_type (void) G_GNUC_CONST;
+
+GeditEncoding		*gedit_encoding_copy		 (const GeditEncoding *enc);
+void               	 gedit_encoding_free		 (GeditEncoding       *enc);
 
 const GeditEncoding	*gedit_encoding_get_from_charset (const gchar         *charset);
 const GeditEncoding	*gedit_encoding_get_from_index	 (gint                 index);
@@ -46,6 +56,6 @@ const gchar		*gedit_encoding_get_charset	 (const GeditEncoding *enc);
 const GeditEncoding 	*gedit_encoding_get_utf8	 (void);
 const GeditEncoding 	*gedit_encoding_get_current	 (void);
 
+G_END_DECLS
+
 #endif  /* __GEDIT_ENCODINGS_H__ */
-
-

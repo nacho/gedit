@@ -1,6 +1,9 @@
-/* gedit-session - Basic session management for gedit
+/*
+ * gedit-session.h - Basic session management for gedit
+ * This file is part of gedit
  *
  * Copyright (C) 2002 Ximian, Inc.
+ * Copyright (C) 2005 - Paolo Maggi 
  *
  * Author: Federico Mena-Quintero <federico@ximian.com>
  *
@@ -21,16 +24,24 @@
  */
 
 /*
- * Modified by the gedit Team, 1998-2001. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * See the ChangeLog files for a list of changes.
+ *
+ * $Id 
  */
 
 #ifndef __GEDIT_SESSION_H__
 #define __GEDIT_SESSION_H__
 
-void gedit_session_init (const char *argv0);
-gboolean gedit_session_is_restored (void);
-gboolean gedit_session_load (void);
+#include <glib.h>
 
-#endif
+G_BEGIN_DECLS
+
+void		gedit_session_init 		(const char *argv0);
+gboolean	gedit_session_is_restored 	(void);
+gboolean 	gedit_session_load 		(void);
+
+G_END_DECLS
+
+#endif /* __GEDIT_SESSION_H__ */

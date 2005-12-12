@@ -364,7 +364,7 @@ gedit_mdi_add_open_button (GeditMDI *mdi, BonoboUIComponent *ui_component,
 static void 
 gedit_mdi_init (GeditMDI  *mdi)
 {
-	gedit_debug (DEBUG_MDI, "START");
+	gedit_debug_message (DEBUG_MDI, "START");
 
 	bonobo_mdi_construct (BONOBO_MDI (mdi), 
 			      "gedit-2", 
@@ -408,7 +408,7 @@ gedit_mdi_init (GeditMDI  *mdi)
 			  G_CALLBACK (gedit_mdi_app_destroy_handler), NULL);
 
 			  
-	gedit_debug (DEBUG_MDI, "END");
+	gedit_debug_message (DEBUG_MDI, "END");
 }
 
 static void
@@ -416,7 +416,7 @@ gedit_mdi_finalize (GObject *object)
 {
 	GeditMDI *mdi;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_if_fail (object != NULL);
 	
@@ -442,7 +442,7 @@ gedit_mdi_new (void)
 {
 	GeditMDI *mdi;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	mdi = GEDIT_MDI (g_object_new (GEDIT_TYPE_MDI, NULL));
   	g_return_val_if_fail (mdi != NULL, NULL);
@@ -479,7 +479,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 	GeditWindowPrefs *prefs;
 	GdkWindowState state;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	ui_component = bonobo_mdi_get_ui_component_from_window (win);
 	g_return_if_fail (ui_component != NULL);
@@ -628,7 +628,7 @@ gedit_mdi_app_created_handler (BonoboMDI *mdi, BonoboWindow *win)
 static void
 gedit_mdi_app_destroy_handler (BonoboMDI *mdi, BonoboWindow *window)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	g_return_if_fail (window != NULL);
 	g_return_if_fail (BONOBO_IS_WINDOW (window));
@@ -647,7 +647,7 @@ gedit_mdi_view_menu_item_toggled_handler (
 	gboolean s;
 	GeditWindowPrefs *prefs;
 
-	gedit_debug (DEBUG_MDI, "%s toggled to '%s'", path, state);
+	gedit_debug_message (DEBUG_MDI, "%s toggled to '%s'", path, state);
 
 	prefs = gedit_window_prefs_get_from_window (win);
 	g_return_if_fail (prefs != NULL);
@@ -759,7 +759,7 @@ gedit_mdi_drag_data_received_handler (GtkWidget *widget,
 	GList *p = NULL;
 	GtkWidget *target_window;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	if (info != TARGET_URI_LIST)
 		return;
@@ -887,7 +887,7 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	BonoboUIComponent *ui_component;
 	GeditWindowPrefs *prefs = NULL;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	g_return_if_fail (BONOBO_IS_WINDOW (win));
 	
@@ -939,28 +939,28 @@ gedit_mdi_set_app_toolbar_style (BonoboWindow *win)
 	switch (prefs->toolbar_buttons_style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
-			gedit_debug (DEBUG_MDI, "GEDIT: SYSTEM");
+			gedit_debug_message (DEBUG_MDI, "GEDIT: SYSTEM");
 			bonobo_ui_component_set_prop (
 				ui_component, "/Toolbar", "look", "system", NULL);
 
 			break;
 			
 		case GEDIT_TOOLBAR_ICONS:
-			gedit_debug (DEBUG_MDI, "GEDIT: ICONS");
+			gedit_debug_message (DEBUG_MDI, "GEDIT: ICONS");
 			bonobo_ui_component_set_prop (
 				ui_component, "/Toolbar", "look", "icon", NULL);
 			
 			break;
 			
 		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
-			gedit_debug (DEBUG_MDI, "GEDIT: ICONS_AND_TEXT");
+			gedit_debug_message (DEBUG_MDI, "GEDIT: ICONS_AND_TEXT");
 			bonobo_ui_component_set_prop (
 				ui_component, "/Toolbar", "look", "both", NULL);
 			
 			break;
 			
 		case GEDIT_TOOLBAR_ICONS_BOTH_HORIZ:
-			gedit_debug (DEBUG_MDI, "GEDIT: ICONS_BOTH_HORIZ");
+			gedit_debug_message (DEBUG_MDI, "GEDIT: ICONS_BOTH_HORIZ");
 			bonobo_ui_component_set_prop (
 				ui_component, "/Toolbar", "look", "both_horiz", NULL);
 			
@@ -984,7 +984,7 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 	GeditWindowPrefs *prefs = NULL;
 	BonoboUIComponent *ui_component;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	g_return_if_fail (BONOBO_IS_WINDOW (win));
 
@@ -1013,7 +1013,7 @@ gedit_mdi_set_app_statusbar_style (BonoboWindow *win)
 static void 
 gedit_mdi_child_state_changed_handler (GeditMDIChild *child)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) != BONOBO_MDI_CHILD (child))
 		return;
@@ -1026,7 +1026,7 @@ gedit_mdi_child_state_changed_handler (GeditMDIChild *child)
 static void 
 gedit_mdi_child_undo_redo_state_changed_handler (GeditMDIChild *child)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) != BONOBO_MDI_CHILD (child))
 		return;
@@ -1037,7 +1037,7 @@ gedit_mdi_child_undo_redo_state_changed_handler (GeditMDIChild *child)
 static void 
 gedit_mdi_child_find_state_changed_handler (GeditMDIChild *child)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	if (bonobo_mdi_get_active_child (BONOBO_MDI (gedit_mdi)) != BONOBO_MDI_CHILD (child))
 		return;
@@ -1048,7 +1048,7 @@ gedit_mdi_child_find_state_changed_handler (GeditMDIChild *child)
 static gint 
 gedit_mdi_add_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_signal_connect (G_OBJECT (child), "state_changed",
 			  G_CALLBACK (gedit_mdi_child_state_changed_handler), 
@@ -1069,7 +1069,7 @@ gedit_mdi_add_view_handler (BonoboMDI *mdi, GtkWidget *view)
 	GtkTextView *text_view;
 	GtkTargetList *tl;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_val_if_fail (view != NULL, TRUE);
 
@@ -1107,7 +1107,7 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 	GeditDocument *doc;
 	gboolean close = TRUE;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_val_if_fail (child != NULL, FALSE);
 	g_return_val_if_fail (GEDIT_MDI_CHILD (child)->document != NULL, FALSE);
@@ -1168,7 +1168,7 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 
 		gtk_widget_destroy (dlg);
 
-		gedit_debug (DEBUG_MDI, "CLOSE: %s", close ? "TRUE" : "FALSE");
+		gedit_debug_message (DEBUG_MDI, "CLOSE: %s", close ? "TRUE" : "FALSE");
 	}
 		
 	return close;
@@ -1177,7 +1177,7 @@ gedit_mdi_remove_child_handler (BonoboMDI *mdi, BonoboMDIChild *child)
 static gboolean
 gedit_mdi_remove_view_handler (BonoboMDI *mdi, GtkWidget *view)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	return TRUE;
 }
@@ -1190,7 +1190,7 @@ gedit_mdi_can_remove_views (GList *views, BonoboWindow *window)
 	GtkWidget *dlg;
 	gboolean close;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	if (window == NULL)
 	{
@@ -1332,7 +1332,7 @@ gedit_mdi_remove_views_handler (BonoboMDI *mdi, BonoboWindow *window)
 	GList *views;
 	gboolean ret;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	if (gedit_mdi_get_state (GEDIT_MDI (mdi)) != GEDIT_STATE_NORMAL)
 		return FALSE;
@@ -1352,7 +1352,7 @@ gedit_mdi_remove_all (GeditMDI *mdi)
 	GList *views;
 	gboolean ret;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_val_if_fail (GEDIT_IS_MDI (mdi), FALSE);
 
@@ -1408,7 +1408,7 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 
 	GtkWidget *active_window;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	active_child = bonobo_mdi_get_active_child (mdi);
 	if (active_child == NULL)
@@ -1501,7 +1501,7 @@ gedit_mdi_set_active_window_title (BonoboMDI *mdi)
 static 
 void gedit_mdi_child_changed_handler (BonoboMDI *mdi, BonoboMDIChild *old_child)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 		
 	gedit_mdi_set_active_window_title (mdi);	
 	gedit_mdi_update_languages_menu (mdi);
@@ -1514,7 +1514,7 @@ void gedit_mdi_view_changed_handler (BonoboMDI *mdi, GtkWidget *old_view)
 	GtkWidget *status;
 	GtkWidget *active_view;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	gedit_mdi_set_active_window_verbs_sensitivity (mdi);
 
@@ -1578,7 +1578,7 @@ gedit_mdi_set_active_window_verbs_sensitivity (BonoboMDI *mdi)
 	GeditDocument* doc = NULL;
 	BonoboUIComponent *ui_component;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	active_window = bonobo_mdi_get_active_window (mdi);
 
@@ -1693,7 +1693,7 @@ gedit_mdi_set_active_window_undo_redo_verbs_sensitivity (BonoboMDI *mdi)
 	GeditDocument* doc = NULL;
 	BonoboUIComponent *ui_component;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	active_window = gedit_get_active_window ();
 	g_return_if_fail (active_window != NULL);
@@ -1723,7 +1723,7 @@ gedit_mdi_set_active_window_find_verbs_sensitivity (BonoboMDI *mdi)
 	BonoboUIComponent *ui_component;
 	gboolean sensitive;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	active_window = gedit_get_active_window ();
 	g_return_if_fail (active_window != NULL);
@@ -1752,7 +1752,7 @@ EggRecentView *
 gedit_mdi_get_recent_view_from_window (BonoboWindow *win)
 {
 	gpointer r;
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	r = g_object_get_data (G_OBJECT (win), RECENT_KEY);
 	
@@ -1776,7 +1776,7 @@ gedit_mdi_show_output_window_cb (GtkWidget *widget, gpointer user_data)
 	GeditWindowPrefs *prefs;
 	BonoboUIComponent *ui_component;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	bw = BONOBO_WINDOW (user_data);
 	g_return_if_fail (bw != NULL);
@@ -1801,7 +1801,7 @@ gedit_mdi_hide_output_window_cb (GtkWidget *widget, gpointer user_data)
 	GeditWindowPrefs *prefs;
 	BonoboUIComponent *ui_component;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 	
 	bw = BONOBO_WINDOW (user_data);
 	g_return_if_fail (bw != NULL);
@@ -1823,7 +1823,7 @@ GtkWidget *
 gedit_mdi_get_output_window_from_window (BonoboWindow *win)
 {
 	gpointer r;
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	r = g_object_get_data (G_OBJECT (win), OUTPUT_WINDOW_KEY);
 
@@ -1854,7 +1854,7 @@ gedit_window_prefs_new (void)
 {
 	GeditWindowPrefs *prefs;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	prefs = g_new0 (GeditWindowPrefs, 1);
 
@@ -1871,7 +1871,7 @@ gedit_window_prefs_new (void)
 static void
 gedit_window_prefs_attach_to_window (GeditWindowPrefs *prefs, BonoboWindow *win)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_if_fail (prefs != NULL);
 	g_return_if_fail (win != NULL);
@@ -1888,7 +1888,7 @@ gedit_window_prefs_get_from_window (BonoboWindow *win)
 {
 	GeditWindowPrefs *prefs;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_val_if_fail (win != NULL, NULL);
 	g_return_val_if_fail (BONOBO_IS_WINDOW (win), NULL);
@@ -1901,7 +1901,7 @@ gedit_window_prefs_get_from_window (BonoboWindow *win)
 static void
 gedit_window_prefs_save (GeditWindowPrefs *prefs)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_if_fail (prefs != NULL);
 
@@ -2094,7 +2094,7 @@ add_languages_menu (BonoboMDI *mdi, BonoboWindow *win)
 	GSList *sections = NULL;
 	GSList *s;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	gedit_menus_add_menu_item_radio (win,
 					 "/menu/View/HighlightMode/",
@@ -2209,7 +2209,7 @@ void gedit_mdi_update_languages_menu (BonoboMDI *mdi)
 	BonoboWindow* active_window = NULL;
 	BonoboUIComponent *ui_component;
 	
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 		
 	active_window = bonobo_mdi_get_active_window (mdi);
 
@@ -2242,7 +2242,7 @@ update_ui_according_to_state (GeditMDI *mdi)
 	GdkCursor *cursor;
 	GList *windows;
 
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	/* Upate menus and toolbars */
 	gedit_mdi_set_active_window_verbs_sensitivity (BONOBO_MDI (gedit_mdi));
@@ -2326,7 +2326,7 @@ update_ui_according_to_state (GeditMDI *mdi)
 GeditState
 gedit_mdi_get_state (GeditMDI *mdi)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_val_if_fail (GEDIT_IS_MDI (mdi), GEDIT_STATE_NORMAL);
 
@@ -2337,7 +2337,7 @@ void
 gedit_mdi_set_state (GeditMDI   *mdi,
 		     GeditState  state)
 {
-	gedit_debug (DEBUG_MDI, "");
+	gedit_debug (DEBUG_MDI);
 
 	g_return_if_fail (GEDIT_IS_MDI (mdi));
 	g_return_if_fail ((state == GEDIT_STATE_NORMAL) ||

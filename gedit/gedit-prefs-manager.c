@@ -45,7 +45,7 @@
 #define DEFINE_BOOL_PREF(name, key, def) gboolean 			\
 gedit_prefs_manager_get_ ## name (void)					\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	return gedit_prefs_manager_get_bool (key,	\
 					     (def));			\
@@ -54,7 +54,7 @@ gedit_prefs_manager_get_ ## name (void)					\
 void 									\
 gedit_prefs_manager_set_ ## name (gboolean v)				\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	gedit_prefs_manager_set_bool (key,		\
 				      v);				\
@@ -63,7 +63,7 @@ gedit_prefs_manager_set_ ## name (gboolean v)				\
 gboolean								\
 gedit_prefs_manager_ ## name ## _can_set (void)				\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	return gedit_prefs_manager_key_is_writable (key);\
 }	
@@ -73,7 +73,7 @@ gedit_prefs_manager_ ## name ## _can_set (void)				\
 #define DEFINE_INT_PREF(name, key, def) gint	 			\
 gedit_prefs_manager_get_ ## name (void)			 		\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	return gedit_prefs_manager_get_int (key,		\
 					    (def));			\
@@ -82,7 +82,7 @@ gedit_prefs_manager_get_ ## name (void)			 		\
 void 									\
 gedit_prefs_manager_set_ ## name (gint v)				\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	gedit_prefs_manager_set_int (key,		\
 				     v);				\
@@ -91,7 +91,7 @@ gedit_prefs_manager_set_ ## name (gint v)				\
 gboolean								\
 gedit_prefs_manager_ ## name ## _can_set (void)				\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	return gedit_prefs_manager_key_is_writable (key);\
 }		
@@ -101,7 +101,7 @@ gedit_prefs_manager_ ## name ## _can_set (void)				\
 #define DEFINE_STRING_PREF(name, key, def) gchar*	 		\
 gedit_prefs_manager_get_ ## name (void)			 		\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	return gedit_prefs_manager_get_string (key,	\
 					       def);			\
@@ -110,7 +110,7 @@ gedit_prefs_manager_get_ ## name (void)			 		\
 void 									\
 gedit_prefs_manager_set_ ## name (const gchar* v)			\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	gedit_prefs_manager_set_string (key,		\
 				        v);				\
@@ -119,7 +119,7 @@ gedit_prefs_manager_set_ ## name (const gchar* v)			\
 gboolean								\
 gedit_prefs_manager_ ## name ## _can_set (void)				\
 {									\
-	gedit_debug (DEBUG_PREFS, "");					\
+	gedit_debug (DEBUG_PREFS);					\
 									\
 	return gedit_prefs_manager_key_is_writable (key);\
 }		
@@ -163,7 +163,7 @@ gboolean		 gconf_client_set_color 		(GConfClient* client,
 gboolean
 gedit_prefs_manager_init (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	if (gedit_prefs_manager == NULL)
 	{
@@ -194,7 +194,7 @@ gedit_prefs_manager_init (void)
 void
 gedit_prefs_manager_shutdown ()
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (gedit_prefs_manager != NULL);
 
@@ -205,7 +205,7 @@ gedit_prefs_manager_shutdown ()
 static gboolean		 
 gedit_prefs_manager_get_bool (const gchar* key, gboolean def)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, def);
 	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, def);
@@ -219,7 +219,7 @@ gedit_prefs_manager_get_bool (const gchar* key, gboolean def)
 static gint 
 gedit_prefs_manager_get_int (const gchar* key, gint def)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, def);
 	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, def);
@@ -233,7 +233,7 @@ gedit_prefs_manager_get_int (const gchar* key, gint def)
 static gchar *
 gedit_prefs_manager_get_string (const gchar* key, const gchar* def)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, 
 			      def ? g_strdup (def) : NULL);
@@ -249,7 +249,7 @@ gedit_prefs_manager_get_string (const gchar* key, const gchar* def)
 static void		 
 gedit_prefs_manager_set_bool (const gchar* key, gboolean value)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (gedit_prefs_manager != NULL);
 	g_return_if_fail (gedit_prefs_manager->gconf_client != NULL);
@@ -262,7 +262,7 @@ gedit_prefs_manager_set_bool (const gchar* key, gboolean value)
 static void		 
 gedit_prefs_manager_set_int (const gchar* key, gint value)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (gedit_prefs_manager != NULL);
 	g_return_if_fail (gedit_prefs_manager->gconf_client != NULL);
@@ -275,7 +275,7 @@ gedit_prefs_manager_set_int (const gchar* key, gint value)
 static void		 
 gedit_prefs_manager_set_string (const gchar* key, const gchar* value)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (value != NULL);
 	
@@ -290,7 +290,7 @@ gedit_prefs_manager_set_string (const gchar* key, const gchar* value)
 static gboolean 
 gedit_prefs_manager_key_is_writable (const gchar* key)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, FALSE);
 	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, FALSE);
@@ -301,7 +301,7 @@ gedit_prefs_manager_key_is_writable (const gchar* key)
 static gchar* 
 gdk_color_to_string (GdkColor color)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	return g_strdup_printf ("#%04x%04x%04x",
 				color.red, 
@@ -316,7 +316,7 @@ gconf_client_get_color_with_default (GConfClient* client, const gchar* key,
 	gchar *str_color = NULL;
 	GdkColor color = {0, };
 
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
       	g_return_val_if_fail (client != NULL, color);
       	g_return_val_if_fail (GCONF_IS_CLIENT (client), color);  
@@ -343,7 +343,7 @@ gconf_client_set_color (GConfClient* client, const gchar* key,
 	gchar *str_color = NULL;
 	gboolean res;
 	
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (client != NULL, FALSE);
 	g_return_val_if_fail (GCONF_IS_CLIENT (client), FALSE);  
@@ -366,7 +366,7 @@ gedit_prefs_manager_get_color (const gchar* key, const gchar* def)
 {
 	GdkColor color = {0, };
 
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	if (def != NULL)
 		gdk_color_parse (def, &color);
@@ -383,7 +383,7 @@ gedit_prefs_manager_get_color (const gchar* key, const gchar* def)
 static void		 
 gedit_prefs_manager_set_color (const gchar* key, GdkColor value)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (gedit_prefs_manager != NULL);
 	g_return_if_fail (gedit_prefs_manager->gconf_client != NULL);
@@ -415,7 +415,7 @@ DEFINE_BOOL_PREF (use_default_colors,
 GdkColor
 gedit_prefs_manager_get_background_color (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	return gedit_prefs_manager_get_color (GPM_BACKGROUND_COLOR,
 					      GPM_DEFAULT_BACKGROUND_COLOR);
@@ -424,7 +424,7 @@ gedit_prefs_manager_get_background_color (void)
 void
 gedit_prefs_manager_set_background_color (GdkColor color)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	gedit_prefs_manager_set_color (GPM_BACKGROUND_COLOR,
 				       color);
@@ -433,7 +433,7 @@ gedit_prefs_manager_set_background_color (GdkColor color)
 gboolean
 gedit_prefs_manager_background_color_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_BACKGROUND_COLOR);
 }
@@ -442,7 +442,7 @@ gedit_prefs_manager_background_color_can_set (void)
 GdkColor
 gedit_prefs_manager_get_text_color (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	return gedit_prefs_manager_get_color (GPM_TEXT_COLOR,
 					      GPM_DEFAULT_TEXT_COLOR);
@@ -451,7 +451,7 @@ gedit_prefs_manager_get_text_color (void)
 void
 gedit_prefs_manager_set_text_color (GdkColor color)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	gedit_prefs_manager_set_color (GPM_TEXT_COLOR,
 				       color);
@@ -460,7 +460,7 @@ gedit_prefs_manager_set_text_color (GdkColor color)
 gboolean
 gedit_prefs_manager_text_color_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_TEXT_COLOR);
 }
@@ -469,7 +469,7 @@ gedit_prefs_manager_text_color_can_set (void)
 GdkColor
 gedit_prefs_manager_get_selected_text_color (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	return gedit_prefs_manager_get_color (GPM_SELECTED_TEXT_COLOR,
 					      GPM_DEFAULT_SELECTED_TEXT_COLOR);
@@ -478,7 +478,7 @@ gedit_prefs_manager_get_selected_text_color (void)
 void
 gedit_prefs_manager_set_selected_text_color (GdkColor color)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	gedit_prefs_manager_set_color (GPM_SELECTED_TEXT_COLOR,
 				       color);
@@ -487,7 +487,7 @@ gedit_prefs_manager_set_selected_text_color (GdkColor color)
 gboolean
 gedit_prefs_manager_selected_text_color_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_SELECTED_TEXT_COLOR);
 }
@@ -496,7 +496,7 @@ gedit_prefs_manager_selected_text_color_can_set (void)
 GdkColor
 gedit_prefs_manager_get_selection_color (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	return gedit_prefs_manager_get_color (GPM_SELECTION_COLOR,
 					      GPM_DEFAULT_SELECTION_COLOR);
@@ -505,7 +505,7 @@ gedit_prefs_manager_get_selection_color (void)
 void
 gedit_prefs_manager_set_selection_color (GdkColor color)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	gedit_prefs_manager_set_color (GPM_SELECTION_COLOR,
 				       color);
@@ -514,7 +514,7 @@ gedit_prefs_manager_set_selection_color (GdkColor color)
 gboolean
 gedit_prefs_manager_selection_color_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_SELECTION_COLOR);
 }
@@ -529,7 +529,7 @@ DEFINE_BOOL_PREF (create_backup_copy,
 gchar *
 gedit_prefs_manager_get_backup_extension (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	return gedit_prefs_manager_get_string (GPM_BACKUP_COPY_EXTENSION,	
 					       GPM_DEFAULT_BACKUP_COPY_EXTENSION);
@@ -578,7 +578,7 @@ gedit_prefs_manager_get_wrap_mode (void)
 	gchar *str;
 	GtkWrapMode res;
 	
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	str = gedit_prefs_manager_get_string (GPM_WRAP_MODE,
 					      GPM_DEFAULT_WRAP_MODE);
@@ -595,7 +595,7 @@ gedit_prefs_manager_set_wrap_mode (GtkWrapMode wp)
 {
 	const gchar * str;
 	
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	switch (wp)
 	{
@@ -618,7 +618,7 @@ gedit_prefs_manager_set_wrap_mode (GtkWrapMode wp)
 gboolean
 gedit_prefs_manager_wrap_mode_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_WRAP_MODE);
 }
@@ -657,7 +657,7 @@ gedit_prefs_manager_get_toolbar_buttons_style (void)
 	gchar *str;
 	GeditToolbarSetting res;
 	
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	str = gedit_prefs_manager_get_string (GPM_TOOLBAR_BUTTONS_STYLE,
 					      GPM_DEFAULT_TOOLBAR_BUTTONS_STYLE);
@@ -688,7 +688,7 @@ gedit_prefs_manager_set_toolbar_buttons_style (GeditToolbarSetting tbs)
 {
 	const gchar * str;
 	
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	switch (tbs)
 	{
@@ -715,7 +715,7 @@ gedit_prefs_manager_set_toolbar_buttons_style (GeditToolbarSetting tbs)
 gboolean
 gedit_prefs_manager_toolbar_buttons_style_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_TOOLBAR_BUTTONS_STYLE);
 
@@ -725,6 +725,16 @@ gedit_prefs_manager_toolbar_buttons_style_can_set (void)
 DEFINE_BOOL_PREF (statusbar_visible,
 		  GPM_STATUSBAR_VISIBLE,
 		  GPM_DEFAULT_STATUSBAR_VISIBLE)
+		  
+/* Side Pane visiblity */
+DEFINE_BOOL_PREF (side_pane_visible,
+		  GPM_SIDE_PANE_VISIBLE,
+		  GPM_DEFAULT_SIDE_PANE_VISIBLE)
+		  
+/* Bottom Panel visiblity */
+DEFINE_BOOL_PREF (bottom_panel_visible,
+		  GPM_BOTTOM_PANEL_VISIBLE,
+		  GPM_DEFAULT_BOTTOM_PANEL_VISIBLE)		  		  
 
 /* Print syntax highlighting */
 DEFINE_BOOL_PREF (print_syntax_hl,
@@ -744,7 +754,7 @@ gedit_prefs_manager_get_print_wrap_mode (void)
 	gchar *str;
 	GtkWrapMode res;
 	
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	str = gedit_prefs_manager_get_string (GPM_PRINT_WRAP_MODE,
 					      GPM_DEFAULT_PRINT_WRAP_MODE);
@@ -769,7 +779,7 @@ gedit_prefs_manager_set_print_wrap_mode (GtkWrapMode pwp)
 {
 	const gchar * str;
 	
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	switch (pwp)
 	{
@@ -792,7 +802,7 @@ gedit_prefs_manager_set_print_wrap_mode (GtkWrapMode pwp)
 gboolean
 gedit_prefs_manager_print_wrap_mode_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_PRINT_WRAP_MODE);
 }
@@ -1014,7 +1024,7 @@ gedit_prefs_manager_get_default_print_font_numbers (void)
 gint
 gedit_prefs_manager_get_max_recents (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	return gedit_prefs_manager_get_int (GPM_MAX_RECENTS,	
 					    GPM_DEFAULT_MAX_RECENTS);
@@ -1043,7 +1053,7 @@ gedit_prefs_manager_get_auto_detected_encodings (void)
 {
 	GSList *strings;
 	GSList *res = NULL;
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
 	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, NULL);
@@ -1102,7 +1112,7 @@ gedit_prefs_manager_get_auto_detected_encodings (void)
 	 	res = g_slist_reverse (res);
 	}
 
-	gedit_debug (DEBUG_PREFS, "Done");
+	gedit_debug_message (DEBUG_PREFS, "Done");
 
 	return res;
 }
@@ -1112,7 +1122,7 @@ gedit_prefs_manager_get_shown_in_menu_encodings (void)
 {
 	GSList *strings;
 	GSList *res = NULL;
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
 	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, NULL);
@@ -1195,7 +1205,7 @@ gedit_prefs_manager_set_shown_in_menu_encodings (const GSList *encs)
 gboolean
 gedit_prefs_manager_shown_in_menu_encodings_can_set (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 	
 	return gedit_prefs_manager_key_is_writable (GPM_SHOWN_IN_MENU_ENCODINGS);
 
@@ -1226,6 +1236,44 @@ DEFINE_BOOL_PREF (enable_syntax_highlighting,
 		  GPM_SYNTAX_HL_ENABLE,
 		  GPM_DEFAULT_SYNTAX_HL_ENABLE)
 
+
+GSList *
+gedit_prefs_manager_get_writable_vfs_schemes (void)
+{
+	GSList *strings;
+	
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_val_if_fail (gedit_prefs_manager != NULL, NULL);
+	g_return_val_if_fail (gedit_prefs_manager->gconf_client != NULL, NULL);
+
+	strings = gconf_client_get_list (gedit_prefs_manager->gconf_client,
+				GPM_WRITABLE_VFS_SCHEMES,
+				GCONF_VALUE_STRING, 
+				NULL);
+
+	if (strings == NULL)
+	{
+		gint i = 0;
+		const gchar* s[] = GPM_DEFAULT_WRITABLE_VFS_SCHEMES;
+
+		while (s[i] != NULL)
+		{
+			strings = g_slist_prepend (strings, g_strdup (s[i]));
+
+			++i;
+		}
+
+		strings = g_slist_reverse (strings);
+	}
+
+	/* The 'file' scheme is writable by default. */
+	strings = g_slist_prepend (strings, g_strdup ("file")); 
+	
+	gedit_debug_message (DEBUG_PREFS, "Done");
+
+	return strings;
+}
 
 /* The following functions are taken from gconf-client.c 
  * and partially modified. 

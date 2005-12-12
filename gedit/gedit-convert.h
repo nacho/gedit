@@ -35,9 +35,7 @@
 
 typedef enum 
 {
-	GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED = 1100,
-	GEDIT_CONVERT_ERROR_BINARY_FILE,
-	GEDIT_CONVERT_ERROR_ILLEGAL_SEQUENCE
+	GEDIT_CONVERT_ERROR_AUTO_DETECTION_FAILED = 1100
 } GeditConvertError;
 
 #define GEDIT_CONVERT_ERROR gedit_convert_error_quark()
@@ -47,6 +45,7 @@ GQuark gedit_convert_error_quark (void);
 gchar *gedit_convert_to_utf8   (const gchar          *content, 
 				gsize                 len,
 				const GeditEncoding **encoding,
+				gsize                *new_len,
 				GError              **error);
 
 gchar *gedit_convert_from_utf8 (const gchar          *content, 

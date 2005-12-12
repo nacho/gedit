@@ -1,9 +1,8 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-plugins-engine.h
  * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2005 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,46 +21,53 @@
  */
  
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifndef __GEDIT_PLUGINS_ENGINE_H__
 #define __GEDIT_PLUGINS_ENGINE_H__
 
-#include <gedit/gedit-plugin.h>
+#include <glib.h>
+#include <gedit/gedit-window.h>
 
 typedef struct _GeditPluginInfo GeditPluginInfo;
-
-typedef enum {
-	GEDIT_PLUGIN_ACTIVATED,
-	GEDIT_PLUGIN_DEACTIVATED
-} GeditPluginActivationState;
-
-struct _GeditPluginInfo
-{
-	GeditPlugin		 	*plugin;
-	GeditPluginActivationState 	 state;
-};
 
 gboolean	 gedit_plugins_engine_init 		(void);
 void		 gedit_plugins_engine_shutdown 		(void);
 
 const GList	*gedit_plugins_engine_get_plugins_list 	(void);
 
-gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPlugin *plugin);
-gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPlugin *plugin);
-gboolean 	 gedit_plugins_engine_configure_plugin	(GeditPlugin *plugin, GtkWidget* parent);
+gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginInfo *info);
+gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginInfo *info);
+gboolean 	 gedit_plugins_engine_plugin_is_active 	(GeditPluginInfo *info);
 
+gboolean	 gedit_plugins_engine_plugin_is_configurable 
+							(GeditPluginInfo *info);
+void	 	 gedit_plugins_engine_configure_plugin	(GeditPluginInfo *info, 
+							 GtkWindow       *parent);
 
 /* 
  * new_window == TRUE if this function is called because a new top window
  * has been created
  */
-void		 gedit_plugins_engine_update_plugins_ui	(BonoboWindow *window, gboolean new_window);
+void		 gedit_plugins_engine_update_plugins_ui (GeditWindow     *window, 
+							 gboolean         new_window);
 
-gboolean	 gedit_plugins_engine_is_a_configurable_plugin (GeditPlugin *plugin);
+
+const gchar	*gedit_plugins_engine_get_plugin_name	(GeditPluginInfo *info);
+const gchar	*gedit_plugins_engine_get_plugin_description
+							(GeditPluginInfo *info);
+
+const gchar    **gedit_plugins_engine_get_plugin_authors
+							(GeditPluginInfo *info);
+const gchar	*gedit_plugins_engine_get_plugin_website
+							(GeditPluginInfo *info);
+const gchar	*gedit_plugins_engine_get_plugin_copyright
+							(GeditPluginInfo *info);
 
 #endif  /* __GEDIT_PLUGINS_ENGINE_H__ */
 

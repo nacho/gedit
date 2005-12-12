@@ -92,6 +92,12 @@
 #define GPM_STATUSBAR_DIR		GPM_PREFS_DIR "/ui/statusbar"
 #define GPM_STATUSBAR_VISIBLE		GPM_STATUSBAR_DIR "/statusbar_visible"
 
+#define GPM_SIDE_PANE_DIR		GPM_PREFS_DIR "/ui/side_pane"
+#define GPM_SIDE_PANE_VISIBLE		GPM_SIDE_PANE_DIR "/side_pane_visible"
+
+#define GPM_BOTTOM_PANEL_DIR		GPM_PREFS_DIR "/ui/bottom_panel"
+#define GPM_BOTTOM_PANEL_VISIBLE	GPM_BOTTOM_PANEL_DIR "/bottom_panel_visible"
+
 #define GPM_RECENTS_DIR			GPM_PREFS_DIR "/ui/recents"
 #define GPM_MAX_RECENTS			GPM_RECENTS_DIR "/max_recents"
 
@@ -114,6 +120,8 @@
 #define GPM_WINDOW_STATE		GPM_WINDOW_DIR "/state"
 #define GPM_WINDOW_WIDTH		GPM_WINDOW_DIR "/width"
 #define GPM_WINDOW_HEIGHT		GPM_WINDOW_DIR "/height"
+#define GPM_SIDE_PANEL_SIZE		GPM_WINDOW_DIR "/side_panel_size"
+#define GPM_BOTTOM_PANEL_SIZE		GPM_WINDOW_DIR "/bottom_panel_size"
 
 /* Encodings */
 #define GPM_ENCODINGS_DIR		GPM_PREFS_DIR "/encodings"
@@ -123,6 +131,9 @@
 /* Syntax highlighting */
 #define GPM_SYNTAX_HL_DIR		GPM_PREFS_DIR "/syntax_highlighting"
 #define GPM_SYNTAX_HL_ENABLE		GPM_SYNTAX_HL_DIR "/enable"
+
+/* White list of writable gnome-vfs methods */
+#define GPM_WRITABLE_VFS_SCHEMES 	GPM_SAVE_DIR "/writable_vfs_schemes"
 
 /* Fallback default values. Keep in sync with gedit.schemas */
 
@@ -159,6 +170,8 @@
 #define GPM_DEFAULT_TOOLBAR_SHOW_TOOLTIPS 1 /* TRUE */
 
 #define GPM_DEFAULT_STATUSBAR_VISIBLE	1 /* TRUE */
+#define GPM_DEFAULT_SIDE_PANE_VISIBLE	0 /* FALSE */
+#define GPM_DEFAULT_BOTTOM_PANEL_VISIBLE 0 /* FALSE */
 
 #define GPM_DEFAULT_PRINT_SYNTAX	1 /* TRUE */
 #define GPM_DEFAULT_PRINT_HEADER	1 /* TRUE */
@@ -179,6 +192,12 @@
 #define GPM_DEFAULT_WINDOW_WIDTH_STR	"650"
 #define GPM_DEFAULT_WINDOW_HEIGHT_STR	"500"
 
+#define GPM_DEFAULT_SIDE_PANEL_SIZE	200
+#define GPM_DEFAULT_BOTTOM_PANEL_SIZE 	140
+
+#define GPM_DEFAULT_SIDE_PANEL_SIZE_STR   "200"
+#define GPM_DEFAULT_BOTTOM_PANEL_SIZE_STR "140"
+
 #define GPM_DEFAULT_HIGHLIGHT_CURRENT_LINE  1 /* TRUE */
 
 #define GPM_DEFAULT_BRACKET_MATCHING	  0 /* FALSE */
@@ -187,6 +206,8 @@
 #define GPM_DEFAULT_RIGHT_MARGIN_POSITION 80
 
 #define GPM_DEFAULT_SYNTAX_HL_ENABLE	1 /* TRUE */
+
+#define GPM_DEFAULT_WRITABLE_VFS_SCHEMES {"ssh", "sftp", "smb", "dav", "davs", NULL}
 
 typedef enum {
 	GEDIT_TOOLBAR_SYSTEM = 0,
@@ -304,6 +325,15 @@ gboolean		 gedit_prefs_manager_get_statusbar_visible	(void);
 void			 gedit_prefs_manager_set_statusbar_visible	(gboolean sv);
 gboolean		 gedit_prefs_manager_statusbar_visible_can_set	(void);
 
+/* Side pane visible */
+gboolean		 gedit_prefs_manager_get_side_pane_visible	(void);
+void			 gedit_prefs_manager_set_side_pane_visible	(gboolean tv);
+gboolean		 gedit_prefs_manager_side_pane_visible_can_set	(void);
+
+/* Bottom panel visible */
+gboolean		 gedit_prefs_manager_get_bottom_panel_visible	(void);
+void			 gedit_prefs_manager_set_bottom_panel_visible	(gboolean tv);
+gboolean		 gedit_prefs_manager_bottom_panel_visible_can_set(void);
 /* Print syntax highlighting */
 gboolean		 gedit_prefs_manager_get_print_syntax_hl	(void);
 void			 gedit_prefs_manager_set_print_syntax_hl	(gboolean ps);
@@ -378,6 +408,9 @@ gboolean		 gedit_prefs_manager_right_margin_position_can_set (void);
 gboolean 		 gedit_prefs_manager_get_enable_syntax_highlighting (void);
 void			 gedit_prefs_manager_set_enable_syntax_highlighting (gboolean esh);
 gboolean		 gedit_prefs_manager_enable_syntax_highlighting_can_set (void);
+
+/* Writable VFS schemes */
+GSList			*gedit_prefs_manager_get_writable_vfs_schemes	(void);
 
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 

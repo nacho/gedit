@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-SUBDIRS= dialogs recent-files
+SUBDIRS = dialogs recent-files
 
 bin_PROGRAMS = gedit
 
@@ -15,115 +15,144 @@ INCLUDES =							\
 	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\"		\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+	
+if ENABLE_PYTHON
+INCLUDES += \
+	$(NO_STRICT_ALIASING_CFLAGS)	\
+	$(PYGTK_CFLAGS)			\
+	$(PYTHON_CFLAGS)		\
+	$(AM_CFLAGS)
+endif
 
-noinst_LTLIBRARIES = libgedit.la
-
-gedit_LDFLAGS = -export-dynamic
+gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
 gedit_LDADD =				\
 	$(GEDIT_LIBS)			\
-	libgedit.la			\
 	dialogs/libdialogs.la		\
 	recent-files/librecent.la
 
-IDL_FILE = GNOME_Gedit.idl
-
-IDL_SOURCES = 				\
-	GNOME_Gedit-stubs.c		\
-	GNOME_Gedit-common.c		\
-	GNOME_Gedit-skels.c		\
-	GNOME_Gedit.h
+if ENABLE_PYTHON
+gedit_LDADD += \
+	$(top_builddir)/bindings/python/gedit.la
+endif
 
 BUILT_SOURCES = 			\
 	gedit-marshal.c			\
-	gedit-marshal.h                 \
-	$(IDL_SOURCES)
+	gedit-marshal.h              
 
-NON_INST_H_FILS =			\
-	gedit-application-server.h	\
-	gedit-file-selector-util.h 	\
-	gedit-io-error-dialogs.h	\
-	bonobo-mdi-session.h		\
+NOINST_H_FILES =			\
 	gedit-commands.h		\
-	gedit-plugins-engine.h		\
-	gedit-session.h			\
+	gedit-tooltips.h		\
 	gedit-languages-manager.h	\
-	gedit-window-server.h		\
-	gedit-tooltips.h
+	gedit-plugin-manager.h		\
+	gedit-plugins-engine.h		\
+	gedit-module.h			\
+	gedit-ui.h			\
+	gedit-window-private.h		\
+	gedit-documents-panel.h		\
+	gedit-document-loader.h		\
+	gedit-document-saver.h		\
+	gedit-io-error-message-area.h	\
+	gedit-spinner.h			\
+	sexy-icon-entry.h		\
+	gedit-session.h
+
+if ENABLE_PYTHON
+NOINST_H_FILES += \
+	gedit-python-module.h		\
+	gedit-python-plugin.h 
+endif
 
 INST_H_FILES =				\
-	gedit2.h			\
-	gedit-file.h			\
-	gedit-encodings-option-menu.h	\
-	gedit-utils.h 			\
-	gedit-mdi.h			\
-	gedit-mdi-child.h		\
-	gedit-document.h 		\
-	gedit-view.h 			\
-	gedit-menus.h			\
-	bonobo-mdi.h			\
-	gedit-print.h			\
-	bonobo-mdi-child.h		\
-	gedit-plugin.h			\
-	gedit-prefs-manager-app.h	\
-	gedit-recent.h			\
-	gedit-output-window.h
-
-LIB_H_FILES =				\
-	gedit-encodings.h		\
+	gedit-app.h			\
 	gedit-convert.h			\
 	gedit-debug.h			\
+	gedit-document.h 		\
+	gedit-encodings.h		\
+	gedit-encodings-option-menu.h	\
+	gedit-file-chooser-dialog.h	\
+	gedit-help.h 			\
+	gedit-message-area.h		\
+	gedit-metadata-manager.h	\
+	gedit-notebook.h		\
+	gedit-panel.h			\
+	gedit-plugin.h			\
+	gedit-prefs-manager-app.h	\
 	gedit-prefs-manager.h		\
-	gedit-metadata-manager.h	
-
+	gedit-print.h			\
+	gedit-print-job-preview.h	\
+	gedit-progress-message-area.h	\
+	gedit-recent.h			\
+	gedit-statusbar.h		\
+	gedit-tab.h 			\
+	gedit-utils.h 			\
+	gedit-view.h 			\
+	gedit-window.h
 
 headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
 
 header_DATA = 				\
-	$(INST_H_FILES)			\
-	$(LIB_H_FILES)
+	$(INST_H_FILES)	
 
 gedit_SOURCES = 			\
 	$(BUILT_SOURCES)		\
-	gedit2.c			\
-	gedit-mdi.c			\
-	gedit-mdi-child.c		\
-	gedit-document.c 		\
-	gedit-view.c 			\
-	gedit-menus.c			\
-	gedit-utils.c 			\
-	gedit-commands.c		\
-	gedit-file.c			\
-	gedit-print.c			\
-	gedit-session.c			\
-	bonobo-mdi.c			\
-	bonobo-mdi-child.c		\
-	bonobo-mdi-session.c		\
-	gedit-file-selector-util.c 	\
-	gedit-io-error-dialogs.c	\
-	gedit-plugins-engine.c		\
-	gedit-plugin.c			\
-	gedit-prefs-manager-app.c	\
-	gedit-recent.c			\
-	gedit-application-server.c	\
-	gedit-document-server.c		\
-	gedit-document-server.h		\
-	gedit-window-server.c		\
-	gedit-output-window.c		\
-	gedit-languages-manager.c	\
-	gedit-encodings-option-menu.c	\
-	gedit-tooltips.c		\
-	$(NON_INST_H_FILS)		\
-	$(INST_H_FILES)
-
-libgedit_la_SOURCES = 			\
-	gedit-debug.c			\
+	$(BACON_FILES)			\
+	gedit.c				\
+	gedit-app.c			\
+	gedit-commands-documents.c	\
+	gedit-commands-edit.c		\
+	gedit-commands-file.c		\
+	gedit-commands-file-print.c	\
+	gedit-commands-help.c		\
+	gedit-commands-search.c		\
+	gedit-commands-view.c		\
 	gedit-convert.c			\
+	gedit-debug.c			\
+	gedit-document.c 		\
+	gedit-document-loader.c		\
+	gedit-document-saver.c		\
+	gedit-documents-panel.c		\
 	gedit-encodings.c		\
+	gedit-encodings-option-menu.c	\
+	gedit-file-chooser-dialog.c	\
+	gedit-help.c			\
+	gedit-io-error-message-area.c	\
+	gedit-languages-manager.c	\
+	gedit-message-area.c		\
+	gedit-metadata-manager.c	\
+	gedit-module.c			\
+	gedit-notebook.c		\
+	gedit-panel.c			\
+	gedit-plugin.c			\
+	gedit-plugin-manager.c		\
+	gedit-plugins-engine.c		\
+	gedit-prefs-manager-app.c	\
 	gedit-prefs-manager.c		\
 	gedit-prefs-manager-private.h	\
-	gedit-metadata-manager.c	\
-	$(LIB_H_FILES)
+	gedit-print.c			\
+	gedit-print-job-preview.c	\
+	gedit-progress-message-area.c	\
+	gedit-recent.c			\
+	gedit-session.c			\
+	gedit-spinner.c			\
+	gedit-statusbar.c		\
+	gedit-tab.c 			\
+	gedit-tooltips.c		\
+	gedit-utils.c 			\
+	gedit-view.c 			\
+	gedit-window.c			\
+	sexy-icon-entry.c		\
+	$(NOINST_H_FILES)		\
+	$(INST_H_FILES)
+
+
+if ENABLE_PYTHON
+gedit_SOURCES += \
+	gedit-python-module.c		\
+	gedit-python-module.h		\
+	gedit-python-plugin.c		\
+	gedit-python-plugin.h	
+endif
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
@@ -132,19 +161,12 @@ gedit-marshal.c: gedit-marshal.list $(GLIB_GENMARSHAL)
 	echo "#include \"gedit-marshal.h\"" > $@ && \
 	$(GLIB_GENMARSHAL) $< --body --prefix=gedit_marshal >> $@
 
-$(IDL_SOURCES): $(IDL_FILE) $(ORBIT_IDL)
-	$(ORBIT_IDL) -I $(LIBBONOBO_IDL) -I $(BONOBO_ACTIVATION_IDL) $(srcdir)/$(IDL_FILE)
-
 ui_DATA = gedit-ui.xml
 uidir = $(datadir)/gedit-2/ui/
 
-idl_DATA = $(IDL_FILE)
-idldir = $(datadir)/idl
-
 EXTRA_DIST = 				\
 	$(ui_DATA)			\
-	gedit-marshal.list		\
-	$(IDL_FILE)
+	gedit-marshal.list
 
 CLEANFILES = $(BUILT_SOURCES)
 
@@ -155,3 +177,8 @@ install-exec-local:
 	rm -f $(DESTDIR)$(bindir)/gnome-text-editor
 	ln -s gedit $(DESTDIR)$(bindir)/gnome-text-editor
 
+BACON_DIR=$(srcdir)/../../libbacon/src/
+BACON_FILES=bacon-message-connection.h bacon-message-connection.c
+
+regenerate-built-sources:
+	BACONFILES="$(BACON_FILES)" BACONDIR="$(BACON_DIR)" $(top_srcdir)/gedit/update-from-bacon.sh

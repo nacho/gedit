@@ -37,6 +37,8 @@
 #include <libgnome/gnome-help.h>
 #include <gedit/gedit-utils.h>
 
+#include <gedit/gedit-help.h>
+
 #include "gedit-spell-language-dialog.h"
 
 
@@ -62,7 +64,6 @@ struct _GeditSpellLanguageDialog
 
 static void ok_button_pressed (GeditSpellLanguageDialog *dialog);
 static GeditSpellLanguageDialog *get_languages_dialog (GeditSpellChecker *spell_checker);
-static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 
 static void
 dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
@@ -75,25 +76,22 @@ dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
 }
 
 static void
-dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditSpellLanguageDialog *dialog)
+dialog_response_handler (GtkDialog                *dlg,
+			 gint                      res_id,
+			 GeditSpellLanguageDialog *dialog)
 {
 	GError *error = NULL;
 
 	switch (res_id) {
 		case GTK_RESPONSE_OK:
 			ok_button_pressed (dialog);
-
 			gtk_widget_destroy (dialog->dialog);
-
 			break;
-			
+
 		case GTK_RESPONSE_HELP:
-			gnome_help_display ("gedit.xml", "gedit-spell-checker-plugin", &error);
-			if (error != NULL)
-			{
-				gedit_warning (GTK_WINDOW (dlg), error->message);
-				g_error_free (error);
-			}
+			gedit_help_display (GTK_WINDOW (dlg),
+					    "gedit.xml",
+					    "gedit-spell-checker-plugin");
 			break;
 
 		default:
@@ -102,7 +100,7 @@ dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditSpellLanguageDialog 
 }
 
 static void 
-ok_button_pressed (GeditSpellLanguageDialog * dialog)
+ok_button_pressed (GeditSpellLanguageDialog *dialog)
 {
 	GError *error = NULL;
 	GValue value = {0, };
@@ -132,7 +130,7 @@ ok_button_pressed (GeditSpellLanguageDialog * dialog)
 	}
 }
 
-static GtkTreeModel*
+static GtkTreeModel *
 init_languages_treeview_model (GeditSpellLanguageDialog *dlg)
 {
 	GtkListStore *store;
@@ -249,17 +247,19 @@ get_languages_dialog (GeditSpellChecker *spell_checker)
 		return NULL;
 	}
 	
-	g_signal_connect(G_OBJECT (dialog->dialog), "destroy",
-			 G_CALLBACK (dialog_destroyed), &dialog);
-
-	g_signal_connect(G_OBJECT (dialog->dialog), "response",
-			 G_CALLBACK (dialog_response_handler), dialog);
+	g_signal_connect (dialog->dialog,
+			  "destroy",
+			  G_CALLBACK (dialog_destroyed),
+			  &dialog);
+	g_signal_connect (dialog->dialog,
+			  "response",
+			  G_CALLBACK (dialog_response_handler),
+			  dialog);
 
 	dialog->model = GTK_TREE_MODEL (gtk_list_store_new (ENCODING_NUM_COLS, G_TYPE_STRING, G_TYPE_POINTER));
 	g_return_val_if_fail (dialog->model != NULL, FALSE);
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (dialog->languages_treeview), dialog->model);
-
 	
 	/* Add the encoding column */
 	cell = gtk_cell_renderer_text_new ();
@@ -273,10 +273,14 @@ get_languages_dialog (GeditSpellChecker *spell_checker)
 
 	init_languages_treeview_model (dialog);
 
-	g_signal_connect (G_OBJECT (dialog->languages_treeview), "realize", 
-			  G_CALLBACK (scroll_to_selected), dialog);
-	g_signal_connect (G_OBJECT (dialog->languages_treeview), "row-activated", 
-			  G_CALLBACK (language_row_activated), dialog);
+	g_signal_connect (dialog->languages_treeview,
+			  "realize",
+			  G_CALLBACK (scroll_to_selected),
+			  dialog);
+	g_signal_connect (dialog->languages_treeview,
+			  "row-activated", 
+			  G_CALLBACK (language_row_activated),
+			  dialog);
 
 	g_object_unref (gui);
 
@@ -286,7 +290,7 @@ get_languages_dialog (GeditSpellChecker *spell_checker)
 void 
 gedit_spell_language_dialog_run (GeditSpellChecker *spell_checker, GtkWindow *parent)
 {
-	GeditSpellLanguageDialog* dialog;
+	GeditSpellLanguageDialog *dialog;
 
 	g_return_if_fail (GTK_IS_WINDOW (parent));
 	g_return_if_fail (spell_checker != NULL);

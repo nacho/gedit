@@ -1,7 +1,7 @@
 General Information
 ===================
 
-This is version 2.12.1 of gedit. gedit is a small and lightweight UTF-8 text 
+This is version 2.13.0 of gedit. gedit is a small and lightweight UTF-8 text 
 editor for the GNOME environment.
 
 gedit is part of GNOME and uses the latest GTK+ and GNOME libraries.
@@ -18,23 +18,21 @@ average text editor (plugins being the most notable of these).
 Although new features are always under development, currently gedit has:
 
     * Complete support for UTF-8 text
-    * File Revert
-    * Read files using the GNOME VFS
-    * Cut/Copy/Paste and Select All text
+    * Syntax highlighting
+    * GNOME VFS support for remote files
     * Complete integration with the GNOME Environment
     * Search and Replace
+    * File Revert
     * A complete preferences interface
-    * Configurable Plugins system
+    * Configurable Plugins system, with optional python support
     * Printing and Print Previewing Support
-    * Configurable levels of Undo/Redo
-    * Syntax highlighting
+
 
 Some of the plugins, packaged and installed with gedit include, among others:
 
     * Word count
     * Spell checker
     * Change case of selected text
-    * Save a Copy
     * Sort
     * Tag list
     * Insert Date/Time
@@ -63,12 +61,12 @@ Information about gedit mailing lists can be found at
 Installation
 ============
 
-gedit requires GTK+-2.6.x (x >= 3 recommended), GtkSourceView 1.2.0 and GNOME 2.8.x libraries.
+gedit requires GTK+-2.8.x, GtkSourceView 1.2.0 and GNOME 2.12.x libraries.
 
 Simple install procedure:
 
-  % gzip -cd gedit-2.12.1.tar.gz | tar xvf - 	# unpack the sources
-  % cd gedit-2.12.1				# change to the toplevel directory
+  % gzip -cd gedit-2.13.0.tar.gz | tar xvf - 	# unpack the sources
+  % cd gedit-2.13.0				# change to the toplevel directory
   % ./configure					# run the `configure' script
   % make					# build gedit
   [ Become root if necessary ]

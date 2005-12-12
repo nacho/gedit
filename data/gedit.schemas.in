@@ -345,6 +345,32 @@
     </schema>
 
     <schema>
+      <key>/schemas/apps/gedit-2/preferences/ui/side_pane/side_pane_visible</key>
+      <applyto>/apps/gedit-2/preferences/ui/side_pane/side_pane_visible</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>FALSE</default>
+      <locale name="C">
+	<short>Side Pane is Visible</short>
+	<long>Whether the side pane at the left of the editing window
+	should be visible.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/ui/bottom_panel/bottom_panel_visible</key>
+      <applyto>/apps/gedit-2/preferences/ui/bottom_panel/bottom_panel_visible</applyto>
+      <owner>gedit</owner>
+      <type>bool</type>
+      <default>FALSE</default>
+      <locale name="C">
+	<short>Bottom Panel is Visible</short>
+	<long>Whether the bottom panel at the bottom of editing windows
+	should be visible.</long>
+      </locale>
+    </schema>
+
+    <schema>
       <key>/schemas/apps/gedit-2/preferences/print/page/print_syntax_highlighting</key>
       <applyto>/apps/gedit-2/preferences/print/page/print_syntax_highlighting</applyto>
       <owner>gedit</owner>
@@ -564,6 +590,19 @@
         the "Location" of a given plugin.</long>
       </locale>
     </schema>
-
+ 
+    <schema>
+      <key>/schemas/apps/gedit-2/preferences/editor/save/writable_vfs_schemes</key>
+      <applyto>/apps/gedit-2/preferences/editor/save/writable_vfs_schemes</applyto>
+      <owner>gedit</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[ssh,sftp,smb,dav,davs]</default>
+      <locale name="C">
+	<short>Writable VFS schemes</short>
+	<long>List of VFS schemes gedit supports in write mode. The 'file' scheme
+	is writable by default.</long>
+      </locale>
+    </schema>
   </schemalist>
 </gconfschemafile>

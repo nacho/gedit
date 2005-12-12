@@ -1,9 +1,9 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-recent.c
  * This file is part of gedit
  *
- * Copyright (C) 2002 James Willcox
+ * Copyright (C) 2002 - James Willcox 
+ * Copyright (C) 2003-2005 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,13 +18,15 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. 
+ * Boston, MA 02111-1307, USA.
  */
-
+ 
 /*
- * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 
@@ -35,9 +37,7 @@
 #include "gedit-recent.h"
 #include "gedit-prefs-manager-app.h"
 
-
 static EggRecentModel *model;
-
 
 EggRecentModel *
 gedit_recent_get_model (void)
@@ -50,7 +50,7 @@ gedit_recent_init (void)
 {
 	model = egg_recent_model_new (EGG_RECENT_MODEL_SORT_MRU);
 	egg_recent_model_set_limit (model,
-				gedit_prefs_manager_get_max_recents ());
+				    gedit_prefs_manager_get_max_recents ());
 
 	egg_recent_model_set_filter_groups (model, "gedit", NULL);
 }
@@ -94,4 +94,3 @@ gedit_recent_remove (const gchar *uri)
 			 g_strdup (uri),
 			 (GDestroyNotify)g_free);
 }
-

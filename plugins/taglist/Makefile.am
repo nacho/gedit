@@ -15,6 +15,7 @@ INCLUDES = 							\
 	$(GEDIT_CFLAGS) 					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
 	-DGEDIT_TAGLIST_DIR=\""$(taglistdir)/"\"
@@ -24,8 +25,8 @@ plugin_LTLIBRARIES = libtaglist.la
 libtaglist_la_SOURCES = \
 	gedit-taglist-plugin-parser.c	\
 	gedit-taglist-plugin-parser.h	\
-	gedit-taglist-plugin-window.c	\
-	gedit-taglist-plugin-window.h	\
+	gedit-taglist-plugin-panel.c	\
+	gedit-taglist-plugin-panel.h	\
 	gedit-taglist-plugin.c		\
 	gedit-taglist-plugin.h
 
@@ -44,6 +45,9 @@ EXTRA_DIST = \
 	$(plugin_in_files) $(plugin_DATA)	
 
 CLEANFILES = \
+	$(taglist_DATA)	\
+ 	$(plugin_DATA)
+DISTCLEANFILES = \
 	$(taglist_DATA)	\
  	$(plugin_DATA)		
 

@@ -1,9 +1,8 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-page-setup-dialog.c
+ * gedit-page-setup-dialog.h
  * This file is part of gedit
  *
- * Copyright (C) 2003 Paolo Maggi 
+ * Copyright (C) 2003-2005 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +24,8 @@
  * Modified by the gedit Team, 2003. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifndef __GEDIT_PAGE_SETUP_DIALOG_H__
@@ -32,7 +33,54 @@
 
 #include <gtk/gtkwindow.h>
 
-void gedit_show_page_setup_dialog (GtkWindow *parent);
+G_BEGIN_DECLS
+
+/*
+ * Type checking and casting macros
+ */
+#define GEDIT_TYPE_PAGE_SETUP_DIALOG              (gedit_page_setup_dialog_get_type())
+#define GEDIT_PAGE_SETUP_DIALOG(obj)              (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PAGE_SETUP_DIALOG, GeditPageSetupDialog))
+#define GEDIT_PAGE_SETUP_DIALOG_CONST(obj)        (G_TYPE_CHECK_INSTANCE_CAST((obj), GEDIT_TYPE_PAGE_SETUP_DIALOG, GeditPageSetupDialog const))
+#define GEDIT_PAGE_SETUP_DIALOG_CLASS(klass)      (G_TYPE_CHECK_CLASS_CAST((klass), GEDIT_TYPE_PAGE_SETUP_DIALOG, GeditPageSetupDialogClass))
+#define GEDIT_IS_PAGE_SETUP_DIALOG(obj)           (G_TYPE_CHECK_INSTANCE_TYPE((obj), GEDIT_TYPE_PAGE_SETUP_DIALOG))
+#define GEDIT_IS_PAGE_SETUP_DIALOG_CLASS(klass)   (G_TYPE_CHECK_CLASS_TYPE ((klass), GEDIT_TYPE_PAGE_SETUP_DIALOG))
+#define GEDIT_PAGE_SETUP_DIALOG_GET_CLASS(obj)    (G_TYPE_INSTANCE_GET_CLASS((obj), GEDIT_TYPE_PAGE_SETUP_DIALOG, GeditPageSetupDialogClass))
+
+
+/* Private structure type */
+typedef struct _GeditPageSetupDialogPrivate GeditPageSetupDialogPrivate;
+
+/*
+ * Main object structure
+ */
+typedef struct _GeditPageSetupDialog GeditPageSetupDialog;
+
+struct _GeditPageSetupDialog 
+{
+	GtkDialog dialog;
+	
+	/*< private > */
+	GeditPageSetupDialogPrivate *priv;
+};
+
+/*
+ * Class definition
+ */
+typedef struct _GeditPageSetupDialogClass GeditPageSetupDialogClass;
+
+struct _GeditPageSetupDialogClass 
+{
+	GtkDialogClass parent_class;
+};
+
+/*
+ * Public methods
+ */
+GType		 gedit_page_setup_dialog_get_type	(void) G_GNUC_CONST;
+
+void		 gedit_show_page_setup_dialog		(GtkWindow	*parent);
+
+G_END_DECLS
 
 #endif /* __GEDIT_PAGE_SETUP_DIALOG_H__ */
 

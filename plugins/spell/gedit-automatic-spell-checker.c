@@ -382,12 +382,12 @@ replace_word (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell)
 	newword =  g_object_get_qdata (G_OBJECT (menuitem), suggestion_id);
 	g_return_if_fail (newword != NULL);
 
-	gedit_document_begin_user_action (spell->doc);
+	gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (spell->doc));
 
 	gtk_text_buffer_delete (GTK_TEXT_BUFFER (spell->doc), &start, &end);
 	gtk_text_buffer_insert (GTK_TEXT_BUFFER (spell->doc), &start, newword, -1);
 
-	gedit_document_end_user_action (spell->doc);
+	gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (spell->doc));
 
 	gedit_spell_checker_set_correction (spell->spell_checker, 
 				oldword, strlen (oldword),
@@ -880,7 +880,7 @@ gedit_automatic_spell_checker_free_internal (GeditAutomaticSpellChecker *spell)
 				0, 0, NULL, NULL,
 				spell);
 
-		g_signal_handlers_disconnect_matched (G_OBJECT (gedit_view_get_gtk_text_view (view)),
+		g_signal_handlers_disconnect_matched (G_OBJECT (view),
 			G_SIGNAL_MATCH_DATA,
 			0, 0, NULL, NULL,
 			spell);
@@ -900,23 +900,22 @@ gedit_automatic_spell_checker_attach_view (
 {
 	g_return_if_fail (spell != NULL);
 	g_return_if_fail (GEDIT_IS_VIEW (view));
-	g_return_if_fail (gedit_view_get_document (view) == spell->doc);
 
-	g_signal_connect (G_OBJECT (gedit_view_get_gtk_text_view (view)), 
+	g_return_if_fail (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)) ==
+			  GTK_TEXT_BUFFER (spell->doc));
+
+	g_signal_connect (G_OBJECT (view), 
 			  "button-press-event",
 			  G_CALLBACK (button_press_event), 
 			  spell);
-
-	g_signal_connect (G_OBJECT (gedit_view_get_gtk_text_view (view)), 
+	g_signal_connect (G_OBJECT (view), 
 			  "popup-menu",
 			  G_CALLBACK (popup_menu_event), 
 			  spell);
-
 	g_signal_connect (G_OBJECT (view), 
 			  "populate-popup",
 			  G_CALLBACK (populate_popup), 
 			  spell);
-	
 	g_signal_connect (G_OBJECT (view), 
 			  "destroy",
 			  G_CALLBACK (view_destroy), 
@@ -932,7 +931,9 @@ gedit_automatic_spell_checker_detach_view (
 {
 	g_return_if_fail (spell != NULL);
 	g_return_if_fail (GEDIT_IS_VIEW (view));
-	g_return_if_fail (gedit_view_get_document (view) == spell->doc);
+
+	g_return_if_fail (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)) ==
+			  GTK_TEXT_BUFFER (spell->doc));
 	g_return_if_fail (spell->views != NULL);
 
 	g_signal_handlers_disconnect_matched (G_OBJECT (view),
@@ -940,7 +941,7 @@ gedit_automatic_spell_checker_detach_view (
 			0, 0, NULL, NULL,
 			spell);
 
-	g_signal_handlers_disconnect_matched (G_OBJECT (gedit_view_get_gtk_text_view (view)),
+	g_signal_handlers_disconnect_matched (G_OBJECT (view),
 			G_SIGNAL_MATCH_DATA,
 			0, 0, NULL, NULL,
 			spell);

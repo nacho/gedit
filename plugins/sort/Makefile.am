@@ -1,4 +1,4 @@
-# Sort plugin
+# sort plugin
 plugindir = $(libdir)/gedit-2/plugins
 
 INCLUDES = \
@@ -6,12 +6,16 @@ INCLUDES = \
 	$(GEDIT_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)			\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
 
 plugin_LTLIBRARIES = libsort.la
 
-libsort_la_SOURCES = sort.c
+libsort_la_SOURCES = \
+	gedit-sort-plugin.h	\
+	gedit-sort-plugin.c
+
 libsort_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
 gladedir = $(datadir)/gedit-2/glade
@@ -26,4 +30,5 @@ plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 EXTRA_DIST = $(glade_DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
+DISTCLEANFILES = $(plugin_DATA)
 

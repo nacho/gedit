@@ -1,0 +1,578 @@
+/*
+ * gedit-taglist-plugin-panel.c
+ * This file is part of gedit
+ *
+ * Copyright (C) 2005 - Paolo Maggi 
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, 
+ * Boston, MA 02111-1307, USA.
+ */
+ 
+/*
+ * Modified by the gedit Team, 2005. See the AUTHORS file for a 
+ * list of people on the gedit Team.  
+ * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
+ */
+ 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <string.h>
+
+#include "gedit-taglist-plugin-panel.h"
+#include "gedit-taglist-plugin-parser.h"
+
+#include <gedit/gedit-utils.h>
+#include <gedit/gedit-debug.h>
+
+#include <gdk/gdkkeysyms.h>
+#include <glib/gi18n.h>
+
+#define GEDIT_TAGLIST_PLUGIN_PANEL_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, GeditTaglistPluginPanelPrivate))
+
+enum
+{
+	COLUMN_TAG_NAME,
+	COLUMN_TAG_INDEX_IN_GROUP,
+	NUM_COLUMNS
+};
+
+struct _GeditTaglistPluginPanelPrivate
+{
+	GeditWindow  *window;
+	
+	GtkWidget *tag_groups_combo;
+	GtkWidget *tags_list;
+
+	GtkTooltips *tooltips;
+
+	TagGroup *selected_tag_group;	
+};
+
+static GObjectClass *parent_class = NULL;
+static GType type = 0;
+
+enum
+{
+	PROP_0,
+	PROP_WINDOW,
+}; 
+
+static void
+set_window (GeditTaglistPluginPanel *panel,
+	    GeditWindow             *window)
+{
+	g_return_if_fail (panel->priv->window == NULL);
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+	
+	panel->priv->window = window;
+	
+	/* TODO */
+}
+
+static void
+gedit_taglist_plugin_panel_set_property (GObject      *object,
+					 guint         prop_id,
+					 const GValue *value,
+					 GParamSpec   *pspec)
+{
+	GeditTaglistPluginPanel *panel = GEDIT_TAGLIST_PLUGIN_PANEL (object);
+
+	switch (prop_id)
+
+	{
+		case PROP_WINDOW:
+			set_window (panel, g_value_get_object (value));
+			break;
+
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
+static void
+gedit_taglist_plugin_panel_get_property (GObject    *object,
+					 guint       prop_id,
+					 GValue     *value,
+					 GParamSpec *pspec)
+{
+	GeditTaglistPluginPanel *panel = GEDIT_TAGLIST_PLUGIN_PANEL (object);
+
+	switch (prop_id)
+	{
+		case PROP_WINDOW:
+			g_value_set_object (value,
+					    GEDIT_TAGLIST_PLUGIN_PANEL_GET_PRIVATE (panel)->window);
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;			
+	}
+}
+
+static void
+gedit_taglist_plugin_panel_finalize (GObject *object)
+{
+	/* GeditTaglistPluginPanel *tab = GEDIT_TAGLIST_PLUGIN_PANEL (object); */
+	
+	G_OBJECT_CLASS (parent_class)->finalize (object);
+}
+
+static void 
+gedit_taglist_plugin_panel_class_init (GeditTaglistPluginPanelClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	parent_class = g_type_class_peek_parent (klass);
+	
+	object_class->finalize = gedit_taglist_plugin_panel_finalize;
+	object_class->get_property = gedit_taglist_plugin_panel_get_property;
+	object_class->set_property = gedit_taglist_plugin_panel_set_property;
+	
+	g_object_class_install_property (object_class,
+					 PROP_WINDOW,
+					 g_param_spec_object ("window",
+							 "Window",
+							 "The GeditWindow this GeditTaglistPluginPanel is associated with",
+							 GEDIT_TYPE_WINDOW,
+							 G_PARAM_READWRITE |
+							 G_PARAM_CONSTRUCT_ONLY));	
+							      
+	g_type_class_add_private (object_class, sizeof(GeditTaglistPluginPanelPrivate));
+}
+
+static void
+insert_tag (GeditTaglistPluginPanel *panel,
+	    Tag                     *tag)
+{
+	GeditView *view;
+	GtkTextBuffer *buffer;
+	GtkTextIter start, end;
+	GtkTextIter cursor;
+	gboolean sel = FALSE;
+
+	gedit_debug (DEBUG_PLUGINS);
+
+	view = gedit_window_get_active_view (panel->priv->window);
+	g_return_if_fail (view != NULL);
+	
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+
+	gtk_text_buffer_begin_user_action (buffer);
+
+	/* always insert the begin tag at the beginning of the selection
+	 * and the end tag at the end, if there is no selection they will
+	 * be automatically inserted at the cursor position.
+	 */
+
+	if (tag->begin != NULL)
+	{
+		sel = gtk_text_buffer_get_selection_bounds (buffer,
+						 	    &start, 
+						 	    &end);
+
+		gtk_text_buffer_insert (buffer, 
+					&start, 
+					tag->begin, 
+					-1);
+
+		/* get iterators again since they have been invalidated and move
+		 * the cursor after the selection */
+		gtk_text_buffer_get_selection_bounds (buffer,
+						      &start,
+						      &cursor);
+	}
+
+	if (tag->end != NULL)
+	{
+		sel = gtk_text_buffer_get_selection_bounds (buffer,
+							    &start, 
+							    &end);
+
+		gtk_text_buffer_insert (buffer, 
+					&end, 
+					tag->end,
+					-1);
+
+		/* if there is no selection and we have a paired tag, move the
+		 * cursor between the pair, otherwise move it at the end */
+		if (!sel)
+		{
+			gint offset;
+
+			offset = gtk_text_iter_get_offset (&end) -
+				 g_utf8_strlen (tag->end, -1);
+
+			gtk_text_buffer_get_iter_at_offset (buffer,
+							    &end, 
+							    offset);
+		}
+
+		cursor = end;
+	}
+
+	gtk_text_buffer_place_cursor (buffer, &cursor);
+
+	gtk_text_buffer_end_user_action (buffer);
+}
+
+static void
+tag_list_row_activated_cb (GtkTreeView             *tag_list, 
+			   GtkTreePath             *path,
+			   GtkTreeViewColumn       *column, 
+			   GeditTaglistPluginPanel *panel)
+{
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	gint index;
+	
+	gedit_debug (DEBUG_PLUGINS);
+
+	model = gtk_tree_view_get_model (tag_list);
+	
+	gtk_tree_model_get_iter (model, &iter, path);
+	g_return_if_fail (&iter != NULL);
+
+	gtk_tree_model_get (model, &iter, COLUMN_TAG_INDEX_IN_GROUP, &index, -1);
+
+	gedit_debug_message (DEBUG_PLUGINS, "Index: %d", index);
+
+	insert_tag (panel,
+		    (Tag*)g_list_nth_data (panel->priv->selected_tag_group->tags, index));
+}
+
+static gboolean 
+tag_list_key_press_event_cb (GtkTreeView             *tag_list, 
+			     GdkEventKey             *event,
+			     GeditTaglistPluginPanel *panel)
+{
+	if ((event->keyval == GDK_Return) && (event->state & GDK_CONTROL_MASK))
+	{
+		GtkTreeModel *model;
+		GtkTreeSelection *selection;
+		GtkTreeIter iter;
+		gint index;
+
+		gedit_debug_message (DEBUG_PLUGINS, "RETURN Pressed");
+
+		model = gtk_tree_view_get_model (tag_list);
+
+		selection = gtk_tree_view_get_selection (tag_list);
+
+		if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+		{
+			gtk_tree_model_get (model, &iter, COLUMN_TAG_INDEX_IN_GROUP, &index, -1);
+
+			gedit_debug_message (DEBUG_PLUGINS, "Index: %d", index);
+
+			insert_tag (panel,
+				    (Tag*)g_list_nth_data (panel->priv->selected_tag_group->tags, index));
+		}
+
+		return FALSE;
+	}
+
+	return FALSE;
+}
+
+static GtkTreeModel*
+create_model (GeditTaglistPluginPanel *panel)
+{
+	gint i = 0;
+	GtkListStore *store;
+	GtkTreeIter iter;
+	GList *list;
+	
+	gedit_debug (DEBUG_PLUGINS);
+
+	/* create list store */
+	store = gtk_list_store_new (NUM_COLUMNS, G_TYPE_STRING, G_TYPE_INT);
+
+	/* add data to the list store */
+	list = panel->priv->selected_tag_group->tags;
+	
+	while (list != NULL)
+	{
+		const gchar* tag_name;
+
+		tag_name = ((Tag*)list->data)->name;
+
+		gedit_debug_message (DEBUG_PLUGINS, "%d : %s", i, tag_name);
+		
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter,
+				    COLUMN_TAG_NAME, tag_name,
+				    COLUMN_TAG_INDEX_IN_GROUP, i,
+				    -1);
+		++i;
+
+		list = g_list_next (list);
+	}
+	
+	gedit_debug_message (DEBUG_PLUGINS, "Rows: %d ", 
+			     gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL));
+	
+	return GTK_TREE_MODEL (store);
+}
+
+static void
+populate_tags_list (GeditTaglistPluginPanel *panel)
+{
+	GtkTreeModel* model;
+
+	gedit_debug (DEBUG_PLUGINS);
+
+	g_return_if_fail (taglist != NULL);
+
+	model = create_model (panel);
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (panel->priv->tags_list), 
+			         model);
+	
+	g_object_unref (G_OBJECT (model));
+}
+
+static TagGroup *
+find_tag_group (const gchar *name)
+{
+	GList *list;
+	
+	gedit_debug (DEBUG_PLUGINS);
+	
+	g_return_val_if_fail (taglist != NULL, NULL);
+
+	list = taglist->tag_groups;
+
+	while (list)
+	{
+		if (strcmp (name, ((TagGroup*)list->data)->name) == 0)
+			return (TagGroup*)list->data;
+
+			list = g_list_next (list);
+	}
+
+	return NULL;
+}
+
+static void
+populate_tag_groups_combo (GeditTaglistPluginPanel *panel)
+{
+	GList *list;
+	GtkComboBox *combo;
+	
+	gedit_debug (DEBUG_PLUGINS);
+
+	combo = GTK_COMBO_BOX (panel->priv->tag_groups_combo);
+	
+	if (taglist == NULL)
+		return;
+
+	list = taglist->tag_groups;
+
+	/* Build cbitems */
+	while (list)
+	{
+		gtk_combo_box_append_text (combo,
+					   ((TagGroup*)list->data)->name);
+
+		list = g_list_next (list);
+	}
+	
+	gtk_combo_box_set_active (combo, 0);
+
+	return;
+}
+
+static void 
+selected_group_changed (GtkComboBox             *combo, 
+			GeditTaglistPluginPanel *panel)
+{
+	gchar* group_name;
+	
+	gedit_debug (DEBUG_PLUGINS);
+	
+	group_name = gtk_combo_box_get_active_text (combo);
+
+	if ((group_name == NULL) || (strlen (group_name) <= 0))
+	{
+		g_free (group_name);
+		return;
+	}
+
+	if ((panel->priv->selected_tag_group == NULL) || 
+	    (strcmp (group_name, panel->priv->selected_tag_group->name) != 0))
+	{
+		panel->priv->selected_tag_group = find_tag_group (group_name);
+		g_return_if_fail (panel->priv->selected_tag_group != NULL);
+		
+		gedit_debug_message (DEBUG_PLUGINS, 
+				     "New selected group: %s",
+				     panel->priv->selected_tag_group->name);
+
+		populate_tags_list (panel);
+	}
+	
+	g_free (group_name);
+}
+
+static void
+gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
+{	
+	GtkWidget *sw;
+	GtkTreeViewColumn *column;
+	GtkCellRenderer *cell;
+	GList *focus_chain = NULL;
+
+	gedit_debug (DEBUG_PLUGINS);
+
+	panel->priv = GEDIT_TAGLIST_PLUGIN_PANEL_GET_PRIVATE (panel);
+
+	panel->priv->tooltips = gtk_tooltips_new ();
+	g_object_ref (G_OBJECT (panel->priv->tooltips));
+	gtk_object_sink (GTK_OBJECT (panel->priv->tooltips));
+
+	/* Build the window content */
+	panel->priv->tag_groups_combo = gtk_combo_box_new_text ();
+	gtk_box_pack_start (GTK_BOX (panel), 
+			    panel->priv->tag_groups_combo, 
+			    FALSE, 
+			    TRUE,
+			    0);
+
+	gtk_tooltips_set_tip (panel->priv->tooltips,
+			      panel->priv->tag_groups_combo,
+			      _("Select the group of tags you want to use"),
+			      NULL);
+
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC,
+					GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
+                                             GTK_SHADOW_IN);
+	gtk_box_pack_start (GTK_BOX (panel), sw, TRUE, TRUE, 0);
+
+	/* Create tree view */
+	panel->priv->tags_list = gtk_tree_view_new ();
+
+	gedit_utils_set_atk_name_description (panel->priv->tag_groups_combo, 
+					      _("Available Tag Lists"),
+					      NULL);
+	gedit_utils_set_atk_name_description (panel->priv->tags_list, 
+					      _("Tags"),
+					      NULL);
+	gedit_utils_set_atk_relation (panel->priv->tag_groups_combo, 
+				      panel->priv->tags_list,
+				      ATK_RELATION_CONTROLLER_FOR);
+	gedit_utils_set_atk_relation (panel->priv->tags_list, 
+				      panel->priv->tag_groups_combo,
+				      ATK_RELATION_CONTROLLED_BY);
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (panel->priv->tags_list), FALSE);
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (panel->priv->tags_list), FALSE);
+
+	gtk_tooltips_set_tip (panel->priv->tooltips,
+			      panel->priv->tags_list,
+			      _("Double-click on a tag to insert it in the current document"),
+			      NULL);
+
+	g_signal_connect_after (panel->priv->tags_list, 
+				"row_activated",
+				G_CALLBACK (tag_list_row_activated_cb), 
+				panel);
+
+	g_signal_connect (panel->priv->tags_list, 
+			  "key_press_event",
+			  G_CALLBACK (tag_list_key_press_event_cb),
+			  panel);
+
+	/* Add the tags column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Tags"), 
+							   cell, 
+							   "text", 
+							   COLUMN_TAG_NAME, 
+							   NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (panel->priv->tags_list), 
+				     column);
+
+	gtk_tree_view_set_search_column (GTK_TREE_VIEW (panel->priv->tags_list),
+					 COLUMN_TAG_NAME);
+
+	gtk_container_add (GTK_CONTAINER (sw), panel->priv->tags_list);
+
+	g_signal_connect (panel->priv->tag_groups_combo, 
+			  "changed",
+			  G_CALLBACK (selected_group_changed), 
+			  panel);
+
+	focus_chain = g_list_prepend (focus_chain, panel->priv->tags_list);
+	focus_chain = g_list_prepend (focus_chain, panel->priv->tag_groups_combo);
+	
+	gtk_container_set_focus_chain (GTK_CONTAINER (panel),
+				       focus_chain);
+	g_list_free (focus_chain);
+	
+	/* Populate combo box */
+	populate_tag_groups_combo (panel);
+
+	gtk_widget_show_all (GTK_WIDGET (panel));
+}
+
+GtkWidget *
+gedit_taglist_plugin_panel_new (GeditWindow *window)
+{
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
+
+	return GTK_WIDGET (g_object_new (GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, 
+					 "window", window,
+					 NULL));
+}
+
+GType
+gedit_taglist_plugin_panel_get_type (void)
+{
+	return type;
+}
+
+GType
+gedit_taglist_plugin_panel_register_type (GTypeModule *module)
+{
+	static const GTypeInfo our_info =
+	{
+		sizeof (GeditTaglistPluginPanelClass),
+		NULL, /* base_init */
+		NULL, /* base_finalize */
+		(GClassInitFunc) gedit_taglist_plugin_panel_class_init,
+		NULL,
+		NULL, /* class_data */
+		sizeof (GeditTaglistPluginPanel),
+		0, /* n_preallocs */
+		(GInstanceInitFunc) gedit_taglist_plugin_panel_init
+	};
+
+	gedit_debug_message (DEBUG_PLUGINS, "Registering GeditTaglistPluginPanel");
+
+	type = g_type_module_register_type (module,
+					    GTK_TYPE_VBOX,
+					    "GeditTaglistPluginPanel",
+					    &our_info, 
+					    0);
+	return type;
+}

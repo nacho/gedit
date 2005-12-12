@@ -525,10 +525,7 @@ gedit_output_window_finalize (GObject *object)
 
 	g_object_unref (ow->priv->tooltips);
 	
-	if (ow->priv != NULL)
-	{
-		g_free (ow->priv);
-	}
+	g_free (ow->priv);
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }

@@ -3,7 +3,7 @@
  * gedit-languages-manager.h
  * This file is part of gedit
  *
- * Copyright (C) 2003 - Paolo Maggi 
+ * Copyright (C) 2003-2005 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +22,11 @@
  */
  
 /*
- * Modified by the gedit Team, 2003. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2003-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifndef __GEDIT_LANGUAGES_MANAGER_H__
@@ -32,11 +34,13 @@
 
 #include <gtksourceview/gtksourcelanguagesmanager.h>
 
+G_BEGIN_DECLS
+
 GtkSourceLanguagesManager *gedit_get_languages_manager    (void);
 
 GtkSourceLanguage	  *gedit_languages_manager_get_language_from_id
-						          (GtkSourceLanguagesManager *lm,
-						           const gchar               *lang_id);
+							  (GtkSourceLanguagesManager *lm,
+							   const gchar               *lang_id);
 
 void			   gedit_language_set_tag_style	  (GtkSourceLanguage         *language,
 							   const gchar               *tag_id,
@@ -46,5 +50,10 @@ void 			   gedit_language_init_tag_styles (GtkSourceLanguage         *language);
 const GSList		*gedit_languages_manager_get_available_languages_sorted (GtkSourceLanguagesManager *lm);
 
 
+
+const GSList		  *gedit_languages_manager_get_available_languages_sorted
+							  (GtkSourceLanguagesManager *lm);
+
+G_END_DECLS
 
 #endif /* __GEDIT_LANGUAGES_MANAGER_H__ */

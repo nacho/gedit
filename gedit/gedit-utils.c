@@ -1,10 +1,10 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-utils.c
  * This file is part of gedit
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  * Copyright (C) 2000, 2002 Chema Celorio, Paolo Maggi 
+ * Copyright (C) 2003-2005 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,9 +23,11 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -45,200 +47,18 @@
 #include <gdk/gdkx.h>
 #include <glib/gunicode.h>
 #include <glib/gi18n.h>
+#include <glade/glade-xml.h>
 #include <libgnomevfs/gnome-vfs.h>
+#include <libgnome/gnome-url.h>
 
 #include "gedit-utils.h"
-#include "gedit2.h"
-#include "bonobo-mdi.h"
+
 #include "gedit-document.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-debug.h"
 #include "gedit-convert.h"
 
 #define STDIN_DELAY_MICROSECONDS 100000
-
-/* =================================================== */
-/* Flash */
-
-struct _MessageInfo {
-  BonoboWindow * win;
-  guint timeoutid;
-  guint handlerid;
-};
-
-typedef struct _MessageInfo MessageInfo;
-
-MessageInfo *current_mi = NULL;
-
-static gint remove_message_timeout (MessageInfo * mi);
-static void remove_timeout_cb (GtkWidget *win, MessageInfo *mi);
-static void bonobo_window_flash (BonoboWindow * win, const gchar * flash);
-
-static gint
-remove_message_timeout (MessageInfo * mi) 
-{
-	BonoboUIComponent *ui_component;
-
-	GDK_THREADS_ENTER ();	
-	
-  	ui_component = bonobo_mdi_get_ui_component_from_window (mi->win);
-	g_return_val_if_fail (ui_component != NULL, FALSE);
-
-	bonobo_ui_component_set_status (ui_component, " ", NULL);
-
-	g_signal_handler_disconnect (G_OBJECT (mi->win), mi->handlerid);
-	
-	g_free (mi);
-	current_mi = NULL;
-
-  	GDK_THREADS_LEAVE ();
-
-  	return FALSE; /* removes the timeout */
-}
-
-/* Called if the win is destroyed before the timeout occurs. */
-static void
-remove_timeout_cb (GtkWidget *win, MessageInfo *mi) 
-{
- 	g_source_remove (mi->timeoutid);
-  	g_free (mi);
-
-	if (mi == current_mi)
-	       	current_mi = NULL;
-}
-
-static const guint32 flash_length = 3000; /* 3 seconds, I hope */
-
-/**
- * bonobo_win_flash
- * @app: Pointer a Bonobo window object
- * @flash: Text of message to be flashed
- *
- * Description:
- * Flash the message in the statusbar for a few moments; if no
- * statusbar, do nothing. For trivial little status messages,
- * e.g. "Auto saving..."
- **/
-
-static void 
-bonobo_window_flash (BonoboWindow * win, const gchar * flash)
-{
-	BonoboUIComponent *ui_component;
-  	g_return_if_fail (win != NULL);
-  	g_return_if_fail (BONOBO_IS_WINDOW (win));
-  	g_return_if_fail (flash != NULL);
-  	
-	ui_component = bonobo_mdi_get_ui_component_from_window (win);
-	g_return_if_fail (ui_component != NULL);
-	
-	if (current_mi != NULL)
-	{
-		g_source_remove (current_mi->timeoutid);
-		remove_message_timeout (current_mi);
-	}
-	
-	if (bonobo_ui_component_path_exists (ui_component, "/status", NULL))
-	{
-    		MessageInfo * mi;
-
-		bonobo_ui_component_set_status (ui_component, flash, NULL);
-    		
-		mi = g_new(MessageInfo, 1);
-
-    		mi->timeoutid = 
-      			g_timeout_add (flash_length,
-				(GSourceFunc) remove_message_timeout,
-				mi);
-    
-    		mi->handlerid = 
-      			g_signal_connect (GTK_OBJECT (win),
-				"destroy",
-			   	G_CALLBACK (remove_timeout_cb),
-			   	mi);
-
-    		mi->win       = win;
-
-		current_mi = mi;
-  	}   
-}
-
-/* ========================================================== */
-
-/**
- * gedit_utils_flash:
- * @msg: Message to flash on the statusbar
- *
- * Flash a temporary message on the statusbar of gedit.
- **/
-void
-gedit_utils_flash (const gchar *msg)
-{
-	g_return_if_fail (msg != NULL);
-	
-	bonobo_window_flash (bonobo_mdi_get_active_window (BONOBO_MDI (gedit_mdi)), msg);
-}
-
-/**
- * gedit_utils_flash_va:
- * @format:
- **/
-void
-gedit_utils_flash_va (gchar *format, ...)
-{
-	va_list args;
-	gchar *msg;
-
-	g_return_if_fail (format != NULL);
-
-	va_start (args, format);
-	msg = g_strdup_vprintf (format, args);
-	va_end (args);
-
-	gedit_utils_flash (msg);
-	g_free (msg);
-}
-
-void
-gedit_utils_set_status (const gchar *msg)
-{
-	BonoboWindow *win;
-	BonoboUIComponent *ui_component;
-
-	win = gedit_get_active_window ();
-  	g_return_if_fail (BONOBO_IS_WINDOW (win));
-  	
-	ui_component = bonobo_mdi_get_ui_component_from_window (win);
-	g_return_if_fail (ui_component != NULL);
-	
-	if (current_mi != NULL)
-	{
-		g_source_remove (current_mi->timeoutid);
-		remove_message_timeout (current_mi);
-	}
-	
-	if (bonobo_ui_component_path_exists (ui_component, "/status", NULL))
-	{
-		bonobo_ui_component_set_status (ui_component, (msg != NULL) ? msg : " ", NULL);
-    		
-		current_mi =  NULL;
-  	}   
-}
-
-void
-gedit_utils_set_status_va (gchar *format, ...)
-{
-	va_list args;
-	gchar *msg;
-
-	g_return_if_fail (format != NULL);
-
-	va_start (args, format);
-	msg = g_strdup_vprintf (format, args);
-	va_end (args);
-
-	gedit_utils_set_status (msg);
-	g_free (msg);
-}
 
 gboolean
 gedit_utils_uri_has_file_scheme (const gchar *uri)
@@ -257,44 +77,66 @@ gedit_utils_uri_has_file_scheme (const gchar *uri)
 }
 
 gboolean
-gedit_utils_is_uri_read_only (const gchar* uri)
+gedit_utils_uri_has_writable_scheme (const gchar *uri)
 {
-	gchar* file_uri = NULL;
-	gchar* canonical_uri = NULL;
+	gchar *canonical_uri;
+	gchar *scheme;
+	GSList *writable_schemes;
+	gboolean res;
 
-	gint res;
-
-	g_return_val_if_fail (uri != NULL, TRUE);
-	
-	gedit_debug (DEBUG_FILE, "URI: %s", uri);
-
-	/* FIXME: all remote files are marked as readonly */
-	if (!gedit_utils_uri_has_file_scheme (uri))
-		return TRUE;
-		
 	canonical_uri = gnome_vfs_make_uri_canonical (uri);
-	g_return_val_if_fail (canonical_uri != NULL, TRUE);
+	g_return_val_if_fail (canonical_uri != NULL, FALSE);
 
-	gedit_debug (DEBUG_FILE, "CANONICAL URI: %s", canonical_uri);
-
-	file_uri = gnome_vfs_get_local_path_from_uri (canonical_uri);
-	if (file_uri == NULL)
-	{
-		gedit_debug (DEBUG_FILE, "FILE URI: NULL");
-
-		return TRUE;
-	}
-	
-	res = access (file_uri, W_OK);
+	scheme = gnome_vfs_get_uri_scheme (canonical_uri);
+	g_return_val_if_fail (scheme != NULL, FALSE);
 
 	g_free (canonical_uri);
-	g_free (file_uri);
 
-	return res;	
+	writable_schemes = gedit_prefs_manager_get_writable_vfs_schemes ();
+
+	/* CHECK: should we use g_ascii_strcasecmp? - Paolo (Nov 6, 2005) */
+	res = (g_slist_find_custom (writable_schemes,
+				    scheme,
+				    (GCompareFunc)strcmp) != NULL);
+
+	g_slist_foreach (writable_schemes, (GFunc)g_free, NULL);
+	g_slist_free (writable_schemes);
+
+	g_free (scheme);
+
+	return res;
 }
 
-static GtkWidget *
-gedit_gtk_button_new_with_stock_icon (const gchar *label, const gchar *stock_id)
+void
+gedit_utils_menu_position_under_widget (GtkMenu  *menu,
+					gint     *x,
+					gint     *y,
+					gboolean *push_in,
+					gpointer  user_data)
+{
+	GtkWidget *w = GTK_WIDGET (user_data);
+	GtkRequisition requisition;
+
+	gdk_window_get_origin (w->window, x, y);
+	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
+
+	if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL)
+	{
+		*x += w->allocation.x + w->allocation.width - requisition.width;
+	}
+	else
+	{
+		*x += w->allocation.x;
+	}
+
+	*y += w->allocation.y + w->allocation.height;
+
+	*push_in = TRUE;
+}
+
+GtkWidget *
+gedit_gtk_button_new_with_stock_icon (const gchar *label,
+				      const gchar *stock_id)
 {
 	GtkWidget *button;
 
@@ -306,9 +148,11 @@ gedit_gtk_button_new_with_stock_icon (const gchar *label, const gchar *stock_id)
         return button;
 }
 
-GtkWidget*
-gedit_dialog_add_button (GtkDialog *dialog, const gchar* text, const gchar* stock_id,
-			 gint response_id)
+GtkWidget *
+gedit_dialog_add_button (GtkDialog   *dialog,
+			 const gchar *text,
+			 const gchar *stock_id,
+			 gint         response_id)
 {
 	GtkWidget *button;
 
@@ -347,11 +191,11 @@ g_utf8_caselessnmatch (const char *s1, const char *s2, gssize n1, gssize n2)
 	g_return_val_if_fail (n2 > 0, FALSE);
 
 	casefold = g_utf8_casefold (s1, n1);
-	normalized_s1 = g_utf8_normalize (casefold, -1, G_NORMALIZE_ALL);
+	normalized_s1 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
 	g_free (casefold);
 
 	casefold = g_utf8_casefold (s2, n2);
-	normalized_s2 = g_utf8_normalize (casefold, -1, G_NORMALIZE_ALL);
+	normalized_s2 = g_utf8_normalize (casefold, -1, G_NORMALIZE_NFD);
 	g_free (casefold);
 
 	len_s1 = strlen (normalized_s1);
@@ -436,7 +280,7 @@ gedit_utils_uri_exists (const gchar* text_uri)
 		
 	g_return_val_if_fail (text_uri != NULL, FALSE);
 	
-	gedit_debug (DEBUG_FILE, "text_uri: %s", text_uri);
+	gedit_debug_message (DEBUG_FILE, "text_uri: %s", text_uri);
 
 	uri = gnome_vfs_uri_new (text_uri);
 	g_return_val_if_fail (uri != NULL, FALSE);
@@ -445,13 +289,60 @@ gedit_utils_uri_exists (const gchar* text_uri)
 
 	gnome_vfs_uri_unref (uri);
 
-	gedit_debug (DEBUG_FILE, res ? "TRUE" : "FALSE");
+	gedit_debug_message (DEBUG_FILE, res ? "TRUE" : "FALSE");
 
 	return res;
 }
 
+gchar* 
+gedit_utils_escape_search_text (const gchar* text)
+{
+	GString *str;
+	gint length;
+	const gchar *p;
+ 	const gchar *end;
+
+	if (text == NULL)
+		return NULL;
+
+	gedit_debug_message (DEBUG_SEARCH, "Text: %s", text);
+
+    	length = strlen (text);
+
+	str = g_string_new ("");
+
+  	p = text;
+  	end = text + length;
+
+  	while (p != end)
+    	{
+      		const gchar *next;
+      		next = g_utf8_next_char (p);
+
+		switch (*p)
+        	{
+       			case '\n':
+          			g_string_append (str, "\\n");
+          			break;
+			case '\r':
+          			g_string_append (str, "\\r");
+          			break;
+			case '\t':
+          			g_string_append (str, "\\t");
+          			break;
+        		default:
+          			g_string_append_len (str, p, next - p);
+          			break;
+        	}
+
+      		p = next;
+    	}
+
+	return g_string_free (str, FALSE);
+}
+
 gchar *
-gedit_utils_convert_search_text (const gchar *text)
+gedit_utils_unescape_search_text (const gchar *text)
 {
 	GString *str;
 	gint length;
@@ -459,8 +350,9 @@ gedit_utils_convert_search_text (const gchar *text)
 	const gchar *cur;
 	const gchar *end;
 	const gchar *prev;
-
-	g_return_val_if_fail (text != NULL, NULL);
+	
+	if (text == NULL)
+		return NULL;
 
 	length = strlen (text);
 
@@ -572,7 +464,7 @@ gedit_utils_get_stdin (void)
 }
 
 void 
-gedit_warning (GtkWindow *parent, gchar *format, ...)
+gedit_warning (GtkWindow *parent, const gchar *format, ...)
 {
 	va_list args;
 	gchar *str;
@@ -584,12 +476,12 @@ gedit_warning (GtkWindow *parent, gchar *format, ...)
 	str = g_strdup_vprintf (format, args);
 	va_end (args);
 
-	dialog = gtk_message_dialog_new (
+	dialog = gtk_message_dialog_new_with_markup (
 			parent,
 			GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		   	GTK_MESSAGE_ERROR,
 		   	GTK_BUTTONS_OK,
-			"%s", str);
+			str);
 
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
@@ -683,51 +575,35 @@ gedit_utils_make_valid_utf8 (const char *name)
 	}
 
 	g_string_append (string, remainder);
-	g_string_append (string, _(" (invalid Unicode)"));
+	g_string_append (string, " (invalid encoding)");
+	
 	g_assert (g_utf8_validate (string->str, -1, NULL));
 
 	return g_string_free (string, FALSE);
 }
 
+/* Note that this function replace home dir with ~ */
 gchar *
-gedit_utils_uri_get_basename (const char *uri)
+gedit_utils_uri_get_dirname (const gchar *uri)
 {
-	GnomeVFSURI *vfs_uri;
-	char *name;
-
-	/* Make VFS version of URI. */
-	vfs_uri = gnome_vfs_uri_new (uri);
-	if (vfs_uri == NULL) {
-		return NULL;
-	}
-
-	/* Extract name part. */
-	name = gnome_vfs_uri_extract_short_name (vfs_uri);
-	gnome_vfs_uri_unref (vfs_uri);
-
-	return name;
-}
-
-gchar *
-gedit_utils_uri_get_dirname (const char *uri)
-{
-	GnomeVFSURI *vfs_uri;
-	gchar *name;
 	gchar *res;
+	gchar *str;
 
-	/* Make VFS version of URI. */
-	vfs_uri = gnome_vfs_uri_new (uri);
-	if (vfs_uri == NULL) {
+	// CHECK: does it work with uri chaining? - Paolo
+	str = g_path_get_dirname (uri);
+	g_return_val_if_fail (str != NULL, ".");
+
+	if ((strlen (str) == 1) && (*str == '.'))
+	{
+		g_free (str);
+		
 		return NULL;
 	}
 
-	/* Extract name part. */
-	name = gnome_vfs_uri_extract_dirname (vfs_uri);
-	gnome_vfs_uri_unref (vfs_uri);
+	res = gedit_utils_replace_home_dir_with_tilde (str);
 
-	res = g_strdup_printf ("file:///%s", name);
-	g_free (name);
-
+	g_free (str);
+	
 	return res;
 }
 
@@ -848,4 +724,152 @@ gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 
        return ret;
 }
+void  
+gedit_utils_activate_url (GtkAboutDialog *about,
+			  const gchar    *url,
+			  gpointer        data)
+{
+	gnome_url_show (url, NULL);
+}
 
+static gboolean
+is_valid_scheme_character (gchar c)
+{
+	return g_ascii_isalnum (c) || c == '+' || c == '-' || c == '.';
+}
+
+static gboolean
+has_valid_scheme (const gchar *uri)
+{
+	const gchar *p;
+
+	p = uri;
+
+	if (!is_valid_scheme_character (*p)) {
+		return FALSE;
+	}
+
+	do {
+		p++;
+	} while (is_valid_scheme_character (*p));
+
+	return *p == ':';
+}
+
+gboolean
+gedit_utils_is_valid_uri (const gchar *uri)
+{
+	const guchar *p;
+
+	if (uri == NULL)
+		return FALSE;
+
+	if (!has_valid_scheme (uri))
+		return FALSE;
+
+	/* We expect to have a fully valid set of characters */
+	for (p = uri; *p; p++) {
+		if (*p == '%')
+		{
+			++p;
+			if (!g_ascii_isxdigit (*p))
+				return FALSE;
+
+			++p;		
+			if (!g_ascii_isxdigit (*p))
+				return FALSE;
+		}
+		else
+		{
+			if (*p <= 32 || *p >= 128)
+				return FALSE;
+		}
+	}
+
+	return TRUE;
+}
+
+
+
+#define GEDIT_MISSING_FILE    N_("<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n\nPlease, check your installation.")
+#define GEDIT_MISSING_WIDGETS N_("<span size=\"large\" weight=\"bold\">Unable to find the required widgets inside file <i>%s</i>..</span>\n\nPlease, check your installation.")
+
+/**
+ * gedit_utils_get_glade_widgets:
+ * @filename: the path to the glade file
+ * @root_node: the root node in the glade file
+ * @error_widget: a pointer were a #GtkLabel
+ * @widget_name: the name of the first widget
+ * @...: a pointer were the first widget is returned, followed by more
+ *       name / widget pairs and terminated by NULL.
+ *
+ * This function gets the requested widgets from a glade file. In case
+ * of error it returns FALSE and sets error_widget to a GtkLabel containing
+ * the error message to display.
+ *
+ * Returns FALSE if an error occurs, TRUE on success.
+ */
+gboolean
+gedit_utils_get_glade_widgets (const gchar *filename,
+			       const gchar *root_node,
+			       GtkWidget **error_widget,
+			       const gchar *widget_name,
+			       ...)
+{
+	GtkWidget *label;
+	GladeXML *gui;
+	va_list args;
+	const gchar *name;
+	gchar *msg;
+	gboolean ret = TRUE;
+
+	g_return_val_if_fail (filename != NULL, FALSE);
+	g_return_val_if_fail (error_widget != NULL, FALSE);
+	g_return_val_if_fail (widget_name != NULL, FALSE);
+
+	*error_widget = NULL;
+
+	gui = glade_xml_new (filename, root_node, NULL);
+	if (!gui)
+	{
+		msg = g_strdup_printf (GEDIT_MISSING_FILE, filename);
+		label = gtk_label_new (msg);
+
+		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+
+		g_free (msg);
+
+		*error_widget = label;
+
+		return FALSE;
+	}
+
+	va_start (args, widget_name);
+	for (name = widget_name; name; name = va_arg (args, const gchar *) )
+	{
+		GtkWidget **wid;
+
+		wid = va_arg (args, GtkWidget **);
+		*wid = glade_xml_get_widget (gui, name);
+		if (*wid == NULL)
+		{
+			msg = g_strdup_printf (GEDIT_MISSING_WIDGETS, filename);
+			label = gtk_label_new (msg);
+
+			gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+
+			g_free (msg);
+
+			*error_widget = label;
+
+			ret = FALSE;
+
+			break;
+		}
+	}
+	va_end (args);
+
+	g_object_unref (gui);
+
+	return ret;
+}

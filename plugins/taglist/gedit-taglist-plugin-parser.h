@@ -1,9 +1,8 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-taglist-plugin-parser.c
- * This file is part of the gedit taglist plugin
+ * gedit-taglist-plugin-parser.h
+ * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2005 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,20 +21,48 @@
  */
  
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifndef __GEDIT_TAGLIST_PLUGIN_PARSER_H__
 #define __GEDIT_TAGLIST_PLUGIN_PARSER_H__
 
-#include "gedit-taglist-plugin.h"
+#include <libxml/tree.h>
+#include <glib/glist.h>
+
+typedef struct _TagList TagList;
+typedef struct _TagGroup TagGroup;
+typedef struct _Tag Tag;
+
+struct _TagList
+{
+	GList *tag_groups;
+};
+
+struct _TagGroup
+{
+	xmlChar *name;
+
+	GList *tags;
+};
+
+struct _Tag
+{
+	xmlChar *name;
+	xmlChar *begin;
+	xmlChar *end;
+};
+
+/* Note that the taglist is ref counted */
+extern TagList *taglist;
 
 TagList* create_taglist (void);
 
 void free_taglist (void);
 
-
-#endif /* __GEDIT_TAGLIST_PLUGIN_PARSER_H_ */
+#endif /* __GEDIT_TAGLIST_PLUGIN_PARSER_H__ */
 

@@ -3,7 +3,7 @@
  * gedit-prefs-manager.c
  * This file is part of gedit
  *
- * Copyright (C) 2002-2003  Paolo Maggi 
+ * Copyright (C) 2002-2005  Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@
 /*
  * Modified by the gedit Team, 2002-2003. See the AUTHORS file for a 
  * list of people on the gedit Team.  
- * See the ChangeLog files for a list of changes. 
+ * See the ChangeLog files for a list of changes.
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -38,75 +40,87 @@
 #include "gedit-prefs-manager.h"
 #include "gedit-prefs-manager-private.h"
 #include "gedit-prefs-manager-app.h"
+#include "gedit-app.h"
 #include "gedit-debug.h"
 #include "gedit-view.h"
-#include "gedit-mdi.h"
+#include "gedit-window.h"
 #include "gedit-recent.h"
-#include "gedit2.h"
-#include <gtksourceview/gtksourceview.h>
 
-static void		gedit_prefs_manager_editor_font_changed	(GConfClient *client,
-				   				 guint cnxn_id,
-				   				 GConfEntry *entry,
-				   				 gpointer user_data);
+static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
+		   				 	 guint        cnxn_id,
+			   				 GConfEntry  *entry,
+			   				 gpointer     user_data);
 
-static void		gedit_prefs_manager_editor_colors_changed (GConfClient *client,
-				   				   guint cnxn_id,
-				   				   GConfEntry *entry,
-				   				   gpointer user_data);
-static void 		gedit_prefs_manager_tabs_size_changed 	(GConfClient *client,
-							       	 guint cnxn_id, 
-							       	 GConfEntry *entry, 
-							       	 gpointer user_data);
-static void 		gedit_prefs_manager_wrap_mode_changed 	(GConfClient *client,
-								 guint cnxn_id, 
-								 GConfEntry *entry, 
-								 gpointer user_data);
-static void 		gedit_prefs_manager_line_numbers_changed (GConfClient *client,
-								  guint cnxn_id, 
-								  GConfEntry *entry, 
-								  gpointer user_data);
-static void 		gedit_prefs_manager_auto_indent_changed (GConfClient *client,
-								 guint cnxn_id, 
-								 GConfEntry *entry, 
-								 gpointer user_data);
-static void 		gedit_prefs_manager_undo_changed (GConfClient *client,
-							  guint cnxn_id, 
-							  GConfEntry *entry, 
-							  gpointer user_data);
-static void 		gedit_prefs_manager_right_margin_changed (GConfClient *client,
-								  guint cnxn_id, 
-								  GConfEntry *entry, 
-								  gpointer user_data);
-static void 		gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
-								  guint cnxn_id, 
-								  GConfEntry *entry, 
-								  gpointer user_data);
-static void 		gedit_prefs_manager_bracket_matching_changed (GConfClient *client,
-								      guint cnxn_id, 
-								      GConfEntry *entry, 
-								      gpointer user_data);
-static void 		gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
-								      guint cnxn_id, 
-								      GConfEntry *entry, 
-								      gpointer user_data);
-static void 		gedit_prefs_manager_max_recents_changed (GConfClient *client,
-								 guint cnxn_id, 
-								 GConfEntry *entry, 
-								 gpointer user_data);
-static void		gedit_prefs_manager_auto_save_changed (GConfClient *client,
-							       guint cnxn_id,
-							       GConfEntry *entry,
-							       gpointer user_data);
+static void gedit_prefs_manager_editor_colors_changed 	(GConfClient *client,
+			   				 guint        cnxn_id,
+			   				 GConfEntry  *entry,
+			   				 gpointer     user_data);
+
+static void gedit_prefs_manager_tabs_size_changed 	(GConfClient *client,
+						       	 guint        cnxn_id, 
+						       	 GConfEntry  *entry, 
+						       	 gpointer     user_data);
+				       	 
+static void gedit_prefs_manager_wrap_mode_changed 	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_line_numbers_changed 	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_auto_indent_changed 	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_undo_changed 		(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_right_margin_changed 	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_hl_current_line_changed	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+							 
+static void gedit_prefs_manager_bracket_matching_changed(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_syntax_hl_enable_changed(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_max_recents_changed 	(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_auto_save_changed	(GConfClient *client,
+							 guint        cnxn_id,
+							 GConfEntry  *entry,
+							 gpointer     user_data);
+
 static gint window_state = -1;
 static gint window_height = -1;
 static gint window_width = -1;
-
+static gint side_panel_size = -1;
+static gint bottom_panel_size = -1;
 
 gboolean
 gedit_prefs_manager_app_init (void)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (gedit_prefs_manager == NULL, FALSE);
 	
@@ -134,12 +148,12 @@ gedit_prefs_manager_app_init (void)
 				GPM_TABS_DIR,
 				gedit_prefs_manager_tabs_size_changed,
 				NULL, NULL, NULL);
-		
+
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_WRAP_MODE_DIR,
 				gedit_prefs_manager_wrap_mode_changed,
 				NULL, NULL, NULL);
-
+		
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_LINE_NUMBERS_DIR,
 				gedit_prefs_manager_line_numbers_changed,
@@ -193,16 +207,16 @@ gedit_prefs_manager_app_init (void)
 void
 gedit_prefs_manager_app_shutdown ()
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	gedit_prefs_manager_shutdown ();
 
 	gnome_config_sync ();
 }
 
-
 /* Window state */
-gint gedit_prefs_manager_get_window_state (void)
+gint
+gedit_prefs_manager_get_window_state (void)
 {
 	if (window_state == -1)
 		window_state = gnome_config_get_int (GPM_WINDOW_STATE "=" GPM_DEFAULT_WINDOW_STATE_STR);
@@ -213,7 +227,7 @@ gint gedit_prefs_manager_get_window_state (void)
 void
 gedit_prefs_manager_set_window_state (gint ws)
 {
-	g_return_if_fail (ws != -1);
+	g_return_if_fail (ws > -1);
 	
 	window_state = ws;
 	gnome_config_set_int (GPM_WINDOW_STATE, ws);
@@ -235,16 +249,16 @@ gedit_prefs_manager_get_window_height (void)
 	return window_height;
 }
 
-
 gint
 gedit_prefs_manager_get_default_window_height (void)
 {
 	return GPM_DEFAULT_WINDOW_HEIGHT;
 }
 
-void gedit_prefs_manager_set_window_height (gint wh)
+void
+gedit_prefs_manager_set_window_height (gint wh)
 {
-	g_return_if_fail (wh != -1);
+	g_return_if_fail (wh > -1);
 
 	window_height = wh;
 	gnome_config_set_int (GPM_WINDOW_HEIGHT, wh);
@@ -275,7 +289,7 @@ gedit_prefs_manager_get_default_window_width (void)
 void 
 gedit_prefs_manager_set_window_width (gint ww)
 {
-	g_return_if_fail (ww != -1);
+	g_return_if_fail (ww > -1);
 	
 	window_width = ww;
 	gnome_config_set_int (GPM_WINDOW_WIDTH, ww);
@@ -287,38 +301,87 @@ gedit_prefs_manager_window_width_can_set (void)
 	return TRUE;
 }
 
-void
-gedit_prefs_manager_save_window_size_and_state (BonoboWindow *window)
+/* Side panel size */
+gint
+gedit_prefs_manager_get_side_panel_size (void)
 {
-	const BonoboMDIWindowInfo *window_info;
+	if (side_panel_size == -1)
+		side_panel_size = gnome_config_get_int (GPM_SIDE_PANEL_SIZE "=" GPM_DEFAULT_SIDE_PANEL_SIZE_STR);
 
-	gedit_debug (DEBUG_PREFS, "");
+	return side_panel_size;
+}
+
+gint 
+gedit_prefs_manager_get_default_side_panel_size (void)
+{
+	return GPM_DEFAULT_SIDE_PANEL_SIZE;
+}
+
+void 
+gedit_prefs_manager_set_side_panel_size (gint ps)
+{
+	g_return_if_fail (ps > -1);
 	
-	g_return_if_fail (window != NULL);
-	g_return_if_fail (BONOBO_IS_WINDOW (window));
+	if (side_panel_size == ps)
+		return;
+		
+	side_panel_size = ps;
+	gnome_config_set_int (GPM_SIDE_PANEL_SIZE, ps);
+}
 
-	window_info = bonobo_mdi_get_window_info (window);
-	g_return_if_fail (window_info != NULL);
+gboolean 
+gedit_prefs_manager_side_panel_size_can_set (void)
+{
+	return TRUE;
+}
+
+/* Bottom panel size */
+gint
+gedit_prefs_manager_get_bottom_panel_size (void)
+{
+	if (bottom_panel_size == -1)
+		bottom_panel_size = gnome_config_get_int (GPM_BOTTOM_PANEL_SIZE "=" GPM_DEFAULT_BOTTOM_PANEL_SIZE_STR);
+
+	return bottom_panel_size;
+}
+
+gint 
+gedit_prefs_manager_get_default_bottom_panel_size (void)
+{
+	return GPM_DEFAULT_BOTTOM_PANEL_SIZE;
+}
+
+void 
+gedit_prefs_manager_set_bottom_panel_size (gint ps)
+{
+	g_return_if_fail (ps > -1);
+
+	if (bottom_panel_size == ps)
+		return;
 	
-	if (gedit_prefs_manager_window_height_can_set ())
-		gedit_prefs_manager_set_window_height (window_info->height);
+	bottom_panel_size = ps;
+	gnome_config_set_int (GPM_BOTTOM_PANEL_SIZE, ps);
+}
 
-	if (gedit_prefs_manager_window_width_can_set ())
-		gedit_prefs_manager_set_window_width (window_info->width);
-
-	if (gedit_prefs_manager_window_state_can_set ())
-		gedit_prefs_manager_set_window_state (window_info->state);
+gboolean 
+gedit_prefs_manager_bottom_panel_size_can_set (void)
+{
+	return TRUE;
 }
 
 static void 
 gedit_prefs_manager_editor_font_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					 guint        cnxn_id, 
+					 GConfEntry  *entry, 
+					 gpointer     user_data)
 {
-	GList *children;
+	GList *views;
+	GList *l;
 	gchar *font = NULL;
 	gboolean def = TRUE;
-	
-	gedit_debug (DEBUG_PREFS, "");
+	gint ts;
+
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -344,81 +407,76 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 	}
 	else
 		return;
-	
+
 	if ((font == NULL) && !def)
 		font = gedit_prefs_manager_get_editor_font ();
-	
-	children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
 
-	while (children != NULL)
+	ts = gedit_prefs_manager_get_tabs_size ();
+
+	views = gedit_app_get_views (gedit_app_get_default ());
+	l = views;
+
+	while (l != NULL)
 	{
-		gint ts;
-		
-		GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+		gedit_view_set_font (GEDIT_VIEW (l->data),
+				     def, 
+				     font);
+		gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data),
+						ts);
 
-		ts = gedit_prefs_manager_get_tabs_size ();
-		while (views != NULL)
-		{
-			GeditView *v =	GEDIT_VIEW (views->data);
-			
-			gedit_view_set_font (v, def, font);
-			gedit_view_set_tab_size (v, ts);
-
-			views = views->next;
-		}
-		
-		children = children->next;
+		l = l->next;
 	}
 
-	if (font != NULL)
-		g_free (font);
+	g_list_free (views);
+	g_free (font);
 }
 
-
 static void 
-set_colors (gboolean def, GdkColor* backgroud, GdkColor* text,
-		GdkColor* selection, GdkColor* sel_text)
+set_colors (gboolean  def, 
+	    GdkColor *backgroud, 
+	    GdkColor *text,
+	    GdkColor *selection, 
+	    GdkColor *sel_text)
 {
-	GList *children;
+	GList *views;
+	GList *l;
 
-	children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+	views = gedit_app_get_views (gedit_app_get_default ());
+	l = views;
 
-	while (children != NULL)
+	while (l != NULL)
 	{
-		GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+		gedit_view_set_colors (GEDIT_VIEW (l->data),
+				       def,
+				       backgroud,
+				       text,
+				       selection,
+				       sel_text);
 
-		while (views != NULL)
-		{
-			GeditView *v =	GEDIT_VIEW (views->data);
-			
-			gedit_view_set_colors (v, 
-					       def,
-					       backgroud,
-					       text,
-					       selection,
-					       sel_text);
-			views = views->next;
-		}
-		
-		children = children->next;
+		l = l->next;
 	}
+
+	g_list_free (views);
 }
 
 static void 
 gedit_prefs_manager_editor_colors_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
-{
-	gboolean def = TRUE;
+					   guint        cnxn_id, 
+					   GConfEntry  *entry, 
+					   gpointer     user_data)
+{	
 	gchar *str_color;
 	GdkColor color;
 
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
 
 	if (strcmp (entry->key, GPM_USE_DEFAULT_COLORS) == 0)
 	{
+		gboolean def = TRUE;
+		
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			def = gconf_value_get_bool (entry->value);
 		else
@@ -445,6 +503,12 @@ gedit_prefs_manager_editor_colors_changed (GConfClient *client,
 		return;
 	}
 	
+	if (gedit_prefs_manager_get_use_default_colors ())
+	{
+		set_colors (TRUE, NULL, NULL, NULL, NULL);
+		return;
+	}
+		
 	if (strcmp (entry->key, GPM_BACKGROUND_COLOR) == 0)
 	{
 		if (entry->value->type == GCONF_VALUE_STRING)
@@ -452,12 +516,10 @@ gedit_prefs_manager_editor_colors_changed (GConfClient *client,
 		else
 			str_color = g_strdup (GPM_DEFAULT_BACKGROUND_COLOR);
 				
-		def = gedit_prefs_manager_get_use_default_colors ();
-
 		gdk_color_parse (str_color, &color);	
 		g_free (str_color);
 
-		set_colors (def, &color, NULL, NULL, NULL);
+		set_colors (FALSE, &color, NULL, NULL, NULL);
 	
 		return;
 	}
@@ -469,12 +531,10 @@ gedit_prefs_manager_editor_colors_changed (GConfClient *client,
 		else
 			str_color = g_strdup (GPM_DEFAULT_TEXT_COLOR);
 				
-		def = gedit_prefs_manager_get_use_default_colors ();
-
 		gdk_color_parse (str_color, &color);	
 		g_free (str_color);
 
-		set_colors (def, NULL, &color, NULL, NULL);
+		set_colors (FALSE, NULL, &color, NULL, NULL);
 	
 		return;
 	}
@@ -486,12 +546,10 @@ gedit_prefs_manager_editor_colors_changed (GConfClient *client,
 		else
 			str_color = g_strdup (GPM_DEFAULT_SELECTION_COLOR);
 				
-		def = gedit_prefs_manager_get_use_default_colors ();
-
 		gdk_color_parse (str_color, &color);	
 		g_free (str_color);
 
-		set_colors (def, NULL, NULL, &color, NULL);
+		set_colors (FALSE, NULL, NULL, &color, NULL);
 	
 		return;
 	}
@@ -503,12 +561,10 @@ gedit_prefs_manager_editor_colors_changed (GConfClient *client,
 		else
 			str_color = g_strdup (GPM_DEFAULT_SELECTED_TEXT_COLOR);
 
-		def = gedit_prefs_manager_get_use_default_colors ();
-
 		gdk_color_parse (str_color, &color);	
 		g_free (str_color);
 
-		set_colors (def, NULL, NULL, NULL, &color);
+		set_colors (FALSE, NULL, NULL, NULL, &color);
 	
 		return;
 	}
@@ -516,10 +572,11 @@ gedit_prefs_manager_editor_colors_changed (GConfClient *client,
 
 static void 
 gedit_prefs_manager_tabs_size_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+				       guint        cnxn_id,
+				       GConfEntry  *entry, 
+				       gpointer     user_data)
 {
-
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -527,7 +584,8 @@ gedit_prefs_manager_tabs_size_changed (GConfClient *client,
 	if (strcmp (entry->key, GPM_TABS_SIZE) == 0)
 	{
 		gint tabs_size;
-		GList *children;
+		GList *views;
+		GList *l;
 		
 		if (entry->value->type == GCONF_VALUE_INT)
 			tabs_size = gconf_value_get_int (entry->value);
@@ -536,55 +594,44 @@ gedit_prefs_manager_tabs_size_changed (GConfClient *client,
 	
 		tabs_size = CLAMP (tabs_size, 1, 24);
 
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
 
-		while (children != NULL)
+		while (l != NULL)
 		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+			gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data), 
+							tabs_size);
 
-			while (views != NULL)
-			{
-				GeditView *v =	GEDIT_VIEW (views->data);
-			
-				gedit_view_set_tab_size (v, tabs_size);
-			
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
 
+		g_list_free (views);
 	}
 	else if (strcmp (entry->key, GPM_INSERT_SPACES) == 0)
 	{
 		gboolean enable;
-			
-		GList *children;
+		GList *views;
+		GList *l;
 		
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			enable = gconf_value_get_bool (entry->value);	
 		else
 			enable = GPM_DEFAULT_INSERT_SPACES;
-	
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
 
-		while (children != NULL)
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
+
+		while (l != NULL)
 		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+			gtk_source_view_set_insert_spaces_instead_of_tabs (
+					GTK_SOURCE_VIEW (l->data), 
+					enable);
 
-			while (views != NULL)
-			{
-				GeditView *v =	GEDIT_VIEW (views->data);
-			
-				gedit_view_set_insert_spaces_instead_of_tabs (v, enable);
-			
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
-	}
 
+		g_list_free (views);
+	}
 }
 
 static GtkWrapMode 
@@ -609,9 +656,11 @@ get_wrap_mode_from_string (const gchar* str)
 
 static void 
 gedit_prefs_manager_wrap_mode_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+	                               guint        cnxn_id, 
+	                               GConfEntry  *entry, 
+	                               gpointer     user_data)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -619,41 +668,37 @@ gedit_prefs_manager_wrap_mode_changed (GConfClient *client,
 	if (strcmp (entry->key, GPM_WRAP_MODE) == 0)
 	{
 		GtkWrapMode wrap_mode;
-			
-		GList *children;
-		
+		GList *views;
+		GList *l;
+
 		if (entry->value->type == GCONF_VALUE_STRING)
 			wrap_mode = 
 				get_wrap_mode_from_string (gconf_value_get_string (entry->value));	
 		else
 			wrap_mode = get_wrap_mode_from_string (GPM_DEFAULT_WRAP_MODE);
-	
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
 
-		while (children != NULL)
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
+
+		while (l != NULL)
 		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+			gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW (l->data),
+						     wrap_mode);
 
-			while (views != NULL)
-			{
-				GeditView *v =	GEDIT_VIEW (views->data);
-			
-				gedit_view_set_wrap_mode (v, wrap_mode);
-			
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
-	}
 
+		g_list_free (views);
+	}
 }
 
 static void 
 gedit_prefs_manager_line_numbers_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					  guint        cnxn_id, 
+					  GConfEntry  *entry, 
+					  gpointer     user_data)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -661,39 +706,36 @@ gedit_prefs_manager_line_numbers_changed (GConfClient *client,
 	if (strcmp (entry->key, GPM_DISPLAY_LINE_NUMBERS) == 0)
 	{
 		gboolean dln;
-			
-		GList *children;
-		
+		GList *views;
+		GList *l;
+
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			dln = gconf_value_get_bool (entry->value);	
 		else
 			dln = GPM_DEFAULT_DISPLAY_LINE_NUMBERS;
-	
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
 
-		while (children != NULL)
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
+
+		while (l != NULL)
 		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+			gtk_source_view_set_show_line_numbers (GTK_SOURCE_VIEW (l->data), 
+							       dln);
 
-			while (views != NULL)
-			{
-				GeditView *v =	GEDIT_VIEW (views->data);
-			
-				gedit_view_show_line_numbers (v, dln);
-			
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
+
+		g_list_free (views);
 	}
 }
 
 static void 
 gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					     guint        cnxn_id, 
+					     GConfEntry  *entry, 
+					     gpointer     user_data)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -701,80 +743,73 @@ gedit_prefs_manager_hl_current_line_changed (GConfClient *client,
 	if (strcmp (entry->key, GPM_HIGHLIGHT_CURRENT_LINE) == 0)
 	{
 		gboolean hl;
-			
-		GList *children;
+		GList *views;
+		GList *l;
 
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			hl = gconf_value_get_bool (entry->value);	
 		else
 			hl = GPM_DEFAULT_HIGHLIGHT_CURRENT_LINE;
-	
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
 
-		while (children != NULL)
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
+
+		while (l != NULL)
 		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+			gtk_source_view_set_highlight_current_line (GTK_SOURCE_VIEW (l->data), 
+								    hl);
 
-			while (views != NULL)
-			{
-				GtkSourceView *v = GTK_SOURCE_VIEW (
-						gedit_view_get_gtk_text_view (GEDIT_VIEW (views->data)));
-			
-				gtk_source_view_set_highlight_current_line (v, hl);
-			
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
+
+		g_list_free (views);
 	}
 }
 
-
 static void 
 gedit_prefs_manager_bracket_matching_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					      guint        cnxn_id, 
+					      GConfEntry  *entry, 
+					      gpointer     user_data)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
 
 	if (strcmp (entry->key, GPM_BRACKET_MATCHING) == 0)
 	{
+		gboolean enable;
 		GList *docs;
 		GList *l;
-		gboolean enable;
 
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			enable = gconf_value_get_bool (entry->value);
 		else
 			enable = GPM_DEFAULT_BRACKET_MATCHING;
 
-		docs = gedit_get_open_documents ();
-		
+		docs = gedit_app_get_documents (gedit_app_get_default ());
 		l = docs;
+
 		while (l != NULL)
 		{
-			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
-
 			gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (l->data),
 							      enable);
 
-
-			l = g_list_next (l);		
+			l = l->next;
 		}
 
 		g_list_free (docs);
 	}
-	
 }
 
 static void 
 gedit_prefs_manager_auto_indent_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					 guint        cnxn_id, 
+					 GConfEntry  *entry, 
+					 gpointer     user_data)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -782,40 +817,36 @@ gedit_prefs_manager_auto_indent_changed (GConfClient *client,
 	if (strcmp (entry->key, GPM_AUTO_INDENT) == 0)
 	{
 		gboolean enable;
-			
-		GList *children;
-		
+		GList *views;
+		GList *l;
+
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			enable = gconf_value_get_bool (entry->value);	
 		else
 			enable = GPM_DEFAULT_AUTO_INDENT;
 	
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
 
-		while (children != NULL)
-		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
-
-			while (views != NULL)
-			{
-				GeditView *v =	GEDIT_VIEW (views->data);
+		while (l != NULL)
+		{		
+			gtk_source_view_set_auto_indent (GTK_SOURCE_VIEW (l->data), 
+							 enable);
 			
-				gedit_view_set_auto_indent (v, enable);
-			
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
+
+		g_list_free (views);
 	}
 }
 
 static void 
 gedit_prefs_manager_undo_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+				  guint        cnxn_id, 
+				  GConfEntry  *entry, 
+				  gpointer     user_data)
 {
-
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -825,7 +856,7 @@ gedit_prefs_manager_undo_changed (GConfClient *client,
 		gint ul;
 		GList *docs;
 		GList *l;
-		
+
 		if (entry->value->type == GCONF_VALUE_INT)
 			ul = gconf_value_get_int (entry->value);
 		else
@@ -833,15 +864,15 @@ gedit_prefs_manager_undo_changed (GConfClient *client,
 	
 		ul = CLAMP (ul, -1, 250);
 
-		docs = gedit_get_open_documents ();
+		docs = gedit_app_get_documents (gedit_app_get_default ());
 		l = docs;
+		
 		while (l != NULL)
 		{
-			GeditDocument *d = GEDIT_DOCUMENT (l->data);
+			gtk_source_buffer_set_max_undo_levels (GTK_SOURCE_BUFFER (l->data), 
+							       ul);
 
-			gedit_document_set_max_undo_levels (d, ul);
-		
-			l = g_list_next (l);
+			l = l->next;
 		}
 
 		g_list_free (docs);
@@ -850,10 +881,11 @@ gedit_prefs_manager_undo_changed (GConfClient *client,
 
 static void 
 gedit_prefs_manager_right_margin_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					  guint cnxn_id,
+					  GConfEntry *entry,
+					  gpointer user_data)
 {
-
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -861,95 +893,81 @@ gedit_prefs_manager_right_margin_changed (GConfClient *client,
 	if (strcmp (entry->key, GPM_RIGHT_MARGIN_POSITION) == 0)
 	{
 		gint pos;
-		GList *children;
-		
+		GList *views;
+		GList *l;
+
 		if (entry->value->type == GCONF_VALUE_INT)
 			pos = gconf_value_get_int (entry->value);
 		else
 			pos = GPM_DEFAULT_RIGHT_MARGIN_POSITION;
-	
+
 		pos = CLAMP (pos, 1, 160);
 
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
 
-		while (children != NULL)
+		while (l != NULL)
 		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+			gtk_source_view_set_margin (GTK_SOURCE_VIEW (l->data),
+						    pos);
 
-			while (views != NULL)
-			{
-				GeditView *v;
-				GtkSourceView *sv;
-			       
-				v = GEDIT_VIEW (views->data);
-				sv = GTK_SOURCE_VIEW (gedit_view_get_gtk_text_view (v));
-
-				gtk_source_view_set_margin (sv, pos);
-			
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
 
+		g_list_free (views);
 	}
 	else if (strcmp (entry->key, GPM_DISPLAY_RIGHT_MARGIN) == 0)
 	{
 		gboolean display;
-			
-		GList *children;
-		
+		GList *views;
+		GList *l;
+
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			display = gconf_value_get_bool (entry->value);	
 		else
 			display = GPM_DEFAULT_DISPLAY_RIGHT_MARGIN;
-	
-		children = bonobo_mdi_get_children (BONOBO_MDI (gedit_mdi));
 
-		while (children != NULL)
+		views = gedit_app_get_views (gedit_app_get_default ());
+		l = views;
+
+		while (l != NULL)
 		{
-			GList *views = bonobo_mdi_child_get_views (BONOBO_MDI_CHILD (children->data));
+			gtk_source_view_set_show_margin (GTK_SOURCE_VIEW (l->data),
+							 display);
 
-			while (views != NULL)
-			{
-				GeditView *v;
-				GtkSourceView *sv;
-			       
-				v = GEDIT_VIEW (views->data);
-				sv = GTK_SOURCE_VIEW (gedit_view_get_gtk_text_view (v));
-
-				gtk_source_view_set_show_margin (sv, display);
-				
-				views = views->next;
-			}
-		
-			children = children->next;
+			l = l->next;
 		}
+
+		g_list_free (views);
 	}
 }
 
-static void 
+static void
 gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					      guint        cnxn_id,
+					      GConfEntry  *entry,
+					      gpointer     user_data)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
 
 	if (strcmp (entry->key, GPM_SYNTAX_HL_ENABLE) == 0)
 	{
+		gboolean enable;
 		GList *docs;
 		GList *l;
-		gboolean enable;
+		const GList *windows;
 
 		if (entry->value->type == GCONF_VALUE_BOOL)
 			enable = gconf_value_get_bool (entry->value);
 		else
 			enable = GPM_DEFAULT_SYNTAX_HL_ENABLE;
 
-		docs = gedit_get_open_documents ();
+		docs = gedit_app_get_documents (gedit_app_get_default ());
 		l = docs;
+
 		while (l != NULL)
 		{
 			g_return_if_fail (GTK_IS_SOURCE_BUFFER (l->data));
@@ -957,37 +975,37 @@ gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 			gtk_source_buffer_set_highlight (GTK_SOURCE_BUFFER (l->data),
 							 enable);
 
-			l = g_list_next (l);		
+			l = l->next;
 		}
 
 		g_list_free (docs);
 
 		/* update the sensitivity of the Higlight Mode menu item */
-		l = gedit_get_top_windows ();
-		while (l != NULL)
+		windows = gedit_app_get_windows (gedit_app_get_default ());
+		while (windows != NULL)
 		{
-			BonoboUIComponent *ui_component;
+			GtkUIManager *ui;
+			GtkAction *a;
 
-			g_return_if_fail (BONOBO_IS_WINDOW (l->data));
+			ui = gedit_window_get_ui_manager (GEDIT_WINDOW (windows->data));
 
-			ui_component = bonobo_mdi_get_ui_component_from_window (l->data);
-			if (enable)
-				bonobo_ui_component_set_prop (ui_component, "/menu/View/HighlightMode",
-						      "sensitive", "1", NULL);
-			else
-				bonobo_ui_component_set_prop (ui_component, "/menu/View/HighlightMode",
-						      "sensitive", "0", NULL);
+			a = gtk_ui_manager_get_action (ui,
+						       "/MenuBar/ViewMenu/ViewHighlightModeMenu");
 
-			l = g_list_next (l);
+			gtk_action_set_sensitive (a, enable);
+
+			windows = g_list_next (windows);
 		}
 	}
 }
 
 static void
 gedit_prefs_manager_max_recents_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+					 guint        cnxn_id,
+					 GConfEntry  *entry,
+					 gpointer     user_data)
 {
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -1015,12 +1033,14 @@ gedit_prefs_manager_max_recents_changed (GConfClient *client,
 
 static void
 gedit_prefs_manager_auto_save_changed (GConfClient *client,
-	guint cnxn_id, GConfEntry *entry, gpointer user_data)
+				       guint        cnxn_id,
+				       GConfEntry  *entry,
+				       gpointer     user_data)
 {
 	GList *docs;
 	GList *l;
 
-	gedit_debug (DEBUG_PREFS, "");
+	gedit_debug (DEBUG_PREFS);
 
 	g_return_if_fail (entry->key != NULL);
 	g_return_if_fail (entry->value != NULL);
@@ -1034,16 +1054,16 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 		else
 			auto_save = GPM_DEFAULT_AUTO_SAVE;
 
-		docs = gedit_get_open_documents ();
+		docs = gedit_app_get_documents (gedit_app_get_default ());
 		l = docs;
 
 		while (l != NULL)
 		{
 			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
 
-			gedit_document_enable_auto_save (doc, auto_save);
+			gedit_document_set_auto_save_enabled (doc, auto_save);
 
-			l = g_list_next (l);
+			l = l->next;
 		}
 
 		g_list_free (docs);
@@ -1062,16 +1082,16 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 		else
 			auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
 
-		docs = gedit_get_open_documents ();
+		docs = gedit_app_get_documents (gedit_app_get_default ());
 		l = docs;
-		
+
 		while (l != NULL)
 		{
 			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
 
 			gedit_document_set_auto_save_interval (doc, auto_save_interval);
 
-			l = g_list_next (l);
+			l = l->next;
 		}
 
 		g_list_free (docs);

@@ -67,7 +67,8 @@ static void gedit_tooltips_unset_tip_window (GeditTooltips * tooltips);
 static gboolean get_keyboard_mode (GtkWidget * widget);
 
 static GtkObjectClass *parent_class;
-static const gchar *tooltips_data_key = "_GeditTooltipsData";
+static const gchar tooltips_data_key[] = "_GeditTooltipsData";
+
 
 GType
 gedit_tooltips_get_type (void)
@@ -204,6 +205,8 @@ gedit_tooltips_destroy (GtkObject * object)
 	}
 
 	gedit_tooltips_unset_tip_window (tooltips);
+
+	GTK_OBJECT_CLASS (parent_class)->destroy (object);
 }
 
 static void
@@ -238,7 +241,6 @@ gedit_tooltips_update_screen (GeditTooltips * tooltips,
 				  (tooltips->tip_window), "closed",
 				  G_CALLBACK (tip_window_display_closed),
 				  tooltips);
-
 }
 
 void
@@ -267,7 +269,7 @@ gedit_tooltips_force_window (GeditTooltips * tooltips)
 					 TRUE);
 		gtk_misc_set_alignment (GTK_MISC (tooltips->tip_label),
 					0.5, 0.5);
-		gtk_label_set_ellipsize (GTK_LABEL (tooltips->tip_label), 
+		gtk_label_set_ellipsize (GTK_LABEL (tooltips->tip_label),
 					 PANGO_ELLIPSIZE_MIDDLE);
 		gtk_label_set_max_width_chars (GTK_LABEL (tooltips->tip_label),
 					       125);
@@ -381,11 +383,14 @@ gedit_tooltips_set_tip (GeditTooltips * tooltips,
 static gint
 gedit_tooltips_paint_window (GeditTooltips * tooltips)
 {
+	GtkRequisition req;
+
+	gtk_widget_size_request (tooltips->tip_window, &req);
 	gtk_paint_flat_box (tooltips->tip_window->style,
 			    tooltips->tip_window->window, GTK_STATE_NORMAL,
 			    GTK_SHADOW_OUT, NULL,
 			    GTK_WIDGET (tooltips->tip_window), "tooltip",
-			    0, 0, -1, -1);
+			    0, 0, req.width, req.height);
 
 	return FALSE;
 }
@@ -395,11 +400,13 @@ gedit_tooltips_draw_tips (GeditTooltips * tooltips)
 {
 	GtkRequisition requisition;
 	GtkWidget *widget;
-	GtkStyle *style;
-	gint x, y, w, h, scr_w, scr_h;
+	gint x, y, w, h;
 	GeditTooltipsData *data;
 	gboolean keyboard_mode;
 	GdkScreen *screen;
+	GdkScreen *pointer_screen;
+	gint monitor_num, px, py;
+	GdkRectangle monitor;
 
 	if (!tooltips->tip_window)
 		gedit_tooltips_force_window (tooltips);
@@ -407,7 +414,6 @@ gedit_tooltips_draw_tips (GeditTooltips * tooltips)
 		g_get_current_time (&tooltips->last_popdown);
 
 	gtk_widget_ensure_style (tooltips->tip_window);
-	style = tooltips->tip_window->style;
 
 	widget = tooltips->active_tips_data->widget;
 
@@ -416,8 +422,6 @@ gedit_tooltips_draw_tips (GeditTooltips * tooltips)
 	gedit_tooltips_update_screen (tooltips, FALSE);
 
 	screen = gtk_widget_get_screen (widget);
-	scr_w = gdk_screen_get_width (screen);
-	scr_h = gdk_screen_get_height (screen);
 
 	data = tooltips->active_tips_data;
 
@@ -442,12 +446,23 @@ gedit_tooltips_draw_tips (GeditTooltips * tooltips)
 
 	x -= (w / 2 + 4);
 
-	if ((x + w) > scr_w)
-		x -= (x + w) - scr_w;
-	else if (x < 0)
-		x = 0;
+	gdk_display_get_pointer (gdk_screen_get_display (screen),
+				 &pointer_screen, &px, &py, NULL);
 
-	if ((y + h + widget->allocation.height + 4) > scr_h)
+	if (pointer_screen != screen)
+	{
+		px = x;
+		py = y;
+	}
+	monitor_num = gdk_screen_get_monitor_at_point (screen, px, py);
+	gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
+
+	if ((x + w) > monitor.x + monitor.width)
+		x -= (x + w) - (monitor.x + monitor.width);
+	else if (x < monitor.x)
+		 x = monitor.x;
+
+	if ((y + h + widget->allocation.height + 4) > monitor.y + monitor.height)
 		y = y - h - 4;
 	else
 		y = y + widget->allocation.height + 4;
@@ -469,6 +484,7 @@ gedit_tooltips_timeout (gpointer data)
 
 	GDK_THREADS_LEAVE ();
 
+	tooltips->timer_tag = 0;
 	return FALSE;
 }
 

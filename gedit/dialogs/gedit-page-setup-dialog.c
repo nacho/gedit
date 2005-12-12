@@ -3,7 +3,7 @@
  * gedit-page-setup-dialog.c
  * This file is part of gedit
  *
- * Copyright (C) 2003 Paolo Maggi 
+ * Copyright (C) 2003-2005 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,6 +25,8 @@
  * Modified by the gedit Team, 2003. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -34,26 +36,38 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
+#include <gtk/gtk.h>
 #include <glade/glade-xml.h>
-#include <libgnome/gnome-help.h>
 #include <gconf/gconf-client.h>
 
 #include <gedit/gedit-prefs-manager.h>
 
 #include "gedit-page-setup-dialog.h"
-#include "gedit2.h"
 #include "gedit-utils.h"
 #include "gedit-debug.h"
+#include "gedit-help.h"
 
-typedef struct _GeditPageSetupDialog GeditPageSetupDialog;
+/*
+ * gedit-page-setup dialog is a singleton since we don't
+ * want two dialogs showing an inconsistent state of the
+ * preferences.
+ * When gedit_show_page_setup_dialog is called and there
+ * is already a page setup dialog open, it is reparented
+ * and shown.
+ */
 
-struct _GeditPageSetupDialog {
-	GtkWidget *dialog;
+static GtkWidget *page_setup_dialog = NULL;
 
+
+#define GEDIT_PAGE_SETUP_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_PAGE_SETUP_DIALOG, GeditPageSetupDialogPrivate))
+
+
+struct _GeditPageSetupDialogPrivate
+{
 	GtkWidget *syntax_checkbutton;
 
 	GtkWidget *page_header_checkbutton;
-	
+
 	GtkWidget *line_numbers_checkbutton;
 	GtkWidget *line_numbers_hbox;
 	GtkWidget *line_numbers_spinbutton;
@@ -74,92 +88,98 @@ struct _GeditPageSetupDialog {
 	GtkWidget *restore_button;
 };
 
+
+G_DEFINE_TYPE(GeditPageSetupDialog, gedit_page_setup_dialog, GTK_TYPE_DIALOG)
+
+
+/* these are used to keep a consistent init value
+ * of preferences not currently stored in gconf
+ * across multiple instances.
+ */
 static gboolean split_button_state = TRUE;
 static gint old_line_numbers_value = 1;
 
-static void dialog_destroyed (GtkObject *obj,  void **dialog_pointer);
 
-static void
-dialog_destroyed (GtkObject *obj,  void **dialog_pointer)
+static void 
+gedit_page_setup_dialog_class_init (GeditPageSetupDialogClass *klass)
 {
-	gedit_debug (DEBUG_PRINT, "");
-
-	if (dialog_pointer != NULL)
-	{
-		g_free (*dialog_pointer);
-		*dialog_pointer = NULL;
-	}	
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+					      								      
+	g_type_class_add_private (object_class, sizeof (GeditPageSetupDialogPrivate));
 }
 
 static void
-dialog_response_handler (GtkDialog *dlg, gint res_id,  GeditPageSetupDialog *dialog)
+dialog_response_handler (GeditPageSetupDialog *dlg,
+			 gint                  res_id,
+			 gpointer              data)
 {
-	GError *error = NULL;
-
-	gedit_debug (DEBUG_PRINT, "");
-
-	switch (res_id) {
+	switch (res_id)
+	{
 		case GTK_RESPONSE_HELP:
-			gnome_help_display ("gedit.xml", "gedit-page-setup", &error);
-			if (error != NULL)
-			{
-				gedit_warning (GTK_WINDOW (dlg), error->message);
-				g_error_free (error);
-			}
+			gedit_help_display (GTK_WINDOW (dlg),
+					    "gedit.xml",
+					    "gedit-page-setup");
+
+			g_signal_stop_emission_by_name (dlg, "response");
+
 			break;
-			
+
 		default:
-			gtk_widget_destroy (dialog->dialog);
+			gtk_widget_destroy (GTK_WIDGET(dlg));
 	}
 }
 
 static void
-syntax_checkbutton_toggled (GtkToggleButton *button, GeditPageSetupDialog *dlg)
+syntax_checkbutton_toggled (GtkToggleButton      *button,
+			    GeditPageSetupDialog *dlg)
 {
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->syntax_checkbutton));
-	
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->syntax_checkbutton));
+
 	gedit_prefs_manager_set_print_syntax_hl (gtk_toggle_button_get_active (button));
 }
 
 static void
-page_header_checkbutton_toggled (GtkToggleButton *button, GeditPageSetupDialog *dlg)
+page_header_checkbutton_toggled (GtkToggleButton      *button,
+				 GeditPageSetupDialog *dlg)
 {
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->page_header_checkbutton));
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->page_header_checkbutton));
 	
 	gedit_prefs_manager_set_print_header (gtk_toggle_button_get_active (button));
 }
 
 static void
-line_numbers_checkbutton_toggled (GtkToggleButton *button, GeditPageSetupDialog *dlg)
+line_numbers_checkbutton_toggled (GtkToggleButton      *button,
+				  GeditPageSetupDialog *dlg)
 {
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
-	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->line_numbers_checkbutton));
-	
+	g_return_if_fail (button == GTK_TOGGLE_BUTTON (dlg->priv->line_numbers_checkbutton));
+
 	if (gtk_toggle_button_get_active (button))
 	{
-		gtk_widget_set_sensitive (dlg->line_numbers_hbox, 
+		gtk_widget_set_sensitive (dlg->priv->line_numbers_hbox, 
 					  gedit_prefs_manager_print_line_numbers_can_set ());
-		
+
 		gedit_prefs_manager_set_print_line_numbers (
 			MAX (1, gtk_spin_button_get_value_as_int (
-			   GTK_SPIN_BUTTON (dlg->line_numbers_spinbutton))));
+			   GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton))));
 	}
-	else	
+	else
 	{
-		gtk_widget_set_sensitive (dlg->line_numbers_hbox, FALSE);
+		gtk_widget_set_sensitive (dlg->priv->line_numbers_hbox, FALSE);
 		gedit_prefs_manager_set_print_line_numbers (0);
 	}
 }
 
 static void
-line_numbers_spinbutton_value_changed (GtkSpinButton *spin_button, GeditPageSetupDialog *dlg)
+line_numbers_spinbutton_value_changed (GtkSpinButton        *spin_button,
+				       GeditPageSetupDialog *dlg)
 {
-	g_return_if_fail (spin_button == GTK_SPIN_BUTTON (dlg->line_numbers_spinbutton));
+	g_return_if_fail (spin_button == GTK_SPIN_BUTTON (dlg->priv->line_numbers_spinbutton));
 
 	old_line_numbers_value = MAX (1, gtk_spin_button_get_value_as_int (spin_button));
 
@@ -167,40 +187,37 @@ line_numbers_spinbutton_value_changed (GtkSpinButton *spin_button, GeditPageSetu
 }
 
 static void
-wrap_mode_checkbutton_toggled (GtkToggleButton *button, GeditPageSetupDialog *dlg)
+wrap_mode_checkbutton_toggled (GtkToggleButton      *button,
+			       GeditPageSetupDialog *dlg)
 {
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->text_wrapping_checkbutton)))
+	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->text_wrapping_checkbutton)))
 	{
 		gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_NONE);
 		
-		gtk_widget_set_sensitive (dlg->do_not_split_checkbutton, 
+		gtk_widget_set_sensitive (dlg->priv->do_not_split_checkbutton, 
 					  FALSE);
 		gtk_toggle_button_set_inconsistent (
-			GTK_TOGGLE_BUTTON (dlg->do_not_split_checkbutton), TRUE);
-
+			GTK_TOGGLE_BUTTON (dlg->priv->do_not_split_checkbutton), TRUE);
 	}
 	else
 	{
-		gtk_widget_set_sensitive (dlg->do_not_split_checkbutton, 
-					  TRUE);
+		gtk_widget_set_sensitive (dlg->priv->do_not_split_checkbutton, TRUE);
 
 		gtk_toggle_button_set_inconsistent (
-			GTK_TOGGLE_BUTTON (dlg->do_not_split_checkbutton), FALSE);
+			GTK_TOGGLE_BUTTON (dlg->priv->do_not_split_checkbutton), FALSE);
 
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->do_not_split_checkbutton)))
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dlg->priv->do_not_split_checkbutton)))
 		{
 			split_button_state = TRUE;
-			
+
 			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_WORD);
 		}
 		else
 		{
 			split_button_state = FALSE;
-			
+
 			gedit_prefs_manager_set_print_wrap_mode (GTK_WRAP_CHAR);
-		}
-			
+		}	
 	}
 }
 
@@ -212,38 +229,38 @@ setup_general_page (GeditPageSetupDialog *dialog)
 	GtkWrapMode wrap_mode;
 	
 	/* Print syntax */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->syntax_checkbutton),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->syntax_checkbutton),
 				      gedit_prefs_manager_get_print_syntax_hl ());
-	gtk_widget_set_sensitive (dialog->syntax_checkbutton,
+	gtk_widget_set_sensitive (dialog->priv->syntax_checkbutton,
 				  gedit_prefs_manager_print_syntax_hl_can_set ());
 	 
 	/* Print page headers */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->page_header_checkbutton),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->page_header_checkbutton),
 				      gedit_prefs_manager_get_print_header ());
-	gtk_widget_set_sensitive (dialog->page_header_checkbutton,
+	gtk_widget_set_sensitive (dialog->priv->page_header_checkbutton,
 				  gedit_prefs_manager_print_header_can_set ());
 	
 	/* Line numbers */
 	line_numbers =  gedit_prefs_manager_get_print_line_numbers ();
 	can_set = gedit_prefs_manager_print_line_numbers_can_set ();
 	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->line_numbers_checkbutton),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (dialog->priv->line_numbers_checkbutton),
 				      line_numbers > 0);
-	gtk_widget_set_sensitive (dialog->line_numbers_checkbutton,
+	gtk_widget_set_sensitive (dialog->priv->line_numbers_checkbutton,
 				  can_set);
 
 	if (line_numbers > 0)
 	{
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->line_numbers_spinbutton),
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->priv->line_numbers_spinbutton),
 					   (guint) line_numbers);
-		gtk_widget_set_sensitive (dialog->line_numbers_hbox, 
+		gtk_widget_set_sensitive (dialog->priv->line_numbers_hbox, 
 					  can_set);	
 	}
 	else
 	{
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->line_numbers_spinbutton),
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (dialog->priv->line_numbers_spinbutton),
 					   (guint)old_line_numbers_value);
-		gtk_widget_set_sensitive (dialog->line_numbers_hbox, FALSE);
+		gtk_widget_set_sensitive (dialog->priv->line_numbers_hbox, FALSE);
 	}
 
 	/* Text wrapping */
@@ -251,127 +268,137 @@ setup_general_page (GeditPageSetupDialog *dialog)
 
 	switch (wrap_mode )
 	{
-		case GTK_WRAP_WORD:
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dialog->text_wrapping_checkbutton), TRUE);
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dialog->do_not_split_checkbutton), TRUE);
-			break;
-		case GTK_WRAP_CHAR:
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dialog->text_wrapping_checkbutton), TRUE);
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dialog->do_not_split_checkbutton), FALSE);
-			break;
-		default:
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dialog->text_wrapping_checkbutton), FALSE);
-			gtk_toggle_button_set_active (
-				GTK_TOGGLE_BUTTON (dialog->do_not_split_checkbutton), 
-				split_button_state);
-			gtk_toggle_button_set_inconsistent (
-				GTK_TOGGLE_BUTTON (dialog->do_not_split_checkbutton), TRUE);
-
+	case GTK_WRAP_WORD:
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dialog->priv->text_wrapping_checkbutton), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dialog->priv->do_not_split_checkbutton), TRUE);
+		break;
+	case GTK_WRAP_CHAR:
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dialog->priv->text_wrapping_checkbutton), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dialog->priv->do_not_split_checkbutton), FALSE);
+		break;
+	default:
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dialog->priv->text_wrapping_checkbutton), FALSE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (dialog->priv->do_not_split_checkbutton), 
+			split_button_state);
+		gtk_toggle_button_set_inconsistent (
+			GTK_TOGGLE_BUTTON (dialog->priv->do_not_split_checkbutton), TRUE);
 	}
 
 	can_set = gedit_prefs_manager_print_wrap_mode_can_set ();
 
-	gtk_widget_set_sensitive (dialog->text_wrapping_checkbutton, 
+	gtk_widget_set_sensitive (dialog->priv->text_wrapping_checkbutton, 
 				  can_set);
 
-	gtk_widget_set_sensitive (dialog->do_not_split_checkbutton, 
+	gtk_widget_set_sensitive (dialog->priv->do_not_split_checkbutton, 
 				  can_set && (wrap_mode != GTK_WRAP_NONE));
 
-	g_signal_connect (G_OBJECT (dialog->syntax_checkbutton), "toggled", 
-			  G_CALLBACK (syntax_checkbutton_toggled), dialog);
-	
-	g_signal_connect (G_OBJECT (dialog->page_header_checkbutton), "toggled", 
-			  G_CALLBACK (page_header_checkbutton_toggled), dialog);
-
-	g_signal_connect (G_OBJECT (dialog->line_numbers_checkbutton), "toggled", 
-			  G_CALLBACK (line_numbers_checkbutton_toggled), dialog);
-
-	g_signal_connect (G_OBJECT (dialog->line_numbers_spinbutton), "value_changed",
-			  G_CALLBACK (line_numbers_spinbutton_value_changed), dialog);
-
-	g_signal_connect (G_OBJECT (dialog->text_wrapping_checkbutton), "toggled", 
-			  G_CALLBACK (wrap_mode_checkbutton_toggled), dialog);
-	
-	g_signal_connect (G_OBJECT (dialog->do_not_split_checkbutton), "toggled", 
-			  G_CALLBACK (wrap_mode_checkbutton_toggled), dialog);
-	
+	g_signal_connect (dialog->priv->syntax_checkbutton,
+			  "toggled",
+			  G_CALLBACK (syntax_checkbutton_toggled),
+			  dialog);
+	g_signal_connect (dialog->priv->page_header_checkbutton,
+			  "toggled",
+			  G_CALLBACK (page_header_checkbutton_toggled),
+			  dialog);
+	g_signal_connect (dialog->priv->line_numbers_checkbutton,
+			  "toggled",
+			  G_CALLBACK (line_numbers_checkbutton_toggled),
+			  dialog);
+	g_signal_connect (dialog->priv->line_numbers_spinbutton,
+			  "value_changed",
+			  G_CALLBACK (line_numbers_spinbutton_value_changed),
+			  dialog);
+	g_signal_connect (dialog->priv->text_wrapping_checkbutton,
+			  "toggled",
+			  G_CALLBACK (wrap_mode_checkbutton_toggled),
+			  dialog);
+	g_signal_connect (dialog->priv->do_not_split_checkbutton,
+			  "toggled",
+			  G_CALLBACK (wrap_mode_checkbutton_toggled),
+			  dialog);
 }
 
 static void
-restore_button_clicked (GtkButton *button, GeditPageSetupDialog *dlg)
+restore_button_clicked (GtkButton            *button,
+			GeditPageSetupDialog *dlg)
 {
-	g_return_if_fail (dlg->body_fontbutton != NULL);
-	g_return_if_fail (dlg->headers_fontbutton != NULL);
-	g_return_if_fail (dlg->numbers_fontbutton != NULL);
+	g_return_if_fail (dlg->priv->body_fontbutton != NULL);
+	g_return_if_fail (dlg->priv->headers_fontbutton != NULL);
+	g_return_if_fail (dlg->priv->numbers_fontbutton != NULL);
 
 	if (gedit_prefs_manager_print_font_body_can_set ())
 	{
 		const gchar* font = gedit_prefs_manager_get_default_print_font_body ();
 
 		gtk_font_button_set_font_name (
-				GTK_FONT_BUTTON (dlg->body_fontbutton),
+				GTK_FONT_BUTTON (dlg->priv->body_fontbutton),
 				font);
-		
+
 		gedit_prefs_manager_set_print_font_body (font);
 	}
 	
 	if (gedit_prefs_manager_print_font_header_can_set ())
 	{
-		const gchar* font = gedit_prefs_manager_get_default_print_font_header ();
+		const gchar *font;
+
+		font = gedit_prefs_manager_get_default_print_font_header ();
 
 		gtk_font_button_set_font_name (
-				GTK_FONT_BUTTON (dlg->headers_fontbutton),
+				GTK_FONT_BUTTON (dlg->priv->headers_fontbutton),
 				font);
-		
+
 		gedit_prefs_manager_set_print_font_header (font);
 	}
-		
+
 	if (gedit_prefs_manager_print_font_numbers_can_set ())
 	{
-		const gchar* font = gedit_prefs_manager_get_default_print_font_numbers ();
-		
+		const gchar *font;
+
+		font = gedit_prefs_manager_get_default_print_font_numbers ();
+
 		gtk_font_button_set_font_name (
-				GTK_FONT_BUTTON (dlg->numbers_fontbutton),
+				GTK_FONT_BUTTON (dlg->priv->numbers_fontbutton),
 				font);
-		
+
 		gedit_prefs_manager_set_print_font_numbers (font);
 	}
 }
 
 static void
-body_font_button_font_set (GtkFontButton *fb, 
+body_font_button_font_set (GtkFontButton        *fb,
 			   GeditPageSetupDialog *dlg)
 {
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
-	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->body_fontbutton));
+	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->priv->body_fontbutton));
 
 	gedit_prefs_manager_set_print_font_body (gtk_font_button_get_font_name (fb));
 }
 
 static void
-headers_font_button_font_set (GtkFontButton *fb, 
+headers_font_button_font_set (GtkFontButton        *fb,
 			      GeditPageSetupDialog *dlg)
 {
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
-	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->headers_fontbutton));
+	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->priv->headers_fontbutton));
 
 	gedit_prefs_manager_set_print_font_header (gtk_font_button_get_font_name (fb));
 }
 
 static void
-numbers_font_button_font_set (GtkFontButton *fb,
+numbers_font_button_font_set (GtkFontButton        *fb,
 			      GeditPageSetupDialog *dlg)
 {
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
-	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->numbers_fontbutton));
+	g_return_if_fail (fb == GTK_FONT_BUTTON (dlg->priv->numbers_fontbutton));
 
 	gedit_prefs_manager_set_print_font_numbers (gtk_font_button_get_font_name (fb));
 }
@@ -387,6 +414,8 @@ font_button_new (void)
 	gtk_font_button_set_show_style (GTK_FONT_BUTTON (button), FALSE);
 	gtk_font_button_set_show_size (GTK_FONT_BUTTON (button), TRUE);
 
+	gtk_widget_show (button);
+
 	return button;
 }
 
@@ -396,42 +425,37 @@ setup_font_page (GeditPageSetupDialog *dlg)
 	gboolean can_set;
 	gchar* font;
 
-	gedit_debug (DEBUG_PRINT, "");
-
 	/* Body font button */
-	dlg->body_fontbutton = font_button_new ();
+	dlg->priv->body_fontbutton = font_button_new ();
 
-	gtk_table_attach_defaults (GTK_TABLE (dlg->fonts_table), 
-			dlg->body_fontbutton, 1, 2, 0, 1);
+	gtk_table_attach_defaults (GTK_TABLE (dlg->priv->fonts_table), 
+			dlg->priv->body_fontbutton, 1, 2, 0, 1);
 	
 	/* Headers font button */
-	dlg->headers_fontbutton = font_button_new ();
+	dlg->priv->headers_fontbutton = font_button_new ();
 
-	gtk_table_attach_defaults (GTK_TABLE (dlg->fonts_table), 
-			dlg->headers_fontbutton, 1, 2, 2, 3);
+	gtk_table_attach_defaults (GTK_TABLE (dlg->priv->fonts_table), 
+			dlg->priv->headers_fontbutton, 1, 2, 2, 3);
 
 	/* Numbers font button */
-	dlg->numbers_fontbutton = font_button_new ();
+	dlg->priv->numbers_fontbutton = font_button_new ();
 
-	gtk_table_attach_defaults (GTK_TABLE (dlg->fonts_table), 
-			dlg->numbers_fontbutton, 1, 2, 1, 2);
+	gtk_table_attach_defaults (GTK_TABLE (dlg->priv->fonts_table), 
+			dlg->priv->numbers_fontbutton, 1, 2, 1, 2);
 
-	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->body_font_label), 
-				       dlg->body_fontbutton);
-	
-	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->headers_font_label), 
-				       dlg->headers_fontbutton);
-
-	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->numbers_font_label), 
-				       dlg->numbers_fontbutton);
-
+	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->priv->body_font_label), 
+				       dlg->priv->body_fontbutton);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->priv->headers_font_label), 
+				       dlg->priv->headers_fontbutton);
+	gtk_label_set_mnemonic_widget (GTK_LABEL (dlg->priv->numbers_font_label), 
+				       dlg->priv->numbers_fontbutton);
 
 	/* Set initial values */
 	font = gedit_prefs_manager_get_print_font_body ();
 	g_return_if_fail (font);
 
 	gtk_font_button_set_font_name (
-			GTK_FONT_BUTTON (dlg->body_fontbutton),
+			GTK_FONT_BUTTON (dlg->priv->body_fontbutton),
 			font);
 	
 	g_free (font);
@@ -440,7 +464,7 @@ setup_font_page (GeditPageSetupDialog *dlg)
 	g_return_if_fail (font);
 
 	gtk_font_button_set_font_name (
-			GTK_FONT_BUTTON (dlg->headers_fontbutton),
+			GTK_FONT_BUTTON (dlg->priv->headers_fontbutton),
 			font);
 
 	g_free (font);
@@ -449,153 +473,126 @@ setup_font_page (GeditPageSetupDialog *dlg)
 	g_return_if_fail (font);
 	
 	gtk_font_button_set_font_name (
-			GTK_FONT_BUTTON (dlg->numbers_fontbutton),
+			GTK_FONT_BUTTON (dlg->priv->numbers_fontbutton),
 			font);
 
 	g_free (font);
 
-	/* Set widgets sensitivity */
 	can_set = gedit_prefs_manager_print_font_body_can_set ();
-	gtk_widget_set_sensitive (dlg->body_fontbutton, can_set);
-	gtk_widget_set_sensitive (dlg->body_font_label, can_set);
-		  
+	gtk_widget_set_sensitive (dlg->priv->body_fontbutton, can_set);
+	gtk_widget_set_sensitive (dlg->priv->body_font_label, can_set);
+
 	can_set = gedit_prefs_manager_print_font_header_can_set ();
-	gtk_widget_set_sensitive (dlg->headers_fontbutton, can_set);
-	gtk_widget_set_sensitive (dlg->headers_font_label, can_set);
+	gtk_widget_set_sensitive (dlg->priv->headers_fontbutton, can_set);
+	gtk_widget_set_sensitive (dlg->priv->headers_font_label, can_set);
 
 	can_set = gedit_prefs_manager_print_font_numbers_can_set ();
-	gtk_widget_set_sensitive (dlg->numbers_fontbutton, can_set);
-	gtk_widget_set_sensitive (dlg->numbers_font_label, can_set);
-	
-	/* Connect signals */
-	g_signal_connect (G_OBJECT (dlg->restore_button), "clicked",
+	gtk_widget_set_sensitive (dlg->priv->numbers_fontbutton, can_set);
+	gtk_widget_set_sensitive (dlg->priv->numbers_font_label, can_set);
+
+	g_signal_connect (dlg->priv->restore_button,
+			  "clicked",
 			  G_CALLBACK (restore_button_clicked),
 			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->body_fontbutton), "font_set", 
+	g_signal_connect (dlg->priv->body_fontbutton,
+			  "font_set", 
 			  G_CALLBACK (body_font_button_font_set), 
 			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->headers_fontbutton), "font_set", 
+	g_signal_connect (dlg->priv->headers_fontbutton,
+			  "font_set", 
 			  G_CALLBACK (headers_font_button_font_set), 
 			  dlg);
-
-	g_signal_connect (G_OBJECT (dlg->numbers_fontbutton), "font_set", 
+	g_signal_connect (dlg->priv->numbers_fontbutton,
+			  "font_set", 
 			  G_CALLBACK (numbers_font_button_font_set), 
 			  dlg);
 }
 
-static GeditPageSetupDialog *
-page_setup_get_dialog (GtkWindow *parent)
+static void
+gedit_page_setup_dialog_init (GeditPageSetupDialog *dlg)
 {
-	static GeditPageSetupDialog *dialog = NULL;
-	GladeXML *gui;
-	
-	gedit_debug (DEBUG_PRINT, "");
+	GtkWidget *content = NULL;
+	GtkWidget *error_widget = NULL;
+	gboolean ret = FALSE;
 
-	if (dialog != NULL)
+	dlg->priv = GEDIT_PAGE_SETUP_DIALOG_GET_PRIVATE (dlg);
+
+	gtk_dialog_add_buttons (GTK_DIALOG (dlg),
+				GTK_STOCK_CLOSE,
+				GTK_RESPONSE_CLOSE,
+				GTK_STOCK_HELP,
+				GTK_RESPONSE_HELP,
+				NULL);
+
+	gtk_window_set_title (GTK_WINDOW (dlg), _("Page Setup"));
+	gtk_window_set_resizable (GTK_WINDOW (dlg), FALSE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (dlg), FALSE);
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (dlg), TRUE);
+
+	gtk_dialog_set_default_response (GTK_DIALOG (dlg),
+					 GTK_RESPONSE_CLOSE);
+
+	g_signal_connect (G_OBJECT (dlg),
+			  "response",
+ 			  G_CALLBACK (dialog_response_handler),
+			  NULL);
+
+	ret = gedit_utils_get_glade_widgets (GEDIT_GLADEDIR "gedit-page-setup-dialog.glade",
+					     "notebook1",
+					     &error_widget,
+					     "notebook1", &content,
+					     "syntax_checkbutton", &dlg->priv->syntax_checkbutton,
+					     "page_header_checkbutton", &dlg->priv->page_header_checkbutton,
+					     "line_numbers_checkbutton", &dlg->priv->line_numbers_checkbutton,
+					     "line_numbers_hbox", &dlg->priv->line_numbers_hbox,
+					     "line_numbers_spinbutton", &dlg->priv->line_numbers_spinbutton,
+					     "text_wrapping_checkbutton", &dlg->priv->text_wrapping_checkbutton,
+					     "do_not_split_checkbutton", &dlg->priv->do_not_split_checkbutton,
+					     "fonts_table", &dlg->priv->fonts_table,
+					     "body_font_label", &dlg->priv->body_font_label,
+					     "headers_font_label", &dlg->priv->headers_font_label,
+					     "numbers_font_label", &dlg->priv->numbers_font_label,
+					     "restore_button", &dlg->priv->restore_button,
+					     NULL);
+
+	if (!ret)
 	{
-		gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-					      parent);
-		gtk_window_present (GTK_WINDOW (dialog->dialog));
+		gtk_widget_show (error_widget);
+			
+		gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+					     error_widget);
 
-		return dialog;
+		return;
 	}
 
-	gui = glade_xml_new (GEDIT_GLADEDIR "page-setup-dialog.glade2",
-			     "dialog", NULL);
-	if (!gui)
-	{
-		gedit_warning (parent,
-			       MISSING_FILE,
-			       GEDIT_GLADEDIR "page-setup-dialog.glade2");
-		return NULL;
-	}
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox),
+			    content, FALSE, FALSE, 0);
 
-	dialog = g_new0 (GeditPageSetupDialog, 1);
-
-	dialog->dialog = glade_xml_get_widget (gui, "dialog");
-	
-	dialog->syntax_checkbutton = glade_xml_get_widget (gui, "syntax_checkbutton");
-	dialog->page_header_checkbutton = glade_xml_get_widget (gui, "page_header_checkbutton");
-	
-	dialog->line_numbers_checkbutton = glade_xml_get_widget (gui, "line_numbers_checkbutton");
-	dialog->line_numbers_hbox = glade_xml_get_widget (gui, "line_numbers_hbox");
-	dialog->line_numbers_spinbutton = glade_xml_get_widget (gui, "line_numbers_spinbutton");
-
-	dialog->text_wrapping_checkbutton = glade_xml_get_widget (gui, "text_wrapping_checkbutton");
-	dialog->do_not_split_checkbutton = glade_xml_get_widget (gui, "do_not_split_checkbutton");
-
-	dialog->fonts_table = glade_xml_get_widget (gui, "fonts_table");
-	
-	dialog->body_font_label = glade_xml_get_widget (gui, "body_font_label");
-	dialog->headers_font_label = glade_xml_get_widget (gui,	"headers_font_label");
-	dialog->numbers_font_label = glade_xml_get_widget (gui,	"numbers_font_label");
-
-	dialog->restore_button = glade_xml_get_widget (gui, "restore_button");	
-
-	if (!dialog->dialog 			|| 
-	    !dialog->syntax_checkbutton		||
-	    !dialog->page_header_checkbutton 	||
-	    !dialog->line_numbers_checkbutton 	||
-	    !dialog->line_numbers_hbox 		||
-	    !dialog->line_numbers_spinbutton 	||
-	    !dialog->text_wrapping_checkbutton	||
-	    !dialog->do_not_split_checkbutton 	||
-	    !dialog->fonts_table 		||
-	    !dialog->body_font_label		||
-	    !dialog->headers_font_label		||
-	    !dialog->numbers_font_label		||
-	    !dialog->restore_button)
-	{
-		gedit_warning (parent,
-			       MISSING_WIDGETS,
-			       GEDIT_GLADEDIR "page-setup-dialog.glade2");
-
-		if (!dialog->dialog)
-			gtk_widget_destroy (dialog->dialog);
-		
-		g_object_unref (gui);
-		g_free (dialog);
-		dialog = NULL;
-
-		return NULL;
-	}
-
-	setup_general_page (dialog);
-	setup_font_page (dialog);
-	
-	gtk_window_set_transient_for (GTK_WINDOW (dialog->dialog),
-				      parent);
-
-	g_signal_connect (G_OBJECT (dialog->dialog), "destroy",
-			  G_CALLBACK (dialog_destroyed), &dialog);
-
-	g_signal_connect (G_OBJECT (dialog->dialog), "response",
-			  G_CALLBACK (dialog_response_handler), dialog);
-
-	g_object_unref (gui);
-
-	gtk_window_set_resizable (GTK_WINDOW (dialog->dialog), FALSE);
-
-	return dialog;
-
+	setup_general_page (dlg);
+	setup_font_page (dlg);
 }
 
 void
 gedit_show_page_setup_dialog (GtkWindow *parent)
 {
-	GeditPageSetupDialog *dialog;
+	g_return_if_fail (GTK_IS_WINDOW (parent));
 
-	gedit_debug (DEBUG_PRINT, "");
+	if (page_setup_dialog == NULL)
+	{
+		page_setup_dialog = GTK_WIDGET (g_object_new (GEDIT_TYPE_PAGE_SETUP_DIALOG, NULL));
+		g_signal_connect (page_setup_dialog,
+				  "destroy",
+				  G_CALLBACK (gtk_widget_destroyed),
+				  &page_setup_dialog);
+	}
 
-	g_return_if_fail (parent != NULL);
+	if (parent != gtk_window_get_transient_for (GTK_WINDOW (page_setup_dialog)))
+	{
+		gtk_window_set_transient_for (GTK_WINDOW (page_setup_dialog),
+					      parent);
+		gtk_window_set_destroy_with_parent (GTK_WINDOW (page_setup_dialog),
+						    TRUE);
+	}
 
-	dialog = page_setup_get_dialog (parent);
-	if (!dialog)
-		return;
-
-	if (!GTK_WIDGET_VISIBLE (dialog->dialog))
-		gtk_widget_show_all (dialog->dialog);
+	gtk_window_present (GTK_WINDOW (page_setup_dialog));
 }
-

@@ -82,7 +82,7 @@ item_free (gpointer data)
 	
 	g_return_if_fail (data != NULL);
 
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	item = (Item *)data;
 
@@ -95,7 +95,7 @@ item_free (gpointer data)
 static gboolean
 gedit_metadata_manager_init (void)
 {
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	if (gedit_metadata_manager != NULL)
 		return TRUE;
@@ -125,7 +125,7 @@ gedit_metadata_manager_init (void)
 void
 gedit_metadata_manager_shutdown (void)
 {
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	if (gedit_metadata_manager == NULL)
 		return;
@@ -149,7 +149,7 @@ parseItem (xmlDocPtr doc, xmlNodePtr cur)
 	xmlChar *uri;
 	xmlChar *atime;
 	
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	if (xmlStrcmp (cur->name, (const xmlChar *)"document") != 0)
 			return;
@@ -215,7 +215,7 @@ load_values ()
 	xmlNodePtr cur;
 	gchar *file_name;
 
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	g_return_val_if_fail (gedit_metadata_manager != NULL, FALSE);
 	g_return_val_if_fail (gedit_metadata_manager->values_loaded == FALSE, FALSE);
@@ -279,7 +279,7 @@ gedit_metadata_manager_get (const gchar *uri,
 	Item *item;
 	gchar *value;
 	
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	g_return_val_if_fail (uri != NULL, NULL);
 	g_return_val_if_fail (key != NULL, NULL);
@@ -323,7 +323,7 @@ gedit_metadata_manager_set (const gchar *uri,
 {
 	Item *item;
 
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	g_return_if_fail (uri != NULL);
 	g_return_if_fail (key != NULL);
@@ -376,7 +376,7 @@ save_values (const gchar *key, const gchar *value, xmlNodePtr parent)
 {
 	xmlNodePtr xml_node;
 	
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	g_return_if_fail (key != NULL);
 	
@@ -388,7 +388,7 @@ save_values (const gchar *key, const gchar *value, xmlNodePtr parent)
 	xmlSetProp (xml_node, "key", key);
 	xmlSetProp (xml_node, "value", value);
 
-	gedit_debug (DEBUG_METADATA, "entry: %s = %s", key, value);
+	gedit_debug_message (DEBUG_METADATA, "entry: %s = %s", key, value);
 }
 
 static void
@@ -398,7 +398,7 @@ save_item (const gchar *key, const gpointer *data, xmlNodePtr parent)
 	const Item *item = (const Item *)data;
 	gchar *atime;
 
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 
 	g_return_if_fail (key != NULL);
 	
@@ -409,13 +409,13 @@ save_item (const gchar *key, const gpointer *data, xmlNodePtr parent)
 	
 	xmlSetProp (xml_node, "uri", key);
 
-	gedit_debug (DEBUG_METADATA, "uri: %s", key);
+	gedit_debug_message (DEBUG_METADATA, "uri: %s", key);
 
 	/* FIXME: is the cast right? - Paolo */
 	atime = g_strdup_printf ("%d", (int)item->atime);
 	xmlSetProp (xml_node, "atime", atime);	
 
-	gedit_debug (DEBUG_METADATA, "atime: %s", atime);
+	gedit_debug_message (DEBUG_METADATA, "atime: %s", atime);
 
 	g_free (atime);
 
@@ -472,7 +472,7 @@ gedit_metadata_manager_save (gpointer data)
 	xmlNodePtr root;
 	gchar *file_name;
 
-	gedit_debug (DEBUG_METADATA, "");
+	gedit_debug (DEBUG_METADATA);
 	
 	if (!gedit_metadata_manager->modified)
 		return TRUE;
@@ -501,8 +501,8 @@ gedit_metadata_manager_save (gpointer data)
 
 	gedit_metadata_manager->modified = FALSE;
 
-	gedit_debug (DEBUG_METADATA, "DONE");
-
+	gedit_debug_message (DEBUG_METADATA, "DONE");
+	
 	return TRUE;
 }
 

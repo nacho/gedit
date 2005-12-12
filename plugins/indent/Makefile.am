@@ -1,4 +1,4 @@
-# INDENT plugin
+# indent plugin
 plugindir = $(libdir)/gedit-2/plugins
 
 INCLUDES = \
@@ -6,13 +6,20 @@ INCLUDES = \
 	$(GEDIT_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)			\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
 
 plugin_LTLIBRARIES = libindent.la
 
-libindent_la_SOURCES = indent.c
+libindent_la_SOURCES = \
+	gedit-indent-plugin.h	\
+	gedit-indent-plugin.c
+
 libindent_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+
+gladedir = $(datadir)/gedit-2/glade
+glade_DATA =
 
 plugin_in_files = indent.gedit-plugin.desktop.in
 
@@ -20,7 +27,8 @@ plugin_in_files = indent.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+EXTRA_DIST = $(glade_DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
-	
+DISTCLEANFILES = $(plugin_DATA)
+

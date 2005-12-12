@@ -1,9 +1,8 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-plugin.h
  * This file is part of gedit
  *
- * Copyright (C) 2002 Paolo Maggi 
+ * Copyright (C) 2002-2005 Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,9 +21,11 @@
  */
  
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -32,19 +33,80 @@
 #endif
 
 #include "gedit-plugin.h"
-#include "dialogs/gedit-dialogs.h"
 
-gchar* 
-gedit_plugin_locate_program  (const gchar *program_name, 
-			      const gchar *plugin_name, 
-			      GtkWindow   *parent, 
-			      const gchar *gconf_key,
-			      const gchar *help_id)
+G_DEFINE_TYPE(GeditPlugin, gedit_plugin, G_TYPE_OBJECT)
+
+static void
+dummy (GeditPlugin *plugin, GeditWindow *window)
 {
-	return gedit_plugin_program_location_dialog (program_name, 
-						     plugin_name, 
-						     parent, 
-						     gconf_key, 
-						     help_id);
+	/* Empty */
 }
 
+static GtkWidget *
+create_configure_dialog	(GeditPlugin *plugin)
+{
+	return NULL;
+}
+
+static void 
+gedit_plugin_class_init (GeditPluginClass *klass)
+{
+	klass->activate = dummy;
+	klass->deactivate = dummy;
+	klass->update_ui = dummy;
+	
+	klass->create_configure_dialog = create_configure_dialog;
+}
+
+static void
+gedit_plugin_init (GeditPlugin *plugin)
+{
+	/* Empty */
+}
+
+void
+gedit_plugin_activate (GeditPlugin *plugin,
+		       GeditWindow *window)
+{
+	g_return_if_fail (GEDIT_IS_PLUGIN (plugin));
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+	
+	GEDIT_PLUGIN_GET_CLASS (plugin)->activate (plugin, window);
+}
+
+void
+gedit_plugin_deactivate	(GeditPlugin *plugin,
+			 GeditWindow *window)
+{
+	g_return_if_fail (GEDIT_IS_PLUGIN (plugin));
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+
+	GEDIT_PLUGIN_GET_CLASS (plugin)->deactivate (plugin, window);
+}
+				 
+void
+gedit_plugin_update_ui	(GeditPlugin *plugin,
+			 GeditWindow *window)
+{
+	g_return_if_fail (GEDIT_IS_PLUGIN (plugin));
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+
+	GEDIT_PLUGIN_GET_CLASS (plugin)->update_ui (plugin, window);
+}
+
+gboolean
+gedit_plugin_is_configurable (GeditPlugin *plugin)
+{
+	g_return_val_if_fail (GEDIT_IS_PLUGIN (plugin), FALSE);
+
+	return (GEDIT_PLUGIN_GET_CLASS (plugin)->create_configure_dialog !=
+		create_configure_dialog);
+}
+
+GtkWidget *
+gedit_plugin_create_configure_dialog (GeditPlugin *plugin)
+{
+	g_return_val_if_fail (GEDIT_IS_PLUGIN (plugin), NULL);
+	
+	return GEDIT_PLUGIN_GET_CLASS (plugin)->create_configure_dialog (plugin);
+}

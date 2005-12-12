@@ -11,12 +11,15 @@ INCLUDES = 							\
 	$(GEDIT_CFLAGS) 					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 		\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
 
 plugin_LTLIBRARIES = libspell.la
 
-libspell_la_SOURCES = spell.c 				\
+libspell_la_SOURCES = \
+	gedit-spell-plugin.c 				\
+	gedit-spell-plugin.h 				\
 	gedit-spell-checker.c 				\
 	gedit-spell-checker.h				\
 	gedit-spell-checker-dialog.c			\
@@ -25,7 +28,7 @@ libspell_la_SOURCES = spell.c 				\
 	gedit-spell-language-dialog.h			\
 	gedit-automatic-spell-checker.c			\
 	gedit-automatic-spell-checker.h			\
-	$(BUILT_SOURCES)				
+	$(BUILT_SOURCES)			
 
 libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
 libspell_la_LIBADD =  $(PSPELL_LIBS)

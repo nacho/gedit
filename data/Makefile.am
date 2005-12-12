@@ -13,14 +13,6 @@ schemas_in_files = gedit.schemas.in
 schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
 
-bonobodir = $(libdir)/bonobo
-serverdir = $(libdir)/bonobo/servers
-server_in_files = GNOME_Gedit.server.in.in
-server_DATA = $(server_in_files:.server.in.in=.server)
-$(server_in_files:.server.in.in=.server.in): $(server_in_files)
-	sed -e "s|\@BONOBODIR\@|$(bonobodir)|" $< > $@
-@INTLTOOL_SERVER_RULE@
-
 man_MANS = gedit.1
 
 app_DATA = gedit.applications
@@ -47,7 +39,6 @@ EXTRA_DIST = 				\
 	$(desktop_in_files)		\
 	$(keys_in_files)		\
 	$(schemas_in_files)		\
-	$(server_in_files)		\
 	$(man_MANS)			\
 	$(app_DATA)			\
 	gedit.pc.in
@@ -56,10 +47,7 @@ CLEANFILES =	 			\
 	$(desktop_DATA)			\
 	$(keys_DATA)			\
 	$(schemas_DATA)			\
-	$(server_DATA)			\
-	$(pkgconfig_DATA)		\
-	GNOME_Gedit.server.in		\
-	GNOME_Gedit.server
+	$(pkgconfig_DATA)
 
 
 

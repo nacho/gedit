@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-encodings.c
  * This file is part of gedit
@@ -25,6 +24,8 @@
  * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
@@ -294,8 +295,7 @@ gedit_encoding_lazy_init (void)
 
 		/* Translate the names */
 		encodings[i].name = _(encodings[i].name);
-      
-		
+
 		++i;
     	}
 
@@ -440,4 +440,67 @@ gedit_encoding_get_name (const GeditEncoding* enc)
 
 	return (enc->name == NULL) ? _("Unknown") : enc->name;
 }
+
+/**
+ * gedit_encoding_get_type:
+ * 
+ * Retrieves the GType object which is associated with the
+ * #GeditEncoding class.
+ * 
+ * Return value: the GType associated with #GeditEncoding.
+ **/
+GType 
+gedit_encoding_get_type (void)
+{
+	static GType our_type = 0;
+
+	if (!our_type)
+		our_type = g_boxed_type_register_static (
+			"GeditEncoding",
+			(GBoxedCopyFunc) gedit_encoding_copy,
+			(GBoxedFreeFunc) gedit_encoding_free);
+
+	return our_type;
+} 
+
+/**
+ * gedit_encoding_copy:
+ * @enc: a #GeditEncoding.
+ * 
+ * Makes a copy of the given encoding.
+ * This function is used by language bindings.
+ *
+ * Return value: a new #GeditEncoding.
+ **/
+GeditEncoding *
+gedit_encoding_copy (const GeditEncoding *enc)
+{
+	GeditEncoding *new_enc;
+
+	g_return_val_if_fail (enc != NULL, NULL);
+	
+	new_enc = g_new0 (GeditEncoding, 1);
+	*new_enc = *enc;
+
+	return new_enc;
+}
+
+
+/**
+ * gedit_encoding_free:
+ * @enc: a #GeditEncoding.
+ * 
+ * Frees the resources allocated by the given encoding.
+ * This function is used by language bindings.
+ **/
+void 
+gedit_encoding_free (GeditEncoding *enc)
+{
+	g_return_if_fail (enc != NULL);
+	
+	g_free (enc);
+}
+
+
+
 

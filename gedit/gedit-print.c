@@ -1,10 +1,9 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
  * gedit-print.c
  * This file is part of gedit
  *
- * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi
- * Copyright (C) 2002  Paolo Maggi  
+ * Copyright (C) 2000-2001 Chema Celorio, Paolo Maggi
+ * Copyright (C) 2002-2005 Paolo Maggi  
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +22,19 @@
  */
  
 /*
- * Modified by the gedit Team, 1998-2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+
+#include <glib/gi18n.h>
+#include <libgnome/gnome-util.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -38,72 +42,31 @@
 #include <unistd.h>
 #include <string.h>	/* For strlen */
 
-#include <glib/gi18n.h>
-#include <libgnome/gnome-util.h>
-#include <libgnomeprintui/gnome-print-dialog.h>
-#include <libgnomeprintui/gnome-print-job-preview.h>
-#include <gtksourceview/gtksourceprintjob.h>
-
-#include "gedit2.h"
 #include "gedit-print.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
-#include "gedit-document.h"
 #include "gedit-prefs-manager-app.h"
+#include "gedit-tab.h"
 
 #define GEDIT_PRINT_CONFIG_FILE "gedit-print-config"
 
-enum
+G_DEFINE_TYPE(GeditPrintJob, gedit_print_job, GTK_TYPE_SOURCE_PRINT_JOB)
+
+static void 
+gedit_print_job_class_init (GeditPrintJobClass *klass)
 {
-	PREVIEW_NO,
-	PREVIEW,
-	PREVIEW_FROM_DIALOG
-};
-
-typedef struct _GeditPrintJobInfo	GeditPrintJobInfo;
-
-struct _GeditPrintJobInfo 
-{
-	GeditDocument     *doc;
-	
-	GtkSourcePrintJob *pjob;
-		
-	gint               preview;
-
-	gint               range_type;
-
-	gint               first_line_to_print;
-	gint               last_line_to_print;
-
-	/* Popup dialog */
-	GtkWidget	  *dialog;
-	GtkWidget         *label;
-	GtkWidget         *progressbar;
-
-	GtkWindow	  *parent;
-};
-
-static GeditPrintJobInfo* gedit_print_job_info_new 	(GeditDocument     *doc);
-static void gedit_print_job_info_destroy		(GeditPrintJobInfo *pji, 
-							 gboolean           save_config);
-static void gedit_print_real 				(GeditPrintJobInfo *pji, 
-							 GtkTextIter       *start, 
-							 GtkTextIter       *end, 
-							 GtkWindow         *parent);
-static void gedit_print_preview_real 			(GeditPrintJobInfo *pji, 
-							 GtkTextIter       *start, 
-							 GtkTextIter       *end, 
-							 GtkWindow         *parent);
+	/* Empty */
+}
 
 static GnomePrintConfig *
-load_gedit_print_config_from_file ()
+load_print_config_from_file ()
 {
 	gchar *file_name;
 	gboolean res;
 	gchar *contents;
 	GnomePrintConfig *gedit_print_config;
 	
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
 	file_name = gnome_util_home_file (GEDIT_PRINT_CONFIG_FILE);
 
@@ -122,7 +85,7 @@ load_gedit_print_config_from_file ()
 }
 
 static void
-save_gedit_print_config_to_file (GnomePrintConfig *gedit_print_config)
+save_print_config_to_file (GnomePrintConfig *gedit_print_config)
 {
 	gint fd;
 	gchar *str;
@@ -131,7 +94,7 @@ save_gedit_print_config_to_file (GnomePrintConfig *gedit_print_config)
 	gchar *file_name;
 	gboolean res;
 
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 
 	g_return_if_fail (gedit_print_config != NULL);
 
@@ -168,340 +131,81 @@ save_error:
 	g_free (str);
 }
 
+#define GEDIT_PRINT_CONFIG "gedit-print-config-key"
 
 static void
-gedit_print_job_info_destroy (GeditPrintJobInfo *pji, gboolean save_config)
+buffer_set (GeditPrintJob *job, GParamSpec *pspec, gpointer d)
 {
-	GnomePrintConfig *config = NULL;
-	
-	gedit_debug (DEBUG_PRINT, "");
-
-	g_return_if_fail (pji != NULL);
-
-	if (pji->pjob != NULL)
-		config = gtk_source_print_job_get_config (pji->pjob);
-	
-	if (config != NULL)
-	{
-		if (save_config)
-			save_gedit_print_config_to_file (config);
-	}
-
-	if (pji->pjob != NULL)
-		g_object_unref (pji->pjob);
-
-	g_free (pji);
-}
-
-static GtkWidget *
-get_print_dialog (GeditPrintJobInfo *pji)
-{
-	GtkWidget *dialog;
-	gint selection_flag;
-	gint lines;
-	GnomePrintConfig *config;
-
-	gedit_debug (DEBUG_PRINT, "");
-
-	g_return_val_if_fail (pji != NULL, NULL);
-	
-	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (pji->doc), NULL, NULL))
-		selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
-	else
-		selection_flag = GNOME_PRINT_RANGE_SELECTION;
-	
-	g_return_val_if_fail(pji->pjob != NULL, NULL);
-	config = gtk_source_print_job_get_config (pji->pjob);
-	
-	dialog = g_object_new (GNOME_TYPE_PRINT_DIALOG, "print_config", config, NULL);
-	
-	gnome_print_dialog_construct (GNOME_PRINT_DIALOG (dialog), 
-				      _("Print"),
-			              GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
-
-	lines = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (pji->doc));
-
-	gnome_print_dialog_construct_range_page ( GNOME_PRINT_DIALOG (dialog),
-						  GNOME_PRINT_RANGE_ALL |
-						  GNOME_PRINT_RANGE_RANGE |
-						  selection_flag,
-						  1, lines, "A", _("Lines"));
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog),
-				      GTK_WINDOW (gedit_get_active_window ()));
-
-	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE); 
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (dialog), TRUE);
-
-	return dialog;
-}
-
-static void
-gedit_print_dialog_response (GtkWidget *dialog, int response, GeditPrintJobInfo *pji)
-{
-	GtkTextIter start, end;
-	gint line_start, line_end;
-
-	pji->range_type = gnome_print_dialog_get_range (GNOME_PRINT_DIALOG (dialog));
-	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (pji->doc), &start, &end);
-
-	switch (pji->range_type)
-	{
-	case GNOME_PRINT_RANGE_ALL:
-		break;
-
-	case GNOME_PRINT_RANGE_SELECTION:
-		gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (pji->doc),
-						      &start, &end);
-		break;
-
-	case GNOME_PRINT_RANGE_RANGE:
-		gnome_print_dialog_get_range_page (GNOME_PRINT_DIALOG (dialog),
-						   &line_start, &line_end);
-
-		gtk_text_iter_set_line (&start, line_start - 1);
-		gtk_text_iter_set_line (&end, line_end - 1);
-		gtk_text_iter_forward_to_line_end (&end);
-		break;
-
-	default:
-		g_return_if_reached ();
-	}
-
-	switch (response)
-	{
-	case GNOME_PRINT_DIALOG_RESPONSE_PRINT:
-		gedit_debug (DEBUG_PRINT, "Print button pressed.");
-		pji->preview = PREVIEW_NO;
-		gedit_print_real (pji, &start, &end, 
-				  GTK_WINDOW (gedit_get_active_window ()));
-		gtk_widget_destroy (dialog);
-		break;
-
-	case GNOME_PRINT_DIALOG_RESPONSE_PREVIEW:
-		gedit_debug (DEBUG_PRINT, "Preview button pressed.");
-		pji->preview = PREVIEW_FROM_DIALOG;
-		gedit_print_preview_real (pji, &start, &end, GTK_WINDOW (dialog));
-		break;
-
-	default:
-		gtk_widget_destroy (dialog);
-		gedit_print_job_info_destroy (pji, FALSE);
-        }
-} 
-
-static void
-show_printing_dialog (GeditPrintJobInfo *pji, GtkWindow *parent)
-{
-	GtkWidget *window;
-	GtkWidget *frame;
-	GtkWidget *hbox;
-	GtkWidget *image;
-	GtkWidget *vbox;
-	GtkWidget *label;
-	GtkWidget *progressbar;
-
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_modal (GTK_WINDOW (window), TRUE);
-	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
-	gtk_window_set_destroy_with_parent (GTK_WINDOW (window), TRUE);
-	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER_ON_PARENT);
-		
-	gtk_window_set_decorated (GTK_WINDOW (window), FALSE);
-	gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), TRUE);
-	gtk_window_set_skip_pager_hint (GTK_WINDOW (window), TRUE);
- 
-	gtk_window_set_transient_for (GTK_WINDOW (window), parent);
-
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
-	gtk_container_add (GTK_CONTAINER (window), frame);
-
-	hbox = gtk_hbox_new (FALSE, 12);
- 	gtk_container_add (GTK_CONTAINER (frame), hbox);
-	gtk_container_set_border_width (GTK_CONTAINER (hbox), 12);
-
-	image = gtk_image_new_from_stock ("gtk-print", GTK_ICON_SIZE_DIALOG);
-	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
-
-	vbox = gtk_vbox_new (FALSE, 12);
-	gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
-
-	label = gtk_label_new (_("Preparing pages..."));
-	gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-	progressbar = gtk_progress_bar_new ();
-	gtk_box_pack_start (GTK_BOX (vbox), progressbar, FALSE, FALSE, 0);
-	
-	pji->dialog = window;
-	pji->label = label;
-	pji->progressbar = progressbar;
-	
-	gtk_widget_show_all (pji->dialog);
-
-	/* Update UI */
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-}
-
-static void
-page_cb (GtkSourcePrintJob *job, GeditPrintJobInfo *pji)
-{
-	gchar *str;
-	gint page_num = gtk_source_print_job_get_page (pji->pjob);
-	gint total = gtk_source_print_job_get_page_count (pji->pjob);
-
-	if (pji->preview != PREVIEW_NO)
-		str = g_strdup_printf (_("Rendering page %d of %d..."), page_num, total);
-	else
-		str = g_strdup_printf (_("Printing page %d of %d..."), page_num, total);
-
-	gtk_label_set_label (GTK_LABEL (pji->label), str);
-	g_free (str);
-
-	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (pji->progressbar), 
-				       1.0 * page_num / total);
-
-	/* Update UI */
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-
-}
-
-static void
-preview_finished_cb (GtkSourcePrintJob *job, GeditPrintJobInfo *pji)
-{
-	GnomePrintJob *gjob;
-	GtkWidget *preview = NULL;
-
-	gjob = gtk_source_print_job_get_print_job (job);
-
-	preview = gnome_print_job_preview_new (gjob, _("Print preview"));
-	if (pji->parent != NULL)
-	{
-		gtk_window_set_transient_for (GTK_WINDOW (preview), pji->parent);
-		gtk_window_set_modal (GTK_WINDOW (preview), TRUE);
-	}
-	
- 	g_object_unref (gjob);
-
-	gtk_widget_destroy (pji->dialog);
-
-	if (pji->preview == PREVIEW)
-		gedit_print_job_info_destroy (pji, FALSE);
-	else
-	{
-		g_signal_handlers_disconnect_by_func (pji->pjob, (GCallback) page_cb, pji);
-		g_signal_handlers_disconnect_by_func (pji->pjob, (GCallback) preview_finished_cb, pji);
-	}
-	
-	gtk_widget_show (preview);
-}
-
-static void
-print_finished_cb (GtkSourcePrintJob *job, GeditPrintJobInfo *pji)
-{
-	GnomePrintJob *gjob;
-
-	gjob = gtk_source_print_job_get_print_job (job);
-
-	gnome_print_job_print (gjob);
-	
- 	g_object_unref (gjob);
-
-	gtk_widget_destroy (pji->dialog);
-
-	gedit_print_job_info_destroy (pji, TRUE);
-}
-
-void 
-gedit_print (GeditDocument *doc)
-{
-	GeditPrintJobInfo *pji;
-	GtkWidget *dialog;
-	
-	gedit_debug (DEBUG_PRINT, "");
-		
-	g_return_if_fail (doc != NULL);
-
-	pji = gedit_print_job_info_new (doc);
-	pji->preview = PREVIEW_NO;
-
-	dialog = get_print_dialog (pji);
-	
-	g_signal_connect (dialog, "response",
-			  G_CALLBACK (gedit_print_dialog_response),
-			  pji);
-
-	gtk_widget_show (dialog);
-}
-
-static void 
-gedit_print_preview_real (GeditPrintJobInfo *pji, 
-			  GtkTextIter       *start, 
-			  GtkTextIter       *end, 
-			  GtkWindow         *parent)
-{
-	show_printing_dialog (pji, parent);
-
-	pji->parent = parent;
-
-	g_signal_connect (pji->pjob, "begin_page", (GCallback) page_cb, pji);
-	g_signal_connect (pji->pjob, "finished", (GCallback) preview_finished_cb, pji);
-
-	if (!gtk_source_print_job_print_range_async (pji->pjob, start, end))
-	{
-		/* FIXME */
-		g_warning ("Async print failed");
-		gtk_widget_destroy (pji->dialog);
-	}
-}
-
-static void 
-gedit_print_real (GeditPrintJobInfo *pji, 
-		  GtkTextIter       *start, 
-		  GtkTextIter       *end, 
-		  GtkWindow         *parent)
-{
-	show_printing_dialog (pji, parent);
-
-	g_signal_connect (pji->pjob, "begin_page", (GCallback) page_cb, pji);
-	g_signal_connect (pji->pjob, "finished", (GCallback) print_finished_cb, pji);
-
-	if (!gtk_source_print_job_print_range_async (pji->pjob, start, end))
-	{
-		/* FIXME */
-		g_warning ("Async print failed");
-		gtk_widget_destroy (pji->dialog);
-	}
-}
-
-void 
-gedit_print_preview (GeditDocument *doc)
-{
-	GeditPrintJobInfo *pji;
-	GtkTextIter start, end;
-
-	gedit_debug (DEBUG_PRINT, "");
-		
-	g_return_if_fail (doc != NULL);
-
-	pji = gedit_print_job_info_new (doc);
-
-	gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (pji->doc), &start, &end);
-
-	pji->preview = PREVIEW;
-	gedit_print_preview_real (pji, &start, &end, GTK_WINDOW (gedit_get_active_window ()));
-}
-
-static GeditPrintJobInfo *
-gedit_print_job_info_new (GeditDocument* doc)
-{	
+	GtkSourceBuffer *buffer;
 	GtkSourcePrintJob *pjob;
+	gpointer data;
 	GnomePrintConfig *config;
-	GeditPrintJobInfo *pji;
+	
+	gedit_debug (DEBUG_PRINT);
+	
+	pjob = GTK_SOURCE_PRINT_JOB (job);
+	
+	buffer = gtk_source_print_job_get_buffer (pjob);
+	
+	data = g_object_get_data (G_OBJECT (buffer),
+				  GEDIT_PRINT_CONFIG);
+
+	if (data == NULL)	
+	{			  
+		config = load_print_config_from_file ();
+		g_return_if_fail (config != NULL);
+		
+		g_object_set_data_full (G_OBJECT (buffer),
+					GEDIT_PRINT_CONFIG,
+					config,
+					(GDestroyNotify)gnome_print_config_unref);
+	}
+	else
+	{
+		config = GNOME_PRINT_CONFIG (data);
+	}
+
+	gnome_print_config_set_int (config, GNOME_PRINT_KEY_NUM_COPIES, 1);
+	gnome_print_config_set_boolean (config, GNOME_PRINT_KEY_COLLATE, FALSE);
+
+	gtk_source_print_job_set_config (pjob, config);
+	
+	gtk_source_print_job_set_highlight (pjob, 
+					    gtk_source_buffer_get_highlight (buffer) &&
+					    gedit_prefs_manager_get_print_syntax_hl ());
+		
+	if (gedit_prefs_manager_get_print_header ())
+	{
+		gchar *doc_name;
+		gchar *name_to_display;
+		gchar *left;
+
+		doc_name = gedit_document_get_uri_for_display (GEDIT_DOCUMENT (buffer));
+		name_to_display = gedit_utils_str_middle_truncate (doc_name, 60);
+
+		left = g_strdup_printf (_("File: %s"), name_to_display);
+
+		/* Translators: %N is the current page number, %Q is the total
+		 * number of pages (ex. Page 2 of 10) 
+		 */
+		gtk_source_print_job_set_header_format (pjob,
+							left, 
+							NULL, 
+							_("Page %N of %Q"), 
+							TRUE);
+
+		gtk_source_print_job_set_print_header (pjob, TRUE);
+
+		g_free (doc_name);
+		g_free (name_to_display);
+		g_free (left);
+	}	
+}
+
+static void
+gedit_print_job_init (GeditPrintJob *job)
+{
+	GtkSourcePrintJob *pjob;
 
 	gchar *print_font_body;
 	gchar *print_font_header;
@@ -511,25 +215,10 @@ gedit_print_job_info_new (GeditDocument* doc)
 	PangoFontDescription *print_font_header_desc;
 	PangoFontDescription *print_font_numbers_desc;
 	
-	gedit_debug (DEBUG_PRINT, "");
+	gedit_debug (DEBUG_PRINT);
 	
-	g_return_val_if_fail (doc != NULL, NULL);
-
-	config = load_gedit_print_config_from_file ();
-	g_return_val_if_fail (config != NULL, NULL);
-
-	gnome_print_config_set_int (config, GNOME_PRINT_KEY_NUM_COPIES, 1);
-	gnome_print_config_set_boolean (config, GNOME_PRINT_KEY_COLLATE, FALSE);
-
-	pjob = gtk_source_print_job_new_with_buffer (config, 
-			GTK_SOURCE_BUFFER (doc));
-
-	gnome_print_config_unref (config);
-
-	gtk_source_print_job_set_highlight (pjob, 
-			gtk_source_buffer_get_highlight (GTK_SOURCE_BUFFER (doc)) &&
-			gedit_prefs_manager_get_print_syntax_hl ());
-	
+	pjob = GTK_SOURCE_PRINT_JOB (job);
+		
 	gtk_source_print_job_set_print_numbers (pjob,
 			gedit_prefs_manager_get_print_line_numbers ());
 
@@ -539,32 +228,7 @@ gedit_print_job_info_new (GeditDocument* doc)
 	gtk_source_print_job_set_tabs_width (pjob,
 			gedit_prefs_manager_get_tabs_size ());
 	
-	if (gedit_prefs_manager_get_print_header ())
-	{
-		gchar *doc_name;
-		gchar *name_to_display;
-		gchar *left;
-
-		doc_name = gedit_document_get_uri (doc);
-		name_to_display = gedit_utils_str_middle_truncate (doc_name, 60);
-
-		left = g_strdup_printf (_("File: %s"), name_to_display);
-		
-		/* Translators: %N is the current page number, %Q is the total
-		 * number of pages (ex. Page 2 of 10) 
-		 */
-		gtk_source_print_job_set_header_format (pjob,
-				left, NULL, _("Page %N of %Q"), TRUE);
-
-		gtk_source_print_job_set_print_header (pjob, TRUE);
-
-		g_free (doc_name);
-		g_free (name_to_display);
-		g_free (left);
-	}	
-	else
-		gtk_source_print_job_set_print_header (pjob, FALSE);
-
+	gtk_source_print_job_set_print_header (pjob, FALSE);
 	gtk_source_print_job_set_print_footer (pjob, FALSE);
 
 	print_font_body = gedit_prefs_manager_get_print_font_body ();
@@ -590,15 +254,89 @@ gedit_print_job_info_new (GeditDocument* doc)
 	pango_font_description_free (print_font_body_desc);
 	pango_font_description_free (print_font_header_desc);
 	pango_font_description_free (print_font_numbers_desc);
-
-	pji = g_new0 (GeditPrintJobInfo, 1);
-
-	pji->pjob = pjob;
-
-	pji->doc = doc;
-	pji->preview = PREVIEW_NO;
-	pji->range_type = GNOME_PRINT_RANGE_ALL;
-
-	return pji;
+	
+	g_signal_connect (job,
+			  "notify::buffer",
+			  G_CALLBACK (buffer_set),
+			  NULL);
 }
 
+GeditPrintJob *
+gedit_print_job_new (GeditDocument *doc)
+{
+	GeditPrintJob *job;
+	
+	job = GEDIT_PRINT_JOB (g_object_new (GEDIT_TYPE_PRINT_JOB,
+					     "buffer", doc,
+					      NULL));
+
+	return job;
+}
+
+void
+gedit_print_job_save_config (GeditPrintJob *job)
+{
+	GnomePrintConfig *config;
+	
+	g_return_if_fail (GEDIT_IS_PRINT_JOB (job));
+	
+	config = gtk_source_print_job_get_config (GTK_SOURCE_PRINT_JOB (job));
+	
+	save_print_config_to_file (config);
+}
+
+GtkWidget *
+gedit_print_dialog_new (GeditPrintJob *job)
+{
+	GtkWidget *dialog;
+	gint selection_flag;
+	gint lines;
+	GnomePrintConfig *config;
+	GtkSourceBuffer *buffer;
+	GeditTab *tab;
+	GeditTabState tab_state;
+
+	gedit_debug (DEBUG_PRINT);
+
+	g_return_val_if_fail (GEDIT_IS_PRINT_JOB (job), NULL);
+
+	buffer = gtk_source_print_job_get_buffer (GTK_SOURCE_PRINT_JOB (job));
+	g_return_val_if_fail (buffer != NULL, NULL);
+
+	if (!gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (buffer), NULL, NULL))
+		selection_flag = GNOME_PRINT_RANGE_SELECTION_UNSENSITIVE;
+	else
+		selection_flag = GNOME_PRINT_RANGE_SELECTION;
+
+	config = gtk_source_print_job_get_config (GTK_SOURCE_PRINT_JOB (job));
+
+	dialog = g_object_new (GNOME_TYPE_PRINT_DIALOG, "print_config", config, NULL);
+
+	gnome_print_dialog_construct (GNOME_PRINT_DIALOG (dialog), 
+				      _("Print"),
+			              GNOME_PRINT_DIALOG_RANGE | GNOME_PRINT_DIALOG_COPIES);
+
+	lines = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (buffer));
+
+	gnome_print_dialog_construct_range_page (GNOME_PRINT_DIALOG (dialog),
+						 GNOME_PRINT_RANGE_ALL |
+						 GNOME_PRINT_RANGE_RANGE |
+						 selection_flag,
+						 1, lines, "A", _("Lines"));
+
+	/* Disable the print preview button of the gnome print dialog if 
+	 * the state of the active tab is print_previewing or 
+	 * showing_print_preview 
+	 */
+	tab = gedit_tab_get_from_document (GEDIT_DOCUMENT (buffer));
+	tab_state = gedit_tab_get_state (tab);
+	if ((tab_state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW) ||
+	    (tab_state == GEDIT_TAB_STATE_PRINT_PREVIEWING))
+	{
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+						   GNOME_PRINT_DIALOG_RESPONSE_PREVIEW,
+						   FALSE);
+	}
+
+	return dialog;
+}

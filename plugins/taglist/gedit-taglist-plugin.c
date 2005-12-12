@@ -1,14 +1,12 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /*
- * gedit-taglist-plugin.c
- * This file is part of the gedit taglist plugin
- *
- * Copyright (C) 2002 Paolo Maggi 
+ * gedit-taglist-plugin.h
+ * 
+ * Copyright (C) 2002-2005 - Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * the Free Software Foundation; either version 2, or (at your option)
+ * any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -17,149 +15,189 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, 
- * Boston, MA 02111-1307, USA. 
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ *
  */
- 
+
 /*
- * Modified by the gedit Team, 2002. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2002-2005. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
+ *
+ * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <string.h>
-
-#include <glib/gi18n.h>
-
-#include <gedit/gedit-menus.h>
-#include <gedit/gedit-plugin.h>
-#include <gedit/gedit-debug.h>
-
 #include "gedit-taglist-plugin.h"
-#include "gedit-taglist-plugin-window.h"
+#include "gedit-taglist-plugin-panel.h"
 #include "gedit-taglist-plugin-parser.h"
 
-#define MENU_ITEM_LABEL		N_("Tag _List")
-#define MENU_ITEM_PATH		"/menu/View/ViewOps/"
-/*
-#define MENU_ITEM_NAME		"TagList"	
-*/
-#define MENU_ITEM_TIP		N_("Show the tag list window")
+#include <glib/gi18n-lib.h>
+#include <gmodule.h>
 
-G_MODULE_EXPORT GeditPluginState update_ui (GeditPlugin *plugin, BonoboWindow *window);
-G_MODULE_EXPORT GeditPluginState destroy (GeditPlugin *pd);
-G_MODULE_EXPORT GeditPluginState activate (GeditPlugin *pd);
-G_MODULE_EXPORT GeditPluginState deactivate (GeditPlugin *pd);
-G_MODULE_EXPORT GeditPluginState init (GeditPlugin *pd);
+#include <gedit/gedit-debug.h>
 
+#define WINDOW_DATA_KEY "GeditTaglistPluginWindowData"
+
+#define GEDIT_TAGLIST_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAGLIST_PLUGIN, GeditTaglistPluginPrivate))
+
+struct _GeditTaglistPluginPrivate
+{
+	gpointer dummy;
+};
+
+static GType gedit_taglist_plugin_type = 0;
+
+GType
+gedit_taglist_plugin_get_type (void)
+{
+	return gedit_taglist_plugin_type;
+}
+
+static void     gedit_taglist_plugin_init              (GeditTaglistPlugin      *self);
+static void     gedit_taglist_plugin_class_init        (GeditTaglistPluginClass *klass);
+static gpointer gedit_taglist_plugin_parent_class = NULL;
+static void     gedit_taglist_plugin_class_intern_init (gpointer klass)
+{
+	gedit_taglist_plugin_parent_class = g_type_class_peek_parent (klass);		
+	gedit_taglist_plugin_class_init ((GeditTaglistPluginClass *) klass);			
+}										
+										
+G_MODULE_EXPORT GType								
+register_gedit_plugin (GTypeModule *module)					
+{										
+	static const GTypeInfo our_info =					
+	{									
+		sizeof (GeditTaglistPluginClass),					
+		NULL, /* base_init */						
+		NULL, /* base_finalize */					
+		(GClassInitFunc) gedit_taglist_plugin_class_intern_init,		
+		NULL,								
+		NULL, /* class_data */						
+		sizeof (GeditTaglistPlugin),						
+		0, /* n_preallocs */						
+		(GInstanceInitFunc) gedit_taglist_plugin_init				
+	};									
+	
+	gedit_debug_message (DEBUG_PLUGINS, "Registering GeditTaglistPlugin");	
+										
+	/* Initialise the i18n stuff */						
+	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);			
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");			
+										
+	gedit_taglist_plugin_type = g_type_module_register_type (module,		
+					    GEDIT_TYPE_PLUGIN,			
+					    "GeditTaglistPlugin",			
+					    &our_info,				
+					    0);
+
+	gedit_taglist_plugin_panel_register_type (module);
+
+	return gedit_taglist_plugin_type;						
+}
 
 static void
-tag_list_cb (BonoboUIComponent           *ui_component,
-	     const char                  *path,
-	     Bonobo_UIComponent_EventType type,
-	     const char                  *state,
-	     gpointer               	  data)
+gedit_taglist_plugin_init (GeditTaglistPlugin *plugin)
 {
-	gboolean s;
+	plugin->priv = GEDIT_TAGLIST_PLUGIN_GET_PRIVATE (plugin);
+
+	gedit_debug_message (DEBUG_PLUGINS, "GeditTaglistPlugin initializing");
 	
-	gedit_debug (DEBUG_PLUGINS, "%s toggled to '%s'", path, state);
-
-	s = (strcmp (state, "1") == 0);
-
-	if (s)
-		taglist_window_show ();
-	else
-		taglist_window_close ();
+	create_taglist ();
 }
 
-
-G_MODULE_EXPORT GeditPluginState
-update_ui (GeditPlugin *plugin, BonoboWindow *window)
+static void
+gedit_taglist_plugin_finalize (GObject *object)
 {
-	BonoboUIComponent *uic;
-	
-	gedit_debug (DEBUG_PLUGINS, "");
-	
-	g_return_val_if_fail (window != NULL, PLUGIN_ERROR);
-
-	uic = gedit_get_ui_component_from_window (window);
-
-	gedit_menus_set_verb_sensitive (uic, "/commands/" MENU_ITEM_NAME, TRUE);
-
-	return PLUGIN_OK;
-}
-
-G_MODULE_EXPORT GeditPluginState
-destroy (GeditPlugin *plugin)
-{
-	gedit_debug (DEBUG_PLUGINS, "");
-
-	free_taglist ();
-
-	return PLUGIN_OK;
-}
-	
-G_MODULE_EXPORT GeditPluginState
-activate (GeditPlugin *pd)
-{
-	GList *top_windows;
-        gedit_debug (DEBUG_PLUGINS, "");
-
-	if (taglist == NULL)
-		if (create_taglist () == NULL)
-			return PLUGIN_ERROR;
-	
-        top_windows = gedit_get_top_windows ();
-        g_return_val_if_fail (top_windows != NULL, PLUGIN_ERROR);
-
-        while (top_windows)
-        {
-		BonoboUIComponent *ui_component;
-
-		gedit_menus_add_menu_item_toggle (BONOBO_WINDOW (top_windows->data),
-				     MENU_ITEM_PATH, MENU_ITEM_NAME,
-				     MENU_ITEM_LABEL, MENU_ITEM_TIP,
-				     tag_list_cb, NULL);
-
-		ui_component = gedit_get_ui_component_from_window (
-					BONOBO_WINDOW (top_windows->data));
-
-		bonobo_ui_component_set_prop (
-			ui_component, "/commands/" MENU_ITEM_NAME, "accel", "*Shift*F8", NULL);
-
-                pd->update_ui (pd, BONOBO_WINDOW (top_windows->data));
-
-                top_windows = g_list_next (top_windows);
-        }
-
-        return PLUGIN_OK;
-}
-
-G_MODULE_EXPORT GeditPluginState
-deactivate (GeditPlugin *pd)
-{
-	gedit_menus_remove_menu_item_toggle_all (MENU_ITEM_PATH, MENU_ITEM_NAME);
-
-	taglist_window_close ();
+/*
+	GeditTaglistPlugin *plugin = GEDIT_TAGLIST_PLUGIN (object);
+*/
+	gedit_debug_message (DEBUG_PLUGINS, "GeditTaglistPlugin finalizing");
 
 	free_taglist ();
 	
-	return PLUGIN_OK;
+	G_OBJECT_CLASS (gedit_taglist_plugin_parent_class)->finalize (object);
 }
 
-G_MODULE_EXPORT GeditPluginState
-init (GeditPlugin *pd)
+static void
+impl_activate (GeditPlugin *plugin,
+	       GeditWindow *window)
 {
-	/* initialize */
-	gedit_debug (DEBUG_PLUGINS, "");
+	GeditPanel *side_panel;
+	GtkWidget *taglist_panel;
+	
+	gedit_debug (DEBUG_PLUGINS);
+	
+	g_return_if_fail (g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY) == NULL);
+	
+	side_panel = gedit_window_get_side_panel (window);
+	taglist_panel = gedit_taglist_plugin_panel_new (window);
+	
+	gedit_panel_add_item_with_stock_icon (side_panel, 
+					      taglist_panel, 
+					      "Tags", 
+					      GTK_STOCK_ADD);
 
-	pd->private_data = NULL;
-		
-	return PLUGIN_OK;
+	g_object_set_data (G_OBJECT (window), 
+			   WINDOW_DATA_KEY,
+			   taglist_panel);
 }
 
+static void
+impl_deactivate	(GeditPlugin *plugin,
+		 GeditWindow *window)
+{
+	GeditPanel *side_panel;
+	gpointer data;
+	
+	gedit_debug (DEBUG_PLUGINS);
+	
+	data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+	g_return_if_fail (data != NULL);
+	
+	side_panel = gedit_window_get_side_panel (window);
 
+	gedit_panel_remove_item (side_panel, 
+			      	 GTK_WIDGET (data));
+			      
+	g_object_set_data (G_OBJECT (window), 
+			   WINDOW_DATA_KEY,
+			   NULL);
+}
+
+static void
+impl_update_ui	(GeditPlugin *plugin,
+		 GeditWindow *window)
+{
+	gpointer data;
+	GeditView *view;
+	
+	gedit_debug (DEBUG_PLUGINS);
+	
+	data = g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY);
+	g_return_if_fail (data != NULL);
+	
+	view = gedit_window_get_active_view (window);
+	
+	gtk_widget_set_sensitive (GTK_WIDGET (data),
+				  (view != NULL) &&
+				  gtk_text_view_get_editable (GTK_TEXT_VIEW (view)));
+}
+
+static void
+gedit_taglist_plugin_class_init (GeditTaglistPluginClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
+
+	object_class->finalize = gedit_taglist_plugin_finalize;
+
+	plugin_class->activate = impl_activate;
+	plugin_class->deactivate = impl_deactivate;
+	plugin_class->update_ui = impl_update_ui;
+
+	g_type_class_add_private (object_class, sizeof (GeditTaglistPluginPrivate));
+}

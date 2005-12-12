@@ -6,13 +6,21 @@ INCLUDES = \
 	$(GEDIT_CFLAGS) 				\
 	$(WARN_CFLAGS)					\
 	$(DISABLE_DEPRECATED_CFLAGS)			\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
 	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
 
 plugin_LTLIBRARIES = libsample.la
 
-libsample_la_SOURCES = sample.c
+libsample_la_SOURCES = \
+	gedit-sample-plugin.h	\
+	gedit-sample-plugin.c
+	
 libsample_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+
+
+gladedir = $(datadir)/gedit-2/glade
+glade_DATA =
 
 plugin_in_files = sample.gedit-plugin.desktop.in
 
@@ -20,7 +28,8 @@ plugin_in_files = sample.gedit-plugin.desktop.in
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(plugin_in_files)
+EXTRA_DIST = $(glade_DATA) $(plugin_in_files)
 
 CLEANFILES = $(plugin_DATA)
+DISTCLEANFILES = $(plugin_DATA)
 
