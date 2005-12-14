@@ -385,10 +385,10 @@ set_toolbar_style (GeditWindow *window,
 		gtk_widget_show (window->priv->toolbar);
 	else
 		gtk_widget_hide (window->priv->toolbar);
-	
-	action = gtk_action_group_get_action (window->priv->action_group,
+
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewToolbar");
-					      
+
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 	
@@ -915,6 +915,10 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 				      gedit_always_sensitive_menu_entries,
 				      G_N_ELEMENTS (gedit_always_sensitive_menu_entries),
 				      window);
+	gtk_action_group_add_toggle_actions (action_group,
+					     gedit_always_sensitive_toggle_menu_entries,
+					     G_N_ELEMENTS (gedit_always_sensitive_toggle_menu_entries),
+					     window);
 
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
@@ -926,10 +930,6 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 				      gedit_menu_entries,
 				      G_N_ELEMENTS (gedit_menu_entries),
 				      window);
-	gtk_action_group_add_toggle_actions (action_group,
-					     gedit_toggle_menu_entries,
-					     G_N_ELEMENTS (gedit_toggle_menu_entries),
-					     window);
 
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
@@ -948,6 +948,17 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	g_object_set (action, "is_important", TRUE, NULL);
 	action = gtk_action_group_get_action (action_group, "EditUndo");
 	g_object_set (action, "is_important", TRUE, NULL);
+
+	action_group = gtk_action_group_new ("GeditQuitWindowActions");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	gtk_action_group_add_actions (action_group,
+				      gedit_quit_menu_entries,
+				      G_N_ELEMENTS (gedit_quit_menu_entries),
+				      window);
+
+	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+	g_object_unref (action_group);
+	window->priv->quit_action_group = action_group;
 
 	/* now load the UI definition */
 	if (gtk_ui_manager_add_ui_from_file (manager, "gedit-ui.xml", NULL)) // REMOVE ME... just to allow running without install
@@ -1186,7 +1197,7 @@ set_statusbar_style (GeditWindow *window,
 	else
 		gtk_widget_hide (window->priv->statusbar);
 
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewStatusbar");
 					      
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -1507,9 +1518,7 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 	   the same time (may be we can remove this limitation in the future) */
 	/* We disable File->Quit/CloseAll if state is saving since saving cannot be
 	   cancelled (may be we can remove this limitation in the future) */
-	action = gtk_action_group_get_action (window->priv->action_group,
-				              "FileQuit");
-	gtk_action_set_sensitive (action, 
+	gtk_action_group_set_sensitive (window->priv->quit_action_group,
 				  !(window->priv->state & GEDIT_WINDOW_STATE_SAVING) &&
 				  !(window->priv->state & GEDIT_WINDOW_STATE_PRINTING));
 
@@ -1518,7 +1527,7 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 	gtk_action_set_sensitive (action, 
 				  !(window->priv->state & GEDIT_WINDOW_STATE_SAVING) &&
 				  !(window->priv->state & GEDIT_WINDOW_STATE_PRINTING));
-				  
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 				              "FileSaveAll");
 	gtk_action_set_sensitive (action, 
@@ -1554,16 +1563,23 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 
 	if ((window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION) != 0)
 	{
-		// FIXME: View menu and Find should be active when in SAVING_SESSION state
-		
+		/* TODO: If we really care, Find could be active
+		 * when in SAVING_SESSION state */
+
 		if (gtk_action_group_get_sensitive (window->priv->action_group))
 			gtk_action_group_set_sensitive (window->priv->action_group,
+							FALSE);
+		if (gtk_action_group_get_sensitive (window->priv->quit_action_group))
+			gtk_action_group_set_sensitive (window->priv->quit_action_group,
 							FALSE);
 	}
 	else
 	{
 		if (!gtk_action_group_get_sensitive (window->priv->action_group))
 			gtk_action_group_set_sensitive (window->priv->action_group,
+							window->priv->num_tabs > 0);
+		if (!gtk_action_group_get_sensitive (window->priv->quit_action_group))
+			gtk_action_group_set_sensitive (window->priv->quit_action_group,
 							window->priv->num_tabs > 0);
 	}
 }
@@ -2020,10 +2036,9 @@ notebook_tab_added (GeditNotebook *notebook,
 	gtk_action_set_sensitive (action,
 				  window->priv->num_tabs > 1);
 
-
 	view = gedit_tab_get_view (tab);
 	doc = gedit_tab_get_document (tab);
-	
+
 	/* IMPORTANT: remember to disconnect the signal in notebook_tab_removed
 	 * if a new signal is connected here */
 
@@ -2204,13 +2219,10 @@ notebook_tab_removed (GeditNotebook *notebook,
 			gtk_action_group_set_sensitive (window->priv->action_group,
 							FALSE);
 
-		// FIXME: Quit and the view menu should be active 
-		
 		action = gtk_action_group_get_action (window->priv->action_group,
 						      "ViewHighlightMode");
-
 		gtk_action_set_sensitive (action, FALSE);
-		
+
 		gedit_plugins_engine_update_plugins_ui (window, FALSE);
 	}
 
@@ -2389,7 +2401,7 @@ create_side_panel (GeditWindow *window)
 
 	visible = gedit_prefs_manager_get_side_pane_visible ();
 
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewSidePane");		
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -2443,7 +2455,7 @@ create_bottom_panel (GeditWindow *window)
 
 	visible = gedit_prefs_manager_get_bottom_panel_visible();
 
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewBottomPanel");
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -2802,7 +2814,7 @@ _gedit_window_set_statusbar_visible (GeditWindow *window,
 	if (gedit_prefs_manager_statusbar_visible_can_set ())
 		gedit_prefs_manager_set_statusbar_visible (visible);
 		
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewStatusbar");		
 		
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -2837,7 +2849,7 @@ _gedit_window_set_toolbar_visible (GeditWindow *window,
 	if (gedit_prefs_manager_toolbar_visible_can_set ())
 		gedit_prefs_manager_set_toolbar_visible (visible);
 
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewToolbar");		
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -2882,7 +2894,7 @@ _gedit_window_set_side_panel_visible (GeditWindow *window,
 	if (gedit_prefs_manager_side_pane_visible_can_set ())
 		gedit_prefs_manager_set_side_pane_visible (visible);
 
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewSidePane");		
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
@@ -2933,7 +2945,7 @@ _gedit_window_set_bottom_panel_visible (GeditWindow *window,
 	if (gedit_prefs_manager_bottom_panel_visible_can_set ())
 		gedit_prefs_manager_set_bottom_panel_visible (visible);
 
-	action = gtk_action_group_get_action (window->priv->action_group,
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewBottomPanel");		
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)

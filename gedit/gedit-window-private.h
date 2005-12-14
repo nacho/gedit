@@ -57,6 +57,7 @@ struct _GeditWindowPrivate
 	/* Menus & Toolbars */
 	GtkUIManager   *manager;
 	GtkActionGroup *action_group;
+	GtkActionGroup *quit_action_group;
 	GtkActionGroup *always_sensitive_action_group;
 	GtkActionGroup *languages_action_group;
 	GtkActionGroup *documents_list_action_group;

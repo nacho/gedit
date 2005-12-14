@@ -88,8 +88,6 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Print the current page"), G_CALLBACK (gedit_cmd_file_print) },
 	{ "FileClose", GTK_STOCK_CLOSE, NULL, "<control>W",
 	  N_("Close the current file"), G_CALLBACK (gedit_cmd_file_close) },
-	{ "FileQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
-	  N_("Quit the program"), G_CALLBACK (gedit_cmd_file_quit) },
 
 	/* Edit menu */
 	{ "EditUndo", GTK_STOCK_UNDO, NULL, "<control>Z",
@@ -128,10 +126,17 @@ static const GtkActionEntry gedit_menu_entries[] =
 	{ "FileCloseAll", GTK_STOCK_CLOSE, N_("_Close All"), "<shift><control>W",
 	  N_("Close all open files"), G_CALLBACK (gedit_cmd_file_close_all) },
 	{ "DocumentsMoveToNewWindow", NULL, N_("_Move to New Window"), NULL,
-	  N_("Move the current document to a new window"), G_CALLBACK (gedit_cmd_documents_move_to_new_window) },
+	  N_("Move the current document to a new window"), G_CALLBACK (gedit_cmd_documents_move_to_new_window) }
 };
 
-static const GtkToggleActionEntry gedit_toggle_menu_entries[] =
+/* separate group, should be sensitive even when there are no tabs */
+static const GtkActionEntry gedit_quit_menu_entries[] =
+{
+	{ "FileQuit", GTK_STOCK_QUIT, NULL, "<control>Q",
+	  N_("Quit the program"), G_CALLBACK (gedit_cmd_file_quit) }
+};
+
+static const GtkToggleActionEntry gedit_always_sensitive_toggle_menu_entries[] =
 {
 	{ "ViewToolbar", NULL, N_("_Toolbar"), NULL,
 	  N_("Show or hide the toolbar in the current window"),
