@@ -75,7 +75,7 @@ static const GtkActionEntry action_entries[] =
 
 	{ "ConfigSpell",
 	  GNOME_STOCK_BOOK_BLUE,
-	  N_("Set _Language"),
+	  N_("Set _Language..."),
 	  NULL,
 	  N_("Set the language of the current document"),
 	  G_CALLBACK (set_language_cb)
