@@ -12,11 +12,16 @@ EXTRA_DIST = BUGS		\
 	TODO 			\
 	xmldocs.make 		\
 	omf.make		\
+	m4			\
+	gnome-doc-utils.make    \
 	intltool-extract.in 	\
 	intltool-merge.in 	\
 	intltool-update.in	
 
 DISTCLEANFILES = 		\
+	gnome-doc-utils.make    \
 	intltool-extract 	\
 	intltool-merge 		\
 	intltool-update
+
+DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper

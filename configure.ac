@@ -11,6 +11,8 @@ AC_SUBST(GEDIT_MAJOR)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
+GNOME_DOC_INIT
+
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
 AM_DISABLE_STATIC
@@ -288,20 +290,11 @@ data/Makefile
 gedit/dialogs/Makefile
 gedit/Makefile
 gedit/recent-files/Makefile
-help/C/Makefile
-help/de/Makefile
-help/es/Makefile
-help/eu/Makefile
-help/fr/Makefile
-help/it/Makefile
-help/ja/Makefile
-help/ko/Makefile
 help/Makefile
+help/eu/Makefile
+help/ko/Makefile
 help/ro/Makefile
 help/sv/Makefile
-help/zh_CN/Makefile
-help/zh_HK/Makefile
-help/zh_TW/Makefile
 pixmaps/Makefile
 plugins/changecase/Makefile
 plugins/docinfo/Makefile

@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-  <!ENTITY legal SYSTEM "legal.xml">
   <!ENTITY appversion "2.7.91">
   <!ENTITY manrevision "2.8">
   <!ENTITY date "August 2004">
@@ -39,15 +38,18 @@
 
    -->
 	 <publisher> 
-		<publishername> GNOME Documentation Project </publishername>
+		<publishername>GNOME Documentation Project</publishername>
 	 </publisher>
-	 &legal; 
+
+	 <xi:include href="legal.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+
 	 <authorgroup> 
-		<author> 
-		  <firstname>Sun </firstname>
-		  <surname>GNOME Documentation Team</surname> 
+		<author role="maintainer"> 
+		  <firstname>Sun Java Desktop System Documentation Team</firstname>
+		  <surname></surname> 
 		  <affiliation> 
 			 <orgname>Sun Microsystems</orgname>
+			 <address><email>gdocteam@sun.com</email></address>
 		  </affiliation>
 		</author>
 		<author> 
@@ -89,57 +91,18 @@
 	 <revhistory>
 <!-- Remember to remove the &manrevision; entity from the revision entries other
    than the current revision. -->
-   		<revision> 
-		  <revnumber>&app; Manual V&manrevision;</revnumber>
-		  <date>&date;</date> 
+		<revision> 
+		  <revnumber>gedit V1.0</revnumber>
+		  <date>2000</date> 
 		  <revdescription> 
-			 <para role="author">Sun Java Desktop System Documentation Team</para>
+			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
+				</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
 		<revision> 
-		  <revnumber>gedit Manual V2.7</revnumber>
-		  <date>March 2004</date> 
-		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team</para>
-			 <para role="publisher">GNOME Documentation Project</para>
-		  </revdescription>
-		</revision>
-		<revision> 
-		  <revnumber>gedit Manual V2.6</revnumber>
-		  <date>September 2003</date> 
-		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team</para>
-			 <para role="publisher">GNOME Documentation Project</para>
-		  </revdescription>
-		</revision>
-		<revision> 
-		  <revnumber>gedit Manual V2.5</revnumber>
-		  <date>March 2003</date> 
-		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team</para>
-			 <para role="publisher">GNOME Documentation Project</para>
-		  </revdescription>
-		</revision>
-		<revision> 
-		  <revnumber>gedit Manual V2.4</revnumber>
-		  <date>January 2003</date> 
-		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team</para>
-			 <para role="publisher">GNOME Documentation Project</para>
-		  </revdescription>
-		</revision>
-		<revision> 
-		  <revnumber>gedit Manual V2.3</revnumber>
-		  <date>September 2002</date> 
-		  <revdescription> 
-			 <para role="author">Sun GNOME Documentation Team</para>
-			 <para role="publisher">GNOME Documentation Project</para>
-		  </revdescription>
-		</revision>
-		<revision> 
-		  <revnumber>gedit Manual V2.2</revnumber>
-		  <date>August 2002</date> 
+		  <revnumber>gedit Manual V2.0</revnumber>
+		  <date>March 2002</date> 
 		  <revdescription> 
 			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
@@ -154,19 +117,58 @@
 		  </revdescription>
 		</revision>
 		<revision> 
-		  <revnumber>gedit Manual V2.0</revnumber>
-		  <date>March 2002</date> 
+		  <revnumber>gedit Manual V2.2</revnumber>
+		  <date>August 2002</date> 
 		  <revdescription> 
 			 <para role="author">Sun GNOME Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
 		<revision> 
-		  <revnumber>gedit V1.0</revnumber>
-		  <date>2000</date> 
+		  <revnumber>gedit Manual V2.3</revnumber>
+		  <date>September 2002</date> 
 		  <revdescription> 
-			 <para role="author">Eric Baudais <email>baudais@okstate.edu</email>
-				</para>
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.4</revnumber>
+		  <date>January 2003</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.5</revnumber>
+		  <date>March 2003</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.6</revnumber>
+		  <date>September 2003</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+		<revision> 
+		  <revnumber>gedit Manual V2.7</revnumber>
+		  <date>March 2004</date> 
+		  <revdescription> 
+			 <para role="author">Sun GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>
+   		<revision> 
+		  <revnumber>&app; Manual V&manrevision;</revnumber>
+		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">Sun Java Desktop System Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
@@ -179,6 +181,9 @@
       </para>
 <!-- Translators may also add here feedback address for translations -->
 	 </legalnotice>
+    <abstract role="description">
+      <para>User manual for the gedit text editor.</para>
+    </abstract>
   </articleinfo>
   <indexterm><primary>gedit</primary></indexterm>
   <indexterm><primary>text editor</primary></indexterm>
