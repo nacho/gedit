@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-18 05:48+0100\n"
-"PO-Revision-Date: 2005-12-18 20:08+0800\n"
+"POT-Creation-Date: 2005-12-21 06:17+0100\n"
+"PO-Revision-Date: 2005-12-21 17:13+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -158,8 +158,7 @@ msgstr "自动换行模式"
 msgid ""
 "List of VFS schemes gedit supports in write mode. The 'file' scheme is "
 "writable by default."
-msgstr ""
-"列出 gedit 在写入模式中支持的 VFS 大纲。“file”大纲默认可写。"
+msgstr "列出 gedit 在写入模式中支持的 VFS 大纲。“file”大纲默认可写。"
 
 #: ../data/gedit.schemas.in.h:30
 msgid ""
@@ -967,7 +966,7 @@ msgid "Replace _All"
 msgstr "全部替换(_A)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:562
+#: ../gedit/gedit-commands-file.c:562 ../plugins/savecopy/savecopy.c:368
 msgid "_Replace"
 msgstr "替换(_R)"
 
@@ -1313,11 +1312,11 @@ msgstr "添加或删除(_R)..."
 msgid "C_haracter Coding:"
 msgstr "字符编码(_H)："
 
-#: ../gedit/gedit-file-chooser-dialog.c:186
+#: ../gedit/gedit-file-chooser-dialog.c:186 ../plugins/savecopy/savecopy.c:583
 msgid "All Files"
 msgstr "全部文件"
 
-#: ../gedit/gedit-file-chooser-dialog.c:194
+#: ../gedit/gedit-file-chooser-dialog.c:194 ../plugins/savecopy/savecopy.c:591
 msgid "All Text Files"
 msgstr "全部文本文件"
 
@@ -1519,8 +1518,7 @@ msgstr "文件 %s 已经打开。"
 msgid ""
 "gedit opened this instance of the file in non-editable way. Do you want to "
 "edit it anyway?"
-msgstr ""
-"gedit 已经在非编辑方式中打开了此文件的其它实例。您是否想要仍然编辑？"
+msgstr "gedit 已经在非编辑方式中打开了此文件的其它实例。您是否想要仍然编辑？"
 
 #: ../gedit/gedit-io-error-message-area.c:910
 #: ../gedit/gedit-io-error-message-area.c:1005
@@ -1560,8 +1558,8 @@ msgid ""
 "You can ignore this warning and save the file anyway, but if an error occurs "
 "while saving, you could lose the old copy of the file. Save anyway?"
 msgstr ""
-"gedit 无法在保存新文件时备份文件的旧副本。您可以忽略此警告，仍然进行保存，但是"
-"如果是在保存中发生了错误，，您可能会丢失文件的旧副本。仍然保存吗？"
+"gedit 无法在保存新文件时备份文件的旧副本。您可以忽略此警告，仍然进行保存，但"
+"是如果是在保存中发生了错误，，您可能会丢失文件的旧副本。仍然保存吗？"
 
 #. Translators: %s is a URI scheme (like for example http, ftp, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1105
@@ -1569,7 +1567,9 @@ msgstr ""
 msgid ""
 "gedit cannot handle <i>%s:</i> locations in write mode. Please, check that "
 "you typed the location correctly and try again."
-msgstr "gedit 无法在写入模式中处理 <i>%s:</i> 位置。请检查键入的位置是否正确，然后重试。"
+msgstr ""
+"gedit 无法在写入模式中处理 <i>%s:</i> 位置。请检查键入的位置是否正确，然后重"
+"试。"
 
 #: ../gedit/gedit-io-error-message-area.c:1112
 msgid ""
@@ -1615,9 +1615,7 @@ msgstr "没有足够的内存来保存文件。请关闭一些正在运行的应
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
-msgstr ""
-"没有足够的磁盘空间用于保存文件。"
-"请释放一些磁盘空间，然后重试。"
+msgstr "没有足够的磁盘空间用于保存文件。请释放一些磁盘空间，然后重试。"
 
 #: ../gedit/gedit-io-error-message-area.c:1233
 msgid ""
@@ -1633,8 +1631,7 @@ msgstr "已经存在同名文件。请使用不同的名称。"
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
-msgstr ""
-"您试图用来保存文件的磁盘有文件名长度的限制。请使用较短的名称。"
+msgstr "您试图用来保存文件的磁盘有文件名长度的限制。请使用较短的名称。"
 
 #: ../gedit/gedit-io-error-message-area.c:1249
 #, c-format
@@ -1651,6 +1648,22 @@ msgstr "无法保存文件 %s。"
 #: ../gedit/gedit-notebook.c:823
 msgid "Close document"
 msgstr "关闭文档"
+
+#: ../gedit/gedit-output-window.c:378
+msgid "Close the output window"
+msgstr "关闭输出窗口"
+
+#: ../gedit/gedit-output-window.c:416
+msgid "Copy selected lines"
+msgstr "复制选中的行"
+
+#: ../gedit/gedit-output-window.c:436
+msgid "Clear the output window"
+msgstr "清楚输出窗口"
+
+#: ../gedit/gedit-output-window.c:476
+msgid "Output Lines"
+msgstr "输出行"
 
 #: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
 #: ../gedit/recent-files/egg-recent-view-gtk.c:444
@@ -2151,7 +2164,8 @@ msgid ""
 "\n"
 "Please, check your installation."
 msgstr ""
-"<span size=\"large\" weight=\"bold\">在文件 <i>%s</i> 中找不到所需的部件。</span>\n"
+"<span size=\"large\" weight=\"bold\">在文件 <i>%s</i> 中找不到所需的部件。</"
+"span>\n"
 "\n"
 "请检查您的安装。"
 
@@ -2339,6 +2353,14 @@ msgstr "缩进行"
 msgid "Indents or un-indents selected lines."
 msgstr "缩进或取消缩进选中行。"
 
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
+msgid "Opens an interactive python console in the bottom panel."
+msgstr "在底部面板中打开交互式 Python 控制台。"
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+msgid "Python Console"
+msgstr "Python 控制台"
+
 #: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
 msgstr "插入用户名(_M)"
@@ -2354,6 +2376,146 @@ msgstr "在光标处插入用户名。"
 #: ../plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "User name"
 msgstr "用户名"
+
+#: ../plugins/savecopy/savecopy.c:48
+msgid "Sa_ve Copy..."
+msgstr "保存副本(_V)..."
+
+#: ../plugins/savecopy/savecopy.c:51
+msgid "Save a copy of the current document"
+msgstr "保存当前文档的副本"
+
+#: ../plugins/savecopy/savecopy.c:314
+#, c-format
+msgid "Could not save a copy of the file to \"%s\""
+msgstr "无法将文件的副本保存为“%s”"
+
+#: ../plugins/savecopy/savecopy.c:355
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "名为“%s”的文件已经存在。\n"
+
+#: ../plugins/savecopy/savecopy.c:359
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "您是否想要将其替换为您正在保存的文件？"
+
+#: ../plugins/savecopy/savecopy.c:413
+msgid "You are trying to overwrite the original file"
+msgstr "您正在试图覆盖原始文件"
+
+#: ../plugins/savecopy/savecopy.c:522
+msgid "Save Copy..."
+msgstr "保存副本..."
+
+#. translators: %s is a filename
+#: ../plugins/savecopy/savecopy.c:554 ../plugins/savecopy/savecopy.c:564
+#, c-format
+msgid "%s (copy)"
+msgstr "%s(副本)"
+
+#: ../plugins/savecopy/savecopy.c:602
+msgid "_Character Coding:"
+msgstr "字符编码(_C)："
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
+msgid "Save a Copy"
+msgstr "保存副本"
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
+msgid "Saves a copy of the current document to a local or remote location."
+msgstr "将当前文档的副本保存到本地或远程位置。"
+
+#: ../plugins/shell_output/shell_output.c:56
+msgid "_Run Command..."
+msgstr "运行命令(_R)..."
+
+#: ../plugins/shell_output/shell_output.c:59
+msgid "Run a command"
+msgstr "运行命令"
+
+#: ../plugins/shell_output/shell_output.c:156
+#: ../plugins/shell_output/shell_output.c:571
+msgid "Stopped"
+msgstr "已停止"
+
+#: ../plugins/shell_output/shell_output.c:350
+msgid "Run Command"
+msgstr "运行命令"
+
+#: ../plugins/shell_output/shell_output.c:369
+msgid "_Run"
+msgstr "运行(_R)"
+
+#: ../plugins/shell_output/shell_output.c:577
+msgid "Done"
+msgstr "完成"
+
+#: ../plugins/shell_output/shell_output.c:579
+msgid "Failed"
+msgstr "失败"
+
+#: ../plugins/shell_output/shell_output.c:749
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Shell 命令项为空。\n"
+"\n"
+"请插入有效的 Shell 命令。"
+
+#: ../plugins/shell_output/shell_output.c:771
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"分析 Shell 命令项出错。\n"
+"\n"
+"请插入有效的 Shell 命令。"
+
+#: ../plugins/shell_output/shell_output.c:849
+msgid "Executing command"
+msgstr "执行命令"
+
+#: ../plugins/shell_output/shell_output.c:914
+msgid "An error occurred while running the selected command."
+msgstr "运行选中命令时发生了错误。"
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+msgid ""
+"Executes an external program and, if required, displays its output in the "
+"output window."
+msgstr "执行外部程序，如果需要的话，在输出窗口中显示其输出。"
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid "Shell command"
+msgstr "Shell 命令"
+
+#: ../plugins/shell_output/shell_output.glade2.h:1
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
+
+#: ../plugins/shell_output/shell_output.glade2.h:2
+msgid "Co_mmand:"
+msgstr "命令(_M)："
+
+#: ../plugins/shell_output/shell_output.glade2.h:3
+msgid "Select the working directory..."
+msgstr "选择工作目录..."
+
+#: ../plugins/shell_output/shell_output.glade2.h:4
+msgid "_Show results in Output Window"
+msgstr "在输出窗口中显示结果(_S)"
+
+#: ../plugins/shell_output/shell_output.glade2.h:5
+msgid "_Working directory:"
+msgstr "工作目录(_W)："
+
+#: ../plugins/shell_output/shell_output.glade2.h:6
+msgid "gedit: Shell Output plugin"
+msgstr "gedit：Shell 输出插件"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -2779,10 +2941,6 @@ msgstr "选择当前文档的语言(_L)。"
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
 msgstr "设置语言"
-
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
 
 #: ../plugins/spell/spell-checker.glade2.h:2
 msgid "<b>Language</b>"
