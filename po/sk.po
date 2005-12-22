@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-14 20:44+0100\n"
-"PO-Revision-Date: 2005-12-14 21:45+0100\n"
+"POT-Creation-Date: 2005-12-22 23:15+0100\n"
+"PO-Revision-Date: 2005-12-22 23:25+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -1039,7 +1039,7 @@ msgid "Replace _All"
 msgstr "Nahradiť _všetko"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:562
+#: ../gedit/gedit-commands-file.c:562 ../plugins/savecopy/savecopy.c:368
 msgid "_Replace"
 msgstr "Na_hradiť"
 
@@ -1419,11 +1419,11 @@ msgstr "Pridať alebo o_dstrániť..."
 msgid "C_haracter Coding:"
 msgstr "Kódovanie _znakov:"
 
-#: ../gedit/gedit-file-chooser-dialog.c:186
+#: ../gedit/gedit-file-chooser-dialog.c:186 ../plugins/savecopy/savecopy.c:583
 msgid "All Files"
 msgstr "Všetky súbory"
 
-#: ../gedit/gedit-file-chooser-dialog.c:194
+#: ../gedit/gedit-file-chooser-dialog.c:194 ../plugins/savecopy/savecopy.c:591
 msgid "All Text Files"
 msgstr "Všetky textové súbory"
 
@@ -1479,8 +1479,8 @@ msgstr "Nemáte potrebné práva na otvorenie súboru."
 msgid ""
 "There are too many open files. Please, close some applications and try again."
 msgstr ""
-"Je otvorených príliš veľa súborov. Prosím, zatvorte niektoré aplikácie "
-"a skúste to znova."
+"Je otvorených príliš veľa súborov. Prosím, zatvorte niektoré aplikácie a "
+"skúste to znova."
 
 #: ../gedit/gedit-io-error-message-area.c:199
 #: ../gedit/gedit-io-error-message-area.c:411
@@ -1505,8 +1505,8 @@ msgid ""
 "Host <i>%s</i> could not be found. Please, check that your proxy settings "
 "are correct and try again."
 msgstr ""
-"Hostiteľ <i>%s</i> nebol nájdený. Prosím skontrolujte, že vaše nastavenia proxy "
-"sú správne a skúste to znovu."
+"Hostiteľ <i>%s</i> nebol nájdený. Prosím skontrolujte, že vaše nastavenia "
+"proxy sú správne a skúste to znovu."
 
 #: ../gedit/gedit-io-error-message-area.c:243
 #: ../gedit/gedit-io-error-message-area.c:254
@@ -1591,9 +1591,8 @@ msgstr "gedit nebol schopný zistiť kódovanie znakov."
 
 #: ../gedit/gedit-io-error-message-area.c:697
 #: ../gedit/gedit-io-error-message-area.c:706
-#, fuzzy
 msgid "Please check that you are not trying to open a binary file."
-msgstr "Súbor obsahuje neplatné dáta. Možno chcete otvoriť binárny súbor."
+msgstr "Prosím skontrolujte, či sa nepokúšate otvoriť binárny súbor."
 
 #: ../gedit/gedit-io-error-message-area.c:698
 msgid "Select a character coding from the menu and try again."
@@ -1662,7 +1661,9 @@ msgstr "Súbor %s bol zmenený od jeho načítania."
 
 #: ../gedit/gedit-io-error-message-area.c:948
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
-msgstr "Ak ho uložíte, všetky externé zmeny môžu byť stratené. Uložiť ho aj napriek tomu?"
+msgstr ""
+"Ak ho uložíte, všetky externé zmeny môžu byť stratené. Uložiť ho aj napriek "
+"tomu?"
 
 #: ../gedit/gedit-io-error-message-area.c:1027
 #, c-format
@@ -1724,8 +1725,8 @@ msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
 msgstr ""
-"Nemáte potrebné práva na uloženie súboru. Prosím overte, že ste zadali umiestnenie správne "
-"a skúste to znovu."
+"Nemáte potrebné práva na uloženie súboru. Prosím overte, že ste zadali "
+"umiestnenie správne a skúste to znovu."
 
 #: ../gedit/gedit-io-error-message-area.c:1147
 #, c-format
@@ -1733,7 +1734,8 @@ msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
 "try again."
 msgstr ""
-"%s je priečinok. Prosím overte, že ste zadali správne umiestnenie a skúste to znovu."
+"%s je priečinok. Prosím overte, že ste zadali správne umiestnenie a skúste "
+"to znovu."
 
 #: ../gedit/gedit-io-error-message-area.c:1153
 msgid ""
@@ -1748,29 +1750,28 @@ msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"Nedostatok miesta na disku pre uloženie súboru. Prosím, uvoľnite nejaké miesto na disku a skúste to znovu."
+"Nedostatok miesta na disku pre uloženie súboru. Prosím, uvoľnite nejaké "
+"miesto na disku a skúste to znovu."
 
 #: ../gedit/gedit-io-error-message-area.c:1233
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
-"Pokúšate sa uložiť súbor na disk len na čítanie. Prosím overte, že ste zadali umiestnenie "
-"správne a skúste to znovu."
+"Pokúšate sa uložiť súbor na disk len na čítanie. Prosím overte, že ste "
+"zadali umiestnenie správne a skúste to znovu."
 
 #: ../gedit/gedit-io-error-message-area.c:1239
 msgid "A file with the same name already exists. Please, use a different name."
 msgstr "Súbor s takým istým názvom už existuje. Prosím, použite iný názov."
 
 #: ../gedit/gedit-io-error-message-area.c:1244
-#, fuzzy
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
 msgstr ""
-"Disk, na ktorý sa pokúšate uložiť súbor, má obmedzené veľkosti súborov. "
-"Skúste uložiť menší súbor alebo súbor skúste uložiť na disk, ktorý toto "
-"obmedzenie nemá."
+"Disk, na ktorý sa pokúšate uložiť súbor, má obmedzenú dĺžku názvu súborov. "
+"Prosím, použite kratší názov"
 
 #: ../gedit/gedit-io-error-message-area.c:1249
 #, fuzzy, c-format
@@ -1778,28 +1779,43 @@ msgid ""
 "%s is not a regular file. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"Meno hostiteľa bolo neplatné. Prosím overte, že ste zadali umiestnenie "
+"Prosím overte, že ste zadali umiestnenie "
 "správne a skúste to znovu."
 
 #: ../gedit/gedit-io-error-message-area.c:1292
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file %s."
-msgstr "Nepodarilo sa uložiť súbor \"%s\""
+msgstr "Nepodarilo sa uložiť súbor %s."
 
 #: ../gedit/gedit-notebook.c:823
-#, fuzzy
 msgid "Close document"
-msgstr "Neuložený dokument"
+msgstr "Zavrieť dokument"
+
+#: ../gedit/gedit-output-window.c:378
+msgid "Close the output window"
+msgstr "Zavrieť okno s výstupom"
+
+#: ../gedit/gedit-output-window.c:416
+msgid "Copy selected lines"
+msgstr "Kopírovať vybrané riadky"
+
+#: ../gedit/gedit-output-window.c:436
+msgid "Clear the output window"
+msgstr "Vyčistiť okno výstupu"
+
+#: ../gedit/gedit-output-window.c:476
+msgid "Output Lines"
+msgstr "Riadky výstupu"
 
 #: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
 #: ../gedit/recent-files/egg-recent-view-gtk.c:444
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
-msgstr ""
+msgstr "Prázdny"
 
 #: ../gedit/gedit-panel.c:459
 msgid "Hide panel"
-msgstr ""
+msgstr "Skryť panel"
 
 #: ../gedit/gedit-plugin-manager.c:55
 msgid "Plugin"
@@ -1844,9 +1860,8 @@ msgid "Lines"
 msgstr "Riadky"
 
 #: ../gedit/gedit-print-job-preview.c:623
-#, fuzzy
 msgid "Page Preview"
-msgstr "Náhľad tlače"
+msgstr "Náhľad strany"
 
 #: ../gedit/gedit-print-job-preview.c:624
 msgid "The preview of a page in the document to be printed"
@@ -1854,26 +1869,25 @@ msgstr ""
 
 #: ../gedit/gedit-print-job-preview.c:710
 msgid "Other"
-msgstr ""
+msgstr "Ostatné"
 
 #: ../gedit/gedit-print-job-preview.c:740
 msgid "Show the previous page"
-msgstr ""
+msgstr "Zobraziť predchádzajúcu stranu"
 
 #: ../gedit/gedit-print-job-preview.c:751
 msgid "Show the next page"
-msgstr ""
+msgstr "Zobraziť nasledujúcu stranu"
 
 #: ../gedit/gedit-print-job-preview.c:767
-#, fuzzy
 msgid "Current page (Alt+P)"
-msgstr "Aktuálne lokálne nastavenie (%s)"
+msgstr "Aktuálna strana (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
 #: ../gedit/gedit-print-job-preview.c:781
 msgid "of"
-msgstr ""
+msgstr "z"
 
 #: ../gedit/gedit-print-job-preview.c:787
 #, fuzzy
@@ -1882,7 +1896,7 @@ msgstr "Nastavenie stránky"
 
 #: ../gedit/gedit-print-job-preview.c:788
 msgid "The total number of pages in the document"
-msgstr ""
+msgstr "Celkový počet strán v dokumente"
 
 #: ../gedit/gedit-print-job-preview.c:805
 msgid "Show multiple pages"
@@ -1890,25 +1904,23 @@ msgstr ""
 
 #: ../gedit/gedit-print-job-preview.c:817
 msgid "Zoom 1:1"
-msgstr ""
+msgstr "Zväčšenie 1:1"
 
 #: ../gedit/gedit-print-job-preview.c:825
 msgid "Zoom to fit the whole page"
 msgstr ""
 
 #: ../gedit/gedit-print-job-preview.c:834
-#, fuzzy
 msgid "Zoom the page in"
-msgstr "Nastavenie stránky"
+msgstr "Zväčšiť stranu"
 
 #: ../gedit/gedit-print-job-preview.c:842
 msgid "Zoom the page out"
-msgstr ""
+msgstr "Zmenšiť stranu"
 
 #: ../gedit/gedit-print-job-preview.c:856
-#, fuzzy
 msgid "Close print preview"
-msgstr "Náhľad tlače"
+msgstr "Zavrieť náhľad tlače"
 
 #: ../gedit/gedit-print-job-preview.c:1096
 #: ../gedit/gedit-print-job-preview.c:1097
@@ -1970,19 +1982,19 @@ msgstr ""
 #: ../gedit/gedit-tab.c:521
 #, c-format
 msgid "Loading <b>%s</b>"
-msgstr ""
+msgstr "Načítavanie <b>%s</b>"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
 #: ../gedit/gedit-tab.c:597
 #, c-format
 msgid "Saving <b>%s</b> to <b>%s</b>"
-msgstr ""
+msgstr "Ukladanie <b>%s</b> do <b>%s</b>"
 
 #: ../gedit/gedit-tab.c:603
 #, c-format
 msgid "Saving <b>%s</b>"
-msgstr ""
+msgstr "Ukladanie <b>%s</b>"
 
 #. Read only
 #: ../gedit/gedit-tab.c:1335
@@ -1990,9 +2002,9 @@ msgid "RO"
 msgstr "RO"
 
 #: ../gedit/gedit-tab.c:1377
-#, fuzzy, c-format
+#, c-format
 msgid "Error opening file <i>%s</i>."
-msgstr "Chyba pri načítavaní súboru \"%s\""
+msgstr "Chyba pri otváraní súboru <i>%s</i>."
 
 #: ../gedit/gedit-tab.c:1382
 #, fuzzy, c-format
@@ -2000,9 +2012,9 @@ msgid "Error reverting file <i>%s</i>."
 msgstr "Nastala chyba pri vracaní dokumentu \"%s\"."
 
 #: ../gedit/gedit-tab.c:1387
-#, fuzzy, c-format
+#, c-format
 msgid "Error saving file <i>%s</i>."
-msgstr "Chyba pri načítavaní súboru \"%s\""
+msgstr "Chyba pri ukladaní súboru <i>%s</i>."
 
 #: ../gedit/gedit-tab.c:1405
 msgid "Unicode (UTF-8)"
@@ -2122,9 +2134,8 @@ msgid "Revert to a saved version of the file"
 msgstr "Vráti sa k uloženej verzii súboru"
 
 #: ../gedit/gedit-ui.h:85
-#, fuzzy
 msgid "Print Previe_w"
-msgstr "Náhľad tlače"
+msgstr "_Náhľad tlače"
 
 #: ../gedit/gedit-ui.h:86
 msgid "Print preview"
@@ -2135,22 +2146,20 @@ msgid "_Print..."
 msgstr "_Tlačiť..."
 
 #: ../gedit/gedit-ui.h:88
-#, fuzzy
 msgid "Print the current page"
-msgstr "Vytlačí aktuálny súbor"
+msgstr "Vytlačiť aktuálnu stranu"
 
 #: ../gedit/gedit-ui.h:90
 msgid "Close the current file"
-msgstr "Zavrie aktuálny súbor"
+msgstr "Zavrieť aktuálny súbor"
 
 #: ../gedit/gedit-ui.h:94
 msgid "Undo the last action"
-msgstr "Vráti poslednú akciu"
+msgstr "Vrátiť poslednú akciu"
 
 #: ../gedit/gedit-ui.h:96
-#, fuzzy
 msgid "Redo the last undone action"
-msgstr "Znovu vykoná poslednú vrátenú akciu"
+msgstr "Znovu vykonať poslednú vrátenú akciu"
 
 #: ../gedit/gedit-ui.h:98
 msgid "Cut the selection"
@@ -2448,14 +2457,12 @@ msgid "Characters (with spaces)"
 msgstr "Znakov (s medzerami)"
 
 #: ../plugins/docinfo/docinfo.glade2.h:7
-#, fuzzy
 msgid "Document"
-msgstr "_Dokumenty"
+msgstr "Dokument"
 
 #: ../plugins/docinfo/docinfo.glade2.h:10
-#, fuzzy
 msgid "Selection"
-msgstr "Farba výberu"
+msgstr "Výber"
 
 #: ../plugins/docinfo/docinfo.glade2.h:11
 msgid "Words"
@@ -2497,6 +2504,14 @@ msgstr "Odsadiť riadky"
 msgid "Indents or un-indents selected lines."
 msgstr "Odsadí, alebo zruší odsadenie označených riadkov."
 
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
+msgid "Opens an interactive python console in the bottom panel."
+msgstr ""
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+msgid "Python Console"
+msgstr ""
+
 #: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
 msgstr "Vložiť meno _používateľa"
@@ -2512,6 +2527,148 @@ msgstr "Vloží meno používateľa na aktuálnu pozíciu kurzoru."
 #: ../plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "User name"
 msgstr "Meno používateľa"
+
+#: ../plugins/savecopy/savecopy.c:48
+msgid "Sa_ve Copy..."
+msgstr "_Uložiť kópiu..."
+
+#: ../plugins/savecopy/savecopy.c:51
+msgid "Save a copy of the current document"
+msgstr "Uložiť kópiu aktuálneho dokumentu"
+
+#: ../plugins/savecopy/savecopy.c:314
+#, c-format
+msgid "Could not save a copy of the file to \"%s\""
+msgstr "Nepodarilo sa uložiť kópiu súboru do \"%s\""
+
+#: ../plugins/savecopy/savecopy.c:355
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Súbor \"%s\" už existuje.\n"
+
+#: ../plugins/savecopy/savecopy.c:359
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Chcete ho nahradiť?"
+
+#: ../plugins/savecopy/savecopy.c:413
+msgid "You are trying to overwrite the original file"
+msgstr "Snažíte sa prepísať originálny súbor"
+
+#: ../plugins/savecopy/savecopy.c:522
+msgid "Save Copy..."
+msgstr "Uložiť kópiu..."
+
+#. translators: %s is a filename
+#: ../plugins/savecopy/savecopy.c:554 ../plugins/savecopy/savecopy.c:564
+#, c-format
+msgid "%s (copy)"
+msgstr "%s (kópia)"
+
+#: ../plugins/savecopy/savecopy.c:602
+msgid "_Character Coding:"
+msgstr "Kódovanie _znakov:"
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
+msgid "Save a Copy"
+msgstr "Uložiť kópiu"
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
+msgid "Saves a copy of the current document to a local or remote location."
+msgstr "Uloží kópiu aktuálneho dokumentu na lokálne alebo vzdialené miesto."
+
+#: ../plugins/shell_output/shell_output.c:56
+msgid "_Run Command..."
+msgstr "_Spustiť príkaz..."
+
+#: ../plugins/shell_output/shell_output.c:59
+msgid "Run a command"
+msgstr "Spustiť príkaz"
+
+#: ../plugins/shell_output/shell_output.c:156
+#: ../plugins/shell_output/shell_output.c:571
+msgid "Stopped"
+msgstr "Zastavené"
+
+#: ../plugins/shell_output/shell_output.c:350
+msgid "Run Command"
+msgstr "Vykonať príkaz"
+
+#: ../plugins/shell_output/shell_output.c:369
+msgid "_Run"
+msgstr "_Spustiť"
+
+#: ../plugins/shell_output/shell_output.c:577
+msgid "Done"
+msgstr "Hotovo"
+
+#: ../plugins/shell_output/shell_output.c:579
+msgid "Failed"
+msgstr "Neuspel"
+
+#: ../plugins/shell_output/shell_output.c:749
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Príkaz shellu je prázdny.\n"
+"\n"
+"Prosím, zadajte platný príkaz."
+
+#: ../plugins/shell_output/shell_output.c:771
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"Chyba pri spracovaní príkazu shellu.\n"
+"\n"
+"Prosím, zadajte platný príkaz."
+
+#: ../plugins/shell_output/shell_output.c:849
+msgid "Executing command"
+msgstr "Vykonávam príkaz"
+
+#: ../plugins/shell_output/shell_output.c:914
+msgid "An error occurred while running the selected command."
+msgstr "Nastala chyba pročas spustenia zvoleného príkazu."
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+msgid ""
+"Executes an external program and, if required, displays its output in the "
+"output window."
+msgstr ""
+"Spustí externý program a zobrazí jeho výstup vo výstupnom okne, aj je to "
+"požadované."
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid "Shell command"
+msgstr "Príkaz shellu"
+
+#: ../plugins/shell_output/shell_output.glade2.h:1
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
+
+#: ../plugins/shell_output/shell_output.glade2.h:2
+msgid "Co_mmand:"
+msgstr "_Príkaz:"
+
+#: ../plugins/shell_output/shell_output.glade2.h:3
+msgid "Select the working directory..."
+msgstr "Vyberte pracovný priečinok..."
+
+#: ../plugins/shell_output/shell_output.glade2.h:4
+msgid "_Show results in Output Window"
+msgstr "_Zobraziť výsledky v okne výstupu"
+
+#: ../plugins/shell_output/shell_output.glade2.h:5
+msgid "_Working directory:"
+msgstr "_Pracovný priečnok:"
+
+#: ../plugins/shell_output/shell_output.glade2.h:6
+msgid "gedit: Shell Output plugin"
+msgstr "gedit: Vložiť výstup shellu"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -2908,7 +3065,8 @@ msgid "Check the current document for incorrect spelling"
 msgstr "Kontrola pravopisu aktuálneho dokumentu"
 
 #: ../plugins/spell/gedit-spell-plugin.c:78
-msgid "Set _Language"
+#, fuzzy
+msgid "Set _Language..."
 msgstr "Nastaviť _jazyk"
 
 #: ../plugins/spell/gedit-spell-plugin.c:80
@@ -2939,10 +3097,6 @@ msgstr "Vybrať _jazyk aktuálneho dokumentu."
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
 msgstr "Nastaviť jazyk"
-
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
 
 #: ../plugins/spell/spell-checker.glade2.h:2
 msgid "<b>Language</b>"
@@ -4481,487 +4635,3 @@ msgstr "_Pýtať sa na formát"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Použiť _vlastný formát"
-
-#~ msgid "Gedit View"
-#~ msgstr "Pohľad Gedit"
-
-#~ msgid "Gedit View."
-#~ msgstr "Pohľad Gedit."
-
-#~ msgid "Gedit viewer factory"
-#~ msgstr "Vytváracie rozhranie pre Gedit"
-
-#~ msgid "gedit application"
-#~ msgstr "aplikácia gedit"
-
-#~ msgid "gedit automation factory"
-#~ msgstr "vytváracie rozhranie pre gedit automation"
-
-#~ msgid "Go to Line"
-#~ msgstr "Prejsť na riadok"
-
-#~ msgid "_Go to Line"
-#~ msgstr "_Prejsť na riadok"
-
-#~ msgid "The text \"%s\" was not found."
-#~ msgstr "Reťazec \"%s\" nenájdený."
-
-#~ msgid "Set program location..."
-#~ msgstr "Nastaviť umiestnenie programu..."
-
-#~ msgid ""
-#~ "The %s plugin uses an external program, called <tt>%s</tt>, to perform "
-#~ "its task.\n"
-#~ "\n"
-#~ "Please, specify the location of the <tt>%s</tt> program."
-#~ msgstr ""
-#~ "Modul %s používa pre túto ulohu externý program <tt>%s</tt>.\n"
-#~ "\n"
-#~ "Prosím, zadajte umiestnenie programu <tt>%s</tt>."
-
-#~ msgid "The selected file is not executable."
-#~ msgstr "Vybraný súbor nie je spustiteľný."
-
-#~ msgid "Goto Line"
-#~ msgstr "Prejsť na riadok"
-
-#~ msgid "_Line number:"
-#~ msgstr "Číslo _riadku:"
-
-#~ msgid "button1"
-#~ msgstr "button1"
-
-#~ msgid "dialog1"
-#~ msgstr "dialog1"
-
-#~ msgid "Browse for program location..."
-#~ msgstr "Prechádzať umiestnenie programu..."
-
-#~ msgid "label"
-#~ msgstr "popis"
-
-#~ msgid "Find Next"
-#~ msgstr "Hľadať ďalej"
-
-#~ msgid "Open from URI"
-#~ msgstr "Otvoriť pomocou URI"
-
-#~ msgid "%s %d"
-#~ msgstr "%s %d"
-
-#~ msgid "Invalid UTF-8 data"
-#~ msgstr "Neplatné dáta UTF-8"
-
-#~ msgid "Could not read symbolic link information for %s"
-#~ msgstr "Nepodarilo sa prečítať informácie o symbolickom odkaze %s"
-
-#~ msgid "The file has too many symbolic links."
-#~ msgstr "Súbor obsazuje príliš veľa symbolických odkazov."
-
-#~ msgid "gedit cannot handle %s: locations in write mode."
-#~ msgstr "gedit nedokáže spracovať miesta %s: v režime zápisu."
-
-#~ msgid "gedit cannot handle this kind of location in write mode."
-#~ msgstr "geditr nedokáže spracovať tento typ umiestnenia v režime zápisu."
-
-#~ msgid "Invalid filename."
-#~ msgstr "Neplatné meno súboru."
-
-#~ msgid "A file named \"%s\" already exists.\n"
-#~ msgstr "Súbor \"%s\" už existuje.\n"
-
-#~ msgid "Do you want to replace it with the one you are saving?"
-#~ msgstr "Chcete ho nahradiť?"
-
-#~ msgid "Select a file to open"
-#~ msgstr "Vyberte súbor"
-
-#~ msgid "Select files to open"
-#~ msgstr "Vyberte súbory"
-
-#~ msgid "Select a filename to save"
-#~ msgstr "Vyberte meno súboru"
-
-#~ msgid "Saving document \"%s\"..."
-#~ msgstr "Ukladám dokument \"%s\"..."
-
-#~ msgid "The document \"%s\" has not been saved."
-#~ msgstr "Dokument \"%s\" nebol uložený."
-
-#~ msgid "The document \"%s\" has been saved."
-#~ msgstr "Dokument \"%s\" bol uložený."
-
-#~ msgid "Save as..."
-#~ msgstr "Uložiť ako..."
-
-#~ msgid "The document \"%s\" has not been reverted."
-#~ msgstr "Dokument \"%s\" nebol vrátený."
-
-#~ msgid "The document \"%s\" has been reverted."
-#~ msgstr "Dokument \"%s\" bol vrátený."
-
-#~ msgid "Could not read data from stdin."
-#~ msgstr "Nastala chyba pri čítaní zo štandardného vstupu."
-
-#~ msgid "Reverting file:"
-#~ msgstr "Vraciam obsah súboru:"
-
-#~ msgid "Loading file:"
-#~ msgstr "Načítavam súbor:"
-
-#~ msgid "Loaded file \"%s\""
-#~ msgstr "Načítaný súbor \"%s\""
-
-#~ msgid "Loaded %d file"
-#~ msgid_plural "Loaded %d files"
-#~ msgstr[0] "Načítaných %d súborov"
-#~ msgstr[1] "Načítaný %d súbor"
-#~ msgstr[2] "Načítané %d súbory"
-
-#~ msgid "Created file \"%s\""
-#~ msgstr "Vytvorený súbor \"%s\""
-
-#~ msgid "Access was denied."
-#~ msgstr "Prístup bol odmietnutý."
-
-#~ msgid ""
-#~ "there are too many open files. Please, close some open files and try "
-#~ "again."
-#~ msgstr ""
-#~ "je otvorených príliš veľa súborov. Prosím, zatvorte niektoré otvorené "
-#~ "súbory a skúste to znovu."
-
-#~ msgid ""
-#~ "gedit was not able to automatically detect the character coding. Please, "
-#~ "check that you are not trying to open a binary file and try again "
-#~ "selecting a character coding in the 'Open File...' (or 'Open Location') "
-#~ "dialog."
-#~ msgstr ""
-#~ "gedit nedokázal automaticky určiť kódovanie znakov. Prosím, skontrolujte, "
-#~ "že sa nesnažíte otvoriť binárny súbor a skúste znova vybrať kódovanie "
-#~ "znakov v dialógovom okne 'Otvoriť súbor...' (alebo 'Otovriť miesto')."
-
-#~ msgid ""
-#~ "Please, check that you are not trying to open a binary file and that you "
-#~ "selected the right character coding in the 'Open File... ' (or 'Open "
-#~ "Location') dialog and try again."
-#~ msgstr ""
-#~ "Prosím skontrolujte, či sa nepokúšate otvoriť binárny súbor a že ste si "
-#~ "zvolili správne kódovanie znakov v dialógovom okne 'Otvoriť súbor... "
-#~ "' (alebo 'Otvoriť miesto') a skúste znova."
-
-#~ msgid ""
-#~ "The file contains data in an invalid format. Probably, you are trying to "
-#~ "open a binary file."
-#~ msgstr ""
-#~ "Súbor obsahuje dáta v neplatnom formáte. Možno chcete otvoriť binárny "
-#~ "súbor."
-
-#~ msgid ""
-#~ "Not enough available memory. Please, close some running applications and "
-#~ "try again."
-#~ msgstr ""
-#~ "Nedostatok dostupnej pamäte. Prosím, zatvorte niektoré bežiace aplikácie "
-#~ "a skúste to znova."
-
-#~ msgid ""
-#~ "The host name was empty. Please, check that your proxy settings are "
-#~ "correct and try again."
-#~ msgstr ""
-#~ "Názov hostiteľa bol prázdny. Prosím skontrolujte, že vaše nastavenia "
-#~ "proxy sú správne a skúste znova."
-
-#~ msgid ""
-#~ "The file contains invalid UTF-8 data. Probably, you are trying to revert "
-#~ "a binary file."
-#~ msgstr ""
-#~ "Súbor obsahuje neplatné dáta UTF-8. Pravdepodobne sa pokúšate vrátiť "
-#~ "binárny súbor."
-
-#~ msgid "It is not possible to revert an Untitled document."
-#~ msgstr "Nemôžete sa vrátiť v dokumente bez mena."
-
-#~ msgid "The file \"%s\" already exists"
-#~ msgstr "Súbor \"%s\" už existuje"
-
-#~ msgid "Please, check that you typed the location correctly."
-#~ msgstr "Prosím overte, že ste zadali správne umiestnenie."
-
-#~ msgid "Could not create the file \"%s\""
-#~ msgstr "Nie je možné vytvoriť súbor \"%s\""
-
-#~ msgid "Make sure you have the appropriate write permissions."
-#~ msgstr "Overte, že máte dostatočné práva pre zápis."
-
-#~ msgid "The file name is too long."
-#~ msgstr "Meno súboru je príliš dlhé."
-
-#~ msgid ""
-#~ "A directory component in the file name does not exist or is a dangling "
-#~ "symbolic link."
-#~ msgstr ""
-#~ "Časť priečinku v mene súboru neexistuje alebo je to neplatný symbolický "
-#~ "odkaz."
-
-#~ msgid ""
-#~ "There is not enough disk space to create the file. Please free some disk "
-#~ "space and try again."
-#~ msgstr ""
-#~ "Nedostatok miesta pre vytvorenie súboru. Uvoľnite nejaké miesto na disku "
-#~ "a skúste to znovu."
-
-#~ msgid "Close the output window"
-#~ msgstr "Zavrieť okno s výstupom"
-
-#~ msgid "Copy selected lines"
-#~ msgstr "Kopírovať vybrané riadky"
-
-#~ msgid "Clear the output window"
-#~ msgstr "Vyčistiť okno výstupu"
-
-#~ msgid "Output Lines"
-#~ msgstr "Riadky výstupu"
-
-#~ msgid "Preparing pages..."
-#~ msgstr "Pripravujem stránky..."
-
-#~ msgid "Printing page %d of %d..."
-#~ msgstr "Tlačím stránku %d z %d..."
-
-#~ msgid "Change the visibility of the output window in the current window"
-#~ msgstr "Zmena zobrazenia okna s výstupom v aktuálnom okne"
-
-#~ msgid "Close"
-#~ msgstr "Zavrieť"
-
-#~ msgid "Copy"
-#~ msgstr "Kopírovať"
-
-#~ msgid "Cu_t"
-#~ msgstr "Vy_strihnúť"
-
-#~ msgid "Cut"
-#~ msgstr "Vystrihnúť"
-
-#~ msgid "Delete"
-#~ msgstr "Odstrániť"
-
-#~ msgid "Find Previous"
-#~ msgstr "Nájsť predchádzajúce"
-
-#~ msgid "Main toolbar"
-#~ msgstr "Hlavný panel nástrojov"
-
-#~ msgid "New"
-#~ msgstr "Nový"
-
-#~ msgid "Open Location..."
-#~ msgstr "Otvoriť miesto..."
-
-#~ msgid "Paste"
-#~ msgstr "Vložiť"
-
-#~ msgid "Print Previe_w..."
-#~ msgstr "Ná_hľad tlače..."
-
-#~ msgid "Quit"
-#~ msgstr "Koniec"
-
-#~ msgid "Redo"
-#~ msgstr "Opakovať vrátené"
-
-#~ msgid "Revert"
-#~ msgstr "Vrátiť"
-
-#~ msgid "Select All"
-#~ msgstr "Vybrať všetko"
-
-#~ msgid ""
-#~ "Set toolbar button style according to desktop Menu and Toolbar Preferences"
-#~ msgstr ""
-#~ "Nastaví štýl panelu nástrojov podľa štandardného nastavenia prostredia"
-
-#~ msgid "Show only icons in the toolbar"
-#~ msgstr "Zobraziť v paneli nástrojov iba ikony"
-
-#~ msgid "Show text below every icon in the toolbar"
-#~ msgstr "Zobraziť text pod každou ikonou v paneli nástrojov"
-
-#~ msgid "Show text only beside important icons in the toolbar"
-#~ msgstr "Zobraziť text vedľa dôležitých ikon v paneli nástrojov"
-
-#~ msgid "T_ext for Important Icons"
-#~ msgstr "T_ext pre dôležité ikony"
-
-#~ msgid "Undo"
-#~ msgstr "Vrátiť späť"
-
-#~ msgid "_About"
-#~ msgstr "_O programe"
-
-#~ msgid "_Close"
-#~ msgstr "_Zavrieť"
-
-#~ msgid "_Copy"
-#~ msgstr "_Kopírovať"
-
-#~ msgid "_Customize Toolbar"
-#~ msgstr "Prispôsobiť _panely nástrojov"
-
-#~ msgid "_Delete"
-#~ msgstr "_Odstrániť"
-
-#~ msgid "_Desktop Default"
-#~ msgstr "Š_tandardné nastavenie"
-
-#~ msgid "_Icons Only"
-#~ msgstr "_Iba ikony"
-
-#~ msgid "_New"
-#~ msgstr "_Nový"
-
-#~ msgid "_Output Window"
-#~ msgstr "Okno s _výstupom"
-
-#~ msgid "_Paste"
-#~ msgstr "V_ložiť"
-
-#~ msgid "_Quit"
-#~ msgstr "_Koniec"
-
-#~ msgid "_Redo"
-#~ msgstr "_Opakovať vrátené"
-
-#~ msgid "_Text for All Icons"
-#~ msgstr "_Text pre všetky ikony"
-
-#~ msgid "_Undo"
-#~ msgstr "Vrátiť _späť"
-
-#~ msgid "Quit an existing instance of gedit"
-#~ msgstr "Ukončiť bežiaci gedit"
-
-#~ msgid "The file you are trying to open contains an invalid byte sequence."
-#~ msgstr ""
-#~ "Súbor, ktorý sa pokúšate otvoriť, obsahuje neplatnú postupnosť bajtov."
-
-#~ msgid ""
-#~ "gedit was not able to automatically determine the encoding of the file "
-#~ "you want to open."
-#~ msgstr ""
-#~ "gedit nemohol automaticky určiť kódovanie súboru, ktorý chcete otvoriť."
-
-#~ msgid "Update"
-#~ msgstr "Aktualizovať"
-
-#~ msgid "gedit: Document Info plugin"
-#~ msgstr "gedit: Modul informácií o dokumente"
-
-#~ msgid "Sa_ve Copy..."
-#~ msgstr "_Uložiť kópiu..."
-
-#~ msgid "Save a copy of the current document"
-#~ msgstr "Uložiť kópiu aktuálneho dokumentu"
-
-#~ msgid "Could not save a copy of the file to \"%s\""
-#~ msgstr "Nepodarilo sa uložiť kópiu súboru do \"%s\""
-
-#~ msgid "You are trying to overwrite the original file"
-#~ msgstr "Snažíte sa prepísať originálny súbor"
-
-#~ msgid "Save Copy..."
-#~ msgstr "Uložiť kópiu..."
-
-#~ msgid "%s (copy)"
-#~ msgstr "%s (kópia)"
-
-#~ msgid "Save a Copy"
-#~ msgstr "Uložiť kópiu"
-
-#~ msgid "Saves a copy of the current document to a local or remote location."
-#~ msgstr "Uloží kópiu aktuálneho dokumentu na lokálne alebo vzdialené miesto."
-
-#~ msgid "_Run Command..."
-#~ msgstr "_Spustiť príkaz..."
-
-#~ msgid "Run a command"
-#~ msgstr "Spustiť príkaz"
-
-#~ msgid "Stopped"
-#~ msgstr "Zastavené"
-
-#~ msgid "Run Command"
-#~ msgstr "Vykonať príkaz"
-
-#~ msgid "_Run"
-#~ msgstr "_Spustiť"
-
-#~ msgid "Done"
-#~ msgstr "Hotovo"
-
-#~ msgid "Failed"
-#~ msgstr "Neuspel"
-
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Príkaz shellu je prázdny.\n"
-#~ "\n"
-#~ "Prosím, zadajte platný príkaz."
-
-#~ msgid ""
-#~ "Error parsing the shell command.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Chyba pri spracovaní príkazu shellu.\n"
-#~ "\n"
-#~ "Prosím, zadajte platný príkaz."
-
-#~ msgid "Executing command"
-#~ msgstr "Vykonávam príkaz"
-
-#~ msgid "An error occurred while running the selected command."
-#~ msgstr "Nastala chyba pročas spustenia zvoleného príkazu."
-
-#~ msgid ""
-#~ "Executes an external program and, if required, displays its output in the "
-#~ "output window."
-#~ msgstr ""
-#~ "Spustí externý program a zobrazí jeho výstup vo výstupnom okne, aj je to "
-#~ "požadované."
-
-#~ msgid "Shell command"
-#~ msgstr "Príkaz shellu"
-
-#~ msgid "Co_mmand:"
-#~ msgstr "_Príkaz:"
-
-#~ msgid "Select the working directory..."
-#~ msgstr "Vyberte pracovný priečinok..."
-
-#~ msgid "_Show results in Output Window"
-#~ msgstr "_Zobraziť výsledky v okne výstupu"
-
-#~ msgid "_Working directory:"
-#~ msgstr "_Pracovný priečnok:"
-
-#~ msgid "gedit: Shell Output plugin"
-#~ msgstr "gedit: Vložiť výstup shellu"
-
-#~ msgid "The selected text does not contain misspelled words."
-#~ msgstr "Označený text neobsahuje žiadne nesprávne slová."
-
-#~ msgid "The document does not contain misspelled words."
-#~ msgstr "Dokument neobsahuje žiadne nesprávne slová."
-
-#~ msgid "Tag list plugin"
-#~ msgstr "Modul pre zoznam tagov"
-
-#~ msgid "Tag _List"
-#~ msgstr "_Zoznam značiek"
-
-#~ msgid "Show the tag list window"
-#~ msgstr "Zobraziť okno zoznamu značiek"
