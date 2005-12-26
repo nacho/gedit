@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-13 05:46+0100\n"
-"PO-Revision-Date: 2005-12-13 14:21+0530\n"
+"POT-Creation-Date: 2005-12-26 05:58+0100\n"
+"PO-Revision-Date: 2005-12-26 12:01+0530\n"
 "Last-Translator: Amanpreet Singh Alam <amanpreetalam@yahoo.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -178,8 +178,8 @@ msgid ""
 "List of VFS schemes gedit supports in write mode. The 'file' scheme is "
 "writable by default."
 msgstr ""
-"ਲਿਖਣਯੋਗ ਢੰਗ ਵਿੱਚ ਜੀ-ਸੰਪਾਦਕ ਵਲੋਂ ਸਹਾਇਕ VFS ਸਕੀਮਾਂ ਦੀ ਸੂਚੀ ਹੈ। 'File' ਸਕੀਮ "
-"ਮੂਲ ਰੂਪ ਵਿੱਚ ਲਿਖਣਯੋਗ ਢੰਗ ਹੈ।"
+"ਲਿਖਣਯੋਗ ਢੰਗ ਵਿੱਚ ਜੀ-ਸੰਪਾਦਕ ਵਲੋਂ ਸਹਾਇਕ VFS ਸਕੀਮਾਂ ਦੀ ਸੂਚੀ ਹੈ। 'File' ਸਕੀਮ ਮੂਲ ਰੂਪ ਵਿੱਚ "
+"ਲਿਖਣਯੋਗ ਢੰਗ ਹੈ।"
 
 #: ../data/gedit.schemas.in.h:30
 msgid ""
@@ -1001,7 +1001,7 @@ msgid "Replace _All"
 msgstr "ਸਭ ਤਬਦੀਲ(_A)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:562
+#: ../gedit/gedit-commands-file.c:562 ../plugins/savecopy/savecopy.c:368
 msgid "_Replace"
 msgstr "ਤਬਦੀਲ(_R)"
 
@@ -1205,7 +1205,7 @@ msgid "Could not obtain backup filename"
 msgstr "ਬੈਕਅੱਪ ਫਾਇਲ-ਨਾਂ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1417 ../gedit/gedit-window.c:1422
+#: ../gedit/gedit-window.c:1428 ../gedit/gedit-window.c:1433
 msgid "Read Only"
 msgstr "ਸਿਰਫ ਪਡ਼੍ਹਨ ਲਈ"
 
@@ -1348,11 +1348,11 @@ msgstr "ਸ਼ਾਮਲ ਜਾਂ ਹਟਾਓ(_R)..."
 msgid "C_haracter Coding:"
 msgstr "ਅੱਖਰ ਕੋਡਿੰਗ(_h):"
 
-#: ../gedit/gedit-file-chooser-dialog.c:186
+#: ../gedit/gedit-file-chooser-dialog.c:186 ../plugins/savecopy/savecopy.c:583
 msgid "All Files"
 msgstr "ਸਭ ਫਾਇਲਾਂ"
 
-#: ../gedit/gedit-file-chooser-dialog.c:194
+#: ../gedit/gedit-file-chooser-dialog.c:194 ../plugins/savecopy/savecopy.c:591
 msgid "All Text Files"
 msgstr "ਸਭ ਪਾਠ ਫਾਇਲਾਂ"
 
@@ -1503,7 +1503,7 @@ msgstr "<small>ਅੱਖਰ ਕੋਡਿੰਗ(_a):</small>"
 
 #: ../gedit/gedit-io-error-message-area.c:600
 msgid "_Retry"
-msgstr "ਮੁੜ-ਪ੍ਰਾਪਤ(_R)"
+msgstr "ਮੁੜ-ਕੋਸ਼ਿਸ਼(_R)"
 
 #: ../gedit/gedit-io-error-message-area.c:695
 msgid "gedit has not been able to detect the character coding."
@@ -1538,12 +1538,12 @@ msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
 msgstr ""
-"ਦਸਤਾਵੇਜ਼ ਵਿੱਚ ਇੱਕ ਜਾਂ ਵੱਧ ਅੱਖਰ ਅਜਿਹੇ ਹਨ, ਜਿੰਨ੍ਹਾਂ ਨੂੰ ਦਿੱਤੀ ਅੱਖਰ ਇੰਕੋਡਿੰਗ ਨਾਲ ਸੋਧਿਆ ਨਹੀਂ ਜਾ "
-"ਸਕਦਾ ਹੈ।"
+"ਦਸਤਾਵੇਜ਼ ਵਿੱਚ ਇੱਕ ਜਾਂ ਵੱਧ ਅੱਖਰ ਅਜਿਹੇ ਹਨ, ਜਿੰਨ੍ਹਾਂ ਨੂੰ ਦਿੱਤੀ ਅੱਖਰ ਇੰਕੋਡਿੰਗ ਨਾਲ ਸੋਧਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ "
+"ਹੈ।"
 
 #: ../gedit/gedit-io-error-message-area.c:818
 msgid "_Edit Anyway"
-msgstr "ਕਿਸੇ ਤਰ੍ਹਾਂ ਵੀ ਸੋਧ(_E)"
+msgstr "ਕਿਵੇਂ ਵੀ ਸੋਧ(_E)"
 
 #: ../gedit/gedit-io-error-message-area.c:821
 msgid "_Don't Edit"
@@ -1560,13 +1560,13 @@ msgid ""
 "gedit opened this instance of the file in non-editable way. Do you want to "
 "edit it anyway?"
 msgstr ""
-"ਜੀ-ਸੰਪਾਦਕ ਨੇ ਫਾਇਲ ਦੇ ਇਸ ਮੌਕੇ ਦੇ ਵਰਜਨ ਨੂੰ ਨਾ-ਸੋਧਣਯੋਗ ਢੰਗ ਨਾਲ ਖੋਲ੍ਹਿਆ ਹੈ। ਕੀ ਤੁਸੀਂ "
-"ਇਸ ਨੂੰ ਕਿਸੇ ਵੀ ਢੰਗ ਨਾਲ ਸੋਧਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+"ਜੀ-ਸੰਪਾਦਕ ਨੇ ਫਾਇਲ ਦੇ ਇਸ ਮੌਕੇ ਦੇ ਵਰਜਨ ਨੂੰ ਨਾ-ਸੋਧਣਯੋਗ ਢੰਗ ਨਾਲ ਖੋਲ੍ਹਿਆ ਹੈ। ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਕਿਸੇ ਵੀ "
+"ਢੰਗ ਨਾਲ ਸੋਧਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: ../gedit/gedit-io-error-message-area.c:910
 #: ../gedit/gedit-io-error-message-area.c:1005
 msgid "_Save Anyway"
-msgstr "ਕਿਸੇ ਤਰ੍ਹਾਂ ਵੀ ਸੰਭਾਲੋ(_S)"
+msgstr "ਕਿਵੇਂ ਵੀ ਸੰਭਾਲੋ(_S)"
 
 #: ../gedit/gedit-io-error-message-area.c:914
 #: ../gedit/gedit-io-error-message-area.c:1009
@@ -1601,10 +1601,10 @@ msgid ""
 "You can ignore this warning and save the file anyway, but if an error occurs "
 "while saving, you could lose the old copy of the file. Save anyway?"
 msgstr ""
-"ਜੀ-ਸੰਪਾਦਕ ਇੱਕ ਫਾਇਕ ਦੀ ਪੁਰਾਣੀ ਨਕਲ ਤੋਂ ਬੈਕਅੱਪ ਨਹੀਂ ਬਣਾ ਸਕਦੇ ਹੈ, ਜਦੋਂ ਕਿ ਇੱਕ ਨਵੇਂ ਨੂੰ "
-"ਸੰਭਾਲਿਆ ਨਹੀ ਜਾਂਦਾ ਹੈ। ਤੁਸੀਂ ਇਹ ਚੇਤਾਵਨੀਆਂ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਕੇ ਫਾਇਲ ਨੂੰ ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ "
-"ਸੰਭਾਲ ਸਕਦੇ ਹੋ, ਪਰ ਜੇਕਰ ਸੰਭਾਲਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਤਾਂ ਤੁਸੀਂ ਫਾਇਲ ਦੀ ਪੁਰਾਣੀ ਨਕਲ "
-"ਨੂੰ ਗੁਆ ਬੈਠੋਗੇ। ਕੀ ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਸੰਭਾਲਣਾ ਹੈ?"
+"ਜੀ-ਸੰਪਾਦਕ ਇੱਕ ਫਾਇਕ ਦੀ ਪੁਰਾਣੀ ਨਕਲ ਤੋਂ ਬੈਕਅੱਪ ਨਹੀਂ ਬਣਾ ਸਕਦੇ ਹੈ, ਜਦੋਂ ਕਿ ਇੱਕ ਨਵੇਂ ਨੂੰ ਸੰਭਾਲਿਆ ਨਹੀ "
+"ਜਾਂਦਾ ਹੈ। ਤੁਸੀਂ ਇਹ ਚੇਤਾਵਨੀਆਂ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰਕੇ ਫਾਇਲ ਨੂੰ ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ ਸੰਭਾਲ ਸਕਦੇ ਹੋ, ਪਰ ਜੇਕਰ "
+"ਸੰਭਾਲਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਤਾਂ ਤੁਸੀਂ ਫਾਇਲ ਦੀ ਪੁਰਾਣੀ ਨਕਲ ਨੂੰ ਗੁਆ ਬੈਠੋਗੇ। ਕੀ ਕਿਸੇ ਵੀ ਤਰ੍ਹਾਂ "
+"ਸੰਭਾਲਣਾ ਹੈ?"
 
 #. Translators: %s is a URI scheme (like for example http, ftp, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1105
@@ -1613,16 +1613,16 @@ msgid ""
 "gedit cannot handle <i>%s:</i> locations in write mode. Please, check that "
 "you typed the location correctly and try again."
 msgstr ""
-"ਜੀ-ਸੰਪਾਦਕ <i>%s:</i> ਟਿਕਾਣੇ ਨੂੰ ਲਿਖਣ ਢੰਗ ਵਿੱਚ ਵਰਤ ਨਹੀਂ ਸਕਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰ "
-"ਲਵੋ ਕਿ ਤੁਸੀਂ ਠੀਕ ਟਿਕਾਣਾ ਦਿੱਤਾ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
+"ਜੀ-ਸੰਪਾਦਕ <i>%s:</i> ਟਿਕਾਣੇ ਨੂੰ ਲਿਖਣ ਢੰਗ ਵਿੱਚ ਵਰਤ ਨਹੀਂ ਸਕਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰ ਲਵੋ "
+"ਕਿ ਤੁਸੀਂ ਠੀਕ ਟਿਕਾਣਾ ਦਿੱਤਾ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1112
 msgid ""
 "gedit cannot handle this location  in write mode. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
-"ਜੀ-ਸੰਪਾਦਕ ਇਹ ਟਿਕਾਣੇ ਨੂੰ ਲਿਖਣ ਢੰਗ ਵਿੱਚ ਵਰਤ ਨਹੀਂ ਸਕਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰ "
-"ਲਵੋ ਕਿ ਤੁਸੀਂ ਠੀਕ ਟਿਕਾਣਾ ਦਿੱਤਾ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
+"ਜੀ-ਸੰਪਾਦਕ ਇਹ ਟਿਕਾਣੇ ਨੂੰ ਲਿਖਣ ਢੰਗ ਵਿੱਚ ਵਰਤ ਨਹੀਂ ਸਕਦਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰ ਲਵੋ ਕਿ ਤੁਸੀਂ "
+"ਠੀਕ ਟਿਕਾਣਾ ਦਿੱਤਾ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1121
 msgid ""
@@ -1639,17 +1639,15 @@ msgstr ""
 msgid ""
 "%s is not a valid location. Please, check that you typed the location "
 "correctly and try again."
-msgstr ""
-"%s ਟਿਕਾਣਾ ਠੀਕ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਟਿਕਾਣਾ ਠੀਕ ਹੈ ਅਤੇ ਮੁੜ ਕੋਸ਼ਸ਼ "
-"ਕਰਕੇ ਦੇਖੋ।"
+msgstr "%s ਟਿਕਾਣਾ ਠੀਕ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਟਿਕਾਣਾ ਠੀਕ ਹੈ ਅਤੇ ਮੁੜ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1135
 msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
 msgstr ""
-"ਤੁਹਾਨੂੰ ਫਾਇਲ ਸੰਭਾਲਣ ਲਈ ਲੋੜੀਦੇ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਸੀਂ ਠੀਕ "
-"ਟਿਕਾਣਾ ਦਿੱਤਾ ਹੈ ਅਤੇ ਮੁੜ-ਕੋਸ਼ਸ਼ ਕਰੋ।"
+"ਤੁਹਾਨੂੰ ਫਾਇਲ ਸੰਭਾਲਣ ਲਈ ਲੋੜੀਦੇ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਸੀਂ ਠੀਕ ਟਿਕਾਣਾ "
+"ਦਿੱਤਾ ਹੈ ਅਤੇ ਮੁੜ-ਕੋਸ਼ਸ਼ ਕਰੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1147
 #, c-format
@@ -1657,32 +1655,30 @@ msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
 "try again."
 msgstr ""
-"%s ਇੱਕ ਡਾਇਰੈਕਟਰੀ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਸੀਂ ਟਿਕਾਣਾ ਸਹੀਂ ਭਰਿਆ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ "
-"ਕਰਕੇ ਦੇਖੋ।"
+"%s ਇੱਕ ਡਾਇਰੈਕਟਰੀ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਸੀਂ ਟਿਕਾਣਾ ਸਹੀਂ ਭਰਿਆ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ "
+"ਦੇਖੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1153
 msgid ""
 "Not enough available memory to save the file. Please, close some running "
 "applications and try again."
-msgstr ""
-"ਫਾਇਲ ਸੰਭਾਲਣ ਲਈ ਲੋੜੀਦੀ ਮੈਮੋਰੀ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ, ਕੁਝ ਚੱਲਦੇ ਕਾਰਜ ਬੰਦ ਕਰੋ ਅਤੇ "
-"ਮੁੜ-ਕੋਸ਼ਸ਼ ਕਰੋ।"
+msgstr "ਫਾਇਲ ਸੰਭਾਲਣ ਲਈ ਲੋੜੀਦੀ ਮੈਮੋਰੀ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ, ਕੁਝ ਚੱਲਦੇ ਕਾਰਜ ਬੰਦ ਕਰੋ ਅਤੇ ਮੁੜ-ਕੋਸ਼ਸ਼ ਕਰੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1227
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"ਫਾਇਲ ਸੰਭਾਲਣ ਲਈ ਲੋੜੀਦੀ ਡਿਸਕ ਥਾਂ ਮੌਜੂਦ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਕੁਝ ਡਿਸਕ ਥਾਂ "
-"ਖਾਲੀ ਕਰੋ ਅਤੇ ਮੁੜ-ਕੋਸ਼ਸ਼ ਕਰੋ।"
+"ਫਾਇਲ ਸੰਭਾਲਣ ਲਈ ਲੋੜੀਦੀ ਡਿਸਕ ਥਾਂ ਮੌਜੂਦ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਪਹਿਲਾਂ ਕੁਝ ਡਿਸਕ ਥਾਂ ਖਾਲੀ ਕਰੋ ਅਤੇ "
+"ਮੁੜ-ਕੋਸ਼ਸ਼ ਕਰੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1233
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
-"ਤੁਸੀਂ ਫਾਇਲ ਨੂੰ ਸਿਰਫ਼ ਪੜ੍ਹਨ-ਯੋਗ ਡਿਸਕ ਉੱਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਸ਼ ਕਰ ਰਹੇ ਹੋ। ਕਿਰਪਾ ਕਰਕੇ "
-"ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਸੀਂ ਟਿਕਾਣਾ ਸਹੀਂ ਭਰਿਆ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
+"ਤੁਸੀਂ ਫਾਇਲ ਨੂੰ ਸਿਰਫ਼ ਪੜ੍ਹਨ-ਯੋਗ ਡਿਸਕ ਉੱਤੇ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਸ਼ ਕਰ ਰਹੇ ਹੋ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ "
+"ਤੁਸੀਂ ਟਿਕਾਣਾ ਸਹੀਂ ਭਰਿਆ ਹੈ ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1239
 msgid "A file with the same name already exists. Please, use a different name."
@@ -1693,8 +1689,8 @@ msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
 msgstr ""
-"ਜਿਸ ਡਿਸਕ ਉੱਤੇ ਤੁਸੀਂ ਫਾਇਲ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ ਕਰ ਰਿਹੇ ਹੋ, ਉਸ ਉੱਪਰ ਫਾਇਲ ਨਾਂ ਲਈ ਸੀਮਿਤ "
-"ਸੀਮਾ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਛੋਟਾ ਨਾ ਵਰਤੋਂ।"
+"ਜਿਸ ਡਿਸਕ ਉੱਤੇ ਤੁਸੀਂ ਫਾਇਲ ਸੰਭਾਲਣ ਦੀ ਕੋਸ਼ਿਸ ਕਰ ਰਿਹੇ ਹੋ, ਉਸ ਉੱਪਰ ਫਾਇਲ ਨਾਂ ਲਈ ਸੀਮਿਤ ਸੀਮਾ ਹੈ। "
+"ਕਿਰਪਾ ਕਰਕੇ ਛੋਟਾ ਨਾ ਵਰਤੋਂ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1249
 #, c-format
@@ -1702,8 +1698,8 @@ msgid ""
 "%s is not a regular file. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"%s ਇੱਕ ਨਿਯਮਤ ਫਾਇਲ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਸੀਂ ਟਿਕਾਣਾ ਸਹੀਂ ਭਰਿਆ ਹੈ ਅਤੇ "
-"ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
+"%s ਇੱਕ ਨਿਯਮਤ ਫਾਇਲ ਨਹੀਂ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਸੀਂ ਟਿਕਾਣਾ ਸਹੀਂ ਭਰਿਆ ਹੈ "
+"ਅਤੇ ਫਿਰ ਕੋਸ਼ਸ਼ ਕਰਕੇ ਦੇਖੋ।"
 
 #: ../gedit/gedit-io-error-message-area.c:1292
 #, c-format
@@ -1713,6 +1709,22 @@ msgstr "ਫਾਇਲ %s ਨੂੰ ਸੰਭਾਲਿਆ ਨਹੀਂ ਜਾ ਸ�
 #: ../gedit/gedit-notebook.c:823
 msgid "Close document"
 msgstr "ਦਸਤਾਵੇਜ਼ ਬੰਦ"
+
+#: ../gedit/gedit-output-window.c:378
+msgid "Close the output window"
+msgstr "ਆਉਟਪੁੱਟ ਝਰੋਖਾ ਬੰਦ"
+
+#: ../gedit/gedit-output-window.c:416
+msgid "Copy selected lines"
+msgstr "ਚੁਣੀਆਂ ਸਤਰਾਂ ਨਕਲ"
+
+#: ../gedit/gedit-output-window.c:436
+msgid "Clear the output window"
+msgstr "ਆਉਟਪੁੱਟ ਝਰੋਖਾ ਸਾਫ਼"
+
+#: ../gedit/gedit-output-window.c:476
+msgid "Output Lines"
+msgstr "ਆਉਟਪੁੱਟ ਸਤਰਾਂ"
 
 #: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
 #: ../gedit/recent-files/egg-recent-view-gtk.c:444
@@ -1978,7 +1990,7 @@ msgstr "ਨਵਾਂ ਦਸਤਾਵੇਜ਼ ਬਣਾਓ"
 msgid "_Open..."
 msgstr "ਖੋਲੋ(_O)..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1034
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1045
 msgid "Open a file"
 msgstr "ਇੱਕ ਫਾਇਲ ਖੋਲ੍ਹੋ"
 
@@ -2056,142 +2068,142 @@ msgstr "ਮੌਜੂਦਾ ਸਫ਼ਾ ਛਾਪੋ"
 msgid "Close the current file"
 msgstr "ਮੌਜੂਦਾ ਫਾਇਲ ਬੰਦ"
 
-#: ../gedit/gedit-ui.h:92
-msgid "Quit the program"
-msgstr "ਕਾਰਜ ਵਿਚੋਂ ਬਾਹਰ"
-
-#: ../gedit/gedit-ui.h:96
+#: ../gedit/gedit-ui.h:94
 msgid "Undo the last action"
 msgstr "ਪਿਛਲੀ ਕਾਰਵਾਈ ਖਤਮ ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:98
+#: ../gedit/gedit-ui.h:96
 msgid "Redo the last undone action"
 msgstr "ਆਖਰੀ ਵਾਪਸ ਕੀਤੀ ਕਾਰਵਾਈ ਨੂੰ ਮੁੜ-ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:100
+#: ../gedit/gedit-ui.h:98
 msgid "Cut the selection"
 msgstr "ਚੁਣੇ ਨੂੰ ਕੱਟੋ"
 
-#: ../gedit/gedit-ui.h:102
+#: ../gedit/gedit-ui.h:100
 msgid "Copy the selection"
 msgstr "ਚੁਣੇ ਦੀ ਨਕਲ ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:104
+#: ../gedit/gedit-ui.h:102
 msgid "Paste the clipboard"
 msgstr "ਕਲਿਪਬੋਰਡ ਚਿਪਕਾਓ"
 
-#: ../gedit/gedit-ui.h:106
+#: ../gedit/gedit-ui.h:104
 msgid "Delete the selected text"
 msgstr "ਚੁਣੇ ਪਾਠ ਨੂੰ ਹਟਾਓ"
 
-#: ../gedit/gedit-ui.h:107
+#: ../gedit/gedit-ui.h:105
 msgid "Select _All"
 msgstr "ਸਭ ਚੁਣੋ(_A)"
 
-#: ../gedit/gedit-ui.h:108
+#: ../gedit/gedit-ui.h:106
 msgid "Select the entire document"
 msgstr "ਸਾਰਾ ਦਸਤਾਵੇਜ ਚੁਣੋ"
 
 #. View menu
-#: ../gedit/gedit-ui.h:111
+#: ../gedit/gedit-ui.h:109
 msgid "_Highlight Mode"
 msgstr "ਉਭਰਾਨ ਢੰਗ(_H)"
 
 #. Search menu
-#: ../gedit/gedit-ui.h:114
+#: ../gedit/gedit-ui.h:112
 msgid "_Find..."
 msgstr "ਖੋਜ(_F)..."
 
-#: ../gedit/gedit-ui.h:115
+#: ../gedit/gedit-ui.h:113
 msgid "Search for text"
 msgstr "ਖੋਜ ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:116
+#: ../gedit/gedit-ui.h:114
 msgid "Find Ne_xt"
 msgstr "ਅੱਗੇ ਖੋਜ(_X)"
 
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:115
 msgid "Search forwards for the same text"
 msgstr "ਇਸੇ ਪਾਠ ਲਈ ਅੱਗੇ ਖੋਜ ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:116
 msgid "Find Pre_vious"
 msgstr "ਪਿੱਛੇ ਖੋਜ(_V)"
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:117
 msgid "Search backwards for the same text"
 msgstr "ਇਸੇ ਪਾਠ ਲਈ ਪਿਛਾਂਹ ਨੂੰ ਖੋਜ ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:118
 msgid "_Replace..."
 msgstr "ਤਬਦੀਲ(_R)..."
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:119
 msgid "Search for and replace text"
 msgstr "ਪਾਠ ਦੀ ਖੋਜ ਕਰੋ ਅਤੇ ਤਬਦੀਲ ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:122
+#: ../gedit/gedit-ui.h:120
 msgid "Go to _Line..."
 msgstr "ਸਤਰ ਤੇ ਜਾਓ(_L)..."
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:121
 msgid "Go to a specific line"
 msgstr "ਖਾਸ ਸਤਰ ਤੇ ਜਾਓ"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:124
 msgid "_Save All"
 msgstr "ਸਭ ਸੰਭਾਲੋ(_S)"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:125
 msgid "Save all open files"
 msgstr "ਸਭ ਖੁੱਲੀਆਂ ਫਾਇਲਾਂ ਸੰਭਾਲੋ"
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:126
 msgid "_Close All"
 msgstr "ਸਭ ਬੰਦ ਕਰੋ(_C)"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:127
 msgid "Close all open files"
 msgstr "ਸਭ ਖੁੱਲੀਆਂ ਫਾਇਲਾਂ ਬੰਦ ਕਰੋ"
 
-#: ../gedit/gedit-ui.h:130
+#: ../gedit/gedit-ui.h:128
 msgid "_Move to New Window"
 msgstr "ਨਵੇਂ ਝਰੋਖੇ ਵਿਚ ਭੇਜੋ(_M)"
 
-#: ../gedit/gedit-ui.h:131
+#: ../gedit/gedit-ui.h:129
 msgid "Move the current document to a new window"
 msgstr "ਮੌਜੂਦਾ ਦਸਤਾਵੇਜ ਨੂੰ ਨਵੇ ਝਰੋਖੇ ਵਿਚ ਭੇਜੋ"
 
 #: ../gedit/gedit-ui.h:136
+msgid "Quit the program"
+msgstr "ਕਾਰਜ ਵਿਚੋਂ ਬਾਹਰ"
+
+#: ../gedit/gedit-ui.h:141
 msgid "_Toolbar"
 msgstr "ਸੰਦਪੱਟੀ(_T)"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:142
 msgid "Show or hide the toolbar in the current window"
 msgstr "ਮੌਜੂਦਾ ਝਰੋਖੇ ਵਿੱਚ ਸੰਦ-ਪੱਟੀ ਵਿੱਚ ਵੇਖਾਓ ਜਾਂ ਓਹਲੇ"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:144
 msgid "_Statusbar"
 msgstr "ਸਥਿਤੀ-ਪੱਟੀ(_S)"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:145
 msgid "Show or hide the statusbar in the current window"
 msgstr "ਮੌਜੂਦਾ ਝਰੋਖੇ ਵਿੱਚ ਹਾਲਤ-ਪੱਟੀ ਵੇਖਾਓ ਜਾਂ ਓਹਲੇ"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:147
 msgid "Side _Pane"
 msgstr "ਬਾਹੀ(_P)"
 
-#: ../gedit/gedit-ui.h:143
+#: ../gedit/gedit-ui.h:148
 msgid "Show or hide the side pane in the current window"
 msgstr "ਮੌਜੂਦਾ ਝਰੋਖੇ ਵਿੱਚ ਬਾਹੀ ਵੇਖਾਓ ਜਾਂ ਓਹਲੇ"
 
-#: ../gedit/gedit-ui.h:145
+#: ../gedit/gedit-ui.h:150
 msgid "_Bottom Panel"
 msgstr "ਹੇਠਲਾ ਤਲ(_B)"
 
-#: ../gedit/gedit-ui.h:146
+#: ../gedit/gedit-ui.h:151
 msgid "Show or hide the bottom panel in the current window"
 msgstr "ਮੌਜੂਦਾ ਝਰੋਖੇ ਵਿੱਚ ਹੇਠਲੀ ਪੱਟੀ ਵੇਖਾਓ ਜਾਂ ਓਹਲੇ"
 
@@ -2214,8 +2226,8 @@ msgid ""
 "\n"
 "Please, check your installation."
 msgstr ""
-"<span size=\"large\" weight=\"bold\">ਫਾਇਲ <i>%s</i> ਵਿੱਚ ਲੋੜੀਦੇ ਵਿਦਗਿਟ "
-"ਪ੍ਰਾਪਤ ਕਰਨ ਤੋਂ ਅਸਫ਼ਲ ਹੈ..</span>\n"
+"<span size=\"large\" weight=\"bold\">ਫਾਇਲ <i>%s</i> ਵਿੱਚ ਲੋੜੀਦੇ ਵਿਦਗਿਟ ਪ੍ਰਾਪਤ "
+"ਕਰਨ ਤੋਂ ਅਸਫ਼ਲ ਹੈ..</span>\n"
 "\n"
 "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਇੰਸਟਾਲੇਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ।"
 
@@ -2267,15 +2279,15 @@ msgstr "'%s' ਖੋਲ੍ਹੋ"
 msgid "Save"
 msgstr "ਸੰਭਾਲੋ"
 
-#: ../gedit/gedit-window.c:1038
+#: ../gedit/gedit-window.c:1049
 msgid "Open a recently used file"
 msgstr "ਹੁਣੇ ਵਰਤੀਆਂ ਫਾਇਲ ਖੋਲੋ"
 
-#: ../gedit/gedit-window.c:1045
+#: ../gedit/gedit-window.c:1056
 msgid "Open"
 msgstr "ਖੋਲ੍ਹੋ"
 
-#: ../gedit/gedit-window.c:1123 ../gedit/gedit-window.c:1686
+#: ../gedit/gedit-window.c:1134 ../gedit/gedit-window.c:1702
 #, c-format
 msgid "Activate %s"
 msgstr "ਸਰਗਰਮ %s"
@@ -2405,13 +2417,21 @@ msgstr "ਸਤਰਾਂ ਹਾਸ਼ੀਏ ਤੋਂ ਦੂਰ"
 msgid "Indents or un-indents selected lines."
 msgstr "ਚੁਣੀਆਂ ਸਤਰਾਂ ਹਾਸ਼ੀਏ ਤੋਂ ਦੂਰ ਜਾਂ ਨਾ-ਦੂਰ"
 
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
+msgid "Opens an interactive python console in the bottom panel."
+msgstr "ਹੇਠਲੇ ਪੈਨਲ ਵਿੱਚ ਸੌਖੀ ਪਾਈਥਨ ਕਨਸੋਲ ਖੋਲਦੀ ਹੈ।"
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+msgid "Python Console"
+msgstr "ਪਾਈਥਨ ਕਨਸੋਲ"
+
 #: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
-msgstr "ਉਪਭੋਗਤਾ ਦਾ ਨਾਂ ਦਿਉ(_M)"
+msgstr "ਉਪਭੋਗੀ ਨਾਂ ਸ਼ਾਮਲ(_M)"
 
 #: ../plugins/sample/gedit-sample-plugin.c:65
 msgid "Insert the user name at the cursor position"
-msgstr "ਕਰਸਰ ਸਥਿਤੀ ਤੇ ਵਰਤਣ ਵਾਲੇ ਦਾ ਨਾਂ ਦਿਓ"
+msgstr "ਕਰਸਰ ਸਥਿਤੀ 'ਤੇ ਵਰਤਣ ਵਾਲੇ ਦਾ ਨਾਂ ਦਿਓ"
 
 #: ../plugins/sample/sample.gedit-plugin.desktop.in.h:1
 msgid "Inserts the user name at the cursor position."
@@ -2420,6 +2440,148 @@ msgstr "ਕਰਸਰ ਸਥਿਤੀ ਤੇ ਵਰਤਣ ਵਾਲੇ ਦਾ ਨ
 #: ../plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "User name"
 msgstr "ਉਪਭੋਗਤਾ ਨਾਂ"
+
+#: ../plugins/savecopy/savecopy.c:48
+msgid "Sa_ve Copy..."
+msgstr "ਨਕਲ ਸੰਭਾਲੋ(_V)..."
+
+#: ../plugins/savecopy/savecopy.c:51
+msgid "Save a copy of the current document"
+msgstr "ਮੌਜੂਦਾ ਦਸਤਾਵੇਜ਼ ਦੀ ਇੱਕ ਨਕਲ ਸੰਭਾਲੋ"
+
+#: ../plugins/savecopy/savecopy.c:314
+#, c-format
+msgid "Could not save a copy of the file to \"%s\""
+msgstr "ਫਾਇਲ ਦੀ ਨਕਲ ਨੂੰ \"%s\" ਦੇ ਰੂਪ ਵਿੱਚ ਸੰਭਾਲਿਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
+
+#: ../plugins/savecopy/savecopy.c:355
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "ਇੱਕ ਫਾਇਲ \"%s\" ਨਾਂ ਨਾਲ ਪਹਿਲਾਂ ਹੀ ਖੁੱਲੀ ਹੈ।\n"
+
+#: ../plugins/savecopy/savecopy.c:359
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "ਕੀ ਤੁਸੀਂ ਇਸ ਨੂੰ ਸੰਭਾਲੀ ਜਾ ਰਹੀ ਨਾਲ ਸੰਭਾਲਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../plugins/savecopy/savecopy.c:413
+msgid "You are trying to overwrite the original file"
+msgstr "ਤੁਸੀਂ ਅਸਲੀਂ ਫਾਇਲ ਉੱਪਰ ਲਿਖਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਹੇ ਹੋ"
+
+#: ../plugins/savecopy/savecopy.c:522
+msgid "Save Copy..."
+msgstr "ਨਕਲ ਸੰਭਾਲੋ..."
+
+#. translators: %s is a filename
+#: ../plugins/savecopy/savecopy.c:554 ../plugins/savecopy/savecopy.c:564
+#, c-format
+msgid "%s (copy)"
+msgstr "%s (ਨਕਲ)"
+
+#: ../plugins/savecopy/savecopy.c:602
+msgid "_Character Coding:"
+msgstr "ਅੱਖਰ ਕੋਡਿੰਗ(_C):"
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
+msgid "Save a Copy"
+msgstr "ਇੱਕ ਨਕਲ ਸੰਭਾਲੋ"
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
+msgid "Saves a copy of the current document to a local or remote location."
+msgstr "ਮੌਜੂਦਾ ਦਸਤਾਵੇਜ਼ ਦੀ ਨਕਲ ਇੱਕ ਲੋਕਲ ਜਾਂ ਰਿਮੋਟ ਟਿਕਾਣੇ ਉੱਤੇ ਸੰਭਾਲੋ।"
+
+#: ../plugins/shell_output/shell_output.c:56
+msgid "_Run Command..."
+msgstr "ਕਮਾਂਡ ਚਲਾਓ(_R)..."
+
+#: ../plugins/shell_output/shell_output.c:59
+msgid "Run a command"
+msgstr "ਇੱਕ ਕਮਾਂਡ ਚਲਾਓ"
+
+#: ../plugins/shell_output/shell_output.c:156
+#: ../plugins/shell_output/shell_output.c:571
+msgid "Stopped"
+msgstr "ਰੁਕਿਆ"
+
+#: ../plugins/shell_output/shell_output.c:350
+msgid "Run Command"
+msgstr "ਕਮਾਂਡ ਚਲਾਓ"
+
+#: ../plugins/shell_output/shell_output.c:369
+msgid "_Run"
+msgstr "ਚਲਾਓ(_R)"
+
+#: ../plugins/shell_output/shell_output.c:577
+msgid "Done"
+msgstr "ਮੁਕੰਮਲ"
+
+#: ../plugins/shell_output/shell_output.c:579
+msgid "Failed"
+msgstr "ਅਸਫ਼ਲ"
+
+#: ../plugins/shell_output/shell_output.c:749
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"ਸ਼ੈੱਲ ਕਮਾਂਡ ਇੰਦਰਾਜ਼ ਖਾਲੀ ਹੈ।\n"
+"\n"
+"ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਠੀਕ ਸ਼ੈੱਲ ਕਮਾਂਡ ਦਿਓ।"
+
+#: ../plugins/shell_output/shell_output.c:771
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"ਸ਼ੈੱਲ ਕਮਾਂਡ ਚਲਾਉਣ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ।\n"
+"\n"
+"ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਠੀਕ ਸ਼ੈੱਲ ਕਮਾਂਡ ਦਿਓ।"
+
+#: ../plugins/shell_output/shell_output.c:849
+msgid "Executing command"
+msgstr "ਕਮਾਂਡ ਚਲਾਈ ਜਾ ਰਹੀ ਹੈ"
+
+#: ../plugins/shell_output/shell_output.c:914
+msgid "An error occurred while running the selected command."
+msgstr "ਚੁਣੀ ਕਮਾਂਡ ਚਲਾਉਣ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।"
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+msgid ""
+"Executes an external program and, if required, displays its output in the "
+"output window."
+msgstr ""
+"ਇੱਕ ਬਾਹਰੀ ਪਰੋਗਰਾਮ ਚਲਾਉਦੀ ਹੈ ਅਤੇ ਜੇਕਰ ਲੋੜ ਪੈਣ ਉੱਤੇ ਇਸ ਦੇ ਨਤੀਜੇ ਆਉਟਪੁੱਟ "
+"ਝਰੋਖੇ ਵਿੱਚ ਵੇਖਾਉਦੀ ਹੈ।"
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid "Shell command"
+msgstr "ਸ਼ੈੱਲ ਕਮਾਂਡ"
+
+#: ../plugins/shell_output/shell_output.glade2.h:1
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
+
+#: ../plugins/shell_output/shell_output.glade2.h:2
+msgid "Co_mmand:"
+msgstr "ਕਮਾਂਡ(_M):"
+
+#: ../plugins/shell_output/shell_output.glade2.h:3
+msgid "Select the working directory..."
+msgstr "ਕਾਰਜਕਾਰੀ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ..."
+
+#: ../plugins/shell_output/shell_output.glade2.h:4
+msgid "_Show results in Output Window"
+msgstr "ਆਉਟਪੁੱਟ ਝਰੋਖੇ ਵਿੱਚ ਨਤੀਜੇ ਵੇਖਾਓ(_S)"
+
+#: ../plugins/shell_output/shell_output.glade2.h:5
+msgid "_Working directory:"
+msgstr "ਕਾਰਜਕਾਰੀ ਡਾਇਰੈਕਟਰੀ(_W):"
+
+#: ../plugins/shell_output/shell_output.glade2.h:6
+msgid "gedit: Shell Output plugin"
+msgstr "gedit: ਸ਼ੈੱਲ ਆਉਟਪੁੱਟ ਪਲੱਗਿੰਨ"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -2815,8 +2977,8 @@ msgid "Check the current document for incorrect spelling"
 msgstr "ਇਸ ਦਸਤਾਵੇਜ ਵਿਚ ਗਲਤ ਸ਼ਬਦ ਜੋਡ਼ ਦੀ ਜਾਂਚ ਕਰੋ"
 
 #: ../plugins/spell/gedit-spell-plugin.c:78
-msgid "Set _Language"
-msgstr "ਭਾਸ਼ਾ ਚੋਣ(_L)"
+msgid "Set _Language..."
+msgstr "ਭਾਸ਼ਾ ਦਿਓ(_L)..."
 
 #: ../plugins/spell/gedit-spell-plugin.c:80
 msgid "Set the language of the current document"
@@ -2845,10 +3007,6 @@ msgstr "ਇਸ ਦਸਤਾਵੇਜ ਲਈ ਭਾਸ਼ਾ ਚੁਣੋ(_L)"
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
 msgstr "ਭਾਸ਼ਾ ਚੁਣੋ"
-
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
 
 #: ../plugins/spell/spell-checker.glade2.h:2
 msgid "<b>Language</b>"
