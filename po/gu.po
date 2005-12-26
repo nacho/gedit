@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-18 22:18+0100\n"
-"PO-Revision-Date: 2005-12-19 09:50+0530\n"
+"POT-Creation-Date: 2005-12-26 05:58+0100\n"
+"PO-Revision-Date: 2005-12-26 17:19+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -995,7 +996,7 @@ msgid "Replace _All"
 msgstr "બધુ બદલો (_A)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:562
+#: ../gedit/gedit-commands-file.c:562 ../plugins/savecopy/savecopy.c:368
 msgid "_Replace"
 msgstr "બદલો (_R)"
 
@@ -1340,11 +1341,11 @@ msgstr "ઉમેરો અથવા દૂર કરો... (_R)"
 msgid "C_haracter Coding:"
 msgstr "અક્ષર માટેનો કોડ (_h):"
 
-#: ../gedit/gedit-file-chooser-dialog.c:186
+#: ../gedit/gedit-file-chooser-dialog.c:186 ../plugins/savecopy/savecopy.c:583
 msgid "All Files"
 msgstr "બધી ફાઈલો"
 
-#: ../gedit/gedit-file-chooser-dialog.c:194
+#: ../gedit/gedit-file-chooser-dialog.c:194 ../plugins/savecopy/savecopy.c:591
 msgid "All Text Files"
 msgstr "બધી લખાણ ફાઇલો"
 
@@ -1710,6 +1711,22 @@ msgstr "ફાઈલ %s નો સંગ્રહ કરી શક્યા ન�
 #: ../gedit/gedit-notebook.c:823
 msgid "Close document"
 msgstr "દસ્તાવેજ બંધ કરો"
+
+#: ../gedit/gedit-output-window.c:378
+msgid "Close the output window"
+msgstr "આઉટપુટ વિન્ડો બંધ કરો"
+
+#: ../gedit/gedit-output-window.c:416
+msgid "Copy selected lines"
+msgstr "પસંદ કરેલ લીટીઓની નકલ કરો"
+
+#: ../gedit/gedit-output-window.c:436
+msgid "Clear the output window"
+msgstr "આઉટપુટ વિન્ડો સાફ કરો"
+
+#: ../gedit/gedit-output-window.c:476
+msgid "Output Lines"
+msgstr "આઉટપુટ લીટીઓ"
 
 #: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
 #: ../gedit/recent-files/egg-recent-view-gtk.c:444
@@ -2426,6 +2443,146 @@ msgstr "કર્સર સ્થાન પર વપરાશકર્તા �
 msgid "User name"
 msgstr "વપરાશકર્તા નામ"
 
+#: ../plugins/savecopy/savecopy.c:48
+msgid "Sa_ve Copy..."
+msgstr "નકલ સંગ્રહો (_v)..."
+
+#: ../plugins/savecopy/savecopy.c:51
+msgid "Save a copy of the current document"
+msgstr "વર્તમાન દસ્તાવેજની નકલનો સંગ્રહ કરો"
+
+#: ../plugins/savecopy/savecopy.c:314
+#, c-format
+msgid "Could not save a copy of the file to \"%s\""
+msgstr "ફાઈલની નકલનો \"%s\" માં સંગ્રહ કરી શક્યા નહિં"
+
+#: ../plugins/savecopy/savecopy.c:355
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "\"%s\" નામવાળી ફાઈલ પહેલાથી જ હાજર છે.\n"
+
+#: ../plugins/savecopy/savecopy.c:359
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "શું તમે તેને તમે જે સંગ્રહી રહ્યા છો તેનાથી બદલવા માંગો છો?"
+
+#: ../plugins/savecopy/savecopy.c:413
+msgid "You are trying to overwrite the original file"
+msgstr "તમે મૂળ ફાઈલ પર ફરીથી લખવાનો પ્રયત્ન કરી રહ્યા છો"
+
+#: ../plugins/savecopy/savecopy.c:522
+msgid "Save Copy..."
+msgstr "નકલ સંગ્રહો..."
+
+#. translators: %s is a filename
+#: ../plugins/savecopy/savecopy.c:554 ../plugins/savecopy/savecopy.c:564
+#, c-format
+msgid "%s (copy)"
+msgstr "%s (નકલ)"
+
+#: ../plugins/savecopy/savecopy.c:602
+msgid "_Character Coding:"
+msgstr "અક્ષર સંગ્રહપદ્ધતિ (_C):"
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
+msgid "Save a Copy"
+msgstr "નકલ સંગ્રહો"
+
+#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
+msgid "Saves a copy of the current document to a local or remote location."
+msgstr "વર્તમાન દસ્તાવેજની નકલ સ્થાનિક અથવા દૂરસ્થ સ્થાને સંગ્રહે છે."
+
+#: ../plugins/shell_output/shell_output.c:56
+msgid "_Run Command..."
+msgstr "આદેશ ચલાવો (_R)..."
+
+#: ../plugins/shell_output/shell_output.c:59
+msgid "Run a command"
+msgstr "આદેશ ચલાવો"
+
+#: ../plugins/shell_output/shell_output.c:156
+#: ../plugins/shell_output/shell_output.c:571
+msgid "Stopped"
+msgstr "અટકાવાયેલ"
+
+#: ../plugins/shell_output/shell_output.c:350
+msgid "Run Command"
+msgstr "આદેશ ચલાવો"
+
+#: ../plugins/shell_output/shell_output.c:369
+msgid "_Run"
+msgstr "ચલાવો (_R)"
+
+#: ../plugins/shell_output/shell_output.c:577
+msgid "Done"
+msgstr "પૂર્ણ"
+
+#: ../plugins/shell_output/shell_output.c:579
+msgid "Failed"
+msgstr "નિષ્ફળ"
+
+#: ../plugins/shell_output/shell_output.c:749
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"શેલ આદેશ પ્રવેશ ખાલી છે.\n"
+"\n"
+"મહેરબાની કરીને, માન્ય શેલ આદેશ દાખલ કરો."
+
+#: ../plugins/shell_output/shell_output.c:771
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"શેલ આદેશનું પદચ્છેદન કરવામાં ભૂલ.\n"
+"\n"
+"મહેરબાની કરીને, માન્ય શેલ આદેશ દાખલ કરો."
+
+#: ../plugins/shell_output/shell_output.c:849
+msgid "Executing command"
+msgstr "આદેશ ચલાવવાનું"
+
+#: ../plugins/shell_output/shell_output.c:914
+msgid "An error occurred while running the selected command."
+msgstr "પસંદ કરેલ આદેશ ચલાવતી વખતે ભૂલ ઉદ્દભવી."
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
+msgid ""
+"Executes an external program and, if required, displays its output in the "
+"output window."
+msgstr "બાહ્ય કાર્યક્રમ ચલાવે છે અને, જો જરૂરી હોય, તો તેનું આઉટપુટ આઉટપુટ વિન્ડોમાં દર્શાવે છે."
+
+#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
+msgid "Shell command"
+msgstr "શેલ આદેશ"
+
+#: ../plugins/shell_output/shell_output.glade2.h:1
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
+
+#: ../plugins/shell_output/shell_output.glade2.h:2
+msgid "Co_mmand:"
+msgstr "આદેશ (_m):"
+
+#: ../plugins/shell_output/shell_output.glade2.h:3
+msgid "Select the working directory..."
+msgstr "કામ આપતી ડિરેક્ટરી પસંદ કરો..."
+
+#: ../plugins/shell_output/shell_output.glade2.h:4
+msgid "_Show results in Output Window"
+msgstr "પરિણામો આઉટપુટ વિન્ડોમાં બતાવો (_S)"
+
+#: ../plugins/shell_output/shell_output.glade2.h:5
+msgid "_Working directory:"
+msgstr "કામ આપતી ડિરેક્ટરી (_W):"
+
+#: ../plugins/shell_output/shell_output.glade2.h:6
+msgid "gedit: Shell Output plugin"
+msgstr "gedit: શેલ આઉટપુટ પ્લગઈન"
+
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
 msgstr "ક્રમમાં ગોઠવો... (_o)"
@@ -2850,10 +3007,6 @@ msgstr "ચાલુ દસ્તાવેજની ભાષા પસંદ �
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
 msgstr "ભાષા સુયોજિત કરો"
-
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
 
 #: ../plugins/spell/spell-checker.glade2.h:2
 msgid "<b>Language</b>"
