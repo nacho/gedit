@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 17:36+0200\n"
-"PO-Revision-Date: 2005-08-23 05:45+0300\n"
+"POT-Creation-Date: 2005-12-27 18:00+0200\n"
+"PO-Revision-Date: 2005-12-27 18:!5+0200\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -19,36 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/GNOME_Gedit.server.in.in.h:1
-msgid "Gedit View"
-msgstr "Geditin näkymä"
-
-#: ../data/GNOME_Gedit.server.in.in.h:2
-msgid "Gedit View."
-msgstr "Geditin näkymä."
-
-#: ../data/GNOME_Gedit.server.in.in.h:3
-msgid "Gedit viewer factory"
-msgstr "Geditin katselintehdas"
-
-#: ../data/GNOME_Gedit.server.in.in.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
-msgid "Source"
-msgstr "Lähde"
-
-#: ../data/GNOME_Gedit.server.in.in.h:5
-msgid "gedit application"
-msgstr "gedit-sovellus"
-
-#: ../data/GNOME_Gedit.server.in.in.h:6
-msgid "gedit automation factory"
-msgstr "gedit-automaatiotehdas"
-
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Muokkaa tekstitiedostoja"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit2.c:365
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:428
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
@@ -109,30 +84,34 @@ msgid "Body Font for Printing"
 msgstr "Tekstin tulostuskirjasin"
 
 #: ../data/gedit.schemas.in.h:12
+msgid "Bottom Panel is Visible"
+msgstr "Alapaneeli näytetään"
+
+#: ../data/gedit.schemas.in.h:13
 msgid "Create Backup Copies"
 msgstr "Luo varmuuskopiot"
 
-#: ../data/gedit.schemas.in.h:13
+#: ../data/gedit.schemas.in.h:14
 msgid "Display Line Numbers"
 msgstr "Näytä rivinumerot"
 
-#: ../data/gedit.schemas.in.h:14
+#: ../data/gedit.schemas.in.h:15
 msgid "Display Right Margin"
 msgstr "Näytä oikea reunus"
 
-#: ../data/gedit.schemas.in.h:15
+#: ../data/gedit.schemas.in.h:16
 msgid "Editor Font"
 msgstr "Muokkaimen kirjasin"
 
-#: ../data/gedit.schemas.in.h:16
+#: ../data/gedit.schemas.in.h:17
 msgid "Enable Syntax Highlighting"
 msgstr "Käytä syntaksiväritystä"
 
-#: ../data/gedit.schemas.in.h:17
+#: ../data/gedit.schemas.in.h:18
 msgid "Encodings shown in menu"
 msgstr "Valikossa näytettävät koodaustavat"
 
-#: ../data/gedit.schemas.in.h:18
+#: ../data/gedit.schemas.in.h:19
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -140,7 +119,7 @@ msgstr ""
 "Varmuuskopioiden tiedostonimiin lisättävä laajennos tai jälkiliite. Tämä on "
 "voimassa ainoastaan mikäli asetus \"Luo varmuuskopiot\" on päällä."
 
-#: ../data/gedit.schemas.in.h:19
+#: ../data/gedit.schemas.in.h:20
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -148,7 +127,7 @@ msgstr ""
 "Edustaväri valitulle tekstille muokkausalueella. Tämä on voimassa ainoastaan "
 "mikäli asetus \"Käytä oletusvärejä\" ei ole päällä."
 
-#: ../data/gedit.schemas.in.h:20
+#: ../data/gedit.schemas.in.h:21
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -156,19 +135,19 @@ msgstr ""
 "Edustaväri valitsemattomalle tekstille muokkausalueella. Tämä on voimassa "
 "ainoastaan mikäli asetus \"Käytä oletusvärejä\" ei ole päällä."
 
-#: ../data/gedit.schemas.in.h:21
+#: ../data/gedit.schemas.in.h:22
 msgid "Header Font for Printing"
 msgstr "Otsikkotietojen tulostuskirjasin"
 
-#: ../data/gedit.schemas.in.h:22
+#: ../data/gedit.schemas.in.h:23
 msgid "Highlight Current Line"
 msgstr "Korosta nykyinen rivi"
 
-#: ../data/gedit.schemas.in.h:23
+#: ../data/gedit.schemas.in.h:24
 msgid "Highlight Matching Bracket"
 msgstr "Korosta vastaava sulku"
 
-#: ../data/gedit.schemas.in.h:24
+#: ../data/gedit.schemas.in.h:25
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -177,19 +156,25 @@ msgstr ""
 "Jos tämän arvo on 0, rivinumeroita ei näytetä asiakirjoja tulostettaessa."
 "Muutoin gedit tulostaa rivinumeron määrittämäsi riviluvun välein."
 
-#: ../data/gedit.schemas.in.h:25
+#: ../data/gedit.schemas.in.h:26
 msgid "Insert spaces"
 msgstr "Lisää tyhjeitä"
 
-#: ../data/gedit.schemas.in.h:26
+#: ../data/gedit.schemas.in.h:27
 msgid "Line Number Font for Printing"
 msgstr "Rivinumeroiden tulostuskirjasin"
 
-#: ../data/gedit.schemas.in.h:27
+#: ../data/gedit.schemas.in.h:28
 msgid "Line Wrapping Mode"
 msgstr "Rivitystapa"
 
-#: ../data/gedit.schemas.in.h:28
+#: ../data/gedit.schemas.in.h:29
+msgid ""
+"List of VFS schemes gedit supports in write mode. The 'file' scheme is "
+"writable by default."
+msgstr ""
+
+#: ../data/gedit.schemas.in.h:30
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
@@ -198,7 +183,7 @@ msgstr ""
 "sijainnin. Katso tiedostoa .gedit-plugin, josta voit selvittää kunkin "
 "liitännäisen sijainnnin kohdasta \"Location\"."
 
-#: ../data/gedit.schemas.in.h:29
+#: ../data/gedit.schemas.in.h:31
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -207,15 +192,15 @@ msgstr ""
 "Merkistön koodaustapa -valikossa. Vain tunnistetut koodaustavat ovat "
 "käytettävissä."
 
-#: ../data/gedit.schemas.in.h:30
+#: ../data/gedit.schemas.in.h:32
 msgid "Max Number of Undo Actions"
 msgstr "Peruttavien toimintojen enimmäismäärä"
 
-#: ../data/gedit.schemas.in.h:31
+#: ../data/gedit.schemas.in.h:33
 msgid "Maximum Recent Files"
 msgstr "Pikavalintojen enimmäismäärä"
 
-#: ../data/gedit.schemas.in.h:32
+#: ../data/gedit.schemas.in.h:34
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions."
@@ -223,7 +208,7 @@ msgstr ""
 "Suurin määrä toimintoja jotka gedit voi kumota tai tehdä uudestaan. Arvo \"-1"
 "\" tarkoittaa rajatonta määrää."
 
-#: ../data/gedit.schemas.in.h:33
+#: ../data/gedit.schemas.in.h:35
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions. Deprecated since 2.12.0"
@@ -234,24 +219,24 @@ msgstr ""
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:36
+#: ../data/gedit.schemas.in.h:38
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:39
+#: ../data/gedit.schemas.in.h:41
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:45
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:46
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -260,61 +245,65 @@ msgstr ""
 "tiedostot. Tämä on voimassa ainoastaan mikäli asetus \"Automaattitallennus\" "
 "on päällä."
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:47
 msgid "Print Header"
 msgstr "Tulosta otsikkotiedot"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:48
 msgid "Print Line Numbers"
 msgstr "Tulosta rivinumerot"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:49
 msgid "Print Syntax Highlighting"
 msgstr "Tulosta syntaksiväritys"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:50
 msgid "Printing Line Wrapping Mode"
 msgstr "Tulostuksen rivitystapa"
 
-#: ../data/gedit.schemas.in.h:49
+#: ../data/gedit.schemas.in.h:51
 msgid "Right Margin Position"
 msgstr "Oikean reunuksen sijainti"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:52
+#: ../data/gedit.schemas.in.h:54
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:55
+#: ../data/gedit.schemas.in.h:57
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:59
+#: ../data/gedit.schemas.in.h:61
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:65
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:66
 msgid "Selected Text Color"
 msgstr "Valitun tekstin väri"
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid "Selection Color"
 msgstr "Valintaväri"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
+msgid "Side Pane is Visible"
+msgstr "Sivupaneeli näytetään"
+
+#: ../data/gedit.schemas.in.h:69
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -324,7 +313,7 @@ msgstr ""
 "\"NYKYINEN\" on nykyisten maa-asetusten mukainen koodaustapa. Vain "
 "tunnettuja koodaustapoja voidaan käyttää."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -338,7 +327,7 @@ msgstr ""
 "kohdalta. Huomaa että kirjainkoko merkitsee arvoissa, joten varmista että "
 "kirjoitat arvon täsmälleen kuten tässä on neuvottu."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -352,12 +341,12 @@ msgstr ""
 "kohdalta. Huomaa että kirjainkoko merkitsee arvoissa, joten varmista että "
 "kirjoitat arvon täsmälleen kuten tässä on neuvottu."
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Määrittää tulostettaessa käytettävän tekstikirjasimen."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -365,7 +354,7 @@ msgstr ""
 "Määrittää tulostettaessa käytettävän tekstikirjasimen. Tämä on gnome-print "
 "kirjasimen nimi ja print_font_body_pango korvaa sen."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -374,7 +363,7 @@ msgstr ""
 "voimassa ainoastaan, mikäli asetuksen \"Tulosta rivinumerot\" arvo on muu "
 "kuin nolla."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -385,7 +374,7 @@ msgstr ""
 "kuin nolla. Tämä on gnome-print kirjasimen nimi ja print_font_numbers_pango "
 "korvaa sen."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -393,7 +382,7 @@ msgstr ""
 "Määrittää tulostettaessa käytettävän otsikkotiedon kirjasimen. Tämä on "
 "voimassa ainoastaan, mikäli asetus \"Tulosta otsikkotiedot\" on päällä."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -403,7 +392,7 @@ msgstr ""
 "voimassa ainoastaan, mikäli asetus \"Tulosta otsikkotiedot\" on päällä. Tämä "
 "on gnome-print kirjasimen nimi ja print_font_header_pango korvaa sen."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -411,21 +400,21 @@ msgstr ""
 "Määrittää kohdassa \"Pikavalinnat\" näytettävien äskettäin käytettyjen "
 "tiedostojen maksimimäärän."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Määrittää tyhjeiden määrän jota käytetään sarkainmerkkien sijaan."
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:80
 msgid "Specifies the position of the right margin."
 msgstr "Määrittää oikean reunuksen sijainnin."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:81
 msgid "Status Bar is Visible"
 msgstr "Tilarivi näytetään"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:82
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -441,35 +430,35 @@ msgstr ""
 "kuvakkeiden vieressä). Huomaa että kirjainkoko merkitsee arvoissa, joten "
 "varmista että kirjoitat arvon täsmälleen kuten tässä on neuvottu."
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:83
 msgid "Tab Size"
 msgstr "Sarkaimen koko"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:84
 msgid "Text Color"
 msgstr "Tekstiväri"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:85
 msgid "Toolbar Buttons Style"
 msgstr "Työkalupalkin painiketyyli"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:86
 msgid "Toolbar is Visible"
 msgstr "Työkalupalkki näytetään"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:87
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "Kumoamiskertojen enimmäismäärä (VANHENTUNUT)"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:88
 msgid "Use Default Colors"
 msgstr "Käytä oletusvärejä"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:89
 msgid "Use Default Font"
 msgstr "Käytä oletuskirjasinta"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:90
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -479,7 +468,7 @@ msgstr ""
 "aikavälein. Voit asettaa aikavälin asetuksella \"Automaattisen tallennuksen "
 "aikaväli\"."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:91
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -488,52 +477,64 @@ msgstr ""
 "asettaa tiedostonimen laajennoksen asetuksella \"Varmuuskopion nimilaajenne"
 "\"."
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:92
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Määrittää näyttääkö gedit rivinumerot muokkausalueella."
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Määrittää näyttääkö gedit oikean reunuksen muokkausalueella."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should enable auto indentation."
 msgstr "Määrittää käyttääkö gedit automaattisisennystä."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Määrittää käyttääkö gedit syntaksiväritystä."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Määrittää korostaako gedit vastaavaa sulkua."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should highlight the current line."
 msgstr "Määrittää korostaako gedit nykyistä riviä."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:98
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Määrittää lisääkö gedit asiakirjojen otsikot tulosteisiin."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Määrittää lisääkö gedit sarkaimien sijaan välilyöntejä."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Määrittää käyttääkö gedit syntaksiväritystä tulostettaessa."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:101
+msgid ""
+"Whether the bottom panel at the bottom of editing windows should be visible."
+msgstr ""
+"Määrittää näytetäänkö muokkausikkunan alalaidassa oleva paneeli."
+
+#: ../data/gedit.schemas.in.h:102
+msgid ""
+"Whether the side pane at the left of the editing window should be visible."
+msgstr ""
+"Määrittää näytetäänkö muokkausikkunan sivussa oleva paneeli."
+
+#: ../data/gedit.schemas.in.h:103
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Määrittää näytetäänkö muokkausikkunan alalaidassa tilarivi."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:104
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Määrittää näytetäänkö muokkausikkunoissa työkalupalkki."
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:105
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -545,7 +546,7 @@ msgstr ""
 "\"Tekstiväri\", \"Valitun tekstin väri\" ja \"Valintaväri\" määriteltyjä "
 "värejä."
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:106
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -555,33 +556,40 @@ msgstr ""
 "geditissämääritellyn kirjasimen sijaan. Jos tämä otetaan pois päältä, "
 "käytetään kohdassa \"Muokkaimen kirjasin\" määriteltyä kirjasinta."
 
+#: ../data/gedit.schemas.in.h:107
+msgid "Writable VFS schemes"
+msgstr ""
+
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:110
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15,ISO-8859-1]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:114
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
-#, c-format
-msgid "Activate %s"
-msgstr "Käynnistä %s"
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:136
+msgid "Logout _without Saving"
+msgstr "kirjaudu ulos -tallentamatta"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:142
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
+msgid "_Cancel Logout"
+msgstr "_Peru uloskirjautuminen"
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:147
 msgid "Close _without Saving"
 msgstr "Sulje _ilman tallentamista"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:180
 msgid "Question"
 msgstr "Kysymys"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:367
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:386
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
@@ -595,13 +603,13 @@ msgstr[1] ""
 "Mikäli et tallenna, muutokset viimeisen %ld sekunnin ajalta menetetään "
 "pysyvästi."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr ""
 "Mikäli et tallenna, muutokset viimeisen minuutin ajalta menetetään pysyvästi."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:382
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:401
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -616,7 +624,7 @@ msgstr[1] ""
 "Mikäli et tallenna, muutokset viimeisen minuutin ja %ld sekunnin ajalta "
 "menetetään pysyvästi."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:392
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
@@ -630,8 +638,8 @@ msgstr[1] ""
 "Mikäli et tallenna, muutokset viimeisen %ld minuutin ajalta menetetään "
 "pysyvästi."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:447
 #, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
@@ -642,7 +650,7 @@ msgstr[1] ""
 "Mikäli et tallenna, muutokset viimeisen %d tunnin ajalta menetetään "
 "pysyvästi."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:413
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:432
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -657,12 +665,12 @@ msgstr[1] ""
 "Mikäli et tallenna, muutokset viimeisen tunnin ja %d minuutin ajalta "
 "menetetään pysyvästi."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:491
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Tallennetaanko muutokset asiakirjaan \"%s\" ennen sulkemista?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:645
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:663
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -674,135 +682,149 @@ msgstr[1] ""
 "Sinulla on avoinna %d asiakirja jossa on tallentamattomia muutoksia. "
 "Tallennetaanko muutokset ennen sulkemista?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:662
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
 msgid "S_elect the documents you want to save:"
 msgstr "Valits_e asiakirjat jotka haluat tallentaa:"
 
 #. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:679
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:697
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Mikäli et tallenna, kaikki tekemäsi muutokset menetetään lopullisesti."
 
-#: ../gedit/dialogs/gedit-dialog-goto-line.c:184
-msgid "Go to Line"
-msgstr "Siirry riville"
+#: ../gedit/dialogs/gedit-encodings-dialog.c:315
+msgid "Character Codings"
+msgstr "Merkistökoodaukset"
 
-#: ../gedit/dialogs/gedit-dialog-goto-line.c:197
-msgid "_Go to Line"
-msgstr "_Siirry riville"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:136
-#: ../gedit/dialogs/gedit-dialog-replace.c:1140 ../gedit/gedit-commands.c:383
-#, c-format
-msgid "The text \"%s\" was not found."
-msgstr "Tekstiä \"%s\" ei löytynyt."
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:269
-#: ../gedit/dialogs/replace.glade2.h:4 ../gedit/gedit-ui.xml.h:46
-msgid "Replace"
-msgstr "Korvaa"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:282
-msgid "Replace _All"
-msgstr "Korvaa k_aikki"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
-msgid "_Replace"
-msgstr "Ko_rvaa"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:402 ../gedit/gedit-ui.xml.h:17
-msgid "Find"
-msgstr "Etsi"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:1149
-#, c-format
-msgid "Found and replaced %d occurrence."
-msgid_plural "Found and replaced %d occurrences."
-msgstr[0] "Löydetty ja korvattu %d esiintymä."
-msgstr[1] "Löydetty ja korvattu %d esiintymää."
-
-#: ../gedit/dialogs/gedit-dialog-uri.c:91
-msgid "Open Location"
-msgstr "Avaa sijainti"
-
-#: ../gedit/dialogs/gedit-encodings-dialog.c:72
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Virhe näytettäessä ohjetta: %s"
-
-#: ../gedit/dialogs/gedit-encodings-dialog.c:355
-#: ../gedit/dialogs/gedit-encodings-dialog.c:423
+#: ../gedit/dialogs/gedit-encodings-dialog.c:365
+#: ../gedit/dialogs/gedit-encodings-dialog.c:426
 msgid "_Description"
 msgstr "_Kuvaus"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:364
-#: ../gedit/dialogs/gedit-encodings-dialog.c:432
+#: ../gedit/dialogs/gedit-encodings-dialog.c:374
+#: ../gedit/dialogs/gedit-encodings-dialog.c:435
 msgid "_Encoding"
 msgstr "Koo_daustapa"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:1
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:1
 msgid "A_vailable encodings:"
 msgstr "Käytettävissä olevat koodausta_vat:"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:2
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:2
 msgid "Character codings"
 msgstr "Merkistön koodaustavat"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:3
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:3
 msgid "E_ncodings shown in menu:"
 msgstr "Valikossa _näytettävät koodaustavat:"
 
-#: ../gedit/dialogs/gedit-plugin-manager.c:55
-msgid "Plugin"
-msgstr "Liitännäinen"
+#: ../gedit/dialogs/gedit-open-location-dialog.c:135
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
+msgid "Open Location"
+msgstr "Avaa sijainti"
 
-#: ../gedit/dialogs/gedit-plugin-manager.c:56
-msgid "Enabled"
-msgstr "Käytössä"
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:1
+msgid "Ch_aracter coding:"
+msgstr "Merkistön koodau_stapa:"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:86
-#: ../gedit/dialogs/program-location-dialog.glade2.h:2
-msgid "Set program location..."
-msgstr "Aseta ohjelman sijainti..."
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:2
+msgid "Enter the _location (URI) of the file you would like to open:"
+msgstr "Anna sen tiedoston _sijainti (URI) jonka haluat avattavan:"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:116
-#, c-format
-msgid ""
-"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
-"task.\n"
-"\n"
-"Please, specify the location of the <tt>%s</tt> program."
-msgstr ""
-"%s -liitännäinen käyttää ulkoista ohjelmaa <tt>%s</tt> tehtävän "
-"suorittamiseen.\n"
-"\n"
-"Määritä ohjelman <tt>%s</tt> sijainti."
+#: ../gedit/dialogs/gedit-page-setup-dialog.c:527
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
+msgid "Page Setup"
+msgstr "Sivuasetukset"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:169
-msgid "The selected file is not executable."
-msgstr "Valittu tiedosto ei ole suorituskelpoinen."
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:649
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
+msgid "<b>Line Numbers</b>"
+msgstr "<b>Rivinumerot</b>"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>Tekstin rivitys</b>"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
+msgid "Do not _split words over two lines"
+msgstr "Älä jaa _sanoja yli kahdelle riville"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
+msgid "Enable text _wrapping"
+msgstr "Käytä _rivitystä"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
+msgid "Fonts"
+msgstr "Kirjasimet"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:7
+msgid "General"
+msgstr "Yleiset"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:8
+msgid "He_aders and footers:"
+msgstr "_Otsikot ja alatunnisteet:"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
+msgid "Print _line numbers"
+msgstr "Tu_losta rivinumerot"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
+msgid "Print s_yntax highlighting"
+msgstr "Tulosta s_yntaksiväritys"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
+msgid "_Body:"
+msgstr "_Tekstiosa:"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:13
+msgid "_Line numbers:"
+msgstr "_Rivinumerot:"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:14
+msgid "_Number every"
+msgstr "_Numeroinnin rivitystiheys:"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
+msgid "_Print page headers"
+msgstr "Tulosta sivujen _otsikkotiedot"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:16
+msgid "_Restore Default Fonts"
+msgstr "_Palauta oletuskirjasimet"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:17
+msgid "lines"
+msgstr "rivin välein"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Napsauta tästä valitaksesi muokkaimessa käytettävän kirjasimen"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:651
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure text color"
 msgstr "Napsauta tästä asettaaksesi tekstivärin"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:653
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid "Push this button to configure background color"
 msgstr "Napsauta tästä asettaaksesi taustavärin"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:655
+#: ../gedit/dialogs/gedit-preferences-dialog.c:657
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr ""
 "Napsauta tätä asettaaksesi värin jolla valittuna oleva teksti esitetään"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:658
+#: ../gedit/dialogs/gedit-preferences-dialog.c:660
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -810,651 +832,335 @@ msgstr ""
 "Napsauta tätä asettaaksesi värin jolla valittuna olevan tekstin tausta "
 "väritetään"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1161
 msgid "Elements"
 msgstr "Elementit"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:1
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
-msgid "    "
-msgstr "    "
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1273
+msgid "gedit Preferences"
+msgstr "geditin asetukset"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Automaattinen sisennys</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:3
 msgid "<b>Bracket Matching</b>"
 msgstr "<b>Hakasulkujen vastaavuus</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:4
 msgid "<b>Current Line</b>"
 msgstr "<b>Nykyinen rivi</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:5
 msgid "<b>Elements</b>"
 msgstr "<b>Elementit</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:6
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
 msgid "<b>File Saving</b>"
 msgstr "<b>Tallentaminen</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:7
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
 msgid "<b>Font</b>"
 msgstr "<b>Kirjasin</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:8
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:2
-msgid "<b>Line Numbers</b>"
-msgstr "<b>Rivinumerot</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:9
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
 msgid "<b>Right Margin</b>"
 msgstr "<b>Oikea reunus</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:10
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Sarkaimet</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:11
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:3
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>Tekstin rivitys</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:12
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Värit</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "Lihavoitu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "Luo tiedostoista _varmuuskopio ennen tallentamista"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Display right _margin"
 msgstr "Näytä o_ikea reunus"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:4
-msgid "Do not _split words over two lines"
-msgstr "Älä jaa _sanoja yli kahdelle riville"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
 msgid "Editor"
 msgstr "Muokkain"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
 msgid "Editor _font: "
 msgstr "Muokkaimen _kirjasin: "
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:5
-msgid "Enable text _wrapping"
-msgstr "Käytä _rivitystä"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Font & Colors"
 msgstr "Kirjasimet & Värit"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
 msgid "Hi_ghlight current line"
 msgstr "_Korosta nykyinen rivi"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
 msgid "Highlight _mode:"
 msgstr "_Väritystila:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
 msgid "Highlight matching _bracket"
 msgstr "Korosta _vastaava sulku"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "Lisää _tyhjeitä sarkaimien sijaan"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
 msgid "Italic"
 msgstr "Kursiivi"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
 msgid "Normal _text color:"
 msgstr "Normaali tekstiväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "Pick a color"
 msgstr "Valitse väri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "Pick the background color"
 msgstr "Valitse taustaväri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "Pick the editor font"
 msgstr "Valitse muokkaimen kirjasin"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "Pick the normal text color"
 msgstr "Valitse normaali tekstiväri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "Pick the selected text color"
 msgstr "Valitse valitun tekstin väri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "Pick the selection color"
 msgstr "Valitse valintaväri"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:33
 msgid "Plugins"
 msgstr "Liitännäiset"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:34
 msgid "Preferences"
 msgstr "Asetukset"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:35
 msgid "Se_lection color:"
 msgstr "V_alintaväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:36
 msgid "Selecte_d text color:"
 msgstr "Valitun _tekstin väri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:37
 msgid "Strikethrough"
 msgstr "Lävistetty"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:38
 msgid "Syntax Highlighting"
 msgstr "Syntaksiväritys"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:39
 msgid "U_se default theme colors"
 msgstr "Käy_tä oletusteeman värejä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:40
 msgid "Underline"
 msgstr "Alleviivattu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:41
 msgid "View"
 msgstr "Näytä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:42
 msgid "_Autosave files every"
 msgstr "Tallenna tiedostot _automaattisesti joka"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:43
 msgid "_Background color:"
 msgstr "_Taustaväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:44
 msgid "_Background:"
 msgstr "_Tausta:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:45
 msgid "_Display line numbers"
 msgstr "Näytä rivi_numerot"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:46
 msgid "_Enable automatic indentation"
 msgstr "Käytä auto_maattisisennystä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:47
 msgid "_Enable syntax highlighting"
 msgstr "Käytä s_yntaksiväritystä"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:48
 msgid "_Foreground:"
 msgstr "_Edustaväri:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:49
 msgid "_Reset to Default "
 msgstr "_Aseta oletukseksi"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:50
 msgid "_Right margin at column:"
 msgstr "Oikea _reunus sarakkeessa:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:51
 msgid "_Tab width:"
 msgstr "_Sarkainleveys:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
 msgid "_Use default theme font"
 msgstr "_Käytä teeman oletuskirjasinta"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:53
 msgid "_minutes"
 msgstr "_minuuttia"
 
-#: ../gedit/dialogs/goto-line.glade2.h:1
-msgid "Goto Line"
-msgstr "Siirry riville"
+#: ../gedit/dialogs/gedit-search-dialog.c:234
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:944
+msgid "Replace"
+msgstr "Korvaa"
 
-#: ../gedit/dialogs/goto-line.glade2.h:2
-msgid "_Line number:"
-msgstr "_Rivinumerot:"
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:942
+msgid "Find"
+msgstr "Etsi"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:6
-msgid "Fonts"
-msgstr "Kirjasimet"
+#: ../gedit/dialogs/gedit-search-dialog.c:298
+msgid "Replace _All"
+msgstr "Korvaa k_aikki"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:7
-msgid "General"
-msgstr "Yleiset"
+#: ../gedit/dialogs/gedit-search-dialog.c:299
+#: ../gedit/gedit-commands-file.c:562 ../plugins/savecopy/savecopy.c:368
+msgid "_Replace"
+msgstr "Ko_rvaa"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:8
-msgid "He_aders and footers:"
-msgstr "_Otsikot ja alatunnisteet:"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:9
-msgid "Page Setup"
-msgstr "Sivuasetukset"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:10
-msgid "Print _line numbers"
-msgstr "Tu_losta rivinumerot"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:11
-msgid "Print s_yntax highlighting"
-msgstr "Tulosta s_yntaksiväritys"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:12
-msgid "_Body:"
-msgstr "_Tekstiosa:"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:13
-msgid "_Line numbers:"
-msgstr "_Rivinumerot:"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:14
-msgid "_Number every"
-msgstr "_Numeroinnin rivitystiheys:"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:15
-msgid "_Print page headers"
-msgstr "Tulosta sivujen _otsikkotiedot"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:16
-msgid "_Restore Default Fonts"
-msgstr "_Palauta oletuskirjasimet"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:17
-msgid "lines"
-msgstr "rivin välein"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:1
-msgid "C_onfigure Plugin"
-msgstr "Mu_okkaa liitännäisen asetuksia"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:2
-msgid "_About Plugin"
-msgstr "Tietoj_a liitännäisestä"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:3
-msgid "button1"
-msgstr "painike1"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:4
-msgid "dialog1"
-msgstr "ikkuna1"
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:1
-msgid "Browse for program location..."
-msgstr "Selaa ohjelman sijainti..."
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:3
-msgid "_Location to search for:"
-msgstr "_Sijainti josta etsitään:"
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:4
-msgid "label"
-msgstr "otsikko"
-
-#: ../gedit/dialogs/replace.glade2.h:1 ../gedit/dialogs/uri.glade2.h:1
-#: ../plugins/shell_output/shell_output.glade2.h:1
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
-
-#: ../gedit/dialogs/replace.glade2.h:2 ../gedit/gedit-ui.xml.h:19
-msgid "Find Next"
-msgstr "Etsi seuraava"
-
-#: ../gedit/dialogs/replace.glade2.h:3
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:1
 msgid "Match _entire word only"
 msgstr "Etsi _kokonaista sanaa"
 
-#: ../gedit/dialogs/replace.glade2.h:5
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:3
 msgid "Replace All"
 msgstr "Korvaa kaikki"
 
-#: ../gedit/dialogs/replace.glade2.h:6
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:4
 msgid "Replace _with: "
 msgstr "Korvaava _merkkijono:"
 
-#: ../gedit/dialogs/replace.glade2.h:7
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:5
 msgid "Search _backwards"
 msgstr "Etsi _taaksepäin"
 
-#: ../gedit/dialogs/replace.glade2.h:8
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:6
 msgid "_Match case"
 msgstr "_Huomioi kirjainkoko"
 
-#: ../gedit/dialogs/replace.glade2.h:9
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:7
 msgid "_Search for: "
 msgstr "_Hakusana:"
 
-#: ../gedit/dialogs/replace.glade2.h:10
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
 msgstr "K_ierrä"
 
-#: ../gedit/dialogs/uri.glade2.h:2
-msgid "Ch_aracter coding:"
-msgstr "Merkistön koodau_stapa:"
-
-#: ../gedit/dialogs/uri.glade2.h:3
-msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Anna sen tiedoston _sijainti (URI) jonka haluat avattavan:"
-
-#: ../gedit/dialogs/uri.glade2.h:4
-msgid "Open from URI"
-msgstr "Avaa URI:stä"
-
-#: ../gedit/gedit-commands.c:551
-msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr ""
-"gedit on pieni ja kevyt tekstieditori Gnomelle. Suomennos: http://gnome-fi."
-"sourceforge.net/"
-
-#. Translators: This is a special message that shouldn't be translated
-#. literally. It is used in the about box to give credits to
-#. the translators.
-#. Thus, you should translate it to your name and email address.
-#. You can also include other translators who have contributed to
-#. this translation; in that case, please write them on separate
-#. lines seperated by newlines (\n).
-#: ../gedit/gedit-commands.c:560
-msgid "translator-credits"
-msgstr ""
-"Jarkko Ranta, 2000-2004\n"
-"Sami Pesonen, 2005\n"
-"Ilkka Tuohela, 2005\n"
-"Lauri Nurmi, 2005\n"
-"\n"
-"http://www.gnome.fi/"
-
-#: ../gedit/gedit-commands.c:579
-msgid "gedit"
-msgstr "gedit"
-
-#: ../gedit/gedit-document.c:384
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: ../gedit/gedit-document.c:384
-msgid "Unsaved Document"
-msgstr "Tallentamaton asiakirja"
-
-#: ../gedit/gedit-document.c:934 ../gedit/gedit-document.c:1488
-msgid "Invalid UTF-8 data"
-msgstr "Viallista UTF-8-dataa"
-
-#: ../gedit/gedit-document.c:1750
-#, c-format
-msgid "Could not read symbolic link information for %s"
-msgstr "Symbolisen linkin tietojen lukeminen kohteelle %s epäonnistui"
-
-#: ../gedit/gedit-document.c:1796
-msgid "The file has too many symbolic links."
-msgstr "Tiedostolla on liian monta symbolista linkkiä."
-
-#: ../gedit/gedit-document.c:1880
-#, c-format
-msgid "gedit cannot handle %s: locations in write mode."
-msgstr "gedit ei pysty käsittelemään %s: -sijainteja kirjoitustilassa."
-
-#: ../gedit/gedit-document.c:1887
-msgid "gedit cannot handle this kind of location in write mode."
-msgstr "gedit ei pysty käsittelemään tällaista sijaintia kirjoitustilassa."
-
-#: ../gedit/gedit-document.c:1900
-msgid "Invalid filename."
-msgstr "Epäkelpo tiedostonimi."
-
-#: ../gedit/gedit-document.c:2051
+#: ../gedit/gedit.c:73
 msgid ""
-"There is not enough disk space to save the file.\n"
-"Please free some disk space and try again."
+"Set the character encoding to be used to open the files listed on the "
+"command line"
 msgstr ""
-"Levyllä ei ole tarpeeksi tilaa tiedoston tallentamiseksi.\n"
-"Vapauta levytilaa ja yritä uudelleen."
+"Aseta merkistön koodaus jota haluat käyttää avatessasi komentorivillä "
+"luettelemiasi tiedostoja"
 
-#: ../gedit/gedit-document.c:2056
-msgid ""
-"The disk where you are trying to save the file has a limitation on file "
-"sizes.  Please try saving a smaller file or saving it to a disk that does "
-"not have this limitation."
+#: ../gedit/gedit.c:76
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Luo uusi itsenäinen ikkuna käynnissä olevaan geditiin"
+
+#: ../gedit/gedit.c:79
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Luo uusi asiakirja jo käynnissä olevaan geditiin"
+
+#: ../gedit/gedit.c:145
+#, c-format
+msgid "%s: malformed file name or URI.\n"
 msgstr ""
-"Yrität kirjoittaa tiedostoa levylle jolle on asetettu tiedostokoon rajoitus. "
-"Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
-"rajoitusta."
 
-#: ../gedit/gedit-document.c:2100
-msgid "Could not create a backup file."
-msgstr "Tiedoston varmuuskopiointi ei onnistunut."
-
-#: ../gedit/gedit-encodings-option-menu.c:204
-msgid "Auto Detected"
-msgstr "Automaattinen"
-
-#: ../gedit/gedit-encodings-option-menu.c:224
-#: ../gedit/gedit-encodings-option-menu.c:246
+#: ../gedit/gedit.c:157
 #, c-format
-msgid "Current Locale (%s)"
-msgstr "Nykyiset maa-asetukset (%s)"
+msgid "%s: invalid encoding.\n"
+msgstr "%s: virheellinen koodaus.\n"
 
-#: ../gedit/gedit-encodings-option-menu.c:307
-msgid "Add or _Remove..."
-msgstr "Lisää tai _poista..."
-
-#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:181
-#: ../gedit/gedit-encodings.c:183 ../gedit/gedit-encodings.c:185
-#: ../gedit/gedit-encodings.c:187
-msgid "Unicode"
-msgstr "Unicode"
-
-#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:176
-#: ../gedit/gedit-encodings.c:222 ../gedit/gedit-encodings.c:265
-msgid "Western"
-msgstr "Länsimainen"
-
-#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:224
-#: ../gedit/gedit-encodings.c:261
-msgid "Central European"
-msgstr "Keskieurooppalainen"
-
-#: ../gedit/gedit-encodings.c:154
-msgid "South European"
-msgstr "Eteläeurooppalainen"
-
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:172
-#: ../gedit/gedit-encodings.c:275
-msgid "Baltic"
-msgstr "Balttilainen"
-
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:226
-#: ../gedit/gedit-encodings.c:239 ../gedit/gedit-encodings.c:243
-#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:263
-msgid "Cyrillic"
-msgstr "Kyrillinen"
-
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:232
-#: ../gedit/gedit-encodings.c:273
-msgid "Arabic"
-msgstr "arabia"
-
-#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:267
-#: ../plugins/spell/gedit-spell-checker.c:93
-msgid "Greek"
-msgstr "kreikka"
-
-#: ../gedit/gedit-encodings.c:164
-msgid "Hebrew Visual"
-msgstr "Heprealainen kuvapohjainen"
-
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:230
-#: ../gedit/gedit-encodings.c:271 ../plugins/spell/gedit-spell-checker.c:109
-msgid "Hebrew"
-msgstr "heprea"
-
-#: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
-msgid "Turkish"
-msgstr "turkki"
-
-#: ../gedit/gedit-encodings.c:170
-msgid "Nordic"
-msgstr "Pohjoismainen"
-
-#: ../gedit/gedit-encodings.c:174
-msgid "Celtic"
-msgstr "Kelttiläinen"
-
-#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
-msgid "Romanian"
-msgstr "romania"
-
-#: ../gedit/gedit-encodings.c:190
-msgid "Armenian"
-msgstr "armenia"
-
-#: ../gedit/gedit-encodings.c:192 ../gedit/gedit-encodings.c:194
-#: ../gedit/gedit-encodings.c:208
-msgid "Chinese Traditional"
-msgstr "Perinteinen kiinalainen"
-
-#: ../gedit/gedit-encodings.c:196
-msgid "Cyrillic/Russian"
-msgstr "Kyrillinen/Venäläinen"
-
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:201
-#: ../gedit/gedit-encodings.c:203 ../gedit/gedit-encodings.c:235
-#: ../gedit/gedit-encodings.c:250
-msgid "Japanese"
-msgstr "japani"
-
-#: ../gedit/gedit-encodings.c:206 ../gedit/gedit-encodings.c:237
-#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:256
-msgid "Korean"
-msgstr "korea"
-
-#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:213
-#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:219
-msgid "Chinese Simplified"
-msgstr "Yksinkertaistettu kiinalainen"
-
-#: ../gedit/gedit-encodings.c:217
-msgid "Georgian"
-msgstr "georgia"
-
-#: ../gedit/gedit-encodings.c:247
-msgid "Cyrillic/Ukrainian"
-msgstr "Kyrillinen/Ukrainalainen"
-
-#: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
-#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
-msgid "Vietnamese"
-msgstr "vietnam"
-
-#: ../gedit/gedit-encodings.c:254
-msgid "Thai"
-msgstr "thai"
-
-#: ../gedit/gedit-encodings.c:441
-msgid "Unknown"
-msgstr "Tuntematon"
-
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
+#: ../gedit/gedit-commands-file.c:130 ../gedit/gedit-commands-file.c:177
 #, c-format
-msgid "A file named \"%s\" already exists.\n"
-msgstr "Tiedosto nimeltä \"%s\" on jo olemassa.\n"
+msgid "Loading file '%s'…"
+msgstr "Ladataan tiedostoa \"%s\"…"
 
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
-msgid "Do you want to replace it with the one you are saving?"
-msgstr "Haluatko korvata sen tiedostolla jota olet tallentamassa?"
-
-#: ../gedit/gedit-file-selector-util.c:142
+#: ../gedit/gedit-commands-file.c:186
 #, c-format
-msgid "The file \"%s\" is read-only.\n"
-msgstr "Sinulla on vain lukuoikeudet tiedostoon \"%s\".\n"
+msgid "Loading %d file…"
+msgid_plural "Loading %d files…"
+msgstr[0] "Ladataan %d tiedosto…"
+msgstr[1] "Ladataan %d tiedostoa…"
 
-#: ../gedit/gedit-file-selector-util.c:143
+#: ../gedit/gedit-commands-file.c:289
+msgid "Open Files…"
+msgstr "Avaa tiedostoja…"
+
+#: ../gedit/gedit-commands-file.c:395
+msgid "The entered location is not valid."
+msgstr "Annettu sijainti ei ole kelvollinen."
+
+#: ../gedit/gedit-commands-file.c:398
+#: ../gedit/gedit-io-error-message-area.c:149
+#: ../gedit/gedit-io-error-message-area.c:185
+#: ../gedit/gedit-io-error-message-area.c:201
+msgid "Please, check that you typed the location correctly and try again."
+msgstr "Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+
+#: ../gedit/gedit-commands-file.c:543
+#, c-format
+msgid "The file \"%s\" is read-only."
+msgstr "Tiedostoa \"%s\" voi vain lukea."
+
+#: ../gedit/gedit-commands-file.c:554
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Haluatko yrittää korvata sen tiedostolla jota olet tallentamassa?"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
-msgid "All Files"
-msgstr "Kaikki tiedostot"
-
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
-msgid "All Text Files"
-msgstr "Kaikki tekstitiedostot"
-
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
-msgid "_Character Coding:"
-msgstr "_Merkistön koodaus:"
-
-#: ../gedit/gedit-file-selector-util.c:498
-msgid "Select a file to open"
-msgstr "Valitse avattava tiedosto"
-
-#: ../gedit/gedit-file-selector-util.c:523
-msgid "Select files to open"
-msgstr "Valitse avattavat tiedostot"
-
-#: ../gedit/gedit-file-selector-util.c:559
-msgid "Select a filename to save"
-msgstr "Valitse tiedostonimi jolla tallennetaan"
-
-#: ../gedit/gedit-file.c:194
-msgid "Open File..."
-msgstr "Avaa tiedosto..."
-
-#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
+#: ../gedit/gedit-commands-file.c:620 ../gedit/gedit-commands-file.c:811
 #, c-format
-msgid "Saving document \"%s\"..."
-msgstr "Tallennetaan asiakirjaa \"%s\"..."
+msgid "Saving file '%s'…"
+msgstr "Tallennetaan tiedostoa \"%s\"…"
 
-#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
+#: ../gedit/gedit-commands-file.c:710
+msgid "Save As…"
+msgstr "Tallenna nimellä…"
+
+#: ../gedit/gedit-commands-file.c:1006
 #, c-format
-msgid "The document \"%s\" has not been saved."
-msgstr "Asiakirjaa \"%s\" ei ole tallennettu."
+msgid "Reverting the document '%s'…"
+msgstr "Palautetaan asiakirjaa \"%s\"…"
 
-#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
+#: ../gedit/gedit-commands-file.c:1028
 #, c-format
-msgid "The document \"%s\" has been saved."
-msgstr "Asiakirja \"%s\" on tallennettu."
+msgid "Revert unsaved changes to document '%s'?"
+msgstr "Peru tekemättömät muutokset asiakirjaan \"%s\"?"
 
-#: ../gedit/gedit-file.c:372
-msgid "Save as..."
-msgstr "Tallenna nimellä..."
-
-#: ../gedit/gedit-file.c:526
-#, c-format
-msgid "Revert unsaved changes to document \"%s\"?"
-msgstr ""
-"Haluatko palauttaa asiakirjan \"%s\" ja kumota tallentamisen jälkeen tehdyt "
-"muutokset?"
-
-#: ../gedit/gedit-file.c:535
+#: ../gedit/gedit-commands-file.c:1037
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1468,14 +1174,14 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisten %ld sekunnin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:544
+#: ../gedit/gedit-commands-file.c:1046
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin aikana menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-file.c:550
+#: ../gedit/gedit-commands-file.c:1052
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1490,7 +1196,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin ja %ld sekunnin "
 "aikana menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:560
+#: ../gedit/gedit-commands-file.c:1062
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1504,7 +1210,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisten %ld minuutin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:575 ../gedit/gedit-file.c:596
+#: ../gedit/gedit-commands-file.c:1077 ../gedit/gedit-commands-file.c:1098
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1516,7 +1222,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-file.c:581
+#: ../gedit/gedit-commands-file.c:1083
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1531,141 +1237,267 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen tunnin ja %d minuutin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-file.c:617 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-commands-file.c:1124
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
-#: ../gedit/gedit-file.c:662
+#: ../gedit/gedit-commands-help.c:78
+msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
+msgstr ""
+"gedit on pieni ja kevyt tekstieditori Gnomelle. Suomennos: http://gnome-fi."
+"sourceforge.net/"
+
+#: ../gedit/gedit-commands-help.c:98
+msgid "translator-credits"
+msgstr ""
+"Jarkko Ranta, 2000-2004\n"
+"Sami Pesonen, 2005\n"
+"Ilkka Tuohela, 2005\n"
+"Lauri Nurmi, 2005\n"
+"\n"
+"http://www.gnome.fi/"
+
+#: ../gedit/gedit-commands-help.c:101
+msgid "gedit"
+msgstr "gedit"
+
+#: ../gedit/gedit-commands-search.c:165
 #, c-format
-msgid "Error reverting the document \"%s\"."
-msgstr "Tiedoston \"%s\" palauttaminen epäonnistui."
+msgid "Found and replaced %d occurrence."
+msgid_plural "Found and replaced %d occurrences."
+msgstr[0] "Löydetty ja korvattu %d esiintymä."
+msgstr[1] "Löydetty ja korvattu %d esiintymää."
 
-#: ../gedit/gedit-file.c:670
+#: ../gedit/gedit-commands-search.c:180
+msgid "Phrase not found"
+msgstr ""
+
+#: ../gedit/gedit-document.c:701 ../gedit/gedit-document.c:781
 #, c-format
-msgid "The document \"%s\" has not been reverted."
-msgstr "Asiakirjaa \"%s\" ei palautettu."
+msgid "Unsaved Document %d"
+msgstr "Tallentamaton asiakirja %d"
 
-#: ../gedit/gedit-file.c:674
+#. bad bad luck...
+#: ../gedit/gedit-document-saver.c:523
+msgid "Could not obtain backup filename"
+msgstr "Varmuuskopiointitiedostonimeä ei voitu luoda"
+
+#: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
+#: ../gedit/gedit-window.c:1428 ../gedit/gedit-window.c:1433
+msgid "Read Only"
+msgstr "Vain luku"
+
+#: ../gedit/gedit-documents-panel.c:633
+msgid "Documents"
+msgstr "Asiakirjat"
+
+#: ../gedit/gedit-encodings.c:137 ../gedit/gedit-encodings.c:182
+#: ../gedit/gedit-encodings.c:184 ../gedit/gedit-encodings.c:186
+#: ../gedit/gedit-encodings.c:188
+msgid "Unicode"
+msgstr "Unicode"
+
+#: ../gedit/gedit-encodings.c:151 ../gedit/gedit-encodings.c:177
+#: ../gedit/gedit-encodings.c:223 ../gedit/gedit-encodings.c:266
+msgid "Western"
+msgstr "Länsimainen"
+
+#: ../gedit/gedit-encodings.c:153 ../gedit/gedit-encodings.c:225
+#: ../gedit/gedit-encodings.c:262
+msgid "Central European"
+msgstr "Keskieurooppalainen"
+
+#: ../gedit/gedit-encodings.c:155
+msgid "South European"
+msgstr "Eteläeurooppalainen"
+
+#: ../gedit/gedit-encodings.c:157 ../gedit/gedit-encodings.c:173
+#: ../gedit/gedit-encodings.c:276
+msgid "Baltic"
+msgstr "Balttilainen"
+
+#: ../gedit/gedit-encodings.c:159 ../gedit/gedit-encodings.c:227
+#: ../gedit/gedit-encodings.c:240 ../gedit/gedit-encodings.c:244
+#: ../gedit/gedit-encodings.c:246 ../gedit/gedit-encodings.c:264
+msgid "Cyrillic"
+msgstr "Kyrillinen"
+
+#: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:233
+#: ../gedit/gedit-encodings.c:274
+msgid "Arabic"
+msgstr "arabia"
+
+#: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:268
+#: ../plugins/spell/gedit-spell-checker.c:93
+msgid "Greek"
+msgstr "kreikka"
+
+#: ../gedit/gedit-encodings.c:165
+msgid "Hebrew Visual"
+msgstr "Heprealainen kuvapohjainen"
+
+#: ../gedit/gedit-encodings.c:167 ../gedit/gedit-encodings.c:231
+#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:109
+msgid "Hebrew"
+msgstr "heprea"
+
+#: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:229
+#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:150
+msgid "Turkish"
+msgstr "turkki"
+
+#: ../gedit/gedit-encodings.c:171
+msgid "Nordic"
+msgstr "Pohjoismainen"
+
+#: ../gedit/gedit-encodings.c:175
+msgid "Celtic"
+msgstr "Kelttiläinen"
+
+#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:138
+msgid "Romanian"
+msgstr "romania"
+
+#: ../gedit/gedit-encodings.c:191
+msgid "Armenian"
+msgstr "armenia"
+
+#: ../gedit/gedit-encodings.c:193 ../gedit/gedit-encodings.c:195
+#: ../gedit/gedit-encodings.c:209
+msgid "Chinese Traditional"
+msgstr "Perinteinen kiinalainen"
+
+#: ../gedit/gedit-encodings.c:197
+msgid "Cyrillic/Russian"
+msgstr "Kyrillinen/Venäläinen"
+
+#: ../gedit/gedit-encodings.c:200 ../gedit/gedit-encodings.c:202
+#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:236
+#: ../gedit/gedit-encodings.c:251
+msgid "Japanese"
+msgstr "japani"
+
+#: ../gedit/gedit-encodings.c:207 ../gedit/gedit-encodings.c:238
+#: ../gedit/gedit-encodings.c:242 ../gedit/gedit-encodings.c:257
+msgid "Korean"
+msgstr "korea"
+
+#: ../gedit/gedit-encodings.c:212 ../gedit/gedit-encodings.c:214
+#: ../gedit/gedit-encodings.c:216 ../gedit/gedit-encodings.c:220
+msgid "Chinese Simplified"
+msgstr "Yksinkertaistettu kiinalainen"
+
+#: ../gedit/gedit-encodings.c:218
+msgid "Georgian"
+msgstr "georgia"
+
+#: ../gedit/gedit-encodings.c:248
+msgid "Cyrillic/Ukrainian"
+msgstr "Kyrillinen/Ukrainalainen"
+
+#: ../gedit/gedit-encodings.c:253 ../gedit/gedit-encodings.c:259
+#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:153
+msgid "Vietnamese"
+msgstr "vietnam"
+
+#: ../gedit/gedit-encodings.c:255
+msgid "Thai"
+msgstr "thai"
+
+#: ../gedit/gedit-encodings.c:441
+msgid "Unknown"
+msgstr "Tuntematon"
+
+#: ../gedit/gedit-encodings-option-menu.c:219
+msgid "Auto Detected"
+msgstr "Automaattinen"
+
+#: ../gedit/gedit-encodings-option-menu.c:239
+#: ../gedit/gedit-encodings-option-menu.c:261
 #, c-format
-msgid "The document \"%s\" has been reverted."
-msgstr "Asiakirja \"%s\" on palautettu."
+msgid "Current Locale (%s)"
+msgstr "Nykyiset maa-asetukset (%s)"
 
-#: ../gedit/gedit-file.c:702
+#: ../gedit/gedit-encodings-option-menu.c:322
+msgid "Add or _Remove..."
+msgstr "Lisää tai _poista..."
+
+#: ../gedit/gedit-file-chooser-dialog.c:72
+msgid "C_haracter Coding:"
+msgstr "_Merkistön koodaus:"
+
+#: ../gedit/gedit-file-chooser-dialog.c:186 ../plugins/savecopy/savecopy.c:583
+msgid "All Files"
+msgstr "Kaikki tiedostot"
+
+#: ../gedit/gedit-file-chooser-dialog.c:194 ../plugins/savecopy/savecopy.c:591
+msgid "All Text Files"
+msgstr "Kaikki tekstitiedostot"
+
+#: ../gedit/gedit-help.c:66
+msgid "There was an error displaying help."
+msgstr "Virhe näytettäessä ohjetta."
+
+#: ../gedit/gedit-io-error-message-area.c:147
 #, c-format
-msgid "Reverting the document \"%s\"..."
-msgstr "Palautetaan asiakirjaa \"%s\"..."
+msgid "Could not find the file %s."
+msgstr "Tiedostoa \"%s\" ei löytynyt."
 
-#: ../gedit/gedit-file.c:825
-msgid "Could not read data from stdin."
-msgstr "Virhe luettaessa dataa stdin:istä."
-
-#: ../gedit/gedit-file.c:912
-msgid "Reverting file:"
-msgstr "Palautetaan tiedostoa:"
-
-#: ../gedit/gedit-file.c:912
-msgid "Loading file:"
-msgstr "Ladataan tiedostoa:"
-
-#: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
-#, c-format
-msgid "Error loading file \"%s\""
-msgstr "Tiedoston \"%s\" lataaminen epäonnistui"
-
-#: ../gedit/gedit-file.c:1113
-#, c-format
-msgid "Loaded file \"%s\""
-msgstr "Ladattu tiedosto \"%s\""
-
-#: ../gedit/gedit-file.c:1225
-#, c-format
-msgid "Loaded %d file"
-msgid_plural "Loaded %d files"
-msgstr[0] "Ladattu %d tiedosto"
-msgstr[1] "Ladattu %d tiedostoa"
-
-#: ../gedit/gedit-file.c:1286
-#, c-format
-msgid "Created file \"%s\""
-msgstr "Luotu tiedosto \"%s\""
-
-#: ../gedit/gedit-file.c:1304
-#, c-format
-msgid "Loading file \"%s\"..."
-msgstr "Ladataan tiedostoa \"%s\"..."
-
-#: ../gedit/gedit-file.c:1469
-#, c-format
-msgid "Loading %d file..."
-msgid_plural "Loading %d files..."
-msgstr[0] "Ladataan %d tiedostoa..."
-msgstr[1] "Ladataan %d tiedostoa..."
-
-#: ../gedit/gedit-io-error-dialogs.c:84
-#, c-format
-msgid "Could not find the file \"%s\""
-msgstr "Tiedostoa \"%s\" ei löytynyt"
-
-#: ../gedit/gedit-io-error-dialogs.c:86 ../gedit/gedit-io-error-dialogs.c:130
-#: ../gedit/gedit-io-error-dialogs.c:150
-msgid "Please, check that you typed the location correctly and try again."
-msgstr "Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
-
-#: ../gedit/gedit-io-error-dialogs.c:91 ../gedit/gedit-io-error-dialogs.c:99
-#: ../gedit/gedit-io-error-dialogs.c:116 ../gedit/gedit-io-error-dialogs.c:122
-#: ../gedit/gedit-io-error-dialogs.c:135 ../gedit/gedit-io-error-dialogs.c:141
-#: ../gedit/gedit-io-error-dialogs.c:155 ../gedit/gedit-io-error-dialogs.c:171
-#: ../gedit/gedit-io-error-dialogs.c:215 ../gedit/gedit-io-error-dialogs.c:223
-#: ../gedit/gedit-io-error-dialogs.c:231 ../gedit/gedit-io-error-dialogs.c:239
-#: ../gedit/gedit-io-error-dialogs.c:246 ../gedit/gedit-io-error-dialogs.c:252
-#: ../gedit/gedit-io-error-dialogs.c:292 ../gedit/gedit-io-error-dialogs.c:313
-#: ../gedit/gedit-io-error-dialogs.c:341
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui"
-
-#: ../gedit/gedit-io-error-dialogs.c:93 ../gedit/gedit-io-error-dialogs.c:406
+#: ../gedit/gedit-io-error-message-area.c:154
+#: ../gedit/gedit-io-error-message-area.c:374
 msgid "The file contains corrupted data."
 msgstr "Tiedosto sisältää viallista dataa."
 
-#: ../gedit/gedit-io-error-dialogs.c:104 ../gedit/gedit-io-error-dialogs.c:417
+#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
+#: ../gedit/gedit-io-error-message-area.c:163
+#: ../gedit/gedit-io-error-message-area.c:382
 #, c-format
-msgid "gedit cannot handle %s: locations."
-msgstr "gedit ei pysty käsittelemään sijaintia %s:."
+msgid "gedit cannot handle <i>%s:</i> locations."
+msgstr "gedit ei pysty käsittelemään tyypin <i>%s:</i> sijainteja."
 
-#: ../gedit/gedit-io-error-dialogs.c:109 ../gedit/gedit-io-error-dialogs.c:422
+#: ../gedit/gedit-io-error-message-area.c:168
+#: ../gedit/gedit-io-error-message-area.c:387
 msgid "gedit cannot handle this location."
 msgstr "gedit ei pysty käsittelemään tätä sijaintia."
 
-#: ../gedit/gedit-io-error-dialogs.c:118 ../gedit/gedit-io-error-dialogs.c:431
+#: ../gedit/gedit-io-error-message-area.c:175
+#: ../gedit/gedit-io-error-message-area.c:394
 msgid "The file contains data in an invalid format."
 msgstr "Tiedosto sisältää dataa epäkelvossa muodossa."
 
-#: ../gedit/gedit-io-error-dialogs.c:124 ../gedit/gedit-io-error-dialogs.c:437
+#: ../gedit/gedit-io-error-message-area.c:179
+#: ../gedit/gedit-io-error-message-area.c:398
 msgid "The file is too big."
 msgstr "Tiedosto on liian suuri."
 
-#: ../gedit/gedit-io-error-dialogs.c:128
+#: ../gedit/gedit-io-error-message-area.c:183
 #, c-format
-msgid "\"%s\" is not a valid location"
-msgstr "\"%s\" ei ole kelvollinen sijainti"
+msgid "%s is not a valid location."
+msgstr "\"%s\" ei ole kelvollinen sijainti."
 
-#: ../gedit/gedit-io-error-dialogs.c:137 ../gedit/gedit-io-error-dialogs.c:443
-msgid "Access was denied."
-msgstr "Pääsy evätty"
-
-#: ../gedit/gedit-io-error-dialogs.c:143
-msgid ""
-"there are too many open files. Please, close some open files and try again."
+#: ../gedit/gedit-io-error-message-area.c:190
+#: ../gedit/gedit-io-error-message-area.c:402
+msgid "You do not have the permissions necessary to open the file."
 msgstr ""
-"Liian monta tiedostoa on auki. Sulje ensin joku tiedosto ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-dialogs.c:148 ../gedit/gedit-io-error-dialogs.c:661
+#: ../gedit/gedit-io-error-message-area.c:194
+#: ../gedit/gedit-io-error-message-area.c:406
+#: ../gedit/gedit-io-error-message-area.c:1142
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some applications and try again."
+msgstr ""
+"Liian monta tiedostoa on jo auki. Sulje ensin joku tiedosto ja yritä "
+"uudelleen."
+
+#: ../gedit/gedit-io-error-message-area.c:199
+#: ../gedit/gedit-io-error-message-area.c:411
 #, c-format
-msgid "\"%s\" is a directory"
-msgstr "\"%s\" on hakemisto"
+msgid "%s is a directory."
+msgstr "\"%s\" on hakemisto."
 
-#: ../gedit/gedit-io-error-dialogs.c:157
+#: ../gedit/gedit-io-error-message-area.c:206
+#: ../gedit/gedit-io-error-message-area.c:416
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
@@ -1673,17 +1505,25 @@ msgstr ""
 "Tiedoston avaaminen vaatii liikaa muistia. Sulje jokin käynnissä oleva "
 "ohjelma ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-dialogs.c:185 ../gedit/gedit-io-error-dialogs.c:483
-#, c-format
+#: ../gedit/gedit-io-error-message-area.c:232
+#: ../gedit/gedit-io-error-message-area.c:442
+#: ../gedit/gedit-io-error-message-area.c:1179
+#, fuzzy, c-format
 msgid ""
-"Host \"%s\" could not be found. Please, check that your proxy settings are "
-"correct and try again."
+"Host <i>%s</i> could not be found. Please, check that your proxy settings "
+"are correct and try again."
 msgstr ""
 "Isäntänimeä \"%s\" ei löytynyt. Tarkista että välipalvelimesi asetukset ovat "
 "kunnossa ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-dialogs.c:196 ../gedit/gedit-io-error-dialogs.c:207
-#: ../gedit/gedit-io-error-dialogs.c:217
+#: ../gedit/gedit-io-error-message-area.c:243
+#: ../gedit/gedit-io-error-message-area.c:254
+#: ../gedit/gedit-io-error-message-area.c:262
+#: ../gedit/gedit-io-error-message-area.c:453
+#: ../gedit/gedit-io-error-message-area.c:464
+#: ../gedit/gedit-io-error-message-area.c:1190
+#: ../gedit/gedit-io-error-message-area.c:1201
+#: ../gedit/gedit-io-error-message-area.c:1209
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
@@ -1691,7 +1531,9 @@ msgstr ""
 "Isäntänimi ei ole kelvollinen. Tarkista että kirjoitit osoitteen oikein ja "
 "yritä uudelleen."
 
-#: ../gedit/gedit-io-error-dialogs.c:225
+#: ../gedit/gedit-io-error-message-area.c:268
+#: ../gedit/gedit-io-error-message-area.c:472
+#: ../gedit/gedit-io-error-message-area.c:1215
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
@@ -1699,7 +1541,8 @@ msgstr ""
 "Isäntänimi on tyhjä. Tarkista että välipalvelimesi asetukset ovat kunnossa "
 "ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-dialogs.c:233
+#: ../gedit/gedit-io-error-message-area.c:274
+#: ../gedit/gedit-io-error-message-area.c:1221
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
@@ -1707,200 +1550,256 @@ msgstr ""
 "Kirjautumisyritys epäonnistui. Tarkista että annoit sijainnin oikein ja "
 "yritä uudelleen."
 
-#: ../gedit/gedit-io-error-dialogs.c:241
-msgid ""
-"The file contains invalid data. Probably, you are trying to open a binary "
-"file."
-msgstr ""
-"Tiedosto sisältää epäkelpoa dataa. Yrität luultavasti avata binääritiedostoa."
-
-#: ../gedit/gedit-io-error-dialogs.c:248
+#: ../gedit/gedit-io-error-message-area.c:280
 msgid "The file you are trying to open is not a regular file."
 msgstr "Tiedosto jota yrität avata ei ole tavallinen tiedosto."
 
-#: ../gedit/gedit-io-error-dialogs.c:294
-msgid ""
-"gedit was not able to automatically detect the character coding. Please, "
-"check that you are not trying to open a binary file and try again selecting "
-"a character coding in the 'Open File...' (or 'Open Location') dialog."
-msgstr ""
-"gedit ei tunnistanut merkistön koodaustapaa automaattisesti.Tarkista ettet "
-"yritä avata binääritiedostoa ja yritä uudestaan valitsemalla jokin merkistön "
-"koodaustapa 'Avaa tiedosto...' (tai 'Avaa sijainti') -ikkunassa."
-
-#: ../gedit/gedit-io-error-dialogs.c:302 ../gedit/gedit-io-error-dialogs.c:328
+#: ../gedit/gedit-io-error-message-area.c:319
+#: ../gedit/gedit-io-error-message-area.c:532
+#: ../gedit/gedit-io-error-message-area.c:1286
 #, c-format
-msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Tiedoston \"%s\" avaaminen epäonnistui %s-merkistön koodauksella"
+msgid "Unexpected error: %s"
+msgstr "Odottamaton virhe: %s"
 
-#: ../gedit/gedit-io-error-dialogs.c:305 ../gedit/gedit-io-error-dialogs.c:331
-msgid ""
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File... ' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Tarkista ettet yritä avata binääritiedostoa ja että olet valinnut oikean "
-"koodaustavan \"Avaa tiedosto...\" (tai \"Avaa sijainti\") -ikkunassa ja "
-"yritä uudestaan."
-
-#: ../gedit/gedit-io-error-dialogs.c:315
-msgid ""
-"The file contains data in an invalid format. Probably, you are trying to "
-"open a binary file."
-msgstr ""
-"Tiedosto sisältää epäkelpoa dataa. Yrität luultavasti avata binääritiedostoa."
-
-#: ../gedit/gedit-io-error-dialogs.c:397 ../gedit/gedit-io-error-dialogs.c:404
-#: ../gedit/gedit-io-error-dialogs.c:410 ../gedit/gedit-io-error-dialogs.c:429
-#: ../gedit/gedit-io-error-dialogs.c:435 ../gedit/gedit-io-error-dialogs.c:441
-#: ../gedit/gedit-io-error-dialogs.c:447 ../gedit/gedit-io-error-dialogs.c:454
-#: ../gedit/gedit-io-error-dialogs.c:469 ../gedit/gedit-io-error-dialogs.c:497
-#: ../gedit/gedit-io-error-dialogs.c:505 ../gedit/gedit-io-error-dialogs.c:511
-#: ../gedit/gedit-io-error-dialogs.c:518 ../gedit/gedit-io-error-dialogs.c:557
+#: ../gedit/gedit-io-error-message-area.c:325
+#: ../gedit/gedit-io-error-message-area.c:693
 #, c-format
-msgid "Could not revert the file \"%s\""
-msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui"
+msgid "Could not open the file %s."
+msgstr "Tiedoston \"%s\" avaaminen epäonnistui."
 
-#: ../gedit/gedit-io-error-dialogs.c:399
+#: ../gedit/gedit-io-error-message-area.c:369
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr "gedit ei löydä sitä. Tämä voi johtua siitä että se on poistettu."
 
-#: ../gedit/gedit-io-error-dialogs.c:449
-msgid ""
-"There are too many open files. Please, close some open files and try again."
-msgstr ""
-"Liian monta tiedostoa on jo auki. Sulje ensin joku tiedosto ja yritä "
-"uudelleen."
-
-#: ../gedit/gedit-io-error-dialogs.c:456
-msgid ""
-"Not enough available memory. Please, close some running applications and try "
-"again."
-msgstr ""
-"Liian vähän vapaata muistia. Sulje jokin käynnissä oleva ohjelma ja yritä "
-"uudelleen."
-
-#: ../gedit/gedit-io-error-dialogs.c:499
-msgid ""
-"The host name was empty. Please, check that your proxy settings are correct "
-"and try again."
-msgstr ""
-"Isäntänimi on tyhjä. Tarkista että välipalvelimesi asetukset ovat kunnossa "
-"ja yritä uudelleen."
-
-#: ../gedit/gedit-io-error-dialogs.c:507
+#: ../gedit/gedit-io-error-message-area.c:478
 msgid "Attempt to log in failed."
 msgstr "Kirjautuminen epäonnistui."
 
-#: ../gedit/gedit-io-error-dialogs.c:513
-msgid ""
-"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
-"binary file."
+#: ../gedit/gedit-io-error-message-area.c:482
+#, c-format
+msgid "%s is not a regular file."
+msgstr "%s ei ole tavallinen tiedosto."
+
+#: ../gedit/gedit-io-error-message-area.c:538
+#, c-format
+msgid "Could not revert the file %s."
+msgstr "Tiedoston \"%s\" palauttaminen levyltä epäonnistui"
+
+#: ../gedit/gedit-io-error-message-area.c:559
+msgid "<small>Ch_aracter Coding:</small>"
+msgstr "<small>_Merkistön koodaus:</small>"
+
+#: ../gedit/gedit-io-error-message-area.c:600
+msgid "_Retry"
+msgstr "Yritä _uudestaan"
+
+#: ../gedit/gedit-io-error-message-area.c:695
+msgid "gedit has not been able to detect the character coding."
+msgstr "gedit ei pystynyt selvittämään merkistön koodausta."
+
+#: ../gedit/gedit-io-error-message-area.c:697
+#: ../gedit/gedit-io-error-message-area.c:706
+msgid "Please check that you are not trying to open a binary file."
+msgstr "Tarkista, ettet yritä avata binääritiedostoa."
+
+#: ../gedit/gedit-io-error-message-area.c:698
+msgid "Select a character coding from the menu and try again."
 msgstr ""
-"Tiedosto sisältää epäkelpoa UTF-8 dataa. Yrität luultavasti avata "
-"binääritiedostoa."
 
-#: ../gedit/gedit-io-error-dialogs.c:520
-msgid "It is not possible to revert an Untitled document."
-msgstr "Et voi palauttaa Nimetöntä asiakirjaa levyltä."
-
-#: ../gedit/gedit-io-error-dialogs.c:607
+#: ../gedit/gedit-io-error-message-area.c:703
 #, c-format
-msgid "Could not save the file \"%s\""
-msgstr "Tiedoston \"%s\" tallentaminen epäonnistui"
+msgid "Could not open the file %s using the %s character coding."
+msgstr "Tiedoston \"%s\" avaaminen merkistöä %s käyttäen epäonnistui."
 
-#: ../gedit/gedit-io-error-dialogs.c:656
+#: ../gedit/gedit-io-error-message-area.c:707
+#: ../gedit/gedit-io-error-message-area.c:759
+msgid "Select a different character coding from the menu and try again."
+msgstr "Valitse eri merkistön koodaus valikosta ja yritä uudestaan."
+
+#: ../gedit/gedit-io-error-message-area.c:754
 #, c-format
-msgid "The file \"%s\" already exists"
-msgstr "Tiedosto \"%s\" on jo olemassa"
+msgid "Could not save the file %s using the %s character coding."
+msgstr "Tiedoston \"%s\" tallennus merkistöä %s käyttäen epäonnistui."
 
-#: ../gedit/gedit-io-error-dialogs.c:662
-msgid "Please, check that you typed the location correctly."
-msgstr "Varmista että kirjoitit osoitteen oikein."
-
-#: ../gedit/gedit-io-error-dialogs.c:668 ../gedit/gedit-io-error-dialogs.c:674
-#: ../gedit/gedit-io-error-dialogs.c:680 ../gedit/gedit-io-error-dialogs.c:687
-#: ../gedit/gedit-io-error-dialogs.c:694
-#, c-format
-msgid "Could not create the file \"%s\""
-msgstr "Tiedoston \"%s\" luominen epäonnistui"
-
-#: ../gedit/gedit-io-error-dialogs.c:670
-msgid "Make sure you have the appropriate write permissions."
-msgstr "Varmista että sinulla on tarvittavat kirjoitusoikeudet."
-
-#: ../gedit/gedit-io-error-dialogs.c:676
-msgid "The file name is too long."
-msgstr "Tiedostonimi on liian pitkä."
-
-#: ../gedit/gedit-io-error-dialogs.c:682
+#: ../gedit/gedit-io-error-message-area.c:757
 msgid ""
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
+"The document contains one or more characters that cannot be encoded using "
+"the specified character coding."
 msgstr ""
-"Annetulla nimellä olevaa hakemistokomponenttia ei ole olemassa, tai se on "
-"symbolinen linkki jolla ei ole kohdetta."
 
-#: ../gedit/gedit-io-error-dialogs.c:689
+#: ../gedit/gedit-io-error-message-area.c:818
+msgid "_Edit Anyway"
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:821
+msgid "_Don't Edit"
+msgstr "Älä m_uokkaa"
+
+#. FIXME: try to rephrase in a better way
+#: ../gedit/gedit-io-error-message-area.c:837
+#, c-format
+msgid "The file %s is already open."
+msgstr "Tiedosto \"%s\" on jo auki."
+
+#: ../gedit/gedit-io-error-message-area.c:852
 msgid ""
-"There is not enough disk space to create the file. Please free some disk "
+"gedit opened this instance of the file in non-editable way. Do you want to "
+"edit it anyway?"
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:910
+#: ../gedit/gedit-io-error-message-area.c:1005
+msgid "_Save Anyway"
+msgstr "_Tallenna joka tapauksessa"
+
+#: ../gedit/gedit-io-error-message-area.c:914
+#: ../gedit/gedit-io-error-message-area.c:1009
+msgid "_Don't Save"
+msgstr "Älä Ta_llenna"
+
+#. FIXME: review this message, it's not clear since for the user the "modification"
+#. could be interpreted as the changes he made in the document. beside "reading" is
+#. not accurate (since last load/save)
+#: ../gedit/gedit-io-error-message-area.c:932
+#, c-format
+msgid "The file %s has been modified since reading it."
+msgstr "Tiedostoa \"%s\" on muokattu sen avaamisen jälkeen."
+
+#: ../gedit/gedit-io-error-message-area.c:948
+msgid "If you save it, all the external changes could be lost. Save it anyway?"
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:1027
+#, c-format
+msgid "Could not create a backup file while saving %s"
+msgstr "Varmuuskopiointitiedostoa ei voitu luoda tallennettaessa tiedostoa %s"
+
+#: ../gedit/gedit-io-error-message-area.c:1030
+#, c-format
+msgid "Could not create a temporary backup file while saving %s"
+msgstr "Väliaikaista varmuuskopiointitiedostoa eivoitu luoda "
+"tallennettaessa tiedostoa %s"
+
+#: ../gedit/gedit-io-error-message-area.c:1047
+msgid ""
+"gedit could not backup the old copy of the file before saving the new one. "
+"You can ignore this warning and save the file anyway, but if an error occurs "
+"while saving, you could lose the old copy of the file. Save anyway?"
+msgstr ""
+
+#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
+#: ../gedit/gedit-io-error-message-area.c:1105
+#, fuzzy, c-format
+msgid ""
+"gedit cannot handle <i>%s:</i> locations in write mode. Please, check that "
+"you typed the location correctly and try again."
+msgstr ""
+"Isäntänimi ei ole kelvollinen. Tarkista että kirjoitit osoitteen oikein ja "
+"yritä uudelleen."
+
+#: ../gedit/gedit-io-error-message-area.c:1112
+#, fuzzy
+msgid ""
+"gedit cannot handle this location  in write mode. Please, check that you "
+"typed the location correctly and try again."
+msgstr ""
+"Kirjautumisyritys epäonnistui. Tarkista että annoit sijainnin oikein ja "
+"yritä uudelleen."
+
+#: ../gedit/gedit-io-error-message-area.c:1121
+msgid ""
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr ""
+"Yrität kirjoittaa tiedostoa levylle jolle on asetettu tiedostokoon rajoitus. "
+"Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
+"rajoitusta."
+
+#: ../gedit/gedit-io-error-message-area.c:1128
+#, fuzzy, c-format
+msgid ""
+"%s is not a valid location. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Isäntänimi ei ole kelvollinen. Tarkista että kirjoitit osoitteen oikein ja "
+"yritä uudelleen."
+
+#: ../gedit/gedit-io-error-message-area.c:1135
+#, fuzzy
+msgid ""
+"You do not have the permissions necessary to save the file. Please, check "
+"that you typed the location correctly and try again."
+msgstr ""
+"Kirjautumisyritys epäonnistui. Tarkista että annoit sijainnin oikein ja "
+"yritä uudelleen."
+
+#: ../gedit/gedit-io-error-message-area.c:1147
+#, fuzzy, c-format
+msgid ""
+"%s is a directory. Please, check that you typed the location correctly and "
+"try again."
+msgstr "Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
+
+#: ../gedit/gedit-io-error-message-area.c:1153
+#, fuzzy
+msgid ""
+"Not enough available memory to save the file. Please, close some running "
+"applications and try again."
+msgstr ""
+"Tiedoston avaaminen vaatii liikaa muistia. Sulje jokin käynnissä oleva "
+"ohjelma ja yritä uudelleen."
+
+#: ../gedit/gedit-io-error-message-area.c:1227
+#, fuzzy
+msgid ""
+"There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"Levyllä ei ole tarpeeksi tilaa tiedoston \"%s\" tallentamiseksi. Vapauta "
-"levytilaa ja yritä uudelleen."
+"Levyllä ei ole tarpeeksi tilaa tiedoston tallentamiseksi.\n"
+"Vapauta levytilaa ja yritä uudelleen."
 
-#. Read only
-#: ../gedit/gedit-mdi-child.c:249
-msgid "RO"
-msgstr "LUKU"
+#: ../gedit/gedit-io-error-message-area.c:1233
+#, fuzzy
+msgid ""
+"You are trying to save the file on a read-only disk. Please, check that you "
+"typed the location correctly and try again."
+msgstr ""
+"Isäntänimi ei ole kelvollinen. Tarkista että kirjoitit osoitteen oikein ja "
+"yritä uudelleen."
 
-#. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
-msgid "_Move to New Window"
-msgstr "_Siirrä uuteen ikkunaan"
+#: ../gedit/gedit-io-error-message-area.c:1239
+msgid "A file with the same name already exists. Please, use a different name."
+msgstr ""
 
-#: ../gedit/gedit-mdi-child.c:803
-msgid "Unicode (UTF-8)"
-msgstr "Unicode (UTF-8)"
+#: ../gedit/gedit-io-error-message-area.c:1244
+#, fuzzy
+msgid ""
+"The disk where you are trying to save the file has a limitation on length of "
+"the file names. Please, use a shorter name."
+msgstr ""
+"Yrität kirjoittaa tiedostoa levylle jolle on asetettu tiedostokoon rajoitus. "
+"Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
+"rajoitusta."
 
-#: ../gedit/gedit-mdi-child.c:813
-msgid "Name:"
-msgstr "Nimi:"
+#: ../gedit/gedit-io-error-message-area.c:1249
+#, fuzzy, c-format
+msgid ""
+"%s is not a regular file. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Isäntänimi ei ole kelvollinen. Tarkista että kirjoitit osoitteen oikein ja "
+"yritä uudelleen."
 
-#: ../gedit/gedit-mdi-child.c:814
-msgid "MIME Type:"
-msgstr "MIME-tyyppi:"
+#: ../gedit/gedit-io-error-message-area.c:1292
+#, fuzzy, c-format
+msgid "Could not save the file %s."
+msgstr "Tiedoston \"%s\" tallentaminen epäonnistui"
 
-#: ../gedit/gedit-mdi-child.c:815
-msgid "Encoding:"
-msgstr "Koodaustapa:"
-
-#. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
-#, c-format
-msgid "Open '%s'"
-msgstr "Avaa \"%s\""
-
-#: ../gedit/gedit-mdi.c:538
-msgid "Open a recently used file"
-msgstr "Avaa äskettäin käytetty tiedosto"
-
-#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
-msgid "Read Only"
-msgstr "Vain luku"
-
-#: ../gedit/gedit-mdi.c:2103
-msgid "Normal"
-msgstr "Tavallinen"
-
-#: ../gedit/gedit-mdi.c:2104
-msgid "Use Normal highlight mode"
-msgstr "Käytä tavallista väritystä"
-
-#: ../gedit/gedit-mdi.c:2180
-#, c-format
-msgid "Use %s highlight mode"
-msgstr "Käytä %s-väritystä"
+#: ../gedit/gedit-notebook.c:823
+#, fuzzy
+msgid "Close document"
+msgstr "Tallentamaton asiakirja"
 
 #: ../gedit/gedit-output-window.c:378
 msgid "Close the output window"
@@ -1918,533 +1817,571 @@ msgstr "Tyhjennä tulosteikkuna"
 msgid "Output Lines"
 msgstr "Tulosterivit"
 
+#: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
+#: ../gedit/recent-files/egg-recent-view-gtk.c:444
+#: ../gedit/recent-files/egg-recent-view-uimanager.c:322
+msgid "Empty"
+msgstr ""
+
+#: ../gedit/gedit-panel.c:459
+msgid "Hide panel"
+msgstr ""
+
+#: ../gedit/gedit-plugin-manager.c:55
+msgid "Plugin"
+msgstr "Liitännäinen"
+
+#: ../gedit/gedit-plugin-manager.c:56
+msgid "Enabled"
+msgstr "Käytössä"
+
+#: ../gedit/gedit-plugin-manager.c:540
+msgid "_About Plugin"
+msgstr "Tietoj_a liitännäisestä"
+
+#: ../gedit/gedit-plugin-manager.c:544
+msgid "C_onfigure Plugin"
+msgstr "Mu_okkaa liitännäisen asetuksia"
+
 #: ../gedit/gedit-prefs-manager.c:175
 msgid "Cannot initialize preferences manager."
 msgstr "Asetusohjelman käynnistys epäonnistui."
 
-#: ../gedit/gedit-prefs-manager.c:1326
+#: ../gedit/gedit-prefs-manager.c:1374
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Odotettiin: \"%s\". Saatiin: \"%s\" (avaimelle %s)."
 
-#: ../gedit/gedit-print.c:219 ../gedit/gedit-ui.xml.h:37
-msgid "Print"
-msgstr "Tulosta"
-
-#: ../gedit/gedit-print.c:228 ../plugins/docinfo/docinfo.glade2.h:7
-msgid "Lines"
-msgstr "Rivejä"
-
-#: ../gedit/gedit-print.c:330
-msgid "Preparing pages..."
-msgstr "Valmistellaan sivuja..."
-
-#: ../gedit/gedit-print.c:357
-#, c-format
-msgid "Rendering page %d of %d..."
-msgstr "Tulkitaan sivua %d/%d..."
-
-#: ../gedit/gedit-print.c:359
-#, c-format
-msgid "Printing page %d of %d..."
-msgstr "Tulostetaan sivua %d/%d..."
-
-#: ../gedit/gedit-print.c:381 ../gedit/gedit-ui.xml.h:40
-msgid "Print preview"
-msgstr "Tulostuksen esikatselu"
-
-#: ../gedit/gedit-print.c:551
+#: ../gedit/gedit-print.c:186
 #, c-format
 msgid "File: %s"
 msgstr "Tiedosto: %s"
 
-#: ../gedit/gedit-print.c:557
+#: ../gedit/gedit-print.c:194
 msgid "Page %N of %Q"
 msgstr "Sivu %N / %Q"
 
-#: ../gedit/gedit-ui.xml.h:1
-msgid "About this application"
-msgstr "Tietoja tästä sovelluksesta"
+#: ../gedit/gedit-print.c:316
+msgid "Print"
+msgstr "Tulosta"
 
-#: ../gedit/gedit-ui.xml.h:2
-msgid "Change the visibility of the output window in the current window"
-msgstr "Muuta tulosteikkunan näkyvyyttä nykyisessä ikkunassa"
+#: ../gedit/gedit-print.c:325 ../plugins/docinfo/docinfo.glade2.h:9
+msgid "Lines"
+msgstr "Rivejä"
 
-#: ../gedit/gedit-ui.xml.h:3
-msgid "Change the visibility of the statusbar in the current window"
-msgstr "Muuta tilarivin näkyvyyttä nykyisessä ikkunassa"
+#: ../gedit/gedit-print-job-preview.c:623
+msgid "Page Preview"
+msgstr "Sivun esikatselu"
 
-#: ../gedit/gedit-ui.xml.h:4
-msgid "Change the visibility of the toolbar in the current window"
-msgstr "Muuta työkalupalkin näkyvyyttä nykyisessä ikkunassa"
-
-#: ../gedit/gedit-ui.xml.h:5
-msgid "Close"
-msgstr "Sulje"
-
-#: ../gedit/gedit-ui.xml.h:6
-msgid "Close all open files"
-msgstr "Sulje kaikki avoimet tiedostot"
-
-#: ../gedit/gedit-ui.xml.h:7
-msgid "Close the current file"
-msgstr "Sulje nykyinen tiedosto"
-
-#: ../gedit/gedit-ui.xml.h:8
-msgid "Configure the application"
-msgstr "Muokkaa sovelluksen asetuksia"
-
-#: ../gedit/gedit-ui.xml.h:9
-msgid "Copy"
-msgstr "Kopioi"
-
-#: ../gedit/gedit-ui.xml.h:10
-msgid "Copy the selection"
-msgstr "Kopioi valinta"
-
-#: ../gedit/gedit-ui.xml.h:11
-msgid "Create a new document"
-msgstr "Luo uusi asiakirja"
-
-#: ../gedit/gedit-ui.xml.h:12
-msgid "Cu_t"
-msgstr "_Leikkaa"
-
-#: ../gedit/gedit-ui.xml.h:13
-msgid "Cut"
-msgstr "Leikkaa"
-
-#: ../gedit/gedit-ui.xml.h:14
-msgid "Cut the selection"
-msgstr "Leikkaa valinta"
-
-#: ../gedit/gedit-ui.xml.h:15
-msgid "Delete"
-msgstr "Tyhjennä"
-
-#: ../gedit/gedit-ui.xml.h:16
-msgid "Delete the selected text"
-msgstr "Tyhjennä valittu teksti"
-
-#: ../gedit/gedit-ui.xml.h:18
-msgid "Find Ne_xt"
-msgstr "Etsi _seuraava"
-
-#: ../gedit/gedit-ui.xml.h:20
-msgid "Find Pre_vious"
-msgstr "Etsi e_dellinen"
-
-#: ../gedit/gedit-ui.xml.h:21
-msgid "Find Previous"
-msgstr "Etsi edellinen"
-
-#: ../gedit/gedit-ui.xml.h:22
-msgid "Go to _Line..."
-msgstr "S_iirry riville..."
-
-#: ../gedit/gedit-ui.xml.h:23
-msgid "Go to a specific line"
-msgstr "Siirry tietylle riville"
-
-#: ../gedit/gedit-ui.xml.h:24
-msgid "Main toolbar"
-msgstr "Päätyökalupalkki"
-
-#: ../gedit/gedit-ui.xml.h:25
-msgid "Move the current document to a new window"
-msgstr "Siirrä asiakirja uuteen ikkunaan"
-
-#: ../gedit/gedit-ui.xml.h:26
-msgid "New"
-msgstr "Uusi"
-
-#: ../gedit/gedit-ui.xml.h:27
-msgid "Open"
-msgstr "Avaa"
-
-#: ../gedit/gedit-ui.xml.h:28
-msgid "Open Location..."
-msgstr "Avaa sijainti..."
-
-#: ../gedit/gedit-ui.xml.h:29
-msgid "Open _Location..."
-msgstr "Avaa s_ijainti..."
-
-#: ../gedit/gedit-ui.xml.h:30
-msgid "Open a file"
-msgstr "Avaa tiedosto"
-
-#: ../gedit/gedit-ui.xml.h:31
-msgid "Open a file from a specified location"
-msgstr "Avaa tiedosto tietystä sijainnista"
-
-#: ../gedit/gedit-ui.xml.h:32
-msgid "Open the gedit manual"
-msgstr "Avaa geditin ohje"
-
-#: ../gedit/gedit-ui.xml.h:33
-msgid "Page Set_up"
-msgstr "Sivuasetu_kset"
-
-#: ../gedit/gedit-ui.xml.h:34
-msgid "Paste"
-msgstr "Liitä"
-
-#: ../gedit/gedit-ui.xml.h:35
-msgid "Paste the clipboard"
-msgstr "Liitä leikepöydän sisältö"
-
-#: ../gedit/gedit-ui.xml.h:36
-msgid "Pr_eferences"
-msgstr "As_etukset"
-
-#: ../gedit/gedit-ui.xml.h:38
-msgid "Print Previe_w..."
-msgstr "Tulostuksen _esikatselu..."
-
-#: ../gedit/gedit-ui.xml.h:39
-msgid "Print Preview"
-msgstr "Tulostuksen esikatselu"
-
-#: ../gedit/gedit-ui.xml.h:41
-msgid "Print the current file"
-msgstr "Tulosta nykyinen tiedosto"
-
-#: ../gedit/gedit-ui.xml.h:42
-msgid "Quit"
-msgstr "Lopeta"
-
-#: ../gedit/gedit-ui.xml.h:43
-msgid "Quit the program"
-msgstr "Lopeta ohjelma"
-
-#: ../gedit/gedit-ui.xml.h:44
-msgid "Redo"
-msgstr "Uudelleen"
-
-#: ../gedit/gedit-ui.xml.h:45
-msgid "Redo the undone action"
-msgstr "Toista edellinen komento"
-
-#: ../gedit/gedit-ui.xml.h:47
-msgid "Revert"
-msgstr "Palauta"
-
-#: ../gedit/gedit-ui.xml.h:48
-msgid "Revert to a saved version of the file"
-msgstr "Palauta levylle tallennettu versio tiedostosta"
-
-#: ../gedit/gedit-ui.xml.h:49
-msgid "Save"
-msgstr "Tallenna"
-
-#: ../gedit/gedit-ui.xml.h:50
-msgid "Save As"
-msgstr "Tallenna nimellä"
-
-#: ../gedit/gedit-ui.xml.h:51
-msgid "Save _As..."
-msgstr "Talle_nna nimellä..."
-
-#: ../gedit/gedit-ui.xml.h:52
-msgid "Save all open files"
-msgstr "Tallenna kaikki avoimet tiedostot"
-
-#: ../gedit/gedit-ui.xml.h:53
-msgid "Save the current file"
-msgstr "Tallenna nykyinen tiedosto"
-
-#: ../gedit/gedit-ui.xml.h:54
-msgid "Save the current file with a different name"
-msgstr "Tallenna nykyinen tiedosto uudella nimellä"
-
-#: ../gedit/gedit-ui.xml.h:55
-msgid "Search backwards for the same text"
-msgstr "Etsi taaksepäin samaa tekstiä"
-
-#: ../gedit/gedit-ui.xml.h:56
-msgid "Search for and replace text"
-msgstr "Etsi ja korvaa tekstiä"
-
-#: ../gedit/gedit-ui.xml.h:57
-msgid "Search for text"
-msgstr "Etsi tekstiä"
-
-#: ../gedit/gedit-ui.xml.h:58
-msgid "Search forwards for the same text"
-msgstr "Etsi eteenpäin samaa tekstiä"
-
-#: ../gedit/gedit-ui.xml.h:59
-msgid "Select All"
-msgstr "Valitse kaikki"
-
-#: ../gedit/gedit-ui.xml.h:60
-msgid "Select _All"
-msgstr "Valitse k_aikki"
-
-#: ../gedit/gedit-ui.xml.h:61
-msgid "Select the entire document"
-msgstr "Valitse koko asiakirjan sisältö"
-
-#: ../gedit/gedit-ui.xml.h:62
-msgid ""
-"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+#: ../gedit/gedit-print-job-preview.c:624
+msgid "The preview of a page in the document to be printed"
 msgstr ""
-"Aseta työkalupalkin painiketyyli työpöydän valikko- ja "
-"työkalupalkkiasetusten mukaiseksi"
 
-#: ../gedit/gedit-ui.xml.h:63
-msgid "Setup the page settings"
+#: ../gedit/gedit-print-job-preview.c:710
+msgid "Other"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:740
+msgid "Show the previous page"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:751
+msgid "Show the next page"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:767
+msgid "Current page (Alt+P)"
+msgstr "Nykyinen sivu (Alt+P)"
+
+#. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
+#. We are displaying 'XXX of XXX'.
+#: ../gedit/gedit-print-job-preview.c:781
+msgid "of"
+msgstr "/"
+
+#: ../gedit/gedit-print-job-preview.c:787
+msgid "Page total"
+msgstr "Sivuja kaikkiaan"
+
+#: ../gedit/gedit-print-job-preview.c:788
+msgid "The total number of pages in the document"
+msgstr "Sivujen kokonaislukumäärä asiakirjassa"
+
+#: ../gedit/gedit-print-job-preview.c:805
+msgid "Show multiple pages"
+msgstr "Näytä useita sivuja"
+
+#: ../gedit/gedit-print-job-preview.c:817
+msgid "Zoom 1:1"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:825
+msgid "Zoom to fit the whole page"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:834
+#, fuzzy
+msgid "Zoom the page in"
 msgstr "Aseta sivuasetukset"
 
-#: ../gedit/gedit-ui.xml.h:64
-msgid "Show only icons in the toolbar"
-msgstr "Näytä vain kuvakkeet työkalupalkissa"
+#: ../gedit/gedit-print-job-preview.c:842
+msgid "Zoom the page out"
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:65
-msgid "Show text below every icon in the toolbar"
-msgstr "Näytä teksti kaikkien työkalupalkin kuvakkeiden vieressä"
+#: ../gedit/gedit-print-job-preview.c:856
+msgid "Close print preview"
+msgstr "Sulje tulostuksen esikatselu"
 
-#: ../gedit/gedit-ui.xml.h:66
-msgid "Show text only beside important icons in the toolbar"
-msgstr "Näytä teksti vain tärkeiden työkalupalkin kuvakkeiden vieressä"
+#: ../gedit/gedit-print-job-preview.c:1096
+#: ../gedit/gedit-print-job-preview.c:1097
+msgid "Number of pages horizontally"
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:67
-msgid "T_ext for Important Icons"
-msgstr "T_ekstit tärkeille kuvakkeille"
+#: ../gedit/gedit-print-job-preview.c:1100
+#: ../gedit/gedit-print-job-preview.c:1101
+msgid "Number of pages vertically"
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:68
-msgid "Undo"
-msgstr "Kumoa"
+#: ../gedit/gedit-print-job-preview.c:1165
+msgid "No visible output was created."
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:69
-msgid "Undo the last action"
-msgstr "Kumoa edellinen toiminto"
+#: ../gedit/gedit-statusbar.c:257
+msgid "  OVR"
+msgstr "  PÄÄLLE"
 
-#: ../gedit/gedit-ui.xml.h:70
-msgid "_About"
-msgstr "_Tietoja"
+#: ../gedit/gedit-statusbar.c:259
+msgid "  INS"
+msgstr "  LISÄÄ"
 
-#: ../gedit/gedit-ui.xml.h:71
-msgid "_Close"
-msgstr "_Sulje"
-
-#: ../gedit/gedit-ui.xml.h:72
-msgid "_Close All"
-msgstr "Sulje _kaikki"
-
-#: ../gedit/gedit-ui.xml.h:73
-msgid "_Contents"
-msgstr "_Sisältö"
-
-#: ../gedit/gedit-ui.xml.h:74
-msgid "_Copy"
-msgstr "_Kopioi"
-
-#: ../gedit/gedit-ui.xml.h:75
-msgid "_Customize Toolbar"
-msgstr "_Mukauta työkalupalkkeja"
-
-#: ../gedit/gedit-ui.xml.h:76
-msgid "_Delete"
-msgstr "_Tyhjennä"
-
-#: ../gedit/gedit-ui.xml.h:77
-msgid "_Desktop Default"
-msgstr "T_yöpöydän oletusarvo"
-
-#: ../gedit/gedit-ui.xml.h:78
-msgid "_Documents"
-msgstr "A_siakirjat"
-
-#: ../gedit/gedit-ui.xml.h:79
-msgid "_Edit"
-msgstr "_Muokkaa"
-
-#: ../gedit/gedit-ui.xml.h:80
-msgid "_File"
-msgstr "_Tiedosto"
-
-#: ../gedit/gedit-ui.xml.h:81
-msgid "_Find..."
-msgstr "_Etsi..."
-
-#: ../gedit/gedit-ui.xml.h:82
-msgid "_Help"
-msgstr "O_hje"
-
-#: ../gedit/gedit-ui.xml.h:83
-msgid "_Highlight Mode"
-msgstr "_Väritystila"
-
-#: ../gedit/gedit-ui.xml.h:84
-msgid "_Icons Only"
-msgstr "_Vain kuvakkeet"
-
-#: ../gedit/gedit-ui.xml.h:86
-msgid "_New"
-msgstr "_Uusi"
-
-#: ../gedit/gedit-ui.xml.h:87
-msgid "_Open..."
-msgstr "_Avaa..."
-
-#: ../gedit/gedit-ui.xml.h:88
-msgid "_Output Window"
-msgstr "_Tulosteikkuna"
-
-#: ../gedit/gedit-ui.xml.h:89
-msgid "_Paste"
-msgstr "L_iitä"
-
-#: ../gedit/gedit-ui.xml.h:90
-msgid "_Print..."
-msgstr "Tul_osta..."
-
-#: ../gedit/gedit-ui.xml.h:91
-msgid "_Quit"
-msgstr "_Lopeta"
-
-#: ../gedit/gedit-ui.xml.h:92
-msgid "_Redo"
-msgstr "Uu_delleen"
-
-#: ../gedit/gedit-ui.xml.h:93
-msgid "_Replace..."
-msgstr "Ko_rvaa..."
-
-#: ../gedit/gedit-ui.xml.h:95
-msgid "_Save"
-msgstr "_Tallenna"
-
-#: ../gedit/gedit-ui.xml.h:96
-msgid "_Save All"
-msgstr "Tallenna k_aikki"
-
-#: ../gedit/gedit-ui.xml.h:97
-msgid "_Search"
-msgstr "_Etsi"
-
-#: ../gedit/gedit-ui.xml.h:98
-msgid "_Statusbar"
-msgstr "T_ilarivi"
-
-#: ../gedit/gedit-ui.xml.h:99
-msgid "_Text for All Icons"
-msgstr "_Tekstit kaikille kuvakkeille"
-
-#: ../gedit/gedit-ui.xml.h:100
-msgid "_Toolbar"
-msgstr "T_yökalupalkki"
-
-#: ../gedit/gedit-ui.xml.h:101
-msgid "_Tools"
-msgstr "Työ_kalut"
-
-#: ../gedit/gedit-ui.xml.h:102
-msgid "_Undo"
-msgstr "K_umoa"
-
-#: ../gedit/gedit-ui.xml.h:103
-msgid "_View"
-msgstr "_Näytä"
-
-#: ../gedit/gedit-utils.c:686
-msgid " (invalid Unicode)"
-msgstr " (epäkelpoa Unicodea)"
-
-#.
-#. if (col == chars)
-#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
-#. else
-#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
-#.
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:879
+#: ../gedit/gedit-statusbar.c:298
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Rvi %d, Srke %d"
 
-#: ../gedit/gedit-view.c:915
-msgid "  OVR"
-msgstr "  PÄÄLLE"
-
-#: ../gedit/gedit-view.c:917
-msgid "  INS"
-msgstr "  LISÄÄ"
-
-#: ../gedit/gedit2.c:83
-msgid ""
-"Set the character encoding to be used to open the files listed on the "
-"command line"
-msgstr ""
-"Aseta merkistön koodaus jota haluat käyttää avatessasi komentorivillä "
-"luettelemiasi tiedostoja"
-
-#: ../gedit/gedit2.c:86
-msgid "Quit an existing instance of gedit"
-msgstr "Lopeta käynnissä oleva gedit"
-
-#: ../gedit/gedit2.c:89
-msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr "Luo uusi itsenäinen ikkuna käynnissä olevaan geditiin"
-
-#: ../gedit/gedit2.c:92
-msgid "Create a new document in an existing instance of gedit"
-msgstr "Luo uusi asiakirja jo käynnissä olevaan geditiin"
-
-#: ../gedit/gedit2.c:168
+#: ../gedit/gedit-statusbar.c:397
 #, c-format
-msgid "The specified encoding \"%s\" is not valid\n"
-msgstr "Määritelty koodaus \"%s\" on epäkelpo\n"
+msgid "There is a tab with errors"
+msgid_plural "There are %d tabs with errors"
+msgstr[0] ""
+msgstr[1] ""
 
-#: ../gedit/gedit-convert.c:91
-msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr "Tiedosto jota yrität avata sisältää epäkelvon tavujakson."
-
-#: ../gedit/gedit-convert.c:160 ../gedit/gedit-convert.c:204
-msgid ""
-"gedit was not able to automatically determine the encoding of the file you "
-"want to open."
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:495
+#, c-format
+msgid "Reverting <b>%s</b> from <b>%s</b>"
 msgstr ""
-"Avattavan tiedoston merkistöä ei pystytty määrittelemään automaattisesti."
 
-#: ../plugins/changecase/changecase.c:43
-msgid "C_hange Case"
-msgstr "_Vaihda kirjainkokoa"
+#: ../gedit/gedit-tab.c:501
+#, c-format
+msgid "Reverting <b>%s</b>"
+msgstr ""
 
-#: ../plugins/changecase/changecase.c:49
-msgid "All _Upper Case"
-msgstr "Kaikki _isoja kirjaimia"
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:515
+#, c-format
+msgid "Loading <b>%s</b> from <b>%s</b>"
+msgstr ""
 
-#: ../plugins/changecase/changecase.c:50
-msgid "All _Lower Case"
-msgstr "Kaikki _pieniä kirjaimia"
+#: ../gedit/gedit-tab.c:521
+#, c-format
+msgid "Loading <b>%s</b>"
+msgstr "Ladataan <b>%s</b>"
 
-#: ../plugins/changecase/changecase.c:51
-msgid "_Invert Case"
-msgstr "_Käännä kirjainkoot päinvastaisiksi"
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:597
+#, c-format
+msgid "Saving <b>%s</b> to <b>%s</b>"
+msgstr ""
 
-#: ../plugins/changecase/changecase.c:52
-msgid "_Title Case"
-msgstr "_Iso alkukirjain"
+#: ../gedit/gedit-tab.c:603
+#, c-format
+msgid "Saving <b>%s</b>"
+msgstr "Tallennetaan <b>%s</b>"
 
-#: ../plugins/changecase/changecase.c:54
-msgid "Change selected text to upper case"
-msgstr "Muuta valittu teksti isoon kirjainkokoon"
+#. Read only
+#: ../gedit/gedit-tab.c:1335
+msgid "RO"
+msgstr "LUKU"
 
-#: ../plugins/changecase/changecase.c:55
-msgid "Change selected text to lower case"
-msgstr "Muuta valittu teksti pieneen kirjainkokoon"
+#: ../gedit/gedit-tab.c:1377
+#, c-format
+msgid "Error opening file <i>%s</i>."
+msgstr "Virhe avattaessa tiedostoa <i>%s</i>."
 
-#: ../plugins/changecase/changecase.c:56
-msgid "Invert the case of selected text"
-msgstr "Vaihda valittu teksti päinvastaiseen kirjainkokoon"
+#: ../gedit/gedit-tab.c:1382
+#, c-format
+msgid "Error reverting file <i>%s</i>."
+msgstr "Virhe palautettaessa tiedostoa <i>%s</i>."
 
-#: ../plugins/changecase/changecase.c:57
-msgid "Capitalize the first letter of each selected word"
-msgstr "Muuttaa jokaisen valitun sanan ensimmäisen merkin isoksi"
+#: ../gedit/gedit-tab.c:1387
+#, c-format
+msgid "Error saving file <i>%s</i>."
+msgstr "Virhe tallennettaessa tiedostoa <i>%s</i>."
+
+#: ../gedit/gedit-tab.c:1405
+msgid "Unicode (UTF-8)"
+msgstr "Unicode (UTF-8)"
+
+#: ../gedit/gedit-tab.c:1412
+msgid "Name:"
+msgstr "Nimi:"
+
+#: ../gedit/gedit-tab.c:1413
+msgid "MIME Type:"
+msgstr "MIME-tyyppi:"
+
+#: ../gedit/gedit-tab.c:1414
+msgid "Encoding:"
+msgstr "Koodaustapa:"
+
+#: ../gedit/gedit-tab.c:1762
+#, c-format
+msgid "Rendering page %d of %d..."
+msgstr "Tulkitaan sivua %d/%d..."
+
+#. Toplevel
+#: ../gedit/gedit-ui.h:47
+msgid "_File"
+msgstr "_Tiedosto"
+
+#: ../gedit/gedit-ui.h:48
+msgid "_Edit"
+msgstr "_Muokkaa"
+
+#: ../gedit/gedit-ui.h:49
+msgid "_View"
+msgstr "_Näytä"
+
+#: ../gedit/gedit-ui.h:50
+msgid "_Search"
+msgstr "_Etsi"
+
+#: ../gedit/gedit-ui.h:51
+msgid "_Tools"
+msgstr "Työ_kalut"
+
+#: ../gedit/gedit-ui.h:52
+msgid "_Documents"
+msgstr "A_siakirjat"
+
+#: ../gedit/gedit-ui.h:53
+msgid "_Help"
+msgstr "O_hje"
+
+#: ../gedit/gedit-ui.h:57
+msgid "Create a new document"
+msgstr "Luo uusi asiakirja"
+
+#: ../gedit/gedit-ui.h:58
+msgid "_Open..."
+msgstr "_Avaa..."
+
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1045
+msgid "Open a file"
+msgstr "Avaa tiedosto"
+
+#: ../gedit/gedit-ui.h:60
+msgid "Open _Location..."
+msgstr "Avaa s_ijainti..."
+
+#: ../gedit/gedit-ui.h:61
+msgid "Open a file from a specified location"
+msgstr "Avaa tiedosto tietystä sijainnista"
+
+#: ../gedit/gedit-ui.h:62
+msgid "Page Set_up..."
+msgstr "Sivuasetu_kset..."
+
+#: ../gedit/gedit-ui.h:63
+msgid "Setup the page settings"
+msgstr "Aseta sivuasetukset"
+
+#. Edit menu
+#: ../gedit/gedit-ui.h:66
+msgid "Pr_eferences"
+msgstr "As_etukset"
+
+#: ../gedit/gedit-ui.h:67
+msgid "Configure the application"
+msgstr "Muokkaa sovelluksen asetuksia"
+
+#. Help menu
+#: ../gedit/gedit-ui.h:70
+msgid "_Contents"
+msgstr "_Sisältö"
+
+#: ../gedit/gedit-ui.h:71
+msgid "Open the gedit manual"
+msgstr "Avaa geditin ohje"
+
+#: ../gedit/gedit-ui.h:73
+msgid "About this application"
+msgstr "Tietoja tästä sovelluksesta"
+
+#: ../gedit/gedit-ui.h:80
+msgid "Save the current file"
+msgstr "Tallenna nykyinen tiedosto"
+
+#: ../gedit/gedit-ui.h:81
+msgid "Save _As..."
+msgstr "Talle_nna nimellä..."
+
+#: ../gedit/gedit-ui.h:82
+msgid "Save the current file with a different name"
+msgstr "Tallenna nykyinen tiedosto uudella nimellä"
+
+#: ../gedit/gedit-ui.h:84
+msgid "Revert to a saved version of the file"
+msgstr "Palauta levylle tallennettu versio tiedostosta"
+
+#: ../gedit/gedit-ui.h:85
+msgid "Print Previe_w"
+msgstr "Tulostuksen _esikatselu"
+
+#: ../gedit/gedit-ui.h:86
+msgid "Print preview"
+msgstr "Tulostuksen esikatselu"
+
+#: ../gedit/gedit-ui.h:87
+msgid "_Print..."
+msgstr "Tul_osta..."
+
+#: ../gedit/gedit-ui.h:88
+msgid "Print the current page"
+msgstr "Tulosta tämänhetkinen sivu"
+
+#: ../gedit/gedit-ui.h:90
+msgid "Close the current file"
+msgstr "Sulje nykyinen tiedosto"
+
+#: ../gedit/gedit-ui.h:94
+msgid "Undo the last action"
+msgstr "Kumoa edellinen toiminto"
+
+#: ../gedit/gedit-ui.h:96
+msgid "Redo the last undone action"
+msgstr "Toista viimeksi kumottu toiminto"
+
+#: ../gedit/gedit-ui.h:98
+msgid "Cut the selection"
+msgstr "Leikkaa valinta"
+
+#: ../gedit/gedit-ui.h:100
+msgid "Copy the selection"
+msgstr "Kopioi valinta"
+
+#: ../gedit/gedit-ui.h:102
+msgid "Paste the clipboard"
+msgstr "Liitä leikepöydän sisältö"
+
+#: ../gedit/gedit-ui.h:104
+msgid "Delete the selected text"
+msgstr "Tyhjennä valittu teksti"
+
+#: ../gedit/gedit-ui.h:105
+msgid "Select _All"
+msgstr "Valitse k_aikki"
+
+#: ../gedit/gedit-ui.h:106
+msgid "Select the entire document"
+msgstr "Valitse koko asiakirjan sisältö"
+
+#. View menu
+#: ../gedit/gedit-ui.h:109
+msgid "_Highlight Mode"
+msgstr "_Väritystila"
+
+#. Search menu
+#: ../gedit/gedit-ui.h:112
+msgid "_Find..."
+msgstr "_Etsi..."
+
+#: ../gedit/gedit-ui.h:113
+msgid "Search for text"
+msgstr "Etsi tekstiä"
+
+#: ../gedit/gedit-ui.h:114
+msgid "Find Ne_xt"
+msgstr "Etsi _seuraava"
+
+#: ../gedit/gedit-ui.h:115
+msgid "Search forwards for the same text"
+msgstr "Etsi eteenpäin samaa tekstiä"
+
+#: ../gedit/gedit-ui.h:116
+msgid "Find Pre_vious"
+msgstr "Etsi e_dellinen"
+
+#: ../gedit/gedit-ui.h:117
+msgid "Search backwards for the same text"
+msgstr "Etsi taaksepäin samaa tekstiä"
+
+#: ../gedit/gedit-ui.h:118
+msgid "_Replace..."
+msgstr "Ko_rvaa..."
+
+#: ../gedit/gedit-ui.h:119
+msgid "Search for and replace text"
+msgstr "Etsi ja korvaa tekstiä"
+
+#: ../gedit/gedit-ui.h:120
+msgid "Go to _Line..."
+msgstr "S_iirry riville..."
+
+#: ../gedit/gedit-ui.h:121
+msgid "Go to a specific line"
+msgstr "Siirry tietylle riville"
+
+#. Documents menu
+#: ../gedit/gedit-ui.h:124
+msgid "_Save All"
+msgstr "Tallenna k_aikki"
+
+#: ../gedit/gedit-ui.h:125
+msgid "Save all open files"
+msgstr "Tallenna kaikki avoimet tiedostot"
+
+#: ../gedit/gedit-ui.h:126
+msgid "_Close All"
+msgstr "Sulje _kaikki"
+
+#: ../gedit/gedit-ui.h:127
+msgid "Close all open files"
+msgstr "Sulje kaikki avoimet tiedostot"
+
+#: ../gedit/gedit-ui.h:128
+msgid "_Move to New Window"
+msgstr "_Siirrä uuteen ikkunaan"
+
+#: ../gedit/gedit-ui.h:129
+msgid "Move the current document to a new window"
+msgstr "Siirrä asiakirja uuteen ikkunaan"
+
+#: ../gedit/gedit-ui.h:136
+msgid "Quit the program"
+msgstr "Lopeta ohjelma"
+
+#: ../gedit/gedit-ui.h:141
+msgid "_Toolbar"
+msgstr "T_yökalupalkki"
+
+#: ../gedit/gedit-ui.h:142
+#, fuzzy
+msgid "Show or hide the toolbar in the current window"
+msgstr "Muuta työkalupalkin näkyvyyttä nykyisessä ikkunassa"
+
+#: ../gedit/gedit-ui.h:144
+msgid "_Statusbar"
+msgstr "T_ilarivi"
+
+#: ../gedit/gedit-ui.h:145
+#, fuzzy
+msgid "Show or hide the statusbar in the current window"
+msgstr "Muuta tilarivin näkyvyyttä nykyisessä ikkunassa"
+
+#: ../gedit/gedit-ui.h:147
+msgid "Side _Pane"
+msgstr "Sivu_paneeli"
+
+#: ../gedit/gedit-ui.h:148
+#, fuzzy
+msgid "Show or hide the side pane in the current window"
+msgstr "Muuta työkalupalkin näkyvyyttä nykyisessä ikkunassa"
+
+#: ../gedit/gedit-ui.h:150
+msgid "_Bottom Panel"
+msgstr "_Alapaneeli"
+
+#: ../gedit/gedit-ui.h:151
+#, fuzzy
+msgid "Show or hide the bottom panel in the current window"
+msgstr "Muuta työkalupalkin näkyvyyttä nykyisessä ikkunassa"
+
+#: ../gedit/gedit-utils.c:794
+#, c-format
+msgid ""
+"<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n"
+"\n"
+"Please, check your installation."
+msgstr ""
+
+#: ../gedit/gedit-utils.c:795
+#, c-format
+msgid ""
+"<span size=\"large\" weight=\"bold\">Unable to find the required widgets "
+"inside file <i>%s</i>..</span>\n"
+"\n"
+"Please, check your installation."
+msgstr ""
+
+#. create "Wrap Around" menu item.
+#: ../gedit/gedit-view.c:1253
+#, fuzzy
+msgid "_Wrap Around"
+msgstr "K_ierrä"
+
+#. create "Match Entire Word Only" menu item.
+#: ../gedit/gedit-view.c:1263
+#, fuzzy
+msgid "Match _Entire Word Only"
+msgstr "Etsi _kokonaista sanaa"
+
+#. create "Match Case" menu item.
+#: ../gedit/gedit-view.c:1273
+msgid "_Match Case"
+msgstr "_Huomioi kirjainkoko"
+
+#: ../gedit/gedit-view.c:1361
+msgid "String you want to search for"
+msgstr "Etsittävä merkkijono"
+
+#: ../gedit/gedit-view.c:1370
+msgid "Line you want to move the cursor to"
+msgstr ""
+
+#: ../gedit/gedit-window.c:640
+#, c-format
+msgid "Use %s highlight mode"
+msgstr "Käytä %s-väritystä"
+
+#: ../gedit/gedit-window.c:692
+msgid "Normal"
+msgstr "Tavallinen"
+
+#: ../gedit/gedit-window.c:693
+msgid "Use Normal highlight mode"
+msgstr "Käytä tavallista väritystä"
+
+#. Translators: %s is a URI
+#: ../gedit/gedit-window.c:815 ../gedit/gedit-window.c:840
+#: ../gedit/recent-files/egg-recent-view-gtk.c:346
+#: ../gedit/recent-files/egg-recent-view-uimanager.c:205
+#, c-format
+msgid "Open '%s'"
+msgstr "Avaa \"%s\""
+
+#: ../gedit/gedit-window.c:940
+msgid "Save"
+msgstr "Tallenna"
+
+#: ../gedit/gedit-window.c:1049
+msgid "Open a recently used file"
+msgstr "Avaa äskettäin käytetty tiedosto"
+
+#: ../gedit/gedit-window.c:1056
+msgid "Open"
+msgstr "Avaa"
+
+#: ../gedit/gedit-window.c:1134 ../gedit/gedit-window.c:1702
+#, c-format
+msgid "Activate %s"
+msgstr "Käynnistä %s"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
@@ -2454,22 +2391,41 @@ msgstr "Vaihda kirjainkokoa"
 msgid "Changes the case of selected text."
 msgstr "Vaihtaa valitun tekstin kirjainkokoa."
 
-#: ../plugins/docinfo/docinfo.c:45
-msgid "_Document Statistics"
-msgstr "A_siakirjan tilastot"
+#: ../plugins/changecase/gedit-changecase-plugin.c:222
+msgid "C_hange Case"
+msgstr "_Vaihda kirjainkokoa"
 
-#: ../plugins/docinfo/docinfo.c:48
-msgid "Get statistic info on current document"
-msgstr "Katso aktiivisen asiakirjan tilastotietoja"
+#: ../plugins/changecase/gedit-changecase-plugin.c:223
+msgid "All _Upper Case"
+msgstr "Kaikki _isoja kirjaimia"
 
-#: ../plugins/docinfo/docinfo.c:139
-#: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
-msgid "Document Statistics"
-msgstr "Asiakirjan tilastot"
+#: ../plugins/changecase/gedit-changecase-plugin.c:224
+msgid "Change selected text to upper case"
+msgstr "Muuta valittu teksti isoon kirjainkokoon"
 
-#: ../plugins/docinfo/docinfo.c:153
-msgid "_Update"
-msgstr "_Päivitä"
+#: ../plugins/changecase/gedit-changecase-plugin.c:226
+msgid "All _Lower Case"
+msgstr "Kaikki _pieniä kirjaimia"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:227
+msgid "Change selected text to lower case"
+msgstr "Muuta valittu teksti pieneen kirjainkokoon"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:229
+msgid "_Invert Case"
+msgstr "_Käännä kirjainkoot päinvastaisiksi"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:230
+msgid "Invert the case of selected text"
+msgstr "Vaihda valittu teksti päinvastaiseen kirjainkokoon"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:232
+msgid "_Title Case"
+msgstr "_Iso alkukirjain"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:233
+msgid "Capitalize the first letter of each selected word"
+msgstr "Muuttaa jokaisen valitun sanan ensimmäisen merkin isoksi"
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
 msgid ""
@@ -2478,6 +2434,11 @@ msgid ""
 msgstr ""
 "Käy läpi aktiivisen asiakirjan ja kertoo siinä olevien sanojen, rivien, "
 "merkkien ja ei-tyhjien merkkien määrät."
+
+#: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#: ../plugins/docinfo/docinfo.glade2.h:8
+msgid "Document Statistics"
+msgstr "Asiakirjan tilastot"
 
 #: ../plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -2499,31 +2460,45 @@ msgstr "merkkiä (ei välilyöntejä)"
 msgid "Characters (with spaces)"
 msgstr "merkkiä (välilyöntien kanssa)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:8
-msgid "Update"
-msgstr "Päivitä"
+#: ../plugins/docinfo/docinfo.glade2.h:7
+#, fuzzy
+msgid "Document"
+msgstr "A_siakirjat"
 
-#: ../plugins/docinfo/docinfo.glade2.h:9
+#: ../plugins/docinfo/docinfo.glade2.h:10
+#, fuzzy
+msgid "Selection"
+msgstr "Valintaväri"
+
+#: ../plugins/docinfo/docinfo.glade2.h:11
 msgid "Words"
 msgstr "Sanoja"
 
-#: ../plugins/docinfo/docinfo.glade2.h:10
-msgid "gedit: Document Info plugin"
-msgstr "gedit: Tiedoston tietoliitännäinen"
+#: ../plugins/docinfo/docinfo.glade2.h:12
+msgid "_Update"
+msgstr "_Päivitä"
 
-#: ../plugins/indent/indent.c:45
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+msgid "_Document Statistics"
+msgstr "A_siakirjan tilastot"
+
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:409
+msgid "Get statistic info on current document"
+msgstr "Katso aktiivisen asiakirjan tilastotietoja"
+
+#: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Sisennä"
 
-#: ../plugins/indent/indent.c:47
+#: ../plugins/indent/gedit-indent-plugin.c:58
 msgid "Indent selected lines"
 msgstr "Sisennä valitut rivit"
 
-#: ../plugins/indent/indent.c:49
+#: ../plugins/indent/gedit-indent-plugin.c:63
 msgid "U_nindent"
 msgstr "Poista sise_nnys"
 
-#: ../plugins/indent/indent.c:51
+#: ../plugins/indent/gedit-indent-plugin.c:65
 msgid "Unindent selected lines"
 msgstr "Poista valittujen rivien sisennys"
 
@@ -2535,11 +2510,19 @@ msgstr "Sisennä rivit"
 msgid "Indents or un-indents selected lines."
 msgstr "Sisentää valitut rivit tai poistaa niiden sisennyksen."
 
-#: ../plugins/sample/sample.c:43
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
+msgid "Opens an interactive python console in the bottom panel."
+msgstr ""
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+msgid "Python Console"
+msgstr ""
+
+#: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
 msgstr "Lisää käyttäjäni_mi"
 
-#: ../plugins/sample/sample.c:46
+#: ../plugins/sample/gedit-sample-plugin.c:65
 msgid "Insert the user name at the cursor position"
 msgstr "Lisää käyttäjänimen kohdistimen kohdalle"
 
@@ -2551,32 +2534,45 @@ msgstr "Lisää käyttäjänimen kohdistimen kohdalle."
 msgid "User name"
 msgstr "Käyttäjänimi"
 
-#: ../plugins/savecopy/savecopy.c:49
+#: ../plugins/savecopy/savecopy.c:48
 msgid "Sa_ve Copy..."
 msgstr "Ta_llenna kopio..."
 
-#: ../plugins/savecopy/savecopy.c:52
+#: ../plugins/savecopy/savecopy.c:51
 msgid "Save a copy of the current document"
 msgstr "Tallenna nykyisestä asiakirjasta kopio"
 
-#: ../plugins/savecopy/savecopy.c:315
+#: ../plugins/savecopy/savecopy.c:314
 #, c-format
 msgid "Could not save a copy of the file to \"%s\""
 msgstr "Kopion tallentaminen epäonnistui kohteeseen \"%s\""
 
-#: ../plugins/savecopy/savecopy.c:414
+#: ../plugins/savecopy/savecopy.c:355
+#, c-format
+msgid "A file named \"%s\" already exists.\n"
+msgstr "Tiedosto nimeltä \"%s\" on jo olemassa.\n"
+
+#: ../plugins/savecopy/savecopy.c:359
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "Haluatko korvata sen tiedostolla jota olet tallentamassa?"
+
+#: ../plugins/savecopy/savecopy.c:413
 msgid "You are trying to overwrite the original file"
 msgstr "Olet kirjoittamassa alkuperäisen tiedoston yli"
 
-#: ../plugins/savecopy/savecopy.c:523
+#: ../plugins/savecopy/savecopy.c:522
 msgid "Save Copy..."
 msgstr "Tallenna kopio..."
 
 #. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
+#: ../plugins/savecopy/savecopy.c:554 ../plugins/savecopy/savecopy.c:564
 #, c-format
 msgid "%s (copy)"
 msgstr "%s (kopio)"
+
+#: ../plugins/savecopy/savecopy.c:602
+msgid "_Character Coding:"
+msgstr "_Merkistön koodaus:"
 
 #: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
 msgid "Save a Copy"
@@ -2596,27 +2592,27 @@ msgid "Run a command"
 msgstr "Suorita komento"
 
 #: ../plugins/shell_output/shell_output.c:156
-#: ../plugins/shell_output/shell_output.c:576
+#: ../plugins/shell_output/shell_output.c:571
 msgid "Stopped"
 msgstr "Pysäytetty"
 
-#: ../plugins/shell_output/shell_output.c:355
+#: ../plugins/shell_output/shell_output.c:350
 msgid "Run Command"
 msgstr "Suorita komento"
 
-#: ../plugins/shell_output/shell_output.c:374
+#: ../plugins/shell_output/shell_output.c:369
 msgid "_Run"
 msgstr "_Suorita"
 
-#: ../plugins/shell_output/shell_output.c:582
+#: ../plugins/shell_output/shell_output.c:577
 msgid "Done"
 msgstr "Valmis"
 
-#: ../plugins/shell_output/shell_output.c:584
+#: ../plugins/shell_output/shell_output.c:579
 msgid "Failed"
 msgstr "Epäonnistui"
 
-#: ../plugins/shell_output/shell_output.c:754
+#: ../plugins/shell_output/shell_output.c:749
 msgid ""
 "The shell command entry is empty.\n"
 "\n"
@@ -2626,7 +2622,7 @@ msgstr ""
 "\n"
 "Anna kelvollinen komento."
 
-#: ../plugins/shell_output/shell_output.c:776
+#: ../plugins/shell_output/shell_output.c:771
 msgid ""
 "Error parsing the shell command.\n"
 "\n"
@@ -2636,11 +2632,11 @@ msgstr ""
 "\n"
 "Anna kelvollinen komento."
 
-#: ../plugins/shell_output/shell_output.c:854
+#: ../plugins/shell_output/shell_output.c:849
 msgid "Executing command"
 msgstr "Suoritetaan komentoa"
 
-#: ../plugins/shell_output/shell_output.c:919
+#: ../plugins/shell_output/shell_output.c:914
 msgid "An error occurred while running the selected command."
 msgstr "Virhe suoritettaessa valittua komentoa."
 
@@ -2655,6 +2651,11 @@ msgstr ""
 #: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
 msgid "Shell command"
 msgstr "Komentotulkin komento"
+
+#: ../plugins/shell_output/shell_output.glade2.h:1
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
 
 #: ../plugins/shell_output/shell_output.glade2.h:2
 msgid "Co_mmand:"
@@ -2676,12 +2677,13 @@ msgstr "_Työhakemisto:"
 msgid "gedit: Shell Output plugin"
 msgstr "gedit: Komentotulkkituloste liitännäinen"
 
-#: ../plugins/sort/sort.c:29
+#: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
 msgstr "_Järjestä..."
 
-#: ../plugins/sort/sort.c:32
-msgid "Sort the current document or selection."
+#: ../plugins/sort/gedit-sort-plugin.c:82
+#, fuzzy
+msgid "Sort the current document or selection"
 msgstr "Järjestä aktiivinen asiakirja tai valinta."
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
@@ -2739,22 +2741,6 @@ msgstr "_Lisää"
 #: ../plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "_Kirjoitusehdotuksia..."
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:289
-msgid "Check Spelling"
-msgstr "Tarkista oikeinkirjoitus"
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:300
-msgid "Suggestions"
-msgstr "Ehdotukset"
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:615
-msgid "(correct spelling)"
-msgstr "(oikea kirjoitusasu)"
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:800
-msgid "Completed spell checking"
-msgstr "Oikoluku on valmis"
 
 #: ../plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
@@ -3053,14 +3039,64 @@ msgstr "zulu"
 msgid "Default"
 msgstr "Oletus"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:239
+#: ../plugins/spell/gedit-spell-checker-dialog.c:289
+msgid "Check Spelling"
+msgstr "Tarkista oikeinkirjoitus"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:300
+msgid "Suggestions"
+msgstr "Ehdotukset"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:615
+msgid "(correct spelling)"
+msgstr "(oikea kirjoitusasu)"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:800
+msgid "Completed spell checking"
+msgstr "Oikoluku on valmis"
+
+#: ../plugins/spell/gedit-spell-language-dialog.c:245
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Tarvittavia laajennuksia ei löytynyt kohteesta \"%s\"."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:258
+#: ../plugins/spell/gedit-spell-language-dialog.c:266
 msgid "Languages"
 msgstr "Kielet"
+
+#: ../plugins/spell/gedit-spell-plugin.c:70
+msgid "_Check Spelling"
+msgstr "_Oikolue"
+
+#: ../plugins/spell/gedit-spell-plugin.c:72
+msgid "Check the current document for incorrect spelling"
+msgstr "Tarkista aktiivinen asiakirja kirjoitusvirheiltä"
+
+#: ../plugins/spell/gedit-spell-plugin.c:78
+#, fuzzy
+msgid "Set _Language..."
+msgstr "Aseta _kieli"
+
+#: ../plugins/spell/gedit-spell-plugin.c:80
+msgid "Set the language of the current document"
+msgstr "Aseta aktiivisen asiakirjan kieli"
+
+#: ../plugins/spell/gedit-spell-plugin.c:89
+msgid "_Autocheck Spelling"
+msgstr "_Automaattinen oikoluku"
+
+#: ../plugins/spell/gedit-spell-plugin.c:91
+msgid "Automatically spell-check the current document"
+msgstr "Tarkista asiakirjan oikeinkirjoitus automaattisesti"
+
+#: ../plugins/spell/gedit-spell-plugin.c:732
+msgid "The document is empty."
+msgstr "Asiakirja on tyhjä."
+
+#: ../plugins/spell/gedit-spell-plugin.c:764
+#, fuzzy
+msgid "No misspelled words"
+msgstr "Väärinkirjoitettu sana:"
 
 #: ../plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -3126,42 +3162,6 @@ msgstr "_Ohita"
 msgid "_Suggestions:"
 msgstr "_Ehdotukset:"
 
-#: ../plugins/spell/spell.c:52
-msgid "_Check Spelling"
-msgstr "_Oikolue"
-
-#: ../plugins/spell/spell.c:55
-msgid "Check the current document for incorrect spelling"
-msgstr "Tarkista aktiivinen asiakirja kirjoitusvirheiltä"
-
-#: ../plugins/spell/spell.c:57
-msgid "_Autocheck Spelling"
-msgstr "_Automaattinen oikoluku"
-
-#: ../plugins/spell/spell.c:60
-msgid "Automatically spell-check the current document"
-msgstr "Tarkista asiakirjan oikeinkirjoitus automaattisesti"
-
-#: ../plugins/spell/spell.c:62
-msgid "Set _Language"
-msgstr "Aseta _kieli"
-
-#: ../plugins/spell/spell.c:65
-msgid "Set the language of the current document"
-msgstr "Aseta aktiivisen asiakirjan kieli"
-
-#: ../plugins/spell/spell.c:625
-msgid "The document is empty."
-msgstr "Asiakirja on tyhjä."
-
-#: ../plugins/spell/spell.c:643
-msgid "The selected text does not contain misspelled words."
-msgstr "Valittu teksti ei sisällä väärinkirjoitettuja sanoja."
-
-#: ../plugins/spell/spell.c:644
-msgid "The document does not contain misspelled words."
-msgstr "Asiakirja ei sisällä väärinkirjoitettuja sanoja."
-
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
 msgstr "Tarkista aktiivisen asiakirjan oikeinkirjoitus."
@@ -3169,6 +3169,23 @@ msgstr "Tarkista aktiivisen asiakirjan oikeinkirjoitus."
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
 msgid "Spell checker"
 msgstr "Oikoluku"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:460
+msgid "Select the group of tags you want to use"
+msgstr "Valitse tagiryhmä jota haluat käyttää"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:476
+msgid "Available Tag Lists"
+msgstr "Käytettävissä olevat tagit"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:479
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:507
+msgid "Tags"
+msgstr "Tagit"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:492
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Kaksoisnapsauta tagia lisätäksesi sen nykyiseen asiakirjaan"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -4010,6 +4027,10 @@ msgstr "Pehmeä rivinvaihto"
 msgid "Sound"
 msgstr "Ääni"
 
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
+msgid "Source"
+msgstr "Lähde"
+
 #: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Space"
 msgstr "Välilyönti"
@@ -4494,6 +4515,18 @@ msgstr "Kirjaintyyli type"
 msgid "Unbreakable text"
 msgstr "Katkeamaton teksti"
 
+#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+msgid ""
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
+msgstr ""
+"Mahdollistaa helpon tavan lisätä asiakirjaan usein käytettyjä tageja ja "
+"merkkijonoja tarvitsematta kirjoittaa niitä joka kerta."
+
+#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+msgid "Tag list"
+msgstr "Tagilista"
+
 #: ../plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
 msgstr "XSLT - Akselit"
@@ -4558,63 +4591,19 @@ msgstr "edeltävä sisarus"
 msgid "self"
 msgstr "itse"
 
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:146
-msgid "Tag list plugin"
-msgstr "Tagilistaliitännäinen"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:167
-msgid "Select the group of tags you want to use"
-msgstr "Valitse tagiryhmä jota haluat käyttää"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:189
-msgid "Available Tag Lists"
-msgstr "Käytettävissä olevat tagit"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:191
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:212
-msgid "Tags"
-msgstr "Tagit"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:201
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Kaksoisnapsauta tagia lisätäksesi sen nykyiseen asiakirjaan"
-
-#: ../plugins/taglist/gedit-taglist-plugin.c:46
-msgid "Tag _List"
-msgstr "Tagi_lista"
-
-#.
-#. #define MENU_ITEM_NAME		"TagList"
-#.
-#: ../plugins/taglist/gedit-taglist-plugin.c:51
-msgid "Show the tag list window"
-msgstr "Näytä tagilistan ikkuna"
-
-#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid ""
-"Provides a method to easily insert into a document commonly used tags/"
-"strings without having to type them."
-msgstr ""
-"Mahdollistaa helpon tavan lisätä asiakirjaan usein käytettyjä tageja ja "
-"merkkijonoja tarvitsematta kirjoittaa niitä joka kerta."
-
-#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
-msgid "Tag list"
-msgstr "Tagilista"
-
-#: ../plugins/time/time.c:49
+#: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
 msgstr "Li_sää päiväys/aika..."
 
-#: ../plugins/time/time.c:52
+#: ../plugins/time/gedit-time-plugin.c:185
 msgid "Insert current date and time at the cursor position"
 msgstr "Lisää päiväys ja aika kohdistimen kohdalle"
 
-#: ../plugins/time/time.c:457
+#: ../plugins/time/gedit-time-plugin.c:628
 msgid "Available formats"
 msgstr "Käytettävissä olevat muodot"
 
-#: ../plugins/time/time.c:565
+#: ../plugins/time/gedit-time-plugin.c:806
 msgid "Configure insert date/time plugin..."
 msgstr "Muokkaa päiväys/aika -liitännäisen asetuksia..."
 
@@ -4657,3 +4646,375 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid "Gedit View"
+#~ msgstr "Geditin näkymä"
+
+#~ msgid "Gedit View."
+#~ msgstr "Geditin näkymä."
+
+#~ msgid "Gedit viewer factory"
+#~ msgstr "Geditin katselintehdas"
+
+#~ msgid "gedit application"
+#~ msgstr "gedit-sovellus"
+
+#~ msgid "gedit automation factory"
+#~ msgstr "gedit-automaatiotehdas"
+
+#~ msgid "Go to Line"
+#~ msgstr "Siirry riville"
+
+#~ msgid "_Go to Line"
+#~ msgstr "_Siirry riville"
+
+#~ msgid "The text \"%s\" was not found."
+#~ msgstr "Tekstiä \"%s\" ei löytynyt."
+
+#~ msgid "Set program location..."
+#~ msgstr "Aseta ohjelman sijainti..."
+
+#~ msgid ""
+#~ "The %s plugin uses an external program, called <tt>%s</tt>, to perform "
+#~ "its task.\n"
+#~ "\n"
+#~ "Please, specify the location of the <tt>%s</tt> program."
+#~ msgstr ""
+#~ "%s -liitännäinen käyttää ulkoista ohjelmaa <tt>%s</tt> tehtävän "
+#~ "suorittamiseen.\n"
+#~ "\n"
+#~ "Määritä ohjelman <tt>%s</tt> sijainti."
+
+#~ msgid "The selected file is not executable."
+#~ msgstr "Valittu tiedosto ei ole suorituskelpoinen."
+
+#~ msgid "Goto Line"
+#~ msgstr "Siirry riville"
+
+#~ msgid "_Line number:"
+#~ msgstr "_Rivinumerot:"
+
+#~ msgid "button1"
+#~ msgstr "painike1"
+
+#~ msgid "dialog1"
+#~ msgstr "ikkuna1"
+
+#~ msgid "Browse for program location..."
+#~ msgstr "Selaa ohjelman sijainti..."
+
+#~ msgid "label"
+#~ msgstr "otsikko"
+
+#~ msgid "Find Next"
+#~ msgstr "Etsi seuraava"
+
+#~ msgid "Open from URI"
+#~ msgstr "Avaa URI:stä"
+
+#~ msgid "%s %d"
+#~ msgstr "%s %d"
+
+#~ msgid "Invalid UTF-8 data"
+#~ msgstr "Viallista UTF-8-dataa"
+
+#~ msgid "Could not read symbolic link information for %s"
+#~ msgstr "Symbolisen linkin tietojen lukeminen kohteelle %s epäonnistui"
+
+#~ msgid "The file has too many symbolic links."
+#~ msgstr "Tiedostolla on liian monta symbolista linkkiä."
+
+#~ msgid "gedit cannot handle %s: locations in write mode."
+#~ msgstr "gedit ei pysty käsittelemään %s: -sijainteja kirjoitustilassa."
+
+#~ msgid "gedit cannot handle this kind of location in write mode."
+#~ msgstr "gedit ei pysty käsittelemään tällaista sijaintia kirjoitustilassa."
+
+#~ msgid "Invalid filename."
+#~ msgstr "Epäkelpo tiedostonimi."
+
+#~ msgid "Select a file to open"
+#~ msgstr "Valitse avattava tiedosto"
+
+#~ msgid "Select files to open"
+#~ msgstr "Valitse avattavat tiedostot"
+
+#~ msgid "Select a filename to save"
+#~ msgstr "Valitse tiedostonimi jolla tallennetaan"
+
+#~ msgid "Saving document \"%s\"..."
+#~ msgstr "Tallennetaan asiakirjaa \"%s\"..."
+
+#~ msgid "The document \"%s\" has not been saved."
+#~ msgstr "Asiakirjaa \"%s\" ei ole tallennettu."
+
+#~ msgid "The document \"%s\" has been saved."
+#~ msgstr "Asiakirja \"%s\" on tallennettu."
+
+#~ msgid "Save as..."
+#~ msgstr "Tallenna nimellä..."
+
+#~ msgid "The document \"%s\" has not been reverted."
+#~ msgstr "Asiakirjaa \"%s\" ei palautettu."
+
+#~ msgid "The document \"%s\" has been reverted."
+#~ msgstr "Asiakirja \"%s\" on palautettu."
+
+#~ msgid "Could not read data from stdin."
+#~ msgstr "Virhe luettaessa dataa stdin:istä."
+
+#~ msgid "Reverting file:"
+#~ msgstr "Palautetaan tiedostoa:"
+
+#~ msgid "Loading file:"
+#~ msgstr "Ladataan tiedostoa:"
+
+#~ msgid "Loaded file \"%s\""
+#~ msgstr "Ladattu tiedosto \"%s\""
+
+#~ msgid "Loaded %d file"
+#~ msgid_plural "Loaded %d files"
+#~ msgstr[0] "Ladattu %d tiedosto"
+#~ msgstr[1] "Ladattu %d tiedostoa"
+
+#~ msgid "Created file \"%s\""
+#~ msgstr "Luotu tiedosto \"%s\""
+
+#~ msgid "Access was denied."
+#~ msgstr "Pääsy evätty"
+
+#~ msgid ""
+#~ "there are too many open files. Please, close some open files and try "
+#~ "again."
+#~ msgstr ""
+#~ "Liian monta tiedostoa on auki. Sulje ensin joku tiedosto ja yritä "
+#~ "uudelleen."
+
+#~ msgid ""
+#~ "gedit was not able to automatically detect the character coding. Please, "
+#~ "check that you are not trying to open a binary file and try again "
+#~ "selecting a character coding in the 'Open File...' (or 'Open Location') "
+#~ "dialog."
+#~ msgstr ""
+#~ "gedit ei tunnistanut merkistön koodaustapaa automaattisesti.Tarkista "
+#~ "ettet yritä avata binääritiedostoa ja yritä uudestaan valitsemalla jokin "
+#~ "merkistön koodaustapa 'Avaa tiedosto...' (tai 'Avaa sijainti') -ikkunassa."
+
+#~ msgid ""
+#~ "Please, check that you are not trying to open a binary file and that you "
+#~ "selected the right character coding in the 'Open File... ' (or 'Open "
+#~ "Location') dialog and try again."
+#~ msgstr ""
+#~ "Tarkista ettet yritä avata binääritiedostoa ja että olet valinnut oikean "
+#~ "koodaustavan \"Avaa tiedosto...\" (tai \"Avaa sijainti\") -ikkunassa ja "
+#~ "yritä uudestaan."
+
+#~ msgid ""
+#~ "The file contains data in an invalid format. Probably, you are trying to "
+#~ "open a binary file."
+#~ msgstr ""
+#~ "Tiedosto sisältää epäkelpoa dataa. Yrität luultavasti avata "
+#~ "binääritiedostoa."
+
+#~ msgid ""
+#~ "Not enough available memory. Please, close some running applications and "
+#~ "try again."
+#~ msgstr ""
+#~ "Liian vähän vapaata muistia. Sulje jokin käynnissä oleva ohjelma ja yritä "
+#~ "uudelleen."
+
+#~ msgid ""
+#~ "The host name was empty. Please, check that your proxy settings are "
+#~ "correct and try again."
+#~ msgstr ""
+#~ "Isäntänimi on tyhjä. Tarkista että välipalvelimesi asetukset ovat "
+#~ "kunnossa ja yritä uudelleen."
+
+#~ msgid ""
+#~ "The file contains invalid UTF-8 data. Probably, you are trying to revert "
+#~ "a binary file."
+#~ msgstr ""
+#~ "Tiedosto sisältää epäkelpoa UTF-8 dataa. Yrität luultavasti avata "
+#~ "binääritiedostoa."
+
+#~ msgid "It is not possible to revert an Untitled document."
+#~ msgstr "Et voi palauttaa Nimetöntä asiakirjaa levyltä."
+
+#~ msgid "The file \"%s\" already exists"
+#~ msgstr "Tiedosto \"%s\" on jo olemassa"
+
+#~ msgid "Please, check that you typed the location correctly."
+#~ msgstr "Varmista että kirjoitit osoitteen oikein."
+
+#~ msgid "Could not create the file \"%s\""
+#~ msgstr "Tiedoston \"%s\" luominen epäonnistui"
+
+#~ msgid "Make sure you have the appropriate write permissions."
+#~ msgstr "Varmista että sinulla on tarvittavat kirjoitusoikeudet."
+
+#~ msgid "The file name is too long."
+#~ msgstr "Tiedostonimi on liian pitkä."
+
+#~ msgid ""
+#~ "A directory component in the file name does not exist or is a dangling "
+#~ "symbolic link."
+#~ msgstr ""
+#~ "Annetulla nimellä olevaa hakemistokomponenttia ei ole olemassa, tai se on "
+#~ "symbolinen linkki jolla ei ole kohdetta."
+
+#~ msgid ""
+#~ "There is not enough disk space to create the file. Please free some disk "
+#~ "space and try again."
+#~ msgstr ""
+#~ "Levyllä ei ole tarpeeksi tilaa tiedoston \"%s\" tallentamiseksi. Vapauta "
+#~ "levytilaa ja yritä uudelleen."
+
+#~ msgid "Preparing pages..."
+#~ msgstr "Valmistellaan sivuja..."
+
+#~ msgid "Printing page %d of %d..."
+#~ msgstr "Tulostetaan sivua %d/%d..."
+
+#~ msgid "Change the visibility of the output window in the current window"
+#~ msgstr "Muuta tulosteikkunan näkyvyyttä nykyisessä ikkunassa"
+
+#~ msgid "Close"
+#~ msgstr "Sulje"
+
+#~ msgid "Copy"
+#~ msgstr "Kopioi"
+
+#~ msgid "Cu_t"
+#~ msgstr "_Leikkaa"
+
+#~ msgid "Cut"
+#~ msgstr "Leikkaa"
+
+#~ msgid "Delete"
+#~ msgstr "Tyhjennä"
+
+#~ msgid "Find Previous"
+#~ msgstr "Etsi edellinen"
+
+#~ msgid "Main toolbar"
+#~ msgstr "Päätyökalupalkki"
+
+#~ msgid "New"
+#~ msgstr "Uusi"
+
+#~ msgid "Open Location..."
+#~ msgstr "Avaa sijainti..."
+
+#~ msgid "Paste"
+#~ msgstr "Liitä"
+
+#~ msgid "Print Previe_w..."
+#~ msgstr "Tulostuksen _esikatselu..."
+
+#~ msgid "Quit"
+#~ msgstr "Lopeta"
+
+#~ msgid "Redo"
+#~ msgstr "Uudelleen"
+
+#~ msgid "Revert"
+#~ msgstr "Palauta"
+
+#~ msgid "Select All"
+#~ msgstr "Valitse kaikki"
+
+#~ msgid ""
+#~ "Set toolbar button style according to desktop Menu and Toolbar Preferences"
+#~ msgstr ""
+#~ "Aseta työkalupalkin painiketyyli työpöydän valikko- ja "
+#~ "työkalupalkkiasetusten mukaiseksi"
+
+#~ msgid "Show only icons in the toolbar"
+#~ msgstr "Näytä vain kuvakkeet työkalupalkissa"
+
+#~ msgid "Show text below every icon in the toolbar"
+#~ msgstr "Näytä teksti kaikkien työkalupalkin kuvakkeiden vieressä"
+
+#~ msgid "Show text only beside important icons in the toolbar"
+#~ msgstr "Näytä teksti vain tärkeiden työkalupalkin kuvakkeiden vieressä"
+
+#~ msgid "T_ext for Important Icons"
+#~ msgstr "T_ekstit tärkeille kuvakkeille"
+
+#~ msgid "Undo"
+#~ msgstr "Kumoa"
+
+#~ msgid "_About"
+#~ msgstr "_Tietoja"
+
+#~ msgid "_Close"
+#~ msgstr "_Sulje"
+
+#~ msgid "_Copy"
+#~ msgstr "_Kopioi"
+
+#~ msgid "_Customize Toolbar"
+#~ msgstr "_Mukauta työkalupalkkeja"
+
+#~ msgid "_Delete"
+#~ msgstr "_Tyhjennä"
+
+#~ msgid "_Desktop Default"
+#~ msgstr "T_yöpöydän oletusarvo"
+
+#~ msgid "_Icons Only"
+#~ msgstr "_Vain kuvakkeet"
+
+#~ msgid "_New"
+#~ msgstr "_Uusi"
+
+#~ msgid "_Output Window"
+#~ msgstr "_Tulosteikkuna"
+
+#~ msgid "_Paste"
+#~ msgstr "L_iitä"
+
+#~ msgid "_Quit"
+#~ msgstr "_Lopeta"
+
+#~ msgid "_Redo"
+#~ msgstr "Uu_delleen"
+
+#~ msgid "_Text for All Icons"
+#~ msgstr "_Tekstit kaikille kuvakkeille"
+
+#~ msgid "_Undo"
+#~ msgstr "K_umoa"
+
+#~ msgid "Quit an existing instance of gedit"
+#~ msgstr "Lopeta käynnissä oleva gedit"
+
+#~ msgid "The file you are trying to open contains an invalid byte sequence."
+#~ msgstr "Tiedosto jota yrität avata sisältää epäkelvon tavujakson."
+
+#~ msgid ""
+#~ "gedit was not able to automatically determine the encoding of the file "
+#~ "you want to open."
+#~ msgstr ""
+#~ "Avattavan tiedoston merkistöä ei pystytty määrittelemään automaattisesti."
+
+#~ msgid "Update"
+#~ msgstr "Päivitä"
+
+#~ msgid "gedit: Document Info plugin"
+#~ msgstr "gedit: Tiedoston tietoliitännäinen"
+
+#~ msgid "The selected text does not contain misspelled words."
+#~ msgstr "Valittu teksti ei sisällä väärinkirjoitettuja sanoja."
+
+#~ msgid "The document does not contain misspelled words."
+#~ msgstr "Asiakirja ei sisällä väärinkirjoitettuja sanoja."
+
+#~ msgid "Tag list plugin"
+#~ msgstr "Tagilistaliitännäinen"
+
+#~ msgid "Tag _List"
+#~ msgstr "Tagi_lista"
+
+#~ msgid "Show the tag list window"
+#~ msgstr "Näytä tagilistan ikkuna"
