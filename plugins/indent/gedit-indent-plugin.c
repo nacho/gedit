@@ -28,9 +28,9 @@
 
 #include <glib/gi18n-lib.h>
 #include <gmodule.h>
-
+#include <gtksourceview/gtksourceview.h>
 #include <gedit/gedit-debug.h>
-#include <gedit/gedit-prefs-manager.h>
+
 
 #define WINDOW_DATA_KEY "GeditIndentPluginWindowData"
 #define MENU_PATH "/MenuBar/EditMenu/EditOps_5"
@@ -84,31 +84,37 @@ static void
 indent_cb (GtkAction   *action,
 	   GeditWindow *window)
 {
-	GeditDocument *doc;
+	GtkSourceView *view;
+	GtkTextBuffer *buffer;
 	GtkTextIter start, end, iter;
 	gint i, start_line, end_line;
 	gchar *tab_buffer = NULL;
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	doc = gedit_window_get_active_document (window);
-	g_return_if_fail (doc != NULL);
+	view = GTK_SOURCE_VIEW (gedit_window_get_active_view (window));
+	g_return_if_fail (view != NULL);
 
-	gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (doc));
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-	gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc), &start, &end);
+	gtk_text_buffer_begin_user_action (buffer);
+
+	gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
 
 	start_line = gtk_text_iter_get_line (&start);
 	end_line = gtk_text_iter_get_line (&end);
 
-	if ((gtk_text_iter_get_visible_line_offset (&end) == 0) && (end_line > start_line))
+	if ((gtk_text_iter_get_visible_line_offset (&end) == 0) &&
+	    (end_line > start_line))
+	{
 		end_line--;
+	}
 
-	if (gedit_prefs_manager_get_insert_spaces ())
+	if (gtk_source_view_get_insert_spaces_instead_of_tabs (view))
 	{
 		gint tabs_size;
 
-		tabs_size = gedit_prefs_manager_get_tabs_size ();
+		tabs_size = gtk_source_view_get_tabs_width (view);
 		tab_buffer = g_strnfill (tabs_size, ' ');
 	}
 	else
@@ -118,15 +124,15 @@ indent_cb (GtkAction   *action,
 
 	for (i = start_line; i <= end_line; i++)
 	{
-		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc), &iter, i);
+		gtk_text_buffer_get_iter_at_line (buffer, &iter, i);
 
 		/* don't add indentation on empty lines */
 		if (gtk_text_iter_ends_line (&iter)) continue;
 
-		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc), &iter, tab_buffer, -1);
+		gtk_text_buffer_insert (buffer, &iter, tab_buffer, -1);
 	}
 
-	gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (doc));
+	gtk_text_buffer_end_user_action (buffer);
 	
 	g_free (tab_buffer);
 }
@@ -135,18 +141,21 @@ static void
 unindent_cb (GtkAction   *action,
 	     GeditWindow *window)
 {
-	GeditDocument *doc;
+	GtkSourceView *view;
+	GtkTextBuffer *buffer;
 	GtkTextIter start, end, iter, iter2;
 	gint i, start_line, end_line;
-	
+
 	gedit_debug (DEBUG_PLUGINS);
 
-	doc = gedit_window_get_active_document (window);
-	g_return_if_fail (doc != NULL);
+	view = GTK_SOURCE_VIEW (gedit_window_get_active_view (window));
+	g_return_if_fail (view != NULL);
 
-	gtk_text_buffer_begin_user_action (GTK_TEXT_BUFFER (doc));
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-	gtk_text_buffer_get_selection_bounds (GTK_TEXT_BUFFER (doc), &start, &end);
+	gtk_text_buffer_begin_user_action (buffer);
+
+	gtk_text_buffer_get_selection_bounds (buffer, &start, &end);
 
 	start_line = gtk_text_iter_get_line (&start);
 	end_line = gtk_text_iter_get_line (&end);
@@ -156,13 +165,13 @@ unindent_cb (GtkAction   *action,
 
 	for (i = start_line; i <= end_line; i++)
 	{
-		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc), &iter, i);
+		gtk_text_buffer_get_iter_at_line (buffer, &iter, i);
 
 		if (gtk_text_iter_get_char (&iter) == '\t')
 		{
 			iter2 = iter;
 			gtk_text_iter_forward_char (&iter2);
-			gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &iter, &iter2);
+			gtk_text_buffer_delete (buffer, &iter, &iter2);
 		}
 		else if (gtk_text_iter_get_char (&iter) == ' ')
 		{
@@ -183,7 +192,7 @@ unindent_cb (GtkAction   *action,
 			if (spaces > 0)
 			{
 				gint tabs = 0;
-				gint tabs_size = gedit_prefs_manager_get_tabs_size ();
+				gint tabs_size = gtk_source_view_get_tabs_width (view);
 
 				tabs = spaces / tabs_size;
 				spaces = spaces - (tabs * tabs_size);
@@ -194,12 +203,12 @@ unindent_cb (GtkAction   *action,
 				iter2 = iter;
 
 				gtk_text_iter_forward_chars (&iter2, spaces);
-				gtk_text_buffer_delete (GTK_TEXT_BUFFER (doc), &iter, &iter2);
+				gtk_text_buffer_delete (buffer, &iter, &iter2);
 			}
 		}
 	}
 
-	gtk_text_buffer_end_user_action (GTK_TEXT_BUFFER (doc));
+	gtk_text_buffer_end_user_action (buffer);
 }
 	
 static void
