@@ -1704,7 +1704,7 @@ sync_state (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
 		return;
 
 	set_sensitivity_according_to_tab (window, tab);
-	
+
 	g_signal_emit (G_OBJECT (window), signals[ACTIVE_TAB_STATE_CHANGED], 0);		
 }
 
@@ -1713,7 +1713,8 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
 {
 	GtkAction *action;
 	gchar *action_name;
-	gchar *tab_name; // CHECK escaping
+	gchar *tab_name;
+	gchar *escaped_name;
 	gchar *tip;
 	gint n;
 	GeditDocument *doc;
@@ -1732,13 +1733,15 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
 	g_return_if_fail (action != NULL);
 
 	tab_name = _gedit_tab_get_name (tab);
+	escaped_name = gedit_utils_escape_underscores (tab_name, -1);
 	tip =  g_strdup_printf (_("Activate %s"), tab_name);
 
-	g_object_set (action, "label", tab_name, NULL);
+	g_object_set (action, "label", escaped_name, NULL);
 	g_object_set (action, "tooltip", tip, NULL);
 
 	g_free (action_name);
 	g_free (tab_name);
+	g_free (escaped_name);
 	g_free (tip);
 
 	doc = gedit_tab_get_document (tab);
