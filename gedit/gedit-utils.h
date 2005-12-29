@@ -69,6 +69,12 @@ GtkWidget	*gedit_dialog_add_button		(GtkDialog   *dialog,
 							 const gchar *stock_id, 
 							 gint         response_id);
 
+gchar		*gedit_utils_escape_underscores		(const gchar *text,
+							 gssize       length);
+
+gchar		*gedit_utils_escape_slashes		(const gchar *text,
+							 gssize       length);
+
 gchar		*gedit_utils_str_middle_truncate	(const gchar *string, 
 							 guint        truncate_length);
 

@@ -294,7 +294,7 @@ gedit_utils_uri_exists (const gchar* text_uri)
 	return res;
 }
 
-gchar* 
+gchar *
 gedit_utils_escape_search_text (const gchar* text)
 {
 	GString *str;
@@ -493,6 +493,85 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
 	gtk_widget_destroy (dialog);
 
 	g_free (str);
+}
+
+/*
+ * Doubles underscore to avoid spurious menu accels.
+ */
+gchar * 
+gedit_utils_escape_underscores (const gchar* text,
+				gssize       length)
+{
+	GString *str;
+	const gchar *p;
+	const gchar *end;
+
+	g_return_val_if_fail (text != NULL, NULL);
+
+	if (length < 0)
+		length = strlen (text);
+
+	str = g_string_sized_new (length);
+
+	p = text;
+	end = text + length;
+
+	while (p != end)
+	{
+		const gchar *next;
+		next = g_utf8_next_char (p);
+
+		switch (*p)
+		{
+			case '_':
+				g_string_append (str, "__");
+				break;
+			default:
+				g_string_append_len (str, p, next - p);
+				break;
+		}
+
+		p = next;
+	}
+
+	return g_string_free (str, FALSE);
+}
+
+/*
+ * Replaces '/' with '-' to avoid problems in xml paths.
+ */
+gchar *
+gedit_utils_escape_slashes (const gchar *text,
+			    gssize       length)
+{
+	GString *str;
+	const gchar *p;
+	const gchar *end;
+
+	g_return_val_if_fail (text != NULL, NULL);
+
+	if (length < 0)
+		length = strlen (text);
+
+	str = g_string_sized_new (length);
+
+	p = text;
+	end = text + length;
+
+	while (p != end)
+	{
+		const gchar *next;
+		next = g_utf8_next_char (p);
+
+		if (*p == '/')
+			g_string_append (str, "-");
+		else
+			g_string_append_len (str, p, next - p);
+
+		p = next;
+	}
+
+	return g_string_free (str, FALSE);
 }
 
 /* the following functions are taken from eel */

@@ -62,7 +62,9 @@
 #include "recent-files/egg-recent-view-gtk.h"
 #include "recent-files/egg-recent-view-uimanager.h"
 
-#define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_WINDOW, GeditWindowPrivate))
+#define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
+					 GEDIT_TYPE_WINDOW,                    \
+					 GeditWindowPrivate))
 
 /* Signals */
 enum
@@ -391,13 +393,13 @@ set_toolbar_style (GeditWindow *window,
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-	
+
 	/* Set style */
 	if (origin == NULL)
 		style = gedit_prefs_manager_get_toolbar_buttons_style ();
 	else
 		style = origin->priv->toolbar_style;
-		
+	
 	window->priv->toolbar_style = style;
 		
 	switch (style)
@@ -407,21 +409,21 @@ set_toolbar_style (GeditWindow *window,
 			gtk_toolbar_unset_style (
 					GTK_TOOLBAR (window->priv->toolbar));
 			break;
-			
+
 		case GEDIT_TOOLBAR_ICONS:
 			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS");
 			gtk_toolbar_set_style (
 					GTK_TOOLBAR (window->priv->toolbar),
 					GTK_TOOLBAR_ICONS);
 			break;
-			
+
 		case GEDIT_TOOLBAR_ICONS_AND_TEXT:
 			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_AND_TEXT");
 			gtk_toolbar_set_style (
 					GTK_TOOLBAR (window->priv->toolbar),
 					GTK_TOOLBAR_BOTH);			
 			break;
-			
+
 		case GEDIT_TOOLBAR_ICONS_BOTH_HORIZ:
 			gedit_debug_message (DEBUG_WINDOW, "GEDIT: ICONS_BOTH_HORIZ");
 			gtk_toolbar_set_style (
@@ -453,7 +455,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 
 	view = gedit_tab_get_view (tab);
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-	
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileSave");
 	gtk_action_set_sensitive (action,
@@ -594,6 +596,24 @@ language_toggled (GtkToggleAction *action,
 	gedit_document_set_language (doc, (GtkSourceLanguage *) lang);
 }
 
+static gchar *
+escape_section_name (gchar *name)
+{
+	gchar *tmp;
+	gchar *ret;
+	gssize len;
+
+	len = strlen (name);
+
+	/* escape slashes doesn't change the string lenght */
+	tmp = gedit_utils_escape_slashes (name, len);
+	ret = g_markup_escape_text (tmp, len);
+
+	g_free (tmp);
+
+	return ret;
+}
+
 static void
 create_language_menu_item (GtkSourceLanguage *lang,
 			   gint               index,
@@ -605,20 +625,22 @@ create_language_menu_item (GtkSourceLanguage *lang,
 	GtkAction *normal_action;
 	GSList *group;
 	gchar *section;
+	gchar *escaped_section;
 	gchar *lang_name;
+	gchar *escaped_lang_name;
 	gchar *tip;
 	gchar *path;
 
 	section = gtk_source_language_get_section (lang);
+	escaped_section = escape_section_name (section);
 
 	/* check if the section submenu exists or create it */
 	section_action = gtk_action_group_get_action (window->priv->languages_action_group,
-						      section);
+						      escaped_section);
 
 	if (section_action == NULL)
 	{
-		// CHECK: escaping strings
-		section_action = gtk_action_new (section,
+		section_action = gtk_action_new (escaped_section,
 						 section,
 						 NULL,
 						 NULL);
@@ -630,19 +652,21 @@ create_language_menu_item (GtkSourceLanguage *lang,
 		gtk_ui_manager_add_ui (window->priv->manager,
 				       ui_id,
 				       "/MenuBar/ViewMenu/ViewHighlightModeMenu/LanguagesMenuPlaceholder",
-				       section, section,
+				       escaped_section, escaped_section,
 				       GTK_UI_MANAGER_MENU,
 				       FALSE);
 	}
 
 	/* now add the language item to the section */
 	lang_name = gtk_source_language_get_name (lang);
+
+	escaped_lang_name = g_markup_escape_text (lang_name, -1);
+
 	tip = g_strdup_printf (_("Use %s highlight mode"), lang_name);
 	path = g_strdup_printf ("/MenuBar/ViewMenu/ViewHighlightModeMenu/LanguagesMenuPlaceholder/%s",
-				section);
+				escaped_section);
 
-	// CHECK: escaping strings
-	action = gtk_radio_action_new (lang_name,
+	action = gtk_radio_action_new (escaped_lang_name,
 				       lang_name,
 				       tip,
 				       NULL,
@@ -666,14 +690,16 @@ create_language_menu_item (GtkSourceLanguage *lang,
 	gtk_ui_manager_add_ui (window->priv->manager,
 			       ui_id,
 			       path,
-			       lang_name, lang_name,
+			       escaped_lang_name, escaped_lang_name,
 			       GTK_UI_MANAGER_MENUITEM,
 			       FALSE);
 
 	g_free (path);
 	g_free (tip);
 	g_free (lang_name);
+	g_free (escaped_lang_name);
 	g_free (section);
+	g_free (escaped_section);
 }
 
 static void
@@ -734,6 +760,7 @@ update_languages_menu (GeditWindow *window)
 	GtkAction *action;
 	GtkSourceLanguage *lang;
 	gchar *lang_name;
+	gchar *escaped_lang_name;
 
 	doc = gedit_window_get_active_document (window);
 	if (doc == NULL)
@@ -744,6 +771,8 @@ update_languages_menu (GeditWindow *window)
 		lang_name = gtk_source_language_get_name (lang);
 	else
 		lang_name = g_strdup ("LangNormal");
+
+	escaped_lang_name = g_markup_escape_text (lang_name, -1);
 
 	actions = gtk_action_group_list_actions (window->priv->languages_action_group);
 
@@ -756,7 +785,7 @@ update_languages_menu (GeditWindow *window)
 	}
 
 	action = gtk_action_group_get_action (window->priv->languages_action_group,
-					      lang_name);
+					      escaped_lang_name);
 
 	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
 
@@ -769,6 +798,7 @@ update_languages_menu (GeditWindow *window)
 
 	g_list_free (actions);
 	g_free (lang_name);
+	g_free (escaped_lang_name);
 }
 
 static void
@@ -1116,8 +1146,9 @@ update_documents_list_menu (GeditWindow *window)
 		GtkWidget *tab;
 		GtkRadioAction *action;
 		gchar *action_name;
-		gchar *tab_name; //CHECK: must escape underscores and gmarkup
-		gchar *tip;	 // ditto as above
+		gchar *tab_name;
+		gchar *name;
+		gchar *tip;
 		gchar *accel;
 
 		tab = gtk_notebook_get_nth_page (GTK_NOTEBOOK (p->notebook), i);
@@ -1131,13 +1162,14 @@ update_documents_list_menu (GeditWindow *window)
 		 */
 		action_name = g_strdup_printf ("Tab_%d", i);
 		tab_name = _gedit_tab_get_name (GEDIT_TAB (tab));
+		name = gedit_utils_escape_underscores (tab_name, -1);
 		tip =  g_strdup_printf (_("Activate %s"), tab_name);
 
 		/* alt + 1, 2, 3... 0 to switch to the first ten tabs */
 		accel = (i < 10) ? g_strdup_printf ("<alt>%d", (i + 1) % 10) : NULL;
 
 		action = gtk_radio_action_new (action_name,
-					       tab_name,
+					       name,
 					       tip,
 					       NULL,
 					       i);
@@ -1171,6 +1203,7 @@ update_documents_list_menu (GeditWindow *window)
 
 		g_free (action_name);
 		g_free (tab_name);
+		g_free (name);
 		g_free (tip);
 		g_free (accel);
 	}
@@ -2272,7 +2305,7 @@ notebook_tab_close_request (GeditNotebook *notebook,
 			    GeditTab      *tab,
 			    GtkWindow     *window)
 {
-	/* CHECK: we are destroying the tab before the default handler
+	/* Note: we are destroying the tab before the default handler
 	 * seems to be ok, but we need to keep an eye on this. */
 	_gedit_cmd_file_close_tab (tab, GEDIT_WINDOW (window));
 }
@@ -2746,7 +2779,6 @@ gedit_window_close_tab (GeditWindow *window,
 				   tab);
 }
 
-// CHECK: these should be priv? pbor.
 void
 gedit_window_close_all_tabs (GeditWindow *window)
 {
