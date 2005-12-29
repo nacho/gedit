@@ -283,19 +283,6 @@ on_message_received (const char *message,
 		window = _gedit_app_get_window_in_workspace (app, workspace);
 	}
 
-	/* set the proper interaction time on the window.
-	 * fall back to roundtripping to the X server. lame. */
-	if (startup_timestamp <= 0)
-	{
-		if (!GTK_WIDGET_REALIZED (window))
-			gtk_widget_realize (GTK_WIDGET (window));
-
-		startup_timestamp = gdk_x11_get_server_time (GTK_WIDGET (window)->window);
-	}
-
-	gdk_x11_window_set_user_time (GTK_WIDGET (window)->window,
-				      startup_timestamp);
-
 	if (file_list != NULL)
 	{
 		gedit_cmd_load_files_from_prompt (window,
@@ -316,6 +303,21 @@ on_message_received (const char *message,
 		    new_document_option)
 			gedit_window_create_tab (window, TRUE);
 	}
+
+	/* set the proper interaction time on the window.
+	 * Fall back to roundtripping to the X server when we
+	 * don't have the timestamp, e.g. when launched from
+	 * terminal. We also need to make sure that the window
+	 * has been realized otherwise it will not work. lame.
+	 */
+	if (!GTK_WIDGET_REALIZED (window))
+		gtk_widget_realize (GTK_WIDGET (window));
+
+	if (startup_timestamp <= 0)
+		startup_timestamp = gdk_x11_get_server_time (GTK_WIDGET (window)->window);
+
+	gdk_x11_window_set_user_time (GTK_WIDGET (window)->window,
+				      startup_timestamp);
 
 	gtk_window_present (GTK_WINDOW (window));
 
