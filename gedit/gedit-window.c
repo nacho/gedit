@@ -2408,7 +2408,7 @@ create_side_panel (GeditWindow *window)
 
 	gedit_debug (DEBUG_WINDOW);
 
-	window->priv->side_panel = gedit_panel_new ();
+	window->priv->side_panel = gedit_panel_new (GTK_ORIENTATION_VERTICAL);
 
 	gtk_paned_pack1 (GTK_PANED (window->priv->hpaned), 
 			 window->priv->side_panel, 
@@ -2470,7 +2470,8 @@ create_bottom_panel (GeditWindow *window)
 
 	gedit_debug (DEBUG_WINDOW);
 
-	window->priv->bottom_panel = gedit_panel_new ();
+	window->priv->bottom_panel = gedit_panel_new (GTK_ORIENTATION_HORIZONTAL);
+	
 	gtk_paned_pack2 (GTK_PANED (window->priv->vpaned), 
 			 window->priv->bottom_panel, 
 			 FALSE, 

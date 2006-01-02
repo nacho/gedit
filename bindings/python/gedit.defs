@@ -520,6 +520,11 @@
   )
 )
 
+(define-method get_orientation
+  (of-object "GeditPanel")
+  (c-name "gedit_panel_get_orientation")
+  (return-type "GtkOrientation")
+)
 
 
 ;; From ../../gedit/gedit-plugin.h

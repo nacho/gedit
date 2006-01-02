@@ -81,7 +81,7 @@ struct _GeditPanelClass
  */
 GType 		 gedit_panel_get_type 			(void) G_GNUC_CONST;
 
-GtkWidget 	*gedit_panel_new 			(void);
+GtkWidget 	*gedit_panel_new 			(GtkOrientation	 orientation);
 
 void		 gedit_panel_add_item			(GeditPanel     *panel,
 						      	 GtkWidget      *item,
@@ -101,6 +101,9 @@ gboolean	 gedit_panel_activate_item 	(GeditPanel     *panel,
 
 gboolean	 gedit_panel_item_is_active 	(GeditPanel     *panel,
 					    	 GtkWidget      *item);
+
+GtkOrientation	 gedit_panel_get_orientation	(GeditPanel	*panel);
+
 
 G_END_DECLS
 

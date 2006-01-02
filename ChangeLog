@@ -1,3 +1,18 @@
+2006-01-02  Steve Frécinaux  <nud@apinc.org>
+
+	* gedit/gedit-panel.[ch]: reworked layout of panels, given their
+	orientation:
+	 - add "orientation" construction property
+	 - remove tab labels from left panel, show them for bottom one
+	 - ellipsize left panel title
+ 	 - remove title bar from bottom panel
+ 	 - placeholder for future panel toolbars
+	to get panel orientation
+	
+	* gedit/gedit-window.c: adapt for the above changes
+	
+	* bindings/python/gedit.defs: add GeditPanel.get_orientation()
+
 2005-12-30  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-ui.xml: add a placeholder in the tab popup.
@@ -5,6 +20,7 @@
 2005-12-29  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-utils.[ch]: add some string escaping utils.
+	
 	* gedit/gedit-window.c: properly escape action names and labels.
 
 2005-12-29  Paolo Borelli  <pborelli@katamail.com>
