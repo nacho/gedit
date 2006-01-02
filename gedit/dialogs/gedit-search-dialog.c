@@ -192,6 +192,20 @@ search_entry_changed (GtkEditable       *editable,
 }
 
 static void
+search_options_changed (GtkToggleButton   *button,
+			GeditSearchDialog *dialog)
+{
+	/* make sure Replace All is reactivated when the options
+	 * become less restrictive */
+	if (!gtk_toggle_button_get_active (button))
+	{
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
+						   GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
+						   TRUE);
+	}
+}
+
+static void
 response_handler (GeditSearchDialog *dialog,
 		  gint               response_id,
 		  gpointer           data)
@@ -335,6 +349,15 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 	g_signal_connect (dlg->priv->search_list,
 			  "changed",
 			  G_CALLBACK (search_entry_changed),
+			  dlg);
+
+	g_signal_connect (dlg->priv->match_case_checkbutton,
+			  "toggled",
+			  G_CALLBACK (search_options_changed),
+			  dlg);
+	g_signal_connect (dlg->priv->entire_word_checkbutton,
+			  "toggled",
+			  G_CALLBACK (search_options_changed),
 			  dlg);
 
 	g_signal_connect (dlg,
