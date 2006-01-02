@@ -300,6 +300,7 @@ plugins/changecase/Makefile
 plugins/docinfo/Makefile
 plugins/indent/Makefile
 plugins/Makefile
+plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
 plugins/sample/Makefile
 plugins/sort/Makefile

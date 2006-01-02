@@ -5,7 +5,7 @@ DIST_SUBDIRS = changecase docinfo indent sample sort spell time taglist
 SUBDIRS = changecase docinfo indent sample sort time taglist $(SPELL_PLUGIN_DIR)
 
 if ENABLE_PYTHON
-DIST_SUBDIRS += pythonconsole
-SUBDIRS      += pythonconsole
+DIST_SUBDIRS += pythonconsole modelines
+SUBDIRS      += pythonconsole modelines
 endif
 
