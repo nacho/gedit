@@ -476,8 +476,9 @@ get_next_misspelled_word (GeditView *view)
 		if (!goto_next_word (doc))
 			return NULL;
 
+		/* may return null if we reached the end of the selection */
 		word = get_current_word (doc, &start, &end);
-		g_return_val_if_fail (word != NULL, NULL);
+			return NULL;
 
 		gedit_debug_message (DEBUG_PLUGINS, "Word to check: %s", word);
 	}
