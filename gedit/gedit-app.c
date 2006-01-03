@@ -189,11 +189,28 @@ gedit_app_create_window_real (GeditApp    *app,
 			      gboolean     set_geometry,
 			      const gchar *role)
 {
-	GtkWindow *window;
+	GeditWindow *window;
 
 	gedit_debug (DEBUG_APP);
-	
-	window = GTK_WINDOW (g_object_new (GEDIT_TYPE_WINDOW, NULL));
+
+	/*
+	 * We need to be careful here, there is a race condition:
+	 * when another gedit is launched it checks active_window,
+	 * so we must do our best to ensure that active_window
+	 * is never NULL when at least a window exists.
+	 */
+	if (app->priv->windows == NULL)
+	{
+		app->priv->active_window = window = g_object_new (GEDIT_TYPE_WINDOW,
+								  NULL);
+	}
+	else
+	{
+		window = g_object_new (GEDIT_TYPE_WINDOW, NULL);
+	}
+
+	app->priv->windows = g_list_prepend (app->priv->windows,
+					     window);
 
 	gedit_debug_message (DEBUG_APP, "Window created");
 
@@ -213,35 +230,32 @@ gedit_app_create_window_real (GeditApp    *app,
 	if (set_geometry)
 	{
 		GdkWindowState state;
-		
+
 		state = gedit_prefs_manager_get_window_state ();
 
 		if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
 		{
-			gtk_window_set_default_size (window,
+			gtk_window_set_default_size (GTK_WINDOW (window),
 						     gedit_prefs_manager_get_default_window_width (),
 						     gedit_prefs_manager_get_default_window_height ());
 
-			gtk_window_maximize (window);
+			gtk_window_maximize (GTK_WINDOW (window));
 		}
 		else
 		{
-			gtk_window_set_default_size (window, 
+			gtk_window_set_default_size (GTK_WINDOW (window),
 						     gedit_prefs_manager_get_window_width (),
 						     gedit_prefs_manager_get_window_height ());
 
-			gtk_window_unmaximize (window);
+			gtk_window_unmaximize (GTK_WINDOW (window));
 		}
 
 		if ((state & GDK_WINDOW_STATE_STICKY ) != 0)
-			gtk_window_stick (window);
+			gtk_window_stick (GTK_WINDOW (window));
 		else
-			gtk_window_unstick (window);
+			gtk_window_unstick (GTK_WINDOW (window));
 	}
-	
-	app->priv->windows = g_list_prepend (app->priv->windows,
-					     window);
-	
+
 	g_signal_connect (window, 
 			  "focus_in_event",
 			  G_CALLBACK (window_focus_in_event), 
@@ -255,7 +269,7 @@ gedit_app_create_window_real (GeditApp    *app,
 			  G_CALLBACK (window_destroy),
 			  app);
 
-	return GEDIT_WINDOW (window);
+	return window;
 }
 
 GeditWindow *
@@ -292,6 +306,14 @@ gedit_app_get_active_window (GeditApp *app)
 {
 	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
 
+	/* make sure our active window is always realized:
+	 * this is needed on startup if we launch two gedit fast
+	 * enough that the second instance comes up before the
+	 * first one shows its window.
+	 */
+	if (!GTK_WIDGET_REALIZED (GTK_WIDGET (app->priv->active_window)))
+		gtk_widget_realize (GTK_WIDGET (app->priv->active_window));
+
 	return app->priv->active_window;
 }
 
@@ -306,6 +328,8 @@ _gedit_app_get_window_in_workspace (GeditApp *app,
 
 	/* first try if the active window */
 	window = app->priv->active_window;
+
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	ws = gedit_utils_get_window_workspace (GTK_WINDOW (window));
 
 	if (ws != workspace && ws != GEDIT_ALL_WORKSPACES)

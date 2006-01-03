@@ -744,29 +744,33 @@ gedit_utils_replace_home_dir_with_tilde (const gchar *uri)
 guint
 gedit_utils_get_current_workspace (GdkScreen *screen)
 {
-       GdkWindow *root_win = gdk_screen_get_root_window (screen);
-       GdkDisplay *display = gdk_screen_get_display (screen);
+	GdkWindow *root_win;
+	GdkDisplay *display;
+	Atom type;
+	gint format;
+	gulong nitems;
+	gulong bytes_after;
+	guint *current_desktop;
+	guint ret = 0;
 
-       Atom type;
-       gint format;
-       gulong nitems;
-       gulong bytes_after;
-       guint *current_desktop;
-       guint ret = 0;
+	g_return_val_if_fail (GDK_IS_SCREEN (screen), 0);
 
-       XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
-                           gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
-                           0, G_MAXLONG,
-                           False, XA_CARDINAL, &type, &format, &nitems,
-                           &bytes_after, (gpointer)&current_desktop);
+	root_win = gdk_screen_get_root_window (screen);
+	display = gdk_screen_get_display (screen);
 
-       if (type == XA_CARDINAL && format == 32 && nitems > 0)
-       {
-               ret = current_desktop[0];
-               XFree (current_desktop);
-       }
+	XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (root_win),
+			    gdk_x11_get_xatom_by_name_for_display (display, "_NET_CURRENT_DESKTOP"),
+			    0, G_MAXLONG,
+			    False, XA_CARDINAL, &type, &format, &nitems,
+			    &bytes_after, (gpointer)&current_desktop);
 
-       return ret;
+	if (type == XA_CARDINAL && format == 32 && nitems > 0)
+	{
+		ret = current_desktop[0];
+		XFree (current_desktop);
+	}
+
+	return ret;
 }
 
 /**
@@ -779,31 +783,37 @@ gedit_utils_get_current_workspace (GdkScreen *screen)
 guint
 gedit_utils_get_window_workspace (GtkWindow *gtkwindow)
 {
-       GdkWindow *window = GTK_WIDGET (gtkwindow)->window;
-       GdkDisplay *display = gdk_drawable_get_display (window);
+	GdkWindow *window;
+	GdkDisplay *display;
+	Atom type;
+	gint format;
+	gulong nitems;
+	gulong bytes_after;
+	guint *workspace;
+	guint ret = GEDIT_ALL_WORKSPACES;
 
-       Atom type;
-       gint format;
-       gulong nitems;
-       gulong bytes_after;
-       guint *workspace;
-       guint ret = GEDIT_ALL_WORKSPACES;
+	g_return_val_if_fail (GTK_IS_WINDOW (gtkwindow), 0);
+	g_return_val_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (gtkwindow)), 0);
 
-       XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
-                           gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
-                           0, G_MAXLONG,
-                           False, XA_CARDINAL, &type, &format, &nitems,
-                           &bytes_after, (gpointer)&workspace);
+	window = GTK_WIDGET (gtkwindow)->window;
+	display = gdk_drawable_get_display (window);
 
-       if (type == XA_CARDINAL && format == 32 && nitems > 0)
-       {
-               ret = workspace[0];
-               XFree (workspace);
-       }
+	XGetWindowProperty (GDK_DISPLAY_XDISPLAY (display), GDK_WINDOW_XID (window),
+			    gdk_x11_get_xatom_by_name_for_display (display, "_NET_WM_DESKTOP"),
+			    0, G_MAXLONG,
+			    False, XA_CARDINAL, &type, &format, &nitems,
+			    &bytes_after, (gpointer)&workspace);
 
-       return ret;
+	if (type == XA_CARDINAL && format == 32 && nitems > 0)
+	{
+		ret = workspace[0];
+		XFree (workspace);
+	}
+
+	return ret;
 }
-void  
+
+void
 gedit_utils_activate_url (GtkAboutDialog *about,
 			  const gchar    *url,
 			  gpointer        data)
