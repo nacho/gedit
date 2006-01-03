@@ -83,6 +83,8 @@
 #define GPM_DISPLAY_RIGHT_MARGIN	GPM_RIGHT_MARGIN_DIR "/display_right_margin"
 #define GPM_RIGHT_MARGIN_POSITION	GPM_RIGHT_MARGIN_DIR "/right_margin_position"
 
+#define GPM_CURSOR_POSITION_DIR		GPM_PREFS_DIR  "/editor/cursor_position"
+#define GPM_RESTORE_CURSOR_POSITION	GPM_CURSOR_POSITION_DIR "/restore_cursor_position"
 
 /* UI */
 #define GPM_TOOLBAR_DIR			GPM_PREFS_DIR "/ui/toolbar"
@@ -208,6 +210,8 @@
 #define GPM_DEFAULT_SYNTAX_HL_ENABLE	1 /* TRUE */
 
 #define GPM_DEFAULT_WRITABLE_VFS_SCHEMES {"ssh", "sftp", "smb", "dav", "davs", NULL}
+
+#define GPM_DEFAULT_RESTORE_CURSOR_POSITION 1 /* TRUE */
 
 typedef enum {
 	GEDIT_TOOLBAR_SYSTEM = 0,
@@ -411,6 +415,9 @@ gboolean		 gedit_prefs_manager_enable_syntax_highlighting_can_set (void);
 
 /* Writable VFS schemes */
 GSList			*gedit_prefs_manager_get_writable_vfs_schemes	(void);
+
+/* Restore cursor position */
+gboolean 		 gedit_prefs_manager_get_restore_cursor_position (void);
 
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 

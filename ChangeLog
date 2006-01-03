@@ -1,5 +1,19 @@
 2006-01-03  Paolo Maggi  <paolo@gnome.org>
 
+	* data/gedit.schemas.in: added restore_cursor_position key
+
+	* gedit/gedit-prefs-manager.c
+	(gedit_prefs_manager_get_restore_cursor_position): new function
+
+	* gedit/gedit-prefs-manager.h: add restore_cursor_position key and
+	gedit_prefs_manager_get_restore_cursor_position function
+
+	* gedit/gedit-document.c (document_loader_loaded): restore the previous
+	cursor position if gedit_prefs_manager_get_restore_cursor_position 
+	return TRUE
+
+2006-01-03  Paolo Maggi  <paolo@gnome.org>
+
 	* gedit/gedit-commands-search.c (phrase_found): modified the string
 	shown in the statusbar for the case occurrences == 1
 

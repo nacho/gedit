@@ -898,15 +898,15 @@ document_loader_loaded (GeditDocumentLoader *loader,
 							  &iter,
 							  doc->priv->requested_line_pos - 1);
 		}
-
 		/* else, if enabled, to the position stored in the metadata */
-		else if (0) // FIXME: should be a GConf option
+		else if (gedit_prefs_manager_get_restore_cursor_position ())
 		{
 			gchar *pos;
 			gint offset;
 
 			pos = gedit_metadata_manager_get (doc->priv->uri,
 							  "position");
+
 			offset = pos ? atoi (pos) : 0;
 			g_free (pos);
 
@@ -914,7 +914,6 @@ document_loader_loaded (GeditDocumentLoader *loader,
 							    &iter,
 							    MAX (offset, 0));
 		}
-
 		/* otherwise to the top */
 		else
 		{

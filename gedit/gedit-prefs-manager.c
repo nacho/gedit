@@ -1275,6 +1275,15 @@ gedit_prefs_manager_get_writable_vfs_schemes (void)
 	return strings;
 }
 
+gboolean
+gedit_prefs_manager_get_restore_cursor_position (void)
+{
+	gedit_debug (DEBUG_PREFS);
+
+	return gedit_prefs_manager_get_bool (GPM_RESTORE_CURSOR_POSITION,
+					     GPM_DEFAULT_RESTORE_CURSOR_POSITION);
+}
+
 /* The following functions are taken from gconf-client.c 
  * and partially modified. 
  * The licensing terms on these is: 
