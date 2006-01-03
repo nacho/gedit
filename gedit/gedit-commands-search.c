@@ -159,17 +159,24 @@ static void
 phrase_found (GeditWindow *window,
 	      gint         occurrences)
 {
-	if (occurrences > 0)
+	if (occurrences > 1)
 		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 					       window->priv->generic_message_cid,
-					       ngettext("Found and replaced %d occurrence.",
-					     	        "Found and replaced %d occurrences.",
+					       ngettext("Found and replaced %d occurrence",
+					     	        "Found and replaced %d occurrences",
 					     	        occurrences),
 					       occurrences);
-	else
-		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-					       window->priv->generic_message_cid,
-					       " ");
+	else 
+	{
+		if (occurrences == 1)
+			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+						       window->priv->generic_message_cid,
+						       _("Found and replaced one occurrence"));
+		else
+			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+						       window->priv->generic_message_cid,
+						       " ");
+	}
 }
 
 static void
