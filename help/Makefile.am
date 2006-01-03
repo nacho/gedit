@@ -4,6 +4,13 @@ dist-hook: doc-dist-hook
 DOC_MODULE = gedit
 DOC_ENTITIES = 
 DOC_INCLUDES = legal.xml
+DOC_FIGURES = \
+	figures/gedit_format_bold.png			\
+	figures/gedit_format_italic.png			\
+	figures/gedit_format_strikethrough.png		\
+	figures/gedit_format_underline.png		\
+	figures/gedit_recent_files_menu_icon.png	\
+	figures/gedit_window.png	
 
 DOC_LINGUAS = de es fr it ja zh_CN zh_HK zh_TW
 
