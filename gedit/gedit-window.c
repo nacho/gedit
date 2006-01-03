@@ -1782,7 +1782,15 @@ drag_data_received_cb (GtkWidget        *widget,
 	uris = g_uri_list_extract_uris ((gchar *) selection_data->data);
 
 	for (i = 0; uris[i] != NULL; i++)
-		uri_list = g_slist_prepend (uri_list, g_strdup (uris[i]));
+	{
+		gchar *uri;
+		
+		uri = gedit_utils_make_canonical_uri_from_shell_arg (uris[i]);
+		
+		/* Silently ignore malformed URI/filename */
+		if (uri != NULL)
+			uri_list = g_slist_prepend (uri_list, uri);	
+	}
 
 	g_strfreev (uris);
 

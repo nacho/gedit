@@ -143,7 +143,7 @@ load_file_list (GeditWindow         *window,
 	while (uris != NULL)
 	{
 		g_return_val_if_fail (uris->data != NULL, 0);
-
+		
 		tab = gedit_window_create_tab_from_uri (window,
 							(const gchar *)uris->data,
 							encoding,

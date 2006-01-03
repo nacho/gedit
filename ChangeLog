@@ -1,3 +1,20 @@
+2006-01-03  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes drag&drop of files from file-roller
+	
+	* gedit/gedit-utils.c (gedit_utils_is_valid_uri): fixed a compiler 
+	warning
+	(gedit_utils_make_canonical_uri_from_shell_arg): new function
+
+	* gedit/gedit-utils.h: new function 
+	gedit_utils_make_canonical_uri_from_shell_arg
+
+	* gedit/gedit-window.c (drag_data_received_cb): use the new
+	gedit_utils_make_canonical_uri_from_shell_arg
+
+	* gedit/gedit.c (gedit_get_command_line_data): use the new
+	gedit_utils_make_canonical_uri_from_shell_arg function
+
 2006-01-03  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-app.c: fix startup race condition on active_window.

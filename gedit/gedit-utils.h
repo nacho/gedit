@@ -129,6 +129,9 @@ gboolean	 gedit_utils_get_glade_widgets		(const gchar  *filename,
 							 const gchar  *widget_name,
 							 ...) G_GNUC_NULL_TERMINATED;
 
+/* Return NULL if str is not a valid URI and/or filename */
+gchar		*gedit_utils_make_canonical_uri_from_shell_arg
+							(const gchar *str);
 G_END_DECLS
 
 #endif /* __GEDIT_UTILS_H__ */

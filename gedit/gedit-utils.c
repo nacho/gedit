@@ -857,7 +857,7 @@ gedit_utils_is_valid_uri (const gchar *uri)
 		return FALSE;
 
 	/* We expect to have a fully valid set of characters */
-	for (p = uri; *p; p++) {
+	for (p = (const guchar *)uri; *p; p++) {
 		if (*p == '%')
 		{
 			++p;
@@ -961,4 +961,41 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 	g_object_unref (gui);
 
 	return ret;
+}
+
+gchar *
+gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
+{	
+	gchar *uri;
+	gchar *canonical_uri;
+
+	g_return_val_if_fail (str != NULL, NULL);
+	g_return_val_if_fail (*str != '\0', NULL);
+	
+	/* Note for the future: 
+	 *
+	 * <federico> paolo: and flame whoever tells 
+	 * you that file:///gnome/test_files/hëllò 
+	 * doesn't work --- that's not a valid URI
+	 *
+	 * <paolo> federico: well, another solution that 
+	 * does not requires patch to _from_shell_args 
+	 * is to check that the string returned by it 
+	 * contains only ASCII chars
+	 * <federico> paolo: hmmmm, isn't there 
+	 * gnome_vfs_is_uri_valid() or something?
+	 * <paolo>: I will use gedit_utils_is_valid_uri ()
+	 *
+	 */
+	 
+	uri = gnome_vfs_make_uri_from_shell_arg (str);
+	canonical_uri = gnome_vfs_make_uri_canonical (uri);
+	g_free (uri);
+	
+	/* g_print ("URI: %s\n", canonical_uri); */
+	
+	if (gedit_utils_is_valid_uri (canonical_uri))
+		return canonical_uri;
+	
+	return NULL;
 }

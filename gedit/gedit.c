@@ -113,32 +113,11 @@ gedit_get_command_line_data (GnomeProgram *program)
 			}
 			else
 			{
-				gchar *uri;
 				gchar *canonical_uri;
-
-				/* Note for the future: 
-				 *
-				 * <federico> paolo: and flame whoever tells 
-				 * you that file:///gnome/test_files/hëllò 
-				 * doesn't work --- that's not a valid URI
-				 *
-				 * <paolo> federico: well, another solution that 
-				 * does not requires patch to _from_shell_args 
-				 * is to check that the string returned by it 
-				 * contains only ASCII chars
-				 * <federico> paolo: hmmmm, isn't there 
-				 * gnome_vfs_is_uri_valid() or something?
-				 * <paolo>: I will use gedit_utils_is_valid_uri ()
-				 *
-				 */
-				 
-				uri = gnome_vfs_make_uri_from_shell_arg (args[i]);
-				canonical_uri = gnome_vfs_make_uri_canonical (uri);
-				g_free (uri);
 				
-				g_print ("URI: %s\n", canonical_uri);
+				canonical_uri = gedit_utils_make_canonical_uri_from_shell_arg (args[i]);
 				
-				if (gedit_utils_is_valid_uri (canonical_uri))
+				if (canonical_uri != NULL)
 					file_list = g_slist_prepend (file_list, 
 								     canonical_uri);
 				else
