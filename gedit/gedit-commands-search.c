@@ -311,9 +311,6 @@ do_find (GeditSearchDialog *dialog,
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
 					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
 					   found);
-	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					   GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
-					   found);
 
 	restore_last_searched_data (dialog, doc);
 }
@@ -468,9 +465,6 @@ do_replace_all (GeditSearchDialog *dialog,
 
 	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
 					   GEDIT_SEARCH_DIALOG_REPLACE_RESPONSE,
-					   FALSE);
-	gtk_dialog_set_response_sensitive (GTK_DIALOG (dialog),
-					   GEDIT_SEARCH_DIALOG_REPLACE_ALL_RESPONSE,
 					   FALSE);
 
 	restore_last_searched_data (dialog, doc);

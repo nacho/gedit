@@ -1,3 +1,16 @@
+2006-01-03  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes Replace All button sensitivity in the Find/Replace dialog.
+	
+	* gedit/dialogs/gedit-search-dialog.c (search_options_changed): function
+	removed
+	(gedit_search_dialog_init): do not connect search_options_changed
+	(gedit_search_dialog_set_search_text): set "Replace All" button 
+	sensitivity
+
+	* gedit/gedit-commands-search.c (do_find) (do_replace_all): not set
+	"Replace All" button sensitivity
+	
 === gedit 2.13.1 ===
 
 2006-01-02  Paolo Borelli  <pborelli@katamail.com>
