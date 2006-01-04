@@ -1,18 +1,18 @@
 # gedit ja.po.
-# Copyright (C) 1999,2000,2002-2005 Free Software Foundation, Inc.
+# Copyright (C) 1999,2000,2002-2006 Free Software Foundation, Inc.
 # Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>, 1999
 # Yuusuke Tahara <tahara@gnome.gr.jp>
 # Yukihiro Nakai <nakai@gnome.gr.jp>
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2002.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
-# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2005.
+# Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-19 00:11+0900\n"
-"PO-Revision-Date: 2005-12-19 00:10+0900\n"
+"POT-Creation-Date: 2006-01-04 19:10+0900\n"
+"PO-Revision-Date: 2006-01-04 19:10+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "テキスト・ファイルを編集します"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:428
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:409
 msgid "Text Editor"
 msgstr "GNOME テキスト・エディタ"
 
@@ -261,48 +261,52 @@ msgid "Printing Line Wrapping Mode"
 msgstr "印刷時の行の折り返しモード"
 
 #: ../data/gedit.schemas.in.h:51
+msgid "Restore Previous Cursor Position"
+msgstr "以前あったカーソル位置に戻す"
+
+#: ../data/gedit.schemas.in.h:52
 msgid "Right Margin Position"
 msgstr "右マージンの位置"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:55
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:58
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:62
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:66
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:67
 msgid "Selected Text Color"
 msgstr "選択したテキストの色"
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:68
 msgid "Selection Color"
 msgstr "選択範囲の色"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:69
 msgid "Side Pane is Visible"
 msgstr "サイド・ペインの表示可否"
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:70
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -312,7 +316,7 @@ msgstr ""
 "のリストです。\"CURRENT\" は現在使用しているロケールになります。認識したエン"
 "コーディングのみ使用します。"
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -326,7 +330,7 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに印刷されるか確認して下さ"
 "い。"
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -340,12 +344,12 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに表示されるか確認して下さ"
 "い。"
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "ドキュメントを印刷する際の本文に使用するフォントを指定します。"
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -353,7 +357,7 @@ msgstr ""
 "ドキュメントを印刷する際の本文に使用するフォントを指定します。これは gnome-"
 "print 用のフォント名で print_font_body_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -361,7 +365,7 @@ msgstr ""
 "印刷する際の行番号に使用するフォントを指定します。これは \"行番号の印刷\" オ"
 "プションが 0 以外の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -371,7 +375,7 @@ msgstr ""
 "プションが 0 以外の場合のみ効果があります。これは gnome-print 用のフォント名"
 "で print_font_numbers_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -379,7 +383,7 @@ msgstr ""
 "ドキュメントを印刷する際のページ・ヘッダに使用するフォントを指定します。これ"
 "は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -389,28 +393,28 @@ msgstr ""
 "は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。これは gnome-"
 "print 用のフォント名で print_font_header_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 "\"最近使ったファイル\" のサブメニューに表示するエントリの最大数を指定します。"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "タブ文字の代わりに表示されるスペースの数を指定します。"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:81
 msgid "Specifies the position of the right margin."
 msgstr "右マージンの位置を指定します。"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:82
 msgid "Status Bar is Visible"
 msgstr "ステータスバーの表示"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:83
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -427,35 +431,35 @@ msgstr ""
 "することに注意して下さい。そしてここで記述したとおりに表示されるか確認して下"
 "さい。"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:84
 msgid "Tab Size"
 msgstr "タブのサイズ"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:85
 msgid "Text Color"
 msgstr "テキストの色"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:86
 msgid "Toolbar Buttons Style"
 msgstr "ツールバーボタンのスタイル"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:87
 msgid "Toolbar is Visible"
 msgstr "ツールバーの表示可否"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:88
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "\"元に戻す\" 動作の限度 (破棄)"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:89
 msgid "Use Default Colors"
 msgstr "デフォルト色を使う"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:90
 msgid "Use Default Font"
 msgstr "デフォルトのフォントを使う"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:91
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -464,7 +468,7 @@ msgstr ""
 "指定時間後に変更されたファイルを gedit が自動的に保存するかどうかを指定しま"
 "す。\"自動保存の間隔\" オプションで時間を設定できます。"
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:92
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -473,62 +477,69 @@ msgstr ""
 "\"バックアップ・コピーの拡張子\" オプションでバックアップ・ファイルの拡張子を"
 "設定することができます。"
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:93
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "編集領域に行番号を表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "編集領域に右マージンを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should enable auto indentation."
 msgstr "自動インデントを有効にするかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "強調表示を有効にするかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should highlight matching bracket."
 msgstr "対応するカッコを強調表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:98
 msgid "Whether gedit should highlight the current line."
 msgstr "カーソル行を強調表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "ドキュメントを印刷する際にヘッダを含めるかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "タブ文字の代わりに空白文字を使うかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "ドキュメントを印刷する際に強調表示も印刷するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:102
+msgid ""
+"Whether gedit should restore the previous cursor position when a file is "
+"loaded."
+msgstr ""
+"ファイルを読み込んだ時に記憶していたカーソル位置に戻すかどうか指定します。"
+
+#: ../data/gedit.schemas.in.h:103
 msgid ""
 "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "編集ウインドウの下側にボトム・ペインを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid ""
 "Whether the side pane at the left of the editing window should be visible."
 msgstr "編集ウィンドウの左側にサイド・ペインを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:105
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "編集ウィンドウの下側にステータスバーを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:106
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "編集ウィンドウの中にツールバーを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:107
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -539,7 +550,7 @@ msgstr ""
 "無効の場合は、編集領域の色は \"背景色\"、\"テキストの色\"、\"選択したテキスト"
 "の色\"、\"選択範囲の色\" オプションで指定されたものになります。"
 
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -550,20 +561,20 @@ msgstr ""
 "トの代わりに \"エディタのフォント\" オプションで指定したフォントを使用しま"
 "す。"
 
-#: ../data/gedit.schemas.in.h:107
+#: ../data/gedit.schemas.in.h:109
 msgid "Writable VFS schemes"
 msgstr "書き込み可能な VFS スキーマ"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:110
+#: ../data/gedit.schemas.in.h:112
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:114
+#: ../data/gedit.schemas.in.h:116
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -1005,11 +1016,11 @@ msgid "_minutes"
 msgstr "分ごと(_M)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:944
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:974
 msgid "Replace"
 msgstr "置換"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:942
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:972
 msgid "Find"
 msgstr "検索"
 
@@ -1064,12 +1075,12 @@ msgstr "既に実行中の gedit に新しいトップレベル・ウィンド�
 msgid "Create a new document in an existing instance of gedit"
 msgstr "既に実行中の gedit に新しいドキュメントを作成する"
 
-#: ../gedit/gedit.c:145
+#: ../gedit/gedit.c:124
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: ファイル名または URI が間違っています。\n"
 
-#: ../gedit/gedit.c:157
+#: ../gedit/gedit.c:136
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: エンコーディングが間違っています。\n"
@@ -1210,12 +1221,16 @@ msgstr "gedit"
 
 #: ../gedit/gedit-commands-search.c:165
 #, c-format
-msgid "Found and replaced %d occurrence."
-msgid_plural "Found and replaced %d occurrences."
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "%d ヶ所で検索と置換を行いました。"
 msgstr[1] "%d ヶ所で検索と置換を行いました。"
 
-#: ../gedit/gedit-commands-search.c:180
+#: ../gedit/gedit-commands-search.c:174
+msgid "Found and replaced one occurrence"
+msgstr "%d ヶ所で検索と置換を行いました。"
+
+#: ../gedit/gedit-commands-search.c:187
 msgid "Phrase not found"
 msgstr "語句が見つかりませんでした"
 
@@ -1230,7 +1245,7 @@ msgid "Could not obtain backup filename"
 msgstr "バックアップ・ファイルを取得できませんでした"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1428 ../gedit/gedit-window.c:1433
+#: ../gedit/gedit-window.c:1461 ../gedit/gedit-window.c:1466
 msgid "Read Only"
 msgstr "書き込み禁止"
 
@@ -1749,15 +1764,15 @@ msgstr "ファイル %s を保存できませんでした。"
 msgid "Close document"
 msgstr "このドキュメントを閉じます"
 
-#: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
+#: ../gedit/gedit-panel.c:345 ../gedit/gedit-panel.c:560
 #: ../gedit/recent-files/egg-recent-view-gtk.c:444
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "履歴なし"
 
-#: ../gedit/gedit-panel.c:459
+#: ../gedit/gedit-panel.c:501 ../gedit/gedit-panel.c:581
 msgid "Hide panel"
-msgstr "サイド・ペインを隠します"
+msgstr "このペインを隠します"
 
 #: ../gedit/gedit-plugin-manager.c:55
 msgid "Plugin"
@@ -1779,7 +1794,7 @@ msgstr "プラグインの設定(_O)"
 msgid "Cannot initialize preferences manager."
 msgstr "設定マネージャを初期化できません。"
 
-#: ../gedit/gedit-prefs-manager.c:1374
+#: ../gedit/gedit-prefs-manager.c:1383
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "キー %3$s の '%1$s' を期待しましたが '%2$s' を得ました"
@@ -1896,7 +1911,8 @@ msgstr "(%d 行, %d 列)"
 #, c-format
 msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
-msgstr[0] ""
+msgstr[0] "エラーが発生したタブがあります"
+msgstr[1] "エラーが発生したタブが %d 個あります"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
@@ -2012,7 +2028,7 @@ msgstr "新しいドキュメントを作成します"
 msgid "_Open..."
 msgstr "開く(_O)..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1045
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1075
 msgid "Open a file"
 msgstr "ファイルを開きます"
 
@@ -2229,7 +2245,7 @@ msgstr "ボトム・ペイン(_B)"
 msgid "Show or hide the bottom panel in the current window"
 msgstr "このウィンドウでボトム・ペインの表示/非表示を切り替えます"
 
-#: ../gedit/gedit-utils.c:794
+#: ../gedit/gedit-utils.c:883
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n"
@@ -2241,7 +2257,7 @@ msgstr ""
 "\n"
 "インストールしたファイルを確認して下さい。"
 
-#: ../gedit/gedit-utils.c:795
+#: ../gedit/gedit-utils.c:884
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Unable to find the required widgets "
@@ -2277,40 +2293,40 @@ msgstr "検索する文字列"
 msgid "Line you want to move the cursor to"
 msgstr "カーソルを移動する行を入力して下さい"
 
-#: ../gedit/gedit-window.c:640
+#: ../gedit/gedit-window.c:665
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s 用の強調表示モードにします"
 
-#: ../gedit/gedit-window.c:692
+#: ../gedit/gedit-window.c:718
 msgid "Normal"
 msgstr "通常"
 
-#: ../gedit/gedit-window.c:693
+#: ../gedit/gedit-window.c:719
 msgid "Use Normal highlight mode"
 msgstr "通常の強調表示モードにします"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:815 ../gedit/gedit-window.c:840
+#: ../gedit/gedit-window.c:845 ../gedit/gedit-window.c:870
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' を開きます"
 
-#: ../gedit/gedit-window.c:940
+#: ../gedit/gedit-window.c:970
 msgid "Save"
 msgstr "保存"
 
-#: ../gedit/gedit-window.c:1049
+#: ../gedit/gedit-window.c:1079
 msgid "Open a recently used file"
 msgstr "最近使用したファイルを開きます"
 
-#: ../gedit/gedit-window.c:1056
+#: ../gedit/gedit-window.c:1086
 msgid "Open"
 msgstr "開く"
 
-#: ../gedit/gedit-window.c:1134 ../gedit/gedit-window.c:1702
+#: ../gedit/gedit-window.c:1166 ../gedit/gedit-window.c:1737
 #, c-format
 msgid "Activate %s"
 msgstr "%s をアクティブにします"
@@ -2873,11 +2889,11 @@ msgstr "自動スペル・チェック(_A)"
 msgid "Automatically spell-check the current document"
 msgstr "このドキュメントを自動的にスペルチェックします"
 
-#: ../plugins/spell/gedit-spell-plugin.c:732
+#: ../plugins/spell/gedit-spell-plugin.c:733
 msgid "The document is empty."
 msgstr "ドキュメントは空です。"
 
-#: ../plugins/spell/gedit-spell-plugin.c:764
+#: ../plugins/spell/gedit-spell-plugin.c:765
 msgid "No misspelled words"
 msgstr "スペルミスと思われる単語はありません"
 
