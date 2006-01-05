@@ -105,6 +105,8 @@ static gint     gedit_view_focus_out		(GtkWidget       *widget,
 
 static gboolean start_interactive_search	(GeditView       *view);
 static gboolean start_interactive_goto_line	(GeditView       *view);
+static gboolean reset_searched_text		(GeditView       *view);
+
 static void	hide_search_window 		(GeditView       *view,
 						 gboolean         cancel);
 
@@ -123,6 +125,7 @@ enum
 {
 	START_INTERACTIVE_SEARCH,
 	START_INTERACTIVE_GOTO_LINE,
+	RESET_SEARCHED_TEXT,
 	LAST_SIGNAL
 };
 
@@ -162,6 +165,7 @@ gedit_view_class_init (GeditViewClass *klass)
 
 	klass->start_interactive_search = start_interactive_search;
 	klass->start_interactive_goto_line = start_interactive_goto_line;
+	klass->reset_searched_text = reset_searched_text;	
 	textview_class->move_cursor = gedit_view_move_cursor;
 
 	view_signals[START_INTERACTIVE_SEARCH] =
@@ -180,17 +184,30 @@ gedit_view_class_init (GeditViewClass *klass)
 		  	      G_STRUCT_OFFSET (GeditViewClass, start_interactive_goto_line),
 			      NULL, NULL,
 			      gedit_marshal_BOOLEAN__NONE,
-			      G_TYPE_BOOLEAN, 0);	
+			      G_TYPE_BOOLEAN, 0);
+
+	view_signals[RESET_SEARCHED_TEXT] =
+    		g_signal_new ("reset_searched_text",
+		  	      G_TYPE_FROM_CLASS (object_class),
+		  	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+		  	      G_STRUCT_OFFSET (GeditViewClass, reset_searched_text),
+			      NULL, NULL,
+			      gedit_marshal_BOOLEAN__NONE,
+			      G_TYPE_BOOLEAN, 0);		
 
 	g_type_class_add_private (klass, sizeof (GeditViewPrivate));
 	
 	binding_set = gtk_binding_set_by_class (klass);
 	
 	gtk_binding_entry_add_signal (binding_set, GDK_k, GDK_CONTROL_MASK, "start_interactive_search", 0);
-	gtk_binding_entry_add_signal (binding_set, GDK_K, GDK_CONTROL_MASK, "start_interactive_search", 0);	
+	gtk_binding_entry_add_signal (binding_set, GDK_K, GDK_CONTROL_MASK, "start_interactive_search", 0);
 	
 	gtk_binding_entry_add_signal (binding_set, GDK_i, GDK_CONTROL_MASK, "start_interactive_goto_line", 0);
-	gtk_binding_entry_add_signal (binding_set, GDK_I, GDK_CONTROL_MASK, "start_interactive_goto_line", 0);	
+	gtk_binding_entry_add_signal (binding_set, GDK_I, GDK_CONTROL_MASK, "start_interactive_goto_line", 0);
+	
+	gtk_binding_entry_add_signal (binding_set, GDK_k, GDK_CONTROL_MASK | GDK_SHIFT_MASK, "reset_searched_text", 0);
+	gtk_binding_entry_add_signal (binding_set, GDK_K, GDK_CONTROL_MASK | GDK_SHIFT_MASK, "reset_searched_text", 0);	
+
 }
 
 static void
@@ -1732,6 +1749,19 @@ start_interactive_search_real (GeditView *view)
 	gtk_widget_grab_focus (view->priv->search_entry);
 	
 	send_focus_change (view->priv->search_entry, TRUE);
+	
+	return TRUE;
+}
+
+static gboolean
+reset_searched_text (GeditView *view)
+{		
+	GeditDocument *doc;
+
+	g_print ("Reset!");		
+	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+	
+	gedit_document_set_search_text (doc, "", GEDIT_SEARCH_DONT_SET_FLAGS);
 	
 	return TRUE;
 }

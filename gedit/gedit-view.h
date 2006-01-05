@@ -74,8 +74,11 @@ struct _GeditViewClass
 	GtkSourceViewClass parent_class;
 	
 	/* FIXME: Do we need placeholders ? */
+	
+	/* Key bindings */
 	gboolean (* start_interactive_search)	(GeditView       *view);
 	gboolean (* start_interactive_goto_line)(GeditView       *view);	
+	gboolean (* reset_searched_text)	(GeditView       *view);
 };
 
 /*
