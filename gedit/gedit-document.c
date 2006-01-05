@@ -1301,33 +1301,29 @@ gedit_document_goto_line (GeditDocument *doc,
 	return ret;
 }
 
-/* FIXME: This needs to be fixed to be UTF-8 compliant. pbor had a patch. */
-static gint 
+static gint
 compute_num_of_lines (const gchar *text)
 {
-	gint n;
-	gint length;
 	const gchar *p;
- 	const gchar *end;
+	gint len;
+	gint n = 0;
 
 	g_return_val_if_fail (text != NULL, 0);
 
-    	length = strlen (text);
+	len = strlen (text);
+	p = text;
 
-  	p = text;
-  	end = text + length;
+	while (len > 0)
+	{
+		gint i;
 
-	n = 1;
-	
-  	while (p != end)
-    	{
-      		if (*p == '\n') /* FIXME: other characters? */
-      			++n;
-      			
-		p = g_utf8_next_char (p);
-    	}
-    	
-    	return n;
+		pango_find_paragraph_boundary (p, len, NULL, &i);
+		p += i;
+		len -= i;
+		++n;
+	}
+
+	return n;
 }
 
 void
