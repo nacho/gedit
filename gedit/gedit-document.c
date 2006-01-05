@@ -1311,8 +1311,10 @@ compute_num_of_lines (const gchar *text)
 	g_return_val_if_fail (text != NULL, 0);
 
 	len = strlen (text);
-	p = text;
+	if (len == 0)
+		return 1;
 
+	p = text;
 	while (len > 0)
 	{
 		gint i;
@@ -1516,7 +1518,7 @@ gedit_document_search_backward (GeditDocument     *doc,
 	{
 		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
 	}
-		
+
 	while (!found)
 	{
 		found = gtk_source_iter_backward_search (&iter,
