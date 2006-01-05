@@ -1306,22 +1306,24 @@ compute_num_of_lines (const gchar *text)
 {
 	const gchar *p;
 	gint len;
-	gint n = 0;
+	gint n = 1;
 
 	g_return_val_if_fail (text != NULL, 0);
 
 	len = strlen (text);
-	if (len == 0)
-		return 1;
-
 	p = text;
+
 	while (len > 0)
 	{
-		gint i;
+		gint del, par;
 
-		pango_find_paragraph_boundary (p, len, NULL, &i);
-		p += i;
-		len -= i;
+		pango_find_paragraph_boundary (p, len, &del, &par);
+
+		if (del == par) /* not found */
+			break;
+
+		p += par;
+		len -= par;
 		++n;
 	}
 
