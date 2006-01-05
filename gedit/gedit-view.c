@@ -49,7 +49,7 @@
 #include "sexy-icon-entry.h"
 
 #define GEDIT_VIEW_SCROLL_MARGIN 0.02
-#define GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT 5000
+#define GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT (30*1000) /* 30 seconds */
 
 #define MIN_SEARCH_COMPLETION_KEY_LEN	3
 
@@ -100,9 +100,14 @@ static void	gedit_view_move_cursor		(GtkTextView     *text_view,
 						 GtkMovementStep  step,
 						 gint             count,
 						 gboolean         extend_selection);
+static gint     gedit_view_focus_out		(GtkWidget       *widget,
+						 GdkEventFocus   *event);
 
 static gboolean start_interactive_search	(GeditView       *view);
 static gboolean start_interactive_goto_line	(GeditView       *view);
+static void	hide_search_window 		(GeditView       *view,
+						 gboolean         cancel);
+
 
 static gint	gedit_view_expose	 	(GtkWidget       *widget,
 						 GdkEventExpose  *event);
@@ -152,6 +157,7 @@ gedit_view_class_init (GeditViewClass *klass)
 	gtkobject_class->destroy = gedit_view_destroy;
 	object_class->finalize = gedit_view_finalize;
 
+	widget_class->focus_out_event = gedit_view_focus_out;
 	widget_class->expose_event = gedit_view_expose;
 
 	klass->start_interactive_search = start_interactive_search;
@@ -400,6 +406,23 @@ gedit_view_finalize (GObject *object)
 		
 	(* G_OBJECT_CLASS (gedit_view_parent_class)->finalize) (object);
 }
+
+static gint
+gedit_view_focus_out (GtkWidget *widget, GdkEventFocus *event)
+{
+	GeditView *view = GEDIT_VIEW (widget);
+	
+	gtk_widget_queue_draw (widget);
+	
+	/* hide interactive search dialog */
+	if (view->priv->search_window != NULL)
+		hide_search_window (view, FALSE);
+	
+	(* GTK_WIDGET_CLASS (gedit_view_parent_class)->focus_out_event) (widget, event);
+	
+	return FALSE;
+}
+
 
 /**
  * gedit_view_new:
@@ -1021,7 +1044,7 @@ search_entry_flush_timeout (GeditView *view)
 	GDK_THREADS_ENTER ();
 
   	view->priv->typeselect_flush_timeout = 0;
-	hide_search_window (view, TRUE);
+	hide_search_window (view, FALSE);
 
 	GDK_THREADS_LEAVE ();
 
@@ -1050,7 +1073,7 @@ search_window_delete_event (GtkWidget   *widget,
 			    GdkEventAny *event,
 			    GeditView   *view)
 {
-	hide_search_window (view, TRUE);
+	hide_search_window (view, FALSE);
 
 	return TRUE;
 }
@@ -1060,7 +1083,7 @@ search_window_button_press_event (GtkWidget      *widget,
 				  GdkEventButton *event,
 				  GeditView      *view)
 {
-	hide_search_window (view, TRUE);
+	hide_search_window (view, FALSE);
 	
 	gtk_propagate_event (GTK_WIDGET (view), (GdkEvent *)event);
 
@@ -1129,9 +1152,15 @@ search_window_key_press_event (GtkWidget   *widget,
 {
 	gboolean retval = FALSE;
 
-	/* close window and cancel the search */
-	if (event->keyval == GDK_Escape ||
-	    event->keyval == GDK_Tab)
+	/* Close window */
+	if (event->keyval == GDK_Tab)
+	{
+		hide_search_window (view, FALSE);
+		retval = TRUE;
+	}
+	
+	/* Close window and cancel the search */
+	if (event->keyval == GDK_Escape)
 	{
 		if (view->priv->search_mode == SEARCH)
 		{
