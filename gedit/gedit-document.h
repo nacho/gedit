@@ -104,6 +104,11 @@ struct _GeditDocumentClass
 
 	void (* saved)  		(GeditDocument    *document,
 					 const GError     *error);
+
+	void (* search_highlight_updated)
+					(GeditDocument    *document,
+					 GtkTextIter      *start,
+					 GtkTextIter      *end);
 };
 
 
@@ -222,6 +227,11 @@ void		 gedit_document_set_auto_save_interval
 						(GeditDocument       *doc, 
 						 gint                 interval);
 
+void		 gedit_document_set_enable_search_highlighting 
+						(GeditDocument       *doc,
+						 gboolean             enable);
+gboolean	 gedit_document_get_enable_search_highlighting
+						(GeditDocument       *doc);
 /* 
  * Non exported functions
  */
@@ -235,7 +245,10 @@ glong		 _gedit_document_get_seconds_since_last_save_or_load
 gboolean	 _gedit_document_get_has_selection
 						(GeditDocument       *doc);
 
-
+void		_gedit_document_search_region   (GeditDocument       *doc,
+						 const GtkTextIter   *start,
+						 const GtkTextIter   *end);
+						  
 /* Search macros */
 #define GEDIT_SEARCH_IS_DONT_SET_FLAGS(sflags) ((sflags & GEDIT_SEARCH_DONT_SET_FLAGS) != 0)
 #define GEDIT_SEARCH_SET_DONT_SET_FLAGS(sflags,state) ((state == TRUE) ? \

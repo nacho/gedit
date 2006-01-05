@@ -104,6 +104,13 @@ static void	gedit_view_move_cursor		(GtkTextView     *text_view,
 static gboolean start_interactive_search	(GeditView       *view);
 static gboolean start_interactive_goto_line	(GeditView       *view);
 
+static gint	gedit_view_expose	 	(GtkWidget       *widget,
+						 GdkEventExpose  *event);
+static void 	search_highlight_updated_cb	(GeditDocument   *doc,
+						 GtkTextIter     *start,
+						 GtkTextIter     *end,
+						 GeditView       *view);
+						 
 G_DEFINE_TYPE(GeditView, gedit_view, GTK_TYPE_SOURCE_VIEW)
 
 /* Signals */
@@ -139,10 +146,13 @@ gedit_view_class_init (GeditViewClass *klass)
 	GObjectClass     *object_class = G_OBJECT_CLASS (klass);
 	GtkObjectClass   *gtkobject_class = GTK_OBJECT_CLASS (klass);
 	GtkTextViewClass *textview_class = GTK_TEXT_VIEW_CLASS (klass);
+	GtkWidgetClass   *widget_class = GTK_WIDGET_CLASS (klass);
 	GtkBindingSet    *binding_set;
 
 	gtkobject_class->destroy = gedit_view_destroy;
 	object_class->finalize = gedit_view_finalize;
+
+	widget_class->expose_event = gedit_view_expose;
 
 	klass->start_interactive_search = start_interactive_search;
 	klass->start_interactive_goto_line = start_interactive_goto_line;
@@ -421,6 +431,11 @@ gedit_view_new (GeditDocument *doc)
 
 	gtk_text_view_set_editable (GTK_TEXT_VIEW (view), 
 				    !gedit_document_get_readonly (doc));					  
+
+	g_signal_connect (doc,
+			  "search_highlight_updated",
+			  G_CALLBACK (search_highlight_updated_cb),
+			  view);
 
 	gedit_debug_message (DEBUG_VIEW, "END: %d", G_OBJECT (view)->ref_count);
 
@@ -1707,3 +1722,89 @@ start_interactive_goto_line (GeditView *view)
 	
 	return start_interactive_search_real (view);
 }
+
+static gint
+gedit_view_expose (GtkWidget      *widget,
+                   GdkEventExpose *event)
+{
+	GtkTextView *text_view;
+	GeditDocument *doc;
+	
+	text_view = GTK_TEXT_VIEW (widget);
+	
+	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (text_view));
+	
+	if ((event->window == gtk_text_view_get_window (text_view, GTK_TEXT_WINDOW_TEXT)) &&
+	    gedit_document_get_enable_search_highlighting (doc))
+	{
+		GdkRectangle visible_rect;
+		GtkTextIter iter1, iter2;
+		
+		gtk_text_view_get_visible_rect (text_view, &visible_rect);
+		gtk_text_view_get_line_at_y (text_view, &iter1,
+					     visible_rect.y, NULL);
+		gtk_text_view_get_line_at_y (text_view, &iter2,
+					     visible_rect.y
+					     + visible_rect.height, NULL);
+		gtk_text_iter_forward_line (&iter2);
+				     
+		_gedit_document_search_region (doc,
+					       &iter1,
+					       &iter2);
+	}
+
+	return (* GTK_WIDGET_CLASS (gedit_view_parent_class)->expose_event)(widget, event);
+}
+
+static void 	
+search_highlight_updated_cb (GeditDocument *doc,
+			     GtkTextIter   *start,
+			     GtkTextIter   *end,
+			     GeditView     *view)
+{
+	GdkRectangle visible_rect;
+	GdkRectangle updated_rect;	
+	GdkRectangle redraw_rect;
+	gint y;
+	gint height;
+	GtkTextView *text_view;
+	
+	text_view = GTK_TEXT_VIEW (view);
+
+	g_return_if_fail (gedit_document_get_enable_search_highlighting (
+				GEDIT_DOCUMENT (gtk_text_view_get_buffer (text_view))));
+	
+	/* get visible area */
+	gtk_text_view_get_visible_rect (text_view, &visible_rect);
+	
+	/* get updated rectangle */
+	gtk_text_view_get_line_yrange (text_view, start, &y, &height);
+	updated_rect.y = y;
+	gtk_text_view_get_line_yrange (text_view, end, &y, &height);
+	updated_rect.height = y + height - updated_rect.y;
+	updated_rect.x = visible_rect.x;
+	updated_rect.width = visible_rect.width;
+
+	/* intersect both rectangles to see whether we need to queue a redraw */
+	if (gdk_rectangle_intersect (&updated_rect, &visible_rect, &redraw_rect)) 
+	{
+		GdkRectangle widget_rect;
+		
+		gtk_text_view_buffer_to_window_coords (text_view,
+						       GTK_TEXT_WINDOW_WIDGET,
+						       redraw_rect.x,
+						       redraw_rect.y,
+						       &widget_rect.x,
+						       &widget_rect.y);
+		
+		widget_rect.width = redraw_rect.width;
+		widget_rect.height = redraw_rect.height;
+		
+		gtk_widget_queue_draw_area (GTK_WIDGET (text_view),
+					    widget_rect.x,
+					    widget_rect.y,
+					    widget_rect.width,
+					    widget_rect.height);
+	}
+}
+

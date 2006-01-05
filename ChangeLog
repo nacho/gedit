@@ -1,3 +1,52 @@
+2006-01-05  Paolo Maggi  <paolo@gnome.org>
+
+	Implemented search highligthing: all the occurences of the searched
+	text are highlighted
+	
+	* data/gedit.schemas.in: added editor/search_highlighting/enable key
+
+	* gedit/Makefile.am: compile gtktextregion.[ch]
+	
+	* gedit/gtktextregion.[c]: new files
+
+	* gedit/gedit-document.c (gedit_document_finalize): destroy 
+	to_search_region if needed
+	(gedit_document_get_property): get the enable-search-highlighting 
+	property
+	(gedit_document_set_property): new function
+	(gedit_document_class_init): added enable-search-highlighting property
+	and search_highlight_updated signal
+	(gedit_document_init): initialize enable-search-highlighting property
+	and connect "insert-text" and "delete-rande" signals
+	(compute_num_of_lines): new function
+	(gedit_document_set_search_text): update search hl if needed
+	(gedit_document_get_can_search_again): fixed to manage the case 
+	in which search_text is empty
+	(search_region): new funtion
+	(to_search_region_range): ditto
+	(_gedit_document_search_region): ditto
+	(insert_text_cb): ditto
+	(delete_range_cb): ditto
+	(gedit_document_set_enable_search_highlighting): ditto
+	(gedit_document_get_enable_search_highlighting): ditto
+
+	* gedit/gedit-document.h: added search_highlight_updated signal and
+	declare gedit_document_[set|get]_enable_search_highlighting and 
+	_gedit_document_search_region functions
+
+	* gedit/gedit-prefs-manager-app.c (gedit_prefs_manager_app_init)
+	(gedit_prefs_manager_syntax_hl_enable_changed)
+	(gedit_prefs_manager_search_hl_enable_changed): added support for 
+	editor/search_highlighting/enable key
+
+	* gedit/gedit-prefs-manager.[ch]: added support for 
+	editor/search_highlighting/enable key
+
+	* gedit/gedit-view.c (gedit_view_class_init): set expose_event default
+	handler
+	(gedit_view_new): connect to "search_highlight_updated" signal
+	(gedit_view_expose)(search_highlight_updated_cb): new functions
+
 2006-01-03  Paolo Maggi  <paolo@gnome.org>
 
 	Fixes drag&drop of files from file-roller

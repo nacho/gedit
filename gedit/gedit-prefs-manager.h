@@ -86,6 +86,9 @@
 #define GPM_CURSOR_POSITION_DIR		GPM_PREFS_DIR  "/editor/cursor_position"
 #define GPM_RESTORE_CURSOR_POSITION	GPM_CURSOR_POSITION_DIR "/restore_cursor_position"
 
+#define GPM_SEARCH_HIGHLIGHTING_DIR	GPM_PREFS_DIR "/editor/search_highlighting"
+#define GPM_SEARCH_HIGHLIGHTING_ENABLE	GPM_SEARCH_HIGHLIGHTING_DIR "/enable"
+
 /* UI */
 #define GPM_TOOLBAR_DIR			GPM_PREFS_DIR "/ui/toolbar"
 #define GPM_TOOLBAR_VISIBLE	 	GPM_TOOLBAR_DIR "/toolbar_visible"
@@ -212,6 +215,8 @@
 #define GPM_DEFAULT_WRITABLE_VFS_SCHEMES {"ssh", "sftp", "smb", "dav", "davs", NULL}
 
 #define GPM_DEFAULT_RESTORE_CURSOR_POSITION 1 /* TRUE */
+
+#define GPM_DEFAULT_SEARCH_HIGHLIGHTING_ENABLE 1 /* TRUE */
 
 typedef enum {
 	GEDIT_TOOLBAR_SYSTEM = 0,
@@ -418,6 +423,11 @@ GSList			*gedit_prefs_manager_get_writable_vfs_schemes	(void);
 
 /* Restore cursor position */
 gboolean 		 gedit_prefs_manager_get_restore_cursor_position (void);
+
+/* Enable search highlighting */
+gboolean 		 gedit_prefs_manager_get_enable_search_highlighting (void);
+void			 gedit_prefs_manager_set_enable_search_highlighting (gboolean esh);
+gboolean		 gedit_prefs_manager_enable_search_highlighting_can_set (void);
 
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 

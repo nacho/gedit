@@ -51,6 +51,8 @@
 #include "gedit-document-saver.h"
 #include "gedit-marshal.h"
 
+#include "gtktextregion.h"
+
 #include <gtksourceview/gtksourceiter.h>
 
 #undef ENABLE_PROFILE 
@@ -75,6 +77,18 @@ PROFILE (static GTimer *timer = NULL);
 
 static void	gedit_document_set_readonly	(GeditDocument *doc,
 						 gboolean       readonly);
+
+static void	to_search_region_range 		(GeditDocument *doc,
+						 GtkTextIter   *start, 
+						 GtkTextIter   *end);
+static void 	insert_text_cb		 	(GeditDocument *doc, 
+						 GtkTextIter   *pos,
+						 const gchar   *text, 
+						 gint           length);
+						 
+static void	delete_range_cb 		(GeditDocument *doc, 
+						 GtkTextIter   *start,
+						 GtkTextIter   *end);
 			     
 struct _GeditDocumentPrivate
 {
@@ -104,6 +118,7 @@ struct _GeditDocumentPrivate
 
 	guint        search_flags;
 	gchar       *search_text;
+	gint	     num_of_lines_search_text;
 
 	/* Temp data while loading */
 	GeditDocumentLoader *loader;
@@ -114,6 +129,10 @@ struct _GeditDocumentPrivate
 
 	/* Saving stuff */
 	GeditDocumentSaver *saver;
+
+	/* Search highlighting support variables */	
+	GtkTextRegion *to_search_region;
+	GtkTextTag    *found_tag;
 };
 
 enum {
@@ -125,7 +144,8 @@ enum {
 	PROP_READ_ONLY,
 	PROP_ENCODING,
 	PROP_CAN_SEARCH_AGAIN,
-	PROP_HAS_SELECTION
+	PROP_HAS_SELECTION,
+	PROP_ENABLE_SEARCH_HIGHLIGHTING
 };
 
 enum {
@@ -134,6 +154,7 @@ enum {
 	LOADED,
 	SAVING,
 	SAVED,
+	SEARCH_HIGHLIGHT_UPDATED,
 	LAST_SIGNAL
 };
 
@@ -247,6 +268,12 @@ gedit_document_finalize (GObject *object)
 		g_object_unref (doc->priv->loader);
 
 	g_free (doc->priv->search_text);
+	
+	if (doc->priv->to_search_region != NULL)
+	{
+		/* we can't delete marks if we're finalizing the buffer */
+		gtk_text_region_destroy (doc->priv->to_search_region, FALSE);
+	}
 
 	G_OBJECT_CLASS (gedit_document_parent_class)->finalize (object);
 }
@@ -282,11 +309,33 @@ gedit_document_get_property (GObject    *object,
 		case PROP_HAS_SELECTION:
 			g_value_set_boolean (value, doc->priv->has_selection);
 			break;
+		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
+			g_value_set_boolean (value, gedit_document_get_enable_search_highlighting (doc));
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
 	}
 }
+
+static void
+gedit_document_set_property (GObject      *object,
+			     guint         prop_id,
+			     const GValue *value,
+			     GParamSpec   *pspec)
+{
+	GeditDocument *doc = GEDIT_DOCUMENT (object);
+
+	switch (prop_id)
+	{
+		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
+			gedit_document_set_enable_search_highlighting (doc,
+								       g_value_get_boolean (value));
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
 
 static void
 emit_cursor_moved (GeditDocument *doc)
@@ -349,6 +398,7 @@ gedit_document_class_init (GeditDocumentClass *klass)
 
 	object_class->finalize = gedit_document_finalize;
 	object_class->get_property = gedit_document_get_property;
+	object_class->set_property = gedit_document_set_property;	
 
 	buf_class->mark_set = gedit_document_mark_set;
 	buf_class->changed = gedit_document_changed;
@@ -399,6 +449,13 @@ gedit_document_class_init (GeditDocumentClass *klass)
 					 		       "Wheter the document has selected text",
 					 		       FALSE,
 					 		       G_PARAM_READABLE));
+
+	g_object_class_install_property (object_class, PROP_ENABLE_SEARCH_HIGHLIGHTING,
+					 g_param_spec_boolean ("enable-search-highlighting",
+					 		       "Enable Search Highlighting",
+					 		       "Whether all the occurences of the searched string must be highlighted",
+					 		       FALSE,
+					 		       G_PARAM_READWRITE));
 
 	/* This signal is used to update the cursor position is the statusbar,
 	 * it's emitted either when the insert mark is moved explicitely or
@@ -461,6 +518,18 @@ gedit_document_class_init (GeditDocumentClass *klass)
 			      G_TYPE_NONE,
 			      1,
 			      G_TYPE_POINTER);
+
+	document_signals[SEARCH_HIGHLIGHT_UPDATED] =
+	    	g_signal_new ("search_highlight_updated",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GeditDocumentClass, search_highlight_updated),
+			      NULL, NULL,
+			      gedit_marshal_VOID__BOXED_BOXED,
+			      G_TYPE_NONE, 
+			      2, 
+			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE,
+			      GTK_TYPE_TEXT_ITER | G_SIGNAL_TYPE_STATIC_SCOPE);
 
 	g_type_class_add_private (object_class, sizeof(GeditDocumentPrivate));
 }
@@ -578,6 +647,19 @@ gedit_document_init (GeditDocument *doc)
 	doc->priv->auto_save_interval = gedit_prefs_manager_get_auto_save_interval ();
 	if (doc->priv->auto_save_interval <= 0)
 		doc->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
+
+	gedit_document_set_enable_search_highlighting (doc,
+						       gedit_prefs_manager_get_enable_search_highlighting ());
+
+	g_signal_connect_after (doc, 
+			  	"insert-text",
+			  	G_CALLBACK (insert_text_cb),
+			  	NULL);
+
+	g_signal_connect_after (doc, 
+			  	"delete-range",
+			  	G_CALLBACK (delete_range_cb),
+			  	NULL);		
 }
 
 GeditDocument *
@@ -1219,40 +1301,93 @@ gedit_document_goto_line (GeditDocument *doc,
 	return ret;
 }
 
+/* FIXME: This needs to be fixed to be UTF-8 compliant. pbor had a patch. */
+static gint 
+compute_num_of_lines (const gchar *text)
+{
+	gint n;
+	gint length;
+	const gchar *p;
+ 	const gchar *end;
+
+	g_return_val_if_fail (text != NULL, 0);
+
+    	length = strlen (text);
+
+  	p = text;
+  	end = text + length;
+
+	n = 1;
+	
+  	while (p != end)
+    	{
+      		if (*p == '\n') /* FIXME: other characters? */
+      			++n;
+      			
+		p = g_utf8_next_char (p);
+    	}
+    	
+    	return n;
+}
+
 void
 gedit_document_set_search_text (GeditDocument *doc,
 				const gchar   *text,
 				guint          flags)
 {
-	gchar *converted_text = NULL;
-	gboolean notify;
-
+	gchar *converted_text;
+	gboolean notify = FALSE;
+	gboolean update_to_search_region = FALSE;
+	
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail ((text == NULL) || (doc->priv->search_text != text));
 	g_return_if_fail ((text == NULL) || g_utf8_validate (text, -1, NULL));
 
 	gedit_debug_message (DEBUG_DOCUMENT, "text = %s", text);
 
-	g_free (doc->priv->search_text);
-
-	if (text != NULL && *text != '\0')
+	if (text != NULL)
 	{
-		converted_text = gedit_utils_unescape_search_text (text);
-		notify = doc->priv->search_text == NULL;
-
+		if (*text != '\0')
+		{
+			converted_text = gedit_utils_unescape_search_text (text);
+			notify = !gedit_document_get_can_search_again (doc);
+		}
+		else
+		{
+			converted_text = g_strdup("");
+			notify = gedit_document_get_can_search_again (doc);
+		}
+		
+		g_free (doc->priv->search_text);
+	
 		doc->priv->search_text = converted_text;
+		doc->priv->num_of_lines_search_text = compute_num_of_lines (doc->priv->search_text);
+		update_to_search_region = TRUE;
 	}
-	else
-	{
-		notify = doc->priv->search_text != NULL;
-		doc->priv->search_text = NULL;
-	}
-
+	
 	if (!GEDIT_SEARCH_IS_DONT_SET_FLAGS (flags))
 	{
+		if (doc->priv->search_flags != flags)
+			update_to_search_region = TRUE;
+			
 		doc->priv->search_flags = flags;
+
 	}
 
+	if (update_to_search_region)
+	{
+		GtkTextIter begin;
+		GtkTextIter end;
+		
+		gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),
+					    &begin,
+					    &end);
+					    
+		to_search_region_range (doc,
+					&begin,
+					&end);
+	}
+	
 	if (notify)
 		g_object_notify (G_OBJECT (doc), "can-search-again");
 }
@@ -1274,7 +1409,8 @@ gedit_document_get_can_search_again (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
-	return doc->priv->search_text != NULL;
+	return ((doc->priv->search_text != NULL) && 
+	        (*doc->priv->search_text != '\0'));
 }
 
 gboolean
@@ -1578,6 +1714,8 @@ _gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
 {
 	GTimeVal current_time;
 
+	gedit_debug (DEBUG_DOCUMENT);
+	
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), -1);
 
 	g_get_current_time (&current_time);
@@ -1588,7 +1726,298 @@ _gedit_document_get_seconds_since_last_save_or_load (GeditDocument *doc)
 gboolean
 _gedit_document_is_saving_as (GeditDocument *doc)
 {
+	gedit_debug (DEBUG_DOCUMENT);
+	
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 	
 	return (doc->priv->is_saving_as);
+}
+
+static void
+search_region (GeditDocument *doc,
+	       GtkTextIter   *start,
+	       GtkTextIter   *end)
+{
+	GtkTextIter iter;
+	GtkTextIter m_start;
+	GtkTextIter m_end;	
+	GtkSourceSearchFlags search_flags = 0;
+	gboolean found = TRUE;
+
+	GtkTextBuffer *buffer;	
+
+	gedit_debug (DEBUG_DOCUMENT);
+	
+	buffer = GTK_TEXT_BUFFER (doc);
+	
+	if (doc->priv->found_tag == NULL)
+	{
+		/* FIXME: the colors are hardcoded */
+		doc->priv->found_tag = gtk_text_buffer_create_tag (GTK_TEXT_BUFFER (doc), 
+								   "found",
+								   "background", "#FFFF78",
+								   //"foreground", "black",
+								   NULL);
+	}
+
+	if (doc->priv->search_text == NULL)
+		return;
+		
+	g_return_if_fail (doc->priv->num_of_lines_search_text > 0);
+	
+	gtk_text_iter_backward_lines (start, doc->priv->num_of_lines_search_text);
+	gtk_text_iter_forward_lines (end, doc->priv->num_of_lines_search_text);
+	
+	if (gtk_text_iter_has_tag (start, doc->priv->found_tag) &&
+	    !gtk_text_iter_begins_tag (start, doc->priv->found_tag))
+		gtk_text_iter_backward_to_tag_toggle (start, doc->priv->found_tag);
+		
+	if (gtk_text_iter_has_tag (end, doc->priv->found_tag) &&
+	    !gtk_text_iter_ends_tag (end, doc->priv->found_tag))
+		gtk_text_iter_forward_to_tag_toggle (end, doc->priv->found_tag);
+		
+	/*
+	g_print ("[%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),	
+					   gtk_text_iter_get_line (end), gtk_text_iter_get_offset (end));
+	*/
+
+	gtk_text_buffer_remove_tag (buffer,
+				    doc->priv->found_tag,
+				    start,
+				    end);
+
+	iter = *start;
+		
+	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
+
+	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (doc->priv->search_flags))
+	{
+		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
+	}
+	
+	do
+	{
+		if ((end != NULL) && gtk_text_iter_is_end (end))
+			end = NULL;
+			
+		found = gtk_source_iter_forward_search (&iter,
+							doc->priv->search_text, 
+							search_flags,
+                        	                	&m_start, 
+                        	                	&m_end,
+                                	               	end);
+				
+		iter = m_end;
+						      	               	
+		if (found && GEDIT_SEARCH_IS_ENTIRE_WORD (doc->priv->search_flags))
+		{
+			gboolean word;
+						
+			word = gtk_text_iter_starts_word (&m_start) && 
+			       gtk_text_iter_ends_word (&m_end);
+				
+			if (!word)
+				continue;
+		}
+		
+		if (found)
+		{
+			/* g_print ("FOUND\n"); */
+			gtk_text_buffer_apply_tag (buffer,
+						   doc->priv->found_tag,
+						   &m_start,
+						   &m_end);
+		}		
+
+	} while (found);		
+}
+
+static void
+to_search_region_range (GeditDocument *doc,
+			GtkTextIter   *start, 
+			GtkTextIter   *end)
+{
+	gedit_debug (DEBUG_DOCUMENT);
+	
+	if (doc->priv->to_search_region == NULL)
+		return;
+		
+	gtk_text_iter_set_line_offset (start, 0);
+	gtk_text_iter_forward_to_line_end (end);
+	
+	/*
+	g_print ("+ [%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),
+					   gtk_text_iter_get_line (end), gtk_text_iter_get_offset (end));
+	*/
+	
+	/* Add the region to the refresh region */
+	gtk_text_region_add (doc->priv->to_search_region, start, end);
+
+	/* Notify views of the updated highlight region */
+	gtk_text_iter_backward_lines (start, doc->priv->num_of_lines_search_text);
+	gtk_text_iter_forward_lines (end, doc->priv->num_of_lines_search_text);
+	
+	g_signal_emit (doc, document_signals [SEARCH_HIGHLIGHT_UPDATED], 0, start, end);
+}
+
+void
+_gedit_document_search_region (GeditDocument     *doc,
+			       const GtkTextIter *start,
+			       const GtkTextIter *end)
+{
+	GtkTextRegion *region;
+
+	gedit_debug (DEBUG_DOCUMENT);
+		
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (start != NULL);
+	g_return_if_fail (end != NULL);
+	
+	if (doc->priv->to_search_region == NULL)
+		return;
+
+	/*
+	g_print ("U [%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),
+					   gtk_text_iter_get_line (end), gtk_text_iter_get_offset (end));
+	*/
+		
+	/* get the subregions not yet highlighted */
+	region = gtk_text_region_intersect (doc->priv->to_search_region, 
+					    start,
+					    end);
+					    
+	if (region) 
+	{
+		gint i;
+		GtkTextIter start_search;
+		GtkTextIter end_search;
+		
+		i = gtk_text_region_subregions (region);
+		gtk_text_region_nth_subregion (region, 
+					       0,
+					       &start_search,
+					       NULL);
+
+		gtk_text_region_nth_subregion (region, 
+					       i - 1,
+					       NULL,
+					       &end_search);
+
+		gtk_text_region_destroy (region, TRUE);
+		
+		gtk_text_iter_order (&start_search, &end_search);
+		
+		search_region (doc, &start_search, &end_search);
+		
+		/* remove the just highlighted region */
+		gtk_text_region_substract (doc->priv->to_search_region,
+					   start, 
+					   end);
+					   
+		gtk_text_region_clear_zero_length_subregions (
+			doc->priv->to_search_region);
+	}
+}
+
+static void
+insert_text_cb (GeditDocument *doc, 
+		GtkTextIter   *pos,
+		const gchar   *text, 
+		gint           length)
+{
+	GtkTextIter start;
+	GtkTextIter end;
+
+	gedit_debug (DEBUG_DOCUMENT);
+		
+	start = end = *pos;
+
+	/*
+	 * pos is invalidated when
+	 * insertion occurs (because the buffer contents change), but the
+	 * default signal handler revalidates it to point to the end of the
+	 * inserted text 
+	 */
+	gtk_text_iter_backward_chars (&start,
+				      g_utf8_strlen (text, length));
+				     
+	to_search_region_range (doc, &start, &end);
+}
+						 
+static void	
+delete_range_cb (GeditDocument *doc, 
+		 GtkTextIter   *start,
+		 GtkTextIter   *end)
+{
+	GtkTextIter d_start;
+	GtkTextIter d_end;
+
+	gedit_debug (DEBUG_DOCUMENT);
+		
+	d_start = *start;
+	d_end = *end;
+	
+	to_search_region_range (doc, &d_start, &d_end);
+}
+
+void
+gedit_document_set_enable_search_highlighting (GeditDocument *doc,
+					       gboolean       enable)
+{
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	
+	enable = enable != FALSE;
+	
+	if ((doc->priv->to_search_region != NULL) == enable)
+		return;
+	
+	if (doc->priv->to_search_region != NULL)
+	{
+		/* Disable search highlighting */
+		if (doc->priv->found_tag != NULL)
+		{
+			/* If needed remove the found_tag */
+			GtkTextIter begin;
+			GtkTextIter end;
+		
+			gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),
+						    &begin,
+						    &end);
+
+			gtk_text_buffer_remove_tag (GTK_TEXT_BUFFER (doc),
+				    		    doc->priv->found_tag,
+				    		    &begin,
+				    		    &end);
+		}
+		
+		gtk_text_region_destroy (doc->priv->to_search_region,
+					 TRUE);
+		doc->priv->to_search_region = NULL;
+	}
+	else
+	{
+		doc->priv->to_search_region = gtk_text_region_new (GTK_TEXT_BUFFER (doc));
+		if (gedit_document_get_can_search_again (doc))
+		{
+			/* If search_text is not empty, highligth all its occurrences */
+			GtkTextIter begin;
+			GtkTextIter end;
+		
+			gtk_text_buffer_get_bounds (GTK_TEXT_BUFFER (doc),
+						    &begin,
+						    &end);
+					    
+			to_search_region_range (doc,
+						&begin,
+						&end);
+		}
+	}
+}
+
+gboolean
+gedit_document_get_enable_search_highlighting (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	
+	return (doc->priv->to_search_region != NULL);
 }

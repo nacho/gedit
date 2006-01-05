@@ -1236,6 +1236,11 @@ DEFINE_BOOL_PREF (enable_syntax_highlighting,
 		  GPM_SYNTAX_HL_ENABLE,
 		  GPM_DEFAULT_SYNTAX_HL_ENABLE)
 
+/* Enable search highlighting */
+DEFINE_BOOL_PREF (enable_search_highlighting,
+		  GPM_SEARCH_HIGHLIGHTING_ENABLE,
+		  GPM_DEFAULT_SEARCH_HIGHLIGHTING_ENABLE)
+
 
 GSList *
 gedit_prefs_manager_get_writable_vfs_schemes (void)

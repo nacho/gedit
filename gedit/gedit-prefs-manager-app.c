@@ -101,6 +101,12 @@ static void gedit_prefs_manager_syntax_hl_enable_changed(GConfClient *client,
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
 
+static void gedit_prefs_manager_search_hl_enable_changed(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+
 static void gedit_prefs_manager_max_recents_changed 	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
@@ -187,6 +193,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_SYNTAX_HL_ENABLE,
 				gedit_prefs_manager_syntax_hl_enable_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_SEARCH_HIGHLIGHTING_ENABLE,
+				gedit_prefs_manager_search_hl_enable_changed,
 				NULL, NULL, NULL);
 
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
@@ -996,6 +1007,45 @@ gedit_prefs_manager_syntax_hl_enable_changed (GConfClient *client,
 
 			windows = g_list_next (windows);
 		}
+	}
+}
+
+static void
+gedit_prefs_manager_search_hl_enable_changed (GConfClient *client,
+					      guint        cnxn_id,
+					      GConfEntry  *entry,
+					      gpointer     user_data)
+{
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_SEARCH_HIGHLIGHTING_ENABLE) == 0)
+	{
+		gboolean enable;
+		GList *docs;
+		GList *l;
+
+		if (entry->value->type == GCONF_VALUE_BOOL)
+			enable = gconf_value_get_bool (entry->value);
+		else
+			enable = GPM_DEFAULT_SEARCH_HIGHLIGHTING_ENABLE;
+
+		docs = gedit_app_get_documents (gedit_app_get_default ());
+		l = docs;
+
+		while (l != NULL)
+		{
+			g_return_if_fail (GEDIT_IS_DOCUMENT (l->data));
+
+			gedit_document_set_enable_search_highlighting  (GEDIT_DOCUMENT (l->data),
+							 		enable);
+
+			l = l->next;
+		}
+
+		g_list_free (docs);
 	}
 }
 

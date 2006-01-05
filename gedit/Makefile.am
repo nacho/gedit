@@ -55,6 +55,7 @@ NOINST_H_FILES =			\
 	gedit-io-error-message-area.h	\
 	gedit-spinner.h			\
 	sexy-icon-entry.h		\
+	gtktextregion.h			\
 	gedit-session.h
 
 if ENABLE_PYTHON
@@ -142,6 +143,7 @@ gedit_SOURCES = 			\
 	gedit-view.c 			\
 	gedit-window.c			\
 	sexy-icon-entry.c		\
+	gtktextregion.c			\
 	$(NOINST_H_FILES)		\
 	$(INST_H_FILES)
 
