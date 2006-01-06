@@ -1,3 +1,13 @@
+2006-01-06  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-plugin.[ch]:
+	* gedit/gedit-python-plugin.c:
+
+	implement configure_dialog support for python plugins and make
+	sure to chain up to the default gedit-plugin methods if a python
+	plugin doesn't override a method.
+	Patch from Jesse Van Den Kieboom and Raphael Slinckx.
+
 2006-01-05  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit/gedit-view.c (gedit_view_class_init): added reset_searched_text

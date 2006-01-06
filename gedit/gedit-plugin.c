@@ -48,6 +48,13 @@ create_configure_dialog	(GeditPlugin *plugin)
 	return NULL;
 }
 
+static gboolean
+is_configurable (GeditPlugin *plugin)
+{
+	return (GEDIT_PLUGIN_GET_CLASS (plugin)->create_configure_dialog !=
+		create_configure_dialog);
+}
+
 static void 
 gedit_plugin_class_init (GeditPluginClass *klass)
 {
@@ -56,6 +63,7 @@ gedit_plugin_class_init (GeditPluginClass *klass)
 	klass->update_ui = dummy;
 	
 	klass->create_configure_dialog = create_configure_dialog;
+	klass->is_configurable = is_configurable;
 }
 
 static void
@@ -99,8 +107,7 @@ gedit_plugin_is_configurable (GeditPlugin *plugin)
 {
 	g_return_val_if_fail (GEDIT_IS_PLUGIN (plugin), FALSE);
 
-	return (GEDIT_PLUGIN_GET_CLASS (plugin)->create_configure_dialog !=
-		create_configure_dialog);
+	return GEDIT_PLUGIN_GET_CLASS (plugin)->is_configurable (plugin);
 }
 
 GtkWidget *

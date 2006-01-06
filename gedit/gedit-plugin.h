@@ -80,14 +80,19 @@ struct _GeditPluginClass
 	void 		(*update_ui)		(GeditPlugin *plugin,
 						 GeditWindow *window);
 
-	GtkWidget      *(*create_configure_dialog)
+	GtkWidget 	*(*create_configure_dialog)
+						(GeditPlugin *plugin);
+
+	/* Plugins should not override this, it's handled automatically by
+	   the GeditPluginClass */
+	gboolean 	(*is_configurable)
 						(GeditPlugin *plugin);
 
 	/* Padding for future expansion */
 	void		(*_gedit_reserved1)	(void);
 	void		(*_gedit_reserved2)	(void);
 	void		(*_gedit_reserved3)	(void);
-	void		(*_gedit_reserved4)	(void);						
+	void		(*_gedit_reserved4)	(void);
 };
 
 /*

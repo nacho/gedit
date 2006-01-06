@@ -31,52 +31,182 @@
 
 static GObjectClass *parent_class;
 
-static void
+static PyObject *
 call_python_method (GeditPythonObject *object,
 		    GeditWindow       *window,
 		    gchar             *method)
 {
-	PyGILState_STATE state = pyg_gil_state_ensure ();                                    
 	PyObject *py_ret = NULL;
 
-	if (!PyObject_HasAttrString (object->instance, method))
-	{
-		pyg_gil_state_release (state);
-		return;
-	}
+	g_return_val_if_fail (PyObject_HasAttrString (object->instance, method), NULL);
 
-	py_ret = PyObject_CallMethod (object->instance,
-				      method,
-				      "(N)",
-				      pygobject_new (G_OBJECT (window)));
+	if (window == NULL)
+	{
+		py_ret = PyObject_CallMethod (object->instance,
+					      method,
+					      NULL);
+	}
+	else
+	{
+		py_ret = PyObject_CallMethod (object->instance,
+					      method,
+					      "(N)",
+					      pygobject_new (G_OBJECT (window)));
+	}
+	
 	if (!py_ret)
 		PyErr_Print ();
 
-	Py_XDECREF (py_ret);
-	pyg_gil_state_release (state);
+	return py_ret;
+}
+
+static gboolean
+check_py_object_is_gtk_widget (PyObject *py_obj)
+{
+	static PyTypeObject *_PyGtkWidget_Type = NULL;
+
+	if (_PyGtkWidget_Type == NULL)
+	{
+		PyObject *module;
+
+	    	if ((module = PyImport_ImportModule ("gtk")))
+	    	{
+			PyObject *moddict = PyModule_GetDict (module);
+			_PyGtkWidget_Type = (PyTypeObject *) PyDict_GetItemString (moddict, "Widget");
+	    	}
+
+		if (_PyGtkWidget_Type == NULL)
+		{
+			PyErr_SetString(PyExc_TypeError, "could not find python gtk widget type");
+			PyErr_Print();
+
+			return FALSE;
+		}
+	}
+
+	return PyObject_TypeCheck (py_obj, _PyGtkWidget_Type) ? TRUE : FALSE;
 }
 
 static void
 impl_update_ui (GeditPlugin *plugin,
 		GeditWindow *window)
 {
-	call_python_method ((GeditPythonObject *) plugin, window, "update_ui");
+	PyGILState_STATE state = pyg_gil_state_ensure ();
+	GeditPythonObject *object = (GeditPythonObject *)plugin;
+	
+	if (PyObject_HasAttrString (object->instance, "update_ui"))
+	{		
+		PyObject *py_ret = call_python_method (object, window, "update_ui");
+		
+		if (py_ret)
+		{
+			Py_XDECREF (py_ret);
+		}
+	}
+	else
+		GEDIT_PLUGIN_CLASS (parent_class)->update_ui (plugin, window);
+
+	pyg_gil_state_release (state);
 }
 
 static void
 impl_deactivate (GeditPlugin *plugin,
 		 GeditWindow *window)
 {
-	call_python_method ((GeditPythonObject *) plugin, window, "deactivate");
+	PyGILState_STATE state = pyg_gil_state_ensure ();
+	GeditPythonObject *object = (GeditPythonObject *)plugin;
+	
+	if (PyObject_HasAttrString (object->instance, "deactivate"))
+	{		
+		PyObject *py_ret = call_python_method (object, window, "deactivate");
+		
+		if (py_ret)
+		{
+			Py_XDECREF (py_ret);
+		}
+	}
+	else
+		GEDIT_PLUGIN_CLASS (parent_class)->deactivate (plugin, window);
+
+	pyg_gil_state_release (state);
 }
 
 static void
 impl_activate (GeditPlugin *plugin,
 	       GeditWindow *window)
 {
-	call_python_method ((GeditPythonObject *) plugin, window, "activate");
+	PyGILState_STATE state = pyg_gil_state_ensure ();
+	GeditPythonObject *object = (GeditPythonObject *)plugin;
+	
+	if (PyObject_HasAttrString (object->instance, "activate"))
+	{
+		PyObject *py_ret = call_python_method (object, window, "activate");
+
+		if (py_ret)
+		{
+			Py_XDECREF (py_ret);
+		}
+	}
+	else
+		GEDIT_PLUGIN_CLASS (parent_class)->activate (plugin, window);
+	
+	pyg_gil_state_release (state);
 }
 
+static GtkWidget *
+impl_create_configure_dialog (GeditPlugin *plugin)
+{
+	PyGILState_STATE state = pyg_gil_state_ensure ();
+	GeditPythonObject *object = (GeditPythonObject *)plugin;
+	GtkWidget *ret = NULL;
+	
+	if (PyObject_HasAttrString (object->instance, "create_configure_dialog"))
+	{
+		PyObject *py_ret = call_python_method (object, NULL, "create_configure_dialog");
+	
+		if (py_ret)
+		{
+			if (check_py_object_is_gtk_widget (py_ret))
+			{
+				ret = GTK_WIDGET (pygobject_get (py_ret));
+				g_object_ref (ret);
+			}
+			else
+			{
+				PyErr_SetString(PyExc_TypeError, "return value for create_configure_dialog is not a GtkWidget");
+				PyErr_Print();
+			}
+			
+			Py_DECREF (py_ret);
+		}
+	}
+	else
+		ret = GEDIT_PLUGIN_CLASS (parent_class)->create_configure_dialog (plugin);
+ 
+	pyg_gil_state_release (state);
+	return ret;
+}
+
+static gboolean
+impl_is_configurable (GeditPlugin *plugin)
+{
+	PyGILState_STATE state = pyg_gil_state_ensure ();
+	GeditPythonObject *object = (GeditPythonObject *) plugin;
+	PyObject *dict = object->instance->ob_type->tp_dict;	
+	gboolean result;
+	
+	if (dict == NULL)
+		result = FALSE;
+	else if (!PyDict_Check(dict))
+		result = FALSE;
+	else 
+		result = PyDict_GetItemString(dict, "create_configure_dialog") != NULL;
+
+	pyg_gil_state_release (state);
+	
+	return result;
+}
+						
 static void 
 gedit_python_object_init (GeditPythonObject *object)
 {
@@ -116,6 +246,8 @@ gedit_python_object_class_init (GeditPythonObjectClass *klass,
 	plugin_class->activate = impl_activate;
 	plugin_class->deactivate = impl_deactivate;
 	plugin_class->update_ui = impl_update_ui;
+	plugin_class->create_configure_dialog = impl_create_configure_dialog;
+	plugin_class->is_configurable = impl_is_configurable;
 }
 
 GType
