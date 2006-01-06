@@ -302,3 +302,46 @@ gedit_python_module_new (const gchar *path,
 
 	return result;
 }
+
+
+/* --- these are not module methods, they are here out of convenience --- */
+
+static gint idle_garbage_collect_id = 0;
+
+static gboolean
+run_gc (gpointer data)
+{
+	while (PyGC_Collect ())
+		;	
+
+	idle_garbage_collect_id = 0;
+	return FALSE;
+}
+
+void
+gedit_python_garbage_collect (void)
+{
+	if (Py_IsInitialized() && idle_garbage_collect_id == 0)
+	{
+		idle_garbage_collect_id = g_idle_add (run_gc, NULL);
+	}
+}
+
+void
+gedit_python_shutdown (void)
+{
+	if (Py_IsInitialized ())
+	{
+		if (idle_garbage_collect_id != 0)
+		{
+			g_source_remove (idle_garbage_collect_id);
+			idle_garbage_collect_id = 0;
+		}
+
+		while (PyGC_Collect ())
+			;	
+
+		Py_Finalize ();
+	}
+}
+

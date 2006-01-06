@@ -39,6 +39,8 @@ typedef struct _GeditPluginInfo GeditPluginInfo;
 gboolean	 gedit_plugins_engine_init 		(void);
 void		 gedit_plugins_engine_shutdown 		(void);
 
+void		 gedit_plugins_engine_garbage_collect	(void);
+
 const GList	*gedit_plugins_engine_get_plugins_list 	(void);
 
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginInfo *info);

@@ -1,5 +1,14 @@
 2006-01-06  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-plugins-engine.[ch]
+	* gedit/gedit-python-module.[ch]
+	* gedit/gedit-window.c:
+
+	Run the python Garbage Collector when closing a window or a tab
+	in order to force python to release references to our objects.
+
+2006-01-06  Paolo Borelli  <pborelli@katamail.com>
+
 	* gedit/gedit-plugin.[ch]:
 	* gedit/gedit-python-plugin.c:
 

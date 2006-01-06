@@ -342,6 +342,14 @@ gedit_plugins_engine_init (void)
 }
 
 void
+gedit_plugins_engine_garbage_collect (void)
+{
+#ifdef ENABLE_PYTHON
+	gedit_python_garbage_collect ();
+#endif
+}
+
+void
 gedit_plugins_engine_shutdown (void)
 {
 	GList *pl;
@@ -385,6 +393,10 @@ gedit_plugins_engine_shutdown (void)
 
 	g_object_unref (gedit_plugins_engine_gconf_client);
 	gedit_plugins_engine_gconf_client = NULL;
+
+#ifdef ENABLE_PYTHON
+	gedit_python_shutdown ();
+#endif
 }
 
 const GList *

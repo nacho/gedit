@@ -165,6 +165,8 @@ gedit_window_destroy (GtkObject *object)
 		g_object_unref (window->priv->recent_view_uim);
 		window->priv->recent_view_uim = NULL;
 	}
+	
+	gedit_plugins_engine_garbage_collect();
 
 	GTK_OBJECT_CLASS (gedit_window_parent_class)->destroy (object);
 }
@@ -234,11 +236,20 @@ gedit_window_key_press_event (GtkWidget   *widget,
 }
 
 static void
+gedit_window_tab_removed (GeditWindow         *window,
+			      GeditTab *tab) 
+{
+	gedit_plugins_engine_garbage_collect();
+}
+
+static void
 gedit_window_class_init (GeditWindowClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkObjectClass *gobject_class = GTK_OBJECT_CLASS (klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+	klass->tab_removed = gedit_window_tab_removed;
 
 	object_class->finalize = gedit_window_finalize;
 	object_class->get_property = gedit_window_get_property;
