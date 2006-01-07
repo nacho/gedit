@@ -165,9 +165,9 @@ G_DEFINE_TYPE(GeditDocument, gedit_document, GTK_TYPE_SOURCE_BUFFER)
 GQuark
 gedit_document_error_quark (void)
 {
-	static GQuark quark;
+	static GQuark quark = NULL;
 
-	if (!quark)
+	if (G_UNLIKELY (quark == NULL))
 		quark = g_quark_from_static_string ("gedit_io_load_error");
 
 	return quark;
@@ -335,7 +335,6 @@ gedit_document_set_property (GObject      *object,
 			break;
 	}
 }
-
 
 static void
 emit_cursor_moved (GeditDocument *doc)
@@ -1910,10 +1909,10 @@ _gedit_document_search_region (GeditDocument     *doc,
 		search_region (doc, &start_search, &end_search);
 		
 		/* remove the just highlighted region */
-		gtk_text_region_substract (doc->priv->to_search_region,
-					   start, 
-					   end);
-					   
+		gtk_text_region_subtract (doc->priv->to_search_region,
+					  start, 
+					  end);
+
 		gtk_text_region_clear_zero_length_subregions (
 			doc->priv->to_search_region);
 	}

@@ -279,9 +279,9 @@ gtk_text_region_add (GtkTextRegion     *region,
 }
 
 void 
-gtk_text_region_substract (GtkTextRegion     *region,
-			   const GtkTextIter *_start,
-			   const GtkTextIter *_end)
+gtk_text_region_subtract (GtkTextRegion     *region,
+			  const GtkTextIter *_start,
+			  const GtkTextIter *_end)
 {
 	GList *start_node, *end_node, *node;
 	GtkTextIter sr_start_iter, sr_end_iter;
@@ -576,11 +576,11 @@ gtk_text_region_get_iterator (GtkTextRegion         *region,
 }
 
 /* Returns TRUE if the iteration has more elements. 
- * In other words, returns TRUE if gtk_text_regione_iterator_has_next would 
+ * In other words, returns TRUE if gtk_text_region_iterator_has_next would 
  * return a subregion rather than FALSE.
  */
 gboolean 
-gtk_text_regione_iterator_has_next (GtkTextRegionIterator *iter)
+gtk_text_region_iterator_has_next (GtkTextRegionIterator *iter)
 {
 	GtkTextRegionIteratorReal *real;
 	
@@ -594,18 +594,18 @@ gtk_text_regione_iterator_has_next (GtkTextRegionIterator *iter)
 
 /* Returns FALSE if iterator has no more elements otherwise returns TRUE and set start/end with the next subregion */
 gboolean       
-gtk_text_regione_iterator_next (GtkTextRegionIterator *iter,
-				GtkTextIter           *start,
-				GtkTextIter           *end)
+gtk_text_region_iterator_next (GtkTextRegionIterator *iter,
+			       GtkTextIter           *start,
+			       GtkTextIter           *end)
 {
 	GtkTextRegionIteratorReal *real;
 	Subregion *sr;
-	
+
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	real = (GtkTextRegionIteratorReal *)iter;
 	g_return_val_if_fail (check_iterator (real), FALSE);
-	
+
 	if (real->subregions == NULL)
 		return FALSE;
 

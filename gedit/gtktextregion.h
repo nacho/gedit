@@ -55,7 +55,7 @@ void           gtk_text_region_add                          (GtkTextRegion     *
 							     const GtkTextIter *_start,
 							     const GtkTextIter *_end);
 
-void           gtk_text_region_substract                    (GtkTextRegion     *region,
+void           gtk_text_region_subtract                     (GtkTextRegion     *region,
 							     const GtkTextIter *_start,
 							     const GtkTextIter *_end);
 
@@ -79,10 +79,10 @@ gboolean       gtk_text_region_get_iterator                 (GtkTextRegion      
  * In other words, returns TRUE if gtk_text_regione_iterator_has_next would 
  * return a subregion rather than FALSE.
  */
-gboolean       gtk_text_regione_iterator_has_next           (GtkTextRegionIterator *iter);
+gboolean       gtk_text_region_iterator_has_next           (GtkTextRegionIterator *iter);
 
 /* Returns FALSE if iterator has no more elements otherwise returns TRUE and set start/end with the next subregion */
-gboolean       gtk_text_regione_iterator_next	            (GtkTextRegionIterator *iter,
+gboolean       gtk_text_region_iterator_next	            (GtkTextRegionIterator *iter,
 							     GtkTextIter           *start,
 							     GtkTextIter            *end);
 
