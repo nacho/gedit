@@ -356,6 +356,16 @@ gedit_plugins_engine_shutdown (void)
 
 	gedit_debug (DEBUG_PLUGINS);
 
+#ifdef ENABLE_PYTHON
+	/* Note: that this may cause finalization of objects (typically
+	 * the GeditWindow) by running the garbage collector. Since some
+	 * of the plugin may have installed callbacks upon object
+	 * finalization (typically they need to free the WindowData)
+	 * it must run before we get rid of the plugins.
+	 */
+	gedit_python_shutdown ();
+#endif
+
 	g_return_if_fail (gedit_plugins_engine_gconf_client != NULL);
 
 	for (pl = gedit_plugins_list; pl; pl = pl->next)
@@ -393,10 +403,6 @@ gedit_plugins_engine_shutdown (void)
 
 	g_object_unref (gedit_plugins_engine_gconf_client);
 	gedit_plugins_engine_gconf_client = NULL;
-
-#ifdef ENABLE_PYTHON
-	gedit_python_shutdown ();
-#endif
 }
 
 const GList *
@@ -827,5 +833,4 @@ gedit_plugins_engine_get_plugin_copyright (GeditPluginInfo *info)
 	
 	return info->copyright;
 }
-
 
