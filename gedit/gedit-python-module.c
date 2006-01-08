@@ -24,6 +24,8 @@
 #include <config.h>
 #endif
 
+#include <signal.h>
+
 #include <gmodule.h>
 
 #include <pygobject.h>
@@ -64,15 +66,44 @@ gedit_python_module_init_python ()
 {
 	PyObject *pygtk, *mdict, *require, *path;
 	PyObject *sys_path, *gedit, *gtk, *pygtk_version, *pygtk_required_version;
+	struct sigaction old_sigint;
+	gint res;
 	char *argv[] = { "gedit", NULL };
 
 	if (Py_IsInitialized ())
 	{
-		g_warning ("Python Should only be initted once, since it's in class_init");
+		g_warning ("Python Should only be initialized once, since it's in class_init");
 		g_return_if_reached ();
 	}
+	
+	/* Hack to make python not overwrite SIGINT: this is needed to avoid
+	 * the crash reported on bug #326191 */
+	
+	/* Save old handler */
+	res = sigaction (SIGINT, NULL, &old_sigint);  
+	if (res != 0)
+	{
+		g_warning ("Error initializing Python interpreter: cannot get "
+		           "handler to SIGINT signal (%s)",
+		           strerror (errno));
 
+		return;
+	}
+	
+	/* Python initialization */
 	Py_Initialize ();
+	
+	/* Restore old handler */
+	res = sigaction (SIGINT, &old_sigint, NULL);
+	if (res != 0)
+	{
+		g_warning ("Error initializing Python interpreter: cannot restore "
+		           "handler to SIGINT signal (%s)",
+		           strerror (errno));
+    
+		return;
+	}
+	
 	PySys_SetArgv (1, argv);
 
 	/* pygtk.require("2.0") */
