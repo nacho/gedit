@@ -697,7 +697,8 @@ gedit_panel_add_item (GeditPanel  *panel,
 	GeditPanelItem *data;
 	GtkWidget *tab_label;
 	GtkWidget *menu_label;
-
+	gint w, h;
+	
 	g_return_if_fail (GEDIT_IS_PANEL (panel));
 	g_return_if_fail (GTK_IS_WIDGET (item));
 	g_return_if_fail (name != NULL);
@@ -718,6 +719,9 @@ gedit_panel_add_item (GeditPanel  *panel,
 		data->icon = image;
 	}
 
+	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
+	gtk_widget_set_size_request (data->icon, w, h);
+	
 	data->toolbar = NULL;
 
 	g_object_set_data (G_OBJECT (item),

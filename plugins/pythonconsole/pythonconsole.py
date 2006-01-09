@@ -11,7 +11,7 @@ class ConsolePlugin(gedit.Plugin):
 		
 		bottom = window.get_bottom_panel()
 		image = gtk.Image()
-		image.set_from_icon_name("gnome-mime-text-x-python", gtk.ICON_SIZE_BUTTON)
+		image.set_from_icon_name("gnome-mime-text-x-python", gtk.ICON_SIZE_MENU)
 		bottom.add_item(cons, "Python Console", image)
 			
 		# Store data in the window object
