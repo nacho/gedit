@@ -50,8 +50,7 @@
 #include "gedit-document-loader.h"
 #include "gedit-document-saver.h"
 #include "gedit-marshal.h"
-
-#include "gtktextregion.h"
+#include "gedittextregion.h"
 
 #include <gtksourceview/gtksourceiter.h>
 
@@ -131,8 +130,8 @@ struct _GeditDocumentPrivate
 	GeditDocumentSaver *saver;
 
 	/* Search highlighting support variables */	
-	GtkTextRegion *to_search_region;
-	GtkTextTag    *found_tag;
+	GeditTextRegion *to_search_region;
+	GtkTextTag      *found_tag;
 };
 
 enum {
@@ -272,7 +271,7 @@ gedit_document_finalize (GObject *object)
 	if (doc->priv->to_search_region != NULL)
 	{
 		/* we can't delete marks if we're finalizing the buffer */
-		gtk_text_region_destroy (doc->priv->to_search_region, FALSE);
+		gedit_text_region_destroy (doc->priv->to_search_region, FALSE);
 	}
 
 	G_OBJECT_CLASS (gedit_document_parent_class)->finalize (object);
@@ -1848,9 +1847,9 @@ to_search_region_range (GeditDocument *doc,
 	g_print ("+ [%u (%u), %u (%u)]\n", gtk_text_iter_get_line (start), gtk_text_iter_get_offset (start),
 					   gtk_text_iter_get_line (end), gtk_text_iter_get_offset (end));
 	*/
-	
+
 	/* Add the region to the refresh region */
-	gtk_text_region_add (doc->priv->to_search_region, start, end);
+	gedit_text_region_add (doc->priv->to_search_region, start, end);
 
 	/* Notify views of the updated highlight region */
 	gtk_text_iter_backward_lines (start, doc->priv->num_of_lines_search_text);
@@ -1864,7 +1863,7 @@ _gedit_document_search_region (GeditDocument     *doc,
 			       const GtkTextIter *start,
 			       const GtkTextIter *end)
 {
-	GtkTextRegion *region;
+	GeditTextRegion *region;
 
 	gedit_debug (DEBUG_DOCUMENT);
 		
@@ -1881,40 +1880,36 @@ _gedit_document_search_region (GeditDocument     *doc,
 	*/
 		
 	/* get the subregions not yet highlighted */
-	region = gtk_text_region_intersect (doc->priv->to_search_region, 
-					    start,
-					    end);
-					    
+	region = gedit_text_region_intersect (doc->priv->to_search_region, 
+					      start,
+					      end);
 	if (region) 
 	{
 		gint i;
 		GtkTextIter start_search;
 		GtkTextIter end_search;
-		
-		i = gtk_text_region_subregions (region);
-		gtk_text_region_nth_subregion (region, 
-					       0,
-					       &start_search,
-					       NULL);
 
-		gtk_text_region_nth_subregion (region, 
-					       i - 1,
-					       NULL,
-					       &end_search);
+		i = gedit_text_region_subregions (region);
+		gedit_text_region_nth_subregion (region, 
+						 0,
+						 &start_search,
+						 NULL);
 
-		gtk_text_region_destroy (region, TRUE);
-		
+		gedit_text_region_nth_subregion (region, 
+						 i - 1,
+						 NULL,
+						 &end_search);
+
+		gedit_text_region_destroy (region, TRUE);
+
 		gtk_text_iter_order (&start_search, &end_search);
-		
-		search_region (doc, &start_search, &end_search);
-		
-		/* remove the just highlighted region */
-		gtk_text_region_subtract (doc->priv->to_search_region,
-					  start, 
-					  end);
 
-		gtk_text_region_clear_zero_length_subregions (
-			doc->priv->to_search_region);
+		search_region (doc, &start_search, &end_search);
+
+		/* remove the just highlighted region */
+		gedit_text_region_subtract (doc->priv->to_search_region,
+					    start, 
+					    end);
 	}
 }
 
@@ -1989,13 +1984,13 @@ gedit_document_set_enable_search_highlighting (GeditDocument *doc,
 				    		    &end);
 		}
 		
-		gtk_text_region_destroy (doc->priv->to_search_region,
-					 TRUE);
+		gedit_text_region_destroy (doc->priv->to_search_region,
+					   TRUE);
 		doc->priv->to_search_region = NULL;
 	}
 	else
 	{
-		doc->priv->to_search_region = gtk_text_region_new (GTK_TEXT_BUFFER (doc));
+		doc->priv->to_search_region = gedit_text_region_new (GTK_TEXT_BUFFER (doc));
 		if (gedit_document_get_can_search_again (doc))
 		{
 			/* If search_text is not empty, highligth all its occurrences */
