@@ -167,7 +167,7 @@ parseItem (xmlDocPtr doc, xmlNodePtr cur)
 
 	item = g_new0 (Item, 1);
 
-	item->atime = atoi (atime);
+	item->atime = g_ascii_strtoull ((char *)atime, NULL, 0);
 	
 	item->values = g_hash_table_new_full (g_str_hash, 
 					      g_str_equal, 
@@ -411,8 +411,7 @@ save_item (const gchar *key, const gpointer *data, xmlNodePtr parent)
 
 	gedit_debug_message (DEBUG_METADATA, "uri: %s", key);
 
-	/* FIXME: is the cast right? - Paolo */
-	atime = g_strdup_printf ("%d", (int)item->atime);
+	atime = g_strdup_printf ("%ld", item->atime);
 	xmlSetProp (xml_node, "atime", atime);	
 
 	gedit_debug_message (DEBUG_METADATA, "atime: %s", atime);
