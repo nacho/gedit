@@ -1,17 +1,17 @@
 # translation of gl.po to Galego
 # translation of gedit.HEAD.po to Galego
 # Galician translation of gedit.
-# Copyright (C) 1999-2001, 2005 Free Software Foundation, Inc.
+# Copyright (C) 1999-2001, 2005, 2006 Free Software Foundation, Inc.
 # Ruben Lopez Gomez <ryu@mundivia.es>, 1999.
 # Manuel A. FernÃ¡ndez Montecelo <manuel@sindominio.net>, 2001.
-# Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005.
+# Ignacio Casal Quinteiro <nacho.resa@gmail.com>, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-18 15:31+0100\n"
-"PO-Revision-Date: 2005-12-18 15:32+0100\n"
+"POT-Creation-Date: 2006-01-09 22:53+0100\n"
+"PO-Revision-Date: 2006-01-09 22:56+0100\n"
 "Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
 "Language-Team: Galego\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Editar ficheiros de texto"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:428
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:409
 msgid "Text Editor"
 msgstr "Editor de texto"
 
@@ -105,14 +105,18 @@ msgid "Editor Font"
 msgstr "Fonte do editor"
 
 #: ../data/gedit.schemas.in.h:17
+msgid "Enable Search Highlighting"
+msgstr "Habilitar resaltado de busca"
+
+#: ../data/gedit.schemas.in.h:18
 msgid "Enable Syntax Highlighting"
 msgstr "Habilitar resaltado de sintase"
 
-#: ../data/gedit.schemas.in.h:18
+#: ../data/gedit.schemas.in.h:19
 msgid "Encodings shown in menu"
 msgstr "Codificacións mostradas no menú"
 
-#: ../data/gedit.schemas.in.h:19
+#: ../data/gedit.schemas.in.h:20
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -121,7 +125,7 @@ msgstr ""
 "Isto só terá efecto se a opción \"Crear copias de resgardo\" atópase "
 "activada."
 
-#: ../data/gedit.schemas.in.h:20
+#: ../data/gedit.schemas.in.h:21
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -129,7 +133,7 @@ msgstr ""
 "Cor de primerio plano para o texto seleccionado no área de edición. Isto só "
 "terá efecto se a opción \"Usar cores predeterminadas\" atópase desactivada."
 
-#: ../data/gedit.schemas.in.h:21
+#: ../data/gedit.schemas.in.h:22
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -138,19 +142,19 @@ msgstr ""
 "só terá efecto se a opción \"Usar cores predeterminadas\" atópase "
 "desactivada."
 
-#: ../data/gedit.schemas.in.h:22
+#: ../data/gedit.schemas.in.h:23
 msgid "Header Font for Printing"
 msgstr "Fonte da cabeceira para a impresión"
 
-#: ../data/gedit.schemas.in.h:23
+#: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
 msgstr "Resaltar a liña actual"
 
-#: ../data/gedit.schemas.in.h:24
+#: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
 msgstr "Resaltar o corchete correspondente"
 
-#: ../data/gedit.schemas.in.h:25
+#: ../data/gedit.schemas.in.h:26
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -160,19 +164,19 @@ msgstr ""
 "imprima o documento. Doutro modo gedit imprimirá os números de liña cada "
 "certa cantidade de liñas."
 
-#: ../data/gedit.schemas.in.h:26
+#: ../data/gedit.schemas.in.h:27
 msgid "Insert spaces"
 msgstr "Inserir espacios"
 
-#: ../data/gedit.schemas.in.h:27
+#: ../data/gedit.schemas.in.h:28
 msgid "Line Number Font for Printing"
 msgstr "Fonte dos números de liña para a impresión"
 
-#: ../data/gedit.schemas.in.h:28
+#: ../data/gedit.schemas.in.h:29
 msgid "Line Wrapping Mode"
 msgstr "Modo de axuste de liña"
 
-#: ../data/gedit.schemas.in.h:29
+#: ../data/gedit.schemas.in.h:30
 msgid ""
 "List of VFS schemes gedit supports in write mode. The 'file' scheme is "
 "writable by default."
@@ -180,7 +184,7 @@ msgstr ""
 "Lista de esquemas VFS que soporta gedit en modo escritura. O esquema 'file' "
 "é escribible por defecto."
 
-#: ../data/gedit.schemas.in.h:30
+#: ../data/gedit.schemas.in.h:31
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
@@ -189,7 +193,7 @@ msgstr ""
 "activos. Vexa o ficheiro .gedit-plugin para obter a \"Ubicación\" dun "
 "complemento dado."
 
-#: ../data/gedit.schemas.in.h:31
+#: ../data/gedit.schemas.in.h:32
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -197,15 +201,15 @@ msgstr ""
 "Lista de codificacións mostradas no menú de codificación de caracteres no "
 "selector para gardar/abrir ficheiro. Só se usan as codificacións recoñecidas."
 
-#: ../data/gedit.schemas.in.h:32
+#: ../data/gedit.schemas.in.h:33
 msgid "Max Number of Undo Actions"
 msgstr "Número máximo de accións de desfacer"
 
-#: ../data/gedit.schemas.in.h:33
+#: ../data/gedit.schemas.in.h:34
 msgid "Maximum Recent Files"
 msgstr "Máximo de ficheiros recentes"
 
-#: ../data/gedit.schemas.in.h:34
+#: ../data/gedit.schemas.in.h:35
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions."
@@ -213,7 +217,7 @@ msgstr ""
 "Cantidade máxima de accións que gedit poderá desfacer ou refacer. Usar \"-1"
 "\" para número de accións ilimitadas."
 
-#: ../data/gedit.schemas.in.h:35
+#: ../data/gedit.schemas.in.h:36
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions. Deprecated since 2.12.0"
@@ -223,24 +227,24 @@ msgstr ""
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:38
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:42
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:46
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:47
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -249,65 +253,69 @@ msgstr ""
 "ficheiros modificados. Isto só terá efecto se a opción \"Auto gardado\" "
 "atópase activa."
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:48
 msgid "Print Header"
 msgstr "Imprimir cabeceira"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:49
 msgid "Print Line Numbers"
 msgstr "Imprimir números de liña"
 
-#: ../data/gedit.schemas.in.h:49
+#: ../data/gedit.schemas.in.h:50
 msgid "Print Syntax Highlighting"
 msgstr "Imprimir o resaltado da sintase"
 
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:51
 msgid "Printing Line Wrapping Mode"
 msgstr "Impresión do modo de axuste de liña"
 
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:52
+msgid "Restore Previous Cursor Position"
+msgstr "Restaurar posición anterior do cursor"
+
+#: ../data/gedit.schemas.in.h:53
 msgid "Right Margin Position"
 msgstr "Posición da marxe dereita"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:56
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
 msgid "Selected Text Color"
 msgstr "Cor do texto seleccionado"
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:69
 msgid "Selection Color"
 msgstr "Cor da selección"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:70
 msgid "Side Pane is Visible"
 msgstr "O panel lateral é visible"
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -317,7 +325,7 @@ msgstr ""
 "a codificación dun ficheiro. \"CURRENT\" é a codificación da localización "
 "actual. Só se utilizan as codificacións recoñecidas."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -332,7 +340,7 @@ msgstr ""
 "por iso asegúrese de que aparecen exactamente do mesmo modo en que son "
 "mencionados aquí."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -347,13 +355,13 @@ msgstr ""
 "capitalización, por iso asegúrese de que aparecen exactamente do mesmo modo "
 "en que son mencionados aquí."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:74
 msgid "Specifies the font to use for a document's body when printing documents."
 msgstr ""
 "Especifica a fonte a utilizar para o corpo do documento cando se imprimen "
 "ficheiros."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -362,7 +370,7 @@ msgstr ""
 "documentos. Este é un nome de fonte gnome-print e será reemprazado por "
 "print_font_body_pango."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -371,7 +379,7 @@ msgstr ""
 "Isto só terá efecto se a opción \"Imprimir números de liña\" é distinta de "
 "cero."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -382,7 +390,7 @@ msgstr ""
 "cero. Este é un nome de fonte gnome-print e será remprazado por "
 "print_font_numbers_pango."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -391,7 +399,7 @@ msgstr ""
 "un documento. Isto só terá efecto cando a opción \"Imprimir cabeceira\" "
 "atópese activada."
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -402,7 +410,7 @@ msgstr ""
 "atópese activada. Este é un nome de fonte gnome-print e será remprazado por "
 "print_font_header_pango."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
@@ -410,7 +418,7 @@ msgstr ""
 "Especifica a máxima cantidade de ficheiros recentemente abertos que será "
 "mostrado no submenú \"Ficheiros recentes\"."
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
@@ -418,15 +426,15 @@ msgstr ""
 "Especifica a cantidade de espacios que deberían mostrarse en vez de "
 "caracteres tabuladores."
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid "Specifies the position of the right margin."
 msgstr "Especifica a posición da marxe dereita."
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid "Status Bar is Visible"
 msgstr "A barra de estado é visible"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -443,35 +451,35 @@ msgstr ""
 "lados das iconas. Note que os valores son sensibles á capitalización, por "
 "iso asegúrese de que éstos aparecen exactamente como se mencionan aquí."
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Tab Size"
 msgstr "Tamaño do tabulador"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid "Text Color"
 msgstr "Cor do texto"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid "Toolbar Buttons Style"
 msgstr "Estilo dos botóns da barra de ferramentas"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid "Toolbar is Visible"
 msgstr "A barra de ferramentas é visible"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "Límite de accións a desfacer (OBSOLETO)"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Use Default Colors"
 msgstr "Usar cores predeterminadas"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Use Default Font"
 msgstr "Usar fonte predeterminada"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -481,7 +489,7 @@ msgstr ""
 "dun intervalo de tempo. Pode configurar o intervalo de tempo coa opción "
 "\"Intervalo de auto gardar\"."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -490,63 +498,73 @@ msgstr ""
 "configurar o complemento dos ficheiros de resgardo coa opción \"Extensión "
 "das copias de resgardo\"."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Indica se gedit debe mostrar números de liña no área de edición."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Indica se gedit debe mostrar a marxe dereita no área de edición."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should enable auto indentation."
 msgstr "Indica se gedit debe activar a sangría automática."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Indica se gedit debe habilitar o resaltado de sintase."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
+msgid "Whether gedit should highlight all the occurrences of the searched text."
+msgstr "Indica se gedit debe resaltar todas as ocorrencias do texto procurado."
+
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Indica se gedit debe resaltar o corchete de peche."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should highlight the current line."
 msgstr "Indica se gedit debe resaltar a liña actual."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should include a document header when printing documents."
 msgstr ""
 "Indica se gedit debe incluir unha cabeceira do documento ao imprimir "
 "documentos."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:102
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Indica se gedit debe inserir espacios en vez de tabuladores."
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:103
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Indica se gedit debe imprimir o resaltado de sintase ao imprimir documentos."
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:104
+msgid ""
+"Whether gedit should restore the previous cursor position when a file is "
+"loaded."
+msgstr "Indica se gedit debe restaurar a posición do cursor anterior cando se carga un ficheiro."
+
+#: ../data/gedit.schemas.in.h:105
 msgid "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "Indica se debe ser visible o panel da parte inferior das fiestras de edición."
 
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:106
 msgid "Whether the side pane at the left of the editing window should be visible."
 msgstr "Indica se debe ser visible o panel da parte inferior das fiestras de edición."
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:107
 msgid "Whether the status bar at the bottom of editing windows should be visible."
 msgstr ""
 "Indica se debe ser visible a barra de estado da parte inferior das fiestras "
 "de edición."
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:108
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Indica se debe ser visible a barra de ferramentas nas fiestras de edición."
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:109
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -558,7 +576,7 @@ msgstr ""
 "serán aquelas que se especifiquen nas opcións \"Cor de fondo\", \"Cor de "
 "texto\", \"Cor do texto seleccionado\" e \"Cor da selección\"."
 
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:110
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -569,20 +587,20 @@ msgstr ""
 "mencionada na opción \"Fonte do editor\" utilizarase en vez da fonte do "
 "sistema."
 
-#: ../data/gedit.schemas.in.h:107
+#: ../data/gedit.schemas.in.h:111
 msgid "Writable VFS schemes"
 msgstr "Esquemas VFS escribibles"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:110
+#: ../data/gedit.schemas.in.h:114
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:114
+#: ../data/gedit.schemas.in.h:118
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,ACTUAL,ISO-8859-15]"
 
@@ -1039,11 +1057,11 @@ msgid "_minutes"
 msgstr "_minutos"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:944
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:985
 msgid "Replace"
 msgstr "Remprazar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:942
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:983
 msgid "Find"
 msgstr "Buscar"
 
@@ -1100,12 +1118,12 @@ msgstr "Crear unha fiestra nova no nivel superior dunha instancia existente de g
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crea un documento novo nunha instancia existente de gedit"
 
-#: ../gedit/gedit.c:145
+#: ../gedit/gedit.c:124
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: nome de ficheiro URI malformado.\n"
 
-#: ../gedit/gedit.c:157
+#: ../gedit/gedit.c:136
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: codificación inválida.\n"
@@ -1254,16 +1272,20 @@ msgstr "gedit"
 
 #: ../gedit/gedit-commands-search.c:165
 #, c-format
-msgid "Found and replaced %d occurrence."
-msgid_plural "Found and replaced %d occurrences."
-msgstr[0] "Atopada e remprazada %d ocorrencia."
-msgstr[1] "Atopada e remprazada %d ocorrencias."
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Atopada e remprazada %d ocorrencia"
+msgstr[1] "Atopadas e remprazadas %d ocorrencias"
 
-#: ../gedit/gedit-commands-search.c:180
+#: ../gedit/gedit-commands-search.c:174
+msgid "Found and replaced one occurrence"
+msgstr "Atopada e remprazada unha ocorrencia"
+
+#: ../gedit/gedit-commands-search.c:187
 msgid "Phrase not found"
 msgstr "Frase non atopada"
 
-#: ../gedit/gedit-document.c:701 ../gedit/gedit-document.c:781
+#: ../gedit/gedit-document.c:781 ../gedit/gedit-document.c:861
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Documento %d non gardado"
@@ -1274,7 +1296,7 @@ msgid "Could not obtain backup filename"
 msgstr "Non se puido crear un ficheiro de resgardo"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1428 ../gedit/gedit-window.c:1433
+#: ../gedit/gedit-window.c:1472 ../gedit/gedit-window.c:1477
 msgid "Read Only"
 msgstr "Só lectura"
 
@@ -1795,13 +1817,13 @@ msgstr "Non se puido gardar o ficheiro %s."
 msgid "Close document"
 msgstr "Pechar documento"
 
-#: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
+#: ../gedit/gedit-panel.c:345 ../gedit/gedit-panel.c:560
 #: ../gedit/recent-files/egg-recent-view-gtk.c:444
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "Baleiro"
 
-#: ../gedit/gedit-panel.c:459
+#: ../gedit/gedit-panel.c:501 ../gedit/gedit-panel.c:581
 msgid "Hide panel"
 msgstr "Agochar panel"
 
@@ -1825,7 +1847,7 @@ msgstr "C_onfigurar complemento"
 msgid "Cannot initialize preferences manager."
 msgstr "Non se puido inicializar o xestor de preferencias."
 
-#: ../gedit/gedit-prefs-manager.c:1374
+#: ../gedit/gedit-prefs-manager.c:1388
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Esperábase '%s' e obtúvose '%s' para a clave %s"
@@ -2059,7 +2081,7 @@ msgstr "Crear un novo documento"
 msgid "_Open..."
 msgstr "_Abrir..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1045
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1086
 msgid "Open a file"
 msgstr "Abrir un ficheiro"
 
@@ -2276,7 +2298,7 @@ msgstr "Panel _inferior"
 msgid "Show or hide the bottom panel in the current window"
 msgstr "Amosar ou agochar o panel inferior da fiestra actual"
 
-#: ../gedit/gedit-utils.c:794
+#: ../gedit/gedit-utils.c:883
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n"
@@ -2288,7 +2310,7 @@ msgstr ""
 "\n"
 "Por favor, comprobe a súa instalación."
 
-#: ../gedit/gedit-utils.c:795
+#: ../gedit/gedit-utils.c:884
 #, c-format
 msgid ""
 "<span size=\"large\" weight=\"bold\">Unable to find the required widgets "
@@ -2302,62 +2324,62 @@ msgstr ""
 "Por favor, comprobe a súa instalación."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1253
+#: ../gedit/gedit-view.c:1314
 msgid "_Wrap Around"
 msgstr "_Voltar ao principio"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1263
+#: ../gedit/gedit-view.c:1324
 msgid "Match _Entire Word Only"
 msgstr "Coincidir só coa palabra com_pleta"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1273
+#: ../gedit/gedit-view.c:1334
 msgid "_Match Case"
 msgstr "Co_incidir con capitalización"
 
-#: ../gedit/gedit-view.c:1361
+#: ../gedit/gedit-view.c:1422
 msgid "String you want to search for"
 msgstr "A cadea que quere procurar"
 
-#: ../gedit/gedit-view.c:1370
+#: ../gedit/gedit-view.c:1431
 msgid "Line you want to move the cursor to"
 msgstr "Liña á que quere mover o cursor"
 
-#: ../gedit/gedit-window.c:640
+#: ../gedit/gedit-window.c:676
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Usar modo de resaltado %s"
 
-#: ../gedit/gedit-window.c:692
+#: ../gedit/gedit-window.c:729
 msgid "Normal"
 msgstr "Normal"
 
-#: ../gedit/gedit-window.c:693
+#: ../gedit/gedit-window.c:730
 msgid "Use Normal highlight mode"
 msgstr "Usar modo de resaltado normal"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:815 ../gedit/gedit-window.c:840
+#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "Abrir '%s'"
 
-#: ../gedit/gedit-window.c:940
+#: ../gedit/gedit-window.c:981
 msgid "Save"
 msgstr "Gardar"
 
-#: ../gedit/gedit-window.c:1049
+#: ../gedit/gedit-window.c:1090
 msgid "Open a recently used file"
 msgstr "Abrir un ficheiro usado recentemente"
 
-#: ../gedit/gedit-window.c:1056
+#: ../gedit/gedit-window.c:1097
 msgid "Open"
 msgstr "Abrir"
 
-#: ../gedit/gedit-window.c:1134 ../gedit/gedit-window.c:1702
+#: ../gedit/gedit-window.c:1177 ../gedit/gedit-window.c:1748
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
@@ -2486,6 +2508,14 @@ msgstr "Sangrar liñas"
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:2
 msgid "Indents or un-indents selected lines."
 msgstr "Sangra ou quita a sangría ás liñas seleccionadas."
+
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
+msgid "Emacs, Kate and Vim-style modelines support for gedit."
+msgstr "Soporte para os modos de liña Emacs, Kate e Vim para gedit."
+
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:2
+msgid "Modelines"
+msgstr "Modos de liñas"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
 msgid "Opens an interactive python console in the bottom panel."
@@ -2920,11 +2950,11 @@ msgstr "Comprobar _ortografía automaticamente"
 msgid "Automatically spell-check the current document"
 msgstr "Verificar automaticamente a ortografía do documento actual"
 
-#: ../plugins/spell/gedit-spell-plugin.c:732
+#: ../plugins/spell/gedit-spell-plugin.c:733
 msgid "The document is empty."
 msgstr "O documento está baleiro."
 
-#: ../plugins/spell/gedit-spell-plugin.c:764
+#: ../plugins/spell/gedit-spell-plugin.c:765
 msgid "No misspelled words"
 msgstr "Sen palabras mal escritas"
 
