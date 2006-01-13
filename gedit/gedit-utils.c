@@ -879,10 +879,6 @@ gedit_utils_is_valid_uri (const gchar *uri)
 }
 
 
-
-#define GEDIT_MISSING_FILE    N_("<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n\nPlease, check your installation.")
-#define GEDIT_MISSING_WIDGETS N_("<span size=\"large\" weight=\"bold\">Unable to find the required widgets inside file <i>%s</i>..</span>\n\nPlease, check your installation.")
-
 /**
  * gedit_utils_get_glade_widgets:
  * @filename: the path to the glade file
@@ -910,6 +906,8 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 	va_list args;
 	const gchar *name;
 	gchar *msg;
+	gchar *filename_markup;
+	gchar *msg_plain;
 	gboolean ret = TRUE;
 
 	g_return_val_if_fail (filename != NULL, FALSE);
@@ -921,11 +919,18 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 	gui = glade_xml_new (filename, root_node, NULL);
 	if (!gui)
 	{
-		msg = g_strdup_printf (GEDIT_MISSING_FILE, filename);
+		filename_markup = g_strdup_printf ("<i>%s</i>", filename);
+		msg_plain = g_strdup_printf (_("Unable to find file %s."),
+				filename_markup);
+		msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
+				msg_plain, "</span>\n\n",
+				_("Please check your installation."), NULL);
 		label = gtk_label_new (msg);
 
 		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
+		g_free (filename_markup);
+		g_free (msg_plain);
 		g_free (msg);
 
 		*error_widget = label;
@@ -942,11 +947,19 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 		*wid = glade_xml_get_widget (gui, name);
 		if (*wid == NULL)
 		{
-			msg = g_strdup_printf (GEDIT_MISSING_WIDGETS, filename);
+			filename_markup = g_strdup_printf ("<i>%s</i>", filename);
+			msg_plain = g_strdup_printf (
+					_("Unable to find the required widgets inside file %s."),
+					filename_markup);
+			msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
+					msg_plain, "</span>\n\n",
+					_("Please check your installation."), NULL);
 			label = gtk_label_new (msg);
 
 			gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 
+			g_free (filename_markup);
+			g_free (msg_plain);
 			g_free (msg);
 
 			*error_widget = label;

@@ -120,6 +120,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
 	gchar *scheme_string;
+	gchar *scheme_markup;
        	gchar *uri_for_display;
        	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
@@ -159,9 +160,12 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 
 		if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 		{
-			/* Translators: %s is a URI scheme (like for example http, ftp, etc.) */
-			message_details = g_strdup_printf (_("gedit cannot handle <i>%s:</i> locations."),
-							   scheme_string);
+  			scheme_markup = g_strdup_printf ("<i>%s:</i>", scheme_string);
+
+			/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
+			message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
+							   scheme_markup);
+			g_free (scheme_markup);
 		}
 		else
 		{
@@ -226,15 +230,17 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 				if (hn != NULL)
 				{
 					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
+					gchar *host_markup = g_strdup_printf ("<i>%s</i>", host_name);
+					g_free (host_name);
 
 					/* Translators: %s is a host name */
 					message_details = g_strdup_printf (
-						_("Host <i>%s</i> could not be found. "
+						_("Host %s could not be found. "
 	        		  	  	  "Please, check that your proxy settings "
 				  	  	  "are correct and try again."),
-					  	host_name);
+					  	host_markup);
 
-					g_free (host_name);
+					g_free (host_markup);
 				}
 				else
 				{
@@ -342,6 +348,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
 	gchar *scheme_string;
+	gchar *scheme_markup;
        	gchar *uri_for_display;
        	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
@@ -379,8 +386,12 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 
 		if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 		{
-			message_details = g_strdup_printf (_("gedit cannot handle <i>%s:</i> locations."),
-							   scheme_string);
+  			scheme_markup = g_strdup_printf ("<i>%s:</i>", scheme_string);
+
+			/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
+			message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
+							   scheme_markup);
+			g_free (scheme_markup);
 		}
 		else
 		{
@@ -436,15 +447,17 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 				if (hn != NULL)
 				{
 					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
+					gchar *host_markup = g_strdup_printf ("<i>%s</i>", host_name);
+					g_free (host_name);
 
 					/* Translators: %s is a host name */
 					message_details = g_strdup_printf (
-						_("Host <i>%s</i> could not be found. "
+						_("Host %s could not be found. "
 	        		  	  	"Please, check that your proxy settings "
 				  	  	"are correct and try again."),
-					  	host_name);
+					  	host_markup);
 
-					g_free (host_name);
+					g_free (host_markup);
 				}
 				else
 				{
@@ -553,10 +566,14 @@ create_option_menu (GtkWidget *message_area, GtkWidget *vbox)
 	GtkWidget *hbox;
 	GtkWidget *label;
 	GtkWidget *menu;
+	gchar *label_markup;
 	
 	hbox = gtk_hbox_new (FALSE, 6);
 
-	label = gtk_label_new_with_mnemonic (_("<small>Ch_aracter Coding:</small>"));
+	label_markup = g_strdup_printf ("<small>%s</small>",
+					_("Ch_aracter Coding:"));
+	label = gtk_label_new_with_mnemonic (label_markup);
+	g_free (label_markup);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	menu = gedit_encodings_option_menu_new (TRUE);
 	g_object_set_data (G_OBJECT (message_area), 
@@ -1073,6 +1090,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	gchar *message_details = NULL;
 	gchar *full_formatted_uri;
 	gchar *scheme_string;
+	gchar *scheme_markup;
        	gchar *uri_for_display;
        	gchar *temp_uri_for_display;
 	GtkWidget *message_area;
@@ -1101,11 +1119,14 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 
 			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
-				/* Translators: %s is a URI scheme (like for example http, ftp, etc.) */
-				message_details = g_strdup_printf (_("gedit cannot handle <i>%s:</i> locations in write mode. "
+				scheme_markup = g_strdup_printf ("<i>%s:</i>", scheme_string);
+ 
+				/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
+				message_details = g_strdup_printf (_("gedit cannot handle %s locations in write mode. "
 								     "Please, check that you typed the "
 								     "location correctly and try again."),
-								   scheme_string);
+								   scheme_markup);
+				g_free (scheme_markup);
 			}
 			else
 			{
@@ -1173,15 +1194,17 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 					if (hn != NULL)
 					{
 						gchar *host_name = gedit_utils_make_valid_utf8 (hn);
+						gchar *host_markup = g_strdup_printf ("<i>%s</i>", host_name);
+						g_free (host_name);		
 
 						/* Translators: %s is a host name */
 						message_details = g_strdup_printf (
-							_("Host <i>%s</i> could not be found. "
+							_("Host %s could not be found. "
 		        		  	  	  "Please, check that your proxy settings "
 					  	  	  "are correct and try again."),
-						  	host_name);
+						  	host_markup);
 
-						g_free (host_name);
+						g_free (host_markup);
 					}
 					else
 					{
