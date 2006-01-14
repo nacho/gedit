@@ -303,6 +303,9 @@ plugins/Makefile
 plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
 plugins/sample/Makefile
+plugins/snippets/Makefile
+plugins/snippets/snippets/Makefile
+plugins/snippets/data/Makefile
 plugins/sort/Makefile
 plugins/spell/Makefile
 plugins/taglist/Makefile
