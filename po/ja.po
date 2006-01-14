@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-04 19:10+0900\n"
-"PO-Revision-Date: 2006-01-04 19:10+0900\n"
+"POT-Creation-Date: 2006-01-14 23:14+0900\n"
+"PO-Revision-Date: 2006-01-14 23:14+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -105,14 +105,18 @@ msgid "Editor Font"
 msgstr "エディタのフォント"
 
 #: ../data/gedit.schemas.in.h:17
+msgid "Enable Search Highlighting"
+msgstr "検索時の強調表示を有効にする"
+
+#: ../data/gedit.schemas.in.h:18
 msgid "Enable Syntax Highlighting"
 msgstr "強調表示を有効にする"
 
-#: ../data/gedit.schemas.in.h:18
+#: ../data/gedit.schemas.in.h:19
 msgid "Encodings shown in menu"
 msgstr "メニューに表示するエンコーディング"
 
-#: ../data/gedit.schemas.in.h:19
+#: ../data/gedit.schemas.in.h:20
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -120,7 +124,7 @@ msgstr ""
 "バックアップ・ファイル名に使われる拡張子を指定します。これは \"バックアップコ"
 "ピーの作成\" オプションが有効になっている場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:20
+#: ../data/gedit.schemas.in.h:21
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -128,7 +132,7 @@ msgstr ""
 "編集領域にあるテキストを選択した際に使用する色を指定します。これは \"デフォル"
 "ト色を使う\" オプションが無効の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:21
+#: ../data/gedit.schemas.in.h:22
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -136,19 +140,19 @@ msgstr ""
 "編集領域にあるテキストの選択を解除した際に使用する色を指定します。これは \"デ"
 "フォルト色を使う\" オプションが無効の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:22
+#: ../data/gedit.schemas.in.h:23
 msgid "Header Font for Printing"
 msgstr "印刷時のヘッダに使用するフォント"
 
-#: ../data/gedit.schemas.in.h:23
+#: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
 msgstr "現在の行の強調表示"
 
-#: ../data/gedit.schemas.in.h:24
+#: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
 msgstr "対応するカッコの強調表示"
 
-#: ../data/gedit.schemas.in.h:25
+#: ../data/gedit.schemas.in.h:26
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -157,19 +161,19 @@ msgstr ""
 "この値が 0 の場合はドキュメントを印刷する時に行番号を挿入しません。それ以外の"
 "場合は gedit は行番号を印刷します。"
 
-#: ../data/gedit.schemas.in.h:26
+#: ../data/gedit.schemas.in.h:27
 msgid "Insert spaces"
 msgstr "空白の挿入"
 
-#: ../data/gedit.schemas.in.h:27
+#: ../data/gedit.schemas.in.h:28
 msgid "Line Number Font for Printing"
 msgstr "印刷時の行番号に使用するフォント"
 
-#: ../data/gedit.schemas.in.h:28
+#: ../data/gedit.schemas.in.h:29
 msgid "Line Wrapping Mode"
 msgstr "行の折り返しモード"
 
-#: ../data/gedit.schemas.in.h:29
+#: ../data/gedit.schemas.in.h:30
 msgid ""
 "List of VFS schemes gedit supports in write mode. The 'file' scheme is "
 "writable by default."
@@ -177,7 +181,7 @@ msgstr ""
 "gedit が書き込みモードでサポートする VFS の並びです。'file' スキーマはデフォ"
 "ルトで書き込み可です。"
 
-#: ../data/gedit.schemas.in.h:30
+#: ../data/gedit.schemas.in.h:31
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
@@ -185,7 +189,7 @@ msgstr ""
 "利用可能なプラグインの一覧です。プラグインの \"場所\" が含まれます。指定した"
 "プラグインの \"場所\" を得るにはファイル .gedit-plugin を参照して下さい。"
 
-#: ../data/gedit.schemas.in.h:31
+#: ../data/gedit.schemas.in.h:32
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -193,15 +197,15 @@ msgstr ""
 "開く/保存のファイル選択ダイアログの文字コード・メニューの中に表示するエンコー"
 "ディングのリストです。認識したエンコーディングのみ使用します。"
 
-#: ../data/gedit.schemas.in.h:32
+#: ../data/gedit.schemas.in.h:33
 msgid "Max Number of Undo Actions"
 msgstr "\"元に戻す\" の回数 (最大値)"
 
-#: ../data/gedit.schemas.in.h:33
+#: ../data/gedit.schemas.in.h:34
 msgid "Maximum Recent Files"
 msgstr "\"最近使ったファイル\" に表示する数 (最大値)"
 
-#: ../data/gedit.schemas.in.h:34
+#: ../data/gedit.schemas.in.h:35
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions."
@@ -209,7 +213,7 @@ msgstr ""
 "gEdit で \"元に戻す\" または \"やり直す\" ことができる動作の回数を最大値で指"
 "定します (無制限にする場合は \"-1\")。"
 
-#: ../data/gedit.schemas.in.h:35
+#: ../data/gedit.schemas.in.h:36
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions. Deprecated since 2.12.0"
@@ -219,24 +223,24 @@ msgstr ""
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:38
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:42
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:46
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:47
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -244,69 +248,69 @@ msgstr ""
 "変更したファイルを gedit が自動的に保存するまでの時間を指定します。これは "
 "\"自動保存\" オプションが有効の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:48
 msgid "Print Header"
 msgstr "ヘッダの印刷"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:49
 msgid "Print Line Numbers"
 msgstr "行番号の印刷"
 
-#: ../data/gedit.schemas.in.h:49
+#: ../data/gedit.schemas.in.h:50
 msgid "Print Syntax Highlighting"
 msgstr "強調表示の印刷"
 
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:51
 msgid "Printing Line Wrapping Mode"
 msgstr "印刷時の行の折り返しモード"
 
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:52
 msgid "Restore Previous Cursor Position"
 msgstr "以前あったカーソル位置に戻す"
 
-#: ../data/gedit.schemas.in.h:52
+#: ../data/gedit.schemas.in.h:53
 msgid "Right Margin Position"
 msgstr "右マージンの位置"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:55
+#: ../data/gedit.schemas.in.h:56
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:58
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:62
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:67
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:68
 msgid "Selected Text Color"
 msgstr "選択したテキストの色"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:69
 msgid "Selection Color"
 msgstr "選択範囲の色"
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:70
 msgid "Side Pane is Visible"
 msgstr "サイド・ペインの表示可否"
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -316,7 +320,7 @@ msgstr ""
 "のリストです。\"CURRENT\" は現在使用しているロケールになります。認識したエン"
 "コーディングのみ使用します。"
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -330,7 +334,7 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに印刷されるか確認して下さ"
 "い。"
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -344,12 +348,12 @@ msgstr ""
 "ことに注意して下さい。そしてここで記述したとおりに表示されるか確認して下さ"
 "い。"
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "ドキュメントを印刷する際の本文に使用するフォントを指定します。"
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -357,7 +361,7 @@ msgstr ""
 "ドキュメントを印刷する際の本文に使用するフォントを指定します。これは gnome-"
 "print 用のフォント名で print_font_body_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -365,7 +369,7 @@ msgstr ""
 "印刷する際の行番号に使用するフォントを指定します。これは \"行番号の印刷\" オ"
 "プションが 0 以外の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -375,7 +379,7 @@ msgstr ""
 "プションが 0 以外の場合のみ効果があります。これは gnome-print 用のフォント名"
 "で print_font_numbers_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -383,7 +387,7 @@ msgstr ""
 "ドキュメントを印刷する際のページ・ヘッダに使用するフォントを指定します。これ"
 "は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。"
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -393,28 +397,28 @@ msgstr ""
 "は \"ヘッダの印刷\" オプションが有効の場合のみ効果があります。これは gnome-"
 "print 用のフォント名で print_font_header_pango に置き換わります。"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
 "\"最近使ったファイル\" のサブメニューに表示するエントリの最大数を指定します。"
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:81
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "タブ文字の代わりに表示されるスペースの数を指定します。"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:82
 msgid "Specifies the position of the right margin."
 msgstr "右マージンの位置を指定します。"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:83
 msgid "Status Bar is Visible"
 msgstr "ステータスバーの表示"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -431,35 +435,35 @@ msgstr ""
 "することに注意して下さい。そしてここで記述したとおりに表示されるか確認して下"
 "さい。"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:85
 msgid "Tab Size"
 msgstr "タブのサイズ"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:86
 msgid "Text Color"
 msgstr "テキストの色"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:87
 msgid "Toolbar Buttons Style"
 msgstr "ツールバーボタンのスタイル"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:88
 msgid "Toolbar is Visible"
 msgstr "ツールバーの表示可否"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:89
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "\"元に戻す\" 動作の限度 (破棄)"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:90
 msgid "Use Default Colors"
 msgstr "デフォルト色を使う"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:91
 msgid "Use Default Font"
 msgstr "デフォルトのフォントを使う"
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:92
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -468,7 +472,7 @@ msgstr ""
 "指定時間後に変更されたファイルを gedit が自動的に保存するかどうかを指定しま"
 "す。\"自動保存の間隔\" オプションで時間を設定できます。"
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:93
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -477,69 +481,74 @@ msgstr ""
 "\"バックアップ・コピーの拡張子\" オプションでバックアップ・ファイルの拡張子を"
 "設定することができます。"
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "編集領域に行番号を表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "編集領域に右マージンを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should enable auto indentation."
 msgstr "自動インデントを有効にするかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "強調表示を有効にするかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:98
+msgid ""
+"Whether gedit should highlight all the occurrences of the searched text."
+msgstr "検索する時に一致した文字列を全て強調表示するかどうかを指定します。"
+
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
 msgstr "対応するカッコを強調表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should highlight the current line."
 msgstr "カーソル行を強調表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "ドキュメントを印刷する際にヘッダを含めるかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:102
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "タブ文字の代わりに空白文字を使うかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:103
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "ドキュメントを印刷する際に強調表示も印刷するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:104
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
 msgstr ""
 "ファイルを読み込んだ時に記憶していたカーソル位置に戻すかどうか指定します。"
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:105
 msgid ""
 "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "編集ウインドウの下側にボトム・ペインを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:106
 msgid ""
 "Whether the side pane at the left of the editing window should be visible."
 msgstr "編集ウィンドウの左側にサイド・ペインを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:107
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "編集ウィンドウの下側にステータスバーを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:108
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "編集ウィンドウの中にツールバーを表示するかどうかを指定します。"
 
-#: ../data/gedit.schemas.in.h:107
+#: ../data/gedit.schemas.in.h:109
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -550,7 +559,7 @@ msgstr ""
 "無効の場合は、編集領域の色は \"背景色\"、\"テキストの色\"、\"選択したテキスト"
 "の色\"、\"選択範囲の色\" オプションで指定されたものになります。"
 
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:110
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -561,20 +570,20 @@ msgstr ""
 "トの代わりに \"エディタのフォント\" オプションで指定したフォントを使用しま"
 "す。"
 
-#: ../data/gedit.schemas.in.h:109
+#: ../data/gedit.schemas.in.h:111
 msgid "Writable VFS schemes"
 msgstr "書き込み可能な VFS スキーマ"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:112
+#: ../data/gedit.schemas.in.h:114
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:116
+#: ../data/gedit.schemas.in.h:118
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -601,13 +610,13 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "保存しないと、%ld秒前からの変更が完全に失われます。"
-msgstr[1] "保存しないと、%ld秒前からの変更が完全に失われます。"
+msgstr[0] "保存しないと、%ld秒前からの変更内容が完全に失われます。"
+msgstr[1] "保存しないと、%ld秒前からの変更内容が完全に失われます。"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
-msgstr "保存しないと、1分前からの変更が完全に失われます。"
+msgstr "保存しないと、1分前からの変更内容が完全に失われます。"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:401
 #, c-format
@@ -617,8 +626,8 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] "保存しないと、1分 %ld秒前からの変更が完全に失われます。"
-msgstr[1] "保存しないと、1分 %ld秒前からの変更が完全に失われます。"
+msgstr[0] "保存しないと、1分 %ld秒前からの変更内容が完全に失われます。"
+msgstr[1] "保存しないと、1分 %ld秒前からの変更内容が完全に失われます。"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
 #, c-format
@@ -627,8 +636,8 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "保存しないと、%ld分前からの変更が完全に失われます。"
-msgstr[1] "保存しないと、%ld分前からの変更が完全に失われます。"
+msgstr[0] "保存しないと、%ld分前からの変更内容が完全に失われます。"
+msgstr[1] "保存しないと、%ld分前からの変更内容が完全に失われます。"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:447
@@ -636,8 +645,8 @@ msgstr[1] "保存しないと、%ld分前からの変更が完全に失われま
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "保存しないと、1時間前からの変更が完全に失われます。"
-msgstr[1] "保存しないと、%d時間前からの変更が完全に失われます。"
+msgstr[0] "保存しないと、1時間前からの変更内容が完全に失われます。"
+msgstr[1] "保存しないと、%d時間前からの変更内容が完全に失われます。"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:432
 #, c-format
@@ -647,13 +656,13 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
-msgstr[0] "保存しないと、1時間 %d分前からの変更が完全に失われます。"
-msgstr[1] "保存しないと、1時間 %d分前からの変更が完全に失われます。"
+msgstr[0] "保存しないと、1時間 %d分前からの変更内容が完全に失われます。"
+msgstr[1] "保存しないと、1時間 %d分前からの変更内容が完全に失われます。"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:491
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
-msgstr "閉じる前にドキュメント \"%s\" の変更を保存しますか？"
+msgstr "閉じる前にドキュメント \"%s\" で変更した内容を保存しますか？"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:663
 #, c-format
@@ -661,8 +670,8 @@ msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
 "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] ""
-"変更を保存していないドキュメントが %d 個あります。閉じる前にそれらを保存しま"
-"すか？"
+"まだ保存していないドキュメントが %d 個あります。閉じる前にそれらを保存します"
+"か？"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
 msgid "S_elect the documents you want to save:"
@@ -671,7 +680,7 @@ msgstr "保存するドキュメントを選択して下さい(_E):"
 #. Secondary label
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:697
 msgid "If you don't save, all your changes will be permanently lost."
-msgstr "保存しないと、全ての変更が完全に失われます。"
+msgstr "保存しないと、変更した内容が完全に失われます。"
 
 #: ../gedit/dialogs/gedit-encodings-dialog.c:315
 msgid "Character Codings"
@@ -1016,11 +1025,11 @@ msgid "_minutes"
 msgstr "分ごと(_M)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:974
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:985
 msgid "Replace"
 msgstr "置換"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:972
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:983
 msgid "Find"
 msgstr "検索"
 
@@ -1106,11 +1115,11 @@ msgid "The entered location is not valid."
 msgstr "入力した場所が間違っています。"
 
 #: ../gedit/gedit-commands-file.c:398
-#: ../gedit/gedit-io-error-message-area.c:149
-#: ../gedit/gedit-io-error-message-area.c:185
-#: ../gedit/gedit-io-error-message-area.c:201
+#: ../gedit/gedit-io-error-message-area.c:150
+#: ../gedit/gedit-io-error-message-area.c:189
+#: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
-msgstr "入力した場所が正しいかチェックしてやり直して下さい。"
+msgstr "入力した場所が正しいか確認して、もう一度実行してみて下さい。"
 
 #: ../gedit/gedit-commands-file.c:543
 #, c-format
@@ -1138,7 +1147,7 @@ msgstr "ドキュメント \"%s\" を戻しています…"
 #: ../gedit/gedit-commands-file.c:1028
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
-msgstr "保存していない変更をドキュメント '%s' へ戻しますか？"
+msgstr "変更部分を保存しないで、元のドキュメント '%s' に戻しますか？"
 
 #: ../gedit/gedit-commands-file.c:1037
 #, c-format
@@ -1234,7 +1243,7 @@ msgstr "%d ヶ所で検索と置換を行いました。"
 msgid "Phrase not found"
 msgstr "語句が見つかりませんでした"
 
-#: ../gedit/gedit-document.c:701 ../gedit/gedit-document.c:781
+#: ../gedit/gedit-document.c:781 ../gedit/gedit-document.c:861
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "編集中のドキュメント %d"
@@ -1245,7 +1254,7 @@ msgid "Could not obtain backup filename"
 msgstr "バックアップ・ファイルを取得できませんでした"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1461 ../gedit/gedit-window.c:1466
+#: ../gedit/gedit-window.c:1472 ../gedit/gedit-window.c:1477
 msgid "Read Only"
 msgstr "書き込み禁止"
 
@@ -1400,65 +1409,65 @@ msgstr "全てのテキスト・ファイル"
 msgid "There was an error displaying help."
 msgstr "ヘルプを表示する際にエラーが発生しました。"
 
-#: ../gedit/gedit-io-error-message-area.c:147
+#: ../gedit/gedit-io-error-message-area.c:148
 #, c-format
 msgid "Could not find the file %s."
-msgstr "ファイル %s がありませんでした。"
+msgstr "ファイル %s が見つかりませんでした。"
 
-#: ../gedit/gedit-io-error-message-area.c:154
-#: ../gedit/gedit-io-error-message-area.c:374
+#: ../gedit/gedit-io-error-message-area.c:155
+#: ../gedit/gedit-io-error-message-area.c:381
 msgid "The file contains corrupted data."
 msgstr "おかしななデータが含まれています。"
 
-#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
-#: ../gedit/gedit-io-error-message-area.c:163
-#: ../gedit/gedit-io-error-message-area.c:382
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:166
+#: ../gedit/gedit-io-error-message-area.c:392
 #, c-format
-msgid "gedit cannot handle <i>%s:</i> locations."
-msgstr "場所 <i>%s:</i> を処理できません。"
+msgid "gedit cannot handle %s locations."
+msgstr "場所 %s を処理できません。"
 
-#: ../gedit/gedit-io-error-message-area.c:168
-#: ../gedit/gedit-io-error-message-area.c:387
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:398
 msgid "gedit cannot handle this location."
 msgstr "この場所を処理できません。"
 
-#: ../gedit/gedit-io-error-message-area.c:175
-#: ../gedit/gedit-io-error-message-area.c:394
+#: ../gedit/gedit-io-error-message-area.c:179
+#: ../gedit/gedit-io-error-message-area.c:405
 msgid "The file contains data in an invalid format."
 msgstr "書式が無効なデータが含まれています。"
 
-#: ../gedit/gedit-io-error-message-area.c:179
-#: ../gedit/gedit-io-error-message-area.c:398
+#: ../gedit/gedit-io-error-message-area.c:183
+#: ../gedit/gedit-io-error-message-area.c:409
 msgid "The file is too big."
 msgstr "ファイル・サイズが大きすぎます。"
 
-#: ../gedit/gedit-io-error-message-area.c:183
+#: ../gedit/gedit-io-error-message-area.c:187
 #, c-format
 msgid "%s is not a valid location."
 msgstr "%s は適切な場所ではありません"
 
-#: ../gedit/gedit-io-error-message-area.c:190
-#: ../gedit/gedit-io-error-message-area.c:402
+#: ../gedit/gedit-io-error-message-area.c:194
+#: ../gedit/gedit-io-error-message-area.c:413
 msgid "You do not have the permissions necessary to open the file."
 msgstr "そのファイルを開く権限がありません。"
 
-#: ../gedit/gedit-io-error-message-area.c:194
-#: ../gedit/gedit-io-error-message-area.c:406
-#: ../gedit/gedit-io-error-message-area.c:1142
+#: ../gedit/gedit-io-error-message-area.c:198
+#: ../gedit/gedit-io-error-message-area.c:417
+#: ../gedit/gedit-io-error-message-area.c:1163
 msgid ""
 "There are too many open files. Please, close some applications and try again."
 msgstr ""
 "開くファイルが多すぎます。いくつかファイルを閉じて、もう一度実行してみて下さ"
 "い。"
 
-#: ../gedit/gedit-io-error-message-area.c:199
-#: ../gedit/gedit-io-error-message-area.c:411
+#: ../gedit/gedit-io-error-message-area.c:203
+#: ../gedit/gedit-io-error-message-area.c:422
 #, c-format
 msgid "%s is a directory."
 msgstr "%s はフォルダです。"
 
-#: ../gedit/gedit-io-error-message-area.c:206
-#: ../gedit/gedit-io-error-message-area.c:416
+#: ../gedit/gedit-io-error-message-area.c:210
+#: ../gedit/gedit-io-error-message-area.c:427
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
@@ -1466,122 +1475,124 @@ msgstr ""
 "ファイルを開くのに十分なメモリがありません。動作中のアプリケーションを閉じ"
 "て、もう一度実行してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:232
-#: ../gedit/gedit-io-error-message-area.c:442
-#: ../gedit/gedit-io-error-message-area.c:1179
+#: ../gedit/gedit-io-error-message-area.c:238
+#: ../gedit/gedit-io-error-message-area.c:455
+#: ../gedit/gedit-io-error-message-area.c:1202
 #, c-format
 msgid ""
-"Host <i>%s</i> could not be found. Please, check that your proxy settings "
-"are correct and try again."
+"Host %s could not be found. Please, check that your proxy settings are "
+"correct and try again."
 msgstr ""
-"ホスト名 <i>%s</i> が見つかりませんでした。プロキシの設定が正しいかチェックし"
-"て、もう一度実行してみて下さい。"
+"ホスト %s が見つかりませんでした。プロキシの設定が正しいか確認して、もう一度"
+"実行してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:243
-#: ../gedit/gedit-io-error-message-area.c:254
-#: ../gedit/gedit-io-error-message-area.c:262
-#: ../gedit/gedit-io-error-message-area.c:453
-#: ../gedit/gedit-io-error-message-area.c:464
-#: ../gedit/gedit-io-error-message-area.c:1190
-#: ../gedit/gedit-io-error-message-area.c:1201
-#: ../gedit/gedit-io-error-message-area.c:1209
+#: ../gedit/gedit-io-error-message-area.c:249
+#: ../gedit/gedit-io-error-message-area.c:260
+#: ../gedit/gedit-io-error-message-area.c:268
+#: ../gedit/gedit-io-error-message-area.c:466
+#: ../gedit/gedit-io-error-message-area.c:477
+#: ../gedit/gedit-io-error-message-area.c:1213
+#: ../gedit/gedit-io-error-message-area.c:1224
+#: ../gedit/gedit-io-error-message-area.c:1232
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"ホスト名が間違っています。入力した場所が正しいかチェックしてやり直して下さ"
-"い。"
+"ホスト名が間違っています。入力した場所が正しいか確認して、もう一度実行してみ"
+"て下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:268
-#: ../gedit/gedit-io-error-message-area.c:472
-#: ../gedit/gedit-io-error-message-area.c:1215
+#: ../gedit/gedit-io-error-message-area.c:274
+#: ../gedit/gedit-io-error-message-area.c:485
+#: ../gedit/gedit-io-error-message-area.c:1238
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"ホスト名が空です。プロキシの設定が正しいかチェックしてやり直して下さい。"
+"ホスト名が空です。プロキシの設定が正しいか確認して、もう一度実行してみて下さ"
+"い。"
 
-#: ../gedit/gedit-io-error-message-area.c:274
-#: ../gedit/gedit-io-error-message-area.c:1221
+#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:1244
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"ログインに失敗しました。入力した場所が正しいかチェックしてやり直して下さい。"
+"ログインに失敗しました。入力した場所が正しいか確認して、もう一度実行してみて"
+"下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:286
 msgid "The file you are trying to open is not a regular file."
 msgstr "開こうとしているファイルは通常のファイルではありません。"
 
-#: ../gedit/gedit-io-error-message-area.c:319
-#: ../gedit/gedit-io-error-message-area.c:532
-#: ../gedit/gedit-io-error-message-area.c:1286
+#: ../gedit/gedit-io-error-message-area.c:325
+#: ../gedit/gedit-io-error-message-area.c:545
+#: ../gedit/gedit-io-error-message-area.c:1309
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "原因不明のエラー: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:325
-#: ../gedit/gedit-io-error-message-area.c:693
+#: ../gedit/gedit-io-error-message-area.c:331
+#: ../gedit/gedit-io-error-message-area.c:710
 #, c-format
 msgid "Could not open the file %s."
 msgstr "ファイル %s を開けませんでした。"
 
-#: ../gedit/gedit-io-error-message-area.c:369
+#: ../gedit/gedit-io-error-message-area.c:376
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr ""
 "指定したファイルが見つかりません。それは最近削除されたのかもしれません。"
 
-#: ../gedit/gedit-io-error-message-area.c:478
+#: ../gedit/gedit-io-error-message-area.c:491
 msgid "Attempt to log in failed."
 msgstr "ログインに失敗しました"
 
-#: ../gedit/gedit-io-error-message-area.c:482
+#: ../gedit/gedit-io-error-message-area.c:495
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s は通常のファイルではありません。"
 
-#: ../gedit/gedit-io-error-message-area.c:538
+#: ../gedit/gedit-io-error-message-area.c:551
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "ファイル \"%s\" を元に戻せませんでした"
 
-#: ../gedit/gedit-io-error-message-area.c:559
-msgid "<small>Ch_aracter Coding:</small>"
-msgstr "<small>エンコーディング(_A):</small>"
+#: ../gedit/gedit-io-error-message-area.c:574
+msgid "Ch_aracter Coding:"
+msgstr "エンコーディング(_A):"
 
-#: ../gedit/gedit-io-error-message-area.c:600
+#: ../gedit/gedit-io-error-message-area.c:617
 msgid "_Retry"
 msgstr "再試行(_R)"
 
-#: ../gedit/gedit-io-error-message-area.c:695
+#: ../gedit/gedit-io-error-message-area.c:712
 msgid "gedit has not been able to detect the character coding."
 msgstr "文字のエンコーディングを検出できませんでした。"
 
-#: ../gedit/gedit-io-error-message-area.c:697
-#: ../gedit/gedit-io-error-message-area.c:706
+#: ../gedit/gedit-io-error-message-area.c:714
+#: ../gedit/gedit-io-error-message-area.c:723
 msgid "Please check that you are not trying to open a binary file."
 msgstr "バイナリ・ファイルを開こうとしていないか確認して下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:698
+#: ../gedit/gedit-io-error-message-area.c:715
 msgid "Select a character coding from the menu and try again."
 msgstr "メニューからエンコーディングを選択して、もう一度実行して下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:703
+#: ../gedit/gedit-io-error-message-area.c:720
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "ファイル %s を %s のエンコーディングで開けませんでした。"
 
-#: ../gedit/gedit-io-error-message-area.c:707
-#: ../gedit/gedit-io-error-message-area.c:759
+#: ../gedit/gedit-io-error-message-area.c:724
+#: ../gedit/gedit-io-error-message-area.c:776
 msgid "Select a different character coding from the menu and try again."
 msgstr "メニューから別のエンコーディングを選択して、もう一度実行して下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:754
+#: ../gedit/gedit-io-error-message-area.c:771
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "ファイル %s を %s のエンコーディングで保存できませんでした。"
 
-#: ../gedit/gedit-io-error-message-area.c:757
+#: ../gedit/gedit-io-error-message-area.c:774
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
@@ -1589,21 +1600,21 @@ msgstr ""
 "そのドキュメントには、指定したエンコーディングで変換できない文字が一つ以上含"
 "まれています。"
 
-#: ../gedit/gedit-io-error-message-area.c:818
+#: ../gedit/gedit-io-error-message-area.c:835
 msgid "_Edit Anyway"
 msgstr "強制的に編集する(_E)"
 
-#: ../gedit/gedit-io-error-message-area.c:821
+#: ../gedit/gedit-io-error-message-area.c:838
 msgid "_Don't Edit"
 msgstr "編集しない(_D)"
 
 #. FIXME: try to rephrase in a better way
-#: ../gedit/gedit-io-error-message-area.c:837
+#: ../gedit/gedit-io-error-message-area.c:854
 #, c-format
 msgid "The file %s is already open."
 msgstr "既にファイル %s を開いています。"
 
-#: ../gedit/gedit-io-error-message-area.c:852
+#: ../gedit/gedit-io-error-message-area.c:869
 msgid ""
 "gedit opened this instance of the file in non-editable way. Do you want to "
 "edit it anyway?"
@@ -1611,42 +1622,42 @@ msgstr ""
 "このファイルのインスタンスを編集不可モードで開きました。強制的に編集します"
 "か？"
 
-#: ../gedit/gedit-io-error-message-area.c:910
-#: ../gedit/gedit-io-error-message-area.c:1005
+#: ../gedit/gedit-io-error-message-area.c:927
+#: ../gedit/gedit-io-error-message-area.c:1022
 msgid "_Save Anyway"
 msgstr "強制的に保存する(_S)"
 
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1009
+#: ../gedit/gedit-io-error-message-area.c:931
+#: ../gedit/gedit-io-error-message-area.c:1026
 msgid "_Don't Save"
 msgstr "保存しない(_D)"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:932
+#: ../gedit/gedit-io-error-message-area.c:949
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "ファイル %s は変更されています。"
 
-#: ../gedit/gedit-io-error-message-area.c:948
+#: ../gedit/gedit-io-error-message-area.c:965
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "このファイルを保存すると外部からの変更は全て失われます。強制的に保存します"
 "か？"
 
-#: ../gedit/gedit-io-error-message-area.c:1027
+#: ../gedit/gedit-io-error-message-area.c:1044
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "%s を保存する際にバックアップ・ファイルを作成できませんでした。"
 
-#: ../gedit/gedit-io-error-message-area.c:1030
+#: ../gedit/gedit-io-error-message-area.c:1047
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr ""
 "%s を保存する際に作業用のバックアップ・ファイルを作成できませんでした。"
 
-#: ../gedit/gedit-io-error-message-area.c:1047
+#: ../gedit/gedit-io-error-message-area.c:1064
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1657,25 +1668,25 @@ msgstr ""
 "が、保存中にエラーが発生すると古いファイルの内容を失う可能性があります。強制"
 "的に保存しますか？"
 
-#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1105
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:1125
 #, c-format
 msgid ""
-"gedit cannot handle <i>%s:</i> locations in write mode. Please, check that "
-"you typed the location correctly and try again."
+"gedit cannot handle %s locations in write mode. Please, check that you typed "
+"the location correctly and try again."
 msgstr ""
-"場所 <i>%s:</i> に書き込めません。入力した場所が正しいかチェックして、もう一"
-"度実行してみて下さい。"
+"場所 %s へ書き込めません。入力した場所が正しいか確認して、もう一度実行してみ"
+"て下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1112
+#: ../gedit/gedit-io-error-message-area.c:1133
 msgid ""
 "gedit cannot handle this location  in write mode. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
-"この場所に書き込めませんでした。入力した場所が正しいかチェックして、もう一度"
-"実行してみて下さい。"
+"この場所へ書き込めませんでした。入力した場所が正しいか確認して、もう一度実行"
+"してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1121
+#: ../gedit/gedit-io-error-message-area.c:1142
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1684,33 +1695,33 @@ msgstr ""
 "ファイルの保存先のディスクにはファイル・サイズの制限があります。小さいファイ"
 "ルを保存するか、この制限を解除してから保存して下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1128
+#: ../gedit/gedit-io-error-message-area.c:1149
 #, c-format
 msgid ""
 "%s is not a valid location. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"場所 %s が間違っています。入力した場所が正しいかチェックして、もう一度実行し"
-"てみて下さい。"
+"場所 %s が間違っています。入力した場所が正しいか確認して、もう一度実行してみ"
+"て下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1135
+#: ../gedit/gedit-io-error-message-area.c:1156
 msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
 msgstr ""
-"ファイルを保存するための権限がありません。入力した場所が正しいかチェックし"
-"て、もう一度実行してみて下さい。"
+"ファイルを保存するための権限がありません。入力した場所が正しいか確認して、も"
+"う一度実行してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1147
+#: ../gedit/gedit-io-error-message-area.c:1168
 #, c-format
 msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
 "try again."
 msgstr ""
-"%s はフォルダです。入力した場所が正しいかチェックして、もう一度実行してみて下"
-"さい。"
+"%s はフォルダです。入力した場所が正しいか確認して、もう一度実行してみて下さ"
+"い。"
 
-#: ../gedit/gedit-io-error-message-area.c:1153
+#: ../gedit/gedit-io-error-message-area.c:1174
 msgid ""
 "Not enough available memory to save the file. Please, close some running "
 "applications and try again."
@@ -1718,27 +1729,27 @@ msgstr ""
 "ファイルを保存するのに十分なメモリがありません。動作中のアプリケーションを閉"
 "じて、もう一度実行してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1227
+#: ../gedit/gedit-io-error-message-area.c:1250
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"ファイルを保存するための十分な空き容量がありません。空き容量を増やして、もう"
-"一度実行してみて下さい。"
+"ファイルを保存するための十分な空き容量がありません。空き容量を増やしてから、"
+"もう一度実行してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1233
+#: ../gedit/gedit-io-error-message-area.c:1256
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
 "読み込み専用のディスクにファイルを保存しようとしています。入力した場所が正し"
-"いかチェックして、もう一度実行してみて下さい。"
+"いか確認して、もう一度実行してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1239
+#: ../gedit/gedit-io-error-message-area.c:1262
 msgid "A file with the same name already exists. Please, use a different name."
 msgstr "既に同名のファイルが存在します。別の名前にして下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1244
+#: ../gedit/gedit-io-error-message-area.c:1267
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
@@ -1746,16 +1757,16 @@ msgstr ""
 "ファイルを保存しようとしているディスクには、ファイル名の長さに制限がありま"
 "す。もっと短いファイル名にして下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1249
+#: ../gedit/gedit-io-error-message-area.c:1272
 #, c-format
 msgid ""
 "%s is not a regular file. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"%s は通常のファイルではありません。入力した場所が正しいかチェックして、もう一"
-"度実行してみて下さい。"
+"%s は通常のファイルではありません。入力した場所が正しいか確認して、もう一度実"
+"行してみて下さい。"
 
-#: ../gedit/gedit-io-error-message-area.c:1292
+#: ../gedit/gedit-io-error-message-area.c:1315
 #, c-format
 msgid "Could not save the file %s."
 msgstr "ファイル %s を保存できませんでした。"
@@ -1794,7 +1805,7 @@ msgstr "プラグインの設定(_O)"
 msgid "Cannot initialize preferences manager."
 msgstr "設定マネージャを初期化できません。"
 
-#: ../gedit/gedit-prefs-manager.c:1383
+#: ../gedit/gedit-prefs-manager.c:1388
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "キー %3$s の '%1$s' を期待しましたが '%2$s' を得ました"
@@ -1916,77 +1927,77 @@ msgstr[1] "エラーが発生したタブが %d 個あります"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:495
-#, c-format
-msgid "Reverting <b>%s</b> from <b>%s</b>"
-msgstr "<b>%2$s</b> から <b>%1$s</b> に戻しています"
-
 #: ../gedit/gedit-tab.c:501
 #, c-format
-msgid "Reverting <b>%s</b>"
-msgstr "<b>%s</b> に戻しています"
+msgid "Reverting %s from %s"
+msgstr "%2$s から %1$s に戻しています"
+
+#: ../gedit/gedit-tab.c:508
+#, c-format
+msgid "Reverting %s"
+msgstr "%s に戻しています"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:515
+#: ../gedit/gedit-tab.c:524
 #, c-format
-msgid "Loading <b>%s</b> from <b>%s</b>"
-msgstr "<b>%2$s</b> から <b>%1$s</b> を読み込んでいます"
+msgid "Loading %s from %s"
+msgstr "%2$s から %1$s を読み込んでいます"
 
-#: ../gedit/gedit-tab.c:521
+#: ../gedit/gedit-tab.c:531
 #, c-format
-msgid "Loading <b>%s</b>"
-msgstr "<b>%s</b> を読み込んでいます"
+msgid "Loading %s"
+msgstr "%s を読み込んでいます"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:597
+#: ../gedit/gedit-tab.c:614
 #, c-format
-msgid "Saving <b>%s</b> to <b>%s</b>"
-msgstr "<b>%s</b> を <b>%s</b> に保存しています"
+msgid "Saving %s to %s"
+msgstr "%s を %s へ保存しています"
 
-#: ../gedit/gedit-tab.c:603
+#: ../gedit/gedit-tab.c:621
 #, c-format
-msgid "Saving <b>%s</b>"
-msgstr "<b>%s</b> を保存しています"
+msgid "Saving %s"
+msgstr "%s を保存しています"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1335
+#: ../gedit/gedit-tab.c:1354
 msgid "RO"
 msgstr "[書き込み禁止]"
 
-#: ../gedit/gedit-tab.c:1377
+#: ../gedit/gedit-tab.c:1399
 #, c-format
-msgid "Error opening file <i>%s</i>."
-msgstr "ファイル <i>%s</i> を読み込む際にエラーが発生しました。"
+msgid "Error opening file %s."
+msgstr "ファイル %s を読み込む際にエラーが発生しました。"
 
-#: ../gedit/gedit-tab.c:1382
+#: ../gedit/gedit-tab.c:1404
 #, c-format
-msgid "Error reverting file <i>%s</i>."
-msgstr "ファイル <i>%s</i> へ戻す際にエラーが発生しました。"
+msgid "Error reverting file %s."
+msgstr "ファイル %s に戻す際にエラーが発生しました。"
 
-#: ../gedit/gedit-tab.c:1387
+#: ../gedit/gedit-tab.c:1409
 #, c-format
-msgid "Error saving file <i>%s</i>."
-msgstr "ファイル <i>%s</i> を保存する際にエラーが発生しました。"
+msgid "Error saving file %s."
+msgstr "ファイル %s を保存する際にエラーが発生しました。"
 
-#: ../gedit/gedit-tab.c:1405
+#: ../gedit/gedit-tab.c:1427
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1412
+#: ../gedit/gedit-tab.c:1434
 msgid "Name:"
 msgstr "名前:"
 
-#: ../gedit/gedit-tab.c:1413
+#: ../gedit/gedit-tab.c:1435
 msgid "MIME Type:"
 msgstr "MIME 型:"
 
-#: ../gedit/gedit-tab.c:1414
+#: ../gedit/gedit-tab.c:1436
 msgid "Encoding:"
 msgstr "エンコーディング:"
 
-#: ../gedit/gedit-tab.c:1762
+#: ../gedit/gedit-tab.c:1785
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "ページ (%d / %d) の描画中..."
@@ -2028,7 +2039,7 @@ msgstr "新しいドキュメントを作成します"
 msgid "_Open..."
 msgstr "開く(_O)..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1075
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1086
 msgid "Open a file"
 msgstr "ファイルを開きます"
 
@@ -2084,7 +2095,7 @@ msgstr "このファイルに名前を付けて保存します"
 
 #: ../gedit/gedit-ui.h:84
 msgid "Revert to a saved version of the file"
-msgstr "保存したファイルのバージョンへ戻します"
+msgstr "保存してある元のファイルに戻します"
 
 #: ../gedit/gedit-ui.h:85
 msgid "Print Previe_w"
@@ -2245,91 +2256,80 @@ msgstr "ボトム・ペイン(_B)"
 msgid "Show or hide the bottom panel in the current window"
 msgstr "このウィンドウでボトム・ペインの表示/非表示を切り替えます"
 
-#: ../gedit/gedit-utils.c:883
+#: ../gedit/gedit-utils.c:923
 #, c-format
-msgid ""
-"<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n"
-"\n"
-"Please, check your installation."
-msgstr ""
-"<span size=\"large\" weight=\"bold\">ファイル <i>%s</i> が見つかりません。</"
-"span>\n"
-"\n"
-"インストールしたファイルを確認して下さい。"
+msgid "Unable to find file %s."
+msgstr "ファイル %s が見つかりません。"
 
-#: ../gedit/gedit-utils.c:884
+#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+msgid "Please check your installation."
+msgstr "gedit のインストールを確認して下さい。"
+
+#: ../gedit/gedit-utils.c:952
 #, c-format
-msgid ""
-"<span size=\"large\" weight=\"bold\">Unable to find the required widgets "
-"inside file <i>%s</i>..</span>\n"
-"\n"
-"Please, check your installation."
-msgstr ""
-"<span size=\"large\" weight=\"bold\">ファイル <i>%s</i> で必要なウィジットが"
-"見つかりません。</span>\n"
-"\n"
-"インストールしたファイルを確認して下さい。"
+msgid "Unable to find the required widgets inside file %s."
+msgstr "ファイル %s の中に指定したウィジットが見つかりませんでした。"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1253
+#: ../gedit/gedit-view.c:1314
 msgid "_Wrap Around"
 msgstr "折り返しも対象にする(_W)"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1263
+#: ../gedit/gedit-view.c:1324
 msgid "Match _Entire Word Only"
 msgstr "単語全体にマッチさせる(_E)"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1273
+#: ../gedit/gedit-view.c:1334
 msgid "_Match Case"
 msgstr "大/小文字を区別する(_M)"
 
-#: ../gedit/gedit-view.c:1361
+#: ../gedit/gedit-view.c:1422
 msgid "String you want to search for"
 msgstr "検索する文字列"
 
-#: ../gedit/gedit-view.c:1370
+#: ../gedit/gedit-view.c:1431
 msgid "Line you want to move the cursor to"
 msgstr "カーソルを移動する行を入力して下さい"
 
-#: ../gedit/gedit-window.c:665
+#: ../gedit/gedit-window.c:676
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "%s 用の強調表示モードにします"
 
-#: ../gedit/gedit-window.c:718
+#: ../gedit/gedit-window.c:729
 msgid "Normal"
 msgstr "通常"
 
-#: ../gedit/gedit-window.c:719
+#: ../gedit/gedit-window.c:730
 msgid "Use Normal highlight mode"
 msgstr "通常の強調表示モードにします"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:845 ../gedit/gedit-window.c:870
+#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "'%s' を開きます"
 
-#: ../gedit/gedit-window.c:970
+#: ../gedit/gedit-window.c:981
 msgid "Save"
 msgstr "保存"
 
-#: ../gedit/gedit-window.c:1079
+#: ../gedit/gedit-window.c:1090
 msgid "Open a recently used file"
 msgstr "最近使用したファイルを開きます"
 
-#: ../gedit/gedit-window.c:1086
+#: ../gedit/gedit-window.c:1097
 msgid "Open"
 msgstr "開く"
 
-#: ../gedit/gedit-window.c:1166 ../gedit/gedit-window.c:1737
+#: ../gedit/gedit-window.c:1177 ../gedit/gedit-window.c:1748
 #, c-format
 msgid "Activate %s"
-msgstr "%s をアクティブにします"
+msgstr "%s に切り替えます"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
@@ -2455,6 +2455,14 @@ msgstr "行のインデント"
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:2
 msgid "Indents or un-indents selected lines."
 msgstr "指定した行をインデントしたりインデントを解除します。"
+
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
+msgid "Emacs, Kate and Vim-style modelines support for gedit."
+msgstr "Emacs や Kate、Vim スタイルなモードラインの機能を gedit に提供します。"
+
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:2
+msgid "Modelines"
+msgstr "モードライン"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
 msgid "Opens an interactive python console in the bottom panel."
@@ -4396,27 +4404,27 @@ msgstr "self"
 
 #: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
-msgstr "日付/時間の挿入(_S)"
+msgstr "日付/時刻の挿入(_S)"
 
 #: ../plugins/time/gedit-time-plugin.c:185
 msgid "Insert current date and time at the cursor position"
-msgstr "カーソル位置に現在の日付と時間を挿入します"
+msgstr "カーソル位置に現在の日付と時刻を挿入します"
 
 #: ../plugins/time/gedit-time-plugin.c:628
 msgid "Available formats"
-msgstr "利用可能なフォーマット"
+msgstr "利用可能な書式"
 
 #: ../plugins/time/gedit-time-plugin.c:806
 msgid "Configure insert date/time plugin..."
-msgstr "日付/時間挿入プラグインの設定..."
+msgstr "日付/時刻挿入プラグインの設定..."
 
 #: ../plugins/time/time.gedit-plugin.desktop.in.h:1
 msgid "Insert Date/Time"
-msgstr "日付/時間の挿入"
+msgstr "日付/時刻の挿入"
 
 #: ../plugins/time/time.gedit-plugin.desktop.in.h:2
 msgid "Inserts current date and time at the cursor position."
-msgstr "カーソル位置に現在の日付と時間を挿入します。"
+msgstr "カーソル位置に現在の日付と時刻を挿入します。"
 
 #: ../plugins/time/time.glade2.h:3
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
@@ -4424,7 +4432,7 @@ msgstr "<span size=\"small\">01/11/2002 17:52:00</span>"
 
 #: ../plugins/time/time.glade2.h:4
 msgid "<span weight=\"bold\"> When inserting date/time...</span>"
-msgstr "<span weight=\"bold\">日付/時間を挿入した日時...</span>"
+msgstr "<span weight=\"bold\">日付/時刻の挿入...</span>"
 
 #: ../plugins/time/time.glade2.h:5
 msgid "Configure date/time plugin"
@@ -4436,16 +4444,16 @@ msgstr "日付と時間の挿入"
 
 #: ../plugins/time/time.glade2.h:7
 msgid "Use the _selected format"
-msgstr "指定したフォーマットを使う(_S)"
+msgstr "次の書式を使う(_S)"
 
 #: ../plugins/time/time.glade2.h:8
 msgid "_Insert"
-msgstr "挿入(_I)"
+msgstr "挿入する(_I)"
 
 #: ../plugins/time/time.glade2.h:9
 msgid "_Prompt for a format"
-msgstr "フォーマットのためのプロンプト(_P)"
+msgstr "書式を毎回指定する(_P)"
 
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
-msgstr "フォーマットをカスタマイズする(_U)"
+msgstr "カスタマイズする(_U)"
