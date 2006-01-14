@@ -147,11 +147,8 @@ class Snippet:
 		index = 0
 		buf = view.get_buffer()
 
-		if view.get_auto_indent():
-			indent = compute_indentation(view, \
-					view.get_buffer().get_iter_at_mark(marks[1]))
-		else:
-			indent = ''
+		indent = compute_indentation(view, \
+				view.get_buffer().get_iter_at_mark(marks[1]))
 
 		while index < len(text):
 			c = text[index]

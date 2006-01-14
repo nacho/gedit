@@ -73,7 +73,7 @@ def markup_escape(text):
 def insert_with_indent(view, piter, text, indentfirst = True):
 	lines = text.split('\n')
 
-	if not view.get_auto_indent() or len(lines) == 1:
+	if len(lines) == 1:
 		view.get_buffer().insert(piter, text)
 	else:
 		# Compute indentation
