@@ -549,9 +549,7 @@ load_local_file_real (GeditDocumentLoader *loader)
 	{
 		gchar *mapped_file;
 		
-		/* CHECK: should we lock the file */
-		g_print ("load_local_file_real: before mmap\n");
-		
+		/* CHECK: should we lock the file */		
 		mapped_file = mmap (0, /* start */
 				    loader->priv->info->size, 
 				    PROT_READ,

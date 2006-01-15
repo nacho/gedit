@@ -280,7 +280,7 @@ gedit_utils_uri_exists (const gchar* text_uri)
 		
 	g_return_val_if_fail (text_uri != NULL, FALSE);
 	
-	gedit_debug_message (DEBUG_FILE, "text_uri: %s", text_uri);
+	gedit_debug_message (DEBUG_UTILS, "text_uri: %s", text_uri);
 
 	uri = gnome_vfs_uri_new (text_uri);
 	g_return_val_if_fail (uri != NULL, FALSE);
@@ -289,7 +289,7 @@ gedit_utils_uri_exists (const gchar* text_uri)
 
 	gnome_vfs_uri_unref (uri);
 
-	gedit_debug_message (DEBUG_FILE, res ? "TRUE" : "FALSE");
+	gedit_debug_message (DEBUG_UTILS, res ? "TRUE" : "FALSE");
 
 	return res;
 }
