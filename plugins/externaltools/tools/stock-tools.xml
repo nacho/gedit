@@ -1,0 +1,4 @@
+<tools>
+<tool applicability="local" description="Run &quot;make&quot; in the document directory" input="nothing" label="Build" output="output-panel" shortcut-key="F7">make</tool>
+<tool applicability="all" description="Remove useless trailing spaces in your file" input="selection" label="Remove Trailing Spaces" output="replace-selection" shortcut-key="&lt;Alt&gt;F12">cat | sed 's/[[:blank:]]*$//'</tool>
+<tool applicability="titled" description="List the content of the document directory into the output panel" input="nothing" label="Directory Listing" output="output-panel" shortcut-key="">gnomevfs-ls $GEDIT_CURRENT_DOCUMENT_DIR</tool><tool applicability="local" description="Cat" input="document" label="Test input" output="output-panel" shortcut-key="F8">cat</tool></tools>

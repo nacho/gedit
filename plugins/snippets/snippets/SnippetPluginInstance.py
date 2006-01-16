@@ -21,6 +21,8 @@ import gtk
 from gtk import gdk
 import re
 import os
+import gettext
+from gettext import gettext as _
 from Snippet import Snippet
 from SnippetsDialog import SnippetsDialog
 from SnippetPlaceholders import *
@@ -39,7 +41,9 @@ class SnippetsPluginInstance:
 		self.language_accel_group = None
 		self.language_accel_group_id = 0
 		self.global_accel_group_id = 0
-		
+#		gettext.bindtextdomain('gedit', '/opt/gnomecvs/share/locale')
+#		gettext.textdomain('gedit')
+
 	def run(self, window):
 		self.window = window
 		self.insert_menu()
@@ -64,8 +68,9 @@ class SnippetsPluginInstance:
 
 		self.action_group = gtk.ActionGroup("GeditSnippetPluginActions")
 		self.action_group.set_translation_domain('gedit')
-		self.action_group.add_actions([('Snippets', None, '_Snippets', \
-				None, 'Show snippets dialog', \
+		self.action_group.add_actions([('Snippets', None,
+				_('Manage _Snippets...'), \
+				None, _('Manage Snippets'), \
 				self.on_action_snippets_activate)])
 
 		self.merge_id = manager.new_merge_id()

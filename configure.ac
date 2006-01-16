@@ -298,6 +298,8 @@ help/sv/Makefile
 pixmaps/Makefile
 plugins/changecase/Makefile
 plugins/docinfo/Makefile
+plugins/externaltools/Makefile
+plugins/externaltools/tools/Makefile
 plugins/indent/Makefile
 plugins/Makefile
 plugins/modelines/Makefile
