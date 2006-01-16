@@ -62,8 +62,8 @@ class SnippetsDialog:
 		return nodes
 
 	def add_new_snippet_node(self, parent):
-		return self.model.append(parent, ('<i>Add a new snippet...</i>', '', \
-				True, None))		
+		return self.model.append(parent, ('<i>' + _('Add a new snippet...') + \
+				'</i>', '', True, None))
 
 	def fill_language(self, piter):
 		# Remove all children
@@ -114,7 +114,7 @@ class SnippetsDialog:
 			manager = gtksourceview.SourceLanguagesManager()
 			langs = manager.get_available_languages()
 			
-			piter = self.model.append(None, ('Global', '', False, None))
+			piter = self.model.append(None, (_('Global'), '', False, None))
 			# Add dummy node
 			self.model.append(piter, ('', '', False, None))
 			
@@ -558,22 +558,9 @@ class SnippetsDialog:
 			self.accel_group.disconnect_key(keyval, mod)		
 		
 	def set_accelerator(self, keyval, mod):
-		# Check whether accelerator already exists
 		snippets = list(self.get_language_snippets((0,)))
 		accelerator = gtk.accelerator_name(keyval, mod)
-		
-		if self.language_path[0] != 0:
-			snippets += self.get_language_snippets(self.language_path)
-		
-		snippet = self.plugin.get_snippet_from_accelerator(snippets, keyval, \
-				mod, self.snippet.node)
 
-		if snippet:
-			message_dialog(self.dlg, gtk.MESSAGE_ERROR, \
-					'This accelerator is already bound to ' + \
-					snippet['description'])
-			return False
-		
 		# Remove old accelerator
 		self.remove_accelerator()
 		
@@ -615,9 +602,9 @@ class SnippetsDialog:
 	
 	def on_entry_accelerator_focus_in(self, entry, event):
 		if self.snippet['accelerator']:
-			entry.set_text('Type a new accelerator, or press Backspace to clear')
+			entry.set_text(_('Type a new accelerator, or press Backspace to clear'))
 		else:
-			entry.set_text('Type a new accelerator')
+			entry.set_text(_('Type a new accelerator'))
 	
 	def on_tree_view_selection_changed(self, selection):
 		parent, piter, node = self.selected_snippet()
@@ -655,6 +642,18 @@ class SnippetsDialog:
 			
 		self.selection_changed()
 
+	def iter_after(self, target, after):
+		if not after:
+			return True
+
+		tp = self.model.get_path(target)
+		ap = self.model.get_path(after)
+		
+		if tp[0] > ap[0] or (tp[0] == ap[0] and (len(ap) == 1 or tp[1] > ap[1])):
+			return True
+		
+		return False
+		
 	def on_tree_view_snippets_key_press(self, treeview, event):
 		if self.snippet and event.keyval == gdk.keyval_from_name('Delete') \
 				and	self.snippet:
@@ -664,34 +663,46 @@ class SnippetsDialog:
 		if event.state & gtk.accelerator_get_default_mod_mask():
 			# possible snippet accelerator, find it!
 			piter = self.model.get_iter_root()
+			selection = self.tree_view.get_selection()
+			(model, seliter) = selection.get_selected()
+			first = None
 			
+			# This is kind of a mess, clean it
 			while piter:
 				path = self.model.get_path(piter)
-				
-				if path[0] == 0:
-					snippets = self.plugin.language_all
-				else:
-					name = self.model.get_value(piter, self.SORT_COLUMN)
-					snippets = self.plugin.lookup_language(name)
-					
-					if snippets:
-						snippets = snippets.getElementsByTagName('snippet')
+				snippets = self.get_language_snippets(path)
 				
 				if snippets:
+					# Get the snippets with this accelerator
 					snippet = self.plugin.get_snippet_from_accelerator(snippets,
 							event.keyval, event.state)
 
-					if snippet:
-						child = self.find_iter(piter, snippet)
+					for s in snippet:
+						# Find iter
+						child = self.find_iter(piter, Snippet(s))
+
+						if not child:
+							# Could not be found, weird
+							continue
 						
-						if child:
+						if child == seliter:
+							continue
+						else:
+							if not first:
+								first = (piter, child)
+
+						if self.iter_after(child, seliter):
 							self.tree_view.expand_row(self.model.get_path( \
 									piter), False)
 							self.select_iter(child)
 
-						break
-				
+							return
+
 				piter = self.model.iter_next(piter)
+		
+			if first:
+				self.tree_view.expand_row(self.model.get_path(first[0]), False)
+				self.select_iter(first[1])
 
 	def on_tree_view_snippets_row_expanded(self, treeview, piter, path):
 		# Check if it is already filled

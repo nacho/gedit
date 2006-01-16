@@ -49,7 +49,7 @@ class SnippetsPluginInstance:
 		self.insert_menu()
 		
 		accel = self.plugin.language_accel_group(None)
-		accel.connect('accel-activate', self.on_global_accel_group_activate)
+		accel.connect('accel-activate', self.on_accel_group_activate)
 		window.add_accel_group(accel)
 		
 		self.set_view(window.get_active_view())
@@ -70,7 +70,7 @@ class SnippetsPluginInstance:
 		self.action_group.set_translation_domain('gedit')
 		self.action_group.add_actions([('Snippets', None,
 				_('Manage _Snippets...'), \
-				None, _('Manage Snippets'), \
+				None, _('Manage snippets'), \
 				self.on_action_snippets_activate)])
 
 		self.merge_id = manager.new_merge_id()
@@ -134,7 +134,7 @@ class SnippetsPluginInstance:
 					self.language_name)
 			self.window.add_accel_group(self.language_accel_group)
 			self.language_accel_group_id = self.language_accel_group.connect( \
-					'accel-activate', self.on_language_accel_group_activate)
+					'accel-activate', self.on_accel_group_activate)
 		else:
 			self.language_accel_group = None
 			self.language_name = None
@@ -439,31 +439,33 @@ class SnippetsPluginInstance:
 
 	def show_completion(self, preset = None):
 		buf = self.current_view.get_buffer()
-
+		bounds = buf.get_selection_bounds()
+		prefix = None
+		
+		if not bounds and not preset:
+			# When there is no text selected and no preset present, find the
+			# prefix
+			(prefix, start, end) = self.get_tab_tag(buf)
+		
+		if not prefix:
+			# If there is no prefix, than take the insertion point as the end
+			end = buf.get_iter_at_mark(buf.get_insert())
+		
 		if not preset:
-			bounds = buf.get_selection_bounds()
-		
-			if bounds:
-				prefix = None
-			else:
-				(prefix, start, end) = self.get_tab_tag(buf)
-		
-			if not prefix:
-				end = buf.get_iter_at_mark(buf.get_insert())
-		
-			# nodes
+			# There is no preset, find all the global snippets and the language
+			# specific snippets
 			nodes = list(self.plugin.language_all)
-		
+			
 			if self.language_name:
 				lang = self.plugin.lookup_language(self.language_name)
 			
 				if lang:
 					nodes += lang.getElementsByTagName('snippet')
 					
-			complete = SnippetComplete(nodes, prefix, True)
+			complete = SnippetComplete(nodes, prefix, True)	
 		else:
+			# There is a preset, so show that preset
 			complete = SnippetComplete(preset, None, True)
-			(prefix, start, end) = self.get_tab_tag(buf)
 		
 		complete.connect('snippet-activated', self.on_complete_row_activated)
 		
@@ -528,30 +530,24 @@ class SnippetsPluginInstance:
 
 		return False
 	
-	def on_language_accel_group_activate(self, group, window, keyval, mod):
-		if self.language_name:
-			snippets = self.plugin.lookup_language(self.language_name)
-			
-			if snippets:
-				snippets = snippets.getElementsByTagName('snippet')
-				snippet = self.plugin.get_snippet_from_accelerator(snippets, \
-						keyval, mod)
-				
-				if snippet:
-					self.apply_snippet(snippet.node)
-					return True
-		
-		return False
-		
-	def on_global_accel_group_activate(self, group, window, keyval, mod):
+	def on_accel_group_activate(self, group, window, keyval, mod):
 		snippets = self.plugin.language_all
+		
+		if self.language_name:
+			lang = self.plugin.lookup_language(self.language_name)
+			
+			if lang:
+				snippets += lang.getElementsByTagName('snippet')
 
-		if snippets:
-			snippet = self.plugin.get_snippet_from_accelerator(snippets, \
-						keyval, mod)
+		snippet = self.plugin.get_snippet_from_accelerator(snippets, keyval, \
+				mod)
 				
-			if snippet:
-				self.apply_snippet(snippet.node)
-				return True
+		if snippet:
+			if len(snippet) == 1:
+				self.apply_snippet(snippet[0])
+			else:
+				# Do the fancy completion dialog
+				self.show_completion(snippet)			
+			return True
 		
 		return False

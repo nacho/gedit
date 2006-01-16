@@ -297,9 +297,9 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
 		if self.remove_me:
 			SnippetPlaceholderExpand.remove(self)
 
-		message_dialog(None, gtk.MESSAGE_ERROR, "Execution of the shell " + \
-				"command (" + self.command + ") exceeds the maximum time, " + \
-				"execution aborted.")
+		message_dialog(None, gtk.MESSAGE_ERROR, 'Execution of the shell ' \
+				'command (%s) exceeds the maximum time, ' \
+				'execution aborted.' % self.command)
 		
 		return False
 	
@@ -392,9 +392,9 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 		if self.remove_me:
 			SnippetPlaceholderExpand.remove(self)
 
-		message_dialog(None, gtk.MESSAGE_ERROR, "Execution of the python " + \
-				"command (" + self.command + ") exceeds the maximum time, " + \
-				"execution aborted.")
+		message_dialog(None, gtk.MESSAGE_ERROR, 'Execution of the python ' \
+				'command (%s) exceeds the maximum time,' \
+				'execution aborted.' % self.command)
 		
 		return False
 	

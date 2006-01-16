@@ -69,13 +69,14 @@ gedit_python_module_init_python ()
 	struct sigaction old_sigint;
 	gint res;
 	char *argv[] = { "gedit", NULL };
-
+	char *gettext_command;
+	
 	if (Py_IsInitialized ())
 	{
 		g_warning ("Python Should only be initialized once, since it's in class_init");
 		g_return_if_reached ();
 	}
-	
+
 	/* Hack to make python not overwrite SIGINT: this is needed to avoid
 	 * the crash reported on bug #326191 */
 	
@@ -153,6 +154,14 @@ gedit_python_module_init_python ()
 		PyErr_Print ();
 		return;
 	}
+	
+	gettext_command = g_strdup_printf ("import gettext\n"
+			"gettext.install (\"%s\", \"%s\")",
+			GETTEXT_PACKAGE,
+			GEDIT_LOCALEDIR);
+
+	PyRun_SimpleString (gettext_command);
+	g_free (gettext_command);
 }
 
 static gboolean

@@ -34,10 +34,10 @@ class SnippetsPlugin(gedit.Plugin):
 		gedit.Plugin.__init__(self)
 		self.dlg = None
 		self.xml_error_message = \
-				'An error has occured during loading the ' + self.XML_FILE + \
-				' file. The file is probably corrupt. Please fix or ' \
+				_('An error has occured during loading the %s ' \
+				'file. The file is probably corrupt. Please fix or ' \
 				'remove	the file. To try to load the file again select ' \
-				'the Tools -> Snippets menu item.'
+				'the Tools -> Snippets menu item.') % self.XML_FILE
 
 		self.show_xml_error = not self.load_xml()
 	
@@ -174,6 +174,8 @@ class SnippetsPlugin(gedit.Plugin):
 		return accel_group
 	
 	def get_snippet_from_accelerator(self, snippets, keyval, mod, ignore = None):
+		result = []
+		
 		if snippets:
 			for snippet in snippets:
 				if snippet == ignore:
@@ -183,9 +185,9 @@ class SnippetsPlugin(gedit.Plugin):
 				(skey, smod) = gtk.accelerator_parse(s['accelerator'])
 				
 				if skey == keyval and smod & mod == smod:
-					return s
+					result.append(snippet)
 		
-		return None
+		return result
 	
 	def language_accel_group(self, nm):
 		if self.xmldoc == None:
