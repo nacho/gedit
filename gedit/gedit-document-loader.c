@@ -53,7 +53,9 @@
 
 #define READ_CHUNK_SIZE 8192
 
-#define GEDIT_DOCUMENT_LOADER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_DOCUMENT_LOADER, GeditDocumentLoaderPrivate))
+#define GEDIT_DOCUMENT_LOADER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+						  GEDIT_TYPE_DOCUMENT_LOADER,            \
+						  GeditDocumentLoaderPrivate))
 
 static void	async_close_cb (GnomeVFSAsyncHandle *handle,
 				GnomeVFSResult       result,
@@ -465,32 +467,6 @@ stat_to_file_info (GnomeVFSFileInfo *file_info,
 	  GNOME_VFS_FILE_INFO_FIELDS_CTIME;
 }
 
-/* FIXME: this is ugly for multiple reasons: it refetches all the info,
- * it doesn't use fd etc... we need something better, possibly in gnome-vfs
- * public api.
- */
-static gchar *
-get_slow_mime_type (const char *text_uri)
-{
-	GnomeVFSFileInfo *info;
-	char *mime_type;
-	GnomeVFSResult result;
-
-	info = gnome_vfs_file_info_new ();
-	result = gnome_vfs_get_file_info (text_uri, info,
-					  GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
-					  GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
-	if (info->mime_type == NULL || result != GNOME_VFS_OK) {
-		mime_type = NULL;
-	} else {
-		mime_type = g_strdup (info->mime_type);
-	}
-	gnome_vfs_file_info_unref (info);
-
-	return mime_type;
-}
-
 static void
 load_completed_or_failed (GeditDocumentLoader *loader)
 {
@@ -513,6 +489,8 @@ load_completed_or_failed (GeditDocumentLoader *loader)
 }
 
 /* ----------- local files ----------- */
+
+#define MAX_MIME_SNIFF_SIZE 4096
 
 static gboolean
 load_local_file_real (GeditDocumentLoader *loader)
@@ -543,12 +521,15 @@ load_local_file_real (GeditDocumentLoader *loader)
 	if (loader->priv->info->size == 0)
 	{
 		if (loader->priv->encoding == NULL)
-			loader->priv->auto_detected_encoding = gedit_encoding_get_current (); 
+			loader->priv->auto_detected_encoding = gedit_encoding_get_current ();
+
+		/* guessing the mime from the filename is up to the caller */
 	}
 	else
 	{
 		gchar *mapped_file;
-		
+		const gchar *mime_type;
+
 		/* CHECK: should we lock the file */		
 		mapped_file = mmap (0, /* start */
 				    loader->priv->info->size, 
@@ -585,6 +566,17 @@ load_local_file_real (GeditDocumentLoader *loader)
 			goto done;
 		}
 
+		mime_type = gnome_vfs_get_mime_type_for_name_and_data (loader->priv->local_file_name,
+				mapped_file,
+				MIN (loader->priv->bytes_read, MAX_MIME_SNIFF_SIZE));
+
+		if ((mime_type != NULL) &&
+		     strcmp (mime_type, GNOME_VFS_MIME_TYPE_UNKNOWN) != 0)
+		{
+			loader->priv->info->mime_type = g_strdup (mime_type);
+			loader->priv->info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
+		}
+
 		ret = munmap (mapped_file, loader->priv->info->size);
 
 		if (ret != 0)
@@ -592,10 +584,6 @@ load_local_file_real (GeditDocumentLoader *loader)
 				   loader->priv->uri,
 				   strerror (errno));
 	}
-
-	/* mime type hack. Do it before closing the fd to avoid race conditions */
-	loader->priv->info->mime_type = get_slow_mime_type (loader->priv->uri);
-	loader->priv->info->valid_fields |= GNOME_VFS_FILE_INFO_FIELDS_MIME_TYPE;
 
 	ret = close (loader->priv->fd);
 
@@ -607,7 +595,6 @@ load_local_file_real (GeditDocumentLoader *loader)
 	loader->priv->fd = -1;
 
  done:
-
 	load_completed_or_failed (loader);
 	
 	return FALSE;
