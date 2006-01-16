@@ -711,15 +711,23 @@ set_uri (GeditDocument *doc,
 	{
 		gchar *base_name;
 
-		/* Set the mime type using the file extension or "text/plain" 
-	   	 * if no match. */
+		/* Guess the mime type from file extension or fallback to "text/plain" */
 		base_name = gnome_vfs_uri_extract_short_path_name (doc->priv->vfs_uri);
-		if (base_name != NULL) 
-			doc->priv->mime_type = g_strdup ("text/plain"); // FIXME
-//			gnome_vfs_mime_type_from_name_or_default (base_name,
-//								  "text/plain");
+		if (base_name != NULL)
+		{
+			const gchar *detected_mime;
+
+			detected_mime = gnome_vfs_get_mime_type_for_name (base_name);
+			if (detected_mime == NULL ||
+			    strcmp (GNOME_VFS_MIME_TYPE_UNKNOWN, detected_mime) == 0)
+				detected_mime = "text/plain";
+
+			doc->priv->mime_type = g_strdup (detected_mime);
+		}
 		else
+		{
 			doc->priv->mime_type = g_strdup ("text/plain");
+		}
 
 		g_free (base_name);
 	}

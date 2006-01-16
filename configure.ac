@@ -84,7 +84,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	libgnomeui-2.0 >= 2.6.0
 	libglade-2.0 >= 2.4.0
 	libgnomeprintui-2.2 >= 2.6.0
-	gnome-vfs-2.0 >= 2.12.0
+	gnome-vfs-2.0 >= 2.13.4
 ])
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
