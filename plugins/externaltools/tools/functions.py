@@ -35,9 +35,9 @@ class ToolsTree:
 			os.mkdir(self.xml_location)
 
 		self.xml_location = os.path.join(self.xml_location, 'gedit-tools.xml')
-			
+
 		if not os.path.isfile(self.xml_location):
-			self.tree = et.parse(os.path.join(os.path.dirname(__file__), 'stock-tools.xml'))
+			self.tree = et.parse(self.get_stock_file())
 			self.root = self.tree.getroot()
 			self.save()
 		else:
@@ -47,10 +47,27 @@ class ToolsTree:
 			except:
 				self.tree = None
 				self.root = None
-	
+
 	def __iter__(self):
 		return iter(self.root)
-	
+
+	def get_stock_file(self):
+		if 'XDG_DATA_DIRS' in os.environ:
+			dirs = os.environ['XDG_DATA_DIRS']
+
+		if not dirs:
+			dirs = '/usr/local/share:/usr/share'
+
+		dirs = dirs.split(':')
+
+		for d in dirs:
+			f = d + '/gedit-2/plugins/externaltools/stock-tools.xml'
+			if os.path.isfile(f):
+				return f
+
+		# print 'not found'
+		return None
+
 	def save(self):
 		self.tree.write(self.xml_location)
 		
