@@ -5,10 +5,10 @@
 # 
 msgid ""
 ""
-msgstr "Project-Id-Version: gedit HEAD\n"
+msgstr "Project-Id-Version: gedit 2.13.3 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-13 22:48+0100\n"
-"PO-Revision-Date: 2006-01-14 13:40+1030\n"
+"POT-Creation-Date: 2006-01-17 06:42+0100\n"
+"PO-Revision-Date: 2006-01-17 22:45+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -61,14 +61,14 @@ msgid ""
 "Background color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
 msgstr "Màu nền cho phần chữ được chọn trong vùng biên soạn. Chỉ có tác dụng nếu tắt "
-"tùy chọn «Dùng màu mặc định»."
+"tùy chọn « Dùng màu mặc định »."
 
 #:../data/gedit.schemas.in.h:9
 msgid ""
 "Background color for unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr "Màu nền cho phần chữ không chọn trong vùng biên soạn. Chỉ có tác dụng nếu "
-"tắt tùy chọn «Dùng màu mặc định»."
+"tắt tùy chọn « Dùng màu mặc định »."
 
 #:../data/gedit.schemas.in.h:10
 msgid "Backup Copy Extension"
@@ -682,7 +682,10 @@ msgstr "Thiết lập trang"
 
 #:../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #:../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#:../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
+#:../plugins/docinfo/docinfo.glade2.h:1
+#:../plugins/externaltools/tools/tools.glade.h:1
+#:../plugins/snippets/snippets/snippets.glade.h:1
+#:../plugins/time/time.glade2.h:1
 msgid "    "
 msgstr "    "
 
@@ -1175,7 +1178,7 @@ msgstr "Đã tìm thấy và thay thế một lần"
 msgid "Phrase not found"
 msgstr "Không tìm thấy cụm từ"
 
-#:../gedit/gedit-document.c:781 ../gedit/gedit-document.c:861
+#:../gedit/gedit-document.c:789 ../gedit/gedit-document.c:869
 #,c-format
 msgid "Unsaved Document %d"
 msgstr "Tài liệu chưa lưu %d"
@@ -1411,8 +1414,7 @@ msgstr "Không đủ bộ nhớ để mở tập tin ấy. Hãy đóng bớt và
 msgid ""
 "Host %s could not be found. Please, check that your proxy settings are "
 "correct and try again."
-msgstr "Không tìm thấy máy %s. Hãy kiểm tra lại các thiết lập ủy nhiệm rồi "
-"thử lại."
+msgstr "Không tìm thấy máy %s. Hãy kiểm tra lại các thiết lập ủy nhiệm rồi thử lại."
 
 #:../gedit/gedit-io-error-message-area.c:249
 #:../gedit/gedit-io-error-message-area.c:260
@@ -1590,8 +1592,8 @@ msgstr "Trình gedit không thể lưu trữ bản sao cũ của tập tin này 
 msgid ""
 "gedit cannot handle %s locations in write mode. Please, check that you typed "
 "the location correctly and try again."
-msgstr "Trình gedit không thể xử lý địa điểm kiểu %s trong chế độ ghi. Hãy kiểm tra bạn "
-"đã gõ đúng địa điểm chưa và thử lại."
+msgstr "Trình gedit không thể xử lý địa điểm kiểu %s trong chế độ ghi. Hãy kiểm tra "
+"bạn đã gõ đúng địa điểm chưa và thử lại."
 
 #:../gedit/gedit-io-error-message-area.c:1133
 msgid ""
@@ -2334,6 +2336,155 @@ msgstr "Thống kê _tài liệu"
 msgid "Get statistic info on current document"
 msgstr "Lấy thông tin thống kê về tài liệu hiện thời"
 
+#:../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
+msgid "Execute external commands and shell scripts."
+msgstr "Thực hiện lệnh bên ngoài và tập lệnh hệ vỏ."
+
+#:../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+msgid "External Tools"
+msgstr "Công cụ bên Ngoài"
+
+#:../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "_Lệnh:"
+
+#:../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "Sửa công cụ <i>make</i>:"
+
+#:../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "Bộ Quản lý Công cụ bên Ngoài"
+
+#:../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#:../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr "Không gì\n"
+"Các tài liệu hiện có\n"
+"Mọi tài liệu"
+
+#:../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "Chạy « make » trong thư mục tài liệu"
+
+#:../plugins/externaltools/tools/tools.glade.h:10
+msgid "Shortcut _key:"
+msgstr "_Phím tắt:"
+
+#:../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr "Khả năng á_p dụng:"
+
+#:../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "_Mô tả:"
+
+#:../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "Ngõ _vào :"
+
+#:../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "Ngõ _ra:"
+
+#:../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "_Lưu :"
+
+#:../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "_Công cụ :"
+
+#:../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr "cd $THƯ_MỤC_TÀI_LIỆU_GEDIT_HIỆN_CÓ\n"
+"make"
+
+#:../plugins/externaltools/tools/manager.py:41
+msgid "Nothing"
+msgstr "Không gì"
+
+#:../plugins/externaltools/tools/manager.py:42
+msgid "Current document"
+msgstr "Tài liệu hiện có"
+
+#:../plugins/externaltools/tools/manager.py:43
+msgid "Current selection"
+msgstr "Vùng chọn hiện có"
+
+#:../plugins/externaltools/tools/manager.py:44
+msgid "Current line"
+msgstr "Dòng hiện có"
+
+#:../plugins/externaltools/tools/manager.py:45
+msgid "Current word"
+msgstr "Từ hiện có"
+
+#:../plugins/externaltools/tools/manager.py:48
+msgid "Insert in output panel"
+msgstr "Chèn vào bảng xuất"
+
+#:../plugins/externaltools/tools/manager.py:49
+msgid "Create new document"
+msgstr "Tạo tài liệu mới"
+
+#:../plugins/externaltools/tools/manager.py:50
+msgid "Append to current document"
+msgstr "Phụ thêm vào tài liệu hiện có"
+
+#:../plugins/externaltools/tools/manager.py:51
+msgid "Replace current document"
+msgstr "Thay thế tài liệu hiện có"
+
+#:../plugins/externaltools/tools/manager.py:52
+msgid "Replace current selection"
+msgstr "Thay thế vùng chọn hiện có"
+
+#:../plugins/externaltools/tools/manager.py:53
+msgid "Insert at cursor position"
+msgstr "Chèn tại vị trí con trỏ"
+
+#:../plugins/externaltools/tools/manager.py:56
+msgid "All documents"
+msgstr "Mọi tài liệu"
+
+#:../plugins/externaltools/tools/manager.py:57
+msgid "All documents except untitled ones"
+msgstr "Mọi tài liệu từ các điều không tên"
+
+#:../plugins/externaltools/tools/manager.py:58
+msgid "Local files only"
+msgstr "Chỉ tập tin cục bộ"
+
+#:../plugins/externaltools/tools/manager.py:59
+msgid "Remote files only"
+msgstr "Chỉ tập tin ở xa"
+
+#:../plugins/externaltools/tools/manager.py:60
+msgid "Untitled documents only"
+msgstr "Chỉ tài liệu không tên"
+
+#:../plugins/externaltools/tools/manager.py:166
+msgid "A Brand New Tool"
+msgstr "Một Công cụ Mới Phát triển"
+
+#:../plugins/externaltools/tools/manager.py:179
+#,python-format
+msgid "Edit tool <i>%s</i>:"
+msgstr "Sửa đổi công cụ <i>%s</i>:"
+
+#:../plugins/externaltools/tools/manager.py:185
+msgid "New tool"
+msgstr "Công cụ mới"
+
 #:../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "Thụt _lề"
@@ -2389,6 +2540,62 @@ msgstr "Chèn tên người dùng vào vị trí con trỏ hiện thời."
 #:../plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "User name"
 msgstr "Tên người dùng"
+
+#:../plugins/snippets/snippets/snippets.glade.h:2
+msgid "<b>Activation</b>"
+msgstr "<b>Hoạt hóa</b>"
+
+#:../plugins/snippets/snippets/snippets.glade.h:3
+msgid "Snippets Manager"
+msgstr "Bộ Quản lý Đoạn"
+
+#:../plugins/snippets/snippets/snippets.glade.h:4
+msgid "_Accelerator:"
+msgstr "_Phím tắt:"
+
+#:../plugins/snippets/snippets/snippets.glade.h:5
+msgid "_Edit snippet:"
+msgstr "_Sửa đổi đoạn:"
+
+#:../plugins/snippets/snippets/snippets.glade.h:6
+msgid "_Snippets:"
+msgstr "_Đoạn:"
+
+#:../plugins/snippets/snippets/snippets.glade.h:7
+msgid "_Tab trigger:"
+msgstr "_Tab gay ra:"
+
+#:../plugins/snippets/snippets/__init__.py:37
+#,python-format
+msgid ""
+"An error has occured during loading the %s file. The file is probably "
+"corrupt. Please fix or remove\tthe file. To try to load the file again "
+"select the Tools -> Snippets menu item."
+msgstr "Gặp lỗi trong khi tải tập tin %s. Rất có thể là tập tin bị hỏng. Hãy sửa hoặc gỡ bỏ tập tin này. Để cố tải lại tập tin này, hãy chọn mục trình đơn Công cụ → Đoạn."
+
+#:../plugins/snippets/snippets/SnippetPluginInstance.py:72
+msgid "Manage _Snippets..."
+msgstr "Quản lý _Đoạn..."
+
+#:../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage snippets"
+msgstr "Quản lý đoạn"
+
+#:../plugins/snippets/snippets/SnippetsDialog.py:65
+msgid "Add a new snippet..."
+msgstr "Thêm đoạn mới..."
+
+#:../plugins/snippets/snippets/SnippetsDialog.py:117
+msgid "Global"
+msgstr "Toàn cục"
+
+#:../plugins/snippets/snippets/SnippetsDialog.py:605
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Hãy gõ phím tắt mới, hoặc bấm phím Backspace để xóa"
+
+#:../plugins/snippets/snippets/SnippetsDialog.py:607
+msgid "Type a new accelerator"
+msgstr "Gõ phím tắt mới"
 
 #:../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
