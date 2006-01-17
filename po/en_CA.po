@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-15 23:20-0500\n"
+"POT-Creation-Date: 2006-01-17 14:32-0500\n"
 "PO-Revision-Date: 2005-08-08 23:18-0500\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: Canadian English <adamw@gnome.org>\n"
@@ -751,9 +751,11 @@ msgstr "Enter the _location (URI) of the file you would like to open:"
 msgid "Page Setup"
 msgstr "Page Setup"
 
+#. ex:noet:ts=8:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
 #: ../plugins/snippets/snippets/snippets.glade.h:1
 #: ../plugins/time/time.glade2.h:1
 msgid "    "
@@ -1282,7 +1284,7 @@ msgstr "Found and replaced one occurrence"
 msgid "Phrase not found"
 msgstr "Phrase not found"
 
-#: ../gedit/gedit-document.c:781 ../gedit/gedit-document.c:861
+#: ../gedit/gedit-document.c:789 ../gedit/gedit-document.c:869
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Unsaved Document %d"
@@ -2466,6 +2468,161 @@ msgstr "_Document Statistics"
 msgid "Get statistic info on current document"
 msgstr "Get statistic info on current document"
 
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
+msgid "Execute external commands and shell scripts."
+msgstr "Execute external commands and shell scripts."
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+msgid "External Tools"
+msgstr "External Tools"
+
+#: ../plugins/externaltools/tools/functions.py:199
+msgid "You must be inside a word to run this command"
+msgstr "You must be inside a word to run this command"
+
+#: ../plugins/externaltools/tools/manager.py:41
+msgid "Nothing"
+msgstr "Nothing"
+
+#: ../plugins/externaltools/tools/manager.py:42
+msgid "Current document"
+msgstr "Current document"
+
+#: ../plugins/externaltools/tools/manager.py:43
+msgid "Current selection"
+msgstr "Current selection"
+
+#: ../plugins/externaltools/tools/manager.py:44
+msgid "Current line"
+msgstr "Current line"
+
+#: ../plugins/externaltools/tools/manager.py:45
+msgid "Current word"
+msgstr "Current word"
+
+#: ../plugins/externaltools/tools/manager.py:48
+msgid "Insert in output panel"
+msgstr "Insert in output panel"
+
+#: ../plugins/externaltools/tools/manager.py:49
+msgid "Create new document"
+msgstr "Create new document"
+
+#: ../plugins/externaltools/tools/manager.py:50
+msgid "Append to current document"
+msgstr "Append to current document"
+
+#: ../plugins/externaltools/tools/manager.py:51
+msgid "Replace current document"
+msgstr "Replace current document"
+
+#: ../plugins/externaltools/tools/manager.py:52
+msgid "Replace current selection"
+msgstr "Replace current selection"
+
+#: ../plugins/externaltools/tools/manager.py:53
+msgid "Insert at cursor position"
+msgstr "Insert at cursor position"
+
+#: ../plugins/externaltools/tools/manager.py:56
+msgid "All documents"
+msgstr "All documents"
+
+#: ../plugins/externaltools/tools/manager.py:57
+msgid "All documents except untitled ones"
+msgstr "All documents except untitled ones"
+
+#: ../plugins/externaltools/tools/manager.py:58
+msgid "Local files only"
+msgstr "Local files only"
+
+#: ../plugins/externaltools/tools/manager.py:59
+msgid "Remote files only"
+msgstr "Remote files only"
+
+#: ../plugins/externaltools/tools/manager.py:60
+msgid "Untitled documents only"
+msgstr "Untitled documents only"
+
+#: ../plugins/externaltools/tools/manager.py:166
+msgid "A Brand New Tool"
+msgstr "A Brand New Tool"
+
+#: ../plugins/externaltools/tools/manager.py:179
+#, python-format
+msgid "Edit tool <i>%s</i>:"
+msgstr "Edit tool <i>%s</i>:"
+
+#: ../plugins/externaltools/tools/manager.py:185
+msgid "New tool"
+msgstr "New tool"
+
+#: ../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "Co_mmand(s):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "Edit tool <i>make</i>:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "External Tools Manager"
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#: ../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+
+#: ../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "Run “make” in the document dir"
+
+#: ../plugins/externaltools/tools/tools.glade.h:10
+msgid "Shortcut _key:"
+msgstr "Shortcut _key:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr "_Applicability:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "_Description:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "_Input:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "_Output:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "_Save:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "_Tools:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Indent"
@@ -2527,8 +2684,8 @@ msgid "<b>Activation</b>"
 msgstr "<b>Activation</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
-msgid "Configure Snippets Plugin"
-msgstr "Configure Snippets Plugin"
+msgid "Snippets Manager"
+msgstr "Snippets Manager"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:4
 msgid "_Accelerator:"
@@ -2545,6 +2702,41 @@ msgstr "_Snippets:"
 #: ../plugins/snippets/snippets/snippets.glade.h:7
 msgid "_Tab trigger:"
 msgstr "_Tab trigger:"
+
+#: ../plugins/snippets/snippets/__init__.py:37
+#, python-format
+msgid ""
+"An error has occured during loading the %s file. The file is probably "
+"corrupt. Please fix or remove\tthe file. To try to load the file again "
+"select the Tools -> Snippets menu item."
+msgstr ""
+"Could not load the file \"%s\". The file is probably "
+"corrupted. Please fix or remove\tthe file. To try to load the file again, "
+"select the Tools -> Snippets menu item."
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
+msgid "Manage _Snippets..."
+msgstr "Manage _Snippets..."
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage snippets"
+msgstr "Manage snippets"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:65
+msgid "Add a new snippet..."
+msgstr "Add a new snippet..."
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:117
+msgid "Global"
+msgstr "Global"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:605
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Type a new accelerator, or press Backspace to clear"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:607
+msgid "Type a new accelerator"
+msgstr "Type a new accelerator"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
