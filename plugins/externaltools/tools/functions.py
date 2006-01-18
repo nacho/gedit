@@ -19,6 +19,7 @@
 import ElementTree as et
 import os
 import gtk
+from gtk import gdk
 import gnomevfs
 import gedit
 from gettext import gettext as _
@@ -35,39 +36,34 @@ class ToolsTree:
 			os.mkdir(self.xml_location)
 
 		self.xml_location = os.path.join(self.xml_location, 'gedit-tools.xml')
-
-		if not os.path.isfile(self.xml_location):
-			self.tree = et.parse(self.get_stock_file())
-			self.root = self.tree.getroot()
-			self.save()
-		else:
-			try:
+		
+		try:
+			if not os.path.isfile(self.xml_location):
+				self.tree = et.parse(self.get_stock_file())
+			else:
 				self.tree = et.parse(self.xml_location)
-				self.root = self.tree.getroot()
-			except:
-				self.tree = None
-				self.root = None
-
+			self.root = self.tree.getroot()
+		except:
+			self.root = et.Element('tools')
+			self.tree = et.ElementTree(self.root)
+	
 	def __iter__(self):
 		return iter(self.root)
-
+	
 	def get_stock_file(self):
-		if 'XDG_DATA_DIRS' in os.environ:
-			dirs = os.environ['XDG_DATA_DIRS']
-
-		if not dirs:
-			dirs = '/usr/local/share:/usr/share'
-
-		dirs = dirs.split(':')
-
+		dirs = os.getenv('XDG_DATA_DIR')
+		if dirs:
+			dirs = dirs.split(os.pathsep)
+		else:
+			dirs = ('/usr/local/share', '/usr/share')
+		
 		for d in dirs:
-			f = d + '/gedit-2/plugins/externaltools/stock-tools.xml'
+			f = os.path.join(d, 'gedit-2/plugins/externaltools/stock-tools.xml')
 			if os.path.isfile(f):
 				return f
 
-		# print 'not found'
 		return None
-
+	
 	def save(self):
 		self.tree.write(self.xml_location)
 		
@@ -144,39 +140,51 @@ def capture_menu_action(action, window, node):
 	panel.show()
 	panel.clear()
 
-	document = window.get_active_document()
+	view = window.get_active_view()
+	document = view.get_buffer()
 	if document is None:
 		# :TODO: Allow command on no document
-		panel.write("No document\n", panel.command)
+		panel.write("No document\n", panel.command_tag)
 		return
 
 	uri = document.get_uri()
 	if uri is None:
 		# :TODO: Allow command on unnamed documents
-		panel.write("Current document has no file name\n", panel.command)
+		panel.write("Current document has no file name\n", panel.command_tag)
 		return
 
-	# Configure capture environment	
+	# Configure capture environment
 	path = gnomevfs.get_local_path_from_uri(uri)
  	cwd = os.path.dirname(path)
 
  	capture = Capture(node.text, cwd)
  	capture.set_flags(capture.CAPTURE_BOTH)
- 	capture.env = {
- 		'GEDIT_CURRENT_DOCUMENT_URI' : uri,
- 		'GEDIT_CURRENT_DOCUMENT_PATH': path,
- 		'GEDIT_CURRENT_DOCUMENT_DIR' : cwd
- 	}
 
+	documents_uri = [document.get_uri()
+	                         for document in window.get_documents()
+	                         if document.get_uri() is not None]
+	documents_path = [gnomevfs.get_local_path_from_uri(uri)
+	                         for uri in documents_uri]
+
+ 	capture.env = os.environ.copy()
+ 	capture.set_env(GEDIT_CURRENT_DOCUMENT_URI  = uri,
+ 	                GEDIT_CURRENT_DOCUMENT_PATH = path,
+ 	                GEDIT_CURRENT_DOCUMENT_NAME = os.path.basename(path),
+ 	                GEDIT_CURRENT_DOCUMENT_DIR  = cwd,
+ 	                GEDIT_DOCUMENTS_URI         = ' '.join(documents_uri),
+ 	                GEDIT_DOCUMENTS_PATH        = ' '.join(documents_path))
+ 	
 	# Assign the error output to the output panel
 	panel.process = capture
 	
 	capture.connect('stderr-line',   capture_stderr_line_panel,   panel)
 	capture.connect('begin-execute', capture_begin_execute_panel, panel, node.get('label'))
-	capture.connect('end-execute',   capture_end_execute_panel,   panel)
+	capture.connect('end-execute',   capture_end_execute_panel,   panel, view)
 
 	# Get input text
-	input_type = node.get('input')
+	input_type = default(node.get('input'), 'nothing')
+	output_type = default(node.get('output'), 'output-panel')
+
 	if input_type != 'nothing':
 		if input_type == 'document':
 			start, end = document.get_bounds()
@@ -185,6 +193,8 @@ def capture_menu_action(action, window, node):
 				start, end = document.get_selection_bounds()
 			except ValueError:
 				start, end = document.get_bounds()
+				if output_type == 'replace-selection':
+					document.select_range(start, end)
 		elif input_type == 'line':
 			start = document.get_insert()
 			end = insert.copy()
@@ -208,18 +218,28 @@ def capture_menu_action(action, window, node):
 		capture.set_input(input_text)
 	
 	# Assign the standard output to the chosen "file"
-	output_type = node.get('output')
 	if output_type == 'output-panel':
 		capture.connect('stdout-line', capture_stdout_line_panel, panel)
+		document.begin_user_action()
+	elif output_type == 'new-document':
+		tab = window.create_tab(True)
+		view = tab.get_view()
+		document = tab.get_document()
+		pos = document.get_start_iter()
+		capture.connect('stdout-line', capture_stdout_line_document, document, pos)
+		document.begin_user_action()
+		view.set_editable(False)
+		view.set_cursor_visible(False)
 	else:
+		document.begin_user_action()
+		view.set_editable(False)
+		view.set_cursor_visible(False)
+		
 		if output_type == 'insert':
 			pos = document.get_iter_at_mark(document.get_mark('insert'))
 		elif output_type == 'replace-selection':
-			document.delete_selection()
+			document.delete_selection(False, False)
 			pos = document.get_iter_at_mark(document.get_mark('insert'))
-		elif output_type == 'new-document':
-			document = window.create_tab(True).get_document()
-			pos = document.get_end_iter()
 		elif output_type == 'replace-document':
 			document.set_text('')
 			pos = document.get_end_iter()
@@ -228,7 +248,7 @@ def capture_menu_action(action, window, node):
 		capture.connect('stdout-line', capture_stdout_line_document, document, pos)
 	
 	# Run the command
-	document.begin_user_action()
+	view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.WATCH))
 	capture.execute()
 	document.end_user_action()
 
@@ -240,9 +260,12 @@ def capture_begin_execute_panel(capture, panel, label):
 	panel.clear()
 	panel.write("Running %s...\n" % label, panel.command_tag)
 
-def capture_end_execute_panel(capture, exit_code, panel):
+def capture_end_execute_panel(capture, exit_code, panel, view):
 	panel.write("Exit code: %s\n" % exit_code, panel.command_tag)
 	panel['stop'].set_sensitive(False)
+	view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.XTERM))
+	view.set_cursor_visible(True)
+	view.set_editable(True)
 
 def capture_stdout_line_panel(capture, line, panel):
 	panel.write(line)

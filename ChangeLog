@@ -1,3 +1,18 @@
+2006-01-18  Steve Frécinaux  <steve@istique.net>
+
+	* plugins/externaltools/tools/capture.py: corrected freeze bug when 
+	an input was specified. End signal is sent *after* the other signals.
+
+	* plugins/externaltools/tools/functions.py: corrected syntax errors.
+	System-wide env vars are passed to the child process (allow to launch
+	X apps). new GEDIT_DOCUMENTS_(PATH|URI) and GEDIT_CURRENT_DOCUMENT_NAME
+	environment variables. Ensure "replace" output options effectively
+	replace previous content. User feedback: wait cursor and locked view.
+	Load an empty tree if no file found (instead of None)
+
+	* plugin/externaltools/tools/stock-tools.xml: Update with new sample
+	tools using the new features.
+
 2006-01-18  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit.c (main): call gnome_accelerators_sync before

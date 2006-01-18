@@ -21,7 +21,6 @@ __all__ = ('Capture', )
 import os, sys, signal
 import subprocess
 import gobject
-from threading import Thread
 
 class Capture(gobject.GObject):
 	CAPTURE_STDOUT = 0x01
@@ -44,8 +43,8 @@ class Capture(gobject.GObject):
 		self.command = command
 		self.input_text = None
 	
-	def set_env(self, name, value):
-		self.env[name] = value
+	def set_env(self, **values):
+		self.env.update(**values)
 	
 	def set_command(self, command):
 		self.command = command
@@ -82,10 +81,15 @@ class Capture(gobject.GObject):
 		# IO
 		if self.input_text is not None:
 			self.pipe.stdin.write(self.input_text)
+			self.pipe.stdin.close()
 		if self.flags & self.CAPTURE_STDOUT:
-			gobject.io_add_watch(self.pipe.stdout, gobject.IO_IN | gobject.IO_HUP, self.on_output)
+			gobject.io_add_watch(self.pipe.stdout,
+			                     gobject.IO_IN | gobject.IO_HUP,
+			                     self.on_output)
 		if self.flags & self.CAPTURE_STDERR:
-			gobject.io_add_watch(self.pipe.stderr, gobject.IO_IN | gobject.IO_HUP, self.on_output)
+			gobject.io_add_watch(self.pipe.stderr,
+			                     gobject.IO_IN | gobject.IO_HUP,
+			                     self.on_output)
 
 		# Wait for the process to complete
 		gobject.child_watch_add(self.pipe.pid, self.on_child_end)
@@ -103,5 +107,9 @@ class Capture(gobject.GObject):
 	def stop(self, error_code = -1):
 		if self.pipe is not None:
 			os.kill(self.pipe.pid, signal.SIGTERM)
-	def on_child_end(self, pid, returncode):
-		self.emit('end-execute', returncode)
+			self.pipe = None
+
+	def on_child_end(self, pid, error_code):
+		# In an idle, so it is emitted after all the std*-line signals
+		# have been intercepted
+		gobject.idle_add(self.emit, 'end-execute', error_code)

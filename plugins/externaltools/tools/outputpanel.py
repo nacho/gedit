@@ -33,7 +33,7 @@ class UniqueById:
 	__shared_state = WeakKeyDictionary()
 	
 	def __init__(self, i):
-		if self.__class__.__shared_state.has_key(i):
+		if i in self.__class__.__shared_state:
 			self.__dict__ = self.__class__.__shared_state[i]
 			return True
 		else:

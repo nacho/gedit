@@ -1,4 +1,7 @@
 <tools>
-<tool applicability="local" description="Run &quot;make&quot; in the document directory" input="nothing" label="Build" output="output-panel" shortcut-key="F7">make</tool>
-<tool applicability="all" description="Remove useless trailing spaces in your file" input="selection" label="Remove Trailing Spaces" output="replace-selection" shortcut-key="&lt;Alt&gt;F12">cat | sed 's/[[:blank:]]*$//'</tool>
-<tool applicability="titled" description="List the content of the document directory into the output panel" input="nothing" label="Directory Listing" output="output-panel" shortcut-key="">gnomevfs-ls $GEDIT_CURRENT_DOCUMENT_DIR</tool><tool applicability="local" description="Cat" input="document" label="Test input" output="output-panel" shortcut-key="F8">cat</tool></tools>
+<tool accelerator="F8" applicability="local" description="Run &quot;make&quot; in the document directory" input="nothing" label="Build" output="output-panel">make</tool>
+<tool accelerator="&lt;Alt&gt;F12" applicability="all" description="Remove useless trailing spaces in your file" input="document" label="Remove Trailing Spaces" output="replace-document">sed 's/[[:blank:]]*$//'</tool>
+<tool accelerator="&lt;Shift&gt;&lt;Control&gt;d" applicability="titled" description="List the content of the document directory into the output panel" input="nothing" label="Directory Listing" output="new-document">gnomevfs-ls $GEDIT_CURRENT_DOCUMENT_DIR</tool>
+<tool accelerator="" applicability="local" description="Look for a pattern accross the files of the current document directory" input="nothing" label="Grep" output="output-panel" shortcut-key="F8">grep `zenity --entry --text="Text to search"` *</tool>
+<tool applicability="local" description="Print the environment variables list into the output panel" input="nothing" label="Environment Variables" output="output-panel">env</tool>
+</tools>
