@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-16 21:46+0200\n"
-"PO-Revision-Date: 2006-01-16 21:55+0200\n"
+"POT-Creation-Date: 2006-01-18 07:13+0200\n"
+"PO-Revision-Date: 2006-01-18 07:15+0200\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -756,6 +756,7 @@ msgstr "Anna sen tiedoston _sijainti (URI) jonka haluat avattavan:"
 msgid "Page Setup"
 msgstr "Sivuasetukset"
 
+#. ex:noet:ts=8:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
@@ -1733,8 +1734,8 @@ msgid ""
 "gedit cannot handle %s locations in write mode. Please, check that you typed "
 "the location correctly and try again."
 msgstr ""
-"Gedit ei osaa kirjoittaa \"%s\"-sijainteihin. Tarkista että annoit "
-"sijainnin oikein ja yritä uudelleen."
+"Gedit ei osaa kirjoittaa \"%s\"-sijainteihin. Tarkista että annoit sijainnin "
+"oikein ja yritä uudelleen."
 
 #: ../gedit/gedit-io-error-message-area.c:1133
 msgid ""
@@ -2498,71 +2499,9 @@ msgstr "Suorita ulkoisia komentoja ja skriptejä."
 msgid "External Tools"
 msgstr "Ulkoiset työkalut"
 
-#: ../plugins/externaltools/tools/tools.glade.h:2
-msgid "Co_mmand(s):"
-msgstr "K_omento:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:3
-msgid "Edit tool <i>make</i>:"
-msgstr "Muokkaa työkalua <i>make</i>:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:4
-msgid "External Tools Manager"
-msgstr "Ulkoisten työkalujen hallinta"
-
-#: ../plugins/externaltools/tools/tools.glade.h:5
-msgid "F7"
-msgstr "F7"
-
-#: ../plugins/externaltools/tools/tools.glade.h:6
-msgid ""
-"Nothing\n"
-"Current document\n"
-"All documents"
-msgstr ""
-"Ei mitään\n"
-"Valittu asiakirja\n"
-"Kaikki asiakirjat"
-
-#: ../plugins/externaltools/tools/tools.glade.h:9
-msgid "Run “make” in the document dir"
-msgstr "Suorita \"make\" asiakirjahakemistossa"
-
-#: ../plugins/externaltools/tools/tools.glade.h:10
-msgid "Shortcut _key:"
-msgstr "Pika_näppäin:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:11
-msgid "_Applicability:"
-msgstr "_Soveltuvuus:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:12
-msgid "_Description:"
-msgstr "_Kuvaus:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:13
-msgid "_Input:"
-msgstr "_Syöte:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:14
-msgid "_Output:"
-msgstr "Tulosterivit:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:15
-msgid "_Save:"
-msgstr "_Tallenna_"
-
-#: ../plugins/externaltools/tools/tools.glade.h:16
-msgid "_Tools:"
-msgstr "Työ_kalut:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:17
-msgid ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
-msgstr ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
+#: ../plugins/externaltools/tools/functions.py:199
+msgid "You must be inside a word to run this command"
+msgstr "Kohdistimen täytyy olla sanan kohdalla jotta komento voidaan suorittaa"
 
 #: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
@@ -2641,6 +2580,72 @@ msgstr "Muokkaa työkalua <i>%s</i>:"
 msgid "New tool"
 msgstr "Uusi työkalu"
 
+#: ../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "K_omento:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "Muokkaa työkalua <i>make</i>:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "Ulkoisten työkalujen hallinta"
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#: ../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr ""
+"Ei mitään\n"
+"Valittu asiakirja\n"
+"Kaikki asiakirjat"
+
+#: ../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "Suorita \"make\" asiakirjahakemistossa"
+
+#: ../plugins/externaltools/tools/tools.glade.h:10
+msgid "Shortcut _key:"
+msgstr "Pika_näppäin:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr "_Soveltuvuus:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "_Kuvaus:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "_Syöte:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "Tulosterivit:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "_Tallenna_"
+
+#: ../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "Työ_kalut:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Sisennä"
@@ -2697,21 +2702,13 @@ msgstr "Lisää käyttäjänimen kohdistimen kohdalle."
 msgid "User name"
 msgstr "Käyttäjänimi"
 
-#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
-msgid "Manage _Snippets..."
-msgstr "Hallitse _koodinpätkiä..."
-
-#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
-msgid "Manage Snippets"
-msgstr "Hallitse koodinpätkiä"
-
 #: ../plugins/snippets/snippets/snippets.glade.h:2
 msgid "<b>Activation</b>"
 msgstr "<b>Aktivointi</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
-msgid "Configure Snippets Plugin"
-msgstr "Koodinpätkien liitännäisen määrittelyt"
+msgid "Snippets Manager"
+msgstr "Koodinpätkien hallinta"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:4
 msgid "_Accelerator:"
@@ -2728,6 +2725,41 @@ msgstr "_Koodinpätkät:"
 #: ../plugins/snippets/snippets/snippets.glade.h:7
 msgid "_Tab trigger:"
 msgstr "_Tab-liipaisu:"
+
+#: ../plugins/snippets/snippets/__init__.py:37
+#, python-format
+msgid ""
+"Could not load the file \"%s\". The file is probably corrupt. Please fix or "
+"remove the file. To try to load the file again, select the Tools -> Manage "
+"Snippets... menu item."
+msgstr ""
+"Tiedostoa \"%s\" ei voitu ladata. Tiedosto on luultavasti viallinen. Ole "
+"hyvä ja korjaa tai poista tiedosto. Jos haluat yrittää ladata tiedoston "
+"uudestaan, valitse Työkalut -> Koodinpätkien hallinta... "
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
+msgid "Manage _Snippets..."
+msgstr "Hallitse _koodinpätkiä..."
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage snippets"
+msgstr "Hallitse koodinpätkiä"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:65
+msgid "Add a new snippet..."
+msgstr "Lisää uusi koodinpätkä..."
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:117
+msgid "Global"
+msgstr "Kaikkialla"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:605
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Syötä uusi pikanäppäin tai tyhjennä arvo Backspacella"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:607
+msgid "Type a new accelerator"
+msgstr "Syötä uusi pikanäppäin"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -4699,6 +4731,9 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid "Configure Snippets Plugin"
+#~ msgstr "Koodinpätkien liitännäisen määrittelyt"
 
 #~ msgid "gedit cannot handle <i>%s:</i> locations."
 #~ msgstr "gedit ei pysty käsittelemään tyypin <i>%s:</i> sijainteja."
