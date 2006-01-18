@@ -34,10 +34,10 @@ class SnippetsPlugin(gedit.Plugin):
 		gedit.Plugin.__init__(self)
 		self.dlg = None
 		self.xml_error_message = \
-				_('An error has occured during loading the %s ' \
-				'file. The file is probably corrupt. Please fix or ' \
-				'remove	the file. To try to load the file again select ' \
-				'the Tools -> Snippets menu item.') % self.XML_FILE
+				_('Could not load the file "%s". ' \
+				'The file is probably corrupt. Please fix or ' \
+				'remove the file. To try to load the file again, select ' \
+				'the Tools -> Manage Snippets... menu item.') % self.XML_FILE
 
 		self.show_xml_error = not self.load_xml()
 	
