@@ -70,10 +70,21 @@ typedef struct _GeditPanelClass GeditPanelClass;
 struct _GeditPanelClass 
 {
 	GtkVBoxClass parent_class;
-	
+
+	void (* item_added)     (GeditPanel     *panel,
+				 GtkWidget      *item);
+	void (* item_removed)   (GeditPanel     *panel,
+				 GtkWidget      *item);
+
 	/* Keybinding signals */
 	void (* close)          (GeditPanel     *panel);
-	void (* focus_document) (GeditPanel     *panel);	
+	void (* focus_document) (GeditPanel     *panel);
+
+	/* Padding for future expansion */
+	void (*_gedit_reserved1) (void);
+	void (*_gedit_reserved2) (void);
+	void (*_gedit_reserved3) (void);
+	void (*_gedit_reserved4) (void);	
 };
 
 /*
@@ -103,6 +114,8 @@ gboolean	 gedit_panel_item_is_active 	(GeditPanel     *panel,
 					    	 GtkWidget      *item);
 
 GtkOrientation	 gedit_panel_get_orientation	(GeditPanel	*panel);
+
+gint		 gedit_panel_get_n_items	(GeditPanel	*panel);
 
 
 G_END_DECLS

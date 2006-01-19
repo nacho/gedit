@@ -2482,6 +2482,15 @@ bottom_panel_hide (GtkWidget   *panel,
 }
 
 static void
+bottom_panel_item_removed (GtkWidget   *panel,
+			   GtkWidget   *item,
+			   GeditWindow *window)
+{
+	if (gedit_panel_get_n_items (panel) == 0)
+		_gedit_window_set_bottom_panel_visible (window, FALSE);
+}
+
+static void
 create_bottom_panel (GeditWindow *window) 
 {
 	GtkAction *action;
@@ -2500,10 +2509,13 @@ create_bottom_panel (GeditWindow *window)
 			  "size_allocate",
 			  G_CALLBACK (bottom_panel_size_allocate),
 			  window);
-
   	g_signal_connect (window->priv->bottom_panel,
 			  "hide",
 			  G_CALLBACK (bottom_panel_hide),
+			  window);
+  	g_signal_connect (window->priv->bottom_panel,
+			  "item_removed",
+			  G_CALLBACK (bottom_panel_item_removed),
 			  window);
 
 	gtk_paned_set_position (GTK_PANED (window->priv->vpaned),

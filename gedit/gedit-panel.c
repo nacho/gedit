@@ -77,6 +77,8 @@ enum {
 
 /* Signals */
 enum {
+	ITEM_ADDED,
+	ITEM_REMOVED,
 	CLOSE,
 	FOCUS_DOCUMENT,
 	LAST_SIGNAL
@@ -125,7 +127,6 @@ gedit_panel_get_property (GObject    *object,
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
-
 	}
 }
 
@@ -214,20 +215,44 @@ gedit_panel_class_init (GeditPanelClass *klass)
 	klass->close = gedit_panel_close;
 	klass->focus_document = gedit_panel_focus_document;
 
-	signals[CLOSE] =  g_signal_new ("close",
-					G_OBJECT_CLASS_TYPE (klass),
-					G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-					G_STRUCT_OFFSET (GeditPanelClass, close),
-		  			NULL, NULL,
-		  			g_cclosure_marshal_VOID__VOID,
-					G_TYPE_NONE, 0);
-	signals[FOCUS_DOCUMENT] =  g_signal_new ("focus_document",
-					G_OBJECT_CLASS_TYPE (klass),
-					G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
-					G_STRUCT_OFFSET (GeditPanelClass, focus_document),
-		  			NULL, NULL,
-		  			g_cclosure_marshal_VOID__VOID,
-					G_TYPE_NONE, 0);					
+	signals[ITEM_ADDED] =
+		g_signal_new ("item_added",
+			      G_OBJECT_CLASS_TYPE (klass),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GeditPanelClass, item_added),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1,
+			      GEDIT_TYPE_TAB);
+	signals[ITEM_REMOVED] =
+		g_signal_new ("item_removed",
+			      G_OBJECT_CLASS_TYPE (klass),
+			      G_SIGNAL_RUN_FIRST,
+			      G_STRUCT_OFFSET (GeditPanelClass, item_removed),
+			      NULL, NULL,
+			      g_cclosure_marshal_VOID__OBJECT,
+			      G_TYPE_NONE,
+			      1,
+			      GTK_TYPE_WIDGET);
+
+	/* Keybinding signals */
+	signals[CLOSE] =
+		g_signal_new ("close",
+			      G_OBJECT_CLASS_TYPE (klass),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GeditPanelClass, close),
+		  	      NULL, NULL,
+		  	      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+	signals[FOCUS_DOCUMENT] =
+		g_signal_new ("focus_document",
+			      G_OBJECT_CLASS_TYPE (klass),
+			      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+			      G_STRUCT_OFFSET (GeditPanelClass, focus_document),
+		  	      NULL, NULL,
+		  	      g_cclosure_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);					
 	binding_set = gtk_binding_set_by_class (klass);
   
 	gtk_binding_entry_add_signal (binding_set, 
@@ -740,6 +765,8 @@ gedit_panel_add_item (GeditPanel  *panel,
 				       item,
 				       tab_label,
 				       menu_label);
+
+	g_signal_emit (G_OBJECT (panel), signals[ITEM_ADDED], 0, item);
 }
 
 void
@@ -803,7 +830,10 @@ gedit_panel_remove_item (GeditPanel *panel,
 		}
 		gtk_widget_destroy (data->toolbar);
 	}
-	
+
+	/* ref the item to keep it alive during signal emission */
+	g_object_ref (G_OBJECT (item));
+
 	gtk_notebook_remove_page (GTK_NOTEBOOK (panel->priv->notebook), 
 				  page_num);
 
@@ -813,6 +843,10 @@ gedit_panel_remove_item (GeditPanel *panel,
 		sync_title (panel, NULL);
 		sync_toolbar (panel, NULL);
 	}
+
+	g_signal_emit (G_OBJECT (panel), signals[ITEM_REMOVED], 0, item);
+
+	g_object_unref (G_OBJECT (item));
 
 	return TRUE;
 }
@@ -864,4 +898,10 @@ GtkOrientation
 gedit_panel_get_orientation (GeditPanel *panel)
 {
 	return panel->priv->orientation;
+}
+
+gint
+gedit_panel_get_n_items (GeditPanel *panel)
+{
+	return gtk_notebook_get_n_pages (panel->priv->notebook);
 }

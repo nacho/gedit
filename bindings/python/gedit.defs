@@ -526,6 +526,12 @@
   (return-type "GtkOrientation")
 )
 
+(define-method get_n_items
+  (of-object "GeditPanel")
+  (c-name "gedit_panel_get_n_items")
+  (return-type "gint")
+)
+
 
 ;; From ../../gedit/gedit-plugin.h
 

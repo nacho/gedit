@@ -1,3 +1,11 @@
+2006-01-19  Paolo Borelli  <pborelli@katamail.com>
+
+	* bindings/python/gedit.defs: bind new panel function.
+	* gedit/gedit-panel.[ch]: add item_added and item_removed signals and
+	a function to get the number of items in a panel.
+	* gedit/gedit-window.c: hide the bottom panel when all the items are
+	removed.
+
 2006-01-18  Steve Frécinaux  <steve@istique.net>
 
 	* plugins/externaltools/tools/capture.py: corrected freeze bug when 
