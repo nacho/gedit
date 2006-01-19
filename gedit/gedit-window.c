@@ -971,6 +971,10 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 				      gedit_menu_entries,
 				      G_N_ELEMENTS (gedit_menu_entries),
 				      window);
+	gtk_action_group_add_toggle_actions (action_group,
+					     gedit_toggle_menu_entries,
+					     G_N_ELEMENTS (gedit_toggle_menu_entries),
+					     window);
 
 	gtk_ui_manager_insert_action_group (manager, action_group, 0);
 	g_object_unref (action_group);
@@ -2421,8 +2425,6 @@ side_panel_hide (GtkWidget   *panel,
 static void
 create_side_panel (GeditWindow *window)
 {
-	GtkAction *action;
-	gboolean visible;
 	GtkWidget *documents_panel;
 
 	gedit_debug (DEBUG_WINDOW);
@@ -2453,17 +2455,6 @@ create_side_panel (GeditWindow *window)
 					      documents_panel,
 					      "Documents",
 					      GTK_STOCK_FILE);
-
-	visible = gedit_prefs_manager_get_side_pane_visible ();
-
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "ViewSidePane");		
-
-	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-	if (visible)
-		gtk_widget_show (window->priv->side_panel);
 }
 
 static void
@@ -2482,27 +2473,53 @@ bottom_panel_hide (GtkWidget   *panel,
 }
 
 static void
-bottom_panel_item_removed (GtkWidget   *panel,
+bottom_panel_item_removed (GeditPanel  *panel,
 			   GtkWidget   *item,
 			   GeditWindow *window)
 {
 	if (gedit_panel_get_n_items (panel) == 0)
+	{
+		GtkAction *action;
+
 		_gedit_window_set_bottom_panel_visible (window, FALSE);
+
+		action = gtk_action_group_get_action (window->priv->action_group,
+						      "ViewBottomPanel");
+		gtk_action_set_sensitive (action, FALSE);
+	}
+}
+
+static void
+bottom_panel_item_added (GeditPanel  *panel,
+			 GtkWidget   *item,
+			 GeditWindow *window)
+{
+	/* if it's the first item added, set the menu item
+	 * sensitive and if needed show the panel */
+	if (gedit_panel_get_n_items (panel) == 1)
+	{
+		GtkAction *action;
+		gboolean show;
+
+		action = gtk_action_group_get_action (window->priv->action_group,
+						      "ViewBottomPanel");
+		gtk_action_set_sensitive (action, TRUE);
+
+		show = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
+		_gedit_window_set_bottom_panel_visible (window, show);
+	}
 }
 
 static void
 create_bottom_panel (GeditWindow *window) 
 {
-	GtkAction *action;
-	gboolean visible;
-
 	gedit_debug (DEBUG_WINDOW);
 
 	window->priv->bottom_panel = gedit_panel_new (GTK_ORIENTATION_HORIZONTAL);
-	
+
 	gtk_paned_pack2 (GTK_PANED (window->priv->vpaned), 
 			 window->priv->bottom_panel, 
-			 FALSE, 
+			 FALSE,
 			 FALSE);
 
 	g_signal_connect (window->priv->bottom_panel,
@@ -2517,20 +2534,53 @@ create_bottom_panel (GeditWindow *window)
 			  "item_removed",
 			  G_CALLBACK (bottom_panel_item_removed),
 			  window);
+  	g_signal_connect (window->priv->bottom_panel,
+			  "item_added",
+			  G_CALLBACK (bottom_panel_item_added),
+			  window);
 
 	gtk_paned_set_position (GTK_PANED (window->priv->vpaned),
-				gedit_prefs_manager_get_bottom_panel_size ()); // CHECK set a min height as we do for the sidepane?
+				MAX (50, gedit_prefs_manager_get_bottom_panel_size ()));
+}
 
-	visible = gedit_prefs_manager_get_bottom_panel_visible();
+static void
+init_panes_visibility (GeditWindow *window)
+{
+	GtkAction *action;
+	gboolean visible;
+
+	gedit_debug (DEBUG_WINDOW);
+
+	/* side pane */
+	visible = gedit_prefs_manager_get_side_pane_visible ();
 
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "ViewBottomPanel");
+					      "ViewSidePane");		
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
-	if(visible) 
-  		gtk_widget_show_all (window->priv->bottom_panel);
+	if (visible)
+		gtk_widget_show (window->priv->side_panel);
+
+	/* bottom pane, it can be empty */
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "ViewBottomPanel");
+
+	if (gedit_panel_get_n_items (GEDIT_PANEL (window->priv->bottom_panel)) > 0)
+	{
+		visible = gedit_prefs_manager_get_bottom_panel_visible();
+
+		if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
+			gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
+
+		if(visible)
+  			gtk_widget_show (window->priv->bottom_panel);
+	}
+	else
+	{
+		gtk_action_set_sensitive (action, FALSE);
+	}
 }
 
 static void
@@ -2591,9 +2641,6 @@ gedit_window_init (GeditWindow *window)
 
 	gedit_debug_message (DEBUG_WINDOW, "Create bottom panel");
 	create_bottom_panel (window);
-	
-	/* Set visibility of panels */
-	// TODO
 
 	gedit_debug_message (DEBUG_WINDOW, "Connect signals");
 	/* Drag and drop support */
@@ -2647,9 +2694,13 @@ gedit_window_init (GeditWindow *window)
 	                  NULL);
 	                  
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");	                  
-        gedit_plugins_engine_update_plugins_ui (window, TRUE);
-        
-       	gedit_debug_message (DEBUG_WINDOW, "END");	                  
+	gedit_plugins_engine_update_plugins_ui (window, TRUE);
+
+	/* set visibility of panes.
+	 * This needs to be done after plugins activatation */
+	init_panes_visibility (window);
+
+	gedit_debug_message (DEBUG_WINDOW, "END");	                  
 }
 
 GeditView *
@@ -3166,18 +3217,18 @@ _gedit_window_set_saving_session_state (GeditWindow *window,
 				        gboolean     saving_session)
 {
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
-		
-	GeditWindowState old_state = window->priv->state;
 	
+	GeditWindowState old_state = window->priv->state;
+
 	if (saving_session)
 		window->priv->state |= GEDIT_WINDOW_STATE_SAVING_SESSION;
 	else
 		window->priv->state &= ~GEDIT_WINDOW_STATE_SAVING_SESSION;
-		
+
 	if (old_state != window->priv->state)
 	{
 		set_sensitivity_according_to_window_state (window);
-		
+
 		g_object_notify (G_OBJECT (window), "state");
 	}
 }

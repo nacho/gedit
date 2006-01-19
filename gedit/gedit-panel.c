@@ -224,7 +224,7 @@ gedit_panel_class_init (GeditPanelClass *klass)
 			      g_cclosure_marshal_VOID__OBJECT,
 			      G_TYPE_NONE,
 			      1,
-			      GEDIT_TYPE_TAB);
+			      GTK_TYPE_WIDGET);
 	signals[ITEM_REMOVED] =
 		g_signal_new ("item_removed",
 			      G_OBJECT_CLASS_TYPE (klass),
@@ -903,5 +903,5 @@ gedit_panel_get_orientation (GeditPanel *panel)
 gint
 gedit_panel_get_n_items (GeditPanel *panel)
 {
-	return gtk_notebook_get_n_pages (panel->priv->notebook);
+	return gtk_notebook_get_n_pages (GTK_NOTEBOOK (panel->priv->notebook));
 }

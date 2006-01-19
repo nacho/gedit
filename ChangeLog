@@ -1,5 +1,12 @@
 2006-01-19  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-panel.c: fix warning.
+	* gedit-ui.h: make view bottom pane action sensitive.
+	* gedit/gedit-window.c: handle view bottom pane sensitivity according
+	to the presence of items in the bottom pane.
+
+2006-01-19  Paolo Borelli  <pborelli@katamail.com>
+
 	* bindings/python/gedit.defs: bind new panel function.
 	* gedit/gedit-panel.[ch]: add item_added and item_removed signals and
 	a function to get the number of items in a panel.

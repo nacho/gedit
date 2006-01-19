@@ -152,6 +152,13 @@ static const GtkToggleActionEntry gedit_always_sensitive_toggle_menu_entries[] =
 	  G_CALLBACK (gedit_cmd_view_show_bottom_panel), FALSE }	  
 };
 
+static const GtkToggleActionEntry gedit_toggle_menu_entries[] =
+{
+	{ "ViewBottomPanel", NULL, N_("_Bottom Panel"), "<control>F9",
+	  N_("Show or hide the bottom panel in the current window"),
+	  G_CALLBACK (gedit_cmd_view_show_bottom_panel), FALSE }	  
+};
+
 G_END_DECLS
 
 #endif  /* __GEDIT_UI_H__  */
