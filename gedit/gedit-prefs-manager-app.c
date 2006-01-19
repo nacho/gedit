@@ -1110,8 +1110,9 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 		while (l != NULL)
 		{
 			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
+			GeditTab *tab = gedit_tab_get_from_document (doc);
 
-			gedit_document_set_auto_save_enabled (doc, auto_save);
+			gedit_tab_set_auto_save_enabled (tab, auto_save);
 
 			l = l->next;
 		}
@@ -1138,8 +1139,9 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 		while (l != NULL)
 		{
 			GeditDocument *doc = GEDIT_DOCUMENT (l->data);
+			GeditTab *tab = gedit_tab_get_from_document (doc);
 
-			gedit_document_set_auto_save_interval (doc, auto_save_interval);
+			gedit_tab_set_auto_save_interval (tab, auto_save_interval);
 
 			l = l->next;
 		}

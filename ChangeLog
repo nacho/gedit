@@ -1,3 +1,52 @@
+2006-01-19  Paolo Maggi  <paolo@gnome.org>
+
+	Re-added autosave feature. 
+	Based on a patch by Sergio Villar Senin <svillar@igalia.com>
+	
+	* gedit/gedit-debug.[ch]: s/GEDIT_DEBUG_FILE/GEDIT_DEBUG_TAB
+
+	* gedit/gedit-document.c (gedit_document_finalize)
+	(gedit_document_init) (set_readonly) (gedit_document_get_encoding):
+	remove autosave related functions (moved to gedit-tab.c)
+
+	* gedit/gedit-document.h: remove autosave related functions (moved to 
+	gedit-tab.h)
+
+	* gedit/gedit-prefs-manager-app.c
+	(gedit_prefs_manager_auto_save_changed): use new functions for autosave
+
+	* gedit/gedit-tab.c (install_auto_save_timeout)
+	(install_auto_save_timeout_if_needed) (remove_auto_save_timeout)
+	(gedit_tab_get_property) (gedit_tab_set_property)
+	(gedit_tab_finalize) (gedit_tab_class_init)
+	(document_uri_notify_handler)
+	(recoverable_loading_error_message_area_response)
+	(unrecoverable_reverting_error_message_area_response)
+	(show_loading_message_area) (show_saving_message_area)
+	(message_area_set_progress) (document_loading) (document_loaded)
+	(document_saving) (end_saving)
+	(unrecoverable_saving_error_message_area_response)
+	(no_backup_error_message_area_response)
+	(externally_modified_error_message_area_response)
+	(recoverable_saving_error_message_area_response) (document_saved)
+	(gedit_tab_init) (_gedit_tab_load) (_gedit_tab_revert)
+	(_gedit_tab_save) (gedit_tab_auto_save) (_gedit_tab_save_as)
+	(gedit_tab_get_auto_save_enabled) (gedit_tab_set_auto_save_enabled)
+	(gedit_tab_get_auto_save_interval)
+	(gedit_tab_set_auto_save_interval): implemented autosave feature.
+	It works in the following way:
+	- the auto_save_timeout timeout is used to call gedit_document_auto_save
+	  every X minutes
+	- when a file is loaded or saved the timeout is removed (to avoid the 
+	  case in which autosave is called while loading/saving)
+	- when a file has been loaded/saved, if needed, the timeout is 
+	  re-created and so gedit_document_auto_save will be called after X 
+	  minutes again
+	  
+	* gedit/gedit-tab.h: new functions related to autosave
+
+	* bindings/python/gedit.defs: updated
+
 2006-01-19  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-panel.c: fix warning.

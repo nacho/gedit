@@ -118,7 +118,10 @@ typedef enum
 	GEDIT_DOCUMENT_SAVE_IGNORE_MTIME 	= 1 << 0,
 
 	/* write the file directly without attempting to backup */
-	GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP	= 1 << 1
+	GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP	= 1 << 1,
+	
+	/* preserve previous backup file, needed to support autosaving */
+	GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP	= 1 << 2
 } GeditDocumentSaveFlags;
 
 
@@ -219,19 +222,13 @@ GtkSourceLanguage
 const GeditEncoding 
 		*gedit_document_get_encoding	(GeditDocument       *doc);
 
-// CHECK: I think this can be private
-void		 gedit_document_set_auto_save_enabled	
-						(GeditDocument       *doc, 
-						 gboolean             enable);
-void		 gedit_document_set_auto_save_interval 
-						(GeditDocument       *doc, 
-						 gint                 interval);
-
 void		 gedit_document_set_enable_search_highlighting 
 						(GeditDocument       *doc,
 						 gboolean             enable);
+
 gboolean	 gedit_document_get_enable_search_highlighting
 						(GeditDocument       *doc);
+
 /* 
  * Non exported functions
  */

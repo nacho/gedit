@@ -108,6 +108,20 @@ GeditTab	*gedit_tab_get_from_document	(GeditDocument       *doc);
 
 GeditTabState	 gedit_tab_get_state		(GeditTab	     *tab);
 
+gboolean	 gedit_tab_get_auto_save_enabled	
+						(GeditTab            *tab); 
+
+void		 gedit_tab_set_auto_save_enabled	
+						(GeditTab            *tab, 
+						 gboolean            enable);
+
+gint		 gedit_tab_get_auto_save_interval 
+						(GeditTab            *tab);
+
+void		 gedit_tab_set_auto_save_interval 
+						(GeditTab            *tab, 
+						 gint                interval);
+
 /*
  * Non exported methods
  */

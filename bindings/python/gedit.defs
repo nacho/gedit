@@ -359,26 +359,6 @@
   (return-type "const-GeditEncoding*")
 )
 
-(define-method set_auto_save_enabled
-  (of-object "GeditDocument")
-  (c-name "gedit_document_set_auto_save_enabled")
-  (return-type "none")
-  (parameters
-    '("gboolean" "enable")
-  )
-)
-
-(define-method set_auto_save_interval
-  (of-object "GeditDocument")
-  (c-name "gedit_document_set_auto_save_interval")
-  (return-type "none")
-  (parameters
-    '("gint" "interval")
-  )
-)
-
-
-
 ;; From ../../gedit/gedit-encodings.h
 
 (define-function gedit_encoding_get_type
@@ -612,6 +592,36 @@
   (of-object "GeditTab")
   (c-name "gedit_tab_get_state")
   (return-type "GeditTabState")
+)
+
+(define-method set_auto_save_enabled
+  (of-object "GeditTab")
+  (c-name "gedit_tab_set_auto_save_enabled")
+  (return-type "none")
+  (parameters
+    '("gboolean" "enable")
+  )
+)
+
+(define-method get_auto_save_enabled
+  (of-object "GeditTab")
+  (c-name "gedit_tab_get_auto_save_enabled")
+  (return-type "gboolean")
+)
+
+(define-method set_auto_save_interval
+  (of-object "GeditTab")
+  (c-name "gedit_tab_set_auto_save_interval")
+  (return-type "none")
+  (parameters
+    '("gint" "interval")
+  )
+)
+
+(define-method get_auto_save_interval
+  (of-object "GeditTab")
+  (c-name "gedit_tab_get_auto_save_interval")
+  (return-type "gint")
 )
 
 ;; From ../../gedit/gedit-view.h

@@ -55,29 +55,33 @@
 
 struct _GeditTabPrivate
 {
-	GeditTabState	     state;
+	GeditTabState	        state;
 	
-	GtkWidget	    *view;
-	GtkWidget	    *view_scrolled_window;
+	GtkWidget	       *view;
+	GtkWidget	       *view_scrolled_window;
 
-	GtkWidget	    *message_area;
-	GtkWidget	    *print_preview;
+	GtkWidget	       *message_area;
+	GtkWidget	       *print_preview;
 
-	GeditPrintJob       *print_job;
+	GeditPrintJob          *print_job;
 
 	/* tmp data for saving */
-	gchar		    *tmp_save_uri;
+	gchar		       *tmp_save_uri;
 
 	/* tmp data for loading */
-	gint                 tmp_line_pos;
-	const GeditEncoding *tmp_encoding;
+	gint                    tmp_line_pos;
+	const GeditEncoding    *tmp_encoding;
 	
-	GTimer 		    *timer;
-	guint		     times_called;
-
-	gboolean	     not_editable;
+	GTimer 		       *timer;
+	guint		        times_called;
 
 	GeditDocumentSaveFlags	save_flags;
+
+        gint                    auto_save_interval;
+        guint                   auto_save_timeout;
+        
+	gint	                not_editable : 1;
+	gint                    auto_save : 1;
 };
 
 G_DEFINE_TYPE(GeditTab, gedit_tab, GTK_TYPE_VBOX)
@@ -86,8 +90,77 @@ enum
 {
 	PROP_0,
 	PROP_NAME,
-	PROP_STATE
+	PROP_STATE,
+	PROP_AUTO_SAVE,
+	PROP_AUTO_SAVE_INTERVAL
 };
+
+static gboolean gedit_tab_auto_save (GeditTab *tab);
+
+static void
+install_auto_save_timeout (GeditTab *tab)
+{
+	gint timeout;
+
+	gedit_debug (DEBUG_TAB);
+
+	g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+	g_return_if_fail (tab->priv->auto_save);
+	g_return_if_fail (tab->priv->auto_save_interval > 0);
+	
+	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_LOADING);
+	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_SAVING);
+	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_REVERTING);
+	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_LOADING_ERROR);
+	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_SAVING_ERROR);
+	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_SAVING_ERROR);
+	g_return_if_fail (tab->priv->state != GEDIT_TAB_STATE_REVERTING_ERROR);
+	
+	/* Add a new timeout */
+	timeout = g_timeout_add (tab->priv->auto_save_interval * 1000 * 60,
+				 (GSourceFunc) gedit_tab_auto_save,
+				 tab);
+
+	tab->priv->auto_save_timeout = timeout;
+}
+
+static gboolean
+install_auto_save_timeout_if_needed (GeditTab *tab)
+{
+	GeditDocument *doc;
+	
+	gedit_debug (DEBUG_TAB);
+	
+	g_return_val_if_fail (tab->priv->auto_save_timeout <= 0, FALSE);
+	g_return_val_if_fail ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) ||
+			      (tab->priv->state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW), FALSE);
+			  
+	doc = gedit_tab_get_document (tab);
+	
+ 	if (tab->priv->auto_save && 
+ 	    !gedit_document_is_untitled (doc) &&
+ 	    !gedit_document_get_readonly (doc))
+ 	{ 
+ 		install_auto_save_timeout (tab);
+ 		
+ 		return TRUE;
+ 	}
+ 	
+ 	return FALSE;
+}
+
+static void
+remove_auto_save_timeout (GeditTab *tab)
+{
+	gedit_debug (DEBUG_TAB);
+
+	/* FIXME: check sugli stati */
+	
+	g_return_if_fail (tab->priv->auto_save_timeout > 0);
+	
+	g_source_remove (tab->priv->auto_save_timeout);
+	tab->priv->auto_save_timeout = 0;
+}
 
 
 static void
@@ -108,6 +181,38 @@ gedit_tab_get_property (GObject    *object,
 			g_value_set_int (value,
 					 gedit_tab_get_state (tab));
 			break;			
+		case PROP_AUTO_SAVE:
+			g_value_set_boolean (value,
+					     gedit_tab_get_auto_save_enabled (tab));
+			break;
+		case PROP_AUTO_SAVE_INTERVAL:
+			g_value_set_int (value,
+					 gedit_tab_get_auto_save_interval (tab));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;			
+	}
+}
+
+static void
+gedit_tab_set_property (GObject      *object,
+		        guint         prop_id,
+		        const GValue *value,
+		        GParamSpec   *pspec)
+{
+	GeditTab *tab = GEDIT_TAB (object);
+
+	switch (prop_id)
+	{
+		case PROP_AUTO_SAVE:
+			gedit_tab_set_auto_save_enabled (tab,
+							 g_value_get_boolean (value));
+			break;
+		case PROP_AUTO_SAVE_INTERVAL:
+			gedit_tab_set_auto_save_interval (tab,
+							  g_value_get_int (value));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;			
@@ -121,7 +226,7 @@ gedit_tab_finalize (GObject *object)
 	
 	if (tab->priv->print_job != NULL)
 	{
-		g_print ("Cancelling printing\n");
+		gedit_debug_message (DEBUG_TAB, "Cancelling printing");
 		
 		gtk_source_print_job_cancel (GTK_SOURCE_PRINT_JOB (tab->priv->print_job));
 		g_object_unref (tab->priv->print_job);
@@ -131,6 +236,9 @@ gedit_tab_finalize (GObject *object)
 		g_timer_destroy (tab->priv->timer);
 
 	g_free (tab->priv->tmp_save_uri);
+
+	if (tab->priv->auto_save_timeout > 0)
+		remove_auto_save_timeout (tab);
 
 	G_OBJECT_CLASS (gedit_tab_parent_class)->finalize (object);
 }
@@ -142,6 +250,7 @@ gedit_tab_class_init (GeditTabClass *klass)
 
 	object_class->finalize = gedit_tab_finalize;
 	object_class->get_property = gedit_tab_get_property;
+	object_class->set_property = gedit_tab_set_property;
 	
 	g_object_class_install_property (object_class,
 					 PROP_NAME,
@@ -150,7 +259,6 @@ gedit_tab_class_init (GeditTabClass *klass)
 							      "The tab's name",
 							      NULL,
 							      G_PARAM_READABLE));
-							      
 	g_object_class_install_property (object_class,
 					 PROP_STATE,
 					 g_param_spec_int ("state",
@@ -161,8 +269,27 @@ gedit_tab_class_init (GeditTabClass *klass)
 							   0, /* GEDIT_TAB_STATE_NORMAL */
 							   G_PARAM_READABLE));							      	
 							      
+	g_object_class_install_property (object_class,
+					 PROP_AUTO_SAVE,
+					 g_param_spec_boolean ("autosave",
+							       "Autosave",
+							       "Autosave feature",
+							       TRUE,
+							       G_PARAM_READWRITE));
+
+	g_object_class_install_property (object_class,
+					 PROP_AUTO_SAVE_INTERVAL,
+					 g_param_spec_int ("autosave_interval",
+							   "AutosaveInterval",
+							   "Time between two autosaves",
+							   0,
+							   G_MAXINT,
+							   0,
+							   G_PARAM_READWRITE));
+							      
 	g_type_class_add_private (object_class, sizeof (GeditTabPrivate));
 }
+
 
 GeditTabState
 gedit_tab_get_state (GeditTab *tab)
@@ -275,11 +402,16 @@ gedit_tab_set_state (GeditTab      *tab,
 	g_object_notify (G_OBJECT (tab), "state");		
 }
 
+
+
 static void 
 document_uri_notify_handler (GeditDocument *document,
 			     GParamSpec    *pspec,
 			     GeditTab      *tab)
 {
+	gedit_debug (DEBUG_TAB);
+	
+	/* Notify the change in the URI */
 	g_object_notify (G_OBJECT (tab), "name");
 }
 
@@ -361,6 +493,8 @@ recoverable_loading_error_message_area_response (GeditMessageArea *message_area,
 	
 		tab->priv->tmp_encoding = encoding;
 		
+		g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+
 		gedit_document_load (doc,
 				     uri,
 				     encoding,
@@ -425,7 +559,9 @@ unrecoverable_reverting_error_message_area_response (GeditMessageArea *message_a
 
 	view = gedit_tab_get_view (tab);
 
-	gtk_widget_grab_focus (GTK_WIDGET (view));	
+	gtk_widget_grab_focus (GTK_WIDGET (view));
+	
+	install_auto_save_timeout_if_needed (tab);	
 }
 
 #define MAX_MSG_LENGTH 100
@@ -446,7 +582,7 @@ show_loading_message_area (GeditTab *tab)
 	if (tab->priv->message_area != NULL)
 		return;
 	
-	gedit_debug (DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_TAB);
 		
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (doc != NULL);
@@ -570,7 +706,7 @@ show_saving_message_area (GeditTab *tab)
 	if (tab->priv->message_area != NULL)
 		return;
 	
-	gedit_debug (DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_TAB);
 		
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (doc != NULL);
@@ -643,7 +779,7 @@ message_area_set_progress (GeditTab	    *tab,
 	if (tab->priv->message_area == NULL)
 		return;
 	
-	gedit_debug_message (DEBUG_DOCUMENT, "%Ld/%Ld", size, total_size);
+	gedit_debug_message (DEBUG_TAB, "%Ld/%Ld", size, total_size);
 	
 	g_return_if_fail (GEDIT_IS_PROGRESS_MESSAGE_AREA (tab->priv->message_area));
 	
@@ -680,7 +816,7 @@ document_loading (GeditDocument    *document,
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
 		 	  (tab->priv->state == GEDIT_TAB_STATE_REVERTING));
 
-	gedit_debug_message (DEBUG_DOCUMENT, "%Ld/%Ld", size, total_size);
+	gedit_debug_message (DEBUG_TAB, "%Ld/%Ld", size, total_size);
 	
 	if (tab->priv->timer == NULL)
 	{
@@ -744,7 +880,8 @@ document_loaded (GeditDocument *document,
 
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
 			  (tab->priv->state == GEDIT_TAB_STATE_REVERTING));
-
+	g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+	
 	g_timer_destroy (tab->priv->timer);
 	tab->priv->timer = NULL;
 	tab->priv->times_called = 0;
@@ -887,6 +1024,8 @@ document_loaded (GeditDocument *document,
 		g_list_free (all_documents);
 
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
+		
+		install_auto_save_timeout_if_needed (tab);
 	}
 
  end:
@@ -906,7 +1045,7 @@ document_saving (GeditDocument    *document,
 
 	g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_SAVING);
 
-	gedit_debug_message (DEBUG_DOCUMENT, "%Ld/%Ld", size, total_size);
+	gedit_debug_message (DEBUG_TAB, "%Ld/%Ld", size, total_size);
 	
 	if (tab->priv->timer == NULL)
 	{
@@ -952,11 +1091,15 @@ document_saving (GeditDocument    *document,
 }
 
 static void
-reset_tmp_data_for_saving (GeditTab *tab)
+end_saving (GeditTab *tab)
 {
+	/* Reset tmp data for saving */
 	g_free (tab->priv->tmp_save_uri);
 	tab->priv->tmp_save_uri = NULL;
 	tab->priv->tmp_encoding = NULL;
+	
+	install_auto_save_timeout_if_needed (tab);
+
 }
 
 static void 
@@ -971,6 +1114,8 @@ unrecoverable_saving_error_message_area_response (GeditMessageArea *message_area
 	else
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
 
+	end_saving (tab);
+	
 	set_message_area (tab, NULL);
 
 	view = gedit_tab_get_view (tab);
@@ -1000,13 +1145,13 @@ no_backup_error_message_area_response (GeditMessageArea *message_area,
 		/* don't bug the user again with this... */
 		tab->priv->save_flags |= GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP;
 
+		g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+		
 		/* Force saving */
 		gedit_document_save (doc, tab->priv->save_flags);
 	}
 	else
 	{
-		reset_tmp_data_for_saving (tab);
-
 		unrecoverable_saving_error_message_area_response (message_area,
 								  response_id,
 								  tab);
@@ -1032,15 +1177,15 @@ externally_modified_error_message_area_response (GeditMessageArea *message_area,
 
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING);
 
+		g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+		
 		/* ignore mtime should not be persisted in save flags across saves */
 
 		/* Force saving */
 		gedit_document_save (doc, tab->priv->save_flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME);
 	}
 	else
-	{
-		reset_tmp_data_for_saving (tab);
-		
+	{		
 		unrecoverable_saving_error_message_area_response (message_area,
 								  response_id,
 								  tab);
@@ -1074,18 +1219,17 @@ recoverable_saving_error_message_area_response (GeditMessageArea *message_area,
 			
 		tab->priv->tmp_encoding = encoding;
 
-		g_print ("Force saving with URI '%s'\n",
-			 tab->priv->tmp_save_uri);
+		gedit_debug_message (DEBUG_TAB, "Force saving with URI '%s'", tab->priv->tmp_save_uri);
 			 
+		g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+		
 		gedit_document_save_as (doc,
 					tab->priv->tmp_save_uri,
 					tab->priv->tmp_encoding,
 					tab->priv->save_flags);
 	}
 	else
-	{
-		reset_tmp_data_for_saving (tab);
-		
+	{		
 		unrecoverable_saving_error_message_area_response (message_area,
 								  response_id,
 								  tab);
@@ -1103,7 +1247,8 @@ document_saved (GeditDocument *document,
 
 	g_return_if_fail (tab->priv->tmp_save_uri != NULL);
 	g_return_if_fail (tab->priv->tmp_encoding != NULL);	
-
+	g_return_if_fail (tab->priv->auto_save_timeout <= 0);
+	
 	g_timer_destroy (tab->priv->timer);
 	tab->priv->timer = NULL;
 	tab->priv->times_called = 0;
@@ -1161,8 +1306,6 @@ document_saved (GeditDocument *document,
 						  "response",
 						  G_CALLBACK (unrecoverable_saving_error_message_area_response),
 						  tab);
-						  
-				reset_tmp_data_for_saving (tab);						  
 			}			
 		}
 		else
@@ -1198,7 +1341,7 @@ document_saved (GeditDocument *document,
 		else
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
 			
-		reset_tmp_data_for_saving (tab);
+		end_saving (tab);
 	}
 
 }
@@ -1224,6 +1367,14 @@ gedit_tab_init (GeditTab *tab)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
 					GTK_POLICY_AUTOMATIC,
 					GTK_POLICY_AUTOMATIC);
+
+	/* Manage auto save data */
+	tab->priv->auto_save = gedit_prefs_manager_get_auto_save ();
+	tab->priv->auto_save = (tab->priv->auto_save != FALSE);
+
+	tab->priv->auto_save_interval = gedit_prefs_manager_get_auto_save_interval ();
+	if (tab->priv->auto_save_interval <= 0)
+		tab->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
 
 	/* Create the view */
 	doc = gedit_document_new ();
@@ -1631,6 +1782,9 @@ _gedit_tab_load (GeditTab            *tab,
 	tab->priv->tmp_line_pos = line_pos;
 	tab->priv->tmp_encoding = encoding;
 	
+	if (tab->priv->auto_save_timeout > 0)
+		remove_auto_save_timeout (tab);
+
 	return gedit_document_load (doc,
 				    uri,
 				    encoding,
@@ -1658,6 +1812,9 @@ _gedit_tab_revert (GeditTab *tab)
 	tab->priv->tmp_line_pos = 0;
 	tab->priv->tmp_encoding = gedit_document_get_encoding (doc);
 
+	if (tab->priv->auto_save_timeout > 0)
+		remove_auto_save_timeout (tab);
+
 	gedit_document_load (doc,
 			     uri,
 			     tab->priv->tmp_encoding,
@@ -1684,11 +1841,80 @@ _gedit_tab_save (GeditTab *tab)
 
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING);
 
-	/* uri used in error messages, will be freed in document_loaded */
+	/* uri used in error messages, will be freed in document_saved */
 	tab->priv->tmp_save_uri = gedit_document_get_uri (doc);
 	tab->priv->tmp_encoding = gedit_document_get_encoding (doc); 
 
+	if (tab->priv->auto_save_timeout > 0)
+		remove_auto_save_timeout (tab);
+		
 	gedit_document_save (doc, tab->priv->save_flags);
+}
+
+static gboolean
+gedit_tab_auto_save (GeditTab *tab)
+{
+	GeditDocument *doc;
+
+	gedit_debug (DEBUG_TAB);
+	
+	g_return_val_if_fail (tab->priv->tmp_save_uri == NULL, FALSE);
+	g_return_val_if_fail (tab->priv->tmp_encoding == NULL, FALSE);
+	
+	doc = gedit_tab_get_document (tab);
+	
+	g_return_val_if_fail (!gedit_document_is_untitled (doc), FALSE);
+	g_return_val_if_fail (!gedit_document_get_readonly (doc), FALSE);
+
+	g_return_val_if_fail (tab->priv->auto_save_timeout > 0, FALSE);
+	g_return_val_if_fail (tab->priv->auto_save, FALSE);
+	g_return_val_if_fail (tab->priv->auto_save_interval > 0, FALSE);
+
+	if (!gtk_text_buffer_get_modified (GTK_TEXT_BUFFER(doc)))
+	{
+		gedit_debug_message (DEBUG_TAB, "Document not modified");
+
+		return TRUE;
+	}
+			
+	if ((tab->priv->state != GEDIT_TAB_STATE_NORMAL) &&
+	    (tab->priv->state != GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW))
+	{
+		/* Retry after 15 seconds */
+		guint timeout;
+		
+		gedit_debug_message (DEBUG_TAB, "Retry after 15 seconds");
+	
+		/* Add a new timeout */
+		timeout = g_timeout_add (30 * 1000,
+					(GSourceFunc) gedit_tab_auto_save,
+					tab);
+
+		tab->priv->auto_save_timeout = timeout;
+	    
+	    	/* Returns FALSE so the old timeout is "destroyed" */
+		return FALSE;
+	}
+	
+	gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING);
+
+	/* uri used in error messages, will be freed in document_saved */
+	tab->priv->tmp_save_uri = gedit_document_get_uri (doc);
+	tab->priv->tmp_encoding = gedit_document_get_encoding (doc); 
+
+	/* Set auto_save_timeout to 0 since the timeout is going to be destroyed */
+	tab->priv->auto_save_timeout = 0;
+
+	/* Since we are autosaving, we need to preserve the backup that was produced
+	   the last time the user "manually" saved the file. In the case a recoverable
+	   error happens while saving, the last backup is not preserved since the user
+	   expressed his willing of saving the file */
+	gedit_document_save (doc, tab->priv->save_flags | GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP);
+	
+	gedit_debug_message (DEBUG_TAB, "Done");
+	
+	/* Returns FALSE so the old timeout is "destroyed" */
+	return FALSE;
 }
 
 void
@@ -1712,12 +1938,15 @@ _gedit_tab_save_as (GeditTab            *tab,
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING);
 
 	/* uri used in error messages... strdup because errors are async
-	 * and the string can go away, will be freed in document_loaded */
+	 * and the string can go away, will be freed in document_saved */
 	tab->priv->tmp_save_uri = g_strdup (uri);
 	tab->priv->tmp_encoding = encoding;
 
 	/* reset the save flags, when saving as */
 	tab->priv->save_flags = 0;
+	
+	if (tab->priv->auto_save_timeout > 0)
+		remove_auto_save_timeout (tab);
 
 	gedit_document_save_as (doc, uri, encoding, tab->priv->save_flags);
 }
@@ -2000,3 +2229,138 @@ _gedit_tab_can_close (GeditTab *tab)
 		!gedit_document_get_deleted (doc));
 }
 
+/**
+ * gedit_tab_get_auto_save_enabled:
+ * @tab: 
+ * 
+ * Gets the current state for the autosave feature
+ * 
+ * Return value: TRUE if the autosave is enabled, else FALSE
+ **/
+gboolean
+gedit_tab_get_auto_save_enabled	(GeditTab *tab)
+{
+	gedit_debug (DEBUG_TAB);
+
+	g_return_val_if_fail (GEDIT_IS_TAB (tab), FALSE);
+
+	return tab->priv->auto_save;
+}
+
+/**
+ * gedit_tab_set_auto_save_enabled:
+ * @tab: a #GeditTab
+ * @enable: enable (TRUE) or disable (FALSE) auto save
+ * 
+ * Enables or disables the autosave feature. It does not install an
+ * autosave timeout if the document is new or is read-only
+ **/
+void
+gedit_tab_set_auto_save_enabled	(GeditTab *tab, 
+				 gboolean enable)
+{
+	GeditDocument *doc = NULL;
+	
+	gedit_debug (DEBUG_TAB);
+
+	g_return_if_fail (GEDIT_IS_TAB (tab));
+
+	doc = gedit_tab_get_document (tab);
+	
+	if (tab->priv->auto_save == enable)
+		return;
+
+	tab->priv->auto_save = enable;
+
+ 	if (enable && 
+ 	    (tab->priv->auto_save_timeout <=0) &&
+ 	    !gedit_document_is_untitled (doc) &&
+ 	    !gedit_document_get_readonly (doc))
+ 	{
+ 		if ((tab->priv->state != GEDIT_TAB_STATE_LOADING) &&
+		    (tab->priv->state != GEDIT_TAB_STATE_SAVING) &&
+		    (tab->priv->state != GEDIT_TAB_STATE_REVERTING) &&
+		    (tab->priv->state != GEDIT_TAB_STATE_LOADING_ERROR) &&
+		    (tab->priv->state != GEDIT_TAB_STATE_SAVING_ERROR) &&
+		    (tab->priv->state != GEDIT_TAB_STATE_REVERTING_ERROR))
+		{
+			install_auto_save_timeout (tab);
+		}
+		/* else: the timeout will be installed when loading/saving/reverting
+		         will terminate */
+		
+		return;
+	}
+ 		
+ 	if (!enable && (tab->priv->auto_save_timeout > 0))
+ 	{
+		remove_auto_save_timeout (tab);
+		
+ 		return; 
+ 	} 
+
+ 	g_return_if_fail ((!enable && (tab->priv->auto_save_timeout <= 0)) ||  
+ 			  gedit_document_is_untitled (doc) || gedit_document_get_readonly (doc)); 
+}
+
+/**
+ * gedit_tab_get_auto_save_interval:
+ * @tab: 
+ * 
+ * Gets the current interval for the autosaves
+ * 
+ * Return value: the value of the autosave
+ **/
+gint 
+gedit_tab_get_auto_save_interval (GeditTab *tab)
+{
+	gedit_debug (DEBUG_TAB);
+
+	g_return_val_if_fail (GEDIT_IS_TAB (tab), 0);
+
+	return tab->priv->auto_save_interval;
+}
+
+/**
+ * gedit_tab_set_auto_save_interval:
+ * @tab: a #GeditTab
+ * @interval: the new interval
+ * 
+ * Sets the interval for the autosave feature. It does nothing if the
+ * interval is the same as the one already present. It removes the old
+ * interval timeout and adds a new one with the autosave passed as
+ * argument.
+ **/
+void 
+gedit_tab_set_auto_save_interval (GeditTab *tab, 
+				  gint interval)
+{
+	GeditDocument *doc = NULL;
+	
+	gedit_debug (DEBUG_TAB);
+	
+	g_return_if_fail (GEDIT_IS_TAB (tab));
+
+	doc = gedit_tab_get_document(tab);
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (interval > 0);
+
+	if (tab->priv->auto_save_interval == interval)
+		return;
+
+	tab->priv->auto_save_interval = interval;
+		
+	if (!tab->priv->auto_save)
+		return;
+
+	if (tab->priv->auto_save_timeout > 0)
+	{
+		g_return_if_fail (!gedit_document_is_untitled (doc));
+		g_return_if_fail (!gedit_document_get_readonly (doc));
+
+		remove_auto_save_timeout (tab);
+
+		install_auto_save_timeout (tab);
+	}
+}

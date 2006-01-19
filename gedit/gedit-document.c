@@ -76,7 +76,6 @@ PROFILE (static GTimer *timer = NULL);
 
 static void	gedit_document_set_readonly	(GeditDocument *doc,
 						 gboolean       readonly);
-
 static void	to_search_region_range 		(GeditDocument *doc,
 						 GtkTextIter   *start, 
 						 GtkTextIter   *end);
@@ -91,7 +90,6 @@ static void	delete_range_cb 		(GeditDocument *doc,
 			     
 struct _GeditDocumentPrivate
 {
-	gint	     auto_save : 1;
 	gint	     readonly : 1;
 	gint	     last_save_was_manually : 1; 	
 	gint	     language_set_by_user : 1;
@@ -107,9 +105,6 @@ struct _GeditDocumentPrivate
 	const GeditEncoding *encoding;
 
 	gchar	    *mime_type;
-
-	gint	     auto_save_interval;
-	guint	     auto_save_timeout;
 
 	time_t       mtime;
 
@@ -213,9 +208,6 @@ gedit_document_finalize (GObject *object)
 	GeditDocument *doc = GEDIT_DOCUMENT (object); 
 	
 	gedit_debug (DEBUG_DOCUMENT);
-
-	if (doc->priv->auto_save_timeout > 0)
-		g_source_remove (doc->priv->auto_save_timeout);
 
 	if (doc->priv->untitled_number > 0)
 	{
@@ -639,13 +631,6 @@ gedit_document_init (GeditDocument *doc)
 	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (doc), 
 					      gedit_prefs_manager_get_bracket_matching ());
 
-	doc->priv->auto_save = gedit_prefs_manager_get_auto_save ();
-	doc->priv->auto_save = (doc->priv->auto_save != FALSE);
-
-	doc->priv->auto_save_interval = gedit_prefs_manager_get_auto_save_interval ();
-	if (doc->priv->auto_save_interval <= 0)
-		doc->priv->auto_save_interval = GPM_DEFAULT_AUTO_SAVE_INTERVAL;
-
 	gedit_document_set_enable_search_highlighting (doc,
 						       gedit_prefs_manager_get_enable_search_highlighting ());
 
@@ -890,28 +875,6 @@ set_readonly (GeditDocument *doc,
 	gedit_debug (DEBUG_DOCUMENT);
 	
 	readonly = (readonly != FALSE);
-
-	if (readonly) 
-	{
-		if (doc->priv->auto_save_timeout > 0)
-		{
-			g_source_remove (doc->priv->auto_save_timeout);
-			doc->priv->auto_save_timeout = 0;
-		}
-	}
-	else
-	{
-		if (doc->priv->auto_save &&
-		    (doc->priv->auto_save_timeout <= 0) && 
-                    !gedit_document_is_untitled (doc))
-		{
-/*			doc->priv->auto_save_timeout = g_timeout_add
-				 (doc->priv->auto_save_interval * 1000 * 60,
-		 		 (GSourceFunc)gedit_document_auto_save,
-		  		 doc);
-*/
-		}
-	}
 
 	if (doc->priv->readonly == readonly) 
 		return;
@@ -1256,6 +1219,7 @@ gedit_document_is_untitled (GeditDocument *doc)
 
 	return (doc->priv->uri == NULL);
 }
+
 
 gboolean
 gedit_document_get_deleted (GeditDocument *doc)
@@ -1684,35 +1648,6 @@ gedit_document_get_encoding (GeditDocument *doc)
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), NULL);
 
 	return doc->priv->encoding;
-}
-
-void
-gedit_document_set_auto_save_enabled (GeditDocument *doc, 
-				      gboolean       enable)
-{
-	gedit_debug (DEBUG_DOCUMENT);
-
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-
-	enable = (enable != FALSE);
-	
-	// TODO
-	
-	return;
-}
-
-void
-gedit_document_set_auto_save_interval (GeditDocument *doc, 
-				       gint           interval)
-{
-	gedit_debug (DEBUG_DOCUMENT);
-
-	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
-	g_return_if_fail (interval > 0);
-
-	// TODO
-
-	return;
 }
 
 glong
