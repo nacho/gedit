@@ -2408,6 +2408,33 @@ notebook_popup_menu (GtkNotebook *notebook,
 }
 
 static void
+hpaned_restore_position (GtkWidget   *widget,
+			 GeditWindow *window)
+{
+	gint pos;
+
+	pos = MAX (100, gedit_prefs_manager_get_side_panel_size ());
+	gtk_paned_set_position (GTK_PANED (window->priv->hpaned), pos);
+
+	/* run this only once */
+	g_signal_handlers_disconnect_by_func (widget, hpaned_restore_position, window);
+}
+
+static void
+vpaned_restore_position (GtkWidget   *widget,
+			 GeditWindow *window)
+{
+	gint pos;
+
+	pos = widget->allocation.height -
+	      MAX (50, gedit_prefs_manager_get_bottom_panel_size ());
+	gtk_paned_set_position (GTK_PANED (window->priv->vpaned), pos);
+
+	/* run this only once */
+	g_signal_handlers_disconnect_by_func (widget, vpaned_restore_position, window);
+}
+
+static void
 side_panel_size_allocate (GtkWidget     *widget,
 			  GtkAllocation *allocation,
 			  GeditWindow   *window)
@@ -2530,14 +2557,6 @@ create_bottom_panel (GeditWindow *window)
 			  "hide",
 			  G_CALLBACK (bottom_panel_hide),
 			  window);
-  	g_signal_connect (window->priv->bottom_panel,
-			  "item_removed",
-			  G_CALLBACK (bottom_panel_item_removed),
-			  window);
-  	g_signal_connect (window->priv->bottom_panel,
-			  "item_added",
-			  G_CALLBACK (bottom_panel_item_added),
-			  window);
 
 	gtk_paned_set_position (GTK_PANED (window->priv->vpaned),
 				MAX (50, gedit_prefs_manager_get_bottom_panel_size ()));
@@ -2581,11 +2600,22 @@ init_panes_visibility (GeditWindow *window)
 	{
 		gtk_action_set_sensitive (action, FALSE);
 	}
+
+	/* start track sensitivity after the initial state is set */
+  	g_signal_connect (window->priv->bottom_panel,
+			  "item_removed",
+			  G_CALLBACK (bottom_panel_item_removed),
+			  window);
+  	g_signal_connect (window->priv->bottom_panel,
+			  "item_added",
+			  G_CALLBACK (bottom_panel_item_added),
+			  window);
 }
 
 static void
 gedit_window_init (GeditWindow *window)
 {
+	static is_first = TRUE;
 	GtkWidget *main_box;
 
 	gedit_debug (DEBUG_WINDOW);
@@ -2619,17 +2649,12 @@ gedit_window_init (GeditWindow *window)
   			    TRUE, 
   			    TRUE, 
   			    0);
-	gtk_widget_show (window->priv->hpaned);
 
-	gedit_debug_message (DEBUG_WINDOW, "Create side panel");		
-  	create_side_panel (window);
-  	  	
 	window->priv->vpaned = gtk_vpaned_new ();
   	gtk_paned_pack2 (GTK_PANED (window->priv->hpaned), 
   			 window->priv->vpaned, 
   			 TRUE, 
   			 FALSE);
-  	gtk_widget_show (window->priv->vpaned);
   	
 	gedit_debug_message (DEBUG_WINDOW, "Create gedit notebook");
 	window->priv->notebook = gedit_notebook_new ();
@@ -2639,8 +2664,31 @@ gedit_window_init (GeditWindow *window)
   			 TRUE);
   	gtk_widget_show (window->priv->notebook);  			 
 
-	gedit_debug_message (DEBUG_WINDOW, "Create bottom panel");
+	/* side and bottom panels */
+  	create_side_panel (window);
 	create_bottom_panel (window);
+
+	/* restore paned positions as soon as we know the panes allocation.
+	 * This needs to be done only for the first window, the successive
+	 * windows are created by cloning the firts one */
+	if (is_first)
+	{
+		is_first = FALSE;
+
+		window->priv->side_panel_size = gedit_prefs_manager_get_side_panel_size ();
+		window->priv->bottom_panel_size = gedit_prefs_manager_get_bottom_panel_size ();
+		g_signal_connect_after (window->priv->hpaned,
+					"map",
+					G_CALLBACK (hpaned_restore_position),
+					window);
+		g_signal_connect_after (window->priv->vpaned,
+					"map",
+					G_CALLBACK (vpaned_restore_position),
+					window);
+	}
+
+	gtk_widget_show (window->priv->hpaned);
+	gtk_widget_show (window->priv->vpaned);
 
 	gedit_debug_message (DEBUG_WINDOW, "Connect signals");
 	/* Drag and drop support */
@@ -3063,7 +3111,7 @@ _gedit_window_set_bottom_panel_visible (GeditWindow *window,
 	if (gedit_prefs_manager_bottom_panel_visible_can_set ())
 		gedit_prefs_manager_set_bottom_panel_visible (visible);
 
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+	action = gtk_action_group_get_action (window->priv->action_group,
 					      "ViewBottomPanel");		
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
