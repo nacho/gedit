@@ -919,7 +919,7 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 	gui = glade_xml_new (filename, root_node, NULL);
 	if (!gui)
 	{
-		filename_markup = g_strdup_printf ("<i>%s</i>", filename);
+		filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
 		msg_plain = g_strdup_printf (_("Unable to find file %s."),
 				filename_markup);
 		msg = g_strconcat ("<span size=\"large\" weight=\"bold\">",
@@ -947,7 +947,7 @@ gedit_utils_get_glade_widgets (const gchar *filename,
 		*wid = glade_xml_get_widget (gui, name);
 		if (*wid == NULL)
 		{
-			filename_markup = g_strdup_printf ("<i>%s</i>", filename);
+			filename_markup = g_markup_printf_escaped ("<i>%s</i>", filename);
 			msg_plain = g_strdup_printf (
 					_("Unable to find the required widgets inside file %s."),
 					filename_markup);

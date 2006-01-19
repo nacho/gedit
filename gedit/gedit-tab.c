@@ -624,25 +624,25 @@ show_loading_message_area (GeditTab *tab)
 		}
 	}
 
-	name_markup = g_strdup_printf ("<b>%s</b>", name);
+	name_markup = g_markup_printf_escaped ("<b>%s</b>", name);
 
 	if (tab->priv->state == GEDIT_TAB_STATE_REVERTING)
 	{
 		if (dirname != NULL)
 		{
-			dirname_markup = g_strdup_printf ("<b>%s</b>", dirname);
+			dirname_markup = g_markup_printf_escaped ("<b>%s</b>", dirname);
 
 			/* Translators: the first %s is a file name (e.g. test.txt) the second one
 			   is a directory (e.g. ssh://master.gnome.org/home/users/paolo) */
-			msg = g_markup_printf_escaped (_("Reverting %s from %s"),
-						       name_markup,
-						       dirname_markup);
+			msg = g_strdup_printf (_("Reverting %s from %s"),
+					       name_markup,
+					       dirname_markup);
 			g_free (dirname_markup);
 		}
 		else
 		{
-			msg = g_markup_printf_escaped (_("Reverting %s"), 
-						       name_markup);
+			msg = g_strdup_printf (_("Reverting %s"), 
+					       name_markup);
 		}
 		
 		area = gedit_progress_message_area_new (GTK_STOCK_REVERT_TO_SAVED,
@@ -653,19 +653,19 @@ show_loading_message_area (GeditTab *tab)
 	{
 		if (dirname != NULL)
 		{
-			dirname_markup = g_strdup_printf ("<b>%s</b>", dirname);
+			dirname_markup = g_markup_printf_escaped ("<b>%s</b>", dirname);
 
 			/* Translators: the first %s is a file name (e.g. test.txt) the second one
 			   is a directory (e.g. ssh://master.gnome.org/home/users/paolo) */
-			msg = g_markup_printf_escaped (_("Loading %s from %s"),
-					       	       name_markup,
-					       	       dirname_markup);
+			msg = g_strdup_printf (_("Loading %s from %s"),
+					       name_markup,
+					       dirname_markup);
 			g_free (dirname_markup);
 		}
 		else
 		{
-			msg = g_markup_printf_escaped (_("Loading %s"), 
-						       name_markup);
+			msg = g_strdup_printf (_("Loading %s"), 
+					       name_markup);
 		}
 
 		area = gedit_progress_message_area_new (GTK_STOCK_OPEN,
@@ -739,22 +739,22 @@ show_saving_message_area (GeditTab *tab)
 		to = str;
 	}
 
-	from_markup = g_strdup_printf ("<b>%s</b>", from);
+	from_markup = g_markup_printf_escaped ("<b>%s</b>", from);
 
 	if (to != NULL)
 	{
-		to_markup = g_strdup_printf("<b>%s</b>", to);
+		to_markup = g_markup_printf_escaped ("<b>%s</b>", to);
 
 		/* Translators: the first %s is a file name (e.g. test.txt) the second one
 		   is a directory (e.g. ssh://master.gnome.org/home/users/paolo) */
-		msg = g_markup_printf_escaped (_("Saving %s to %s"),
-				       	       from_markup,
-				       	       to_markup);
+		msg = g_strdup_printf (_("Saving %s to %s"),
+				       from_markup,
+				       to_markup);
 		g_free (to_markup);
 	}
 	else
 	{
-		msg = g_markup_printf_escaped (_("Saving %s"), from_markup);
+		msg = g_strdup_printf (_("Saving %s"), from_markup);
 	}
 
 	area = gedit_progress_message_area_new (GTK_STOCK_SAVE,
@@ -1542,23 +1542,23 @@ _gedit_tab_get_tooltips	(GeditTab *tab)
 	ruri = 	gedit_utils_replace_home_dir_with_tilde (uri);
 	g_free (uri);
 
-	ruri_markup = g_strdup_printf ("<i>%s</i>", ruri);
+	ruri_markup = g_markup_printf_escaped ("<i>%s</i>", ruri);
 
 	switch (tab->priv->state)
 	{
 		case GEDIT_TAB_STATE_LOADING_ERROR:
-			tip =  g_markup_printf_escaped(_("Error opening file %s."),
-						       ruri_markup);
+			tip = g_strdup_printf (_("Error opening file %s"),
+					       ruri_markup);
 			break;
 
 		case GEDIT_TAB_STATE_REVERTING_ERROR:
-			tip =  g_markup_printf_escaped(_("Error reverting file %s."),
-						       ruri_markup);
+			tip = g_strdup_printf (_("Error reverting file %s"),
+					       ruri_markup);
 			break;			
 
 		case GEDIT_TAB_STATE_SAVING_ERROR:
-			tip =  g_markup_printf_escaped(_("Error saving file %s."),
-						       ruri_markup);
+			tip =  g_strdup_printf (_("Error saving file %s"),
+						ruri_markup);
 			break;			
 		default:
 			mime_type = gedit_document_get_mime_type (doc);

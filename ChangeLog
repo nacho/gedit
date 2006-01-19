@@ -1,3 +1,20 @@
+2006-01-19  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit/gedit-io-error-message-area.c
+	(gedit_unrecoverable_loading_error_message_area_new)
+	(gedit_unrecoverable_reverting_error_message_area_new)
+	(gedit_conversion_error_while_loading_message_area_new)
+	(gedit_conversion_error_while_saving_message_area_new)
+	(gedit_externally_modified_saving_error_message_area_new)
+	(gedit_no_backup_saving_error_message_area_new)
+	(gedit_unrecoverable_saving_error_message_area_new): use
+	g_markup_printf_escaped instead of g_strdup_printf when needed
+
+	* gedit/gedit-tab.c (show_loading_message_area)
+	(show_saving_message_area) (_gedit_tab_get_tooltips): ditto
+
+	* gedit/gedit-utils.c (gedit_utils_get_glade_widgets): ditto
+
 2006-01-19  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-window.c: properly restore the bottom panel size

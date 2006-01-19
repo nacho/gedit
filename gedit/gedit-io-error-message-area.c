@@ -139,7 +139,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
 	switch (error->code)
@@ -160,7 +160,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 
 		if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 		{
-  			scheme_markup = g_strdup_printf ("<i>%s:</i>", scheme_string);
+  			scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
 
 			/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
 			message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
@@ -230,7 +230,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 				if (hn != NULL)
 				{
 					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
-					gchar *host_markup = g_strdup_printf ("<i>%s</i>", host_name);
+					gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
 					g_free (host_name);
 
 					/* Translators: %s is a host name */
@@ -367,7 +367,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
 	switch (error->code)
@@ -386,7 +386,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 
 		if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 		{
-  			scheme_markup = g_strdup_printf ("<i>%s:</i>", scheme_string);
+  			scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
 
 			/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
 			message_details = g_strdup_printf (_("gedit cannot handle %s locations."),
@@ -447,7 +447,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 				if (hn != NULL)
 				{
 					gchar *host_name = gedit_utils_make_valid_utf8 (hn);
-					gchar *host_markup = g_strdup_printf ("<i>%s</i>", host_name);
+					gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
 					g_free (host_name);
 
 					/* Translators: %s is a host name */
@@ -695,7 +695,7 @@ gedit_conversion_error_while_loading_message_area_new (
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 	
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
 	if (encoding != NULL)
@@ -724,9 +724,7 @@ gedit_conversion_error_while_loading_message_area_new (
 					       _("Select a different character coding from the menu and try again."), NULL);
 	}
 	
-	message_area = create_conversion_error_message_area (
-								error_message,
-								message_details);
+	message_area = create_conversion_error_message_area (error_message, message_details);
 
 	g_free (error_message);
 	g_free (message_details);
@@ -763,7 +761,7 @@ gedit_conversion_error_while_saving_message_area_new (
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 	
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
 	encoding_name = gedit_encoding_to_string (encoding);
@@ -827,7 +825,7 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 	
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 	
 	message_area = gedit_message_area_new ();
@@ -919,7 +917,7 @@ gedit_externally_modified_saving_error_message_area_new (
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
 	message_area = gedit_message_area_new ();
@@ -1014,7 +1012,7 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
 	message_area = gedit_message_area_new ();
@@ -1109,7 +1107,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 								MAX_URI_IN_DIALOG_LENGTH);								
 	g_free (full_formatted_uri);
 
-	uri_for_display = g_strdup_printf ("<i>%s</i>", temp_uri_for_display);
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
 	g_free (temp_uri_for_display);
 
 	switch (error->code)
@@ -1119,7 +1117,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 
 			if ((scheme_string != NULL) && g_utf8_validate (scheme_string, -1, NULL))
 			{
-				scheme_markup = g_strdup_printf ("<i>%s:</i>", scheme_string);
+				scheme_markup = g_markup_printf_escaped ("<i>%s:</i>", scheme_string);
  
 				/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
 				message_details = g_strdup_printf (_("gedit cannot handle %s locations in write mode. "
@@ -1194,7 +1192,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 					if (hn != NULL)
 					{
 						gchar *host_name = gedit_utils_make_valid_utf8 (hn);
-						gchar *host_markup = g_strdup_printf ("<i>%s</i>", host_name);
+						gchar *host_markup = g_markup_printf_escaped ("<i>%s</i>", host_name);
 						g_free (host_name);		
 
 						/* Translators: %s is a host name */
