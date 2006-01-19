@@ -7,15 +7,15 @@ msgid ""
 ""
 msgstr "Project-Id-Version: gedit 2.13.3 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-17 06:42+0100\n"
-"PO-Revision-Date: 2006-01-17 22:45+1030\n"
+"POT-Creation-Date: 2006-01-19 06:34+0100\n"
+"PO-Revision-Date: 2006-01-19 21:55+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: LocFactoryEditor 1.6b23\n"
+"X-Generator: LocFactoryEditor 1.6b30\n"
 
 #:../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
@@ -680,6 +680,7 @@ msgstr "Nhập đị_a chỉ (URI) của tập tin cần mở:"
 msgid "Page Setup"
 msgstr "Thiết lập trang"
 
+#.ex:noet:ts=8:
 #:../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #:../gedit/dialogs/gedit-preferences-dialog.glade.h:1
 #:../plugins/docinfo/docinfo.glade2.h:1
@@ -2344,69 +2345,9 @@ msgstr "Thực hiện lệnh bên ngoài và tập lệnh hệ vỏ."
 msgid "External Tools"
 msgstr "Công cụ bên Ngoài"
 
-#:../plugins/externaltools/tools/tools.glade.h:2
-msgid "Co_mmand(s):"
-msgstr "_Lệnh:"
-
-#:../plugins/externaltools/tools/tools.glade.h:3
-msgid "Edit tool <i>make</i>:"
-msgstr "Sửa công cụ <i>make</i>:"
-
-#:../plugins/externaltools/tools/tools.glade.h:4
-msgid "External Tools Manager"
-msgstr "Bộ Quản lý Công cụ bên Ngoài"
-
-#:../plugins/externaltools/tools/tools.glade.h:5
-msgid "F7"
-msgstr "F7"
-
-#:../plugins/externaltools/tools/tools.glade.h:6
-msgid ""
-"Nothing\n"
-"Current document\n"
-"All documents"
-msgstr "Không gì\n"
-"Các tài liệu hiện có\n"
-"Mọi tài liệu"
-
-#:../plugins/externaltools/tools/tools.glade.h:9
-msgid "Run “make” in the document dir"
-msgstr "Chạy « make » trong thư mục tài liệu"
-
-#:../plugins/externaltools/tools/tools.glade.h:10
-msgid "Shortcut _key:"
-msgstr "_Phím tắt:"
-
-#:../plugins/externaltools/tools/tools.glade.h:11
-msgid "_Applicability:"
-msgstr "Khả năng á_p dụng:"
-
-#:../plugins/externaltools/tools/tools.glade.h:12
-msgid "_Description:"
-msgstr "_Mô tả:"
-
-#:../plugins/externaltools/tools/tools.glade.h:13
-msgid "_Input:"
-msgstr "Ngõ _vào :"
-
-#:../plugins/externaltools/tools/tools.glade.h:14
-msgid "_Output:"
-msgstr "Ngõ _ra:"
-
-#:../plugins/externaltools/tools/tools.glade.h:15
-msgid "_Save:"
-msgstr "_Lưu :"
-
-#:../plugins/externaltools/tools/tools.glade.h:16
-msgid "_Tools:"
-msgstr "_Công cụ :"
-
-#:../plugins/externaltools/tools/tools.glade.h:17
-msgid ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
-msgstr "cd $THƯ_MỤC_TÀI_LIỆU_GEDIT_HIỆN_CÓ\n"
-"make"
+#:../plugins/externaltools/tools/functions.py:209
+msgid "You must be inside a word to run this command"
+msgstr "Bạn phải ở trong từ để chạy lệnh này"
 
 #:../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
@@ -2484,6 +2425,70 @@ msgstr "Sửa đổi công cụ <i>%s</i>:"
 #:../plugins/externaltools/tools/manager.py:185
 msgid "New tool"
 msgstr "Công cụ mới"
+
+#:../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "_Lệnh:"
+
+#:../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "Sửa công cụ <i>make</i>:"
+
+#:../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "Bộ Quản lý Công cụ bên Ngoài"
+
+#:../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#:../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr "Không gì\n"
+"Các tài liệu hiện có\n"
+"Mọi tài liệu"
+
+#:../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "Chạy « make » trong thư mục tài liệu"
+
+#:../plugins/externaltools/tools/tools.glade.h:10
+msgid "Shortcut _key:"
+msgstr "_Phím tắt:"
+
+#:../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr "Khả năng á_p dụng:"
+
+#:../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "_Mô tả:"
+
+#:../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "Ngõ _vào :"
+
+#:../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "Ngõ _ra:"
+
+#:../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "_Lưu :"
+
+#:../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "_Công cụ :"
+
+#:../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr "cd $THƯ_MỤC_TÀI_LIỆU_GEDIT_HIỆN_CÓ\n"
+"make"
 
 #:../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2568,10 +2573,12 @@ msgstr "_Tab gay ra:"
 #:../plugins/snippets/snippets/__init__.py:37
 #,python-format
 msgid ""
-"An error has occured during loading the %s file. The file is probably "
-"corrupt. Please fix or remove\tthe file. To try to load the file again "
-"select the Tools -> Snippets menu item."
-msgstr "Gặp lỗi trong khi tải tập tin %s. Rất có thể là tập tin bị hỏng. Hãy sửa hoặc gỡ bỏ tập tin này. Để cố tải lại tập tin này, hãy chọn mục trình đơn Công cụ → Đoạn."
+"Could not load the file \"%s\". The file is probably corrupt. Please fix or "
+"remove the file. To try to load the file again, select the Tools -> Manage "
+"Snippets... menu item."
+msgstr "Không thể tải tập tin « %s ». Rất có thể là tập tin bị hỏng. Hãy sửa "
+"hoặc gỡ bỏ tập tin này. Để cố tải lại tập tin này, hãy chọn mục trình đơn "
+"Công cụ → Quản lý Đoạn..."
 
 #:../plugins/snippets/snippets/SnippetPluginInstance.py:72
 msgid "Manage _Snippets..."
