@@ -1,7 +1,7 @@
 General Information
 ===================
 
-This is version 2.13.3 of gedit. gedit is a small and lightweight UTF-8 text 
+This is version 2.13.4 of gedit. gedit is a small and lightweight UTF-8 text 
 editor for the GNOME environment.
 
 gedit is part of GNOME and uses the latest GTK+ and GNOME libraries.
@@ -14,6 +14,9 @@ one document at the same time.
 
 gedit supports most standard editing features, plus several not found in your 
 average text editor (plugins being the most notable of these).
+
+gedit plugins may also be written in the python scripting language: to enable
+python support you need the pygtk and gnome-python-desktop bindings.
 
 Although new features are always under development, currently gedit has:
 
@@ -61,12 +64,14 @@ Information about gedit mailing lists can be found at
 Installation
 ============
 
-gedit requires GTK+-2.8.x, GtkSourceView 1.2.0 and GNOME 2.12.x libraries.
+gedit requires GTK+-2.8.x, GtkSourceView 1.2.0 and GNOME 2.13.x libraries.
+pygtk 2.8.x and gnome-python-desktop 2.13.x are required to enable python
+plugins support.
 
 Simple install procedure:
 
-  % gzip -cd gedit-2.13.3.tar.gz | tar xvf - 	# unpack the sources
-  % cd gedit-2.13.3				# change to the toplevel directory
+  % gzip -cd gedit-2.13.4.tar.gz | tar xvf - 	# unpack the sources
+  % cd gedit-2.13.4				# change to the toplevel directory
   % ./configure					# run the `configure' script
   % make					# build gedit
   [ Become root if necessary ]
