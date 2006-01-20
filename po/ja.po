@@ -6,14 +6,15 @@
 # Akira TAGOH <tagoh@gnome.gr.jp>, 2002.
 # KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>, 2003.
 # Takeshi AIHANA <aihana@gnome.gr.jp>, 2003-2006.
+# Satoru SATOH <ss@gnome.gr.jp>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-14 23:14+0900\n"
-"PO-Revision-Date: 2006-01-14 23:14+0900\n"
-"Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
+"POT-Creation-Date: 2006-01-20 13:17+0900\n"
+"PO-Revision-Date: 2006-01-20 01:14+0900\n"
+"Last-Translator: Satoru SATOH <ss@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -726,9 +727,13 @@ msgstr "開くファイルの格納場所 (URI) を入力して下さい(_L):"
 msgid "Page Setup"
 msgstr "ページの設定"
 
+#. ex:noet:ts=8:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
 msgid "    "
 msgstr "    "
 
@@ -1217,6 +1222,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "相花 毅 <aihana@gnome.gr.jp>\n"
+"佐藤 暁 <ss@gnome.gr.jp>\n"
 "KAMAGASAKO Masatoshi <emerald@gnome.gr.jp>\n"
 "Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Yukihiro Nakai <nakai@gnome.gr.jp>\n"
@@ -1243,7 +1249,7 @@ msgstr "%d ヶ所で検索と置換を行いました。"
 msgid "Phrase not found"
 msgstr "語句が見つかりませんでした"
 
-#: ../gedit/gedit-document.c:781 ../gedit/gedit-document.c:861
+#: ../gedit/gedit-document.c:789 ../gedit/gedit-document.c:869
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "編集中のドキュメント %d"
@@ -2432,6 +2438,161 @@ msgstr "ドキュメントの統計情報(_D)"
 msgid "Get statistic info on current document"
 msgstr "このドキュメントから統計情報を取得します"
 
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
+msgid "Execute external commands and shell scripts."
+msgstr "外部コマンドとシェルスクリプトを実行"
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+msgid "External Tools"
+msgstr "外部ツール"
+
+#: ../plugins/externaltools/tools/functions.py:209
+msgid "You must be inside a word to run this command"
+msgstr "このコマンドを実行するには何か語句を入力する必要があります"
+
+#: ../plugins/externaltools/tools/manager.py:41
+msgid "Nothing"
+msgstr "なし"
+
+#: ../plugins/externaltools/tools/manager.py:42
+msgid "Current document"
+msgstr "現在のドキュメント"
+
+#: ../plugins/externaltools/tools/manager.py:43
+msgid "Current selection"
+msgstr "現在の選択範囲"
+
+#: ../plugins/externaltools/tools/manager.py:44
+msgid "Current line"
+msgstr "現在の行"
+
+#: ../plugins/externaltools/tools/manager.py:45
+msgid "Current word"
+msgstr "現在の語句"
+
+#: ../plugins/externaltools/tools/manager.py:48
+msgid "Insert in output panel"
+msgstr "出力パネルに挿入"
+
+#: ../plugins/externaltools/tools/manager.py:49
+msgid "Create new document"
+msgstr "新しいドキュメントを作成"
+
+#: ../plugins/externaltools/tools/manager.py:50
+msgid "Append to current document"
+msgstr "このドキュメントに追加"
+
+#: ../plugins/externaltools/tools/manager.py:51
+msgid "Replace current document"
+msgstr "現在のドキュメントを置き換え"
+
+#: ../plugins/externaltools/tools/manager.py:52
+msgid "Replace current selection"
+msgstr "現在の選択範囲を置き換え"
+
+#: ../plugins/externaltools/tools/manager.py:53
+msgid "Insert at cursor position"
+msgstr "カーソル位置に挿入"
+
+#: ../plugins/externaltools/tools/manager.py:56
+msgid "All documents"
+msgstr "すべてのドキュメント"
+
+#: ../plugins/externaltools/tools/manager.py:57
+msgid "All documents except untitled ones"
+msgstr "無題のものを除くすべてのドキュメント"
+
+#: ../plugins/externaltools/tools/manager.py:58
+msgid "Local files only"
+msgstr "ローカルファイルのみ"
+
+#: ../plugins/externaltools/tools/manager.py:59
+msgid "Remote files only"
+msgstr "リモートのファイルのみ"
+
+#: ../plugins/externaltools/tools/manager.py:60
+msgid "Untitled documents only"
+msgstr "無題のドキュメントのみ"
+
+#: ../plugins/externaltools/tools/manager.py:166
+msgid "A Brand New Tool"
+msgstr "まったく新しいツール"
+
+#: ../plugins/externaltools/tools/manager.py:179
+#, python-format
+msgid "Edit tool <i>%s</i>:"
+msgstr "ツール <i>%s</i> を編集:"
+
+#: ../plugins/externaltools/tools/manager.py:185
+msgid "New tool"
+msgstr "新しいツール"
+
+#: ../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "コマンド(_M):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "ツール <i>make</i> を編集:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "外部ツールの管理"
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#: ../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr ""
+"なし\n"
+"現在のドキュメント\n"
+"すべてのドキュメント"
+
+#: ../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "ドキュメントのディレクトリで \"make\" を実行"
+
+#: ../plugins/externaltools/tools/tools.glade.h:10
+msgid "Shortcut _key:"
+msgstr "ショートカット・キー(_K):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr "適用性(_A):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "説明(_D):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "入力(_I):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "出力(_O):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "保存(_S):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "ツール(_T):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "インデント(_I)"
@@ -2487,6 +2648,67 @@ msgstr "カーソル位置にユーザ名を挿入します。"
 #: ../plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "User name"
 msgstr "ユーザ名"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:2
+msgid "<b>Activation</b>"
+msgstr "<b>自動インデント</b>"
+
+# snippet=断片,抜粋,...
+# とりあえず訳してはおくがあやしい。動作を見るかコードを読む必要あり。
+#: ../plugins/snippets/snippets/snippets.glade.h:3
+msgid "Snippets Manager"
+msgstr "断片の管理"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:4
+msgid "_Accelerator:"
+msgstr "アクセラレータ(_A):"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:5
+msgid "_Edit snippet:"
+msgstr "断片の編集(_E):"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:6
+msgid "_Snippets:"
+msgstr "断片(_S):"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:7
+msgid "_Tab trigger:"
+msgstr "タブトリガ(_T):"
+
+#: ../plugins/snippets/snippets/__init__.py:37
+#, python-format
+msgid ""
+"Could not load the file \"%s\". The file is probably corrupt. Please fix or "
+"remove the file. To try to load the file again, select the Tools -> Manage "
+"Snippets... menu item."
+msgstr ""
+"ファイル \"%s\" を読み込むことができませんでした。ファイルはおそらく壊れてい"
+"るので、修正するか削除して下さい。再度読み込みを試みるには [ツール]->[断片を"
+"管理...] メニューアイテムを選択します。"
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
+msgid "Manage _Snippets..."
+msgstr "断片を管理(_S)..."
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage snippets"
+msgstr "断片を管理"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:65
+msgid "Add a new snippet..."
+msgstr "新しい断片を追加"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:117
+msgid "Global"
+msgstr "グローバル"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:605
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "新しいアクセラレータを入力するか、Backspace で消去します"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:607
+msgid "Type a new accelerator"
+msgstr "新しいアクセラレータを入力"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
