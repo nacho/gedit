@@ -185,7 +185,7 @@ gedit_window_window_state_event (GtkWidget           *widget,
 		gboolean show;
 
 		show = !(event->new_window_state &
-		         (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN));
+			(GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN));
 
 		_gedit_statusbar_set_has_resize_grip (GEDIT_STATUSBAR (window->priv->statusbar),
 						      show);
@@ -324,7 +324,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 
 static void
 menu_item_select_cb (GtkMenuItem *proxy,
-                     GeditWindow *window)
+		     GeditWindow *window)
 {
 	GtkAction *action;
 	char *message;
@@ -850,7 +850,7 @@ recent_tooltip_func_gtk (GtkTooltips   *tooltips,
 
 	trunc_uri = gedit_utils_str_middle_truncate (uri_for_display,
 						     TIP_MAX_URI_LEN);
-        g_free (uri_for_display);
+	g_free (uri_for_display);
 
 	/* Translators: %s is a URI */
 	tip = g_strdup_printf (_("Open '%s'"), trunc_uri);
@@ -875,7 +875,7 @@ recent_tooltip_func_uim (EggRecentItem *item,
 
 	trunc_uri = gedit_utils_str_middle_truncate (uri_for_display,
 						     TIP_MAX_URI_LEN);
-        g_free (uri_for_display);
+	g_free (uri_for_display);
 
 	/* Translators: %s is a URI */
 	tip = g_strdup_printf (_("Open '%s'"), trunc_uri);
@@ -928,7 +928,7 @@ set_non_homogeneus (GtkWidget *widget, gpointer data)
 {
 	gtk_tool_item_set_homogeneous (GTK_TOOL_ITEM (widget), FALSE);
 }
-                                             
+
 static void
 create_menu_bar_and_toolbar (GeditWindow *window, 
 			     GtkWidget   *main_box)
@@ -1006,10 +1006,6 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	window->priv->quit_action_group = action_group;
 
 	/* now load the UI definition */
-	if (gtk_ui_manager_add_ui_from_file (manager, "gedit-ui.xml", NULL)) // REMOVE ME... just to allow running without install
-		;
-	else
-
 	gtk_ui_manager_add_ui_from_file (manager, GEDIT_UI_DIR "gedit-ui.xml", &error);
 	if (error != NULL)
 	{
@@ -2615,7 +2611,7 @@ init_panes_visibility (GeditWindow *window)
 static void
 gedit_window_init (GeditWindow *window)
 {
-	static is_first = TRUE;
+	static gboolean is_first = TRUE;
 	GtkWidget *main_box;
 
 	gedit_debug (DEBUG_WINDOW);
@@ -2634,11 +2630,9 @@ gedit_window_init (GeditWindow *window)
 	gtk_widget_show (main_box);
 
 	/* Add menu bar and toolbar bar */
-	gedit_debug_message (DEBUG_WINDOW, "Add menu bar and toolbar bar");
 	create_menu_bar_and_toolbar (window, main_box);
 
 	/* Add status bar */
-	gedit_debug_message (DEBUG_WINDOW, "Add statusbar");	
 	create_statusbar (window, main_box);
 
 	/* Add the main area */
@@ -2670,7 +2664,7 @@ gedit_window_init (GeditWindow *window)
 
 	/* restore paned positions as soon as we know the panes allocation.
 	 * This needs to be done only for the first window, the successive
-	 * windows are created by cloning the firts one */
+	 * windows are created by cloning the first one */
 	if (is_first)
 	{
 		is_first = FALSE;
@@ -2690,7 +2684,6 @@ gedit_window_init (GeditWindow *window)
 	gtk_widget_show (window->priv->hpaned);
 	gtk_widget_show (window->priv->vpaned);
 
-	gedit_debug_message (DEBUG_WINDOW, "Connect signals");
 	/* Drag and drop support */
 	gtk_drag_dest_set (GTK_WIDGET (window),
 			   GTK_DEST_DEFAULT_MOTION |
@@ -2734,35 +2727,35 @@ gedit_window_init (GeditWindow *window)
 			  G_CALLBACK (notebook_popup_menu),
 			  window);
 
-	/* connect instead pf override, so that we can
+	/* connect instead of override, so that we can
 	 * share the cb code with the view */
 	g_signal_connect (window,
 			  "drag_data_received",
 	                  G_CALLBACK (drag_data_received_cb), 
 	                  NULL);
-	                  
-	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");	                  
+
+	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
 	gedit_plugins_engine_update_plugins_ui (window, TRUE);
 
 	/* set visibility of panes.
 	 * This needs to be done after plugins activatation */
 	init_panes_visibility (window);
 
-	gedit_debug_message (DEBUG_WINDOW, "END");	                  
+	gedit_debug_message (DEBUG_WINDOW, "END");
 }
 
 GeditView *
 gedit_window_get_active_view (GeditWindow *window)
 {
 	GeditView *view;
-	
+
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	
+
 	if (window->priv->active_tab == NULL)
 		return NULL;
-		
+
 	view = gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab));
-	
+
 	return view;
 }
 
@@ -2770,13 +2763,13 @@ GeditDocument *
 gedit_window_get_active_document (GeditWindow *window)
 {
 	GeditView *view;
-	
+
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	
+
 	view = gedit_window_get_active_view (window);
 	if (view == NULL)
 		return NULL;
-	
+
 	return GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 }
 
@@ -2803,7 +2796,7 @@ gedit_window_create_tab (GeditWindow *window,
 				tab,
 				-1,
 				jump_to);
-				
+
 	return tab;
 }
 
@@ -2819,14 +2812,14 @@ gedit_window_create_tab_from_uri (GeditWindow         *window,
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	g_return_val_if_fail (uri != NULL, NULL);
-	
+
 	tab = _gedit_tab_new_from_uri (uri,
 				       encoding,
 				       line_pos,
 				       create);	
 	if (tab == NULL)
 		return NULL;
-		
+
 	gtk_widget_show (tab);	
 	
 	gedit_notebook_add_tab (GEDIT_NOTEBOOK (window->priv->notebook),
@@ -2959,19 +2952,19 @@ _gedit_window_set_statusbar_visible (GeditWindow *window,
 				     gboolean     visible)
 {
 	GtkAction *action;
-	static gboolean recursione_guard = FALSE;
+	static gboolean recursion_guard = FALSE;
 
 	gedit_debug (DEBUG_WINDOW);
 
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
-	if (recursione_guard)
+	if (recursion_guard)
 		return;
 
-	recursione_guard = TRUE;
+	recursion_guard = TRUE;
 
 	visible = (visible != FALSE);
-		
+
 	if (visible)
 		gtk_widget_show (window->priv->statusbar);
 	else
@@ -2979,14 +2972,14 @@ _gedit_window_set_statusbar_visible (GeditWindow *window,
 
 	if (gedit_prefs_manager_statusbar_visible_can_set ())
 		gedit_prefs_manager_set_statusbar_visible (visible);
-		
+
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "ViewStatusbar");		
-		
+
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
-	recursione_guard = FALSE;		
+	recursion_guard = FALSE;		
 }
 
 void
@@ -2994,17 +2987,17 @@ _gedit_window_set_toolbar_visible (GeditWindow *window,
 				   gboolean     visible)
 {
 	GtkAction *action;
-	static gboolean recursione_guard = FALSE;
+	static gboolean recursion_guard = FALSE;
 
 	gedit_debug (DEBUG_WINDOW);
 
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 
-	if (recursione_guard)
+	if (recursion_guard)
 		return;
 
-	recursione_guard = TRUE;
-	
+	recursion_guard = TRUE;
+
 	visible = (visible != FALSE);
 
 	if (visible)
@@ -3021,7 +3014,7 @@ _gedit_window_set_toolbar_visible (GeditWindow *window,
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
 
-	recursione_guard = FALSE;
+	recursion_guard = FALSE;
 }
 
 void
@@ -3262,7 +3255,7 @@ gedit_window_get_unsaved_documents (GeditWindow *window)
 
 void 
 _gedit_window_set_saving_session_state (GeditWindow *window,
-				        gboolean     saving_session)
+					gboolean     saving_session)
 {
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 	
