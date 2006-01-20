@@ -1224,7 +1224,6 @@ gedit_document_saver_save (GeditDocumentSaver     *saver,
 
 	// CHECK:
 	// - sanity check a max len for the uri?
-	// - check a whitelist of allowed uri types
 	// report async (in an idle handler) or sync (bool ret)
 	// async is extra work here, sync is special casing in the caller
 
@@ -1232,8 +1231,15 @@ gedit_document_saver_save (GeditDocumentSaver     *saver,
 
 	/* fetch saving options */
 	saver->priv->backup_ext = gedit_prefs_manager_get_backup_extension ();
-	saver->priv->keep_backup = gedit_prefs_manager_get_create_backup_copy ();
-	saver->priv->backups_in_curr_dir = TRUE; // TODO configurable backup dir
+
+	/* never keep backup of autosaves */
+	if ((flags & GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP) != 0)
+		saver->priv->keep_backup = FALSE;
+	else
+		saver->priv->keep_backup = gedit_prefs_manager_get_create_backup_copy ();
+
+	/* TODO: add support for configurable backup dir */
+	saver->priv->backups_in_curr_dir = TRUE;
 
 	if (encoding != NULL)
 		saver->priv->encoding = encoding;
