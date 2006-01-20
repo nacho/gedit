@@ -187,12 +187,12 @@ EOF
 fi
 
 if test "x$have_python" != "xno"; then
-	PYGTK_REQUIRED=2.7.1
-	GNOME_PYTHON_EXTRAS_REQUIRED=2.12.0
+	PYGTK_REQUIRED=2.8.0
+	GNOME_PYTHON_DESKTOP_REQUIRED=2.13.3
 
 	PKG_CHECK_MODULES([PYGTK], [
 		pygtk-2.0 >= $PYGTK_REQUIRED
-		gnome-python-extras-2.0 >= $GNOME_PYTHON_EXTRAS_REQUIRED],
+		gnome-python-desktop-2.0 >= $GNOME_PYTHON_DESKTOP_REQUIRED],
 		[],[have_python=no])
 
 	AC_SUBST([PYGTK_CFLAGS])
@@ -211,7 +211,7 @@ if test "x$have_python" != "xno"; then
 	AC_MSG_CHECKING([for pygtk h2def])
 	PYGTK_H2DEF="$PYTHON `$PKG_CONFIG --variable=codegendir pygtk-2.0`/h2def.py"
 	AC_MSG_RESULT([$PYGTK_H2DEF])
-	
+
 	AC_SUBST([PYGTK_DEFSDIR])
 	AC_SUBST([PYGTK_CODEGEN])
 	AC_SUBST([PYGTK_H2DEF])
