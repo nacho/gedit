@@ -518,6 +518,8 @@ main (int argc, char *argv[])
 	gedit_debug_message (DEBUG_APP, "Start gtk-main");		
 	gtk_main();
 
+	bacon_message_connection_free (connection);
+
 	gedit_plugins_engine_shutdown ();
 	gedit_prefs_manager_app_shutdown ();
 	gedit_metadata_manager_shutdown ();
