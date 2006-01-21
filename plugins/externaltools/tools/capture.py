@@ -55,6 +55,9 @@ class Capture(gobject.GObject):
 	def set_input(self, text):
 		self.input_text = text
 	
+	def set_cwd(self, cwd):
+		self.cwd = cwd
+	
 	def execute(self):
 		if self.command is None:
 			return

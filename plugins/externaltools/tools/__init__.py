@@ -47,6 +47,7 @@ class ToolsPlugin(gedit.Plugin):
 		               'ToolsManager', 'ToolsManager',
 		               gtk.UI_MANAGER_MENUITEM, False)
 		insert_tools_menu(window)
+		filter_tools_menu(window)
 		manager.ensure_update()
 
 		# Create output console
@@ -67,7 +68,10 @@ class ToolsPlugin(gedit.Plugin):
 		bottom = window.get_bottom_panel()
 		bottom.remove_item(window_data["output_buffer"].panel)
 		window.set_data("ToolsPluginWindowData", None)
-		print "deactivate on window %s" % window
+
+	def update_ui(self, window):
+		filter_tools_menu(window)
+		window.get_ui_manager().ensure_update()
 
 	def create_configure_dialog(self):
 		return self.open_dialog()

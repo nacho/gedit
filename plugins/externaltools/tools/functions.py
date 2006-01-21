@@ -73,7 +73,7 @@ class ToolsTree:
 		
 		for tool in self.root:
 			if tool != ignore:
-				skey, smod = gtk.accelerator_parse(tool.get('accelerator'))
+				skey, smod = gtk.accelerator_parse(default(tool.get('accelerator'), ''))
 				if skey == keyval and smod & mod == smod:
 					return tool
 		return None
@@ -86,8 +86,10 @@ def default(val, d):
 		return d
 
 # ==== UI related functions ====
+APPLICABILITIES = ('all', 'titled', 'local', 'remote', 'untitled')
+
 def insert_tools_menu(window, tools = None):
-	window_data = dict()	
+	window_data = dict()
 	window.set_data("ToolsPluginCommandsData", window_data)
 
 	if tools is None:
@@ -95,20 +97,24 @@ def insert_tools_menu(window, tools = None):
 
 	manager = window.get_ui_manager()
 
-	window_data['action_group'] = gtk.ActionGroup("GeditToolsPluginCommandsActions")
-	window_data['action_group'].set_translation_domain('gedit')
+	window_data['action_groups'] = dict()
 	window_data['ui_id'] = manager.new_merge_id()
 
 	i = 0;
 	for tool in tools:
 		menu_id = "ToolCommand%06d" % i
-		window_data['action_group'].add_actions([(menu_id,
-		                                          None,
-		                                          tool.get('label'),
-		                                          tool.get('accelerator'),
-		                                          tool.get('description'),
-		                                          capture_menu_action)],
-		                                        (window, tool))
+		
+		ap = tool.get('applicability')
+		if ap not in window_data['action_groups']:
+			window_data['action_groups'][ap] = \
+			    gtk.ActionGroup("GeditToolsPluginCommandsActions%s" % ap.capitalize())
+			window_data['action_groups'][ap].set_translation_domain('gedit')
+		
+		window_data['action_groups'][ap].add_actions(
+			[(menu_id, None, tool.get('label'),
+			  tool.get('accelerator'), tool.get('description'),
+			  capture_menu_action)],
+			(window, tool))
 		manager.add_ui(window_data['ui_id'],
 		               '/MenuBar/ToolsMenu/ToolsOps_4',
 		               menu_id, 
@@ -117,63 +123,89 @@ def insert_tools_menu(window, tools = None):
 		               False)
 		i = i + 1
 
-	manager.insert_action_group(window_data['action_group'], -1)
+	for applic in APPLICABILITIES:
+		if applic in window_data['action_groups']:
+			manager.insert_action_group(window_data['action_groups'][applic], -1)
 
 def remove_tools_menu(window):
 	window_data = window.get_data("ToolsPluginCommandsData")
 
 	manager = window.get_ui_manager()
 	manager.remove_ui(window_data['ui_id'])
-	manager.remove_action_group(window_data['action_group'])
+	for action_group in window_data['action_groups'].itervalues():
+		manager.remove_action_group(action_group)
 	window.set_data("ToolsPluginCommandsData", None)
 
 def update_tools_menu(tools = None):
 	for window in gedit.gedit_app_get_default().get_windows():
 		remove_tools_menu(window)
 		insert_tools_menu(window, tools)
+		filter_tools_menu(window)
 		window.get_ui_manager().ensure_update()
+
+def filter_tools_menu(window):
+	action_groups = window.get_data("ToolsPluginCommandsData")['action_groups']
+
+	document = window.get_active_document()
+	if document is not None:
+		active_groups = ['all']
+		uri = document.get_uri()
+		if uri is not None:
+			active_groups.append('titled')
+			if gnomevfs.get_uri_scheme(uri) == 'file':
+				active_groups.append('local')
+			else:
+				active_groups.append('remote')
+		else:
+			active_groups.append('untitled')
+	else:
+		active_groups = []
+
+	for name, group in action_groups.iteritems():
+		group.set_sensitive(name in active_groups)
 
 # ==== Capture related functions ====
 def capture_menu_action(action, window, node):
+
 	# Get the panel
 	panel = window.get_data("ToolsPluginWindowData")["output_buffer"]
 	panel.show()
 	panel.clear()
 
-	view = window.get_active_view()
-	document = view.get_buffer()
-	if document is None:
-		# :TODO: Allow command on no document
-		panel.write("No document\n", panel.command_tag)
-		return
-
-	uri = document.get_uri()
-	if uri is None:
-		# :TODO: Allow command on unnamed documents
-		panel.write("Current document has no file name\n", panel.command_tag)
-		return
-
 	# Configure capture environment
-	path = gnomevfs.get_local_path_from_uri(uri)
- 	cwd = os.path.dirname(path)
+ 	capture = Capture(node.text, os.getcwd())
+ 	capture.env = os.environ.copy()
+	capture.set_env(GEDIT_CWD = os.getcwd())
 
- 	capture = Capture(node.text, cwd)
+	view = window.get_active_view()
+	if view is not None:
+		# Environment vars relative to current document
+		document = view.get_buffer()
+		uri = document.get_uri()
+		if uri is not None:
+			scheme = gnomevfs.get_uri_scheme(uri)
+			name = os.path.basename(uri)
+			capture.set_env(GEDIT_CURRENT_DOCUMENT_URI    = uri,
+			                GEDIT_CURRENT_DOCUMENT_NAME   = name,
+			                GEDIT_CURRENT_DOCUMENT_SCHEME = scheme)
+			if scheme == 'file':
+		 		path = gnomevfs.get_local_path_from_uri(uri)
+				cwd = os.path.dirname(path)
+				capture.set_cwd(cwd)
+				capture.set_env(GEDIT_CURRENT_DOCUMENT_PATH = path,
+				                GEDIT_CURRENT_DOCUMENT_DIR  = cwd)
+		
+		documents_uri = [document.get_uri()
+		                         for document in window.get_documents()
+		                         if document.get_uri() is not None]
+		documents_path = [gnomevfs.get_local_path_from_uri(uri)
+		                         for uri in documents_uri
+		                         if gnomevfs.get_uri_scheme(uri) == 'file']
+		capture.set_env(GEDIT_DOCUMENTS_URI  = ' '.join(documents_uri),
+		                GEDIT_DOCUMENTS_PATH = ' '.join(documents_path))
+
  	capture.set_flags(capture.CAPTURE_BOTH)
 
-	documents_uri = [document.get_uri()
-	                         for document in window.get_documents()
-	                         if document.get_uri() is not None]
-	documents_path = [gnomevfs.get_local_path_from_uri(uri)
-	                         for uri in documents_uri]
-
- 	capture.env = os.environ.copy()
- 	capture.set_env(GEDIT_CURRENT_DOCUMENT_URI  = uri,
- 	                GEDIT_CURRENT_DOCUMENT_PATH = path,
- 	                GEDIT_CURRENT_DOCUMENT_NAME = os.path.basename(path),
- 	                GEDIT_CURRENT_DOCUMENT_DIR  = cwd,
- 	                GEDIT_DOCUMENTS_URI         = ' '.join(documents_uri),
- 	                GEDIT_DOCUMENTS_PATH        = ' '.join(documents_path))
- 	
 	# Assign the error output to the output panel
 	panel.process = capture
 	
@@ -185,7 +217,7 @@ def capture_menu_action(action, window, node):
 	input_type = default(node.get('input'), 'nothing')
 	output_type = default(node.get('output'), 'output-panel')
 
-	if input_type != 'nothing':
+	if input_type != 'nothing' and view is not None:
 		if input_type == 'document':
 			start, end = document.get_bounds()
 		elif input_type == 'selection':
@@ -218,10 +250,7 @@ def capture_menu_action(action, window, node):
 		capture.set_input(input_text)
 	
 	# Assign the standard output to the chosen "file"
-	if output_type == 'output-panel':
-		capture.connect('stdout-line', capture_stdout_line_panel, panel)
-		document.begin_user_action()
-	elif output_type == 'new-document':
+	if output_type == 'new-document':
 		tab = window.create_tab(True)
 		view = tab.get_view()
 		document = tab.get_document()
@@ -230,7 +259,7 @@ def capture_menu_action(action, window, node):
 		document.begin_user_action()
 		view.set_editable(False)
 		view.set_cursor_visible(False)
-	else:
+	elif output_type != 'output-panel' and view is not None:
 		document.begin_user_action()
 		view.set_editable(False)
 		view.set_cursor_visible(False)
@@ -246,6 +275,10 @@ def capture_menu_action(action, window, node):
 		else:
 			pos = document.get_end_iter()
 		capture.connect('stdout-line', capture_stdout_line_document, document, pos)
+	else:
+		capture.connect('stdout-line', capture_stdout_line_panel, panel)
+		document.begin_user_action()
+
 	
 	# Run the command
 	view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.WATCH))

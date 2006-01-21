@@ -20,7 +20,6 @@ from gtk import glade
 from gtk import gdk
 import pango
 import os
-import gconf
 from xml.dom import minidom
 import xml
 import gedit
@@ -35,7 +34,6 @@ class SnippetsDialog:
 	EDITABLE_COLUMN = 2
 	OBJ_COLUMN = 3
 
-	GCONF_DIR = '/apps/gedit-2/plugins/snippets'
 	model = None
 	
 	def __init__(self, plugin):
@@ -274,7 +272,6 @@ class SnippetsDialog:
 	def run(self):
 		if not self.dlg:
 			self.build()
-			self.load_metrics()
 			self.dlg.show_all()
 		else:
 			self.build_model()
@@ -323,36 +320,6 @@ class SnippetsDialog:
 		self.tree_view.get_selection().select_iter(piter)
 		self.tree_view.scroll_to_cell(self.model.get_path(piter), None, \
 			True, 0.5, 0.5)
-	
-	def preference_int(self, client, pref):
-		try:
-			ret = client.get_int(self.GCONF_DIR + '/' + pref)
-		except gobject.GError:
-			ret = 0
-		
-		return ret
-			
-	def load_metrics(self):
-		client = gconf.client_get_default()
-		
-		width = self.preference_int(client, 'dialog_width')
-		height = self.preference_int(client, 'dialog_height')
-		position = self.preference_int(client, 'dialog_paned')
-
-		if width > 0 and height > 0:		
-			self.dlg.set_default_size(width, height)
-		
-		if position > 0:
-			self['hpaned_paned'].set_position(position)
-	
-	def save_metrics(self):
-		client = gconf.client_get_default()
-		client.set_int(self.GCONF_DIR + '/dialog_width', \
-				self.dlg.allocation.width)
-		client.set_int(self.GCONF_DIR + '/dialog_height', \
-				self.dlg.allocation.height)
-		client.set_int(self.GCONF_DIR + '/dialog_paned', \
-				self['hpaned_paned'].get_position())
 
 	def new_snippet(self):
 		if not self.language_path:
@@ -402,9 +369,6 @@ class SnippetsDialog:
 		if resp == gtk.RESPONSE_HELP:
 			# Show help
 			return
-
-		# Save size and pane position
-		self.save_metrics()
 
 		self.snippet = None		
 		self.dlg.destroy()

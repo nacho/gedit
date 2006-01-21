@@ -94,5 +94,6 @@ class OutputPanel(UniqueById):
 		gobject.idle_add(self.scroll_to_end)
 
 	def show(self):
-		# :TODO: Show the good panel
-		pass
+		panel = self.window.get_bottom_panel()
+		panel.show()
+		panel.activate_item(self.panel)

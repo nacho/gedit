@@ -310,12 +310,11 @@ class SnippetsPluginInstance:
 		holders = len(self.placeholders)
 		active_info = s.insert_into(self)
 		self.active_snippets.append(active_info)
-		
+
 		# Put cursor back to beginning of the snippet
 		piter = buf.get_iter_at_mark(active_info[0])
-		buf.move_mark(buf.get_insert(), piter)
-		buf.move_mark(buf.get_selection_bound(), piter)
-		
+		buf.place_cursor(piter)
+
 		# Jump to first placeholder
 		(current, next) = self.next_placeholder()
 		

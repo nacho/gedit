@@ -26,9 +26,11 @@ from gettext import gettext as _
 from functions import *
 import ElementTree as et
 
-GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
-
 class Manager:
+	GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
+	GCONF_DIR = '/apps/gedit-2/plugins/tools'
+
+
 	LABEL_COLUMN = 0 # For Combo and Tree
 	NODE_COLUMN  = 1 # For Tree only
 	NAME_COLUMN = 1  # For Combo only
@@ -74,11 +76,11 @@ class Manager:
 			'on_tool_manager_dialog_response': self.on_tool_manager_dialog_response,
 			'on_accelerator_key_press'       : self.on_accelerator_key_press,
 			'on_accelerator_focus_in'        : self.on_accelerator_focus_in,
-			'on_entry_accelerator_focus_out' : self.on_entry_accelerator_focus_out
+			'on_accelerator_focus_out'       : self.on_accelerator_focus_out
 		}
 		
 		# Load the "main-window" widget from the glade file.
-		self.ui = glade.XML(GLADE_FILE, 'tool-manager-dialog')
+		self.ui = glade.XML(self.GLADE_FILE, 'tool-manager-dialog')
 		self.ui.signal_autoconnect(callbacks)
 		self.dialog = self.ui.get_widget('tool-manager-dialog')
 		self.view = self.ui.get_widget('view')
@@ -93,11 +95,12 @@ class Manager:
 		self.current_node = None
 
 		self.model = gtk.ListStore(str, object)
-		self.model.set_sort_column_id(self.LABEL_COLUMN, gtk.SORT_ASCENDING)
 		self.view.set_model(self.model)
 
 		for item in self.tools:
 			self.model.append([item.get('label'), item])
+		
+		self.model.connect('row-changed', self.on_tools_model_row_changed)
 
 	def __init_tools_view(self):
 		# Tools column
@@ -110,7 +113,7 @@ class Manager:
 		
 		renderer.connect('edited', self.on_view_label_cell_edited)
 		self.view.get_selection().connect('changed', self.on_view_selection_changed, None)
-	
+			
 	def __init_combobox(self, name):
 		combo = self[name]
 		model = gtk.ListStore(str, str)
@@ -133,8 +136,8 @@ class Manager:
 				combo.set_active_iter(piter)
 				return True
 			piter = model.iter_next(piter)
-		return False		
-	
+		return False
+
 	def get_selected_tool(self):
 		model, piter = self.view.get_selection().get_selected()
 		
@@ -203,6 +206,7 @@ class Manager:
 			node = self.model.get_value(piter, self.NODE_COLUMN)
 			node.set("label", new_text)
 			self.model.set(piter, self.LABEL_COLUMN, new_text)
+			self['title'].set_label(_('Edit tool <i>%s</i>:') % new_text)
 
 	def on_view_selection_changed(self, selection, userdata):
 		self.save_current_tool()
@@ -217,6 +221,13 @@ class Manager:
 			# :TODO: Config panel should be grayed
 			pass
 
+	def on_tools_model_row_changed(self, model, path, piter):
+		tool = model.get_value(piter, self.NODE_COLUMN)
+		if tool is not self.tools.root[path[0]]:
+			if tool in self.tools.root.items():
+				self.tools.root.remove(tool)
+			self.tools.root.insert(path[0], tool)
+
 	def set_accelerator(self, keyval, mod):
 		# Check whether accelerator already exists
 		
@@ -229,8 +240,11 @@ class Manager:
  			                  self.current_node.get('label'))
  			return False
  		
-		self.current_node.set('accelerator',
-		                      gtk.accelerator_name(keyval, mod))
+		name = gtk.accelerator_name(keyval, mod)
+ 		if name != '':
+			self.current_node.set('accelerator', name)
+		else:
+			self.current_node.set('accelerator', None)
 		return True
 
 	def on_accelerator_key_press(self, entry, event):
@@ -242,7 +256,6 @@ class Manager:
 			return True
 		elif event.keyval == gtk.keysyms.Delete \
 		  or event.keyval == gtk.keysyms.BackSpace:
-			self.remove_accelerator()
 			entry.set_text('')
 			self.current_node.set('accelerator', '')
 			self['commands'].grab_focus()
@@ -273,7 +286,7 @@ class Manager:
 		else:
 			entry.set_text('Type a new accelerator')
 	
-	def on_entry_accelerator_focus_out(self, entry, event):
+	def on_accelerator_focus_out(self, entry, event):
 		if self.current_node is not None:
 			entry.set_text(self.current_node.get('accelerator'))
 
@@ -283,9 +296,6 @@ class Manager:
 			return
 
 		self.save_current_tool()
-
-		# :TODO: Save size and pane position
-		# self.save_metrics()
 
 		self.dialog.destroy()
 		self.dialog = None
