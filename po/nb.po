@@ -1,15 +1,15 @@
 # Norwegian translation of gedit (bokmål).
 # Copyright (C) 1998-2004, 2005 Free Software Foundation, Inc.
-# Kjartan Maraas <kmaraas@gnome.org>, 1998-2005.
+# Kjartan Maraas <kmaraas@gnome.org>, 1998-2006.
 # Terance Edward Sola <terance@lyse.net>, 2005.
 # Sigurd Gartmann <sigurd-translate@brogar.org>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 2.11.x\n"
+"Project-Id-Version: gedit 2.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-06 17:53+0100\n"
-"PO-Revision-Date: 2006-01-06 18:31+0100\n"
+"POT-Creation-Date: 2006-01-22 21:03+0100\n"
+"PO-Revision-Date: 2006-01-22 21:09+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -520,11 +520,11 @@ msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "Om gedit skal ta med en syntaksutheving ved utskrift av dokumenter."
 
 #: ../data/gedit.schemas.in.h:104
-#, fuzzy
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
-msgstr "Om gedit skal vise høyre marg i redigeringsområdet."
+msgstr ""
+"Om gedit skal gjenopprette tidligere markørposisjon når et dokument lastes."
 
 #: ../data/gedit.schemas.in.h:105
 #, fuzzy
@@ -740,9 +740,13 @@ msgstr "Skriv inn _lokasjon (URI) for filen du ønsker å åpne:"
 msgid "Page Setup"
 msgstr "Sideoppsett"
 
+#. ex:noet:ts=8:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
 msgid "    "
 msgstr "    "
 
@@ -1039,11 +1043,11 @@ msgid "_minutes"
 msgstr "_minutter"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:974
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:989
 msgid "Replace"
 msgstr "Erstatt"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:972
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:987
 msgid "Find"
 msgstr "Finn"
 
@@ -1102,7 +1106,7 @@ msgstr "Opprett et nytt dokument i en eksisterende instans av gedit"
 #: ../gedit/gedit.c:124
 #, c-format
 msgid "%s: malformed file name or URI.\n"
-msgstr ""
+msgstr "%s: ugyldig filnavn eller URI.\n"
 
 #: ../gedit/gedit.c:136
 #, c-format
@@ -1130,9 +1134,9 @@ msgid "The entered location is not valid."
 msgstr "Oppgitt lokasjon er ikke gyldig."
 
 #: ../gedit/gedit-commands-file.c:398
-#: ../gedit/gedit-io-error-message-area.c:149
-#: ../gedit/gedit-io-error-message-area.c:185
-#: ../gedit/gedit-io-error-message-area.c:201
+#: ../gedit/gedit-io-error-message-area.c:150
+#: ../gedit/gedit-io-error-message-area.c:189
+#: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
@@ -1254,7 +1258,7 @@ msgstr "Fant og erstattet en oppføring"
 msgid "Phrase not found"
 msgstr "Frase ikke funnet"
 
-#: ../gedit/gedit-document.c:783 ../gedit/gedit-document.c:863
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:854
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Ikke-lagret dokument %d"
@@ -1265,7 +1269,7 @@ msgid "Could not obtain backup filename"
 msgstr "Kunne ikke finne navn på sikkerhetskopi"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1461 ../gedit/gedit-window.c:1466
+#: ../gedit/gedit-window.c:1472 ../gedit/gedit-window.c:1477
 msgid "Read Only"
 msgstr "Skrivebeskyttet"
 
@@ -1420,63 +1424,64 @@ msgstr "Alle tekstfiler"
 msgid "There was an error displaying help."
 msgstr "Det oppsto en feil under visning av hjelp."
 
-#: ../gedit/gedit-io-error-message-area.c:147
+#: ../gedit/gedit-io-error-message-area.c:148
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Kunne ikke finne filen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:154
-#: ../gedit/gedit-io-error-message-area.c:374
+#: ../gedit/gedit-io-error-message-area.c:155
+#: ../gedit/gedit-io-error-message-area.c:381
 msgid "The file contains corrupted data."
 msgstr "Filen inneholder korrupte data."
 
-#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
-#: ../gedit/gedit-io-error-message-area.c:163
-#: ../gedit/gedit-io-error-message-area.c:382
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:166
+#: ../gedit/gedit-io-error-message-area.c:392
 #, c-format
-msgid "gedit cannot handle <i>%s:</i> locations."
-msgstr "gedit kan ikke håndtere <i>%s:</i>-lokasjoner."
+msgid "gedit cannot handle %s locations."
+msgstr "gedit kan ikke håndtere %s-lokasjoner."
 
-#: ../gedit/gedit-io-error-message-area.c:168
-#: ../gedit/gedit-io-error-message-area.c:387
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:398
 msgid "gedit cannot handle this location."
 msgstr "gedit kan ikke håndtere denne lokasjonen."
 
-#: ../gedit/gedit-io-error-message-area.c:175
-#: ../gedit/gedit-io-error-message-area.c:394
+#: ../gedit/gedit-io-error-message-area.c:179
+#: ../gedit/gedit-io-error-message-area.c:405
 msgid "The file contains data in an invalid format."
 msgstr "Filen inneholder data i ugyldig format."
 
-#: ../gedit/gedit-io-error-message-area.c:179
-#: ../gedit/gedit-io-error-message-area.c:398
+#: ../gedit/gedit-io-error-message-area.c:183
+#: ../gedit/gedit-io-error-message-area.c:409
 msgid "The file is too big."
 msgstr "Filen er for stor."
 
-#: ../gedit/gedit-io-error-message-area.c:183
+#: ../gedit/gedit-io-error-message-area.c:187
 #, c-format
 msgid "%s is not a valid location."
 msgstr "«%s» er ikke en gyldig lokasjon."
 
-#: ../gedit/gedit-io-error-message-area.c:190
-#: ../gedit/gedit-io-error-message-area.c:402
-msgid "You do not have the permissions necessary to open the file."
-msgstr ""
-
 #: ../gedit/gedit-io-error-message-area.c:194
-#: ../gedit/gedit-io-error-message-area.c:406
-#: ../gedit/gedit-io-error-message-area.c:1142
+#: ../gedit/gedit-io-error-message-area.c:413
+msgid "You do not have the permissions necessary to open the file."
+msgstr "Du har ikke tilstrekkelige rettigheter til å åpne filen."
+
+#: ../gedit/gedit-io-error-message-area.c:198
+#: ../gedit/gedit-io-error-message-area.c:417
+#: ../gedit/gedit-io-error-message-area.c:1161
 msgid ""
 "There are too many open files. Please, close some applications and try again."
-msgstr "Du har for mange åpne filer. Vennligst lukk noen programmer og prøv igjen."
+msgstr ""
+"Du har for mange åpne filer. Vennligst lukk noen programmer og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:199
-#: ../gedit/gedit-io-error-message-area.c:411
+#: ../gedit/gedit-io-error-message-area.c:203
+#: ../gedit/gedit-io-error-message-area.c:422
 #, c-format
 msgid "%s is a directory."
 msgstr "«%s» er en katalog."
 
-#: ../gedit/gedit-io-error-message-area.c:206
-#: ../gedit/gedit-io-error-message-area.c:416
+#: ../gedit/gedit-io-error-message-area.c:210
+#: ../gedit/gedit-io-error-message-area.c:427
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
@@ -1484,23 +1489,25 @@ msgstr ""
 "Ikke nok minne tilgjengelig til å åpne filen. Vennligst lukk noen programmer "
 "og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:232
-#: ../gedit/gedit-io-error-message-area.c:442
-#: ../gedit/gedit-io-error-message-area.c:1179
+#: ../gedit/gedit-io-error-message-area.c:238
+#: ../gedit/gedit-io-error-message-area.c:455
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid ""
-"Host <i>%s</i> could not be found. Please, check that your proxy settings "
-"are correct and try again."
-msgstr "Vert <i>«%s»</i> ble ikke funnet. Vennligst sjekk at dine proxy-innstillinger er riktige og prøv igjen."
+"Host %s could not be found. Please, check that your proxy settings are "
+"correct and try again."
+msgstr ""
+"Vert %s ble ikke funnet. Vennligst sjekk at dine proxy-innstillinger er "
+"riktige og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:243
-#: ../gedit/gedit-io-error-message-area.c:254
-#: ../gedit/gedit-io-error-message-area.c:262
-#: ../gedit/gedit-io-error-message-area.c:453
-#: ../gedit/gedit-io-error-message-area.c:464
-#: ../gedit/gedit-io-error-message-area.c:1190
-#: ../gedit/gedit-io-error-message-area.c:1201
-#: ../gedit/gedit-io-error-message-area.c:1209
+#: ../gedit/gedit-io-error-message-area.c:249
+#: ../gedit/gedit-io-error-message-area.c:260
+#: ../gedit/gedit-io-error-message-area.c:268
+#: ../gedit/gedit-io-error-message-area.c:466
+#: ../gedit/gedit-io-error-message-area.c:477
+#: ../gedit/gedit-io-error-message-area.c:1211
+#: ../gedit/gedit-io-error-message-area.c:1222
+#: ../gedit/gedit-io-error-message-area.c:1230
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
@@ -1508,9 +1515,9 @@ msgstr ""
 "Vertsnavnet er ugyldig. Vennligst sjekk at du skrev inn lokasjonen korrekt "
 "og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:268
-#: ../gedit/gedit-io-error-message-area.c:472
-#: ../gedit/gedit-io-error-message-area.c:1215
+#: ../gedit/gedit-io-error-message-area.c:274
+#: ../gedit/gedit-io-error-message-area.c:485
+#: ../gedit/gedit-io-error-message-area.c:1236
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
@@ -1518,8 +1525,8 @@ msgstr ""
 "Vertsnavnet var tomt. Vennligst sjekk at dine proxy-innstillinger er riktige "
 "og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:274
-#: ../gedit/gedit-io-error-message-area.c:1221
+#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:1242
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
@@ -1527,160 +1534,166 @@ msgstr ""
 "Forsøk på å logge inn feilet. Vennligst sjekk at du skrev inn lokasjonen "
 "korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:286
 msgid "The file you are trying to open is not a regular file."
 msgstr "Filen du prøver å åpne er ikke en vanlig fil."
 
-#: ../gedit/gedit-io-error-message-area.c:319
-#: ../gedit/gedit-io-error-message-area.c:532
-#: ../gedit/gedit-io-error-message-area.c:1286
+#: ../gedit/gedit-io-error-message-area.c:325
+#: ../gedit/gedit-io-error-message-area.c:545
+#: ../gedit/gedit-io-error-message-area.c:1307
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Uventet feil: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:325
-#: ../gedit/gedit-io-error-message-area.c:693
+#: ../gedit/gedit-io-error-message-area.c:331
+#: ../gedit/gedit-io-error-message-area.c:710
 #, c-format
 msgid "Could not open the file %s."
 msgstr "Kunne ikke åpne filen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:369
+#: ../gedit/gedit-io-error-message-area.c:376
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr "gedit ikke kan finne den. Kanskje den ble slettet nylig."
 
-#: ../gedit/gedit-io-error-message-area.c:478
+#: ../gedit/gedit-io-error-message-area.c:491
 msgid "Attempt to log in failed."
 msgstr "Forsøk på å logge inn feilet."
 
-#: ../gedit/gedit-io-error-message-area.c:482
+#: ../gedit/gedit-io-error-message-area.c:495
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s er ikke en vanlig fil."
 
-#: ../gedit/gedit-io-error-message-area.c:538
+#: ../gedit/gedit-io-error-message-area.c:551
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Kunne ikke forkaste endringer i fil %s."
 
-#: ../gedit/gedit-io-error-message-area.c:559
-msgid "<small>Ch_aracter Coding:</small>"
-msgstr "<small>T_egnkoding:</small>"
+#: ../gedit/gedit-io-error-message-area.c:574
+msgid "Ch_aracter Coding:"
+msgstr "Te_gnkoding:"
 
-#: ../gedit/gedit-io-error-message-area.c:600
+#: ../gedit/gedit-io-error-message-area.c:617
 msgid "_Retry"
 msgstr "P_røv igjen"
 
-#: ../gedit/gedit-io-error-message-area.c:695
+#: ../gedit/gedit-io-error-message-area.c:712
 msgid "gedit has not been able to detect the character coding."
 msgstr "gedit har ikke klart å gjenkjenne tegnkodingen."
 
-#: ../gedit/gedit-io-error-message-area.c:697
-#: ../gedit/gedit-io-error-message-area.c:706
+#: ../gedit/gedit-io-error-message-area.c:714
+#: ../gedit/gedit-io-error-message-area.c:723
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Vennligst sjekk om du prøver å åpne en binær fil."
 
-#: ../gedit/gedit-io-error-message-area.c:698
+#: ../gedit/gedit-io-error-message-area.c:715
 msgid "Select a character coding from the menu and try again."
 msgstr "Velg tegnkoding fra menyen og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:703
+#: ../gedit/gedit-io-error-message-area.c:720
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "Kunne ikke åpne fil %s som bruker tegnkoding %s."
 
-#: ../gedit/gedit-io-error-message-area.c:707
-#: ../gedit/gedit-io-error-message-area.c:759
+#: ../gedit/gedit-io-error-message-area.c:724
+#: ../gedit/gedit-io-error-message-area.c:774
 msgid "Select a different character coding from the menu and try again."
 msgstr "Velg en annen tegnkoding fra menyen og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:754
+#: ../gedit/gedit-io-error-message-area.c:769
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "Kunne ikke lagre fil %s med tegnkoding %s."
 
-#: ../gedit/gedit-io-error-message-area.c:757
+#: ../gedit/gedit-io-error-message-area.c:772
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
-msgstr "Dokumentet inneholder et eller flere tegn som ikke kan kodes med oppgitt tegnkoding."
+msgstr ""
+"Dokumentet inneholder et eller flere tegn som ikke kan kodes med oppgitt "
+"tegnkoding."
 
-#: ../gedit/gedit-io-error-message-area.c:818
+#: ../gedit/gedit-io-error-message-area.c:833
 msgid "_Edit Anyway"
 msgstr "R_ediger likevel"
 
-#: ../gedit/gedit-io-error-message-area.c:821
+#: ../gedit/gedit-io-error-message-area.c:836
 msgid "_Don't Edit"
 msgstr "_Ikke Rediger"
 
 #. FIXME: try to rephrase in a better way
-#: ../gedit/gedit-io-error-message-area.c:837
+#: ../gedit/gedit-io-error-message-area.c:852
 #, c-format
 msgid "The file %s is already open."
 msgstr "Fil %s er allerede åpen."
 
-#: ../gedit/gedit-io-error-message-area.c:852
+#: ../gedit/gedit-io-error-message-area.c:867
 msgid ""
 "gedit opened this instance of the file in non-editable way. Do you want to "
 "edit it anyway?"
-msgstr "gedit åpnet denne instansen av filen uten mulighet for redigering. Vil du redigere den likevel?"
+msgstr ""
+"gedit åpnet denne instansen av filen uten mulighet for redigering. Vil du "
+"redigere den likevel?"
 
-#: ../gedit/gedit-io-error-message-area.c:910
-#: ../gedit/gedit-io-error-message-area.c:1005
+#: ../gedit/gedit-io-error-message-area.c:925
+#: ../gedit/gedit-io-error-message-area.c:1020
 msgid "_Save Anyway"
 msgstr "_Lagre likevel"
 
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1009
+#: ../gedit/gedit-io-error-message-area.c:929
+#: ../gedit/gedit-io-error-message-area.c:1024
 msgid "_Don't Save"
 msgstr "_Ikke lagre"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:932
+#: ../gedit/gedit-io-error-message-area.c:947
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Fil %s er endret siden den ble lest."
 
-#: ../gedit/gedit-io-error-message-area.c:948
+#: ../gedit/gedit-io-error-message-area.c:963
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
-msgstr "Hvis du lagrer den kan alle eksterne endringer gå tapt. Lagre den likevel?"
+msgstr ""
+"Hvis du lagrer den kan alle eksterne endringer gå tapt. Lagre den likevel?"
 
-#: ../gedit/gedit-io-error-message-area.c:1027
+#: ../gedit/gedit-io-error-message-area.c:1042
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Kunne ikke opprette sikkerhetskopi ved lagring av %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1030
+#: ../gedit/gedit-io-error-message-area.c:1045
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Kunne ikke opprette en midlertidig sikkerhetskopi ved lagring av %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1047
+#: ../gedit/gedit-io-error-message-area.c:1062
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
 "while saving, you could lose the old copy of the file. Save anyway?"
-msgstr ""
+msgstr "gedit kunne ikke ta sikkerhetskopi av den gamle kopien av filen før lagring av den nye. Du kan overse denne advarselen og lagre filen likevel, men hvis en feil oppstår under lagring kan du miste den gamle kopien av filen. Lagre likevel?"
 
-#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1105
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:1123
 #, c-format
 msgid ""
-"gedit cannot handle <i>%s:</i> locations in write mode. Please, check that "
-"you typed the location correctly and try again."
-msgstr "gedit kan ikke skrive til <i>%s:</i>-lokasjoner. Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
+"gedit cannot handle %s locations in write mode. Please, check that you typed "
+"the location correctly and try again."
+msgstr ""
+"gedit kan ikke håndtere %s-lokasjoner i skrivemodus. Vennligst sjekk at du "
+"skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1112
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1131
 msgid ""
 "gedit cannot handle this location  in write mode. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
-"Forsøk på å logge inn feilet. Vennligst sjekk at du skrev inn lokasjonen "
-"korrekt og prøv igjen."
+"gedit kan ikke håndtere denne lokasjonen. Vennligst sjekk at du skrev inn "
+"lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1121
+#: ../gedit/gedit-io-error-message-area.c:1140
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1690,97 +1703,79 @@ msgstr ""
 "Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har "
 "denne begrensningen."
 
-#: ../gedit/gedit-io-error-message-area.c:1128
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1147
+#, c-format
 msgid ""
 "%s is not a valid location. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"Vertsnavnet er ugyldig. Vennligst sjekk at du skrev inn lokasjonen korrekt "
-"og prøv igjen."
+"%s er ikke en gyldig lokasjon. Vennligst sjekk at du skrev inn lokasjonen "
+"korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1135
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1154
 msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
-msgstr ""
-"Forsøk på å logge inn feilet. Vennligst sjekk at du skrev inn lokasjonen "
-"korrekt og prøv igjen."
+msgstr "Du har ikke nødvendige rettigheter til å lagre filen. Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1147
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1166
+#, c-format
 msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
 "try again."
-msgstr "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
+msgstr "%s er en katalog. Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1153
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1172
 msgid ""
 "Not enough available memory to save the file. Please, close some running "
 "applications and try again."
-msgstr ""
-"Ikke nok minne tilgjengelig til å åpne filen. Vennligst lukk noen programmer "
-"og prøv igjen."
+msgstr "Ikke nok minne tilgjengelig til å lagre filen. Vennligst lukk noen programmer og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1227
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1248
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
-msgstr ""
-"Det er ikke nok plass på disken til å lagre filen.\n"
-"Vennligst frigjør plass og prøv igjen."
+msgstr "Det er ikke nok plass på disken til å lagre filen. Vennligst frigjør plass og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1233
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1254
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
-msgstr ""
-"Vertsnavnet er ugyldig. Vennligst sjekk at du skrev inn lokasjonen korrekt "
-"og prøv igjen."
+msgstr "Du prøver å lagre filen på en skrivebeskyttet disk. Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1239
+#: ../gedit/gedit-io-error-message-area.c:1260
 msgid "A file with the same name already exists. Please, use a different name."
-msgstr ""
+msgstr "En fil med det samme navnet eksisterer allerede. Vennligst bruk et annet navn."
 
-#: ../gedit/gedit-io-error-message-area.c:1244
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:1265
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
-msgstr ""
-"Disken du prøver å lagre filen på har en begrensning på filstørrelse. "
-"Vennligst prøv å lagre en mindre fil eller lagre den på en disk som ikke har "
-"denne begrensningen."
+msgstr "Disken du prøver å lagre filen på har en begrensning på lenge på filnavn. Vennligst bruk et kortere navn."
 
-#: ../gedit/gedit-io-error-message-area.c:1249
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1270
+#, c-format
 msgid ""
 "%s is not a regular file. Please, check that you typed the location "
 "correctly and try again."
-msgstr ""
-"Vertsnavnet er ugyldig. Vennligst sjekk at du skrev inn lokasjonen korrekt "
-"og prøv igjen."
+msgstr "%s er ikke en vanlig fil. Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-io-error-message-area.c:1292
-#, fuzzy, c-format
+#: ../gedit/gedit-io-error-message-area.c:1313
+#, c-format
 msgid "Could not save the file %s."
-msgstr "Kunne ikke lagre fil «%s»"
+msgstr "Kunne ikke lagre filen %s."
 
 #: ../gedit/gedit-notebook.c:823
 msgid "Close document"
 msgstr "Lukk dokument"
 
-#: ../gedit/gedit-panel.c:345 ../gedit/gedit-panel.c:560
+#: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
 #: ../gedit/recent-files/egg-recent-view-gtk.c:444
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "Tom"
 
-#: ../gedit/gedit-panel.c:501 ../gedit/gedit-panel.c:581
+#: ../gedit/gedit-panel.c:526 ../gedit/gedit-panel.c:606
 msgid "Hide panel"
 msgstr "Skjul panel"
 
@@ -1832,7 +1827,7 @@ msgstr "Forhåndsvisning av side"
 
 #: ../gedit/gedit-print-job-preview.c:624
 msgid "The preview of a page in the document to be printed"
-msgstr ""
+msgstr "Forhåndsvisning av en side i dokumentet som skal skrives ut"
 
 #: ../gedit/gedit-print-job-preview.c:710
 msgid "Other"
@@ -1900,7 +1895,7 @@ msgstr "Antall sider vertikalt"
 
 #: ../gedit/gedit-print-job-preview.c:1165
 msgid "No visible output was created."
-msgstr ""
+msgstr "Ingen synlige utdata ble opprettet."
 
 #: ../gedit/gedit-statusbar.c:257
 msgid "  OVR"
@@ -1926,77 +1921,77 @@ msgstr[1] ""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:495
+#: ../gedit/gedit-tab.c:637
 #, c-format
-msgid "Reverting <b>%s</b> from <b>%s</b>"
-msgstr ""
+msgid "Reverting %s from %s"
+msgstr "Forkaster endringer fra %s til %s"
 
-#: ../gedit/gedit-tab.c:501
+#: ../gedit/gedit-tab.c:644
 #, c-format
-msgid "Reverting <b>%s</b>"
-msgstr ""
-
-#. Translators: the first %s is a file name (e.g. test.txt) the second one
-#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:515
-#, c-format
-msgid "Loading <b>%s</b> from <b>%s</b>"
-msgstr ""
-
-#: ../gedit/gedit-tab.c:521
-#, c-format
-msgid "Loading <b>%s</b>"
-msgstr ""
+msgid "Reverting %s"
+msgstr "Forkaster %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:597
+#: ../gedit/gedit-tab.c:660
 #, c-format
-msgid "Saving <b>%s</b> to <b>%s</b>"
-msgstr ""
+msgid "Loading %s from %s"
+msgstr "Laster %s fra %s"
 
-#: ../gedit/gedit-tab.c:603
+#: ../gedit/gedit-tab.c:667
 #, c-format
-msgid "Saving <b>%s</b>"
-msgstr "Lagrer <b>%s</b>"
+msgid "Loading %s"
+msgstr "Laster %s"
+
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:750
+#, c-format
+msgid "Saving %s to %s"
+msgstr "Lagrer %s til %s"
+
+#: ../gedit/gedit-tab.c:757
+#, c-format
+msgid "Saving %s"
+msgstr "Lagrer %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1335
+#: ../gedit/gedit-tab.c:1505
 msgid "RO"
 msgstr "Skrivebeskyttet"
 
-#: ../gedit/gedit-tab.c:1377
+#: ../gedit/gedit-tab.c:1550
 #, c-format
-msgid "Error opening file <i>%s</i>."
-msgstr "Feil under åpning av fil <i>«%s»</i>."
+msgid "Error opening file %s"
+msgstr "Feil ved åpning av fil %s"
 
-#: ../gedit/gedit-tab.c:1382
-#, fuzzy, c-format
-msgid "Error reverting file <i>%s</i>."
-msgstr "Feil under forkasting av endringer i fil «%s»."
-
-#: ../gedit/gedit-tab.c:1387
+#: ../gedit/gedit-tab.c:1555
 #, c-format
-msgid "Error saving file <i>%s</i>."
-msgstr "Feil under lagring av fil <i>«%s»</i>."
+msgid "Error reverting file %s"
+msgstr "Feil under forkasting av endringer i fil %s"
 
-#: ../gedit/gedit-tab.c:1405
+#: ../gedit/gedit-tab.c:1560
+#, c-format
+msgid "Error saving file %s"
+msgstr "Feil ved lagring av fil %s"
+
+#: ../gedit/gedit-tab.c:1578
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1412
+#: ../gedit/gedit-tab.c:1585
 msgid "Name:"
 msgstr "Navn:"
 
-#: ../gedit/gedit-tab.c:1413
+#: ../gedit/gedit-tab.c:1586
 msgid "MIME Type:"
 msgstr "MIME-type:"
 
-#: ../gedit/gedit-tab.c:1414
+#: ../gedit/gedit-tab.c:1587
 msgid "Encoding:"
 msgstr "Koding:"
 
-#: ../gedit/gedit-tab.c:1762
+#: ../gedit/gedit-tab.c:2014
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Rendrer side %d av %d..."
@@ -2038,7 +2033,7 @@ msgstr "Opprett et nytt dokument"
 msgid "_Open..."
 msgstr "_Åpne..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1075
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1086
 msgid "Open a file"
 msgstr "Åpne en fil"
 
@@ -2244,35 +2239,30 @@ msgid "Side _Pane"
 msgstr "Side_linje"
 
 #: ../gedit/gedit-ui.h:148
-#, fuzzy
 msgid "Show or hide the side pane in the current window"
-msgstr "Endre synlighet for verktøylinjen i aktivt vindu"
+msgstr "Vis eller skjul sidelinjen i dette vinduet"
 
-#: ../gedit/gedit-ui.h:150
+#: ../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
 msgid "_Bottom Panel"
 msgstr "_Bunnpanel"
 
-#: ../gedit/gedit-ui.h:151
-#, fuzzy
+#: ../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
 msgid "Show or hide the bottom panel in the current window"
-msgstr "Endre synlighet for verktøylinjen i aktivt vindu"
+msgstr "Vis eller skjul bunnpanelet i dette vinduet"
 
-#: ../gedit/gedit-utils.c:883
+#: ../gedit/gedit-utils.c:923
 #, c-format
-msgid ""
-"<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n"
-"\n"
-"Please, check your installation."
-msgstr ""
+msgid "Unable to find file %s."
+msgstr "Kunne ikke finne fil %s."
 
-#: ../gedit/gedit-utils.c:884
+#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+msgid "Please check your installation."
+msgstr "Vennligst sjekk din installasjon."
+
+#: ../gedit/gedit-utils.c:952
 #, c-format
-msgid ""
-"<span size=\"large\" weight=\"bold\">Unable to find the required widgets "
-"inside file <i>%s</i>..</span>\n"
-"\n"
-"Please, check your installation."
-msgstr ""
+msgid "Unable to find the required widgets inside file %s."
+msgstr "Kunne ikke finne nødvendige komponenter i fil %s."
 
 #. create "Wrap Around" menu item.
 #: ../gedit/gedit-view.c:1314
@@ -2297,40 +2287,40 @@ msgstr "Streng du vil søke etter"
 msgid "Line you want to move the cursor to"
 msgstr "Linje du vil flytte markøren til"
 
-#: ../gedit/gedit-window.c:665
+#: ../gedit/gedit-window.c:676
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Bruk uthevingsmodus %s"
 
-#: ../gedit/gedit-window.c:718
+#: ../gedit/gedit-window.c:729
 msgid "Normal"
 msgstr "Normal"
 
-#: ../gedit/gedit-window.c:719
+#: ../gedit/gedit-window.c:730
 msgid "Use Normal highlight mode"
 msgstr "Bruk normal uthevingsmodus"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:845 ../gedit/gedit-window.c:870
+#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "Åpne «%s»"
 
-#: ../gedit/gedit-window.c:970
+#: ../gedit/gedit-window.c:985
 msgid "Save"
 msgstr "Lagre"
 
-#: ../gedit/gedit-window.c:1079
+#: ../gedit/gedit-window.c:1090
 msgid "Open a recently used file"
 msgstr "Åpne nylig brukt fil"
 
-#: ../gedit/gedit-window.c:1086
+#: ../gedit/gedit-window.c:1097
 msgid "Open"
 msgstr "Åpne"
 
-#: ../gedit/gedit-window.c:1166 ../gedit/gedit-window.c:1737
+#: ../gedit/gedit-window.c:1177 ../gedit/gedit-window.c:1748
 #, c-format
 msgid "Activate %s"
 msgstr "Aktiver %s"
@@ -2436,6 +2426,162 @@ msgstr "_Dokumentstatistikk"
 msgid "Get statistic info on current document"
 msgstr "Hent statisisk informasjon om dette dokumentet"
 
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
+msgid "Execute external commands and shell scripts."
+msgstr "Kjør eksterne kommandoer og skallskript."
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+msgid "External Tools"
+msgstr "Eksterne verktøy"
+
+#: ../plugins/externaltools/tools/functions.py:241
+msgid "You must be inside a word to run this command"
+msgstr "Du må være inne i et ord for å kjøre denne kommandoen"
+
+#: ../plugins/externaltools/tools/manager.py:43
+msgid "Nothing"
+msgstr "Ingenting"
+
+#: ../plugins/externaltools/tools/manager.py:44
+msgid "Current document"
+msgstr "Aktivt dokument"
+
+#: ../plugins/externaltools/tools/manager.py:45
+msgid "Current selection"
+msgstr "Aktivt utvalg"
+
+#: ../plugins/externaltools/tools/manager.py:46
+msgid "Current line"
+msgstr "Denne linjen"
+
+#: ../plugins/externaltools/tools/manager.py:47
+msgid "Current word"
+msgstr "Dette ordet"
+
+#: ../plugins/externaltools/tools/manager.py:50
+msgid "Insert in output panel"
+msgstr "Sett inn i utskriftspanel"
+
+#: ../plugins/externaltools/tools/manager.py:51
+msgid "Create new document"
+msgstr "Opprett nytt dokument"
+
+#: ../plugins/externaltools/tools/manager.py:52
+msgid "Append to current document"
+msgstr "Legg til i dette dokumentet"
+
+#: ../plugins/externaltools/tools/manager.py:53
+msgid "Replace current document"
+msgstr "Erstatt dette dokumentet"
+
+#: ../plugins/externaltools/tools/manager.py:54
+msgid "Replace current selection"
+msgstr "Erstatt dette utvalget"
+
+#: ../plugins/externaltools/tools/manager.py:55
+msgid "Insert at cursor position"
+msgstr "Set inn i markørposisjonen"
+
+#: ../plugins/externaltools/tools/manager.py:58
+msgid "All documents"
+msgstr "Alle dokumenter"
+
+#: ../plugins/externaltools/tools/manager.py:59
+msgid "All documents except untitled ones"
+msgstr "Alle dokumenter med navn"
+
+#: ../plugins/externaltools/tools/manager.py:60
+msgid "Local files only"
+msgstr "Kun lokale filer"
+
+#: ../plugins/externaltools/tools/manager.py:61
+msgid "Remote files only"
+msgstr "Kun eksterne filer"
+
+#: ../plugins/externaltools/tools/manager.py:62
+msgid "Untitled documents only"
+msgstr "Kun dokumenter uten navn"
+
+#: ../plugins/externaltools/tools/manager.py:169
+msgid "A Brand New Tool"
+msgstr "Et helt nytt verktøy"
+
+#: ../plugins/externaltools/tools/manager.py:182
+#: ../plugins/externaltools/tools/manager.py:209
+#, python-format
+msgid "Edit tool <i>%s</i>:"
+msgstr "Redigeringsverktøy <i>%s</i>:"
+
+#: ../plugins/externaltools/tools/manager.py:188
+msgid "New tool"
+msgstr "Nytt verktøy"
+
+#: ../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "Ko_mmando(er):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "Rediger verktøy <i>make</i>:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "Håndtering av eksterne verktøy"
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#: ../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr ""
+"Ingenting\n"
+"Aktivt dokument\n"
+"Alle dokumenter"
+
+#: ../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "Kjør «make» i dokumentkatalogen"
+
+#: ../plugins/externaltools/tools/tools.glade.h:10
+msgid "Shortcut _key:"
+msgstr "Snarvei_tast:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "_Beskrivelse:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "_Inndata:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "_Utdata:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "_Lagre:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "Verk_tøy:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Innrykk"
@@ -2491,6 +2637,64 @@ msgstr "Setter inn brukernavn i markørposisjonen."
 #: ../plugins/sample/sample.gedit-plugin.desktop.in.h:2
 msgid "User name"
 msgstr "Brukernavn"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:2
+msgid "<b>Activation</b>"
+msgstr "<b>Aktivering</b>"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:3
+#, fuzzy
+msgid "Snippets Manager"
+msgstr "Sett språk"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:4
+msgid "_Accelerator:"
+msgstr ""
+
+#: ../plugins/snippets/snippets/snippets.glade.h:5
+msgid "_Edit snippet:"
+msgstr ""
+
+#: ../plugins/snippets/snippets/snippets.glade.h:6
+msgid "_Snippets:"
+msgstr ""
+
+#: ../plugins/snippets/snippets/snippets.glade.h:7
+msgid "_Tab trigger:"
+msgstr ""
+
+#: ../plugins/snippets/snippets/__init__.py:37
+#, python-format
+msgid ""
+"Could not load the file \"%s\". The file is probably corrupt. Please fix or "
+"remove the file. To try to load the file again, select the Tools -> Manage "
+"Snippets... menu item."
+msgstr ""
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
+#, fuzzy
+msgid "Manage _Snippets..."
+msgstr "Side_oppsett..."
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage snippets"
+msgstr ""
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:63
+msgid "Add a new snippet..."
+msgstr ""
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:115
+msgid "Global"
+msgstr "Global"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:569
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr ""
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:571
+msgid "Type a new accelerator"
+msgstr ""
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
