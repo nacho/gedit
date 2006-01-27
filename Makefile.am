@@ -8,7 +8,6 @@ distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 EXTRA_DIST = BUGS		\
 	ChangeLog  		\
 	MAINTAINERS		\
-	README 			\
 	TODO 			\
 	xmldocs.make 		\
 	omf.make		\
