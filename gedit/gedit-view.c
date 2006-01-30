@@ -1042,6 +1042,7 @@ hide_search_window (GeditView *view, gboolean cancel)
 
 	/* send focus-in event */
 	send_focus_change (GTK_WIDGET (view->priv->search_entry), FALSE);
+	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (view), TRUE);
 	gtk_widget_hide (view->priv->search_window);
 	
 	if (cancel)
@@ -1717,16 +1718,16 @@ start_interactive_search_real (GeditView *view)
 		return FALSE;
 
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-	
+
 	if (view->priv->search_mode == SEARCH)
 		gtk_text_buffer_get_selection_bounds (buffer, &view->priv->start_search_iter, NULL);
 	else
 		gtk_text_buffer_get_iter_at_mark (buffer,
 						  &view->priv->start_search_iter,
 						  gtk_text_buffer_get_insert (buffer));
-					  		
+
 	ensure_search_window (view);
-		
+
 	/* done, show it */
 	update_search_window_position (view);
 	gtk_widget_show (view->priv->search_window);
@@ -1734,18 +1735,20 @@ start_interactive_search_real (GeditView *view)
 	if (view->priv->search_entry_changed_id == 0)
 	{
       		view->priv->search_entry_changed_id =
-			g_signal_connect (view->priv->search_entry, "changed",
+			g_signal_connect (view->priv->search_entry,
+					  "changed",
 					  G_CALLBACK (search_init),
 					  view);
 	}
-	
+
 	init_search_entry (view);
 
 	view->priv->typeselect_flush_timeout =  
 		g_timeout_add (GEDIT_VIEW_SEARCH_DIALOG_TIMEOUT,
 		   	       (GSourceFunc) search_entry_flush_timeout,
 		   	       view);
-		   
+
+	gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW (view), FALSE);
 	gtk_widget_grab_focus (view->priv->search_entry);
 	
 	send_focus_change (view->priv->search_entry, TRUE);
