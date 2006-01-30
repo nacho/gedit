@@ -453,7 +453,7 @@ save_existing_local_file (GeditDocumentSaver *saver)
 	struct stat statbuf;
 	struct stat new_statbuf;
 	gchar *backup_filename = NULL;
-	gint bfd;
+	gboolean backup_created = FALSE;
 
 	if (fstat (saver->priv->fd, &statbuf) != 0) 
 	{
@@ -658,6 +658,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 	 */
 	if ((saver->priv->flags & GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP) == 0)
 	{
+		gint bfd;
+
 		/* move away old backups */
 		if (!remove_file (backup_filename))
 		{
@@ -702,6 +704,7 @@ save_existing_local_file (GeditDocumentSaver *saver)
 					     "No backup created");
 
 				unlink (backup_filename);
+				close (bfd);
 
 				goto out;
 			}
@@ -715,9 +718,13 @@ save_existing_local_file (GeditDocumentSaver *saver)
 					     "No backup created");
 
 				unlink (backup_filename);
+				close (bfd);
 
 				goto out;
 		}
+
+		backup_created = TRUE;
+		close (bfd);
 	}
 
 	/* finally overwrite the original */
@@ -727,6 +734,12 @@ save_existing_local_file (GeditDocumentSaver *saver)
 				      &saver->priv->error))
 	{
 		goto out;
+	}
+
+	/* remove the backup if we don't want to keep it */
+	if (backup_created && !saver->priv->keep_backup)
+	{
+		unlink (backup_filename);
 	}
 
 	/* re stat the file and refetch the mime type */
