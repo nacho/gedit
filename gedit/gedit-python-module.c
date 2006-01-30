@@ -24,18 +24,20 @@
 #include <config.h>
 #endif
 
+#include <pygobject.h>
+#include <pygtk/pygtk.h>
+
 #include <signal.h>
 
 #include <gmodule.h>
-
-#include <pygobject.h>
-#include <pygtk/pygtk.h>
 
 #include "gedit-python-module.h"
 #include "gedit-python-plugin.h"
 #include "gedit-debug.h"
 
-#define GEDIT_PYTHON_MODULE_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_PYTHON_MODULE, GeditPythonModulePrivate))
+#define GEDIT_PYTHON_MODULE_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+						 GEDIT_TYPE_PYTHON_MODULE, \
+						 GeditPythonModulePrivate))
 
 struct _GeditPythonModulePrivate
 {
@@ -66,10 +68,10 @@ gedit_python_module_init_python ()
 {
 	PyObject *pygtk, *mdict, *require, *path;
 	PyObject *sys_path, *gedit, *gtk, *pygtk_version, *pygtk_required_version;
+	PyObject *gettext, *install, *gettext_args;
 	struct sigaction old_sigint;
 	gint res;
 	char *argv[] = { "gedit", NULL };
-	char *gettext_command;
 	
 	if (Py_IsInitialized ())
 	{
@@ -90,10 +92,10 @@ gedit_python_module_init_python ()
 
 		return;
 	}
-	
+
 	/* Python initialization */
 	Py_Initialize ();
-	
+
 	/* Restore old handler */
 	res = sigaction (SIGINT, &old_sigint, NULL);
 	if (res != 0)
@@ -101,14 +103,19 @@ gedit_python_module_init_python ()
 		g_warning ("Error initializing Python interpreter: cannot restore "
 		           "handler to SIGINT signal (%s)",
 		           strerror (errno));
-    
 		return;
 	}
-	
+
 	PySys_SetArgv (1, argv);
 
 	/* pygtk.require("2.0") */
 	pygtk = PyImport_ImportModule ("pygtk");
+	if (pygtk == NULL)
+	{
+		g_warning ("Could not import pygtk");
+		return;
+	}
+
 	mdict = PyModule_GetDict (pygtk);
 	require = PyDict_GetItemString (mdict, "require");
 	PyObject_CallObject (require, Py_BuildValue ("(S)", PyString_FromString ("2.0")));
@@ -121,6 +128,12 @@ gedit_python_module_init_python ()
 
 	/* gtk.pygtk_version < (2, 4, 0) */
 	gtk = PyImport_ImportModule ("gtk");
+	if (gtk == NULL)
+	{
+		g_warning ("Could not import gtk");
+		return;
+	}
+
 	mdict = PyModule_GetDict (gtk);
 	pygtk_version = PyDict_GetItemString (mdict, "pygtk_version");
 	pygtk_required_version = Py_BuildValue ("(iii)", 2, 4, 0);
@@ -154,14 +167,20 @@ gedit_python_module_init_python ()
 		PyErr_Print ();
 		return;
 	}
-	
-	gettext_command = g_strdup_printf ("import gettext\n"
-			"gettext.install (\"%s\", \"%s\")",
-			GETTEXT_PACKAGE,
-			GEDIT_LOCALEDIR);
 
-	PyRun_SimpleString (gettext_command);
-	g_free (gettext_command);
+	/* i18n support */
+	gettext = PyImport_ImportModule ("gettext");
+	if (gettext == NULL)
+	{
+		g_warning ("Could not import gettext");
+		return;
+	}
+
+	mdict = PyModule_GetDict (gettext);
+	install = PyDict_GetItemString (mdict, "install");
+	gettext_args = Py_BuildValue ("ss", GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
+	PyObject_CallObject (install, gettext_args);
+	Py_DECREF (gettext_args);
 }
 
 static gboolean

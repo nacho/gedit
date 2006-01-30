@@ -22,7 +22,6 @@ from gtk import gdk
 import re
 import os
 import gettext
-from gettext import gettext as _
 from Snippet import Snippet
 from SnippetsDialog import SnippetsDialog
 from SnippetPlaceholders import *
