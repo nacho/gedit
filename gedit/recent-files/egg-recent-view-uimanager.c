@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 
-/**
+/*
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -832,14 +832,6 @@ egg_recent_view_uimanager_new (GtkUIManager  *uimanager,
 	return EGG_RECENT_VIEW_UIMANAGER (view);
 }
 
-/**
- * egg_recent_view_uimanager_get_type:
- * @:
- *
- * This returns a GType representing a EggRecentViewUIManager object.
- *
- * Returns: a GType
- */
 GType
 egg_recent_view_uimanager_get_type (void)
 {

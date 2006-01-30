@@ -46,6 +46,11 @@
 #define EGG_RECENT_MODEL_TIMEOUT_LENGTH 200
 #define EGG_RECENT_MODEL_POLL_TIME 3
 
+/* needed for Darwin */
+#if !HAVE_DECL_LOCKF
+int lockf (int filedes, int function, off_t size);
+#endif
+
 #define EGG_RECENT_MODEL_KEY_DIR "/desktop/gnome/recent_files"
 #define EGG_RECENT_MODEL_DEFAULT_LIMIT_KEY EGG_RECENT_MODEL_KEY_DIR "/default_limit"
 #define EGG_RECENT_MODEL_EXPIRE_KEY EGG_RECENT_MODEL_KEY_DIR "/expire"
@@ -996,7 +1001,7 @@ egg_recent_model_open_file (EggRecentModel *model,
 static gboolean
 egg_recent_model_lock_file (FILE *file)
 {
-#ifdef F_TLOCK
+#ifdef HAVE_LOCKF
 	int fd;
 	gint	try = 5;
 
@@ -1028,13 +1033,13 @@ egg_recent_model_lock_file (FILE *file)
 	return FALSE;
 #else
 	return TRUE;
-#endif
+#endif /* HAVE_LOCKF */
 }
 
 static gboolean
 egg_recent_model_unlock_file (FILE *file)
 {
-#ifdef F_TLOCK
+#ifdef HAVE_LOCKF
 	int fd;
 
 	rewind (file);
@@ -1043,7 +1048,7 @@ egg_recent_model_unlock_file (FILE *file)
 	return (lockf (fd, F_ULOCK, 0) == 0) ? TRUE : FALSE;
 #else
 	return TRUE;
-#endif
+#endif /* HAVE_LOCKF */
 }
 
 static void
