@@ -36,6 +36,7 @@
 #include <string.h>
 
 #include <glib/gi18n.h>
+#include <glib/goption.h>
 #include <gdk/gdkx.h>
 #include <libgnome/libgnome.h>
 #include <libgnomeui/libgnomeui.h>
@@ -65,64 +66,55 @@ static gchar *encoding_charset = NULL;
 static const GeditEncoding *encoding;
 static gboolean new_window_option = FALSE;
 static gboolean new_document_option = FALSE;
+static gchar **remaining_args = NULL;
 static GSList *file_list = NULL;
 
-static const struct poptOption options [] =
+static const GOptionEntry options [] =
 {
-	{ "encoding", '\0', POPT_ARG_STRING, &encoding_charset,	0,
-	  N_("Set the character encoding to be used to open the files listed on the command line"), NULL },
+	{ "encoding", '\0', 0, G_OPTION_ARG_STRING, &encoding_charset,
+	  N_("Set the character encoding to be used to open the files listed on the command line"), NULL /* When out of string freeze, use N_("STRING") */ },
 
-	{ "new-window", '\0', POPT_ARG_NONE, &new_window_option, 0,
+	{ "new-window", '\0', 0, G_OPTION_ARG_NONE, &new_window_option,
 	  N_("Create a new toplevel window in an existing instance of gedit"), NULL },
 
-	{ "new-document", '\0', POPT_ARG_NONE, &new_document_option, 0,
+	{ "new-document", '\0', 0, G_OPTION_ARG_NONE, &new_document_option,
 	  N_("Create a new document in an existing instance of gedit"), NULL },
 
-	{NULL, '\0', 0, NULL, 0}
+	{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &remaining_args,
+	  NULL, NULL }, /* collects file arguments */
+
+	{NULL}
 };
 
 static void
 gedit_get_command_line_data (GnomeProgram *program)
 {
-	GValue value = { 0, };
-	poptContext ctx;
-	gchar **args;
-
-	g_value_init (&value, G_TYPE_POINTER);
-	g_object_get_property (G_OBJECT (program),
-			       GNOME_PARAM_POPT_CONTEXT,
-			       &value);
-	ctx = g_value_get_pointer (&value);
-	g_value_unset (&value);
-
-	args = (gchar **) poptGetArgs(ctx);
-
-	if (args)
+	if (remaining_args)
 	{
 		gint i;
 
-		for (i = 0; args[i]; i++) 
+		for (i = 0; remaining_args[i]; i++) 
 		{
-			if (*args[i] == '+')
+			if (*remaining_args[i] == '+')
 			{
-				if (*(args[i] + 1) == '\0')
+				if (*(remaining_args[i] + 1) == '\0')
 					/* goto the last line of the document */
 					line_position = G_MAXINT;
 				else
-					line_position = atoi (args[i] + 1);
+					line_position = atoi (remaining_args[i] + 1);
 			}
 			else
 			{
 				gchar *canonical_uri;
 				
-				canonical_uri = gedit_utils_make_canonical_uri_from_shell_arg (args[i]);
+				canonical_uri = gedit_utils_make_canonical_uri_from_shell_arg (remaining_args[i]);
 				
 				if (canonical_uri != NULL)
 					file_list = g_slist_prepend (file_list, 
 								     canonical_uri);
 				else
 					g_print (_("%s: malformed file name or URI.\n"),
-						 args[i]);
+						 remaining_args[i]);
 			} 
 		}
 
@@ -139,8 +131,6 @@ gedit_get_command_line_data (GnomeProgram *program)
 		g_free (encoding_charset);
 		encoding_charset = NULL;
 	}
-
-	poptFreeContext (ctx);
 }
 
 static guint32
@@ -384,6 +374,7 @@ int
 main (int argc, char *argv[])
 {
 	GnomeProgram *program;
+	GOptionContext *context;
 	GeditWindow *window;
 	GeditApp *app;
 	gboolean restored = FALSE;
@@ -400,11 +391,15 @@ main (int argc, char *argv[])
 	startup_timestamp = get_startup_timestamp();
 
 	gedit_debug_message (DEBUG_APP, "Run gnome_program_init");
+
+	/* Setup command line options */
+	context = g_option_context_new (NULL);
+	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
 	
 	/* Initialize gnome program */
 	program = gnome_program_init ("gedit", VERSION,
 			    LIBGNOMEUI_MODULE, argc, argv,
-			    GNOME_PARAM_POPT_TABLE, options,
+			    GNOME_PARAM_GOPTION_CONTEXT, context,
 			    GNOME_PARAM_HUMAN_READABLE_NAME,
 		            _("Text Editor"),
 			    GNOME_PARAM_APP_DATADIR, DATADIR,

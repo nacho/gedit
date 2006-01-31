@@ -81,7 +81,7 @@ PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.8.0
 	gtk+-2.0 >= 2.8.0
 	gtksourceview-1.0 >= 1.2.0
-	libgnomeui-2.0 >= 2.6.0
+	libgnomeui-2.0 >= 2.13.0
 	libglade-2.0 >= 2.4.0
 	libgnomeprintui-2.2 >= 2.6.0
 	gnome-vfs-2.0 >= 2.13.4
@@ -96,14 +96,6 @@ dnl GConf related settings
 dnl ================================================================
 
 AM_GCONF_SOURCE_2
-
-dnl
-dnl Check popt
-dnl
-
-AC_CHECK_LIB(popt, poptStrippedArgv,, AC_MSG_ERROR([popt 1.5 or newer is required to build
-gedit. You can download the latest version from ftp://people.redhat.com/sopwith/popt/]))
-
 
 dnl ================================================================
 dnl GEDIT_DATA_DIR - Sets the location of the data directory, where we install
