@@ -127,14 +127,17 @@ all_text_files_filter (const GtkFileFilterInfo *filter_info,
 {
 	if (filter_info->mime_type == NULL)
 		return TRUE;
-	
+
 	if ((strncmp (filter_info->mime_type, "text/", 5) == 0) ||
             (strcmp (filter_info->mime_type, "application/x-desktop") == 0) ||
 	    (strcmp (filter_info->mime_type, "application/x-perl") == 0) ||
             (strcmp (filter_info->mime_type, "application/x-python") == 0) ||
-	    (strcmp (filter_info->mime_type, "application/x-php") == 0))
+	    (strcmp (filter_info->mime_type, "application/x-php") == 0) ||
+	    (strcmp (filter_info->mime_type, "application/x-ruby") == 0) ||
+	    (strcmp (filter_info->mime_type, "application/x-shellscript") == 0) ||
+	    (strcmp (filter_info->mime_type, "application/xhtml+xml") == 0))
 	{
-	    return TRUE;
+		return TRUE;
 	}
 
 	return FALSE;
