@@ -3257,9 +3257,11 @@ void
 _gedit_window_set_saving_session_state (GeditWindow *window,
 					gboolean     saving_session)
 {
+	GeditWindowState old_state;
+
 	g_return_if_fail (GEDIT_IS_WINDOW (window));
 	
-	GeditWindowState old_state = window->priv->state;
+	old_state = window->priv->state;
 
 	if (saving_session)
 		window->priv->state |= GEDIT_WINDOW_STATE_SAVING_SESSION;

@@ -833,6 +833,7 @@ static void
 save_local_file (GeditDocumentSaver *saver)
 {
 	GSourceFunc next_phase;
+	GnomeVFSResult result;
 
 	/* saving start */
 	g_signal_emit (saver,
@@ -863,7 +864,7 @@ save_local_file (GeditDocumentSaver *saver)
 	}
 
 	/* else error */
-	GnomeVFSResult result = gnome_vfs_result_from_errno (); //may it happen that no errno?
+	result = gnome_vfs_result_from_errno (); //may it happen that no errno?
 
 	g_set_error (&saver->priv->error,
 		     GEDIT_DOCUMENT_ERROR,

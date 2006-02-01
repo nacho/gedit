@@ -70,12 +70,10 @@ static void docinfo_dialog_response_cb (GtkDialog   *widget,
 					GeditWindow *window);
 
 static void
-docinfo_dialog_destroy_cb (GtkObject *obj,
-			   gpointer  data_pointer)
+docinfo_dialog_destroy_cb (GtkObject  *obj,
+			   WindowData *data)
 {
 	gedit_debug (DEBUG_PLUGINS);
-
-	WindowData *data = (WindowData *) data_pointer;
 
 	if (data != NULL)
 	{
