@@ -1536,8 +1536,9 @@ gedit_document_replace_all (GeditDocument       *doc,
 	gchar *search_text;
 	gchar *replace_text;
 	gint replace_text_len;
-	GtkTextBuffer *buffer;	
-	
+	GtkTextBuffer *buffer;
+	gboolean check_brackets;	
+
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
 	g_return_val_if_fail (replace != NULL, 0);
 	g_return_val_if_fail ((find != NULL) || (doc->priv->search_text != NULL), 0);
@@ -1548,18 +1549,18 @@ gedit_document_replace_all (GeditDocument       *doc,
 		search_text = g_strdup (doc->priv->search_text);
 	else
 		search_text = gedit_utils_unescape_search_text (find);
-		
+
 	replace_text = gedit_utils_unescape_search_text (replace);
-		
+
 	gtk_text_buffer_get_start_iter (buffer, &iter);
-		
+
 	search_flags = GTK_SOURCE_SEARCH_VISIBLE_ONLY | GTK_SOURCE_SEARCH_TEXT_ONLY;
 
 	if (!GEDIT_SEARCH_IS_CASE_SENSITIVE (flags))
 	{
 		search_flags = search_flags | GTK_SOURCE_SEARCH_CASE_INSENSITIVE;
 	}
-	
+
 	replace_text_len = strlen (replace_text);
 
 	/* disable cursor_moved emission until the end of the
@@ -1568,8 +1569,12 @@ gedit_document_replace_all (GeditDocument       *doc,
 	 */
 	doc->priv->stop_cursor_moved_emission = TRUE;
 
+	/* also avoid spending time matching brackets */
+	check_brackets = gtk_source_buffer_get_check_brackets (GTK_SOURCE_BUFFER (buffer));
+	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (buffer), FALSE);
+
 	gtk_text_buffer_begin_user_action (buffer);
-	
+
 	do
 	{
 		found = gtk_source_iter_forward_search (&iter,
@@ -1578,29 +1583,28 @@ gedit_document_replace_all (GeditDocument       *doc,
                         	                	&m_start, 
                         	                	&m_end,
                                 	               	NULL);
-								      	               	
+
 		if (found && GEDIT_SEARCH_IS_ENTIRE_WORD (flags))
 		{
 			gboolean word;
-						
+
 			word = gtk_text_iter_starts_word (&m_start) && 
 			       gtk_text_iter_ends_word (&m_end);
-				
+
 			if (!word)
 			{
 				iter = m_end;
 				continue;
 			}
 		}
-		
+
 		if (found)
 		{
 			++cont;
-			
+
 			gtk_text_buffer_delete (buffer, 
 						&m_start,
 						&m_end);
-		
 			gtk_text_buffer_insert (buffer,
 						&m_start,
 						replace_text,
@@ -1619,13 +1623,16 @@ gedit_document_replace_all (GeditDocument       *doc,
 	doc->priv->stop_cursor_moved_emission = FALSE;
 	emit_cursor_moved (doc);
 
+	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (buffer),
+					      check_brackets);
+
 	g_free (search_text);
-	g_free (replace_text);	
+	g_free (replace_text);
 
 	return cont;
-}			    
+}
 
-void 
+void
 gedit_document_set_language (GeditDocument     *doc, 
 			     GtkSourceLanguage *lang)
 {
