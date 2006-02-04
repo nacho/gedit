@@ -114,7 +114,7 @@ search_dialog_set_last_replace_text (GeditSearchDialog *dialog,
 				     LastSearchData    *data)
 {
 	if (data->replace_text)
-		gedit_search_dialog_set_search_text (dialog, data->replace_text);
+		gedit_search_dialog_set_replace_text (dialog, data->replace_text);
 }
 
 static void
@@ -160,13 +160,15 @@ phrase_found (GeditWindow *window,
 	      gint         occurrences)
 {
 	if (occurrences > 1)
+	{
 		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 					       window->priv->generic_message_cid,
 					       ngettext("Found and replaced %d occurrence",
 					     	        "Found and replaced %d occurrences",
 					     	        occurrences),
 					       occurrences);
-	else 
+	}
+	else
 	{
 		if (occurrences == 1)
 			gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
