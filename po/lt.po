@@ -1,17 +1,17 @@
 # Lithuanian translation of gedit
-# Copyright (C) 2000-2005 Free Software Foundation, Inc.
+# Copyright (C) 2000-2006 Free Software Foundation, Inc.
 # Gediminas Paulauskas <menesis@chatsubo.lt>, 2000-2003.
 # Vaidotas Zemlys <mpiktas@delfi.lt>, 2003.
-# Žygimantas Beručka <uid0@akl.lt>, 2003-2005.
+# Žygimantas Beručka <zygis@gnome.org>, 2003-2006.
 #
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-21 10:46+0200\n"
-"PO-Revision-Date: 2005-12-21 10:55+0200\n"
-"Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
+"POT-Creation-Date: 2006-02-04 18:44+0200\n"
+"PO-Revision-Date: 2006-02-04 19:41+0200\n"
+"Last-Translator: Žygimantas Beručka <zygis@gnome.org>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,9 +20,9 @@ msgstr ""
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
-msgstr "Redaguoti tekstines bylas"
+msgstr "Redaguoti tekstines rinkmenas"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:428
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
 msgid "Text Editor"
 msgstr "Tekstų redaktorius"
 
@@ -32,7 +32,7 @@ msgid ""
 "effect if the \"Use Default Font\" option is turned off."
 msgstr ""
 "Redagavimo vietoje naudojamas savas šriftas. Jis galios tik tada, jei "
-"parinktis „Naudoti numatytąjį šriftą yra išjungta."
+"parinktis „Naudoti numatytąjį šriftą“ yra išjungta."
 
 #: ../data/gedit.schemas.in.h:2
 msgid "Active plugins"
@@ -76,7 +76,7 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:10
 msgid "Backup Copy Extension"
-msgstr "Atsarginės bylos kopijos priesaga"
+msgstr "Atsarginės rinkmenos kopijos priesaga"
 
 #: ../data/gedit.schemas.in.h:11
 msgid "Body Font for Printing"
@@ -103,22 +103,26 @@ msgid "Editor Font"
 msgstr "Redaktoriaus šriftas"
 
 #: ../data/gedit.schemas.in.h:17
+msgid "Enable Search Highlighting"
+msgstr "Įjungti paieškos paryškinimus"
+
+#: ../data/gedit.schemas.in.h:18
 msgid "Enable Syntax Highlighting"
 msgstr "Įjungti sintaksės paryškinimus"
 
-#: ../data/gedit.schemas.in.h:18
+#: ../data/gedit.schemas.in.h:19
 msgid "Encodings shown in menu"
 msgstr "Koduotės rodomos meniu"
 
-#: ../data/gedit.schemas.in.h:19
+#: ../data/gedit.schemas.in.h:20
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
 msgstr ""
-"Atsarginių bylų vardų priesaga. Ji galios tik tada, jei parinktis „Kurti "
-"atsargines kopijas“ yra įjungta."
+"Atsarginių rinkmenų pavadinimų prievardis. Tai turės reikšmės tik tada, jei "
+"parinktis „Kurti atsargines kopijas“ yra įjungta."
 
-#: ../data/gedit.schemas.in.h:20
+#: ../data/gedit.schemas.in.h:21
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -126,7 +130,7 @@ msgstr ""
 "Redagavimo vietoje pažymėto teksto spalva. Ji galios tik tada, jei parinktis "
 "„Naudoti numatytąsias spalvas“ yra išjungta."
 
-#: ../data/gedit.schemas.in.h:21
+#: ../data/gedit.schemas.in.h:22
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -134,19 +138,19 @@ msgstr ""
 "Redagavimo vietoje nepažymėto teksto spalva. Ji galios tik tada, jei "
 "parinktis „Naudoti numatytąsias spalvas“ yra išjungta."
 
-#: ../data/gedit.schemas.in.h:22
+#: ../data/gedit.schemas.in.h:23
 msgid "Header Font for Printing"
 msgstr "Antraštės šriftas spausdinimui"
 
-#: ../data/gedit.schemas.in.h:23
+#: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
 msgstr "Paryškinti esamą eilutę"
 
-#: ../data/gedit.schemas.in.h:24
+#: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
 msgstr "Paryškinti atitinkantį skliaustelį"
 
-#: ../data/gedit.schemas.in.h:25
+#: ../data/gedit.schemas.in.h:26
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -155,19 +159,19 @@ msgstr ""
 "Jei ši reikšmė yra 0, tai spausdinant nebus įterptas nė vienas eilutės "
 "numeris. Kitu atveju gedit spaudins eilučių numerius kas tiek eilučių."
 
-#: ../data/gedit.schemas.in.h:26
+#: ../data/gedit.schemas.in.h:27
 msgid "Insert spaces"
 msgstr "Įterpti tarpus"
 
-#: ../data/gedit.schemas.in.h:27
+#: ../data/gedit.schemas.in.h:28
 msgid "Line Number Font for Printing"
 msgstr "Eilučių numerių šriftas spausdinimui"
 
-#: ../data/gedit.schemas.in.h:28
+#: ../data/gedit.schemas.in.h:29
 msgid "Line Wrapping Mode"
 msgstr "Eilučių laužymo būdas"
 
-#: ../data/gedit.schemas.in.h:29
+#: ../data/gedit.schemas.in.h:30
 msgid ""
 "List of VFS schemes gedit supports in write mode. The 'file' scheme is "
 "writable by default."
@@ -175,31 +179,31 @@ msgstr ""
 "VFS schemų, kuriose gedit gali rašyti, sąrašas. Schemoje „file“ rašymas "
 "numatytas iš karto."
 
-#: ../data/gedit.schemas.in.h:30
+#: ../data/gedit.schemas.in.h:31
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
 "Aktyvių įskiepių sąrašas. Jame yra aktyvių įskiepių „Vietos“. Žr. .gedit-"
-"plugin bylą norėdami gauti nurodyto įskiepio „vietą“."
+"plugin rinkmeną norėdami gauti nurodyto įskiepio „vietą“."
 
-#: ../data/gedit.schemas.in.h:31
+#: ../data/gedit.schemas.in.h:32
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
-"Sąrašas koduočių rodomų Koduočių meniu esančio bylų pasirinkimo lange. "
+"Sąrašas koduočių rodomų Koduočių meniu esančio rinkmenų pasirinkimo lange. "
 "Naudojamos tik atpažįstamos koduotės."
 
-#: ../data/gedit.schemas.in.h:32
+#: ../data/gedit.schemas.in.h:33
 msgid "Max Number of Undo Actions"
 msgstr "Maksimalus atšaukiamų veiksmų skaičius"
 
-#: ../data/gedit.schemas.in.h:33
-msgid "Maximum Recent Files"
-msgstr "Maksimalus neseniai naudotų bylų skaičius"
-
 #: ../data/gedit.schemas.in.h:34
+msgid "Maximum Recent Files"
+msgstr "Maksimalus neseniai naudotų rinkmenų skaičius"
+
+#: ../data/gedit.schemas.in.h:35
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions."
@@ -207,7 +211,7 @@ msgstr ""
 "Maksimalus veiksmų skaičius, kuriuos gedit galės atstatyti arba daryti iš "
 "naujo. Naudoti „-1“ neribotam veiksmų skaičiui."
 
-#: ../data/gedit.schemas.in.h:35
+#: ../data/gedit.schemas.in.h:36
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions. Deprecated since 2.12.0"
@@ -218,100 +222,104 @@ msgstr ""
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:38
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:41
+#: ../data/gedit.schemas.in.h:42
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:46
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:47
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr ""
-"Skaičius minučių kurį gedit lauks, kad išsaugotų pakeistas bylas. Tai galios "
+"Skaičius minučių kurį gedit lauks, kad išsaugotų pakeistas rinkmenas. Tai galios "
 "tik tada, jei parinktis „Automatinis išsaugojimas“ yra įjungta."
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:48
 msgid "Print Header"
 msgstr "Spausdinti antraštę"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:49
 msgid "Print Line Numbers"
 msgstr "Spausdinti eilučių numerius"
 
-#: ../data/gedit.schemas.in.h:49
+#: ../data/gedit.schemas.in.h:50
 msgid "Print Syntax Highlighting"
 msgstr "Spausdinti sintaksės paryškinimus"
 
-#: ../data/gedit.schemas.in.h:50
+#: ../data/gedit.schemas.in.h:51
 msgid "Printing Line Wrapping Mode"
 msgstr "Eilučių laužymo būdas spausdinant"
 
-#: ../data/gedit.schemas.in.h:51
+#: ../data/gedit.schemas.in.h:52
+msgid "Restore Previous Cursor Position"
+msgstr "Perkelti kursorių į ankstesnę poziciją"
+
+#: ../data/gedit.schemas.in.h:53
 msgid "Right Margin Position"
 msgstr "Dešinės paraštės pozicija"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:54
+#: ../data/gedit.schemas.in.h:56
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:57
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:61
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:67
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:68
 msgid "Selected Text Color"
 msgstr "Pažymėto teksto spalva"
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:69
 msgid "Selection Color"
 msgstr "Pažymėjimo spalva"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:70
 msgid "Side Pane is Visible"
 msgstr "Šoninis skydelis yra matomas"
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
-"Išrūšiuotas koduočių sąrašas, kurį gedit naudoja nustatydamas bylos koduotę. "
+"Išrūšiuotas koduočių sąrašas, kurį gedit naudoja nustatydamas rinkmenos koduotę. "
 "„CURRENT“ yra dabartinės lokalės koduotė. Naudojamos tik atpažįstamos "
 "koduotės."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -325,7 +333,7 @@ msgstr ""
 "kad šios reikšmės skiria didžiąsias ir mažąsias reikšmes, todėl "
 "pasistenkite, kad jos būtų įrašytos tiksliai tokios kokios yra čia."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -339,12 +347,12 @@ msgstr ""
 "Atsiminkite, kad šios reikšmės skiria didžiąsias ir mažąsias reikšmes, todėl "
 "pasistenkite, kad jos būtų įrašytos tiksliai tokios kokios yra čia."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Šriftas, kuriuo bus spausdinamas pagrindinis tekstas."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -352,7 +360,7 @@ msgstr ""
 "Šriftas, kuriuo bus spausdinamas pagrindinis tekstas. Tai yra gnome-print "
 "šrifto vardas ir jis pakeistas print_font_body_pango."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -360,7 +368,7 @@ msgstr ""
 "Šriftas, kuriuo bus spausdinami eilučių numeriai. Jis galios tik tada, jei "
 "parametras „Spausdinti eilučių numerius“ yra ne nulinis."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -370,7 +378,7 @@ msgstr ""
 "parametras \"Spausdinti eilučių numerius\" yra ne nulinis. Tai yra gnome-"
 "print šrifto vardas ir jis pakeistas print_font_numbers_pango."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -378,7 +386,7 @@ msgstr ""
 "Šriftas, kuriuo bus spausdinamos puslapių antraštes. Jis galios tik tada, "
 "jei parametras \"Spausdinti antraštę\" yra įjungtas."
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -388,30 +396,30 @@ msgstr ""
 "jei parametras \"Spausdinti antraštę\" yra įjungtas. Tai yra gnome-print "
 "šrifto vardas ir jis pakeistas print_font_header_pango."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
-"Nurodo maksimalų skaičių neseniai naudotų bylų, kurios bus rodomos „Naudotos "
-"bylos“ submeniu."
+"Nurodo maksimalų skaičių neseniai naudotų rinkmenų, kurios bus rodomos „Naudotos "
+"rinkmenos“ submeniu."
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:81
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
 "Nurodo tarpų skaičių, kuris turėtų būti rodomas vietoj tabuliavimo simbolio."
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:82
 msgid "Specifies the position of the right margin."
 msgstr "Nurodo dešinės paraštės poziciją."
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:83
 msgid "Status Bar is Visible"
 msgstr "Būsenos juosta yra matoma"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -427,109 +435,120 @@ msgstr ""
 "tekstą šalia piktogramų. Pastaba: vertėse raidžių dydžio skirtumai turi "
 "reikšmę, taigi įsitikinkit, kad jos atrodo tiksliai taip kaip čia paminėta."
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:85
 msgid "Tab Size"
 msgstr "Tabuliacijos dydis"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:86
 msgid "Text Color"
 msgstr "Teksto spalva"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:87
 msgid "Toolbar Buttons Style"
 msgstr "Įrankių juostos mygtukų stilius"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:88
 msgid "Toolbar is Visible"
 msgstr "Įrankinė yra matoma"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:89
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "Atšaukiamų veiksmų limitas (NEBENAUDOJAMA)"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:90
 msgid "Use Default Colors"
 msgstr "Naudoti numatytasias spalvas"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:91
 msgid "Use Default Font"
 msgstr "Naudoti numatytąjį šriftą"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:92
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
 "option."
 msgstr ""
-"Ar gedit turėtų perdiodiškai išsaugoti pakeistas bylas. Periodą galima "
+"Ar gedit turėtų perdiodiškai išsaugoti pakeistas rinkmenas. Periodą galima "
 "nustatyti \"Auto Save Interval\" parinktyje."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:93
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
-"Ar gedit turėtų kurti atsargines bylų kopijas jas saugant. Atsarginės bylos "
+"Ar gedit turėtų kurti atsargines rinkmenų kopijas jas saugant. Atsarginės rinkmenos "
 "kopijos priesagą galima nustatyti naudojant \"Atsarginės kopijos priesaga\" "
 "parinktį."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "Ar gedit turėtų rodyti eilučių numerius redagavimo lange."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "Ar gedit turėtų rodyti dešinę paraštę redagavimo lange."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should enable auto indentation."
 msgstr "Ar gedit turėtų įjungti automatinį atitraukimą."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "Ar gedit turėtų įjungti sintaksės paryškinimą."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:98
+msgid ""
+"Whether gedit should highlight all the occurrences of the searched text."
+msgstr "Ar gedit turėtų paryškinti visus ieškomo teksto pasikartojimus."
+
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
 msgstr "Ar gedit turėtų paryškinti tinkantį skliaustelį."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should highlight the current line."
 msgstr "Ar gedit turėtų paryškinti esamą eilutę."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "Ar gedit turėtų įtraukti dokumento antraštę, juos spausdinant."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:102
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "Ar gedit turėtų įterpti tarpus vietoj tabuliacijos."
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:103
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr ""
 "Ar gedit turėtų spausdinti sintaksės paryškinimus, spausdinant dokumentus."
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:104
+msgid ""
+"Whether gedit should restore the previous cursor position when a file is "
+"loaded."
+msgstr "Ar gedit įkėlus rinkmeną turėtų perkelti kursorių į buvusią poziciją."
+
+#: ../data/gedit.schemas.in.h:105
 msgid ""
 "Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "Ar turi būti matomas apatinis skydelis redagavimo langų apačioje."
 
-#: ../data/gedit.schemas.in.h:102
+#: ../data/gedit.schemas.in.h:106
 msgid ""
 "Whether the side pane at the left of the editing window should be visible."
 msgstr "Ar turi būti matomas šoninis skydelis redagavimo langų kairėje."
 
-#: ../data/gedit.schemas.in.h:103
+#: ../data/gedit.schemas.in.h:107
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "Ar turi matytis būsenos juosta readagavimo lango apačioje."
 
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:108
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "Ar redagavimo languose turi matytis įrankių juosta."
 
-#: ../data/gedit.schemas.in.h:105
+#: ../data/gedit.schemas.in.h:109
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -540,7 +559,7 @@ msgstr ""
 "išjungtas, tai redagavimo lango spalvos bus nurodytos „Fono spalva“, „Teksto "
 "spalva“, „Pažymėto teksto spalva“ ir „Pažymėjimo spalva“ parinktyse."
 
-#: ../data/gedit.schemas.in.h:106
+#: ../data/gedit.schemas.in.h:110
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -550,20 +569,20 @@ msgstr ""
 "parinktis nepasirinkta, tai vietoje sistemos naudojamo šrifto bus naudojamas "
 "šriftas pasirinktas „Redaktoriaus šriftas“ parinktyje."
 
-#: ../data/gedit.schemas.in.h:107
+#: ../data/gedit.schemas.in.h:111
 msgid "Writable VFS schemes"
 msgstr "Rašomos VFS schemos"
 
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:110
+#: ../data/gedit.schemas.in.h:114
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:114
+#: ../data/gedit.schemas.in.h:118
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
@@ -729,7 +748,7 @@ msgstr "K_oduotės matomos meniu:"
 #: ../gedit/dialogs/gedit-open-location-dialog.c:135
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
-msgstr "Atidaryti vietą"
+msgstr "Atverti vietą"
 
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:1
 msgid "Ch_aracter coding:"
@@ -744,9 +763,13 @@ msgstr "Įvesk norimo atverti failo _vietą (URI)"
 msgid "Page Setup"
 msgstr "Puslapio nuostatos"
 
+#. ex:noet:ts=8:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
 msgid "    "
 msgstr "    "
 
@@ -866,7 +889,7 @@ msgstr "<b>Elementai</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
 msgid "<b>File Saving</b>"
-msgstr "<b>Bylų saugojimas</b>"
+msgstr "<b>Rinkmenų saugojimas</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
 msgid "<b>Font</b>"
@@ -891,7 +914,7 @@ msgstr "Storas"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
 msgid "Create a _backup copy of files before saving"
-msgstr "Prieš išsaugant sukurti atsarginę _bylos kopiją"
+msgstr "Prieš išsaugant sukurti atsarginę _rinkmenos kopiją"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Display right _margin"
@@ -927,7 +950,7 @@ msgstr "Įterpti _tarpus vietoje tabuliacijos"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
 msgid "Italic"
-msgstr "Pasviręs"
+msgstr "Kursyvas"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
 msgid "Normal _text color:"
@@ -995,7 +1018,7 @@ msgstr "Rodyti"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:42
 msgid "_Autosave files every"
-msgstr "_Išsaugoti bylas kas"
+msgstr "_Išsaugoti rinkmenas kas"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:43
 msgid "_Background color:"
@@ -1042,11 +1065,11 @@ msgid "_minutes"
 msgstr "_minučių"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:944
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:989
 msgid "Replace"
 msgstr "Pakeisti"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:942
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:987
 msgid "Find"
 msgstr "Rasti"
 
@@ -1055,7 +1078,7 @@ msgid "Replace _All"
 msgstr "Pakeisti _visus"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:562 ../plugins/savecopy/savecopy.c:368
+#: ../gedit/gedit-commands-file.c:562
 msgid "_Replace"
 msgstr "_Pakeisti"
 
@@ -1087,28 +1110,28 @@ msgstr "_Ieškoti ko: "
 msgid "_Wrap around"
 msgstr "_Priėjus pabaigą, ieškoti nuo pradžios"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:75
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
-"Nurodykite simbolių koduotę naudojamą atveriant bylas nurodytas komandų "
+"Nurodykite simbolių koduotę naudojamą atveriant rinkmenas nurodytas komandų "
 "eilutėje"
 
-#: ../gedit/gedit.c:76
+#: ../gedit/gedit.c:78
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Sukurti naują viršutinį langą esamoje gedit programoje"
 
-#: ../gedit/gedit.c:79
+#: ../gedit/gedit.c:81
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Sukurti naują dokumentą esamoje gedit programoje"
 
-#: ../gedit/gedit.c:145
+#: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
-msgstr "%s: netinkamas bylos vardas arba URI.\n"
+msgstr "%s: netinkamas rinkmenos vardas arba URI.\n"
 
-#: ../gedit/gedit.c:157
+#: ../gedit/gedit.c:128
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: netinkama koduotė.\n"
@@ -1116,28 +1139,28 @@ msgstr "%s: netinkama koduotė.\n"
 #: ../gedit/gedit-commands-file.c:130 ../gedit/gedit-commands-file.c:177
 #, c-format
 msgid "Loading file '%s'…"
-msgstr "Įkeliama byla „%s“…"
+msgstr "Įkeliama rinkmena „%s“…"
 
 #: ../gedit/gedit-commands-file.c:186
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
-msgstr[0] "Įkeliama %d byla…"
-msgstr[1] "Įkeliamos %d bylos…"
-msgstr[2] "Įkeliamos %d bylų…"
+msgstr[0] "Įkeliama %d rinkmena…"
+msgstr[1] "Įkeliamos %d rinkmenos…"
+msgstr[2] "Įkeliamos %d rinkmenų…"
 
 #: ../gedit/gedit-commands-file.c:289
 msgid "Open Files…"
-msgstr "Atverti bylas…"
+msgstr "Atverti rinkmenas…"
 
 #: ../gedit/gedit-commands-file.c:395
 msgid "The entered location is not valid."
 msgstr "Įvesta vieta yra netinkama."
 
 #: ../gedit/gedit-commands-file.c:398
-#: ../gedit/gedit-io-error-message-area.c:149
-#: ../gedit/gedit-io-error-message-area.c:185
-#: ../gedit/gedit-io-error-message-area.c:201
+#: ../gedit/gedit-io-error-message-area.c:150
+#: ../gedit/gedit-io-error-message-area.c:189
+#: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr ""
 "Patikrinkite ar teisingai parašėte norimos vietos pavadinimą ir bandykite "
@@ -1146,7 +1169,7 @@ msgstr ""
 #: ../gedit/gedit-commands-file.c:543
 #, c-format
 msgid "The file \"%s\" is read-only."
-msgstr "Byla „%s“ yra tik skaitoma."
+msgstr "Rinkmena „%s“ yra tik skaitoma."
 
 #: ../gedit/gedit-commands-file.c:554
 msgid "Do you want to try to replace it with the one you are saving?"
@@ -1155,7 +1178,7 @@ msgstr "Ar norite ją pakeisti ta, kurią dabar norite išsaugoti?"
 #: ../gedit/gedit-commands-file.c:620 ../gedit/gedit-commands-file.c:811
 #, c-format
 msgid "Saving file '%s'…"
-msgstr "Saugoma byla „%s“…"
+msgstr "Saugoma rinkmena „%s“…"
 
 #: ../gedit/gedit-commands-file.c:710
 msgid "Save As…"
@@ -1250,7 +1273,7 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 "Paskutinysis vertėjas:\n"
-"Žygimantas Beručka <uid0@akl.lt>\n"
+"Žygimantas Beručka <zygis@gnome.org>\n"
 "\n"
 "Ankstesnieji vertėjai:\n"
 "Gediminas Paulauskas <menesis@chatsubo.lt>,\n"
@@ -1260,19 +1283,23 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-commands-search.c:165
+#: ../gedit/gedit-commands-search.c:166
 #, c-format
-msgid "Found and replaced %d occurrence."
-msgid_plural "Found and replaced %d occurrences."
-msgstr[0] "Rasta ir pakeista %d pasitaikymas."
-msgstr[1] "Rasta ir pakeista %d pasitaikymai."
-msgstr[2] "Rasta ir pakeista %d pasitaikymų."
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Rastas ir pakeista %d pasitaikymas"
+msgstr[1] "Rasti ir pakeisti %d pasitaikymai"
+msgstr[2] "Rasta ir pakeista %d pasitaikymų"
 
-#: ../gedit/gedit-commands-search.c:180
+#: ../gedit/gedit-commands-search.c:176
+msgid "Found and replaced one occurrence"
+msgstr "Rastas ir pakeistas vienas pasitaikymas"
+
+#: ../gedit/gedit-commands-search.c:189
 msgid "Phrase not found"
 msgstr "Frazė nerasta"
 
-#: ../gedit/gedit-document.c:701 ../gedit/gedit-document.c:781
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:854
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Neišsaugotas dokumentas %d"
@@ -1280,10 +1307,10 @@ msgstr "Neišsaugotas dokumentas %d"
 #. bad bad luck...
 #: ../gedit/gedit-document-saver.c:523
 msgid "Could not obtain backup filename"
-msgstr "Nepavyko gauti atsarginės bylos vardo."
+msgstr "Nepavyko gauti atsarginės rinkmenos vardo"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1428 ../gedit/gedit-window.c:1433
+#: ../gedit/gedit-window.c:1472 ../gedit/gedit-window.c:1477
 msgid "Read Only"
 msgstr "Tik skaitymui"
 
@@ -1426,102 +1453,102 @@ msgstr "Pridėti arba _pašalinti..."
 msgid "C_haracter Coding:"
 msgstr "_Simbolių koduotė:"
 
-#: ../gedit/gedit-file-chooser-dialog.c:186 ../plugins/savecopy/savecopy.c:583
+#: ../gedit/gedit-file-chooser-dialog.c:189
 msgid "All Files"
-msgstr "Visos bylos"
+msgstr "Visos rinkmenos"
 
-#: ../gedit/gedit-file-chooser-dialog.c:194 ../plugins/savecopy/savecopy.c:591
+#: ../gedit/gedit-file-chooser-dialog.c:197
 msgid "All Text Files"
-msgstr "Visos tekstinės bylos"
+msgstr "Visos tekstinės rinkmenos"
 
 #: ../gedit/gedit-help.c:66
 msgid "There was an error displaying help."
 msgstr "Įvyko klaida rodant žinyną."
 
-#: ../gedit/gedit-io-error-message-area.c:147
+#: ../gedit/gedit-io-error-message-area.c:148
 #, c-format
 msgid "Could not find the file %s."
-msgstr "Nepavyko rasti bylos „%s“."
+msgstr "Nepavyko rasti rinkmenos „%s“."
 
-#: ../gedit/gedit-io-error-message-area.c:154
-#: ../gedit/gedit-io-error-message-area.c:374
+#: ../gedit/gedit-io-error-message-area.c:155
+#: ../gedit/gedit-io-error-message-area.c:381
 msgid "The file contains corrupted data."
-msgstr "Byloje yra sugadintų duomenų."
+msgstr "Rinkmenoje yra sugadintų duomenų."
 
-#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
-#: ../gedit/gedit-io-error-message-area.c:163
-#: ../gedit/gedit-io-error-message-area.c:382
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:166
+#: ../gedit/gedit-io-error-message-area.c:392
 #, c-format
-msgid "gedit cannot handle <i>%s:</i> locations."
-msgstr "gedit negali apdoroti <i>%s:</i> vietų."
+msgid "gedit cannot handle %s locations."
+msgstr "gedit negali priimti %s vietos."
 
-#: ../gedit/gedit-io-error-message-area.c:168
-#: ../gedit/gedit-io-error-message-area.c:387
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:398
 msgid "gedit cannot handle this location."
 msgstr "gedit negali priimti šios vietos."
 
-#: ../gedit/gedit-io-error-message-area.c:175
-#: ../gedit/gedit-io-error-message-area.c:394
-msgid "The file contains data in an invalid format."
-msgstr "Byloje yra netinkamo formato duomenų."
-
 #: ../gedit/gedit-io-error-message-area.c:179
-#: ../gedit/gedit-io-error-message-area.c:398
-msgid "The file is too big."
-msgstr "Byla per didelė."
+#: ../gedit/gedit-io-error-message-area.c:405
+msgid "The file contains data in an invalid format."
+msgstr "Rinkmenoje yra netinkamo formato duomenų."
 
 #: ../gedit/gedit-io-error-message-area.c:183
+#: ../gedit/gedit-io-error-message-area.c:409
+msgid "The file is too big."
+msgstr "Rinkmena per didelė."
+
+#: ../gedit/gedit-io-error-message-area.c:187
 #, c-format
 msgid "%s is not a valid location."
 msgstr "„%s“ nėra tinkama vieta."
 
-#: ../gedit/gedit-io-error-message-area.c:190
-#: ../gedit/gedit-io-error-message-area.c:402
-msgid "You do not have the permissions necessary to open the file."
-msgstr "Jūs neturite teisių būtinų atverti šiai bylai."
-
 #: ../gedit/gedit-io-error-message-area.c:194
-#: ../gedit/gedit-io-error-message-area.c:406
-#: ../gedit/gedit-io-error-message-area.c:1142
+#: ../gedit/gedit-io-error-message-area.c:413
+msgid "You do not have the permissions necessary to open the file."
+msgstr "Jūs neturite teisių reikiamų atverti šiai rinkmenai."
+
+#: ../gedit/gedit-io-error-message-area.c:198
+#: ../gedit/gedit-io-error-message-area.c:417
+#: ../gedit/gedit-io-error-message-area.c:1161
 msgid ""
 "There are too many open files. Please, close some applications and try again."
 msgstr ""
-"Yra per daug atvertų bylų. Užverkite keletą programų ir bandykite dar kartą."
+"Yra per daug atvertų rinkmenų. Užverkite keletą programų ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:199
-#: ../gedit/gedit-io-error-message-area.c:411
+#: ../gedit/gedit-io-error-message-area.c:203
+#: ../gedit/gedit-io-error-message-area.c:422
 #, c-format
 msgid "%s is a directory."
 msgstr "„%s“ yra aplankas."
 
-#: ../gedit/gedit-io-error-message-area.c:206
-#: ../gedit/gedit-io-error-message-area.c:416
+#: ../gedit/gedit-io-error-message-area.c:210
+#: ../gedit/gedit-io-error-message-area.c:427
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"Neužtenka atminties atverti bylai. Užverkite kokias nors šiuo metu "
+"Neužtenka atminties atverti rinkmenai. Užverkite kokias nors šiuo metu "
 "veikiančias programas ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:232
-#: ../gedit/gedit-io-error-message-area.c:442
-#: ../gedit/gedit-io-error-message-area.c:1179
+#: ../gedit/gedit-io-error-message-area.c:238
+#: ../gedit/gedit-io-error-message-area.c:455
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid ""
-"Host <i>%s</i> could not be found. Please, check that your proxy settings "
-"are correct and try again."
+"Host %s could not be found. Please, check that your proxy settings are "
+"correct and try again."
 msgstr ""
-"Kompiuteris <i>%s</i> nerastas. Patikrinkite ar Jūsų tarpinio serverio "
-"nustatymai yra teisingi ir bandykite dar kartą."
+"Kompiuteris %s nerastas. Patikrinkite ar Jūsų tarpinio serverio nustatymai "
+"yra teisingi ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:243
-#: ../gedit/gedit-io-error-message-area.c:254
-#: ../gedit/gedit-io-error-message-area.c:262
-#: ../gedit/gedit-io-error-message-area.c:453
-#: ../gedit/gedit-io-error-message-area.c:464
-#: ../gedit/gedit-io-error-message-area.c:1190
-#: ../gedit/gedit-io-error-message-area.c:1201
-#: ../gedit/gedit-io-error-message-area.c:1209
+#: ../gedit/gedit-io-error-message-area.c:249
+#: ../gedit/gedit-io-error-message-area.c:260
+#: ../gedit/gedit-io-error-message-area.c:268
+#: ../gedit/gedit-io-error-message-area.c:466
+#: ../gedit/gedit-io-error-message-area.c:477
+#: ../gedit/gedit-io-error-message-area.c:1211
+#: ../gedit/gedit-io-error-message-area.c:1222
+#: ../gedit/gedit-io-error-message-area.c:1230
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
@@ -1529,9 +1556,9 @@ msgstr ""
 "Kompiuterio vardas yra netinkamas. Patikrinkite ar teisingai įrašėte vietą "
 "ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:268
-#: ../gedit/gedit-io-error-message-area.c:472
-#: ../gedit/gedit-io-error-message-area.c:1215
+#: ../gedit/gedit-io-error-message-area.c:274
+#: ../gedit/gedit-io-error-message-area.c:485
+#: ../gedit/gedit-io-error-message-area.c:1236
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
@@ -1539,8 +1566,8 @@ msgstr ""
 "Nenurodytas kompiuterio vardas. Patikrinkite ar Jūsų tarpinio serverio "
 "nustatymai yra teisingi ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:274
-#: ../gedit/gedit-io-error-message-area.c:1221
+#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:1242
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
@@ -1548,78 +1575,78 @@ msgstr ""
 "Bandymas prisijungti nepavyko. Patikrinkite, ar teisingai nurodėte vietą ir "
 "bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:286
 msgid "The file you are trying to open is not a regular file."
-msgstr "Jūsų bandoma atverti byla nėra paprasta byla."
+msgstr "Jūsų bandoma atverti rinkmena nėra paprasta rinkmena."
 
-#: ../gedit/gedit-io-error-message-area.c:319
-#: ../gedit/gedit-io-error-message-area.c:532
-#: ../gedit/gedit-io-error-message-area.c:1286
+#: ../gedit/gedit-io-error-message-area.c:325
+#: ../gedit/gedit-io-error-message-area.c:545
+#: ../gedit/gedit-io-error-message-area.c:1307
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Netikėta klaida: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:325
-#: ../gedit/gedit-io-error-message-area.c:693
+#: ../gedit/gedit-io-error-message-area.c:331
+#: ../gedit/gedit-io-error-message-area.c:710
 #, c-format
 msgid "Could not open the file %s."
-msgstr "Nepavyko atverti bylos „%s“."
+msgstr "Nepavyko atverti rinkmenos „%s“."
 
-#: ../gedit/gedit-io-error-message-area.c:369
+#: ../gedit/gedit-io-error-message-area.c:376
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr "gedit jos neranda. Gali būti, kad ji neseniai buvo ištrinta."
 
-#: ../gedit/gedit-io-error-message-area.c:478
+#: ../gedit/gedit-io-error-message-area.c:491
 msgid "Attempt to log in failed."
 msgstr "Bandymas prisijungti nepavyko."
 
-#: ../gedit/gedit-io-error-message-area.c:482
+#: ../gedit/gedit-io-error-message-area.c:495
 #, c-format
 msgid "%s is not a regular file."
-msgstr "%s nėra paprasta byla."
+msgstr "%s nėra paprasta rinkmena."
 
-#: ../gedit/gedit-io-error-message-area.c:538
+#: ../gedit/gedit-io-error-message-area.c:551
 #, c-format
 msgid "Could not revert the file %s."
-msgstr "Nepavyko atkurti bylos „%s“."
+msgstr "Nepavyko atkurti rinkmenos „%s“."
 
-#: ../gedit/gedit-io-error-message-area.c:559
-msgid "<small>Ch_aracter Coding:</small>"
-msgstr "<small>_Simbolių koduotė:</small>"
+#: ../gedit/gedit-io-error-message-area.c:574
+msgid "Ch_aracter Coding:"
+msgstr "_Simbolių koduotė:"
 
-#: ../gedit/gedit-io-error-message-area.c:600
+#: ../gedit/gedit-io-error-message-area.c:617
 msgid "_Retry"
 msgstr "_Bandyti dar kartą"
 
-#: ../gedit/gedit-io-error-message-area.c:695
+#: ../gedit/gedit-io-error-message-area.c:712
 msgid "gedit has not been able to detect the character coding."
 msgstr "gedit nepavyko aptikti simbolių koduotės."
 
-#: ../gedit/gedit-io-error-message-area.c:697
-#: ../gedit/gedit-io-error-message-area.c:706
+#: ../gedit/gedit-io-error-message-area.c:714
+#: ../gedit/gedit-io-error-message-area.c:723
 msgid "Please check that you are not trying to open a binary file."
-msgstr "Patikrinkite ar Jūs nebandote atverti dvejetainės bylos."
+msgstr "Patikrinkite ar Jūs nebandote atverti dvejetainės rinkmenos."
 
-#: ../gedit/gedit-io-error-message-area.c:698
+#: ../gedit/gedit-io-error-message-area.c:715
 msgid "Select a character coding from the menu and try again."
 msgstr "Pasirinkite meniu simbolių koduotę ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:703
+#: ../gedit/gedit-io-error-message-area.c:720
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
-msgstr "Nepavyko atverti bylos %s naudojant %s simbolių koduotę."
+msgstr "Nepavyko atverti rinkmenos %s naudojant %s simbolių koduotę."
 
-#: ../gedit/gedit-io-error-message-area.c:707
-#: ../gedit/gedit-io-error-message-area.c:759
+#: ../gedit/gedit-io-error-message-area.c:724
+#: ../gedit/gedit-io-error-message-area.c:774
 msgid "Select a different character coding from the menu and try again."
 msgstr "Pasirinkite meniu kitą simbolių koduotę ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:754
+#: ../gedit/gedit-io-error-message-area.c:769
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
-msgstr "Nepavyko išsaugoti bylos %s naudojant %s simbolių koduotę."
+msgstr "Nepavyko išsaugoti rinkmenos %s naudojant %s simbolių koduotę."
 
-#: ../gedit/gedit-io-error-message-area.c:757
+#: ../gedit/gedit-io-error-message-area.c:772
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
@@ -1627,81 +1654,81 @@ msgstr ""
 "Dokumente yra vienas ar daugiau simbolių, kurie negali būti perkoduoti "
 "naudojant nurodytą simbolių koduotę."
 
-#: ../gedit/gedit-io-error-message-area.c:818
+#: ../gedit/gedit-io-error-message-area.c:833
 msgid "_Edit Anyway"
 msgstr "_Vistiek redaguoti"
 
-#: ../gedit/gedit-io-error-message-area.c:821
+#: ../gedit/gedit-io-error-message-area.c:836
 msgid "_Don't Edit"
 msgstr "_Neredaguoti"
 
 #. FIXME: try to rephrase in a better way
-#: ../gedit/gedit-io-error-message-area.c:837
+#: ../gedit/gedit-io-error-message-area.c:852
 #, c-format
 msgid "The file %s is already open."
-msgstr "Byla „%s“ jau atverta."
+msgstr "Rinkmena „%s“ jau atverta."
 
-#: ../gedit/gedit-io-error-message-area.c:852
+#: ../gedit/gedit-io-error-message-area.c:867
 msgid ""
 "gedit opened this instance of the file in non-editable way. Do you want to "
 "edit it anyway?"
-msgstr "Gedit atvėrė šią bylą neredaguojamu būdu. Vistiek norite ją redaguoti?"
+msgstr "Gedit atvėrė šią rinkmeną neredaguojamu būdu. Vistiek norite ją redaguoti?"
 
-#: ../gedit/gedit-io-error-message-area.c:910
-#: ../gedit/gedit-io-error-message-area.c:1005
+#: ../gedit/gedit-io-error-message-area.c:925
+#: ../gedit/gedit-io-error-message-area.c:1020
 msgid "_Save Anyway"
 msgstr "_Vistiek išsaugoti"
 
-#: ../gedit/gedit-io-error-message-area.c:914
-#: ../gedit/gedit-io-error-message-area.c:1009
+#: ../gedit/gedit-io-error-message-area.c:929
+#: ../gedit/gedit-io-error-message-area.c:1024
 msgid "_Don't Save"
 msgstr "_Nesaugoti"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:932
+#: ../gedit/gedit-io-error-message-area.c:947
 #, c-format
 msgid "The file %s has been modified since reading it."
-msgstr "Byla %s nuo jos perskaitymo buvo pakeista."
+msgstr "Rinkmena %s nuo jos perskaitymo buvo pakeista."
 
-#: ../gedit/gedit-io-error-message-area.c:948
+#: ../gedit/gedit-io-error-message-area.c:963
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Jeigu ją išsaugosite, visi išoriniai pakeitimai bus prarasti. Vistiek "
 "išsaugoti?"
 
-#: ../gedit/gedit-io-error-message-area.c:1027
+#: ../gedit/gedit-io-error-message-area.c:1042
 #, c-format
 msgid "Could not create a backup file while saving %s"
-msgstr "Saugant %s sepavyko sukurti atsarginės šios bylos kopijos."
+msgstr "Saugant %s sepavyko sukurti atsarginės šios rinkmenos kopijos."
 
-#: ../gedit/gedit-io-error-message-area.c:1030
+#: ../gedit/gedit-io-error-message-area.c:1045
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
-msgstr "Saugant %s nepavyko sukurti laikinosios bylos."
+msgstr "Saugant %s nepavyko sukurti laikinosios rinkmenos."
 
-#: ../gedit/gedit-io-error-message-area.c:1047
+#: ../gedit/gedit-io-error-message-area.c:1062
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
 "while saving, you could lose the old copy of the file. Save anyway?"
 msgstr ""
-"Gedit nepavyko padaryti atsarginės senos bylos kopijos prieš išsaugant "
-"naują. Galite nepaisyti šio perspėjimo ir vistiek išsaugoti bylą, bet jeigu "
-"saugant įvyks klaida, galite prarasti senąją bylos kopiją. Vistiek išsaugoti?"
+"Gedit nepavyko padaryti atsarginės senos rinkmenos kopijos prieš išsaugant "
+"naują. Galite nepaisyti šio perspėjimo ir vistiek išsaugoti rinkmeną, bet jeigu "
+"saugant įvyks klaida, galite prarasti senąją rinkmenos kopiją. Vistiek išsaugoti?"
 
-#. Translators: %s is a URI scheme (like for example http, ftp, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1105
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:1123
 #, c-format
 msgid ""
-"gedit cannot handle <i>%s:</i> locations in write mode. Please, check that "
-"you typed the location correctly and try again."
+"gedit cannot handle %s locations in write mode. Please, check that you typed "
+"the location correctly and try again."
 msgstr ""
-"Gedit negali rašyti į <i>%s:</i> vietas. Patikrinkite ar teisingai įrašėte "
-"vietą ir bandykite dar kartą."
+"gedit negali apdoroti %s vietų rašymo režime. Patikrinkite, ar teisingai "
+"nurodėte vietą ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1112
+#: ../gedit/gedit-io-error-message-area.c:1131
 msgid ""
 "gedit cannot handle this location  in write mode. Please, check that you "
 "typed the location correctly and try again."
@@ -1709,17 +1736,17 @@ msgstr ""
 "Gedit negali rašyti į šią vietą. Patikrinkite, ar teisingai nurodėte vietą "
 "ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1121
+#: ../gedit/gedit-io-error-message-area.c:1140
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
 "not have this limitation."
 msgstr ""
-"Diske, į kurį norite išsaugoti bylą, yra apribojimai bylos dydžiui. "
-"Pabandykite išsaugoti mažesnę bylą, arba saugokite į diską, kuriame tokių "
+"Diske, į kurį norite išsaugoti rinkmeną, yra apribojimai rinkmenos dydžiui. "
+"Pabandykite išsaugoti mažesnę rinkmeną, arba saugokite į diską, kuriame tokių "
 "apribojimų nėra."
 
-#: ../gedit/gedit-io-error-message-area.c:1128
+#: ../gedit/gedit-io-error-message-area.c:1147
 #, c-format
 msgid ""
 "%s is not a valid location. Please, check that you typed the location "
@@ -1728,15 +1755,15 @@ msgstr ""
 "%s nėra tinkama vieta.. Patikrinkite ar teisingai įrašėte vietą ir bandykite "
 "dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1135
+#: ../gedit/gedit-io-error-message-area.c:1154
 msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
 msgstr ""
-"Neturite reikiamų teisių įrašyti šią bylą. Patikrinkite, ar teisingai "
+"Neturite reikiamų teisių įrašyti šią rinkmeną. Patikrinkite, ar teisingai "
 "nurodėte vietą ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1147
+#: ../gedit/gedit-io-error-message-area.c:1166
 #, c-format
 msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
@@ -1745,84 +1772,68 @@ msgstr ""
 "%s yra aplankas. Patikrinkite ar teisingai parašėte vietą ir bandykite dar "
 "kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1153
+#: ../gedit/gedit-io-error-message-area.c:1172
 msgid ""
 "Not enough available memory to save the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"Nepakanka atminties išsaugoti bylai. Užverkite keletą šiuo metu veikiančių "
+"Nepakanka atminties išsaugoti rinkmenai. Užverkite keletą šiuo metu veikiančių "
 "programų ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1227
+#: ../gedit/gedit-io-error-message-area.c:1248
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"Išsaugoti bylai nepakanka laisvos vietos diske. Atlaisvinkite šiek tiek "
+"Išsaugoti rinkmenai nepakanka laisvos vietos diske. Atlaisvinkite šiek tiek "
 "vietos diske vietos ir bandykite iš naujo."
 
-#: ../gedit/gedit-io-error-message-area.c:1233
+#: ../gedit/gedit-io-error-message-area.c:1254
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
-"Bandote išsaugoti bylą tik skaitymui skirtame diske. Patikrinkite ar "
+"Bandote išsaugoti rinkmeną tik skaitymui skirtame diske. Patikrinkite ar "
 "teisingai įrašėte vietą ir bandykite dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1239
+#: ../gedit/gedit-io-error-message-area.c:1260
 msgid "A file with the same name already exists. Please, use a different name."
-msgstr "Byla tokiu vardu jau yra. Pasirinkite kitą vardą."
+msgstr "Rinkmena tokiu vardu jau yra. Pasirinkite kitą vardą."
 
-#: ../gedit/gedit-io-error-message-area.c:1244
+#: ../gedit/gedit-io-error-message-area.c:1265
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
 msgstr ""
-"Diske, į kurį norite išsaugoti bylą, yra apribojimai bylos dydžiui. "
-"Pabandykite išsaugoti mažesnę bylą, arba saugokite į diską, kuriame tokių "
+"Diske, į kurį norite išsaugoti rinkmeną, yra apribojimai rinkmenos dydžiui. "
+"Pabandykite išsaugoti mažesnę rinkmeną, arba saugokite į diską, kuriame tokių "
 "apribojimų nėra."
 
-#: ../gedit/gedit-io-error-message-area.c:1249
+#: ../gedit/gedit-io-error-message-area.c:1270
 #, c-format
 msgid ""
 "%s is not a regular file. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"%s nėra paprasta byla. Patikrinkite ar teisingai įrašėte vietą ir bandykite "
+"%s nėra paprasta rinkmena. Patikrinkite ar teisingai įrašėte vietą ir bandykite "
 "dar kartą."
 
-#: ../gedit/gedit-io-error-message-area.c:1292
+#: ../gedit/gedit-io-error-message-area.c:1313
 #, c-format
 msgid "Could not save the file %s."
-msgstr "Nepavyko išsaugoti bylos %s."
+msgstr "Nepavyko išsaugoti rinkmenos %s."
 
 #: ../gedit/gedit-notebook.c:823
 msgid "Close document"
 msgstr "Užverti dokumentą"
 
-#: ../gedit/gedit-output-window.c:378
-msgid "Close the output window"
-msgstr "Užverti išvesties langą"
-
-#: ../gedit/gedit-output-window.c:416
-msgid "Copy selected lines"
-msgstr "Kopijuoti pasirinktas eilutes"
-
-#: ../gedit/gedit-output-window.c:436
-msgid "Clear the output window"
-msgstr "Išalyti išvesties langą"
-
-#: ../gedit/gedit-output-window.c:476
-msgid "Output Lines"
-msgstr "Išvesties eilutės"
-
-#: ../gedit/gedit-panel.c:306 ../gedit/gedit-panel.c:427
-#: ../gedit/recent-files/egg-recent-view-gtk.c:444
+#: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
+#: ../gedit/recent-files/egg-recent-view-gtk.c:446
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "Tuščia"
 
-#: ../gedit/gedit-panel.c:459
+#: ../gedit/gedit-panel.c:526 ../gedit/gedit-panel.c:606
 msgid "Hide panel"
 msgstr "Paslėpti skydelį"
 
@@ -1846,7 +1857,7 @@ msgstr "K_onfigūruoti įskiepį"
 msgid "Cannot initialize preferences manager."
 msgstr "Negalima paleisti nustatymų tvarkyklės."
 
-#: ../gedit/gedit-prefs-manager.c:1374
+#: ../gedit/gedit-prefs-manager.c:1388
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Tikėtasi „%s“, gauta „%s“ raktui %s"
@@ -1854,7 +1865,7 @@ msgstr "Tikėtasi „%s“, gauta „%s“ raktui %s"
 #: ../gedit/gedit-print.c:186
 #, c-format
 msgid "File: %s"
-msgstr "Byla: %s"
+msgstr "Rinkmena: %s"
 
 #: ../gedit/gedit-print.c:194
 msgid "Page %N of %Q"
@@ -1969,77 +1980,77 @@ msgstr[2] "Yra %d kortelių su klaidomis"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:495
+#: ../gedit/gedit-tab.c:637
 #, c-format
-msgid "Reverting <b>%s</b> from <b>%s</b>"
-msgstr "Atstatoma <b>%s</b> iš <b>%s</b>"
+msgid "Reverting %s from %s"
+msgstr "Atstatoma %s iš %s"
 
-#: ../gedit/gedit-tab.c:501
+#: ../gedit/gedit-tab.c:644
 #, c-format
-msgid "Reverting <b>%s</b>"
-msgstr "Atstatoma <b>%s</b>"
-
-#. Translators: the first %s is a file name (e.g. test.txt) the second one
-#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:515
-#, c-format
-msgid "Loading <b>%s</b> from <b>%s</b>"
-msgstr "Įkeliama <b>%s</b> iš <b>%s</b>"
-
-#: ../gedit/gedit-tab.c:521
-#, c-format
-msgid "Loading <b>%s</b>"
-msgstr "Įkeliama <b>%s</b>"
+msgid "Reverting %s"
+msgstr "Atstatoma %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:597
+#: ../gedit/gedit-tab.c:660
 #, c-format
-msgid "Saving <b>%s</b> to <b>%s</b>"
-msgstr "Saugoma <b>%s</b> į <b>%s</b>"
+msgid "Loading %s from %s"
+msgstr "Įkeliama %s iš %s"
 
-#: ../gedit/gedit-tab.c:603
+#: ../gedit/gedit-tab.c:667
 #, c-format
-msgid "Saving <b>%s</b>"
-msgstr "Saugoma <b>%s</b>"
+msgid "Loading %s"
+msgstr "Įkeliama %s"
+
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:750
+#, c-format
+msgid "Saving %s to %s"
+msgstr "Saugoma %s į %s"
+
+#: ../gedit/gedit-tab.c:757
+#, c-format
+msgid "Saving %s"
+msgstr "Saugoma %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1335
+#: ../gedit/gedit-tab.c:1505
 msgid "RO"
 msgstr "RO"
 
-#: ../gedit/gedit-tab.c:1377
+#: ../gedit/gedit-tab.c:1550
 #, c-format
-msgid "Error opening file <i>%s</i>."
-msgstr "Klaida atveriant bylą <i>%s</i>."
+msgid "Error opening file %s"
+msgstr "Klaida atveriant rinkmeną %s"
 
-#: ../gedit/gedit-tab.c:1382
+#: ../gedit/gedit-tab.c:1555
 #, c-format
-msgid "Error reverting file <i>%s</i>."
-msgstr "Klaida atstatant bylą <i>%s</i>."
+msgid "Error reverting file %s"
+msgstr "Klaida atstatant rinkmeną %s"
 
-#: ../gedit/gedit-tab.c:1387
+#: ../gedit/gedit-tab.c:1560
 #, c-format
-msgid "Error saving file <i>%s</i>."
-msgstr "Klaida saugant bylą <i>%s</i>."
+msgid "Error saving file %s"
+msgstr "Klaida įrašant rinkmeną %s"
 
-#: ../gedit/gedit-tab.c:1405
+#: ../gedit/gedit-tab.c:1578
 msgid "Unicode (UTF-8)"
 msgstr "Unikodas (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1412
+#: ../gedit/gedit-tab.c:1585
 msgid "Name:"
 msgstr "Vardas:"
 
-#: ../gedit/gedit-tab.c:1413
+#: ../gedit/gedit-tab.c:1586
 msgid "MIME Type:"
 msgstr "MIME tipas:"
 
-#: ../gedit/gedit-tab.c:1414
+#: ../gedit/gedit-tab.c:1587
 msgid "Encoding:"
 msgstr "Koduotė:"
 
-#: ../gedit/gedit-tab.c:1762
+#: ../gedit/gedit-tab.c:2014
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Vaizduojamas %d puslapis iš %d..."
@@ -2047,7 +2058,7 @@ msgstr "Vaizduojamas %d puslapis iš %d..."
 #. Toplevel
 #: ../gedit/gedit-ui.h:47
 msgid "_File"
-msgstr "_Byla"
+msgstr "_Rinkmena"
 
 #: ../gedit/gedit-ui.h:48
 msgid "_Edit"
@@ -2055,11 +2066,11 @@ msgstr "_Keisti"
 
 #: ../gedit/gedit-ui.h:49
 msgid "_View"
-msgstr "_Rodymas"
+msgstr "R_odymas"
 
 #: ../gedit/gedit-ui.h:50
 msgid "_Search"
-msgstr "_Ieškoti"
+msgstr "_Paieška"
 
 #: ../gedit/gedit-ui.h:51
 msgid "_Tools"
@@ -2071,7 +2082,7 @@ msgstr "_Dokumentai"
 
 #: ../gedit/gedit-ui.h:53
 msgid "_Help"
-msgstr "_Pagalba"
+msgstr "_Žinynas"
 
 #: ../gedit/gedit-ui.h:57
 msgid "Create a new document"
@@ -2081,9 +2092,9 @@ msgstr "Sukurti naują dokumentą"
 msgid "_Open..."
 msgstr "_Atverti..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1045
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1086
 msgid "Open a file"
-msgstr "Atverti bylą"
+msgstr "Atverti rinkmeną"
 
 #: ../gedit/gedit-ui.h:60
 msgid "Open _Location..."
@@ -2091,7 +2102,7 @@ msgstr "Atverti _vietą..."
 
 #: ../gedit/gedit-ui.h:61
 msgid "Open a file from a specified location"
-msgstr "Atverti bylą iš nurodytos vietos"
+msgstr "Atverti rinkmeną iš nurodytos vietos"
 
 #: ../gedit/gedit-ui.h:62
 msgid "Page Set_up..."
@@ -2125,7 +2136,7 @@ msgstr "Apie šią programą"
 
 #: ../gedit/gedit-ui.h:80
 msgid "Save the current file"
-msgstr "Išsaugoti esamą bylą"
+msgstr "Išsaugoti esamą rinkmeną"
 
 #: ../gedit/gedit-ui.h:81
 msgid "Save _As..."
@@ -2133,11 +2144,11 @@ msgstr "Išsaugoti k_aip..."
 
 #: ../gedit/gedit-ui.h:82
 msgid "Save the current file with a different name"
-msgstr "Išsaugoti esamą bylą kitu vardu"
+msgstr "Išsaugoti esamą rinkmeną kitu vardu"
 
 #: ../gedit/gedit-ui.h:84
 msgid "Revert to a saved version of the file"
-msgstr "Atstatyti iki išsaugotos bylos versijos"
+msgstr "Atstatyti iki išsaugotos rinkmenos versijos"
 
 #: ../gedit/gedit-ui.h:85
 msgid "Print Previe_w"
@@ -2157,7 +2168,7 @@ msgstr "Spausdinti esamą puslapį"
 
 #: ../gedit/gedit-ui.h:90
 msgid "Close the current file"
-msgstr "Užverti esamą bylą"
+msgstr "Užverti esamą rinkmeną"
 
 #: ../gedit/gedit-ui.h:94
 msgid "Undo the last action"
@@ -2244,7 +2255,7 @@ msgstr "_Išsaugoti visas"
 
 #: ../gedit/gedit-ui.h:125
 msgid "Save all open files"
-msgstr "Išsaugoti visas atvertas bylas"
+msgstr "Išsaugoti visas atvertas rinkmenas"
 
 #: ../gedit/gedit-ui.h:126
 msgid "_Close All"
@@ -2252,7 +2263,7 @@ msgstr "_Užverti visas"
 
 #: ../gedit/gedit-ui.h:127
 msgid "Close all open files"
-msgstr "Užverti visas atvertas bylas"
+msgstr "Užverti visas atvertas rinkmenas"
 
 #: ../gedit/gedit-ui.h:128
 msgid "_Move to New Window"
@@ -2290,95 +2301,85 @@ msgstr "Šoninis _skydelis"
 msgid "Show or hide the side pane in the current window"
 msgstr "Rodyti arba slėpti šoninį skydelį esamame lange"
 
-#: ../gedit/gedit-ui.h:150
+#: ../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
 msgid "_Bottom Panel"
 msgstr "_Apatinis skydelis"
 
-#: ../gedit/gedit-ui.h:151
+#: ../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
 msgid "Show or hide the bottom panel in the current window"
 msgstr "Rodyti arba slėpti apatinį skydelį esamame lange"
 
-#: ../gedit/gedit-utils.c:794
+#: ../gedit/gedit-utils.c:923
 #, c-format
-msgid ""
-"<span size=\"large\" weight=\"bold\">Unable to find file <i>%s</i>.</span>\n"
-"\n"
-"Please, check your installation."
-msgstr ""
-"<span size=\"large\" weight=\"bold\">Nepavyko rasti bylos <i>%s</i>.</span>\n"
-"\n"
-"Patikrinkite ar korektiškai įdiegta."
+msgid "Unable to find file %s."
+msgstr "Nepavyko rasti rinkmenos %s."
 
-#: ../gedit/gedit-utils.c:795
+#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+msgid "Please check your installation."
+msgstr "Patikrinkite Jūsų įdiegimą."
+
+#: ../gedit/gedit-utils.c:952
 #, c-format
-msgid ""
-"<span size=\"large\" weight=\"bold\">Unable to find the required widgets "
-"inside file <i>%s</i>..</span>\n"
-"\n"
-"Please, check your installation."
-msgstr ""
-"<span size=\"large\" weight=\"bold\">Byloje <i>%s</i> nepavyko rasti "
-"reikalingų objektų.</span>\n"
-"\n"
-"Patikrinkite ar korektiškai įdiegta."
+msgid "Unable to find the required widgets inside file %s."
+msgstr "Rinkmenoje %s nepavyko rasti reikiamų valdymo elementų."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1253
+#: ../gedit/gedit-view.c:1315
 msgid "_Wrap Around"
 msgstr "_Apvesti"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1263
+#: ../gedit/gedit-view.c:1325
 msgid "Match _Entire Word Only"
 msgstr "Tenkina tik _visas žodis"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1273
+#: ../gedit/gedit-view.c:1335
 msgid "_Match Case"
 msgstr "Skirti raidžių _dydį"
 
-#: ../gedit/gedit-view.c:1361
+#: ../gedit/gedit-view.c:1423
 msgid "String you want to search for"
 msgstr "Jūsų norimas rasti užrašas"
 
-#: ../gedit/gedit-view.c:1370
+#: ../gedit/gedit-view.c:1432
 msgid "Line you want to move the cursor to"
 msgstr "Eilutė į kurią norite perkelti žymeklį"
 
-#: ../gedit/gedit-window.c:640
+#: ../gedit/gedit-window.c:676
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Naudoti %s paryškinimo režimą"
 
-#: ../gedit/gedit-window.c:692
+#: ../gedit/gedit-window.c:729
 msgid "Normal"
 msgstr "Įprastas"
 
-#: ../gedit/gedit-window.c:693
+#: ../gedit/gedit-window.c:730
 msgid "Use Normal highlight mode"
 msgstr "Naudoti numatytąjį paryškinimo režimą"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:815 ../gedit/gedit-window.c:840
+#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "Atverti „%s“"
 
-#: ../gedit/gedit-window.c:940
+#: ../gedit/gedit-window.c:985
 msgid "Save"
 msgstr "Išsaugoti"
 
-#: ../gedit/gedit-window.c:1049
+#: ../gedit/gedit-window.c:1090
 msgid "Open a recently used file"
-msgstr "Atidaryti neseniai naudotą bylą"
+msgstr "Atverti neseniai naudotą rinkmeną"
 
-#: ../gedit/gedit-window.c:1056
+#: ../gedit/gedit-window.c:1097
 msgid "Open"
-msgstr "Atidaryti"
+msgstr "Atverti"
 
-#: ../gedit/gedit-window.c:1134 ../gedit/gedit-window.c:1702
+#: ../gedit/gedit-window.c:1177 ../gedit/gedit-window.c:1748
 #, c-format
 msgid "Activate %s"
 msgstr "Aktyvuoti %s"
@@ -2446,7 +2447,7 @@ msgstr "0"
 
 #: ../plugins/docinfo/docinfo.glade2.h:3
 msgid "<span weight=\"bold\">File Name</span>"
-msgstr "<span weight=\"bold\">Bylos pavadinimas</span>"
+msgstr "<span weight=\"bold\">Rinkmenos pavadinimas</span>"
 
 #: ../plugins/docinfo/docinfo.glade2.h:4
 msgid "Bytes"
@@ -2476,13 +2477,169 @@ msgstr "Žodžių"
 msgid "_Update"
 msgstr "Atna_ujinti"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:405
 msgid "_Document Statistics"
 msgstr "_Dokumento statistika"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:409
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
 msgid "Get statistic info on current document"
 msgstr "Gauti statistinę informaciją apie esamąjį dokumentą"
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
+msgid "Execute external commands and shell scripts."
+msgstr "Vykdyti išorines komandas ir shell scenarijus."
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+msgid "External Tools"
+msgstr "Išoriniai įrankiai"
+
+#: ../plugins/externaltools/tools/functions.py:241
+msgid "You must be inside a word to run this command"
+msgstr "Norėdami paleisti šią komandą, turite perkelti kursorių į žodį"
+
+#: ../plugins/externaltools/tools/manager.py:43
+msgid "Nothing"
+msgstr "Nieko"
+
+#: ../plugins/externaltools/tools/manager.py:44
+msgid "Current document"
+msgstr "Esamas dokumentas"
+
+#: ../plugins/externaltools/tools/manager.py:45
+msgid "Current selection"
+msgstr "Esamas pasirinkimas"
+
+#: ../plugins/externaltools/tools/manager.py:46
+msgid "Current line"
+msgstr "Esama eilutė"
+
+#: ../plugins/externaltools/tools/manager.py:47
+msgid "Current word"
+msgstr "Esamas žodis"
+
+#: ../plugins/externaltools/tools/manager.py:50
+msgid "Insert in output panel"
+msgstr "Įterpti išvesties skydelyje"
+
+#: ../plugins/externaltools/tools/manager.py:51
+msgid "Create new document"
+msgstr "Sukurti naują dokumentą"
+
+#: ../plugins/externaltools/tools/manager.py:52
+msgid "Append to current document"
+msgstr "Pridurti prie esamo dokumento"
+
+#: ../plugins/externaltools/tools/manager.py:53
+msgid "Replace current document"
+msgstr "Perrašyti esamą dokumentą"
+
+#: ../plugins/externaltools/tools/manager.py:54
+msgid "Replace current selection"
+msgstr "Perrašyti esamą pasirinkimą"
+
+#: ../plugins/externaltools/tools/manager.py:55
+msgid "Insert at cursor position"
+msgstr "Įterpti kursoriaus pozicijoje"
+
+#: ../plugins/externaltools/tools/manager.py:58
+msgid "All documents"
+msgstr "Visi dokumentai"
+
+#: ../plugins/externaltools/tools/manager.py:59
+msgid "All documents except untitled ones"
+msgstr "Visi dokumentai išskyrus nepavadintus"
+
+#: ../plugins/externaltools/tools/manager.py:60
+msgid "Local files only"
+msgstr "Tik vietinės rinkmenos"
+
+#: ../plugins/externaltools/tools/manager.py:61
+msgid "Remote files only"
+msgstr "Tik nutolusios rinkmenos"
+
+#: ../plugins/externaltools/tools/manager.py:62
+msgid "Untitled documents only"
+msgstr "Tik nepavadinti dokumentai"
+
+#: ../plugins/externaltools/tools/manager.py:169
+msgid "A Brand New Tool"
+msgstr "Visiškai naujas įrankis"
+
+#: ../plugins/externaltools/tools/manager.py:182
+#: ../plugins/externaltools/tools/manager.py:209
+#, python-format
+msgid "Edit tool <i>%s</i>:"
+msgstr "Keisti įrankį <i>%s</i>:"
+
+#: ../plugins/externaltools/tools/manager.py:188
+msgid "New tool"
+msgstr "Naujas įrankis"
+
+#: ../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "Ko_manda(os):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "Redaguoti įrankio <i>„make“</i>:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "Išorinių įrankių valdyklė"
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#: ../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr ""
+"Nieko\n"
+"Esamas dokumentas\n"
+"Visi dokumentai"
+
+#: ../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "Paleisti „make“ dokumento aplanke"
+
+#: ../plugins/externaltools/tools/tools.glade.h:10
+msgid "Shortcut _key:"
+msgstr "Spartusis _klavišas:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr "_Pritaikomumas:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "_Aprašymas:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "Į_vestis:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "_Išvestis:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "Iš_saugoti:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "Įr_ankiai:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2508,6 +2665,14 @@ msgstr "Atitraukti eilutes"
 msgid "Indents or un-indents selected lines."
 msgstr "Atitraukti arba pritraukti pažymėtas eilutes."
 
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
+msgid "Emacs, Kate and Vim-style modelines support for gedit."
+msgstr "Emacs, Kate ir Vim stiliaus režimų eilučių palaikymas."
+
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:2
+msgid "Modelines"
+msgstr "Režimų eilutės"
+
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
 msgid "Opens an interactive python console in the bottom panel."
 msgstr "Apatiniame skydelyje atveria interaktyvią python konsolę."
@@ -2518,7 +2683,7 @@ msgstr "Python konsolė"
 
 #: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
-msgstr "Įterpti vartotojo va_rdą"
+msgstr "Įterpti naudotojo va_rdą"
 
 #: ../plugins/sample/gedit-sample-plugin.c:65
 msgid "Insert the user name at the cursor position"
@@ -2532,147 +2697,64 @@ msgstr "Žymeklio vietoje įterpia naudotojo vardą."
 msgid "User name"
 msgstr "Naudotojo vardas"
 
-#: ../plugins/savecopy/savecopy.c:48
-msgid "Sa_ve Copy..."
-msgstr "Išsau_goti kopiją..."
+#: ../plugins/snippets/snippets/snippets.glade.h:2
+msgid "<b>Activation</b>"
+msgstr "<b>Aktyvavimas</b>"
 
-#: ../plugins/savecopy/savecopy.c:51
-msgid "Save a copy of the current document"
-msgstr "Išsaugoti šio dokumento kopiją"
+#: ../plugins/snippets/snippets/snippets.glade.h:3
+msgid "Snippets Manager"
+msgstr "Iškarpų valdyklė"
 
-#: ../plugins/savecopy/savecopy.c:314
-#, c-format
-msgid "Could not save a copy of the file to \"%s\""
-msgstr "Nepavyko išsaugoti bylos kopijos į „%s“"
+#: ../plugins/snippets/snippets/snippets.glade.h:4
+msgid "_Accelerator:"
+msgstr "_Spartusis klavišas:"
 
-#: ../plugins/savecopy/savecopy.c:355
-#, c-format
-msgid "A file named \"%s\" already exists.\n"
-msgstr "Byla vardu „%s“ jau egzistuoja.\n"
+#: ../plugins/snippets/snippets/snippets.glade.h:5
+msgid "_Edit snippet:"
+msgstr "_Keisti iškarpą:"
 
-#: ../plugins/savecopy/savecopy.c:359
-msgid "Do you want to replace it with the one you are saving?"
-msgstr "Ar norite ją pakeisti ta, kurią dabar norite išsaugoti?"
+#: ../plugins/snippets/snippets/snippets.glade.h:6
+msgid "_Snippets:"
+msgstr "_Iškarpos:"
 
-#: ../plugins/savecopy/savecopy.c:413
-msgid "You are trying to overwrite the original file"
-msgstr "Jūs bandote perrašyti originalią bylą"
+#: ../plugins/snippets/snippets/snippets.glade.h:7
+msgid "_Tab trigger:"
+msgstr "_Aktyvavimas tabuliacija:"
 
-#: ../plugins/savecopy/savecopy.c:522
-msgid "Save Copy..."
-msgstr "Išsaugoti kopiją..."
-
-#. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:554 ../plugins/savecopy/savecopy.c:564
-#, c-format
-msgid "%s (copy)"
-msgstr "%s (kopija)"
-
-#: ../plugins/savecopy/savecopy.c:602
-msgid "_Character Coding:"
-msgstr "_Simbolių koduotė:"
-
-#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-msgid "Save a Copy"
-msgstr "Išsaugoti kopiją"
-
-#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Išsaugo esamo dokumento kopiją vietiniame arba nutolusiame kompiuteryje."
-
-#: ../plugins/shell_output/shell_output.c:56
-msgid "_Run Command..."
-msgstr "_Paleisti komandą..."
-
-#: ../plugins/shell_output/shell_output.c:59
-msgid "Run a command"
-msgstr "Paleisti komandą"
-
-#: ../plugins/shell_output/shell_output.c:156
-#: ../plugins/shell_output/shell_output.c:571
-msgid "Stopped"
-msgstr "Sustabdyta"
-
-#: ../plugins/shell_output/shell_output.c:350
-msgid "Run Command"
-msgstr "Paleisti komandą"
-
-#: ../plugins/shell_output/shell_output.c:369
-msgid "_Run"
-msgstr "_Paleisti"
-
-#: ../plugins/shell_output/shell_output.c:577
-msgid "Done"
-msgstr "Atlikta"
-
-#: ../plugins/shell_output/shell_output.c:579
-msgid "Failed"
-msgstr "Nepavyko"
-
-#: ../plugins/shell_output/shell_output.c:749
+#: ../plugins/snippets/snippets/__init__.py:37
+#, python-format
 msgid ""
-"The shell command entry is empty.\n"
-"\n"
-"Please, insert a valid shell command."
+"Could not load the file \"%s\". The file is probably corrupt. Please fix or "
+"remove the file. To try to load the file again, select the Tools -> Manage "
+"Snippets... menu item."
 msgstr ""
-"Shell komandos įvestis tuščia.\n"
-"\n"
-"Įveskite tinkamą shell komandą."
+"Nepavyko įkelti rinkmenos „%s“. Rinkmena tikriausiai sugadinta. Pataisykite ją "
+"arba ištrinkite. Dar kartą įkelti rinkmeną galite pasirinkdami meniu  Įrankiai "
+"→ Valdyti iškarpas... "
 
-#: ../plugins/shell_output/shell_output.c:771
-msgid ""
-"Error parsing the shell command.\n"
-"\n"
-"Please, insert a valid shell command."
-msgstr ""
-"Klaida apdorojant shell komandą.\n"
-"\n"
-"Įveskite tinkamą shell komandą."
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:71
+msgid "Manage _Snippets..."
+msgstr "Valdyti _iškarpas..."
 
-#: ../plugins/shell_output/shell_output.c:849
-msgid "Executing command"
-msgstr "Vykdoma komanda"
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
+msgid "Manage snippets"
+msgstr "Valdyti iškarpas"
 
-#: ../plugins/shell_output/shell_output.c:914
-msgid "An error occurred while running the selected command."
-msgstr "Vykdant pasirinktą komandą įvyko klaida."
+#: ../plugins/snippets/snippets/SnippetsDialog.py:63
+msgid "Add a new snippet..."
+msgstr "Pridėti naują iškarpą..."
 
-#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
-msgid ""
-"Executes an external program and, if required, displays its output in the "
-"output window."
-msgstr ""
-"Vykdo išorinę programą ir, jei reikia, parodo jos išvestį išvesties "
-"lange."
+#: ../plugins/snippets/snippets/SnippetsDialog.py:115
+msgid "Global"
+msgstr "Globalus"
 
-#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
-msgid "Shell command"
-msgstr "Shell komanda"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:569
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Įveskite naują spartųjį klavišą arba paspauskite Backspace, norėdami ištrinti"
 
-#: ../plugins/shell_output/shell_output.glade2.h:1
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
-
-#: ../plugins/shell_output/shell_output.glade2.h:2
-msgid "Co_mmand:"
-msgstr "Ko_manda:"
-
-#: ../plugins/shell_output/shell_output.glade2.h:3
-msgid "Select the working directory..."
-msgstr "Pasirinkite darbo aplanką..."
-
-#: ../plugins/shell_output/shell_output.glade2.h:4
-msgid "_Show results in Output Window"
-msgstr "_Rezultatus rodyti išvesties lange"
-
-#: ../plugins/shell_output/shell_output.glade2.h:5
-msgid "_Working directory:"
-msgstr "_Darbo aplankas:"
-
-#: ../plugins/shell_output/shell_output.glade2.h:6
-msgid "gedit: Shell Output plugin"
-msgstr "gedit: Shell išvesties įskiepis"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:571
+msgid "Type a new accelerator"
+msgstr "Įveskite naują spartųjį klavišą"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -3083,11 +3165,11 @@ msgstr "_Automatinis rašybos tikrinimas"
 msgid "Automatically spell-check the current document"
 msgstr "Automatiškai tikrinti esamo dokumento rašybą"
 
-#: ../plugins/spell/gedit-spell-plugin.c:732
+#: ../plugins/spell/gedit-spell-plugin.c:733
 msgid "The document is empty."
 msgstr "Dokumentas tuščias."
 
-#: ../plugins/spell/gedit-spell-plugin.c:764
+#: ../plugins/spell/gedit-spell-plugin.c:765
 msgid "No misspelled words"
 msgstr "Nėra neteisingai parašytų žodžių"
 
@@ -3098,6 +3180,10 @@ msgstr "Pasirinkti esamo dokumento _kalbą."
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
 msgstr "Nustatyti kalbą"
+
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
 
 #: ../plugins/spell/spell-checker.glade2.h:2
 msgid "<b>Language</b>"
@@ -3222,7 +3308,7 @@ msgstr "Inkaro adresas"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
 msgid "Applet class file code"
-msgstr "Įtaiso klasės bylos kodas"
+msgstr "Įtaiso klasės rinkmenos kodas"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
@@ -3674,7 +3760,7 @@ msgstr "Sluoksnis"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Link color"
-msgstr "Nuorodos spalvą"
+msgstr "Nuorodos spalva"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "List item"
@@ -3682,7 +3768,7 @@ msgstr "Sąrašo elementas"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "List of MIME types for file upload"
-msgstr "MIME tipų sąrašas nusiunčiamoms byloms"
+msgstr "MIME tipų sąrašas nusiųstinoms rinkmenoms"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:130
 msgid "List of supported character sets"
@@ -3798,7 +3884,7 @@ msgstr "Pastaba"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Object applet file"
-msgstr "Objekto įtaiso byla"
+msgstr "Objekto įtaiso rinkmena"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Object data reference"
@@ -4250,7 +4336,7 @@ msgstr "Skliausteliai {}"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr "Bylos įvestis"
+msgstr "Rinkmenos įvestis"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:11
 msgid "Footnote"
@@ -4590,7 +4676,7 @@ msgstr "Į_terpti datą ir laiką..."
 
 #: ../plugins/time/gedit-time-plugin.c:185
 msgid "Insert current date and time at the cursor position"
-msgstr "Žymeklio vietoje įterpti dabartinę datą ir laiką "
+msgstr "Žymeklio vietoje įterpti esamą datą ir laiką "
 
 #: ../plugins/time/gedit-time-plugin.c:628
 msgid "Available formats"
@@ -4606,7 +4692,7 @@ msgstr "Įterpti datą/laiką"
 
 #: ../plugins/time/time.gedit-plugin.desktop.in.h:2
 msgid "Inserts current date and time at the cursor position."
-msgstr "Žymeklio vietoje įterpia dabartinę datą ir laiką"
+msgstr "Žymeklio vietoje įterpia esamą datą ir laiką"
 
 #: ../plugins/time/time.glade2.h:3
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
@@ -4638,4 +4724,4 @@ msgstr "_Paklausti formato"
 
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
-msgstr "Na_udoti savą formatą"
+msgstr "Na_udoti kitą formatą"
