@@ -100,7 +100,7 @@ class Manager:
 		for item in self.tools:
 			self.model.append([item.get('label'), item])
 		
-		self.model.connect('row-changed', self.on_tools_model_row_changed)
+		self.row_changed_id = self.model.connect('row-changed', self.on_tools_model_row_changed)
 
 	def __init_tools_view(self):
 		# Tools column
@@ -112,7 +112,7 @@ class Manager:
 		self.view.append_column(column)
 		
 		renderer.connect('edited', self.on_view_label_cell_edited)
-		self.view.get_selection().connect('changed', self.on_view_selection_changed, None)
+		self.selection_changed_id = self.view.get_selection().connect('changed', self.on_view_selection_changed, None)
 			
 	def __init_combobox(self, name):
 		combo = self[name]
@@ -163,7 +163,17 @@ class Manager:
 			                      combo.get_model().get_value(
 			                             combo.get_active_iter(),
 			                             self.NAME_COLUMN))
-	
+
+	def clear_fields(self):
+		self['description'].set_text('')
+		self['accelerator'].set_text('')
+		self['commands'].get_buffer().set_text('')
+
+		self.set_active_by_name('input', Manager.combobox_items['input'][0][0])
+		self.set_active_by_name('output', Manager.combobox_items['output'][0][0])
+		self.set_active_by_name('applicability', Manager.combobox_items['applicability'][0][0])
+		self['title'].set_label(_('Edit tool <i>%s</i>:') % '') # a bit ugly, but we're string frozen
+
 	def fill_fields(self):
 		node = self.current_node
 		self['description'].set_text(default(node.get('description'), _('A Brand New Tool')))
@@ -181,25 +191,37 @@ class Manager:
 		                                Manager.combobox_items['applicability'][0][0]))
 		self['title'].set_label(_('Edit tool <i>%s</i>:') % node.get('label'))
 
-	
 	def on_new_tool_button_clicked(self, button):
 		self.save_current_tool()
+
+		# block handlers while inserting a new item
+		self.model.handler_block(self.row_changed_id)
+		self.view.get_selection().handler_block(self.selection_changed_id)
+
 		self.current_node = et.Element('tool');
 		self.current_node.set('label', _('New tool'))
 		self.tools.root.append(self.current_node)
 		piter = self.model.append([self.current_node.get('label'),
 		                           self.current_node])
-		self.view.set_cursor(self.model.get_path(piter), 
+		self.view.set_cursor(self.model.get_path(piter),
 		                     self.view.get_column(self.LABEL_COLUMN),
 		                     True)
 		self.fill_fields()
-	
+		self['tool-table'].set_sensitive(True)
+
+		self.view.get_selection().handler_unblock(self.selection_changed_id)
+		self.model.handler_unblock(self.row_changed_id)
+
 	def on_remove_tool_button_clicked(self, button):
 		piter, node = self.get_selected_tool()
 		self.tools.root.remove(node)
 		self.current_node = None
-		self.model.remove(piter)
-	
+		if self.model.remove(piter):
+			self.view.set_cursor(self.model.get_path(piter),
+			                     self.view.get_column(self.LABEL_COLUMN),
+			                     False)
+			self.view.grab_focus()
+
 	def on_view_label_cell_edited(self, cell, path, new_text):
 		if new_text != '':
 			piter = self.model.get_iter(path)
@@ -213,13 +235,14 @@ class Manager:
 		piter, node = self.get_selected_tool()
 		
 		self['remove-tool-button'].set_sensitive(piter is not None)
-		
+
 		if node is not None:
 			self.current_node = node
 			self.fill_fields()
+			self['tool-table'].set_sensitive(True)
 		else:
-			# :TODO: Config panel should be grayed
-			pass
+			self.clear_fields()
+			self['tool-table'].set_sensitive(False)
 
 	def on_tools_model_row_changed(self, model, path, piter):
 		tool = model.get_value(piter, self.NODE_COLUMN)
