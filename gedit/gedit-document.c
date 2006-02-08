@@ -1537,7 +1537,8 @@ gedit_document_replace_all (GeditDocument       *doc,
 	gchar *replace_text;
 	gint replace_text_len;
 	GtkTextBuffer *buffer;
-	gboolean check_brackets;	
+	gboolean check_brackets;
+	gboolean search_highliting;
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), 0);
 	g_return_val_if_fail (replace != NULL, 0);
@@ -1572,6 +1573,10 @@ gedit_document_replace_all (GeditDocument       *doc,
 	/* also avoid spending time matching brackets */
 	check_brackets = gtk_source_buffer_get_check_brackets (GTK_SOURCE_BUFFER (buffer));
 	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (buffer), FALSE);
+
+	/* and do search highliting later */
+	search_highliting = gedit_document_get_enable_search_highlighting (doc);
+	gedit_document_set_enable_search_highlighting (doc, FALSE);
 
 	gtk_text_buffer_begin_user_action (buffer);
 
@@ -1625,6 +1630,7 @@ gedit_document_replace_all (GeditDocument       *doc,
 
 	gtk_source_buffer_set_check_brackets (GTK_SOURCE_BUFFER (buffer),
 					      check_brackets);
+	gedit_document_set_enable_search_highlighting (doc, search_highliting);
 
 	g_free (search_text);
 	g_free (replace_text);

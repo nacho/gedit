@@ -1,3 +1,9 @@
+2006-02-08  James Livingston  <jrl@ids.org.au>
+
+	* gedit/gedit-document.c: (gedit_document_replace_all): disable
+	search highlighting during replace all, as it can be done at the end
+	and can be slow.
+
 2006-02-08  Paolo Borelli  <pborelli@katamail.com>
 
 	* plugins/externaltools/tools/manager.py: properly clear the fields
