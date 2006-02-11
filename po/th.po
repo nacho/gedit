@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 18:29+0700\n"
-"PO-Revision-Date: 2006-01-21 20:04+0700\n"
+"POT-Creation-Date: 2006-02-11 09:02+0700\n"
+"PO-Revision-Date: 2006-02-11 09:04+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "แก้ไขแฟ้มข้อความ"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:409
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
 msgid "Text Editor"
 msgstr "เครื่องมือแก้ไขข้อความ"
 
@@ -320,7 +320,7 @@ msgid ""
 msgstr ""
 "กรุณาเลือกว่าจะตัดบรรทัดอย่างไรเวลาพิมพ์ หากไม่ตัดบรรทัดเลือก \"GTK_WRAP_NONE\" "
 "หรือตัดบรรทัดเมื่อจบคำเลือก \"GTK_WRAP_WORD\" หรือตัดบรรทัดที่ระดับตัวอักษรเลือก "
-"\"GTK_WRAP_CHAR\" หมายเหตุ ตัวพิมพ์เล็ก-ใหญ่มีความหมายต่างกัน"
+"\"GTK_WRAP_CHAR\" หมายเหตุ ตัวพิมพ์ใหญ่-เล็กมีความหมายต่างกัน"
 
 #: ../data/gedit.schemas.in.h:73
 msgid ""
@@ -332,7 +332,7 @@ msgid ""
 msgstr ""
 "กรุณาเลือกว่าจะตัดบรรทัดอย่างไรเวลาแก้ไข หากไม่ตัดบรรทัดเลือก \"GTK_WRAP_NONE\" "
 "หรือตัดบรรทัดเมื่อจบคำเลือก \"GTK_WRAP_WORD\" หรือตัดบรรทัดที่ระดับตัวอักษรเลือก "
-"\"GTK_WRAP_CHAR\" หมายเหตุ ตัวพิมพ์เล็ก-ใหญ่มีความหมายต่างกัน"
+"\"GTK_WRAP_CHAR\" หมายเหตุ ตัวพิมพ์ใหญ่-เล็กมีความหมายต่างกัน"
 
 #: ../data/gedit.schemas.in.h:74
 msgid ""
@@ -1045,26 +1045,26 @@ msgstr "_ค้นหา: "
 msgid "_Wrap around"
 msgstr "หมดแล้วเ_ริ่มใหม่"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:75
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr "กำหนดรหัสอักขระที่จะใช้เปิดแฟ้มที่ระบุในบรรทัดคำสั่ง"
 
-#: ../gedit/gedit.c:76
+#: ../gedit/gedit.c:78
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "เปิดหน้าต่างใหม่โดยใช้ gedit ตัวที่กำลังทำงานอยู่"
 
-#: ../gedit/gedit.c:79
+#: ../gedit/gedit.c:81
 msgid "Create a new document in an existing instance of gedit"
 msgstr "สร้างเอกสารใหม่ในหน้าต่าง gedit ที่ใช้งานอยู่"
 
-#: ../gedit/gedit.c:124
+#: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: ชื่อแฟ้มหรือ URI ผิดรูปแบบ\n"
 
-#: ../gedit/gedit.c:136
+#: ../gedit/gedit.c:128
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: ไม่ใช่รหัสอักขระที่ใช้ได้\n"
@@ -1199,18 +1199,18 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-commands-search.c:165
+#: ../gedit/gedit-commands-search.c:166
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "ค้นพบและแทนที่ไปทั้งหมด %d แห่ง"
 msgstr[1] "ค้นพบและแทนที่ไปทั้งหมด %d แห่ง"
 
-#: ../gedit/gedit-commands-search.c:174
+#: ../gedit/gedit-commands-search.c:176
 msgid "Found and replaced one occurrence"
 msgstr "ค้นพบและแทนที่ไปแห่งเดียว"
 
-#: ../gedit/gedit-commands-search.c:187
+#: ../gedit/gedit-commands-search.c:189
 msgid "Phrase not found"
 msgstr "หาวลีไม่พบ"
 
@@ -1348,7 +1348,7 @@ msgstr "ภาษาไทย"
 
 #: ../gedit/gedit-encodings.c:441
 msgid "Unknown"
-msgstr "ไม่รู้จัก"
+msgstr "ไม่ทราบ"
 
 #: ../gedit/gedit-encodings-option-menu.c:219
 msgid "Auto Detected"
@@ -1368,11 +1368,11 @@ msgstr "เพิ่มหรือ_ลบออก..."
 msgid "C_haracter Coding:"
 msgstr "_รหัสอักขระ:"
 
-#: ../gedit/gedit-file-chooser-dialog.c:186
+#: ../gedit/gedit-file-chooser-dialog.c:189
 msgid "All Files"
 msgstr "ทุกแฟ้ม"
 
-#: ../gedit/gedit-file-chooser-dialog.c:194
+#: ../gedit/gedit-file-chooser-dialog.c:197
 msgid "All Text Files"
 msgstr "แฟ้มข้อความทั้งหมด"
 
@@ -1713,7 +1713,7 @@ msgid "Close document"
 msgstr "ปิดเอกสาร"
 
 #: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
-#: ../gedit/recent-files/egg-recent-view-gtk.c:444
+#: ../gedit/recent-files/egg-recent-view-gtk.c:446
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "ว่างเปล่า"
@@ -2208,25 +2208,25 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "หาวิดเจ็ตที่ต้องใช้ในแฟ้ม %s ไม่พบ"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1314
+#: ../gedit/gedit-view.c:1315
 msgid "_Wrap Around"
 msgstr "ห_มดแล้วเริ่มใหม่"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1324
+#: ../gedit/gedit-view.c:1325
 msgid "Match _Entire Word Only"
 msgstr "ค้นหาทั้_งคำ"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1334
+#: ../gedit/gedit-view.c:1335
 msgid "_Match Case"
 msgstr "ตัวอักษรเ_ล็กใหญ่ตรงกัน"
 
-#: ../gedit/gedit-view.c:1422
+#: ../gedit/gedit-view.c:1423
 msgid "String you want to search for"
 msgstr "ข้อความที่คุณต้องการค้นหา"
 
-#: ../gedit/gedit-view.c:1431
+#: ../gedit/gedit-view.c:1432
 msgid "Line you want to move the cursor to"
 msgstr "บรรทัดที่คุณต้องการย้ายเคอร์เซอร์ไป"
 
@@ -2360,11 +2360,11 @@ msgstr "คำ"
 msgid "_Update"
 msgstr "_อัพเดต"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:405
 msgid "_Document Statistics"
 msgstr "ส_ถิติของเอกสาร"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:409
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
 msgid "Get statistic info on current document"
 msgstr "ดูค่าสถิติต่างๆ ของเอกสารปัจจุบัน"
 
@@ -2376,84 +2376,86 @@ msgstr "เรียกคำสั่งและเชลล์สคริป
 msgid "External Tools"
 msgstr "เครื่องมือภายนอก"
 
-#: ../plugins/externaltools/tools/functions.py:209
+#: ../plugins/externaltools/tools/functions.py:241
 msgid "You must be inside a word to run this command"
 msgstr "คุณต้องอยู่ภายในคำเพื่อจะเรียกคำสั่งนี้"
 
-#: ../plugins/externaltools/tools/manager.py:41
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Nothing"
 msgstr "ไม่มี"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current document"
 msgstr "เอกสารปัจจุบัน"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current selection"
 msgstr "ส่วนที่เลือก"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:46
 msgid "Current line"
 msgstr "บรรทัดปัจจุบัน"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:47
 msgid "Current word"
 msgstr "คำปัจจุบัน"
 
-#: ../plugins/externaltools/tools/manager.py:48
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Insert in output panel"
 msgstr "แทรกในช่องแสดงผล"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Create new document"
 msgstr "สร้างเป็นเอกสารใหม่"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Append to current document"
 msgstr "แทรกต่อท้ายเอกสารปัจจุบัน"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Replace current document"
 msgstr "เขียนทับเอกสารปัจจุบัน"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:54
 msgid "Replace current selection"
 msgstr "เขียนทับส่วนที่เลือก"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:55
 msgid "Insert at cursor position"
 msgstr "แทรกที่ตำแหน่งเคอร์เซอร์"
 
-#: ../plugins/externaltools/tools/manager.py:56
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "All documents"
 msgstr "ทุกเอกสาร"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "All documents except untitled ones"
 msgstr "ทุกเอกสารยกเว้นเอกสารที่ไม่มีชื่อ"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Local files only"
 msgstr "แฟ้มในเครื่องนี้เท่านั้น"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:61
 msgid "Remote files only"
 msgstr "แฟ้มในเครื่องอื่นในเครือข่ายเท่านั้น"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:62
 msgid "Untitled documents only"
 msgstr "เอกสารที่ยังไม่มีชื่อเท่านั้น"
 
-#: ../plugins/externaltools/tools/manager.py:166
-msgid "A Brand New Tool"
-msgstr "เครื่องมือชิ้นใหม่"
-
-#: ../plugins/externaltools/tools/manager.py:179
+#: ../plugins/externaltools/tools/manager.py:175
+#: ../plugins/externaltools/tools/manager.py:192
+#: ../plugins/externaltools/tools/manager.py:231
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "แก้ไขเครื่องมือ <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:185
+#: ../plugins/externaltools/tools/manager.py:179
+msgid "A Brand New Tool"
+msgstr "เครื่องมือชิ้นใหม่"
+
+#: ../plugins/externaltools/tools/manager.py:202
 msgid "New tool"
 msgstr "เครื่องมือใหม่"
 
@@ -2613,27 +2615,27 @@ msgstr ""
 "ไม่สามารถโหลดแฟ้ม \"%s\"  เป็นไปได้ว่าแฟ้มอาจจะเสีย กรุณาแก้ไขหรือลบแฟ้มดังกล่าวทิ้ง "
 "หากต้องการพยายามโหลดแฟ้มนี้อีกครั้ง เลือกเมนู เครื่องมือ -> จัดการข้อความสั้น..."
 
-#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:71
 msgid "Manage _Snippets..."
 msgstr "จัดการ_ข้อความสั้น..."
 
-#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
 msgid "Manage snippets"
 msgstr "จัดการข้อความสั้น"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:65
+#: ../plugins/snippets/snippets/SnippetsDialog.py:63
 msgid "Add a new snippet..."
 msgstr "เพิ่มข้อความสั้น..."
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:117
+#: ../plugins/snippets/snippets/SnippetsDialog.py:115
 msgid "Global"
-msgstr ""
+msgstr "ทั่วไป"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:605
+#: ../plugins/snippets/snippets/SnippetsDialog.py:569
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "พิมพ์คีย์ด่วนที่จะใช้ หรือกด Backspace เพื่อล้างค่า"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:607
+#: ../plugins/snippets/snippets/SnippetsDialog.py:571
 msgid "Type a new accelerator"
 msgstr "พิมพ์คีย์ด่วนที่จะใช้"
 
@@ -2851,7 +2853,6 @@ msgid "Italian"
 msgstr "ภาษาอิตาลี"
 
 #: ../plugins/spell/gedit-spell-checker.c:118
-#, fuzzy
 msgid "Kurdish"
 msgstr "ภาษาเคิร์ด"
 
@@ -3253,7 +3254,7 @@ msgstr "สีขอบ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "กล่อง"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Cell rowspan"
@@ -3713,7 +3714,7 @@ msgstr "ช่องกรอกข้อความหลายบรรทั
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Multicolumn"
-msgstr ""
+msgstr "หลายคอลัมน์"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Multiple"
@@ -3729,7 +3730,7 @@ msgstr "คุณสมบัติอ็อบเจกต์"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Next ID"
-msgstr ""
+msgstr "ID ถัดไป"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No URI"
@@ -4129,7 +4130,7 @@ msgstr "ตัวอักษรพิมพ์ดีด"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Text"
-msgstr ""
+msgstr "ข้อความ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Text color"
@@ -4225,7 +4226,7 @@ msgstr "วงเล็บ {}"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:10
 msgid "File input"
-msgstr "แฟ้ม: input"
+msgstr "แฟ้ม input"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:11
 msgid "Footnote"
