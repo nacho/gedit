@@ -1073,9 +1073,7 @@ document_saver_saving (GeditDocumentSaver *saver,
 		       const GError       *error,
 		       GeditDocument      *doc)
 {
-	/* FIXME */
-	if (error)
-		g_print ("error saving: %s\n", error->message);
+	gedit_debug (DEBUG_DOCUMENT);
 
 	if (completed)
 	{
@@ -1096,9 +1094,9 @@ document_saver_saving (GeditDocumentSaver *saver,
 
 			gtk_text_buffer_set_modified (GTK_TEXT_BUFFER (doc),
 						      FALSE);
-			
+
 			set_uri (doc, uri, mime_type);
-			
+
 			set_encoding (doc, 
 				      doc->priv->requested_encoding, 
 				      TRUE);
@@ -1259,13 +1257,19 @@ gedit_document_goto_line (GeditDocument *doc,
 
 	line_count = gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc));
 
-	if (line > line_count)
+	if (line >= line_count)
 	{
 		ret = FALSE;
-		line = line_count;
+		gtk_text_buffer_get_end_iter (GTK_TEXT_BUFFER (doc),
+					      &iter);
+	}
+	else
+	{
+		gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc),
+						  &iter,
+						  line);
 	}
 
-	gtk_text_buffer_get_iter_at_line (GTK_TEXT_BUFFER (doc), &iter, line);
 	gtk_text_buffer_place_cursor (GTK_TEXT_BUFFER (doc), &iter);
 
 	return ret;
