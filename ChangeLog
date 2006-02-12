@@ -1,3 +1,9 @@
+2006-02-12  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-view.c: be robust to the case where the view is destroyed
+	before the idle-scroll-to-line hack runs.
+	* gedit/gedit-tab.c: check for NULLness before destroying a GTimer.
+
 2006-02-12  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit/gedit-utils.c (gedit_utils_make_valid_utf8): replace

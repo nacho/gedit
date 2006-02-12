@@ -64,6 +64,9 @@ typedef enum
 struct _GeditViewPrivate
 {
 	GtkTooltips *tooltips;
+
+	/* idle hack to make open-at-line work */
+	guint        scroll_idle;
 	
 	SearchMode   search_mode;
 	
@@ -316,6 +319,7 @@ scroll_to_cursor_on_init (GeditView *view)
 {
 	gedit_view_scroll_to_cursor (view);
 
+	view->priv->scroll_idle = 0;
 	return FALSE;
 }
 
@@ -380,7 +384,7 @@ gedit_view_init (GeditView *view)
 	 * possible: see bug #172277 and bug #311728.
 	 * So we need to do this in an idle handler.
 	 */
-	g_idle_add ((GSourceFunc) scroll_to_cursor_on_init, view);
+	view->priv->scroll_idle = g_idle_add ((GSourceFunc) scroll_to_cursor_on_init, view);
 	
 	view->priv->typeselect_flush_timeout = 0;	
 	view->priv->wrap_around = TRUE;		   
@@ -420,6 +424,9 @@ gedit_view_finalize (GObject *object)
 	
 	if (view->priv->tooltips != NULL)
 		g_object_unref (view->priv->tooltips);
+
+	if (view->priv->scroll_idle > 0)
+		g_source_remove (view->priv->scroll_idle);
 		
 	(* G_OBJECT_CLASS (gedit_view_parent_class)->finalize) (object);
 }

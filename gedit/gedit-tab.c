@@ -881,9 +881,12 @@ document_loaded (GeditDocument *document,
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_LOADING) ||
 			  (tab->priv->state == GEDIT_TAB_STATE_REVERTING));
 	g_return_if_fail (tab->priv->auto_save_timeout <= 0);
-	
-	g_timer_destroy (tab->priv->timer);
-	tab->priv->timer = NULL;
+
+	if (tab->priv->timer != NULL)
+	{
+		g_timer_destroy (tab->priv->timer);
+		tab->priv->timer = NULL;
+	}
 	tab->priv->times_called = 0;
 
 	set_message_area (tab, NULL);
