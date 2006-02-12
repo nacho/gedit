@@ -1,3 +1,9 @@
+2006-02-12  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit/gedit-utils.c (gedit_utils_make_valid_utf8): replace
+	unknown characters by the Unicode replacement character
+	instead of '?', and don't append "(invalid encoding)".
+
 2006-02-12  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-view.c: use gtk_widget_get_clipboard instead of
