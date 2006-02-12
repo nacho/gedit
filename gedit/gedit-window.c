@@ -930,6 +930,25 @@ set_non_homogeneus (GtkWidget *widget, gpointer data)
 }
 
 static void
+toolbar_visibility_changed (GtkWidget   *toolbar,
+			    GeditWindow *window)
+{
+	gboolean visible;
+	GtkAction *action;
+
+	visible = GTK_WIDGET_VISIBLE (toolbar);
+
+	if (gedit_prefs_manager_toolbar_visible_can_set ())
+		gedit_prefs_manager_set_toolbar_visible (visible);
+
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+					      "ViewToolbar");
+
+	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
+		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
+}
+
+static void
 create_menu_bar_and_toolbar (GeditWindow *window, 
 			     GtkWidget   *main_box)
 {
@@ -1104,7 +1123,16 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 
 	gtk_container_foreach (GTK_CONTAINER (window->priv->toolbar),
 			       (GtkCallback)set_non_homogeneus,
-			       NULL);	       
+			       NULL);
+
+	g_signal_connect_after (G_OBJECT (window->priv->toolbar),
+				"show",
+				G_CALLBACK (toolbar_visibility_changed),
+				window);
+	g_signal_connect_after (G_OBJECT (window->priv->toolbar),
+				"hide",
+				G_CALLBACK (toolbar_visibility_changed),
+				window);
 }
 
 static void
@@ -1251,6 +1279,25 @@ set_statusbar_style (GeditWindow *window,
 }
 
 static void
+statusbar_visibility_changed (GtkWidget   *statusbar,
+			      GeditWindow *window)
+{
+	gboolean visible;
+	GtkAction *action;
+
+	visible = GTK_WIDGET_VISIBLE (statusbar);
+
+	if (gedit_prefs_manager_statusbar_visible_can_set ())
+		gedit_prefs_manager_set_statusbar_visible (visible);
+
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+					      "ViewStatusbar");
+
+	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
+		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
+}
+
+static void
 create_statusbar (GeditWindow *window, 
 		  GtkWidget   *main_box)
 {
@@ -1267,9 +1314,18 @@ create_statusbar (GeditWindow *window,
 			  window->priv->statusbar,
 			  FALSE, 
 			  TRUE, 
-			  0);	
+			  0);
 
-	set_statusbar_style (window, NULL);		
+	g_signal_connect_after (G_OBJECT (window->priv->statusbar),
+				"show",
+				G_CALLBACK (statusbar_visibility_changed),
+				window);
+	g_signal_connect_after (G_OBJECT (window->priv->statusbar),
+				"hide",
+				G_CALLBACK (statusbar_visibility_changed),
+				window);
+
+	set_statusbar_style (window, NULL);
 }
 
 static GeditWindow *
@@ -2431,6 +2487,30 @@ vpaned_restore_position (GtkWidget   *widget,
 }
 
 static void
+side_panel_visibility_changed (GtkWidget   *side_panel,
+			       GeditWindow *window)
+{
+	gboolean visible;
+	GtkAction *action;
+
+	visible = GTK_WIDGET_VISIBLE (side_panel);
+
+	if (gedit_prefs_manager_side_pane_visible_can_set ())
+		gedit_prefs_manager_set_side_pane_visible (visible);
+
+	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
+	                                      "ViewSidePane");
+
+	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
+		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
+
+	/* focus the document */
+	if (!visible && window->priv->active_tab != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (
+				gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab))));
+}
+
+static void
 side_panel_size_allocate (GtkWidget     *widget,
 			  GtkAllocation *allocation,
 			  GeditWindow   *window)
@@ -2438,13 +2518,6 @@ side_panel_size_allocate (GtkWidget     *widget,
 	window->priv->side_panel_size = allocation->width;
 }
 
-static void
-side_panel_hide (GtkWidget   *panel,
-		 GeditWindow *window)
-{
-	_gedit_window_set_side_panel_visible (window, FALSE);
-}
-		 
 static void
 create_side_panel (GeditWindow *window)
 {
@@ -2461,14 +2534,18 @@ create_side_panel (GeditWindow *window)
 	gtk_widget_set_size_request (window->priv->side_panel, 100, -1);  			 
 
 	g_signal_connect (window->priv->side_panel,
-			  "size_allocate",
+			  "size-allocate",
 			  G_CALLBACK (side_panel_size_allocate),
 			  window);
 
-	g_signal_connect (window->priv->side_panel,
-			  "hide",
-			  G_CALLBACK (side_panel_hide),
-			  window);
+	g_signal_connect_after (window->priv->side_panel,
+				"show",
+				G_CALLBACK (side_panel_visibility_changed),
+				window);
+	g_signal_connect_after (window->priv->side_panel,
+				"hide",
+				G_CALLBACK (side_panel_visibility_changed),
+				window);
 
 	gtk_paned_set_position (GTK_PANED (window->priv->hpaned),
 				MAX (100, gedit_prefs_manager_get_side_panel_size ()));
@@ -2481,18 +2558,35 @@ create_side_panel (GeditWindow *window)
 }
 
 static void
+bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
+				 GeditWindow *window)
+{
+	gboolean visible;
+	GtkAction *action;
+
+	visible = GTK_WIDGET_VISIBLE (bottom_panel);
+
+	if (gedit_prefs_manager_bottom_panel_visible_can_set ())
+		gedit_prefs_manager_set_bottom_panel_visible (visible);
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "ViewBottomPanel");
+
+	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
+		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
+
+	/* focus the document */
+	if (!visible && window->priv->active_tab != NULL)
+		gtk_widget_grab_focus (GTK_WIDGET (
+				gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab))));
+}
+
+static void
 bottom_panel_size_allocate (GtkWidget     *widget,
 			    GtkAllocation *allocation,
 			    GeditWindow   *window)
 {
 	window->priv->bottom_panel_size = allocation->height;
-}
-
-static void
-bottom_panel_hide (GtkWidget   *panel,
-		   GeditWindow *window)
-{
-	_gedit_window_set_bottom_panel_visible (window, FALSE);
 }
 
 static void
@@ -2504,7 +2598,7 @@ bottom_panel_item_removed (GeditPanel  *panel,
 	{
 		GtkAction *action;
 
-		_gedit_window_set_bottom_panel_visible (window, FALSE);
+		gtk_widget_hide (GTK_WIDGET (panel));
 
 		action = gtk_action_group_get_action (window->priv->action_group,
 						      "ViewBottomPanel");
@@ -2529,7 +2623,8 @@ bottom_panel_item_added (GeditPanel  *panel,
 		gtk_action_set_sensitive (action, TRUE);
 
 		show = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
-		_gedit_window_set_bottom_panel_visible (window, show);
+		if (show)
+			gtk_widget_show (GTK_WIDGET (panel));
 	}
 }
 
@@ -2546,54 +2641,43 @@ create_bottom_panel (GeditWindow *window)
 			 FALSE);
 
 	g_signal_connect (window->priv->bottom_panel,
-			  "size_allocate",
+			  "size-allocate",
 			  G_CALLBACK (bottom_panel_size_allocate),
 			  window);
-  	g_signal_connect (window->priv->bottom_panel,
-			  "hide",
-			  G_CALLBACK (bottom_panel_hide),
-			  window);
+
+	g_signal_connect_after (window->priv->bottom_panel,
+				"show",
+				G_CALLBACK (bottom_panel_visibility_changed),
+				window);
+	g_signal_connect_after (window->priv->bottom_panel,
+				"hide",
+				G_CALLBACK (bottom_panel_visibility_changed),
+				window);
 
 	gtk_paned_set_position (GTK_PANED (window->priv->vpaned),
 				MAX (50, gedit_prefs_manager_get_bottom_panel_size ()));
 }
 
 static void
-init_panes_visibility (GeditWindow *window)
+init_panels_visibility (GeditWindow *window)
 {
-	GtkAction *action;
-	gboolean visible;
-
 	gedit_debug (DEBUG_WINDOW);
 
 	/* side pane */
-	visible = gedit_prefs_manager_get_side_pane_visible ();
-
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "ViewSidePane");		
-
-	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-	if (visible)
+	if (gedit_prefs_manager_get_side_pane_visible ())
 		gtk_widget_show (window->priv->side_panel);
 
 	/* bottom pane, it can be empty */
-	action = gtk_action_group_get_action (window->priv->action_group,
-					      "ViewBottomPanel");
-
 	if (gedit_panel_get_n_items (GEDIT_PANEL (window->priv->bottom_panel)) > 0)
 	{
-		visible = gedit_prefs_manager_get_bottom_panel_visible();
-
-		if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-			gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-		if(visible)
+		if (gedit_prefs_manager_get_bottom_panel_visible ())
   			gtk_widget_show (window->priv->bottom_panel);
 	}
 	else
 	{
+		GtkAction *action;
+		action = gtk_action_group_get_action (window->priv->action_group,
+						      "ViewBottomPanel");
 		gtk_action_set_sensitive (action, FALSE);
 	}
 
@@ -2739,7 +2823,7 @@ gedit_window_init (GeditWindow *window)
 
 	/* set visibility of panes.
 	 * This needs to be done after plugins activatation */
-	init_panes_visibility (window);
+	init_panels_visibility (window);
 
 	gedit_debug_message (DEBUG_WINDOW, "END");
 }
@@ -2930,193 +3014,21 @@ gedit_window_close_tabs (GeditWindow *window,
 
 	if (tabs == NULL)
 		return;
-		
+
 	window->priv->removing_tabs = TRUE;
 
 	while (tabs != NULL)
 	{
 		if (tabs->next == NULL)
 			window->priv->removing_tabs = FALSE;
-			
+
 		gedit_notebook_remove_tab (GEDIT_NOTEBOOK (window->priv->notebook),
 				   	   GEDIT_TAB (tabs->data));
 
 		tabs = g_list_next (tabs);
 	}
-	
+
 	g_return_if_fail (window->priv->removing_tabs == FALSE);
-}
-
-void
-_gedit_window_set_statusbar_visible (GeditWindow *window,
-				     gboolean     visible)
-{
-	GtkAction *action;
-	static gboolean recursion_guard = FALSE;
-
-	gedit_debug (DEBUG_WINDOW);
-
-	g_return_if_fail (GEDIT_IS_WINDOW (window));
-
-	if (recursion_guard)
-		return;
-
-	recursion_guard = TRUE;
-
-	visible = (visible != FALSE);
-
-	if (visible)
-		gtk_widget_show (window->priv->statusbar);
-	else
-		gtk_widget_hide (window->priv->statusbar);
-
-	if (gedit_prefs_manager_statusbar_visible_can_set ())
-		gedit_prefs_manager_set_statusbar_visible (visible);
-
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "ViewStatusbar");		
-
-	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-	recursion_guard = FALSE;		
-}
-
-void
-_gedit_window_set_toolbar_visible (GeditWindow *window,
-				   gboolean     visible)
-{
-	GtkAction *action;
-	static gboolean recursion_guard = FALSE;
-
-	gedit_debug (DEBUG_WINDOW);
-
-	g_return_if_fail (GEDIT_IS_WINDOW (window));
-
-	if (recursion_guard)
-		return;
-
-	recursion_guard = TRUE;
-
-	visible = (visible != FALSE);
-
-	if (visible)
-		gtk_widget_show (window->priv->toolbar);
-	else
-		gtk_widget_hide (window->priv->toolbar);
-
-	if (gedit_prefs_manager_toolbar_visible_can_set ())
-		gedit_prefs_manager_set_toolbar_visible (visible);
-
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "ViewToolbar");		
-
-	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-	recursion_guard = FALSE;
-}
-
-void
-_gedit_window_set_side_panel_visible (GeditWindow *window,
-				      gboolean     visible)
-{
-	GtkAction *action;
-	static gboolean recursion_guard = FALSE;
-	gboolean show = FALSE;
-
-	gedit_debug (DEBUG_WINDOW);
-
-	g_return_if_fail (GEDIT_IS_WINDOW (window));
-
-	if (recursion_guard)
-		return;
-
-	recursion_guard = TRUE;
-
-	visible = (visible != FALSE);
-
-	if (visible &&
-	    (GTK_WIDGET_VISIBLE (window->priv->side_panel) != visible))
-	{
-		gtk_widget_show (window->priv->side_panel);
-		show = TRUE;
-	}
-	else
-	{
-		gtk_widget_hide (window->priv->side_panel);
-		if (window->priv->active_tab)
-			gtk_widget_grab_focus (GTK_WIDGET (
-					gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab))));
-	}
-
-	if (gedit_prefs_manager_side_pane_visible_can_set ())
-		gedit_prefs_manager_set_side_pane_visible (visible);
-
-	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
-					      "ViewSidePane");		
-
-	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-	if (show)
-	{
-		/* g_print ("GRAB side panel\n"); */
-		gtk_widget_grab_focus (window->priv->side_panel);
-	}
-
-	recursion_guard = FALSE;
-}
-
-void
-_gedit_window_set_bottom_panel_visible (GeditWindow *window,
-					gboolean     visible)
-{
-	GtkAction *action;
-	static gboolean recursion_guard = FALSE;
-	gboolean show = FALSE;
-
-	gedit_debug (DEBUG_WINDOW);
-
-	g_return_if_fail (GEDIT_IS_WINDOW (window));
-
-	if (recursion_guard)
-		return;
-
-	recursion_guard = TRUE;
-
-	visible = (visible != FALSE);
-
-	if (visible &&
-	    (GTK_WIDGET_VISIBLE (window->priv->bottom_panel) != visible))
-	{
-		gtk_widget_show (window->priv->bottom_panel);
-		show = TRUE;
-	}
-	else
-	{
-		gtk_widget_hide (window->priv->bottom_panel);
-		if (window->priv->active_tab)
-			gtk_widget_grab_focus (GTK_WIDGET (
-					gedit_tab_get_view (GEDIT_TAB (window->priv->active_tab))));
-	}
-
-	if (gedit_prefs_manager_bottom_panel_visible_can_set ())
-		gedit_prefs_manager_set_bottom_panel_visible (visible);
-
-	action = gtk_action_group_get_action (window->priv->action_group,
-					      "ViewBottomPanel");		
-
-	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
-		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
-
-	if (show)
-	{
-		/* g_print ("GRAB bottom panel\n"); */
-		gtk_widget_grab_focus (window->priv->bottom_panel);
-	}
-
-	recursion_guard = FALSE;
 }
 
 GeditWindow *

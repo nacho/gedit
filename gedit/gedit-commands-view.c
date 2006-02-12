@@ -37,8 +37,10 @@
 #include <gtk/gtk.h>
 
 #include "gedit-commands.h"
-#include "gedit-window.h"
 #include "gedit-debug.h"
+#include "gedit-window.h"
+#include "gedit-window-private.h"
+
 
 void
 gedit_cmd_view_show_toolbar (GtkAction   *action,
@@ -50,7 +52,10 @@ gedit_cmd_view_show_toolbar (GtkAction   *action,
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-	_gedit_window_set_toolbar_visible (window, visible);
+	if (visible)
+		gtk_widget_show (window->priv->toolbar);
+	else
+		gtk_widget_hide (window->priv->toolbar);
 }
 
 void
@@ -63,7 +68,10 @@ gedit_cmd_view_show_statusbar (GtkAction   *action,
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-	_gedit_window_set_statusbar_visible (window, visible);
+	if (visible)
+		gtk_widget_show (window->priv->statusbar);
+	else
+		gtk_widget_hide (window->priv->statusbar);
 }
 
 void
@@ -71,12 +79,23 @@ gedit_cmd_view_show_side_pane (GtkAction   *action,
 			       GeditWindow *window)
 {
 	gboolean visible;
+	GeditPanel *panel;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-	_gedit_window_set_side_panel_visible (window, visible);
+	panel = gedit_window_get_side_panel (window);
+
+	if (visible)
+	{
+		gtk_widget_show (panel);
+		gtk_widget_grab_focus (panel);
+	}
+	else
+	{
+		gtk_widget_hide (panel);
+	}
 }
 
 void
@@ -84,10 +103,21 @@ gedit_cmd_view_show_bottom_panel (GtkAction   *action,
 				  GeditWindow *window)
 {
 	gboolean visible;
+	GeditPanel *panel;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	visible = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
 
-	_gedit_window_set_bottom_panel_visible (window, visible);
+	panel = gedit_window_get_bottom_panel (window);
+
+	if (visible)
+	{
+		gtk_widget_show (panel);
+		gtk_widget_grab_focus (panel);
+	}
+	else
+	{
+		gtk_widget_hide (panel);
+	}
 }

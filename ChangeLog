@@ -1,3 +1,14 @@
+2006-02-12  Steve Frécinaux <steve@istique.net>
+
+	* gedit/gedit-window.[ch]: handle the visibility changes of panels, 
+	toolbar and statusbar connecting to the show and hide signals.
+
+	* gedit/gedit-commands-view.c:
+	* gedit/gedit-session.c:
+
+	adapt for above changes (use directly gtk_widget_show/hide instead of a
+	custom function)
+
 2006-02-12  Paolo Maggi  <paolo@gnome.org>
 
 	* plugins/externaltools/tools/tools.glade: use GTK_SHADOW_IN for

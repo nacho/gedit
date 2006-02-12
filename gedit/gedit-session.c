@@ -694,22 +694,21 @@ parse_window (xmlNodePtr node)
 		if (strcmp ((char *) child->name, "side-pane") == 0)
 		{
 			xmlChar *visible;
+			GeditPanel *panel;
 
 			visible = xmlGetProp (child, (const xmlChar *) "visible");
+			panel = gedit_window_get_side_panel (window);
 
 			if ((visible != NULL) &&
 			    (strcmp ((char *) visible, "yes") == 0))
 			{
 				gedit_debug_message (DEBUG_SESSION, "Side panel visible");
-				_gedit_window_set_side_panel_visible (window, 
-								      TRUE);
+				gtk_widget_show (GTK_WIDGET (panel));
 			}
 			else
 			{
 				gedit_debug_message (DEBUG_SESSION, "Side panel _NOT_ visible");
-				_gedit_window_set_side_panel_visible (window, 
-								      FALSE);
-
+				gtk_widget_hide (GTK_WIDGET (panel));
 			}
 
 			if (visible != NULL)
@@ -718,22 +717,21 @@ parse_window (xmlNodePtr node)
 		else if (strcmp ((char *) child->name, "bottom-panel") == 0)
 		{
 			xmlChar *visible;
+			GeditPanel *panel;
 
 			visible = xmlGetProp (child, (const xmlChar *) "visible");
+			panel = gedit_window_get_bottom_panel (window);
 
 			if ((visible != NULL) &&
 			    (strcmp ((char *) visible, "yes") == 0))
 			{
 				gedit_debug_message (DEBUG_SESSION, "Bottom panel visible");
-				_gedit_window_set_bottom_panel_visible (window, 
-									TRUE);
+				gtk_widget_show (GTK_WIDGET (panel));
 			}
 			else
 			{
 				gedit_debug_message (DEBUG_SESSION, "Bottom panel _NOT_ visible");
-				_gedit_window_set_bottom_panel_visible (window, 
-									FALSE);
-
+				gtk_widget_hide (GTK_WIDGET (panel));
 			}
 
 			if (visible != NULL)
