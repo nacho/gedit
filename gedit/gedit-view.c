@@ -487,7 +487,8 @@ gedit_view_new (GeditDocument *doc)
 void
 gedit_view_cut_clipboard (GeditView *view)
 {
-	GtkTextBuffer *buffer = NULL;
+	GtkTextBuffer *buffer;
+	GtkClipboard *clipboard;
 
 	gedit_debug (DEBUG_VIEW);
 
@@ -496,9 +497,12 @@ gedit_view_cut_clipboard (GeditView *view)
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 	g_return_if_fail (buffer != NULL);
 
+	clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
+					      GDK_SELECTION_CLIPBOARD);
+
 	/* FIXME: what is default editability of a buffer? */
   	gtk_text_buffer_cut_clipboard (buffer,
-  				       gtk_clipboard_get (GDK_NONE),
+  				       clipboard,
 				       !gedit_document_get_readonly (
 				       		GEDIT_DOCUMENT (buffer)));
   	
@@ -513,7 +517,8 @@ gedit_view_cut_clipboard (GeditView *view)
 void
 gedit_view_copy_clipboard (GeditView *view)
 {
-	GtkTextBuffer *buffer = NULL;
+	GtkTextBuffer *buffer;
+	GtkClipboard *clipboard;
 
 	gedit_debug (DEBUG_VIEW);
 
@@ -522,8 +527,10 @@ gedit_view_copy_clipboard (GeditView *view)
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 	g_return_if_fail (buffer != NULL);
 
-  	gtk_text_buffer_copy_clipboard (buffer,
-  					gtk_clipboard_get (GDK_NONE));
+	clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
+					      GDK_SELECTION_CLIPBOARD);
+
+  	gtk_text_buffer_copy_clipboard (buffer, clipboard);
 
 	/* on copy do not scroll, we are already on screen */
 }
@@ -531,7 +538,8 @@ gedit_view_copy_clipboard (GeditView *view)
 void
 gedit_view_paste_clipboard (GeditView *view)
 {
-  	GtkTextBuffer *buffer = NULL;
+  	GtkTextBuffer *buffer;
+	GtkClipboard *clipboard;
 
 	gedit_debug (DEBUG_VIEW);
 
@@ -540,9 +548,12 @@ gedit_view_paste_clipboard (GeditView *view)
 	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 	g_return_if_fail (buffer != NULL);
 
+	clipboard = gtk_widget_get_clipboard (GTK_WIDGET (view),
+					      GDK_SELECTION_CLIPBOARD);
+
 	/* FIXME: what is default editability of a buffer? */
   	gtk_text_buffer_paste_clipboard (buffer,
-					 gtk_clipboard_get (GDK_NONE),
+					 clipboard,
 					 NULL,
 					 !gedit_document_get_readonly (
 						GEDIT_DOCUMENT (buffer)));
