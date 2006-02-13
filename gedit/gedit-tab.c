@@ -133,10 +133,14 @@ install_auto_save_timeout_if_needed (GeditTab *tab)
 	
 	g_return_val_if_fail (tab->priv->auto_save_timeout <= 0, FALSE);
 	g_return_val_if_fail ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) ||
-			      (tab->priv->state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW), FALSE);
-			  
+			      (tab->priv->state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW) ||
+			      (tab->priv->state == GEDIT_TAB_STATE_CLOSING), FALSE);
+
+	if (tab->priv->state == GEDIT_TAB_STATE_CLOSING)
+		return FALSE;
+
 	doc = gedit_tab_get_document (tab);
-	
+
  	if (tab->priv->auto_save && 
  	    !gedit_document_is_untitled (doc) &&
  	    !gedit_document_get_readonly (doc))
@@ -942,7 +946,7 @@ document_loaded (GeditDocument *document,
 
 				set_message_area (tab, emsg);
 			}
-		}					  
+		}
 		else
 		{
 			g_return_if_fail ((error->domain == G_CONVERT_ERROR) ||
@@ -1102,7 +1106,6 @@ end_saving (GeditTab *tab)
 	tab->priv->tmp_encoding = NULL;
 	
 	install_auto_save_timeout_if_needed (tab);
-
 }
 
 static void 
