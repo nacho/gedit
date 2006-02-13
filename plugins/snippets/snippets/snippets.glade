@@ -49,6 +49,7 @@
 	  <child>
 	    <widget class="GtkButton" id="button1">
 	      <property name="visible">True</property>
+	      <property name="sensitive">False</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-help</property>
@@ -72,7 +73,7 @@
 	  <property name="border_width">6</property>
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
-	  <property name="position">200</property>
+	  <property name="position">250</property>
 
 	  <child>
 	    <widget class="GtkVBox" id="vbox_selection">
@@ -129,6 +130,7 @@
 		      <property name="hover_expand">False</property>
 		      <signal name="row_expanded" handler="on_tree_view_snippets_row_expanded" last_modification_time="Tue, 03 Jan 2006 22:06:02 GMT"/>
 		      <signal name="key_press_event" handler="on_tree_view_snippets_key_press" last_modification_time="Tue, 03 Jan 2006 22:07:00 GMT"/>
+		      <signal name="row_collapsed" handler="on_tree_view_snippets_row_collapsed" last_modification_time="Wed, 08 Feb 2006 22:28:38 GMT"/>
 		    </widget>
 		  </child>
 		</widget>

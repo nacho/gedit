@@ -50,7 +50,7 @@ class CompleteModel(gtk.GenericTreeModel):
 		self.visible_nodes = list(self.nodes)		
 
 	def display_snippet_description(self, snippet):
-		return snippet['description']
+		return markup_escape(snippet['description'])
 	
 	def display_snippet_default(self, snippet):
 		return snippet.display()

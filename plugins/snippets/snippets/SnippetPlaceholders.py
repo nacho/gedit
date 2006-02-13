@@ -33,7 +33,8 @@ class SnippetPlaceholder:
 		self.mirrors = []
 		self.tabstop = tabstop
 		self.default = self.expand_environment(default)
-		
+		self.prev_contents = self.default
+
 		if begin:
 			self.begin = self.buf.create_mark(None, begin, True)
 		else:
@@ -57,7 +58,7 @@ class SnippetPlaceholder:
 		return re.sub('(\\\\)?\\$([A-Z_]+)', self.re_environment, text)
 	
 	def get_iter(self, mark):
-		if mark:
+		if mark and not mark.get_deleted():
 			return self.buf.get_iter_at_mark(mark)
 		else:
 			return None
@@ -98,7 +99,10 @@ class SnippetPlaceholder:
 			return ''
 	
 	def add_mirror(self, mirror):
-		self.mirrors.append(mirror)
+		if type(mirror) is SnippetPlaceholderMirror:
+			self.instant_mirrors.append(mirror)
+		else:
+			self.mirrors.append(mirror)
 
 	def set_text(self, text):
 		if self.begin.get_deleted() or self.end.get_deleted():
@@ -112,13 +116,24 @@ class SnippetPlaceholder:
 		# Insert the text from the mirror
 		insert_with_indent(self.view, begin, text)
 		self.buf.end_user_action()
+		self.prev_contents = text
 
+	def needs_updating(self):
+		return len(self.mirrors) != 0 and self.prev_contents != self.get_text()
+
+	def update_contents(self):
+		prev = self.prev_contents
+		self.prev_contents = self.get_text()
+		
+		if prev != self.get_text():
+			for mirror in self.mirrors:
+				mirror.update(self)
+			
 	# Do something on ending this placeholder
 	def leave(self):
 		# Notify mirrors
 		for mirror in self.mirrors:
 			mirror.update(self)
-		
 
 # This is an placeholder which inserts a mirror of another SnippetPlaceholder	
 class SnippetPlaceholderMirror(SnippetPlaceholder):

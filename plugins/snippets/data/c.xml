@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snippets language="C">
+  <snippet id="gpl">
+    <text><![CDATA[/*
+ * ${1:<filename>}
+ * This file is part of ${2:<program name>}
+ *
+ * Copyright (C) ${3:<year>} - ${4:<name of author>}
+ *
+ * ${2} is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * ${2} is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, 
+ * Boston, MA  02110-1301  USA
+ */
+ 
+ $0]]></text>
+    <tag>gpl</tag>
+    <description>GPL License</description>
+  </snippet>
+  <snippet id="lgpl">
+    <text><![CDATA[/*
+ * ${1:<filename>}
+ * This file is part of ${2:<library name>} 
+ *
+ * Copyright (C) ${3:<year>} - ${4:<name of author>}
+ *
+ * ${2} is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ * 
+ * ${2} is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+ 
+ $0]]></text>
+    <tag>lgpl</tag>
+    <description>LGPL License</description>
+  </snippet>
+  <snippet id="do">
+    <text><![CDATA[do
+{
+	$0
+} while ($1);]]></text>
+    <tag>do</tag>
+    <description>do .. while</description>
+  </snippet>
+  <snippet id="for">
+    <text><![CDATA[for (${1:i} = ${2:0}; ${1:i} < ${3:count}; ${1:i} += ${4:1})
+{
+	$0
+}]]></text>
+    <tag>for</tag>
+    <description>for loop</description>
+  </snippet>
+  <snippet id="while">
+    <text><![CDATA[while ($1)
+{
+	$0
+}]]></text>
+    <tag>while</tag>
+    <description>while</description>
+  </snippet>
+  <snippet id="once">
+    <text><![CDATA[#ifndef __${1:NAME}_H__
+#define __$1_H__
+
+$0
+
+#endif /* __$1_H__ */
+]]></text>
+    <tag>once</tag>
+    <description>Header-Include Guard</description>
+  </snippet>
+  <snippet id="if">
+    <text><![CDATA[if (${1:condition})
+{
+	$0
+}]]></text>
+    <tag>if</tag>
+    <description>if</description>
+  </snippet>
+  <snippet id="Inc">
+    <text><![CDATA[#include <${1:file}.h>
+$0]]></text>
+    <tag>Inc</tag>
+    <description>#include &lt;..&gt;</description>
+  </snippet>
+  <snippet id="inc">
+    <text><![CDATA[#include "${1:file}.h"
+$0]]></text>
+    <tag>inc</tag>
+    <description>#include ".."</description>
+  </snippet>
+  <snippet id="main">
+    <text><![CDATA[int 
+main (int argc, char *argv[])
+{
+	$0
+	return 0;
+}]]></text>
+    <tag>main</tag>
+    <description>main</description>
+  </snippet>
+  <snippet id="struct">
+    <text><![CDATA[struct ${1:name}
+{
+	${0:/* data */}
+};]]></text>
+    <tag>struct</tag>
+    <description>struct</description>
+  </snippet>
+  <snippet id="endif">
+    <text><![CDATA[#endif
+$0]]></text>
+    <description>#endif</description>
+    <accelerator><![CDATA[<Control><Alt>period]]></accelerator>
+  </snippet>
+  <snippet id="td">
+    <text><![CDATA[typedef ${1:newtype} ${2:type};
+$0]]></text>
+    <tag>td</tag>
+    <description>typedef</description>
+  </snippet>
+</snippets>

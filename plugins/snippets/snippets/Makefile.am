@@ -4,6 +4,9 @@ plugindir = $(libdir)/gedit-2/plugins/snippets
 plugin_PYTHON = \
 	__init__.py \
 	SnippetPluginInstance.py \
+	SnippetController.py \
+	SnippetsLibrary.py \
+	ElementTree.py \
 	Snippet.py \
 	SnippetPlaceholders.py \
 	SnippetsDialog.py \

@@ -15,69 +15,40 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from xml.dom import minidom
-import xml
 from SnippetPlaceholders import *
 import os
 from functions import *
 
 class Snippet:
-	def __init__(self, node, plugin = None):
-		self.node = node
-		self.properties = {}
-		
-		self.initSnippetData(plugin)
-	
-	def initSnippetData(self, p):
-		props = {'tag': '', 'text': '', 'description': 'New snippet', 
-				'accelerator': ''}
-		has_props = {}
-		
-		for child in self.node.childNodes:
-			for prop in props:
-				if child.localName == prop:
-					has_props[prop] = child
-				
-					if child.hasChildNodes():
-						self.properties[prop] = child.firstChild
-
-		if p:
-			for prop in props:
-				if not prop in has_props:
-					prop_node = p.xmldoc.createElement(prop)
-					self.node.appendChild(prop_node)
-				else:
-					prop_node = has_props[prop]
-
-				if not prop in self.properties:
-					text_node = p.xmldoc.createTextNode(props[prop])
-					self.properties[prop] = text_node
-					prop_node.appendChild(text_node)
-
-				if self.properties[prop].data == '':
-					self.properties[prop].data = props[prop]
+	def __init__(self, data):
+		self.data = data
 	
 	def __getitem__(self, prop):
-		if prop in self.properties:
-			return self.properties[prop].data
-		
-		return ''
+		return self.data[prop]
 	
 	def __setitem__(self, prop, value):
-		if prop in self.properties:
-			self.properties[prop].data = value
+		self.data[prop] = value
 	
+	def accelerator_display(self):
+		accel = self['accelerator']
+
+		if accel:
+			keyval, mod = gtk.accelerator_parse(accel)
+			accel = gtk.accelerator_get_label(keyval, mod)
+		
+		return accel or ''
+
 	def display(self):
 		nm = markup_escape(self['description'])
 		
 		tag = self['tag']
-		accel = self['accelerator']
+		accel = self.accelerator_display()
 		detail = []
 		
-		if tag:
+		if tag and tag != '':
 			detail.append(tag)
 			
-		if accel:
+		if accel and accel != '':
 			detail.append(accel)
 		
 		if not detail:
@@ -272,7 +243,7 @@ class Snippet:
 		return placeholders
 	
 	def insert_into(self, plugin_data):
-		buf = plugin_data.current_view.get_buffer()
+		buf = plugin_data.view.get_buffer()
 		insert = buf.get_iter_at_mark(buf.get_insert())
 		lastIndex = 0
 		
@@ -297,7 +268,7 @@ class Snippet:
 		
 		# Now parse the contents of this snippet, create SnippetPlaceholders
 		# and insert the placholder marks in the marks array of plugin_data
-		placeholders = self.parse_text(plugin_data.current_view, marks)
+		placeholders = self.parse_text(plugin_data.view, marks)
 		
 		# So now all of the snippet is in the buffer, we have all our 
 		# placeholders right here, what's next, put all marks in the 
@@ -314,7 +285,6 @@ class Snippet:
 				endIter = placeholder.end_iter()
 				
 				if lastIter.compare(endIter) < 0:
-					print tabstop
 					lastIter = endIter
 				
 				# Inserting placeholder

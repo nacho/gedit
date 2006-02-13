@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<snippets language="Python">
+  <snippet id="def">
+    <text><![CDATA[def ${1:fname}(${2:self}):
+	${3:pass}]]></text>
+    <description>New Function</description>
+    <tag>def</tag>
+  </snippet>
+  <snippet id="get">
+    <text><![CDATA[def get$1(self): return self._$1]]></text>
+    <description>New Get Method</description>
+    <tag>get</tag>
+  </snippet>
+  <snippet id="class">
+    <text><![CDATA[class ${1:ClassName} (${2:object}):
+
+	def __init__(self${3:,})
+		${4:pass}
+
+
+$0]]></text>
+    <description>New Class</description>
+    <tag>class</tag>
+  </snippet>
+  <snippet id="insert">
+    <text><![CDATA["${1:$GEDIT_SELECTED_TEXT}"]]></text>
+    <accelerator><![CDATA[<Control>2]]></accelerator>
+    <description>Inside String: Insert "…"</description>
+  </snippet>
+  <snippet id="insert-1">
+    <text><![CDATA['${1:$GEDIT_SELECTED_TEXT}']]></text>
+    <accelerator><![CDATA[<Control>apostrophe]]></accelerator>
+    <description>Inside String: Insert '…'</description>
+  </snippet>
+  <snippet id=".">
+    <text><![CDATA[self.]]></text>
+    <description>self</description>
+    <tag>.</tag>
+  </snippet>
+  <snippet id="set">
+    <text><![CDATA[def set$1(self, ${2:newValue}): self._$1 = $2]]></text>
+    <description>New Set Method</description>
+    <tag>set</tag>
+  </snippet>
+</snippets>

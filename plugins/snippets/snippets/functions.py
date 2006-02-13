@@ -87,3 +87,6 @@ def insert_with_indent(view, piter, text, indentfirst = True):
 				text += lines[i] + '\n'
 		
 		view.get_buffer().insert(piter, text[:-1])
+
+def snippets_debug(*s):
+	return
