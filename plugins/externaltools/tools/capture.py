@@ -99,14 +99,23 @@ class Capture(gobject.GObject):
 		
 	def on_output(self, source, condition):
 		line = source.readline()
+
 		if len(line) > 0:
+			try:
+				line = unicode(line, 'utf-8')
+			except:
+				line = unicode(line, 
+				               locale.getdefaultlocale()[1],
+				               'replace')
+
 			if source == self.pipe.stdout:
 				self.emit('stdout-line', line)
 			else:
 				self.emit('stderr-line', line)
 			return True
+
 		return False
-	
+
 	def stop(self, error_code = -1):
 		if self.pipe is not None:
 			os.kill(self.pipe.pid, signal.SIGTERM)
