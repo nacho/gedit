@@ -44,7 +44,6 @@ class UniqueById:
 		return self.__class__.__shared_state
 
 class OutputPanel(UniqueById):
-	
 	def __init__(self, window):
 		if UniqueById.__init__(self, window):
 			return
@@ -63,8 +62,10 @@ class OutputPanel(UniqueById):
 		self.normal_tag = buffer.create_tag("normal")
 		self.error_tag  = buffer.create_tag("error")
 		self.error_tag.set_property("foreground", "red")
-		self.command_tag = buffer.create_tag("command")
-		self.command_tag.set_property("foreground", "blue")
+		self.italic_tag = buffer.create_tag('italic')
+		self.italic_tag.set_property('style', pango.STYLE_OBLIQUE)
+		self.bold_tag = buffer.create_tag('bold')
+		self.bold_tag.set_property('weight', pango.WEIGHT_BOLD)
 
 		self.process = None
 
@@ -74,7 +75,8 @@ class OutputPanel(UniqueById):
 	
 	def on_stop_clicked(self, widget, *args):
 		if self.process is not None:
-			self.write("Stopping...\n", self.command_tag)
+			self.write("\n" + _('Stopped.') + "\n",
+			           self.italic_tag)
 			self.process.stop(-1)
 		
 	def scroll_to_end(self):

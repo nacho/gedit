@@ -208,10 +208,6 @@ def capture_menu_action(action, window, node):
 
 	# Assign the error output to the output panel
 	panel.process = capture
-	
-	capture.connect('stderr-line',   capture_stderr_line_panel,   panel)
-	capture.connect('begin-execute', capture_begin_execute_panel, panel, node.get('label'))
-	capture.connect('end-execute',   capture_end_execute_panel,   panel, view)
 
 	# Get input text
 	input_type = default(node.get('input'), 'nothing')
@@ -279,6 +275,9 @@ def capture_menu_action(action, window, node):
 		capture.connect('stdout-line', capture_stdout_line_panel, panel)
 		document.begin_user_action()
 
+	capture.connect('stderr-line',   capture_stderr_line_panel,   panel)
+	capture.connect('begin-execute', capture_begin_execute_panel, panel, node.get('label'))
+	capture.connect('end-execute',   capture_end_execute_panel,   panel, view)
 	
 	# Run the command
 	view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.WATCH))
@@ -291,18 +290,23 @@ def capture_stderr_line_panel(capture, line, panel):
 def capture_begin_execute_panel(capture, panel, label):
 	panel['stop'].set_sensitive(True)
 	panel.clear()
-	panel.write("Running %s...\n" % label, panel.command_tag)
+	panel.write(_("Running tool:"), panel.italic_tag);
+	panel.write(" %s\n\n" % label, panel.bold_tag);
 
 def capture_end_execute_panel(capture, exit_code, panel, view):
-	panel.write("Exit code: %s\n" % exit_code, panel.command_tag)
 	panel['stop'].set_sensitive(False)
 	view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.XTERM))
 	view.set_cursor_visible(True)
 	view.set_editable(True)
+
+	if exit_code == 0:
+		panel.write("\n" + _("Done.") + "\n", panel.italic_tag)
+	else:
+		panel.write("\n" + _("Exited") + ":", panel.italic_tag)
+		panel.write(" %d\n" % exit_code, panel.bold_tag)
 
 def capture_stdout_line_panel(capture, line, panel):
 	panel.write(line)
 
 def capture_stdout_line_document(capture, line, document, pos):
 	document.insert(pos, line)
-

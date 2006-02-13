@@ -311,7 +311,7 @@ class Manager:
 	
 	def on_accelerator_focus_out(self, entry, event):
 		if self.current_node is not None:
-			entry.set_text(self.current_node.get('accelerator'))
+			entry.set_text(default(self.current_node.get('accelerator'), ''))
 
 	def on_tool_manager_dialog_response(self, dialog, response):
 		if response == gtk.RESPONSE_HELP:
