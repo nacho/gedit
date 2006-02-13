@@ -31,12 +31,16 @@
   <menubar name="MenuBar">
     <menu name="FileMenu" action="File">
       <menuitem name="FileNewMenu" action="FileNew"/>
+      <placeholder name="FileOps_1"/>
       <menuitem name="FileOpenMenu" action="FileOpen"/>
       <menuitem name="FileOpenURIMenu" action="FileOpenURI"/>
+      <placeholder name="FileOps_2"/>
       <separator/>
       <menuitem name="FileSaveMenu" action="FileSave"/>
       <menuitem name="FileSaveAsMenu" action="FileSaveAs"/>
+      <placeholder name="FileOps_3"/>
       <menuitem name="FileRevertMenu" action="FileRevert"/>
+      <placeholder name="FileOps_4"/>
       <separator/>
       <menuitem name="FilePageSetupMenu" action="FilePageSetup"/>
       <menuitem name="FilePrintPreviewMenu" action="FilePrintPreview"/>
@@ -135,7 +139,7 @@
     <toolitem action="EditPaste"/>
     <separator/>
     <toolitem action="SearchFind"/>
-    <toolitem action="SearchReplace"/>    
+    <toolitem action="SearchReplace"/>
   </toolbar>
 
   <popup name="NotebookPopup" action="NotebookPopupAction">
@@ -146,7 +150,7 @@
     <separator/>
     <menuitem action="FilePrint"/>
     <separator/>
-    <placeholder name="NotebookPupupOps_1" />   
+    <placeholder name="NotebookPupupOps_1"/>   
     <separator/>
     <menuitem name="FileCloseMenu" action="FileClose"/>
   </popup>
