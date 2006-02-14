@@ -778,7 +778,9 @@ class SnippetsLibraryImpl:
 		snippets_debug('Unref:', language)
 		
 		if language in self.containers:
-			if not self.containers[language].unref():
+			if not self.containers[language].unref() and \
+					language in self.libraries:
+
 				for library in self.libraries[language]:
 					library.unload()
 				
