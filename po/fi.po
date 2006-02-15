@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-21 21:08+0200\n"
-"PO-Revision-Date: 2006-01-21 21:09+0200\n"
+"POT-Creation-Date: 2006-02-15 04:59+0200\n"
+"PO-Revision-Date: 2006-02-15 05:10+0200\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Muokkaa tekstitiedostoja"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:409
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
 msgid "Text Editor"
 msgstr "Tekstieditori"
 
@@ -1059,11 +1059,11 @@ msgid "_minutes"
 msgstr "_minuuttia"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:989
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1008
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:987
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1006
 msgid "Find"
 msgstr "Etsi"
 
@@ -1104,7 +1104,7 @@ msgstr "_Hakusana:"
 msgid "_Wrap around"
 msgstr "K_ierrä"
 
-#: ../gedit/gedit.c:73
+#: ../gedit/gedit.c:75
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -1112,20 +1112,20 @@ msgstr ""
 "Aseta merkistön koodaus jota haluat käyttää avatessasi komentorivillä "
 "luettelemiasi tiedostoja"
 
-#: ../gedit/gedit.c:76
+#: ../gedit/gedit.c:78
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Luo uusi itsenäinen ikkuna käynnissä olevaan geditiin"
 
-#: ../gedit/gedit.c:79
+#: ../gedit/gedit.c:81
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Luo uusi asiakirja jo käynnissä olevaan geditiin"
 
-#: ../gedit/gedit.c:124
+#: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: virheellinen tiedostonimi tai URI.\n"
 
-#: ../gedit/gedit.c:136
+#: ../gedit/gedit.c:128
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: virheellinen koodaus.\n"
@@ -1286,18 +1286,18 @@ msgstr ""
 msgid "gedit"
 msgstr "gedit"
 
-#: ../gedit/gedit-commands-search.c:165
+#: ../gedit/gedit-commands-search.c:166
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "Löydetty ja korvattu %d esiintymä."
 msgstr[1] "Löydetty ja korvattu %d esiintymää."
 
-#: ../gedit/gedit-commands-search.c:174
+#: ../gedit/gedit-commands-search.c:176
 msgid "Found and replaced one occurrence"
 msgstr "Löydetty ja korvattu yksi esiintymä"
 
-#: ../gedit/gedit-commands-search.c:187
+#: ../gedit/gedit-commands-search.c:189
 msgid "Phrase not found"
 msgstr "Lausetta ei löytynyt"
 
@@ -1312,7 +1312,7 @@ msgid "Could not obtain backup filename"
 msgstr "Varmuuskopiointitiedostonimeä ei voitu luoda"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1472 ../gedit/gedit-window.c:1477
+#: ../gedit/gedit-window.c:1528 ../gedit/gedit-window.c:1533
 msgid "Read Only"
 msgstr "Vain luku"
 
@@ -1455,11 +1455,11 @@ msgstr "Lisää tai _poista..."
 msgid "C_haracter Coding:"
 msgstr "_Merkistön koodaus:"
 
-#: ../gedit/gedit-file-chooser-dialog.c:186
+#: ../gedit/gedit-file-chooser-dialog.c:189
 msgid "All Files"
 msgstr "Kaikki tiedostot"
 
-#: ../gedit/gedit-file-chooser-dialog.c:194
+#: ../gedit/gedit-file-chooser-dialog.c:197
 msgid "All Text Files"
 msgstr "Kaikki tekstitiedostot"
 
@@ -1835,7 +1835,7 @@ msgid "Close document"
 msgstr "Sulje asiakirja"
 
 #: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
-#: ../gedit/recent-files/egg-recent-view-gtk.c:444
+#: ../gedit/recent-files/egg-recent-view-gtk.c:446
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "Tyhjä"
@@ -1986,77 +1986,77 @@ msgstr[1] "%d välilehteä sisältää virheitä"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:637
+#: ../gedit/gedit-tab.c:641
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Palautetaan %s hakemistosta %s"
 
-#: ../gedit/gedit-tab.c:644
+#: ../gedit/gedit-tab.c:648
 #, c-format
 msgid "Reverting %s"
 msgstr "Palautetaan %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:660
+#: ../gedit/gedit-tab.c:664
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Ladataan %s hakemistosta %s"
 
-#: ../gedit/gedit-tab.c:667
+#: ../gedit/gedit-tab.c:671
 #, c-format
 msgid "Loading %s"
 msgstr "Ladataan %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:750
+#: ../gedit/gedit-tab.c:754
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Tallennetaan %s hakemistoon %s"
 
-#: ../gedit/gedit-tab.c:757
+#: ../gedit/gedit-tab.c:761
 #, c-format
 msgid "Saving %s"
 msgstr "Tallennetaan %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1505
+#: ../gedit/gedit-tab.c:1511
 msgid "RO"
 msgstr "LUKU"
 
-#: ../gedit/gedit-tab.c:1550
+#: ../gedit/gedit-tab.c:1556
 #, c-format
 msgid "Error opening file %s"
 msgstr "Virhe avattaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1555
+#: ../gedit/gedit-tab.c:1561
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Virhe palautettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1560
+#: ../gedit/gedit-tab.c:1566
 #, c-format
 msgid "Error saving file %s"
 msgstr "Virhe tallennettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1578
+#: ../gedit/gedit-tab.c:1584
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1585
+#: ../gedit/gedit-tab.c:1591
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../gedit/gedit-tab.c:1586
+#: ../gedit/gedit-tab.c:1592
 msgid "MIME Type:"
 msgstr "MIME-tyyppi:"
 
-#: ../gedit/gedit-tab.c:1587
+#: ../gedit/gedit-tab.c:1593
 msgid "Encoding:"
 msgstr "Koodaustapa:"
 
-#: ../gedit/gedit-tab.c:2014
+#: ../gedit/gedit-tab.c:2020
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Tulkitaan sivua %d/%d..."
@@ -2098,7 +2098,7 @@ msgstr "Luo uusi asiakirja"
 msgid "_Open..."
 msgstr "_Avaa..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1086
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1105
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
@@ -2330,25 +2330,25 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Tarvittavia elementtejä ei löytynyt tiedostosta %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1314
+#: ../gedit/gedit-view.c:1333
 msgid "_Wrap Around"
 msgstr "_Rivitä"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1324
+#: ../gedit/gedit-view.c:1343
 msgid "Match _Entire Word Only"
 msgstr "Täsmää vain _kokonaisia sanoja"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1334
+#: ../gedit/gedit-view.c:1353
 msgid "_Match Case"
 msgstr "_Huomioi kirjainkoko"
 
-#: ../gedit/gedit-view.c:1422
+#: ../gedit/gedit-view.c:1441
 msgid "String you want to search for"
 msgstr "Etsittävä merkkijono"
 
-#: ../gedit/gedit-view.c:1431
+#: ../gedit/gedit-view.c:1450
 msgid "Line you want to move the cursor to"
 msgstr "Rivi, jolle haluat siirtää kursorin"
 
@@ -2373,19 +2373,19 @@ msgstr "Käytä tavallista väritystä"
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: ../gedit/gedit-window.c:985
+#: ../gedit/gedit-window.c:1004
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../gedit/gedit-window.c:1090
+#: ../gedit/gedit-window.c:1109
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: ../gedit/gedit-window.c:1097
+#: ../gedit/gedit-window.c:1116
 msgid "Open"
 msgstr "Avaa"
 
-#: ../gedit/gedit-window.c:1177 ../gedit/gedit-window.c:1748
+#: ../gedit/gedit-window.c:1205 ../gedit/gedit-window.c:1804
 #, c-format
 msgid "Activate %s"
 msgstr "Käynnistä %s"
@@ -2483,11 +2483,11 @@ msgstr "Sanoja"
 msgid "_Update"
 msgstr "_Päivitä"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:405
 msgid "_Document Statistics"
 msgstr "A_siakirjan tilastot"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:409
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
 msgid "Get statistic info on current document"
 msgstr "Katso aktiivisen asiakirjan tilastotietoja"
 
@@ -2499,84 +2499,98 @@ msgstr "Suorita ulkoisia komentoja ja skriptejä."
 msgid "External Tools"
 msgstr "Ulkoiset työkalut"
 
-#: ../plugins/externaltools/tools/functions.py:209
+#: ../plugins/externaltools/tools/functions.py:237
 msgid "You must be inside a word to run this command"
 msgstr "Kohdistimen täytyy olla sanan kohdalla jotta komento voidaan suorittaa"
 
-#: ../plugins/externaltools/tools/manager.py:41
+#: ../plugins/externaltools/tools/functions.py:293
+msgid "Running tool:"
+msgstr "Suoritetaan työkalua:"
+
+#: ../plugins/externaltools/tools/functions.py:303
+msgid "Done."
+msgstr "Valmis."
+
+#: ../plugins/externaltools/tools/functions.py:305
+msgid "Exited"
+msgstr "Päättyi"
+
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Nothing"
 msgstr "Ei mitään"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current document"
 msgstr "Nykyinen asiakirja"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current selection"
 msgstr "Nykyinen valinta"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:46
 msgid "Current line"
 msgstr "Nykyinen rivi"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:47
 msgid "Current word"
 msgstr "Nykyinen sana"
 
-#: ../plugins/externaltools/tools/manager.py:48
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Insert in output panel"
 msgstr "Lisää tulospaneeliin"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Create new document"
 msgstr "Luo uusi asiakirja"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Append to current document"
 msgstr "Lisää nykyiseen asiakirjaan"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Replace current document"
 msgstr "Korvaa nykyinen asiakirja"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:54
 msgid "Replace current selection"
 msgstr "Korvaa nykyinen valinta"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:55
 msgid "Insert at cursor position"
 msgstr "Lisää kohdistimen kohdalle"
 
-#: ../plugins/externaltools/tools/manager.py:56
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "All documents"
 msgstr "Kaikki asiakirjat"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "All documents except untitled ones"
 msgstr "Kaikki asiakirjat lukuunottamatta nimeämättömiä"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Local files only"
 msgstr "Vain paikalliset tiedostot"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:61
 msgid "Remote files only"
 msgstr "Vain etätiedostot"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:62
 msgid "Untitled documents only"
 msgstr "Vain nimeämättömä asiakirjat"
 
-#: ../plugins/externaltools/tools/manager.py:166
-msgid "A Brand New Tool"
-msgstr "Tuliterä työkalu"
-
-#: ../plugins/externaltools/tools/manager.py:179
+#: ../plugins/externaltools/tools/manager.py:175
+#: ../plugins/externaltools/tools/manager.py:192
+#: ../plugins/externaltools/tools/manager.py:231
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Muokkaa työkalua <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:185
+#: ../plugins/externaltools/tools/manager.py:179
+msgid "A Brand New Tool"
+msgstr "Tuliterä työkalu"
+
+#: ../plugins/externaltools/tools/manager.py:202
 msgid "New tool"
 msgstr "Uusi työkalu"
 
@@ -2611,7 +2625,8 @@ msgid "Run “make” in the document dir"
 msgstr "Suorita \"make\" asiakirjahakemistossa"
 
 #: ../plugins/externaltools/tools/tools.glade.h:10
-msgid "Shortcut _key:"
+#: ../plugins/snippets/snippets/snippets.glade.h:4
+msgid "_Accelerator:"
 msgstr "Pika_näppäin:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:11
@@ -2702,62 +2717,55 @@ msgstr "Lisää käyttäjänimen kohdistimen kohdalle."
 msgid "User name"
 msgstr "Käyttäjänimi"
 
+#: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:1
+msgid "Insert often used pieces of text in a fast way"
+msgstr "Lisää usein käytetettyjä tekstinpätkiä nopeasti"
+
+#: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
+msgid "Snippets"
+msgstr "Tekstinpätkien"
+
 #: ../plugins/snippets/snippets/snippets.glade.h:2
 msgid "<b>Activation</b>"
 msgstr "<b>Aktivointi</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
 msgid "Snippets Manager"
-msgstr "Koodinpätkien hallinta"
-
-#: ../plugins/snippets/snippets/snippets.glade.h:4
-msgid "_Accelerator:"
-msgstr "Pika_näppäin:"
+msgstr "Tekstinpätkien hallinta"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:5
 msgid "_Edit snippet:"
-msgstr "_Muokkaa koodinpätkää:"
+msgstr "_Muokkaa tekstinpätkää:"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:6
 msgid "_Snippets:"
-msgstr "_Koodinpätkät:"
+msgstr "_Tekstinpätkät:"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:7
 msgid "_Tab trigger:"
 msgstr "_Tab-liipaisu:"
 
-#: ../plugins/snippets/snippets/__init__.py:37
-#, python-format
-msgid ""
-"Could not load the file \"%s\". The file is probably corrupt. Please fix or "
-"remove the file. To try to load the file again, select the Tools -> Manage "
-"Snippets... menu item."
-msgstr ""
-"Tiedostoa \"%s\" ei voitu ladata. Tiedosto on luultavasti viallinen. Ole "
-"hyvä ja korjaa tai poista tiedosto. Jos haluat yrittää ladata tiedoston "
-"uudestaan, valitse Työkalut -> Koodinpätkien hallinta... "
-
-#: ../plugins/snippets/snippets/SnippetPluginInstance.py:72
-msgid "Manage _Snippets..."
-msgstr "Hallitse _koodinpätkiä..."
-
 #: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage _Snippets..."
+msgstr "Hallitse _tekstinpätkiä..."
+
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:74
 msgid "Manage snippets"
-msgstr "Hallitse koodinpätkiä"
+msgstr "Hallitse tekstinpätkiä"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:65
+#: ../plugins/snippets/snippets/SnippetsDialog.py:54
 msgid "Add a new snippet..."
-msgstr "Lisää uusi koodinpätkä..."
+msgstr "Lisää uusi tekstinpätkä..."
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:117
+#: ../plugins/snippets/snippets/SnippetsDialog.py:109
 msgid "Global"
 msgstr "Kaikkialla"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:605
+#: ../plugins/snippets/snippets/SnippetsDialog.py:562
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Syötä uusi pikanäppäin tai tyhjennä arvo Backspacella"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:607
+#: ../plugins/snippets/snippets/SnippetsDialog.py:564
 msgid "Type a new accelerator"
 msgstr "Syötä uusi pikanäppäin"
 
@@ -4732,6 +4740,18 @@ msgstr "_Kysy muotoilua"
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
 
+#~ msgid "Shortcut _key:"
+#~ msgstr "Pika_näppäin:"
+
+#~ msgid ""
+#~ "Could not load the file \"%s\". The file is probably corrupt. Please fix "
+#~ "or remove the file. To try to load the file again, select the Tools -> "
+#~ "Manage Snippets... menu item."
+#~ msgstr ""
+#~ "Tiedostoa \"%s\" ei voitu ladata. Tiedosto on luultavasti viallinen. Ole "
+#~ "hyvä ja korjaa tai poista tiedosto. Jos haluat yrittää ladata tiedoston "
+#~ "uudestaan, valitse Työkalut -> Koodinpätkien hallinta... "
+
 #~ msgid "Configure Snippets Plugin"
 #~ msgstr "Koodinpätkien liitännäisen määrittelyt"
 
@@ -4821,9 +4841,6 @@ msgstr "_Käytä mukautettua muotoilua"
 
 #~ msgid "_Run"
 #~ msgstr "_Suorita"
-
-#~ msgid "Done"
-#~ msgstr "Valmis"
 
 #~ msgid "Failed"
 #~ msgstr "Epäonnistui"
