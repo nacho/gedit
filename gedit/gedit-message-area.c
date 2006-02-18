@@ -170,8 +170,6 @@ style_set (GtkWidget *widget,
 	
 	if (message_area->priv->changing_style)
 		return;
-		
-	g_print ("style-set\n");
 	
 	tooltips = gtk_tooltips_new ();
 	g_object_ref (G_OBJECT (tooltips));

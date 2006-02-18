@@ -1779,7 +1779,6 @@ reset_searched_text (GeditView *view)
 {		
 	GeditDocument *doc;
 
-	g_print ("Reset!");		
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
 	
 	gedit_document_set_search_text (doc, "", GEDIT_SEARCH_DONT_SET_FLAGS);
