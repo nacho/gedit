@@ -44,7 +44,7 @@ class SnippetsPluginInstance:
 		# Add controllers to all the current views
 		for view in self.window.get_views():
 			if isinstance(view, gedit.View) and not self.has_controller(view):
-				view._snippet_controller = SnippetController(view)
+				view._snippet_controller = SnippetController(self, view)
 		
 		self.update()
 	

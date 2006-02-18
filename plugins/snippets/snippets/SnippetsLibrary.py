@@ -322,9 +322,13 @@ class SnippetsSystemFile:
 		self.language = None
 		self.ok = True
 		
+	def load_error(self, message):
+		sys.stderr.write("An error occurred loading " + self.path + ":\n")
+		sys.stderr.write(message + "\nSnippets in this file will not be " \
+				"available, please correct or remove the file.\n")
+
 	def _add_snippet(self, element):
-		snippet = SnippetsLibrary().add_snippet(self, element)
-		return snippet
+		self.loading_elements.append(element)
 
 	def set_language(self, element):
 		self.language = element.attrib.get('language')
@@ -338,12 +342,15 @@ class SnippetsSystemFile:
 	def _preprocess_element(self, element):
 		if not self.loaded:
 			if not element.tag == "snippets":
+				self.load_error("Root element should be `snippets' instead " \
+						"of `%s'" % element.tag)
 				return False
 			else:
 				self._set_root(element)
 				self.loaded = True
 		elif element.tag != 'snippet' and not self.insnippet:
-			snippets_debug('Element is not of type snippet: ' + element.tag)
+			self.load_error("Element should be `snippet' instead of `%s'" \
+					% element.tag)
 			return False
 		else:
 			self.insnippet = True
@@ -405,17 +412,22 @@ class SnippetsSystemFile:
 		
 		self.loaded = False
 		self.ok = False
+		self.loading_elements = []
 		
 		for element in self.parse_xml():
 			if element[1]:
 				if not self._preprocess_element(element[0]):
-					sys.stderr.write("Error while preprocessing!\n")
+					del self.loading_elements[:]
 					return
 			else:
 				if not self._process_element(element[0]):
-					sys.stderr.write("Error while post processing!\n")
+					del self.loading_elements[:]
 					return
 
+		for element in self.loading_elements:
+			snippet = SnippetsLibrary().add_snippet(self, element)
+		
+		del self.loading_elements[:]
 		self.ok = True
 
 	# This function will get the language for a file by just inspecting the

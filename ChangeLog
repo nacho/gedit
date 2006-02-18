@@ -1,3 +1,14 @@
+2006-02-18  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/snippets/snippets/SnippetsLibrary.py: give more informative
+	error messages when loading a file fails. Only add snippets once the
+	whole file loaded ok.
+	* plugins/snippets/snippets/SnippetPluginInstance.py: fix adding 
+	SnippetControllers to views in the window when activating the snippets
+	plugin
+	* po/POTFILES.in: removed plugins/snippets/snippets/__init__.py as it
+	no longer contains translatable strings
+	
 2006-02-14  Steve Frécinaux  <steve@istique.net>
 
 	* plugins/externaltools/tools/tools.glade: use "Accelerator" instead
