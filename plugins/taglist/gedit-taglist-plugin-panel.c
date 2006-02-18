@@ -431,6 +431,26 @@ selected_group_changed (GtkComboBox             *combo,
 	g_free (group_name);
 }
 
+static gboolean 
+expose_event_cb (GtkWidget      *panel,
+                 GdkEventExpose *event,
+                 gpointer        user_data)
+{
+	gedit_debug (DEBUG_PLUGINS);
+
+	/* If needed load taglists from files at the first expose */	
+	if (taglist == NULL)
+		create_taglist ();
+	
+	/* And populate combo box */
+	populate_tag_groups_combo (GEDIT_TAGLIST_PLUGIN_PANEL (panel));
+	
+	/* We need to manage only the first expose event -> disconnect */
+	g_signal_handlers_disconnect_by_func (panel, expose_event_cb, NULL);
+	
+	return FALSE;
+}
+
 static void
 gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 {	
@@ -528,11 +548,14 @@ gedit_taglist_plugin_panel_init (GeditTaglistPluginPanel *panel)
 	gtk_container_set_focus_chain (GTK_CONTAINER (panel),
 				       focus_chain);
 	g_list_free (focus_chain);
+				  
+	gtk_widget_show_all (GTK_WIDGET (sw));
+	gtk_widget_show (GTK_WIDGET (panel->priv->tag_groups_combo));
 	
-	/* Populate combo box */
-	populate_tag_groups_combo (panel);
-
-	gtk_widget_show_all (GTK_WIDGET (panel));
+	g_signal_connect (panel,
+			  "expose-event",
+			  G_CALLBACK (expose_event_cb), 
+			  NULL);
 }
 
 GtkWidget *

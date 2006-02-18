@@ -498,13 +498,13 @@ free_taglist (void)
 {
 	gedit_debug_message (DEBUG_PLUGINS, "ref_count: %d", taglist_ref_count);
 	
+	if (taglist == NULL)
+		return;
+		
 	g_return_if_fail (taglist_ref_count > 0);
 
 	--taglist_ref_count;
 	if (taglist_ref_count > 0)
-		return;
-		
-	if (taglist == NULL)
 		return;
 		
 	while (taglist->tag_groups)

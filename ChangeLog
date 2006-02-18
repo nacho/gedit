@@ -1,5 +1,22 @@
 2006-02-18  Paolo Maggi  <paolo@gnome.org>
 
+	Lazy loading of taglists (improve gedit startup time when taglist plugin
+	is active)
+	
+	* plugins/taglist/gedit-taglist-plugin-panel.c (expose_event_cb):
+	If needed load taglists from files at the first expose and populate the
+	combobox
+	(gedit_taglist_plugin_panel_init): do not show_all the panel and do
+	not populate the combox. Connect the expose-eveng signal.
+
+	* plugins/taglist/gedit-taglist-plugin-parser.c (free_taglist): return
+	immediately if taglist is NULL
+
+	* plugins/taglist/gedit-taglist-plugin.c
+	(gedit_taglist_plugin_init): does not load taglists
+
+2006-02-18  Paolo Maggi  <paolo@gnome.org>
+
 	* gedit/gedit-message-area.c (style_set): removed a debug message
 
 	* gedit/gedit-view.c (reset_searched_text): ditto

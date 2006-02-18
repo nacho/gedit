@@ -105,8 +105,6 @@ gedit_taglist_plugin_init (GeditTaglistPlugin *plugin)
 	plugin->priv = GEDIT_TAGLIST_PLUGIN_GET_PRIVATE (plugin);
 
 	gedit_debug_message (DEBUG_PLUGINS, "GeditTaglistPlugin initializing");
-	
-	create_taglist ();
 }
 
 static void
