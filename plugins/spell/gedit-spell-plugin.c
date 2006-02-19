@@ -439,8 +439,8 @@ goto_next_word (GeditDocument *doc)
 		update_current (doc, gtk_text_iter_get_offset (&current_iter));
 		return TRUE;
 	}
-	else
-		return FALSE;
+
+	return FALSE;
 }
 
 static gchar *
@@ -478,6 +478,7 @@ get_next_misspelled_word (GeditView *view)
 
 		/* may return null if we reached the end of the selection */
 		word = get_current_word (doc, &start, &end);
+		if (word == NULL)
 			return NULL;
 
 		gedit_debug_message (DEBUG_PLUGINS, "Word to check: %s", word);
@@ -601,8 +602,6 @@ change_all_cb (GeditSpellCheckerDialog *dlg,
 	CheckRange *range;
 	gchar *w = NULL;
 	GtkTextIter start, end;
-	gchar *last_searched_text;
-	gchar *last_replaced_text;
 	gint flags = 0;
 
 	gedit_debug (DEBUG_PLUGINS);
@@ -634,33 +633,14 @@ change_all_cb (GeditSpellCheckerDialog *dlg,
 
 	g_free (w);
 
-// FIXME: save and restore search history
-//	last_searched_text = gedit_document_get_last_searched_text (doc);
-//	last_replaced_text = gedit_document_get_last_replace_text (doc);
-       	
 	GEDIT_SEARCH_SET_CASE_SENSITIVE (flags, TRUE);
 	GEDIT_SEARCH_SET_ENTIRE_WORD (flags, TRUE);
 
-//CHECK: we still have to decide about this function (see gedit-document)
-//beside currently the function does escaping etc
+	/* CHECK: currently this function does escaping etc */
 	gedit_document_replace_all (doc, word, change, flags);
 
 	update_current (doc, range->mw_start + g_utf8_strlen (change, -1));
-/*
-	if (last_searched_text != NULL)
-	{
-		gedit_document_set_last_searched_text (doc, last_searched_text);
 
-		g_free (last_searched_text);
-	}
-
-	if (last_replaced_text != NULL)
-	{
-		gedit_document_set_last_replace_text (doc, last_replaced_text);
-
-		g_free (last_replaced_text);
-	}
-*/
 	/* go to next misspelled word */
 	ignore_cb (dlg, word, view);
 }
