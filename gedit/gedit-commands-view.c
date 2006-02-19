@@ -89,12 +89,12 @@ gedit_cmd_view_show_side_pane (GtkAction   *action,
 
 	if (visible)
 	{
-		gtk_widget_show (panel);
-		gtk_widget_grab_focus (panel);
+		gtk_widget_show (GTK_WIDGET (panel));
+		gtk_widget_grab_focus (GTK_WIDGET (panel));
 	}
 	else
 	{
-		gtk_widget_hide (panel);
+		gtk_widget_hide (GTK_WIDGET (panel));
 	}
 }
 
@@ -113,11 +113,11 @@ gedit_cmd_view_show_bottom_panel (GtkAction   *action,
 
 	if (visible)
 	{
-		gtk_widget_show (panel);
-		gtk_widget_grab_focus (panel);
+		gtk_widget_show (GTK_WIDGET (panel));
+		gtk_widget_grab_focus (GTK_WIDGET (panel));
 	}
 	else
 	{
-		gtk_widget_hide (panel);
+		gtk_widget_hide (GTK_WIDGET (panel));
 	}
 }

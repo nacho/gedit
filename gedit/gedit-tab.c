@@ -1444,12 +1444,10 @@ _gedit_tab_new_from_uri (const gchar         *uri,
 {
 	GeditTab *tab;
 
-	gboolean ret;
-	
 	g_return_val_if_fail (uri != NULL, NULL);
-	
+
 	tab = GEDIT_TAB (_gedit_tab_new ());
-		
+
 	_gedit_tab_load (tab,
 			 uri,
 			 encoding,
@@ -1771,17 +1769,17 @@ _gedit_tab_load (GeditTab            *tab,
 {
 	GeditDocument *doc;
 
-	g_return_val_if_fail (GEDIT_IS_TAB (tab), FALSE);
-	g_return_val_if_fail (tab->priv->state == GEDIT_TAB_STATE_NORMAL, FALSE);
+	g_return_if_fail (GEDIT_IS_TAB (tab));
+	g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_NORMAL);
 
 	doc = gedit_tab_get_document (tab);
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_LOADING);
 
 	tab->priv->tmp_line_pos = line_pos;
 	tab->priv->tmp_encoding = encoding;
-	
+
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
 

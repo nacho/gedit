@@ -104,7 +104,6 @@ load_file_list (GeditWindow         *window,
 		    (gedit_tab_get_state (tab) == GEDIT_TAB_STATE_NORMAL))
 		{
 			const gchar *uri;
-			gboolean     ret;
 
 			uri = (const gchar *)uris->data;
 
