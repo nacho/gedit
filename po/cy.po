@@ -1,7 +1,7 @@
 # gedit yn Gymraeg (in Welsh).
 # This file is distributed under the same license as the gedit package.
 # Dafydd Harries <daf@muse.19inch.net>, 2003, 2004.
-# Rhys Jones <rhys@sucs.org>, 2004, 2005.
+# Rhys Jones <rhys@sucs.org>, 2004-2006.
 # Chris Jackson <chriscf@gmail.com>, 2005.
 #
 # Nodiadau:
@@ -9,7 +9,7 @@
 # defnyddiwyd "adfer" (yn hytrach na "dychwelyd") ar gyfer "revert"
 # isafswm neu leiafswm (minimum), nid lleiafrif (minority)
 # sa i'n meddwl isafrif chwaith
-# uchafswm neu fwyafswm (maxiumum), nid mwyafrif (majority)
+# uchafswm neu fwyafswm (maximum), nid mwyafrif (majority)
 # sa i'n meddwl uchafrif chwaith
 # angen ymchwilio hyn
 #
@@ -21,45 +21,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 17:36+0200\n"
-"PO-Revision-Date: 2005-09-05 18:45+0100\n"
-"Last-Translator: Chris Jackson <chriscf@gmail.com>\n"
+"POT-Creation-Date: 2006-02-19 19:09+0000\n"
+"PO-Revision-Date: 2006-02-19 18:36-0000\n"
+"Last-Translator: Rhys Jones <rhys@sucs.org>\n"
 "Language-Team: Cymraeg <gnome-cy@pengwyn.linux.org.uk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1)?1:(n==2)?2:(n==8||n==11)?3:0;\n"
 
-#: ../data/GNOME_Gedit.server.in.in.h:1
-msgid "Gedit View"
-msgstr "Golwg Gedit"
-
-#: ../data/GNOME_Gedit.server.in.in.h:2
-msgid "Gedit View."
-msgstr "Golwg Gedit."
-
-#: ../data/GNOME_Gedit.server.in.in.h:3
-msgid "Gedit viewer factory"
-msgstr "ffatri golwg Gedit"
-
-#: ../data/GNOME_Gedit.server.in.in.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
-msgid "Source"
-msgstr "Ffynhonnell"
-
-#: ../data/GNOME_Gedit.server.in.in.h:5
-msgid "gedit application"
-msgstr "rhaglen gedit"
-
-#: ../data/GNOME_Gedit.server.in.in.h:6
-msgid "gedit automation factory"
-msgstr "ffatri awtomeiddio gedit"
-
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Golygu ffeiliau testun"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit2.c:365
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
 msgid "Text Editor"
 msgstr "Golygydd Testun"
 
@@ -123,30 +98,38 @@ msgid "Body Font for Printing"
 msgstr "Ffont y Corff ar gyfer Argraffu"
 
 #: ../data/gedit.schemas.in.h:12
+msgid "Bottom Panel is Visible"
+msgstr "Panel Gwaelod yn Weladwy"
+
+#: ../data/gedit.schemas.in.h:13
 msgid "Create Backup Copies"
 msgstr "Creu Copïau Wrth Gefn"
 
-#: ../data/gedit.schemas.in.h:13
+#: ../data/gedit.schemas.in.h:14
 msgid "Display Line Numbers"
 msgstr "Dangos Rhifau Llinell"
 
-#: ../data/gedit.schemas.in.h:14
+#: ../data/gedit.schemas.in.h:15
 msgid "Display Right Margin"
 msgstr "Dangos Ymyl Dde"
 
-#: ../data/gedit.schemas.in.h:15
+#: ../data/gedit.schemas.in.h:16
 msgid "Editor Font"
 msgstr "Ffont Golygydd"
 
-#: ../data/gedit.schemas.in.h:16
+#: ../data/gedit.schemas.in.h:17
+msgid "Enable Search Highlighting"
+msgstr "Galluogi Amlygiad Chwiliad"
+
+#: ../data/gedit.schemas.in.h:18
 msgid "Enable Syntax Highlighting"
 msgstr "Galluogi Amlygiad Cystrawen"
 
-#: ../data/gedit.schemas.in.h:17
+#: ../data/gedit.schemas.in.h:19
 msgid "Encodings shown in menu"
 msgstr "Amgodiad a ddangosir yn y ddewislen"
 
-#: ../data/gedit.schemas.in.h:18
+#: ../data/gedit.schemas.in.h:20
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -155,7 +138,7 @@ msgstr ""
 "Dim ond os caiff yr opsiwn \"Creu Copïau Wrth Gefn\" ei alluogi y defnyddir "
 "yr estyniad."
 
-#: ../data/gedit.schemas.in.h:19
+#: ../data/gedit.schemas.in.h:21
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -164,7 +147,7 @@ msgstr ""
 "caiff yr opsiwn \"Defnyddio Lliwiau Rhagosodedig\" ei ddiffodd y defnyddir y "
 "lliw hwn."
 
-#: ../data/gedit.schemas.in.h:20
+#: ../data/gedit.schemas.in.h:22
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -173,19 +156,19 @@ msgstr ""
 "caiff yr opsiwn \"Defnyddio Lliwiau Rhagosodedig\" ei ddiffodd y defnyddir y "
 "lliw hwn."
 
-#: ../data/gedit.schemas.in.h:21
+#: ../data/gedit.schemas.in.h:23
 msgid "Header Font for Printing"
 msgstr "Ffont Bennawd ar gyfer Argraffu"
 
-#: ../data/gedit.schemas.in.h:22
+#: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
 msgstr "Amlygu'r Llinell Bresennol"
 
-#: ../data/gedit.schemas.in.h:23
+#: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
-msgstr "Amlygu'r Gromfach sy'n Cyd-Fynd"
+msgstr "Amlygu'r Gromfach sy'n Cyd-fynd"
 
-#: ../data/gedit.schemas.in.h:24
+#: ../data/gedit.schemas.in.h:26
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -194,19 +177,27 @@ msgstr ""
 "Os mai 0 yw'r gwerth yma, ni fewnosodir rhifau llinell wrth argraffu dogfen. "
 "Fel arall, fe fydd gedit yn argraffu rhifau llinell bob hyn o linellau."
 
-#: ../data/gedit.schemas.in.h:25
+#: ../data/gedit.schemas.in.h:27
 msgid "Insert spaces"
 msgstr "Mewnosod bylchau"
 
-#: ../data/gedit.schemas.in.h:26
+#: ../data/gedit.schemas.in.h:28
 msgid "Line Number Font for Printing"
 msgstr "Ffont Rhifau Llinell ar gyfer Argraffu"
 
-#: ../data/gedit.schemas.in.h:27
+#: ../data/gedit.schemas.in.h:29
 msgid "Line Wrapping Mode"
 msgstr "Modd Amlapio Llinellau"
 
-#: ../data/gedit.schemas.in.h:28
+#: ../data/gedit.schemas.in.h:30
+msgid ""
+"List of VFS schemes gedit supports in write mode. The 'file' scheme is "
+"writable by default."
+msgstr ""
+"Rhestr o gynlluniau VFS mae gedit yn eu cynnal yn y modd ysgrifennu. Fel "
+"rhagosodiad, gellir ysgrifennu at y cynllun 'file'."
+
+#: ../data/gedit.schemas.in.h:31
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
@@ -215,7 +206,7 @@ msgstr ""
 "gweithredol. Gweler y ffeil .gedit-plugin er mwyn cael \"Lleoliad\" ategyn "
 "arbennig."
 
-#: ../data/gedit.schemas.in.h:29
+#: ../data/gedit.schemas.in.h:32
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
@@ -223,15 +214,15 @@ msgstr ""
 "Rhestr o amgodiadau a ddangosir yn y ddewislen Amgodiad Nodau yn y dewiswr "
 "ffeiliau agor/cadw. Dim ond amgodiadau a adnabyddir a gaiff eu defnyddio."
 
-#: ../data/gedit.schemas.in.h:30
+#: ../data/gedit.schemas.in.h:33
 msgid "Max Number of Undo Actions"
 msgstr "Uchafswm Gweithredoedd i'w Dadwneud"
 
-#: ../data/gedit.schemas.in.h:31
+#: ../data/gedit.schemas.in.h:34
 msgid "Maximum Recent Files"
 msgstr "Uchafswm Ffeiliau Diweddar"
 
-#: ../data/gedit.schemas.in.h:32
+#: ../data/gedit.schemas.in.h:35
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions."
@@ -239,7 +230,7 @@ msgstr ""
 "Y nifer mwyaf o weithredoedd y bydd gedit yn gallu dadwneud neu ail-wneud. "
 "Defnyddiwch \"-1\" am nifer diderfyn."
 
-#: ../data/gedit.schemas.in.h:33
+#: ../data/gedit.schemas.in.h:36
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions. Deprecated since 2.12.0"
@@ -249,24 +240,24 @@ msgstr ""
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:36
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 12"
 msgstr "Monospace 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:39
+#: ../data/gedit.schemas.in.h:42
 msgid "Monospace 9"
 msgstr "Monospace 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:46
 msgid "Monospace Regular 9"
 msgstr "Monospace Regular 9"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:47
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -275,61 +266,69 @@ msgstr ""
 "awtomatig. Fe fydd hyn ond yn cymryd effaith os galluogir yr opsiwn \"Cadw'n "
 "Awtomatig\"."
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:48
 msgid "Print Header"
 msgstr "Pennawd Argraffydd"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:49
 msgid "Print Line Numbers"
 msgstr "Argraffu Rhifau Llinell"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:50
 msgid "Print Syntax Highlighting"
 msgstr "Argraffu Amlygiad Cystrawen"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:51
 msgid "Printing Line Wrapping Mode"
 msgstr "Modd Amlapio Llinellau Argraffu"
 
-#: ../data/gedit.schemas.in.h:49
+#: ../data/gedit.schemas.in.h:52
+msgid "Restore Previous Cursor Position"
+msgstr "Adfer Lleoliad Blaenorol y Cyrchwr"
+
+#: ../data/gedit.schemas.in.h:53
 msgid "Right Margin Position"
 msgstr "Safle'r Ymyl Dde"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:52
+#: ../data/gedit.schemas.in.h:56
 msgid "Sans 11"
 msgstr "Sans 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:55
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans 8"
 msgstr "Sans 8"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:59
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 11"
 msgstr "Sans Regular 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:67
 msgid "Sans Regular 8"
 msgstr "Sans Regular 8"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:68
 msgid "Selected Text Color"
 msgstr "Lliw Testun a Ddewiswyd"
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:69
 msgid "Selection Color"
 msgstr "Lliw'r Dewis"
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:70
+msgid "Side Pane is Visible"
+msgstr "Cwarel Ochr yn Weladwy"
+
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
@@ -339,7 +338,7 @@ msgstr ""
 "amgodiad ffeil yn awtomatig. \"CURRENT\" yw'r amgodiad locale cyfredol. Dim "
 "ond amgodiadau cydnabyddedig a gaiff eu defnyddio."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -353,7 +352,7 @@ msgstr ""
 "unigol. Nodwch fod priflythrennau a llythrennau bach yn cael eu trin yn "
 "wahanol, felly sicrhewch eu bod nhw'n ymddangos yn union fel y maent yma."
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -367,12 +366,12 @@ msgstr ""
 "unigol. Nodwch fod priflythrennau a llythrennau bach yn cael eu trin yn "
 "wahanol, felly sicrhewch eu bod nhw'n ymddangos yn union fel y maent yma."
 
-#: ../data/gedit.schemas.in.h:69
+#: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "Penodi'r ffont i'w ddefnyddio ar gyfer corff dogfennau wrth argraffu."
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
@@ -380,7 +379,7 @@ msgstr ""
 "Penodi'r ffont i'w ddefnyddio ar gyfer corff dogfennau wrth argraffu. Enw "
 "ffont gnome-print yw hwn, ac fe gaiff print_font_body_pango ei roi yn ei le."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -389,7 +388,7 @@ msgstr ""
 "dogfennau. Mae hyn ond yn berthnasol os nad yw'r opsiwn \"Argraffu Rhifau "
 "Llinellau\" yn sero."
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -400,7 +399,7 @@ msgstr ""
 "Llinellau\" yn sero. Enw ffont gnome-print yw hwn, ac fe gaiff "
 "print_font_numbers_pango ei roi yn ei le."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -409,7 +408,7 @@ msgstr ""
 "dogfen. Mae hyn ond yn berthnasol os yw'r opsiwn \"Argraffu Pennawd\" wedi "
 "ei ddewis."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
@@ -420,29 +419,29 @@ msgstr ""
 "ei ddewis. Enw ffont gnome-print yw hwn, ac fe gaiff print_font_header_pango "
 "ei roi yn ei le."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
-"Penodi'r uchafrif o ffeiliau agorwyd yn ddiweddar a gaiff eu dangos yn yr "
-"isddewislen \"Ffeiliau Diweddar\"."
+"Penodi'r uchafrif o ffeiliau agorwyd yn ddiweddar a gaiff eu dangos yn yr is-"
+"ddewislen \"Ffeiliau Diweddar\"."
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:81
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "Penodi sawl bwlch dylid dangos yn lle nodau tab."
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:82
 msgid "Specifies the position of the right margin."
 msgstr "Penodi safle'r ymyl dde."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:83
 msgid "Status Bar is Visible"
 msgstr "Bar Statws yn Weladwy"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -459,35 +458,35 @@ msgstr ""
 "eiconau. Nodwch fod priflythrennau a llythrennau bach yn cael eu trin yn "
 "wahanol, felly sicrhewch eu bod nhw'n ymddangos yn union fel y maent yma."
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:85
 msgid "Tab Size"
 msgstr "Maint Tabl"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:86
 msgid "Text Color"
 msgstr "Lliw Testun"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:87
 msgid "Toolbar Buttons Style"
 msgstr "Arddull Botymau Bar Offer"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:88
 msgid "Toolbar is Visible"
 msgstr "Mae'r Bar Offer yn Weladwy"
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:89
 msgid "Undo Actions Limit (DEPRECATED)"
-msgstr "Cyfwng Datwneud Gweithredau (ANGHYMERADWY)"
+msgstr "Cyfwng Dadwneud Gweithrediadau (ANGHYMERADWY)"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:90
 msgid "Use Default Colors"
 msgstr "Defnyddio Lliwiau Rhagosodedig"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:91
 msgid "Use Default Font"
 msgstr "Defnyddio Ffont Rhagosodedig"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:92
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -496,7 +495,7 @@ msgstr ""
 "A ddylai gedit gadw ffeiliau a newidiwyd ar ôl ysbaid. Fe allwch osod yr "
 "ysbaid gyda'r opsiwn \"Ysbaid Cadw Awtomatig\"."
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:93
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -504,52 +503,77 @@ msgstr ""
 "A ddylai gedit greu copïau wrth gefn ar gyfer y ffeiliau mae'n cadw. Gallwch "
 "osod yr estyniad copi wrth gefn gyda'r opsiwn \"Estyniad Copi Wrth Gefn\"."
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "A ddylai gedit ddangos rhifau llinellau yn yr ardal golygu."
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "A ddylai gedit ddangos yr ymyl de yn yr ardal golygu."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should enable auto indentation."
 msgstr "A ddylai gedit alluogi mewnoli awtomatig."
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "A ddylai gedit alluogi amlygu cystrawen."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:98
+msgid ""
+"Whether gedit should highlight all the occurrences of the searched text."
+msgstr ""
+"A ddylai gedit amlygu bob man mae'r testun chwiliwyd amdano yn ymddangos."
+
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
 msgstr "A ddylai gedit amlygu'r gromfach sy'n cyd-fynd."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should highlight the current line."
 msgstr "A ddylai gedit amlygu'r llinell bresennol."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "A ddylai gedit gynnwys pennawd dogfen wrth argraffu dogfennau."
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:102
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "A ddylai gedit fewnosod bylchau yn lle tabiau."
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:103
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "A ddylai gedit argraffu amlygiadau cystrawen wrth argraffu dogfennau."
 
-#: ../data/gedit.schemas.in.h:98
+#: ../data/gedit.schemas.in.h:104
+msgid ""
+"Whether gedit should restore the previous cursor position when a file is "
+"loaded."
+msgstr ""
+"A ddylai gedit adfer lleoliad blaenorol y cyrchwr pan fo ffeil wedi'i "
+"llwytho."
+
+#: ../data/gedit.schemas.in.h:105
+msgid ""
+"Whether the bottom panel at the bottom of editing windows should be visible."
+msgstr "A ddylai'r panel gwaelod ar waelod ffenestri golygu fod yn weladwy."
+
+#: ../data/gedit.schemas.in.h:106
+msgid ""
+"Whether the side pane at the left of the editing window should be visible."
+msgstr ""
+"A ddylai'r panel ochr afr ochr chwith y ffenestr golygu fod yn weladwy."
+
+#: ../data/gedit.schemas.in.h:107
 msgid ""
 "Whether the status bar at the bottom of editing windows should be visible."
 msgstr "A ddylai'r bar statws ar waelod ffenestri golygu fod yn weladwy."
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:108
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "A ddylai'r bar offer for yn weladwy mewn ffenestri golygu."
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:109
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -561,7 +585,7 @@ msgstr ""
 "benodwyd yn yr opsiynau \"Lliw Cefndir\", \"Lliw Testun\", \"Lliw Testun "
 "Wedi ei Ddewis\" a \"Lliw Dewis\"."
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:110
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -571,33 +595,40 @@ msgstr ""
 "ffont yn benodol i gedit. Os troir yr opsiwn yma bant, yna fe gaiff y ffont "
 "a enwir yn yr opsiwn \"Font Golygydd\" ei ddefnyddio yn lle ffont y system."
 
+#: ../data/gedit.schemas.in.h:111
+msgid "Writable VFS schemes"
+msgstr "Cynlluniau ysgrifenadwy VFS"
+
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:114
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:118
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-14,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
-#, c-format
-msgid "Activate %s"
-msgstr "Gweithredu %s"
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:136
+msgid "Logout _without Saving"
+msgstr "Allgofnodi _heb Gadw"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:142
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
+msgid "_Cancel Logout"
+msgstr "_Diddymu'r Allgofnodi"
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:147
 msgid "Close _without Saving"
 msgstr "Cau _heb Gadw"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:180
 msgid "Question"
 msgstr "Cwestiwn"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:367
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:386
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
@@ -613,12 +644,12 @@ msgstr[2] ""
 msgstr[3] ""
 "Os na wnewch chi gadw, fe gollir am byth newidiadau'r %ld eiliad olaf."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:376
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr "Os na wnewch chi gadw, fe gollir am byth newidiadau'r munud diwethaf."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:382
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:401
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -639,7 +670,7 @@ msgstr[3] ""
 "Os na wnewch chi gadw, fe gollir am byth newidiadau'r funud ac %ld eiliad "
 "olaf."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:392
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
@@ -655,8 +686,8 @@ msgstr[2] ""
 msgstr[3] ""
 "Os na wnewch chi gadw, fe gollir am byth newidiadau'r %ld munud olaf."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:447
 #, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
@@ -666,7 +697,7 @@ msgstr[1] "Os na wnewch chi gadw, fe gollir am byth newidiadau'r %d awr olaf."
 msgstr[2] "Os na wnewch chi gadw, fe gollir am byth newidiadau'r %d awr olaf."
 msgstr[3] "Os na wnewch chi gadw, fe gollir am byth newidiadau'r %d awr olaf."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:413
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:432
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -683,12 +714,12 @@ msgstr[2] ""
 msgstr[3] ""
 "Os na wnewch chi gadw, fe gollir am byth newidiadau'r awr a'r %d munud olaf."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:491
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Cadw'r newidiadau i'r ddogfen \"%s\" cyn cau?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:645
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:663
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -698,131 +729,146 @@ msgstr[1] "Mae %d dogfen gyda newidiadau heb gadw. Cadw'r newidiadau cyn cau?"
 msgstr[2] "Mae %d ddogfen gyda newidiadau heb gadw. Cadw'r newidiadau cyn cau?"
 msgstr[3] "Mae %d dogfen gyda newidiadau heb gadw. Cadw'r newidiadau cyn cau?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:662
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
 msgid "S_elect the documents you want to save:"
 msgstr "_Dewiswch y dogfennau hoffech eu cadw:"
 
 #. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:679
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:697
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Os na wnewch chi gadw, fe gollir eich holl newidiadau am byth."
 
-#: ../gedit/dialogs/gedit-dialog-goto-line.c:184
-msgid "Go to Line"
-msgstr "Mynd i Linell"
+#: ../gedit/dialogs/gedit-encodings-dialog.c:315
+msgid "Character Codings"
+msgstr "Amgodiadau Nodau"
 
-#: ../gedit/dialogs/gedit-dialog-goto-line.c:197
-msgid "_Go to Line"
-msgstr "_Mynd i Linell"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:136
-#: ../gedit/dialogs/gedit-dialog-replace.c:1140 ../gedit/gedit-commands.c:383
-#, c-format
-msgid "The text \"%s\" was not found."
-msgstr "Ni ganfodwyd y testun \"%s\"."
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:269
-#: ../gedit/dialogs/replace.glade2.h:4 ../gedit/gedit-ui.xml.h:46
-msgid "Replace"
-msgstr "Amnewid"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:282
-msgid "Replace _All"
-msgstr "Amnewid _Popeth"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
-msgid "_Replace"
-msgstr "_Amnewid"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:402 ../gedit/gedit-ui.xml.h:17
-msgid "Find"
-msgstr "Chwilio"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:1149
-#, c-format
-msgid "Found and replaced %d occurrence."
-msgid_plural "Found and replaced %d occurrences."
-msgstr[0] "Canfodwyd ac amnewidiwyd %d achlysur."
-msgstr[1] "Canfodwyd ac amnewidiwyd %d achlysur."
-msgstr[2] "Canfodwyd ac amnewidiwyd %d achlysur."
-msgstr[3] "Canfodwyd ac amnewidiwyd %d achlysur."
-
-#: ../gedit/dialogs/gedit-dialog-uri.c:91
-msgid "Open Location"
-msgstr "Lleoliad Agor"
-
-#: ../gedit/dialogs/gedit-encodings-dialog.c:72
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "Roedd gwall wrth ddangos cymorth: %s"
-
-#: ../gedit/dialogs/gedit-encodings-dialog.c:355
-#: ../gedit/dialogs/gedit-encodings-dialog.c:423
+#: ../gedit/dialogs/gedit-encodings-dialog.c:365
+#: ../gedit/dialogs/gedit-encodings-dialog.c:426
 msgid "_Description"
 msgstr "_Disgrifiad"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:364
-#: ../gedit/dialogs/gedit-encodings-dialog.c:432
+#: ../gedit/dialogs/gedit-encodings-dialog.c:374
+#: ../gedit/dialogs/gedit-encodings-dialog.c:435
 msgid "_Encoding"
 msgstr "_Amgodiad"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:1
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:1
 msgid "A_vailable encodings:"
 msgstr "Amgodiadau ar _gael:"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:2
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:2
 msgid "Character codings"
 msgstr "Amgodiadau nodau"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:3
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:3
 msgid "E_ncodings shown in menu:"
 msgstr "_Amgodiadau a ddangosir yn y ddewislen:"
 
-#: ../gedit/dialogs/gedit-plugin-manager.c:55
-msgid "Plugin"
-msgstr "Ategyn"
+#: ../gedit/dialogs/gedit-open-location-dialog.c:135
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
+msgid "Open Location"
+msgstr "Lleoliad Agor"
 
-#: ../gedit/dialogs/gedit-plugin-manager.c:56
-msgid "Enabled"
-msgstr "Galluog"
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:1
+msgid "Ch_aracter coding:"
+msgstr "Amgodiad _nodau:"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:86
-#: ../gedit/dialogs/program-location-dialog.glade2.h:2
-msgid "Set program location..."
-msgstr "Gosod lleoliad y rhaglen..."
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:2
+msgid "Enter the _location (URI) of the file you would like to open:"
+msgstr "Gosodwch _lleoliad (URI) y ffeil hoffwch ei agor:"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:116
-#, c-format
-msgid ""
-"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
-"task.\n"
-"\n"
-"Please, specify the location of the <tt>%s</tt> program."
-msgstr ""
-"Mae'r ategyn %s yn defnyddio rhaglen allanol, o'r enw <tt>%s</tt> er mwyn "
-"cyflawni ei dasg.\n"
-"\n"
-"Os gwelwch yn dda, penodwch leoliad y rhaglen <tt>%s</tt>."
+#: ../gedit/dialogs/gedit-page-setup-dialog.c:527
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
+msgid "Page Setup"
+msgstr "Cyfluniad Tudalen"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:169
-msgid "The selected file is not executable."
-msgstr "Nid yw'r ffeil a ddewiswyd yn weithredadwy."
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:649
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
+msgid "<b>Line Numbers</b>"
+msgstr "<b>Rhifau Llinellau</b>"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>Amlapio Testun</b>"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
+msgid "Do not _split words over two lines"
+msgstr "Peidio _hollti geiriau dros ddwy linell"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
+msgid "Enable text _wrapping"
+msgstr "Galluogi am_lapio testun"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
+msgid "Fonts"
+msgstr "Ffontiau"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:7
+msgid "General"
+msgstr "Cyffredinol"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:8
+msgid "He_aders and footers:"
+msgstr "_Penawdau a Throedynnau:"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
+msgid "Print _line numbers"
+msgstr "Argraffu _rhifau llinellau"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
+msgid "Print s_yntax highlighting"
+msgstr "Argraffu amlygu _cystrawen"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
+msgid "_Body:"
+msgstr "_Corff:"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:13
+msgid "_Line numbers:"
+msgstr "_Rhifau llinellau:"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:14
+msgid "_Number every"
+msgstr "_Rhif bob"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
+msgid "_Print page headers"
+msgstr "_Argraffu penawdau tudalennau"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:16
+msgid "_Restore Default Fonts"
+msgstr "_Adfer Ffontiau Rhagosodedig"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:17
+msgid "lines"
+msgstr "llinellau"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to select the font to be used by the editor"
 msgstr ""
 "Gwasgwch y botwm hwn er mwyn dewis y ffont i'w ddefnyddio gan y golygydd"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:651
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure text color"
 msgstr "Gwasgwch y botwm hwn er mwyn cyflunio lliw testun"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:653
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid "Push this button to configure background color"
 msgstr "Gwasgwch y botwm hwn er mwyn cyflunio lliw cefndir"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:655
+#: ../gedit/dialogs/gedit-preferences-dialog.c:657
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
@@ -830,7 +876,7 @@ msgstr ""
 "Gwasgwch y botwm hwn er mwyn cyflunio'r lliw dylai'r testun a ddewiswyd "
 "ymddangos ynddi"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:658
+#: ../gedit/dialogs/gedit-preferences-dialog.c:660
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
@@ -838,645 +884,337 @@ msgstr ""
 "Gwasgwch y botwm hwn er mwyn cyflunio'r lliw dylai'r testun a ddewiswyd cael "
 "ei farcio ynddi"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1161
 msgid "Elements"
 msgstr "Elfennau"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:1
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
-msgid "    "
-msgstr "    "
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1273
+msgid "gedit Preferences"
+msgstr "Hoffterau gedit"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>Mewnoli Awtomatig</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:3
 msgid "<b>Bracket Matching</b>"
 msgstr "<b>Paru Bracedi</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:4
 msgid "<b>Current Line</b>"
 msgstr "<b>Llinell Bresennol</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:5
 msgid "<b>Elements</b>"
 msgstr "<b>Elfennau</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:6
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
 msgid "<b>File Saving</b>"
 msgstr "<b>Cadw Ffeiliau</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:7
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
 msgid "<b>Font</b>"
 msgstr "<b>Ffont</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:8
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:2
-msgid "<b>Line Numbers</b>"
-msgstr "<b>Rhifau Llinellau</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:9
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
 msgid "<b>Right Margin</b>"
 msgstr "<b>Ymyl De</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:10
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
 msgid "<b>Tab Stops</b>"
 msgstr "<b>Tabiau</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:11
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:3
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>Amlapio Testun</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:12
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Lliwiau</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "Trwm"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "Creu copi wrth _gefn o ffeiliau cyn cadw"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Display right _margin"
 msgstr "_Dangos ymyl de"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:4
-msgid "Do not _split words over two lines"
-msgstr "Peidio _hollti geiriau dros ddwy linell"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
 msgid "Editor"
 msgstr "Golygydd"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
 msgid "Editor _font: "
 msgstr "_Ffont golygydd: "
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:5
-msgid "Enable text _wrapping"
-msgstr "Galluogi am_lapio testun"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Font & Colors"
 msgstr "Ffont a Lliwiau"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
 msgid "Hi_ghlight current line"
 msgstr "_Amlygu'r llinell bresennol"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
 msgid "Highlight _mode:"
 msgstr "_Modd amlygu:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
 msgid "Highlight matching _bracket"
 msgstr "Amlygu'r _gromfach sy'n cyd-fynd"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "Mewnosod _bylchau yn lle tabiau"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
 msgid "Italic"
 msgstr "Italig"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
 msgid "Normal _text color:"
 msgstr "Lliw _testun arferol:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "Pick a color"
 msgstr "Dewiswch liw"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "Pick the background color"
 msgstr "Dewiswch liw'r cefndir"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "Pick the editor font"
 msgstr "Dewis ffont y golygydd"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "Pick the normal text color"
 msgstr "Dewiswch liw testun arferol"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "Pick the selected text color"
 msgstr "Dewis lliw testun wedi ei ddewis"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "Pick the selection color"
 msgstr "Dewis lliw'r dewis"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:33
 msgid "Plugins"
 msgstr "Ategynnau"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:34
 msgid "Preferences"
 msgstr "Hoffterau"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:35
 msgid "Se_lection color:"
 msgstr "Lliw _dewis:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:36
 msgid "Selecte_d text color:"
 msgstr "Lliw _testun wedi ei ddewis:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:37
 msgid "Strikethrough"
 msgstr "Taro drwodd"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:38
 msgid "Syntax Highlighting"
 msgstr "Amlygiad Cystrawen"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:39
 msgid "U_se default theme colors"
 msgstr "Defnyddio _lliwiau rhagosodedig y thema"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:40
 msgid "Underline"
 msgstr "Tanlinellu"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:41
 msgid "View"
 msgstr "Golwg"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:42
 msgid "_Autosave files every"
 msgstr "Cadw ffeiliau yn _awtomatig bob"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:43
 msgid "_Background color:"
 msgstr "Lliw _cefndir:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:44
 msgid "_Background:"
 msgstr "Lliw _cefndir:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:45
 msgid "_Display line numbers"
 msgstr "_Dangos rhifau llinellau"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:46
 msgid "_Enable automatic indentation"
 msgstr "Galluogi mewnoliad _awtomatig"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:47
 msgid "_Enable syntax highlighting"
 msgstr "_Galluogi amlygu cystrawen"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:48
 msgid "_Foreground:"
 msgstr "_Blaendir:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:49
 msgid "_Reset to Default "
 msgstr "_Ailosod i'r Rhagosodiad "
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:50
 msgid "_Right margin at column:"
 msgstr "_Ymyl dde wrth golofn:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:51
 msgid "_Tab width:"
 msgstr "Lled _tab:"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
 msgid "_Use default theme font"
 msgstr "Defnyddio _ffont rhagosodedig y thema"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:53
 msgid "_minutes"
 msgstr "_munudau"
 
-#: ../gedit/dialogs/goto-line.glade2.h:1
-msgid "Goto Line"
-msgstr "Mynd i Linell"
+#: ../gedit/dialogs/gedit-search-dialog.c:234
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1008
+msgid "Replace"
+msgstr "Amnewid"
 
-#: ../gedit/dialogs/goto-line.glade2.h:2
-msgid "_Line number:"
-msgstr "_Rhif Linell:"
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1006
+msgid "Find"
+msgstr "Chwilio"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:6
-msgid "Fonts"
-msgstr "Ffontiau"
+#: ../gedit/dialogs/gedit-search-dialog.c:298
+msgid "Replace _All"
+msgstr "Amnewid _Popeth"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:7
-msgid "General"
-msgstr "Cyffredinol"
+#: ../gedit/dialogs/gedit-search-dialog.c:299
+#: ../gedit/gedit-commands-file.c:560
+msgid "_Replace"
+msgstr "_Amnewid"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:8
-msgid "He_aders and footers:"
-msgstr "_Pennawdau a Throedynnau:"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:9
-msgid "Page Setup"
-msgstr "Cyfluniad Tudalen"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:10
-msgid "Print _line numbers"
-msgstr "Argraffu _rhifau llinellau"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:11
-msgid "Print s_yntax highlighting"
-msgstr "Argraffu amlygu _cystrawen"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:12
-msgid "_Body:"
-msgstr "_Corff:"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:13
-msgid "_Line numbers:"
-msgstr "_Rhifau llinellau:"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:14
-msgid "_Number every"
-msgstr "_Rhif bob"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:15
-msgid "_Print page headers"
-msgstr "_Argraffu penawdau tudalennau"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:16
-msgid "_Restore Default Fonts"
-msgstr "_Adfer Ffontiau Rhagosodedig"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:17
-msgid "lines"
-msgstr "llinellau"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:1
-msgid "C_onfigure Plugin"
-msgstr "_Cyflunio'r Ategyn"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:2
-msgid "_About Plugin"
-msgstr "_Ynghylch yr Ategyn"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:3
-msgid "button1"
-msgstr "botwm1"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:4
-msgid "dialog1"
-msgstr "deialog1"
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:1
-msgid "Browse for program location..."
-msgstr "Pori ar gyfer lleoliad rhaglen..."
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:3
-msgid "_Location to search for:"
-msgstr "_Lleoliad i'w chwilio amdani:"
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:4
-msgid "label"
-msgstr "label"
-
-#: ../gedit/dialogs/replace.glade2.h:1 ../gedit/dialogs/uri.glade2.h:1
-#: ../plugins/shell_output/shell_output.glade2.h:1
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
-
-#: ../gedit/dialogs/replace.glade2.h:2 ../gedit/gedit-ui.xml.h:19
-msgid "Find Next"
-msgstr "Canfod Nesaf"
-
-#: ../gedit/dialogs/replace.glade2.h:3
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:1
 msgid "Match _entire word only"
 msgstr "Cydweddu gair _cyfan yn unig"
 
-#: ../gedit/dialogs/replace.glade2.h:5
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:3
 msgid "Replace All"
 msgstr "Amnewid y Cwbl"
 
-#: ../gedit/dialogs/replace.glade2.h:6
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:4
 msgid "Replace _with: "
 msgstr "Amnewid _gyda: "
 
-#: ../gedit/dialogs/replace.glade2.h:7
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:5
 msgid "Search _backwards"
 msgstr "Chwilio am _yn ôl"
 
-#: ../gedit/dialogs/replace.glade2.h:8
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:6
 msgid "_Match case"
-msgstr "_Cydweddu priflythrennedd"
+msgstr "_Cydweddu prif lythrennedd"
 
-#: ../gedit/dialogs/replace.glade2.h:9
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:7
 msgid "_Search for: "
 msgstr "_Chwilio am: "
 
-#: ../gedit/dialogs/replace.glade2.h:10
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
 msgstr "_Amlapio o gwmpas"
 
-#: ../gedit/dialogs/uri.glade2.h:2
-msgid "Ch_aracter coding:"
-msgstr "Amgodiad _nodau:"
-
-#: ../gedit/dialogs/uri.glade2.h:3
-msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "Gosodwch _lleoliad (URI) y ffeil hoffwch ei agor:"
-
-#: ../gedit/dialogs/uri.glade2.h:4
-msgid "Open from URI"
-msgstr "Agor o URI"
-
-#: ../gedit/gedit-commands.c:551
-msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr "Mae gedit yn olygydd testun bach ac ysgafn ar gyfer Penbwrdd GNOME"
-
-#. Translators: This is a special message that shouldn't be translated
-#. literally. It is used in the about box to give credits to
-#. the translators.
-#. Thus, you should translate it to your name and email address.
-#. You can also include other translators who have contributed to
-#. this translation; in that case, please write them on separate
-#. lines seperated by newlines (\n).
-#: ../gedit/gedit-commands.c:560
-msgid "translator-credits"
-msgstr ""
-"Chris Jackson <chris@www.linux.org.uk>\n"
-"Gareth Bowker <tgb@tgb.org.uk>\n"
-"Alan Cox <alan@lxorguk.ukuu.org.uk>\n"
-"Dafydd Harries <daf@muse.19inch.net>\n"
-"Rhys Jones <rhys@sucs.org>"
-
-#: ../gedit/gedit-commands.c:579
-msgid "gedit"
-msgstr "gedit"
-
-#: ../gedit/gedit-document.c:384
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: ../gedit/gedit-document.c:384
-msgid "Unsaved Document"
-msgstr "Dogfen Heb ei Chadw"
-
-#: ../gedit/gedit-document.c:934 ../gedit/gedit-document.c:1488
-msgid "Invalid UTF-8 data"
-msgstr "UTF-8 annilys"
-
-#: ../gedit/gedit-document.c:1750
-#, c-format
-msgid "Could not read symbolic link information for %s"
-msgstr "Methwyd darllen gwybodaeth cyswllt symbolaidd ar gyfer %s"
-
-#: ../gedit/gedit-document.c:1796
-msgid "The file has too many symbolic links."
-msgstr "Mae gan y ffeil ormod o gysylltau symbolaidd."
-
-#: ../gedit/gedit-document.c:1880
-#, c-format
-msgid "gedit cannot handle %s: locations in write mode."
-msgstr "Ni all gedit ymddelio a lleoliadau %s: yn y modd ysgrifennu."
-
-#: ../gedit/gedit-document.c:1887
-msgid "gedit cannot handle this kind of location in write mode."
-msgstr "Ni all gedit ymddelio a'r math hwn o leoliad yn y modd ysgrifennu."
-
-#: ../gedit/gedit-document.c:1900
-msgid "Invalid filename."
-msgstr "Enw ffeil annilys."
-
-#: ../gedit/gedit-document.c:2051
+#: ../gedit/gedit.c:75
 msgid ""
-"There is not enough disk space to save the file.\n"
-"Please free some disk space and try again."
+"Set the character encoding to be used to open the files listed on the "
+"command line"
 msgstr ""
-"Does dim digon o le disg i gadw'r ffeil.\n"
-"Rhyddhewch beth lle ar y disg cyn ceisio eto."
+"Gosod yr amgodiad nodau i'w ddefnyddio i agor ffeiliau a rhestrir ar y "
+"llinell orchymyn"
 
-#: ../gedit/gedit-document.c:2056
-msgid ""
-"The disk where you are trying to save the file has a limitation on file "
-"sizes.  Please try saving a smaller file or saving it to a disk that does "
-"not have this limitation."
-msgstr ""
-"Mae gan y disg lle rydych chi'n ceisio cadw'r ffeil gyfwng ar feintiau "
-"ffeiliau. Ceisiwch gadw ffeil lai neu gadw at ddisg sydd heb y cyfyngiad yma."
+#: ../gedit/gedit.c:78
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "Creu ffenest lefel dop newydd mewn achos o gedit sy'n bodoli"
 
-#: ../gedit/gedit-document.c:2100
-msgid "Could not create a backup file."
-msgstr "Ni allwyd creu ffeil wrth gefn."
+#: ../gedit/gedit.c:81
+msgid "Create a new document in an existing instance of gedit"
+msgstr "Creu dogfen newydd mewn achos o gedit sy'n bodoli"
 
-#: ../gedit/gedit-encodings-option-menu.c:204
-msgid "Auto Detected"
-msgstr "Canfodwyd yn Awtomatig"
-
-#: ../gedit/gedit-encodings-option-menu.c:224
-#: ../gedit/gedit-encodings-option-menu.c:246
+#: ../gedit/gedit.c:116
 #, c-format
-msgid "Current Locale (%s)"
-msgstr "Locale Cyfredol (%s)"
+msgid "%s: malformed file name or URI.\n"
+msgstr "%s: enw ffeil neu URI wedi'i gam-ffurfio.\n"
 
-#: ../gedit/gedit-encodings-option-menu.c:307
-msgid "Add or _Remove..."
-msgstr "Ychwannegu new _Dynnu..."
-
-#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:181
-#: ../gedit/gedit-encodings.c:183 ../gedit/gedit-encodings.c:185
-#: ../gedit/gedit-encodings.c:187
-msgid "Unicode"
-msgstr "Unicode"
-
-#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:176
-#: ../gedit/gedit-encodings.c:222 ../gedit/gedit-encodings.c:265
-msgid "Western"
-msgstr "Gorllewinol"
-
-#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:224
-#: ../gedit/gedit-encodings.c:261
-msgid "Central European"
-msgstr "Canol Ewropeaidd"
-
-#: ../gedit/gedit-encodings.c:154
-msgid "South European"
-msgstr "De Ewropeaidd"
-
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:172
-#: ../gedit/gedit-encodings.c:275
-msgid "Baltic"
-msgstr "Baltig"
-
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:226
-#: ../gedit/gedit-encodings.c:239 ../gedit/gedit-encodings.c:243
-#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:263
-msgid "Cyrillic"
-msgstr "Cyrilig"
-
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:232
-#: ../gedit/gedit-encodings.c:273
-msgid "Arabic"
-msgstr "Arabeg"
-
-#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:267
-#: ../plugins/spell/gedit-spell-checker.c:93
-msgid "Greek"
-msgstr "Groeg"
-
-#: ../gedit/gedit-encodings.c:164
-msgid "Hebrew Visual"
-msgstr "Hebraeg Gweledol"
-
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:230
-#: ../gedit/gedit-encodings.c:271 ../plugins/spell/gedit-spell-checker.c:109
-msgid "Hebrew"
-msgstr "Hebraeg"
-
-#: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
-msgid "Turkish"
-msgstr "Tyrceg"
-
-#: ../gedit/gedit-encodings.c:170
-msgid "Nordic"
-msgstr "Nordig"
-
-#: ../gedit/gedit-encodings.c:174
-msgid "Celtic"
-msgstr "Celtaidd"
-
-#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
-msgid "Romanian"
-msgstr "Riwmaneg"
-
-#: ../gedit/gedit-encodings.c:190
-msgid "Armenian"
-msgstr "Armaneg"
-
-#: ../gedit/gedit-encodings.c:192 ../gedit/gedit-encodings.c:194
-#: ../gedit/gedit-encodings.c:208
-msgid "Chinese Traditional"
-msgstr "Tsieinëeg Traddodiadol"
-
-#: ../gedit/gedit-encodings.c:196
-msgid "Cyrillic/Russian"
-msgstr "Cyrilig/Rwsieg"
-
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:201
-#: ../gedit/gedit-encodings.c:203 ../gedit/gedit-encodings.c:235
-#: ../gedit/gedit-encodings.c:250
-msgid "Japanese"
-msgstr "Siapaneg"
-
-#: ../gedit/gedit-encodings.c:206 ../gedit/gedit-encodings.c:237
-#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:256
-msgid "Korean"
-msgstr "Corëeg"
-
-#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:213
-#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:219
-msgid "Chinese Simplified"
-msgstr "Tsieinëeg Symleiddiedig"
-
-#: ../gedit/gedit-encodings.c:217
-msgid "Georgian"
-msgstr "Georgeg"
-
-#: ../gedit/gedit-encodings.c:247
-msgid "Cyrillic/Ukrainian"
-msgstr "Cyrilig/Wrcreineg"
-
-#: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
-#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
-msgid "Vietnamese"
-msgstr "Fietnameg"
-
-#: ../gedit/gedit-encodings.c:254
-msgid "Thai"
-msgstr "Tai"
-
-#: ../gedit/gedit-encodings.c:441
-msgid "Unknown"
-msgstr "Anhysbys"
-
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
+#: ../gedit/gedit.c:128
 #, c-format
-msgid "A file named \"%s\" already exists.\n"
-msgstr "Mae ffeil o'r enw \"%s\" yn bodoli eisoes.\n"
+msgid "%s: invalid encoding.\n"
+msgstr "%s: amgodiad annilys.\n"
 
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
-msgid "Do you want to replace it with the one you are saving?"
-msgstr "Ydych chi am ei hamnewid gyda'r un rydych yn ei chadw?"
-
-#: ../gedit/gedit-file-selector-util.c:142
+#: ../gedit/gedit-commands-file.c:129 ../gedit/gedit-commands-file.c:175
 #, c-format
-msgid "The file \"%s\" is read-only.\n"
-msgstr "Ffeil i'w darllen yn unig yw \"%s\".\n"
+msgid "Loading file '%s'…"
+msgstr "Llwytho'r ffeil '%s'..."
 
-#: ../gedit/gedit-file-selector-util.c:143
+#: ../gedit/gedit-commands-file.c:184
+#, c-format
+msgid "Loading %d file…"
+msgid_plural "Loading %d files…"
+msgstr[0] "Llwytho %d ffeil..."
+msgstr[1] "Llwytho %d ffeil..."
+msgstr[2] "Llwytho %d ffeil..."
+msgstr[3] "Llwytho %d ffeil..."
+
+#: ../gedit/gedit-commands-file.c:287
+msgid "Open Files…"
+msgstr "Agor Ffeiliau..."
+
+#: ../gedit/gedit-commands-file.c:393
+msgid "The entered location is not valid."
+msgstr "Nid yw'r lleoliad a roddwyd yn ddilys."
+
+#: ../gedit/gedit-commands-file.c:396
+#: ../gedit/gedit-io-error-message-area.c:150
+#: ../gedit/gedit-io-error-message-area.c:189
+#: ../gedit/gedit-io-error-message-area.c:205
+msgid "Please, check that you typed the location correctly and try again."
+msgstr "Gwiriwch eich bod chi wedi teipio'r lleoliad yn gywir, cyn ceisio eto."
+
+#: ../gedit/gedit-commands-file.c:541
+#, c-format
+msgid "The file \"%s\" is read-only."
+msgstr "Ffeil ddarllen-yn-unig yw \"%s\"."
+
+#: ../gedit/gedit-commands-file.c:552
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Ydych chi am geisio ei hamnewid gyda'r un rydych yn ei chadw?"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
-msgid "All Files"
-msgstr "Pob Ffeil"
-
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
-msgid "All Text Files"
-msgstr "Pob Ffeil Testun"
-
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
-msgid "_Character Coding:"
-msgstr "Amgodiad _Nodau:"
-
-#: ../gedit/gedit-file-selector-util.c:498
-msgid "Select a file to open"
-msgstr "Dewiswch ffeil i'w hagor"
-
-#: ../gedit/gedit-file-selector-util.c:523
-msgid "Select files to open"
-msgstr "Dewiswch ffeiliau i'w agor"
-
-#: ../gedit/gedit-file-selector-util.c:559
-msgid "Select a filename to save"
-msgstr "Dewiswch enw ffeil er mwyn cadw"
-
-#: ../gedit/gedit-file.c:194
-msgid "Open File..."
-msgstr "Agor ffeil..."
-
-#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
+#: ../gedit/gedit-commands-file.c:618 ../gedit/gedit-commands-file.c:809
 #, c-format
-msgid "Saving document \"%s\"..."
-msgstr "Cadw'r ddogfen \"%s\"..."
+msgid "Saving file '%s'…"
+msgstr "Cadw'r ffeil '%s'..."
 
-#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
+#: ../gedit/gedit-commands-file.c:708
+msgid "Save As…"
+msgstr "Cadw Fel..."
+
+#: ../gedit/gedit-commands-file.c:1004
 #, c-format
-msgid "The document \"%s\" has not been saved."
-msgstr "Nid yw'r ddogfen \"%s\" wedi ei chadw."
+msgid "Reverting the document '%s'…"
+msgstr "Yn adfer y ddogfen '%s'..."
 
-#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
+#: ../gedit/gedit-commands-file.c:1026
 #, c-format
-msgid "The document \"%s\" has been saved."
-msgstr "Mae'r ddogfen \"%s\" wedi ei chadw."
+msgid "Revert unsaved changes to document '%s'?"
+msgstr "Adfer y newidiadau sydd heb eu cadw i ddogfen '%s'?"
 
-#: ../gedit/gedit-file.c:372
-msgid "Save as..."
-msgstr "Cadw fel..."
-
-#: ../gedit/gedit-file.c:526
-#, c-format
-msgid "Revert unsaved changes to document \"%s\"?"
-msgstr "Amnewid y newidiadau heb eu cadw i ddogfen \"%s\"?"
-
-#: ../gedit/gedit-file.c:535
+#: ../gedit/gedit-commands-file.c:1035
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1492,13 +1230,13 @@ msgstr[2] ""
 msgstr[3] ""
 "Fe gollir am byth y newidiadau wnaed i'r ddogfen yn ystod y %ld eiliad olaf."
 
-#: ../gedit/gedit-file.c:544
+#: ../gedit/gedit-commands-file.c:1044
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Fe gollir am byth y newidiadau wnaed i'r ddogfen yn ystod y funud olaf."
 
-#: ../gedit/gedit-file.c:550
+#: ../gedit/gedit-commands-file.c:1050
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1519,7 +1257,7 @@ msgstr[3] ""
 "Fe gollir am byth y newidiadau wnaed i'r ddogfen yn ystod y funud ac %ld "
 "eiliad olaf."
 
-#: ../gedit/gedit-file.c:560
+#: ../gedit/gedit-commands-file.c:1060
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1535,7 +1273,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Os na wnewch chi gadw, fe gollir am byth newidiadau'r %ld munud olaf."
 
-#: ../gedit/gedit-file.c:575 ../gedit/gedit-file.c:596
+#: ../gedit/gedit-commands-file.c:1075 ../gedit/gedit-commands-file.c:1096
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1549,7 +1287,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Fe gollir am byth y newidiadau wnaed i'r ddogfen yn ystod yr %d awr olaf."
 
-#: ../gedit/gedit-file.c:581
+#: ../gedit/gedit-commands-file.c:1081
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1570,146 +1308,269 @@ msgstr[3] ""
 "Fe gollir am byth y newidiadau wnaed i'r ddogfen yn ystod yr awr ac %d munud "
 "olaf."
 
-#: ../gedit/gedit-file.c:617 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-commands-file.c:1122
 msgid "_Revert"
 msgstr "_Adfer"
 
-#: ../gedit/gedit-file.c:662
+#: ../gedit/gedit-commands-help.c:78
+msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
+msgstr "Mae gedit yn olygydd testun bach ac ysgafn ar gyfer Penbwrdd GNOME"
+
+#: ../gedit/gedit-commands-help.c:98
+msgid "translator-credits"
+msgstr ""
+"Chris Jackson <chris@www.linux.org.uk>\n"
+"Gareth Bowker <tgb@tgb.org.uk>\n"
+"Alan Cox <alan@lxorguk.ukuu.org.uk>\n"
+"Dafydd Harries <daf@muse.19inch.net>\n"
+"Rhys Jones <rhys@sucs.org>"
+
+#: ../gedit/gedit-commands-help.c:101
+msgid "gedit"
+msgstr "gedit"
+
+#: ../gedit/gedit-commands-search.c:166
 #, c-format
-msgid "Error reverting the document \"%s\"."
-msgstr "Gwall wrth adfer y ddogfen \"%s\"."
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "Canfuwyd ac adferwyd %d achlysur"
+msgstr[1] "Canfuwyd ac adferwyd %d achlysur"
+msgstr[2] "Canfuwyd ac adferwyd %d achlysur"
+msgstr[3] "Canfuwyd ac adferwyd %d achlysur"
 
-#: ../gedit/gedit-file.c:670
+#: ../gedit/gedit-commands-search.c:176
+msgid "Found and replaced one occurrence"
+msgstr "Canfuwyd ac amnewidiwyd un achlysur"
+
+#: ../gedit/gedit-commands-search.c:189
+msgid "Phrase not found"
+msgstr "Cymal heb ei ganfod"
+
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:855
 #, c-format
-msgid "The document \"%s\" has not been reverted."
-msgstr "Ni chafodd y ddogfen \"%s\" ei hadfer."
+msgid "Unsaved Document %d"
+msgstr "Dogfen Heb ei Chadw %d"
 
-#: ../gedit/gedit-file.c:674
+#. bad bad luck...
+#: ../gedit/gedit-document-saver.c:523
+msgid "Could not obtain backup filename"
+msgstr "Methwyd cael enw ffeil wrth gefn"
+
+#: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
+#: ../gedit/gedit-window.c:1528 ../gedit/gedit-window.c:1533
+msgid "Read Only"
+msgstr "Darllen yn Unig"
+
+#: ../gedit/gedit-documents-panel.c:633
+msgid "Documents"
+msgstr "Dogfennau"
+
+#: ../gedit/gedit-encodings.c:137 ../gedit/gedit-encodings.c:182
+#: ../gedit/gedit-encodings.c:184 ../gedit/gedit-encodings.c:186
+#: ../gedit/gedit-encodings.c:188
+msgid "Unicode"
+msgstr "Unicode"
+
+#: ../gedit/gedit-encodings.c:151 ../gedit/gedit-encodings.c:177
+#: ../gedit/gedit-encodings.c:223 ../gedit/gedit-encodings.c:266
+msgid "Western"
+msgstr "Gorllewinol"
+
+#: ../gedit/gedit-encodings.c:153 ../gedit/gedit-encodings.c:225
+#: ../gedit/gedit-encodings.c:262
+msgid "Central European"
+msgstr "Canol Ewropeaidd"
+
+#: ../gedit/gedit-encodings.c:155
+msgid "South European"
+msgstr "De Ewropeaidd"
+
+#: ../gedit/gedit-encodings.c:157 ../gedit/gedit-encodings.c:173
+#: ../gedit/gedit-encodings.c:276
+msgid "Baltic"
+msgstr "Baltig"
+
+#: ../gedit/gedit-encodings.c:159 ../gedit/gedit-encodings.c:227
+#: ../gedit/gedit-encodings.c:240 ../gedit/gedit-encodings.c:244
+#: ../gedit/gedit-encodings.c:246 ../gedit/gedit-encodings.c:264
+msgid "Cyrillic"
+msgstr "Cyrilig"
+
+#: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:233
+#: ../gedit/gedit-encodings.c:274
+msgid "Arabic"
+msgstr "Arabeg"
+
+#: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:268
+#: ../plugins/spell/gedit-spell-checker.c:93
+msgid "Greek"
+msgstr "Groeg"
+
+#: ../gedit/gedit-encodings.c:165
+msgid "Hebrew Visual"
+msgstr "Hebraeg Gweledol"
+
+#: ../gedit/gedit-encodings.c:167 ../gedit/gedit-encodings.c:231
+#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:109
+msgid "Hebrew"
+msgstr "Hebraeg"
+
+#: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:229
+#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:150
+msgid "Turkish"
+msgstr "Tyrceg"
+
+#: ../gedit/gedit-encodings.c:171
+msgid "Nordic"
+msgstr "Nordig"
+
+#: ../gedit/gedit-encodings.c:175
+msgid "Celtic"
+msgstr "Celtaidd"
+
+#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:138
+msgid "Romanian"
+msgstr "Riwmaneg"
+
+#: ../gedit/gedit-encodings.c:191
+msgid "Armenian"
+msgstr "Armaneg"
+
+#: ../gedit/gedit-encodings.c:193 ../gedit/gedit-encodings.c:195
+#: ../gedit/gedit-encodings.c:209
+msgid "Chinese Traditional"
+msgstr "Tsieinëeg Draddodiadol"
+
+#: ../gedit/gedit-encodings.c:197
+msgid "Cyrillic/Russian"
+msgstr "Cyrilig/Rwsieg"
+
+#: ../gedit/gedit-encodings.c:200 ../gedit/gedit-encodings.c:202
+#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:236
+#: ../gedit/gedit-encodings.c:251
+msgid "Japanese"
+msgstr "Siapaneg"
+
+#: ../gedit/gedit-encodings.c:207 ../gedit/gedit-encodings.c:238
+#: ../gedit/gedit-encodings.c:242 ../gedit/gedit-encodings.c:257
+msgid "Korean"
+msgstr "Corëeg"
+
+#: ../gedit/gedit-encodings.c:212 ../gedit/gedit-encodings.c:214
+#: ../gedit/gedit-encodings.c:216 ../gedit/gedit-encodings.c:220
+msgid "Chinese Simplified"
+msgstr "Tsieinëeg Symleiddiedig"
+
+#: ../gedit/gedit-encodings.c:218
+msgid "Georgian"
+msgstr "Georgeg"
+
+#: ../gedit/gedit-encodings.c:248
+msgid "Cyrillic/Ukrainian"
+msgstr "Cyrilig/Wrcreineg"
+
+#: ../gedit/gedit-encodings.c:253 ../gedit/gedit-encodings.c:259
+#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:153
+msgid "Vietnamese"
+msgstr "Fietnameg"
+
+#: ../gedit/gedit-encodings.c:255
+msgid "Thai"
+msgstr "Tai"
+
+#: ../gedit/gedit-encodings.c:441
+msgid "Unknown"
+msgstr "Anhysbys"
+
+#: ../gedit/gedit-encodings-option-menu.c:219
+msgid "Auto Detected"
+msgstr "Canfuwyd yn Awtomatig"
+
+#: ../gedit/gedit-encodings-option-menu.c:239
+#: ../gedit/gedit-encodings-option-menu.c:261
 #, c-format
-msgid "The document \"%s\" has been reverted."
-msgstr "Cafodd y ddogfen \"%s\" ei hadfer."
+msgid "Current Locale (%s)"
+msgstr "Locale Cyfredol (%s)"
 
-#: ../gedit/gedit-file.c:702
+#: ../gedit/gedit-encodings-option-menu.c:322
+msgid "Add or _Remove..."
+msgstr "Ychwannegu new _Dynnu..."
+
+#: ../gedit/gedit-file-chooser-dialog.c:72
+msgid "C_haracter Coding:"
+msgstr "_Amgodiad Nodau:"
+
+#: ../gedit/gedit-file-chooser-dialog.c:189
+msgid "All Files"
+msgstr "Pob Ffeil"
+
+#: ../gedit/gedit-file-chooser-dialog.c:197
+msgid "All Text Files"
+msgstr "Pob Ffeil Testun"
+
+#: ../gedit/gedit-help.c:66
+msgid "There was an error displaying help."
+msgstr "Roedd gwall wrth ddangos cymorth."
+
+#: ../gedit/gedit-io-error-message-area.c:148
 #, c-format
-msgid "Reverting the document \"%s\"..."
-msgstr "Yn adfer y ddogfen \"%s\"..."
+msgid "Could not find the file %s."
+msgstr "Methu canfod y ffeil %s."
 
-#: ../gedit/gedit-file.c:825
-msgid "Could not read data from stdin."
-msgstr "Methwyd darllen data o'r mewnbwn safonol."
-
-#: ../gedit/gedit-file.c:912
-msgid "Reverting file:"
-msgstr "Yn adfer y ffeil:"
-
-#: ../gedit/gedit-file.c:912
-msgid "Loading file:"
-msgstr "Yn llwytho'r ffeil:"
-
-#: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
-#, c-format
-msgid "Error loading file \"%s\""
-msgstr "Gwall wrth lwytho ffeil \"%s\""
-
-#: ../gedit/gedit-file.c:1113
-#, c-format
-msgid "Loaded file \"%s\""
-msgstr "Llwythwyd ffeil \"%s\""
-
-#: ../gedit/gedit-file.c:1225
-#, c-format
-msgid "Loaded %d file"
-msgid_plural "Loaded %d files"
-msgstr[0] "Llwythwyd %d ffeil"
-msgstr[1] "Llwythwyd %d ffeil"
-msgstr[2] "Llwythwyd %d ffeil"
-msgstr[3] "Llwythwyd %d ffeil"
-
-#: ../gedit/gedit-file.c:1286
-#, c-format
-msgid "Created file \"%s\""
-msgstr "Wedi creu ffeil \"%s\""
-
-#: ../gedit/gedit-file.c:1304
-#, c-format
-msgid "Loading file \"%s\"..."
-msgstr "Llwytho'r ffeil \"%s\"..."
-
-#: ../gedit/gedit-file.c:1469
-#, c-format
-msgid "Loading %d file..."
-msgid_plural "Loading %d files..."
-msgstr[0] "Llwytho %d ffeil..."
-msgstr[1] "Llwytho %d ffeil..."
-msgstr[2] "Llwytho %d ffeil..."
-msgstr[3] "Llwytho %d ffeil..."
-
-#: ../gedit/gedit-io-error-dialogs.c:84
-#, c-format
-msgid "Could not find the file \"%s\""
-msgstr "Methu canfod y ffeil \"%s\""
-
-#: ../gedit/gedit-io-error-dialogs.c:86 ../gedit/gedit-io-error-dialogs.c:130
-#: ../gedit/gedit-io-error-dialogs.c:150
-msgid "Please, check that you typed the location correctly and try again."
-msgstr "Gwiriwch eich bod chi wedi teipio'r lleoliad yn gywir, cyn ceisio eto."
-
-#: ../gedit/gedit-io-error-dialogs.c:91 ../gedit/gedit-io-error-dialogs.c:99
-#: ../gedit/gedit-io-error-dialogs.c:116 ../gedit/gedit-io-error-dialogs.c:122
-#: ../gedit/gedit-io-error-dialogs.c:135 ../gedit/gedit-io-error-dialogs.c:141
-#: ../gedit/gedit-io-error-dialogs.c:155 ../gedit/gedit-io-error-dialogs.c:171
-#: ../gedit/gedit-io-error-dialogs.c:215 ../gedit/gedit-io-error-dialogs.c:223
-#: ../gedit/gedit-io-error-dialogs.c:231 ../gedit/gedit-io-error-dialogs.c:239
-#: ../gedit/gedit-io-error-dialogs.c:246 ../gedit/gedit-io-error-dialogs.c:252
-#: ../gedit/gedit-io-error-dialogs.c:292 ../gedit/gedit-io-error-dialogs.c:313
-#: ../gedit/gedit-io-error-dialogs.c:341
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "Methu agor y ffeil \"%s\""
-
-#: ../gedit/gedit-io-error-dialogs.c:93 ../gedit/gedit-io-error-dialogs.c:406
+#: ../gedit/gedit-io-error-message-area.c:155
+#: ../gedit/gedit-io-error-message-area.c:381
 msgid "The file contains corrupted data."
 msgstr "Mae'r ffeil yn cynnwys data llygredig."
 
-#: ../gedit/gedit-io-error-dialogs.c:104 ../gedit/gedit-io-error-dialogs.c:417
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:166
+#: ../gedit/gedit-io-error-message-area.c:392
 #, c-format
-msgid "gedit cannot handle %s: locations."
-msgstr "Ni all gedit ddelio â lleoliadau %s:"
+msgid "gedit cannot handle %s locations."
+msgstr "Ni all gedit ddelio â lleoliadau %s."
 
-#: ../gedit/gedit-io-error-dialogs.c:109 ../gedit/gedit-io-error-dialogs.c:422
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:398
 msgid "gedit cannot handle this location."
 msgstr "Ni all gedit ddelio â'r lleoliad hwn."
 
-#: ../gedit/gedit-io-error-dialogs.c:118 ../gedit/gedit-io-error-dialogs.c:431
+#: ../gedit/gedit-io-error-message-area.c:179
+#: ../gedit/gedit-io-error-message-area.c:405
 msgid "The file contains data in an invalid format."
 msgstr "Mae'r ffeil yn cynnwys data mewn ffurf annilys."
 
-#: ../gedit/gedit-io-error-dialogs.c:124 ../gedit/gedit-io-error-dialogs.c:437
+#: ../gedit/gedit-io-error-message-area.c:183
+#: ../gedit/gedit-io-error-message-area.c:409
 msgid "The file is too big."
 msgstr "Mae'r ffeil yn rhy fawr."
 
-#: ../gedit/gedit-io-error-dialogs.c:128
+#: ../gedit/gedit-io-error-message-area.c:187
 #, c-format
-msgid "\"%s\" is not a valid location"
-msgstr "Nid yw \"%s\" yn lleoliad dilys"
+msgid "%s is not a valid location."
+msgstr "Nid yw %s yn lleoliad dilys."
 
-#: ../gedit/gedit-io-error-dialogs.c:137 ../gedit/gedit-io-error-dialogs.c:443
-msgid "Access was denied."
-msgstr "Gwrthodwyd mynediad."
+#: ../gedit/gedit-io-error-message-area.c:194
+#: ../gedit/gedit-io-error-message-area.c:413
+msgid "You do not have the permissions necessary to open the file."
+msgstr "Does gennych chi ddim y caniatâd angenrheidiol i agor y ffeil."
 
-#: ../gedit/gedit-io-error-dialogs.c:143
+#: ../gedit/gedit-io-error-message-area.c:198
+#: ../gedit/gedit-io-error-message-area.c:417
+#: ../gedit/gedit-io-error-message-area.c:1161
 msgid ""
-"there are too many open files. Please, close some open files and try again."
+"There are too many open files. Please, close some applications and try again."
 msgstr ""
-"mae gormod o ffeiliau ar agor. Caewch ryw ffeiliau sydd ar agor, cyn ceisio "
+"Mae gormod o ffeiliau ar agor. Caewch rai rhaglenni sydd ar agor, cyn ceisio "
 "eto."
 
-#: ../gedit/gedit-io-error-dialogs.c:148 ../gedit/gedit-io-error-dialogs.c:661
+#: ../gedit/gedit-io-error-message-area.c:203
+#: ../gedit/gedit-io-error-message-area.c:422
 #, c-format
-msgid "\"%s\" is a directory"
-msgstr "Plygell yw \"%s\""
+msgid "%s is a directory."
+msgstr "Mae %s yn gyfeiriadur."
 
-#: ../gedit/gedit-io-error-dialogs.c:157
+#: ../gedit/gedit-io-error-message-area.c:210
+#: ../gedit/gedit-io-error-message-area.c:427
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
@@ -1717,17 +1578,25 @@ msgstr ""
 "Dim digon o gof ar gael er mwyn agor y ffeil. Caewch ryw raglenni sy'n "
 "rhedeg, cyn ceisio eto."
 
-#: ../gedit/gedit-io-error-dialogs.c:185 ../gedit/gedit-io-error-dialogs.c:483
+#: ../gedit/gedit-io-error-message-area.c:238
+#: ../gedit/gedit-io-error-message-area.c:455
+#: ../gedit/gedit-io-error-message-area.c:1200
 #, c-format
 msgid ""
-"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"Host %s could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"Ni ddarganfuwyd y gwesteiwr \"%s\". Gwiriwch fod eich gosodiadau dirprwy yn "
+"Ni ddarganfuwyd y gwesteiwr %s. Gwiriwch fod eich gosodiadau dirprwy yn "
 "gywir cyn ceisio eto."
 
-#: ../gedit/gedit-io-error-dialogs.c:196 ../gedit/gedit-io-error-dialogs.c:207
-#: ../gedit/gedit-io-error-dialogs.c:217
+#: ../gedit/gedit-io-error-message-area.c:249
+#: ../gedit/gedit-io-error-message-area.c:260
+#: ../gedit/gedit-io-error-message-area.c:268
+#: ../gedit/gedit-io-error-message-area.c:466
+#: ../gedit/gedit-io-error-message-area.c:477
+#: ../gedit/gedit-io-error-message-area.c:1211
+#: ../gedit/gedit-io-error-message-area.c:1222
+#: ../gedit/gedit-io-error-message-area.c:1230
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
@@ -1735,7 +1604,9 @@ msgstr ""
 "Roedd enw'r gwesteiwr yn annilys. Gwiriwch eich bod chi wedi rhoi'r lleoliad "
 "yn gywir cyn ceisio eto."
 
-#: ../gedit/gedit-io-error-dialogs.c:225
+#: ../gedit/gedit-io-error-message-area.c:274
+#: ../gedit/gedit-io-error-message-area.c:485
+#: ../gedit/gedit-io-error-message-area.c:1236
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
@@ -1743,7 +1614,8 @@ msgstr ""
 "Roedd enw'r gwesteiwr yn wag. Gwiriwch fod eich gosodiadau dirprwy yn gywir "
 "cyn ceisio eto."
 
-#: ../gedit/gedit-io-error-dialogs.c:233
+#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:1242
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
@@ -1751,773 +1623,860 @@ msgstr ""
 "Methwyd mewngofnodi. Gwiriwch eich bod chi wedi rhoi'r lleoliad yn gywir cyn "
 "ceisio eto."
 
-#: ../gedit/gedit-io-error-dialogs.c:241
-msgid ""
-"The file contains invalid data. Probably, you are trying to open a binary "
-"file."
-msgstr ""
-"Mae'r ffeil yn cynnwys data annilys. Mae'n debyg eich bod chi'n ceisio agor "
-"ffeil ddeuaidd."
-
-#: ../gedit/gedit-io-error-dialogs.c:248
+#: ../gedit/gedit-io-error-message-area.c:286
 msgid "The file you are trying to open is not a regular file."
 msgstr "Nid ffeil gyffredin mo'r ffeil yr ydych yn ceisio ei hagor."
 
-#: ../gedit/gedit-io-error-dialogs.c:294
-msgid ""
-"gedit was not able to automatically detect the character coding. Please, "
-"check that you are not trying to open a binary file and try again selecting "
-"a character coding in the 'Open File...' (or 'Open Location') dialog."
-msgstr ""
-"Methodd gedit ganfod yr amgodiad nodau yn awtomatig. Gwiriwch nad ydych "
-"chi'n ceisio agor ffeil ddeuaidd a cheisiwch eto gan ddewis amgodiad nodau "
-"yn y ddeialog 'Agor Ffeil...' (neu 'Agor Lleoliad')"
-
-#: ../gedit/gedit-io-error-dialogs.c:302 ../gedit/gedit-io-error-dialogs.c:328
+#: ../gedit/gedit-io-error-message-area.c:325
+#: ../gedit/gedit-io-error-message-area.c:545
+#: ../gedit/gedit-io-error-message-area.c:1307
 #, c-format
-msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "Methu agor y ffeil \"%s\" gan ddefnyddio'r amgodiad nodau %s"
+msgid "Unexpected error: %s"
+msgstr "Gwall annisgwyl: %s"
 
-#: ../gedit/gedit-io-error-dialogs.c:305 ../gedit/gedit-io-error-dialogs.c:331
-msgid ""
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File... ' (or 'Open "
-"Location') dialog and try again."
-msgstr ""
-"Gwiriwch nad ydych chi'n ceisio agor ffeil ddeuaidd ac eich bod chi wedi "
-"dewis yr amgodiad nodau cywir yn y ddeialog 'Agor Ffeil...' (neu 'Agor "
-"Lleoliad'), a cheisiwch eto."
-
-# EFALLAI (dyw'r Saesneg yn gwneud fawr o synnwyr chwaith!)
-#: ../gedit/gedit-io-error-dialogs.c:315
-msgid ""
-"The file contains data in an invalid format. Probably, you are trying to "
-"open a binary file."
-msgstr ""
-"Mae'r ffeil yn cynnwys data annilys. Mae'n fwy na thebyg eich bod chi'n "
-"ceisio agor ffeil ddeuaidd."
-
-#: ../gedit/gedit-io-error-dialogs.c:397 ../gedit/gedit-io-error-dialogs.c:404
-#: ../gedit/gedit-io-error-dialogs.c:410 ../gedit/gedit-io-error-dialogs.c:429
-#: ../gedit/gedit-io-error-dialogs.c:435 ../gedit/gedit-io-error-dialogs.c:441
-#: ../gedit/gedit-io-error-dialogs.c:447 ../gedit/gedit-io-error-dialogs.c:454
-#: ../gedit/gedit-io-error-dialogs.c:469 ../gedit/gedit-io-error-dialogs.c:497
-#: ../gedit/gedit-io-error-dialogs.c:505 ../gedit/gedit-io-error-dialogs.c:511
-#: ../gedit/gedit-io-error-dialogs.c:518 ../gedit/gedit-io-error-dialogs.c:557
+#: ../gedit/gedit-io-error-message-area.c:331
+#: ../gedit/gedit-io-error-message-area.c:710
 #, c-format
-msgid "Could not revert the file \"%s\""
-msgstr "Methu adfer y ffeil \"%s\""
+msgid "Could not open the file %s."
+msgstr "Methu agor y ffeil %s."
 
-#: ../gedit/gedit-io-error-dialogs.c:399
+#: ../gedit/gedit-io-error-message-area.c:376
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr "ni all gedit ei ganfod. Efallai cafodd ei ddileu yn ddiweddar."
 
-#: ../gedit/gedit-io-error-dialogs.c:449
-msgid ""
-"There are too many open files. Please, close some open files and try again."
-msgstr ""
-"Mae gormod o ffeiliau ar agor. Caewch rai ffeiliau sydd ar agor, cyn ceisio "
-"eto."
-
-#: ../gedit/gedit-io-error-dialogs.c:456
-msgid ""
-"Not enough available memory. Please, close some running applications and try "
-"again."
-msgstr ""
-"Dim digon o gof ar gael. Caewch rai rhaglenni sy'n rhedeg, cyn ceisio eto."
-
-#: ../gedit/gedit-io-error-dialogs.c:499
-msgid ""
-"The host name was empty. Please, check that your proxy settings are correct "
-"and try again."
-msgstr ""
-"Roedd enw'r gwesteiwr yn wag. Gwiriwch fod eich gosodiadau dirprwy yn gywir, "
-"cyn ceisio eto."
-
-#: ../gedit/gedit-io-error-dialogs.c:507
+#: ../gedit/gedit-io-error-message-area.c:491
 msgid "Attempt to log in failed."
 msgstr "Methodd yr ymgais mewngofnodi."
 
-#: ../gedit/gedit-io-error-dialogs.c:513
+#: ../gedit/gedit-io-error-message-area.c:495
+#, c-format
+msgid "%s is not a regular file."
+msgstr "Nid yw %s yn ffeil gyffredin"
+
+#: ../gedit/gedit-io-error-message-area.c:551
+#, c-format
+msgid "Could not revert the file %s."
+msgstr "Methu adfer y ffeil %s."
+
+#: ../gedit/gedit-io-error-message-area.c:574
+msgid "Ch_aracter Coding:"
+msgstr "Amgodiad _Nodau:"
+
+#: ../gedit/gedit-io-error-message-area.c:617
+msgid "_Retry"
+msgstr "_Ail-geisio"
+
+#: ../gedit/gedit-io-error-message-area.c:712
+msgid "gedit has not been able to detect the character coding."
+msgstr "Mae gedit wedi methu canfod yr amgodiad nodau."
+
+#: ../gedit/gedit-io-error-message-area.c:714
+#: ../gedit/gedit-io-error-message-area.c:723
+msgid "Please check that you are not trying to open a binary file."
+msgstr "Gwnewch yn siŵr nad ydych chi'n ceisio agor ffeil ddeuaidd."
+
+#: ../gedit/gedit-io-error-message-area.c:715
+msgid "Select a character coding from the menu and try again."
+msgstr "Dewiswch amgodiad nodau o'r ddewislen, a cheisiwch eto."
+
+#: ../gedit/gedit-io-error-message-area.c:720
+#, c-format
+msgid "Could not open the file %s using the %s character coding."
+msgstr "Methu agor y ffeil %s gan ddefnyddio'r amgodiad nodau %s."
+
+#: ../gedit/gedit-io-error-message-area.c:724
+#: ../gedit/gedit-io-error-message-area.c:774
+msgid "Select a different character coding from the menu and try again."
+msgstr "Dewiswch amgodiad nodau gwahanol o'r ddewislen, a cheisiwch eto."
+
+#: ../gedit/gedit-io-error-message-area.c:769
+#, c-format
+msgid "Could not save the file %s using the %s character coding."
+msgstr "Methu cadw'r ffeil %s gan ddefnyddio'r amgodiad nodau %s."
+
+#: ../gedit/gedit-io-error-message-area.c:772
 msgid ""
-"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
-"binary file."
+"The document contains one or more characters that cannot be encoded using "
+"the specified character coding."
 msgstr ""
-"Mae'r ffeil yn cynnwys data UTF-8 annilys. Mae'n debygol eich bod chi'n "
-"ceisio adfer ffeil ddeuaidd."
+"Mae'r ddogfen yn cynnwys o leiaf un nod na ellir ei amgodio gyda'r amgodiad "
+"nodau gafodd ei ddewis."
 
-#: ../gedit/gedit-io-error-dialogs.c:520
-msgid "It is not possible to revert an Untitled document."
-msgstr "Nid yw'n bosib adfer dogfen Dideitl."
+#: ../gedit/gedit-io-error-message-area.c:833
+msgid "_Edit Anyway"
+msgstr "_Golygu Beth Bynnag"
 
-#: ../gedit/gedit-io-error-dialogs.c:607
+#: ../gedit/gedit-io-error-message-area.c:836
+msgid "_Don't Edit"
+msgstr "_Peidio â Golygu"
+
+#. FIXME: try to rephrase in a better way
+#: ../gedit/gedit-io-error-message-area.c:852
 #, c-format
-msgid "Could not save the file \"%s\""
-msgstr "Methu cadw'r ffeil \"%s\""
+msgid "The file %s is already open."
+msgstr "Mae'r ffeil %s ar agor eisoes."
 
-#: ../gedit/gedit-io-error-dialogs.c:656
-#, c-format
-msgid "The file \"%s\" already exists"
-msgstr "Mae'r ffeil \"%s\" yn bodoli eisioes"
-
-#: ../gedit/gedit-io-error-dialogs.c:662
-msgid "Please, check that you typed the location correctly."
-msgstr "Gwiriwch eich bod chi wedi teipio'r lleoliad yn gywir."
-
-#: ../gedit/gedit-io-error-dialogs.c:668 ../gedit/gedit-io-error-dialogs.c:674
-#: ../gedit/gedit-io-error-dialogs.c:680 ../gedit/gedit-io-error-dialogs.c:687
-#: ../gedit/gedit-io-error-dialogs.c:694
-#, c-format
-msgid "Could not create the file \"%s\""
-msgstr "Ni ellwyd creu'r ffeil \"%s\""
-
-#: ../gedit/gedit-io-error-dialogs.c:670
-msgid "Make sure you have the appropriate write permissions."
-msgstr "Sicrhewch fod y caniatâd ysgrifennu priodol gennych."
-
-#: ../gedit/gedit-io-error-dialogs.c:676
-msgid "The file name is too long."
-msgstr "Mae enw'r ffeil yn rhy hir."
-
-#: ../gedit/gedit-io-error-dialogs.c:682
+#: ../gedit/gedit-io-error-message-area.c:867
 msgid ""
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
+"gedit opened this instance of the file in non-editable way. Do you want to "
+"edit it anyway?"
 msgstr ""
-"Mae elfen cyfeiriadur yn enw'r ffeil nad yw'n bodoli, neu sy'n gyswllt "
-"symbolaidd sy'n hongian."
+"Agorodd gedit y copi hwn o'r ffeil mewn modd na ellir ei golygu. Ydych chi "
+"am ei golygu beth bynnag?"
 
-#: ../gedit/gedit-io-error-dialogs.c:689
+#: ../gedit/gedit-io-error-message-area.c:925
+#: ../gedit/gedit-io-error-message-area.c:1020
+msgid "_Save Anyway"
+msgstr "_Cadw Beth Bynnag"
+
+#: ../gedit/gedit-io-error-message-area.c:929
+#: ../gedit/gedit-io-error-message-area.c:1024
+msgid "_Don't Save"
+msgstr "_Peidio â Chadw"
+
+#. FIXME: review this message, it's not clear since for the user the "modification"
+#. could be interpreted as the changes he made in the document. beside "reading" is
+#. not accurate (since last load/save)
+#: ../gedit/gedit-io-error-message-area.c:947
+#, c-format
+msgid "The file %s has been modified since reading it."
+msgstr "Cafodd y ffeil %s ei newid ers ei darllen."
+
+#: ../gedit/gedit-io-error-message-area.c:963
+msgid "If you save it, all the external changes could be lost. Save it anyway?"
+msgstr ""
+"Os wnewch chi ei chadw, mae'n bosib y collir yr holl newidiadau allanol. "
+"Ydych chi am ei chadw beth bynnag?"
+
+#: ../gedit/gedit-io-error-message-area.c:1042
+#, c-format
+msgid "Could not create a backup file while saving %s"
+msgstr "Wrth gadw %s, ni allwyd creu ffeil wrth gefn"
+
+#: ../gedit/gedit-io-error-message-area.c:1045
+#, c-format
+msgid "Could not create a temporary backup file while saving %s"
+msgstr "Wrth gadw %s, ni allwyd creu ffeil wrth gefn dros dro"
+
+#: ../gedit/gedit-io-error-message-area.c:1062
 msgid ""
-"There is not enough disk space to create the file. Please free some disk "
+"gedit could not backup the old copy of the file before saving the new one. "
+"You can ignore this warning and save the file anyway, but if an error occurs "
+"while saving, you could lose the old copy of the file. Save anyway?"
+msgstr ""
+"Methodd gedit wneud copi wrth gefn o'r ffeil cyn cadw'r un newydd. Gallwch "
+"chi anwybyddu'r rhybudd yma, a chadw'r ffeil beth bynnag, ond os fydd gwall "
+"wrth gadw, fe allech chi golli hen gopi'r ffeil. Cadw beth bynnag?"
+
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:1123
+#, c-format
+msgid ""
+"gedit cannot handle %s locations in write mode. Please, check that you typed "
+"the location correctly and try again."
+msgstr ""
+"Ni all gedit ddelio â lleoliadau %s yn y modd ysgrifennu. Gwnewch yn siŵr "
+"eich bod chi wedi rhoi'r lleoliad yn gywir cyn ceisio eto."
+
+#: ../gedit/gedit-io-error-message-area.c:1131
+msgid ""
+"gedit cannot handle this location  in write mode. Please, check that you "
+"typed the location correctly and try again."
+msgstr ""
+"Ni all gedit ddelio â'r lleoliad hwn yn y modd ysgrifennu. Gwnewch yn siŵr "
+"eich bod chi wedi rhoi'r lleoliad yn gywir cyn ceisio eto."
+
+#: ../gedit/gedit-io-error-message-area.c:1140
+msgid ""
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr ""
+"Mae gan y disg lle rydych chi'n ceisio cadw'r ffeil gyfwng ar feintiau "
+"ffeiliau. Ceisiwch gadw ffeil lai neu gadw at ddisg sydd heb y cyfyngiad yma."
+
+#: ../gedit/gedit-io-error-message-area.c:1147
+#, c-format
+msgid ""
+"%s is not a valid location. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Nid yw %s yn lleoliad dilys. Gwnewch yn siŵr eich bod chi wedi rhoi'r "
+"lleoliad yn gywir cyn ceisio eto."
+
+#: ../gedit/gedit-io-error-message-area.c:1154
+msgid ""
+"You do not have the permissions necessary to save the file. Please, check "
+"that you typed the location correctly and try again."
+msgstr ""
+"Does gennych chi ddim y caniatâd angenrheidiol i gadw'r ffeil. Gwiriwch eich "
+"bod chi wedi rhoi'r lleoliad yn gywir, cyn ceisio eto."
+
+#: ../gedit/gedit-io-error-message-area.c:1166
+#, c-format
+msgid ""
+"%s is a directory. Please, check that you typed the location correctly and "
+"try again."
+msgstr ""
+"Cyfeiriadur yw %s. Gwiriwch eich bod chi wedi teipio'r lleoliad yn gywir, "
+"cyn ceisio eto."
+
+#: ../gedit/gedit-io-error-message-area.c:1172
+msgid ""
+"Not enough available memory to save the file. Please, close some running "
+"applications and try again."
+msgstr ""
+"Dim digon o gof ar gael er mwyn cadw'r ffeil. Caewch ryw raglenni sy'n "
+"rhedeg, cyn ceisio eto."
+
+#: ../gedit/gedit-io-error-message-area.c:1248
+msgid ""
+"There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"Does dim digon o le ar y ddisg er mwyn creu'r ffeil. Rhyddhewch le ar y "
-"ddisg, cyn ceisio eto."
+"Does dim digon o le disg i gadw'r ffeil. Rhyddhewch ychydig o'r lle ar y "
+"disg cyn ceisio eto."
 
-#. Read only
-#: ../gedit/gedit-mdi-child.c:249
-msgid "RO"
-msgstr "DYU"
+#: ../gedit/gedit-io-error-message-area.c:1254
+msgid ""
+"You are trying to save the file on a read-only disk. Please, check that you "
+"typed the location correctly and try again."
+msgstr ""
+"Rydych chi'n ceisio cadw'r ffeil ar ddisg darllen-yn-unig. Gwiriwch eich bod "
+"chi wedi rhoi'r lleoliad yn gywir, cyn ceisio eto."
 
-#. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
-msgid "_Move to New Window"
-msgstr "_Symud at Ffenest Newydd"
+#: ../gedit/gedit-io-error-message-area.c:1260
+msgid "A file with the same name already exists. Please, use a different name."
+msgstr "Mae ffeil o'r un enw yn bodoli'n barod. Defnyddiwch enw gwahanol."
 
-#: ../gedit/gedit-mdi-child.c:803
-msgid "Unicode (UTF-8)"
-msgstr "Unicode (UTF-8)"
+#: ../gedit/gedit-io-error-message-area.c:1265
+msgid ""
+"The disk where you are trying to save the file has a limitation on length of "
+"the file names. Please, use a shorter name."
+msgstr ""
+"Mae gan y disg lle rydych chi'n ceisio cadw'r ffeil gyfyngiad ar hyd enwau "
+"ffeiliau. Defnyddiwch enw byrrach."
 
-#: ../gedit/gedit-mdi-child.c:813
-msgid "Name:"
-msgstr "Enw:"
-
-#: ../gedit/gedit-mdi-child.c:814
-msgid "MIME Type:"
-msgstr "Math MIME:"
-
-#: ../gedit/gedit-mdi-child.c:815
-msgid "Encoding:"
-msgstr "Amgodiad:"
-
-#. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
+#: ../gedit/gedit-io-error-message-area.c:1270
 #, c-format
-msgid "Open '%s'"
-msgstr "Agor '%s'"
+msgid ""
+"%s is not a regular file. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"Nid ffeil gyffredin yw %s. Gwiriwch eich bod chi wedi rhoi'r lleoliad yn "
+"gywir, cyn ceisio eto."
 
-#: ../gedit/gedit-mdi.c:538
-msgid "Open a recently used file"
-msgstr "Agor ffeil a ddefnyddiwyd yn ddiweddar"
-
-#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
-msgid "Read Only"
-msgstr "Darllen yn Unig"
-
-#: ../gedit/gedit-mdi.c:2103
-msgid "Normal"
-msgstr "Arferol"
-
-#: ../gedit/gedit-mdi.c:2104
-msgid "Use Normal highlight mode"
-msgstr "Defnyddio'r modd amlygu Arferol"
-
-#: ../gedit/gedit-mdi.c:2180
+#: ../gedit/gedit-io-error-message-area.c:1313
 #, c-format
-msgid "Use %s highlight mode"
-msgstr "Defnyddio'r modd amlygu %s"
+msgid "Could not save the file %s."
+msgstr "Methu cadw'r ffeil %s."
 
-#: ../gedit/gedit-output-window.c:378
-msgid "Close the output window"
-msgstr "Cau'r ffenest allbwn"
+#: ../gedit/gedit-notebook.c:823
+msgid "Close document"
+msgstr "Cau'r ddogfen"
 
-#: ../gedit/gedit-output-window.c:416
-msgid "Copy selected lines"
-msgstr "Copïo'r llinellau a ddewiswyd"
+#: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
+#: ../gedit/recent-files/egg-recent-view-gtk.c:446
+#: ../gedit/recent-files/egg-recent-view-uimanager.c:322
+msgid "Empty"
+msgstr "Gwag"
 
-#: ../gedit/gedit-output-window.c:436
-msgid "Clear the output window"
-msgstr "Clirio'r ffenest allbwn"
+#: ../gedit/gedit-panel.c:526 ../gedit/gedit-panel.c:606
+msgid "Hide panel"
+msgstr "Cuddio'r panel"
 
-#: ../gedit/gedit-output-window.c:476
-msgid "Output Lines"
-msgstr "Llinellau Allbwn"
+#: ../gedit/gedit-plugin-manager.c:55
+msgid "Plugin"
+msgstr "Ategyn"
+
+#: ../gedit/gedit-plugin-manager.c:56
+msgid "Enabled"
+msgstr "Galluog"
+
+#: ../gedit/gedit-plugin-manager.c:540
+msgid "_About Plugin"
+msgstr "_Ynghylch yr Ategyn"
+
+#: ../gedit/gedit-plugin-manager.c:544
+msgid "C_onfigure Plugin"
+msgstr "_Cyflunio'r Ategyn"
 
 #: ../gedit/gedit-prefs-manager.c:175
 msgid "Cannot initialize preferences manager."
 msgstr "Methu cychwyn y rheolwr hoffterau."
 
-#: ../gedit/gedit-prefs-manager.c:1326
+#: ../gedit/gedit-prefs-manager.c:1388
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
-msgstr "Disgwylwyd `%s' cafwyd `%s' ar gyfer yr allwedd %s"
+msgstr "Disgwyliwyd `%s' cafwyd `%s' ar gyfer yr allwedd %s"
 
-#: ../gedit/gedit-print.c:219 ../gedit/gedit-ui.xml.h:37
-msgid "Print"
-msgstr "Argraffu"
-
-#: ../gedit/gedit-print.c:228 ../plugins/docinfo/docinfo.glade2.h:7
-msgid "Lines"
-msgstr "Llinellau"
-
-#: ../gedit/gedit-print.c:330
-msgid "Preparing pages..."
-msgstr "Paratoi tudalennau..."
-
-#: ../gedit/gedit-print.c:357
-#, c-format
-msgid "Rendering page %d of %d..."
-msgstr "Llunio tudalen %d o %d..."
-
-#: ../gedit/gedit-print.c:359
-#, c-format
-msgid "Printing page %d of %d..."
-msgstr "Argraffu tudalen %d o %d..."
-
-#: ../gedit/gedit-print.c:381 ../gedit/gedit-ui.xml.h:40
-msgid "Print preview"
-msgstr "Rhagolwg argraffu"
-
-#: ../gedit/gedit-print.c:551
+#: ../gedit/gedit-print.c:186
 #, c-format
 msgid "File: %s"
 msgstr "Ffeil: %s"
 
-#: ../gedit/gedit-print.c:557
+#: ../gedit/gedit-print.c:194
 msgid "Page %N of %Q"
-msgstr "Tudelen %N o %Q"
-
-#: ../gedit/gedit-ui.xml.h:1
-msgid "About this application"
-msgstr "Ynghylch y rhaglen hon"
-
-#: ../gedit/gedit-ui.xml.h:2
-msgid "Change the visibility of the output window in the current window"
-msgstr "Newid gwelededd y ffenest allbwn yn y ffenst cyfredol"
-
-#: ../gedit/gedit-ui.xml.h:3
-msgid "Change the visibility of the statusbar in the current window"
-msgstr "Newid gwelededd y bar statws yn y ffenest gyfredol"
-
-#: ../gedit/gedit-ui.xml.h:4
-msgid "Change the visibility of the toolbar in the current window"
-msgstr "Newid gwelededd y bat offer yn y ffenest gyfredol"
-
-#: ../gedit/gedit-ui.xml.h:5
-msgid "Close"
-msgstr "Cau"
-
-#: ../gedit/gedit-ui.xml.h:6
-msgid "Close all open files"
-msgstr "Cau bob ffeil agored"
-
-#: ../gedit/gedit-ui.xml.h:7
-msgid "Close the current file"
-msgstr "Cau'r ffeil cyfredol"
-
-#: ../gedit/gedit-ui.xml.h:8
-msgid "Configure the application"
-msgstr "Cyflunio'r rhaglen"
-
-#: ../gedit/gedit-ui.xml.h:9
-msgid "Copy"
-msgstr "Copïo"
-
-#: ../gedit/gedit-ui.xml.h:10
-msgid "Copy the selection"
-msgstr "Copïo'r dewis"
-
-#: ../gedit/gedit-ui.xml.h:11
-msgid "Create a new document"
-msgstr "Creu dogfen newydd"
-
-#: ../gedit/gedit-ui.xml.h:12
-msgid "Cu_t"
-msgstr "_Torri"
-
-#: ../gedit/gedit-ui.xml.h:13
-msgid "Cut"
-msgstr "Torri"
-
-#: ../gedit/gedit-ui.xml.h:14
-msgid "Cut the selection"
-msgstr "Torri'r dewis"
-
-#: ../gedit/gedit-ui.xml.h:15
-msgid "Delete"
-msgstr "Dileu"
-
-#: ../gedit/gedit-ui.xml.h:16
-msgid "Delete the selected text"
-msgstr "Dileu'r testun a ddewiswyd"
-
-#: ../gedit/gedit-ui.xml.h:18
-msgid "Find Ne_xt"
-msgstr "Canfod _Nesaf"
-
-#: ../gedit/gedit-ui.xml.h:20
-msgid "Find Pre_vious"
-msgstr "Canfod _Blaenorol"
-
-#: ../gedit/gedit-ui.xml.h:21
-msgid "Find Previous"
-msgstr "Canfod Blaenorol"
-
-#: ../gedit/gedit-ui.xml.h:22
-msgid "Go to _Line..."
-msgstr "_Mynd at Linell..."
-
-#: ../gedit/gedit-ui.xml.h:23
-msgid "Go to a specific line"
-msgstr "Mynd at linell benodol"
-
-#: ../gedit/gedit-ui.xml.h:24
-msgid "Main toolbar"
-msgstr "Prif far offer"
-
-#: ../gedit/gedit-ui.xml.h:25
-msgid "Move the current document to a new window"
-msgstr "Symud y ddogfen gyfredol at ffenest newydd"
-
-#: ../gedit/gedit-ui.xml.h:26
-msgid "New"
-msgstr "Newydd"
-
-#: ../gedit/gedit-ui.xml.h:27
-msgid "Open"
-msgstr "Agor"
-
-#: ../gedit/gedit-ui.xml.h:28
-msgid "Open Location..."
-msgstr "Agor Lleoliad..."
-
-#: ../gedit/gedit-ui.xml.h:29
-msgid "Open _Location..."
-msgstr "Agor _lleoliad..."
-
-#: ../gedit/gedit-ui.xml.h:30
-msgid "Open a file"
-msgstr "Agor ffeil"
-
-#: ../gedit/gedit-ui.xml.h:31
-msgid "Open a file from a specified location"
-msgstr "Agor ffeil o leoliad penodedig"
-
-#: ../gedit/gedit-ui.xml.h:32
-msgid "Open the gedit manual"
-msgstr "Agor y llawlyfr gedit"
-
-#: ../gedit/gedit-ui.xml.h:33
-msgid "Page Set_up"
-msgstr "Cyfluniad _Tudalen"
-
-#: ../gedit/gedit-ui.xml.h:34
-msgid "Paste"
-msgstr "Gludo"
-
-#: ../gedit/gedit-ui.xml.h:35
-msgid "Paste the clipboard"
-msgstr "Gludo'r clipfwrdd"
-
-#: ../gedit/gedit-ui.xml.h:36
-msgid "Pr_eferences"
-msgstr "_Ffafredigion"
-
-#: ../gedit/gedit-ui.xml.h:38
-msgid "Print Previe_w..."
-msgstr "_Rhagolwg Argraffu...."
-
-#: ../gedit/gedit-ui.xml.h:39
-msgid "Print Preview"
-msgstr "Rhagolwg Argraffu"
-
-#: ../gedit/gedit-ui.xml.h:41
-msgid "Print the current file"
-msgstr "Argraffu'r ffeil cyfredol"
-
-#: ../gedit/gedit-ui.xml.h:42
-msgid "Quit"
-msgstr "Gadael"
-
-#: ../gedit/gedit-ui.xml.h:43
-msgid "Quit the program"
-msgstr "Gadael y rhaglen"
-
-#: ../gedit/gedit-ui.xml.h:44
-msgid "Redo"
-msgstr "Ailwneud"
-
-#: ../gedit/gedit-ui.xml.h:45
-msgid "Redo the undone action"
-msgstr "Ailwneud y weithred fe ddatwneuthpwyd"
-
-#: ../gedit/gedit-ui.xml.h:47
-msgid "Revert"
-msgstr "Adfer"
-
-#: ../gedit/gedit-ui.xml.h:48
-msgid "Revert to a saved version of the file"
-msgstr "Adfer at versiwn wedi ei gadw o'r ffeil"
-
-#: ../gedit/gedit-ui.xml.h:49
-msgid "Save"
-msgstr "Cadw"
-
-#: ../gedit/gedit-ui.xml.h:50
-msgid "Save As"
-msgstr "Cadw Fel"
-
-#: ../gedit/gedit-ui.xml.h:51
-msgid "Save _As..."
-msgstr "Cadw _Fel..."
-
-#: ../gedit/gedit-ui.xml.h:52
-msgid "Save all open files"
-msgstr "Cadw pob ffeil agored"
-
-#: ../gedit/gedit-ui.xml.h:53
-msgid "Save the current file"
-msgstr "Arbed y ffeil cyfredol"
-
-#: ../gedit/gedit-ui.xml.h:54
-msgid "Save the current file with a different name"
-msgstr "Arbed y ffeil cyfredol gydag enw newydd"
-
-#: ../gedit/gedit-ui.xml.h:55
-msgid "Search backwards for the same text"
-msgstr "Chwilio am yn ôl am yr un testun"
-
-#: ../gedit/gedit-ui.xml.h:56
-msgid "Search for and replace text"
-msgstr "Chwilio am destun a'i amnewid"
-
-#: ../gedit/gedit-ui.xml.h:57
-msgid "Search for text"
-msgstr "Chwilio am destun"
-
-#: ../gedit/gedit-ui.xml.h:58
-msgid "Search forwards for the same text"
-msgstr "Chwilio am ymlaen am yr un llinyn"
-
-#: ../gedit/gedit-ui.xml.h:59
-msgid "Select All"
-msgstr "Dewis Popeth"
-
-#: ../gedit/gedit-ui.xml.h:60
-msgid "Select _All"
-msgstr "Dewis _Popeth"
-
-#: ../gedit/gedit-ui.xml.h:61
-msgid "Select the entire document"
-msgstr "Dewis yr holl ddogfen"
-
-#: ../gedit/gedit-ui.xml.h:62
-msgid ""
-"Set toolbar button style according to desktop Menu and Toolbar Preferences"
-msgstr ""
-"Gosod yr arddull botwm bar offer yn ôl Hoffterau Dewislen a Bar Offer y "
-"penbwrdd"
-
-#: ../gedit/gedit-ui.xml.h:63
-msgid "Setup the page settings"
-msgstr "Cyflunio'r gosodiadau tudalen"
-
-#: ../gedit/gedit-ui.xml.h:64
-msgid "Show only icons in the toolbar"
-msgstr "Dangos eiconau'n unig yn y bar offer"
-
-#: ../gedit/gedit-ui.xml.h:65
-msgid "Show text below every icon in the toolbar"
-msgstr "Dangos testun islaw pob eicon yn y bar offer"
-
-#: ../gedit/gedit-ui.xml.h:66
-msgid "Show text only beside important icons in the toolbar"
-msgstr "Dangos testun ger ochr eiconau pwysig yn unig yn y bar offer"
-
-#: ../gedit/gedit-ui.xml.h:67
-msgid "T_ext for Important Icons"
-msgstr "Testun ar gyer _Eiconau Pwysig"
-
-#: ../gedit/gedit-ui.xml.h:68
-msgid "Undo"
-msgstr "Datwneud"
-
-#: ../gedit/gedit-ui.xml.h:69
-msgid "Undo the last action"
-msgstr "Datwneud y weithred ddiwethaf"
-
-#: ../gedit/gedit-ui.xml.h:70
-msgid "_About"
-msgstr "_Ynghylch"
-
-#: ../gedit/gedit-ui.xml.h:71
-msgid "_Close"
-msgstr "_Cau"
-
-#: ../gedit/gedit-ui.xml.h:72
-msgid "_Close All"
-msgstr "_Cau Popeth"
-
-#: ../gedit/gedit-ui.xml.h:73
-msgid "_Contents"
-msgstr "_Cynnwys"
-
-#: ../gedit/gedit-ui.xml.h:74
-msgid "_Copy"
-msgstr "_Copïo"
-
-#: ../gedit/gedit-ui.xml.h:75
-msgid "_Customize Toolbar"
-msgstr "_Addasu'r Bar Offer"
-
-#: ../gedit/gedit-ui.xml.h:76
-msgid "_Delete"
-msgstr "_Dileu"
-
-#: ../gedit/gedit-ui.xml.h:77
-msgid "_Desktop Default"
-msgstr "_Rhagosodiad y Penbwrdd"
-
-#: ../gedit/gedit-ui.xml.h:78
-msgid "_Documents"
-msgstr "_Dogfennau"
-
-#: ../gedit/gedit-ui.xml.h:79
-msgid "_Edit"
-msgstr "_Golygu"
-
-#: ../gedit/gedit-ui.xml.h:80
-msgid "_File"
-msgstr "_Ffeil"
-
-#: ../gedit/gedit-ui.xml.h:81
-msgid "_Find..."
-msgstr "_Chwilio..."
-
-#: ../gedit/gedit-ui.xml.h:82
-msgid "_Help"
-msgstr "_Cymorth"
-
-#: ../gedit/gedit-ui.xml.h:83
-msgid "_Highlight Mode"
-msgstr "Modd _Amlygu"
-
-#: ../gedit/gedit-ui.xml.h:84
-msgid "_Icons Only"
-msgstr "_Eiconau yn Unig"
-
-#: ../gedit/gedit-ui.xml.h:86
-msgid "_New"
-msgstr "_Newydd"
-
-#: ../gedit/gedit-ui.xml.h:87
-msgid "_Open..."
-msgstr "_Agor..."
-
-#: ../gedit/gedit-ui.xml.h:88
-msgid "_Output Window"
-msgstr "_Ffenest Allbwn"
-
-#: ../gedit/gedit-ui.xml.h:89
-msgid "_Paste"
-msgstr "_Gludo"
-
-#: ../gedit/gedit-ui.xml.h:90
-msgid "_Print..."
-msgstr "_Argraffu..."
-
-#: ../gedit/gedit-ui.xml.h:91
-msgid "_Quit"
-msgstr "_Gadael"
-
-#: ../gedit/gedit-ui.xml.h:92
-msgid "_Redo"
-msgstr "_Ailwneud"
-
-#: ../gedit/gedit-ui.xml.h:93
-msgid "_Replace..."
-msgstr "_Amnewid..."
-
-#: ../gedit/gedit-ui.xml.h:95
-msgid "_Save"
-msgstr "_Cadw"
-
-#: ../gedit/gedit-ui.xml.h:96
-msgid "_Save All"
-msgstr "_Cadw Popeth"
-
-#: ../gedit/gedit-ui.xml.h:97
-msgid "_Search"
-msgstr "_Chwilio"
-
-#: ../gedit/gedit-ui.xml.h:98
-msgid "_Statusbar"
-msgstr "Bar _Statws"
-
-#: ../gedit/gedit-ui.xml.h:99
-msgid "_Text for All Icons"
-msgstr "_Testun ar gyfer Pob Eicon"
-
-#: ../gedit/gedit-ui.xml.h:100
-msgid "_Toolbar"
-msgstr "Bar _Offer"
-
-#: ../gedit/gedit-ui.xml.h:101
-msgid "_Tools"
-msgstr "_Offer"
-
-#: ../gedit/gedit-ui.xml.h:102
-msgid "_Undo"
-msgstr "_Datwneud"
-
-#: ../gedit/gedit-ui.xml.h:103
-msgid "_View"
-msgstr "_Golwg"
-
-#: ../gedit/gedit-utils.c:686
-msgid " (invalid Unicode)"
-msgstr "(Unicode annilys)"
-
-#.
-#. if (col == chars)
-#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
-#. else
-#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
-#.
+msgstr "Tudalen %N o %Q"
+
+#: ../gedit/gedit-print.c:316
+msgid "Print"
+msgstr "Argraffu"
+
+#: ../gedit/gedit-print.c:325 ../plugins/docinfo/docinfo.glade2.h:9
+msgid "Lines"
+msgstr "Llinellau"
+
+#: ../gedit/gedit-print-job-preview.c:623
+msgid "Page Preview"
+msgstr "Rhagolwg Tudalen"
+
+#: ../gedit/gedit-print-job-preview.c:624
+msgid "The preview of a page in the document to be printed"
+msgstr "Rhagolwg tudalen o fewn y ddogfen sydd i'w phrintio"
+
+#: ../gedit/gedit-print-job-preview.c:710
+msgid "Other"
+msgstr "Arall"
+
+#: ../gedit/gedit-print-job-preview.c:740
+msgid "Show the previous page"
+msgstr "Dangos y dudalen flaenorol"
+
+#: ../gedit/gedit-print-job-preview.c:751
+msgid "Show the next page"
+msgstr "Dangos y dudalen nesaf"
+
+#: ../gedit/gedit-print-job-preview.c:767
+msgid "Current page (Alt+P)"
+msgstr "Y dudalen bresennol (Alt+P)"
+
+#. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
+#. We are displaying 'XXX of XXX'.
+#: ../gedit/gedit-print-job-preview.c:781
+msgid "of"
+msgstr "o"
+
+#: ../gedit/gedit-print-job-preview.c:787
+msgid "Page total"
+msgstr "Cyfanswm tudalennau"
+
+#: ../gedit/gedit-print-job-preview.c:788
+msgid "The total number of pages in the document"
+msgstr "Cyfanswm y tudalennau o fewn y ddogfen"
+
+#: ../gedit/gedit-print-job-preview.c:805
+msgid "Show multiple pages"
+msgstr "Dangos fwy nag un tudalen"
+
+#: ../gedit/gedit-print-job-preview.c:817
+msgid "Zoom 1:1"
+msgstr "Chwyddo 1:1"
+
+#: ../gedit/gedit-print-job-preview.c:825
+msgid "Zoom to fit the whole page"
+msgstr "Chwyddo i ffitio'r holl dudalen"
+
+#: ../gedit/gedit-print-job-preview.c:834
+msgid "Zoom the page in"
+msgstr "Chwyddo'r dudalen"
+
+#: ../gedit/gedit-print-job-preview.c:842
+msgid "Zoom the page out"
+msgstr "Crebachu'r dudalen"
+
+#: ../gedit/gedit-print-job-preview.c:856
+msgid "Close print preview"
+msgstr "Cau'r rhagolwg argraffu"
+
+#: ../gedit/gedit-print-job-preview.c:1096
+#: ../gedit/gedit-print-job-preview.c:1097
+msgid "Number of pages horizontally"
+msgstr "Faint o dudalennau yn llorweddol"
+
+#: ../gedit/gedit-print-job-preview.c:1100
+#: ../gedit/gedit-print-job-preview.c:1101
+msgid "Number of pages vertically"
+msgstr "Faint o dudalennau yn fertigol"
+
+#: ../gedit/gedit-print-job-preview.c:1165
+msgid "No visible output was created."
+msgstr "Ni chrëwyd allbwn gweladwy."
+
+# "TRS" fel yn "trosysgrifo" ("overwrite")
+#: ../gedit/gedit-statusbar.c:257
+msgid "  OVR"
+msgstr "  TRS"
+
+#: ../gedit/gedit-statusbar.c:259
+msgid "  INS"
+msgstr "  MEW"
+
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:879
+#: ../gedit/gedit-statusbar.c:298
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Ll %d, Col %d"
 
-# "TRS" fel yn "trosysgrifo" ("overwrite")
-#: ../gedit/gedit-view.c:915
-msgid "  OVR"
-msgstr "  TRS"
-
-#: ../gedit/gedit-view.c:917
-msgid "  INS"
-msgstr "  MEW"
-
-#: ../gedit/gedit2.c:83
-msgid ""
-"Set the character encoding to be used to open the files listed on the "
-"command line"
-msgstr ""
-"Gosod yr amgodiad nodau i'w ddefnyddio i agor ffeiliau a rhestrir ar y "
-"llinell orchymyn"
-
-#: ../gedit/gedit2.c:86
-msgid "Quit an existing instance of gedit"
-msgstr "Gadael achos o gedit sy'n bodoli"
-
-#: ../gedit/gedit2.c:89
-msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr "Creu ffenest lefel dop newydd mewn achos o gedit sy'n bodoli"
-
-#: ../gedit/gedit2.c:92
-msgid "Create a new document in an existing instance of gedit"
-msgstr "Creu dogfen newydd mewn achos o gedit sy'n bodoli"
-
-#: ../gedit/gedit2.c:168
+#: ../gedit/gedit-statusbar.c:397
 #, c-format
-msgid "The specified encoding \"%s\" is not valid\n"
-msgstr "Nid yw'r amgodiad \"%s\" a benodwyd yn ddilys\n"
+msgid "There is a tab with errors"
+msgid_plural "There are %d tabs with errors"
+msgstr[0] "Mae yna %d tab â gwallau."
+msgstr[1] "Mae yna %d tab â gwallau."
+msgstr[2] "Mae yna %d dab â gwallau."
+msgstr[3] "Mae yna %d tab â gwallau."
 
-#: ../gedit/gedit-convert.c:91
-msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
-"Mae'r ffeil yr ydych yn ceisio ei hagor yn cynnwys dilyniant beit annilys."
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:641
+#, c-format
+msgid "Reverting %s from %s"
+msgstr "Yn adfer %s o %s"
 
-#: ../gedit/gedit-convert.c:160 ../gedit/gedit-convert.c:204
-msgid ""
-"gedit was not able to automatically determine the encoding of the file you "
-"want to open."
-msgstr ""
-"Methodd gedit ddirnad yn awtomatig amgodiad y ffeil yr ydych am ei hagor."
+#: ../gedit/gedit-tab.c:648
+#, c-format
+msgid "Reverting %s"
+msgstr "Yn adfer %s"
 
-#: ../plugins/changecase/changecase.c:43
-msgid "C_hange Case"
-msgstr "_Newid Priflythrennedd"
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:664
+#, c-format
+msgid "Loading %s from %s"
+msgstr "Yn llwytho %s o %s"
 
-#: ../plugins/changecase/changecase.c:49
-msgid "All _Upper Case"
-msgstr "_Priflythrennau I Gyd"
+#: ../gedit/gedit-tab.c:671
+#, c-format
+msgid "Loading %s"
+msgstr "Yn llwytho %s"
 
-#: ../plugins/changecase/changecase.c:50
-msgid "All _Lower Case"
-msgstr "Llythrennau _Bychain I Gyd"
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:754
+#, c-format
+msgid "Saving %s to %s"
+msgstr "Cadw %s i %s"
 
-#: ../plugins/changecase/changecase.c:51
-msgid "_Invert Case"
-msgstr "_Cyfnewid Priflythrennedd"
+#: ../gedit/gedit-tab.c:761
+#, c-format
+msgid "Saving %s"
+msgstr "Yn cadw %s"
 
-#: ../plugins/changecase/changecase.c:52
-msgid "_Title Case"
-msgstr "Priflythrennedd _Teitl"
+#. Read only
+#: ../gedit/gedit-tab.c:1505
+msgid "RO"
+msgstr "DYU"
 
-#: ../plugins/changecase/changecase.c:54
-msgid "Change selected text to upper case"
-msgstr "Newid y testun a ddewiswyd at briflythrennau"
+#: ../gedit/gedit-tab.c:1550
+#, c-format
+msgid "Error opening file %s"
+msgstr "Gwall wrth agor ffeil %s"
 
-#: ../plugins/changecase/changecase.c:55
-msgid "Change selected text to lower case"
-msgstr "Newid y testun a ddewiswyd at lythrennau bychain"
+#: ../gedit/gedit-tab.c:1555
+#, c-format
+msgid "Error reverting file %s"
+msgstr "Gwall wrth adfer ffeil %s"
 
-#: ../plugins/changecase/changecase.c:56
-msgid "Invert the case of selected text"
-msgstr "Cyfnewid priflythrennedd y testun dewisiedig"
+#: ../gedit/gedit-tab.c:1560
+#, c-format
+msgid "Error saving file %s"
+msgstr "Gwall wrth gadw ffeil %s"
 
-#: ../plugins/changecase/changecase.c:57
-msgid "Capitalize the first letter of each selected word"
-msgstr "Priflythrennu llythyren gyntaf pob gair dewisiedig"
+#: ../gedit/gedit-tab.c:1578
+msgid "Unicode (UTF-8)"
+msgstr "Unicode (UTF-8)"
+
+#: ../gedit/gedit-tab.c:1585
+msgid "Name:"
+msgstr "Enw:"
+
+#: ../gedit/gedit-tab.c:1586
+msgid "MIME Type:"
+msgstr "Math MIME:"
+
+#: ../gedit/gedit-tab.c:1587
+msgid "Encoding:"
+msgstr "Amgodiad:"
+
+#: ../gedit/gedit-tab.c:2014
+#, c-format
+msgid "Rendering page %d of %d..."
+msgstr "Llunio tudalen %d o %d..."
+
+#. Toplevel
+#: ../gedit/gedit-ui.h:47
+msgid "_File"
+msgstr "_Ffeil"
+
+#: ../gedit/gedit-ui.h:48
+msgid "_Edit"
+msgstr "_Golygu"
+
+#: ../gedit/gedit-ui.h:49
+msgid "_View"
+msgstr "_Golwg"
+
+#: ../gedit/gedit-ui.h:50
+msgid "_Search"
+msgstr "_Chwilio"
+
+#: ../gedit/gedit-ui.h:51
+msgid "_Tools"
+msgstr "_Offer"
+
+#: ../gedit/gedit-ui.h:52
+msgid "_Documents"
+msgstr "_Dogfennau"
+
+#: ../gedit/gedit-ui.h:53
+msgid "_Help"
+msgstr "_Cymorth"
+
+#: ../gedit/gedit-ui.h:57
+msgid "Create a new document"
+msgstr "Creu dogfen newydd"
+
+#: ../gedit/gedit-ui.h:58
+msgid "_Open..."
+msgstr "_Agor..."
+
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1105
+msgid "Open a file"
+msgstr "Agor ffeil"
+
+#: ../gedit/gedit-ui.h:60
+msgid "Open _Location..."
+msgstr "Agor _lleoliad..."
+
+#: ../gedit/gedit-ui.h:61
+msgid "Open a file from a specified location"
+msgstr "Agor ffeil o leoliad penodedig"
+
+#: ../gedit/gedit-ui.h:62
+msgid "Page Set_up..."
+msgstr "Gosodiad _Tudalen..."
+
+#: ../gedit/gedit-ui.h:63
+msgid "Setup the page settings"
+msgstr "Cyflunio'r gosodiadau tudalen"
+
+#. Edit menu
+#: ../gedit/gedit-ui.h:66
+msgid "Pr_eferences"
+msgstr "_Ffafredigion"
+
+#: ../gedit/gedit-ui.h:67
+msgid "Configure the application"
+msgstr "Cyflunio'r rhaglen"
+
+#. Help menu
+#: ../gedit/gedit-ui.h:70
+msgid "_Contents"
+msgstr "_Cynnwys"
+
+#: ../gedit/gedit-ui.h:71
+msgid "Open the gedit manual"
+msgstr "Agor y llawlyfr gedit"
+
+#: ../gedit/gedit-ui.h:73
+msgid "About this application"
+msgstr "Ynghylch y rhaglen hon"
+
+#: ../gedit/gedit-ui.h:80
+msgid "Save the current file"
+msgstr "Arbed y ffeil cyfredol"
+
+#: ../gedit/gedit-ui.h:81
+msgid "Save _As..."
+msgstr "Cadw _Fel..."
+
+#: ../gedit/gedit-ui.h:82
+msgid "Save the current file with a different name"
+msgstr "Arbed y ffeil cyfredol gydag enw newydd"
+
+#: ../gedit/gedit-ui.h:84
+msgid "Revert to a saved version of the file"
+msgstr "Adfer at fersiwn wedi ei gadw o'r ffeil"
+
+#: ../gedit/gedit-ui.h:85
+msgid "Print Previe_w"
+msgstr "_Rhagolwg Argraffu"
+
+#: ../gedit/gedit-ui.h:86
+msgid "Print preview"
+msgstr "Rhagolwg argraffu"
+
+#: ../gedit/gedit-ui.h:87
+msgid "_Print..."
+msgstr "_Argraffu..."
+
+#: ../gedit/gedit-ui.h:88
+msgid "Print the current page"
+msgstr "Argraffu'r dudalen hon"
+
+#: ../gedit/gedit-ui.h:90
+msgid "Close the current file"
+msgstr "Cau'r ffeil cyfredol"
+
+#: ../gedit/gedit-ui.h:94
+msgid "Undo the last action"
+msgstr "Dadwneud y weithred ddiwethaf"
+
+#: ../gedit/gedit-ui.h:96
+msgid "Redo the last undone action"
+msgstr "Ail-wneud y weithred gafodd ei dadwneud diwethaf"
+
+#: ../gedit/gedit-ui.h:98
+msgid "Cut the selection"
+msgstr "Torri'r dewis"
+
+#: ../gedit/gedit-ui.h:100
+msgid "Copy the selection"
+msgstr "Copïo'r dewis"
+
+#: ../gedit/gedit-ui.h:102
+msgid "Paste the clipboard"
+msgstr "Gludo'r clipfwrdd"
+
+#: ../gedit/gedit-ui.h:104
+msgid "Delete the selected text"
+msgstr "Dileu'r testun a ddewiswyd"
+
+#: ../gedit/gedit-ui.h:105
+msgid "Select _All"
+msgstr "Dewis _Popeth"
+
+#: ../gedit/gedit-ui.h:106
+msgid "Select the entire document"
+msgstr "Dewis yr holl ddogfen"
+
+#. View menu
+#: ../gedit/gedit-ui.h:109
+msgid "_Highlight Mode"
+msgstr "Modd _Amlygu"
+
+#. Search menu
+#: ../gedit/gedit-ui.h:112
+msgid "_Find..."
+msgstr "_Chwilio..."
+
+#: ../gedit/gedit-ui.h:113
+msgid "Search for text"
+msgstr "Chwilio am destun"
+
+#: ../gedit/gedit-ui.h:114
+msgid "Find Ne_xt"
+msgstr "Canfod _Nesaf"
+
+#: ../gedit/gedit-ui.h:115
+msgid "Search forwards for the same text"
+msgstr "Chwilio am ymlaen am yr un llinyn"
+
+#: ../gedit/gedit-ui.h:116
+msgid "Find Pre_vious"
+msgstr "Canfod _Blaenorol"
+
+#: ../gedit/gedit-ui.h:117
+msgid "Search backwards for the same text"
+msgstr "Chwilio am yn ôl am yr un testun"
+
+#: ../gedit/gedit-ui.h:118
+msgid "_Replace..."
+msgstr "_Amnewid..."
+
+#: ../gedit/gedit-ui.h:119
+msgid "Search for and replace text"
+msgstr "Chwilio am destun a'i amnewid"
+
+#: ../gedit/gedit-ui.h:120
+msgid "Go to _Line..."
+msgstr "_Mynd at Linell..."
+
+#: ../gedit/gedit-ui.h:121
+msgid "Go to a specific line"
+msgstr "Mynd at linell benodol"
+
+#. Documents menu
+#: ../gedit/gedit-ui.h:124
+msgid "_Save All"
+msgstr "_Cadw Popeth"
+
+#: ../gedit/gedit-ui.h:125
+msgid "Save all open files"
+msgstr "Cadw pob ffeil agored"
+
+#: ../gedit/gedit-ui.h:126
+msgid "_Close All"
+msgstr "_Cau Popeth"
+
+#: ../gedit/gedit-ui.h:127
+msgid "Close all open files"
+msgstr "Cau bob ffeil agored"
+
+#: ../gedit/gedit-ui.h:128
+msgid "_Move to New Window"
+msgstr "_Symud at Ffenest Newydd"
+
+#: ../gedit/gedit-ui.h:129
+msgid "Move the current document to a new window"
+msgstr "Symud y ddogfen gyfredol at ffenest newydd"
+
+#: ../gedit/gedit-ui.h:136
+msgid "Quit the program"
+msgstr "Gadael y rhaglen"
+
+#: ../gedit/gedit-ui.h:141
+msgid "_Toolbar"
+msgstr "Bar _Offer"
+
+#: ../gedit/gedit-ui.h:142
+msgid "Show or hide the toolbar in the current window"
+msgstr "Cuddio neu ddangos y bar offer yn y ffenestr bresennol"
+
+#: ../gedit/gedit-ui.h:144
+msgid "_Statusbar"
+msgstr "Bar _Statws"
+
+#: ../gedit/gedit-ui.h:145
+msgid "Show or hide the statusbar in the current window"
+msgstr "Cuddio neu ddangos y bar statws yn y ffenestr bresennol"
+
+#: ../gedit/gedit-ui.h:147
+msgid "Side _Pane"
+msgstr "Cwarel _Ochr"
+
+#: ../gedit/gedit-ui.h:148
+msgid "Show or hide the side pane in the current window"
+msgstr "Cuddio neu ddangos y cwarel ochr yn y ffenestr bresennol"
+
+#: ../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
+msgid "_Bottom Panel"
+msgstr "_Panel Gwaelod"
+
+#: ../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
+msgid "Show or hide the bottom panel in the current window"
+msgstr "Cuddio neu ddangos y panel gwaelod yn y ffenestr bresennol"
+
+#: ../gedit/gedit-utils.c:923
+#, c-format
+msgid "Unable to find file %s."
+msgstr "Methu canfod y ffeil %s."
+
+#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+msgid "Please check your installation."
+msgstr "Gwiriwch eich gosodiad."
+
+#: ../gedit/gedit-utils.c:952
+#, c-format
+msgid "Unable to find the required widgets inside file %s."
+msgstr "Methu canfod y teclynnau gofynnol o fewn y ffeil %s."
+
+#. create "Wrap Around" menu item.
+#: ../gedit/gedit-view.c:1333
+msgid "_Wrap Around"
+msgstr "_Amlapio o gwmpas"
+
+#. create "Match Entire Word Only" menu item.
+#: ../gedit/gedit-view.c:1343
+msgid "Match _Entire Word Only"
+msgstr "Cydweddu gair _cyfan yn unig"
+
+#. create "Match Case" menu item.
+#: ../gedit/gedit-view.c:1353
+msgid "_Match Case"
+msgstr "_Cydweddu prif lythrennedd"
+
+#: ../gedit/gedit-view.c:1441
+msgid "String you want to search for"
+msgstr "Llinyn i'w chwilio amdani"
+
+#: ../gedit/gedit-view.c:1450
+msgid "Line you want to move the cursor to"
+msgstr "Y llinell i symud y cyrchwr ati"
+
+#: ../gedit/gedit-window.c:676
+#, c-format
+msgid "Use %s highlight mode"
+msgstr "Defnyddio'r modd amlygu %s"
+
+#: ../gedit/gedit-window.c:729
+msgid "Normal"
+msgstr "Arferol"
+
+#: ../gedit/gedit-window.c:730
+msgid "Use Normal highlight mode"
+msgstr "Defnyddio'r modd amlygu Arferol"
+
+#. Translators: %s is a URI
+#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
+#: ../gedit/recent-files/egg-recent-view-gtk.c:346
+#: ../gedit/recent-files/egg-recent-view-uimanager.c:205
+#, c-format
+msgid "Open '%s'"
+msgstr "Agor '%s'"
+
+#: ../gedit/gedit-window.c:1004
+msgid "Save"
+msgstr "Cadw"
+
+#: ../gedit/gedit-window.c:1109
+msgid "Open a recently used file"
+msgstr "Agor ffeil a ddefnyddiwyd yn ddiweddar"
+
+#: ../gedit/gedit-window.c:1116
+msgid "Open"
+msgstr "Agor"
+
+#: ../gedit/gedit-window.c:1205 ../gedit/gedit-window.c:1804
+#, c-format
+msgid "Activate %s"
+msgstr "Gweithredu %s"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
-msgstr "Newid Priflythrennedd"
+msgstr "Newid prif lythrennedd"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
 msgid "Changes the case of selected text."
-msgstr "Newidir priflythrennedd y testun a ddewiswyd."
+msgstr "Newidir prif lythrennedd y testun a ddewiswyd."
 
-#: ../plugins/docinfo/docinfo.c:45
-msgid "_Document Statistics"
-msgstr "_Ystadegau Dogfen"
+#: ../plugins/changecase/gedit-changecase-plugin.c:222
+msgid "C_hange Case"
+msgstr "_Newid prif lythrennedd"
 
-#: ../plugins/docinfo/docinfo.c:48
-msgid "Get statistic info on current document"
-msgstr "Cyrchu ystadegau ynghylch y ddogfen gyfredol"
+#: ../plugins/changecase/gedit-changecase-plugin.c:223
+msgid "All _Upper Case"
+msgstr "_Priflythrennau I Gyd"
 
-#: ../plugins/docinfo/docinfo.c:139
-#: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
-msgid "Document Statistics"
-msgstr "Ystadegau Dogfen"
+#: ../plugins/changecase/gedit-changecase-plugin.c:224
+msgid "Change selected text to upper case"
+msgstr "Newid y testun a ddewiswyd at briflythrennau"
 
-#: ../plugins/docinfo/docinfo.c:153
-msgid "_Update"
-msgstr "_Diweddaru"
+#: ../plugins/changecase/gedit-changecase-plugin.c:226
+msgid "All _Lower Case"
+msgstr "Llythrennau _Bychain I Gyd"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:227
+msgid "Change selected text to lower case"
+msgstr "Newid y testun a ddewiswyd at lythrennau bychain"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:229
+msgid "_Invert Case"
+msgstr "_Cyfnewid prif lythrennedd"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:230
+msgid "Invert the case of selected text"
+msgstr "Cyfnewid prif lythrennedd y testun dewisedig"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:232
+msgid "_Title Case"
+msgstr "prif lythrennedd _Teitl"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:233
+msgid "Capitalize the first letter of each selected word"
+msgstr "Priflythrennu llythyren gyntaf pob gair dewisedig"
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
 msgid ""
@@ -2526,6 +2485,11 @@ msgid ""
 msgstr ""
 "Dadansoddi'r ddogfen gyfredol ac adrodd y nifer o eiriau, llinellau, nodau a "
 "nodau heb fod yn fylchau sydd ynddo."
+
+#: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#: ../plugins/docinfo/docinfo.glade2.h:8
+msgid "Document Statistics"
+msgstr "Ystadegau Dogfen"
 
 #: ../plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -2547,31 +2511,217 @@ msgstr "Nodau (dim bylchau)"
 msgid "Characters (with spaces)"
 msgstr "Nodau (gyda bylchau)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:8
-msgid "Update"
-msgstr "Diweddaru"
+#: ../plugins/docinfo/docinfo.glade2.h:7
+msgid "Document"
+msgstr "Dogfen"
 
-#: ../plugins/docinfo/docinfo.glade2.h:9
+#: ../plugins/docinfo/docinfo.glade2.h:10
+msgid "Selection"
+msgstr "Dewis"
+
+#: ../plugins/docinfo/docinfo.glade2.h:11
 msgid "Words"
 msgstr "Geiriau"
 
-#: ../plugins/docinfo/docinfo.glade2.h:10
-msgid "gedit: Document Info plugin"
-msgstr "gedit: Ategyn Gwybodaeth Dogfen"
+#: ../plugins/docinfo/docinfo.glade2.h:12
+msgid "_Update"
+msgstr "_Diweddaru"
 
-#: ../plugins/indent/indent.c:45
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:405
+msgid "_Document Statistics"
+msgstr "_Ystadegau Dogfen"
+
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+msgid "Get statistic info on current document"
+msgstr "Cyrchu ystadegau ynghylch y ddogfen gyfredol"
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
+msgid "Execute external commands and shell scripts."
+msgstr "Rhedeg gorchmynion allanol a sgriptiau'r plisgyn."
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+msgid "External Tools"
+msgstr "Offer Allanol"
+
+#: ../plugins/externaltools/tools/functions.py:237
+msgid "You must be inside a word to run this command"
+msgstr "Rhaid bod o fewn gair cyn rhedeg y gorchymyn hwn"
+
+#: ../plugins/externaltools/tools/functions.py:293
+msgid "Running tool:"
+msgstr "Offer sy'n rhedeg:"
+
+#: ../plugins/externaltools/tools/functions.py:303
+msgid "Done."
+msgstr "Wedi'i wneud."
+
+#: ../plugins/externaltools/tools/functions.py:305
+msgid "Exited"
+msgstr "Wedi Gadael"
+
+#: ../plugins/externaltools/tools/manager.py:43
+msgid "Nothing"
+msgstr "Dim"
+
+#: ../plugins/externaltools/tools/manager.py:44
+msgid "Current document"
+msgstr "Dogfen bresennol"
+
+#: ../plugins/externaltools/tools/manager.py:45
+msgid "Current selection"
+msgstr "Dewis presennol"
+
+#: ../plugins/externaltools/tools/manager.py:46
+msgid "Current line"
+msgstr "Llinell bresennol"
+
+#: ../plugins/externaltools/tools/manager.py:47
+msgid "Current word"
+msgstr "Gair presennol"
+
+#: ../plugins/externaltools/tools/manager.py:50
+msgid "Insert in output panel"
+msgstr "Rhoi yn y panel allbwn"
+
+#: ../plugins/externaltools/tools/manager.py:51
+msgid "Create new document"
+msgstr "Creu dogfen newydd"
+
+#: ../plugins/externaltools/tools/manager.py:52
+msgid "Append to current document"
+msgstr "Atodi at y ddogfen bresennol"
+
+#: ../plugins/externaltools/tools/manager.py:53
+msgid "Replace current document"
+msgstr "Disodli'r ddogfen bresennol"
+
+#: ../plugins/externaltools/tools/manager.py:54
+msgid "Replace current selection"
+msgstr "Disodli'r dewis presennol"
+
+#: ../plugins/externaltools/tools/manager.py:55
+msgid "Insert at cursor position"
+msgstr "Mewnosod ar safle'r cyrchwr"
+
+#: ../plugins/externaltools/tools/manager.py:58
+msgid "All documents"
+msgstr "Pob dogfen"
+
+#: ../plugins/externaltools/tools/manager.py:59
+msgid "All documents except untitled ones"
+msgstr "Pob dogfen ar wahân i'r rhai dideitl"
+
+#: ../plugins/externaltools/tools/manager.py:60
+msgid "Local files only"
+msgstr "Ffeiliau lleol yn unig"
+
+#: ../plugins/externaltools/tools/manager.py:61
+msgid "Remote files only"
+msgstr "Ffeiliau pell yn unig"
+
+#: ../plugins/externaltools/tools/manager.py:62
+msgid "Untitled documents only"
+msgstr "Dogfennau dideitl yn unig"
+
+#: ../plugins/externaltools/tools/manager.py:175
+#: ../plugins/externaltools/tools/manager.py:192
+#: ../plugins/externaltools/tools/manager.py:231
+#, python-format
+msgid "Edit tool <i>%s</i>:"
+msgstr "Arf golygu <i>%s</i>:"
+
+#: ../plugins/externaltools/tools/manager.py:179
+msgid "A Brand New Tool"
+msgstr "Arf newydd sbon"
+
+#: ../plugins/externaltools/tools/manager.py:202
+msgid "New tool"
+msgstr "Arf newydd"
+
+#: ../plugins/externaltools/tools/outputpanel.py:78
+msgid "Stopped."
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:2
+msgid "Co_mmand(s):"
+msgstr "_Gorchymyn/gorchmynion:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr "Arf golygu <i>make</i>:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr "Rheolwr Offer Allanol"
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr "F7"
+
+#: ../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr ""
+"Dim\n"
+"Y ddogfen bresennol\n"
+"Pob dogfen"
+
+#: ../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr "Rhedeg “make” yng nghyfeiriadur y ddogfen"
+
+#: ../plugins/externaltools/tools/tools.glade.h:10
+#: ../plugins/snippets/snippets/snippets.glade.h:4
+msgid "_Accelerator:"
+msgstr "_Cyflymydd:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr "_Cymhwysedd:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Description:"
+msgstr "_Disgrifiad:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr "_Mewnbwn:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "_Output:"
+msgstr "_Allbwn:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:15
+msgid "_Save:"
+msgstr "_Cadw:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:16
+msgid "_Tools:"
+msgstr "_Offer:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:17
+msgid ""
+"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+"make"
+msgstr ""
+"cd $CYFEIRIADUR_PRESENNOL_DOGFEN_GEDIT\n"
+"make"
+
+#: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Mewnoliad"
 
-#: ../plugins/indent/indent.c:47
+#: ../plugins/indent/gedit-indent-plugin.c:58
 msgid "Indent selected lines"
 msgstr "Mewnoli'r llinellau a ddewiswyd"
 
-#: ../plugins/indent/indent.c:49
+#: ../plugins/indent/gedit-indent-plugin.c:63
 msgid "U_nindent"
 msgstr "_Datfewnoli"
 
-#: ../plugins/indent/indent.c:51
+#: ../plugins/indent/gedit-indent-plugin.c:65
 msgid "Unindent selected lines"
 msgstr "Datfewnoli y llinellau a ddewiswyd"
 
@@ -2583,11 +2733,27 @@ msgstr "Mewnoli llinellau"
 msgid "Indents or un-indents selected lines."
 msgstr "Mewnoli new datfewnoli llinellau dewisedig."
 
-#: ../plugins/sample/sample.c:43
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
+msgid "Emacs, Kate and Vim-style modelines support for gedit."
+msgstr "Cynhaliaeth llinellau modd Emacs, Kate a Vim ar gyfer gedit."
+
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:2
+msgid "Modelines"
+msgstr "Llinellau modd"
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
+msgid "Opens an interactive python console in the bottom panel."
+msgstr "Agor consol Python rhyngweithiol yn y panel gwaelod."
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+msgid "Python Console"
+msgstr "Consol Python"
+
+#: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
 msgstr "Mewnosod _Enw Cyfrif"
 
-#: ../plugins/sample/sample.c:46
+#: ../plugins/sample/gedit-sample-plugin.c:65
 msgid "Insert the user name at the cursor position"
 msgstr "Mewnosod yr enw cyfrif ger safle'r cyrchydd"
 
@@ -2599,142 +2765,70 @@ msgstr "Mewnosodir yr enw cyfrif ger safle'r cyrchydd."
 msgid "User name"
 msgstr "Enw cyfrif"
 
-#: ../plugins/savecopy/savecopy.c:49
-msgid "Sa_ve Copy..."
-msgstr "Cadw _Copi..."
+#: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:1
+msgid "Insert often used pieces of text in a fast way"
+msgstr "Ffordd chwim i fewnosod darnau o destun a ddefnyddir yn aml"
 
-#: ../plugins/savecopy/savecopy.c:52
-msgid "Save a copy of the current document"
-msgstr "Cadw copi o'r ddogfen bresennol"
+#: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
+msgid "Snippets"
+msgstr "Tameidiau"
 
-#: ../plugins/savecopy/savecopy.c:315
-#, c-format
-msgid "Could not save a copy of the file to \"%s\""
-msgstr "Methu cadw copi o'r ffeil i \"%s\""
+#: ../plugins/snippets/snippets/snippets.glade.h:2
+msgid "<b>Activation</b>"
+msgstr "<b>Rhoi ar Waith</b>"
 
-#: ../plugins/savecopy/savecopy.c:414
-msgid "You are trying to overwrite the original file"
-msgstr "Rydych yn ceisio trosysgrifo'r ffeil wreiddiol"
+#: ../plugins/snippets/snippets/snippets.glade.h:3
+msgid "Snippets Manager"
+msgstr "Trefnydd Tameidiau"
 
-#: ../plugins/savecopy/savecopy.c:523
-msgid "Save Copy..."
-msgstr "Cadw Copi..."
+#: ../plugins/snippets/snippets/snippets.glade.h:5
+msgid "_Edit snippet:"
+msgstr "_Golygu tamaid:"
 
-#. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
-#, c-format
-msgid "%s (copy)"
-msgstr "%s (copi)"
+#: ../plugins/snippets/snippets/snippets.glade.h:6
+msgid "_Snippets:"
+msgstr "_Tameidiau:"
 
-#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
-msgid "Save a Copy"
-msgstr "Cadw Copi"
+#: ../plugins/snippets/snippets/snippets.glade.h:7
+msgid "_Tab trigger:"
+msgstr "Sbardun _Tab:"
 
-#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-msgid "Saves a copy of the current document to a local or remote location."
-msgstr "Arbed copi o'r ddogfen bresennol i leoliad lleol neu bell."
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage _Snippets..."
+msgstr "Rheoli _Tameidiau:"
 
-#: ../plugins/shell_output/shell_output.c:56
-msgid "_Run Command..."
-msgstr "_Gweithredu gorchymyn..."
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:74
+msgid "Manage snippets"
+msgstr "Rheoli tameidiau"
 
-#: ../plugins/shell_output/shell_output.c:59
-msgid "Run a command"
-msgstr "Gweithredu gorchymyn"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:54
+msgid "Add a new snippet..."
+msgstr "Ychwanegu tamaid newydd..."
 
-#: ../plugins/shell_output/shell_output.c:156
-#: ../plugins/shell_output/shell_output.c:576
-msgid "Stopped"
-msgstr "Wedi ei aros"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:109
+msgid "Global"
+msgstr "Eang"
 
-#: ../plugins/shell_output/shell_output.c:355
-msgid "Run Command"
-msgstr "Gweithredu'r gorchymyn"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:562
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Teipiwch gyflymydd newydd, neu bwyso Yn-Ôl (Backspace) i glirio"
 
-#: ../plugins/shell_output/shell_output.c:374
-msgid "_Run"
-msgstr "_Gweithredu"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:564
+msgid "Type a new accelerator"
+msgstr "Teipiwch gyflymydd newydd"
 
-#: ../plugins/shell_output/shell_output.c:582
-msgid "Done"
-msgstr "Wedi gorffen"
-
-#: ../plugins/shell_output/shell_output.c:584
-msgid "Failed"
-msgstr "Methwyd"
-
-#: ../plugins/shell_output/shell_output.c:754
-msgid ""
-"The shell command entry is empty.\n"
-"\n"
-"Please, insert a valid shell command."
-msgstr ""
-"Mae'r cofnod gorchymyn cragen yn wag.\n"
-"\n"
-"Os gwelwch yn dda, gosodwch orchymyn cragen ddilys."
-
-#: ../plugins/shell_output/shell_output.c:776
-msgid ""
-"Error parsing the shell command.\n"
-"\n"
-"Please, insert a valid shell command."
-msgstr ""
-"Gwall wrth ramadegu'r gorchymyn cragen.\n"
-"\n"
-"Os gwelwch yn dda, gosodwch orchymyn cragen ddilys."
-
-#: ../plugins/shell_output/shell_output.c:854
-msgid "Executing command"
-msgstr "Gweithredu'r gorchymyn"
-
-#: ../plugins/shell_output/shell_output.c:919
-msgid "An error occurred while running the selected command."
-msgstr "Digwyddodd gwall wrth weithredu'r gorchymyn a ddewiswyd."
-
-#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
-msgid ""
-"Executes an external program and, if required, displays its output in the "
-"output window."
-msgstr ""
-"Gweithredu rhaglen allanol ac, os gofynnir, dangos ei allbwn yn y ffenest "
-"allbwn."
-
-#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
-msgid "Shell command"
-msgstr "Gorchymyn cragen"
-
-#: ../plugins/shell_output/shell_output.glade2.h:2
-msgid "Co_mmand:"
-msgstr "_Gorchymyn:"
-
-#: ../plugins/shell_output/shell_output.glade2.h:3
-msgid "Select the working directory..."
-msgstr "Dewiswch y cyfeiridaur gweithio..."
-
-#: ../plugins/shell_output/shell_output.glade2.h:4
-msgid "_Show results in Output Window"
-msgstr "_Dangos canlyniadau yn y Ffenest Allbwn"
-
-#: ../plugins/shell_output/shell_output.glade2.h:5
-msgid "_Working directory:"
-msgstr "Cyfeiriadur _gweithio:"
-
-#: ../plugins/shell_output/shell_output.glade2.h:6
-msgid "gedit: Shell Output plugin"
-msgstr "gedit: Ategyn Allbwn Cragen"
-
-#: ../plugins/sort/sort.c:29
+#: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
 msgstr "_Trefnu"
 
-#: ../plugins/sort/sort.c:32
-msgid "Sort the current document or selection."
-msgstr "Trefnu'r ddogfen neu ddewisiad cyfredol."
+#: ../plugins/sort/gedit-sort-plugin.c:82
+msgid "Sort the current document or selection"
+msgstr "Trefnu'r ddogfen neu ddewis presennol"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.glade2.h:3
 msgid "Sort"
-msgstr "_Trefnu"
+msgstr "Trefnu"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:2
 msgid "Sorts a document or selected text."
@@ -2746,20 +2840,20 @@ msgstr "_Tynnu copïau dyblyg"
 
 #: ../plugins/sort/sort.glade2.h:2
 msgid "S_tart at column:"
-msgstr "_Dechrau a cholofn:"
+msgstr "_Dechrau â cholofn:"
 
 #: ../plugins/sort/sort.glade2.h:4
 msgid "You cannot undo a sort operation"
-msgstr "Ni allwch ddatwneud gweithred trefnu"
+msgstr "Ni allwch ddadwneud gweithred trefnu"
 
 # msgstr "_Anwybyddu'r gwahaniaeth rhwng priflythennau a llythrennau bychain"
 #: ../plugins/sort/sort.glade2.h:5
 msgid "_Ignore case"
-msgstr "_Anwybyddu priflythrennedd"
+msgstr "_Anwybyddu prif lythrennedd"
 
 #: ../plugins/sort/sort.glade2.h:6
 msgid "_Reverse order"
-msgstr "Trefn _gwrthdroedig"
+msgstr "Trefn _gwrthdroëdig"
 
 #: ../plugins/sort/sort.glade2.h:7
 msgid "_Sort"
@@ -2787,24 +2881,6 @@ msgstr "_Ychwanegu"
 #: ../plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
 msgstr "_Cynigion sillafu"
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:289
-msgid "Check Spelling"
-msgstr "Cywiro sillafu"
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:300
-msgid "Suggestions"
-msgstr "Awgrymiadau"
-
-# ydi "correct" yn ferf neu'n ansoddair?
-# ansoddair dwi'n meddwl
-#: ../plugins/spell/gedit-spell-checker-dialog.c:615
-msgid "(correct spelling)"
-msgstr "(sillafu cywir)"
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:800
-msgid "Completed spell checking"
-msgstr "Gorffenwyd gwirio sillafu"
 
 #: ../plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
@@ -3102,14 +3178,64 @@ msgstr "Zwlw"
 msgid "Default"
 msgstr "Rhagosodiad"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:239
+#: ../plugins/spell/gedit-spell-checker-dialog.c:289
+msgid "Check Spelling"
+msgstr "Cywiro sillafu"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:300
+msgid "Suggestions"
+msgstr "Awgrymiadau"
+
+# ydi "correct" yn ferf neu'n ansoddair?
+# ansoddair dwi'n meddwl
+#: ../plugins/spell/gedit-spell-checker-dialog.c:615
+msgid "(correct spelling)"
+msgstr "(sillafu cywir)"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:800
+msgid "Completed spell checking"
+msgstr "Gorffennwyd gwirio sillafu"
+
+#: ../plugins/spell/gedit-spell-language-dialog.c:245
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Methwyd canfod y teclynnau gofynnol o fewn %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:258
+#: ../plugins/spell/gedit-spell-language-dialog.c:266
 msgid "Languages"
 msgstr "Ieithoedd"
+
+#: ../plugins/spell/gedit-spell-plugin.c:70
+msgid "_Check Spelling"
+msgstr "_Gwirio Sillafu"
+
+#: ../plugins/spell/gedit-spell-plugin.c:72
+msgid "Check the current document for incorrect spelling"
+msgstr "Gwirio sillafu'r ddogfen gyfredol"
+
+#: ../plugins/spell/gedit-spell-plugin.c:78
+msgid "Set _Language..."
+msgstr "Gosod _Iaith:"
+
+#: ../plugins/spell/gedit-spell-plugin.c:80
+msgid "Set the language of the current document"
+msgstr "Gosod iaith y ddogfen gyfredol"
+
+#: ../plugins/spell/gedit-spell-plugin.c:89
+msgid "_Autocheck Spelling"
+msgstr "Gwirio Sillafu'n _Awtomatig"
+
+#: ../plugins/spell/gedit-spell-plugin.c:91
+msgid "Automatically spell-check the current document"
+msgstr "Gwirio sillafu'r ddogfen gyfredol yn awtomatig."
+
+#: ../plugins/spell/gedit-spell-plugin.c:733
+msgid "The document is empty."
+msgstr "Mae'r ddogfen yn wag."
+
+#: ../plugins/spell/gedit-spell-plugin.c:765
+msgid "No misspelled words"
+msgstr "Dim geiriau wedi'u camsillafu"
 
 #: ../plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -3118,6 +3244,10 @@ msgstr "Dewis _iaith y ddogfen gyfredol."
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
 msgstr "Gosod iaith"
+
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
 
 #: ../plugins/spell/spell-checker.glade2.h:2
 msgid "<b>Language</b>"
@@ -3165,7 +3295,7 @@ msgstr "Gair wedi ei gamsillafu:"
 
 #: ../plugins/spell/spell-checker.glade2.h:13
 msgid "User dictionary:"
-msgstr "Geiridaur y defnyddiwr:"
+msgstr "Geiriadur y defnyddiwr:"
 
 #: ../plugins/spell/spell-checker.glade2.h:14
 msgid "_Ignore"
@@ -3175,42 +3305,6 @@ msgstr "_Anwybyddu"
 msgid "_Suggestions:"
 msgstr "_Awgrymiadau:"
 
-#: ../plugins/spell/spell.c:52
-msgid "_Check Spelling"
-msgstr "_Gwirio Sillafu"
-
-#: ../plugins/spell/spell.c:55
-msgid "Check the current document for incorrect spelling"
-msgstr "Gwirio sillafu'r ddogfen gyfredol"
-
-#: ../plugins/spell/spell.c:57
-msgid "_Autocheck Spelling"
-msgstr "Gwirio Sillafu'n _Awtomatig"
-
-#: ../plugins/spell/spell.c:60
-msgid "Automatically spell-check the current document"
-msgstr "Gwirio sillafu'r ddogfen gyfredol yn awtomatig."
-
-#: ../plugins/spell/spell.c:62
-msgid "Set _Language"
-msgstr "Gosod _Iaith"
-
-#: ../plugins/spell/spell.c:65
-msgid "Set the language of the current document"
-msgstr "Gosod iaith y ddogfen gyfredol"
-
-#: ../plugins/spell/spell.c:625
-msgid "The document is empty."
-msgstr "Mae'r ddogfen yn wag."
-
-#: ../plugins/spell/spell.c:643
-msgid "The selected text does not contain misspelled words."
-msgstr "Nid yw'r testun a ddewiswyd yn cynnwys geiriau wedi eu camsillafu."
-
-#: ../plugins/spell/spell.c:644
-msgid "The document does not contain misspelled words."
-msgstr "Nid yw'r ddogfen yn cynnwys geiriau wedi eu camsillafu."
-
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
 msgstr "Gwirio sillafu'r ddogfen gyfredol."
@@ -3218,6 +3312,23 @@ msgstr "Gwirio sillafu'r ddogfen gyfredol."
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
 msgid "Spell checker"
 msgstr "Cywirydd sillafu"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
+msgid "Select the group of tags you want to use"
+msgstr "Dewis y grŵp o dagiau hoffech ddefnyddio."
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
+msgid "Available Tag Lists"
+msgstr "Rhestrau Tag Ar Gael"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
+msgid "Tags"
+msgstr "Tagiau"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "Rhowch glic dwbl ar dag er mwyn ei fewnosod yn y ddogfen gyfredol"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3261,7 +3372,7 @@ msgstr "URI angor"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
 msgid "Applet class file code"
-msgstr "Côd ffeil dosbarth apled"
+msgstr "Cod ffeil dosbarth apled"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
@@ -3334,7 +3445,7 @@ msgstr "Amgodiad nodau'r adnodd cysylltiedig"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked (state)"
-msgstr "Ticiwyd (stâd)"
+msgstr "Ticiwyd (stad)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
 msgid "Citation"
@@ -3358,7 +3469,7 @@ msgstr "Clirio rheolaeth llif y testun"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
-msgstr "Math cynnwys y côd"
+msgstr "Math cynnwys y cod"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Color of selected links"
@@ -3378,7 +3489,7 @@ msgstr "Sylw"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
-msgstr "Darn o gôd cyfrifiadurol"
+msgstr "Darn o god cyfrifiadurol"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Content scheme"
@@ -3408,863 +3519,864 @@ msgstr "Dydd ac amser y newid"
 msgid "Declare flag"
 msgstr "Fflag datgan"
 
-#. Translators: DEFER is an optional attribute of the <script> tag.
-#. It indicates that the script is not going to generate any document
-#. content. The browser can continue parsing and drawing the page.
-#: ../plugins/taglist/HTML.tags.xml.in.h:52
+#: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Defer attribute"
 msgstr "Gohirio priodoledd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:53
+#: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Definition description"
 msgstr "Disgrifiad diffiniad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:54
+#: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Definition list"
 msgstr "Rhestr ddiffiniadau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:55
+#: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Definition term"
 msgstr "Y term i'w ddiffinio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:56
+#: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Deleted text"
 msgstr "Testun wedi ei ddileu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Direction"
 msgstr "Cyfeiriad y testun"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:58
+#: ../plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Directionality"
 msgstr "Cyfeiriad yr elfen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:59
+#: ../plugins/taglist/HTML.tags.xml.in.h:56
 msgid "Directory list"
 msgstr "Rhestr plygell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:60
+#: ../plugins/taglist/HTML.tags.xml.in.h:57
 msgid "Disabled"
 msgstr "Analluog"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:61
+#: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Document base"
 msgstr "Sail y ddogfen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:62
+#: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Document body"
 msgstr "Corff y ddogfen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:63
+#: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "Document head"
 msgstr "Pen y ddogfen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:64
+#: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Document title"
 msgstr "Teitl y ddogfen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:65
+#: ../plugins/taglist/HTML.tags.xml.in.h:62
 msgid "Document type"
 msgstr "Math y ddogfen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:66
+#: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Element ID"
 msgstr "ID Elfen"
 
 # EFALLAI: 'nod mewnol' sydd ar gyfer 'embedded character' yn y Termiadur
-#: ../plugins/taglist/HTML.tags.xml.in.h:67
+#: ../plugins/taglist/HTML.tags.xml.in.h:64
 msgid "Embedded object"
 msgstr "Gwrthrych mewnol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:68
+#: ../plugins/taglist/HTML.tags.xml.in.h:65
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Pwyslais"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:69
+#: ../plugins/taglist/HTML.tags.xml.in.h:66
 msgid "Encode type"
 msgstr "Math amgodio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:70
+#: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Figure"
 msgstr "Ffigwr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:71
+#: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Font face"
 msgstr "Enw ffont"
 
 # EFALLAI: wedi edrych ar w3.org ond dal ddim yn siŵr fy mod yn
 # deall yr attrib <... FOR=...>
-#: ../plugins/taglist/HTML.tags.xml.in.h:72
+#: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "For label"
 msgstr "Label 'er mwyn'"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:73
+#: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Forced line break"
 msgstr "Toriad llinell gorfodol"
 
 # Y tag <FORM> sydd dan sylw fan hyn
-#: ../plugins/taglist/HTML.tags.xml.in.h:74
+#: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Form"
 msgstr "Ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Form action handler"
 msgstr "Trinydd gweithred ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:76
+#: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Form control group"
 msgstr "Grŵp rheoli ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:77
+#: ../plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form field label text"
 msgstr "Testun label o fewn ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:78
+#: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form input"
 msgstr "Mewnbwn o fewn ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:79
+#: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form input type"
 msgstr "Math mewnbwn ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:80
+#: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Form method"
 msgstr "Dull ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:81
+#: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Forward link"
 msgstr "Cyswllt ymlaen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:82
+#: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Frame"
 msgstr "Ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:83
+#: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Frame render parts"
 msgstr "Rhannau llunio ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:84
+#: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Frame source"
 msgstr "Ffynhonnell ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:85
+#: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Frame target"
 msgstr "Targed ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:86
+#: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frameborder"
-msgstr "Border ffram"
+msgstr "Border ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:87
+#: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frameset"
 msgstr "Set ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:88
+#: ../plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frameset columns"
 msgstr "Colofnau set ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:89
+#: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Frameset rows"
 msgstr "Rhesi set ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:90
+#: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Framespacing"
 msgstr "Bylchiad ffrâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:91
+#: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Generic embedded object"
 msgstr "Gwrthrych mewnol cyffredinol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:92
+#: ../plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Generic metainformation"
 msgstr "Gwybodaeth feta gyffredinol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:93
+#: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Generic span"
-msgstr "Ystod cyffredinol"
+msgstr "Ystod gyffredinol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:94
+#: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "HREF URI"
 msgstr "URI HREF"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:95
+#: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "HTML - Special Characters"
 msgstr "HTML - Nodau Arbennig"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:96
+#: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "HTML - Tags"
 msgstr "HTML - Tagiau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:97
+#: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HTML root element"
 msgstr "Elfen wraidd HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:98
+#: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML version"
 msgstr "Fersiwn HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:99
+#: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTTP header name"
 msgstr "Enw pennawd HTTP"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:100
+#: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Header cell ID's"
 msgstr "IDau'r celloedd pennawd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:101
+#: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Heading"
 msgstr "Pennawd"
 
 # Wedi rhoi H1 ayyb yn y msgstr am fod hynny'n ei gwneud hi'n haws i rywun
 # â gwybodaeth o HTML (wel, yn haws i mi, o leiaf) ddeall beth sy'n
 # mynd mlaen fan hyn - rhysj
-#: ../plugins/taglist/HTML.tags.xml.in.h:102
+#: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Heading 1"
 msgstr "Pennawd H1"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:103
+#: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Heading 2"
 msgstr "Pennawd H2"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:104
+#: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading 3"
 msgstr "Pennawd H3"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:105
+#: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Heading 4"
 msgstr "Pennawd H4"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:106
+#: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 5"
 msgstr "Pennawd H5"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:107
+#: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 6"
 msgstr "Pennawd H6"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:108
+#: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Height"
 msgstr "Taldra"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:109
+#: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Horizontal rule"
 msgstr "Llinell lorweddol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:110
+#: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Horizontal space"
 msgstr "Bwlch llorweddol"
 
 # Fe edrychais ar http://www.w3.org/TR/REC-html40/struct/dirlang.html#h-8.2.4
 # er mwyn cael syniad o'r hyn oedd y tag hwn yn ei wneud - rhysj
-#: ../plugins/taglist/HTML.tags.xml.in.h:111
+#: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "I18N BiDi over-ride"
 msgstr "Gwrthwneud y cyfeiriad testun rhagosodedig"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:112
+#: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Image"
 msgstr "Delwedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:113
+#: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Image map"
 msgstr "Map delwedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:114
+#: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Image map area"
 msgstr "Ardal fap delwedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:115
+#: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Image map name"
 msgstr "Enw map delwedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:116
+#: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image source"
 msgstr "Ffynhonnell delwedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:117
+#: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "Inline frame"
 msgstr "Ffram fewnol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:118
+#: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "Inline layer"
 msgstr "Haen fewnol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:119
+#: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "Inserted text"
 msgstr "Testun wedi ei fewnosod"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:120
+#: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "Instance definition"
 msgstr "Diffiniad enghraifft"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:121
+#: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Italic text"
 msgstr "Testun italig"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:122
+#: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Java applet"
 msgstr "Apled Java"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:123
+#: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Label"
 msgstr "Label"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:124
+#: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Language code"
-msgstr "Côd iaith"
+msgstr "Cod iaith"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:125
+#: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Large text style"
 msgstr "Arddull testun mawr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:126
+#: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Layer"
 msgstr "Haen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:127
+#: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Link color"
 msgstr "Lliw cyswllt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:128
+#: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "List item"
 msgstr "Eitem rhestr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:129
+#: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "List of MIME types for file upload"
-msgstr "Rhestr o fathau MIME ar gyfer lanlwytho ffeiliau"
+msgstr "Rhestr o fathau MIME ar gyfer llwytho ffeiliau i fyny"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:130
+#: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "List of supported character sets"
 msgstr "Rhestr o'r setiau nodau a gynhelir"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Listing"
 msgstr "Rhestr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Local change to font"
 msgstr "Newid lleol i'r ffont"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:133
+#: ../plugins/taglist/HTML.tags.xml.in.h:130
 msgid "Long description link"
 msgstr "Cyswllt â disgrifiad hir"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:134
+#: ../plugins/taglist/HTML.tags.xml.in.h:131
 msgid "Long quotation"
 msgstr "Dyfyniad hir"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:135
+#: ../plugins/taglist/HTML.tags.xml.in.h:132
 msgid "Mail link"
-msgstr "Cyswllt ebost"
+msgstr "Cyswllt e-bost"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:136
+#: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "Margin pixel height"
 msgstr "Uchder yr ymyl, mewn picseli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:137
+#: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Margin pixel width"
 msgstr "Lled yr ymyl, mewn picseli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:138
+#: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Marquee"
 msgstr "Testun yn sgrolio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:139
+#: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Maximum length of text field"
 msgstr "Uchafswm hyd maes testun"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:140
+#: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Media-independent link"
 msgstr "Cyswllt annibynnol o gyfrwng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:141
+#: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Menu list"
 msgstr "Rhestr ddewislen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:142
+#: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Multi-line text field"
 msgstr "Man testun aml-linell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:143
+#: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Multicolumn"
 msgstr "Aml-golofn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:144
+#: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Multiple"
 msgstr "Mwy nag un"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:145
+#: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Name"
 msgstr "Enw"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Named property value"
 msgstr "Gwerth priodwedd ag enw"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:147
+#: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Next ID"
 msgstr "ID nesaf"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:148
+#: ../plugins/taglist/HTML.tags.xml.in.h:145
 msgid "No URI"
 msgstr "Dim URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:149
+#: ../plugins/taglist/HTML.tags.xml.in.h:146
 msgid "No embedded objects"
 msgstr "Dim gwrthrychau mewnol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:150
+#: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "No frames"
 msgstr "Dim fframiau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:151
+#: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "No layers"
 msgstr "Dim haenau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:152
+#: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "No line break"
 msgstr "Dim toriad llinell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "No resize"
 msgstr "Dim ail-osod maint"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:154
+#: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "No script"
 msgstr "Dim sgript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:155
+#: ../plugins/taglist/HTML.tags.xml.in.h:152
 msgid "No shade"
 msgstr "Dim cysgod"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:156
+#: ../plugins/taglist/HTML.tags.xml.in.h:153
 msgid "No word wrap"
 msgstr "Dim amlapio geiriau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:157
+#: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "Note"
 msgstr "Nodyn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:158
+#: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "Object applet file"
 msgstr "Ffeil gwrthrych apled"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:159
+#: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "Object data reference"
 msgstr "Cyfeirnod data gwrthrych"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:160
+#: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Offset for alignment character"
 msgstr "Atred ar gyfer nod alinio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:161
+#: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "OnBlur event"
 msgstr "Digwyddiad pan yn annelwig"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:162
+#: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "OnChange event"
 msgstr "Digwyddiad wrth newid"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:163
+#: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "OnClick event"
 msgstr "Digwyddiad wrth glicio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:164
+#: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "OnDblClick event"
 msgstr "Digwyddiad wrth glicio'n ddwbl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:165
+#: ../plugins/taglist/HTML.tags.xml.in.h:162
 msgid "OnFocus event"
 msgstr "Digwyddiad wrth ffocysu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:166
+#: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnKeyDown event"
 msgstr "Digwyddiad wrth daro'r fysell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:167
+#: ../plugins/taglist/HTML.tags.xml.in.h:164
 msgid "OnKeyPress event"
 msgstr "Digwyddiad wrth bwyso'r fysell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:168
+#: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "OnKeyUp event"
 msgstr "Digwyddiad wrth ollwng y fysell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:169
+#: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "OnLoad event"
 msgstr "Digwyddiad wrth lwytho"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:170
+#: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "OnMouseDown event"
 msgstr "Digwyddiad wrth glicio botwm y llygoden"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:171
+#: ../plugins/taglist/HTML.tags.xml.in.h:168
 msgid "OnMouseMove event"
 msgstr "Digwyddiad wrth symud y llygoden"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:172
+#: ../plugins/taglist/HTML.tags.xml.in.h:169
 msgid "OnMouseOut event"
 msgstr "Digwyddiad pan fo'r llygoden yn gadael"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:173
+#: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "OnMouseOver event"
 msgstr "Digwyddiad wrth hofran y llygoden"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:174
+#: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "OnMouseUp event"
 msgstr "Digwyddiad wrth adael fynd o fotwm y llygoden"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:175
+#: ../plugins/taglist/HTML.tags.xml.in.h:172
 msgid "OnReset event"
 msgstr "Digwyddiad wrth ail-osod"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:176
+#: ../plugins/taglist/HTML.tags.xml.in.h:173
 msgid "OnSelect event"
 msgstr "Digwyddiad wrth ddewis"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:177
+#: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "OnSubmit event"
 msgstr "Digwyddiad wrth gyflwyno ffurflen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:178
+#: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "OnUnload event"
 msgstr "Digwyddiad wrth ddadlwytho"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:179
+#: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Option group"
 msgstr "Grŵp opsiwn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:180
+#: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Option selector"
 msgstr "Dewisydd opsiwn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:181
+#: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Ordered list"
 msgstr "Rhestr wedi'i drefnu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:182
+#: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Output media"
 msgstr "Cyfrwng allbwn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:183
+#: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "Paragraph"
 msgstr "Paragraff"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:184
+#: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Paragraph class"
 msgstr "Dosbarth paragraff"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:185
+#: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "Paragraph style"
 msgstr "Arddull paragraff"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:186
+#: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Preformatted listing"
 msgstr "Rhestr wedi'i fformadu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:187
+#: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "Preformatted text"
 msgstr "Testun wedi'i fformadu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:188
+#: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "Profile metainfo dictionary"
 msgstr "Geiriadur proffil gwybodaeth feta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:189
+#: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "Prompt message"
 msgstr "Neges bromptio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:190
+#: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "Push button"
 msgstr "Botwm gwasgu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:191
+#: ../plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Quote"
 msgstr "Dyfyniad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#: ../plugins/taglist/HTML.tags.xml.in.h:189
 msgid "Range"
 msgstr "Ystod"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:193
+#: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "ReadOnly text and password"
 msgstr "Testun a chyfrinair darllen-yn-unig"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:194
+#: ../plugins/taglist/HTML.tags.xml.in.h:191
 msgid "Reduced spacing"
 msgstr "Bwlch wedi'i leihau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:195
+#: ../plugins/taglist/HTML.tags.xml.in.h:192
 msgid "Reverse link"
 msgstr "Cyswllt am yn ôl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:196
+#: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "Root"
 msgstr "Gwraidd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:197
+#: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Rows"
 msgstr "Rhesi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:198
+#: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Rulings between rows and columns"
 msgstr "Llinelliad rhwng rhesi a cholofnau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:199
+#: ../plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Sample program output, scripts"
 msgstr "Allbwn enghreifftiol rhaglen, sgript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:200
+#: ../plugins/taglist/HTML.tags.xml.in.h:197
 msgid "Scope covered by header cells"
 msgstr "Cwmpas celloedd pennawd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:201
+#: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Script language name"
 msgstr "Enw iaith sgript"
 
 # FIXME: typo in English should go -> bugzilla [rhysj]
-#: ../plugins/taglist/HTML.tags.xml.in.h:202
+#: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Script statments"
 msgstr "Llinellau o sgript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:203
+#: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "Scrollbar"
 msgstr "Bar sgrolio"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:204
+#: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "Selectable option"
 msgstr "Opsiwn dewisiadwy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:205
+#: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "Selected"
 msgstr "Dewiswyd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:206
+#: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "Server-side image map"
 msgstr "Map delwedd ar y gweinydd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:207
+#: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "Shape"
 msgstr "Ffurf"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:208
+#: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "Short inline quotation"
 msgstr "Dyfyniad byr mewnol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:209
+#: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Single line prompt"
 msgstr "Prompt un llinell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:210
+#: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "Size"
 msgstr "Maint"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:211
+#: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "Small text style"
 msgstr "Arddull testun bach"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:212
+#: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "Soft line break"
 msgstr "Toriad llinell meddal"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:213
+#: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "Sound"
 msgstr "Sŵn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:215
+#: ../plugins/taglist/HTML.tags.xml.in.h:211
+msgid "Source"
+msgstr "Ffynhonnell"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "Space"
 msgstr "Bwlch"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:216
+#: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "Space separated archive list"
 msgstr "Rhestr archif, rannir gan fylchau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:217
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "Spacer"
 msgstr "Gwahanydd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:218
+#: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "Spacing between cells"
 msgstr "Bwlch rhwng celloedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:219
+#: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Spacing within cells"
 msgstr "Bwlch o fewn celloedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:220
+#: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "Span"
 msgstr "Rhychwant"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:221
+#: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Square root"
 msgstr "Ail isradd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:222
+#: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Standby load msg"
 msgstr "Neges aros llwytho"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:223
+#: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Starting sequence number"
 msgstr "Rhif dechrau cyfres"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:224
+#: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Strike-through text"
 msgstr "Testun wedi'i daro drwodd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:225
+#: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Strike-through text style"
 msgstr "Arddull testun wedi'i daro drwodd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:226
+#: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Strong emphasis"
 msgstr "Pwyslais cryf"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:227
+#: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Style info"
 msgstr "Gwybodaeth arddull"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:228
+#: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Subscript"
 msgstr "Uwchysgrif"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:229
+#: ../plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Superscript"
 msgstr "Isysgrif"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:230
+#: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Tab order position"
 msgstr "Safle trefn tabiau"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:231
+#: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Table"
 msgstr "Tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:232
+#: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Table body"
 msgstr "Corff tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:233
+#: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Table caption"
 msgstr "Capsiwn tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:234
+#: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Table column group properties"
 msgstr "Priodweddau grŵp colofn tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:235
+#: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "Table column properties"
 msgstr "Priodweddau colofn tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:236
+#: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Table data cell"
 msgstr "Cell data tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:237
+#: ../plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table footer"
 msgstr "Troedyn tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:238
+#: ../plugins/taglist/HTML.tags.xml.in.h:235
 msgid "Table header"
 msgstr "Pennawd tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:239
+#: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table header cell"
 msgstr "Cell pennawd tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:240
+#: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table row"
 msgstr "Rhes tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:241
+#: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Table summary"
 msgstr "Crynodeb tabl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:242
+#: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Target - Blank"
 msgstr "Targed - Gwag"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:243
+#: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Target - Parent"
 msgstr "Targed - Rhiant"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:244
+#: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Target - Self"
 msgstr "Targed - Hunan"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:245
+#: ../plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Top"
 msgstr "Targed - Top"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:246
+#: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Teletype or monospace text style"
 msgstr "Arddull testun monoteip"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:247
+#: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Text"
 msgstr "Testun"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:248
+#: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Text color"
 msgstr "Lliw testun"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:249
+#: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Text entered by user"
 msgstr "Testun a roddwyd gan ddefnyddiwr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:250
+#: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Title"
 msgstr "Teitl"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:251
+#: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Topmargin in pixels"
 msgstr "Ffin dop mewn picseli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:252
+#: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "URL"
 msgstr "LAU"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:253
+#: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Underlined text style"
 msgstr "Testun wedi'i danlinelli"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:254
+#: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Unordered list"
 msgstr "Rhestr heb ei drefnu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:255
+#: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Use image map"
 msgstr "Defnyddio map delwedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:256
+#: ../plugins/taglist/HTML.tags.xml.in.h:253
 msgid "Value"
 msgstr "Gwerth"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:257
+#: ../plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Value interpretation"
 msgstr "Dehongliad gwerth"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:258
+#: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Variable or program argument"
 msgstr "Newidyn neu arg rhaglen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:259
+#: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Vertical cell alignment"
 msgstr "Aliniad fertigol celloedd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:260
+#: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Vertical space"
 msgstr "Bwlch fertigol"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:261
+#: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Visited link color"
 msgstr "Lliw cyswllt ymwelwyd ag ef"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:262
+#: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Width"
 msgstr "Lled"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography (cite)"
-msgstr "Dyfyniad llyfyryddiaeth"
+msgstr "Dyfyniad llyfryddiaeth"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:2
 msgid "Bibliography (item)"
@@ -4279,12 +4391,12 @@ msgid "Bibliography (thebibliography)"
 msgstr "Y llyfryddiaeth"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:5
-msgid "Brackets ()"
-msgstr "Cromfachau ()"
+msgid "Brackets &lt;&gt;"
+msgstr "Cromfachau &lt;&gt;"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:6
-msgid "Brackets <>"
-msgstr "Cromfachau <>"
+msgid "Brackets ()"
+msgstr "Cromfachau ()"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:7
 msgid "Brackets []"
@@ -4456,20 +4568,20 @@ msgid "Reference ref"
 msgstr "Cyfeiriad cyfeirnod"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:50
-msgid "Symbol <<"
-msgstr "Symbol <<"
+msgid "Symbol &gt;&gt;"
+msgstr "Symbol &gt;&gt;"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:51
-msgid "Symbol <="
-msgstr "Symbol <="
+msgid "Symbol &gt;="
+msgstr "Symbol &gt;="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:52
-msgid "Symbol >="
-msgstr "Symbol >="
+msgid "Symbol &lt;&lt;"
+msgstr "Symbol &lt;&lt;"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:53
-msgid "Symbol >>"
-msgstr "Symbol >>"
+msgid "Symbol &lt;="
+msgstr "Symbol &lt;="
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:54
 msgid "Symbol and"
@@ -4556,6 +4668,18 @@ msgstr "Math y teip"
 msgid "Unbreakable text"
 msgstr "Testun na ddylid ei dorri"
 
+#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+msgid ""
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
+msgstr ""
+"Darparu modd i fewnosod tagiau/llinynnau a ddefnyddir yn aml i mewn i "
+"ddogfen yn hawdd heb orfod eu teipio."
+
+#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+msgid "Tag list"
+msgstr "Rhestr tagiau"
+
 #: ../plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
 msgstr "XSLT - Echelinau"
@@ -4620,63 +4744,19 @@ msgstr "sibling-blaenorol"
 msgid "self"
 msgstr "hunan"
 
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:146
-msgid "Tag list plugin"
-msgstr "Ategyn rhestr tagiau"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:167
-msgid "Select the group of tags you want to use"
-msgstr "Dewis y grŵp o dagiau hoffech ddefnyddio."
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:189
-msgid "Available Tag Lists"
-msgstr "Rhestrau Tag Ar Gael"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:191
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:212
-msgid "Tags"
-msgstr "Tagiau"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:201
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "Rhowch glic ddwbl ar dag er mwyn ei fewnosod yn y ddogfen gyfredol"
-
-#: ../plugins/taglist/gedit-taglist-plugin.c:46
-msgid "Tag _List"
-msgstr "_Rhestr Tagiau"
-
-#.
-#. #define MENU_ITEM_NAME		"TagList"
-#.
-#: ../plugins/taglist/gedit-taglist-plugin.c:51
-msgid "Show the tag list window"
-msgstr "Dangos y ffenest rhestr tagiau"
-
-#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-msgid ""
-"Provides a method to easily insert into a document commonly used tags/"
-"strings without having to type them."
-msgstr ""
-"Darparu modd i fewnosod tagiau/llinynnau a ddefnyddir yn aml i mewn i "
-"ddogfen yn hawdd heb orfod eu teipio."
-
-#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
-msgid "Tag list"
-msgstr "Rhestr tagiau"
-
-#: ../plugins/time/time.c:49
+#: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
 msgstr "_Mewnosod Dyddiad ac Amser..."
 
-#: ../plugins/time/time.c:52
+#: ../plugins/time/gedit-time-plugin.c:185
 msgid "Insert current date and time at the cursor position"
-msgstr "Mewnosod y dyddiar a'r amser cyfredol wrth safle'r cyrchydd"
+msgstr "Mewnosod y dyddiad a'r amser cyfredol wrth safle'r cyrchydd"
 
-#: ../plugins/time/time.c:457
+#: ../plugins/time/gedit-time-plugin.c:628
 msgid "Available formats"
 msgstr "Fformatau ar gael"
 
-#: ../plugins/time/time.c:565
+#: ../plugins/time/gedit-time-plugin.c:806
 msgid "Configure insert date/time plugin..."
 msgstr "Cyflunio'r ategyn dyddiad/amser..."
 
@@ -4718,4 +4798,183 @@ msgstr "_Gofyn am fformat"
 
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
-msgstr "_Defnyddio fformat addasiedig"
+msgstr "_Defnyddio fformat addasedig"
+
+#~ msgid "Brackets <>"
+#~ msgstr "Cromfachau <>"
+
+#~ msgid "Symbol <<"
+#~ msgstr "Symbol <<"
+
+#~ msgid "Symbol <="
+#~ msgstr "Symbol <="
+
+#~ msgid "Symbol >>"
+#~ msgstr "Symbol >>"
+
+#~ msgid "Gedit View"
+#~ msgstr "Golwg Gedit"
+
+#~ msgid "Gedit View."
+#~ msgstr "Golwg Gedit."
+
+#~ msgid "Gedit viewer factory"
+#~ msgstr "ffatri golwg Gedit"
+
+#~ msgid "gedit application"
+#~ msgstr "rhaglen gedit"
+
+#~ msgid "gedit automation factory"
+#~ msgstr "ffatri awtomeiddio gedit"
+
+#~ msgid "Go to Line"
+#~ msgstr "Mynd i Linell"
+
+#~ msgid "_Go to Line"
+#~ msgstr "_Mynd i Linell"
+
+#~ msgid "The text \"%s\" was not found."
+#~ msgstr "Ni ganfodwyd y testun \"%s\"."
+
+#~ msgid "Set program location..."
+#~ msgstr "Gosod lleoliad y rhaglen..."
+
+#~ msgid ""
+#~ "The %s plugin uses an external program, called <tt>%s</tt>, to perform "
+#~ "its task.\n"
+#~ "\n"
+#~ "Please, specify the location of the <tt>%s</tt> program."
+#~ msgstr ""
+#~ "Mae'r ategyn %s yn defnyddio rhaglen allanol, o'r enw <tt>%s</tt> er mwyn "
+#~ "cyflawni ei dasg.\n"
+#~ "\n"
+#~ "Os gwelwch yn dda, penodwch leoliad y rhaglen <tt>%s</tt>."
+
+#~ msgid "The selected file is not executable."
+#~ msgstr "Nid yw'r ffeil a ddewiswyd yn weithredadwy."
+
+#~ msgid "Goto Line"
+#~ msgstr "Mynd i Linell"
+
+#~ msgid "_Line number:"
+#~ msgstr "_Rhif Linell:"
+
+#~ msgid "button1"
+#~ msgstr "botwm1"
+
+#~ msgid "dialog1"
+#~ msgstr "deialog1"
+
+#~ msgid "Browse for program location..."
+#~ msgstr "Pori ar gyfer lleoliad rhaglen..."
+
+#~ msgid "label"
+#~ msgstr "label"
+
+#~ msgid "Find Next"
+#~ msgstr "Canfod Nesaf"
+
+#~ msgid "Open from URI"
+#~ msgstr "Agor o URI"
+
+#~ msgid "%s %d"
+#~ msgstr "%s %d"
+
+#~ msgid "Invalid UTF-8 data"
+#~ msgstr "UTF-8 annilys"
+
+#~ msgid "Could not read symbolic link information for %s"
+#~ msgstr "Methwyd darllen gwybodaeth cyswllt symbolaidd ar gyfer %s"
+
+#~ msgid "The file has too many symbolic links."
+#~ msgstr "Mae gan y ffeil ormod o gysylltau symbolaidd."
+
+#~ msgid "gedit cannot handle %s: locations in write mode."
+#~ msgstr "Ni all gedit ymddelio a lleoliadau %s: yn y modd ysgrifennu."
+
+#~ msgid "gedit cannot handle this kind of location in write mode."
+#~ msgstr "Ni all gedit ymddelio a'r math hwn o leoliad yn y modd ysgrifennu."
+
+#~ msgid "Invalid filename."
+#~ msgstr "Enw ffeil annilys."
+
+#~ msgid "A file named \"%s\" already exists.\n"
+#~ msgstr "Mae ffeil o'r enw \"%s\" yn bodoli eisoes.\n"
+
+#~ msgid "Do you want to replace it with the one you are saving?"
+#~ msgstr "Ydych chi am ei hamnewid gyda'r un rydych yn ei chadw?"
+
+#~ msgid "Select a file to open"
+#~ msgstr "Dewiswch ffeil i'w hagor"
+
+#~ msgid "Select files to open"
+#~ msgstr "Dewiswch ffeiliau i'w agor"
+
+#~ msgid "Select a filename to save"
+#~ msgstr "Dewiswch enw ffeil er mwyn cadw"
+
+#~ msgid "Saving document \"%s\"..."
+#~ msgstr "Cadw'r ddogfen \"%s\"..."
+
+#~ msgid "The document \"%s\" has not been saved."
+#~ msgstr "Nid yw'r ddogfen \"%s\" wedi ei chadw."
+
+#~ msgid "The document \"%s\" has been saved."
+#~ msgstr "Mae'r ddogfen \"%s\" wedi ei chadw."
+
+#~ msgid "Save as..."
+#~ msgstr "Cadw fel..."
+
+#~ msgid "Error reverting the document \"%s\"."
+#~ msgstr "Gwall wrth adfer y ddogfen \"%s\"."
+
+#~ msgid "The document \"%s\" has not been reverted."
+#~ msgstr "Ni chafodd y ddogfen \"%s\" ei hadfer."
+
+#~ msgid "The document \"%s\" has been reverted."
+#~ msgstr "Cafodd y ddogfen \"%s\" ei hadfer."
+
+#~ msgid "Could not read data from stdin."
+#~ msgstr "Methwyd darllen data o'r mewnbwn safonol."
+
+#~ msgid "Loaded file \"%s\""
+#~ msgstr "Llwythwyd ffeil \"%s\""
+
+#~ msgid "Loaded %d file"
+#~ msgid_plural "Loaded %d files"
+#~ msgstr[0] "Llwythwyd %d ffeil"
+#~ msgstr[1] "Llwythwyd %d ffeil"
+#~ msgstr[2] "Llwythwyd %d ffeil"
+#~ msgstr[3] "Llwythwyd %d ffeil"
+
+#~ msgid "Created file \"%s\""
+#~ msgstr "Wedi creu ffeil \"%s\""
+
+#~ msgid "Access was denied."
+#~ msgstr "Gwrthodwyd mynediad."
+
+#~ msgid ""
+#~ "there are too many open files. Please, close some open files and try "
+#~ "again."
+#~ msgstr ""
+#~ "mae gormod o ffeiliau ar agor. Caewch ryw ffeiliau sydd ar agor, cyn "
+#~ "ceisio eto."
+
+#~ msgid ""
+#~ "gedit was not able to automatically detect the character coding. Please, "
+#~ "check that you are not trying to open a binary file and try again "
+#~ "selecting a character coding in the 'Open File...' (or 'Open Location') "
+#~ "dialog."
+#~ msgstr ""
+#~ "Methodd gedit ganfod yr amgodiad nodau yn awtomatig. Gwiriwch nad ydych "
+#~ "chi'n ceisio agor ffeil ddeuaidd a cheisiwch eto gan ddewis amgodiad "
+#~ "nodau yn y ddeialog 'Agor Ffeil...' (neu 'Agor Lleoliad')"
+
+#~ msgid ""
+#~ "Please, check that you are not trying to open a binary file and that you "
+#~ "selected the right character coding in the 'Open File... ' (or 'Open "
+#~ "Location') dialog and try again."
+#~ msgstr ""
+#~ "Gwiriwch nad ydych chi'n ceisio agor ffeil ddeuaidd ac eich bod chi wedi "
+#~ "dewis yr amgodiad nodau cywir yn y ddeialog 'Agor Ffeil...' (neu 'Agor "
+#~ "Lleoliad'), a cheisiwch eto."
