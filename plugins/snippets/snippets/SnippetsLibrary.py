@@ -794,16 +794,16 @@ class SnippetsLibraryImpl:
 
 	def ensure(self, language):
 		language = self.normalize_language(language)
-		
+
 		# Ensure language as well as the global snippets (None)
 		for lang in (None, language):
 			if lang in self.libraries:
 			# Ensure the container exists
 				self.container(lang)
-			
+
 				for library in self.libraries[lang]:
-				library.ensure()
-	
+					library.ensure()
+
 	def ensure_files(self):
 		if self.loaded:
 			return
