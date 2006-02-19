@@ -154,12 +154,12 @@ gchar		*gedit_document_get_mime_type 	(GeditDocument       *doc);
 
 gboolean	 gedit_document_get_readonly 	(GeditDocument       *doc);
 
-gboolean	 gedit_document_load 		(GeditDocument       *doc, 
-						 const gchar         *uri, 
+void		 gedit_document_load 		(GeditDocument       *doc,
+						 const gchar         *uri,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,
 						 gboolean             create); 
-						 
+
 gboolean	 gedit_document_insert_file	(GeditDocument       *doc,
 						 GtkTextIter         *iter, 
 						 const gchar         *uri, 

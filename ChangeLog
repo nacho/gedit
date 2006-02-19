@@ -1,3 +1,14 @@
+2006-02-19  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-document.[ch]:
+	* gedit/gedit-document-loader.[ch]:
+	* gedit/gedit-tab.[ch]:
+	* gedit/gedit-command-file.c:
+
+	make the file load api return null in all the involved functions to
+	reflect that it is async. Handle correctly valid uris that however
+	return a null vfs-uri.
+
 2006-02-19  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugins/snippets/snippets/SnippetsLibrary.py: inspect files as lazy as

@@ -675,8 +675,9 @@ set_uri (GeditDocument *doc,
 		if (doc->priv->vfs_uri != NULL)
 			gnome_vfs_uri_unref (doc->priv->vfs_uri);
 
+		/* Note: vfs_uri may be NULL for some valid but
+		 * unsupported uris */
 		doc->priv->vfs_uri = gnome_vfs_uri_new (uri);
-		g_return_if_fail (doc->priv->vfs_uri != NULL);
 
 		if (doc->priv->untitled_number > 0)
 		{
@@ -685,8 +686,6 @@ set_uri (GeditDocument *doc,
 		}
 	}
 
-	g_return_if_fail (doc->priv->vfs_uri != NULL);
-
 	g_free (doc->priv->mime_type);
 	if (mime_type != NULL)
 	{
@@ -694,10 +693,11 @@ set_uri (GeditDocument *doc,
 	}
 	else
 	{
-		gchar *base_name;
+		gchar *base_name = NULL;
 
 		/* Guess the mime type from file extension or fallback to "text/plain" */
-		base_name = gnome_vfs_uri_extract_short_path_name (doc->priv->vfs_uri);
+		if (doc->priv->vfs_uri != NULL)
+			base_name = gnome_vfs_uri_extract_short_path_name (doc->priv->vfs_uri);
 		if (base_name != NULL)
 		{
 			const gchar *detected_mime;
@@ -708,13 +708,13 @@ set_uri (GeditDocument *doc,
 				detected_mime = "text/plain";
 
 			doc->priv->mime_type = g_strdup (detected_mime);
+
+			g_free (base_name);
 		}
 		else
 		{
 			doc->priv->mime_type = g_strdup ("text/plain");
 		}
-
-		g_free (base_name);
 	}
 
 	if (!doc->priv->language_set_by_user)
@@ -785,6 +785,7 @@ get_uri_shortname_for_display (GnomeVFSURI *uri)
 	gboolean  validated;
 
 	validated = FALSE;
+
 	name = gnome_vfs_uri_extract_short_name (uri);
 	
 	if (name == NULL)
@@ -853,6 +854,8 @@ gedit_document_get_short_name_for_display (GeditDocument *doc)
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
 					doc->priv->untitled_number);	      
+	else if (doc->priv->vfs_uri == NULL)
+		return g_strdup (doc->priv->uri);
 	else
 		return get_uri_shortname_for_display (doc->priv->vfs_uri);
 }
@@ -1024,18 +1027,18 @@ document_loader_loading (GeditDocumentLoader *loader,
 	}
 }
 
-gboolean
+void
 gedit_document_load (GeditDocument       *doc,
 		     const gchar         *uri,
 		     const GeditEncoding *encoding,
 		     gint                 line_pos,
 		     gboolean             create)
 {
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-	g_return_val_if_fail (uri != NULL, FALSE);
-	g_return_val_if_fail (gedit_utils_is_valid_uri (uri), FALSE);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+	g_return_if_fail (uri != NULL);
+	g_return_if_fail (gedit_utils_is_valid_uri (uri));
 
-	g_return_val_if_fail (doc->priv->loader == NULL, FALSE);
+	g_return_if_fail (doc->priv->loader == NULL);
 
 	/* create a loader. It will be destroyed when loading is completed */
 	doc->priv->loader = gedit_document_loader_new (doc);
@@ -1051,9 +1054,9 @@ gedit_document_load (GeditDocument       *doc,
 
 	set_uri (doc, uri, NULL);
 
-	return gedit_document_loader_load (doc->priv->loader,
-					   uri,
-					   encoding);
+	gedit_document_loader_load (doc->priv->loader,
+				    uri,
+				    encoding);
 }
 
 gboolean
@@ -1224,7 +1227,7 @@ gedit_document_get_deleted (GeditDocument *doc)
 {
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
 
-	if (doc->priv->uri == NULL)
+	if (doc->priv->uri == NULL || doc->priv->vfs_uri == NULL)
 		return FALSE;
 		
 	return !gnome_vfs_uri_exists (doc->priv->vfs_uri);

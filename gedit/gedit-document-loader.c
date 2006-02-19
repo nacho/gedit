@@ -877,23 +877,47 @@ load_remote_file (GeditDocumentLoader *loader)
 
 /* ---------- public api ---------- */
 
+static gboolean
+vfs_uri_new_failed (GeditDocumentLoader *loader)
+{
+	load_completed_or_failed (loader);
+
+	/* stop the timeout */
+	return FALSE;
+}
+
 /* If enconding == NULL, the encoding will be autodetected */
-gboolean
+void
 gedit_document_loader_load (GeditDocumentLoader *loader,
 			    const gchar         *uri,
 			    const GeditEncoding *encoding)
 {
 	gchar *local_path;
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), FALSE);
-	g_return_val_if_fail (uri != NULL, FALSE);
+
+	g_return_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader));
+	g_return_if_fail (uri != NULL);
 
 	/* the loader can be used just once, then it must be thrown away */
-	g_return_val_if_fail (loader->priv->used == FALSE, FALSE);
+	g_return_if_fail (loader->priv->used == FALSE);
 	loader->priv->used = TRUE;
 
+	/* vfs_uri may be NULL for some valid but unsupported uris */
 	loader->priv->vfs_uri = gnome_vfs_uri_new (uri);
 	if (loader->priv->vfs_uri == NULL)
-		return FALSE;
+	{
+		g_set_error (&loader->priv->error,
+			     GEDIT_DOCUMENT_ERROR,
+			     GNOME_VFS_ERROR_NOT_SUPPORTED,
+			     gnome_vfs_result_to_string (GNOME_VFS_ERROR_NOT_SUPPORTED));
+
+		g_timeout_add_full (G_PRIORITY_HIGH,
+				    0,
+				    (GSourceFunc) vfs_uri_new_failed,
+				    loader,
+				    NULL);
+
+		return;
+	}
 
 	loader->priv->encoding = encoding;
 
@@ -909,8 +933,6 @@ gedit_document_loader_load (GeditDocumentLoader *loader,
 	{
 		load_remote_file (loader);
 	}
-
-	return TRUE;
 }
 
 /* Returns STDIN_URI if loading from stdin */

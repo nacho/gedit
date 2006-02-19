@@ -136,7 +136,7 @@ GtkWidget	*_gedit_tab_new_from_uri	(const gchar         *uri,
 gchar 		*_gedit_tab_get_name		(GeditTab            *tab);
 gchar 		*_gedit_tab_get_tooltips	(GeditTab            *tab);
 GdkPixbuf 	*_gedit_tab_get_icon		(GeditTab            *tab);
-gboolean	 _gedit_tab_load		(GeditTab            *tab,
+void		 _gedit_tab_load		(GeditTab            *tab,
 						 const gchar         *uri,
 						 const GeditEncoding *encoding,
 						 gint                 line_pos,

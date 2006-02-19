@@ -107,36 +107,34 @@ load_file_list (GeditWindow         *window,
 			gboolean     ret;
 
 			uri = (const gchar *)uris->data;
-			ret = _gedit_tab_load (tab,
-					       uri,
-					       encoding,
-					       line_pos,
-					       create);
+
+			_gedit_tab_load (tab,
+					 uri,
+					 encoding,
+					 line_pos,
+					 create);
 
 			uris = g_slist_next (uris);
 			jump_to = FALSE;
 
-			if (ret)
+			if (uris == NULL)
 			{
-				if (uris == NULL)
-				{
-					/* There is only a single file to load */
-					gchar *uri_for_display;
+				/* There is only a single file to load */
+				gchar *uri_for_display;
 
-					uri_for_display = gnome_vfs_format_uri_for_display (uri);
+				uri_for_display = gnome_vfs_format_uri_for_display (uri);
 
-					gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-								       window->priv->generic_message_cid,
-								       _("Loading file '%s'\342\200\246"),
-								       uri_for_display);
+				gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+							       window->priv->generic_message_cid,
+							       _("Loading file '%s'\342\200\246"),
+							       uri_for_display);
 
-					g_free (uri_for_display);
+				g_free (uri_for_display);
 
-					flash = FALSE;
-				}
-
-				++loaded_files;
+				flash = FALSE;
 			}
+
+			++loaded_files;
 		}
 	}
 

@@ -85,7 +85,7 @@ GType 		 	 gedit_document_loader_get_type		(void) G_GNUC_CONST;
 GeditDocumentLoader 	*gedit_document_loader_new 		(GeditDocument       *doc);
 
 /* If enconding == NULL, the encoding will be autodetected */
-gboolean		 gedit_document_loader_load		(GeditDocumentLoader *loader,
+void			 gedit_document_loader_load		(GeditDocumentLoader *loader,
 							 	 const gchar         *uri,
 								 const GeditEncoding *encoding);
 #if 0

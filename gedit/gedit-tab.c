@@ -1450,17 +1450,11 @@ _gedit_tab_new_from_uri (const gchar         *uri,
 	
 	tab = GEDIT_TAB (_gedit_tab_new ());
 		
-	ret = _gedit_tab_load (tab,
-			       uri,
-			       encoding,
-			       line_pos,
-			       create);
-
-	if (!ret)
-	{
-		g_object_unref (tab);
-		return NULL;
-	}
+	_gedit_tab_load (tab,
+			 uri,
+			 encoding,
+			 line_pos,
+			 create);
 
 	return GTK_WIDGET (tab);
 }		
@@ -1768,7 +1762,7 @@ gedit_tab_get_from_document (GeditDocument *doc)
 	return (res != NULL) ? GEDIT_TAB (res) : NULL;
 }
 
-gboolean
+void
 _gedit_tab_load (GeditTab            *tab,
 		 const gchar         *uri,
 		 const GeditEncoding *encoding,
@@ -1791,11 +1785,11 @@ _gedit_tab_load (GeditTab            *tab,
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
 
-	return gedit_document_load (doc,
-				    uri,
-				    encoding,
-				    line_pos,
-				    create);
+	gedit_document_load (doc,
+			     uri,
+			     encoding,
+			     line_pos,
+			     create);
 }
 
 void
