@@ -36,15 +36,7 @@ class SnippetsPlugin(gedit.Plugin):
 		library.set_accelerator_callback(self.accelerator_activated)
 		
 		userdir = os.path.join(os.environ['HOME'], '.gnome2', 'gedit', 'snippets')
-		library.set_data(userdir, self.system_dirs())
-		
-		#self.xml_error_message = \
-		#		_('Could not load the file "%s". ' \
-		#		'The file is probably corrupt. Please fix or ' \
-		#		'remove the file. To try to load the file again, select ' \
-		#		'the Tools -> Manage Snippets... menu item.') % self.XML_FILE
-
-		#self.show_xml_error = not self.load_xml()
+		library.set_dirs(userdir, self.system_dirs())
 	
 	def system_dirs(self):
 		if 'XDG_DATA_DIRS' in os.environ:
@@ -62,18 +54,10 @@ class SnippetsPlugin(gedit.Plugin):
 		
 		return dirs
 	
-	def idle_error_message(self, window):
-		message_dialog(window, gtk.MESSAGE_ERROR, self.xml_error_message)
-		return False
-
 	def activate(self, window):
 		data = SnippetsPluginInstance(self)
 		window._snippets_plugin_data = data
 		data.run(window)
-		
-		#if self.show_xml_error:
-		#	self.show_xml_error = None
-		#	gobject.idle_add(self.idle_error_message, window)
 
 	def deactivate(self, window):
 		window._snippets_plugin_data.stop()

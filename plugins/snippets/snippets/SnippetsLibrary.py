@@ -558,6 +558,8 @@ class SnippetsLibraryImpl:
 	def __init__(self):
 		self._accelerator_activated_cb = None
 		
+		self.loaded = False
+		
 		# Contains all the language containers which have tag/accel mappings
 		self.containers = {}
 		
@@ -567,20 +569,15 @@ class SnippetsLibraryImpl:
 		# Contains the suppressed snippets
 		self.overridden = {}
 	
-	def set_data(self, userdir, systemdirs):
+	def set_dirs(self, userdir, systemdirs):
+		self.userdir = userdir
+		self.systemdirs = systemdirs
+		
 		self.libraries = {}
 		self.containers = {}
 		self.overridden = {}
 
-		self.userdir = userdir
-
-		searched = []
-		searched = self.find_libraries(userdir, searched, \
-				self._add_user_library)
-		
-		for d in systemdirs:
-			searched = self.find_libraries(d, searched, \
-					self._add_system_library)
+		self.loaded = False
 	
 	def set_accelerator_callback(self, cb):
 		self._accelerator_activated_cb = cb
@@ -776,12 +773,7 @@ class SnippetsLibraryImpl:
 	def ref(self, language):
 		language = self.normalize_language(language)
 
-		if not language in self.libraries:
-			return
-			
 		snippets_debug('Ref:', language)
-			
-		self.ensure(language)
 		self.container(language).ref()
 	
 	def unref(self, language):
@@ -803,18 +795,35 @@ class SnippetsLibraryImpl:
 	def ensure(self, language):
 		language = self.normalize_language(language)
 		
-		if language in self.libraries:
+		# Ensure language as well as the global snippets (None)
+		for lang in (None, language):
+			if lang in self.libraries:
 			# Ensure the container exists
-			self.container(language)
+				self.container(lang)
 			
-			for library in self.libraries[language]:
+				for library in self.libraries[lang]:
 				library.ensure()
 	
+	def ensure_files(self):
+		if self.loaded:
+			return
+
+		searched = []
+		searched = self.find_libraries(self.userdir, searched, \
+				self._add_user_library)
+		
+		for d in self.systemdirs:
+			searched = self.find_libraries(d, searched, \
+					self._add_system_library)
+
+		self.loaded = True
+
 	# Snippet getters
 	# ===============
 	
 	# Get snippets for a given language
 	def get_snippets(self, language=None):
+		self.ensure_files()
 		language = self.normalize_language(language)
 		
 		if not language in self.libraries:
@@ -827,8 +836,9 @@ class SnippetsLibraryImpl:
 
 	# Get snippets for a given accelerator
 	def from_accelerator(self, accelerator, language=None):
-		result = []
+		self.ensure_files()
 		
+		result = []		
 		language = self.normalize_language(language)
 			
 		if not language in self.containers:
@@ -844,8 +854,9 @@ class SnippetsLibraryImpl:
 
 	# Get snippets for a given tag
 	def from_tag(self, tag, language=None):
-		result = []
+		self.ensure_files()
 		
+		result = []
 		language = self.normalize_language(language)
 			
 		if not language in self.containers:
