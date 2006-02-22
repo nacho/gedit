@@ -832,7 +832,7 @@ class SnippetsLibraryImpl:
 		snippets = []
 		self.ensure(language)
 		
-		return self.containers[language].snippets
+		return list(self.containers[language].snippets)
 
 	# Get snippets for a given accelerator
 	def from_accelerator(self, accelerator, language=None):
