@@ -19,6 +19,7 @@
 __all__ = ('Manager', )
 
 import gtk
+import gtksourceview as gsv
 from gtk import glade
 import os.path
 from gettext import gettext as _
@@ -30,11 +31,9 @@ class Manager:
 	GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
 	GCONF_DIR = '/apps/gedit-2/plugins/tools'
 
-
 	LABEL_COLUMN = 0 # For Combo and Tree
 	NODE_COLUMN  = 1 # For Tree only
 	NAME_COLUMN = 1  # For Combo only
-
 
 	__shared_state = None
 
@@ -80,6 +79,7 @@ class Manager:
 		}
 		
 		# Load the "main-window" widget from the glade file.
+		glade.set_custom_handler(self.custom_handler)
 		self.ui = glade.XML(self.GLADE_FILE, 'tool-manager-dialog')
 		self.ui.signal_autoconnect(callbacks)
 		self.dialog = self.ui.get_widget('tool-manager-dialog')
@@ -126,6 +126,21 @@ class Manager:
 	def __getitem__(self, key):
 		"""Convenience function to get a widget from its name"""
 		return self.ui.get_widget(key)
+
+	def custom_handler(self, xml, function_name, widget_name,
+	                   str1, str2, int1 , int2):
+		if function_name == 'create_commands':
+			buf = gsv.SourceBuffer()
+			manager = gsv.SourceLanguagesManager()
+			language = manager.get_language_from_mime_type('text/x-shellscript')
+			buf.set_language(language)
+			buf.set_highlight(True)
+			view = gsv.SourceView(buf)
+			view.set_wrap_mode(gtk.WRAP_WORD)
+			view.show()
+			return view
+		else:
+			return None
 
 	def set_active_by_name(self, combo_name, option_name):
 		combo = self[combo_name]
@@ -233,7 +248,7 @@ class Manager:
 	def on_view_selection_changed(self, selection, userdata):
 		self.save_current_tool()
 		piter, node = self.get_selected_tool()
-		
+
 		self['remove-tool-button'].set_sensitive(piter is not None)
 
 		if node is not None:

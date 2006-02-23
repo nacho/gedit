@@ -159,11 +159,10 @@
 	  <property name="border_width">6</property>
 	  <property name="visible">True</property>
 	  <property name="can_focus">True</property>
-	  <property name="position">160</property>
+	  <property name="position">1</property>
 
 	  <child>
 	    <widget class="GtkVBox" id="vbox2">
-	      <property name="width_request">200</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">6</property>
@@ -225,7 +224,6 @@
 
 	      <child>
 		<widget class="GtkHBox" id="hbox2">
-		  <property name="width_request">180</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">True</property>
 		  <property name="spacing">8</property>
@@ -250,7 +248,6 @@
 		  <child>
 		    <widget class="GtkButton" id="remove-tool-button">
 		      <property name="visible">True</property>
-		      <property name="sensitive">False</property>
 		      <property name="can_default">True</property>
 		      <property name="label">gtk-remove</property>
 		      <property name="use_stock">True</property>
@@ -280,7 +277,6 @@
 
 	  <child>
 	    <widget class="GtkVBox" id="vbox5">
-	      <property name="width_request">400</property>
 	      <property name="visible">True</property>
 	      <property name="homogeneous">False</property>
 	      <property name="spacing">6</property>
@@ -381,28 +377,6 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkEntry" id="description">
-			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="editable">True</property>
-			  <property name="visibility">True</property>
-			  <property name="max_length">0</property>
-			  <property name="text" translatable="yes" context="yes">Run “make” in the document dir</property>
-			  <property name="has_frame">True</property>
-			  <property name="invisible_char">*</property>
-			  <property name="activates_default">False</property>
-			  <signal name="focus_out_event" handler="on_description_focus_out" last_modification_time="Fri, 13 Jan 2006 17:37:56 GMT"/>
-			</widget>
-			<packing>
-			  <property name="left_attach">1</property>
-			  <property name="right_attach">2</property>
-			  <property name="top_attach">0</property>
-			  <property name="bottom_attach">1</property>
-			  <property name="y_options"></property>
-			</packing>
-		      </child>
-
-		      <child>
 			<widget class="GtkLabel" id="label3">
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes" context="yes">_Accelerator:</property>
@@ -427,30 +401,6 @@
 			  <property name="top_attach">1</property>
 			  <property name="bottom_attach">2</property>
 			  <property name="x_options">fill</property>
-			  <property name="y_options"></property>
-			</packing>
-		      </child>
-
-		      <child>
-			<widget class="GtkEntry" id="accelerator">
-			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="editable">True</property>
-			  <property name="visibility">True</property>
-			  <property name="max_length">0</property>
-			  <property name="text" translatable="yes" context="yes">F7</property>
-			  <property name="has_frame">True</property>
-			  <property name="invisible_char">*</property>
-			  <property name="activates_default">False</property>
-			  <signal name="focus_out_event" handler="on_accelerator_focus_out" last_modification_time="Mon, 16 Jan 2006 00:02:25 GMT"/>
-			  <signal name="focus_in_event" handler="on_accelerator_focus_in" last_modification_time="Mon, 16 Jan 2006 00:02:39 GMT"/>
-			  <signal name="key_press_event" handler="on_accelerator_key_press" last_modification_time="Mon, 16 Jan 2006 00:02:58 GMT"/>
-			</widget>
-			<packing>
-			  <property name="left_attach">1</property>
-			  <property name="right_attach">2</property>
-			  <property name="top_attach">1</property>
-			  <property name="bottom_attach">2</property>
 			  <property name="y_options"></property>
 			</packing>
 		      </child>
@@ -541,66 +491,6 @@
 		      </child>
 
 		      <child>
-			<widget class="GtkComboBox" id="output">
-			  <property name="visible">True</property>
-			  <property name="items" translatable="yes"></property>
-			  <property name="add_tearoffs">False</property>
-			  <property name="focus_on_click">True</property>
-			  <signal name="focus_out_event" handler="on_output_focus_out" last_modification_time="Sun, 15 Jan 2006 12:52:08 GMT"/>
-			</widget>
-			<packing>
-			  <property name="left_attach">1</property>
-			  <property name="right_attach">2</property>
-			  <property name="top_attach">5</property>
-			  <property name="bottom_attach">6</property>
-			  <property name="x_options">fill</property>
-			  <property name="y_options">fill</property>
-			</packing>
-		      </child>
-
-		      <child>
-			<widget class="GtkScrolledWindow" id="scrolledwindow3">
-			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-			  <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-			  <property name="shadow_type">GTK_SHADOW_IN</property>
-			  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
-
-			  <child>
-			    <widget class="GtkTextView" id="commands">
-			      <property name="height_request">120</property>
-			      <property name="visible">True</property>
-			      <property name="can_focus">True</property>
-			      <property name="editable">True</property>
-			      <property name="overwrite">False</property>
-			      <property name="accepts_tab">True</property>
-			      <property name="justification">GTK_JUSTIFY_LEFT</property>
-			      <property name="wrap_mode">GTK_WRAP_NONE</property>
-			      <property name="cursor_visible">True</property>
-			      <property name="pixels_above_lines">0</property>
-			      <property name="pixels_below_lines">0</property>
-			      <property name="pixels_inside_wrap">0</property>
-			      <property name="left_margin">0</property>
-			      <property name="right_margin">0</property>
-			      <property name="indent">0</property>
-			      <property name="text" translatable="yes">cd $GEDIT_CURRENT_DOCUMENT_DIR
-make</property>
-			      <signal name="focus_out_event" handler="on_commands_focus_out" last_modification_time="Sun, 15 Jan 2006 10:06:22 GMT"/>
-			    </widget>
-			  </child>
-			</widget>
-			<packing>
-			  <property name="left_attach">1</property>
-			  <property name="right_attach">2</property>
-			  <property name="top_attach">2</property>
-			  <property name="bottom_attach">3</property>
-			  <property name="x_options">fill</property>
-			  <property name="y_options">fill</property>
-			</packing>
-		      </child>
-
-		      <child>
 			<widget class="GtkLabel" id="label4">
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes" context="yes">Co_mmand(s):</property>
@@ -624,43 +514,6 @@ make</property>
 			  <property name="right_attach">1</property>
 			  <property name="top_attach">2</property>
 			  <property name="bottom_attach">3</property>
-			  <property name="x_options">fill</property>
-			  <property name="y_options">fill</property>
-			</packing>
-		      </child>
-
-		      <child>
-			<widget class="GtkComboBox" id="save-files">
-			  <property name="items" translatable="yes">Nothing
-Current document
-All documents</property>
-			  <property name="add_tearoffs">False</property>
-			  <property name="focus_on_click">True</property>
-			  <signal name="focus_out_event" handler="on_save_files_focus_out" last_modification_time="Sun, 15 Jan 2006 12:51:24 GMT"/>
-			</widget>
-			<packing>
-			  <property name="left_attach">1</property>
-			  <property name="right_attach">2</property>
-			  <property name="top_attach">3</property>
-			  <property name="bottom_attach">4</property>
-			  <property name="x_options">fill</property>
-			  <property name="y_options">fill</property>
-			</packing>
-		      </child>
-
-		      <child>
-			<widget class="GtkComboBox" id="input">
-			  <property name="visible">True</property>
-			  <property name="items" translatable="yes"></property>
-			  <property name="add_tearoffs">False</property>
-			  <property name="focus_on_click">True</property>
-			  <signal name="focus_out_event" handler="on_input_focus_out" last_modification_time="Sun, 15 Jan 2006 12:51:56 GMT"/>
-			</widget>
-			<packing>
-			  <property name="left_attach">1</property>
-			  <property name="right_attach">2</property>
-			  <property name="top_attach">4</property>
-			  <property name="bottom_attach">5</property>
 			  <property name="x_options">fill</property>
 			  <property name="y_options">fill</property>
 			</packing>
@@ -696,6 +549,61 @@ All documents</property>
 		      </child>
 
 		      <child>
+			<widget class="GtkComboBox" id="save-files">
+			  <property name="items" translatable="yes">Nothing
+Current document
+All documents</property>
+			  <property name="add_tearoffs">False</property>
+			  <property name="focus_on_click">True</property>
+			  <signal name="focus_out_event" handler="on_save_files_focus_out" last_modification_time="Sun, 15 Jan 2006 12:51:24 GMT"/>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">3</property>
+			  <property name="bottom_attach">4</property>
+			  <property name="x_options">expand|shrink|fill</property>
+			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkComboBox" id="input">
+			  <property name="visible">True</property>
+			  <property name="items" translatable="yes"></property>
+			  <property name="add_tearoffs">False</property>
+			  <property name="focus_on_click">True</property>
+			  <signal name="focus_out_event" handler="on_input_focus_out" last_modification_time="Sun, 15 Jan 2006 12:51:56 GMT"/>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">4</property>
+			  <property name="bottom_attach">5</property>
+			  <property name="x_options">expand|shrink|fill</property>
+			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkComboBox" id="output">
+			  <property name="visible">True</property>
+			  <property name="items" translatable="yes"></property>
+			  <property name="add_tearoffs">False</property>
+			  <property name="focus_on_click">True</property>
+			  <signal name="focus_out_event" handler="on_output_focus_out" last_modification_time="Sun, 15 Jan 2006 12:52:08 GMT"/>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">5</property>
+			  <property name="bottom_attach">6</property>
+			  <property name="x_options">expand|shrink|fill</property>
+			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
+
+		      <child>
 			<widget class="GtkComboBox" id="applicability">
 			  <property name="visible">True</property>
 			  <property name="items" translatable="yes"></property>
@@ -708,8 +616,84 @@ All documents</property>
 			  <property name="right_attach">2</property>
 			  <property name="top_attach">6</property>
 			  <property name="bottom_attach">7</property>
-			  <property name="x_options">fill</property>
+			  <property name="x_options">expand|shrink|fill</property>
 			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkEntry" id="accelerator">
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="editable">True</property>
+			  <property name="visibility">True</property>
+			  <property name="max_length">0</property>
+			  <property name="text" translatable="yes" context="yes">F7</property>
+			  <property name="has_frame">True</property>
+			  <property name="invisible_char">*</property>
+			  <property name="activates_default">False</property>
+			  <signal name="focus_out_event" handler="on_accelerator_focus_out" last_modification_time="Mon, 16 Jan 2006 00:02:25 GMT"/>
+			  <signal name="focus_in_event" handler="on_accelerator_focus_in" last_modification_time="Mon, 16 Jan 2006 00:02:39 GMT"/>
+			  <signal name="key_press_event" handler="on_accelerator_key_press" last_modification_time="Mon, 16 Jan 2006 00:02:58 GMT"/>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">1</property>
+			  <property name="bottom_attach">2</property>
+			  <property name="x_options">expand|shrink|fill</property>
+			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkEntry" id="description">
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="editable">True</property>
+			  <property name="visibility">True</property>
+			  <property name="max_length">0</property>
+			  <property name="text" translatable="yes" context="yes">Run “make” in the document dir</property>
+			  <property name="has_frame">True</property>
+			  <property name="invisible_char">*</property>
+			  <property name="activates_default">False</property>
+			  <signal name="focus_out_event" handler="on_description_focus_out" last_modification_time="Fri, 13 Jan 2006 17:37:56 GMT"/>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">0</property>
+			  <property name="bottom_attach">1</property>
+			  <property name="x_options">expand|shrink|fill</property>
+			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkScrolledWindow" id="scrolledwindow3">
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+			  <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
+			  <property name="shadow_type">GTK_SHADOW_IN</property>
+			  <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
+
+			  <child>
+			    <widget class="Custom" id="commands">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="creation_function">create_commands</property>
+			      <property name="int1">0</property>
+			      <property name="int2">0</property>
+			      <property name="last_modification_time">Thu, 23 Feb 2006 00:29:56 GMT</property>
+			    </widget>
+			  </child>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">2</property>
+			  <property name="bottom_attach">3</property>
 			</packing>
 		      </child>
 		    </widget>
