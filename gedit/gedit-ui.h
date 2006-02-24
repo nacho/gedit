@@ -147,8 +147,8 @@ static const GtkToggleActionEntry gedit_always_sensitive_toggle_menu_entries[] =
 	{ "ViewSidePane", NULL, N_("Side _Pane"), "F9",
 	  N_("Show or hide the side pane in the current window"),
 	  G_CALLBACK (gedit_cmd_view_show_side_pane), FALSE },
-	{ "ViewBottomPanel", NULL, N_("_Bottom Panel"), "<control>F9",
-	  N_("Show or hide the bottom panel in the current window"),
+	{ "ViewBottomPanel", NULL, N_("_Bottom Pane"), "<control>F9",
+	  N_("Show or hide the bottom pane in the current window"),
 	  G_CALLBACK (gedit_cmd_view_show_bottom_panel), FALSE }	  
 };
 
