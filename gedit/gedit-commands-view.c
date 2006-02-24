@@ -99,8 +99,8 @@ gedit_cmd_view_show_side_pane (GtkAction   *action,
 }
 
 void
-gedit_cmd_view_show_bottom_panel (GtkAction   *action,
-				  GeditWindow *window)
+gedit_cmd_view_show_bottom_pane (GtkAction   *action,
+				 GeditWindow *window)
 {
 	gboolean visible;
 	GeditPanel *panel;

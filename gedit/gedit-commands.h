@@ -100,7 +100,7 @@ void		gedit_cmd_view_show_statusbar		(GtkAction   *action,
 							 GeditWindow *window);
 void		gedit_cmd_view_show_side_pane		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_view_show_bottom_panel	(GtkAction   *action,
+void		gedit_cmd_view_show_bottom_pane		(GtkAction   *action,
 							 GeditWindow *window);
 
 void		gedit_cmd_search_find			(GtkAction   *action,

@@ -2570,7 +2570,7 @@ bottom_panel_visibility_changed (GeditPanel  *bottom_panel,
 		gedit_prefs_manager_set_bottom_panel_visible (visible);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
-					      "ViewBottomPanel");
+					      "ViewBottomPane");
 
 	if (gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action)) != visible)
 		gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), visible);
@@ -2601,7 +2601,7 @@ bottom_panel_item_removed (GeditPanel  *panel,
 		gtk_widget_hide (GTK_WIDGET (panel));
 
 		action = gtk_action_group_get_action (window->priv->action_group,
-						      "ViewBottomPanel");
+						      "ViewBottomPane");
 		gtk_action_set_sensitive (action, FALSE);
 	}
 }
@@ -2619,7 +2619,7 @@ bottom_panel_item_added (GeditPanel  *panel,
 		gboolean show;
 
 		action = gtk_action_group_get_action (window->priv->action_group,
-						      "ViewBottomPanel");
+						      "ViewBottomPane");
 		gtk_action_set_sensitive (action, TRUE);
 
 		show = gtk_toggle_action_get_active (GTK_TOGGLE_ACTION (action));
@@ -2677,7 +2677,7 @@ init_panels_visibility (GeditWindow *window)
 	{
 		GtkAction *action;
 		action = gtk_action_group_get_action (window->priv->action_group,
-						      "ViewBottomPanel");
+						      "ViewBottomPane");
 		gtk_action_set_sensitive (action, FALSE);
 	}
 
