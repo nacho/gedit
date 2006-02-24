@@ -1187,6 +1187,9 @@ search_window_key_press_event (GtkWidget   *widget,
 			       GeditView   *view)
 {
 	gboolean retval = FALSE;
+	guint modifiers;
+
+	modifiers = gtk_accelerator_get_default_mod_mask ();
 
 	/* Close window */
 	if (event->keyval == GDK_Tab)
@@ -1194,7 +1197,7 @@ search_window_key_press_event (GtkWidget   *widget,
 		hide_search_window (view, FALSE);
 		retval = TRUE;
 	}
-	
+
 	/* Close window and cancel the search */
 	if (event->keyval == GDK_Escape)
 	{
@@ -1226,7 +1229,7 @@ search_window_key_press_event (GtkWidget   *widget,
 		retval = TRUE;
 	}
 
-	if (((event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) && 
+	if (((event->state & modifiers) == (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) && 
 	    (event->keyval == GDK_g || event->keyval == GDK_G))
 	{
 		search_again (view, TRUE);
@@ -1240,7 +1243,7 @@ search_window_key_press_event (GtkWidget   *widget,
 		retval = TRUE;
 	}
 
-	if (((event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)) == GDK_CONTROL_MASK) && 
+	if (((event->state & modifiers) == GDK_CONTROL_MASK) && 
 	    (event->keyval == GDK_g || event->keyval == GDK_G))
 	{
 		search_again (view, FALSE);
