@@ -111,6 +111,8 @@ void		gedit_cmd_search_find_prev		(GtkAction   *action,
 							 GeditWindow *window);
 void		gedit_cmd_search_replace		(GtkAction   *action,
 							 GeditWindow *window);
+void		gedit_cmd_search_clear_highlight	(GtkAction   *action,
+							 GeditWindow *window);
 void		gedit_cmd_search_goto_line		(GtkAction   *action,
 							 GeditWindow *window);
 

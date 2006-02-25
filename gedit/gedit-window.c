@@ -561,6 +561,11 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	gtk_action_set_sensitive (action, state_normal && b);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
+					      "SearchClearHighlight");
+	gtk_action_set_sensitive (action, state_normal && b);
+
+
+	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchGoToLine");
 	gtk_action_set_sensitive (action, state_normal);
 	
@@ -1972,6 +1977,10 @@ can_search_again (GeditDocument *doc,
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchFindPrevious");
+	gtk_action_set_sensitive (action, sensitive);
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "SearchClearHighlight");
 	gtk_action_set_sensitive (action, sensitive);
 }
 

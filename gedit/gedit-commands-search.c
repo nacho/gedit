@@ -710,6 +710,20 @@ gedit_cmd_search_find_prev (GtkAction   *action,
 }
 
 void
+gedit_cmd_search_clear_highlight (GtkAction   *action,
+				  GeditWindow *window)
+{
+	GtkWidget *doc;
+
+	gedit_debug (DEBUG_COMMANDS);
+
+	doc = gedit_window_get_active_document (window);
+	gedit_document_set_search_text (GEDIT_DOCUMENT (doc),
+					"",
+					GEDIT_SEARCH_DONT_SET_FLAGS);
+}
+
+void
 gedit_cmd_search_goto_line (GtkAction   *action,
 			    GeditWindow *window)
 {

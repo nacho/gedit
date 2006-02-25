@@ -117,6 +117,8 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Search backwards for the same text"), G_CALLBACK (gedit_cmd_search_find_prev) },
 	{ "SearchReplace", GTK_STOCK_FIND_AND_REPLACE, N_("_Replace..."), "<control>H",
 	  N_("Search for and replace text"), G_CALLBACK (gedit_cmd_search_replace) },
+	{ "SearchClearHighlight", NULL, N_("_Clear Highlight"), "<shift><control>K",
+	  N_("Clear highlighting of search matches"), G_CALLBACK (gedit_cmd_search_clear_highlight) },
 	{ "SearchGoToLine", GTK_STOCK_JUMP_TO, N_("Go to _Line..."), "<control>I",
 	  N_("Go to a specific line"), G_CALLBACK (gedit_cmd_search_goto_line) },
 
