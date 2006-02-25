@@ -713,7 +713,7 @@ void
 gedit_cmd_search_clear_highlight (GtkAction   *action,
 				  GeditWindow *window)
 {
-	GtkWidget *doc;
+	GeditDocument *doc;
 
 	gedit_debug (DEBUG_COMMANDS);
 
