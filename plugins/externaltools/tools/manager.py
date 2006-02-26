@@ -273,9 +273,13 @@ class Manager:
  		                                            mod, 
  		                                            self.current_node)
  		if tool is not None:
- 			message_dialog(self.dlg, gtk.MESSAGE_ERROR,
- 			               __('This accelerator is already bound to %s') %
- 			                  self.current_node.get('label'))
+ 			dialog = gtk.MessageDialog(self.dialog,
+ 			                           gtk.DIALOG_MODAL,
+ 			                           gtk.MESSAGE_ERROR,
+ 			                           gtk.BUTTONS_OK,
+ 			                           _('This accelerator is already bound to %s') % self.current_node.get('label'))
+			dialog.run()
+			dialog.destroy()
  			return False
  		
 		name = gtk.accelerator_name(keyval, mod)
@@ -289,7 +293,9 @@ class Manager:
 		mask = event.state & gtk.accelerator_get_default_mod_mask()
 
 		if event.keyval == gtk.keysyms.Escape:
-			entry.set_text(self.current_node.get('accelerator'))
+			entry.set_text(
+			           default(self.current_node.get('accelerator'),
+			                   ''))
 			self['commands'].grab_focus()
 			return True
 		elif event.keyval == gtk.keysyms.Delete \
@@ -320,9 +326,9 @@ class Manager:
 		if self.current_node is None:
 			return
 		if self.current_node.get('accelerator'):
-			entry.set_text('Type a new accelerator, or press Backspace to clear')
+			entry.set_text(_('Type a new accelerator, or press Backspace to clear'))
 		else:
-			entry.set_text('Type a new accelerator')
+			entry.set_text(_('Type a new accelerator'))
 	
 	def on_accelerator_focus_out(self, entry, event):
 		if self.current_node is not None:

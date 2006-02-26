@@ -173,9 +173,14 @@ def capture_menu_action(action, window, node):
 	panel.clear()
 
 	# Configure capture environment
- 	capture = Capture(node.text, os.getcwd())
+	try:
+		cwd = os.getcwd()
+	except OSError:
+		cwd = os.getenv('HOME');
+
+ 	capture = Capture(node.text, cwd)
  	capture.env = os.environ.copy()
-	capture.set_env(GEDIT_CWD = os.getcwd())
+	capture.set_env(GEDIT_CWD = cwd)
 
 	view = window.get_active_view()
 	if view is not None:

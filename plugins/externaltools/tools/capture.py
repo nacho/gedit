@@ -19,6 +19,7 @@
 __all__ = ('Capture', )
 
 import os, sys, signal
+import locale
 import subprocess
 import gobject
 
