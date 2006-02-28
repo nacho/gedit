@@ -224,29 +224,35 @@ class Console(gtk.VBox):
 		if event.keyval == gtk.keysyms.Return:
 			self.line.emit_stop_by_name("key_press_event")
 			self.eval()
+			return True
 		elif event.keyval == gtk.keysyms.Tab:
 		        self.line.emit_stop_by_name("key_press_event")
 			self.line.insert_text('\t')
 			gobject.idle_add(self.focus_text)
+			return True
 		elif event.keyval in (gtk.keysyms.KP_Up, gtk.keysyms.Up) \
 		     or (event.keyval in (gtk.keysyms.P, gtk.keysyms.p) and
 			 event.state & gtk.gdk.CONTROL_MASK):
 			self.line.emit_stop_by_name("key_press_event")
 			self.historyUp()
 			gobject.idle_add(self.focus_text)
+			return True
 		elif event.keyval in (gtk.keysyms.KP_Down, gtk.keysyms.Down) \
 		     or (event.keyval in (gtk.keysyms.N, gtk.keysyms.n) and
 			 event.state & gtk.gdk.CONTROL_MASK):
 			self.line.emit_stop_by_name("key_press_event")
 			self.historyDown()
 			gobject.idle_add(self.focus_text)
+			return True
 		elif event.keyval in (gtk.keysyms.L, gtk.keysyms.l) and \
 		     event.state & gtk.gdk.CONTROL_MASK:
 			self.text.get_buffer().set_text('')
+			return True
 		elif event.keyval in (gtk.keysyms.D, gtk.keysyms.d) and \
 		     event.state & gtk.gdk.CONTROL_MASK:
 			self.line.emit_stop_by_name("key_press_event")
 			self.ctrld()
+			return True
 
 	def focus_text(self):
 		self.line.grab_focus()
