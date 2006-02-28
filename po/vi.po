@@ -5,10 +5,10 @@
 # 
 msgid ""
 ""
-msgstr "Project-Id-Version: gedit 2.13.91 Gnome HEAD\n"
+msgstr "Project-Id-Version: gedit 2.13.92 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-24 09:03+0100\n"
-"PO-Revision-Date: 2006-02-24 21:57+1030\n"
+"POT-Creation-Date: 2006-02-27 22:42+0100\n"
+"PO-Revision-Date: 2006-02-28 16:28+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -100,7 +100,7 @@ msgstr "Phông bộ biên soạn"
 
 #:../data/gedit.schemas.in.h:17
 msgid "Enable Search Highlighting"
-msgstr "Bật nổi bật tìm kiếm"
+msgstr "Bật tô sáng tìm kiếm"
 
 #:../data/gedit.schemas.in.h:18
 msgid "Enable Syntax Highlighting"
@@ -468,7 +468,7 @@ msgstr "Gedit nên bật tô sáng cú pháp hay không."
 #:../data/gedit.schemas.in.h:98
 msgid ""
 "Whether gedit should highlight all the occurrences of the searched text."
-msgstr "Gedit có nên nổi bật mọi lần gặp chuỗi đã tìm kiếm hay không."
+msgstr "Gedit có nên tô sáng mọi lần gặp chuỗi đã tìm kiếm hay không."
 
 #:../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
@@ -979,11 +979,11 @@ msgid "_minutes"
 msgstr "p_hút"
 
 #:../gedit/dialogs/gedit-search-dialog.c:234
-#:../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1008
+#:../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "Thay thế"
 
-#:../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1006
+#:../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "Tìm"
 
@@ -1189,7 +1189,7 @@ msgid "Could not obtain backup filename"
 msgstr "Không thể lấy tên tập tin sao lưu"
 
 #:../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#:../gedit/gedit-window.c:1528 ../gedit/gedit-window.c:1533
+#:../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
 msgid "Read Only"
 msgstr "Chỉ đọc)"
 
@@ -1944,7 +1944,7 @@ msgstr "Tạo tài liệu mới"
 msgid "_Open..."
 msgstr "_Mở..."
 
-#:../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1105
+#:../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1110
 msgid "Open a file"
 msgstr "Mở tập tin"
 
@@ -2093,73 +2093,81 @@ msgid "Search for and replace text"
 msgstr "Tìm và thay thế đoạn"
 
 #:../gedit/gedit-ui.h:120
+msgid "_Clear Highlight"
+msgstr "_Xoá tô sáng"
+
+#:../gedit/gedit-ui.h:121
+msgid "Clear highlighting of search matches"
+msgstr "Xoá tô sáng điều khớp chuỗi tìm kiếm"
+
+#:../gedit/gedit-ui.h:122
 msgid "Go to _Line..."
 msgstr "Đi tới _Dòng..."
 
-#:../gedit/gedit-ui.h:121
+#:../gedit/gedit-ui.h:123
 msgid "Go to a specific line"
 msgstr "Đi đến dòng xác định"
 
 #.Documents menu
-#:../gedit/gedit-ui.h:124
+#:../gedit/gedit-ui.h:126
 msgid "_Save All"
 msgstr "_Lưu tất cả"
 
-#:../gedit/gedit-ui.h:125
+#:../gedit/gedit-ui.h:127
 msgid "Save all open files"
 msgstr "Lưu mọi tập tin đang mở"
 
-#:../gedit/gedit-ui.h:126
+#:../gedit/gedit-ui.h:128
 msgid "_Close All"
 msgstr "_Đóng tất cả"
 
-#:../gedit/gedit-ui.h:127
+#:../gedit/gedit-ui.h:129
 msgid "Close all open files"
 msgstr "Đóng tất cả các tập tin đang mở"
 
-#:../gedit/gedit-ui.h:128
+#:../gedit/gedit-ui.h:130
 msgid "_Move to New Window"
 msgstr "Chu_yển vào cửa sổ mới"
 
-#:../gedit/gedit-ui.h:129
+#:../gedit/gedit-ui.h:131
 msgid "Move the current document to a new window"
 msgstr "Chuyển tài liệu hiện thời vào cửa sổ mới"
 
-#:../gedit/gedit-ui.h:136
+#:../gedit/gedit-ui.h:138
 msgid "Quit the program"
 msgstr "Thoát chương trình"
 
-#:../gedit/gedit-ui.h:141
+#:../gedit/gedit-ui.h:143
 msgid "_Toolbar"
 msgstr "Thanh _công cụ"
 
-#:../gedit/gedit-ui.h:142
+#:../gedit/gedit-ui.h:144
 msgid "Show or hide the toolbar in the current window"
 msgstr "Hiện/Ẩn thanh công cụ trên cửa sổ hiện thời"
 
-#:../gedit/gedit-ui.h:144
+#:../gedit/gedit-ui.h:146
 msgid "_Statusbar"
 msgstr "Thanh t_rạng thái"
 
-#:../gedit/gedit-ui.h:145
+#:../gedit/gedit-ui.h:147
 msgid "Show or hide the statusbar in the current window"
 msgstr "Thay đổi trạng thái hiển thị của thanh trạng thái trên cửa sổ hiện thời"
 
-#:../gedit/gedit-ui.h:147
+#:../gedit/gedit-ui.h:149
 msgid "Side _Pane"
 msgstr "Khung _lề"
 
-#:../gedit/gedit-ui.h:148
+#:../gedit/gedit-ui.h:150
 msgid "Show or hide the side pane in the current window"
 msgstr "Hiện/Ẩn khung lề trên cửa sổ hiện thời"
 
-#:../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
-msgid "_Bottom Panel"
-msgstr "Bảng _dưới"
+#:../gedit/gedit-ui.h:156
+msgid "_Bottom Pane"
+msgstr "Ô _dưới"
 
-#:../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
-msgid "Show or hide the bottom panel in the current window"
-msgstr "Hiện/Ẩn bảng dưới trên cửa sổ hiện thời"
+#:../gedit/gedit-ui.h:157
+msgid "Show or hide the bottom pane in the current window"
+msgstr "Hiện/Ẩn ô dưới trong cửa sổ hiện thời"
 
 #:../gedit/gedit-utils.c:923
 #,c-format
@@ -2176,62 +2184,62 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Không thể tìm thấy ô điều khiển yêu cầu trong %s."
 
 #.create "Wrap Around" menu item.
-#:../gedit/gedit-view.c:1333
+#:../gedit/gedit-view.c:1336
 msgid "_Wrap Around"
 msgstr "_Cuộn vòng"
 
 #.create "Match Entire Word Only" menu item.
-#:../gedit/gedit-view.c:1343
+#:../gedit/gedit-view.c:1346
 msgid "Match _Entire Word Only"
 msgstr "Chỉ khớp với t_oàn bộ từ"
 
 #.create "Match Case" menu item.
-#:../gedit/gedit-view.c:1353
+#:../gedit/gedit-view.c:1356
 msgid "_Match Case"
 msgstr "_Khớp chữ hoa/thường"
 
-#:../gedit/gedit-view.c:1441
+#:../gedit/gedit-view.c:1444
 msgid "String you want to search for"
 msgstr "Chuỗi cần tìm kiếm"
 
-#:../gedit/gedit-view.c:1450
+#:../gedit/gedit-view.c:1453
 msgid "Line you want to move the cursor to"
 msgstr "Dòng nơi bạn muốn chuyển con trỏ"
 
-#:../gedit/gedit-window.c:676
+#:../gedit/gedit-window.c:681
 #,c-format
 msgid "Use %s highlight mode"
 msgstr "Dùng chế độ tô sáng %s"
 
-#:../gedit/gedit-window.c:729
+#:../gedit/gedit-window.c:734
 msgid "Normal"
 msgstr "Thường"
 
-#:../gedit/gedit-window.c:730
+#:../gedit/gedit-window.c:735
 msgid "Use Normal highlight mode"
 msgstr "Dùng chế độ tô sáng bình thường"
 
 #.Translators: %s is a URI
-#:../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
+#:../gedit/gedit-window.c:861 ../gedit/gedit-window.c:886
 #:../gedit/recent-files/egg-recent-view-gtk.c:346
 #:../gedit/recent-files/egg-recent-view-uimanager.c:205
 #,c-format
 msgid "Open '%s'"
 msgstr "Mở '%s'"
 
-#:../gedit/gedit-window.c:1004
+#:../gedit/gedit-window.c:1009
 msgid "Save"
 msgstr "Lưu"
 
-#:../gedit/gedit-window.c:1109
+#:../gedit/gedit-window.c:1114
 msgid "Open a recently used file"
 msgstr "Mở tập tin mới dùng"
 
-#:../gedit/gedit-window.c:1116
+#:../gedit/gedit-window.c:1121
 msgid "Open"
 msgstr "Mở"
 
-#:../gedit/gedit-window.c:1205 ../gedit/gedit-window.c:1804
+#:../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
 #,c-format
 msgid "Activate %s"
 msgstr "Kích hoạt %s"
@@ -2344,19 +2352,19 @@ msgstr "Thực hiện lệnh bên ngoài và tập lệnh hệ vỏ."
 msgid "External Tools"
 msgstr "Công cụ bên Ngoài"
 
-#:../plugins/externaltools/tools/functions.py:237
+#:../plugins/externaltools/tools/functions.py:242
 msgid "You must be inside a word to run this command"
 msgstr "Bạn phải ở trong từ để chạy lệnh này"
 
-#:../plugins/externaltools/tools/functions.py:293
+#:../plugins/externaltools/tools/functions.py:298
 msgid "Running tool:"
 msgstr "Công cụ đang chạy:"
 
-#:../plugins/externaltools/tools/functions.py:303
+#:../plugins/externaltools/tools/functions.py:308
 msgid "Done."
 msgstr "Đã xong."
 
-#:../plugins/externaltools/tools/functions.py:305
+#:../plugins/externaltools/tools/functions.py:310
 msgid "Exited"
 msgstr "Đã thoát"
 
@@ -2438,6 +2446,21 @@ msgstr "Một Công cụ Mới Phát triển"
 #:../plugins/externaltools/tools/manager.py:217
 msgid "New tool"
 msgstr "Công cụ mới"
+
+#:../plugins/externaltools/tools/manager.py:280
+#,python-format
+msgid "This accelerator is already bound to %s"
+msgstr "Phím tổ hợp này đã được gán cho %s"
+
+#:../plugins/externaltools/tools/manager.py:329
+#:../plugins/snippets/snippets/SnippetsDialog.py:562
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Hãy gõ phím tắt mới, hoặc bấm phím Backspace để xóa"
+
+#:../plugins/externaltools/tools/manager.py:331
+#:../plugins/snippets/snippets/SnippetsDialog.py:564
+msgid "Type a new accelerator"
+msgstr "Gõ phím tắt mới"
 
 #:../plugins/externaltools/tools/outputpanel.py:78
 msgid "Stopped."
@@ -2600,14 +2623,6 @@ msgstr "Thêm đoạn mới..."
 #:../plugins/snippets/snippets/SnippetsDialog.py:109
 msgid "Global"
 msgstr "Toàn cục"
-
-#:../plugins/snippets/snippets/SnippetsDialog.py:562
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "Hãy gõ phím tắt mới, hoặc bấm phím Backspace để xóa"
-
-#:../plugins/snippets/snippets/SnippetsDialog.py:564
-msgid "Type a new accelerator"
-msgstr "Gõ phím tắt mới"
 
 #:../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
