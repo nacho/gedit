@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-20 11:27+0200\n"
-"PO-Revision-Date: 2006-02-20 11:30+0200\n"
+"POT-Creation-Date: 2006-02-28 21:44+0200\n"
+"PO-Revision-Date: 2006-02-28 21:50+0200\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1058,11 +1058,11 @@ msgid "_minutes"
 msgstr "_minuuttia"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1008
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1006
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "Etsi"
 
@@ -1311,7 +1311,7 @@ msgid "Could not obtain backup filename"
 msgstr "Varmuuskopiointitiedostonimeä ei voitu luoda"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1528 ../gedit/gedit-window.c:1533
+#: ../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
 msgid "Read Only"
 msgstr "Vain luku"
 
@@ -2097,7 +2097,7 @@ msgstr "Luo uusi asiakirja"
 msgid "_Open..."
 msgstr "_Avaa..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1105
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1110
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
@@ -2246,72 +2246,80 @@ msgid "Search for and replace text"
 msgstr "Etsi ja korvaa tekstiä"
 
 #: ../gedit/gedit-ui.h:120
+msgid "_Clear Highlight"
+msgstr "Ä_lä korosta osumia"
+
+#: ../gedit/gedit-ui.h:121
+msgid "Clear highlighting of search matches"
+msgstr "Poista hakuosumien korostus käytöstä"
+
+#: ../gedit/gedit-ui.h:122
 msgid "Go to _Line..."
 msgstr "S_iirry riville..."
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:123
 msgid "Go to a specific line"
 msgstr "Siirry tietylle riville"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:126
 msgid "_Save All"
 msgstr "Tallenna k_aikki"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:127
 msgid "Save all open files"
 msgstr "Tallenna kaikki avoimet tiedostot"
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:128
 msgid "_Close All"
 msgstr "Sulje _kaikki"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:129
 msgid "Close all open files"
 msgstr "Sulje kaikki avoimet tiedostot"
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:130
 msgid "_Move to New Window"
 msgstr "_Siirrä uuteen ikkunaan"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:131
 msgid "Move the current document to a new window"
 msgstr "Siirrä asiakirja uuteen ikkunaan"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:138
 msgid "Quit the program"
 msgstr "Lopeta ohjelma"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:143
 msgid "_Toolbar"
 msgstr "T_yökalupalkki"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:144
 msgid "Show or hide the toolbar in the current window"
 msgstr "Näytä tai piilota työkalupalkki tässä ikkunassa"
 
-#: ../gedit/gedit-ui.h:144
+#: ../gedit/gedit-ui.h:146
 msgid "_Statusbar"
 msgstr "T_ilarivi"
 
-#: ../gedit/gedit-ui.h:145
+#: ../gedit/gedit-ui.h:147
 msgid "Show or hide the statusbar in the current window"
 msgstr "Näytä tai piilota tilarivi tässä ikkunassa"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:149
 msgid "Side _Pane"
 msgstr "Sivu_paneeli"
 
-#: ../gedit/gedit-ui.h:148
+#: ../gedit/gedit-ui.h:150
 msgid "Show or hide the side pane in the current window"
 msgstr "Näytä tai piilot sivupaneeli nykyisessä ikkunassa"
 
-#: ../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
-msgid "_Bottom Panel"
+#: ../gedit/gedit-ui.h:156
+msgid "_Bottom Pane"
 msgstr "_Alapaneeli"
 
-#: ../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
-msgid "Show or hide the bottom panel in the current window"
+#: ../gedit/gedit-ui.h:157
+msgid "Show or hide the bottom pane in the current window"
 msgstr "Näytä tai piilota alapaneeli nykyisessä ikkunassa"
 
 #: ../gedit/gedit-utils.c:923
@@ -2329,62 +2337,62 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Tarvittavia elementtejä ei löytynyt tiedostosta %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1333
+#: ../gedit/gedit-view.c:1336
 msgid "_Wrap Around"
 msgstr "_Rivitä"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1343
+#: ../gedit/gedit-view.c:1346
 msgid "Match _Entire Word Only"
 msgstr "Täsmää vain _kokonaisia sanoja"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1353
+#: ../gedit/gedit-view.c:1356
 msgid "_Match Case"
 msgstr "_Huomioi kirjainkoko"
 
-#: ../gedit/gedit-view.c:1441
+#: ../gedit/gedit-view.c:1444
 msgid "String you want to search for"
 msgstr "Etsittävä merkkijono"
 
-#: ../gedit/gedit-view.c:1450
+#: ../gedit/gedit-view.c:1453
 msgid "Line you want to move the cursor to"
 msgstr "Rivi, jolle haluat siirtää kursorin"
 
-#: ../gedit/gedit-window.c:676
+#: ../gedit/gedit-window.c:681
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
 
-#: ../gedit/gedit-window.c:729
+#: ../gedit/gedit-window.c:734
 msgid "Normal"
 msgstr "Tavallinen"
 
-#: ../gedit/gedit-window.c:730
+#: ../gedit/gedit-window.c:735
 msgid "Use Normal highlight mode"
 msgstr "Käytä tavallista väritystä"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:861 ../gedit/gedit-window.c:886
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: ../gedit/gedit-window.c:1004
+#: ../gedit/gedit-window.c:1009
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../gedit/gedit-window.c:1109
+#: ../gedit/gedit-window.c:1114
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: ../gedit/gedit-window.c:1116
+#: ../gedit/gedit-window.c:1121
 msgid "Open"
 msgstr "Avaa"
 
-#: ../gedit/gedit-window.c:1205 ../gedit/gedit-window.c:1804
+#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
 #, c-format
 msgid "Activate %s"
 msgstr "Käynnistä %s"
@@ -2498,100 +2506,115 @@ msgstr "Suorita ulkoisia komentoja ja skriptejä."
 msgid "External Tools"
 msgstr "Ulkoiset työkalut"
 
-#: ../plugins/externaltools/tools/functions.py:237
+#: ../plugins/externaltools/tools/functions.py:242
 msgid "You must be inside a word to run this command"
 msgstr "Kohdistimen täytyy olla sanan kohdalla jotta komento voidaan suorittaa"
 
-#: ../plugins/externaltools/tools/functions.py:293
+#: ../plugins/externaltools/tools/functions.py:298
 msgid "Running tool:"
 msgstr "Suoritetaan työkalua:"
 
-#: ../plugins/externaltools/tools/functions.py:303
+#: ../plugins/externaltools/tools/functions.py:308
 msgid "Done."
 msgstr "Valmis."
 
-#: ../plugins/externaltools/tools/functions.py:305
+#: ../plugins/externaltools/tools/functions.py:310
 msgid "Exited"
 msgstr "Päättyi"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Nothing"
 msgstr "Ei mitään"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current document"
 msgstr "Nykyinen asiakirja"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current selection"
 msgstr "Nykyinen valinta"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current line"
 msgstr "Nykyinen rivi"
 
-#: ../plugins/externaltools/tools/manager.py:47
+#: ../plugins/externaltools/tools/manager.py:46
 msgid "Current word"
 msgstr "Nykyinen sana"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Insert in output panel"
 msgstr "Lisää tulospaneeliin"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Create new document"
 msgstr "Luo uusi asiakirja"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Append to current document"
 msgstr "Lisää nykyiseen asiakirjaan"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current document"
 msgstr "Korvaa nykyinen asiakirja"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Replace current selection"
 msgstr "Korvaa nykyinen valinta"
 
-#: ../plugins/externaltools/tools/manager.py:55
+#: ../plugins/externaltools/tools/manager.py:54
 msgid "Insert at cursor position"
 msgstr "Lisää kohdistimen kohdalle"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents"
 msgstr "Kaikki asiakirjat"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "All documents except untitled ones"
 msgstr "Kaikki asiakirjat lukuunottamatta nimeämättömiä"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Local files only"
 msgstr "Vain paikalliset tiedostot"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Remote files only"
 msgstr "Vain etätiedostot"
 
-#: ../plugins/externaltools/tools/manager.py:62
+#: ../plugins/externaltools/tools/manager.py:61
 msgid "Untitled documents only"
 msgstr "Vain nimeämättömä asiakirjat"
 
-#: ../plugins/externaltools/tools/manager.py:175
-#: ../plugins/externaltools/tools/manager.py:192
-#: ../plugins/externaltools/tools/manager.py:231
+#: ../plugins/externaltools/tools/manager.py:190
+#: ../plugins/externaltools/tools/manager.py:207
+#: ../plugins/externaltools/tools/manager.py:246
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Muokkaa työkalua <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:179
+#: ../plugins/externaltools/tools/manager.py:194
 msgid "A Brand New Tool"
 msgstr "Tuliterä työkalu"
 
-#: ../plugins/externaltools/tools/manager.py:202
+#: ../plugins/externaltools/tools/manager.py:217
 msgid "New tool"
 msgstr "Uusi työkalu"
+
+#: ../plugins/externaltools/tools/manager.py:280
+#, python-format
+msgid "This accelerator is already bound to %s"
+msgstr "Tämä pikanäppäin on jo käytössä toiminnolle %s"
+
+#: ../plugins/externaltools/tools/manager.py:329
+#: ../plugins/snippets/snippets/SnippetsDialog.py:562
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Syötä uusi pikanäppäin tai tyhjennä arvo Backspacella"
+
+#: ../plugins/externaltools/tools/manager.py:331
+#: ../plugins/snippets/snippets/SnippetsDialog.py:564
+msgid "Type a new accelerator"
+msgstr "Syötä uusi pikanäppäin"
 
 #: ../plugins/externaltools/tools/outputpanel.py:78
 msgid "Stopped."
@@ -2655,14 +2678,6 @@ msgstr "_Tallenna_"
 #: ../plugins/externaltools/tools/tools.glade.h:16
 msgid "_Tools:"
 msgstr "Työ_kalut:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:17
-msgid ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
-msgstr ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2763,14 +2778,6 @@ msgstr "Lisää uusi tekstinpätkä..."
 #: ../plugins/snippets/snippets/SnippetsDialog.py:109
 msgid "Global"
 msgstr "Kaikkialla"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:562
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "Syötä uusi pikanäppäin tai tyhjennä arvo Backspacella"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:564
-msgid "Type a new accelerator"
-msgstr "Syötä uusi pikanäppäin"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -4742,6 +4749,13 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid ""
+#~ "cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+#~ "make"
+#~ msgstr ""
+#~ "cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+#~ "make"
 
 #~ msgid "Shortcut _key:"
 #~ msgstr "Pika_näppäin:"
