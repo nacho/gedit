@@ -154,11 +154,11 @@ parseItem (xmlDocPtr doc, xmlNodePtr cur)
 	if (xmlStrcmp (cur->name, (const xmlChar *)"document") != 0)
 			return;
 
-	uri = xmlGetProp (cur, "uri");
+	uri = xmlGetProp (cur, (const xmlChar *)"uri");
 	if (uri == NULL)
 		return;
 	
-	atime = xmlGetProp (cur, "atime");
+	atime = xmlGetProp (cur, (const xmlChar *)"atime");
 	if (atime == NULL)
 	{
 		xmlFree (uri);
@@ -168,40 +168,40 @@ parseItem (xmlDocPtr doc, xmlNodePtr cur)
 	item = g_new0 (Item, 1);
 
 	item->atime = g_ascii_strtoull ((char *)atime, NULL, 0);
-	
+
 	item->values = g_hash_table_new_full (g_str_hash, 
 					      g_str_equal, 
 					      g_free, 
 					      g_free);
 
 	cur = cur->xmlChildrenNode;
-		
+
 	while (cur != NULL)
 	{
 		if (xmlStrcmp (cur->name, (const xmlChar *)"entry") == 0)
 		{
 			xmlChar *key;
 			xmlChar *value;
-			
-			key = xmlGetProp (cur, "key");
-			value = xmlGetProp (cur, "value");
+
+			key = xmlGetProp (cur, (const xmlChar *)"key");
+			value = xmlGetProp (cur, (const xmlChar *)"value");
 
 			if ((key != NULL) && (value != NULL))
 				g_hash_table_insert (item->values,
-						     g_strdup (key), 
-						     g_strdup (value));
+						     g_strdup ((gchar *)key), 
+						     g_strdup ((gchar *)value));
 
 			if (key != NULL)
 				xmlFree (key);
 			if (value != NULL)
 				xmlFree (value);
 		}
-		
+
 		cur = cur->next;
 	}
 
 	g_hash_table_insert (gedit_metadata_manager->items,
-			     g_strdup (uri),
+			     g_strdup ((gchar *)uri),
 			     item);
 
 	xmlFree (uri);
@@ -278,7 +278,7 @@ gedit_metadata_manager_get (const gchar *uri,
 {
 	Item *item;
 	gchar *value;
-	
+
 	gedit_debug (DEBUG_METADATA);
 
 	g_return_val_if_fail (uri != NULL, NULL);
@@ -307,8 +307,8 @@ gedit_metadata_manager_get (const gchar *uri,
 	
 	if (item->values == NULL)
 		return NULL;
-	
-	value = (gchar *)g_hash_table_lookup (item->values, key);
+
+	value = g_hash_table_lookup (item->values, key);
 
 	if (value == NULL)
 		return NULL;
@@ -375,7 +375,7 @@ static void
 save_values (const gchar *key, const gchar *value, xmlNodePtr parent)
 {
 	xmlNodePtr xml_node;
-	
+
 	gedit_debug (DEBUG_METADATA);
 
 	g_return_if_fail (key != NULL);
@@ -383,17 +383,24 @@ save_values (const gchar *key, const gchar *value, xmlNodePtr parent)
 	if (value == NULL)
 		return;
 		
-	xml_node = xmlNewChild (parent, NULL, "entry", NULL);
+	xml_node = xmlNewChild (parent,
+				NULL,
+				(const xmlChar *)"entry",
+				NULL);
 
-	xmlSetProp (xml_node, "key", key);
-	xmlSetProp (xml_node, "value", value);
+	xmlSetProp (xml_node,
+		    (const xmlChar *)"key",
+		    (const xmlChar *)key);
+	xmlSetProp (xml_node,
+		    (const xmlChar *)"value",
+		    (const xmlChar *)value);
 
 	gedit_debug_message (DEBUG_METADATA, "entry: %s = %s", key, value);
 }
 
 static void
 save_item (const gchar *key, const gpointer *data, xmlNodePtr parent)
-{	
+{
 	xmlNodePtr xml_node;
 	const Item *item = (const Item *)data;
 	gchar *atime;
@@ -401,32 +408,33 @@ save_item (const gchar *key, const gpointer *data, xmlNodePtr parent)
 	gedit_debug (DEBUG_METADATA);
 
 	g_return_if_fail (key != NULL);
-	
+
 	if (item == NULL)
 		return;
-		
-	xml_node = xmlNewChild (parent, NULL, "document", NULL);
-	
-	xmlSetProp (xml_node, "uri", key);
+
+	xml_node = xmlNewChild (parent, NULL, (const xmlChar *)"document", NULL);
+
+	xmlSetProp (xml_node, (const xmlChar *)"uri", (const xmlChar *)key);
 
 	gedit_debug_message (DEBUG_METADATA, "uri: %s", key);
 
 	atime = g_strdup_printf ("%ld", item->atime);
-	xmlSetProp (xml_node, "atime", atime);	
+	xmlSetProp (xml_node, (const xmlChar *)"atime", (const xmlChar *)atime);	
 
 	gedit_debug_message (DEBUG_METADATA, "atime: %s", atime);
 
 	g_free (atime);
 
     	g_hash_table_foreach (item->values,
-			      (GHFunc)save_values, xml_node); 
+			      (GHFunc)save_values,
+			      xml_node);
 }
 
 static void
 get_oldest (const gchar *key, const gpointer value, const gchar ** key_to_remove)
 {
 	const Item *item = (const Item *)value;
-	
+
 	if (*key_to_remove == NULL)
 	{
 		*key_to_remove = key;
@@ -472,7 +480,7 @@ gedit_metadata_manager_save (gpointer data)
 	gchar *file_name;
 
 	gedit_debug (DEBUG_METADATA);
-	
+
 	if (!gedit_metadata_manager->modified)
 		return TRUE;
 
@@ -480,28 +488,29 @@ gedit_metadata_manager_save (gpointer data)
 		
 	xmlIndentTreeOutput = TRUE;
 
-	doc = xmlNewDoc ("1.0");
+	doc = xmlNewDoc ((const xmlChar *)"1.0");
 	if (doc == NULL)
 		return TRUE;
 
 	/* Create metadata root */
-	root = xmlNewDocNode (doc, NULL, "metadata", NULL);
+	root = xmlNewDocNode (doc, NULL, (const xmlChar *)"metadata", NULL);
 	xmlDocSetRootElement (doc, root);
 
     	g_hash_table_foreach (gedit_metadata_manager->items,
-			  (GHFunc)save_item, root);        
+			      (GHFunc)save_item,
+			      root);        
 
 	/* FIXME: lock file - Paolo */
 	file_name = gnome_util_home_file (METADATA_FILE);
 	xmlSaveFormatFile (file_name, doc, 1);
 	g_free (file_name);
-	
+
 	xmlFreeDoc (doc); 
 
 	gedit_metadata_manager->modified = FALSE;
 
 	gedit_debug_message (DEBUG_METADATA, "DONE");
-	
+
 	return TRUE;
 }
 

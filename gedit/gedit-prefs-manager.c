@@ -826,7 +826,7 @@ DEFINE_INT_PREF (print_line_numbers,
  * gnome_font_face_find_closest() (probably a gnome-print bug)
  */
 static void
-face_and_size_from_full_name (const guchar   *name,
+face_and_size_from_full_name (const gchar    *name,
 			      GnomeFontFace **face,
 			      gdouble        *size)
 {
@@ -843,7 +843,7 @@ face_and_size_from_full_name (const guchar   *name,
 		*size = 12;
 	}
 
-	*face = gnome_font_face_find_closest (copy);
+	*face = gnome_font_face_find_closest ((guchar *)copy);
 	g_free (copy);
 }
 
@@ -854,6 +854,7 @@ font_description_from_gnome_font_name (const char *font_name)
 	PangoFontDescription *desc;
 	PangoStyle style;
 	PangoWeight weight;
+	const gchar *family_name;
 	gdouble size;
 
 	face_and_size_from_full_name (font_name, &face, &size);
@@ -861,9 +862,10 @@ font_description_from_gnome_font_name (const char *font_name)
 	/* Pango and GnomePrint have basically the same numeric weight values */
 	weight = (PangoWeight) gnome_font_face_get_weight_code (face);
 	style = gnome_font_face_is_italic (face) ? PANGO_STYLE_ITALIC : PANGO_STYLE_NORMAL;
+	family_name = (const gchar *) gnome_font_face_get_family_name (face);
 
 	desc = pango_font_description_new ();
-	pango_font_description_set_family (desc, gnome_font_face_get_family_name (face));
+	pango_font_description_set_family (desc, family_name);
 	pango_font_description_set_weight (desc, weight);
 	pango_font_description_set_style (desc, style);
 	pango_font_description_set_size (desc, size * PANGO_SCALE);
