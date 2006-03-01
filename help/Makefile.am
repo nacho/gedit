@@ -12,7 +12,7 @@ DOC_FIGURES = \
 	figures/gedit_recent_files_menu_icon.png	\
 	figures/gedit_window.png	
 
-DOC_LINGUAS = de es fr it ja zh_CN zh_HK zh_TW
+DOC_LINGUAS = bg de es fr it ja zh_CN zh_HK zh_TW
 
 # These languages aren't yet converted to gnome-doc-utils
 SUBDIRS = eu ko ro sv
