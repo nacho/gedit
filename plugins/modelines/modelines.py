@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# modelines.py
+# modelines.py - Emacs, Kate and Vim-style modelines support for gedit.
 #
 # Copyright (C) 2005 - Steve Frécinaux
 #
@@ -25,34 +25,35 @@ class ModelinePlugin(gedit.Plugin):
 	def __init__(self):
 		gedit.Plugin.__init__(self)
 
-	def activate(self, window):
-		for view in window.get_views():
-			doc = view.get_buffer()
-			loaded_id = doc.connect("loaded", apply_modeline, view)
-			saved_id  = doc.connect("saved", apply_modeline, view)
-			doc.set_data("ModelinePluginHandlerIds", (loaded_id, saved_id))
-			apply_modeline(doc, None, view)
-			
-		tab_added_id = window.connect("tab_added", self.connect_handlers);
-		window.set_data("ModelinePluginHandlerId", tab_added_id);
-
-	def connect_handlers(self, window, tab):
-		doc = tab.get_document()
-		view = tab.get_view()
+	def connect_handlers(self, view):
+		doc = view.get_buffer()
 		loaded_id = doc.connect("loaded", apply_modeline, view)
 		saved_id  = doc.connect("saved", apply_modeline, view)
 		doc.set_data("ModelinePluginHandlerIds", (loaded_id, saved_id))
 	
+	def disconnect_handlers(self, view):
+		doc = view.get_buffer()
+		loaded_id, saved_id = doc.get_data("ModelinePluginHandlerIds")
+		doc.disconnect(loaded_id)
+		doc.disconnect(saved_id)
+		doc.set_data("ModelinePluginHandlerIds", None)
+	
+	def activate(self, window):
+		for view in window.get_views(): 
+			self.connect_handler(view)
+			apply_modeline(doc, None, view)
+			
+		tab_added_id = window.connect("tab_added",
+		                              lambda w, t: self.connect_handlers(t.get_view()))
+		window.set_data("ModelinePluginHandlerId", tab_added_id)
+	
 	def deactivate(self, window):
-		tab_added_id = window.get_data("ModelinePluginHandlerId");
-		window.disconnect(tab_added_id);
-		window.set_data("ModelinePluginHandlerId", None);
+		tab_added_id = window.get_data("ModelinePluginHandlerId")
+		window.disconnect(tab_added_id)
+		window.set_data("ModelinePluginHandlerId", None)
 		
-		for doc in window.get_documents():
-			loaded_id, saved_id = doc.get_data("ModelinePluginHandlerIds")
-			doc.set_data("ModelinePluginHandlerIds", None)
-			doc.disconnect(loaded_id)
-			doc.disconnect(saved_id)
+		for view in window.get_views():
+			self.disconnect_handlers(view)
 
 def apply_modeline(doc, error, view):
 	if error is None:
@@ -61,37 +62,36 @@ def apply_modeline(doc, error, view):
 		doc.set_data("ModelineOptions", options)
 
 def get_modeline_options(doc):
+	options = dict()
+
 	# Search the two first lines for emacs- or vim-style modelines
 	start = doc.get_start_iter()
 	for i in (1, 2):
 		end = start.copy()
-		if not end.forward_to_line_end(): return False
+		if not end.forward_to_line_end():
+			return options
 		modeline = doc.get_text(start, end, False)
-		options = parse_modeline_vim(modeline)
-		if options: return options
-		options = parse_modeline_emacs(modeline)
-		if options: return options
-		options = parse_modeline_kate(modeline)
-		if options: return options
+		options.update(parse_modeline_kate(modeline))
+		options.update(parse_modeline_vim(modeline))
+		options.update(parse_modeline_emacs(modeline))
 		start = end
 
 	# Vim can read modeline on the 3rd line
 	end = start.copy()
-	if not end.forward_to_line_end(): return False
+	if not end.forward_to_line_end():
+		return options
 	modeline = doc.get_text(start, end, False)
-	options = parse_modeline_vim(modeline)
-	if options: return options
-	options = parse_modeline_kate(modeline)
-	if options: return options
+	options.update(parse_modeline_kate(modeline))
+	options.update(parse_modeline_vim(modeline))
 	start = end
 
 	# Kate reads modelines on the 10 first lines
 	for i in (4, 5, 6, 7, 8, 9, 10):
 		end = start.copy()
-		if not end.forward_to_line_end(): break
+		if not end.forward_to_line_end():
+			break
 		modeline = doc.get_text(start, end, False)
-		options = parse_modeline_kate(modeline)
-		if options: return options
+		options.update(parse_modeline_kate(modeline))
 		start = end
 
 	# Search the three last lines for vim- and kate-style modelines
@@ -99,26 +99,24 @@ def get_modeline_options(doc):
 	start.backward_lines(2)	
 	for i in (1, 2, 3):
 		end = start.copy()
-		if not end.forward_to_line_end(): return False
+		if not end.forward_to_line_end():
+			return options
 		modeline = doc.get_text(start, end, False)
-		options = parse_modeline_vim(modeline)
-		if options: return options
-		options = parse_modeline_kate(modeline)
-		if options: return options
+		options.update(parse_modeline_kate(modeline))
+		options.update(parse_modeline_vim(modeline))
 		start = end
 
 	# Kate reads modelines on the 10 last lines
 	start.backward_lines(9)	
 	for i in (4, 5, 6, 7, 8, 9, 10):
 		end = start.copy()
-		if not end.forward_to_line_end(): return False
+		if not end.forward_to_line_end():
+			return options
 		modeline = doc.get_text(start, end, False)
-		options = parse_modeline_kate(modeline)
-		if options: return options
+		options.update(parse_modeline_kate(modeline))
 		start = end
 	
-	# No modeline found
-	return False
+	return options
 
 def parse_modeline_vim(line):
 	# First form modeline
@@ -131,23 +129,24 @@ def parse_modeline_vim(line):
 	for i in ('ex:', 'vi:', 'vim:'):
 		start = line.find(i)
 		if start != -1:	
+			start = start + len(i)
 			break
 	else:
-		return False
+		return {}
 	
 	if line[start : start + 2] == "se":
 		end = line.find(":", start + 3)
 		if end == -1:
-			return False
-		elif line[start : start + 3] == "set":
-			line = line[start + 4 : end - 1]
+			return {}
+		elif line[start + 2] == 't':
+			line = line[start + 4 : end]
 		else:
-			line = line[start + 3 : end - 1]
+			line = line[start + 3 : end]
 	else:
 		line = line[start :]
 	
 	# Get every individual directives
-	directives = filter((lambda x: x != ''), re.split(r'[: ]', line))
+	directives = [x for x in re.split(r'[: ]', line) if x != '']
 	options = dict();
 	
 	for directive in directives:
@@ -177,19 +176,19 @@ def parse_modeline_emacs(line):
 	# Extract the modeline from the given line
 	start = line.find("-*-")
 	if start == -1:
-		return False
+		return {}
 	else:
 		start = start + 3
 	end = line.find("-*-", start)
 	if end == -1:
-		return False
+		return {}
 	
 	# Get every individual directives
-	directives = filter((lambda x: x != ''), map(str.strip, line[start : end - 1].split(";")))
+	directives = [x for x in [i.strip() for i in line[start : end].split(";")] if x != '']
 	options = dict()
 	
 	for directive in directives:
-		name, value = (map(str.strip, directive.split(":", 1)) + [None])[0:2]
+		name, value = ([i.strip() for i in directive.split(":", 1)] + [None])[0:2]
 		if name == "tab-width":
 			options["tabs-width"] = int(value)
 		elif name == "indent-tabs-mode":
@@ -204,25 +203,25 @@ def parse_modeline_kate(line):
 	# Extract the modeline from the given line
 	start = line.find("kate:")
 	if start == -1:
-		return False
+		return {}
 	else:
 		start = start + 5
 	end = line.rfind(";")
 	if end == -1:
-		return False
+		return {}
 	
 	# Get every individual directives
-	directives = filter((lambda x: x != ''), map(str.strip, line[start : end - 1].split(";")))
+	directives = [x for x in [i.strip() for i in line[start : end].split(";")] if x != '']
 	options = dict()
 	
 	for directive in directives:
-		name, value = (map(str.strip, directive.split(None, 1)) + [None])[0:2]
-		if name == "tab-width":
+		name, value = ([i.strip() for i in directive.split(None, 1)] + [None])[0:2]
+		if name == "tab-width" or name == "indent-width":
 			options["tabs-width"] = int(value)
 		elif name == "space-indent":
 			options["use-tabs"] = value not in ("on", "true", "1")
 		elif name == "word-wrap":
-			options["wrapping"] = value not in ("on", "true", "1")
+			options["wrapping"] = value in ("on", "true", "1")
 		elif name == "word-wrap-column":
 			options["margin"] = int(value)
 	return options
@@ -251,3 +250,4 @@ def apply_options(options, view):
 			view.set_show_margin(False)
 
 # ex:ts=8:noet:
+# kate: word-wrap-column 120;
