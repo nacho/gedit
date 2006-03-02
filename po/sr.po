@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-20 23:41+0100\n"
-"PO-Revision-Date: 2006-02-20 23:45+0100\n"
+"POT-Creation-Date: 2006-03-02 06:32+0100\n"
+"PO-Revision-Date: 2006-03-02 13:52+0100\n"
 "Last-Translator: Слободан Д. Средојевић <slobo@akrep.be>\n"
 "Language-Team: Serbian (sr) <gnom@prevod.org>\n"
 "MIME-Version: 1.0\n"
@@ -1078,11 +1078,11 @@ msgid "_minutes"
 msgstr "_минута"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1008
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "Замени"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1006
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "Пронађи"
 
@@ -1338,7 +1338,7 @@ msgid "Could not obtain backup filename"
 msgstr "Не могу да прибавим име датотеке резервног примерка"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1528 ../gedit/gedit-window.c:1533
+#: ../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
 msgid "Read Only"
 msgstr "Само читање"
 
@@ -1889,7 +1889,7 @@ msgstr "П_одеси додатак"
 msgid "Cannot initialize preferences manager."
 msgstr "Не могу да покренем управљача поставки."
 
-#: ../gedit/gedit-prefs-manager.c:1388
+#: ../gedit/gedit-prefs-manager.c:1390
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Очекиван ’%s‘ је добио ’%s‘ за кључ %s"
@@ -2124,7 +2124,7 @@ msgstr "Направи нови документ"
 msgid "_Open..."
 msgstr "_Отвори..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1105
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1110
 msgid "Open a file"
 msgstr "Отвори датотеку"
 
@@ -2273,73 +2273,81 @@ msgid "Search for and replace text"
 msgstr "Тражи и замени текст"
 
 #: ../gedit/gedit-ui.h:120
+msgid "_Clear Highlight"
+msgstr "Уклони исти_цање"
+
+#: ../gedit/gedit-ui.h:121
+msgid "Clear highlighting of search matches"
+msgstr "Уклони истицање пронађеног текста"
+
+#: ../gedit/gedit-ui.h:122
 msgid "Go to _Line..."
 msgstr "Иди у _ред..."
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:123
 msgid "Go to a specific line"
 msgstr "Иди у одређени ред"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:126
 msgid "_Save All"
 msgstr "_Сачувај све"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:127
 msgid "Save all open files"
 msgstr "Сачувај све отворене датотеке"
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:128
 msgid "_Close All"
 msgstr "Зат_вори све"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:129
 msgid "Close all open files"
 msgstr "Затвори све отворене датотеке"
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:130
 msgid "_Move to New Window"
 msgstr "Пре_мести у нови прозор"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:131
 msgid "Move the current document to a new window"
 msgstr "Премести тренутни документ у нови прозор"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:138
 msgid "Quit the program"
 msgstr "Затвори програм"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:143
 msgid "_Toolbar"
 msgstr "Палета _алата"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:144
 msgid "Show or hide the toolbar in the current window"
 msgstr "Промени видљивост палете са алатима у тренутном прозору"
 
-#: ../gedit/gedit-ui.h:144
+#: ../gedit/gedit-ui.h:146
 msgid "_Statusbar"
 msgstr "Линија са _стањем"
 
-#: ../gedit/gedit-ui.h:145
+#: ../gedit/gedit-ui.h:147
 msgid "Show or hide the statusbar in the current window"
 msgstr "Промени видљивост линије са стањем у тренутном прозору"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:149
 msgid "Side _Pane"
 msgstr "_Бочна област"
 
-#: ../gedit/gedit-ui.h:148
+#: ../gedit/gedit-ui.h:150
 msgid "Show or hide the side pane in the current window"
 msgstr "Промени видљивост бочне области у тренутном прозору"
 
-#: ../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
-msgid "_Bottom Panel"
-msgstr "_Панел на дну"
+#: ../gedit/gedit-ui.h:156
+msgid "_Bottom Pane"
+msgstr "Област _на дну"
 
-#: ../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
-msgid "Show or hide the bottom panel in the current window"
-msgstr "Промени видљивост панела на дну у тренутном прозору"
+#: ../gedit/gedit-ui.h:157
+msgid "Show or hide the bottom pane in the current window"
+msgstr "Промени видљивост области на дну у тренутном прозору"
 
 #: ../gedit/gedit-utils.c:923
 #, c-format
@@ -2356,62 +2364,62 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Не могу да пронађем неопходне елементе у датотеци %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1333
+#: ../gedit/gedit-view.c:1336
 msgid "_Wrap Around"
 msgstr "Пре_ламај око"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1343
+#: ../gedit/gedit-view.c:1346
 msgid "Match _Entire Word Only"
 msgstr "Упор_еди само целе речи"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1353
+#: ../gedit/gedit-view.c:1356
 msgid "_Match Case"
 msgstr "_Упореди мала и велика слова"
 
-#: ../gedit/gedit-view.c:1441
+#: ../gedit/gedit-view.c:1444
 msgid "String you want to search for"
 msgstr "Слог који тражите"
 
-#: ../gedit/gedit-view.c:1450
+#: ../gedit/gedit-view.c:1453
 msgid "Line you want to move the cursor to"
 msgstr "Ред у који желите да померите курсор"
 
-#: ../gedit/gedit-window.c:676
+#: ../gedit/gedit-window.c:681
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Користи %s режим истицања"
 
-#: ../gedit/gedit-window.c:729
+#: ../gedit/gedit-window.c:734
 msgid "Normal"
 msgstr "Обично"
 
-#: ../gedit/gedit-window.c:730
+#: ../gedit/gedit-window.c:735
 msgid "Use Normal highlight mode"
 msgstr "Користи обичан режим истицања"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:861 ../gedit/gedit-window.c:886
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "Отвори „%s“"
 
-#: ../gedit/gedit-window.c:1004
+#: ../gedit/gedit-window.c:1009
 msgid "Save"
 msgstr "Сачувај"
 
-#: ../gedit/gedit-window.c:1109
+#: ../gedit/gedit-window.c:1114
 msgid "Open a recently used file"
 msgstr "Отвори скоро коришћену датотеку"
 
-#: ../gedit/gedit-window.c:1116
+#: ../gedit/gedit-window.c:1121
 msgid "Open"
 msgstr "Отвори"
 
-#: ../gedit/gedit-window.c:1205 ../gedit/gedit-window.c:1804
+#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
 #, c-format
 msgid "Activate %s"
 msgstr "Активирај %s"
@@ -2525,100 +2533,115 @@ msgstr "Извршава спољне наредбе и скрипте љуск�
 msgid "External Tools"
 msgstr "Спољни алати"
 
-#: ../plugins/externaltools/tools/functions.py:237
+#: ../plugins/externaltools/tools/functions.py:242
 msgid "You must be inside a word to run this command"
 msgstr "Морате бити унутар неке речи да би извршили ову наредбу"
 
-#: ../plugins/externaltools/tools/functions.py:293
+#: ../plugins/externaltools/tools/functions.py:298
 msgid "Running tool:"
 msgstr "Покренути алат:"
 
-#: ../plugins/externaltools/tools/functions.py:303
+#: ../plugins/externaltools/tools/functions.py:308
 msgid "Done."
 msgstr "Готово."
 
-#: ../plugins/externaltools/tools/functions.py:305
+#: ../plugins/externaltools/tools/functions.py:310
 msgid "Exited"
 msgstr "Изашао"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Nothing"
 msgstr "Ништа"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current document"
 msgstr "Текући документ"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current selection"
 msgstr "Тренутно означени текст"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current line"
 msgstr "Текући ред"
 
-#: ../plugins/externaltools/tools/manager.py:47
+#: ../plugins/externaltools/tools/manager.py:46
 msgid "Current word"
 msgstr "Текућа реч"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Insert in output panel"
 msgstr "Уметни у излазни панел"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Create new document"
 msgstr "Направи нови документ"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Append to current document"
 msgstr "Припој тренутном документу"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current document"
 msgstr "Замени текући документ"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Replace current selection"
 msgstr "Замени тренутно означени текст"
 
-#: ../plugins/externaltools/tools/manager.py:55
+#: ../plugins/externaltools/tools/manager.py:54
 msgid "Insert at cursor position"
 msgstr "Уметни на позицију курсора"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents"
 msgstr "Сви документи"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "All documents except untitled ones"
 msgstr "Сви документи изузев насловљених"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Local files only"
 msgstr "Само локалне датотеке"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Remote files only"
 msgstr "Само удаљене датотеке"
 
-#: ../plugins/externaltools/tools/manager.py:62
+#: ../plugins/externaltools/tools/manager.py:61
 msgid "Untitled documents only"
 msgstr "Само ненасловљени документи"
 
-#: ../plugins/externaltools/tools/manager.py:175
-#: ../plugins/externaltools/tools/manager.py:192
-#: ../plugins/externaltools/tools/manager.py:231
+#: ../plugins/externaltools/tools/manager.py:190
+#: ../plugins/externaltools/tools/manager.py:207
+#: ../plugins/externaltools/tools/manager.py:246
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Уреди алат <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:179
+#: ../plugins/externaltools/tools/manager.py:194
 msgid "A Brand New Tool"
 msgstr "Сасвим нови алат"
 
-#: ../plugins/externaltools/tools/manager.py:202
+#: ../plugins/externaltools/tools/manager.py:217
 msgid "New tool"
 msgstr "Нови алат"
+
+#: ../plugins/externaltools/tools/manager.py:280
+#, python-format
+msgid "This accelerator is already bound to %s"
+msgstr "Ова пречица је већ везана за %s"
+
+#: ../plugins/externaltools/tools/manager.py:329
+#: ../plugins/snippets/snippets/SnippetsDialog.py:562
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Задај једну нову пречицу или очисти тастером за брисање"
+
+#: ../plugins/externaltools/tools/manager.py:331
+#: ../plugins/snippets/snippets/SnippetsDialog.py:564
+msgid "Type a new accelerator"
+msgstr "Притисни нову пречицу"
 
 #: ../plugins/externaltools/tools/outputpanel.py:78
 msgid "Stopped."
@@ -2682,14 +2705,6 @@ msgstr "_Сачувај:"
 #: ../plugins/externaltools/tools/tools.glade.h:16
 msgid "_Tools:"
 msgstr "Ала_ти:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:17
-msgid ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
-msgstr ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2790,14 +2805,6 @@ msgstr "Додај нови цитат..."
 #: ../plugins/snippets/snippets/SnippetsDialog.py:109
 msgid "Global"
 msgstr "Опште"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:562
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "Задај једну нову пречицу или очисти тастером за брисање"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:564
-msgid "Type a new accelerator"
-msgstr "Притисни нову пречицу"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -4773,6 +4780,13 @@ msgstr "У_питај за формат"
 msgid "_Use custom format"
 msgstr "Кори_сти посебан формат"
 
+#~ msgid ""
+#~ "cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+#~ "make"
+#~ msgstr ""
+#~ "cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
+#~ "make"
+
 #~ msgid "Shortcut _key:"
 #~ msgstr "Преч_ица:"
 
@@ -4784,22 +4798,6 @@ msgstr "Кори_сти посебан формат"
 #~ "Не могу да учитам датотеку „%s“. Она је вероватно оштећена. Молим "
 #~ "исправите или уклоните датотеку. Да би покушали да учитате датотеку "
 #~ "поново изаберите редом ставке менија: „Алати —> Цитати“."
-
-#, fuzzy
-#~ msgid "gedit cannot handle <i>%s:</i> locations."
-#~ msgstr "гедит не може да користи %s: путање."
-
-#, fuzzy
-#~ msgid "<small>Ch_aracter Coding:</small>"
-#~ msgstr "Кодирање зн_акова:"
-
-#, fuzzy
-#~ msgid ""
-#~ "gedit cannot handle <i>%s:</i> locations in write mode. Please, check "
-#~ "that you typed the location correctly and try again."
-#~ msgstr ""
-#~ "Име рачунара је неисправно. Проверите да ли сте унели исправну путању и "
-#~ "покушајте поново."
 
 #~ msgid "Gedit View"
 #~ msgstr "Гедит преглед"
