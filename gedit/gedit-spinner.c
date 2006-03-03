@@ -58,16 +58,6 @@
 typedef struct _GeditSpinnerCache		GeditSpinnerCache;
 typedef struct _GeditSpinnerCacheClass		GeditSpinnerCacheClass;
 typedef struct _GeditSpinnerCachePrivate	GeditSpinnerCachePrivate;
-typedef struct _GeditSpinnerImages		GeditSpinnerImages;
-
-struct _GeditSpinnerImages
-{
-	GtkIconSize  size;
-	gint         width;
-	gint         height;
-	GdkPixbuf   *quiescent_pixbuf;
-	GList       *images;
-};
 
 struct _GeditSpinnerCacheClass
 {
@@ -84,13 +74,29 @@ struct _GeditSpinnerCache
 
 #define GEDIT_SPINNER_CACHE_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_SPINNER_CACHE, GeditSpinnerCachePrivate))
 
-struct _GeditSpinnerCachePrivate
+typedef struct
 {
+	GtkIconSize  size;
+	gint         width;
+	gint         height;
+	GdkPixbuf   *quiescent_pixbuf;
+	GList       *images;
+} GeditSpinnerImages;
+
+typedef struct
+{
+	GdkScreen          *screen;
 	GtkIconTheme       *icon_theme;
 	GeditSpinnerImages *originals;
-	
+
 	/* List of GeditSpinnerImages scaled to different sizes */
 	GList              *images;
+} GeditSpinnerCacheData;
+
+struct _GeditSpinnerCachePrivate
+{
+	/* Hash table of GdkScreen -> EphySpinnerCacheData */
+	GHashTable *hash;
 };
 
 static void gedit_spinner_cache_class_init	(GeditSpinnerCacheClass *klass);
@@ -155,11 +161,15 @@ gedit_spinner_images_copy (GeditSpinnerImages *images)
 }
 
 static void
-gedit_spinner_cache_unload (GeditSpinnerCache *cache)
+gedit_spinner_cache_data_unload (GeditSpinnerCacheData *data)
 {
-	g_list_foreach (cache->priv->images, (GFunc) gedit_spinner_images_free, NULL);
-	cache->priv->images = NULL;
-	cache->priv->originals = NULL;
+	g_return_if_fail (data != NULL);
+
+	/* LOG ("GeditSpinnerDataCache unload for screen %p", data->screen); */
+
+	g_list_foreach (data->images, (GFunc) gedit_spinner_images_free, NULL);
+	data->images = NULL;
+	data->originals = NULL;
 }
 
 static GdkPixbuf *
@@ -185,7 +195,7 @@ extract_frame (GdkPixbuf *grid_pixbuf,
 }
 
 static void
-gedit_spinner_cache_load (GeditSpinnerCache *cache)
+gedit_spinner_cache_data_load (GeditSpinnerCacheData *data)
 {
 	GeditSpinnerImages *images;
 	GdkPixbuf *icon_pixbuf, *pixbuf;
@@ -193,14 +203,16 @@ gedit_spinner_cache_load (GeditSpinnerCache *cache)
 	int grid_width, grid_height, x, y, size, h, w;
 	const char *icon;
 
-	/* LOG ("GeditSpinnerCache loading"); */
+	g_return_if_fail (data != NULL);
 
-	gedit_spinner_cache_unload (cache);
+	/* LOG ("GeditSpinnerCacheData loading for screen %p", data->screen); */
+
+	gedit_spinner_cache_data_unload (data);
 
 	/* START_PROFILER ("loading spinner animation") */
 
 	/* Load the animation */
-	icon_info = gtk_icon_theme_lookup_icon (cache->priv->icon_theme,
+	icon_info = gtk_icon_theme_lookup_icon (data->icon_theme,
 						"gnome-spinner", -1, 0);
 	if (icon_info == NULL)
 	{
@@ -228,8 +240,8 @@ gedit_spinner_cache_load (GeditSpinnerCache *cache)
 	grid_height = gdk_pixbuf_get_height (icon_pixbuf);
 
 	images = g_new (GeditSpinnerImages, 1);
-	cache->priv->images = g_list_prepend (NULL, images);
-	cache->priv->originals = images;
+	data->images = g_list_prepend (NULL, images);
+	data->originals = images;
 
 	images->size = GTK_ICON_SIZE_INVALID;
 	images->width = images->height = size;
@@ -259,7 +271,7 @@ gedit_spinner_cache_load (GeditSpinnerCache *cache)
 	g_object_unref (icon_pixbuf);
 
 	/* Load the rest icon */
-	icon_info = gtk_icon_theme_lookup_icon (cache->priv->icon_theme,
+	icon_info = gtk_icon_theme_lookup_icon (data->icon_theme,
 						"gnome-spinner-rest", -1, 0);
 	if (icon_info == NULL)
 	{
@@ -293,6 +305,40 @@ gedit_spinner_cache_load (GeditSpinnerCache *cache)
 	images->height = MAX (images->height, h);
 
 	/* STOP_PROFILER ("loading spinner animation") */
+}
+
+static GeditSpinnerCacheData *
+gedit_spinner_cache_data_new (GdkScreen *screen)
+{
+	GeditSpinnerCacheData *data;
+
+	data = g_new0 (GeditSpinnerCacheData, 1);
+
+	data->screen = screen;
+	data->icon_theme = gtk_icon_theme_get_for_screen (screen);
+	g_signal_connect_swapped (data->icon_theme,
+				  "changed",
+				  G_CALLBACK (gedit_spinner_cache_data_load),
+				  data);
+
+	gedit_spinner_cache_data_load (data);
+
+	return data;
+}
+
+static void
+gedit_spinner_cache_data_free (GeditSpinnerCacheData *data)
+{
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (data->icon_theme != NULL);
+
+	g_signal_handlers_disconnect_by_func (data->icon_theme,
+					      G_CALLBACK (gedit_spinner_cache_data_load),
+					      data);
+
+	gedit_spinner_cache_data_unload (data);
+
+	g_free (data);
 }
 
 static int
@@ -336,21 +382,32 @@ scale_to_size (GdkPixbuf *pixbuf,
 
 static GeditSpinnerImages *
 gedit_spinner_cache_get_images (GeditSpinnerCache *cache,
-			       GtkIconSize size)
+				GdkScreen         *screen,
+				GtkIconSize        size)
 {
+	GeditSpinnerCachePrivate *priv = cache->priv;
+	GeditSpinnerCacheData *data;
 	GeditSpinnerImages *images;
+	GtkSettings *settings;
 	GdkPixbuf *pixbuf, *scaled_pixbuf;
 	GList *element, *l;
 	int h, w;
 
-	/* LOG ("Getting animation images at size %d", size); */
+	/* LOG ("Getting animation images at size %d for screen %p", size, screen); */
 
-	if (cache->priv->images == NULL || cache->priv->originals == NULL)
+	data = g_hash_table_lookup (priv->hash, screen);
 	{
+		data = gedit_spinner_cache_data_new (screen);
+		g_hash_table_insert (priv->hash, screen, data);
+	}
+
+	if (data->images == NULL || data->originals == NULL)
+	{
+		/* Load failed, but don't try endlessly again! */
 		return NULL;
 	}
 
-	element = g_list_find_custom (cache->priv->images,
+	element = g_list_find_custom (data->images,
 				      GINT_TO_POINTER (size),
 				      (GCompareFunc) compare_size);
 	if (element != NULL)
@@ -358,7 +415,9 @@ gedit_spinner_cache_get_images (GeditSpinnerCache *cache,
 		return gedit_spinner_images_copy ((GeditSpinnerImages *) element->data);
 	}
 
-	if (!gtk_icon_size_lookup_for_settings (gtk_settings_get_default (), size, &w, &h))
+	settings = gtk_settings_get_for_screen (screen);
+
+	if (!gtk_icon_size_lookup_for_settings (settings, size, &w, &h))
 	{
 		g_warning ("Failed to lookup icon size.");
 		return NULL;
@@ -372,7 +431,7 @@ gedit_spinner_cache_get_images (GeditSpinnerCache *cache,
 
 	/* START_PROFILER ("scaling spinner animation") */
 
-	for (l = cache->priv->originals->images; l != NULL; l = l->next)
+	for (l = data->originals->images; l != NULL; l = l->next)
 	{
 		pixbuf = (GdkPixbuf *) l->data;
 		scaled_pixbuf = scale_to_size (pixbuf, w, h);
@@ -382,10 +441,10 @@ gedit_spinner_cache_get_images (GeditSpinnerCache *cache,
 	images->images = g_list_reverse (images->images);
 
 	images->quiescent_pixbuf =
-		scale_to_size (cache->priv->originals->quiescent_pixbuf, w, h);
+		scale_to_size (data->originals->quiescent_pixbuf, w, h);
 
 	/* store in cache */
-	cache->priv->images = g_list_prepend (cache->priv->images, images);
+	data->images = g_list_prepend (data->images, images);
 
 	/* STOP_PROFILER ("scaling spinner animation") */
 
@@ -395,29 +454,27 @@ gedit_spinner_cache_get_images (GeditSpinnerCache *cache,
 static void
 gedit_spinner_cache_init (GeditSpinnerCache *cache)
 {
-	cache->priv = GEDIT_SPINNER_CACHE_GET_PRIVATE (cache);
+	GeditSpinnerCachePrivate *priv;
+
+	priv = cache->priv = GEDIT_SPINNER_CACHE_GET_PRIVATE (cache);
 
 	/* LOG ("GeditSpinnerCache initialising"); */
 
-	/* FIXME: icon theme is per-screen, not global */
-	cache->priv->icon_theme = gtk_icon_theme_get_default ();
-	g_signal_connect_swapped (cache->priv->icon_theme, "changed",
-				  G_CALLBACK (gedit_spinner_cache_load), cache);
-
-	gedit_spinner_cache_load (cache);
+	priv->hash = g_hash_table_new_full (g_direct_hash,
+					    g_direct_equal,
+					    NULL,
+					    (GDestroyNotify) gedit_spinner_cache_data_free);
 }
 
 static void
 gedit_spinner_cache_finalize (GObject *object)
 {
 	GeditSpinnerCache *cache = GEDIT_SPINNER_CACHE (object); 
+	GeditSpinnerCachePrivate *priv = cache->priv;
 
 	/* LOG ("GeditSpinnerCache finalising"); */
 
-	g_signal_handlers_disconnect_by_func
-		(cache->priv->icon_theme, G_CALLBACK(gedit_spinner_cache_load), cache);
-
-	gedit_spinner_cache_unload (cache);
+	g_hash_table_destroy (priv->hash);
 
 	G_OBJECT_CLASS (cache_parent_class)->finalize (object);
 }
@@ -458,7 +515,7 @@ gedit_spinner_cache_ref (void)
 
 /* Spinner implementation */
 
-#define SPINNER_TIMEOUT 100	/* Milliseconds Per Frame */
+#define SPINNER_TIMEOUT 125 /* ms */
 
 #define GEDIT_SPINNER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_SPINNER, GeditSpinnerPrivate))
 
@@ -469,7 +526,9 @@ struct _GeditSpinnerPrivate
 	GtkIconSize         size;
 	GeditSpinnerImages *images;
 	GList              *current_image;
+	guint               timeout;
 	guint               timer_task;
+	guint               spinning : 1;
 };
 
 static void gedit_spinner_class_init	(GeditSpinnerClass *class);
@@ -508,24 +567,26 @@ gedit_spinner_get_type (void)
 static gboolean
 gedit_spinner_load_images (GeditSpinner *spinner)
 {
-	GeditSpinnerPrivate *details = spinner->priv;
+	GeditSpinnerPrivate *priv = spinner->priv;
 
-	if (details->images == NULL)
+	if (priv->images == NULL)
 	{
 		/* START_PROFILER ("gedit_spinner_load_images") */
 
-		details->images =
-			gedit_spinner_cache_get_images (details->cache, details->size);
+		priv->images =
+			gedit_spinner_cache_get_images (priv->cache,
+							gtk_widget_get_screen (GTK_WIDGET (spinner)),
+							priv->size);
 
-		if (details->images != NULL)
+		if (priv->images != NULL)
 		{
-			details->current_image = details->images->images;
+			priv->current_image = priv->images->images;
 		}
 
 		/* STOP_PROFILER ("gedit_spinner_load_images") */
 	}
 
-	return details->images != NULL;
+	return priv->images != NULL;
 }
 
 static void
@@ -547,6 +608,7 @@ icon_theme_changed_cb (GtkIconTheme *icon_theme,
 static void
 gedit_spinner_init (GeditSpinner *spinner)
 {
+	GeditSpinnerPrivate *priv = spinner->priv;
 	GtkWidget *widget = GTK_WIDGET (spinner);
 
 	gtk_widget_set_events (widget,
@@ -554,23 +616,19 @@ gedit_spinner_init (GeditSpinner *spinner)
 			       | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK
 			       | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK);
 
-	spinner->priv = GEDIT_SPINNER_GET_PRIVATE (spinner);
+	priv = spinner->priv = GEDIT_SPINNER_GET_PRIVATE (spinner);
 
-	spinner->priv->cache = gedit_spinner_cache_ref ();
-	spinner->priv->size = GTK_ICON_SIZE_INVALID;
-
-	/* FIXME: icon theme is per-screen, not global */
-	spinner->priv->icon_theme = gtk_icon_theme_get_default ();
-	g_signal_connect (spinner->priv->icon_theme, "changed",
-			  G_CALLBACK (icon_theme_changed_cb), spinner);
-
+	priv->cache = gedit_spinner_cache_ref ();
+	priv->size = GTK_ICON_SIZE_INVALID;
+	priv->spinning = FALSE;
+	priv->timeout = SPINNER_TIMEOUT;
 }
 
 static GdkPixbuf *
 select_spinner_image (GeditSpinner *spinner)
 {
-	GeditSpinnerPrivate *details = spinner->priv;
-	GeditSpinnerImages *images = details->images;
+	GeditSpinnerPrivate *priv = spinner->priv;
+	GeditSpinnerImages *images = priv->images;
 
 	g_return_val_if_fail (images != NULL, NULL);
 
@@ -578,15 +636,15 @@ select_spinner_image (GeditSpinner *spinner)
 	{
 		if (images->quiescent_pixbuf != NULL)
 		{
-			return g_object_ref (details->images->quiescent_pixbuf);
+			return g_object_ref (priv->images->quiescent_pixbuf);
 		}
 
 		return NULL;
 	}
 
-	g_return_val_if_fail (details->current_image != NULL, NULL);
+	g_return_val_if_fail (priv->current_image != NULL, NULL);
 
-	return g_object_ref (details->current_image->data);
+	return g_object_ref (priv->current_image->data);
 }
 
 static int
@@ -650,6 +708,7 @@ gedit_spinner_expose (GtkWidget *widget,
 static gboolean
 bump_spinner_frame_cb (GeditSpinner *spinner)
 {
+	GeditSpinnerPrivate *priv = spinner->priv;
 	GList *frame;
 
 	if (!GTK_WIDGET_DRAWABLE (spinner))
@@ -657,9 +716,17 @@ bump_spinner_frame_cb (GeditSpinner *spinner)
 		return TRUE;
 	}
 
-	frame = spinner->priv->current_image;
+	/* This can happen when we've unloaded the images on a theme
+	 * change, but haven't been in the queued size request yet.
+	 * Just skip this update.
+	 */
+	if (priv->images == NULL)
+		return TRUE;
 
-	if (g_list_next (frame) != NULL)
+	frame = priv->current_image;
+	/* g_assert (frame != NULL); */
+
+	if (frame->next != NULL)
 	{
 		frame = frame->next;
 	}
@@ -668,7 +735,7 @@ bump_spinner_frame_cb (GeditSpinner *spinner)
 		frame = g_list_first (frame);
 	}
 
-	spinner->priv->current_image = frame;
+	priv->current_image = frame;
 
 	gtk_widget_queue_draw (GTK_WIDGET (spinner));
 
@@ -685,20 +752,23 @@ bump_spinner_frame_cb (GeditSpinner *spinner)
 void
 gedit_spinner_start (GeditSpinner *spinner)
 {
-	if (spinner->priv->timer_task == 0)
-	{
+	GeditSpinnerPrivate *priv = spinner->priv;
 
-		if (spinner->priv->images != NULL)
+	priv->spinning = TRUE;
+
+	if (GTK_WIDGET_MAPPED (GTK_WIDGET (spinner)) &&
+			       priv->timer_task == 0 &&
+			       gedit_spinner_load_images (spinner))
+	{
+		if (priv->images != NULL)
 		{
 			/* reset to first frame */
-			spinner->priv->current_image =
-				spinner->priv->images->images;
+			priv->current_image = priv->images->images;
 		}
 
-		spinner->priv->timer_task =
-			g_timeout_add (SPINNER_TIMEOUT,
-				       (GSourceFunc) bump_spinner_frame_cb,
-				       spinner);
+		priv->timer_task = g_timeout_add (priv->timeout,
+						  (GSourceFunc) bump_spinner_frame_cb,
+						  spinner);
 	}
 }
 
@@ -721,10 +791,16 @@ gedit_spinner_remove_update_callback (GeditSpinner *spinner)
 void
 gedit_spinner_stop (GeditSpinner *spinner)
 {
+	GeditSpinnerPrivate *priv = spinner->priv;
+
+	priv->spinning = FALSE;
+
 	if (spinner->priv->timer_task != 0)
 	{
 		gedit_spinner_remove_update_callback (spinner);
-		gtk_widget_queue_draw (GTK_WIDGET (spinner));
+
+		if (GTK_WIDGET_MAPPED (GTK_WIDGET (spinner)))
+			gtk_widget_queue_draw (GTK_WIDGET (spinner));
 	}
 }
 
@@ -749,6 +825,34 @@ gedit_spinner_set_size (GeditSpinner *spinner,
 		gtk_widget_queue_resize (GTK_WIDGET (spinner));
 	}
 }
+
+#if 0
+/*
+* gedit_spinner_set_timeout:
+* @spinner: a #GeditSpinner
+* @timeout: time delay between updates to the spinner.
+*
+* Sets the timeout delay for spinner updates.
+**/
+void
+gedit_spinner_set_timeout (GeditSpinner *spinner,
+			   guint         timeout)
+{
+	GeditSpinnerPrivate *priv = spinner->priv;
+
+	if (timeout != priv->timeout)
+	{
+		gedit_spinner_stop (spinner);
+
+		priv->timeout = timeout;
+
+		if (priv->spinning)
+		{
+			gedit_spinner_start (spinner);
+		}
+	}
+}
+#endif
 
 static void
 gedit_spinner_size_request (GtkWidget *widget,
@@ -778,13 +882,45 @@ gedit_spinner_size_request (GtkWidget *widget,
 }
 
 static void
-gedit_spinner_finalize (GObject *object)
+gedit_spinner_map (GtkWidget *widget)
+{
+	GeditSpinner *spinner = GEDIT_SPINNER (widget);
+	GeditSpinnerPrivate *priv = spinner->priv;
+
+	GTK_WIDGET_CLASS (parent_class)->map (widget);
+
+	if (priv->spinning)
+	{
+		gedit_spinner_start (spinner);
+	}
+}
+
+static void
+gedit_spinner_unmap (GtkWidget *widget)
+{
+	GeditSpinner *spinner = GEDIT_SPINNER (widget);
+
+	gedit_spinner_remove_update_callback (spinner);
+
+	GTK_WIDGET_CLASS (parent_class)->unmap (widget);
+}
+
+static void
+gedit_spinner_dispose (GObject *object)
 {
 	GeditSpinner *spinner = GEDIT_SPINNER (object);
 
 	g_signal_handlers_disconnect_by_func
-		(spinner->priv->icon_theme,
-		 G_CALLBACK (icon_theme_changed_cb), spinner);
+			(spinner->priv->icon_theme,
+			 G_CALLBACK (icon_theme_changed_cb), spinner);
+
+	G_OBJECT_CLASS (parent_class)->dispose (object);
+}
+
+static void
+gedit_spinner_finalize (GObject *object)
+{
+	GeditSpinner *spinner = GEDIT_SPINNER (object);
 
 	gedit_spinner_remove_update_callback (spinner);
 	gedit_spinner_unload_images (spinner);
@@ -795,6 +931,44 @@ gedit_spinner_finalize (GObject *object)
 }
 
 static void
+gedit_spinner_screen_changed (GtkWidget *widget,
+			      GdkScreen *old_screen)
+{
+	GeditSpinner *spinner = GEDIT_SPINNER (widget);
+	GeditSpinnerPrivate *priv = spinner->priv;
+	GdkScreen *screen;
+
+	if (GTK_WIDGET_CLASS (parent_class)->screen_changed)
+	{
+		GTK_WIDGET_CLASS (parent_class)->screen_changed (widget, old_screen);
+	}
+
+	screen = gtk_widget_get_screen (widget);
+
+	/* FIXME: this seems to be happening when then spinner is destroyed!? */
+	if (old_screen == screen)
+		return;
+
+	/* We'll get mapped again on the new screen, but not unmapped from
+	 * the old screen, so remove timeout here.
+	 */
+	gedit_spinner_remove_update_callback (spinner);
+
+	gedit_spinner_unload_images (spinner);
+
+	if (old_screen != NULL)
+	{
+		g_signal_handlers_disconnect_by_func
+			(gtk_icon_theme_get_for_screen (old_screen),
+			 G_CALLBACK (icon_theme_changed_cb), spinner);
+	}
+
+	priv->icon_theme = gtk_icon_theme_get_for_screen (screen);
+	g_signal_connect (priv->icon_theme, "changed",
+			  G_CALLBACK (icon_theme_changed_cb), spinner);
+}
+
+static void
 gedit_spinner_class_init (GeditSpinnerClass *class)
 {
 	GObjectClass *object_class =  G_OBJECT_CLASS (class);
@@ -802,10 +976,14 @@ gedit_spinner_class_init (GeditSpinnerClass *class)
 
 	parent_class = g_type_class_peek_parent (class);
 
+	object_class->dispose = gedit_spinner_dispose;
 	object_class->finalize = gedit_spinner_finalize;
 
 	widget_class->expose_event = gedit_spinner_expose;
 	widget_class->size_request = gedit_spinner_size_request;
+	widget_class->map = gedit_spinner_map;
+	widget_class->unmap = gedit_spinner_unmap;
+	widget_class->screen_changed = gedit_spinner_screen_changed;
 
 	g_type_class_add_private (object_class, sizeof (GeditSpinnerPrivate));
 }
