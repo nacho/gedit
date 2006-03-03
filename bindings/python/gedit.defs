@@ -126,6 +126,9 @@
   (of-object "GeditApp")
   (c-name "gedit_app_create_window")
   (return-type "GeditWindow*")
+  (parameters
+    '("GdkScreen*" "screen")
+  )
 )
 
 (define-method get_windows

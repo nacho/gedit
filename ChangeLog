@@ -1,3 +1,26 @@
+2006-03-03  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #333129 – [Multihead] cannot launch multiple instances of 
+	                    gedit on different heads
+	
+	* gedit/gedit-app.c (gedit_app_create_window): added screen argument
+	(is_in_workspace): new function
+	(_gedit_app_get_window_in_workspace): fixed to me multihead aware
+
+	* gedit/gedit-app.h: updated gedit_app_create_window prototype
+
+	* gedit/gedit-window.c (clone_window): update to call 
+	gedit_app_create_window with a screen parameter
+
+	* gedit/gedit.c (on_message_received) (send_bacon_message) (main):
+	updated the client/server protocol used to support single application
+	instances so that display name and screen number are communicated from
+	client to server
+	
+	* bindings/python/gedit.defs:
+	* bindings/python/gedit.override: updated binding for create_window(), 
+	overridden so that the screen param is optional
+
 2006-03-02  Steve Frécinaux  <steve@istique.net>
 
 	* plugins/modelines/modelines.py: 

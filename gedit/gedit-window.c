@@ -1337,14 +1337,16 @@ static GeditWindow *
 clone_window (GeditWindow *origin)
 {
 	GtkWindow *window;
+	GdkScreen *screen;
 	GeditApp  *app;
 
 	gedit_debug (DEBUG_WINDOW);	
 
 	app = gedit_app_get_default ();
-	
-	window = GTK_WINDOW (gedit_app_create_window (app));
-	
+
+	screen = gtk_window_get_screen (GTK_WINDOW (origin));
+	window = GTK_WINDOW (gedit_app_create_window (app, screen));
+
 	gtk_window_set_default_size (window, 
 				     origin->priv->width,
 				     origin->priv->height);

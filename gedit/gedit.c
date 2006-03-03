@@ -177,9 +177,13 @@ on_message_received (const char *message,
 	gchar **commands;
 	gchar **params;
 	gint workspace;
+	gchar *display_name;
+	gint screen_number;
 	gint i;
 	GeditApp *app;
 	GeditWindow *window;
+	GdkDisplay *display;
+	GdkScreen *screen;
 
 	g_return_if_fail (message != NULL);
 
@@ -188,9 +192,16 @@ on_message_received (const char *message,
 	commands = g_strsplit (message, "\v", -1);
 
 	/* header */
-	params = g_strsplit (commands[0], "\t", 2);
-	startup_timestamp = atoi (params[0]); //CHECK if this is safe
-	workspace = atoi (params[1]);
+	params = g_strsplit (commands[0], "\t", 4);
+	startup_timestamp = atoi (params[0]); /* CHECK if this is safe */
+	display_name = g_strdup (params[1]);
+	screen_number = atoi (params[2]);
+	workspace = atoi (params[3]);
+
+	display = gdk_display_open (display_name);
+	screen = gdk_display_get_screen (display, screen_number);
+	g_free (display_name);
+
 	g_strfreev (params);
 
 	/* body */
@@ -244,12 +255,14 @@ on_message_received (const char *message,
 
 	if (new_window_option)
 	{
-		window = gedit_app_create_window (app);
+		window = gedit_app_create_window (app, screen);
 	}
 	else
 	{
 		/* get a window in the current workspace (if exists) and raise it */
-		window = _gedit_app_get_window_in_workspace (app, workspace);
+		window = _gedit_app_get_window_in_workspace (app,
+							     screen,
+							     workspace);
 	}
 
 	if (file_list != NULL)
@@ -305,12 +318,16 @@ on_message_received (const char *message,
 static void
 send_bacon_message (void)
 {
+	GdkScreen *screen;
+	GdkDisplay *display;
+	const gchar *display_name;
+	gint screen_number;
 	gint ws;
 	GString *command;
 
 	/* the messages have the following format:
-	 * <----   header   -----> <----            body             ----->
-	 * timestamp \t workspace \v OP1 \t arg \t arg \v OP2 \t arg \t arg|...
+	 * <---                   header                       ---> <----            body             ----->
+	 * timestamp \t display_name \t screen_number \t workspace \v OP1 \t arg \t arg \v OP2 \t arg \t arg|...
 	 *
 	 * when the arg is a list of uri, they are separated by a space.
 	 * So the delimiters are \v for the commands, \t for the tokens in
@@ -318,14 +335,27 @@ send_bacon_message (void)
 	 * be part of an uri, this way parsing is easier.
 	 */
 
-	ws = gedit_utils_get_current_workspace (gdk_screen_get_default ());
+	gedit_debug (DEBUG_APP);
+
+	screen = gdk_screen_get_default ();
+	display = gdk_screen_get_display (screen);
+
+	display_name = gdk_display_get_name (display);
+	screen_number = gdk_screen_get_number (screen);
+
+	gedit_debug_message (DEBUG_APP, "Display: %s", display_name);
+	gedit_debug_message (DEBUG_APP, "Screen: %d", screen_number);	
+
+	ws = gedit_utils_get_current_workspace (screen);
 
 	command = g_string_new (NULL);
 
 	/* header */
 	g_string_append_printf (command,
-				"%" G_GUINT32_FORMAT "\t%d",
+				"%" G_GUINT32_FORMAT "\t%s\t%d\t%d",
 				startup_timestamp,
+				display_name,
+				screen_number,
 				ws);
 
 	/* NEW-WINDOW command */
@@ -364,6 +394,8 @@ send_bacon_message (void)
 		}
 	}
 
+	gedit_debug_message (DEBUG_APP, "Bacon Message: %s", command->str);
+	
 	bacon_message_connection_send (connection,
 				       command->str);
 
@@ -482,8 +514,8 @@ main (int argc, char *argv[])
 		app = gedit_app_get_default ();
 
 		gedit_debug_message (DEBUG_APP, "Create main window");
-		window = gedit_app_create_window (app);
-		
+		window = gedit_app_create_window (app, NULL);
+
 		if (file_list != NULL)
 		{
 			gedit_debug_message (DEBUG_APP, "Load files");

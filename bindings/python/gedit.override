@@ -37,7 +37,8 @@ _helper_wrap_gobject_glist (const GList *list)
 modulename gedit 
 %%
 import gtk.Widget as PyGtkWidget_Type
-import gobject.GObject as PyGObject_Type 
+import gobject.GObject as PyGObject_Type
+import gtk.gdk.Screen as PyGdkScreen_Type
 import gtk.VBox as PyGtkVBox_Type
 import gtk.Window as PyGtkWindow_Type
 import gtk.Image as PyGtkImage_Type
@@ -49,6 +50,26 @@ ignore-glob
   *_get_type
   gedit_document_error_quark
   gedit_panel_add_item_with_stock_icon
+%%
+override gedit_app_create_window kwargs
+static PyObject *
+_wrap_gedit_app_create_window(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "screen", NULL};
+    PyGObject *screen = NULL;
+    GeditWindow *ret;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+			"|O!", kwlist,
+			&PyGdkScreen_Type, &screen))
+        return NULL;
+
+    ret = gedit_app_create_window(GEDIT_APP(self->obj),
+				  screen ? GDK_SCREEN(screen->obj) : NULL);
+
+    /* pygobject_new handles NULL checking */
+    return pygobject_new((GObject *)ret);
+}
 %%
 override gedit_app_get_windows
 static PyObject *

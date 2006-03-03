@@ -81,7 +81,8 @@ GType 		 gedit_app_get_type 			(void) G_GNUC_CONST;
 
 GeditApp 	*gedit_app_get_default			(void);
 
-GeditWindow	*gedit_app_create_window		(GeditApp *app);
+GeditWindow	*gedit_app_create_window		(GeditApp  *app,
+							 GdkScreen *screen);
 
 const GList	*gedit_app_get_windows			(GeditApp *app);
 GeditWindow	*gedit_app_get_active_window		(GeditApp *app);
@@ -97,8 +98,9 @@ GList		*gedit_app_get_views			(GeditApp *app);
  */
 GeditWindow	*_gedit_app_restore_window		(GeditApp    *app,
 							 const gchar *role);
-GeditWindow	*_gedit_app_get_window_in_workspace	(GeditApp *app,
-							 gint      workspace);
+GeditWindow	*_gedit_app_get_window_in_workspace	(GeditApp  *app,
+							 GdkScreen *screen,
+							 gint       workspace);
 
 G_END_DECLS
 

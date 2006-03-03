@@ -32,6 +32,8 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+
 #include <glib/gi18n.h>
 
 #include "gedit-app.h"
@@ -273,9 +275,17 @@ gedit_app_create_window_real (GeditApp    *app,
 }
 
 GeditWindow *
-gedit_app_create_window (GeditApp *app)
+gedit_app_create_window (GeditApp  *app,
+			 GdkScreen *screen)
 {
-	return gedit_app_create_window_real (app, TRUE, NULL);
+	GeditWindow *window;
+
+	window = gedit_app_create_window_real (app, TRUE, NULL);
+
+	if (screen != NULL)
+		gtk_window_set_screen (GTK_WINDOW (window), screen);
+
+	return window;
 }
 
 /*
@@ -317,12 +327,42 @@ gedit_app_get_active_window (GeditApp *app)
 	return app->priv->active_window;
 }
 
+static gboolean
+is_in_workspace (GeditWindow *window,
+		 GdkScreen   *screen,
+		 gint         workspace)
+{
+	GdkScreen *s;
+	GdkDisplay *display;
+	const gchar *cur_name;
+	const gchar *name;
+	gint cur_n;
+	gint n;
+	gint ws;
+
+	display = gdk_screen_get_display (screen);
+	cur_name = gdk_display_get_name (display);
+	cur_n = gdk_screen_get_number (screen);
+
+	s = gtk_window_get_screen (GTK_WINDOW (window));
+	display = gdk_screen_get_display (s);
+	name = gdk_display_get_name (display);
+	n = gdk_screen_get_number (s);
+
+	ws = gedit_utils_get_window_workspace (GTK_WINDOW (window));
+
+	return ((strcmp (cur_name, name) == 0) && cur_n == n &&
+	        (ws == workspace || ws == GEDIT_ALL_WORKSPACES));
+}
+
 GeditWindow *
-_gedit_app_get_window_in_workspace (GeditApp *app,
-				    gint      workspace)
+_gedit_app_get_window_in_workspace (GeditApp  *app,
+				    GdkScreen *screen,
+				    gint       workspace)
 {
 	GeditWindow *window;
-	gint ws;
+
+	GList *l;
 
 	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
 
@@ -330,29 +370,21 @@ _gedit_app_get_window_in_workspace (GeditApp *app,
 	window = app->priv->active_window;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
-	ws = gedit_utils_get_window_workspace (GTK_WINDOW (window));
 
-	if (ws != workspace && ws != GEDIT_ALL_WORKSPACES)
+	if (is_in_workspace (window, screen, workspace))
+		return window;
+
+	/* otherwise try to see if there is a window on this workspace */
+	for (l = app->priv->windows; l != NULL; l = l->next)
 	{
-		GList *l;
+		window = l->data;
 
-		/* try to see if there is a window on this workspace */
-		l = app->priv->windows;
-		while (l != NULL)
-		{
-			ws = gedit_utils_get_window_workspace (GTK_WINDOW (l->data));
-			if (ws == workspace || ws == GEDIT_ALL_WORKSPACES)
-				break;
-
-			l = g_list_next (l);
-		}
-
-		/* no window on this workspace... create a new one */
-		if (l == NULL)
-			window = gedit_app_create_window (app);
+		if (is_in_workspace (window, screen, workspace))
+			return window;
 	}
 
-	return window;
+	/* no window on this workspace... create a new one */
+	return gedit_app_create_window (app, screen);
 }
 
 /* Returns a newly allocated list with all the documents */
