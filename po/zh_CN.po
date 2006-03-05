@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-15 07:53+0100\n"
-"PO-Revision-Date: 2006-02-16 04:52+0800\n"
+"POT-Creation-Date: 2006-03-05 09:48+0100\n"
+"PO-Revision-Date: 2006-03-05 19:41+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "编辑文本文件"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:436
 msgid "Text Editor"
 msgstr "文本编辑器"
 
@@ -676,7 +676,6 @@ msgstr "输入您想打开文件的位置(URI)(_L)："
 msgid "Page Setup"
 msgstr "页面设置"
 
-#. ex:noet:ts=8:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
@@ -976,11 +975,11 @@ msgid "_minutes"
 msgstr "分钟(_M)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1008
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "替换"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1006
+#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "查找"
 
@@ -989,7 +988,7 @@ msgid "Replace _All"
 msgstr "全部替换(_A)"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:562
+#: ../gedit/gedit-commands-file.c:559
 msgid "_Replace"
 msgstr "替换(_R)"
 
@@ -1045,61 +1044,61 @@ msgstr "%s：文件名或 URI 格式错误。\n"
 msgid "%s: invalid encoding.\n"
 msgstr "%s：无效的编码。\n"
 
-#: ../gedit/gedit-commands-file.c:130 ../gedit/gedit-commands-file.c:177
+#: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "正在装入文件“%s”..."
 
-#: ../gedit/gedit-commands-file.c:186
+#: ../gedit/gedit-commands-file.c:183
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
 msgstr[0] "正在载入 %d 个文件..."
 
-#: ../gedit/gedit-commands-file.c:289
+#: ../gedit/gedit-commands-file.c:286
 msgid "Open Files…"
 msgstr "打开文件..."
 
-#: ../gedit/gedit-commands-file.c:395
+#: ../gedit/gedit-commands-file.c:392
 msgid "The entered location is not valid."
 msgstr "指定的位置无效。"
 
-#: ../gedit/gedit-commands-file.c:398
+#: ../gedit/gedit-commands-file.c:395
 #: ../gedit/gedit-io-error-message-area.c:150
 #: ../gedit/gedit-io-error-message-area.c:189
 #: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "请检查键入的位置是否正确，然后重试。"
 
-#: ../gedit/gedit-commands-file.c:543
+#: ../gedit/gedit-commands-file.c:540
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "文件“%s”为只读。"
 
-#: ../gedit/gedit-commands-file.c:554
+#: ../gedit/gedit-commands-file.c:551
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "您想要试着将其替换为您正在保存的文件吗？"
 
-#: ../gedit/gedit-commands-file.c:620 ../gedit/gedit-commands-file.c:811
+#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "正在保存文件“%s”..."
 
-#: ../gedit/gedit-commands-file.c:710
+#: ../gedit/gedit-commands-file.c:707
 msgid "Save As…"
 msgstr "另存为..."
 
-#: ../gedit/gedit-commands-file.c:1006
+#: ../gedit/gedit-commands-file.c:1003
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "正在还原文档“%s”..."
 
-#: ../gedit/gedit-commands-file.c:1028
+#: ../gedit/gedit-commands-file.c:1025
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "还原对文档“%s”未保存的更改吗？"
 
-#: ../gedit/gedit-commands-file.c:1037
+#: ../gedit/gedit-commands-file.c:1034
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1108,12 +1107,12 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1046
+#: ../gedit/gedit-commands-file.c:1043
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "上一分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1052
+#: ../gedit/gedit-commands-file.c:1049
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1123,7 +1122,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一分钟零 %ld 秒内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1062
+#: ../gedit/gedit-commands-file.c:1059
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1132,14 +1131,14 @@ msgid_plural ""
 "lost."
 msgstr[0] "前 %ld 分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1077 ../gedit/gedit-commands-file.c:1098
+#: ../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "上 %d 小时内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1083
+#: ../gedit/gedit-commands-file.c:1080
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1149,7 +1148,7 @@ msgid_plural ""
 "permanently lost."
 msgstr[0] "上一小时零 %d 分钟内对文档所做的更改将永久丢失。"
 
-#: ../gedit/gedit-commands-file.c:1124
+#: ../gedit/gedit-commands-file.c:1121
 msgid "_Revert"
 msgstr "还原(_R)"
 
@@ -1185,7 +1184,7 @@ msgstr "找到并替换了一处"
 msgid "Phrase not found"
 msgstr "短语未找到"
 
-#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:854
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:855
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "未保存文档 %d"
@@ -1196,7 +1195,7 @@ msgid "Could not obtain backup filename"
 msgstr "无法获得备份文件名"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1528 ../gedit/gedit-window.c:1533
+#: ../gedit/gedit-window.c:1535 ../gedit/gedit-window.c:1540
 msgid "Read Only"
 msgstr "只读"
 
@@ -1704,7 +1703,7 @@ msgstr "配置插件(_O)"
 msgid "Cannot initialize preferences manager."
 msgstr "无法初始化首选项管理器。"
 
-#: ../gedit/gedit-prefs-manager.c:1388
+#: ../gedit/gedit-prefs-manager.c:1390
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Gconf 项 %3$s 期望的类型是“%1$s”，得到的类型是“%2$s”"
@@ -1860,42 +1859,42 @@ msgid "Saving %s"
 msgstr "保存 %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1511
+#: ../gedit/gedit-tab.c:1503
 msgid "RO"
 msgstr "只读"
 
-#: ../gedit/gedit-tab.c:1556
+#: ../gedit/gedit-tab.c:1548
 #, c-format
 msgid "Error opening file %s"
 msgstr "打开文件 %s 出错"
 
-#: ../gedit/gedit-tab.c:1561
+#: ../gedit/gedit-tab.c:1553
 #, c-format
 msgid "Error reverting file %s"
 msgstr "还原文件 %s 出错"
 
-#: ../gedit/gedit-tab.c:1566
+#: ../gedit/gedit-tab.c:1558
 #, c-format
 msgid "Error saving file %s"
 msgstr "保存文件 %s 出错"
 
-#: ../gedit/gedit-tab.c:1584
+#: ../gedit/gedit-tab.c:1576
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1591
+#: ../gedit/gedit-tab.c:1583
 msgid "Name:"
 msgstr "名称："
 
-#: ../gedit/gedit-tab.c:1592
+#: ../gedit/gedit-tab.c:1584
 msgid "MIME Type:"
 msgstr "MIME 类型："
 
-#: ../gedit/gedit-tab.c:1593
+#: ../gedit/gedit-tab.c:1585
 msgid "Encoding:"
 msgstr "编码："
 
-#: ../gedit/gedit-tab.c:2020
+#: ../gedit/gedit-tab.c:2012
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "正在渲染第 %d 页，共 %d 页..."
@@ -1937,7 +1936,7 @@ msgstr "新建一个文档"
 msgid "_Open..."
 msgstr "打开(_O)..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1105
+#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1110
 msgid "Open a file"
 msgstr "打开一个文件"
 
@@ -2086,72 +2085,80 @@ msgid "Search for and replace text"
 msgstr "搜索并替换文字"
 
 #: ../gedit/gedit-ui.h:120
+msgid "_Clear Highlight"
+msgstr "清除突出显示(_C)"
+
+#: ../gedit/gedit-ui.h:121
+msgid "Clear highlighting of search matches"
+msgstr "清除搜索匹配项的突出显示"
+
+#: ../gedit/gedit-ui.h:122
 msgid "Go to _Line..."
 msgstr "跳到行(_L)..."
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:123
 msgid "Go to a specific line"
 msgstr "跳转到指定的行"
 
 #. Documents menu
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:126
 msgid "_Save All"
 msgstr "全部保存(_S)"
 
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:127
 msgid "Save all open files"
 msgstr "保存所有已打开的文件"
 
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:128
 msgid "_Close All"
 msgstr "全部关闭(_C)"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:129
 msgid "Close all open files"
 msgstr "关闭所有已打开的文件"
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:130
 msgid "_Move to New Window"
 msgstr "移动到新窗口(_M)"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:131
 msgid "Move the current document to a new window"
 msgstr "将当前文档移动到新窗口"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:138
 msgid "Quit the program"
 msgstr "退出程序"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:143
 msgid "_Toolbar"
 msgstr "工具栏(_T)"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:144
 msgid "Show or hide the toolbar in the current window"
 msgstr "当前窗口中显示或隐藏工具栏"
 
-#: ../gedit/gedit-ui.h:144
+#: ../gedit/gedit-ui.h:146
 msgid "_Statusbar"
 msgstr "状态栏(_S)"
 
-#: ../gedit/gedit-ui.h:145
+#: ../gedit/gedit-ui.h:147
 msgid "Show or hide the statusbar in the current window"
 msgstr "在当前窗口中显示或隐藏显示状态栏"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:149
 msgid "Side _Pane"
 msgstr "侧边栏(_P)"
 
-#: ../gedit/gedit-ui.h:148
+#: ../gedit/gedit-ui.h:150
 msgid "Show or hide the side pane in the current window"
 msgstr "在当前窗口中显示或隐藏侧边栏"
 
-#: ../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
-msgid "_Bottom Panel"
+#: ../gedit/gedit-ui.h:156
+msgid "_Bottom Pane"
 msgstr "底部面板(_B)"
 
-#: ../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
-msgid "Show or hide the bottom panel in the current window"
+#: ../gedit/gedit-ui.h:157
+msgid "Show or hide the bottom pane in the current window"
 msgstr "在当前窗口中显示或隐藏底部面板"
 
 #: ../gedit/gedit-utils.c:923
@@ -2169,62 +2176,62 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "在文件 %s 中找不到所需的部件。"
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1333
+#: ../gedit/gedit-view.c:1336
 msgid "_Wrap Around"
 msgstr "回到文档头部继续搜索(_W)"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1343
+#: ../gedit/gedit-view.c:1346
 msgid "Match _Entire Word Only"
 msgstr "只匹配整个单词(_E)"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1353
+#: ../gedit/gedit-view.c:1356
 msgid "_Match Case"
 msgstr "区分大小写(_M)"
 
-#: ../gedit/gedit-view.c:1441
+#: ../gedit/gedit-view.c:1444
 msgid "String you want to search for"
 msgstr "您想要搜索的字符串"
 
-#: ../gedit/gedit-view.c:1450
+#: ../gedit/gedit-view.c:1453
 msgid "Line you want to move the cursor to"
 msgstr "您想要将光标移动到的行"
 
-#: ../gedit/gedit-window.c:676
+#: ../gedit/gedit-window.c:681
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "使用 %s 突出显示模式"
 
-#: ../gedit/gedit-window.c:729
+#: ../gedit/gedit-window.c:734
 msgid "Normal"
 msgstr "普通"
 
-#: ../gedit/gedit-window.c:730
+#: ../gedit/gedit-window.c:735
 msgid "Use Normal highlight mode"
 msgstr "使用普通突出显示模式"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:861 ../gedit/gedit-window.c:886
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "打开“%s”"
 
-#: ../gedit/gedit-window.c:1004
+#: ../gedit/gedit-window.c:1009
 msgid "Save"
 msgstr "保存"
 
-#: ../gedit/gedit-window.c:1109
+#: ../gedit/gedit-window.c:1114
 msgid "Open a recently used file"
 msgstr "打开最近用过的文件"
 
-#: ../gedit/gedit-window.c:1116
+#: ../gedit/gedit-window.c:1121
 msgid "Open"
 msgstr "打开"
 
-#: ../gedit/gedit-window.c:1205 ../gedit/gedit-window.c:1804
+#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1811
 #, c-format
 msgid "Activate %s"
 msgstr "激活 %s"
@@ -2336,100 +2343,119 @@ msgstr "执行外部命令和 Shell 脚本。"
 msgid "External Tools"
 msgstr "外部工具"
 
-#: ../plugins/externaltools/tools/functions.py:237
+#: ../plugins/externaltools/tools/functions.py:242
 msgid "You must be inside a word to run this command"
 msgstr "您必须位于单词内才能运行此命令"
 
-#: ../plugins/externaltools/tools/functions.py:293
+#: ../plugins/externaltools/tools/functions.py:298
 msgid "Running tool:"
 msgstr "运行工具："
 
-#: ../plugins/externaltools/tools/functions.py:303
+#: ../plugins/externaltools/tools/functions.py:308
 msgid "Done."
 msgstr "完成。"
 
-#: ../plugins/externaltools/tools/functions.py:305
+#: ../plugins/externaltools/tools/functions.py:310
 msgid "Exited"
 msgstr "已退出"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Nothing"
 msgstr "无"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current document"
 msgstr "当前文档"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current selection"
 msgstr "选中区域"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current line"
 msgstr "当前行"
 
-#: ../plugins/externaltools/tools/manager.py:47
+#: ../plugins/externaltools/tools/manager.py:46
 msgid "Current word"
 msgstr "当前单词"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Insert in output panel"
 msgstr "在输出面板中插入"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Create new document"
 msgstr "创建新文档"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Append to current document"
 msgstr "追加到当前文档"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current document"
 msgstr "替换当前文档"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Replace current selection"
 msgstr "替换选中区域"
 
-#: ../plugins/externaltools/tools/manager.py:55
+#: ../plugins/externaltools/tools/manager.py:54
 msgid "Insert at cursor position"
 msgstr "在光标处插入"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents"
 msgstr "全部文档"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "All documents except untitled ones"
 msgstr "除无标题文档的全部文档"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Local files only"
 msgstr "只对本地文件"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Remote files only"
 msgstr "只对远程文件"
 
-#: ../plugins/externaltools/tools/manager.py:62
+#: ../plugins/externaltools/tools/manager.py:61
 msgid "Untitled documents only"
 msgstr "只对无标题文档"
 
-#: ../plugins/externaltools/tools/manager.py:175
-#: ../plugins/externaltools/tools/manager.py:192
-#: ../plugins/externaltools/tools/manager.py:231
+#: ../plugins/externaltools/tools/manager.py:190
+#: ../plugins/externaltools/tools/manager.py:207
+#: ../plugins/externaltools/tools/manager.py:246
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "编辑工具 <i>%s</i>："
 
-#: ../plugins/externaltools/tools/manager.py:179
+#: ../plugins/externaltools/tools/manager.py:194
 msgid "A Brand New Tool"
 msgstr "全新工具"
 
-#: ../plugins/externaltools/tools/manager.py:202
+#: ../plugins/externaltools/tools/manager.py:217
 msgid "New tool"
 msgstr "新建工具"
+
+#: ../plugins/externaltools/tools/manager.py:280
+#, python-format
+msgid "This accelerator is already bound to %s"
+msgstr "此加速键已绑定到 %s"
+
+#: ../plugins/externaltools/tools/manager.py:329
+#: ../plugins/snippets/snippets/SnippetsDialog.py:562
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "输入新加速键或按 Backspace 清除"
+
+#: ../plugins/externaltools/tools/manager.py:331
+#: ../plugins/snippets/snippets/SnippetsDialog.py:564
+msgid "Type a new accelerator"
+msgstr "输入新加速键"
+
+#: ../plugins/externaltools/tools/outputpanel.py:78
+msgid "Stopped."
+msgstr "已停止。"
 
 #: ../plugins/externaltools/tools/tools.glade.h:2
 msgid "Co_mmand(s):"
@@ -2489,14 +2515,6 @@ msgstr "保存(_S)："
 #: ../plugins/externaltools/tools/tools.glade.h:16
 msgid "_Tools:"
 msgstr "工具(_T)："
-
-#: ../plugins/externaltools/tools/tools.glade.h:17
-msgid ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
-msgstr ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2597,14 +2615,6 @@ msgstr "添加新片断..."
 #: ../plugins/snippets/snippets/SnippetsDialog.py:109
 msgid "Global"
 msgstr "全局"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:562
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "输入新加速键或按 Backspace 清除"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:564
-msgid "Type a new accelerator"
-msgstr "输入新加速键"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -3015,11 +3025,11 @@ msgstr "自动检查拼写(_A)"
 msgid "Automatically spell-check the current document"
 msgstr "自动检查当前文档的拼写"
 
-#: ../plugins/spell/gedit-spell-plugin.c:733
+#: ../plugins/spell/gedit-spell-plugin.c:713
 msgid "The document is empty."
 msgstr "文档为空。"
 
-#: ../plugins/spell/gedit-spell-plugin.c:765
+#: ../plugins/spell/gedit-spell-plugin.c:745
 msgid "No misspelled words"
 msgstr "没有拼错的单词"
 
@@ -3099,20 +3109,20 @@ msgstr "检查当前文档的拼写。"
 msgid "Spell checker"
 msgstr "拼写检查器"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:460
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
 msgid "Select the group of tags you want to use"
 msgstr "选择您想使用的标记组"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:476
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
 msgid "Available Tag Lists"
 msgstr "可用的标记列表"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:479
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:507
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
 msgid "Tags"
 msgstr "标记"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:492
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "在标记上双击把它插入到文档中"
 
