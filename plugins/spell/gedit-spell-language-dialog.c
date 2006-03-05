@@ -80,9 +80,8 @@ dialog_response_handler (GtkDialog                *dlg,
 			 gint                      res_id,
 			 GeditSpellLanguageDialog *dialog)
 {
-	GError *error = NULL;
-
-	switch (res_id) {
+	switch (res_id)
+	{
 		case GTK_RESPONSE_OK:
 			ok_button_pressed (dialog);
 			gtk_widget_destroy (dialog->dialog);

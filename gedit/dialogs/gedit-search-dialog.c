@@ -111,14 +111,32 @@ gedit_search_dialog_get_property (GObject    *object,
 	}
 }
 
+static gboolean
+gedit_search_dialog_focus_in_event (GtkWidget     *widget,
+				    GdkEventFocus *event)
+{
+	GeditSearchDialog *dlg = GEDIT_SEARCH_DIALOG (widget);
+	GtkWidget *entry = dlg->priv->search_entry;
+	
+	if (!GTK_WIDGET_HAS_FOCUS (entry))
+	{
+		gtk_widget_grab_focus (entry);
+		gtk_editable_set_position (GTK_EDITABLE (entry), -1);
+	}
+
+	return GTK_WIDGET_CLASS (gedit_search_dialog_parent_class)->focus_in_event (widget, event);
+}
+
 static void 
 gedit_search_dialog_class_init (GeditSearchDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
 	object_class->set_property = gedit_search_dialog_set_property;
 	object_class->get_property = gedit_search_dialog_get_property;
-
+	widget_class->focus_in_event = gedit_search_dialog_focus_in_event;
+	
 	g_object_class_install_property (object_class, PROP_SHOW_REPLACE,
 					 g_param_spec_boolean ("show-replace",
 					 		       "Show Replace",
