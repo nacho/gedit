@@ -559,16 +559,7 @@ class SnippetsLibraryImpl:
 		self._accelerator_activated_cb = None
 		
 		self.loaded = False
-		
-		# Contains all the language containers which have tag/accel mappings
-		self.containers = {}
-		
-		# Contains all the library file mappings
-		self.libraries = {}
-		
-		# Contains the suppressed snippets
-		self.overridden = {}
-	
+			
 	def set_dirs(self, userdir, systemdirs):
 		self.userdir = userdir
 		self.systemdirs = systemdirs
@@ -576,6 +567,7 @@ class SnippetsLibraryImpl:
 		self.libraries = {}
 		self.containers = {}
 		self.overridden = {}
+		self.loaded_ids = []
 
 		self.loaded = False
 	
@@ -596,13 +588,21 @@ class SnippetsLibraryImpl:
 			return None
 		
 		snippet = SnippetData(element, library)
-		snippet = container.append(snippet)
 		
+		if snippet.id in self.loaded_ids:
+			snippets_debug('Not added snippet ' + str(library.language) + \
+					'::' + snippet['description'] + ' (duplicate)')
+			return None
+
+		snippet = container.append(snippet)
 		snippets_debug('Added snippet ' + str(library.language) + '::' + \
 				snippet['description'])
 		
 		if snippet and snippet.override:
 			self.add_override(snippet)
+		
+		if snippet.id:
+			self.loaded_ids.append(snippet.id)
 
 		return snippet
 	
@@ -749,11 +749,16 @@ class SnippetsLibraryImpl:
 		
 		return language
 	
-	def remove_overrides(self, language):
+	def remove_container(self, language):
 		for snippet in self.containers[language].snippets:
+			if snippet.id in self.loaded_ids:
+				self.loaded_ids.remove(snippet.id)
+
 			if snippet.override in self.overridden:
 				del self.overridden[snippet.override]
-	
+
+		del self.containers[language]
+		
 	def get_accel_group(self, language):
 		language = self.normalize_language(language)
 		
@@ -788,9 +793,7 @@ class SnippetsLibraryImpl:
 				for library in self.libraries[language]:
 					library.unload()
 				
-				self.remove_overrides(language)
-				
-				del self.containers[language]
+				self.remove_container(language)
 
 	def ensure(self, language):
 		language = self.normalize_language(language)

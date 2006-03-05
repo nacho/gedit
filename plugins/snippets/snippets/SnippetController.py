@@ -129,7 +129,7 @@ class SnippetController:
 			self.apply_snippet(snippets[0])
 		else:
 			# Do the fancy completion dialog
-			self.show_completion(snippets)
+			return self.show_completion(snippets)
 	
 		return True
 
@@ -322,8 +322,8 @@ class SnippetController:
 		if not word or word == '':
 			if start.backward_char():
 				word = start.get_char()
-				
-				if word.isspace():
+
+				if word.isalnum() or word.isspace():
 					return (None, None, None)
 			else:
 				return (None, None, None)
@@ -349,7 +349,7 @@ class SnippetController:
 				self.apply_snippet(snippets[0], start, end)
 			else:
 				# Do the fancy completion dialog
-				self.show_completion(snippets)
+				return self.show_completion(snippets)
 				
 			return True
 
@@ -429,7 +429,7 @@ class SnippetController:
 			# If there is no prefix, than take the insertion point as the end
 			end = buf.get_iter_at_mark(buf.get_insert())
 		
-		if not preset:
+		if not preset or len(preset) == 0:
 			# There is no preset, find all the global snippets and the language
 			# specific snippets
 			
@@ -438,7 +438,18 @@ class SnippetController:
 			if self.language_name:
 				nodes += SnippetsLibrary().get_snippets(self.language_name)
 			
-			complete = SnippetComplete(nodes, prefix, True)	
+			if prefix and len(prefix) == 1 and not prefix.isalnum():
+				hasnodes = False
+				
+				for node in nodes:
+					if node['tag'] and node['tag'].startswith(prefix):
+						hasnodes = True
+						break
+				
+				if not hasnodes:
+					prefix = None
+			
+			complete = SnippetComplete(nodes, prefix, False)	
 		else:
 			# There is a preset, so show that preset
 			complete = SnippetComplete(preset, None, True)
@@ -452,7 +463,7 @@ class SnippetController:
 		(xor, yor) = win.get_origin()
 		
 		self.move_completion_window(complete, x + xor, y + yor)		
-		complete.run()
+		return complete.run()
 
 	def update_snippet_contents(self):
 		self.idle_update_id = 0
@@ -517,7 +528,6 @@ class SnippetController:
 				not (event.state & gdk.MOD1_MASK) and \
 				not (event.state & gdk.SHIFT_MASK) and \
 				event.keyval in self.SPACE_KEY_VAL:
-			self.show_completion()
-			return True
+			return self.show_completion()
 
 		return False

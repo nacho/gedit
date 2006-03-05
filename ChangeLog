@@ -1,3 +1,13 @@
+2006-03-05  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/snippets/snippets/SnippetController.py:
+	fixed Ctrl+space being stopped from handling even if snippets doesn't
+	show a popup dialog (see bug #333326). Fixed handling of single
+	non-alphanumeric tab triggers
+	
+	* plugins/snippets/snippets/SnippetsLibrary.py:
+	fixed loading of duplicate system snippets (see bug #332384)
+	
 2006-03-04  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit/gedit-languages-manager.c (string_to_tag_style):
