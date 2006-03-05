@@ -387,7 +387,7 @@ class SnippetsDialog:
 	# Callbacks
 	def on_dialog_snippets_response(self, dlg, resp):
 		if resp == gtk.RESPONSE_HELP:
-			# TODO: Show help
+			gedit.help_display(self.dlg, 'gedit.xml', 'gedit-plugins')
 			return
 
 		self.unref_languages()		
