@@ -1600,10 +1600,11 @@ static GdkPixbuf *
 resize_icon (GdkPixbuf *pixbuf,
 	     gint       size)
 {
-	guint width, height;
-	
+	gint width, height;
+
 	width = gdk_pixbuf_get_width (pixbuf); 
 	height = gdk_pixbuf_get_height (pixbuf);
+
 	/* if the icon is larger than the nominal size, scale down */
 	if (MAX (width, height) > size) 
 	{
