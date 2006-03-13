@@ -390,7 +390,7 @@ do_replace (GeditSearchDialog *dialog,
 
 	/* replace text may be "", we just delete */
 	replace_entry_text = gedit_search_dialog_get_replace_text (dialog);
-	g_return_if_fail ((search_entry_text) != NULL);
+	g_return_if_fail ((replace_entry_text) != NULL);
 
 	unescaped_search_text = gedit_utils_unescape_search_text (search_entry_text);
 
@@ -450,7 +450,7 @@ do_replace_all (GeditSearchDialog *dialog,
 
 	/* replace text may be "", we just delete all occurrencies */
 	replace_entry_text = gedit_search_dialog_get_replace_text (dialog);
-	g_return_if_fail ((search_entry_text) != NULL);
+	g_return_if_fail ((replace_entry_text) != NULL);
 
 	match_case = gedit_search_dialog_get_match_case (dialog);
 	entire_word = gedit_search_dialog_get_entire_word (dialog);
