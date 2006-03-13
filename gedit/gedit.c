@@ -180,10 +180,11 @@ display_open_if_needed (const gchar *name)
 
 	for (l = displays; l != NULL; l = l->next)
 	{
-		display = l->data;
-
-		if (strcmp (gdk_display_get_name (display), name) == 0)
+		if (strcmp (gdk_display_get_name ((GdkDisplay *) l->data), name) == 0)
+		{
+			display = l->data;
 			break;
+		}
 	}
 
 	g_slist_free (displays);
@@ -579,3 +580,4 @@ main (int argc, char *argv[])
 
 	return 0;
 }
+
