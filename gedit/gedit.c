@@ -169,6 +169,28 @@ get_startup_timestamp ()
 	return (retval > 0) ? retval : 0;
 }
 
+static GdkDisplay *
+display_open_if_needed (const gchar *name)
+{
+	GSList *displays;
+	GSList *l;
+	GdkDisplay *display = NULL;
+
+	displays = gdk_display_manager_list_displays (gdk_display_manager_get ());
+
+	for (l = displays; l != NULL; l = l->next)
+	{
+		display = l->data;
+
+		if (strcmp (gdk_display_get_name (display), name) == 0)
+			break;
+	}
+
+	g_slist_free (displays);
+
+	return display != NULL ? display : gdk_display_open (name);
+}
+
 /* serverside */
 static void
 on_message_received (const char *message,
@@ -198,7 +220,7 @@ on_message_received (const char *message,
 	screen_number = atoi (params[2]);
 	workspace = atoi (params[3]);
 
-	display = gdk_display_open (display_name);
+	display = display_open_if_needed (display_name);
 	screen = gdk_display_get_screen (display, screen_number);
 	g_free (display_name);
 
