@@ -369,7 +369,7 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 					    gint                          response_id,
 					    GeditWindow                  *window)
 {
-	const GList *selected_documents;
+	GList *selected_documents;
 	GSList *l;
 
 	gedit_debug (DEBUG_COMMANDS);
@@ -391,11 +391,11 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 
 			g_object_set_data (G_OBJECT (window),
 					   GEDIT_SESSION_LIST_OF_DOCS_TO_SAVE,
-					   g_list_copy (selected_documents));
+					   selected_documents);
 
 			_gedit_cmd_file_save_documents_list (window, selected_documents);
 
-			// FIXME: also need to lock the window to prevent further changes..
+			/* FIXME: also need to lock the window to prevent further changes... */
 
 			break;
 

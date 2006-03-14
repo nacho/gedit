@@ -617,6 +617,8 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 					       _("Saving file '%s'\342\200\246"),
 					       uri_for_display);
 
+		g_free (uri_for_display);
+
 		_gedit_tab_save_as (tab, uri, encoding);
 	}
 
@@ -669,12 +671,17 @@ confirm_overwrite_callback (GtkFileChooser *dialog,
 			    gpointer        data)
 {
 	gchar *uri;
+	gboolean ro;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	uri = gtk_file_chooser_get_uri (dialog);
 
-	if (is_read_only (uri))
+	ro = is_read_only (uri);
+
+	g_free (uri);
+
+	if (ro)
 	{
 		if (replace_read_only_file (GTK_WINDOW (dialog), uri))
 			return GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME;
@@ -1463,8 +1470,7 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 					    gint                          response_id,
 					    GeditWindow                  *window)
 {
-	const GList *unsaved_documents;
-	const GList *selected_documents;
+	GList *selected_documents;
 	gboolean is_closing_all;
 
 	gedit_debug (DEBUG_COMMANDS);
@@ -1473,8 +1479,6 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 					    			 GEDIT_IS_CLOSING_ALL));
 
 	gtk_widget_hide (GTK_WIDGET (dlg));
-
-	unsaved_documents = gedit_close_confirmation_dialog_get_unsaved_documents (dlg);
 
 	switch (response_id)
 	{
@@ -1509,6 +1513,9 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 								 window);
 				}
 			}
+
+			g_list_free (selected_documents);
+
 			break;
 
 		case GTK_RESPONSE_NO: /* Close without Saving */
@@ -1524,6 +1531,9 @@ close_confirmation_dialog_response_handler (GeditCloseConfirmationDialog *dlg,
 			}
 			else
 			{
+				const GList *unsaved_documents;
+
+				unsaved_documents = gedit_close_confirmation_dialog_get_unsaved_documents (dlg);
 				g_return_if_fail (unsaved_documents->next == NULL);
 
 				close_document (window,

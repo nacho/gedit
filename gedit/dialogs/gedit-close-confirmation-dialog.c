@@ -315,7 +315,7 @@ get_selected_docs (GtkTreeModel *store)
 	return list;
 }
 
-const GList * 
+GList *
 gedit_close_confirmation_dialog_get_selected_documents (GeditCloseConfirmationDialog *dlg)
 {
 	GeditCloseConfirmationDialogPrivate *priv;

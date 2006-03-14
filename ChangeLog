@@ -1,3 +1,12 @@
+2006-03-14  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/dialogs/gedit-close-confirmation-dialog.[ch]:
+	* gedit/gedit-commands-file.c:
+	* gedit/gedit-session.c:
+
+	do not leak the list of selected documents.
+	Noticed by Vincent Geddes (bug 333882).
+
 2006-03-13  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-commands-search.c: fix sanity check, typo spotted
