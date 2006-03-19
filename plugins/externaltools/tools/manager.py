@@ -70,12 +70,13 @@ class Manager:
 			Manager.__shared_state = self.__dict__
 		
 		callbacks = {
-			'on_new_tool_button_clicked'     : self.on_new_tool_button_clicked,
-			'on_remove_tool_button_clicked'  : self.on_remove_tool_button_clicked,
-			'on_tool_manager_dialog_response': self.on_tool_manager_dialog_response,
-			'on_accelerator_key_press'       : self.on_accelerator_key_press,
-			'on_accelerator_focus_in'        : self.on_accelerator_focus_in,
-			'on_accelerator_focus_out'       : self.on_accelerator_focus_out
+			'on_new_tool_button_clicked'      : self.on_new_tool_button_clicked,
+			'on_remove_tool_button_clicked'   : self.on_remove_tool_button_clicked,
+			'on_tool_manager_dialog_response' : self.on_tool_manager_dialog_response,
+			'on_tool_manager_dialog_focus_out': self.on_tool_manager_dialog_focus_out,
+			'on_accelerator_key_press'        : self.on_accelerator_key_press,
+			'on_accelerator_focus_in'         : self.on_accelerator_focus_in,
+			'on_accelerator_focus_out'        : self.on_accelerator_focus_out
 		}
 		
 		# Load the "main-window" widget from the glade file.
@@ -347,5 +348,9 @@ class Manager:
 		self.tools.save()
 		update_tools_menu(tools = self.tools)
 		self.tools = None
+	
+	def on_tool_manager_dialog_focus_out(self, dialog, event):
+		self.save_current_tool()
+		update_tools_menu(tools = self.tools)
 
 # ex:noet:ts=8:
