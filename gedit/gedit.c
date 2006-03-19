@@ -441,6 +441,7 @@ main (int argc, char *argv[])
 	setlocale (LC_ALL, "");
 
 	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
 	startup_timestamp = get_startup_timestamp();
@@ -461,10 +462,6 @@ main (int argc, char *argv[])
 			    NULL);
 
 	gedit_debug_message (DEBUG_APP, "Done gnome_program_init");
-
-	/* Must be called after gnome_program_init to avoid problem with the
-         * translation of --help messages */
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 
 	gedit_debug_message (DEBUG_APP, "Create bacon connection");
 
