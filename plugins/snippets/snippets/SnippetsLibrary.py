@@ -139,7 +139,7 @@ class SnippetData:
 			return None
 	
 	def _override(self):
-		# Find the user file where this fella can find refugee
+		# Find the user file
 		target = SnippetsLibrary().get_user_library(self.language())
 
 		# Create a new node there with override
@@ -617,11 +617,12 @@ class SnippetsLibraryImpl:
 	def get_user_library(self, language):
 		target = None
 		
-		for library in self.libraries[language]:
-			if isinstance(library, SnippetsUserFile) and library.modifier:
-				target = library
-			elif not isinstance(library, SnippetsUserFile):
-				break
+		if language in self.libraries:
+			for library in self.libraries[language]:
+				if isinstance(library, SnippetsUserFile) and library.modifier:
+					target = library
+				elif not isinstance(library, SnippetsUserFile):
+					break
 		
 		if not target:
 			# Create a new user file then
