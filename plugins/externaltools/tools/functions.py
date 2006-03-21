@@ -200,9 +200,9 @@ def capture_menu_action(action, window, node):
 				capture.set_env(GEDIT_CURRENT_DOCUMENT_PATH = path,
 				                GEDIT_CURRENT_DOCUMENT_DIR  = cwd)
 		
-		documents_uri = [document.get_uri()
-		                         for document in window.get_documents()
-		                         if document.get_uri() is not None]
+		documents_uri = [doc.get_uri()
+		                         for doc in window.get_documents()
+		                         if doc.get_uri() is not None]
 		documents_path = [gnomevfs.get_local_path_from_uri(uri)
 		                         for uri in documents_uri
 		                         if gnomevfs.get_uri_scheme(uri) == 'file']
@@ -229,15 +229,15 @@ def capture_menu_action(action, window, node):
 				if output_type == 'replace-selection':
 					document.select_range(start, end)
 		elif input_type == 'line':
-			start = document.get_insert()
-			end = insert.copy()
+			start = document.get_iter_at_mark(document.get_insert())
+			end = start.copy()
 			if not start.starts_line():
 				start.backward_line()
 			if not end.ends_line():
 				end.forward_to_line_end()
 		elif input_type == 'word':
-			start = document.get_insert()
-			end = insert.copy()
+			start = document.get_iter_at_mark(document.get_insert())
+			end = start.copy()
 			if not start.inside_word():
 				panel.write(_('You must be inside a word to run this command'),
 				            panel.command_tag)
