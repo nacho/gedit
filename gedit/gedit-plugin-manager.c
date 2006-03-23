@@ -162,7 +162,7 @@ plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
 			     gpointer           data)
 {
 	GeditPluginInfo *info;
-//	const gchar *title;
+	gchar *text;
 	
 	g_return_if_fail (tree_model != NULL);
 	g_return_if_fail (tree_column != NULL);
@@ -172,14 +172,14 @@ plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
 	if (info == NULL)
 		return;
 
-//	title = gtk_tree_view_column_get_title (tree_column);
-
-	/* FIXME: this string comparison stuff sucks.  is there a better way? */
-//	if (!strcmp (title, PLUGIN_MANAGER_NAME_TITLE))
-	g_object_set (G_OBJECT (cell), 
-		      "text", 
-		      gedit_plugins_engine_get_plugin_name (info), 
+	text = g_markup_printf_escaped ("<b>%s</b>\n%s",
+					gedit_plugins_engine_get_plugin_name (info),
+					gedit_plugins_engine_get_plugin_description (info));
+	g_object_set (G_OBJECT (cell),
+		      "markup",
+		      text,
 		      NULL);
+	g_free (text);
 }
 
 static void
@@ -483,6 +483,7 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 
 	/* second column */
 	cell = gtk_cell_renderer_text_new ();
+	g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 	column = gtk_tree_view_column_new_with_attributes (PLUGIN_MANAGER_NAME_TITLE, cell, NULL);
 	gtk_tree_view_column_set_resizable (column, TRUE);
 	gtk_tree_view_column_set_cell_data_func (column, cell, plugin_manager_view_cell_cb,
