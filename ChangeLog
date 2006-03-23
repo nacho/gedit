@@ -1,3 +1,12 @@
+2006-03-23  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/snippets/snippets/SnippetsLibrary.py: fixes the disappearance
+	of a snippet when it is reverted and it is the last user snippet in 
+	the language (bug #334305). The fix simply sets the library of
+	the snippet back to the system library before removing the snippet from 
+	the user library, thus not causing it to be removed itself when the user
+	library (and all its snippets) is removed from the container.
+
 2006-03-22  Tommi Vainikainen  <thv@iki.fi>
 
 	* configure.ac (ALL_LINGUAS): Added Dzongkha (dz).

@@ -177,10 +177,11 @@ class SnippetData:
 	
 	def revert(self, snippet):
 		userlib = self.library()
+		self.set_library(snippet.library())
+		
 		userlib.remove(self.node)
 		
 		self.set_node(None)
-		self.set_library(snippet.library())
 
 		# Copy the properties
 		self.properties = snippet.properties
