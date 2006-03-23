@@ -115,16 +115,24 @@ static gboolean
 gedit_search_dialog_focus_in_event (GtkWidget     *widget,
 				    GdkEventFocus *event)
 {
+	gboolean res;
 	GeditSearchDialog *dlg = GEDIT_SEARCH_DIALOG (widget);
 	GtkWidget *entry = dlg->priv->search_entry;
-	
+
+	res = GTK_WIDGET_CLASS (gedit_search_dialog_parent_class)->focus_in_event (widget, event);
+
+	/*
+	 * If the document is focused and we print ctrl+F
+	 * we want the focus to go on the entry even if it
+	 * currently was on the Find button.
+	 */
 	if (!GTK_WIDGET_HAS_FOCUS (entry))
 	{
 		gtk_widget_grab_focus (entry);
 		gtk_editable_set_position (GTK_EDITABLE (entry), -1);
 	}
 
-	return GTK_WIDGET_CLASS (gedit_search_dialog_parent_class)->focus_in_event (widget, event);
+	return res;
 }
 
 static void 
