@@ -21,7 +21,7 @@ import os
 import gtk
 from gtk import gdk
 import gnomevfs
-import gedit
+import gedit, gtksourceview
 from gettext import gettext as _
 from outputpanel import OutputPanel
 from capture import *
@@ -282,7 +282,8 @@ def capture_menu_action(action, window, node):
 
 	capture.connect('stderr-line',   capture_stderr_line_panel,   panel)
 	capture.connect('begin-execute', capture_begin_execute_panel, panel, node.get('label'))
-	capture.connect('end-execute',   capture_end_execute_panel,   panel, view)
+	capture.connect('end-execute',   capture_end_execute_panel,   panel, view, 
+	                output_type in ('new-document','replace-document'))
 	
 	# Run the command
 	view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.WATCH))
@@ -298,8 +299,21 @@ def capture_begin_execute_panel(capture, panel, label):
 	panel.write(_("Running tool:"), panel.italic_tag);
 	panel.write(" %s\n\n" % label, panel.bold_tag);
 
-def capture_end_execute_panel(capture, exit_code, panel, view):
+def capture_end_execute_panel(capture, exit_code, panel, view, update_type):
 	panel['stop'].set_sensitive(False)
+	
+	if update_type:
+		doc = view.get_buffer()
+		start = doc.get_start_iter()
+		end = start.copy()
+		end.forward_chars(300)
+		
+		mtype = gnomevfs.get_mime_type_for_data(doc.get_text(start, end))
+		languages_manager = gtksourceview.SourceLanguagesManager()
+		language = languages_manager.get_language_from_mime_type(mtype)
+		if language is not None:
+			doc.set_language(language)
+	
 	view.get_window(gtk.TEXT_WINDOW_TEXT).set_cursor(gdk.Cursor(gdk.XTERM))
 	view.set_cursor_visible(True)
 	view.set_editable(True)
