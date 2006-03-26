@@ -258,17 +258,6 @@ if test "x$enable_deprecations" = "xyes"; then
    AC_SUBST(DISABLE_DEPRECATED_CFLAGS)
 fi
 
-dnl stuff for the CORBA interface
-
-ORBIT_IDL="`$PKG_CONFIG --variable=orbit_idl ORBit-2.0`"
-AC_SUBST(ORBIT_IDL)
-
-LIBBONOBO_IDL="`$PKG_CONFIG --variable=idldir libbonobo-2.0`"
-AC_SUBST(LIBBONOBO_IDL)
-
-BONOBO_ACTIVATION_IDL="`$PKG_CONFIG --variable=idldir bonobo-activation-2.0`"
-AC_SUBST(BONOBO_ACTIVATION_IDL)
-
 PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
