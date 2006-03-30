@@ -285,6 +285,7 @@ plugins/indent/Makefile
 plugins/Makefile
 plugins/modelines/Makefile
 plugins/pythonconsole/Makefile
+plugins/pythonconsole/pythonconsole/Makefile
 plugins/sample/Makefile
 plugins/snippets/Makefile
 plugins/snippets/snippets/Makefile
