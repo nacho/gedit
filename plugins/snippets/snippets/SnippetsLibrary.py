@@ -658,8 +658,13 @@ class SnippetsLibraryImpl:
 		if not snippet.can_modify() or snippet.override:
 			return
 		
+		# Remove from the library
 		userlib = snippet.library()
 		userlib.remove(snippet.node)
+		
+		# Remove from the container
+		container = self.containers[userlib.language]
+		container.remove(snippet)
 	
 	def overrided(self, library, element):
 		id = NamespacedId(library.language, element.attrib.get('id')).id
