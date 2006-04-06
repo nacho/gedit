@@ -29,7 +29,6 @@ import ElementTree as et
 
 class Manager:
 	GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
-	GCONF_DIR = '/apps/gedit-2/plugins/tools'
 
 	LABEL_COLUMN = 0 # For Combo and Tree
 	NODE_COLUMN  = 1 # For Tree only
@@ -278,7 +277,7 @@ class Manager:
  			                           gtk.DIALOG_MODAL,
  			                           gtk.MESSAGE_ERROR,
  			                           gtk.BUTTONS_OK,
- 			                           _('This accelerator is already bound to %s') % self.current_node.get('label'))
+ 			                           _('This accelerator is already bound to %s') % tool.get('label'))
 			dialog.run()
 			dialog.destroy()
  			return False
@@ -308,7 +307,9 @@ class Manager:
 		elif event.keyval in range(gtk.keysyms.F1, gtk.keysyms.F12):
 			# New accelerator
 			self.set_accelerator(event.keyval, mask)
-			entry.set_text(self.current_node.get('accelerator'))
+			entry.set_text(
+			           default(self.current_node.get('accelerator'),
+			                   ''))
 			self['commands'].grab_focus()
 			# Capture all `normal characters`
 			return True			
@@ -316,7 +317,9 @@ class Manager:
 			if mask:
 				# New accelerator
 				self.set_accelerator(event.keyval, mask)
-				entry.set_text(self.current_node.get('accelerator'))
+				entry.set_text(
+				   default(self.current_node.get('accelerator'),
+				           ''))
 				self['commands'].grab_focus()
 			# Capture all `normal characters`
 			return True

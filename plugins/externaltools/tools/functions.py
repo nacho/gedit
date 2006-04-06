@@ -65,7 +65,7 @@ class ToolsTree:
 		return None
 	
 	def save(self):
-		self.tree.write(self.xml_location)
+		self.tree.write(self.xml_location, 'UTF-8')
 		
 	def get_tool_from_accelerator(self, keyval, mod, ignore = None):
 		if not self.root:
@@ -74,7 +74,7 @@ class ToolsTree:
 		for tool in self.root:
 			if tool != ignore:
 				skey, smod = gtk.accelerator_parse(default(tool.get('accelerator'), ''))
-				if skey == keyval and smod & mod == smod:
+				if skey == keyval and mod == smod:
 					return tool
 		return None
 

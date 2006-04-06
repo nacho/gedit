@@ -1,4 +1,15 @@
+2006-04-06  Steve Frécinaux  <steve@istique.net>
+
+	* plugins/externaltools/tools/functions.py: fix checking for existing
+	accelerators (modificators mismatch). Save the data file as UTF-8,
+	avoiding text corruption (bug #335823)
+	
+	* plugins/externaltools/tools/manager.py: wrong tool was cited in error
+	message when trying to bind a already used accelerator to another tool.
+	Also fix two warnings.
+	
 2006-04-01  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/snippets/snippets/SnippetsLibrary.py: added removal from 
 	container when user snippet gets removed	
 
