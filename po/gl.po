@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-01 09:17+0100\n"
-"PO-Revision-Date: 2006-03-01 09:20+0100\n"
+"POT-Creation-Date: 2006-04-07 13:12+0200\n"
+"PO-Revision-Date: 2006-04-07 13:13+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
 "Language-Team: Galego <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Editar ficheiros de texto"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:460
 msgid "Text Editor"
 msgstr "Editor de texto"
 
@@ -1060,20 +1060,20 @@ msgstr "_Usar fonte predeterminada do tema"
 msgid "_minutes"
 msgstr "_minutos"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:234
+#: ../gedit/dialogs/gedit-search-dialog.c:260
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "Remprazar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
+#: ../gedit/dialogs/gedit-search-dialog.c:272 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "Buscar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298
+#: ../gedit/dialogs/gedit-search-dialog.c:324
 msgid "Replace _All"
 msgstr "Remprazar _todo"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:299
+#: ../gedit/dialogs/gedit-search-dialog.c:325
 #: ../gedit/gedit-commands-file.c:559
 msgid "_Replace"
 msgstr "_Remprazar"
@@ -1168,26 +1168,26 @@ msgstr "O ficheiro \"%s\" é de só lectura."
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Quere intentar remprazalo co que está gardando agora?"
 
-#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
+#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:815
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Cargando ficheiro '%s'..."
 
-#: ../gedit/gedit-commands-file.c:707
+#: ../gedit/gedit-commands-file.c:714
 msgid "Save As…"
 msgstr "Gardar como..."
 
-#: ../gedit/gedit-commands-file.c:1003
+#: ../gedit/gedit-commands-file.c:1010
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Recuperando o documento '%s'..."
 
-#: ../gedit/gedit-commands-file.c:1025
+#: ../gedit/gedit-commands-file.c:1032
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Recuperar os cambios non gardados no documento '%s'?"
 
-#: ../gedit/gedit-commands-file.c:1034
+#: ../gedit/gedit-commands-file.c:1041
 #, c-format
 msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1200,13 +1200,13 @@ msgstr[1] ""
 "Os cambios realizados ao documento no último %ld segundos perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1043
+#: ../gedit/gedit-commands-file.c:1050
 msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Os cambios realizados ao documento no último %ld minuto perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1049
+#: ../gedit/gedit-commands-file.c:1056
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1221,7 +1221,7 @@ msgstr[1] ""
 "Os cambios realizados ao documento no último minuto e %ld segundos "
 "perderanse permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1059
+#: ../gedit/gedit-commands-file.c:1066
 #, c-format
 msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -1234,7 +1234,7 @@ msgstr[1] ""
 "Os cambios realizados ao documento no último %ld minutos perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
+#: ../gedit/gedit-commands-file.c:1081 ../gedit/gedit-commands-file.c:1102
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
@@ -1243,7 +1243,7 @@ msgstr[1] ""
 "Os cambios realizados ao documento nas últimas %d hora perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1080
+#: ../gedit/gedit-commands-file.c:1087
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1258,7 +1258,7 @@ msgstr[1] ""
 "Os cambios realizados ao documento na última hora e %d minutos perderanse "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1121
+#: ../gedit/gedit-commands-file.c:1128
 msgid "_Revert"
 msgstr "_Recuperar"
 
@@ -1300,7 +1300,7 @@ msgid "Could not obtain backup filename"
 msgstr "Non se puido crear un ficheiro de resgardo"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
+#: ../gedit/gedit-window.c:1535 ../gedit/gedit-window.c:1540
 msgid "Read Only"
 msgstr "Só lectura"
 
@@ -1839,11 +1839,11 @@ msgstr "Complemento"
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: ../gedit/gedit-plugin-manager.c:540
+#: ../gedit/gedit-plugin-manager.c:541
 msgid "_About Plugin"
 msgstr "_Acerca do complemento"
 
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:545
 msgid "C_onfigure Plugin"
 msgstr "C_onfigurar complemento"
 
@@ -1851,7 +1851,7 @@ msgstr "C_onfigurar complemento"
 msgid "Cannot initialize preferences manager."
 msgstr "Non se puido inicializar o xestor de preferencias."
 
-#: ../gedit/gedit-prefs-manager.c:1388
+#: ../gedit/gedit-prefs-manager.c:1390
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Esperábase '%s' e obtúvose '%s' para a clave %s"
@@ -2043,7 +2043,7 @@ msgstr "Tipo MIME:"
 msgid "Encoding:"
 msgstr "Codificación:"
 
-#: ../gedit/gedit-tab.c:2012
+#: ../gedit/gedit-tab.c:2013
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Renderizando páxina %d de %d..."
@@ -2380,7 +2380,7 @@ msgstr "Abrir un ficheiro usado recentemente"
 msgid "Open"
 msgstr "Abrir"
 
-#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
+#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1811
 #, c-format
 msgid "Activate %s"
 msgstr "Activar %s"
@@ -2498,79 +2498,79 @@ msgstr "Ferramentas externas"
 msgid "You must be inside a word to run this command"
 msgstr "Debe introducir unha palabra para executar este comando"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:299
 msgid "Running tool:"
 msgstr "Executando a ferramenta:"
 
-#: ../plugins/externaltools/tools/functions.py:308
+#: ../plugins/externaltools/tools/functions.py:322
 msgid "Done."
 msgstr "Feito."
 
-#: ../plugins/externaltools/tools/functions.py:310
+#: ../plugins/externaltools/tools/functions.py:324
 msgid "Exited"
 msgstr "Rematado"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Ningún"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Documento actual"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Selección actual"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Liña actual"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Palabra actual"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Inserir no panel de saída"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Crear un novo documento"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Engadir ao documento actual"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Reemprazar o documento actual"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Reemprazar selección actual"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Inserir na posición do cursor"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Tódolos documentos"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Tódolos documentos excepto os que non teñen título"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Só ficheiros locais"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Só ficheiros remotos"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Só documentos sen título"
 
@@ -2594,12 +2594,12 @@ msgstr "Nova ferramenta"
 msgid "This accelerator is already bound to %s"
 msgstr "Este acelerador xa esta vinculado a %s"
 
-#: ../plugins/externaltools/tools/manager.py:329
+#: ../plugins/externaltools/tools/manager.py:333
 #: ../plugins/snippets/snippets/SnippetsDialog.py:562
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Escribir un novo acelerador, ou premer no Retroceso para limpar"
 
-#: ../plugins/externaltools/tools/manager.py:331
+#: ../plugins/externaltools/tools/manager.py:335
 #: ../plugins/snippets/snippets/SnippetsDialog.py:564
 msgid "Type a new accelerator"
 msgstr "Escribir un novo acelerador"
@@ -2700,8 +2700,8 @@ msgid "Modelines"
 msgstr "Modos de liñas"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-msgid "Opens an interactive python console in the bottom panel."
-msgstr "Abre unha interface de consola de python no panel inferior."
+msgid "Interactive python console standing in the bottom panel"
+msgstr "Consola de python interactiva no panel inferior"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -3143,12 +3143,12 @@ msgstr "(corrección ortográfica)"
 msgid "Completed spell checking"
 msgstr "Corrección ortográfica completada"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:245
+#: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Non se puideron atopar os widgets necesarios dentro de %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:266
+#: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "Linguas"
 
