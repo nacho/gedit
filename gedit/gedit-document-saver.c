@@ -44,13 +44,16 @@
 #include <libgnomevfs/gnome-vfs.h>
 
 #include "gedit-document-saver.h"
+#include "gedit-debug.h"
 #include "gedit-convert.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
 
-#define GEDIT_DOCUMENT_SAVER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_DOCUMENT_SAVER, GeditDocumentSaverPrivate))
+#define GEDIT_DOCUMENT_SAVER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
+						 GEDIT_TYPE_DOCUMENT_SAVER, \
+						 GeditDocumentSaverPrivate))
 
 struct _GeditDocumentSaverPrivate
 {
@@ -187,6 +190,8 @@ write_document_contents (gint                  fd,
 	ssize_t written;
 	gboolean res;
 
+	gedit_debug (DEBUG_SAVER);
+
 	gtk_text_buffer_get_bounds (doc, &start_iter, &end_iter);
 	contents = gtk_text_buffer_get_slice (doc, &start_iter, &end_iter, TRUE);
 
@@ -296,6 +301,11 @@ save_completed_or_failed (GeditDocumentSaver *saver)
 		       TRUE, /* completed */
 		       saver->priv->error);
 
+	if (saver->priv->error == NULL)
+		gedit_debug_message (DEBUG_SAVER, "save completed");
+	else
+		gedit_debug_message (DEBUG_SAVER, "save failed");
+
 	g_object_unref (saver);
 }
 
@@ -365,6 +375,8 @@ copy_file_data (gint     sfd,
 	ssize_t bytes_read;
 	ssize_t bytes_to_write;
 	ssize_t bytes_written;
+
+	gedit_debug (DEBUG_SAVER);
 
 	buffer = g_malloc (BUFSIZE);
 
@@ -454,6 +466,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 	struct stat new_statbuf;
 	gchar *backup_filename = NULL;
 	gboolean backup_created = FALSE;
+
+	gedit_debug (DEBUG_SAVER);
 
 	if (fstat (saver->priv->fd, &statbuf) != 0) 
 	{
@@ -550,6 +564,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 		gchar *tmp_filename;
 		gint tmpfd;
 
+		gedit_debug_message (DEBUG_SAVER, "tmp file moving strategy");
+
 		dirname = g_path_get_dirname (saver->priv->local_path);
 		tmp_filename = g_build_filename (dirname, ".gedit-save-XXXXXX", NULL);
 		g_free (dirname);
@@ -563,6 +579,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 
 		if (tmpfd == -1)
 		{
+			gedit_debug_message (DEBUG_SAVER, "could not create tmp file");
+
 			g_free (tmp_filename);
 			goto fallback_strategy;
 		}
@@ -571,9 +589,12 @@ save_existing_local_file (GeditDocumentSaver *saver)
 		if (fchown (tmpfd, statbuf.st_uid, statbuf.st_gid) == -1 ||
 		    fchmod (tmpfd, statbuf.st_mode) == -1)
 		{
+			gedit_debug_message (DEBUG_SAVER, "could not set perms");
+
 			close (tmpfd);
 			unlink (tmp_filename);
 			g_free (tmp_filename);
+
 			goto fallback_strategy;
 		}
 
@@ -582,9 +603,12 @@ save_existing_local_file (GeditDocumentSaver *saver)
 			 	 	      saver->priv->encoding,
 				 	      &saver->priv->error))
 		{
+			gedit_debug_message (DEBUG_SAVER, "could not write tmp file");
+
 			close (tmpfd);
 			unlink (tmp_filename);
 			g_free (tmp_filename);
+
 			goto out;
 		}
 
@@ -592,6 +616,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 		if (rename (saver->priv->local_path, backup_filename) != 0)
 		{
 			GnomeVFSResult result = gnome_vfs_result_from_errno ();
+
+			gedit_debug_message (DEBUG_SAVER, "could not rename original -> backup");
 
 			g_set_error (&saver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
@@ -601,6 +627,7 @@ save_existing_local_file (GeditDocumentSaver *saver)
 			close (tmpfd);
 			unlink (tmp_filename);
 			g_free (tmp_filename);
+
 			goto out;
 		}
 
@@ -608,6 +635,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 		if (rename (tmp_filename, saver->priv->local_path) != 0)
 		{
 			GnomeVFSResult result = gnome_vfs_result_from_errno ();
+
+			gedit_debug_message (DEBUG_SAVER, "could not rename tmp -> original");
 
 			g_set_error (&saver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
@@ -620,6 +649,7 @@ save_existing_local_file (GeditDocumentSaver *saver)
 			close (tmpfd);
 			unlink (tmp_filename);
 			g_free (tmp_filename);
+
 			goto out;
 		}
 
@@ -653,6 +683,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 
  fallback_strategy:
 
+	gedit_debug_message (DEBUG_SAVER, "fallback strategy");
+
 	/* try to copy the old contents in a backup for safety
 	 * unless we are explicetely told not to.
 	 */
@@ -660,9 +692,13 @@ save_existing_local_file (GeditDocumentSaver *saver)
 	{
 		gint bfd;
 
+		gedit_debug_message (DEBUG_SAVER, "copying to backup");
+
 		/* move away old backups */
 		if (!remove_file (backup_filename))
 		{
+			gedit_debug_message (DEBUG_SAVER, "could not remove old backup");
+
 			/* we don't care about which was the problem, just
 			 * that a backup was not possible.
 			 */
@@ -680,6 +716,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 
 		if (bfd == -1)
 		{
+			gedit_debug_message (DEBUG_SAVER, "could not create backup");
+
 			g_set_error (&saver->priv->error,
 				     GEDIT_DOCUMENT_ERROR,
 				     GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP,
@@ -694,10 +732,14 @@ save_existing_local_file (GeditDocumentSaver *saver)
 		 * others. */
 		if (fchown (bfd, (uid_t) -1, statbuf.st_gid) != 0)
 		{
+			gedit_debug_message (DEBUG_SAVER, "could not restore group");
+
 			if (fchmod (bfd,
 			            (statbuf.st_mode& 0707) |
 			            ((statbuf.st_mode & 07) << 3)) != 0)
 			{
+				gedit_debug_message (DEBUG_SAVER, "could not even clear group perms");
+
 				g_set_error (&saver->priv->error,
 					     GEDIT_DOCUMENT_ERROR,
 					     GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP,
@@ -712,6 +754,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 
 		if (!copy_file_data (saver->priv->fd, bfd, NULL))
 		{
+				gedit_debug_message (DEBUG_SAVER, "could not copy data into the backup");
+
 				g_set_error (&saver->priv->error,
 					     GEDIT_DOCUMENT_ERROR,
 					     GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP,
@@ -780,6 +824,8 @@ save_new_local_file (GeditDocumentSaver *saver)
 {
 	struct stat statbuf;
 
+	gedit_debug (DEBUG_SAVER);
+
 	if (!write_document_contents (saver->priv->fd,
 				      GTK_TEXT_BUFFER (saver->priv->document),
 			 	      saver->priv->encoding,
@@ -834,6 +880,8 @@ save_local_file (GeditDocumentSaver *saver)
 {
 	GSourceFunc next_phase;
 	GnomeVFSResult result;
+
+	gedit_debug (DEBUG_SAVER);
 
 	/* saving start */
 	g_signal_emit (saver,
@@ -901,6 +949,8 @@ remote_get_info_cb (GnomeVFSAsyncHandle *handle,
 	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (data);
 	GnomeVFSGetFileInfoResult *info_result;
 
+	gedit_debug (DEBUG_SAVER);
+
 	/* assert that the list has one and only one item */
 	g_return_if_fail (results != NULL && results->next == NULL);
 
@@ -935,6 +985,8 @@ static gint
 async_xfer_ok (GnomeVFSXferProgressInfo *progress_info,
 	       GeditDocumentSaver       *saver)
 {
+	gedit_debug_message (DEBUG_SAVER, "xfer phase: %d", progress_info->phase);
+
 	switch (progress_info->phase)
 	{
 	case GNOME_VFS_XFER_PHASE_INITIAL:
@@ -1075,6 +1127,8 @@ static gint
 async_xfer_error (GnomeVFSXferProgressInfo *progress_info,
 		  GeditDocumentSaver       *saver)
 {
+	gedit_debug (DEBUG_SAVER);
+
 	g_set_error (&saver->priv->error,
 		     GEDIT_DOCUMENT_ERROR,
 		     progress_info->vfs_status,
@@ -1116,6 +1170,8 @@ save_remote_file_real (GeditDocumentSaver *saver)
 	GList *source_uri_list = NULL;
 	GList *dest_uri_list = NULL;
 	GnomeVFSResult result;
+
+	gedit_debug (DEBUG_SAVER);
 
 	/* For remote files we use the following strategy:
 	 * we save to a local temp file and then transfer it
@@ -1171,6 +1227,8 @@ save_remote_file_real (GeditDocumentSaver *saver)
 		goto error;
 	}
 
+	gedit_debug_message (DEBUG_SAVER, "Saved local copy, starting xfer");
+
 	result = gnome_vfs_async_xfer (&saver->priv->handle,
 				       source_uri_list,
 				       dest_uri_list,
@@ -1208,6 +1266,8 @@ save_remote_file_real (GeditDocumentSaver *saver)
 static void
 save_remote_file (GeditDocumentSaver *saver)
 {
+	gedit_debug (DEBUG_SAVER);
+
 	/* saving start */
 	g_signal_emit (saver,
 		       signals[SAVING],
@@ -1235,6 +1295,8 @@ gedit_document_saver_save (GeditDocumentSaver     *saver,
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT_SAVER (saver));
 	g_return_if_fail ((uri != NULL) && (strlen (uri) > 0));
+
+	gedit_debug (DEBUG_SAVER);
 
 	// CHECK:
 	// - sanity check a max len for the uri?

@@ -275,6 +275,8 @@ update_document_contents (GeditDocumentLoader  *loader,
 			  gint                  file_size,
 			  GError              **error)
 {
+	gedit_debug (DEBUG_SAVER);
+
 	g_return_val_if_fail (file_size > 0, FALSE);
 	g_return_val_if_fail (file_contents != NULL, FALSE);
 
@@ -470,8 +472,6 @@ stat_to_file_info (GnomeVFSFileInfo *file_info,
 static void
 load_completed_or_failed (GeditDocumentLoader *loader)
 {
-	gedit_debug (DEBUG_DOCUMENT);
-	
 	/* the object will be unrefed in the callback of the loading
 	 * signal, so we need to prevent finalization.
 	 */
@@ -482,9 +482,12 @@ load_completed_or_failed (GeditDocumentLoader *loader)
 		       0,
 		       TRUE, /* completed */
 		       loader->priv->error);
-		      
-	gedit_debug_message (DEBUG_DOCUMENT, "unref");
-			      
+
+	if (loader->priv->error == NULL)
+		gedit_debug_message (DEBUG_LOADER, "load completed");
+	else
+		gedit_debug_message (DEBUG_LOADER, "load failed");
+
 	g_object_unref (loader);		       
 }
 
@@ -540,6 +543,8 @@ load_local_file_real (GeditDocumentLoader *loader)
 				    
 		if (mapped_file == MAP_FAILED)
 		{
+			gedit_debug_message (DEBUG_SAVER, "mmap failed");
+
 			result = gnome_vfs_result_from_errno ();
 
 			g_set_error (&loader->priv->error,
@@ -613,6 +618,8 @@ static void
 load_local_file (GeditDocumentLoader *loader,
 		 const gchar         *fname)
 {
+	gedit_debug (DEBUG_SAVER);
+
 	g_signal_emit (loader,
 		       signals[LOADING],
 		       0,
@@ -661,8 +668,6 @@ async_close_cb (GnomeVFSAsyncHandle *handle,
 static void
 remote_load_completed_or_failed (GeditDocumentLoader *loader)
 {
-	gedit_debug (DEBUG_DOCUMENT);
-	
 	/* free the buffer and close the handle */
 	gnome_vfs_async_close (loader->priv->handle,
 			       async_close_cb,
@@ -688,6 +693,8 @@ async_read_cb (GnomeVFSAsyncHandle *handle,
 	       gpointer             data)
 {
 	GeditDocumentLoader *loader = GEDIT_DOCUMENT_LOADER (data);
+
+	gedit_debug (DEBUG_LOADER);
 
 	/* reality checks. */
 	g_return_if_fail (bytes_requested == READ_CHUNK_SIZE);
@@ -772,6 +779,8 @@ remote_get_info_cb (GnomeVFSAsyncHandle *handle,
 	GeditDocumentLoader *loader = GEDIT_DOCUMENT_LOADER (data);
 	GnomeVFSGetFileInfoResult *info_result;
 
+	gedit_debug (DEBUG_LOADER);
+
 	/* assert that the list has one and only one item */
 	g_return_if_fail (results != NULL && results->next == NULL);
 
@@ -820,6 +829,8 @@ async_open_callback (GnomeVFSAsyncHandle *handle,
 {
 	GList *uri_list = NULL;
 
+	gedit_debug (DEBUG_LOADER);
+
 	g_return_if_fail (loader->priv->handle == handle);
 
 	if (result != GNOME_VFS_OK)
@@ -858,6 +869,8 @@ async_open_callback (GnomeVFSAsyncHandle *handle,
 static void
 load_remote_file (GeditDocumentLoader *loader)
 {
+	gedit_debug (DEBUG_LOADER);
+
 	g_return_if_fail (loader->priv->handle == NULL);
 
 	/* loading start */
@@ -893,6 +906,8 @@ gedit_document_loader_load (GeditDocumentLoader *loader,
 			    const GeditEncoding *encoding)
 {
 	gchar *local_path;
+
+	gedit_debug (DEBUG_LOADER);
 
 	g_return_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader));
 	g_return_if_fail (uri != NULL);
@@ -992,10 +1007,10 @@ gedit_document_loader_get_bytes_read (GeditDocumentLoader *loader)
 gboolean 
 gedit_document_loader_cancel (GeditDocumentLoader *loader)
 {
-	gedit_debug (DEBUG_DOCUMENT);
+	gedit_debug (DEBUG_LOADER);
 
 	g_return_val_if_fail (GEDIT_IS_DOCUMENT_LOADER (loader), FALSE);
-	
+
 	if (loader->priv->handle == NULL)
 		return FALSE;
 
