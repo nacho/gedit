@@ -72,22 +72,17 @@ gedit_cmd_help_about (GtkAction   *action,
 	static const gchar copyright[] = \
 		"Copyright \xc2\xa9 1998-2000 Evan Lawrence, Alex Robert\n"
 		"Copyright \xc2\xa9 2000-2002 Chema Celorio, Paolo Maggi\n"
-		"Copyright \xc2\xa9 2003-2005 Paolo Maggi";
+		"Copyright \xc2\xa9 2003-2006 Paolo Maggi";
 
 	static const gchar comments[] = \
 		N_("gedit is a small and lightweight text editor for the "
 		   "GNOME Desktop");
 
-	static GdkPixbuf *logo = NULL;
+	GdkPixbuf *logo;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	if(!logo)
-	{
-		logo = gdk_pixbuf_new_from_file (
-			GNOME_ICONDIR "/gedit-logo.png",
-			NULL);
-	}
+	logo = gdk_pixbuf_new_from_file (GNOME_ICONDIR "/gedit-logo.png", NULL);
 
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "authors", authors,
@@ -98,6 +93,9 @@ gedit_cmd_help_about (GtkAction   *action,
 			       "translator-credits", _("translator-credits"),
 			       "version", VERSION,
 			       "website", "http://www.gedit.org",
-			       "name", _("gedit"),
+			       "name", "gedit",
 			       NULL);
+
+	if (logo)
+		g_object_unref (logo);
 }
