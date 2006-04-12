@@ -18,7 +18,7 @@ AM_CONFIG_HEADER(config.h)
 AM_DISABLE_STATIC
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AC_PROG_INTLTOOL([0.31])
+AC_PROG_INTLTOOL([0.34.90])
 
 AM_PROG_LIBTOOL
 
@@ -37,9 +37,8 @@ dnl ================================================================
 
 GETTEXT_PACKAGE=gedit
 AC_SUBST(GETTEXT_PACKAGE)
-AC_SUBST([CONFIG_STATUS_DEPENDENCIES],['$(top_srcdir)/po/LINGUAS'])
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE", [Gettext package])
-ALL_LINGUAS="`cat "$srcdir/po/LINGUAS" | grep -v '^#'`"
+
 AM_GLIB_GNU_GETTEXT
 
 
@@ -262,7 +261,7 @@ fi
 PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
 AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 bindings/Makefile
 bindings/python/Makefile
@@ -297,6 +296,7 @@ plugins/taglist/Makefile
 plugins/time/Makefile
 po/Makefile.in])
 
+AC_OUTPUT
 
 echo "
 
