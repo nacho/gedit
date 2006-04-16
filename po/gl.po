@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 13:12+0200\n"
-"PO-Revision-Date: 2006-04-07 13:13+0200\n"
+"POT-Creation-Date: 2006-04-16 23:34+0200\n"
+"PO-Revision-Date: 2006-04-16 23:35+0200\n"
 "Last-Translator: Ignacio Casal Quinteiro <nacho.resa@gmail.com>\n"
 "Language-Team: Galego <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -1122,6 +1122,10 @@ msgstr "Crear unha fiestra nova no nivel superior dunha instancia existente de g
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crea un documento novo nunha instancia existente de gedit"
 
+#: ../gedit/gedit.c:84
+msgid "[FILE...]"
+msgstr "[FICHEIRO...]"
+
 #: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
@@ -1131,6 +1135,11 @@ msgstr "%s: nome de ficheiro URI malformado.\n"
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: codificación inválida.\n"
+
+#. Setup command line options
+#: ../gedit/gedit.c:452
+msgid "- Edit text files"
+msgstr " - Editar ficheiros de texto"
 
 #: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #, c-format
@@ -1266,13 +1275,9 @@ msgstr "_Recuperar"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit é un pequeno e lixeiro editor de textos para GNOME"
 
-#: ../gedit/gedit-commands-help.c:98
+#: ../gedit/gedit-commands-help.c:93
 msgid "translator-credits"
 msgstr "Ignacio Casal Quinteiro <nacho.resa@gmail.com>"
-
-#: ../gedit/gedit-commands-help.c:101
-msgid "gedit"
-msgstr "gedit"
 
 #: ../gedit/gedit-commands-search.c:166
 #, c-format
@@ -1295,7 +1300,7 @@ msgid "Unsaved Document %d"
 msgstr "Documento %d non gardado"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:523
+#: ../gedit/gedit-document-saver.c:537
 msgid "Could not obtain backup filename"
 msgstr "Non se puido crear un ficheiro de resgardo"
 
