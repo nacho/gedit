@@ -81,7 +81,7 @@ static const GOptionEntry options [] =
 	  N_("Create a new document in an existing instance of gedit"), NULL },
 
 	{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &remaining_args,
-	  NULL, NULL }, /* collects file arguments */
+	  NULL, N_("[FILE...]") }, /* collects file arguments */
 
 	{NULL}
 };
@@ -449,7 +449,7 @@ main (int argc, char *argv[])
 	gedit_debug_message (DEBUG_APP, "Run gnome_program_init");
 
 	/* Setup command line options */
-	context = g_option_context_new ("[FILE...]"); /* Should be translated when out of string freeze */
+	context = g_option_context_new (_("- Edit text files"));
 	g_option_context_add_main_entries (context, options, GETTEXT_PACKAGE);
 	
 	/* Initialize gnome program */
