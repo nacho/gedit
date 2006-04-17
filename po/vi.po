@@ -7,12 +7,12 @@ msgid ""
 ""
 msgstr "Project-Id-Version: gedit 2.14.1 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-27 22:42+0100\n"
-"PO-Revision-Date: 2006-03-21 22:03+1030\n"
+"POT-Creation-Date: 2006-04-16 22:21+0200\n"
+"PO-Revision-Date: 2006-04-17 13:45+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: LocFactoryEditor 1.6b36\n"
@@ -21,7 +21,7 @@ msgstr "Project-Id-Version: gedit 2.14.1 Gnome HEAD\n"
 msgid "Edit text files"
 msgstr "Soạn thảo tập tin văn bản"
 
-#:../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
+#:../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:460
 msgid "Text Editor"
 msgstr "Bộ soạn thảo văn bản"
 
@@ -978,20 +978,20 @@ msgstr "_Dùng phông sắc thái mặc định"
 msgid "_minutes"
 msgstr "p_hút"
 
-#:../gedit/dialogs/gedit-search-dialog.c:234
+#:../gedit/dialogs/gedit-search-dialog.c:260
 #:../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "Thay thế"
 
-#:../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
+#:../gedit/dialogs/gedit-search-dialog.c:272 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "Tìm"
 
-#:../gedit/dialogs/gedit-search-dialog.c:298
+#:../gedit/dialogs/gedit-search-dialog.c:324
 msgid "Replace _All"
 msgstr "Thay thế _tất cả"
 
-#:../gedit/dialogs/gedit-search-dialog.c:299
+#:../gedit/dialogs/gedit-search-dialog.c:325
 #:../gedit/gedit-commands-file.c:559
 msgid "_Replace"
 msgstr "T_hay thế"
@@ -1038,6 +1038,10 @@ msgstr "Tạo cửa sổ mức đầu mới trong một trình gedit chạy"
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Tạo tài liệu mới trong một trình gedit chạy"
 
+#:../gedit/gedit.c:84
+msgid "[FILE...]"
+msgstr "[TẬP TIN...]"
+
 #:../gedit/gedit.c:116
 #,c-format
 msgid "%s: malformed file name or URI.\n"
@@ -1047,6 +1051,11 @@ msgstr "%s: tên tập tin hay địa chỉ Mạng dạng sai\n"
 #,c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: mã không hợp lệ.\n"
+
+#.Setup command line options
+#:../gedit/gedit.c:452
+msgid "- Edit text files"
+msgstr "- Soạn thảo tập tin văn bản"
 
 #:../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #,c-format
@@ -1083,26 +1092,26 @@ msgstr "Tập tin « %s » chỉ đọc được thôi."
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Bạn có muốn thay thế nó bằng tập tin bạn đang lưu không?"
 
-#:../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
+#:../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:815
 #,c-format
 msgid "Saving file '%s'…"
 msgstr "Đang lưu tập tin « %s »..."
 
-#:../gedit/gedit-commands-file.c:707
+#:../gedit/gedit-commands-file.c:714
 msgid "Save As…"
 msgstr "Lưu dạng..."
 
-#:../gedit/gedit-commands-file.c:1003
+#:../gedit/gedit-commands-file.c:1010
 #,c-format
 msgid "Reverting the document '%s'…"
 msgstr "Đang hoàn nguyên tài liệu « %s »..."
 
-#:../gedit/gedit-commands-file.c:1025
+#:../gedit/gedit-commands-file.c:1032
 #,c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Hoàn nguyên các thay đổi chưa lưu về tài liệu « %s » không?"
 
-#:../gedit/gedit-commands-file.c:1034
+#:../gedit/gedit-commands-file.c:1041
 #,c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1110,12 +1119,12 @@ msgid_plural "Changes made to the document in the last %ld seconds will be perma
 "lost."
 msgstr[0] "Các thay đổi trong tài liệu ở %ld phút chót sẽ hoàn toàn bị mất."
 
-#:../gedit/gedit-commands-file.c:1043
+#:../gedit/gedit-commands-file.c:1050
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Các thay đổi trong tài liệu ở phút chót sẽ hoàn toàn bị mất."
 
-#:../gedit/gedit-commands-file.c:1049
+#:../gedit/gedit-commands-file.c:1056
 #,c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1124,7 +1133,7 @@ msgid_plural "Changes made to the document in the last minute and %ld seconds wi
 "permanently lost."
 msgstr[0] "Các thay đổi trong tài liệu ở phút chót và %ld giây chót sẽ hoàn toàn bị mất."
 
-#:../gedit/gedit-commands-file.c:1059
+#:../gedit/gedit-commands-file.c:1066
 #,c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1132,13 +1141,13 @@ msgid_plural "Changes made to the document in the last %ld minutes will be perma
 "lost."
 msgstr[0] "Các thay đổi trong tài liệu ở %ld phút chót sẽ hoàn toàn bị mất."
 
-#:../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
+#:../gedit/gedit-commands-file.c:1081 ../gedit/gedit-commands-file.c:1102
 #,c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "Các thay đổi trong tài liệu ở giờ sau chót sẽ hoàn toàn bị mất."
 
-#:../gedit/gedit-commands-file.c:1080
+#:../gedit/gedit-commands-file.c:1087
 #,c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1148,7 +1157,7 @@ msgid_plural "Changes made to the document in the last hour and %d minutes will 
 msgstr[0] "Các thay đổi trong tài liệu ở giờ sau chót và %d phút chót sẽ hoàn toàn bị "
 "mất."
 
-#:../gedit/gedit-commands-file.c:1121
+#:../gedit/gedit-commands-file.c:1128
 msgid "_Revert"
 msgstr "_Hoàn nguyên"
 
@@ -1156,13 +1165,9 @@ msgstr "_Hoàn nguyên"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit là trình soạn thảo văn bản nhỏ gọn của Gnome"
 
-#:../gedit/gedit-commands-help.c:98
+#:../gedit/gedit-commands-help.c:93
 msgid "translator-credits"
 msgstr "Nhóm Việt hoá GNOME (http://gnomevi.sourceforge.net)"
-
-#:../gedit/gedit-commands-help.c:101
-msgid "gedit"
-msgstr "gedit"
 
 #:../gedit/gedit-commands-search.c:166
 #,c-format
@@ -1184,12 +1189,12 @@ msgid "Unsaved Document %d"
 msgstr "Tài liệu chưa lưu %d"
 
 #.bad bad luck...
-#:../gedit/gedit-document-saver.c:523
+#:../gedit/gedit-document-saver.c:537
 msgid "Could not obtain backup filename"
 msgstr "Không thể lấy tên tập tin sao lưu"
 
 #:../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#:../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
+#:../gedit/gedit-window.c:1535 ../gedit/gedit-window.c:1540
 msgid "Read Only"
 msgstr "Chỉ đọc)"
 
@@ -1699,11 +1704,11 @@ msgstr "Bộ cầm phít"
 msgid "Enabled"
 msgstr "Bật"
 
-#:../gedit/gedit-plugin-manager.c:540
+#:../gedit/gedit-plugin-manager.c:541
 msgid "_About Plugin"
 msgstr "_Giới thiệu bộ cầm phít"
 
-#:../gedit/gedit-plugin-manager.c:544
+#:../gedit/gedit-plugin-manager.c:545
 msgid "C_onfigure Plugin"
 msgstr "Cấu _hình bộ cầm phít"
 
@@ -1711,7 +1716,7 @@ msgstr "Cấu _hình bộ cầm phít"
 msgid "Cannot initialize preferences manager."
 msgstr "Không thể khởi động bộ quản lý thông số."
 
-#:../gedit/gedit-prefs-manager.c:1388
+#:../gedit/gedit-prefs-manager.c:1390
 #,c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Yêu cầu `%s', nhận được `%s' cho khóa %s"
@@ -1902,7 +1907,7 @@ msgstr "Kiểu MIME:"
 msgid "Encoding:"
 msgstr "Bảng mã:"
 
-#:../gedit/gedit-tab.c:2012
+#:../gedit/gedit-tab.c:2013
 #,c-format
 msgid "Rendering page %d of %d..."
 msgstr "Vẽ trang %d trên %d..."
@@ -2239,7 +2244,7 @@ msgstr "Mở tập tin mới dùng"
 msgid "Open"
 msgstr "Mở"
 
-#:../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
+#:../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1811
 #,c-format
 msgid "Activate %s"
 msgstr "Kích hoạt %s"
@@ -2356,79 +2361,79 @@ msgstr "Công cụ bên Ngoài"
 msgid "You must be inside a word to run this command"
 msgstr "Bạn phải ở trong từ để chạy lệnh này"
 
-#:../plugins/externaltools/tools/functions.py:298
+#:../plugins/externaltools/tools/functions.py:299
 msgid "Running tool:"
 msgstr "Công cụ đang chạy:"
 
-#:../plugins/externaltools/tools/functions.py:308
+#:../plugins/externaltools/tools/functions.py:322
 msgid "Done."
 msgstr "Đã xong."
 
-#:../plugins/externaltools/tools/functions.py:310
+#:../plugins/externaltools/tools/functions.py:324
 msgid "Exited"
 msgstr "Đã thoát"
 
-#:../plugins/externaltools/tools/manager.py:42
+#:../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Không gì"
 
-#:../plugins/externaltools/tools/manager.py:43
+#:../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Tài liệu hiện có"
 
-#:../plugins/externaltools/tools/manager.py:44
+#:../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Vùng chọn hiện có"
 
-#:../plugins/externaltools/tools/manager.py:45
+#:../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Dòng hiện có"
 
-#:../plugins/externaltools/tools/manager.py:46
+#:../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Từ hiện có"
 
-#:../plugins/externaltools/tools/manager.py:49
+#:../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Chèn vào bảng xuất"
 
-#:../plugins/externaltools/tools/manager.py:50
+#:../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Tạo tài liệu mới"
 
-#:../plugins/externaltools/tools/manager.py:51
+#:../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Phụ thêm vào tài liệu hiện có"
 
-#:../plugins/externaltools/tools/manager.py:52
+#:../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Thay thế tài liệu hiện có"
 
-#:../plugins/externaltools/tools/manager.py:53
+#:../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Thay thế vùng chọn hiện có"
 
-#:../plugins/externaltools/tools/manager.py:54
+#:../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Chèn tại vị trí con trỏ"
 
-#:../plugins/externaltools/tools/manager.py:57
+#:../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Mọi tài liệu"
 
-#:../plugins/externaltools/tools/manager.py:58
+#:../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Mọi tài liệu từ các điều không tên"
 
-#:../plugins/externaltools/tools/manager.py:59
+#:../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Chỉ tập tin cục bộ"
 
-#:../plugins/externaltools/tools/manager.py:60
+#:../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Chỉ tập tin ở xa"
 
-#:../plugins/externaltools/tools/manager.py:61
+#:../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Chỉ tài liệu không tên"
 
@@ -2452,12 +2457,12 @@ msgstr "Công cụ mới"
 msgid "This accelerator is already bound to %s"
 msgstr "Phím tổ hợp này đã được gán cho %s"
 
-#:../plugins/externaltools/tools/manager.py:329
+#:../plugins/externaltools/tools/manager.py:333
 #:../plugins/snippets/snippets/SnippetsDialog.py:562
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Hãy gõ phím tắt mới, hoặc bấm phím Backspace để xóa"
 
-#:../plugins/externaltools/tools/manager.py:331
+#:../plugins/externaltools/tools/manager.py:335
 #:../plugins/snippets/snippets/SnippetsDialog.py:564
 msgid "Type a new accelerator"
 msgstr "Gõ phím tắt mới"
@@ -2557,8 +2562,8 @@ msgid "Modelines"
 msgstr "Dòng chế độ"
 
 #:../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-msgid "Opens an interactive python console in the bottom panel."
-msgstr "Mở bàn giao tiếp python tương tác trong bảng dưới."
+msgid "Interactive python console standing in the bottom panel"
+msgstr "Bàn giao tiếp python tương tác trong bảng dưới."
 
 #:../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -3000,12 +3005,12 @@ msgstr "(đúng chính tả)"
 msgid "Completed spell checking"
 msgstr "Hoàn thành kiểm tra chính tả"
 
-#:../plugins/spell/gedit-spell-language-dialog.c:245
+#:../plugins/spell/gedit-spell-language-dialog.c:244
 #,c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Không thể tìm thấy ô điều khiển yêu cầu trong %s."
 
-#:../plugins/spell/gedit-spell-language-dialog.c:266
+#:../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "Ngôn ngữ"
 
