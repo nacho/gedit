@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-28 06:30+0100\n"
-"PO-Revision-Date: 2006-02-28 11:45+0530\n"
+"POT-Creation-Date: 2006-04-18 06:11+0200\n"
+"PO-Revision-Date: 2006-04-18 10:10+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -26,12 +26,13 @@ msgstr ""
 "\n"
 "\n"
 "\n"
+"\n"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "લખાણ ફાઇલોમાં ફેરફાર કરો"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:460
 msgid "Text Editor"
 msgstr "લખાણ સંપાદક"
 
@@ -1010,20 +1011,20 @@ msgstr "મૂળભુત થીમ ફોન્ટ વાપરો (_U)"
 msgid "_minutes"
 msgstr "મિનિટો (_m)"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:234
+#: ../gedit/dialogs/gedit-search-dialog.c:260
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "બદલો"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
+#: ../gedit/dialogs/gedit-search-dialog.c:272 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "શોધો"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298
+#: ../gedit/dialogs/gedit-search-dialog.c:324
 msgid "Replace _All"
 msgstr "બધુ બદલો (_A)"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:299
+#: ../gedit/dialogs/gedit-search-dialog.c:325
 #: ../gedit/gedit-commands-file.c:559
 msgid "_Replace"
 msgstr "બદલો (_R)"
@@ -1070,6 +1071,10 @@ msgstr "હાલના જીએડીટના નમૂનાની નવી
 msgid "Create a new document in an existing instance of gedit"
 msgstr "હાલના જીએડીટના નમૂનામાં નવો દસ્તાવેજ બનાવો"
 
+#: ../gedit/gedit.c:84
+msgid "[FILE...]"
+msgstr "[FILE...]"
+
 #: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
@@ -1079,6 +1084,11 @@ msgstr "%s: મલીન ફાઈલ નામ અથવા URI.\n"
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: અયોગ્ય એનકોડીંગ.\n"
+
+#. Setup command line options
+#: ../gedit/gedit.c:452
+msgid "- Edit text files"
+msgstr "- લખાણ ફાઈલોમાં ફેરફાર કરો"
 
 #: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #, c-format
@@ -1118,26 +1128,26 @@ msgstr ""
 "\"%s\" ફાઇલ ફક્ત વાંચી શકાય તેવી છે.\n"
 " શું તમે તેને સંગ્રહ થઈ રહેલ ફાઇલ સાથે બદલવાનો પ્રયાસ કરવા માગો છો?"
 
-#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
+#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:815
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "ફાઈલ '%s' સંગ્રહી રહ્યા છીએ…"
 
-#: ../gedit/gedit-commands-file.c:707
+#: ../gedit/gedit-commands-file.c:714
 msgid "Save As…"
 msgstr "આ રીતે સંગ્રહ કરો…"
 
-#: ../gedit/gedit-commands-file.c:1003
+#: ../gedit/gedit-commands-file.c:1010
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "દસ્તાવેજ '%s' ને પહેલાંની સ્થિતિમાં લાવી રહ્યા છીએ…"
 
-#: ../gedit/gedit-commands-file.c:1025
+#: ../gedit/gedit-commands-file.c:1032
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "શું દસ્તાવેજ '%s' ના નહિં સંગ્રહાયેલ ફેરફારો ઉલટાવવા માંગો છો?"
 
-#: ../gedit/gedit-commands-file.c:1034
+#: ../gedit/gedit-commands-file.c:1041
 #, c-format
 msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1146,11 +1156,11 @@ msgid_plural ""
 msgstr[0] "દસ્તાવેજમાં છેલ્લી %ld સેકન્ડમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 msgstr[1] "દસ્તાવેજમાં છેલ્લી %ld સેકન્ડોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
-#: ../gedit/gedit-commands-file.c:1043
+#: ../gedit/gedit-commands-file.c:1050
 msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr "દસ્તાવેજમાં છેલ્લી મિનિટમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
-#: ../gedit/gedit-commands-file.c:1049
+#: ../gedit/gedit-commands-file.c:1056
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1161,7 +1171,7 @@ msgid_plural ""
 msgstr[0] "દસ્તાવેજમાં છેલ્લી મિનિટ અને %ld સેકન્ડમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 msgstr[1] "દસ્તાવેજમાં છેલ્લી મિનિટ અને %ld સેકન્ડોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
-#: ../gedit/gedit-commands-file.c:1059
+#: ../gedit/gedit-commands-file.c:1066
 #, c-format
 msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -1170,14 +1180,14 @@ msgid_plural ""
 msgstr[0] "દસ્તાવેજમાં છેલ્લી %ld મિનિટમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 msgstr[1] "દસ્તાવેજમાં છેલ્લી %ld મિનિટોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
-#: ../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
+#: ../gedit/gedit-commands-file.c:1081 ../gedit/gedit-commands-file.c:1102
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "દસ્તાવેજમાં છેલ્લા કલાકમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 msgstr[1] "દસ્તાવેજમાં છેલ્લા %d કલાકોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
-#: ../gedit/gedit-commands-file.c:1080
+#: ../gedit/gedit-commands-file.c:1087
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1188,7 +1198,7 @@ msgid_plural ""
 msgstr[0] "દસ્તાવેજમાં છેલ્લા કલાક અને %d મિનિટમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 msgstr[1] "દસ્તાવેજમાં છેલ્લા કલાક અને %d મિનિટોમાં થયેલા બદલાવો કાયમ માટે ખોવાઈ જશે."
 
-#: ../gedit/gedit-commands-file.c:1121
+#: ../gedit/gedit-commands-file.c:1128
 msgid "_Revert"
 msgstr "પહેલાની સ્થિતિમાં લાવો (_R)"
 
@@ -1196,13 +1206,9 @@ msgstr "પહેલાની સ્થિતિમાં લાવો (_R)"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "જીએડીટ એ જીનાેમ ડેસ્કટોપ માટેનું નાનુ અને હલકુ લખાણ સંપાદક છે"
 
-#: ../gedit/gedit-commands-help.c:98
+#: ../gedit/gedit-commands-help.c:93
 msgid "translator-credits"
 msgstr "અંકિત પટેલ <ankit644@yahoo.com>"
-
-#: ../gedit/gedit-commands-help.c:101
-msgid "gedit"
-msgstr "જીએડીટ"
 
 #: ../gedit/gedit-commands-search.c:166
 #, c-format
@@ -1225,12 +1231,12 @@ msgid "Unsaved Document %d"
 msgstr "અસંગ્રહિત દસ્તાવેજ %d"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:523
+#: ../gedit/gedit-document-saver.c:537
 msgid "Could not obtain backup filename"
 msgstr "બેકઅપ ફાઇલનામ મેળવી શક્યા નહિં"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
+#: ../gedit/gedit-window.c:1535 ../gedit/gedit-window.c:1540
 msgid "Read Only"
 msgstr "માત્ર વાંચી શકાય તેવું"
 
@@ -1762,11 +1768,11 @@ msgstr "પ્લગઈન"
 msgid "Enabled"
 msgstr "સક્રિય કરાયેલ"
 
-#: ../gedit/gedit-plugin-manager.c:540
+#: ../gedit/gedit-plugin-manager.c:541
 msgid "_About Plugin"
 msgstr "પ્લગઈન વિશે (_A)"
 
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:545
 msgid "C_onfigure Plugin"
 msgstr "પ્લગઈનને રુપરેખાંકિત કરો (_o)"
 
@@ -1774,7 +1780,7 @@ msgstr "પ્લગઈનને રુપરેખાંકિત કરો (_o
 msgid "Cannot initialize preferences manager."
 msgstr "પસંદગી વ્યવસ્થાપકનો પ્રારંભ કરી શકતા નથી."
 
-#: ../gedit/gedit-prefs-manager.c:1388
+#: ../gedit/gedit-prefs-manager.c:1390
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "%s કી માટે `%s' ને ઈચ્છિત `%s' મળ્યુ"
@@ -1966,7 +1972,7 @@ msgstr "MIME પ્રકાર:"
 msgid "Encoding:"
 msgstr "સંગ્રહપદ્ધતિ: "
 
-#: ../gedit/gedit-tab.c:2012
+#: ../gedit/gedit-tab.c:2013
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "%d માંના %d પાનાને ઘાટ આપી રહ્યા છે..."
@@ -2303,7 +2309,7 @@ msgstr "હાલમાં વપરાયેલી એક ફાઇલ ખો�
 msgid "Open"
 msgstr "ખોલો"
 
-#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
+#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1811
 #, c-format
 msgid "Activate %s"
 msgstr "%s કાર્યરત કરો"
@@ -2421,79 +2427,79 @@ msgstr "બાહ્ય સાધનો"
 msgid "You must be inside a word to run this command"
 msgstr "આ આદેશ ચલાવવા માટે તમે આંતરિક હોવા જ જોઈએ"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:299
 msgid "Running tool:"
 msgstr "ચાલી રહેલ સાધન:"
 
-#: ../plugins/externaltools/tools/functions.py:308
+#: ../plugins/externaltools/tools/functions.py:322
 msgid "Done."
 msgstr "પૂર્ણ."
 
-#: ../plugins/externaltools/tools/functions.py:310
+#: ../plugins/externaltools/tools/functions.py:324
 msgid "Exited"
 msgstr "બહાર નીકળી ગયેલ"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "કંઈ નહિં"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "વર્તમાન દસ્તાવેજ"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "વર્તમાન પસંદગી"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "વર્તમાન લીટી"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "વર્તમાન શબ્દ"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "આઉટપુટ પેનલમાં દાખલ કરો"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "નવો દસ્તાવેજ બનાવો"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "વર્તમાન દસ્તાવેજમાં ઉમેરો"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "વર્તમાન દસ્તાવેજ બદલો"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "વર્તમાન પસંદગી બદલો"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "વર્તમાન સ્થાને દાખલ કરો"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "બધા દસ્તાવેજો"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "શીર્ષકવિહીન સિવાયના બધા દસ્તાવેજો"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "માત્ર સ્થાનિક ફાઈલો જ"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "માત્ર દૂરસ્થ ફાઈલો જ"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "માત્ર શીર્ષકવિહીન દસ્તાવેજો જ"
 
@@ -2517,12 +2523,12 @@ msgstr "નવું સાધન"
 msgid "This accelerator is already bound to %s"
 msgstr "આ પ્રવેગક પહેલાથી જ %s સાથે બંધાયેલ છે"
 
-#: ../plugins/externaltools/tools/manager.py:329
+#: ../plugins/externaltools/tools/manager.py:333
 #: ../plugins/snippets/snippets/SnippetsDialog.py:562
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "નવો પ્રવેગક લખો, અથવા સાફ કરવા માટે બેકસ્પેસ દબાવો"
 
-#: ../plugins/externaltools/tools/manager.py:331
+#: ../plugins/externaltools/tools/manager.py:335
 #: ../plugins/snippets/snippets/SnippetsDialog.py:564
 msgid "Type a new accelerator"
 msgstr "નવો પ્રવેગક લખો"
@@ -2623,8 +2629,8 @@ msgid "Modelines"
 msgstr "સ્થિતિવાક્યો"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-msgid "Opens an interactive python console in the bottom panel."
-msgstr "તળિયેની પેનલમાં પૂછપરછવાળું python કન્સોલ ખોલે છે."
+msgid "Interactive python console standing in the bottom panel"
+msgstr "પૂછપરછવાળું python કન્સોલ એ તળિયેની પેનલમાં ઊભું છે"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -3066,12 +3072,12 @@ msgstr "(જોડણી સુધારો)"
 msgid "Completed spell checking"
 msgstr "જોડણી ચકાસણી પૂરી થઈ"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:245
+#: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "%sમાં જરૂરી વિજેટો શોધી શકાયા નથી."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:266
+#: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "ભાષાઓ"
 
