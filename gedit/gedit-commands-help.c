@@ -82,7 +82,8 @@ gedit_cmd_help_about (GtkAction   *action,
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	logo = gdk_pixbuf_new_from_file (GNOME_ICONDIR "/gedit-logo.png", NULL);
+	logo = gdk_pixbuf_new_from_file (GEDIT_DATADIR "/logo/gedit-logo.png",
+					 NULL);
 
 	gtk_show_about_dialog (GTK_WINDOW (window),
 			       "authors", authors,

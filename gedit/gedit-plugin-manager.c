@@ -88,15 +88,12 @@ about_button_cb (GtkWidget          *button,
 		 GeditPluginManager *pm)
 {
 	GeditPluginInfo *info;
-	GdkPixbuf *pixbuf = NULL;
 
 	gedit_debug (DEBUG_PLUGINS);
 
 	info = plugin_manager_get_selected_plugin (pm);
 
 	g_return_if_fail (info != NULL);
-
-	pixbuf = gdk_pixbuf_new_from_file (GNOME_ICONDIR "/gedit-plugin-manager.png", NULL);
 
 	/* if there is another about dialog already open destroy it */
 	if (pm->priv->about)
@@ -108,7 +105,7 @@ about_button_cb (GtkWidget          *button,
 		"authors", gedit_plugins_engine_get_plugin_authors (info),
 		"comments", gedit_plugins_engine_get_plugin_description (info),
 		"website", gedit_plugins_engine_get_plugin_website (info),
-		"logo", pixbuf,
+		"logo-icon-name", "gedit-plugin",
 		NULL);
 
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about),
@@ -126,9 +123,6 @@ about_button_cb (GtkWidget          *button,
 	gtk_window_set_transient_for (GTK_WINDOW (pm->priv->about),
 				      GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET(pm))));
 	gtk_widget_show (pm->priv->about);
-
-	if (pixbuf != NULL)
-		g_object_unref (pixbuf);
 }
 
 static void

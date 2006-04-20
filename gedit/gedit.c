@@ -500,6 +500,9 @@ main (int argc, char *argv[])
 
 	gedit_debug_message (DEBUG_APP, "Set icon");
 	
+	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
+					   GEDIT_ICONDIR);
+
 	/* Set default icon */
 	gtk_window_set_default_icon_name ("text-editor");
 

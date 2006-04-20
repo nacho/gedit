@@ -1,11 +1,9 @@
+icondir = $(datadir)/gedit-2/icons
+icon_DATA = gedit-plugin.png
 
-appicondir = $(datadir)/pixmaps
-appicon_DATA = gedit-icon.png
-
-applogodir = $(datadir)/pixmaps
-applogo_DATA = gedit-logo.png 		\
-	gedit-plugin-manager.png 	
+logodir = $(datadir)/gedit-2/logo
+logo_DATA = gedit-logo.png
 
 EXTRA_DIST = \
-	$(appicon_DATA) \
-	$(applogo_DATA)
+	$(icon_DATA) \
+	$(logo_DATA)

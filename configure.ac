@@ -98,23 +98,6 @@ dnl ================================================================
 AM_GCONF_SOURCE_2
 
 dnl ================================================================
-dnl GEDIT_DATA_DIR - Sets the location of the data directory, where we install
-dnl source files added to projects (such as all the Gnome m4 macros).
-dnl This will substitute GEDIT_DATA_DIR in config.h.
-dnl ================================================================
-
-if test "x${datadir}" = 'x${prefix}/share'; then
-  if test "x${prefix}" = "xNONE"; then
-    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${ac_default_prefix}/share/${PACKAGE}", [Directory of data files])
-  else
-    AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${prefix}/share/${PACKAGE}", [Directory of data files])
-  fi
-else
-  AC_DEFINE_UNQUOTED(GEDIT_DATA_DIR, "${datadir}/${PACKAGE}", [Directory of data files])
-fi
-
-
-dnl ================================================================
 dnl Python
 dnl ================================================================
 

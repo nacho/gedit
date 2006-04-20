@@ -1,3 +1,24 @@
+2006-04-18  Steve Frécinaux  <steve@istique.net>
+
+	* pixmaps/*.png: add Andreas Nilsson's puzzle icon (gedit-plugin.png).
+	Get rid of gedit-icon.png and gedit-plugin-manager.png since they are
+	not used anymore.
+
+	* pixmaps/Makefile.am: install the logo into $prefix/share/gedit-2/logo
+	and the plugin icon into $prefix/share/gedit-2/icons.
+
+	* gedit/Makefile.am: define GEDIT_DATADIR and GEDIT_ICONDIR, and
+	remove GNOME_ICONDIR which is not used anymore.
+	
+	* gedit/gedit-commands-help.c: update the logo path.
+
+	* gedit/gedit.c: add GEDIT_ICONDIR to the icon theme lookup directories.
+
+	* gedit/gedit-plugin-manager.c: use the gedit-plugin icon from icon
+	theme in the plugin about box.
+
+	* configure.ac: Remove unused definition of GEDIT_DATA_DIR in config.h.
+
 2006-04-18  Brian Pepple  <bdpepple@gmail.com>
 
 	* configure.ac: Use IT_PROG_INTLTOOL instead of AC_PROG_INTLTOOL.

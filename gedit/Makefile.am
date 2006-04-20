@@ -10,11 +10,12 @@ INCLUDES =							\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DDATADIR=\""$(datadir)"\"				\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\"		\
+	-DGEDIT_DATADIR=\""$(datadir)/gedit-2"\"		\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
 	-DGEDIT_UI_DIR=\""$(datadir)/gedit-2/ui/"\"		\
 	-DGEDIT_PLUGINDIR=\""$(libdir)/gedit-2/plugins"\"	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"	\
+	-DGEDIT_ICONDIR=\""$(datadir)/gedit-2/icons"\"
 	
 if ENABLE_PYTHON
 INCLUDES += \
