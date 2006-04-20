@@ -1,3 +1,36 @@
+2006-04-20  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #338173 - Gedit show keyring store password on the window 
+	title bar
+	
+	* gedit/gedit-utils.[ch] (gedit_utils_format_uri_for_display): new
+	function similar to gnome_vfs_format_uri_for_display but that hides
+	the password if needed
+	
+	* gedit/gedit-commands-file.c (load_file_list)
+	(replace_read_only_file) (save_dialog_response_cb): use
+	gedit_utils_format_uri_for_display instead of 
+	gnome_vfs_format_uri_for_display
+
+	* gedit/gedit-io-error-message-area.c
+	(gedit_unrecoverable_loading_error_message_area_new)
+	(gedit_unrecoverable_reverting_error_message_area_new)
+	(gedit_conversion_error_while_loading_message_area_new)
+	(gedit_conversion_error_while_saving_message_area_new)
+	(gedit_file_already_open_warning_message_area_new)
+	(gedit_externally_modified_saving_error_message_area_new)
+	(gedit_no_backup_saving_error_message_area_new)
+	(gedit_unrecoverable_saving_error_message_area_new): ditto
+
+	* gedit/gedit-tab.c (show_saving_message_area): ditto
+	
+	* gedit/gedit-document.c (gedit_document_get_uri_for_display): hides
+	the password if needed
+
+	* gedit/gedit-window.c (recent_tooltip_func_gtk)
+	(recent_tooltip_func_uim): uses gedit_utils_format_uri_for_display 
+	instead of egg_recent_item_get_uri_for_display
+
 2006-04-18  Steve Frécinaux  <steve@istique.net>
 
 	* pixmaps/*.png: add Andreas Nilsson's puzzle icon (gedit-plugin.png).

@@ -772,9 +772,22 @@ gedit_document_get_uri_for_display (GeditDocument *doc)
 
 	if (doc->priv->uri == NULL)
 		return g_strdup_printf (_("Unsaved Document %d"),
-					doc->priv->untitled_number);	      
-	else
+					doc->priv->untitled_number);
+	else if (doc->priv->vfs_uri == NULL)
 		return gnome_vfs_format_uri_for_display (doc->priv->uri);
+	else
+	{	
+		gchar *name;
+		gchar *uri_for_display;
+		
+		name = gnome_vfs_uri_to_string (doc->priv->vfs_uri, GNOME_VFS_URI_HIDE_PASSWORD);
+		g_return_val_if_fail (name != NULL, gnome_vfs_format_uri_for_display (doc->priv->uri));
+		
+		uri_for_display = gnome_vfs_format_uri_for_display (name);
+		g_free (name);
+		
+		return uri_for_display;
+	}
 }
 
 /* move to gedit-utils? */

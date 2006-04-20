@@ -1012,3 +1012,56 @@ gedit_utils_make_canonical_uri_from_shell_arg (const gchar *str)
 	
 	return NULL;
 }
+
+/**
+ * gedit_utils_format_uri_for_display:
+ * @uri: uri to be displayed.
+ *
+ * Filter, modify, unescape and change @uri to make it appropriate
+ * for display to users.
+ * 
+ * Rules:
+ * <ul>
+ * <li>file: uri without fragments should appear as local paths.</li>
+ * <li>file: uri with fragments should appear as file:uri.</li>
+ * <li>All other uri appear as expected.</li>
+ * </ul>
+ *
+ * This function is very similar to gnome_vfs_format_uri_for_display but remove
+ * the password from the resulting string
+ *
+ * Return value: a string which represents @uri and can be displayed.
+ */
+gchar *
+gedit_utils_format_uri_for_display (const gchar *uri)
+{
+	GnomeVFSURI *vfs_uri;
+	
+	g_return_val_if_fail (uri != NULL, NULL);
+
+	/* Note: vfs_uri may be NULL for some valid but
+	 * unsupported uris */
+	vfs_uri = gnome_vfs_uri_new (uri);
+	
+	if (vfs_uri == NULL)
+	{
+		/* We may disclose the password here, but there is nothing we
+		 * can do since we cannot get a valid vfs_uri */
+		return gnome_vfs_format_uri_for_display (uri);
+	}
+	else
+	{	
+		gchar *name;
+		gchar *uri_for_display;
+		
+		name = gnome_vfs_uri_to_string (vfs_uri, GNOME_VFS_URI_HIDE_PASSWORD);
+		g_return_val_if_fail (name != NULL, gnome_vfs_format_uri_for_display (uri));
+		
+		uri_for_display = gnome_vfs_format_uri_for_display (name);
+		g_free (name);
+		
+		gnome_vfs_uri_unref (vfs_uri);
+		
+		return uri_for_display;
+	}
+}

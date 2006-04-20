@@ -850,7 +850,7 @@ recent_tooltip_func_gtk (GtkTooltips   *tooltips,
 	gchar *uri_for_display;
 	gchar *trunc_uri;
 
-	uri_for_display = egg_recent_item_get_uri_for_display (item);
+	uri_for_display = gedit_utils_format_uri_for_display (egg_recent_item_peek_uri (item));
 	g_return_if_fail (uri_for_display != NULL);
 
 	trunc_uri = gedit_utils_str_middle_truncate (uri_for_display,
@@ -875,7 +875,7 @@ recent_tooltip_func_uim (EggRecentItem *item,
 	gchar *uri_for_display;
 	gchar *trunc_uri;
 
-	uri_for_display = egg_recent_item_get_uri_for_display (item);
+	uri_for_display = gedit_utils_format_uri_for_display (egg_recent_item_peek_uri (item));
 	g_return_val_if_fail (uri_for_display != NULL, NULL);
 
 	trunc_uri = gedit_utils_str_middle_truncate (uri_for_display,

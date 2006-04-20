@@ -734,7 +734,7 @@ show_saving_message_area (GeditTab *tab)
 
 		from = short_name;
 
-		to = gnome_vfs_format_uri_for_display (tab->priv->tmp_save_uri);
+		to = gedit_utils_format_uri_for_display (tab->priv->tmp_save_uri);
 
 		str = gedit_utils_str_middle_truncate (to, 
 						       MAX (20, MAX_MSG_LENGTH - len));

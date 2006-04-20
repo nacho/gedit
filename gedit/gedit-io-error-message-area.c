@@ -129,7 +129,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 	g_return_val_if_fail (error != NULL, NULL);
 	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
 
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -357,7 +357,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	g_return_val_if_fail (error != NULL, NULL);
 	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
 
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -685,7 +685,7 @@ gedit_conversion_error_while_loading_message_area_new (
 	g_return_val_if_fail ((error->domain == G_CONVERT_ERROR) ||
 			      (error->domain == GEDIT_CONVERT_ERROR), NULL);
 	
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -751,7 +751,7 @@ gedit_conversion_error_while_saving_message_area_new (
 	g_return_val_if_fail (error->domain == G_CONVERT_ERROR, NULL);
 	g_return_val_if_fail (encoding != NULL, NULL);
 	
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -815,7 +815,7 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
        	gchar *uri_for_display;
        	gchar *temp_uri_for_display;
 	
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -907,7 +907,7 @@ gedit_externally_modified_saving_error_message_area_new (
 	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
 	g_return_val_if_fail (error->code == GEDIT_DOCUMENT_ERROR_EXTERNALLY_MODIFIED, NULL);
 
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -1002,7 +1002,7 @@ gedit_no_backup_saving_error_message_area_new (const gchar  *uri,
 	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
 	g_return_val_if_fail (error->code == GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP, NULL);
 
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain
@@ -1097,7 +1097,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	g_return_val_if_fail (error != NULL, NULL);
 	g_return_val_if_fail (error->domain == GEDIT_DOCUMENT_ERROR, NULL);
 
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
 	 * though the dialog uses wrapped text, if the URI doesn't contain

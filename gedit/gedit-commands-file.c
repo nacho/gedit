@@ -121,7 +121,7 @@ load_file_list (GeditWindow         *window,
 				/* There is only a single file to load */
 				gchar *uri_for_display;
 
-				uri_for_display = gnome_vfs_format_uri_for_display (uri);
+				uri_for_display = gedit_utils_format_uri_for_display (uri);
 
 				gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 							       window->priv->generic_message_cid,
@@ -526,7 +526,7 @@ replace_read_only_file (GtkWindow   *parent,
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	full_formatted_uri = gnome_vfs_format_uri_for_display (uri);
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
 	g_return_val_if_fail (full_formatted_uri != NULL, FALSE);
 
 	/* Truncate the URI so it doesn't get insanely wide. Note that even
@@ -610,7 +610,7 @@ save_dialog_response_cb (GeditFileChooserDialog *dialog,
 		doc = gedit_tab_get_document (tab);
 		g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
-		uri_for_display = gnome_vfs_format_uri_for_display (uri);
+		uri_for_display = gedit_utils_format_uri_for_display (uri);
 
 		gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
 					        window->priv->generic_message_cid,

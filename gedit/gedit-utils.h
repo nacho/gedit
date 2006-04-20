@@ -132,6 +132,11 @@ gboolean	 gedit_utils_get_glade_widgets		(const gchar  *filename,
 /* Return NULL if str is not a valid URI and/or filename */
 gchar		*gedit_utils_make_canonical_uri_from_shell_arg
 							(const gchar *str);
+		
+/* Like gnome_vfs_format_uri_for_display but removes the password from the 
+ * resulting string */
+gchar		*gedit_utils_format_uri_for_display 	(const gchar *uri);
+
 G_END_DECLS
 
 #endif /* __GEDIT_UTILS_H__ */
