@@ -4,7 +4,7 @@
  *
  * Copyright (C) 1998, 1999 Alex Roberts, Evan Lawrence
  * Copyright (C) 2000, 2001 Chema Celorio, Paolo Maggi
- * Copyright (C) 2002-2005 Paolo Maggi
+ * Copyright (C) 2002-2006 Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  */
 
 /*
- * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a
+ * Modified by the gedit Team, 1998-2006. See the AUTHORS file for a
  * list of people on the gedit Team.
  * See the ChangeLog files for a list of changes.
  *
@@ -49,7 +49,6 @@
 
 #define GEDIT_SEARCH_DIALOG_KEY		"gedit-search-dialog-key"
 #define GEDIT_LAST_SEARCH_DATA_KEY	"gedit-last-search-data-key"
-
 
 /* data stored in the document
  * to persist the last searched
@@ -307,7 +306,7 @@ do_find (GeditSearchDialog *dialog,
 	}
 
 	g_free (search_text);
-
+	
 	found = run_search (active_view,
 			    wrap_around,
 			    search_backwards);
@@ -682,12 +681,20 @@ do_find_again (GeditWindow *window,
 	       gboolean     backward)
 {
 	GeditView *active_view;
-
+	gboolean wrap_around = TRUE;
+	LastSearchData *data;
+	
 	active_view = gedit_window_get_active_view (window);
 	g_return_if_fail (active_view != NULL);
 
+	data = g_object_get_data (G_OBJECT (gtk_text_view_get_buffer (active_view)), 
+				  GEDIT_LAST_SEARCH_DATA_KEY);
+					    
+	if (data != NULL)
+		wrap_around = data->wrap_around;					    
+
 	run_search (active_view,
-	   	    TRUE,
+	   	    wrap_around,
 	   	    backward);
 }				 
 
