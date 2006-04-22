@@ -24,9 +24,9 @@ from SnippetPlaceholders import *
 from SnippetComplete import SnippetComplete
 
 class SnippetController:
-	TAB_KEY_VAL = (gtk.gdk.keyval_from_name('Tab'), \
-			gtk.gdk.keyval_from_name('ISO_Left_Tab'))
-	SPACE_KEY_VAL = (gtk.gdk.keyval_from_name('space'),)
+	TAB_KEY_VAL = (gtk.keysyms.Tab, \
+			gtk.keysyms.ISO_Left_Tab)
+	SPACE_KEY_VAL = (gtk.keysyms.space,)
 	
 	def __init__(self, instance, view):
 		self.view = None

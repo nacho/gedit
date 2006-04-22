@@ -544,7 +544,8 @@ class SnippetsDialog:
 			
 			self.snippet_changed()
 			return True
-		elif gdk.keyval_to_unicode(event.keyval):
+		elif (gdk.keyval_to_unicode(event.keyval) and mask) or \
+				event.keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1):
 			if mask:
 				# New accelerator
 				self.set_accelerator(event.keyval, mask)
@@ -552,10 +553,8 @@ class SnippetsDialog:
 				self.snippet_changed()
 				self.tree_view.grab_focus()
 
-			# Capture all `normal characters`
-			return True
 		else:
-			return False
+			return True
 	
 	def on_entry_accelerator_focus_in(self, entry, event):
 		if self.snippet['accelerator']:
