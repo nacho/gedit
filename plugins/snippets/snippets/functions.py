@@ -155,3 +155,15 @@ def valid_accelerator(keyval, mod):
 	
 	return (mod and (gdk.keyval_to_unicode(keyval) or \
 			keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1)))
+
+def buffer_word_boundary(buf):
+	iter = buf.get_iter_at_mark(buf.get_insert())
+	start = iter.copy()
+	
+	if not iter.starts_word():
+		start.backward_word_start()
+	
+	if not iter.ends_word():
+		iter.forward_word_end()
+		
+	return (start, iter)

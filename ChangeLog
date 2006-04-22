@@ -1,4 +1,16 @@
 2006-04-22  Jesse van den Kieboom  <jesse@icecrew.nl>
+	
+	Fixed bug #339396 - Snippets plugin could support GEDIT_CURRENT_WORD 
+	variable expansion
+	
+	* plugins/snippets/snippets/SnippetController.py:
+	* plugins/snippets/snippets/functions.py:
+	
+	Added the GEDIT_CURRENT_WORD variable and implemented the removal of 
+	the	current word from the buffer prior to the insertion of the 
+	snippet	when the variable is used
+	
+2006-04-22  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	Fixed bug #339398 - Bottom panel: size changes when resizing window, 
 	size is not properly restored after restart

@@ -259,27 +259,55 @@ class SnippetController:
 		(current, prev) = self.previous_placeholder()
 		return self.goto_placeholder(current, prev)
 
-	def update_environment(self):
-		buf = self.view.get_buffer()
+	def env_get_selected_text(self, buf):
 		bounds = buf.get_selection_bounds()
-		
+
 		if bounds:
-			os.environ['GEDIT_SELECTED_TEXT'] = buf.get_text(bounds[0], \
-					bounds[1])
+			return buf.get_text(bounds[0], bounds[1])
 		else:
-			os.environ['GEDIT_SELECTED_TEXT'] = ''
+			return ''
+
+	def env_get_current_word(self, buf):
+		start, end = buffer_word_boundary(buf)
 		
+		return buf.get_text(start, end)
+		
+	def env_get_filename(self, buf):
 		uri = buf.get_uri()
 		
 		if uri:
-			os.environ['GEDIT_FILENAME'] = \
-					buf.get_uri_for_display()
-			os.environ['GEDIT_BASENAME'] = \
-					os.path.basename(uri)
+			return buf.get_uri_for_display()
 		else:
-			os.environ['GEDIT_FILENAME'] = ''
-			os.environ['GEDIT_BASENAME'] = ''
+			return ''
+	
+	def env_get_basename(self, buf):
+		uri = buf.get_uri()
 		
+		if uri:
+			return os.path.basename(uri)
+		else:
+			return ''
+
+	def update_environment(self):
+		buf = self.view.get_buffer()
+		
+		variables = {'GEDIT_SELECTED_TEXT': self.env_get_selected_text, \
+				'GEDIT_CURRENT_WORD': self.env_get_current_word, \
+				'GEDIT_FILENAME': self.env_get_filename, \
+				'GEDIT_BASENAME': self.env_get_basename}
+		
+		for var in variables:
+			os.environ[var] = variables[var](buf)
+	
+	def uses_current_word(self, snippet):
+		matches = re.findall('(\\\\*)\\$GEDIT_CURRENT_WORD', snippet['text'])
+		
+		for match in matches:
+			if len(match) % 2 == 0:
+				return True
+		
+		return False
+
 	def apply_snippet(self, snippet, start = None, end = None):
 		buf = self.view.get_buffer()
 		s = Snippet(snippet)
@@ -289,7 +317,13 @@ class SnippetController:
 		
 		if not end:
 			end = buf.get_iter_at_mark(buf.get_selection_bound())
-		
+
+		if start.equal(end) and self.uses_current_word(s):
+			# There is no tab trigger and no selection and the snippet uses
+			# the current word. Set start and end to the word boundary so that 
+			# it will be removed
+			start, end = buffer_word_boundary(buf)
+
 		# Set environmental variables
 		self.update_environment()
 		
@@ -299,7 +333,8 @@ class SnippetController:
 			self.goto_placeholder(current, None)
 		
 		buf.begin_user_action()
-		# Remove the tag
+
+		# Remove the tag, selection or current word
 		buf.delete(start, end)
 		
 		# Insert the snippet
