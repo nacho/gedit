@@ -1,4 +1,13 @@
 2006-04-22  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	Fixed bug #339398 - Bottom panel: size changes when resizing window, 
+	size is not properly restored after restart
+	
+	* gedit/gedit-window.c: pack the main notebook in the paned with
+	stretch = TRUE so the bottom panel size doesn't change when resizing
+	the paned
+	
+2006-04-22  Jesse van den Kieboom  <jesse@icecrew.nl>
 	
 	Fixed bug #339397 - Accelerator snippets don't work when gedit is just 
 	started

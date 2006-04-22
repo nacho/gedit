@@ -2749,7 +2749,7 @@ gedit_window_init (GeditWindow *window)
 	window->priv->notebook = gedit_notebook_new ();
   	gtk_paned_pack1 (GTK_PANED (window->priv->vpaned), 
   			 window->priv->notebook,
-  			 FALSE, 
+  			 TRUE, 
   			 TRUE);
   	gtk_widget_show (window->priv->notebook);  			 
 
