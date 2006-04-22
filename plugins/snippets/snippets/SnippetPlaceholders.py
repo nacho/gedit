@@ -23,6 +23,8 @@ import sys
 import signal
 import gobject
 import select
+import locale
+import subprocess
 
 # These are places in a view where the cursor can go and do things
 class SnippetPlaceholder:
@@ -31,10 +33,11 @@ class SnippetPlaceholder:
 		self.buf = view.get_buffer()
 		self.view = view
 		self.mirrors = []
+		self.leave_mirrors = []
 		self.tabstop = tabstop
 		self.default = self.expand_environment(default)
 		self.prev_contents = self.default
-
+		
 		if begin:
 			self.begin = self.buf.create_mark(None, begin, True)
 		else:
@@ -43,7 +46,7 @@ class SnippetPlaceholder:
 		self.end = None
 	
 	def literal(self, s):
-		return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
+		return repr(s)
 
 	def re_environment(self, m):
 		if m.group(1) or not m.group(2) in os.environ:
@@ -82,7 +85,7 @@ class SnippetPlaceholder:
 		
 		if self.end and not self.end.get_deleted():
 			self.buf.delete_mark(self.end)
-	
+		
 	# Do something on beginning this placeholder
 	def enter(self):
 		self.buf.move_mark(self.buf.get_insert(), self.begin_iter())
@@ -99,8 +102,8 @@ class SnippetPlaceholder:
 			return ''
 	
 	def add_mirror(self, mirror):
-		if type(mirror) is SnippetPlaceholderMirror:
-			self.instant_mirrors.append(mirror)
+		if isinstance(mirror, SnippetPlaceholderExpand):
+			self.leave_mirrors.append(mirror)
 		else:
 			self.mirrors.append(mirror)
 
@@ -114,12 +117,11 @@ class SnippetPlaceholder:
 		begin = self.begin_iter()
 		self.buf.delete(begin, self.end_iter())
 		# Insert the text from the mirror
-		insert_with_indent(self.view, begin, text)
-		self.buf.end_user_action()
-		self.prev_contents = text
 
-	def needs_updating(self):
-		return len(self.mirrors) != 0 and self.prev_contents != self.get_text()
+		insert_with_indent(self.view, begin, text, True)
+		self.buf.end_user_action()
+		
+		self.update_contents()
 
 	def update_contents(self):
 		prev = self.prev_contents
@@ -132,7 +134,7 @@ class SnippetPlaceholder:
 	# Do something on ending this placeholder
 	def leave(self):
 		# Notify mirrors
-		for mirror in self.mirrors:
+		for mirror in self.leave_mirrors:
 			mirror.update(self)
 
 # This is an placeholder which inserts a mirror of another SnippetPlaceholder	
@@ -140,7 +142,7 @@ class SnippetPlaceholderMirror(SnippetPlaceholder):
 	def __init__(self, view, tabstop, begin):
 		SnippetPlaceholder.__init__(self, view, -1, None, begin)
 		self.mirror_stop = tabstop
-	
+
 	def update(self, mirror):
 		self.set_text(mirror.get_text())
 	
@@ -182,30 +184,19 @@ class SnippetPlaceholderEnd(SnippetPlaceholder):
 
 # This placeholder is used to expand a command with embedded mirrors	
 class SnippetPlaceholderExpand(SnippetPlaceholder):
-	# s = [$n]: something shelly
-	def __init__(self, view, begin, s):
+	def __init__(self, view, tabstop, begin, s):
+		SnippetPlaceholder.__init__(self, view, tabstop, None, begin)
+
 		self.mirror_text = {0: ''}
+		self.timeout_id = 0
+		self.cmd = s
 
-		m = re.match('\\${([0-9]+)(:((\\\\:|[^:])+))?}:', s)
-		
-		if m:
-			# This thing has a tabstop
-			SnippetPlaceholder.__init__(self, view, int(m.group(1)), \
-					m.group(3), begin)
-			self.cmd = s[m.end():]
-		else:
-			SnippetPlaceholder.__init__(self, view, -1, None, begin)
-			self.cmd = s
-
-	# Check if all substitution placeholders are accounted for
-	def run_last(self, placeholders):
-		SnippetPlaceholder.run_last(self, placeholders)
-
+	def get_mirrors(self, placeholders):
 		s = self.cmd
-		mirrors = []
-				
+		mirrors = []		
+
 		while (True):
-			m = re.search('\\${([0-9]+)}', s)
+			m = re.search('\\${([0-9]+)}', s) or re.search('\\$([0-9]+)', s)
 			
 			if not m:
 				break
@@ -213,29 +204,39 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
 			tabstop = int(m.group(1))
 			
 			if placeholders.has_key(tabstop):
-				mirrors.append(tabstop)
+				if not tabstop in mirrors:
+					mirrors.append(tabstop)
+
 				s = s[m.end():]
 			else:
 				self.ok = False
-				break
+				return None
+		
+		return mirrors
+		
+	# Check if all substitution placeholders are accounted for
+	def run_last(self, placeholders):
+		SnippetPlaceholder.run_last(self, placeholders)
+
+		self.ok = True
+		mirrors = self.get_mirrors(placeholders)
 	
-		if self.ok:
-			if mirrors:
-				allDefault = True
+		if mirrors:
+			allDefault = True
 				
-				for mirror in mirrors:
-					p = placeholders[mirror]
-					p.add_mirror(self)
-					self.mirror_text[p.tabstop] = p.default
-					
-					if not p.default:
-						allDefault = False
+			for mirror in mirrors:
+				p = placeholders[mirror]
+				p.add_mirror(self)
+				self.mirror_text[p.tabstop] = p.default
 				
-				if allDefault:
-					self.expand(self.substitute())
-			else:
-				self.update(None)
-				self.ok = False
+				if not p.default:
+					allDefault = False
+			
+			if allDefault:
+				self.expand(self.substitute())
+		else:
+			self.update(None)
+			self.ok = False
 		
 	def re_placeholder(self, m):
 		if m.group(1):
@@ -248,9 +249,24 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
 			
 			return SnippetPlaceholder.literal(self, self.mirror_text[index])
 
+	def remove_timeout(self):
+		if self.timeout_id:
+			gobject.source_remove(self.timeout_id)
+			self.timeout_id = 0
+		
+	def install_timeout(self):
+		self.remove_timeout()
+		self.timeout_id = gobject.timeout_add(1000, self.timeout_cb)
+
+	def timeout_cb(self):
+		self.timeout_id = 0
+		
+		return False
+		
 	def substitute(self):
 		# substitute all mirrors, but also environmental variables
-		text = re.sub('(\\\\)?\\$({([0-9]+)}|([0-9]+))', self.re_placeholder, self.cmd)
+		text = re.sub('(\\\\)?\\$({([0-9]+)}|([0-9]+))', self.re_placeholder, 
+				self.cmd)
 		
 		return SnippetPlaceholder.expand_environment(self, text)
 	
@@ -281,30 +297,21 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
 
 # The shell placeholder executes commands in a subshell
 class SnippetPlaceholderShell(SnippetPlaceholderExpand):
-	def __init__(self, view, begin, s):
-		SnippetPlaceholderExpand.__init__(self, view, begin, s)
+	def __init__(self, view, tabstop, begin, s):
+		SnippetPlaceholderExpand.__init__(self, view, tabstop, begin, s)
+
 		self.shell = None
-		self.timeout_id = 0
 		self.remove_me = False
 
-	def remove_timeout(self):
-		if self.timeout_id:
-			gobject.source_remove(self.timeout_id)
-			self.timeout_id = 0
-		
-	def install_timeout(self):
-		self.remove_timeout()
-		self.timeout_id = gobject.timeout_add(1000, self.timeout_cb)
-	
 	def close_shell(self):
-		self.shell.close()
+		self.shell.stdout.close()
 		self.shell = None	
 	
 	def timeout_cb(self):
-		self.timeout_id = 0
+		SnippetPlaceholderExpand.timeout_cb(self)
 		
 		if not self.shell:
-			return
+			return False
 
 		gobject.source_remove(self.watch_id)
 		self.close_shell()
@@ -328,33 +335,42 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
 				SnippetPlaceholderExpand.remove(self, True)
 		
 	def process_cb(self, source, condition):
-		if condition & gobject.IO_HUP:
-			self.process_close()
-			return False
-		
 		if condition & gobject.IO_IN:
-			inp = source.read(1)
-			
-			if not inp:
-				self.process_close()
-				return False
-			else:
-				self.shell_output += inp
-				self.install_timeout()
+			line = source.readline()
+
+			if len(line) > 0:
+				try:
+					line = unicode(line, 'utf-8')
+				except:
+					line = unicode(line, locale.getdefaultlocale()[1], 
+							'replace')
+
+			self.shell_output += line
+			self.install_timeout()
 
 			return True
 
+		self.process_close()
+		return False
+		
 	def expand(self, text):
 		self.remove_timeout()
 
 		if self.shell:
 			gobject.source_remove(self.watch_id)
 			self.close_shell()
-		
+
+		popen_args = {
+			'cwd'  : None,
+			'shell': True,
+			'env'  : os.environ,
+			'stdout': subprocess.PIPE
+		}
+
 		self.command = text
-		self.shell = os.popen(text)
+		self.shell = subprocess.Popen(text, **popen_args)
 		self.shell_output = ''
-		self.watch_id = gobject.io_add_watch(self.shell, gobject.IO_IN | \
+		self.watch_id = gobject.io_add_watch(self.shell.stdout, gobject.IO_IN | \
 				gobject.IO_HUP, self.process_cb)
 		self.install_timeout()
 		
@@ -373,22 +389,35 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
 
 # The python placeholder evaluates commands in python
 class SnippetPlaceholderEval(SnippetPlaceholderExpand):
-	def __init__(self, view, begin, s):
-		SnippetPlaceholderExpand.__init__(self, view, begin, s)
+	def __init__(self, view, refs, begin, s, namespace):
+		SnippetPlaceholderExpand.__init__(self, view, -1, begin, s)
 
 		self.child = None
 		self.fdread = 0
-		self.timeout_id = 0
 		self.remove_me = False
-
-	def remove_timeout(self):
-		if self.timeout_id:
-			gobject.source_remove(self.timeout_id)
-			self.timeout_id = 0
+		self.namespace = namespace
 		
-	def install_timeout(self):
-		self.remove_timeout()
-		self.timeout_id = gobject.timeout_add(1000, self.timeout_cb)
+		self.refs = []
+		
+		if refs:
+			for ref in refs:
+				self.refs.append(int(ref.strip()))
+	
+	def get_mirrors(self, placeholders):
+		mirrors = SnippetPlaceholderExpand.get_mirrors(self, placeholders)
+		
+		if not self.ok:
+			return None
+		
+		for ref in self.refs:
+			if placeholders.has_key(ref):
+				if not ref in mirrors:
+					mirrors.append(ref)
+			else:
+				self.ok = False
+				return None
+		
+		return mirrors
 	
 	def close_child(self):
 		os.close(self.fdread)
@@ -396,10 +425,10 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 		self.child = None
 	
 	def timeout_cb(self):
-		self.timeout_id = 0
+		SnippetPlaceholderExpand.timeout_cb(self)
 		
 		if not self.child:
-			return
+			return False
 
 		gobject.source_remove(self.watch_id)
 		self.close_child()
@@ -442,47 +471,28 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 				self.install_timeout()
 
 			return True
-	
+		
 	def expand(self, text):
 		self.remove_timeout()
 
-		if self.child:
-			gobject.source_remove(self.watch_id)
-			self.close_child()
-		
-		fdread, fdwrite = os.pipe()
-		self.fdread = fdread
-		
 		text = text.strip()
 		self.command = text
 
-		f = os.fork()
-		
-		if f == 0:
-			# child process, close the read pipe thing
-			os.close(fdread)
-			# make everything on stdout go into the write pipe
-			os.dup2(fdwrite, sys.stdout.fileno())
+		if not self.command or self.command == '':
+			self.set_text('')
+			return
 
-			namespace = {'__builtins__': __builtins__}
+		text = "def process_snippet():\n\t" + "\n\t".join(text.split("\n"))
 
-			try:
-				try:
-					r = eval(text, namespace)
-				except SyntaxError:
-					exec text in namespace
-			except:
-				traceback.print_exc()
+		try:
+			exec text in self.namespace
+		except:
+			traceback.print_exc()
 
-			sys.exit(0)
-		else:
-			# parent process, close the write pipe thing
-			os.close(fdwrite)
-			self.child = f
-			self.child_output = ''
-			self.watch_id = gobject.io_add_watch(fdread, gobject.IO_IN | \
-				gobject.IO_HUP, self.process_cb)
-			self.install_timeout()
+		if 'process_snippet' in self.namespace:
+			result = self.namespace['process_snippet']()
+			self.set_text(result)
+
 		
 	def remove(self, force = False):
 		if not force and self.child:

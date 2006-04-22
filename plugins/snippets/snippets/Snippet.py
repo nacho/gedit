@@ -19,6 +19,53 @@ from SnippetPlaceholders import *
 import os
 from functions import *
 
+class EvalUtilities:
+	def __init__(self, view=None):
+		self.view = view
+		self.namespace = {}
+		self.init_namespace()
+	
+	def init_namespace(self):
+		self.namespace['__builtins__'] = __builtins__
+		self.namespace['align'] = self.util_align
+
+	def real_len(self, s, tablen = 0):
+		if tablen == 0:
+			tablen = self.view.get_tabs_width()
+		
+		return len(s.expandtabs(tablen))
+
+	def util_align(self, items):
+		maxlen = []
+		tablen = self.view.get_tabs_width()
+		
+		for row in range(0, len(items)):
+			for col in range(0, len(items[row]) - 1):
+				if row == 0:
+					maxlen.append(0)
+				
+				items[row][col] += "\t"
+				rl = self.real_len(items[row][col], tablen)
+				
+				if (rl > maxlen[col]):
+					maxlen[col] = rl
+
+		result = ''
+		
+		for row in range(0, len(items)):
+			for col in range(0, len(items[row]) - 1):
+				item = items[row][col]
+				
+				result += item + ("\t" * ((maxlen[col] - \
+						self.real_len(item, tablen)) / tablen))
+			
+			result += items[row][len(items[row]) - 1]
+			
+			if row != len(items) - 1:
+				result += "\n"
+		
+		return result
+
 class Snippet:
 	def __init__(self, data):
 		self.data = data
@@ -111,100 +158,103 @@ class Snippet:
 		else:
 			return (text, index + len(m.group(0)))
 		
+	def parse_variables(self, text, index):
+		# Environmental variable substitution
+		s = text[index:]
+		match = re.match('\\$([A-Z_]+)', s) or re.match('\\${([A-Z_]+)}', s)
+				
+		if match:
+			text, index = self.substitute_environment(text, index, match)
+		
+		return text, index, match
+
+	def parse_placeholder(self, s):
+		result = re.match('\\${([0-9]+)(:((\\\\:|\\\\}|[^:])+?))?}', s) or \
+				re.match('\\$([0-9]+)', s)
+		
+		return result and (result, SnippetPlaceholder)
+	
+	def parse_shell(self, s):
+		result = re.match('`(([0-9]+):)?((\\\\`|[^`])+?)`', s) or \
+				re.match('\\$\\((([0-9]+):)?((\\\\\\)|[^`])+?)\\)', s)
+		
+		return result and (result, SnippetPlaceholderShell)
+	
+	def parse_eval(self, s):
+		result = re.match('\\$<(([0-9, ]+):)?((\\\\>|[^>])+?)>', s)
+		
+		return result and (result, SnippetPlaceholderEval)
+
 	def parse_text(self, view, marks):
 		placeholders = {}
-		text = self['text']
 		lastInsert = 0
 		index = 0
+		text = self['text']
 		buf = view.get_buffer()
 
 		indent = compute_indentation(view, \
 				view.get_buffer().get_iter_at_mark(marks[1]))
 
+		utils = EvalUtilities(view)
+
 		while index < len(text):
 			c = text[index]
-			
+			match = None
+			s = text[index:]	
+					
 			if c == '\\':
 				# Skip escapements
 				index += 1
-			#elif c == '`':
-			#	m = re.match('`((\\\\`|[^`])+?)`', text[index:])
-			#	
-			#	if (m):
-			#		# We found a shell thing!
-			#		self.updateLastInsert(view, index, lastInsert, \
-			#				text, marks[1], indent)
-			#	
-			#		begin = buf.get_iter_at_mark(marks[1])
-			#		placeholder = SnippetPlaceholderShell(view, begin, \
-			#				m.group(1))
-			#		self.add_placeholder(placeholders, placeholder)
-			#		
-			#		index += len(m.group(0))
-			#		lastInsert = index
+			elif c == '`':
+				match = self.parse_shell(s)
 			elif c == '$':
-				# Environmental variable substitution
-				m = re.match('\\$([A-Z_]+)', text[index:])
+				text, index, handled = self.parse_variables(text, index)
 				
-				if m:
-					text, index = self.substitute_environment(text, index, m)
+				if handled:
 					continue
-				
-				m = re.match('\\${([A-Z_]+)}', text[index:])
-				
-				if m:
-					text, index = self.substitute_environment(text, index, m)
-					continue
-					
-				ev = False
-				m = re.match('\\${([0-9]+)(:((\\\\:|\\\\}|[^:])+?))?}', \
-						text[index:])
-				
-				if not m:
-					m = re.match('\\$([0-9]+)', text[index:])
-				
-				#if not m:
-				#	ev = True
-				#	m = re.match('\\$<((\\\\>|[^>])+?)>', text[index:])
 
-				if (m):
-					# Placeholders cannot appear directly after eachother, so
-					# ignore it if index == lastInsert
-					if index != lastInsert or index == 0:
-						self.updateLastInsert(view, index, lastInsert, \
-								text, marks[1], indent)
-						begin = buf.get_iter_at_mark(marks[1])
-					
-						if ev:
-							# Python eval
-							placeholder = SnippetPlaceholderEval(view, begin, \
-									m.group(1))
-						else:
-							tabstop = int(m.group(1))
+				match = self.parse_placeholder(s) or \
+						self.parse_shell(s) or \
+						self.parse_eval(s)
 
-							if m.lastindex >= 2:
-								default = m.group(3)
-							else:
-								default = None
+			if match:
+				if index != lastInsert or index == 0:
+					self.updateLastInsert(view, index, lastInsert, \
+							text, marks[1], indent)
+					begin = buf.get_iter_at_mark(marks[1])
+
+					if match[1] == SnippetPlaceholderEval:
+						refs = (match[0].group(2) and \
+								match[0].group(2).split(','))
+						placeholder = SnippetPlaceholderEval(view, \
+								refs, begin, match[0].group(3), \
+								utils.namespace)
+					elif match[1] == SnippetPlaceholderShell:
+						tabstop = (match[0].group(2) and \
+								int(match[0].group(2))) or -1
+						placeholder = SnippetPlaceholderShell(view, \
+								tabstop, begin, match[0].group(3))						
+					else:
+						tabstop = int(match[0].group(1))
+						default = match[0].lastindex >= 2 and \
+								re.sub('\\\\(.)', '\\1', match[0].group(3))
 						
-							if default:
-								default = re.sub('\\\\(.)', '\\1', default)
-	
-							if tabstop == 0:
-								# End placeholder
-								placeholder = SnippetPlaceholderEnd(view, begin, default)
-							elif placeholders.has_key(tabstop):
-								# this is a mirror
-								placeholder = SnippetPlaceholderMirror(view, \
-										tabstop, begin)
-							else:
-								# this is a first time
-								placeholder = SnippetPlaceholder(view, tabstop, \
-										default, begin)
+						if tabstop == 0:
+							# End placeholder
+							placeholder = SnippetPlaceholderEnd(view, begin,
+									default)
+						elif placeholders.has_key(tabstop):
+							# Mirror placeholder
+							placeholder = SnippetPlaceholderMirror(view, \
+									tabstop, begin)
+						else:
+							# Default placeholder
+							placeholder = SnippetPlaceholder(view, tabstop, \
+									default, begin)
+						
 					
-						self.add_placeholder(placeholders, placeholder)
-
-					index += len(m.group(0)) - 1
+					self.add_placeholder(placeholders, placeholder)
+					index += len(match[0].group(0)) - 1
 					lastInsert = index + 1
 					
 			index += 1
@@ -212,6 +262,7 @@ class Snippet:
 		lastInsert = self.updateLastInsert(view, index, lastInsert, text, \
 				marks[1], indent)
 
+		# Create end placeholder if there isn't one yet
 		if not placeholders.has_key(0):
 			placeholders[0] = SnippetPlaceholderEnd(view, \
 					buf.get_iter_at_mark(marks[1]), None)
@@ -240,6 +291,18 @@ class Snippet:
 					else:
 						del placeholders[placeholder.tabstop]
 		
+		# Remove all the Expand placeholders which have a tabstop because
+		# they can be used to mirror, but they shouldn't be real tabstops
+		# This is problably a bit of a dirty hack :)
+		if not placeholders.has_key(-1):
+			placeholders[-1] = []
+
+		for tabstop in placeholders.copy():
+			if tabstop != -1:
+				if isinstance(placeholders[tabstop], SnippetPlaceholderExpand):
+					placeholders[-1].append(placeholders[tabstop])
+					del placeholders[tabstop]
+		
 		return placeholders
 	
 	def insert_into(self, plugin_data):
@@ -264,6 +327,7 @@ class Snippet:
 		# lastIndex now contains the position of the last mark
 		# Create snippet bounding marks
 		marks = (buf.create_mark(None, insert, True), \
+				buf.create_mark(None, insert, False), \
 				buf.create_mark(None, insert, False))
 		
 		# Now parse the contents of this snippet, create SnippetPlaceholders
@@ -293,4 +357,4 @@ class Snippet:
 		# Move end mark to last placeholder
 		buf.move_mark(marks[1], lastIter)
 		
-		return (marks[0], marks[1], placeholders)
+		return (marks[0], marks[1], marks[2], placeholders)

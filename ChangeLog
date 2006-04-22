@@ -1,3 +1,20 @@
+2006-04-22  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* snippets/Snippet.py: enabled shell and python placeholders. Added 
+	python placeholder align function (can be used by python placeholders 
+	to align/tabelize text). Cleaned the parsing code. Added an extra mark 
+	on snippet insertion which is positioned at the end of the snippet
+	* snippets/SnippetController.py: use timeout instead of idle to update
+	mirrors (this enables semi instant-update if we want it). Apply 
+	placeholder.leave() when the cursor leaves the placeholder
+	* snippets/SnippetPlaceholders.py: fixed making string literals used 
+	for inserting mirror text into shell and python placeholders. Added 
+	separate mirror handler which handles mirrored items which apply after 
+	leaving the dependent placeholder. Moved general expander placeholder 
+	code to	PlaceholderExpand. Added private namespace for python 
+	placeholders which enables python snippets to define global 
+	variables/functions which can be used throughout the snippet.
+
 2006-04-21  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugins/snippets/snippets/functions.py: add custom xml writer to have 

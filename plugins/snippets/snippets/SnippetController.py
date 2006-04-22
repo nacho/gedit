@@ -34,25 +34,29 @@ class SnippetController:
 		
 		self.placeholders = []
 		self.active_snippets = []
+		self.active_placeholder = None
 		self.signal_ids = {}
 		
 		self.update_placeholders = []
+		self.jump_placeholders = []
 		self.language_name = 0
-		self.idle_update_id = 0
+		self.timeout_update_id = 0
 		
 		self.set_view(view)
 	
 	# Stop controlling the view. Remove all active snippets, remove references
 	# to the view and the plugin instance, disconnect all signal handlers
 	def stop(self):
-		if self.idle_update_id != 0:
-			gobject.source_remove(self.idle_update_id)
-			self.idle_update_id = 0
+		if self.timeout_update_id != 0:
+			gobject.source_remove(self.timeout_update_id)
+			self.timeout_update_id = 0
 			del self.update_placeholders[:]
+			del self.jump_placeholders[:]
 
 		SnippetsLibrary().unref(None)
 		self.set_view(None)
 		self.instance = None
+		self.active_placeholder = None
 
 	def disconnect_signal(self, obj, signal):
 		if signal in self.signal_ids:
@@ -123,6 +127,8 @@ class SnippetController:
 		snippets = SnippetsLibrary().from_accelerator(accelerator, \
 				self.language_name)
 
+		snippets_debug('Accel!')
+
 		if len(snippets) == 0:
 			return False
 		elif len(snippets) == 1:
@@ -130,7 +136,7 @@ class SnippetController:
 		else:
 			# Do the fancy completion dialog
 			return self.show_completion(snippets)
-	
+
 		return True
 
 	def first_snippet_inserted(self):
@@ -146,11 +152,26 @@ class SnippetController:
 		self.disconnect_signal(buf, 'changed')
 		self.disconnect_signal(buf, 'cursor-moved')
 
+	def current_placeholder(self):
+		buf = self.view.get_buffer()
+		
+		piter = buf.get_iter_at_mark(buf.get_insert())	
+		current = None
+
+		for placeholder in self.placeholders:
+			begin = placeholder.begin_iter()
+			end = placeholder.end_iter()
+
+			if piter.compare(begin) >= 0 and \
+					piter.compare(end) <= 0:
+				current = placeholder
+
+		return current
+
 	def advance_placeholder(self, direction):
 		# Returns (CurrentPlaceholder, NextPlaceholder), depending on direction
 		buf = self.view.get_buffer()
 		
-		# Find out if we are in a placeholder now
 		piter = buf.get_iter_at_mark(buf.get_insert())
 		prev = current = next = None
 		length = len(self.placeholders)		
@@ -210,6 +231,8 @@ class SnippetController:
 			
 			if current.__class__ == SnippetPlaceholderEnd:
 				last = current
+		
+		self.active_placeholder = next
 		
 		if next:
 			next.enter()
@@ -359,25 +382,31 @@ class SnippetController:
 		buf = self.view.get_buffer()
 		remove = []
 		
-		for tabstop in snippet[2]:
+		for tabstop in snippet[3]:
 			if tabstop == -1:
-				placeholders = snippet[2][-1]
+				placeholders = snippet[3][-1]
 			else:
-				placeholders = [snippet[2][tabstop]]
+				placeholders = [snippet[3][tabstop]]
 			
 			for placeholder in placeholders:
 				if placeholder in self.placeholders:
 					if placeholder in self.update_placeholders:
 						placeholder.update_contents()
+					elif placeholder in self.jump_placeholders:
+						placeholder[0].leave()
 						
 					remove.append(placeholder)
 		
 		for placeholder in remove:
+			if placeholder == self.active_placeholder:
+				self.active_placeholder = None
+
 			self.placeholders.remove(placeholder)
 			placeholder.remove(force)
-				
+
 		buf.delete_mark(snippet[0])
 		buf.delete_mark(snippet[1])
+		buf.delete_mark(snippet[2])
 		
 		self.active_snippets.remove(snippet)
 		
@@ -466,12 +495,17 @@ class SnippetController:
 		return complete.run()
 
 	def update_snippet_contents(self):
-		self.idle_update_id = 0
+		self.timeout_update_id = 0
 		
 		for placeholder in self.update_placeholders:
 			placeholder.update_contents()
 		
+		for placeholder in self.jump_placeholders:
+			self.goto_placeholder(placeholder[0], placeholder[1])
+		
 		del self.update_placeholders[:]
+		del self.jump_placeholders[:]
+		
 		return False
 
 	# Callbacks
@@ -503,15 +537,32 @@ class SnippetController:
 				if piter.compare(begin) < 0 or piter.compare(end) > 0:
 					# Oh no! Remove the snippet this instant!!
 					self.deactivate_snippet(snippet)
+		
+		current = self.current_placeholder()
+		
+		if current != self.active_placeholder:
+			if self.active_placeholder:
+				self.jump_placeholders.append((self.active_placeholder, current))
+				
+				if self.timeout_update_id != 0:
+					gobject.source_remove(self.timeout_update_id)
+				
+				self.timeout_update_id = gobject.timeout_add(0, 
+						self.update_snippet_contents)
+
+			self.active_placeholder = current
 	
 	def on_buffer_changed(self, buf):
-		current, next = self.advance_placeholder(1)
+		current = self.current_placeholder()
 		
-		if current and current.needs_updating():
+		if current:
 			self.update_placeholders.append(current)
 		
-			if self.idle_update_id == 0:
-				self.idle_update_id = gobject.idle_add(self.update_snippet_contents)
+			if self.timeout_update_id != 0:
+				gobject.source_remove(self.timeout_update_id)
+
+			self.timeout_update_id = gobject.timeout_add(0, \
+					self.update_snippet_contents)
 	
 	def on_notify_language(self, buf, spec):
 		self.update_language()
