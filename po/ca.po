@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-01 01:20+0100\n"
-"PO-Revision-Date: 2006-03-01 01:22+0100\n"
+"POT-Creation-Date: 2006-04-22 09:48+0200\n"
+"PO-Revision-Date: 2006-04-22 09:49+0200\n"
 "Last-Translator: Josep Puigdemont <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Editeu fitxers de text"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:460
 msgid "Text Editor"
 msgstr "Editor de text"
 
@@ -1112,22 +1112,22 @@ msgid "_minutes"
 msgstr "_minuts"
 
 #
-#: ../gedit/dialogs/gedit-search-dialog.c:234
+#: ../gedit/dialogs/gedit-search-dialog.c:260
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "Reemplaça"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
+#: ../gedit/dialogs/gedit-search-dialog.c:272 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "Cerca"
 
 #
-#: ../gedit/dialogs/gedit-search-dialog.c:298
+#: ../gedit/dialogs/gedit-search-dialog.c:324
 msgid "Replace _All"
 msgstr "Reempl_aça-ho tot"
 
 #
-#: ../gedit/dialogs/gedit-search-dialog.c:299
+#: ../gedit/dialogs/gedit-search-dialog.c:325
 #: ../gedit/gedit-commands-file.c:559
 msgid "_Replace"
 msgstr "_Reemplaça"
@@ -1179,6 +1179,10 @@ msgstr ""
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crea un nou document en una instància existent del gedit"
 
+#: ../gedit/gedit.c:84
+msgid "[FILE...]"
+msgstr "[FITXER...]"
+
 #: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
@@ -1188,6 +1192,11 @@ msgstr "%s: l'URI o el nom del fitxer estan malament.\n"
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: codificació invàlida.\n"
+
+#. Setup command line options
+#: ../gedit/gedit.c:452
+msgid "- Edit text files"
+msgstr "- Editeu fitxers de text"
 
 #: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #, c-format
@@ -1225,26 +1234,26 @@ msgstr "El fitxer «%s» és de només de lectura."
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Voleu intentar reemplaçar-lo pel que esteu desant?"
 
-#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
+#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:815
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "S'està carregant el fitxer «%s»…"
 
-#: ../gedit/gedit-commands-file.c:707
+#: ../gedit/gedit-commands-file.c:714
 msgid "Save As…"
 msgstr "Anomena i desa"
 
-#: ../gedit/gedit-commands-file.c:1003
+#: ../gedit/gedit-commands-file.c:1010
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "S'està recuperant el document «%s»…"
 
-#: ../gedit/gedit-commands-file.c:1025
+#: ../gedit/gedit-commands-file.c:1032
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Voleu recuperar els canvis no desats al document «%s»?"
 
-#: ../gedit/gedit-commands-file.c:1034
+#: ../gedit/gedit-commands-file.c:1041
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1256,14 +1265,14 @@ msgstr[0] ""
 msgstr[1] ""
 "Es perdran permanentment les modificacions realitzades els últims %ld segons."
 
-#: ../gedit/gedit-commands-file.c:1043
+#: ../gedit/gedit-commands-file.c:1050
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Es perdran permanentment les modificacions realitzades al document en "
 "l'últim minut."
 
-#: ../gedit/gedit-commands-file.c:1049
+#: ../gedit/gedit-commands-file.c:1056
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1278,7 +1287,7 @@ msgstr[1] ""
 "Es perdran permanentment les modificacions del document realitzades l'últim "
 "minut i %ld segons."
 
-#: ../gedit/gedit-commands-file.c:1059
+#: ../gedit/gedit-commands-file.c:1066
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1292,7 +1301,7 @@ msgstr[1] ""
 "Es perdran permanentment les modificacions del document realitzades els "
 "últims %ld minuts."
 
-#: ../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
+#: ../gedit/gedit-commands-file.c:1081 ../gedit/gedit-commands-file.c:1102
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1304,7 +1313,7 @@ msgstr[1] ""
 "Es perdran permanentment les modificacions realitzades al document les "
 "darreres %d hores."
 
-#: ../gedit/gedit-commands-file.c:1080
+#: ../gedit/gedit-commands-file.c:1087
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1319,7 +1328,7 @@ msgstr[1] ""
 "Es perdran permanentment les modificacions del document realitzades l'última "
 "hora i %d minuts."
 
-#: ../gedit/gedit-commands-file.c:1121
+#: ../gedit/gedit-commands-file.c:1128
 msgid "_Revert"
 msgstr "_Recupera"
 
@@ -1327,7 +1336,7 @@ msgstr "_Recupera"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "El gedit és un editor de text petit i lleuger pel GNOME Desktop"
 
-#: ../gedit/gedit-commands-help.c:98
+#: ../gedit/gedit-commands-help.c:94
 msgid "translator-credits"
 msgstr ""
 "Quico Llach <quico@softcatala.org>\n"
@@ -1336,38 +1345,34 @@ msgstr ""
 "Aleix Badia i Bosch <abadia@ica.es>\n"
 "Josep Puigdemont <josep.puigdemont@gmail.com>"
 
-#: ../gedit/gedit-commands-help.c:101
-msgid "gedit"
-msgstr "gedit"
-
-#: ../gedit/gedit-commands-search.c:166
+#: ../gedit/gedit-commands-search.c:165
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "S'ha trobat i reemplaçat %d cadena coincident"
 msgstr[1] "S'han trobat i reemplaçat %d cadenes coincidents"
 
-#: ../gedit/gedit-commands-search.c:176
+#: ../gedit/gedit-commands-search.c:175
 msgid "Found and replaced one occurrence"
 msgstr "S'ha trobat i reemplaçat una cadena coincident"
 
-#: ../gedit/gedit-commands-search.c:189
+#: ../gedit/gedit-commands-search.c:188
 msgid "Phrase not found"
 msgstr "No s'ha trobat la frase"
 
-#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:855
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:868
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Documents sense desar %d"
 
 #
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:523
+#: ../gedit/gedit-document-saver.c:536
 msgid "Could not obtain backup filename"
 msgstr "No s'ha obtenir el nom del fitxer de còpia de seguretat"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
+#: ../gedit/gedit-window.c:1535 ../gedit/gedit-window.c:1540
 msgid "Read Only"
 msgstr "Només de lectura"
 
@@ -1914,12 +1919,12 @@ msgid "Enabled"
 msgstr "Habilitat"
 
 #
-#: ../gedit/gedit-plugin-manager.c:540
+#: ../gedit/gedit-plugin-manager.c:535
 msgid "_About Plugin"
 msgstr "_Quant al connector"
 
 #
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:539
 msgid "C_onfigure Plugin"
 msgstr "_Configura el connector"
 
@@ -1927,7 +1932,7 @@ msgstr "_Configura el connector"
 msgid "Cannot initialize preferences manager."
 msgstr "No es pot inicialitzar el gestor de preferències."
 
-#: ../gedit/gedit-prefs-manager.c:1388
+#: ../gedit/gedit-prefs-manager.c:1390
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "S'esperava «%s» i s'ha rebut «%s» per a la clau %s"
@@ -2122,7 +2127,7 @@ msgstr "Tipus de MIME:"
 msgid "Encoding:"
 msgstr "Codificació:"
 
-#: ../gedit/gedit-tab.c:2012
+#: ../gedit/gedit-tab.c:2013
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "S'està representant la pàgina %d de %d..."
@@ -2463,7 +2468,7 @@ msgstr "Obre un fitxer utilitzat recentment"
 msgid "Open"
 msgstr "Obre"
 
-#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
+#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1811
 #, c-format
 msgid "Activate %s"
 msgstr "Activa %s"
@@ -2581,79 +2586,79 @@ msgstr "Eines externes"
 msgid "You must be inside a word to run this command"
 msgstr "Heu de ser dins d'una paraula per poder executar aquesta ordre"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:299
 msgid "Running tool:"
 msgstr "S'està executant l'eina:"
 
-#: ../plugins/externaltools/tools/functions.py:308
+#: ../plugins/externaltools/tools/functions.py:322
 msgid "Done."
 msgstr "Fet."
 
-#: ../plugins/externaltools/tools/functions.py:310
+#: ../plugins/externaltools/tools/functions.py:324
 msgid "Exited"
 msgstr "Ha sortit"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Res"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Document actual"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Selecció actual"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Línia actual"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Paraula actual"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Insereix en el quadre de sortida"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Crea un document nou"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Afegeix al final del document actual"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Substitueix el document actual"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Substitueix la selecció actual"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Insereix a la posició del cursor"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Tots els documents"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Tots els documents excepte aquells sense títol"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Només fitxers locals"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Només fitxers remots"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Només documents sense títol"
 
@@ -2677,12 +2682,12 @@ msgstr "Eina nova"
 msgid "This accelerator is already bound to %s"
 msgstr "Aquest accelerador ja s'utilitza per a %s"
 
-#: ../plugins/externaltools/tools/manager.py:329
+#: ../plugins/externaltools/tools/manager.py:333
 #: ../plugins/snippets/snippets/SnippetsDialog.py:562
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Teclegeu un nou accelerador, o premeu la tecla de retrocés per netejar"
 
-#: ../plugins/externaltools/tools/manager.py:331
+#: ../plugins/externaltools/tools/manager.py:335
 #: ../plugins/snippets/snippets/SnippetsDialog.py:564
 msgid "Type a new accelerator"
 msgstr "Teclegeu un accelerador nou"
@@ -2784,8 +2789,8 @@ msgid "Modelines"
 msgstr "Modes de línia"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-msgid "Opens an interactive python console in the bottom panel."
-msgstr "Obre una consola interactiva de Python al quadre de sota."
+msgid "Interactive python console standing in the bottom panel"
+msgstr "Consola interactiva de Python que és al quadre de sota"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -2915,7 +2920,7 @@ msgstr "_Afegeix"
 
 #: ../plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
-msgstr "_Suggerències d'ortografia"
+msgstr "_Suggeriments d'ortografia"
 
 #: ../plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
@@ -3239,12 +3244,12 @@ msgstr "(corregeix l'ortografia)"
 msgid "Completed spell checking"
 msgstr "S'ha completat la comprovació d'ortografia"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:245
+#: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "No s'han trobat els ginys necessaris dins de %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:266
+#: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "Llengues"
 
@@ -4852,6 +4857,9 @@ msgstr "_Pregunta per un format"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Utilitza un format personalitzat"
+
+#~ msgid "gedit"
+#~ msgstr "gedit"
 
 #~ msgid ""
 #~ "cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
