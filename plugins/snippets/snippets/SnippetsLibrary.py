@@ -544,7 +544,7 @@ class SnippetsUserFile(SnippetsSystemFile):
 			sys.stderr.write("Error in making dirs\n")
 
 		try:
-			et.ElementTree(self.root).write(self.path, 'utf-8')
+			write_xml(self.root, self.path, ('text', 'accelerator'))
 			self.tainted = False
 		except IOError:
 			# Couldn't save, what to do

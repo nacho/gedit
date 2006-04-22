@@ -17,36 +17,14 @@
 
 import gtk
 from xml.sax import saxutils
+from ElementTree import *
+import string
 
 def message_dialog(par, typ, msg):
 	d = gtk.MessageDialog(par, gtk.DIALOG_MODAL, typ, \
 			gtk.BUTTONS_OK, msg)
 	d.run()
 	d.destroy()
-
-class outfile:
-	def __init__(self, fn):
-		self.__fn = fn
-		self.__text = ''
-		
-	def close(self): pass
-	flush = close
-	def fileno(self):    return self.__fn
-	def isatty(self):    return 0
-	def read(self, a):   return ''
-	def readline(self):  return ''
-	def readlines(self):
-		l = self.__text.split('\n')
-		self.__text = ''
-		return l
-	def write(self, s):
-		#stdout.write(str(self.__w.get_point()) + '\n')
-		self.__text += s
-	def writelines(self, l):
-		self.__text += str.join('', l)
-	def seek(self, a):   raise IOError, (29, 'Illegal seek')
-	def tell(self):      raise IOError, (29, 'Illegal seek')
-	truncate = tell
 
 def compute_indentation(view, piter):
 	line = piter.get_line()
@@ -90,3 +68,83 @@ def insert_with_indent(view, piter, text, indentfirst = True):
 
 def snippets_debug(*s):
 	return
+
+def write_xml(node, file, cdata_nodes=()):
+	assert node is not None
+
+	if not hasattr(file, "write"):
+		file = open(file, "wb")
+
+	# Encoding
+	file.write("<?xml version='1.0' encoding='utf-8'?>\n")
+
+	_write_node(node, file, cdata_nodes)
+
+def _write_indent(file, text, indent):
+	file.write('  ' * indent + text)
+
+def _write_node(node, file, cdata_nodes=(), indent=0):
+    # write XML to file
+	tag = node.tag
+
+	if node is Comment:
+		_write_indent(file, "<!-- %s -->\n" % _escape_cdata(node.text), indent)
+	elif node is ProcessingInstruction:
+		_write_indent(file, "<?%s?>\n" % _escape_cdata(node.text), \
+				indent)
+	else:
+		items = node.items()
+		
+		if items or node.text or len(node):
+			_write_indent(file, "<" + tag.encode('utf-8'), indent)
+		
+			if items:
+				items.sort() # lexical order
+				for k, v in items:
+					file.write(" %s=\"%s\"" % (k.encode('utf-8'),
+							_escape_attrib(v)))
+			if node.text or len(node):
+				file.write(">")
+				if node.text and node.text.strip() != "":
+					if tag in cdata_nodes:
+						file.write(_cdata(node.text))
+					else:
+						file.write(_escape_cdata(node.text))
+				else:
+					file.write("\n")
+
+				for n in node:
+					_write_node(n, file, cdata_nodes, indent + 1)
+			
+				if not len(node):
+					file.write("</" + tag.encode('utf-8') + ">\n")
+				else:
+					_write_indent(file, "</" + tag.encode('utf-8') + ">\n", \
+							indent)
+			else:
+				file.write(" />\n")
+
+		if node.tail and node.tail.strip() != "":
+			file.write(_escape_cdata(node.tail))
+
+def _cdata(text, replace=string.replace):
+	text = text.encode('utf-8')
+	return '<![CDATA[' + replace(text, ']]>', ']]]]><![CDATA[>') + ']]>'
+
+def _escape_cdata(text, replace=string.replace):
+	# escape character data
+	text = text.encode('utf-8')
+	text = replace(text, "&", "&amp;")
+	text = replace(text, "<", "&lt;")
+	text = replace(text, ">", "&gt;")
+	return text
+
+def _escape_attrib(text, replace=string.replace):
+	# escape attribute value
+	text = text.encode('utf-8')
+	text = replace(text, "&", "&amp;")
+	text = replace(text, "'", "&apos;")
+	text = replace(text, "\"", "&quot;")
+	text = replace(text, "<", "&lt;")
+	text = replace(text, ">", "&gt;")
+	return text
