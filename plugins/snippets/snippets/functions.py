@@ -16,6 +16,7 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import gtk
+from gtk import gdk
 from xml.sax import saxutils
 from ElementTree import *
 import string
@@ -148,3 +149,9 @@ def _escape_attrib(text, replace=string.replace):
 	text = replace(text, "<", "&lt;")
 	text = replace(text, ">", "&gt;")
 	return text
+
+def valid_accelerator(keyval, mod):
+	mod &= gtk.accelerator_get_default_mod_mask()
+	
+	return (mod and (gdk.keyval_to_unicode(keyval) or \
+			keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1)))

@@ -526,9 +526,6 @@ class SnippetsDialog:
 	def on_entry_accelerator_key_press(self, entry, event):
 		source_view = self['source_view_snippet']
 
-		# Clear the mask so only the accelerator modifiers are there
-		mask = event.state & gtk.accelerator_get_default_mod_mask()
-
 		if event.keyval == gdk.keyval_from_name('Escape'):
 			# Reset
 			entry.set_text(self.snippet.accelerator_display())
@@ -544,14 +541,13 @@ class SnippetsDialog:
 			
 			self.snippet_changed()
 			return True
-		elif (gdk.keyval_to_unicode(event.keyval) and mask) or \
-				event.keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1):
-			if mask:
-				# New accelerator
-				self.set_accelerator(event.keyval, mask)
-				entry.set_text(self.snippet.accelerator_display())
-				self.snippet_changed()
-				self.tree_view.grab_focus()
+		elif valid_accelerator(event.keyval, event.state):
+			# New accelerator
+			self.set_accelerator(event.keyval, \
+					event.state & gtk.accelerator_get_default_mod_mask())
+			entry.set_text(self.snippet.accelerator_display())
+			self.snippet_changed()
+			self.tree_view.grab_focus()
 
 		else:
 			return True

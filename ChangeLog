@@ -1,4 +1,16 @@
 2006-04-22  Jesse van den Kieboom  <jesse@icecrew.nl>
+	
+	Fixed bug #339397 - Accelerator snippets don't work when gedit is just 
+	started
+	
+	* plugins/snippets/snippets/SnippetController.py:
+	* plugins/snippets/snippets/functions.py:
+	* plugins/snippets/snippets/SnippetsDialog.py:
+	
+	Loads the snippets when the a valid accelerator is activated in a 
+	buffer while the snippets library wasn't yet loaded
+	
+2006-04-22  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugins/snippets/snippets/SnippetController.py: fix wrong index
 	caused by the addition of an extra mark

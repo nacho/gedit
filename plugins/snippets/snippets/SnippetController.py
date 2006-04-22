@@ -580,5 +580,11 @@ class SnippetController:
 				not (event.state & gdk.SHIFT_MASK) and \
 				event.keyval in self.SPACE_KEY_VAL:
 			return self.show_completion()
+		elif not SnippetsLibrary().loaded and \
+				valid_accelerator(event.keyval, event.state):
+			SnippetsLibrary().ensure_files()
+			SnippetsLibrary().ensure(self.language_name)
+			self.accelerator_activate(event.keyval, \
+					event.state & gtk.accelerator_get_default_mod_mask())
 
 		return False
