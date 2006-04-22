@@ -243,7 +243,7 @@ class SnippetController:
 		if last:
 			# This is the end of the placeholder, remove the snippet etc
 			for snippet in list(self.active_snippets):
-				if snippet[2][0] == last:
+				if snippet[3][0] == last:
 					self.deactivate_snippet(snippet)
 					break
 		
