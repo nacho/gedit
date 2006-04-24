@@ -442,6 +442,21 @@ name_search_cb (GtkTreeModel *model,
 	return retval;
 }
 
+static gint 
+model_name_sort_func (GtkTreeModel *model,
+		      GtkTreeIter  *iter1,
+		      GtkTreeIter  *iter2,
+		      gpointer      user_data)
+{
+	GeditPluginInfo *info1, *info2;
+	
+	gtk_tree_model_get (model, iter1, NAME_COLUMN, &info1, -1);
+	gtk_tree_model_get (model, iter2, NAME_COLUMN, &info2, -1);
+
+	return g_utf8_collate (gedit_plugins_engine_get_plugin_name (info1),
+			       gedit_plugins_engine_get_plugin_name (info2));
+}
+
 static void
 plugin_manager_construct_tree (GeditPluginManager *pm)
 {
@@ -453,7 +468,8 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 
 	model = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_POINTER);
 
-	gtk_tree_view_set_model (GTK_TREE_VIEW (pm->priv->tree), GTK_TREE_MODEL (model));
+	gtk_tree_view_set_model (GTK_TREE_VIEW (pm->priv->tree),
+				 GTK_TREE_MODEL (model));
 	g_object_unref (model);
 
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (pm->priv->tree), TRUE);
@@ -484,8 +500,18 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 						 pm, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (pm->priv->tree), column);
 
+	/* Sort on the plugin names */
+	gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (model),
+	                                         model_name_sort_func,
+        	                                 NULL,
+                	                         NULL);
+	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (model),
+					      GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID,
+					      GTK_SORT_ASCENDING);
+
 	/* Enable search for our non-string column */
-	gtk_tree_view_set_search_column (GTK_TREE_VIEW (pm->priv->tree), NAME_COLUMN);
+	gtk_tree_view_set_search_column (GTK_TREE_VIEW (pm->priv->tree),
+					 NAME_COLUMN);
 	gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (pm->priv->tree),
 					     name_search_cb,
 					     NULL,
