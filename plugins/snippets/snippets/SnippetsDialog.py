@@ -261,7 +261,7 @@ class SnippetsDialog:
 			if self.snippet.data.can_modify():
 				button.set_sensitive(True)
 				
-			 	if self.snippet.data.override:
+			 	if self.snippet.data.is_override():
 					button.set_label(gtk.STOCK_REVERT_TO_SAVED)
 				else:
 					button.set_label(gtk.STOCK_REMOVE)
@@ -390,7 +390,7 @@ class SnippetsDialog:
 			gedit.help_display(self.dlg, 'gedit.xml', 'gedit-plugins')
 			return
 
-		self.unref_languages()		
+		self.unref_languages()	
 		self.snippet = None	
 		self.model = None
 		self.dlg.destroy()
@@ -497,7 +497,7 @@ class SnippetsDialog:
 		if not self.snippet or not node.can_modify():
 			return
 		
-		if node.override:
+		if node.is_override():
 			SnippetsLibrary().revert_snippet(node)
 			self.selection_changed()
 		else:

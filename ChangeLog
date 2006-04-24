@@ -1,3 +1,13 @@
+2006-04-24  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/snippets/snippets/SnippetsLibrary.py:
+	* plugins/snippets/snippets/SnippetsDialog.py:
+	
+	Fixed a bug where reverting a snippet results in the system snippet 
+	disappearing. The fix involves setting the correct namespaced id when 
+	the library of a snippet changes and putting the system snippet id in
+	the loaded_ids list when reverted
+
 2006-04-24  Steve Frécinaux  <steve@istique.net>
 
 	* gedit/gedit-plugin-manager.c: sort the plugin list alphabetically.

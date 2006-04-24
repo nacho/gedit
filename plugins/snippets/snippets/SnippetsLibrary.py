@@ -39,6 +39,8 @@ class SnippetData:
 			'accelerator': ''}
 
 	def __init__(self, node, library):
+		self.priv_id = node.attrib.get('id')
+
 		self.set_library(library)
 		self.set_node(node)
 
@@ -50,6 +52,8 @@ class SnippetData:
 			self.library = weakref.ref(library)
 		else:
 			self.library = None
+
+		self.id = NamespacedId(self.language(), self.priv_id).id
 
 	def set_node(self, node):
 		if self.can_modify():
@@ -64,7 +68,6 @@ class SnippetData:
 			return
 
 		self.override = node.attrib.get('override')
-		self.id = NamespacedId(self.language(), node.attrib.get('id')).id
 
 		self.properties = {}
 		props = SnippetData.PROPS.copy()
@@ -138,6 +141,9 @@ class SnippetData:
 		else:
 			return None
 	
+	def is_override(self):
+		return self.override and SnippetsLibrary().overridden[self.override]
+
 	def _override(self):
 		# Find the user file
 		target = SnippetsLibrary().get_user_library(self.language())
@@ -652,10 +658,14 @@ class SnippetsLibraryImpl:
 		revertto = self.overridden[snippet.override]
 		del self.overridden[snippet.override]
 		
-		snippet.revert(revertto)
+		if revertto:
+			snippet.revert(revertto)
+		
+			if revertto.id:
+				self.loaded_ids.append(revertto.id)
 	
 	def remove_snippet(self, snippet):
-		if not snippet.can_modify() or snippet.override:
+		if not snippet.can_modify() or snippet.is_override():
 			return
 		
 		# Remove from the library
@@ -808,7 +818,7 @@ class SnippetsLibraryImpl:
 		# Ensure language as well as the global snippets (None)
 		for lang in (None, language):
 			if lang in self.libraries:
-			# Ensure the container exists
+				# Ensure the container exists
 				self.container(lang)
 
 				for library in self.libraries[lang]:
