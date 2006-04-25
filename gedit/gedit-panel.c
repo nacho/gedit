@@ -50,10 +50,6 @@ struct _GeditPanelPrivate
 	GtkWidget *title_image;
 	GtkWidget *title_label;
 
-	/* Toolbar */
-	GtkWidget *toolbar_container;
-	GtkWidget *toolbar;
-
 	/* Notebook */
 	GtkWidget *notebook;
 
@@ -66,7 +62,6 @@ struct _GeditPanelItem
 {
 	gchar *name;
 	GtkWidget *icon;
-	GtkWidget *toolbar;
 };
 
 /* Properties */
@@ -376,26 +371,6 @@ sync_title (GeditPanel     *panel,
 }
 
 static void
-sync_toolbar (GeditPanel *panel,
-	      GeditPanelItem *item)
-{
-	if (panel->priv->toolbar != NULL)
-		gtk_container_remove (GTK_CONTAINER (panel->priv->toolbar_container),
-				      panel->priv->toolbar);
-
-	if (item != NULL && item->toolbar != NULL)
-	{
-		panel->priv->toolbar = item->toolbar;
-		gtk_container_add (GTK_CONTAINER (panel->priv->toolbar_container),
-				   item->toolbar);
-	}
-	else
-	{
-		panel->priv->toolbar = NULL;
-	}
-}
-
-static void
 notebook_page_changed (GtkNotebook     *notebook,
                        GtkNotebookPage *page,
                        guint            page_num,
@@ -412,7 +387,6 @@ notebook_page_changed (GtkNotebook     *notebook,
 	g_return_if_fail (data != NULL);
 
 	sync_title (panel, data);
-	sync_toolbar (panel, data);
 }
 
 static void
@@ -531,9 +505,6 @@ build_horizontal_panel (GeditPanel *panel)
                           G_CALLBACK (close_button_clicked_cb),
                           panel);
 
-	panel->priv->toolbar_container = sidebar;
-	panel->priv->toolbar = NULL;
-
 	gtk_widget_show_all (box);
 
 	gtk_box_pack_start (GTK_BOX (panel),
@@ -612,15 +583,6 @@ build_vertical_panel (GeditPanel *panel)
                           panel);
                  
 	gtk_widget_show_all (title_hbox);
-
-	panel->priv->toolbar_container = gtk_vbox_new(FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (panel),
-			    panel->priv->toolbar_container,
-			    FALSE,
-			    FALSE,
-			    0);
-	gtk_widget_show (panel->priv->toolbar_container);
-	panel->priv->toolbar = NULL;
 
 	gtk_box_pack_start (GTK_BOX (panel),
 			    panel->priv->notebook,
@@ -747,8 +709,6 @@ gedit_panel_add_item (GeditPanel  *panel,
 	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
 	gtk_widget_set_size_request (data->icon, w, h);
 	
-	data->toolbar = NULL;
-
 	g_object_set_data (G_OBJECT (item),
 		           PANEL_ITEM_KEY,
 		           data);
@@ -820,17 +780,6 @@ gedit_panel_remove_item (GeditPanel *panel,
 			      NULL, 
 			      NULL);  
 	
-	if (data->toolbar != NULL)
-	{
-		if (panel->priv->toolbar == data->toolbar)
-		{
-			gtk_container_remove (GTK_CONTAINER (panel->priv->toolbar_container),
-					      panel->priv->toolbar);
-			panel->priv->toolbar = NULL;
-		}
-		gtk_widget_destroy (data->toolbar);
-	}
-
 	/* ref the item to keep it alive during signal emission */
 	g_object_ref (G_OBJECT (item));
 
@@ -839,10 +788,7 @@ gedit_panel_remove_item (GeditPanel *panel,
 
 	/* if we removed all the pages, reset the title */
 	if (gtk_notebook_get_n_pages (GTK_NOTEBOOK (panel->priv->notebook)) == 0)
-	{
 		sync_title (panel, NULL);
-		sync_toolbar (panel, NULL);
-	}
 
 	g_signal_emit (G_OBJECT (panel), signals[ITEM_REMOVED], 0, item);
 
