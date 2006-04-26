@@ -39,6 +39,7 @@
 
 #include "gedit-languages-manager.h"
 #include "gedit-prefs-manager.h"
+#include "gedit-utils.h"
 
 
 static GtkSourceLanguagesManager *language_manager = NULL;
@@ -146,71 +147,49 @@ tag_style_to_string (const GtkSourceTagStyle *style)
 static GtkSourceTagStyle *
 string_to_tag_style (const gchar *string)
 {
+	const int items_len[] = {1, 13, 13, 1, 1, 1, 1};
+	guint i;
 	gchar**	items;
 	GtkSourceTagStyle *style;
 	
 	style = gtk_source_tag_style_new ();
-	items = g_strsplit (string, "/", 7);
+	items = g_strsplit (string, "/", G_N_ELEMENTS(items_len));
+
+	for (i = 0; i < G_N_ELEMENTS (items_len); ++i)
+	{
+		if ((items[i] == NULL) || (strlen (items[i]) != items_len[i]))
+			goto error;
+	}
 
 	style->is_default = FALSE;
-	
-	if (items == NULL)
+
+	style->mask = items[0][0] - '0';
+	if (style->mask < 0 || style->mask > 3)
 		goto error;
 
-	if ((items [0] == NULL) || (strlen (items [0]) != 1))
+	if (!gdk_color_parse (items[1], &style->foreground))
 		goto error;
 
-	style->mask = items [0][0] - '0';
-	
-	if ((style->mask < 0) || (style->mask > 3))
+	if (!gdk_color_parse (items[2], &style->background))
 		goto error;
 
-	if ((items [1] == NULL) || (strlen (items [1]) != 13))
+	style->italic = items[3][0] - '0';
+	if (!IS_VALID_BOOLEAN (style->italic))
 		goto error;
 
-	if (!gdk_color_parse (items [1], &style->foreground))
+	style->bold = items[4][0] - '0';
+	if (!IS_VALID_BOOLEAN (style->bold))
 		goto error;
 
-	if ((items [2] == NULL) || (strlen (items [2]) != 13))
+	style->underline = items[5][0] - '0';
+	if (!IS_VALID_BOOLEAN (style->underline))
 		goto error;
 
-	if (!gdk_color_parse (items [2], &style->background))
-		goto error;
-
-	if ((items [3] == NULL) || (strlen (items [3]) != 1))
-		goto error;
-
-	style->italic = items [3][0] - '0';
-	
-	if ((style->italic < 0) || (style->italic > 1))
-		goto error;
-	
-	if ((items [4] == NULL) || (strlen (items [4]) != 1))
-		goto error;
-
-	style->bold = items [4][0] - '0';
-	
-	if ((style->bold < 0) || (style->bold > 1))
-		goto error;
-
-	if ((items [5] == NULL) || (strlen (items [5]) != 1))
-		goto error;
-
-	style->underline = items [5][0] - '0';
-	
-	if ((style->underline < 0) || (style->underline > 1))
-		goto error;
-
-	if ((items [6] == NULL) || (strlen (items [6]) != 1))
-		goto error;
-
-	style->strikethrough = items [6][0] - '0';
-	
-	if ((style->strikethrough < 0) || (style->strikethrough > 1))
+	style->strikethrough = items[6][0] - '0';
+	if (!IS_VALID_BOOLEAN (style->strikethrough))
 		goto error;
 
 	g_strfreev (items);
-	
 	return style;
 
 error:
