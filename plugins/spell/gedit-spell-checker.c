@@ -78,6 +78,8 @@ static GeditLanguage known_languages [] =
 {
 	{"af", N_("Afrikaans")},
 	{"am", N_("Amharic")},
+	{"ar", N_("Arabic")},
+	{"ar_EG", N_("Arabic (Egypt)")},
 	{"az", N_("Azerbaijani")},
 	{"be", N_("Belarusian")},
 	{"bg", N_("Bulgarian")},
