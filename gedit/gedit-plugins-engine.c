@@ -72,6 +72,7 @@ struct _GeditPluginInfo
 
 	gchar        *name;
 	gchar        *desc;
+	gchar        *icon_name;
 	gchar       **authors;
 	gchar        *copyright;
 	gchar        *website;
@@ -192,6 +193,16 @@ gedit_plugins_engine_load (const gchar *file)
 	else
 		gedit_debug_message (DEBUG_PLUGINS, "Could not find 'Description' in %s", file);
 
+	/* Get Icon */
+	str = g_key_file_get_locale_string (plugin_file,
+					    "Gedit Plugin",
+					    "Icon",
+					    NULL, NULL);
+	if (str)
+		info->icon_name = str;
+	else
+		gedit_debug_message (DEBUG_PLUGINS, "Could not find 'Icon' in %s, using 'gedit-plugin'", file);
+	
 
 	/* Get Authors */
 	info->authors = g_key_file_get_string_list (plugin_file,
@@ -386,6 +397,7 @@ gedit_plugins_engine_shutdown (void)
 		g_free (info->location);
 		g_free (info->name);
 		g_free (info->desc);
+		g_free (info->icon_name);
 		g_free (info->website);
 		g_free (info->copyright);
 		g_strfreev (info->authors);
@@ -808,6 +820,16 @@ gedit_plugins_engine_get_plugin_description (GeditPluginInfo *info)
 	g_return_val_if_fail (info != NULL, NULL);
 	
 	return info->desc;
+}
+
+const gchar *
+gedit_plugins_engine_get_plugin_icon_name (GeditPluginInfo *info)
+{
+	g_return_val_if_fail (info != NULL, NULL);
+	
+	/* use the gedit-plugin icon as a default if the plugin does not
+	   have its own */
+	return (info->icon_name != NULL) ? info->icon_name : "gedit-plugin";
 }
 
 const gchar **

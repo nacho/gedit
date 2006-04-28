@@ -1,3 +1,19 @@
+2006-04-28  Steve Frécinaux  <steve@istique.net>
+
+	* gedit/gedit-plugins-engine.[ch]: add support for an 'Icon' field in
+	the plugins description file. New function to access this icon field:
+	gedit_plugin_engine_get_plugin_icon_name.
+	
+	* gedit/gedit-plugin-manager.c: show the above defined icon in the
+	plugin about boxes and in the plugin list.
+	
+	* plugins/indent/indent.gedit-plugin.desktop.in:
+	* plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in:
+	* plugins/sort/sort.gedit-plugin.desktop.in:
+	* plugins/spell/spell.gedit-plugin.desktop.in:
+	
+	Define custom icons.
+
 2006-04-26  Benoît Dejean  <benoit@placenet.org>
 
 	* gedit/gedit-languages-manager.c: (string_to_tag_style): Cleanup.

@@ -105,7 +105,7 @@ about_button_cb (GtkWidget          *button,
 		"authors", gedit_plugins_engine_get_plugin_authors (info),
 		"comments", gedit_plugins_engine_get_plugin_description (info),
 		"website", gedit_plugins_engine_get_plugin_website (info),
-		"logo-icon-name", "gedit-plugin",
+		"logo-icon-name", gedit_plugins_engine_get_plugin_icon_name (info),
 		NULL);
 
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (pm->priv->about),
@@ -149,11 +149,11 @@ configure_button_cb (GtkWidget          *button,
 }
 
 static void
-plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
-			     GtkCellRenderer   *cell,
-			     GtkTreeModel      *tree_model,
-			     GtkTreeIter       *iter,
-			     gpointer           data)
+plugin_manager_view_info_cell_cb (GtkTreeViewColumn *tree_column,
+				  GtkCellRenderer   *cell,
+				  GtkTreeModel      *tree_model,
+				  GtkTreeIter       *iter,
+				  gpointer           data)
 {
 	GeditPluginInfo *info;
 	gchar *text;
@@ -175,6 +175,30 @@ plugin_manager_view_cell_cb (GtkTreeViewColumn *tree_column,
 		      NULL);
 	g_free (text);
 }
+
+static void
+plugin_manager_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
+				  GtkCellRenderer   *cell,
+				  GtkTreeModel      *tree_model,
+				  GtkTreeIter       *iter,
+				  gpointer           data)
+{
+	GeditPluginInfo *info;
+	
+	g_return_if_fail (tree_model != NULL);
+	g_return_if_fail (tree_column != NULL);
+
+	gtk_tree_model_get (tree_model, iter, NAME_COLUMN, &info, -1);
+
+	if (info == NULL)
+		return;
+
+	g_object_set (G_OBJECT (cell),
+		      "icon-name",
+		      gedit_plugins_engine_get_plugin_icon_name (info),
+		      NULL);
+}
+
 
 static void
 active_toggled_cb (GtkCellRendererToggle *cell,
@@ -492,12 +516,26 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (pm->priv->tree), column);
 
 	/* second column */
-	cell = gtk_cell_renderer_text_new ();
-	g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-	column = gtk_tree_view_column_new_with_attributes (PLUGIN_MANAGER_NAME_TITLE, cell, NULL);
+	column = gtk_tree_view_column_new ();
+	gtk_tree_view_column_set_title (column, PLUGIN_MANAGER_NAME_TITLE);
 	gtk_tree_view_column_set_resizable (column, TRUE);
-	gtk_tree_view_column_set_cell_data_func (column, cell, plugin_manager_view_cell_cb,
+
+	cell = gtk_cell_renderer_pixbuf_new ();
+	gtk_tree_view_column_pack_start (column, cell, FALSE);
+	g_object_set (cell, "stock-size", GTK_ICON_SIZE_SMALL_TOOLBAR, NULL);
+	gtk_tree_view_column_set_cell_data_func (column, cell,
+						 plugin_manager_view_icon_cell_cb,
 						 pm, NULL);
+	
+	cell = gtk_cell_renderer_text_new ();
+	gtk_tree_view_column_pack_start (column, cell, TRUE);
+	g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+	gtk_tree_view_column_set_cell_data_func (column, cell,
+						 plugin_manager_view_info_cell_cb,
+						 pm, NULL);
+	
+	
+	gtk_tree_view_column_set_spacing (column, 6);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (pm->priv->tree), column);
 
 	/* Sort on the plugin names */
