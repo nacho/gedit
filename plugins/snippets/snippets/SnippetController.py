@@ -309,6 +309,9 @@ class SnippetController:
 		return False
 
 	def apply_snippet(self, snippet, start = None, end = None):
+		if not snippet.valid:
+			return False
+
 		buf = self.view.get_buffer()
 		s = Snippet(snippet)
 		
@@ -359,6 +362,8 @@ class SnippetController:
 		if len(self.active_snippets) == 1:
 			self.first_snippet_inserted()
 
+		return True
+
 	def get_tab_tag(self, buf):
 		end = buf.get_iter_at_mark(buf.get_insert())
 		start = end.copy()
@@ -404,12 +409,10 @@ class SnippetController:
 		
 		if snippets:
 			if len(snippets) == 1:
-				self.apply_snippet(snippets[0], start, end)
+				return self.apply_snippet(snippets[0], start, end)
 			else:
 				# Do the fancy completion dialog
 				return self.show_completion(snippets)
-				
-			return True
 
 		return self.skip_to_next_placeholder()
 	
@@ -603,6 +606,8 @@ class SnippetController:
 		self.update_language()
 		
 	def on_view_key_press(self, view, event):
+		library = SnippetsLibrary()
+
 		if not (event.state & gdk.CONTROL_MASK) and \
 				not (event.state & gdk.MOD1_MASK) and \
 				event.keyval in self.TAB_KEY_VAL:
@@ -615,10 +620,10 @@ class SnippetController:
 				not (event.state & gdk.SHIFT_MASK) and \
 				event.keyval in self.SPACE_KEY_VAL:
 			return self.show_completion()
-		elif not SnippetsLibrary().loaded and \
-				valid_accelerator(event.keyval, event.state):
-			SnippetsLibrary().ensure_files()
-			SnippetsLibrary().ensure(self.language_name)
+		elif not library.loaded and \
+				library.valid_accelerator(event.keyval, event.state):
+			library.ensure_files()
+			library.ensure(self.language_name)
 			self.accelerator_activate(event.keyval, \
 					event.state & gtk.accelerator_get_default_mod_mask())
 
