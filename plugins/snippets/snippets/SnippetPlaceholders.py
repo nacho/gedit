@@ -129,13 +129,15 @@ class SnippetPlaceholder:
 		
 		if prev != self.get_text():
 			for mirror in self.mirrors:
-				mirror.update(self)
+				if not mirror.update(self):
+					return
 			
 	# Do something on ending this placeholder
 	def leave(self):
 		# Notify mirrors
 		for mirror in self.leave_mirrors:
-			mirror.update(self)
+			if not mirror.update(self):
+				return
 
 # This is an placeholder which inserts a mirror of another SnippetPlaceholder	
 class SnippetPlaceholderMirror(SnippetPlaceholder):
@@ -145,6 +147,7 @@ class SnippetPlaceholderMirror(SnippetPlaceholder):
 
 	def update(self, mirror):
 		self.set_text(mirror.get_text())
+		return True
 	
 	def run_last(self, placeholders):
 		SnippetPlaceholder.run_last(self, placeholders)
@@ -290,10 +293,12 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
 		text = self.substitute()
 		
 		if text:
-			self.expand(text)
+			return self.expand(text)
+		
+		return True
 
 	def expand(self, text):
-		None
+		return True
 
 # The shell placeholder executes commands in a subshell
 class SnippetPlaceholderShell(SnippetPlaceholderExpand):
@@ -309,6 +314,7 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
 	
 	def timeout_cb(self):
 		SnippetPlaceholderExpand.timeout_cb(self)
+		self.remove_timeout()
 		
 		if not self.shell:
 			return False
@@ -374,6 +380,8 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
 				gobject.IO_HUP, self.process_cb)
 		self.install_timeout()
 		
+		return True
+		
 	def remove(self, force = False):
 		if not force and self.shell:
 			# Still executing shell command
@@ -392,7 +400,6 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 	def __init__(self, view, refs, begin, s, namespace):
 		SnippetPlaceholderExpand.__init__(self, view, -1, begin, s)
 
-		self.child = None
 		self.fdread = 0
 		self.remove_me = False
 		self.namespace = namespace
@@ -419,58 +426,21 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 		
 		return mirrors
 	
-	def close_child(self):
-		os.close(self.fdread)
-		os.kill(self.child, signal.SIGTERM)
-		self.child = None
+	def timeout_cb(self, signum = 0, frame = 0):
+		raise Exception, "Operation timed out (>2 seconds)"
 	
-	def timeout_cb(self):
-		SnippetPlaceholderExpand.timeout_cb(self)
-		
-		if not self.child:
-			return False
-
-		gobject.source_remove(self.watch_id)
-		self.close_child()
-
-		if self.remove_me:
-			SnippetPlaceholderExpand.remove(self)
-
-		message_dialog(None, gtk.MESSAGE_ERROR, 'Execution of the python ' \
-				'command (%s) exceeds the maximum time,' \
-				'execution aborted.' % self.command)
-		
-		return False
-	
-	def process_close(self):
-			self.close_child()
+	def install_timeout(self):
+		if self.timeout_id != 0:
 			self.remove_timeout()
-
-			self.set_text(str.join('', self.child_output))
-			
-			if self.remove_me:
-				SnippetPlaceholderExpand.remove(self, True)
 		
-	def process_cb(self, source, condition):
-		if condition & gobject.IO_HUP:
-			self.process_close()
-			return False
+		self.timeout_id = signal.signal(signal.SIGALRM, self.timeout_cb)
+		signal.alarm(2)
 		
-		if condition & gobject.IO_IN:
-			i = select.select([source], [], [], 0.0)
-			inp = None
-			
-			if i and i[0]:
-				inp = os.read(source, i[0][0])
-			
-			if not inp:
-				self.process_close()
-				return False
-			else:
-				self.child_output += inp
-				self.install_timeout()
-
-			return True
+	def remove_timeout(self):
+		if self.timeout_id != 0:
+			signal.alarm(0)
+			signal.signal(signal.SIGALRM, self.timeout_id)
+			self.timeout_id = 0
 		
 	def expand(self, text):
 		self.remove_timeout()
@@ -483,6 +453,9 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 			return
 
 		text = "def process_snippet():\n\t" + "\n\t".join(text.split("\n"))
+		
+		if 'process_snippet' in self.namespace:
+			del self.namespace['process_snippet']
 
 		try:
 			exec text in self.namespace
@@ -490,19 +463,26 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 			traceback.print_exc()
 
 		if 'process_snippet' in self.namespace:
-			result = self.namespace['process_snippet']()
-			self.set_text(result)
-
-		
-	def remove(self, force = False):
-		if not force and self.child:
-			# Still executing shell command
-			self.remove_me = True
-		else:
-			if force:
+			try:
+				# Install a sigalarm signal. This is a HACK to make sure 
+				# gedit doesn't get freezed by someone creating a python
+				# placeholder which for instance loops indefinately. Since
+				# the code is executed synchronously it will hang gedit. With
+				# the alarm signal we raise an exception and catch this
+				# (see below). We show an error message and return False.
+				# ___this is a HACK___ and should be fixed properly (I just 
+				# don't know how)				
+				self.install_timeout()
+				result = self.namespace['process_snippet']()
 				self.remove_timeout()
-				
-				if self.child:
-					self.close_child()
+			except:
+				self.remove_timeout()
 
-			SnippetPlaceholderExpand.remove(self, force)
+				message_dialog(None, gtk.MESSAGE_ERROR, \
+				_('Execution of the python command (%s) exceeds the maximum ' \
+				'time, execution aborted.') % self.command)
+				return False
+
+			self.set_text(result)
+		
+		return True
