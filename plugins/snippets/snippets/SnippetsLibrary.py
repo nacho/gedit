@@ -42,6 +42,7 @@ class SnippetData:
 		self.priv_id = node.attrib.get('id')
 
 		self.set_library(library)
+		self.valid = False
 		self.set_node(node)
 
 	def can_modify(self):
@@ -100,6 +101,18 @@ class SnippetData:
 				self.properties[prop] = child
 			else:
 				self.properties[prop] = props[prop]
+		
+		self.check_validation()
+	
+	def check_validation(self):
+		if not self['tag'] and not self['accelerator']:
+			return False
+
+		library = SnippetsLibrary()
+		keyval, mod = gtk.accelerator_parse(self['accelerator'])
+		
+		self.valid = library.valid_tab_trigger(self['tag']) and \
+				(not self['accelerator'] or library.valid_accelerator(keyval, mod))
 	
 	def __getitem__(self, prop):
 		if prop in self.properties:
@@ -134,6 +147,8 @@ class SnippetData:
 			if prop == 'tag' or prop == 'accelerator':
 				container = SnippetsLibrary().container(self.language())
 				container.prop_changed(self, prop, oldvalue)
+		
+		self.check_validation()
 
 	def language(self):
 		if self.library and self.library():
@@ -564,8 +579,8 @@ class SnippetsUserFile(SnippetsSystemFile):
 class SnippetsLibraryImpl:
 	def __init__(self):
 		self._accelerator_activated_cb = None
-		
 		self.loaded = False
+		self.check_buffer = gtk.TextBuffer()
 			
 	def set_dirs(self, userdir, systemdirs):
 		self.userdir = userdir
@@ -837,6 +852,32 @@ class SnippetsLibraryImpl:
 					self._add_system_library)
 
 		self.loaded = True
+
+	def valid_accelerator(self, keyval, mod):
+		mod &= gtk.accelerator_get_default_mod_mask()
+	
+		return (mod and (gdk.keyval_to_unicode(keyval) or \
+				keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1)))
+	
+	def valid_tab_trigger(self, trigger):
+		if not trigger:
+			return True
+
+		if trigger.isdigit():
+			return False
+
+		self.check_buffer.set_text(trigger)
+
+		start, end = self.check_buffer.get_bounds()
+		text = self.check_buffer.get_text(start, end)
+				
+		s = start.copy()
+		e = end.copy()
+		
+		end.backward_word_start()
+		start.forward_word_end()
+		
+		return (s.equal(end) and e.equal(start)) or (len(text) == 1 and not (text.isalnum() or text.isspace()))
 
 	# Snippet getters
 	# ===============

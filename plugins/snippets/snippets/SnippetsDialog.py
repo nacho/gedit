@@ -30,8 +30,7 @@ import gobject
 class SnippetsDialog:
 	NAME_COLUMN = 0
 	SORT_COLUMN = 1
-	EDITABLE_COLUMN = 2
-	OBJ_COLUMN = 3
+	OBJ_COLUMN = 2
 
 	model = None
 	
@@ -39,7 +38,7 @@ class SnippetsDialog:
 		self.snippet = None
 		self.dlg = None
 		self.key_press_id = 0
-
+		self.tooltips = gtk.Tooltips()
 		self.run()
 
 	def get_language_snippets(self, path, name = None):
@@ -52,7 +51,7 @@ class SnippetsDialog:
 
 	def add_new_snippet_node(self, parent):
 		return self.model.append(parent, ('<i>' + _('Add a new snippet...') + \
-				'</i>', '', True, None))
+				'</i>', '', None))
 
 	def fill_language(self, piter):
 		# Remove all children
@@ -101,14 +100,14 @@ class SnippetsDialog:
 		expand = None
 		
 		if not self.model:
-			self.model = gtk.TreeStore(str, str, bool, object)
+			self.model = gtk.TreeStore(str, str, object)
 			self.model.set_sort_column_id(self.SORT_COLUMN, gtk.SORT_ASCENDING)
 			manager = gtksourceview.SourceLanguagesManager()
 			langs = manager.get_available_languages()
 			
-			piter = self.model.append(None, (_('Global'), '', False, None))
+			piter = self.model.append(None, (_('Global'), '', None))
 			# Add dummy node
-			self.model.append(piter, ('', '', False, None))
+			self.model.append(piter, ('', '', None))
 			
 			nm = None
 			
@@ -117,10 +116,10 @@ class SnippetsDialog:
 		
 			for lang in langs:
 				name = lang.get_name()
-				parent = self.model.append(None, (name, name, False, lang))
+				parent = self.model.append(None, (name, name, lang))
 
 				# Add dummy node
-				self.model.append(parent, ('', '', False, None))
+				self.model.append(parent, ('', '', None))
 
 				if (nm == name):
 					expand = parent
@@ -147,14 +146,28 @@ class SnippetsDialog:
 		tree_view.expand_row(self.model.get_path(expand), False)
 		self.select_iter(expand)
 
+	def get_cell_data_cb(self, column, cell, model, iter):
+		s = model.get_value(iter, self.OBJ_COLUMN)
+		
+		snippet = isinstance(s, SnippetData)
+		
+		cell.set_property('editable', snippet)
+		
+		if snippet and not s.valid:
+			cell.set_property('foreground-gdk', gdk.color_parse('red'))
+		else:
+			cell.set_property('foreground-set', False)
+		
+		cell.set_property('markup', model.get_value(iter, self.NAME_COLUMN))
+		
+
 	def build_tree_view(self):		
 		self.tree_view = self['tree_view_snippets']
 		
 		self.column = gtk.TreeViewColumn(None)
 		self.renderer = gtk.CellRendererText()
 		self.column.pack_start(self.renderer, False)
-		self.column.set_attributes(self.renderer, markup=self.NAME_COLUMN, \
-				editable=self.EDITABLE_COLUMN)
+		self.column.set_cell_data_func(self.renderer, self.get_cell_data_cb)
 		
 		self.tree_view.append_column(self.column)
 		
@@ -192,6 +205,8 @@ class SnippetsDialog:
 					self.on_button_remove_snippet_clicked, \
 				'on_entry_tab_trigger_focus_out': \
 					self.on_entry_tab_trigger_focus_out, \
+				'on_entry_tab_trigger_changed': \
+					self.on_entry_tab_trigger_changed, \
 				'on_entry_accelerator_focus_out': \
 					self.on_entry_accelerator_focus_out, \
 				'on_entry_accelerator_focus_in': \
@@ -279,13 +294,15 @@ class SnippetsDialog:
 
 		if piter:
 			nm = s.display()
+			
 			self.model.set(piter, self.NAME_COLUMN, nm, self.SORT_COLUMN, nm)
 			self.update_remove_button()
+			self.entry_tab_trigger_update_valid()
 
 		return piter
 
 	def add_snippet(self, parent, snippet):
-		piter = self.model.append(parent, ('', '', True, snippet))
+		piter = self.model.append(parent, ('', '', snippet))
 		
 		return self.snippet_changed(piter)
 
@@ -316,8 +333,10 @@ class SnippetsDialog:
 			sens = False
 
 			self['entry_tab_trigger'].set_text('')
-			self['entry_accelerator'].set_text('')
+			self['entry_accelerator'].set_text('')			
 			self['source_view_snippet'].get_buffer().set_text('')
+
+			self.tooltips.disable()
 		else:
 			sens = True
 
@@ -331,6 +350,8 @@ class SnippetsDialog:
 			
 			buf.set_language(lang)
 			buf.set_text(self.snippet['text'])
+			
+			self.tooltips.enable()
 
 		for name in ['source_view_snippet', 'label_tab_trigger', \
 				'entry_tab_trigger', 'label_accelerator', 'entry_accelerator']:
@@ -442,6 +463,25 @@ class SnippetsDialog:
 
 		entry.set_text(self.snippet.accelerator_display())
 
+	def entry_tab_trigger_update_valid(self):
+		entry = self['entry_tab_trigger']
+		text = entry.get_text()
+		
+		if text and not SnippetsLibrary().valid_tab_trigger(text):
+			entry.modify_base(gtk.STATE_NORMAL, gtk.gdk.Color(0xffff, 0x6666, \
+					0x6666))
+			entry.modify_text(gtk.STATE_NORMAL, gtk.gdk.Color(0xffff, 0xffff, \
+					0xffff))
+
+			self.tooltips.set_tip(entry, _('This is not a valid tab trigger. Triggers can either contain letters or a single, non alphanumeric, character like {, [, etcetera.'))
+		else:
+			entry.modify_base(gtk.STATE_NORMAL, None)
+			entry.modify_text(gtk.STATE_NORMAL, None)
+
+			self.tooltips.set_tip(entry, None)
+		
+		return False
+
 	def on_entry_tab_trigger_focus_out(self, entry, event):
 		if not self.snippet:
 			return
@@ -451,6 +491,9 @@ class SnippetsDialog:
 		# save tag
 		self.snippet['tag'] = text
 		self.snippet_changed()
+	
+	def on_entry_tab_trigger_changed(self, entry):
+		self.entry_tab_trigger_update_valid()
 	
 	def on_source_view_snippet_focus_out(self, source_view, event):
 		if not self.snippet:
@@ -541,7 +584,7 @@ class SnippetsDialog:
 			
 			self.snippet_changed()
 			return True
-		elif valid_accelerator(event.keyval, event.state):
+		elif SnippetsLibrary().valid_accelerator(event.keyval, event.state):
 			# New accelerator
 			self.set_accelerator(event.keyval, \
 					event.state & gtk.accelerator_get_default_mod_mask())

@@ -150,12 +150,6 @@ def _escape_attrib(text, replace=string.replace):
 	text = replace(text, ">", "&gt;")
 	return text
 
-def valid_accelerator(keyval, mod):
-	mod &= gtk.accelerator_get_default_mod_mask()
-	
-	return (mod and (gdk.keyval_to_unicode(keyval) or \
-			keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1)))
-
 def buffer_word_boundary(buf):
 	iter = buf.get_iter_at_mark(buf.get_insert())
 	start = iter.copy()
