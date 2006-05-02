@@ -1,3 +1,17 @@
+2006-04-28  Steve Frécinaux  <steve@istique.net>
+
+	* gedit/gedit-plugin-manager.c: new layout for the plugin manager:
+	hide the treeview headers and add a title. Add a context menu to the
+	plugin list.
+	
+	* gedit/gedit-plugins-engine.c
+	(gedit_plugin_engine_get_plugin_icon_name): fallback to default icon
+	when the specified icon is invalid or unavailable.
+
+	* gedit/gedit-utils.[ch] (gedit_utils_menu_position_under_tree_view):
+	new helper function allowing to position a popup menu under the active
+	row of a tree view.
+
 2006-05-01  Jesse van den Kieboom  <jesse@icecrew.nl>
 	
 	* gedit/plugins/snippets/snippets/SnippetPlaceholders.py: added 

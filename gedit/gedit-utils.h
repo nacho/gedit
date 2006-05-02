@@ -61,6 +61,13 @@ void		 gedit_utils_menu_position_under_widget (GtkMenu  *menu,
 							 gboolean *push_in,
 							 gpointer  user_data);
 
+void		 gedit_utils_menu_position_under_tree_view
+							(GtkMenu  *menu,
+							 gint     *x,
+							 gint     *y,
+							 gboolean *push_in,
+							 gpointer  user_data);
+
 GtkWidget	*gedit_gtk_button_new_with_stock_icon	(const gchar *label,
 							 const gchar *stock_id);
 

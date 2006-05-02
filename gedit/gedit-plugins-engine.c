@@ -829,7 +829,12 @@ gedit_plugins_engine_get_plugin_icon_name (GeditPluginInfo *info)
 	
 	/* use the gedit-plugin icon as a default if the plugin does not
 	   have its own */
-	return (info->icon_name != NULL) ? info->icon_name : "gedit-plugin";
+	if (info->icon_name != NULL && 
+	    gtk_icon_theme_has_icon (gtk_icon_theme_get_default (),
+	    			     info->icon_name))
+		return info->icon_name;
+	else
+		return "gedit-plugin";
 }
 
 const gchar **

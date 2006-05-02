@@ -3,7 +3,7 @@
  * This file is part of gedit
  *
  * Copyright (C) 2002 Paolo Maggi and James Willcox
- * Copyright (C) 2003-2005 Paolo Maggi
+ * Copyright (C) 2003-2006 Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  */
 
 /*
- * Modified by the gedit Team, 1998-2005. See the AUTHORS file for a 
+ * Modified by the gedit Team, 1998-2006. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  *
@@ -67,13 +67,14 @@ struct _GeditPluginManagerPrivate
 	const GList	*plugins;
 
 	GtkWidget 	*about;
+	
+	GtkWidget	*popup_menu;
 };
 
 G_DEFINE_TYPE(GeditPluginManager, gedit_plugin_manager, GTK_TYPE_VBOX)
 
 static GeditPluginInfo *plugin_manager_get_selected_plugin (GeditPluginManager *pm); 
 static void plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model); 
-static void plugin_manager_toggle_all (GeditPluginManager *pm); 
 
 static void 
 gedit_plugin_manager_class_init (GeditPluginManagerClass *klass)
@@ -266,19 +267,6 @@ row_activated_cb (GtkTreeView       *tree_view,
 }
 
 static void
-column_clicked_cb (GtkTreeViewColumn *tree_column,
-		   gpointer           data)
-{
-	GeditPluginManager *pm = data;
-
-	gedit_debug (DEBUG_PLUGINS);
-
-	g_return_if_fail (pm != NULL);
-
-	plugin_manager_toggle_all (pm);
-}
-
-static void
 plugin_manager_populate_lists (GeditPluginManager *pm)
 {
 	const GList *plugins;
@@ -404,15 +392,13 @@ plugin_manager_get_selected_plugin (GeditPluginManager *pm)
 }
 
 static void
-plugin_manager_toggle_all (GeditPluginManager *pm)
+plugin_manager_set_active_all (GeditPluginManager *pm,
+			       gboolean            active)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	static gboolean active;
 
 	gedit_debug (DEBUG_PLUGINS);
-
-	active ^= 1;
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
 
@@ -466,6 +452,171 @@ name_search_cb (GtkTreeModel *model,
 	return retval;
 }
 
+static void
+enable_plugin_menu_cb (GtkMenu            *menu,
+		       GeditPluginManager *pm)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (pm->priv->tree));
+	g_return_if_fail (model != NULL);
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (pm->priv->tree));
+	g_return_if_fail (selection != NULL);
+
+	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
+		plugin_manager_toggle_active (&iter, model);
+}
+
+static void
+enable_all_menu_cb (GtkMenu            *menu,
+		    GeditPluginManager *pm)
+{
+	plugin_manager_set_active_all (pm, TRUE);
+}
+
+static void
+disable_all_menu_cb (GtkMenu            *menu,
+		     GeditPluginManager *pm)
+{
+	plugin_manager_set_active_all (pm, FALSE);
+}
+
+static GtkWidget *
+create_tree_popup_menu (GeditPluginManager *pm)
+{
+	GtkWidget *menu;
+	GtkWidget *item;
+	GtkWidget *image;
+	GeditPluginInfo *info;
+
+	info = plugin_manager_get_selected_plugin (pm);
+
+	menu = gtk_menu_new ();
+
+	item = gtk_image_menu_item_new_with_mnemonic (_("_About"));
+	image = gtk_image_new_from_stock (GTK_STOCK_ABOUT,
+					  GTK_ICON_SIZE_MENU);
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+	g_signal_connect (item, "activate",
+			  G_CALLBACK (about_button_cb), pm);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+	item = gtk_image_menu_item_new_with_mnemonic (_("C_onfigure"));
+	image = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES,
+					  GTK_ICON_SIZE_MENU);
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (item), image);
+	g_signal_connect (item, "activate",
+			  G_CALLBACK (configure_button_cb), pm);
+	gtk_widget_set_sensitive (item,
+				  gedit_plugins_engine_plugin_is_configurable (info));
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+	item = gtk_check_menu_item_new_with_mnemonic (_("A_ctivate"));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
+					gedit_plugins_engine_plugin_is_active (info));
+	g_signal_connect (item, "toggled",
+			  G_CALLBACK (enable_plugin_menu_cb), pm);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);					
+
+	item = gtk_separator_menu_item_new ();
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+	item = gtk_menu_item_new_with_mnemonic (_("Ac_tivate All"));
+	g_signal_connect (item, "activate",
+			  G_CALLBACK (enable_all_menu_cb), pm);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+	item = gtk_menu_item_new_with_mnemonic (_("_Unactivate All"));
+	g_signal_connect (item, "activate",
+			  G_CALLBACK (disable_all_menu_cb), pm);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+	
+	gtk_widget_show_all (menu);
+	
+	return menu;
+}
+
+static void
+tree_popup_menu_detach (GeditPluginManager *pm,
+			GtkMenu            *menu)
+{
+	pm->priv->popup_menu = NULL;
+}
+
+static void
+show_tree_popup_menu (GtkTreeView        *tree,
+		      GeditPluginManager *pm,
+		      GdkEventButton     *event)
+{
+	if (pm->priv->popup_menu)
+		gtk_widget_destroy (pm->priv->popup_menu);
+
+	pm->priv->popup_menu = create_tree_popup_menu (pm);
+	
+	gtk_menu_attach_to_widget (GTK_MENU (pm->priv->popup_menu),
+				   GTK_WIDGET (pm),
+				   (GtkMenuDetachFunc) tree_popup_menu_detach);
+
+	if (event != NULL)
+	{
+		gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
+				NULL, NULL,
+				event->button, event->time);
+	}
+	else
+	{
+		gtk_menu_popup (GTK_MENU (pm->priv->popup_menu), NULL, NULL,
+				gedit_utils_menu_position_under_tree_view, tree,
+				0, gtk_get_current_event_time ());
+
+		gtk_menu_shell_select_first (GTK_MENU_SHELL (pm->priv->popup_menu),
+					     FALSE);
+	}
+}
+
+static gboolean
+button_press_event_cb (GtkWidget          *tree,
+		       GdkEventButton     *event,
+		       GeditPluginManager *pm)
+{
+	/* We want the treeview selection to be updated before showing the menu.
+	 * This code is evil, thanks to Federico Mena Quintero's black magic.
+	 * See: http://mail.gnome.org/archives/gtk-devel-list/2006-February/msg00168.html
+	 * FIXME: Let's remove it asap.
+	 */
+
+	static gboolean in_press = FALSE;
+	gboolean handled;
+
+	if (in_press)
+		return FALSE; /* we re-entered */
+
+	if (GDK_BUTTON_PRESS != event->type || 3 != event->button)
+		return FALSE; /* let the normal handler run */
+
+	in_press = TRUE;
+	handled = gtk_widget_event (tree, (GdkEvent *) event);
+	in_press = FALSE;
+
+	if (!handled)
+		return FALSE;
+		
+	/* The selection is fully updated by now */
+	show_tree_popup_menu (GTK_TREE_VIEW (tree), pm, event);
+	return TRUE;
+}
+
+static gboolean
+popup_menu_cb (GtkTreeView        *tree,
+	       GeditPluginManager *pm)
+{
+	show_tree_popup_menu (tree, pm, NULL);
+	return TRUE;
+}
+
 static gint 
 model_name_sort_func (GtkTreeModel *model,
 		      GtkTreeIter  *iter1,
@@ -497,10 +648,11 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 	g_object_unref (model);
 
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (pm->priv->tree), TRUE);
-	gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW (pm->priv->tree), TRUE);
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (pm->priv->tree), FALSE);
 
 	/* first column */
 	cell = gtk_cell_renderer_toggle_new ();
+	g_object_set (cell, "xpad", 6, NULL);
 	g_signal_connect (cell,
 			  "toggled",
 			  G_CALLBACK (active_toggled_cb),
@@ -510,9 +662,6 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 							  "active",
 							   ACTIVE_COLUMN,
 							   NULL);
-	gtk_tree_view_column_set_clickable (column, TRUE);
-	gtk_tree_view_column_set_resizable (column, TRUE);
-	g_signal_connect (column, "clicked", G_CALLBACK (column_clicked_cb), pm);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (pm->priv->tree), column);
 
 	/* second column */
@@ -564,14 +713,25 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 			  G_CALLBACK (row_activated_cb),
 			  pm);
 
+	g_signal_connect (pm->priv->tree,
+			  "button-press-event",
+			  G_CALLBACK (button_press_event_cb),
+			  pm);
+	g_signal_connect (pm->priv->tree,
+			  "popup-menu",
+			  G_CALLBACK (popup_menu_cb),
+			  pm);
 	gtk_widget_show (pm->priv->tree);
 }
 
 static void 
 gedit_plugin_manager_init (GeditPluginManager *pm)
 {
+	GtkWidget *label;
+	GtkWidget *alignment;
 	GtkWidget *viewport;
 	GtkWidget *hbuttonbox;
+	gchar *markup;
 
 	gedit_debug (DEBUG_PLUGINS);
 
@@ -579,6 +739,20 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 
 	gtk_box_set_spacing (GTK_BOX (pm), 6);
 
+	label = gtk_label_new (NULL);
+	markup = g_markup_printf_escaped ("<span weight=\"bold\">%s</span>",
+					  _("Active plugins"));
+	gtk_label_set_markup (GTK_LABEL (label), markup);
+	g_free (markup);
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	
+	gtk_box_pack_start (GTK_BOX (pm), label, FALSE, TRUE, 0);
+	
+	alignment = gtk_alignment_new (0., 0., 1., 1.);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 0, 0, 12, 0);
+	gtk_box_pack_start (GTK_BOX (pm), alignment, TRUE, TRUE, 0);
+	
 	viewport = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (viewport),
 					GTK_POLICY_AUTOMATIC,
@@ -586,7 +760,7 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (viewport), 
 					     GTK_SHADOW_IN);
 
-	gtk_box_pack_start (GTK_BOX (pm), viewport, TRUE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (alignment), viewport);
 
 	pm->priv->tree = gtk_tree_view_new ();
 	gtk_container_add (GTK_CONTAINER (viewport), pm->priv->tree);
