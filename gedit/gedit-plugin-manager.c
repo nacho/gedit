@@ -75,11 +75,14 @@ G_DEFINE_TYPE(GeditPluginManager, gedit_plugin_manager, GTK_TYPE_VBOX)
 
 static GeditPluginInfo *plugin_manager_get_selected_plugin (GeditPluginManager *pm); 
 static void plugin_manager_toggle_active (GtkTreeIter *iter, GtkTreeModel *model); 
+static void gedit_plugin_manager_finalize (GObject *object);
 
 static void 
 gedit_plugin_manager_class_init (GeditPluginManagerClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+	object_class->finalize = gedit_plugin_manager_finalize;
 
 	g_type_class_add_private (object_class, sizeof (GeditPluginManagerPrivate));
 }
@@ -529,7 +532,7 @@ create_tree_popup_menu (GeditPluginManager *pm)
 			  G_CALLBACK (enable_all_menu_cb), pm);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
-	item = gtk_menu_item_new_with_mnemonic (_("_Unactivate All"));
+	item = gtk_menu_item_new_with_mnemonic (_("_Deactivate All"));
 	g_signal_connect (item, "activate",
 			  G_CALLBACK (disable_all_menu_cb), pm);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -804,6 +807,18 @@ gedit_plugin_manager_init (GeditPluginManager *pm)
 		gtk_widget_set_sensitive (pm->priv->about_button, FALSE);
 		gtk_widget_set_sensitive (pm->priv->configure_button, FALSE);		
 	}
+}
+
+static void
+gedit_plugin_manager_finalize (GObject *object)
+{
+	GeditPluginManager *pm = GEDIT_PLUGIN_MANAGER (object);
+
+	if (pm->priv->popup_menu)
+		gtk_widget_destroy (pm->priv->popup_menu);
+
+	G_OBJECT_CLASS (gedit_plugin_manager_parent_class)->finalize (object);
+
 }
 
 GtkWidget *gedit_plugin_manager_new (void)
