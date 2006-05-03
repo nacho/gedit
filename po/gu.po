@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit.HEAD.gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-01 22:29+0200\n"
-"PO-Revision-Date: 2006-05-02 08:12+0530\n"
+"POT-Creation-Date: 2006-05-03 06:31+0200\n"
+"PO-Revision-Date: 2006-05-03 10:08+0530\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n\n"
+"\n"
 "\n"
 "\n"
 "\n"
@@ -46,7 +47,7 @@ msgstr ""
 "કસ્ટમ ફોન્ટ જે સંપાદક વિસ્તારમાં વપરાશે. જો \"મૂળભૂત ફોન્ટ વાપરો\" વિકલ્પ બંધ હશે તો જ "
 "આની અસર થશે."
 
-#: ../data/gedit.schemas.in.h:2
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:747
 msgid "Active plugins"
 msgstr "સક્રિય પ્લગઈનો"
 
@@ -1770,11 +1771,31 @@ msgstr "પ્લગઈન"
 msgid "Enabled"
 msgstr "સક્રિય કરાયેલ"
 
-#: ../gedit/gedit-plugin-manager.c:599
+#: ../gedit/gedit-plugin-manager.c:502
+msgid "_About"
+msgstr "વિશે (_A)"
+
+#: ../gedit/gedit-plugin-manager.c:510
+msgid "C_onfigure"
+msgstr "રુપરેખાંકિત કરો (_o)"
+
+#: ../gedit/gedit-plugin-manager.c:520
+msgid "A_ctivate"
+msgstr "કાર્યરત કરો (_c)"
+
+#: ../gedit/gedit-plugin-manager.c:530
+msgid "Ac_tivate All"
+msgstr "બધું કાર્યરત કરો (_t)"
+
+#: ../gedit/gedit-plugin-manager.c:535
+msgid "_Deactivate All"
+msgstr "બધું અસક્રિય કરો (_D)"
+
+#: ../gedit/gedit-plugin-manager.c:776
 msgid "_About Plugin"
 msgstr "પ્લગઈન વિશે (_A)"
 
-#: ../gedit/gedit-plugin-manager.c:603
+#: ../gedit/gedit-plugin-manager.c:780
 msgid "C_onfigure Plugin"
 msgstr "પ્લગઈનને રુપરેખાંકિત કરો (_o)"
 
@@ -2241,16 +2262,16 @@ msgstr "તળિયેની તકતી (_B)"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "વર્તમાન વિન્ડોમાંની તળિયાની તકતી બતાવો અથવા છુપાવો"
 
-#: ../gedit/gedit-utils.c:923
+#: ../gedit/gedit-utils.c:973
 #, c-format
 msgid "Unable to find file %s."
 msgstr "ફાઈલ %s શોધવામાં અસમર્થ."
 
-#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+#: ../gedit/gedit-utils.c:977 ../gedit/gedit-utils.c:1006
 msgid "Please check your installation."
 msgstr "મહેરબાની કરીને તમારું સ્થાપન ચકાસો."
 
-#: ../gedit/gedit-utils.c:952
+#: ../gedit/gedit-utils.c:1002
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "ફાઈલ %s માં જરૂરી વિજેટો શોધવામાં અસમર્થ."
@@ -2702,7 +2723,9 @@ msgstr "વૈશ્વિક"
 msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
-msgstr "આમાન્ય ટેબ ટ્રીગર નથી. ટ્રીગરો ક્યાં તો અક્ષરો સમાવે અથવા એક, બિન આલ્ફાન્યૂમેરિક, અક્ષર જેવા કે {, [, વગેરે સમાવી શકે."
+msgstr ""
+"આમાન્ય ટેબ ટ્રીગર નથી. ટ્રીગરો ક્યાં તો અક્ષરો સમાવે અથવા એક, બિન આલ્ફાન્યૂમેરિક, અક્ષર "
+"જેવા કે {, [, વગેરે સમાવી શકે."
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
