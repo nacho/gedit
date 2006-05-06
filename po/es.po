@@ -1,8 +1,3 @@
-# translation of es.po to
-# translation of gedit.HEAD.po to Spanish
-# Spanish translation of es
-# translation of es.po to Spanish
-# traducción de es.po al Spanish
 # Gedit's Spanish translation
 # Copyright © 1999-2003, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gedit package.
@@ -11,17 +6,17 @@
 # Chema Celorio <chema@celorio.com>, 2000.
 # QA by <asan@euskalnet.net>, 2001.
 # Pablo Gonzalo del Campo <pablodc@bigfoot.com>,2002-2003.
-# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003, 2004, 2005, 2006.
+# Francisco Javier F. Serrador <serrador@cvs.gnome.org>, 2003 - 2006.
 # Pablo G. del Campo <pablodc@bigfoot.com>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: gedit-2.16\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-28 16:23+0200\n"
-"PO-Revision-Date: 2006-03-28 16:24+0200\n"
+"POT-Creation-Date: 2006-05-06 16:43+0200\n"
+"PO-Revision-Date: 2006-05-06 16:47+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
-"Language-Team:  <traductores@es.gnome.org>\n"
+"Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,7 +27,7 @@ msgstr ""
 msgid "Edit text files"
 msgstr "Edite archivos de texto"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:436
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:460
 msgid "Text Editor"
 msgstr "Editor de textos"
 
@@ -45,7 +40,7 @@ msgstr ""
 "sólo tendrá efecto si la opción «Usar tipografía predeterminada» se "
 "encuentra desactivada."
 
-#: ../data/gedit.schemas.in.h:2
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:747
 msgid "Active plugins"
 msgstr "Complementos activos"
 
@@ -1078,20 +1073,20 @@ msgstr "_Usar tipografía predeterminada del tema"
 msgid "_minutes"
 msgstr "_minutos"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:234
+#: ../gedit/dialogs/gedit-search-dialog.c:260
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
 msgid "Replace"
 msgstr "Reemplazar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
+#: ../gedit/dialogs/gedit-search-dialog.c:272 ../gedit/gedit-window.c:1011
 msgid "Find"
 msgstr "Buscar"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298
+#: ../gedit/dialogs/gedit-search-dialog.c:324
 msgid "Replace _All"
 msgstr "Reemplazar _todo"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:299
+#: ../gedit/dialogs/gedit-search-dialog.c:325
 #: ../gedit/gedit-commands-file.c:559
 msgid "_Replace"
 msgstr "_Reemplazar"
@@ -1142,6 +1137,10 @@ msgstr ""
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Crea un documento nuevo en una instancia existente de gedit"
 
+#: ../gedit/gedit.c:84
+msgid "[FILE...]"
+msgstr "[ARCHIVO...]"
+
 #: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
@@ -1151,6 +1150,11 @@ msgstr "%s: Nombre de archivo o URI mal formado.\n"
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: codificación inválida.\n"
+
+#. Setup command line options
+#: ../gedit/gedit.c:452
+msgid "- Edit text files"
+msgstr "- Edite archivos de texto"
 
 #: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #, c-format
@@ -1188,26 +1192,26 @@ msgstr "El archivo «%s» es de sólo lectura."
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "¿Desea intentar reemplazarlo con el que está guardando ahora?"
 
-#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
+#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:815
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Guardando del archivo: «%s»…"
 
-#: ../gedit/gedit-commands-file.c:707
+#: ../gedit/gedit-commands-file.c:714
 msgid "Save As…"
 msgstr "Guardar como…"
 
-#: ../gedit/gedit-commands-file.c:1003
+#: ../gedit/gedit-commands-file.c:1010
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Revirtiendo el documento «%s»…"
 
-#: ../gedit/gedit-commands-file.c:1025
+#: ../gedit/gedit-commands-file.c:1032
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "¿Recuperar los cambios no guardados en el documento «%s»?"
 
-#: ../gedit/gedit-commands-file.c:1034
+#: ../gedit/gedit-commands-file.c:1041
 #, c-format
 msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1220,13 +1224,13 @@ msgstr[1] ""
 "Los cambios realizados al documento en los últimos %ld segundos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1043
+#: ../gedit/gedit-commands-file.c:1050
 msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Los cambios realizados al documento en el último minuto se perderán "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1049
+#: ../gedit/gedit-commands-file.c:1056
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1241,7 +1245,7 @@ msgstr[1] ""
 "Los cambios hechos al documento en el último minuto y %ld se perderán "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1059
+#: ../gedit/gedit-commands-file.c:1066
 #, c-format
 msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -1254,7 +1258,7 @@ msgstr[1] ""
 "Los cambios hechos al documento en los últimos %ld minutos se perderán "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
+#: ../gedit/gedit-commands-file.c:1081 ../gedit/gedit-commands-file.c:1102
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
@@ -1265,7 +1269,7 @@ msgstr[1] ""
 "Los cambios realizados en el documento en las últimas %d horas se perderán "
 "permanentemente."
 
-#: ../gedit/gedit-commands-file.c:1080
+#: ../gedit/gedit-commands-file.c:1087
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1280,7 +1284,7 @@ msgstr[1] ""
 "Los cambios hechos al documento en la última hora y %d minutos se perderán "
 "para siempre."
 
-#: ../gedit/gedit-commands-file.c:1121
+#: ../gedit/gedit-commands-file.c:1128
 msgid "_Revert"
 msgstr "Re_vertir"
 
@@ -1288,7 +1292,7 @@ msgstr "Re_vertir"
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit es un editor de texto compacto y simple para GNOME"
 
-#: ../gedit/gedit-commands-help.c:98
+#: ../gedit/gedit-commands-help.c:94
 msgid "translator-credits"
 msgstr ""
 "Francisco Javier F. Serrador <serrador@cvs.gnome.org>\n"
@@ -1296,32 +1300,28 @@ msgstr ""
 "Germán Poo Caamaño <gpoo@ubiobio.cl>\n"
 "Pablo Saratxaga <pablo@mandrakesoft.com>"
 
-#: ../gedit/gedit-commands-help.c:101
-msgid "gedit"
-msgstr "gedit"
-
-#: ../gedit/gedit-commands-search.c:166
+#: ../gedit/gedit-commands-search.c:165
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "Se encontró y reemplazó %d aparición"
 msgstr[1] "Se encontraron y reemplazaron %d apariciones"
 
-#: ../gedit/gedit-commands-search.c:176
+#: ../gedit/gedit-commands-search.c:175
 msgid "Found and replaced one occurrence"
 msgstr "Se encontró y reemplazó una aparición"
 
-#: ../gedit/gedit-commands-search.c:189
+#: ../gedit/gedit-commands-search.c:188
 msgid "Phrase not found"
 msgstr "Frase no encontrada "
 
-#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:855
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:868
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Documento %d no guardado"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:523
+#: ../gedit/gedit-document-saver.c:536
 msgid "Could not obtain backup filename"
 msgstr "No se pudo el nombre de archivo de la copia de respaldo"
 
@@ -1366,12 +1366,12 @@ msgid "Cyrillic"
 msgstr "Cirílica"
 
 #: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:233
-#: ../gedit/gedit-encodings.c:274
+#: ../gedit/gedit-encodings.c:274 ../plugins/spell/gedit-spell-checker.c:81
 msgid "Arabic"
 msgstr "Árabe"
 
 #: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:268
-#: ../plugins/spell/gedit-spell-checker.c:93
+#: ../plugins/spell/gedit-spell-checker.c:95
 msgid "Greek"
 msgstr "Griega"
 
@@ -1380,12 +1380,12 @@ msgid "Hebrew Visual"
 msgstr "Hebreo visual"
 
 #: ../gedit/gedit-encodings.c:167 ../gedit/gedit-encodings.c:231
-#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:109
+#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:111
 msgid "Hebrew"
 msgstr "Hebreo"
 
 #: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:229
-#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:150
+#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
 msgid "Turkish"
 msgstr "Turca"
 
@@ -1397,7 +1397,7 @@ msgstr "Nórdica"
 msgid "Celtic"
 msgstr "Celta"
 
-#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:138
+#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:140
 msgid "Romanian"
 msgstr "Rumana"
 
@@ -1439,7 +1439,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Cirílica/Ucraniano"
 
 #: ../gedit/gedit-encodings.c:253 ../gedit/gedit-encodings.c:259
-#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:153
+#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:155
 msgid "Vietnamese"
 msgstr "Vietnamita"
 
@@ -1851,13 +1851,13 @@ msgstr "No se puede guardar el archivo %s."
 msgid "Close document"
 msgstr "Cerrar documento"
 
-#: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
+#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:556
 #: ../gedit/recent-files/egg-recent-view-gtk.c:446
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "Vaciar"
 
-#: ../gedit/gedit-panel.c:526 ../gedit/gedit-panel.c:606
+#: ../gedit/gedit-panel.c:500 ../gedit/gedit-panel.c:577
 msgid "Hide panel"
 msgstr "Ocultar panel"
 
@@ -1869,11 +1869,31 @@ msgstr "Complementos"
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: ../gedit/gedit-plugin-manager.c:540
+#: ../gedit/gedit-plugin-manager.c:502
+msgid "_About"
+msgstr "Acerca _de"
+
+#: ../gedit/gedit-plugin-manager.c:510
+msgid "C_onfigure"
+msgstr "C_onfigurar"
+
+#: ../gedit/gedit-plugin-manager.c:520
+msgid "A_ctivate"
+msgstr "A_ctivar"
+
+#: ../gedit/gedit-plugin-manager.c:530
+msgid "Ac_tivate All"
+msgstr "Ac_tivar todo"
+
+#: ../gedit/gedit-plugin-manager.c:535
+msgid "_Deactivate All"
+msgstr "_Desactivar todo"
+
+#: ../gedit/gedit-plugin-manager.c:776
 msgid "_About Plugin"
 msgstr "A_cerca del complemento"
 
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:780
 msgid "C_onfigure Plugin"
 msgstr "C_onfigurar el complemento"
 
@@ -2073,7 +2093,7 @@ msgstr "Tipo MIME:"
 msgid "Encoding:"
 msgstr "Codificación:"
 
-#: ../gedit/gedit-tab.c:2012
+#: ../gedit/gedit-tab.c:2013
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Renderizando la página %d de %d…"
@@ -2340,16 +2360,16 @@ msgstr "Panel _inferior"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Muestra u oculta el panel inferior en la ventana actual"
 
-#: ../gedit/gedit-utils.c:923
+#: ../gedit/gedit-utils.c:973
 #, c-format
 msgid "Unable to find file %s."
 msgstr "No se ha podido encontrar el archivo %s."
 
-#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+#: ../gedit/gedit-utils.c:977 ../gedit/gedit-utils.c:1006
 msgid "Please check your installation."
 msgstr "Compruebe su instalación."
 
-#: ../gedit/gedit-utils.c:952
+#: ../gedit/gedit-utils.c:1002
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "No se han podido encontrar los widgets necesarios dentro del archivo %s."
@@ -2528,79 +2548,79 @@ msgstr "Herramientas externas"
 msgid "You must be inside a word to run this command"
 msgstr "Debe estar dentro de una palabra para ejecutar este comando"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:299
 msgid "Running tool:"
 msgstr "Ejecutando herramienta:"
 
-#: ../plugins/externaltools/tools/functions.py:308
+#: ../plugins/externaltools/tools/functions.py:322
 msgid "Done."
 msgstr "Hecho."
 
-#: ../plugins/externaltools/tools/functions.py:310
+#: ../plugins/externaltools/tools/functions.py:324
 msgid "Exited"
 msgstr "Salió"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Ninguno"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Documento actual"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Selección actual"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Línea actual"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Palabra actual"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Insertar en el panel de salida"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Crear un documento nuevo"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Agregar al documento actual"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Reemplazar documento actual"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Reemplazar selección actual"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Insertar en la posición del cursor"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Todos los documentos"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Todos los documentos excepto los que no tienen título"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Sólo archivos locales"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Sólo archivos remotos"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Sólo documentos sin título"
 
@@ -2624,13 +2644,13 @@ msgstr "Herramienta nueva"
 msgid "This accelerator is already bound to %s"
 msgstr "Este acelerador ya está vinculado a %s"
 
-#: ../plugins/externaltools/tools/manager.py:329
-#: ../plugins/snippets/snippets/SnippetsDialog.py:562
+#: ../plugins/externaltools/tools/manager.py:333
+#: ../plugins/snippets/snippets/SnippetsDialog.py:600
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Teclee un acelerador nuevo , o pulse Retroceder para limpiar"
 
-#: ../plugins/externaltools/tools/manager.py:331
-#: ../plugins/snippets/snippets/SnippetsDialog.py:564
+#: ../plugins/externaltools/tools/manager.py:335
+#: ../plugins/snippets/snippets/SnippetsDialog.py:602
 msgid "Type a new accelerator"
 msgstr "Teclee un acelerador nuevo"
 
@@ -2730,8 +2750,8 @@ msgid "Modelines"
 msgstr "Modos de líneas"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-msgid "Opens an interactive python console in the bottom panel."
-msgstr "Abre una consola interactiva python en el panel inferior."
+msgid "Interactive python console standing in the bottom panel"
+msgstr "Consola interactiva python en el panel inferior."
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -2789,13 +2809,19 @@ msgstr "Administrar _snippets…"
 msgid "Manage snippets"
 msgstr "Administre snippets"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:54
+#: ../plugins/snippets/snippets/SnippetsDialog.py:53
 msgid "Add a new snippet..."
 msgstr "Añadir un snippet nuevo…"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:109
+#: ../plugins/snippets/snippets/SnippetsDialog.py:108
 msgid "Global"
 msgstr "Global"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:476
+msgid ""
+"This is not a valid tab trigger. Triggers can either contain letters or a "
+"single, non alphanumeric, character like {, [, etcetera."
+msgstr "Este no es un disparador de solapa válido. Los disparadores pueden contener letras o un solo carácter alfanumérico como {,[, etcétera."
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -2869,291 +2895,295 @@ msgstr "Afrikaans"
 msgid "Amharic"
 msgstr "Amhárico"
 
-#: ../plugins/spell/gedit-spell-checker.c:81
+#: ../plugins/spell/gedit-spell-checker.c:82
+msgid "Arabic (Egypt)"
+msgstr "Árabe (Egipto)"
+
+#: ../plugins/spell/gedit-spell-checker.c:83
 msgid "Azerbaijani"
 msgstr "Azerbaijaní"
 
-#: ../plugins/spell/gedit-spell-checker.c:82
+#: ../plugins/spell/gedit-spell-checker.c:84
 msgid "Belarusian"
 msgstr "Bielorruso"
 
-#: ../plugins/spell/gedit-spell-checker.c:83
+#: ../plugins/spell/gedit-spell-checker.c:85
 msgid "Bulgarian"
 msgstr "Búlgaro"
 
-#: ../plugins/spell/gedit-spell-checker.c:84
+#: ../plugins/spell/gedit-spell-checker.c:86
 msgid "Bengali"
 msgstr "Bengalí"
 
-#: ../plugins/spell/gedit-spell-checker.c:85
+#: ../plugins/spell/gedit-spell-checker.c:87
 msgid "Breton"
 msgstr "Bretón"
 
-#: ../plugins/spell/gedit-spell-checker.c:86
+#: ../plugins/spell/gedit-spell-checker.c:88
 msgid "Catalan"
 msgstr "Catalán"
 
-#: ../plugins/spell/gedit-spell-checker.c:87
+#: ../plugins/spell/gedit-spell-checker.c:89
 msgid "Czech"
 msgstr "Checo"
 
-#: ../plugins/spell/gedit-spell-checker.c:88
+#: ../plugins/spell/gedit-spell-checker.c:90
 msgid "Welsh"
 msgstr "Galés"
 
-#: ../plugins/spell/gedit-spell-checker.c:89
+#: ../plugins/spell/gedit-spell-checker.c:91
 msgid "Danish"
 msgstr "Danés"
 
-#: ../plugins/spell/gedit-spell-checker.c:90
+#: ../plugins/spell/gedit-spell-checker.c:92
 msgid "German (Austria)"
 msgstr "Alemán (Austria)"
 
-#: ../plugins/spell/gedit-spell-checker.c:91
+#: ../plugins/spell/gedit-spell-checker.c:93
 msgid "German (Germany)"
 msgstr "Alemán (Alemania)"
 
-#: ../plugins/spell/gedit-spell-checker.c:92
+#: ../plugins/spell/gedit-spell-checker.c:94
 msgid "German (Swiss)"
 msgstr "Alemán (Suiza)"
 
-#: ../plugins/spell/gedit-spell-checker.c:94
+#: ../plugins/spell/gedit-spell-checker.c:96
 msgid "English (American)"
 msgstr "Inglés (Americano)"
 
-#: ../plugins/spell/gedit-spell-checker.c:95
+#: ../plugins/spell/gedit-spell-checker.c:97
 msgid "English (British)"
 msgstr "Inglés (Británico)"
 
-#: ../plugins/spell/gedit-spell-checker.c:96
+#: ../plugins/spell/gedit-spell-checker.c:98
 msgid "English (Canadian)"
 msgstr "Inglés (Canadiense)"
 
-#: ../plugins/spell/gedit-spell-checker.c:97
+#: ../plugins/spell/gedit-spell-checker.c:99
 msgid "Esperanto"
 msgstr "Esperanto"
 
-#: ../plugins/spell/gedit-spell-checker.c:98
+#: ../plugins/spell/gedit-spell-checker.c:100
 msgid "Spanish"
 msgstr "Español"
 
-#: ../plugins/spell/gedit-spell-checker.c:99
+#: ../plugins/spell/gedit-spell-checker.c:101
 msgid "Estonian"
 msgstr "Estonio"
 
-#: ../plugins/spell/gedit-spell-checker.c:100
+#: ../plugins/spell/gedit-spell-checker.c:102
 msgid "Persian"
 msgstr "Persa"
 
-#: ../plugins/spell/gedit-spell-checker.c:101
+#: ../plugins/spell/gedit-spell-checker.c:103
 msgid "Finnish"
 msgstr "Finlandés"
 
-#: ../plugins/spell/gedit-spell-checker.c:102
+#: ../plugins/spell/gedit-spell-checker.c:104
 msgid "Faroese"
 msgstr "Faroés"
 
-#: ../plugins/spell/gedit-spell-checker.c:103
+#: ../plugins/spell/gedit-spell-checker.c:105
 msgid "French (France)"
 msgstr "Francés (Francia)"
 
-#: ../plugins/spell/gedit-spell-checker.c:104
+#: ../plugins/spell/gedit-spell-checker.c:106
 msgid "French (Swiss)"
 msgstr "Francés (Suiza)"
 
-#: ../plugins/spell/gedit-spell-checker.c:105
+#: ../plugins/spell/gedit-spell-checker.c:107
 msgid "Irish"
 msgstr "Irlandés"
 
-#: ../plugins/spell/gedit-spell-checker.c:106
+#: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Scottish Gaelic"
 msgstr "Galés escocés"
 
-#: ../plugins/spell/gedit-spell-checker.c:107
+#: ../plugins/spell/gedit-spell-checker.c:109
 msgid "Gallegan"
 msgstr "Gallego"
 
-#: ../plugins/spell/gedit-spell-checker.c:108
+#: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Manx Gaelic"
 msgstr "Galés Manx"
 
-#: ../plugins/spell/gedit-spell-checker.c:110
+#: ../plugins/spell/gedit-spell-checker.c:112
 msgid "Hindi"
 msgstr "Hindi"
 
-#: ../plugins/spell/gedit-spell-checker.c:111
+#: ../plugins/spell/gedit-spell-checker.c:113
 msgid "Croatian"
 msgstr "Croata"
 
-#: ../plugins/spell/gedit-spell-checker.c:112
+#: ../plugins/spell/gedit-spell-checker.c:114
 msgid "Upper Sorbian"
 msgstr "Servio"
 
-#: ../plugins/spell/gedit-spell-checker.c:113
+#: ../plugins/spell/gedit-spell-checker.c:115
 msgid "Hungarian"
 msgstr "Húngaro"
 
-#: ../plugins/spell/gedit-spell-checker.c:114
+#: ../plugins/spell/gedit-spell-checker.c:116
 msgid "Interlingua (IALA)"
 msgstr "Interlingua (IALA)"
 
-#: ../plugins/spell/gedit-spell-checker.c:115
+#: ../plugins/spell/gedit-spell-checker.c:117
 msgid "Indonesian"
 msgstr "Indonesio"
 
-#: ../plugins/spell/gedit-spell-checker.c:116
+#: ../plugins/spell/gedit-spell-checker.c:118
 msgid "Icelandic"
 msgstr "Islandés"
 
-#: ../plugins/spell/gedit-spell-checker.c:117
+#: ../plugins/spell/gedit-spell-checker.c:119
 msgid "Italian"
 msgstr "Italiano"
 
-#: ../plugins/spell/gedit-spell-checker.c:118
+#: ../plugins/spell/gedit-spell-checker.c:120
 msgid "Kurdish"
 msgstr "Kurdo"
 
-#: ../plugins/spell/gedit-spell-checker.c:119
+#: ../plugins/spell/gedit-spell-checker.c:121
 msgid "Latin"
 msgstr "Latín"
 
-#: ../plugins/spell/gedit-spell-checker.c:120
+#: ../plugins/spell/gedit-spell-checker.c:122
 msgid "Lithuanian"
 msgstr "Lituano"
 
-#: ../plugins/spell/gedit-spell-checker.c:121
+#: ../plugins/spell/gedit-spell-checker.c:123
 msgid "Latvian"
 msgstr "Letón"
 
-#: ../plugins/spell/gedit-spell-checker.c:122
+#: ../plugins/spell/gedit-spell-checker.c:124
 msgid "Malagasy"
 msgstr "Malgache"
 
-#: ../plugins/spell/gedit-spell-checker.c:123
+#: ../plugins/spell/gedit-spell-checker.c:125
 msgid "Maori"
 msgstr "Maorí"
 
-#: ../plugins/spell/gedit-spell-checker.c:124
+#: ../plugins/spell/gedit-spell-checker.c:126
 msgid "Macedonian"
 msgstr "Macedonio"
 
-#: ../plugins/spell/gedit-spell-checker.c:125
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Mongolian"
 msgstr "Mongol"
 
-#: ../plugins/spell/gedit-spell-checker.c:126
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Marathi"
 msgstr "Marathi"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Malay"
 msgstr "Malayo"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Maltese"
 msgstr "Maltés"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Bokmal"
 msgstr "Noruego Bokmal"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Dutch"
 msgstr "Holandés"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Norwegian Nynorsk"
 msgstr "Noruego Nynorsk"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Norwegian"
 msgstr "Noruego"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Nyanja"
 msgstr "Nyanja"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Polish"
 msgstr "Polaco"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Portuguese (Portugal)"
 msgstr "Portugués (Portugal)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:138
 msgid "Portuguese (Brazilian)"
 msgstr "Portugués (Brasileño)"
 
-#: ../plugins/spell/gedit-spell-checker.c:137
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Quechua"
 msgstr "Quechua"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Russian"
 msgstr "Ruso"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Kinyarwanda"
 msgstr "Kinyarwanda"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Sardinian"
 msgstr "Sardo"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Slovak"
 msgstr "Eslovaco"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Slovenian"
 msgstr "Esloveno"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Swedish"
 msgstr "Sueco"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Swahili"
 msgstr "Swahili"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tamil"
 msgstr "Tamil"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tetum"
 msgstr "Tetum"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:150
 msgid "Tagalog"
 msgstr "Tagalo"
 
-#: ../plugins/spell/gedit-spell-checker.c:149
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Tswana"
 msgstr "Tswana"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:153
 msgid "Ukrainian"
 msgstr "Ucraniano"
 
-#: ../plugins/spell/gedit-spell-checker.c:152
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Uzbek"
 msgstr "Uzbeco"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Walloon"
 msgstr "Valón"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:157
 msgid "Yiddish"
 msgstr "Yiddish"
 
-#: ../plugins/spell/gedit-spell-checker.c:156
+#: ../plugins/spell/gedit-spell-checker.c:158
 msgid "Zulu"
 msgstr "Zulú"
 
-#: ../plugins/spell/gedit-spell-checker.c:828
+#: ../plugins/spell/gedit-spell-checker.c:830
 msgid "Default"
 msgstr "Predeterminado"
 
@@ -3173,12 +3203,12 @@ msgstr "(corrección ortográfica correcta)"
 msgid "Completed spell checking"
 msgstr "Corrección ortográfica finalizada"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:245
+#: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "No se han podido encontrar los widgets necesarios dentro de %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:266
+#: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "Idiomas"
 
