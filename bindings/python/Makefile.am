@@ -1,8 +1,11 @@
 ## Process this file with automake to produce Makefile.in
 
-noinst_LTLIBRARIES = gedit.la
+noinst_LTLIBRARIES = \
+	gedit.la
 
-nodist_gedit_la_SOURCES = gedit.c
+nodist_gedit_la_SOURCES = \
+	gedit.c			\
+	geditutils.c
 
 gedit_la_LDFLAGS = \
 	-module -avoid-version
@@ -30,7 +33,12 @@ gedit.c: gedit.defs gedit.override
 		--override $*.override \
 		--prefix py$* $(<F) ) > $@ 
 
-BINDING_HEADERS_SRCDIR_IN = \
+geditutils.c: geditutils.defs geditutils.override
+	( cd $(srcdir) && $(PYGTK_CODEGEN) \
+		--override $*.override \
+		--prefix py$* $(<F) ) > $@ 
+
+BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 	gedit/gedit-app.h		\
 	gedit/gedit-document.h		\
 	gedit/gedit-encodings.h		\
@@ -41,19 +49,28 @@ BINDING_HEADERS_SRCDIR_IN = \
 	gedit/gedit-window.h 		\
 	gedit/gedit-help.h
 
+BINDING_UTILS_HEADERS_SRCDIR_IN = \
+	gedit/gedit-utils.h
+
 BINDING_HEADERS_BUILDDIR_IN = 
 
-BINDING_HEADERS_SRCDIR		:= $(addprefix $(top_srcdir)/,$(BINDING_HEADERS_SRCDIR_IN))
+BINDING_GEDIT_HEADERS_SRCDIR	:= $(addprefix $(top_srcdir)/,$(BINDING_GEDIT_HEADERS_SRCDIR_IN))
+BINDING_UTILS_HEADERS_SRCDIR	:= $(addprefix $(top_srcdir)/,$(BINDING_UTILS_HEADERS_SRCDIR_IN))
 BINDING_HEADERS_BUILDDIR	:= $(addprefix $(top_builddir)/,$(BINDING_HEADERS_BUILDDIR_IN))
 
 regenerate-python-binding:
-	$(PYGTK_H2DEF) $(sort $(BINDING_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > gedit.defs.new
+	$(PYGTK_H2DEF) $(sort $(BINDING_GEDIT_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > gedit.defs.new
+	$(PYGTK_H2DEF) $(sort $(BINDING_UTILS_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > geditutils.defs.new
 
-BUILT_SOURCES = gedit.c
+BUILT_SOURCES = \
+	gedit.c			\
+	geditutils.c
 
 EXTRA_DIST = \
-	gedit.override	\
-	gedit.defs
+	gedit.override		\
+	gedit.defs		\
+	geditutils.override	\
+	geditutils.defs
 
 CLEANFILES = $(BUILT_SOURCES)
 

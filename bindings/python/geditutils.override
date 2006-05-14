@@ -1,0 +1,21 @@
+%%
+headers
+#define NO_IMPORT_PYGOBJECT
+#include "pygobject.h"
+#include <pygtk/pygtk.h>
+
+#include "gedit-utils.h"
+
+void pygeditutils_register_classes (PyObject *d);
+void pygeditutils_add_constants (PyObject *module, const gchar *strip_prefix);
+
+%%
+modulename gedit.utils
+%%
+import gtk.Widget as PyGtkWidget_Type
+import gobject.GObject as PyGObject_Type
+import gtk.Menu as PyGtkMenu_Type
+%%
+ignore-glob
+  _*
+%%

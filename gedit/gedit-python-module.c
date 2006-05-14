@@ -58,6 +58,9 @@ void pygedit_register_classes (PyObject *d);
 void pygedit_add_constants (PyObject *module, const gchar *strip_prefix);
 extern PyMethodDef pygedit_functions[];
 
+/* Exported by pygeditutils module */
+extern PyMethodDef pygeditutils_functions[];
+
 /* We retreive this to check for correct class hierarchy */
 static PyTypeObject *PyGeditPlugin_Type;
 
@@ -67,7 +70,8 @@ static void
 gedit_python_module_init_python ()
 {
 	PyObject *pygtk, *mdict, *require, *path;
-	PyObject *sys_path, *gedit, *gtk, *pygtk_version, *pygtk_required_version;
+	PyObject *sys_path, *gtk, *gedit, *geditutils;
+	PyObject *pygtk_version, *pygtk_required_version;
 	PyObject *gettext, *install, *gettext_args;
 	struct sigaction old_sigint;
 	gint res;
@@ -140,8 +144,8 @@ gedit_python_module_init_python ()
 	if (PyObject_Compare (pygtk_version, pygtk_required_version) == -1)
 	{
 		g_warning("PyGTK %s required, but %s found.",
-				  PyString_AsString (PyObject_Repr (pygtk_required_version)),
-				  PyString_AsString (PyObject_Repr (pygtk_version)));
+			  PyString_AsString (PyObject_Repr (pygtk_required_version)),
+			  PyString_AsString (PyObject_Repr (pygtk_version)));
 		Py_DECREF (pygtk_required_version);
 		return;
 	}
@@ -158,9 +162,9 @@ gedit_python_module_init_python ()
 	mdict = PyModule_GetDict (gedit);
 
 	pygedit_register_classes (mdict);
-	pygedit_add_constants (gedit, "GEDIT_");   
-
-	/* Retreive the Python type for gedit.Plugin */
+	pygedit_add_constants (gedit, "GEDIT_");
+	
+	/* Retrieve the Python type for gedit.Plugin */
 	PyGeditPlugin_Type = (PyTypeObject *) PyDict_GetItemString (mdict, "Plugin"); 
 	if (PyGeditPlugin_Type == NULL)
 	{
@@ -168,6 +172,10 @@ gedit_python_module_init_python ()
 		return;
 	}
 
+	/* import gedit.utils */
+	geditutils = Py_InitModule ("gedit.utils", pygeditutils_functions);
+	PyDict_SetItemString (mdict, "utils", geditutils);
+	
 	/* i18n support */
 	gettext = PyImport_ImportModule ("gettext");
 	if (gettext == NULL)

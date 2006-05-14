@@ -1,3 +1,14 @@
+2006-05-14  Steve Frécinaux  <steve@istique.net>
+
+	* bindings/python/Makefile.am:
+	* bindings/python/geditutils.defs:
+	* bindings/python/geditutils.override:
+	
+	New gedit.utils python module binding a few functions from gedit-utils.h
+
+	* gedit/gedit-python-module.c: (gedit_python_module_init_python): import
+	the new above-mentioned module.
+
 2006-05-02  Steve Frécinaux  <steve@istique.net>
 
 	* gedit/gedit-plugin-manager.c: destroy the popup menu when the dialog
