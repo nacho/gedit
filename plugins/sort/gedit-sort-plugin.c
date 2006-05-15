@@ -282,17 +282,39 @@ compare_algorithm (gconstpointer s1,
 	return ret;
 }
 
+static gchar *
+get_line_slice (GtkTextBuffer *buf,
+		gint           line)
+{
+	GtkTextIter start, end;
+	char *ret;
+
+	gtk_text_buffer_get_iter_at_line (buf, &start, line);
+	end = start;
+
+	if (!gtk_text_iter_ends_line (&start))
+		gtk_text_iter_forward_to_line_end (&end);
+
+	ret= gtk_text_buffer_get_slice (buf,
+					  &start,
+					  &end,
+					  TRUE);
+
+	g_assert (ret != NULL);
+
+	return ret;
+}
+
 static void
 sort_real (SortDialog *dialog)
 {
 	GeditDocument *doc;
 	GtkTextIter start, end;
-	gchar *buffer;
-	gchar *p;
-	gunichar c;
+	gint start_line, end_line;
+	gint i;
 	gchar *last_row = NULL;
-	gpointer *lines;
-	gint cont;
+	gint num_lines;
+	gchar **lines;
 	SortInfo *sort_info;
 
 	gedit_debug (DEBUG_PLUGINS);
@@ -316,47 +338,33 @@ sort_real (SortDialog *dialog)
 					    &end);
 	}
 
-	buffer = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
-					    &start,
-					    &end,
-					    TRUE);
+	start_line = gtk_text_iter_get_line (&start);
+	end_line = gtk_text_iter_get_line (&end);
 
-	lines = g_new0 (gpointer, gtk_text_buffer_get_line_count (GTK_TEXT_BUFFER (doc)) + 1);
+	/* if we are at line start our last line is the previus one.
+	 * Otherwise the last line is the current one but we try to
+	 * move the iter after the line terminator */
+	if (gtk_text_iter_get_line_offset (&end) == 0)
+		end_line = MAX (start_line, end_line - 1);
+	else
+		gtk_text_iter_forward_line (&end);
+
+	num_lines = end_line - start_line + 1;
+	lines = g_new0 (gchar *, num_lines + 1);
 
 	gedit_debug_message (DEBUG_PLUGINS, "Building list...");
 
-	cont = 0;
-	p = buffer;
-	c = g_utf8_get_char (p);
-
-	while (c != '\0')
+	for (i = 0; i < num_lines; i++)
 	{
-		if (c == '\n')
-		{
-			gchar *old_p;
-
-			old_p = p;
-			p = g_utf8_next_char (p);
-
-			*old_p = '\0';
-
-			lines[cont] = p;
-			++cont;
-		} else
-		{
-			p = g_utf8_next_char (p);
-		}
-
-		c = g_utf8_get_char (p);
+		lines[i] = get_line_slice (GTK_TEXT_BUFFER (doc), start_line + i);
 	}
 
-	lines[cont] = buffer;
-	++cont;
+	lines[num_lines] = NULL;
 
 	gedit_debug_message (DEBUG_PLUGINS, "Sort list...");
 
 	g_qsort_with_data (lines,
-			   cont,
+			   num_lines,
 			   sizeof (gpointer),
 			   compare_algorithm,
 			   sort_info);
@@ -369,40 +377,28 @@ sort_real (SortDialog *dialog)
 				&start,
 				&end);
 
-	cont = 0;
-
-	while (lines[cont] != NULL)
+	for (i = 0; i < num_lines; i++)
 	{
-		gchar *current_row = lines[cont];
+		if (sort_info->remove_duplicates &&
+		    last_row != NULL &&
+		    (strcmp (last_row, lines[i]) == 0))
+			continue;
 
-		/* Don't insert this row if it's the same as the last
-		 * one and the user has specified to remove duplicates. */
-		if (!sort_info->remove_duplicates ||
-		    last_row == NULL ||
-		    (strcmp (last_row, current_row) != 0))
-		{
-			gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
-						&start,
-						current_row,
-						-1);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
+					&start,
+					lines[i],
+					-1);
+		gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
+					&start,
+					"\n",
+					-1);
 
-			if (lines[cont + 1] != NULL)
-			{
-				gtk_text_buffer_insert (GTK_TEXT_BUFFER (doc),
-							&start,
-							"\n",
-							-1);
-			}
-		}
-
-		last_row = current_row;
-		++cont;
+		last_row = lines[i];
 	}
 
 	gtk_source_buffer_end_not_undoable_action (GTK_SOURCE_BUFFER (doc));
 
-	g_free (lines);
-	g_free (buffer);
+	g_strfreev (lines);
 	g_free (sort_info);
 
 	gedit_debug_message (DEBUG_PLUGINS, "Done.");
