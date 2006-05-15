@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
 
-AC_INIT(gedit, 2.15.1, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_INIT(gedit, 2.15.2, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
 AC_CONFIG_SRCDIR(gedit/gedit.c)
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -18,7 +18,7 @@ AM_CONFIG_HEADER(config.h)
 AM_DISABLE_STATIC
 
 AC_PATH_PROG(GCONFTOOL, gconftool-2)
-IT_PROG_INTLTOOL([0.34.90])
+IT_PROG_INTLTOOL([0.35.0])
 
 AM_PROG_LIBTOOL
 
