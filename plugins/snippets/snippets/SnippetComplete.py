@@ -194,7 +194,7 @@ class SnippetComplete(gtk.Window):
 		self.set_skip_taskbar_hint(True)
 		self.set_skip_pager_hint(True)
 		
-		window = gedit.gedit_app_get_default().get_active_window()
+		window = gedit.app_get_default().get_active_window()
 		window.get_group().add_window(self)
 		
 		self.set_transient_for(window)

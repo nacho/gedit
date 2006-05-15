@@ -137,7 +137,7 @@ def remove_tools_menu(window):
 	window.set_data("ToolsPluginCommandsData", None)
 
 def update_tools_menu(tools = None):
-	for window in gedit.gedit_app_get_default().get_windows():
+	for window in gedit.app_get_default().get_windows():
 		remove_tools_menu(window)
 		insert_tools_menu(window, tools)
 		filter_tools_menu(window)

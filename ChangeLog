@@ -1,3 +1,19 @@
+2006-05-15  Steve Frécinaux  <steve@istique.net>
+
+	* bindings/python/gedit.defs: Remove gedit_ prefix from functions, and
+	add gedit_-prefixed ones marked as deprecated.
+	
+	* bindings/python/gedit.override: Add overrides for deprecated functions
+	issuing a DeprecationWarning when used.
+	
+	* plugins/externaltools/tools/__init__.py:
+	* plugins/externaltools/tools/functions.py:
+	* plugins/snippets/snippets/SnippetComplete.py:
+	* plugins/snippets/snippets/SnippetsDialog.py:
+	* plugins/snippets/snippets/__init__.py:
+	
+	Use the new function names.
+
 2006-05-15  Paolo Borelli  <pborelli@katamail.com>
 
 	* plugins/sort/gedit-sort-plugin.c: handle empty lines correctly.

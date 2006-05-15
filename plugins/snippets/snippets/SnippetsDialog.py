@@ -76,7 +76,7 @@ class SnippetsDialog:
 		self.tree_view.expand_row(path, False)
 
 	def build_model(self):
-		window = gedit.gedit_app_get_default().get_active_window()
+		window = gedit.app_get_default().get_active_window()
 		
 		if window:
 			view = window.get_active_view()

@@ -78,7 +78,7 @@ class ToolsPlugin(gedit.Plugin):
 
 	def open_dialog(self):
 		tm = Manager().dialog
-		window = gedit.gedit_app_get_default().get_active_window()
+		window = gedit.app_get_default().get_active_window()
 		if window:
 			tm.set_transient_for(window)
 		return tm

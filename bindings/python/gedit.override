@@ -32,7 +32,6 @@ _helper_wrap_gobject_glist (const GList *list)
     }
     return py_list;
 }
-
 %%
 modulename gedit 
 %%
@@ -217,4 +216,59 @@ _wrap_gedit_panel_add_item(PyGObject *self, PyObject *args, PyObject *kwargs)
     PyErr_Clear();
     PyErr_SetString(PyExc_TypeError, "the last arg should be either a gtk.Image or a stock_id string");
     return NULL;
+}
+%%
+override gedit_app_get_default_deprecated
+/* deprecated wrappers */
+static PyObject *
+_wrap_gedit_app_get_default_deprecated(PyObject *self)
+{
+    if (PyErr_Warn(PyExc_DeprecationWarning, "use gedit.app_get_default instead") < 0)
+	return NULL;
+    return _wrap_gedit_app_get_default(self);
+}
+%%
+override gedit_encoding_get_from_charset_deprecated kwargs
+static PyObject *
+_wrap_gedit_encoding_get_from_charset_deprecated(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    if (PyErr_Warn(PyExc_DeprecationWarning, "use gedit.encoding_get_from_charset instead") < 0)
+	return NULL;
+    return _wrap_gedit_encoding_get_from_charset(self, args, kwargs);
+}
+%%
+override gedit_encoding_get_from_index_deprecated kwargs
+static PyObject *
+_wrap_gedit_encoding_get_from_index_deprecated(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    if (PyErr_Warn(PyExc_DeprecationWarning, "use gedit.encoding_get_from_index instead") < 0)
+	return NULL;
+    return _wrap_gedit_encoding_get_from_index(self, args, kwargs);
+}
+%%
+override gedit_encoding_get_utf8_deprecated
+static PyObject *
+_wrap_gedit_encoding_get_utf8_deprecated(PyObject *self)
+{
+    if (PyErr_Warn(PyExc_DeprecationWarning, "use gedit.encoding_get_utf8 instead") < 0)
+	return NULL;
+    return _wrap_gedit_encoding_get_utf8(self);
+}
+%%
+override gedit_encoding_get_current_deprecated
+static PyObject *
+_wrap_gedit_encoding_get_current_deprecated(PyObject *self)
+{
+    if (PyErr_Warn(PyExc_DeprecationWarning, "use gedit.encoding_get_current instead") < 0)
+	return NULL;
+    return _wrap_gedit_encoding_get_current(self);
+}
+%%
+override gedit_tab_get_from_document_deprecated kwargs
+static PyObject *
+_wrap_gedit_tab_get_from_document_deprecated(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    if (PyErr_Warn(PyExc_DeprecationWarning, "use gedit.tab_get_from_document instead") < 0)
+	return NULL;
+    return _wrap_gedit_tab_get_from_document(self, args, kwargs);
 }

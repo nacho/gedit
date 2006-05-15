@@ -117,8 +117,14 @@
   (return-type "GType")
 )
 
-(define-function gedit_app_get_default
+(define-function app_get_default
   (c-name "gedit_app_get_default")
+  (return-type "GeditApp*")
+)
+
+; deprecated version !
+(define-function gedit_app_get_default
+  (c-name "gedit_app_get_default_deprecated")
   (return-type "GeditApp*")
 )
 
@@ -159,7 +165,7 @@
 
 ;; From ../../gedit/gedit-document.h
 
-(define-function gedit_document_error_quark
+(define-function document_error_quark
   (c-name "gedit_document_error_quark")
   (return-type "GQuark")
 )
@@ -381,7 +387,7 @@
   (return-type "none")
 )
 
-(define-function gedit_encoding_get_from_charset
+(define-function encoding_get_from_charset
   (c-name "gedit_encoding_get_from_charset")
   (return-type "const-GeditEncoding*")
   (parameters
@@ -389,8 +395,26 @@
   )
 )
 
-(define-function gedit_encoding_get_from_index
+; Deprecated version !
+(define-function gedit_encoding_get_from_charset
+  (c-name "gedit_encoding_get_from_charset_deprecated")
+  (return-type "const-GeditEncoding*")
+  (parameters
+    '("const-gchar*" "charset")
+  )
+)
+
+(define-function encoding_get_from_index
   (c-name "gedit_encoding_get_from_index")
+  (return-type "const-GeditEncoding*")
+  (parameters
+    '("gint" "index")
+  )
+)
+
+; Deprecated version !
+(define-function gedit_encoding_get_from_index
+  (c-name "gedit_encoding_get_from_index_deprecated")
   (return-type "const-GeditEncoding*")
   (parameters
     '("gint" "index")
@@ -415,17 +439,27 @@
   (return-type "const-gchar*")
 )
 
-(define-function gedit_encoding_get_utf8
+(define-function encoding_get_utf8
   (c-name "gedit_encoding_get_utf8")
   (return-type "const-GeditEncoding*")
 )
 
-(define-function gedit_encoding_get_current
+; Deprecated version !
+(define-function gedit_encoding_get_utf8
+  (c-name "gedit_encoding_get_utf8_deprecated")
+  (return-type "const-GeditEncoding*")
+)
+
+(define-function encoding_get_current
   (c-name "gedit_encoding_get_current")
   (return-type "const-GeditEncoding*")
 )
 
-
+; Deprecated version !
+(define-function gedit_encoding_get_current
+  (c-name "gedit_encoding_get_current_deprecated")
+  (return-type "const-GeditEncoding*")
+)
 
 ;; From ../../gedit/gedit-help.h
 
@@ -583,8 +617,17 @@
   (return-type "GeditDocument*")
 )
 
-(define-function gedit_tab_get_from_document
+(define-function tab_get_from_document
   (c-name "gedit_tab_get_from_document")
+  (return-type "GeditTab*")
+  (parameters
+    '("GeditDocument*" "doc")
+  )
+)
+
+; Deprecated version !
+(define-function gedit_tab_get_from_document
+  (c-name "gedit_tab_get_from_document_deprecated")
   (return-type "GeditTab*")
   (parameters
     '("GeditDocument*" "doc")

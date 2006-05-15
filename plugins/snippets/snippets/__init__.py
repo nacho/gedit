@@ -72,7 +72,7 @@ class SnippetsPlugin(gedit.Plugin):
 		else:
 			self.dlg.run()
 		
-		window = gedit.gedit_app_get_default().get_active_window()
+		window = gedit.app_get_default().get_active_window()
 		
 		if window:
 			self.dlg.dlg.set_transient_for(window)
