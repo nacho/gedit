@@ -681,15 +681,18 @@ do_find_again (GeditWindow *window,
 	       gboolean     backward)
 {
 	GeditView *active_view;
+	GtkTextBuffer *buffer;
 	gboolean wrap_around = TRUE;
 	LastSearchData *data;
 	
 	active_view = gedit_window_get_active_view (window);
 	g_return_if_fail (active_view != NULL);
 
-	data = g_object_get_data (G_OBJECT (gtk_text_view_get_buffer (active_view)), 
+	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (active_view));
+
+	data = g_object_get_data (G_OBJECT (buffer), 
 				  GEDIT_LAST_SEARCH_DATA_KEY);
-					    
+
 	if (data != NULL)
 		wrap_around = data->wrap_around;					    
 

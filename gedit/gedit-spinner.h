@@ -80,7 +80,7 @@ struct _GeditSpinnerClass
 /*
  * Public methods
  */
-GType		gedit_spinner_get_type	(void) G_GNUC_CONST;;
+GType		gedit_spinner_get_type	(void) G_GNUC_CONST;
 
 GtkWidget      *gedit_spinner_new	(void);
 

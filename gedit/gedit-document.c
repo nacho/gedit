@@ -62,7 +62,7 @@
 #define PROFILE(x)
 #endif
 
-PROFILE (static GTimer *timer = NULL);
+PROFILE (static GTimer *timer = NULL)
 
 #ifdef MAXPATHLEN
 #define GEDIT_MAX_PATH_LEN  MAXPATHLEN
@@ -1212,7 +1212,7 @@ gedit_document_insert_file (GeditDocument       *doc,
 	g_return_val_if_fail (gtk_text_iter_get_buffer (iter) == 
 				GTK_TEXT_BUFFER (doc), FALSE);
 
-	// TODO
+	/* TODO */
 
 	return FALSE;
 }

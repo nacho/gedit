@@ -87,7 +87,7 @@ static const GOptionEntry options [] =
 };
 
 static void
-gedit_get_command_line_data (GnomeProgram *program)
+gedit_get_command_line_data (void)
 {
 	if (remaining_args)
 	{
@@ -228,8 +228,7 @@ on_message_received (const char *message,
 	g_strfreev (params);
 
 	/* body */
-	i = 1;
-	while (commands[i])
+	for (i = 1; commands[i] != NULL; i++)
 	{
 		params = g_strsplit (commands[i], "\t", -1);
 
@@ -243,7 +242,7 @@ on_message_received (const char *message,
 		}
 		else if (strcmp (params[0], "OPEN-URIS") == 0)
 		{
-			gint n_uris, i;
+			gint n_uris, j;
 			gchar **uris;
 
 			line_position = atoi (params[1]);
@@ -253,8 +252,8 @@ on_message_received (const char *message,
 			n_uris = atoi (params[3]);
 			uris = g_strsplit (params[4], " ", n_uris);
 
-			for (i = 0; i < n_uris; i++)
-				file_list = g_slist_prepend (file_list, uris[i]);
+			for (j = 0; j < n_uris; j++)
+				file_list = g_slist_prepend (file_list, uris[j]);
 			file_list = g_slist_reverse (file_list);
 
 			/* the list takes ownerhip of the strings,
@@ -267,7 +266,6 @@ on_message_received (const char *message,
 		}
 
 		g_strfreev (params);
-		++i;
 	}
 
 	g_strfreev (commands);
@@ -404,7 +402,7 @@ send_bacon_message (void)
 		command = g_string_append (command, "OPEN-URIS");
 
 		g_string_append_printf (command,
-					"\t%d\t%s\t%d\t",
+					"\t%d\t%s\t%u\t",
 					line_position,
 					encoding_charset ? encoding_charset : "",
 					g_slist_length (file_list));
@@ -473,7 +471,7 @@ main (int argc, char *argv[])
 		{
 			gedit_debug_message (DEBUG_APP, "I'm a client");
 
-			gedit_get_command_line_data (program);
+			gedit_get_command_line_data ();
 
 			send_bacon_message ();
 
@@ -531,7 +529,7 @@ main (int argc, char *argv[])
 	if (!restored)
 	{
 		gedit_debug_message (DEBUG_APP, "Analyze command line data");
-		gedit_get_command_line_data (program);
+		gedit_get_command_line_data ();
 		
 		gedit_debug_message (DEBUG_APP, "Get default app");
 		app = gedit_app_get_default ();

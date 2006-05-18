@@ -2306,10 +2306,6 @@ notebook_tab_removed (GeditNotebook *notebook,
 	g_return_if_fail (window->priv->num_tabs >= 0);
 	if (window->priv->num_tabs == 0)
 	{
-		GeditApp *app;
-			
-		app = gedit_app_get_default ();
-		
 		window->priv->active_tab = NULL;
 			       
 		set_title (window);
@@ -2355,9 +2351,9 @@ notebook_tab_removed (GeditNotebook *notebook,
 		gtk_action_set_sensitive (action,
 					  FALSE);
 	}
-	
+
 	update_window_state (window);
-		
+
 	g_signal_emit (G_OBJECT (window), signals[TAB_REMOVED], 0, tab);	
 }
 

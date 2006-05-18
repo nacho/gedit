@@ -44,10 +44,14 @@
 
 typedef struct _GeditCloseConfirmationDialog 		GeditCloseConfirmationDialog;
 typedef struct _GeditCloseConfirmationDialogClass 	GeditCloseConfirmationDialogClass;
+typedef struct _GeditCloseConfirmationDialogPrivate 	GeditCloseConfirmationDialogPrivate;
 
 struct _GeditCloseConfirmationDialog 
 {
 	GtkDialog parent;
+
+	/*< private > */
+	GeditCloseConfirmationDialogPrivate *priv;
 };
 
 struct _GeditCloseConfirmationDialogClass 

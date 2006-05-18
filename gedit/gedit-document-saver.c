@@ -1189,7 +1189,7 @@ save_remote_file_real (GeditDocumentSaver *saver)
 
 	if (saver->priv->tmpfd == -1)
 	{
-		GnomeVFSResult result = gnome_vfs_result_from_errno ();
+		result = gnome_vfs_result_from_errno ();
 
 		g_set_error (&saver->priv->error,
 			     GEDIT_DOCUMENT_ERROR,

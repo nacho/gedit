@@ -154,11 +154,6 @@ static gint		 gedit_prefs_manager_get_int		(const gchar* key,
 static gchar		*gedit_prefs_manager_get_string		(const gchar* key, 
 								 const gchar* def);
 
-gboolean		 gconf_client_set_color 		(GConfClient* client, 
-								 const gchar* key,
-								 GdkColor val, 
-								 GError** err);
-
 
 gboolean
 gedit_prefs_manager_init (void)
@@ -337,12 +332,14 @@ gconf_client_get_color_with_default (GConfClient* client, const gchar* key,
 }
 
 gboolean
-gconf_client_set_color (GConfClient* client, const gchar* key,
-                        GdkColor val, GError** err)
+gedit_gconf_client_set_color (GConfClient   *client,
+                              const gchar   *key,
+                              GdkColor       val,
+                              GError       **err)
 {
 	gchar *str_color = NULL;
 	gboolean res;
-	
+
 	gedit_debug (DEBUG_PREFS);
 
 	g_return_val_if_fail (client != NULL, FALSE);
@@ -390,7 +387,7 @@ gedit_prefs_manager_set_color (const gchar* key, GdkColor value)
 	g_return_if_fail (gconf_client_key_is_writable (
 				gedit_prefs_manager->gconf_client, key, NULL));
 			
-	gconf_client_set_color (gedit_prefs_manager->gconf_client, key, value, NULL);
+	gedit_gconf_client_set_color (gedit_prefs_manager->gconf_client, key, value, NULL);
 }
 
 
@@ -402,13 +399,13 @@ DEFINE_BOOL_PREF (use_default_font,
 /* Editor font */
 DEFINE_STRING_PREF (editor_font,
 		    GPM_EDITOR_FONT,
-		    GPM_DEFAULT_EDITOR_FONT);
+		    GPM_DEFAULT_EDITOR_FONT)
 
 
 /* Use default colors */
 DEFINE_BOOL_PREF (use_default_colors,
 		  GPM_USE_DEFAULT_COLORS,
-		  GPM_DEFAULT_USE_DEFAULT_COLORS);
+		  GPM_DEFAULT_USE_DEFAULT_COLORS)
 
 
 /* Background color */	
@@ -523,7 +520,7 @@ gedit_prefs_manager_selection_color_can_set (void)
 /* Create backup copy */
 DEFINE_BOOL_PREF (create_backup_copy,
 		  GPM_CREATE_BACKUP_COPY,
-		  GPM_DEFAULT_CREATE_BACKUP_COPY);
+		  GPM_DEFAULT_CREATE_BACKUP_COPY)
 
 /* Backup extension. This is configurable only using gconftool or gconf-editor */
 gchar *
@@ -538,12 +535,12 @@ gedit_prefs_manager_get_backup_extension (void)
 /* Auto save */
 DEFINE_BOOL_PREF (auto_save,
 		  GPM_AUTO_SAVE,
-		  GPM_DEFAULT_AUTO_SAVE);
+		  GPM_DEFAULT_AUTO_SAVE)
 
 /* Auto save interval */
 DEFINE_INT_PREF (auto_save_interval,
 		 GPM_AUTO_SAVE_INTERVAL,
-		 GPM_DEFAULT_AUTO_SAVE_INTERVAL);
+		 GPM_DEFAULT_AUTO_SAVE_INTERVAL)
 
 
 /* Undo actions limit: if < 1 then no limits */
@@ -627,7 +624,7 @@ gedit_prefs_manager_wrap_mode_can_set (void)
 /* Tabs size */
 DEFINE_INT_PREF (tabs_size, 
 		 GPM_TABS_SIZE, 
-		 GPM_DEFAULT_TABS_SIZE);
+		 GPM_DEFAULT_TABS_SIZE)
 
 /* Insert spaces */
 DEFINE_BOOL_PREF (insert_spaces, 
@@ -647,7 +644,7 @@ DEFINE_BOOL_PREF (display_line_numbers,
 /* Toolbar visibility */
 DEFINE_BOOL_PREF (toolbar_visible,
 		  GPM_TOOLBAR_VISIBLE,
-		  GPM_DEFAULT_TOOLBAR_VISIBLE);
+		  GPM_DEFAULT_TOOLBAR_VISIBLE)
 
 
 /* Toolbar suttons style */
@@ -680,7 +677,6 @@ gedit_prefs_manager_get_toolbar_buttons_style (void)
 	g_free (str);
 
 	return res;
-
 }
 
 void
@@ -1097,10 +1093,10 @@ gedit_prefs_manager_get_auto_detected_encodings (void)
 
 		      g_return_val_if_fail (charset != NULL, NULL);
 		      enc = gedit_encoding_get_from_charset (charset);
-		      
+
 		      if (enc != NULL)
 		      {
-			      if (!data_exists (res, (const gpointer)enc))
+			      if (!data_exists (res, (gpointer)enc))
 				      res = g_slist_prepend (res, (gpointer)enc);
 
 		      }
@@ -1147,13 +1143,13 @@ gedit_prefs_manager_get_shown_in_menu_encodings (void)
 
 		      if (strcmp (charset, "CURRENT") == 0)
 			      g_get_charset (&charset);
-      
+
 		      g_return_val_if_fail (charset != NULL, NULL);
 		      enc = gedit_encoding_get_from_charset (charset);
-		      
+
 		      if (enc != NULL)
 		      {
-			      if (!data_exists (res, (const gpointer)enc))
+			      if (!data_exists (res, (gpointer)enc))
 				      res = g_slist_prepend (res, (gpointer)enc);
 		      }
 

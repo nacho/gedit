@@ -64,7 +64,7 @@ extern PyMethodDef pygeditutils_functions[];
 /* We retreive this to check for correct class hierarchy */
 static PyTypeObject *PyGeditPlugin_Type;
 
-G_DEFINE_TYPE (GeditPythonModule, gedit_python_module, G_TYPE_TYPE_MODULE);
+G_DEFINE_TYPE (GeditPythonModule, gedit_python_module, G_TYPE_TYPE_MODULE)
 
 static void
 gedit_python_module_init_python ()
