@@ -2,7 +2,7 @@
  * gedit-app.c
  * This file is part of gedit
  *
- * Copyright (C) 2005 - Paolo Maggi 
+ * Copyright (C) 2005-2006 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -86,6 +86,14 @@ app_weak_notify (gpointer data,
 	gtk_main_quit ();
 }
 
+/**
+ * gedit_app_get_default:
+ *
+ * Returns the #GeditApp object. This object is a singleton and
+ * represents the running gedit instance.
+ *
+ * Return value: the #GeditApp pointer
+ */
 GeditApp *
 gedit_app_get_default (void)
 {
@@ -274,6 +282,14 @@ gedit_app_create_window_real (GeditApp    *app,
 	return window;
 }
 
+/**
+ * gedit_app_create_window:
+ * @app: the #GeditApp
+ *
+ * Create a new #GeditWindow part of @app.
+ *
+ * Return value: the new #GeditWindow
+ */
 GeditWindow *
 gedit_app_create_window (GeditApp  *app,
 			 GdkScreen *screen)
@@ -303,6 +319,15 @@ _gedit_app_restore_window (GeditApp    *app,
 	return window;
 }
 
+/**
+ * gedit_app_get_windows:
+ * @app: the #GeditApp
+ *
+ * Returns all the windows currently present in #GeditApp.
+ *
+ * Return value: the list of #GeditWindows objects. The list
+ * should not be freed
+ */
 const GList *
 gedit_app_get_windows (GeditApp *app)
 {
@@ -311,6 +336,14 @@ gedit_app_get_windows (GeditApp *app)
 	return app->priv->windows;
 }
 
+/**
+ * gedit_app_get_active_window:
+ * @app: the #GeditApp
+ *
+ * Retrives the #GeditWindow currently active.
+ *
+ * Return value: the active #GeditWindow
+ */
 GeditWindow *
 gedit_app_get_active_window (GeditApp *app)
 {
@@ -387,46 +420,60 @@ _gedit_app_get_window_in_workspace (GeditApp  *app,
 	return gedit_app_create_window (app, screen);
 }
 
-/* Returns a newly allocated list with all the documents */
+/**
+ * gedit_app_get_documents:
+ * @app: the #GeditApp
+ *
+ * Returns all the documents currently open in #GeditApp.
+ *
+ * Return value: a newly allocated list of #GeditDocument objects
+ */
 GList *
 gedit_app_get_documents	(GeditApp *app)
 {
 	GList *res = NULL;
 	GList *windows;
-	
+
 	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
-	
+
 	windows = app->priv->windows;
-	
+
 	while (windows != NULL)
 	{
 		res = g_list_concat (res,
 				     gedit_window_get_documents (GEDIT_WINDOW (windows->data)));
-				     
+
 		windows = g_list_next (windows);
 	}
-	
+
 	return res;
 }
 
-/* Returns a newly allocated list with all the views */
+/**
+ * gedit_app_get_views:
+ * @app: the #GeditApp
+ *
+ * Returns all the views currently present in #GeditApp.
+ *
+ * Return value: a newly allocated list of #GeditView objects
+ */
 GList *
 gedit_app_get_views (GeditApp *app)
 {
 	GList *res = NULL;
 	GList *windows;
-	
+
 	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
-	
+
 	windows = app->priv->windows;
-	
+
 	while (windows != NULL)
 	{
 		res = g_list_concat (res,
 				     gedit_window_get_views (GEDIT_WINDOW (windows->data)));
-				     
+
 		windows = g_list_next (windows);
 	}
-	
+
 	return res;
 }

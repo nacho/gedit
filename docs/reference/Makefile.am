@@ -69,7 +69,7 @@ expand_content_files=
 # CFLAGS and LDFLAGS for compiling gtkdoc-scangobj with your library.
 # Only needed if you are using gtkdoc-scangobj to dynamically query widget
 # signals and properties.
-INCLUDES=	\
+GTKDOC_CFLAGS=	\
 	-I$(top_srcdir)/gedit	\
 	-I$(top_builddir)/gedit \
 	-I$(top_srcdir)		\
@@ -84,7 +84,7 @@ GTKDOC_LIBS=	\
 	$(GEDIT_LIBS)
 
 if ENABLE_PYTHON
-INCLUDES += \
+GTKDOC_CFLAGS += \
         $(NO_STRICT_ALIASING_CFLAGS)    \
         $(PYGTK_CFLAGS)                 \
         $(PYTHON_CFLAGS)                \
