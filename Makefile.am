@@ -1,7 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = bindings gedit pixmaps po help data plugins
+SUBDIRS = bindings gedit pixmaps po help data plugins docs
 
 distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 

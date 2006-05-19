@@ -11,8 +11,6 @@ AC_SUBST(GEDIT_MAJOR)
 
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
-GNOME_DOC_INIT
-
 AM_MAINTAINER_MODE
 AM_CONFIG_HEADER(config.h)
 AM_DISABLE_STATIC
@@ -21,6 +19,9 @@ AC_PATH_PROG(GCONFTOOL, gconftool-2)
 IT_PROG_INTLTOOL([0.35.0])
 
 AM_PROG_LIBTOOL
+
+GNOME_DOC_INIT
+GTK_DOC_CHECK([1.0])
 
 AC_ISC_POSIX
 AC_PROG_CC
@@ -251,6 +252,8 @@ bindings/python/Makefile
 data/gedit.desktop.in
 data/gedit.pc
 data/Makefile
+docs/Makefile
+docs/reference/Makefile
 gedit/dialogs/Makefile
 gedit/Makefile
 gedit/recent-files/Makefile

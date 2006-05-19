@@ -3,6 +3,8 @@ SUBDIRS = dialogs recent-files
 
 bin_PROGRAMS = gedit
 
+noinst_LTLIBRARIES = libgedit.la
+
 INCLUDES =							\
 	-I$(top_srcdir)						\
 	-I$(srcdir)						\
@@ -25,15 +27,21 @@ INCLUDES += \
 	$(AM_CFLAGS)
 endif
 
+gedit_SOURCES = gedit.c
+gedit_LDADD = libgedit.la $(GEDIT_LIBS)
+
 gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
-gedit_LDADD =				\
+
+libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
+
+libgedit_la_LIBADD =				\
 	$(GEDIT_LIBS)			\
 	dialogs/libdialogs.la		\
 	recent-files/librecent.la
 
 if ENABLE_PYTHON
-gedit_LDADD += \
+libgedit_la_LIBADD += \
 	$(top_builddir)/bindings/python/gedit.la
 endif
 
@@ -96,10 +104,9 @@ headerdir = $(prefix)/include/gedit-@GEDIT_MAJOR@/gedit
 header_DATA = 				\
 	$(INST_H_FILES)	
 
-gedit_SOURCES = 			\
+libgedit_la_SOURCES = 			\
 	$(BUILT_SOURCES)		\
 	$(BACON_FILES)			\
-	gedit.c				\
 	gedit-app.c			\
 	gedit-commands-documents.c	\
 	gedit-commands-edit.c		\
@@ -150,7 +157,7 @@ gedit_SOURCES = 			\
 
 
 if ENABLE_PYTHON
-gedit_SOURCES += \
+libgedit_la_SOURCES += \
 	gedit-python-module.c		\
 	gedit-python-module.h		\
 	gedit-python-plugin.c		\
