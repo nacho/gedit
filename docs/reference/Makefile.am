@@ -38,21 +38,47 @@ FIXXREF_OPTIONS=
 HFILE_GLOB=$(top_srcdir)/gedit/*.h
 CFILE_GLOB=$(top_srcdir)/gedit/*.c
 
-# Header files to ignore when scanning.
-IGNORE_HFILES=	\
-	gedit-ui.h			\
-	gedit-window-private.h		\
-	gedit-commands.h		\
-	gedit-marshal.h			\
-	gedit-output-window.h		\
-	gedit-prefs-manager-private.h	\
-	gedit-module.h			\
-	gedit-python-module.h		\
-	gedit-python-plugin.h		\
-	bacon-message-connection.h	\
-	gedittextregion.h		\
-	sexy-icon-entry.h		\
-	egg-recent-*
+# Header files to ignore when scanning (These are internal to gedit).
+IGNORE_HFILES=		\
+	gedit-commands.h			\
+	gedit-document-loader.h			\
+	gedit-document-saver.h			\
+	gedit-documents-panel.h			\
+	gedit-io-error-message-area.h		\
+	gedit-languages-manager.h		\
+	gedit-module.h				\
+	gedit-plugin-manager.h			\
+	gedit-plugins-engine.h			\
+	gedit-prefs-manager-private.h		\
+	gedit-python-module.h			\
+	gedit-python-plugin.h			\
+	gedit-session.h				\
+	gedit-spinner.h				\
+	gedit-tooltips.h			\
+	gedit-ui.h				\
+	gedit-window-private.h			\
+	gedit-output-window.h			\
+	gedit-close-confirmation-dialog.h	\
+	gedit-encodings-dialog.h		\
+	gedit-open-location-dialog.h		\
+	gedit-page-setup-dialog.h		\
+	gedit-preferences-dialog.h		\
+	gedit-search-dialog.h			\
+	gedit-marshal.h
+
+# These files are not part of gedit but were copied into it for some reason.
+# Do not parse them to make the docs.
+IGNORE_HFILES +=	\
+	bacon-message-connection.h		\
+	gedittextregion.h			\
+	sexy-icon-entry.h			\
+	egg-recent-item.h			\
+	egg-recent-model.h			\
+	egg-recent-util.h			\
+	egg-recent-view-gtk.h			\
+	egg-recent-view.h			\
+	egg-recent-view-uimanager.h
+
 
 # Images to copy into HTML directory.
 HTML_IMAGES=
@@ -75,9 +101,6 @@ GTKDOC_CFLAGS=	\
 	-I$(top_srcdir)		\
 	-I$(top_builddir)	\
 	$(GEDIT_CFLAGS)
-
-#	$(top_builddir)/gedit/dialogs/libdialogs.la	\
-#	$(top_builddir)/gedit/recent-files/librecent.la
 
 GTKDOC_LIBS=	\
 	$(top_builddir)/gedit/libgedit.la	\

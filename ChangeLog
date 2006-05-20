@@ -1,3 +1,17 @@
+2006-05-20  Steve Frécinaux  <steve@istique.net>
+
+	* gedit/Makefile.am: Add gedit-prefs-manager-private.h to
+	NOINST_H_FILES.
+	
+	* docs/reference/Makefile.am:
+	* docs/reference/gedit.types:
+	* docs/reference/gedit-docs.sgml:
+	
+	Ignore private header files when generating the docs (typically, NOINST
+	and cut'n'pasted files).
+	
+	* docs/reference/tmpl/*: Add template files.
+
 2006-05-20  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit/gedit-window.c (create_language_menu_item)

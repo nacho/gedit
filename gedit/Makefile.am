@@ -63,6 +63,7 @@ NOINST_H_FILES =			\
 	gedit-document-saver.h		\
 	gedit-io-error-message-area.h	\
 	gedit-spinner.h			\
+	gedit-prefs-manager-private.h	\
 	sexy-icon-entry.h		\
 	gedittextregion.h		\
 	gedit-session.h

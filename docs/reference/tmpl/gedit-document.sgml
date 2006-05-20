@@ -1,0 +1,450 @@
+<!-- ##### SECTION Title ##### -->
+GeditDocument
+
+<!-- ##### SECTION Short_Description ##### -->
+
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### MACRO GEDIT_DOCUMENT_CONST ##### -->
+<para>
+
+</para>
+
+@obj: 
+
+
+<!-- ##### ENUM GeditSearchFlags ##### -->
+<para>
+
+</para>
+
+@GEDIT_SEARCH_DONT_SET_FLAGS: 
+@GEDIT_SEARCH_ENTIRE_WORD: 
+@GEDIT_SEARCH_CASE_SENSITIVE: 
+
+<!-- ##### STRUCT GeditDocumentPrivate ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### STRUCT GeditDocument ##### -->
+<para>
+
+</para>
+
+
+<!-- ##### SIGNAL GeditDocument::cursor-moved ##### -->
+<para>
+
+</para>
+
+@geditdocument: the object which received the signal.
+
+<!-- ##### SIGNAL GeditDocument::loaded ##### -->
+<para>
+
+</para>
+
+@geditdocument: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GeditDocument::loading ##### -->
+<para>
+
+</para>
+
+@geditdocument: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL GeditDocument::saved ##### -->
+<para>
+
+</para>
+
+@geditdocument: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL GeditDocument::saving ##### -->
+<para>
+
+</para>
+
+@geditdocument: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL GeditDocument::search-highlight-updated ##### -->
+<para>
+
+</para>
+
+@geditdocument: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### ARG GeditDocument:can-search-again ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GeditDocument:enable-search-highlighting ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GeditDocument:encoding ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GeditDocument:has-selection ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GeditDocument:mime-type ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GeditDocument:read-only ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GeditDocument:shortname ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG GeditDocument:uri ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM GeditDocumentSaveFlags ##### -->
+<para>
+
+</para>
+
+@GEDIT_DOCUMENT_SAVE_IGNORE_MTIME: 
+@GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP: 
+@GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP: 
+
+<!-- ##### MACRO GEDIT_DOCUMENT_ERROR ##### -->
+<para>
+
+</para>
+
+
+
+<!-- ##### FUNCTION gedit_document_error_quark ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_get_uri ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_get_uri_for_display ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_get_short_name_for_display ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_get_mime_type ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_get_readonly ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_load ##### -->
+<para>
+
+</para>
+
+@doc: 
+@uri: 
+@encoding: 
+@line_pos: 
+@create: 
+
+
+<!-- ##### FUNCTION gedit_document_insert_file ##### -->
+<para>
+
+</para>
+
+@doc: 
+@iter: 
+@uri: 
+@encoding: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_load_cancel ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_save ##### -->
+<para>
+
+</para>
+
+@doc: 
+@flags: 
+
+
+<!-- ##### FUNCTION gedit_document_save_as ##### -->
+<para>
+
+</para>
+
+@doc: 
+@uri: 
+@encoding: 
+@flags: 
+
+
+<!-- ##### FUNCTION gedit_document_is_untouched ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_is_untitled ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_get_deleted ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_goto_line ##### -->
+<para>
+
+</para>
+
+@doc: 
+@line: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_set_search_text ##### -->
+<para>
+
+</para>
+
+@doc: 
+@text: 
+@flags: 
+
+
+<!-- ##### FUNCTION gedit_document_get_search_text ##### -->
+<para>
+
+</para>
+
+@doc: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_get_can_search_again ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_search_forward ##### -->
+<para>
+
+</para>
+
+@doc: 
+@start: 
+@end: 
+@match_start: 
+@match_end: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_search_backward ##### -->
+<para>
+
+</para>
+
+@doc: 
+@start: 
+@end: 
+@match_start: 
+@match_end: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_replace_all ##### -->
+<para>
+
+</para>
+
+@doc: 
+@find: 
+@replace: 
+@flags: 
+@Returns: 
+
+
+<!-- ##### FUNCTION gedit_document_set_language ##### -->
+<para>
+
+</para>
+
+@doc: 
+@lang: 
+
+
+<!-- ##### FUNCTION gedit_document_set_enable_search_highlighting ##### -->
+<para>
+
+</para>
+
+@doc: 
+@enable: 
+
+
+<!-- ##### FUNCTION gedit_document_get_enable_search_highlighting ##### -->
+<para>
+
+</para>
+
+@doc: 
+@Returns: 
+
+
+<!-- ##### MACRO GEDIT_SEARCH_IS_DONT_SET_FLAGS ##### -->
+<para>
+
+</para>
+
+@sflags: 
+
+
+<!-- ##### MACRO GEDIT_SEARCH_SET_DONT_SET_FLAGS ##### -->
+<para>
+
+</para>
+
+@sflags: 
+@state: 
+
+
+<!-- ##### MACRO GEDIT_SEARCH_IS_ENTIRE_WORD ##### -->
+<para>
+
+</para>
+
+@sflags: 
+
+
+<!-- ##### MACRO GEDIT_SEARCH_SET_ENTIRE_WORD ##### -->
+<para>
+
+</para>
+
+@sflags: 
+@state: 
+
+
+<!-- ##### MACRO GEDIT_SEARCH_IS_CASE_SENSITIVE ##### -->
+<para>
+
+</para>
+
+@sflags: 
+
+
+<!-- ##### MACRO GEDIT_SEARCH_SET_CASE_SENSITIVE ##### -->
+<para>
+
+</para>
+
+@sflags: 
+@state: 
+
+
