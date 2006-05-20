@@ -694,7 +694,7 @@ create_language_menu_item (GtkSourceLanguage *lang,
 
 	/* add the action to the same radio group of the "Normal" action */
 	normal_action = gtk_action_group_get_action (window->priv->languages_action_group,
-						     "LangNormal");
+						     "LangNone");
 	group = gtk_radio_action_get_group (GTK_RADIO_ACTION (normal_action));
 	gtk_radio_action_set_group (action, group);
 
@@ -721,7 +721,7 @@ create_language_menu_item (GtkSourceLanguage *lang,
 static void
 create_languages_menu (GeditWindow *window)
 {
-	GtkRadioAction *action_normal;
+	GtkRadioAction *action_none;
 	const GSList *languages;
 	const GSList *l;
 	guint id;
@@ -729,18 +729,20 @@ create_languages_menu (GeditWindow *window)
 
 	gedit_debug (DEBUG_WINDOW);
 
-	/* add the "Normal" item before all the others */
-	action_normal = gtk_radio_action_new ("LangNormal",
-					      _("Normal"),
-					      _("Use Normal highlight mode"),
-					      NULL,
-					      -1);
+	/* add the "None" item before all the others */
+	
+	/* Translators: "None" means that no highlight mode is selected in the 
+	 * "View->Highlight Mode" submenu and so syntax highlighting is disabled */
+	action_none = gtk_radio_action_new ("LangNone", _("None"),
+					    _("Disable syntax highlighting"),
+					    NULL,
+					    -1);
 
 	gtk_action_group_add_action (window->priv->languages_action_group,
-				     GTK_ACTION (action_normal));
-	g_object_unref (action_normal);
+				     GTK_ACTION (action_none));
+	g_object_unref (action_none);
 
-	g_signal_connect (action_normal,
+	g_signal_connect (action_none,
 			  "activate",
 			  G_CALLBACK (language_toggled),
 			  window);
@@ -750,11 +752,11 @@ create_languages_menu (GeditWindow *window)
 	gtk_ui_manager_add_ui (window->priv->manager,
 			       id,
 			       "/MenuBar/ViewMenu/ViewHighlightModeMenu/LanguagesMenuPlaceholder",
-			       "LangNormal", "LangNormal",
+			       "LangNone", "LangNone",
 			       GTK_UI_MANAGER_MENUITEM,
 			       TRUE);
 
-	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action_normal), TRUE);
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action_none), TRUE);
 
 	/* now add all the known languages */
 	languages = gedit_languages_manager_get_available_languages_sorted (
@@ -786,7 +788,7 @@ update_languages_menu (GeditWindow *window)
 	if (lang != NULL)
 		lang_name = gtk_source_language_get_name (lang);
 	else
-		lang_name = g_strdup ("LangNormal");
+		lang_name = g_strdup ("LangNone");
 
 	escaped_lang_name = g_markup_escape_text (lang_name, -1);
 
