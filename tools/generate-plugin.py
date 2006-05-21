@@ -35,7 +35,6 @@ options = {
     'author'            : os.getenv('USERNAME'),
     'email'             : os.getenv('LOGNAME') + '@email.com',
     'standalone'        : False,
-    'with-gconf'        : False,
     'with-side-pane'    : False,
     'with-bottom-pane'  : False,
     'with-menu'         : False,
@@ -43,8 +42,10 @@ options = {
     'with-config-dlg'   : False
 }
 
-USAGE = "Usage: %s [OPTIONS] pluginname" % os.path.basename(sys.argv[0])
-HELP = USAGE + """\n
+USAGE = """Usage:
+   %s [OPTIONS...] pluginname
+""" % os.path.basename(sys.argv[0])
+HELP = USAGE + """
 generate skeleton source tree for a new gedit plugin.
 
 Options:
@@ -61,10 +62,9 @@ Options:
 Features:
   window-helper         Create a window helper object (python only)
   config-dlg            Plugin configuration dialog
-  menu                  Plugin menu entries (N/A)
+  menu                  Plugin menu entries
   side-pane             Side pane item (N/A)
   bottom-pane           Bottom pane item (N/A)
-  gconf                 Configuration setting storage using GConf (N/A)
 """ % options
 
 TEMPLATE_DIR = os.path.join(os.path.dirname(sys.argv[0]), "plugin_template")
@@ -79,7 +79,6 @@ try:
                                 'email=',
                                 'standalone',
                                 'with-menu'         , 'without-menu',
-                                'with-gconf'        , 'without-gconf',
                                 'with-side-pane'    , 'without-side-pane',
                                 'with-bottom-pane'  , 'without-bottom-pane',
                                 'with-window-helper', 'without-window-helper', 
@@ -154,10 +153,6 @@ else:
 
 if options['standalone']:
     output_files['configure.ac'] = 'configure.ac'
-
-if options['with-gconf']:
-    output_files['gedit-plugin.schemas.in'] = '%s/gedit-%s-plugin.schemas.in' % (plugin_module, plugin_module)
-    directives['WITH_GCONF'] = True
 
 if options['with-side-pane']:
     directives['WITH_SIDE_PANE'] = True

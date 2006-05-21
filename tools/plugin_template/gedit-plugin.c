@@ -38,6 +38,28 @@ struct ##(PLUGIN_ID.camel)PluginPrivate
 
 GEDIT_PLUGIN_REGISTER_TYPE (##(PLUGIN_ID.camel)Plugin, ##(PLUGIN_ID.lower)_plugin)
 
+##ifdef WITH_MENU
+/* UI string. See gedit-ui.xml for reference */
+static const gchar ui_str = 
+	"<ui>"
+	"  <menubar name='MenuBar'>"
+	"    <!-- Put your menu entries here -->"
+	"  </menubar>"
+	"</ui>";
+
+/* UI actions */
+static const GtkActionEntry action_entries[] =
+	{
+		/* Put your actions here */
+	};
+
+typedef struct
+{
+	GtkActionGroup *action_group;
+	guint           ui_id;
+} WindowData;
+##endif
+
 static void
 ##(PLUGIN_ID.lower)_plugin_init (##(PLUGIN_ID.camel)Plugin *plugin)
 {
@@ -56,18 +78,75 @@ static void
 	G_OBJECT_CLASS (##(PLUGIN_ID.lower)_plugin_parent_class)->finalize (object);
 }
 
+##ifdef WITH_MENU
+static void
+free_window_data (WindowData *data)
+{
+	g_return_if_fail (data != NULL);
+
+	g_object_unref (data->action_group);
+	g_free (data);
+}
+##endif
+
 static void
 impl_activate (GeditPlugin *plugin,
 	       GeditWindow *window)
 {
+##ifdef WITH_MENU
+	GtkUIManager *manager;
+	WindowData *data;
+##endif	
+
 	gedit_debug (DEBUG_PLUGINS);
+
+##ifdef WITH_MENU
+	data = g_new (WindowData, 1);
+	manager = gedit_window_get_ui_manager (window);
+
+	data->action_group = gtk_action_group_new ("##(PLUGIN_ID.camel)PluginActions");
+	gtk_action_group_set_translation_domain (data->action_group,
+						 GETTEXT_PACKAGE);
+	gtk_action_group_add_actions (data->action_group,
+				      action_entries,
+				      G_N_ELEMENTS (action_entries),
+				      window);
+
+	gtk_ui_manager_insert_action_group (manager, data->action_group, -1);
+
+	data->ui_id = gtk_ui_manager_add_ui_from_string (manager, ui_str,
+							 -1, NULL);
+
+	g_object_set_data_full (G_OBJECT (window), 
+				WINDOW_DATA_KEY, 
+				data,
+				(GDestroyNotify) free_window_data);
+##endif	
 }
 
 static void
 impl_deactivate (GeditPlugin *plugin,
 		 GeditWindow *window)
 {
+##ifdef WITH_MENU
+	GtkUIManager *manager;
+	WindowData *data;
+##endif
+
 	gedit_debug (DEBUG_PLUGINS);
+
+##ifdef WITH_MENU
+	manager = gedit_window_get_ui_manager (window);
+
+	data = (WindowData *) g_object_get_data (G_OBJECT (window),
+						 WINDOW_DATA_KEY);
+	g_return_if_fail (data != NULL);
+
+	gtk_ui_manager_remove_ui (manager, data->ui_id);
+	gtk_ui_manager_remove_action_group (manager, data->action_group);
+
+	g_object_set_data (G_OBJECT (window), WINDOW_DATA_KEY, NULL);
+##endif
 }
 
 static void
