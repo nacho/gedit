@@ -102,7 +102,7 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Paste the clipboard"), G_CALLBACK (gedit_cmd_edit_paste) },
 	{ "EditDelete", GTK_STOCK_DELETE, NULL, NULL,
 	  N_("Delete the selected text"), G_CALLBACK (gedit_cmd_edit_delete) },
-	{ "EditSelectAll", NULL, N_("Select _All"), "<control>A",
+	{ "EditSelectAll", GTK_STOCK_SELECT_ALL, N_("Select _All"), "<control>A",
 	  N_("Select the entire document"), G_CALLBACK (gedit_cmd_edit_select_all) },
 
 	/* View menu */
@@ -127,6 +127,10 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Save all open files"), G_CALLBACK (gedit_cmd_file_save_all) },
 	{ "FileCloseAll", GTK_STOCK_CLOSE, N_("_Close All"), "<shift><control>W",
 	  N_("Close all open files"), G_CALLBACK (gedit_cmd_file_close_all) },
+	{ "DocumentsPreviousDocument", NULL, N_("_Previous Document"), "<alt><control>Page_Up",
+	  N_("Activate previous document"), G_CALLBACK (gedit_cmd_documents_previous_document) },
+	{ "DocumentsNextDocument", NULL, N_("_Next Document"), "<alt><control>Page_Down",
+	  N_("Activate next document"), G_CALLBACK (gedit_cmd_documents_next_document) },
 	{ "DocumentsMoveToNewWindow", NULL, N_("_Move to New Window"), NULL,
 	  N_("Move the current document to a new window"), G_CALLBACK (gedit_cmd_documents_move_to_new_window) }
 };

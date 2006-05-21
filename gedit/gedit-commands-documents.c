@@ -42,6 +42,30 @@
 #include "gedit-debug.h"
 
 void
+gedit_cmd_documents_previous_document (GtkAction   *action,
+				       GeditWindow *window)
+{
+	GtkNotebook *notebook;
+
+	gedit_debug (DEBUG_COMMANDS);
+
+	notebook = GTK_NOTEBOOK (_gedit_window_get_notebook (window));
+	gtk_notebook_prev_page (notebook);
+}
+
+void
+gedit_cmd_documents_next_document (GtkAction   *action,
+				   GeditWindow *window)
+{
+	GtkNotebook *notebook;
+
+	gedit_debug (DEBUG_COMMANDS);
+
+	notebook = GTK_NOTEBOOK (_gedit_window_get_notebook (window));
+	gtk_notebook_next_page (notebook);
+}
+
+void
 gedit_cmd_documents_move_to_new_window (GtkAction   *action,
 					GeditWindow *window)
 {

@@ -1,3 +1,26 @@
+2006-05-21  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #342208 - show 'next tab' and 'previous tab' menu items
+	
+	* gedit/gedit-commands-documents.c
+	(gedit_cmd_documents_previous_document)
+	(gedit_cmd_documents_next_document): new methods
+
+	* gedit/gedit-commands.h: new 
+	gedit_cmd_documents_[previous|next]_document methods
+
+	* gedit/gedit-ui.h: added icon to "Select All", added new actions
+	for "Next|Previous Document"
+
+	* gedit/gedit-ui.xml:  added new menu items
+	for "Next|Previous Document"
+
+	* gedit/gedit-window.c (update_next_prev_doc_sensitivity)
+	(update_next_prev_doc_sensitivity_per_window)
+	(set_sensitivity_according_to_tab) (notebook_tab_added)
+	(notebook_tab_removed) (notebook_tabs_reordered): update sensitivity
+	of "Next|Previous Document" menu item
+
 2006-05-20  Steve Frécinaux  <steve@istique.net>
 
 	* gedit/Makefile.am: Add gedit-prefs-manager-private.h to

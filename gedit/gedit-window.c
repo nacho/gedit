@@ -447,6 +447,57 @@ set_toolbar_style (GeditWindow *window,
 }
 
 static void
+update_next_prev_doc_sensitivity (GeditWindow *window,
+				  GeditTab    *tab)
+{
+	gint	     tab_number;
+	GtkNotebook *notebook;
+	GtkAction   *action;
+	
+	gedit_debug (DEBUG_WINDOW);
+	
+	notebook = GTK_NOTEBOOK (_gedit_window_get_notebook (window));
+	
+	tab_number = gtk_notebook_page_num (notebook, GTK_WIDGET (tab));
+	g_return_if_fail (tab_number >= 0);
+	
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "DocumentsPreviousDocument");
+	gtk_action_set_sensitive (action, tab_number != 0);
+	
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "DocumentsNextDocument");
+	gtk_action_set_sensitive (action, 
+				  tab_number < gtk_notebook_get_n_pages (notebook) - 1);
+}
+
+static void
+update_next_prev_doc_sensitivity_per_window (GeditWindow *window)
+{
+	GeditTab  *tab;
+	GtkAction *action;
+	
+	gedit_debug (DEBUG_WINDOW);
+	
+	tab = gedit_window_get_active_tab (window);
+	if (tab != NULL)
+	{
+		update_next_prev_doc_sensitivity (window, tab);
+		
+		return;
+	}
+	
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "DocumentsPreviousDocument");
+	gtk_action_set_sensitive (action, FALSE);
+	
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "DocumentsNextDocument");
+	gtk_action_set_sensitive (action, FALSE);
+	
+}
+
+static void
 set_sensitivity_according_to_tab (GeditWindow *window,
 				  GeditTab    *tab)
 {
@@ -575,6 +626,8 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  (state != GEDIT_TAB_STATE_CLOSING) &&
 				  gedit_prefs_manager_get_enable_syntax_highlighting ());
 
+	update_next_prev_doc_sensitivity (window, tab);
+	
 	gedit_plugins_engine_update_plugins_ui (window, FALSE);
 }
 
@@ -2213,7 +2266,7 @@ notebook_tab_added (GeditNotebook *notebook,
 			  window);
 
 	update_documents_list_menu (window);
-
+	
 	/* CHECK: it seems to me this does not work when tab are moved between
 	   windows */
 	/* Drag and drop support */
@@ -2325,11 +2378,15 @@ notebook_tab_removed (GeditNotebook *notebook,
 	if (!window->priv->removing_tabs)
 	{
 		update_documents_list_menu (window);
+		update_next_prev_doc_sensitivity_per_window (window);
 	}
 	else
 	{
 		if (window->priv->num_tabs == 0)
+		{
 			update_documents_list_menu (window);
+			update_next_prev_doc_sensitivity_per_window (window);
+		}
 	}
 
 	/* Set sensitivity */
@@ -2364,6 +2421,7 @@ notebook_tabs_reordered (GeditNotebook *notebook,
 			 GeditWindow   *window)
 {
 	update_documents_list_menu (window);
+	update_next_prev_doc_sensitivity_per_window (window);
 	
 	g_signal_emit (G_OBJECT (window), signals[TABS_REORDERED], 0);
 }
