@@ -1,7 +1,7 @@
 /*
- * gedit-xyz-plugin.c
- * 
- * Copyright (C) %YEAR% - %AUTHOR%
+ * ##(FILENAME) - ##(DESCRIPTION)
+ *
+ * Copyright (C) ##(DATE_YEAR) - ##(AUTHOR_FULLNAME)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,47 +16,44 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
- * $Id$
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include "gedit-xyz-plugin.h"
+#include "##(PLUGIN_MODULE)-plugin.h"
 
 #include <glib/gi18n-lib.h>
-#include <gmodule.h>
-
 #include <gedit/gedit-debug.h>
 
-#define GEDIT_XYZ_PLUGIN_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_XYZ_PLUGIN, GeditXyzPluginPrivate))
+#define WINDOW_DATA_KEY	"##(PLUGIN_ID.camel)PluginWindowData"
 
-struct _GeditXyzPluginPrivate
+#define ##(PLUGIN_ID.upper)_PLUGIN_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ((object), TYPE_##(PLUGIN_ID.upper)_PLUGIN, ##(PLUGIN_ID.camel)PluginPrivate))
+
+struct ##(PLUGIN_ID.camel)PluginPrivate
 {
 	gpointer dummy;
 };
 
-GEDIT_PLUGIN_REGISTER_TYPE(GeditXyzPlugin, gedit_xyz_plugin)
+GEDIT_PLUGIN_REGISTER_TYPE (##(PLUGIN_ID.camel)Plugin, ##(PLUGIN_ID.lower)_plugin)
 
 static void
-gedit_xyz_plugin_init (GeditXyzPlugin *plugin)
+##(PLUGIN_ID.lower)_plugin_init (##(PLUGIN_ID.camel)Plugin *plugin)
 {
-	plugin->priv = GEDIT_XYZ_PLUGIN_GET_PRIVATE (plugin);
+	plugin->priv = ##(PLUGIN_ID.upper)_PLUGIN_GET_PRIVATE (plugin)
 
-	gedit_debug_message (DEBUG_PLUGINS, "GeditXyzPlugin initializing");
+	gedit_debug_message (DEBUG_PLUGINS,
+			     "##(PLUGIN_ID.camel)Plugin initializing");
 }
 
 static void
-gedit_xyz_plugin_finalize (GObject *object)
+##(PLUGIN_ID.lower)_plugin_finalize (GObject *object)
 {
-/*
-	GeditXyzPlugin *plugin = GEDIT_XYZ_PLUGIN (object);
-*/
-	gedit_debug_message (DEBUG_PLUGINS, "GeditXyzPlugin finalizing");
+	gedit_debug_message (DEBUG_PLUGINS,
+			     "##(PLUGIN_ID.camel)Plugin finalizing");
 
-	G_OBJECT_CLASS (gedit_xyz_plugin_parent_class)->finalize (object);
+	G_OBJECT_CLASS (##(PLUGIN_ID.lower)_plugin_parent_class)->finalize (object);
 }
 
 static void
@@ -67,42 +64,42 @@ impl_activate (GeditPlugin *plugin,
 }
 
 static void
-impl_deactivate	(GeditPlugin *plugin,
+impl_deactivate (GeditPlugin *plugin,
 		 GeditWindow *window)
 {
 	gedit_debug (DEBUG_PLUGINS);
 }
 
 static void
-impl_update_ui	(GeditPlugin *plugin,
-		 GeditWindow *window)
+impl_update_ui (GeditPlugin *plugin,
+		GeditWindow *window)
 {
 	gedit_debug (DEBUG_PLUGINS);
 }
 
-/*
+##ifdef WITH_CONFIGURE_DIALOG
 static GtkWidget *
 impl_create_configure_dialog (GeditPlugin *plugin)
 {
-	* Implements this function only and only if the plugin
-	* is configurable. Otherwise you can safely remove it. *
+	gedit_debug (DEBUG_PLUGINS);
 }
-*/
+##endif
 
 static void
-gedit_xyz_plugin_class_init (GeditXyzPluginClass *klass)
+##(PLUGIN_ID.lower)_plugin_class_init (##(PLUGIN_ID.camel)PluginClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GeditPluginClass *plugin_class = GEDIT_PLUGIN_CLASS (klass);
 
-	object_class->finalize = gedit_xyz_plugin_finalize;
+	object_class->finalize = ##(PLUGIN_ID.lower)_plugin_finalize;
 
 	plugin_class->activate = impl_activate;
 	plugin_class->deactivate = impl_deactivate;
 	plugin_class->update_ui = impl_update_ui;
+##ifdef WITH_CONFIGURE_DIALOG
+	plugin_class->create_configure_dialog = impl_create_configure_dialog;
+##endif
 
-	/* Only if the plugin is configurable */
-	/* plugin_class->create_configure_dialog = impl_create_configure_dialog; */
-
-	g_type_class_add_private (object_class, sizeof (GeditXyzPluginPrivate));
+	g_type_class_add_private (object_class, 
+				  sizeof (##(PLUGIN_ID.camel)PluginPrivate));
 }

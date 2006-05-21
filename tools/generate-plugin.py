@@ -1,124 +1,199 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+# generate-plugin.py - gedit plugin skeletton generator
+# This file is part of gedit
+#
+# Copyright (C) 2006 - Steve Frécinaux
+#
+# gedit is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# gedit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with gedit; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin St, Fifth Floor, 
+# Boston, MA  02110-1301  USA
+
+import re
 import os
 import sys
 import getopt
+from datetime import date
+import preprocessor
 
-usage = """usage: generate-plugin.py [ options ] plugin-name (words must be separated by '-' )"""
-
-help = """generate scheleton sources for a gedit plugin.
-
-Options:
-  -i, --internal        adds the plugin to gedit's configure.ac (TODO)
-  -t, --type=TYPE       specify which kind of plugin generate (defauly barebone)
-  
-types
-  barebone - generate code for a simple plugin
-  with-ui  - generate code for a plugin which adds menu items and toolbuttons
-  sidepane - generate code for a plugin which adds a sidepane page (TODO)
-
-"""
-
-
-# template info
-
-tmpl_dir = 'plugin_template'
-
-common_tmpl_files = (
-    'gedit-xyz-plugin.h',
-    'xyz.gedit-plugin.desktop.in',
-    'Makefile.am',
-)
-
-barebone_tmpl = 'gedit-xyz-plugin.c'
-with_ui_tmpl  = 'gedit-xyz-plugin.c'
-sidepane_tmpl = 'gedit-xyz-plugin.c'
-
-
-def copy_template_file(tmpl_file, replacements):
-    dest_file = tmpl_file
-
-    for (a, b) in replacements:
-        dest_file = dest_file.replace(a, b)
-
-    print "generating " + dest_file + " from " + tmpl_file
-
-    dest_dir = os.path.dirname(dest_file)
-
-    if not os.path.exists(dest_dir):
-        os.makedirs(dest_dir)
-
-    r = open(tmpl_file, 'r')
-    w = open(dest_file, 'w')
-
-    for line in r:
-        for (a, b) in replacements:
-            line = line.replace(a, b)
-        w.write(line)
-
-    r.close()
-    w.close()
-
-# --- main ---
-
-plugin_types = {
-    'barebone': barebone_tmpl,
-    'with-ui': with_ui_tmpl,
-    'sidepane': sidepane_tmpl,
+# Default values of command line options
+options = {
+    'language'          : 'python',
+    'description'       : 'Type here a short description of your plugin',
+    'author'            : os.getenv('USERNAME'),
+    'email'             : os.getenv('LOGNAME') + '@email.com',
+    'standalone'        : False,
+    'with-gconf'        : False,
+    'with-side-pane'    : False,
+    'with-bottom-pane'  : False,
+    'with-menu'         : False,
+    'with-window-helper': True,
+    'with-config-dlg'   : False
 }
 
-#defaults
-internal  = False
-tmpl_type = barebone_tmpl
+USAGE = "Usage: %s [OPTIONS] pluginname" % os.path.basename(sys.argv[0])
+HELP = USAGE + """\n
+generate skeleton source tree for a new gedit plugin.
 
+Options:
+  --author              Set the author name
+  --email               Set the author email
+  --description         Set the description you want for your new plugin
+  --standalone          Is this plugin intended to be distributed as a
+                        standalone package ? (N/A)
+  --language / -l       Set the language (python/C) [default: %(language)s]
+  --with-$feature       Enable $feature
+  --without-$feature    Disable $feature
+  --help / -h           Show this message and exits
+    
+Features:
+  window-helper         Create a window helper object (python only)
+  config-dlg            Plugin configuration dialog
+  menu                  Plugin menu entries (N/A)
+  side-pane             Side pane item (N/A)
+  bottom-pane           Bottom pane item (N/A)
+  gconf                 Configuration setting storage using GConf (N/A)
+""" % options
+
+TEMPLATE_DIR = os.path.join(os.path.dirname(sys.argv[0]), "plugin_template")
+
+# Parsing command line options
 try:
-    opts, args = getopt.getopt(sys.argv[1:], 'i:t:', ['internal', 'type=', 'help'])
+    opts, args = getopt.getopt(sys.argv[1:], 
+                               'l:h',
+                               ['language=',
+                                'description=',
+                                'author=',
+                                'email=',
+                                'standalone',
+                                'with-menu'         , 'without-menu',
+                                'with-gconf'        , 'without-gconf',
+                                'with-side-pane'    , 'without-side-pane',
+                                'with-bottom-pane'  , 'without-bottom-pane',
+                                'with-window-helper', 'without-window-helper', 
+                                'with-config-dlg'   , 'without-config-dlg',
+                                'help'])
 except getopt.error, exc:
-    sys.stderr.write('gen-plugin: %s\n' % str(exc))
-    sys.stderr.write(usage + '\n')
+    print >>sys.stderr, '%s: %s' % (sys.argv[0], str(exc))
+    print >>sys.stderr, USAGE
     sys.exit(1)
 
 for opt, arg in opts:
-    if opt == '--help':
-        print usage
-        print help
+    if opt in ('-h', '--help'):
+        print >>sys.stderr, HELP
         sys.exit(0)
-    elif opt in ('-i', '--internal'):
-        internal = True
-    elif opt in ('-t', '--type'):
-        if arg in plugin_types.keys():
-            tmpl_type = plugin_types[arg]
-        else:
-            sys.stderr.write('invalid type, using barebone\n\n')
 
-if len(args) != 1:
-    sys.stderr.write(usage + '\n')
+    elif opt in ('--description', '--author', '--email'):
+        options[opt[2:]] = arg
+
+    elif opt in ('-l', '--language'):
+        options['language'] = arg.lower()
+
+    elif opt == '--standalone':
+        options['standalone'] = True
+
+    elif opt[0:7] == '--with-':
+        options['with-' + opt[7:]] = True
+    
+    elif opt[0:10] == '--without-':
+        options['with-' + opt[10:]] = False
+
+# What's the new plugin name ?
+if len(args) < 1:
+    print >>sys.stderr, USAGE
     sys.exit(1)
 
-new_name = args[0]
+plugin_name = args[0]
+plugin_id = re.sub('[^a-z0-9_]', '', plugin_name.lower().replace(' ', '_'))
+if options['language'] == 'python':
+    plugin_module = plugin_id.replace('_', '')
+else:
+    plugin_module = plugin_id.replace('_', '-')
 
-replacements = [('plugin_template', new_name.replace('-', '')),
-                ('libxyz', 'lib' + new_name.replace('-', '')),
-                ('xyz_', new_name.replace('-', '_') + '_'),
-                ('Xyz', new_name.title().replace('-', '')),
-                ('XYZ', new_name.upper().replace('-', '_')),
-                ('xyz', new_name),
-]
+directives = {
+    'PLUGIN_NAME'       : plugin_name,
+    'PLUGIN_MODULE'     : plugin_module,
+    'PLUGIN_ID'         : plugin_id,
+    'AUTHOR_FULLNAME'   : options['author'],
+    'AUTHOR_EMAIL'      : options['email'],
+    'DATE_YEAR'         : date.today().year,
+    'DESCRIPTION'       : options['description'],
+}
 
-root_path = os.path.dirname(__file__)
+# Files to be generated by the preprocessor, in the form "template : outfile"
+output_files = {
+    'Makefile.am': '%s/Makefile.am' % plugin_module,
+    'gedit-plugin.desktop.in': '%s/%s.gedit-plugin.desktop.in' % (plugin_module, plugin_module)
+}
 
-tmpl_paths = []
+if options['language'] == 'c':
+    output_files['gedit-plugin.c'] = '%s/%s-plugin.c' % (plugin_module, plugin_module)
+    output_files['gedit-plugin.h'] = '%s/%s-plugin.h' % (plugin_module, plugin_module)
+elif options['language'] == 'python':
+    if options['with-window-helper']:
+        output_files['gedit-plugin-helper.py'] = '%s/%s.py' % (plugin_module, plugin_module)
+    else:
+        output_files['gedit-plugin-nohelper.py'] = '%s/%s.py' % (plugin_module, plugin_module)
+    directives['WITH_PYTHON'] = True
+else:
+    print >>sys.stderr, 'Value of --language should be C or Python'
+    print >>sys.stderr, USAGE
+    sys.exit(1)
 
-for f in common_tmpl_files:
-    tmpl_paths.append(os.path.join(root_path, tmpl_dir, f))
+if options['standalone']:
+    output_files['configure.ac'] = 'configure.ac'
 
-tmpl_paths.append(os.path.join(root_path, tmpl_dir, tmpl_type))
+if options['with-gconf']:
+    output_files['gedit-plugin.schemas.in'] = '%s/gedit-%s-plugin.schemas.in' % (plugin_module, plugin_module)
+    directives['WITH_GCONF'] = True
 
-#if internal:
-#    TODO: edit configure.in
-#else
-#    tmpl_paths.append(os.path.join(root, "configure.in"))
+if options['with-side-pane']:
+    directives['WITH_SIDE_PANE'] = True
 
-for f in tmpl_paths:
-    copy_template_file(f, replacements)
+if options['with-bottom-pane']:
+    directives['WITH_BOTTOM_PANE'] = True
 
+if options['with-menu']:
+    directives['WITH_MENU'] = True
+    
+if options['with-config-dlg']:
+    directives['WITH_CONFIGURE_DIALOG'] = True
+    
+
+# Generate the plugin base
+for infile, outfile in output_files.iteritems():
+    print 'Processing %s\n' \
+          '      into %s...' % (infile, outfile)
+
+    infile = os.path.join(TEMPLATE_DIR, infile)
+    outfile = os.path.join(os.getcwd(), outfile)
+
+    if not os.path.isfile(infile):
+        print >>sys.stderr, 'Input file does not exist : %s.' % os.path.basename(infile)
+        continue
+    
+    # Make sure the destination directory exists
+    if not os.path.isdir(os.path.split(outfile)[0]):
+        os.makedirs(os.path.split(outfile)[0])
+   
+    # Variables relative to the generated file
+    directives['DIRNAME'], directives['FILENAME'] = os.path.split(outfile)
+
+    # Generate the file
+    preprocessor.process(infile, outfile, directives.copy())
+
+print 'Done.'
+
+# ex:ts=4:et:

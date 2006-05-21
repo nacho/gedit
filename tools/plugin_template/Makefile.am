@@ -1,34 +1,39 @@
-# xyz plugin
+# ##(PLUGIN_NAME)
+
 plugindir = $(libdir)/gedit-2/plugins
 
+##ifdef WITH_PYTHON
+plugin_PYTHON = \
+	##(PLUGIN_MODULE).py
+##else
 INCLUDES = \
-	-I$(top_srcdir) 				\
-	$(GEDIT_CFLAGS) 				\
-	$(WARN_CFLAGS)					\
-	$(DISABLE_DEPRECATED_CFLAGS)			\
-	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
-	-DGNOME_ICONDIR=\""$(datadir)/pixmaps"\" 	\
-	-DGEDIT_GLADEDIR=\""$(datadir)/gedit-2/glade/"\"
+	-I$(top_srcdir) 						\
+	$(GEDIT_CFLAGS) 						\
+	$(WARN_CFLAGS)							\
+	$(DISABLE_DEPRECATED_CFLAGS)					\
+	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"
 
-plugin_LTLIBRARIES = libxyz.la
+plugin_LTLIBRARIES = lib##(PLUGIN_MODULE).la
 
-libxyz_la_SOURCES = \
-	gedit-xyz-plugin.h	\
-	gedit-xyz-plugin.c
+lib##(PLUGIN_MODULE)_la_SOURCES = \
+	##(PLUGIN_MODULE)-plugin.h	\
+	##(PLUGIN_MODULE)-plugin.c
 
-libxyz_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+lib##(PLUGIN_MODULE)_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+##endif
 
+# Glade files (if you use glade for your plugin, list those files here)
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA =
 
-plugin_in_files = xyz.gedit-plugin.desktop.in
+plugin_in_files = ##(PLUGIN_MODULE).gedit-plugin.desktop.in
 
 %.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
 
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
-EXTRA_DIST = $(glade_DATA) $(plugin_in_files)
+EXTRA_DIST = $(plugin_in_files)
 
-CLEANFILES = $(plugin_DATA)
-DISTCLEANFILES = $(plugin_DATA)
+CLEANFILES = $(plugin_DATA) $(glade_DATA)
 
+DISTCLEANFILES = $(plugin_DATA) $(glade_DATA)
