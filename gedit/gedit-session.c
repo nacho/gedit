@@ -605,9 +605,6 @@ client_die_cb (GnomeClient *client, gpointer data)
 
 	gedit_debug_message (DEBUG_FILE, "Unref gedit_app_server: DONE");
 #endif
-	gedit_prefs_manager_app_shutdown ();
-	gedit_metadata_manager_shutdown ();
-	gedit_plugins_engine_shutdown ();
 
 	gtk_main_quit ();
 }
