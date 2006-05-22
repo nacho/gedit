@@ -39,6 +39,11 @@
 
 #include "gedit-commands.h"
 
+/* FIXME: remove it when bumping dependency to GTK 2.10 */
+#ifndef GTK_STOCK_SELECT_ALL
+#	define GTK_STOCK_SELECT_ALL NULL
+#endif
+
 G_BEGIN_DECLS
 
 static const GtkActionEntry gedit_always_sensitive_menu_entries[] =
