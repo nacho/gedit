@@ -1,3 +1,12 @@
+2006-05-23  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/snippets/snippets/SnippetsLibrary.py: fixed a problem with
+	removing the last user snippet in a user library. The library would 
+	signal the store that it should be removed and that causes the 
+	container to be removed. After that the remove_snippet function would
+	try to remove the snippet from the container causing a ValueError.
+	Only IndexErrors were caught. The fix is to catch every error.
+
 2006-05-22  Steve Frécinaux  <steve@istique.net>
 
 	* gedit/gedit-ui.h: define GTK_STOCK_SELECT_ALL if not defined, to

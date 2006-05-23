@@ -289,7 +289,7 @@ class LanguageContainer:
 		
 		try:
 			snippets[value].remove(snippet)
-		except IndexError:
+		except:
 			True
 		
 	def append(self, snippet):
@@ -306,7 +306,7 @@ class LanguageContainer:
 	def remove(self, snippet):
 		try:
 			self.snippets.remove(snippet)
-		except IndexError:
+		except:
 			True
 			
 		self._remove_prop(snippet, 'tag')
@@ -542,12 +542,12 @@ class SnippetsUserFile(SnippetsSystemFile):
 		try:
 			self.root.remove(element)
 			self.tainted = True
-		except ValueError:
+		except:
 			return
 		
 		try:
 			first = self.root[0]
-		except IndexError:
+		except:
 			# No more elements, this library is useless now
 			SnippetsLibrary().remove_library(self)
 	
