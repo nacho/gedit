@@ -191,7 +191,7 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
 		SnippetPlaceholder.__init__(self, view, tabstop, None, begin)
 
 		self.mirror_text = {0: ''}
-		self.timeout_id = 0
+		self.timeout_id = None
 		self.cmd = s
 
 	def get_mirrors(self, placeholders):
@@ -253,16 +253,16 @@ class SnippetPlaceholderExpand(SnippetPlaceholder):
 			return SnippetPlaceholder.literal(self, self.mirror_text[index])
 
 	def remove_timeout(self):
-		if self.timeout_id:
+		if self.timeout_id != None:
 			gobject.source_remove(self.timeout_id)
-			self.timeout_id = 0
+			self.timeout_id = None
 		
 	def install_timeout(self):
 		self.remove_timeout()
 		self.timeout_id = gobject.timeout_add(1000, self.timeout_cb)
 
 	def timeout_cb(self):
-		self.timeout_id = 0
+		self.timeout_id = None
 		
 		return False
 		
@@ -395,6 +395,13 @@ class SnippetPlaceholderShell(SnippetPlaceholderExpand):
 
 			SnippetPlaceholderExpand.remove(self, force)
 
+class TimeoutError(Exception):
+	def __init__(self, value):
+		self.value = value
+	
+	def __str__(self):
+		return repr(self.value)
+
 # The python placeholder evaluates commands in python
 class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 	def __init__(self, view, refs, begin, s, namespace):
@@ -427,20 +434,22 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 		return mirrors
 	
 	def timeout_cb(self, signum = 0, frame = 0):
-		raise Exception, "Operation timed out (>2 seconds)"
+		raise TimeoutError, "Operation timed out (>2 seconds)"
 	
 	def install_timeout(self):
-		if self.timeout_id != 0:
+		if self.timeout_id != None:
 			self.remove_timeout()
 		
 		self.timeout_id = signal.signal(signal.SIGALRM, self.timeout_cb)
 		signal.alarm(2)
 		
 	def remove_timeout(self):
-		if self.timeout_id != 0:
+		if self.timeout_id != None:
 			signal.alarm(0)
+			
 			signal.signal(signal.SIGALRM, self.timeout_id)
-			self.timeout_id = 0
+
+			self.timeout_id = None
 		
 	def expand(self, text):
 		self.remove_timeout()
@@ -475,12 +484,21 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
 				self.install_timeout()
 				result = self.namespace['process_snippet']()
 				self.remove_timeout()
-			except:
+			except TimeoutError:
 				self.remove_timeout()
 
 				message_dialog(None, gtk.MESSAGE_ERROR, \
 				_('Execution of the python command (%s) exceeds the maximum ' \
 				'time, execution aborted.') % self.command)
+				
+				return False
+			except Exception, detail:
+				self.remove_timeout()
+				
+				message_dialog(None, gtk.MESSAGE_ERROR, 
+				_('Execution of the python command (%s) failed: %s') % 
+				(self.command, detail))
+
 				return False
 
 			self.set_text(result)

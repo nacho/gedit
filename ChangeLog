@@ -1,5 +1,20 @@
 2006-05-23  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/snippets/snippets/SnippetPlaceholders.py: fix timeout_id
+	to be None instead of 0 when not active because the value can be 
+	0 in python placeholders (it's used for storing the default sigalarm
+	handler which can be 0, and it wasn't properly restored because of 
+	this). Added a new exception TimeoutError so the timeout is handled 
+	differently from other errors. Show other errors to the user 
+	(like syntax etc).
+	
+	* plugins/snippets/snippets/SnippetController.py: make sure to
+	remove placeholders that need updates from the updates list when they
+	are removed so that when the update runs the placeholders that don't
+	exist anymore aren't tried to be updated
+	
+2006-05-23  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/snippets/snippets/SnippetsLibrary.py: fixed a problem with
 	removing the last user snippet in a user library. The library would 
 	signal the store that it should be removed and that causes the 

@@ -430,6 +430,8 @@ class SnippetController:
 				if placeholder in self.placeholders:
 					if placeholder in self.update_placeholders:
 						placeholder.update_contents()
+						
+						self.update_placeholders.remove(placeholder)
 					elif placeholder in self.jump_placeholders:
 						placeholder[0].leave()
 						
