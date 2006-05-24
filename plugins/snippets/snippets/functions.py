@@ -50,8 +50,6 @@ def markup_escape(text):
 	return saxutils.escape(text)
 
 def spaces_instead_of_tabs(view, text):
-	print repr(text), view.get_insert_spaces_instead_of_tabs(), repr(text.replace("\t", view.get_tabs_width() * ' '))
-
 	if not view.get_insert_spaces_instead_of_tabs():
 		return text
 
