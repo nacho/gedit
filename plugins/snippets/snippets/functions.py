@@ -49,7 +49,16 @@ def compute_indentation(view, piter):
 def markup_escape(text):
 	return saxutils.escape(text)
 
+def spaces_instead_of_tabs(view, text):
+	print repr(text), view.get_insert_spaces_instead_of_tabs(), repr(text.replace("\t", view.get_tabs_width() * ' '))
+
+	if not view.get_insert_spaces_instead_of_tabs():
+		return text
+
+	return text.replace("\t", view.get_tabs_width() * ' ')
+
 def insert_with_indent(view, piter, text, indentfirst = True):
+	text = spaces_instead_of_tabs(view, text)
 	lines = text.split('\n')
 
 	if len(lines) == 1:
@@ -58,7 +67,7 @@ def insert_with_indent(view, piter, text, indentfirst = True):
 		# Compute indentation
 		indent = compute_indentation(view, piter)
 		text = ''
-		
+
 		for i in range(0, len(lines)):
 			if indentfirst or i > 0:
 				text += indent + lines[i] + '\n'

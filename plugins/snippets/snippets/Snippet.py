@@ -124,13 +124,13 @@ class Snippet:
 			lines = re.sub('\\\\(.)', '\\1', text[lastInsert:index]).split('\n')
 			
 			if len(lines) == 1:
-				buf.insert(piter, lines[0])
+				buf.insert(piter, spaces_instead_of_tabs(view, lines[0]))
 			else:
 				text = lines[0] + '\n'
 			
 				for i in range(1, len(lines)):
-					text += indent + lines[i] + '\n'
-			
+					text += indent + spaces_instead_of_tabs(view, lines[i]) + '\n'
+
 				buf.insert(piter, text[:-1])
 
 			lastInsert = index
