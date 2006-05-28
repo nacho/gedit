@@ -31,7 +31,7 @@
 
 #define ##(PLUGIN_ID.upper)_PLUGIN_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ((object), TYPE_##(PLUGIN_ID.upper)_PLUGIN, ##(PLUGIN_ID.camel)PluginPrivate))
 
-struct ##(PLUGIN_ID.camel)PluginPrivate
+struct _##(PLUGIN_ID.camel)PluginPrivate
 {
 	gpointer dummy;
 };
@@ -63,7 +63,7 @@ typedef struct
 static void
 ##(PLUGIN_ID.lower)_plugin_init (##(PLUGIN_ID.camel)Plugin *plugin)
 {
-	plugin->priv = ##(PLUGIN_ID.upper)_PLUGIN_GET_PRIVATE (plugin)
+	plugin->priv = ##(PLUGIN_ID.upper)_PLUGIN_GET_PRIVATE (plugin);
 
 	gedit_debug_message (DEBUG_PLUGINS,
 			     "##(PLUGIN_ID.camel)Plugin initializing");
