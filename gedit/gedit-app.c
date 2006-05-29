@@ -141,7 +141,7 @@ window_delete_event (GeditWindow *window,
 	     GEDIT_WINDOW_STATE_SAVING_SESSION))
 	    	return TRUE;
 	
-	gedit_cmd_file_quit (NULL, window);
+	_gedit_cmd_file_quit (NULL, window);
 		
 	/* Do not destroy the window */
 	return TRUE;

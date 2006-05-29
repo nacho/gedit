@@ -288,10 +288,10 @@ on_message_received (const char *message,
 
 	if (file_list != NULL)
 	{
-		gedit_cmd_load_files_from_prompt (window,
-						  file_list,
-						  encoding,
-						  line_position);
+		_gedit_cmd_load_files_from_prompt (window,
+						   file_list,
+						   encoding,
+						   line_position);
 
 		if (new_document_option)
 			gedit_window_create_tab (window, TRUE);
@@ -540,7 +540,10 @@ main (int argc, char *argv[])
 		if (file_list != NULL)
 		{
 			gedit_debug_message (DEBUG_APP, "Load files");
-			gedit_cmd_load_files_from_prompt (window, file_list, encoding, line_position);
+			_gedit_cmd_load_files_from_prompt (window, 
+							   file_list, 
+							   encoding, 
+							   line_position);
 		}
 		else
 		{

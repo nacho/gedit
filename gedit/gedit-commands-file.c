@@ -67,7 +67,7 @@ static void tab_state_changed_while_saving (GeditTab    *tab,
 					    GeditWindow *window);
 
 void
-gedit_cmd_file_new (GtkAction   *action,
+_gedit_cmd_file_new (GtkAction   *action,
 		    GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
@@ -192,7 +192,7 @@ load_file_list (GeditWindow         *window,
 
 /* Exported so it can be used for drag'n'drop */
 gint
-gedit_cmd_load_files (GeditWindow         *window,
+_gedit_cmd_load_files (GeditWindow         *window,
 		      const GSList        *uris,
 		      const GeditEncoding *encoding)
 {
@@ -207,7 +207,7 @@ gedit_cmd_load_files (GeditWindow         *window,
  * titled document.
  */
 gint
-gedit_cmd_load_files_from_prompt (GeditWindow         *window,
+_gedit_cmd_load_files_from_prompt (GeditWindow         *window,
 				  const GSList        *uris,
 				  const GeditEncoding *encoding,
 				  gint                 line_pos)
@@ -253,7 +253,7 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
-	gedit_cmd_load_files (window,
+	_gedit_cmd_load_files (window,
 			      uris,
 			      encoding);
 
@@ -262,7 +262,7 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 }
 
 void
-gedit_cmd_file_open (GtkAction   *action,
+_gedit_cmd_file_open (GtkAction   *action,
 		     GeditWindow *window)
 {
 	GtkWidget     *open_dialog;
@@ -415,7 +415,7 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 
 	gtk_widget_destroy (GTK_WIDGET (dlg));
 
-	gedit_cmd_load_files (window,
+	_gedit_cmd_load_files (window,
 		 	      uris,
 			      encoding);
 
@@ -424,7 +424,7 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 }
 
 void
-gedit_cmd_file_open_uri (GtkAction   *action,
+_gedit_cmd_file_open_uri (GtkAction   *action,
 			 GeditWindow *window)
 {
 	GtkWidget *dlg;
@@ -462,7 +462,7 @@ gedit_cmd_file_open_uri (GtkAction   *action,
 }
 
 void
-gedit_cmd_file_open_recent (EggRecentItem *item,
+_gedit_cmd_file_open_recent (EggRecentItem *item,
 			    GeditWindow   *window)
 {
 	GSList *uris = NULL;
@@ -474,7 +474,7 @@ gedit_cmd_file_open_recent (EggRecentItem *item,
 
 	uris = g_slist_prepend (uris, uri);
 
-	if (gedit_cmd_load_files (window, uris, NULL) != 1)
+	if (_gedit_cmd_load_files (window, uris, NULL) != 1)
 		gedit_recent_remove (uri);
 
 	g_slist_foreach (uris, (GFunc) g_free, NULL);
@@ -821,7 +821,7 @@ file_save (GeditTab    *tab,
 }
 
 void
-gedit_cmd_file_save (GtkAction   *action,
+_gedit_cmd_file_save (GtkAction   *action,
 		     GeditWindow *window)
 {
 	GeditTab *tab;
@@ -836,7 +836,7 @@ gedit_cmd_file_save (GtkAction   *action,
 }
 
 void
-gedit_cmd_file_save_as (GtkAction   *action,
+_gedit_cmd_file_save_as (GtkAction   *action,
 			GeditWindow *window)
 {
 	GeditTab *tab;
@@ -962,7 +962,7 @@ _gedit_cmd_file_save_documents_list (GeditWindow *window,
 }
 
 void
-gedit_cmd_file_save_all (GtkAction   *action,
+_gedit_cmd_file_save_all (GtkAction   *action,
 			 GeditWindow *window)
 {
 	GList *docs;
@@ -1136,7 +1136,7 @@ revert_dialog (GeditWindow   *window,
 }
 
 void
-gedit_cmd_file_revert (GtkAction   *action,
+_gedit_cmd_file_revert (GtkAction   *action,
 		       GeditWindow *window)
 {
 	GeditDocument  *doc;
@@ -1613,7 +1613,7 @@ _gedit_cmd_file_close_tab (GeditTab    *tab,
 }
 
 void
-gedit_cmd_file_close (GtkAction   *action,
+_gedit_cmd_file_close (GtkAction   *action,
 		      GeditWindow *window)
 {
 	GeditTab *active_tab;
@@ -1699,7 +1699,7 @@ file_close_all (GeditWindow *window,
 }
 
 void
-gedit_cmd_file_close_all (GtkAction   *action,
+_gedit_cmd_file_close_all (GtkAction   *action,
 			  GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
@@ -1714,7 +1714,7 @@ gedit_cmd_file_close_all (GtkAction   *action,
 
 /* Quit */
 void
-gedit_cmd_file_quit (GtkAction   *action,
+_gedit_cmd_file_quit (GtkAction   *action,
 		     GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);

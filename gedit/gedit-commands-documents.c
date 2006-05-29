@@ -42,7 +42,7 @@
 #include "gedit-debug.h"
 
 void
-gedit_cmd_documents_previous_document (GtkAction   *action,
+_gedit_cmd_documents_previous_document (GtkAction   *action,
 				       GeditWindow *window)
 {
 	GtkNotebook *notebook;
@@ -54,7 +54,7 @@ gedit_cmd_documents_previous_document (GtkAction   *action,
 }
 
 void
-gedit_cmd_documents_next_document (GtkAction   *action,
+_gedit_cmd_documents_next_document (GtkAction   *action,
 				   GeditWindow *window)
 {
 	GtkNotebook *notebook;
@@ -66,7 +66,7 @@ gedit_cmd_documents_next_document (GtkAction   *action,
 }
 
 void
-gedit_cmd_documents_move_to_new_window (GtkAction   *action,
+_gedit_cmd_documents_move_to_new_window (GtkAction   *action,
 					GeditWindow *window)
 {
 	GeditNotebook *old_notebook;

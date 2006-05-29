@@ -1,3 +1,53 @@
+2006-05-29  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit/gedit-app.c (window_delete_event): s/gedit_cmd/_gedit_cmd/
+
+	* gedit/gedit-commands-documents.c
+	(_gedit_cmd_documents_previous_document)
+	(_gedit_cmd_documents_next_document)
+	(_gedit_cmd_documents_move_to_new_window): ditto
+
+	* gedit/gedit-commands-edit.c (_gedit_cmd_edit_undo)
+	(_gedit_cmd_edit_redo) (_gedit_cmd_edit_cut) (_gedit_cmd_edit_copy)
+	(_gedit_cmd_edit_paste) (_gedit_cmd_edit_delete)
+	(_gedit_cmd_edit_select_all) (_gedit_cmd_edit_preferences): ditto
+
+	* gedit/gedit-commands-file-print.c (_gedit_cmd_file_page_setup)
+	(_gedit_cmd_file_print_preview) (_gedit_cmd_file_print): ditto
+
+	* gedit/gedit-commands-file.c (_gedit_cmd_file_new)
+	(_gedit_cmd_load_files) (_gedit_cmd_load_files_from_prompt)
+	(open_dialog_response_cb) (_gedit_cmd_file_open)
+	(open_location_dialog_response_cb) (_gedit_cmd_file_open_uri)
+	(_gedit_cmd_file_open_recent) (_gedit_cmd_file_save)
+	(_gedit_cmd_file_save_as) (_gedit_cmd_file_save_all)
+	(_gedit_cmd_file_revert) (_gedit_cmd_file_close)
+	(_gedit_cmd_file_close_all) (_gedit_cmd_file_quit): ditto
+
+	* gedit/gedit-commands-help.c (_gedit_cmd_help_contents)
+	(_gedit_cmd_help_about): ditto
+
+	* gedit/gedit-commands-search.c (_gedit_cmd_search_find)
+	(_gedit_cmd_search_replace) (_gedit_cmd_search_find_next)
+	(_gedit_cmd_search_find_prev) (_gedit_cmd_search_clear_highlight)
+	(_gedit_cmd_search_goto_line): ditto
+
+	* gedit/gedit-commands-view.c (_gedit_cmd_view_show_toolbar)
+	(_gedit_cmd_view_show_statusbar) (_gedit_cmd_view_show_side_pane)
+	(_gedit_cmd_view_show_bottom_pane): ditto
+
+	* gedit/gedit-commands.h: ditto
+
+	* gedit/gedit-ui.h: ditto
+	
+	* gedit/gedit-window.c (open_recent_gtk) (open_recent_uim)
+	(drag_data_received_cb): ditto
+
+	* gedit/gedit.c (on_message_received) (main): ditto
+
+	* gedit/gedit-prefs-manager.c: gedit_gconf_client_set_color is now a 
+	static function
+
 2006-05-24  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* tools/plugin_template/gedit-plugin.c: fixed missing semicolon and 

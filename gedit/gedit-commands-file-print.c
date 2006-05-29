@@ -45,7 +45,7 @@
 
 
 void
-gedit_cmd_file_page_setup (GtkAction   *action,
+_gedit_cmd_file_page_setup (GtkAction   *action,
 			   GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
@@ -54,7 +54,7 @@ gedit_cmd_file_page_setup (GtkAction   *action,
 }
 
 void
-gedit_cmd_file_print_preview (GtkAction   *action,
+_gedit_cmd_file_print_preview (GtkAction   *action,
 			      GeditWindow *window)
 {
 	GeditDocument *doc;
@@ -154,7 +154,7 @@ print_dialog_response_cb (GtkWidget *dialog,
 }
 
 void
-gedit_cmd_file_print (GtkAction   *action,
+_gedit_cmd_file_print (GtkAction   *action,
 		      GeditWindow *window)
 {
 	GeditDocument *doc;

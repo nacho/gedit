@@ -513,7 +513,7 @@ search_dialog_destroyed (GeditWindow       *window,
 }
 
 void
-gedit_cmd_search_find (GtkAction   *action,
+_gedit_cmd_search_find (GtkAction   *action,
 		       GeditWindow *window)
 {
 	gpointer data;
@@ -594,7 +594,7 @@ gedit_cmd_search_find (GtkAction   *action,
 }
 
 void
-gedit_cmd_search_replace (GtkAction   *action,
+_gedit_cmd_search_replace (GtkAction   *action,
 			  GeditWindow *window)
 {
 	gpointer data;
@@ -702,7 +702,7 @@ do_find_again (GeditWindow *window,
 }				 
 
 void
-gedit_cmd_search_find_next (GtkAction   *action,
+_gedit_cmd_search_find_next (GtkAction   *action,
 			    GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
@@ -711,7 +711,7 @@ gedit_cmd_search_find_next (GtkAction   *action,
 }
 
 void
-gedit_cmd_search_find_prev (GtkAction   *action,
+_gedit_cmd_search_find_prev (GtkAction   *action,
 			    GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
@@ -720,7 +720,7 @@ gedit_cmd_search_find_prev (GtkAction   *action,
 }
 
 void
-gedit_cmd_search_clear_highlight (GtkAction   *action,
+_gedit_cmd_search_clear_highlight (GtkAction   *action,
 				  GeditWindow *window)
 {
 	GeditDocument *doc;
@@ -734,7 +734,7 @@ gedit_cmd_search_clear_highlight (GtkAction   *action,
 }
 
 void
-gedit_cmd_search_goto_line (GtkAction   *action,
+_gedit_cmd_search_goto_line (GtkAction   *action,
 			    GeditWindow *window)
 {
 	GeditView *active_view;

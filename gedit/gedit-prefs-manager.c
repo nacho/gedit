@@ -331,7 +331,7 @@ gconf_client_get_color_with_default (GConfClient* client, const gchar* key,
 	return color;
 }
 
-gboolean
+static gboolean
 gedit_gconf_client_set_color (GConfClient   *client,
                               const gchar   *key,
                               GdkColor       val,

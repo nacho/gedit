@@ -43,7 +43,7 @@
 
 
 void
-gedit_cmd_view_show_toolbar (GtkAction   *action,
+_gedit_cmd_view_show_toolbar (GtkAction   *action,
 			     GeditWindow *window)
 {
 	gboolean visible;
@@ -59,7 +59,7 @@ gedit_cmd_view_show_toolbar (GtkAction   *action,
 }
 
 void
-gedit_cmd_view_show_statusbar (GtkAction   *action,
+_gedit_cmd_view_show_statusbar (GtkAction   *action,
 			       GeditWindow *window)
 {
 	gboolean visible;
@@ -75,7 +75,7 @@ gedit_cmd_view_show_statusbar (GtkAction   *action,
 }
 
 void
-gedit_cmd_view_show_side_pane (GtkAction   *action,
+_gedit_cmd_view_show_side_pane (GtkAction   *action,
 			       GeditWindow *window)
 {
 	gboolean visible;
@@ -99,7 +99,7 @@ gedit_cmd_view_show_side_pane (GtkAction   *action,
 }
 
 void
-gedit_cmd_view_show_bottom_pane (GtkAction   *action,
+_gedit_cmd_view_show_bottom_pane (GtkAction   *action,
 				 GeditWindow *window)
 {
 	gboolean visible;

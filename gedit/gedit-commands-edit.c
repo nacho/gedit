@@ -43,7 +43,7 @@
 #include "dialogs/gedit-preferences-dialog.h"
 
 void
-gedit_cmd_edit_undo (GtkAction   *action,
+_gedit_cmd_edit_undo (GtkAction   *action,
 		     GeditWindow *window)
 {
 	GeditView *active_view;
@@ -64,7 +64,7 @@ gedit_cmd_edit_undo (GtkAction   *action,
 }
 
 void
-gedit_cmd_edit_redo (GtkAction   *action,
+_gedit_cmd_edit_redo (GtkAction   *action,
 		     GeditWindow *window)
 {
 	GeditView *active_view;
@@ -85,7 +85,7 @@ gedit_cmd_edit_redo (GtkAction   *action,
 }
 
 void
-gedit_cmd_edit_cut (GtkAction   *action,
+_gedit_cmd_edit_cut (GtkAction   *action,
 		    GeditWindow *window)
 {
 	GeditView *active_view;
@@ -101,7 +101,7 @@ gedit_cmd_edit_cut (GtkAction   *action,
 }
 
 void
-gedit_cmd_edit_copy (GtkAction   *action,
+_gedit_cmd_edit_copy (GtkAction   *action,
 		     GeditWindow *window)
 {
 	GeditView *active_view;
@@ -117,7 +117,7 @@ gedit_cmd_edit_copy (GtkAction   *action,
 }
 
 void
-gedit_cmd_edit_paste (GtkAction   *action,
+_gedit_cmd_edit_paste (GtkAction   *action,
 		      GeditWindow *window)
 {
 	GeditView *active_view;
@@ -133,7 +133,7 @@ gedit_cmd_edit_paste (GtkAction   *action,
 }
 
 void
-gedit_cmd_edit_delete (GtkAction   *action,
+_gedit_cmd_edit_delete (GtkAction   *action,
 		       GeditWindow *window)
 {
 	GeditView *active_view;
@@ -149,7 +149,7 @@ gedit_cmd_edit_delete (GtkAction   *action,
 }
 
 void
-gedit_cmd_edit_select_all (GtkAction   *action,
+_gedit_cmd_edit_select_all (GtkAction   *action,
 			   GeditWindow *window)
 {
 	GeditView *active_view;
@@ -165,7 +165,7 @@ gedit_cmd_edit_select_all (GtkAction   *action,
 }
 
 void
-gedit_cmd_edit_preferences (GtkAction   *action,
+_gedit_cmd_edit_preferences (GtkAction   *action,
 			    GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);

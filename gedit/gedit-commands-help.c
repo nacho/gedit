@@ -42,7 +42,7 @@
 #include "gedit-help.h"
 
 void
-gedit_cmd_help_contents (GtkAction   *action,
+_gedit_cmd_help_contents (GtkAction   *action,
 			 GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
@@ -51,7 +51,7 @@ gedit_cmd_help_contents (GtkAction   *action,
 }
 
 void
-gedit_cmd_help_about (GtkAction   *action,
+_gedit_cmd_help_about (GtkAction   *action,
 		      GeditWindow *window)
 {
 	static const gchar * const authors[] = {

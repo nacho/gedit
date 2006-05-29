@@ -877,7 +877,7 @@ open_recent_gtk (EggRecentViewGtk *view,
 		 EggRecentItem    *item,
 		 GeditWindow      *window)
 {
-	gedit_cmd_file_open_recent (item, window);
+	_gedit_cmd_file_open_recent (item, window);
 }
 
 static void
@@ -890,7 +890,7 @@ open_recent_uim (GtkAction   *action,
 						   action);
 	g_return_if_fail (item != NULL);
 
-	gedit_cmd_file_open_recent (item, window);
+	_gedit_cmd_file_open_recent (item, window);
 }
 
 #define TIP_MAX_URI_LEN 100
@@ -1928,7 +1928,7 @@ drag_data_received_cb (GtkWidget        *widget,
 
 	uri_list = g_slist_reverse (uri_list);
 
-	gedit_cmd_load_files (GEDIT_WINDOW (target_window),
+	_gedit_cmd_load_files (GEDIT_WINDOW (target_window),
 			      uri_list,
 			      NULL);
 

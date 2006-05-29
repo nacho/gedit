@@ -40,97 +40,98 @@
 
 G_BEGIN_DECLS
 
-gint		gedit_cmd_load_files			(GeditWindow         *window,
+/*
+ * Non-exported function
+ */
+ 
+gint		_gedit_cmd_load_files			(GeditWindow         *window,
 							 const GSList        *uris,
 							 const GeditEncoding *encoding);
-gint		gedit_cmd_load_files_from_prompt	(GeditWindow         *window,
+gint		_gedit_cmd_load_files_from_prompt	(GeditWindow         *window,
 							 const GSList        *uris,
 							 const GeditEncoding *encoding,
 							 gint                 line_pos);
 
-void		gedit_cmd_file_new			(GtkAction   *action,
+void		_gedit_cmd_file_new			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_open			(GtkAction   *action,
+void		_gedit_cmd_file_open			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_open_recent		(EggRecentItem *item,
+void		_gedit_cmd_file_open_recent		(EggRecentItem *item,
 							 GeditWindow *window);
-void		gedit_cmd_file_save			(GtkAction   *action,
+void		_gedit_cmd_file_save			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_save_as			(GtkAction   *action,
+void		_gedit_cmd_file_save_as			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_save_all			(GtkAction   *action,
+void		_gedit_cmd_file_save_all		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_revert			(GtkAction   *action,
+void		_gedit_cmd_file_revert			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_open_uri			(GtkAction   *action,
+void		_gedit_cmd_file_open_uri		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_page_setup		(GtkAction   *action,
+void		_gedit_cmd_file_page_setup		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_print_preview		(GtkAction   *action,
+void		_gedit_cmd_file_print_preview		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_print			(GtkAction   *action,
+void		_gedit_cmd_file_print			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_close			(GtkAction   *action,
+void		_gedit_cmd_file_close			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_close_all		(GtkAction   *action,
+void		_gedit_cmd_file_close_all		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_file_quit			(GtkAction   *action,
-							 GeditWindow *window);
-
-void		gedit_cmd_edit_undo			(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_edit_redo			(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_edit_cut			(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_edit_copy			(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_edit_paste			(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_edit_delete			(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_edit_select_all		(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_edit_preferences		(GtkAction   *action,
+void		_gedit_cmd_file_quit			(GtkAction   *action,
 							 GeditWindow *window);
 
-void		gedit_cmd_view_show_toolbar		(GtkAction   *action,
+void		_gedit_cmd_edit_undo			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_view_show_statusbar		(GtkAction   *action,
+void		_gedit_cmd_edit_redo			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_view_show_side_pane		(GtkAction   *action,
+void		_gedit_cmd_edit_cut			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_view_show_bottom_pane		(GtkAction   *action,
+void		_gedit_cmd_edit_copy			(GtkAction   *action,
 							 GeditWindow *window);
-
-void		gedit_cmd_search_find			(GtkAction   *action,
+void		_gedit_cmd_edit_paste			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_search_find_next		(GtkAction   *action,
+void		_gedit_cmd_edit_delete			(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_search_find_prev		(GtkAction   *action,
+void		_gedit_cmd_edit_select_all		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_search_replace		(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_search_clear_highlight	(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_search_goto_line		(GtkAction   *action,
+void		_gedit_cmd_edit_preferences		(GtkAction   *action,
 							 GeditWindow *window);
 
-void		gedit_cmd_documents_previous_document	(GtkAction   *action,
+void		_gedit_cmd_view_show_toolbar		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_documents_next_document	(GtkAction   *action,
+void		_gedit_cmd_view_show_statusbar		(GtkAction   *action,
 							 GeditWindow *window);
-void		gedit_cmd_documents_move_to_new_window	(GtkAction   *action,
+void		_gedit_cmd_view_show_side_pane		(GtkAction   *action,
 							 GeditWindow *window);
-
-void		gedit_cmd_help_contents			(GtkAction   *action,
-							 GeditWindow *window);
-void		gedit_cmd_help_about			(GtkAction   *action,
+void		_gedit_cmd_view_show_bottom_pane	(GtkAction   *action,
 							 GeditWindow *window);
 
-/*
- * Non-exported function
- */
+void		_gedit_cmd_search_find			(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_search_find_next		(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_search_find_prev		(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_search_replace		(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_search_clear_highlight	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_search_goto_line		(GtkAction   *action,
+							 GeditWindow *window);
+
+void		_gedit_cmd_documents_previous_document	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_documents_next_document	(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_documents_move_to_new_window	(GtkAction   *action,
+							 GeditWindow *window);
+
+void		_gedit_cmd_help_contents		(GtkAction   *action,
+							 GeditWindow *window);
+void		_gedit_cmd_help_about			(GtkAction   *action,
+							 GeditWindow *window);
+
 void		_gedit_cmd_file_close_tab 		(GeditTab    *tab,
 							 GeditWindow *window);
 
