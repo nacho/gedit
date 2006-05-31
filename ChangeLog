@@ -1,3 +1,8 @@
+2006-05-31  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-commands-file.c (confirm_overwrite_callback): fix
+	use after free. Patch by Sylvain Defresne (bug #343480)
+
 2006-05-29  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit/gedit-app.c (window_delete_event): s/gedit_cmd/_gedit_cmd/

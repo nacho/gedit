@@ -671,28 +671,28 @@ confirm_overwrite_callback (GtkFileChooser *dialog,
 			    gpointer        data)
 {
 	gchar *uri;
-	gboolean ro;
+	GtkFileChooserConfirmation res;
 
 	gedit_debug (DEBUG_COMMANDS);
 
 	uri = gtk_file_chooser_get_uri (dialog);
 
-	ro = is_read_only (uri);
-
-	g_free (uri);
-
-	if (ro)
+	if (is_read_only (uri))
 	{
 		if (replace_read_only_file (GTK_WINDOW (dialog), uri))
-			return GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME;
+			res = GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME;
 		else
-			return GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN;
+			res = GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN;
 	}
 	else
 	{
 		/* fall back to the default confirmation dialog */
-		return GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
+		res = GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM;
 	}
+
+	g_free (uri);
+
+	return res;
 }
 
 static void
