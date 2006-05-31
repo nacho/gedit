@@ -1,3 +1,27 @@
+2006-05-31  Paolo Maggi  <paolo@gnome.org>
+
+	Added a couple of helper functions for plugins.
+	
+	* gedit/gedit-commands-file.c
+	(gedit_commands_load_uri) (gedit_commands_load_uris): new public 
+	functions
+	(_gedit_cmd_load_files): removed
+	(open_dialog_response_cb): uses gedit_commands_load_uris instead of
+	_gedit_cmd_load_files
+	(open_location_dialog_response_cb): ditto
+	(_gedit_cmd_file_open_recent): ditto
+
+	* gedit/gedit-commands.h 
+	(gedit_commands_load_uri) (gedit_commands_load_uris): new public 
+	functions
+
+	* gedit/gedit-window.c (drag_data_received_cb): uses 
+	gedit_commands_load_uris instead of _gedit_cmd_load_files
+	(gedit_window_get_unsaved_documents): refactored
+	(gedit_window_get_tab_from_uri): new function
+
+	* gedit/gedit-window.h (gedit_window_get_tab_from_uri): new function
+
 2006-05-31  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-commands-file.c (confirm_overwrite_callback): fix

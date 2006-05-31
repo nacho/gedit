@@ -40,13 +40,27 @@
 
 G_BEGIN_DECLS
 
+/* Do nothing if URI does not exist */
+void		 gedit_commands_load_uri		(GeditWindow         *window,
+							 const gchar         *uri,
+							 const GeditEncoding *encoding,
+							 gint                 line_pos);
+
+/* Ignore non-existing URIs */
+gint		 gedit_commands_load_uris		(GeditWindow         *window,
+							 const GSList        *uris,
+							 const GeditEncoding *encoding,
+							 gint                 line_pos);
+
 /*
- * Non-exported function
+ * Non-exported functions
  */
  
 gint		_gedit_cmd_load_files			(GeditWindow         *window,
 							 const GSList        *uris,
 							 const GeditEncoding *encoding);
+							 
+/* Create titled documens for non-existing URIs */
 gint		_gedit_cmd_load_files_from_prompt	(GeditWindow         *window,
 							 const GSList        *uris,
 							 const GeditEncoding *encoding,

@@ -149,7 +149,9 @@ GtkWidget	*gedit_window_get_statusbar		(GeditWindow         *window);
 GtkUIManager	*gedit_window_get_ui_manager		(GeditWindow         *window);
 
 GeditWindowState gedit_window_get_state 		(GeditWindow         *window);
-							 
+	
+GeditTab        *gedit_window_get_tab_from_uri		(GeditWindow         *window,
+							 const gchar         *uri);
 /*
  * Non exported functions
  */
@@ -158,8 +160,6 @@ GtkWidget	*_gedit_window_get_notebook		(GeditWindow         *window);
 GeditWindow	*_gedit_window_move_tab_to_new_window	(GeditWindow         *window,
 							 GeditTab            *tab);
 gboolean	 _gedit_window_is_removing_tabs		(GeditWindow         *window);
-
-GtkWidget	*_gedit_window_get_search_panel		(GeditWindow         *window);
 
 G_CONST_RETURN gchar
 		*_gedit_window_get_default_path 	(GeditWindow         *window);

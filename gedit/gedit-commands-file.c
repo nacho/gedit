@@ -68,7 +68,7 @@ static void tab_state_changed_while_saving (GeditTab    *tab,
 
 void
 _gedit_cmd_file_new (GtkAction   *action,
-		    GeditWindow *window)
+		     GeditWindow *window)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -190,27 +190,60 @@ load_file_list (GeditWindow         *window,
 	return loaded_files;
 }
 
-/* Exported so it can be used for drag'n'drop */
-gint
-_gedit_cmd_load_files (GeditWindow         *window,
-		      const GSList        *uris,
-		      const GeditEncoding *encoding)
+/**
+ * gedit_commands_load_uri:
+ *
+ * Do nothing if URI does not exist
+ */
+void
+gedit_commands_load_uri (GeditWindow         *window,
+			 const gchar         *uri,
+			 const GeditEncoding *encoding,
+			 gint                 line_pos)
 {
-	gedit_debug (DEBUG_COMMANDS);
+	GSList *uris = NULL;
+	
+	g_return_if_fail (GEDIT_IS_WINDOW (window));
+	g_return_if_fail (uri != NULL);
 
-	return load_file_list (window, uris, encoding, 0, FALSE);
+	gedit_debug (DEBUG_COMMANDS);	
+	
+	uris = g_slist_prepend (uris, (gchar *)uri);
+	
+	load_file_list (window, uris, encoding, line_pos, FALSE);
+	
+	g_slist_free (uris);	
+}
+
+/**
+ * gedit_commands_load_uri:
+ *
+ * Ignore non-existing URIs 
+ */
+gint
+gedit_commands_load_uris (GeditWindow         *window,
+			  const GSList        *uris,
+			  const GeditEncoding *encoding,
+			  gint                 line_pos)
+{	
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), 0);
+	g_return_val_if_fail ((uris != NULL) && (uris->data != NULL), 0);
+	
+	gedit_debug (DEBUG_COMMANDS);
+	
+	return load_file_list (window, uris, encoding, line_pos, FALSE);
 }
 
 /*
  * From the command line we can specify a line position for the
- * first doc. Beside specifying a not existing uri crates a
+ * first doc. Beside specifying a not existing uri creates a
  * titled document.
  */
 gint
 _gedit_cmd_load_files_from_prompt (GeditWindow         *window,
-				  const GSList        *uris,
-				  const GeditEncoding *encoding,
-				  gint                 line_pos)
+				   const GSList        *uris,
+				   const GeditEncoding *encoding,
+				   gint                 line_pos)
 {
 	gedit_debug (DEBUG_COMMANDS);
 
@@ -253,9 +286,10 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
-	_gedit_cmd_load_files (window,
-			      uris,
-			      encoding);
+	gedit_commands_load_uris (window,
+				  uris,
+				  encoding,
+				  0);
 
 	g_slist_foreach (uris, (GFunc) g_free, NULL);
 	g_slist_free (uris);
@@ -263,7 +297,7 @@ open_dialog_response_cb (GeditFileChooserDialog *dialog,
 
 void
 _gedit_cmd_file_open (GtkAction   *action,
-		     GeditWindow *window)
+		      GeditWindow *window)
 {
 	GtkWidget     *open_dialog;
 	gpointer       data;
@@ -415,9 +449,10 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 
 	gtk_widget_destroy (GTK_WIDGET (dlg));
 
-	_gedit_cmd_load_files (window,
-		 	      uris,
-			      encoding);
+	gedit_commands_load_uris (window,
+				  uris,
+				  encoding,
+				  0);
 
 	g_slist_foreach (uris, (GFunc) g_free, NULL);
 	g_slist_free (uris);
@@ -425,7 +460,7 @@ open_location_dialog_response_cb (GeditOpenLocationDialog *dlg,
 
 void
 _gedit_cmd_file_open_uri (GtkAction   *action,
-			 GeditWindow *window)
+			  GeditWindow *window)
 {
 	GtkWidget *dlg;
 	gpointer   data;
@@ -463,7 +498,7 @@ _gedit_cmd_file_open_uri (GtkAction   *action,
 
 void
 _gedit_cmd_file_open_recent (EggRecentItem *item,
-			    GeditWindow   *window)
+			     GeditWindow   *window)
 {
 	GSList *uris = NULL;
 	gchar  *uri;
@@ -474,7 +509,7 @@ _gedit_cmd_file_open_recent (EggRecentItem *item,
 
 	uris = g_slist_prepend (uris, uri);
 
-	if (_gedit_cmd_load_files (window, uris, NULL) != 1)
+	if (gedit_commands_load_uris (window, uris, NULL, 0) != 1)
 		gedit_recent_remove (uri);
 
 	g_slist_foreach (uris, (GFunc) g_free, NULL);

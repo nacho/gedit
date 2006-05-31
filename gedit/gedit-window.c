@@ -1928,9 +1928,10 @@ drag_data_received_cb (GtkWidget        *widget,
 
 	uri_list = g_slist_reverse (uri_list);
 
-	_gedit_cmd_load_files (GEDIT_WINDOW (target_window),
-			      uri_list,
-			      NULL);
+	gedit_commands_load_uris (GEDIT_WINDOW (target_window),
+				  uri_list,
+				  NULL,
+				  0);
 
 	g_slist_foreach (uri_list, (GFunc) g_free, NULL);	
 	g_slist_free (uri_list);
@@ -3208,26 +3209,32 @@ GList *
 gedit_window_get_unsaved_documents (GeditWindow *window)
 {
 	GList *unsaved_docs = NULL;
-	GList *docs;
+	GList *tabs;
 	GList *l;
 
 	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
 	
-	docs = gedit_window_get_documents (window);
-
-	for (l = docs; l != NULL; l = l->next)
+	tabs = gtk_container_get_children (GTK_CONTAINER (window->priv->notebook));
+	
+	l = tabs;
+	while (l != NULL)
 	{
 		GeditTab *tab;
-		GeditDocument *doc;
 
-		doc = GEDIT_DOCUMENT (l->data);
-		tab = gedit_tab_get_from_document (doc);
-
+		tab = GEDIT_TAB (l->data);
+		
 		if (!_gedit_tab_can_close (tab))
+		{
+			GeditDocument *doc;
+			
+			doc = gedit_tab_get_document (tab);
 			unsaved_docs = g_list_prepend (unsaved_docs, doc);
+		}	
+		
+		l = g_list_next (l);
 	}
-
-	g_list_free (docs);
+	
+	g_list_free (tabs);
 
 	return g_list_reverse (unsaved_docs);
 }
@@ -3253,5 +3260,48 @@ _gedit_window_set_saving_session_state (GeditWindow *window,
 
 		g_object_notify (G_OBJECT (window), "state");
 	}
+}
+
+GeditTab *
+gedit_window_get_tab_from_uri (GeditWindow *window,
+			       const gchar *uri)
+{
+	GList *tabs;
+	GList *l;
+	
+	g_return_val_if_fail (GEDIT_IS_WINDOW (window), NULL);
+	g_return_val_if_fail (uri != NULL, NULL);
+	
+	tabs = gtk_container_get_children (GTK_CONTAINER (window->priv->notebook));
+	
+	l = tabs;
+	while (l != NULL)
+	{
+		gchar *u;
+		GeditDocument *d;
+		GeditTab *t;
+		
+		t = GEDIT_TAB (l->data);
+		d = gedit_tab_get_document (t);
+
+		u = gedit_document_get_uri (d);
+
+		if ((u != NULL) && gnome_vfs_uris_match (uri, u))
+		{
+			g_free (u);
+			
+			g_list_free (tabs);
+			
+			return t;
+		}
+		
+		g_free (u);
+		
+		l = g_list_next (l);
+	}
+	
+	g_list_free (tabs);
+	
+	return NULL;
 }
 
