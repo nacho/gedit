@@ -59,6 +59,7 @@ void pygedit_add_constants (PyObject *module, const gchar *strip_prefix);
 extern PyMethodDef pygedit_functions[];
 
 /* Exported by pygeditutils module */
+void pygeditutils_register_classes (PyObject *d);
 extern PyMethodDef pygeditutils_functions[];
 
 /* We retreive this to check for correct class hierarchy */
@@ -176,6 +177,9 @@ gedit_python_module_init_python ()
 	geditutils = Py_InitModule ("gedit.utils", pygeditutils_functions);
 	PyDict_SetItemString (mdict, "utils", geditutils);
 	
+	mdict = PyModule_GetDict (geditutils);
+	pygeditutils_register_classes (mdict);
+
 	/* i18n support */
 	gettext = PyImport_ImportModule ("gettext");
 	if (gettext == NULL)

@@ -1,3 +1,12 @@
+2006-06-03  Steve Frécinaux  <steve@istique.net>
+
+	* bindings/python/geditutils.override: override menu_position_* to
+	conform to pygtk format for GtkMenuPositionFunc (you still have to use a
+	lambda to provude user_data anyway)
+	
+	* gedit/gedit-python-module.c: call pygeditutils_register_classes (fix
+	crasher bug)
+
 2006-05-31  Paolo Maggi  <paolo@gnome.org>
 
 	Added a couple of helper functions for plugins.
