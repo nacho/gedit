@@ -11,6 +11,7 @@ gedit_la_LDFLAGS = \
 	-module -avoid-version
 
 gedit_la_LIBADD = \
+	$(PYTHON_LIB_LOC)       \
 	$(PYTHON_LIBS)		\
 	$(PYTHON_EXTRA_LIBS)	\
 	$(PYGTK_LIBS)
