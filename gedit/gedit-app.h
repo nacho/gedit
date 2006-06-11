@@ -75,6 +75,18 @@ struct _GeditAppClass
 };
 
 /*
+ * Lockdown mask definition
+ */
+typedef enum
+{
+	GEDIT_LOCKDOWN_COMMAND_LINE	= 1 << 0,
+	GEDIT_LOCKDOWN_PRINTING		= 1 << 1,
+	GEDIT_LOCKDOWN_PRINT_SETUP	= 1 << 2,
+	GEDIT_LOCKDOWN_SAVE_TO_DISK	= 1 << 3,
+	GEDIT_LOCKDOWN_ALL		= 0xF
+} GeditLockdownMask;
+
+/*
  * Public methods
  */
 GType 		 gedit_app_get_type 			(void) G_GNUC_CONST;
@@ -93,6 +105,9 @@ GList		*gedit_app_get_documents		(GeditApp *app);
 /* Returns a newly allocated list with all the views */
 GList		*gedit_app_get_views			(GeditApp *app);
 
+/* Lockdown state */
+GeditLockdownMask gedit_app_get_lockdown		(GeditApp *app);
+
 /*
  * Non exported functions
  */
@@ -101,6 +116,12 @@ GeditWindow	*_gedit_app_restore_window		(GeditApp    *app,
 GeditWindow	*_gedit_app_get_window_in_workspace	(GeditApp  *app,
 							 GdkScreen *screen,
 							 gint       workspace);
+void		 _gedit_app_set_lockdown		(GeditApp          *app,
+							 GeditLockdownMask  lockdown);
+void		 _gedit_app_set_lockdown_bit		(GeditApp          *app,
+							 GeditLockdownMask  bit,
+							 gboolean           value);
+
 
 G_END_DECLS
 

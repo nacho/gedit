@@ -44,6 +44,7 @@
 #include "gedit-debug.h"
 #include "gedit-view.h"
 #include "gedit-window.h"
+#include "gedit-window-private.h"
 #include "gedit-recent.h"
 
 static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
@@ -117,6 +118,12 @@ static void gedit_prefs_manager_auto_save_changed	(GConfClient *client,
 							 GConfEntry  *entry,
 							 gpointer     user_data);
 
+static void gedit_prefs_manager_lockdown_changed 	(GConfClient *client,
+							 guint        cnxn_id,
+							 GConfEntry  *entry,
+							 gpointer     user_data);
+
+
 static gint window_state = -1;
 static gint window_height = -1;
 static gint window_width = -1;
@@ -137,6 +144,11 @@ gedit_prefs_manager_app_init (void)
 		/* TODO: notify, add dirs */
 		gconf_client_add_dir (gedit_prefs_manager->gconf_client,
 				GPM_PREFS_DIR,
+				GCONF_CLIENT_PRELOAD_RECURSIVE,
+				NULL);
+		
+		gconf_client_add_dir (gedit_prefs_manager->gconf_client,
+				GPM_LOCKDOWN_DIR,
 				GCONF_CLIENT_PRELOAD_RECURSIVE,
 				NULL);
 		
@@ -208,6 +220,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_SAVE_DIR,
 				gedit_prefs_manager_auto_save_changed,
+				NULL, NULL, NULL);
+		
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_LOCKDOWN_DIR,
+				gedit_prefs_manager_lockdown_changed,
 				NULL, NULL, NULL);
 	}
 
@@ -1148,4 +1165,46 @@ gedit_prefs_manager_auto_save_changed (GConfClient *client,
 
 		g_list_free (docs);
 	}
+}
+
+static void
+gedit_prefs_manager_lockdown_changed (GConfClient *client,
+				      guint        cnxn_id,
+				      GConfEntry  *entry,
+				      gpointer     user_data)
+{
+	GeditApp *app;
+	gboolean locked;
+
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (entry->value->type == GCONF_VALUE_BOOL)
+		locked = gconf_value_get_bool (entry->value);
+	else
+		locked = FALSE;
+
+	app = gedit_app_get_default ();
+
+	if (strcmp (entry->key, GPM_LOCKDOWN_COMMAND_LINE) == 0)
+		_gedit_app_set_lockdown_bit (app, 
+					     GEDIT_LOCKDOWN_COMMAND_LINE,
+					     locked);
+
+	else if (strcmp (entry->key, GPM_LOCKDOWN_PRINTING) == 0)
+		_gedit_app_set_lockdown_bit (app, 
+					     GEDIT_LOCKDOWN_PRINTING,
+					     locked);
+
+	else if (strcmp (entry->key, GPM_LOCKDOWN_PRINT_SETUP) == 0)
+		_gedit_app_set_lockdown_bit (app, 
+					     GEDIT_LOCKDOWN_PRINT_SETUP,
+					     locked);
+
+	else if (strcmp (entry->key, GPM_LOCKDOWN_SAVE_TO_DISK) == 0)
+		_gedit_app_set_lockdown_bit (app, 
+					     GEDIT_LOCKDOWN_SAVE_TO_DISK,
+					     locked);
 }

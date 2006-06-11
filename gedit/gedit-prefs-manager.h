@@ -33,6 +33,7 @@
 #include <gdk/gdkcolor.h>
 #include <gtk/gtkenums.h>
 #include <glib/gslist.h>
+#include "gedit-app.h"
 
 #define GEDIT_BASE_KEY	"/apps/gedit-2"
 
@@ -139,6 +140,13 @@
 
 /* White list of writable gnome-vfs methods */
 #define GPM_WRITABLE_VFS_SCHEMES 	GPM_SAVE_DIR "/writable_vfs_schemes"
+
+/* Global Lockdown keys */
+#define GPM_LOCKDOWN_DIR		"/desktop/gnome/lockdown"
+#define GPM_LOCKDOWN_COMMAND_LINE	GPM_LOCKDOWN_DIR "/disable_command_line"
+#define GPM_LOCKDOWN_PRINTING		GPM_LOCKDOWN_DIR "/disable_printing"
+#define GPM_LOCKDOWN_PRINT_SETUP	GPM_LOCKDOWN_DIR "/disable_print_setup"
+#define GPM_LOCKDOWN_SAVE_TO_DISK	GPM_LOCKDOWN_DIR "/disable_save_to_disk"
 
 /* Fallback default values. Keep in sync with gedit.schemas */
 
@@ -428,6 +436,9 @@ gboolean 		 gedit_prefs_manager_get_restore_cursor_position (void);
 gboolean 		 gedit_prefs_manager_get_enable_search_highlighting (void);
 void			 gedit_prefs_manager_set_enable_search_highlighting (gboolean esh);
 gboolean		 gedit_prefs_manager_enable_search_highlighting_can_set (void);
+
+/* Global lockdown */
+GeditLockdownMask	 gedit_prefs_manager_get_lockdown			(void);
 
 #endif  /* __GEDIT_PREFS_MANAGER_H__ */
 

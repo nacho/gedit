@@ -35,7 +35,7 @@ gedit_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
 libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_]].*"
 
-libgedit_la_LIBADD =				\
+libgedit_la_LIBADD =			\
 	$(GEDIT_LIBS)			\
 	dialogs/libdialogs.la		\
 	recent-files/librecent.la
@@ -46,6 +46,8 @@ libgedit_la_LIBADD += \
 endif
 
 BUILT_SOURCES = 			\
+	gedit-enum-types.c		\
+	gedit-enum-types.h		\
 	gedit-marshal.c			\
 	gedit-marshal.h              
 
@@ -165,6 +167,12 @@ libgedit_la_SOURCES += \
 	gedit-python-plugin.h	
 endif
 
+gedit-enum-types.h: $(INST_H_FILES) $(GLIB_MKENUMS) $(top_srcdir)/gedit/gedit-enum-types.h.template
+	$(GLIB_MKENUMS) --template $(top_srcdir)/gedit/gedit-enum-types.h.template $(INST_H_FILES) > gedit-enum-types.h
+	
+gedit-enum-types.c: $(INST_H_FILES) $(GLIB_MKENUMS) $(top_srcdir)/gedit/gedit-enum-types.c.template
+	$(GLIB_MKENUMS) --template $(top_srcdir)/gedit/gedit-enum-types.c.template $(INST_H_FILES) > gedit-enum-types.c
+
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
 
@@ -177,6 +185,8 @@ uidir = $(datadir)/gedit-2/ui/
 
 EXTRA_DIST = 				\
 	$(ui_DATA)			\
+	gedit-enum-types.h.template	\
+	gedit-enum-types.c.template	\
 	gedit-marshal.list
 
 CLEANFILES = $(BUILT_SOURCES)

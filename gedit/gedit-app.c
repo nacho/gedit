@@ -42,13 +42,22 @@
 #include "gedit-notebook.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
+#include "gedit-enum-types.h"
 
 #define GEDIT_APP_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_APP, GeditAppPrivate))
 
+/* Properties */
+enum
+{
+	PROP_0,
+	PROP_LOCKDOWN
+};
+
 struct _GeditAppPrivate
 {
-	GList	    *windows;
-	GeditWindow *active_window;
+	GList	          *windows;
+	GeditWindow       *active_window;
+	GeditLockdownMask  lockdown;
 };
 
 G_DEFINE_TYPE(GeditApp, gedit_app, G_TYPE_OBJECT)
@@ -63,12 +72,41 @@ gedit_app_finalize (GObject *object)
 	G_OBJECT_CLASS (gedit_app_parent_class)->finalize (object);
 }
 
+static void
+gedit_app_get_property (GObject    *object,
+			guint       prop_id,
+			GValue     *value,
+			GParamSpec *pspec)
+{
+	GeditApp *app = GEDIT_APP (object);
+
+	switch (prop_id)
+	{
+		case PROP_LOCKDOWN:
+			g_value_set_flags (value, gedit_app_get_lockdown (app));
+			break;
+		default:
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+			break;
+	}
+}
+
 static void 
 gedit_app_class_init (GeditAppClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->finalize = gedit_app_finalize;
+	object_class->get_property = gedit_app_get_property;
+	
+	g_object_class_install_property (object_class,
+					 PROP_LOCKDOWN,
+					 g_param_spec_flags ("lockdown",
+					 		     "Lockdown",
+					 		     "The lockdown mask",
+					 		     GEDIT_TYPE_LOCKDOWN_MASK,
+					 		     0,
+					 		     G_PARAM_READABLE));
 
 	g_type_class_add_private (object_class, sizeof(GeditAppPrivate));
 }
@@ -76,7 +114,10 @@ gedit_app_class_init (GeditAppClass *klass)
 static void
 gedit_app_init (GeditApp *app)
 {
-	app->priv = GEDIT_APP_GET_PRIVATE (app);	
+	app->priv = GEDIT_APP_GET_PRIVATE (app);
+		
+	/* initial lockdown state */
+	app->priv->lockdown = gedit_prefs_manager_get_lockdown ();
 }
 
 static void
@@ -476,4 +517,46 @@ gedit_app_get_views (GeditApp *app)
 	}
 
 	return res;
+}
+
+/**
+ * gedit_app_get_lockdown:
+ * @app: a #GeditApp
+ *
+ * Gets the lockdown mask (see #GeditLockdownMask) for the application.
+ * The lockdown mask determines which functions are locked down using
+ * the GNOME-wise lockdown GConf keys.
+ **/
+GeditLockdownMask
+gedit_app_get_lockdown (GeditApp *app)
+{
+	g_return_val_if_fail (GEDIT_IS_APP (app), GEDIT_LOCKDOWN_ALL);
+
+	return app->priv->lockdown;
+}
+
+void
+_gedit_app_set_lockdown (GeditApp          *app,
+			 GeditLockdownMask  lockdown)
+{
+	g_return_if_fail (GEDIT_IS_APP (app));
+
+	app->priv->lockdown = lockdown;
+
+	g_object_notify (G_OBJECT (app), "lockdown");
+}
+
+void
+_gedit_app_set_lockdown_bit (GeditApp          *app,
+			     GeditLockdownMask  bit,
+			     gboolean           value)
+{
+	g_return_if_fail (GEDIT_IS_APP (app));
+
+	if (value)
+		app->priv->lockdown |= bit;
+	else
+		app->priv->lockdown &= ~bit;
+
+	g_object_notify (G_OBJECT (app), "lockdown");
 }

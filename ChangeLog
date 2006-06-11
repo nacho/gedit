@@ -1,3 +1,26 @@
+2006-06-11  Steve Frécinaux  <steve@istique.net>
+
+	Fix for bug #165568 – Support global lockdown keys (first part)
+
+	* gedit/gedit-app.[ch]: define GeditLockdownMask as a flag type, add a 
+	'lockdown' property to GeditApp, of type GeditLockdownMask, and define
+	its getter/setter.
+	
+	* gedit/gedit-prefs-manager.[ch]: define a new helper function
+	gedit_prefs_manager_get_lockdown.
+	
+	* gedit/gedit-prefs-manager-app.c: Listen to lockdown GConf folder
+	changes. Update GeditApp's lockdown properties when a lockdown key is
+	changed.
+	
+	* gedit/gedit-enum-types.h.template:
+	* gedit/gedit-enum-types.c.template:
+	* gedit/Makefile.am:
+	
+	Autogenerate type definitions for exported enums using glib-mkenums.
+
+	* configure.ac: add GLIB_MKENUMS definition.
+
 2006-06-03  Steve Frécinaux  <steve@istique.net>
 
 	* bindings/python/geditutils.override: override menu_position_* to
@@ -160,7 +183,7 @@
 	* tools/generate-plugins.py:
 	* tools/preprocessor.py:
 
-	New plugin generator, able to generate python and C plugin skelettons.
+	New plugin generator, able to generate python and C plugin skeletons.
 	See ./generate-plugins.py --help
 
 	* tools/plugin_template/Makefile.am:

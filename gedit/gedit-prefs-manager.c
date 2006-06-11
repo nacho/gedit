@@ -47,7 +47,7 @@ gedit_prefs_manager_get_ ## name (void)					\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	return gedit_prefs_manager_get_bool (key,	\
+	return gedit_prefs_manager_get_bool (key,			\
 					     (def));			\
 }									\
 									\
@@ -56,7 +56,7 @@ gedit_prefs_manager_set_ ## name (gboolean v)				\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	gedit_prefs_manager_set_bool (key,		\
+	gedit_prefs_manager_set_bool (key,				\
 				      v);				\
 }									\
 				      					\
@@ -65,7 +65,7 @@ gedit_prefs_manager_ ## name ## _can_set (void)				\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	return gedit_prefs_manager_key_is_writable (key);\
+	return gedit_prefs_manager_key_is_writable (key);		\
 }	
 
 
@@ -75,7 +75,7 @@ gedit_prefs_manager_get_ ## name (void)			 		\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	return gedit_prefs_manager_get_int (key,		\
+	return gedit_prefs_manager_get_int (key,			\
 					    (def));			\
 }									\
 									\
@@ -84,7 +84,7 @@ gedit_prefs_manager_set_ ## name (gint v)				\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	gedit_prefs_manager_set_int (key,		\
+	gedit_prefs_manager_set_int (key,				\
 				     v);				\
 }									\
 				      					\
@@ -93,7 +93,7 @@ gedit_prefs_manager_ ## name ## _can_set (void)				\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	return gedit_prefs_manager_key_is_writable (key);\
+	return gedit_prefs_manager_key_is_writable (key);		\
 }		
 
 
@@ -103,7 +103,7 @@ gedit_prefs_manager_get_ ## name (void)			 		\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	return gedit_prefs_manager_get_string (key,	\
+	return gedit_prefs_manager_get_string (key,			\
 					       def);			\
 }									\
 									\
@@ -112,7 +112,7 @@ gedit_prefs_manager_set_ ## name (const gchar* v)			\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	gedit_prefs_manager_set_string (key,		\
+	gedit_prefs_manager_set_string (key,				\
 				        v);				\
 }									\
 				      					\
@@ -121,7 +121,7 @@ gedit_prefs_manager_ ## name ## _can_set (void)				\
 {									\
 	gedit_debug (DEBUG_PREFS);					\
 									\
-	return gedit_prefs_manager_key_is_writable (key);\
+	return gedit_prefs_manager_key_is_writable (key);		\
 }		
 
 
@@ -1285,6 +1285,27 @@ gedit_prefs_manager_get_restore_cursor_position (void)
 
 	return gedit_prefs_manager_get_bool (GPM_RESTORE_CURSOR_POSITION,
 					     GPM_DEFAULT_RESTORE_CURSOR_POSITION);
+}
+
+/* Global Lockdown */
+GeditLockdownMask
+gedit_prefs_manager_get_lockdown (void)
+{
+	guint lockdown = 0;
+
+	if (gedit_prefs_manager_get_bool (GPM_LOCKDOWN_COMMAND_LINE, FALSE))
+		lockdown |= GEDIT_LOCKDOWN_COMMAND_LINE;
+
+	if (gedit_prefs_manager_get_bool (GPM_LOCKDOWN_PRINTING, FALSE))
+		lockdown |= GEDIT_LOCKDOWN_PRINTING;
+
+	if (gedit_prefs_manager_get_bool (GPM_LOCKDOWN_PRINT_SETUP, FALSE))
+		lockdown |= GEDIT_LOCKDOWN_PRINT_SETUP;
+
+	if (gedit_prefs_manager_get_bool (GPM_LOCKDOWN_SAVE_TO_DISK, FALSE))
+		lockdown |= GEDIT_LOCKDOWN_SAVE_TO_DISK;
+
+	return lockdown;
 }
 
 /* The following functions are taken from gconf-client.c 
