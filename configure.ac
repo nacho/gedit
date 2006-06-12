@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
 
-AC_INIT(gedit, 2.15.2, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+AC_INIT(gedit, 2.15.3, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
 AC_CONFIG_SRCDIR(gedit/gedit.c)
 AC_CONFIG_MACRO_DIR([m4])
 
