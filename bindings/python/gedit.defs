@@ -51,9 +51,23 @@
 
 ;; Enumerations and flags ...
 
+(define-flags LockdownMask
+  (in-module "Gedit")
+  (c-name "GeditLockdownMask")
+  (gtype-id "GEDIT_TYPE_LOCKDOWN_MASK")
+  (values
+    '("command-line" "GEDIT_LOCKDOWN_COMMAND_LINE")
+    '("printing" "GEDIT_LOCKDOWN_PRINTING")
+    '("print-setup" "GEDIT_LOCKDOWN_PRINT_SETUP")
+    '("save-to-disk" "GEDIT_LOCKDOWN_SAVE_TO_DISK")
+    '("all" "GEDIT_LOCKDOWN_ALL")
+  )
+)
+
 (define-flags SearchFlags
   (in-module "Gedit")
   (c-name "GeditSearchFlags")
+  (gtype-id "GEDIT_TYPE_SEARCH_FLAGS")
   (values
     '("dont-set-flags" "GEDIT_SEARCH_DONT_SET_FLAGS")
     '("entire-word" "GEDIT_SEARCH_ENTIRE_WORD")
@@ -61,37 +75,49 @@
   )
 )
 
+(define-flags DocumentSaveFlags
+  (in-module "Gedit")
+  (c-name "GeditDocumentSaveFlags")
+  (gtype-id "GEDIT_TYPE_DOCUMENT_SAVE_FLAGS")
+  (values
+    '("ignore-mtime" "GEDIT_DOCUMENT_SAVE_IGNORE_MTIME")
+    '("ignore-backup" "GEDIT_DOCUMENT_SAVE_IGNORE_BACKUP")
+    '("preserve-backup" "GEDIT_DOCUMENT_SAVE_PRESERVE_BACKUP")
+  )
+)
+
 (define-enum TabState
   (in-module "Gedit")
   (c-name "GeditTabState")
+  (gtype-id "GEDIT_TYPE_TAB_STATE")
   (values
-    '("state-normal" "GEDIT_TAB_STATE_NORMAL")
-    '("state-loading" "GEDIT_TAB_STATE_LOADING")
-    '("state-reverting" "GEDIT_TAB_STATE_REVERTING")
-    '("state-saving" "GEDIT_TAB_STATE_SAVING")
-    '("state-printing" "GEDIT_TAB_STATE_PRINTING")
-    '("state-print-previewing" "GEDIT_TAB_STATE_PRINT_PREVIEWING")
-    '("state-showing-print-preview" "GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW")
-    '("state-generic-not-editable" "GEDIT_TAB_STATE_GENERIC_NOT_EDITABLE")
-    '("state-loading-error" "GEDIT_TAB_STATE_LOADING_ERROR")
-    '("state-reverting-error" "GEDIT_TAB_STATE_REVERTING_ERROR")
-    '("state-saving-error" "GEDIT_TAB_STATE_SAVING_ERROR")
-    '("state-generic-error" "GEDIT_TAB_STATE_GENERIC_ERROR")
-    '("state-closing" "GEDIT_TAB_STATE_CLOSING")
-    '("num-of-states" "GEDIT_TAB_NUM_OF_STATES")
+    '("normal" "GEDIT_TAB_STATE_NORMAL")
+    '("loading" "GEDIT_TAB_STATE_LOADING")
+    '("reverting" "GEDIT_TAB_STATE_REVERTING")
+    '("saving" "GEDIT_TAB_STATE_SAVING")
+    '("printing" "GEDIT_TAB_STATE_PRINTING")
+    '("print-previewing" "GEDIT_TAB_STATE_PRINT_PREVIEWING")
+    '("showing-print-preview" "GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW")
+    '("generic-not-editable" "GEDIT_TAB_STATE_GENERIC_NOT_EDITABLE")
+    '("loading-error" "GEDIT_TAB_STATE_LOADING_ERROR")
+    '("reverting-error" "GEDIT_TAB_STATE_REVERTING_ERROR")
+    '("saving-error" "GEDIT_TAB_STATE_SAVING_ERROR")
+    '("generic-error" "GEDIT_TAB_STATE_GENERIC_ERROR")
+    '("closing" "GEDIT_TAB_STATE_CLOSING")
   )
 )
 
 (define-flags WindowState
   (in-module "Gedit")
   (c-name "GeditWindowState")
+  (gtype-id "GEDIT_TYPE_WINDOW_STATE")
   (values
-    '("state-normal" "GEDIT_WINDOW_STATE_NORMAL")
-    '("state-saving" "GEDIT_WINDOW_STATE_SAVING")
-    '("state-printing" "GEDIT_WINDOW_STATE_PRINTING")
-    '("state-loading" "GEDIT_WINDOW_STATE_LOADING")
-    '("state-error" "GEDIT_WINDOW_STATE_ERROR")
-    '("state-saving-session" "GEDIT_WINDOW_STATE_SAVING_SESSION")    
+    '("normal" "GEDIT_WINDOW_STATE_NORMAL")
+    '("saving" "GEDIT_WINDOW_STATE_SAVING")
+    '("printing" "GEDIT_WINDOW_STATE_PRINTING")
+    '("loading" "GEDIT_WINDOW_STATE_LOADING")
+    '("error" "GEDIT_WINDOW_STATE_ERROR")
+    '("saving-session" "GEDIT_WINDOW_STATE_SAVING_SESSION")    
   )
 )
 
@@ -161,6 +187,11 @@
   (return-type "GList*")
 )
 
+(define-method get_lockdown
+  (of-object "GeditApp")
+  (c-name "gedit_app_get_lockdown")
+  (return-type "GeditLockdownMask")
+)
 
 
 ;; From ../../gedit/gedit-document.h
@@ -366,6 +397,21 @@
   (of-object "GeditDocument")
   (c-name "gedit_document_get_encoding")
   (return-type "const-GeditEncoding*")
+)
+
+(define-method set_enable_search_highlighting
+  (of-object "GeditDocument")
+  (c-name "gedit_document_set_enable_search_highlighting")
+  (return-type "none")
+  (parameters
+    '("gboolean" "enable")
+  )
+)
+
+(define-method get_enable_search_highlighting
+  (of-object "GeditDocument")
+  (c-name "gedit_document_get_enable_search_highlighting")
+  (return-type "gboolean")
 )
 
 ;; From ../../gedit/gedit-encodings.h
@@ -785,6 +831,15 @@
   )
 )
 
+(define-method close_tabs
+  (of-object "GeditWindow")
+  (c-name "gedit_window_close_tabs")
+  (return-type "none")
+  (parameters
+    '("const-GList*" "tabs")
+  )
+)
+
 (define-method close_all_tabs
   (of-object "GeditWindow")
   (c-name "gedit_window_close_all_tabs")
@@ -872,4 +927,12 @@
   (return-type "GeditWindowState")
 )
 
+(define-method get_tab_from_uri
+  (of-object "GeditWindow")
+  (c-name "gedit_window_get_tab_from_uri")
+  (return-type "GeditTab*")
+  (parameters
+    '("const-gchar*" "uri")
+  )
+)
 

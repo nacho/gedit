@@ -48,6 +48,7 @@
 #include "gedit-prefs-manager-app.h"
 #include "gedit-recent.h"
 #include "gedit-convert.h"
+#include "gedit-enum-types.h"
 
 #define GEDIT_TAB_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_TAB, GeditTabPrivate))
 
@@ -182,8 +183,8 @@ gedit_tab_get_property (GObject    *object,
 					     _gedit_tab_get_name (tab));
 			break;
 		case PROP_STATE:
-			g_value_set_int (value,
-					 gedit_tab_get_state (tab));
+			g_value_set_enum (value,
+					  gedit_tab_get_state (tab));
 			break;			
 		case PROP_AUTO_SAVE:
 			g_value_set_boolean (value,
@@ -265,13 +266,12 @@ gedit_tab_class_init (GeditTabClass *klass)
 							      G_PARAM_READABLE));
 	g_object_class_install_property (object_class,
 					 PROP_STATE,
-					 g_param_spec_int ("state",
-							   "State",
-							   "The tab's state",
-							   0, /* GEDIT_TAB_STATE_NORMAL */
-							   GEDIT_TAB_NUM_OF_STATES - 1,
-							   0, /* GEDIT_TAB_STATE_NORMAL */
-							   G_PARAM_READABLE));							      	
+					 g_param_spec_enum ("state",
+							    "State",
+							    "The tab's state",
+							    GEDIT_TYPE_TAB_STATE,
+							    GEDIT_TAB_STATE_NORMAL,
+							    G_PARAM_READABLE));							      	
 							      
 	g_object_class_install_property (object_class,
 					 PROP_AUTO_SAVE,

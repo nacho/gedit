@@ -7,6 +7,7 @@ headers
 #include "gedit-plugin.h"
 #include "gedit-app.h"
 #include "gedit-encodings.h"
+#include "gedit-enum-types.h"
 
 void pygedit_register_classes (PyObject *d); 
 void pygedit_add_constants (PyObject *module, const gchar *strip_prefix);
@@ -162,6 +163,54 @@ _wrap_gedit_window_get_views(PyGObject *self)
     g_list_free(list);
 
     return py_list;
+}
+%%
+override gedit_window_close_tabs kwargs
+static PyObject *
+_wrap_gedit_window_close_tabs (PyGObject *self,
+			       PyObject  *args,
+			       PyObject  *kwargs)
+{
+	static char *kwlist[] = { "tabs", NULL };
+	PyObject *list, *item;
+	GList *glist = NULL;
+	int len, i;
+
+	if (!PyArg_ParseTupleAndKeywords (args, kwargs,
+					  "O:GeditWindow.close_tabs", kwlist,
+					  &list))
+		return NULL;
+
+	if (!PySequence_Check (list))
+	{
+		PyErr_SetString (PyExc_TypeError,
+				 "first argument must be a sequence");
+		return NULL;
+	}
+
+	len = PySequence_Length (list);
+
+	for (i = 0; i < len; i++)
+	{
+		item = PySequence_GetItem (list, i);
+		Py_DECREF(item);
+
+		if (!pygobject_check (item, &PyGeditTab_Type))
+		{
+			PyErr_SetString (PyExc_TypeError,
+					 "sequence item not a Gtkwidget object");
+			g_list_free (glist);
+			return NULL;
+		}
+
+		glist = g_list_append (glist, pygobject_get (item));
+	}
+
+	gedit_window_close_tabs (GEDIT_WINDOW (self->obj), glist);
+
+	g_list_free (glist);
+	Py_INCREF (Py_None);
+	return Py_None;
 }
 %%
 override gedit_document_get_search_text

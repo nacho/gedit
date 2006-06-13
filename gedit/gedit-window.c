@@ -56,6 +56,7 @@
 #include "gedit-recent.h"
 #include "gedit-documents-panel.h"
 #include "gedit-plugins-engine.h"
+#include "gedit-enum-types.h"
 
 #include "recent-files/egg-recent-model.h"
 #include "recent-files/egg-recent-view.h"
@@ -108,8 +109,8 @@ gedit_window_get_property (GObject    *object,
 	switch (prop_id)
 	{
 		case PROP_STATE:
-			g_value_set_int (value,
-					 gedit_window_get_state (window));
+			g_value_set_enum (value,
+					  gedit_window_get_state (window));
 			break;			
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -311,13 +312,12 @@ gedit_window_class_init (GeditWindowClass *klass)
 
 	g_object_class_install_property (object_class,
 					 PROP_STATE,
-					 g_param_spec_int ("state",
-							   "State",
-							   "The window's state",
-							   0, /* GEDIT_WINDOW_STATE_NORMAL */
-							   G_MAXINT,
-							   0, /* GEDIT_WINDOW_STATE_NORMAL */
-							   G_PARAM_READABLE));
+					 g_param_spec_flags ("state",
+							     "State",
+							     "The window's state",
+							     GEDIT_TYPE_WINDOW_STATE,
+							     GEDIT_WINDOW_STATE_NORMAL,
+							     G_PARAM_READABLE));
 							   
 	g_type_class_add_private (object_class, sizeof(GeditWindowPrivate));
 }

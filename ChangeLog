@@ -1,3 +1,18 @@
+2006-06-13  Steve Frécinaux  <steve@istique.net>
+
+	* gedit/gedit-tab.c:
+	* gedit/gedit-window.c:
+
+	Update property definitions to use the new enum GTypes.
+
+	* bindings/python/gedit.defs: 
+	* bindings/python/gedit.override:
+	
+	Update enum types to actually use the new GTypes. Add bindings for
+	several new methods (GeditDocument.get_enable_search_highlighting,
+	GeditDocument.get_enable_search_highlighting, GeditWindow.close_tabs,
+	GeditWindow.get_tab_from_uri and GeditApp.get_lockdown)
+	
 === gedit 2.15.3 ===
 
 2006-06-12  Steve Frécinaux  <steve@istique.net>
