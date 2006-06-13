@@ -425,18 +425,28 @@ gedit_panel_init (GeditPanel *panel)
 static GtkWidget *
 create_small_button (GtkWidget *image)
 {
-	/* This is quite ugly and sometimes don't give good results */
-	gint w, h;
-	GtkWidget *button = gtk_button_new ();	
-	gtk_widget_show (image);		    
-	gtk_button_set_relief (GTK_BUTTON (button),
-			       GTK_RELIEF_NONE);
+	GtkWidget *button;
+	GtkRcStyle *rcstyle;
+	GtkRequisition size;
+	
+	button = gtk_button_new ();
+	gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
 
-	gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &w, &h);
-	gtk_widget_set_size_request (image, w, h); 
-	gtk_widget_set_size_request (button, w + 4, h + 4);
-	gtk_container_add (GTK_CONTAINER (button), image);
+	/* don't allow focus on the close button */
 	gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+
+	/* make it as small as possible */
+	rcstyle = gtk_rc_style_new ();
+	rcstyle->xthickness = rcstyle->ythickness = 0;
+	gtk_widget_modify_style (button, rcstyle);
+	gtk_rc_style_unref (rcstyle);
+
+	gtk_widget_show (image);
+	gtk_widget_size_request (image, &size);
+	gtk_widget_set_size_request (button, size.width, size.height);
+
+	gtk_container_add (GTK_CONTAINER (button), image);
+
 	return button;
 }
 
@@ -486,7 +496,7 @@ build_horizontal_panel (GeditPanel *panel)
 			    FALSE, 
 			    0);
 
-	image = gtk_image_new_from_stock ("gtk-close", GTK_ICON_SIZE_MENU);
+	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE, GTK_ICON_SIZE_MENU);
 	close_button = create_small_button (image);
 
 	gtk_box_pack_start (GTK_BOX (sidebar),
