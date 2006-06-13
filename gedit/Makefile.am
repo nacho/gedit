@@ -167,11 +167,11 @@ libgedit_la_SOURCES += \
 	gedit-python-plugin.h	
 endif
 
-gedit-enum-types.h: $(INST_H_FILES) $(GLIB_MKENUMS) $(top_srcdir)/gedit/gedit-enum-types.h.template
-	$(GLIB_MKENUMS) --template $(top_srcdir)/gedit/gedit-enum-types.h.template $(INST_H_FILES) > gedit-enum-types.h
+gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	cd $(srcdir) && $(GLIB_MKENUMS) --template $< $(INST_H_FILES) > $@
 	
-gedit-enum-types.c: $(INST_H_FILES) $(GLIB_MKENUMS) $(top_srcdir)/gedit/gedit-enum-types.c.template
-	$(GLIB_MKENUMS) --template $(top_srcdir)/gedit/gedit-enum-types.c.template $(INST_H_FILES) > gedit-enum-types.c
+gedit-enum-types.c: gedit-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
+	cd $(srcdir) && $(GLIB_MKENUMS) --template $< $(INST_H_FILES) > $@
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
