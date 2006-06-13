@@ -18,14 +18,19 @@ gedit_la_LIBADD = \
 
 gedit_la_CFLAGS = \
 	-I$(top_srcdir)			\
+	-I$(top_builddir)		\
 	-I$(top_srcdir)/gedit		\
+	-I$(top_builddir)/gedit		\
 	$(GEDIT_CFLAGS)			\
 	$(NO_STRICT_ALIASING_CFLAGS)	\
 	$(PYGTK_CFLAGS)			\
 	$(PYTHON_CFLAGS)		\
 	$(AM_CFLAGS)
+
+$(top_builddir)/gedit/gedit-enum-types.h:
+	cd $(top_builddir)/gedit && make gedit-enum-types.h
 	
-gedit.c: gedit.defs gedit.override
+gedit.c: gedit.defs gedit.override $(top_builddir)/gedit/gedit-enum-types.h
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
 		--register $(PYGTK_DEFSDIR)/pango-types.defs \
 		--register $(PYGTK_DEFSDIR)/gdk-types.defs \

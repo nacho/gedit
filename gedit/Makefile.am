@@ -168,10 +168,10 @@ libgedit_la_SOURCES += \
 endif
 
 gedit-enum-types.h: gedit-enum-types.h.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	cd $(srcdir) && $(GLIB_MKENUMS) --template $< $(INST_H_FILES) > $@
+	(cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.h.template $(INST_H_FILES)) > $@
 	
 gedit-enum-types.c: gedit-enum-types.c.template $(INST_H_FILES) $(GLIB_MKENUMS)
-	cd $(srcdir) && $(GLIB_MKENUMS) --template $< $(INST_H_FILES) > $@
+	(cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-enum-types.c.template $(INST_H_FILES)) > $@
 
 gedit-marshal.h: gedit-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_marshal > $@
