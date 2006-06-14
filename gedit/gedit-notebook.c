@@ -788,18 +788,17 @@ build_tab_label (GeditNotebook *nb,
 	GtkWidget *label, *dummy_label;
 	GtkWidget *close_button;
 	GtkRcStyle *rcstyle;
-	GtkRequisition size;
 	GtkWidget *image;
 	GtkWidget *spinner;
 	GtkWidget *icon;
 
-	hbox = gtk_hbox_new (FALSE, 0);
+	hbox = gtk_hbox_new (FALSE, 4);
 
 	label_ebox = gtk_event_box_new ();
 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (label_ebox), FALSE);
 	gtk_box_pack_start (GTK_BOX (hbox), label_ebox, TRUE, TRUE, 0);
 
-	label_hbox = gtk_hbox_new (FALSE, 0);
+	label_hbox = gtk_hbox_new (FALSE, 4);
 	gtk_container_add (GTK_CONTAINER (label_ebox), label_hbox);
 
 	/* setup close button */
@@ -817,18 +816,16 @@ build_tab_label (GeditNotebook *nb,
 
 	image = gtk_image_new_from_stock (GTK_STOCK_CLOSE,
 					  GTK_ICON_SIZE_MENU);
-	gtk_widget_size_request (image, &size);
-	gtk_widget_set_size_request (close_button, size.width, size.height);
-
 	gtk_container_add (GTK_CONTAINER (close_button), image);
 	gtk_box_pack_start (GTK_BOX (hbox), close_button, FALSE, FALSE, 0);
 
 	gedit_tooltips_set_tip (nb->priv->title_tips, close_button,
 			      _("Close document"), NULL);
 
-	g_signal_connect (G_OBJECT (close_button), "clicked",
-                          G_CALLBACK (close_button_clicked_cb),
-                          tab);
+	g_signal_connect (close_button,
+			  "clicked",
+			  G_CALLBACK (close_button_clicked_cb),
+			  tab);
 
 	/* setup spinner */
 	spinner = gedit_spinner_new ();
@@ -840,9 +837,9 @@ build_tab_label (GeditNotebook *nb,
 	gtk_box_pack_start (GTK_BOX (label_hbox), icon, FALSE, FALSE, 0);
 	
 	/* setup label */
-        label = gtk_label_new ("");
+	label = gtk_label_new ("");
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-        gtk_misc_set_padding (GTK_MISC (label), 2, 0);
+	gtk_misc_set_padding (GTK_MISC (label), 0, 0);
 	gtk_box_pack_start (GTK_BOX (label_hbox), label, FALSE, FALSE, 0);
 
 	dummy_label = gtk_label_new ("");
