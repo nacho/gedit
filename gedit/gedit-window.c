@@ -98,6 +98,10 @@ static const GtkTargetEntry drag_types[] =
 
 G_DEFINE_TYPE(GeditWindow, gedit_window, GTK_TYPE_WINDOW)
 
+static void	app_lockdown_changed	(GeditApp    *app,
+					 GParamSpec  *param,
+					 GeditWindow *window);
+
 static void
 gedit_window_get_property (GObject    *object,
 			   guint       prop_id,
@@ -122,6 +126,10 @@ static void
 gedit_window_finalize (GObject *object)
 {
 	GeditWindow *window = GEDIT_WINDOW (object); 
+
+	g_signal_handlers_disconnect_by_func (gedit_app_get_default (),
+					      G_CALLBACK (app_lockdown_changed),
+					      window);
 
 	g_object_unref (window->priv->manager);
 
@@ -507,10 +515,13 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	gboolean       b;
 	gboolean       state_normal;
 	GeditTabState  state;
+	GeditLockdownMask lockdown;
 
 	g_return_if_fail (GEDIT_TAB (tab));
 
 	gedit_debug (DEBUG_WINDOW);
+
+	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
 
 	state = gedit_tab_get_state (tab);
 	state_normal = (state == GEDIT_TAB_STATE_NORMAL);
@@ -523,13 +534,15 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	gtk_action_set_sensitive (action,
 				  (state_normal ||
 				   (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
-				  !gedit_document_get_readonly (doc));
+				  !gedit_document_get_readonly (doc) &&
+				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileSaveAs");
 	gtk_action_set_sensitive (action,
-				  state_normal ||
-				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW));
+				  (state_normal ||
+				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
+				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
 				  	
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileRevert");
@@ -540,13 +553,15 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FilePrintPreview");
 	gtk_action_set_sensitive (action,
-				  state_normal);
+				  state_normal &&
+				  !(lockdown & GEDIT_LOCKDOWN_PRINTING));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FilePrint");
 	gtk_action_set_sensitive (action,
-				  state_normal ||
-				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW));
+				  (state_normal ||
+				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
+				  !(lockdown & GEDIT_LOCKDOWN_PRINTING));
 				  
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileClose");
@@ -1020,6 +1035,7 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	EggRecentViewUIManager *recent_view;
 	GtkToolItem *open_button;
 	GError *error = NULL;
+	GeditLockdownMask lockdown;
 
 	gedit_debug (DEBUG_WINDOW);
 
@@ -1101,6 +1117,14 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 			  "disconnect_proxy",
 			  G_CALLBACK (disconnect_proxy_cb),
 			  window);
+
+	/* page setup menu lockdown state */
+	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
+	action = gtk_action_group_get_action (window->priv->action_group,
+				              "FilePageSetup");
+	gtk_action_set_sensitive (action, 
+				  !(lockdown & GEDIT_LOCKDOWN_PRINT_SETUP));
+
 
 	/* recent files menu */
 	recent_model = gedit_recent_get_model ();
@@ -1673,8 +1697,12 @@ static void
 set_sensitivity_according_to_window_state (GeditWindow *window)
 {
 	GtkAction *action;
+	GeditLockdownMask lockdown;
+
 	// GtkWidget *recent_file_menu;
 	
+	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
+
 	/* We disable File->Quit/SaveAll/CloseAll while printing to avoid to have two
 	   operations (save and print/print preview) that uses the message area at
 	   the same time (may be we can remove this limitation in the future) */
@@ -1693,7 +1721,8 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 	action = gtk_action_group_get_action (window->priv->action_group,
 				              "FileSaveAll");
 	gtk_action_set_sensitive (action, 
-				  !(window->priv->state & GEDIT_WINDOW_STATE_PRINTING));
+				  !(window->priv->state & GEDIT_WINDOW_STATE_PRINTING) &&
+				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
 			
 	action = gtk_action_group_get_action (window->priv->always_sensitive_action_group,
 					      "FileNew");
@@ -1744,6 +1773,51 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 			gtk_action_group_set_sensitive (window->priv->quit_action_group,
 							window->priv->num_tabs > 0);
 	}
+}
+
+static void
+update_tab_autosave (GtkWidget *widget,
+		     gpointer   data)
+{
+	GeditTab *tab = GEDIT_TAB (widget);
+	gboolean *enabled = (gboolean *) data;
+
+	gedit_tab_set_auto_save_enabled (tab, *enabled);
+}
+
+static void
+app_lockdown_changed (GeditApp    *app,
+		      GParamSpec  *spec,
+		      GeditWindow *window)
+{
+	GeditTab *tab;
+	GtkAction *action;
+	GeditLockdownMask lockdown;
+	gboolean autosave;
+
+	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
+	
+	/* start/stop autosave in each existing tab */
+	autosave = gedit_prefs_manager_get_auto_save ();
+	gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
+			       update_tab_autosave,
+			       &autosave);
+
+	/* update menues wrt the current active tab */	
+	tab = gedit_window_get_active_tab (window);
+
+	set_sensitivity_according_to_tab (window, tab);
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+				              "FileSaveAll");
+	gtk_action_set_sensitive (action, 
+				  !(window->priv->state & GEDIT_WINDOW_STATE_PRINTING) &&
+				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+				              "FilePageSetup");
+	gtk_action_set_sensitive (action, 
+				  !(lockdown & GEDIT_LOCKDOWN_PRINT_SETUP));
 }
 
 static void
@@ -2885,6 +2959,12 @@ gedit_window_init (GeditWindow *window)
 			  "drag_data_received",
 	                  G_CALLBACK (drag_data_received_cb), 
 	                  NULL);
+
+	/* be aware of lockdown changes */
+	g_signal_connect (gedit_app_get_default (),
+			  "notify::lockdown",
+			  G_CALLBACK (app_lockdown_changed),
+			  window);
 
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
 	gedit_plugins_engine_update_plugins_ui (window, TRUE);

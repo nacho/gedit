@@ -64,8 +64,6 @@ static const GtkActionEntry gedit_always_sensitive_menu_entries[] =
 	  N_("Open a file"), G_CALLBACK (_gedit_cmd_file_open) },
 	{ "FileOpenURI", NULL, N_("Open _Location..."), "<control>L",
 	  N_("Open a file from a specified location"), G_CALLBACK (_gedit_cmd_file_open_uri) },
-	{ "FilePageSetup", NULL, N_("Page Set_up..."), NULL,
-	  N_("Setup the page settings"), G_CALLBACK (_gedit_cmd_file_page_setup) },
 	
 	/* Edit menu */
 	{ "EditPreferences", GTK_STOCK_PREFERENCES, N_("Pr_eferences"), NULL,
@@ -87,6 +85,8 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Save the current file with a different name"), G_CALLBACK (_gedit_cmd_file_save_as) },
 	{ "FileRevert", GTK_STOCK_REVERT_TO_SAVED, NULL, NULL,
 	  N_("Revert to a saved version of the file"), G_CALLBACK (_gedit_cmd_file_revert) },
+	{ "FilePageSetup", NULL, N_("Page Set_up..."), NULL,
+	  N_("Setup the page settings"), G_CALLBACK (_gedit_cmd_file_page_setup) },
 	{ "FilePrintPreview", GTK_STOCK_PRINT_PREVIEW, N_("Print Previe_w"),"<control><shift>P",
 	  N_("Print preview"), G_CALLBACK (_gedit_cmd_file_print_preview) },
 	 { "FilePrint", GTK_STOCK_PRINT, N_("_Print..."), "<control>P",

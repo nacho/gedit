@@ -1357,6 +1357,7 @@ gedit_tab_init (GeditTab *tab)
 {
 	GtkWidget *sw;
 	GeditDocument *doc;
+	GeditLockdownMask lockdown;
 
 	tab->priv = GEDIT_TAB_GET_PRIVATE (tab);
 
@@ -1375,7 +1376,9 @@ gedit_tab_init (GeditTab *tab)
 					GTK_POLICY_AUTOMATIC);
 
 	/* Manage auto save data */
-	tab->priv->auto_save = gedit_prefs_manager_get_auto_save ();
+	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
+	tab->priv->auto_save = gedit_prefs_manager_get_auto_save () &&
+			       !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK);
 	tab->priv->auto_save = (tab->priv->auto_save != FALSE);
 
 	tab->priv->auto_save_interval = gedit_prefs_manager_get_auto_save_interval ();
@@ -2259,13 +2262,19 @@ gedit_tab_set_auto_save_enabled	(GeditTab *tab,
 				 gboolean enable)
 {
 	GeditDocument *doc = NULL;
+	GeditLockdownMask lockdown;
 	
 	gedit_debug (DEBUG_TAB);
 
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 
-	doc = gedit_tab_get_document (tab);
+	/* Force disabling when lockdown is active */
+	lockdown = gedit_app_get_lockdown (gedit_app_get_default());
+	if (lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK)
+		enable = FALSE;
 	
+	doc = gedit_tab_get_document (tab);
+
 	if (tab->priv->auto_save == enable)
 		return;
 

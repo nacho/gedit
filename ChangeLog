@@ -1,3 +1,18 @@
+2006-06-15  Steve Frécinaux  <steve@istique.net>
+
+	Fix for bug #165568 – Support global lockdown keys (second part)
+
+	* gedit/gedit-window.c: disable some menu entries according the current 
+	lockdown state; listen to app's lockdown property changes to update the
+	menus sensitivity and autosave status accordingly.
+	
+	* gedit/gedit-ui.h: move FilePageSetup from always sensitive actions.
+
+	* gedit/gedit-tab.c: do not enable autosave if save_to_disk is disabled.
+	
+	* gedit/dialogs/gedit-close-confirmation-dialog.c: adapt the dialog to
+	the case save_to_disk is disabled.
+
 2006-06-13  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-panel.c: (create_small_button):

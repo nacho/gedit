@@ -37,6 +37,7 @@
 #include "gedit-close-confirmation-dialog.h"
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-window.h>
+#include <gedit/gedit-app.h>
 
 /* Properties */
 enum 
@@ -71,6 +72,8 @@ struct _GeditCloseConfirmationDialogPrivate
 	GList       *selected_documents;
 
 	GtkTreeModel *list_store;
+	
+	gboolean     disable_save_to_disk;
 };
 
 #define GEDIT_CLOSE_CONFIRMATION_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), \
@@ -128,11 +131,7 @@ static void
 set_logout_mode (GeditCloseConfirmationDialog *dlg,
 		 gboolean                      logout_mode)
 {
-	GeditCloseConfirmationDialogPrivate *priv;
-
-	priv = dlg->priv;
-
-	priv->logout_mode = logout_mode;
+	dlg->priv->logout_mode = logout_mode;
 	
 	if (logout_mode)
 	{
@@ -155,10 +154,19 @@ set_logout_mode (GeditCloseConfirmationDialog *dlg,
 				       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
 	}
 	
-	gtk_dialog_add_button (GTK_DIALOG (dlg),
-			       GTK_STOCK_SAVE, GTK_RESPONSE_YES);
+	if (dlg->priv->disable_save_to_disk)
+	{
+		gtk_dialog_set_default_response	(GTK_DIALOG (dlg),
+						 GTK_RESPONSE_NO);
+	}
+	else
+	{
+		gtk_dialog_add_button (GTK_DIALOG (dlg),
+				       GTK_STOCK_SAVE, GTK_RESPONSE_YES);
 
-	gtk_dialog_set_default_response	(GTK_DIALOG (dlg), GTK_RESPONSE_YES);
+		gtk_dialog_set_default_response	(GTK_DIALOG (dlg), 
+						 GTK_RESPONSE_YES);
+	}
 }
 
 static void 
@@ -167,6 +175,10 @@ gedit_close_confirmation_dialog_init (GeditCloseConfirmationDialog *dlg)
 	AtkObject *atk_obj;
 
 	dlg->priv = GEDIT_CLOSE_CONFIRMATION_DIALOG_GET_PRIVATE (dlg);
+
+	dlg->priv->disable_save_to_disk = 
+			gedit_app_get_lockdown (gedit_app_get_default ()) 
+			& GEDIT_LOCKDOWN_SAVE_TO_DISK;
 
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 5);		
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (dlg)->vbox), 14);
@@ -455,7 +467,6 @@ get_text_secondary_label (GeditDocument *doc)
 static void
 build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 {
-	GeditCloseConfirmationDialogPrivate *priv;
 	GtkWidget     *hbox;
 	GtkWidget     *vbox;
 	GtkWidget     *primary_label;
@@ -466,10 +477,8 @@ build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 	gchar         *str;
 	gchar         *markup_str;
 
-	priv = dlg->priv;
-
-	g_return_if_fail (priv->unsaved_documents->data != NULL);
-	doc = GEDIT_DOCUMENT (priv->unsaved_documents->data);
+	g_return_if_fail (dlg->priv->unsaved_documents->data != NULL);
+	doc = GEDIT_DOCUMENT (dlg->priv->unsaved_documents->data);
 
 	/* Image */
 	image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, 
@@ -484,8 +493,14 @@ build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
 	doc_name = gedit_document_get_short_name_for_display (doc);
-	str = g_strdup_printf (_("Save the changes to document \"%s\" before closing?"),
-			       doc_name);
+
+	if (dlg->priv->disable_save_to_disk)
+		str = g_strdup_printf (_("Changes to document \"%s\" will be permanently lost."),
+				       doc_name);
+	else
+		str = g_strdup_printf (_("Save the changes to document \"%s\" before closing?"),
+				       doc_name);
+
 	g_free (doc_name);
 
 	markup_str = g_strconcat ("<span weight=\"bold\" size=\"larger\">", str, "</span>", NULL);
@@ -495,7 +510,10 @@ build_single_doc_dialog (GeditCloseConfirmationDialog *dlg)
 	g_free (markup_str);
 
 	/* Secondary label */
-	str = get_text_secondary_label (doc);
+	if (dlg->priv->disable_save_to_disk)
+		str = g_strdup (_("Saving has been disabled by the system administrator."));	
+	else
+		str = get_text_secondary_label (doc);
 	secondary_label = gtk_label_new (str);
 	g_free (str);
 	gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
@@ -593,16 +611,19 @@ create_treeview (GeditCloseConfirmationDialogPrivate *priv)
 	priv->list_store = GTK_TREE_MODEL (store);
 	
 	/* Add columns */
-	renderer = gtk_cell_renderer_toggle_new ();
-	g_signal_connect (renderer, "toggled",
-			  G_CALLBACK (save_toggled), store);
+	if (!priv->disable_save_to_disk)
+	{
+		renderer = gtk_cell_renderer_toggle_new ();
+		g_signal_connect (renderer, "toggled",
+				  G_CALLBACK (save_toggled), store);
 
-	column = gtk_tree_view_column_new_with_attributes ("Save?",
-							   renderer,
-							   "active",
-							   SAVE_COLUMN,
-							   NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+		column = gtk_tree_view_column_new_with_attributes ("Save?",
+								   renderer,
+								   "active",
+								   SAVE_COLUMN,
+								   NULL);
+		gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
+	}
 
 	renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes ("Name",
@@ -654,14 +675,21 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 	gtk_misc_set_alignment (GTK_MISC (primary_label), 0.0, 0.5);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
-	str = g_strdup_printf (
-			ngettext ("There is %d document with unsaved changes. "
-				  "Save changes before closing?",
-				  "There are %d documents with unsaved changes. "
-				  "Save changes before closing?",
-				  g_list_length (priv->unsaved_documents)),
-			g_list_length (priv->unsaved_documents));
-	
+	if (priv->disable_save_to_disk)
+		str = g_strdup_printf (
+				ngettext ("Changes to %d document will be permanently lost.",
+					  "Changes to %d documents will be permanently lost.",
+					  g_slist_length (priv->unsaved_documents)),
+				g_slist_length (priv->unsaved_documents));
+	else
+		str = g_strdup_printf (
+				ngettext ("There is %d document with unsaved changes. "
+					  "Save changes before closing?",
+					  "There are %d documents with unsaved changes. "
+					  "Save changes before closing?",
+					  g_slist_length (priv->unsaved_documents)),
+				g_slist_length (priv->unsaved_documents));
+
 	markup_str = g_strconcat ("<span weight=\"bold\" size=\"larger\">", str, "</span>", NULL);
 	g_free (str);
 	
@@ -672,7 +700,11 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 	vbox2 = gtk_vbox_new (FALSE, 8);
 	gtk_box_pack_start (GTK_BOX (vbox), vbox2, FALSE, FALSE, 0);
 
-	select_label = gtk_label_new_with_mnemonic (_("S_elect the documents you want to save:"));
+	if (priv->disable_save_to_disk)
+		select_label = gtk_label_new_with_mnemonic (_("Docum_ents with unsaved changes:"));
+	else
+		select_label = gtk_label_new_with_mnemonic (_("S_elect the documents you want to save:"));
+
 	gtk_box_pack_start (GTK_BOX (vbox2), select_label, FALSE, FALSE, 0);
 	gtk_label_set_line_wrap (GTK_LABEL (select_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (select_label), 0.0, 0.5);
@@ -689,8 +721,12 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 	gtk_container_add (GTK_CONTAINER (scrolledwindow), treeview);
 
 	/* Secondary label */
-	secondary_label = gtk_label_new (_("If you don't save, "
-					   "all your changes will be permanently lost."));
+	if (priv->disable_save_to_disk)
+		secondary_label = gtk_label_new (_("Saving has been disabled by the system administrator."));
+	else
+		secondary_label = gtk_label_new (_("If you don't save, "
+						   "all your changes will be permanently lost."));
+
 	gtk_box_pack_start (GTK_BOX (vbox2), secondary_label, FALSE, FALSE, 0);
 	gtk_label_set_line_wrap (GTK_LABEL (secondary_label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (secondary_label), 0, 0.5);
