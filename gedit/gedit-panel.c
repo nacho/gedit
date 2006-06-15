@@ -422,6 +422,19 @@ gedit_panel_init (GeditPanel *panel)
 	gtk_object_sink (GTK_OBJECT (panel->priv->tooltips));
 }
 
+static void
+button_style_set_cb (GtkWidget *button,
+		     GtkStyle *previous_style,
+		     gpointer user_data)
+{
+	gint h, w;
+
+	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (button),
+					   GTK_ICON_SIZE_MENU, &w, &h);
+
+	gtk_widget_set_size_request (button, w + 2, h + 2);
+}
+
 static GtkWidget *
 create_small_button (GtkWidget *image)
 {
@@ -443,6 +456,10 @@ create_small_button (GtkWidget *image)
 	gtk_widget_show (image);
 
 	gtk_container_add (GTK_CONTAINER (button), image);
+
+	/* Set minimal size */
+	g_signal_connect (button, "style-set",
+			  G_CALLBACK (button_style_set_cb), NULL);
 
 	return button;
 }

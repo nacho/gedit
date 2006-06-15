@@ -780,6 +780,21 @@ close_button_clicked_cb (GtkWidget *widget,
 	g_signal_emit (notebook, signals[TAB_CLOSE_REQUEST], 0, tab);
 }
 
+static void
+tab_label_style_set_cb (GtkWidget *hbox,
+			GtkStyle *previous_style,
+			gpointer user_data)
+{
+	GtkWidget *button;
+	gint h, w;
+
+	gtk_icon_size_lookup_for_settings (gtk_widget_get_settings (hbox),
+					   GTK_ICON_SIZE_MENU, &w, &h);
+
+	button = g_object_get_data (G_OBJECT (hbox), "close-button");
+	gtk_widget_set_size_request (button, w + 2, h + 2);
+}
+
 static GtkWidget *
 build_tab_label (GeditNotebook *nb, 
 		 GeditTab      *tab)
@@ -844,6 +859,10 @@ build_tab_label (GeditNotebook *nb,
 
 	dummy_label = gtk_label_new ("");
 	gtk_box_pack_start (GTK_BOX (label_hbox), dummy_label, TRUE, TRUE, 0);
+	
+	/* Set minimal size */
+	g_signal_connect (hbox, "style-set",
+			  G_CALLBACK (tab_label_style_set_cb), NULL);
 	
 	gtk_widget_show (hbox);
 	gtk_widget_show (label_ebox);
