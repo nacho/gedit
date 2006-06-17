@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-  <!ENTITY appversion "2.7.91">
-  <!ENTITY manrevision "2.8">
+  <!ENTITY appversion "2.14.3">
+  <!ENTITY manrevision "2.9">
   <!ENTITY date "August 2004">
   <!ENTITY app "gedit">
 ]>
@@ -200,7 +200,7 @@
 
 <!-- ============= To Start gedit ============================ -->
 	 <sect2 id="gedit-to-start"> 
-		<title>To Start &app;</title>
+		<title>Starting &app;</title>
 		<para>You can start <application>&app;</application> in the following ways:</para>
 		<variablelist>
     		<varlistentry>
@@ -216,11 +216,12 @@
     		</listitem>
     		</varlistentry>
     		</variablelist>
+    <para>By default, when you open a text document in the file manager, gedit will start, and display the document.</para>		
 	</sect2>
 	
 	<sect2 id="gedit-when-you-start">
 	
-		<title>When You Start &app;</title>	
+		<title>The &app; Window</title>	
 		<para>When you start <application>&app;</application>, the following window is displayed:</para>
 	
 		<figure id="gedit-window"> 
@@ -252,11 +253,6 @@
 		  <varlistentry> <term>Display area</term> 
 			 <listitem> 
 				<para> The display area contains the text of the file that you are editing. </para>
-			 </listitem>
-		  </varlistentry>
-		  <varlistentry> <term>Output window</term> 
-			 <listitem> 
-				<para>The output window displays the output returned by the Shell command plugin. </para>
 			 </listitem>
 		  </varlistentry>
 		  <varlistentry> <term>Statusbar</term> 
@@ -297,16 +293,12 @@
                         <row valign="top">               
                           <entry><para>Menubar</para></entry>
                           <entry><para>Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice>.</para>
-           <para>If you have recently opened the file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open Recent</guimenuitem></menuchoice>.</para> 
+           <para>If you have recently opened the file, choose it from the list further down the <guimenu>File</guimenu> menu.</para> 
 </entry>
                         </row>
                         <row valign="top">               
                           <entry><para>Toolbar</para></entry>
                           <entry><para>Click on the <guibutton>Open</guibutton> toolbar button.</para></entry>
-                        </row>
-                        <row valign="top">               
-                          <entry><para>Right-click popup menu</para></entry>
-                          <entry><para>Right-click on the file in a file manager window, then choose <guilabel>Open With</guilabel> from the popup menu. </para></entry>
                         </row>
                         <row valign="top">               
                           <entry><para>Shortcut keys</para></entry>
@@ -322,7 +314,7 @@
 	 </sect2>
 <!-- ============= To Open a File ============================= -->
 	 <sect2 id="gedit-open-file"> 
-		<title>To Open a File</title>
+		<title>Opening a File</title>
 		<para>To open a file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> to display the <guilabel>Open File</guilabel> dialog. Select the file that you want to open, then click <guibutton>Open</guibutton>. The file is displayed in the <application>&app;</application> window. </para>
 		<para>You can open multiple files in <application>&app;</application>. The application displays one file at a time in the application window. The application adds a tab for each open file to the window. To display another open file, click on the tab that corresponds to the file. To create a new <application> &app;</application> window for each file that is open, drag the tab corresponding to each file to the desktop background. </para>
                   <para>You can also use the <guimenu>Documents</guimenu> menu to move between the open files. You can choose <menuchoice> <guimenu>Documents</guimenu> <guimenuitem>Move to New Window</guimenuitem> </menuchoice> to move a document to a new <application> &app;</application> window.
@@ -331,11 +323,11 @@
 	 </sect2>
 <!-- ============= To Open Multiple Files from the Command Line ========= -->
 	 <sect2 id="gedit-run-from-cmd-line"> 
-		<title>To Open Multiple Files from a Command Line</title>
+		<title>Running &app; from a Command Line</title>
 		<para>You can run <application>&app;</application> from a command line and open a single file or multiple files. To open multiple files from a command line, type the following command, then press <keycap>Return</keycap>:</para>
 		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
 		<para>When the application starts, the files that you specify are displayed in the <application>&app;</application> window.</para>
-                <para>For more information on how to run <application>&app;</application> from a command line, see <ulink url="man:gedit" type="man"><citerefentry><refentrytitle>&app;</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.</para>
+                <para>For more information on how to run <application>&app;</application> from a command line, see the unix manual page for &app;, <ulink url="man:gedit" type="man"><citerefentry><refentrytitle>&app;</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.</para>
 	 </sect2>
   </sect1>
 <!-- ================ Usage ================================ -->
@@ -344,12 +336,12 @@
 
 <!-- ============= To Create a New File ======================== -->
 	 <sect2 id="gedit-create-new-file"> 
-		<title>To Create a New File</title>
-		<para>To create a new file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>. The application displays a new file in the <application>&app;</application> window.</para>
+		<title>Creating a New Document</title>
+		<para>To create a new document, choose <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>. The application displays a new blank document in the <application>&app;</application> window.</para>
 	 </sect2>
 <!-- ============= To Save a File ============================== -->
 	 <sect2 id="gedit-save-file"> 
-		<title>To Save a File</title>
+		<title>Saving a File</title>
 		<para>You can save files in the following ways:</para>
 		<itemizedlist> 
 		  <listitem><para>To save changes to an existing file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice>. </para>
@@ -363,18 +355,18 @@
 	 </sect2>
 <!-- ============= To Edit Text ================================ -->
 	 <sect2 id="gedit-edit-text"> 
-		<title>To Edit Text</title>
+		<title>Editing Text</title>
 		<para>You can edit the text of a file in the following ways:</para>
 		<itemizedlist> 
-		  <listitem><para>Type new text from the keyboard. </para>
+		  <listitem><para>Type new text from the keyboard. The blinking <firstterm>insertion cursor</firstterm> marks the point where new text appears. To change this, use the arrow keys on the keyboard or click with the mouse.</para>
 		  </listitem>
-		  <listitem><para>To copy the selected text to a buffer, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Copy</guimenuitem> </menuchoice>.</para>
+		  <listitem><para>To copy the selected text to the clipboard, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Copy</guimenuitem> </menuchoice>.</para>
 		  </listitem>
-		  <listitem><para>To delete the selected text from the file and move the selected text to a buffer, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Cut</guimenuitem> </menuchoice>.</para>
+		  <listitem><para>To delete the selected text from the file and move the selected text to the clipboard, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Cut</guimenuitem> </menuchoice>.</para>
 		  </listitem>
 		  <listitem><para>To permanently delete the selected text from the file, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Delete</guimenuitem> </menuchoice>.</para>
 		  </listitem>
-		  <listitem><para>To insert the contents of the buffer at the cursor position, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Paste</guimenuitem> </menuchoice>. You must cut or copy text before you can paste text into the file.</para>
+		  <listitem><para>To insert the contents of the clipboard at the cursor position, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Paste</guimenuitem> </menuchoice>. You must cut or copy text before you can paste text into the file, either from &app; or another application.</para>
 		  </listitem>
 		  <listitem><para>To select all of the text in a file, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Select All</guimenuitem> </menuchoice>. </para>
 		  </listitem>
@@ -382,12 +374,12 @@
 	 </sect2>
 <!-- ============== To Undo or Redo Edits ====================== -->
 	 <sect2 id="gedit-undo-redo-edits"> 
-		<title>To Undo or Redo Edits</title>
-		<para>To undo an edit, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Undo</guimenuitem> </menuchoice>. To redo an edit, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Redo</guimenuitem> </menuchoice>. The number of previous edits that you can undo is determined by the <guilabel>Undo</guilabel> limit setting in the <xref linkend="gedit-prefs-editor"/> tabbed section of the <guilabel>Preferences</guilabel> dialog.  </para>
+		<title>Undoing and Redoing Changes</title>
+		<para>To undo a change you have made, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Undo</guimenuitem> </menuchoice>. To reverse this action, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Redo</guimenuitem> </menuchoice>. The number of previous edits that you can undo is determined by the <guilabel>Undo</guilabel> limit setting in the <guilabel>Editor</guilabel> tabbed section of the <guilabel>Preferences</guilabel> dialog: see  <xref linkend="gedit-prefs-editor"/>.  </para>
 	 </sect2>
 <!-- ============= To Find Text ================================ -->
 	 <sect2 id="gedit-find-text"> 
-		<title>To Find Text</title>
+		<title>Finding Text</title>
 		<para>To search a file for a string, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find</guimenuitem> </menuchoice> to display the <guilabel>Find</guilabel> dialog.</para>
@@ -495,7 +487,7 @@
 		<title>To Pipe the Output of a Command to a File</title>
 		<para>You can use <application>&app;</application> to pipe the output of a command to a text file. For example, to pipe the output of an <command>ls</command> command to a text file, type <command>ls | gedit</command>, then press <keycap>Return</keycap>.</para>
 		<para>The output of the <command>ls</command> command is displayed in a new text file in the <application>&app;</application> window.</para>
-		<para>Alternatively, you can use the Shell command plugin to pipe command output to the current file. For information about how to use the Shell command plugin, see <xref linkend="gedit-shell-command-plugin"/>.</para>
+		<para>Alternatively, you can use the External tools plugin to pipe command output to the current file. <!-- fixme: xref needed! -->.</para>
 	 </sect2>
 <!-- ============= To Position the Cursor on a Specific Line ======================= -->
 	 <sect2 id="gedit-goto-line"> 
@@ -829,13 +821,38 @@
 	   
 	 <para>To configure <application>&app;</application>, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</guimenuitem> </menuchoice>. The <guilabel>Preferences</guilabel> dialog contains the following categories:</para>
 	 <itemizedlist> 
-		<listitem><para><xref linkend="gedit-prefs-editor"/></para></listitem>
 		<listitem><para><xref linkend="gedit-prefs-view"/></para></listitem>
+		<listitem><para><xref linkend="gedit-prefs-editor"/></para></listitem>
 		<listitem><para><xref linkend="gedit-prefs-fontsandcolors"/></para></listitem>
 		<listitem><para><xref linkend="gedit-prefs-syntax"/></para></listitem>
 		<listitem><para><xref linkend="gedit-prefs-plugins"/></para></listitem>
 	 </itemizedlist>
 	 
+	 	<sect2 id="gedit-prefs-view">
+	 		<title>View</title>
+			<variablelist>
+	 		<varlistentry> <term><guilabel>Text Wrapping</guilabel> </term> 
+                          <listitem> 
+                            <para>Select the <guilabel>Enable text wrapping</guilabel> option to have long lines of text flow into paragraphs instead of running off the edge of the text window. This avoids having to scroll horizontally</para>
+			   <para>Select the <guilabel>Do not split words over two lines</guilabel> option to have the text wrapping option preserve whole words when flowing text to the next line. This makes text easier to read.</para>
+			 </listitem>
+		  	</varlistentry>
+		        <varlistentry> 
+                          <term><guilabel>Line Numbers</guilabel></term> 
+			 <listitem> 
+				<para>Select the <guilabel>Display line numbers</guilabel> option to display line numbers on the left side of the <application>&app;</application> window. </para>
+			 </listitem>
+		  </varlistentry>
+		        <varlistentry> 
+                          <term><guilabel>Right Margin</guilabel></term> 
+			 <listitem> 
+				<para>Select the <guilabel>Display right margin</guilabel> option to display a vertical line that indicates the right margin. </para>
+				<para>Use the <guilabel>Right margin at column</guilabel> spin box to specify the location of the vertical line. </para>
+			 </listitem>
+		  </varlistentry>
+			</variablelist>
+		</sect2>
+		
 	 <sect2 id="gedit-prefs-editor">
 	 <title>Editor</title>
 			<variablelist>
@@ -862,32 +879,7 @@
 			 </listitem>
 		  	</varlistentry>
 			</variablelist>
-	 	</sect2>
-
-	 	<sect2 id="gedit-prefs-view">
-	 		<title>View</title>
-			<variablelist>
-	 		<varlistentry> <term><guilabel>Text Wrapping</guilabel> </term> 
-                          <listitem> 
-                            <para>Select the <guilabel>Enable text wrapping</guilabel> option to wrap text onto the next line, at a character level, when you reach the text window boundary. </para>
-			   <para>Select the <guilabel>Do not split words over two lines</guilabel> option to wrap text onto the next line, at a word level, when you reach the text window boundary. </para>
-			 </listitem>
-		  	</varlistentry>
-		        <varlistentry> 
-                          <term><guilabel>Line Numbers</guilabel></term> 
-			 <listitem> 
-				<para>Select the <guilabel>Display line numbers</guilabel> option to display line numbers on the left side of the <application>&app;</application> window. </para>
-			 </listitem>
-		  </varlistentry>
-		        <varlistentry> 
-                          <term><guilabel>Right Margin</guilabel></term> 
-			 <listitem> 
-				<para>Select the <guilabel>Display right margin</guilabel> option to display a vertical line that indicates the right margin. </para>
-				<para>Use the <guilabel>Right margin at column</guilabel> spin box to specify the location of the vertical line. </para>
-			 </listitem>
-		  </varlistentry>
-			</variablelist>
-		</sect2>	 
+	 	</sect2>			 
 
 	 	<sect2 id="gedit-prefs-fontsandcolors">
 	 		<title>Font &amp; Colors</title>
@@ -1079,10 +1071,6 @@
 			<entry><para>Inserts the current date and time into a file.</para></entry> 
 		</row>
 		<row valign="top">
-			<entry><para>Shell command</para></entry> 
-			<entry><para>Displays the text output of a shell command in the output window. </para></entry> 
-		</row> 
-		<row valign="top">
 			<entry><para>Sort</para></entry> 
 			<entry><para>Sorts the selected text. </para></entry> 
 		</row> 
@@ -1125,7 +1113,7 @@
 		  <listitem><para>A <guibutton>Configure Plugin</guibutton> button: use this button to open a configuration dialog for the selected plugin, if that plugin is configurable. For example, see <xref linkend="gedit-date-time-configure"/>.</para>
 		  </listitem>
 		</itemizedlist>
-		<para>When you load a plugin, <application>&app;</application> adds the plugin to the appropriate <application>&app;</application> menu, as described in the following table.</para>
+		<para><!-- TODO: move this detail to each individual plugin section -->When you load a plugin, <application>&app;</application> adds the plugin to the appropriate <application>&app;</application> menu, as described in the following table.</para>
 		<informaltable frame="topbot"> 
 		<tgroup cols="2"> 
 		<colspec colname="col1"/> 
@@ -1169,11 +1157,6 @@
 			<entry><para><menuchoice><guimenu>Edit</guimenu> 
 			<guimenuitem>Insert Date and Time</guimenuitem></menuchoice></para></entry> 
 		</row>
-		<row valign="top">
-			<entry><para>Shell command</para></entry> 
-			<entry><para><menuchoice><guimenu>Tools</guimenu> 
-			<guimenuitem>Run Command</guimenuitem></menuchoice></para></entry> 
-		</row> 
 		<row valign="top">
 			<entry><para>Sort</para></entry> 
 			<entry><para><menuchoice><guimenu>Edit</guimenu> 
@@ -1401,52 +1384,6 @@
 </sect3>
 </sect2>
 
-<sect2 id="gedit-shell-command-plugin">
-<title>To Use the Shell Command Plugin</title>
-
-	<para>The Shell Command plugin enables you to capture the output from a shell command in <application>&app;</application>, by displaying the text output of the shell command in the output window. To use the Shell command plugin, perform the following steps:</para>
-		<orderedlist> 
-		  <listitem><para>Load the Shell command plugin. </para>
-		  </listitem>
-
-		  <listitem><para>Choose <menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Run Command</guimenuitem> </menuchoice> to display the <guilabel>Run Command</guilabel> dialog.
-				</para>
-		  </listitem>
-		  <listitem><para>Type the shell command that you want to execute in the <guilabel>Command</guilabel> field. </para>
-                             <para> You can include the following special characters:</para>
-                                <itemizedlist>
-                                  <listitem>
-                                   <para><literal>%f</literal></para>
-                                   <para>Use these special characters to specify the filename of the current active document, including the path. </para>
-                                  </listitem>
-                                  <listitem>
-                                   <para><literal>%n</literal></para>
-                                   <para>Use these special characters to specify the filename of the current active document, without the path. In this case, <application>&app;</application> looks for the file in the Working directory. </para>
-                                  </listitem>
-                                </itemizedlist>
-		  </listitem>
-		  <listitem><para>Edit the <guilabel>Working directory</guilabel> field if necessary. By default, the Shell command plugin executes the command you specify in the current directory. </para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Show results in Output Window</guilabel> option to display the results of the command in the output window. If you do not select this option, <application>&app;</application> discards the results of the command. 
-				</para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Run</guibutton>. The Shell command plugin executes the command and inserts the text output into the output window.
-				</para>
-		  </listitem>
-		  <listitem><para>Use the <keycap>Shift</keycap> key to select the text in the output window.  </para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Copy selected lines</guibutton> to copy the selected text into the buffer.
-				</para>
-		  </listitem>
-		  <listitem><para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Paste</guimenuitem> </menuchoice> to paste the selected text into the file.
-				</para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Close the output window</guibutton> to close the output window.
-				</para>
-		  </listitem>
-		</orderedlist>
-
-</sect2>
 <sect2 id="gedit-sort-plugin">
 <title>To Use the Sort Plugin</title>
 	<para>The Sort plugin sorts the selected text.</para>
