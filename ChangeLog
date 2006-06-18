@@ -1,5 +1,24 @@
 2006-06-18  Paolo Maggi  <paolo@gnome.org>
 
+	Reorganization of the Search menu
+	
+	* gedit/gedit-commands-search.c (_gedit_cmd_search_goto_line): focus
+	the view
+	(_gedit_cmd_search_interactive_search): new method
+
+	* gedit/gedit-commands.h: new method 
+	_gedit_cmd_search_interactive_search
+
+	* gedit/gedit-ui.h: new action "SearchInteractiveSearch"
+
+	* gedit/gedit-ui.xml: added "Interactive search..." menu item and
+	some placeholder and separator to the Search menu
+
+	* gedit/gedit-window.c (set_sensitivity_according_to_tab): set
+	the sensitivity of the "SearchInteractiveSearch" action
+
+2006-06-18  Paolo Maggi  <paolo@gnome.org>
+
 	Fixed bug #344026 – Find - Replace
 
 	* gedit/dialogs/gedit-search-dialog.c (show_replace): new function

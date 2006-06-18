@@ -745,10 +745,39 @@ _gedit_cmd_search_goto_line (GtkAction   *action,
 	if (active_view == NULL)
 		return;
 
+	/* Focus the view if needed: we need to focus the view otherwise 
+	   activating the binding for goto line has no effect */
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+
+
 	/* goto line is builtin in GeditView, just activate
 	 * the corrisponding binding.
 	 */
 	gtk_bindings_activate (GTK_OBJECT (active_view),
 			       GDK_i,
+			       GDK_CONTROL_MASK);
+}
+
+void
+_gedit_cmd_search_interactive_search (GtkAction   *action,
+				      GeditWindow *window)
+{
+	GeditView *active_view;
+
+	gedit_debug (DEBUG_COMMANDS);
+
+	active_view = gedit_window_get_active_view (window);
+	if (active_view == NULL)
+		return;
+
+	/* Focus the view if needed: we need to focus the view otherwise 
+	   activating the binding for interactive search has no effect */
+	gtk_widget_grab_focus (GTK_WIDGET (active_view));
+	
+	/* interactive search is builtin in GeditView, just activate
+	 * the corrisponding binding.
+	 */
+	gtk_bindings_activate (GTK_OBJECT (active_view),
+			       GDK_k,
 			       GDK_CONTROL_MASK);
 }

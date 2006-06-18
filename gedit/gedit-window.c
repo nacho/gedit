@@ -613,6 +613,11 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  state_normal);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
+					      "SearchInteractiveSearch");
+	gtk_action_set_sensitive (action,
+				  state_normal);
+
+	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchReplace");
 	gtk_action_set_sensitive (action,
 				  state_normal);
