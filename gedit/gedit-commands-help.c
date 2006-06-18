@@ -57,6 +57,8 @@ _gedit_cmd_help_about (GtkAction   *action,
 	static const gchar * const authors[] = {
 		"Paolo Maggi <paolo@gnome.org>",
 		"Paolo Borelli <pborelli@katamail.com>",
+		"Steve Fr\303\251cinaux  <steve@istique.net>",
+		"Jesse van den Kieboom  <jesse@icecrew.nl>",
 		"James Willcox <jwillcox@gnome.org>",
 		"Chema Celorio",
 		"Federico Mena Quintero <federico@novell.com>",
