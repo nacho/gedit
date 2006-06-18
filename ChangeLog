@@ -1,5 +1,15 @@
 2006-06-18  Paolo Maggi  <paolo@gnome.org>
 
+	Fixed bug #344026 – Find - Replace
+
+	* gedit/dialogs/gedit-search-dialog.c (show_replace): new function
+	(gedit_search_dialog_class_init): register the new signal "show_replace"
+	and bind Ctrl+H to it
+
+	* gedit/dialogs/gedit-search-dialog.h: new signal "show_replace"
+
+2006-06-18  Paolo Maggi  <paolo@gnome.org>
+
 	* gedit/gedit-commands-help.c (_gedit_cmd_help_about): added
 	Steve Frécinaux and Jesse van den Kieboom to authors. Welcome guys :)
 

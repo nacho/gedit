@@ -70,6 +70,9 @@ typedef struct _GeditSearchDialogClass GeditSearchDialogClass;
 struct _GeditSearchDialogClass 
 {
 	GtkDialogClass parent_class;
+	
+	/* Key bindings */
+	gboolean (* show_replace) (GeditSearchDialog *dlg);
 };
 
 enum

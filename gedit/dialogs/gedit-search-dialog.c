@@ -33,15 +33,29 @@
 #endif
 
 #include <string.h>
+
 #include <glib/gi18n.h>
+
+#include <gdk/gdkkeysyms.h>
+
 #include <libgnomeui/gnome-entry.h>
 
 #include "gedit-search-dialog.h"
 #include "gedit-utils.h"
+#include "gedit-marshal.h"
 
 #define GEDIT_SEARCH_DIALOG_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						GEDIT_TYPE_SEARCH_DIALOG,              \
 						GeditSearchDialogPrivate))
+
+/* Signals */
+enum
+{
+	SHOW_REPLACE,
+	LAST_SIGNAL
+};
+
+static guint dialog_signals [LAST_SIGNAL] = { 0 };
 
 struct _GeditSearchDialogPrivate 
 {
@@ -135,16 +149,36 @@ gedit_search_dialog_focus_in_event (GtkWidget     *widget,
 	return res;
 }
 
+static gboolean
+show_replace (GeditSearchDialog *dlg)
+{
+	gedit_search_dialog_set_show_replace (dlg, TRUE);
+	
+	return TRUE;
+}
+
 static void 
 gedit_search_dialog_class_init (GeditSearchDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
+	GtkBindingSet *binding_set;
+	
 	object_class->set_property = gedit_search_dialog_set_property;
 	object_class->get_property = gedit_search_dialog_get_property;
 	widget_class->focus_in_event = gedit_search_dialog_focus_in_event;
 	
+	klass->show_replace = show_replace;
+	
+	dialog_signals[SHOW_REPLACE] =
+    		g_signal_new ("show_replace",
+		  	      G_TYPE_FROM_CLASS (object_class),
+		  	      G_SIGNAL_RUN_LAST | G_SIGNAL_ACTION,
+		  	      G_STRUCT_OFFSET (GeditSearchDialogClass, show_replace),
+			      NULL, NULL,
+			      gedit_marshal_BOOLEAN__NONE,
+			      G_TYPE_BOOLEAN, 0);
+			      
 	g_object_class_install_property (object_class, PROP_SHOW_REPLACE,
 					 g_param_spec_boolean ("show-replace",
 					 		       "Show Replace",
@@ -153,6 +187,14 @@ gedit_search_dialog_class_init (GeditSearchDialogClass *klass)
 					 		       G_PARAM_READWRITE));
 
 	g_type_class_add_private (object_class, sizeof (GeditSearchDialogPrivate));
+
+	binding_set = gtk_binding_set_by_class (klass);
+	
+	/* Note: we cannot use the keyval/modifier associated with the 
+	 * GTK_STOCK_FIND_AND_REPLACE stock item since GNOME HIG suggests Ctrl+h
+	 * for Replace while gtk+ uses Ctrl+r */
+	gtk_binding_entry_add_signal (binding_set, GDK_h, GDK_CONTROL_MASK, "show_replace", 0);
+	gtk_binding_entry_add_signal (binding_set, GDK_H, GDK_CONTROL_MASK, "show_replace", 0);		
 }
 
 static void
