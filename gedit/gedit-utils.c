@@ -516,12 +516,16 @@ gedit_utils_get_stdin (void)
 void 
 gedit_warning (GtkWindow *parent, const gchar *format, ...)
 {
-	va_list args;
-	gchar *str;
-	GtkWidget *dialog;
-
+	va_list         args;
+	gchar          *str;
+	GtkWidget      *dialog;
+	GtkWindowGroup *wg = NULL;
+	
 	g_return_if_fail (format != NULL);
 
+	if (parent != NULL)
+		wg = parent->group;
+		
 	va_start (args, format);
 	str = g_strdup_vprintf (format, args);
 	va_end (args);
@@ -533,16 +537,22 @@ gedit_warning (GtkWindow *parent, const gchar *format, ...)
 		   	GTK_BUTTONS_OK,
 			str);
 
+	g_free (str);
+	
+	if (wg != NULL)
+		gtk_window_group_add_window (wg, GTK_WINDOW (dialog));
+		
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 	gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 
-	gtk_dialog_run (GTK_DIALOG (dialog));
-
-	gtk_widget_destroy (dialog);
-
-	g_free (str);
+	g_signal_connect (G_OBJECT (dialog),
+			  "response",
+			  G_CALLBACK (gtk_widget_destroy),
+			  NULL);
+			  
+	gtk_widget_show (dialog);
 }
 
 /*
