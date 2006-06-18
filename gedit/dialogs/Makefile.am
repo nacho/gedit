@@ -2,7 +2,9 @@ gladedir = $(datadir)/gedit-2/glade/
 
 INCLUDES = 							\
 	-I$(top_srcdir)						\
+	-I$(top_builddir)					\
 	-I$(top_srcdir)/gedit 					\
+	-I$(top_builddir)/gedit					\
 	$(GEDIT_CFLAGS) 					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
