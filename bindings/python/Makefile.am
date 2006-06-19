@@ -5,7 +5,8 @@ noinst_LTLIBRARIES = \
 
 nodist_gedit_la_SOURCES = \
 	gedit.c			\
-	geditutils.c
+	geditutils.c	\
+	geditcommands.c
 
 gedit_la_LDFLAGS = \
 	-module -avoid-version
@@ -44,6 +45,13 @@ geditutils.c: geditutils.defs geditutils.override
 		--override $*.override \
 		--prefix py$* $(<F) ) > $@ 
 
+geditcommands.c: geditcommands.defs geditcommands.override gedit.defs
+	( cd $(srcdir) && $(PYGTK_CODEGEN) \
+		--register gedit.defs \
+		--register $(PYGTK_DEFSDIR)/gtk-types.defs \
+		--override $*.override \
+		--prefix py$* $(<F) ) > $@ 
+
 BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 	gedit/gedit-app.h		\
 	gedit/gedit-document.h		\
@@ -58,25 +66,34 @@ BINDING_GEDIT_HEADERS_SRCDIR_IN = \
 BINDING_UTILS_HEADERS_SRCDIR_IN = \
 	gedit/gedit-utils.h
 
+BINDING_COMMANDS_HEADERS_SRCDIR_IN = \
+	gedit/gedit-commands.h
+
 BINDING_HEADERS_BUILDDIR_IN = 
 
 BINDING_GEDIT_HEADERS_SRCDIR	:= $(addprefix $(top_srcdir)/,$(BINDING_GEDIT_HEADERS_SRCDIR_IN))
 BINDING_UTILS_HEADERS_SRCDIR	:= $(addprefix $(top_srcdir)/,$(BINDING_UTILS_HEADERS_SRCDIR_IN))
+BINDING_COMMANDS_HEADERS_SRCDIR	:= $(addprefix $(top_srcdir)/,$(BINDING_COMMANDS_HEADERS_SRCDIR_IN))
+
 BINDING_HEADERS_BUILDDIR	:= $(addprefix $(top_builddir)/,$(BINDING_HEADERS_BUILDDIR_IN))
 
 regenerate-python-binding:
 	$(PYGTK_H2DEF) $(sort $(BINDING_GEDIT_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > gedit.defs.new
 	$(PYGTK_H2DEF) $(sort $(BINDING_UTILS_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > geditutils.defs.new
+	$(PYGTK_H2DEF) $(sort $(BINDING_COMMANDS_HEADERS_SRCDIR) $(BINDING_HEADERS_BUILDDIR)) > geditcommands.defs.new
 
 BUILT_SOURCES = \
 	gedit.c			\
-	geditutils.c
+	geditutils.c	\
+	geditcommands.c
 
 EXTRA_DIST = \
 	gedit.override		\
 	gedit.defs		\
 	geditutils.override	\
-	geditutils.defs
+	geditutils.defs		\
+	geditcommands.override \
+	geditcommands.defs
 
 CLEANFILES = $(BUILT_SOURCES)
 

@@ -62,6 +62,10 @@ extern PyMethodDef pygedit_functions[];
 void pygeditutils_register_classes (PyObject *d);
 extern PyMethodDef pygeditutils_functions[];
 
+/* Exported by pygeditcommands module */
+void pygeditcommands_register_classes (PyObject *d);
+extern PyMethodDef pygeditcommands_functions[];
+
 /* We retreive this to check for correct class hierarchy */
 static PyTypeObject *PyGeditPlugin_Type;
 
@@ -71,7 +75,7 @@ static void
 gedit_python_module_init_python ()
 {
 	PyObject *pygtk, *mdict, *require, *path;
-	PyObject *sys_path, *gtk, *gedit, *geditutils;
+	PyObject *sys_path, *gtk, *gedit, *geditutils, *geditcommands;
 	PyObject *pygtk_version, *pygtk_required_version;
 	PyObject *gettext, *install, *gettext_args;
 	struct sigaction old_sigint;
@@ -176,9 +180,16 @@ gedit_python_module_init_python ()
 	/* import gedit.utils */
 	geditutils = Py_InitModule ("gedit.utils", pygeditutils_functions);
 	PyDict_SetItemString (mdict, "utils", geditutils);
-	
+
+	/* import gedit.commands */
+	geditcommands = Py_InitModule ("gedit.commands", pygeditcommands_functions);
+	PyDict_SetItemString (mdict, "commands", geditcommands);
+
 	mdict = PyModule_GetDict (geditutils);
 	pygeditutils_register_classes (mdict);
+	
+	mdict = PyModule_GetDict (geditcommands);
+	pygeditcommands_register_classes (mdict);
 
 	/* i18n support */
 	gettext = PyImport_ImportModule ("gettext");
