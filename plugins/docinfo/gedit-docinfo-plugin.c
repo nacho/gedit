@@ -380,18 +380,13 @@ docinfo_dialog_response_cb (GtkDialog	*widget,
 			gedit_debug_message (DEBUG_PLUGINS, "GTK_RESPONSE_OK");
 			
 			doc = gedit_window_get_active_document (window);
+			g_return_if_fail (doc != NULL);
 			
-			if (doc == NULL)
-			{
-				gtk_widget_destroy (data->dialog->dialog);
-			}
-			else
-			{
-				docinfo_real (doc,
-					      data->dialog);
-				selectioninfo_real (doc,
-						    data->dialog);
-			}
+			docinfo_real (doc,
+				      data->dialog);
+
+			selectioninfo_real (doc,
+					    data->dialog);
 			
 			break;
 		}
@@ -437,6 +432,13 @@ update_ui_real (GeditWindow  *window,
 
 	gtk_action_group_set_sensitive (data->ui_action_group,
 					(view != NULL));
+					
+	if (data->dialog != NULL)
+	{
+		gtk_dialog_set_response_sensitive (GTK_DIALOG (data->dialog->dialog),
+						   GTK_RESPONSE_OK,
+						   (view != NULL));
+	}
 }
 
 static void
