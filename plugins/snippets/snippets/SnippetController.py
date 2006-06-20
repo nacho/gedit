@@ -352,7 +352,7 @@ class SnippetController:
 		# Jump to first placeholder
 		(current, next) = self.next_placeholder()
 		
-		if current:
+		if current and current != self.active_placeholder:
 			self.goto_placeholder(None, current)
 		elif next:
 			self.goto_placeholder(None, next)		
