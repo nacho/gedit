@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-28 22:42+0200\n"
-"PO-Revision-Date: 2006-05-28 22:45+0200\n"
+"POT-Creation-Date: 2006-06-26 22:13+0200\n"
+"PO-Revision-Date: 2006-06-26 22:14+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -586,23 +586,23 @@ msgstr "[ISO-8859-15]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:139
 msgid "Logout _without Saving"
 msgstr "Lukk _uten å lagre"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:144
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:143
 msgid "_Cancel Logout"
 msgstr "A_vbryt utlogging"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:151
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:150
 msgid "Close _without Saving"
 msgstr "Lukk _uten å lagre"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:183
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:195
 msgid "Question"
 msgstr "Spørsmål"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:383
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld second will be permanently lost."
@@ -614,12 +614,12 @@ msgstr[0] ""
 msgstr[1] ""
 "Hvis du ikke lagrer vil endringene fra de siste %ld sekundene gå tapt."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:392
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid ""
 "If you don't save, changes from the last minute will be permanently lost."
 msgstr "Hvis du ikke lagrer vil endringene fra det siste minuttet gå tapt."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:398
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -634,7 +634,7 @@ msgstr[1] ""
 "Hvis du ikke lagrer vil endringene fra det siste minuttet og %ld sekundene "
 "gå tapt."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:408
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
 #, c-format
 msgid ""
 "If you don't save, changes from the last %ld minute will be permanently lost."
@@ -646,8 +646,8 @@ msgstr[0] ""
 msgstr[1] ""
 "Hvis du ikke lagrer vil endringene fra de siste %ld minuttene gå tapt."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:423
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:444
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:435
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:456
 #, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural ""
@@ -655,7 +655,7 @@ msgid_plural ""
 msgstr[0] "Hvis du ikke lagrer vil endringene fra den siste timen gå tapt."
 msgstr[1] "Hvis du ikke lagrer vil endringene fra de %d siste timene gå tapt."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:429
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:441
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -670,12 +670,29 @@ msgstr[1] ""
 "Hvis du ikke lagrer vil endringene fra den siste timen og %d minuttene gå "
 "tapt."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:487
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:498
+#, c-format
+msgid "Changes to document \"%s\" will be permanently lost."
+msgstr "Endringer gjort i dokument «%s» vil gå tapt."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:501
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Lagre endringene i dokument «%s» før du lukker?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:658
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:725
+msgid "Saving has been disabled by the system administrator."
+msgstr "Lagring er deaktivert av systemadministrator."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "Endringer gjort i %d dokument vil gå tapt."
+msgstr[1] "Endringer gjort i %d dokumenter vil gå tapt."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:686
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural ""
@@ -687,12 +704,15 @@ msgstr[1] ""
 "Det finnes %d dokumenter med endringer som ikke er lagret. Lagre endringene "
 "før du lukker?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:675
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:704
+msgid "Docum_ents with unsaved changes:"
+msgstr "Dokum_enter med endringer som ikke er lagret:"
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
 msgid "S_elect the documents you want to save:"
 msgstr "V_elg dokumentene du vil lagre:"
 
-#. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:692
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:727
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Hvis du ikke lagrer vil alle endringene gå tapt."
 
@@ -1041,21 +1061,21 @@ msgstr "Br_uk forvalgt temaskrift"
 msgid "_minutes"
 msgstr "_minutter"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:260
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1068
+#: ../gedit/dialogs/gedit-search-dialog.c:302
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1089
 msgid "Replace"
 msgstr "Erstatt"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:272 ../gedit/gedit-window.c:1066
+#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1087
 msgid "Find"
 msgstr "Finn"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:324
+#: ../gedit/dialogs/gedit-search-dialog.c:366
 msgid "Replace _All"
 msgstr "Erstatt _alle"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:325
-#: ../gedit/gedit-commands-file.c:559
+#: ../gedit/dialogs/gedit-search-dialog.c:367
+#: ../gedit/gedit-commands-file.c:594
 msgid "_Replace"
 msgstr "E_rstatt"
 
@@ -1133,50 +1153,50 @@ msgid_plural "Loading %d files…"
 msgstr[0] "Laster %d fil..."
 msgstr[1] "Laster %d filer..."
 
-#: ../gedit/gedit-commands-file.c:286
+#: ../gedit/gedit-commands-file.c:320
 msgid "Open Files…"
 msgstr "Åpne filer..."
 
-#: ../gedit/gedit-commands-file.c:392
+#: ../gedit/gedit-commands-file.c:426
 msgid "The entered location is not valid."
 msgstr "Oppgitt lokasjon er ikke gyldig."
 
-#: ../gedit/gedit-commands-file.c:395
+#: ../gedit/gedit-commands-file.c:429
 #: ../gedit/gedit-io-error-message-area.c:150
 #: ../gedit/gedit-io-error-message-area.c:189
 #: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Vennligst sjekk at du skrev inn lokasjonen korrekt og prøv igjen."
 
-#: ../gedit/gedit-commands-file.c:540
+#: ../gedit/gedit-commands-file.c:575
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Filen «%s» er skrivebeskyttet."
 
-#: ../gedit/gedit-commands-file.c:551
+#: ../gedit/gedit-commands-file.c:586
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Vil du prøve å erstatte den med filen du lagrer?"
 
-#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:815
+#: ../gedit/gedit-commands-file.c:652 ../gedit/gedit-commands-file.c:850
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Lagrer fil «%s»..."
 
-#: ../gedit/gedit-commands-file.c:714
+#: ../gedit/gedit-commands-file.c:749
 msgid "Save As…"
 msgstr "Lagre som..."
 
-#: ../gedit/gedit-commands-file.c:1010
+#: ../gedit/gedit-commands-file.c:1045
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Forkaster endringer i dokument «%s»..."
 
-#: ../gedit/gedit-commands-file.c:1032
+#: ../gedit/gedit-commands-file.c:1067
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Forkast ikke-lagrede endringer i dokumentet «%s»?"
 
-#: ../gedit/gedit-commands-file.c:1041
+#: ../gedit/gedit-commands-file.c:1076
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1186,12 +1206,12 @@ msgid_plural ""
 msgstr[0] "Endringer gjort i dokumentet det siste %ld sekundet vil å tapt."
 msgstr[1] "Endringer gjort i dokumentet de siste %ld sekundene vil gå tapt."
 
-#: ../gedit/gedit-commands-file.c:1050
+#: ../gedit/gedit-commands-file.c:1085
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr "Endringer gjort i dokumentet det siste minuttet vil gå tapt."
 
-#: ../gedit/gedit-commands-file.c:1056
+#: ../gedit/gedit-commands-file.c:1091
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1204,7 +1224,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Endringer gjort i dokumentet det siste minuttet og %ld sekundene vil gå tapt."
 
-#: ../gedit/gedit-commands-file.c:1066
+#: ../gedit/gedit-commands-file.c:1101
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1214,7 +1234,7 @@ msgid_plural ""
 msgstr[0] "Endringer gjort i dokumentet det siste %ld minuttet vil gå tapt."
 msgstr[1] "Endringer gjort i dokumentet de siste %ld minuttene vil gå tapt."
 
-#: ../gedit/gedit-commands-file.c:1081 ../gedit/gedit-commands-file.c:1102
+#: ../gedit/gedit-commands-file.c:1116 ../gedit/gedit-commands-file.c:1137
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1222,7 +1242,7 @@ msgid_plural ""
 msgstr[0] "Endringer gjort i dokumentet den siste timen vil gå tapt."
 msgstr[1] "Endringer gjort i dokumentet de siste %d timene vil gå tapt."
 
-#: ../gedit/gedit-commands-file.c:1087
+#: ../gedit/gedit-commands-file.c:1122
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1235,15 +1255,15 @@ msgstr[0] ""
 msgstr[1] ""
 "Endringer gjort i dokumentet den siste timen og %d minuttene vil gå tapt."
 
-#: ../gedit/gedit-commands-file.c:1128
+#: ../gedit/gedit-commands-file.c:1163
 msgid "_Revert"
 msgstr "Fo_rkast"
 
-#: ../gedit/gedit-commands-help.c:78
+#: ../gedit/gedit-commands-help.c:80
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit er en liten og lett tekst editor for GNOME skrivebordet"
 
-#: ../gedit/gedit-commands-help.c:94
+#: ../gedit/gedit-commands-help.c:96
 msgid "translator-credits"
 msgstr "Kjartan Maraas <kmaraas@gnome.org>"
 
@@ -1273,7 +1293,7 @@ msgid "Could not obtain backup filename"
 msgstr "Kunne ikke finne navn på sikkerhetskopi"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1590 ../gedit/gedit-window.c:1595
+#: ../gedit/gedit-window.c:1619 ../gedit/gedit-window.c:1624
 msgid "Read Only"
 msgstr "Skrivebeskyttet"
 
@@ -1789,17 +1809,17 @@ msgstr ""
 msgid "Could not save the file %s."
 msgstr "Kunne ikke lagre filen %s."
 
-#: ../gedit/gedit-notebook.c:823
+#: ../gedit/gedit-notebook.c:838
 msgid "Close document"
 msgstr "Lukk dokument"
 
-#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:556
+#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:580
 #: ../gedit/recent-files/egg-recent-view-gtk.c:446
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "Tom"
 
-#: ../gedit/gedit-panel.c:500 ../gedit/gedit-panel.c:577
+#: ../gedit/gedit-panel.c:524 ../gedit/gedit-panel.c:601
 msgid "Hide panel"
 msgstr "Skjul panel"
 
@@ -1843,7 +1863,7 @@ msgstr "K_onfigurer tillegg"
 msgid "Cannot initialize preferences manager."
 msgstr "Kan ikke initiere håndtering av brukervalg."
 
-#: ../gedit/gedit-prefs-manager.c:1386
+#: ../gedit/gedit-prefs-manager.c:1407
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Ventet «%s»; fikk «%s» for nøkkel %s"
@@ -2000,42 +2020,42 @@ msgid "Saving %s"
 msgstr "Lagrer %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1503
+#: ../gedit/gedit-tab.c:1506
 msgid "RO"
 msgstr "Skrivebeskyttet"
 
-#: ../gedit/gedit-tab.c:1548
+#: ../gedit/gedit-tab.c:1551
 #, c-format
 msgid "Error opening file %s"
 msgstr "Feil ved åpning av fil %s"
 
-#: ../gedit/gedit-tab.c:1553
+#: ../gedit/gedit-tab.c:1556
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Feil under forkasting av endringer i fil %s"
 
-#: ../gedit/gedit-tab.c:1558
+#: ../gedit/gedit-tab.c:1561
 #, c-format
 msgid "Error saving file %s"
 msgstr "Feil ved lagring av fil %s"
 
-#: ../gedit/gedit-tab.c:1576
+#: ../gedit/gedit-tab.c:1579
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1583
+#: ../gedit/gedit-tab.c:1586
 msgid "Name:"
 msgstr "Navn:"
 
-#: ../gedit/gedit-tab.c:1584
+#: ../gedit/gedit-tab.c:1587
 msgid "MIME Type:"
 msgstr "MIME-type:"
 
-#: ../gedit/gedit-tab.c:1585
+#: ../gedit/gedit-tab.c:1588
 msgid "Encoding:"
 msgstr "Koding:"
 
-#: ../gedit/gedit-tab.c:2013
+#: ../gedit/gedit-tab.c:2016
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Rendrer side %d av %d..."
@@ -2077,7 +2097,7 @@ msgstr "Opprett et nytt dokument"
 msgid "_Open..."
 msgstr "_Åpne..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1165
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1194
 msgid "Open a file"
 msgstr "Åpne en fil"
 
@@ -2089,51 +2109,51 @@ msgstr "Åpne _lokasjon ..."
 msgid "Open a file from a specified location"
 msgstr "Åpne en fil fra en spesifisert lokasjon"
 
-#: ../gedit/gedit-ui.h:67
-msgid "Page Set_up..."
-msgstr "Side_oppsett..."
-
-#: ../gedit/gedit-ui.h:68
-msgid "Setup the page settings"
-msgstr "Sett innstillinger for siden"
-
 #. Edit menu
-#: ../gedit/gedit-ui.h:71
+#: ../gedit/gedit-ui.h:69
 msgid "Pr_eferences"
 msgstr "Bruk_ervalg"
 
-#: ../gedit/gedit-ui.h:72
+#: ../gedit/gedit-ui.h:70
 msgid "Configure the application"
 msgstr "Konfigurer applikasjonen"
 
 #. Help menu
-#: ../gedit/gedit-ui.h:75
+#: ../gedit/gedit-ui.h:73
 msgid "_Contents"
 msgstr "_Innhold"
 
-#: ../gedit/gedit-ui.h:76
+#: ../gedit/gedit-ui.h:74
 msgid "Open the gedit manual"
 msgstr "Åpne gedit-håndbok"
 
-#: ../gedit/gedit-ui.h:78
+#: ../gedit/gedit-ui.h:76
 msgid "About this application"
 msgstr "Om denne applikasjonen"
 
-#: ../gedit/gedit-ui.h:85
+#: ../gedit/gedit-ui.h:83
 msgid "Save the current file"
 msgstr "Lagre aktiv fil"
 
-#: ../gedit/gedit-ui.h:86
+#: ../gedit/gedit-ui.h:84
 msgid "Save _As..."
 msgstr "L_agre som..."
 
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:85
 msgid "Save the current file with a different name"
 msgstr "Lagre aktiv fil med et nytt navn"
 
-#: ../gedit/gedit-ui.h:89
+#: ../gedit/gedit-ui.h:87
 msgid "Revert to a saved version of the file"
 msgstr "Gå tilbake til lagret versjon av filen"
+
+#: ../gedit/gedit-ui.h:88
+msgid "Page Set_up..."
+msgstr "Side_oppsett..."
+
+#: ../gedit/gedit-ui.h:89
+msgid "Setup the page settings"
+msgstr "Sett innstillinger for siden"
 
 #: ../gedit/gedit-ui.h:90
 msgid "Print Previe_w"
@@ -2241,93 +2261,101 @@ msgstr "Gå til _linje..."
 msgid "Go to a specific line"
 msgstr "Gå til en spesifikk linje"
 
+#: ../gedit/gedit-ui.h:129
+msgid "Interactive search..."
+msgstr "Interaktivt søk..."
+
+#: ../gedit/gedit-ui.h:130
+msgid "Interactively search for text"
+msgstr "Søk etter tekst interaktivt"
+
 #. Documents menu
-#: ../gedit/gedit-ui.h:131
+#: ../gedit/gedit-ui.h:133
 msgid "_Save All"
 msgstr "L_agre alle"
 
-#: ../gedit/gedit-ui.h:132
+#: ../gedit/gedit-ui.h:134
 msgid "Save all open files"
 msgstr "Lagre alle åpne filer"
 
-#: ../gedit/gedit-ui.h:133
+#: ../gedit/gedit-ui.h:135
 msgid "_Close All"
 msgstr "_Lukk alle"
 
-#: ../gedit/gedit-ui.h:134
+#: ../gedit/gedit-ui.h:136
 msgid "Close all open files"
 msgstr "Lukk alle åpne filer"
 
-#: ../gedit/gedit-ui.h:135
+#: ../gedit/gedit-ui.h:137
 msgid "_Previous Document"
 msgstr "_Forrige dokument"
 
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:138
 msgid "Activate previous document"
 msgstr "Aktiver forrige dokument"
 
-#: ../gedit/gedit-ui.h:137
+#: ../gedit/gedit-ui.h:139
 msgid "_Next Document"
 msgstr "_Neste dokument"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:140
 msgid "Activate next document"
 msgstr "Aktiver forrige dokument"
 
-#: ../gedit/gedit-ui.h:139
+#: ../gedit/gedit-ui.h:141
 msgid "_Move to New Window"
 msgstr "_Flytt til nytt vindu"
 
-#: ../gedit/gedit-ui.h:140
+#: ../gedit/gedit-ui.h:142
 msgid "Move the current document to a new window"
 msgstr "Flytt aktivt dokument til et nytt vindu"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:149
 msgid "Quit the program"
 msgstr "Avslutt programmet"
 
-#: ../gedit/gedit-ui.h:152
+#: ../gedit/gedit-ui.h:154
 msgid "_Toolbar"
 msgstr "Verk_tøylinje"
 
-#: ../gedit/gedit-ui.h:153
+#: ../gedit/gedit-ui.h:155
 msgid "Show or hide the toolbar in the current window"
 msgstr "Vis eller skjul verktøylinjen i aktivt vindu"
 
-#: ../gedit/gedit-ui.h:155
+#: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
 msgstr "_Statuslinje"
 
-#: ../gedit/gedit-ui.h:156
+#: ../gedit/gedit-ui.h:158
 msgid "Show or hide the statusbar in the current window"
 msgstr "Vis eller skjul statuslinjen i aktivt vindu"
 
-#: ../gedit/gedit-ui.h:158
+#: ../gedit/gedit-ui.h:160
 msgid "Side _Pane"
 msgstr "Side_linje"
 
-#: ../gedit/gedit-ui.h:159
+#: ../gedit/gedit-ui.h:161
 msgid "Show or hide the side pane in the current window"
 msgstr "Vis eller skjul sidelinjen i dette vinduet"
 
-#: ../gedit/gedit-ui.h:165
+#: ../gedit/gedit-ui.h:167
 msgid "_Bottom Pane"
 msgstr "_Bunnpanel"
 
-#: ../gedit/gedit-ui.h:166
+#: ../gedit/gedit-ui.h:168
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Vis eller skjul bunnpanelet i dette vinduet"
 
-#: ../gedit/gedit-utils.c:973
+#: ../gedit/gedit-utils.c:983
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Kunne ikke finne fil %s."
 
-#: ../gedit/gedit-utils.c:977 ../gedit/gedit-utils.c:1006
+#: ../gedit/gedit-utils.c:987 ../gedit/gedit-utils.c:1016
 msgid "Please check your installation."
 msgstr "Vennligst sjekk din installasjon."
 
-#: ../gedit/gedit-utils.c:1002
+#: ../gedit/gedit-utils.c:1012
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Kunne ikke finne nødvendige komponenter i fil %s."
@@ -2355,7 +2383,7 @@ msgstr "Streng du vil søke etter"
 msgid "Line you want to move the cursor to"
 msgstr "Linje du vil flytte markøren til"
 
-#: ../gedit/gedit-window.c:734
+#: ../gedit/gedit-window.c:754
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Bruk uthevingsmodus %s"
@@ -2363,35 +2391,35 @@ msgstr "Bruk uthevingsmodus %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:789
+#: ../gedit/gedit-window.c:809
 msgid "None"
 msgstr "Ingen"
 
-#: ../gedit/gedit-window.c:790
+#: ../gedit/gedit-window.c:810
 msgid "Disable syntax highlighting"
 msgstr "Deaktiver syntaksutheving"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:916 ../gedit/gedit-window.c:941
+#: ../gedit/gedit-window.c:936 ../gedit/gedit-window.c:961
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "Åpne «%s»"
 
-#: ../gedit/gedit-window.c:1064
+#: ../gedit/gedit-window.c:1085
 msgid "Save"
 msgstr "Lagre"
 
-#: ../gedit/gedit-window.c:1169
+#: ../gedit/gedit-window.c:1198
 msgid "Open a recently used file"
 msgstr "Åpne nylig brukt fil"
 
-#: ../gedit/gedit-window.c:1176
+#: ../gedit/gedit-window.c:1205
 msgid "Open"
 msgstr "Åpne"
 
-#: ../gedit/gedit-window.c:1265 ../gedit/gedit-window.c:1866
+#: ../gedit/gedit-window.c:1294 ../gedit/gedit-window.c:1945
 #, c-format
 msgid "Activate %s"
 msgstr "Aktiver %s"
@@ -2489,11 +2517,11 @@ msgstr "Ord"
 msgid "_Update"
 msgstr "_Oppdater"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:405
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:400
 msgid "_Document Statistics"
 msgstr "_Dokumentstatistikk"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:402
 msgid "Get statistic info on current document"
 msgstr "Hent statisisk informasjon om dette dokumentet"
 
@@ -2782,7 +2810,9 @@ msgstr "Global"
 msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
-msgstr "Dette er ikke en gyldig utløser for tabulator. Utløsere kan enten inneholde bokstaver eller et enkelt, ikke alfanumerisk, tegn som {, [, etc."
+msgstr ""
+"Dette er ikke en gyldig utløser for tabulator. Utløsere kan enten inneholde "
+"bokstaver eller et enkelt, ikke alfanumerisk, tegn som {, [, etc."
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
