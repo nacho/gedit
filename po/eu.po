@@ -1,3 +1,4 @@
+# translation of eu.po to Basque
 # translation of gedit.po to basque
 # Copyright (C) 2001, 2004, 2005, 2006 Free Software Foundation, Inc.
 # Hizkuntza Politikarako Sailburuordetza <hizpol@ej-gv.es>, 2004.
@@ -7,22 +8,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-22 12:18+0100\n"
-"PO-Revision-Date: 2006-02-22 13:10+0100\n"
-"Last-Translator: Iñaki Larrañaga <dooteo@euskalgnu.org>\n"
+"POT-Creation-Date: 2006-07-07 17:33+0000\n"
+"PO-Revision-Date: 2006-07-07 17:44+0000\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Editatu testu-fitxategiak"
 
 #
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:458
 msgid "Text Editor"
 msgstr "Testu-editorea"
 
@@ -34,7 +35,7 @@ msgstr ""
 "Editatzeko arean erabiliko den letra-tipo pertsonalizatua. Eragina izan "
 "dezan, \"Erabili letra-tipo lehenetsia\" aukerak desaktibatuta egon behar du."
 
-#: ../data/gedit.schemas.in.h:2
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:747
 msgid "Active plugins"
 msgstr "Aktibatu plugin-ak"
 
@@ -523,7 +524,9 @@ msgstr "Gedit-ek sintaxiaren nabarmentzea gaitu behar duen ala ez."
 
 #: ../data/gedit.schemas.in.h:98
 msgid "Whether gedit should highlight all the occurrences of the searched text."
-msgstr "Gedit-ek bilaketako testuaren gertaera guztiak nabarmendu behar dituen ala ez."
+msgstr ""
+"Gedit-ek bilaketako testuaren gertaera guztiak nabarmendu behar dituen ala "
+"ez."
 
 #: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
@@ -553,7 +556,9 @@ msgstr ""
 msgid ""
 "Whether gedit should restore the previous cursor position when a file is "
 "loaded."
-msgstr "Fitxategi bat kargatzean Gedit-ek kurtsorearen aurreko posizioa leheneratu behar duen ala ez."
+msgstr ""
+"Fitxategi bat kargatzean Gedit-ek kurtsorearen aurreko posizioa leheneratu "
+"behar duen ala ez."
 
 #: ../data/gedit.schemas.in.h:105
 msgid "Whether the bottom panel at the bottom of editing windows should be visible."
@@ -612,24 +617,24 @@ msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,UNEKOA,ISO-8859-15]"
 
 #
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:136
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:139
 msgid "Logout _without Saving"
 msgstr "Amaitu saioa gorde _gabe"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:143
 msgid "_Cancel Logout"
 msgstr "_Ez amaitu saioa"
 
 #
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:147
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:150
 msgid "Close _without Saving"
 msgstr "Itxi gorde _gabe"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:180
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:195
 msgid "Question"
 msgstr "Galdera"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
 #, c-format
 msgid "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
@@ -638,11 +643,11 @@ msgid_plural ""
 msgstr[0] "Ez baduzu gordetzen, azken %ld segundoko aldaketak betirako galduko dira."
 msgstr[1] "Ez baduzu gordetzen, azken %ld segundotako aldaketak betirako galduko dira."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid "If you don't save, changes from the last minute will be permanently lost."
 msgstr "Ez baduzu gordetzen, azken minutuko aldaketak betirako galduko dira."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -657,7 +662,7 @@ msgstr[1] ""
 "Ez baduzu gordetzen, azken minutuko eta %ld segundotako aldaketak betirako "
 "galduko dira."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
 #, c-format
 msgid "If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -666,15 +671,15 @@ msgid_plural ""
 msgstr[0] "Ez baduzu gordetzen, azken %ld minutuko aldaketak betirako galduko dira."
 msgstr[1] "Ez baduzu gordetzen, azken %ld minututako aldaketak betirako galduko dira."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:447
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:435
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:456
 #, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] "Ez baduzu gordetzen, azken orduko aldaketak betirako galduko dira."
 msgstr[1] "Ez baduzu gordetzen, azken %d orduko aldaketak betirako galduko dira."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:432
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:441
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -689,24 +694,44 @@ msgstr[1] ""
 "Ez baduzu gordetzen, azken orduko eta %d minututako aldaketak betirako "
 "galduko dira."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:491
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:498
+#, c-format
+msgid "Changes to document \"%s\" will be permanently lost."
+msgstr "\"%s\" dokumentuan egindako aldaketak betirako galduko dira."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:501
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Aldaketak \"%s\" dokumentuan gorde itxi aurretik?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:663
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:725
+msgid "Saving has been disabled by the system administrator."
+msgstr "Sistemako administratzaileak desgaitu egin du gordetzea."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "Dokumentu %dean egindako aldaketak betirako galduko dira."
+msgstr[1] "%d dokumentutan egindako aldaketak betirako galduko dira."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:686
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "Aldatutako  dokumentu %d gorde gabe dago. Aldaketak gorde itxi aurretik?"
 msgstr[1] "Aldatutako %d dokumentu gorde gabe daude. Aldaketak gorde itxi aurretik?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:704
+msgid "Docum_ents with unsaved changes:"
+msgstr "_Dokumentuak, gorde gabeko aldaketekin:"
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
 msgid "S_elect the documents you want to save:"
 msgstr "_Hautatu dokumentuak, gordetzea nahi dituzunak:"
 
-#. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:697
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:727
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Ez baduzu gordetzen, aldaketak betirako galduko dira."
 
@@ -1093,23 +1118,23 @@ msgstr "_Erabili gaiaren letra-tipo lehenetsia"
 msgid "_minutes"
 msgstr "_minutuz behin"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1008
+#: ../gedit/dialogs/gedit-search-dialog.c:302
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1089
 msgid "Replace"
 msgstr "Ordeztu"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1006
+#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1087
 msgid "Find"
 msgstr "Bilatu"
 
 #
-#: ../gedit/dialogs/gedit-search-dialog.c:298
+#: ../gedit/dialogs/gedit-search-dialog.c:366
 msgid "Replace _All"
 msgstr "Ordeztu _guztiak"
 
 #
-#: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:559
+#: ../gedit/dialogs/gedit-search-dialog.c:367
+#: ../gedit/gedit-commands-file.c:594
 msgid "_Replace"
 msgstr "Orde_ztu"
 
@@ -1159,6 +1184,10 @@ msgstr "Sortu goi-mailako leiho berri bat lehendik dagoen gedit-en instantzia ba
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Sortu dokumentu berri bat lehendik dagoen gedit-en instantzia batean"
 
+#: ../gedit/gedit.c:84
+msgid "[FILE...]"
+msgstr "[FITXATEGIA...]"
+
 #: ../gedit/gedit.c:116
 #, c-format
 msgid "%s: malformed file name or URI.\n"
@@ -1168,6 +1197,11 @@ msgstr "%s: gaizki osatutako okerreko fitxategi-izena edo URIa.\n"
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: kodeketa baliogabea.\n"
+
+#. Setup command line options
+#: ../gedit/gedit.c:450
+msgid "- Edit text files"
+msgstr "- Editatu testu-fitxategiak"
 
 #: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #, c-format
@@ -1182,51 +1216,51 @@ msgstr[0] "Fitxategi %d kargatzen..."
 msgstr[1] "%d fitxategi kargatzen..."
 
 #
-#: ../gedit/gedit-commands-file.c:286
+#: ../gedit/gedit-commands-file.c:320
 msgid "Open Files…"
 msgstr "Ireki fitxategiak..."
 
-#: ../gedit/gedit-commands-file.c:392
+#: ../gedit/gedit-commands-file.c:426
 msgid "The entered location is not valid."
 msgstr "Zehaztutako helbidea ez da baliozkoa."
 
-#: ../gedit/gedit-commands-file.c:395
+#: ../gedit/gedit-commands-file.c:429
 #: ../gedit/gedit-io-error-message-area.c:150
 #: ../gedit/gedit-io-error-message-area.c:189
 #: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Egiaztatu helbidea ondo idatzi duzula eta saiatu berriro."
 
-#: ../gedit/gedit-commands-file.c:540
+#: ../gedit/gedit-commands-file.c:575
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "\"%s\" fitxategia irakurtzeko soilik da."
 
-#: ../gedit/gedit-commands-file.c:551
+#: ../gedit/gedit-commands-file.c:586
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Gordetzen ari zarenarekin ordezten saiatu nahi duzu?"
 
-#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
+#: ../gedit/gedit-commands-file.c:652 ../gedit/gedit-commands-file.c:850
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "'%s fitxategia gordetzen..."
 
 #
-#: ../gedit/gedit-commands-file.c:707
+#: ../gedit/gedit-commands-file.c:749
 msgid "Save As…"
 msgstr "Gorde honela..."
 
-#: ../gedit/gedit-commands-file.c:1003
+#: ../gedit/gedit-commands-file.c:1045
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "'%s' fitxategia leheneratzen..."
 
-#: ../gedit/gedit-commands-file.c:1025
+#: ../gedit/gedit-commands-file.c:1067
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Leheneratu '%s' dokumentuko gorde ez diren aldaketak?"
 
-#: ../gedit/gedit-commands-file.c:1034
+#: ../gedit/gedit-commands-file.c:1076
 #, c-format
 msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1235,11 +1269,11 @@ msgid_plural ""
 msgstr[0] "Azken %ld segundoan dokumentuan egin diren aldaketak betirako galduko dira."
 msgstr[1] "Azken %ld segundotan dokumentuan egin diren aldaketak betirako galduko dira."
 
-#: ../gedit/gedit-commands-file.c:1043
+#: ../gedit/gedit-commands-file.c:1085
 msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr "Azken minutuan dokumentuan egin diren aldaketak betirako galduko dira."
 
-#: ../gedit/gedit-commands-file.c:1049
+#: ../gedit/gedit-commands-file.c:1091
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1254,7 +1288,7 @@ msgstr[1] ""
 "Azken minutuan eta %ld segundotan dokumentuan egin diren aldaketak betirako "
 "galduko dira."
 
-#: ../gedit/gedit-commands-file.c:1059
+#: ../gedit/gedit-commands-file.c:1101
 #, c-format
 msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -1263,14 +1297,14 @@ msgid_plural ""
 msgstr[0] "Azken %ld minutuan dokumentuan egin diren aldaketak betirako galduko dira."
 msgstr[1] "Azken %ld minututan dokumentuan egin diren aldaketak betirako galduko dira."
 
-#: ../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
+#: ../gedit/gedit-commands-file.c:1116 ../gedit/gedit-commands-file.c:1137
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "Azken orduan dokumentuan egin diren aldaketak betirako galduko dira."
 msgstr[1] "Azken %d ordutan dokumentuan egin diren aldaketak betirako galduko dira."
 
-#: ../gedit/gedit-commands-file.c:1080
+#: ../gedit/gedit-commands-file.c:1122
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1285,54 +1319,50 @@ msgstr[1] ""
 "Azken azken orduan eta %d minututan dokumentuan egin diren aldaketak "
 "betirako galduko dira."
 
-#: ../gedit/gedit-commands-file.c:1121
+#: ../gedit/gedit-commands-file.c:1163
 msgid "_Revert"
 msgstr "_Leheneratu"
 
 #
-#: ../gedit/gedit-commands-help.c:78
+#: ../gedit/gedit-commands-help.c:80
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit testu-editore txikia eta sinplea da, GNOME mahaigainerako."
 
-#: ../gedit/gedit-commands-help.c:98
+#: ../gedit/gedit-commands-help.c:96
 msgid "translator-credits"
 msgstr ""
 "Iñaki Larrañaga <dooteo@euskalgnu.org>\n"
 "Hizkuntza Politikarako Sailburuordetza \n"
 "<hizkpol@ej-gv.es>"
 
-#: ../gedit/gedit-commands-help.c:101
-msgid "gedit"
-msgstr "gedit"
-
-#: ../gedit/gedit-commands-search.c:166
+#: ../gedit/gedit-commands-search.c:165
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
 msgstr[0] "Agerraldi %d aurkitu eta ordeztu da."
 msgstr[1] "%d agerraldi aurkitu eta ordeztu dira."
 
-#: ../gedit/gedit-commands-search.c:176
+#: ../gedit/gedit-commands-search.c:175
 msgid "Found and replaced one occurrence"
 msgstr "Agerraldi bat aurkitu eta ordeztu da."
 
-#: ../gedit/gedit-commands-search.c:189
+#: ../gedit/gedit-commands-search.c:188
 msgid "Phrase not found"
 msgstr "Ez da esaldia aurkitu"
 
-#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:855
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:868
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Gorde gabeko %d dokumentua"
 
 #
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:523
+#: ../gedit/gedit-document-saver.c:536
 msgid "Could not obtain backup filename"
 msgstr "Ezin izan da babeskopiaren izena lortu."
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1528 ../gedit/gedit-window.c:1533
+#: ../gedit/gedit-window.c:1619 ../gedit/gedit-window.c:1624
 msgid "Read Only"
 msgstr "Irakurtzeko soilik (IS)"
 
@@ -1372,12 +1402,12 @@ msgid "Cyrillic"
 msgstr "Zirilikoa"
 
 #: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:233
-#: ../gedit/gedit-encodings.c:274
+#: ../gedit/gedit-encodings.c:274 ../plugins/spell/gedit-spell-checker.c:81
 msgid "Arabic"
 msgstr "Arabiarra"
 
 #: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:268
-#: ../plugins/spell/gedit-spell-checker.c:93
+#: ../plugins/spell/gedit-spell-checker.c:95
 msgid "Greek"
 msgstr "Grekoa"
 
@@ -1386,12 +1416,12 @@ msgid "Hebrew Visual"
 msgstr "Hebrear bisuala"
 
 #: ../gedit/gedit-encodings.c:167 ../gedit/gedit-encodings.c:231
-#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:109
+#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:111
 msgid "Hebrew"
 msgstr "Hebrearra"
 
 #: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:229
-#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:150
+#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
 msgid "Turkish"
 msgstr "Turkiarra"
 
@@ -1403,7 +1433,7 @@ msgstr "Nordikoa"
 msgid "Celtic"
 msgstr "Zelta"
 
-#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:138
+#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:140
 msgid "Romanian"
 msgstr "Errumaniarra"
 
@@ -1445,7 +1475,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Zirilikoa/Ukrainarra"
 
 #: ../gedit/gedit-encodings.c:253 ../gedit/gedit-encodings.c:259
-#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:153
+#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:155
 msgid "Vietnamese"
 msgstr "Vietnamdarra"
 
@@ -1560,8 +1590,8 @@ msgid ""
 "Host %s could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
-"Ezin izan da %s ostalaria aurkitu. Egiaztatu proxy-ezarpenak zuzenak "
-"direla eta saiatu berriro."
+"Ezin izan da %s ostalaria aurkitu. Egiaztatu proxy-ezarpenak zuzenak direla "
+"eta saiatu berriro."
 
 #: ../gedit/gedit-io-error-message-area.c:249
 #: ../gedit/gedit-io-error-message-area.c:260
@@ -1848,17 +1878,17 @@ msgstr ""
 msgid "Could not save the file %s."
 msgstr "Ezin izan da %s fitxategia gorde."
 
-#: ../gedit/gedit-notebook.c:823
+#: ../gedit/gedit-notebook.c:838
 msgid "Close document"
 msgstr "Itxi dokumentua"
 
-#: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
+#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:580
 #: ../gedit/recent-files/egg-recent-view-gtk.c:446
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:322
 msgid "Empty"
 msgstr "Hutsa"
 
-#: ../gedit/gedit-panel.c:526 ../gedit/gedit-panel.c:606
+#: ../gedit/gedit-panel.c:524 ../gedit/gedit-panel.c:601
 msgid "Hide panel"
 msgstr "Ezkutatu panela"
 
@@ -1872,21 +1902,44 @@ msgid "Enabled"
 msgstr "Gaituta"
 
 #
-#: ../gedit/gedit-plugin-manager.c:540
+#: ../gedit/gedit-plugin-manager.c:502
+msgid "_About"
+msgstr "_Honi buruz"
+
+#
+#: ../gedit/gedit-plugin-manager.c:510
+msgid "C_onfigure"
+msgstr "K_onfiguratu"
+
+#: ../gedit/gedit-plugin-manager.c:520
+msgid "A_ctivate"
+msgstr "_Aktibatu"
+
+#: ../gedit/gedit-plugin-manager.c:530
+msgid "Ac_tivate All"
+msgstr "A_ktibatu denak"
+
+#
+#: ../gedit/gedit-plugin-manager.c:535
+msgid "_Deactivate All"
+msgstr "_Desaktibatu denak"
+
+#
+#: ../gedit/gedit-plugin-manager.c:776
 msgid "_About Plugin"
 msgstr "_Plugin-ari buruz"
 
 #
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:780
 msgid "C_onfigure Plugin"
 msgstr "K_onfiguratu plugin-a"
 
 #
-#: ../gedit/gedit-prefs-manager.c:175
+#: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
 msgstr "Ezin da hobespenen kudeatzailea abiarazi."
 
-#: ../gedit/gedit-prefs-manager.c:1388
+#: ../gedit/gedit-prefs-manager.c:1407
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "`%s' espero nuen, baina `%s' eskuratu dut %s gakoarentzat"
@@ -2046,404 +2099,439 @@ msgid "Saving %s"
 msgstr "%s gordetzen"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1503
+#: ../gedit/gedit-tab.c:1506
 msgid "RO"
 msgstr "IS"
 
-#: ../gedit/gedit-tab.c:1548
+#: ../gedit/gedit-tab.c:1551
 #, c-format
 msgid "Error opening file %s"
 msgstr "Errorea %s fitxategia irekitzean."
 
-#: ../gedit/gedit-tab.c:1553
+#: ../gedit/gedit-tab.c:1556
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Errorea %s fitxategia leheneratzean."
 
-#: ../gedit/gedit-tab.c:1558
+#: ../gedit/gedit-tab.c:1561
 #, c-format
 msgid "Error saving file %s"
 msgstr "Errorea %s fitxategia gordetzean."
 
-#: ../gedit/gedit-tab.c:1576
+#: ../gedit/gedit-tab.c:1579
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1583
+#: ../gedit/gedit-tab.c:1586
 msgid "Name:"
 msgstr "Izena:"
 
-#: ../gedit/gedit-tab.c:1584
+#: ../gedit/gedit-tab.c:1587
 msgid "MIME Type:"
 msgstr "MIME mota:"
 
-#: ../gedit/gedit-tab.c:1585
+#: ../gedit/gedit-tab.c:1588
 msgid "Encoding:"
 msgstr "Kodeketa:"
 
-#: ../gedit/gedit-tab.c:2012
+#: ../gedit/gedit-tab.c:2016
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "%d/%d orria errendatzen..."
 
 #. Toplevel
-#: ../gedit/gedit-ui.h:47
+#: ../gedit/gedit-ui.h:52
 msgid "_File"
 msgstr "_Fitxategia"
 
 #
-#: ../gedit/gedit-ui.h:48
+#: ../gedit/gedit-ui.h:53
 msgid "_Edit"
 msgstr "_Editatu"
 
 #
-#: ../gedit/gedit-ui.h:49
+#: ../gedit/gedit-ui.h:54
 msgid "_View"
 msgstr "_Ikusi"
 
 #
-#: ../gedit/gedit-ui.h:50
+#: ../gedit/gedit-ui.h:55
 msgid "_Search"
 msgstr "_Bilatu"
 
 #
-#: ../gedit/gedit-ui.h:51
+#: ../gedit/gedit-ui.h:56
 msgid "_Tools"
 msgstr "Tresn_ak"
 
-#: ../gedit/gedit-ui.h:52
+#: ../gedit/gedit-ui.h:57
 msgid "_Documents"
 msgstr "_Dokumentuak"
 
-#: ../gedit/gedit-ui.h:53
+#: ../gedit/gedit-ui.h:58
 msgid "_Help"
 msgstr "La_guntza"
 
-#: ../gedit/gedit-ui.h:57
+#: ../gedit/gedit-ui.h:62
 msgid "Create a new document"
 msgstr "Dokumentu berria sortzen du"
 
 #
-#: ../gedit/gedit-ui.h:58
+#: ../gedit/gedit-ui.h:63
 msgid "_Open..."
 msgstr "_Ireki..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1105
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1194
 msgid "Open a file"
 msgstr "Fitxategi bat irekitzen du"
 
 #
-#: ../gedit/gedit-ui.h:60
+#: ../gedit/gedit-ui.h:65
 msgid "Open _Location..."
 msgstr "Ireki hel_bidea..."
 
 #
-#: ../gedit/gedit-ui.h:61
+#: ../gedit/gedit-ui.h:66
 msgid "Open a file from a specified location"
 msgstr "Fitxategia zehaztutako kokalekutik irekitzen du"
 
 #
-#: ../gedit/gedit-ui.h:62
-msgid "Page Set_up..."
-msgstr "Orrialdearen _konfigurazioa..."
-
-#: ../gedit/gedit-ui.h:63
-msgid "Setup the page settings"
-msgstr "Konfiguratu orriaren ezarpenak"
-
-#
 #. Edit menu
-#: ../gedit/gedit-ui.h:66
+#: ../gedit/gedit-ui.h:69
 msgid "Pr_eferences"
 msgstr "Hobes_penak"
 
 #
-#: ../gedit/gedit-ui.h:67
+#: ../gedit/gedit-ui.h:70
 msgid "Configure the application"
 msgstr "Aplikazioa konfiguratzen du"
 
 #
 #. Help menu
-#: ../gedit/gedit-ui.h:70
+#: ../gedit/gedit-ui.h:73
 msgid "_Contents"
 msgstr "_Edukia"
 
-#: ../gedit/gedit-ui.h:71
+#: ../gedit/gedit-ui.h:74
 msgid "Open the gedit manual"
 msgstr "Gedit-en eskuliburua irekitzen du"
 
 #
-#: ../gedit/gedit-ui.h:73
+#: ../gedit/gedit-ui.h:76
 msgid "About this application"
 msgstr "Aplikazio honi buruz"
 
-#: ../gedit/gedit-ui.h:80
+#: ../gedit/gedit-ui.h:83
 msgid "Save the current file"
 msgstr "Uneko fitxategia gordetzen du"
 
 #
-#: ../gedit/gedit-ui.h:81
+#: ../gedit/gedit-ui.h:84
 msgid "Save _As..."
 msgstr "Gor_de honela..."
 
 #
-#: ../gedit/gedit-ui.h:82
+#: ../gedit/gedit-ui.h:85
 msgid "Save the current file with a different name"
 msgstr "Uneko fitxategia beste izen batekin gordetzen du "
 
-#: ../gedit/gedit-ui.h:84
+#: ../gedit/gedit-ui.h:87
 msgid "Revert to a saved version of the file"
 msgstr "Fitxategiaren gordetako bertsio batera itzultzen da"
 
 #
-#: ../gedit/gedit-ui.h:85
+#: ../gedit/gedit-ui.h:88
+msgid "Page Set_up..."
+msgstr "Orrialdearen _konfigurazioa..."
+
+#: ../gedit/gedit-ui.h:89
+msgid "Setup the page settings"
+msgstr "Konfiguratu orriaren ezarpenak"
+
+#
+#: ../gedit/gedit-ui.h:90
 msgid "Print Previe_w"
 msgstr "Inprimatzeko _aurrebista"
 
-#: ../gedit/gedit-ui.h:86
+#: ../gedit/gedit-ui.h:91
 msgid "Print preview"
 msgstr "Inprimatzeko aurrebista"
 
 #
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:92
 msgid "_Print..."
 msgstr "Inpri_matu..."
 
-#: ../gedit/gedit-ui.h:88
+#: ../gedit/gedit-ui.h:93
 msgid "Print the current page"
 msgstr "Uneko orria inprimatzen du"
 
-#: ../gedit/gedit-ui.h:90
+#: ../gedit/gedit-ui.h:95
 msgid "Close the current file"
 msgstr "Uneko fitxategia ixten du"
 
 #
-#: ../gedit/gedit-ui.h:94
+#: ../gedit/gedit-ui.h:99
 msgid "Undo the last action"
 msgstr "Azken ekintza desegiten du"
 
 #
-#: ../gedit/gedit-ui.h:96
+#: ../gedit/gedit-ui.h:101
 msgid "Redo the last undone action"
 msgstr "Desegin den azken ekintza berregiten du"
 
-#: ../gedit/gedit-ui.h:98
+#: ../gedit/gedit-ui.h:103
 msgid "Cut the selection"
 msgstr "Hautapena ebakitzen du"
 
-#: ../gedit/gedit-ui.h:100
+#: ../gedit/gedit-ui.h:105
 msgid "Copy the selection"
 msgstr "Hautapena kopiatzen du"
 
-#: ../gedit/gedit-ui.h:102
+#: ../gedit/gedit-ui.h:107
 msgid "Paste the clipboard"
 msgstr "Arbelaren edukia itsasten du"
 
-#: ../gedit/gedit-ui.h:104
+#: ../gedit/gedit-ui.h:109
 msgid "Delete the selected text"
 msgstr "Hautatutako testua ezabatzen du"
 
 #
-#: ../gedit/gedit-ui.h:105
+#: ../gedit/gedit-ui.h:110
 msgid "Select _All"
 msgstr "Ha_utatu dena"
 
 #
-#: ../gedit/gedit-ui.h:106
+#: ../gedit/gedit-ui.h:111
 msgid "Select the entire document"
 msgstr "Dokumentu osoa hautatzen du"
 
 #. View menu
-#: ../gedit/gedit-ui.h:109
+#: ../gedit/gedit-ui.h:114
 msgid "_Highlight Mode"
 msgstr "_Nabarmentze-modua"
 
 #
 #. Search menu
-#: ../gedit/gedit-ui.h:112
+#: ../gedit/gedit-ui.h:117
 msgid "_Find..."
 msgstr "Bila_tu..."
 
-#: ../gedit/gedit-ui.h:113
+#: ../gedit/gedit-ui.h:118
 msgid "Search for text"
 msgstr "Bilatu testua"
 
 #
-#: ../gedit/gedit-ui.h:114
+#: ../gedit/gedit-ui.h:119
 msgid "Find Ne_xt"
 msgstr "Bilatu hurren_goa"
 
 #
-#: ../gedit/gedit-ui.h:115
+#: ../gedit/gedit-ui.h:120
 msgid "Search forwards for the same text"
 msgstr "Bilatu testu bera aurrerantz"
 
-#: ../gedit/gedit-ui.h:116
+#: ../gedit/gedit-ui.h:121
 msgid "Find Pre_vious"
 msgstr "Bilatu _aurrekoa"
 
 #
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:122
 msgid "Search backwards for the same text"
 msgstr "Bilatu testu bera atzerantz"
 
 #
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:123
 msgid "_Replace..."
 msgstr "Orde_ztu..."
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:124
 msgid "Search for and replace text"
 msgstr "Bilatu eta ordeztu testua"
 
+#: ../gedit/gedit-ui.h:125
+msgid "_Clear Highlight"
+msgstr "_Garbitu nabarmentzea"
+
+#: ../gedit/gedit-ui.h:126
+msgid "Clear highlighting of search matches"
+msgstr "Kendu narbarmentzea bilaketan bat datozenei"
+
 #
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:127
 msgid "Go to _Line..."
 msgstr "Joan _lerro honetara:"
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:128
 msgid "Go to a specific line"
 msgstr "Joan lerro zehatzera"
 
+#: ../gedit/gedit-ui.h:129
+msgid "Interactive search..."
+msgstr "Bilaketa interaktiboa..."
+
+#: ../gedit/gedit-ui.h:130
+msgid "Interactively search for text"
+msgstr "Bilatu testua interaktiboki"
+
 #
 #. Documents menu
-#: ../gedit/gedit-ui.h:124
+#: ../gedit/gedit-ui.h:133
 msgid "_Save All"
 msgstr "G_orde dena"
 
 #
-#: ../gedit/gedit-ui.h:125
+#: ../gedit/gedit-ui.h:134
 msgid "Save all open files"
 msgstr "Irekitako fitxategi guztiak gordetzen ditu"
 
 #
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:135
 msgid "_Close All"
 msgstr "Itxi _dena"
 
 #
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:136
 msgid "Close all open files"
 msgstr "Irekita dauden fitxategi guztiak ixten ditu"
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:137
+msgid "_Previous Document"
+msgstr "_Aurreko dokumentua"
+
+#: ../gedit/gedit-ui.h:138
+msgid "Activate previous document"
+msgstr "Aktibatu aurreko dokumentua"
+
+#: ../gedit/gedit-ui.h:139
+msgid "_Next Document"
+msgstr "_Hurrengo dokumentua"
+
+#: ../gedit/gedit-ui.h:140
+msgid "Activate next document"
+msgstr "Aktibatu hurrengo dokumentua"
+
+#: ../gedit/gedit-ui.h:141
 msgid "_Move to New Window"
 msgstr "_Eraman leiho berrira"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:142
 msgid "Move the current document to a new window"
 msgstr "Eraman uneko dokumentua leiho berri batera"
 
 #
-#: ../gedit/gedit-ui.h:136
+#: ../gedit/gedit-ui.h:149
 msgid "Quit the program"
 msgstr "Programatik irteten da"
 
-#: ../gedit/gedit-ui.h:141
+#: ../gedit/gedit-ui.h:154
 msgid "_Toolbar"
 msgstr "_Tresna-barra"
 
-#: ../gedit/gedit-ui.h:142
+#: ../gedit/gedit-ui.h:155
 msgid "Show or hide the toolbar in the current window"
 msgstr "Uneko leihoko tresna-barra erakusten/ezkutatzen du"
 
 #
-#: ../gedit/gedit-ui.h:144
+#: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
 msgstr "Egoe_ra-barra"
 
-#: ../gedit/gedit-ui.h:145
+#: ../gedit/gedit-ui.h:158
 msgid "Show or hide the statusbar in the current window"
 msgstr "Uneko leihoko egoera-barra erakusten/ezkutatzen du"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:160
 msgid "Side _Pane"
 msgstr "Alboko panela"
 
-#: ../gedit/gedit-ui.h:148
+#: ../gedit/gedit-ui.h:161
 msgid "Show or hide the side pane in the current window"
 msgstr "Uneko leihoko alboko panela erakusten/ezkutatzen du"
 
-#: ../gedit/gedit-ui.h:150 ../gedit/gedit-ui.h:157
-msgid "_Bottom Panel"
+#: ../gedit/gedit-ui.h:167
+msgid "_Bottom Pane"
 msgstr "_Beheko panela"
 
-#: ../gedit/gedit-ui.h:151 ../gedit/gedit-ui.h:158
-msgid "Show or hide the bottom panel in the current window"
-msgstr "Uneko leihoko beheko panela erakusten/ezkutatzen du"
+#: ../gedit/gedit-ui.h:168
+msgid "Show or hide the bottom pane in the current window"
+msgstr "Erakutsi edo ezkutatu beheko panela uneko leihoan"
 
-#: ../gedit/gedit-utils.c:923
+#: ../gedit/gedit-utils.c:983
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Ezin izan da %s fitxategia aurkitu."
 
-#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+#: ../gedit/gedit-utils.c:987 ../gedit/gedit-utils.c:1016
 msgid "Please check your installation."
 msgstr "Egiaztatu instalazioa"
 
-#: ../gedit/gedit-utils.c:952
+#: ../gedit/gedit-utils.c:1012
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Ezin dira behar diren trepetak %s fitxategiaren barruan bilatu."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1333
+#: ../gedit/gedit-view.c:1336
 msgid "_Wrap Around"
 msgstr "_Doitu"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1343
+#: ../gedit/gedit-view.c:1346
 msgid "Match _Entire Word Only"
 msgstr "_Hitz osoak soilik"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1353
+#: ../gedit/gedit-view.c:1356
 msgid "_Match Case"
 msgstr "_Maiuskula/minuskula"
 
-#: ../gedit/gedit-view.c:1441
+#: ../gedit/gedit-view.c:1444
 msgid "String you want to search for"
 msgstr "Bilatzea nahi duzun katea"
 
-#: ../gedit/gedit-view.c:1450
+#: ../gedit/gedit-view.c:1453
 msgid "Line you want to move the cursor to"
 msgstr "Lerroa kurtsorea kokatzeko"
 
-#: ../gedit/gedit-window.c:676
+#: ../gedit/gedit-window.c:754
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Erabili %s nabarmentze-modua"
 
-#: ../gedit/gedit-window.c:729
-msgid "Normal"
-msgstr "Normala"
+#. add the "None" item before all the others
+#. Translators: "None" means that no highlight mode is selected in the
+#. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
+#: ../gedit/gedit-window.c:809
+msgid "None"
+msgstr "Bat ere ez"
 
-#: ../gedit/gedit-window.c:730
-msgid "Use Normal highlight mode"
-msgstr "Erabili nabarmentze-modu normala"
+#: ../gedit/gedit-window.c:810
+msgid "Disable syntax highlighting"
+msgstr "Desgaitu sintaxiaren nabarmentzea"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:856 ../gedit/gedit-window.c:881
+#: ../gedit/gedit-window.c:936 ../gedit/gedit-window.c:961
 #: ../gedit/recent-files/egg-recent-view-gtk.c:346
 #: ../gedit/recent-files/egg-recent-view-uimanager.c:205
 #, c-format
 msgid "Open '%s'"
 msgstr "Ireki '%s'"
 
-#: ../gedit/gedit-window.c:1004
+#: ../gedit/gedit-window.c:1085
 msgid "Save"
 msgstr "Gorde"
 
 #
-#: ../gedit/gedit-window.c:1109
+#: ../gedit/gedit-window.c:1198
 msgid "Open a recently used file"
 msgstr "Erabili berri duzun fitxategi bat irekitzen du"
 
-#: ../gedit/gedit-window.c:1116
+#: ../gedit/gedit-window.c:1205
 msgid "Open"
 msgstr "Ireki"
 
-#: ../gedit/gedit-window.c:1205 ../gedit/gedit-window.c:1804
+#: ../gedit/gedit-window.c:1294 ../gedit/gedit-window.c:1945
 #, c-format
 msgid "Activate %s"
 msgstr "Aktibatu %s"
@@ -2549,12 +2637,12 @@ msgid "_Update"
 msgstr "_Eguneratu"
 
 #
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:405
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:400
 msgid "_Document Statistics"
 msgstr "_Dokumentuaren estatistikak"
 
 #
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:402
 msgid "Get statistic info on current document"
 msgstr "Lortu uneko dokumentuari buruzko estatistika-informazioa"
 
@@ -2566,103 +2654,118 @@ msgstr "Exekutatu kanpoko komandoak eta shell-eko script-ak."
 msgid "External Tools"
 msgstr "Kanpoko tresnak"
 
-#: ../plugins/externaltools/tools/functions.py:237
+#: ../plugins/externaltools/tools/functions.py:242
 msgid "You must be inside a word to run this command"
 msgstr "Hitz baten barruan egon behar zara komando hau exekutatzeko"
 
-#: ../plugins/externaltools/tools/functions.py:293
+#: ../plugins/externaltools/tools/functions.py:299
 msgid "Running tool:"
 msgstr "Tresna exekutatzen:"
 
-#: ../plugins/externaltools/tools/functions.py:303
+#: ../plugins/externaltools/tools/functions.py:322
 msgid "Done."
 msgstr "Eginda"
 
-#: ../plugins/externaltools/tools/functions.py:305
+#: ../plugins/externaltools/tools/functions.py:324
 msgid "Exited"
 msgstr "Irten da"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Ezer ez"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Uneko dokumentua"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Uneko hautapena"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Uneko lerroa"
 
-#: ../plugins/externaltools/tools/manager.py:47
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Uneko hitza"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Txertatu kanpoko panelean"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Sortu dokumentu berria"
 
 #
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Erantsi uneko dokumentuari"
 
 #
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Ordeztu uneko dokumentua"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Ordeztu uneko hautapena"
 
 #
-#: ../plugins/externaltools/tools/manager.py:55
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Txertatu kurtsorearen posizioan"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Dokumentu guztiak"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Dokumentu guztiak izenik gabekoak ezik"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Fitxategi lokalak soilik"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Urruneko fitxategiak soilik"
 
-#: ../plugins/externaltools/tools/manager.py:62
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Izenik gabeko dokumentuak soilik"
 
-#: ../plugins/externaltools/tools/manager.py:175
-#: ../plugins/externaltools/tools/manager.py:192
-#: ../plugins/externaltools/tools/manager.py:231
+#: ../plugins/externaltools/tools/manager.py:190
+#: ../plugins/externaltools/tools/manager.py:207
+#: ../plugins/externaltools/tools/manager.py:246
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Editatu <i>%s</i> tresna:"
 
-#: ../plugins/externaltools/tools/manager.py:179
+#: ../plugins/externaltools/tools/manager.py:194
 msgid "A Brand New Tool"
 msgstr "Tresna-mota berria"
 
-#: ../plugins/externaltools/tools/manager.py:202
+#: ../plugins/externaltools/tools/manager.py:217
 msgid "New tool"
 msgstr "Tresna berria"
+
+#: ../plugins/externaltools/tools/manager.py:280
+#, python-format
+msgid "This accelerator is already bound to %s"
+msgstr "Bizkortzaile hau jadanik %s(e)ra lotuta dago"
+
+#: ../plugins/externaltools/tools/manager.py:333
+#: ../plugins/snippets/snippets/SnippetsDialog.py:600
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr "Sakatu bizkortzaile berria, edo Atzera-tekla garbitzeko"
+
+#: ../plugins/externaltools/tools/manager.py:335
+#: ../plugins/snippets/snippets/SnippetsDialog.py:602
+msgid "Type a new accelerator"
+msgstr "Sakatu bizkortzaile berria"
 
 #: ../plugins/externaltools/tools/outputpanel.py:78
 msgid "Stopped."
@@ -2729,14 +2832,6 @@ msgstr "_Gorde:"
 msgid "_Tools:"
 msgstr "_Tresnak:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:17
-msgid ""
-"cd $GEDIT_CURRENT_DOCUMENT_DIR\n"
-"make"
-msgstr ""
-"cd $GEDIT_UNEKO_DOKUMENTU_DIR\n"
-"make"
-
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Koska"
@@ -2772,8 +2867,8 @@ msgid "Modelines"
 msgstr "Lerro-moduak"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-msgid "Opens an interactive python console in the bottom panel."
-msgstr "Python-en kontsola interaktiboa irekitzen du beheko panelean."
+msgid "Interactive python console standing in the bottom panel"
+msgstr "Python-en kontsola interaktiboa beheko panelean."
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -2837,21 +2932,19 @@ msgstr "Kudeatu _mozkinak..."
 msgid "Manage snippets"
 msgstr "Kudeatu mozkinak"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:54
+#: ../plugins/snippets/snippets/SnippetsDialog.py:53
 msgid "Add a new snippet..."
 msgstr "Gehitu mozkin berria..."
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:109
+#: ../plugins/snippets/snippets/SnippetsDialog.py:108
 msgid "Global"
 msgstr "Globala"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:562
-msgid "Type a new accelerator, or press Backspace to clear"
-msgstr "Sakatu bizkortzaile berria, edo Atzera-tekla garbitzeko"
-
-#: ../plugins/snippets/snippets/SnippetsDialog.py:564
-msgid "Type a new accelerator"
-msgstr "Sakatu bizkortzaile berria"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:476
+msgid ""
+"This is not a valid tab trigger. Triggers can either contain letters or a "
+"single, non alphanumeric, character like {, [, etcetera."
+msgstr "Hau ez da baliozko abiarazlea. Abiarazleek letrak edo karaktere bakarra (ez alfanumerikoa, {, [ bezalako karaktereak) eduki dezakete."
 
 #
 #: ../plugins/sort/gedit-sort-plugin.c:80
@@ -2934,293 +3027,297 @@ msgstr "Afrikaansa"
 msgid "Amharic"
 msgstr "Amharic"
 
-#: ../plugins/spell/gedit-spell-checker.c:81
+#: ../plugins/spell/gedit-spell-checker.c:82
+msgid "Arabic (Egypt)"
+msgstr "Arabiarra (Egipto)"
+
+#: ../plugins/spell/gedit-spell-checker.c:83
 msgid "Azerbaijani"
 msgstr "Azerbaijanera"
 
-#: ../plugins/spell/gedit-spell-checker.c:82
+#: ../plugins/spell/gedit-spell-checker.c:84
 msgid "Belarusian"
 msgstr "Bielorrusiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:83
+#: ../plugins/spell/gedit-spell-checker.c:85
 msgid "Bulgarian"
 msgstr "Bulgariera"
 
-#: ../plugins/spell/gedit-spell-checker.c:84
+#: ../plugins/spell/gedit-spell-checker.c:86
 msgid "Bengali"
 msgstr "Bengalera"
 
-#: ../plugins/spell/gedit-spell-checker.c:85
+#: ../plugins/spell/gedit-spell-checker.c:87
 msgid "Breton"
 msgstr "Bretoiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:86
+#: ../plugins/spell/gedit-spell-checker.c:88
 msgid "Catalan"
 msgstr "Katalana"
 
-#: ../plugins/spell/gedit-spell-checker.c:87
+#: ../plugins/spell/gedit-spell-checker.c:89
 msgid "Czech"
 msgstr "Txekiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:88
+#: ../plugins/spell/gedit-spell-checker.c:90
 msgid "Welsh"
 msgstr "Galesa"
 
-#: ../plugins/spell/gedit-spell-checker.c:89
+#: ../plugins/spell/gedit-spell-checker.c:91
 msgid "Danish"
 msgstr "Daniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:90
+#: ../plugins/spell/gedit-spell-checker.c:92
 msgid "German (Austria)"
 msgstr "Alemana (Austria)"
 
-#: ../plugins/spell/gedit-spell-checker.c:91
+#: ../plugins/spell/gedit-spell-checker.c:93
 msgid "German (Germany)"
 msgstr "Alemana (Alemaniakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:92
+#: ../plugins/spell/gedit-spell-checker.c:94
 msgid "German (Swiss)"
 msgstr "Alemana (Suitzakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:94
+#: ../plugins/spell/gedit-spell-checker.c:96
 msgid "English (American)"
 msgstr "Ingelesa (AEBetakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:95
+#: ../plugins/spell/gedit-spell-checker.c:97
 msgid "English (British)"
 msgstr "Ingelesa (Britainiakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:96
+#: ../plugins/spell/gedit-spell-checker.c:98
 msgid "English (Canadian)"
 msgstr "Ingelesa (Kanadakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:97
+#: ../plugins/spell/gedit-spell-checker.c:99
 msgid "Esperanto"
 msgstr "Esperantoa"
 
-#: ../plugins/spell/gedit-spell-checker.c:98
+#: ../plugins/spell/gedit-spell-checker.c:100
 msgid "Spanish"
 msgstr "Gaztelania"
 
-#: ../plugins/spell/gedit-spell-checker.c:99
+#: ../plugins/spell/gedit-spell-checker.c:101
 msgid "Estonian"
 msgstr "Estoniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:100
+#: ../plugins/spell/gedit-spell-checker.c:102
 msgid "Persian"
 msgstr "Farsia"
 
-#: ../plugins/spell/gedit-spell-checker.c:101
+#: ../plugins/spell/gedit-spell-checker.c:103
 msgid "Finnish"
 msgstr "Finlandiera"
 
 #
-#: ../plugins/spell/gedit-spell-checker.c:102
+#: ../plugins/spell/gedit-spell-checker.c:104
 msgid "Faroese"
 msgstr "Faroeera"
 
-#: ../plugins/spell/gedit-spell-checker.c:103
+#: ../plugins/spell/gedit-spell-checker.c:105
 msgid "French (France)"
 msgstr "Frantsesa (Frantziakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:104
+#: ../plugins/spell/gedit-spell-checker.c:106
 msgid "French (Swiss)"
 msgstr "Frantsesa (Suitzakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:105
+#: ../plugins/spell/gedit-spell-checker.c:107
 msgid "Irish"
 msgstr "Irlandera"
 
-#: ../plugins/spell/gedit-spell-checker.c:106
+#: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Scottish Gaelic"
 msgstr "Gaelikoa (Eskoziakoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:107
+#: ../plugins/spell/gedit-spell-checker.c:109
 msgid "Gallegan"
 msgstr "Galiziera"
 
-#: ../plugins/spell/gedit-spell-checker.c:108
+#: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Manx Gaelic"
 msgstr "Manx Gaelikoa"
 
-#: ../plugins/spell/gedit-spell-checker.c:110
+#: ../plugins/spell/gedit-spell-checker.c:112
 msgid "Hindi"
 msgstr "Hindi"
 
-#: ../plugins/spell/gedit-spell-checker.c:111
+#: ../plugins/spell/gedit-spell-checker.c:113
 msgid "Croatian"
 msgstr "Kroaziera"
 
-#: ../plugins/spell/gedit-spell-checker.c:112
+#: ../plugins/spell/gedit-spell-checker.c:114
 msgid "Upper Sorbian"
 msgstr "Serviera"
 
-#: ../plugins/spell/gedit-spell-checker.c:113
+#: ../plugins/spell/gedit-spell-checker.c:115
 msgid "Hungarian"
 msgstr "Hungariera"
 
-#: ../plugins/spell/gedit-spell-checker.c:114
+#: ../plugins/spell/gedit-spell-checker.c:116
 msgid "Interlingua (IALA)"
 msgstr "Interlingua (IALA)"
 
-#: ../plugins/spell/gedit-spell-checker.c:115
+#: ../plugins/spell/gedit-spell-checker.c:117
 msgid "Indonesian"
 msgstr "Indonesiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:116
+#: ../plugins/spell/gedit-spell-checker.c:118
 msgid "Icelandic"
 msgstr "Islandiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:117
+#: ../plugins/spell/gedit-spell-checker.c:119
 msgid "Italian"
 msgstr "Italiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:118
+#: ../plugins/spell/gedit-spell-checker.c:120
 msgid "Kurdish"
 msgstr "Kurduera"
 
-#: ../plugins/spell/gedit-spell-checker.c:119
+#: ../plugins/spell/gedit-spell-checker.c:121
 msgid "Latin"
 msgstr "Latin"
 
-#: ../plugins/spell/gedit-spell-checker.c:120
+#: ../plugins/spell/gedit-spell-checker.c:122
 msgid "Lithuanian"
 msgstr "Lituaniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:121
+#: ../plugins/spell/gedit-spell-checker.c:123
 msgid "Latvian"
 msgstr "Letoniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:122
+#: ../plugins/spell/gedit-spell-checker.c:124
 msgid "Malagasy"
 msgstr "Madagaskarera"
 
-#: ../plugins/spell/gedit-spell-checker.c:123
+#: ../plugins/spell/gedit-spell-checker.c:125
 msgid "Maori"
 msgstr "Maoriera"
 
-#: ../plugins/spell/gedit-spell-checker.c:124
+#: ../plugins/spell/gedit-spell-checker.c:126
 msgid "Macedonian"
 msgstr "Mazedoniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:125
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Mongolian"
 msgstr "Mongoliera"
 
-#: ../plugins/spell/gedit-spell-checker.c:126
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Marathi"
 msgstr "Marathera"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Malay"
 msgstr "Malaysiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Maltese"
 msgstr "Maltera"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Bokmal"
 msgstr "Norvegiera (Bokmal)"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Dutch"
 msgstr "Nederlandera"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Norwegian Nynorsk"
 msgstr "Norvegiera (Nynorsk)"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Norwegian"
 msgstr "Norvegiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Nyanja"
 msgstr "Nyanja"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Polish"
 msgstr "Poloniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Portuguese (Portugal)"
 msgstr "Portugesa (Portugalekoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:138
 msgid "Portuguese (Brazilian)"
 msgstr "Portugesa (Brasilgoa)"
 
-#: ../plugins/spell/gedit-spell-checker.c:137
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Quechua"
 msgstr "Kitxua"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Russian"
 msgstr "Errusiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Kinyarwanda"
 msgstr "Kinyaruanda"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Sardinian"
 msgstr "Sardiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Slovak"
 msgstr "Eslovakiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Slovenian"
 msgstr "Esloveniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Swedish"
 msgstr "Suediera"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Swahili"
 msgstr "Swahili"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tamil"
 msgstr "Tamila"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tetum"
 msgstr "Tetum"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:150
 msgid "Tagalog"
 msgstr "Tagaloa"
 
-#: ../plugins/spell/gedit-spell-checker.c:149
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Tswana"
 msgstr "Tswanera"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:153
 msgid "Ukrainian"
 msgstr "Ukraniera"
 
-#: ../plugins/spell/gedit-spell-checker.c:152
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Uzbek"
 msgstr "Uzbekera"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Walloon"
 msgstr "Waloiera"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:157
 msgid "Yiddish"
 msgstr "Jiddish"
 
-#: ../plugins/spell/gedit-spell-checker.c:156
+#: ../plugins/spell/gedit-spell-checker.c:158
 msgid "Zulu"
 msgstr "Zuluera"
 
 #
-#: ../plugins/spell/gedit-spell-checker.c:828
+#: ../plugins/spell/gedit-spell-checker.c:830
 msgid "Default"
 msgstr "Lehenetsia"
 
@@ -3241,12 +3338,12 @@ msgstr "(ortografia zuzena)"
 msgid "Completed spell checking"
 msgstr "Ortografia-egiaztapena bukatuta"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:245
+#: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Ezin izan dira behar diren trepetak bilatu %s(r)en barruan."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:266
+#: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "Hizkuntzak"
 
