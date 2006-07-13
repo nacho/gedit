@@ -2,9 +2,21 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.59)
 
-AC_INIT(gedit, 2.15.4, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
+m4_define(gedit_major_version,  2)
+m4_define(gedit_minor_version, 15)
+m4_define(gedit_micro_version,  4)
+m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
+
+AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
 AC_CONFIG_SRCDIR(gedit/gedit.c)
 AC_CONFIG_MACRO_DIR([m4])
+
+AC_DEFINE(GEDIT_MAJOR_VERSION, gedit_major_version, [Gedit major version])
+AC_SUBST(GEDIT_MAJOR_VERSION, gedit_major_version)
+AC_DEFINE(GEDIT_MINOR_VERSION, gedit_minor_version, [Gedit minor version])
+AC_SUBST(GEDIT_MINOR_VERSION, gedit_minor_version)
+AC_DEFINE(GEDIT_MICRO_VERSION, gedit_micro_version, [Gedit micro version])
+AC_SUBST(GEDIT_MICRO_VERSION, gedit_micro_version)
 
 GEDIT_MAJOR=2.14
 AC_SUBST(GEDIT_MAJOR)

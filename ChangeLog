@@ -1,3 +1,12 @@
+2006-07-13  Steve Frécinaux  <steve@istique.net>
+
+	* gedit/gedit-python-module.c: expose a gedit.version tuple in python.
+	
+	* configure.ac: define version components separately, and add
+	GEDIT_(MAJOR|MINOR|MICRO)_VERSION definition to config.h.
+	
+	Note: maybe we'd like to have a gedit.require_version() function, too.
+
 === gedit 2.15.4 ===
 
 2006-07-10  Jesse van den Kieboom  <jesse@icecrew.nl>
@@ -9,6 +18,7 @@
 	gedit 2.15.4 released.
 	
 	* docs/reference/gedit-sections.txt: added gedit-sections.txt
+
 	* Makefile.am: added --enable-gtk-doc to DISTCHECK_CONFIGURE_FLAGS
 
 2006-06-20  Steve Frécinaux  <steve@istique.net>

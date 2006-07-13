@@ -74,7 +74,7 @@ G_DEFINE_TYPE (GeditPythonModule, gedit_python_module, G_TYPE_TYPE_MODULE)
 static void
 gedit_python_module_init_python ()
 {
-	PyObject *pygtk, *mdict, *require, *path;
+	PyObject *pygtk, *mdict, *require, *path, *tuple;
 	PyObject *sys_path, *gtk, *gedit, *geditutils, *geditcommands;
 	PyObject *pygtk_version, *pygtk_required_version;
 	PyObject *gettext, *install, *gettext_args;
@@ -168,6 +168,14 @@ gedit_python_module_init_python ()
 
 	pygedit_register_classes (mdict);
 	pygedit_add_constants (gedit, "GEDIT_");
+
+	/* gedit version */
+	tuple = Py_BuildValue("(iii)", 
+			      GEDIT_MAJOR_VERSION,
+			      GEDIT_MINOR_VERSION,
+			      GEDIT_MICRO_VERSION);
+	PyDict_SetItemString(mdict, "version", tuple);
+	Py_DECREF(tuple);
 	
 	/* Retrieve the Python type for gedit.Plugin */
 	PyGeditPlugin_Type = (PyTypeObject *) PyDict_GetItemString (mdict, "Plugin"); 
