@@ -192,6 +192,10 @@
 <!-- ============= Introduction ============================== -->
   <sect1 id="gedit-intro"> 
 	 <title>Introduction</title>
+
+   <!-- removed ids, here as anchors to prevent possible breakage -->	 
+	 <anchor id="gedit-customize-toolbar"/>	 
+	 
 	 <para>The <application>&app;</application> application enables you to create and edit text files. You can use <application>&app;</application> plugins to perform a variety of tasks related to text-editing from within the <application>&app;</application> window.</para>
   </sect1>
 <!-- ============= Getting Started =========================== -->
@@ -270,57 +274,10 @@
 		  </varlistentry>
 		</variablelist>
 		<para>When you right-click in the <application>&app;</application> window, the application displays a popup menu. The popup menu contains the most common text editing commands. </para>
-
-      <para>
-        In <application>&app;</application>, you can perform the same action in several ways. For example, you can open a file in the following ways:
-                  <informaltable frame="all">
-                    <tgroup cols="2" colsep="1" rowsep="1">
-                      <colspec colname="COLSPEC0" colwidth="50*"/>
-                      <colspec colname="COLSPEC1" colwidth="50*"/>
-                      <thead>
-                        <row valign="top">
-                          <entry colname="COLSPEC0">
-                            <para>UI Component</para></entry>
-                          <entry colname="COLSPEC1" align="left"> 
-                            <para>Action</para></entry>
-                        </row>
-                      </thead>
-                      <tbody>
-                        <row valign="top">               
-                          <entry><para>Window</para></entry>
-                          <entry><para>Drag a file into the <application>&app;</application> window from another application such as a file manager.</para></entry>
-                        </row>
-                        <row valign="top">               
-                          <entry><para>Menubar</para></entry>
-                          <entry><para>Choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice>.</para>
-           <para>If you have recently opened the file, choose it from the list further down the <guimenu>File</guimenu> menu.</para> 
-</entry>
-                        </row>
-                        <row valign="top">               
-                          <entry><para>Toolbar</para></entry>
-                          <entry><para>Click on the <guibutton>Open</guibutton> toolbar button.</para></entry>
-                        </row>
-                        <row valign="top">               
-                          <entry><para>Shortcut keys</para></entry>
-                          <entry><para>Press <keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo>.</para></entry>
-                        </row>
-                      </tbody>
-                    </tgroup>
-                  </informaltable>
-      </para>
-      <para>
-      This manual documents functionality from the menubar.
-      </para>
+		
+		<para>Like other GNOME apps, actions in <application>&app;</application> can be performed in several ways: with the menu, with the toolbar, or with shortcut keys. The common shortcuts keys for are listed in the <ulink type="help" url="ghelp:user-guide?shortcuts-apps">User Guide</ulink>.</para>
 	 </sect2>
-<!-- ============= To Open a File ============================= -->
-	 <sect2 id="gedit-open-file"> 
-		<title>Opening a File</title>
-		<para>To open a file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> to display the <guilabel>Open File</guilabel> dialog. Select the file that you want to open, then click <guibutton>Open</guibutton>. The file is displayed in the <application>&app;</application> window. </para>
-		<para>You can open multiple files in <application>&app;</application>. The application displays one file at a time in the application window. The application adds a tab for each open file to the window. To display another open file, click on the tab that corresponds to the file. To create a new <application> &app;</application> window for each file that is open, drag the tab corresponding to each file to the desktop background. </para>
-                  <para>You can also use the <guimenu>Documents</guimenu> menu to move between the open files. You can choose <menuchoice> <guimenu>Documents</guimenu> <guimenuitem>Move to New Window</guimenuitem> </menuchoice> to move a document to a new <application> &app;</application> window.
-</para>
-		<para>The application records the paths and filenames of the five most recent files that you edited and displays the files as menu items on the <menuchoice><guimenu>File</guimenu></menuchoice> menu. You can also click on the <inlinemediaobject><imageobject><imagedata fileref="figures/gedit_recent_files_menu_icon.png" format="PNG"/></imageobject><textobject><phrase>Shows Recent Files menu icon.</phrase></textobject></inlinemediaobject>  icon on the toolbar to display the list of recent files.  </para>
-	 </sect2>
+	 
 <!-- ============= To Open Multiple Files from the Command Line ========= -->
 	 <sect2 id="gedit-run-from-cmd-line"> 
 		<title>Running &app; from a Command Line</title>
@@ -332,13 +289,25 @@
   </sect1>
 <!-- ================ Usage ================================ -->
   <sect1 id="gedit-usage"> 
-	 <title>Usage</title>
+	 <title>Working with Files</title>
 
 <!-- ============= To Create a New File ======================== -->
 	 <sect2 id="gedit-create-new-file"> 
 		<title>Creating a New Document</title>
 		<para>To create a new document, choose <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice>. The application displays a new blank document in the <application>&app;</application> window.</para>
 	 </sect2>
+	 
+<!-- ============= To Open a File ============================= -->
+	 <sect2 id="gedit-open-file"> 
+		<title>Opening a File</title>
+		<para>To open a file, choose <menuchoice><guimenu>File</guimenu><guimenuitem>Open</guimenuitem></menuchoice> to display the <guilabel>Open File</guilabel> dialog. Select the file that you want to open, then click <guibutton>Open</guibutton>. The file is displayed in the <application>&app;</application> window. </para>
+	
+		<para>The application records the paths and filenames of the five most recent files that you edited and displays the files as menu items on the <menuchoice><guimenu>File</guimenu></menuchoice> menu. You can also click on the <inlinemediaobject><imageobject><imagedata fileref="figures/gedit_recent_files_menu_icon.png" format="PNG"/></imageobject><textobject><phrase>Shows Recent Files menu icon.</phrase></textobject></inlinemediaobject>  icon on the toolbar to display the list of recent files.  </para>
+		
+		<note><para>You can open multiple files in <application>&app;</application>. The application adds a tab for each open file to the window. For more on this see <xref linkend="gedit-tabs"/>.</para></note>
+				
+	 </sect2>
+	 
 <!-- ============= To Save a File ============================== -->
 	 <sect2 id="gedit-save-file"> 
 		<title>Saving a File</title>
@@ -353,6 +322,42 @@
 		</itemizedlist>
 		<para>To close all of the files that are currently open in <application>&app;</application>, choose <menuchoice> <guimenu>Documents</guimenu> <guimenuitem>Close All</guimenuitem> </menuchoice>.</para>
 	 </sect2>
+	 
+<!-- ============= To Open a File from a URI ======================= -->
+	 <sect2 id="gedit-open-from-uri"> 
+		<title>To Open a File from a URI</title>
+		<para>To open a file from a Uniform Resource Identifier (URI), perform the following steps:</para>
+		<orderedlist>
+		<listitem>
+		<para>Choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Open Location</guimenuitem> </menuchoice> to display the <guilabel>Open Location</guilabel> dialog. </para>
+		</listitem>
+		<listitem>
+		<para>Enter the URI of the file that you want to open.</para>
+		</listitem>
+		<listitem>
+		<para>Use the <guilabel>Character coding</guilabel> drop-down list to select the appropriate character coding. </para>
+		</listitem>
+		<listitem>
+		<para>Click <guibutton>Open</guibutton>.</para>
+		</listitem>
+		</orderedlist>
+		<para>Alternatively, type <command>gedit <replaceable>URI</replaceable></command> at a command line, where <replaceable>URI</replaceable> is the URI of the file that you want to open, then press <keycap>Return</keycap>. Valid types of <replaceable>URI</replaceable> include <literal>http:</literal>, <literal>ftp:</literal>, <literal>file:</literal>, and all of the methods supported by <literal>gnome-vfs</literal>.</para>
+		<para>The application opens the file located at the URI in read-only mode.</para>
+	 </sect2>	 
+	 
+<!-- ============= Working with tabs ======================== -->	 
+	 <sect2 id="gedit-tabs">
+	   <title>Working With Tabs</title>
+	
+		 <para><application>Gedit</application> displays one file at a time in the application window. The application adds a tab for each open file to the window. To display another open file, click on the tab that corresponds to the file. To create a new <application> &app;</application> window for each file that is open, drag the tab corresponding to each file to the desktop background. </para>
+   <para>You can also use the <guimenu>Documents</guimenu> menu to move between the open files. To move a document to a new <application> &app;</application> window, choose <menuchoice> <guimenu>Documents</guimenu> <guimenuitem>Move to New Window</guimenuitem> </menuchoice>.</para>	   
+	 </sect2>	 
+	 
+  </sect1>
+  
+  <sect1 id="working-with-text">
+    <title>Working with Text</title>
+    
 <!-- ============= To Edit Text ================================ -->
 	 <sect2 id="gedit-edit-text"> 
 		<title>Editing Text</title>
@@ -377,6 +382,26 @@
 		<title>Undoing and Redoing Changes</title>
 		<para>To undo a change you have made, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Undo</guimenuitem> </menuchoice>. To reverse this action, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Redo</guimenuitem> </menuchoice>. The number of previous edits that you can undo is determined by the <guilabel>Undo</guilabel> limit setting in the <guilabel>Editor</guilabel> tabbed section of the <guilabel>Preferences</guilabel> dialog: see  <xref linkend="gedit-prefs-editor"/>.  </para>
 	 </sect2>
+	 
+<!-- ============= To Position the Cursor on a Specific Line ======================= -->
+	 <sect2 id="gedit-goto-line"> 
+		<title>To Position the Cursor on a Specific Line</title>
+		<para>To position the cursor on a specific line in the current file, perform the following steps:</para>
+		<orderedlist> 
+		  <listitem><para>Choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go to Line</guimenuitem> </menuchoice> to display the <guilabel>Go to Line</guilabel> dialog.</para>
+		  </listitem>
+		  <listitem><para>Type the number of the line that you want to move the cursor to in the <guilabel>Line number</guilabel> field.</para>
+		  </listitem>
+		  <listitem><para>Click <guibutton>Go to Line</guibutton>. The application moves the cursor to the line number that you specify.</para>
+		  </listitem>
+		  <listitem><para>To close the <guilabel>Go to Line</guilabel> dialog, click <guibutton>Close</guibutton>.</para>
+		  </listitem>
+		</orderedlist>
+	 </sect2>	 
+	 
+	</sect1>
+	<sect1 id="gedit-finding">
+		<title>Finding and Replacing</title>
 <!-- ============= To Find Text ================================ -->
 	 <sect2 id="gedit-find-text"> 
 		<title>Finding Text</title>
@@ -461,49 +486,12 @@
 		  </listitem>
 		</orderedlist>
 	 </sect2>
-<!-- ============= To Open a File from a URI ======================= -->
-	 <sect2 id="gedit-open-from-uri"> 
-		<title>To Open a File from a URI</title>
-		<para>To open a file from a Uniform Resource Identifier (URI), perform the following steps:</para>
-		<orderedlist>
-		<listitem>
-		<para>Choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Open Location</guimenuitem> </menuchoice> to display the <guilabel>Open Location</guilabel> dialog. </para>
-		</listitem>
-		<listitem>
-		<para>Enter the URI of the file that you want to open.</para>
-		</listitem>
-		<listitem>
-		<para>Use the <guilabel>Character coding</guilabel> drop-down list to select the appropriate character coding. </para>
-		</listitem>
-		<listitem>
-		<para>Click <guibutton>Open</guibutton>.</para>
-		</listitem>
-		</orderedlist>
-		<para>Alternatively, type <command>gedit <replaceable>URI</replaceable></command> at a command line, where <replaceable>URI</replaceable> is the URI of the file that you want to open, then press <keycap>Return</keycap>. Valid types of <replaceable>URI</replaceable> include <literal>http:</literal>, <literal>ftp:</literal>, <literal>file:</literal>, and all of the methods supported by <literal>gnome-vfs</literal>.</para>
-		<para>The application opens the file located at the URI in read-only mode.</para>
-	 </sect2>	 
-<!-- ============= To Pipe the Output of a Command to a File ======= -->
-	 <sect2 id="gedit-pipe-output"> 
-		<title>To Pipe the Output of a Command to a File</title>
-		<para>You can use <application>&app;</application> to pipe the output of a command to a text file. For example, to pipe the output of an <command>ls</command> command to a text file, type <command>ls | gedit</command>, then press <keycap>Return</keycap>.</para>
-		<para>The output of the <command>ls</command> command is displayed in a new text file in the <application>&app;</application> window.</para>
-		<para>Alternatively, you can use the External tools plugin to pipe command output to the current file. <!-- fixme: xref needed! -->.</para>
-	 </sect2>
-<!-- ============= To Position the Cursor on a Specific Line ======================= -->
-	 <sect2 id="gedit-goto-line"> 
-		<title>To Position the Cursor on a Specific Line</title>
-		<para>To position the cursor on a specific line in the current file, perform the following steps:</para>
-		<orderedlist> 
-		  <listitem><para>Choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go to Line</guimenuitem> </menuchoice> to display the <guilabel>Go to Line</guilabel> dialog.</para>
-		  </listitem>
-		  <listitem><para>Type the number of the line that you want to move the cursor to in the <guilabel>Line number</guilabel> field.</para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Go to Line</guibutton>. The application moves the cursor to the line number that you specify.</para>
-		  </listitem>
-		  <listitem><para>To close the <guilabel>Go to Line</guilabel> dialog, click <guibutton>Close</guibutton>.</para>
-		  </listitem>
-		</orderedlist>
-	 </sect2>
+
+  </sect1>
+  
+  <sect1 id="gedit-printing">
+    <title>Printing</title>
+    
 <!-- ============= To Set the Page Options ============================ -->
 	 <sect2 id="gedit-page-setup"> 
 		<title>To Set the Page Options</title>
@@ -750,31 +738,12 @@
 		
 	 </sect2>
 
-	 <sect2 id="gedit-customize-toolbar">
-	 <title>To Customize the Toolbar</title>
-	 <para>To display or hide the toolbar, choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Toolbar</guimenuitem> </menuchoice>. To customize how <application>&app;</application> displays the toolbar, choose <menuchoice> <guimenu>View</guimenu> <guisubmenu>Customize Toolbar</guisubmenu> </menuchoice>, then select one of the following menu items:</para>
-		  <itemizedlist>
-		  <listitem>
-		  <para><guimenuitem>Desktop Default</guimenuitem></para>
-		  <para>Display the default toolbar.</para>
-		  </listitem>
-		  <listitem>
-		  <para><guimenuitem>Icons Only</guimenuitem></para>
-		  <para>Display icons only.</para>
-		  </listitem>
-		  <listitem>
-		  <para><guimenuitem>Text for All Icons</guimenuitem></para>
-		  <para>Display icons, and display text for all icons.</para>
-		  </listitem>
-		  <listitem>
-		  <para><guimenuitem>Text for Important Icons</guimenuitem></para>
-		  <para>Display icons, and display text for the important icons.</para>
-		  </listitem>
-		  </itemizedlist>
-	 <para>To display or hide the output window, choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Output Window</guimenuitem> </menuchoice>.</para>
-	 
-	 </sect2>
+  </sect1>
+ 
+  <sect1 id="gedit-programming-features">	 
+	  <title>Programming Features</title>
 
+<!-- ============= Syntax Highlighting =================== -->
 	 <sect2 id="gedit-set-highlightmode">
 	 <title>To Set the Syntax Highlighting Mode</title>
 	 <para>To set the syntax highlighting mode, choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Highlight Mode</guimenuitem> </menuchoice>, then select one of the following menu items:</para>
@@ -813,8 +782,16 @@
 	 <para>For more information about how to configure syntax highlighting, see <xref linkend="gedit-prefs-syntax"/>.
 </para>
 	 </sect2>
-	 
+	 	 
+<!-- ============= To Pipe the Output of a Command to a File ======= -->
+	 <sect2 id="gedit-pipe-output"> 
+		<title>To Pipe the Output of a Command to a File</title>
+		<para>You can use <application>&app;</application> to pipe the output of a command to a text file. For example, to pipe the output of an <command>ls</command> command to a text file, type <command>ls | gedit</command>, then press <keycap>Return</keycap>.</para>
+		<para>The output of the <command>ls</command> command is displayed in a new text file in the <application>&app;</application> window.</para>
+		<para>Alternatively, you can use the External tools plugin to pipe command output to the current file. <!-- fixme: xref needed! -->.</para>
+	 </sect2>
   </sect1>
+  
 <!-- ============= Preferences ============================= -->
   <sect1 id="gedit-prefs"> 
 	 <title>Preferences</title>
@@ -1041,8 +1018,8 @@
  </sect1>
 <!-- ============= To Use the gedit Plugins ========================= -->
 	 <sect1 id="gedit-plugins"> 
-		<title>Working with Plugins</title>
-		<para>A plugin is a supplementary program that enhances the functionality of an application. The <application>&app;</application> plugins enable you to perform a variety of functions related to text editing from within the <application> &app;</application> window. The following table lists the <application> &app;</application> plugins.</para>
+		<title>Plugins</title>
+		<para>A <firstterm>plugin</firstterm> is a supplementary program that enhances the functionality of an application. The <application>&app;</application> plugins enable you to perform a variety of functions related to text editing from within the <application> &app;</application> window. The following table lists the <application> &app;</application> plugins.</para>
 		<informaltable frame="topbot"> 
 		<tgroup cols="2"> 
 			<colspec colname="col1"/> 
