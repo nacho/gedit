@@ -3,7 +3,7 @@
 "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY appversion "2.14.3">
   <!ENTITY manrevision "2.9">
-  <!ENTITY date "August 2004">
+  <!ENTITY date "July 2006">
   <!ENTITY app "gedit">
 ]>
 <!-- 
@@ -19,7 +19,7 @@
 <!-- please do not change the id; for translations, change lang to -->
 <!-- appropriate code -->
   <articleinfo> 
-	 <title>&app; Manual</title>
+	 <title>Gedit Manual<!-- not using app entity because of lowercase ugliness --></title>
 	 <copyright> 
 		<year>2002</year>
 		<year>2003</year>
@@ -164,14 +164,22 @@
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
-   		<revision> 
-		  <revnumber>&app; Manual V&manrevision;</revnumber>
+   	<revision> 
+		  <revnumber>&app; Manual V2.8</revnumber>
 		  <date>&date;</date> 
 		  <revdescription> 
 			 <para role="author">Sun Java Desktop System Documentation Team</para>
 			 <para role="publisher">GNOME Documentation Project</para>
 		  </revdescription>
 		</revision>
+   		<revision> 
+		  <revnumber>&app; Manual V&manrevision;</revnumber>
+		  <date>&date;</date> 
+		  <revdescription> 
+			 <para role="author">GNOME Documentation Team</para>
+			 <para role="publisher">GNOME Documentation Project</para>
+		  </revdescription>
+		</revision>		
 	 </revhistory>
 	 <releaseinfo> This manual describes version &appversion; of &app;.
 		</releaseinfo>
@@ -401,57 +409,75 @@
 	 </sect2>	 
 	 
 	</sect1>
-	<sect1 id="gedit-finding">
+	<sect1 id="gedit-find">
 		<title>Finding and Replacing</title>
+		
+		<para>In <application>&app;</application>, there are two ways of searching for text. You can use the <guilabel>Find</guilabel> dialog to search for a specific piece of text, or <guilabel>Incremental Search</guilabel> to highlight matching text as you type it.
+		</para>		
+		
 <!-- ============= To Find Text ================================ -->
 	 <sect2 id="gedit-find-text"> 
 		<title>Finding Text</title>
-		<para>To search a file for a string, perform the following steps:</para>
+		<para>To search a file for a string of text, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find</guimenuitem> </menuchoice> to display the <guilabel>Find</guilabel> dialog.</para>
 		  </listitem>
-		  <listitem><para>Type the string that you want to find, in the <guilabel>Search for</guilabel> field.</para>
-                  <para>You can include the following escape sequences:</para>
-			 <itemizedlist> 
-				<listitem>
-                                   <para><literal>\n</literal></para>
-                                   <para>Use this escape sequence to specify a new line.</para>
-				</listitem>
-				<listitem>
-                                   <para><literal>\t</literal></para>
-                                   <para>Use this escape sequence to specify a tab character.</para>
-				</listitem>
-				<listitem>
-                                   <para><literal>\r</literal></para>
-                                   <para>Use this escape sequence to specify a carriage return.</para>
-				</listitem>
-			 </itemizedlist> 
+		  <listitem><para>Type the string that you want to find in the <guilabel>Search for</guilabel> field. You can include special characters such as a new line or tab: see <xref linkend="gedit-find-escapes"/>.</para>
 		  </listitem>
-		  <listitem><para>Select the <guilabel>Match case</guilabel> option to only find occurrences of the string that match the case of the text that you type. </para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Match entire word only</guilabel> option to only find occurrences of the string that match the entire words of the text that you type. </para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Search backwards</guilabel> option to search backwards to the beginning of the file. </para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Wrap around</guilabel> option to search to one end of the file and then continue the search from the other end of the file. </para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Find</guibutton> to search the file for the first occurrence of the string. If <application>&app;</application> finds the string, the application moves the cursor to the string, and selects the string.</para>
-		  </listitem>
-		  <listitem><para>To find the next occurrence of the string, click <guibutton>Find</guibutton> or choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find Next</guimenuitem> </menuchoice>. To find the previous occurrence of the string, choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find Previous</guimenuitem> </menuchoice>.</para>
-		  </listitem>
-		  <listitem><para>To finish the search, click <guibutton>Close</guibutton>. </para>
-		  </listitem>
+		  <listitem><para>Click <guibutton>Find</guibutton> to search the file for the first occurrence of the string after your current curosr position. If <application>&app;</application> finds the string, the application selects first occurrence of the string. Other occurrences of the string are highlighted.</para>
+		  </listitem>		  
+		  <listitem><para>To find the next occurrence of the string, click <guibutton>Find</guibutton> or choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find Next</guimenuitem> </menuchoice>. To find the previous occurrence of the text, choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find Previous</guimenuitem> </menuchoice>.</para>
+		  </listitem>		  
 		</orderedlist>
+		<para>After you have closed the <guilabel>Find</guilabel> dialog, you can still move the selection to other occurrences of the text by choosing  <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find Next</guimenuitem> </menuchoice> and  <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Find Previous</guimenuitem> </menuchoice>.</para>
+		<para>To remove the highlighting from the text, choose  <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Clear Highlight</guimenuitem> </menuchoice>.</para>
 	 </sect2>
+	 
+	 <sect2 id="gedit-find-incremental">
+	   <title>Incremental Search</title>
+	   
+	   <para>Incremental search highlights matching text in the document as you type it letter by letter. (This is similar to the search feature in several web browsers.)</para>
+	   <para>To start an incremental search, choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Incremental Search</guimenuitem> </menuchoice>. The search box appears at the top of the display area. </para>
+	   <para>Begin typing, and text that matches will be highlighted in the document. The first instance after the cursor position is also selected. To advance the selection to the next match while keeping the incremental search box open, press <keycombo><keycap>Ctrl</keycap><keycap>G</keycap></keycombo>.</para>
+	 </sect2>
+
 <!-- ============= To Find and Replace Text =================== -->
 	 <sect2 id="gedit-find-replace-text"> 
-		<title>To Find and Replace Text</title>
+		<title>Replacing Text</title>
+		
 		<para>To search a file for a string, and replace the string with an alternative string, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Replace</guimenuitem> </menuchoice> to display the <guilabel>Replace</guilabel> dialog.</para>
 		  </listitem>
-		  <listitem><para>Type the string that you want to find, in the <guilabel>Search for</guilabel> field. </para>
-                  <para>You can include the following escape sequences:</para>
+		  <listitem><para>Type the string that you want to find, in the <guilabel>Search for</guilabel> field. You can include special characters such as a new line or tab: see <xref linkend="gedit-find-escapes"/>.</para></listitem>
+		  <listitem><para>Type the string that you want to use to replace the string that you find, in the <guilabel>Replace with</guilabel> field.</para>
+		  </listitem>
+		</orderedlist>
+		
+		<para>To examine each occurrence of the string before replacing it, click <guibutton>Find</guibutton>. If <application>&app;</application> finds the string, the application selects the string. Click <guibutton>Replace</guibutton> to replace the selected occurrence of the string. To find the next occurrence of the string, click <guibutton>Find</guibutton> again.</para>
+		<para>To replace all occurrences of the string throughout the document, click <guibutton>Replace All</guibutton>.</para>
+	 </sect2>
+
+<!-- ============= Find and Replace Options ============================ -->	 	 
+  <sect2 id="gedit-find-options">
+		<title>Find and Replace Options</title>
+		<para>The <guilabel>Find</guilabel> dialog and the <guilabel>Replace</guilabel> dialog both have the following options:</para>
+		<itemizedlist>
+		  <listitem><para>Select the <guilabel>Match case</guilabel> option to only find occurrences of the string that match the case of the text that you type. For example, with <guilabel>Match case</guilabel> selected, "TEXT" will not match "text".</para>
+		  </listitem>
+		  <listitem><para>Select the <guilabel>Match entire word only</guilabel> option to only find occurrences of the string that match the entire words of the text that you type. For example, with <guilabel>Match entire word only</guilabel> selected, "text" will not match "texture". <!-- translators, please make up your own example ;) --></para>
+		  </listitem>
+		  <listitem><para>Select the <guilabel>Search backwards</guilabel> option to search backwards towards the beginning of the document. </para>
+		  </listitem>
+		  <listitem><para>Select the <guilabel>Wrap around</guilabel> option to search to one end of the document and then continue the search from the other end of the file. </para>
+		  </listitem>
+		</itemizedlist>
+  </sect2>	 
+	 
+<!-- ============= Special Characters ============================ -->	 
+	 <sect2 id="gedit-find-escapes">
+	   <title>Special Characters</title>
+	     <para>You can include the following escape sequences in the text to find or replace:</para>
 			 <itemizedlist> 
 				<listitem>
                                    <para><literal>\n</literal></para>
@@ -466,28 +492,7 @@
                                    <para>Use this escape sequence to specify a carriage return.</para>
 				</listitem>
 			 </itemizedlist> 
-		  </listitem>
-		  <listitem><para>Type the string that you want to use to replace the string that you find, in the <guilabel>Replace with</guilabel> field.</para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Match case</guilabel> option to only find occurrences of the string that match the case of the text that you enter. </para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Match entire word only</guilabel> option to only find occurrences of the string that match the entire words of the text that you type. </para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Search backwards</guilabel> option to search backwards to the beginning of the file. </para>
-		  </listitem>
-		  <listitem><para>Select the <guilabel>Wrap around</guilabel> option to search to one end of the file and then continue the search from the other end of the file. </para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Find</guibutton> to search the file for the first occurrence of the string. If <application>&app;</application> finds the string, the application moves the cursor to the string, and selects the string. </para>
-		  </listitem>
-		  <listitem><para>Click <guibutton>Replace</guibutton> to replace the occurrence of the string with the text in the <guilabel>Replace with</guilabel> field. Click <guibutton>Replace All</guibutton> to replace all occurrences of the string.</para>
-		  </listitem>
-		  <listitem><para>To find the next occurrence of the string, click <guibutton>Find</guibutton>.</para>
-		  </listitem>
-		  <listitem><para>To finish the search, click <guibutton>Close</guibutton>. </para>
-		  </listitem>
-		</orderedlist>
-	 </sect2>
-
+    </sect2>
   </sect1>
   
   <sect1 id="gedit-printing">
