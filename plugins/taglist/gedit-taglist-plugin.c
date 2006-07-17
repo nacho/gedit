@@ -38,6 +38,7 @@
 #include <glib/gi18n-lib.h>
 #include <gmodule.h>
 
+#include <gedit/gedit-plugin.h>
 #include <gedit/gedit-debug.h>
 
 #define WINDOW_DATA_KEY "GeditTaglistPluginWindowData"
@@ -49,55 +50,9 @@ struct _GeditTaglistPluginPrivate
 	gpointer dummy;
 };
 
-static GType gedit_taglist_plugin_type = 0;
-
-GType
-gedit_taglist_plugin_get_type (void)
-{
-	return gedit_taglist_plugin_type;
-}
-
-static void     gedit_taglist_plugin_init              (GeditTaglistPlugin      *self);
-static void     gedit_taglist_plugin_class_init        (GeditTaglistPluginClass *klass);
-static gpointer gedit_taglist_plugin_parent_class = NULL;
-static void     gedit_taglist_plugin_class_intern_init (gpointer klass)
-{
-	gedit_taglist_plugin_parent_class = g_type_class_peek_parent (klass);		
-	gedit_taglist_plugin_class_init ((GeditTaglistPluginClass *) klass);			
-}										
-										
-G_MODULE_EXPORT GType								
-register_gedit_plugin (GTypeModule *module)					
-{										
-	static const GTypeInfo our_info =					
-	{									
-		sizeof (GeditTaglistPluginClass),					
-		NULL, /* base_init */						
-		NULL, /* base_finalize */					
-		(GClassInitFunc) gedit_taglist_plugin_class_intern_init,		
-		NULL,								
-		NULL, /* class_data */						
-		sizeof (GeditTaglistPlugin),						
-		0, /* n_preallocs */						
-		(GInstanceInitFunc) gedit_taglist_plugin_init				
-	};									
-	
-	gedit_debug_message (DEBUG_PLUGINS, "Registering GeditTaglistPlugin");	
-										
-	/* Initialise the i18n stuff */						
-	bindtextdomain (GETTEXT_PACKAGE, GEDIT_LOCALEDIR);			
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");			
-										
-	gedit_taglist_plugin_type = g_type_module_register_type (module,		
-					    GEDIT_TYPE_PLUGIN,			
-					    "GeditTaglistPlugin",			
-					    &our_info,				
-					    0);
-
+GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE (GeditTaglistPlugin, gedit_taglist_plugin,
 	gedit_taglist_plugin_panel_register_type (module);
-
-	return gedit_taglist_plugin_type;						
-}
+)
 
 static void
 gedit_taglist_plugin_init (GeditTaglistPlugin *plugin)

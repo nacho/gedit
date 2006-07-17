@@ -1,5 +1,15 @@
 2006-07-17  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* gedit/gedit-plugin.h: added convenient macros for registering
+	additional GTypes in plugins
+
+	* plugins/taglist/gedit-taglist-plugin.c:
+	* plugins/taglist/gedit-taglist-plugin-panel.c:
+	
+	make use of the new macros
+
+2006-07-17  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* gedit/dialogs/gedit-close-confirmation-dialog.c: fixed using 
 	g_slist_length on a GList.
 

@@ -39,6 +39,7 @@
 
 #include <gedit/gedit-utils.h>
 #include <gedit/gedit-debug.h>
+#include <gedit/gedit-plugin.h>
 
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
@@ -64,8 +65,7 @@ struct _GeditTaglistPluginPanelPrivate
 	TagGroup *selected_tag_group;	
 };
 
-static GObjectClass *parent_class = NULL;
-static GType type = 0;
+GEDIT_PLUGIN_DEFINE_TYPE (GeditTaglistPluginPanel, gedit_taglist_plugin_panel, GTK_TYPE_VBOX)
 
 enum
 {
@@ -131,15 +131,13 @@ gedit_taglist_plugin_panel_finalize (GObject *object)
 {
 	/* GeditTaglistPluginPanel *tab = GEDIT_TAGLIST_PLUGIN_PANEL (object); */
 	
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (gedit_taglist_plugin_panel_parent_class)->finalize (object);
 }
 
 static void 
 gedit_taglist_plugin_panel_class_init (GeditTaglistPluginPanelClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-	parent_class = g_type_class_peek_parent (klass);
 	
 	object_class->finalize = gedit_taglist_plugin_panel_finalize;
 	object_class->get_property = gedit_taglist_plugin_panel_get_property;
@@ -189,7 +187,7 @@ insert_tag (GeditTaglistPluginPanel *panel,
 
 		gtk_text_buffer_insert (buffer, 
 					&start, 
-					tag->begin, 
+					(gchar *)tag->begin, 
 					-1);
 
 		/* get iterators again since they have been invalidated and move
@@ -207,7 +205,7 @@ insert_tag (GeditTaglistPluginPanel *panel,
 
 		gtk_text_buffer_insert (buffer, 
 					&end, 
-					tag->end,
+					(gchar *)tag->end,
 					-1);
 
 		/* if there is no selection and we have a paired tag, move the
@@ -217,7 +215,7 @@ insert_tag (GeditTaglistPluginPanel *panel,
 			gint offset;
 
 			offset = gtk_text_iter_get_offset (&end) -
-				 g_utf8_strlen (tag->end, -1);
+				 g_utf8_strlen ((gchar *)tag->end, -1);
 
 			gtk_text_buffer_get_iter_at_offset (buffer,
 							    &end, 
@@ -311,7 +309,7 @@ create_model (GeditTaglistPluginPanel *panel)
 	{
 		const gchar* tag_name;
 
-		tag_name = ((Tag*)list->data)->name;
+		tag_name = (gchar *)((Tag*)list->data)->name;
 
 		gedit_debug_message (DEBUG_PLUGINS, "%d : %s", i, tag_name);
 		
@@ -361,7 +359,7 @@ find_tag_group (const gchar *name)
 
 	while (list)
 	{
-		if (strcmp (name, ((TagGroup*)list->data)->name) == 0)
+		if (strcmp (name, (gchar *)((TagGroup*)list->data)->name) == 0)
 			return (TagGroup*)list->data;
 
 			list = g_list_next (list);
@@ -389,7 +387,7 @@ populate_tag_groups_combo (GeditTaglistPluginPanel *panel)
 	while (list)
 	{
 		gtk_combo_box_append_text (combo,
-					   ((TagGroup*)list->data)->name);
+					   (gchar *)((TagGroup*)list->data)->name);
 
 		list = g_list_next (list);
 	}
@@ -416,7 +414,7 @@ selected_group_changed (GtkComboBox             *combo,
 	}
 
 	if ((panel->priv->selected_tag_group == NULL) || 
-	    (strcmp (group_name, panel->priv->selected_tag_group->name) != 0))
+	    (strcmp (group_name, (gchar *)panel->priv->selected_tag_group->name) != 0))
 	{
 		panel->priv->selected_tag_group = find_tag_group (group_name);
 		g_return_if_fail (panel->priv->selected_tag_group != NULL);
@@ -566,36 +564,4 @@ gedit_taglist_plugin_panel_new (GeditWindow *window)
 	return GTK_WIDGET (g_object_new (GEDIT_TYPE_TAGLIST_PLUGIN_PANEL, 
 					 "window", window,
 					 NULL));
-}
-
-GType
-gedit_taglist_plugin_panel_get_type (void)
-{
-	return type;
-}
-
-GType
-gedit_taglist_plugin_panel_register_type (GTypeModule *module)
-{
-	static const GTypeInfo our_info =
-	{
-		sizeof (GeditTaglistPluginPanelClass),
-		NULL, /* base_init */
-		NULL, /* base_finalize */
-		(GClassInitFunc) gedit_taglist_plugin_panel_class_init,
-		NULL,
-		NULL, /* class_data */
-		sizeof (GeditTaglistPluginPanel),
-		0, /* n_preallocs */
-		(GInstanceInitFunc) gedit_taglist_plugin_panel_init
-	};
-
-	gedit_debug_message (DEBUG_PLUGINS, "Registering GeditTaglistPluginPanel");
-
-	type = g_type_module_register_type (module,
-					    GTK_TYPE_VBOX,
-					    "GeditTaglistPluginPanel",
-					    &our_info, 
-					    0);
-	return type;
 }
