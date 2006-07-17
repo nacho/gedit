@@ -679,16 +679,16 @@ build_multiple_docs_dialog (GeditCloseConfirmationDialog *dlg)
 		str = g_strdup_printf (
 				ngettext ("Changes to %d document will be permanently lost.",
 					  "Changes to %d documents will be permanently lost.",
-					  g_slist_length (priv->unsaved_documents)),
-				g_slist_length (priv->unsaved_documents));
+					  g_list_length (priv->unsaved_documents)),
+				g_list_length (priv->unsaved_documents));
 	else
 		str = g_strdup_printf (
 				ngettext ("There is %d document with unsaved changes. "
 					  "Save changes before closing?",
 					  "There are %d documents with unsaved changes. "
 					  "Save changes before closing?",
-					  g_slist_length (priv->unsaved_documents)),
-				g_slist_length (priv->unsaved_documents));
+					  g_list_length (priv->unsaved_documents)),
+				g_list_length (priv->unsaved_documents));
 
 	markup_str = g_strconcat ("<span weight=\"bold\" size=\"larger\">", str, "</span>", NULL);
 	g_free (str);
