@@ -21,15 +21,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.15.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-17 22:24+0200\n"
-"PO-Revision-Date: 2006-07-17 22:26+0200\n"
+"POT-Creation-Date: 2006-07-21 16:00+0200\n"
+"PO-Revision-Date: 2006-07-21 15:40+0200\n"
 "Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
-"Language-Team: French <gnomefr@traduc.org>\n"
+"Language-Team:GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Poedit-Language: French\n"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
@@ -163,7 +162,7 @@ msgstr "Police pour l'impression de l'en-tête"
 
 #: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
-msgstr "Surligner la ligne actuelle"
+msgstr "Surligner la ligne courante"
 
 #: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
@@ -231,7 +230,7 @@ msgid ""
 "\" for unlimited number of actions."
 msgstr ""
 "Nombre maximum d'actions que gedit sera en mesure d'annuler ou de "
-"réintégrer. Indiquez « -1 » si vous ne voulez pas préciser de limite."
+"réintégrer. Indiquez « -1 » si vous ne voulez pas spécifier de limite."
 
 #: ../data/gedit.schemas.in.h:36
 msgid ""
@@ -239,7 +238,7 @@ msgid ""
 "\" for unlimited number of actions. Deprecated since 2.12.0"
 msgstr ""
 "Nombre maximum d'actions que gedit sera en mesure d'annuler ou de "
-"réintégrer. Indiquez « -1 » si vous ne voulez pas préciser de limite. "
+"réintégrer. Indiquez « -1 » si vous ne voulez pas spécifier de limite. "
 "Obsolète depuis 2.12.0"
 
 #. Translators: This is the Editor Font.
@@ -339,7 +338,7 @@ msgid ""
 "are used."
 msgstr ""
 "Liste triée des codages utilisés par gedit pour la détection automatique du "
-"codage d'un fichier. « CURRENT » est le codage local actuel. Seuls les "
+"codage d'un fichier. « CURRENT » est le codage local courant. Seuls les "
 "codages reconnus sont utilisés."
 
 #: ../data/gedit.schemas.in.h:72
@@ -376,7 +375,7 @@ msgstr ""
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
-"Précise la police à utiliser pour le corps d'un document lors de "
+"Spécifie la police à utiliser pour le corps d'un document lors de "
 "l'impression."
 
 #: ../data/gedit.schemas.in.h:75
@@ -384,7 +383,7 @@ msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
-"Précise la police à utiliser pour le corps d'un document lors de "
+"Spécifie la police à utiliser pour le corps d'un document lors de "
 "l'impression. C'est un nom de police gnome-print et remplacé par "
 "print_font_body_pango."
 
@@ -393,9 +392,9 @@ msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
-"Précise la police à utiliser pour les numéros de ligne lors de l'impression. "
-"Cela ne s'appliquera que si l'option « Afficher les numéros de ligne » est "
-"non-nulle."
+"Spécifie la police à utiliser pour les numéros de ligne lors de "
+"l'impression. Cela ne s'appliquera que si l'option « Afficher les numéros de "
+"ligne » est non-nulle."
 
 #: ../data/gedit.schemas.in.h:77
 msgid ""
@@ -403,9 +402,9 @@ msgid ""
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
-"Précise la police à utiliser pour les numéros de ligne lors de l'impression. "
-"Cela ne s'appliquera que si l'option «Imprimer les numéros de ligne » est "
-"non-nulle. Il s'agit d'un nom de police gnome-print remplacé par "
+"Spécifie la police à utiliser pour les numéros de ligne lors de "
+"l'impression. Cela ne s'appliquera que si l'option «Imprimer les numéros de "
+"ligne » est non-nulle. Il s'agit d'un nom de police gnome-print remplacé par "
 "print_font_numbers_pango."
 
 #: ../data/gedit.schemas.in.h:78
@@ -413,7 +412,7 @@ msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
-"Précise la police à utiliser pour les en-têtes de page lors de l'impression "
+"Spécifie la police à utiliser pour les en-têtes de page lors de l'impression "
 "d'un document. Cela ne s'appliquera que si l'option « Afficher l'en-tête » "
 "est activée."
 
@@ -423,7 +422,7 @@ msgid ""
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
-"Précise la police à utiliser pour les en-têtes de page lors de l'impression "
+"Spécifie la police à utiliser pour les en-têtes de page lors de l'impression "
 "d'un document. Cela ne s'appliquera que si l'option « Imprimer l'en-tête » "
 "est activée. Il s'agit du nom d'une police gnome-print et remplacée par "
 "print_font_header_pango."
@@ -433,20 +432,20 @@ msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
-"Précise le nombre maximum de fichiers récemments ouverts qui seront affichés "
-"dans le sous-menu « Fichiers récents »."
+"Spécifie le nombre maximum de fichiers récemments ouverts qui seront "
+"affichés dans le sous-menu « Fichiers récents »."
 
 #: ../data/gedit.schemas.in.h:81
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr ""
-"Précise le nombre d'espaces qui devraient être affichées au lieu des "
+"Spécifie le nombre d'espaces qui devraient être affichées au lieu des "
 "caractères de tabulation."
 
 #: ../data/gedit.schemas.in.h:82
 msgid "Specifies the position of the right margin."
-msgstr "Précise la position de la marge de droite"
+msgstr "Spécifie la position de la marge de droite."
 
 #: ../data/gedit.schemas.in.h:83
 msgid "Status Bar is Visible"
@@ -513,8 +512,8 @@ msgid ""
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
 "Indique si gedit doit activer la création de copies de sauvegarde pour les "
-"fichiers que gedit enregistre. Vous pouvez préciser l'extension du fichier "
-"de sauvegarde avec l'option « Extension de la copie de sauvegarde »."
+"fichiers que gedit enregistre. Vous pouvez définir l'extension du fichier de "
+"sauvegarde avec l'option « Extension de la copie de sauvegarde »."
 
 #: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display line numbers in the editing area."
@@ -547,7 +546,7 @@ msgstr "Indique si gedit doit surligner les parenthèses correspondantes."
 
 #: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should highlight the current line."
-msgstr "Indique si gedit doit surligner la ligne actuelle."
+msgstr "Indique si gedit doit surligner la ligne courante."
 
 #: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should include a document header when printing documents."
@@ -733,11 +732,11 @@ msgstr[1] ""
 "d minutes seront définitivement perdues."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:498
-#, fuzzy, c-format
+#, c-format
 msgid "Changes to document \"%s\" will be permanently lost."
 msgstr ""
-"Les modifications effectuées au document depuis la dernière heure seront "
-"définitivement perdues."
+"Les modifications effectuées au document « %s » seront définitivement "
+"perdues."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:501
 #, c-format
@@ -749,18 +748,16 @@ msgstr ""
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:725
 msgid "Saving has been disabled by the system administrator."
-msgstr "La sauvegarde a été désactivée par l'administrateur système."
+msgstr "L'enregistrement a été désactivé par l'administrateur système."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
-#, fuzzy, c-format
+#, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
 msgstr[0] ""
-"Les modifications effectuées au document depuis la dernière heure seront "
-"définitivement perdues."
+"Les modifications effectuées à %d document seront définitivement perdues."
 msgstr[1] ""
-"Les modifications effectuées au document depuis les dernières %d heures "
-"seront définitivement perdues."
+"Les modifications effectuées à %d documents seront définitivement perdues."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:686
 #, c-format
@@ -776,7 +773,7 @@ msgstr[1] ""
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:704
 msgid "Docum_ents with unsaved changes:"
-msgstr ""
+msgstr "_Documents avec des modifications non enregistrées :"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
 msgid "S_elect the documents you want to save:"
@@ -951,7 +948,7 @@ msgstr "<b>Correspondance des parenthèses</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:4
 msgid "<b>Current Line</b>"
-msgstr "<b>Ligne actuelle</b>"
+msgstr "<b>Ligne courante</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:5
 msgid "<b>Elements</b>"
@@ -1004,7 +1001,7 @@ msgstr "Police et couleurs"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
 msgid "Hi_ghlight current line"
-msgstr "Surli_gner la ligne actuelle"
+msgstr "Surli_gner la ligne courante"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
 msgid "Highlight _mode:"
@@ -1210,13 +1207,12 @@ msgstr "%s : nom de fichier ou URI malformé.\n"
 #: ../gedit/gedit.c:128
 #, c-format
 msgid "%s: invalid encoding.\n"
-msgstr "%s : codage invalide.\n"
+msgstr "%s : codage non valide.\n"
 
 #. Setup command line options
 #: ../gedit/gedit.c:450
-#, fuzzy
 msgid "- Edit text files"
-msgstr "Édite des fichiers texte"
+msgstr "- Édite des fichiers texte"
 
 #: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
 #, c-format
@@ -1408,120 +1404,120 @@ msgstr "Lecture-seule"
 msgid "Documents"
 msgstr "Documents"
 
-#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:177
-#: ../gedit/gedit-encodings.c:179 ../gedit/gedit-encodings.c:181
-#: ../gedit/gedit-encodings.c:183
+#: ../gedit/gedit-encodings.c:137 ../gedit/gedit-encodings.c:182
+#: ../gedit/gedit-encodings.c:184 ../gedit/gedit-encodings.c:186
+#: ../gedit/gedit-encodings.c:188
 msgid "Unicode"
 msgstr "Unicode"
 
-#: ../gedit/gedit-encodings.c:146 ../gedit/gedit-encodings.c:172
-#: ../gedit/gedit-encodings.c:218 ../gedit/gedit-encodings.c:261
+#: ../gedit/gedit-encodings.c:151 ../gedit/gedit-encodings.c:177
+#: ../gedit/gedit-encodings.c:223 ../gedit/gedit-encodings.c:266
 msgid "Western"
 msgstr "Occidental"
 
-#: ../gedit/gedit-encodings.c:148 ../gedit/gedit-encodings.c:220
-#: ../gedit/gedit-encodings.c:257
+#: ../gedit/gedit-encodings.c:153 ../gedit/gedit-encodings.c:225
+#: ../gedit/gedit-encodings.c:262
 msgid "Central European"
 msgstr "Europe centrale"
 
-#: ../gedit/gedit-encodings.c:150
+#: ../gedit/gedit-encodings.c:155
 msgid "South European"
 msgstr "Europe du Sud"
 
-#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:168
-#: ../gedit/gedit-encodings.c:271
+#: ../gedit/gedit-encodings.c:157 ../gedit/gedit-encodings.c:173
+#: ../gedit/gedit-encodings.c:276
 msgid "Baltic"
 msgstr "Balte"
 
-#: ../gedit/gedit-encodings.c:154 ../gedit/gedit-encodings.c:222
-#: ../gedit/gedit-encodings.c:235 ../gedit/gedit-encodings.c:239
-#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:259
+#: ../gedit/gedit-encodings.c:159 ../gedit/gedit-encodings.c:227
+#: ../gedit/gedit-encodings.c:240 ../gedit/gedit-encodings.c:244
+#: ../gedit/gedit-encodings.c:246 ../gedit/gedit-encodings.c:264
 msgid "Cyrillic"
 msgstr "Cyrillique"
 
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:81
+#: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:233
+#: ../gedit/gedit-encodings.c:274 ../plugins/spell/gedit-spell-checker.c:81
 msgid "Arabic"
 msgstr "Arabe"
 
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:263
+#: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:268
 #: ../plugins/spell/gedit-spell-checker.c:95
 msgid "Greek"
 msgstr "Grec"
 
-#: ../gedit/gedit-encodings.c:160
+#: ../gedit/gedit-encodings.c:165
 msgid "Hebrew Visual"
 msgstr "Hébreu visuel"
 
-#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:226
-#: ../gedit/gedit-encodings.c:267 ../plugins/spell/gedit-spell-checker.c:111
+#: ../gedit/gedit-encodings.c:167 ../gedit/gedit-encodings.c:231
+#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:111
 msgid "Hebrew"
 msgstr "Hébreu"
 
-#: ../gedit/gedit-encodings.c:164 ../gedit/gedit-encodings.c:224
-#: ../gedit/gedit-encodings.c:265 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:229
+#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
 msgid "Turkish"
 msgstr "Turc"
 
-#: ../gedit/gedit-encodings.c:166
+#: ../gedit/gedit-encodings.c:171
 msgid "Nordic"
 msgstr "Nordique"
 
-#: ../gedit/gedit-encodings.c:170
+#: ../gedit/gedit-encodings.c:175
 msgid "Celtic"
 msgstr "Celtique"
 
-#: ../gedit/gedit-encodings.c:174 ../plugins/spell/gedit-spell-checker.c:140
+#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:140
 msgid "Romanian"
 msgstr "Roumain"
 
-#: ../gedit/gedit-encodings.c:186
+#: ../gedit/gedit-encodings.c:191
 msgid "Armenian"
 msgstr "Arménien"
 
-#: ../gedit/gedit-encodings.c:188 ../gedit/gedit-encodings.c:190
-#: ../gedit/gedit-encodings.c:204
+#: ../gedit/gedit-encodings.c:193 ../gedit/gedit-encodings.c:195
+#: ../gedit/gedit-encodings.c:209
 msgid "Chinese Traditional"
 msgstr "Chinois traditionnel"
 
-#: ../gedit/gedit-encodings.c:192
+#: ../gedit/gedit-encodings.c:197
 msgid "Cyrillic/Russian"
 msgstr "Cyrillique/Russe"
 
-#: ../gedit/gedit-encodings.c:195 ../gedit/gedit-encodings.c:197
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:231
-#: ../gedit/gedit-encodings.c:246
+#: ../gedit/gedit-encodings.c:200 ../gedit/gedit-encodings.c:202
+#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:236
+#: ../gedit/gedit-encodings.c:251
 msgid "Japanese"
 msgstr "Japonais"
 
-#: ../gedit/gedit-encodings.c:202 ../gedit/gedit-encodings.c:233
-#: ../gedit/gedit-encodings.c:237 ../gedit/gedit-encodings.c:252
+#: ../gedit/gedit-encodings.c:207 ../gedit/gedit-encodings.c:238
+#: ../gedit/gedit-encodings.c:242 ../gedit/gedit-encodings.c:257
 msgid "Korean"
 msgstr "Coréen"
 
-#: ../gedit/gedit-encodings.c:207 ../gedit/gedit-encodings.c:209
-#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:215
+#: ../gedit/gedit-encodings.c:212 ../gedit/gedit-encodings.c:214
+#: ../gedit/gedit-encodings.c:216 ../gedit/gedit-encodings.c:220
 msgid "Chinese Simplified"
 msgstr "Chinois simplifié"
 
-#: ../gedit/gedit-encodings.c:213
+#: ../gedit/gedit-encodings.c:218
 msgid "Georgian"
 msgstr "Géorgien"
 
-#: ../gedit/gedit-encodings.c:243
+#: ../gedit/gedit-encodings.c:248
 msgid "Cyrillic/Ukrainian"
 msgstr "Cyrillique/Ukrainien"
 
-#: ../gedit/gedit-encodings.c:248 ../gedit/gedit-encodings.c:254
-#: ../gedit/gedit-encodings.c:273 ../plugins/spell/gedit-spell-checker.c:155
+#: ../gedit/gedit-encodings.c:253 ../gedit/gedit-encodings.c:259
+#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:155
 msgid "Vietnamese"
 msgstr "Vietnamien"
 
-#: ../gedit/gedit-encodings.c:250
+#: ../gedit/gedit-encodings.c:255
 msgid "Thai"
 msgstr "Thaï"
 
-#: ../gedit/gedit-encodings.c:423
+#: ../gedit/gedit-encodings.c:441
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -1533,7 +1529,7 @@ msgstr "Auto détecté"
 #: ../gedit/gedit-encodings-option-menu.c:261
 #, c-format
 msgid "Current Locale (%s)"
-msgstr "Locale en cours (%s)"
+msgstr "Locale courante (%s)"
 
 #: ../gedit/gedit-encodings-option-menu.c:322
 msgid "Add or _Remove..."
@@ -1948,19 +1944,19 @@ msgstr "À _propos"
 
 #: ../gedit/gedit-plugin-manager.c:510
 msgid "C_onfigure"
-msgstr "C_onfigurer"
+msgstr "_Configurer"
 
 #: ../gedit/gedit-plugin-manager.c:520
 msgid "A_ctivate"
-msgstr "A_ctiver"
+msgstr "_Activer"
 
 #: ../gedit/gedit-plugin-manager.c:530
 msgid "Ac_tivate All"
-msgstr "Ac_tive tous"
+msgstr "_Tout activer"
 
 #: ../gedit/gedit-plugin-manager.c:535
 msgid "_Deactivate All"
-msgstr "_Désactiver tous"
+msgstr "Tout _désactiver"
 
 #: ../gedit/gedit-plugin-manager.c:776
 msgid "_About Plugin"
@@ -2018,7 +2014,7 @@ msgstr "Afficher la page suivante"
 
 #: ../gedit/gedit-print-job-preview.c:767
 msgid "Current page (Alt+P)"
-msgstr "Page en cours (Alt+P)"
+msgstr "Page courante (Alt+P)"
 
 #. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
 #. We are displaying 'XXX of XXX'.
@@ -2182,7 +2178,7 @@ msgstr "É_dition"
 
 #: ../gedit/gedit-ui.h:54
 msgid "_View"
-msgstr "_Affichage"
+msgstr "Afficha_ge"
 
 #: ../gedit/gedit-ui.h:55
 msgid "_Search"
@@ -2198,7 +2194,7 @@ msgstr "_Documents"
 
 #: ../gedit/gedit-ui.h:58
 msgid "_Help"
-msgstr "Aid_e"
+msgstr "_Aide"
 
 #: ../gedit/gedit-ui.h:62
 msgid "Create a new document"
@@ -2244,7 +2240,7 @@ msgstr "À propos de cette application"
 
 #: ../gedit/gedit-ui.h:83
 msgid "Save the current file"
-msgstr "Enregistre le fichier actuel"
+msgstr "Enregistre le fichier courant"
 
 #: ../gedit/gedit-ui.h:84
 msgid "Save _As..."
@@ -2252,7 +2248,7 @@ msgstr "Enregistrer _sous..."
 
 #: ../gedit/gedit-ui.h:85
 msgid "Save the current file with a different name"
-msgstr "Enregistre le fichier actuel sous un nom différent"
+msgstr "Enregistre le fichier courant sous un nom différent"
 
 #: ../gedit/gedit-ui.h:87
 msgid "Revert to a saved version of the file"
@@ -2280,11 +2276,11 @@ msgstr "_Imprimer..."
 
 #: ../gedit/gedit-ui.h:93
 msgid "Print the current page"
-msgstr "Imprime la page actuelle"
+msgstr "Imprime la page courante"
 
 #: ../gedit/gedit-ui.h:95
 msgid "Close the current file"
-msgstr "Ferme le fichier en cours"
+msgstr "Ferme le fichier courant"
 
 #: ../gedit/gedit-ui.h:99
 msgid "Undo the last action"
@@ -2377,9 +2373,8 @@ msgid "Interactive search..."
 msgstr "Recherche interactive..."
 
 #: ../gedit/gedit-ui.h:130
-#, fuzzy
 msgid "Interactively search for text"
-msgstr "Recherche un texte"
+msgstr "Recherche interactivement du texte"
 
 #. Documents menu
 #: ../gedit/gedit-ui.h:133
@@ -2403,18 +2398,16 @@ msgid "_Previous Document"
 msgstr "Document _précédent"
 
 #: ../gedit/gedit-ui.h:138
-#, fuzzy
 msgid "Activate previous document"
-msgstr "Créer un nouveau document"
+msgstr "Active le document précédent"
 
 #: ../gedit/gedit-ui.h:139
 msgid "_Next Document"
 msgstr "Document _suivant"
 
 #: ../gedit/gedit-ui.h:140
-#, fuzzy
 msgid "Activate next document"
-msgstr "Créer un nouveau document"
+msgstr "Active le document suivant"
 
 #: ../gedit/gedit-ui.h:141
 msgid "_Move to New Window"
@@ -2422,7 +2415,7 @@ msgstr "_Déplacer à la nouvelle fenêtre"
 
 #: ../gedit/gedit-ui.h:142
 msgid "Move the current document to a new window"
-msgstr "Déplace le document en cours dans une nouvelle fenêtre"
+msgstr "Déplace le document courant dans une nouvelle fenêtre"
 
 #: ../gedit/gedit-ui.h:149
 msgid "Quit the program"
@@ -2434,7 +2427,7 @@ msgstr "Barre d'_outils"
 
 #: ../gedit/gedit-ui.h:155
 msgid "Show or hide the toolbar in the current window"
-msgstr "Afficher ou cacher la barre d'outils dans la fenêtre actuelle"
+msgstr "Afficher ou cacher la barre d'outils dans la fenêtre courante"
 
 #: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
@@ -2442,7 +2435,7 @@ msgstr "Barre d'é_tat"
 
 #: ../gedit/gedit-ui.h:158
 msgid "Show or hide the statusbar in the current window"
-msgstr "Afficher ou cacher la barre d'état dans la fenêtre actuelle"
+msgstr "Afficher ou cacher la barre d'état dans la fenêtre courante"
 
 #: ../gedit/gedit-ui.h:160
 msgid "Side _Pane"
@@ -2450,7 +2443,7 @@ msgstr "Panneau _Latéral"
 
 #: ../gedit/gedit-ui.h:161
 msgid "Show or hide the side pane in the current window"
-msgstr "Afficher ou cacher le panneau latéral dans la fenêtre actuelle"
+msgstr "Afficher ou cacher le panneau latéral dans la fenêtre courante"
 
 #: ../gedit/gedit-ui.h:167
 msgid "_Bottom Pane"
@@ -2458,7 +2451,7 @@ msgstr "Panneau _inférieur"
 
 #: ../gedit/gedit-ui.h:168
 msgid "Show or hide the bottom pane in the current window"
-msgstr "Afficher ou cacher le panneau inférieur dans la fenêtre actuelle"
+msgstr "Afficher ou cacher le panneau inférieur dans la fenêtre courante"
 
 #: ../gedit/gedit-utils.c:983
 #, c-format
@@ -2512,7 +2505,7 @@ msgstr "Aucun"
 
 #: ../gedit/gedit-window.c:810
 msgid "Disable syntax highlighting"
-msgstr "Désactiver la _coloration syntaxique"
+msgstr "Désactiver la coloration syntaxique"
 
 #. Translators: %s is a URI
 #: ../gedit/gedit-window.c:936 ../gedit/gedit-window.c:961
@@ -2588,8 +2581,8 @@ msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
 msgstr ""
-"Analyse le document actuel et rapporte le nombre de mots, lignes, caractères "
-"et caractères sans espaces qu'il contient."
+"Analyse le document courant et rapporte le nombre de mots, lignes, "
+"caractères et caractères sans espaces qu'il contient."
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 #: ../plugins/docinfo/docinfo.glade2.h:8
@@ -2638,7 +2631,7 @@ msgstr "_Statistiques du document"
 
 #: ../plugins/docinfo/gedit-docinfo-plugin.c:402
 msgid "Get statistic info on current document"
-msgstr "Obtenir les statistiques du document actuel"
+msgstr "Obtenir les statistiques du document courant"
 
 #: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
 msgid "Execute external commands and shell scripts."
@@ -2670,19 +2663,19 @@ msgstr "Rien"
 
 #: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
-msgstr "Document actuel"
+msgstr "Document courant"
 
 #: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
-msgstr "Sélection actuelle"
+msgstr "Sélection courante"
 
 #: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
-msgstr "Ligne actuelle"
+msgstr "Ligne courante"
 
 #: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
-msgstr "Mot actuel"
+msgstr "Mot courant"
 
 #: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
@@ -2694,15 +2687,15 @@ msgstr "Créer un nouveau document"
 
 #: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
-msgstr "Ajouter au document actuel"
+msgstr "Ajouter au document courant"
 
 #: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
-msgstr "Remplacer le document actuel"
+msgstr "Remplacer le document courant"
 
 #: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
-msgstr "Remplacer la sélection actuelle"
+msgstr "Remplacer la sélection courante"
 
 #: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
@@ -2786,7 +2779,7 @@ msgid ""
 "All documents"
 msgstr ""
 "Rien\n"
-"Document actuel\n"
+"Document courant\n"
 "Tous les documents"
 
 #: ../plugins/externaltools/tools/tools.glade.h:9
@@ -2855,9 +2848,8 @@ msgid "Modelines"
 msgstr "Modificateurs"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Interactive python console standing in the bottom panel"
-msgstr "Ouvre une console interactive Python dans le panneau inférieur."
+msgstr "Console interactive Python dans le panneau inférieur"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -2928,6 +2920,9 @@ msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
 msgstr ""
+"Ce n'est pas un déclencheur d'onglets valide. Les déclencheurs peuvent "
+"contenir des lettres ou un seul caractères non alphanumérique comme {, [, "
+"etc."
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -2935,7 +2930,7 @@ msgstr "_Trier..."
 
 #: ../plugins/sort/gedit-sort-plugin.c:82
 msgid "Sort the current document or selection"
-msgstr "Trie le document en cours ou la sélection"
+msgstr "Trie le document courant ou la sélection"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.glade2.h:3
@@ -3002,9 +2997,8 @@ msgid "Amharic"
 msgstr "Amharique"
 
 #: ../plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Arabic (Egypt)"
-msgstr "Arabe"
+msgstr "Arabe (Égyptien)"
 
 #: ../plugins/spell/gedit-spell-checker.c:83
 msgid "Azerbaijani"
@@ -3325,7 +3319,7 @@ msgstr "_Vérification orthographique"
 
 #: ../plugins/spell/gedit-spell-plugin.c:72
 msgid "Check the current document for incorrect spelling"
-msgstr "Vérifie l'orthographe du document actuel"
+msgstr "Vérifie l'orthographe du document courant"
 
 #: ../plugins/spell/gedit-spell-plugin.c:78
 msgid "Set _Language..."
@@ -3333,7 +3327,7 @@ msgstr "Définir la _langue..."
 
 #: ../plugins/spell/gedit-spell-plugin.c:80
 msgid "Set the language of the current document"
-msgstr "Définit la langue du document actuel"
+msgstr "Définis la langue du document courant"
 
 #: ../plugins/spell/gedit-spell-plugin.c:89
 msgid "_Autocheck Spelling"
@@ -3341,7 +3335,7 @@ msgstr "Vérification orthographique _automatique"
 
 #: ../plugins/spell/gedit-spell-plugin.c:91
 msgid "Automatically spell-check the current document"
-msgstr "Vérifie automatiquement l'orthographe du document actuel"
+msgstr "Vérifie automatiquement l'orthographe du document courant"
 
 #: ../plugins/spell/gedit-spell-plugin.c:713
 msgid "The document is empty."
@@ -3353,7 +3347,7 @@ msgstr "Aucun mot mal orthographié"
 
 #: ../plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
-msgstr "Sélectionnez la _langue du document actuel."
+msgstr "Sélectionnez la _langue du document courant."
 
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
@@ -3421,28 +3415,28 @@ msgstr "_Suggestions :"
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:1
 msgid "Checks the spelling of the current document."
-msgstr "Vérifie l'orthographe du document actuel."
+msgstr "Vérifie l'orthographe du document courant."
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
 msgid "Spell checker"
 msgstr "Vérificateur orthographique"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
 msgid "Select the group of tags you want to use"
 msgstr "Sélectionne le groupe de balises que vous souhaitez utiliser"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
 msgid "Available Tag Lists"
 msgstr "Listes de balises disponibles"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
 msgid "Tags"
 msgstr "Balises"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
 msgid "Double-click on a tag to insert it in the current document"
-msgstr "Double-cliquez sur une balise pour l'insérer dans le document en cours"
+msgstr "Double-cliquez sur une balise pour l'insérer dans le document courant"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -3502,7 +3496,7 @@ msgstr "Information sur l'auteur"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:15
 msgid "Axis related headers"
-msgstr "En-têtes reliées aux axes"
+msgstr "En-têtes reliés aux axes"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
@@ -4870,7 +4864,7 @@ msgstr "Insérer la date et l'heure"
 
 #: ../plugins/time/time.gedit-plugin.desktop.in.h:2
 msgid "Inserts current date and time at the cursor position."
-msgstr "Insère la date et l'heure actuelle à l'emplacement du curseur."
+msgstr "Insère la date et l'heure courante à l'emplacement du curseur."
 
 #: ../plugins/time/time.glade2.h:3
 msgid "<span size=\"small\">01/11/2002 17:52:00</span>"
