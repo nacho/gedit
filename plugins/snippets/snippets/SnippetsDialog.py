@@ -369,7 +369,7 @@ class SnippetsDialog:
 			return None
 		else:
 			return self.model.get_value(self.model.get_iter( \
-					(path[0],)), self.SORT_COLUMN)
+					(path[0],)), self.OBJ_COLUMN).get_id()
 
 	def new_snippet(self, properties=None):
 		if not self.language_path:

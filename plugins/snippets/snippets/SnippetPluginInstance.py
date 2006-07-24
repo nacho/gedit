@@ -104,7 +104,7 @@ class SnippetsPluginInstance:
 			self.window.remove_accel_group(accel_group)
 
 		if self.current_controller:
-			self.current_language = self.current_controller.language_name
+			self.current_language = self.current_controller.language_id
 			
 			if self.current_language != None:
 				accel_group = SnippetsLibrary().get_accel_group( \

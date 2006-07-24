@@ -1,3 +1,17 @@
+2004-07-24  Steve Frécinaux  <steve@istique.net>
+
+	Fix bug #348558 – Snippets use language.get_name() instead of .get_id()
+	
+	* plugins/snippets/snippets/SnippetController.py:
+	* plugins/snippets/snippets/SnippetPluginInstance.py:
+	
+	Replace SourceLanguage.get_name() calls with SourceLanguage.get_id()
+	ones. Rename SnippetController.language_name into
+	SnippetController.language_id to avoid confusion.
+	
+	* plugins/snippets/snippets/SnippetsDialog.py: get_language() now
+	returns the id of the language instead of its name.
+
 2006-07-24  Steve Frécinaux  <steve@istique.net>
 
 	Fix build errors due to missing file.

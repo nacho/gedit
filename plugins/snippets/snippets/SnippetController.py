@@ -39,7 +39,7 @@ class SnippetController:
 		
 		self.update_placeholders = []
 		self.jump_placeholders = []
-		self.language_name = 0
+		self.language_id = 0
 		self.timeout_update_id = 0
 		
 		self.set_view(view)
@@ -98,34 +98,34 @@ class SnippetController:
 					'notify::language', self.on_notify_language)
 			
 			self.update_language()
-		elif self.language_name != 0:
-			SnippetsLibrary().unref(self.language_name)
+		elif self.language_id != 0:
+			SnippetsLibrary().unref(self.language_id)
 
 	# Call this whenever the language in the view changes. This makes sure that
 	# the correct language is used when finding snippets
 	def update_language(self):
 		lang = self.view.get_buffer().get_language()
 
-		if lang == None and self.language_name == None:
+		if lang == None and self.language_id == None:
 			return
-		elif lang and lang.get_name() == self.language_name:
+		elif lang and lang.get_id() == self.language_id:
 			return
 
-		if self.language_name != 0:
-			SnippetsLibrary().unref(self.language_name)
+		if self.language_id != 0:
+			SnippetsLibrary().unref(self.language_id)
 
 		if lang:
-			self.language_name = lang.get_name()
+			self.language_id = lang.get_id()
 		else:
-			self.language_name = None
+			self.language_id = None
 
 		self.instance.language_changed(self)
-		SnippetsLibrary().ref(self.language_name)
+		SnippetsLibrary().ref(self.language_id)
 
 	def accelerator_activate(self, keyval, mod):
 		accelerator = gtk.accelerator_name(keyval, mod)
 		snippets = SnippetsLibrary().from_accelerator(accelerator, \
-				self.language_name)
+				self.language_id)
 
 		snippets_debug('Accel!')
 
@@ -405,7 +405,7 @@ class SnippetController:
 		if not word:
 			return self.skip_to_next_placeholder()
 		
-		snippets = SnippetsLibrary().from_tag(word, self.language_name)
+		snippets = SnippetsLibrary().from_tag(word, self.language_id)
 		
 		if snippets:
 			if len(snippets) == 1:
@@ -504,8 +504,8 @@ class SnippetController:
 			
 			nodes = SnippetsLibrary().get_snippets(None)
 			
-			if self.language_name:
-				nodes += SnippetsLibrary().get_snippets(self.language_name)
+			if self.language_id:
+				nodes += SnippetsLibrary().get_snippets(self.language_id)
 			
 			if prefix and len(prefix) == 1 and not prefix.isalnum():
 				hasnodes = False
@@ -625,7 +625,7 @@ class SnippetController:
 		elif not library.loaded and \
 				library.valid_accelerator(event.keyval, event.state):
 			library.ensure_files()
-			library.ensure(self.language_name)
+			library.ensure(self.language_id)
 			self.accelerator_activate(event.keyval, \
 					event.state & gtk.accelerator_get_default_mod_mask())
 
