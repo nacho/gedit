@@ -1,3 +1,23 @@
+2006-07-24  Steve Frécinaux  <steve@istique.net>
+
+	Fix build errors due to missing file.
+
+	* gedit/plugins/filebrowser/Makefile.am:
+	* gedit/plugins/filebrowser/gedit-file-browser-enum-types.h.template:
+	* gedit/plugins/filebrowser/gedit-file-browser-enum-types.c.template:
+	* gedit/plugins/filebrowser/gedit-file-browser-enum-register.c.template:
+
+	Generate enum type description using glib-mkenums.
+	
+	* gedit/plugins/filebrowser/gedit-file-browser-error.h: create a file to
+	contain the Error enum.
+	
+	* plugins/filebrowser/gedit-file-browser-plugin.c:
+	* plugins/filebrowser/gedit-file-browser-store.c:
+	* plugins/filebrowser/gedit-file-browser-widget.c:
+	
+	Adapt for above changes.
+
 2006-07-24  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* gedit/plugins/filebrowser/*: let there be a file tree pane.

@@ -32,12 +32,13 @@
 #include <gedit/gedit-plugin.h>
 
 #include "gedit-file-browser-utils.h"
+#include "gedit-file-browser-error.h"
 #include "gedit-file-browser-widget.h"
 #include "gedit-file-browser-view.h"
 #include "gedit-file-browser-store.h"
 #include "gedit-file-bookmarks-store.h"
 #include "gedit-file-browser-marshal.h"
-#include "enum-types.h"
+#include "gedit-file-browser-enum-types.h"
 
 #define GEDIT_FILE_BROWSER_WIDGET_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_FILE_BROWSER_WIDGET, GeditFileBrowserWidgetPrivate))
 #define XML_UI_FILE GEDIT_FILE_BROWSER_DIR "/gedit-file-browser-widget-ui.xml"

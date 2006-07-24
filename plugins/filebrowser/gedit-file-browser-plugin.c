@@ -30,9 +30,10 @@
 #include <gconf/gconf-client.h>
 #include <string.h>
 
-#include "enum-types.h"
+#include "gedit-file-browser-enum-types.h"
 #include "gedit-file-browser-plugin.h"
 #include "gedit-file-browser-utils.h"
+#include "gedit-file-browser-error.h"
 #include "gedit-file-browser-widget.h"
 
 #define WINDOW_DATA_KEY	        "GeditFileBrowserPluginWindowData"

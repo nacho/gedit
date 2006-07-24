@@ -12,28 +12,32 @@ INCLUDES = \
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
 	-DGEDIT_FILE_BROWSER_DIR=\""$(filebrowserdir)/"\"
 
-BUILT_SOURCES = 			\
-	gedit-file-browser-marshal.h \
+BUILT_SOURCES = \
+	gedit-file-browser-enum-types.h		\
+	gedit-file-browser-enum-types.c		\
+	gedit-file-browser-marshal.h 		\
 	gedit-file-browser-marshal.c
 
 plugin_LTLIBRARIES = libfilebrowser.la
 
-libfilebrowser_la_SOURCES = 			\
+NOINST_H_FILES = \
+	gedit-file-bookmarks-store.h 		\
+	gedit-file-browser-store.h 		\
+	gedit-file-browser-view.h 		\
+	gedit-file-browser-widget.h 		\
+	gedit-file-browser-error.h		\
+	gedit-file-browser-utils.h		\
+	gedit-file-browser-plugin.h
+
+libfilebrowser_la_SOURCES = \
 	$(BUILT_SOURCES) 			\
 	gedit-file-bookmarks-store.c 		\
-	gedit-file-bookmarks-store.h 		\
 	gedit-file-browser-store.c 		\
-	gedit-file-browser-store.h 		\
 	gedit-file-browser-view.c 		\
-	gedit-file-browser-view.h 		\
 	gedit-file-browser-widget.c 		\
-	gedit-file-browser-widget.h 		\
-	enum-types.c 				\
-	enum-types.h 				\
 	gedit-file-browser-utils.c 		\
-	gedit-file-browser-utils.h		\
 	gedit-file-browser-plugin.c		\
-	gedit-file-browser-plugin.h
+	$(NOINST_H_FILES)
 
 libfilebrowser_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
 
@@ -44,6 +48,14 @@ glade_DATA =
 plugin_in_files = filebrowser.gedit-plugin.desktop.in
 
 %.gedit-plugin: %.gedit-plugin.desktop.in $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*po) ; $(INTLTOOL_MERGE) $(top_srcdir)/po $< $@ -d -u -c $(top_builddir)/po/.intltool-merge-cache
+
+gedit-file-browser-enum-types.h: gedit-file-browser-enum-types.h.template $(NOINST_H_FILES) $(GLIB_MKENUMS)
+	(cd $(srcdir) && $(GLIB_MKENUMS) --template gedit-file-browser-enum-types.h.template $(NOINST_H_FILES)) > $@
+	
+gedit-file-browser-enum-types.c: gedit-file-browser-enum-types.c.template gedit-file-browser-enum-register.c.template $(NOINST_H_FILES) $(GLIB_MKENUMS)
+	(cd $(srcdir) && \
+	 $(GLIB_MKENUMS) --template gedit-file-browser-enum-types.c.template $(NOINST_H_FILES) && \
+	 $(GLIB_MKENUMS) --template gedit-file-browser-enum-register.c.template $(NOINST_H_FILES)) > $@
 
 gedit-file-browser-marshal.h: gedit-file-browser-marshal.list $(GLIB_GENMARSHAL)
 	$(GLIB_GENMARSHAL) $< --header --prefix=gedit_file_browser_marshal > $@
@@ -72,8 +84,11 @@ endif
 
 
 EXTRA_DIST = \
-	$(plugin_in_files)		\
-	$(schemas_in_files)		\
+	$(plugin_in_files)				\
+	$(schemas_in_files)				\
+	gedit-file-browser-enum-types.h.template	\
+	gedit-file-browser-enum-types.c.template	\
+	gedit-file-browser-enum-register.c.template	\
 	gedit-file-browser-marshal.list
 
 CLEANFILES = \

@@ -29,7 +29,8 @@
 
 #include "gedit-file-browser-store.h"
 #include "gedit-file-browser-marshal.h"
-#include "enum-types.h"
+#include "gedit-file-browser-enum-types.h"
+#include "gedit-file-browser-error.h"
 #include "gedit-file-browser-utils.h"
 
 #define GEDIT_FILE_BROWSER_STORE_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE((object), GEDIT_TYPE_FILE_BROWSER_STORE, GeditFileBrowserStorePrivate))
