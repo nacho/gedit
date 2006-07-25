@@ -84,6 +84,7 @@ endif
 
 
 EXTRA_DIST = \
+	$(filebrowser_DATA)				\
 	$(plugin_in_files)				\
 	$(schemas_in_files)				\
 	gedit-file-browser-enum-types.h.template	\
