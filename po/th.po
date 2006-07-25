@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-24 16:29+0700\n"
-"PO-Revision-Date: 2006-06-24 16:35+0700\n"
+"POT-Creation-Date: 2006-07-25 17:30+0700\n"
+"PO-Revision-Date: 2006-07-25 18:43+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <L10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -2628,6 +2628,319 @@ msgstr "_บันทึก:"
 msgid "_Tools:"
 msgstr "เครื่อ_งมือ:"
 
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr "เปิดใช้การคืนค่าสำหรับแฟ้มในเครือข่าย"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+msgid "File Browser Filter Mode"
+msgstr "รูปแบบการกรองแฟ้มในช่องเรียกดูแฟ้ม"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+msgid "File Browser Filter Pattern"
+msgstr "แพตเทิร์นการกรองแฟ้มในช่องเรียกดูแฟ้ม"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+msgid "File Browser Root Directory"
+msgstr "ไดเรกทอรีรากของช่องเรียกดูแฟ้ม"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+msgid "File Browser Virtual Root Directory"
+msgstr "ไดเรกทอรีรากเสมือนของช่องเรียกดูแฟ้ม"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with nautilus etc)"
+msgstr ""
+"ถ้ากำหนดเป็นจริง ปลั๊กอินช่องเรียกดูแฟ้มจะแสดงไดเรกทอรีของแฟ้มแรกที่เปิด "
+"ถ้ายังไม่มีการใช้ช่องเรียกดูแฟ้มมาก่อน (ดังนั้น โดยทั่วไปแล้ว "
+"คีย์นี้จะมีผลกับการเปิดเอกสารจากบรรทัดคำสั่ง หรือจาก nautilus เป็นต้น)"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+msgid "Open With Tree View"
+msgstr "แสดงแบบผังต้นไม้"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr "เปิดช่องเรียกดูแฟ้มด้วยแผนผังแบบต้นไม้แทนแบบที่คั่นหน้า"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+msgid "Set Location To First Document"
+msgstr "กำหนดตำแหน่งที่ตั้งตามแฟ้มแรก"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+msgid "Sets whether to enable restoring of remote locations."
+msgstr "กำหนดว่าจะเปิดใช้การคืนค่าสำหรับแฟ้มในเครือข่ายหรือไม่"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+msgid "TRUE"
+msgstr "TRUE"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+"ไดเรกทอรีรากที่ช่องเรียกดูแฟ้มจะใช้เมื่อโหลดปลั๊กอินช่องเรียกดูแฟ้ม โดยค่าคีย์ onload/tree_view "
+"เป็นจริง"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+"ไดเรกทอรีรากเสมือนที่ช่องเรียกดูแฟ้มจะใช้เมื่อโหลดปลั๊กอินช่องเรียกดูแฟ้ม โดยค่าคีย์ "
+"onload/tree_view เป็นจริง ไดเรกทอรีรากเสมือนต้องอยู่ใต้รากจริงเสมอ"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+"แพตเทิร์นการกรองสำหรับกรองแฟ้มในช่องเรียกดูแฟ้ม การกรองนี้ กรองต่อจาก filter_mode "
+"อีกชั้นหนึ่ง"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:15
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+"ค่านี้กำหนดว่าแฟ้มใดจะถูกกรองออกไปจากช่องเรียกดูแฟ้ม ค่าที่เป็นไปได้คือ: none (ไม่กรอง), "
+"hidden (กรองแฟ้มซ่อนออกไป), binary (กรองแฟ้มไบนารีออกไป) และ hidden_and_binary "
+"(กรองทั้งแฟ้มซ่อนและแฟ้มไบนารีออกไป)"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:16
+msgid "hidden_and_binary"
+msgstr "hidden_and_binary"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr "เลือกแฟ้มอย่างสะดวกจากช่องด้านข้าง"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "ช่องเรียกดูแฟ้ม"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:352
+msgid "_Set root to active document"
+msgstr "_กำหนดรากตามเอกสารที่ใช้งานอยู่"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:354
+msgid "Set the root to the active document location"
+msgstr "กำหนดรากเป็นตำแหน่งของเอกสารที่ใช้งานอยู่"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:356
+msgid "_Open terminal here"
+msgstr "เ_ปิดเทอร์มินัลที่นี่"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:358
+msgid "Open a terminal at the currently opened directory"
+msgstr "เปิดเทอร์มินัลที่ไดเรกทอรีที่กำลังเปิดอยู่"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:470
+msgid "File Browser"
+msgstr "ช่องเรียกดูแฟ้ม"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:564
+msgid "An error occurred while creating a new directory"
+msgstr "เกิดข้อผิดพลาดขณะสร้างไดเรกทอรีใหม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:567
+msgid "An error occurred while creating a new file"
+msgstr "เกิดข้อผิดพลาดขณะสร้างแฟ้มใหม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+msgid "An error occurred while renaming a file or directory"
+msgstr "เกิดข้อผิดพลาดขณะเปลี่ยนชื่อแฟ้มหรือไดเรกทอรี"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:577
+msgid "An error occurred while deleting a file or directory"
+msgstr "เกิดข้อผิดพลาดขณะลบแฟ้มหรือไดเรกทอรี"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:582
+msgid "An error occurred while opening a directory in the file manager"
+msgstr "เกิดข้อผิดพลาดขณะเปิดไดเรกทอรีในโปรแกรมจัดการแฟ้ม"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:586
+msgid "An error occurred while setting a root directory"
+msgstr "เกิดข้อผิดพลาดขณะกำหนดไดเรกทอรีราก"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+msgid "An error occurred while loading a directory"
+msgstr "เกิดข้อผิดพลาดขณะเรียกข้อมูลไดเรกทอรี"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
+msgid "An error occurred"
+msgstr "เกิดข้อผิดพลาด"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:817
+msgid ""
+"Cannot move file to trash, do you\n"
+"want to delete immediately?"
+msgstr ""
+"ไม่สามารถย้ายแฟ้มไปลงถังขยะได้\n"
+"คุณต้องการจะลบทันทีเลยหรือไม่?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:820
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr "ไม่สามารถย้ายแฟ้ม \"%s\" ไปลงถังขยะได้"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:856
+#, c-format
+msgid ""
+"Are you sure you want to\n"
+"permanently delete \"%s\"?"
+msgstr ""
+"คุณแน่ใจหรือไม่ว่าต้องการลบ\n"
+"\"%s\" อย่างถาวร?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:860
+msgid "If you delete an item it is permanently lost."
+msgstr "ถ้าคุณลบรายการนี้ มันจะสูญหายอย่างถาวร"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2437
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
+msgid "Invalid uri"
+msgstr "URI ไม่ถูกต้อง"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2795
+msgid "file"
+msgstr "แฟ้ม"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2816
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2863
+msgid ""
+"The new file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+"แฟ้มใหม่ที่สร้างถูกกรองออกอยู่ คุณต้องปรับกฎการกรองของคุณเพื่อให้มองเห็นแฟ้มได้"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2844
+msgid "directory"
+msgstr "ไดเรกทอรี"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:699
+msgid "Bookmarks"
+msgstr "ที่คั่นหน้า"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
+msgid "_New Directory"
+msgstr "ไ_ดเรกทอรีใหม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
+msgid "Add new empty directory"
+msgstr "สร้างไดเรกทอรีใหม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+msgid "New F_ile"
+msgstr "แ_ฟ้มใหม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
+msgid "Add new empty file"
+msgstr "สร้างแฟ้มใหม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+msgid "_Rename"
+msgstr "เปลี่ยน_ชื่อ"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+msgid "Rename selected file or directory"
+msgstr "เปลี่ยนชื่อแฟ้มหรือไดเรกทอรีที่เลือก"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+msgid "_Move To Trash"
+msgstr "_ทิ้งลงถังขยะ"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+msgid "Move selected file or directory to trash"
+msgstr "ย้ายแฟ้มหรือไดเรกทอรีที่เลือกไปลงถังขยะ"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+msgid "_Delete"
+msgstr "_ลบ"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+msgid "Delete selected file or directory"
+msgstr "ลบแฟ้มหรือไดเรกทอรีที่เลือก"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+msgid "_Previous Location"
+msgstr "ตำแหน่ง_ก่อนหน้า"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+msgid "Go to previous location"
+msgstr "ไปยังตำแหน่งที่แล้ว"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+msgid "_Next Location"
+msgstr "ตำแหน่ง_ถัดไป"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+msgid "Go to next location"
+msgstr "ไปยังตำแหน่งถัดไป"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "Re_fresh View"
+msgstr "แสดงผลให_ม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "Refresh the view"
+msgstr "แสดงผลใหม่"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "_View Directory"
+msgstr "แ_สดงไดเรกทอรี"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "View directory in file manager"
+msgstr "แสดงไดเรกทอรีด้วยโปรแกรมจัดการแฟ้ม"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+msgid "Show _Hidden"
+msgstr "แสดงแฟ้มซ่อ_น"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+msgid "Show hidden files and directories"
+msgstr "แสดงแฟ้มและไดเรกทอรีที่ซ่อนอยู่"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+msgid "Show _Binary"
+msgstr "แสดงแฟ้มไ_บนารี"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+msgid "Show binary files"
+msgstr "แสดงแฟ้มไบนารี"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:945
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:977
+msgid "Previous location"
+msgstr "ตำแหน่งก่อนหน้า"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:938
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:970
+msgid "Go to a previously opened location"
+msgstr "ไปยังตำแหน่งล่าสุดที่เปิด"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
+msgid "Next location"
+msgstr "ตำแหน่งถัดไป"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1132
+msgid "Advanced filtering"
+msgstr "การกรองแบบละเอียด"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "เยื้อ_ง"
@@ -3240,20 +3553,20 @@ msgstr "ตรวจตัวสะกดในเอกสารนี้"
 msgid "Spell checker"
 msgstr "ตรวจตัวสะกด"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
 msgid "Select the group of tags you want to use"
 msgstr "เลือกกลุ่มแท็กที่ต้องการใช้"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
 msgid "Available Tag Lists"
 msgstr "รายการแท็กที่มี"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
 msgid "Tags"
 msgstr "แท็ก"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "ดับเบิลคลิกที่แท็กที่ต้องการแทรกในเอกสารปัจจุบัน"
 
@@ -4851,9 +5164,6 @@ msgstr "ใช้รูปแบบ_กำหนดเอง"
 #~ msgid "Executing command"
 #~ msgstr "กำลังเรียกคำสั่งทำงาน"
 
-#~ msgid "An error occurred while running the selected command."
-#~ msgstr "เกิดข้อผิดพลาดขณะเรียกคำสั่งที่กำหนด"
-
 #~ msgid ""
 #~ "Executes an external program and, if required, displays its output in the "
 #~ "output window."
@@ -4862,14 +5172,8 @@ msgstr "ใช้รูปแบบ_กำหนดเอง"
 #~ msgid "Shell command"
 #~ msgstr "คำสั่งเชลล์"
 
-#~ msgid "Select the working directory..."
-#~ msgstr "เลือกไดเรกทอรีทำงาน..."
-
 #~ msgid "_Show results in Output Window"
 #~ msgstr "แสดง_ผลในหน้าต่างแสดงผล"
-
-#~ msgid "_Working directory:"
-#~ msgstr "ไ_ดเรกทอรีทำงาน:"
 
 #~ msgid "gedit: Shell Output plugin"
 #~ msgstr "gedit: เรียกคำสั่งเชลล์"
@@ -4952,9 +5256,6 @@ msgstr "ใช้รูปแบบ_กำหนดเอง"
 
 #~ msgid "gedit cannot handle this kind of location in write mode."
 #~ msgstr "gedit ไม่สามารถทำงานที่ตำแหน่งนี้ใน write mode ได้"
-
-#~ msgid "Invalid filename."
-#~ msgstr "ชื่อแฟ้มไม่ถูกต้อง"
 
 #~ msgid "Select a file to open"
 #~ msgstr "เลือกแฟ้มที่จะเปิด"
@@ -5155,9 +5456,6 @@ msgstr "ใช้รูปแบบ_กำหนดเอง"
 
 #~ msgid "_Customize Toolbar"
 #~ msgstr "กำหนดแ_บบแถบเครื่องมือ"
-
-#~ msgid "_Delete"
-#~ msgstr "_ลบ"
 
 #~ msgid "_Desktop Default"
 #~ msgstr "ค่าปริยายของเ_ดสก์ทอป"
