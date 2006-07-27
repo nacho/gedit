@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-03 09:48+0300\n"
-"PO-Revision-Date: 2006-07-03 09:54+0300\n"
+"POT-Creation-Date: 2006-07-27 13:27+0300\n"
+"PO-Revision-Date: 2006-07-27 13:36+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -689,8 +689,7 @@ msgstr[1] ""
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:498
 #, c-format
 msgid "Changes to document \"%s\" will be permanently lost."
-msgstr ""
-"Muutokset asiakirjaan \"%s\" menetetään lopullisesti."
+msgstr "Muutokset asiakirjaan \"%s\" menetetään lopullisesti."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:501
 #, c-format
@@ -2752,6 +2751,313 @@ msgstr "_Tallenna_"
 msgid "_Tools:"
 msgstr "Työ_kalut:"
 
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr "Ota käyttöön palautus etäsijainneissa"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+msgid "FALSE"
+msgstr "EPÄTOSI"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+msgid "File Browser Filter Mode"
+msgstr "Tiedostoselaimen suodatintila"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+msgid "File Browser Filter Pattern"
+msgstr "Tiedostoselaimen suodatinmalli"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+msgid "File Browser Root Directory"
+msgstr "Tiedostoselaimen juurihakemisto"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+msgid "File Browser Virtual Root Directory"
+msgstr "Tiedostoselaimen virtuaalinen juurihakemisto"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with nautilus etc)"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+msgid "Open With Tree View"
+msgstr "Avaa puunäkymässä"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+msgid "Set Location To First Document"
+msgstr "Aseta sijanti ensimmäiseen asiakirjaan"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+msgid "Sets whether to enable restoring of remote locations."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+msgid "TRUE"
+msgstr "TOSI"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:15
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:16
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:17
+msgid "hidden_and_binary"
+msgstr "piilo_ja_binääri"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr "Helppo tiedostonkäsittely sivupaneelista"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "Tiedostoselainpaneeli"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:352
+msgid "_Set root to active document"
+msgstr "_Aseta juuri aktiivinen asiakirjan sijaintiin"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:354
+msgid "Set the root to the active document location"
+msgstr "Aseta juurikansioksi aktiivisen asiakirjan sijainti"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:356
+msgid "_Open terminal here"
+msgstr "_Avaa pääte tähän"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:358
+msgid "Open a terminal at the currently opened directory"
+msgstr "Avaa pääte nyt valittuun kansioon"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:470
+#, fuzzy
+msgid "File Browser"
+msgstr "Tiedosto: %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:564
+#, fuzzy
+msgid "An error occurred while creating a new directory"
+msgstr "Virhe suoritettaessa valittua komentoa."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:567
+#, fuzzy
+msgid "An error occurred while creating a new file"
+msgstr "Virhe suoritettaessa valittua komentoa."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+msgid "An error occurred while renaming a file or directory"
+msgstr "Virhe nimettäessä tiedostoa tai kansiota uudestaan"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:577
+msgid "An error occurred while deleting a file or directory"
+msgstr "Virhe poistettaessa tiedostoa tai kansiota"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:582
+msgid "An error occurred while opening a directory in the file manager"
+msgstr "Virhe avattaessa kansiota tiedostonhalintaan"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:586
+msgid "An error occurred while setting a root directory"
+msgstr "Virhe asetettaessa juurikansiota"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+msgid "An error occurred while loading a directory"
+msgstr "Virhe ladattaessa kansiota"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
+msgid "An error occurred"
+msgstr "Tapahtui virhe"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:817
+msgid ""
+"Cannot move file to trash, do you\n"
+"want to delete immediately?"
+msgstr ""
+"Tiedostoa ei voi siirtää roskakoriin.\n"
+"Haluatko poistaa sen kokonaan?" 
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:820
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr "Tiedostoa \"%s\" ei voi siirtää roskakoriin."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:856
+#, c-format
+msgid ""
+"Are you sure you want to\n"
+"permanently delete \"%s\"?"
+msgstr ""
+"Haluatko varmasti poistaa kohteen\n"
+"\"%s\" pysyvästi?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:860
+msgid "If you delete an item it is permanently lost."
+msgstr "Jos poistat kohteen se menetetään pysyvästi."
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2437
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
+msgid "Invalid uri"
+msgstr "Virheellinen URI"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2795
+msgid "file"
+msgstr "tiedosto"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2816
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2863
+msgid ""
+"The new file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2844
+msgid "directory"
+msgstr "kansio"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:699
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
+msgid "_New Directory"
+msgstr "_Uusi kansio"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
+msgid "Add new empty directory"
+msgstr "Lisää uusi tyhjä kansio"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+msgid "New F_ile"
+msgstr "Uusi _tiedosto"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
+msgid "Add new empty file"
+msgstr "Lisää uusi tyhjä tiedosto"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+msgid "_Rename"
+msgstr "_Nimeä uudestaan"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+msgid "Rename selected file or directory"
+msgstr "Nimeä valittu tiedosto tai kansio uudestaan"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+msgid "_Move To Trash"
+msgstr "_Siirrä roskakoriin"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+msgid "Move selected file or directory to trash"
+msgstr "Siirrä valittu tiedosto tai kansio roskakoriin"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+msgid "_Delete"
+msgstr "_Poista"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+msgid "Delete selected file or directory"
+msgstr "Poista valittu tiedosto tai kansio"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+msgid "_Previous Location"
+msgstr "_Edellinen sijainti"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+msgid "Go to previous location"
+msgstr "Siirry edelliseen sijaintiin"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+msgid "_Next Location"
+msgstr "_Seuraava sijainti"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+msgid "Go to next location"
+msgstr "Siirry seuraavaan sijaintiin"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "Re_fresh View"
+msgstr "_Päivitä näkymä"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "Refresh the view"
+msgstr "Päivitä näkymä"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "_View Directory"
+msgstr "_Näytä kansio:"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "View directory in file manager"
+msgstr "Näytä kansio tiedostoselaimessa"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+msgid "Show _Hidden"
+msgstr "Näytä _piilotetut"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+msgid "Show hidden files and directories"
+msgstr "Näytä piilotiedostot ja -kansiot"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+msgid "Show _Binary"
+msgstr "Näytä _binäärit"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+msgid "Show binary files"
+msgstr "Näytä binääritiedostot"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:945
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:977
+msgid "Previous location"
+msgstr "Edellinen sijainti"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:938
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:970
+msgid "Go to a previously opened location"
+msgstr "Siirry edelliseen avattuun sijaintiin"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
+msgid "Next location"
+msgstr "Seuraava sijainti"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1132
+msgid "Advanced filtering"
+msgstr "Edistynyt suodatus"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Sisennä"
@@ -3358,20 +3664,20 @@ msgstr "Tarkista aktiivisen asiakirjan oikeinkirjoitus."
 msgid "Spell checker"
 msgstr "Oikoluku"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
 msgid "Select the group of tags you want to use"
 msgstr "Valitse tagiryhmä jota haluat käyttää"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
 msgid "Available Tag Lists"
 msgstr "Käytettävissä olevat tagit"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
 msgid "Tags"
 msgstr "Tagit"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Kaksoisnapsauta tagia lisätäksesi sen nykyiseen asiakirjaan"
 
@@ -4974,9 +5280,6 @@ msgstr "_Käytä mukautettua muotoilua"
 #~ msgid "Executing command"
 #~ msgstr "Suoritetaan komentoa"
 
-#~ msgid "An error occurred while running the selected command."
-#~ msgstr "Virhe suoritettaessa valittua komentoa."
-
 #~ msgid ""
 #~ "Executes an external program and, if required, displays its output in the "
 #~ "output window."
@@ -4987,14 +5290,8 @@ msgstr "_Käytä mukautettua muotoilua"
 #~ msgid "Shell command"
 #~ msgstr "Komentotulkin komento"
 
-#~ msgid "Select the working directory..."
-#~ msgstr "Valitse työhakemisto..."
-
 #~ msgid "_Show results in Output Window"
 #~ msgstr "_Näytä tulokset tulosteikkunassa"
-
-#~ msgid "_Working directory:"
-#~ msgstr "_Työhakemisto:"
 
 #~ msgid "gedit: Shell Output plugin"
 #~ msgstr "gedit: Komentotulkkituloste liitännäinen"
