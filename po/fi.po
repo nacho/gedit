@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-27 13:27+0300\n"
-"PO-Revision-Date: 2006-07-27 13:36+0300\n"
+"POT-Creation-Date: 2006-07-29 08:14+0300\n"
+"PO-Revision-Date: 2006-07-29 08:22+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -2782,16 +2782,21 @@ msgid ""
 "generally applies to opening a document from the command line or opening it "
 "with nautilus etc)"
 msgstr ""
+"Jos TOSI, tiedostoselain-liitännäinen näyttää ensimmaiseksi avatun asiakirjan "
+"kansion, edellyttäen että tiedostoselainta ei ole vielä käytetty. Yleensä "
+"tämä koskee asiakirjan avaamista komentoriviltä tai esimerkiksi nautiluksesta."
+
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:8
 msgid "Open With Tree View"
-msgstr "Avaa puunäkymässä"
+msgstr "Avaa puunäkymä"
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:9
 msgid ""
 "Open the tree view when the file browser plugin gets loaded instead of the "
 "bookmarks view"
 msgstr ""
+"Avaa puunäkymä kirjanmerkkinäkymän sijasta, kun tiedostoselain ladataan"
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:10
 msgid "Set Location To First Document"
@@ -2799,7 +2804,7 @@ msgstr "Aseta sijanti ensimmäiseen asiakirjaan"
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:11
 msgid "Sets whether to enable restoring of remote locations."
-msgstr ""
+msgstr "Käytetäänkö etäsijaintien palautusta."
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:12
 msgid "TRUE"
@@ -2810,6 +2815,8 @@ msgid ""
 "The file browser root directory to use when loading the file browser plugin "
 "and onload/tree_view is TRUE."
 msgstr ""
+"Tiedostoselaimen juurikansiona käytettävä kansio, kun liitännäistä ladataan "
+"ja avain onload/tree_view on TOSI."
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:14
 msgid ""
@@ -2817,12 +2824,17 @@ msgid ""
 "plugin when onload/tree_view is TRUE. The virtual root must always be below "
 "the actual root."
 msgstr ""
+"Tiedostoselaimen virtuaalisena juurikansiona käytettävä kansio, kun "
+"liitännäistä ladataan ja avain onload/tree_view on TOSI. Virtuaalisen kansion "
+"täytyy aina olla todellisen juurikansion alikansio."
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:15
 msgid ""
 "The filter pattern to filter the file browser with. This filter works on top "
 "of the filter_mode."
 msgstr ""
+"Tiedostoselaimen listan suodatuksessa käytetty suodatin. Tämä suodatin on "
+"käytössä avaimen filter_mode määrittelemällä tavalla."
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:16
 msgid ""
@@ -2831,6 +2843,10 @@ msgid ""
 "(filter binary files) and hidden_and_binary (filter both hidden and binary "
 "files)."
 msgstr ""
+"Tämä avain määrittää, mitkä tiedostot suodatetaan tiedostoselaimessa. "
+"Kelvolliset arvot ovat: none (ei suodatusta), hidden (suodatetaan "
+"piilotiedostot), binary (suodatetaan binääritiedostot) sekä "
+"hidden_and_binary (suodatetaan piilo- ja binääritiedostot)"
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:17
 msgid "hidden_and_binary"
@@ -2861,19 +2877,16 @@ msgid "Open a terminal at the currently opened directory"
 msgstr "Avaa pääte nyt valittuun kansioon"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:470
-#, fuzzy
 msgid "File Browser"
-msgstr "Tiedosto: %s"
+msgstr "Tiedostoselain"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:564
-#, fuzzy
 msgid "An error occurred while creating a new directory"
-msgstr "Virhe suoritettaessa valittua komentoa."
+msgstr "Virhe luotaessa uutta kansiota"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:567
-#, fuzzy
 msgid "An error occurred while creating a new file"
-msgstr "Virhe suoritettaessa valittua komentoa."
+msgstr "Virhe luotaessa uutta tiedostoa"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
 msgid "An error occurred while renaming a file or directory"
@@ -2905,7 +2918,7 @@ msgid ""
 "want to delete immediately?"
 msgstr ""
 "Tiedostoa ei voi siirtää roskakoriin.\n"
-"Haluatko poistaa sen kokonaan?" 
+"Haluatko poistaa sen kokonaan?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:820
 #, c-format
@@ -2940,6 +2953,8 @@ msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
 msgstr ""
+"Uusi tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy säätää "
+"suodatinasetuksiasi, jos haluat nähdä sen."
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2844
 msgid "directory"
