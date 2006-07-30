@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-17 07:12+0200\n"
-"PO-Revision-Date: 2006-07-17 16:20+0300\n"
+"POT-Creation-Date: 2006-07-29 19:33+0200\n"
+"PO-Revision-Date: 2006-07-30 00:45+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -656,10 +656,8 @@ msgstr "Salvestamine on süsteemiülema poolt keelatud."
 #, c-format
 msgid "Changes to %d document will be permanently lost."
 msgid_plural "Changes to %d documents will be permanently lost."
-msgstr[0] ""
-"Dokumendile tehtud muudatused lähevad jäädavalt kaotsi."
-msgstr[1] ""
-"%d dokumendile tehtud muudatused lähevad jäädavalt kaotsi."
+msgstr[0] "Dokumendile tehtud muudatused lähevad jäädavalt kaotsi."
+msgstr[1] "%d dokumendile tehtud muudatused lähevad jäädavalt kaotsi."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:686
 #, c-format
@@ -1078,18 +1076,19 @@ msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr ""
+"Käsureal avamiseks määratud failidele kooditabeli seadmine"
 
 #: ../gedit/gedit.c:78
 msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr ""
+msgstr "Ülemise taseme akna loomine olemasolevale gedit'i instantsile"
 
 #: ../gedit/gedit.c:81
 msgid "Create a new document in an existing instance of gedit"
-msgstr ""
+msgstr "Uue dokumendi loomine olemasolevas gedit'i instantsis"
 
 #: ../gedit/gedit.c:84
 msgid "[FILE...]"
-msgstr ""
+msgstr "[FAIL...]"
 
 #: ../gedit/gedit.c:116
 #, c-format
@@ -1930,7 +1929,7 @@ msgstr "Printimise eelvaate sulgemine"
 #: ../gedit/gedit-print-job-preview.c:1096
 #: ../gedit/gedit-print-job-preview.c:1097
 msgid "Number of pages horizontally"
-msgstr ""
+msgstr "Lehekülgede horisontaalne nummerdamine"
 
 #: ../gedit/gedit-print-job-preview.c:1100
 #: ../gedit/gedit-print-job-preview.c:1101
@@ -2686,6 +2685,308 @@ msgstr "_Salvesta:"
 msgid "_Tools:"
 msgstr "_Tööriistad:"
 
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr "Võrgukohtade taastamise lubamine"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+msgid "FALSE"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+msgid "File Browser Filter Mode"
+msgstr "Failisirvija filtrirežiim"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+msgid "File Browser Filter Pattern"
+msgstr "Failisirvija filtrimuster"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+msgid "File Browser Root Directory"
+msgstr "Failisirvija juurkataloog"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+msgid "File Browser Virtual Root Directory"
+msgstr "Failisirvija virtuaalne juurkataloog"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with nautilus etc)"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+msgid "Open With Tree View"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+msgid "Set Location To First Document"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+msgid "Sets whether to enable restoring of remote locations."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+msgid "TRUE"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:15
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:16
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:17
+msgid "hidden_and_binary"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr "Külgpaani kaudu hõlbus ligipääs failidele"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "Failisirvimispaan"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:352
+msgid "_Set root to active document"
+msgstr "_Määra juurikas aktiivseks kataloogiks"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:354
+msgid "Set the root to the active document location"
+msgstr "Juurkataloogi määramine aktiivse dokumendi asukohale"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:356
+msgid "_Open terminal here"
+msgstr "_Ava terminal siin"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:358
+msgid "Open a terminal at the currently opened directory"
+msgstr "Terminali avamine käesolevaga avatud kataloogis"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:470
+msgid "File Browser"
+msgstr "Failisirvija"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:564
+msgid "An error occurred while creating a new directory"
+msgstr "Uue kataloogi loomisel tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:567
+msgid "An error occurred while creating a new file"
+msgstr "Uue faili loomisel tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+msgid "An error occurred while renaming a file or directory"
+msgstr "Faili või kataloogi ümbernimetamisel tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:577
+msgid "An error occurred while deleting a file or directory"
+msgstr "Faili või kataloogi kustutamisel tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:582
+msgid "An error occurred while opening a directory in the file manager"
+msgstr "Faili või kataloogi avamisel failihalduris tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:586
+msgid "An error occurred while setting a root directory"
+msgstr "Juurkataloogi seadmisel tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+msgid "An error occurred while loading a directory"
+msgstr "Kataloogi laadimisel tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
+msgid "An error occurred"
+msgstr "Tekkis viga"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:817
+msgid ""
+"Cannot move file to trash, do you\n"
+"want to delete immediately?"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:820
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr "Faili \"%s\" pole võimalik prügikasti tõsta."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:856
+#, c-format
+msgid ""
+"Are you sure you want to\n"
+"permanently delete \"%s\"?"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:860
+msgid "If you delete an item it is permanently lost."
+msgstr "Kui sa selle kirje kustutad, siis läheb see jäädavalt kaotsi."
+"Kui sa ei salvesta, siis lähevad viimase minuti jooksul tehtud muudatused "
+"jäädavalt kaotsi."
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2437
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
+msgid "Invalid uri"
+msgstr "Vigane uri"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2795
+msgid "file"
+msgstr "fail"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2816
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2863
+msgid ""
+"The new file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2844
+msgid "directory"
+msgstr "kataloog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:699
+msgid "Bookmarks"
+msgstr "Järjehoidjad"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
+msgid "_New Directory"
+msgstr "_Uus kataloog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
+msgid "Add new empty directory"
+msgstr "Uue tühja kataloogi lisamine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+msgid "New F_ile"
+msgstr "Uus _fail"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
+msgid "Add new empty file"
+msgstr "Uue tühja faili lisamine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+msgid "_Rename"
+msgstr "_Nimeta ümber"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+msgid "Rename selected file or directory"
+msgstr "Valitud faili või kataloogi ümbernimetamine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+msgid "_Move To Trash"
+msgstr "_Tõsta prügikasti"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+msgid "Move selected file or directory to trash"
+msgstr "Valitud faili või kataloogi tõstmine prügikasti"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+msgid "_Delete"
+msgstr "_Kustuta"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+msgid "Delete selected file or directory"
+msgstr "Valitud faili või kataloogi kustutamine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+msgid "_Previous Location"
+msgstr "_Eelmine asukoht"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+msgid "Go to previous location"
+msgstr "Eelmisele asukohale siirdumine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+msgid "_Next Location"
+msgstr "_Järgmine asukoht"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+msgid "Go to next location"
+msgstr "Järgmisele asukohale siirdumine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "Re_fresh View"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "Refresh the view"
+msgstr "Vaate värskendamine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "_View Directory"
+msgstr "Vaata _kataloogi"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "View directory in file manager"
+msgstr "Kataloogi vaatamine failihalduris"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+msgid "Show _Hidden"
+msgstr "Näita _peidetuid"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+msgid "Show hidden files and directories"
+msgstr "Peidetud failide ja kataloogide näitamine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+msgid "Show _Binary"
+msgstr "Näita _binaarseid"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+msgid "Show binary files"
+msgstr "Binaarfailide näitamine"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:945
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:977
+msgid "Previous location"
+msgstr "Eelmine asukoht"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:938
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:970
+msgid "Go to a previously opened location"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
+msgid "Next location"
+msgstr "Järgmine asukoht"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1132
+msgid "Advanced filtering"
+msgstr "Laiendatud filtreerimine"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Taane"
@@ -3289,20 +3590,20 @@ msgstr "Käesoleva dokumendi õigekirja kontrollimine."
 msgid "Spell checker"
 msgstr "Õigekirjakontrollija"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
 msgid "Select the group of tags you want to use"
 msgstr "Vali kasutatav siltide grupp"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
 msgid "Available Tag Lists"
 msgstr ""
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
 msgid "Tags"
 msgstr "Sildid"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Sildi aktiivsesse dokumenti lisamiseks tee topeltklõps"
 
@@ -3380,7 +3681,7 @@ msgstr "Taustatekstuuri pealkiri"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "BaasURI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
 msgid "Base font"
@@ -3503,11 +3804,11 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Definition description"
-msgstr ""
+msgstr "Definitsiooni kirjeldus"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Definition list"
-msgstr ""
+msgstr "Definitsioonide loend"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Definition term"
@@ -4236,7 +4537,7 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Table data cell"
-msgstr ""
+msgstr "Tabeli andmelahter"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Table footer"
@@ -4248,7 +4549,7 @@ msgstr "Tabeli päis"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Table header cell"
-msgstr ""
+msgstr "Tabeli päiselahter"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Table row"
@@ -4260,19 +4561,19 @@ msgstr "Tabeli kokkuvõte"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:242
 msgid "Target - Blank"
-msgstr ""
+msgstr "Sihtkoht - tühi"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Target - Parent"
-msgstr ""
+msgstr "Sihtkoht - vanem"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Target - Self"
-msgstr ""
+msgstr "Sihtkoht - ise"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Target - Top"
-msgstr ""
+msgstr "Sihtkoht - kõige ülemine"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Teletype or monospace text style"
@@ -4308,7 +4609,7 @@ msgstr "Allajoonitud teksti laad"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:254
 msgid "Unordered list"
-msgstr ""
+msgstr "Järjestamata loend"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Use image map"
@@ -4324,11 +4625,11 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Variable or program argument"
-msgstr ""
+msgstr "Muutuja või programmiargument"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Vertical cell alignment"
-msgstr ""
+msgstr "Lahtri püstjoondus"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Vertical space"
@@ -4813,9 +5114,6 @@ msgstr "Kasutatakse o_ma vormingut"
 #~ msgid "gedit cannot handle this kind of location in write mode."
 #~ msgstr "gedit ei oska sellisesse asukohta kirjutada."
 
-#~ msgid "Invalid filename."
-#~ msgstr "Vigane failinimi."
-
 #~ msgid "A file named \"%s\" already exists.\n"
 #~ msgstr "Fail nimega \"%s\" on juba olemas.\n"
 
@@ -5006,9 +5304,6 @@ msgstr "Kasutatakse o_ma vormingut"
 #~ msgid "Executing command"
 #~ msgstr "Käsu täitmine"
 
-#~ msgid "An error occurred while running the selected command."
-#~ msgstr "Valitud käsu täitmisel tekkis viga."
-
 #~ msgid ""
 #~ "Executes an external program and, if required, displays its output in the "
 #~ "output window."
@@ -5016,14 +5311,8 @@ msgstr "Kasutatakse o_ma vormingut"
 #~ "Välise programmi käivitamine ja vajadusel tõsta selle väljundi kuvamine "
 #~ "väljundiaknas."
 
-#~ msgid "Select the working directory..."
-#~ msgstr "Vali töökataloog..."
-
 #~ msgid "_Show results in Output Window"
 #~ msgstr "_Tulemuste näitamine väljundiaknas"
-
-#~ msgid "_Working directory:"
-#~ msgstr "_Töökataloog:"
 
 #~ msgid "The selected text does not contain misspelled words."
 #~ msgstr ""
