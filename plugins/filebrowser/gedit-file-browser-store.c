@@ -70,20 +70,12 @@ struct _FileBrowserNode
 	GdkPixbuf *emblem;
 
 	FileBrowserNode *parent;
-	guint pos;
+	gint pos;
 };
 
 struct _FileBrowserNodeDir 
 {
-	GnomeVFSURI *uri;
-	gchar *mime_type;
-	guint flags;
-	gchar *name;
-
-	GdkPixbuf *icon;
-	GdkPixbuf *emblem;
-
-	FileBrowserNode *parent;
+	FileBrowserNode node;
 	GSList *children;
 
 	GnomeVFSAsyncHandle *load_handle;
@@ -1021,7 +1013,7 @@ model_resort_node (GeditFileBrowserStore * model, FileBrowserNode * node)
 		dir->children = g_slist_sort (dir->children,
 					      (GCompareFunc) (model->priv->
 							      sort_func));
-		neworder = g_new (gint, g_slist_length (dir->children));
+		neworder = g_new (gint, pos);
 		pos = 0;
 
 		/* Store the new positions */
@@ -2653,7 +2645,6 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 
 	parent = gnome_vfs_uri_get_parent (node->uri);
 	uri = gnome_vfs_uri_append_file_name (parent, new_name);
-	gnome_vfs_uri_unref (parent);
 
 	if (gnome_vfs_uri_equal (node->uri, uri)) {
 		gnome_vfs_uri_unref (uri);
@@ -2792,7 +2783,7 @@ gedit_file_browser_store_new_file (GeditFileBrowserStore * model,
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	parent_node = FILE_BROWSER_NODE_DIR (parent->user_data);
-	uri = unique_new_name (parent_node->uri, _("file"));
+	uri = unique_new_name (((FileBrowserNode *) parent_node)->uri, _("file"));
 
 	ret = gnome_vfs_create_uri (&handle, uri,
 				    GNOME_VFS_OPEN_NONE |
@@ -2841,7 +2832,7 @@ gedit_file_browser_store_new_directory (GeditFileBrowserStore * model,
 	g_return_val_if_fail (iter != NULL, FALSE);
 
 	parent_node = FILE_BROWSER_NODE_DIR (parent->user_data);
-	uri = unique_new_name (parent_node->uri, _("directory"));
+	uri = unique_new_name (((FileBrowserNode *) parent_node)->uri, _("directory"));
 
 	ret = gnome_vfs_make_directory_for_uri (uri, 0755);
 
