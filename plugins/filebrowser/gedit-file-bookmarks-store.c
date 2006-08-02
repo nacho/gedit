@@ -195,11 +195,6 @@ init_special_directories (GeditFileBookmarksStore * model)
 	add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_HOME |
 		 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
 
-	path = g_get_home_dir ();
-	local = gnome_vfs_get_uri_from_local_path (path);
-	uri = gnome_vfs_uri_new (local);
-	g_free (local);
-
 	local = g_build_filename (path, "Desktop", NULL);
 	uri = gnome_vfs_uri_new (local);
 	add_uri (model, uri, NULL, GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP |
@@ -213,6 +208,8 @@ init_special_directories (GeditFileBookmarksStore * model)
 		add_uri (model, uri, NULL,
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+	else
+		gnome_vfs_uri_unref (uri);
 
 	g_free (local);
 
@@ -402,6 +399,7 @@ init_bookmarks (GeditFileBookmarksStore * model)
 		}
 
 		g_strfreev (lines);
+		g_free (contents);
 
 		/* Add a watch */
 		if (model->priv->bookmarks_monitor == NULL) {
@@ -591,8 +589,10 @@ remove_node (GtkTreeModel * model, GtkTreeIter * iter, gboolean fromtree)
 				     (GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE |
 				      GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT),
 				     FALSE);
-		} else if (flags &
-			   GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR) {
+		} else if ((flags &
+			   GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR) ||
+			   (flags &
+			   GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK)) {
 			gnome_vfs_uri_unref ((GnomeVFSURI *) obj);
 		}
 	}
@@ -690,8 +690,10 @@ gedit_file_bookmarks_store_get_uri (GeditFileBookmarksStore * model,
 void
 gedit_file_bookmarks_store_refresh (GeditFileBookmarksStore * model)
 {
-	gtk_tree_store_clear (GTK_TREE_STORE (model));
+	gtk_tree_model_foreach (GTK_TREE_MODEL (model), foreach_remove_node,
+				NULL);
 
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	initialize_fill (model);
 }
 

@@ -213,15 +213,17 @@ restore_filter (GeditFileBrowserPluginData * data)
 	gedit_file_browser_store_set_filter_mode (
 	    gedit_file_browser_widget_get_browser_store (data->tree_widget),
 	    mode);
-	    
-	
+
 	pattern = gconf_client_get_string (client,
 	                                   FILE_BROWSER_BASE_KEY "/filter_pattern",
 	                                   NULL);
 
 	gedit_file_browser_widget_set_filter_pattern (data->tree_widget, 
 	                                              pattern);
+
 	g_object_unref (client);
+	g_free (filter_mode);
+	g_free (pattern);
 }
 
 static void
@@ -231,7 +233,8 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 	gchar * uri;
 	gchar * root;
 	GnomeVFSURI * guri;
-	
+	GnomeVFSURI * parent;
+
 	if (doc == NULL)
 		return;
 	
@@ -242,11 +245,16 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 	
 	guri = gnome_vfs_uri_new (uri);
 	
-	if (guri == NULL)
+	if (guri == NULL) {
+		g_free (uri);
 		return;
+	}
 	
-	if (gnome_vfs_uri_has_parent(guri))
-		guri = gnome_vfs_uri_get_parent (guri);
+	if (gnome_vfs_uri_has_parent(guri)) {
+		parent = gnome_vfs_uri_get_parent (guri);
+		gnome_vfs_uri_unref (guri);
+		guri = parent;
+	}
 
 	root = gnome_vfs_uri_to_string (guri, GNOME_VFS_URI_HIDE_NONE);
 

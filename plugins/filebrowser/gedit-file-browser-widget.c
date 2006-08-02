@@ -518,13 +518,17 @@ get_from_bookmark (GeditFileBrowserWidget * obj, gchar const *uri,
 		   gchar ** name, GdkPixbuf ** icon)
 {
 	GnomeVFSURI *guri;
+	gboolean result;
 
 	guri = gnome_vfs_uri_new (uri);
 
 	if (guri == NULL)
 		return FALSE;
 	
-	return get_from_bookmark_uri (obj, guri, name, icon);
+	result = get_from_bookmark_uri (obj, guri, name, icon);
+	gnome_vfs_uri_unref (guri);
+	
+	return TRUE;
 }
 
 static void
@@ -600,15 +604,23 @@ static guint
 uri_num_parents (GnomeVFSURI * from, GnomeVFSURI * to)
 {
 	guint parents = 0;
-	
+	GnomeVFSURI * tmp;
+
 	if (from == NULL)
 		return 0;
 	
+	from = gnome_vfs_uri_dup (from);
+	
 	while (gnome_vfs_uri_has_parent (from) && 
 	       !(to && gnome_vfs_uri_equal (from, to))) {
-		from = gnome_vfs_uri_get_parent (from);
+		tmp = gnome_vfs_uri_get_parent (from);
+		gnome_vfs_uri_unref (from);
+		from = tmp;
+		
 		++parents;
 	}
+	
+	gnome_vfs_uri_unref (from);
 	
 	return parents;
 }
@@ -620,6 +632,7 @@ insert_location_path (GeditFileBrowserWidget * obj)
 	GnomeVFSURI *virtual;
 	GnomeVFSURI *root;
 	GnomeVFSURI *current = NULL;
+	GnomeVFSURI * tmp;
 	GtkTreeIter separator;
 	GtkTreeIter iter;
 	guint indent;
@@ -655,16 +668,16 @@ insert_location_path (GeditFileBrowserWidget * obj)
 							   obj);
 		}
 
-		if (gnome_vfs_uri_equal (current, root))
+		if (gnome_vfs_uri_equal (current, root) || !gnome_vfs_uri_has_parent (current)) {
+			gnome_vfs_uri_unref (current);
 			break;
+		}
 
-		if (!gnome_vfs_uri_has_parent (current))
-			break;
-
-		current = gnome_vfs_uri_get_parent (current);
+		tmp = gnome_vfs_uri_get_parent (current);
+		gnome_vfs_uri_unref (current);
+		current = tmp;
 	}
 
-	gnome_vfs_uri_unref (virtual);
 	gnome_vfs_uri_unref (root);
 }
 
@@ -1364,13 +1377,21 @@ delete_selected_file (GeditFileBrowserWidget * obj, gboolean trash)
 	return result == GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 }
 
-static GnomeVFSURI const *
+static GnomeVFSURI *
 get_topmost_uri (GnomeVFSURI const *uri)
 {
-	while (gnome_vfs_uri_has_parent (uri))
-		uri = gnome_vfs_uri_get_parent (uri);
-
-	return uri;
+	GnomeVFSURI * tmp;
+	GnomeVFSURI * current;
+	
+	current = gnome_vfs_uri_dup (uri);
+	
+	while (gnome_vfs_uri_has_parent (current)) {
+		tmp = gnome_vfs_uri_get_parent (current);
+		gnome_vfs_uri_unref (current);
+		current = tmp;
+	}
+	
+	return current;
 }
 
 static GtkWidget *
@@ -1702,7 +1723,7 @@ gedit_file_browser_widget_set_root (GeditFileBrowserWidget * obj,
 				    gboolean virtual)
 {
 	GnomeVFSURI *uri;
-	GnomeVFSURI const *parent;
+	GnomeVFSURI *parent;
 	gchar *str;
 
 	if (!virtual) {
@@ -1723,6 +1744,7 @@ gedit_file_browser_widget_set_root (GeditFileBrowserWidget * obj,
 
 			g_free (str);
 			gnome_vfs_uri_unref (uri);
+			gnome_vfs_uri_unref (parent);
 		} else {
 			str =
 			    g_strconcat (_("Invalid uri"), ": ", root,

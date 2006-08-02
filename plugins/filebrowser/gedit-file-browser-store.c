@@ -1835,17 +1835,17 @@ static GList *
 get_parent_uris (GeditFileBrowserStore * model, GnomeVFSURI * uri)
 {
 	GList *result = NULL;
-	GnomeVFSURI *parent;
 
 	result = g_list_prepend (result, gnome_vfs_uri_ref (uri));
 
 	while (gnome_vfs_uri_has_parent (uri)) {
-		parent = gnome_vfs_uri_get_parent (uri);
+		uri = gnome_vfs_uri_get_parent (uri);
 
-		if (gnome_vfs_uri_equal (parent, model->priv->root->uri))
+		if (gnome_vfs_uri_equal (uri, model->priv->root->uri)) {
+			gnome_vfs_uri_unref (uri);
 			break;
+		}
 
-		uri = gnome_vfs_uri_ref (parent);
 		result = g_list_prepend (result, uri);
 	}
 
@@ -1909,7 +1909,7 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 	}
 
 	if (free_path)
-		g_free (path);
+		gtk_tree_path_free (path);
 }
 
 static void
@@ -1976,9 +1976,6 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 					file_browser_node_unload (model,
 								  check,
 								  FALSE);
-
-					model_create_dummy_node (model,
-								 check);
 				}
 			} else if (check != prev) {
 				/* Only free when the node is not in the chain */
@@ -2014,10 +2011,6 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 							  (FileBrowserNode
 							   *) (item->data),
 							  FALSE);
-
-				model_create_dummy_node (model,
-							 (FileBrowserNode
-							  *) (item->data));
 			}
 		} else if (NODE_IS_DUMMY (check)) {
 			check->flags |=
@@ -2043,7 +2036,6 @@ set_virtual_root_from_uri (GeditFileBrowserStore * model,
 	GList *item;
 	FileBrowserNode *node;
 	FileBrowserNode *parent;
-	FileBrowserNode *dummy;
 	GnomeVFSURI *check;
 	gboolean created = FALSE;
 	GnomeVFSFileInfo *info;
@@ -2077,10 +2069,6 @@ set_virtual_root_from_uri (GeditFileBrowserStore * model,
 			file_browser_node_set_from_info (model, node,
 							 info);
 			gnome_vfs_file_info_unref (info);
-
-			dummy = model_create_dummy_node (model, node);
-			dummy->flags |=
-			    GEDIT_FILE_BROWSER_STORE_FLAG_IS_HIDDEN;
 
 			model_add_node (model, node, parent);
 			created = TRUE;
@@ -2645,6 +2633,7 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 
 	parent = gnome_vfs_uri_get_parent (node->uri);
 	uri = gnome_vfs_uri_append_file_name (parent, new_name);
+	gnome_vfs_uri_unref (parent);
 
 	if (gnome_vfs_uri_equal (node->uri, uri)) {
 		gnome_vfs_uri_unref (uri);
