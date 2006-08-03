@@ -1664,7 +1664,8 @@ file_browser_node_set_from_info (GeditFileBrowserStore * model,
 
 	if (info->type == GNOME_VFS_FILE_TYPE_DIRECTORY)
 		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_DIRECTORY;
-	else if (gnome_vfs_mime_type_get_equivalence (node->mime_type,
+	else if (node->mime_type && 
+	         gnome_vfs_mime_type_get_equivalence (node->mime_type,
 						      "text/plain") !=
 		 GNOME_VFS_MIME_UNRELATED)
 		node->flags |= GEDIT_FILE_BROWSER_STORE_FLAG_IS_TEXT;

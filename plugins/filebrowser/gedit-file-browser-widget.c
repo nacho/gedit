@@ -528,7 +528,7 @@ get_from_bookmark (GeditFileBrowserWidget * obj, gchar const *uri,
 	result = get_from_bookmark_uri (obj, guri, name, icon);
 	gnome_vfs_uri_unref (guri);
 	
-	return TRUE;
+	return result;
 }
 
 static void
@@ -669,15 +669,20 @@ insert_location_path (GeditFileBrowserWidget * obj)
 		}
 
 		if (gnome_vfs_uri_equal (current, root) || !gnome_vfs_uri_has_parent (current)) {
-			gnome_vfs_uri_unref (current);
+			if (current != virtual)
+				gnome_vfs_uri_unref (current);
 			break;
 		}
 
 		tmp = gnome_vfs_uri_get_parent (current);
-		gnome_vfs_uri_unref (current);
+		
+		if (current != virtual)
+			gnome_vfs_uri_unref (current);
+
 		current = tmp;
 	}
 
+	gnome_vfs_uri_unref (virtual);
 	gnome_vfs_uri_unref (root);
 }
 
