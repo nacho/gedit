@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-23 07:58+0200\n"
-"PO-Revision-Date: 2006-07-23 18:56+0800\n"
+"POT-Creation-Date: 2006-08-03 07:23+0200\n"
+"PO-Revision-Date: 2006-08-03 17:55+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -2587,6 +2587,306 @@ msgstr "保存(_S)："
 msgid "_Tools:"
 msgstr "工具(_T)："
 
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr "启用恢复远程位置"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+msgid "FALSE"
+msgstr "FALSE"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+msgid "File Browser Filter Mode"
+msgstr "文件浏览器过滤方式"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+msgid "File Browser Filter Pattern"
+msgstr "文件浏览器过滤模式"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+msgid "File Browser Root Directory"
+msgstr "文件浏览器根目录"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+msgid "File Browser Virtual Root Directory"
+msgstr "文件浏览器虚拟根目录"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with nautilus etc)"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+msgid "Open With Tree View"
+msgstr "以树视图打开"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+msgid "Set Location To First Document"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+msgid "Sets whether to enable restoring of remote locations."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+msgid "TRUE"
+msgstr "TRUE"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:15
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:16
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:17
+msgid "hidden_and_binary"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "文件浏览器面板"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:360
+msgid "_Set root to active document"
+msgstr "将根设定为当前文档(_S)"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:362
+msgid "Set the root to the active document location"
+msgstr "将根设定为当前文档的位置"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:364
+msgid "_Open terminal here"
+msgstr "在此打开终端(_O)"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:366
+msgid "Open a terminal at the currently opened directory"
+msgstr "在目前打开的目录中打开终端"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:478
+msgid "File Browser"
+msgstr "文件浏览器"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+msgid "An error occurred while creating a new directory"
+msgstr "创建新目录时发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:575
+msgid "An error occurred while creating a new file"
+msgstr "创建新文件时发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:580
+msgid "An error occurred while renaming a file or directory"
+msgstr "重命名文件或目录时发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:585
+msgid "An error occurred while deleting a file or directory"
+msgstr "删除文件或目录时发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+msgid "An error occurred while opening a directory in the file manager"
+msgstr "在文件管理其中打开目录时发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
+msgid "An error occurred while setting a root directory"
+msgstr "设定根目录时发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
+msgid "An error occurred while loading a directory"
+msgstr "装入目录时发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
+msgid "An error occurred"
+msgstr "发生了错误"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:825
+msgid ""
+"Cannot move file to trash, do you\n"
+"want to delete immediately?"
+msgstr "无法将文件移动到回收站，您是否想要立即删除？"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:828
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr "无法将文件“%s”移动到回收站。"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
+#, c-format
+msgid ""
+"Are you sure you want to\n"
+"permanently delete \"%s\"?"
+msgstr "您确定想要永久删除“%s”吗？"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
+msgid "If you delete an item it is permanently lost."
+msgstr "如果您删除的话，该文件将永久丢失。"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2417
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1750
+msgid "Invalid uri"
+msgstr "无效的 URI"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2775
+msgid "file"
+msgstr "文件"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2796
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2843
+msgid ""
+"The new file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2824
+msgid "directory"
+msgstr "目录"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:712
+msgid "Bookmarks"
+msgstr "书签"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+msgid "_New Directory"
+msgstr "新建目录(_N)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
+msgid "Add new empty directory"
+msgstr "添加新的空目录"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+msgid "New F_ile"
+msgstr "新建文件(_I)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
+msgid "Add new empty file"
+msgstr "添加新的空文件"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+msgid "_Rename"
+msgstr "重命名(_R)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
+msgid "Rename selected file or directory"
+msgstr "重命名选中的文件或目录"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
+msgid "_Move To Trash"
+msgstr "移动到回收站(_M)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+msgid "Move selected file or directory to trash"
+msgstr "将选中文件或目录移动到回收站"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "_Delete"
+msgstr "删除(_D)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "Delete selected file or directory"
+msgstr "删除选中的文件或目录"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
+msgid "_Previous Location"
+msgstr "上一个位置(_P)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:945
+msgid "Go to previous location"
+msgstr "转到上一个位置"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+msgid "_Next Location"
+msgstr "下一个位置(_N)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:977
+msgid "Go to next location"
+msgstr "转到下一个位置"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+msgid "Re_fresh View"
+msgstr "刷新视图(_F)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+msgid "Refresh the view"
+msgstr "刷新视图"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+msgid "_View Directory"
+msgstr "查看目录(_V)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:850
+msgid "View directory in file manager"
+msgstr "在文件管理器中查看目录"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:857
+msgid "Show _Hidden"
+msgstr "显示隐藏文件(_H)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
+msgid "Show hidden files and directories"
+msgstr "显示隐藏的文件和目录"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:860
+msgid "Show _Binary"
+msgstr "显示二进制(_B)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:861
+msgid "Show binary files"
+msgstr "显示二进制文件"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:941
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:958
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:990
+msgid "Previous location"
+msgstr "上一个位置"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:951
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:983
+msgid "Go to a previously opened location"
+msgstr "转到上一个打开的位置"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:973
+msgid "Next location"
+msgstr "下一个位置"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1145
+msgid "Advanced filtering"
+msgstr "高级过滤"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "缩进(_I)"
@@ -2667,7 +2967,8 @@ msgstr "编辑片断(_E)："
 msgid "_Snippets:"
 msgstr "片断(_S)："
 
-#: ../plugins/snippets/snippets/snippets.glade.h:7
+#. "tab" here means the tab key, not the notebook tab!
+#: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "_Tab trigger:"
 msgstr "_Tab 触发器："
 
@@ -2691,7 +2992,9 @@ msgstr "全局"
 msgid ""
 "This is not a valid tab trigger. Triggers can either contain letters or a "
 "single, non alphanumeric, character like {, [, etcetera."
-msgstr "这不是有效的跳格触发器。触发器必须是包含包含字母或者单个非字母字符，比如 { 或 [ 等等。"
+msgstr ""
+"这不是有效的跳格触发器。触发器必须是包含包含字母或者单个非字母字符，比如 "
+"{ 或 [ 等等。"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -4664,4 +4967,3 @@ msgstr "提示可使用的格式(_P)"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "使用自定义格式(_U)"
-
