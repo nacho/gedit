@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit 2.15.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-06-26 22:13+0200\n"
-"PO-Revision-Date: 2006-06-26 22:14+0200\n"
+"POT-Creation-Date: 2006-08-03 13:26+0200\n"
+"PO-Revision-Date: 2006-08-03 15:03+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -2706,6 +2706,310 @@ msgstr "_Lagre:"
 msgid "_Tools:"
 msgstr "Verk_tøy:"
 
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+msgid "FALSE"
+msgstr "FALSK"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+msgid "File Browser Filter Mode"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+msgid "File Browser Filter Pattern"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+msgid "File Browser Root Directory"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+msgid "File Browser Virtual Root Directory"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with nautilus etc)"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+msgid "Open With Tree View"
+msgstr "Åpne med trevisning"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+msgid "Set Location To First Document"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+msgid "Sets whether to enable restoring of remote locations."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+msgid "TRUE"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:15
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:16
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:17
+msgid "hidden_and_binary"
+msgstr "hidden_and_binary"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr "Enkel filtilgang fra sidelinjen"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "Filhåndterer"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:352
+msgid "_Set root to active document"
+msgstr "_Sett rot til aktivt dokument"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:354
+msgid "Set the root to the active document location"
+msgstr "Sett roten til lokasjonen for aktivt dokument"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:356
+msgid "_Open terminal here"
+msgstr "_Åpne terminal her"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:358
+msgid "Open a terminal at the currently opened directory"
+msgstr "Åpne en terminal i katalogen som er åpen"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:470
+msgid "File Browser"
+msgstr "Filhåndterer"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:564
+msgid "An error occurred while creating a new directory"
+msgstr "En feil oppsto ved oppretting av ny katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:567
+msgid "An error occurred while creating a new file"
+msgstr "En feil oppsto ved oppretting av en ny fil"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+msgid "An error occurred while renaming a file or directory"
+msgstr "En feil oppsto ved endring av navn på en fil eller katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:577
+msgid "An error occurred while deleting a file or directory"
+msgstr "En feil oppsto ved sletting av en fil eller katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:582
+msgid "An error occurred while opening a directory in the file manager"
+msgstr "En feil oppsto ved åpning av en katalog i filhåndtereren"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:586
+msgid "An error occurred while setting a root directory"
+msgstr "En feil oppsto ved forsøk på å sette rotkatalogen"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+msgid "An error occurred while loading a directory"
+msgstr "En feil oppsto ved lasting av en katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
+msgid "An error occurred"
+msgstr "En feil oppsto"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:817
+msgid ""
+"Cannot move file to trash, do you\n"
+"want to delete immediately?"
+msgstr ""
+"Kan ikke flytte filen til papirkurven.\n"
+"Vil du slette den med en gang?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:820
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr "Filen «%s» kan ikke flyttes til papirkurven."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:856
+#, c-format
+msgid ""
+"Are you sure you want to\n"
+"permanently delete \"%s\"?"
+msgstr ""
+"Er du sikker på at du vil\n"
+"slette «%s» permanent?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:860
+msgid "If you delete an item it is permanently lost."
+msgstr "Hvis du sletter en oppføring vil denne gå tapt."
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2429
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
+msgid "Invalid uri"
+msgstr "Ugyldig URI"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2786
+msgid "file"
+msgstr "fil"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2807
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2854
+msgid ""
+"The new file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr "Den nye filen er filtrert ut. Du må justere filterinnstillingene for å gjøre den synlig"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2835
+msgid "directory"
+msgstr "katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:699
+msgid "Bookmarks"
+msgstr "Bokmerker"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
+msgid "_New Directory"
+msgstr "_Ny katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
+msgid "Add new empty directory"
+msgstr "Legg til ny tom katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+msgid "New F_ile"
+msgstr "Ny f_il"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
+msgid "Add new empty file"
+msgstr "Legg til ny tom fil"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+msgid "_Rename"
+msgstr "End_re navn"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+msgid "Rename selected file or directory"
+msgstr "Endre navn på valgt fil eller katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+msgid "_Move To Trash"
+msgstr "_Flytt til papirkurven"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+msgid "Move selected file or directory to trash"
+msgstr "Flytt valgt fil eller katalog til papirkurven"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+msgid "_Delete"
+msgstr "_Slett"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+msgid "Delete selected file or directory"
+msgstr "Slett valgt fil eller katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+msgid "_Previous Location"
+msgstr "_Forrige lokasjon"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+msgid "Go to previous location"
+msgstr "Gå til forrige lokasjon"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+msgid "_Next Location"
+msgstr "_Neste lokasjon"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+msgid "Go to next location"
+msgstr "Gå til neste lokasjon"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "Re_fresh View"
+msgstr "Opp_dater visningen"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "Refresh the view"
+msgstr "Oppdater visningen"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "_View Directory"
+msgstr "_Vis katalog"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "View directory in file manager"
+msgstr "Vis katalog i filhåndterer"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+msgid "Show _Hidden"
+msgstr "Vis s_kjulte"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+msgid "Show hidden files and directories"
+msgstr "Vis skjulte filer og kataloger"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+msgid "Show _Binary"
+msgstr "Vis _binære filer"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+msgid "Show binary files"
+msgstr "Vis binære filer"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:945
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:977
+msgid "Previous location"
+msgstr "Forrige lokasjon"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:938
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:970
+msgid "Go to a previously opened location"
+msgstr "Gå til en tidligere åpnet lokasjon"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
+msgid "Next location"
+msgstr "Neste lokasjon"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1132
+msgid "Advanced filtering"
+msgstr "Avansert filtrering"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_Innrykk"
@@ -2786,7 +3090,8 @@ msgstr "_Rediger blokk:"
 msgid "_Snippets:"
 msgstr "_Tekstblokker:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:7
+#. "tab" here means the tab key, not the notebook tab!
+#: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "_Tab trigger:"
 msgstr "_Tab-utløser:"
 
@@ -3311,20 +3616,20 @@ msgstr "Sjekker staving i aktivt dokument."
 msgid "Spell checker"
 msgstr "Stavekontroll"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
 msgid "Select the group of tags you want to use"
 msgstr "Velg gruppen med «tagger» du vil bruke"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
 msgid "Available Tag Lists"
 msgstr "Tilgjengelige lister over tags"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
 msgid "Tags"
 msgstr "Tags"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Dobbelklikk på en «tag» for å sette den inn i aktivt dokument"
 
