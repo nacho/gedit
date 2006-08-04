@@ -154,6 +154,12 @@ gedit_file_browser_view_row_activated (GtkTreeView * tree_view,
 	GtkTreeIter iter;
 	guint flags;
 
+	if (GTK_TREE_VIEW_CLASS (gedit_file_browser_view_parent_class)->
+	    row_activated)
+		GTK_TREE_VIEW_CLASS
+		    (gedit_file_browser_view_parent_class)->
+		    row_activated (tree_view, path, column);
+
 	if (GEDIT_IS_FILE_BROWSER_STORE (view->priv->model)) {
 		if (gtk_tree_model_get_iter
 		    (view->priv->model, &iter, path)) {
@@ -168,12 +174,6 @@ gedit_file_browser_view_row_activated (GtkTreeView * tree_view,
 			}
 		}
 	}
-
-	if (GTK_TREE_VIEW_CLASS (gedit_file_browser_view_parent_class)->
-	    row_activated)
-		GTK_TREE_VIEW_CLASS
-		    (gedit_file_browser_view_parent_class)->
-		    row_activated (tree_view, path, column);
 }
 
 static void
