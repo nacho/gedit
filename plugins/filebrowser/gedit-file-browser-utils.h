@@ -16,4 +16,5 @@ gboolean gedit_file_browser_utils_confirmation_dialog     (GeditWindow * window,
 		                                           gchar const *secondary, 
 		                                           gchar const * button_stock, 
 		                                           gchar const * button_label);
+gboolean gedit_file_browser_utils_is_local                (gchar const * uri);
 #endif /* __GEDIT_FILE_BROWSER_UTILS_H__ */

@@ -1392,7 +1392,7 @@ create_goto_menu_item (GeditFileBrowserWidget * obj, GList * item,
 
 	if (!get_from_bookmark
 	    (obj, loc->virtual_root, &unescape, &pixbuf)) {
-		if (strncmp (loc->virtual_root, "file://", 7) == 0) {
+		if (gedit_file_browser_utils_is_local (loc->virtual_root)) {
 			unescape =
 			    gnome_vfs_get_local_path_from_uri (loc->
 							       virtual_root);
