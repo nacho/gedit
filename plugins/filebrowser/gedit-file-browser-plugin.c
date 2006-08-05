@@ -153,7 +153,7 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 	if (root != NULL && *root != '\0') {
 		uri = gnome_vfs_uri_new (root);
 
-		if (uri == NULL || (!remote && gedit_file_browser_utils_is_local (root))) {
+		if (uri == NULL || (!remote && !gedit_file_browser_utils_is_local (root))) {
 		} else if (virtual != NULL && virtual != '\0') {
 			gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget, 
 			                                                     root,
