@@ -2268,6 +2268,14 @@ doc_saved (GeditDocument *doc,
 }
 
 static void
+editable_changed (GeditView  *view,
+                  GParamSpec  *arg1,
+                  GeditWindow *window)
+{
+	gedit_plugins_engine_update_plugins_ui (window, FALSE);
+}
+
+static void
 notebook_tab_added (GeditNotebook *notebook,
 		    GeditTab      *tab,
 		    GeditWindow   *window)
@@ -2343,6 +2351,10 @@ notebook_tab_added (GeditNotebook *notebook,
 	g_signal_connect (view,
 			  "toggle_overwrite",
 			  G_CALLBACK (update_overwrite_mode_statusbar),
+			  window);
+	g_signal_connect (view,
+			  "notify::editable",
+			  G_CALLBACK (editable_changed),
 			  window);
 
 	update_documents_list_menu (window);
@@ -2427,6 +2439,9 @@ notebook_tab_removed (GeditNotebook *notebook,
 					      window);					      				      
 	g_signal_handlers_disconnect_by_func (view, 
 					      G_CALLBACK (update_overwrite_mode_statusbar),
+					      window);
+	g_signal_handlers_disconnect_by_func (view, 
+					      G_CALLBACK (editable_changed),
 					      window);
 	g_signal_handlers_disconnect_by_func (view, 
 					      G_CALLBACK (drag_data_received_cb),

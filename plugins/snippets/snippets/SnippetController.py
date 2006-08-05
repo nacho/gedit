@@ -68,16 +68,14 @@ class SnippetController:
 	# all currently active snippets and disconnect all current signals. So
 	# self.set_view(None) will effectively remove all the control from the
 	# current view
-	def set_view(self, view):
-		if view == self.view:
-			return
-
+	def _set_view(self, view):
 		if self.view:
 			buf = self.view.get_buffer()
 			
 			self.disconnect_signal(self.view, 'key-press-event')
 			self.disconnect_signal(self.view, 'destroy')
 			self.disconnect_signal(buf, 'notify::language')
+			self.disconnect_signal(self.view, 'notify::editable')
 			self.disconnect_signal(buf, 'changed')
 			self.disconnect_signal(buf, 'cursor-moved')
 			
@@ -92,14 +90,25 @@ class SnippetController:
 			
 			self.signal_ids['destroy'] = view.connect('destroy', \
 					self.on_view_destroy)
-			self.signal_ids['key-press-event'] = view.connect( \
-					'key_press_event', self.on_view_key_press)
+
+			if view.get_editable():
+				self.signal_ids['key-press-event'] = view.connect( \
+						'key_press_event', self.on_view_key_press)
+
 			self.signal_ids['notify::language'] = buf.connect( \
 					'notify::language', self.on_notify_language)
+			self.signal_ids['notify::editable'] = view.connect( \
+					'notify::editable', self.on_notify_editable)
 			
 			self.update_language()
 		elif self.language_id != 0:
 			SnippetsLibrary().unref(self.language_id)
+	
+	def set_view(self, view):
+		if view == self.view:
+			return
+		
+		self._set_view(view)
 
 	# Call this whenever the language in the view changes. This makes sure that
 	# the correct language is used when finding snippets
@@ -123,6 +132,9 @@ class SnippetController:
 		SnippetsLibrary().ref(self.language_id)
 
 	def accelerator_activate(self, keyval, mod):
+		if not self.view or not self.view.get_editable():
+			return
+
 		accelerator = gtk.accelerator_name(keyval, mod)
 		snippets = SnippetsLibrary().from_accelerator(accelerator, \
 				self.language_id)
@@ -606,7 +618,10 @@ class SnippetController:
 	
 	def on_notify_language(self, buf, spec):
 		self.update_language()
-		
+
+	def on_notify_editable(self, view, spec):
+		self._set_view(view)
+	
 	def on_view_key_press(self, view, event):
 		library = SnippetsLibrary()
 
