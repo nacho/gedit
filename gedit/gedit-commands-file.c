@@ -75,6 +75,49 @@ _gedit_cmd_file_new (GtkAction   *action,
 	gedit_window_create_tab (window, TRUE);
 }
 
+static GeditTab *
+get_tab_from_uri (const GList *docs, 
+		  const gchar *uri)
+{
+	while (docs != NULL)
+	{
+		gchar *u;
+		GeditDocument *d;
+		
+		d = GEDIT_DOCUMENT (docs->data);
+
+		u = gedit_document_get_uri (d);
+
+		if ((u != NULL) && gnome_vfs_uris_match (uri, u))
+		{
+			g_free (u);
+			
+			return gedit_tab_get_from_document (d);
+		}
+		
+		g_free (u);
+		
+		docs = g_list_next (docs);
+	}
+	
+	return NULL;
+}
+
+static gboolean
+is_duplicated_uri (const GSList *uris, 
+		   const gchar  *u)
+{
+	while (uris != NULL)
+	{
+		if (gnome_vfs_uris_match (u, (const gchar*)uris->data))
+			return TRUE;
+			
+		uris = g_slist_next (uris);
+	}
+	
+	return FALSE;
+}
+
 /* File loading */
 static gint
 load_file_list (GeditWindow         *window,
@@ -89,9 +132,49 @@ load_file_list (GeditWindow         *window,
 	gboolean       jump_to = TRUE; /* Whether to jump to the new tab */
 	gboolean       flash = TRUE;   /* Whether to flash a message in the statusbar */
 
+	GList         *win_docs;
+	GSList        *uris_to_load = NULL;
+	const GSList  *l;
+	
 	gedit_debug (DEBUG_COMMANDS);
 
 	g_return_val_if_fail ((uris != NULL) && (uris->data != NULL), 0);
+
+	win_docs = gedit_window_get_documents (window);
+	
+	/* Remove the uris corresponding to documents already open in "window".
+	   Add remove duplicates from "uris" list */
+	l = uris;
+	while (uris != NULL)
+	{
+		if (!is_duplicated_uri (uris_to_load, uris->data))
+		{
+			tab = get_tab_from_uri (win_docs, (const gchar *)uris->data);
+			if (tab != NULL)
+			{
+				if (uris == l)
+				{
+					gedit_window_set_active_tab (window, tab);
+					jump_to = FALSE;
+				}
+				
+				++loaded_files;
+			}
+			else
+			{
+				uris_to_load = g_slist_prepend (uris_to_load, 
+								uris->data);
+			}
+		}
+				
+		uris = g_slist_next (uris);
+	}
+	
+	if (uris_to_load == NULL)
+		return loaded_files;
+		
+	uris_to_load = g_slist_reverse (uris_to_load);
+	l = uris_to_load;
 
 	tab = gedit_window_get_active_tab (window);
 	if (tab != NULL)
@@ -105,7 +188,7 @@ load_file_list (GeditWindow         *window,
 		{
 			const gchar *uri;
 
-			uri = (const gchar *)uris->data;
+			uri = (const gchar *)uris_to_load->data;
 
 			_gedit_tab_load (tab,
 					 uri,
@@ -113,10 +196,10 @@ load_file_list (GeditWindow         *window,
 					 line_pos,
 					 create);
 
-			uris = g_slist_next (uris);
+			uris_to_load = g_slist_next (uris_to_load);
 			jump_to = FALSE;
 
-			if (uris == NULL)
+			if (uris_to_load == NULL)
 			{
 				/* There is only a single file to load */
 				gchar *uri_for_display;
@@ -137,12 +220,12 @@ load_file_list (GeditWindow         *window,
 		}
 	}
 
-	while (uris != NULL)
+	while (uris_to_load != NULL)
 	{
-		g_return_val_if_fail (uris->data != NULL, 0);
+		g_return_val_if_fail (uris_to_load->data != NULL, 0);
 		
 		tab = gedit_window_create_tab_from_uri (window,
-							(const gchar *)uris->data,
+							(const gchar *)uris_to_load->data,
 							encoding,
 							line_pos,
 							create,
@@ -154,7 +237,7 @@ load_file_list (GeditWindow         *window,
 			++loaded_files;
 		}
 
-		uris = g_slist_next (uris);
+		uris_to_load = g_slist_next (uris_to_load);
 	}
 
 	if (flash)
@@ -186,6 +269,9 @@ load_file_list (GeditWindow         *window,
 						       loaded_files);
 		}
 	}
+	
+	/* Free uris_to_load. Note that l points to the first element of uris_to_load */
+	g_slist_free ((GSList *)l);
 
 	return loaded_files;
 }

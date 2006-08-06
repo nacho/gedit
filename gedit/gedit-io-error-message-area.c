@@ -848,8 +848,7 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
 
-	// FIXME: try to rephrase in a better way
-	primary_text = g_strdup_printf (_("The file %s is already open."), uri_for_display);
+	primary_text = g_strdup_printf (_("This file (%s) is already opened in another gedit window."), uri_for_display);
 	g_free (uri_for_display);
 	
 	primary_markup = g_strdup_printf ("<b>%s</b>", primary_text);
