@@ -94,7 +94,6 @@ struct _GeditDocumentPrivate
 	gint	     last_save_was_manually : 1; 	
 	gint	     language_set_by_user : 1;
 	gint         is_saving_as : 1;
-	gint         has_selection : 1;
 	gint         stop_cursor_moved_emission : 1;
 
 	gchar	    *uri;
@@ -138,7 +137,6 @@ enum {
 	PROP_READ_ONLY,
 	PROP_ENCODING,
 	PROP_CAN_SEARCH_AGAIN,
-	PROP_HAS_SELECTION,
 	PROP_ENABLE_SEARCH_HIGHLIGHTING
 };
 
@@ -297,11 +295,9 @@ gedit_document_get_property (GObject    *object,
 		case PROP_CAN_SEARCH_AGAIN:
 			g_value_set_boolean (value, gedit_document_get_can_search_again (doc));
 			break;
-		case PROP_HAS_SELECTION:
-			g_value_set_boolean (value, doc->priv->has_selection);
-			break;
 		case PROP_ENABLE_SEARCH_HIGHLIGHTING:
 			g_value_set_boolean (value, gedit_document_get_enable_search_highlighting (doc));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -349,22 +345,6 @@ gedit_document_mark_set (GtkTextBuffer     *buffer,
 		GTK_TEXT_BUFFER_CLASS (gedit_document_parent_class)->mark_set (buffer,
 									       iter,
 									       mark);
-
-	if (mark == gtk_text_buffer_get_insert (buffer) ||
-	    mark == gtk_text_buffer_get_selection_bound (buffer))
-	{
-		gboolean has_selection;
-
-		has_selection = gtk_text_buffer_get_selection_bounds (buffer,
-								      NULL,
-								      NULL);
-
-		if (has_selection != doc->priv->has_selection)
-		{
-			doc->priv->has_selection = has_selection;
-			g_object_notify (G_OBJECT (doc), "has-selection");
-		}
-	}
 
 	if (mark == gtk_text_buffer_get_insert (buffer))
 	{
@@ -427,16 +407,6 @@ gedit_document_class_init (GeditDocumentClass *klass)
 					 g_param_spec_boolean ("can-search-again",
 					 		       "Can search again",
 					 		       "Wheter it's possible to search again in the document",
-					 		       FALSE,
-					 		       G_PARAM_READABLE));
-
-	/* This has been properly moved in GtkTextBuffer in gtk 2.10, so when
-	 * we switch to 2.10 we can remove it and part of with gedit_document_mark_set.
-	 */
-	g_object_class_install_property (object_class, PROP_HAS_SELECTION,
-					 g_param_spec_boolean ("has-selection",
-					 		       "Has selection",
-					 		       "Wheter the document has selected text",
 					 		       FALSE,
 					 		       G_PARAM_READABLE));
 
@@ -612,7 +582,6 @@ gedit_document_init (GeditDocument *doc)
 
 	doc->priv->readonly = FALSE;
 
-	doc->priv->has_selection = FALSE;
 	doc->priv->stop_cursor_moved_emission = FALSE;
 
 	doc->priv->last_save_was_manually = TRUE;
@@ -1244,14 +1213,6 @@ gedit_document_get_deleted (GeditDocument *doc)
 		return FALSE;
 		
 	return !gnome_vfs_uri_exists (doc->priv->vfs_uri);
-}
-
-gboolean
-_gedit_document_get_has_selection (GeditDocument *doc)
-{
-	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
-
-	return doc->priv->has_selection;
 }
 
 /*

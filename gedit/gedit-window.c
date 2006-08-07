@@ -53,7 +53,6 @@
 #include "gedit-languages-manager.h"
 #include "gedit-prefs-manager-app.h"
 #include "gedit-panel.h"
-#include "gedit-recent.h"
 #include "gedit-documents-panel.h"
 #include "gedit-plugins-engine.h"
 #include "gedit-enum-types.h"
@@ -608,13 +607,13 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "EditCut");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
-				  _gedit_document_get_has_selection (doc));
+				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditCopy");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
-				  _gedit_document_get_has_selection (doc));
+				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 				  
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditPaste");
@@ -625,7 +624,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "EditDelete");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
-				  _gedit_document_get_has_selection (doc));
+				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "SearchFind");
@@ -1023,7 +1022,6 @@ update_recent_files_menu (GeditWindow *window)
 {
 	GeditWindowPrivate *p = window->priv;
 	gint max_recents;
-	guint merge_id;
 	GList *actions, *l, *items;
 	gint i;
 
@@ -2322,19 +2320,19 @@ selection_changed (GeditDocument *doc,
 					      "EditCut");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
-				  _gedit_document_get_has_selection (doc));
+				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditCopy");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
-				  _gedit_document_get_has_selection (doc));
+				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditDelete");
 	gtk_action_set_sensitive (action,
 				  state_normal &&
-				  _gedit_document_get_has_selection (doc));
+				  gtk_text_buffer_get_has_selection (GTK_TEXT_BUFFER (doc)));
 }
 
 static void

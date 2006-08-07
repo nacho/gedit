@@ -238,10 +238,6 @@ gboolean	_gedit_document_is_saving_as	(GeditDocument       *doc);
 glong		 _gedit_document_get_seconds_since_last_save_or_load 
 						(GeditDocument       *doc);
 
-/* private because the property will move to gtk */
-gboolean	 _gedit_document_get_has_selection
-						(GeditDocument       *doc);
-
 void		_gedit_document_search_region   (GeditDocument       *doc,
 						 const GtkTextIter   *start,
 						 const GtkTextIter   *end);
