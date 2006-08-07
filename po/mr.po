@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 17:36+0200\n"
-"PO-Revision-Date: 2006-08-07 13:16+0530\n"
+"POT-Creation-Date: 2006-08-07 07:26+0200\n"
+"PO-Revision-Date: 2006-08-07 19:22+0530\n"
 "Last-Translator: Rahul Bhalerao <b.rahul.pm@gmail.com>\n"
 "Language-Team: Marathi\n"
 "MIME-Version: 1.0\n"
@@ -20,36 +20,11 @@ msgstr ""
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/GNOME_Gedit.server.in.in.h:1
-msgid "Gedit View"
-msgstr "जीएडिट दृश्य"
-
-#: ../data/GNOME_Gedit.server.in.in.h:2
-msgid "Gedit View."
-msgstr "जीएडिट दृश्य."
-
-#: ../data/GNOME_Gedit.server.in.in.h:3
-msgid "Gedit viewer factory"
-msgstr "जिएडीट स्वयंसिद्धता कारखाना"
-
-#: ../data/GNOME_Gedit.server.in.in.h:4
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
-msgid "Source"
-msgstr "स्त्रोत"
-
-#: ../data/GNOME_Gedit.server.in.in.h:5
-msgid "gedit application"
-msgstr "जिएडीट कार्यक्रम"
-
-#: ../data/GNOME_Gedit.server.in.in.h:6
-msgid "gedit automation factory"
-msgstr "जिएडीट स्वयंसिद्धता कारखाना"
-
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "गद्य फाइल संपादित करा"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit2.c:365
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:458
 msgid "Text Editor"
 msgstr "पाठ्य संपादक"
 
@@ -61,7 +36,7 @@ msgstr ""
 "संपादक क्षेत्रासाठी वापरला जाणारा फॉंटचा परिणाम तेव्हाच जाणवेल जेव्हा\"सर्वसाधारण फाॅंट "
 "वापरा\"हा पर्याय निवडलेला नसेल"
 
-#: ../data/gedit.schemas.in.h:2
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:747
 msgid "Active plugins"
 msgstr "प्लगीन्स कार्यान्वित करा"
 
@@ -110,30 +85,40 @@ msgid "Body Font for Printing"
 msgstr "छपाइसाठीचा अंतर्गत फॉंट"
 
 #: ../data/gedit.schemas.in.h:12
+#, fuzzy
+msgid "Bottom Panel is Visible"
+msgstr "साधन पट्टी दिसत आहे "
+
+#: ../data/gedit.schemas.in.h:13
 msgid "Create Backup Copies"
 msgstr "सुरक्षित प्रती तयार करा"
 
-#: ../data/gedit.schemas.in.h:13
+#: ../data/gedit.schemas.in.h:14
 msgid "Display Line Numbers"
 msgstr "ओळ क्रमांक दाखवा"
 
-#: ../data/gedit.schemas.in.h:14
+#: ../data/gedit.schemas.in.h:15
 msgid "Display Right Margin"
 msgstr "उजवा समास दाखवा"
 
-#: ../data/gedit.schemas.in.h:15
+#: ../data/gedit.schemas.in.h:16
 msgid "Editor Font"
 msgstr "संपादन फॉंट"
 
-#: ../data/gedit.schemas.in.h:16
+#: ../data/gedit.schemas.in.h:17
+#, fuzzy
+msgid "Enable Search Highlighting"
+msgstr "सिटॅक्स उठावदारीकरण कार्यान्वित करा"
+
+#: ../data/gedit.schemas.in.h:18
 msgid "Enable Syntax Highlighting"
 msgstr "सिटॅक्स उठावदारीकरण कार्यान्वित करा"
 
-#: ../data/gedit.schemas.in.h:17
+#: ../data/gedit.schemas.in.h:19
 msgid "Encodings shown in menu"
 msgstr "मेनूमध्ये दाखवलेल्या एनकोडींग"
 
-#: ../data/gedit.schemas.in.h:18
+#: ../data/gedit.schemas.in.h:20
 msgid ""
 "Extension or suffix to use for backup file names. This will only take effect "
 "if the \"Create Backup Copies\" option is turned on."
@@ -141,7 +126,7 @@ msgstr ""
 "सुरक्षित प्रतीसाठी वापरले जाणारे अतिरिक्त नाव.याचा परिणाम तेव्हाच जाणवेल जेव्हा\"सुरक्षित "
 "प्रत तयार करा\" हा पर्याय निवडलेला असेल"
 
-#: ../data/gedit.schemas.in.h:19
+#: ../data/gedit.schemas.in.h:21
 msgid ""
 "Foreground color for selected text in the editing area. This will only take "
 "effect if the \"Use Default Colors\" option is turned off."
@@ -149,7 +134,7 @@ msgstr ""
 "संपादन क्षेत्रातील निवडलेल्या भागासाठी पृष्ठरंगाचा परिणाम तेव्हाच जाणवेल जेव्हा\"सर्वसाधारण "
 "रंग वापरा\"हा पर्याय निवडलेला नसेल"
 
-#: ../data/gedit.schemas.in.h:20
+#: ../data/gedit.schemas.in.h:22
 msgid ""
 "Foreground color for the unselected text in the editing area. This will only "
 "take effect if the \"Use Default Colors\" option is turned off."
@@ -157,19 +142,19 @@ msgstr ""
 "संपादन क्षेत्रातील न निवडलेल्या भागासाठी पृष्ठरंगाचा परिणाम तेव्हाच जाणवेल जेव्हा"
 "\"सर्वसाधारण रंग वापरा\" हा पर्याय निवडलेला नसेल"
 
-#: ../data/gedit.schemas.in.h:21
+#: ../data/gedit.schemas.in.h:23
 msgid "Header Font for Printing"
 msgstr "छपाईसाठी शिर्षक फॉंट"
 
-#: ../data/gedit.schemas.in.h:22
+#: ../data/gedit.schemas.in.h:24
 msgid "Highlight Current Line"
 msgstr "चालू ओळ उठावदार करा"
 
-#: ../data/gedit.schemas.in.h:23
+#: ../data/gedit.schemas.in.h:25
 msgid "Highlight Matching Bracket"
 msgstr "जुळणारे कंस उठावदार करा"
 
-#: ../data/gedit.schemas.in.h:24
+#: ../data/gedit.schemas.in.h:26
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
 "document. Otherwise, gedit will print line numbers every such number of "
@@ -178,78 +163,84 @@ msgstr ""
 "जर हे मूल्य 0 असेल तर छपाई करताना ओळ क्रमांक छापले जाणार नाहीत. अन्यथा जिएडीट "
 "प्रत्येकवेळी ओळ क्रमांकही छापेल"
 
-#: ../data/gedit.schemas.in.h:25
+#: ../data/gedit.schemas.in.h:27
 msgid "Insert spaces"
 msgstr "रिक्त जागा सोडा"
 
-#: ../data/gedit.schemas.in.h:26
+#: ../data/gedit.schemas.in.h:28
 msgid "Line Number Font for Printing"
 msgstr "छपाई करताना ओळ क्रमांक दाखवण्यासाठी फॉंट "
 
-#: ../data/gedit.schemas.in.h:27
+#: ../data/gedit.schemas.in.h:29
 msgid "Line Wrapping Mode"
 msgstr "ओळ गुंडाळणे रीत"
 
-#: ../data/gedit.schemas.in.h:28
+#: ../data/gedit.schemas.in.h:30
+msgid ""
+"List of VFS schemes gedit supports in write mode. The 'file' scheme is "
+"writable by default."
+msgstr ""
+
+#: ../data/gedit.schemas.in.h:31
 msgid ""
 "List of active plugins. It contains the \"Location\" of the active plugins. "
 "See the .gedit-plugin file for obtaining the \"Location\" of a given plugin."
 msgstr ""
-"कार्यान्वित प्लगीन्सची यादी. यात कार्यान्वित प्लगीन्सचे \"ठिकाण\" आहे. "
-"दिलेल्या प्लगीनचे \"ठिकाण\" मिळवण्यासाठी gedit-plugin ही फाइल पहा."
+"कार्यान्वित प्लगीन्सची यादी. यात कार्यान्वित प्लगीन्सचे \"ठिकाण\" आहे. दिलेल्या प्लगीनचे "
+"\"ठिकाण\" मिळवण्यासाठी gedit-plugin ही फाइल पहा."
 
-#: ../data/gedit.schemas.in.h:29
+#: ../data/gedit.schemas.in.h:32
 msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
-"उघडा/सुरक्षित करा फाइल निवडकर्त्या मेनूमधील अक्षर कोडिंगमध्ये दाखवलेल्या एनकोडिंग्सची यादी. "
-"फक्त ओळखप्राप्त एनकोडिंग्स वापरल्या जातात."
+"उघडा/सुरक्षित करा फाइल निवडकर्त्या मेनूमधील अक्षर कोडिंगमध्ये दाखवलेल्या एनकोडिंग्सची "
+"यादी. फक्त ओळखप्राप्त एनकोडिंग्स वापरल्या जातात."
 
-#: ../data/gedit.schemas.in.h:30
+#: ../data/gedit.schemas.in.h:33
 msgid "Max Number of Undo Actions"
 msgstr "क्रिया रद्द करण्याची कमाल संख्या"
 
-#: ../data/gedit.schemas.in.h:31
+#: ../data/gedit.schemas.in.h:34
 msgid "Maximum Recent Files"
 msgstr "फाइलची सर्वात नवीन प्रत"
 
-#: ../data/gedit.schemas.in.h:32
+#: ../data/gedit.schemas.in.h:35
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions."
 msgstr ""
-"जिएडीट जास्तीत जास्त एवढ्या क्रिया रद्द करु शकतो किंवा पुन्हा करु शकतो. "
-"अमर्यादित क्रियांसाठी  \"-1\" वापरा."
+"जिएडीट जास्तीत जास्त एवढ्या क्रिया रद्द करु शकतो किंवा पुन्हा करु शकतो. अमर्यादित "
+"क्रियांसाठी  \"-1\" वापरा."
 
-#: ../data/gedit.schemas.in.h:33
+#: ../data/gedit.schemas.in.h:36
 msgid ""
 "Maximum number of actions that gedit will be able to undo or redo. Use \"-1"
 "\" for unlimited number of actions. Deprecated since 2.12.0"
 msgstr ""
-"जिएडीट जास्तीत जास्त एवढ्या क्रिया रद्द करु शकतो किंवा पुन्हा करु शकतो. "
-"अमर्यादित क्रियांसाठी  \"-1\" वापरा. 2.12.0 पासून नापसंत"
+"जिएडीट जास्तीत जास्त एवढ्या क्रिया रद्द करु शकतो किंवा पुन्हा करु शकतो. अमर्यादित "
+"क्रियांसाठी  \"-1\" वापरा. 2.12.0 पासून नापसंत"
 
 #. Translators: This is the Editor Font.
 #. This is a Pango font
-#: ../data/gedit.schemas.in.h:36
+#: ../data/gedit.schemas.in.h:39
 msgid "Monospace 12"
 msgstr "मोनोस्पेस 12"
 
 #. Translators: This is the Body font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:39
+#: ../data/gedit.schemas.in.h:42
 msgid "Monospace 9"
 msgstr "मोनोस्पेस 9"
 
 #. Translators: This is the Body font for printing.
 #. This is a gnome-print font name and is replaced by
 #. print_font_body_pango.
-#: ../data/gedit.schemas.in.h:43
+#: ../data/gedit.schemas.in.h:46
 msgid "Monospace Regular 9"
 msgstr "मोनोस्पेस नियमीत 9"
 
-#: ../data/gedit.schemas.in.h:44
+#: ../data/gedit.schemas.in.h:47
 msgid ""
 "Number of minutes after which gedit will automatically save modified files. "
 "This will only take effect if the \"Auto Save\" option is turned on."
@@ -257,71 +248,79 @@ msgstr ""
 "एवढ्या मिनिटांनंतर जिएडीट बदललेल्या फाइल आपोआप संचयीत केलयाचा परिणाम तेव्हाच जाणवेल "
 "जेव्हा\"आपोआप संचयीत करा\"हा पर्याय निवडलेला असेल"
 
-#: ../data/gedit.schemas.in.h:45
+#: ../data/gedit.schemas.in.h:48
 msgid "Print Header"
 msgstr "छपाई शिर्षक"
 
-#: ../data/gedit.schemas.in.h:46
+#: ../data/gedit.schemas.in.h:49
 msgid "Print Line Numbers"
 msgstr "ओळ क्रमांक छापा"
 
-#: ../data/gedit.schemas.in.h:47
+#: ../data/gedit.schemas.in.h:50
 msgid "Print Syntax Highlighting"
 msgstr "सिंटॅक्स उठाविकरण छापा"
 
-#: ../data/gedit.schemas.in.h:48
+#: ../data/gedit.schemas.in.h:51
 msgid "Printing Line Wrapping Mode"
 msgstr "मुद्रित ओळीतील शेषभाग खाली घेणे "
 
-#: ../data/gedit.schemas.in.h:49
+#: ../data/gedit.schemas.in.h:52
+msgid "Restore Previous Cursor Position"
+msgstr ""
+
+#: ../data/gedit.schemas.in.h:53
 msgid "Right Margin Position"
 msgstr "उजव्या समासाची स्थिती"
 
 #. Translators: This is the Header font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:52
+#: ../data/gedit.schemas.in.h:56
 msgid "Sans 11"
 msgstr "सॅन्स12"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a Pango font.
-#: ../data/gedit.schemas.in.h:55
+#: ../data/gedit.schemas.in.h:59
 msgid "Sans 8"
 msgstr "सॅन्स12"
 
 #. Translators: This is the Header font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_header_pango.
-#: ../data/gedit.schemas.in.h:59
+#: ../data/gedit.schemas.in.h:63
 msgid "Sans Regular 11"
 msgstr "सॅन्स नियमीत 11"
 
 #. Translators: This is the Line Number font for printing.
 #. This is a gnome-print font name and replaced by
 #. print_font_numbers_pango.
-#: ../data/gedit.schemas.in.h:63
+#: ../data/gedit.schemas.in.h:67
 msgid "Sans Regular 8"
 msgstr "सॅन्स नियमीत 8"
 
-#: ../data/gedit.schemas.in.h:64
+#: ../data/gedit.schemas.in.h:68
 msgid "Selected Text Color"
 msgstr "निवडलेल्या भागाचा रंग"
 
-#: ../data/gedit.schemas.in.h:65
+#: ../data/gedit.schemas.in.h:69
 msgid "Selection Color"
 msgstr "रंग निवड "
 
-#: ../data/gedit.schemas.in.h:66
+#: ../data/gedit.schemas.in.h:70
+#, fuzzy
+msgid "Side Pane is Visible"
+msgstr "स्थितीदर्शक पट्टी दिसत आहे"
+
+#: ../data/gedit.schemas.in.h:71
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
 "जीएडिटने फाइलची एनकोडिंग स्वयं-शोधण्यासाठी वापरलेली एनकोडिंग्सची क्रमबद्ध यादी. "
-"\"CURRENT\" ही सद्य लोकेल एनकोडिंग आहे. फक्त ओळखप्राप्त एनकोडिंग्स वापरल्या "
-"आहेत."
+"\"CURRENT\" ही सद्य लोकेल एनकोडिंग आहे. फक्त ओळखप्राप्त एनकोडिंग्स वापरल्या आहेत."
 
-#: ../data/gedit.schemas.in.h:67
+#: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
 "wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -334,7 +333,7 @@ msgstr ""
 "\"GTK_WRAP_WORD\"वापरा आणि अक्षरांवर वाक्य तोडण्यासाठी \"GTK_WRAP_CHAR\"वापरा . "
 "लक्षात असुद्या की ही नावे जशी लिहिली आहेत तशीच वापरायला हवीत (मोठ्या लिपीत)"
 
-#: ../data/gedit.schemas.in.h:68
+#: ../data/gedit.schemas.in.h:73
 msgid ""
 "Specifies how to wrap long lines in the editing area. Use \"GTK_WRAP_NONE\" "
 "for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and "
@@ -348,19 +347,21 @@ msgstr ""
 "\" वापरा. लक्षात असुद्या की ही नावे जशी लिहीली आहेत तशीच वापरायला हवीत (मोठ्या "
 "लिपीत)"
 
-#: ../data/gedit.schemas.in.h:69
-msgid "Specifies the font to use for a document's body when printing documents."
-msgstr "एखादा दस्तएेवज छापताना त्याच्यां अंतर्गत भागातील  वापरा साठी लागणारा  फाॅट दाखवते"
+#: ../data/gedit.schemas.in.h:74
+msgid ""
+"Specifies the font to use for a document's body when printing documents."
+msgstr ""
+"एखादा दस्तएेवज छापताना त्याच्यां अंतर्गत भागातील  वापरा साठी लागणारा  फाॅट दाखवते"
 
-#: ../data/gedit.schemas.in.h:70
+#: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
-"एखादा दस्तऐवज छापताना त्याच्यां अंतर्गत भागातील  वापरा साठी लागणारा  फॉन्ट दाखवते. "
-"हे gnome-print फॉन्ट नाव आहे आणि print_font_body_pango ने बदली केले आहे."
+"एखादा दस्तऐवज छापताना त्याच्यां अंतर्गत भागातील  वापरा साठी लागणारा  फॉन्ट दाखवते. हे "
+"gnome-print फॉन्ट नाव आहे आणि print_font_body_pango ने बदली केले आहे."
 
-#: ../data/gedit.schemas.in.h:71
+#: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
@@ -368,7 +369,7 @@ msgstr ""
 "छपाई करताना ओळ क्रमांक छापण्यासाठी वापरला जाणारा फॉट दाखवते. याचा परिणाम तेव्हाच "
 "जाणवेल जेव्हा \"ओळ क्रमांक छापा\"हा पर्याय वापरला असेल"
 
-#: ../data/gedit.schemas.in.h:72
+#: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
@@ -378,7 +379,7 @@ msgstr ""
 "जाणवेल जेव्हा \"ओळ क्रमांक छापा\" हा पर्याय वापरला असेल. हे gnome-print फॉन्ट नाव आहे "
 "आणि print_font_body_pango ने बदली केले आहे."
 
-#: ../data/gedit.schemas.in.h:73
+#: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
@@ -386,37 +387,37 @@ msgstr ""
 "छपाई करताना पानाचे शिर्षक छापण्यासाठी वापरला जाणारा फॉट दाखवते. याचा परिणाम "
 "तेव्हाच जाणवेल जेव्हा \"शिर्षक छापा\" हा पर्याय वापरला असेल."
 
-#: ../data/gedit.schemas.in.h:74
+#: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
 "छपाई करताना पानाचे शिर्षक छापण्यासाठी वापरला जाणारा फॉन्ट दाखवते. याचा परिणाम "
-"तेव्हाच जाणवेल जेव्हा \"शिर्षक छापा\" हा पर्याय वापरला असेल. हे gnome-print फॉन्ट "
-"नाव आहे आणि print_font_body_pango ने बदली केले आहे."
+"तेव्हाच जाणवेल जेव्हा \"शिर्षक छापा\" हा पर्याय वापरला असेल. हे gnome-print फॉन्ट नाव "
+"आहे आणि print_font_body_pango ने बदली केले आहे."
 
-#: ../data/gedit.schemas.in.h:75
+#: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr "नुकत्याच वापरलेल्या किती फाइल \"अलिकडील फाइल\" या उपयादीत दाखवायच्या हे ठरवते"
 
-#: ../data/gedit.schemas.in.h:76
+#: ../data/gedit.schemas.in.h:81
 msgid ""
 "Specifies the number of spaces that should be displayed instead of Tab "
 "characters."
 msgstr "टॅबच्या जागी किती अक्षरांची जागा सोडायची हे ठरवते"
 
-#: ../data/gedit.schemas.in.h:77
+#: ../data/gedit.schemas.in.h:82
 msgid "Specifies the position of the right margin."
 msgstr "उजव्या समासाची स्थिती दाखवते."
 
-#: ../data/gedit.schemas.in.h:78
+#: ../data/gedit.schemas.in.h:83
 msgid "Status Bar is Visible"
 msgstr "स्थितीदर्शक पट्टी दिसत आहे"
 
-#: ../data/gedit.schemas.in.h:79
+#: ../data/gedit.schemas.in.h:84
 msgid ""
 "Style for the toolbar buttons. Possible values are \"GEDIT_TOOLBAR_SYSTEM\" "
 "to use the system's default style, \"GEDIT_TOOLBAR_ICONS\" to display icons "
@@ -432,35 +433,35 @@ msgstr ""
 "प्राधान्यक्रमाने येणारे पाठ्य दाखवण्यासाठी. कृपया याची नोंद घ्या की वरील नावे जशी आहेत "
 "(मोठी,लिपी) तशीच लिहायची आहेत."
 
-#: ../data/gedit.schemas.in.h:80
+#: ../data/gedit.schemas.in.h:85
 msgid "Tab Size"
 msgstr "टॅबचा आकार"
 
-#: ../data/gedit.schemas.in.h:81
+#: ../data/gedit.schemas.in.h:86
 msgid "Text Color"
 msgstr "अक्षरांचा आकार"
 
-#: ../data/gedit.schemas.in.h:82
+#: ../data/gedit.schemas.in.h:87
 msgid "Toolbar Buttons Style"
 msgstr "साधन पट्टीच्या बटणांची शैली"
 
-#: ../data/gedit.schemas.in.h:83
+#: ../data/gedit.schemas.in.h:88
 msgid "Toolbar is Visible"
 msgstr "साधन पट्टी दिसत आहे "
 
-#: ../data/gedit.schemas.in.h:84
+#: ../data/gedit.schemas.in.h:89
 msgid "Undo Actions Limit (DEPRECATED)"
 msgstr "रद्दिकरण प्रक्रियेची मर्यादा (DEPRECATED)"
 
-#: ../data/gedit.schemas.in.h:85
+#: ../data/gedit.schemas.in.h:90
 msgid "Use Default Colors"
 msgstr "सर्वसाधारण रंग वापरा"
 
-#: ../data/gedit.schemas.in.h:86
+#: ../data/gedit.schemas.in.h:91
 msgid "Use Default Font"
 msgstr "सर्वसाधारण फॉंट वापरा"
 
-#: ../data/gedit.schemas.in.h:87
+#: ../data/gedit.schemas.in.h:92
 msgid ""
 "Whether gedit should automatically save modified files after a time "
 "interval. You can set the time interval with the \"Auto Save Interval\" "
@@ -469,7 +470,7 @@ msgstr ""
 "काही कालावधी नंतर जिएडीटने बदलेल्या फाइल स्वयं रक्षित कराव्यात की नाही।\"स्वयं रक्षण "
 "कालावधी\"या पर्यायाचा वापर करुन तुम्ही हा कालावधी ठरवू शकता"
 
-#: ../data/gedit.schemas.in.h:88
+#: ../data/gedit.schemas.in.h:93
 msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
@@ -477,51 +478,77 @@ msgstr ""
 "जिएडीट संचयीत करत असलेल्या फाइलची मूळ प्रत राखून ठेवावी की नाही।या राखीव प्रतीचे नाव "
 "तुम्ही\"राखीव प्रतीचे नाव\"या पर्यायाचा वापर करुन ठरवू शकता"
 
-#: ../data/gedit.schemas.in.h:89
+#: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display line numbers in the editing area."
 msgstr "संपादन क्षेत्रात ओळ क्रमांक दाखवावेत की नाही।"
 
-#: ../data/gedit.schemas.in.h:90
+#: ../data/gedit.schemas.in.h:95
 msgid "Whether gedit should display the right margin in the editing area."
 msgstr "जीएडिटने संपादन क्षेत्रात उजवा समास दाखवावा की नाही."
 
-#: ../data/gedit.schemas.in.h:91
+#: ../data/gedit.schemas.in.h:96
 msgid "Whether gedit should enable auto indentation."
 msgstr "जिएडीट द्वारा आपोआप व्यवस्थित करावे की नाही "
 
-#: ../data/gedit.schemas.in.h:92
+#: ../data/gedit.schemas.in.h:97
 msgid "Whether gedit should enable syntax highlighting."
 msgstr "जिएडीटने सिंटॅक्स उठावदारीकरण कार्यान्वित करावे कि नाही."
 
-#: ../data/gedit.schemas.in.h:93
+#: ../data/gedit.schemas.in.h:98
+#, fuzzy
+msgid ""
+"Whether gedit should highlight all the occurrences of the searched text."
+msgstr "जीएडिटने चालू ओऴ उठावदार करावी कि नाही."
+
+#: ../data/gedit.schemas.in.h:99
 msgid "Whether gedit should highlight matching bracket."
 msgstr "जिएडीटने जुळणारे कंस उठावदार करावेत कि नाही."
 
-#: ../data/gedit.schemas.in.h:94
+#: ../data/gedit.schemas.in.h:100
 msgid "Whether gedit should highlight the current line."
 msgstr "जीएडिटने चालू ओऴ उठावदार करावी कि नाही."
 
-#: ../data/gedit.schemas.in.h:95
+#: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "एखादा दस्तएेवज छापताना जिएडीटने त्यात शिर्षकाचा समावेश करावा की नाही"
 
-#: ../data/gedit.schemas.in.h:96
+#: ../data/gedit.schemas.in.h:102
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "जिएडीट टॅब एेवजी रिकाम्या जागा भराव्यात की नाही"
 
-#: ../data/gedit.schemas.in.h:97
+#: ../data/gedit.schemas.in.h:103
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "एखादा दस्तऐवज छापताना जिएडीटने सिंटॅक्स उठावदारी छापावी की नाही."
 
-#: ../data/gedit.schemas.in.h:98
-msgid "Whether the status bar at the bottom of editing windows should be visible."
+#: ../data/gedit.schemas.in.h:104
+#, fuzzy
+msgid ""
+"Whether gedit should restore the previous cursor position when a file is "
+"loaded."
+msgstr "जीएडिटने संपादन क्षेत्रात उजवा समास दाखवावा की नाही."
+
+#: ../data/gedit.schemas.in.h:105
+#, fuzzy
+msgid ""
+"Whether the bottom panel at the bottom of editing windows should be visible."
 msgstr "संपादन क्षेत्राच्या तळाशी असलेली स्थितीदर्शक पट्टी दिसावी की नाही "
 
-#: ../data/gedit.schemas.in.h:99
+#: ../data/gedit.schemas.in.h:106
+#, fuzzy
+msgid ""
+"Whether the side pane at the left of the editing window should be visible."
+msgstr "संपादन क्षेत्राच्या तळाशी असलेली स्थितीदर्शक पट्टी दिसावी की नाही "
+
+#: ../data/gedit.schemas.in.h:107
+msgid ""
+"Whether the status bar at the bottom of editing windows should be visible."
+msgstr "संपादन क्षेत्राच्या तळाशी असलेली स्थितीदर्शक पट्टी दिसावी की नाही "
+
+#: ../data/gedit.schemas.in.h:108
 msgid "Whether the toolbar should be visible in editing windows."
 msgstr "संपादन क्षेत्रात साधनांची पट्टी दिसावी की नाही"
 
-#: ../data/gedit.schemas.in.h:100
+#: ../data/gedit.schemas.in.h:109
 msgid ""
 "Whether to use the system's default colors for the editing area. If this "
 "option is turned off, then the colors of the editing area will be those "
@@ -532,7 +559,7 @@ msgstr ""
 "निवडलेला नसेल तर संपादन क्षेत्रासाठी\"पार्श्र्वरंग\",\"गद्याचा रंग\",\"निवडलेल्या भागाचा रंग"
 "\" आणि \"निवडीसाठी रंग\" या पर्यायाचा वापर केला जाईल"
 
-#: ../data/gedit.schemas.in.h:101
+#: ../data/gedit.schemas.in.h:110
 msgid ""
 "Whether to use the system's default font for editing text instead of a font "
 "specific to gedit. If this option is turned off, then the font named in the "
@@ -542,46 +569,58 @@ msgstr ""
 "नाही . जर ह पर्याय निवडलेला नसेल तर सिस्टिम फॉंट एेवजी\"संपादकाचा फाॅंट\" या पर्यायात "
 "दिलेला फाॅंट वापरला जाईल"
 
+#: ../data/gedit.schemas.in.h:111
+msgid "Writable VFS schemes"
+msgstr ""
+
 #. Translators: This is the list of encodings shown by default in the Character Coding
 #. menu in open/save file selector. Only recognized encodings are displayed.
-#: ../data/gedit.schemas.in.h:104
+#: ../data/gedit.schemas.in.h:114
 msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
 #. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:108
+#: ../data/gedit.schemas.in.h:118
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,ISO-8859-15]"
 
-#: ../gedit/bonobo-mdi.c:548 ../gedit/bonobo-mdi.c:2099
-#, c-format
-msgid "Activate %s"
-msgstr "%s कार्यान्वित करा"
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:139
+#, fuzzy
+msgid "Logout _without Saving"
+msgstr "सुरक्षित न करता बंद करा(_w)"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:142
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:143
+msgid "_Cancel Logout"
+msgstr ""
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:150
 msgid "Close _without Saving"
 msgstr "सुरक्षित न करता बंद करा(_w)"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:152
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:195
 msgid "Question"
 msgstr "प्रश्न"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:367
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
 #, c-format
-msgid "If you don't save, changes from the last %ld second will be permanently lost."
+msgid ""
+"If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld seconds will be permanently "
 "lost."
-msgstr[0] "जर तुम्ही सुरक्षित केले नाही, तर मागील %ld सेकंदापासूनचे बदल कायमस्वरूपी नष्ट होतील."
-msgstr[1] "जर तुम्ही सुरक्षित केले नाही, तर मागील %ld सेकंदांपासूनचे बदल कायमस्वरूपी नष्ट होतील."
+msgstr[0] ""
+"जर तुम्ही सुरक्षित केले नाही, तर मागील %ld सेकंदापासूनचे बदल कायमस्वरूपी नष्ट होतील."
+msgstr[1] ""
+"जर तुम्ही सुरक्षित केले नाही, तर मागील %ld सेकंदांपासूनचे बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:376
-msgid "If you don't save, changes from the last minute will be permanently lost."
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:404
+msgid ""
+"If you don't save, changes from the last minute will be permanently lost."
 msgstr "जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या मिनिटापासूनचे बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:382
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -589,27 +628,37 @@ msgid ""
 msgid_plural ""
 "If you don't save, changes from the last minute and %ld seconds will be "
 "permanently lost."
-msgstr[0] "जर तुम्ही सुरक्षित नाही केले, तर अखेरचा मिनिट आणि %ld सेकंदापासूनचे बदल कायमस्वरूपी नष्ट होतील."
-msgstr[1] "जर तुम्ही सुरक्षित नाही केले, तर अखेरचा मिनिट आणि %ld सेकंदांपासूनचे बदल कायमस्वरूपी नष्ट होतील."
+msgstr[0] ""
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरचा मिनिट आणि %ld सेकंदापासूनचे बदल कायमस्वरूपी नष्ट "
+"होतील."
+msgstr[1] ""
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरचा मिनिट आणि %ld सेकंदांपासूनचे बदल कायमस्वरूपी नष्ट "
+"होतील."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:392
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
 #, c-format
-msgid "If you don't save, changes from the last %ld minute will be permanently lost."
+msgid ""
+"If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %ld minutes will be permanently "
 "lost."
-msgstr[0] "जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या %ld मिनिटापासूनचे बदल कायमस्वरूपी नष्ट होतील.े."
-msgstr[1] "जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या %ld मिनिटांपासूनचे बदल कायमस्वरूपी नष्ट होतील."
+msgstr[0] ""
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या %ld मिनिटापासूनचे बदल कायमस्वरूपी नष्ट होतील.े."
+msgstr[1] ""
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या %ld मिनिटांपासूनचे बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:407
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:428
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:435
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:456
 #, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या तासापासूनचे बदल कायमस्वरूपी नष्ट होतील."
-msgstr[1] "जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या %d तासांपासूनचे बदल कायमस्वरूपी नष्ट होतील.."
+msgid_plural ""
+"If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] ""
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या तासापासूनचे बदल कायमस्वरूपी नष्ट होतील."
+msgstr[1] ""
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या %d तासांपासूनचे बदल कायमस्वरूपी नष्ट होतील.."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:413
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:441
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -618,805 +667,554 @@ msgid_plural ""
 "If you don't save, changes from the last hour and %d minutes will be "
 "permanently lost."
 msgstr[0] ""
-"जर तुम्ही सुरक्षित नाही केले, तर अखेरचा तास आणि %d मिनिटापासूनचे बदल कायमस्वरूपी "
-"नष्ट होतील."
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरचा तास आणि %d मिनिटापासूनचे बदल कायमस्वरूपी नष्ट "
+"होतील."
 msgstr[1] ""
-"जर तुम्ही सुरक्षित नाही केले, तर अखेरचा तास आणि %d मिनिटांपासूनचे बदल कायमस्वरूपी "
-"नष्ट होतील."
+"जर तुम्ही सुरक्षित नाही केले, तर अखेरचा तास आणि %d मिनिटांपासूनचे बदल कायमस्वरूपी नष्ट "
+"होतील."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:498
+#, fuzzy, c-format
+msgid "Changes to document \"%s\" will be permanently lost."
+msgstr "दस्तावेजात मागील %d तासात केलेले बदल कायमस्वरूपी नष्ट होतील."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:501
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "बंद करण्यापूर्वी \"%s\" या दस्तावेजातील बदल सुरक्षित करावेत?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:645
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:725
+msgid "Saving has been disabled by the system administrator."
+msgstr ""
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
+#, fuzzy, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "दस्तावेजात मागील %d तासात केलेले बदल कायमस्वरूपी नष्ट होतील."
+msgstr[1] "दस्तावेजात मागील %d तासांत केलेले बदल कायमस्वरूपी नष्ट होतील."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:686
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
-msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
+msgid_plural ""
+"There are %d documents with unsaved changes. Save changes before closing?"
 msgstr[0] "%d दस्तावेज असुरक्षित बदलांसह आहे. बंद करण्यापूर्वी बदल सुरक्षित करावेत?"
 msgstr[1] "%d दस्तावेज असुरक्षित बदलांसह आहेत. बंद करण्यापूर्वी बदल सुरक्षित करावेत?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:662
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:704
+msgid "Docum_ents with unsaved changes:"
+msgstr ""
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
 msgid "S_elect the documents you want to save:"
 msgstr "तुम्हास सुरक्षित करावयाचे दस्तावेज निवडा(_e):"
 
-#. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:679
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:727
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "जर तुम्ही सुरक्षित नाही केले, तर तुमचे सर्व बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/dialogs/gedit-dialog-goto-line.c:184
-msgid "Go to Line"
-msgstr "ओळ क्रमांकावर जा"
+#: ../gedit/dialogs/gedit-encodings-dialog.c:315
+#, fuzzy
+msgid "Character Codings"
+msgstr "अक्षरे कोडिंग"
 
-#: ../gedit/dialogs/gedit-dialog-goto-line.c:197
-msgid "_Go to Line"
-msgstr "ओळ क्रमांकावर जा"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:136
-#: ../gedit/dialogs/gedit-dialog-replace.c:1140 ../gedit/gedit-commands.c:383
-#, c-format
-msgid "The text \"%s\" was not found."
-msgstr "टेक्स्ट \"%s\" मिळाले नाही "
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:269
-#: ../gedit/dialogs/replace.glade2.h:4 ../gedit/gedit-ui.xml.h:46
-msgid "Replace"
-msgstr "बदलून घ्या"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:282
-msgid "Replace _All"
-msgstr "सर्व बदलून घ्या"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:285
-#: ../gedit/gedit-file-selector-util.c:114 ../plugins/savecopy/savecopy.c:369
-msgid "_Replace"
-msgstr "बदलून घ्या"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:402 ../gedit/gedit-ui.xml.h:17
-msgid "Find"
-msgstr "शोधा"
-
-#: ../gedit/dialogs/gedit-dialog-replace.c:1149
-#, c-format
-msgid "Found and replaced %d occurrence."
-msgid_plural "Found and replaced %d occurrences."
-msgstr[0] "%d प्राप्त आणि बदलला उद्भव."
-msgstr[1] "%d प्राप्त आणि बदलले उद्भव."
-
-#: ../gedit/dialogs/gedit-dialog-uri.c:91
-msgid "Open Location"
-msgstr "जागा उघडा"
-
-#: ../gedit/dialogs/gedit-encodings-dialog.c:72
-#, c-format
-msgid "There was an error displaying help: %s"
-msgstr "मदत दर्शवण्यात चूक झाली: %s"
-
-#: ../gedit/dialogs/gedit-encodings-dialog.c:355
-#: ../gedit/dialogs/gedit-encodings-dialog.c:423
+#: ../gedit/dialogs/gedit-encodings-dialog.c:365
+#: ../gedit/dialogs/gedit-encodings-dialog.c:426
 msgid "_Description"
 msgstr "वर्णन"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.c:364
-#: ../gedit/dialogs/gedit-encodings-dialog.c:432
+#: ../gedit/dialogs/gedit-encodings-dialog.c:374
+#: ../gedit/dialogs/gedit-encodings-dialog.c:435
 msgid "_Encoding"
 msgstr "एनकोडिंग(_E)"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:1
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:1
 msgid "A_vailable encodings:"
 msgstr "उपलब्ध एनकोडिंग(_v):"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:2
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:2
 msgid "Character codings"
 msgstr "अक्षरे कोडिंग"
 
-#: ../gedit/dialogs/gedit-encodings-dialog.glade2.h:3
+#: ../gedit/dialogs/gedit-encodings-dialog.glade.h:3
 msgid "E_ncodings shown in menu:"
 msgstr "मेनूमध्ये दाखवलेल्या एनकोडिंग:"
 
-#: ../gedit/dialogs/gedit-plugin-manager.c:55
-msgid "Plugin"
-msgstr "प्लगईन"
+#: ../gedit/dialogs/gedit-open-location-dialog.c:135
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
+msgid "Open Location"
+msgstr "जागा उघडा"
 
-#: ../gedit/dialogs/gedit-plugin-manager.c:56
-msgid "Enabled"
-msgstr "कार्यान्वित"
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:1
+msgid "Ch_aracter coding:"
+msgstr "अक्षर कोडिंग(_a):"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:86
-#: ../gedit/dialogs/program-location-dialog.glade2.h:2
-msgid "Set program location..."
-msgstr "कार्यक्रम स्थानाचे नियोजन करा"
+#: ../gedit/dialogs/gedit-open-location-dialog.glade.h:2
+msgid "Enter the _location (URI) of the file you would like to open:"
+msgstr "(URI) जी फाइल तुम्हाला उघडायची आहे त्या फाइलची जागा सांगा(_l):"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:116
-#, c-format
-msgid ""
-"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
-"task.\n"
-"\n"
-"Please, specify the location of the <tt>%s</tt> program."
-msgstr ""
-"<tt>%2s</tt>नामक प्रोग्राम प्रमाणे कार्यान्वित होण्यासाठी प्लगईन %s नामक एखादा बाह्य "
-"कार्यक्रम वापरतो. कृपया,<tt>%3s</tt>नामक प्रोग्राम ठरवा/दाखवा"
+#: ../gedit/dialogs/gedit-page-setup-dialog.c:527
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
+msgid "Page Setup"
+msgstr "पृष्ठ व्यवस्था"
 
-#: ../gedit/dialogs/gedit-plugin-program-location-dialog.c:169
-msgid "The selected file is not executable."
-msgstr "निवडलेली फाइल कार्यान्वित होत नाही"
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
+#: ../plugins/docinfo/docinfo.glade2.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:1
+#: ../plugins/time/time.glade2.h:1
+msgid "    "
+msgstr "    "
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:649
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:8
+msgid "<b>Line Numbers</b>"
+msgstr "<b>ओळ क्रमांक</b>"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:11
+msgid "<b>Text Wrapping</b>"
+msgstr "<b>पाठ गुंडाळणी</b>"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:16
+msgid "Do not _split words over two lines"
+msgstr "शब्द दोन रांगांमध्ये विभागू नका(_s)"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:19
+msgid "Enable text _wrapping"
+msgstr "पाठ गुंडाळणी कार्यान्वित करा(_w)"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:6
+msgid "Fonts"
+msgstr "फोन्ट"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:7
+msgid "General"
+msgstr "सामान्य"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:8
+msgid "He_aders and footers:"
+msgstr "मथळे आणि तळटिपा(_a):"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
+msgid "Print _line numbers"
+msgstr "ओळ क्रमांक छापा(_l)"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
+msgid "Print s_yntax highlighting"
+msgstr "सिंटॅक्स उठावदारीकरण छापा(_s)"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:12
+msgid "_Body:"
+msgstr "धड(_B):"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:13
+msgid "_Line numbers:"
+msgstr "ओळ क्रमांक(_L):"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:14
+msgid "_Number every"
+msgstr "प्रत्येक ओळ क्रमांक मुद्रीत करा(_N)"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
+msgid "_Print page headers"
+msgstr "पान शिर्षके मुद्रीत करा(_P)"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:16
+msgid "_Restore Default Fonts"
+msgstr "मुलभूत फॉंन्ट वापरा(_R)"
+
+#: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:17
+msgid "lines"
+msgstr "रेषा"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:651
 msgid "Push this button to select the font to be used by the editor"
 msgstr "हे बटन दाबून संपादकाने वापरायचा फोन्ट निवडा"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:651
+#: ../gedit/dialogs/gedit-preferences-dialog.c:653
 msgid "Push this button to configure text color"
 msgstr "हे बटन दाबून टेक्स्ट रंग संकलित करा"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:653
+#: ../gedit/dialogs/gedit-preferences-dialog.c:655
 msgid "Push this button to configure background color"
 msgstr "हे बटन दाबून दाबून पार्श्वरंग संकलित करा"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:655
+#: ../gedit/dialogs/gedit-preferences-dialog.c:657
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "हे बटन दाबून निवडलेले टेक्स्ट ज्या रंगामध्ये दिसायला हवे तो रंग संकलित करादर्शवा"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:658
+#: ../gedit/dialogs/gedit-preferences-dialog.c:660
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "हे बटन दाबून निवडलेले टेक्स्ट ज्या रंगामध्ये  हवे तो रंग मार्क  करामार्ककेले"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1111
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1161
 msgid "Elements"
 msgstr "घटक"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:1
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:1
-#: ../plugins/docinfo/docinfo.glade2.h:1 ../plugins/time/time.glade2.h:1
-msgid "    "
-msgstr "    "
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1273
+#, fuzzy
+msgid "gedit Preferences"
+msgstr "प्राधान्यक्रम"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:2
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:2
 msgid "<b>Automatic Indentation</b>"
 msgstr "<b>आपोआप समास सोडणे </b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:3
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:3
 msgid "<b>Bracket Matching</b>"
 msgstr "<b>कंस जुळणी</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:4
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:4
 msgid "<b>Current Line</b>"
 msgstr "<b>चालू ओळ</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:5
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:5
 msgid "<b>Elements</b>"
 msgstr "<b>घटक</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:6
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:6
 msgid "<b>File Saving</b>"
 msgstr "<b>फाइल सुरक्षित करत आहे</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:7
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:7
 msgid "<b>Font</b>"
 msgstr "<b>फॉन्ट</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:8
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:2
-msgid "<b>Line Numbers</b>"
-msgstr "<b>ओळ क्रमांक</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:9
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:9
 msgid "<b>Right Margin</b>"
 msgstr "<b>उजवा समास</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:10
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
 msgid "<b>Tab Stops</b>"
 msgstr "<b>टॅब थांबे</b>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:11
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:3
-msgid "<b>Text Wrapping</b>"
-msgstr "<b>पाठ गुंडाळणी</b>"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:12
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
 msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">रंग</span>"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:13
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
 #: ../plugins/taglist/HTML.tags.xml.in.h:23
 msgid "Bold"
 msgstr "ठळक"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:14
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:14
 msgid "Create a _backup copy of files before saving"
 msgstr "रक्षित करण्यापूर्वी फाइलींची पूरक प्रत बनवा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:15
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:15
 msgid "Display right _margin"
 msgstr "उजवा समास दाखवा(_m)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:16
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:4
-msgid "Do not _split words over two lines"
-msgstr "शब्द दोन रांगांमध्ये विभागू नका(_s)"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:17
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:17
 msgid "Editor"
 msgstr "संपादक"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:18
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:18
 msgid "Editor _font: "
 msgstr "संपादकाने वापरायचा फोन्ट"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:19
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:5
-msgid "Enable text _wrapping"
-msgstr "पाठ गुंडाळणी कार्यान्वित करा(_w)"
-
-#: ../gedit/dialogs/gedit-preferences.glade2.h:20
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:20
 msgid "Font & Colors"
 msgstr "फोन्ड आणि रंग"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:21
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:21
 msgid "Hi_ghlight current line"
 msgstr "चालू ओळ उठावदार करा(_g)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:22
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:22
 msgid "Highlight _mode:"
 msgstr "उठावदार रीत(_m)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:23
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:23
 msgid "Highlight matching _bracket"
 msgstr "जुळणारे कंस उठावदार करा(_b)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:24
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Insert _spaces instead of tabs"
 msgstr "टॅब ऐवजी रिकाम्या जागा भराव्यात(_s)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:25
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
 msgid "Italic"
 msgstr "तिरपे"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:26
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:26
 msgid "Normal _text color:"
 msgstr "सामान्य पाठ रंग(_t):"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:27
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:27
 msgid "Pick a color"
 msgstr "रंग निवडा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:28
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:28
 msgid "Pick the background color"
 msgstr "पार्श्वरंग घ्या "
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:29
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:29
 msgid "Pick the editor font"
 msgstr "संपादक फॉन्ट निवडा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:30
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:30
 msgid "Pick the normal text color"
 msgstr "सामान्य पाठ रंग निवडा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:31
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:31
 msgid "Pick the selected text color"
 msgstr "निवडलेला टेक्स्ट रंग घ्या"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:32
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:32
 msgid "Pick the selection color"
 msgstr "निवडीचा रंग ध्या"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:33
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:33
 msgid "Plugins"
 msgstr "प्लगईन"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:34
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:34
 msgid "Preferences"
 msgstr "प्राधान्यक्रम"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:35
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:35
 msgid "Se_lection color:"
 msgstr "निवडीचे रंग"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:36
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:36
 msgid "Selecte_d text color:"
 msgstr "निवडलेले टेक्स्ट रंग"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:37
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:37
 msgid "Strikethrough"
 msgstr "खोडा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:38
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:38
 msgid "Syntax Highlighting"
 msgstr "सिंटॅक्स उठावदार"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:39
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:39
 msgid "U_se default theme colors"
 msgstr "मुलभूत थीम रंग वापरा(_s)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:40
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:40
 msgid "Underline"
 msgstr "अधोरेखीत करा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:41
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:41
 msgid "View"
 msgstr "दृश्य"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:42
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:42
 msgid "_Autosave files every"
 msgstr "प्रत्येक चालू फाइल स्वयंरक्षित करा(_A)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:43
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:43
 msgid "_Background color:"
 msgstr "पार्श्वभागातील रंग"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:44
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:44
 msgid "_Background:"
 msgstr "पार्श्वभूमी(_B):"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:45
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:45
 msgid "_Display line numbers"
 msgstr "ओळ क्रमांक दर्षवा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:46
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:46
 msgid "_Enable automatic indentation"
 msgstr "आपोआप समास सोडणे कार्यान्वित करा(_E)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:47
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:47
 msgid "_Enable syntax highlighting"
 msgstr "सिंटॅक्स उठावदारीकरण कार्यान्वित करा(_E)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:48
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:48
 msgid "_Foreground:"
 msgstr "प्रधानभूमी(_F):"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:49
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:49
 msgid "_Reset to Default "
 msgstr "मुलभूतास पुनर्निर्धारित करा(_R)"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:50
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:50
 msgid "_Right margin at column:"
 msgstr "स्तंभास उजवा समास(_R):"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:51
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:51
 msgid "_Tab width:"
 msgstr "टॅब रुंदी(_T):"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:52
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
 msgid "_Use default theme font"
 msgstr "उपलब्ध साधारण फोन्ट वापरा"
 
-#: ../gedit/dialogs/gedit-preferences.glade2.h:53
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:53
 msgid "_minutes"
 msgstr "मिनिटे(_m)"
 
-#: ../gedit/dialogs/goto-line.glade2.h:1
-msgid "Goto Line"
-msgstr "ओळ क्रमांकावर जा"
+#: ../gedit/dialogs/gedit-search-dialog.c:302
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1089
+msgid "Replace"
+msgstr "बदलून घ्या"
 
-#: ../gedit/dialogs/goto-line.glade2.h:2
-msgid "_Line number:"
-msgstr "ओळ क्रमांक"
+#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1087
+msgid "Find"
+msgstr "शोधा"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:6
-msgid "Fonts"
-msgstr "फोन्ट"
+#: ../gedit/dialogs/gedit-search-dialog.c:366
+msgid "Replace _All"
+msgstr "सर्व बदलून घ्या"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:7
-msgid "General"
-msgstr "सामान्य"
+#: ../gedit/dialogs/gedit-search-dialog.c:367
+#: ../gedit/gedit-commands-file.c:680
+msgid "_Replace"
+msgstr "बदलून घ्या"
 
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:8
-msgid "He_aders and footers:"
-msgstr "मथळे आणि तळटिपा(_a):"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:9
-msgid "Page Setup"
-msgstr "पृष्ठ व्यवस्था"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:10
-msgid "Print _line numbers"
-msgstr "ओळ क्रमांक छापा(_l)"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:11
-msgid "Print s_yntax highlighting"
-msgstr "सिंटॅक्स उठावदारीकरण छापा(_s)"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:12
-msgid "_Body:"
-msgstr "धड(_B):"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:13
-msgid "_Line numbers:"
-msgstr "ओळ क्रमांक(_L):"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:14
-msgid "_Number every"
-msgstr "प्रत्येक ओळ क्रमांक मुद्रीत करा(_N)"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:15
-msgid "_Print page headers"
-msgstr "पान शिर्षके मुद्रीत करा(_P)"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:16
-msgid "_Restore Default Fonts"
-msgstr "मुलभूत फॉंन्ट वापरा(_R)"
-
-#: ../gedit/dialogs/page-setup-dialog.glade2.h:17
-msgid "lines"
-msgstr "रेषा"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:1
-msgid "C_onfigure Plugin"
-msgstr "प्लगइन व्यूहरचना करा(_o)"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:2
-msgid "_About Plugin"
-msgstr "प्लगइन विषयी(_A)"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:3
-msgid "button1"
-msgstr "बटन१"
-
-#: ../gedit/dialogs/plugin-manager.glade2.h:4
-msgid "dialog1"
-msgstr "संवाद १"
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:1
-msgid "Browse for program location..."
-msgstr "कार्यक्रम स्थानाचे नियोजन करा..."
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:3
-msgid "_Location to search for:"
-msgstr "योग्य स्थाने शोधण्यासाठी"
-
-#: ../gedit/dialogs/program-location-dialog.glade2.h:4
-msgid "label"
-msgstr "लेबल"
-
-#: ../gedit/dialogs/replace.glade2.h:1 ../gedit/dialogs/uri.glade2.h:1
-#: ../plugins/shell_output/shell_output.glade2.h:1
-#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
-msgid "*"
-msgstr "*"
-
-#: ../gedit/dialogs/replace.glade2.h:2 ../gedit/gedit-ui.xml.h:19
-msgid "Find Next"
-msgstr "पुढचा भाग पहा"
-
-#: ../gedit/dialogs/replace.glade2.h:3
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:1
 msgid "Match _entire word only"
 msgstr "फक्त संपूर्ण शब्द जोडा(_e)"
 
-#: ../gedit/dialogs/replace.glade2.h:5
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:3
 msgid "Replace All"
 msgstr "सर्व बदलून घ्या"
 
-#: ../gedit/dialogs/replace.glade2.h:6
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:4
 msgid "Replace _with: "
 msgstr "बदला"
 
-#: ../gedit/dialogs/replace.glade2.h:7
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:5
 msgid "Search _backwards"
 msgstr "मागे शोधा(_b)"
 
-#: ../gedit/dialogs/replace.glade2.h:8
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:6
 msgid "_Match case"
 msgstr "लिपी जुळवा(_M)"
 
-#: ../gedit/dialogs/replace.glade2.h:9
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:7
 msgid "_Search for: "
 msgstr "शोधा"
 
-#: ../gedit/dialogs/replace.glade2.h:10
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
 msgstr "आसपासचा भाग कवर करून घ्या"
 
-#: ../gedit/dialogs/uri.glade2.h:2
-msgid "Ch_aracter coding:"
-msgstr "अक्षर कोडिंग(_a):"
-
-#: ../gedit/dialogs/uri.glade2.h:3
-msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "(URI) जी फाइल तुम्हाला उघडायची आहे त्या फाइलची जागा सांगा(_l):"
-
-#: ../gedit/dialogs/uri.glade2.h:4
-msgid "Open from URI"
-msgstr "URI मधुन उघडा"
-
-#: ../gedit/gedit-commands.c:551
-msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
-msgstr "GNOME साठी जीएडीट हा एक लहान व हलक्या वजनाचा पाठ संपादक आहे"
-
-#. Translators: This is a special message that shouldn't be translated
-#. literally. It is used in the about box to give credits to
-#. the translators.
-#. Thus, you should translate it to your name and email address.
-#. You can also include other translators who have contributed to
-#. this translation; in that case, please write them on separate
-#. lines seperated by newlines (\n).
-#: ../gedit/gedit-commands.c:560
-msgid "translator-credits"
-msgstr ""
-"राहुल भालेराव <b.rahul.pm@gmail.com>"
-"Swapnil Hajare <dreamil1000a@yahoo.com>"
-"Pradeep Deshpande <npdeshpande@vsnl.net>"
-
-#: ../gedit/gedit-commands.c:579
-msgid "gedit"
-msgstr "गेडीट"
-
-#: ../gedit/gedit-document.c:384
-#, c-format
-msgid "%s %d"
-msgstr "%s %d"
-
-#: ../gedit/gedit-document.c:384
-msgid "Unsaved Document"
-msgstr "असुरक्षित दस्तऐवज"
-
-#: ../gedit/gedit-document.c:934 ../gedit/gedit-document.c:1488
-msgid "Invalid UTF-8 data"
-msgstr "माहीती UTF-8 अयोग्य आहे"
-
-#: ../gedit/gedit-document.c:1750
-#, c-format
-msgid "Could not read symbolic link information for %s"
-msgstr "सूचक संबंधीत माहीती वाचता येत नही %s"
-
-#: ../gedit/gedit-document.c:1796
-msgid "The file has too many symbolic links."
-msgstr "या फाइल मध्ये अनेक पूरक सूचके आहेत"
-
-#: ../gedit/gedit-document.c:1880
-#, c-format
-msgid "gedit cannot handle %s: locations in write mode."
-msgstr "लिहा मधील स्थिती दर्शके %s गेडीट द्वारा हाताळता येत नाहीत"
-
-#: ../gedit/gedit-document.c:1887
-msgid "gedit cannot handle this kind of location in write mode."
-msgstr "लिहा मधील अशा प्रकारची स्थिती दर्शके गेडीट द्वारा हाताळता येत नाहीत"
-
-#: ../gedit/gedit-document.c:1900
-msgid "Invalid filename."
-msgstr "फाइलचे नाव चुकीचे आहे"
-
-#: ../gedit/gedit-document.c:2051
+#: ../gedit/gedit.c:75
 msgid ""
-"There is not enough disk space to save the file.\n"
-"Please free some disk space and try again."
+"Set the character encoding to be used to open the files listed on the "
+"command line"
 msgstr ""
-"डिस्कमध्ये फाइल रक्षित करण्यासाठी पुरेशी जागा नाहीकृपया डिस्कमधील काही फाइल मोकळ्या "
-"करा आणि पुन्हा प्रयत्न करा"
+"आदेश पंक्तीवर यादी केलेल्या फाइली उघडण्यासाठी कोणती अक्षर एनकोडिंग वापरावी हे निर्धारित "
+"करा"
 
-#: ../gedit/gedit-document.c:2056
-msgid ""
-"The disk where you are trying to save the file has a limitation on file "
-"sizes.  Please try saving a smaller file or saving it to a disk that does "
-"not have this limitation."
+#: ../gedit/gedit.c:78
+msgid "Create a new toplevel window in an existing instance of gedit"
+msgstr "जीएडिट मधील सध्याच्या घटनेसाठी एक नविन उच्च स्तरीय विन्डो तयार करा"
+
+#: ../gedit/gedit.c:81
+msgid "Create a new document in an existing instance of gedit"
+msgstr "जीएडिट मधील सध्याच्या घटनेसाठी एक नविन दस्तऐवज तयार करा"
+
+#: ../gedit/gedit.c:84
+msgid "[FILE...]"
 msgstr ""
-"ज्या डिस्कमध्ये तुम्ही फाइल रक्षित करु पहाता त्या डिस्कमध्ये फाइलींसाठी मर्यादित जागा आहे "
-"कृपया अशी मर्यादित जागा नसणार्या डिस्कमध्ये फाइल रक्षित करता येईल असे पहा"
 
-#: ../gedit/gedit-document.c:2100
-msgid "Could not create a backup file."
-msgstr "पूरक फाइल तयार करता आली नाही"
-
-#: ../gedit/gedit-encodings-option-menu.c:204
-msgid "Auto Detected"
-msgstr "आपोआप शोधलेले"
-
-#: ../gedit/gedit-encodings-option-menu.c:224
-#: ../gedit/gedit-encodings-option-menu.c:246
+#: ../gedit/gedit.c:116
 #, c-format
-msgid "Current Locale (%s)"
-msgstr "सद्य लोकेल (%s)"
+msgid "%s: malformed file name or URI.\n"
+msgstr ""
 
-#: ../gedit/gedit-encodings-option-menu.c:307
-msgid "Add or _Remove..."
-msgstr "जमा करा किंवा काढून टाका(_R)..."
+#: ../gedit/gedit.c:128
+#, fuzzy, c-format
+msgid "%s: invalid encoding.\n"
+msgstr " (अवैध युनिकोड)"
 
-#: ../gedit/gedit-encodings.c:136 ../gedit/gedit-encodings.c:181
-#: ../gedit/gedit-encodings.c:183 ../gedit/gedit-encodings.c:185
-#: ../gedit/gedit-encodings.c:187
-msgid "Unicode"
-msgstr "युनिकोड"
+#. Setup command line options
+#: ../gedit/gedit.c:450
+#, fuzzy
+msgid "- Edit text files"
+msgstr "गद्य फाइल संपादित करा"
 
-#: ../gedit/gedit-encodings.c:150 ../gedit/gedit-encodings.c:176
-#: ../gedit/gedit-encodings.c:222 ../gedit/gedit-encodings.c:265
-msgid "Western"
-msgstr "पश्चिमी"
+#: ../gedit/gedit-commands-file.c:211 ../gedit/gedit-commands-file.c:257
+#, fuzzy, c-format
+msgid "Loading file '%s'…"
+msgstr "\"%s\" फाइल लोड होत आहे..."
 
-#: ../gedit/gedit-encodings.c:152 ../gedit/gedit-encodings.c:224
-#: ../gedit/gedit-encodings.c:261
-msgid "Central European"
-msgstr "मध्य युरोपिअन"
+#: ../gedit/gedit-commands-file.c:266
+#, fuzzy, c-format
+msgid "Loading %d file…"
+msgid_plural "Loading %d files…"
+msgstr[0] "%d फाइल लोड होत आहे.."
+msgstr[1] "%d फाइली लोड होत आहेत.."
 
-#: ../gedit/gedit-encodings.c:154
-msgid "South European"
-msgstr "दक्षिण युरोपिअन"
+#: ../gedit/gedit-commands-file.c:406
+#, fuzzy
+msgid "Open Files…"
+msgstr "फाइल उघडा..."
 
-#: ../gedit/gedit-encodings.c:156 ../gedit/gedit-encodings.c:172
-#: ../gedit/gedit-encodings.c:275
-msgid "Baltic"
-msgstr "बाल्टिक"
+#: ../gedit/gedit-commands-file.c:512
+#, fuzzy
+msgid "The entered location is not valid."
+msgstr "दर्शवलेली एनकोडिंग \"%s\" वैध नाही\n"
 
-#: ../gedit/gedit-encodings.c:158 ../gedit/gedit-encodings.c:226
-#: ../gedit/gedit-encodings.c:239 ../gedit/gedit-encodings.c:243
-#: ../gedit/gedit-encodings.c:245 ../gedit/gedit-encodings.c:263
-msgid "Cyrillic"
-msgstr "सिरीलिक"
+#: ../gedit/gedit-commands-file.c:515
+#: ../gedit/gedit-io-error-message-area.c:150
+#: ../gedit/gedit-io-error-message-area.c:189
+#: ../gedit/gedit-io-error-message-area.c:205
+msgid "Please, check that you typed the location correctly and try again."
+msgstr "कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा प्रयत्न करा."
 
-#: ../gedit/gedit-encodings.c:160 ../gedit/gedit-encodings.c:232
-#: ../gedit/gedit-encodings.c:273
-msgid "Arabic"
-msgstr "अरेबिक"
-
-#: ../gedit/gedit-encodings.c:162 ../gedit/gedit-encodings.c:267
-#: ../plugins/spell/gedit-spell-checker.c:93
-msgid "Greek"
-msgstr "ग्रीक"
-
-#: ../gedit/gedit-encodings.c:164
-msgid "Hebrew Visual"
-msgstr "हिब्रू दर्शनीय"
-
-#: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:230
-#: ../gedit/gedit-encodings.c:271 ../plugins/spell/gedit-spell-checker.c:109
-msgid "Hebrew"
-msgstr "हिब्रू"
-
-#: ../gedit/gedit-encodings.c:168 ../gedit/gedit-encodings.c:228
-#: ../gedit/gedit-encodings.c:269 ../plugins/spell/gedit-spell-checker.c:150
-msgid "Turkish"
-msgstr "तुर्किश"
-
-#: ../gedit/gedit-encodings.c:170
-msgid "Nordic"
-msgstr "नॉर्डिक"
-
-#: ../gedit/gedit-encodings.c:174
-msgid "Celtic"
-msgstr "सेल्टिक"
-
-#: ../gedit/gedit-encodings.c:178 ../plugins/spell/gedit-spell-checker.c:138
-msgid "Romanian"
-msgstr "रोमानिअन"
-
-#: ../gedit/gedit-encodings.c:190
-msgid "Armenian"
-msgstr "आर्मेनिअन"
-
-#: ../gedit/gedit-encodings.c:192 ../gedit/gedit-encodings.c:194
-#: ../gedit/gedit-encodings.c:208
-msgid "Chinese Traditional"
-msgstr "पारंपारिक चिनी"
-
-#: ../gedit/gedit-encodings.c:196
-msgid "Cyrillic/Russian"
-msgstr "सिरीलिक/रशियन"
-
-#: ../gedit/gedit-encodings.c:199 ../gedit/gedit-encodings.c:201
-#: ../gedit/gedit-encodings.c:203 ../gedit/gedit-encodings.c:235
-#: ../gedit/gedit-encodings.c:250
-msgid "Japanese"
-msgstr "जपानी"
-
-#: ../gedit/gedit-encodings.c:206 ../gedit/gedit-encodings.c:237
-#: ../gedit/gedit-encodings.c:241 ../gedit/gedit-encodings.c:256
-msgid "Korean"
-msgstr "कोरियन"
-
-#: ../gedit/gedit-encodings.c:211 ../gedit/gedit-encodings.c:213
-#: ../gedit/gedit-encodings.c:215 ../gedit/gedit-encodings.c:219
-msgid "Chinese Simplified"
-msgstr "सरलीकृत चिनी"
-
-#: ../gedit/gedit-encodings.c:217
-msgid "Georgian"
-msgstr "जॉर्जीअन"
-
-#: ../gedit/gedit-encodings.c:247
-msgid "Cyrillic/Ukrainian"
-msgstr "सिरीलिक/यूक्रेनियन"
-
-#: ../gedit/gedit-encodings.c:252 ../gedit/gedit-encodings.c:258
-#: ../gedit/gedit-encodings.c:277 ../plugins/spell/gedit-spell-checker.c:153
-msgid "Vietnamese"
-msgstr "वियेतनामी"
-
-#: ../gedit/gedit-encodings.c:254
-msgid "Thai"
-msgstr "थाई"
-
-#: ../gedit/gedit-encodings.c:441
-msgid "Unknown"
-msgstr "अपरिचित"
-
-#: ../gedit/gedit-file-selector-util.c:132 ../plugins/savecopy/savecopy.c:356
-#, c-format
-msgid "A file named \"%s\" already exists.\n"
-msgstr "\"%s\" ही फाइल आधीच अस्तित्वात आहे.\n"
-
-#: ../gedit/gedit-file-selector-util.c:133 ../plugins/savecopy/savecopy.c:360
-msgid "Do you want to replace it with the one you are saving?"
-msgstr "तुम्ही सुरक्षित करत असलेल्याशी ही बदली करू इच्छिता काय?"
-
-#: ../gedit/gedit-file-selector-util.c:142
-#, c-format
-msgid "The file \"%s\" is read-only.\n"
+#: ../gedit/gedit-commands-file.c:661
+#, fuzzy, c-format
+msgid "The file \"%s\" is read-only."
 msgstr "\"%s\" ही फाइल फक्त वाचण्यायोग्य आहे.\n"
 
-#: ../gedit/gedit-file-selector-util.c:143
+#: ../gedit/gedit-commands-file.c:672
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "तुम्ही सुरक्षित करत असलेल्याशी ही बदली करण्याचा प्रयत्न करू इच्छिता काय?"
 
-#: ../gedit/gedit-file-selector-util.c:338 ../plugins/savecopy/savecopy.c:584
-msgid "All Files"
-msgstr "सर्व फाइली"
+#: ../gedit/gedit-commands-file.c:738 ../gedit/gedit-commands-file.c:936
+#, fuzzy, c-format
+msgid "Saving file '%s'…"
+msgstr "\"%s\" फाइल लोड होत आहे..."
 
-#: ../gedit/gedit-file-selector-util.c:346 ../plugins/savecopy/savecopy.c:592
-msgid "All Text Files"
-msgstr "सर्व पाठ्य फाइली"
+#: ../gedit/gedit-commands-file.c:835
+#, fuzzy
+msgid "Save As…"
+msgstr "...प्रमाणे सुरक्षित करा"
 
-#: ../gedit/gedit-file-selector-util.c:364 ../plugins/savecopy/savecopy.c:603
-msgid "_Character Coding:"
-msgstr "अक्षर कोडिंग(_C):"
+#: ../gedit/gedit-commands-file.c:1131
+#, fuzzy, c-format
+msgid "Reverting the document '%s'…"
+msgstr "दस्तावेज \"%s\" मूळ स्थितीवर आणत आहे..."
 
-#: ../gedit/gedit-file-selector-util.c:498
-msgid "Select a file to open"
-msgstr "उघडण्यासाठी फाइल निवडा"
-
-#: ../gedit/gedit-file-selector-util.c:523
-msgid "Select files to open"
-msgstr "उघडण्यासाठी फाइली निवडा"
-
-#: ../gedit/gedit-file-selector-util.c:559
-msgid "Select a filename to save"
-msgstr "रक्षित करण्या साठी फाइलचे नाव निवडा"
-
-#: ../gedit/gedit-file.c:194
-msgid "Open File..."
-msgstr "फाइल उघडा..."
-
-#: ../gedit/gedit-file.c:250 ../gedit/gedit-file.c:390
-#, c-format
-msgid "Saving document \"%s\"..."
-msgstr "दस्तावेज %s संग्रहित होत आहे..."
-
-#: ../gedit/gedit-file.c:279 ../gedit/gedit-file.c:408
-#, c-format
-msgid "The document \"%s\" has not been saved."
-msgstr "दस्तऐवज \"%s\" रक्षित करण्यात आलेला नाही"
-
-#: ../gedit/gedit-file.c:287 ../gedit/gedit-file.c:421
-#, c-format
-msgid "The document \"%s\" has been saved."
-msgstr "दस्तऐवज \"%s\" रक्षित करण्यात आलेला आहे."
-
-#: ../gedit/gedit-file.c:372
-msgid "Save as..."
-msgstr "अशी संग्रहित करा..."
-
-#: ../gedit/gedit-file.c:526
-#, c-format
-msgid "Revert unsaved changes to document \"%s\"?"
+#: ../gedit/gedit-commands-file.c:1153
+#, fuzzy, c-format
+msgid "Revert unsaved changes to document '%s'?"
 msgstr "दस्तावेज \"%s\" मधील असंग्रहित बदल परत करावेत का?"
 
-#: ../gedit/gedit-file.c:535
+#: ../gedit/gedit-commands-file.c:1162
 #, c-format
-msgid "Changes made to the document in the last %ld second will be permanently lost."
+msgid ""
+"Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld seconds will be permanently "
 "lost."
 msgstr[0] "दस्तावेजात मागील %ld सेकंदात केलेले बदल कायमस्वरूपी नष्ट होतील."
 msgstr[1] "दस्तावेजात मागील %ld सेकंदांत केलेले बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/gedit-file.c:544
-msgid "Changes made to the document in the last minute will be permanently lost."
+#: ../gedit/gedit-commands-file.c:1171
+msgid ""
+"Changes made to the document in the last minute will be permanently lost."
 msgstr "दस्तावेजात मागील मिनिटात केलेले बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/gedit-file.c:550
+#: ../gedit/gedit-commands-file.c:1177
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1427,23 +1225,25 @@ msgid_plural ""
 msgstr[0] "दस्तावेजात मागील मिनिट आणि %ld सेकंदात केलेले बदल कायमस्वरूपी नष्ट होतील."
 msgstr[1] "दस्तावेजात मागील मिनिट आणि %ld सेकंदांत केलेले बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/gedit-file.c:560
+#: ../gedit/gedit-commands-file.c:1187
 #, c-format
-msgid "Changes made to the document in the last %ld minute will be permanently lost."
+msgid ""
+"Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
 "Changes made to the document in the last %ld minutes will be permanently "
 "lost."
 msgstr[0] "दस्तावेजात मागील %ld मिनिटात केलेले बदल कायमस्वरूपी नष्ट होतील."
 msgstr[1] "दस्तावेजात मागील %ld मिनिटांत केलेले बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/gedit-file.c:575 ../gedit/gedit-file.c:596
+#: ../gedit/gedit-commands-file.c:1202 ../gedit/gedit-commands-file.c:1223
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
+msgid_plural ""
+"Changes made to the document in the last %d hours will be permanently lost."
 msgstr[0] "दस्तावेजात मागील %d तासात केलेले बदल कायमस्वरूपी नष्ट होतील."
 msgstr[1] "दस्तावेजात मागील %d तासांत केलेले बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/gedit-file.c:581
+#: ../gedit/gedit-commands-file.c:1208
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1454,165 +1254,300 @@ msgid_plural ""
 msgstr[0] "दस्तावेजात मागील तासात आणि %d मिनिटात केलेले बदल कायमस्वरूपी नष्ट होतील."
 msgstr[1] "दस्तावेजात मागील तासात आणि %d मिनिटांत केलेले बदल कायमस्वरूपी नष्ट होतील."
 
-#: ../gedit/gedit-file.c:617 ../gedit/gedit-ui.xml.h:94
+#: ../gedit/gedit-commands-file.c:1249
 msgid "_Revert"
 msgstr "मूळ स्थितीवर या (_R)"
 
-#: ../gedit/gedit-file.c:662
+#: ../gedit/gedit-commands-help.c:80
+msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
+msgstr "GNOME साठी जीएडीट हा एक लहान व हलक्या वजनाचा पाठ संपादक आहे"
+
+#: ../gedit/gedit-commands-help.c:96
+msgid "translator-credits"
+msgstr ""
+"राहुल भालेराव <b.rahul.pm@gmail.com>Swapnil Hajare <dreamil1000a@yahoo."
+"com>Pradeep Deshpande <npdeshpande@vsnl.net>"
+
+#: ../gedit/gedit-commands-search.c:165
+#, fuzzy, c-format
+msgid "Found and replaced %d occurrence"
+msgid_plural "Found and replaced %d occurrences"
+msgstr[0] "%d प्राप्त आणि बदलला उद्भव."
+msgstr[1] "%d प्राप्त आणि बदलले उद्भव."
+
+#: ../gedit/gedit-commands-search.c:175
+#, fuzzy
+msgid "Found and replaced one occurrence"
+msgstr "%d प्राप्त आणि बदलला उद्भव."
+
+#: ../gedit/gedit-commands-search.c:188
+msgid "Phrase not found"
+msgstr ""
+
+#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:868
+#, fuzzy, c-format
+msgid "Unsaved Document %d"
+msgstr "असुरक्षित दस्तऐवज"
+
+#. bad bad luck...
+#: ../gedit/gedit-document-saver.c:536
+#, fuzzy
+msgid "Could not obtain backup filename"
+msgstr "पूरक फाइल तयार करता आली नाही"
+
+#: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
+#: ../gedit/gedit-window.c:1619 ../gedit/gedit-window.c:1624
+msgid "Read Only"
+msgstr "फक्त वाचण्यासाठी"
+
+#: ../gedit/gedit-documents-panel.c:633
+#, fuzzy
+msgid "Documents"
+msgstr "दस्तऐवज(_D)"
+
+#: ../gedit/gedit-encodings.c:137 ../gedit/gedit-encodings.c:182
+#: ../gedit/gedit-encodings.c:184 ../gedit/gedit-encodings.c:186
+#: ../gedit/gedit-encodings.c:188
+msgid "Unicode"
+msgstr "युनिकोड"
+
+#: ../gedit/gedit-encodings.c:151 ../gedit/gedit-encodings.c:177
+#: ../gedit/gedit-encodings.c:223 ../gedit/gedit-encodings.c:266
+msgid "Western"
+msgstr "पश्चिमी"
+
+#: ../gedit/gedit-encodings.c:153 ../gedit/gedit-encodings.c:225
+#: ../gedit/gedit-encodings.c:262
+msgid "Central European"
+msgstr "मध्य युरोपिअन"
+
+#: ../gedit/gedit-encodings.c:155
+msgid "South European"
+msgstr "दक्षिण युरोपिअन"
+
+#: ../gedit/gedit-encodings.c:157 ../gedit/gedit-encodings.c:173
+#: ../gedit/gedit-encodings.c:276
+msgid "Baltic"
+msgstr "बाल्टिक"
+
+#: ../gedit/gedit-encodings.c:159 ../gedit/gedit-encodings.c:227
+#: ../gedit/gedit-encodings.c:240 ../gedit/gedit-encodings.c:244
+#: ../gedit/gedit-encodings.c:246 ../gedit/gedit-encodings.c:264
+msgid "Cyrillic"
+msgstr "सिरीलिक"
+
+#: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:233
+#: ../gedit/gedit-encodings.c:274 ../plugins/spell/gedit-spell-checker.c:81
+msgid "Arabic"
+msgstr "अरेबिक"
+
+#: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:268
+#: ../plugins/spell/gedit-spell-checker.c:95
+msgid "Greek"
+msgstr "ग्रीक"
+
+#: ../gedit/gedit-encodings.c:165
+msgid "Hebrew Visual"
+msgstr "हिब्रू दर्शनीय"
+
+#: ../gedit/gedit-encodings.c:167 ../gedit/gedit-encodings.c:231
+#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:111
+msgid "Hebrew"
+msgstr "हिब्रू"
+
+#: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:229
+#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
+msgid "Turkish"
+msgstr "तुर्किश"
+
+#: ../gedit/gedit-encodings.c:171
+msgid "Nordic"
+msgstr "नॉर्डिक"
+
+#: ../gedit/gedit-encodings.c:175
+msgid "Celtic"
+msgstr "सेल्टिक"
+
+#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:140
+msgid "Romanian"
+msgstr "रोमानिअन"
+
+#: ../gedit/gedit-encodings.c:191
+msgid "Armenian"
+msgstr "आर्मेनिअन"
+
+#: ../gedit/gedit-encodings.c:193 ../gedit/gedit-encodings.c:195
+#: ../gedit/gedit-encodings.c:209
+msgid "Chinese Traditional"
+msgstr "पारंपारिक चिनी"
+
+#: ../gedit/gedit-encodings.c:197
+msgid "Cyrillic/Russian"
+msgstr "सिरीलिक/रशियन"
+
+#: ../gedit/gedit-encodings.c:200 ../gedit/gedit-encodings.c:202
+#: ../gedit/gedit-encodings.c:204 ../gedit/gedit-encodings.c:236
+#: ../gedit/gedit-encodings.c:251
+msgid "Japanese"
+msgstr "जपानी"
+
+#: ../gedit/gedit-encodings.c:207 ../gedit/gedit-encodings.c:238
+#: ../gedit/gedit-encodings.c:242 ../gedit/gedit-encodings.c:257
+msgid "Korean"
+msgstr "कोरियन"
+
+#: ../gedit/gedit-encodings.c:212 ../gedit/gedit-encodings.c:214
+#: ../gedit/gedit-encodings.c:216 ../gedit/gedit-encodings.c:220
+msgid "Chinese Simplified"
+msgstr "सरलीकृत चिनी"
+
+#: ../gedit/gedit-encodings.c:218
+msgid "Georgian"
+msgstr "जॉर्जीअन"
+
+#: ../gedit/gedit-encodings.c:248
+msgid "Cyrillic/Ukrainian"
+msgstr "सिरीलिक/यूक्रेनियन"
+
+#: ../gedit/gedit-encodings.c:253 ../gedit/gedit-encodings.c:259
+#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:155
+msgid "Vietnamese"
+msgstr "वियेतनामी"
+
+#: ../gedit/gedit-encodings.c:255
+msgid "Thai"
+msgstr "थाई"
+
+#: ../gedit/gedit-encodings.c:441
+msgid "Unknown"
+msgstr "अपरिचित"
+
+#: ../gedit/gedit-encodings-option-menu.c:219
+msgid "Auto Detected"
+msgstr "आपोआप शोधलेले"
+
+#: ../gedit/gedit-encodings-option-menu.c:239
+#: ../gedit/gedit-encodings-option-menu.c:261
 #, c-format
-msgid "Error reverting the document \"%s\"."
-msgstr "\"%s\" ही फाइल मूळ स्थितीत आणताना चूक."
+msgid "Current Locale (%s)"
+msgstr "सद्य लोकेल (%s)"
 
-#: ../gedit/gedit-file.c:670
-#, c-format
-msgid "The document \"%s\" has not been reverted."
-msgstr "\"%s\" दस्तऐवज मूळ स्थितीवर घेण्यात आलेला नाही."
+#: ../gedit/gedit-encodings-option-menu.c:322
+msgid "Add or _Remove..."
+msgstr "जमा करा किंवा काढून टाका(_R)..."
 
-#: ../gedit/gedit-file.c:674
-#, c-format
-msgid "The document \"%s\" has been reverted."
-msgstr "\"%s\" दस्तऐवज मूळ स्थितीवर घेण्यात आलेला नाही"
+#: ../gedit/gedit-file-chooser-dialog.c:72
+#, fuzzy
+msgid "C_haracter Coding:"
+msgstr "अक्षर कोडिंग(_C):"
 
-#: ../gedit/gedit-file.c:702
-#, c-format
-msgid "Reverting the document \"%s\"..."
-msgstr "दस्तावेज \"%s\" मूळ स्थितीवर आणत आहे..."
+#: ../gedit/gedit-file-chooser-dialog.c:189
+msgid "All Files"
+msgstr "सर्व फाइली"
 
-#: ../gedit/gedit-file.c:825
-msgid "Could not read data from stdin."
-msgstr "stdin मधील माहिती वाचता आली नाही"
+#: ../gedit/gedit-file-chooser-dialog.c:197
+msgid "All Text Files"
+msgstr "सर्व पाठ्य फाइली"
 
-#: ../gedit/gedit-file.c:912
-msgid "Reverting file:"
-msgstr "फाइल मूळ स्थितीवर आणत आहे:"
+#: ../gedit/gedit-help.c:66
+#, fuzzy
+msgid "There was an error displaying help."
+msgstr "मदत दर्शवण्यात चूक झाली: %s"
 
-#: ../gedit/gedit-file.c:912
-msgid "Loading file:"
-msgstr "फाइल लोड होत आहे:"
-
-#: ../gedit/gedit-file.c:1092 ../gedit/gedit-file.c:1333
-#, c-format
-msgid "Error loading file \"%s\""
-msgstr "फाइल  \"%s\" लोड करताना चूक"
-
-#: ../gedit/gedit-file.c:1113
-#, c-format
-msgid "Loaded file \"%s\""
-msgstr "\"%s\" फाइल लोड केली"
-
-#: ../gedit/gedit-file.c:1225
-#, c-format
-msgid "Loaded %d file"
-msgid_plural "Loaded %d files"
-msgstr[0] "%d फाइल लोड केली"
-msgstr[1] "%d फाइली लोड केल्या"
-
-#: ../gedit/gedit-file.c:1286
-#, c-format
-msgid "Created file \"%s\""
-msgstr "\"%s\" फाइल निर्माण केली"
-
-#: ../gedit/gedit-file.c:1304
-#, c-format
-msgid "Loading file \"%s\"..."
-msgstr "\"%s\" फाइल लोड होत आहे..."
-
-#: ../gedit/gedit-file.c:1469
-#, c-format
-msgid "Loading %d file..."
-msgid_plural "Loading %d files..."
-msgstr[0] "%d फाइल लोड होत आहे.."
-msgstr[1] "%d फाइली लोड होत आहेत.."
-
-#: ../gedit/gedit-io-error-dialogs.c:84
-#, c-format
-msgid "Could not find the file \"%s\""
+#: ../gedit/gedit-io-error-message-area.c:148
+#, fuzzy, c-format
+msgid "Could not find the file %s."
 msgstr "\"%s\"फाइल सापडू शकली नाही"
 
-#: ../gedit/gedit-io-error-dialogs.c:86 ../gedit/gedit-io-error-dialogs.c:130
-#: ../gedit/gedit-io-error-dialogs.c:150
-msgid "Please, check that you typed the location correctly and try again."
-msgstr "कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा प्रयत्न करा."
-
-#: ../gedit/gedit-io-error-dialogs.c:91 ../gedit/gedit-io-error-dialogs.c:99
-#: ../gedit/gedit-io-error-dialogs.c:116 ../gedit/gedit-io-error-dialogs.c:122
-#: ../gedit/gedit-io-error-dialogs.c:135 ../gedit/gedit-io-error-dialogs.c:141
-#: ../gedit/gedit-io-error-dialogs.c:155 ../gedit/gedit-io-error-dialogs.c:171
-#: ../gedit/gedit-io-error-dialogs.c:215 ../gedit/gedit-io-error-dialogs.c:223
-#: ../gedit/gedit-io-error-dialogs.c:231 ../gedit/gedit-io-error-dialogs.c:239
-#: ../gedit/gedit-io-error-dialogs.c:246 ../gedit/gedit-io-error-dialogs.c:252
-#: ../gedit/gedit-io-error-dialogs.c:292 ../gedit/gedit-io-error-dialogs.c:313
-#: ../gedit/gedit-io-error-dialogs.c:341
-#, c-format
-msgid "Could not open the file \"%s\""
-msgstr "\"%s\"फाइल उघडू शकली नाही"
-
-#: ../gedit/gedit-io-error-dialogs.c:93 ../gedit/gedit-io-error-dialogs.c:406
+#: ../gedit/gedit-io-error-message-area.c:155
+#: ../gedit/gedit-io-error-message-area.c:381
 msgid "The file contains corrupted data."
 msgstr "फाइलमध्ये सदोष डेटा आहे."
 
-#: ../gedit/gedit-io-error-dialogs.c:104 ../gedit/gedit-io-error-dialogs.c:417
-#, c-format
-msgid "gedit cannot handle %s: locations."
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:166
+#: ../gedit/gedit-io-error-message-area.c:392
+#, fuzzy, c-format
+msgid "gedit cannot handle %s locations."
 msgstr "जीएडिट %s हाताळू शकत नाही: ठिकाणे."
 
-#: ../gedit/gedit-io-error-dialogs.c:109 ../gedit/gedit-io-error-dialogs.c:422
+#: ../gedit/gedit-io-error-message-area.c:172
+#: ../gedit/gedit-io-error-message-area.c:398
 msgid "gedit cannot handle this location."
 msgstr "जीएडिट हे ठिकाण हाताळू शकत नाही."
 
-#: ../gedit/gedit-io-error-dialogs.c:118 ../gedit/gedit-io-error-dialogs.c:431
+#: ../gedit/gedit-io-error-message-area.c:179
+#: ../gedit/gedit-io-error-message-area.c:405
 msgid "The file contains data in an invalid format."
 msgstr "फाइलमध्ये अवैध स्वरूपातील माहिती समाविष्ट आहे."
 
-#: ../gedit/gedit-io-error-dialogs.c:124 ../gedit/gedit-io-error-dialogs.c:437
+#: ../gedit/gedit-io-error-message-area.c:183
+#: ../gedit/gedit-io-error-message-area.c:409
 msgid "The file is too big."
 msgstr "ही फाइल खूप मोठी आहे."
 
-#: ../gedit/gedit-io-error-dialogs.c:128
-#, c-format
-msgid "\"%s\" is not a valid location"
+#: ../gedit/gedit-io-error-message-area.c:187
+#, fuzzy, c-format
+msgid "%s is not a valid location."
 msgstr "\"%s\" हे वैध ठिकाण नाही"
 
-#: ../gedit/gedit-io-error-dialogs.c:137 ../gedit/gedit-io-error-dialogs.c:443
-msgid "Access was denied."
-msgstr "प्रवेश नाकारण्यात आला."
+#: ../gedit/gedit-io-error-message-area.c:194
+#: ../gedit/gedit-io-error-message-area.c:413
+msgid "You do not have the permissions necessary to open the file."
+msgstr ""
 
-#: ../gedit/gedit-io-error-dialogs.c:143
-msgid "there are too many open files. Please, close some open files and try again."
-msgstr "अनेक फाइल उघड्या आहेत.कृपया, काही उघड्या फाइल बंद करा आणि पुन्हा प्रयत्न करा."
+#: ../gedit/gedit-io-error-message-area.c:198
+#: ../gedit/gedit-io-error-message-area.c:417
+#: ../gedit/gedit-io-error-message-area.c:1160
+#, fuzzy
+msgid ""
+"There are too many open files. Please, close some applications and try again."
+msgstr "अनेक फाइल उघड्या आहेत. कृपया, काही उघड्या फाइल बंद करा आणि पुन्हा प्रयत्न करा."
 
-#: ../gedit/gedit-io-error-dialogs.c:148 ../gedit/gedit-io-error-dialogs.c:661
-#, c-format
-msgid "\"%s\" is a directory"
+#: ../gedit/gedit-io-error-message-area.c:203
+#: ../gedit/gedit-io-error-message-area.c:422
+#, fuzzy, c-format
+msgid "%s is a directory."
 msgstr "\"%s\" ही निर्देशिका आहे"
 
-#: ../gedit/gedit-io-error-dialogs.c:157
+#: ../gedit/gedit-io-error-message-area.c:210
+#: ../gedit/gedit-io-error-message-area.c:427
 msgid ""
 "Not enough available memory to open the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"फाइल उघडण्यासाठी पुरेशी स्मरणशक्ती नाही. कृपया, काही चालू स्थितीतील अनुप्रयोग"
-"बंद करून पुन्हा प्रयत्न करा."
+"फाइल उघडण्यासाठी पुरेशी स्मरणशक्ती नाही. कृपया, काही चालू स्थितीतील अनुप्रयोगबंद करून "
+"पुन्हा प्रयत्न करा."
 
-#: ../gedit/gedit-io-error-dialogs.c:185 ../gedit/gedit-io-error-dialogs.c:483
-#, c-format
+#: ../gedit/gedit-io-error-message-area.c:238
+#: ../gedit/gedit-io-error-message-area.c:455
+#: ../gedit/gedit-io-error-message-area.c:1199
+#, fuzzy, c-format
 msgid ""
-"Host \"%s\" could not be found. Please, check that your proxy settings are "
+"Host %s could not be found. Please, check that your proxy settings are "
 "correct and try again."
 msgstr ""
 "यजमान \"%s\" सापडला नाही. कृपया, तुम्ही निवडलेले प्रॉक्झी पर्याय योग्य असल्याची खात्री "
 "करा आणि पुन्हा प्रयत्न करा."
 
-#: ../gedit/gedit-io-error-dialogs.c:196 ../gedit/gedit-io-error-dialogs.c:207
-#: ../gedit/gedit-io-error-dialogs.c:217
+#: ../gedit/gedit-io-error-message-area.c:249
+#: ../gedit/gedit-io-error-message-area.c:260
+#: ../gedit/gedit-io-error-message-area.c:268
+#: ../gedit/gedit-io-error-message-area.c:466
+#: ../gedit/gedit-io-error-message-area.c:477
+#: ../gedit/gedit-io-error-message-area.c:1210
+#: ../gedit/gedit-io-error-message-area.c:1221
+#: ../gedit/gedit-io-error-message-area.c:1229
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
 msgstr ""
-"यजमाननाम अवैध होते. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि "
-"पुन्हा प्रयत्न करा."
+"यजमाननाम अवैध होते. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा "
+"प्रयत्न करा."
 
-#: ../gedit/gedit-io-error-dialogs.c:225
+#: ../gedit/gedit-io-error-message-area.c:274
+#: ../gedit/gedit-io-error-message-area.c:485
+#: ../gedit/gedit-io-error-message-area.c:1235
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
@@ -1620,807 +1555,972 @@ msgstr ""
 "यजमाननाम रिकामे होते. कृपया, तुम्ही निवडलेले पर्याय योग्य असल्याची खात्री करा आणि पुन्हा "
 "प्रयत्न करा"
 
-#: ../gedit/gedit-io-error-dialogs.c:233
+#: ../gedit/gedit-io-error-message-area.c:280
+#: ../gedit/gedit-io-error-message-area.c:1241
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"प्रवेशाचा(लॉगीन) प्रयत्न असफल. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री "
-"करा आणि पुन्हा प्रयत्न करा."
+"प्रवेशाचा(लॉगीन) प्रयत्न असफल. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा "
+"आणि पुन्हा प्रयत्न करा."
 
-#: ../gedit/gedit-io-error-dialogs.c:241
-msgid ""
-"The file contains invalid data. Probably, you are trying to open a binary "
-"file."
-msgstr ""
-"फाइलमध्ये अवैध डेटा आहे. बहुदा, तुम्ही एखादी द्विमान(बायनरी) फाइल उघडण्याचा प्रयत्न "
-"करीत आहात."
-
-#: ../gedit/gedit-io-error-dialogs.c:248
+#: ../gedit/gedit-io-error-message-area.c:286
 msgid "The file you are trying to open is not a regular file."
 msgstr "तुम्ही उघडण्याचा प्रयत्न करित असलेली फाइल नियमित फाइल नाही."
 
-#: ../gedit/gedit-io-error-dialogs.c:294
-msgid ""
-"gedit was not able to automatically detect the character coding. Please, "
-"check that you are not trying to open a binary file and try again selecting "
-"a character coding in the 'Open File...' (or 'Open Location') dialog."
-msgstr ""
-"जीएडिट अक्षर कोडिंग आपोआप ओळखण्यास अपयशी. कृपया, तुम्ही द्विमान(बायनरी) "
-"फाइल उघडण्याचा प्रयत्न करत नसल्याची खात्री करा आणि 'फाइल उघडा...'(किंवा "
-"'स्थळ उघडा') या संवादामध्ये योग्य अक्षर कोडिंग निवडून पुन्हा प्रयत्न करा."
-
-#: ../gedit/gedit-io-error-dialogs.c:302 ../gedit/gedit-io-error-dialogs.c:328
+#: ../gedit/gedit-io-error-message-area.c:325
+#: ../gedit/gedit-io-error-message-area.c:545
+#: ../gedit/gedit-io-error-message-area.c:1306
 #, c-format
-msgid "Could not open the file \"%s\" using the %s character coding"
-msgstr "\"%s\" ही फाइल %s अक्षर कोडिंग वापरून उघडता आली नाही"
-
-#: ../gedit/gedit-io-error-dialogs.c:305 ../gedit/gedit-io-error-dialogs.c:331
-msgid ""
-"Please, check that you are not trying to open a binary file and that you "
-"selected the right character coding in the 'Open File... ' (or 'Open "
-"Location') dialog and try again."
+msgid "Unexpected error: %s"
 msgstr ""
-"कृपया, तुम्ही द्विमान(बायनरी) फाइल उघडण्याचा प्रयत्न करत नसल्याची खात्री करा "
-"आणि 'फाइल उघडा...'(किंवा 'स्थळ उघडा') या संवादामध्ये योग्य अक्षर कोडिंग "
-"निवडल्याची खात्री करा व पुन्हा प्रयत्न करा."
 
-#: ../gedit/gedit-io-error-dialogs.c:315
-#, fuzzy
-msgid ""
-"The file contains data in an invalid format. Probably, you are trying to "
-"open a binary file."
-msgstr ""
-"अयोग्य UTF-8 डाटा \n"
-" समाविष्ट असल्यामुळे फाइल उघडू शकली नाही\n"
-"बहुदा तुम्ही एखादी वेगळी फाइल उघडण्याचा प्रयत्न करीत आहात"
+#: ../gedit/gedit-io-error-message-area.c:331
+#: ../gedit/gedit-io-error-message-area.c:710
+#, fuzzy, c-format
+msgid "Could not open the file %s."
+msgstr "\"%s\"फाइल उघडू शकली नाही"
 
-#: ../gedit/gedit-io-error-dialogs.c:397 ../gedit/gedit-io-error-dialogs.c:404
-#: ../gedit/gedit-io-error-dialogs.c:410 ../gedit/gedit-io-error-dialogs.c:429
-#: ../gedit/gedit-io-error-dialogs.c:435 ../gedit/gedit-io-error-dialogs.c:441
-#: ../gedit/gedit-io-error-dialogs.c:447 ../gedit/gedit-io-error-dialogs.c:454
-#: ../gedit/gedit-io-error-dialogs.c:469 ../gedit/gedit-io-error-dialogs.c:497
-#: ../gedit/gedit-io-error-dialogs.c:505 ../gedit/gedit-io-error-dialogs.c:511
-#: ../gedit/gedit-io-error-dialogs.c:518 ../gedit/gedit-io-error-dialogs.c:557
-#, c-format
-msgid "Could not revert the file \"%s\""
-msgstr "\"%s\" ही फाइल मूळ स्थितीत येऊ शकली नाही"
-
-#: ../gedit/gedit-io-error-dialogs.c:399
-#, fuzzy
+#: ../gedit/gedit-io-error-message-area.c:376
 msgid "gedit cannot find it. Perhaps, it has recently been deleted."
 msgstr ""
-"गेडीट द्वारा फाइल मिळत नसल्या मुळे\"%s\"फाइल मूळ स्थितीत येऊ शकली नाही\n"
-"बहूदा ती फाइल अलीकडे काठून टाकण्यात आली असावी"
+"जीएडीट द्वारा फाइल मिळत नाही आहे. बहूदा ती फाइल अलीकडे काढून टाकण्यात आली असावी."
 
-#: ../gedit/gedit-io-error-dialogs.c:449
-#, fuzzy
-msgid "There are too many open files. Please, close some open files and try again."
-msgstr ""
-"अनेक फाइल उघड्या असल्यामुळे \"%s\"ती फाइल उघडू शकली नाही\n"
-"कृपया, नको असलेल्या काही उघड्या फाइल बंद करा आणि पुन्हा प्रयत्न करा"
-
-#: ../gedit/gedit-io-error-dialogs.c:456
-#, fuzzy
-msgid ""
-"Not enough available memory. Please, close some running applications and try "
-"again."
-msgstr ""
-"\"%s\"फाइल उघडण्यासाठी पुरेशी स्मरणशक्ती नाही. कृपया काही फाइल बंद कराचालू स्थितीतील "
-"(फाइल) बंद करून पुन्हा प्रयत्न करा"
-
-#: ../gedit/gedit-io-error-dialogs.c:499
-#, fuzzy
-msgid ""
-"The host name was empty. Please, check that your proxy settings are correct "
-"and try again."
-msgstr ""
-"प्रबंधक नाव नसल्यामुळे \"%s\" ही फाइल उघडू शकली नाही\n"
-"कृपया तुम्ही निवडलेले पर्याय योग्य असल्याची खात्री करा आणि पुन्हा प्रयत्न करा"
-
-#: ../gedit/gedit-io-error-dialogs.c:507
+#: ../gedit/gedit-io-error-message-area.c:491
 msgid "Attempt to log in failed."
 msgstr "प्रवेश(लॉगीन) करण्याचा प्रयत्न असफल."
 
-#: ../gedit/gedit-io-error-dialogs.c:513
-#, fuzzy
-msgid ""
-"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
-"binary file."
+#: ../gedit/gedit-io-error-message-area.c:495
+#, c-format
+msgid "%s is not a regular file."
 msgstr ""
-"अयोग्य UTF-8 डाटा \n"
-" समाविष्ट असल्यामुळे \"%s\" ही फाइल उघडू शकली नाही\n"
-"बहुदा तुम्ही एखादी वेगळी फाइल उघडण्याचा प्रयत्न करीत आहात"
 
-#: ../gedit/gedit-io-error-dialogs.c:520
-msgid "It is not possible to revert an Untitled document."
-msgstr "शिर्षक नसलेला दस्तऐवज मूळ स्थितीत येऊ शकत नाही."
+#: ../gedit/gedit-io-error-message-area.c:551
+#, fuzzy, c-format
+msgid "Could not revert the file %s."
+msgstr "\"%s\" ही फाइल मूळ स्थितीत येऊ शकली नाही"
 
-#: ../gedit/gedit-io-error-dialogs.c:607
-#, c-format
-msgid "Could not save the file \"%s\""
-msgstr "फाइल \"%s\" रक्षित करता आली नाही"
-
-#: ../gedit/gedit-io-error-dialogs.c:656
-#, c-format
-msgid "The file \"%s\" already exists"
-msgstr "\"%s\" ही फाइल आधिच अस्तित्वात आहे"
-
-#: ../gedit/gedit-io-error-dialogs.c:662
-msgid "Please, check that you typed the location correctly."
-msgstr "कृपया, तुम्ही योग्य स्थळ टाइप केल्याची खात्री करून घ्या."
-
-#: ../gedit/gedit-io-error-dialogs.c:668 ../gedit/gedit-io-error-dialogs.c:674
-#: ../gedit/gedit-io-error-dialogs.c:680 ../gedit/gedit-io-error-dialogs.c:687
-#: ../gedit/gedit-io-error-dialogs.c:694
-#, c-format
-msgid "Could not create the file \"%s\""
-msgstr "फाइल \"%s\" तयार करता आली नाही"
-
-#: ../gedit/gedit-io-error-dialogs.c:670
-msgid "Make sure you have the appropriate write permissions."
-msgstr "कृपया तुम्हाला योग्य लेखन परवाना असल्याची खात्री करून घ्या."
-
-#: ../gedit/gedit-io-error-dialogs.c:676
-msgid "The file name is too long."
-msgstr "फाइलचे नाव खूप लांब आहे."
-
-#: ../gedit/gedit-io-error-dialogs.c:682
+#: ../gedit/gedit-io-error-message-area.c:574
 #, fuzzy
-msgid ""
-"A directory component in the file name does not exist or is a dangling "
-"symbolic link."
+msgid "Ch_aracter Coding:"
+msgstr "अक्षर कोडिंग(_C):"
+
+#: ../gedit/gedit-io-error-message-area.c:617
+#, fuzzy
+msgid "_Retry"
+msgstr "मूळ स्थितीवर या (_R)"
+
+#: ../gedit/gedit-io-error-message-area.c:712
+#, fuzzy
+msgid "gedit has not been able to detect the character coding."
+msgstr "\"%s\" ही फाइल %s अक्षर कोडिंग वापरून उघडता आली नाही"
+
+#: ../gedit/gedit-io-error-message-area.c:714
+#: ../gedit/gedit-io-error-message-area.c:723
+#, fuzzy
+msgid "Please check that you are not trying to open a binary file."
 msgstr ""
-"\"%s\" ही फाइल तयार करता येत नाही \n"
-"\n"
-"फाइल नामावळीत डिरेक्ट्रीमधला योग्यतो भाग नाही किंवा तो भाग अधांतरी अवस्थेत आहे"
+"फाइलमध्ये अवैध डेटा आहे. बहुदा, तुम्ही एखादी द्विमान(बायनरी) फाइल उघडण्याचा प्रयत्न करीत "
+"आहात."
 
-#: ../gedit/gedit-io-error-dialogs.c:689
+#: ../gedit/gedit-io-error-message-area.c:715
+msgid "Select a character coding from the menu and try again."
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:720
+#, fuzzy, c-format
+msgid "Could not open the file %s using the %s character coding."
+msgstr "\"%s\" ही फाइल %s अक्षर कोडिंग वापरून उघडता आली नाही"
+
+#: ../gedit/gedit-io-error-message-area.c:724
+#: ../gedit/gedit-io-error-message-area.c:774
+msgid "Select a different character coding from the menu and try again."
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:769
+#, fuzzy, c-format
+msgid "Could not save the file %s using the %s character coding."
+msgstr "\"%s\" ही फाइल %s अक्षर कोडिंग वापरून उघडता आली नाही"
+
+#: ../gedit/gedit-io-error-message-area.c:772
+msgid ""
+"The document contains one or more characters that cannot be encoded using "
+"the specified character coding."
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:833
+msgid "_Edit Anyway"
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:836
+#, fuzzy
+msgid "_Don't Edit"
+msgstr "संपादन करा"
+
+#: ../gedit/gedit-io-error-message-area.c:851
+#, c-format
+msgid "This file (%s) is already opened in another gedit window."
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:866
+msgid ""
+"gedit opened this instance of the file in non-editable way. Do you want to "
+"edit it anyway?"
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:924
+#: ../gedit/gedit-io-error-message-area.c:1019
+#, fuzzy
+msgid "_Save Anyway"
+msgstr "सर्व सुरक्षित करा(_S)"
+
+#: ../gedit/gedit-io-error-message-area.c:928
+#: ../gedit/gedit-io-error-message-area.c:1023
+#, fuzzy
+msgid "_Don't Save"
+msgstr "सुरक्षित करा(_S)"
+
+#. FIXME: review this message, it's not clear since for the user the "modification"
+#. could be interpreted as the changes he made in the document. beside "reading" is
+#. not accurate (since last load/save)
+#: ../gedit/gedit-io-error-message-area.c:946
+#, c-format
+msgid "The file %s has been modified since reading it."
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:962
+msgid "If you save it, all the external changes could be lost. Save it anyway?"
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:1041
+#, fuzzy, c-format
+msgid "Could not create a backup file while saving %s"
+msgstr "पूरक फाइल तयार करता आली नाही"
+
+#: ../gedit/gedit-io-error-message-area.c:1044
+#, fuzzy, c-format
+msgid "Could not create a temporary backup file while saving %s"
+msgstr "पूरक फाइल तयार करता आली नाही"
+
+#: ../gedit/gedit-io-error-message-area.c:1061
+msgid ""
+"gedit could not backup the old copy of the file before saving the new one. "
+"You can ignore this warning and save the file anyway, but if an error occurs "
+"while saving, you could lose the old copy of the file. Save anyway?"
+msgstr ""
+
+#. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
+#: ../gedit/gedit-io-error-message-area.c:1122
+#, fuzzy, c-format
+msgid ""
+"gedit cannot handle %s locations in write mode. Please, check that you typed "
+"the location correctly and try again."
+msgstr ""
+"यजमाननाम अवैध होते. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा "
+"प्रयत्न करा."
+
+#: ../gedit/gedit-io-error-message-area.c:1130
 #, fuzzy
 msgid ""
-"There is not enough disk space to create the file. Please free some disk "
+"gedit cannot handle this location  in write mode. Please, check that you "
+"typed the location correctly and try again."
+msgstr ""
+"प्रवेशाचा(लॉगीन) प्रयत्न असफल. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा "
+"आणि पुन्हा प्रयत्न करा."
+
+#: ../gedit/gedit-io-error-message-area.c:1139
+msgid ""
+"The disk where you are trying to save the file has a limitation on file "
+"sizes.  Please try saving a smaller file or saving it to a disk that does "
+"not have this limitation."
+msgstr ""
+"ज्या डिस्कमध्ये तुम्ही फाइल रक्षित करु पहाता त्या डिस्कमध्ये फाइलींसाठी मर्यादित जागा आहे "
+"कृपया अशी मर्यादित जागा नसणार्या डिस्कमध्ये फाइल रक्षित करता येईल असे पहा"
+
+#: ../gedit/gedit-io-error-message-area.c:1146
+#, fuzzy, c-format
+msgid ""
+"%s is not a valid location. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"यजमाननाम अवैध होते. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा "
+"प्रयत्न करा."
+
+#: ../gedit/gedit-io-error-message-area.c:1153
+#, fuzzy
+msgid ""
+"You do not have the permissions necessary to save the file. Please, check "
+"that you typed the location correctly and try again."
+msgstr ""
+"प्रवेशाचा(लॉगीन) प्रयत्न असफल. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा "
+"आणि पुन्हा प्रयत्न करा."
+
+#: ../gedit/gedit-io-error-message-area.c:1165
+#, fuzzy, c-format
+msgid ""
+"%s is a directory. Please, check that you typed the location correctly and "
+"try again."
+msgstr "कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा प्रयत्न करा."
+
+#: ../gedit/gedit-io-error-message-area.c:1171
+#, fuzzy
+msgid ""
+"Not enough available memory to save the file. Please, close some running "
+"applications and try again."
+msgstr ""
+"फाइल उघडण्यासाठी पुरेशी स्मरणशक्ती नाही. कृपया, काही चालू स्थितीतील अनुप्रयोगबंद करून "
+"पुन्हा प्रयत्न करा."
+
+#: ../gedit/gedit-io-error-message-area.c:1247
+#, fuzzy
+msgid ""
+"There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"\"%s\" ही फाइल तयार करण्यासाठी डिस्क मध्ये पुरेशी जागा नाही\n"
-"\n"
-"कृपया काही डिस्क रिकाम्या करा आणि पुन्हा प्रयत्न करा"
+"डिस्कमध्ये फाइल रक्षित करण्यासाठी पुरेशी जागा नाहीकृपया डिस्कमधील काही फाइल मोकळ्या "
+"करा आणि पुन्हा प्रयत्न करा"
 
-#. Read only
-#: ../gedit/gedit-mdi-child.c:249
-msgid "RO"
-msgstr "RO"
+#: ../gedit/gedit-io-error-message-area.c:1253
+#, fuzzy
+msgid ""
+"You are trying to save the file on a read-only disk. Please, check that you "
+"typed the location correctly and try again."
+msgstr ""
+"यजमाननाम अवैध होते. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा "
+"प्रयत्न करा."
 
-#. Add the detach tab button
-#: ../gedit/gedit-mdi-child.c:650 ../gedit/gedit-ui.xml.h:85
-msgid "_Move to New Window"
-msgstr "नविन खिडकीत हलवा(_M)"
+#: ../gedit/gedit-io-error-message-area.c:1259
+msgid "A file with the same name already exists. Please, use a different name."
+msgstr ""
 
-#: ../gedit/gedit-mdi-child.c:803
-msgid "Unicode (UTF-8)"
-msgstr "युनिकोड (UTF-8)"
+#: ../gedit/gedit-io-error-message-area.c:1264
+#, fuzzy
+msgid ""
+"The disk where you are trying to save the file has a limitation on length of "
+"the file names. Please, use a shorter name."
+msgstr ""
+"ज्या डिस्कमध्ये तुम्ही फाइल रक्षित करु पहाता त्या डिस्कमध्ये फाइलींसाठी मर्यादित जागा आहे "
+"कृपया अशी मर्यादित जागा नसणार्या डिस्कमध्ये फाइल रक्षित करता येईल असे पहा"
 
-#: ../gedit/gedit-mdi-child.c:813
-msgid "Name:"
-msgstr "नाव:"
+#: ../gedit/gedit-io-error-message-area.c:1269
+#, fuzzy, c-format
+msgid ""
+"%s is not a regular file. Please, check that you typed the location "
+"correctly and try again."
+msgstr ""
+"यजमाननाम अवैध होते. कृपया, तुम्ही टाइप केलेले स्थळ योग्य असल्याची खात्री करा आणि पुन्हा "
+"प्रयत्न करा."
 
-#: ../gedit/gedit-mdi-child.c:814
-msgid "MIME Type:"
-msgstr "MIME प्रकार:"
+#: ../gedit/gedit-io-error-message-area.c:1312
+#, fuzzy, c-format
+msgid "Could not save the file %s."
+msgstr "फाइल \"%s\" रक्षित करता आली नाही"
 
-#: ../gedit/gedit-mdi-child.c:815
-msgid "Encoding:"
-msgstr "एनकोडिंग:"
+#: ../gedit/gedit-notebook.c:838
+#, fuzzy
+msgid "Close document"
+msgstr "असुरक्षित दस्तऐवज"
 
-#. Translators: %s is a URI
-#: ../gedit/gedit-mdi.c:260 ../gedit/gedit-mdi.c:463
-#, c-format
-msgid "Open '%s'"
-msgstr "'%s' उघडा "
+#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:580
+#: ../gedit/recent-files/egg-recent-view-gtk.c:446
+#: ../gedit/recent-files/egg-recent-view-uimanager.c:322
+msgid "Empty"
+msgstr ""
 
-#: ../gedit/gedit-mdi.c:538
-msgid "Open a recently used file"
-msgstr "नुकतीच वापरलेली फाइल उघडा"
+#: ../gedit/gedit-panel.c:524 ../gedit/gedit-panel.c:601
+msgid "Hide panel"
+msgstr ""
 
-#: ../gedit/gedit-mdi.c:1477 ../gedit/gedit-mdi.c:1479
-msgid "Read Only"
-msgstr "फक्त वाचण्यासाठी"
+#: ../gedit/gedit-plugin-manager.c:55
+msgid "Plugin"
+msgstr "प्लगईन"
 
-#: ../gedit/gedit-mdi.c:2103
-msgid "Normal"
-msgstr "सामान्य"
+#: ../gedit/gedit-plugin-manager.c:56
+msgid "Enabled"
+msgstr "कार्यान्वित"
 
-#: ../gedit/gedit-mdi.c:2104
-msgid "Use Normal highlight mode"
-msgstr "सामान्य उठावदार रीत वापरा"
+#: ../gedit/gedit-plugin-manager.c:502
+msgid "_About"
+msgstr "विषयी(_A)"
 
-#: ../gedit/gedit-mdi.c:2180
-#, c-format
-msgid "Use %s highlight mode"
-msgstr "%s उठावदार रीत वापरा"
+#: ../gedit/gedit-plugin-manager.c:510
+#, fuzzy
+msgid "C_onfigure"
+msgstr "प्लगइन व्यूहरचना करा(_o)"
 
-#: ../gedit/gedit-output-window.c:378
-msgid "Close the output window"
-msgstr "आउटपुट विंडो बंद करा"
+#: ../gedit/gedit-plugin-manager.c:520
+#, fuzzy
+msgid "A_ctivate"
+msgstr "%s कार्यान्वित करा"
 
-#: ../gedit/gedit-output-window.c:416
-msgid "Copy selected lines"
-msgstr "निवडलेल्या ओळींची कॉपी करा"
+#: ../gedit/gedit-plugin-manager.c:530
+#, fuzzy
+msgid "Ac_tivate All"
+msgstr "%s कार्यान्वित करा"
 
-#: ../gedit/gedit-output-window.c:436
-msgid "Clear the output window"
-msgstr "आउटपुट विंडो साफ करा"
+#: ../gedit/gedit-plugin-manager.c:535
+#, fuzzy
+msgid "_Deactivate All"
+msgstr "सर्व सुरक्षित करा(_S)"
 
-#: ../gedit/gedit-output-window.c:476
-msgid "Output Lines"
-msgstr "प्रदान(आउटपुट) ओळी"
+#: ../gedit/gedit-plugin-manager.c:776
+msgid "_About Plugin"
+msgstr "प्लगइन विषयी(_A)"
 
-#: ../gedit/gedit-prefs-manager.c:175
+#: ../gedit/gedit-plugin-manager.c:780
+msgid "C_onfigure Plugin"
+msgstr "प्लगइन व्यूहरचना करा(_o)"
+
+#: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
 msgstr "प्राधान्य क्रम व्यवस्थापक मुळापासून सुरू करणे अशक्य आहे"
 
-#: ../gedit/gedit-prefs-manager.c:1326
+#: ../gedit/gedit-prefs-manager.c:1407
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "'%1s' अपेक्षित असताना '%3s' साठी %2s बटन प्राप्त झाले "
 
-#: ../gedit/gedit-print.c:219 ../gedit/gedit-ui.xml.h:37
-msgid "Print"
-msgstr "छपाई"
-
-#: ../gedit/gedit-print.c:228 ../plugins/docinfo/docinfo.glade2.h:7
-msgid "Lines"
-msgstr "रेषा"
-
-#: ../gedit/gedit-print.c:330
-msgid "Preparing pages..."
-msgstr "पाने तयार करित आहे..."
-
-#: ../gedit/gedit-print.c:357
-#, fuzzy, c-format
-msgid "Rendering page %d of %d..."
-msgstr "फाइल %s मूळ स्थिती वर येत आहे"
-
-#: ../gedit/gedit-print.c:359
-#, c-format
-msgid "Printing page %d of %d..."
-msgstr ""
-
-#: ../gedit/gedit-print.c:381 ../gedit/gedit-ui.xml.h:40
-msgid "Print preview"
-msgstr "मुद्रण करण्याआधी नजर टाका"
-
-#: ../gedit/gedit-print.c:551
+#: ../gedit/gedit-print.c:186
 #, c-format
 msgid "File: %s"
 msgstr "फाइल %s"
 
-#: ../gedit/gedit-print.c:557
-#, fuzzy
+#: ../gedit/gedit-print.c:194
 msgid "Page %N of %Q"
-msgstr "पेज"
+msgstr "%N पान %Q पैकी"
 
-#: ../gedit/gedit-ui.xml.h:1
-msgid "About this application"
-msgstr "लागू करण्याबाबत"
+#: ../gedit/gedit-print.c:316
+msgid "Print"
+msgstr "छपाई"
 
-#: ../gedit/gedit-ui.xml.h:2
-msgid "Change the visibility of the output window in the current window"
-msgstr "चालू विडो मधिल प्राप्त विंडोची दर्शनियता बदला किंवा स्पष्ट कारा"
+#: ../gedit/gedit-print.c:325 ../plugins/docinfo/docinfo.glade2.h:9
+msgid "Lines"
+msgstr "रेषा"
 
-#: ../gedit/gedit-ui.xml.h:3
-msgid "Change the visibility of the statusbar in the current window"
-msgstr "चालू विन्डो चौकटीत सुचनादर्शक पट्टी सुस्पस्ट दिसेल असे पहा "
-
-#: ../gedit/gedit-ui.xml.h:4
-msgid "Change the visibility of the toolbar in the current window"
-msgstr "चालू विन्डो चौकटीत साधनदर्शक पट्टी सुस्पस्ट दिसेल असे पहा"
-
-#: ../gedit/gedit-ui.xml.h:5
-msgid "Close"
-msgstr "बंद"
-
-#: ../gedit/gedit-ui.xml.h:6
-msgid "Close all open files"
-msgstr "उघडलेल्या सर्व फाइल बंद करा"
-
-#: ../gedit/gedit-ui.xml.h:7
-msgid "Close the current file"
-msgstr "चालू फाइल बंद करा "
-
-#: ../gedit/gedit-ui.xml.h:8
-msgid "Configure the application"
-msgstr "अर्ज हवातसा करुन घ्या"
-
-#: ../gedit/gedit-ui.xml.h:9
-msgid "Copy"
-msgstr "प्रत बनवा"
-
-#: ../gedit/gedit-ui.xml.h:10
-msgid "Copy the selection"
-msgstr "निवडलेल्याची प्रत बनवा"
-
-#: ../gedit/gedit-ui.xml.h:11
-msgid "Create a new document"
-msgstr "नविन दस्तऐवज बनवा"
-
-#: ../gedit/gedit-ui.xml.h:12
-msgid "Cu_t"
-msgstr "कापा"
-
-#: ../gedit/gedit-ui.xml.h:13
-msgid "Cut"
-msgstr "कापा"
-
-#: ../gedit/gedit-ui.xml.h:14
-msgid "Cut the selection"
-msgstr "निवडलेले कापा"
-
-#: ../gedit/gedit-ui.xml.h:15
-msgid "Delete"
-msgstr "काढूनटाका"
-
-#: ../gedit/gedit-ui.xml.h:16
-msgid "Delete the selected text"
-msgstr "निवडलेले टेक्स्ट काढूनटाका"
-
-#: ../gedit/gedit-ui.xml.h:18
-msgid "Find Ne_xt"
-msgstr "पुढचे शोधा"
-
-#: ../gedit/gedit-ui.xml.h:20
-msgid "Find Pre_vious"
-msgstr "मागील शोधा(_v)"
-
-#: ../gedit/gedit-ui.xml.h:21
-msgid "Find Previous"
-msgstr "मागील शोधा"
-
-#: ../gedit/gedit-ui.xml.h:22
-msgid "Go to _Line..."
-msgstr "या ओळीवर जा (_L)..."
-
-#: ../gedit/gedit-ui.xml.h:23
-msgid "Go to a specific line"
-msgstr "योग्य ओळ क्रमांकावर जा"
-
-#: ../gedit/gedit-ui.xml.h:24
-msgid "Main toolbar"
-msgstr "मुख्य टूलबार"
-
-#: ../gedit/gedit-ui.xml.h:25
+#: ../gedit/gedit-print-job-preview.c:623
 #, fuzzy
-msgid "Move the current document to a new window"
-msgstr "हलवा a"
-
-#: ../gedit/gedit-ui.xml.h:26
-msgid "New"
-msgstr "नविन"
-
-#: ../gedit/gedit-ui.xml.h:27
-msgid "Open"
-msgstr "उघडा"
-
-#: ../gedit/gedit-ui.xml.h:28
-msgid "Open Location..."
-msgstr "स्थळ उघडा"
-
-#: ../gedit/gedit-ui.xml.h:29
-msgid "Open _Location..."
-msgstr "स्थळ उघडा (_L)"
-
-#: ../gedit/gedit-ui.xml.h:30
-msgid "Open a file"
-msgstr "फाइल उघडा"
-
-#: ../gedit/gedit-ui.xml.h:31
-msgid "Open a file from a specified location"
-msgstr "योग्य स्थळातील फाइल उघडा"
-
-#: ../gedit/gedit-ui.xml.h:32
-msgid "Open the gedit manual"
-msgstr "गेडीट कृतीसंच उघडा"
-
-#: ../gedit/gedit-ui.xml.h:33
-msgid "Page Set_up"
-msgstr "पृष्ठ व्यवस्था(_u)"
-
-#: ../gedit/gedit-ui.xml.h:34
-msgid "Paste"
-msgstr "चिकटवा"
-
-#: ../gedit/gedit-ui.xml.h:35
-msgid "Paste the clipboard"
-msgstr "क्लिपबोर्डवर चिकटवा"
-
-#: ../gedit/gedit-ui.xml.h:36
-msgid "Pr_eferences"
-msgstr "प्राधान्यक्रम"
-
-#: ../gedit/gedit-ui.xml.h:38
-msgid "Print Previe_w..."
-msgstr "छपाई पूर्वी निरीक्षण करणे"
-
-#: ../gedit/gedit-ui.xml.h:39
-msgid "Print Preview"
+msgid "Page Preview"
 msgstr "मुद्रण करण्याआधी नजर टाका"
 
-#: ../gedit/gedit-ui.xml.h:41
-msgid "Print the current file"
-msgstr "चालू फाइल मुद्रित करा"
-
-#: ../gedit/gedit-ui.xml.h:42
-msgid "Quit"
-msgstr "टाळा/सोडून द्या"
-
-#: ../gedit/gedit-ui.xml.h:43
-msgid "Quit the program"
-msgstr "कार्यक्रम टाळा/सोडून द्या"
-
-#: ../gedit/gedit-ui.xml.h:44
-msgid "Redo"
-msgstr "पुन्हा करून पहा"
-
-#: ../gedit/gedit-ui.xml.h:45
-msgid "Redo the undone action"
-msgstr "टाळलेली कृती पुन्हा करून पहा"
-
-#: ../gedit/gedit-ui.xml.h:47
-msgid "Revert"
-msgstr "मुळपदावर घ्या"
-
-#: ../gedit/gedit-ui.xml.h:48
-msgid "Revert to a saved version of the file"
-msgstr "फाइलमधील रक्षित भागाकडे परत घ्या"
-
-#: ../gedit/gedit-ui.xml.h:49
-msgid "Save"
-msgstr "सुरक्षित करा"
-
-#: ../gedit/gedit-ui.xml.h:50
-msgid "Save As"
-msgstr "...प्रमाणे सुरक्षित करा"
-
-#: ../gedit/gedit-ui.xml.h:51
-msgid "Save _As..."
-msgstr "... प्रमाणे सुरक्षित करा"
-
-#: ../gedit/gedit-ui.xml.h:52
-msgid "Save all open files"
-msgstr "उघडलेल्या सर्व फाइल सुरक्षित करा"
-
-#: ../gedit/gedit-ui.xml.h:53
-msgid "Save the current file"
-msgstr "चालू फाइल सुरक्षित ठेवा"
-
-#: ../gedit/gedit-ui.xml.h:54
-msgid "Save the current file with a different name"
-msgstr "चालू फाइल वेगळे नाव देउन सुरक्षित ठेवा"
-
-#: ../gedit/gedit-ui.xml.h:55
-msgid "Search backwards for the same text"
-msgstr "तीच स्ट्रिंग मागे शोधून काढा"
-
-#: ../gedit/gedit-ui.xml.h:56
-msgid "Search for and replace text"
-msgstr "शोधा आणि बदला"
-
-#: ../gedit/gedit-ui.xml.h:57
-msgid "Search for text"
-msgstr "पाठ शोधा"
-
-#: ../gedit/gedit-ui.xml.h:58
-msgid "Search forwards for the same text"
-msgstr "तीच स्ट्रिंग पुन्हा पुढे शोधून काढा"
-
-#: ../gedit/gedit-ui.xml.h:59
-msgid "Select All"
-msgstr "सर्व निवडा"
-
-#: ../gedit/gedit-ui.xml.h:60
-msgid "Select _All"
-msgstr "सर्व निवडा (_A)"
-
-#: ../gedit/gedit-ui.xml.h:61
-msgid "Select the entire document"
-msgstr "संपुर्ण दस्तऐवज निवडा"
-
-#: ../gedit/gedit-ui.xml.h:62
-#, fuzzy
-msgid "Set toolbar button style according to desktop Menu and Toolbar Preferences"
-msgstr "डेस्कटॉपमधील उपलब्ध रीतीप्रमाणे टूलबारची बटणे लावून घ्या"
-
-#: ../gedit/gedit-ui.xml.h:63
-#, fuzzy
-msgid "Setup the page settings"
-msgstr "तुम्ही वापरीत असनाऱ्या मुद्रणयंत्राशी जुळणारे पान बनविण्याची पद्धत ठीक करून घ्या"
-
-#: ../gedit/gedit-ui.xml.h:64
-msgid "Show only icons in the toolbar"
-msgstr "टुलबारमध्ये फक्त आयकॉन्स दाखवा"
-
-#: ../gedit/gedit-ui.xml.h:65
-#, fuzzy
-msgid "Show text below every icon in the toolbar"
-msgstr "टूलबार मध्ये टूलटिप दाखवा"
-
-#: ../gedit/gedit-ui.xml.h:66
-msgid "Show text only beside important icons in the toolbar"
+#: ../gedit/gedit-print-job-preview.c:624
+msgid "The preview of a page in the document to be printed"
 msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:67
-#, fuzzy
-msgid "T_ext for Important Icons"
-msgstr "T च्यासाठी"
-
-#: ../gedit/gedit-ui.xml.h:68
-msgid "Undo"
-msgstr "काढून टाका"
-
-#: ../gedit/gedit-ui.xml.h:69
-msgid "Undo the last action"
-msgstr "शेवटची कृती बदला"
-
-#: ../gedit/gedit-ui.xml.h:70
-msgid "_About"
-msgstr "विषयी(_A)"
-
-#: ../gedit/gedit-ui.xml.h:71
-msgid "_Close"
-msgstr "बंद करा(_C)"
-
-#: ../gedit/gedit-ui.xml.h:72
-msgid "_Close All"
-msgstr "सर्व बंद करा"
-
-#: ../gedit/gedit-ui.xml.h:73
-msgid "_Contents"
-msgstr "अनुक्रम(_C)"
-
-#: ../gedit/gedit-ui.xml.h:74
-msgid "_Copy"
-msgstr "प्रतबनवा(_C)"
-
-#: ../gedit/gedit-ui.xml.h:75
-msgid "_Customize Toolbar"
-msgstr "टूलबार हवातसाकरुण घ्या(_C)"
-
-#: ../gedit/gedit-ui.xml.h:76
-msgid "_Delete"
-msgstr "काढून टाका(_D)"
-
-#: ../gedit/gedit-ui.xml.h:77
-msgid "_Desktop Default"
-msgstr "डेस्कटोपवरील उपलब्ध रचना"
-
-#: ../gedit/gedit-ui.xml.h:78
-msgid "_Documents"
-msgstr "दस्तऐवज(_D)"
-
-#: ../gedit/gedit-ui.xml.h:79
-msgid "_Edit"
-msgstr "संपादन करा"
-
-#: ../gedit/gedit-ui.xml.h:80
-msgid "_File"
-msgstr "फाइल/करा(_F)"
-
-#: ../gedit/gedit-ui.xml.h:81
-msgid "_Find..."
-msgstr "शोधा"
-
-#: ../gedit/gedit-ui.xml.h:82
-msgid "_Help"
-msgstr "मदत करा(_H)"
-
-#: ../gedit/gedit-ui.xml.h:83
-msgid "_Highlight Mode"
-msgstr "उठावदार रीत(_H)"
-
-#: ../gedit/gedit-ui.xml.h:84
-#, fuzzy
-msgid "_Icons Only"
-msgstr "आयकोन(_I)"
-
-#: ../gedit/gedit-ui.xml.h:86
-msgid "_New"
-msgstr "नविन(_N)"
-
-#: ../gedit/gedit-ui.xml.h:87
-msgid "_Open..."
-msgstr "उघडा(_O)"
-
-#: ../gedit/gedit-ui.xml.h:88
-msgid "_Output Window"
+#: ../gedit/gedit-print-job-preview.c:710
+msgid "Other"
 msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:89
-msgid "_Paste"
-msgstr "चिक्टवा(_P)"
+#: ../gedit/gedit-print-job-preview.c:740
+msgid "Show the previous page"
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:90
-msgid "_Print..."
-msgstr "छापा(_P)"
+#: ../gedit/gedit-print-job-preview.c:751
+msgid "Show the next page"
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:91
-msgid "_Quit"
-msgstr "सोडून द्या(_Q)"
-
-#: ../gedit/gedit-ui.xml.h:92
-msgid "_Redo"
-msgstr "पुन्हा करून पहा(_R)"
-
-#: ../gedit/gedit-ui.xml.h:93
-msgid "_Replace..."
-msgstr "बदलून घ्या"
-
-#: ../gedit/gedit-ui.xml.h:95
-msgid "_Save"
-msgstr "सुरक्षित करा(_S)"
-
-#: ../gedit/gedit-ui.xml.h:96
-msgid "_Save All"
-msgstr "सर्व सुरक्षित करा(_S)"
-
-#: ../gedit/gedit-ui.xml.h:97
-msgid "_Search"
-msgstr "शोधा(_S)"
-
-#: ../gedit/gedit-ui.xml.h:98
-msgid "_Statusbar"
-msgstr "स्टेटसबार(_S)"
-
-#: ../gedit/gedit-ui.xml.h:99
+#: ../gedit/gedit-print-job-preview.c:767
 #, fuzzy
-msgid "_Text for All Icons"
-msgstr "पाठ च्यासाठी सर्व"
+msgid "Current page (Alt+P)"
+msgstr "सद्य लोकेल (%s)"
 
-#: ../gedit/gedit-ui.xml.h:100
-msgid "_Toolbar"
-msgstr "टूलबार(_T)"
+#. gtk_label_set_mnemonic_widget ((GtkLabel *) l, mp->priv->page_entry);
+#. We are displaying 'XXX of XXX'.
+#: ../gedit/gedit-print-job-preview.c:781
+msgid "of"
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:101
-msgid "_Tools"
-msgstr "उपकरणे"
+#: ../gedit/gedit-print-job-preview.c:787
+#, fuzzy
+msgid "Page total"
+msgstr "पृष्ठ व्यवस्था"
 
-#: ../gedit/gedit-ui.xml.h:102
-msgid "_Undo"
-msgstr "मुळ स्थितीवर या"
+#: ../gedit/gedit-print-job-preview.c:788
+msgid "The total number of pages in the document"
+msgstr ""
 
-#: ../gedit/gedit-ui.xml.h:103
-msgid "_View"
-msgstr "पाहून घ्या"
+#: ../gedit/gedit-print-job-preview.c:805
+msgid "Show multiple pages"
+msgstr ""
 
-#: ../gedit/gedit-utils.c:686
-msgid " (invalid Unicode)"
-msgstr " (अवैध युनिकोड)"
+#: ../gedit/gedit-print-job-preview.c:817
+msgid "Zoom 1:1"
+msgstr ""
 
-#.
-#. if (col == chars)
-#. msg = g_strdup_printf (_("  Ln %d, Col %d"), row + 1, col + 1);
-#. else
-#. msg = g_strdup_printf (_("  Ln %d, Col %d-%d"), row + 1, chars + 1, col + 1);
-#.
+#: ../gedit/gedit-print-job-preview.c:825
+msgid "Zoom to fit the whole page"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:834
+#, fuzzy
+msgid "Zoom the page in"
+msgstr "पृष्ठ रचना व्यवस्थित करा"
+
+#: ../gedit/gedit-print-job-preview.c:842
+msgid "Zoom the page out"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:856
+#, fuzzy
+msgid "Close print preview"
+msgstr "मुद्रण करण्याआधी नजर टाका"
+
+#: ../gedit/gedit-print-job-preview.c:1096
+#: ../gedit/gedit-print-job-preview.c:1097
+msgid "Number of pages horizontally"
+msgstr ""
+
+#: ../gedit/gedit-print-job-preview.c:1100
+#: ../gedit/gedit-print-job-preview.c:1101
+#, fuzzy
+msgid "Number of pages vertically"
+msgstr "प्रत्येक ओळ क्रमांक मुद्रीत करा(_N)"
+
+#: ../gedit/gedit-print-job-preview.c:1165
+msgid "No visible output was created."
+msgstr ""
+
+#: ../gedit/gedit-statusbar.c:257
+msgid "  OVR"
+msgstr "ओव्हीआर"
+
+#: ../gedit/gedit-statusbar.c:259
+msgid "  INS"
+msgstr "आयएनएस"
+
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-view.c:879
+#: ../gedit/gedit-statusbar.c:298
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "Ln %d, Col. %d"
 
-#: ../gedit/gedit-view.c:915
-msgid "  OVR"
-msgstr "ओव्हीआर"
-
-#: ../gedit/gedit-view.c:917
-msgid "  INS"
-msgstr "आयएनएस"
-
-#: ../gedit/gedit2.c:83
-msgid ""
-"Set the character encoding to be used to open the files listed on the "
-"command line"
-msgstr ""
-
-#: ../gedit/gedit2.c:86
-msgid "Quit an existing instance of gedit"
-msgstr "गेडीट मधील सध्याचे घटना काढून टाका"
-
-#: ../gedit/gedit2.c:89
-msgid "Create a new toplevel window in an existing instance of gedit"
-msgstr "गेडीट मधील सध्याच्या घटनेसाठी एक नविन उच्च स्तरीय विन्डो तयार करा"
-
-#: ../gedit/gedit2.c:92
-msgid "Create a new document in an existing instance of gedit"
-msgstr "गेडीट मधील सध्याच्या घटनेसाठी एक नविन दस्तऐवज तयार करा"
-
-#: ../gedit/gedit2.c:168
+#: ../gedit/gedit-statusbar.c:397
 #, c-format
-msgid "The specified encoding \"%s\" is not valid\n"
+msgid "There is a tab with errors"
+msgid_plural "There are %d tabs with errors"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:641
+#, fuzzy, c-format
+msgid "Reverting %s from %s"
+msgstr "दस्तावेज \"%s\" मूळ स्थितीवर आणत आहे..."
+
+#: ../gedit/gedit-tab.c:648
+#, fuzzy, c-format
+msgid "Reverting %s"
+msgstr "फाइल मूळ स्थितीवर आणत आहे:"
+
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:664
+#, fuzzy, c-format
+msgid "Loading %s from %s"
+msgstr "\"%s\" फाइल लोड होत आहे..."
+
+#: ../gedit/gedit-tab.c:671
+#, fuzzy, c-format
+msgid "Loading %s"
+msgstr "फाइल लोड होत आहे:"
+
+#. Translators: the first %s is a file name (e.g. test.txt) the second one
+#. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
+#: ../gedit/gedit-tab.c:754
+#, c-format
+msgid "Saving %s to %s"
 msgstr ""
 
-#: ../gedit/gedit-convert.c:91
-msgid "The file you are trying to open contains an invalid byte sequence."
-msgstr ""
+#: ../gedit/gedit-tab.c:761
+#, fuzzy, c-format
+msgid "Saving %s"
+msgstr "...प्रमाणे सुरक्षित करा"
 
-#: ../gedit/gedit-convert.c:160 ../gedit/gedit-convert.c:204
-msgid ""
-"gedit was not able to automatically determine the encoding of the file you "
-"want to open."
-msgstr ""
+#. Read only
+#: ../gedit/gedit-tab.c:1506
+msgid "RO"
+msgstr "RO"
 
-#: ../plugins/changecase/changecase.c:43
-msgid "C_hange Case"
-msgstr "लिपी बदला(_h)"
+#: ../gedit/gedit-tab.c:1551
+#, fuzzy, c-format
+msgid "Error opening file %s"
+msgstr "फाइल  \"%s\" लोड करताना चूक"
 
-#: ../plugins/changecase/changecase.c:49
-msgid "All _Upper Case"
-msgstr "सर्व मोठ्या लिपीत(_U)"
+#: ../gedit/gedit-tab.c:1556
+#, fuzzy, c-format
+msgid "Error reverting file %s"
+msgstr "फाइल  \"%s\" लोड करताना चूक"
 
-#: ../plugins/changecase/changecase.c:50
-msgid "All _Lower Case"
-msgstr "सर्व छोट्या लिपीत(_L)"
+#: ../gedit/gedit-tab.c:1561
+#, fuzzy, c-format
+msgid "Error saving file %s"
+msgstr "फाइल  \"%s\" लोड करताना चूक"
 
-#: ../plugins/changecase/changecase.c:51
-msgid "_Invert Case"
-msgstr "लिपी व्यस्त करा(_I)"
+#: ../gedit/gedit-tab.c:1579
+msgid "Unicode (UTF-8)"
+msgstr "युनिकोड (UTF-8)"
 
-#: ../plugins/changecase/changecase.c:52
-msgid "_Title Case"
-msgstr "शिर्षक लिपी(_T)"
+#: ../gedit/gedit-tab.c:1586
+msgid "Name:"
+msgstr "नाव:"
 
-#: ../plugins/changecase/changecase.c:54
+#: ../gedit/gedit-tab.c:1587
+msgid "MIME Type:"
+msgstr "MIME प्रकार:"
+
+#: ../gedit/gedit-tab.c:1588
+msgid "Encoding:"
+msgstr "एनकोडिंग:"
+
+#: ../gedit/gedit-tab.c:2016
+#, c-format
+msgid "Rendering page %d of %d..."
+msgstr "%2$d पैकी %1$d पान रेंडर करत आहे..."
+
+#. Toplevel
+#: ../gedit/gedit-ui.h:52
+msgid "_File"
+msgstr "फाइल/करा(_F)"
+
+#: ../gedit/gedit-ui.h:53
+msgid "_Edit"
+msgstr "संपादन करा"
+
+#: ../gedit/gedit-ui.h:54
+msgid "_View"
+msgstr "पाहून घ्या"
+
+#: ../gedit/gedit-ui.h:55
+msgid "_Search"
+msgstr "शोधा(_S)"
+
+#: ../gedit/gedit-ui.h:56
+msgid "_Tools"
+msgstr "उपकरणे"
+
+#: ../gedit/gedit-ui.h:57
+msgid "_Documents"
+msgstr "दस्तऐवज(_D)"
+
+#: ../gedit/gedit-ui.h:58
+msgid "_Help"
+msgstr "मदत करा(_H)"
+
+#: ../gedit/gedit-ui.h:62
+msgid "Create a new document"
+msgstr "नविन दस्तऐवज बनवा"
+
+#: ../gedit/gedit-ui.h:63
+msgid "_Open..."
+msgstr "उघडा(_O)"
+
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1194
+msgid "Open a file"
+msgstr "फाइल उघडा"
+
+#: ../gedit/gedit-ui.h:65
+msgid "Open _Location..."
+msgstr "स्थळ उघडा (_L)"
+
+#: ../gedit/gedit-ui.h:66
+msgid "Open a file from a specified location"
+msgstr "योग्य स्थळातील फाइल उघडा"
+
+#. Edit menu
+#: ../gedit/gedit-ui.h:69
+msgid "Pr_eferences"
+msgstr "प्राधान्यक्रम"
+
+#: ../gedit/gedit-ui.h:70
+msgid "Configure the application"
+msgstr "अर्ज हवातसा करुन घ्या"
+
+#. Help menu
+#: ../gedit/gedit-ui.h:73
+msgid "_Contents"
+msgstr "अनुक्रम(_C)"
+
+#: ../gedit/gedit-ui.h:74
+msgid "Open the gedit manual"
+msgstr "जीएडिट कृतीसंच उघडा"
+
+#: ../gedit/gedit-ui.h:76
+msgid "About this application"
+msgstr "लागू करण्याबाबत"
+
+#: ../gedit/gedit-ui.h:83
+msgid "Save the current file"
+msgstr "चालू फाइल सुरक्षित ठेवा"
+
+#: ../gedit/gedit-ui.h:84
+msgid "Save _As..."
+msgstr "... प्रमाणे सुरक्षित करा"
+
+#: ../gedit/gedit-ui.h:85
+msgid "Save the current file with a different name"
+msgstr "चालू फाइल वेगळे नाव देउन सुरक्षित ठेवा"
+
+#: ../gedit/gedit-ui.h:87
+msgid "Revert to a saved version of the file"
+msgstr "फाइलमधील रक्षित भागाकडे परत घ्या"
+
+#: ../gedit/gedit-ui.h:88
 #, fuzzy
-msgid "Change selected text to upper case"
-msgstr "निवडलेला टेक्स्ट रंग घ्या"
+msgid "Page Set_up..."
+msgstr "पृष्ठ व्यवस्था(_u)"
 
-#: ../plugins/changecase/changecase.c:55
-#, fuzzy
-msgid "Change selected text to lower case"
-msgstr "निवडलेला टेक्स्ट रंग घ्या"
+#: ../gedit/gedit-ui.h:89
+msgid "Setup the page settings"
+msgstr "पृष्ठ रचना व्यवस्थित करा"
 
-#: ../plugins/changecase/changecase.c:56
+#: ../gedit/gedit-ui.h:90
 #, fuzzy
-msgid "Invert the case of selected text"
+msgid "Print Previe_w"
+msgstr "मुद्रण करण्याआधी नजर टाका"
+
+#: ../gedit/gedit-ui.h:91
+msgid "Print preview"
+msgstr "मुद्रण करण्याआधी नजर टाका"
+
+#: ../gedit/gedit-ui.h:92
+msgid "_Print..."
+msgstr "छापा(_P)"
+
+#: ../gedit/gedit-ui.h:93
+#, fuzzy
+msgid "Print the current page"
+msgstr "चालू फाइल मुद्रित करा"
+
+#: ../gedit/gedit-ui.h:95
+msgid "Close the current file"
+msgstr "चालू फाइल बंद करा "
+
+#: ../gedit/gedit-ui.h:99
+msgid "Undo the last action"
+msgstr "शेवटची कृती बदला"
+
+#: ../gedit/gedit-ui.h:101
+#, fuzzy
+msgid "Redo the last undone action"
+msgstr "टाळलेली कृती पुन्हा करून पहा"
+
+#: ../gedit/gedit-ui.h:103
+msgid "Cut the selection"
+msgstr "निवडलेले कापा"
+
+#: ../gedit/gedit-ui.h:105
+msgid "Copy the selection"
+msgstr "निवडलेल्याची प्रत बनवा"
+
+#: ../gedit/gedit-ui.h:107
+msgid "Paste the clipboard"
+msgstr "क्लिपबोर्डवर चिकटवा"
+
+#: ../gedit/gedit-ui.h:109
+msgid "Delete the selected text"
 msgstr "निवडलेले टेक्स्ट काढूनटाका"
 
-#: ../plugins/changecase/changecase.c:57
-msgid "Capitalize the first letter of each selected word"
+#: ../gedit/gedit-ui.h:110
+msgid "Select _All"
+msgstr "सर्व निवडा (_A)"
+
+#: ../gedit/gedit-ui.h:111
+msgid "Select the entire document"
+msgstr "संपुर्ण दस्तऐवज निवडा"
+
+#. View menu
+#: ../gedit/gedit-ui.h:114
+msgid "_Highlight Mode"
+msgstr "उठावदार रीत(_H)"
+
+#. Search menu
+#: ../gedit/gedit-ui.h:117
+msgid "_Find..."
+msgstr "शोधा"
+
+#: ../gedit/gedit-ui.h:118
+msgid "Search for text"
+msgstr "पाठ शोधा"
+
+#: ../gedit/gedit-ui.h:119
+msgid "Find Ne_xt"
+msgstr "पुढचे शोधा"
+
+#: ../gedit/gedit-ui.h:120
+msgid "Search forwards for the same text"
+msgstr "तीच स्ट्रिंग पुन्हा पुढे शोधून काढा"
+
+#: ../gedit/gedit-ui.h:121
+msgid "Find Pre_vious"
+msgstr "मागील शोधा(_v)"
+
+#: ../gedit/gedit-ui.h:122
+msgid "Search backwards for the same text"
+msgstr "तीच स्ट्रिंग मागे शोधून काढा"
+
+#: ../gedit/gedit-ui.h:123
+msgid "_Replace..."
+msgstr "बदलून घ्या"
+
+#: ../gedit/gedit-ui.h:124
+msgid "Search for and replace text"
+msgstr "शोधा आणि बदला"
+
+#: ../gedit/gedit-ui.h:125
+#, fuzzy
+msgid "_Clear Highlight"
+msgstr "उठावदार रीत(_H)"
+
+#: ../gedit/gedit-ui.h:126
+msgid "Clear highlighting of search matches"
 msgstr ""
+
+#: ../gedit/gedit-ui.h:127
+msgid "Go to _Line..."
+msgstr "या ओळीवर जा (_L)..."
+
+#: ../gedit/gedit-ui.h:128
+msgid "Go to a specific line"
+msgstr "योग्य ओळ क्रमांकावर जा"
+
+#: ../gedit/gedit-ui.h:129
+msgid "Interactive search..."
+msgstr ""
+
+#: ../gedit/gedit-ui.h:130
+#, fuzzy
+msgid "Interactively search for text"
+msgstr "पाठ शोधा"
+
+#. Documents menu
+#: ../gedit/gedit-ui.h:133
+msgid "_Save All"
+msgstr "सर्व सुरक्षित करा(_S)"
+
+#: ../gedit/gedit-ui.h:134
+msgid "Save all open files"
+msgstr "उघडलेल्या सर्व फाइल सुरक्षित करा"
+
+#: ../gedit/gedit-ui.h:135
+msgid "_Close All"
+msgstr "सर्व बंद करा"
+
+#: ../gedit/gedit-ui.h:136
+msgid "Close all open files"
+msgstr "उघडलेल्या सर्व फाइल बंद करा"
+
+#: ../gedit/gedit-ui.h:137
+#, fuzzy
+msgid "_Previous Document"
+msgstr "दस्तऐवज(_D)"
+
+#: ../gedit/gedit-ui.h:138
+#, fuzzy
+msgid "Activate previous document"
+msgstr "संपुर्ण दस्तऐवज निवडा"
+
+#: ../gedit/gedit-ui.h:139
+#, fuzzy
+msgid "_Next Document"
+msgstr "दस्तऐवज(_D)"
+
+#: ../gedit/gedit-ui.h:140
+#, fuzzy
+msgid "Activate next document"
+msgstr "नविन दस्तऐवज बनवा"
+
+#: ../gedit/gedit-ui.h:141
+msgid "_Move to New Window"
+msgstr "नविन खिडकीत हलवा(_M)"
+
+#: ../gedit/gedit-ui.h:142
+msgid "Move the current document to a new window"
+msgstr "चालू दस्तावेज नविन खिडकीत हलवा"
+
+#: ../gedit/gedit-ui.h:149
+msgid "Quit the program"
+msgstr "कार्यक्रम टाळा/सोडून द्या"
+
+#: ../gedit/gedit-ui.h:154
+msgid "_Toolbar"
+msgstr "उपकरणपट्टी(_T)"
+
+#: ../gedit/gedit-ui.h:155
+#, fuzzy
+msgid "Show or hide the toolbar in the current window"
+msgstr "चालू विन्डो चौकटीत साधनदर्शक पट्टी सुस्पस्ट दिसेल असे पहा"
+
+#: ../gedit/gedit-ui.h:157
+msgid "_Statusbar"
+msgstr "स्टेटसबार(_S)"
+
+#: ../gedit/gedit-ui.h:158
+#, fuzzy
+msgid "Show or hide the statusbar in the current window"
+msgstr "चालू विन्डो चौकटीत सुचनादर्शक पट्टी सुस्पस्ट दिसेल असे पहा "
+
+#: ../gedit/gedit-ui.h:160
+#, fuzzy
+msgid "Side _Pane"
+msgstr "भाषा निर्धारित करा(_L)"
+
+#: ../gedit/gedit-ui.h:161
+#, fuzzy
+msgid "Show or hide the side pane in the current window"
+msgstr "चालू विन्डो चौकटीत साधनदर्शक पट्टी सुस्पस्ट दिसेल असे पहा"
+
+#: ../gedit/gedit-ui.h:167
+#, fuzzy
+msgid "_Bottom Pane"
+msgstr "ओळ क्रमांकावर जा"
+
+#: ../gedit/gedit-ui.h:168
+#, fuzzy
+msgid "Show or hide the bottom pane in the current window"
+msgstr "चालू विन्डो चौकटीत साधनदर्शक पट्टी सुस्पस्ट दिसेल असे पहा"
+
+#: ../gedit/gedit-utils.c:983
+#, fuzzy, c-format
+msgid "Unable to find file %s."
+msgstr "\"%s\"फाइल सापडू शकली नाही"
+
+#: ../gedit/gedit-utils.c:987 ../gedit/gedit-utils.c:1016
+#, fuzzy
+msgid "Please check your installation."
+msgstr "कृपया, तुम्ही योग्य स्थळ टाइप केल्याची खात्री करून घ्या."
+
+#: ../gedit/gedit-utils.c:1012
+#, fuzzy, c-format
+msgid "Unable to find the required widgets inside file %s."
+msgstr "%s. मधील अपेक्षित विगेट्स सापडले नाहीत"
+
+#. create "Wrap Around" menu item.
+#: ../gedit/gedit-view.c:1336
+#, fuzzy
+msgid "_Wrap Around"
+msgstr "आसपासचा भाग कवर करून घ्या"
+
+#. create "Match Entire Word Only" menu item.
+#: ../gedit/gedit-view.c:1346
+#, fuzzy
+msgid "Match _Entire Word Only"
+msgstr "फक्त संपूर्ण शब्द जोडा(_e)"
+
+#. create "Match Case" menu item.
+#: ../gedit/gedit-view.c:1356
+#, fuzzy
+msgid "_Match Case"
+msgstr "लिपी जुळवा(_M)"
+
+#: ../gedit/gedit-view.c:1444
+#, fuzzy
+msgid "String you want to search for"
+msgstr "योग्य स्थाने शोधण्यासाठी"
+
+#: ../gedit/gedit-view.c:1453
+msgid "Line you want to move the cursor to"
+msgstr ""
+
+#: ../gedit/gedit-window.c:754
+#, c-format
+msgid "Use %s highlight mode"
+msgstr "%s उठावदार रीत वापरा"
+
+#. add the "None" item before all the others
+#. Translators: "None" means that no highlight mode is selected in the
+#. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
+#: ../gedit/gedit-window.c:809
+#, fuzzy
+msgid "None"
+msgstr "पूर्ण"
+
+#: ../gedit/gedit-window.c:810
+#, fuzzy
+msgid "Disable syntax highlighting"
+msgstr "सिंटॅक्स उठावदारीकरण कार्यान्वित करा(_E)"
+
+#. Translators: %s is a URI
+#: ../gedit/gedit-window.c:936 ../gedit/gedit-window.c:961
+#: ../gedit/recent-files/egg-recent-view-gtk.c:346
+#: ../gedit/recent-files/egg-recent-view-uimanager.c:205
+#, c-format
+msgid "Open '%s'"
+msgstr "'%s' उघडा "
+
+#: ../gedit/gedit-window.c:1085
+msgid "Save"
+msgstr "सुरक्षित करा"
+
+#: ../gedit/gedit-window.c:1198
+msgid "Open a recently used file"
+msgstr "नुकतीच वापरलेली फाइल उघडा"
+
+#: ../gedit/gedit-window.c:1205
+msgid "Open"
+msgstr "उघडा"
+
+#: ../gedit/gedit-window.c:1294 ../gedit/gedit-window.c:1945
+#, c-format
+msgid "Activate %s"
+msgstr "%s कार्यान्वित करा"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
 msgstr "लिपी बदला"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Changes the case of selected text."
-msgstr "निवडलेले टेक्स्ट काढूनटाका"
+msgstr "निवडलेल्या पाठाची लिपी बदलतो."
 
-#: ../plugins/docinfo/docinfo.c:45
-msgid "_Document Statistics"
-msgstr "दस्तऐवजांचे संख्यांकन"
+#: ../plugins/changecase/gedit-changecase-plugin.c:222
+msgid "C_hange Case"
+msgstr "लिपी बदला(_h)"
 
-#: ../plugins/docinfo/docinfo.c:48
-msgid "Get statistic info on current document"
-msgstr "चालू दस्तऐवजावरील सांख्यिक माहिती घ्या"
+#: ../plugins/changecase/gedit-changecase-plugin.c:223
+msgid "All _Upper Case"
+msgstr "सर्व मोठ्या लिपीत(_U)"
 
-#: ../plugins/docinfo/docinfo.c:139
-#: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
-msgid "Document Statistics"
-msgstr "दस्तऐवजांचे संख्यांकन"
+#: ../plugins/changecase/gedit-changecase-plugin.c:224
+msgid "Change selected text to upper case"
+msgstr "निवडलेला पाठ छोट्या लिपीत बदला"
 
-#: ../plugins/docinfo/docinfo.c:153
-msgid "_Update"
-msgstr "सद्यास्थितीपर्यंत"
+#: ../plugins/changecase/gedit-changecase-plugin.c:226
+msgid "All _Lower Case"
+msgstr "सर्व छोट्या लिपीत(_L)"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:227
+msgid "Change selected text to lower case"
+msgstr "निवडलेला "
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:229
+msgid "_Invert Case"
+msgstr "लिपी व्यस्त करा(_I)"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:230
+msgid "Invert the case of selected text"
+msgstr "निवडलेले पाठाटी लिपी उलटी करा"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:232
+msgid "_Title Case"
+msgstr "शिर्षक लिपी(_T)"
+
+#: ../plugins/changecase/gedit-changecase-plugin.c:233
+msgid "Capitalize the first letter of each selected word"
+msgstr "प्रत्येक निवडलेल्या शब्दाचे पहिले अक्षर मोठ्या लिपीत बदला"
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
 msgstr ""
-"शब्दमोजणी प्लगीन द्वारा चालू दस्तएेवजाचे विश्लेषण करून त्यातील एकूण  शब्द , ओळी , अक्षरे व "
-"अन्य स्थळ वाचक खुणा यंाचे संकलीत चित्रण करते"
+"शब्दमोजणी प्लगीन द्वारा चालू दस्तऐवजाचे विश्लेषण करून त्यातील एकूण  शब्द , ओळी , अक्षरे व "
+"अन्य स्थळ वाचक खुणा यांचे संकलीत चित्रण करते."
+
+#: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
+#: ../plugins/docinfo/docinfo.glade2.h:8
+msgid "Document Statistics"
+msgstr "दस्तऐवजांचे संख्यांकन"
 
 #: ../plugins/docinfo/docinfo.glade2.h:2
 msgid "0"
@@ -2442,31 +2542,567 @@ msgstr "अक्षरे (रिकाम्या जागेशिवाय
 msgid "Characters (with spaces)"
 msgstr "अक्षरे (मोकळ्या जागांसह)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:8
-msgid "Update"
-msgstr "अद्ययावत करा"
+#: ../plugins/docinfo/docinfo.glade2.h:7
+#, fuzzy
+msgid "Document"
+msgstr "दस्तऐवज(_D)"
 
-#: ../plugins/docinfo/docinfo.glade2.h:9
+#: ../plugins/docinfo/docinfo.glade2.h:10
+#, fuzzy
+msgid "Selection"
+msgstr "रंग निवड "
+
+#: ../plugins/docinfo/docinfo.glade2.h:11
 msgid "Words"
 msgstr "शब्द"
 
-#: ../plugins/docinfo/docinfo.glade2.h:10
-msgid "gedit: Document Info plugin"
-msgstr "जीएडिट: दस्यावेज माहिती प्लगिन"
+#: ../plugins/docinfo/docinfo.glade2.h:12
+msgid "_Update"
+msgstr "सद्यास्थितीपर्यंत"
 
-#: ../plugins/indent/indent.c:45
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:400
+msgid "_Document Statistics"
+msgstr "दस्तऐवजांचे संख्यांकन"
+
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:402
+msgid "Get statistic info on current document"
+msgstr "चालू दस्तऐवजावरील सांख्यिक माहिती घ्या"
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:1
+msgid "Execute external commands and shell scripts."
+msgstr ""
+
+#: ../plugins/externaltools/externaltools.gedit-plugin.desktop.in.h:2
+msgid "External Tools"
+msgstr ""
+
+#: ../plugins/externaltools/tools/functions.py:242
+msgid "You must be inside a word to run this command"
+msgstr ""
+
+#: ../plugins/externaltools/tools/functions.py:299
+msgid "Running tool:"
+msgstr ""
+
+#: ../plugins/externaltools/tools/functions.py:322
+#, fuzzy
+msgid "Done."
+msgstr "पूर्ण"
+
+#: ../plugins/externaltools/tools/functions.py:324
+msgid "Exited"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:41
+msgid "Nothing"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:42
+#, fuzzy
+msgid "Current document"
+msgstr "नविन दस्तऐवज बनवा"
+
+#: ../plugins/externaltools/tools/manager.py:43
+#, fuzzy
+msgid "Current selection"
+msgstr "निवडलेले कापा"
+
+#: ../plugins/externaltools/tools/manager.py:44
+#, fuzzy
+msgid "Current line"
+msgstr "<b>चालू ओळ</b>"
+
+#: ../plugins/externaltools/tools/manager.py:45
+msgid "Current word"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:48
+msgid "Insert in output panel"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:49
+#, fuzzy
+msgid "Create new document"
+msgstr "नविन दस्तऐवज बनवा"
+
+#: ../plugins/externaltools/tools/manager.py:50
+#, fuzzy
+msgid "Append to current document"
+msgstr "चालू दस्तऐवजावरील सांख्यिक माहिती घ्या"
+
+#: ../plugins/externaltools/tools/manager.py:51
+#, fuzzy
+msgid "Replace current document"
+msgstr "चालू दस्तावेजाची प्रत सुरक्षित करा"
+
+#: ../plugins/externaltools/tools/manager.py:52
+#, fuzzy
+msgid "Replace current selection"
+msgstr "निवडलेल्याची प्रत बनवा"
+
+#: ../plugins/externaltools/tools/manager.py:53
+#, fuzzy
+msgid "Insert at cursor position"
+msgstr "कर्सर स्थिती वर उपयोगकर्त्याचे नाव टाका"
+
+#: ../plugins/externaltools/tools/manager.py:56
+#, fuzzy
+msgid "All documents"
+msgstr "दस्तऐवज(_D)"
+
+#: ../plugins/externaltools/tools/manager.py:57
+msgid "All documents except untitled ones"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:58
+msgid "Local files only"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:59
+msgid "Remote files only"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:60
+#, fuzzy
+msgid "Untitled documents only"
+msgstr "असुरक्षित दस्तऐवज"
+
+#: ../plugins/externaltools/tools/manager.py:190
+#: ../plugins/externaltools/tools/manager.py:207
+#: ../plugins/externaltools/tools/manager.py:246
+#, python-format
+msgid "Edit tool <i>%s</i>:"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:194
+msgid "A Brand New Tool"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:217
+msgid "New tool"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:280
+#, python-format
+msgid "This accelerator is already bound to %s"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:333
+#: ../plugins/snippets/snippets/SnippetsDialog.py:600
+msgid "Type a new accelerator, or press Backspace to clear"
+msgstr ""
+
+#: ../plugins/externaltools/tools/manager.py:335
+#: ../plugins/snippets/snippets/SnippetsDialog.py:602
+msgid "Type a new accelerator"
+msgstr ""
+
+#: ../plugins/externaltools/tools/outputpanel.py:78
+#, fuzzy
+msgid "Stopped."
+msgstr "थांबले"
+
+#: ../plugins/externaltools/tools/tools.glade.h:2
+#, fuzzy
+msgid "Co_mmand(s):"
+msgstr "आदेश(_m):"
+
+#: ../plugins/externaltools/tools/tools.glade.h:3
+msgid "Edit tool <i>make</i>:"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:4
+msgid "External Tools Manager"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:5
+msgid "F7"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:6
+msgid ""
+"Nothing\n"
+"Current document\n"
+"All documents"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:9
+msgid "Run “make” in the document dir"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:10
+#: ../plugins/snippets/snippets/snippets.glade.h:4
+msgid "_Accelerator:"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:11
+msgid "_Applicability:"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:12
+#, fuzzy
+msgid "_Description:"
+msgstr "वर्णन"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
+msgid "_Input:"
+msgstr ""
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+#, fuzzy
+msgid "_Output:"
+msgstr "प्रदान(आउटपुट) खिडकी(_O)"
+
+#: ../plugins/externaltools/tools/tools.glade.h:15
+#, fuzzy
+msgid "_Save:"
+msgstr "सुरक्षित करा(_S)"
+
+#: ../plugins/externaltools/tools/tools.glade.h:16
+#, fuzzy
+msgid "_Tools:"
+msgstr "उपकरणे"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+msgid "File Browser Filter Mode"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+msgid "File Browser Filter Pattern"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+msgid "File Browser Root Directory"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+msgid "File Browser Virtual Root Directory"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with nautilus etc)"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+msgid "Open With Tree View"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+msgid "Set Location To First Document"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+msgid "Sets whether to enable restoring of remote locations."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr ""
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:360
+#, fuzzy
+msgid "_Set root to active document"
+msgstr "संपुर्ण दस्तऐवज निवडा"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:362
+#, fuzzy
+msgid "Set the root to the active document location"
+msgstr "चालू दस्तावेज किंवा निवड क्रमबद्ध करा."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:364
+msgid "_Open terminal here"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:366
+msgid "Open a terminal at the currently opened directory"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:478
+#, fuzzy
+msgid "File Browser"
+msgstr "फाइल %s"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+#, fuzzy
+msgid "An error occurred while creating a new directory"
+msgstr "निवडलेला आदेश देताना/कार्यान्वित करताना चूक उद्भवते. "
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:575
+#, fuzzy
+msgid "An error occurred while creating a new file"
+msgstr "निवडलेला आदेश देताना/कार्यान्वित करताना चूक उद्भवते. "
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:580
+#, fuzzy
+msgid "An error occurred while renaming a file or directory"
+msgstr "निवडलेला आदेश देताना/कार्यान्वित करताना चूक उद्भवते. "
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:585
+#, fuzzy
+msgid "An error occurred while deleting a file or directory"
+msgstr "निवडलेला आदेश देताना/कार्यान्वित करताना चूक उद्भवते. "
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+#, fuzzy
+msgid "An error occurred while opening a directory in the file manager"
+msgstr "निवडलेला आदेश देताना/कार्यान्वित करताना चूक उद्भवते. "
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
+#, fuzzy
+msgid "An error occurred while setting a root directory"
+msgstr "निवडलेला आदेश देताना/कार्यान्वित करताना चूक उद्भवते. "
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
+#, fuzzy
+msgid "An error occurred while loading a directory"
+msgstr "निवडलेला आदेश देताना/कार्यान्वित करताना चूक उद्भवते. "
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
+msgid "An error occurred"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:825
+msgid ""
+"Cannot move file to trash, do you\n"
+"want to delete immediately?"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:828
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
+#, c-format
+msgid ""
+"Are you sure you want to\n"
+"permanently delete \"%s\"?"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
+#, fuzzy
+msgid "If you delete an item it is permanently lost."
+msgstr "जर तुम्ही सुरक्षित नाही केले, तर अखेरच्या मिनिटापासूनचे बदल कायमस्वरूपी नष्ट होतील."
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2418
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
+#, fuzzy
+msgid "Invalid uri"
+msgstr "फाइलचे नाव चुकीचे आहे"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2776
+#, fuzzy
+msgid "file"
+msgstr "शिर्षक "
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2797
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2844
+msgid ""
+"The new file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2825
+#, fuzzy
+msgid "directory"
+msgstr "निर्देशिका यादी"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:719
+msgid "Bookmarks"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
+#, fuzzy
+msgid "_New Directory"
+msgstr "निर्देशिका यादी"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+msgid "Add new empty directory"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
+msgid "New F_ile"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
+msgid "Add new empty file"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
+msgid "Up"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
+#, fuzzy
+msgid "Open the parent folder"
+msgstr "चालू फाइल सुरक्षित ठेवा"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+#, fuzzy
+msgid "_Rename"
+msgstr "बदलून घ्या"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
+#, fuzzy
+msgid "Rename selected file or directory"
+msgstr "कृतीदर्शिका निवडा"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+msgid "_Move To Trash"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
+msgid "Move selected file or directory to trash"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+msgid "_Delete"
+msgstr "काढून टाका(_D)"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
+#, fuzzy
+msgid "Delete selected file or directory"
+msgstr "निवडलेले टेक्स्ट काढूनटाका"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#, fuzzy
+msgid "_Previous Location"
+msgstr "जागा उघडा"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "Go to the previous visited location"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#, fuzzy
+msgid "_Next Location"
+msgstr "जागा उघडा"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "Go to the next visited location"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
+msgid "Re_fresh View"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
+msgid "Refresh the view"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
+#, fuzzy
+msgid "_View Directory"
+msgstr "कार्यदर्शिका "
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
+msgid "View directory in file manager"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+msgid "Show _Hidden"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+msgid "Show hidden files and directories"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+msgid "Show _Binary"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+msgid "Show binary files"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:949
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
+#, fuzzy
+msgid "Previous location"
+msgstr "संक्षिप्त"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:936
+#, fuzzy
+msgid "Go to previous location"
+msgstr "कार्यक्रम स्थानाचे नियोजन करा"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:942
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
+msgid "Go to a previously opened location"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+#, fuzzy
+msgid "Next location"
+msgstr "जागा उघडा"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:968
+msgid "Go to next location"
+msgstr ""
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1129
+msgid "Advanced filtering"
+msgstr ""
+
+#: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "_समास"
 
-#: ../plugins/indent/indent.c:47
+#: ../plugins/indent/gedit-indent-plugin.c:58
 msgid "Indent selected lines"
 msgstr "निवडक ओळींचा क्रमलावा"
 
-#: ../plugins/indent/indent.c:49
+#: ../plugins/indent/gedit-indent-plugin.c:63
 msgid "U_nindent"
 msgstr "समास काढून टाका(_n)"
 
-#: ../plugins/indent/indent.c:51
+#: ../plugins/indent/gedit-indent-plugin.c:65
 msgid "Unindent selected lines"
 msgstr "निवडक ओळींचा क्रम काढून टाका"
 
@@ -2475,15 +3111,31 @@ msgid "Indent lines"
 msgstr "ओळ/क्रम टाका"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Indents or un-indents selected lines."
-msgstr "निवडक ओळींचा क्रम काढून टाका"
+msgstr "निवडलेल्या ओळींना समास देतो किंवा काढून टाकतो."
 
-#: ../plugins/sample/sample.c:43
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
+msgid "Emacs, Kate and Vim-style modelines support for gedit."
+msgstr ""
+
+#: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:2
+#, fuzzy
+msgid "Modelines"
+msgstr "रेषा"
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
+msgid "Interactive python console standing in the bottom panel"
+msgstr ""
+
+#: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+msgid "Python Console"
+msgstr ""
+
+#: ../plugins/sample/gedit-sample-plugin.c:63
 msgid "Insert User Na_me"
 msgstr "उपयोगकर्त्याचे नाव टाका(_m)"
 
-#: ../plugins/sample/sample.c:46
+#: ../plugins/sample/gedit-sample-plugin.c:65
 msgid "Insert the user name at the cursor position"
 msgstr "कर्सर स्थिती वर उपयोगकर्त्याचे नाव टाका"
 
@@ -2495,146 +3147,67 @@ msgstr "कर्सर स्थिती वर उपयोगकर्त्
 msgid "User name"
 msgstr "उपयोगकर्त्याचे नाव"
 
-#: ../plugins/savecopy/savecopy.c:49
-msgid "Sa_ve Copy..."
-msgstr "प्रत सुरक्षित करा(_C)..."
-
-#: ../plugins/savecopy/savecopy.c:52
-#, fuzzy
-msgid "Save a copy of the current document"
-msgstr "चालू दस्तऐवजातील भाषा सुरचित करा"
-
-#: ../plugins/savecopy/savecopy.c:315
-#, c-format
-msgid "Could not save a copy of the file to \"%s\""
-msgstr "फाइल येथे \"%s\" रक्षित करता आली नाही"
-
-#: ../plugins/savecopy/savecopy.c:414
-msgid "You are trying to overwrite the original file"
+#: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:1
+msgid "Insert often used pieces of text in a fast way"
 msgstr ""
 
-#: ../plugins/savecopy/savecopy.c:523
+#: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
+msgid "Snippets"
+msgstr ""
+
+#: ../plugins/snippets/snippets/snippets.glade.h:2
 #, fuzzy
-msgid "Save Copy..."
-msgstr "...प्रमाणे सुरक्षित करा"
+msgid "<b>Activation</b>"
+msgstr "<b>आपोआप समास सोडणे </b>"
 
-#. translators: %s is a filename
-#: ../plugins/savecopy/savecopy.c:555 ../plugins/savecopy/savecopy.c:565
-#, c-format
-msgid "%s (copy)"
-msgstr "%s (प्रतिलिपी)"
-
-#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:1
+#: ../plugins/snippets/snippets/snippets.glade.h:3
 #, fuzzy
-msgid "Save a Copy"
-msgstr "उघडलेल्या सर्व फाइल सुरक्षित करा"
+msgid "Snippets Manager"
+msgstr "भाषा निर्धारित करा"
 
-#: ../plugins/savecopy/savecopy.gedit-plugin.desktop.in.h:2
-#, fuzzy
-msgid "Saves a copy of the current document to a local or remote location."
-msgstr "निवडक भाग किंवा दस्तऐवजांची छाननी करते "
+#: ../plugins/snippets/snippets/snippets.glade.h:5
+msgid "_Edit snippet:"
+msgstr ""
 
-#: ../plugins/shell_output/shell_output.c:56
-msgid "_Run Command..."
-msgstr "आदेश चालवा(_R)..."
+#: ../plugins/snippets/snippets/snippets.glade.h:6
+msgid "_Snippets:"
+msgstr ""
 
-#: ../plugins/shell_output/shell_output.c:59
-#, fuzzy
-msgid "Run a command"
-msgstr "अंमलात आणलेला आदेश"
+#. "tab" here means the tab key, not the notebook tab!
+#: ../plugins/snippets/snippets/snippets.glade.h:8
+msgid "_Tab trigger:"
+msgstr ""
 
-#: ../plugins/shell_output/shell_output.c:156
-#: ../plugins/shell_output/shell_output.c:576
-msgid "Stopped"
-msgstr "थांबले"
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
+msgid "Manage _Snippets..."
+msgstr ""
 
-#: ../plugins/shell_output/shell_output.c:355
-msgid "Run Command"
-msgstr "आदेश चालवा"
+#: ../plugins/snippets/snippets/SnippetPluginInstance.py:74
+msgid "Manage snippets"
+msgstr ""
 
-#: ../plugins/shell_output/shell_output.c:374
-msgid "_Run"
-msgstr "चालवा"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:53
+msgid "Add a new snippet..."
+msgstr ""
 
-#: ../plugins/shell_output/shell_output.c:582
-msgid "Done"
-msgstr "पूर्ण"
+#: ../plugins/snippets/snippets/SnippetsDialog.py:108
+msgid "Global"
+msgstr ""
 
-#: ../plugins/shell_output/shell_output.c:584
-msgid "Failed"
-msgstr "अयशस्वी झाले"
-
-#: ../plugins/shell_output/shell_output.c:754
+#: ../plugins/snippets/snippets/SnippetsDialog.py:476
 msgid ""
-"The shell command entry is empty.\n"
-"\n"
-"Please, insert a valid shell command."
+"This is not a valid tab trigger. Triggers can either contain letters or a "
+"single, non alphanumeric, character like {, [, etcetera."
 msgstr ""
-"शेल कमान्ड प्रवेश रिक्त आहे.\n"
-"\n"
-"कृपया, योग्य शेल कमान्ड द्या"
 
-#: ../plugins/shell_output/shell_output.c:776
-msgid ""
-"Error parsing the shell command.\n"
-"\n"
-"Please, insert a valid shell command."
-msgstr ""
-"शेल कमान्ड कार्यान्वित करताना चूक होते \n"
-"\n"
-"कृपया, योग्य शेल कमान्ड द्या"
-
-#: ../plugins/shell_output/shell_output.c:854
-msgid "Executing command"
-msgstr "आदेश अंमलात आणत आहे "
-
-#: ../plugins/shell_output/shell_output.c:919
-#, fuzzy
-msgid "An error occurred while running the selected command."
-msgstr "निवडक वा निश्चित आदेश देताना/कार्यान्वित करताना चूक येते "
-
-#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:1
-#, fuzzy
-msgid ""
-"Executes an external program and, if required, displays its output in the "
-"output window."
-msgstr ""
-"बाह्य कार्यक्रमाचा अमल करा आणि प्राप्त परिणाम (output) एका नव्या दस्ताएेवजात समाविष्ट "
-"करा"
-
-#: ../plugins/shell_output/shell_output.gedit-plugin.desktop.in.h:2
-msgid "Shell command"
-msgstr "शैल आदेश"
-
-#: ../plugins/shell_output/shell_output.glade2.h:2
-msgid "Co_mmand:"
-msgstr "आदेश(_m):"
-
-#: ../plugins/shell_output/shell_output.glade2.h:3
-msgid "Select the working directory..."
-msgstr "कृतीदर्शिका निवडा"
-
-#: ../plugins/shell_output/shell_output.glade2.h:4
-#, fuzzy
-msgid "_Show results in Output Window"
-msgstr "दाखवा"
-
-#: ../plugins/shell_output/shell_output.glade2.h:5
-msgid "_Working directory:"
-msgstr "कार्यदर्शिका "
-
-#: ../plugins/shell_output/shell_output.glade2.h:6
-msgid "gedit: Shell Output plugin"
-msgstr "शेल परिणाम जोडा"
-
-#: ../plugins/sort/sort.c:29
+#: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
 msgstr "छाननी करा"
 
-#: ../plugins/sort/sort.c:32
+#: ../plugins/sort/gedit-sort-plugin.c:82
 #, fuzzy
-msgid "Sort the current document or selection."
-msgstr "निवडक भाग किंवा दस्तऐवजांची छाननी करते "
+msgid "Sort the current document or selection"
+msgstr "चालू दस्तावेज किंवा निवड क्रमबद्ध करा."
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.glade2.h:3
@@ -2654,9 +3227,8 @@ msgid "S_tart at column:"
 msgstr "या स्तंभात सुरू करा(_t):"
 
 #: ../plugins/sort/sort.glade2.h:4
-#, fuzzy
 msgid "You cannot undo a sort operation"
-msgstr "a"
+msgstr "तुम्ही क्रमवारी प्रक्रिया रद्द(अन-डू) करू शकत नाही"
 
 #: ../plugins/sort/sort.glade2.h:5
 msgid "_Ignore case"
@@ -2673,7 +3245,7 @@ msgstr "क्रमबद्ध करा(_S)"
 #: ../plugins/spell/gedit-automatic-spell-checker.c:419
 #: ../plugins/spell/gedit-spell-checker-dialog.c:511
 msgid "(no suggested words)"
-msgstr ""
+msgstr "(शब्द सुचवले नाहीत)"
 
 #: ../plugins/spell/gedit-automatic-spell-checker.c:443
 msgid "_More..."
@@ -2691,23 +3263,7 @@ msgstr "जोडा(_A)"
 
 #: ../plugins/spell/gedit-automatic-spell-checker.c:546
 msgid "_Spelling Suggestions..."
-msgstr ""
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:289
-msgid "Check Spelling"
-msgstr ""
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:300
-msgid "Suggestions"
-msgstr "सल्ले"
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:615
-msgid "(correct spelling)"
-msgstr ""
-
-#: ../plugins/spell/gedit-spell-checker-dialog.c:800
-msgid "Completed spell checking"
-msgstr "स्पेलिंगची तपासणी पूर्ण झाली"
+msgstr "स्पेलिंगसाठी सल्ले(_S)..."
 
 #: ../plugins/spell/gedit-spell-checker.c:79
 msgid "Afrikaans"
@@ -2717,302 +3273,357 @@ msgstr "आफ्रीकी"
 msgid "Amharic"
 msgstr "अम्हेरिक"
 
-#: ../plugins/spell/gedit-spell-checker.c:81
+#: ../plugins/spell/gedit-spell-checker.c:82
+#, fuzzy
+msgid "Arabic (Egypt)"
+msgstr "अरेबिक"
+
+#: ../plugins/spell/gedit-spell-checker.c:83
 msgid "Azerbaijani"
 msgstr "अझेरबाइजानी"
 
-#: ../plugins/spell/gedit-spell-checker.c:82
+#: ../plugins/spell/gedit-spell-checker.c:84
 msgid "Belarusian"
 msgstr "बेलारशियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:83
+#: ../plugins/spell/gedit-spell-checker.c:85
 msgid "Bulgarian"
 msgstr "बल्गेरियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:84
+#: ../plugins/spell/gedit-spell-checker.c:86
 msgid "Bengali"
 msgstr "बंगाली"
 
-#: ../plugins/spell/gedit-spell-checker.c:85
+#: ../plugins/spell/gedit-spell-checker.c:87
 msgid "Breton"
 msgstr "ब्रेटन"
 
-#: ../plugins/spell/gedit-spell-checker.c:86
+#: ../plugins/spell/gedit-spell-checker.c:88
 msgid "Catalan"
 msgstr "कॅटालॉन"
 
-#: ../plugins/spell/gedit-spell-checker.c:87
+#: ../plugins/spell/gedit-spell-checker.c:89
 msgid "Czech"
 msgstr "चेक"
 
-#: ../plugins/spell/gedit-spell-checker.c:88
+#: ../plugins/spell/gedit-spell-checker.c:90
 msgid "Welsh"
 msgstr "वेल्श"
 
-#: ../plugins/spell/gedit-spell-checker.c:89
+#: ../plugins/spell/gedit-spell-checker.c:91
 msgid "Danish"
 msgstr "डॅनिश"
 
-#: ../plugins/spell/gedit-spell-checker.c:90
+#: ../plugins/spell/gedit-spell-checker.c:92
 msgid "German (Austria)"
 msgstr "जर्मन आस्ट्रिया"
 
-#: ../plugins/spell/gedit-spell-checker.c:91
+#: ../plugins/spell/gedit-spell-checker.c:93
 msgid "German (Germany)"
 msgstr "जर्मन जर्मनी"
 
-#: ../plugins/spell/gedit-spell-checker.c:92
+#: ../plugins/spell/gedit-spell-checker.c:94
 msgid "German (Swiss)"
 msgstr "जर्मन (स्विस)"
 
-#: ../plugins/spell/gedit-spell-checker.c:94
+#: ../plugins/spell/gedit-spell-checker.c:96
 msgid "English (American)"
 msgstr "इंग्लिश (अमेरीकन)"
 
-#: ../plugins/spell/gedit-spell-checker.c:95
+#: ../plugins/spell/gedit-spell-checker.c:97
 msgid "English (British)"
 msgstr "इंग्लिश (ब्रिटिश)"
 
-#: ../plugins/spell/gedit-spell-checker.c:96
+#: ../plugins/spell/gedit-spell-checker.c:98
 msgid "English (Canadian)"
 msgstr "इंग्लिश (कनाडियन)"
 
-#: ../plugins/spell/gedit-spell-checker.c:97
+#: ../plugins/spell/gedit-spell-checker.c:99
 msgid "Esperanto"
 msgstr "एस्पेरांटो"
 
-#: ../plugins/spell/gedit-spell-checker.c:98
+#: ../plugins/spell/gedit-spell-checker.c:100
 msgid "Spanish"
 msgstr "स्पॅनिश"
 
-#: ../plugins/spell/gedit-spell-checker.c:99
+#: ../plugins/spell/gedit-spell-checker.c:101
 msgid "Estonian"
 msgstr "एस्टोनियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:100
+#: ../plugins/spell/gedit-spell-checker.c:102
 msgid "Persian"
 msgstr "पर्शियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:101
+#: ../plugins/spell/gedit-spell-checker.c:103
 msgid "Finnish"
 msgstr "फिन्निश"
 
-#: ../plugins/spell/gedit-spell-checker.c:102
+#: ../plugins/spell/gedit-spell-checker.c:104
 msgid "Faroese"
 msgstr "फारसी"
 
-#: ../plugins/spell/gedit-spell-checker.c:103
+#: ../plugins/spell/gedit-spell-checker.c:105
 msgid "French (France)"
 msgstr "फ्रेंच (फ्रांस)"
 
-#: ../plugins/spell/gedit-spell-checker.c:104
+#: ../plugins/spell/gedit-spell-checker.c:106
 msgid "French (Swiss)"
 msgstr "फ्रेंच (स्विस)"
 
-#: ../plugins/spell/gedit-spell-checker.c:105
+#: ../plugins/spell/gedit-spell-checker.c:107
 msgid "Irish"
 msgstr "आयरिश"
 
-#: ../plugins/spell/gedit-spell-checker.c:106
+#: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Scottish Gaelic"
 msgstr "स्कॉटिश गेलिक"
 
-#: ../plugins/spell/gedit-spell-checker.c:107
+#: ../plugins/spell/gedit-spell-checker.c:109
 msgid "Gallegan"
 msgstr "गॅलेगन"
 
-#: ../plugins/spell/gedit-spell-checker.c:108
+#: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Manx Gaelic"
 msgstr "मॅन्क गेलिक"
 
-#: ../plugins/spell/gedit-spell-checker.c:110
+#: ../plugins/spell/gedit-spell-checker.c:112
 msgid "Hindi"
 msgstr "हिंदी"
 
-#: ../plugins/spell/gedit-spell-checker.c:111
+#: ../plugins/spell/gedit-spell-checker.c:113
 msgid "Croatian"
 msgstr "क्रोएशिअन"
 
-#: ../plugins/spell/gedit-spell-checker.c:112
+#: ../plugins/spell/gedit-spell-checker.c:114
 msgid "Upper Sorbian"
 msgstr "अप्पर सोर्बियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:113
+#: ../plugins/spell/gedit-spell-checker.c:115
 msgid "Hungarian"
 msgstr "हंगेरियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:114
+#: ../plugins/spell/gedit-spell-checker.c:116
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "इंटरलिंग्वा (IALA)"
 
-#: ../plugins/spell/gedit-spell-checker.c:115
+#: ../plugins/spell/gedit-spell-checker.c:117
 msgid "Indonesian"
 msgstr "इंडोनेशियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:116
+#: ../plugins/spell/gedit-spell-checker.c:118
 msgid "Icelandic"
 msgstr "आइसलँडिक"
 
-#: ../plugins/spell/gedit-spell-checker.c:117
+#: ../plugins/spell/gedit-spell-checker.c:119
 msgid "Italian"
 msgstr "इटालियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:118
+#: ../plugins/spell/gedit-spell-checker.c:120
 msgid "Kurdish"
 msgstr "कुर्दिश"
 
-#: ../plugins/spell/gedit-spell-checker.c:119
+#: ../plugins/spell/gedit-spell-checker.c:121
 msgid "Latin"
 msgstr "लॅटिन"
 
-#: ../plugins/spell/gedit-spell-checker.c:120
+#: ../plugins/spell/gedit-spell-checker.c:122
 msgid "Lithuanian"
 msgstr "लुथिआनिअन"
 
-#: ../plugins/spell/gedit-spell-checker.c:121
+#: ../plugins/spell/gedit-spell-checker.c:123
 msgid "Latvian"
 msgstr "लॅटविअन"
 
-#: ../plugins/spell/gedit-spell-checker.c:122
+#: ../plugins/spell/gedit-spell-checker.c:124
 msgid "Malagasy"
 msgstr "मॅलागासी"
 
-#: ../plugins/spell/gedit-spell-checker.c:123
+#: ../plugins/spell/gedit-spell-checker.c:125
 msgid "Maori"
 msgstr "माओरी"
 
-#: ../plugins/spell/gedit-spell-checker.c:124
+#: ../plugins/spell/gedit-spell-checker.c:126
 msgid "Macedonian"
 msgstr "मेसेडोनिअन"
 
-#: ../plugins/spell/gedit-spell-checker.c:125
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Mongolian"
 msgstr "मंगोलियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:126
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Marathi"
 msgstr "मराठी"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Malay"
 msgstr "मलय"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Maltese"
 msgstr "माल्टेज"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Bokmal"
 msgstr "नार्वेजियन बोकमाल"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Dutch"
 msgstr "डच"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Norwegian Nynorsk"
 msgstr "नार्वेजियन निनॉर्स्क"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Norwegian"
 msgstr "नार्वेजियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Nyanja"
 msgstr "न्यान्जा"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Polish"
 msgstr "पोलिश"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Portuguese (Portugal)"
 msgstr "पुर्तुगीज (पुर्तगाल)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:138
 msgid "Portuguese (Brazilian)"
 msgstr "पुर्तुगीज (ब्राझिलियन)"
 
-#: ../plugins/spell/gedit-spell-checker.c:137
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Quechua"
 msgstr "क्वेचवा"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Russian"
 msgstr "रशियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Kinyarwanda"
 msgstr "किन्यारवांडा"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Sardinian"
 msgstr "सर्डिनिअन"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Slovak"
 msgstr "स्लोवाक"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Slovenian"
 msgstr "स्लोवेनियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Swedish"
 msgstr "स्वीडिश"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Swahili"
 msgstr "स्वाहिली"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tamil"
 msgstr "तमिळ"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tetum"
 msgstr "टेटम"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:150
 msgid "Tagalog"
 msgstr "टॅगालोग"
 
-#: ../plugins/spell/gedit-spell-checker.c:149
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Tswana"
 msgstr "त्स्वाना"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:153
 msgid "Ukrainian"
 msgstr "यूक्रेनियन"
 
-#: ../plugins/spell/gedit-spell-checker.c:152
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Uzbek"
 msgstr "उज्बेक"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Walloon"
 msgstr "वल्लून"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:157
 msgid "Yiddish"
 msgstr "यिद्दिश"
 
-#: ../plugins/spell/gedit-spell-checker.c:156
+#: ../plugins/spell/gedit-spell-checker.c:158
 msgid "Zulu"
 msgstr "झुलू"
 
-#: ../plugins/spell/gedit-spell-checker.c:828
+#: ../plugins/spell/gedit-spell-checker.c:830
 msgid "Default"
 msgstr "साधारण"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:239
+#: ../plugins/spell/gedit-spell-checker-dialog.c:289
+msgid "Check Spelling"
+msgstr "स्पेलिंग तपासा"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:300
+msgid "Suggestions"
+msgstr "सल्ले"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:615
+msgid "(correct spelling)"
+msgstr "(स्पेलिंग सुधारा)"
+
+#: ../plugins/spell/gedit-spell-checker-dialog.c:800
+msgid "Completed spell checking"
+msgstr "स्पेलिंगची तपासणी पूर्ण झाली"
+
+#: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "%s. मधील अपेक्षित विगेट्स सापडले नाहीत"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:258
+#: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "भाषा"
+
+#: ../plugins/spell/gedit-spell-plugin.c:70
+msgid "_Check Spelling"
+msgstr "स्पेलिंग तपासा(_C)"
+
+#: ../plugins/spell/gedit-spell-plugin.c:72
+msgid "Check the current document for incorrect spelling"
+msgstr "चुकीच्या स्पेलिंगसाठी चालू दस्तावेज तपासा"
+
+#: ../plugins/spell/gedit-spell-plugin.c:78
+#, fuzzy
+msgid "Set _Language..."
+msgstr "भाषा निर्धारित करा(_L)"
+
+#: ../plugins/spell/gedit-spell-plugin.c:80
+msgid "Set the language of the current document"
+msgstr "चालू दस्तऐवजातील भाषा सुरचित करा"
+
+#: ../plugins/spell/gedit-spell-plugin.c:89
+msgid "_Autocheck Spelling"
+msgstr "स्पेलिंग स्वयंतपासणी(_A)"
+
+#: ../plugins/spell/gedit-spell-plugin.c:91
+msgid "Automatically spell-check the current document"
+msgstr "चालू दस्तऐवजातील स्पेलींग आपोआप छाननी केली जातात"
+
+#: ../plugins/spell/gedit-spell-plugin.c:713
+msgid "The document is empty."
+msgstr "दस्तऐवज रिकामे आहे"
+
+#: ../plugins/spell/gedit-spell-plugin.c:745
+#, fuzzy
+msgid "No misspelled words"
+msgstr "स्पेलिंग चुकलेले शब्द:"
 
 #: ../plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -3021,6 +3632,10 @@ msgstr "चालु दस्तऐवजाची भाषा निवडा
 #: ../plugins/spell/languages-dialog.glade2.h:2
 msgid "Set language"
 msgstr "भाषा निर्धारित करा"
+
+#: ../plugins/spell/spell-checker.glade2.h:1 ../plugins/time/time.glade2.h:2
+msgid "*"
+msgstr "*"
 
 #: ../plugins/spell/spell-checker.glade2.h:2
 msgid "<b>Language</b>"
@@ -3043,17 +3658,16 @@ msgid "Change A_ll"
 msgstr "सर्व बदला"
 
 #: ../plugins/spell/spell-checker.glade2.h:7
-#, fuzzy
 msgid "Change _to:"
-msgstr "सर्व बदला"
+msgstr "यामध्ये बदला(_t):"
 
 #: ../plugins/spell/spell-checker.glade2.h:8
 msgid "Check _Word"
-msgstr ""
+msgstr "शब्द तपासा(_W)"
 
 #: ../plugins/spell/spell-checker.glade2.h:9
 msgid "Check spelling"
-msgstr ""
+msgstr "स्पेलिंग तपासा"
 
 #: ../plugins/spell/spell-checker.glade2.h:10
 msgid "Ignore _All"
@@ -3065,11 +3679,11 @@ msgstr "भाषा:"
 
 #: ../plugins/spell/spell-checker.glade2.h:12
 msgid "Misspelled word:"
-msgstr ""
+msgstr "स्पेलिंग चुकलेले शब्द:"
 
 #: ../plugins/spell/spell-checker.glade2.h:13
 msgid "User dictionary:"
-msgstr ""
+msgstr "उपयोक्ता शब्दकोश:"
 
 #: ../plugins/spell/spell-checker.glade2.h:14
 msgid "_Ignore"
@@ -3077,82 +3691,58 @@ msgstr "दुर्लक्ष करा(_I)"
 
 #: ../plugins/spell/spell-checker.glade2.h:15
 msgid "_Suggestions:"
-msgstr ""
-
-#: ../plugins/spell/spell.c:52
-msgid "_Check Spelling"
-msgstr ""
-
-#: ../plugins/spell/spell.c:55
-#, fuzzy
-msgid "Check the current document for incorrect spelling"
-msgstr "च्यासाठी"
-
-#: ../plugins/spell/spell.c:57
-msgid "_Autocheck Spelling"
-msgstr ""
-
-#: ../plugins/spell/spell.c:60
-msgid "Automatically spell-check the current document"
-msgstr "चालू दस्तऐवजातील स्पेलींग आपोआप छाननी केली जातात"
-
-#: ../plugins/spell/spell.c:62
-msgid "Set _Language"
-msgstr "भाषा निर्धारित करा(_L)"
-
-#: ../plugins/spell/spell.c:65
-msgid "Set the language of the current document"
-msgstr "चालू दस्तऐवजातील भाषा सुरचित करा"
-
-#: ../plugins/spell/spell.c:625
-msgid "The document is empty."
-msgstr "दस्तऐवज रिकामे आहे"
-
-#: ../plugins/spell/spell.c:643
-#, fuzzy
-msgid "The selected text does not contain misspelled words."
-msgstr "निवडक भागामधे चुकीचे स्पेलींग असणारे शब्द नाहीत"
-
-#: ../plugins/spell/spell.c:644
-#, fuzzy
-msgid "The document does not contain misspelled words."
-msgstr "दस्तऐवजामधे चुकीचे स्पेलींग असणारे शब्द नाहीत"
+msgstr "सल्ले(_S):"
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Checks the spelling of the current document."
-msgstr "चालु दस्तऐवजाची भाषा निवडा"
+msgstr "चालु दस्तऐवजातील स्पेलिंग तपासतो."
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
 msgid "Spell checker"
-msgstr ""
+msgstr "स्पेल चेकर"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
+#, fuzzy
+msgid "Select the group of tags you want to use"
+msgstr "तुम्हाला हवा असणारा टॅब गट निवडा"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
+#, fuzzy
+msgid "Available Tag Lists"
+msgstr "उपलब्द नमुने/पध्दती"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
+msgid "Tags"
+msgstr "टॅग्स"
+
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
+msgid "Double-click on a tag to insert it in the current document"
+msgstr "चालू दस्तएेवजात हवा तो टॅग घेण्यासाठी त्या टॅगवर डबल क्लिक करा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "उपलब्द नमुने/पध्दती"
+msgstr "संक्षिप्त रूप"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:2
 msgid "Abbreviation"
-msgstr ""
+msgstr "संक्षिप्त"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
 msgstr "वर"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:4
-#, fuzzy
 msgid "Accessibility key character"
-msgstr "सुलभता"
+msgstr "सुलभता कळ अक्षर"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:5
 msgid "Acronym"
-msgstr ""
+msgstr "संज्ञा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "रेषा"
+msgstr "रेषेत"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
@@ -3160,20 +3750,19 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:8
 msgid "Alternative"
-msgstr ""
+msgstr "पर्यायी"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:9
 msgid "Anchor"
-msgstr ""
+msgstr "ऍन्कर"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "ऍन्कर URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "रक्षित करण्या साठी फाइलचे नाव निवडा"
+msgstr "एप्लेट वर्ग फाइल कोड"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
@@ -3181,41 +3770,35 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "संबंधित माहती"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "स्वयंक्रम होतो"
+msgstr "लेखक माहिती"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "पान शिर्षके मुद्रीत करा"
+msgstr "अक्ष संबंधीत शिर्षके"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:16
-#, fuzzy
 msgid "BGSound"
-msgstr "दुसरा"
+msgstr "BGSound"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:17
 msgid "Background color"
 msgstr "पार्श्वभूमी रंग"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "पार्श्वरंग"
+msgstr "पार्श्वभूमी टेक्चर टाइल"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:19
-#, fuzzy
 msgid "Base URI"
-msgstr "आधार"
+msgstr "बेस URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "लेबल साठी फोन्ट वापरा"
+msgstr "बेस फॉन्ट"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
@@ -3223,7 +3806,7 @@ msgstr "वर्तन"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:22
 msgid "Blinking text"
-msgstr ""
+msgstr "लुकलुकता पाठ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Border"
@@ -3235,7 +3818,7 @@ msgstr "किनार रंग"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "खोका"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
 msgid "Cell rowspan"
@@ -3243,21 +3826,19 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Center"
-msgstr ""
+msgstr "केंद्र"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
-#, fuzzy
 msgid "Character encoding of linked resource"
-msgstr "अक्षरे (रिकाम्या जागेशिवाय)"
+msgstr "लिंक केलेल्या साधनांची अक्षर एनकोडिंग"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:30
 msgid "Checked (state)"
-msgstr ""
+msgstr "तपासलेले (स्थिती)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "क्रिया(एं)"
+msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:32
 #, fuzzy
@@ -3265,42 +3846,36 @@ msgid "Cite reason for change"
 msgstr "च्यासाठी"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:33
-#, fuzzy
 msgid "Class implementation ID"
-msgstr "वर्ग"
+msgstr "वर्गअंमल ID"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "टॅग यादी"
+msgstr "वर्ग यादी"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:35
-#, fuzzy
 msgid "Clear text flow control"
-msgstr "क्लियर"
+msgstr "पाठ प्रवाह नियंत्रण साफ करा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:36
 msgid "Code content type"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "निवडलेल्या ओळींची कॉपी करा"
+msgstr "निवडलेल्या लिंक्सचा रंग"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:39
-#, fuzzy
 msgid "Columns"
-msgstr "रंग"
+msgstr "स्तंभ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "अनुक्रम(_C)"
+msgstr "टीप"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
@@ -3317,9 +3892,8 @@ msgid "Content type"
 msgstr "अनुक्रम(_C)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "अनुक्रम(_C)"
+msgstr "अक्षांश"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3331,11 +3905,11 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:47
 msgid "Date and time of change"
-msgstr ""
+msgstr "बदलाची दिनांक आणि वेळ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:48
 msgid "Declare flag"
-msgstr ""
+msgstr "ध्वज घोषित करा"
 
 #. Translators: DEFER is an optional attribute of the <script> tag.
 #. It indicates that the script is not going to generate any document
@@ -3345,210 +3919,193 @@ msgid "Defer attribute"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Definition description"
-msgstr "वर्णन"
+msgstr "व्याख्या वर्णन"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Definition list"
-msgstr ""
+msgstr "व्याख्या यादी"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:55
 msgid "Definition term"
-msgstr ""
+msgstr "व्याख्या संज्ञा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Deleted text"
-msgstr "निवडलेले टेक्स्ट काढूनटाका"
+msgstr "काढून टाकलेला पाठ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Direction"
-msgstr "वर्णन"
+msgstr "दिशा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Directionality"
-msgstr ""
+msgstr "दिशामानता"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "Directory list"
 msgstr "निर्देशिका यादी"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Disabled"
-msgstr "अयशस्वी झाले"
+msgstr "अकार्यान्वित"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document base"
-msgstr "दस्तऐवज(_D)"
+msgstr "दस्तऐवज बेस"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Document body"
-msgstr "दस्तऐवज(_D)"
+msgstr "दस्तऐवज धड"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:63
-#, fuzzy
 msgid "Document head"
-msgstr "दस्तऐवज(_D)"
+msgstr "दस्तऐवज शिर्ष"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:64
-#, fuzzy
 msgid "Document title"
-msgstr "दस्तऐवजांचे संख्यांकन"
+msgstr "दस्तऐवज शिर्षक"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:65
-#, fuzzy
 msgid "Document type"
-msgstr "दस्तऐवज(_D)"
+msgstr "दस्तऐवज प्रकार"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:66
-#, fuzzy
 msgid "Element ID"
-msgstr "दस्तऐवज(_D)"
+msgstr "घटक ID"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Embedded object"
-msgstr ""
+msgstr "जोडलेली वस्तू"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:68
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
-msgstr ""
+msgstr "जोर"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Encode type"
-msgstr ""
+msgstr "एनकोड प्रकार"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Figure"
-msgstr ""
+msgstr "आकृती"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Font face"
 msgstr "फोन्टचे नाव"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:72
-#, fuzzy
 msgid "For label"
-msgstr "लेबल"
+msgstr "लेबलसाठी"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Forced line break"
-msgstr ""
+msgstr "जबरदस्तीचा ओळ विराम"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:74
 msgid "Form"
-msgstr ""
+msgstr "अर्ज"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form action handler"
-msgstr ""
+msgstr "अर्ज क्रिया हाताळक"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Form control group"
-msgstr ""
+msgstr "अर्ज नियंत्रण समुह"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:77
-#, fuzzy
 msgid "Form field label text"
-msgstr "लेबल"
+msgstr "अर्ज जागा लेबल पाठ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Form input"
-msgstr ""
+msgstr "अर्ज आदान(इनपुट)"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Form input type"
-msgstr ""
+msgstr "अर्ज आदान(इनपुट) प्रकार"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Form method"
-msgstr ""
+msgstr "अर्ज पद्धती"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:81
-#, fuzzy
 msgid "Forward link"
-msgstr "पुढे"
+msgstr "पुढे जाण्याची लिंक"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:82
-#, fuzzy
 msgid "Frame"
-msgstr "नाव"
+msgstr "चौकट"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Frame render parts"
-msgstr ""
+msgstr "चौकट रेंडर भाग"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Frame source"
-msgstr ""
+msgstr "चौकट स्त्रोत"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:85
 msgid "Frame target"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:86
-#, fuzzy
 msgid "Frameborder"
-msgstr "पद्धती कव्हर करा"
+msgstr "चौकटकिनार"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:87
-#, fuzzy
 msgid "Frameset"
-msgstr "फारसी"
+msgstr "चौकटसंच"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Frameset columns"
-msgstr ""
+msgstr "चौकटसंच स्तंभ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Frameset rows"
-msgstr ""
+msgstr "चौकटसंच रांगा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:90
 msgid "Framespacing"
-msgstr ""
+msgstr "चौकटजागा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "Generic embedded object"
-msgstr ""
+msgstr "सर्वसाधारण जोडलेली वस्तू"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Generic metainformation"
-msgstr ""
+msgstr "सर्वसाधारण मेटा-माहिती"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Generic span"
-msgstr ""
+msgstr "सर्वसाधारण स्पॅन"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HREF URI"
-msgstr ""
+msgstr "HREF URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "HTML - Special Characters"
-msgstr ""
+msgstr "HTML - विशेष अक्षरे"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTML - Tags"
-msgstr ""
+msgstr "HTML - टॅग्स"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "HTML root element"
-msgstr ""
+msgstr "HTML रूट घटक"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "HTML version"
-msgstr ""
+msgstr "HTML आवृत्ती"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:99
-#, fuzzy
 msgid "HTTP header name"
-msgstr "HTTP"
+msgstr "HTTP शिर्ष नाम"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Header cell ID's"
@@ -3556,89 +4113,79 @@ msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Heading"
-msgstr ""
+msgstr "मथळा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:102
-#, fuzzy
 msgid "Heading 1"
-msgstr "1"
+msgstr "मथळा १"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Heading 2"
-msgstr ""
+msgstr "मथळा २"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Heading 3"
-msgstr ""
+msgstr "मथळा ३"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Heading 4"
-msgstr ""
+msgstr "मथळा ४"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:106
-#, fuzzy
 msgid "Heading 5"
-msgstr "५"
+msgstr "मथळा ५"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Heading 6"
-msgstr ""
+msgstr "मथळा ६"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:108
-#, fuzzy
 msgid "Height"
-msgstr "उजवीकडे"
+msgstr "उंची"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Horizontal rule"
-msgstr ""
+msgstr "आडवी पट्टी"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Horizontal space"
-msgstr ""
+msgstr "आडवी जागा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "I18N BiDi over-ride"
-msgstr ""
+msgstr "I18N BiDi over-ride"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:112
-#, fuzzy
 msgid "Image"
-msgstr "पान"
+msgstr "प्रतिमा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:113
-#, fuzzy
 msgid "Image map"
-msgstr "प्रतिमा"
+msgstr "प्रतिमा नकाशा"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:114
-#, fuzzy
 msgid "Image map area"
-msgstr "प्रतिमा"
+msgstr "प्रतिमा नकाशा क्षेत्र"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:115
-#, fuzzy
 msgid "Image map name"
-msgstr "प्रतिमा"
+msgstr "प्रतिमा नकाशा नाव"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:116
-#, fuzzy
 msgid "Image source"
-msgstr "प्रतिमा"
+msgstr "प्रतिमा स्त्रोत"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Inline frame"
-msgstr "फाइलचे नाव अयोग्य आहे"
+msgstr "ओळीमध्ये(इनलाइन) चौकट"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Inline layer"
-msgstr ""
+msgstr "ओळीमध्ये स्तर"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Inserted text"
-msgstr "दिनांक /वेळ टाका"
+msgstr "दाखल केलेला पाठ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Instance definition"
@@ -3649,9 +4196,8 @@ msgid "Italic text"
 msgstr "तिरपे लेखन"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:122
-#, fuzzy
 msgid "Java applet"
-msgstr "जावा"
+msgstr "जावा एप्लेट"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Label"
@@ -4048,6 +4594,10 @@ msgstr ""
 #, fuzzy
 msgid "Sound"
 msgstr "दुसरा"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
+msgid "Source"
+msgstr "स्त्रोत"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:215
 #, fuzzy
@@ -4579,6 +5129,19 @@ msgstr ""
 msgid "Unbreakable text"
 msgstr ""
 
+#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
+#, fuzzy
+msgid ""
+"Provides a method to easily insert into a document commonly used tags/"
+"strings without having to type them."
+msgstr ""
+"टॅग यादी plugin पद्धतीमुळे साधारणतः वापरात असणारा टॅग किंवा नियंत्रक टाइप न करताही "
+"सहज  पणे एखाद्या दस्तऐवजात घेता येतात"
+
+#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
+msgid "Tag list"
+msgstr "टॅग यादी"
+
 #: ../plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
 msgstr ""
@@ -4646,66 +5209,19 @@ msgstr ""
 msgid "self"
 msgstr ""
 
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:146
-msgid "Tag list plugin"
-msgstr "टॅग लिस्ट जोडा"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:167
-#, fuzzy
-msgid "Select the group of tags you want to use"
-msgstr "तुम्हाला हवा असणारा टॅब गट निवडा"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:189
-#, fuzzy
-msgid "Available Tag Lists"
-msgstr "उपलब्द नमुने/पध्दती"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:191
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:212
-msgid "Tags"
-msgstr "टॅग्स"
-
-#: ../plugins/taglist/gedit-taglist-plugin-window.c:201
-msgid "Double-click on a tag to insert it in the current document"
-msgstr "चालू दस्तएेवजात हवा तो टॅग घेण्यासाठी त्या टॅगवर डबल क्लिक करा"
-
-#: ../plugins/taglist/gedit-taglist-plugin.c:46
-msgid "Tag _List"
-msgstr "टॅग यादी"
-
-#.
-#. #define MENU_ITEM_NAME		"TagList"
-#.
-#: ../plugins/taglist/gedit-taglist-plugin.c:51
-msgid "Show the tag list window"
-msgstr "टॅग यादी उघडून दाखवा"
-
-#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:1
-#, fuzzy
-msgid ""
-"Provides a method to easily insert into a document commonly used tags/"
-"strings without having to type them."
-msgstr ""
-"टॅग यादी plugin पद्धतीमुळे साधारणतः वापरात असणारा टॅग किंवा नियंत्रक टाइप न करताही "
-"सहज  पणे एखाद्या दस्तऐवजात घेता येतात"
-
-#: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
-msgid "Tag list"
-msgstr "टॅग यादी"
-
-#: ../plugins/time/time.c:49
+#: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
 msgstr "दिनांक आणि वेळ टाका"
 
-#: ../plugins/time/time.c:52
+#: ../plugins/time/gedit-time-plugin.c:185
 msgid "Insert current date and time at the cursor position"
 msgstr "कर्सर स्थितीत दिनांक आणि वेळ टाका"
 
-#: ../plugins/time/time.c:457
+#: ../plugins/time/gedit-time-plugin.c:628
 msgid "Available formats"
 msgstr "उपलब्द नमुने/पध्दती"
 
-#: ../plugins/time/time.c:565
+#: ../plugins/time/gedit-time-plugin.c:806
 #, fuzzy
 msgid "Configure insert date/time plugin..."
 msgstr "संकलित दिनंाक / वेळ प्लगींन टाका"
@@ -4752,3 +5268,440 @@ msgstr "च्यासाठी a"
 msgid "_Use custom format"
 msgstr "निवडलेली रीती वापरा"
 
+msgid "Gedit View"
+msgstr "जीएडिट दृश्य"
+
+msgid "Gedit View."
+msgstr "जीएडिट दृश्य."
+
+msgid "Gedit viewer factory"
+msgstr "जिएडीट स्वयंसिद्धता कारखाना"
+
+msgid "gedit application"
+msgstr "जिएडीट कार्यक्रम"
+
+msgid "gedit automation factory"
+msgstr "जिएडीट स्वयंसिद्धता कारखाना"
+
+msgid "Go to Line"
+msgstr "ओळ क्रमांकावर जा"
+
+msgid "The text \"%s\" was not found."
+msgstr "टेक्स्ट \"%s\" मिळाले नाही "
+
+msgid ""
+"The %s plugin uses an external program, called <tt>%s</tt>, to perform its "
+"task.\n"
+"\n"
+"Please, specify the location of the <tt>%s</tt> program."
+msgstr ""
+"<tt>%2s</tt>नामक प्रोग्राम प्रमाणे कार्यान्वित होण्यासाठी प्लगईन %s नामक एखादा बाह्य "
+"कार्यक्रम वापरतो. कृपया,<tt>%3s</tt>नामक प्रोग्राम ठरवा/दाखवा"
+
+msgid "Goto Line"
+msgstr "ओळ क्रमांकावर जा"
+
+msgid "_Line number:"
+msgstr "ओळ क्रमांक"
+
+msgid "button1"
+msgstr "बटन१"
+
+msgid "dialog1"
+msgstr "संवाद १"
+
+msgid "Browse for program location..."
+msgstr "कार्यक्रम स्थानाचे नियोजन करा..."
+
+msgid "label"
+msgstr "लेबल"
+
+msgid "Find Next"
+msgstr "पुढचा भाग पहा"
+
+msgid "Open from URI"
+msgstr "URI मधुन उघडा"
+
+msgid "gedit"
+msgstr "जीएडिट"
+
+msgid "%s %d"
+msgstr "%s %d"
+
+msgid "Invalid UTF-8 data"
+msgstr "माहीती UTF-8 अयोग्य आहे"
+
+msgid "Could not read symbolic link information for %s"
+msgstr "सूचक संबंधीत माहीती वाचता येत नही %s"
+
+msgid "The file has too many symbolic links."
+msgstr "या फाइल मध्ये अनेक पूरक सूचके आहेत"
+
+msgid "gedit cannot handle %s: locations in write mode."
+msgstr "लिहा मधील स्थिती दर्शके %s जीएडिट द्वारा हाताळता येत नाहीत"
+
+msgid "gedit cannot handle this kind of location in write mode."
+msgstr "लिहा मधील अशा प्रकारची स्थिती दर्शके जीएडिट द्वारा हाताळता येत नाहीत"
+
+msgid "A file named \"%s\" already exists.\n"
+msgstr "\"%s\" ही फाइल आधीच अस्तित्वात आहे.\n"
+
+msgid "Do you want to replace it with the one you are saving?"
+msgstr "तुम्ही सुरक्षित करत असलेल्याशी ही बदली करू इच्छिता काय?"
+
+msgid "Select a file to open"
+msgstr "उघडण्यासाठी फाइल निवडा"
+
+msgid "Select files to open"
+msgstr "उघडण्यासाठी फाइली निवडा"
+
+msgid "Select a filename to save"
+msgstr "रक्षित करण्या साठी फाइलचे नाव निवडा"
+
+msgid "Saving document \"%s\"..."
+msgstr "दस्तावेज %s संग्रहित होत आहे..."
+
+msgid "The document \"%s\" has not been saved."
+msgstr "दस्तऐवज \"%s\" रक्षित करण्यात आलेला नाही"
+
+msgid "The document \"%s\" has been saved."
+msgstr "दस्तऐवज \"%s\" रक्षित करण्यात आलेला आहे."
+
+msgid "Save as..."
+msgstr "अशी संग्रहित करा..."
+
+msgid "Error reverting the document \"%s\"."
+msgstr "\"%s\" ही फाइल मूळ स्थितीत आणताना चूक."
+
+msgid "The document \"%s\" has not been reverted."
+msgstr "\"%s\" दस्तऐवज मूळ स्थितीवर घेण्यात आलेला नाही."
+
+msgid "The document \"%s\" has been reverted."
+msgstr "\"%s\" दस्तऐवज मूळ स्थितीवर घेण्यात आलेला नाही"
+
+msgid "Could not read data from stdin."
+msgstr "stdin मधील माहिती वाचता आली नाही"
+
+msgid "Loaded file \"%s\""
+msgstr "\"%s\" फाइल लोड केली"
+
+msgid "Loaded %d file"
+msgid_plural "Loaded %d files"
+msgstr[0] "%d फाइल लोड केली"
+msgstr[1] "%d फाइली लोड केल्या"
+
+msgid "Created file \"%s\""
+msgstr "\"%s\" फाइल निर्माण केली"
+
+msgid ""
+"there are too many open files. Please, close some open files and try again."
+msgstr "अनेक फाइल उघड्या आहेत.कृपया, काही उघड्या फाइल बंद करा आणि पुन्हा प्रयत्न करा."
+
+msgid ""
+"gedit was not able to automatically detect the character coding. Please, "
+"check that you are not trying to open a binary file and try again selecting "
+"a character coding in the 'Open File...' (or 'Open Location') dialog."
+msgstr ""
+"जीएडिट अक्षर कोडिंग आपोआप ओळखण्यास अपयशी. कृपया, तुम्ही द्विमान(बायनरी) फाइल "
+"उघडण्याचा प्रयत्न करत नसल्याची खात्री करा आणि 'फाइल उघडा...'(किंवा 'स्थळ उघडा') या "
+"संवादामध्ये योग्य अक्षर कोडिंग निवडून पुन्हा प्रयत्न करा."
+
+msgid ""
+"Please, check that you are not trying to open a binary file and that you "
+"selected the right character coding in the 'Open File... ' (or 'Open "
+"Location') dialog and try again."
+msgstr ""
+"कृपया, तुम्ही द्विमान(बायनरी) फाइल उघडण्याचा प्रयत्न करत नसल्याची खात्री करा आणि "
+"'फाइल उघडा...'(किंवा 'स्थळ उघडा') या संवादामध्ये योग्य अक्षर कोडिंग निवडल्याची खात्री "
+"करा व पुन्हा प्रयत्न करा."
+
+msgid ""
+"The file contains data in an invalid format. Probably, you are trying to "
+"open a binary file."
+msgstr ""
+"फाइलमध्ये अवैध स्वरूपातील माहिती समाविष्ट आहे. बहुदा तुम्ही एखादी द्विमान(बायनरी) फाइल "
+"उघडण्याचा प्रयत्न करीत आहात."
+
+msgid ""
+"Not enough available memory. Please, close some running applications and try "
+"again."
+msgstr ""
+"पुरेशी स्मृती उपलब्ध नाही. कृपया, काही चालू स्थितीतील अनुप्रययोग बंद करा बंद करून पुन्हा "
+"प्रयत्न करा."
+
+msgid ""
+"The host name was empty. Please, check that your proxy settings are correct "
+"and try again."
+msgstr ""
+"यजमाननाम रिकामे होते. कृपया, तुम्ही निवडलेले प्रॉक्झी पर्याय योग्य असल्याची खात्री करा "
+"आणि पुन्हा प्रयत्न करा."
+
+msgid ""
+"The file contains invalid UTF-8 data. Probably, you are trying to revert a "
+"binary file."
+msgstr ""
+"फाइलमध्ये अयोग्य UTF-8 डाटा समाविष्ट आहे. बहुदा तुम्ही एखादी द्विमान(बायनरी) फाइल "
+"उघडण्याचा प्रयत्न करीत आहात."
+
+msgid "It is not possible to revert an Untitled document."
+msgstr "शिर्षक नसलेला दस्तऐवज मूळ स्थितीत येऊ शकत नाही."
+
+msgid "The file \"%s\" already exists"
+msgstr "\"%s\" ही फाइल आधिच अस्तित्वात आहे"
+
+msgid "Could not create the file \"%s\""
+msgstr "फाइल \"%s\" तयार करता आली नाही"
+
+msgid "Make sure you have the appropriate write permissions."
+msgstr "कृपया तुम्हाला योग्य लेखन परवाना असल्याची खात्री करून घ्या."
+
+msgid "The file name is too long."
+msgstr "फाइलचे नाव खूप लांब आहे."
+
+msgid ""
+"A directory component in the file name does not exist or is a dangling "
+"symbolic link."
+msgstr ""
+"फाइल नावातील निर्देशिका घटक अस्तित्वात नाही किंवा फक्त लटकती प्रतिकात्मक लिंक आहे."
+
+msgid ""
+"There is not enough disk space to create the file. Please free some disk "
+"space and try again."
+msgstr ""
+"फाइल तयार करण्यासाठी डिस्क मध्ये पुरेशी जागा नाही. कृपया डिस्क थोडी रिकामी करा आणि "
+"पुन्हा प्रयत्न करा."
+
+msgid "Normal"
+msgstr "सामान्य"
+
+msgid "Close the output window"
+msgstr "आउटपुट विंडो बंद करा"
+
+msgid "Copy selected lines"
+msgstr "निवडलेल्या ओळींची कॉपी करा"
+
+msgid "Clear the output window"
+msgstr "आउटपुट विंडो साफ करा"
+
+msgid "Preparing pages..."
+msgstr "पाने तयार करित आहे..."
+
+msgid "Change the visibility of the output window in the current window"
+msgstr "चालू विडो मधिल प्राप्त विंडोची दर्शनियता बदला किंवा स्पष्ट कारा"
+
+msgid "Close"
+msgstr "बंद"
+
+msgid "Copy"
+msgstr "प्रत बनवा"
+
+msgid "Cu_t"
+msgstr "कापा"
+
+msgid "Cut"
+msgstr "कापा"
+
+msgid "Delete"
+msgstr "काढूनटाका"
+
+msgid "Find Previous"
+msgstr "मागील शोधा"
+
+msgid "Main toolbar"
+msgstr "मुख्य उपकरणपट्टी"
+
+msgid "New"
+msgstr "नविन"
+
+msgid "Open Location..."
+msgstr "स्थळ उघडा"
+
+msgid "Paste"
+msgstr "चिकटवा"
+
+msgid "Print Previe_w..."
+msgstr "छपाई पूर्वी निरीक्षण करणे"
+
+msgid "Quit"
+msgstr "टाळा/सोडून द्या"
+
+msgid "Redo"
+msgstr "पुन्हा करून पहा"
+
+msgid "Revert"
+msgstr "मुळपदावर घ्या"
+
+msgid "Select All"
+msgstr "सर्व निवडा"
+
+msgid ""
+"Set toolbar button style according to desktop Menu and Toolbar Preferences"
+msgstr "डेस्कटॉपमधील मेनू आणि उपकरणपट्टी प्राधान्यतांप्रमाणे उपकरणपट्टीची बटणे लावून घ्या"
+
+msgid "Show only icons in the toolbar"
+msgstr "टुलबारमध्ये फक्त आयकॉन्स दाखवा"
+
+msgid "Show text below every icon in the toolbar"
+msgstr "प्रत्येक आयकॉन खालील पाठ उकरणपट्टीमध्ये दाखवा"
+
+msgid "Show text only beside important icons in the toolbar"
+msgstr "महत्वाच्या आयकॉन्ससोबत असलेले पाठ उपकरणपट्टीमध्ये दाखवा"
+
+msgid "T_ext for Important Icons"
+msgstr "महत्वाच्या आयकॉन्ससाठी पाठ(_e)"
+
+msgid "Undo"
+msgstr "काढून टाका"
+
+msgid "_Close"
+msgstr "बंद करा(_C)"
+
+msgid "_Copy"
+msgstr "प्रतबनवा(_C)"
+
+msgid "_Customize Toolbar"
+msgstr " हवातसाकरुण घ्या(_C)"
+
+msgid "_Desktop Default"
+msgstr "डेस्कटोपवरील उपलब्ध रचना"
+
+msgid "_Icons Only"
+msgstr "फक्त आयकोन(_I)"
+
+msgid "_New"
+msgstr "नविन(_N)"
+
+msgid "_Paste"
+msgstr "चिक्टवा(_P)"
+
+msgid "_Quit"
+msgstr "सोडून द्या(_Q)"
+
+msgid "_Redo"
+msgstr "पुन्हा करून पहा(_R)"
+
+msgid "_Text for All Icons"
+msgstr "सर्व आयकॉनसाठी पाठ(_T)"
+
+msgid "_Undo"
+msgstr "मुळ स्थितीवर या"
+
+msgid "Quit an existing instance of gedit"
+msgstr "जीएडिट मधील सध्याचे घटना काढून टाका"
+
+msgid "Update"
+msgstr "अद्ययावत करा"
+
+msgid "gedit: Document Info plugin"
+msgstr "जीएडिट: दस्यावेज माहिती प्लगिन"
+
+msgid "Sa_ve Copy..."
+msgstr "प्रत सुरक्षित करा(_C)..."
+
+msgid "Could not save a copy of the file to \"%s\""
+msgstr "फाइल येथे \"%s\" रक्षित करता आली नाही"
+
+msgid "Save Copy..."
+msgstr "प्रत सुरक्षित करा..."
+
+msgid "%s (copy)"
+msgstr "%s (प्रतिलिपी)"
+
+msgid "Save a Copy"
+msgstr "प्रत सुरक्षित करा..."
+
+msgid "Saves a copy of the current document to a local or remote location."
+msgstr "चाली दस्तावेजाची प्रत स्थानिक किंवा दूरस्थ स्थळावर सुरक्षित करा."
+
+msgid "_Run Command..."
+msgstr "आदेश चालवा(_R)..."
+
+msgid "Run a command"
+msgstr "आदेश अंमलात आणा"
+
+msgid "Run Command"
+msgstr "आदेश चालवा"
+
+msgid "_Run"
+msgstr "चालवा"
+
+msgid "Failed"
+msgstr "अयशस्वी झाले"
+
+msgid ""
+"The shell command entry is empty.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"शेल कमान्ड प्रवेश रिक्त आहे.\n"
+"\n"
+"कृपया, योग्य शेल कमान्ड द्या"
+
+msgid ""
+"Error parsing the shell command.\n"
+"\n"
+"Please, insert a valid shell command."
+msgstr ""
+"शेल कमान्ड कार्यान्वित करताना चूक होते \n"
+"\n"
+"कृपया, योग्य शेल कमान्ड द्या"
+
+msgid "Executing command"
+msgstr "आदेश अंमलात आणत आहे "
+
+msgid ""
+"Executes an external program and, if required, displays its output in the "
+"output window."
+msgstr ""
+"बाह्य कार्यक्रमाचा अमल करा आणि प्राप्त परिणाम (output) एका नव्या प्रदान(आउटपुट) "
+"खिडकीत समाविष्ट करा."
+
+msgid "Shell command"
+msgstr "शैल आदेश"
+
+msgid "_Show results in Output Window"
+msgstr "परिणाम प्रदान(आउटपुट) खिडकीत दाखवा(_S)"
+
+msgid "gedit: Shell Output plugin"
+msgstr "शेल परिणाम जोडा"
+
+msgid "The selected text does not contain misspelled words."
+msgstr "निवडलेल्या भागामधे चुकीचे स्पेलींग असणारे शब्द नाहीत."
+
+msgid "The document does not contain misspelled words."
+msgstr "दस्तऐवजामधे चुकीचे स्पेलींग असणारे शब्द नाहीत."
+
+msgid "Tag list plugin"
+msgstr "टॅग लिस्ट जोडा"
+
+msgid "Tag _List"
+msgstr "टॅग यादी"
+
+msgid "Show the tag list window"
+msgstr "टॅग यादी उघडून दाखवा"
+
+#~ msgid "The selected file is not executable."
+#~ msgstr "निवडलेली फाइल कार्यान्वित होत नाही"
+
+#~ msgid "Access was denied."
+#~ msgstr "प्रवेश नाकारण्यात आला."
+
+#~ msgid "Use Normal highlight mode"
+#~ msgstr "सामान्य उठावदार रीत वापरा"
+
+#~ msgid "Output Lines"
+#~ msgstr "प्रदान(आउटपुट) ओळी"
+
+#~ msgid "Printing page %d of %d..."
+#~ msgstr "%2$d पैकी %1$d पान छापत आहे..."
+
+#~ msgid "The file you are trying to open contains an invalid byte sequence."
+#~ msgstr "तुम्ही उघडण्याचा प्रयत्न करित असलेल्या फाइलमध्ये अवैध बाइट मालिका आहे."
+
+#~ msgid ""
+#~ "gedit was not able to automatically determine the encoding of the file "
+#~ "you want to open."
+#~ msgstr "तुम्ही उघडू इच्छित असलेल्या फाइलची एनकोडिंग आपोआप ओळखणे जीएडिटला जमले नाही."
+
+#~ msgid "You are trying to overwrite the original file"
+#~ msgstr "तुम्ही मूळ फाइल गिरवण्याचा प्रयत्न करत आहात"
