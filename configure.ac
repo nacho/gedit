@@ -93,7 +93,7 @@ dnl ================================================================
 PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.12.0
 	gtk+-2.0 >= 2.10.0
-	gtksourceview-1.0 >= 1.2.0
+	gtksourceview-1.0 >= 1.7.2
 	libgnomeui-2.0 >= 2.13.0
 	libglade-2.0 >= 2.4.0
 	libgnomeprintui-2.2 >= 2.6.0
