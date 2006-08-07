@@ -46,7 +46,6 @@
 #include "gedit-statusbar.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
-#include "gedit-recent.h"
 #include "dialogs/gedit-close-confirmation-dialog.h"
 #include "dialogs/gedit-open-location-dialog.h"
 #include "gedit-file-chooser-dialog.h"
@@ -580,26 +579,6 @@ _gedit_cmd_file_open_uri (GtkAction   *action,
 			  window);
 
 	gtk_widget_show (dlg);
-}
-
-void
-_gedit_cmd_file_open_recent (EggRecentItem *item,
-			     GeditWindow   *window)
-{
-	GSList *uris = NULL;
-	gchar  *uri;
-
-	gedit_debug (DEBUG_COMMANDS);
-
-	uri = egg_recent_item_get_uri (item);
-
-	uris = g_slist_prepend (uris, uri);
-
-	if (gedit_commands_load_uris (window, uris, NULL, 0) != 1)
-		gedit_recent_remove (uri);
-
-	g_slist_foreach (uris, (GFunc) g_free, NULL);
-	g_slist_free (uris);
 }
 
 /* File saving */

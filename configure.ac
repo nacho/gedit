@@ -91,8 +91,8 @@ dnl Start of pkg-config checks
 dnl ================================================================
 
 PKG_CHECK_MODULES(GEDIT, [
-	glib-2.0 >= 2.8.0
-	gtk+-2.0 >= 2.8.0
+	glib-2.0 >= 2.12.0
+	gtk+-2.0 >= 2.10.0
 	gtksourceview-1.0 >= 1.2.0
 	libgnomeui-2.0 >= 2.13.0
 	libglade-2.0 >= 2.4.0
@@ -269,7 +269,6 @@ docs/Makefile
 docs/reference/Makefile
 gedit/dialogs/Makefile
 gedit/Makefile
-gedit/recent-files/Makefile
 help/Makefile
 help/eu/Makefile
 help/ko/Makefile

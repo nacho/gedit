@@ -35,7 +35,6 @@
 #define __GEDIT_COMMANDS_H__
 
 #include <gtk/gtkaction.h>
-#include "recent-files/egg-recent-item.h"
 #include "gedit-window.h"
 
 G_BEGIN_DECLS
@@ -69,8 +68,6 @@ gint		_gedit_cmd_load_files_from_prompt	(GeditWindow         *window,
 void		_gedit_cmd_file_new			(GtkAction   *action,
 							 GeditWindow *window);
 void		_gedit_cmd_file_open			(GtkAction   *action,
-							 GeditWindow *window);
-void		_gedit_cmd_file_open_recent		(EggRecentItem *item,
 							 GeditWindow *window);
 void		_gedit_cmd_file_save			(GtkAction   *action,
 							 GeditWindow *window);

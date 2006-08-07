@@ -374,6 +374,7 @@ gedit_view_init (GeditView *view)
 		      "show_margin", gedit_prefs_manager_get_display_right_margin (), 
 		      "margin", gedit_prefs_manager_get_right_margin_position (),
 		      "highlight_current_line", gedit_prefs_manager_get_highlight_current_line (), 
+		      "indent_on_tab", TRUE,
 		      "smart_home_end", FALSE, /* Never changes this */
 		      NULL);
 

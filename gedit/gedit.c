@@ -50,7 +50,6 @@
 #include "gedit-metadata-manager.h"
 #include "gedit-plugins-engine.h"
 #include "gedit-prefs-manager-app.h"
-#include "gedit-recent.h"
 #include "gedit-session.h"
 #include "gedit-utils.h"
 #include "gedit-window.h"
@@ -507,9 +506,6 @@ main (int argc, char *argv[])
 	/* Load user preferences */
 	gedit_debug_message (DEBUG_APP, "Init prefs manager");
 	gedit_prefs_manager_app_init ();
-
-	gedit_debug_message (DEBUG_APP, "Init recent files");
-	gedit_recent_init ();
 
 	/* Init plugins engine */
 	gedit_debug_message (DEBUG_APP, "Init plugins");	

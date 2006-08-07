@@ -46,7 +46,6 @@
 #include "gedit-progress-message-area.h"
 #include "gedit-debug.h"
 #include "gedit-prefs-manager-app.h"
-#include "gedit-recent.h"
 #include "gedit-convert.h"
 #include "gedit-enum-types.h"
 
@@ -507,7 +506,7 @@ recoverable_loading_error_message_area_response (GeditMessageArea *message_area,
 	}
 	else
 	{
-		gedit_recent_remove (uri);
+		_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
 		
 		unrecoverable_loading_error_message_area_response (message_area,
 								   response_id,
@@ -920,7 +919,7 @@ document_loaded (GeditDocument *document,
 			}
 			else
 			{
-				gedit_recent_remove (uri);
+				_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
 
 				if (tab->priv->state == GEDIT_TAB_STATE_LOADING_ERROR)
 				{
@@ -976,12 +975,17 @@ document_loaded (GeditDocument *document,
 	}
 	else
 	{
+		gchar *mime;
 		GList *all_documents;
 		GList *l;
 
 		g_return_if_fail (uri != NULL);
-		
-		gedit_recent_add (uri);
+
+		mime = gedit_document_get_mime_type (document);
+		_gedit_recent_add (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
+				   uri,
+				   mime);
+		g_free (mime);
 
 		all_documents = gedit_app_get_documents (gedit_app_get_default ());
 
@@ -1300,8 +1304,9 @@ document_saved (GeditDocument *document,
 			else
 			{
 				/* These errors are _NOT_ recoverable */
-				gedit_recent_remove (tab->priv->tmp_save_uri);
-				
+				_gedit_recent_remove  (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
+						       tab->priv->tmp_save_uri);
+
 				emsg = gedit_unrecoverable_saving_error_message_area_new (tab->priv->tmp_save_uri, 
 									  error);
 				g_return_if_fail (emsg != NULL);
@@ -1340,8 +1345,13 @@ document_saved (GeditDocument *document,
 	}
 	else
 	{
-		gedit_recent_add (tab->priv->tmp_save_uri);
-		
+		gchar *mime = gedit_document_get_mime_type (document);
+
+		_gedit_recent_add (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))),
+				   tab->priv->tmp_save_uri,
+				   mime);
+		g_free (mime);
+
 		if (tab->priv->print_preview != NULL)
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW);
 		else

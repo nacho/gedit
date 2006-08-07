@@ -166,7 +166,14 @@ G_CONST_RETURN gchar
 
 void		 _gedit_window_set_saving_session_state	(GeditWindow         *window,
 							 gboolean             saving_session);
-							 
+
+/* these are in gedit-window because of screen safety */
+void		 _gedit_recent_add			(GeditWindow	     *window,
+							 const gchar         *uri,
+							 const gchar         *mime);
+void		 _gedit_recent_remove			(GeditWindow         *window,
+							 const gchar         *uri);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_WINDOW_H__  */

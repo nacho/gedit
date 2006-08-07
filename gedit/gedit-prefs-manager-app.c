@@ -45,7 +45,6 @@
 #include "gedit-view.h"
 #include "gedit-window.h"
 #include "gedit-window-private.h"
-#include "gedit-recent.h"
 
 static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
 		   				 	 guint        cnxn_id,
@@ -1079,7 +1078,7 @@ gedit_prefs_manager_max_recents_changed (GConfClient *client,
 
 	if (strcmp (entry->key, GPM_MAX_RECENTS) == 0)
 	{
-		EggRecentModel *model;
+		const GList *windows;
 		gint max;
 
 		if (entry->value->type == GCONF_VALUE_INT)
@@ -1092,9 +1091,19 @@ gedit_prefs_manager_max_recents_changed (GConfClient *client,
 		else
 			max = GPM_DEFAULT_MAX_RECENTS;
 
-		model = gedit_recent_get_model ();
+		windows = gedit_app_get_windows (gedit_app_get_default ());
+		while (windows != NULL)
+		{
+			GeditWindow *w = windows->data;
 
-		egg_recent_model_set_limit (model, max);
+			gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (w->priv->toolbar_recent_menu),
+						      max);
+
+			windows = g_list_next (windows);
+		}
+
+		/* FIXME: we have no way at the moment to trigger the
+		 * update of the inline recents in the File menu */
 	}
 }
 

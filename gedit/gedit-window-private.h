@@ -33,7 +33,6 @@
 
 #include "gedit/gedit-window.h"
 #include "gedit-prefs-manager.h"
-#include "recent-files/egg-recent-view-uimanager.h"
 
 G_BEGIN_DECLS
 
@@ -66,7 +65,10 @@ struct _GeditWindowPrivate
 	GtkWidget      *toolbar_recent_menu;
 	GeditToolbarSetting toolbar_style;
 
-	EggRecentViewUIManager *recent_view_uim;
+	/* recent files */
+	GtkRecentManager *recent_manager;
+	GtkActionGroup *recents_action_group;
+	guint           recents_menu_ui_id;
 
 	GeditTab       *active_tab;
 	gint            num_tabs;

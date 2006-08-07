@@ -1,5 +1,5 @@
 ## Process this file with automake to produce Makefile.in
-SUBDIRS = dialogs recent-files
+SUBDIRS = dialogs
 
 bin_PROGRAMS = gedit
 
@@ -37,8 +37,7 @@ libgedit_la_LDFLAGS = -export-dynamic -no-undefined -export-symbols-regex "^[[^_
 
 libgedit_la_LIBADD =			\
 	$(GEDIT_LIBS)			\
-	dialogs/libdialogs.la		\
-	recent-files/librecent.la
+	dialogs/libdialogs.la
 
 if ENABLE_PYTHON
 libgedit_la_LIBADD += \
@@ -95,7 +94,6 @@ INST_H_FILES =				\
 	gedit-print.h			\
 	gedit-print-job-preview.h	\
 	gedit-progress-message-area.h	\
-	gedit-recent.h			\
 	gedit-statusbar.h		\
 	gedit-tab.h 			\
 	gedit-utils.h 			\
@@ -144,7 +142,6 @@ libgedit_la_SOURCES = 			\
 	gedit-print.c			\
 	gedit-print-job-preview.c	\
 	gedit-progress-message-area.c	\
-	gedit-recent.c			\
 	gedit-session.c			\
 	gedit-spinner.c			\
 	gedit-statusbar.c		\

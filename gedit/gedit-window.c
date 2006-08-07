@@ -58,11 +58,6 @@
 #include "gedit-plugins-engine.h"
 #include "gedit-enum-types.h"
 
-#include "recent-files/egg-recent-model.h"
-#include "recent-files/egg-recent-view.h"
-#include "recent-files/egg-recent-view-gtk.h"
-#include "recent-files/egg-recent-view-uimanager.h"
-
 #define GEDIT_WINDOW_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object),\
 					 GEDIT_TYPE_WINDOW,                    \
 					 GeditWindowPrivate))
@@ -100,6 +95,9 @@ G_DEFINE_TYPE(GeditWindow, gedit_window, GTK_TYPE_WINDOW)
 
 static void	app_lockdown_changed	(GeditApp    *app,
 					 GParamSpec  *param,
+					 GeditWindow *window);
+
+static void	recent_manager_changed	(GtkRecentManager *manager,
 					 GeditWindow *window);
 
 static void
@@ -166,15 +164,6 @@ gedit_window_destroy (GtkObject *object)
 			gedit_prefs_manager_set_bottom_panel_size (
 					window->priv->bottom_panel_size);
 
-	/* do it here, because recent_view_uim finalization
-	 * requires that widgets are still there
-	 */
-	if (window->priv->recent_view_uim != NULL)
-	{
-		g_object_unref (window->priv->recent_view_uim);
-		window->priv->recent_view_uim = NULL;
-	}
-	
 	gedit_plugins_engine_garbage_collect();
 
 	GTK_OBJECT_CLASS (gedit_window_parent_class)->destroy (object);
@@ -245,6 +234,36 @@ gedit_window_key_press_event (GtkWidget   *widget,
 }
 
 static void
+gedit_window_screen_changed (GtkWidget *widget,
+			     GdkScreen *old_screen)
+{
+	GeditWindowPrivate *priv = GEDIT_WINDOW (widget)->priv;
+	GdkScreen *screen;
+
+	screen = gtk_widget_get_screen (widget);
+
+	/* FIXME: this seems to be happening when then spinner is destroyed!? */
+	if (old_screen == screen)
+		return;
+
+	if (old_screen != NULL)
+	{
+		g_signal_handlers_disconnect_by_func
+			(gtk_recent_manager_get_for_screen (old_screen),
+			 G_CALLBACK (recent_manager_changed), widget);
+	}
+
+	priv->recent_manager = gtk_recent_manager_get_for_screen (screen);
+	g_signal_connect (priv->recent_manager,
+			  "changed",
+			  G_CALLBACK (recent_manager_changed),
+			  widget);
+
+	if (GTK_WIDGET_CLASS (gedit_window_parent_class)->screen_changed)
+		GTK_WIDGET_CLASS (gedit_window_parent_class)->screen_changed (widget, old_screen);
+}
+
+static void
 gedit_window_tab_removed (GeditWindow         *window,
 			      GeditTab *tab) 
 {
@@ -268,6 +287,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 	widget_class->window_state_event = gedit_window_window_state_event;
 	widget_class->configure_event = gedit_window_configure_event;
 	widget_class->key_press_event = gedit_window_key_press_event;
+	widget_class->screen_changed = gedit_window_screen_changed;
 
 	signals[TAB_ADDED] =
 		g_signal_new ("tab_added",
@@ -420,7 +440,7 @@ set_toolbar_style (GeditWindow *window,
 		style = origin->priv->toolbar_style;
 	
 	window->priv->toolbar_style = style;
-		
+
 	switch (style)
 	{
 		case GEDIT_TOOLBAR_SYSTEM:
@@ -892,116 +912,230 @@ update_languages_menu (GeditWindow *window)
 	g_free (escaped_lang_name);
 }
 
-static void
-open_recent_gtk (EggRecentViewGtk *view, 
-		 EggRecentItem    *item,
-		 GeditWindow      *window)
+void
+_gedit_recent_add (GeditWindow *window,
+		   const gchar *uri,
+		   const gchar *mime)
 {
-	_gedit_cmd_file_open_recent (item, window);
+	GtkRecentData *recent_data;
+
+	static gchar *groups[2] = {
+		"gedit",
+		NULL
+	};
+
+	recent_data = g_slice_new (GtkRecentData);
+
+	recent_data->display_name = NULL;
+	recent_data->description = NULL;
+	recent_data->mime_type = (gchar *) mime;
+	recent_data->app_name = (gchar *) g_get_application_name ();
+	recent_data->app_exec = g_strjoin (" ", g_get_prgname (), "%u", NULL);
+	recent_data->groups = groups;
+	recent_data->is_private = FALSE;
+
+	gtk_recent_manager_add_full (window->priv->recent_manager,
+				     uri,
+				     recent_data);
+
+	g_free (recent_data->app_exec);
+
+	g_slice_free (GtkRecentData, recent_data);
+}
+
+void
+_gedit_recent_remove (GeditWindow *window,
+		      const gchar *uri)
+{
+	gtk_recent_manager_remove_item (window->priv->recent_manager,
+					uri,
+					NULL);
 }
 
 static void
-open_recent_uim (GtkAction   *action, 
-		 GeditWindow *window)
+open_recent_file (const gchar *uri,
+		  GeditWindow *window)
 {
-	EggRecentItem *item;
+	GSList *uris = NULL;
 
-	item = egg_recent_view_uimanager_get_item (window->priv->recent_view_uim,
-						   action);
-	g_return_if_fail (item != NULL);
+	uris = g_slist_prepend (uris, (gpointer) uri);
 
-	_gedit_cmd_file_open_recent (item, window);
+	if (gedit_commands_load_uris (window, uris, NULL, 0) != 1)
+	{
+		_gedit_recent_remove (window, uri);
+	}
+
+	g_slist_free (uris);
+}
+
+static void
+recent_chooser_item_activated (GtkRecentChooser *chooser,
+			       GeditWindow      *window)
+{
+	gchar *uri;
+
+	uri = gtk_recent_chooser_get_current_uri (chooser);
+
+	open_recent_file (uri, window);
+
+	g_free (uri);
+}
+
+static void
+recents_menu_activate (GtkAction   *action,
+		       GeditWindow *window)
+{
+	GtkRecentInfo *info;
+	const gchar *uri;
+
+	info = g_object_get_data (G_OBJECT (action), "gtk-recent-info");
+	g_return_if_fail (info != NULL);
+
+	uri = gtk_recent_info_get_uri (info);
+
+	open_recent_file (uri, window);
+}
+
+static gint
+sort_recents_mru (GtkRecentInfo *a, GtkRecentInfo *b)
+{
+	return (gtk_recent_info_get_modified (a) < gtk_recent_info_get_modified (b));
+}
+
+static void	update_recent_files_menu (GeditWindow *window);
+
+static void
+recent_manager_changed (GtkRecentManager *manager,
+			GeditWindow      *window)
+{
+	/* regenerate the menu when the model changes */
+	update_recent_files_menu (window);
 }
 
 #define TIP_MAX_URI_LEN 100
 
+/*
+ * Manually construct the inline recents list in the File menu.
+ * Hopefully gtk 2.12 will add support for it.
+ */
 static void
-recent_tooltip_func_gtk (GtkTooltips   *tooltips,
-			 GtkWidget     *menu,
-			 EggRecentItem *item,
-			 gpointer       user_data)
+update_recent_files_menu (GeditWindow *window)
 {
-	gchar *tip;
-	gchar *uri_for_display;
-	gchar *trunc_uri;
+	GeditWindowPrivate *p = window->priv;
+	gint max_recents;
+	guint merge_id;
+	GList *actions, *l, *items;
+	gint i;
 
-	uri_for_display = gedit_utils_format_uri_for_display (egg_recent_item_peek_uri (item));
-	g_return_if_fail (uri_for_display != NULL);
+	gedit_debug (DEBUG_WINDOW);
 
-	trunc_uri = gedit_utils_str_middle_truncate (uri_for_display,
-						     TIP_MAX_URI_LEN);
-	g_free (uri_for_display);
+	max_recents = gedit_prefs_manager_get_max_recents ();
 
-	/* Translators: %s is a URI */
-	tip = g_strdup_printf (_("Open '%s'"), trunc_uri);
+	g_return_if_fail (p->recents_action_group != NULL);
 
-	g_free (trunc_uri);
+	if (p->recents_menu_ui_id != 0)
+		gtk_ui_manager_remove_ui (p->manager,
+					  p->recents_menu_ui_id);
 
-	gtk_tooltips_set_tip (tooltips, GTK_WIDGET (menu), tip, NULL);
+	actions = gtk_action_group_list_actions (p->recents_action_group);
+	for (l = actions; l != NULL; l = l->next)
+	{
+		g_signal_handlers_disconnect_by_func (GTK_ACTION (l->data),
+						      G_CALLBACK (recents_menu_activate),
+						      window);
+ 		gtk_action_group_remove_action (p->recents_action_group,
+						GTK_ACTION (l->data));
+	}
+	g_list_free (actions);
 
-	g_free (tip);
-}
+	p->recents_menu_ui_id = gtk_ui_manager_new_merge_id (p->manager);
 
-static char *
-recent_tooltip_func_uim (EggRecentItem *item,
-			 gpointer       user_data)
-{
-	gchar *tip;
-	gchar *uri_for_display;
-	gchar *trunc_uri;
+	items = gtk_recent_manager_get_items (p->recent_manager);
 
-	uri_for_display = gedit_utils_format_uri_for_display (egg_recent_item_peek_uri (item));
-	g_return_val_if_fail (uri_for_display != NULL, NULL);
+	items = g_list_sort (items, (GCompareFunc) sort_recents_mru);
 
-	trunc_uri = gedit_utils_str_middle_truncate (uri_for_display,
-						     TIP_MAX_URI_LEN);
-	g_free (uri_for_display);
+	i = 0;
+	for (l = items; l != NULL; l = l->next)
+	{
+		gchar *action_name;
+		const gchar *display_name;
+		gchar *escaped;
+		gchar *label;
+		gchar *uri;
+		gchar *trunc_uri;
+		gchar *tip;
+		GtkAction *action;
+		GtkRecentInfo *info = l->data;
 
-	/* Translators: %s is a URI */
-	tip = g_strdup_printf (_("Open '%s'"), trunc_uri);
+		/* clamp */
+		if (i >= max_recents)
+			break;
 
-	g_free (trunc_uri);
+		/* filter */
+		if (!gtk_recent_info_has_group (info, "gedit"))
+			continue;
 
-	return tip;
+		i++;
+
+		action_name = g_strdup_printf ("recent-info-%d", i);
+
+		display_name = gtk_recent_info_get_display_name (info);
+		escaped = gedit_utils_escape_underscores (display_name, -1);
+		if (i >= 10)
+			label = g_strdup_printf ("%d.  %s",
+						 i, 
+						 escaped);
+		else
+			label = g_strdup_printf ("_%d.  %s",
+						 i, 
+						 escaped);
+		g_free (escaped);
+
+		uri = gtk_recent_info_get_uri_display (info);
+		trunc_uri = gedit_utils_str_middle_truncate (uri,
+							     TIP_MAX_URI_LEN);
+		g_free (uri);
+
+		/* Translators: %s is a URI */
+		tip = g_strdup_printf (_("Open '%s'"), trunc_uri);
+		g_free (trunc_uri);
+
+		action = gtk_action_new (action_name,
+					 label,
+					 tip,
+					 NULL);
+
+		g_object_set_data_full (G_OBJECT (action),
+					"gtk-recent-info",
+					gtk_recent_info_ref (info),
+					(GDestroyNotify) gtk_recent_info_unref);
+
+		g_signal_connect (action,
+				  "activate",
+				  G_CALLBACK (recents_menu_activate),
+				  window);
+
+		gtk_action_group_add_action (p->recents_action_group,
+					     action);
+
+		gtk_ui_manager_add_ui (p->manager,
+				       p->recents_menu_ui_id,
+				       "/MenuBar/FileMenu/FileRecentsPlaceholder",
+				       action_name,
+				       action_name,
+				       GTK_UI_MANAGER_MENUITEM,
+				       FALSE);
+
+		g_free (action_name);
+		g_free (label);
+		g_free (tip);
+	}
+
+	g_list_foreach (items, (GFunc) gtk_recent_info_unref, NULL);
+	g_list_free (items);
 }
 
 #undef TIP_MAX_URI_LEN
-
-static void
-build_recent_tool_menu (GtkMenuToolButton *button,
-			GeditWindow       *window)
-{
-	EggRecentViewGtk *view;
-	EggRecentModel *model;
-
-	model = gedit_recent_get_model ();
-	view = egg_recent_view_gtk_new (window->priv->toolbar_recent_menu,
-					NULL);
-
-	egg_recent_view_gtk_show_icons (view, TRUE);
-	egg_recent_view_gtk_show_numbers (view, FALSE);
-
-	/* elipsize if if gets too large */
-	egg_recent_view_gtk_set_label_width (view, 50);
-
-	egg_recent_view_gtk_set_tooltip_func (view, recent_tooltip_func_gtk, NULL);
-
-	egg_recent_view_set_model (EGG_RECENT_VIEW (view), model);
-
-	g_signal_connect (view,
-			  "activate",
-			  G_CALLBACK (open_recent_gtk),
-			  window);
-
-	gtk_widget_show (window->priv->toolbar_recent_menu);
-
-	/* this callback must run just once for lazy initialization:
-	 * we can now disconnect it
-	 */
-	g_signal_handlers_disconnect_by_func (button,
-					      G_CALLBACK (build_recent_tool_menu),
-					      window);
-}
 
 static void
 set_non_homogeneus (GtkWidget *widget, gpointer data)
@@ -1036,9 +1170,9 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	GtkAction *action;
 	GtkUIManager *manager;
 	GtkWidget *menubar;
-	EggRecentModel *recent_model;
-	EggRecentViewUIManager *recent_view;
 	GtkToolItem *open_button;
+	GdkScreen *screen;
+	GtkRecentFilter *filter;
 	GError *error = NULL;
 	GeditLockdownMask lockdown;
 
@@ -1130,19 +1264,42 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 	gtk_action_set_sensitive (action, 
 				  !(lockdown & GEDIT_LOCKDOWN_PRINT_SETUP));
 
-
 	/* recent files menu */
-	recent_model = gedit_recent_get_model ();
-	recent_view = egg_recent_view_uimanager_new (manager,
-						     "/MenuBar/FileMenu/FileRecentsPlaceholder",
-						     G_CALLBACK (open_recent_uim),
-						     window);
-	window->priv->recent_view_uim = recent_view;
-	egg_recent_view_uimanager_show_icons (recent_view, FALSE);
-	egg_recent_view_uimanager_set_tooltip_func (recent_view,
-						    recent_tooltip_func_uim,
-						    window);
-	egg_recent_view_set_model (EGG_RECENT_VIEW (recent_view), recent_model);
+	action_group = gtk_action_group_new ("RecentFilesActions");
+	gtk_action_group_set_translation_domain (action_group, NULL);
+	window->priv->recents_action_group = action_group;
+	gtk_ui_manager_insert_action_group (manager, action_group, 0);
+	g_object_unref (action_group);
+
+	screen = gtk_widget_get_screen (GTK_WIDGET (window));
+	window->priv->recent_manager = gtk_recent_manager_get_for_screen (screen);
+
+	g_signal_connect (window->priv->recent_manager,
+			  "changed",
+			  G_CALLBACK (recent_manager_changed),
+			  window);
+
+	update_recent_files_menu (window);
+
+	/* recent files menu tool button */
+	window->priv->toolbar_recent_menu = gtk_recent_chooser_menu_new_for_manager (window->priv->recent_manager);
+
+	gtk_recent_chooser_set_local_only (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
+					   FALSE);
+	gtk_recent_chooser_set_sort_type (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
+					  GTK_RECENT_SORT_MRU);
+	gtk_recent_chooser_set_limit (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
+				      gedit_prefs_manager_get_max_recents ());
+
+	filter = gtk_recent_filter_new ();
+	gtk_recent_filter_add_group (filter, "gedit");
+	gtk_recent_chooser_set_filter (GTK_RECENT_CHOOSER (window->priv->toolbar_recent_menu),
+				       filter);
+
+	g_signal_connect (window->priv->toolbar_recent_menu,
+			  "item_activated",
+			  G_CALLBACK (recent_chooser_item_activated),
+			  window);
 
 	/* languages menu */
 	action_group = gtk_action_group_new ("LanguagesActions");
@@ -1173,17 +1330,12 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 			    FALSE,
 			    0);
 
+	set_toolbar_style (window, NULL);
+
 	/* add the custom Open button to the toolbar */
 	open_button = gtk_menu_tool_button_new_from_stock (GTK_STOCK_OPEN);
-
-	/* the popup menu is actually built the first time it's showed */
-	window->priv->toolbar_recent_menu = gtk_menu_new ();
 	gtk_menu_tool_button_set_menu (GTK_MENU_TOOL_BUTTON (open_button),
 				       window->priv->toolbar_recent_menu);
-	g_signal_connect (open_button,
-			  "show-menu",
-			  G_CALLBACK (build_recent_tool_menu),
-			  window);
 
 	/* not very nice the way we access the tooltops object
 	 * but I can't see a better way and I don't want a differen GtkTooltip
@@ -1206,9 +1358,9 @@ create_menu_bar_and_toolbar (GeditWindow *window,
 		      NULL);
 	gtk_action_connect_proxy (action, GTK_WIDGET (open_button));
 
-	gtk_toolbar_insert (GTK_TOOLBAR (window->priv->toolbar), open_button, 1);
-	
-	set_toolbar_style (window, NULL);
+	gtk_toolbar_insert (GTK_TOOLBAR (window->priv->toolbar),
+			    open_button,
+			    1);
 
 	gtk_container_foreach (GTK_CONTAINER (window->priv->toolbar),
 			       (GtkCallback)set_non_homogeneus,
@@ -1743,14 +1895,10 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 					      "FileOpenURI");
 	gtk_action_set_sensitive (action, 
 				  !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
-		
-	/* FIXME		
-	recent_file_menu = gtk_ui_manager_get_widget (window->priv->manager,
-						      "/MenuBar/FileMenu/FileRecentsPlaceholder");
-	gtk_widget_set_sensitive (recent_file_menu, 
-				  !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
-	*/
-			  
+
+	gtk_action_group_set_sensitive (window->priv->recents_action_group,
+					!(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
+
 	gedit_notebook_set_close_buttons_sensitive (GEDIT_NOTEBOOK (window->priv->notebook),
 						    !(window->priv->state & GEDIT_WINDOW_STATE_SAVING_SESSION));
 						    
