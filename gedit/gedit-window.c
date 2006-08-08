@@ -1089,7 +1089,9 @@ update_recent_files_menu (GeditWindow *window)
 						 escaped);
 		g_free (escaped);
 
-		uri = gtk_recent_info_get_uri_display (info);
+		/* gtk_recent_info_get_uri_display (info) is buggy and
+		 * works only for local files */
+		uri = gedit_utils_format_uri_for_display (gtk_recent_info_get_uri (info));
 		trunc_uri = gedit_utils_str_middle_truncate (uri,
 							     TIP_MAX_URI_LEN);
 		g_free (uri);
