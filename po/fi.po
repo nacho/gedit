@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-29 08:14+0300\n"
-"PO-Revision-Date: 2006-07-29 08:22+0300\n"
+"POT-Creation-Date: 2006-08-09 15:40+0300\n"
+"PO-Revision-Date: 2006-08-09 15:41+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1091,7 +1091,7 @@ msgid "Replace _All"
 msgstr "Korvaa k_aikki"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:367
-#: ../gedit/gedit-commands-file.c:594
+#: ../gedit/gedit-commands-file.c:680
 msgid "_Replace"
 msgstr "Ko_rvaa"
 
@@ -1158,62 +1158,62 @@ msgstr "%s: virheellinen koodaus.\n"
 msgid "- Edit text files"
 msgstr "- Muokkaa tekstitiedostoja"
 
-#: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
+#: ../gedit/gedit-commands-file.c:211 ../gedit/gedit-commands-file.c:257
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Ladataan tiedostoa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:183
+#: ../gedit/gedit-commands-file.c:266
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
 msgstr[0] "Ladataan %d tiedosto…"
 msgstr[1] "Ladataan %d tiedostoa…"
 
-#: ../gedit/gedit-commands-file.c:320
+#: ../gedit/gedit-commands-file.c:406
 msgid "Open Files…"
 msgstr "Avaa tiedostoja…"
 
-#: ../gedit/gedit-commands-file.c:426
+#: ../gedit/gedit-commands-file.c:512
 msgid "The entered location is not valid."
 msgstr "Annettu sijainti ei ole kelvollinen."
 
-#: ../gedit/gedit-commands-file.c:429
+#: ../gedit/gedit-commands-file.c:515
 #: ../gedit/gedit-io-error-message-area.c:150
 #: ../gedit/gedit-io-error-message-area.c:189
 #: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-commands-file.c:575
+#: ../gedit/gedit-commands-file.c:661
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Tiedostoa \"%s\" voi vain lukea."
 
-#: ../gedit/gedit-commands-file.c:586
+#: ../gedit/gedit-commands-file.c:672
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Haluatko yrittää korvata sen tiedostolla jota olet tallentamassa?"
 
-#: ../gedit/gedit-commands-file.c:652 ../gedit/gedit-commands-file.c:850
+#: ../gedit/gedit-commands-file.c:738 ../gedit/gedit-commands-file.c:936
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Tallennetaan tiedostoa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:749
+#: ../gedit/gedit-commands-file.c:835
 msgid "Save As…"
 msgstr "Tallenna nimellä…"
 
-#: ../gedit/gedit-commands-file.c:1045
+#: ../gedit/gedit-commands-file.c:1131
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Palautetaan asiakirjaa \"%s\"…"
 
-#: ../gedit/gedit-commands-file.c:1067
+#: ../gedit/gedit-commands-file.c:1153
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Peru tekemättömät muutokset asiakirjaan \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1076
+#: ../gedit/gedit-commands-file.c:1162
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld second will be permanently lost."
@@ -1227,14 +1227,14 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisten %ld sekunnin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1085
+#: ../gedit/gedit-commands-file.c:1171
 msgid ""
 "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin aikana menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1091
+#: ../gedit/gedit-commands-file.c:1177
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1249,7 +1249,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen minuutin ja %ld sekunnin "
 "aikana menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1101
+#: ../gedit/gedit-commands-file.c:1187
 #, c-format
 msgid ""
 "Changes made to the document in the last %ld minute will be permanently lost."
@@ -1263,7 +1263,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisten %ld minuutin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1116 ../gedit/gedit-commands-file.c:1137
+#: ../gedit/gedit-commands-file.c:1202 ../gedit/gedit-commands-file.c:1223
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural ""
@@ -1275,7 +1275,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen %d tunnin aikana menetetään "
 "lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1122
+#: ../gedit/gedit-commands-file.c:1208
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1290,7 +1290,7 @@ msgstr[1] ""
 "Muutokset jotka on tehty asiakirjaan viimeisen tunnin ja %d minuutin aikana "
 "menetetään lopullisesti."
 
-#: ../gedit/gedit-commands-file.c:1163
+#: ../gedit/gedit-commands-file.c:1249
 msgid "_Revert"
 msgstr "_Palauta levyltä"
 
@@ -1535,7 +1535,7 @@ msgstr "Sinulla ei ole tarvittavia oikeuksia tiedoston avaamiseksi."
 
 #: ../gedit/gedit-io-error-message-area.c:198
 #: ../gedit/gedit-io-error-message-area.c:417
-#: ../gedit/gedit-io-error-message-area.c:1161
+#: ../gedit/gedit-io-error-message-area.c:1160
 msgid ""
 "There are too many open files. Please, close some applications and try again."
 msgstr ""
@@ -1559,7 +1559,7 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:238
 #: ../gedit/gedit-io-error-message-area.c:455
-#: ../gedit/gedit-io-error-message-area.c:1200
+#: ../gedit/gedit-io-error-message-area.c:1199
 #, c-format
 msgid ""
 "Host %s could not be found. Please, check that your proxy settings are "
@@ -1573,9 +1573,9 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:268
 #: ../gedit/gedit-io-error-message-area.c:466
 #: ../gedit/gedit-io-error-message-area.c:477
-#: ../gedit/gedit-io-error-message-area.c:1211
-#: ../gedit/gedit-io-error-message-area.c:1222
-#: ../gedit/gedit-io-error-message-area.c:1230
+#: ../gedit/gedit-io-error-message-area.c:1210
+#: ../gedit/gedit-io-error-message-area.c:1221
+#: ../gedit/gedit-io-error-message-area.c:1229
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
@@ -1585,7 +1585,7 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:274
 #: ../gedit/gedit-io-error-message-area.c:485
-#: ../gedit/gedit-io-error-message-area.c:1236
+#: ../gedit/gedit-io-error-message-area.c:1235
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
@@ -1594,7 +1594,7 @@ msgstr ""
 "ja yritä uudelleen."
 
 #: ../gedit/gedit-io-error-message-area.c:280
-#: ../gedit/gedit-io-error-message-area.c:1242
+#: ../gedit/gedit-io-error-message-area.c:1241
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
@@ -1608,7 +1608,7 @@ msgstr "Tiedosto jota yrität avata ei ole tavallinen tiedosto."
 
 #: ../gedit/gedit-io-error-message-area.c:325
 #: ../gedit/gedit-io-error-message-area.c:545
-#: ../gedit/gedit-io-error-message-area.c:1307
+#: ../gedit/gedit-io-error-message-area.c:1306
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Odottamaton virhe: %s"
@@ -1689,13 +1689,12 @@ msgstr "_Muokkaa joka tapauksessa"
 msgid "_Don't Edit"
 msgstr "Älä m_uokkaa"
 
-#. FIXME: try to rephrase in a better way
-#: ../gedit/gedit-io-error-message-area.c:852
+#: ../gedit/gedit-io-error-message-area.c:851
 #, c-format
-msgid "The file %s is already open."
-msgstr "Tiedosto \"%s\" on jo auki."
+msgid "This file (%s) is already opened in another gedit window."
+msgstr "Tiedosto (%s) on jo auki toisessa geditin ikkunassa."
 
-#: ../gedit/gedit-io-error-message-area.c:867
+#: ../gedit/gedit-io-error-message-area.c:866
 msgid ""
 "gedit opened this instance of the file in non-editable way. Do you want to "
 "edit it anyway?"
@@ -1703,43 +1702,43 @@ msgstr ""
 "Tämä tiedoston näkymä on avattu vain luettavassa tilassa. Haluatko silti "
 "muokata sitä?"
 
-#: ../gedit/gedit-io-error-message-area.c:925
-#: ../gedit/gedit-io-error-message-area.c:1020
+#: ../gedit/gedit-io-error-message-area.c:924
+#: ../gedit/gedit-io-error-message-area.c:1019
 msgid "_Save Anyway"
 msgstr "_Tallenna joka tapauksessa"
 
-#: ../gedit/gedit-io-error-message-area.c:929
-#: ../gedit/gedit-io-error-message-area.c:1024
+#: ../gedit/gedit-io-error-message-area.c:928
+#: ../gedit/gedit-io-error-message-area.c:1023
 msgid "_Don't Save"
 msgstr "Älä Ta_llenna"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:947
+#: ../gedit/gedit-io-error-message-area.c:946
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Tiedostoa \"%s\" on muokattu sen avaamisen jälkeen."
 
-#: ../gedit/gedit-io-error-message-area.c:963
+#: ../gedit/gedit-io-error-message-area.c:962
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Jos tallennat tiedoston, kaikki ulkopuoliset muutokset hukataan. "
 "Tallennetaanko silti?"
 
-#: ../gedit/gedit-io-error-message-area.c:1042
+#: ../gedit/gedit-io-error-message-area.c:1041
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Varmuuskopiointitiedostoa ei voitu luoda tallennettaessa tiedostoa %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1045
+#: ../gedit/gedit-io-error-message-area.c:1044
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr ""
 "Väliaikaista varmuuskopiointitiedostoa eivoitu luoda tallennettaessa "
 "tiedostoa %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1062
+#: ../gedit/gedit-io-error-message-area.c:1061
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1752,7 +1751,7 @@ msgstr ""
 "Tallennetaanko silti?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1123
+#: ../gedit/gedit-io-error-message-area.c:1122
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please, check that you typed "
@@ -1761,7 +1760,7 @@ msgstr ""
 "Gedit ei osaa kirjoittaa \"%s\"-sijainteihin. Tarkista että annoit sijainnin "
 "oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1131
+#: ../gedit/gedit-io-error-message-area.c:1130
 msgid ""
 "gedit cannot handle this location  in write mode. Please, check that you "
 "typed the location correctly and try again."
@@ -1769,7 +1768,7 @@ msgstr ""
 "Gedit ei osaa kirjoittaa tämän tyyppiseen sijaintiin. Tarkista että annoit "
 "sijainnin oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1140
+#: ../gedit/gedit-io-error-message-area.c:1139
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1779,7 +1778,7 @@ msgstr ""
 "Yritä tallentaa pienempi tiedosto tai tallenna levylle jolla ei ole "
 "rajoitusta."
 
-#: ../gedit/gedit-io-error-message-area.c:1147
+#: ../gedit/gedit-io-error-message-area.c:1146
 #, c-format
 msgid ""
 "%s is not a valid location. Please, check that you typed the location "
@@ -1788,7 +1787,7 @@ msgstr ""
 "%s ei ole kelvollinen sijainti. Tarkista että kirjoitit osoitteen oikein ja "
 "yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1154
+#: ../gedit/gedit-io-error-message-area.c:1153
 msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
@@ -1796,7 +1795,7 @@ msgstr ""
 "Oikeutesi eivät riitä tiedoston kirjoittamiseen. Tarkista että annoit "
 "sijainnin oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1166
+#: ../gedit/gedit-io-error-message-area.c:1165
 #, c-format
 msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
@@ -1804,7 +1803,7 @@ msgid ""
 msgstr ""
 "%s on hakemisto. Tarkista että kirjoitit osoitteen oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1172
+#: ../gedit/gedit-io-error-message-area.c:1171
 msgid ""
 "Not enough available memory to save the file. Please, close some running "
 "applications and try again."
@@ -1812,7 +1811,7 @@ msgstr ""
 "Muisti ei riitä tiedoston tallentamiseen. Sulje jokin muu käynnissä oleva "
 "ohjelma ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1248
+#: ../gedit/gedit-io-error-message-area.c:1247
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
@@ -1820,7 +1819,7 @@ msgstr ""
 "Levyllä ei ole tarpeeksi tilaa tiedoston tallentamiseksi. Vapauta levytilaa "
 "ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1254
+#: ../gedit/gedit-io-error-message-area.c:1253
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
@@ -1828,11 +1827,11 @@ msgstr ""
 "Yrität tallentaa tiedostoa levylle, jolta voi vain lukea. Tarkista että "
 "kirjoitit osoitteen oikein ja yritä uudelleen."
 
-#: ../gedit/gedit-io-error-message-area.c:1260
+#: ../gedit/gedit-io-error-message-area.c:1259
 msgid "A file with the same name already exists. Please, use a different name."
 msgstr "Samannniminen tiedosto on jo olemassa. Käytä toista nimeä."
 
-#: ../gedit/gedit-io-error-message-area.c:1265
+#: ../gedit/gedit-io-error-message-area.c:1264
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
@@ -1840,7 +1839,7 @@ msgstr ""
 "Levy, jolle yrität tallentaa tiedostoa, rajoittaa tiedostonimien pituutta. "
 "Valitse lyhyempi nimi."
 
-#: ../gedit/gedit-io-error-message-area.c:1270
+#: ../gedit/gedit-io-error-message-area.c:1269
 #, c-format
 msgid ""
 "%s is not a regular file. Please, check that you typed the location "
@@ -1849,7 +1848,7 @@ msgstr ""
 "\"%s\" ei ole tavallinen tiedosto. Tarkista että syötit sijainnin oikein ja "
 "yritä uudestaan."
 
-#: ../gedit/gedit-io-error-message-area.c:1313
+#: ../gedit/gedit-io-error-message-area.c:1312
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Tiedoston \"%s\" tallentaminen epäonnistui."
@@ -2756,61 +2755,53 @@ msgid "Enable Restore of Remote Locations"
 msgstr "Ota käyttöön palautus etäsijainneissa"
 
 #: ../plugins/filebrowser/filebrowser.schemas.in.h:2
-msgid "FALSE"
-msgstr "EPÄTOSI"
-
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
 msgid "File Browser Filter Mode"
 msgstr "Tiedostoselaimen suodatintila"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
 msgid "File Browser Filter Pattern"
 msgstr "Tiedostoselaimen suodatinmalli"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
 msgid "File Browser Root Directory"
 msgstr "Tiedostoselaimen juurihakemisto"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
 msgid "File Browser Virtual Root Directory"
 msgstr "Tiedostoselaimen virtuaalinen juurihakemisto"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
 msgid ""
 "If TRUE the file browser plugin will view the directory of the first opened "
 "document given that the file browser hasn't been used yet. (Thus this "
 "generally applies to opening a document from the command line or opening it "
 "with nautilus etc)"
 msgstr ""
-"Jos TOSI, tiedostoselain-liitännäinen näyttää ensimmaiseksi avatun asiakirjan "
-"kansion, edellyttäen että tiedostoselainta ei ole vielä käytetty. Yleensä "
-"tämä koskee asiakirjan avaamista komentoriviltä tai esimerkiksi nautiluksesta."
+"Jos TOSI, tiedostoselain-liitännäinen näyttää ensimmaiseksi avatun "
+"asiakirjan kansion, edellyttäen että tiedostoselainta ei ole vielä käytetty. "
+"Yleensä tämä koskee asiakirjan avaamista komentoriviltä tai esimerkiksi "
+"nautiluksesta."
 
-
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
 msgid "Open With Tree View"
 msgstr "Avaa puunäkymä"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
 msgid ""
 "Open the tree view when the file browser plugin gets loaded instead of the "
 "bookmarks view"
 msgstr ""
 "Avaa puunäkymä kirjanmerkkinäkymän sijasta, kun tiedostoselain ladataan"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
 msgid "Set Location To First Document"
 msgstr "Aseta sijanti ensimmäiseen asiakirjaan"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
 msgid "Sets whether to enable restoring of remote locations."
 msgstr "Käytetäänkö etäsijaintien palautusta."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
-msgid "TRUE"
-msgstr "TOSI"
-
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
 msgid ""
 "The file browser root directory to use when loading the file browser plugin "
 "and onload/tree_view is TRUE."
@@ -2818,17 +2809,17 @@ msgstr ""
 "Tiedostoselaimen juurikansiona käytettävä kansio, kun liitännäistä ladataan "
 "ja avain onload/tree_view on TOSI."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
 msgid ""
 "The file browser virtual root directory to use when loading the file browser "
 "plugin when onload/tree_view is TRUE. The virtual root must always be below "
 "the actual root."
 msgstr ""
 "Tiedostoselaimen virtuaalisena juurikansiona käytettävä kansio, kun "
-"liitännäistä ladataan ja avain onload/tree_view on TOSI. Virtuaalisen kansion "
-"täytyy aina olla todellisen juurikansion alikansio."
+"liitännäistä ladataan ja avain onload/tree_view on TOSI. Virtuaalisen "
+"kansion täytyy aina olla todellisen juurikansion alikansio."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:15
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
 msgid ""
 "The filter pattern to filter the file browser with. This filter works on top "
 "of the filter_mode."
@@ -2836,7 +2827,7 @@ msgstr ""
 "Tiedostoselaimen listan suodatuksessa käytetty suodatin. Tämä suodatin on "
 "käytössä avaimen filter_mode määrittelemällä tavalla."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:16
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
 msgid ""
 "This value determines what files get filtered from the file browser. Valid "
 "values are: none (filter nothing), hidden (filter hidden files), binary "
@@ -2848,10 +2839,6 @@ msgstr ""
 "piilotiedostot), binary (suodatetaan binääritiedostot) sekä "
 "hidden_and_binary (suodatetaan piilo- ja binääritiedostot)"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:17
-msgid "hidden_and_binary"
-msgstr "piilo_ja_binääri"
-
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
 msgstr "Helppo tiedostonkäsittely sivupaneelista"
@@ -2860,59 +2847,59 @@ msgstr "Helppo tiedostonkäsittely sivupaneelista"
 msgid "File browser pane"
 msgstr "Tiedostoselainpaneeli"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:352
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:360
 msgid "_Set root to active document"
 msgstr "_Aseta juuri aktiivinen asiakirjan sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:354
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:362
 msgid "Set the root to the active document location"
 msgstr "Aseta juurikansioksi aktiivisen asiakirjan sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:356
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:364
 msgid "_Open terminal here"
 msgstr "_Avaa pääte tähän"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:358
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:366
 msgid "Open a terminal at the currently opened directory"
 msgstr "Avaa pääte nyt valittuun kansioon"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:470
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:478
 msgid "File Browser"
 msgstr "Tiedostoselain"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:564
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
 msgid "An error occurred while creating a new directory"
 msgstr "Virhe luotaessa uutta kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:567
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:575
 msgid "An error occurred while creating a new file"
 msgstr "Virhe luotaessa uutta tiedostoa"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:580
 msgid "An error occurred while renaming a file or directory"
 msgstr "Virhe nimettäessä tiedostoa tai kansiota uudestaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:577
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:585
 msgid "An error occurred while deleting a file or directory"
 msgstr "Virhe poistettaessa tiedostoa tai kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:582
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Virhe avattaessa kansiota tiedostonhalintaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:586
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
 msgid "An error occurred while setting a root directory"
 msgstr "Virhe asetettaessa juurikansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
 msgid "An error occurred while loading a directory"
 msgstr "Virhe ladattaessa kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
 msgid "An error occurred"
 msgstr "Tapahtui virhe"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:817
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:825
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete immediately?"
@@ -2920,12 +2907,12 @@ msgstr ""
 "Tiedostoa ei voi siirtää roskakoriin.\n"
 "Haluatko poistaa sen kokonaan?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:820
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:828
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Tiedostoa \"%s\" ei voi siirtää roskakoriin."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:856
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
 #, c-format
 msgid ""
 "Are you sure you want to\n"
@@ -2934,21 +2921,21 @@ msgstr ""
 "Haluatko varmasti poistaa kohteen\n"
 "\"%s\" pysyvästi?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:860
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
 msgid "If you delete an item it is permanently lost."
 msgstr "Jos poistat kohteen se menetetään pysyvästi."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2437
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2418
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
 msgid "Invalid uri"
 msgstr "Virheellinen URI"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2795
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2776
 msgid "file"
 msgstr "tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2816
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2863
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2797
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2844
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2956,120 +2943,134 @@ msgstr ""
 "Uusi tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy säätää "
 "suodatinasetuksiasi, jos haluat nähdä sen."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2844
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2825
 msgid "directory"
 msgstr "kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:699
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:719
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "_New Directory"
 msgstr "_Uusi kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Add new empty directory"
 msgstr "Lisää uusi tyhjä kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
 msgid "New F_ile"
 msgstr "Uusi _tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:810
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
 msgid "Add new empty file"
 msgstr "Lisää uusi tyhjä tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
+msgid "Up"
+msgstr "Ylös"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
+msgid "Open the parent folder"
+msgstr "Avaa yläkansio"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
 msgid "_Rename"
 msgstr "_Nimeä uudestaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:816
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "Rename selected file or directory"
 msgstr "Nimeä valittu tiedosto tai kansio uudestaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
 msgid "_Move To Trash"
 msgstr "_Siirrä roskakoriin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "Move selected file or directory to trash"
 msgstr "Siirrä valittu tiedosto tai kansio roskakoriin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
 msgid "_Delete"
 msgstr "_Poista"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
 msgid "Delete selected file or directory"
 msgstr "Poista valittu tiedosto tai kansio"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:828
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
 msgid "_Previous Location"
 msgstr "_Edellinen sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
-msgid "Go to previous location"
-msgstr "Siirry edelliseen sijaintiin"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "Go to the previous visited location"
+msgstr "Siirry edelliseen aiemmin avattuun sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
 msgid "_Next Location"
 msgstr "_Seuraava sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
-msgid "Go to next location"
-msgstr "Siirry seuraavaan sijaintiin"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "Go to the next visited location"
+msgstr "Siirry seuraavaan aiemmin avattuun sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
 msgid "Re_fresh View"
 msgstr "_Päivitä näkymä"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
 msgid "Refresh the view"
 msgstr "Päivitä näkymä"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
 msgid "_View Directory"
 msgstr "_Näytä kansio:"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
 msgid "View directory in file manager"
 msgstr "Näytä kansio tiedostoselaimessa"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
 msgid "Show _Hidden"
 msgstr "Näytä _piilotetut"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
 msgid "Show hidden files and directories"
 msgstr "Näytä piilotiedostot ja -kansiot"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
 msgid "Show _Binary"
 msgstr "Näytä _binäärit"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
 msgid "Show binary files"
 msgstr "Näytä binääritiedostot"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:945
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:977
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:949
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
 msgid "Previous location"
 msgstr "Edellinen sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:938
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:970
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:936
+msgid "Go to previous location"
+msgstr "Siirry edelliseen sijaintiin"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:942
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
 msgid "Go to a previously opened location"
 msgstr "Siirry edelliseen avattuun sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:960
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
 msgid "Next location"
 msgstr "Seuraava sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1132
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:968
+msgid "Go to next location"
+msgstr "Siirry seuraavaan sijaintiin"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1129
 msgid "Advanced filtering"
 msgstr "Edistynyt suodatus"
 
@@ -3153,7 +3154,8 @@ msgstr "_Muokkaa tekstinpätkää:"
 msgid "_Snippets:"
 msgstr "_Tekstinpätkät:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:7
+#. "tab" here means the tab key, not the notebook tab!
+#: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "_Tab trigger:"
 msgstr "_Tab-liipaisu:"
 
@@ -5155,6 +5157,15 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
+
+#~ msgid "FALSE"
+#~ msgstr "EPÄTOSI"
+
+#~ msgid "TRUE"
+#~ msgstr "TOSI"
+
+#~ msgid "hidden_and_binary"
+#~ msgstr "piilo_ja_binääri"
 
 #~ msgid "gedit"
 #~ msgstr "gedit"
