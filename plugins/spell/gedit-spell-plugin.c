@@ -826,13 +826,20 @@ static void
 update_ui_real (GeditWindow *window,
 		WindowData *data)
 {
+	GeditDocument *doc;
 	GeditView *view;
-	
+	gboolean autospell;
+	GtkAction *action;
+
 	gedit_debug (DEBUG_PLUGINS);
 
+	doc = gedit_window_get_active_document (window);
 	view = gedit_window_get_active_view (window);
 
-	// TODO, see old plugin
+	autospell = (doc != NULL &&
+	             gedit_automatic_spell_checker_get_from_document (doc) != NULL);
+	action = gtk_action_group_get_action (data->action_group, "AutoSpell");
+	gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), autospell);
 
 	gtk_action_group_set_sensitive (data->action_group,
 					(view != NULL) &&
