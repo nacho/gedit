@@ -355,9 +355,7 @@ gedit_output_window_init (GeditOutputWindow  *output_window)
 	output_window->priv = g_new0 (GeditOutputWindowPrivate, 1);
 
 	output_window->priv->tooltips = gtk_tooltips_new ();
-
-	g_object_ref (G_OBJECT (output_window->priv->tooltips ));
-	gtk_object_sink (GTK_OBJECT (output_window->priv->tooltips ));
+	g_object_ref_sink (output_window->priv->tooltips);
 
 	settings = gtk_widget_get_settings (GTK_WIDGET (output_window));
 

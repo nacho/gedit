@@ -1561,13 +1561,12 @@ ensure_search_window (GeditView *view)
 	gtk_entry_set_completion (GTK_ENTRY (view->priv->search_entry), 
 				  completion);
 	g_object_unref (completion);
-	
+
 	gtk_widget_realize (view->priv->search_entry);
-	
+
 	view->priv->tooltips = gtk_tooltips_new ();
-	g_object_ref (G_OBJECT (view->priv->tooltips));
-	gtk_object_sink (GTK_OBJECT (view->priv->tooltips));
-	
+	g_object_ref_sink (view->priv->tooltips);
+
 	customize_for_search_mode (view);	
 }
 

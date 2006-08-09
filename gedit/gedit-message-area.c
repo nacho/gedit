@@ -172,9 +172,8 @@ style_set (GtkWidget *widget,
 		return;
 	
 	tooltips = gtk_tooltips_new ();
-	g_object_ref (G_OBJECT (tooltips));
-	gtk_object_sink (GTK_OBJECT (tooltips));
-	
+	g_object_ref_sink (tooltips);
+
 	gtk_tooltips_force_window (tooltips);
 	gtk_widget_ensure_style (tooltips->tip_window);
 	style = gtk_widget_get_style (tooltips->tip_window);

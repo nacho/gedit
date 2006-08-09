@@ -658,8 +658,7 @@ gedit_notebook_init (GeditNotebook *notebook)
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 
 	notebook->priv->title_tips = gedit_tooltips_new ();
-	g_object_ref (G_OBJECT (notebook->priv->title_tips));
-	gtk_object_sink (GTK_OBJECT (notebook->priv->title_tips));
+	g_object_ref_sink (notebook->priv->title_tips);
 
 	notebook->priv->always_show_tabs = TRUE;
 

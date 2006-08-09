@@ -416,10 +416,9 @@ gedit_panel_init (GeditPanel *panel)
 {
 	panel->priv = GEDIT_PANEL_GET_PRIVATE (panel);
 	g_return_if_fail (panel->priv != NULL);	
-	
+
 	panel->priv->tooltips = gtk_tooltips_new ();
-	g_object_ref (G_OBJECT (panel->priv->tooltips));
-	gtk_object_sink (GTK_OBJECT (panel->priv->tooltips));
+	g_object_ref_sink (panel->priv->tooltips);
 }
 
 static void

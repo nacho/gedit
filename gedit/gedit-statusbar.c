@@ -190,8 +190,7 @@ gedit_statusbar_init (GeditStatusbar *statusbar)
 			       0);
 
 	statusbar->priv->tooltips = gedit_tooltips_new ();
-	g_object_ref (G_OBJECT (statusbar->priv->tooltips));
-	gtk_object_sink (GTK_OBJECT (statusbar->priv->tooltips));			       
+	g_object_ref_sink (statusbar->priv->tooltips);
 }
 
 /**
