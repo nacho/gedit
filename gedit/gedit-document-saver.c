@@ -50,6 +50,12 @@
 #include "gedit-marshal.h"
 #include "gedit-utils.h"
 
+#ifdef HAVE_LIBATTR
+#include <attr/libattr.h>
+#else
+#define attr_copy_fd(x1, x2, x3, x4, x5, x6) (errno = ENOSYS, -1)
+#endif
+
 #define GEDIT_DOCUMENT_SAVER_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
 						 GEDIT_TYPE_DOCUMENT_SAVER, \
 						 GeditDocumentSaverPrivate))
@@ -457,6 +463,16 @@ get_slow_mime_type (const char *text_uri)
 
 /* ----------- local files ----------- */
 
+#ifdef HAVE_LIBATTR
+/* Save everything: user/root xattrs, SELinux, ACLs. */
+static int
+all_xattrs (const char *xattr G_GNUC_UNUSED,
+	    struct error_context *err G_GNUC_UNUSED)
+{
+	return 1;
+}
+#endif
+
 static gboolean
 save_existing_local_file (GeditDocumentSaver *saver)
 {
@@ -589,6 +605,25 @@ save_existing_local_file (GeditDocumentSaver *saver)
 		    fchmod (tmpfd, statbuf.st_mode) == -1)
 		{
 			gedit_debug_message (DEBUG_SAVER, "could not set perms");
+
+			close (tmpfd);
+			unlink (tmp_filename);
+			g_free (tmp_filename);
+
+			goto fallback_strategy;
+		}
+
+		/* copy the xattrs, like user.mime_type, over. Also ACLs and
+		 * SELinux context. */
+		if ((attr_copy_fd (saver->priv->local_path,
+				   saver->priv->fd,
+				   tmp_filename,
+				   tmpfd,
+				   all_xattrs,
+				   NULL) == -1) &&
+		    (errno != EOPNOTSUPP) && (errno != ENOSYS))
+		{
+			gedit_debug_message (DEBUG_SAVER, "could not set xattrs");
 
 			close (tmpfd);
 			unlink (tmp_filename);
@@ -749,6 +784,29 @@ save_existing_local_file (GeditDocumentSaver *saver)
 
 				goto out;
 			}
+		}
+
+		/* copy the xattrs, like user.mime_type, over. Also ACLs and
+		 * SELinux context. */
+		if ((attr_copy_fd (saver->priv->local_path,
+				   saver->priv->fd,
+				   backup_filename,
+				   bfd,
+				   all_xattrs,
+				   NULL) == -1) &&
+		    (errno != EOPNOTSUPP) && (errno != ENOSYS))
+		{
+			gedit_debug_message (DEBUG_SAVER, "could not set xattrs");
+
+			g_set_error (&saver->priv->error,
+				     GEDIT_DOCUMENT_ERROR,
+				     GEDIT_DOCUMENT_ERROR_CANT_CREATE_BACKUP,
+				     "No backup created");
+
+			unlink (backup_filename);
+			close (bfd);
+
+			goto out;
 		}
 
 		if (!copy_file_data (saver->priv->fd, bfd, NULL))
