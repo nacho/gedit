@@ -1,4 +1,4 @@
-# translation of gedit to Russian
+# translation of gedit.HEAD.po to
 # Valek Filippov <frob@df.ru>, 2000-2002, 2003.
 # Sergey Panov <sipan@mit.edu>, 1999-2000.
 # Dmitry G. Mastrukov <dmitry@taurussoft.org>, 2002.
@@ -8,23 +8,23 @@
 # Copyright (C) 1999-2003, 2004, 2005, 2006 Free Software Foundation, Inc.
 msgid ""
 msgstr ""
-"Project-Id-Version: ru\n"
+"Project-Id-Version: gedit.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-27 14:37+0100\n"
-"PO-Revision-Date: 2006-03-06 15:43+0200\n"
-"Last-Translator: Leonid Kanter\n"
-"Language-Team: Russian <gnome-cyr@gnome.org>\n"
+"POT-Creation-Date: 2006-08-11 17:50+0200\n"
+"PO-Revision-Date: 2006-08-12 15:23+0300\n"
+"Last-Translator: Leonid Kanter <leon@asplinux.ru>\n"
+"Language-Team:  <gnome-cyr@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.1\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Редактор текстовых файлов"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:404
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:457
 msgid "Text Editor"
 msgstr "Текстовый редактор"
 
@@ -36,7 +36,7 @@ msgstr ""
 "Другой шрифт, который будет использован для области редактирования. Будет "
 "иметь эффект только если параметр \"Использовать исходный шрифт\" выключен."
 
-#: ../data/gedit.schemas.in.h:2
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:747
 msgid "Active plugins"
 msgstr "Активные модули"
 
@@ -588,23 +588,23 @@ msgstr "[CP866,IBM855,ISO-8859-5,KOI8R,WINDOWS-1251]"
 msgid "[UTF-8,CURRENT,ISO-8859-15]"
 msgstr "[UTF-8,CURRENT,KOI8R,WINDOWS-1251,ISO-8859-5]"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:136
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:139
 msgid "Logout _without Saving"
 msgstr "Выйти _без сохранения"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:143
 msgid "_Cancel Logout"
 msgstr "_Отменить выход"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:147
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:150
 msgid "Close _without Saving"
 msgstr "Закрыть _без сохранения"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:180
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:195
 msgid "Question"
 msgstr "Вопрос"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:386
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
 #, c-format
 msgid "If you don't save, changes from the last %ld second will be permanently lost."
 msgid_plural ""
@@ -620,13 +620,13 @@ msgstr[2] ""
 "Если вы не сохраните, изменения за последние %ld секунд будут безвозвратно "
 "утрачены."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:395
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:404
 msgid "If you don't save, changes from the last minute will be permanently lost."
 msgstr ""
 "Если вы не сохраните, изменения за последнюю минуту будут безвозвратно "
 "утрачены."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:401
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:410
 #, c-format
 msgid ""
 "If you don't save, changes from the last minute and %ld second will be "
@@ -644,7 +644,7 @@ msgstr[2] ""
 "Если вы не сохраните, изменения за последнюю минуту и %ld секунд будут "
 "безвозвратно утрачены."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:411
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:420
 #, c-format
 msgid "If you don't save, changes from the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -660,8 +660,8 @@ msgstr[2] ""
 "Если вы не сохраните, изменения за последние %ld минут будут безвозвратно "
 "утрачены."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:426
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:447
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:435
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:456
 #, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
@@ -673,7 +673,7 @@ msgstr[2] ""
 "Если вы не сохраните, изменения за последние %d часов будут безвозвратно "
 "утрачены."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:432
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:441
 #, c-format
 msgid ""
 "If you don't save, changes from the last hour and %d minute will be "
@@ -691,12 +691,30 @@ msgstr[2] ""
 "Если вы не сохраните, изменения за последний час и %d минут будут "
 "безвозвратно утрачены."
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:491
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:498
+#, c-format
+msgid "Changes to document \"%s\" will be permanently lost."
+msgstr "Изменения документа \"%s\" будут безвозвратно утеряны."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:501
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr "Сохранить изменения в документе \"%s\" перед закрытием?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:663
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:725
+msgid "Saving has been disabled by the system administrator."
+msgstr "Сохранение было запрещено системным администратором."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
+#, c-format
+msgid "Changes to %d document will be permanently lost."
+msgid_plural "Changes to %d documents will be permanently lost."
+msgstr[0] "Изменения в %d документе будут безвозвратно утеряны."
+msgstr[1] "Изменения в %d документах будут безвозвратно утеряны."
+msgstr[2] "Изменения в %d документах будут безвозвратно утеряны."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:686
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
@@ -710,12 +728,15 @@ msgstr[2] ""
 "%d документов имеют несохраненные изменения. Сохранить изменения перед "
 "закрытием?"
 
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:680
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:704
+msgid "Docum_ents with unsaved changes:"
+msgstr "Докум_енты с несохранёнными изменениями:"
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:706
 msgid "S_elect the documents you want to save:"
 msgstr "_Выберите документы, которые вы хотите сохранить:"
 
-#. Secondary label
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:697
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:727
 msgid "If you don't save, all your changes will be permanently lost."
 msgstr "Если вы не сохраните, все изменения будут безвозвратно утрачены."
 
@@ -1061,21 +1082,21 @@ msgstr "Использовать ис_ходный шрифт темы"
 msgid "_minutes"
 msgstr "_минут"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:234
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1013
+#: ../gedit/dialogs/gedit-search-dialog.c:302
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1223
 msgid "Replace"
 msgstr "Заменить"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:246 ../gedit/gedit-window.c:1011
+#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1221
 msgid "Find"
 msgstr "Найти"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:298
+#: ../gedit/dialogs/gedit-search-dialog.c:366
 msgid "Replace _All"
 msgstr "Заменить вс_е"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:299
-#: ../gedit/gedit-commands-file.c:559
+#: ../gedit/dialogs/gedit-search-dialog.c:367
+#: ../gedit/gedit-commands-file.c:659
 msgid "_Replace"
 msgstr "_Заменить"
 
@@ -1107,7 +1128,7 @@ msgstr "На_йти: "
 msgid "_Wrap around"
 msgstr "Автоматически пере_ходить к началу документа"
 
-#: ../gedit/gedit.c:75
+#: ../gedit/gedit.c:74
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -1115,30 +1136,39 @@ msgstr ""
 "Установить кодировку символов, используемую при открывании файлов, "
 "перечисленных в командной строке"
 
-#: ../gedit/gedit.c:78
+#: ../gedit/gedit.c:77
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Создать новое главное окно в существующем экземпляре программы"
 
-#: ../gedit/gedit.c:81
+#: ../gedit/gedit.c:80
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Создать новый документ в существующем экземпляре программы"
 
-#: ../gedit/gedit.c:116
+#: ../gedit/gedit.c:83
+msgid "[FILE...]"
+msgstr "[FILE...]"
+
+#: ../gedit/gedit.c:115
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: неверное имя файла или URI.\n"
 
-#: ../gedit/gedit.c:128
+#: ../gedit/gedit.c:127
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: неверная кодировка.\n"
 
-#: ../gedit/gedit-commands-file.c:128 ../gedit/gedit-commands-file.c:174
+#. Setup command line options
+#: ../gedit/gedit.c:449
+msgid "- Edit text files"
+msgstr "- редактирование текстовых файлов"
+
+#: ../gedit/gedit-commands-file.c:210 ../gedit/gedit-commands-file.c:256
 #, c-format
 msgid "Loading file '%s'…"
 msgstr "Загружается файл \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:183
+#: ../gedit/gedit-commands-file.c:265
 #, c-format
 msgid "Loading %d file…"
 msgid_plural "Loading %d files…"
@@ -1146,50 +1176,50 @@ msgstr[0] "Загружается %d файл..."
 msgstr[1] "Загружается %d файла..."
 msgstr[2] "Загружается %d файлов..."
 
-#: ../gedit/gedit-commands-file.c:286
+#: ../gedit/gedit-commands-file.c:405
 msgid "Open Files…"
 msgstr "Открыть файлы..."
 
-#: ../gedit/gedit-commands-file.c:392
+#: ../gedit/gedit-commands-file.c:511
 msgid "The entered location is not valid."
 msgstr "Введёный адрес неверен."
 
-#: ../gedit/gedit-commands-file.c:395
+#: ../gedit/gedit-commands-file.c:514
 #: ../gedit/gedit-io-error-message-area.c:150
 #: ../gedit/gedit-io-error-message-area.c:189
 #: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Убедитесь, что адрес указан правильно, и попробуйте еще раз."
 
-#: ../gedit/gedit-commands-file.c:540
+#: ../gedit/gedit-commands-file.c:640
 #, c-format
 msgid "The file \"%s\" is read-only."
 msgstr "Файл \"%s\" только для чтения."
 
-#: ../gedit/gedit-commands-file.c:551
+#: ../gedit/gedit-commands-file.c:651
 msgid "Do you want to try to replace it with the one you are saving?"
 msgstr "Попробовать заменить его тем, который вы сохраняете?"
 
-#: ../gedit/gedit-commands-file.c:617 ../gedit/gedit-commands-file.c:808
+#: ../gedit/gedit-commands-file.c:717 ../gedit/gedit-commands-file.c:915
 #, c-format
 msgid "Saving file '%s'…"
 msgstr "Сохраняется файл \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:707
+#: ../gedit/gedit-commands-file.c:814
 msgid "Save As…"
 msgstr "Сохранить как..."
 
-#: ../gedit/gedit-commands-file.c:1003
+#: ../gedit/gedit-commands-file.c:1110
 #, c-format
 msgid "Reverting the document '%s'…"
 msgstr "Восстанавливается документ \"%s\"..."
 
-#: ../gedit/gedit-commands-file.c:1025
+#: ../gedit/gedit-commands-file.c:1132
 #, c-format
 msgid "Revert unsaved changes to document '%s'?"
 msgstr "Восстановить несохраненные изменения в документе \"%s\"?"
 
-#: ../gedit/gedit-commands-file.c:1034
+#: ../gedit/gedit-commands-file.c:1141
 #, c-format
 msgid "Changes made to the document in the last %ld second will be permanently lost."
 msgid_plural ""
@@ -1205,13 +1235,13 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последние %ld секунд, будут безвозвратно "
 "утрачены."
 
-#: ../gedit/gedit-commands-file.c:1043
+#: ../gedit/gedit-commands-file.c:1150
 msgid "Changes made to the document in the last minute will be permanently lost."
 msgstr ""
 "Изменения, сделанные в документе за последнюю минуту, будут безвозвратно "
 "утрачены."
 
-#: ../gedit/gedit-commands-file.c:1049
+#: ../gedit/gedit-commands-file.c:1156
 #, c-format
 msgid ""
 "Changes made to the document in the last minute and %ld second will be "
@@ -1229,7 +1259,7 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последние минуту и %ld секунд, будут "
 "безвозвратно утрачены."
 
-#: ../gedit/gedit-commands-file.c:1059
+#: ../gedit/gedit-commands-file.c:1166
 #, c-format
 msgid "Changes made to the document in the last %ld minute will be permanently lost."
 msgid_plural ""
@@ -1245,7 +1275,7 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последние %ld минут, будут безвозвратно "
 "утрачены."
 
-#: ../gedit/gedit-commands-file.c:1074 ../gedit/gedit-commands-file.c:1095
+#: ../gedit/gedit-commands-file.c:1181 ../gedit/gedit-commands-file.c:1202
 #, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
@@ -1259,7 +1289,7 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последние %d часов, будут безвозвратно "
 "утрачены."
 
-#: ../gedit/gedit-commands-file.c:1080
+#: ../gedit/gedit-commands-file.c:1187
 #, c-format
 msgid ""
 "Changes made to the document in the last hour and %d minute will be "
@@ -1277,15 +1307,15 @@ msgstr[2] ""
 "Изменения, сделанные в документе за последний час и %d минут, будут "
 "безвозвратно утрачены."
 
-#: ../gedit/gedit-commands-file.c:1121
+#: ../gedit/gedit-commands-file.c:1228
 msgid "_Revert"
 msgstr "Восста_новить"
 
-#: ../gedit/gedit-commands-help.c:78
+#: ../gedit/gedit-commands-help.c:80
 msgid "gedit is a small and lightweight text editor for the GNOME Desktop"
 msgstr "gedit - это маленький и легкий редактор текстов для среды GNOME"
 
-#: ../gedit/gedit-commands-help.c:98
+#: ../gedit/gedit-commands-help.c:96
 msgid "translator-credits"
 msgstr ""
 "Валек Филлипов <frob@df.ru>\n"
@@ -1295,11 +1325,7 @@ msgstr ""
 "Леонид Кантер <leon@asplinux.ru>\n"
 "Максим Попов <ravemax@hotbox.ru>"
 
-#: ../gedit/gedit-commands-help.c:101
-msgid "gedit"
-msgstr "Редактор \"gedit\""
-
-#: ../gedit/gedit-commands-search.c:166
+#: ../gedit/gedit-commands-search.c:165
 #, c-format
 msgid "Found and replaced %d occurrence"
 msgid_plural "Found and replaced %d occurrences"
@@ -1307,26 +1333,26 @@ msgstr[0] "Найдено и заменено %d вхождение"
 msgstr[1] "Найдено и заменено %d вхождения"
 msgstr[2] "Найдено и заменено %d вхождений"
 
-#: ../gedit/gedit-commands-search.c:176
+#: ../gedit/gedit-commands-search.c:175
 msgid "Found and replaced one occurrence"
 msgstr "Найдено и заменено одно вхождение"
 
-#: ../gedit/gedit-commands-search.c:189
+#: ../gedit/gedit-commands-search.c:188
 msgid "Phrase not found"
 msgstr "Фраза не найдена"
 
-#: ../gedit/gedit-document.c:774 ../gedit/gedit-document.c:855
+#: ../gedit/gedit-document.c:743 ../gedit/gedit-document.c:837
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Несохраненный документ %d"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:523
+#: ../gedit/gedit-document-saver.c:536
 msgid "Could not obtain backup filename"
 msgstr "Не удалось получить имя резервной копии файла"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1533 ../gedit/gedit-window.c:1538
+#: ../gedit/gedit-window.c:1771 ../gedit/gedit-window.c:1776
 msgid "Read Only"
 msgstr "Только чтение"
 
@@ -1366,12 +1392,12 @@ msgid "Cyrillic"
 msgstr "Кириллица"
 
 #: ../gedit/gedit-encodings.c:161 ../gedit/gedit-encodings.c:233
-#: ../gedit/gedit-encodings.c:274
+#: ../gedit/gedit-encodings.c:274 ../plugins/spell/gedit-spell-checker.c:81
 msgid "Arabic"
 msgstr "Арабская"
 
 #: ../gedit/gedit-encodings.c:163 ../gedit/gedit-encodings.c:268
-#: ../plugins/spell/gedit-spell-checker.c:93
+#: ../plugins/spell/gedit-spell-checker.c:95
 msgid "Greek"
 msgstr "Греческая"
 
@@ -1380,12 +1406,12 @@ msgid "Hebrew Visual"
 msgstr "Еврейская видимая"
 
 #: ../gedit/gedit-encodings.c:167 ../gedit/gedit-encodings.c:231
-#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:109
+#: ../gedit/gedit-encodings.c:272 ../plugins/spell/gedit-spell-checker.c:111
 msgid "Hebrew"
 msgstr "Еврейская"
 
 #: ../gedit/gedit-encodings.c:169 ../gedit/gedit-encodings.c:229
-#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:150
+#: ../gedit/gedit-encodings.c:270 ../plugins/spell/gedit-spell-checker.c:152
 msgid "Turkish"
 msgstr "Турецкая"
 
@@ -1397,7 +1423,7 @@ msgstr "Северная"
 msgid "Celtic"
 msgstr "Кельтская"
 
-#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:138
+#: ../gedit/gedit-encodings.c:179 ../plugins/spell/gedit-spell-checker.c:140
 msgid "Romanian"
 msgstr "Романская"
 
@@ -1439,7 +1465,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Кириллица (украинская)"
 
 #: ../gedit/gedit-encodings.c:253 ../gedit/gedit-encodings.c:259
-#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:153
+#: ../gedit/gedit-encodings.c:278 ../plugins/spell/gedit-spell-checker.c:155
 msgid "Vietnamese"
 msgstr "Вьетнамская"
 
@@ -1525,7 +1551,7 @@ msgstr "Недостаточно прав для открытия файла."
 
 #: ../gedit/gedit-io-error-message-area.c:198
 #: ../gedit/gedit-io-error-message-area.c:417
-#: ../gedit/gedit-io-error-message-area.c:1161
+#: ../gedit/gedit-io-error-message-area.c:1160
 msgid "There are too many open files. Please, close some applications and try again."
 msgstr ""
 "Открыто слишком много файлов. Закройте некоторые открытые файлы и попробуйте "
@@ -1548,7 +1574,7 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:238
 #: ../gedit/gedit-io-error-message-area.c:455
-#: ../gedit/gedit-io-error-message-area.c:1200
+#: ../gedit/gedit-io-error-message-area.c:1199
 #, c-format
 msgid ""
 "Host %s could not be found. Please, check that your proxy settings are "
@@ -1562,9 +1588,9 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:268
 #: ../gedit/gedit-io-error-message-area.c:466
 #: ../gedit/gedit-io-error-message-area.c:477
-#: ../gedit/gedit-io-error-message-area.c:1211
-#: ../gedit/gedit-io-error-message-area.c:1222
-#: ../gedit/gedit-io-error-message-area.c:1230
+#: ../gedit/gedit-io-error-message-area.c:1210
+#: ../gedit/gedit-io-error-message-area.c:1221
+#: ../gedit/gedit-io-error-message-area.c:1229
 msgid ""
 "Host name was invalid. Please, check that you typed the location correctly "
 "and try again."
@@ -1572,14 +1598,14 @@ msgstr "Неверное имя узла. Убедитесь, что имя вв
 
 #: ../gedit/gedit-io-error-message-area.c:274
 #: ../gedit/gedit-io-error-message-area.c:485
-#: ../gedit/gedit-io-error-message-area.c:1236
+#: ../gedit/gedit-io-error-message-area.c:1235
 msgid ""
 "Host name was empty. Please, check that your proxy settings are correct and "
 "try again."
 msgstr "Пустое имя узла. Убедитесь, что параметры прокси верны и попробуйте еще раз."
 
 #: ../gedit/gedit-io-error-message-area.c:280
-#: ../gedit/gedit-io-error-message-area.c:1242
+#: ../gedit/gedit-io-error-message-area.c:1241
 msgid ""
 "Attempt to log in failed. Please, check that you typed the location "
 "correctly and try again."
@@ -1593,7 +1619,7 @@ msgstr "Файл, который вы пытаетесь открыть, не я
 
 #: ../gedit/gedit-io-error-message-area.c:325
 #: ../gedit/gedit-io-error-message-area.c:545
-#: ../gedit/gedit-io-error-message-area.c:1307
+#: ../gedit/gedit-io-error-message-area.c:1306
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Неожиданная ошибка: %s"
@@ -1674,13 +1700,12 @@ msgstr "_Править в любом случае"
 msgid "_Don't Edit"
 msgstr "_Не редактировать"
 
-#. FIXME: try to rephrase in a better way
-#: ../gedit/gedit-io-error-message-area.c:852
+#: ../gedit/gedit-io-error-message-area.c:851
 #, c-format
-msgid "The file %s is already open."
-msgstr "Файл %s уже открыт."
+msgid "This file (%s) is already opened in another gedit window."
+msgstr "Этот файл (%s) уже открыт в другом окне gedit."
 
-#: ../gedit/gedit-io-error-message-area.c:867
+#: ../gedit/gedit-io-error-message-area.c:866
 msgid ""
 "gedit opened this instance of the file in non-editable way. Do you want to "
 "edit it anyway?"
@@ -1688,41 +1713,41 @@ msgstr ""
 "gedit открыл этот файл в режиме \"только чтение\". Вы действительно хотите "
 "редактировать его?"
 
-#: ../gedit/gedit-io-error-message-area.c:925
-#: ../gedit/gedit-io-error-message-area.c:1020
+#: ../gedit/gedit-io-error-message-area.c:924
+#: ../gedit/gedit-io-error-message-area.c:1019
 msgid "_Save Anyway"
 msgstr "Со_хранить всё равно"
 
-#: ../gedit/gedit-io-error-message-area.c:929
-#: ../gedit/gedit-io-error-message-area.c:1024
+#: ../gedit/gedit-io-error-message-area.c:928
+#: ../gedit/gedit-io-error-message-area.c:1023
 msgid "_Don't Save"
 msgstr "_Не сохранять"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:947
+#: ../gedit/gedit-io-error-message-area.c:946
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Файл %s был изменен во время чтения."
 
-#: ../gedit/gedit-io-error-message-area.c:963
+#: ../gedit/gedit-io-error-message-area.c:962
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Если вы сохранитесь, все внешние изменения будут потеряны. Всё равно "
 "сохранить?"
 
-#: ../gedit/gedit-io-error-message-area.c:1042
+#: ../gedit/gedit-io-error-message-area.c:1041
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Не удалось создать резервную копию файла при сохранении %s."
 
-#: ../gedit/gedit-io-error-message-area.c:1045
+#: ../gedit/gedit-io-error-message-area.c:1044
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Не удалось создать резервную копию файла при сохранении %s."
 
-#: ../gedit/gedit-io-error-message-area.c:1062
+#: ../gedit/gedit-io-error-message-area.c:1061
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1734,7 +1759,7 @@ msgstr ""
 "копию файла. Всё равно сохранить?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1123
+#: ../gedit/gedit-io-error-message-area.c:1122
 #, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please, check that you typed "
@@ -1743,7 +1768,7 @@ msgstr ""
 "gedit не может открыть адрес %s в режиме записи. Убедитесь, что адрес указан "
 "правильно, и попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1131
+#: ../gedit/gedit-io-error-message-area.c:1130
 msgid ""
 "gedit cannot handle this location  in write mode. Please, check that you "
 "typed the location correctly and try again."
@@ -1751,7 +1776,7 @@ msgstr ""
 "gedit не может открыть данный адрес в режиме записи. Убедитесь, что адрес "
 "введен правильно, и попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1140
+#: ../gedit/gedit-io-error-message-area.c:1139
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1761,7 +1786,7 @@ msgstr ""
 "файла. Попробуйте сохранить файл меньшего размера или воспользуйтесь диском, "
 "не имеющим подобного ограничения."
 
-#: ../gedit/gedit-io-error-message-area.c:1147
+#: ../gedit/gedit-io-error-message-area.c:1146
 #, c-format
 msgid ""
 "%s is not a valid location. Please, check that you typed the location "
@@ -1770,7 +1795,7 @@ msgstr ""
 "%s не является верным адресом. Убедитесь, что адрес введён правильно, и "
 "попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1154
+#: ../gedit/gedit-io-error-message-area.c:1153
 msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
@@ -1778,14 +1803,14 @@ msgstr ""
 "Недостаточно прав для сохранения файла. Убедитесь, что адрес введен "
 "правильно, и попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1166
+#: ../gedit/gedit-io-error-message-area.c:1165
 #, c-format
 msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
 "try again."
 msgstr "%s это каталог. Убедитесь, что адрес указан правильно, и попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1172
+#: ../gedit/gedit-io-error-message-area.c:1171
 msgid ""
 "Not enough available memory to save the file. Please, close some running "
 "applications and try again."
@@ -1793,7 +1818,7 @@ msgstr ""
 "Недостаточно памяти, чтобы сохранить этот файл. Закройте несколько "
 "работающих приложений и попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1248
+#: ../gedit/gedit-io-error-message-area.c:1247
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
@@ -1801,7 +1826,7 @@ msgstr ""
 "Недостаточно места на диске для сохранения файла. Освободите немного места "
 "на диске и попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1254
+#: ../gedit/gedit-io-error-message-area.c:1253
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
@@ -1809,11 +1834,11 @@ msgstr ""
 "Вы пытаетесь сохранить файл на устройство в режиме только чтение. Убедитесь, "
 "что адрес введён правильно, и попробуйте еще раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1260
+#: ../gedit/gedit-io-error-message-area.c:1259
 msgid "A file with the same name already exists. Please, use a different name."
 msgstr "Файл с таким именем уже существует. Пожайлуста, укажите другое имя."
 
-#: ../gedit/gedit-io-error-message-area.c:1265
+#: ../gedit/gedit-io-error-message-area.c:1264
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
@@ -1821,7 +1846,7 @@ msgstr ""
 "Диск, на который вы пытаетесь сохранить файл имеет ограничение на длину "
 "имени файла. Пожайлуста, используйте более короткое имя."
 
-#: ../gedit/gedit-io-error-message-area.c:1270
+#: ../gedit/gedit-io-error-message-area.c:1269
 #, c-format
 msgid ""
 "%s is not a regular file. Please, check that you typed the location "
@@ -1830,22 +1855,20 @@ msgstr ""
 "%s не обычный файл. Убедитесь, что адрес введён правильно, и попробуйте еще "
 "раз."
 
-#: ../gedit/gedit-io-error-message-area.c:1313
+#: ../gedit/gedit-io-error-message-area.c:1312
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Не удается сохранить файл \"%s\"."
 
-#: ../gedit/gedit-notebook.c:823
+#: ../gedit/gedit-notebook.c:837
 msgid "Close document"
 msgstr "Закрыть документ"
 
-#: ../gedit/gedit-panel.c:370 ../gedit/gedit-panel.c:585
-#: ../gedit/recent-files/egg-recent-view-gtk.c:446
-#: ../gedit/recent-files/egg-recent-view-uimanager.c:322
+#: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:579
 msgid "Empty"
 msgstr "Пусто"
 
-#: ../gedit/gedit-panel.c:526 ../gedit/gedit-panel.c:606
+#: ../gedit/gedit-panel.c:523 ../gedit/gedit-panel.c:600
 msgid "Hide panel"
 msgstr "Скрыть панель"
 
@@ -1857,19 +1880,39 @@ msgstr "Модуль"
 msgid "Enabled"
 msgstr "Включено"
 
-#: ../gedit/gedit-plugin-manager.c:540
+#: ../gedit/gedit-plugin-manager.c:502
+msgid "_About"
+msgstr "_О модуле"
+
+#: ../gedit/gedit-plugin-manager.c:510
+msgid "C_onfigure"
+msgstr "_Настроить"
+
+#: ../gedit/gedit-plugin-manager.c:520
+msgid "A_ctivate"
+msgstr "_Активировать"
+
+#: ../gedit/gedit-plugin-manager.c:530
+msgid "Ac_tivate All"
+msgstr "Ак_тивировать все"
+
+#: ../gedit/gedit-plugin-manager.c:535
+msgid "_Deactivate All"
+msgstr "_Деактивировать все"
+
+#: ../gedit/gedit-plugin-manager.c:776
 msgid "_About Plugin"
 msgstr "_О модуле"
 
-#: ../gedit/gedit-plugin-manager.c:544
+#: ../gedit/gedit-plugin-manager.c:780
 msgid "C_onfigure Plugin"
 msgstr "_Настроить модуль"
 
-#: ../gedit/gedit-prefs-manager.c:175
+#: ../gedit/gedit-prefs-manager.c:170
 msgid "Cannot initialize preferences manager."
 msgstr "Невозможно инициализировать менеджер настроек."
 
-#: ../gedit/gedit-prefs-manager.c:1388
+#: ../gedit/gedit-prefs-manager.c:1407
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Ожидалось значение \"%s\", было получено значение \"%s\" для ключа %s"
@@ -1967,22 +2010,22 @@ msgstr "Количество страниц по вертикали"
 msgid "No visible output was created."
 msgstr "Нет видимого результата."
 
-#: ../gedit/gedit-statusbar.c:257
+#: ../gedit/gedit-statusbar.c:256
 msgid "  OVR"
 msgstr "  ЗАМ"
 
-#: ../gedit/gedit-statusbar.c:259
+#: ../gedit/gedit-statusbar.c:258
 msgid "  INS"
 msgstr "  ВСТ"
 
 #. Translators: "Ln" is an abbreviation for "Line", Col is an abbreviation for "Column". Please,
 #. use abbreviations if possible to avoid space problems.
-#: ../gedit/gedit-statusbar.c:298
+#: ../gedit/gedit-statusbar.c:297
 #, c-format
 msgid "  Ln %d, Col %d"
 msgstr "  Стр %d, Стлб %d"
 
-#: ../gedit/gedit-statusbar.c:397
+#: ../gedit/gedit-statusbar.c:396
 #, c-format
 msgid "There is a tab with errors"
 msgid_plural "There are %d tabs with errors"
@@ -1992,414 +2035,439 @@ msgstr[2] "%d вкладок с ошибками"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:641
+#: ../gedit/gedit-tab.c:640
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Восстанавливается \"%s\" из \"%s\""
 
-#: ../gedit/gedit-tab.c:648
+#: ../gedit/gedit-tab.c:647
 #, c-format
 msgid "Reverting %s"
 msgstr "Восстанавливается %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:664
+#: ../gedit/gedit-tab.c:663
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Загружается \"%s\" из \"%s\""
 
-#: ../gedit/gedit-tab.c:671
+#: ../gedit/gedit-tab.c:670
 #, c-format
 msgid "Loading %s"
 msgstr "Загружается \"%s\""
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:754
+#: ../gedit/gedit-tab.c:753
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Сохраняется %s в %s"
 
-#: ../gedit/gedit-tab.c:761
+#: ../gedit/gedit-tab.c:760
 #, c-format
 msgid "Saving %s"
 msgstr "Сохраняется \"%s\""
 
 #. Read only
-#: ../gedit/gedit-tab.c:1503
+#: ../gedit/gedit-tab.c:1516
 msgid "RO"
 msgstr "RO"
 
-#: ../gedit/gedit-tab.c:1548
+#: ../gedit/gedit-tab.c:1561
 #, c-format
 msgid "Error opening file %s"
 msgstr "Ошибка открытия файла \"%s\""
 
-#: ../gedit/gedit-tab.c:1553
+#: ../gedit/gedit-tab.c:1566
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Ошибка восстановления файла \"%s\""
 
-#: ../gedit/gedit-tab.c:1558
+#: ../gedit/gedit-tab.c:1571
 #, c-format
 msgid "Error saving file %s"
 msgstr "Ошибка сохранения файла \"%s\""
 
-#: ../gedit/gedit-tab.c:1576
+#: ../gedit/gedit-tab.c:1589
 msgid "Unicode (UTF-8)"
 msgstr "Юникод (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1583
+#: ../gedit/gedit-tab.c:1596
 msgid "Name:"
 msgstr "Имя:"
 
-#: ../gedit/gedit-tab.c:1584
+#: ../gedit/gedit-tab.c:1597
 msgid "MIME Type:"
 msgstr "Тип MIME:"
 
-#: ../gedit/gedit-tab.c:1585
+#: ../gedit/gedit-tab.c:1598
 msgid "Encoding:"
 msgstr "Кодировка:"
 
-#: ../gedit/gedit-tab.c:2012
+#: ../gedit/gedit-tab.c:2026
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Визуализация страницы %d из %d..."
 
 #. Toplevel
-#: ../gedit/gedit-ui.h:47
+#: ../gedit/gedit-ui.h:52
 msgid "_File"
 msgstr "_Файл"
 
-#: ../gedit/gedit-ui.h:48
+#: ../gedit/gedit-ui.h:53
 msgid "_Edit"
 msgstr "_Правка"
 
-#: ../gedit/gedit-ui.h:49
+#: ../gedit/gedit-ui.h:54
 msgid "_View"
 msgstr "_Вид"
 
-#: ../gedit/gedit-ui.h:50
+#: ../gedit/gedit-ui.h:55
 msgid "_Search"
 msgstr "П_оиск"
 
-#: ../gedit/gedit-ui.h:51
+#: ../gedit/gedit-ui.h:56
 msgid "_Tools"
 msgstr "С_ервис"
 
-#: ../gedit/gedit-ui.h:52
+#: ../gedit/gedit-ui.h:57
 msgid "_Documents"
 msgstr "_Документы"
 
-#: ../gedit/gedit-ui.h:53
+#: ../gedit/gedit-ui.h:58
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../gedit/gedit-ui.h:57
+#: ../gedit/gedit-ui.h:62
 msgid "Create a new document"
 msgstr "Создать новый документ"
 
-#: ../gedit/gedit-ui.h:58
+#: ../gedit/gedit-ui.h:63
 msgid "_Open..."
 msgstr "_Открыть..."
 
-#: ../gedit/gedit-ui.h:59 ../gedit/gedit-window.c:1110
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1346
 msgid "Open a file"
 msgstr "Открыть файл"
 
-#: ../gedit/gedit-ui.h:60
+#: ../gedit/gedit-ui.h:65
 msgid "Open _Location..."
 msgstr "Открыть _адрес..."
 
-#: ../gedit/gedit-ui.h:61
+#: ../gedit/gedit-ui.h:66
 msgid "Open a file from a specified location"
 msgstr "Открыть файл по указанному адресу"
 
-#: ../gedit/gedit-ui.h:62
-msgid "Page Set_up..."
-msgstr "Пара_метры страницы..."
-
-#: ../gedit/gedit-ui.h:63
-msgid "Setup the page settings"
-msgstr "Настроить параметры страницы"
-
 #. Edit menu
-#: ../gedit/gedit-ui.h:66
+#: ../gedit/gedit-ui.h:69
 msgid "Pr_eferences"
 msgstr "_Параметры"
 
-#: ../gedit/gedit-ui.h:67
+#: ../gedit/gedit-ui.h:70
 msgid "Configure the application"
 msgstr "Настроить приложение"
 
 #. Help menu
-#: ../gedit/gedit-ui.h:70
+#: ../gedit/gedit-ui.h:73
 msgid "_Contents"
 msgstr "_Содержание"
 
-#: ../gedit/gedit-ui.h:71
+#: ../gedit/gedit-ui.h:74
 msgid "Open the gedit manual"
 msgstr "Открыть руководство gedit"
 
-#: ../gedit/gedit-ui.h:73
+#: ../gedit/gedit-ui.h:76
 msgid "About this application"
 msgstr "Об этой программе"
 
-#: ../gedit/gedit-ui.h:80
+#: ../gedit/gedit-ui.h:83
 msgid "Save the current file"
 msgstr "Сохранить текущий файл"
 
-#: ../gedit/gedit-ui.h:81
+#: ../gedit/gedit-ui.h:84
 msgid "Save _As..."
 msgstr "Сохранить _как..."
 
-#: ../gedit/gedit-ui.h:82
+#: ../gedit/gedit-ui.h:85
 msgid "Save the current file with a different name"
 msgstr "Сохранить текущий файл под другим именем"
 
-#: ../gedit/gedit-ui.h:84
+#: ../gedit/gedit-ui.h:87
 msgid "Revert to a saved version of the file"
 msgstr "Восстановить до сохраненной версии файла"
 
-#: ../gedit/gedit-ui.h:85
+#: ../gedit/gedit-ui.h:88
+msgid "Page Set_up..."
+msgstr "Пара_метры страницы..."
+
+#: ../gedit/gedit-ui.h:89
+msgid "Setup the page settings"
+msgstr "Настроить параметры страницы"
+
+#: ../gedit/gedit-ui.h:90
 msgid "Print Previe_w"
 msgstr "Просмотр печати"
 
-#: ../gedit/gedit-ui.h:86
+#: ../gedit/gedit-ui.h:91
 msgid "Print preview"
 msgstr "Просмотреть образец печати"
 
-#: ../gedit/gedit-ui.h:87
+#: ../gedit/gedit-ui.h:92
 msgid "_Print..."
 msgstr "_Печать..."
 
-#: ../gedit/gedit-ui.h:88
+#: ../gedit/gedit-ui.h:93
 msgid "Print the current page"
 msgstr "Печать текущей страницы"
 
-#: ../gedit/gedit-ui.h:90
+#: ../gedit/gedit-ui.h:95
 msgid "Close the current file"
 msgstr "Закрыть текущий файл"
 
-#: ../gedit/gedit-ui.h:94
+#: ../gedit/gedit-ui.h:99
 msgid "Undo the last action"
 msgstr "Отменить последнее действие"
 
-#: ../gedit/gedit-ui.h:96
+#: ../gedit/gedit-ui.h:101
 msgid "Redo the last undone action"
 msgstr "Вернуть отмененное действие"
 
-#: ../gedit/gedit-ui.h:98
+#: ../gedit/gedit-ui.h:103
 msgid "Cut the selection"
 msgstr "Вырезать выделенный текст"
 
-#: ../gedit/gedit-ui.h:100
+#: ../gedit/gedit-ui.h:105
 msgid "Copy the selection"
 msgstr "Копировать выделенный текст"
 
-#: ../gedit/gedit-ui.h:102
+#: ../gedit/gedit-ui.h:107
 msgid "Paste the clipboard"
 msgstr "Вставить из буфера обмена"
 
-#: ../gedit/gedit-ui.h:104
+#: ../gedit/gedit-ui.h:109
 msgid "Delete the selected text"
 msgstr "Удалить выделенный текст"
 
-#: ../gedit/gedit-ui.h:105
+#: ../gedit/gedit-ui.h:110
 msgid "Select _All"
 msgstr "В_ыделить все"
 
-#: ../gedit/gedit-ui.h:106
+#: ../gedit/gedit-ui.h:111
 msgid "Select the entire document"
 msgstr "Выделить весь документ"
 
 #. View menu
-#: ../gedit/gedit-ui.h:109
+#: ../gedit/gedit-ui.h:114
 msgid "_Highlight Mode"
 msgstr "_Режим подсветки синтаксиса"
 
 #. Search menu
-#: ../gedit/gedit-ui.h:112
+#: ../gedit/gedit-ui.h:117
 msgid "_Find..."
 msgstr "_Найти..."
 
-#: ../gedit/gedit-ui.h:113
+#: ../gedit/gedit-ui.h:118
 msgid "Search for text"
 msgstr "Поиск текста"
 
-#: ../gedit/gedit-ui.h:114
+#: ../gedit/gedit-ui.h:119
 msgid "Find Ne_xt"
 msgstr "Найти след_ующее"
 
-#: ../gedit/gedit-ui.h:115
+#: ../gedit/gedit-ui.h:120
 msgid "Search forwards for the same text"
 msgstr "Обратный поиск этого же текста"
 
-#: ../gedit/gedit-ui.h:116
+#: ../gedit/gedit-ui.h:121
 msgid "Find Pre_vious"
 msgstr "Найти пред_ыдущее"
 
-#: ../gedit/gedit-ui.h:117
+#: ../gedit/gedit-ui.h:122
 msgid "Search backwards for the same text"
 msgstr "Обратный поиск того же текста"
 
-#: ../gedit/gedit-ui.h:118
+#: ../gedit/gedit-ui.h:123
 msgid "_Replace..."
 msgstr "За_менить..."
 
-#: ../gedit/gedit-ui.h:119
+#: ../gedit/gedit-ui.h:124
 msgid "Search for and replace text"
 msgstr "Поиск и замена текста"
 
-#: ../gedit/gedit-ui.h:120
+#: ../gedit/gedit-ui.h:125
 msgid "_Clear Highlight"
 msgstr "О_чистить подсветку"
 
-#: ../gedit/gedit-ui.h:121
+#: ../gedit/gedit-ui.h:126
 msgid "Clear highlighting of search matches"
 msgstr "Очистить подсветку совпадений поиска"
 
-#: ../gedit/gedit-ui.h:122
+#: ../gedit/gedit-ui.h:127
 msgid "Go to _Line..."
 msgstr "Перейти к _строке..."
 
-#: ../gedit/gedit-ui.h:123
+#: ../gedit/gedit-ui.h:128
 msgid "Go to a specific line"
 msgstr "Перейти к указанной строке"
 
+#: ../gedit/gedit-ui.h:129
+msgid "Interactive search..."
+msgstr "Интерактивный поиск..."
+
+#: ../gedit/gedit-ui.h:130
+msgid "Interactively search for text"
+msgstr "Интерактивный поиск текста"
+
 #. Documents menu
-#: ../gedit/gedit-ui.h:126
+#: ../gedit/gedit-ui.h:133
 msgid "_Save All"
 msgstr "Со_хранить все"
 
-#: ../gedit/gedit-ui.h:127
+#: ../gedit/gedit-ui.h:134
 msgid "Save all open files"
 msgstr "Сохранить все открытые файлы"
 
-#: ../gedit/gedit-ui.h:128
+#: ../gedit/gedit-ui.h:135
 msgid "_Close All"
 msgstr "_Закрыть все"
 
-#: ../gedit/gedit-ui.h:129
+#: ../gedit/gedit-ui.h:136
 msgid "Close all open files"
 msgstr "Закрыть все открытые файлы"
 
-#: ../gedit/gedit-ui.h:130
+#: ../gedit/gedit-ui.h:137
+msgid "_Previous Document"
+msgstr "_Предыдущий документ"
+
+#: ../gedit/gedit-ui.h:138
+msgid "Activate previous document"
+msgstr "Активировать предыдущий документ"
+
+#: ../gedit/gedit-ui.h:139
+msgid "_Next Document"
+msgstr "_Следующий документ"
+
+#: ../gedit/gedit-ui.h:140
+msgid "Activate next document"
+msgstr "Активировать следующий документ"
+
+#: ../gedit/gedit-ui.h:141
 msgid "_Move to New Window"
 msgstr "Пере_местить в новое окно"
 
-#: ../gedit/gedit-ui.h:131
+#: ../gedit/gedit-ui.h:142
 msgid "Move the current document to a new window"
 msgstr "Переместить текущий документ в новое окно"
 
-#: ../gedit/gedit-ui.h:138
+#: ../gedit/gedit-ui.h:149
 msgid "Quit the program"
 msgstr "Выйти из программы"
 
-#: ../gedit/gedit-ui.h:143
+#: ../gedit/gedit-ui.h:154
 msgid "_Toolbar"
 msgstr "Панель _инструментов"
 
-#: ../gedit/gedit-ui.h:144
+#: ../gedit/gedit-ui.h:155
 msgid "Show or hide the toolbar in the current window"
 msgstr "Показать или скрыть панель инструментов в текущем окне"
 
-#: ../gedit/gedit-ui.h:146
+#: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
 msgstr "_Строка состояния"
 
-#: ../gedit/gedit-ui.h:147
+#: ../gedit/gedit-ui.h:158
 msgid "Show or hide the statusbar in the current window"
 msgstr "Показать или скрыть строку состояния текущего окна"
 
-#: ../gedit/gedit-ui.h:149
+#: ../gedit/gedit-ui.h:160
 msgid "Side _Pane"
 msgstr "Бо_ковая панель"
 
-#: ../gedit/gedit-ui.h:150
+#: ../gedit/gedit-ui.h:161
 msgid "Show or hide the side pane in the current window"
 msgstr "Показать или скрыть боковую панель в текущем окне"
 
-#: ../gedit/gedit-ui.h:156
+#: ../gedit/gedit-ui.h:167
 msgid "_Bottom Pane"
 msgstr "_Нижняя панель"
 
-#: ../gedit/gedit-ui.h:157
+#: ../gedit/gedit-ui.h:168
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Показать или скрыть нижнюю панель в текущем окне"
 
-#: ../gedit/gedit-utils.c:923
+#: ../gedit/gedit-utils.c:983
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Не удается найти файл \"%s\"."
 
-#: ../gedit/gedit-utils.c:927 ../gedit/gedit-utils.c:956
+#: ../gedit/gedit-utils.c:987 ../gedit/gedit-utils.c:1016
 msgid "Please check your installation."
 msgstr "Пожалуйста, проверьте вашу установку."
 
-#: ../gedit/gedit-utils.c:952
+#: ../gedit/gedit-utils.c:1012
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Не удалось найти необходимые виджеты в файле \"%s\"."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1336
+#: ../gedit/gedit-view.c:1337
 msgid "_Wrap Around"
 msgstr "Автоматически пере_ходить к началу документа"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1346
+#: ../gedit/gedit-view.c:1347
 msgid "Match _Entire Word Only"
 msgstr "Только _полные слова"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1356
+#: ../gedit/gedit-view.c:1357
 msgid "_Match Case"
 msgstr "Учитывать _регистр"
 
-#: ../gedit/gedit-view.c:1444
+#: ../gedit/gedit-view.c:1445
 msgid "String you want to search for"
 msgstr "Строка, которую вы хотите найти"
 
-#: ../gedit/gedit-view.c:1453
+#: ../gedit/gedit-view.c:1454
 msgid "Line you want to move the cursor to"
 msgstr "Строка куда вы хотите переместить курсор"
 
-#: ../gedit/gedit-window.c:681
+#: ../gedit/gedit-window.c:773
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Использовать режим подсветки \"%s\""
 
-#: ../gedit/gedit-window.c:734
-msgid "Normal"
-msgstr "Обычный"
+#. add the "None" item before all the others
+#. Translators: "None" means that no highlight mode is selected in the
+#. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
+#: ../gedit/gedit-window.c:828
+msgid "None"
+msgstr "Нет"
 
-#: ../gedit/gedit-window.c:735
-msgid "Use Normal highlight mode"
-msgstr "Использовать обычный режим подсветки синтаксиса"
+#: ../gedit/gedit-window.c:829
+msgid "Disable syntax highlighting"
+msgstr "Отключить подсветку синтаксиса"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:861 ../gedit/gedit-window.c:886
-#: ../gedit/recent-files/egg-recent-view-gtk.c:346
-#: ../gedit/recent-files/egg-recent-view-uimanager.c:205
+#: ../gedit/gedit-window.c:1100
 #, c-format
 msgid "Open '%s'"
 msgstr "Открыть '%s'"
 
-#: ../gedit/gedit-window.c:1009
+#: ../gedit/gedit-window.c:1219
 msgid "Save"
 msgstr "Сохранить"
 
-#: ../gedit/gedit-window.c:1114
+#: ../gedit/gedit-window.c:1350
 msgid "Open a recently used file"
 msgstr "Открыть недавно использованный файл"
 
-#: ../gedit/gedit-window.c:1121
+#: ../gedit/gedit-window.c:1357
 msgid "Open"
 msgstr "Открыть"
 
-#: ../gedit/gedit-window.c:1210 ../gedit/gedit-window.c:1809
+#: ../gedit/gedit-window.c:1446 ../gedit/gedit-window.c:2093
 #, c-format
 msgid "Activate %s"
 msgstr "Активировать %s"
@@ -2497,11 +2565,11 @@ msgstr "Слов"
 msgid "_Update"
 msgstr "Об_новить"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:405
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:400
 msgid "_Document Statistics"
 msgstr "Показать статистику _документа"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:407
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:402
 msgid "Get statistic info on current document"
 msgstr "Выдать статистическую информацию о текущем документе"
 
@@ -2517,79 +2585,79 @@ msgstr "Внешние инструменты"
 msgid "You must be inside a word to run this command"
 msgstr "Вы должны быть внутри слова для запуска данной команды"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:299
 msgid "Running tool:"
 msgstr "Запускается утилита:"
 
-#: ../plugins/externaltools/tools/functions.py:308
+#: ../plugins/externaltools/tools/functions.py:322
 msgid "Done."
 msgstr "Готово."
 
-#: ../plugins/externaltools/tools/functions.py:310
+#: ../plugins/externaltools/tools/functions.py:324
 msgid "Exited"
 msgstr "Выход"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Ничего"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Текущий документ"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Текущее выделение"
 
-#: ../plugins/externaltools/tools/manager.py:45
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Текущая строка"
 
-#: ../plugins/externaltools/tools/manager.py:46
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Текущее слово"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Вставить в панель вывода"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Создать новый документ"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Добавить к текущему документу"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Заменить текущий документ"
 
-#: ../plugins/externaltools/tools/manager.py:53
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Заменить текущее выделение"
 
-#: ../plugins/externaltools/tools/manager.py:54
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Вставить в позиции курсора"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Все _документы"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Все документы исключая несохраненные"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Только локальные файлы"
 
-#: ../plugins/externaltools/tools/manager.py:60
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Только удаленные файлы"
 
-#: ../plugins/externaltools/tools/manager.py:61
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Только неозаглавленные документы"
 
@@ -2613,13 +2681,13 @@ msgstr "Новый инструмент"
 msgid "This accelerator is already bound to %s"
 msgstr "Этот акселератор уже привязан к %s"
 
-#: ../plugins/externaltools/tools/manager.py:329
-#: ../plugins/snippets/snippets/SnippetsDialog.py:562
+#: ../plugins/externaltools/tools/manager.py:333
+#: ../plugins/snippets/snippets/SnippetsDialog.py:600
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Введите новую комбинацию клавиш, или нажмите Backspace для очистки"
 
-#: ../plugins/externaltools/tools/manager.py:331
-#: ../plugins/snippets/snippets/SnippetsDialog.py:564
+#: ../plugins/externaltools/tools/manager.py:335
+#: ../plugins/snippets/snippets/SnippetsDialog.py:602
 msgid "Type a new accelerator"
 msgstr "Введите новую комбинацию клавиш"
 
@@ -2686,6 +2754,312 @@ msgstr "Со_хранить:"
 msgid "_Tools:"
 msgstr "С_ервис:"
 
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+msgid "Enable Restore of Remote Locations"
+msgstr "Включить или выключить удалённые адреса"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+msgid "File Browser Filter Mode"
+msgstr "Режим фильтра обозревателя файлов"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+msgid "File Browser Filter Pattern"
+msgstr "Шаблон фильтра обозревателя файлов"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+msgid "File Browser Root Directory"
+msgstr "Корневой каталог обозревателя файлов"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+msgid "File Browser Virtual Root Directory"
+msgstr "Виртуальный корневой каталог обозревателя файлов"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+msgid ""
+"If TRUE the file browser plugin will view the directory of the first opened "
+"document given that the file browser hasn't been used yet. (Thus this "
+"generally applies to opening a document from the command line or opening it "
+"with nautilus etc)"
+msgstr "Если этот параметр установлен, модуль обозревателя файлов откроется на каталоге первого открытого файла (как правило, применимо при открытии документа из командной строки или из nautius и тд)"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+msgid "Open With Tree View"
+msgstr "Открыть в режиме дерева"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+msgid ""
+"Open the tree view when the file browser plugin gets loaded instead of the "
+"bookmarks view"
+msgstr "Открыть просмотр в режиме дерева при загрузке модуля обозревателя файлов вместо режима закладок"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+msgid "Set Location To First Document"
+msgstr "Установить адрес на первый документ"
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+msgid "Sets whether to enable restoring of remote locations."
+msgstr "Устанвливает, разрешено ли восстановление из удалённых адресов."
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+msgid ""
+"The file browser root directory to use when loading the file browser plugin "
+"and onload/tree_view is TRUE."
+msgstr "Корневой каталог обозревателя файлов при загрузке модуля обозревателя файлов, когда onload/tree_view установлен."
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+msgid ""
+"The file browser virtual root directory to use when loading the file browser "
+"plugin when onload/tree_view is TRUE. The virtual root must always be below "
+"the actual root."
+msgstr "Виртуальный корневой каталог обозревателя файлов при загрузке модуля обозревателя, если установлен параметр onload/tree_view. Виртуальный корневой каталог всегда должен быть ниже настрящего корня.."
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+msgid ""
+"The filter pattern to filter the file browser with. This filter works on top "
+"of the filter_mode."
+msgstr "Шаблон фильтра для фильтрации файлов в обозревателе файлов. Этот фильтр работает поверх filter_mode."
+
+#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+msgid ""
+"This value determines what files get filtered from the file browser. Valid "
+"values are: none (filter nothing), hidden (filter hidden files), binary "
+"(filter binary files) and hidden_and_binary (filter both hidden and binary "
+"files)."
+msgstr "Это значение определяет, какие файлы должны быть отфильтрованы из обозревателя. Допустимые значения: none (ничего не фильтровать), hidden (фильтровать скрытые файлы), binary (фильтровать бинарные файлы), hidden_and_binary (фильтровать скрытые и бинарные файлы)."
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr "Простой доступ к файлам из боковой панели"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "Панель обозревателя файлов"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:360
+msgid "_Set root to active document"
+msgstr "_Установить корень на активный документ"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:362
+msgid "Set the root to the active document location"
+msgstr "Установить корень на адрес активного документа"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:364
+msgid "_Open terminal here"
+msgstr "_Открыть терминал здесь"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:366
+msgid "Open a terminal at the currently opened directory"
+msgstr "Открыть терминал в открытом в текущий момент каталоге"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:478
+msgid "File Browser"
+msgstr "Обозреватель файлов"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:572
+msgid "An error occurred while creating a new directory"
+msgstr "Произошла ошибка при создании нового каталога"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:575
+msgid "An error occurred while creating a new file"
+msgstr "Произошла ошибка при создании нового файла"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:580
+msgid "An error occurred while renaming a file or directory"
+msgstr "Произошла ошибка при удалении файла или каталога"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:585
+msgid "An error occurred while deleting a file or directory"
+msgstr "Произошла ошибка при удалении файла или каталога"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:590
+msgid "An error occurred while opening a directory in the file manager"
+msgstr "Произошла ошибка при открытии каталога в менеджере файлов"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:594
+msgid "An error occurred while setting a root directory"
+msgstr "Произошла ошибка при установке корневого каталога"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
+msgid "An error occurred while loading a directory"
+msgstr "При загрузке каталога произошла ошибка"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
+msgid "An error occurred"
+msgstr "Произошла ошибка"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:825
+msgid ""
+"Cannot move file to trash, do you\n"
+"want to delete immediately?"
+msgstr ""
+"Не удаётся переместить файл в корзину,\n"
+"вы действительно хотите удалить его безвозвратно?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:828
+#, c-format
+msgid "The file \"%s\" cannot be moved to the trash."
+msgstr "Не удаётся выбросить в корзину файл \"%s\""
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:864
+#, c-format
+msgid ""
+"Are you sure you want to\n"
+"permanently delete \"%s\"?"
+msgstr ""
+"Вы действительно хотите\n"
+"безвозвратно удалить \"%s\"?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
+msgid "If you delete an item it is permanently lost."
+msgstr "если вы удалите элемент, он будет безвозвратно утрачен."
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2418
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
+msgid "Invalid uri"
+msgstr "Неверный uri"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2776
+msgid "file"
+msgstr "файл"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2797
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2844
+msgid ""
+"The new file is currently filtered out. You need to adjust your filter "
+"settings to make the file visible"
+msgstr "Новый файл сейчас отфильтрован. Необходимо настроить фильтр, чтобы сделать этот файл видимым"
+
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2825
+msgid "directory"
+msgstr "каталог"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:719
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
+msgid "_New Directory"
+msgstr "_Создать каталог"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
+msgid "Add new empty directory"
+msgstr "Создать новый пустой каталог"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
+msgid "New F_ile"
+msgstr "С_оздать файл"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
+msgid "Add new empty file"
+msgstr "Создать новый пустой файл"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
+msgid "Up"
+msgstr "Вверх"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
+msgid "Open the parent folder"
+msgstr "Сохранить папку верхнего уровня"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+msgid "_Rename"
+msgstr "_Переименовать"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
+msgid "Rename selected file or directory"
+msgstr "Переименовать выделенный файл или каталог"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+msgid "_Move To Trash"
+msgstr "_Удалить в корзину"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
+msgid "Move selected file or directory to trash"
+msgstr "Удалить выделенный файл или каталог в корзину"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+msgid "_Delete"
+msgstr "_Удалить"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
+msgid "Delete selected file or directory"
+msgstr "Удалить выделенный текст или каталог"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+msgid "_Previous Location"
+msgstr "_Предыдущий адрес"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+msgid "Go to the previous visited location"
+msgstr "Перейти к предыдущему посещенному адресу"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "_Next Location"
+msgstr "_Следующий адрес"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "Go to the next visited location"
+msgstr "Перейти к следующему посещенному адресу"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
+msgid "Re_fresh View"
+msgstr "О_бновить вид"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
+msgid "Refresh the view"
+msgstr "Обновить вид"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
+msgid "_View Directory"
+msgstr "Прос_мотреть каталог"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
+msgid "View directory in file manager"
+msgstr "Просмотреть каталог в менеджере файлов"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+msgid "Show _Hidden"
+msgstr "Отображать _скрытые"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+msgid "Show hidden files and directories"
+msgstr "Отображать скрытые файлы и каталоги"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+msgid "Show _Binary"
+msgstr "Отображать _двоичные"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+msgid "Show binary files"
+msgstr "Отображать двоичные файлы"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:949
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
+msgid "Previous location"
+msgstr "Предыдущий адрес"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:936
+msgid "Go to previous location"
+msgstr "Перейти к предыдущему адресу"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:942
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
+msgid "Go to a previously opened location"
+msgstr "Перейти к предыдущему открытому адресу"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+msgid "Next location"
+msgstr "Следующий адрес"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:968
+msgid "Go to next location"
+msgstr "Перейти к следующему адресу"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1129
+msgid "Advanced filtering"
+msgstr "Дополнительная фильтрация"
+
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
 msgstr "Сделать о_тступ"
@@ -2719,8 +3093,8 @@ msgid "Modelines"
 msgstr "Строки режимов"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
-msgid "Opens an interactive python console in the bottom panel."
-msgstr "Открыть интерактивную консоль python в нижней панели."
+msgid "Interactive python console standing in the bottom panel"
+msgstr "Интерактивная панель python в нижней панели"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -2766,7 +3140,8 @@ msgstr "_Редактировать фрагмент:"
 msgid "_Snippets:"
 msgstr "_Фрагменты:"
 
-#: ../plugins/snippets/snippets/snippets.glade.h:7
+#. "tab" here means the tab key, not the notebook tab!
+#: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "_Tab trigger:"
 msgstr "_Переключатель вкладок:"
 
@@ -2778,13 +3153,19 @@ msgstr "Управление _фрагментами..."
 msgid "Manage snippets"
 msgstr "Управление фрагментами"
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:54
+#: ../plugins/snippets/snippets/SnippetsDialog.py:53
 msgid "Add a new snippet..."
 msgstr "Добавить новый фрагмент..."
 
-#: ../plugins/snippets/snippets/SnippetsDialog.py:109
+#: ../plugins/snippets/snippets/SnippetsDialog.py:108
 msgid "Global"
 msgstr "Глобальный"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:476
+msgid ""
+"This is not a valid tab trigger. Triggers can either contain letters or a "
+"single, non alphanumeric, character like {, [, etcetera."
+msgstr "Это неверный переключатель вкладок. Переключатели могут содержать либо буквы, либо один не-алфавитноцифровой символ, такой как {, [, и т.д."
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -2858,291 +3239,295 @@ msgstr "Африкаанс"
 msgid "Amharic"
 msgstr "Амхарский"
 
-#: ../plugins/spell/gedit-spell-checker.c:81
+#: ../plugins/spell/gedit-spell-checker.c:82
+msgid "Arabic (Egypt)"
+msgstr "Арабский (Египет)"
+
+#: ../plugins/spell/gedit-spell-checker.c:83
 msgid "Azerbaijani"
 msgstr "Азербайджанский"
 
-#: ../plugins/spell/gedit-spell-checker.c:82
+#: ../plugins/spell/gedit-spell-checker.c:84
 msgid "Belarusian"
 msgstr "Белорусский"
 
-#: ../plugins/spell/gedit-spell-checker.c:83
+#: ../plugins/spell/gedit-spell-checker.c:85
 msgid "Bulgarian"
 msgstr "Болгарский"
 
-#: ../plugins/spell/gedit-spell-checker.c:84
+#: ../plugins/spell/gedit-spell-checker.c:86
 msgid "Bengali"
 msgstr "Бенгальский"
 
-#: ../plugins/spell/gedit-spell-checker.c:85
+#: ../plugins/spell/gedit-spell-checker.c:87
 msgid "Breton"
 msgstr "Бретонский"
 
-#: ../plugins/spell/gedit-spell-checker.c:86
+#: ../plugins/spell/gedit-spell-checker.c:88
 msgid "Catalan"
 msgstr "Каталонский"
 
-#: ../plugins/spell/gedit-spell-checker.c:87
+#: ../plugins/spell/gedit-spell-checker.c:89
 msgid "Czech"
 msgstr "Чешский"
 
-#: ../plugins/spell/gedit-spell-checker.c:88
+#: ../plugins/spell/gedit-spell-checker.c:90
 msgid "Welsh"
 msgstr "Валлийский"
 
-#: ../plugins/spell/gedit-spell-checker.c:89
+#: ../plugins/spell/gedit-spell-checker.c:91
 msgid "Danish"
 msgstr "Датский"
 
-#: ../plugins/spell/gedit-spell-checker.c:90
+#: ../plugins/spell/gedit-spell-checker.c:92
 msgid "German (Austria)"
 msgstr "Немецкий (Австрия)"
 
-#: ../plugins/spell/gedit-spell-checker.c:91
+#: ../plugins/spell/gedit-spell-checker.c:93
 msgid "German (Germany)"
 msgstr "Немецкий (Германия)"
 
-#: ../plugins/spell/gedit-spell-checker.c:92
+#: ../plugins/spell/gedit-spell-checker.c:94
 msgid "German (Swiss)"
 msgstr "Немецкий (Швейцария)"
 
-#: ../plugins/spell/gedit-spell-checker.c:94
+#: ../plugins/spell/gedit-spell-checker.c:96
 msgid "English (American)"
 msgstr "Английский (американский)"
 
-#: ../plugins/spell/gedit-spell-checker.c:95
+#: ../plugins/spell/gedit-spell-checker.c:97
 msgid "English (British)"
 msgstr "Английский (британский)"
 
-#: ../plugins/spell/gedit-spell-checker.c:96
+#: ../plugins/spell/gedit-spell-checker.c:98
 msgid "English (Canadian)"
 msgstr "Английский (канадский)"
 
-#: ../plugins/spell/gedit-spell-checker.c:97
+#: ../plugins/spell/gedit-spell-checker.c:99
 msgid "Esperanto"
 msgstr "Эсперанто"
 
-#: ../plugins/spell/gedit-spell-checker.c:98
+#: ../plugins/spell/gedit-spell-checker.c:100
 msgid "Spanish"
 msgstr "Испанский"
 
-#: ../plugins/spell/gedit-spell-checker.c:99
+#: ../plugins/spell/gedit-spell-checker.c:101
 msgid "Estonian"
 msgstr "Эстонский"
 
-#: ../plugins/spell/gedit-spell-checker.c:100
+#: ../plugins/spell/gedit-spell-checker.c:102
 msgid "Persian"
 msgstr "Персидский"
 
-#: ../plugins/spell/gedit-spell-checker.c:101
+#: ../plugins/spell/gedit-spell-checker.c:103
 msgid "Finnish"
 msgstr "Финский"
 
-#: ../plugins/spell/gedit-spell-checker.c:102
+#: ../plugins/spell/gedit-spell-checker.c:104
 msgid "Faroese"
 msgstr "Фарерский"
 
-#: ../plugins/spell/gedit-spell-checker.c:103
+#: ../plugins/spell/gedit-spell-checker.c:105
 msgid "French (France)"
 msgstr "Французский (Франция)"
 
-#: ../plugins/spell/gedit-spell-checker.c:104
+#: ../plugins/spell/gedit-spell-checker.c:106
 msgid "French (Swiss)"
 msgstr "Французский (Швейцария)"
 
-#: ../plugins/spell/gedit-spell-checker.c:105
+#: ../plugins/spell/gedit-spell-checker.c:107
 msgid "Irish"
 msgstr "Ирландский"
 
-#: ../plugins/spell/gedit-spell-checker.c:106
+#: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Scottish Gaelic"
 msgstr "Шотландский гаэльский"
 
-#: ../plugins/spell/gedit-spell-checker.c:107
+#: ../plugins/spell/gedit-spell-checker.c:109
 msgid "Gallegan"
 msgstr "Галлеган"
 
-#: ../plugins/spell/gedit-spell-checker.c:108
+#: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Manx Gaelic"
 msgstr "Манкс гаэльский"
 
-#: ../plugins/spell/gedit-spell-checker.c:110
+#: ../plugins/spell/gedit-spell-checker.c:112
 msgid "Hindi"
 msgstr "Хинди"
 
-#: ../plugins/spell/gedit-spell-checker.c:111
+#: ../plugins/spell/gedit-spell-checker.c:113
 msgid "Croatian"
 msgstr "Хорватский"
 
-#: ../plugins/spell/gedit-spell-checker.c:112
+#: ../plugins/spell/gedit-spell-checker.c:114
 msgid "Upper Sorbian"
 msgstr "Лужицкий"
 
-#: ../plugins/spell/gedit-spell-checker.c:113
+#: ../plugins/spell/gedit-spell-checker.c:115
 msgid "Hungarian"
 msgstr "Венгерский"
 
-#: ../plugins/spell/gedit-spell-checker.c:114
+#: ../plugins/spell/gedit-spell-checker.c:116
 msgid "Interlingua (IALA)"
 msgstr "Интерлингва (IALA)"
 
-#: ../plugins/spell/gedit-spell-checker.c:115
+#: ../plugins/spell/gedit-spell-checker.c:117
 msgid "Indonesian"
 msgstr "Индонезийский"
 
-#: ../plugins/spell/gedit-spell-checker.c:116
+#: ../plugins/spell/gedit-spell-checker.c:118
 msgid "Icelandic"
 msgstr "Исландский"
 
-#: ../plugins/spell/gedit-spell-checker.c:117
+#: ../plugins/spell/gedit-spell-checker.c:119
 msgid "Italian"
 msgstr "Итальянский"
 
-#: ../plugins/spell/gedit-spell-checker.c:118
+#: ../plugins/spell/gedit-spell-checker.c:120
 msgid "Kurdish"
 msgstr "Курдский"
 
-#: ../plugins/spell/gedit-spell-checker.c:119
+#: ../plugins/spell/gedit-spell-checker.c:121
 msgid "Latin"
 msgstr "Латинский"
 
-#: ../plugins/spell/gedit-spell-checker.c:120
+#: ../plugins/spell/gedit-spell-checker.c:122
 msgid "Lithuanian"
 msgstr "Литовский"
 
-#: ../plugins/spell/gedit-spell-checker.c:121
+#: ../plugins/spell/gedit-spell-checker.c:123
 msgid "Latvian"
 msgstr "Латышский"
 
-#: ../plugins/spell/gedit-spell-checker.c:122
+#: ../plugins/spell/gedit-spell-checker.c:124
 msgid "Malagasy"
 msgstr "Малагасийский"
 
-#: ../plugins/spell/gedit-spell-checker.c:123
+#: ../plugins/spell/gedit-spell-checker.c:125
 msgid "Maori"
 msgstr "Маори"
 
-#: ../plugins/spell/gedit-spell-checker.c:124
+#: ../plugins/spell/gedit-spell-checker.c:126
 msgid "Macedonian"
 msgstr "Македонский"
 
-#: ../plugins/spell/gedit-spell-checker.c:125
+#: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Mongolian"
 msgstr "Монгольский"
 
-#: ../plugins/spell/gedit-spell-checker.c:126
+#: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Marathi"
 msgstr "Марати"
 
-#: ../plugins/spell/gedit-spell-checker.c:127
+#: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Malay"
 msgstr "Малайский"
 
-#: ../plugins/spell/gedit-spell-checker.c:128
+#: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Maltese"
 msgstr "Мальтийский"
 
-#: ../plugins/spell/gedit-spell-checker.c:129
+#: ../plugins/spell/gedit-spell-checker.c:131
 msgid "Norwegian Bokmal"
 msgstr "Норвежский Бокмал"
 
-#: ../plugins/spell/gedit-spell-checker.c:130
+#: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Dutch"
 msgstr "Голландский"
 
-#: ../plugins/spell/gedit-spell-checker.c:131
+#: ../plugins/spell/gedit-spell-checker.c:133
 msgid "Norwegian Nynorsk"
 msgstr "Норвежский Нюнорск"
 
-#: ../plugins/spell/gedit-spell-checker.c:132
+#: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Norwegian"
 msgstr "Норвежский"
 
-#: ../plugins/spell/gedit-spell-checker.c:133
+#: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Nyanja"
 msgstr "Ньянджа"
 
-#: ../plugins/spell/gedit-spell-checker.c:134
+#: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Polish"
 msgstr "Польский"
 
-#: ../plugins/spell/gedit-spell-checker.c:135
+#: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Portuguese (Portugal)"
 msgstr "Португальский (Португалия)"
 
-#: ../plugins/spell/gedit-spell-checker.c:136
+#: ../plugins/spell/gedit-spell-checker.c:138
 msgid "Portuguese (Brazilian)"
 msgstr "Португальский (Бразилия)"
 
-#: ../plugins/spell/gedit-spell-checker.c:137
+#: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Quechua"
 msgstr "Кечуа"
 
-#: ../plugins/spell/gedit-spell-checker.c:139
+#: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Russian"
 msgstr "Русский"
 
-#: ../plugins/spell/gedit-spell-checker.c:140
+#: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Kinyarwanda"
 msgstr "Кинъярванда"
 
-#: ../plugins/spell/gedit-spell-checker.c:141
+#: ../plugins/spell/gedit-spell-checker.c:143
 msgid "Sardinian"
 msgstr "Сардинский"
 
-#: ../plugins/spell/gedit-spell-checker.c:142
+#: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Slovak"
 msgstr "Словацкий"
 
-#: ../plugins/spell/gedit-spell-checker.c:143
+#: ../plugins/spell/gedit-spell-checker.c:145
 msgid "Slovenian"
 msgstr "Словенский"
 
-#: ../plugins/spell/gedit-spell-checker.c:144
+#: ../plugins/spell/gedit-spell-checker.c:146
 msgid "Swedish"
 msgstr "Шведский"
 
-#: ../plugins/spell/gedit-spell-checker.c:145
+#: ../plugins/spell/gedit-spell-checker.c:147
 msgid "Swahili"
 msgstr "Суахили"
 
-#: ../plugins/spell/gedit-spell-checker.c:146
+#: ../plugins/spell/gedit-spell-checker.c:148
 msgid "Tamil"
 msgstr "Тамильский"
 
-#: ../plugins/spell/gedit-spell-checker.c:147
+#: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tetum"
 msgstr "Тетум"
 
-#: ../plugins/spell/gedit-spell-checker.c:148
+#: ../plugins/spell/gedit-spell-checker.c:150
 msgid "Tagalog"
 msgstr "Тагалог"
 
-#: ../plugins/spell/gedit-spell-checker.c:149
+#: ../plugins/spell/gedit-spell-checker.c:151
 msgid "Tswana"
 msgstr "Банту"
 
-#: ../plugins/spell/gedit-spell-checker.c:151
+#: ../plugins/spell/gedit-spell-checker.c:153
 msgid "Ukrainian"
 msgstr "Украинский"
 
-#: ../plugins/spell/gedit-spell-checker.c:152
+#: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Uzbek"
 msgstr "Узбекский"
 
-#: ../plugins/spell/gedit-spell-checker.c:154
+#: ../plugins/spell/gedit-spell-checker.c:156
 msgid "Walloon"
 msgstr "Валлонский"
 
-#: ../plugins/spell/gedit-spell-checker.c:155
+#: ../plugins/spell/gedit-spell-checker.c:157
 msgid "Yiddish"
 msgstr "Идиш"
 
-#: ../plugins/spell/gedit-spell-checker.c:156
+#: ../plugins/spell/gedit-spell-checker.c:158
 msgid "Zulu"
 msgstr "Зулу"
 
-#: ../plugins/spell/gedit-spell-checker.c:828
+#: ../plugins/spell/gedit-spell-checker.c:830
 msgid "Default"
 msgstr "Исходный"
 
@@ -3162,12 +3547,12 @@ msgstr "(правильное написание)"
 msgid "Completed spell checking"
 msgstr "Проверка завершена"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:245
+#: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Не удалось найти необходимые виджеты в файле \"%s\"."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:266
+#: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
 msgstr "Языки"
 
@@ -3279,20 +3664,20 @@ msgstr "Проверяет орфографию в текущем докумен
 msgid "Spell checker"
 msgstr "Проверка орфографии"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:480
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
 msgid "Select the group of tags you want to use"
 msgstr "Выбрать группу тегов, которую вы хотите использовать"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:496
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
 msgid "Available Tag Lists"
 msgstr "Списки доступных тегов"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:499
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:527
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
 msgid "Tags"
 msgstr "Теги"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:512
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Дважды щелкните на теге, чтобы вставить его в текущий документ"
 
