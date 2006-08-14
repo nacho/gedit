@@ -266,64 +266,45 @@ gedit_prefs_manager_window_state_can_set (void)
 	return TRUE;
 }
 
-/* Window height */
-gint
-gedit_prefs_manager_get_window_height (void)
-{
-	if (window_height == -1)
-		window_height = gnome_config_get_int (GPM_WINDOW_HEIGHT "=" GPM_DEFAULT_WINDOW_HEIGHT_STR);
-
-	return window_height;
-}
-
-gint
-gedit_prefs_manager_get_default_window_height (void)
-{
-	return GPM_DEFAULT_WINDOW_HEIGHT;
-}
-
+/* Window size */
 void
-gedit_prefs_manager_set_window_height (gint wh)
+gedit_prefs_manager_get_window_size (gint *width, gint *height)
 {
-	g_return_if_fail (wh > -1);
+	g_return_if_fail (width != NULL && height != NULL);
 
-	window_height = wh;
-	gnome_config_set_int (GPM_WINDOW_HEIGHT, wh);
-}
-
-gboolean 
-gedit_prefs_manager_window_height_can_set (void)
-{
-	return TRUE;
-}
-
-/* Window width */
-gint
-gedit_prefs_manager_get_window_width (void)
-{
 	if (window_width == -1)
 		window_width = gnome_config_get_int (GPM_WINDOW_WIDTH "=" GPM_DEFAULT_WINDOW_WIDTH_STR);
 
-	return window_width;
+	if (window_height == -1)
+		window_height = gnome_config_get_int (GPM_WINDOW_HEIGHT "=" GPM_DEFAULT_WINDOW_HEIGHT_STR);
+
+	*width = window_width;
+	*height = window_height;
 }
 
-gint 
-gedit_prefs_manager_get_default_window_width (void)
+void
+gedit_prefs_manager_get_default_window_size (gint *width, gint *height)
 {
-	return GPM_DEFAULT_WINDOW_WIDTH;
+	g_return_if_fail (width != NULL && height != NULL);
+
+	*width = GPM_DEFAULT_WINDOW_WIDTH;
+	*height = GPM_DEFAULT_WINDOW_HEIGHT;;
 }
 
-void 
-gedit_prefs_manager_set_window_width (gint ww)
+void
+gedit_prefs_manager_set_window_size (gint width, gint height)
 {
-	g_return_if_fail (ww > -1);
-	
-	window_width = ww;
-	gnome_config_set_int (GPM_WINDOW_WIDTH, ww);
+	g_return_if_fail (width > -1 && height > -1);
+
+	window_width = width;
+	window_height = height;
+
+	gnome_config_set_int (GPM_WINDOW_WIDTH, width);
+	gnome_config_set_int (GPM_WINDOW_HEIGHT, height);
 }
 
 gboolean 
-gedit_prefs_manager_window_width_can_set (void)
+gedit_prefs_manager_window_size_can_set (void)
 {
 	return TRUE;
 }

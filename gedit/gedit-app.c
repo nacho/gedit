@@ -281,23 +281,20 @@ gedit_app_create_window_real (GeditApp    *app,
 	if (set_geometry)
 	{
 		GdkWindowState state;
+		gint w, h;
 
 		state = gedit_prefs_manager_get_window_state ();
 
 		if ((state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
 		{
-			gtk_window_set_default_size (GTK_WINDOW (window),
-						     gedit_prefs_manager_get_default_window_width (),
-						     gedit_prefs_manager_get_default_window_height ());
-
+			gedit_prefs_manager_get_default_window_size (&w, &h);
+			gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 			gtk_window_maximize (GTK_WINDOW (window));
 		}
 		else
 		{
-			gtk_window_set_default_size (GTK_WINDOW (window),
-						     gedit_prefs_manager_get_window_width (),
-						     gedit_prefs_manager_get_window_height ());
-
+			gedit_prefs_manager_get_window_size (&w, &h);
+			gtk_window_set_default_size (GTK_WINDOW (window), w, h);
 			gtk_window_unmaximize (GTK_WINDOW (window));
 		}
 

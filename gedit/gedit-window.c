@@ -144,11 +144,9 @@ gedit_window_destroy (GtkObject *object)
 
 	window = GEDIT_WINDOW (object);
 
-	if (gedit_prefs_manager_window_height_can_set ())
-		gedit_prefs_manager_set_window_height (window->priv->height);
-
-	if (gedit_prefs_manager_window_width_can_set ())
-		gedit_prefs_manager_set_window_width (window->priv->width);
+	if (gedit_prefs_manager_window_size_can_set ())
+		gedit_prefs_manager_set_window_size (window->priv->width,
+						     window->priv->height);
 
 	if (gedit_prefs_manager_window_state_can_set ())
 		gedit_prefs_manager_set_window_state (window->priv->window_state);
@@ -1589,10 +1587,10 @@ clone_window (GeditWindow *origin)
 				     
 	if ((origin->priv->window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0)
 	{
-		gtk_window_set_default_size (window, 
-					     gedit_prefs_manager_get_default_window_width (),
-					     gedit_prefs_manager_get_default_window_height ());
-					     
+		gint w, h;
+
+		gedit_prefs_manager_get_default_window_size (&w, &h);
+		gtk_window_set_default_size (window, w, h);
 		gtk_window_maximize (window);
 	}
 	else
