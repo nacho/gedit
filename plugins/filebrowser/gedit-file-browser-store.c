@@ -217,9 +217,7 @@ set_gvalue_from_node (GValue          *value,
 	else {
 		uri = gnome_vfs_uri_to_string (node->uri, 
 		                               GNOME_VFS_URI_HIDE_NONE);
-		g_value_set_string (value, uri);
-
-		g_free (uri);
+		g_value_take_string (value, uri);
 	}
 }
 
@@ -578,8 +576,7 @@ gedit_file_browser_store_get_value (GtkTreeModel * tree_model,
 			    gnome_vfs_uri_to_string (node->uri,
 						     GNOME_VFS_URI_HIDE_NONE);
 
-		g_value_set_string (value, uri);
-		g_free (uri);
+		g_value_take_string (value, uri);
 		break;
 	case GEDIT_FILE_BROWSER_STORE_COLUMN_NAME:
 		g_value_set_string (value, node->name);

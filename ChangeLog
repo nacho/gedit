@@ -1,5 +1,10 @@
 2006-08-15  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-store.c: changed 
+	g_value_set_string to g_value_take_string to save a string dup
+
+2006-08-15  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/filebrowser/gedit-file-bookmarks-store.[ch]: fixed
 	bug 350553 – Filebrowser plugin: Double separators if remote loc. 
 	list is empty
