@@ -128,6 +128,10 @@ gedit_window_finalize (GObject *object)
 					      G_CALLBACK (app_lockdown_changed),
 					      window);
 
+	g_signal_handlers_disconnect_by_func (window->priv->recent_manager,
+					      G_CALLBACK (recent_manager_changed),
+					      window);
+
 	g_object_unref (window->priv->manager);
 
 	g_object_unref (window->priv->window_group);
@@ -261,8 +265,8 @@ gedit_window_screen_changed (GtkWidget *widget,
 }
 
 static void
-gedit_window_tab_removed (GeditWindow         *window,
-			      GeditTab *tab) 
+gedit_window_tab_removed (GeditWindow *window,
+			  GeditTab    *tab) 
 {
 	gedit_plugins_engine_garbage_collect();
 }
