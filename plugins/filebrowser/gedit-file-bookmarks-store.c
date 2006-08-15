@@ -138,7 +138,7 @@ add_node (GeditFileBookmarksStore * model, GdkPixbuf * pixbuf,
 		*iter = newiter;
 }
 
-static void
+static gboolean
 add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 	 gchar * name, guint flags, GtkTreeIter * iter)
 {
@@ -150,7 +150,7 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 	/* CHECK: how bad is this? */
 	if (!gnome_vfs_uri_exists (uri)) {
 		gnome_vfs_uri_unref (uri);
-		return;
+		return FALSE;
 	}
 
 	if (flags & GEDIT_FILE_BOOKMARKS_STORE_IS_HOME)
@@ -178,6 +178,8 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 
 	if (free_name)
 		g_free (name);
+	
+	return TRUE;
 }
 
 static void
@@ -212,11 +214,6 @@ init_special_directories (GeditFileBookmarksStore * model)
 		gnome_vfs_uri_unref (uri);
 
 	g_free (local);
-
-	/* Special dir separator */
-	add_node (model, NULL, NULL, NULL,
-		  GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR |
-		  GEDIT_FILE_BOOKMARKS_STORE_IS_SEPARATOR, NULL);
 }
 
 static void
@@ -266,7 +263,8 @@ add_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 		g_free (name);
 
 	flags = flags & (GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE |
-			 GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT);
+			 GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT |
+			 GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT);
 
 	if (flags)
 		check_volume_separator (model, flags, TRUE);
@@ -292,7 +290,7 @@ process_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 		else if (vtype == GNOME_VFS_VOLUME_TYPE_MOUNTPOINT)
 			flags = GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT;
 		else
-			flags = 0;
+			flags = GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT;
 
 		add_volume (model, volume, NULL, flags, NULL);
 	} else if (root && !*root) {
@@ -303,7 +301,7 @@ process_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 
 			add_volume (model, volume, "File System",
 				    GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT |
-				    GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT,
+				    GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE,
 				    NULL);
 		}
 
@@ -378,7 +376,7 @@ init_bookmarks (GeditFileBookmarksStore * model)
 					uri = gnome_vfs_uri_new (unescape);
 					g_free (unescape);
 
-					add_uri (model, uri, NULL,
+					added = add_uri (model, uri, NULL,
 						 GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
 						 NULL);
 				} else {
@@ -389,12 +387,10 @@ init_bookmarks (GeditFileBookmarksStore * model)
 					uri = gnome_vfs_uri_new (unescape);
 					g_free (unescape);
 
-					add_uri (model, uri, pos + 1,
+					added = add_uri (model, uri, pos + 1,
 						 GEDIT_FILE_BOOKMARKS_STORE_IS_BOOKMARK,
 						 NULL);
 				}
-
-				added = TRUE;
 			}
 		}
 
@@ -432,9 +428,10 @@ static gint flags_order[] = {
 	GEDIT_FILE_BOOKMARKS_STORE_IS_HOME,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_DESKTOP,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR,
-	GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE,
+	GEDIT_FILE_BOOKMARKS_STORE_IS_ROOT,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT,
+	GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT,
 	GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME,
 	-1
 };
@@ -514,9 +511,9 @@ bookmarks_compare_flags (GtkTreeModel * model, GtkTreeIter * a,
 			}
 		} else if ((f1 & *flags) && (f1 & sep) != (f2 & sep)) {
 			if (f1 & sep)
-				return 1;
-			else
 				return -1;
+			else
+				return 1;
 		}
 	}
 
