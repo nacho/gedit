@@ -41,7 +41,7 @@ class ModelinePlugin(gedit.Plugin):
 	def activate(self, window):
 		for view in window.get_views(): 
 			self.connect_handlers(view)
-			apply_modeline(doc, None, view)
+			apply_modeline(view.get_buffer(), None, view)
 			
 		tab_added_id = window.connect("tab_added",
 		                              lambda w, t: self.connect_handlers(t.get_view()))
