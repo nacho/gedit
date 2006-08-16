@@ -92,10 +92,6 @@ static const GtkTargetEntry drag_types[] =
 
 G_DEFINE_TYPE(GeditWindow, gedit_window, GTK_TYPE_WINDOW)
 
-static void	app_lockdown_changed	(GeditApp    *app,
-					 GParamSpec  *param,
-					 GeditWindow *window);
-
 static void	recent_manager_changed	(GtkRecentManager *manager,
 					 GeditWindow *window);
 
@@ -120,21 +116,41 @@ gedit_window_get_property (GObject    *object,
 }
 
 static void
+gedit_window_dispose (GObject *object)
+{
+	GeditWindow *window;
+
+	window = GEDIT_WINDOW (object);
+
+	if (window->priv->recent_manager != NULL)
+	{
+		g_signal_handlers_disconnect_by_func (window->priv->recent_manager,
+						      G_CALLBACK (recent_manager_changed),
+						      window);
+		window->priv->recent_manager = NULL;
+	}
+
+	if (window->priv->manager != NULL)
+	{
+		g_object_unref (window->priv->manager);
+		window->priv->manager = NULL;
+	}
+
+	if (window->priv->window_group != NULL)
+	{
+		g_object_unref (window->priv->window_group);
+		window->priv->window_group = NULL;
+	}
+
+	G_OBJECT_CLASS (gedit_window_parent_class)->dispose (object);
+}
+
+static void
 gedit_window_finalize (GObject *object)
 {
-	GeditWindow *window = GEDIT_WINDOW (object); 
+	GeditWindow *window; 
 
-	g_signal_handlers_disconnect_by_func (gedit_app_get_default (),
-					      G_CALLBACK (app_lockdown_changed),
-					      window);
-
-	g_signal_handlers_disconnect_by_func (window->priv->recent_manager,
-					      G_CALLBACK (recent_manager_changed),
-					      window);
-
-	g_object_unref (window->priv->manager);
-
-	g_object_unref (window->priv->window_group);
+	window = GEDIT_WINDOW (object);
 
 	g_free (window->priv->default_path);
 
@@ -280,6 +296,7 @@ gedit_window_class_init (GeditWindowClass *klass)
 
 	klass->tab_removed = gedit_window_tab_removed;
 
+	object_class->dispose = gedit_window_dispose;
 	object_class->finalize = gedit_window_finalize;
 	object_class->get_property = gedit_window_get_property;
 
@@ -1858,8 +1875,6 @@ set_sensitivity_according_to_window_state (GeditWindow *window)
 	GtkAction *action;
 	GeditLockdownMask lockdown;
 
-	// GtkWidget *recent_file_menu;
-	
 	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
 
 	/* We disable File->Quit/SaveAll/CloseAll while printing to avoid to have two
@@ -1940,18 +1955,14 @@ update_tab_autosave (GtkWidget *widget,
 	gedit_tab_set_auto_save_enabled (tab, *enabled);
 }
 
-static void
-app_lockdown_changed (GeditApp    *app,
-		      GParamSpec  *spec,
-		      GeditWindow *window)
+void
+_gedit_window_set_lockdown (GeditWindow       *window,
+			    GeditLockdownMask  lockdown)
 {
 	GeditTab *tab;
 	GtkAction *action;
-	GeditLockdownMask lockdown;
 	gboolean autosave;
 
-	lockdown = gedit_app_get_lockdown (gedit_app_get_default ());
-	
 	/* start/stop autosave in each existing tab */
 	autosave = gedit_prefs_manager_get_auto_save ();
 	gtk_container_foreach (GTK_CONTAINER (window->priv->notebook),
@@ -3129,12 +3140,6 @@ gedit_window_init (GeditWindow *window)
 			  "drag_data_received",
 	                  G_CALLBACK (drag_data_received_cb), 
 	                  NULL);
-
-	/* be aware of lockdown changes */
-	g_signal_connect (gedit_app_get_default (),
-			  "notify::lockdown",
-			  G_CALLBACK (app_lockdown_changed),
-			  window);
 
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
 	gedit_plugins_engine_update_plugins_ui (window, TRUE);

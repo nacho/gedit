@@ -1,3 +1,14 @@
+2006-08-16  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit-window.c:
+	* gedit-app.[ch]:
+
+	properly use window::dispose to drop the references to the ui
+	manager and to disconnect the recents_changed callback. It should
+	fix warning and crashes. Also turn the lockdown changed handler
+	in a simple method so that we avoid headaches tracking the lifetime
+	of the window itself.
+
 2006-08-16  Steve Frécinaux  <steve@istique.net>
 
 	* plugins/modelines/modelines.py: fix warning on activation.

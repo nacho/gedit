@@ -35,7 +35,7 @@
 #define __GEDIT_COMMANDS_H__
 
 #include <gtk/gtkaction.h>
-#include "gedit-window.h"
+#include <gedit/gedit-window.h>
 
 G_BEGIN_DECLS
 

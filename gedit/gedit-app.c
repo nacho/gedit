@@ -532,6 +532,18 @@ gedit_app_get_lockdown (GeditApp *app)
 	return app->priv->lockdown;
 }
 
+static void
+app_lockdown_changed (GeditApp *app)
+{
+	GList *l;
+
+	for (l = app->priv->windows; l != NULL; l = l->next)
+		_gedit_window_set_lockdown (GEDIT_WINDOW (l->data),
+					    app->priv->lockdown);
+
+	g_object_notify (G_OBJECT (app), "lockdown");
+}
+
 void
 _gedit_app_set_lockdown (GeditApp          *app,
 			 GeditLockdownMask  lockdown)
@@ -540,7 +552,7 @@ _gedit_app_set_lockdown (GeditApp          *app,
 
 	app->priv->lockdown = lockdown;
 
-	g_object_notify (G_OBJECT (app), "lockdown");
+	app_lockdown_changed (app);
 }
 
 void
@@ -555,5 +567,5 @@ _gedit_app_set_lockdown_bit (GeditApp          *app,
 	else
 		app->priv->lockdown &= ~bit;
 
-	g_object_notify (G_OBJECT (app), "lockdown");
+	app_lockdown_changed (app);
 }

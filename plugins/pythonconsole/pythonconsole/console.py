@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # pythonconsole.py -- Console widget
 #
 # Copyright (C) 2006 - Steve Frécinaux
