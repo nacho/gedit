@@ -1,7 +1,11 @@
+2006-08-17  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-io-error-message-area.c: small memory leaks on error.
+
 2006-08-16  Paolo Borelli  <pborelli@katamail.com>
 
-	* gedit-window.c:
-	* gedit-app.[ch]:
+	* gedit/gedit-window.c:
+	* gedit/gedit-app.[ch]:
 
 	properly use window::dispose to drop the references to the ui
 	manager and to disconnect the recents_changed callback. It should

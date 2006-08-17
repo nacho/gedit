@@ -334,6 +334,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 	message_area = create_unrecoverable_error_message_area (error_message,
 								message_details);
 
+	g_free (uri_for_display);
 	g_free (error_message);
 	g_free (message_details);
 
@@ -554,6 +555,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	message_area = create_unrecoverable_error_message_area (error_message,
 								message_details);
 
+	g_free (uri_for_display);
 	g_free (error_message);
 	g_free (message_details);
 
@@ -726,6 +728,8 @@ gedit_conversion_error_while_loading_message_area_new (
 	
 	message_area = create_conversion_error_message_area (error_message, message_details);
 
+	g_free (uri_for_display);
+	g_free (encoding_name);
 	g_free (error_message);
 	g_free (message_details);
 	
@@ -777,6 +781,8 @@ gedit_conversion_error_while_saving_message_area_new (
 								error_message,
 								message_details);
 
+	g_free (uri_for_display);
+	g_free (encoding_name);
 	g_free (error_message);
 	g_free (message_details);
 	
@@ -1315,6 +1321,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	message_area = create_unrecoverable_error_message_area (error_message,
 								message_details);
 
+	g_free (uri_for_display);
 	g_free (error_message);
 	g_free (message_details);
 

@@ -474,7 +474,7 @@ recoverable_loading_error_message_area_response (GeditMessageArea *message_area,
 						 GeditTab         *tab)
 {
 	GeditDocument *doc;
-	const gchar *uri;
+	gchar *uri;
 
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
@@ -507,11 +507,13 @@ recoverable_loading_error_message_area_response (GeditMessageArea *message_area,
 	else
 	{
 		_gedit_recent_remove (GEDIT_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (tab))), uri);
-		
+
 		unrecoverable_loading_error_message_area_response (message_area,
 								   response_id,
 								   tab);
 	}
+
+	g_free (uri);
 }
 
 static void 
@@ -970,6 +972,7 @@ document_loaded (GeditDocument *document,
 							 GTK_RESPONSE_CANCEL);
 
 		gtk_widget_show (emsg);
+		g_free (uri);
 
 		return;
 	}
