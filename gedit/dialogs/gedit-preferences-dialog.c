@@ -768,10 +768,11 @@ enable_syntax_hl_button_toggled (GtkWidget              *button,
 }
 
 static void
-language_changed_cb (GtkComboBox *combobox,
+language_changed_cb (GtkComboBox            *combobox,
 		     GeditPreferencesDialog *dlg)
 {
 	const GSList *languages;
+	gint active;
 	GSList *tags, *l;
 	GtkSourceLanguage *lang;
 	GtkTreeIter iter;
@@ -780,7 +781,14 @@ language_changed_cb (GtkComboBox *combobox,
 	languages = gedit_languages_manager_get_available_languages_sorted (
 						gedit_get_languages_manager ());
 
-	lang = g_slist_nth_data ((GSList*)languages, gtk_combo_box_get_active (combobox));
+	active = gtk_combo_box_get_active (combobox);
+	if (active < 0)
+	{
+		/* no active language: no lang files found */
+		return;
+	}
+
+	lang = g_slist_nth_data ((GSList*)languages, active);
 
 	gtk_list_store_clear (dlg->priv->tags_treeview_model);
 
