@@ -140,7 +140,7 @@ load_file_list (GeditWindow         *window,
 	g_return_val_if_fail ((uris != NULL) && (uris->data != NULL), 0);
 
 	win_docs = gedit_window_get_documents (window);
-	
+
 	/* Remove the uris corresponding to documents already open in "window".
 	   Add remove duplicates from "uris" list */
 	l = uris;
@@ -168,7 +168,9 @@ load_file_list (GeditWindow         *window,
 				
 		uris = g_slist_next (uris);
 	}
-	
+
+	g_list_free (win_docs);
+
 	if (uris_to_load == NULL)
 		return loaded_files;
 		
