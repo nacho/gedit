@@ -42,7 +42,7 @@ class PythonConsolePlugin(gedit.Plugin):
 		image = gtk.Image()
 		image.set_from_icon_name('gnome-mime-text-x-python',
 		                         gtk.ICON_SIZE_MENU)
-		bottom.add_item(console, 'Python Console', image)
+		bottom.add_item(console, _('Python Console'), image)
 		window.set_data('PythonConsolePluginInfo', console)
 	
 	def deactivate(self, window):

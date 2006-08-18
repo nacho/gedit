@@ -22,7 +22,6 @@ import gtk
 from gtk import gdk
 import gnomevfs
 import gedit, gtksourceview
-from gettext import gettext as _
 from outputpanel import OutputPanel
 from capture import *
 

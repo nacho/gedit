@@ -20,7 +20,6 @@ __all__ = ('ToolsPlugin', 'Manager', 'OutputPanel', 'Capture', 'UniqueById')
 
 import gedit
 import gtk
-from gettext import gettext as _
 from manager import Manager
 from outputpanel import OutputPanel
 from capture import Capture

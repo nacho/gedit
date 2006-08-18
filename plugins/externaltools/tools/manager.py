@@ -22,7 +22,6 @@ import gtk
 import gtksourceview as gsv
 from gtk import glade
 import os.path
-from gettext import gettext as _
 
 from functions import *
 import ElementTree as et
