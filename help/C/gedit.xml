@@ -280,10 +280,21 @@
 		  </itemizedlist>
 			 </listitem>
 		  </varlistentry>
+		  <varlistentry> <term>Side Pane</term> 
+			 <listitem> 
+				<para>The side pane displays a list of open documents, and other information depending on which plugins are enabled.</para>
+				<para>By default the side pane is not shown. To show it, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Side Pane</guimenuitem></menuchoice>.</para>
+			 </listitem>
+		  </varlistentry>
+		  <varlistentry> <term>Bottom pane</term> 
+			 <listitem> 
+				<para> The bottom pane is used by programming tools such as the <application>Python Console</application> plugin to display output. It is not shown by default.</para>
+			 </listitem>
+		  </varlistentry>		  
 		</variablelist>
 		<para>When you right-click in the <application>&app;</application> window, the application displays a popup menu. The popup menu contains the most common text editing commands. </para>
 		
-		<para>Like other GNOME apps, actions in <application>&app;</application> can be performed in several ways: with the menu, with the toolbar, or with shortcut keys. The common shortcuts keys for are listed in the <ulink type="help" url="ghelp:user-guide?shortcuts-apps">User Guide</ulink>.</para>
+		<para>Like other GNOME applications, actions in <application>&app;</application> can be performed in several ways: with the menu, with the toolbar, or with shortcut keys. Shortcuts keys common to all applications are listed in the <ulink type="help" url="ghelp:user-guide?shortcuts-apps">User Guide</ulink>.</para>
 	 </sect2>
 	 
 <!-- ============= To Open Multiple Files from the Command Line ========= -->
@@ -748,11 +759,15 @@
  
   <sect1 id="gedit-programming-features">	 
 	  <title>Programming Features</title>
+	  
+	  <para>Several of <application>&app;</application>'s features for programming are provided with plugins. For example, the Tag List plugin provides a list of commonly-used tags for different markup languages: see <xref linkend="gedit-tag-list-plugin"/>.</para>
 
 <!-- ============= Syntax Highlighting =================== -->
 	 <sect2 id="gedit-set-highlightmode">
-	 <title>To Set the Syntax Highlighting Mode</title>
-	 <para>To set the syntax highlighting mode, choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Highlight Mode</guimenuitem> </menuchoice>, then select one of the following menu items:</para>
+	 <title>Syntax Highlighting</title>
+	 <para>Syntax highlighting makes source code easier to read by showing different parts of the text in different colors.</para>
+	 
+	 <para><application>&app;</application> chooses an appropriate syntax highlighting mode based on a document's type. To override the syntax highlighting mode, choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Highlight Mode</guimenuitem> </menuchoice>, then select one of the following menu items:</para>
 		  <variablelist>
 		    <varlistentry>
 		      <term><guimenuitem>Normal</guimenuitem></term>
@@ -788,7 +803,7 @@
 	 <para>For more information about how to configure syntax highlighting, see <xref linkend="gedit-prefs-syntax"/>.
 </para>
 	 </sect2>
-	 	 
+
 <!-- ============= To Pipe the Output of a Command to a File ======= -->
 	 <sect2 id="gedit-pipe-output"> 
 		<title>To Pipe the Output of a Command to a File</title>
@@ -812,7 +827,7 @@
 	 </itemizedlist>
 	 
 	 	<sect2 id="gedit-prefs-view">
-	 		<title>View</title>
+	 		<title>View Preferences</title>
 			<variablelist>
 	 		<varlistentry> <term><guilabel>Text Wrapping</guilabel> </term> 
                           <listitem> 
@@ -837,7 +852,7 @@
 		</sect2>
 		
 	 <sect2 id="gedit-prefs-editor">
-	 <title>Editor</title>
+	 <title>Editor Preferences</title>
 			<variablelist>
 	 		<varlistentry> <term><guilabel>Tabs</guilabel> </term> 
 			 <listitem> 
@@ -865,7 +880,7 @@
 	 	</sect2>			 
 
 	 	<sect2 id="gedit-prefs-fontsandcolors">
-	 		<title>Font &amp; Colors</title>
+	 		<title>Font &amp; Colors Preferences</title>
 	 		<variablelist> 
 		   <varlistentry> <term><guilabel>Font</guilabel> </term> 
 			 <listitem> 
@@ -887,7 +902,7 @@
 		</sect2>
 				
 	 <sect2 id="gedit-prefs-syntax">
-	 <title>Syntax Highlighting</title>
+	 <title>Syntax Highlighting Preferences</title>
 	 	<variablelist> 
 		  <varlistentry> <term><guilabel>Enable syntax highlighting</guilabel> </term> 
 			 <listitem> 
@@ -1017,7 +1032,7 @@
 	 </sect2>	 
 
 	 <sect2 id="gedit-prefs-plugins">
-	 <title>Plugins</title>
+	 <title>Plugins Preferences</title>
 	 <para>For information about how to use the <guilabel>Plugins</guilabel> category of the <guilabel>Preferences</guilabel> dialog, see <xref linkend="gedit-install-plugins"/>. </para>		
 	 </sect2>	 
 	 
@@ -1171,8 +1186,8 @@
 		</informaltable> 
 <!-- ============= To Load gedit Plugins ========================= -->
 	 <sect2 id="gedit-install-plugins"> 
-		<title>To Load a &app; Plugin</title>
-		<para>To load a <application>&app;</application> plugin, perform the following steps:</para>
+		<title>Enabling a &app; Plugin</title>
+		<para>To enable a <application>&app;</application> plugin, perform the following steps:</para>
                 <orderedlist>
                   <listitem>
                     <para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</guimenuitem> </menuchoice>. </para>
@@ -1191,9 +1206,9 @@
 
 <!-- ============= To Remove gedit Plugins ========================= -->
 	 <sect2 id="gedit-remove-plugins"> 
-		<title>To Remove a &app; Plugin</title>
-		<para>A plugin remains loaded when you quit <application>&app;</application>. </para>
-		<para>To remove a <application>&app;</application> plugin, perform the following steps:</para>
+		<title>Disabling a &app; Plugin</title>
+		<para>A plugin remains enabled when you quit <application>&app;</application>. </para>
+		<para>To disable a <application>&app;</application> plugin, perform the following steps:</para>
                 <orderedlist>
                   <listitem>
                     <para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</guimenuitem> </menuchoice>. </para>
@@ -1211,7 +1226,7 @@
 	 </sect2>
 
 <sect2 id="gedit-change-case-plugin">
-<title>To Use the ChangeCase Plugin</title>
+<title>ChangeCase Plugin</title>
 	<para>The ChangeCase plugin changes the case of the selected text. To use the ChangeCase plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Load the ChangeCase plugin.</para>
@@ -1265,7 +1280,7 @@
 </sect2>
 
 <sect2 id="gedit-document-statistics-plugin">
-<title>To Use the Document Statistics Plugin</title>
+<title>Document Statistics Plugin</title>
 	<para>The Document Statistics plugin counts the number of lines, words, characters with spaces, characters without spaces, and bytes in the current file. The plugin displays the results in a <guilabel>Document Statistics</guilabel> dialog. To use the Document Statistics plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Load the Document Statistics plugin. </para>
@@ -1300,7 +1315,7 @@
 </sect2>
 
 <sect2 id="gedit-indent-lines-plugin">
-<title>To Use the Indent Lines Plugin</title>
+<title>Indent Lines Plugin</title>
 	<para>The Indent lines plugin indents the selected lines, or removes the indentation from the selected lines. To use the Indent lines plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Load the Indent lines plugin. </para>
@@ -1317,7 +1332,7 @@
 </sect2>
 
 <sect2 id="gedit-insert-date-time-plugin">
-<title>To Use the Insert Date/Time Plugin</title>
+<title>Insert Date/Time Plugin</title>
 	<para>The Insert Date/Time plugin inserts the current date and time into a file. To use the Insert Date/Time plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Load the Insert Date/Time plugin. </para>
@@ -1330,7 +1345,7 @@
 		</orderedlist> 
 
 <sect3 id="gedit-date-time-configure">
-<title>To Configure the Insert Date/Time Plugin</title>
+<title>Configuring the Insert Date/Time Plugin</title>
 <para>To configure the Insert Date/Time plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem> <para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Preferences</guimenuitem> </menuchoice>. 
@@ -1368,7 +1383,7 @@
 </sect2>
 
 <sect2 id="gedit-sort-plugin">
-<title>To Use the Sort Plugin</title>
+<title>Sort Plugin</title>
 	<para>The Sort plugin sorts the selected text.</para>
 		  <note><para>You cannot undo the Sort operation, so you should save the file before performing the sort. To revert to the saved version of the file after the sort operation, choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Revert</guimenuitem> </menuchoice>.
 				</para>
@@ -1399,7 +1414,7 @@
 </sect2>
 
 <sect2 id="gedit-spell-checker-plugin">
-<title>To Use the Spell Checker Plugin</title>
+<title>Spell Checker Plugin</title>
 	<para>The Spell checker plugin checks the spelling in the selected text. You can configure <application>&app;</application> to check the spelling automatically, or you can check the spelling manually, in the specified language. The language setting, and the autocheck spelling properties, apply per document. To use the Spell checker plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Load the Spell checker plugin. </para>
@@ -1456,7 +1471,7 @@
 </sect2>
 
 <sect2 id="gedit-tag-list-plugin">
-<title>To Use the Tag List Plugin</title>
+<title>Tag List Plugin</title>
 	<para>The Tag List plugin displays a window that contains a list of common tags. You can use the window to insert a tag into a file. To use the Tag List plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Load the Tag List plugin. </para>
@@ -1487,7 +1502,7 @@
 </sect2>
 
 <sect2 id="gedit-user-name-plugin">
-<title>To Use the User Name Plugin</title>
+<title>User Name Plugin</title>
 	<para>The User name plugin inserts the username of the current user into the file. To use the User name plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Load the User name plugin. </para>
