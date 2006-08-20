@@ -240,16 +240,10 @@ check_volume_separator (GeditFileBookmarksStore * model, guint flags,
 
 static void
 add_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
-	    gchar * name, guint flags, GtkTreeIter * iter)
+	    const gchar * name, guint flags, GtkTreeIter * iter)
 {
-	gboolean free_name = FALSE;
 	GdkPixbuf *pixbuf;
 	gchar *icon;
-
-	if (name == NULL) {
-		name = gnome_vfs_volume_get_display_name (volume);
-		free_name = TRUE;
-	}
 
 	icon = gnome_vfs_volume_get_icon (volume);
 	pixbuf = pixbuf_from_stock (icon);
@@ -258,9 +252,6 @@ add_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 		  flags | GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME, iter);
 
 	g_free (icon);
-
-	if (free_name)
-		g_free (name);
 
 	flags = flags & (GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT |
@@ -275,7 +266,6 @@ process_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 		gboolean * root)
 {
 	GnomeVFSVolumeType vtype;
-	gchar *uri;
 	guint flags;
 
 	vtype = gnome_vfs_volume_get_volume_type (volume);
@@ -285,6 +275,8 @@ process_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 		return FALSE;
 
 	if (gnome_vfs_volume_is_user_visible (volume)) {
+		gchar *name;
+
 		if (vtype == GNOME_VFS_VOLUME_TYPE_VFS_MOUNT)
 			flags = GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE;
 		else if (vtype == GNOME_VFS_VOLUME_TYPE_MOUNTPOINT)
@@ -292,8 +284,14 @@ process_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 		else
 			flags = GEDIT_FILE_BOOKMARKS_STORE_IS_REMOTE_MOUNT;
 
-		add_volume (model, volume, NULL, flags, NULL);
+		name = gnome_vfs_volume_get_display_name (volume);
+
+		add_volume (model, volume, name, flags, NULL);
+
+		g_free (name);
 	} else if (root && !*root) {
+		gchar *uri;
+
 		uri = gnome_vfs_volume_get_activation_uri (volume);
 
 		if (strcmp (uri, "file:///") == 0) {
@@ -342,6 +340,8 @@ init_volumes (GeditFileBookmarksStore * model)
 		volume = GNOME_VFS_VOLUME (item->data);
 		process_volume (model, volume, &root);
 	}
+
+	g_list_free (volumes);
 }
 
 static void
