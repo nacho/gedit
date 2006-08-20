@@ -35,9 +35,9 @@ class ToolsPlugin(gedit.Plugin):
 		window_data['action_group'].set_translation_domain('gedit')
 		window_data['action_group'].add_actions([('ToolsManager',
 		                                          None,
-		                                          '_External Tools...',
+		                                          _('_External Tools...'),
 		                                          None,
-		                                          "Opens the External Tools Manager",
+		                                          _("Opens the External Tools Manager"),
 		                                          lambda action: self.open_dialog())])
 		window_data['ui_id'] = manager.new_merge_id()
 		manager.insert_action_group(window_data['action_group'], -1)
@@ -52,7 +52,9 @@ class ToolsPlugin(gedit.Plugin):
 		# Create output console
 		window_data["output_buffer"] = OutputPanel(window)
 		bottom = window.get_bottom_panel()
-		bottom.add_item(window_data["output_buffer"].panel, "Shell Output", gtk.STOCK_EXECUTE)
+		bottom.add_item(window_data["output_buffer"].panel,
+		                _("Shell Output"),
+		                gtk.STOCK_EXECUTE)
 
 	def deactivate(self, window):
 		window_data = window.get_data("ToolsPluginWindowData")
