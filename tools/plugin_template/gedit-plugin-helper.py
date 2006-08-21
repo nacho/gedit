@@ -41,7 +41,7 @@ class ##(PLUGIN_ID.camel)WindowHelper:
         self.insert_menu()
 ##endif
 
-    def __del__(self)
+    def __del__(self):
         self._window = None
         self._plugin = None
     
