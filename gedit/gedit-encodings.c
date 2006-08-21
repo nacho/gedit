@@ -73,6 +73,9 @@ typedef enum
 
   GEDIT_ENCODING_UTF_7,
   GEDIT_ENCODING_UTF_16,
+  GEDIT_ENCODING_UTF_16_BE,
+  GEDIT_ENCODING_UTF_16_LE,
+  GEDIT_ENCODING_UTF_32,  
   GEDIT_ENCODING_UCS_2,
   GEDIT_ENCODING_UCS_4,
 
@@ -182,6 +185,12 @@ static GeditEncoding encodings [] = {
     "UTF-7", N_("Unicode") },
   { GEDIT_ENCODING_UTF_16,
     "UTF-16", N_("Unicode") },
+  { GEDIT_ENCODING_UTF_16_BE,
+    "UTF-16BE", N_("Unicode") },
+  { GEDIT_ENCODING_UTF_16_LE,
+    "UTF-16LE", N_("Unicode") },
+  { GEDIT_ENCODING_UTF_32,
+    "UTF-32", N_("Unicode") },
   { GEDIT_ENCODING_UCS_2,
     "UCS-2", N_("Unicode") },
   { GEDIT_ENCODING_UCS_4,
