@@ -2,7 +2,7 @@
  * gedit-document-saver.c
  * This file is part of gedit
  *
- * Copyright (C) 2005 - Paolo Borelli and Paolo Maggi
+ * Copyright (C) 2005-2006 - Paolo Borelli and Paolo Maggi
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
  */
 
 /*
- * Modified by the gedit Team, 2005. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2005-2006. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  *
@@ -707,8 +707,24 @@ save_existing_local_file (GeditDocumentSaver *saver)
 
 		saver->priv->mime_type = get_slow_mime_type (saver->priv->uri);
 
-		if (!saver->priv->keep_backup)
+		if (saver->priv->keep_backup)
+		{
+			/* remove executable permissions from the backup 
+			 * file */
+			mode_t new_mode = statbuf.st_mode;
+
+			new_mode &= ~(S_IXUSR | S_IXGRP | S_IXOTH);
+			
+			if (new_mode != statbuf.st_mode)
+			{
+				/* try to change permissions */
+				chmod (backup_filename, new_mode);
+			}
+		}
+		else
+		{
 			unlink (backup_filename);
+		}
 
 		close (tmpfd);
 
@@ -744,9 +760,11 @@ save_existing_local_file (GeditDocumentSaver *saver)
 			goto out;
 		}
 
+		/* open the backup file with the same permissions
+		 * except the executable ones */
 		bfd = open (backup_filename,
 			    O_WRONLY | O_CREAT | O_EXCL,
-			    statbuf.st_mode & 0777);
+			    statbuf.st_mode & 0666);
 
 		if (bfd == -1)
 		{
@@ -769,8 +787,8 @@ save_existing_local_file (GeditDocumentSaver *saver)
 			gedit_debug_message (DEBUG_SAVER, "could not restore group");
 
 			if (fchmod (bfd,
-			            (statbuf.st_mode& 0707) |
-			            ((statbuf.st_mode & 07) << 3)) != 0)
+			            (statbuf.st_mode& 0606) |
+			            ((statbuf.st_mode & 06) << 3)) != 0)
 			{
 				gedit_debug_message (DEBUG_SAVER, "could not even clear group perms");
 
@@ -834,6 +852,7 @@ save_existing_local_file (GeditDocumentSaver *saver)
 			 	      saver->priv->encoding,
 				      &saver->priv->error))
 	{
+		/* FIXME: restore the backup? */
 		goto out;
 	}
 
