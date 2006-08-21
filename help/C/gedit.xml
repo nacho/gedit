@@ -204,7 +204,9 @@
    <!-- removed ids, here as anchors to prevent possible breakage -->	 
 	 <anchor id="gedit-customize-toolbar"/>	 
 	 
-	 <para>The <application>&app;</application> application enables you to create and edit text files. You can use <application>&app;</application> plugins to perform a variety of tasks related to text-editing from within the <application>&app;</application> window.</para>
+	 <para>The <application>&app;</application> application enables you to create and edit text files.</para>
+	 
+	 <para>The aim of <application>&app;</application> is to be a simple and easy to use text editor. More powerful features can be enabled with different <firstterm>plugins</firstterm>, allowing a variety of tasks related to text-editing.</para>
   </sect1>
 <!-- ============= Getting Started =========================== -->
   <sect1 id="gedit-getting-started"> 
@@ -286,7 +288,7 @@
 				<para>By default the side pane is not shown. To show it, choose <menuchoice><guimenu>View</guimenu><guimenuitem>Side Pane</guimenuitem></menuchoice>.</para>
 			 </listitem>
 		  </varlistentry>
-		  <varlistentry> <term>Bottom pane</term> 
+		  <varlistentry> <term>Bottom Pane</term> 
 			 <listitem> 
 				<para> The bottom pane is used by programming tools such as the <application>Python Console</application> plugin to display output. It is not shown by default.</para>
 			 </listitem>
@@ -344,7 +346,7 @@
 	 
 <!-- ============= To Open a File from a URI ======================= -->
 	 <sect2 id="gedit-open-from-uri"> 
-		<title>To Open a File from a URI</title>
+		<title>Opening a File from a URI</title>
 		<para>To open a file from a Uniform Resource Identifier (URI), perform the following steps:</para>
 		<orderedlist>
 		<listitem>
@@ -405,7 +407,7 @@
 	 
 <!-- ============= To Position the Cursor on a Specific Line ======================= -->
 	 <sect2 id="gedit-goto-line"> 
-		<title>To Position the Cursor on a Specific Line</title>
+		<title>Positioning the Cursor on a Specific Line</title>
 		<para>To position the cursor on a specific line in the current file, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>Search</guimenu> <guimenuitem>Go to Line</guimenuitem> </menuchoice> to display the <guilabel>Go to Line</guilabel> dialog.</para>
@@ -488,21 +490,27 @@
 <!-- ============= Special Characters ============================ -->	 
 	 <sect2 id="gedit-find-escapes">
 	   <title>Special Characters</title>
-	     <para>You can include the following escape sequences in the text to find or replace:</para>
-			 <itemizedlist> 
-				<listitem>
-                                   <para><literal>\n</literal></para>
-                                   <para>Use this escape sequence to specify a new line.</para>
-				</listitem>
-				<listitem>
-                                   <para><literal>\t</literal></para>
-                                   <para>Use this escape sequence to specify a tab character.</para>
-				</listitem>
-				<listitem>
-                                   <para><literal>\r</literal></para>
-                                   <para>Use this escape sequence to specify a carriage return.</para>
-				</listitem>
-			 </itemizedlist> 
+	     <para>You can include the following escape sequences in the text to find or replace to represent special characters:</para>
+			 <variablelist>
+        <varlistentry>
+          <term><literal>\n</literal></term>
+    				<listitem>
+              <para>Specifies a new line.</para>
+    				</listitem>          
+        </varlistentry>
+        <varlistentry>
+          <term><literal>\t</literal></term>
+    				<listitem>
+              <para>Specifies a tab character.</para>
+    				</listitem>          
+        </varlistentry>
+        <varlistentry>
+          <term><literal>\r</literal></term>
+    				<listitem>
+              <para>Specifies a carriage return.</para>
+    				</listitem>          
+        </varlistentry>                  
+			 </variablelist>          
     </sect2>
   </sect1>
   
@@ -511,7 +519,7 @@
     
 <!-- ============= To Set the Page Options ============================ -->
 	 <sect2 id="gedit-page-setup"> 
-		<title>To Set the Page Options</title>
+		<title>Setting the Page Options</title>
 		  
 		<para>To set the page options, choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Page Setup</guimenuitem> </menuchoice> to display the <guilabel>Page Setup</guilabel> dialog.</para>
 				
@@ -575,10 +583,10 @@
 	 
 <!-- ============= To Print a File ============================ -->
 	 <sect2 id="gedit-print-file"> 
-		<title>To Print a File</title>
+		<title>Printing a Document</title>
 		<para>You can use <application>&app;</application> to perform the following print operations:</para>
 		<itemizedlist> 
-		  <listitem><para>Print a file to a printer. </para>
+		  <listitem><para>Print a document to a printer. </para>
 		  </listitem>
 		  <listitem><para>Print the output of the print command to a file.</para>
 		  </listitem>
@@ -767,7 +775,7 @@
 	 <title>Syntax Highlighting</title>
 	 <para>Syntax highlighting makes source code easier to read by showing different parts of the text in different colors.</para>
 	 
-	 <para><application>&app;</application> chooses an appropriate syntax highlighting mode based on a document's type. To override the syntax highlighting mode, choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Highlight Mode</guimenuitem> </menuchoice>, then select one of the following menu items:</para>
+	 <para><application>&app;</application> chooses an appropriate syntax highlighting mode based on a document's type. To override the syntax highlighting mode, choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Highlight Mode</guimenuitem> </menuchoice>, then choose one of the following menu items:</para>
 		  <variablelist>
 		    <varlistentry>
 		      <term><guimenuitem>Normal</guimenuitem></term>
@@ -806,10 +814,10 @@
 
 <!-- ============= To Pipe the Output of a Command to a File ======= -->
 	 <sect2 id="gedit-pipe-output"> 
-		<title>To Pipe the Output of a Command to a File</title>
+		<title>Piping the Output of a Command to a File</title>
 		<para>You can use <application>&app;</application> to pipe the output of a command to a text file. For example, to pipe the output of an <command>ls</command> command to a text file, type <command>ls | gedit</command>, then press <keycap>Return</keycap>.</para>
 		<para>The output of the <command>ls</command> command is displayed in a new text file in the <application>&app;</application> window.</para>
-		<para>Alternatively, you can use the External tools plugin to pipe command output to the current file. <!-- fixme: xref needed! -->.</para>
+		<para>Alternatively, you can use the <application>External tools</application> plugin to pipe command output to the current file. <!-- fixme: xref needed! --></para>
 	 </sect2>
   </sect1>
   
@@ -1029,7 +1037,7 @@
 			 </listitem>
 		  </varlistentry>
 	 	</variablelist> 
-	 </sect2>	 
+    </sect2>	 
 
 	 <sect2 id="gedit-prefs-plugins">
 	 <title>Plugins Preferences</title>
@@ -1512,6 +1520,116 @@
 		  </listitem>
 		</orderedlist> 
 </sect2>
-  </sect1>
+
+<sect2 id="gedit-snippets-plugin">
+<title>Snippets Plugin</title>
+  <para>The Snippets plugin allows you to store frequently-used pieces of text, called <firstterm>snippets</firstterm>, and insert them quickly into a document.</para>
+    <para>Snippets are specific to the language syntax of the current document. For example, when you are working with an HTML document, you can choose from a list of snippets that are useful for HTML. In addition, some snippets are global, and are available in all documents.</para>
+  
+  <sect3 id="gedit-snippets-plugin-insert">
+    <title>Inserting Snippets</title>
+    <para>To insert a snippet into a document, type its <firstterm>tab trigger</firstterm> and press <keycap>Tab</keycap>. A snippet's tab trigger is usually the first few letters of the snippet, or something else that is short and easy to remember.</para>
+    <para>Alternatively, press <keycombo><keycap>Ctrl</keycap><keycap>Space</keycap></keycombo> to see a list of snippets you can insert.</para>
+  </sect3>
+  
+  <sect3 id="gedit-snippets-plugin-add">    
+    <title>Adding Snippets</title>
+    <para>To create a new snippet, do the following:</para>
+      <orderedlist>
+        <listitem>
+          <para>Choose <menuchoice><guimenu>Tools</guimenu><guimenuitem>Manage Snippets</guimenuitem></menuchoice>. The <guilabel>Snippets Manager</guilabel> window opens.</para>
+        </listitem>  
+        <listitem>
+          <para>The list of snippets is grouped by language. Select the language you want to add a snippet to, or a snippet in that language group. To add a snippet for all languages, choose Global at the top of the list. The syntax of the document you are currently working with is shown by default.</para>
+        </listitem>
+        <listitem>
+          <para>Click <guibutton>New</guibutton>. A new snippet appears in the list.</para>
+        </listitem>
+        <listitem>
+          <para>Enter the following information for the new snippet:</para>
+          <variablelist>
+            <varlistentry><term>Name</term>
+              <listitem>
+                <para>Enter a name for the snippet in the text field within the snippet list. The name of a snippet serves only as a reminder of its purpose. You can change name of a snippet you create by clicking on it in the list.</para>
+              </listitem>     
+            </varlistentry>
+            <varlistentry><term>Snippet text</term>
+              <listitem>
+                <para>Enter the text of the snippet in the <guilabel>Edit snippet</guilabel> text box. For special codes you can use, see <xref linkend="gedit-snippets-plugin-syntax"/>.</para>
+                <tip><para>You can switch back to the document window to copy text without closing the <guilabel>Snippets Manager</guilabel> window.</para></tip>    
+              </listitem>     
+            </varlistentry>
+            <varlistentry><term>Tab Trigger</term>
+              <listitem>
+                <para>Enter the tab trigger for the snippet. This is the text that you type before pressing <keycap>Tab</keycap> to insert the snippet.</para>
+              </listitem>     
+            </varlistentry>
+            <varlistentry><term>Accelerator</term>
+              <listitem>
+                <para>Type a shortcut key to use for inserting the snippet.</para>
+              </listitem>     
+            </varlistentry>
+          </variablelist>
+          
+        </listitem>             
+      </orderedlist>
+  </sect3>
+  <sect3 id="gedit-snippets-plugin-edit">    
+    <title>Editing and Removing Snippets</title>
+    <para>To edit a snippet, select it in the list and make changes to its text and activation properties.</para>
+    <para>To rename a snippet, click it again in the list.</para>
+    <para>To remove a snippet, select it in the list and press <guibutton>Remove</guibutton>. You can not remove snippets that are installed by default with <application>&app;</application>, only those you have created yourself.</para>
+  </sect3>
+
+  <sect3 id="gedit-snippets-plugin-syntax">
+    <title>Snippet Substitutions</title>
+    <para>In addition to inserting stored text, a snippet can include customizable text, or mark spaces where you can add text once the snippet is inserted in your document.</para>
+    
+    <para></para>
+    
+    <para>You can use the following placeholder codes in snippet text:</para>
+      <variablelist>  
+        <varlistentry><term>Tab placeholders</term>
+          <listitem>
+            <para><literal>${n}</literal> defines a tab placeholder.</para>
+            <para><literal>${n:default}</literal> defines a tab placeholder with a default value.</para>            
+            <para>A tab placeholder marks a place in the snippet text where you can add extra text after the snippet is inserted.</para>
+            <para>To use tab placeholders, insert the snippet as normal. The insertion cursor is placed at the first tab placeholder. Type text, and press <keycap>Tab</keycap> to advance to the next tab placeholder. Pressing <keycap>Tab</keycap> when there are no more tab placeholders moves the insertion cursor to the end of the snippet text.</para>
+          </listitem>     
+        </varlistentry>
+        <varlistentry><term>Mirror placeholders</term>
+          <listitem>
+            <para>A repeated a tab placeholder will mirror the placeholder already defined. This allows you to type in text only once that you want to appear several times in the snippet.</para>
+          </listitem>     
+        </varlistentry>
+        <varlistentry><term>Environmental variables</term>
+          <listitem>
+            <para>Environmental variable such as <literal>$PATH</literal> and <literal>$HOME</literal> are substituted in snippet text. The following variables specific to <application>&app;</application> can also be used:</para>
+            <variablelist>
+              <varlistentry><term>$GEDIT_SELECTED_TEXT</term>
+                <listitem>
+                  <para>The currently selected text.</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>$GEDIT_FILENAME</term>
+                <listitem>
+                  <para>The full filename of the document, or and empty string if the document isn't saved yet.</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>$GEDIT_BASENAME</term>
+                <listitem>
+                  <para>The basename of the filename of the document, or an empty string if the document isn't saved yet.</para>
+                </listitem>     
+              </varlistentry>
+            
+            </variablelist>
+            
+          </listitem>     
+        </varlistentry>
+      </variablelist>
+  </sect3>
+  
+</sect2>
+</sect1>
 
 </article>
