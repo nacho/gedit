@@ -404,11 +404,11 @@ class SnippetsDialog:
 				library.unref(language)
 			
 			piter = self.model.iter_next(piter)
-	
+
 	# Callbacks
 	def on_dialog_snippets_response(self, dlg, resp):
 		if resp == gtk.RESPONSE_HELP:
-			gedit.help_display(self.dlg, 'gedit.xml', 'gedit-plugins')
+			gedit.help_display(self.dlg, 'gedit.xml', 'gedit-snippets-plugin')
 			return
 
 		self.unref_languages()	
