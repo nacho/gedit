@@ -230,27 +230,27 @@ static void
 set_root_from_doc (GeditFileBrowserPluginData * data,
                    GeditDocument * doc)
 {
-	gchar * uri;
-	gchar * root;
-	GnomeVFSURI * guri;
-	GnomeVFSURI * parent;
+	gchar *uri;
+	gchar *root;
+	GnomeVFSURI *guri;
 
 	if (doc == NULL)
 		return;
-	
-	uri = gedit_document_get_uri (doc);
 
+	uri = gedit_document_get_uri (doc);
 	if (uri == NULL)
 		return;
-	
+
 	guri = gnome_vfs_uri_new (uri);
-	
+
 	if (guri == NULL) {
 		g_free (uri);
 		return;
 	}
-	
-	if (gnome_vfs_uri_has_parent(guri)) {
+
+	if (gnome_vfs_uri_has_parent (guri)) {
+		GnomeVFSURI *parent;
+
 		parent = gnome_vfs_uri_get_parent (guri);
 		gnome_vfs_uri_unref (guri);
 		guri = parent;
@@ -261,6 +261,8 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 	gedit_file_browser_widget_set_root (data->tree_widget,
 		                            root,
 		                            TRUE);
+
+	gnome_vfs_uri_unref (guri);
 	g_free (root);
 	g_free (uri);
 }
