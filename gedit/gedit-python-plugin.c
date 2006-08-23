@@ -254,17 +254,21 @@ GType
 gedit_python_object_get_type (GTypeModule *module, 
 			      PyObject    *type)
 {
-	GTypeInfo *info;
 	GType gtype;
 	gchar *type_name;
 
-	info = g_new0 (GTypeInfo, 1);
+	GTypeInfo info = {
+		sizeof (GeditPythonObjectClass),
+		NULL,           /* base_init */
+		NULL,           /* base_finalize */
+		(GClassInitFunc) gedit_python_object_class_init,
+		NULL,           /* class_finalize */
+		type,           /* class_data */
+		sizeof (GeditPythonObject),
+		0,              /* n_preallocs */
+		(GInstanceInitFunc) gedit_python_object_init,
+	};
 
-	info->class_size = sizeof (GeditPythonObjectClass);
-	info->class_init = (GClassInitFunc) gedit_python_object_class_init;
-	info->instance_size = sizeof (GeditPythonObject);
-	info->instance_init = (GInstanceInitFunc) gedit_python_object_init;
-	info->class_data = type;
 	Py_INCREF (type);
 
 	type_name = g_strdup_printf ("%s+GeditPythonPlugin",
@@ -274,7 +278,7 @@ gedit_python_object_get_type (GTypeModule *module,
 	gtype = g_type_module_register_type (module, 
 					     GEDIT_TYPE_PLUGIN,
 					     type_name,
-					     info, 0);
+					     &info, 0);
 	g_free (type_name);
 
 	return gtype;
