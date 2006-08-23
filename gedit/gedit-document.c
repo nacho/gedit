@@ -712,7 +712,7 @@ set_uri (GeditDocument *doc,
 
 			if (strcmp (doc->priv->mime_type, "text/plain") != 0)
 			{
-				language = gtk_source_languages_manager_get_language_from_mime_type (
+				language = gedit_languages_manager_get_language_from_mime_type (
 							gedit_get_languages_manager (),
 							doc->priv->mime_type);
 			}

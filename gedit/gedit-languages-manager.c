@@ -3,7 +3,7 @@
  * gedit-languages-manager.c
  * This file is part of gedit
  *
- * Copyright (C) 2003-2005 - Paolo Maggi 
+ * Copyright (C) 2003-2006 - Paolo Maggi 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  */
  
 /*
- * Modified by the gedit Team, 2003-2005. See the AUTHORS file for a 
+ * Modified by the gedit Team, 2003-2006. See the AUTHORS file for a 
  * list of people on the gedit Team.  
  * See the ChangeLog files for a list of changes. 
  *
@@ -40,7 +40,7 @@
 #include "gedit-languages-manager.h"
 #include "gedit-prefs-manager.h"
 #include "gedit-utils.h"
-
+#include "gedit-debug.h"
 
 static GtkSourceLanguagesManager *language_manager = NULL;
 static GConfClient *gconf_client = NULL;
@@ -339,5 +339,118 @@ gedit_languages_manager_get_available_languages_sorted (GtkSourceLanguagesManage
 	}
 
 	return languages_list_sorted;
+}
+
+/* Returns a hash table that is used as a cache of already matched mime-types */
+static GHashTable *
+get_languages_cache (GtkSourceLanguagesManager *lm)
+{
+	static GQuark id = 0;
+	GHashTable *res;
+	
+	if (id == 0)
+		id = g_quark_from_static_string ("gedit_languages_manager_cache");
+
+	res = (GHashTable *)g_object_get_qdata (G_OBJECT (lm), id);
+	if (res == NULL)
+	{
+		res = g_hash_table_new_full (g_str_hash,
+					     g_str_equal,
+					     g_free,
+					     NULL);
+
+		g_object_set_qdata_full (G_OBJECT (lm), 
+					 id,
+					 res,
+					 (GDestroyNotify)g_hash_table_unref);
+	}
+	
+	return res;
+}
+
+static GtkSourceLanguage *
+get_language_from_cache (GtkSourceLanguagesManager *lm,
+			 const gchar               *mime_type)
+{
+	GHashTable *cache;
+	
+	cache = get_languages_cache (lm);
+	
+	return g_hash_table_lookup (cache, mime_type);
+}
+
+static void
+add_language_to_cache (GtkSourceLanguagesManager *lm,
+		       const gchar               *mime_type,
+		       GtkSourceLanguage         *lang)
+{
+	GHashTable *cache;
+	
+	cache = get_languages_cache (lm);
+	g_hash_table_replace (cache, g_strdup (mime_type), lang);
+}
+
+/*
+ * gedit_languages_manager_get_language_from_mime_type works like
+ * gtk_source_languages_manager_get_language_from_mime_type but it uses
+ * gnome_vfs_mime_type_get_equivalence instead of strcmp to compare mime-types.
+ * In this way it takes care of mime-types inheritance (fixes bug #324191)
+ * It also uses a cache of already matched mime-type in order to improve
+ * performance for frequently used mime-types.
+ */
+GtkSourceLanguage *
+gedit_languages_manager_get_language_from_mime_type (GtkSourceLanguagesManager 	*lm,
+						     const gchar                *mime_type)
+{
+	const GSList *languages;
+	GtkSourceLanguage *lang;
+	
+	g_return_val_if_fail (mime_type != NULL, NULL);
+
+	languages = gtk_source_languages_manager_get_available_languages (lm);
+	
+	lang = get_language_from_cache (lm, mime_type);
+	if (lang != NULL)
+	{
+		gedit_debug_message (DEBUG_DOCUMENT,
+				     "Cache hit for %s", mime_type);
+		return lang;
+	}
+	gedit_debug_message (DEBUG_DOCUMENT,
+			     "Cache miss for %s", mime_type);
+
+	while (languages != NULL)
+	{
+		GSList *mime_types, *tmp;
+
+		lang = GTK_SOURCE_LANGUAGE (languages->data);
+		
+		tmp = mime_types = gtk_source_language_get_mime_types (lang);
+
+		while (tmp != NULL)
+		{
+			GnomeVFSMimeEquivalence res;
+			res = gnome_vfs_mime_type_get_equivalence (mime_type, 
+								   (const gchar*)tmp->data);
+			
+			if (res != GNOME_VFS_MIME_UNRELATED)	
+				break;
+
+			tmp = g_slist_next (tmp);
+		}
+
+		g_slist_foreach (mime_types, (GFunc) g_free, NULL);
+		g_slist_free (mime_types);
+		
+		if (tmp != NULL)
+		{
+			add_language_to_cache (lm, mime_type, lang);
+			return lang;
+		}
+		
+		languages = g_slist_next (languages);
+	}
+
+	return NULL;
 }
 

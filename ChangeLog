@@ -1,3 +1,23 @@
+2006-08-23  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #324191 – the xml.lang syntax file should include 
+	application/vnd.mozilla.xul+xml
+	
+	* gedit/gedit-languages-manager.c
+	(gedit_languages_manager_get_available_languages_sorted)
+	(get_languages_cache) (get_language_from_cache)
+	(add_language_to_cache)
+	(gedit_languages_manager_get_language_from_mime_type): get the language
+	associated to a given mime-type. It takes care for mime-types 
+	inheritance. It also uses a cache of already matched mime-type in order 
+	to improve performace for frequently used mime-types.
+
+	* gedit/gedit-languages-manager.h: new prototype for function
+	gedit_languages_manager_get_language_from_mime_type
+	
+	* gedit/gedit-document.c (set_uri): uses the new function
+	gedit_languages_manager_get_language_from_mime_type
+
 2006-08-23  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-python-plugin.c: fix a small leak.
