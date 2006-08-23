@@ -1,3 +1,9 @@
+2006-08-23  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit/gedit.c: initialize gnome authentication manager before 
+	plugins (since the file browser plugin might need it). Fixes Bug 
+	352339 – Remote root location for filebrowser makes gedit crash on load
+
 2006-08-23  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit/dialogs/gedit-close-confirmation-dialog.c

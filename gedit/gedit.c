@@ -507,12 +507,14 @@ main (int argc, char *argv[])
 	gedit_debug_message (DEBUG_APP, "Init prefs manager");
 	gedit_prefs_manager_app_init ();
 
+	/* Initialize authentication manager */
+	gedit_debug_message (DEBUG_APP, "Init authentication manager");	
+	gnome_authentication_manager_init ();
+	
 	/* Init plugins engine */
 	gedit_debug_message (DEBUG_APP, "Init plugins");	
 	gedit_plugins_engine_init ();
 
-	gedit_debug_message (DEBUG_APP, "Init authentication manager");	
-	gnome_authentication_manager_init ();
 	gtk_about_dialog_set_url_hook (gedit_utils_activate_url, NULL, NULL);
 	
 	/* Initialize session management */
