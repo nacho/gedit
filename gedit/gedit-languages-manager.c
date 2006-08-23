@@ -404,6 +404,7 @@ gedit_languages_manager_get_language_from_mime_type (GtkSourceLanguagesManager 	
 {
 	const GSList *languages;
 	GtkSourceLanguage *lang;
+	GtkSourceLanguage *parent = NULL;
 	
 	g_return_val_if_fail (mime_type != NULL, NULL);
 
@@ -432,9 +433,26 @@ gedit_languages_manager_get_language_from_mime_type (GtkSourceLanguagesManager 	
 			GnomeVFSMimeEquivalence res;
 			res = gnome_vfs_mime_type_get_equivalence (mime_type, 
 								   (const gchar*)tmp->data);
-			
-			if (res != GNOME_VFS_MIME_UNRELATED)	
+									
+			if (res == GNOME_VFS_MIME_IDENTICAL)
+			{	
+				/* If the mime-type of lang is identical to "mime-type" then
+				   return lang */
+				gedit_debug_message (DEBUG_DOCUMENT,
+						     "%s is indentical to %s\n", (const gchar*)tmp->data, mime_type);
+				   
 				break;
+			}
+			else if ((res == GNOME_VFS_MIME_PARENT) && (parent == NULL))
+			{
+				/* If the mime-type of lang is a parent of "mime-type" then
+				   remember it. We will return it if we don't find
+				   an exact match. The first "parent" wins */
+				parent = lang;
+				
+				gedit_debug_message (DEBUG_DOCUMENT,
+						     "%s is a parent of %s\n", (const gchar*)tmp->data, mime_type);
+			}
 
 			tmp = g_slist_next (tmp);
 		}
@@ -451,6 +469,9 @@ gedit_languages_manager_get_language_from_mime_type (GtkSourceLanguagesManager 	
 		languages = g_slist_next (languages);
 	}
 
-	return NULL;
+	if (parent != NULL)
+		add_language_to_cache (lm, mime_type, parent);
+	
+	return parent;
 }
 
