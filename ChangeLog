@@ -1,3 +1,14 @@
+2006-08-24  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #352662 – Opening non-existing remote file from command line
+	should report an error
+
+	* gedit/gedit-document.c (document_loader_loaded): ignore the 
+	"create" flag is the file is not local
+
+	* gedit/gedit-utils.c (gedit_utils_uri_has_file_scheme): returns FALSE
+	if the uri is a chained uri.
+
 2006-08-23  Paolo Borelli  <pborelli@katamail.com>
 
 	* plugins/filetree/gedit-file-browser-plugin.c: plug a leak.

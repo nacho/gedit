@@ -60,22 +60,27 @@
 
 #define STDIN_DELAY_MICROSECONDS 100000
 
+/* Returns true if uri is a file: uri and is not a chained uri */
 gboolean
 gedit_utils_uri_has_file_scheme (const gchar *uri)
 {
-	gchar *canonical_uri = NULL;
+	gchar *canonical_uri;
+	gchar *tmp;
 	gboolean res;
 
 	canonical_uri = gnome_vfs_make_uri_canonical (uri);
 	g_return_val_if_fail (canonical_uri != NULL, FALSE);
 
-	res = g_str_has_prefix (canonical_uri, "file:");
-
+	tmp = gnome_vfs_get_local_path_from_uri (canonical_uri);
+	res = (tmp != NULL);
+	
 	g_free (canonical_uri);
+	g_free (tmp);
 
 	return res;
 }
 
+/* FIXME: we should check for chained URIs */
 gboolean
 gedit_utils_uri_has_writable_scheme (const gchar *uri)
 {
