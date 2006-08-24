@@ -1147,10 +1147,17 @@ async_xfer_ok (GnomeVFSXferProgressInfo *progress_info,
 	case GNOME_VFS_XFER_PHASE_CLEANUP:
 		break;
 	case GNOME_VFS_XFER_PHASE_COMPLETED:
-		/* Transfer done!
-		 * Restore the permissions if needed and then refetch
-		 * info on our newly written file to get the mime etc */
+		if (saver->priv->error != NULL)
 		{
+			/* We aborted the xfer after an error */
+			remote_save_completed_or_failed (saver);
+		}
+		else
+		{
+			/* Transfer done!
+			 * Restore the permissions if needed and then refetch
+			 * info on our newly written file to get the mime etc */
+
 			GList *uri_list = NULL;
 
 			/* Try is not as paranoid as the local version (GID)... it would take
@@ -1205,12 +1212,15 @@ async_xfer_error (GnomeVFSXferProgressInfo *progress_info,
 {
 	gedit_debug (DEBUG_SAVER);
 
+	/* We set the error and then abort.
+	 * Note that remote_save_completed_or_failed ()
+	 * will then be called when the xfer state machine goes
+	 * in the COMPLETED state.
+	 */
 	g_set_error (&saver->priv->error,
 		     GEDIT_DOCUMENT_ERROR,
 		     progress_info->vfs_status,
 		     gnome_vfs_result_to_string (progress_info->vfs_status));
-
-	remote_save_completed_or_failed (saver);
 
 	return GNOME_VFS_XFER_ERROR_ACTION_ABORT;
 }
@@ -1309,7 +1319,7 @@ save_remote_file_real (GeditDocumentSaver *saver)
 				       source_uri_list,
 				       dest_uri_list,
 				       GNOME_VFS_XFER_DEFAULT | GNOME_VFS_XFER_TARGET_DEFAULT_PERMS, // CHECK needs more thinking, follow symlinks etc... options are undocumented :(
-				       GNOME_VFS_XFER_ERROR_MODE_ABORT,       /* keep it simple, abort on any error */
+				       GNOME_VFS_XFER_ERROR_MODE_QUERY,       /* We need to use QUERY otherwise we don't get errors */
 				       GNOME_VFS_XFER_OVERWRITE_MODE_REPLACE, /* We have already asked confirm (even if it is racy) */
 				       GNOME_VFS_PRIORITY_DEFAULT,
 				       async_xfer_progress, saver,
