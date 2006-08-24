@@ -734,10 +734,18 @@ async_read_cb (GnomeVFSAsyncHandle *handle,
 	/* end of the file, we are done! */
 	if (bytes_read == 0 || result != GNOME_VFS_OK)
 	{
-		update_document_contents (loader,
-					  loader->priv->buffer,
-					  loader->priv->bytes_read,
-					  &loader->priv->error);
+		if (loader->priv->bytes_read == 0)
+		{
+			if (loader->priv->encoding == NULL)
+				loader->priv->auto_detected_encoding = gedit_encoding_get_current ();
+		}
+		else
+		{
+			update_document_contents (loader,
+						  loader->priv->buffer,
+						  loader->priv->bytes_read,
+						  &loader->priv->error);
+		}
 
 		remote_load_completed_or_failed (loader);
 
