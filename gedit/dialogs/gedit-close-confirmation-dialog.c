@@ -162,8 +162,22 @@ set_logout_mode (GeditCloseConfirmationDialog *dlg,
 	}
 	else
 	{
+		const gchar *stock_id = GTK_STOCK_SAVE;
+		
+		if (GET_MODE (dlg->priv) == SINGLE_DOC_MODE)
+		{
+			GeditDocument *doc;
+			
+			doc = GEDIT_DOCUMENT (dlg->priv->unsaved_documents->data);
+			
+			if (gedit_document_get_readonly (doc) || 
+			    gedit_document_is_untitled (doc))
+				stock_id = GTK_STOCK_SAVE_AS;
+		}
+
 		gtk_dialog_add_button (GTK_DIALOG (dlg),
-				       GTK_STOCK_SAVE, GTK_RESPONSE_YES);
+				       stock_id, 
+				       GTK_RESPONSE_YES);
 
 		gtk_dialog_set_default_response	(GTK_DIALOG (dlg), 
 						 GTK_RESPONSE_YES);

@@ -1,11 +1,25 @@
+2006-08-24  Paolo Maggi  <paolo@gnome.org>
+
+	Fixed bug #352680 – Save on close for readonly files does not work as
+	expected
+	
+	* gedit/dialogs/gedit-close-confirmation-dialog.c
+	(set_logout_mode): add a "Save As" button instead of a "Save" one when
+	in single mode and the document to close is untitled or readonly
+
+	* gedit/gedit-commands-file.c (file_save): call file_save_as for
+	readonly files too
+
 2006-08-24  Paolo Borelli  <pborelli@katamail.com>
 
+	Fixed bug #352677 – Critical warning when opening a empty remote file
+	
 	* gedit/gedit-document-loader.c: handle remote zero lenght files
 	correctly.
 
 2006-08-24  Paolo Maggi  <paolo@gnome.org>
 
-	Fixes bug 352658 – print preview state machine issue.
+	Fixes bug #352658 – print preview state machine issue.
 	
 	* gedit/gedit-tab.c (print_preview_destroyed): add a comment and
 	check that the state is "printing" in the "else" case  

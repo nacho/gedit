@@ -902,9 +902,10 @@ file_save (GeditTab    *tab,
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 
-	if (gedit_document_is_untitled (doc))
+	if (gedit_document_is_untitled (doc) || 
+	    gedit_document_get_readonly (doc))
 	{
-		gedit_debug_message (DEBUG_COMMANDS, "Untitled");
+		gedit_debug_message (DEBUG_COMMANDS, "Untitled or Readonly");
 
 		file_save_as (tab, window);
 		
