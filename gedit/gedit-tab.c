@@ -388,7 +388,7 @@ gedit_tab_set_state (GeditTab      *tab,
 
 	set_view_properties_according_to_state (tab, state);
 
-	if ((state == GEDIT_TAB_STATE_LOADING_ERROR) || // FIXME: add other states if needed
+	if ((state == GEDIT_TAB_STATE_LOADING_ERROR) || /* FIXME: add other states if needed */
 	    (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW))
 	{
 		gtk_widget_hide (tab->priv->view_scrolled_window);
@@ -1973,9 +1973,18 @@ print_preview_destroyed (GtkWidget *preview,
 	tab->priv->print_preview = NULL;
 	
 	if (tab->priv->state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)
+	{
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
+	}
 	else
-		gtk_widget_show (tab->priv->view_scrolled_window);		
+	{
+		/* This should happen only when printing while showing the print
+		 * preview. In this case let us continue whithout changing
+		 * the state and show the document. See bug #352658 */
+		gtk_widget_show (tab->priv->view_scrolled_window);
+		
+		g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINTING);
+	}	
 }
 
 static void
@@ -1986,8 +1995,7 @@ set_print_preview (GeditTab  *tab, GtkWidget *print_preview)
 		
 	if (tab->priv->print_preview != NULL)
 		gtk_widget_destroy (tab->priv->print_preview);
-		
-	
+
 	tab->priv->print_preview = print_preview;
 
 	gtk_box_pack_end (GTK_BOX (tab),
@@ -2072,8 +2080,16 @@ print_finished_cb (GtkSourcePrintJob *pjob, GeditTab *tab)
  	g_object_unref (gjob);
 
 	gedit_print_job_save_config (GEDIT_PRINT_JOB (pjob));
-	
+
 	g_object_unref (pjob);
+
+	if (tab->priv->print_preview != NULL)
+	{
+		/* If we were printing while showing the print preview,
+		   see bug #352658 */
+		gtk_widget_destroy (tab->priv->print_preview);
+		g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINTING);
+	}
 	
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
 }
@@ -2089,6 +2105,14 @@ print_cancelled (GeditMessageArea *area,
 	g_object_unref (tab->priv->print_job);
 
 	set_message_area (tab, NULL); /* destroy the message area */
+
+	if (tab->priv->print_preview != NULL)
+	{
+		/* If we were printing while showing the print preview,
+		   see bug #352658 */        	
+		gtk_widget_destroy (tab->priv->print_preview);
+		g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_PRINTING);
+	}
 	
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
 }

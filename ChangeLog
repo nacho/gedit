@@ -1,5 +1,15 @@
 2006-08-24  Paolo Maggi  <paolo@gnome.org>
 
+	Fixes bug 352658 – print preview state machine issue.
+	
+	* gedit/gedit-tab.c (print_preview_destroyed): add a comment and
+	check that the state is "printing" in the "else" case  
+	(print_finished_cb) (print_cancelled): If we are printing while 
+	showing the print preview, close the print preview when done or 
+	cancelled
+
+2006-08-24  Paolo Maggi  <paolo@gnome.org>
+
 	Fixes bug #352662 – Opening non-existing remote file from command line
 	should report an error
 
