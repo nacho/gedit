@@ -275,7 +275,7 @@ update_document_contents (GeditDocumentLoader  *loader,
 			  gint                  file_size,
 			  GError              **error)
 {
-	gedit_debug (DEBUG_SAVER);
+	gedit_debug (DEBUG_LOADER);
 
 	g_return_val_if_fail (file_size > 0, FALSE);
 	g_return_val_if_fail (file_contents != NULL, FALSE);
@@ -543,7 +543,7 @@ load_local_file_real (GeditDocumentLoader *loader)
 				    
 		if (mapped_file == MAP_FAILED)
 		{
-			gedit_debug_message (DEBUG_SAVER, "mmap failed");
+			gedit_debug_message (DEBUG_LOADER, "mmap failed");
 
 			result = gnome_vfs_result_from_errno ();
 
@@ -618,7 +618,7 @@ static void
 load_local_file (GeditDocumentLoader *loader,
 		 const gchar         *fname)
 {
-	gedit_debug (DEBUG_SAVER);
+	gedit_debug (DEBUG_LOADER);
 
 	g_signal_emit (loader,
 		       signals[LOADING],
@@ -644,10 +644,10 @@ load_local_file (GeditDocumentLoader *loader,
 				    
 		return;			    
 	}
-	
+
 	g_free (loader->priv->local_file_name);
 	loader->priv->local_file_name = g_strdup (fname);
-	
+
 	g_timeout_add_full (G_PRIORITY_HIGH,
 			    0,
 			    (GSourceFunc) load_local_file_real,
