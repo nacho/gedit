@@ -266,22 +266,21 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 	gnome_vfs_uri_unref (guri);
 	g_free (root);
 	g_free (uri);
-	gnome_vfs_uri_unref (guri);
 }
 
 static void
 on_action_set_active_root (GtkAction * action,
                            GeditWindow * window)
 {
-	GeditFileBrowserPluginData * data;
-	
+	GeditFileBrowserPluginData *data;
+
 	data = get_plugin_data (window);
 	set_root_from_doc (data, 
 	                   gedit_window_get_active_document (window));
 }
 
 static gchar *
-get_terminal ()
+get_terminal (void)
 {
 	GConfClient * client;
 	gchar * terminal;
