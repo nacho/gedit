@@ -576,40 +576,39 @@ show_loading_message_area (GeditTab *tab)
 {
 	GtkWidget *area;
 	GeditDocument *doc = NULL;
-	const gchar *short_name;
 	gchar *name;
 	gchar *dirname = NULL;
 	gchar *msg = NULL;
 	gchar *name_markup;
 	gchar *dirname_markup;
 	gint len;
-	
+
 	if (tab->priv->message_area != NULL)
 		return;
-	
+
 	gedit_debug (DEBUG_TAB);
 		
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (doc != NULL);
 
-	short_name = gedit_document_get_short_name_for_display (doc);
-
-	len = g_utf8_strlen (short_name, -1);
+	name = gedit_document_get_short_name_for_display (doc);
+	len = g_utf8_strlen (name, -1);
 
 	/* if the name is awfully long, truncate it and be done with it,
 	 * otherwise also show the directory (ellipsized if needed)
 	 */
 	if (len > MAX_MSG_LENGTH)
 	{
-		name = gedit_utils_str_middle_truncate (short_name, 
-							MAX_MSG_LENGTH);
+		gchar *str;
+
+		str = gedit_utils_str_middle_truncate (name, MAX_MSG_LENGTH);
+		g_free (name);
+		name = str;
 	}
 	else
 	{
 		gchar *uri;
 		gchar *str;
-
-		name = g_strdup (short_name);
 
 		uri = gedit_document_get_uri_for_display (doc);
 		str = gedit_utils_uri_get_dirname (uri);
