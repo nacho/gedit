@@ -1,3 +1,18 @@
+2006-08-25  Paolo Maggi  <paolo@gnome.org>
+
+	Really fixes bug #352717 – gedit silently ignores saving errors when
+	saving remote files
+	
+	* gedit/gedit-document-saver.c (manage_completed_phase): new function,
+	it splits up the code related to the management of the "COMPLETED"
+	phase in async_xfer_ok.
+	(async_xfer_ok): returns just after calling manage_completed_phase in
+	the COMPLETED phase. In this way we avoid emitting the "saving" signal
+	from a potentially finalized saver
+	 (async_xfer_error): does not set the error if it was already set
+	 in a previous interaction
+	 (async_xfer_progress): better debugging messages
+
 2006-08-25  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-document-loader.c: fix a couple of typos.

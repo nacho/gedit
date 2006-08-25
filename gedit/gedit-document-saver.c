@@ -1057,16 +1057,70 @@ remote_get_info_cb (GnomeVFSAsyncHandle *handle,
 	remote_save_completed_or_failed (saver);
 }
 
+static void
+manage_completed_phase (GeditDocumentSaver *saver)
+{
+	/* In tha complete phase we emit the "saving" signal before managing
+	   the phase itself since the saver could be destroyed during these
+	   operations */
+	g_signal_emit (saver,
+		       signals[SAVING],
+		       0,
+		       FALSE,
+		       NULL);
+
+	if (saver->priv->error != NULL)
+	{
+		/* We aborted the xfer after an error */
+		remote_save_completed_or_failed (saver);
+	}
+	else
+	{
+		/* Transfer done!
+		 * Restore the permissions if needed and then refetch
+		 * info on our newly written file to get the mime etc */
+
+		GList *uri_list = NULL;
+
+		/* Try is not as paranoid as the local version (GID)... it would take
+		 * yet another stat to do it...
+		 */
+		if (saver->priv->orig_info != NULL &&
+		    (saver->priv->orig_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS))
+		{
+			gnome_vfs_set_file_info_uri (saver->priv->vfs_uri,
+		     				     saver->priv->orig_info,
+		     				     GNOME_VFS_SET_FILE_INFO_PERMISSIONS);
+
+			// FIXME: for now is a blind try... do we want to error check?
+		}
+
+		uri_list = g_list_prepend (uri_list, saver->priv->vfs_uri);
+
+		gnome_vfs_async_get_file_info (&saver->priv->info_handle,
+					       uri_list,
+					       GNOME_VFS_FILE_INFO_DEFAULT |
+					       GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
+					       GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
+					       GNOME_VFS_FILE_INFO_FOLLOW_LINKS,
+					       GNOME_VFS_PRIORITY_MAX,
+					       remote_get_info_cb,
+					       saver);
+		g_list_free (uri_list);
+	}
+}
+
 static gint
 async_xfer_ok (GnomeVFSXferProgressInfo *progress_info,
 	       GeditDocumentSaver       *saver)
 {
-	gedit_debug_message (DEBUG_SAVER, "xfer phase: %d", progress_info->phase);
+	gedit_debug (DEBUG_SAVER);
 
 	switch (progress_info->phase)
 	{
 	case GNOME_VFS_XFER_PHASE_INITIAL:
 		break;
+		
 	case GNOME_VFS_XFER_CHECKING_DESTINATION:
 		{
 			GnomeVFSFileInfo *orig_info;
@@ -1128,12 +1182,15 @@ async_xfer_ok (GnomeVFSXferProgressInfo *progress_info,
 				saver->priv->orig_info = orig_info;
 		}
 		break;
+		
 	case GNOME_VFS_XFER_PHASE_COLLECTING:
 	case GNOME_VFS_XFER_PHASE_DELETESOURCE: // why do we get this phase??
 		break;
+		
 	case GNOME_VFS_XFER_PHASE_READYTOGO:
 		saver->priv->size = progress_info->bytes_total;
 		break;
+		
 	case GNOME_VFS_XFER_PHASE_OPENSOURCE:
 	case GNOME_VFS_XFER_PHASE_OPENTARGET:
 	case GNOME_VFS_XFER_PHASE_COPYING:
@@ -1143,50 +1200,18 @@ async_xfer_ok (GnomeVFSXferProgressInfo *progress_info,
 			saver->priv->bytes_written = MIN (progress_info->total_bytes_copied,
 							  progress_info->bytes_total);
 		break;
+		
 	case GNOME_VFS_XFER_PHASE_FILECOMPLETED:
 	case GNOME_VFS_XFER_PHASE_CLEANUP:
 		break;
+		
 	case GNOME_VFS_XFER_PHASE_COMPLETED:
-		if (saver->priv->error != NULL)
-		{
-			/* We aborted the xfer after an error */
-			remote_save_completed_or_failed (saver);
-		}
-		else
-		{
-			/* Transfer done!
-			 * Restore the permissions if needed and then refetch
-			 * info on our newly written file to get the mime etc */
-
-			GList *uri_list = NULL;
-
-			/* Try is not as paranoid as the local version (GID)... it would take
-			 * yet another stat to do it...
-			 */
-			if (saver->priv->orig_info != NULL &&
-			    (saver->priv->orig_info->valid_fields & GNOME_VFS_FILE_INFO_FIELDS_PERMISSIONS))
-			{
-				gnome_vfs_set_file_info_uri (saver->priv->vfs_uri,
-			     				     saver->priv->orig_info,
-			     				     GNOME_VFS_SET_FILE_INFO_PERMISSIONS);
-
-				// FIXME: for now is a blind try... do we want to error check?
-			}
-
-			uri_list = g_list_prepend (uri_list, saver->priv->vfs_uri);
-
-			gnome_vfs_async_get_file_info (&saver->priv->info_handle,
-						       uri_list,
-						       GNOME_VFS_FILE_INFO_DEFAULT |
-						       GNOME_VFS_FILE_INFO_GET_MIME_TYPE |
-						       GNOME_VFS_FILE_INFO_FORCE_SLOW_MIME_TYPE |
-						       GNOME_VFS_FILE_INFO_FOLLOW_LINKS,
-						       GNOME_VFS_PRIORITY_MAX,
-						       remote_get_info_cb,
-						       saver);
-			g_list_free (uri_list);
-		}
-		break;
+		manage_completed_phase (saver);
+		
+		/* We return here in order to not emit a "saving" signal on
+		   a potentially invald saver */
+		return 0;
+		
 	/* Phases we don't expect to see */
 	case GNOME_VFS_XFER_PHASE_SETATTRIBUTES:
 	case GNOME_VFS_XFER_PHASE_CLOSESOURCE:
@@ -1210,17 +1235,32 @@ static gint
 async_xfer_error (GnomeVFSXferProgressInfo *progress_info,
 		  GeditDocumentSaver       *saver)
 {
-	gedit_debug (DEBUG_SAVER);
+	if (saver->priv->error == NULL)
+	{
+		/* We set the error and then abort.
+		 * Note that remote_save_completed_or_failed ()
+		 * will then be called when the xfer state machine goes
+		 * in the COMPLETED state.
+		 */
+		gedit_debug_message (DEBUG_SAVER, 
+				     "Set the error: \"%s\"",
+				     gnome_vfs_result_to_string (progress_info->vfs_status));
+		 
+		g_set_error (&saver->priv->error,
+			     GEDIT_DOCUMENT_ERROR,
+			     progress_info->vfs_status,
+			     gnome_vfs_result_to_string (progress_info->vfs_status));
+	}
+	else
+	{
+		gedit_debug_message (DEBUG_SAVER, 
+				     "Error already set.\n"
+				     "The new (skipped) error is: \"%s\"",
+				     gnome_vfs_result_to_string (progress_info->vfs_status));
 
-	/* We set the error and then abort.
-	 * Note that remote_save_completed_or_failed ()
-	 * will then be called when the xfer state machine goes
-	 * in the COMPLETED state.
-	 */
-	g_set_error (&saver->priv->error,
-		     GEDIT_DOCUMENT_ERROR,
-		     progress_info->vfs_status,
-		     gnome_vfs_result_to_string (progress_info->vfs_status));
+		g_return_val_if_fail (progress_info->vfs_status == GNOME_VFS_ERROR_INTERRUPTED,
+				      GNOME_VFS_XFER_ERROR_ACTION_ABORT);
+	}
 
 	return GNOME_VFS_XFER_ERROR_ACTION_ABORT;
 }
@@ -1230,6 +1270,9 @@ async_xfer_progress (GnomeVFSAsyncHandle      *handle,
 		     GnomeVFSXferProgressInfo *progress_info,
 		     gpointer                  data)
 {
+	gedit_debug_message (DEBUG_SAVER, "xfer phase: %d", progress_info->phase);
+	gedit_debug_message (DEBUG_SAVER, "xfer status: %d", progress_info->status);
+	
 	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (data);
 
 	switch (progress_info->status)
