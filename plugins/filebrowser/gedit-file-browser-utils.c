@@ -122,9 +122,3 @@ gedit_file_browser_utils_confirmation_dialog (GeditWindow * window,
 
 	return (ret == GTK_RESPONSE_OK);
 }
-
-gboolean 
-gedit_file_browser_utils_is_local (gchar const * uri)
-{
-	return strncmp(uri, "file://", 7) == 0;
-}

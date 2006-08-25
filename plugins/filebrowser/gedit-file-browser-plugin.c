@@ -25,6 +25,7 @@
 #endif
 
 #include <gedit/gedit-commands.h>
+#include <gedit/gedit-utils.h>
 #include <glib/gi18n-lib.h>
 #include <gedit/gedit-debug.h>
 #include <gconf/gconf-client.h>
@@ -153,7 +154,7 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 	if (root != NULL && *root != '\0') {
 		uri = gnome_vfs_uri_new (root);
 
-		if (uri == NULL || (!remote && !gedit_file_browser_utils_is_local (root))) {
+		if (uri == NULL || (!remote && !gedit_utils_uri_has_file_scheme (root))) {
 		} else if (virtual != NULL && virtual != '\0') {
 			gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget, 
 			                                                     root,
@@ -265,6 +266,7 @@ set_root_from_doc (GeditFileBrowserPluginData * data,
 	gnome_vfs_uri_unref (guri);
 	g_free (root);
 	g_free (uri);
+	gnome_vfs_uri_unref (guri);
 }
 
 static void
@@ -748,7 +750,7 @@ on_virtual_root_changed_cb (GeditFileBrowserStore * store,
 		gtk_action_set_sensitive (
 			gtk_action_group_get_action (data->action_group, 
 	                                            "OpenTerminal"),
-	                guri != NULL && gedit_file_browser_utils_is_local (virtual));
+	                guri != NULL && gedit_utils_uri_has_file_scheme (virtual));
 		
 		if (guri != NULL)
 			gnome_vfs_uri_unref (guri);
@@ -776,6 +778,7 @@ on_tab_added_cb (GeditWindow * window,
 	GConfClient * client;
 	GeditDocument * doc;
 	gboolean open;
+	gchar *uri;
 
 	client = gconf_client_get_default ();
 	
@@ -789,8 +792,12 @@ on_tab_added_cb (GeditWindow * window,
 	if (open) {
 		doc = gedit_tab_get_document (tab);
 		
-		if (!gedit_document_is_untitled (doc))
-			set_root_from_doc (data, doc);
+		if (!gedit_document_is_untitled (doc)) {
+			uri = gedit_document_get_uri (doc);
+			
+			if (gedit_utils_uri_has_file_scheme (uri))
+				set_root_from_doc (data, doc);
+		}
 		
 	}
 	

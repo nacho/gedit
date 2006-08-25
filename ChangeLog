@@ -1,3 +1,16 @@
+2006-08-25  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/filebrowser/gedit-file-browser-plugin.c:
+	* plugins/filebrowser/gedit-file-browser-utils.[ch]:
+	* plugins/filebrowser/gedit-file-browser-widget.c:
+	
+	Make use of gedit_utils_uri_has_file_scheme instead of using
+	gedit_file_browser_utils_is_local
+	
+	* plugins/filebrowser/gedit-file-browser-plugin.c: do not open file
+	browser at first opened document when it is a remote file (to avoid
+	problems with bug #352824)
+	
 2006-08-25  Paolo Maggi  <paolo@gnome.org>
 
 	Really fixes bug #352717 – gedit silently ignores saving errors when
