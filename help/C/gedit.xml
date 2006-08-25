@@ -865,7 +865,7 @@
 			<variablelist>
 	 		<varlistentry> <term><guilabel>Tabs</guilabel> </term> 
 			 <listitem> 
-				<para>Use the <guilabel>Tabs width</guilabel> spin box to specify the width of the space that <application> &app;</application> inserts when you press the <keycap>Tab</keycap> key. </para>
+				<para>Use the <guilabel>Tab width</guilabel> spin box to specify the width of the space that <application> &app;</application> inserts when you press the <keycap>Tab</keycap> key. </para>
 				<para>Select the <guilabel>Insert spaces instead of tabs</guilabel> option to specify that <application> &app;</application> inserts spaces instead of a tab character when you press the <keycap>Tab</keycap> key. </para>
 			 </listitem>
 		  	</varlistentry>
@@ -1093,10 +1093,15 @@
 		<title>Plugins</title>
 		<sect2 id="gedit-plugins-overview">
 		  <title>Working with Plugins</title>
-  		<para>You can add extra features to <application>&app;</application> by enabling <firstterm>plugins</firstterm>. A <firstterm>plugin</firstterm> is a supplementary program that enhances the functionality of an application. Plugins add new items to the <application>&app;</application> menus for the new features they provide.
+  		<para>You can add extra features to <application>&app;</application> by enabling <firstterm>plugins</firstterm>. A plugin is a supplementary program that enhances the functionality of an application. Plugins add new items to the <application>&app;</application> menus for the new features they provide.
   		</para>
   		<para>Several plugins come built-in with <application>&app;</application>, and you can install more. The <ulink type="http" url="http://live.gnome.org/Gedit/Plugins">gedit website</ulink> lists third-party plugins.</para> 
   		<para>The following plugins come built-in with <application>&app;</application>:</para>
+  		<!-- Not yet documented:
+  		Ext Tools
+  		Python
+  		Modelines  		
+  		-->
   		<itemizedlist>
   		  <listitem>
   		    <para><link linkend="gedit-change-case-plugin"><application>Change Case</application></link> allows you to change the case of the selected text.</para>
@@ -1109,7 +1114,10 @@
   		  </listitem>
   		  <listitem>
   		    <para><application><link linkend="gedit-insert-date-time-plugin">Insert Date/Time</link></application> adds the current date and time into a document.</para>
-  		  </listitem>  
+  		  </listitem>
+  		  <listitem>
+  		    <para><application><link linkend="gedit-modelines-plugin">Modelines</link></application> allows you to set editing preferences for individual documents, and supports <application>Emacs</application>, <application>Kate</application> and <application>Vim</application>-style modelines.</para>
+  		  </listitem> 
   		  <listitem>
   		    <para><application><link linkend="gedit-snippets-plugin">Snippets</link></application> allows you to store frequently-used pieces of text and insert them quickly into a document.</para>
   		  </listitem>
@@ -1131,7 +1139,7 @@
   	</sect2>
   		
 <sect2 id="gedit-change-case-plugin">
-<title>ChangeCase Plugin</title>
+<title>Change Case Plugin</title>
 	<para>The <application>Change Case</application> plugin changes the case of the selected text.</para>
 	 <para>The following items are added to the <guimenu>Edit</guimenu> menu when the <application>Change Case</application> plugin is enabled:</para>
 
@@ -1183,7 +1191,7 @@
 
 <sect2 id="gedit-document-statistics-plugin">
 <title>Document Statistics Plugin</title>
-	<para>The Document Statistics plugin counts the number of lines, words, characters with spaces, characters without spaces, and bytes in the current file. The plugin displays the results in a <guilabel>Document Statistics</guilabel> dialog. To use the Document Statistics plugin, perform the following steps:</para>
+	<para>The <application>Document Statistics</application> plugin counts the number of lines, words, characters with spaces, characters without spaces, and bytes in the current file. The plugin displays the results in a <guilabel>Document Statistics</guilabel> dialog. To use the Document Statistics plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Document Statistics</guimenuitem> </menuchoice> to display the <guilabel>Document Statistics</guilabel> dialog. The <guilabel>Document Statistics</guilabel> dialog displays the following information about the file:
 				</para>
@@ -1206,9 +1214,6 @@
 		      </itemizedlist>
 		  </listitem>
 		  <listitem><para>You can continue to update the <application>&app;</application> file while the <guilabel>Document Statistics</guilabel> dialog is open. To refresh the contents of the <guilabel>Document Statistics</guilabel> dialog, click <guibutton>Update</guibutton>.
-                           </para>
-		  </listitem>
-		  <listitem><para>To close the <guilabel>Document Statistics</guilabel> dialog, click <guibutton>Close</guibutton>.
                            </para>
 		  </listitem>
 		</orderedlist> 
@@ -1238,7 +1243,7 @@
 
 <sect2 id="gedit-insert-date-time-plugin">
 <title>Insert Date/Time Plugin</title>
-	<para>The Insert Date/Time plugin inserts the current date and time into a file. To use the Insert Date/Time plugin, perform the following steps:</para>
+	<para>The <application>Insert Date/Time</application> plugin inserts the current date and time into a document. To use the Insert Date/Time plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Insert Date and Time</guimenuitem> </menuchoice>. </para>
         <para>If you have not configured the Insert Date/Time plugin to automatically insert the date/time without prompting you for the format, <application>&app;</application> displays the <guilabel>Insert Date and Time</guilabel> dialog. Select the appropriate date/time format from the list. Click <guibutton>Insert</guibutton> to close the <guilabel>Insert Date and Time</guilabel> dialog. <application>&app;</application> inserts the date/time at the cursor position in the current file. </para>
@@ -1284,10 +1289,48 @@
 </sect3>
 </sect2>
 
+<sect2 id="gedit-modelines-plugin">    
+  <title>Modelines Plugin</title>
+    <para>The <application>Modelines</application> plugin allows you to set  preferences for individual documents. A <firstterm>modeline</firstterm> is a line of text at the start or end of the document with settings that <application>&app;</application> recognises.</para>
+    <para>You can override the following preferences with modelines:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Tab width</para>
+      </listitem>
+      <listitem>
+        <para>Insert spaces instead of tabs</para>
+      </listitem>
+      <listitem>
+        <para>Text Wrapping</para>
+      </listitem>
+      <listitem>
+        <para>Right margin width</para>
+      </listitem>
+    </itemizedlist>
+   
+    <para>The <application>Modelines</application> plugin supports a subset of the options used by other text editors <application>Emacs</application>, <application>Kate</application> and <application>Vim</application>.</para>
+    
+    <sect3 id="gedit-modelines-plugin-emacs">    
+      <title>Emacs Modelines</title>
+      <para>The first two lines of a document are scanned for <application>Emacs</application> modelines.</para>
+      <para>The <application>Emacs</application> options for tab-width, indent-tabs-mode and autowrap are supported. For more information, see the <ulink type="http" url="http://www.delorie.com/gnu/docs/emacs/emacs_486.html">GNU Emacs Manual</ulink>.</para>
+    </sect3>
+    <sect3 id="gedit-modelines-plugin-kate">    
+      <title>Kate Modelines</title>
+      <para>The first and last ten lines a document are scanned for <application>Kate</application> modelines.</para>
+      <para>The <application>Kate</application> options for tab-width, indent-width, space-indent, word-wrap and word-wrap-column are supported. For more information, see the <ulink type="http" url="http://www.kate-editor.org/article/katepart_modelines">Kate website</ulink>.</para>
+    </sect3>
+    <sect3 id="gedit-modelines-plugin-vim">    
+      <title>Vim Modelines</title>
+      <para>The first and last three lines a document are scanned for <application>Vim</application> modelines.</para>      
+      <para>The <application>Vim</application> options for et, expandtab, ts, tabstop, wrap, and textwidth are supported. For more information, see the <ulink type="http" url="http://vimdoc.sourceforge.net/htmldoc/options.html#modeline">Vim website</ulink>.</para>
+      <note><para>A current limitation in <application>&app;</application> prevents the last line of a document from being used as a modeline.</para></note>
+    </sect3>
+</sect2>
 
 <sect2 id="gedit-snippets-plugin">
 <title>Snippets Plugin</title>
-  <para>The Snippets plugin allows you to store frequently-used pieces of text, called <firstterm>snippets</firstterm>, and insert them quickly into a document.</para>
+  <para>The <application>Snippets</application> plugin allows you to store frequently-used pieces of text, called <firstterm>snippets</firstterm>, and insert them quickly into a document.</para>
     <para>Snippets are specific to the language syntax of the current document. For example, when you are working with an HTML document, you can choose from a list of snippets that are useful for HTML. In addition, some snippets are global, and are available in all documents.</para>
     <para>A number of built-in snippets are installed with <application>&app;</application>, which can be modified.</para>
   
@@ -1392,6 +1435,11 @@
               <varlistentry><term>$GEDIT_BASENAME</term>
                 <listitem>
                   <para>The basename of the filename of the document, or an empty string if the document isn't saved yet.</para>
+                </listitem>  
+              </varlistentry>
+              <varlistentry><term>$GEDIT_CURRENT_WORD</term>
+                <listitem>
+                  <para>The word at the cursor's location in the document. When this variable is used, the current word will be replaced by the snippet text.</para>
                 </listitem>     
               </varlistentry>
             
@@ -1406,27 +1454,35 @@
 
 <sect2 id="gedit-sort-plugin">
 <title>Sort Plugin</title>
-	<para>The Sort plugin sorts the selected text.</para>
-		  <note><para>You cannot undo the Sort operation, so you should save the file before performing the sort. To revert to the saved version of the file after the sort operation, choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Revert</guimenuitem> </menuchoice>.
+	<para>The <application>Sort</application> plugin arranges selected lines of text into alphabetical order.</para>
+		  <caution><para>You cannot undo the Sort operation, so you should save the file before performing the sort. To revert to the saved version of the file after the sort operation, choose <menuchoice> <guimenu>File</guimenu> <guimenuitem>Revert</guimenuitem> </menuchoice>.
 				</para>
-		  </note>
+		  </caution>
               <para>To use the Sort plugin, perform the following steps:</para>
-		<orderedlist> 
-		  <listitem><para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Sort</guimenuitem> </menuchoice> to display the <guilabel>Sort</guilabel> dialog.
+		<orderedlist>
+		  <listitem>
+		    <para>Select the lines of text you want to sort.</para>
+		  </listitem> 
+		  <listitem><para>Choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Sort</guimenuitem> </menuchoice>. The <guilabel>Sort</guilabel> dialog opens.
 				</para>
 		  </listitem>
-		  <listitem><para>To arrange the text in reverse sort order, select the <guilabel>Reverse order</guilabel> option.
-				</para>
-		  </listitem>
-		  <listitem><para>To delete duplicate lines, select the <guilabel>Remove duplicates</guilabel> option.
-				</para>
-		  </listitem>
-		  <listitem><para>To ignore case sensitivity, select the <guilabel>Ignore case</guilabel> option.
-				</para>
-		  </listitem>
-		  <listitem><para>To specify the start position of the sort, use the <guilabel>Start at column</guilabel> spin box.
-				</para>
-		  </listitem>
+		  <listitem><para>Choose the options you want for the sort:</para>
+		    <itemizedlist>
+    		  <listitem>
+    		    <para>To arrange the text in reverse order, select <guilabel>Reverse order</guilabel>.
+    				</para>
+    		  </listitem>
+    		  <listitem><para>To delete duplicate lines, select <guilabel>Remove duplicates</guilabel>.
+    				</para>
+    		  </listitem>
+    		  <listitem><para>To ignore case sensitivity, select <guilabel>Ignore case</guilabel>.
+    				</para>
+    		  </listitem>
+    		  <listitem><para>To have the sort ignore the characters at the start of the lines, set the first character that should be used for sorting in the <guilabel>Start at column</guilabel> spin box.
+    				</para>
+    		  </listitem>    
+		    </itemizedlist>
+		  </listitem>		  
 		  <listitem><para>To perform the sort operation, click <guibutton>Sort</guibutton>. 
 				</para>
 		  </listitem>
@@ -1435,7 +1491,7 @@
 
 <sect2 id="gedit-spell-checker-plugin">
 <title>Spell Checker Plugin</title>
-	<para>The Spell checker plugin checks the spelling in the selected text. You can configure <application>&app;</application> to check the spelling automatically, or you can check the spelling manually, in the specified language. The language setting, and the autocheck spelling properties, apply per document. To use the Spell checker plugin, perform the following steps:</para>
+	<para>The <application>Spell Checker</application> plugin checks the spelling in the selected text. You can configure <application>&app;</application> to check the spelling automatically, or you can check the spelling manually, in the specified language. The language setting, and the autocheck spelling properties, apply per document. To use the Spell checker plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>Tools</guimenu> <guimenuitem>Set Language</guimenuitem> </menuchoice> to display the <guilabel>Set language</guilabel> dialog. Select the appropriate language from the list. Click <guibutton>OK</guibutton> to close the <guilabel>Set language</guilabel> dialog.
 				</para>
@@ -1490,7 +1546,7 @@
 
 <sect2 id="gedit-tag-list-plugin">
 <title>Tag List Plugin</title>
-	<para>The Tag List plugin allows you to insert common tags from a list in the side pane.</para>
+	<para>The <application>Tag List</application> plugin allows you to insert common tags from a list in the side pane.</para>
   <para>To use the Tag List plugin, perform the following steps:</para>
 		<orderedlist> 
 		  <listitem><para>Choose <menuchoice> <guimenu>View</guimenu> <guimenuitem>Side Pane</guimenuitem> </menuchoice>.
@@ -1520,7 +1576,7 @@
 
 <sect2 id="gedit-user-name-plugin">
 <title>User Name Plugin</title>
-	<para>The User name plugin inserts the username of the current user into the document.</para>
+	<para>The <application>User name</application> plugin inserts the username of the current user into the document.</para>
 	<para>To insert your username at the cursor position, choose <menuchoice> <guimenu>Edit</guimenu> <guimenuitem>Insert User Name</guimenuitem> </menuchoice>.</para>
 	
 	<note><para>This plugin is mostly provided as an example of how to create your own plugins. For more information on creating plugins, see the <ulink type="http" url="http://live.gnome.org/Gedit/Plugins"><application>&app;</application> website</ulink>.</para></note>
