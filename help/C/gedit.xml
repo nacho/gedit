@@ -1126,7 +1126,7 @@
   		    <para><application><link linkend="gedit-modelines-plugin">Modelines</link></application> allows you to set editing preferences for individual documents, and supports <application>Emacs</application>, <application>Kate</application> and <application>Vim</application>-style modelines.</para>
   		  </listitem>
   		  <listitem>
-  		    <para><application><!--<link linkend="gedit-python-console-plugin">Python Console</link>-->Python Console</application> allows you to run commands in the python programming language.</para>
+  		    <para><application><link linkend="gedit-python-console-plugin">Python Console</link></application> allows you to run commands in the python programming language.</para>
   		  </listitem>
   		  <listitem>
   		    <para><application><link linkend="gedit-snippets-plugin">Snippets</link></application> allows you to store frequently-used pieces of text and insert them quickly into a document.</para>
@@ -1439,6 +1439,12 @@
       <para>The <application>Vim</application> options for et, expandtab, ts, tabstop, wrap, and textwidth are supported. For more information, see the <ulink type="http" url="http://vimdoc.sourceforge.net/htmldoc/options.html#modeline">Vim website</ulink>.</para>
       <note><para>A current limitation in <application>&app;</application> prevents the last line of a document from being used as a modeline.</para></note>
     </sect3>
+</sect2>
+
+<sect2 id="gedit-python-console-plugin">    
+  <title>Python Console Plugin</title>
+  <para>The <application>Python Console</application> Plugin allows you to run commands in the python programming language from <application>&app;</application>. Enabling the plugin adds a tab to the bottom pane. This shows recent output and a command prompt field.</para>
+  <caution><para>Commands entered into the python console are not checked before they are run. It is therefore possible to hang <application>&app;</application>, for example by entering an infinite loop.</para></caution>
 </sect2>
 
 <sect2 id="gedit-snippets-plugin">
