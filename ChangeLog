@@ -1,3 +1,11 @@
+2006-08-26  Steve Frécinaux  <steve@istique.net>
+
+	Fix bug #352854 – modelines should revert to pref values when a
+	modeline part is removed
+
+	* plugins/modelines/modelines.py: read parameters that are not in the
+	modelines anymore from gconf.
+
 2006-08-26  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-python-module.c:

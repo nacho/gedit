@@ -20,6 +20,7 @@
 import gedit
 import re
 import gtk
+import gconf
 
 class ModelinePlugin(gedit.Plugin):
 	def __init__(self):
@@ -59,7 +60,6 @@ def apply_modeline(doc, error, view):
 	if error is None:
 		options = get_modeline_options(doc)
 		apply_options(options, view)
-		doc.set_data("ModelineOptions", options)
 
 def get_modeline_options(doc):
 	options = dict()
@@ -227,20 +227,34 @@ def parse_modeline_kate(line):
 	return options
 
 def apply_options(options, view):
+	old_options = view.get_data("ModelineOptions")
+
+	if not old_options:
+		old_options = {}
 	if not options:
-		return
+		options = {}
 
 	if options.has_key("tabs-width"):
 		view.set_tabs_width(options["tabs-width"])
+	elif old_options.has_key("tabs-width"):
+		view.set_tabs_width(gconf_get_int("/apps/gedit-2/preferences/editor/tabs/tabs_size", 8))
 	
 	if options.has_key("use-tabs"):
 		view.set_insert_spaces_instead_of_tabs(not options["use-tabs"])
+	elif old_options.has_key("use-tabs"):
+		view.set_insert_spaces_instead_of_tabs(gconf_get_bool("/apps/gedit-2/preferences/editor/tabs/insert_spaces", False))
 
 	if options.has_key("wrapping"):
 		if options["wrapping"]:
 			view.set_wrap_mode(gtk.WRAP_WORD)
 		else:
 			view.set_wrap_mode(gtk.WRAP_NONE)
+	elif old_options.has_key("wrapping"):
+		wrap_mode = gconf_get_str("/apps/gedit-2/preferences/editor/wrap_mode/wrap_mode", "GTK_WRAP_WORD")
+		if wrap_mode == "GTK_WRAP_WORD":
+			view.set_wrap_mode(gtk.WRAP_WORD)
+		else:
+			view.set_wrap_mode(gtk.WRAP_NONE)		
 
 	if options.has_key("margin"):
 		if options["margin"] > 0:
@@ -248,6 +262,33 @@ def apply_options(options, view):
 			view.set_show_margin(True)
 		else:
 			view.set_show_margin(False)
+	elif old_options.has_key("margin"):
+		view.set_margin(long(gconf_get_int("/apps/gedit-2/preferences/editor/right_margin/right_margin_position", 80)))
+		view.set_show_margin(gconf_get_bool("/apps/gedit-2/preferences/editor/right_margin/display_right_margin", False))
+
+	view.set_data("ModelineOptions", options)
+
+gconf_client = gconf.client_get_default()
+def gconf_get_bool(key, default = False):
+	val = gconf_client.get(key)
+	if val is not None and val.type == gconf.VALUE_BOOL:
+		return val.get_bool()
+	else:
+		return default
+
+def gconf_get_str(key, default = ""):
+	val = gconf_client.get(key)
+	if val is not None and val.type == gconf.VALUE_STRING:
+		return val.get_string()
+	else:
+		return default
+
+def gconf_get_int(key, default = 0):
+	val = gconf_client.get(key)
+	if val is not None and val.type == gconf.VALUE_INT:
+		return val.get_int()
+	else:
+		return default
 
 # ex:ts=8:noet:
 # kate: word-wrap-column 120;
