@@ -407,7 +407,7 @@ static gboolean
 run_gc (gpointer data)
 {
 	while (PyGC_Collect ())
-		;	
+		;
 
 	idle_garbage_collect_id = 0;
 	return FALSE;
@@ -416,9 +416,18 @@ run_gc (gpointer data)
 void
 gedit_python_garbage_collect (void)
 {
-	if (Py_IsInitialized() && idle_garbage_collect_id == 0)
+	if (Py_IsInitialized())
 	{
-		idle_garbage_collect_id = g_idle_add (run_gc, NULL);
+		/*
+		 * We both run the GC right now and we schedule
+		 * a further collection in the main loop.
+		 */
+
+		while (PyGC_Collect ())
+			;
+
+		if (idle_garbage_collect_id == 0)
+			idle_garbage_collect_id = g_idle_add (run_gc, NULL);
 	}
 }
 

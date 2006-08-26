@@ -122,6 +122,11 @@ gedit_window_dispose (GObject *object)
 
 	window = GEDIT_WINDOW (object);
 
+	/* First of all, force collection so that plugins
+	 * really drop some of the references.
+	 */
+	gedit_plugins_engine_garbage_collect ();
+
 	if (window->priv->recent_manager != NULL)
 	{
 		g_signal_handlers_disconnect_by_func (window->priv->recent_manager,
@@ -141,6 +146,11 @@ gedit_window_dispose (GObject *object)
 		g_object_unref (window->priv->window_group);
 		window->priv->window_group = NULL;
 	}
+
+	/* Now that there have broken some reference loops,
+	 * force collection again.
+	 */
+	gedit_plugins_engine_garbage_collect ();
 
 	G_OBJECT_CLASS (gedit_window_parent_class)->dispose (object);
 }
@@ -180,8 +190,6 @@ gedit_window_destroy (GtkObject *object)
 		gedit_prefs_manager_bottom_panel_size_can_set ())
 			gedit_prefs_manager_set_bottom_panel_size (
 					window->priv->bottom_panel_size);
-
-	gedit_plugins_engine_garbage_collect();
 
 	GTK_OBJECT_CLASS (gedit_window_parent_class)->destroy (object);
 }

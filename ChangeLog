@@ -1,3 +1,12 @@
+2006-08-26  Paolo Borelli  <pborelli@katamail.com>
+
+	* gedit/gedit-python-module.c:
+	* gedit/gedit-window.c:
+
+	Run the garbage collector both at the start and at the end of 
+	gedit_window_dispose, in order to enforce correct object lifetime.
+	Should fix bug #350776.
+
 2006-08-25  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-tab.c: plug tiny leak when loading remote files.
