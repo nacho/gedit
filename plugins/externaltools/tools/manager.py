@@ -339,7 +339,7 @@ class Manager:
 
 	def on_tool_manager_dialog_response(self, dialog, response):
 		if response == gtk.RESPONSE_HELP:
-			gedit.help_display(self.dialog, 'gedit.xml', 'gedit-plugins')
+			gedit.help_display(self.dialog, 'gedit.xml', 'gedit-external-tools-plugin')
 			return
 
 		self.save_current_tool()
