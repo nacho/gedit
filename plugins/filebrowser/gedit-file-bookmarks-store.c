@@ -408,9 +408,7 @@ init_bookmarks (GeditFileBookmarksStore * model)
 on_bookmarks_file_changed, model);
 		}
 	} else {
-		g_warning ("Couldn't open bookmarks file %s: %s",
-			   bookmarks, error->message);
-
+		/* The bookmarks file doesn't exist (which is perfectly fine) */
 		g_error_free (error);
 	}
 

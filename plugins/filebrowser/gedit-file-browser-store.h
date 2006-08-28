@@ -114,7 +114,7 @@ GeditFileBrowserStore *gedit_file_browser_store_new   (gchar const *root);
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root_and_virtual_root    (GeditFileBrowserStore * model,
 						       gchar const *root,
-			  			       gchar const *virtual);
+			  			       gchar const *virtual_root);
 GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root                     (GeditFileBrowserStore * model,
 				                       gchar const *root);

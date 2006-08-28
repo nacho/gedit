@@ -51,7 +51,9 @@ typedef struct _GeditFileBrowserPluginData
 {
 	GeditFileBrowserWidget * tree_widget;
 	gulong                   merge_id;
-	GtkActionGroup         * action_group;	
+	GtkActionGroup         * action_group;
+	gboolean	         auto_root;
+	gulong                   end_loading_handle;
 } GeditFileBrowserPluginData;
 
 static void on_uri_activated_cb          (GeditFileBrowserWidget * widget,
@@ -84,6 +86,9 @@ static gboolean on_confirm_no_trash_cb   (GeditFileBrowserWidget * widget,
                                           GeditFileBrowserStore * store,
                                           GtkTreeIter * iter,
                                           GeditWindow * window);
+static void on_end_loading_cb            (GeditFileBrowserStore      * store,
+                                          GtkTreeIter                * iter,
+                                          GeditFileBrowserPluginData * data);
 
 GEDIT_PLUGIN_REGISTER_TYPE_WITH_CODE (GeditFileBrowserPlugin, filetree_plugin, 	\
 	gedit_file_browser_enum_and_flag_register_type (module);		\
@@ -114,12 +119,32 @@ get_plugin_data (GeditWindow * window)
 	return (GeditFileBrowserPluginData *) (g_object_get_data (G_OBJECT (window), WINDOW_DATA_KEY));
 }
 
+static void
+prepare_auto_root (GeditFileBrowserPluginData *data)
+{
+	GeditFileBrowserStore *store;
+
+	data->auto_root = TRUE;
+	
+	store = gedit_file_browser_widget_get_browser_store (data->tree_widget);
+	
+	if (data->end_loading_handle != 0) {
+		g_signal_handler_disconnect(store, data->end_loading_handle);
+		data->end_loading_handle = 0;
+	}
+
+	data->end_loading_handle = g_signal_connect (store, 
+	                                             "end-loading",
+	                                             G_CALLBACK (on_end_loading_cb),
+	                                             data);
+}
+
 static void 
 restore_default_location (GeditFileBrowserPlugin * plugin, 
                           GeditFileBrowserPluginData *data)
 {
 	gchar * root;
-	gchar * virtual;
+	gchar * virtual_root;
 	gboolean bookmarks;
 	gboolean remote;
 	GConfClient * client;
@@ -143,7 +168,7 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 	root = gconf_client_get_string (client, 
 	                                FILE_BROWSER_BASE_KEY "/on_load/root", 
 	                                NULL);
-	virtual = gconf_client_get_string (client, 
+	virtual_root = gconf_client_get_string (client, 
 	                                   FILE_BROWSER_BASE_KEY "/on_load/virtual_root", 
 	                                   NULL);
 
@@ -155,11 +180,13 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 		uri = gnome_vfs_uri_new (root);
 
 		if (uri == NULL || (!remote && !gedit_utils_uri_has_file_scheme (root))) {
-		} else if (virtual != NULL && virtual != '\0') {
+		} else if (virtual_root != NULL && virtual_root != '\0') {
+			prepare_auto_root(data);
 			gedit_file_browser_widget_set_root_and_virtual_root (data->tree_widget, 
 			                                                     root,
-			                                                     virtual);
+			                                                     virtual_root);
 		} else {
+			prepare_auto_root(data);
 			gedit_file_browser_widget_set_root (data->tree_widget,
 			                                    root,
 			                                    TRUE);
@@ -171,7 +198,7 @@ restore_default_location (GeditFileBrowserPlugin * plugin,
 
 	g_object_unref (client);
 	g_free (root);
-	g_free (virtual);
+	g_free (virtual_root);
 }
 
 static void
@@ -440,6 +467,8 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 	GeditFileBrowserStore * store;
 
 	data = g_new (GeditFileBrowserPluginData, 1);
+	data->auto_root = FALSE;
+	data->end_loading_handle = 0;
 	data->tree_widget = GEDIT_FILE_BROWSER_WIDGET (gedit_file_browser_widget_new ());
 
 	g_signal_connect (data->tree_widget,
@@ -568,6 +597,18 @@ on_error_cb (GeditFileBrowserWidget * tree_widget,
 {
 	gchar * title;
 	GtkWidget * dlg;
+	GeditFileBrowserPluginData * data;
+	
+	data = get_plugin_data (window);
+	
+	/* Do not show the error when the root has been set automatically */
+	if (data->auto_root && (code == GEDIT_FILE_BROWSER_ERROR_SET_ROOT ||
+	                        code == GEDIT_FILE_BROWSER_ERROR_LOAD_DIRECTORY)) 
+	{
+		/* Show bookmarks */
+		gedit_file_browser_widget_show_bookmarks (data->tree_widget);
+		return;
+	}
 
 	switch (code) {
 	case GEDIT_FILE_BROWSER_ERROR_NEW_DIRECTORY:
@@ -717,7 +758,7 @@ on_virtual_root_changed_cb (GeditFileBrowserStore * store,
 {
 	GeditFileBrowserPluginData * data = get_plugin_data (window);
 	gchar * root;
-	gchar * virtual;
+	gchar * virtual_root;
 	GConfClient * client;
 	GnomeVFSURI * guri;
 
@@ -736,27 +777,27 @@ on_virtual_root_changed_cb (GeditFileBrowserStore * store,
 	                         root,
 	                         NULL);
 	
-	virtual = gedit_file_browser_store_get_virtual_root (store);
+	virtual_root = gedit_file_browser_store_get_virtual_root (store);
 
-	if (!virtual) {
+	if (!virtual_root) {
 		/* Set virtual to same as root then */
 		gconf_client_set_string (client,
 	                                 FILE_BROWSER_BASE_KEY "/on_load/virtual_root",
 	                                 root,
 	                                 NULL);
 	} else {
-		guri = gnome_vfs_uri_new (virtual);
+		guri = gnome_vfs_uri_new (virtual_root);
 		gtk_action_set_sensitive (
 			gtk_action_group_get_action (data->action_group, 
 	                                            "OpenTerminal"),
-	                guri != NULL && gedit_utils_uri_has_file_scheme (virtual));
+	                guri != NULL && gedit_utils_uri_has_file_scheme (virtual_root));
 		
 		if (guri != NULL)
 			gnome_vfs_uri_unref (guri);
 		
 		gconf_client_set_string (client,
 	                                 FILE_BROWSER_BASE_KEY "/on_load/virtual_root",
-	                                 virtual,
+	                                 virtual_root,
 	                                 NULL);	
 	}
 
@@ -766,7 +807,7 @@ on_virtual_root_changed_cb (GeditFileBrowserStore * store,
 
 	g_object_unref (client);
 	g_free (root);
-	g_free (virtual);
+	g_free (virtual_root);
 }
 
 static void 
@@ -794,8 +835,10 @@ on_tab_added_cb (GeditWindow * window,
 		if (!gedit_document_is_untitled (doc)) {
 			uri = gedit_document_get_uri (doc);
 			
-			if (gedit_utils_uri_has_file_scheme (uri))
+			if (gedit_utils_uri_has_file_scheme (uri)) {
+				prepare_auto_root (data);
 				set_root_from_doc (data, doc);
+			}
 		}
 		
 	}
@@ -885,6 +928,17 @@ on_confirm_delete_cb (GeditFileBrowserWidget * widget,
 	g_free (message);
 
 	return result;
+}
+
+static void 
+on_end_loading_cb (GeditFileBrowserStore      * store,
+                   GtkTreeIter                * iter,
+                   GeditFileBrowserPluginData * data)
+{
+	/* Disconnect the signal */
+	g_signal_handler_disconnect (store, data->end_loading_handle);
+	data->end_loading_handle = 0;
+	data->auto_root = FALSE;
 }
 
 // ex:ts=8:noet:

@@ -1,3 +1,27 @@
+2006-08-28  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/filebrowser/gedit-file-browser-plugin.c: disable showing
+	an error message when the error occurred when setting a root directory
+	automatically (either on load or when the first document is loaded)
+
+	* plugins/filebrowser/Makefile.am:
+	* plugins/filebrowser/filebrowser.schemas.in:
+	* plugins/filebrowser/gedit-file-browser.schemas.in:
+	
+	Renamed filebrowser.schemas.in to gedit-file-browser-schemas.in
+
+	* plugins/filebrowser/gedit-file-browser-store.c:
+	* plugins/filebrowser/gedit-file-bookmarks-store.c:
+	
+	Removed unnecessary g_warning calls
+	
+	* plugins/filebrowser/gedit-file-browser-plugin.c:
+	* plugins/filebrowser/gedit-file-browser-store.[ch]:
+	* plugins/filebrowser/gedit-file-browser-widget.[ch]:
+	
+	Renamed variable 'virtual' to 'virtual_root' (since virtual is a
+	C++ keyword
+
 2006-08-27  Paolo Borelli  <pborelli@katamail.com>
 
 	* plugins/externaltools/tools/manager.py: link updates docs.

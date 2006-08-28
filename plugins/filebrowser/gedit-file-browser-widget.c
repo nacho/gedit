@@ -631,7 +631,7 @@ static void
 insert_location_path (GeditFileBrowserWidget * obj)
 {
 	Location *loc;
-	GnomeVFSURI *virtual;
+	GnomeVFSURI *virtual_root;
 	GnomeVFSURI *root;
 	GnomeVFSURI *current = NULL;
 	GnomeVFSURI * tmp;
@@ -646,18 +646,18 @@ insert_location_path (GeditFileBrowserWidget * obj)
 
 	loc = (Location *) (obj->priv->current_location->data);
 
-	virtual = gnome_vfs_uri_new (loc->virtual_root);
+	virtual_root = gnome_vfs_uri_new (loc->virtual_root);
 	root = gnome_vfs_uri_new (loc->root);
-	current = virtual;
+	current = virtual_root;
 
 	combo_find_by_id (obj, SEPARATOR_ID, &separator);
 	
-	indent = uri_num_parents (virtual, root);
+	indent = uri_num_parents (virtual_root, root);
 
 	while (current != NULL) {
 		insert_path_item (obj, current, &separator, &iter, indent--);
 
-		if (current == virtual) {
+		if (current == virtual_root) {
 			g_signal_handlers_block_by_func (obj->priv->combo,
 							 on_combo_changed,
 							 obj);
@@ -671,20 +671,20 @@ insert_location_path (GeditFileBrowserWidget * obj)
 		}
 
 		if (gnome_vfs_uri_equal (current, root) || !gnome_vfs_uri_has_parent (current)) {
-			if (current != virtual)
+			if (current != virtual_root)
 				gnome_vfs_uri_unref (current);
 			break;
 		}
 
 		tmp = gnome_vfs_uri_get_parent (current);
 		
-		if (current != virtual)
+		if (current != virtual_root)
 			gnome_vfs_uri_unref (current);
 
 		current = tmp;
 	}
 
-	gnome_vfs_uri_unref (virtual);
+	gnome_vfs_uri_unref (virtual_root);
 	gnome_vfs_uri_unref (root);
 }
 
@@ -1680,7 +1680,7 @@ void
 gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget
 						     * obj,
 						     gchar const *root,
-						     gchar const *virtual)
+						     gchar const *virtual_root)
 {
 	GeditFileBrowserStoreResult result;
 
@@ -1688,14 +1688,14 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget
 					   GTK_TREE_MODEL (obj->priv->
 							   file_store));
 
-	if (!virtual)
+	if (!virtual_root)
 		result =
 		    gedit_file_browser_store_set_root_and_virtual_root 
 		    (obj->priv->file_store, root, root);
 	else
 		result =
 		    gedit_file_browser_store_set_root_and_virtual_root
-		    (obj->priv->file_store, root, virtual);
+		    (obj->priv->file_store, root, virtual_root);
 
 	if (result == GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE)
 		on_virtual_root_changed (obj->priv->file_store, NULL, obj);
@@ -1704,13 +1704,13 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget
 void
 gedit_file_browser_widget_set_root (GeditFileBrowserWidget * obj,
 				    gchar const *root, 
-				    gboolean virtual)
+				    gboolean virtual_root)
 {
 	GnomeVFSURI *uri;
 	GnomeVFSURI *parent;
 	gchar *str;
 
-	if (!virtual) {
+	if (!virtual_root) {
 		gedit_file_browser_widget_set_root_and_virtual_root (obj,
 								     root,
 								     NULL);
@@ -1900,15 +1900,15 @@ virtual_root_is_root (GeditFileBrowserWidget * obj,
                       GeditFileBrowserStore  * model)
 {
 	GtkTreeIter root;
-	GtkTreeIter virtual;
+	GtkTreeIter virtual_root;
 	
 	if (!gedit_file_browser_store_get_iter_root (model, &root))
 		return TRUE;
 	
-	if (!gedit_file_browser_store_get_iter_virtual_root (model, &virtual))
+	if (!gedit_file_browser_store_get_iter_virtual_root (model, &virtual_root))
 		return TRUE;
 	
-	return gedit_file_browser_store_iter_equal (model, &root, &virtual);
+	return gedit_file_browser_store_iter_equal (model, &root, &virtual_root);
 }
 
 static void

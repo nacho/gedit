@@ -1788,8 +1788,6 @@ on_directory_monitor_event, parent);
 			model_check_dummy (model, parent);
 		}
 	} else {
-		g_warning ("Error on loading directory: %s",
-			   gnome_vfs_result_to_string (result));
 		g_signal_emit (model, 
 		               model_signals[ERROR], 
 		               0,
@@ -2261,7 +2259,7 @@ gedit_file_browser_store_set_virtual_root (GeditFileBrowserStore * model,
 }
 
 GeditFileBrowserStoreResult
-    gedit_file_browser_store_set_virtual_root_from_string
+gedit_file_browser_store_set_virtual_root_from_string
     (GeditFileBrowserStore * model, gchar const *root) {
 	GnomeVFSURI *uri = gnome_vfs_uri_new (root);
 	gchar *str, *str1;
@@ -2393,7 +2391,7 @@ GeditFileBrowserStoreResult
 gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 						    model,
 						    gchar const *root,
-						    gchar const *virtual)
+						    gchar const *virtual_root)
 {
 	GnomeVFSURI *uri = NULL;
 	GnomeVFSURI *vuri = NULL;
@@ -2420,14 +2418,14 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 	if (root != NULL && model->priv->root != NULL) {
 		equal = gnome_vfs_uri_equal (uri, model->priv->root->uri);
 
-		if (equal && virtual == NULL) {
+		if (equal && virtual_root == NULL) {
 			gnome_vfs_uri_unref (uri);
 			return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 		}
 	}
 
-	if (virtual) {
-		vuri = gnome_vfs_uri_new (virtual);
+	if (virtual_root) {
+		vuri = gnome_vfs_uri_new (virtual_root);
 
 		if (equal && model->priv->virtual_root &&
 		    gnome_vfs_uri_equal (vuri,
@@ -2459,10 +2457,10 @@ gedit_file_browser_store_set_root_and_virtual_root (GeditFileBrowserStore *
 		
 		g_object_notify (G_OBJECT (model), "root");
 
-		if (virtual != NULL)
+		if (virtual_root != NULL)
 			return
 			    gedit_file_browser_store_set_virtual_root_from_string
-			    (model, virtual);
+			    (model, virtual_root);
 		else
 			set_virtual_root_from_node (model,
 						    model->priv->root);

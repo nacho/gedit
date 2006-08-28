@@ -67,7 +67,7 @@ gedit-file-browser-marshal.c: gedit-file-browser-marshal.list $(GLIB_GENMARSHAL)
 plugin_DATA = $(plugin_in_files:.gedit-plugin.desktop.in=.gedit-plugin)
 
 schemasdir	 = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_files = filebrowser.schemas.in
+schemas_in_files = gedit-file-browser.schemas.in
 schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
 
