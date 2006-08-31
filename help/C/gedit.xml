@@ -1099,9 +1099,7 @@
   		<para>To enable and disable plugins, or see which plugins are currently enabled, use the <link linkend="gedit-prefs-plugins">Plugins Preferences</link>.</para>
   		<para>The following plugins come built-in with <application>&app;</application>:</para>
   		<!-- Not yet documented:
-  		Ext Tools
-  		Python
-  		FIle browser
+  		File browser
   		-->
   		<itemizedlist>
   		  <listitem>
@@ -1520,8 +1518,8 @@
       <variablelist>
         <varlistentry><term>Tab placeholders</term>
           <listitem>
-            <para><literal>$n</literal> defines a tab placeholder, where <literal>n</literal> is any number from 1 upwards. </para>
-            <para><literal>${n:default}</literal> defines a tab placeholder with a default value.</para>
+            <para><literal>$<replaceable>n</replaceable></literal> defines a tab placeholder, where <literal>n</literal> is any number from 1 upwards. </para>
+            <para><literal>${<replaceable>n</replaceable>:<replaceable>default</replaceable>}</literal> defines a tab placeholder with a default value.</para>
             <para>A tab placeholder marks a place in the snippet text where you can add extra text after the snippet is inserted.</para>
             <para>To use tab placeholders, insert the snippet as normal. The cursor is placed at the first tab placeholder. Type text, and press <keycap>Tab</keycap> to advance to the next tab placeholder. The number in the placeholder code defines the order in which tab advances to each place in the text.</para>
             <para>Press <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> to return to the previous tab placeholder. Pressing <keycap>Tab</keycap> when there are no more tab placeholders moves the cursor to the end of the snippet text, or to the end placeholder if it exists.</para>
@@ -1565,6 +1563,19 @@
             </variablelist>
 
           </listitem>
+        </varlistentry>
+        <varlistentry><term>Shell placeholders</term>
+          <listitem>
+            <para><literal>$(<replaceable>cmd</replaceable>)</literal> is replaced by the result of executing <replaceable>cmd</replaceable> in a shell. </para>
+            <para><literal>$(<replaceable>n</replaceable>:<replaceable>cmd</replaceable>)</literal> allows you to give this placeholder a reference, where <replaceable>n</replaceable> is any number from 1 upwards. Use <literal>$<replaceable>n</replaceable></literal> to use the output from one shell placeholder as input in another.</para>
+          </listitem>     
+        </varlistentry>
+        <varlistentry><term>Python placeholders</term>
+          <listitem>
+            <para><literal>$&lt;<replaceable>cmd</replaceable>&gt;</literal> is replaced by the result of evaluating <replaceable>cmd</replaceable> in the python interpreter.</para>
+            <para><literal>$&lt;<replaceable>a</replaceable>:<replaceable>cmd</replaceable>&gt;</literal> specifies another python placeholder as a dependency, where <replaceable>a</replaceable> gives its order in the snippet. This allows you to use python functions defined in another snippet. To specify several dependencies, separate the numbers with commas thus: <literal>$&lt;<replaceable>a</replaceable>,<replaceable>b</replaceable>:<replaceable>cmd</replaceable>&gt;</literal></para>
+            <para>To use a variable in all other python snippets, declare it as <literal>global</literal>.</para>
+          </listitem>     
         </varlistentry>
       </variablelist>
   </sect3>
