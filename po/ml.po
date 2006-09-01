@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gedit.HEAD.ml\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-09-01 11:42+0200\n"
-"PO-Revision-Date: 2006-09-01 17:43+0530\n"
+"PO-Revision-Date: 2006-09-01 19:55+0530\n"
 "Last-Translator: Ani Peter <apeter@redhat.com>\n"
 "Language-Team: Malayalam\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
-msgstr "വാചക രചനകള്‍ തിരുത്തുക"
+msgstr "ടെക്സ്റ്റ് ഫയലുകളില്‍ മാറ്റം വരുത്തുക"
 
 #: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:457
 msgid "Text Editor"
@@ -1586,9 +1586,9 @@ msgid "_Don't Edit"
 msgstr "മാറ്റം വരുത്തേണ്ട (_D)"
 
 #: ../gedit/gedit-io-error-message-area.c:857
-#, fuzzy, c-format
+#, c-format
 msgid "This file (%s) is already opened in another gedit window."
-msgstr "ഫയല്‍ %s തുറന്ന അവസ്ഥയിലാണ്."
+msgstr "ഈ ഫയല്‍ (%s) മറ്റൊരു gedit ജാലകത്തില്‍ തുറന്ന അവസ്ഥയിലാണ്."
 
 #: ../gedit/gedit-io-error-message-area.c:872
 msgid ""
@@ -1598,15 +1598,13 @@ msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:930
 #: ../gedit/gedit-io-error-message-area.c:1025
-#, fuzzy
 msgid "_Save Anyway"
-msgstr "എല്ലാം സംരംക്ഷിക്കുക"
+msgstr "എന്തായാലും സംരംക്ഷിക്കുക (_S)"
 
 #: ../gedit/gedit-io-error-message-area.c:934
 #: ../gedit/gedit-io-error-message-area.c:1029
-#, fuzzy
 msgid "_Don't Save"
-msgstr "സംരംക്ഷിക്കുക"
+msgstr "സംരംക്ഷിക്കേണ്ടതില്ല (_D)"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
@@ -1621,14 +1619,14 @@ msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:1047
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create a backup file while saving %s"
-msgstr "കരുതല്‌ രചന നിര്‌മ്മിക്കാനാകുന്നില്ല."
+msgstr "%s സൂക്ഷിക്കുന്പോള്‍ ഒരു ബാക്കപ്പ് ഫയല്‍ നിര്‍മ്മിക്കുവാന്‍ സാധ്യമായില്ല"
 
 #: ../gedit/gedit-io-error-message-area.c:1050
-#, fuzzy, c-format
+#, c-format
 msgid "Could not create a temporary backup file while saving %s"
-msgstr "കരുതല്‌ രചന നിര്‌മ്മിക്കാനാകുന്നില്ല."
+msgstr "%s സൂക്ഷിക്കുന്പോള്‍ ഒരു താല്‍ക്കാലിക ബാക്കപ്പ് ഫയല്‍ നിര്‍മ്മിക്കുവാന്‍ സാധ്യമായില്ല"
 
 #: ../gedit/gedit-io-error-message-area.c:1067
 msgid ""
@@ -1639,24 +1637,21 @@ msgstr ""
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1128
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please, check that you typed "
 "the location correctly and try again."
 msgstr ""
-"\"%s\" അസാധുവായ സ്ഥാനമാണ‌്.\n"
-"\n"
-"ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
+"gedit-ന് എഴുതുന്ന മോഡില്‍ %s സ്ഥാനങ്ങള്‍ കൈകാര്യം ചെയ്യുവാന്‍ സാധ്യമായില്ല. നിങ്ങള്‍ സ്ഥാനം "
+"അക്ഷരത്തെറ്റില്ലാതെ എഴുതി എന്നുറപ്പ് വരുത്തി വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1136
-#, fuzzy
 msgid ""
 "gedit cannot handle this location  in write mode. Please, check that you "
 "typed the location correctly and try again."
 msgstr ""
-"രചന \"%s\" കണ്ടെത്താനായില്ല. \n"
-"\n"
-"ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക"
+"gedit-ന് എഴുതുന്ന മോഡില്‍ ഈ സ്ഥാനം കൈകാര്യം ചെയ്യുവാന്‍ സാധ്യമായില്ല. നിങ്ങള്‍ സ്ഥാനം "
+"അക്ഷരത്തെറ്റില്ലാതെ എഴുതി എന്നുറപ്പ് വരുത്തി വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1145
 msgid ""
@@ -1668,95 +1663,76 @@ msgstr ""
 "സംരക്ഷിക്കൂ.  അല്ലെങ്കില്‌ കഴിവുള്ള ഡിസ്കില്‌ സംരക്ഷിക്കൂ"
 
 #: ../gedit/gedit-io-error-message-area.c:1152
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is not a valid location. Please, check that you typed the location "
 "correctly and try again."
-msgstr ""
-"\"%s\" അസാധുവായ സ്ഥാനമാണ‌്.\n"
-"\n"
-"ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
+msgstr "%s ശരിയായ സ്ഥാനം അല്ല. നിങ്ങള്‍ സ്ഥാനം അക്ഷരത്തെറ്റില്ലാതെ എഴുതി എന്നുറപ്പ് വരുത്തി വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1159
-#, fuzzy
 msgid ""
 "You do not have the permissions necessary to save the file. Please, check "
 "that you typed the location correctly and try again."
-msgstr ""
-"രചന \"%s\" കണ്ടെത്താനായില്ല. \n"
-"\n"
-"ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക"
+msgstr "നിങ്ങള്‍ക്ക് ഫയല്‍ സൂക്ഷിക്കുന്നതിനുളള അനുവാദമില്ല. നിങ്ങള്‍ സ്ഥാനം അക്ഷരത്തെറ്റില്ലാതെ എഴുതി എന്നുറപ്പ് വരുത്തി വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1171
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is a directory. Please, check that you typed the location correctly and "
 "try again."
-msgstr ""
-"\"%s\" ഒരു വിവരസമാഹാരമാണ‌്.\n"
-"\n"
-"ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
+msgstr "%s ഒരു ഡയറക്ടറി ആണ്. നിങ്ങള്‍ സ്ഥാനം അക്ഷരത്തെറ്റില്ലാതെ എഴുതി എന്നുറപ്പ് വരുത്തി വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1177
-#, fuzzy
 msgid ""
 "Not enough available memory to save the file. Please, close some running "
 "applications and try again."
 msgstr ""
-"രചന %s തുറക്കുന്നതിനാവശ്യമായ സ്ഥലം സ്മൃതിപഥത്തിലില്ല. ദയവായി നിര്‌വ്വഹണത്തിലിരിക്കുന്ന ചില "
-"അനുപ്രയോഗങ്ങള്‌ മതിയാക്കിയതിനുശേഷം വീണ്ടും ശ്രമിക്കുക"
+"ഫയല്‍ സൂക്ഷിക്കുന്നതിന് ആവശ്യമായ മെമ്മറി ലഭ്യമല്ല. ദയവായി, ഉപയോഗത്തിലുളള ചില "
+"പ്രയോഗങ്ങള്‍ അടച്ച ശേഷം വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1253
-#, fuzzy
 msgid ""
 "There is not enough disk space to save the file. Please, free some disk "
 "space and try again."
 msgstr ""
-"രചന സംരക്ഷിക്കുന്നതിനാവശ്യമായ സ്ഥലം ഡിസ്ക്കിലില്ല.  ദയവായി ഡിസ്ക്കിലെ കുറച്ച് സ്ഥലം.\n"
-"സ്വതന്ത്രമാക്കുകയും വീണ്ടും ശ്രമിക്കുകയും ചെയ്യ‍ുക"
+"ഫയല്‍ സൂക്ഷിക്കുന്നതിന് ആവശ്യമായ സ്ഥലം ഡിസ്കില്‍ ലഭ്യമല്ല. ദയവായി, ഡിസ്കില്‍ കുറച്ച് സ്ഥലം "
+"ഒഴിവാക്കി വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1259
-#, fuzzy
 msgid ""
 "You are trying to save the file on a read-only disk. Please, check that you "
 "typed the location correctly and try again."
-msgstr ""
-"\"%s\" അസാധുവായ സ്ഥാനമാണ‌്.\n"
-"\n"
-"ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
+msgstr "നിങ്ങള്‍ ഒരു റീഡ്-ഒണ്‍ലി ഡിസ്കിലാണ് ഫയല്‍ സംരക്ഷിക്കുവാന്‍ ശ്രമിക്കുന്നത്. നിങ്ങള്‍ സ്ഥാനം അക്ഷരത്തെറ്റില്ലാതെ എഴുതി എന്നുറപ്പ് വരുത്തി വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1265
 msgid "A file with the same name already exists. Please, use a different name."
 msgstr ""
 
 #: ../gedit/gedit-io-error-message-area.c:1270
-#, fuzzy
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
 "the file names. Please, use a shorter name."
 msgstr ""
-"താങ്കള്‌ രചനയെ സംരക്ഷിക്കാന്‌ ശ്രമിക്കുന്ന ഡിസ്കിന് രചനക്ക് പരിമിതിയുണ്ട്.ദയവായി ചെറിയ രചനയായി "
-"സംരക്ഷിക്കൂ.  അല്ലെങ്കില്‌ കഴിവുള്ള ഡിസ്കില്‌ സംരക്ഷിക്കൂ"
+"നിങ്ങള്‍ ഫയല്‍ സംരക്ഷിക്കുവാന്‍ ശ്രമിക്കുന്ന ഡിസ്കില്‍ ഫയല്‍ പേരുകള്‍ക്ക് പരിമിതിയുണ്ട്.ദയവായി "
+"ചെറിയ പേര് ഉപയോഗിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1275
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%s is not a regular file. Please, check that you typed the location "
 "correctly and try again."
 msgstr ""
-"\"%s\" അസാധുവായ സ്ഥാനമാണ‌്.\n"
-"\n"
-"ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
+"%s ഒരു സാധാരണ ഫയല്‍ അല്ല. നിങ്ങള്‍ സ്ഥാനം അക്ഷരത്തെറ്റില്ലാതെ എഴുതി എന്നുറപ്പ് വരുത്തി "
+"വീണ്ടും ശ്രമിക്കുക."
 
 #: ../gedit/gedit-io-error-message-area.c:1318
-#, fuzzy, c-format
+#, c-format
 msgid "Could not save the file %s."
-msgstr "%s എന്ന രചന സംരക്ഷിക്കാന്‌ കഴിയുന്നില്ല."
+msgstr "ഫയല്‍ %s സൂക്ഷിക്കുവാന്‍ സാധ്യമായില്ല."
 
 #: ../gedit/gedit-notebook.c:837
-#, fuzzy
 msgid "Close document"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "ഡോക്യുമെന്‍റ് അടയ്ക്കുക"
 
 #: ../gedit/gedit-panel.c:365 ../gedit/gedit-panel.c:579
 msgid "Empty"
@@ -1783,24 +1759,20 @@ msgid "C_onfigure"
 msgstr ""
 
 #: ../gedit/gedit-plugin-manager.c:520
-#, fuzzy
 msgid "A_ctivate"
-msgstr "%s നെ സജീവമാക്കുക"
+msgstr "സജീവമാക്കുക (_c)"
 
 #: ../gedit/gedit-plugin-manager.c:530
-#, fuzzy
 msgid "Ac_tivate All"
-msgstr "%s നെ സജീവമാക്കുക"
+msgstr "എല്ലാം സജീവമാക്കുക (_t)"
 
 #: ../gedit/gedit-plugin-manager.c:535
-#, fuzzy
 msgid "_Deactivate All"
-msgstr "എല്ലാം സംരംക്ഷിക്കുക"
+msgstr "എല്ലാം പ്രവര്‍ത്തന രഹിതമാക്കുക (_D)"
 
 #: ../gedit/gedit-plugin-manager.c:776
-#, fuzzy
 msgid "_About Plugin"
-msgstr "കുറിപ്പ്"
+msgstr "പ്ളഗിന്‍ സംബന്ധിച്ച് (_A)"
 
 #: ../gedit/gedit-plugin-manager.c:780
 msgid "C_onfigure Plugin"
@@ -1833,9 +1805,8 @@ msgid "Lines"
 msgstr "വരികള്‌"
 
 #: ../gedit/gedit-print-job-preview.c:623
-#, fuzzy
 msgid "Page Preview"
-msgstr "പ്രിന്‍റ് ചെയ്യുന്നതിന് മുന്പ് കാണുക"
+msgstr "പ്രിന്‍റ് ചെയ്യുന്നതിന് മുന്പ് കാണുക "
 
 #: ../gedit/gedit-print-job-preview.c:624
 msgid "The preview of a page in the document to be printed"
@@ -1864,9 +1835,8 @@ msgid "of"
 msgstr "ന്‍റെ"
 
 #: ../gedit/gedit-print-job-preview.c:787
-#, fuzzy
 msgid "Page total"
-msgstr "ആകെ എത്ര പേജ്"
+msgstr "ആകെ എത്ര പേജ് "
 
 #: ../gedit/gedit-print-job-preview.c:788
 msgid "The total number of pages in the document"
@@ -1885,29 +1855,26 @@ msgid "Zoom to fit the whole page"
 msgstr ""
 
 #: ../gedit/gedit-print-job-preview.c:834
-#, fuzzy
 msgid "Zoom the page in"
-msgstr "നിലവിലുള്ള അച്ചടിയന്ത്രത്തിന് വേണ്ടി താളിന്റെ ക്രമീകരണം സജ്ജീകരിക്കുക"
+msgstr "പേജ് വലുതാക്കുക"
 
 #: ../gedit/gedit-print-job-preview.c:842
 msgid "Zoom the page out"
 msgstr ""
 
 #: ../gedit/gedit-print-job-preview.c:856
-#, fuzzy
 msgid "Close print preview"
-msgstr "അച്ചടി രൂപം മുന്‍കൂട്ടി കാണുക"
+msgstr "പ്രിന്‍റ് ചെയ്യുന്നതിനുളള മുന്പ് കാണുന്നതിനുളള സ്ക്രീന്‍ അടയ്ക്കുക"
 
 #: ../gedit/gedit-print-job-preview.c:1096
 #: ../gedit/gedit-print-job-preview.c:1097
 msgid "Number of pages horizontally"
-msgstr "കുറുകേ ഉളള പേജുകളുടെ എണ്ണം"
+msgstr "ഇടത്ത് നിന്നും വലത്തേക്കുളള പേജുകളുടെ എണ്ണം"
 
 #: ../gedit/gedit-print-job-preview.c:1100
 #: ../gedit/gedit-print-job-preview.c:1101
-#, fuzzy
 msgid "Number of pages vertically"
-msgstr "നേരേ ഉളള പേജുകളുടെ എണ്ണം"
+msgstr "മുകളില്‍ നിന്നും താഴേക്കുളള പേജുകളുടെ എണ്ണം"
 
 #: ../gedit/gedit-print-job-preview.c:1165
 msgid "No visible output was created."
@@ -1938,38 +1905,38 @@ msgstr[1] ""
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
 #: ../gedit/gedit-tab.c:641
-#, fuzzy, c-format
+#, c-format
 msgid "Reverting %s from %s"
-msgstr "രചന '%s' പൂ‌‌‌‌ര്‌വ്വസ്ഥിതിയിലാക്കുക..."
+msgstr "%s-ല്‍ നിന്നും %s പൂര്‍വ്വസ്ഥിതിയിലാക്കുന്നു"
 
 #: ../gedit/gedit-tab.c:648
-#, fuzzy, c-format
+#, c-format
 msgid "Reverting %s"
-msgstr "രചന '%s' പൂ‌‌‌‌ര്‌വ്വസ്ഥിതിയിലാക്കുക..."
+msgstr "%s പൂര്‍വ്വസ്ഥിതിയിലാക്കുന്നു"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
 #: ../gedit/gedit-tab.c:664
-#, fuzzy, c-format
+#, c-format
 msgid "Loading %s from %s"
-msgstr "%d രചനകള് നിറക്കുന്നും..."
+msgstr "%s-ല്‍ നിന്നും %s ലോഡ് ചെയ്യുക"
 
 #: ../gedit/gedit-tab.c:671
-#, fuzzy, c-format
+#, c-format
 msgid "Loading %s"
-msgstr "%d രചനകള് നിറക്കുന്നും..."
+msgstr "%s ലോഡ് ചെയ്യുന്നു"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
 #: ../gedit/gedit-tab.c:754
 #, c-format
 msgid "Saving %s to %s"
-msgstr ""
+msgstr "%s-നെ %s ആയി സൂക്ഷിക്കുക"
 
 #: ../gedit/gedit-tab.c:761
-#, fuzzy, c-format
+#, c-format
 msgid "Saving %s"
-msgstr "പേ‍ര‍് മാറ്റി‌ സംരക്ഷിക്കുക"
+msgstr "%s സൂക്ഷിക്കുന്നു"
 
 #. Read only
 #: ../gedit/gedit-tab.c:1518
@@ -1982,14 +1949,14 @@ msgid "Error opening file %s"
 msgstr ""
 
 #: ../gedit/gedit-tab.c:1568
-#, fuzzy, c-format
+#, c-format
 msgid "Error reverting file %s"
-msgstr "രചന %s‌ പൂര്‍വ്വസ്ഥിതിയിലാക്കാന്‌ കഴിഞ്ഞില്ല"
+msgstr "ഫയല്‍ %s‌ പൂര്‍വ്വസ്ഥിതിയിലാക്കുന്നതില്‍ പിശക്"
 
 #: ../gedit/gedit-tab.c:1573
-#, fuzzy, c-format
+#, c-format
 msgid "Error saving file %s"
-msgstr "%d രചനകള് നിറക്കുന്നും..."
+msgstr "ഫയല്‍ %s കംപ്യൂട്ടറില്‍ സൂക്ഷിക്കുന്നതില്‍ പിശക്"
 
 #: ../gedit/gedit-tab.c:1591
 msgid "Unicode (UTF-8)"
@@ -2004,9 +1971,8 @@ msgid "MIME Type:"
 msgstr ""
 
 #: ../gedit/gedit-tab.c:1600
-#, fuzzy
 msgid "Encoding:"
-msgstr "ഗൂഢഭാഷ"
+msgstr "ഗൂഢഭാഷ:"
 
 #: ../gedit/gedit-tab.c:2036
 #, c-format
@@ -2101,19 +2067,16 @@ msgid "Revert to a saved version of the file"
 msgstr "ശേഖരത്തെ അവസാനം സംരക്ഷിച്ച അവസ്ഥയിലേക്ക് മാറ്റുക"
 
 #: ../gedit/gedit-ui.h:88
-#, fuzzy
 msgid "Page Set_up..."
-msgstr "അച്ചടി സജ്ജീകരണം"
+msgstr "പ്രിന്‍റ് ചെയ്യുന്നതിനുളള സജ്ജീകരണം... (_u)"
 
 #: ../gedit/gedit-ui.h:89
-#, fuzzy
 msgid "Setup the page settings"
-msgstr "നിലവിലുള്ള അച്ചടിയന്ത്രത്തിന് വേണ്ടി താളിന്റെ ക്രമീകരണം സജ്ജീകരിക്കുക"
+msgstr "പ്രിന്‍റ് ചെയ്യുന്നതിനുളള ക്രമീകരണങ്ങള്‍ സജ്ജമാക്കുക"
 
 #: ../gedit/gedit-ui.h:90
-#, fuzzy
 msgid "Print Previe_w"
-msgstr "അച്ചടി-തിരനോട്ടം"
+msgstr "പ്രിന്‍റ് ചെയ്യുന്നതിന് മുന്പ് സ്ക്രീനില്‍ കാണുക (_w)"
 
 #: ../gedit/gedit-ui.h:91
 msgid "Print preview"
@@ -2121,12 +2084,11 @@ msgstr "അച്ചടി രൂപം മുന്‍കൂട്ടി കാ
 
 #: ../gedit/gedit-ui.h:92
 msgid "_Print..."
-msgstr "അച്ചടി..."
+msgstr "പ്രിന്‍റ് ചെയ്യുക... (_P)"
 
 #: ../gedit/gedit-ui.h:93
-#, fuzzy
 msgid "Print the current page"
-msgstr "ഇപ്പോഴത്തെ രചന അച്ചടിക്കുക"
+msgstr "നിലവിലുളള പേജ് പ്രിന്‍റ് ചെയ്യുക"
 
 #: ../gedit/gedit-ui.h:95
 msgid "Close the current file"
@@ -2137,9 +2099,8 @@ msgid "Undo the last action"
 msgstr "അവസാന പ്രവ‍ര്ത്തി ഒഴിവാക്കുക"
 
 #: ../gedit/gedit-ui.h:101
-#, fuzzy
 msgid "Redo the last undone action"
-msgstr "മുന്പ് ഒഴിവാക്കിയ പ്രവ‍ര്ത്തി വീണ്ടും ചെയ്യ‍ുക"
+msgstr "ഏറ്റവും ഒടുവില്‍ വേണ്ട എന്ന് തീരുമാനിച്ച മാറ്റം വീണ്ടും വരുത്തുക"
 
 #: ../gedit/gedit-ui.h:103
 msgid "Cut the selection"
@@ -2176,36 +2137,32 @@ msgid "_Find..."
 msgstr "കണ്ടെത്തുക..."
 
 #: ../gedit/gedit-ui.h:118
-#, fuzzy
 msgid "Search for text"
-msgstr "ഇത് തെരയുക:"
+msgstr "ടെക്സ്റ്റിനായി തിരയുക"
 
 #: ../gedit/gedit-ui.h:119
 msgid "Find Ne_xt"
 msgstr "അടുത്തത് കണ്ടെത്തുക"
 
 #: ../gedit/gedit-ui.h:120
-#, fuzzy
 msgid "Search forwards for the same text"
-msgstr "ഇതേ വാക്യത്തിനുവേണ്ടി വീണ്ടും പരതൂ"
+msgstr "ഇതേ ടെക്സ്റ്റിനായി മുന്പോട്ട് തിരയുക"
 
 #: ../gedit/gedit-ui.h:121
 msgid "Find Pre_vious"
 msgstr "മുന്പുളളത് കണ്ടെത്തുക (_v)"
 
 #: ../gedit/gedit-ui.h:122
-#, fuzzy
 msgid "Search backwards for the same text"
-msgstr "ഇതേ വാക്യത്തിനുവേണ്ടി വീണ്ടും പരതൂ"
+msgstr "ഇതേ ടെക്സ്റ്റിനായി പുറകോട്ട് തിരയുക"
 
 #: ../gedit/gedit-ui.h:123
 msgid "_Replace..."
-msgstr "മാറ്റി എഴുതുക..."
+msgstr "മാറ്റി എഴുതുക... (_R)"
 
 #: ../gedit/gedit-ui.h:124
-#, fuzzy
 msgid "Search for and replace text"
-msgstr "വാക്യം പരതൂ"
+msgstr "ടെക്സ്റ്റ് കണ്ടുപിടിച്ച് മാറ്റുക"
 
 #: ../gedit/gedit-ui.h:125
 msgid "_Clear Highlight"
@@ -2220,18 +2177,16 @@ msgid "Go to _Line..."
 msgstr "വരിയിലേക്ക് പോകുക..."
 
 #: ../gedit/gedit-ui.h:128
-#, fuzzy
 msgid "Go to a specific line"
-msgstr "നിശ്ചിത വരിയിലേക്ക് പോകുക"
+msgstr "നിശ്ചിത വരിയിലേക്ക് പോകുക "
 
 #: ../gedit/gedit-ui.h:129
 msgid "Interactive search..."
-msgstr ""
+msgstr "ചോദ്യോത്തര തിരച്ചില്‍..."
 
 #: ../gedit/gedit-ui.h:130
-#, fuzzy
 msgid "Interactively search for text"
-msgstr "ഇത് തെരയുക:"
+msgstr "ചോദ്യോത്തര രീതിയില്‍ ടെക്സ്റ്റ് തിരയുക"
 
 #. Documents menu
 #: ../gedit/gedit-ui.h:133
@@ -2244,31 +2199,27 @@ msgstr "എല്ലാ തുറന്ന ശേഖരങ്ങളും സം
 
 #: ../gedit/gedit-ui.h:135
 msgid "_Close All"
-msgstr "എല്ലാം അടയ്‍ക്കുക"
+msgstr "എല്ലാം അടയ്‍ക്കുക (_C)"
 
 #: ../gedit/gedit-ui.h:136
 msgid "Close all open files"
-msgstr "തുറന്ന എല്ലാ രചനകളും അടയ്‍ക്കുക"
+msgstr "തുറന്ന എല്ലാ ഫയലുകളും അടയ്‍ക്കുക"
 
 #: ../gedit/gedit-ui.h:137
-#, fuzzy
 msgid "_Previous Document"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "മുന്പുളള ഡോക്യുമെന്‍റ് (_P)"
 
 #: ../gedit/gedit-ui.h:138
-#, fuzzy
 msgid "Activate previous document"
-msgstr "ആധാരം മുഴുവന്‌ തെരഞ്ഞെടുക്കുക"
+msgstr "മുന്പുളള ഡോക്യുമെന്‍റ് പ്രവര്‍ത്തിപ്പിക്കുക"
 
 #: ../gedit/gedit-ui.h:139
-#, fuzzy
 msgid "_Next Document"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "അടുത്ത ഡോക്യുമെന്‍റ് (_N)"
 
 #: ../gedit/gedit-ui.h:140
-#, fuzzy
 msgid "Activate next document"
-msgstr "പുതിയ രചന ഉണ്ടാക്കുക"
+msgstr "അടുത്ത ഡോക്യുമെന്‍റ് സജ്ജമാക്കുക"
 
 #: ../gedit/gedit-ui.h:141
 msgid "_Move to New Window"
@@ -2287,76 +2238,65 @@ msgid "_Toolbar"
 msgstr "ഉപകരണപ്പട്ട"
 
 #: ../gedit/gedit-ui.h:155
-#, fuzzy
 msgid "Show or hide the toolbar in the current window"
-msgstr "സജീവ ജാലകത്തിലെ ഉപകരണപ്പട്ട കാണുക/കാണാതാക്കുക"
+msgstr "സജീവ ജാലകത്തില്‍ ടൂള്‍ ബാര്‍ കാണിക്കുകയോ അദൃശ്യമാക്കുകയോ ചെയ്യുക"
 
 #: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
 msgstr "അവസ്ഥാപ്പട്ട"
 
 #: ../gedit/gedit-ui.h:158
-#, fuzzy
 msgid "Show or hide the statusbar in the current window"
-msgstr "സജീവ ജാലകത്തിലെ അവസ്ഥാപ്പട്ട കാണുക/കാണാതാക്കുക"
+msgstr "സജീവ ജാലകത്തില്‍ സ്റ്റേറ്റസ് ബാര്‍ കാണിക്കുകയോ അദൃശ്യമാക്കുകയോ ചെയ്യുക"
 
 #: ../gedit/gedit-ui.h:160
-#, fuzzy
 msgid "Side _Pane"
-msgstr "സൈഡ് പെയിന്‍ (_P)"
+msgstr "സൈഡ് പെയിന്‍ (_P) "
 
 #: ../gedit/gedit-ui.h:161
-#, fuzzy
 msgid "Show or hide the side pane in the current window"
-msgstr "സജീവ ജാലകത്തിലെ ഉപകരണപ്പട്ട കാണുക/കാണാതാക്കുക"
+msgstr "സജീവ ജാലകത്തില്‍ സൈഡ് പെയിന്‍ കാണിക്കുകയോ അദൃശ്യമാക്കുകയോ ചെയ്യുക"
 
 #: ../gedit/gedit-ui.h:167
-#, fuzzy
 msgid "_Bottom Pane"
-msgstr "വരിയിലേക്ക് പോകുക"
+msgstr "താഴെയുളള പെയിന്‍ (_B)"
 
 #: ../gedit/gedit-ui.h:168
-#, fuzzy
 msgid "Show or hide the bottom pane in the current window"
-msgstr "സജീവ ജാലകത്തിലെ ഉപകരണപ്പട്ട കാണുക/കാണാതാക്കുക"
+msgstr "സജീവ ജാലകത്തില്‍ താഴെയുളള പെയിന്‍ കാണിക്കുകയോ അദൃശ്യമാക്കുകയോ ചെയ്യുക"
 
 #: ../gedit/gedit-utils.c:988
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find file %s."
-msgstr "രചന \"%s\" തുറക്കാനായില്ല "
+msgstr "ഫയല്‍ %s ലഭ്യമല്ല."
 
 #: ../gedit/gedit-utils.c:992 ../gedit/gedit-utils.c:1021
-#, fuzzy
 msgid "Please check your installation."
-msgstr "%s ഒരു വിവരസമാഹാരമാകുന്നു. ദയവായി താങ്കള്‌ കൊടുത്ത സ്ഥാനം ശരിയാണൊ എന്ന് പരിശോധിക്കുക "
+msgstr "ദയവായി നിങ്ങളുടെ ഇന്‍സ്റ്റലേഷന്‍ പരിശോധിക്കുക."
 
 #: ../gedit/gedit-utils.c:1017
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to find the required widgets inside file %s."
-msgstr "%s ല് ആവശ്യമായ ഉപകരണം കണ്ടെത്താനായില്ല"
+msgstr "ഫയല്‍ %s-ല്‍ ആവശ്യമുളള വിഡ്ജറ്റുകള്‍ കാണുവാന്‍ സാധ്യമായില്ല."
 
 #. create "Wrap Around" menu item.
 #: ../gedit/gedit-view.c:1337
-#, fuzzy
 msgid "_Wrap Around"
-msgstr "രചനയാകെ"
+msgstr ""
 
 #. create "Match Entire Word Only" menu item.
 #: ../gedit/gedit-view.c:1347
-#, fuzzy
 msgid "Match _Entire Word Only"
-msgstr "വാക്ക് പൂര്ണ്ണമായുണ്ടെങ്കില് മാത്രം"
+msgstr "വാക്ക് മാത്രം പൊരുത്തമുണ്ടോ എന്ന് നോക്കുക (_E)"
 
 #. create "Match Case" menu item.
 #: ../gedit/gedit-view.c:1357
-#, fuzzy
 msgid "_Match Case"
-msgstr "Match case (ഇംഗ്ളീഷിന‍് മാത്രം)"
+msgstr ""
 
 #: ../gedit/gedit-view.c:1445
-#, fuzzy
 msgid "String you want to search for"
-msgstr "തെരയുന്നതിന് വേണ്ടിയുള്ള സ്ഥലം"
+msgstr "നിങ്ങള്‍ക്ക് തിരയേണ്ട സ്ട്രിങ്"
 
 #: ../gedit/gedit-view.c:1454
 msgid "Line you want to move the cursor to"
@@ -2371,20 +2311,18 @@ msgstr ""
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
 #: ../gedit/gedit-window.c:855
-#, fuzzy
 msgid "None"
-msgstr "ഒന്നുമില്ല"
+msgstr "ഒന്നുമില്ല "
 
 #: ../gedit/gedit-window.c:856
-#, fuzzy
 msgid "Disable syntax highlighting"
-msgstr "ജി-എഡിറ്റ് സ്വയം വിടവ് സജീവമാക്കേണ്ടതുണ്ടോ‌"
+msgstr ""
 
 #. Translators: %s is a URI
 #: ../gedit/gedit-window.c:1127
-#, fuzzy, c-format
+#, c-format
 msgid "Open '%s'"
-msgstr "'%s' തുറക്കുക"
+msgstr "'%s' തുറക്കുക "
 
 #: ../gedit/gedit-window.c:1246
 msgid "Save"
@@ -2404,52 +2342,44 @@ msgid "Activate %s"
 msgstr "%s നെ സജീവമാക്കുക"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
-#, fuzzy
 msgid "Change Case"
-msgstr "മാറ്റം"
+msgstr ""
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Changes the case of selected text."
-msgstr "തെരഞ്ഞെടുത്തവ നീക്കം ചെയ്യ‍ുക"
+msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:222
-#, fuzzy
 msgid "C_hange Case"
-msgstr "മാറ്റം"
+msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:223
 msgid "All _Upper Case"
 msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:224
-#, fuzzy
 msgid "Change selected text to upper case"
-msgstr "തെരഞ്ഞെടുത്ത വാക്കുകള് പക‍ര്ത്തുക"
+msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:226
 msgid "All _Lower Case"
 msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:227
-#, fuzzy
 msgid "Change selected text to lower case"
-msgstr "തെരഞ്ഞെടുത്ത വാക്കുകള് പക‍ര്ത്തുക"
+msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:229
-#, fuzzy
 msgid "_Invert Case"
-msgstr "ലിപി അവഗണിക്കുക"
+msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:230
-#, fuzzy
 msgid "Invert the case of selected text"
-msgstr "തെരഞ്ഞെടുത്തവ നീക്കം ചെയ്യ‍ുക"
+msgstr ""
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:232
-#, fuzzy
 msgid "_Title Case"
-msgstr "തലക്കെട്ട്"
+msgstr "തലക്കെട്ടിന്‍റെ കേസ് (_C)"
 
 #: ../plugins/changecase/gedit-changecase-plugin.c:233
 msgid "Capitalize the first letter of each selected word"
@@ -2487,14 +2417,12 @@ msgid "Characters (with spaces)"
 msgstr "അക്ഷരങ്ങള്‌ (അകലം ഉള്‌പ്പെടെ)"
 
 #: ../plugins/docinfo/docinfo.glade2.h:7
-#, fuzzy
 msgid "Document"
-msgstr "രേഖ"
+msgstr "രേഖ "
 
 #: ../plugins/docinfo/docinfo.glade2.h:10
-#, fuzzy
 msgid "Selection"
-msgstr "തെരഞ്ഞെടുത്ത നിറം"
+msgstr "തിരഞ്ഞെടുത്തവ"
 
 #: ../plugins/docinfo/docinfo.glade2.h:11
 msgid "Words"
@@ -2529,9 +2457,8 @@ msgid "Opens the External Tools Manager"
 msgstr ""
 
 #: ../plugins/externaltools/tools/__init__.py:56
-#, fuzzy
 msgid "Shell Output"
-msgstr "ഫല ജാലകം"
+msgstr "ഷെല്‍ ഓട്ട് പുട്ട്"
 
 #: ../plugins/externaltools/tools/functions.py:241
 msgid "You must be inside a word to run this command"
@@ -2542,32 +2469,28 @@ msgid "Running tool:"
 msgstr ""
 
 #: ../plugins/externaltools/tools/functions.py:321
-#, fuzzy
 msgid "Done."
-msgstr "ചെയ്യ‍ുക"
+msgstr "ചെയ്തിരിക്കുന്നു."
 
 #: ../plugins/externaltools/tools/functions.py:323
 msgid "Exited"
-msgstr ""
+msgstr "പുറത്ത് കടന്നിരിക്കുന്നു"
 
 #: ../plugins/externaltools/tools/manager.py:40
 msgid "Nothing"
-msgstr ""
+msgstr "ഒന്നുമില്ല"
 
 #: ../plugins/externaltools/tools/manager.py:41
-#, fuzzy
 msgid "Current document"
-msgstr "പുതിയ രചന ഉണ്ടാക്കുക"
+msgstr "നിലവിലുളള ഡോക്യുമെന്‍റ്"
 
 #: ../plugins/externaltools/tools/manager.py:42
-#, fuzzy
 msgid "Current selection"
-msgstr "തെരഞ്ഞെടുത്തവ മുറിക്കുക"
+msgstr "നിലവില്‍ തിരഞ്ഞെടുത്തത്"
 
 #: ../plugins/externaltools/tools/manager.py:43
-#, fuzzy
 msgid "Current line"
-msgstr "<b>അക്ഷരരൂപം</b>"
+msgstr "ഇപ്പോഴത്തെ വരി"
 
 #: ../plugins/externaltools/tools/manager.py:44
 msgid "Current word"
@@ -2578,34 +2501,28 @@ msgid "Insert in output panel"
 msgstr ""
 
 #: ../plugins/externaltools/tools/manager.py:48
-#, fuzzy
 msgid "Create new document"
-msgstr "പുതിയ രചന ഉണ്ടാക്കുക"
+msgstr "പുതിയ ഡോക്യുമെന്‍റ് ഉണ്ടാക്കുക"
 
 #: ../plugins/externaltools/tools/manager.py:49
-#, fuzzy
 msgid "Append to current document"
-msgstr "നിലവിലുള്ള പ്രസ്താവത്തിലെ സ്ഥിതിവിവരം ലഭ്യമാക്കുക"
+msgstr "നിലവില്‍ ഡോക്യുമെന്‍റിലേക്ക് മാറ്റം വരുത്തുക"
 
 #: ../plugins/externaltools/tools/manager.py:50
-#, fuzzy
 msgid "Replace current document"
-msgstr "നിലവിലുള്ള പ്രസ്താവത്തിന്റെ ഭാഷ സജ്ജമാക്കുക"
+msgstr "നിലവില്‍ തിരഞ്ഞെടുത്ത ഡോക്യുമെന്‍റ് മാറ്റുക"
 
 #: ../plugins/externaltools/tools/manager.py:51
-#, fuzzy
 msgid "Replace current selection"
-msgstr "തെരഞ്ഞെടുത്തവ പക‍ര്ത്തുക"
+msgstr "നിലവില്‍ തിരഞ്ഞെടുത്തത് മാറ്റുക"
 
 #: ../plugins/externaltools/tools/manager.py:52
-#, fuzzy
 msgid "Insert at cursor position"
-msgstr "ഉപയോക്തൃ നാമം സൂചികാ സ്ഥാനത്ത് ചേറ്‌ക്കുക"
+msgstr "സൂചികയുടെ സ്ഥാനത്ത് ചേര്‍ക്കുക"
 
 #: ../plugins/externaltools/tools/manager.py:55
-#, fuzzy
 msgid "All documents"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "എല്ലാ ഡോക്യുമെന്‍റുകളും"
 
 #: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents except untitled ones"
@@ -2620,9 +2537,8 @@ msgid "Remote files only"
 msgstr ""
 
 #: ../plugins/externaltools/tools/manager.py:59
-#, fuzzy
 msgid "Untitled documents only"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "പേരിടാത്ത രേഖകള്‍ മാത്രം"
 
 #: ../plugins/externaltools/tools/manager.py:189
 #: ../plugins/externaltools/tools/manager.py:206
@@ -2655,14 +2571,12 @@ msgid "Type a new accelerator"
 msgstr "പുതിയ ആക്സലറേറ്റര്‍ ടൈപ്പ് ചെയ്യുക"
 
 #: ../plugins/externaltools/tools/outputpanel.py:78
-#, fuzzy
 msgid "Stopped."
-msgstr "നിര്‍ത്തി"
+msgstr "നിര്‍ത്തിയിരിക്കുന്നു."
 
 #: ../plugins/externaltools/tools/tools.glade.h:2
-#, fuzzy
 msgid "Co_mmand(s):"
-msgstr "നിര്‍ദ്ദേശം:"
+msgstr "നിര്‍ദ്ദേശങ്ങള്‍: (_m)"
 
 #: ../plugins/externaltools/tools/tools.glade.h:3
 msgid "Edit tool <i>make</i>:"
@@ -2697,37 +2611,32 @@ msgid "_Applicability:"
 msgstr ""
 
 #: ../plugins/externaltools/tools/tools.glade.h:12
-#, fuzzy
 msgid "_Description:"
-msgstr "വിവരണം: (_D)"
+msgstr "വിവരണം: (_D) "
 
 #: ../plugins/externaltools/tools/tools.glade.h:13
 msgid "_Input:"
 msgstr "ഇന്‍പുട്ട (_I):"
 
 #: ../plugins/externaltools/tools/tools.glade.h:14
-#, fuzzy
 msgid "_Output:"
-msgstr "ഔട്ട് പുട്ട്: (_O)"
+msgstr "ഔട്ട് പുട്ട്: (_O) "
 
 #: ../plugins/externaltools/tools/tools.glade.h:15
-#, fuzzy
 msgid "_Save:"
-msgstr "സംരംക്ഷിക്കുക"
+msgstr "സംരംക്ഷിക്കുക: (_S)"
 
 #: ../plugins/externaltools/tools/tools.glade.h:16
-#, fuzzy
 msgid "_Tools:"
-msgstr "ഉപകരണങ്ങള്"
+msgstr "ഉപകരണങ്ങള്‍: (_T)"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
 msgstr ""
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "File browser pane"
-msgstr "മധ്യ യൂറോപ്യന്"
+msgstr "ഫയല്‍ ബ്രൌസര്‍ പെയിന്‍"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
 msgid "Enable Restore of Remote Locations"
@@ -2803,14 +2712,12 @@ msgid ""
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:390
-#, fuzzy
 msgid "_Set root to active document"
-msgstr "ആധാരം മുഴുവന്‌ തെരഞ്ഞെടുക്കുക"
+msgstr "സജീവമായ രേഖയിലേക്ക് റൂട്ട് സെറ്റ് ചെയ്യുക (_S)"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:392
-#, fuzzy
 msgid "Set the root to the active document location"
-msgstr "നിലിലുള്ള രചന അല്ലേങ്കില്‌ തെരഞ്ഞെടുത്തവ ക്രമീകരിക്കുക"
+msgstr "സജീവമായ രേഖയുടെ സ്ഥലത്ത് റൂട്ട് സെറ്റ് ചെയ്യുക"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:394
 msgid "_Open terminal here"
@@ -2821,44 +2728,36 @@ msgid "Open a terminal at the currently opened directory"
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:510
-#, fuzzy
 msgid "File Browser"
-msgstr "ഫയല്‍ ബ്രൌസര്‍"
+msgstr "ഫയല്‍ ബ്രൌസര്‍ "
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:616
-#, fuzzy
 msgid "An error occurred while creating a new directory"
-msgstr "തെരഞ്ഞെടുത്ത നിര്‌ദ്ദേശം നടപ്പിലാക്കുന്പോള് തെറ്റ് ഉണ്ടായി"
+msgstr "ഒരു പുതിയ ഡയറക്ടറി ഉണ്ടാക്കുന്പോള്‍ പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:619
-#, fuzzy
 msgid "An error occurred while creating a new file"
-msgstr "തെരഞ്ഞെടുത്ത നിര്‌ദ്ദേശം നടപ്പിലാക്കുന്പോള് തെറ്റ് ഉണ്ടായി"
+msgstr "ഒരു പുതിയ ഫയല്‍ നിര്‍മ്മിക്കുന്പോള്‍ ഒരു പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:624
-#, fuzzy
 msgid "An error occurred while renaming a file or directory"
-msgstr "തെരഞ്ഞെടുത്ത നിര്‌ദ്ദേശം നടപ്പിലാക്കുന്പോള് തെറ്റ് ഉണ്ടായി"
+msgstr "ഒരു ഫയല്‍ അല്ലെങ്കില്‍ ഡയറക്ടറിയുടെ പേര് മാറ്റുന്പോള്‍ ഒരു പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:629
-#, fuzzy
 msgid "An error occurred while deleting a file or directory"
-msgstr "തെരഞ്ഞെടുത്ത നിര്‌ദ്ദേശം നടപ്പിലാക്കുന്പോള് തെറ്റ് ഉണ്ടായി"
+msgstr "ഒരു ഫയല്‍ അല്ലെങ്കില്‍ ഡയറക്ടറി നീക്കം ചെയ്യുന്പോള്‍ ഒരു പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:634
-#, fuzzy
 msgid "An error occurred while opening a directory in the file manager"
-msgstr "തെരഞ്ഞെടുത്ത നിര്‌ദ്ദേശം നടപ്പിലാക്കുന്പോള് തെറ്റ് ഉണ്ടായി"
+msgstr "ഫയല്‍ മാനേജറില്‍ ഒരു ഡയറക്ടറി തുറക്കുന്പോള്‍ ഒരു പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:638
-#, fuzzy
 msgid "An error occurred while setting a root directory"
-msgstr "തെരഞ്ഞെടുത്ത നിര്‌ദ്ദേശം നടപ്പിലാക്കുന്പോള് തെറ്റ് ഉണ്ടായി"
+msgstr "റൂട്ട് ഡയറക്ടറി ക്രമീകരിക്കുന്പോള്‍ ഒരു പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:642
-#, fuzzy
 msgid "An error occurred while loading a directory"
-msgstr "തെരഞ്ഞെടുത്ത നിര്‌ദ്ദേശം നടപ്പിലാക്കുന്പോള് തെറ്റ് ഉണ്ടായി"
+msgstr "ഒരു ഡയറക്ടറി ലോഡ് ചെയ്യുന്പോള്‍ പിശക് സംഭവിച്ചിരിക്കുന്നു"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:645
 msgid "An error occurred"
@@ -2888,14 +2787,12 @@ msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2413
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
-#, fuzzy
 msgid "Invalid uri"
-msgstr "സാധുതയില്ലാത്ത രചന നാമം"
+msgstr "അസാധുവായ uri"
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2771
-#, fuzzy
 msgid "file"
-msgstr "ഫയല്‍"
+msgstr "ഫയല്‍ "
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2792
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2839
@@ -2905,18 +2802,16 @@ msgid ""
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2820
-#, fuzzy
 msgid "directory"
-msgstr "ബ്രിട്ടണ്"
+msgstr "ഡയറക്ടറി"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:719
 msgid "Bookmarks"
 msgstr "ബുക്ക് മാര്‍ക്കുകള്‍"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:808
-#, fuzzy
 msgid "_New Directory"
-msgstr "ബ്രിട്ടണ്"
+msgstr "പുതിയ ഡയറക്ടറി (_N)"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Add new empty directory"
@@ -2935,19 +2830,16 @@ msgid "Up"
 msgstr "മുകളിലോട്ട്"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:814
-#, fuzzy
 msgid "Open the parent folder"
-msgstr "ഈ പേരന്‍റ് ഫോള്‍ഡര്‍ തുറക്കുക"
+msgstr "പേരന്‍റ് ഫോള്‍ഡര്‍ തുറക്കുക"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:819
-#, fuzzy
 msgid "_Rename"
-msgstr "പേര് മാറ്റുക (_R)"
+msgstr "പേര് മാറ്റുക (_R) "
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:820
-#, fuzzy
 msgid "Rename selected file or directory"
-msgstr "പ്രവ‍ര്ത്തന കൂട് തെരഞ്ഞെടുക്കുക..."
+msgstr "തിരഞ്ഞെടുത്ത ഫയല്‍ അല്ലെങ്കില്‍ ഡയറക്ടറിയുടെ പേര് മാറ്റുക"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:822
 msgid "_Move To Trash"
@@ -2959,26 +2851,23 @@ msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:825
 msgid "_Delete"
-msgstr "നീക്കം ചെയ്യ‍ുക"
+msgstr "നീക്കം ചെയ്യുക (_D)"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:826
-#, fuzzy
 msgid "Delete selected file or directory"
-msgstr "തെരഞ്ഞെടുത്തവ നീക്കം ചെയ്യ‍ുക"
+msgstr "തിരഞ്ഞെടുത്ത ഫയല്‍ അല്ലെങ്കില്‍ ഡയറക്ടറി നീക്കം ചെയ്യുക"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:832
-#, fuzzy
 msgid "_Previous Location"
-msgstr "വിലാസം-തുറക്കുക..."
+msgstr "മുന്പുളള സ്ഥാനം (_P)"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:834
 msgid "Go to the previous visited location"
 msgstr "മുന്പ് സന്ദര്‍ശിച്ച സ്ഥാനത്തേക്ക് പോകുക"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:836
-#, fuzzy
 msgid "_Next Location"
-msgstr "വിലാസം-തുറക്കുക..."
+msgstr "അടുത്ത സ്ഥാനം (_N)"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:837
 msgid "Go to the next visited location"
@@ -2993,9 +2882,8 @@ msgid "Refresh the view"
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:840
-#, fuzzy
 msgid "_View Directory"
-msgstr "പ്രവ‍ര്ത്തന വിവര സമാഹാരം"
+msgstr "ഡയറക്ടറി കാണുക (_V)"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:841
 msgid "View directory in file manager"
@@ -3020,14 +2908,12 @@ msgstr ""
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:932
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:949
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:981
-#, fuzzy
 msgid "Previous location"
-msgstr "അര്‍മേനിയന്"
+msgstr "മുന്പുളള സ്ഥാനം"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:936
-#, fuzzy
 msgid "Go to previous location"
-msgstr "പ്രക്രമസ്ഥാനം സജ്ജീകരിക്കുക"
+msgstr "മുന്പുളള സ്ഥാനത്തേക്ക് പോകുക"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:942
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:974
@@ -3035,9 +2921,8 @@ msgid "Go to a previously opened location"
 msgstr ""
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:964
-#, fuzzy
 msgid "Next location"
-msgstr "വിലാസം-തുറക്കുക..."
+msgstr "അടുത്ത സ്ഥാനം"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:968
 msgid "Go to next location"
@@ -3068,18 +2953,16 @@ msgid "Indent lines"
 msgstr "തെരഞ്ഞെടുത്ത വരികളുടെ വിടവ്"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Indents or un-indents selected lines."
-msgstr "വിടവില്ലാത്ത തെരഞ്ഞെടുത്ത വരികള്‌"
+msgstr ""
 
 #: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
 msgid "Emacs, Kate and Vim-style modelines support for gedit."
 msgstr ""
 
 #: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:2
-#, fuzzy
 msgid "Modelines"
-msgstr "വരികള്‌"
+msgstr "മോഡ് ലൈനുകള്‍"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
 msgid "Interactive python console standing in the bottom panel"
@@ -3111,17 +2994,15 @@ msgstr ""
 
 #: ../plugins/snippets/snippets.gedit-plugin.desktop.in.h:2
 msgid "Snippets"
-msgstr ""
+msgstr "Snippets"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:2
-#, fuzzy
 msgid "<b>Activation</b>"
-msgstr "സ്വയം വിടവ്"
+msgstr "<b>പ്രവര്‍ത്തനം</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
-#, fuzzy
 msgid "Snippets Manager"
-msgstr "ഭാഷ സജ്ജമാക്കുക"
+msgstr "Snippets മാനേജര്‍"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:5
 msgid "_Edit snippet:"
@@ -3160,12 +3041,11 @@ msgstr ""
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
-msgstr "ക്രമീകരണം"
+msgstr "ക്രമീകരിക്കുക... (_o)"
 
 #: ../plugins/sort/gedit-sort-plugin.c:82
-#, fuzzy
 msgid "Sort the current document or selection"
-msgstr "നിലിലുള്ള രചന അല്ലേങ്കില്‌ തെരഞ്ഞെടുത്തവ ക്രമീകരിക്കുക"
+msgstr "നിലിലുള്ള ഫയല്‍ അല്ലെങ്കില്‍ തിരഞ്ഞെടുത്തവ  ക്രമീകരിക്കുക"
 
 #: ../plugins/sort/sort.gedit-plugin.desktop.in.h:1
 #: ../plugins/sort/sort.glade2.h:3
@@ -3228,14 +3108,12 @@ msgid "Afrikaans"
 msgstr "ആഫ്രിക്കന്‍സ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:80
-#, fuzzy
 msgid "Amharic"
-msgstr "അറബിക്"
+msgstr "അമാറിക്ക്"
 
 #: ../plugins/spell/gedit-spell-checker.c:82
-#, fuzzy
 msgid "Arabic (Egypt)"
-msgstr "അറബിക്"
+msgstr "അറബിക് (ഈജിപ്റ്റ്)"
 
 #: ../plugins/spell/gedit-spell-checker.c:83
 msgid "Azerbaijani"
@@ -3250,34 +3128,32 @@ msgid "Bulgarian"
 msgstr "ബള്‍ഗോറിയന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:86
-#, fuzzy
 msgid "Bengali"
-msgstr "ബംഗാളി"
+msgstr "ബംഗാളി "
 
 #: ../plugins/spell/gedit-spell-checker.c:87
 msgid "Breton"
-msgstr "ബ്രിട്ടണ്"
+msgstr "ബ്രെട്ടണ്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:88
 msgid "Catalan"
-msgstr "ക്യാറ്റലന്"
+msgstr "ക്യാറ്റലന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:89
 msgid "Czech"
-msgstr "സ്വിഷ്"
+msgstr "ചെക്ക്"
 
 #: ../plugins/spell/gedit-spell-checker.c:90
 msgid "Welsh"
-msgstr ""
+msgstr "വെല്‍ഷ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:91
 msgid "Danish"
 msgstr "ഡാനിഷ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:92
-#, fuzzy
 msgid "German (Austria)"
-msgstr "ജറ്മ്മന് (ജറ്മ്മനി)"
+msgstr "ജര്‍മ്മന്‍ (ഓസ്ട്രിയാ)"
 
 #: ../plugins/spell/gedit-spell-checker.c:93
 msgid "German (Germany)"
@@ -3301,26 +3177,23 @@ msgstr "ഇംഗ്ളിഷ് (കനേഡിയന്‌)"
 
 #: ../plugins/spell/gedit-spell-checker.c:99
 msgid "Esperanto"
-msgstr "സ്പരാന്റോ"
+msgstr "എസ്പെറാന്‍റോ"
 
 #: ../plugins/spell/gedit-spell-checker.c:100
 msgid "Spanish"
 msgstr "സ്പാനിഷ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:101
-#, fuzzy
 msgid "Estonian"
-msgstr "എസ്റ്റോണിയന്‍"
+msgstr "എസ്റ്റോണിയന്‍ "
 
 #: ../plugins/spell/gedit-spell-checker.c:102
-#, fuzzy
 msgid "Persian"
-msgstr "പേര്‍ഷ്യന്‍"
+msgstr "പേര്‍ഷ്യന്‍ "
 
 #: ../plugins/spell/gedit-spell-checker.c:103
-#, fuzzy
 msgid "Finnish"
-msgstr "ഫിന്നിഷ്"
+msgstr "ഫിന്നിഷ് "
 
 #: ../plugins/spell/gedit-spell-checker.c:104
 msgid "Faroese"
@@ -3335,32 +3208,28 @@ msgid "French (Swiss)"
 msgstr "ഫ്രഞ്ച് (സ്വിസ്സ്)"
 
 #: ../plugins/spell/gedit-spell-checker.c:107
-#, fuzzy
 msgid "Irish"
-msgstr "തുര്ക്കിഷ്"
+msgstr "ഐറിഷ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:108
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "സ്കോട്ടിഷ് ഗേയിലിക്"
 
 #: ../plugins/spell/gedit-spell-checker.c:109
-#, fuzzy
 msgid "Gallegan"
-msgstr "ജോര്‍ജ്ജിയന്"
+msgstr "ഗലേഗന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:110
 msgid "Manx Gaelic"
 msgstr ""
 
 #: ../plugins/spell/gedit-spell-checker.c:112
-#, fuzzy
 msgid "Hindi"
-msgstr "ഹിന്ദി"
+msgstr "ഹിന്ദി "
 
 #: ../plugins/spell/gedit-spell-checker.c:113
-#, fuzzy
 msgid "Croatian"
-msgstr "ക്രോയേഷ്യന്‍"
+msgstr "ക്രോയേഷ്യന്‍ "
 
 #: ../plugins/spell/gedit-spell-checker.c:114
 msgid "Upper Sorbian"
@@ -3372,7 +3241,7 @@ msgstr "ഹന്‍ഗേറിയന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:116
 msgid "Interlingua (IALA)"
-msgstr ""
+msgstr "ഇന്‍റര്‍ലിന്‍ഗ്വാ (IALA)"
 
 #: ../plugins/spell/gedit-spell-checker.c:117
 msgid "Indonesian"
@@ -3380,21 +3249,19 @@ msgstr "ഇന്‍ഡൊനേഷ്യന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:118
 msgid "Icelandic"
-msgstr "ഐസ്ലാന്‍റിക്ക"
+msgstr "ഐസ്ലാന്‍റിക്ക്"
 
 #: ../plugins/spell/gedit-spell-checker.c:119
 msgid "Italian"
-msgstr "ഇറ്റാലിയന്‌"
+msgstr "ഇറ്റാലിയന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:120
-#, fuzzy
 msgid "Kurdish"
-msgstr "തുര്ക്കിഷ്"
+msgstr "കര്‍ഡിഷ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:121
-#, fuzzy
 msgid "Latin"
-msgstr "ലാറ്റിന്‍"
+msgstr "ലാറ്റിന്‍ "
 
 #: ../plugins/spell/gedit-spell-checker.c:122
 msgid "Lithuanian"
@@ -3406,16 +3273,15 @@ msgstr "ലാറ്റ്വിയന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:124
 msgid "Malagasy"
-msgstr ""
+msgstr "മലാഗസി"
 
 #: ../plugins/spell/gedit-spell-checker.c:125
 msgid "Maori"
-msgstr ""
+msgstr "മൌരി"
 
 #: ../plugins/spell/gedit-spell-checker.c:126
-#, fuzzy
 msgid "Macedonian"
-msgstr "മാസെഡോണിയന്‍"
+msgstr "മാസെഡോണിയന്‍ "
 
 #: ../plugins/spell/gedit-spell-checker.c:127
 msgid "Mongolian"
@@ -3423,7 +3289,7 @@ msgstr "മംഗോളിയന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:128
 msgid "Marathi"
-msgstr ""
+msgstr "മറാഠി"
 
 #: ../plugins/spell/gedit-spell-checker.c:129
 msgid "Malay"
@@ -3431,29 +3297,27 @@ msgstr "മലയ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:130
 msgid "Maltese"
-msgstr ""
+msgstr "മാല്‍ട്ടീസ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:131
-#, fuzzy
 msgid "Norwegian Bokmal"
-msgstr "നോറ്വിജിയന്"
+msgstr "നോറ്വിജിയന്‍ ബോക്മാല്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:132
 msgid "Dutch"
 msgstr "ഡച്ച്"
 
 #: ../plugins/spell/gedit-spell-checker.c:133
-#, fuzzy
 msgid "Norwegian Nynorsk"
-msgstr "നോറ്വിജിയന്"
+msgstr "നോറ്വിജിയന്‍ നൈറോസ്ക്"
 
 #: ../plugins/spell/gedit-spell-checker.c:134
 msgid "Norwegian"
-msgstr "നോറ്വിജിയന്"
+msgstr "നോറ്വിജിയന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:135
 msgid "Nyanja"
-msgstr ""
+msgstr "ന്യാഞ്ചാ"
 
 #: ../plugins/spell/gedit-spell-checker.c:136
 msgid "Polish"
@@ -3461,28 +3325,27 @@ msgstr "പോളിഷ്"
 
 #: ../plugins/spell/gedit-spell-checker.c:137
 msgid "Portuguese (Portugal)"
-msgstr "പോറ്ട്ടുഗിസ്(പോറ്ട്ടുഗല്)"
+msgstr "പോര്‍ച്ചുഗീസ് (പോര്‍ച്ചുഗല്‍)"
 
 #: ../plugins/spell/gedit-spell-checker.c:138
 msgid "Portuguese (Brazilian)"
-msgstr "പോറ്ട്ടുഗിസ്(ബ്രസീലിയന്‌)"
+msgstr "പോര്‍ച്ചുഗീസ് (ബ്രസീലിയന്‍‌)"
 
 #: ../plugins/spell/gedit-spell-checker.c:139
 msgid "Quechua"
-msgstr ""
+msgstr "ക്വെന്‍ചാ"
 
 #: ../plugins/spell/gedit-spell-checker.c:141
 msgid "Russian"
-msgstr "റഷ്യന്‌"
+msgstr "റഷ്യന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:142
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "കിന്‍യാര്‍വാന്‍ഡാ"
 
 #: ../plugins/spell/gedit-spell-checker.c:143
-#, fuzzy
 msgid "Sardinian"
-msgstr "സിറിലിക്/ഉക്രേനിയന്"
+msgstr "സാര്‍ഡിയന്‍"
 
 #: ../plugins/spell/gedit-spell-checker.c:144
 msgid "Slovak"
@@ -3501,9 +3364,8 @@ msgid "Swahili"
 msgstr ""
 
 #: ../plugins/spell/gedit-spell-checker.c:148
-#, fuzzy
 msgid "Tamil"
-msgstr "തമിഴ്"
+msgstr "തമിഴ് "
 
 #: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tetum"
@@ -3518,9 +3380,8 @@ msgid "Tswana"
 msgstr ""
 
 #: ../plugins/spell/gedit-spell-checker.c:153
-#, fuzzy
 msgid "Ukrainian"
-msgstr "യുക്രെയിനിയന്‍"
+msgstr "യുക്രെയിനിയന്‍ "
 
 #: ../plugins/spell/gedit-spell-checker.c:154
 msgid "Uzbek"
@@ -3561,11 +3422,11 @@ msgstr "ലിപി വിന്യാസ പരിശോധന പു‍ര്
 #: ../plugins/spell/gedit-spell-language-dialog.c:244
 #, c-format
 msgid "Could not find the required widgets inside %s."
-msgstr "%s ല് ആവശ്യമായ ഉപകരണം കണ്ടെത്താനായില്ല"
+msgstr "%s-ല്‍ ആവശ്യമായ ഉപകരണം കണ്ടെത്താനായില്ല"
 
 #: ../plugins/spell/gedit-spell-language-dialog.c:265
 msgid "Languages"
-msgstr "ഭാഷകള്"
+msgstr "ഭാഷകള്‍"
 
 #: ../plugins/spell/gedit-spell-plugin.c:70
 msgid "_Check Spelling"
@@ -3576,9 +3437,8 @@ msgid "Check the current document for incorrect spelling"
 msgstr "അക്ഷരത്തെറ്റ് കണ്ടെത്താനായി നിലവിലുള്ള രചന പരിശോധിക്കുക"
 
 #: ../plugins/spell/gedit-spell-plugin.c:78
-#, fuzzy
 msgid "Set _Language..."
-msgstr "ഭാഷ സജ്ജമാക്കുക... (_L)"
+msgstr "ഭാഷ സജ്ജമാക്കുക... (_L) "
 
 #: ../plugins/spell/gedit-spell-plugin.c:80
 msgid "Set the language of the current document"
@@ -3597,9 +3457,8 @@ msgid "The document is empty."
 msgstr "രചന ശൂന്യമാണ്"
 
 #: ../plugins/spell/gedit-spell-plugin.c:745
-#, fuzzy
 msgid "No misspelled words"
-msgstr "അക്ഷരത്തെറ്റുള്ള വാക്കുകള്‍ ഇല്ല"
+msgstr "അക്ഷരത്തെറ്റുള്ള വാക്കുകള്‍ ഇല്ല "
 
 #: ../plugins/spell/languages-dialog.glade2.h:1
 msgid "Select the _language of the current document."
@@ -3654,9 +3513,8 @@ msgid "Language:"
 msgstr "ഭാഷ"
 
 #: ../plugins/spell/spell-checker.glade2.h:12
-#, fuzzy
 msgid "Misspelled word:"
-msgstr "അക്ഷരത്തെറ്റുളള വാക്ക്:"
+msgstr "അക്ഷരത്തെറ്റുളള വാക്ക്: "
 
 #: ../plugins/spell/spell-checker.glade2.h:13
 msgid "User dictionary:"
@@ -3683,9 +3541,8 @@ msgid "Select the group of tags you want to use"
 msgstr "താങ്കള്‌ക്കുപയോഗിക്കാനാവശ്യമായ അനുബന്ധ നിര തെരഞ്ഞെടുക്കുക"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
-#, fuzzy
 msgid "Available Tag Lists"
-msgstr "ലഭ്യമായ ഘടന"
+msgstr "ലഭ്യമായ ടാഗ് ലിസ്റ്റുകള്‍"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
@@ -3697,18 +3554,16 @@ msgid "Double-click on a tag to insert it in the current document"
 msgstr "അനുബന്ധത്തെ ഇരട്ട ഞെക്കിലൂടെ നിലവിലുള്ള പ്രസ്താവത്തിലേക്ക് ചേറ്‌ക്കുക"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
-#, fuzzy
 msgid "Abbreviated form"
-msgstr "ഘടന"
+msgstr "ചുരുങ്ങിയ രീതി"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:2
-#, fuzzy
 msgid "Abbreviation"
-msgstr "അര്‍മേനിയന്"
+msgstr "ചുരുക്കല്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:3
 msgid "Above"
-msgstr ""
+msgstr "മുകളില്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:4
 msgid "Accessibility key character"
@@ -3719,9 +3574,8 @@ msgid "Acronym"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:6
-#, fuzzy
 msgid "Align"
-msgstr "വരികള്‌"
+msgstr "ചിട്ടപ്പെടുത്തുക"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:7
 msgid "Alignment character"
@@ -3737,53 +3591,47 @@ msgstr "നങ്കൂരം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:10
 msgid "Anchor URI"
-msgstr ""
+msgstr "Anchor URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:11
-#, fuzzy
 msgid "Applet class file code"
-msgstr "താരതമ്യം ചെയ്യ‍ുന്നതിന് ആദ്യ ശേഖരം തെരഞ്ഞെടുക്കുക"
+msgstr "അപ്പ്-ലെറ്റ് ക്ളാസ് ഫയലുകളുടെ കോഡ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:12
 msgid "Array"
-msgstr ""
+msgstr "അറെ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:13
 msgid "Associated information"
-msgstr ""
+msgstr "അനുബന്ധിച്ചുളള വിവരങ്ങള്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:14
-#, fuzzy
 msgid "Author info"
-msgstr "സ്വയം വിടവ്"
+msgstr "രചയിതാവിന്‍റെ വിവരം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:15
-#, fuzzy
 msgid "Axis related headers"
-msgstr "താളിന്‌റെ തലക്കുറി അച്ചടിക്കുക"
+msgstr "ആക്സിസ് സംബന്ധിച്ചുളള തലക്കെട്ടുകള്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "BGSound"
-msgstr ""
+msgstr "BGSound"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:17
-#, fuzzy
 msgid "Background color"
-msgstr "പശ്ചാത്തല നിറം"
+msgstr "പശ്ചാത്തല നിറം "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:18
-#, fuzzy
 msgid "Background texture tile"
-msgstr "പശ്ചാത്തല നിറം"
+msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:19
 msgid "Base URI"
-msgstr ""
+msgstr "അടിസ്ഥാന URI"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:20
-#, fuzzy
 msgid "Base font"
-msgstr "ലിഖിതത്തില് അക്ഷരരൂപം ഉപയോഗിക്കുക"
+msgstr "അടിസ്ഥാന നിറം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Behavior"
@@ -3794,28 +3642,24 @@ msgid "Blinking text"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:24
-#, fuzzy
 msgid "Border"
-msgstr "ബോര്‍ഡര്‍"
+msgstr "ബോര്‍ഡര്‍ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:25
-#, fuzzy
 msgid "Border color"
-msgstr "പശ്ചാത്തലനിറം"
+msgstr "അതിരിന്‍റെ നിറം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:26
 msgid "Box"
-msgstr ""
+msgstr "ബോക്സ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:27
-#, fuzzy
 msgid "Cell rowspan"
-msgstr "മധ്യ യൂറോപ്യന്"
+msgstr "സെല്ലില്‍ ഒരു നിരയില്‍ എത്ര വരി"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:28
-#, fuzzy
 msgid "Center"
-msgstr "മദ്ധ്യത്തില്‍"
+msgstr "മദ്ധ്യത്തില്‍ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Character encoding of linked resource"
@@ -3826,9 +3670,8 @@ msgid "Checked (state)"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:31
-#, fuzzy
 msgid "Citation"
-msgstr "പ്രവ‍ര്ത്തനങ്ങള്‌"
+msgstr "Citation"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Cite reason for change"
@@ -3839,9 +3682,8 @@ msgid "Class implementation ID"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:34
-#, fuzzy
 msgid "Class list"
-msgstr "അനുബന്ധ പട്ടിക"
+msgstr "ക്ളാസ് ലിസ്റ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:35
 msgid "Clear text flow control"
@@ -3852,9 +3694,8 @@ msgid "Code content type"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:37
-#, fuzzy
 msgid "Color of selected links"
-msgstr "തെരഞ്ഞെടുത്ത വരികള് പക‍ര്ത്തുക"
+msgstr "തിരഞ്ഞെടുത്ത ലിങ്കുകളുടെ നിറം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Column span"
@@ -3865,28 +3706,24 @@ msgid "Columns"
 msgstr "ഗ്രന്ഥങ്ങള്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:40
-#, fuzzy
 msgid "Comment"
-msgstr "അഭിപ്രായം"
+msgstr "അഭിപ്രായം "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Computer code fragment"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:42
-#, fuzzy
 msgid "Content scheme"
-msgstr "ഉള്ളടക്കം"
+msgstr "ഉള്ളടക്കത്തിന്‍റെ സ്കീം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:43
-#, fuzzy
 msgid "Content type"
-msgstr "ഉള്ളടക്കം"
+msgstr "ഏത് തരം ഉള്ളടക്കം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:44
-#, fuzzy
 msgid "Coordinates"
-msgstr "ഉള്ളടക്കം"
+msgstr "കോര്‍ഡിനേറ്റുകള്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "DIV Style container"
@@ -3912,9 +3749,8 @@ msgid "Defer attribute"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:53
-#, fuzzy
 msgid "Definition description"
-msgstr "വിവരണം"
+msgstr "അര്‍ത്ഥങ്ങളുടെ വിവരണം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Definition list"
@@ -3925,14 +3761,12 @@ msgid "Definition term"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:56
-#, fuzzy
 msgid "Deleted text"
-msgstr "തെരഞ്ഞെടുത്തവ നീക്കം ചെയ്യ‍ുക"
+msgstr "നീക്കം ചെയ്ത ടെക്സ്റ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:57
-#, fuzzy
 msgid "Direction"
-msgstr "ദിശ"
+msgstr "ദിശ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Directionality"
@@ -3943,39 +3777,32 @@ msgid "Directory list"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:60
-#, fuzzy
 msgid "Disabled"
-msgstr "പ്രവര്‍ത്തന രഹിതം"
+msgstr "പ്രവര്‍ത്തന രഹിതമാക്കുക"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:61
-#, fuzzy
 msgid "Document base"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "രേഖയുടെ അടിസ്ഥാനം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:62
-#, fuzzy
 msgid "Document body"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "രേഖയുടെ ഭാഗം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:63
-#, fuzzy
 msgid "Document head"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "രേഖയുടെ തലക്കെട്ട്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:64
-#, fuzzy
 msgid "Document title"
-msgstr "പ്രസ്താവ സ്ഥിതിവിവരം"
+msgstr "രേഖയുടെ തലക്കെട്ട്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:65
-#, fuzzy
 msgid "Document type"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "ഏത് തരം രേഖ"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:66
-#, fuzzy
 msgid "Element ID"
-msgstr "ആധാരങ്ങള്‌"
+msgstr "എലമെന്‍റ് ID"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Embedded object"
@@ -3995,23 +3822,20 @@ msgid "Figure"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:71
-#, fuzzy
 msgid "Font face"
-msgstr "അക്ഷരരൂപ നാമം"
+msgstr "ലിപിയുടെ നാമം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:72
-#, fuzzy
 msgid "For label"
-msgstr "ലിഖിതം"
+msgstr "ലേബലിനുളളത്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Forced line break"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:74
-#, fuzzy
 msgid "Form"
-msgstr "സാധാരണ"
+msgstr "ഫോം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:75
 msgid "Form action handler"
@@ -4058,19 +3882,16 @@ msgid "Frame target"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:86
-#, fuzzy
 msgid "Frameborder"
-msgstr "നിരത്തല്‌ രീതി"
+msgstr "ഫ്രെയിമിന്‍റെ അതിര്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:87
-#, fuzzy
 msgid "Frameset"
-msgstr "ഫറോയിസ്"
+msgstr "ഫ്രെയിംസെറ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:88
-#, fuzzy
 msgid "Frameset columns"
-msgstr "നിരയില് തുടങ്ങുക"
+msgstr "ഫ്രെയിംസെറ്റ് നിരകള്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:89
 msgid "Frameset rows"
@@ -4089,9 +3910,8 @@ msgid "Generic metainformation"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:93
-#, fuzzy
 msgid "Generic span"
-msgstr "ജോര്‍ജ്ജിയന്"
+msgstr "ജനറിക്ക് സ്പാന്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "HREF URI"
@@ -4166,9 +3986,8 @@ msgid "I18N BiDi over-ride"
 msgstr "I18N BiDi over-ride"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:112
-#, fuzzy
 msgid "Image"
-msgstr "ഇമേജ്"
+msgstr "ഇമേജ് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "Image map"
@@ -4187,41 +4006,36 @@ msgid "Image source"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:117
-#, fuzzy
 msgid "Inline frame"
-msgstr "സാധുതയില്ലാത്ത രചന നാമം"
+msgstr "ഇന്‍ ലൈന്‍ ഫ്രെയിം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "Inline layer"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:119
-#, fuzzy
 msgid "Inserted text"
-msgstr "തീയതിയും സമയും ചേറ്‌ക്കുക"
+msgstr "ഇടയ്ക്ക് ചേര്‍ക്കുന്ന ടെക്സ്റ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Instance definition"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:121
-#, fuzzy
 msgid "Italic text"
-msgstr "ചരിഞ്ഞ രീതിയിലുളള വാചകം"
+msgstr "ചരിഞ്ഞ രീതിയിലുളള വാചകം "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Java applet"
 msgstr "Java ആപ്പ്-ലെറ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:123
-#, fuzzy
 msgid "Label"
-msgstr "ലേബല്‍"
+msgstr "ലേബല്‍ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:124
-#, fuzzy
 msgid "Language code"
-msgstr "ഭാഷകളുടെ കോഡ്"
+msgstr "ഭാഷകളുടെ കോഡ് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Large text style"
@@ -4232,9 +4046,8 @@ msgid "Layer"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:127
-#, fuzzy
 msgid "Link color"
-msgstr " ബന്ധന നിറം"
+msgstr "ലിങ്കിന്‍റെ നിറം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "List item"
@@ -4253,14 +4066,12 @@ msgid "Listing"
 msgstr "ലിസ്റ്റിങ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:132
-#, fuzzy
 msgid "Local change to font"
-msgstr "വാക്യ നിറം തെരഞ്ഞെടുക്കുക"
+msgstr "ലിപിയിലേക്ക് ലോക്കല്‍ മാറ്റം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:133
-#, fuzzy
 msgid "Long description link"
-msgstr "വിവരണം"
+msgstr "വലിയ വിവരണമുളള ലിങ്ക്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Long quotation"
@@ -4339,9 +4150,8 @@ msgid "No line break"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:153
-#, fuzzy
 msgid "No resize"
-msgstr "ൃ"
+msgstr "വലിപ്പം മാറ്റിയില്ല"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "No script"
@@ -4360,9 +4170,8 @@ msgid "Note"
 msgstr "കുറിപ്പ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:158
-#, fuzzy
 msgid "Object applet file"
-msgstr "ഒബ്ജക്റ്റ് ആപ്പ്-ലെറ്റ് ഫയല്‍"
+msgstr "ഒബ്ജക്റ്റ് ആപ്പ്-ലെറ്റ് ഫയല്‍ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Object data reference"
@@ -4377,9 +4186,8 @@ msgid "OnBlur event"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:162
-#, fuzzy
 msgid "OnChange event"
-msgstr "മാറ്റം"
+msgstr "OnChange event"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "OnClick event"
@@ -4450,18 +4258,16 @@ msgid "Option group"
 msgstr "ഉപാധി ഗ്രൂപ്പ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:180
-#, fuzzy
 msgid "Option selector"
-msgstr "ഉപാധി തിരഞ്ഞെടുക്കല്‍"
+msgstr "ഉപാധി തിരഞ്ഞെടുക്കല്‍ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "Ordered list"
 msgstr "ക്രമത്തിലുളള ലിസ്റ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:182
-#, fuzzy
 msgid "Output media"
-msgstr "ഔട്ട് പുട്ട് മീഡിയാ"
+msgstr "ഔട്ട് പുട്ട് മീഡിയാ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "Paragraph"
@@ -4480,9 +4286,8 @@ msgid "Preformatted listing"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:187
-#, fuzzy
 msgid "Preformatted text"
-msgstr "തിരനോട്ട വാക്യം"
+msgstr "ക്രമീകരിക്കുന്നതിന് മുന്പുളള ടെക്സ്റ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:188
 msgid "Profile metainfo dictionary"
@@ -4497,14 +4302,12 @@ msgid "Push button"
 msgstr "പുഷ് ബട്ടണ്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:191
-#, fuzzy
 msgid "Quote"
-msgstr "ഉദാഹരണം"
+msgstr "ഉദാഹരണം "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:192
-#, fuzzy
 msgid "Range"
-msgstr "പരിധി"
+msgstr "പരിധി "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:193
 msgid "ReadOnly text and password"
@@ -4515,9 +4318,8 @@ msgid "Reduced spacing"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:195
-#, fuzzy
 msgid "Reverse link"
-msgstr "വിപരീത ലിങ്ക്"
+msgstr "വിപരീത ലിങ്ക് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:196
 msgid "Root"
@@ -4540,9 +4342,8 @@ msgid "Scope covered by header cells"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:201
-#, fuzzy
 msgid "Script language name"
-msgstr "സ്ക്രിപ്റ്റ് ഭാഷയുടെ പേര്"
+msgstr "സ്ക്രിപ്റ്റ് ഭാഷയുടെ പേര് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "Script statments"
@@ -4553,23 +4354,20 @@ msgid "Scrollbar"
 msgstr "സ്ക്രോള്‍ ബാര്‍"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:204
-#, fuzzy
 msgid "Selectable option"
-msgstr "തിരഞ്ഞെടുക്കാവുന്ന ഉപാധി"
+msgstr "തിരഞ്ഞെടുക്കാവുന്ന ഉപാധി "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:205
-#, fuzzy
 msgid "Selected"
-msgstr "തിരഞ്ഞെടുത്ത്"
+msgstr "തിരഞ്ഞെടുത്ത് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "Server-side image map"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:207
-#, fuzzy
 msgid "Shape"
-msgstr "രൂപം"
+msgstr "രൂപം "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "Short inline quotation"
@@ -4580,14 +4378,12 @@ msgid "Single line prompt"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:210
-#, fuzzy
 msgid "Size"
-msgstr "വലിപ്പം"
+msgstr "വലിപ്പം "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:211
-#, fuzzy
 msgid "Small text style"
-msgstr "വാചക രചനകള് തിരുത്തുക"
+msgstr "ചെറിയ ടെക്സ്റ്റ് ശൈലി"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "Soft line break"
@@ -4602,18 +4398,16 @@ msgid "Source"
 msgstr "ഉറവിടം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:215
-#, fuzzy
 msgid "Space"
-msgstr "സ്പെയിസ്"
+msgstr "സ്പെയിസ് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "Space separated archive list"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:217
-#, fuzzy
 msgid "Spacer"
-msgstr "സ്പെയിസര്‍"
+msgstr "സ്പെയിസര്‍ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Spacing between cells"
@@ -4624,9 +4418,8 @@ msgid "Spacing within cells"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:220
-#, fuzzy
 msgid "Span"
-msgstr "സ്പാന്‍"
+msgstr "സ്പാന്‍ "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Square root"
@@ -4637,9 +4430,8 @@ msgid "Standby load msg"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:223
-#, fuzzy
 msgid "Starting sequence number"
-msgstr "വരി എണ്ണം അച്ചടിക്കു"
+msgstr "ക്രമത്തില്‍ അക്കങ്ങള്‍ ആരംഭിക്കുന്നു"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Strike-through text"
@@ -4662,16 +4454,14 @@ msgid "Subscript"
 msgstr "സബ് സ്ക്രിപ്റ്റ്"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:229
-#, fuzzy
 msgid "Superscript"
-msgstr "സൂപ്പര്‍ സ്ക്രിപ്റ്റ്"
+msgstr "സൂപ്പര്‍ സ്ക്രിപ്റ്റ് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Tab order position"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:231
-#, fuzzy
 msgid "Table"
 msgstr "ടേബിള്‍"
 
@@ -4680,9 +4470,8 @@ msgid "Table body"
 msgstr "ടേബിളിന്‍റെ ഉളളടക്കം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:233
-#, fuzzy
 msgid "Table caption"
-msgstr "ടേബിളിന്‍റെ പേര്"
+msgstr "ടേബിളിന്‍റെ പേര് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:234
 msgid "Table column group properties"
@@ -4741,9 +4530,8 @@ msgid "Text"
 msgstr "വാചകം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:248
-#, fuzzy
 msgid "Text color"
-msgstr "വാചകത്തിന്‍റെ നിറം"
+msgstr "ടെക്സ്റ്റിന്‍റെ നിറം"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Text entered by user"
@@ -4762,14 +4550,12 @@ msgid "URL"
 msgstr "URL"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:253
-#, fuzzy
 msgid "Underlined text style"
-msgstr "അടിവരയിട്ട വാചക രീതി"
+msgstr "അടിവരയിട്ട ടെക്സ്റ്റ് രീതി "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:254
-#, fuzzy
 msgid "Unordered list"
-msgstr "ക്രമത്തിലല്ലാത്ത ലിസ്റ്റ്"
+msgstr "ക്രമത്തിലല്ലാത്ത ലിസ്റ്റ് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Use image map"
@@ -4792,14 +4578,12 @@ msgid "Vertical cell alignment"
 msgstr ""
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:260
-#, fuzzy
 msgid "Vertical space"
-msgstr "നേരെയുളള സ്പെയിസ്"
+msgstr "നേരെയുളള സ്പെയിസ് "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:261
-#, fuzzy
 msgid "Visited link color"
-msgstr "സന്ദര്‍ശിച്ചിട്ടുളള ലിങ്കുകളുടെ നിറം"
+msgstr "സന്ദര്‍ശിച്ചിട്ടുളള ലിങ്കിന്‍റെ നിറം "
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Width"
@@ -4842,9 +4626,8 @@ msgid "File input"
 msgstr "ഫയല്‍ ഇന്‍പുട്ട്"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:11
-#, fuzzy
 msgid "Footnote"
-msgstr "അടിക്കുറിപ്പ്"
+msgstr "അടിക്കുറിപ്പ് "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:12
 msgid "Function cosin"
@@ -4871,37 +4654,32 @@ msgid "Function sine"
 msgstr "sine ഫംഗ്ഷന്‍"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:18
-#, fuzzy
 msgid "Greek alpha"
-msgstr "ഗ്രീക്ക് ആല്‍ഫാ"
+msgstr "ഗ്രീക്ക് ആല്‍ഫാ "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:19
-#, fuzzy
 msgid "Greek beta"
-msgstr "ഗ്രീക്ക് ബീറ്റാ"
+msgstr "ഗ്രീക്ക് ബീറ്റാ "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:20
 msgid "Greek epsilon"
 msgstr "ഗ്രീക്ക് എപ്സിലോണ്‍"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:21
-#, fuzzy
 msgid "Greek gamma"
-msgstr "ഗ്രീക്ക് ഗാമ്മാ"
+msgstr "ഗ്രീക്ക് ഗാമ്മാ "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:22
 msgid "Greek lambda"
 msgstr "ഗ്രീക്ക് ലാമ്ഡാ"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:23
-#, fuzzy
 msgid "Greek rho"
-msgstr "ഗ്രീക്ക് റോ"
+msgstr "ഗ്രീക്ക് റോ "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:24
-#, fuzzy
 msgid "Greek tau"
-msgstr "ഗ്രീക്ക് താവു"
+msgstr "ഗ്രീക്ക് താവു "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:25
 msgid "Header 0 (chapter)"
@@ -4956,14 +4734,12 @@ msgid "Latex - Tags"
 msgstr "ലാറ്റക്സ് - ടാഗുകള്‍"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:38
-#, fuzzy
 msgid "List description"
-msgstr "ലിസ്റ്റിന്‍റെ വിവരണം"
+msgstr "ലിസ്റ്റിന്‍റെ വിവരണം "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:39
-#, fuzzy
 msgid "List enumerate"
-msgstr "വരി എണ്ണം"
+msgstr "ലിസ്റ്റ് എന്യൂമറേറ്റ്"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:40
 msgid "List itemize"
@@ -4978,9 +4754,8 @@ msgid "Maths (inline)"
 msgstr "മാഥ്സ് (ഇന്‍‍ലൈന്‍)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:43
-#, fuzzy
 msgid "Operator fraction"
-msgstr "ഓപ്പറേറ്റര്‍ ഫ്രാക്ഷന്‍"
+msgstr "ഓപ്പറേറ്റര്‍ ഫ്രാക്ഷന്‍ "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:44
 msgid "Operator integral (display)"
@@ -4999,14 +4774,12 @@ msgid "Operator sum (inline)"
 msgstr "ഓപ്പറേറ്റര്‍ സം (ഇന്‍‍ലൈന്‍)"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:48
-#, fuzzy
 msgid "Reference label"
-msgstr "റിഫറന്‍സ് ലേബല്‍"
+msgstr "റിഫറന്‍സ് ലേബല്‍ "
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:49
-#, fuzzy
 msgid "Reference ref"
-msgstr "റിഫറന്‍സ് റെഫ് (ref)"
+msgstr "റിഫറന്‍സ് റെഫ്"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:50
 msgid "Symbol <<"
@@ -5163,14 +4936,12 @@ msgid "following-sibling"
 msgstr "ശേഷമുളള-സിബ്ളിങ്"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:12
-#, fuzzy
 msgid "namespace"
 msgstr "നെയിം സ്പെയിസ്"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:13
-#, fuzzy
 msgid "parent"
-msgstr "പേരന്‍റ്"
+msgstr "പേരന്‍റ് "
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:14
 msgid "preceding"
