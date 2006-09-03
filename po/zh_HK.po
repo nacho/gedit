@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: gedit 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-09-03 22:00+0800\n"
-"PO-Revision-Date: 2006-09-03 22:16+0800\n"
+"PO-Revision-Date: 2006-09-04 04:00+0800\n"
 "Last-Translator: Woodman Tuen <wmtuen@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <community@linuxhall.org>\n"
 "MIME-Version: 1.0\n"
@@ -73,6 +73,7 @@ msgstr "在編輯區域中，未被選取的文字的背景顏色。本選項只
 msgid "Backup Copy Extension"
 msgstr "備份檔延伸檔名"
 
+# zh_HK: msgstr "打印時使用的內文字型"
 #: ../data/gedit.schemas.in.h:11
 msgid "Body Font for Printing"
 msgstr "打印時使用的內文字型"
@@ -127,6 +128,7 @@ msgid ""
 "take effect if the \"Use Default Colors\" option is turned off."
 msgstr "在編輯區域中，未被選取的文字的顏色。本選項只有在「使用預設色彩」選項關閉後才會生效。"
 
+# zh_HK: msgstr "打印時使用的頁首字型"
 #: ../data/gedit.schemas.in.h:23
 msgid "Header Font for Printing"
 msgstr "打印時使用的頁首字型"
@@ -139,6 +141,7 @@ msgstr "標示目前的行"
 msgid "Highlight Matching Bracket"
 msgstr "標示對稱的括號"
 
+# zh_HK: msgstr "如果數值是 0，當打印文件時不會打印行號。否則，gedit 會每隔指定的行數打印行號。"
 #: ../data/gedit.schemas.in.h:26
 msgid ""
 "If this value is 0, then no line numbers will be inserted when printing a "
@@ -150,6 +153,7 @@ msgstr "如果數值是 0，當打印文件時不會打印行號。否則，gedi
 msgid "Insert spaces"
 msgstr "插入空格"
 
+# zh_HK: msgstr "打印行號時使用的字型"
 #: ../data/gedit.schemas.in.h:28
 msgid "Line Number Font for Printing"
 msgstr "打印行號時使用的字型"
@@ -222,18 +226,22 @@ msgid ""
 "This will only take effect if the \"Auto Save\" option is turned on."
 msgstr "gedit 會在每隔指定的時間（分鐘）後自動儲存檔案。本選項只有在「自動儲存」選項開啟後才會生效。"
 
+# zh_HK: msgstr "打印頁首"
 #: ../data/gedit.schemas.in.h:48
 msgid "Print Header"
 msgstr "打印頁首"
 
+# zh_HK: msgstr "打印行號"
 #: ../data/gedit.schemas.in.h:49
 msgid "Print Line Numbers"
 msgstr "打印行號"
 
+# zh_HK: msgstr "打印時顯示語法色彩"
 #: ../data/gedit.schemas.in.h:50
 msgid "Print Syntax Highlighting"
 msgstr "打印時顯示語法色彩"
 
+# zh_HK: msgstr "打印換行模式"
 #: ../data/gedit.schemas.in.h:51
 msgid "Printing Line Wrapping Mode"
 msgstr "打印換行模式"
@@ -292,6 +300,7 @@ msgid ""
 "are used."
 msgstr "這裏是一系列已排序的編碼，gedit 會根據這個清單自動偵測檔案的字符編碼。“CURRENT”表示使用目前地區設定的編碼。所有無法識別的編碼將不會使用。"
 
+# zh_HK: msgstr "指定打印時如何換行。使用“GTK_WRAP_NONE”代表不會換行，“GTK_WRAP_WORD”代表在字詞間換行，及“GTK_WRAP_CHAR”代表在個別字符間換行。請注意，設定值是會分辨大小寫的，所以請確保設定值和上面所列出的完全一致。"
 #: ../data/gedit.schemas.in.h:72
 msgid ""
 "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no "
@@ -310,23 +319,27 @@ msgid ""
 "here."
 msgstr "指定編輯區域如何換行。使用“GTK_WRAP_NONE”代表不會換行，“GTK_WRAP_WORD”代表在字詞間換行，及“GTK_WRAP_CHAR”代表在個別字符間換行。請注意，設定值是會分辨大小寫的，所以請確保設定值和上面所列出的完全一致。"
 
+# zh_HK: msgstr "指定打印文件時文件內容所用的字型。"
 #: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr "指定打印文件時文件內容所用的字型。"
 
+# zh_HK: msgstr "指定打印文件時文件內容所用的字型。這是一個 gnome-print 的字型名稱及以 print_font_body_pango 所取代。"
 #: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr "指定打印文件時文件內容所用的字型。這是一個 gnome-print 的字型名稱及以 print_font_body_pango 所取代。"
 
+# zh_HK: msgstr "指定打印時行號所用的字型。本選項只有在「打印行號」選項的值不是零的時候生效。"
 #: ../data/gedit.schemas.in.h:76
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr "指定打印時行號所用的字型。本選項只有在「打印行號」選項的值不是零的時候生效。"
 
+# zh_HK: msgstr "指定打印時行號所用的字型。本選項只有在「打印行號」選項的值不是零的時候生效。這是一個 gnome-print 的字型名稱及以 print_font_numbers_pango 所取代。"
 #: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
@@ -334,12 +347,14 @@ msgid ""
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr "指定打印時行號所用的字型。本選項只有在「打印行號」選項的值不是零的時候生效。這是一個 gnome-print 的字型名稱及以 print_font_numbers_pango 所取代。"
 
+# zh_HK: msgstr "指定打印文件時頁首所用的字型。本選項只有在「打印頁首」選項的值開啟的時候生效。"
 #: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr "指定打印文件時頁首所用的字型。本選項只有在「打印頁首」選項的值開啟的時候生效。"
 
+# zh_HK: msgstr "指定打印文件時頁首所用的字型。本選項只有在「打印頁首」選項的值開啟的時候生效。這是一個 gnome-print 的字型名稱及以 print_font_header_pango 所取代。"
 #: ../data/gedit.schemas.in.h:79
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
@@ -453,6 +468,7 @@ msgstr "gedit 應否啟用對稱括號色彩顯示的功能。"
 msgid "Whether gedit should highlight the current line."
 msgstr "gedit 應否在當前的行上啟用色彩顯示功能。"
 
+# zh_HK: msgstr "gedit 應否在打印文件時加上頁首。"
 #: ../data/gedit.schemas.in.h:101
 msgid "Whether gedit should include a document header when printing documents."
 msgstr "gedit 應否在打印文件時加上頁首。"
@@ -461,6 +477,7 @@ msgstr "gedit 應否在打印文件時加上頁首。"
 msgid "Whether gedit should insert spaces instead of tabs."
 msgstr "gedit 應否使用空格來代替 Tab 字符。"
 
+# zh_HK: msgstr "gedit 應否在打印文件時加上語法色彩處理。"
 #: ../data/gedit.schemas.in.h:103
 msgid "Whether gedit should print syntax highlighting when printing documents."
 msgstr "gedit 應否在打印文件時加上語法色彩處理。"
@@ -675,7 +692,7 @@ msgstr "字符編碼(_A)："
 
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:2
 msgid "Enter the _location (URI) of the file you would like to open:"
-msgstr "輸入準備開啟的檔案的位置[URI](_L)："
+msgstr "輸入準備開啟的檔案的位置 (_URI)："
 
 #: ../gedit/dialogs/gedit-page-setup-dialog.c:527
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:9
@@ -723,10 +740,12 @@ msgstr "一般"
 msgid "He_aders and footers:"
 msgstr "頁首和頁尾(_A)："
 
+# zh_HK: msgstr "打印行號(_L)"
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:10
 msgid "Print _line numbers"
 msgstr "打印行號(_L)"
 
+# zh_HK: msgstr "打印語法標示的顏色(_Y)"
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:11
 msgid "Print s_yntax highlighting"
 msgstr "打印語法標示的顏色(_Y)"
@@ -743,6 +762,7 @@ msgstr "行號(_L)："
 msgid "_Number every"
 msgstr "每隔指定行數加上行號(_N)："
 
+# zh_HK: msgstr "打印頁首(_P)"
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:15
 msgid "_Print page headers"
 msgstr "打印頁首(_P)"
@@ -862,7 +882,7 @@ msgstr "標示對稱的括號(_B)"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:24
 msgid "Insert _spaces instead of tabs"
-msgstr "插入空格代替 Tab 字符(_S)"
+msgstr "插入空格代替 _Tab 字符"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:25
 msgid "Italic"
@@ -1181,7 +1201,7 @@ msgstr "gedit 是一個小巧的文字編輯器，適用於 GNOME 桌面"
 msgid "translator-credits"
 msgstr ""
 "如對翻譯有任何意見，請送一封電子郵件給\n"
-"以下地址，GNOME 翻譯隊伍會盡快回覆你：\n"
+"以下地址，GNOME 翻譯隊伍會儘快回覆你：\n"
 "community@linuxhall.org\n"
 "\n"
 "Woodman Tuen <wmtuen@gmail.com>, 2005-06\n"
@@ -1752,6 +1772,7 @@ msgstr "檔案： %s"
 msgid "Page %N of %Q"
 msgstr "%N / %Q 頁"
 
+# zh_HK: msgstr "打印"
 #: ../gedit/gedit-print.c:316
 msgid "Print"
 msgstr "打印"
@@ -1764,6 +1785,7 @@ msgstr "行"
 msgid "Page Preview"
 msgstr "頁面預覽"
 
+# zh_HK: msgstr "將會打印的文件的預覽"
 #: ../gedit/gedit-print-job-preview.c:624
 msgid "The preview of a page in the document to be printed"
 msgstr "將會打印的文件的預覽"
@@ -2042,6 +2064,7 @@ msgstr "預覽打印"
 msgid "_Print..."
 msgstr "打印(_P)..."
 
+# zh_HK: msgstr "打印本頁"
 #: ../gedit/gedit-ui.h:93
 msgid "Print the current page"
 msgstr "打印本頁"
@@ -2668,7 +2691,7 @@ msgid ""
 "values are: none (filter nothing), hidden (filter hidden files), binary "
 "(filter binary files) and hidden_and_binary (filter both hidden and binary "
 "files)."
-msgstr "本數值決定那些檔案在檔案瀏覽器中會被過濾。有效的數值為“none”（不過濾），“hidden”（只過濾隱藏檔），“binary”（只過濾二位元檔），“hidden_and_binary”（過濾隱藏檔及二位元檔）。"
+msgstr "本數值決定哪些檔案在檔案瀏覽器中會被過濾。有效的數值為“none”（不過濾），“hidden”（只過濾隱藏檔），“binary”（只過濾二位元檔），“hidden_and_binary”（過濾隱藏檔及二位元檔）。"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:390
 msgid "_Set root to active document"
@@ -2740,7 +2763,7 @@ msgstr "檔案“%s”無法移至回收筒。"
 msgid ""
 "Are you sure you want to\n"
 "permanently delete \"%s\"?"
-msgstr "確定要永遠地刪除“%s”嗎？"
+msgstr "確定要永遠刪除“%s”嗎？"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:919
 msgid "If you delete an item it is permanently lost."
@@ -2749,7 +2772,7 @@ msgstr "如果將項目刪除，它將會永久地失去。"
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2413
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
 msgid "Invalid uri"
-msgstr "無法的 uri"
+msgstr "無效的 uri"
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2771
 msgid "file"
@@ -2804,7 +2827,7 @@ msgstr "更改已選檔案或資料夾的名稱"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:822
 msgid "_Move To Trash"
-msgstr "移至回收筒"
+msgstr "移至回收筒(_M)"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "Move selected file or directory to trash"
@@ -4972,11 +4995,5 @@ msgstr "提示可使用的格式(_P)"
 msgid "_Use custom format"
 msgstr "使用自訂格式(_U)"
 
-#~ msgid "FALSE"
-#~ msgstr "FALSE"
 
-#~ msgid "TRUE"
-#~ msgstr "TRUE"
 
-#~ msgid "hidden_and_binary"
-#~ msgstr "隱藏檔及二位元檔"
