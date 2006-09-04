@@ -3,8 +3,8 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 
 m4_define(gedit_major_version,  2)
-m4_define(gedit_minor_version, 15)
-m4_define(gedit_micro_version,  9)
+m4_define(gedit_minor_version, 16)
+m4_define(gedit_micro_version,  0)
 m4_define(gedit_version, gedit_major_version.gedit_minor_version.gedit_micro_version)
 
 AC_INIT(gedit, gedit_version, http://bugzilla.gnome.org/enter_bug.cgi?product=gedit)
@@ -18,7 +18,7 @@ AC_SUBST(GEDIT_MINOR_VERSION, gedit_minor_version)
 AC_DEFINE(GEDIT_MICRO_VERSION, gedit_micro_version, [Gedit micro version])
 AC_SUBST(GEDIT_MICRO_VERSION, gedit_micro_version)
 
-GEDIT_MAJOR=2.14
+GEDIT_MAJOR=2.16
 AC_SUBST(GEDIT_MAJOR)
 
 AM_INIT_AUTOMAKE([1.8 dist-bzip2 no-dist-gzip])
@@ -98,11 +98,11 @@ dnl ================================================================
 PKG_CHECK_MODULES(GEDIT, [
 	glib-2.0 >= 2.12.0
 	gtk+-2.0 >= 2.10.0
-	gtksourceview-1.0 >= 1.7.2
-	libgnomeui-2.0 >= 2.13.0
-	libglade-2.0 >= 2.4.0
-	libgnomeprintui-2.2 >= 2.6.0
-	gnome-vfs-2.0 >= 2.13.4
+	gtksourceview-1.0 >= 1.8.0
+	libgnomeui-2.0 >= 2.16.0
+	libglade-2.0 >= 2.5.1
+	libgnomeprintui-2.2 >= 2.12.1
+	gnome-vfs-2.0 >= 2.16.0
 ])
 GEDIT_LIBS="${GEDIT_LIBS}"
 AC_SUBST(GEDIT_LIBS)
@@ -180,10 +180,12 @@ EOF
 fi
 
 if test "x$have_python" != "xno"; then
-	PYGTK_REQUIRED=2.8.0
-	GNOME_PYTHON_DESKTOP_REQUIRED=2.13.3
+	PYGOBJECT_REQUIRED=2.11.5
+	PYGTK_REQUIRED=2.9.7
+	GNOME_PYTHON_DESKTOP_REQUIRED=2.15.90
 
 	PKG_CHECK_MODULES([PYGTK], [
+		pygobject-2.0 >= $PYGOBJECT_REQUIRED
 		pygtk-2.0 >= $PYGTK_REQUIRED
 		gnome-python-desktop-2.0 >= $GNOME_PYTHON_DESKTOP_REQUIRED],
 		[],[have_python=no])
