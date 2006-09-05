@@ -103,6 +103,9 @@ static void model_remove_node                               (GeditFileBrowserSto
 							     GtkTreePath * path,
 							     gboolean free_nodes);
 
+static void set_virtual_root_from_node                      (GeditFileBrowserStore * model,
+				                             FileBrowserNode * node);
+
 static void gedit_file_browser_store_iface_init             (GtkTreeModelIface * iface);
 static GtkTreeModelFlags gedit_file_browser_store_get_flags (GtkTreeModel * tree_model);
 static gint gedit_file_browser_store_get_n_columns          (GtkTreeModel * tree_model);
@@ -1305,7 +1308,9 @@ model_remove_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 
 	model_remove_node_children (model, node, path, free_nodes);
 
-	if (model_node_visibility (model, node))
+	/* Only delete if the node is visible in the tree (but only when it's
+	   not the virtual root) */
+	if (model_node_visibility (model, node) && node != model->priv->virtual_root)
 		gtk_tree_model_row_deleted (GTK_TREE_MODEL (model), path);
 
 	if (free_path)
@@ -1320,12 +1325,17 @@ model_remove_node (GeditFileBrowserStore * model, FileBrowserNode * node,
 			    g_slist_remove (FILE_BROWSER_NODE_DIR
 					    (node->parent)->children,
 					    node);
-
-		file_browser_node_free (model, node);
 	}
-
-	if (parent && model_node_visibility (model, parent))
+	
+	/* If this is the virtual root, than set the parent as the virtual root */
+	if (node == model->priv->virtual_root)
+		set_virtual_root_from_node (model, parent);
+	else if (parent && model_node_visibility (model, parent) && !(free_nodes && NODE_IS_DUMMY(node)))
 		model_check_dummy (model, parent);
+
+	/* Now free the node if necessary */
+	if (free_nodes)
+		file_browser_node_free (model, node);
 }
 
 /**
