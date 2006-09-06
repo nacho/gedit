@@ -2003,19 +2003,19 @@ set_virtual_root_from_node (GeditFileBrowserStore * model,
 	for (item = FILE_BROWSER_NODE_DIR (node)->children; item;
 	     item = item->next) {
 		check = (FileBrowserNode *) (item->data);
-
-		if (NODE_IS_DIR (check)) {
+			
+		if (NODE_IS_DIR (check)) {		
 			for (copy =
 			     FILE_BROWSER_NODE_DIR (check)->children; copy;
 			     copy = copy->next) {
 				file_browser_node_free_children (model,
 								 (FileBrowserNode
 								  *)
-								 (item->
+								 (copy->
 								  data));
 				file_browser_node_unload (model,
 							  (FileBrowserNode
-							   *) (item->data),
+							   *) (copy->data),
 							  FALSE);
 			}
 		} else if (NODE_IS_DUMMY (check)) {
