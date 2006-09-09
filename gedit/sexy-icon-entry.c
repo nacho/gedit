@@ -114,6 +114,14 @@ sexy_icon_entry_class_init(SexyIconEntryClass *klass)
 	widget_class->button_press_event = sexy_icon_entry_button_press;
 	widget_class->button_release_event = sexy_icon_entry_button_release;
 
+	/**
+	 * SexyIconEntry::icon-pressed:
+	 * @entry: The entry on which the signal is emitted.
+	 * @icon_pos: The position of the clicked icon.
+	 * @button: The mouse button clicked.
+	 *
+	 * The ::icon-pressed signal is emitted when an icon is clicked.
+	 */
 	signals[ICON_PRESSED] =
 		g_signal_new("icon_pressed",
 					 G_TYPE_FROM_CLASS(gobject_class),
@@ -125,6 +133,15 @@ sexy_icon_entry_class_init(SexyIconEntryClass *klass)
 					 G_TYPE_INT,
 					 G_TYPE_INT);
 
+	/**
+	 * SexyIconEntry::icon-released:
+	 * @entry: The entry on which the signal is emitted.
+	 * @icon_pos: The position of the clicked icon.
+	 * @button: The mouse button clicked.
+	 *
+	 * The ::icon-released signal is emitted on the button release from a
+	 * mouse click.
+	 */
 	signals[ICON_RELEASED] =
 		g_signal_new("icon_released",
 					 G_TYPE_FROM_CLASS(gobject_class),
@@ -189,7 +206,10 @@ sexy_icon_entry_map(GtkWidget *widget)
 		GTK_WIDGET_CLASS(parent_class)->map(widget);
 
 		for (i = 0; i < MAX_ICONS; i++)
-			gdk_window_show(entry->priv->icons[i].window);
+		{
+			if (entry->priv->icons[i].icon != NULL)
+				gdk_window_show(entry->priv->icons[i].window);
+		}
 	}
 }
 
@@ -202,7 +222,10 @@ sexy_icon_entry_unmap(GtkWidget *widget)
 		int i;
 
 		for (i = 0; i < MAX_ICONS; i++)
-			gdk_window_hide(entry->priv->icons[i].window);
+		{
+			if (entry->priv->icons[i].icon != NULL)
+				gdk_window_hide(entry->priv->icons[i].window);
+		}
 
 		GTK_WIDGET_CLASS(parent_class)->unmap(widget);
 	}
@@ -314,22 +337,25 @@ sexy_icon_entry_realize(GtkWidget *widget)
 
 	GTK_WIDGET_CLASS(parent_class)->realize(widget);
 
+	attributes.x = 0;
+	attributes.y = 0;
+	attributes.width = 1;
+	attributes.height = 1;
+	attributes.window_type = GDK_WINDOW_CHILD;
+	attributes.wclass = GDK_INPUT_OUTPUT;
+	attributes.visual = gtk_widget_get_visual(widget);
+	attributes.colormap = gtk_widget_get_colormap(widget);
+	attributes.event_mask = gtk_widget_get_events(widget);
+	attributes.event_mask |=
+		(GDK_EXPOSURE_MASK
+		 | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK
+		 | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK);
+
+	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
+
 	for (i = 0; i < MAX_ICONS; i++)
 	{
 		SexyIconInfo *icon_info;
-
-		attributes.window_type = GDK_WINDOW_CHILD;
-		attributes.wclass = GDK_INPUT_OUTPUT;
-		attributes.visual = gtk_widget_get_visual(widget);
-		attributes.colormap = gtk_widget_get_colormap(widget);
-		attributes.event_mask = gtk_widget_get_events(widget);
-		attributes.event_mask |=
-			(GDK_EXPOSURE_MASK
-			 | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK
-			 | GDK_ENTER_NOTIFY_MASK | GDK_LEAVE_NOTIFY_MASK);
-
-		attributes_mask = GDK_WA_X | GDK_WA_Y |
-		                  GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
 		icon_info = &entry->priv->icons[i];
 		icon_info->window = gdk_window_new(widget->window, &attributes,
@@ -521,13 +547,21 @@ draw_icon(GtkWidget *widget, SexyIconEntryPosition icon_pos)
 	GdkPixbuf *pixbuf;
 	gint x, y, width, height;
 
-	if (icon_info->icon == NULL)
+	if (icon_info->icon == NULL || !GTK_WIDGET_REALIZED(widget))
 		return;
 
 	if ((pixbuf = get_pixbuf_from_icon(entry, icon_pos)) == NULL)
 		return;
 
 	gdk_drawable_get_size(icon_info->window, &width, &height);
+
+	if (width == 1 || height == 1)
+	{
+		/*
+		 * size_allocate hasn't been called yet. These are the default values.
+		 */
+		return;
+	}
 
 	if (gdk_pixbuf_get_height(pixbuf) > height)
 	{
@@ -763,7 +797,7 @@ sexy_icon_entry_new(void)
 /**
  * sexy_icon_entry_set_icon
  * @entry: A #SexyIconEntry.
- * @icon_pos: Icon position.
+ * @position: Icon position.
  * @icon: A #GtkImage to set as the icon.
  *
  * Sets the icon shown in the entry
@@ -797,15 +831,24 @@ sexy_icon_entry_set_icon(SexyIconEntry *entry, SexyIconEntryPosition icon_pos,
 		{
 			gtk_widget_destroy(GTK_WIDGET(icon_info->icon));
 			icon_info->icon = NULL;
+
+			/*
+			 * Explicitly check, as the pointer may become invalidated
+			 * during destruction.
+			 */
+			if (icon_info->window != NULL && GDK_IS_WINDOW(icon_info->window))
+				gdk_window_hide(icon_info->window);
 		}
 	}
 	else
 	{
+		if (icon_info->window != NULL && icon_info->icon == NULL)
+			gdk_window_show(icon_info->window);
+
 		g_signal_connect(G_OBJECT(icon), "notify",
 						 G_CALLBACK(update_icon), entry);
 
 		icon_info->icon = icon;
-
 		g_object_ref(icon);
 	}
 
@@ -815,7 +858,7 @@ sexy_icon_entry_set_icon(SexyIconEntry *entry, SexyIconEntryPosition icon_pos,
 /**
  * sexy_icon_entry_set_icon_highlight
  * @entry: A #SexyIconEntry;
- * @primary: Icon position.
+ * @position: Icon position.
  * @highlight: TRUE if the icon should highlight on mouse-over
  *
  * Determines whether the icon will highlight on mouse-over.
@@ -842,7 +885,7 @@ sexy_icon_entry_set_icon_highlight(SexyIconEntry *entry,
 /**
  * sexy_icon_entry_get_icon
  * @entry: A #SexyIconEntry.
- * @primary: Icon position.
+ * @position: Icon position.
  *
  * Retrieves the image used for the icon
  *
@@ -862,7 +905,7 @@ sexy_icon_entry_get_icon(const SexyIconEntry *entry,
 /**
  * sexy_icon_entry_get_icon_highlight
  * @entry: A #SexyIconEntry.
- * @primary: Icon position.
+ * @position: Icon position.
  *
  * Retrieves whether entry will highlight the icon on mouseover.
  *
