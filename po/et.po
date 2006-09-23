@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-24 00:18+0200\n"
-"PO-Revision-Date: 2006-09-19 07:55+0300\n"
+"PO-Revision-Date: 2006-09-22 23:54+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -325,6 +325,10 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
+"Pikkade ridade murdmise määramine printimisel. \"GTK_WRAP_NONE\" korral "
+"murdmist ei toimu, \"GTK_WRAP_WORD\" korral murtakse sõnavahedest ja "
+"\"GTK_WRAP_CHAR\" korral murtakse murdmispiiril asuva märgist. NB! Väärtused "
+"on tõstutundlikud."
 
 #: ../data/gedit.schemas.in.h:73
 msgid ""
@@ -334,17 +338,24 @@ msgid ""
 "the values are case-sensitive, so make sure they appear exactly as mentioned "
 "here."
 msgstr ""
+"Pikkade ridade murdmise määramine redigeerimisel. \"GTK_WRAP_NONE\" korral "
+"murdmist ei toimu, \"GTK_WRAP_WORD\" korral murtakse sõnavahedest ja "
+"\"GTK_WRAP_CHAR\" korral murtakse murdmispiiril asuva märgist. NB! Väärtused "
+"on tõstutundlikud."
 
 #: ../data/gedit.schemas.in.h:74
 msgid ""
 "Specifies the font to use for a document's body when printing documents."
 msgstr ""
+"Dokumendi sisu printimiseks kasutatav kirjatüüp."
 
 #: ../data/gedit.schemas.in.h:75
 msgid ""
 "Specifies the font to use for a document's body when printing documents. "
 "This is a gnome-print font name and replaced by print_font_body_pango."
 msgstr ""
+"Printimisel dokumendi sisu jaoks kasutatav kirjatüüp. See on gnome-print "
+"kirjatüübi nimi ja see asendatakse print_font_body_pango poolt."
 
 #: ../data/gedit.schemas.in.h:76
 msgid ""
@@ -863,7 +874,7 @@ msgstr "<b>Paremveeris</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:10
 msgid "<b>Tab Stops</b>"
-msgstr ""
+msgstr "<b>Tabeldusmärgi sammud</b>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:12
 msgid "<span weight=\"bold\">Colors</span>"
@@ -1666,6 +1677,8 @@ msgstr "Faili %s on lugemise ajal muudetud."
 #: ../gedit/gedit-io-error-message-area.c:968
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
+"Kui sa selle salvestad, siis lähevad kõik välised muudatused kaotsi. Kas "
+"salvestada ikkagi?"
 
 #: ../gedit/gedit-io-error-message-area.c:1047
 #, c-format
@@ -5082,239 +5095,3 @@ msgstr "_Küsitakse vormingut"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "Kasutatakse o_ma vormingut"
-
-#~ msgid ""
-#~ "The %s plugin uses an external program, called <tt>%s</tt>, to perform "
-#~ "its task.\n"
-#~ "\n"
-#~ "Please, specify the location of the <tt>%s</tt> program."
-#~ msgstr ""
-#~ "Plugin %s kasutab oma ülesannete täitmiseks välist programmi nimega <tt>%"
-#~ "s</tt>.\n"
-#~ "\n"
-#~ "Palun näita programmi <tt>%s</tt> asukoht."
-
-#~ msgid "Browse for program location..."
-#~ msgstr "Sirvi programmi asukohta..."
-
-#~ msgid "gedit cannot handle %s: locations in write mode."
-#~ msgstr "gedit ei oska %s: asukohta kirjutada."
-
-#~ msgid "gedit cannot handle this kind of location in write mode."
-#~ msgstr "gedit ei oska sellisesse asukohta kirjutada."
-
-#~ msgid "A file named \"%s\" already exists.\n"
-#~ msgstr "Fail nimega \"%s\" on juba olemas.\n"
-
-#~ msgid "Do you want to replace it with the one you are saving?"
-#~ msgstr "Kas tahad seda asendada salvestatava failiga?"
-
-#~ msgid "Select a file to open"
-#~ msgstr "Avatava faili valimine"
-
-#~ msgid "Select files to open"
-#~ msgstr "Avatavate failide valimine"
-
-#~ msgid "Select a filename to save"
-#~ msgstr "Vali failinimi salvestamiseks"
-
-#~ msgid "Saving document \"%s\"..."
-#~ msgstr "Dokumendi \"%s\" salvestamine..."
-
-#~ msgid "The document \"%s\" has not been saved."
-#~ msgstr "Dokumenti \"%s\" ei salvestatud."
-
-#~ msgid "The document \"%s\" has been saved."
-#~ msgstr "Dokument \"%s\" salvestati."
-
-#~ msgid "Save as..."
-#~ msgstr "Salvesta kui..."
-
-#~ msgid "Error reverting the document \"%s\"."
-#~ msgstr "Viga faili \"%s\" taastamisel."
-
-#~ msgid "The document \"%s\" has not been reverted."
-#~ msgstr "Dokumenti \"%s\" ei taastatud."
-
-#~ msgid "The document \"%s\" has been reverted."
-#~ msgstr "Dokument \"%s\" taastati."
-
-#~ msgid "Could not read data from stdin."
-#~ msgstr "Standardsisendist pole võimalik andmeid lugeda."
-
-#~ msgid "Loaded file \"%s\""
-#~ msgstr "Fail \"%s\" laaditud"
-
-#~ msgid "Loaded %d file"
-#~ msgid_plural "Loaded %d files"
-#~ msgstr[0] "%d fail laaditud"
-#~ msgstr[1] "%d faili laaditud"
-
-#~ msgid "Created file \"%s\""
-#~ msgstr "Faili \"%s\" loomine"
-
-#~ msgid "Access was denied."
-#~ msgstr "Ligipääs keelatud."
-
-#~ msgid ""
-#~ "there are too many open files. Please, close some open files and try "
-#~ "again."
-#~ msgstr ""
-#~ "Liiga palju faile on korraga avatud. Palun sulge mõned failid ja proovi "
-#~ "uuesti."
-
-#~ msgid ""
-#~ "The file contains data in an invalid format. Probably, you are trying to "
-#~ "open a binary file."
-#~ msgstr ""
-#~ "Fail sisaldab vigases vormingus andmeid. Tõenäoliselt üritad sa "
-#~ "binaarfaili avada."
-
-#~ msgid ""
-#~ "Not enough available memory. Please, close some running applications and "
-#~ "try again."
-#~ msgstr ""
-#~ "Pole piisavalt vaba mälu. Palun sulge mõned töötavad rakendused ja proovi "
-#~ "uuesti."
-
-#~ msgid ""
-#~ "The host name was empty. Please, check that your proxy settings are "
-#~ "correct and try again."
-#~ msgstr ""
-#~ "Hostinimi on tühi. Palun veendu, et su proksi on õigesti seadistatud ja "
-#~ "proovi uuesti."
-
-#~ msgid ""
-#~ "The file contains invalid UTF-8 data. Probably, you are trying to revert "
-#~ "a binary file."
-#~ msgstr ""
-#~ "Fail sisaldab vigaseid UTF-8 andmeid. Tõenäoliselt üritad sa binaarfaili "
-#~ "taastada."
-
-#~ msgid "It is not possible to revert an Untitled document."
-#~ msgstr "Pealkirjata dokumendi taastamine on võimatu."
-
-#~ msgid "The file \"%s\" already exists"
-#~ msgstr "Fail \"%s\" on juba olemas"
-
-#~ msgid "Could not create the file \"%s\""
-#~ msgstr "Faili \"%s\" pole võimalik luua"
-
-#~ msgid "Make sure you have the appropriate write permissions."
-#~ msgstr "Veendu, et sul on kirjutamisõigus olemas."
-
-#~ msgid "The file name is too long."
-#~ msgstr "Failinimi on liiga pikk."
-
-#~ msgid "Close the output window"
-#~ msgstr "Väljundiakna sulgemine"
-
-#~ msgid "Copy selected lines"
-#~ msgstr "Kopeeri valitud read"
-
-#~ msgid "Output Lines"
-#~ msgstr "Väljundread"
-
-#~ msgid "Preparing pages..."
-#~ msgstr "Lehekülgede ettavalmistamine..."
-
-#~ msgid "Printing page %d of %d..."
-#~ msgstr "Lehekülje %d/%d printimine..."
-
-#~ msgid "Change the visibility of the output window in the current window"
-#~ msgstr "Muuda väljundiakna nähtavust aktiivses aknas"
-
-#~ msgid ""
-#~ "Set toolbar button style according to desktop Menu and Toolbar Preferences"
-#~ msgstr ""
-#~ "Sätib tööriistariba nuppude stiili vastavalt töölaua vaikeväärtustele"
-
-#~ msgid "Show only icons in the toolbar"
-#~ msgstr "Tööriistaribal ainult ikoonide kuvamine"
-
-#~ msgid "Show text below every icon in the toolbar"
-#~ msgstr "Teksti kuvamine tööriistariba iga ikooni all"
-
-#~ msgid "Show text only beside important icons in the toolbar"
-#~ msgstr "Teksti kuvamine tööriistariba tähtsate ikoonide kõrval"
-
-#~ msgid "T_ext for Important Icons"
-#~ msgstr "T_ekst tähtsate ikoonide jaoks"
-
-#~ msgid "_Customize Toolbar"
-#~ msgstr "_Kohanda tööriistariba"
-
-#~ msgid "_Desktop Default"
-#~ msgstr "Töölaua _vaikeväärtus"
-
-#~ msgid "_Icons Only"
-#~ msgstr "_Ainult ikoonid"
-
-#~ msgid "gedit: Document Info plugin"
-#~ msgstr "gedit: Dokumendi info plugin"
-
-#~ msgid "Sa_ve Copy..."
-#~ msgstr "Salvesta _koopia..."
-
-#~ msgid "Could not save a copy of the file to \"%s\""
-#~ msgstr "Faili koopiat pole nimega \"%s\" võimalik salvestada"
-
-#~ msgid "You are trying to overwrite the original file"
-#~ msgstr "Sa proovid algupärast faili üle kirjutada"
-
-#~ msgid "Save Copy..."
-#~ msgstr "Koopia salvestamine..."
-
-#~ msgid "Saves a copy of the current document to a local or remote location."
-#~ msgstr ""
-#~ "Käesoleva dokumendi koopia salvestamine kohalikule meediale või võrku."
-
-#~ msgid "_Run Command..."
-#~ msgstr "_Käivita käsk..."
-
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Kesta käsurida on tühi.\n"
-#~ "\n"
-#~ "Palun sisesta korrektne kesta käsk."
-
-#~ msgid ""
-#~ "Error parsing the shell command.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Viga kesta käsu töötlemisel.\n"
-#~ "\n"
-#~ "Palun sisesta korrektne kesta käsk."
-
-#~ msgid "Executing command"
-#~ msgstr "Käsu täitmine"
-
-#~ msgid ""
-#~ "Executes an external program and, if required, displays its output in the "
-#~ "output window."
-#~ msgstr ""
-#~ "Välise programmi käivitamine ja vajadusel tõsta selle väljundi kuvamine "
-#~ "väljundiaknas."
-
-#~ msgid "_Show results in Output Window"
-#~ msgstr "_Tulemuste näitamine väljundiaknas"
-
-#~ msgid "The selected text does not contain misspelled words."
-#~ msgstr ""
-#~ "Valitud tekstis pole õigekirjakontrolli poolt vigaseks peetavaid sõnu."
-
-#~ msgid "The document does not contain misspelled words."
-#~ msgstr "Dokumendis pole õigekirjakontrolli poolt vigaseks peetavaid sõnu."
-
-#~ msgid "Tag list plugin"
-#~ msgstr "Siltide loendi plugin"
-
-#~ msgid "Tag _List"
-#~ msgstr "Siltide _loend"
-
-#~ msgid "Show the tag list window"
-#~ msgstr "Sildiloendi akna näitamine"
