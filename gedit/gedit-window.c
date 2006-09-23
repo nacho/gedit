@@ -171,6 +171,7 @@ static void
 gedit_window_destroy (GtkObject *object)
 {
 	GeditWindow *window;
+	gint pane_page;
 
 	window = GEDIT_WINDOW (object);
 
@@ -182,14 +183,24 @@ gedit_window_destroy (GtkObject *object)
 		gedit_prefs_manager_set_window_state (window->priv->window_state);
 
 	if ((window->priv->side_panel_size > 0) &&
-		gedit_prefs_manager_side_panel_size_can_set ())
-			gedit_prefs_manager_set_side_panel_size	(
+	    gedit_prefs_manager_side_panel_size_can_set ())
+		gedit_prefs_manager_set_side_panel_size	(
 					window->priv->side_panel_size);
 
+	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->side_panel));
+	if (pane_page != 0 &&
+	    gedit_prefs_manager_side_panel_active_page_can_set ())
+		gedit_prefs_manager_set_side_panel_active_page (pane_page);
+
 	if ((window->priv->bottom_panel_size > 0) && 
-		gedit_prefs_manager_bottom_panel_size_can_set ())
-			gedit_prefs_manager_set_bottom_panel_size (
+	    gedit_prefs_manager_bottom_panel_size_can_set ())
+		gedit_prefs_manager_set_bottom_panel_size (
 					window->priv->bottom_panel_size);
+
+	pane_page = _gedit_panel_get_active_item_id (GEDIT_PANEL (window->priv->bottom_panel));
+	if (pane_page != 0 &&
+	    gedit_prefs_manager_bottom_panel_active_page_can_set ())
+		gedit_prefs_manager_set_bottom_panel_active_page (pane_page);
 
 	GTK_OBJECT_CLASS (gedit_window_parent_class)->destroy (object);
 }
@@ -2992,15 +3003,25 @@ create_bottom_panel (GeditWindow *window)
 static void
 init_panels_visibility (GeditWindow *window)
 {
+	gint active_page;
+
 	gedit_debug (DEBUG_WINDOW);
 
 	/* side pane */
+	active_page = gedit_prefs_manager_get_side_panel_active_page ();
+	_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->side_panel),
+					    active_page);
+
 	if (gedit_prefs_manager_get_side_pane_visible ())
 		gtk_widget_show (window->priv->side_panel);
 
 	/* bottom pane, it can be empty */
 	if (gedit_panel_get_n_items (GEDIT_PANEL (window->priv->bottom_panel)) > 0)
 	{
+		active_page = gedit_prefs_manager_get_bottom_panel_active_page ();
+		_gedit_panel_set_active_item_by_id (GEDIT_PANEL (window->priv->bottom_panel),
+						    active_page);
+
 		if (gedit_prefs_manager_get_bottom_panel_visible ())
   			gtk_widget_show (window->priv->bottom_panel);
 	}

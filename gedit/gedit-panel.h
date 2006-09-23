@@ -118,6 +118,14 @@ GtkOrientation	 gedit_panel_get_orientation	(GeditPanel	*panel);
 gint		 gedit_panel_get_n_items	(GeditPanel	*panel);
 
 
+/*
+ * Non exported functions
+ */
+gint		 _gedit_panel_get_active_item_id	(GeditPanel	*panel);
+
+void		 _gedit_panel_set_active_item_by_id	(GeditPanel	*panel,
+							 gint		 id);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_PANEL_H__  */

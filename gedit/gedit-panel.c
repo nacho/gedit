@@ -866,11 +866,83 @@ gedit_panel_item_is_active (GeditPanel *panel,
 GtkOrientation
 gedit_panel_get_orientation (GeditPanel *panel)
 {
+	g_return_val_if_fail (GEDIT_IS_PANEL (panel), GTK_ORIENTATION_VERTICAL);
+
 	return panel->priv->orientation;
 }
 
 gint
 gedit_panel_get_n_items (GeditPanel *panel)
 {
+	g_return_val_if_fail (GEDIT_IS_PANEL (panel), -1);
+
 	return gtk_notebook_get_n_pages (GTK_NOTEBOOK (panel->priv->notebook));
+}
+
+gint
+_gedit_panel_get_active_item_id (GeditPanel *panel)
+{
+	gint cur_page;
+	GtkWidget *item;
+	GeditPanelItem *data;
+
+	g_return_val_if_fail (GEDIT_IS_PANEL (panel), 0);
+
+	cur_page = gtk_notebook_get_current_page (
+				GTK_NOTEBOOK (panel->priv->notebook));
+	if (cur_page == -1)
+		return 0;
+
+	item = gtk_notebook_get_nth_page (
+				GTK_NOTEBOOK (panel->priv->notebook),
+				cur_page);
+
+	/* FIXME: for now we use as the hash of the name as id.
+	 * However the name is not guaranteed to be unique and
+	 * it is a translated string, so it's subotimal, but should
+	 * be good enough for now since we don't want to add an
+	 * ad hoc id argument.
+	 */
+
+	data = (GeditPanelItem *)g_object_get_data (G_OBJECT (item),
+					            PANEL_ITEM_KEY);
+	g_return_val_if_fail (data != NULL, 0);
+
+	return g_str_hash (data->name);
+}
+
+void
+_gedit_panel_set_active_item_by_id (GeditPanel *panel,
+				    gint        id)
+{
+	gint n, i;
+
+	g_return_if_fail (GEDIT_IS_PANEL (panel));
+
+	if (id == 0)
+		return;
+
+	n = gtk_notebook_get_n_pages (
+				GTK_NOTEBOOK (panel->priv->notebook));
+
+	for (i = 0; i < n; i++)
+	{
+		GtkWidget *item;
+		GeditPanelItem *data;
+
+		item = gtk_notebook_get_nth_page (
+				GTK_NOTEBOOK (panel->priv->notebook), i);
+
+		data = (GeditPanelItem *)g_object_get_data (G_OBJECT (item),
+						            PANEL_ITEM_KEY);
+		g_return_if_fail (data != NULL);
+
+		if (g_str_hash (data->name) == id)
+		{
+			gtk_notebook_set_current_page (
+				GTK_NOTEBOOK (panel->priv->notebook), i);
+
+			return;
+		}
+	}
 }

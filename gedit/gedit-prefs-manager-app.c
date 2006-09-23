@@ -129,6 +129,9 @@ static gint window_width = -1;
 static gint side_panel_size = -1;
 static gint bottom_panel_size = -1;
 
+static gint side_panel_active_page = 0;
+static gint bottom_panel_active_page = 0;
+
 gboolean
 gedit_prefs_manager_app_init (void)
 {
@@ -309,7 +312,7 @@ gedit_prefs_manager_window_size_can_set (void)
 	return TRUE;
 }
 
-/* Side panel size */
+/* Side panel */
 gint
 gedit_prefs_manager_get_side_panel_size (void)
 {
@@ -343,7 +346,33 @@ gedit_prefs_manager_side_panel_size_can_set (void)
 	return TRUE;
 }
 
-/* Bottom panel size */
+gint
+gedit_prefs_manager_get_side_panel_active_page (void)
+{
+	if (side_panel_active_page == 0)
+		side_panel_active_page = gnome_config_get_int (
+				GPM_SIDE_PANEL_ACTIVE_PAGE);
+
+	return side_panel_active_page;
+}
+
+void
+gedit_prefs_manager_set_side_panel_active_page (gint id)
+{
+	if (side_panel_active_page == id)
+		return;
+
+	side_panel_active_page = id;
+	gnome_config_set_int (GPM_SIDE_PANEL_ACTIVE_PAGE, id);
+}
+
+gboolean 
+gedit_prefs_manager_side_panel_active_page_can_set (void)
+{
+	return TRUE;
+}
+
+/* Bottom panel */
 gint
 gedit_prefs_manager_get_bottom_panel_size (void)
 {
@@ -373,6 +402,32 @@ gedit_prefs_manager_set_bottom_panel_size (gint ps)
 
 gboolean 
 gedit_prefs_manager_bottom_panel_size_can_set (void)
+{
+	return TRUE;
+}
+
+gint
+gedit_prefs_manager_get_bottom_panel_active_page (void)
+{
+	if (bottom_panel_active_page == 0)
+		bottom_panel_active_page = gnome_config_get_int (
+				GPM_BOTTOM_PANEL_ACTIVE_PAGE);
+
+	return bottom_panel_active_page;
+}
+
+void
+gedit_prefs_manager_set_bottom_panel_active_page (gint id)
+{
+	if (bottom_panel_active_page == id)
+		return;
+
+	bottom_panel_active_page = id;
+	gnome_config_set_int (GPM_BOTTOM_PANEL_ACTIVE_PAGE, id);
+}
+
+gboolean 
+gedit_prefs_manager_bottom_panel_active_page_can_set (void)
 {
 	return TRUE;
 }

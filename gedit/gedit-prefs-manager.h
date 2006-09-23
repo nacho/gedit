@@ -127,7 +127,9 @@
 #define GPM_WINDOW_WIDTH		GPM_WINDOW_DIR "/width"
 #define GPM_WINDOW_HEIGHT		GPM_WINDOW_DIR "/height"
 #define GPM_SIDE_PANEL_SIZE		GPM_WINDOW_DIR "/side_panel_size"
+#define GPM_SIDE_PANEL_ACTIVE_PAGE	GPM_WINDOW_DIR "/side_panel_active_page"
 #define GPM_BOTTOM_PANEL_SIZE		GPM_WINDOW_DIR "/bottom_panel_size"
+#define GPM_BOTTOM_PANEL_ACTIVE_PAGE	GPM_WINDOW_DIR "/bottom_panel_active_page"
 
 /* Encodings */
 #define GPM_ENCODINGS_DIR		GPM_PREFS_DIR "/encodings"

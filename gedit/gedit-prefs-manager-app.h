@@ -57,16 +57,23 @@ void 		 gedit_prefs_manager_set_window_size		(gint width,
 								 gint height);
 gboolean	 gedit_prefs_manager_window_size_can_set	(void);
 
-/* Side panel size */
+/* Side panel */
 gint	 	 gedit_prefs_manager_get_side_panel_size	(void);
 gint	 	 gedit_prefs_manager_get_default_side_panel_size(void);
 void 		 gedit_prefs_manager_set_side_panel_size	(gint ps);
 gboolean	 gedit_prefs_manager_side_panel_size_can_set	(void);
+gint		 gedit_prefs_manager_get_side_panel_active_page (void);
+void 		 gedit_prefs_manager_set_side_panel_active_page (gint id);
+gboolean	 gedit_prefs_manager_side_panel_active_page_can_set (void);
 
-/* Bottom panel size */
+/* Bottom panel */
 gint	 	 gedit_prefs_manager_get_bottom_panel_size	(void);
 gint	 	 gedit_prefs_manager_get_default_bottom_panel_size(void);
 void 		 gedit_prefs_manager_set_bottom_panel_size	(gint ps);
 gboolean	 gedit_prefs_manager_bottom_panel_size_can_set	(void);
+gint		 gedit_prefs_manager_get_bottom_panel_active_page (void);
+void 		 gedit_prefs_manager_set_bottom_panel_active_page (gint id);
+gboolean	 gedit_prefs_manager_bottom_panel_active_page_can_set (void);
+
 
 #endif /* __GEDIT_PREFS_MANAGER_APP_H__ */
