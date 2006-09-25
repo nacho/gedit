@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-24 00:18+0200\n"
-"PO-Revision-Date: 2006-09-22 23:54+0300\n"
+"PO-Revision-Date: 2006-09-24 22:58+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -195,6 +195,8 @@ msgid ""
 "List of encodings shown in Character Coding menu in open/save file selector. "
 "Only recognized encodings are used."
 msgstr ""
+"Kooditabelite loetelu, mida näidatakse Kooditabelite menüüs faili "
+"avamisel/salvestamisel. Kasutatakse ainult teadaolevaid kooditabeleid."
 
 #: ../data/gedit.schemas.in.h:33
 msgid "Max Number of Undo Actions"
@@ -316,6 +318,8 @@ msgid ""
 "file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
 "are used."
 msgstr ""
+"Gediti poolt faili kooditabeli tuvastamiseks kasutatavate kooditabelite "
+"sorditud loend. \"CURRENT\" on praegune lokaadist tulenev kooditabel. Kasutatakse ainult teadaolevaid kooditabeleid."
 
 #: ../data/gedit.schemas.in.h:72
 msgid ""
@@ -362,6 +366,8 @@ msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
 msgstr ""
+"Printimisel reanumbrite jaoks kasutatav kirjatüüp. Seda kasutatakse ainult "
+"juhul, kui valiku \"Prindi reanumbrid\" väärtus erineb nullist."
 
 #: ../data/gedit.schemas.in.h:77
 msgid ""
@@ -369,12 +375,17 @@ msgid ""
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
 msgstr ""
+"Printimisel reanumbrite jaoks kasutatav kirjatüüp. Seda kasutatakse ainult "
+"juhul, kui valiku \"Prindi reanumbrid\" väärtus erineb nullist. See on "
+"gnome-print kirjatüübi nimi ja see asendatakse print_font_numbers_pango poolt."
 
 #: ../data/gedit.schemas.in.h:78
 msgid ""
 "Specifies the font to use for page headers when printing a document. This "
 "will only take effect if the \"Print Header\" option is turned on."
 msgstr ""
+"Printimisel lehekülje päise jaoks kasutatav kirjatüüp. Seda kasutatakse "
+"ainult juhul, kui valiku \"Prindi päis\" väärtus on märgitud."
 
 #: ../data/gedit.schemas.in.h:79
 msgid ""
@@ -382,12 +393,17 @@ msgid ""
 "will only take effect if the \"Print Header\" option is turned on. This is a "
 "gnome-print font name and replaced by print_font_header_pango."
 msgstr ""
+"Printimisel lehekülje päise jaoks kasutatav kirjatüüp. Seda kasutatakse "
+"ainult juhul, kui valiku \"Prindi päis\" väärtus on märgitud. See on "
+"gnome-print kirjatüübi nimi ja see asendatakse print_font_header_pango poolt."
 
 #: ../data/gedit.schemas.in.h:80
 msgid ""
 "Specifies the maximum number of recently opened files that will be displayed "
 "in the \"Recent Files\" submenu."
 msgstr ""
+"Suurim hiljuti avatud failide arv, mis kuvatakse \"Hiljutiste failide\" "
+"alammenüüs."
 
 #: ../data/gedit.schemas.in.h:81
 msgid ""
@@ -432,7 +448,7 @@ msgstr "Tööriistariba on nähtav"
 
 #: ../data/gedit.schemas.in.h:89
 msgid "Undo Actions Limit (DEPRECATED)"
-msgstr "Unustatavate toimingute piirang (aegunud)"
+msgstr "Unustatavate toimingute piirang (AEGUNUD)"
 
 #: ../data/gedit.schemas.in.h:90
 msgid "Use Default Colors"
@@ -697,7 +713,7 @@ msgstr "Kui Sa ei salvesta, siis lähevad kõik muudatused kaduma."
 
 #: ../gedit/dialogs/gedit-encodings-dialog.c:315
 msgid "Character Codings"
-msgstr "Märgikodeeringud"
+msgstr "Kooditabelid"
 
 #: ../gedit/dialogs/gedit-encodings-dialog.c:365
 #: ../gedit/dialogs/gedit-encodings-dialog.c:426
@@ -715,7 +731,7 @@ msgstr "_Saadaolevad kodeeringud:"
 
 #: ../gedit/dialogs/gedit-encodings-dialog.glade.h:2
 msgid "Character codings"
-msgstr "Märgikodeeringud"
+msgstr "Kooditabelid"
 
 #: ../gedit/dialogs/gedit-encodings-dialog.glade.h:3
 msgid "E_ncodings shown in menu:"
@@ -728,7 +744,7 @@ msgstr "Asukoha avamine"
 
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:1
 msgid "Ch_aracter coding:"
-msgstr "Märgi_kodeering:"
+msgstr "_Kooditabel:"
 
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:2
 msgid "Enter the _location (URI) of the file you would like to open:"
@@ -1431,7 +1447,7 @@ msgstr "_Lisa või eemalda..."
 
 #: ../gedit/gedit-file-chooser-dialog.c:72
 msgid "C_haracter Coding:"
-msgstr "Märgi_kodeering:"
+msgstr "_Kooditabel:"
 
 #: ../gedit/gedit-file-chooser-dialog.c:189
 msgid "All Files"
@@ -1593,7 +1609,7 @@ msgstr "Faili %s pole võimalik taastada."
 
 #: ../gedit/gedit-io-error-message-area.c:576
 msgid "Ch_aracter Coding:"
-msgstr "Märgi_kodeering:"
+msgstr "_Kooditabel:"
 
 #: ../gedit/gedit-io-error-message-area.c:619
 msgid "_Retry"
@@ -3452,7 +3468,7 @@ msgstr "Tamili"
 
 #: ../plugins/spell/gedit-spell-checker.c:149
 msgid "Tetum"
-msgstr ""
+msgstr "Tetumi"
 
 #: ../plugins/spell/gedit-spell-checker.c:150
 msgid "Tagalog"
