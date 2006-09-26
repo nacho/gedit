@@ -29,7 +29,7 @@ gedit_la_CFLAGS = \
 	$(AM_CFLAGS)
 
 $(top_builddir)/gedit/gedit-enum-types.h:
-	cd $(top_builddir)/gedit && make gedit-enum-types.h
+	cd $(top_builddir)/gedit && $(MAKE) gedit-enum-types.h
 	
 gedit.c: gedit.defs gedit.override $(top_builddir)/gedit/gedit-enum-types.h
 	( cd $(srcdir) && $(PYGTK_CODEGEN) \
