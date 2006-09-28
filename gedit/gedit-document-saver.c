@@ -241,8 +241,26 @@ write_document_contents (gint                  fd,
 	/* Save the file content */
 	if (res)
 	{
-		written = write (fd, contents, len);
-		res = ((written != -1) && ((gsize) written == len));
+		const gchar *write_buffer = contents;
+		ssize_t to_write = len;
+
+		do
+		{
+			written = write (fd, write_buffer, to_write);
+			if (written == -1)
+			{
+				if (errno == EINTR)
+					continue;
+
+				res = FALSE;
+
+				break;
+			}
+
+			to_write -= written;
+			write_buffer += written;
+		}
+		while (to_write > 0);
 	}
 
 	/* Add \n at the end if needed */
@@ -374,7 +392,6 @@ copy_file_data (gint     sfd,
 		GError **error)
 {
 	gboolean ret = TRUE;
-	GError *err = NULL;
 	gpointer buffer;
 	const gchar *write_buffer;
 	ssize_t bytes_read;
@@ -392,7 +409,7 @@ copy_file_data (gint     sfd,
 		{
 			GnomeVFSResult result = gnome_vfs_result_from_errno ();
 
-			g_set_error (&err,
+			g_set_error (error,
 				     GEDIT_DOCUMENT_ERROR,
 				     result,
 				     gnome_vfs_result_to_string (result));
@@ -410,9 +427,12 @@ copy_file_data (gint     sfd,
 			bytes_written = write (dfd, write_buffer, bytes_to_write);
 			if (bytes_written == -1)
 			{
+				if (errno == EINTR)
+					continue;
+
 				GnomeVFSResult result = gnome_vfs_result_from_errno ();
 
-				g_set_error (&err,
+				g_set_error (error,
 					     GEDIT_DOCUMENT_ERROR,
 					     result,
 					     gnome_vfs_result_to_string (result));
@@ -429,8 +449,7 @@ copy_file_data (gint     sfd,
 
 	} while ((bytes_read != 0) && (ret == TRUE));
 
-	if (error)
-		*error = err;
+	g_free (buffer);
 
 	return ret;
 }
