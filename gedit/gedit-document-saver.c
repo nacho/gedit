@@ -427,10 +427,12 @@ copy_file_data (gint     sfd,
 			bytes_written = write (dfd, write_buffer, bytes_to_write);
 			if (bytes_written == -1)
 			{
+				GnomeVFSResult result;
+
 				if (errno == EINTR)
 					continue;
 
-				GnomeVFSResult result = gnome_vfs_result_from_errno ();
+				result = gnome_vfs_result_from_errno ();
 
 				g_set_error (error,
 					     GEDIT_DOCUMENT_ERROR,
@@ -1289,11 +1291,11 @@ async_xfer_progress (GnomeVFSAsyncHandle      *handle,
 		     GnomeVFSXferProgressInfo *progress_info,
 		     gpointer                  data)
 {
+	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (data);
+
 	gedit_debug_message (DEBUG_SAVER, "xfer phase: %d", progress_info->phase);
 	gedit_debug_message (DEBUG_SAVER, "xfer status: %d", progress_info->status);
 	
-	GeditDocumentSaver *saver = GEDIT_DOCUMENT_SAVER (data);
-
 	switch (progress_info->status)
 	{
 	case GNOME_VFS_XFER_PROGRESS_STATUS_OK:
