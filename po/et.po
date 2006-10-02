@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-24 00:18+0200\n"
-"PO-Revision-Date: 2006-09-27 21:27+0300\n"
+"PO-Revision-Date: 2006-10-02 21:19+0300\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -429,6 +429,12 @@ msgid ""
 "Note that the values are case-sensitive, so make sure they appear exactly as "
 "mentioned here."
 msgstr ""
+"Tööriistariba nuppude laad. Võimalikud väärtused on \"GEDIT_TOOLBAR_SYSTEM\" "
+"süsteemi vaikimisi laadi jaoks, \"GEDIT_TOOLBAR_ICONS\" ainult ikoonide "
+"kuvamiseks, \"GEDIT_TOOLBAR_ICONS_AND_TEXT\" nii ikoonide kui ka teksti "
+"kuvamiseks ja \"GEDIT_TOOLBAR_ICONS_BOTH_HORIZ\" kuvamaks ikoonide kõrval "
+"ainult tähtsamat teksti. Väärtused on tõstutundlikud ja seetõttu tuleb "
+"jälgida, et need määrataks täpselt nii nagu siin kirjeldatud."
 
 #: ../data/gedit.schemas.in.h:85
 msgid "Tab Size"
@@ -472,6 +478,8 @@ msgid ""
 "Whether gedit should create backup copies for the files it saves. You can "
 "set the backup file extension with the \"Backup Copy Extension\" option."
 msgstr ""
+"Kas gedit peab faili salvestamisel sellest varukoopia tegema või mitte. "
+"Varukoopia faili laiendit saab määrata valikust \"Varukoopia laiend\"."
 
 #: ../data/gedit.schemas.in.h:94
 msgid "Whether gedit should display line numbers in the editing area."
@@ -1302,7 +1310,7 @@ msgstr "Salvestamata dokument %d"
 #. bad bad luck...
 #: ../gedit/gedit-document-saver.c:552
 msgid "Could not obtain backup filename"
-msgstr ""
+msgstr "Varukoopia failinime pole võimalik hankida"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
 #: ../gedit/gedit-window.c:1790 ../gedit/gedit-window.c:1795
@@ -1712,6 +1720,9 @@ msgid ""
 "You can ignore this warning and save the file anyway, but if an error occurs "
 "while saving, you could lose the old copy of the file. Save anyway?"
 msgstr ""
+"gedit ei saa enne uue faili salvestamist vana faili varukoopiaks salvestada. "
+"Sa võid seda hoiatust eirata ja faili siiski salvestada, kuid võimaliku vea "
+"korral läheb vana koopia kaotsi. Kas salvestada siiski?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1128
