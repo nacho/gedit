@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-25 11:36+0300\n"
-"PO-Revision-Date: 2006-09-24 23:12+0300\n"
+"POT-Creation-Date: 2006-10-02 09:01+0300\n"
+"PO-Revision-Date: 2006-10-02 08:59+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 
 #: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:747
 msgid "Active plugins"
-msgstr "Käynnissä olevat liitännäiset"
+msgstr "Käytössä olevat liitännäiset"
 
 #: ../data/gedit.schemas.in.h:3
 msgid "Auto Detected Encodings"
@@ -1078,11 +1078,11 @@ msgid "_minutes"
 msgstr "_minuutin välein"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:302
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1242
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1261
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1240
+#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1259
 msgid "Find"
 msgstr "Etsi"
 
@@ -1121,7 +1121,7 @@ msgstr "_Hakusana:"
 
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:8
 msgid "_Wrap around"
-msgstr "K_ierrä"
+msgstr "Jatka _alusta"
 
 #: ../gedit/gedit.c:74
 msgid ""
@@ -1329,12 +1329,12 @@ msgid "Unsaved Document %d"
 msgstr "Tallentamaton asiakirja %d"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:552
+#: ../gedit/gedit-document-saver.c:573
 msgid "Could not obtain backup filename"
 msgstr "Varmuuskopiointitiedostonimeä ei voitu luoda"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1790 ../gedit/gedit-window.c:1795
+#: ../gedit/gedit-window.c:1809 ../gedit/gedit-window.c:1814
 msgid "Read Only"
 msgstr "Vain luku"
 
@@ -2026,77 +2026,77 @@ msgstr[1] "%d välilehteä sisältää virheitä"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:642
+#: ../gedit/gedit-tab.c:641
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Palautetaan %s hakemistosta %s"
 
-#: ../gedit/gedit-tab.c:649
+#: ../gedit/gedit-tab.c:648
 #, c-format
 msgid "Reverting %s"
 msgstr "Palautetaan %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:665
+#: ../gedit/gedit-tab.c:664
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Ladataan %s hakemistosta %s"
 
-#: ../gedit/gedit-tab.c:672
+#: ../gedit/gedit-tab.c:671
 #, c-format
 msgid "Loading %s"
 msgstr "Ladataan %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:755
+#: ../gedit/gedit-tab.c:754
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Tallennetaan %s hakemistoon %s"
 
-#: ../gedit/gedit-tab.c:762
+#: ../gedit/gedit-tab.c:761
 #, c-format
 msgid "Saving %s"
 msgstr "Tallennetaan %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1519
+#: ../gedit/gedit-tab.c:1518
 msgid "RO"
 msgstr "LUKU"
 
-#: ../gedit/gedit-tab.c:1564
+#: ../gedit/gedit-tab.c:1563
 #, c-format
 msgid "Error opening file %s"
 msgstr "Virhe avattaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1569
+#: ../gedit/gedit-tab.c:1568
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Virhe palautettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1574
+#: ../gedit/gedit-tab.c:1573
 #, c-format
 msgid "Error saving file %s"
 msgstr "Virhe tallennettaessa tiedostoa %s"
 
-#: ../gedit/gedit-tab.c:1592
+#: ../gedit/gedit-tab.c:1591
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1599
+#: ../gedit/gedit-tab.c:1598
 msgid "Name:"
 msgstr "Nimi:"
 
-#: ../gedit/gedit-tab.c:1600
+#: ../gedit/gedit-tab.c:1599
 msgid "MIME Type:"
 msgstr "MIME-tyyppi:"
 
-#: ../gedit/gedit-tab.c:1601
+#: ../gedit/gedit-tab.c:1600
 msgid "Encoding:"
 msgstr "Koodaustapa:"
 
-#: ../gedit/gedit-tab.c:2037
+#: ../gedit/gedit-tab.c:2036
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Tulkitaan sivua %d/%d..."
@@ -2138,7 +2138,7 @@ msgstr "Luo uusi asiakirja"
 msgid "_Open..."
 msgstr "_Avaa..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1365
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1384
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
@@ -2304,7 +2304,7 @@ msgstr "Siirry tietylle riville"
 
 #: ../gedit/gedit-ui.h:129
 msgid "Interactive search..."
-msgstr "Interaktiivinen haku"
+msgstr "Interaktiivinen haku..."
 
 #: ../gedit/gedit-ui.h:130
 msgid "Interactively search for text"
@@ -2424,7 +2424,7 @@ msgstr "Etsittävä merkkijono"
 msgid "Line you want to move the cursor to"
 msgstr "Rivi, jolle haluat siirtää kursorin"
 
-#: ../gedit/gedit-window.c:792
+#: ../gedit/gedit-window.c:811
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
@@ -2432,33 +2432,33 @@ msgstr "Käytä %s-väritystä"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:847
+#: ../gedit/gedit-window.c:866
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../gedit/gedit-window.c:848
+#: ../gedit/gedit-window.c:867
 msgid "Disable syntax highlighting"
 msgstr "Älä käytä syntaksiväritystä"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1119
+#: ../gedit/gedit-window.c:1138
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: ../gedit/gedit-window.c:1238
+#: ../gedit/gedit-window.c:1257
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../gedit/gedit-window.c:1369
+#: ../gedit/gedit-window.c:1388
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: ../gedit/gedit-window.c:1376
+#: ../gedit/gedit-window.c:1395
 msgid "Open"
 msgstr "Avaa"
 
-#: ../gedit/gedit-window.c:1465 ../gedit/gedit-window.c:2106
+#: ../gedit/gedit-window.c:1484 ../gedit/gedit-window.c:2125
 #, c-format
 msgid "Activate %s"
 msgstr "Käynnistä %s"
@@ -2735,7 +2735,7 @@ msgstr "Pika_näppäin:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:11
 msgid "_Applicability:"
-msgstr "_Soveltuvuus:"
+msgstr "_Kohteet:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:12
 msgid "_Description:"
@@ -2757,27 +2757,35 @@ msgstr "_Tallenna_"
 msgid "_Tools:"
 msgstr "Työ_kalut:"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr "Sivupaneelin tiedostoselain."
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "Paneelin tiedostoselain"
+
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
 msgid "Enable Restore of Remote Locations"
 msgstr "Ota käyttöön palautus etäsijainneissa"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:2
 msgid "File Browser Filter Mode"
 msgstr "Tiedostoselaimen suodatintila"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:3
 msgid "File Browser Filter Pattern"
 msgstr "Tiedostoselaimen suodatinmalli"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:4
 msgid "File Browser Root Directory"
 msgstr "Tiedostoselaimen juurihakemisto"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:5
 msgid "File Browser Virtual Root Directory"
 msgstr "Tiedostoselaimen virtuaalinen juurihakemisto"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:6
 msgid ""
 "If TRUE the file browser plugin will view the directory of the first opened "
 "document given that the file browser hasn't been used yet. (Thus this "
@@ -2789,26 +2797,26 @@ msgstr ""
 "Yleensä tämä koskee asiakirjan avaamista komentoriviltä tai esimerkiksi "
 "nautiluksesta."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
 msgid "Open With Tree View"
 msgstr "Avaa puunäkymä"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:8
 msgid ""
 "Open the tree view when the file browser plugin gets loaded instead of the "
 "bookmarks view"
 msgstr ""
 "Avaa puunäkymä kirjanmerkkinäkymän sijasta, kun tiedostoselain ladataan"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:9
 msgid "Set Location To First Document"
 msgstr "Aseta sijanti ensimmäiseen asiakirjaan"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:10
 msgid "Sets whether to enable restoring of remote locations."
 msgstr "Käytetäänkö etäsijaintien palautusta."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:11
 msgid ""
 "The file browser root directory to use when loading the file browser plugin "
 "and onload/tree_view is TRUE."
@@ -2816,7 +2824,7 @@ msgstr ""
 "Tiedostoselaimen juurikansiona käytettävä kansio, kun liitännäistä ladataan "
 "ja avain onload/tree_view on TOSI."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:12
 msgid ""
 "The file browser virtual root directory to use when loading the file browser "
 "plugin when onload/tree_view is TRUE. The virtual root must always be below "
@@ -2826,7 +2834,7 @@ msgstr ""
 "liitännäistä ladataan ja avain onload/tree_view on TOSI. Virtuaalisen "
 "kansion täytyy aina olla todellisen juurikansion alikansio."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:13
 msgid ""
 "The filter pattern to filter the file browser with. This filter works on top "
 "of the filter_mode."
@@ -2834,7 +2842,7 @@ msgstr ""
 "Tiedostoselaimen listan suodatuksessa käytetty suodatin. Tämä suodatin on "
 "käytössä avaimen filter_mode määrittelemällä tavalla."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:14
 msgid ""
 "This value determines what files get filtered from the file browser. Valid "
 "values are: none (filter nothing), hidden (filter hidden files), binary "
@@ -2846,67 +2854,59 @@ msgstr ""
 "piilotiedostot), binary (suodatetaan binääritiedostot) sekä "
 "hidden_and_binary (suodatetaan piilo- ja binääritiedostot)"
 
-#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
-msgid "Easy file access from the side pane"
-msgstr "Helppo tiedostonkäsittely sivupaneelista"
-
-#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-msgid "File browser pane"
-msgstr "Tiedostoselainpaneeli"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:362
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:390
 msgid "_Set root to active document"
 msgstr "_Aseta juuri aktiivinen asiakirjan sijaintiin"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:364
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:392
 msgid "Set the root to the active document location"
 msgstr "Aseta juurikansioksi aktiivisen asiakirjan sijainti"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:366
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:394
 msgid "_Open terminal here"
 msgstr "_Avaa pääte tähän"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:368
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:396
 msgid "Open a terminal at the currently opened directory"
 msgstr "Avaa pääte nyt valittuun kansioon"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:480
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:510
 msgid "File Browser"
 msgstr "Tiedostoselain"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:574
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:616
 msgid "An error occurred while creating a new directory"
 msgstr "Virhe luotaessa uutta kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:577
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:619
 msgid "An error occurred while creating a new file"
 msgstr "Virhe luotaessa uutta tiedostoa"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:582
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:624
 msgid "An error occurred while renaming a file or directory"
 msgstr "Virhe nimettäessä tiedostoa tai kansiota uudestaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:587
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:629
 msgid "An error occurred while deleting a file or directory"
 msgstr "Virhe poistettaessa tiedostoa tai kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:592
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:634
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Virhe avattaessa kansiota tiedostonhalintaan"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:596
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:638
 msgid "An error occurred while setting a root directory"
 msgstr "Virhe asetettaessa juurikansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:642
 msgid "An error occurred while loading a directory"
 msgstr "Virhe ladattaessa kansiota"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:603
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:645
 msgid "An error occurred"
 msgstr "Tapahtui virhe"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:827
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete immediately?"
@@ -2914,12 +2914,12 @@ msgstr ""
 "Tiedostoa ei voi siirtää roskakoriin.\n"
 "Haluatko poistaa sen kokonaan?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:830
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:879
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Tiedostoa \"%s\" ei voi siirtää roskakoriin."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:866
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:915
 #, c-format
 msgid ""
 "Are you sure you want to\n"
@@ -2928,21 +2928,21 @@ msgstr ""
 "Haluatko varmasti poistaa kohteen\n"
 "\"%s\" pysyvästi?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:870
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:919
 msgid "If you delete an item it is permanently lost."
 msgstr "Jos poistat kohteen se menetetään pysyvästi."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2415
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2423
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
 msgid "Invalid uri"
 msgstr "Virheellinen URI"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2773
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2781
 msgid "file"
 msgstr "tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2794
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2841
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2802
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2849
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2950,7 +2950,7 @@ msgstr ""
 "Uusi tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy säätää "
 "suodatinasetuksiasi, jos haluat nähdä sen."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2822
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2830
 msgid "directory"
 msgstr "kansio"
 
@@ -3107,7 +3107,7 @@ msgstr "Sisentää valitut rivit tai poistaa niiden sisennyksen."
 
 #: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:1
 msgid "Emacs, Kate and Vim-style modelines support for gedit."
-msgstr "Tuki emacsin, katen ja vimin tyyliselle tilariville."
+msgstr "Tuki emacsin, katen ja vimin tilariveille."
 
 #: ../plugins/modelines/modelines.gedit-plugin.desktop.in.h:2
 msgid "Modelines"
@@ -3115,7 +3115,7 @@ msgstr "Tilarivit"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:1
 msgid "Interactive python console standing in the bottom panel"
-msgstr "Interaktiivisen python-konsolin alapaneelissa"
+msgstr "Interaktiivinen python-konsoli alapaneelissa."
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
 msgid "Python Console"
@@ -3582,7 +3582,7 @@ msgstr "Kielet"
 
 #: ../plugins/spell/gedit-spell-plugin.c:70
 msgid "_Check Spelling"
-msgstr "_Oikolue"
+msgstr "_Oikoluku"
 
 #: ../plugins/spell/gedit-spell-plugin.c:72
 msgid "Check the current document for incorrect spelling"
@@ -3690,20 +3690,20 @@ msgstr "Oikoluku"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
 msgid "Select the group of tags you want to use"
-msgstr "Valitse tagiryhmä jota haluat käyttää"
+msgstr "Valitse käytettävä merkintäryhmä"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
 msgid "Available Tag Lists"
-msgstr "Käytettävissä olevat tagit"
+msgstr "Käytettävissä olevat merkinnät"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
 msgid "Tags"
-msgstr "Tagit"
+msgstr "Merkinnät"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
 msgid "Double-click on a tag to insert it in the current document"
-msgstr "Kaksoisnapsauta tagia lisätäksesi sen nykyiseen asiakirjaan"
+msgstr "Lisää merkintä nykyiseen asiakirjaan kaksoisnapsauttamalla"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:1
 msgid "Abbreviated form"
@@ -4075,7 +4075,7 @@ msgstr "HTML - Erikoismerkit"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "HTML - Tags"
-msgstr "HTML - Tagit"
+msgstr "HTML - Merkinnät"
 
 #: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "HTML root element"
@@ -4883,7 +4883,7 @@ msgstr "Kohta otsikolla"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:37
 msgid "Latex - Tags"
-msgstr "Latex - tagit"
+msgstr "Latex - merkinnät"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:38
 msgid "List description"
@@ -5038,12 +5038,12 @@ msgid ""
 "Provides a method to easily insert into a document commonly used tags/"
 "strings without having to type them."
 msgstr ""
-"Mahdollistaa helpon tavan lisätä asiakirjaan usein käytettyjä tageja ja "
-"merkkijonoja tarvitsematta kirjoittaa niitä joka kerta."
+"Lisää usein käytettyjä merkintöjä ja merkkijonoja asiakirjaan kirjoittamatta "
+"niitä."
 
 #: ../plugins/taglist/taglist.gedit-plugin.desktop.in.h:2
 msgid "Tag list"
-msgstr "Tagilista"
+msgstr "Merkintälista"
 
 #: ../plugins/taglist/XSLT.tags.xml.in.h:1
 msgid "XSLT - Axes"
@@ -5164,4 +5164,3 @@ msgstr "_Kysy muotoilua"
 #: ../plugins/time/time.glade2.h:10
 msgid "_Use custom format"
 msgstr "_Käytä mukautettua muotoilua"
-
