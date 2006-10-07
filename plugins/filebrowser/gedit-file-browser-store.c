@@ -262,6 +262,7 @@ gedit_file_browser_store_set_property (GObject      *object,
 		case PROP_FILTER_MODE:
 			gedit_file_browser_store_set_filter_mode (obj,
 			                                          g_value_get_flags (value));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -856,11 +857,31 @@ model_node_update_visibility (GeditFileBrowserStore * model,
 }
 
 static gint
+collate_nodes (FileBrowserNode * node1, FileBrowserNode * node2)
+{
+	if (node1->name == NULL)
+		return -1;
+	else if (node2->name == NULL)
+		return 1;
+	else {
+		gchar *k1, *k2;
+		gint result;
+
+		k1 = g_utf8_collate_key_for_filename (node1->name, -1);
+		k2 = g_utf8_collate_key_for_filename (node2->name, -1);
+
+		result = strcmp (k1, k2);
+
+		g_free (k1);
+		g_free (k2);
+
+		return result;
+	}
+}
+
+static gint
 model_sort_default (FileBrowserNode * node1, FileBrowserNode * node2)
 {
-	gchar *case1;
-	gchar *case2;
-	gint result;
 	gint f1;
 	gint f2;
 
@@ -895,21 +916,7 @@ model_sort_default (FileBrowserNode * node1, FileBrowserNode * node2)
 			return 1;
 	}
 
-	if (node1->name == NULL)
-		return -1;
-	else if (node2->name == NULL)
-		return 1;
-	else {
-		case1 = g_utf8_casefold (node1->name, -1);
-		case2 = g_utf8_casefold (node2->name, -1);
-
-		result = g_utf8_collate (case1, case2);
-
-		g_free (case1);
-		g_free (case2);
-
-		return result;
-	}
+	return collate_nodes (node1, node2);
 }
 
 static void
