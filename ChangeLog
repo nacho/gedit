@@ -1,5 +1,11 @@
 2006-10-07  Paolo Borelli  <pborelli@katamail.com>
 
+	* gedit/gedit-window.c (gedit_window_destroy): save panes
+	state only on the first run of destroy. Fixes critical
+	warnings. bug #360219.
+
+2006-10-07  Paolo Borelli  <pborelli@katamail.com>
+
 	* plugins/filebrowser/gedit-file-browser-store.c:
 	properly collate filenames.
 

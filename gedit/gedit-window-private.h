@@ -82,13 +82,14 @@ struct _GeditWindowPrivate
 	gint		side_panel_size;
 	gint		bottom_panel_size;
 
-	gboolean	removing_tabs;
-	
 	GeditWindowState state;
 
 	GtkWindowGroup *window_group;
 	
 	gchar          *default_path;
+
+	gboolean	removing_tabs : 1;
+	gboolean	destroy_has_run : 1;
 };
 
 G_END_DECLS

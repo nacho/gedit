@@ -168,12 +168,9 @@ gedit_window_finalize (GObject *object)
 }
 
 static void
-gedit_window_destroy (GtkObject *object)
+save_panes_state (GeditWindow *window)
 {
-	GeditWindow *window;
 	gint pane_page;
-
-	window = GEDIT_WINDOW (object);
 
 	if (gedit_prefs_manager_window_size_can_set ())
 		gedit_prefs_manager_set_window_size (window->priv->width,
@@ -201,6 +198,21 @@ gedit_window_destroy (GtkObject *object)
 	if (pane_page != 0 &&
 	    gedit_prefs_manager_bottom_panel_active_page_can_set ())
 		gedit_prefs_manager_set_bottom_panel_active_page (pane_page);
+}
+
+static void
+gedit_window_destroy (GtkObject *object)
+{
+	GeditWindow *window;
+	gint pane_page;
+
+	window = GEDIT_WINDOW (object);
+
+	if (!window->priv->destroy_has_run)
+	{
+		save_panes_state (window);
+		window->priv->destroy_has_run = TRUE;
+	}
 
 	GTK_OBJECT_CLASS (gedit_window_parent_class)->destroy (object);
 }
@@ -3057,6 +3069,7 @@ gedit_window_init (GeditWindow *window)
 	window->priv->num_tabs = 0;
 	window->priv->removing_tabs = FALSE;
 	window->priv->state = GEDIT_WINDOW_STATE_NORMAL;
+	window->priv->destroy_has_run = FALSE;
 
 	window->priv->window_group = gtk_window_group_new ();
 	gtk_window_group_add_window (window->priv->window_group, GTK_WINDOW (window));
