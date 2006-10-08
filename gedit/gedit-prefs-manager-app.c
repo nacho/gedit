@@ -291,7 +291,7 @@ gedit_prefs_manager_get_default_window_size (gint *width, gint *height)
 	g_return_if_fail (width != NULL && height != NULL);
 
 	*width = GPM_DEFAULT_WINDOW_WIDTH;
-	*height = GPM_DEFAULT_WINDOW_HEIGHT;;
+	*height = GPM_DEFAULT_WINDOW_HEIGHT;
 }
 
 void

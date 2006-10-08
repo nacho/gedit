@@ -136,12 +136,12 @@ init_languages_treeview_model (GeditSpellLanguageDialog *dlg)
 	GtkTreeIter iter;
 
 	const GSList* langs;
-	
+
 	/* create list store */
 	store = GTK_LIST_STORE (dlg->model);
-		
-	langs = gedit_spell_checker_get_available_languages ();;
-	
+
+	langs = gedit_spell_checker_get_available_languages ();
+
 	while (langs)
 	{
 		gchar *name;

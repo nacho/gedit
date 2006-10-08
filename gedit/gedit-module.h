@@ -52,7 +52,7 @@ G_BEGIN_DECLS
 
 typedef struct _GeditModule	GeditModule;
 
-GType		 gedit_module_get_type		(void) G_GNUC_CONST;;
+GType		 gedit_module_get_type		(void) G_GNUC_CONST;
 
 GeditModule	*gedit_module_new		(const gchar *path);
 
