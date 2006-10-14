@@ -2090,11 +2090,12 @@ update_window_state (GeditWindow *window)
 						  window->priv->state,
 						  window->priv->num_tabs_with_error);	
 	}
-	
 }
 
 static void
-sync_state (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
+sync_state (GeditTab    *tab,
+	    GParamSpec  *pspec,
+	    GeditWindow *window)
 {
 	gedit_debug (DEBUG_WINDOW);
 	
@@ -2109,7 +2110,9 @@ sync_state (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
 }
 
 static void
-sync_name (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
+sync_name (GeditTab    *tab,
+	   GParamSpec  *pspec,
+	   GeditWindow *window)
 {
 	GtkAction *action;
 	gchar *action_name;
@@ -2119,10 +2122,16 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
 	gint n;
 	GeditDocument *doc;
 
-	if (tab != window->priv->active_tab)
-		return;
+	if (tab == window->priv->active_tab)
+	{
+		set_title (window);
 
-	set_title (window);
+		doc = gedit_tab_get_document (tab);
+		action = gtk_action_group_get_action (window->priv->action_group,
+						      "FileRevert");
+		gtk_action_set_sensitive (action,
+					  !gedit_document_is_untitled (doc));
+	}
 
 	/* sync the item in the documents list menu */
 	n = gtk_notebook_page_num (GTK_NOTEBOOK (window->priv->notebook),
@@ -2143,12 +2152,6 @@ sync_name (GeditTab *tab, GParamSpec *pspec, GeditWindow *window)
 	g_free (tab_name);
 	g_free (escaped_name);
 	g_free (tip);
-
-	doc = gedit_tab_get_document (tab);
-	action = gtk_action_group_get_action (window->priv->action_group,
-					      "FileRevert");
-	gtk_action_set_sensitive (action,
-				  !gedit_document_is_untitled (doc));
 
 	gedit_plugins_engine_update_plugins_ui (window, FALSE);
 }
