@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-02 09:01+0300\n"
-"PO-Revision-Date: 2006-10-02 08:59+0300\n"
+"POT-Creation-Date: 2006-10-25 09:08+0300\n"
+"PO-Revision-Date: 2006-10-02 09:05+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
 "Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -1078,11 +1078,11 @@ msgid "_minutes"
 msgstr "_minuutin välein"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:302
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1261
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1273
 msgid "Replace"
 msgstr "Korvaa"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1259
+#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1271
 msgid "Find"
 msgstr "Etsi"
 
@@ -1334,7 +1334,7 @@ msgid "Could not obtain backup filename"
 msgstr "Varmuuskopiointitiedostonimeä ei voitu luoda"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1809 ../gedit/gedit-window.c:1814
+#: ../gedit/gedit-window.c:1821 ../gedit/gedit-window.c:1826
 msgid "Read Only"
 msgstr "Vain luku"
 
@@ -2138,7 +2138,7 @@ msgstr "Luo uusi asiakirja"
 msgid "_Open..."
 msgstr "_Avaa..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1384
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1396
 msgid "Open a file"
 msgstr "Avaa tiedosto"
 
@@ -2424,7 +2424,7 @@ msgstr "Etsittävä merkkijono"
 msgid "Line you want to move the cursor to"
 msgstr "Rivi, jolle haluat siirtää kursorin"
 
-#: ../gedit/gedit-window.c:811
+#: ../gedit/gedit-window.c:823
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Käytä %s-väritystä"
@@ -2432,33 +2432,33 @@ msgstr "Käytä %s-väritystä"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:866
+#: ../gedit/gedit-window.c:878
 msgid "None"
 msgstr "Ei mitään"
 
-#: ../gedit/gedit-window.c:867
+#: ../gedit/gedit-window.c:879
 msgid "Disable syntax highlighting"
 msgstr "Älä käytä syntaksiväritystä"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1138
+#: ../gedit/gedit-window.c:1150
 #, c-format
 msgid "Open '%s'"
 msgstr "Avaa \"%s\""
 
-#: ../gedit/gedit-window.c:1257
+#: ../gedit/gedit-window.c:1269
 msgid "Save"
 msgstr "Tallenna"
 
-#: ../gedit/gedit-window.c:1388
+#: ../gedit/gedit-window.c:1400
 msgid "Open a recently used file"
 msgstr "Avaa äskettäin käytetty tiedosto"
 
-#: ../gedit/gedit-window.c:1395
+#: ../gedit/gedit-window.c:1407
 msgid "Open"
 msgstr "Avaa"
 
-#: ../gedit/gedit-window.c:1484 ../gedit/gedit-window.c:2125
+#: ../gedit/gedit-window.c:1496 ../gedit/gedit-window.c:2146
 #, c-format
 msgid "Activate %s"
 msgstr "Käynnistä %s"
@@ -2932,17 +2932,17 @@ msgstr ""
 msgid "If you delete an item it is permanently lost."
 msgstr "Jos poistat kohteen se menetetään pysyvästi."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2423
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2430
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
 msgid "Invalid uri"
 msgstr "Virheellinen URI"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2781
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2788
 msgid "file"
 msgstr "tiedosto"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2802
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2849
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2809
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2856
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2950,7 +2950,7 @@ msgstr ""
 "Uusi tiedosto on tällä hetkellä suodatettu pois. Sinun täytyy säätää "
 "suodatinasetuksiasi, jos haluat nähdä sen."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2830
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2837
 msgid "directory"
 msgstr "kansio"
 
@@ -3079,7 +3079,7 @@ msgstr "Siirry seuraavaan sijaintiin"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1129
 msgid "Advanced filtering"
-msgstr "Edistynyt suodatus"
+msgstr "Oma suodatin"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
