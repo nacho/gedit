@@ -20,10 +20,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gedit 2.15.9\n"
+"Project-Id-Version: gedit 2.16.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-29 12:32+0200\n"
-"PO-Revision-Date: 2006-08-29 12:32+0200\n"
+"POT-Creation-Date: 2006-11-02 14:12+0100\n"
+"PO-Revision-Date: 2006-11-02 14:12+0100\n"
 "Last-Translator: Robert-André Mauchin <zebob.m@gmail.com>\n"
 "Language-Team:GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -644,11 +644,11 @@ msgstr "Se déconnecter _sans enregistrer"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:144
 msgid "_Cancel Logout"
-msgstr "_Annuler la demande de fin de session"
+msgstr "A_nnuler la demande de clôture de session"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:151
 msgid "Close _without Saving"
-msgstr "Fermer sans sa_uvegarder"
+msgstr "_Fermer sans enregistrer"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:211
 msgid "Question"
@@ -743,7 +743,7 @@ msgstr ""
 #, c-format
 msgid "Save the changes to document \"%s\" before closing?"
 msgstr ""
-"Voulez-vous enregistrer les modifications dans le document « %s » avant de "
+"Voulez-vous enregistrer les modifications du document « %s » avant de "
 "le fermer ?"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:530
@@ -1133,11 +1133,11 @@ msgid "_minutes"
 msgstr "_minutes"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:302
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1250
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1273
 msgid "Replace"
 msgstr "Remplacer"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1248
+#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1271
 msgid "Find"
 msgstr "Rechercher"
 
@@ -1393,12 +1393,12 @@ msgid "Unsaved Document %d"
 msgstr "Document %d non enregistré"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:552
+#: ../gedit/gedit-document-saver.c:573
 msgid "Could not obtain backup filename"
 msgstr "Impossible de retrouver le nom du fichier de sauvegarde"
 
 #: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1798 ../gedit/gedit-window.c:1803
+#: ../gedit/gedit-window.c:1821 ../gedit/gedit-window.c:1826
 msgid "Read Only"
 msgstr "Lecture-seule"
 
@@ -1791,14 +1791,14 @@ msgstr ""
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr ""
-"Impossible de créer un fichier de sauvegarde lors de la sauvegarde de %s"
+"Impossible de créer un fichier de sauvegarde lors de l'enregistrement de %s"
 
 #: ../gedit/gedit-io-error-message-area.c:1050
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr ""
-"Impossible de créer un fichier de sauvegarde temporaire lors de la "
-"sauvegarde de %s"
+"Impossible de créer un fichier de sauvegarde temporaire lors de l'"
+"enregistrement de %s"
 
 #: ../gedit/gedit-io-error-message-area.c:1067
 msgid ""
@@ -2204,7 +2204,7 @@ msgstr "Crée un nouveau document"
 msgid "_Open..."
 msgstr "_Ouvrir..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1373
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1396
 msgid "Open a file"
 msgstr "Ouvre un fichier"
 
@@ -2427,7 +2427,7 @@ msgstr "Barre d'_outils"
 
 #: ../gedit/gedit-ui.h:155
 msgid "Show or hide the toolbar in the current window"
-msgstr "Afficher ou cacher la barre d'outils dans la fenêtre courante"
+msgstr "Affiche ou cache la barre d'outils dans la fenêtre courante"
 
 #: ../gedit/gedit-ui.h:157
 msgid "_Statusbar"
@@ -2435,15 +2435,15 @@ msgstr "Barre d'é_tat"
 
 #: ../gedit/gedit-ui.h:158
 msgid "Show or hide the statusbar in the current window"
-msgstr "Afficher ou cacher la barre d'état dans la fenêtre courante"
+msgstr "Affiche ou cache la barre d'état dans la fenêtre courante"
 
 #: ../gedit/gedit-ui.h:160
 msgid "Side _Pane"
-msgstr "Panneau _Latéral"
+msgstr "Panneau _latéral"
 
 #: ../gedit/gedit-ui.h:161
 msgid "Show or hide the side pane in the current window"
-msgstr "Afficher ou cacher le panneau latéral dans la fenêtre courante"
+msgstr "Affiche ou cache le panneau latéral dans la fenêtre courante"
 
 #: ../gedit/gedit-ui.h:167
 msgid "_Bottom Pane"
@@ -2451,7 +2451,7 @@ msgstr "Panneau _inférieur"
 
 #: ../gedit/gedit-ui.h:168
 msgid "Show or hide the bottom pane in the current window"
-msgstr "Afficher ou cacher le panneau inférieur dans la fenêtre courante"
+msgstr "Affiche ou cache le panneau inférieur dans la fenêtre courante"
 
 #: ../gedit/gedit-utils.c:988
 #, c-format
@@ -2491,7 +2491,7 @@ msgstr "Chaîne que vous recherchez"
 msgid "Line you want to move the cursor to"
 msgstr "La ligne vers laquelle vous souhaitez déplacer le curseur"
 
-#: ../gedit/gedit-window.c:800
+#: ../gedit/gedit-window.c:823
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Utilise le mode de coloration %s"
@@ -2499,33 +2499,33 @@ msgstr "Utilise le mode de coloration %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:855
+#: ../gedit/gedit-window.c:878
 msgid "None"
 msgstr "Aucun"
 
-#: ../gedit/gedit-window.c:856
+#: ../gedit/gedit-window.c:879
 msgid "Disable syntax highlighting"
-msgstr "Désactiver la coloration syntaxique"
+msgstr "Désactive la coloration syntaxique"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1127
+#: ../gedit/gedit-window.c:1150
 #, c-format
 msgid "Open '%s'"
 msgstr "Ouvre « %s »"
 
-#: ../gedit/gedit-window.c:1246
+#: ../gedit/gedit-window.c:1269
 msgid "Save"
 msgstr "Enregistrer"
 
-#: ../gedit/gedit-window.c:1377
+#: ../gedit/gedit-window.c:1400
 msgid "Open a recently used file"
 msgstr "Ouvre un fichier récemment utilisé"
 
-#: ../gedit/gedit-window.c:1384
+#: ../gedit/gedit-window.c:1407
 msgid "Open"
 msgstr "Ouvrir"
 
-#: ../gedit/gedit-window.c:1473 ../gedit/gedit-window.c:2114
+#: ../gedit/gedit-window.c:1496 ../gedit/gedit-window.c:2146
 #, c-format
 msgid "Activate %s"
 msgstr "Active %s"
@@ -3008,17 +3008,17 @@ msgstr ""
 msgid "If you delete an item it is permanently lost."
 msgstr "Si vous supprimez un élément, il sera définitivement perdu."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2413
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2430
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
 msgid "Invalid uri"
 msgstr "URI non valide"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2771
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2788
 msgid "file"
 msgstr "fichier"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2792
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2839
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2809
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2856
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -3026,7 +3026,7 @@ msgstr ""
 "Le nouveau fichier est actuellement filtré. Veuillez ajuster les paramètres "
 "de votre filtre pour rendre le fichier visible"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2820
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2837
 msgid "directory"
 msgstr "répertoire"
 
@@ -3163,7 +3163,7 @@ msgstr "_Indentation"
 
 #: ../plugins/indent/gedit-indent-plugin.c:58
 msgid "Indent selected lines"
-msgstr "Indenter les lignes sélectionnées"
+msgstr "Indente les lignes sélectionnées"
 
 #: ../plugins/indent/gedit-indent-plugin.c:63
 msgid "U_nindent"
@@ -3171,7 +3171,7 @@ msgstr "Dési_ndentation"
 
 #: ../plugins/indent/gedit-indent-plugin.c:65
 msgid "Unindent selected lines"
-msgstr "Désindenter les lignes sélectionnées"
+msgstr "Désindente les lignes sélectionnées"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:1
 msgid "Indent lines"
@@ -5190,7 +5190,7 @@ msgstr "Insérer la _date et l'heure..."
 
 #: ../plugins/time/gedit-time-plugin.c:185
 msgid "Insert current date and time at the cursor position"
-msgstr "Insérer la date et l'heure actuelle à l'emplacement du curseur"
+msgstr "Insére la date et l'heure actuelle à l'emplacement du curseur"
 
 #: ../plugins/time/gedit-time-plugin.c:628
 msgid "Available formats"
