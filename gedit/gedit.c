@@ -501,7 +501,7 @@ main (int argc, char *argv[])
 					   GEDIT_ICONDIR);
 
 	/* Set default icon */
-	gtk_window_set_default_icon_name ("text-editor");
+	gtk_window_set_default_icon_name ("accessories-text-editor");
 
 	/* Load user preferences */
 	gedit_debug_message (DEBUG_APP, "Init prefs manager");
