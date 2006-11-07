@@ -147,7 +147,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 	case GNOME_VFS_ERROR_NOT_FOUND:
 		error_message = g_strdup_printf (_("Could not find the file %s."),
 						 uri_for_display);
-		message_details = g_strdup (_("Please, check that you typed the "
+		message_details = g_strdup (_("Please check that you typed the "
 				      	      "location correctly and try again."));
 	break;
 
@@ -186,7 +186,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 	case GNOME_VFS_ERROR_INVALID_URI:
 		error_message = g_strdup_printf (_("%s is not a valid location."),
 						 uri_for_display);
-		message_details = g_strdup (_("Please, check that you typed the "
+		message_details = g_strdup (_("Please check that you typed the "
 					      "location correctly and try again."));
 		break;
 
@@ -195,20 +195,20 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 		break;
 
 	case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-		message_details = g_strdup (_("There are too many open files. Please, "
+		message_details = g_strdup (_("There are too many open files. Please "
 					      "close some applications and try again."));
 		break;
 
 	case GNOME_VFS_ERROR_IS_DIRECTORY:
 		error_message = g_strdup_printf (_("%s is a directory."),
 						 uri_for_display);
-		message_details = g_strdup (_("Please, check that you typed the "
+		message_details = g_strdup (_("Please check that you typed the "
 					      "location correctly and try again."));
 		break;
 
 	case GNOME_VFS_ERROR_NO_MEMORY:
 		message_details = g_strdup (_("Not enough available memory to open "
-					      "the file. Please, close some running "
+					      "the file. Please close some running "
 					      "applications and try again."));
 		break;
 
@@ -236,7 +236,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 					/* Translators: %s is a host name */
 					message_details = g_strdup_printf (
 						_("Host %s could not be found. "
-	        		  	  	  "Please, check that your proxy settings "
+	        		  	  	  "Please check that your proxy settings "
 				  	  	  "are correct and try again."),
 					  	host_markup);
 
@@ -247,7 +247,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 					/* use the same string as INVALID_HOST */
 					message_details = g_strdup_printf (
 						_("Host name was invalid. "
-						  "Please, check that you typed the location "
+						  "Please check that you typed the location "
 						  "correctly and try again."));
 				}
 
@@ -258,7 +258,7 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 				/* use the same string as INVALID_HOST */
 				message_details = g_strdup_printf (
 					_("Host name was invalid. "
-					  "Please, check that you typed the location "
+					  "Please check that you typed the location "
 					  "correctly and try again."));
 			}
 		}
@@ -266,19 +266,19 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 
 	case GNOME_VFS_ERROR_INVALID_HOST_NAME:
 		message_details = g_strdup_printf (_("Host name was invalid. "
-						     "Please, check that you typed the location "
+						     "Please check that you typed the location "
 						     "correctly and try again."));
         		break;
 
 	case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
 		message_details = g_strdup (_("Host name was empty. "
-					      "Please, check that your proxy settings "
+					      "Please check that your proxy settings "
 					      "are correct and try again."));
 		break;
 
 	case GNOME_VFS_ERROR_LOGIN_FAILED:
 		message_details = g_strdup (_("Attempt to log in failed. "
-					      "Please, check that you typed the location "
+					      "Please check that you typed the location "
 					      "correctly and try again."));
 		break;
 
@@ -375,7 +375,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 	{
 	case GNOME_VFS_ERROR_NOT_FOUND:
 		message_details = g_strdup (_("gedit cannot find it. "
-					      "Perhaps, it has recently been deleted."));
+					      "Perhaps it has recently been deleted."));
 		break;
 
 	case GNOME_VFS_ERROR_CORRUPTED_DATA:
@@ -415,7 +415,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 		break;
 
 	case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-		message_details = g_strdup (_("There are too many open files. Please, "
+		message_details = g_strdup (_("There are too many open files. Please "
 					      "close some applications and try again."));
 		break;
 
@@ -426,7 +426,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 
 	case GNOME_VFS_ERROR_NO_MEMORY:
 		message_details = g_strdup (_("Not enough available memory to open "
-					      "the file. Please, close some running "
+					      "the file. Please close some running "
 					      "applications and try again."));
 		break;
 
@@ -454,7 +454,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 					/* Translators: %s is a host name */
 					message_details = g_strdup_printf (
 						_("Host %s could not be found. "
-	        		  	  	"Please, check that your proxy settings "
+	        		  	  	"Please check that your proxy settings "
 				  	  	"are correct and try again."),
 					  	host_markup);
 
@@ -465,7 +465,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 					/* use the same string as INVALID_HOST */
 					message_details = g_strdup_printf (
 						_("Host name was invalid. "
-						  "Please, check that you typed the location "
+						  "Please check that you typed the location "
 						  "correctly and try again."));
 				}
 
@@ -476,7 +476,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 				/* use the same string as INVALID_HOST */
 				message_details = g_strdup_printf (
 					_("Host name was invalid. "
-					  "Please, check that you typed the location "
+					  "Please check that you typed the location "
 					  "correctly and try again."));
 			}
 		}
@@ -484,7 +484,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 
 	case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
 		message_details = g_strdup (_("Host name was empty. "
-					      "Please, check that your proxy settings "
+					      "Please check that your proxy settings "
 					      "are correct and try again."));
 		break;
 
@@ -854,7 +854,7 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
 
-	primary_text = g_strdup_printf (_("This file (%s) is already opened in another gedit window."), uri_for_display);
+	primary_text = g_strdup_printf (_("This file (%s) is already open in another gedit window."), uri_for_display);
 	g_free (uri_for_display);
 	
 	primary_markup = g_strdup_printf ("<b>%s</b>", primary_text);
@@ -869,7 +869,7 @@ gedit_file_already_open_warning_message_area_new (const gchar *uri)
 	GTK_WIDGET_SET_FLAGS (primary_label, GTK_CAN_FOCUS);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
 
-	secondary_text = _("gedit opened this instance of the file in non-editable way. "
+	secondary_text = _("gedit opened this instance of the file in a non-editable way. "
 			   "Do you want to edit it anyway?");
   	secondary_markup = g_strdup_printf ("<small>%s</small>",
   					    secondary_text);
@@ -1126,15 +1126,15 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
  
 				/* Translators: %s is a URI scheme (like for example http:, ftp:, etc.) */
 				message_details = g_strdup_printf (_("gedit cannot handle %s locations in write mode. "
-								     "Please, check that you typed the "
+								     "Please check that you typed the "
 								     "location correctly and try again."),
 								   scheme_markup);
 				g_free (scheme_markup);
 			}
 			else
 			{
-				message_details = g_strdup (_("gedit cannot handle this location  in write mode. "
-							      "Please, check that you typed the "
+				message_details = g_strdup (_("gedit cannot handle this location in write mode. "
+							      "Please check that you typed the "
 							      "location correctly and try again."));
 			}
 
@@ -1150,32 +1150,32 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 
 		case GNOME_VFS_ERROR_INVALID_URI:
 			message_details = g_strdup (_("%s is not a valid location. " 
-						      "Please, check that you typed the "
+						      "Please check that you typed the "
 						      "location correctly and try again."));
 			break;
 
 		case GNOME_VFS_ERROR_ACCESS_DENIED:
 		case GNOME_VFS_ERROR_NOT_PERMITTED:		
 			message_details = g_strdup (_("You do not have the permissions necessary to save the file. "
-						      "Please, check that you typed the "
+						      "Please check that you typed the "
 						      "location correctly and try again."));
 
 			break;
 
 		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
-			message_details = g_strdup (_("There are too many open files. Please, "
+			message_details = g_strdup (_("There are too many open files. Please "
 						      "close some applications and try again."));
 			break;
 
 		case GNOME_VFS_ERROR_IS_DIRECTORY:
 			message_details = g_strdup (_("%s is a directory. "
-						      "Please, check that you typed the "
+						      "Please check that you typed the "
 						      "location correctly and try again."));
 			break;
 
 		case GNOME_VFS_ERROR_NO_MEMORY:
 			message_details = g_strdup (_("Not enough available memory to save "
-						      "the file. Please, close some running "
+						      "the file. Please close some running "
 						      "applications and try again."));
 			break;
 
@@ -1203,7 +1203,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 						/* Translators: %s is a host name */
 						message_details = g_strdup_printf (
 							_("Host %s could not be found. "
-		        		  	  	  "Please, check that your proxy settings "
+		        		  	  	  "Please check that your proxy settings "
 					  	  	  "are correct and try again."),
 						  	host_markup);
 
@@ -1214,7 +1214,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 						/* use the same string as INVALID_HOST */
 						message_details = g_strdup_printf (
 							_("Host name was invalid. "
-							  "Please, check that you typed the location "
+							  "Please check that you typed the location "
 							  "correctly and try again."));
 					}
 
@@ -1225,7 +1225,7 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 					/* use the same string as INVALID_HOST */
 					message_details = g_strdup_printf (
 						_("Host name was invalid. "
-						  "Please, check that you typed the location "
+						  "Please check that you typed the location "
 						  "correctly and try again."));
 				}
 			}
@@ -1233,47 +1233,47 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 
 		case GNOME_VFS_ERROR_INVALID_HOST_NAME:
 			message_details = g_strdup_printf (_("Host name was invalid. "
-							     "Please, check that you typed the location "
+							     "Please check that you typed the location "
 							     "correctly and try again."));
 				break;
 
 		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
 			message_details = g_strdup (_("Host name was empty. "
-						      "Please, check that your proxy settings "
+						      "Please check that your proxy settings "
 						      "are correct and try again."));
 			break;
 
 		case GNOME_VFS_ERROR_LOGIN_FAILED:
 			message_details = g_strdup (_("Attempt to log in failed. "
-						      "Please, check that you typed the location "
+						      "Please check that you typed the location "
 						      "correctly and try again."));
 			break;
 
 		case GNOME_VFS_ERROR_NO_SPACE:
 			message_details = g_strdup (_("There is not enough disk space to save the file. "
-						      "Please, free some disk space and try again."));
+						      "Please free some disk space and try again."));
 			break;
 			
 		case GNOME_VFS_ERROR_READ_ONLY:
 		case GNOME_VFS_ERROR_READ_ONLY_FILE_SYSTEM:		
 			message_details = g_strdup (_("You are trying to save the file on a read-only disk. "
-						      "Please, check that you typed the location "
+						      "Please check that you typed the location "
 						      "correctly and try again."));
 			break;
 			
 		case GNOME_VFS_ERROR_FILE_EXISTS:
 			message_details = g_strdup (_("A file with the same name already exists. "
-						      "Please, use a different name."));
+						      "Please use a different name."));
 			break;
 			
 		case GNOME_VFS_ERROR_NAME_TOO_LONG:
 			message_details = g_strdup (_("The disk where you are trying to save the file has "
 						      "a limitation on length of the file names. "
-						      "Please, use a shorter name."));
+						      "Please use a shorter name."));
 
 		case GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE:
 			message_details = g_strdup_printf (_("%s is not a regular file. "
-							     "Please, check that you typed the location "
+							     "Please check that you typed the location "
 							     "correctly and try again."),
 							   uri_for_display);
 
