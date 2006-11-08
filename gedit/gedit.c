@@ -44,7 +44,6 @@
 
 #include "gedit-app.h"
 #include "gedit-commands.h"
-#include "gedit-convert.h"
 #include "gedit-debug.h"
 #include "gedit-encodings.h"
 #include "gedit-metadata-manager.h"

@@ -44,7 +44,6 @@
 #include "gedit-document.h"
 #include "gedit-debug.h"
 #include "gedit-utils.h"
-#include "gedit-convert.h"
 #include "gedit-metadata-manager.h"
 #include "gedit-languages-manager.h"
 #include "gedit-document-loader.h"

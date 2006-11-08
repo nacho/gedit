@@ -32,7 +32,6 @@
 #define __GEDIT_PLUGIN_MANAGER_H__
 
 #include <gtk/gtk.h>
-#include <gedit/gedit-encodings.h>
 
 G_BEGIN_DECLS
 
