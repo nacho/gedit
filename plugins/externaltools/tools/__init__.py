@@ -16,7 +16,8 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-__all__ = ('ToolsPlugin', 'Manager', 'OutputPanel', 'Capture', 'UniqueById')
+__all__ = ('ExternalToolsPlugin', 'ExternalToolsWindowHelper',
+           'Manager', 'OutputPanel', 'Capture', 'UniqueById')
 
 import gedit
 import gtk
@@ -25,23 +26,27 @@ from outputpanel import OutputPanel
 from capture import Capture
 from functions import *
 
-class ToolsPlugin(gedit.Plugin):
-    def activate(self, window):
-        manager = window.get_ui_manager()
-        window_data = dict()
-        window.set_data("ToolsPluginWindowData", window_data)
+class ExternalToolsWindowHelper(object):
+    def __init__(self, plugin, window):
+        super(ExternalToolsWindowHelper, self).__init__()
 
-        window_data['action_group'] = gtk.ActionGroup("GeditToolsPluginActions")
-        window_data['action_group'].set_translation_domain('gedit')
-        window_data['action_group'].add_actions([('ToolsManager',
-                                                  None,
-                                                  _('_External Tools...'),
-                                                  None,
-                                                  _("Opens the External Tools Manager"),
-                                                  lambda action: self.open_dialog())])
-        window_data['ui_id'] = manager.new_merge_id()
-        manager.insert_action_group(window_data['action_group'], -1)
-        manager.add_ui(window_data['ui_id'],
+        self._window = window
+        self._plugin = plugin
+    
+        manager = window.get_ui_manager()
+
+        self._action_group = gtk.ActionGroup('ExternalToolsPluginActions')
+        self._action_group.set_translation_domain('gedit')
+        self._action_group.add_actions([('ToolsManager',
+                                         None,
+                                         _('_External Tools...'),
+                                         None,
+                                         _("Opens the External Tools Manager"),
+                                         lambda action: plugin.open_dialog())])
+        manager.insert_action_group(self._action_group, -1)
+
+        self._merge_id = manager.new_merge_id()
+        manager.add_ui(self._merge_id,
                        '/MenuBar/ToolsMenu/ToolsOps_5',
                        'ToolsManager', 'ToolsManager',
                        gtk.UI_MANAGER_MENUITEM, False)
@@ -50,29 +55,43 @@ class ToolsPlugin(gedit.Plugin):
         manager.ensure_update()
 
         # Create output console
-        window_data["output_buffer"] = OutputPanel(window)
+        self._output_buffer = OutputPanel(window)
         bottom = window.get_bottom_panel()
-        bottom.add_item(window_data["output_buffer"].panel,
+        bottom.add_item(self._output_buffer.panel,
                         _("Shell Output"),
                         gtk.STOCK_EXECUTE)
 
-    def deactivate(self, window):
-        window_data = window.get_data("ToolsPluginWindowData")
-        manager = window.get_ui_manager()
+    def update_ui(self):
+        filter_tools_menu(self._window)
+        self._window.get_ui_manager().ensure_update()
 
-        manager.remove_ui(window_data["ui_id"])
-        manager.remove_action_group(window_data["action_group"])
+    def deactivate(self):
+        manager = self._window.get_ui_manager()
+    
+        manager.remove_ui(self._merge_id)
+        manager.remove_action_group(self._action_group)
 
-        remove_tools_menu(window)
+        remove_tools_menu(self._window)
 
         manager.ensure_update()
-        bottom = window.get_bottom_panel()
-        bottom.remove_item(window_data["output_buffer"].panel)
-        window.set_data("ToolsPluginWindowData", None)
+        bottom = self._window.get_bottom_panel()
+        bottom.remove_item(self._output_buffer.panel)
+
+class ExternalToolsPlugin(gedit.Plugin):
+    WINDOW_DATA_KEY = "ExternalToolsPluginWindowData"
+
+    def activate(self, window):
+        super(ExternalToolsPlugin, self).__init__()
+        
+        helper = ExternalToolsWindowHelper(self, window)
+        window.set_data(self.WINDOW_DATA_KEY, helper)
+
+    def deactivate(self, window):
+        window.get_data(self.WINDOW_DATA_KEY).deactivate()
+        window.set_data(self.WINDOW_DATA_KEY, None)
 
     def update_ui(self, window):
-        filter_tools_menu(window)
-        window.get_ui_manager().ensure_update()
+        window.get_data(self.WINDOW_DATA_KEY).update_ui()
 
     def create_configure_dialog(self):
         return self.open_dialog()

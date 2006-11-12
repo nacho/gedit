@@ -167,7 +167,7 @@ def filter_tools_menu(window):
 def capture_menu_action(action, window, node):
 
     # Get the panel
-    panel = window.get_data("ToolsPluginWindowData")["output_buffer"]
+    panel = window.get_data("ExternalToolsPluginWindowData")._output_buffer
     panel.show()
     panel.clear()
 
