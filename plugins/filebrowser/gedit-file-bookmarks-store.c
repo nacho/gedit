@@ -206,12 +206,19 @@ init_special_directories (GeditFileBookmarksStore * model)
 	local = g_build_filename (path, "Documents", NULL);
 	uri = gnome_vfs_uri_new (local);
 
-	if (gnome_vfs_uri_exists (uri))
+	if (gnome_vfs_uri_is_local (uri)) {
+		if (gnome_vfs_uri_exists (uri))
+			add_uri (model, uri, NULL,
+				 GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
+				 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
+		else
+			gnome_vfs_uri_unref (uri);
+	} else {
 		add_uri (model, uri, NULL,
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_DOCUMENTS |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_SPECIAL_DIR, NULL);
-	else
-		gnome_vfs_uri_unref (uri);
+	}
+		
 
 	g_free (local);
 }
