@@ -30,72 +30,74 @@ from capture import *
 GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
 
 class UniqueById:
-	__shared_state = WeakKeyDictionary()
-	
-	def __init__(self, i):
-		if i in self.__class__.__shared_state:
-			self.__dict__ = self.__class__.__shared_state[i]
-			return True
-		else:
-			self.__class__.__shared_state[i] = self.__dict__
-			return False
+    __shared_state = WeakKeyDictionary()
 
-	def states(self):
-		return self.__class__.__shared_state
+    def __init__(self, i):
+        if i in self.__class__.__shared_state:
+            self.__dict__ = self.__class__.__shared_state[i]
+            return True
+        else:
+            self.__class__.__shared_state[i] = self.__dict__
+            return False
+
+    def states(self):
+        return self.__class__.__shared_state
 
 class OutputPanel(UniqueById):
-	def __init__(self, window):
-		if UniqueById.__init__(self, window):
-			return
-		
-		callbacks = {
-			'on_stop_clicked' : self.on_stop_clicked
-		}
+    def __init__(self, window):
+        if UniqueById.__init__(self, window):
+            return
 
-		self.window = window
-		self.ui = glade.XML(GLADE_FILE, "output-panel")
-		self.ui.signal_autoconnect(callbacks)
-		self.panel = self["output-panel"]
-		self['view'].modify_font(pango.FontDescription('Monospace'))
-		
-		buffer = self['view'].get_buffer()
-		self.normal_tag = buffer.create_tag("normal")
-		self.error_tag  = buffer.create_tag("error")
-		self.error_tag.set_property("foreground", "red")
-		self.italic_tag = buffer.create_tag('italic')
-		self.italic_tag.set_property('style', pango.STYLE_OBLIQUE)
-		self.bold_tag = buffer.create_tag('bold')
-		self.bold_tag.set_property('weight', pango.WEIGHT_BOLD)
+        callbacks = {
+            'on_stop_clicked' : self.on_stop_clicked
+        }
 
-		self.process = None
+        self.window = window
+        self.ui = glade.XML(GLADE_FILE, "output-panel")
+        self.ui.signal_autoconnect(callbacks)
+        self.panel = self["output-panel"]
+        self['view'].modify_font(pango.FontDescription('Monospace'))
 
-	def __getitem__(self, key):
-		# Convenience function to get a widget from its name
-		return self.ui.get_widget(key)
-	
-	def on_stop_clicked(self, widget, *args):
-		if self.process is not None:
-			self.write("\n" + _('Stopped.') + "\n",
-			           self.italic_tag)
-			self.process.stop(-1)
-		
-	def scroll_to_end(self):
-		iter = self['view'].get_buffer().get_end_iter()
-		self['view'].scroll_to_iter(iter, 0.0)
-		return False  # don't requeue this handler
+        buffer = self['view'].get_buffer()
+        self.normal_tag = buffer.create_tag("normal")
+        self.error_tag  = buffer.create_tag("error")
+        self.error_tag.set_property("foreground", "red")
+        self.italic_tag = buffer.create_tag('italic')
+        self.italic_tag.set_property('style', pango.STYLE_OBLIQUE)
+        self.bold_tag = buffer.create_tag('bold')
+        self.bold_tag.set_property('weight', pango.WEIGHT_BOLD)
 
-	def clear(self):
-		self['view'].get_buffer().set_text("")
+        self.process = None
 
-	def write(self, text, tag = None):
-		buffer = self['view'].get_buffer()
-		if tag is None:
-			buffer.insert(buffer.get_end_iter(), text)
-		else:
-			buffer.insert_with_tags(buffer.get_end_iter(), text, tag)
-		gobject.idle_add(self.scroll_to_end)
+    def __getitem__(self, key):
+        # Convenience function to get a widget from its name
+        return self.ui.get_widget(key)
 
-	def show(self):
-		panel = self.window.get_bottom_panel()
-		panel.show()
-		panel.activate_item(self.panel)
+    def on_stop_clicked(self, widget, *args):
+        if self.process is not None:
+            self.write("\n" + _('Stopped.') + "\n",
+                       self.italic_tag)
+            self.process.stop(-1)
+
+    def scroll_to_end(self):
+        iter = self['view'].get_buffer().get_end_iter()
+        self['view'].scroll_to_iter(iter, 0.0)
+        return False  # don't requeue this handler
+
+    def clear(self):
+        self['view'].get_buffer().set_text("")
+
+    def write(self, text, tag = None):
+        buffer = self['view'].get_buffer()
+        if tag is None:
+            buffer.insert(buffer.get_end_iter(), text)
+        else:
+            buffer.insert_with_tags(buffer.get_end_iter(), text, tag)
+        gobject.idle_add(self.scroll_to_end)
+
+    def show(self):
+        panel = self.window.get_bottom_panel()
+        panel.show()
+        panel.activate_item(self.panel)
+
+# ex:ts=4:et:
