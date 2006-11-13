@@ -27,58 +27,58 @@ from SnippetsDialog import SnippetsDialog
 from Snippet import Snippet
 
 class SnippetsPlugin(gedit.Plugin):
-	def __init__(self):
-		gedit.Plugin.__init__(self)
+        def __init__(self):
+                gedit.Plugin.__init__(self)
 
-		self.dlg = None
-		
-		library = SnippetsLibrary()
-		library.set_accelerator_callback(self.accelerator_activated)
-		
-		userdir = os.path.join(os.environ['HOME'], '.gnome2', 'gedit', 'snippets')
-		library.set_dirs(userdir, self.system_dirs())
-	
-	def system_dirs(self):
-		if 'XDG_DATA_DIRS' in os.environ:
-			datadirs = os.environ['XDG_DATA_DIRS']
-		else:
-			datadirs = '/usr/local/share:/usr/share'
-		
-		dirs = []
-		
-		for d in datadirs.split(':'):
-			d = os.path.join(d, 'gedit-2', 'plugins', 'snippets')
-			
-			if os.path.isdir(d):
-				dirs.append(d)
-		
-		return dirs
-	
-	def activate(self, window):
-		data = SnippetsPluginInstance(self)
-		window._snippets_plugin_data = data
-		data.run(window)
+                self.dlg = None
+                
+                library = SnippetsLibrary()
+                library.set_accelerator_callback(self.accelerator_activated)
+                
+                userdir = os.path.join(os.environ['HOME'], '.gnome2', 'gedit', 'snippets')
+                library.set_dirs(userdir, self.system_dirs())
+        
+        def system_dirs(self):
+                if 'XDG_DATA_DIRS' in os.environ:
+                        datadirs = os.environ['XDG_DATA_DIRS']
+                else:
+                        datadirs = '/usr/local/share:/usr/share'
+                
+                dirs = []
+                
+                for d in datadirs.split(':'):
+                        d = os.path.join(d, 'gedit-2', 'plugins', 'snippets')
+                        
+                        if os.path.isdir(d):
+                                dirs.append(d)
+                
+                return dirs
+        
+        def activate(self, window):
+                data = SnippetsPluginInstance(self)
+                window._snippets_plugin_data = data
+                data.run(window)
 
-	def deactivate(self, window):
-		window._snippets_plugin_data.stop()
-		window._snippets_plugin_data = None
-		
-	def update_ui(self, window):
-		window._snippets_plugin_data.update()
-	
-	def create_configure_dialog(self):
-		if not self.dlg:
-			self.dlg = SnippetsDialog()
-		else:
-			self.dlg.run()
-		
-		window = gedit.app_get_default().get_active_window()
-		
-		if window:
-			self.dlg.dlg.set_transient_for(window)
-		
-		return self.dlg.dlg
-	
-	def accelerator_activated(self, group, obj, keyval, mod):
-		if hasattr(obj, '_snippets_plugin_data'):
-			obj._snippets_plugin_data.accelerator_activated(keyval, mod)
+        def deactivate(self, window):
+                window._snippets_plugin_data.stop()
+                window._snippets_plugin_data = None
+                
+        def update_ui(self, window):
+                window._snippets_plugin_data.update()
+        
+        def create_configure_dialog(self):
+                if not self.dlg:
+                        self.dlg = SnippetsDialog()
+                else:
+                        self.dlg.run()
+                
+                window = gedit.app_get_default().get_active_window()
+                
+                if window:
+                        self.dlg.dlg.set_transient_for(window)
+                
+                return self.dlg.dlg
+        
+        def accelerator_activated(self, group, obj, keyval, mod):
+                if hasattr(obj, '_snippets_plugin_data'):
+                        obj._snippets_plugin_data.accelerator_activated(keyval, mod)

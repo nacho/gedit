@@ -22,149 +22,149 @@ from ElementTree import *
 import string
 
 def message_dialog(par, typ, msg):
-	d = gtk.MessageDialog(par, gtk.DIALOG_MODAL, typ, \
-			gtk.BUTTONS_OK, msg)
-	d.run()
-	d.destroy()
+        d = gtk.MessageDialog(par, gtk.DIALOG_MODAL, typ, \
+                        gtk.BUTTONS_OK, msg)
+        d.run()
+        d.destroy()
 
 def compute_indentation(view, piter):
-	line = piter.get_line()
-	start = view.get_buffer().get_iter_at_line(line)
-	end = start.copy()
-	
-	ch = end.get_char()
-	
-	while (ch.isspace() and ch != '\r' and ch != '\n' and \
-			end.compare(piter) < 0):
-		if not end.forward_char():
-			break;
-		
-		ch = end.get_char()
-	
-	if start.equal(end):
-		return ''
-	
-	return start.get_slice(end)
+        line = piter.get_line()
+        start = view.get_buffer().get_iter_at_line(line)
+        end = start.copy()
+        
+        ch = end.get_char()
+        
+        while (ch.isspace() and ch != '\r' and ch != '\n' and \
+                        end.compare(piter) < 0):
+                if not end.forward_char():
+                        break;
+                
+                ch = end.get_char()
+        
+        if start.equal(end):
+                return ''
+        
+        return start.get_slice(end)
 
 def markup_escape(text):
-	return saxutils.escape(text)
+        return saxutils.escape(text)
 
 def spaces_instead_of_tabs(view, text):
-	if not view.get_insert_spaces_instead_of_tabs():
-		return text
+        if not view.get_insert_spaces_instead_of_tabs():
+                return text
 
-	return text.replace("\t", view.get_tabs_width() * ' ')
+        return text.replace("\t", view.get_tabs_width() * ' ')
 
 def insert_with_indent(view, piter, text, indentfirst = True):
-	text = spaces_instead_of_tabs(view, text)
-	lines = text.split('\n')
+        text = spaces_instead_of_tabs(view, text)
+        lines = text.split('\n')
 
-	if len(lines) == 1:
-		view.get_buffer().insert(piter, text)
-	else:
-		# Compute indentation
-		indent = compute_indentation(view, piter)
-		text = ''
+        if len(lines) == 1:
+                view.get_buffer().insert(piter, text)
+        else:
+                # Compute indentation
+                indent = compute_indentation(view, piter)
+                text = ''
 
-		for i in range(0, len(lines)):
-			if indentfirst or i > 0:
-				text += indent + lines[i] + '\n'
-			else:
-				text += lines[i] + '\n'
-		
-		view.get_buffer().insert(piter, text[:-1])
+                for i in range(0, len(lines)):
+                        if indentfirst or i > 0:
+                                text += indent + lines[i] + '\n'
+                        else:
+                                text += lines[i] + '\n'
+                
+                view.get_buffer().insert(piter, text[:-1])
 
 def snippets_debug(*s):
-	return
+        return
 
 def write_xml(node, file, cdata_nodes=()):
-	assert node is not None
+        assert node is not None
 
-	if not hasattr(file, "write"):
-		file = open(file, "wb")
+        if not hasattr(file, "write"):
+                file = open(file, "wb")
 
-	# Encoding
-	file.write("<?xml version='1.0' encoding='utf-8'?>\n")
+        # Encoding
+        file.write("<?xml version='1.0' encoding='utf-8'?>\n")
 
-	_write_node(node, file, cdata_nodes)
+        _write_node(node, file, cdata_nodes)
 
 def _write_indent(file, text, indent):
-	file.write('  ' * indent + text)
+        file.write('  ' * indent + text)
 
 def _write_node(node, file, cdata_nodes=(), indent=0):
     # write XML to file
-	tag = node.tag
+        tag = node.tag
 
-	if node is Comment:
-		_write_indent(file, "<!-- %s -->\n" % _escape_cdata(node.text), indent)
-	elif node is ProcessingInstruction:
-		_write_indent(file, "<?%s?>\n" % _escape_cdata(node.text), \
-				indent)
-	else:
-		items = node.items()
-		
-		if items or node.text or len(node):
-			_write_indent(file, "<" + tag.encode('utf-8'), indent)
-		
-			if items:
-				items.sort() # lexical order
-				for k, v in items:
-					file.write(" %s=\"%s\"" % (k.encode('utf-8'),
-							_escape_attrib(v)))
-			if node.text or len(node):
-				file.write(">")
-				if node.text and node.text.strip() != "":
-					if tag in cdata_nodes:
-						file.write(_cdata(node.text))
-					else:
-						file.write(_escape_cdata(node.text))
-				else:
-					file.write("\n")
+        if node is Comment:
+                _write_indent(file, "<!-- %s -->\n" % _escape_cdata(node.text), indent)
+        elif node is ProcessingInstruction:
+                _write_indent(file, "<?%s?>\n" % _escape_cdata(node.text), \
+                                indent)
+        else:
+                items = node.items()
+                
+                if items or node.text or len(node):
+                        _write_indent(file, "<" + tag.encode('utf-8'), indent)
+                
+                        if items:
+                                items.sort() # lexical order
+                                for k, v in items:
+                                        file.write(" %s=\"%s\"" % (k.encode('utf-8'),
+                                                        _escape_attrib(v)))
+                        if node.text or len(node):
+                                file.write(">")
+                                if node.text and node.text.strip() != "":
+                                        if tag in cdata_nodes:
+                                                file.write(_cdata(node.text))
+                                        else:
+                                                file.write(_escape_cdata(node.text))
+                                else:
+                                        file.write("\n")
 
-				for n in node:
-					_write_node(n, file, cdata_nodes, indent + 1)
-			
-				if not len(node):
-					file.write("</" + tag.encode('utf-8') + ">\n")
-				else:
-					_write_indent(file, "</" + tag.encode('utf-8') + ">\n", \
-							indent)
-			else:
-				file.write(" />\n")
+                                for n in node:
+                                        _write_node(n, file, cdata_nodes, indent + 1)
+                        
+                                if not len(node):
+                                        file.write("</" + tag.encode('utf-8') + ">\n")
+                                else:
+                                        _write_indent(file, "</" + tag.encode('utf-8') + ">\n", \
+                                                        indent)
+                        else:
+                                file.write(" />\n")
 
-		if node.tail and node.tail.strip() != "":
-			file.write(_escape_cdata(node.tail))
+                if node.tail and node.tail.strip() != "":
+                        file.write(_escape_cdata(node.tail))
 
 def _cdata(text, replace=string.replace):
-	text = text.encode('utf-8')
-	return '<![CDATA[' + replace(text, ']]>', ']]]]><![CDATA[>') + ']]>'
+        text = text.encode('utf-8')
+        return '<![CDATA[' + replace(text, ']]>', ']]]]><![CDATA[>') + ']]>'
 
 def _escape_cdata(text, replace=string.replace):
-	# escape character data
-	text = text.encode('utf-8')
-	text = replace(text, "&", "&amp;")
-	text = replace(text, "<", "&lt;")
-	text = replace(text, ">", "&gt;")
-	return text
+        # escape character data
+        text = text.encode('utf-8')
+        text = replace(text, "&", "&amp;")
+        text = replace(text, "<", "&lt;")
+        text = replace(text, ">", "&gt;")
+        return text
 
 def _escape_attrib(text, replace=string.replace):
-	# escape attribute value
-	text = text.encode('utf-8')
-	text = replace(text, "&", "&amp;")
-	text = replace(text, "'", "&apos;")
-	text = replace(text, "\"", "&quot;")
-	text = replace(text, "<", "&lt;")
-	text = replace(text, ">", "&gt;")
-	return text
+        # escape attribute value
+        text = text.encode('utf-8')
+        text = replace(text, "&", "&amp;")
+        text = replace(text, "'", "&apos;")
+        text = replace(text, "\"", "&quot;")
+        text = replace(text, "<", "&lt;")
+        text = replace(text, ">", "&gt;")
+        return text
 
 def buffer_word_boundary(buf):
-	iter = buf.get_iter_at_mark(buf.get_insert())
-	start = iter.copy()
-	
-	if not iter.starts_word():
-		start.backward_word_start()
-	
-	if not iter.ends_word():
-		iter.forward_word_end()
-		
-	return (start, iter)
+        iter = buf.get_iter_at_mark(buf.get_insert())
+        start = iter.copy()
+        
+        if not iter.starts_word():
+                start.backward_word_start()
+        
+        if not iter.ends_word():
+                iter.forward_word_end()
+                
+        return (start, iter)
