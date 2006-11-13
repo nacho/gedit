@@ -597,9 +597,9 @@ class SnippetsDialog:
 	
 	def on_entry_accelerator_focus_in(self, entry, event):
 		if self.snippet['accelerator']:
-			entry.set_text(_('Type a new accelerator, or press Backspace to clear'))
+			entry.set_text(_('Type a new shortcut, or press Backspace to clear'))
 		else:
-			entry.set_text(_('Type a new accelerator'))
+			entry.set_text(_('Type a new shortcut'))
 	
 	def on_tree_view_selection_changed(self, selection):
 		parent, piter, node = self.selected_snippet()
