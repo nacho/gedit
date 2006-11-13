@@ -296,7 +296,7 @@ class SnippetController:
 		uri = buf.get_uri()
 		
 		if uri:
-			return os.path.basename(uri)
+			return os.path.basename(buf.get_uri_for_display())
 		else:
 			return ''
 
