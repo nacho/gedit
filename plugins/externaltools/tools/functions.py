@@ -16,67 +16,14 @@
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import ElementTree as et
 import os
 import gtk
 from gtk import gdk
 import gnomevfs
 import gedit, gtksourceview
+from library import ToolLibrary
 from outputpanel import OutputPanel
 from capture import *
-
-# ==== Data storage related functions ====
-
-class ToolsTree:
-    def __init__(self):
-        self.xml_location = os.path.join(os.environ['HOME'], '.gnome2/gedit')
-
-        if not os.path.isdir(self.xml_location):
-            os.mkdir(self.xml_location)
-
-        self.xml_location = os.path.join(self.xml_location, 'gedit-tools.xml')
-
-        try:
-            if not os.path.isfile(self.xml_location):
-                self.tree = et.parse(self.get_stock_file())
-            else:
-                self.tree = et.parse(self.xml_location)
-            self.root = self.tree.getroot()
-        except:
-            self.root = et.Element('tools')
-            self.tree = et.ElementTree(self.root)
-
-    def __iter__(self):
-        return iter(self.root)
-
-    def get_stock_file(self):
-        dirs = os.getenv('XDG_DATA_DIR')
-        if dirs:
-            dirs = dirs.split(os.pathsep)
-        else:
-            dirs = ('/usr/local/share', '/usr/share')
-
-        for d in dirs:
-            f = os.path.join(d, 'gedit-2/plugins/externaltools/stock-tools.xml')
-            if os.path.isfile(f):
-                return f
-
-        return None
-
-    def save(self):
-        self.tree.write(self.xml_location, 'UTF-8')
-
-    def get_tool_from_accelerator(self, keyval, mod, ignore = None):
-        if not self.root:
-            return None
-
-        for tool in self.root:
-            if tool != ignore:
-                skey, smod = gtk.accelerator_parse(default(tool.get('accelerator'), ''))
-                if skey == keyval and mod == smod:
-                    return tool
-        return None
-
 
 def default(val, d):
     if val is not None:
@@ -87,12 +34,12 @@ def default(val, d):
 # ==== UI related functions ====
 APPLICABILITIES = ('all', 'titled', 'local', 'remote', 'untitled')
 
-def insert_tools_menu(window, tools = None):
+def insert_tools_menu(window, library = None):
     window_data = dict()
-    window.set_data("ToolsPluginCommandsData", window_data)
+    window.set_data("ExternalToolsPluginCommandsData", window_data)
 
-    if tools is None:
-        tools = ToolsTree()
+    if library is None:
+        library = ToolLibrary()
 
     manager = window.get_ui_manager()
 
@@ -100,18 +47,17 @@ def insert_tools_menu(window, tools = None):
     window_data['ui_id'] = manager.new_merge_id()
 
     i = 0;
-    for tool in tools:
+    for tool in library.tree.tools:
         menu_id = "ToolCommand%06d" % i
 
-        ap = tool.get('applicability')
+        ap = tool.applicability
         if ap not in window_data['action_groups']:
             window_data['action_groups'][ap] = \
-                gtk.ActionGroup("GeditToolsPluginCommandsActions%s" % ap.capitalize())
+                gtk.ActionGroup("ExternalToolsPluginCommandsActions%s" % ap.capitalize())
             window_data['action_groups'][ap].set_translation_domain('gedit')
 
         window_data['action_groups'][ap].add_actions(
-            [(menu_id, None, tool.get('label'),
-              tool.get('accelerator'), tool.get('description'),
+            [(menu_id, None, tool.name, tool.shortcut, tool.comment,
               capture_menu_action)],
             (window, tool))
         manager.add_ui(window_data['ui_id'],
@@ -127,13 +73,13 @@ def insert_tools_menu(window, tools = None):
             manager.insert_action_group(window_data['action_groups'][applic], -1)
 
 def remove_tools_menu(window):
-    window_data = window.get_data("ToolsPluginCommandsData")
+    window_data = window.get_data("ExternalToolsPluginCommandsData")
 
     manager = window.get_ui_manager()
     manager.remove_ui(window_data['ui_id'])
     for action_group in window_data['action_groups'].itervalues():
         manager.remove_action_group(action_group)
-    window.set_data("ToolsPluginCommandsData", None)
+    window.set_data("ExternalToolsPluginCommandsData", None)
 
 def update_tools_menu(tools = None):
     for window in gedit.app_get_default().get_windows():
@@ -143,7 +89,7 @@ def update_tools_menu(tools = None):
         window.get_ui_manager().ensure_update()
 
 def filter_tools_menu(window):
-    action_groups = window.get_data("ToolsPluginCommandsData")['action_groups']
+    action_groups = window.get_data("ExternalToolsPluginCommandsData")['action_groups']
 
     document = window.get_active_document()
     if document is not None:
@@ -177,7 +123,7 @@ def capture_menu_action(action, window, node):
     except OSError:
         cwd = os.getenv('HOME');
 
-    capture = Capture(node.text, cwd)
+    capture = Capture(node.command, cwd)
     capture.env = os.environ.copy()
     capture.set_env(GEDIT_CWD = cwd)
 
@@ -214,8 +160,8 @@ def capture_menu_action(action, window, node):
     panel.process = capture
 
     # Get input text
-    input_type = default(node.get('input'), 'nothing')
-    output_type = default(node.get('output'), 'output-panel')
+    input_type = node.input
+    output_type = node.output
 
     if input_type != 'nothing' and view is not None:
         if input_type == 'document':
@@ -280,7 +226,7 @@ def capture_menu_action(action, window, node):
         document.begin_user_action()
 
     capture.connect('stderr-line',   capture_stderr_line_panel,   panel)
-    capture.connect('begin-execute', capture_begin_execute_panel, panel, node.get('label'))
+    capture.connect('begin-execute', capture_begin_execute_panel, panel, node.name)
     capture.connect('end-execute',   capture_end_execute_panel,   panel, view,
                     output_type in ('new-document','replace-document'))
 

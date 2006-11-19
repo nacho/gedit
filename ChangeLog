@@ -1,3 +1,39 @@
+2006-11-14  Steve Frécinaux  <code@istique.net>
+	
+	New storage system for External Tools Plugin. It uses the filesystem
+	instead of an XML file and allows to write scripts in bash, but 
+	also (at least) in perl, python, ruby.
+	
+	NB: library.ToolLibrary.__init__() imports the old custom tools from
+	the old XML store file at first run (ie when there is no tools
+	directory in ~)
+	
+	* plugins/externaltools/tools/library.py: new ToolLibrary object, using
+	filesystem directories and script files directly.
+	
+	* plugins/externaltools/tools/functions.py: use new ToolLibrary instead
+	of ElementTree.
+	
+	* plugins/externaltools/tools/manager.py: adapt for use with the new
+	ToolLibrary; allow removing local tools, and reverting customized tools
+	to stock ones; fix F12 handing in shortcuts.
+	
+	* plugins/externaltools/tools/tools.glade: add Revert button (should
+	never be shown when the Remove button is visible, and shares his
+	clicked handler with it); convert file to glade-3 format.
+	
+	* plugins/externaltools/tools/Makefile.am: add library.py.
+
+	* configure.ac:
+	* plugins/externaltools/Makefile.am:
+	* plugins/externaltools/data/Makefile.am:
+	* plugins/externaltools/data/build:
+	* plugins/externaltools/data/open-terminal-here:
+	* plugins/externaltools/data/remove-trailing-spaces:
+	* plugins/externaltools/data/run-command:
+	
+	New stock tools
+
 2006-11-19  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-history-entry.[ch]:

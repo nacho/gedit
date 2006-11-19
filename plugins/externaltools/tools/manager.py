@@ -22,11 +22,11 @@ import gtk
 import gtksourceview as gsv
 from gtk import glade
 import os.path
-
+from library import *
 from functions import *
-import ElementTree as et
+import md5
 
-class Manager:
+class Manager(object):
     GLADE_FILE = os.path.join(os.path.dirname(__file__), "tools.glade")
 
     LABEL_COLUMN = 0 # For Combo and Tree
@@ -60,13 +60,14 @@ class Manager:
         )
     }
 
-    def __init__(self):
-        if Manager.__shared_state is not None:
-            self.__dict__ = Manager.__shared_state
-            if self.dialog: return
-        else:
-            Manager.__shared_state = self.__dict__
+    _instance = None
 
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = object.__new__(cls)
+        return cls._instance
+
+    def __init__(self):
         callbacks = {
             'on_new_tool_button_clicked'      : self.on_new_tool_button_clicked,
             'on_remove_tool_button_clicked'   : self.on_remove_tool_button_clicked,
@@ -90,16 +91,18 @@ class Manager:
         self.dialog.show()
 
     def __init_tools_model(self):
-        self.tools = ToolsTree()
+        self.tools = ToolLibrary()
         self.current_node = None
+        self.script_hash = None
+        self.accelerators = dict()
 
         self.model = gtk.ListStore(str, object)
         self.view.set_model(self.model)
 
-        for item in self.tools:
-            self.model.append([item.get('label'), item])
-
-        self.row_changed_id = self.model.connect('row-changed', self.on_tools_model_row_changed)
+        for item in self.tools.tree.tools:
+            self.model.append([item.name, item])
+            if item.shortcut:
+                self.accelerators[item.shortcut] = item
 
     def __init_tools_view(self):
         # Tools column
@@ -130,10 +133,6 @@ class Manager:
                        str1, str2, int1 , int2):
         if function_name == 'create_commands':
             buf = gsv.SourceBuffer()
-            manager = gsv.SourceLanguagesManager()
-            language = manager.get_language_from_mime_type('text/x-shellscript')
-            buf.set_language(language)
-            buf.set_highlight(True)
             view = gsv.SourceView(buf)
             view.set_wrap_mode(gtk.WRAP_WORD)
             view.show()
@@ -160,23 +159,34 @@ class Manager:
         else:
             return None, None
 
+    def compute_hash(self, string):
+        return md5.md5(string).hexdigest()
+
     def save_current_tool(self):
         if self.current_node is None:
-            return
+             return
+
+        if self.current_node.filename is None:
+            self.current_node.autoset_filename()
+
+        def combo_value(o, name):
+            combo = o[name]
+            return combo.get_model().get_value(combo.get_active_iter(), self.NAME_COLUMN)
+
+        self.current_node.input = combo_value(self, 'input')
+        self.current_node.ouput = combo_value(self, 'output')
+        self.current_node.applicability = combo_value(self, 'applicability')
+        self.current_node.comment = self['description'].get_text()
 
         buf = self['commands'].get_buffer()
-        self.current_node.text = buf.get_text(buf.get_start_iter(),
-                                              buf.get_end_iter())
-
-        self.current_node.set('description',
-                          self['description'].get_text())
-
-        for name in ('input', 'output', 'applicability'):
-            combo = self[name]
-            self.current_node.set(name,
-                                  combo.get_model().get_value(
-                                         combo.get_active_iter(),
-                                         self.NAME_COLUMN))
+        script  = buf.get_text(*buf.get_bounds())
+        h = self.compute_hash(script)
+        if h != self.script_hash:
+            # script has changed -> save it
+            self.current_node.save_with_script([line + "\n" for line in script.split("\n")])
+            self.script_hash = h
+        else:
+            self.current_node.save()
 
     def clear_fields(self):
         self['description'].set_text('')
@@ -187,36 +197,45 @@ class Manager:
         self.set_active_by_name('output', Manager.combobox_items['output'][0][0])
         self.set_active_by_name('applicability', Manager.combobox_items['applicability'][0][0])
         self['title'].set_label(_('Edit tool <i>%s</i>:') % '') # a bit ugly, but we're string frozen
-
+    
     def fill_fields(self):
         node = self.current_node
-        self['description'].set_text(default(node.get('description'), _('A Brand New Tool')))
-        self['accelerator'].set_text(default(node.get('accelerator'), ''))
-        self['commands'].get_buffer().set_text(default(node.text, ''))
+        self['description'].set_text(default(node.comment, _('A Brand New Tool')))
+        self['accelerator'].set_text(default(node.shortcut, ''))
+
+        buf = self['commands'].get_buffer()
+        script = default(''.join(node.get_script()), '')
+        buf.set_text(script)
+        self.script_hash = self.compute_hash(script)
+        mimetype = gnomevfs.get_mime_type_for_data(script)
+        language = gsv.SourceLanguagesManager().get_language_from_mime_type(mimetype)
+        if language is not None:
+            buf.set_language(language)
+            buf.set_highlight(True)
+        else:
+            buf.set_highlight(False)
 
         self.set_active_by_name('input',
-                                default(node.get('input'),
+                                default(node.input,
                                         Manager.combobox_items['input'][0][0]))
         self.set_active_by_name('output',
-                                default(node.get('output'),
+                                default(node.output,
                                         Manager.combobox_items['output'][0][0]))
         self.set_active_by_name('applicability',
-                                default(node.get('applicability'),
+                                default(node.applicability,
                                         Manager.combobox_items['applicability'][0][0]))
-        self['title'].set_label(_('Edit tool <i>%s</i>:') % node.get('label'))
+        self['title'].set_label(_('Edit tool <i>%s</i>:') % node.name)
 
     def on_new_tool_button_clicked(self, button):
         self.save_current_tool()
-
+        
         # block handlers while inserting a new item
-        self.model.handler_block(self.row_changed_id)
         self.view.get_selection().handler_block(self.selection_changed_id)
 
-        self.current_node = et.Element('tool');
-        self.current_node.set('label', _('New tool'))
-        self.tools.root.append(self.current_node)
-        piter = self.model.append([self.current_node.get('label'),
-                                   self.current_node])
+        self.current_node = Tool(self.tools.tree);
+        self.current_node.name = _('New tool')
+        self.tools.tree.tools.append(self.current_node)
+        piter = self.model.append([self.current_node.name, self.current_node])
         self.view.set_cursor(self.model.get_path(piter),
                              self.view.get_column(self.LABEL_COLUMN),
                              True)
@@ -224,23 +243,33 @@ class Manager:
         self['tool-table'].set_sensitive(True)
 
         self.view.get_selection().handler_unblock(self.selection_changed_id)
-        self.model.handler_unblock(self.row_changed_id)
 
     def on_remove_tool_button_clicked(self, button):
         piter, node = self.get_selected_tool()
-        self.tools.root.remove(node)
-        self.current_node = None
-        if self.model.remove(piter):
-            self.view.set_cursor(self.model.get_path(piter),
-                                 self.view.get_column(self.LABEL_COLUMN),
-                                 False)
-            self.view.grab_focus()
+
+        if node.is_global():
+            if node.parent.revert_tool(node):
+                if self.current_node.shortcut:
+                    del self.accelerators[self.current_node.shortcut]                
+                self['revert-tool-button'].set_sensitive(False)
+                self.fill_fields()
+        else:
+            if node.parent.delete_tool(node):
+                if self.current_node.shortcut:
+                    del self.accelerators[self.current_node.shortcut]
+                self.current_node = None
+                self.script_hash = None
+                if self.model.remove(piter):
+                    self.view.set_cursor(self.model.get_path(piter),
+                                         self.view.get_column(self.LABEL_COLUMN),
+                                        False)
+                    self.view.grab_focus()
 
     def on_view_label_cell_edited(self, cell, path, new_text):
         if new_text != '':
             piter = self.model.get_iter(path)
             node = self.model.get_value(piter, self.NODE_COLUMN)
-            node.set("label", new_text)
+            node.name = new_text
             self.model.set(piter, self.LABEL_COLUMN, new_text)
             self['title'].set_label(_('Edit tool <i>%s</i>:') % new_text)
 
@@ -248,7 +277,15 @@ class Manager:
         self.save_current_tool()
         piter, node = self.get_selected_tool()
 
-        self['remove-tool-button'].set_sensitive(piter is not None)
+        removable = piter is not None and node is not None and node.is_local()
+        self['remove-tool-button'].set_sensitive(removable)
+        self['revert-tool-button'].set_sensitive(removable)
+        if node is not None and node.is_global():
+            self['remove-tool-button'].hide()
+            self['revert-tool-button'].show()
+        else:
+            self['remove-tool-button'].show()
+            self['revert-tool-button'].hide()
 
         if node is not None:
             self.current_node = node
@@ -258,53 +295,45 @@ class Manager:
             self.clear_fields()
             self['tool-table'].set_sensitive(False)
 
-    def on_tools_model_row_changed(self, model, path, piter):
-        tool = model.get_value(piter, self.NODE_COLUMN)
-        if tool is not self.tools.root[path[0]]:
-            if tool in self.tools.root.items():
-                self.tools.root.remove(tool)
-            self.tools.root.insert(path[0], tool)
-
     def set_accelerator(self, keyval, mod):
         # Check whether accelerator already exists
 
-        tool = self.tools.get_tool_from_accelerator(keyval, mod, self.current_node)
-        if tool is not None:
-            dialog = gtk.MessageDialog(self.dialog,
-                                       gtk.DIALOG_MODAL,
-                                       gtk.MESSAGE_ERROR,
-                                       gtk.BUTTONS_OK,
-                                       _('This accelerator is already bound to %s') % tool.get('label'))
-            dialog.run()
-            dialog.destroy()
-            return False
-
+        if self.current_node.shortcut:
+            del self.accelerators[self.current_node.shortcut]
         name = gtk.accelerator_name(keyval, mod)
         if name != '':
-            self.current_node.set('accelerator', name)
+            if self.accelerators.has_key(name):
+                dialog = gtk.MessageDialog(self.dialog,
+                                           gtk.DIALOG_MODAL,
+                                           gtk.MESSAGE_ERROR,
+                                           gtk.BUTTONS_OK,
+                                           _('This accelerator is already bound to %s') % self.accelerators[name].name)
+                dialog.run()
+                dialog.destroy()
+                return False
+            self.current_node.shortcut = name
+            self.accelerators[name] = self.current_node
         else:
-            self.current_node.set('accelerator', None)
+            self.current_node.shortcut = None
         return True
 
     def on_accelerator_key_press(self, entry, event):
         mask = event.state & gtk.accelerator_get_default_mod_mask()
 
         if event.keyval == gtk.keysyms.Escape:
-            entry.set_text(default(self.current_node.get('accelerator'), ''))
+            entry.set_text(default(self.current_node.shortcut, ''))
             self['commands'].grab_focus()
             return True
         elif event.keyval == gtk.keysyms.Delete \
           or event.keyval == gtk.keysyms.BackSpace:
             entry.set_text('')
-            self.current_node.set('accelerator', '')
+            self.current_node.shortcut = None
             self['commands'].grab_focus()
             return True
-        elif event.keyval in range(gtk.keysyms.F1, gtk.keysyms.F12):
+        elif event.keyval in range(gtk.keysyms.F1, gtk.keysyms.F12 + 1):
             # New accelerator
             self.set_accelerator(event.keyval, mask)
-            entry.set_text(
-                       default(self.current_node.get('accelerator'),
-                               ''))
+            entry.set_text(default(self.current_node.shortcut, ''))
             self['commands'].grab_focus()
             # Capture all `normal characters`
             return True
@@ -312,9 +341,7 @@ class Manager:
             if mask:
                 # New accelerator
                 self.set_accelerator(event.keyval, mask)
-                entry.set_text(
-                   default(self.current_node.get('accelerator'),
-                           ''))
+                entry.set_text(default(self.current_node.shortcut, ''))
                 self['commands'].grab_focus()
             # Capture all `normal characters`
             return True
@@ -322,16 +349,17 @@ class Manager:
             return False
 
     def on_accelerator_focus_in(self, entry, event):
+        pass
         if self.current_node is None:
             return
-        if self.current_node.get('accelerator'):
+        if self.current_node.shortcut:
             entry.set_text(_('Type a new accelerator, or press Backspace to clear'))
         else:
             entry.set_text(_('Type a new accelerator'))
 
     def on_accelerator_focus_out(self, entry, event):
         if self.current_node is not None:
-            entry.set_text(default(self.current_node.get('accelerator'), ''))
+            entry.set_text(default(self.current_node.shortcut, ''))
 
     def on_tool_manager_dialog_response(self, dialog, response):
         if response == gtk.RESPONSE_HELP:
@@ -343,7 +371,6 @@ class Manager:
         self.dialog.destroy()
         self.dialog = None
 
-        self.tools.save()
         update_tools_menu(tools = self.tools)
         self.tools = None
 
