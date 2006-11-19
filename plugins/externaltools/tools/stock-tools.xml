@@ -1,7 +1,0 @@
-<tools>
-<tool accelerator="F8" applicability="local" description="Run &quot;make&quot; in the document directory" input="nothing" label="Build" output="output-panel">make</tool>
-<tool accelerator="&lt;Alt&gt;F12" applicability="all" description="Remove spaces from the end of lines in the document" input="document" label="Remove Trailing Spaces" output="replace-document">sed 's/[[:blank:]]*$//'</tool>
-<tool accelerator="&lt;Shift&gt;&lt;Control&gt;d" applicability="titled" description="List the contents of this document's folder in a new document" input="nothing" label="Directory Listing" output="new-document">gnomevfs-ls $GEDIT_CURRENT_DOCUMENT_DIR</tool>
-<tool accelerator="" applicability="local" description="Search for a pattern in the files in this document's folder" input="nothing" label="Grep" output="output-panel" shortcut-key="F8">grep `zenity --entry --text="Text to search"` *</tool>
-<tool applicability="local" description="Display the environment variables list in the bottom pane" input="nothing" label="Environment Variables" output="output-panel">env</tool>
-</tools>
