@@ -62,6 +62,7 @@ NOINST_H_FILES =			\
 	gedit-documents-panel.h		\
 	gedit-document-loader.h		\
 	gedit-document-saver.h		\
+	gedit-history-entry.h		\
 	gedit-io-error-message-area.h	\
 	gedit-spinner.h			\
 	gedit-prefs-manager-private.h	\
@@ -126,6 +127,7 @@ libgedit_la_SOURCES = 			\
 	gedit-encodings-option-menu.c	\
 	gedit-file-chooser-dialog.c	\
 	gedit-help.c			\
+	gedit-history-entry.c		\
 	gedit-io-error-message-area.c	\
 	gedit-languages-manager.c	\
 	gedit-message-area.c		\
