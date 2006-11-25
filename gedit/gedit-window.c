@@ -204,7 +204,6 @@ static void
 gedit_window_destroy (GtkObject *object)
 {
 	GeditWindow *window;
-	gint pane_page;
 
 	window = GEDIT_WINDOW (object);
 
@@ -1061,7 +1060,7 @@ recent_manager_changed (GtkRecentManager *manager,
 	update_recent_files_menu (window);
 }
 
-#define TIP_MAX_URI_LEN 100
+
 
 /*
  * Manually construct the inline recents list in the File menu.
@@ -1110,7 +1109,7 @@ update_recent_files_menu (GeditWindow *window)
 		gchar *escaped;
 		gchar *label;
 		gchar *uri;
-		gchar *trunc_uri;
+		gchar *ruri;
 		gchar *tip;
 		GtkAction *action;
 		GtkRecentInfo *info = l->data;
@@ -1142,13 +1141,12 @@ update_recent_files_menu (GeditWindow *window)
 		/* gtk_recent_info_get_uri_display (info) is buggy and
 		 * works only for local files */
 		uri = gedit_utils_format_uri_for_display (gtk_recent_info_get_uri (info));
-		trunc_uri = gedit_utils_str_middle_truncate (uri,
-							     TIP_MAX_URI_LEN);
+		ruri = gedit_utils_replace_home_dir_with_tilde (uri);
 		g_free (uri);
 
 		/* Translators: %s is a URI */
-		tip = g_strdup_printf (_("Open '%s'"), trunc_uri);
-		g_free (trunc_uri);
+		tip = g_strdup_printf (_("Open '%s'"), ruri);
+		g_free (ruri);
 
 		action = gtk_action_new (action_name,
 					 label,
@@ -1184,8 +1182,6 @@ update_recent_files_menu (GeditWindow *window)
 	g_list_foreach (items, (GFunc) gtk_recent_info_unref, NULL);
 	g_list_free (items);
 }
-
-#undef TIP_MAX_URI_LEN
 
 static void
 set_non_homogeneus (GtkWidget *widget, gpointer data)
@@ -1439,6 +1435,27 @@ documents_list_menu_activate (GtkToggleAction *action,
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (window->priv->notebook), n);
 }
 
+static gchar *
+get_menu_tip_for_tab (GeditTab *tab)
+{
+	GeditDocument *doc;
+	gchar *uri;
+	gchar *ruri;
+	gchar *tip;
+
+	doc = gedit_tab_get_document (tab);
+
+	uri = gedit_document_get_uri_for_display (doc);
+	ruri = gedit_utils_replace_home_dir_with_tilde (uri);
+	g_free (uri);
+
+	/* Translators: %s is a URI */
+	tip =  g_strdup_printf (_("Activate '%s'"), ruri);
+	g_free (ruri);
+	
+	return tip;
+}
+
 static void
 update_documents_list_menu (GeditWindow *window)
 {
@@ -1493,7 +1510,7 @@ update_documents_list_menu (GeditWindow *window)
 		action_name = g_strdup_printf ("Tab_%d", i);
 		tab_name = _gedit_tab_get_name (GEDIT_TAB (tab));
 		name = gedit_utils_escape_underscores (tab_name, -1);
-		tip =  g_strdup_printf (_("Activate %s"), tab_name);
+		tip =  get_menu_tip_for_tab (GEDIT_TAB (tab));
 
 		/* alt + 1, 2, 3... 0 to switch to the first ten tabs */
 		accel = (i < 10) ? g_strdup_printf ("<alt>%d", (i + 1) % 10) : NULL;
@@ -2143,7 +2160,7 @@ sync_name (GeditTab    *tab,
 
 	tab_name = _gedit_tab_get_name (tab);
 	escaped_name = gedit_utils_escape_underscores (tab_name, -1);
-	tip =  g_strdup_printf (_("Activate %s"), tab_name);
+	tip =  get_menu_tip_for_tab (tab);
 
 	g_object_set (action, "label", escaped_name, NULL);
 	g_object_set (action, "tooltip", tip, NULL);
