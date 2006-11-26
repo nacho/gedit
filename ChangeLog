@@ -1,3 +1,12 @@
+2006-11-26  Steve Frécinaux  <code@istique.net>
+
+	* gedit/gedit-document-loader.c: don't add the trailing \n to the
+	buffer (to avoid having an empty last line). This is the way vim does.
+	Fixes bug #324942.
+	
+	* gedit/gedit-document-saver.c: always add a trailing \n (to be
+	consistent with the way the loader works).
+
 2006-11-25  Steve Frécinaux  <code@istique.net>
 
 	* gedit/gedit-window.c: show the whole file URI in the document menu

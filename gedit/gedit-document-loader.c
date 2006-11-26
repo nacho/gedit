@@ -257,6 +257,11 @@ insert_text_in_document (GeditDocumentLoader *loader,
 	gtk_source_buffer_begin_not_undoable_action (
 				GTK_SOURCE_BUFFER (loader->priv->document));
 
+	/* If the last char is a newline, don't add it to the buffer
+	(otherwise GtkTextView shows it as an empty line). See bug #324942. */
+	if (text[len-1] == '\n')
+		len--;
+
 	/* Insert text in the buffer */
 	gtk_text_buffer_set_text (GTK_TEXT_BUFFER (loader->priv->document), 
 				  text, 

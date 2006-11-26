@@ -191,7 +191,6 @@ write_document_contents (gint                  fd,
 	GtkTextIter end_iter;
 	gchar *contents;
 	gsize len;
-	gboolean add_cr;
 	ssize_t written;
 	gboolean res;
 
@@ -201,11 +200,6 @@ write_document_contents (gint                  fd,
 	contents = gtk_text_buffer_get_slice (doc, &start_iter, &end_iter, TRUE);
 
 	len = strlen (contents);
-
-	if (len >= 1)
-		add_cr = (*(contents + len - 1) != '\n');
-	else
-		add_cr = FALSE;
 
 	if (encoding != gedit_encoding_get_utf8 ())
 	{
@@ -263,8 +257,9 @@ write_document_contents (gint                  fd,
 		while (to_write > 0);
 	}
 
-	/* Add \n at the end if needed */
-	if (res && add_cr)
+	/* make sure files are always terminated with \n (see bug #95676). Note
+	that we strip the trailing \n when loading the file */
+	if (res)
 	{
 		if (encoding != gedit_encoding_get_utf8 ())
 		{
