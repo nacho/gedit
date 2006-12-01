@@ -111,40 +111,40 @@ static GtkTreeModelFlags gedit_file_browser_store_get_flags (GtkTreeModel * tree
 static gint gedit_file_browser_store_get_n_columns          (GtkTreeModel * tree_model);
 static GType gedit_file_browser_store_get_column_type       (GtkTreeModel * tree_model,
 							     gint index);
-
 static gboolean gedit_file_browser_store_get_iter           (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter,
 							     GtkTreePath * path);
-
 static GtkTreePath *gedit_file_browser_store_get_path       (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter);
-
 static void gedit_file_browser_store_get_value              (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter,
 							     gint column,
 							     GValue * value);
-
 static gboolean gedit_file_browser_store_iter_next          (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter);
-
 static gboolean gedit_file_browser_store_iter_children      (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter,
 							     GtkTreeIter * parent);
-
 static gboolean gedit_file_browser_store_iter_has_child     (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter);
-
 static gint gedit_file_browser_store_iter_n_children        (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter);
-
 static gboolean gedit_file_browser_store_iter_nth_child     (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter,
 							     GtkTreeIter * parent, 
 							     gint n);
-
 static gboolean gedit_file_browser_store_iter_parent        (GtkTreeModel * tree_model,
 							     GtkTreeIter * iter,
 							     GtkTreeIter * child);
+
+static void gedit_file_browser_store_drag_source_init       (GtkTreeDragSourceIface * iface);
+static gboolean gedit_file_browser_store_row_draggable      (GtkTreeDragSource * drag_source,
+							     GtkTreePath       * path);
+static gboolean gedit_file_browser_store_drag_data_delete   (GtkTreeDragSource * drag_source,
+							     GtkTreePath       * path);
+static gboolean gedit_file_browser_store_drag_data_get      (GtkTreeDragSource * drag_source,
+							     GtkTreePath       * path,
+							     GtkSelectionData  * selection_data);
 
 static void file_browser_node_free                          (GeditFileBrowserStore * model,
 							     FileBrowserNode * node);
@@ -170,7 +170,9 @@ static void on_directory_monitor_event                      (GnomeVFSMonitorHand
 GEDIT_PLUGIN_DEFINE_TYPE_WITH_CODE (GeditFileBrowserStore, gedit_file_browser_store,
 			G_TYPE_OBJECT,
 			G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_MODEL,
-					       gedit_file_browser_store_iface_init))
+					       gedit_file_browser_store_iface_init)
+			G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
+					       gedit_file_browser_store_drag_source_init))
 
 /* Properties */
 enum {
@@ -344,6 +346,14 @@ gedit_file_browser_store_iface_init (GtkTreeModelIface * iface)
 	iface->iter_n_children = gedit_file_browser_store_iter_n_children;
 	iface->iter_nth_child = gedit_file_browser_store_iter_nth_child;
 	iface->iter_parent = gedit_file_browser_store_iter_parent;
+}
+
+static void
+gedit_file_browser_store_drag_source_init (GtkTreeDragSourceIface * iface)
+{
+	iface->row_draggable = gedit_file_browser_store_row_draggable;
+	iface->drag_data_delete = gedit_file_browser_store_drag_data_delete;
+	iface->drag_data_get = gedit_file_browser_store_drag_data_get;
 }
 
 static void
@@ -807,6 +817,50 @@ gedit_file_browser_store_iter_parent (GtkTreeModel * tree_model,
 
 	iter->user_data = node->parent;
 	return TRUE;
+}
+
+static gboolean
+gedit_file_browser_store_row_draggable (GtkTreeDragSource * drag_source,
+					GtkTreePath       * path)
+{
+	return TRUE;
+}
+
+static gboolean
+gedit_file_browser_store_drag_data_delete (GtkTreeDragSource * drag_source,
+					   GtkTreePath       * path)
+{
+	return FALSE;
+}
+
+static gboolean
+gedit_file_browser_store_drag_data_get (GtkTreeDragSource * drag_source,
+					GtkTreePath       * path,
+					GtkSelectionData  * selection_data)
+{
+	GtkTreeIter iter;
+	gchar *uri;
+	gchar *uris[2] = {0, };
+	gboolean ret;
+
+	if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (drag_source),
+				      &iter, path))
+	{
+		return FALSE;
+	}
+
+	gtk_tree_model_get (GTK_TREE_MODEL (drag_source), &iter,
+			    GEDIT_FILE_BROWSER_STORE_COLUMN_URI, &uri,
+			    -1);
+
+	g_assert (uri);
+
+	uris[0] = uri;
+	ret = gtk_selection_data_set_uris (selection_data, uris);
+
+	g_free (uri);
+
+	return ret;
 }
 
 #define FILTER_HIDDEN(mode) (mode & GEDIT_FILE_BROWSER_STORE_FILTER_MODE_HIDE_HIDDEN)

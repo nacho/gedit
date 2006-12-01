@@ -42,13 +42,17 @@ struct _GeditFileBrowserViewPrivate
 };
 
 /* Signals */
-enum 
+enum
 {
 	ERROR,
 	NUM_SIGNALS
 };
 
 static guint signals[NUM_SIGNALS] = { 0 };
+
+static const GtkTargetEntry drag_source_targets[] = {
+	{ "text/uri-list", 0, 0 }
+};
 
 GEDIT_PLUGIN_DEFINE_TYPE (GeditFileBrowserView, gedit_file_browser_view,
 	                  GTK_TYPE_TREE_VIEW)
@@ -256,6 +260,12 @@ gedit_file_browser_view_init (GeditFileBrowserView * obj)
 	gtk_tree_view_append_column (GTK_TREE_VIEW (obj),
 				     obj->priv->column);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (obj), FALSE);
+
+	gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (obj),
+						GDK_BUTTON1_MASK,
+						drag_source_targets,
+						G_N_ELEMENTS (drag_source_targets),
+						GDK_ACTION_COPY);
 }
 
 static gboolean
