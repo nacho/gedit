@@ -1072,6 +1072,7 @@ update_recent_files_menu (GeditWindow *window)
 	GeditWindowPrivate *p = window->priv;
 	gint max_recents;
 	GList *actions, *l, *items;
+	GList *filtered_items = NULL;
 	gint i;
 
 	gedit_debug (DEBUG_WINDOW);
@@ -1099,10 +1100,23 @@ update_recent_files_menu (GeditWindow *window)
 
 	items = gtk_recent_manager_get_items (p->recent_manager);
 
-	items = g_list_sort (items, (GCompareFunc) sort_recents_mru);
+	/* filter */
+	for (l = items; l != NULL; l = l->next)
+	{
+		GtkRecentInfo *info = l->data;
+
+		if (!gtk_recent_info_has_group (info, "gedit"))
+			continue;
+
+		filtered_items = g_list_prepend (filtered_items, info);
+	}
+
+	/* sort */
+	filtered_items = g_list_sort (filtered_items,
+				      (GCompareFunc) sort_recents_mru);
 
 	i = 0;
-	for (l = items; l != NULL; l = l->next)
+	for (l = filtered_items; l != NULL; l = l->next)
 	{
 		gchar *action_name;
 		const gchar *display_name;
@@ -1117,10 +1131,6 @@ update_recent_files_menu (GeditWindow *window)
 		/* clamp */
 		if (i >= max_recents)
 			break;
-
-		/* filter */
-		if (!gtk_recent_info_has_group (info, "gedit"))
-			continue;
 
 		i++;
 
@@ -1178,6 +1188,8 @@ update_recent_files_menu (GeditWindow *window)
 		g_free (label);
 		g_free (tip);
 	}
+
+	g_list_free (filtered_items);
 
 	g_list_foreach (items, (GFunc) gtk_recent_info_unref, NULL);
 	g_list_free (items);
