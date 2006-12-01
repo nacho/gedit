@@ -520,7 +520,28 @@ load_local_file_real (GeditDocumentLoader *loader)
 
 		goto done;
 	}
-	
+
+	/* not a regular file */
+	if (!S_ISREG (statbuf.st_mode))
+	{
+		if (S_ISDIR (statbuf.st_mode))
+		{
+			g_set_error (&loader->priv->error,
+				     GEDIT_DOCUMENT_ERROR,
+				     GNOME_VFS_ERROR_IS_DIRECTORY,
+				     gnome_vfs_result_to_string (GNOME_VFS_ERROR_IS_DIRECTORY));
+		}
+		else
+		{
+			g_set_error (&loader->priv->error,
+				     GEDIT_DOCUMENT_ERROR,
+				     GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE,
+				     "Not a regular file");
+		}
+
+		goto done;
+	}
+
 	loader->priv->info = gnome_vfs_file_info_new ();
 	stat_to_file_info (loader->priv->info, &statbuf);
 	GNOME_VFS_FILE_INFO_SET_LOCAL (loader->priv->info, TRUE);
