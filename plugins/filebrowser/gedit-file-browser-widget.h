@@ -106,7 +106,6 @@ gulong gedit_file_browser_widget_add_filter         (GeditFileBrowserWidget * ob
                                                      gpointer user_data);
 void gedit_file_browser_widget_remove_filter        (GeditFileBrowserWidget * obj,
                                                      gulong id);
-GtkVBox *gedit_file_browser_widget_get_filter_vbox  (GeditFileBrowserWidget * obj);
 void gedit_file_browser_widget_set_filter_pattern   (GeditFileBrowserWidget * obj,
                                                      gchar const *pattern);
 

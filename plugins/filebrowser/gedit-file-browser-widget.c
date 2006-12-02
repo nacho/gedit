@@ -121,7 +121,6 @@ struct _GeditFileBrowserWidgetPrivate
 	GdkCursor *cursor;
 
 	GtkWidget *filter_expander;
-	GtkWidget *filter_vbox;
 	GtkWidget *filter_entry;
 
 	GtkUIManager *manager;
@@ -715,16 +714,16 @@ fill_combo_model (GeditFileBrowserWidget * obj)
 
 	gtk_tree_store_append (store, &iter, NULL);
 	gtk_tree_store_set (store, &iter,
-			    COLUMN_ICON, gedit_file_browser_utils_pixbuf_from_theme(GTK_STOCK_HOME, GTK_ICON_SIZE_MENU),
+			    COLUMN_ICON, gedit_file_browser_utils_pixbuf_from_theme (GTK_STOCK_HOME, GTK_ICON_SIZE_MENU),
 			    COLUMN_NAME, _("Bookmarks"),
 			    COLUMN_ID, BOOKMARKS_ID, -1);
-
-	/*gtk_tree_store_append(store, &iter, NULL);
-	   gtk_tree_store_set(store, &iter,
-	   COLUMN_ICON, GTK_STOCK_OPEN,
-	   COLUMN_NAME, "Recent",
-	   COLUMN_ID, RECENT_ID, -1); */
-
+#if 0
+	gtk_tree_store_append (store, &iter, NULL);
+	gtk_tree_store_set (store, &iter,
+			    COLUMN_ICON, gedit_file_browser_utils_pixbuf_from_theme (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU),
+			    COLUMN_NAME, _("Recent Files"),
+			    COLUMN_ID, RECENTS_ID, -1);
+#endif
 	gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX
 					      (obj->priv->combo),
 					      separator_func, obj, NULL);
@@ -803,7 +802,7 @@ static GtkActionEntry toplevel_actions[] =
 	{"FilterMenuAction", NULL, "_Filter"}
 };
 
-static GtkActionEntry tree_actions[] = 
+static const GtkActionEntry tree_actions[] = 
 {
 	{"DirectoryNew", GTK_STOCK_ADD, N_("_New Directory"), NULL,
 	 N_("Add new empty directory"),
@@ -814,7 +813,7 @@ static GtkActionEntry tree_actions[] =
 	 N_("Open the parent folder"), G_CALLBACK (on_action_directory_up)}
 };
 
-static GtkActionEntry tree_actions_selection[] = 
+static const GtkActionEntry tree_actions_selection[] = 
 {
 	{"FileRename", NULL, N_("_Rename"), NULL,
 	 N_("Rename selected file or directory"),
@@ -827,7 +826,7 @@ static GtkActionEntry tree_actions_selection[] =
 	 G_CALLBACK (on_action_file_delete)}
 };
 
-static GtkActionEntry tree_actions_sensitive[] = 
+static const GtkActionEntry tree_actions_sensitive[] = 
 {
 	{"DirectoryPrevious", GTK_STOCK_GO_BACK, N_("_Previous Location"),
 	 NULL,
@@ -842,7 +841,7 @@ static GtkActionEntry tree_actions_sensitive[] =
 	 G_CALLBACK (on_action_directory_open)}
 };
 
-static GtkToggleActionEntry tree_actions_toggle[] = 
+static const GtkToggleActionEntry tree_actions_toggle[] = 
 {
 	{"FilterHidden", GTK_STOCK_DIALOG_AUTHENTICATION,
 	 N_("Show _Hidden"), NULL,
@@ -1127,7 +1126,7 @@ create_filter (GeditFileBrowserWidget * obj)
 	GtkWidget *vbox;
 	GtkWidget *entry;
 
-	expander = gtk_expander_new (_("Advanced filtering"));
+	expander = gtk_expander_new_with_mnemonic (_("_Advanced filtering"));
 	gtk_widget_show (expander);
 	gtk_box_pack_start (GTK_BOX (obj), expander, FALSE, FALSE, 0);
 
@@ -1135,7 +1134,6 @@ create_filter (GeditFileBrowserWidget * obj)
 	gtk_widget_show (vbox);
 
 	obj->priv->filter_expander = expander;
-	obj->priv->filter_vbox = vbox;
 
 	entry = gtk_entry_new ();
 	gtk_widget_show (entry);
@@ -1813,12 +1811,6 @@ gedit_file_browser_widget_remove_filter (GeditFileBrowserWidget * obj,
 	}
 }
 
-GtkVBox *
-gedit_file_browser_widget_get_filter_vbox (GeditFileBrowserWidget * obj)
-{
-	return GTK_VBOX (obj->priv->filter_vbox);
-}
-
 void 
 gedit_file_browser_widget_set_filter_pattern (GeditFileBrowserWidget * obj,
                                               gchar const *pattern)
@@ -2055,7 +2047,7 @@ on_model_set (GObject * gobject, GParamSpec * arg1,
 			      "DirectoryPrevious"), TRUE);
 		}
 
-		gtk_widget_set_sensitive (obj->priv->filter_vbox, FALSE);
+		gtk_widget_set_sensitive (obj->priv->filter_expander, FALSE);
 	} else if (GEDIT_IS_FILE_BROWSER_STORE (model)) {
 		add_signal (obj, model,
 			    g_signal_connect (model, "begin-loading",
@@ -2075,7 +2067,7 @@ on_model_set (GObject * gobject, GParamSpec * arg1,
 			    g_signal_connect (model, "error",
 					      G_CALLBACK
 					      (on_file_store_error), obj));
-		gtk_widget_set_sensitive (obj->priv->filter_vbox, TRUE);
+		gtk_widget_set_sensitive (obj->priv->filter_expander, TRUE);
 	}
 
 	update_sensitivity (obj);
@@ -2114,6 +2106,7 @@ on_combo_changed (GtkComboBox * combo, GeditFileBrowserWidget * obj)
 	case BOOKMARKS_ID:
 		gedit_file_browser_widget_show_bookmarks (obj);
 		break;
+
 	case PATH_ID:
 		gtk_tree_model_get (GTK_TREE_MODEL
 				    (obj->priv->combo_model), &iter,
