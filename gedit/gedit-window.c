@@ -255,29 +255,34 @@ gedit_window_configure_event (GtkWidget         *widget,
  * GtkWindow catches keybindings for the menu items _before_ passing them to
  * the focused widget. This is unfortunate and means that pressing ctrl+V
  * in an entry on a panel ends up pasting text in the TextView.
- * Here we force events to be first  passed to the focused widget and then
- * we chain up the default handler... this is the opposite of Gtk default
- * behavior so we need to keep an eye open to see if anything breaks.
+ * Here we override GtkWindow's handler to do the same things that it
+ * does, but in the opposite order and then we chain up to the grand
+ * parent handler, skipping gtk_window_key_press_event.
  */
 static gboolean
 gedit_window_key_press_event (GtkWidget   *widget,
 			      GdkEventKey *event)
 {
-	GtkWidget *focused_widget;
+	static gpointer grand_parent_class = NULL;
+	GtkWindow *window = GTK_WINDOW (widget);
 	gboolean handled = FALSE;
 
-	focused_widget = gtk_window_get_focus (GTK_WINDOW (widget));
+	if (grand_parent_class == NULL)
+		grand_parent_class = g_type_class_peek_parent (gedit_window_parent_class);
 
-	if (focused_widget)
-	{
-		handled = gtk_widget_event (focused_widget,
-					    (GdkEvent*) event);
-	}
+	/* handle focus widget key events */
+	if (!handled)
+		handled = gtk_window_propagate_key_event (window, event);
 
-	if (handled)
-		return TRUE;
-	else
-		return GTK_WIDGET_CLASS (gedit_window_parent_class)->key_press_event (widget, event);
+	/* handle mnemonics and accelerators */
+	if (!handled)
+		handled = gtk_window_activate_key (window, event);
+
+	/* Chain up, invokes binding set */
+	if (!handled)
+		handled = GTK_WIDGET_CLASS (grand_parent_class)->key_press_event (widget, event);
+
+	return handled;
 }
 
 static void
