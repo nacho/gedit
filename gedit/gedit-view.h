@@ -55,11 +55,11 @@ typedef struct _GeditViewPrivate	GeditViewPrivate;
  * Main object structure
  */
 typedef struct _GeditView		GeditView;
- 
+
 struct _GeditView
 {
 	GtkSourceView view;
-	
+
 	/*< private > */
 	GeditViewPrivate *priv;
 };
@@ -68,13 +68,13 @@ struct _GeditView
  * Class definition
  */
 typedef struct _GeditViewClass		GeditViewClass;
- 
+
 struct _GeditViewClass
 {
 	GtkSourceViewClass parent_class;
-	
+
 	/* FIXME: Do we need placeholders ? */
-	
+
 	/* Key bindings */
 	gboolean (* start_interactive_search)	(GeditView       *view);
 	gboolean (* start_interactive_goto_line)(GeditView       *view);	

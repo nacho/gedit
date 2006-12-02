@@ -759,7 +759,7 @@ _gedit_cmd_search_goto_line (GtkAction   *action,
 }
 
 void
-_gedit_cmd_search_interactive_search (GtkAction   *action,
+_gedit_cmd_search_incremental_search (GtkAction   *action,
 				      GeditWindow *window)
 {
 	GeditView *active_view;
@@ -771,10 +771,10 @@ _gedit_cmd_search_interactive_search (GtkAction   *action,
 		return;
 
 	/* Focus the view if needed: we need to focus the view otherwise 
-	   activating the binding for interactive search has no effect */
+	   activating the binding for incremental search has no effect */
 	gtk_widget_grab_focus (GTK_WIDGET (active_view));
 	
-	/* interactive search is builtin in GeditView, just activate
+	/* incremental search is builtin in GeditView, just activate
 	 * the corrisponding binding.
 	 */
 	gtk_bindings_activate (GTK_OBJECT (active_view),

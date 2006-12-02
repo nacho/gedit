@@ -126,8 +126,8 @@ static const GtkActionEntry gedit_menu_entries[] =
 	  N_("Clear highlighting of search matches"), G_CALLBACK (_gedit_cmd_search_clear_highlight) },
 	{ "SearchGoToLine", GTK_STOCK_JUMP_TO, N_("Go to _Line..."), "<control>I",
 	  N_("Go to a specific line"), G_CALLBACK (_gedit_cmd_search_goto_line) },
-	{ "SearchInteractiveSearch", GTK_STOCK_FIND, N_("Interactive search..."), "<control>K",
-	  N_("Interactively search for text"), G_CALLBACK (_gedit_cmd_search_interactive_search) },
+	{ "SearchIncrementalSearch", GTK_STOCK_FIND, N_("Incremental search..."), "<control>K",
+	  N_("Incrementally search for text"), G_CALLBACK (_gedit_cmd_search_incremental_search) },
 
 	/* Documents menu */
 	{ "FileSaveAll", GTK_STOCK_SAVE, N_("_Save All"), "<shift><control>L",
