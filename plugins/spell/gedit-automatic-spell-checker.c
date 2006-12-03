@@ -586,9 +586,9 @@ add_word_signal_cb (GeditSpellChecker          *checker,
 }
 
 static void 
-set_language_cb (GeditSpellChecker          *checker,
-		 const GeditLanguage        *lang,
-		 GeditAutomaticSpellChecker *spell)
+set_language_cb (GeditSpellChecker               *checker,
+		 const GeditSpellCheckerLanguage *lang,
+		 GeditAutomaticSpellChecker      *spell)
 {
 	gedit_automatic_spell_checker_recheck_all (spell);
 }

@@ -41,6 +41,7 @@
 
 #include "gedit-spell-language-dialog.h"
 
+#include "gedit-spell-checker-language.h"
 
 enum
 {
@@ -103,7 +104,7 @@ ok_button_pressed (GeditSpellLanguageDialog *dialog)
 {
 	GError *error = NULL;
 	GValue value = {0, };
-	const GeditLanguage* lang;
+	const GeditSpellCheckerLanguage* lang;
 
 	GtkTreeIter iter;
 	GtkTreeSelection *selection;
@@ -117,7 +118,7 @@ ok_button_pressed (GeditSpellLanguageDialog *dialog)
 	gtk_tree_model_get_value (dialog->model, &iter,
 			    COLUMN_LANGUAGE_POINTER, &value);
 
-	lang = (const GeditLanguage* ) g_value_get_pointer (&value);
+	lang = (const GeditSpellCheckerLanguage* ) g_value_get_pointer (&value);
 	g_return_if_fail (lang != NULL);
 	
 	gedit_spell_checker_set_language (dialog->spell_checker, lang, &error);
@@ -144,17 +145,16 @@ init_languages_treeview_model (GeditSpellLanguageDialog *dlg)
 
 	while (langs)
 	{
-		gchar *name;
+		const gchar *name;
 
-		name = gedit_language_to_string ((const GeditLanguage*)langs->data);
+		name = gedit_spell_checker_language_to_string ((const GeditSpellCheckerLanguage*)langs->data);
 	       	
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
 				    COLUMN_LANGUAGE_NAME, name,
 				    COLUMN_LANGUAGE_POINTER, langs->data,
 				    -1);
-		g_free (name);
-
+				    
 		if (langs->data == gedit_spell_checker_get_language (dlg->spell_checker))
 		{
 			GtkTreeSelection *selection;

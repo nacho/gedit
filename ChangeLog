@@ -1,3 +1,13 @@
+2006-12-04  Paolo Maggi  <paolo@gnome.org>
+
+	* configure.ac:
+	* plugins/spell/*:
+
+	Switch the spell plugin to the enchant library and use
+	the iso-codes package to retrieve language names.
+	The port to the enchant spell checking library is based
+	on a patch by Sertaç Ö. Yıldız. Bug #365899.
+
 2006-12-02  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-window.c (gedit_window_key_press_event): avoid
@@ -195,8 +205,8 @@
 
 2006-11-05  Joachim Noreiko  <jnoreiko@yahoo.com>
 
- * plugins/externaltools/tools/stock-tools.xml: fixing a few mistakes 
-   in the status bar descriptions of the stock External Tools. Bug 352950.
+	 * plugins/externaltools/tools/stock-tools.xml: fixing a few mistakes 
+	 in the status bar descriptions of the stock External Tools. Bug 352950.
 
 === gedit 2.16.2 ===
 

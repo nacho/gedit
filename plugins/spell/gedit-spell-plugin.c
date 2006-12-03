@@ -126,7 +126,7 @@ gedit_spell_plugin_finalize (GObject *object)
 
 static void 
 set_spell_language_cb (GeditSpellChecker   *spell,
-		       const GeditLanguage *lang,
+		       const GeditSpellCheckerLanguage *lang,
 		       GeditDocument 	   *doc)
 {
 	gchar *uri;
@@ -138,16 +138,15 @@ set_spell_language_cb (GeditSpellChecker   *spell,
 
 	if (uri != NULL)
 	{
-		gchar *key;
+		const gchar *key;
 
-		key = gedit_language_to_key (lang);
+		key = gedit_spell_checker_language_to_key (lang);
 		g_return_if_fail (key != NULL);
 
 		gedit_metadata_manager_set (uri, 
 					    "spell-language",
 					    key);
 
-		g_free (key);
 		g_free (uri);
 	}
 }
@@ -175,14 +174,14 @@ get_spell_checker_from_document (GeditDocument *doc)
 		if (uri != NULL)
 		{
 			gchar *key;
-			const GeditLanguage *lang = NULL;
+			const GeditSpellCheckerLanguage *lang = NULL;
 
 			key = gedit_metadata_manager_get (uri,
 							  "spell-language");
 
 			if (key != NULL)
 			{
-				lang = gedit_language_from_key (key);
+				lang = gedit_spell_checker_language_from_key (key);
 				g_free (key);
 			}
 
@@ -199,7 +198,7 @@ get_spell_checker_from_document (GeditDocument *doc)
 					 spell, 
 					 (GDestroyNotify) g_object_unref);
 
-		g_signal_connect (G_OBJECT (spell),
+		g_signal_connect (spell,
 				  "set_language",
 				  G_CALLBACK (set_spell_language_cb),
 				  doc);
@@ -239,12 +238,12 @@ update_current (GeditDocument *doc,
 
 	g_return_if_fail (doc != NULL);
 	g_return_if_fail (current >= 0);
-	
+
 	range = get_check_range (doc);
 	g_return_if_fail (range != NULL);
 
 	gtk_text_buffer_get_iter_at_offset (GTK_TEXT_BUFFER (doc), 
-			&iter, current);
+					    &iter, current);
 
 	if (!gtk_text_iter_inside_word (&iter))
 	{	
@@ -263,18 +262,21 @@ update_current (GeditDocument *doc,
 			gtk_text_iter_backward_word_start (&iter);	
 	}
 
-	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc), &end_iter,
-			range->end_mark);
+	gtk_text_buffer_get_iter_at_mark (GTK_TEXT_BUFFER (doc),
+					  &end_iter,
+					  range->end_mark);
 
 	if (gtk_text_iter_compare (&end_iter, &iter) < 0)
 	{	
-		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc), range->current_mark,
-				&end_iter);
+		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
+					   range->current_mark,
+					   &end_iter);
 	}
 	else
 	{
-		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc), range->current_mark,
-				&iter);
+		gtk_text_buffer_move_mark (GTK_TEXT_BUFFER (doc),
+					   range->current_mark,
+					   &iter);
 	}
 }
 

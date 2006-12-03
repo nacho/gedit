@@ -56,34 +56,63 @@ AM_GLIB_GNU_GETTEXT
 
 
 dnl ================================================================
-dnl pspell checks
+dnl spell plugins checks: enchant and iso-codes
 dnl ================================================================
 
-AC_MSG_CHECKING([for aspell/pspell])
-if pspell-config version > /dev/null 2>&1; then
-	pspell_ver=`pspell-config version`
-	pspell_num=`echo ${pspell_ver} | awk 'BEGIN {FS="."}{printf $1*10000 + $2*100 + $3;}'`
-	if test ${pspell_num} -lt 1200; then
-		AC_MSG_RESULT([pspell version .12 or later required, you have ${pspell_ver} installed])
-	else
-		AC_MSG_RESULT([found ($pspell_ver)])
+ENCHANT_REQUIRED=1.2.0
+ISO_CODES_REQUIRED=0.35
+	
+AC_ARG_ENABLE([spell],
+	AS_HELP_STRING([--disable-spell],[Disable spell plugin (default: enabled)]),
+	[enable_enchant=$enableval],
+	[enable_enchant=yes])
 
-		AC_CHECK_HEADER(pspell/pspell.h,
-			[AC_CHECK_LIB(aspell, new_aspell_speller, 
-				[PSPELL_LIBS="-laspell" SPELL_PLUGIN_DIR="spell" AC_SUBST(SPELL_PLUGIN_DIR)],
-   				[AC_CHECK_LIB(pspell, new_pspell_manager, 
-					[PSPELL_LIBS="-lpspell" SPELL_PLUGIN_DIR="spell" AC_SUBST(SPELL_PLUGIN_DIR)],
-					[AC_MSG_WARN([You must have the aspell or pspell dev packages to build the spell plugin.])] 
-				)]
-			)],
-			[AC_MSG_WARN([You must have the aspell or pspell dev packages to build the spell plugin.])] 
-		)
+if test "x$enable_enchant" = "xyes" ; then
+
+	PKG_CHECK_MODULES(ENCHANT, enchant >= $ENCHANT_REQUIRED, \
+			  have_enchant=yes, have_enchant=no)
+
+	if test "x$have_enchant" = "xyes"; then
+	
+		PKG_CHECK_EXISTS([iso-codes >= $ISO_CODES_REQUIRED],
+				 [have_iso_codes=yes],[have_iso_codes=no])
+
+		if test "x$have_iso_codes" = "xyes"; then
+			AC_MSG_CHECKING([whether iso-codes has iso-639 and iso-3166 domains])
+			if $PKG_CONFIG --variable=domains iso-codes | grep -q 639 && \
+			   $PKG_CONFIG --variable=domains iso-codes | grep -q 3166 ; then
+				result=yes
+			else
+				result=no
+				have_iso_codes=no
+			fi
+			AC_MSG_RESULT([$result])
+		fi
+
+		if test "x$have_iso_codes" = "xyes"; then
+			AC_DEFINE_UNQUOTED([ISO_CODES_PREFIX],["`$PKG_CONFIG --variable=prefix iso-codes`"],[ISO codes prefix])
+			AC_DEFINE([HAVE_ISO_CODES],[1],[Define if you have the iso-codes package])
+		else
+			AC_MSG_ERROR([iso-codes is required to build the spell plugin. Use --disable-spell to build without spell plugin.])
+		fi
+	
+		enable_enchant=yes
+		ENCHANT_CFLAGS="${ENCHANT_CFLAGS}"
+		ENCHANT_LIBS="${ENCHANT_LIBS}"
+		SPELL_PLUGIN_DIR="spell"
+	else
+		AC_MSG_ERROR([Enchant library not found or too old. Use --disable-spell to build without spell plugin.])
 	fi
 else
-	AC_MSG_RESULT([not found])
+	enable_enchant=no
+	ENCHANT_CFLAGS=
+	ENCHANT_LIBS=
+	SPELL_PLUGIN_DIR=
 fi
 
-AC_SUBST(PSPELL_LIBS)
+AC_SUBST(ENCHANT_CFLAGS)
+AC_SUBST(ENCHANT_LIBS)
+AC_SUBST(SPELL_PLUGIN_DIR)
 
 dnl ================================================================
 dnl libattr checks
@@ -311,7 +340,7 @@ Configuration:
 	Source code location:	${srcdir}
 	Compiler:		${CC}
 	Python Plugins Support: $enable_python
-
+	Spell Plugin enabled:	$enable_enchant	
 "
 
 dnl uncomment this in developement releases

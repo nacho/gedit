@@ -404,8 +404,8 @@ gedit_spell_checker_dialog_new_from_spell_checker (GeditSpellChecker *spell)
 void
 gedit_spell_checker_dialog_set_spell_checker (GeditSpellCheckerDialog *dlg, GeditSpellChecker *spell)
 {
-	const GeditLanguage* language;
-	gchar *lang;
+	const GeditSpellCheckerLanguage* language;
+	const gchar *lang;
 	gchar *tmp;
 	
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
@@ -419,9 +419,8 @@ gedit_spell_checker_dialog_set_spell_checker (GeditSpellCheckerDialog *dlg, Gedi
 	
 	language = gedit_spell_checker_get_language (dlg->spell_checker);
 
-	lang = gedit_language_to_string (language);
+	lang = gedit_spell_checker_language_to_string (language);
 	tmp = g_strdup_printf("<b>%s</b>", lang);
-	g_free (lang);
 
 	gtk_label_set_label (GTK_LABEL (dlg->language_label), tmp);
 	g_free (tmp);

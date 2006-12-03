@@ -9,6 +9,7 @@ BUILT_SOURCES = 						\
 INCLUDES = 							\
 	-I$(top_srcdir)						\
 	$(GEDIT_CFLAGS) 					\
+	$(ENCHANT_CFLAGS)					\
 	$(WARN_CFLAGS)						\
 	$(DISABLE_DEPRECATED_CFLAGS)				\
 	-DGEDIT_LOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"	\
@@ -24,6 +25,8 @@ libspell_la_SOURCES = \
 	gedit-spell-checker.h				\
 	gedit-spell-checker-dialog.c			\
 	gedit-spell-checker-dialog.h			\
+	gedit-spell-checker-language.c			\
+	gedit-spell-checker-language.h			\
 	gedit-spell-language-dialog.c			\
 	gedit-spell-language-dialog.h			\
 	gedit-automatic-spell-checker.c			\
@@ -31,7 +34,7 @@ libspell_la_SOURCES = \
 	$(BUILT_SOURCES)			
 
 libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
-libspell_la_LIBADD =  $(PSPELL_LIBS)
+libspell_la_LIBADD =  $(ENCHANT_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = spell-checker.glade2 languages-dialog.glade2

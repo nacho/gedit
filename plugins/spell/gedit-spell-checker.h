@@ -33,6 +33,7 @@
 #include <glib.h>
 #include <glib-object.h>
 
+#include "gedit-spell-checker-language.h"
 
 G_BEGIN_DECLS
 
@@ -44,17 +45,13 @@ G_BEGIN_DECLS
 #define GEDIT_SPELL_CHECKER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), GEDIT_TYPE_SPELL_CHECKER, GeditSpellChecker))
 
 
-
 #define GEDIT_SPELL_CHECKER_ERROR gedit_spell_checker_error_quark()
 
 typedef enum 
 {
-	GEDIT_SPELL_CHECKER_ERROR_PSPELL
+	GEDIT_SPELL_CHECKER_ERROR_ENCHANT
 } GeditSpellCheckerError;
 
-
-
-typedef struct _GeditLanguage GeditLanguage;
 
 typedef struct _GeditSpellChecker GeditSpellChecker;
 
@@ -65,18 +62,18 @@ struct _GeditSpellCheckerClass
 	GObjectClass parent_class;
 
 	/* Signals */
-	void (*add_word_to_personal) (GeditSpellChecker *spell, 
-				      const gchar *word,
-				      gint len);
+	void (*add_word_to_personal) (GeditSpellChecker               *spell, 
+				      const gchar                     *word,
+				      gint                             len);
 
-	void (*add_word_to_session)  (GeditSpellChecker *spell, 
-				      const gchar *word, 
-				      gint len);
+	void (*add_word_to_session)  (GeditSpellChecker               *spell, 
+				      const gchar                     *word, 
+				      gint                             len);
 
-	void (*set_language)         (GeditSpellChecker *spell, 
-				      const GeditLanguage *lang);
+	void (*set_language)         (GeditSpellChecker               *spell, 
+				      const GeditSpellCheckerLanguage *lang);
 
-	void (*clear_session)	     (GeditSpellChecker *spell);
+	void (*clear_session)	     (GeditSpellChecker                *spell);
 };
 
 
@@ -87,19 +84,17 @@ GQuark 			 gedit_spell_checker_error_quark	(void);
 /* Constructors */
 GeditSpellChecker	*gedit_spell_checker_new		(void);
 
-/* GSList contains GeditLanguage* items */
-const GSList 		*gedit_spell_checker_get_available_languages (void);
 
+gboolean		 gedit_spell_checker_set_language 	(GeditSpellChecker                *spell, 
+								 const GeditSpellCheckerLanguage  *lang,
+								 GError                          **error);
+const GeditSpellCheckerLanguage 
+			*gedit_spell_checker_get_language 	(GeditSpellChecker                *spell);
 
-gboolean		 gedit_spell_checker_set_language 	(GeditSpellChecker *spell, 
-								 const GeditLanguage *lang,
-								 GError **error);
-const GeditLanguage 	*gedit_spell_checker_get_language 	(GeditSpellChecker *spell);
-
-gboolean		 gedit_spell_checker_check_word 	(GeditSpellChecker *spell, 
-								 const gchar *word, 
-								 gint len, 
-								 GError **error);
+gboolean		 gedit_spell_checker_check_word 	(GeditSpellChecker                *spell, 
+								 const gchar                      *word, 
+								 gint                              len, 
+								 GError                          **error);
 
 GSList 			*gedit_spell_checker_get_suggestions 	(GeditSpellChecker *spell, 
 								 const gchar *word, 
@@ -124,12 +119,6 @@ gboolean		 gedit_spell_checker_set_correction 	(GeditSpellChecker *spell,
 								 const gchar *replacement, 
 								 gint r_len,
 								 GError **error);
-
-gchar 			*gedit_language_to_string 		(const GeditLanguage *lang);
-
-gchar			*gedit_language_to_key			(const GeditLanguage *lang);
-
-const GeditLanguage 	*gedit_language_from_key		(const gchar *key);
 
 G_END_DECLS
 

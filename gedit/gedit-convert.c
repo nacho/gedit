@@ -73,11 +73,13 @@ gedit_convert_to_utf8_from_charset (const gchar  *content,
 					
 			return g_strndup (content, len);
 		}
-		else	
+		else
+		{	
 			g_set_error (error, G_CONVERT_ERROR, G_CONVERT_ERROR_ILLEGAL_SEQUENCE,
 				     "The file you are trying to open contains an invalid byte sequence.");
 		
-			return NULL;	
+			return NULL;
+		}
 	}
 	
 	converted_contents = g_convert (content, 
