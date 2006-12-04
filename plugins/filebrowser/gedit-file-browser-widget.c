@@ -214,23 +214,24 @@ static void
 free_name_icon (gpointer data)
 {
 	NameIcon * item;
-	
+
 	if (data == NULL)
 		return;
 
 	item = (NameIcon *)(data);
 
 	g_free (item->name);
-	
+
 	if (item->icon)
 		g_object_unref (item->icon);
-	
+
 	g_free (item);
 }
 
 static FilterFunc *
 filter_func_new (GeditFileBrowserWidget * obj,
-		 GeditFileBrowserWidgetFilterFunc func, gpointer user_data)
+		 GeditFileBrowserWidgetFilterFunc func,
+		 gpointer user_data)
 {
 	FilterFunc *result;
 
@@ -294,7 +295,6 @@ static void
 gedit_file_browser_widget_finalize (GObject * object)
 {
 	GeditFileBrowserWidget *obj = GEDIT_FILE_BROWSER_WIDGET (object);
-	GSList *item;
 	GList *loc;
 
 	remove_path_items (obj);
@@ -309,9 +309,7 @@ gedit_file_browser_widget_finalize (GObject * object)
 	g_object_unref (obj->priv->bookmarks_store);
 	g_object_unref (obj->priv->combo_model);
 
-	for (item = obj->priv->filter_funcs; item; item = item->next)
-		g_free (item->data);
-
+	g_slist_foreach (obj->priv->filter_funcs, (GFunc) g_free, NULL);
 	g_slist_free (obj->priv->filter_funcs);
 
 	for (loc = obj->priv->locations; loc; loc = loc->next)
@@ -324,8 +322,7 @@ gedit_file_browser_widget_finalize (GObject * object)
 
 	g_hash_table_destroy (obj->priv->bookmarks_hash);
 
-	G_OBJECT_CLASS (gedit_file_browser_widget_parent_class)->
-	    finalize (object);
+	G_OBJECT_CLASS (gedit_file_browser_widget_parent_class)->finalize (object);
 }
 
 static void
@@ -705,7 +702,6 @@ check_current_item (GeditFileBrowserWidget * obj, gboolean show_path)
 		gtk_tree_store_remove (obj->priv->combo_model, &separator);
 }
 
-
 static void
 fill_combo_model (GeditFileBrowserWidget * obj)
 {
@@ -804,8 +800,8 @@ static GtkActionEntry toplevel_actions[] =
 
 static const GtkActionEntry tree_actions[] = 
 {
-	{"DirectoryNew", GTK_STOCK_ADD, N_("_New Directory"), NULL,
-	 N_("Add new empty directory"),
+	{"DirectoryNew", GTK_STOCK_ADD, N_("_New Folder"), NULL,
+	 N_("Add new empty folder"),
 	 G_CALLBACK (on_action_directory_new)},
 	{"FileNew", GTK_STOCK_NEW, N_("New F_ile"), NULL,
 	 N_("Add new empty file"), G_CALLBACK (on_action_file_new)},
@@ -816,13 +812,13 @@ static const GtkActionEntry tree_actions[] =
 static const GtkActionEntry tree_actions_selection[] = 
 {
 	{"FileRename", NULL, N_("_Rename"), NULL,
-	 N_("Rename selected file or directory"),
+	 N_("Rename selected file or folder"),
 	 G_CALLBACK (on_action_file_rename)},
 	{"FileMoveToTrash", "gnome-stock-trash", N_("_Move To Trash"), NULL,
-	 N_("Move selected file or directory to trash"),
+	 N_("Move selected file or folder to trash"),
 	 G_CALLBACK (on_action_file_move_to_trash)},
 	{"FileDelete", GTK_STOCK_DELETE, N_("_Delete"), NULL,
-	 N_("Delete selected file or directory"),
+	 N_("Delete selected file or folder"),
 	 G_CALLBACK (on_action_file_delete)}
 };
 
@@ -836,8 +832,8 @@ static const GtkActionEntry tree_actions_sensitive[] =
 	 N_("Go to the next visited location"), G_CALLBACK (on_action_directory_next)},
 	{"DirectoryRefresh", GTK_STOCK_REFRESH, N_("Re_fresh View"), NULL,
 	 N_("Refresh the view"), G_CALLBACK (on_action_directory_refresh)},
-	{"DirectoryOpen", GTK_STOCK_OPEN, N_("_View Directory"), NULL,
-	 N_("View directory in file manager"),
+	{"DirectoryOpen", GTK_STOCK_OPEN, N_("_View Folder"), NULL,
+	 N_("View folder in file manager"),
 	 G_CALLBACK (on_action_directory_open)}
 };
 
@@ -845,7 +841,7 @@ static const GtkToggleActionEntry tree_actions_toggle[] =
 {
 	{"FilterHidden", GTK_STOCK_DIALOG_AUTHENTICATION,
 	 N_("Show _Hidden"), NULL,
-	 N_("Show hidden files and directories"),
+	 N_("Show hidden files and folders"),
 	 G_CALLBACK (on_action_filter_hidden), FALSE},
 	{"FilterBinary", NULL, N_("Show _Binary"), NULL,
 	 N_("Show binary files"), G_CALLBACK (on_action_filter_binary),
@@ -938,8 +934,7 @@ create_toolbar (GeditFileBrowserWidget * obj)
 						(widget),
 						GTK_TOOLBAR (toolbar)->
 						tooltips,
-						_
-						("Go to a previously opened location"),
+						_("Go to a previously opened location"),
 						NULL);
 
 	action =
@@ -1769,7 +1764,6 @@ gedit_file_browser_widget_get_filter_entry (GeditFileBrowserWidget * obj)
 {
 	return obj->priv->filter_entry;
 }
-
 
 gulong
 gedit_file_browser_widget_add_filter (GeditFileBrowserWidget * obj,
