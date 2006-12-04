@@ -21,7 +21,6 @@ import gtk
 from gtk import gdk
 import gnomevfs
 import gedit, gtksourceview
-from library import ToolLibrary
 from outputpanel import OutputPanel
 from capture import *
 
@@ -30,84 +29,6 @@ def default(val, d):
         return val
     else:
         return d
-
-# ==== UI related functions ====
-APPLICABILITIES = ('all', 'titled', 'local', 'remote', 'untitled')
-
-def insert_tools_menu(window, library = None):
-    window_data = dict()
-    window.set_data("ExternalToolsPluginCommandsData", window_data)
-
-    if library is None:
-        library = ToolLibrary()
-
-    manager = window.get_ui_manager()
-
-    window_data['action_groups'] = dict()
-    window_data['ui_id'] = manager.new_merge_id()
-
-    i = 0;
-    for tool in library.tree.tools:
-        menu_id = "ToolCommand%06d" % i
-
-        ap = tool.applicability
-        if ap not in window_data['action_groups']:
-            window_data['action_groups'][ap] = \
-                gtk.ActionGroup("ExternalToolsPluginCommandsActions%s" % ap.capitalize())
-            window_data['action_groups'][ap].set_translation_domain('gedit')
-
-        window_data['action_groups'][ap].add_actions(
-            [(menu_id, None, tool.name, tool.shortcut, tool.comment,
-              capture_menu_action)],
-            (window, tool))
-        manager.add_ui(window_data['ui_id'],
-                       '/MenuBar/ToolsMenu/ToolsOps_4',
-                       menu_id,
-                       menu_id,
-                       gtk.UI_MANAGER_MENUITEM,
-                       False)
-        i = i + 1
-
-    for applic in APPLICABILITIES:
-        if applic in window_data['action_groups']:
-            manager.insert_action_group(window_data['action_groups'][applic], -1)
-
-def remove_tools_menu(window):
-    window_data = window.get_data("ExternalToolsPluginCommandsData")
-
-    manager = window.get_ui_manager()
-    manager.remove_ui(window_data['ui_id'])
-    for action_group in window_data['action_groups'].itervalues():
-        manager.remove_action_group(action_group)
-    window.set_data("ExternalToolsPluginCommandsData", None)
-
-def update_tools_menu(tools = None):
-    for window in gedit.app_get_default().get_windows():
-        remove_tools_menu(window)
-        insert_tools_menu(window, tools)
-        filter_tools_menu(window)
-        window.get_ui_manager().ensure_update()
-
-def filter_tools_menu(window):
-    action_groups = window.get_data("ExternalToolsPluginCommandsData")['action_groups']
-
-    document = window.get_active_document()
-    if document is not None:
-        active_groups = ['all']
-        uri = document.get_uri()
-        if uri is not None:
-            active_groups.append('titled')
-            if gnomevfs.get_uri_scheme(uri) == 'file':
-                active_groups.append('local')
-            else:
-                active_groups.append('remote')
-        else:
-            active_groups.append('untitled')
-    else:
-        active_groups = []
-
-    for name, group in action_groups.iteritems():
-        group.set_sensitive(name in active_groups)
 
 # ==== Capture related functions ====
 def capture_menu_action(action, window, node):

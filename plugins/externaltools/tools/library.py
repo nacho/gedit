@@ -147,6 +147,10 @@ class ToolDirectory(object):
             return os.path.join(self.parent.get_path(), self.dirname)
     path = property(get_path)
 
+    def get_name(self):
+        return os.path.basename(self.dirname)
+    name = property(get_name)
+
     def delete_tool(self, tool):
         # Only remove it if it lays in $HOME
         if tool in self.tools:

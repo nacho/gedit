@@ -1,3 +1,23 @@
+2006-12-04  Steve Frécinaux  <code@istique.net>
+
+	Bug 381761 – External Tools: nested menus support (code-wise).
+
+	* plugins/externaltools/tools/__init__.py: new ToolMenu object,
+	managing the tool menu; place added command menus in a shared
+	placeholder to avoid weird interactions with other plugins using
+	ToolsOpt_4.
+
+	* plugins/externaltools/tools/functions.py: remove menu-related
+	functions that have been replaced with the new object.
+
+	* plugins/externaltools/tools/library.py: add a name attribute to the
+	ToolDirectory class.
+
+	* plugins/externaltools/tools/manager.py: adapt for above changes.
+
+	Note: despite the new ToolMenu object handles nested menus, the
+	manager still only allow to edit the root menu.
+
 2006-12-04  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/plugins/filebrowser/gedit-file-browser-widget.c: use

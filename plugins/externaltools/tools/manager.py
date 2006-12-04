@@ -18,6 +18,7 @@
 
 __all__ = ('Manager', )
 
+import gedit
 import gtk
 import gtksourceview as gsv
 from gtk import glade
@@ -249,7 +250,8 @@ class Manager(object):
 
         if node.is_global():
             if node.parent.revert_tool(node):
-                if self.current_node.shortcut:
+                if self.current_node.shortcut and \
+                   self.accelerator.has_key(self.current_node.shortcut):
                     del self.accelerators[self.current_node.shortcut]                
                 self['revert-tool-button'].set_sensitive(False)
                 self.fill_fields()
@@ -361,21 +363,22 @@ class Manager(object):
         if self.current_node is not None:
             entry.set_text(default(self.current_node.shortcut, ''))
 
+
     def on_tool_manager_dialog_response(self, dialog, response):
         if response == gtk.RESPONSE_HELP:
             gedit.help_display(self.dialog, 'gedit.xml', 'gedit-external-tools-plugin')
             return
 
-        self.save_current_tool()
+        self.on_tool_manager_dialog_focus_out(dialog, None)
 
         self.dialog.destroy()
         self.dialog = None
-
-        update_tools_menu(tools = self.tools)
         self.tools = None
 
     def on_tool_manager_dialog_focus_out(self, dialog, event):
         self.save_current_tool()
-        update_tools_menu(tools = self.tools)
+        for window in gedit.app_get_default().get_windows():
+            helper = window.get_data("ExternalToolsPluginWindowData")
+            helper.menu.update()
 
 # ex:et:ts=4:
