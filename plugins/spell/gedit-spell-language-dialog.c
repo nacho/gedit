@@ -102,7 +102,6 @@ dialog_response_handler (GtkDialog                *dlg,
 static void 
 ok_button_pressed (GeditSpellLanguageDialog *dialog)
 {
-	GError *error = NULL;
 	GValue value = {0, };
 	const GeditSpellCheckerLanguage* lang;
 
@@ -121,13 +120,7 @@ ok_button_pressed (GeditSpellLanguageDialog *dialog)
 	lang = (const GeditSpellCheckerLanguage* ) g_value_get_pointer (&value);
 	g_return_if_fail (lang != NULL);
 	
-	gedit_spell_checker_set_language (dialog->spell_checker, lang, &error);
-
-	if (error)
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
+	gedit_spell_checker_set_language (dialog->spell_checker, lang);
 }
 
 static GtkTreeModel *

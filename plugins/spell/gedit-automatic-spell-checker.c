@@ -80,7 +80,7 @@ check_word (GeditAutomaticSpellChecker *spell, GtkTextIter *start, GtkTextIter *
 						gtk_text_iter_get_offset (end));
 	*/
 
-	if (!gedit_spell_checker_check_word (spell->spell_checker, word, -1, NULL)) 
+	if (!gedit_spell_checker_check_word (spell->spell_checker, word, -1)) 
 	{
 		/*
 		g_print ("Apply tag: [%d - %d]\n", gtk_text_iter_get_offset (start),
@@ -343,7 +343,7 @@ add_to_dictionary (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell)
 					 &end, 
 					 FALSE);
 	
-	gedit_spell_checker_add_word_to_personal (spell->spell_checker, word, -1, NULL);
+	gedit_spell_checker_add_word_to_personal (spell->spell_checker, word, -1);
 
 	g_free (word);
 }
@@ -362,7 +362,7 @@ ignore_all (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell)
 					 &end, 
 					 FALSE);
 	
-	gedit_spell_checker_add_word_to_session (spell->spell_checker, word, -1, NULL);
+	gedit_spell_checker_add_word_to_session (spell->spell_checker, word, -1);
 
 	g_free (word);
 }
@@ -391,8 +391,7 @@ replace_word (GtkWidget *menuitem, GeditAutomaticSpellChecker *spell)
 
 	gedit_spell_checker_set_correction (spell->spell_checker, 
 				oldword, strlen (oldword),
-				newword, strlen (newword),
-				NULL);
+				newword, strlen (newword));
 
 	g_free (oldword);
 }
@@ -408,7 +407,7 @@ build_suggestion_menu (GeditAutomaticSpellChecker *spell, const gchar *word)
 	
 	topmenu = menu = gtk_menu_new();
 
-	suggestions = gedit_spell_checker_get_suggestions (spell->spell_checker, word, -1, NULL);
+	suggestions = gedit_spell_checker_get_suggestions (spell->spell_checker, word, -1);
 
 	list = suggestions;
 

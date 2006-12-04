@@ -435,17 +435,17 @@ gedit_spell_checker_dialog_set_spell_checker (GeditSpellCheckerDialog *dlg, Gedi
 
 void
 gedit_spell_checker_dialog_set_misspelled_word (GeditSpellCheckerDialog *dlg, 
-		const gchar* word, gint len)
+						const gchar             *word,
+						gint                     len)
 {
 	gchar *tmp;
-	GSList *sug, *list;
-	GError *error = NULL;
+	GSList *sug;
 	
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 	g_return_if_fail (word != NULL);
 
 	g_return_if_fail (dlg->spell_checker != NULL);
-	g_return_if_fail (!gedit_spell_checker_check_word (dlg->spell_checker, word, -1, NULL));
+	g_return_if_fail (!gedit_spell_checker_check_word (dlg->spell_checker, word, -1));
 
 	/* build_suggestions_list */
 	if (dlg->misspelled_word != NULL)
@@ -458,30 +458,14 @@ gedit_spell_checker_dialog_set_misspelled_word (GeditSpellCheckerDialog *dlg,
 	g_free (tmp);
 
 	sug = gedit_spell_checker_get_suggestions (dlg->spell_checker,
-		       dlg->misspelled_word, -1, &error);
+		       				   dlg->misspelled_word, 
+		       				   -1);
 	
-	if (error != NULL)
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-
-		gtk_list_store_clear (GTK_LIST_STORE (dlg->suggestions_list_model));
-	}
-	else
-		update_suggestions_list_model (dlg, sug);
+	update_suggestions_list_model (dlg, sug);
 
 	/* free the suggestion list */
-	list = sug;
-	
-	while (sug)
-	{
-		g_free (sug->data);
-
-		sug = g_slist_next (sug);
-	}
-
-
-	g_slist_free (list);
+	g_slist_foreach (sug, (GFunc)g_free, NULL);
+	g_slist_free (sug);
 
 	gtk_widget_set_sensitive (dlg->ignore_button, TRUE);
 	gtk_widget_set_sensitive (dlg->ignore_all_button, TRUE);
@@ -595,13 +579,15 @@ static void
 check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 {
 	const gchar *word;
+	gssize len;
 	
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 
 	word = gtk_entry_get_text (GTK_ENTRY (dlg->word_entry));
-	g_return_if_fail (g_utf8_strlen (word, -1) > 0);
+	len = strlen (word);
+	g_return_if_fail (len > 0);
 	
-	if (gedit_spell_checker_check_word (dlg->spell_checker, word, -1, NULL))
+	if (gedit_spell_checker_check_word (dlg->spell_checker, word, len))
 	{
 		GtkListStore *store;
 		GtkTreeIter iter;
@@ -618,33 +604,17 @@ check_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 	}
 	else
 	{
-		GSList *sug, *list;
-		GError *error = NULL;
+		GSList *sug;
 
 		sug = gedit_spell_checker_get_suggestions (dlg->spell_checker,
-				word, -1, &error);
+							   word,
+							   len);
 	
-		if (error != NULL)
-		{
-			g_warning ("%s", error->message);
-			g_error_free (error);
-
-			gtk_list_store_clear (GTK_LIST_STORE (dlg->suggestions_list_model));
-		}
-		else
-			update_suggestions_list_model (dlg, sug);
+		update_suggestions_list_model (dlg, sug);
 
 		/* free the suggestion list */
-		list = sug;
-		
-		while (sug)
-		{
-			g_free (sug->data);
-
-			sug = g_slist_next (sug);
-		}
-
-		g_slist_free (list);
+		g_slist_foreach (sug, (GFunc)g_free, NULL);
+		g_slist_free (sug);
 	}
 }
 
@@ -652,19 +622,13 @@ static void
 add_word_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 {
 	gchar *word;	
-	GError *error = NULL;
 	
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 	g_return_if_fail (dlg->misspelled_word != NULL);
 
 	gedit_spell_checker_add_word_to_personal (dlg->spell_checker, 
-			dlg->misspelled_word, -1, &error);
-
-	if (error)
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
+						  dlg->misspelled_word, 
+						  -1);
 
 	word = g_strdup (dlg->misspelled_word);
 
@@ -692,19 +656,13 @@ static void
 ignore_all_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 {
 	gchar *word;
-	GError *error = NULL;
 	
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 	g_return_if_fail (dlg->misspelled_word != NULL);
 
 	gedit_spell_checker_add_word_to_session (dlg->spell_checker,
-			dlg->misspelled_word, -1, &error);
-
-	if (error)
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
+						 dlg->misspelled_word, 
+						 -1);
 
 	word = g_strdup (dlg->misspelled_word);
 
@@ -718,23 +676,17 @@ change_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *dlg)
 {
 	gchar *word;
 	gchar *change;
-	GError *error = NULL;
-		
+
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 	g_return_if_fail (dlg->misspelled_word != NULL);
 
 	change = g_strdup (gtk_entry_get_text (GTK_ENTRY (dlg->word_entry)));
 	g_return_if_fail (change != NULL);
-	g_return_if_fail (strlen (change) > 0);
+	g_return_if_fail (*change != '\0');
 
 	gedit_spell_checker_set_correction (dlg->spell_checker, 
-			dlg->misspelled_word, -1, change, -1, &error);
-	
-	if (error)
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
+					    dlg->misspelled_word, -1, 
+					    change, -1);
 	
 	word = g_strdup (dlg->misspelled_word);
 
@@ -761,25 +713,17 @@ change_all_button_clicked_handler (GtkButton *button, GeditSpellCheckerDialog *d
 {
 	gchar *word;
 	gchar *change;
-	
-	GError *error = NULL;
-	
 		
 	g_return_if_fail (GEDIT_IS_SPELL_CHECKER_DIALOG (dlg));
 	g_return_if_fail (dlg->misspelled_word != NULL);
 
 	change = g_strdup (gtk_entry_get_text (GTK_ENTRY (dlg->word_entry)));
 	g_return_if_fail (change != NULL);
-	g_return_if_fail (strlen (change) > 0);
+	g_return_if_fail (*change != '\0');
 
 	gedit_spell_checker_set_correction (dlg->spell_checker, 
-			dlg->misspelled_word, -1, change, -1, &error);
-	
-	if (error)
-	{
-		g_warning ("%s", error->message);
-		g_error_free (error);
-	}
+					    dlg->misspelled_word, -1,
+					    change, -1);
 	
 	word = g_strdup (dlg->misspelled_word);
 

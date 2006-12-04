@@ -187,8 +187,7 @@ get_spell_checker_from_document (GeditDocument *doc)
 
 			if (lang != NULL)
 				gedit_spell_checker_set_language (spell,
-								  lang,
-								  NULL);
+								  lang);
 
 			g_free (uri);	
 		}
@@ -471,7 +470,7 @@ get_next_misspelled_word (GeditView *view)
 
 	gedit_debug_message (DEBUG_PLUGINS, "Word to check: %s", word);
 
-	while (gedit_spell_checker_check_word (spell, word, -1, NULL))
+	while (gedit_spell_checker_check_word (spell, word, -1))
 	{
 		g_free (word);
 
