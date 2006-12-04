@@ -406,13 +406,11 @@ init_bookmarks (GeditFileBookmarksStore * model)
 
 		/* Add a watch */
 		if (model->priv->bookmarks_monitor == NULL) {
-			gnome_vfs_monitor_add (&
-					       (model->priv->
-						bookmarks_monitor),
+			gnome_vfs_monitor_add (&model->priv->bookmarks_monitor,
 					       bookmarks,
 					       GNOME_VFS_MONITOR_FILE,
-					       (GnomeVFSMonitorCallback)
-on_bookmarks_file_changed, model);
+					       (GnomeVFSMonitorCallback)on_bookmarks_file_changed, 
+					       model);
 		}
 	} else {
 		/* The bookmarks file doesn't exist (which is perfectly fine) */
