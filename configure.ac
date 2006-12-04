@@ -344,4 +344,4 @@ Configuration:
 "
 
 dnl uncomment this in developement releases
-dnl cat $srcdir/message-of-doom
+cat $srcdir/message-of-doom
