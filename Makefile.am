@@ -5,16 +5,18 @@ SUBDIRS = bindings gedit pixmaps po help data plugins docs
 
 distuninstallcheck_listfiles = find . -type f -print | grep -v scrollkeeper
 
-EXTRA_DIST = BUGS		\
+EXTRA_DIST = 			\
+	BUGS			\
 	ChangeLog  		\
 	MAINTAINERS		\
 	xmldocs.make 		\
 	omf.make		\
 	m4			\
+	message-of-doom		\
 	gnome-doc-utils.make    \
 	intltool-extract.in 	\
 	intltool-merge.in 	\
-	intltool-update.in	
+	intltool-update.in
 
 DISTCLEANFILES = 		\
 	gnome-doc-utils.make    \
