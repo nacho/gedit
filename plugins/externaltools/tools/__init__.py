@@ -78,7 +78,7 @@ class ToolMenu(object):
 
             action.set_data(self.ACTION_ITEM_DATA_KEY, item)
             action.set_data(self.ACTION_HANDLER_DATA_KEY, handler)
-            self._action_group.add_action(action)
+            self._action_group.add_action_with_accel(action, item.shortcut)
 
             manager.add_ui(self._merge_id, path,
                            action_name, action_name,
