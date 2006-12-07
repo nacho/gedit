@@ -834,8 +834,10 @@ create_language_menu_item (GtkSourceLanguage *lang,
 				       NULL,
 				       index);
 
-	gtk_action_group_add_action (window->priv->languages_action_group,
-				     GTK_ACTION (action));
+	/* Action is added with a NULL accel to make the accel overridable */
+	gtk_action_group_add_action_with_accel (window->priv->languages_action_group,
+						GTK_ACTION (action),
+						NULL);
 	g_object_unref (action);
 
 	/* add the action to the same radio group of the "Normal" action */
