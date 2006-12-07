@@ -388,7 +388,7 @@ gedit_view_init (GeditView *view)
 	view->priv->scroll_idle = g_idle_add ((GSourceFunc) scroll_to_cursor_on_init, view);
 	
 	view->priv->typeselect_flush_timeout = 0;	
-	view->priv->wrap_around = TRUE;		   
+	view->priv->wrap_around = TRUE;	
 }
 
 static void
@@ -1461,6 +1461,65 @@ customize_for_search_mode (GeditView *view)
 				  GTK_IMAGE (icon));
 }
 
+static gboolean
+completion_func (GtkEntryCompletion *completion,
+                 const char         *key,
+		 GtkTreeIter        *iter,
+		 gpointer            data)
+{
+	gchar *item = NULL;
+	gboolean ret = FALSE;
+	GtkTreeModel *model;
+	GeditViewPrivate *priv = (GeditViewPrivate *)data;
+	const gchar *real_key;
+		
+	if (priv->search_mode == GOTO_LINE)
+		return FALSE;
+		
+	real_key = gtk_entry_get_text (GTK_ENTRY (gtk_entry_completion_get_entry (completion)));
+	
+	if (g_utf8_strlen (real_key, -1) <= MIN_SEARCH_COMPLETION_KEY_LEN)
+		return FALSE;
+		
+	model = gtk_entry_completion_get_model (completion);
+	g_return_val_if_fail (gtk_tree_model_get_column_type (model, 0) == G_TYPE_STRING, 
+			      FALSE);
+			      
+	gtk_tree_model_get (model, 
+			    iter,
+			    0, 
+			    &item,
+			    -1);
+	
+	if (item == NULL)
+		return FALSE;
+		
+	if (GEDIT_SEARCH_IS_CASE_SENSITIVE (priv->search_flags))
+	{		
+		if (!strncmp (real_key, item, strlen (real_key)))
+			ret = TRUE;
+	}
+	else
+	{
+		gchar *normalized_string;
+		gchar *case_normalized_string;
+		
+		normalized_string = g_utf8_normalize (item, -1, G_NORMALIZE_ALL);
+		case_normalized_string = g_utf8_casefold (normalized_string, -1);
+      
+      		if (!strncmp (key, case_normalized_string, strlen (key)))
+			ret = TRUE;
+ 		
+		g_free (normalized_string);
+		g_free (case_normalized_string);
+		
+	}
+	
+	g_free (item);
+	
+	return ret;	
+}
+
 static void
 ensure_search_window (GeditView *view)
 {  
@@ -1468,7 +1527,6 @@ ensure_search_window (GeditView *view)
 	GtkWidget          *vbox;
 	GtkWidget          *toplevel;
 	GtkEntryCompletion *completion;
-
 	
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (view));
 
@@ -1556,6 +1614,14 @@ ensure_search_window (GeditView *view)
 
 	gtk_entry_completion_set_minimum_key_length (completion,
 						     MIN_SEARCH_COMPLETION_KEY_LEN);
+
+	gtk_entry_completion_set_popup_completion (completion, FALSE);
+	gtk_entry_completion_set_inline_completion (completion, TRUE);
+	
+	gtk_entry_completion_set_match_func (completion, 
+					     completion_func,
+					     view->priv,
+					     NULL);
 
 	/* Assign the completion to the entry */
 	gtk_entry_set_completion (GTK_ENTRY (view->priv->search_entry), 
@@ -1665,7 +1731,7 @@ search_init (GtkWidget *entry,
 	     GeditView *view)
 {
 	GeditDocument *doc;
-	const gchar   *entry_text;
+	const gchar *entry_text;
 
 	/* renew the flush timeout */
 	if (view->priv->typeselect_flush_timeout != 0)
@@ -1678,7 +1744,7 @@ search_init (GtkWidget *entry,
 	}
 	
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
-	
+			
 	entry_text = gtk_entry_get_text (GTK_ENTRY (entry));
 	
 	if (view->priv->search_mode == SEARCH)
