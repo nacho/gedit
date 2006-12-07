@@ -139,7 +139,7 @@ gedit_search_dialog_focus_in_event (GtkWidget     *widget,
 	 */
 	if (!GTK_WIDGET_HAS_FOCUS (dlg->priv->search_text_entry))
 	{
-		gtk_widget_grab_focus (GTK_ENTRY (dlg->priv->search_text_entry));
+		gtk_widget_grab_focus (dlg->priv->search_text_entry);
 		gtk_editable_set_position (GTK_EDITABLE (dlg->priv->search_text_entry),
 					   -1);
 	}
@@ -358,7 +358,8 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 		return;
 	}
 
-	dlg->priv->search_entry = gedit_history_entry_new ("gedit2_search_for_entry");
+	dlg->priv->search_entry = gedit_history_entry_new ("gedit2_search_for_entry",
+							   TRUE);
 	gtk_widget_set_size_request (dlg->priv->search_entry, 300, -1);
 	dlg->priv->search_text_entry = gedit_history_entry_get_entry
 			(GEDIT_HISTORY_ENTRY (dlg->priv->search_entry));
@@ -369,7 +370,8 @@ gedit_search_dialog_init (GeditSearchDialog *dlg)
 				   dlg->priv->search_entry,
 				   1, 2, 0, 1);
 
-	dlg->priv->replace_entry = gedit_history_entry_new ("gedit2_replace_with_entry");
+	dlg->priv->replace_entry = gedit_history_entry_new ("gedit2_replace_with_entry",
+							    TRUE);
 	dlg->priv->replace_text_entry = gedit_history_entry_get_entry
 			(GEDIT_HISTORY_ENTRY (dlg->priv->replace_entry));
 	gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->replace_text_entry),

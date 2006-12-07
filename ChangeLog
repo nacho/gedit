@@ -1,3 +1,20 @@
+2006-12-07  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit/gedit-history-entry.[ch] (gedit_history_entry_destroy)
+	(gedit_history_entry_finalize) (gedit_history_entry_class_init)
+	(insert_history_item) (gedit_history_entry_init)
+	(gedit_history_entry_set_enable_completion)
+	(gedit_history_entry_get_enable_completion)
+	(gedit_history_entry_new): implemented inline completion
+
+	* gedit/dialogs/gedit-open-location-dialog.c
+	(gedit_open_location_dialog_init): use the new signature for 
+	gedit_history_entry_new
+
+	* gedit/dialogs/gedit-search-dialog.c
+	(gedit_search_dialog_focus_in_event): fixed a warning
+	(gedit_search_dialog_init): enable completion for history entries
+
 2006-12-07  Steve Frécinaux  <code@istique.net>
 
 	* gedit/gedit-window.c: Fix Bug 349198 – Unable to define accelerators 

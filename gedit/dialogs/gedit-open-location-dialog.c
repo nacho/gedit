@@ -168,7 +168,7 @@ gedit_open_location_dialog_init (GeditOpenLocationDialog *dlg)
 		return;
 	}
 
-	dlg->priv->uri_entry = gedit_history_entry_new ("gedit2_uri_list");
+	dlg->priv->uri_entry = gedit_history_entry_new ("gedit2_uri_list", FALSE);
 	dlg->priv->uri_text_entry = gedit_history_entry_get_entry (GEDIT_HISTORY_ENTRY (dlg->priv->uri_entry));
 	gtk_entry_set_activates_default (GTK_ENTRY (dlg->priv->uri_text_entry), TRUE);
 	gtk_widget_show (dlg->priv->uri_entry);

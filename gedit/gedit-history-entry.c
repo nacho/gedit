@@ -45,6 +45,8 @@ enum {
 	PROP_HISTORY_LENGTH
 };
 
+#define MIN_ITEM_LEN 3
+
 #define GEDIT_HISTORY_ENTRY_HISTORY_LENGTH_DEFAULT 10
 
 #define GEDIT_HISTORY_ENTRY_GET_PRIVATE(object)(G_TYPE_INSTANCE_GET_PRIVATE ((object), \
@@ -53,9 +55,12 @@ enum {
 
 struct _GeditHistoryEntryPrivate
 {
-	gchar       *history_id;
-	guint        history_length;
-	GConfClient *gconf_client;
+	gchar              *history_id;
+	guint               history_length;
+	
+	GtkEntryCompletion *completion;
+	
+	GConfClient        *gconf_client;
 };
 
 G_DEFINE_TYPE(GeditHistoryEntry, gedit_history_entry, GTK_TYPE_COMBO_BOX_ENTRY)
@@ -110,12 +115,21 @@ gedit_history_entry_get_property (GObject    *object,
 }
 
 static void
+gedit_history_entry_destroy (GtkObject *object)
+{
+	gedit_history_entry_set_enable_completion (GEDIT_HISTORY_ENTRY (object),
+						   FALSE);
+
+	(* GTK_OBJECT_CLASS (gedit_history_entry_parent_class)->destroy) (object);
+}
+
+static void
 gedit_history_entry_finalize (GObject *object)
 {
 	GeditHistoryEntryPrivate *priv;
 
 	priv = GEDIT_HISTORY_ENTRY (object)->priv;
-
+	
 	g_free (priv->history_id);
 
 	if (priv->gconf_client != NULL)
@@ -130,12 +144,14 @@ gedit_history_entry_finalize (GObject *object)
 static void 
 gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
+	GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+	GtkObjectClass *gtkobject_class = GTK_OBJECT_CLASS (klass);
+	
 	object_class->set_property = gedit_history_entry_set_property;
 	object_class->get_property = gedit_history_entry_get_property;
 	object_class->finalize = gedit_history_entry_finalize;
-
+	gtkobject_class->destroy = gedit_history_entry_destroy;
+	
 	g_object_class_install_property (object_class,
 					 PROP_HISTORY_ID,
 					 g_param_spec_string ("history-id",
@@ -154,6 +170,8 @@ gedit_history_entry_class_init (GeditHistoryEntryClass *klass)
 							    GEDIT_HISTORY_ENTRY_HISTORY_LENGTH_DEFAULT,
 							    G_PARAM_READWRITE));
 
+	/* TODO: Add enable-completion property */
+	
 	g_type_class_add_private (object_class, sizeof(GeditHistoryEntryPrivate));
 }
 
@@ -307,6 +325,9 @@ insert_history_item (GeditHistoryEntry *entry,
 	GtkListStore *store;
 	GtkTreeIter iter;
 
+	if (g_utf8_strlen (text, -1) <= MIN_ITEM_LEN)
+		return;
+		
 	store = get_history_store (entry);
 
 	/* remove the text from the store if it was already
@@ -413,6 +434,8 @@ gedit_history_entry_init (GeditHistoryEntry *entry)
 	priv->history_id = NULL;
 	priv->history_length = GEDIT_HISTORY_ENTRY_HISTORY_LENGTH_DEFAULT;
 
+	priv->completion = NULL;
+	
 	priv->gconf_client = gconf_client_get_default ();
 }
 
@@ -444,8 +467,60 @@ gedit_history_entry_get_history_id (GeditHistoryEntry *entry)
 	return g_strdup (entry->priv->history_id);
 }
 
+void
+gedit_history_entry_set_enable_completion (GeditHistoryEntry *entry,
+					   gboolean           enable)
+{
+	g_return_if_fail (GEDIT_IS_HISTORY_ENTRY (entry));
+	
+	if (enable)
+	{
+		if (entry->priv->completion != NULL)
+			return;
+		
+		entry->priv->completion = gtk_entry_completion_new ();
+		gtk_entry_completion_set_model (entry->priv->completion, 
+						GTK_TREE_MODEL (get_history_store (entry)));
+		
+		/* Use model column 0 as the text column */
+		gtk_entry_completion_set_text_column (entry->priv->completion, 0);
+
+		gtk_entry_completion_set_minimum_key_length (entry->priv->completion,
+							     MIN_ITEM_LEN);
+
+		gtk_entry_completion_set_popup_completion (entry->priv->completion, FALSE);
+		gtk_entry_completion_set_inline_completion (entry->priv->completion, TRUE);
+	
+		/* Assign the completion to the entry */
+		gtk_entry_set_completion (GTK_ENTRY (gedit_history_entry_get_entry(entry)), 
+					  entry->priv->completion);
+	}
+	else
+	{
+		if (entry->priv->completion == NULL)
+			return;
+
+		gtk_entry_set_completion (GTK_ENTRY (gedit_history_entry_get_entry (entry)), 
+					  NULL);
+		
+		g_object_unref (entry->priv->completion);
+		
+		entry->priv->completion = NULL;
+	}
+}
+							 
+gboolean
+gedit_history_entry_get_enable_completion (GeditHistoryEntry *entry)
+{
+	g_return_val_if_fail (GEDIT_IS_HISTORY_ENTRY (entry), FALSE);
+		
+	return entry->priv->completion != NULL;
+}
+
+
 GtkWidget *
-gedit_history_entry_new (const gchar *history_id)
+gedit_history_entry_new (const gchar *history_id,
+			 gboolean     enable_completion)
 {
 	GtkWidget *ret;
 	GtkListStore *store;
@@ -481,6 +556,9 @@ gedit_history_entry_new (const gchar *history_id)
 	 */
 	gedit_history_entry_load_history (GEDIT_HISTORY_ENTRY (ret));
 
+	gedit_history_entry_set_enable_completion (GEDIT_HISTORY_ENTRY (ret),
+						   enable_completion);
+						   
 	return ret;
 }
 
