@@ -1,3 +1,15 @@
+2006-12-08  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #353235 – Overloaded plural strings
+	
+	Patch by Theppitak Karoonboonyanan <thep@inux.thai.net>
+	
+	* gedit/dialogs/gedit-close-confirmation-dialog.c
+	(get_text_secondary_label): manage the case with hours == 1 in the 
+	right way
+
+	* gedit/gedit-commands-file.c (revert_dialog): ditto
+
 2006-12-07  Paolo Maggi  <paolo@gnome.org>
 
 	* gedit/gedit-history-entry.[ch] (gedit_history_entry_destroy)

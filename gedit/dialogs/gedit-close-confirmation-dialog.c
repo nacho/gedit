@@ -469,7 +469,7 @@ get_text_secondary_label (GeditDocument *doc)
 		hours = seconds / 3600;
 
 		secondary_msg = g_strdup_printf (
-					ngettext ("If you don't save, changes from the last hour "
+					ngettext ("If you don't save, changes from the last %d hour "
 					    	  "will be permanently lost.",
 						  "If you don't save, changes from the last %d hours "
 					    	  "will be permanently lost.",
