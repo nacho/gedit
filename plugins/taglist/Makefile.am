@@ -6,7 +6,8 @@ taglistdir = $(datadir)/gedit-2/taglist
 taglist_in_files = \
 	HTML.tags.xml.in	\
 	Latex.tags.xml.in	\
-	XSLT.tags.xml.in
+	XSLT.tags.xml.in \
+	XUL.tags.xml.in
 
 taglist_DATA = $(taglist_in_files:.tags.xml.in=.tags)
 
