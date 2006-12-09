@@ -1,5 +1,10 @@
 2006-12-09  Jesse van den Kieboom  <jesse@icecrew.nl>
 
+	* plugins/filebrowser/gedit-file-browser-store.c: only enable dragging
+	for non dummy nodes
+	
+2006-12-09  Jesse van den Kieboom  <jesse@icecrew.nl>
+
 	* plugins/filebrowser/gedit-file-browser-store.c: check if a node
 	is visible in the tree when removing its children. If its not visible
 	than just free the children nodes. Fixes bug #384015 – Warning running 

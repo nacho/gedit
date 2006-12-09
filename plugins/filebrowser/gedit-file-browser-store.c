@@ -823,7 +823,20 @@ static gboolean
 gedit_file_browser_store_row_draggable (GtkTreeDragSource * drag_source,
 					GtkTreePath       * path)
 {
-	return TRUE;
+	GtkTreeIter iter;
+	GeditFileBrowserStoreFlag flags;
+
+	if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (drag_source),
+				      &iter, path))
+	{
+		return FALSE;
+	}
+
+	gtk_tree_model_get (GTK_TREE_MODEL (drag_source), &iter,
+			    GEDIT_FILE_BROWSER_STORE_COLUMN_FLAGS, &flags,
+			    -1);
+
+	return !FILE_IS_DUMMY(flags);
 }
 
 static gboolean
