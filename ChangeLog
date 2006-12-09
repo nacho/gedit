@@ -1,3 +1,21 @@
+2006-12-09  Paolo Maggi  <paolo@gnome.org>
+
+	* plugins/taglist/HTML.tags.xml.in: added "sort" attribute to TagGroups,
+	added a couple of missing elements.
+
+	* plugins/taglist/Latex.tags.xml.in: 
+	* plugins/taglist/XSLT.tags.xml.in: 
+	* plugins/taglist/XUL.tags.xml.in: added "sort" attribute to TagGroup
+
+	* plugins/taglist/gedit-taglist-plugin-panel.c (insert_tag)
+	(tag_list_row_activated_cb) (tag_list_key_press_event_cb): move focus
+	to document when double-clicking on a tag. Move focus also on 
+	Ctrl + Return, but not on Return.
+
+	* plugins/taglist/gedit-taglist-plugin-parser.c (tags_cmp)
+	(parse_tag_group) (get_tag_group) (groups_cmp) (lookup_best_lang):
+	sort the tags if needed, sort the tag groups.
+
 2006-12-08  Paolo Maggi  <paolo@gnome.org>
 
 	Fixes bug #155487 – make html tag list xhtml compliant

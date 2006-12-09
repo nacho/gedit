@@ -157,7 +157,8 @@ gedit_taglist_plugin_panel_class_init (GeditTaglistPluginPanelClass *klass)
 
 static void
 insert_tag (GeditTaglistPluginPanel *panel,
-	    Tag                     *tag)
+	    Tag                     *tag,
+	    gboolean                 grab_focus)
 {
 	GeditView *view;
 	GtkTextBuffer *buffer;
@@ -228,6 +229,9 @@ insert_tag (GeditTaglistPluginPanel *panel,
 	gtk_text_buffer_place_cursor (buffer, &cursor);
 
 	gtk_text_buffer_end_user_action (buffer);
+	
+	if (grab_focus)
+		gtk_widget_grab_focus (GTK_WIDGET (view));
 }
 
 static void
@@ -252,7 +256,8 @@ tag_list_row_activated_cb (GtkTreeView             *tag_list,
 	gedit_debug_message (DEBUG_PLUGINS, "Index: %d", index);
 
 	insert_tag (panel,
-		    (Tag*)g_list_nth_data (panel->priv->selected_tag_group->tags, index));
+		    (Tag*)g_list_nth_data (panel->priv->selected_tag_group->tags, index),
+		    TRUE);
 }
 
 static gboolean 
@@ -260,7 +265,11 @@ tag_list_key_press_event_cb (GtkTreeView             *tag_list,
 			     GdkEventKey             *event,
 			     GeditTaglistPluginPanel *panel)
 {
-	if ((event->keyval == GDK_Return) && (event->state & GDK_CONTROL_MASK))
+	gboolean grab_focus;
+	
+	grab_focus = (event->state & GDK_CONTROL_MASK) != 0;
+	
+	if (event->keyval == GDK_Return)
 	{
 		GtkTreeModel *model;
 		GtkTreeSelection *selection;
@@ -280,10 +289,11 @@ tag_list_key_press_event_cb (GtkTreeView             *tag_list,
 			gedit_debug_message (DEBUG_PLUGINS, "Index: %d", index);
 
 			insert_tag (panel,
-				    (Tag*)g_list_nth_data (panel->priv->selected_tag_group->tags, index));
+				    (Tag*)g_list_nth_data (panel->priv->selected_tag_group->tags, index),
+				    grab_focus);
 		}
 
-		return FALSE;
+		return TRUE;
 	}
 
 	return FALSE;

@@ -28,6 +28,8 @@
  * $Id$
  */
 
+/* FIXME: we should rewrite the parser to avoid using DOM */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -54,7 +56,8 @@ static gint taglist_ref_count = 0;
 
 static gboolean	 parse_tag (Tag *tag, xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur);
 static gboolean	 parse_tag_group (TagGroup *tg, const gchar *fn, 
-				  xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur);
+				  xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur,
+				  gboolean sort);
 static TagGroup* get_tag_group (const gchar* filename, xmlDocPtr doc, 
 				xmlNsPtr ns, xmlNodePtr cur);
 static TagList* lookup_best_lang (TagList *taglist, const gchar *filename, 
@@ -103,9 +106,18 @@ parse_tag (Tag *tag, xmlDocPtr doc, xmlNsPtr ns, xmlNodePtr cur)
 	return TRUE;
 }
 
+static gint
+tags_cmp (gconstpointer a, gconstpointer b)
+{
+	gchar *tag_a = (gchar*)((Tag *)a)->name;
+	gchar *tag_b = (gchar*)((Tag *)b)->name;
+	
+	return g_utf8_collate (tag_a, tag_b);
+}
+
 static gboolean
 parse_tag_group (TagGroup *tg, const gchar* fn, xmlDocPtr doc, 
-		 xmlNsPtr ns, xmlNodePtr cur) 
+		 xmlNsPtr ns, xmlNodePtr cur, gboolean sort) 
 {
 	gedit_debug_message (DEBUG_PLUGINS, "Parse TagGroup: %s", tg->name);
 
@@ -145,8 +157,8 @@ parse_tag_group (TagGroup *tg, const gchar* fn, xmlDocPtr doc,
 				/* Parse Tag */
 				if (parse_tag (tag, doc, ns, cur))
 				{
-					/* Append Tag to TagGroup */
-					tg->tags = g_list_append (tg->tags, tag);
+					/* Prepend Tag to TagGroup */
+					tg->tags = g_list_prepend (tg->tags, tag);
 				}
 				else
 				{
@@ -165,6 +177,11 @@ parse_tag_group (TagGroup *tg, const gchar* fn, xmlDocPtr doc,
 		cur = cur->next;		
 	}
 
+	if (sort)
+		tg->tags = g_list_sort (tg->tags, tags_cmp);
+	else
+		tg->tags = g_list_reverse (tg->tags);	
+	
 	return TRUE;
 }
 
@@ -173,67 +190,86 @@ static TagGroup*
 get_tag_group (const gchar* filename, xmlDocPtr doc, 
 		 xmlNsPtr ns, xmlNodePtr cur) 
 {
-			TagGroup *tag_group;
+	TagGroup *tag_group;
+	gchar *sort_str;
+	gboolean sort = FALSE;
 
+	tag_group = g_new0 (TagGroup, 1);
 
-			tag_group = g_new0 (TagGroup, 1);
+	/* Get TagGroup name */
+	tag_group->name = xmlGetProp (cur, (const xmlChar *) "name");
 
-			/* Get TagGroup name */
-			tag_group->name = xmlGetProp (cur, (const xmlChar *) "name");
+	sort_str = (gchar *)xmlGetProp (cur, (const xmlChar *) "sort");
+	
+	if ((sort_str != NULL) &&
+	    ((g_ascii_strcasecmp (sort_str, "yes") == 0) ||
+	     (g_ascii_strcasecmp (sort_str, "true") == 0) ||
+	     (g_ascii_strcasecmp (sort_str, "1") == 0)))
+	{
+		sort = TRUE;
+	}
+	
+	if (tag_group->name == NULL)
+	{
+		/* Error: No name */
+		g_warning ("The tag list file '%s' is of the wrong type, "
+		   "TagGroup without name.", filename);
 
-			if (tag_group->name == NULL)
+		g_free (tag_group);
+	}
+	else
+	{
+		/* Name found */
+		gboolean exists = FALSE;
+		GList *t = taglist->tag_groups;
+		
+		/* Check if the tag group already exists */
+		while (t && !exists)
+		{
+			gchar *tgn = (gchar*)((TagGroup*)(t->data))->name;
+			
+			if (strcmp (tgn, (gchar*)tag_group->name) == 0)
 			{
-				/* Error: No name */
-				g_warning ("The tag list file '%s' is of the wrong type, "
-				   "TagGroup without name.", filename);
+				gedit_debug_message (DEBUG_PLUGINS, 
+					     "Tag group '%s' already exists.", tgn);
+				
+				exists = TRUE;
 
-				g_free (tag_group);
+				free_tag_group (tag_group);
+			}
+			
+			t = g_list_next (t);		
+		}
+
+		if (!exists)
+		{				
+			/* Parse tag group */
+			if (parse_tag_group (tag_group, filename, doc, ns, cur, sort))
+			{
+				return tag_group;
 			}
 			else
 			{
-				/* Name found */
-				gboolean exists = FALSE;
-				GList *t = taglist->tag_groups;
-				
-				/* Check if the tag group already exists */
-				while (t && !exists)
-				{
-					gchar *tgn = (gchar*)((TagGroup*)(t->data))->name;
-					
-					if (strcmp (tgn, (gchar*)tag_group->name) == 0)
-					{
-						gedit_debug_message (DEBUG_PLUGINS, 
-							     "Tag group '%s' already exists.", tgn);
-						
-						exists = TRUE;
+				/* Error parsing TagGroup */
+				g_warning ("The tag list file '%s' is of the wrong type, "
+		   			   "error parsing TagGroup '%s'.", 
+					   filename, tag_group->name);
 
-						free_tag_group (tag_group);
-					}
-					
-					t = g_list_next (t);		
-				}
-
-				if (!exists)
-				{				
-					/* Parse tag group */
-					if (parse_tag_group (tag_group, filename, doc, ns, cur))
-					{
-						return tag_group;
-					}
-					else
-					{
-						/* Error parsing TagGroup */
-						g_warning ("The tag list file '%s' is of the wrong type, "
-				   			   "error parsing TagGroup '%s'.", 
-							   filename, tag_group->name);
-
-						free_tag_group (tag_group);
-					}
-				}
+				free_tag_group (tag_group);
 			}
+		}
+	}
 	return NULL;
 }
 
+static gint
+groups_cmp (gconstpointer a, gconstpointer b)
+{
+	gchar *g_a = (gchar *)((TagGroup *)a)->name;
+	gchar *g_b = (gchar *)((TagGroup *)b)->name;
+	
+	return g_utf8_collate (g_a, g_b);
+}
 
 /* 
  *  tags file is localized by intltool-merge below.
@@ -289,14 +325,14 @@ lookup_best_lang (TagList *taglist, const gchar *filename,
 			cur_lanking = 1;
 
 			/* 
-			 * When found a new TagGroup, append the best 
+			 * When found a new TagGroup, prepend the best 
 			 * tag_group to taglist. In the current intltool-merge, 
 			 * the first section is the default lang NULL.
 			 */
 			if (lang == NULL) {
 				if (best_tag_group != NULL) {
 					taglist->tag_groups = 
-					g_list_append (taglist->tag_groups, best_tag_group);
+					g_list_prepend (taglist->tag_groups, best_tag_group);
 				}
 
 				best_tag_group = NULL;
@@ -367,15 +403,16 @@ lookup_best_lang (TagList *taglist, const gchar *filename,
 		cur = cur->next;
     	} /* End of while (cur != NULL) */
 
-	/* Append TagGroup to TagList */
+	/* Prepend TagGroup to TagList */
 	if (best_tag_group != NULL) {
 		taglist->tag_groups = 
-			g_list_append (taglist->tag_groups, best_tag_group);
+			g_list_prepend (taglist->tag_groups, best_tag_group);
 	}
 
+	taglist->tag_groups = g_list_sort (taglist->tag_groups, groups_cmp);
+	
 	return taglist;
 }
-
 
 static TagList *
 parse_taglist_file (const gchar* filename)
