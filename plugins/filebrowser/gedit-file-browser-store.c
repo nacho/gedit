@@ -509,7 +509,7 @@ gedit_file_browser_store_get_path_real (GeditFileBrowserStore * model,
 	FileBrowserNode *check;
 	GSList *item;
 	gint num = 0;
-
+	
 	while (node != model->priv->virtual_root) {
 		if (node->parent == NULL) {
 			gtk_tree_path_free (path);
@@ -1289,10 +1289,6 @@ file_browser_node_free (GeditFileBrowserStore * model,
 	g_free (node);
 }
 
-/* Should only be called for removing nodes that are visible in the model 
- * ======================================================================
- */
-
 /**
  * model_remove_node_children:
  * @model: the #GeditFileBrowserStore
@@ -1322,6 +1318,15 @@ model_remove_node_children (GeditFileBrowserStore * model,
 	if (dir->children == NULL)
 		return;
 
+	if (!model_node_visibility (model, node)) {
+		// Node is invisible and therefore the children can just
+		// be freed
+		if (free_nodes)
+			file_browser_node_free_children (model, node);
+		
+		return;
+	}
+
 	if (path == NULL)
 		path_child =
 		    gedit_file_browser_store_get_path_real (model, node);
@@ -1329,6 +1334,7 @@ model_remove_node_children (GeditFileBrowserStore * model,
 		path_child = gtk_tree_path_copy (path);
 
 	gtk_tree_path_down (path_child);
+
 	list = g_slist_copy (dir->children);
 
 	for (item = list; item; item = item->next)
