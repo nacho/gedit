@@ -579,6 +579,69 @@ update_next_prev_doc_sensitivity_per_window (GeditWindow *window)
 }
 
 static void
+received_clipboard_contents (GtkClipboard     *clipboard,
+			     GtkSelectionData *selection_data,
+			     GeditWindow      *window)
+{
+	gboolean sens;
+	GtkAction *action;
+
+	/* getting clipboard contents is async, so we need to
+	 * get the current tab and its state */
+
+	if (window->priv->active_tab != NULL)
+	{
+		GeditTabState state;
+		gboolean state_normal;
+
+		state = gedit_tab_get_state (window->priv->active_tab);
+		state_normal = (state == GEDIT_TAB_STATE_NORMAL);
+
+		sens = state_normal &&
+		       gtk_selection_data_targets_include_text (selection_data);
+	}
+	else
+	{
+		sens = FALSE;
+	}
+
+	action = gtk_action_group_get_action (window->priv->action_group,
+					      "EditPaste");
+
+	gtk_action_set_sensitive (action, sens);
+
+	g_object_unref (window);
+}
+
+static void
+set_paste_sensitivity_according_to_clipboard (GeditWindow  *window,
+					      GtkClipboard *clipboard)
+{
+	GdkDisplay *display;
+
+	display = gtk_clipboard_get_display (clipboard);
+
+	if (gdk_display_supports_selection_notification (display))
+	{
+		gtk_clipboard_request_contents (clipboard,
+						gdk_atom_intern ("TARGETS", FALSE),
+						(GtkClipboardReceivedFunc) received_clipboard_contents,
+						g_object_ref (window));
+	}
+	else
+	{
+		GtkAction *action;
+
+		action = gtk_action_group_get_action (window->priv->action_group,
+						      "EditPaste");
+
+		/* XFIXES extension not availbale, make
+		 * Paste always sensitive */
+		gtk_action_set_sensitive (action, TRUE);
+	}
+}
+
+static void
 set_sensitivity_according_to_tab (GeditWindow *window,
 				  GeditTab    *tab)
 {
@@ -588,6 +651,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 	gboolean       b;
 	gboolean       state_normal;
 	GeditTabState  state;
+	GtkClipboard  *clipboard;
 	GeditLockdownMask lockdown;
 
 	g_return_if_fail (GEDIT_TAB (tab));
@@ -601,6 +665,9 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 
 	view = gedit_tab_get_view (tab);
 	doc = GEDIT_DOCUMENT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (view)));
+
+	clipboard = gtk_widget_get_clipboard (GTK_WIDGET (window),
+					      GDK_SELECTION_CLIPBOARD);
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileSave");
@@ -671,8 +738,15 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 				  
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditPaste");
-	gtk_action_set_sensitive (action,
-				  state_normal);
+	if (state_normal)
+	{
+		set_paste_sensitivity_according_to_clipboard (window,
+							      clipboard);
+	}
+	else
+	{
+		gtk_action_set_sensitive (action, FALSE);
+	}
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "EditDelete");
@@ -3096,6 +3170,44 @@ init_panels_visibility (GeditWindow *window)
 }
 
 static void
+clipboard_owner_change (GtkClipboard        *clipboard,
+			GdkEventOwnerChange *event,
+			GeditWindow         *window)
+{
+	set_paste_sensitivity_according_to_clipboard (window,
+						      clipboard);
+}
+
+static void
+window_realized (GtkWidget *window,
+		 gpointer  *data)
+{
+	GtkClipboard *clipboard;
+
+	clipboard = gtk_widget_get_clipboard (window,
+					      GDK_SELECTION_CLIPBOARD);
+
+	g_signal_connect (clipboard,
+			  "owner_change",
+			  G_CALLBACK (clipboard_owner_change),
+			  window);
+}
+
+static void
+window_unrealized (GtkWidget *window,
+		   gpointer  *data)
+{
+	GtkClipboard *clipboard;
+
+	clipboard = gtk_widget_get_clipboard (window,
+					      GDK_SELECTION_CLIPBOARD);
+
+	g_signal_handlers_disconnect_by_func (clipboard,
+					      G_CALLBACK (clipboard_owner_change),
+					      window);
+}
+
+static void
 gedit_window_init (GeditWindow *window)
 {
 	static gboolean is_first = TRUE;
@@ -3221,6 +3333,17 @@ gedit_window_init (GeditWindow *window)
 			  "drag_data_received",
 	                  G_CALLBACK (drag_data_received_cb), 
 	                  NULL);
+
+	/* we can get the clipboard only after the widget
+	 * is realized */
+	g_signal_connect (window,
+			  "realize",
+			  G_CALLBACK (window_realized),
+			  NULL);
+	g_signal_connect (window,
+			  "unrealize",
+			  G_CALLBACK (window_unrealized),
+			  NULL);
 
 	gedit_debug_message (DEBUG_WINDOW, "Update plugins ui");
 	gedit_plugins_engine_update_plugins_ui (window, TRUE);
