@@ -325,12 +325,20 @@ gedit_notebook_reorder_tab (GeditNotebook *src,
 			    GeditTab      *tab,
 			    gint           dest_position)
 {
+	gint old_position;
+	
 	g_return_if_fail (GEDIT_IS_NOTEBOOK (src));	
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 
+	old_position = gtk_notebook_page_num (GTK_NOTEBOOK (src), 
+				    	      GTK_WIDGET (tab));
+				    	      
+	if (old_position == dest_position)
+		return;
+
 	gtk_notebook_reorder_child (GTK_NOTEBOOK (src), 
-					    GTK_WIDGET (tab), 
-					    dest_position);
+				    GTK_WIDGET (tab),
+				    dest_position);
 		
 	if (!src->priv->drag_in_progress)
 	{

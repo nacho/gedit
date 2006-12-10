@@ -1,3 +1,12 @@
+2006-12-10  Paolo Maggi  <paolo@gnome.org>
+
+	* gedit/gedit-documents-panel.c (refresh_list) (window_tab_added)
+	(window_tabs_reordered) (treeview_row_inserted)
+	(gedit_documents_panel_init): implements documents reordering using d&d
+
+	* gedit/gedit-notebook.c (gedit_notebook_reorder_tab): do not reorder
+	if the new position of the tab is equal to the old one
+
 2006-12-09  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugins/filebrowser/gedit-file-browser-store.c: only enable dragging

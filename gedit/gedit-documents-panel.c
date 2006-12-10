@@ -34,6 +34,7 @@
 
 #include "gedit-documents-panel.h"
 #include "gedit-utils.h"
+#include "gedit-notebook.h"
 
 #include <glib/gi18n.h>
 
@@ -47,6 +48,9 @@ struct _GeditDocumentsPanelPrivate
 
 	GtkWidget    *treeview;
 	GtkTreeModel *model;
+	
+	gboolean      adding_tab;
+	gboolean      is_reodering;
 };
 
 G_DEFINE_TYPE(GeditDocumentsPanel, gedit_documents_panel, GTK_TYPE_VBOX)
@@ -167,6 +171,8 @@ refresh_list (GeditDocumentsPanel *panel)
 	GtkListStore *list_store;
 	GeditTab *active_tab;
 
+	/* g_debug ("refresh_list"); */
+	
 	list_store = GTK_LIST_STORE (panel->priv->model);
 
 	gtk_list_store_clear (list_store);
@@ -178,6 +184,8 @@ refresh_list (GeditDocumentsPanel *panel)
 	tabs = gtk_container_get_children (GTK_CONTAINER (nb));
 	l = tabs;
 
+	panel->priv->adding_tab = TRUE;
+	
 	while (l != NULL)
 	{	
 		GdkPixbuf *pixbuf;
@@ -212,6 +220,8 @@ refresh_list (GeditDocumentsPanel *panel)
 
 		l = g_list_next (l);
 	}
+	
+	panel->priv->adding_tab = FALSE;
 
 	g_list_free (tabs);
 }
@@ -279,6 +289,8 @@ window_tab_added (GeditWindow         *window,
 
 	sibling = get_iter_from_tab (panel, tab);
 
+	panel->priv->adding_tab = TRUE;
+	
 	if (gtk_list_store_iter_is_valid (GTK_LIST_STORE (panel->priv->model), 
 					  &sibling)) 
 	{
@@ -312,12 +324,17 @@ window_tab_added (GeditWindow         *window,
 	g_free (name);
 	if (pixbuf != NULL)
 		g_object_unref (pixbuf);
+
+	panel->priv->adding_tab = FALSE;		
 }			    
  
 static void
 window_tabs_reordered (GeditWindow         *window,
 		       GeditDocumentsPanel *panel)
 {
+	if (panel->priv->is_reodering)
+		return;
+		
 	refresh_list (panel);
 }
 
@@ -594,15 +611,56 @@ panel_popup_menu (GtkWidget           *treeview,
 }
 
 static void
+treeview_row_inserted (GtkTreeModel        *tree_model,
+		       GtkTreePath         *path,
+		       GtkTreeIter         *iter,
+		       GeditDocumentsPanel *panel)
+{
+	GeditTab *tab;
+	gint *indeces;
+	GtkWidget *nb;
+	gint old_position;
+	gint new_position;
+	
+	if (panel->priv->adding_tab)
+		return;
+		
+	tab = gedit_window_get_active_tab (panel->priv->window);
+	g_return_if_fail (tab != NULL);
+
+	panel->priv->is_reodering = TRUE;
+	
+	indeces = gtk_tree_path_get_indices (path);
+	
+	/* g_debug ("New Index: %d (path: %s)", indeces[0], gtk_tree_path_to_string (path));*/
+	
+	nb = _gedit_window_get_notebook (panel->priv->window);
+
+	new_position = indeces[0];
+	old_position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), 
+				    	      GTK_WIDGET (tab));
+	if (new_position > old_position)
+		new_position = MAX (0, new_position - 1);
+		
+	gedit_notebook_reorder_tab (GEDIT_NOTEBOOK (nb),
+				    tab,
+				    new_position);
+
+	panel->priv->is_reodering = FALSE;				    
+}
+
+static void
 gedit_documents_panel_init (GeditDocumentsPanel *panel)
 {
 	GtkWidget 		*sw;
 	GtkTreeViewColumn	*column;
 	GtkCellRenderer 	*cell;
 	GtkTreeSelection 	*selection;
-	// GtkWidget 		*popup_menu;
 
 	panel->priv = GEDIT_DOCUMENTS_PANEL_GET_PRIVATE (panel);
+	
+	panel->priv->adding_tab = FALSE;
+	panel->priv->is_reodering = FALSE;
 	
 	/* Create the scrolled window */
 	sw = gtk_scrolled_window_new (NULL, NULL);
@@ -627,6 +685,8 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 	g_object_unref (G_OBJECT (panel->priv->model));
   	gtk_container_add (GTK_CONTAINER (sw), panel->priv->treeview);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (panel->priv->treeview), FALSE);
+	gtk_tree_view_set_reorderable (GTK_TREE_VIEW (panel->priv->treeview), TRUE);
+	
 	gtk_widget_show (panel->priv->treeview);
 	
 	column = gtk_tree_view_column_new ();
@@ -658,7 +718,12 @@ gedit_documents_panel_init (GeditDocumentsPanel *panel)
 	g_signal_connect (panel->priv->treeview, 
 			  "popup-menu",
 			  G_CALLBACK (panel_popup_menu),
-			  panel);			  
+			  panel);
+
+	g_signal_connect (panel->priv->model, 
+			  "row-inserted",
+			  G_CALLBACK (treeview_row_inserted),
+			  panel);
 }
 
 GtkWidget *
