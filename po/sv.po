@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-11-18 03:59+0000\n"
-"PO-Revision-Date: 2006-11-18 23:04+0100\n"
+"POT-Creation-Date: 2006-12-11 10:36+0100\n"
+"PO-Revision-Date: 2006-12-11 19:49+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -481,12 +481,8 @@ msgstr[0] "Om du inte sparar kommer ändringar gjorda under den senaste minuten 
 msgstr[1] "Om du inte sparar kommer ändringar gjorda under de senaste %ld minuterna att vara borta för alltid."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
-#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "Om du inte sparar kommer ändringar gjorda under den senaste timmen att vara borta för alltid."
-msgstr[1] "Om du inte sparar kommer ändringar gjorda under de senaste %d timmarna att vara borta för alltid."
+msgstr "Om du inte sparar kommer ändringar gjorda under den senaste timmen att vara borta för alltid."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:457
 #, c-format
@@ -494,6 +490,13 @@ msgid "If you don't save, changes from the last hour and %d minute will be perma
 msgid_plural "If you don't save, changes from the last hour and %d minutes will be permanently lost."
 msgstr[0] "Om du inte sparar kommer ändringar gjorda under den senaste timmen och minuten att vara borta för alltid."
 msgstr[1] "Om du inte sparar kommer ändringar gjorda under den senaste timmen och %d minuterna att vara borta för alltid."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
+#, c-format
+msgid "If you don't save, changes from the last %d hour will be permanently lost."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Om du inte sparar kommer ändringar gjorda under den senaste timmen att vara borta för alltid."
+msgstr[1] "Om du inte sparar kommer ändringar gjorda under de senaste %d timmarna att vara borta för alltid."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
 #, c-format
@@ -562,7 +565,7 @@ msgstr "Teckenkodningar"
 msgid "E_ncodings shown in menu:"
 msgstr "Kod_ningar som visas i menyn:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:135
+#: ../gedit/dialogs/gedit-open-location-dialog.c:136
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "Öppna plats"
@@ -719,7 +722,7 @@ msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Färger</span>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
-#: ../plugins/taglist/HTML.tags.xml.in.h:23
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Bold"
 msgstr "Fet"
 
@@ -878,20 +881,20 @@ msgstr "_minut"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:302
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2
-#: ../gedit/gedit-window.c:1273
+#: ../gedit/gedit-window.c:1362
 msgid "Replace"
 msgstr "Ersätt"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:314
-#: ../gedit/gedit-window.c:1271
+#: ../gedit/dialogs/gedit-search-dialog.c:313
+#: ../gedit/gedit-window.c:1360
 msgid "Find"
 msgstr "Sök"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:366
+#: ../gedit/dialogs/gedit-search-dialog.c:390
 msgid "Replace _All"
 msgstr "Ersätt _alla"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:367
+#: ../gedit/dialogs/gedit-search-dialog.c:391
 #: ../gedit/gedit-commands-file.c:661
 msgid "_Replace"
 msgstr "_Ersätt"
@@ -1035,12 +1038,8 @@ msgstr[0] "Ändringar i dokumentet gjorda under den senaste minuten kommer att v
 msgstr[1] "Ändringar i dokumentet gjorda under de senaste %ld minuterna kommer att vara borta för alltid."
 
 #: ../gedit/gedit-commands-file.c:1184
-#: ../gedit/gedit-commands-file.c:1205
-#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Ändringar i dokumentet gjorda under den senaste timmen kommer att vara borta för alltid."
-msgstr[1] "Ändringar i dokumentet gjorda under de senaste %d timmarna kommer att vara borta för alltid."
+msgstr "Ändringar i dokumentet gjorda under den senaste timmen kommer att vara borta för alltid."
 
 #: ../gedit/gedit-commands-file.c:1190
 #, c-format
@@ -1048,6 +1047,13 @@ msgid "Changes made to the document in the last hour and %d minute will be perma
 msgid_plural "Changes made to the document in the last hour and %d minutes will be permanently lost."
 msgstr[0] "Ändringar i dokumentet gjorda under den senaste timmen och minuten kommer att vara borta för alltid."
 msgstr[1] "Ändringar i dokumentet gjorda under den senaste timmen och %d minuterna kommer att vara borta för alltid."
+
+#: ../gedit/gedit-commands-file.c:1205
+#, c-format
+msgid "Changes made to the document in the last %d hour will be permanently lost."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Ändringar i dokumentet gjorda under den senaste timmen kommer att vara borta för alltid."
+msgstr[1] "Ändringar i dokumentet gjorda under de senaste %d timmarna kommer att vara borta för alltid."
 
 #: ../gedit/gedit-commands-file.c:1231
 msgid "_Revert"
@@ -1091,18 +1097,18 @@ msgid "Unsaved Document %d"
 msgstr "Osparat dokument %d"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:573
+#: ../gedit/gedit-document-saver.c:568
 msgid "Could not obtain backup filename"
 msgstr "Kunde inte få tag på filnamn för säkerhetskopia"
 
-#: ../gedit/gedit-documents-panel.c:85
-#: ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1821
-#: ../gedit/gedit-window.c:1826
+#: ../gedit/gedit-documents-panel.c:89
+#: ../gedit/gedit-documents-panel.c:103
+#: ../gedit/gedit-window.c:1931
+#: ../gedit/gedit-window.c:1936
 msgid "Read Only"
 msgstr "Skrivskyddad"
 
-#: ../gedit/gedit-documents-panel.c:633
+#: ../gedit/gedit-documents-panel.c:693
 msgid "Documents"
 msgstr "Dokument"
 
@@ -1152,13 +1158,11 @@ msgstr "Kyrillisk"
 #: ../gedit/gedit-encodings.c:164
 #: ../gedit/gedit-encodings.c:242
 #: ../gedit/gedit-encodings.c:283
-#: ../plugins/spell/gedit-spell-checker.c:81
 msgid "Arabic"
 msgstr "Arabisk"
 
 #: ../gedit/gedit-encodings.c:166
 #: ../gedit/gedit-encodings.c:277
-#: ../plugins/spell/gedit-spell-checker.c:95
 msgid "Greek"
 msgstr "Grekisk"
 
@@ -1169,14 +1173,12 @@ msgstr "Synlig hebreisk"
 #: ../gedit/gedit-encodings.c:170
 #: ../gedit/gedit-encodings.c:240
 #: ../gedit/gedit-encodings.c:281
-#: ../plugins/spell/gedit-spell-checker.c:111
 msgid "Hebrew"
 msgstr "Hebreisk"
 
 #: ../gedit/gedit-encodings.c:172
 #: ../gedit/gedit-encodings.c:238
 #: ../gedit/gedit-encodings.c:279
-#: ../plugins/spell/gedit-spell-checker.c:152
 msgid "Turkish"
 msgstr "Turkisk"
 
@@ -1189,7 +1191,6 @@ msgid "Celtic"
 msgstr "Keltisk"
 
 #: ../gedit/gedit-encodings.c:182
-#: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Romanian"
 msgstr "Rumänsk"
 
@@ -1240,7 +1241,6 @@ msgstr "Kyrillisk/Ukrainsk"
 #: ../gedit/gedit-encodings.c:262
 #: ../gedit/gedit-encodings.c:268
 #: ../gedit/gedit-encodings.c:287
-#: ../plugins/spell/gedit-spell-checker.c:155
 msgid "Vietnamese"
 msgstr "Vietnamesisk"
 
@@ -1562,7 +1562,7 @@ msgstr "%s är inte en vanlig fil. Kontrollera att du angav platsen korrekt och 
 msgid "Could not save the file %s."
 msgstr "Kunde inte spara filen %s."
 
-#: ../gedit/gedit-notebook.c:837
+#: ../gedit/gedit-notebook.c:845
 msgid "Close document"
 msgstr "Stäng dokument"
 
@@ -1852,7 +1852,7 @@ msgid "_Open..."
 msgstr "_Öppna..."
 
 #: ../gedit/gedit-ui.h:64
-#: ../gedit/gedit-window.c:1396
+#: ../gedit/gedit-window.c:1485
 msgid "Open a file"
 msgstr "Öppna en fil"
 
@@ -2017,11 +2017,11 @@ msgid "Go to a specific line"
 msgstr "Gå till en specifik rad"
 
 #: ../gedit/gedit-ui.h:129
-msgid "Interactive search..."
+msgid "Incremental search..."
 msgstr "Interaktiv sökning..."
 
 #: ../gedit/gedit-ui.h:130
-msgid "Interactively search for text"
+msgid "Incrementally search for text"
 msgstr "Interaktiv sökning efter text"
 
 #. Documents menu
@@ -2139,7 +2139,7 @@ msgstr "Sträng du vill söka efter"
 msgid "Line you want to move the cursor to"
 msgstr "Rad du vill flytta markören till"
 
-#: ../gedit/gedit-window.c:823
+#: ../gedit/gedit-window.c:901
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Använd färgmarkeringsläge för %s"
@@ -2147,37 +2147,37 @@ msgstr "Använd färgmarkeringsläge för %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:878
+#: ../gedit/gedit-window.c:958
 msgid "None"
 msgstr "Ingen"
 
-#: ../gedit/gedit-window.c:879
+#: ../gedit/gedit-window.c:959
 msgid "Disable syntax highlighting"
 msgstr "Inaktivera syntaxmarkering"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1150
+#: ../gedit/gedit-window.c:1239
 #, c-format
 msgid "Open '%s'"
 msgstr "Öppna \"%s\""
 
-#: ../gedit/gedit-window.c:1269
+#: ../gedit/gedit-window.c:1358
 msgid "Save"
 msgstr "Spara"
 
-#: ../gedit/gedit-window.c:1400
+#: ../gedit/gedit-window.c:1489
 msgid "Open a recently used file"
 msgstr "Öppna en nyligen använd fil"
 
-#: ../gedit/gedit-window.c:1407
+#: ../gedit/gedit-window.c:1496
 msgid "Open"
 msgstr "Öppna"
 
-#: ../gedit/gedit-window.c:1496
-#: ../gedit/gedit-window.c:2146
+#. Translators: %s is a URI
+#: ../gedit/gedit-window.c:1546
 #, c-format
-msgid "Activate %s"
-msgstr "Aktivera %s"
+msgid "Activate '%s'"
+msgstr "Aktivera \"%s\""
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
@@ -2288,123 +2288,123 @@ msgstr "Starta externa kommandon och skalskript."
 msgid "External Tools"
 msgstr "Externa verktyg"
 
-#: ../plugins/externaltools/tools/__init__.py:42
+#: ../plugins/externaltools/tools/__init__.py:129
 msgid "_External Tools..."
 msgstr "_Externa verktyg..."
 
-#: ../plugins/externaltools/tools/__init__.py:44
+#: ../plugins/externaltools/tools/__init__.py:131
 msgid "Opens the External Tools Manager"
 msgstr "Öppnar hanteraren för externa verktyg"
 
-#: ../plugins/externaltools/tools/__init__.py:61
+#: ../plugins/externaltools/tools/__init__.py:161
 msgid "Shell Output"
 msgstr "Skalutdata"
 
-#: ../plugins/externaltools/tools/functions.py:241
+#: ../plugins/externaltools/tools/functions.py:108
 msgid "You must be inside a word to run this command"
 msgstr "Du måste vara inom ett ord för att köra detta kommando"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:165
 msgid "Running tool:"
 msgstr "Körande verktyg:"
 
-#: ../plugins/externaltools/tools/functions.py:321
+#: ../plugins/externaltools/tools/functions.py:188
 msgid "Done."
 msgstr "Klar."
 
-#: ../plugins/externaltools/tools/functions.py:323
+#: ../plugins/externaltools/tools/functions.py:190
 msgid "Exited"
 msgstr "Avslutade"
 
-#: ../plugins/externaltools/tools/manager.py:40
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Ingenting"
 
-#: ../plugins/externaltools/tools/manager.py:41
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Aktuellt dokument"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Aktuell markering"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Aktuell rad"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Aktuellt ord"
 
-#: ../plugins/externaltools/tools/manager.py:47
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Infoga i _utdatapanel"
 
-#: ../plugins/externaltools/tools/manager.py:48
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Skapa nytt dokument"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Infoga till aktuellt dokument"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Ersätt aktuellt dokument"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Ersätt aktuell markering"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Infoga vid markörpositionen"
 
-#: ../plugins/externaltools/tools/manager.py:55
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Alla dokument"
 
-#: ../plugins/externaltools/tools/manager.py:56
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Alla dokument utom namnlösa dokument"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Endast lokala filer"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Endast fjärrfiler"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Endast namnlösa dokument"
 
-#: ../plugins/externaltools/tools/manager.py:189
-#: ../plugins/externaltools/tools/manager.py:206
-#: ../plugins/externaltools/tools/manager.py:245
+#: ../plugins/externaltools/tools/manager.py:200
+#: ../plugins/externaltools/tools/manager.py:228
+#: ../plugins/externaltools/tools/manager.py:276
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Redigeringsverktyg <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:193
+#: ../plugins/externaltools/tools/manager.py:204
 msgid "A Brand New Tool"
 msgstr "Ett alldeles nytt verktyg"
 
-#: ../plugins/externaltools/tools/manager.py:216
+#: ../plugins/externaltools/tools/manager.py:237
 msgid "New tool"
 msgstr "Nytt verktyg"
 
-#: ../plugins/externaltools/tools/manager.py:277
+#: ../plugins/externaltools/tools/manager.py:312
 #, python-format
 msgid "This accelerator is already bound to %s"
 msgstr "Denna snabbtangent är redan bunden till %s"
 
-#: ../plugins/externaltools/tools/manager.py:328
+#: ../plugins/externaltools/tools/manager.py:358
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Ange en ny snabbtangent, eller tryck Backsteg för att rensa"
 
-#: ../plugins/externaltools/tools/manager.py:330
+#: ../plugins/externaltools/tools/manager.py:360
 msgid "Type a new accelerator"
 msgstr "Ange en ny snabbtangent"
 
@@ -2421,14 +2421,6 @@ msgid "Edit tool <i>make</i>:"
 msgstr "Redigera verktyget <i>make</i>:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:4
-msgid "External Tools Manager"
-msgstr "Hantera externa verktyg"
-
-#: ../plugins/externaltools/tools/tools.glade.h:5
-msgid "F7"
-msgstr "F7"
-
-#: ../plugins/externaltools/tools/tools.glade.h:6
 msgid ""
 "Nothing\n"
 "Current document\n"
@@ -2438,37 +2430,37 @@ msgstr ""
 "Aktuellt dokument\n"
 "Alla dokument"
 
-#: ../plugins/externaltools/tools/tools.glade.h:9
-msgid "Run “make” in the document dir"
-msgstr "Kör \"make\" i dokumentkatalogen"
-
-#: ../plugins/externaltools/tools/tools.glade.h:10
+#: ../plugins/externaltools/tools/tools.glade.h:7
 msgid "_Accelerator:"
 msgstr "_Snabbtangent:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:11
+#: ../plugins/externaltools/tools/tools.glade.h:8
 msgid "_Applicability:"
 msgstr "_Användbarhet:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:12
+#: ../plugins/externaltools/tools/tools.glade.h:9
 msgid "_Description:"
 msgstr "_Beskrivning:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:13
+#: ../plugins/externaltools/tools/tools.glade.h:10
 msgid "_Input:"
 msgstr "_Inmatning:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:14
+#: ../plugins/externaltools/tools/tools.glade.h:11
 msgid "_Output:"
 msgstr "_Utdata:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:15
+#: ../plugins/externaltools/tools/tools.glade.h:12
 msgid "_Save:"
 msgstr "_Spara:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:16
+#: ../plugins/externaltools/tools/tools.glade.h:13
 msgid "_Tools:"
 msgstr "Verkty_g:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "gtk-revert-to-saved"
+msgstr ""
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
@@ -2612,150 +2604,154 @@ msgstr ""
 msgid "If you delete an item it is permanently lost."
 msgstr "Om du tar bort ett objekt är det permanent borta."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2430
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2503
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
 msgid "Invalid uri"
 msgstr "Ogiltig uri"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2788
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2861
 msgid "file"
 msgstr "fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2809
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2856
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2882
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2929
 msgid "The new file is currently filtered out. You need to adjust your filter settings to make the file visible"
 msgstr "Den nya filen är för närvarande bortfiltrerad. Du behöver justera dina filterinställningar för att göra filen synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2837
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2910
 msgid "directory"
 msgstr "katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:719
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:714
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
-msgid "_New Directory"
-msgstr "_Ny katalog"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:720
+msgid "Recent Files"
+msgstr "Senaste filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
-msgid "Add new empty directory"
-msgstr "Lägg till en ny tom katalog"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
+msgid "_New Folder"
+msgstr "_Ny mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
+msgid "Add new empty folder"
+msgstr "Lägg till ny tom mapp"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
 msgid "New F_ile"
 msgstr "Ny f_il"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Add new empty file"
 msgstr "Lägg till en ny tom fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Up"
 msgstr "Upp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Open the parent folder"
 msgstr "Öppna föräldramappen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
 msgid "_Rename"
 msgstr "_Byt namn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
-msgid "Rename selected file or directory"
-msgstr "Byt namn på markerad fil eller katalog"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+msgid "Rename selected file or folder"
+msgstr "Byt namn på markerad fil eller mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:817
 msgid "_Move To Trash"
 msgstr "_Flytta till papperskorg"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
-msgid "Move selected file or directory to trash"
-msgstr "Flytta markerad fil eller katalog till papperskorgen"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+msgid "Move selected file or folder to trash"
+msgstr "Flytta markerad fil eller mapp till papperskorgen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
-msgid "Delete selected file or directory"
-msgstr "Ta bort markerad fil eller katalog"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+msgid "Delete selected file or folder"
+msgstr "Ta bort markerad fil eller mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
 msgid "_Previous Location"
 msgstr "_Föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
 msgid "Go to the previous visited location"
 msgstr "Gå till föregående besökt plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
 msgid "_Next Location"
 msgstr "_Nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
 msgid "Go to the next visited location"
 msgstr "Gå till nästa besökta plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "Re_fresh View"
 msgstr "Upp_datera vy"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
 msgid "Refresh the view"
 msgstr "Uppdatera vyn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
-msgid "_View Directory"
-msgstr "_Visa katalog"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "_View Folder"
+msgstr "_Visa mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
-msgid "View directory in file manager"
-msgstr "Visa katalog i filhanterare"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "View folder in file manager"
+msgstr "Visa mapp i filhanterare"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
 msgid "Show _Hidden"
 msgstr "Visa _dolda"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
-msgid "Show hidden files and directories"
-msgstr "Visa dolda filer och kataloger"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+msgid "Show hidden files and folders"
+msgstr "Visa dolda filer och mappar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
 msgid "Show _Binary"
 msgstr "Visa _binära"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
 msgid "Show binary files"
 msgstr "Visa binära filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:949
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
 msgid "Previous location"
 msgstr "Föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:936
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
 msgid "Go to previous location"
 msgstr "Gå till föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:942
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
 msgid "Go to a previously opened location"
 msgstr "Gå till en tidigare öppnad plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
 msgid "Next location"
 msgstr "Nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:968
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
 msgid "Go to next location"
 msgstr "Gå till nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1129
-msgid "Advanced filtering"
-msgstr "Avancerad filtrering"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1124
+msgid "_Advanced filtering"
+msgstr "_Avancerad filtrering"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2926,332 +2922,28 @@ msgstr "_Baklänges"
 msgid "_Sort"
 msgstr "_Sortera"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:419
-#: ../plugins/spell/gedit-spell-checker-dialog.c:511
+#: ../plugins/spell/gedit-automatic-spell-checker.c:418
+#: ../plugins/spell/gedit-spell-checker-dialog.c:494
 msgid "(no suggested words)"
 msgstr "(inga föreslagna ord)"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:443
+#: ../plugins/spell/gedit-automatic-spell-checker.c:442
 msgid "_More..."
 msgstr "_Mer..."
 
 #. Ignore all
-#: ../plugins/spell/gedit-automatic-spell-checker.c:496
+#: ../plugins/spell/gedit-automatic-spell-checker.c:495
 msgid "_Ignore All"
 msgstr "_Ignorera alla"
 
 #. + Add to Dictionary
-#: ../plugins/spell/gedit-automatic-spell-checker.c:509
+#: ../plugins/spell/gedit-automatic-spell-checker.c:508
 msgid "_Add"
 msgstr "_Lägg till"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:546
+#: ../plugins/spell/gedit-automatic-spell-checker.c:545
 msgid "_Spelling Suggestions..."
 msgstr "_Stavningsförslag..."
-
-#: ../plugins/spell/gedit-spell-checker.c:79
-msgid "Afrikaans"
-msgstr "Afrikaans"
-
-#: ../plugins/spell/gedit-spell-checker.c:80
-msgid "Amharic"
-msgstr "Amhariska"
-
-#: ../plugins/spell/gedit-spell-checker.c:82
-msgid "Arabic (Egypt)"
-msgstr "Arabisk (Egypten)"
-
-#: ../plugins/spell/gedit-spell-checker.c:83
-msgid "Azerbaijani"
-msgstr "Azerbajdzjanska"
-
-#: ../plugins/spell/gedit-spell-checker.c:84
-msgid "Belarusian"
-msgstr "Vitryska"
-
-#: ../plugins/spell/gedit-spell-checker.c:85
-msgid "Bulgarian"
-msgstr "Bulgariska"
-
-#: ../plugins/spell/gedit-spell-checker.c:86
-msgid "Bengali"
-msgstr "Bengali"
-
-#: ../plugins/spell/gedit-spell-checker.c:87
-msgid "Breton"
-msgstr "Bretonska"
-
-#: ../plugins/spell/gedit-spell-checker.c:88
-msgid "Catalan"
-msgstr "Katalanska"
-
-#: ../plugins/spell/gedit-spell-checker.c:89
-msgid "Czech"
-msgstr "Tjeckiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:90
-msgid "Welsh"
-msgstr "Kymriska"
-
-#: ../plugins/spell/gedit-spell-checker.c:91
-msgid "Danish"
-msgstr "Danska"
-
-#: ../plugins/spell/gedit-spell-checker.c:92
-msgid "German (Austria)"
-msgstr "Tyska (Österrike)"
-
-#: ../plugins/spell/gedit-spell-checker.c:93
-msgid "German (Germany)"
-msgstr "Tyska (Tyskland)"
-
-#: ../plugins/spell/gedit-spell-checker.c:94
-msgid "German (Swiss)"
-msgstr "Tyska (Schweiz)"
-
-#: ../plugins/spell/gedit-spell-checker.c:96
-msgid "English (American)"
-msgstr "Engelska (amerikansk)"
-
-#: ../plugins/spell/gedit-spell-checker.c:97
-msgid "English (British)"
-msgstr "Engelska (brittisk)"
-
-#: ../plugins/spell/gedit-spell-checker.c:98
-msgid "English (Canadian)"
-msgstr "Engelska (kanadensisk)"
-
-#: ../plugins/spell/gedit-spell-checker.c:99
-msgid "Esperanto"
-msgstr "Esperanto"
-
-#: ../plugins/spell/gedit-spell-checker.c:100
-msgid "Spanish"
-msgstr "Spanska"
-
-#: ../plugins/spell/gedit-spell-checker.c:101
-msgid "Estonian"
-msgstr "Estniska"
-
-#: ../plugins/spell/gedit-spell-checker.c:102
-msgid "Persian"
-msgstr "Persiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:103
-msgid "Finnish"
-msgstr "Finska"
-
-#: ../plugins/spell/gedit-spell-checker.c:104
-msgid "Faroese"
-msgstr "Färöiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:105
-msgid "French (France)"
-msgstr "Franska (Frankrike)"
-
-#: ../plugins/spell/gedit-spell-checker.c:106
-msgid "French (Swiss)"
-msgstr "Franska (Schweiz)"
-
-#: ../plugins/spell/gedit-spell-checker.c:107
-msgid "Irish"
-msgstr "Iriska"
-
-#: ../plugins/spell/gedit-spell-checker.c:108
-msgid "Scottish Gaelic"
-msgstr "Höglandsskotska"
-
-#: ../plugins/spell/gedit-spell-checker.c:109
-msgid "Gallegan"
-msgstr "Galiciska"
-
-#: ../plugins/spell/gedit-spell-checker.c:110
-msgid "Manx Gaelic"
-msgstr "Manx"
-
-#: ../plugins/spell/gedit-spell-checker.c:112
-msgid "Hindi"
-msgstr "Hindi"
-
-#: ../plugins/spell/gedit-spell-checker.c:113
-msgid "Croatian"
-msgstr "Kroatisk"
-
-# Osäker
-#: ../plugins/spell/gedit-spell-checker.c:114
-msgid "Upper Sorbian"
-msgstr "Översorbiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:115
-msgid "Hungarian"
-msgstr "Ungerska"
-
-#: ../plugins/spell/gedit-spell-checker.c:116
-msgid "Interlingua (IALA)"
-msgstr "Interlingua (IALA)"
-
-#: ../plugins/spell/gedit-spell-checker.c:117
-msgid "Indonesian"
-msgstr "Indonesiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:118
-msgid "Icelandic"
-msgstr "Isländska"
-
-#: ../plugins/spell/gedit-spell-checker.c:119
-msgid "Italian"
-msgstr "Italienska"
-
-#: ../plugins/spell/gedit-spell-checker.c:120
-msgid "Kurdish"
-msgstr "Kurdiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:121
-msgid "Latin"
-msgstr "Latin"
-
-#: ../plugins/spell/gedit-spell-checker.c:122
-msgid "Lithuanian"
-msgstr "Litauiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:123
-msgid "Latvian"
-msgstr "Lettiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:124
-msgid "Malagasy"
-msgstr "Malagasy"
-
-#: ../plugins/spell/gedit-spell-checker.c:125
-msgid "Maori"
-msgstr "Maori"
-
-#: ../plugins/spell/gedit-spell-checker.c:126
-msgid "Macedonian"
-msgstr "Makedonska"
-
-# Libris vill ha det så.
-#: ../plugins/spell/gedit-spell-checker.c:127
-msgid "Mongolian"
-msgstr "Mongoliska språk"
-
-#: ../plugins/spell/gedit-spell-checker.c:128
-msgid "Marathi"
-msgstr "Marathi"
-
-#: ../plugins/spell/gedit-spell-checker.c:129
-msgid "Malay"
-msgstr "Malajiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:130
-msgid "Maltese"
-msgstr "Maltesiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:131
-msgid "Norwegian Bokmal"
-msgstr "Norska, bokmål"
-
-#: ../plugins/spell/gedit-spell-checker.c:132
-msgid "Dutch"
-msgstr "Holländska"
-
-# bugg!
-# Libris vill ha det så.
-#: ../plugins/spell/gedit-spell-checker.c:133
-msgid "Norwegian Nynorsk"
-msgstr "Nynorsk"
-
-#: ../plugins/spell/gedit-spell-checker.c:134
-msgid "Norwegian"
-msgstr "Norska"
-
-#: ../plugins/spell/gedit-spell-checker.c:135
-msgid "Nyanja"
-msgstr "Nyanja"
-
-#: ../plugins/spell/gedit-spell-checker.c:136
-msgid "Polish"
-msgstr "Polska"
-
-#: ../plugins/spell/gedit-spell-checker.c:137
-msgid "Portuguese (Portugal)"
-msgstr "Portugisiska (Portugal)"
-
-#: ../plugins/spell/gedit-spell-checker.c:138
-msgid "Portuguese (Brazilian)"
-msgstr "Portugisiska (brasiliansk)"
-
-#: ../plugins/spell/gedit-spell-checker.c:139
-msgid "Quechua"
-msgstr "Quechua"
-
-#: ../plugins/spell/gedit-spell-checker.c:141
-msgid "Russian"
-msgstr "Ryska"
-
-#: ../plugins/spell/gedit-spell-checker.c:142
-msgid "Kinyarwanda"
-msgstr "Rwanda"
-
-#: ../plugins/spell/gedit-spell-checker.c:143
-msgid "Sardinian"
-msgstr "Sardiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:144
-msgid "Slovak"
-msgstr "Slovakiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:145
-msgid "Slovenian"
-msgstr "Slovenska"
-
-#: ../plugins/spell/gedit-spell-checker.c:146
-msgid "Swedish"
-msgstr "Svenska"
-
-#: ../plugins/spell/gedit-spell-checker.c:147
-msgid "Swahili"
-msgstr "Swahili"
-
-#: ../plugins/spell/gedit-spell-checker.c:148
-msgid "Tamil"
-msgstr "Tamil"
-
-#: ../plugins/spell/gedit-spell-checker.c:149
-msgid "Tetum"
-msgstr "Tetum"
-
-#: ../plugins/spell/gedit-spell-checker.c:150
-msgid "Tagalog"
-msgstr "Tagalog"
-
-#: ../plugins/spell/gedit-spell-checker.c:151
-msgid "Tswana"
-msgstr "Tswana"
-
-#: ../plugins/spell/gedit-spell-checker.c:153
-msgid "Ukrainian"
-msgstr "Ukrainska"
-
-#: ../plugins/spell/gedit-spell-checker.c:154
-msgid "Uzbek"
-msgstr "Uzbekiska"
-
-#: ../plugins/spell/gedit-spell-checker.c:156
-msgid "Walloon"
-msgstr "Vallonska"
-
-#: ../plugins/spell/gedit-spell-checker.c:157
-msgid "Yiddish"
-msgstr "Jiddisch"
-
-#: ../plugins/spell/gedit-spell-checker.c:158
-msgid "Zulu"
-msgstr "Zulu"
-
-#: ../plugins/spell/gedit-spell-checker.c:830
-msgid "Default"
-msgstr "Standard"
 
 #: ../plugins/spell/gedit-spell-checker-dialog.c:289
 msgid "Check Spelling"
@@ -3261,20 +2953,53 @@ msgstr "Kontrollera stavning"
 msgid "Suggestions"
 msgstr "Förslag"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:615
+#: ../plugins/spell/gedit-spell-checker-dialog.c:600
 msgid "(correct spelling)"
 msgstr "(korrigera stavning)"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:800
+#: ../plugins/spell/gedit-spell-checker-dialog.c:743
 msgid "Completed spell checking"
 msgstr "Stavningskontrollen färdig"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:244
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#. * Translators: the first %s is the language name, and the
+#. * second %s is the locale name. Example:
+#. * "French (France)"
+#.
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#: ../plugins/spell/gedit-spell-checker-language.c:287
+#: ../plugins/spell/gedit-spell-checker-language.c:295
+#, c-format
+msgid "language|%s (%s)"
+msgstr "%s (%s)"
+
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#. * Translators: this refers to an unknown language code
+#. * (one which isn't in our built-in list).
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:306
+#, c-format
+msgid "language|Unknown (%s)"
+msgstr "Okänt (%s)"
+
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#. * Translators: this refers the Default language used by the
+#. * spell checker
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:414
+msgid "language|Default"
+msgstr "Standard"
+
+#: ../plugins/spell/gedit-spell-language-dialog.c:237
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Kunde inte hitta de nödvändiga widgetarna i %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:265
+#: ../plugins/spell/gedit-spell-language-dialog.c:258
 msgid "Languages"
 msgstr "Språk"
 
@@ -3302,11 +3027,11 @@ msgstr "Kontrollera stavning _automatiskt"
 msgid "Automatically spell-check the current document"
 msgstr "Stavningskontrollera automatiskt det aktuella dokumentet"
 
-#: ../plugins/spell/gedit-spell-plugin.c:713
+#: ../plugins/spell/gedit-spell-plugin.c:714
 msgid "The document is empty."
 msgstr "Dokumentet är tomt."
 
-#: ../plugins/spell/gedit-spell-plugin.c:745
+#: ../plugins/spell/gedit-spell-plugin.c:746
 msgid "No misspelled words"
 msgstr "Inga felstavade ord"
 
@@ -3387,20 +3112,20 @@ msgstr "Kontrollerar stavningen i det aktuella dokumentet."
 msgid "Spell checker"
 msgstr "Stavningskontroll"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
 msgid "Select the group of tags you want to use"
 msgstr "Välj den grupp med taggar som du vill använda"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:627
 msgid "Available Tag Lists"
 msgstr "Tillgängliga tagglistor"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:630
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:649
 msgid "Tags"
 msgstr "Taggar"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:644
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Dubbelklicka på en tagg för att infoga det i det aktuella dokumentet"
 
@@ -3448,997 +3173,1125 @@ msgstr "Ankar-URI"
 msgid "Applet class file code"
 msgstr "Applet-klassfilsnamn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:12
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:13
+msgid "Applet class file code (deprecated)"
+msgstr "Applet-klassfilsnamn (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
 msgstr "Vektor"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:13
+#: ../plugins/taglist/HTML.tags.xml.in.h:15
 msgid "Associated information"
 msgstr "Associerad information"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:14
+#: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "Author info"
 msgstr "Författarinformation"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:15
+#: ../plugins/taglist/HTML.tags.xml.in.h:17
 msgid "Axis related headers"
 msgstr "Axelrelaterade huvuden"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:16
-msgid "BGSound"
-msgstr "BGSound"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:17
+#: ../plugins/taglist/HTML.tags.xml.in.h:18
 msgid "Background color"
 msgstr "Bakgrundsfärg"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:18
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:20
+msgid "Background color (deprecated)"
+msgstr "Bakgrundsfärg (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Background texture tile"
 msgstr "Bakgrundstexturbricka"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:19
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:23
+msgid "Background texture tile (deprecated)"
+msgstr "Bakgrundstexturbricka (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Base URI"
 msgstr "Bas-URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:20
+#: ../plugins/taglist/HTML.tags.xml.in.h:25
 msgid "Base font"
 msgstr "Bastypsnitt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:21
-msgid "Behavior"
-msgstr "Beteende"
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:27
+msgid "Base font (deprecated)"
+msgstr "Grundtypsnitt (utfasad)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:22
-msgid "Blinking text"
-msgstr "Blinkande text"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:24
+#: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
 msgstr "Kant"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:25
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:31
+msgid "Border (deprecated)"
+msgstr "Ram (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
 msgstr "Kantfärg"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:26
-msgid "Box"
-msgstr "Låda"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:27
+#: ../plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Cell rowspan"
 msgstr "Cellradvidd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
+#: ../plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Center"
 msgstr "Mitt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:29
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:36
+msgid "Center (deprecated)"
+msgstr "Centrera (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Character encoding of linked resource"
 msgstr "Teckenkodning för länkad resurs"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:30
+#: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Checked (state)"
 msgstr "Ikryssat (tillstånd)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:31
+#: ../plugins/taglist/HTML.tags.xml.in.h:39
+msgid "Checked state"
+msgstr "Ikryssat tillstånd"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:40
 msgid "Citation"
 msgstr "Citering"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:32
+#: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Cite reason for change"
 msgstr "Ange orsak för ändring"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:33
+#: ../plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Class implementation ID"
 msgstr "Id för klassimplementation"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:34
+#: ../plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Class list"
 msgstr "Klasslista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:35
+#: ../plugins/taglist/HTML.tags.xml.in.h:44
 msgid "Clear text flow control"
 msgstr "Töm textflödeskontroll"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:36
+#: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "Code content type"
 msgstr "Typ av kodinnehåll"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:37
+#: ../plugins/taglist/HTML.tags.xml.in.h:46
 msgid "Color of selected links"
 msgstr "Färg på markerade länkar"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:38
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:48
+msgid "Color of selected links (deprecated)"
+msgstr "Färg på markerade länkar (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
 msgstr "Kolumnvidd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:39
+#: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Columns"
 msgstr "Kolumner"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:40
+#: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Comment"
 msgstr "Kommentar"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:41
+#: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Computer code fragment"
 msgstr "Datorkodfragment"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:42
+#: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Content scheme"
 msgstr "Innehållsschema"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:43
+#: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Content type"
 msgstr "Innehållstyp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:44
+#. The "type" attribute is deprecated for the "ol" tag only,
+#. since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:57
+msgid "Content type (deprecated)"
+msgstr "Innehållstyp (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Coordinates"
 msgstr "Koordinater"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:45
+#: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "DIV Style container"
 msgstr "DIV-stilcontainer"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:46
+#: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "DIV container"
 msgstr "DIV-container"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:47
+#: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Date and time of change"
 msgstr "Datum och tid för ändring"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:48
+#. NOTE: used in "object" tag
+#: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Declare flag"
 msgstr "Deklarera flagga"
 
 #. Translators: DEFER is an optional attribute of the <script> tag.
 #. It indicates that the script is not going to generate any document
 #. content. The browser can continue parsing and drawing the page.
-#: ../plugins/taglist/HTML.tags.xml.in.h:52
+#: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Defer attribute"
 msgstr "Defer-attribut"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:53
+#: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Definition description"
 msgstr "Definitionsbeskrivning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:54
+#: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Definition list"
 msgstr "Definitionslista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:55
+#: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Definition term"
 msgstr "Definitionsterm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:56
+#: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Deleted text"
 msgstr "Borttagen text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Direction"
 msgstr "Riktning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:58
+#: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Directionality"
 msgstr "Riktning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:59
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:75
+msgid "Directionality (deprecated)"
+msgstr "Riktning (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
 msgstr "Kataloglista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:60
+#: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Disabled"
 msgstr "Inaktiverad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:61
+#: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Document base"
 msgstr "Dokumentbas"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:62
+#: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Document body"
 msgstr "Dokumenttext"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:63
+#: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Document head"
 msgstr "Dokumenthuvud"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:64
+#: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Document title"
 msgstr "Dokumenttitel"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:65
+#: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Document type"
 msgstr "Dokumenttyp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:66
+#: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Element ID"
 msgstr "Element-id"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:67
+#: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Embedded object"
 msgstr "Inbäddat objekt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:68
+#: ../plugins/taglist/HTML.tags.xml.in.h:85
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Betoning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:69
+#: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Encode type"
 msgstr "KOdningstyp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:70
+#: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Figure"
 msgstr "Figur"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:71
+#: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Font face"
 msgstr "Typnsnitt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:72
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:90
+msgid "Font face (deprecated)"
+msgstr "Typsnitt (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "For label"
 msgstr "För etikett"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:73
+#: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Forced line break"
 msgstr "Framtvingad radbrytning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:74
+#: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Form"
 msgstr "Formulär"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "Form action handler"
 msgstr "Formuläråtgärdshanterare"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:76
+#: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "Form control group"
 msgstr "Formulärkontrollgrupp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:77
+#: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Form field label text"
 msgstr "Etikettext för formulärfält"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:78
+#: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Form input"
 msgstr "Formulärinmatning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:79
+#: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Form input type"
 msgstr "Typ av formulärinmatning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:80
+#: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Form method"
 msgstr "Formulärmetod"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:81
+#: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Forward link"
 msgstr "Framåtlänk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:82
+#: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Frame"
 msgstr "Ram"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:83
+#: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Frame render parts"
 msgstr "Ramrenderingsdelar"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:84
+#: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Frame source"
 msgstr "Ramkälla"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:85
+#: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Frame target"
 msgstr "Rammål"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:86
+#: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Frameborder"
 msgstr "Ramkant"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:87
+#: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Frameset"
 msgstr "Ramsamling"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:88
+#: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Frameset columns"
 msgstr "Ramsamlingskolumner"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:89
+#: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Frameset rows"
 msgstr "Ramsamlingsrader"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:90
+#: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Framespacing"
 msgstr "Rammellanrum"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:91
+#: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Generic embedded object"
 msgstr "Allmänt inbäddat objekt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:92
+#: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Generic metainformation"
 msgstr "Allmän metainformation"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:93
+#: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Generic span"
 msgstr "Allmän vidd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:94
+#: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "HREF URI"
 msgstr "HREF-URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:95
+#: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "HTML - Special Characters"
 msgstr "HTML - Specialtecken"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:96
+#: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "HTML - Tags"
 msgstr "HTML - Taggar"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:97
+#: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "HTML root element"
 msgstr "HTML-rotelement"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:98
+#: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "HTML version"
 msgstr "HTML-version"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:99
+#: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "HTTP header name"
 msgstr "Namn på HTTP-huvud"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:100
+#: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Header cell ID's"
 msgstr "Huvudcell-id"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:101
+#: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Heading"
 msgstr "Rubrik"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:102
+#: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Heading 1"
 msgstr "Rubrik 1"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:103
+#: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Heading 2"
 msgstr "Rubrik 2"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:104
+#: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Heading 3"
 msgstr "Rubrik 3"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:105
+#: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Heading 4"
 msgstr "Rubrik 4"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:106
+#: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Heading 5"
 msgstr "Rubrik 5"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:107
+#: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Heading 6"
 msgstr "Rubrik 6"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:108
+#: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Height"
 msgstr "Höjd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:109
+#: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Horizontal rule"
 msgstr "Horisontell linje"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:110
+#: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Horizontal space"
 msgstr "Horisontellt mellanrum"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:111
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:131
+msgid "Horizontal space (deprecated)"
+msgstr "Horisontellt mellanrum (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:132
+msgid "HttP header name"
+msgstr "HTTP-rubriknamn"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "I18N BiDi over-ride"
 msgstr "Åsidosättning för bidirektionalitet vid internationalisering"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:112
+#: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Image"
 msgstr "Bild"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:113
+#: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Image map"
 msgstr "Bildkarta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:114
+#: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Image map area"
 msgstr "Bildkarteområde"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:115
+#: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Image map name"
 msgstr "Bildkartenamn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:116
+#: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Image source"
 msgstr "Bildkälla"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:117
+#: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Inline frame"
 msgstr "Inline-ram"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:118
+#: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Inline layer"
 msgstr "Inline-lager"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:119
+#: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Inserted text"
 msgstr "Infogad text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:120
+#: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Instance definition"
 msgstr "Instansdefinition"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:121
+#: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Italic text"
 msgstr "Kursiv text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:122
+#: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Java applet"
 msgstr "Java-applet"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:123
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:146
+msgid "Java applet (deprecated)"
+msgstr "Java-applet (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
 msgstr "Etikett"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:124
+#: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "Language code"
 msgstr "Språkkod"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:125
+#: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "Large text style"
 msgstr "Stor textstil"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:126
+#: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "Layer"
 msgstr "Lager"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:127
+#: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "Link color"
 msgstr "Länkfärg"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:128
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:153
+msgid "Link color (deprecated)"
+msgstr "Länkfärg (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "List item"
 msgstr "Listobjekt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:129
+#: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "List of MIME types for file upload"
 msgstr "Lista med MIME-typer för fillämning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:130
+#: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "List of supported character sets"
 msgstr "Lista med teckentabeller som stöds"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Listing"
 msgstr "Lista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Local change to font"
 msgstr "Lokal ändring av typsnitt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:133
+#: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Long description link"
 msgstr "Lång beskrivningslänk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:134
+#: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Long quotation"
 msgstr "Långt citat"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:135
+#: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "Mail link"
 msgstr "E-postlänk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:136
+#. Supported in XHTML 1.0 Frameset DTD only.
+#: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "Margin pixel height"
 msgstr "Bildpunktshöjd för marginal"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:137
+#. Supported in XHTML 1.0 Frameset DTD only.
+#: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "Margin pixel width"
 msgstr "Bildpunktsbredd för marginal"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:138
+#: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "Marquee"
 msgstr "Skärmtak"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:139
+#: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "Maximum length of text field"
 msgstr "Maximal längd på textfält"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:140
+#. Here I take some liberties: There's no mandatory attributes,
+#. but those are most common, and will likely be used.
+#: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "Media-independent link"
 msgstr "Mediaoberoende länk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:141
+#: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "Menu list"
 msgstr "Menylista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:142
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:173
+msgid "Menu list (deprecated)"
+msgstr "Menylista (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Multi-line text field"
 msgstr "Flerradigt textfält"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:143
+#: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Multicolumn"
 msgstr "Flera kolumner"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:144
+#: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Multiple"
 msgstr "Flertal"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:145
+#: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Name"
 msgstr "Namn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Named property value"
 msgstr "Värde på namngiven egenskap"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:147
+#: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Next ID"
 msgstr "Nästa id"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:148
+#: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "No URI"
 msgstr "Ingen URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:149
+#: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "No embedded objects"
 msgstr "Inga inbäddade objekt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:150
+#: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "No frames"
 msgstr "Inga ramar"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:151
+#: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "No layers"
 msgstr "Inga lager"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:152
+#: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "No line break"
 msgstr "Ingen radbrytning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "No resize"
 msgstr "Ingen storleksändring"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:154
+#: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "No script"
 msgstr "Inget skript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:155
+#: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "No shade"
 msgstr "Ingen skuggning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:156
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:189
+msgid "No shade (deprecated)"
+msgstr "Ingen skuggning (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "No word wrap"
 msgstr "Ingen ordbrytning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:157
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:192
+msgid "No word wrap (deprecated)"
+msgstr "Ingen ordbrytning (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:193
+msgid "Non-breaking space"
+msgstr "Icke-brytande mellanrum"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Note"
 msgstr "Anteckning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:158
+#: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Object applet file"
 msgstr "Fil för objekt-applet"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:159
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:197
+msgid "Object applet file (deprecated)"
+msgstr "Fil för objekt-applet (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object data reference"
 msgstr "Objektdatareferens"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:160
+#: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Offset for alignment character"
 msgstr "Avstånd för justeringstecken"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:161
+#: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "OnBlur event"
 msgstr "Suddningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:162
+#: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "OnChange event"
 msgstr "Ändringshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:163
+#: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "OnClick event"
 msgstr "Klickhändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:164
+#: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "OnDblClick event"
 msgstr "Dubbelklickshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:165
+#: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "OnFocus event"
 msgstr "Fokushändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:166
+#: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "OnKeyDown event"
 msgstr "Tangentnedtryckningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:167
+#: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "OnKeyPress event"
 msgstr "Tangenttryckningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:168
+#: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "OnKeyUp event"
 msgstr "Tangentuppsläppningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:169
+#: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "OnLoad event"
 msgstr "Inläsningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:170
+#: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "OnMouseDown event"
 msgstr "Musklickningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:171
+#: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "OnMouseMove event"
 msgstr "Musflyttningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:172
+#: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "OnMouseOut event"
 msgstr "Musutflyttningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:173
+#: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "OnMouseOver event"
 msgstr "Musöverflyttningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:174
+#: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "OnMouseUp event"
 msgstr "Musuppsläppningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:175
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "OnReset event"
 msgstr "Återställningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:176
+#: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "OnSelect event"
 msgstr "Markeringshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:177
+#: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "OnSubmit event"
 msgstr "Skickandehändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:178
+#: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "OnUnload event"
 msgstr "Utläsningshändelse"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:179
+#: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Option group"
 msgstr "Alternativgrupp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:180
+#: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Option selector"
 msgstr "Alternativväljare"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:181
+#: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Ordered list"
 msgstr "Sorterad lista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:182
+#: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Output media"
 msgstr "Utdatamedia"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:183
+#: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Paragraph"
 msgstr "Stycke"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:184
+#: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Paragraph class"
 msgstr "Styckeklass"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:185
+#: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Paragraph style"
 msgstr "Styckestil"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:186
+#: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Preformatted listing"
 msgstr "Förformaterad lista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:187
+#: ../plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Preformatted text"
 msgstr "Förformaterad text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:188
+#: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Profile metainfo dictionary"
 msgstr "Katalog för profilmetainformation"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:189
+#: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Prompt message"
 msgstr "Frågemeddelande"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:190
+#: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Push button"
 msgstr "Tryckknapp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:191
+#: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Quote"
 msgstr "Citat"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Range"
 msgstr "Intervall"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:193
+#: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "ReadOnly text and password"
 msgstr "Skrivskyddad text och lösenord"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:194
+#: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Reduced spacing"
 msgstr "Reducerat mellanrum"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:195
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:235
+msgid "Reduced spacing (deprecated)"
+msgstr "Reducerat mellanrum (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Reverse link"
 msgstr "Baklängeslänk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:196
+#: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Root"
 msgstr "Rot"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:197
+#: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Rows"
 msgstr "Rader"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:198
+#: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Rulings between rows and columns"
 msgstr "Linjer mellan rader och kolumner"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:199
+#: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Sample program output, scripts"
 msgstr "Exempelprogramutdata, skript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:200
+#: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Scope covered by header cells"
 msgstr "Omfattning som täcks av huvudceller"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:201
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Script language name"
 msgstr "Namn på skriptspråk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:202
+#: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Script statments"
 msgstr "Skriptsatser"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:203
+#: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Scrollbar"
 msgstr "Rullningslist"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:204
+#: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Selectable option"
 msgstr "Valbart alternativ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:205
+#: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Selected"
 msgstr "Markerad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:206
+#: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Server-side image map"
 msgstr "Bildkarta på serversida"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:207
+#: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Shape"
 msgstr "Form"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:208
+#: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Short inline quotation"
 msgstr "Kort inline-citat"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:209
+#: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Single line prompt"
 msgstr "Enkelradsfråga"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:210
+#: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Size"
 msgstr "Storlek"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:211
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:254
+msgid "Size (deprecated)"
+msgstr "Storlek (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Small text style"
 msgstr "Liten textstil"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:212
+#: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Soft line break"
 msgstr "Mjuk radbrytning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:213
+#: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Sound"
 msgstr "Ljud"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
+#: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Source"
 msgstr "Källa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:215
-msgid "Space"
-msgstr "Blanksteg"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:216
+#: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Space separated archive list"
 msgstr "Blankstegsseparerad arkivlista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:217
+#: ../plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Spacer"
 msgstr "Utfyllnad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:218
+#: ../plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Spacing between cells"
 msgstr "Mellanrum mellan celler"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:219
+#: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Spacing within cells"
 msgstr "Mellanrum i celler"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:220
+#: ../plugins/taglist/HTML.tags.xml.in.h:263
 msgid "Span"
 msgstr "Vidd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:221
+#: ../plugins/taglist/HTML.tags.xml.in.h:264
 msgid "Square root"
 msgstr "Kvadratrot"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:222
+#: ../plugins/taglist/HTML.tags.xml.in.h:265
 msgid "Standby load msg"
 msgstr "Standby-inläsningsmeddelande"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:223
+#: ../plugins/taglist/HTML.tags.xml.in.h:266
 msgid "Starting sequence number"
 msgstr "Startsekvensnummer"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:224
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:268
+msgid "Starting sequence number (deprecated)"
+msgstr "Startsekvensnummer (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:269
 msgid "Strike-through text"
 msgstr "Genomstruken text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:225
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:271
+msgid "Strike-through text (deprecated)"
+msgstr "Genomstruken textstil (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:272
 msgid "Strike-through text style"
 msgstr "Genomstruken textstil"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:226
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:274
+msgid "Strike-through text style (deprecated)"
+msgstr "Genomstruken textstil (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:275
 msgid "Strong emphasis"
 msgstr "Stark betoning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:227
+#: ../plugins/taglist/HTML.tags.xml.in.h:276
 msgid "Style info"
 msgstr "Stilinformation"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:228
+#: ../plugins/taglist/HTML.tags.xml.in.h:277
 msgid "Subscript"
 msgstr "Nedsänkt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:229
+#: ../plugins/taglist/HTML.tags.xml.in.h:278
 msgid "Superscript"
 msgstr "Upphöjd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:230
+#: ../plugins/taglist/HTML.tags.xml.in.h:279
 msgid "Tab order position"
 msgstr "Position för tabulatorsortering"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:231
+#: ../plugins/taglist/HTML.tags.xml.in.h:280
 msgid "Table"
 msgstr "Tabell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:232
+#: ../plugins/taglist/HTML.tags.xml.in.h:281
 msgid "Table body"
 msgstr "Tabelltext"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:233
+#: ../plugins/taglist/HTML.tags.xml.in.h:282
 msgid "Table caption"
 msgstr "Tabellrubrik"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:234
+#: ../plugins/taglist/HTML.tags.xml.in.h:283
 msgid "Table column group properties"
 msgstr "Gruppegenskaper för tabellkolumn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:235
+#: ../plugins/taglist/HTML.tags.xml.in.h:284
 msgid "Table column properties"
 msgstr "Egenskaper för tabellkolumn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:236
+#: ../plugins/taglist/HTML.tags.xml.in.h:285
 msgid "Table data cell"
 msgstr "Tabelldatacell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:237
+#: ../plugins/taglist/HTML.tags.xml.in.h:286
 msgid "Table footer"
 msgstr "Tabellfot"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:238
+#: ../plugins/taglist/HTML.tags.xml.in.h:287
 msgid "Table header"
 msgstr "Tabellhuvud"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:239
+#: ../plugins/taglist/HTML.tags.xml.in.h:288
 msgid "Table header cell"
 msgstr "Tabellhuvudcell"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:240
+#: ../plugins/taglist/HTML.tags.xml.in.h:289
 msgid "Table row"
 msgstr "Tabellrad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:241
+#: ../plugins/taglist/HTML.tags.xml.in.h:290
 msgid "Table summary"
 msgstr "Tabellsammanfattning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:242
+#: ../plugins/taglist/HTML.tags.xml.in.h:291
 msgid "Target - Blank"
 msgstr "Mål - Tomt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:243
+#: ../plugins/taglist/HTML.tags.xml.in.h:292
 msgid "Target - Parent"
 msgstr "Mål - Förälder"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:244
+#: ../plugins/taglist/HTML.tags.xml.in.h:293
 msgid "Target - Self"
 msgstr "Mål - Själv"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:245
+#: ../plugins/taglist/HTML.tags.xml.in.h:294
 msgid "Target - Top"
 msgstr "Mål - Överst"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:246
+#: ../plugins/taglist/HTML.tags.xml.in.h:295
 msgid "Teletype or monospace text style"
 msgstr "Textstil med fast breddsteg"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:247
+#: ../plugins/taglist/HTML.tags.xml.in.h:296
 msgid "Text"
 msgstr "Text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:248
+#: ../plugins/taglist/HTML.tags.xml.in.h:297
 msgid "Text color"
 msgstr "Textfärg"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:249
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:299
+msgid "Text color (deprecated)"
+msgstr "Textfärg (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:300
 msgid "Text entered by user"
 msgstr "Text angiven av användaren"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:250
+#: ../plugins/taglist/HTML.tags.xml.in.h:301
 msgid "Title"
 msgstr "Titel"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:251
+#: ../plugins/taglist/HTML.tags.xml.in.h:302
 msgid "Topmargin in pixels"
 msgstr "Överkantsmarginal i bildpunkter"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:252
+#: ../plugins/taglist/HTML.tags.xml.in.h:303
 msgid "URL"
 msgstr "URL"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:253
+#: ../plugins/taglist/HTML.tags.xml.in.h:304
 msgid "Underlined text style"
 msgstr "Understruken textstil"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:254
+#: ../plugins/taglist/HTML.tags.xml.in.h:305
 msgid "Unordered list"
 msgstr "Osorterad lista"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:255
+#: ../plugins/taglist/HTML.tags.xml.in.h:306
 msgid "Use image map"
 msgstr "Använd bildkarta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:256
+#: ../plugins/taglist/HTML.tags.xml.in.h:307
 msgid "Value"
 msgstr "Värde"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:257
+#: ../plugins/taglist/HTML.tags.xml.in.h:308
 msgid "Value interpretation"
 msgstr "Värdetolkning"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:258
+#: ../plugins/taglist/HTML.tags.xml.in.h:309
 msgid "Variable or program argument"
 msgstr "Variabel eller programargument"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:259
+#: ../plugins/taglist/HTML.tags.xml.in.h:310
 msgid "Vertical cell alignment"
 msgstr "Vertikal celljustering"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:260
+#: ../plugins/taglist/HTML.tags.xml.in.h:311
 msgid "Vertical space"
 msgstr "Vertikalt blanksteg"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:261
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:313
+msgid "Vertical space (deprecated)"
+msgstr "Vertikalt blanksteg (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:314
 msgid "Visited link color"
 msgstr "Färg på besökt länk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:262
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:316
+msgid "Visited link color (deprecated)"
+msgstr "Färg på besökt länk (utfasad)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:317
 msgid "Width"
 msgstr "Bredd"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:318
+msgid "XHTML 1.0 - Tags"
+msgstr "XHTML 1.0 - Taggar"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography (cite)"
@@ -4805,6 +4658,10 @@ msgstr "föregående-syskon"
 msgid "self"
 msgstr "själv"
 
+#: ../plugins/taglist/XUL.tags.xml.in.h:1
+msgid "XUL - Tags"
+msgstr "XUL - Taggar"
+
 #: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
 msgstr "In_foga datum och tid..."
@@ -4861,379 +4718,80 @@ msgstr "_Fråga efter ett format"
 msgid "_Use custom format"
 msgstr "_Använd anpassat format"
 
-#~ msgid "gedit"
-#~ msgstr "gedit"
-#~ msgid "Normal"
-#~ msgstr "Normal"
-#~ msgid "Use Normal highlight mode"
-#~ msgstr "Använd normalt färgmarkeringsläge"
-#~ msgid "Gedit View"
-#~ msgstr "Gedit-vy"
-#~ msgid "Gedit View."
-#~ msgstr "Gedit-vy."
-#~ msgid "Gedit viewer factory"
-#~ msgstr "Gedit-visarfabrik"
-#~ msgid "gedit application"
-#~ msgstr "gedit-program"
-#~ msgid "gedit automation factory"
-#~ msgstr "gedit-automatikfabrik"
-#~ msgid "Go to Line"
-#~ msgstr "Gå till rad"
-#~ msgid "_Go to Line"
-#~ msgstr "_Gå till rad"
-#~ msgid "The text \"%s\" was not found."
-#~ msgstr "Texten \"%s\" hittades inte."
-#~ msgid "Set program location..."
-#~ msgstr "Ställ in programplats..."
-#~ msgid ""
-#~ "The %s plugin uses an external program, called <tt>%s</tt>, to perform "
-#~ "its task.\n"
-#~ "\n"
-#~ "Please, specify the location of the <tt>%s</tt> program."
-#~ msgstr ""
-#~ "Insticksmodulen %s använder ett externt program, kallat <tt>%s</tt>, för "
-#~ "att utföra dess uppgift.\n"
-#~ "\n"
-#~ "Ange sökvägen till programmet <tt>%s</tt>."
-#~ msgid "The selected file is not executable."
-#~ msgstr "Den valda filen är inte körbar."
-#~ msgid "Goto Line"
-#~ msgstr "Gå till rad"
-#~ msgid "_Line number:"
-#~ msgstr "_Radnummer:"
-#~ msgid "button1"
-#~ msgstr "knapp1"
-#~ msgid "dialog1"
-#~ msgstr "dialog1"
-#~ msgid "Browse for program location..."
-#~ msgstr "Bläddra efter programplats..."
-#~ msgid "label"
-#~ msgstr "etikett"
-#~ msgid "Find Next"
-#~ msgstr "Sök nästa"
-#~ msgid "Open from URI"
-#~ msgstr "Öppna från URI"
-#~ msgid "%s %d"
-#~ msgstr "%s %d"
-#~ msgid "Invalid UTF-8 data"
-#~ msgstr "Ogiltig UTF-8-data"
-#~ msgid "Could not read symbolic link information for %s"
-#~ msgstr "Kunde inte läsa information om symbolisk länken %s"
-#~ msgid "The file has too many symbolic links."
-#~ msgstr "Filen har för många symboliska länkar."
-#~ msgid "gedit cannot handle %s: locations in write mode."
-#~ msgstr "gedit kan inte hantera %s:-platser i skrivläge."
-#~ msgid "gedit cannot handle this kind of location in write mode."
-#~ msgstr "gedit kan inte hantera denna typ av plats i skrivlägre."
-#~ msgid "A file named \"%s\" already exists.\n"
-#~ msgstr "En fil med namnet \"%s\" finns redan.\n"
-#~ msgid "Do you want to replace it with the one you are saving?"
-#~ msgstr "Vill du ersätta den med den fil som du vill spara?"
-#~ msgid "The file \"%s\" is read-only.\n"
-#~ msgstr "Filen \"%s\" är skrivskyddad.\n"
-#~ msgid "_Character Coding:"
-#~ msgstr "_Teckenkodning:"
-#~ msgid "Select a file to open"
-#~ msgstr "Välj en fil att öppna"
-#~ msgid "Select files to open"
-#~ msgstr "Välj filer att öppna"
-#~ msgid "Select a filename to save"
-#~ msgstr "Välj ett filnamn att spara"
-#~ msgid "Saving document \"%s\"..."
-#~ msgstr "Sparar dokumentet \"%s\"..."
-#~ msgid "The document \"%s\" has not been saved."
-#~ msgstr "Dokumentet \"%s\" har inte sparats."
-#~ msgid "The document \"%s\" has been saved."
-#~ msgstr "Dokumentet \"%s\" har sparats."
-#~ msgid "Save as..."
-#~ msgstr "Spara som..."
-#~ msgid "Error reverting the document \"%s\"."
-#~ msgstr "Fel vid återställning av dokumentet \"%s\"."
-#~ msgid "The document \"%s\" has not been reverted."
-#~ msgstr "Dokumentet \"%s\" har inte återställts."
-#~ msgid "The document \"%s\" has been reverted."
-#~ msgstr "Dokumentet \"%s\" har återställts."
-#~ msgid "Could not read data from stdin."
-#~ msgstr "Kunde inte läsa data från standard in."
-#~ msgid "Loaded file \"%s\""
-#~ msgstr "Läste in filen \"%s\""
-#~ msgid "Loaded %d file"
-#~ msgid_plural "Loaded %d files"
-#~ msgstr[0] "Läste in %d fil"
-#~ msgstr[1] "Läste in %d filer"
-#~ msgid "Created file \"%s\""
-#~ msgstr "Skapade filen \"%s\""
-#~ msgid "Could not open the file \"%s\""
-#~ msgstr "Kunde inte öppna filen \"%s\""
-#~ msgid "Access was denied."
-#~ msgstr "Åtkomst nekades."
-#~ msgid ""
-#~ "there are too many open files. Please, close some open files and try "
-#~ "again."
-#~ msgstr ""
-#~ "det finns för många öppna filer. Stäng några öppna filer och försök igen."
-#~ msgid ""
-#~ "gedit was not able to automatically detect the character coding. Please, "
-#~ "check that you are not trying to open a binary file and try again "
-#~ "selecting a character coding in the 'Open File...' (or 'Open Location') "
-#~ "dialog."
-#~ msgstr ""
-#~ "gedit kunde inte automatiskt detektera teckenkodningen. Kontrollera att "
-#~ "du inte försöker öppna en binär fil och försök att välja en teckenkodning "
-#~ "igen i dialogen \"Öppna fil...\" (eller \"Öppna plats\")."
-#~ msgid ""
-#~ "Please, check that you are not trying to open a binary file and that you "
-#~ "selected the right character coding in the 'Open File... ' (or 'Open "
-#~ "Location') dialog and try again."
-#~ msgstr ""
-#~ "Kontrollera att du inte försöker öppna en binär fil och att du valde rätt "
-#~ "teckenkodning i dialogen \"Öppna fil...\" (eller \"Öppna plats\") och "
-#~ "försök igen."
-#~ msgid ""
-#~ "The file contains data in an invalid format. Probably, you are trying to "
-#~ "open a binary file."
-#~ msgstr ""
-#~ "Filen innehåller data i ett ogiltigt format. Du försöker troligtvis öppna "
-#~ "en binär fil."
-#~ msgid "Could not revert the file \"%s\""
-#~ msgstr "Kunde inte återställa filen \"%s\""
-#~ msgid ""
-#~ "Not enough available memory. Please, close some running applications and "
-#~ "try again."
-#~ msgstr ""
-#~ "Det finns inte tillräckligt med minne. Stäng några körande program och "
-#~ "försök igen."
-#~ msgid ""
-#~ "The host name was empty. Please, check that your proxy settings are "
-#~ "correct and try again."
-#~ msgstr ""
-#~ "Värdnamnet var tomt. Kontrollera att dina proxyserverinställningar "
-#~ "stämmer och försök igen."
-#~ msgid ""
-#~ "The file contains invalid UTF-8 data. Probably, you are trying to revert "
-#~ "a binary file."
-#~ msgstr ""
-#~ "Filen innehåller ogiltiga UTF-8-data. Du försöker troligtvis återställa "
-#~ "en binär fil."
-#~ msgid "It is not possible to revert an Untitled document."
-#~ msgstr "Det går inte att återställa ett namnlöst dokument."
-#~ msgid "Could not save the file \"%s\""
-#~ msgstr "Kunde inte spara filen \"%s\""
-#~ msgid "The file \"%s\" already exists"
-#~ msgstr "Filen \"%s\" finns redan"
-#~ msgid "Could not create the file \"%s\""
-#~ msgstr "Kunde inte skapa filen \"%s\""
-#~ msgid "Make sure you have the appropriate write permissions."
-#~ msgstr "Försäkra dig om att du har de rätta skrivrättigheterna."
-#~ msgid "The file name is too long."
-#~ msgstr "Filnamnet är för långt."
-#~ msgid ""
-#~ "A directory component in the file name does not exist or is a dangling "
-#~ "symbolic link."
-#~ msgstr ""
-#~ "En katalogkomponent i filnamnet finns inte eller är en lös symbolisk länk."
-#~ msgid ""
-#~ "There is not enough disk space to create the file. Please free some disk "
-#~ "space and try again."
-#~ msgstr ""
-#~ "Det finns inte tillräckligt med diskutrymme för att skapa filen. Frigör "
-#~ "en del utrymme på disken och försök igen."
-#~ msgid "Close the output window"
-#~ msgstr "Stäng utdatafönstret"
-#~ msgid "Copy selected lines"
-#~ msgstr "Kopiera markerade rader"
-#~ msgid "Clear the output window"
-#~ msgstr "Töm utdatafönstret"
-#~ msgid "Output Lines"
-#~ msgstr "Utdatarader"
-#~ msgid "Preparing pages..."
-#~ msgstr "Förbereder sidor..."
-#~ msgid "Printing page %d of %d..."
-#~ msgstr "Skriver ut sida %d av %d..."
-#~ msgid "Change the visibility of the output window in the current window"
-#~ msgstr "Ändra synligheten på utdatafönstret i det aktuella fönstret"
-#~ msgid "Close"
-#~ msgstr "Stäng"
-#~ msgid "Copy"
-#~ msgstr "Kopiera"
-#~ msgid "Cu_t"
-#~ msgstr "Klipp _ut"
-#~ msgid "Cut"
-#~ msgstr "Klipp ut"
-#~ msgid "Delete"
-#~ msgstr "Ta bort"
-#~ msgid "Find Previous"
-#~ msgstr "Sök föregående"
-#~ msgid "Main toolbar"
-#~ msgstr "Huvudverktygsrad"
-#~ msgid "New"
-#~ msgstr "Nytt"
-#~ msgid "Open Location..."
-#~ msgstr "Öppna plats..."
-#~ msgid "Paste"
-#~ msgstr "Klistra in"
-#~ msgid "Print Previe_w..."
-#~ msgstr "Förhands_granska..."
-#~ msgid "Quit"
-#~ msgstr "Avsluta"
-#~ msgid "Redo"
-#~ msgstr "Gör om"
-#~ msgid "Revert"
-#~ msgstr "Återgå"
-#~ msgid "Select All"
-#~ msgstr "Markera allt"
-#~ msgid ""
-#~ "Set toolbar button style according to desktop Menu and Toolbar Preferences"
-#~ msgstr ""
-#~ "Ställ in stilen på verktygsradsknappar enligt skrivbordsinställningarna "
-#~ "för menyer och verktygsrader"
-#~ msgid "Show only icons in the toolbar"
-#~ msgstr "Visa endast ikoner i verktygsraden"
-#~ msgid "Show text below every icon in the toolbar"
-#~ msgstr "Visa text under varje ikon i verktygsraden"
-#~ msgid "Show text only beside important icons in the toolbar"
-#~ msgstr "Visa text endast bredvid viktiga ikoner i verktygsraden"
-#~ msgid "T_ext for Important Icons"
-#~ msgstr "Te_xt för viktiga ikoner"
-#~ msgid "Undo"
-#~ msgstr "Ångra"
-#~ msgid "_Close"
-#~ msgstr "S_täng"
-#~ msgid "_Copy"
-#~ msgstr "_Kopiera"
-#~ msgid "_Customize Toolbar"
-#~ msgstr "_Anpassa verktygsrad"
-#~ msgid "_Desktop Default"
-#~ msgstr "_Systemstandard"
-#~ msgid "_Icons Only"
-#~ msgstr "Endast _ikoner"
-#~ msgid "_New"
-#~ msgstr "_Ny"
-#~ msgid "_Paste"
-#~ msgstr "Klistra _in"
-#~ msgid "_Quit"
-#~ msgstr "_Avsluta"
-#~ msgid "_Redo"
-#~ msgstr "_Gör om"
-#~ msgid "_Text for All Icons"
-#~ msgstr "_Text för alla ikoner"
-#~ msgid "_Undo"
-#~ msgstr "_Ångra"
-#~ msgid "Quit an existing instance of gedit"
-#~ msgstr "Avsluta en befintlig instans av gedit"
-#~ msgid "The specified encoding \"%s\" is not valid\n"
-#~ msgstr "Den angivna kodningen \"%s\" är inte giltig\n"
-#~ msgid "The file you are trying to open contains an invalid byte sequence."
-#~ msgstr "Filen som du försöker öppna innehåller en ogiltig bytesekvens."
-#~ msgid ""
-#~ "gedit was not able to automatically determine the encoding of the file "
-#~ "you want to open."
-#~ msgstr ""
-#~ "gedit kunde inte automatiskt avgöra kodningen på den fil som du vill "
-#~ "öppna."
-#~ msgid "Update"
-#~ msgstr "Uppdatera"
-#~ msgid "gedit: Document Info plugin"
-#~ msgstr "gedit: Insticksmodul för dokumentinformation"
-#~ msgid "Sa_ve Copy..."
-#~ msgstr "Spa_ra kopia..."
-#~ msgid "Could not save a copy of the file to \"%s\""
-#~ msgstr "Kunde inte spara en kopia av filen till \"%s\""
-#~ msgid "You are trying to overwrite the original file"
-#~ msgstr "Du försöker skriva över den ursprungliga filen"
-#~ msgid "Save Copy..."
-#~ msgstr "Spara kopia..."
-#~ msgid "%s (copy)"
-#~ msgstr "%s (kopia)"
-#~ msgid "Save a Copy"
-#~ msgstr "Spara en kopia"
-#~ msgid "Saves a copy of the current document to a local or remote location."
-#~ msgstr ""
-#~ "Sparar en kopia av det aktuella dokument på en lokal plats eller en "
-#~ "fjärrplats."
-#~ msgid "_Run Command..."
-#~ msgstr "_Kör kommando..."
-#~ msgid "Run a command"
-#~ msgstr "Kör ett kommando"
-#~ msgid "Run Command"
-#~ msgstr "Kör kommando"
-#~ msgid "_Run"
-#~ msgstr "_Kör"
-#~ msgid "Failed"
-#~ msgstr "Misslyckades"
-#~ msgid ""
-#~ "The shell command entry is empty.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Fältet för skalkommando är tomt.\n"
-#~ "\n"
-#~ "Var vänlig och ange ett giltigt skalkommando."
-#~ msgid ""
-#~ "Error parsing the shell command.\n"
-#~ "\n"
-#~ "Please, insert a valid shell command."
-#~ msgstr ""
-#~ "Fel vid tolkning av skalkommandot.\n"
-#~ "\n"
-#~ "Ange ett giltigt skalkommando."
-#~ msgid "Executing command"
-#~ msgstr "Kör kommando"
-#~ msgid ""
-#~ "Executes an external program and, if required, displays its output in the "
-#~ "output window."
-#~ msgstr ""
-#~ "Kör ett externt program och, om så krävs, infogar dess utdata i "
-#~ "utdatafönstret."
-#~ msgid "Shell command"
-#~ msgstr "Skalkommando"
-#~ msgid "_Show results in Output Window"
-#~ msgstr "_Visa resultat i utdatafönster"
-#~ msgid "The selected text does not contain misspelled words."
-#~ msgstr "Den markerade texten innehåller inga felstavade ord."
-#~ msgid "The document does not contain misspelled words."
-#~ msgstr "Dokumentet innehåller inte felstavade ord."
-#~ msgid "Tag list plugin"
-#~ msgstr "Insticksmodul för tagglistor"
-#~ msgid "Tag _List"
-#~ msgstr "Tagg_lista"
-#~ msgid "Show the tag list window"
-#~ msgstr "Visa tagglistefönstret"
-#~ msgid "Undo Actions Limit"
-#~ msgstr "Gräns för ångraåtgärder"
-#~ msgid "Highlight matching bracket"
-#~ msgstr "Färgmarkera matchande klammer"
-#~ msgid "<b>Undo</b>"
-#~ msgstr "<b>Ångra</b>"
-#~ msgid "_Limit to"
-#~ msgstr "_Begränsa till"
-#~ msgid "_Unlimited undo"
-#~ msgstr "_Obegränsad ångrafunktion"
-#~ msgid "act_ions"
-#~ msgstr "_åtgärder"
-#~ msgid "Invalid file name"
-#~ msgstr "Ogiltigt filnamn"
-#~ msgid "Brackets &lt;&gt;"
-#~ msgstr "Klamrar &lt;&gt;"
-#~ msgid "Symbol &gt;&gt;"
-#~ msgstr "Symbolen &gt;&gt;"
-#~ msgid "Symbol &gt;="
-#~ msgstr "Symbolen &gt;="
-#~ msgid "Symbol &lt;&lt;"
-#~ msgstr "Symbolen &lt;&lt;"
-#~ msgid "Symbol &lt;="
-#~ msgstr "Symbolen &lt;="
-#~ msgid ""
-#~ "<span weight=\"bold\" size=\"larger\">You have X documents with unsaved "
-#~ "changes. </span>"
-#~ msgstr ""
-#~ "<span weight=\"bold\" size=\"larger\">Du har X dokument med osparade "
-#~ "ändringar. </span>"
-#~ msgid "If you don't save your documents, all your changes will be lost."
-#~ msgstr ""
-#~ "Om du inte sparar dina dokument kommer dina ändringar att gå förlorade."
-#~ msgid "Save _None"
-#~ msgstr "Spara _ingen"
-#~ msgid "_Save Selected"
-#~ msgstr "_Spara valda"
+#~ msgid "External Tools Manager"
+#~ msgstr "Hantera externa verktyg"
+#~ msgid "F7"
+#~ msgstr "F7"
+#~ msgid "Run “make” in the document dir"
+#~ msgstr "Kör \"make\" i dokumentkatalogen"
+#~ msgid "_New Directory"
+#~ msgstr "_Ny katalog"
+#~ msgid "Add new empty directory"
+#~ msgstr "Lägg till en ny tom katalog"
+#~ msgid "_View Directory"
+#~ msgstr "_Visa katalog"
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikaans"
+#~ msgid "Amharic"
+#~ msgstr "Amhariska"
+#~ msgid "Arabic (Egypt)"
+#~ msgstr "Arabisk (Egypten)"
+#~ msgid "Azerbaijani"
+#~ msgstr "Azerbajdzjanska"
+#~ msgid "Belarusian"
+#~ msgstr "Vitryska"
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgariska"
+#~ msgid "Bengali"
+#~ msgstr "Bengali"
+#~ msgid "Breton"
+#~ msgstr "Bretonska"
+#~ msgid "Catalan"
+#~ msgstr "Katalanska"
+#~ msgid "Czech"
+#~ msgstr "Tjeckiska"
+#~ msgid "Welsh"
+#~ msgstr "Kymriska"
+#~ msgid "Danish"
+#~ msgstr "Danska"
+#~ msgid "German (Austria)"
+#~ msgstr "Tyska (Österrike)"
+#~ msgid "German (Germany)"
+#~ msgstr "Tyska (Tyskland)"
+#~ msgid "German (Swiss)"
+#~ msgstr "Tyska (Schweiz)"
+#~ msgid "English (American)"
+#~ msgstr "Engelska (amerikansk)"
+#~ msgid "English (British)"
+#~ msgstr "Engelska (brittisk)"
+#~ msgid "English (Canadian)"
+#~ msgstr "Engelska (kanadensisk)"
+#~ msgid "Esperanto"
+#~ msgstr "Esperanto"
+#~ msgid "Spanish"
+#~ msgstr "Spanska"
+#~ msgid "Estonian"
+#~ msgstr "Estniska"
+#~ msgid "Persian"
+#~ msgstr "Persiska"
+#~ msgid "Finnish"
+#~ msgstr "Finska"
+#~ msgid "Faroese"
+#~ msgstr "Färöiska"
+#~ msgid "French (France)"
+#~ msgstr "Franska (Frankrike)"
+#~ msgid "French (Swiss)"
+#~ msgstr "Franska (Schweiz)"
+#~ msgid "Irish"
+#~ msgstr "Iriska"
+#~ msgid "Scottish Gaelic"
+#~ msgstr "Höglandsskotska"
+#~ msgid "Gallegan"
+#~ msgstr "Galiciska"
+#~ msgid "Manx Gaelic"
+#~ msgstr "Manx"
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
+#~ msgid "Croatian"
+#~ msgstr "Kroatisk"
 
