@@ -1,3 +1,12 @@
+2006-12-12  Bruno Boaventura <brunoboaventura@gmail.com>
+
+	* gedit/gedit-io-error-message-area.[ch]: create
+	is_recoverable_error, rename unrecoverable_error to
+	io_loading_error.
+	* gedit/gedit-tab.c: rename recoverable_loading_error to
+	conversion_loading_error. Add a "Retry" button to the message
+	area when the error is recoverable. Fixes #372653.
+
 2006-12-10  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-module.c: fail gradefully if

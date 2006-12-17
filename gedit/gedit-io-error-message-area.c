@@ -52,9 +52,31 @@
 
 #define MAX_URI_IN_DIALOG_LENGTH 50
 
+static gboolean
+is_recoverable_error (const GError *error)
+{
+	gboolean is_recoverable = FALSE;
+
+	if (error->domain == GEDIT_DOCUMENT_ERROR)
+	{
+		switch (error->code) {
+		case GNOME_VFS_ERROR_ACCESS_DENIED:
+		case GNOME_VFS_ERROR_TOO_MANY_OPEN_FILES:
+		case GNOME_VFS_ERROR_NO_MEMORY:
+		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
+		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
+		case GNOME_VFS_ERROR_LOGIN_FAILED:
+
+			is_recoverable = TRUE;
+		}
+	}
+
+	return is_recoverable;
+}
+
 static GtkWidget *
-create_unrecoverable_error_message_area (const gchar *primary_text,
-					 const gchar *secondary_text)
+create_io_loading_error_message_area (const gchar *primary_text,
+				      const gchar *secondary_text)
 {
 	GtkWidget *message_area;
 	GtkWidget *hbox_content;
@@ -113,8 +135,8 @@ create_unrecoverable_error_message_area (const gchar *primary_text,
 }
 
 GtkWidget *
-gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
-				    		    const GError *error)
+gedit_io_loading_error_message_area_new (const gchar  *uri,
+					 const GError *error)
 {
 	gchar *error_message = NULL;
 	gchar *message_details = NULL;
@@ -331,8 +353,16 @@ gedit_unrecoverable_loading_error_message_area_new (const gchar  *uri,
 		error_message = g_strdup_printf (_("Could not open the file %s."),
 						 uri_for_display);
 
-	message_area = create_unrecoverable_error_message_area (error_message,
-								message_details);
+	message_area = create_io_loading_error_message_area (error_message,
+							     message_details);
+
+	if (is_recoverable_error (error))
+	{
+		gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
+							       _("_Retry"),
+							       GTK_STOCK_REFRESH,
+							       GTK_RESPONSE_OK);
+	}
 
 	g_free (uri_for_display);
 	g_free (error_message);
@@ -552,8 +582,8 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 		error_message = g_strdup_printf (_("Could not revert the file %s."),
 						 uri_for_display);
 
-	message_area = create_unrecoverable_error_message_area (error_message,
-								message_details);
+	message_area = create_io_loading_error_message_area (error_message,
+							     message_details);
 
 	g_free (uri_for_display);
 	g_free (error_message);
@@ -1318,8 +1348,8 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 		error_message = g_strdup_printf (_("Could not save the file %s."),
 						 uri_for_display);
 
-	message_area = create_unrecoverable_error_message_area (error_message,
-								message_details);
+	message_area = create_io_loading_error_message_area (error_message,
+							     message_details);
 
 	g_free (uri_for_display);
 	g_free (error_message);
