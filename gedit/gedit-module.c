@@ -122,7 +122,15 @@ gedit_module_load (GTypeModule *gmodule)
 		return FALSE;
 	}
 
-	g_assert (register_func);
+	/* symbol can still be NULL even though g_module_symbol
+	 * returned TRUE */
+	if (register_func == NULL)
+	{
+		g_warning ("Symbol 'register_gedit_plugin' should not be NULL");
+		g_module_close (module->library);
+
+		return FALSE;
+	}
 
 	module->type = register_func (gmodule);
 
