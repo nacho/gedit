@@ -214,14 +214,20 @@ on_message_received (const char *message,
 
 	/* header */
 	params = g_strsplit (commands[0], "\t", 4);
-	startup_timestamp = atoi (params[0]); /* CHECK if this is safe */
-	display_name = g_strdup (params[1]);
+	startup_timestamp = atoi (params[0]);
+	display_name = params[1];
 	screen_number = atoi (params[2]);
 	workspace = atoi (params[3]);
 
 	display = display_open_if_needed (display_name);
+	if (display == NULL)
+	{
+		g_warning ("Could not open display %s\n", display_name);
+		g_strfreev (params);
+		goto out;
+	}
+
 	screen = gdk_display_get_screen (display, screen_number);
-	g_free (display_name);
 
 	g_strfreev (params);
 
@@ -265,8 +271,6 @@ on_message_received (const char *message,
 
 		g_strfreev (params);
 	}
-
-	g_strfreev (commands);
 
 	/* execute the commands */
 
@@ -326,6 +330,9 @@ on_message_received (const char *message,
 	g_slist_foreach (file_list, (GFunc) g_free, NULL);
 	g_slist_free (file_list);
 	file_list = NULL;
+
+ out:
+	g_strfreev (commands);
 
 	new_window_option = FALSE;
 	new_document_option = FALSE;
