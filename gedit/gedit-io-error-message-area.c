@@ -66,6 +66,7 @@ is_recoverable_error (const GError *error)
 		case GNOME_VFS_ERROR_HOST_NOT_FOUND:
 		case GNOME_VFS_ERROR_HOST_HAS_NO_ADDRESS:
 		case GNOME_VFS_ERROR_LOGIN_FAILED:
+		case GNOME_VFS_ERROR_TIMEOUT:
 
 			is_recoverable = TRUE;
 		}
@@ -308,6 +309,10 @@ gedit_io_loading_error_message_area_new (const gchar  *uri,
 		message_details = g_strdup (_("The file you are trying to open is not a regular file."));
 		break;
 
+	case GNOME_VFS_ERROR_TIMEOUT:
+		message_details = g_strdup (_("Connection timed out. Please try again."));
+		break;
+
 	case GNOME_VFS_ERROR_GENERIC:
 		break;
 
@@ -527,6 +532,10 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 						   uri_for_display);
 		break;
 
+	case GNOME_VFS_ERROR_TIMEOUT:
+		message_details = g_strdup (_("Connection timed out. Please try again."));
+		break;
+
 	/* this should never happen, revert should be insensitive */
 //CHECK: we used to have this before new_mdi... is it really useful (see comment above)
 /*
@@ -534,6 +543,7 @@ gedit_unrecoverable_reverting_error_message_area_new (const gchar  *uri,
 		message_details = g_strdup (_("It is not possible to revert an Untitled document."));
 		break;
 */
+
 	case GNOME_VFS_ERROR_GENERIC:
 		break;
 
@@ -1301,6 +1311,10 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 						      "a limitation on length of the file names. "
 						      "Please use a shorter name."));
 
+		case GNOME_VFS_ERROR_TIMEOUT:
+			message_details = g_strdup (_("Connection timed out. Please try again."));
+			break;
+
 		case GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE:
 			message_details = g_strdup_printf (_("%s is not a regular file. "
 							     "Please check that you typed the location "
@@ -1357,3 +1371,4 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 
 	return message_area;
 }
+
