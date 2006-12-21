@@ -142,7 +142,6 @@ get_docinfo_dialog (GeditWindow *window,
 	return dialog;
 }
 
-
 static void 
 calculate_info (GeditDocument *doc,
 		GtkTextIter   *start,
@@ -153,8 +152,8 @@ calculate_info (GeditDocument *doc,
 		gint          *bytes)
 {	
 	gchar *text;
-	PangoLogAttr *attrs;
-	gint i;
+
+	gedit_debug (DEBUG_PLUGINS);
 
 	text = gtk_text_buffer_get_slice (GTK_TEXT_BUFFER (doc),
 					  start,
@@ -162,27 +161,39 @@ calculate_info (GeditDocument *doc,
 					  TRUE);
 
 	*chars = g_utf8_strlen (text, -1);
- 	attrs = g_new0 (PangoLogAttr, *chars + 1);
-
-	pango_get_log_attrs (text,
-			     -1,
-			     0,
-			     pango_language_from_string ("C"),
-			     attrs,
-			     *chars + 1);
-
-	for (i = 0; i < (*chars); i++)
-	{
-		if (attrs [i].is_white)
-			++(*white_chars);
-
-		if (attrs [i].is_word_start)
-			++(*words);
-	}
-
 	*bytes = strlen (text);
 
-	g_free (attrs);
+	if (*chars > 0)
+	{
+		PangoLogAttr *attrs;
+		gint i;
+
+		attrs = g_new0 (PangoLogAttr, *chars + 1);
+
+		pango_get_log_attrs (text,
+				     -1,
+				     0,
+				     pango_language_from_string ("C"),
+				     attrs,
+				     *chars + 1);
+
+		for (i = 0; i < (*chars); i++)
+		{
+			if (attrs[i].is_white)
+				++(*white_chars);
+
+			if (attrs[i].is_word_start)
+				++(*words);
+		}
+
+		g_free (attrs);
+	}
+	else
+	{
+		*white_chars = 0;
+		*words = 0;
+	}
+
 	g_free (text);
 }
 
