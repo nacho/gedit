@@ -17,6 +17,8 @@
 #    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import os
+import re
+import locale
 
 class ToolLibrary(object):
     _instance = None
@@ -176,6 +178,8 @@ class ToolDirectory(object):
 
 
 class Tool(object):
+    RE_KEY = re.compile('^([a-zA-Z_][a-zA-Z0-9_.\-]*)(\[([a-zA-Z_@]+)\])?$')
+
     def __init__(self, parent, filename = None):
         super(Tool, self).__init__()
         self.parent = parent
@@ -193,17 +197,25 @@ class Tool(object):
         if filename is None:
             return
 
-        fp = open(filename, 'r', 1)
+        fp = file(filename, 'r', 1)
         in_block = False
+        lang = locale.getlocale()[0]
+
         for line in fp:
             if not in_block:
                 in_block = line.startswith('# [Gedit Tool]')
                 continue
-            if line.startswith('##'): continue
+            if line.startswith('##') or line.startswith('# #'): continue
             if not line.startswith('# '): break
+
             try:
                 (key, value) = [i.strip() for i in line[2:].split('=', 1)]
-                self._properties[key] = value
+                m = self.RE_KEY.match(key)
+                if m.group(3) is None:
+                    if not self._properties.has_key(m.group(0)):
+                        self._properties[m.group(1)] = value
+                elif lang is not None and lang.startswith(m.group(3)):
+                    self._properties[m.group(1)] = value
             except ValueError:
                 break
         fp.close()

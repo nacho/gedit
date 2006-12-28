@@ -1,5 +1,5 @@
-# Python snippets plugin
-SUBDIRS = tools data
+# External Tools plugin
+SUBDIRS = tools data scripts
 plugindir = $(libdir)/gedit-2/plugins
 
 plugin_in_files = externaltools.gedit-plugin.desktop.in

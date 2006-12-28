@@ -315,6 +315,7 @@ plugins/docinfo/Makefile
 plugins/externaltools/Makefile
 plugins/externaltools/tools/Makefile
 plugins/externaltools/data/Makefile
+plugins/externaltools/scripts/Makefile
 plugins/filebrowser/Makefile
 plugins/indent/Makefile
 plugins/Makefile
