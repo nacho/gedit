@@ -398,6 +398,12 @@ gedit_view_destroy (GtkObject *object)
 
 	view = GEDIT_VIEW (object);
 
+	if (view->priv->scroll_idle > 0)
+	{
+		g_source_remove (view->priv->scroll_idle);
+		view->priv->scroll_idle = 0;
+	}
+
 	if (view->priv->search_window != NULL)
 	{
 		gtk_widget_destroy (view->priv->search_window);
@@ -426,9 +432,6 @@ gedit_view_finalize (GObject *object)
 	if (view->priv->tooltips != NULL)
 		g_object_unref (view->priv->tooltips);
 
-	if (view->priv->scroll_idle > 0)
-		g_source_remove (view->priv->scroll_idle);
-		
 	(* G_OBJECT_CLASS (gedit_view_parent_class)->finalize) (object);
 }
 
@@ -447,7 +450,6 @@ gedit_view_focus_out (GtkWidget *widget, GdkEventFocus *event)
 	
 	return FALSE;
 }
-
 
 /**
  * gedit_view_new:
