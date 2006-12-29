@@ -1305,11 +1305,30 @@ filter_glob (GeditFileBrowserWidget * obj, GeditFileBrowserStore * store,
 	return result;
 }
 
+static void
+rename_selected_file (GeditFileBrowserWidget * obj)
+{
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
+	GtkTreeModel *selmodel;
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
+	if (!GEDIT_IS_FILE_BROWSER_STORE (model))
+		return;
+
+	selection =
+	    gtk_tree_view_get_selection (GTK_TREE_VIEW (obj->priv->treeview));
+
+	if (gtk_tree_selection_get_selected (selection, &selmodel, &iter))
+		gedit_file_browser_view_start_rename (obj->priv->treeview,
+						      &iter);
+}
+
 static gboolean
 delete_selected_file (GeditFileBrowserWidget * obj, gboolean trash)
 {
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
+	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GtkTreeSelection *selection;
 	GtkTreeModel *selmodel;
@@ -1317,6 +1336,7 @@ delete_selected_file (GeditFileBrowserWidget * obj, gboolean trash)
 	gboolean confirm;
 	GeditFileBrowserStoreResult result;
 
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
 	if (!GEDIT_IS_FILE_BROWSER_STORE (model))
 		return FALSE;
 
@@ -2181,12 +2201,13 @@ do_change_directory (GeditFileBrowserWidget * obj,
 	return FALSE;
 }
 
-	
 static gboolean
 on_treeview_key_press_event (GeditFileBrowserView * treeview,
 			     GdkEventKey * event,
 			     GeditFileBrowserWidget * obj)
 {
+	guint modifiers;
+
 	if (do_change_directory (obj, event))
 		return TRUE;
 
@@ -2194,13 +2215,23 @@ on_treeview_key_press_event (GeditFileBrowserView * treeview,
 	    (gtk_tree_view_get_model (GTK_TREE_VIEW (treeview))))
 		return FALSE;
 
+	modifiers = gtk_accelerator_get_default_mod_mask ();
+
 	if (event->keyval == GDK_Delete
-	    && !(event->state & GDK_CONTROL_MASK)) {
-		if (event->state & GDK_SHIFT_MASK) {
+	    || event->keyval == GDK_KP_Delete) {
+
+		if ((event->state & modifiers) == GDK_SHIFT_MASK) {
 			delete_selected_file (obj, FALSE);
-		} else {
+			return TRUE;
+		} else if ((event->state & modifiers) == 0) {
 			delete_selected_file (obj, TRUE);
+			return TRUE;
 		}
+	}
+
+	if ((event->keyval == GDK_F2)
+	    && (event->state & modifiers) == 0) {
+		rename_selected_file (obj);
 
 		return TRUE;
 	}
@@ -2386,22 +2417,7 @@ on_action_file_new (GtkAction * action, GeditFileBrowserWidget * obj)
 static void
 on_action_file_rename (GtkAction * action, GeditFileBrowserWidget * obj)
 {
-	GtkTreeModel *model =
-	    gtk_tree_view_get_model (GTK_TREE_VIEW (obj->priv->treeview));
-	GtkTreeIter iter;
-	GtkTreeSelection *selection;
-	GtkTreeModel *selmodel;
-
-	if (!GEDIT_IS_FILE_BROWSER_STORE (model))
-		return;
-
-	selection =
-	    gtk_tree_view_get_selection (GTK_TREE_VIEW
-					 (obj->priv->treeview));
-
-	if (gtk_tree_selection_get_selected (selection, &selmodel, &iter))
-		gedit_file_browser_view_start_rename (obj->priv->treeview,
-						      &iter);
+	rename_selected_file (obj);
 }
 
 static void
