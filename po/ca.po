@@ -10,14 +10,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-29 18:54+0100\n"
-"PO-Revision-Date: 2006-12-29 19:19+0100\n"
+"POT-Creation-Date: 2006-12-31 00:45+0100\n"
+"PO-Revision-Date: 2006-12-31 00:43+0100\n"
 "Last-Translator: Josep Puigdemont <josep.puigdemont@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
+
+#: ../data/gedit.desktop.in.in.h:1
+msgid "Edit text files"
+msgstr "Editeu fitxers de text"
+
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:463
+msgid "Text Editor"
+msgstr "Editor de text"
 
 #: ../data/gedit.schemas.in.h:1
 msgid ""
@@ -1209,10 +1217,6 @@ msgstr "%s: codificació invàlida.\n"
 #: ../gedit/gedit.c:455
 msgid "- Edit text files"
 msgstr "- Editeu fitxers de text"
-
-#: ../gedit/gedit.c:463
-msgid "Text Editor"
-msgstr "Editor de text"
 
 #: ../gedit/gedit-commands-file.c:212 ../gedit/gedit-commands-file.c:258
 #, c-format
@@ -2545,6 +2549,14 @@ msgstr "Obre"
 msgid "Activate '%s'"
 msgstr "Activa «%s»"
 
+#: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
+msgid "Change Case"
+msgstr "Canvia les majúscules/minúscules"
+
+#: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:2
+msgid "Changes the case of selected text."
+msgstr "Canvia les majúscules/minúscules del text seleccionat."
+
 #: ../plugins/changecase/gedit-changecase-plugin.c:222
 msgid "C_hange Case"
 msgstr "Ca_nvia les majúscules/minúscules"
@@ -2821,6 +2833,40 @@ msgstr "Ei_nes:"
 #: ../plugins/externaltools/tools/tools.glade.h:14
 msgid "gtk-revert-to-saved"
 msgstr "gtk-revert-to-saved"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:1
+msgid "Build"
+msgstr "Munta"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:2
+msgid "Run \"make\" in the document directory"
+msgstr "Executa «make» al directori del document"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
+msgid "Open a terminal in the document location"
+msgstr "Obre un terminal a la ubicació del document"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
+msgid "Open terminal here"
+msgstr "Obre un terminal aquí"
+
+# FIXME
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
+msgid "Remove trailing spaces"
+msgstr "Suprimiu espais al final de les línies"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
+msgid "Remove useless trailing spaces in your file"
+msgstr "Suprimiu espais innecessaris al final de les línies d'un fitxer"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:1
+msgid "Execute a custom command and put its output in a new document"
+msgstr ""
+"Executeu una ordre personalitzada i poseu-ne la sortida a un document nou"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:2
+msgid "Run command"
+msgstr "Executeu una ordre"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
@@ -5152,23 +5198,11 @@ msgstr "_Pregunta per un format"
 msgid "_Use custom format"
 msgstr "_Utilitza un format personalitzat"
 
-#~ msgid "Edit text files"
-#~ msgstr "Editeu fitxers de text"
-
-#~ msgid "Change Case"
-#~ msgstr "Canvia les majúscules/minúscules"
-
-#~ msgid "Changes the case of selected text."
-#~ msgstr "Canvia les majúscules/minúscules del text seleccionat."
-
 #~ msgid "External Tools Manager"
 #~ msgstr "Gestor d'eines externes"
 
 #~ msgid "F7"
 #~ msgstr "F7"
-
-#~ msgid "Run “make” in the document dir"
-#~ msgstr "Executa «make» al directori del document"
 
 #~ msgid "_Accelerator:"
 #~ msgstr "_Accelerador:"
@@ -5530,9 +5564,6 @@ msgstr "_Utilitza un format personalitzat"
 
 #~ msgid "_Run Command..."
 #~ msgstr "Executa una o_rdre..."
-
-#~ msgid "Run a command"
-#~ msgstr "Executa una ordre"
 
 #~ msgid "Run Command"
 #~ msgstr "Executa una ordre"
