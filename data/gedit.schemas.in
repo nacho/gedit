@@ -542,11 +542,19 @@
       <list_type>string</list_type>
       <locale name="C">
         <default><!-- Translators: This is the sorted list of encodings used by gedit 
-	for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding. 
-	Only recognized encodings are used.-->[UTF-8,CURRENT,ISO-8859-15]</default>
+	for auto-detecting the encoding of a file. You may want to customize it adding
+	encodings that are common in your country, for instance the GB18030 encoding
+	for the Chinese	translation. You may also want to remove the ISO-8859-15 encoding
+	(covering English and most Western European languages) if you think people
+	in you country will rarely use it.
+	"CURRENT" is a magic value used by gedit and it represents the encoding
+	for the current locale, so please don't translate the "CURRENT" term. 
+	Only recognized encodings are used. 
+	See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
+	a list of supported encodings -->[UTF-8,CURRENT,ISO-8859-15,UTF-16]</default>
 	<short>Auto Detected Encodings</short>
 	<long>Sorted list of encodings used by gedit for auto-detecting the encoding of
-	a file. "CURRENT" is the current locale encoding. Only recognized encodings are used.</long>
+	a file. "CURRENT" represents the current locale encoding. Only recognized encodings are used.</long>
       </locale>
     </schema>
 
