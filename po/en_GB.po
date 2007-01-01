@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-28 19:06+0000\n"
-"PO-Revision-Date: 2006-12-28 19:11-0000\n"
+"POT-Creation-Date: 2007-01-01 22:26+0000\n"
+"PO-Revision-Date: 2007-01-01 22:27-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -256,8 +256,8 @@ msgid "Side Pane is Visible"
 msgstr "Side Pane is Visible"
 
 #: ../data/gedit.schemas.in.h:71
-msgid "Sorted list of encodings used by gedit for auto-detecting the encoding of a file. \"CURRENT\" is the current locale encoding. Only recognized encodings are used."
-msgstr "Sorted list of encodings used by gedit for auto-detecting the encoding of a file. \"CURRENT\" is the current locale encoding. Only recognised encodings are used."
+msgid "Sorted list of encodings used by gedit for auto-detecting the encoding of a file. \"CURRENT\" represents the current locale encoding. Only recognized encodings are used."
+msgstr "Sorted list of encodings used by gedit for auto-detecting the encoding of a file. \"CURRENT\" represents the current locale encoding. Only recognised encodings are used."
 
 #: ../data/gedit.schemas.in.h:72
 msgid "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and \"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here."
@@ -426,11 +426,19 @@ msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
-#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. for auto-detecting the encoding of a file. You may want to customize it adding
+#. encodings that are common in your country, for instance the GB18030 encoding
+#. for the Chinese	translation. You may also want to remove the ISO-8859-15 encoding
+#. (covering English and most Western European languages) if you think people
+#. in you country will rarely use it.
+#. "CURRENT" is a magic value used by gedit and it represents the encoding
+#. for the current locale, so please don't translate the "CURRENT" term.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:118
-msgid "[UTF-8,CURRENT,ISO-8859-15]"
-msgstr "[UTF-8,CURRENT,ISO-8859-15]"
+#. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
+#. a list of supported encodings
+#: ../data/gedit.schemas.in.h:126
+msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
+msgstr "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
 msgid "Logout _without Saving"
@@ -2113,25 +2121,25 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Unable to find the required widgets inside file %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1337
+#: ../gedit/gedit-view.c:1339
 msgid "_Wrap Around"
 msgstr "_Wrap Around"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1347
+#: ../gedit/gedit-view.c:1349
 msgid "Match _Entire Word Only"
 msgstr "Match _Entire Word Only"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1357
+#: ../gedit/gedit-view.c:1359
 msgid "_Match Case"
 msgstr "_Match Case"
 
-#: ../gedit/gedit-view.c:1445
+#: ../gedit/gedit-view.c:1447
 msgid "String you want to search for"
 msgstr "String you want to search for"
 
-#: ../gedit/gedit-view.c:1454
+#: ../gedit/gedit-view.c:1456
 msgid "Line you want to move the cursor to"
 msgstr "Line you want to move the cursor to"
 
@@ -2454,6 +2462,38 @@ msgstr "_Tools:"
 msgid "gtk-revert-to-saved"
 msgstr "gtk-revert-to-saved"
 
+#: ../plugins/externaltools/data/build.desktop.in.h:1
+msgid "Build"
+msgstr "Build"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:2
+msgid "Run \"make\" in the document directory"
+msgstr "Run \"make\" in the document directory"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
+msgid "Open a terminal in the document location"
+msgstr "Open a terminal in the document location"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
+msgid "Open terminal here"
+msgstr "Open terminal here"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
+msgid "Remove trailing spaces"
+msgstr "Remove trailing spaces"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
+msgid "Remove useless trailing spaces in your file"
+msgstr "Remove useless trailing spaces in your file"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:1
+msgid "Execute a custom command and put its output in a new document"
+msgstr "Execute a custom command and put its output in a new document"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:2
+msgid "Run command"
+msgstr "Run command"
+
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
 msgstr "Easy file access from the side pane"
@@ -2597,7 +2637,7 @@ msgid "If you delete an item it is permanently lost."
 msgstr "If you delete an item it is permanently lost."
 
 #: ../plugins/filebrowser/gedit-file-browser-store.c:2503
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1748
 msgid "Invalid uri"
 msgstr "Invalid uri"
 
@@ -4713,8 +4753,6 @@ msgstr "_Use custom format"
 #~ msgstr "External Tools Manager"
 #~ msgid "F7"
 #~ msgstr "F7"
-#~ msgid "Run “make” in the document dir"
-#~ msgstr "Run “make” in the document dir"
 #~ msgid "_Accelerator:"
 #~ msgstr "_Accelerator:"
 #~ msgid "_New Directory"
@@ -5167,8 +5205,6 @@ msgstr "_Use custom format"
 #~ msgstr "Saves a copy of the current document to a local or remote location."
 #~ msgid "_Run Command..."
 #~ msgstr "_Run Command..."
-#~ msgid "Run a command"
-#~ msgstr "Run a command"
 #~ msgid "Run Command"
 #~ msgstr "Run Command"
 #~ msgid "_Run"
