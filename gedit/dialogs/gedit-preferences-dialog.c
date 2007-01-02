@@ -644,6 +644,7 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 	gboolean use_default_colors;
 	gchar *editor_font = NULL;
 	GdkColor color;
+	gchar *label;
 
 	gedit_debug (DEBUG_PREFS);
 
@@ -663,7 +664,15 @@ setup_font_colors_page (GeditPreferencesDialog *dlg)
 	gedit_utils_set_atk_relation (dlg->priv->font_button, dlg->priv->default_font_checkbutton, 
                                                           ATK_RELATION_CONTROLLED_BY);
 	gedit_utils_set_atk_relation (dlg->priv->default_font_checkbutton, dlg->priv->font_button, 
-                                                         ATK_RELATION_CONTROLLER_FOR);
+                                                         ATK_RELATION_CONTROLLER_FOR);	
+
+	editor_font = gedit_prefs_manager_get_system_font ();
+	label = g_strdup_printf(_("_Use the system fixed width font (%s)"),
+				editor_font);
+	gtk_button_set_label (GTK_BUTTON (dlg->priv->default_font_checkbutton),
+			      label);
+	g_free (editor_font);
+	g_free (label);
 
 	/* read current config and setup initial state */
 	use_default_font = gedit_prefs_manager_get_use_default_font ();

@@ -43,6 +43,7 @@
 #define GPM_FONT_DIR			GPM_PREFS_DIR "/editor/font"
 #define GPM_USE_DEFAULT_FONT		GPM_FONT_DIR "/use_default_font"
 #define GPM_EDITOR_FONT			GPM_FONT_DIR "/editor_font"
+#define GPM_SYSTEM_FONT			"/desktop/gnome/interface/monospace_font_name"
 
 #define GPM_COLORS_DIR			GPM_PREFS_DIR  "/editor/colors"
 #define GPM_USE_DEFAULT_COLORS		GPM_COLORS_DIR "/use_default_colors"
@@ -152,8 +153,9 @@
 
 /* Fallback default values. Keep in sync with gedit.schemas */
 
-#define GPM_DEFAULT_USE_DEFAULT_FONT 	0 /* FALSE */
+#define GPM_DEFAULT_USE_DEFAULT_FONT 	1 /* TRUE */
 #define GPM_DEFAULT_EDITOR_FONT 	(const gchar*) "Monospace 12"
+#define GPM_DEFAULT_SYSTEM_FONT 	(const gchar*) "Monospace 10"
 
 #define GPM_DEFAULT_USE_DEFAULT_COLORS 	1 /* TRUE */
 #define GPM_DEFAULT_BACKGROUND_COLOR	(const gchar*) "#ffffffffffff"
@@ -254,6 +256,9 @@ gboolean		 gedit_prefs_manager_use_default_font_can_set	(void);
 gchar 			*gedit_prefs_manager_get_editor_font		(void);
 void			 gedit_prefs_manager_set_editor_font 		(const gchar *font);
 gboolean		 gedit_prefs_manager_editor_font_can_set	(void);
+
+/* System font */
+gchar 			*gedit_prefs_manager_get_system_font		(void);
 
 /* Use default colors */
 gboolean 		 gedit_prefs_manager_get_use_default_colors 	(void);

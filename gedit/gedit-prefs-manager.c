@@ -401,6 +401,14 @@ DEFINE_STRING_PREF (editor_font,
 		    GPM_EDITOR_FONT,
 		    GPM_DEFAULT_EDITOR_FONT)
 
+/* System font */
+gedit_prefs_manager_get_system_font (void)
+{
+	gedit_debug (DEBUG_PREFS);
+
+	return gedit_prefs_manager_get_string (GPM_SYSTEM_FONT,
+					       GPM_DEFAULT_SYSTEM_FONT);
+}
 
 /* Use default colors */
 DEFINE_BOOL_PREF (use_default_colors,

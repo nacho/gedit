@@ -47,41 +47,46 @@
 #include "gedit-window-private.h"
 
 static void gedit_prefs_manager_editor_font_changed	(GConfClient *client,
-		   				 	 guint        cnxn_id,
-			   				 GConfEntry  *entry,
-			   				 gpointer     user_data);
+							 guint        cnxn_id,
+							 GConfEntry  *entry,
+							 gpointer     user_data);
 
-static void gedit_prefs_manager_editor_colors_changed 	(GConfClient *client,
-			   				 guint        cnxn_id,
-			   				 GConfEntry  *entry,
-			   				 gpointer     user_data);
+static void gedit_prefs_manager_system_font_changed	(GConfClient *client,
+							 guint        cnxn_id,
+							 GConfEntry  *entry,
+							 gpointer     user_data);
 
-static void gedit_prefs_manager_tabs_size_changed 	(GConfClient *client,
-						       	 guint        cnxn_id, 
-						       	 GConfEntry  *entry, 
-						       	 gpointer     user_data);
-				       	 
-static void gedit_prefs_manager_wrap_mode_changed 	(GConfClient *client,
+static void gedit_prefs_manager_editor_colors_changed	(GConfClient *client,
+							 guint        cnxn_id,
+							 GConfEntry  *entry,
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_tabs_size_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
 
-static void gedit_prefs_manager_line_numbers_changed 	(GConfClient *client,
+static void gedit_prefs_manager_wrap_mode_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
 
-static void gedit_prefs_manager_auto_indent_changed 	(GConfClient *client,
+static void gedit_prefs_manager_line_numbers_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
 
-static void gedit_prefs_manager_undo_changed 		(GConfClient *client,
+static void gedit_prefs_manager_auto_indent_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
 
-static void gedit_prefs_manager_right_margin_changed 	(GConfClient *client,
+static void gedit_prefs_manager_undo_changed		(GConfClient *client,
+							 guint        cnxn_id, 
+							 GConfEntry  *entry, 
+							 gpointer     user_data);
+
+static void gedit_prefs_manager_right_margin_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
@@ -107,7 +112,7 @@ static void gedit_prefs_manager_search_hl_enable_changed(GConfClient *client,
 							 gpointer     user_data);
 
 
-static void gedit_prefs_manager_max_recents_changed 	(GConfClient *client,
+static void gedit_prefs_manager_max_recents_changed	(GConfClient *client,
 							 guint        cnxn_id, 
 							 GConfEntry  *entry, 
 							 gpointer     user_data);
@@ -117,7 +122,7 @@ static void gedit_prefs_manager_auto_save_changed	(GConfClient *client,
 							 GConfEntry  *entry,
 							 gpointer     user_data);
 
-static void gedit_prefs_manager_lockdown_changed 	(GConfClient *client,
+static void gedit_prefs_manager_lockdown_changed	(GConfClient *client,
 							 guint        cnxn_id,
 							 GConfEntry  *entry,
 							 gpointer     user_data);
@@ -157,6 +162,11 @@ gedit_prefs_manager_app_init (void)
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
 				GPM_FONT_DIR,
 				gedit_prefs_manager_editor_font_changed,
+				NULL, NULL, NULL);
+
+		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
+				GPM_SYSTEM_FONT,
+				gedit_prefs_manager_system_font_changed,
 				NULL, NULL, NULL);
 
 		gconf_client_notify_add (gedit_prefs_manager->gconf_client,
@@ -473,6 +483,8 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 
 	if ((font == NULL) && !def)
 		font = gedit_prefs_manager_get_editor_font ();
+	else
+		font = gedit_prefs_manager_get_system_font ();
 
 	ts = gedit_prefs_manager_get_tabs_size ();
 
@@ -481,12 +493,55 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 
 	while (l != NULL)
 	{
-		gedit_view_set_font (GEDIT_VIEW (l->data),
-				     def, 
-				     font);
-		gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data),
-						ts);
+		/* Note: we use def=FALSE to avoid GeditView to query gconf */
+		gedit_view_set_font (GEDIT_VIEW (l->data), FALSE,  font);
+		gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data), ts);
 
+		l = l->next;
+	}
+
+	g_list_free (views);
+	g_free (font);
+}
+
+static void 
+gedit_prefs_manager_system_font_changed (GConfClient *client,
+					 guint        cnxn_id, 
+					 GConfEntry  *entry, 
+					 gpointer     user_data)
+{
+	GList *views;
+	GList *l;
+	gchar *font;
+	gint ts;
+
+	gedit_debug (DEBUG_PREFS);
+
+	g_return_if_fail (entry->key != NULL);
+	g_return_if_fail (entry->value != NULL);
+
+	if (strcmp (entry->key, GPM_SYSTEM_FONT) != 0)
+		return;
+
+	if (!gedit_prefs_manager_get_use_default_font ())
+		return;
+
+	if (entry->value->type == GCONF_VALUE_STRING)
+		font = g_strdup (gconf_value_get_string (entry->value));
+	else
+		font = g_strdup (GPM_DEFAULT_SYSTEM_FONT);
+
+	ts = gedit_prefs_manager_get_tabs_size ();
+
+	views = gedit_app_get_views (gedit_app_get_default ());
+	l = views;
+
+	while (l != NULL)
+	{
+		/* Note: we use def=FALSE to avoid GeditView to query gconf */
+		gedit_view_set_font (GEDIT_VIEW (l->data), FALSE, font);
+
+		gtk_source_view_set_tabs_width (GTK_SOURCE_VIEW (l->data), ts);
 		l = l->next;
 	}
 
@@ -1092,7 +1147,7 @@ gedit_prefs_manager_search_hl_enable_changed (GConfClient *client,
 			g_return_if_fail (GEDIT_IS_DOCUMENT (l->data));
 
 			gedit_document_set_enable_search_highlighting  (GEDIT_DOCUMENT (l->data),
-							 		enable);
+									enable);
 
 			l = l->next;
 		}

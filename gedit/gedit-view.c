@@ -344,6 +344,10 @@ gedit_view_init (GeditView *view)
 
 		g_free (editor_font);
 	}
+	else
+	{
+		gedit_view_set_font (view, TRUE, NULL);
+	}
 
 	if (!gedit_prefs_manager_get_use_default_colors ())
 	{
@@ -781,36 +785,23 @@ gedit_view_set_font (GeditView   *view,
 		     gboolean     def, 
 		     const gchar *font_name)
 {
+	PangoFontDescription *font_desc = NULL;
+
 	gedit_debug (DEBUG_VIEW);
 
 	g_return_if_fail (GEDIT_IS_VIEW (view));
 
-	if (!def)
-	{
-		PangoFontDescription *font_desc = NULL;
+	if (def)
+		font_name = gedit_prefs_manager_get_system_font ();
 
-		g_return_if_fail (font_name != NULL);
-		
-		font_desc = pango_font_description_from_string (font_name);
-		g_return_if_fail (font_desc != NULL);
+	g_return_if_fail (font_name != NULL);
 
-		gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
-		
-		pango_font_description_free (font_desc);		
-	}
-	else
-	{
-		GtkRcStyle *rc_style;
+	font_desc = pango_font_description_from_string (font_name);
+	g_return_if_fail (font_desc != NULL);
 
-		rc_style = gtk_widget_get_modifier_style (GTK_WIDGET (view));
+	gtk_widget_modify_font (GTK_WIDGET (view), font_desc);
 
-		if (rc_style->font_desc)
-			pango_font_description_free (rc_style->font_desc);
-
-		rc_style->font_desc = NULL;
-		
-		gtk_widget_modify_style (GTK_WIDGET (view), rc_style);
-	}
+	pango_font_description_free (font_desc);		
 }
 
 static void
