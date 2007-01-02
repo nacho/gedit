@@ -402,6 +402,7 @@ DEFINE_STRING_PREF (editor_font,
 		    GPM_DEFAULT_EDITOR_FONT)
 
 /* System font */
+gchar *
 gedit_prefs_manager_get_system_font (void)
 {
 	gedit_debug (DEBUG_PREFS);

@@ -1,38 +1,6 @@
-2007-01-02  Paolo Maggi  <paolo@gnome.org>
+2007-01-02  Steve Frécinaux  <code@istiquet.net>
 
-	Fixes bug #351954 – gedit should not crash on a bad Python plugin
-	
-	* gedit/gedit-plugin-manager.c (plugin_manager_view_info_cell_cb),
-	(plugin_manager_view_icon_cell_cb),
-	(plugin_manager_populate_lists), (plugin_manager_set_active),
-	(plugin_manager_get_selected_plugin), (name_search_cb),
-	(create_tree_popup_menu), (model_name_sort_func),
-	(plugin_manager_construct_tree): set unavailable plugins unsensitive
-	
-	* gedit/gedit-plugins-engine.c (gedit_plugins_engine_load),
-	(load_plugin_module), (gedit_plugins_engine_activate_plugin_real),
-	(gedit_plugins_engine_activate_plugin),
-	(gedit_plugins_engine_deactivate_plugin),
-	(gedit_plugins_engine_plugin_is_active),
-	(gedit_plugins_engine_plugin_is_available), (reactivate_all),
-	(gedit_plugins_engine_update_plugins_ui),
-	(gedit_plugins_engine_plugin_is_configurable),
-	(gedit_plugins_engine_active_plugins_changed): manage unavailable 
-	plugins, i.e. plugins that for some reason cannot be loaded by gedit
-	
-	* gedit/gedit-plugins-engine.h: new 
-	gedit_plugins_engine_plugin_is_available prototype
-	
-	* gedit/gedit-python-module.c (gedit_python_module_load),
-	(gedit_python_module_unload), (gedit_python_module_init),
-	(gedit_python_module_finalize), (gedit_python_module_class_init),
-	(check_pygtk2), (gedit_init_pygobject), (gedit_init_pygtk),
-	(gedit_init_pygtksourceview), (gedit_python_init), (run_gc),
-	(gedit_python_garbage_collect): Python initialization now happens
-	when the first python plugin happen and initialization errors can be
-	handled
-	
-	* gedit/gedit-python-module.h: new gedit_python_init prototype
+	* gedit/gedit-prefs-manager.c: fix a typo in previous patch.
 
 2007-01-02  Steve Frécinaux  <code@istique.net>
 
