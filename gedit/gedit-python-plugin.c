@@ -77,7 +77,7 @@ check_py_object_is_gtk_widget (PyObject *py_obj)
 
 		if (_PyGtkWidget_Type == NULL)
 		{
-			PyErr_SetString(PyExc_TypeError, "could not find python gtk widget type");
+			PyErr_SetString(PyExc_TypeError, "could not find Python gtk widget type");
 			PyErr_Print();
 
 			return FALSE;
@@ -212,7 +212,7 @@ gedit_python_object_init (GeditPythonObject *object)
 {
 	GeditPythonObjectClass *class;
 
-	gedit_debug_message (DEBUG_PLUGINS, "Creating python plugin instance");
+	gedit_debug_message (DEBUG_PLUGINS, "Creating Python plugin instance");
 
 	class = (GeditPythonObjectClass*) (((GTypeInstance*) object)->g_class);
 
@@ -224,7 +224,7 @@ gedit_python_object_init (GeditPythonObject *object)
 static void
 gedit_python_object_finalize (GObject *object)
 {
-	gedit_debug_message (DEBUG_PLUGINS, "Finalizing python plugin instance");
+	gedit_debug_message (DEBUG_PLUGINS, "Finalizing Python plugin instance");
 
 	Py_DECREF (((GeditPythonObject *) object)->instance);
 
@@ -274,7 +274,7 @@ gedit_python_object_get_type (GTypeModule *module,
 	type_name = g_strdup_printf ("%s+GeditPythonPlugin",
 				     PyString_AsString (PyObject_GetAttrString (type, "__name__")));
 
-	gedit_debug_message (DEBUG_PLUGINS, "Registering python plugin instance: %s", type_name);
+	gedit_debug_message (DEBUG_PLUGINS, "Registering Python plugin instance: %s", type_name);
 	gtype = g_type_module_register_type (module, 
 					     GEDIT_TYPE_PLUGIN,
 					     type_name,
