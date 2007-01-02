@@ -64,22 +64,27 @@ typedef enum
 
 struct _GeditPluginInfo
 {
-	gchar        *file;
+	gchar             *file;
 	
-	gchar        *location;
-	GeditPluginLoader loader;
-	GTypeModule  *module;
+	gchar             *location;
+	GeditPluginLoader  loader;
+	GTypeModule       *module;
 
-	gchar        *name;
-	gchar        *desc;
-	gchar        *icon_name;
-	gchar       **authors;
-	gchar        *copyright;
-	gchar        *website;
+	gchar             *name;
+	gchar             *desc;
+	gchar             *icon_name;
+	gchar            **authors;
+	gchar             *copyright;
+	gchar             *website;
 	 
-	GeditPlugin  *plugin;
+	GeditPlugin       *plugin;
 	
-	gboolean     active;
+	gint               active : 1;
+	
+	/* A plugin is unavailable if it is not possible to activate it
+	   due to an error loading the plugin module (e.g. for Python plugins
+	   when the interpreter has not been correctly initializated) */
+	gint               available : 1;
 };
 
 static void	gedit_plugins_engine_active_plugins_changed (GConfClient *client,
@@ -140,7 +145,8 @@ gedit_plugins_engine_load (const gchar *file)
 				     "Gedit Plugin",
 				     "Module",
 				     NULL);
-	if (str)
+
+	if ((str != NULL) && (*str != '\0'))
 	{
 		info->location = str;
 	}
@@ -159,8 +165,8 @@ gedit_plugins_engine_load (const gchar *file)
 	{
 		info->loader = GEDIT_PLUGIN_LOADER_PY;
 #ifndef ENABLE_PYTHON
-		g_warning ("Cannot load python extension '%s', gedit was not "
-					"compiled with python support", file);
+		g_warning ("Cannot load Python plugin '%s' since gedit was not "
+			   "compiled with Python support.", file);
 		goto error;
 #endif
 	}
@@ -224,7 +230,7 @@ gedit_plugins_engine_load (const gchar *file)
 	else
 		gedit_debug_message (DEBUG_PLUGINS, "Could not find 'Copyright' in %s", file);
 
-	/* Get Copyright */
+	/* Get Website */
 	str = g_key_file_get_string (plugin_file,
 				     "Gedit Plugin",
 				     "Website",
@@ -235,6 +241,10 @@ gedit_plugins_engine_load (const gchar *file)
 		gedit_debug_message (DEBUG_PLUGINS, "Could not find 'Website' in %s", file);
 		
 	g_key_file_free (plugin_file);
+	
+	/* If we know nothing about the availability of the plugin,
+	   set it as available */
+	info->available = TRUE;
 	
 	return info;
 
@@ -437,6 +447,7 @@ load_plugin_module (GeditPluginInfo *info)
 	g_return_val_if_fail (info->file != NULL, FALSE);
 	g_return_val_if_fail (info->location != NULL, FALSE);
 	g_return_val_if_fail (info->plugin == NULL, FALSE);
+	g_return_val_if_fail (info->available, FALSE);
 	
 	switch (info->loader)
 	{
@@ -450,12 +461,32 @@ load_plugin_module (GeditPluginInfo *info)
 	
 			info->module = G_TYPE_MODULE (gedit_module_new (path));
 			g_free (path);
+			
 			break;
+
 #ifdef ENABLE_PYTHON
 		case GEDIT_PLUGIN_LOADER_PY:
 		{
-			gchar *dir = g_path_get_dirname (info->file);
+			gchar *dir;
 			
+			if (!gedit_python_init ())
+			{
+				/* Mark plugin as unavailable and fails */
+				info->available = FALSE;
+				
+				g_warning ("Cannot load Python plugin '%s' since gedit "
+				           "was not able to initialize the Python interpreter.",
+				           info->name);
+
+				return FALSE;
+			}
+
+			dir = g_path_get_dirname (info->file);
+			
+			g_return_val_if_fail ((info->location != NULL) &&
+			                      (info->location[0] != '\0'),
+			                      FALSE);
+
 			info->module = G_TYPE_MODULE (
 					gedit_python_module_new (dir, info->location));
 					
@@ -463,24 +494,35 @@ load_plugin_module (GeditPluginInfo *info)
 			break;
 		}
 #endif
+		default:
+			g_return_val_if_reached (FALSE);
 	}
 
-	
-	if (g_type_module_use (info->module) == FALSE)
+	if (!g_type_module_use (info->module))
 	{
 		switch (info->loader)
 		{
 			case GEDIT_PLUGIN_LOADER_C:
-				g_warning ("Could not load plugin file at %s\n",
-				   gedit_module_get_path (GEDIT_MODULE (info->module)));
+				g_warning ("Cannot load plugin '%s' since file '%s' cannot be read.",
+					   info->name,			           
+					   gedit_module_get_path (GEDIT_MODULE (info->module)));
 				break;
+
 			case GEDIT_PLUGIN_LOADER_PY:
-				g_warning ("Could not load python module %s\n", info->location);
+				g_warning ("Cannot load Python plugin '%s' since file '%s' cannot be read.",
+					   info->name,			           
+					   info->location);
 				break;
+
+			default:
+				g_return_val_if_reached (FALSE);				
 		}
 			   
 		g_object_unref (G_OBJECT (info->module));
 		info->module = NULL;
+
+		/* Mark plugin as unavailable and fails */
+		info->available = FALSE;
 		
 		return FALSE;
 	}
@@ -488,13 +530,19 @@ load_plugin_module (GeditPluginInfo *info)
 	switch (info->loader)
 	{
 		case GEDIT_PLUGIN_LOADER_C:
-			info->plugin = GEDIT_PLUGIN (gedit_module_new_object (GEDIT_MODULE (info->module)));
+			info->plugin = 
+				GEDIT_PLUGIN (gedit_module_new_object (GEDIT_MODULE (info->module)));
 			break;
+
 #ifdef ENABLE_PYTHON
 		case GEDIT_PLUGIN_LOADER_PY:
-			info->plugin = GEDIT_PLUGIN (gedit_python_module_new_object (GEDIT_PYTHON_MODULE (info->module)));
+			info->plugin = 
+				GEDIT_PLUGIN (gedit_python_module_new_object (GEDIT_PYTHON_MODULE (info->module)));
 			break;
 #endif
+
+		default:
+			g_return_val_if_reached (FALSE);
 	}
 	
 	g_type_module_unuse (info->module);
@@ -509,6 +557,12 @@ gedit_plugins_engine_activate_plugin_real (GeditPluginInfo *info)
 {
 	gboolean res = TRUE;
 
+	if (!info->available)
+	{
+		/* Plugin is not available, don't try to activate/load it */
+		return FALSE;
+	}
+		
 	if (info->plugin == NULL)
 		res = load_plugin_module (info);
 
@@ -524,8 +578,7 @@ gedit_plugins_engine_activate_plugin_real (GeditPluginInfo *info)
 		}
 	}
 	else
-		g_warning ("Error, impossible to activate plugin '%s'",
-			   info->name);
+		g_warning ("Error activating plugin '%s'", info->name);
 
 	return res;
 }
@@ -537,6 +590,9 @@ gedit_plugins_engine_activate_plugin (GeditPluginInfo *info)
 
 	g_return_val_if_fail (info != NULL, FALSE);
 
+	if (!info->available)
+		return FALSE;
+		
 	if (info->active)
 		return TRUE;
 
@@ -554,7 +610,7 @@ gedit_plugins_engine_activate_plugin (GeditPluginInfo *info)
 		{
 			if (strcmp (info->location, (gchar *)list->data) == 0)
 			{
-				g_warning ("Plugin %s is already active.", info->location);
+				g_warning ("Plugin '%s' is already active.", info->name);
 				return TRUE;
 			}
 
@@ -604,7 +660,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 
 	g_return_val_if_fail (info != NULL, FALSE);
 
-	if (!info->active)
+	if (!info->active || !info->available)
 		return TRUE;
 
 	gedit_plugins_engine_deactivate_plugin_real (info);
@@ -630,7 +686,7 @@ gedit_plugins_engine_deactivate_plugin (GeditPluginInfo *info)
 
 	if (!res)
 	{
-		g_warning ("Plugin %s is already deactivated.", info->location);
+		g_warning ("Plugin '%s' is already deactivated.", info->name);
 		return TRUE;
 	}
 
@@ -651,7 +707,15 @@ gedit_plugins_engine_plugin_is_active (GeditPluginInfo *info)
 {
 	g_return_val_if_fail (info != NULL, FALSE);
 	
-	return info->active;
+	return (info->available && info->active);
+}
+
+gboolean
+gedit_plugins_engine_plugin_is_available (GeditPluginInfo *info)
+{
+	g_return_val_if_fail (info != NULL, FALSE);
+	
+	return (info->available != FALSE);
 }
 
 static void
@@ -667,13 +731,15 @@ reactivate_all (GeditWindow *window)
 		
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 
-		if ((info->plugin == NULL) && info->active)
-			res = load_plugin_module (info);
-			
-		if (info->active && res)
-		{
-			gedit_plugin_activate (info->plugin,
-					       window);
+		/* If plugin is not available, don't try to activate/load it */
+		if (info->available && info->active)
+		{		
+			if (info->plugin == NULL)
+				res = load_plugin_module (info);
+				
+			if (res)
+				gedit_plugin_activate (info->plugin,
+						       window);			
 		}
 	}
 	
@@ -698,7 +764,7 @@ gedit_plugins_engine_update_plugins_ui (GeditWindow *window,
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
 
-		if (!info->active)
+		if (!info->available || !info->active)
 			continue;
 			
 	       	gedit_debug_message (DEBUG_PLUGINS, "Updating UI of %s", info->name);
@@ -714,7 +780,7 @@ gedit_plugins_engine_plugin_is_configurable (GeditPluginInfo *info)
 
 	g_return_val_if_fail (info != NULL, FALSE);
 
-	if ((info->plugin == NULL) || !info->active)
+	if ((info->plugin == NULL) || !info->active || !info->available)
 		return FALSE;
 	
 	return gedit_plugin_is_configurable (info->plugin);
@@ -769,7 +835,7 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 	if (!((entry->value->type == GCONF_VALUE_LIST) && 
 	      (gconf_value_get_list_type (entry->value) == GCONF_VALUE_STRING)))
 	{
-		g_warning ("The gconf key '%s' mat be corrupted", GEDIT_PLUGINS_ENGINE_KEY);
+		g_warning ("The gconf key '%s' may be corrupted.", GEDIT_PLUGINS_ENGINE_KEY);
 		return;
 	}
 	
@@ -781,6 +847,9 @@ gedit_plugins_engine_active_plugins_changed (GConfClient *client,
 	for (pl = gedit_plugins_list; pl; pl = pl->next)
 	{
 		GeditPluginInfo *info = (GeditPluginInfo*)pl->data;
+
+		if (!info->available)
+			continue;
 
 		to_activate = (g_slist_find_custom (active_plugins,
 						    info->location,

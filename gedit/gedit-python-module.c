@@ -71,149 +71,6 @@ static PyTypeObject *PyGeditPlugin_Type;
 
 G_DEFINE_TYPE (GeditPythonModule, gedit_python_module, G_TYPE_TYPE_MODULE)
 
-static void
-gedit_python_module_init_python ()
-{
-	PyObject *pygtk, *mdict, *require, *path, *tuple;
-	PyObject *sys_path, *gtk, *gedit, *geditutils, *geditcommands;
-	PyObject *pygtk_version, *pygtk_required_version;
-	PyObject *gettext, *install, *gettext_args;
-	struct sigaction old_sigint;
-	gint res;
-	char *argv[] = { "gedit", NULL };
-	
-	if (Py_IsInitialized ())
-	{
-		g_warning ("Python Should only be initialized once, since it's in class_init");
-		g_return_if_reached ();
-	}
-
-	/* Hack to make python not overwrite SIGINT: this is needed to avoid
-	 * the crash reported on bug #326191 */
-	
-	/* Save old handler */
-	res = sigaction (SIGINT, NULL, &old_sigint);  
-	if (res != 0)
-	{
-		g_warning ("Error initializing Python interpreter: cannot get "
-		           "handler to SIGINT signal (%s)",
-		           strerror (errno));
-
-		return;
-	}
-
-	/* Python initialization */
-	Py_Initialize ();
-
-	/* Restore old handler */
-	res = sigaction (SIGINT, &old_sigint, NULL);
-	if (res != 0)
-	{
-		g_warning ("Error initializing Python interpreter: cannot restore "
-		           "handler to SIGINT signal (%s)",
-		           strerror (errno));
-		return;
-	}
-
-	PySys_SetArgv (1, argv);
-
-	/* pygtk.require("2.0") */
-	pygtk = PyImport_ImportModule ("pygtk");
-	if (pygtk == NULL)
-	{
-		g_warning ("Could not import pygtk");
-		return;
-	}
-
-	mdict = PyModule_GetDict (pygtk);
-	require = PyDict_GetItemString (mdict, "require");
-	PyObject_CallObject (require, Py_BuildValue ("(S)", PyString_FromString ("2.0")));
-
-	/* import gobject */
-	init_pygobject ();
-
-	/* import gtk */
-	init_pygtk ();
-
-	/* gtk.pygtk_version < (2, 4, 0) */
-	gtk = PyImport_ImportModule ("gtk");
-	if (gtk == NULL)
-	{
-		g_warning ("Could not import gtk");
-		return;
-	}
-
-	mdict = PyModule_GetDict (gtk);
-	pygtk_version = PyDict_GetItemString (mdict, "pygtk_version");
-	pygtk_required_version = Py_BuildValue ("(iii)", 2, 4, 0);
-	if (PyObject_Compare (pygtk_version, pygtk_required_version) == -1)
-	{
-		g_warning("PyGTK %s required, but %s found.",
-			  PyString_AsString (PyObject_Repr (pygtk_required_version)),
-			  PyString_AsString (PyObject_Repr (pygtk_version)));
-		Py_DECREF (pygtk_required_version);
-		return;
-	}
-	Py_DECREF (pygtk_required_version);
-
-	/* sys.path.insert(0, ...) for system-wide plugins */
-	sys_path = PySys_GetObject ("path");
-	path = PyString_FromString (GEDIT_PLUGINDIR "/");
-	PyList_Insert (sys_path, 0, path);
-	Py_DECREF(path);
-
-	/* import gedit */
-	gedit = Py_InitModule ("gedit", pygedit_functions);
-	mdict = PyModule_GetDict (gedit);
-
-	pygedit_register_classes (mdict);
-	pygedit_add_constants (gedit, "GEDIT_");
-
-	/* gedit version */
-	tuple = Py_BuildValue("(iii)", 
-			      GEDIT_MAJOR_VERSION,
-			      GEDIT_MINOR_VERSION,
-			      GEDIT_MICRO_VERSION);
-	PyDict_SetItemString(mdict, "version", tuple);
-	Py_DECREF(tuple);
-	
-	/* Retrieve the Python type for gedit.Plugin */
-	PyGeditPlugin_Type = (PyTypeObject *) PyDict_GetItemString (mdict, "Plugin"); 
-	if (PyGeditPlugin_Type == NULL)
-	{
-		PyErr_Print ();
-		return;
-	}
-
-	/* import gedit.utils */
-	geditutils = Py_InitModule ("gedit.utils", pygeditutils_functions);
-	PyDict_SetItemString (mdict, "utils", geditutils);
-
-	/* import gedit.commands */
-	geditcommands = Py_InitModule ("gedit.commands", pygeditcommands_functions);
-	PyDict_SetItemString (mdict, "commands", geditcommands);
-
-	mdict = PyModule_GetDict (geditutils);
-	pygeditutils_register_classes (mdict);
-	
-	mdict = PyModule_GetDict (geditcommands);
-	pygeditcommands_register_classes (mdict);
-
-	/* i18n support */
-	gettext = PyImport_ImportModule ("gettext");
-	if (gettext == NULL)
-	{
-		g_warning ("Could not import gettext");
-		return;
-	}
-
-	mdict = PyModule_GetDict (gettext);
-	install = PyDict_GetItemString (mdict, "install");
-	gettext_args = Py_BuildValue ("ss", GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
-	PyObject_CallObject (install, gettext_args);
-	Py_DECREF (gettext_args);
-}
-
 static gboolean
 gedit_python_module_load (GTypeModule *gmodule)
 {
@@ -221,6 +78,8 @@ gedit_python_module_load (GTypeModule *gmodule)
 	PyObject *main_module, *main_locals, *locals, *key, *value;
 	PyObject *module, *fromlist;
 	int pos = 0;
+	
+	g_return_val_if_fail (Py_IsInitialized (), FALSE);
 
 	main_module = PyImport_AddModule ("__main__");
 	if (main_module == NULL)
@@ -274,7 +133,7 @@ static void
 gedit_python_module_unload (GTypeModule *module)
 {
 	GeditPythonModulePrivate *priv = GEDIT_PYTHON_MODULE_GET_PRIVATE (module);
-	gedit_debug_message (DEBUG_PLUGINS, "Unloading python module");
+	gedit_debug_message (DEBUG_PLUGINS, "Unloading Python module");
 	
 	priv->type = 0;
 }
@@ -294,14 +153,14 @@ gedit_python_module_new_object (GeditPythonModule *module)
 static void
 gedit_python_module_init (GeditPythonModule *module)
 {
-	gedit_debug_message (DEBUG_PLUGINS, "Init of python module");
+	gedit_debug_message (DEBUG_PLUGINS, "Init of Python module");
 }
 
 static void
 gedit_python_module_finalize (GObject *object)
 {
 	GeditPythonModulePrivate *priv = GEDIT_PYTHON_MODULE_GET_PRIVATE (object);
-	gedit_debug_message (DEBUG_PLUGINS, "Finalizing python module %s", g_type_name (priv->type));
+	gedit_debug_message (DEBUG_PLUGINS, "Finalizing Python module %s", g_type_name (priv->type));
 
 	g_free (priv->module);
 	g_free (priv->path);
@@ -355,7 +214,7 @@ gedit_python_module_class_init (GeditPythonModuleClass *class)
 			 PROP_MODULE,
 			 g_param_spec_string ("module",
 					      "Module Name",
-					      "The python module to load for this plugin",
+					      "The Python module to load for this plugin",
 					      NULL,
 					      G_PARAM_WRITABLE | G_PARAM_READABLE | G_PARAM_CONSTRUCT_ONLY));
 					      
@@ -364,7 +223,7 @@ gedit_python_module_class_init (GeditPythonModuleClass *class)
 			 PROP_PATH,
 			 g_param_spec_string ("path",
 					      "Path",
-					      "The python path to use when loading this module",
+					      "The Python path to use when loading this module",
 					      NULL,
 					      G_PARAM_WRITABLE | G_PARAM_READABLE | G_PARAM_CONSTRUCT_ONLY));
 
@@ -372,11 +231,6 @@ gedit_python_module_class_init (GeditPythonModuleClass *class)
 	
 	module_class->load = gedit_python_module_load;
 	module_class->unload = gedit_python_module_unload;
-
-	/* Init python subsystem, this should happen only once
-	 * in the process lifetime, and doing it here is ok since
-	 * class_init is called once */
-	gedit_python_module_init_python ();
 }
 
 GeditPythonModule *
@@ -403,6 +257,286 @@ gedit_python_module_new (const gchar *path,
 
 static gint idle_garbage_collect_id = 0;
 
+/* C equivalent of
+ *    import pygtk
+ *    pygtk.require ("2.0")
+ */
+static gboolean
+check_pygtk2 (void)
+{
+	PyObject *pygtk, *mdict, *require;
+
+	/* pygtk.require("2.0") */
+	pygtk = PyImport_ImportModule ("pygtk");
+	if (pygtk == NULL)
+	{
+		g_warning ("Error initializing Python interpreter: could not import pygtk.");
+		return FALSE;
+	}
+
+	mdict = PyModule_GetDict (pygtk);
+	require = PyDict_GetItemString (mdict, "require");
+	PyObject_CallObject (require,
+			     Py_BuildValue ("(S)", PyString_FromString ("2.0")));
+	if (PyErr_Occurred())
+	{
+		g_warning ("Error initializing Python interpreter: pygtk 2 is required.");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+/* Note: the following two functions are needed because
+ * init_pyobject and init_pygtk which are *macros* which in case
+ * case of error set the PyErr and then make the calling
+ * function return behind our back.
+ * It's up to the caller to check the result with PyErr_Occurred()
+ */
+static void
+gedit_init_pygobject (void)
+{
+	init_pygobject_check (2, 11, 5); /* FIXME: get from config */
+}
+
+static void
+gedit_init_pygtk (void)
+{
+	PyObject *gtk, *mdict, *version, *required_version;
+
+	init_pygtk ();
+
+	/* there isn't init_pygtk_check(), do the version
+	 * check ourselves */
+	gtk = PyImport_ImportModule("gtk");
+	mdict = PyModule_GetDict(gtk);
+	version = PyDict_GetItemString (mdict, "pygtk_version");
+	if (!version)
+	{
+		PyErr_SetString (PyExc_ImportError,
+				 "PyGObject version too old");
+		return;
+	}
+
+	required_version = Py_BuildValue ("(iii)", 2, 4, 0); /* FIXME */
+
+	if (PyObject_Compare (version, required_version) == -1)
+	{
+		PyErr_SetString (PyExc_ImportError,
+				 "PyGObject version too old");
+		Py_DECREF (required_version);
+		return;
+	}
+
+	Py_DECREF (required_version);
+}
+
+static void
+gedit_init_pygtksourceview (void)
+{
+	PyObject *gtksourceview;
+
+	gtksourceview = PyImport_ImportModule("gtksourceview");
+	if (gtksourceview == NULL)
+	{
+		PyErr_SetString (PyExc_ImportError,
+				 "could not import gtksourceview");
+		return;
+	}
+}
+
+gboolean
+gedit_python_init (void)
+{
+	PyObject *mdict, *path, *tuple;
+	PyObject *sys_path, *gedit, *geditutils, *geditcommands;
+	PyObject *gettext, *install, *gettext_args;
+	struct sigaction old_sigint;
+	gint res;
+	char *argv[] = { "gedit", NULL };
+	
+	static gboolean init_failed = FALSE;
+
+	if (init_failed)
+	{
+		/* We already failed to initialized Python, don't need to
+		   retry again */
+		return FALSE;
+	}
+	
+	if (Py_IsInitialized ())
+	{
+		/* Python has already been successfully initialized */
+		return TRUE;
+	}
+	
+	/* We are trying to initialize Python for the first time,
+	   set init_failed to FALSE only if the entire initialization process
+	   ends with success */
+	init_failed = TRUE;
+	
+	/* Hack to make python not overwrite SIGINT: this is needed to avoid
+	 * the crash reported on bug #326191 */
+	 
+       /* CHECK: can't we use Py_InitializeEx instead of Py_Initialize in order
+          to avoid to manage signal handlers ? - Paolo (Dec. 31, 2006) */
+	
+	/* Save old handler */
+	res = sigaction (SIGINT, NULL, &old_sigint);  
+	if (res != 0)
+	{
+		g_warning ("Error initializing Python interpreter: cannot get "
+		           "handler to SIGINT signal (%s)",
+		           strerror (errno));
+
+		return FALSE;
+	}
+
+	/* Python initialization */
+	Py_Initialize ();
+
+	/* Restore old handler */
+	res = sigaction (SIGINT, &old_sigint, NULL);
+	if (res != 0)
+	{
+		g_warning ("Error initializing Python interpreter: cannot restore "
+		           "handler to SIGINT signal (%s).",
+		           strerror (errno));
+
+		goto python_init_error;
+	}
+
+	PySys_SetArgv (1, argv);
+
+	if (!check_pygtk2 ())
+	{
+		/* Warning message already printed in check_pygtk2 */
+		goto python_init_error;
+	}
+
+	/* import gobject */	
+	gedit_init_pygobject ();
+	if (PyErr_Occurred ())
+	{
+		g_warning ("Error initializing Python interpreter: could not import pygobject.");
+
+		goto python_init_error;		
+	}
+
+	/* import gtk */
+	gedit_init_pygtk ();
+	if (PyErr_Occurred ())
+	{
+		g_warning ("Error initializing Python interpreter: could not import pygtk.");
+
+		goto python_init_error;
+	}
+	
+	/* import gtksourceview */
+	gedit_init_pygtksourceview ();
+	if (PyErr_Occurred ())
+	{
+		PyErr_Print ();
+
+		g_warning ("Error initializing Python interpreter: could not import pygtksourceview.");
+
+		goto python_init_error;
+	}	
+	
+	/* sys.path.insert(0, ...) for system-wide plugins */
+	sys_path = PySys_GetObject ("path");
+	path = PyString_FromString (GEDIT_PLUGINDIR "/");
+	PyList_Insert (sys_path, 0, path);
+	Py_DECREF(path);
+
+	/* import gedit */
+	gedit = Py_InitModule ("gedit", pygedit_functions);
+	mdict = PyModule_GetDict (gedit);
+
+	pygedit_register_classes (mdict);
+	pygedit_add_constants (gedit, "GEDIT_");
+
+	/* gedit version */
+	tuple = Py_BuildValue("(iii)", 
+			      GEDIT_MAJOR_VERSION,
+			      GEDIT_MINOR_VERSION,
+			      GEDIT_MICRO_VERSION);
+	PyDict_SetItemString(mdict, "version", tuple);
+	Py_DECREF(tuple);
+	
+	/* Retrieve the Python type for gedit.Plugin */
+	PyGeditPlugin_Type = (PyTypeObject *) PyDict_GetItemString (mdict, "Plugin"); 
+	if (PyGeditPlugin_Type == NULL)
+	{
+		PyErr_Print ();
+
+		goto python_init_error;
+	}
+
+	/* import gedit.utils */
+	geditutils = Py_InitModule ("gedit.utils", pygeditutils_functions);
+	PyDict_SetItemString (mdict, "utils", geditutils);
+
+	/* import gedit.commands */
+	geditcommands = Py_InitModule ("gedit.commands", pygeditcommands_functions);
+	PyDict_SetItemString (mdict, "commands", geditcommands);
+
+	mdict = PyModule_GetDict (geditutils);
+	pygeditutils_register_classes (mdict);
+	
+	mdict = PyModule_GetDict (geditcommands);
+	pygeditcommands_register_classes (mdict);
+
+	/* i18n support */
+	gettext = PyImport_ImportModule ("gettext");
+	if (gettext == NULL)
+	{
+		g_warning ("Error initializing Python interpreter: could not import gettext.");
+
+		goto python_init_error;
+	}
+
+	mdict = PyModule_GetDict (gettext);
+	install = PyDict_GetItemString (mdict, "install");
+	gettext_args = Py_BuildValue ("ss", GETTEXT_PACKAGE, GEDIT_LOCALEDIR);
+	PyObject_CallObject (install, gettext_args);
+	Py_DECREF (gettext_args);
+	
+	/* Python has been successfully initialized */
+	init_failed = FALSE;
+	
+	return TRUE;
+	
+python_init_error:
+
+	g_warning ("Please check the installation of all the Python related packages required "
+	           "by gedit and try again.");
+
+	PyErr_Clear ();
+
+	gedit_python_shutdown ();
+
+	return FALSE;
+}
+
+void
+gedit_python_shutdown (void)
+{
+	if (Py_IsInitialized ())
+	{
+		if (idle_garbage_collect_id != 0)
+		{
+			g_source_remove (idle_garbage_collect_id);
+			idle_garbage_collect_id = 0;
+		}
+
+		while (PyGC_Collect ())
+			;	
+
+		Py_Finalize ();
+	}
+}
+
 static gboolean
 run_gc (gpointer data)
 {
@@ -428,24 +562,6 @@ gedit_python_garbage_collect (void)
 
 		if (idle_garbage_collect_id == 0)
 			idle_garbage_collect_id = g_idle_add (run_gc, NULL);
-	}
-}
-
-void
-gedit_python_shutdown (void)
-{
-	if (Py_IsInitialized ())
-	{
-		if (idle_garbage_collect_id != 0)
-		{
-			g_source_remove (idle_garbage_collect_id);
-			idle_garbage_collect_id = 0;
-		}
-
-		while (PyGC_Collect ())
-			;	
-
-		Py_Finalize ();
 	}
 }
 

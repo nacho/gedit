@@ -46,6 +46,8 @@ const GList	*gedit_plugins_engine_get_plugins_list 	(void);
 gboolean 	 gedit_plugins_engine_activate_plugin 	(GeditPluginInfo *info);
 gboolean 	 gedit_plugins_engine_deactivate_plugin	(GeditPluginInfo *info);
 gboolean 	 gedit_plugins_engine_plugin_is_active 	(GeditPluginInfo *info);
+gboolean 	 gedit_plugins_engine_plugin_is_available
+							(GeditPluginInfo *info);
 
 gboolean	 gedit_plugins_engine_plugin_is_configurable 
 							(GeditPluginInfo *info);

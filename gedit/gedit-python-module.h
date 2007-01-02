@@ -57,11 +57,14 @@ GeditPythonModule	*gedit_python_module_new		(const gchar* path,
 GObject			*gedit_python_module_new_object		(GeditPythonModule *module);
 
 
-/* --- python utils --- */
+/* --- Python utils --- */
 
-void			gedit_python_garbage_collect		(void);
+/* Must be called before loading python modules */
+gboolean		gedit_python_init			(void);
 
 void			gedit_python_shutdown			(void);
+
+void			gedit_python_garbage_collect		(void);
 
 G_END_DECLS
 

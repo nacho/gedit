@@ -48,7 +48,8 @@
 enum
 {
 	ACTIVE_COLUMN,
-	NAME_COLUMN,
+	AVAILABLE_COLUMN,
+	INFO_COLUMN,
 	N_COLUMNS
 };
 
@@ -165,7 +166,7 @@ plugin_manager_view_info_cell_cb (GtkTreeViewColumn *tree_column,
 	g_return_if_fail (tree_model != NULL);
 	g_return_if_fail (tree_column != NULL);
 
-	gtk_tree_model_get (tree_model, iter, NAME_COLUMN, &info, -1);
+	gtk_tree_model_get (tree_model, iter, INFO_COLUMN, &info, -1);
 
 	if (info == NULL)
 		return;
@@ -176,7 +177,10 @@ plugin_manager_view_info_cell_cb (GtkTreeViewColumn *tree_column,
 	g_object_set (G_OBJECT (cell),
 		      "markup",
 		      text,
+		      "sensitive",
+		      gedit_plugins_engine_plugin_is_available (info),
 		      NULL);
+
 	g_free (text);
 }
 
@@ -192,7 +196,7 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
 	g_return_if_fail (tree_model != NULL);
 	g_return_if_fail (tree_column != NULL);
 
-	gtk_tree_model_get (tree_model, iter, NAME_COLUMN, &info, -1);
+	gtk_tree_model_get (tree_model, iter, INFO_COLUMN, &info, -1);
 
 	if (info == NULL)
 		return;
@@ -200,6 +204,8 @@ plugin_manager_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
 	g_object_set (G_OBJECT (cell),
 		      "icon-name",
 		      gedit_plugins_engine_get_plugin_icon_name (info),
+		      "sensitive",
+		      gedit_plugins_engine_plugin_is_available (info),
 		      NULL);
 }
 
@@ -290,7 +296,8 @@ plugin_manager_populate_lists (GeditPluginManager *pm)
 		gtk_list_store_append (model, &iter);
 		gtk_list_store_set (model, &iter,
 				    ACTIVE_COLUMN, gedit_plugins_engine_plugin_is_active (info),
-				    NAME_COLUMN, info,
+				    AVAILABLE_COLUMN, gedit_plugins_engine_plugin_is_available (info),
+				    INFO_COLUMN, info,
 				    -1);
 
 		plugins = plugins->next;
@@ -307,25 +314,26 @@ plugin_manager_populate_lists (GeditPluginManager *pm)
 		gtk_tree_selection_select_iter (selection, &iter);
 
 		gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
-				    NAME_COLUMN, &info, -1);
+				    INFO_COLUMN, &info, -1);
 
 		gtk_widget_set_sensitive (GTK_WIDGET (pm->priv->configure_button),
 					  gedit_plugins_engine_plugin_is_configurable (info));
 	}
 }
 
-static void
+static gboolean
 plugin_manager_set_active (GtkTreeIter  *iter,
 			   GtkTreeModel *model,
 			   gboolean      active)
 {
 	GeditPluginInfo *info;
+	gboolean res = TRUE;
 	
 	gedit_debug (DEBUG_PLUGINS);
 
-	gtk_tree_model_get (model, iter, NAME_COLUMN, &info, -1);
+	gtk_tree_model_get (model, iter, INFO_COLUMN, &info, -1);
 
-	g_return_if_fail (info != NULL);
+	g_return_val_if_fail (info != NULL, FALSE);
 
 	if (active)
 	{
@@ -333,7 +341,8 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 		if (!gedit_plugins_engine_activate_plugin (info)) {
 			gedit_debug_message (DEBUG_PLUGINS, "Could not activate %s.\n", 
 					     gedit_plugins_engine_get_plugin_name (info));
-			active ^= 1;
+					     
+			res = FALSE;
 		}
 	}
 	else
@@ -343,7 +352,7 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 			gedit_debug_message (DEBUG_PLUGINS, "Could not deactivate %s.\n", 
 					     gedit_plugins_engine_get_plugin_name (info));
 
-			active ^= 1;
+			res = FALSE;
 		}
 	}
   
@@ -351,8 +360,12 @@ plugin_manager_set_active (GtkTreeIter  *iter,
 	gtk_list_store_set (GTK_LIST_STORE (model), 
 			    iter, 
 			    ACTIVE_COLUMN,
-			    gedit_plugins_engine_plugin_is_active (info), 
+			    gedit_plugins_engine_plugin_is_active (info),
+			    AVAILABLE_COLUMN,
+			    gedit_plugins_engine_plugin_is_available (info),			    
 			    -1);
+
+	return res;
 }
 
 static void
@@ -388,7 +401,7 @@ plugin_manager_get_selected_plugin (GeditPluginManager *pm)
 
 	if (gtk_tree_selection_get_selected (selection, NULL, &iter))
 	{
-		gtk_tree_model_get (model, &iter, NAME_COLUMN, &info, -1);
+		gtk_tree_model_get (model, &iter, INFO_COLUMN, &info, -1);
 	}
 	
 	return info;
@@ -431,7 +444,7 @@ name_search_cb (GtkTreeModel *model,
 	gint key_len;
 	gboolean retval;
 
-	gtk_tree_model_get (model, iter, NAME_COLUMN, &info, -1);
+	gtk_tree_model_get (model, iter, INFO_COLUMN, &info, -1);
 	if (!info)
 		return FALSE;
 
@@ -518,6 +531,8 @@ create_tree_popup_menu (GeditPluginManager *pm)
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	item = gtk_check_menu_item_new_with_mnemonic (_("A_ctivate"));
+	gtk_widget_set_sensitive (item,
+				  gedit_plugins_engine_plugin_is_available (info));	
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
 					gedit_plugins_engine_plugin_is_active (info));
 	g_signal_connect (item, "toggled",
@@ -628,8 +643,8 @@ model_name_sort_func (GtkTreeModel *model,
 {
 	GeditPluginInfo *info1, *info2;
 	
-	gtk_tree_model_get (model, iter1, NAME_COLUMN, &info1, -1);
-	gtk_tree_model_get (model, iter2, NAME_COLUMN, &info2, -1);
+	gtk_tree_model_get (model, iter1, INFO_COLUMN, &info1, -1);
+	gtk_tree_model_get (model, iter2, INFO_COLUMN, &info2, -1);
 
 	return g_utf8_collate (gedit_plugins_engine_get_plugin_name (info1),
 			       gedit_plugins_engine_get_plugin_name (info2));
@@ -644,7 +659,7 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 
 	gedit_debug (DEBUG_PLUGINS);
 
-	model = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_POINTER);
+	model = gtk_list_store_new (N_COLUMNS, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_POINTER);
 
 	gtk_tree_view_set_model (GTK_TREE_VIEW (pm->priv->tree),
 				 GTK_TREE_MODEL (model));
@@ -662,8 +677,12 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 			  pm);
 	column = gtk_tree_view_column_new_with_attributes (PLUGIN_MANAGER_ACTIVE_TITLE,
 							   cell,
-							  "active",
+							   "active",
 							   ACTIVE_COLUMN,
+							   "activatable",
+							   AVAILABLE_COLUMN,
+							   "sensitive",
+							   AVAILABLE_COLUMN,
 							   NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (pm->priv->tree), column);
 
@@ -701,7 +720,7 @@ plugin_manager_construct_tree (GeditPluginManager *pm)
 
 	/* Enable search for our non-string column */
 	gtk_tree_view_set_search_column (GTK_TREE_VIEW (pm->priv->tree),
-					 NAME_COLUMN);
+					 INFO_COLUMN);
 	gtk_tree_view_set_search_equal_func (GTK_TREE_VIEW (pm->priv->tree),
 					     name_search_cb,
 					     NULL,
