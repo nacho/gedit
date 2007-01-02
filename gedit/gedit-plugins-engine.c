@@ -60,14 +60,14 @@ typedef enum
 {
 	GEDIT_PLUGIN_LOADER_C,
 	GEDIT_PLUGIN_LOADER_PY,
-} GeditPluginLang;
+} GeditPluginLoader;
 
 struct _GeditPluginInfo
 {
 	gchar        *file;
 	
 	gchar        *location;
-	GeditPluginLang lang;
+	GeditPluginLoader loader;
 	GTypeModule  *module;
 
 	gchar        *name;
@@ -157,7 +157,7 @@ gedit_plugins_engine_load (const gchar *file)
 				     NULL);
 	if (str && strcmp(str, "python") == 0)
 	{
-		info->lang = GEDIT_PLUGIN_LOADER_PY;
+		info->loader = GEDIT_PLUGIN_LOADER_PY;
 #ifndef ENABLE_PYTHON
 		g_warning ("Cannot load python extension '%s', gedit was not "
 					"compiled with python support", file);
@@ -166,7 +166,7 @@ gedit_plugins_engine_load (const gchar *file)
 	}
 	else
 	{
-		info->lang = GEDIT_PLUGIN_LOADER_C;
+		info->loader = GEDIT_PLUGIN_LOADER_C;
 	}
 	g_free (str);
 
@@ -438,7 +438,7 @@ load_plugin_module (GeditPluginInfo *info)
 	g_return_val_if_fail (info->location != NULL, FALSE);
 	g_return_val_if_fail (info->plugin == NULL, FALSE);
 	
-	switch (info->lang)
+	switch (info->loader)
 	{
 		case GEDIT_PLUGIN_LOADER_C:
 			dirname = g_path_get_dirname (info->file);	
@@ -468,7 +468,7 @@ load_plugin_module (GeditPluginInfo *info)
 	
 	if (g_type_module_use (info->module) == FALSE)
 	{
-		switch (info->lang)
+		switch (info->loader)
 		{
 			case GEDIT_PLUGIN_LOADER_C:
 				g_warning ("Could not load plugin file at %s\n",
@@ -485,7 +485,7 @@ load_plugin_module (GeditPluginInfo *info)
 		return FALSE;
 	}
 	
-	switch (info->lang)
+	switch (info->loader)
 	{
 		case GEDIT_PLUGIN_LOADER_C:
 			info->plugin = GEDIT_PLUGIN (gedit_module_new_object (GEDIT_MODULE (info->module)));
