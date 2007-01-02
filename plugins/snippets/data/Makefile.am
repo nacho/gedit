@@ -3,6 +3,7 @@ snippets_DATA = \
 	css.xml \
 	c.xml \
 	c++.xml \
+	docbook.xml \
 	global.xml \
 	haskell.xml \
 	html.xml \
