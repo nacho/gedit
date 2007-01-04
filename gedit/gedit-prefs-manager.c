@@ -41,6 +41,7 @@
 #include "gedit-prefs-manager-private.h"
 #include "gedit-debug.h"
 #include "gedit-encodings.h"
+#include "gedit-utils.h"
 
 #define DEFINE_BOOL_PREF(name, key, def) gboolean 			\
 gedit_prefs_manager_get_ ## name (void)					\
@@ -293,17 +294,6 @@ gedit_prefs_manager_key_is_writable (const gchar* key)
 	return gconf_client_key_is_writable (gedit_prefs_manager->gconf_client, key, NULL);
 }
 
-static gchar* 
-gdk_color_to_string (GdkColor color)
-{
-	gedit_debug (DEBUG_PREFS);
-
-	return g_strdup_printf ("#%04x%04x%04x",
-				color.red, 
-				color.green,
-				color.blue);
-}
-
 static GdkColor
 gconf_client_get_color_with_default (GConfClient* client, const gchar* key,
                       		     const gchar* def, GError** err)
@@ -346,7 +336,7 @@ gedit_gconf_client_set_color (GConfClient   *client,
 	g_return_val_if_fail (GCONF_IS_CLIENT (client), FALSE);  
 	g_return_val_if_fail (key != NULL, FALSE);
 
-	str_color = gdk_color_to_string (val);
+	str_color = gedit_gdk_color_to_string (val);
 	g_return_val_if_fail (str_color != NULL, FALSE);
 
 	res = gconf_client_set_string (client,

@@ -68,6 +68,8 @@ void		 gedit_utils_menu_position_under_tree_view
 							 gboolean *push_in,
 							 gpointer  user_data);
 
+gchar		*gedit_gdk_color_to_string		(GdkColor color);
+
 GtkWidget	*gedit_gtk_button_new_with_stock_icon	(const gchar *label,
 							 const gchar *stock_id);
 
