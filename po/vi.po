@@ -1,14 +1,14 @@
 # Vietnamese translation for GEdit.
-# Copyright © 2006 Gnome i18n Project for Vietnamese.
+# Copyright © 2007 Gnome i18n Project for Vietnamese.
 # Nguyễn Thái Ngọc Duy <pclouds@vnlinux.org>, 2002-2004.
-# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2007.
 # 
 msgid ""
 ""
 msgstr "Project-Id-Version: gedit 2.15.9 Gnome HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-27 07:55+0200\n"
-"PO-Revision-Date: 2006-08-27 17:20+0930\n"
+"POT-Creation-Date: 2007-01-03 03:43+0000\n"
+"PO-Revision-Date: 2007-01-05 16:40+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgid "Edit text files"
 msgstr "Soạn thảo tập tin văn bản"
 
 #: ../data/gedit.desktop.in.in.h:2
-#: ../gedit/gedit.c:457
+#: ../gedit/gedit.c:463
 msgid "Text Editor"
 msgstr "Bộ soạn thảo văn bản"
 
@@ -34,7 +34,7 @@ msgstr "Phông tự chọn sẽ được dùng trong vùng biên soạn. Phông 
 "nếu tắt tùy chọn « Dùng phông mặc định »."
 
 #: ../data/gedit.schemas.in.h:2
-#: ../gedit/gedit-plugin-manager.c:747
+#: ../gedit/gedit-plugin-manager.c:766
 msgid "Active plugins"
 msgstr "Bổ sung hoạt động"
 
@@ -299,11 +299,9 @@ msgstr "Hiện ô bên"
 #: ../data/gedit.schemas.in.h:71
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
-msgstr "Danh sách sắp xếp các bảng mã ký tự được gedit dùng để tìm tự động bảng mã "
-"của tập tin. \"CURRENT\" là bảng mã miền địa phương hiện thời. Chỉ dùng "
-"những bảng mã được công nhận."
+"file. \"CURRENT\" represents the current locale encoding. Only recognized "
+"encodings are used."
+msgstr "Danh sách sắp xếp các bảng mã ký tự được gedit dùng để tự động tìm bảng mã của tập tin. « CURRENT » đại diện bảng mã miền địa phương hiện thời. Chỉ dùng những bảng mã được công nhận."
 
 #: ../data/gedit.schemas.in.h:72
 msgid ""
@@ -344,16 +342,16 @@ msgstr "Xác định phông dùng khi in phần thân tài liệu. Đây là tê
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero."
-msgstr "Xác định phông dùng in số hiệu dòng. Chỉ có tác dụng nếu tùy chọn « In số hiệu dòng » "
-"khác không."
+msgstr "Xác định phông dùng in số hiệu dòng. Chỉ có tác dụng nếu tùy chọn « In số "
+"hiệu dòng » khác không."
 
 #: ../data/gedit.schemas.in.h:77
 msgid ""
 "Specifies the font to use for line numbers when printing. This will only "
 "take effect if the \"Print Line Numbers\" option is non-zero. This is a "
 "gnome-print font name and replaced by print_font_numbers_pango."
-msgstr "Xác định phông dùng in số hiệu dòng. Chỉ có tác dụng nếu tùy chọn « In số hiệu dòng » "
-"khác không. Đây là tên phông gnome-print mà được thay thế bởi "
+msgstr "Xác định phông dùng in số hiệu dòng. Chỉ có tác dụng nếu tùy chọn « In số "
+"hiệu dòng » khác không. Đây là tên phông gnome-print mà được thay thế bởi "
 "print_font_numbers_pango."
 
 #: ../data/gedit.schemas.in.h:78
@@ -529,12 +527,11 @@ msgstr "Có nên dùng màu mặc định hệ thống trong vùng biên soạn 
 
 #: ../data/gedit.schemas.in.h:110
 msgid ""
-"Whether to use the system's default font for editing text instead of a font "
-"specific to gedit. If this option is turned off, then the font named in the "
-"\"Editor Font\" option will be used instead of the system font."
-msgstr "Dùng phông mặc định hệ thống trong vùng biên soạn thay vì phông riêng cho "
-"gedit. Nếu tắt tùy chọn này thì sẽ dùng tùy chọn « Phông bộ biên soạn » thay "
-"thế phông hệ thống."
+"Whether to use the system's default fixed width font for editing text "
+"instead of a font specific to gedit. If this option is turned off, then the "
+"font named in the \"Editor Font\" option will be used instead of the system "
+"font."
+msgstr "Có nên dùng phông chữ độ rộng cố định của hệ thống để soạn thảo văn bản thay cho phông chữ nào đặc trưng cho gedit. Nếu tùy chọn này được tắt, phông chữ được xác định trong tùy chọn « Phông bộ soạn thảo » sẽ được dùng thay cho phông chữ hệ thống."
 
 #: ../data/gedit.schemas.in.h:111
 msgid "Writable VFS schemes"
@@ -547,11 +544,19 @@ msgid "[ISO-8859-15]"
 msgstr "[UTF-8]"
 
 #.Translators: This is the sorted list of encodings used by gedit
-#.for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#.for auto-detecting the encoding of a file. You may want to customize it adding
+#.encodings that are common in your country, for instance the GB18030 encoding
+#.for the Chinese	translation. You may also want to remove the ISO-8859-15 encoding
+#.(covering English and most Western European languages) if you think people
+#.in you country will rarely use it.
+#."CURRENT" is a magic value used by gedit and it represents the encoding
+#.for the current locale, so please don't translate the "CURRENT" term.
 #.Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:118
-msgid "[UTF-8,CURRENT,ISO-8859-15]"
-msgstr "[UTF-8,HIỆN_CÓ,ISO-8859-15]"
+#.See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
+#.a list of supported encodings
+#: ../data/gedit.schemas.in.h:126
+msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
+msgstr "[UTF-8,CURRENT]"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
 msgid "Logout _without Saving"
@@ -601,11 +606,9 @@ msgid_plural "If you don't save, changes from the last %ld minutes will be perma
 msgstr[0] "Nếu bạn không lưu, các thay đổi của bạn ở %ld phút chót sẽ bị mất hoàn toàn."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
-#, c-format
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "Nếu bạn không lưu, các thay đổi của bạn ở %d giờ sau chót sẽ bị mất hoàn toàn."
+msgstr "Nếu bạn không lưu, các thay đổi của bạn ở %d giờ sau chót sẽ bị mất hoàn "
+"toàn."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:457
 #, c-format
@@ -616,6 +619,13 @@ msgid_plural "If you don't save, changes from the last hour and %d minutes will 
 "permanently lost."
 msgstr[0] "Nếu bạn không lưu, các thay đổi của bạn ở giờ sau chót và %d phút chót sẽ bị "
 "mất hoàn toàn."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
+#, c-format
+msgid ""
+"If you don't save, changes from the last %d hour will be permanently lost."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Không lưu thì các thay đổi của bạn ở %d giờ sau chót sẽ bị mất hoàn toàn."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
 #, c-format
@@ -642,7 +652,8 @@ msgstr[0] "Các thay đổi trong tài liệu %d sẽ bị mất hoàn toàn."
 #, c-format
 msgid "There is %d document with unsaved changes. Save changes before closing?"
 msgid_plural "There are %d documents with unsaved changes. Save changes before closing?"
-msgstr[0] "Có %d tài liệu có thay đổi chưa được lưu. Lưu các thay đổi trước khi đóng lại chứ?"
+msgstr[0] "Có %d tài liệu có thay đổi chưa được lưu. Lưu các thay đổi trước khi đóng "
+"lại chứ?"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:720
 msgid "Docum_ents with unsaved changes:"
@@ -682,7 +693,7 @@ msgstr "Bảng mã ký tự"
 msgid "E_ncodings shown in menu:"
 msgstr "Bả_ng mã hiển thị trong trình đơn:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:135
+#: ../gedit/dialogs/gedit-open-location-dialog.c:136
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "Mở địa chỉ"
@@ -700,6 +711,7 @@ msgstr "Nhập đị_a chỉ (URI) của tập tin cần mở:"
 msgid "Page Setup"
 msgstr "Thiết lập trang"
 
+#.ex:ts=4:et:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
@@ -773,35 +785,40 @@ msgstr "_Khôi phục phông mặc định"
 msgid "lines"
 msgstr "dòng"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:651
+#: ../gedit/dialogs/gedit-preferences-dialog.c:652
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Hãy nhấn nút này để chọn phông được dùng bởi bộ soạn thảo"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:653
+#: ../gedit/dialogs/gedit-preferences-dialog.c:654
 msgid "Push this button to configure text color"
 msgstr "Hãy nhấn nút này để cấu hình màu chữ"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:655
+#: ../gedit/dialogs/gedit-preferences-dialog.c:656
 msgid "Push this button to configure background color"
 msgstr "Hãy nhấn nút này để cấu hình màu nền."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:657
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Hãy nhấn nút này để cấu hình màu hiển thị cho văn bản được chọn."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:660
+#: ../gedit/dialogs/gedit-preferences-dialog.c:661
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Nhấn nút này để cấu hình màu đánh dấu cho văn bản được chọn."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1169
+#: ../gedit/dialogs/gedit-preferences-dialog.c:670
+#, c-format
+msgid "_Use the system fixed width font (%s)"
+msgstr "_Dùng phông rộng cố định hệ thống (%s)"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1178
 msgid "Elements"
 msgstr "Phần tử"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1281
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1290
 msgid "gedit Preferences"
 msgstr "Tuỳ thích gedit"
 
@@ -842,7 +859,7 @@ msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Màu sắc</span>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
-#: ../plugins/taglist/HTML.tags.xml.in.h:23
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Bold"
 msgstr "Đậm"
 
@@ -991,29 +1008,25 @@ msgid "_Tab width:"
 msgstr "Độ rộng _tab:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
-msgid "_Use default theme font"
-msgstr "_Dùng phông sắc thái mặc định"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:53
 msgid "_minutes"
 msgstr "_phút"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:302
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2
-#: ../gedit/gedit-window.c:1250
+#: ../gedit/gedit-window.c:1362
 msgid "Replace"
 msgstr "Thay thế"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:314
-#: ../gedit/gedit-window.c:1248
+#: ../gedit/dialogs/gedit-search-dialog.c:313
+#: ../gedit/gedit-window.c:1360
 msgid "Find"
 msgstr "Tìm"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:366
+#: ../gedit/dialogs/gedit-search-dialog.c:390
 msgid "Replace _All"
 msgstr "Thay thế tất _cả"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:367
+#: ../gedit/dialogs/gedit-search-dialog.c:391
 #: ../gedit/gedit-commands-file.c:661
 msgid "_Replace"
 msgstr "Th_ay thế"
@@ -1046,36 +1059,36 @@ msgstr "_Tìm: "
 msgid "_Wrap around"
 msgstr "_Cuộn"
 
-#: ../gedit/gedit.c:74
+#: ../gedit/gedit.c:73
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
 msgstr "Đặt bảng mã ký tự cần dùng để mở những tập tin đã liệt kê trên dòng lệnh."
 
-#: ../gedit/gedit.c:77
+#: ../gedit/gedit.c:76
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Tạo cửa sổ cấp đầu mới trong một trình gedit đang chạy"
 
-#: ../gedit/gedit.c:80
+#: ../gedit/gedit.c:79
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Tạo tài liệu mới trong một trình gedit đang chạy"
 
-#: ../gedit/gedit.c:83
+#: ../gedit/gedit.c:82
 msgid "[FILE...]"
 msgstr "[TẬP TIN...]"
 
-#: ../gedit/gedit.c:115
+#: ../gedit/gedit.c:114
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: tên tập tin hay địa chỉ Mạng dạng sai\n"
 
-#: ../gedit/gedit.c:127
+#: ../gedit/gedit.c:126
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s: mã không hợp lệ.\n"
 
 #.Setup command line options
-#: ../gedit/gedit.c:449
+#: ../gedit/gedit.c:455
 msgid "- Edit text files"
 msgstr "- Soạn thảo tập tin văn bản"
 
@@ -1100,9 +1113,6 @@ msgid "The entered location is not valid."
 msgstr "Bạn đã nhập một địa chỉ không hợp lệ."
 
 #: ../gedit/gedit-commands-file.c:516
-#: ../gedit/gedit-io-error-message-area.c:150
-#: ../gedit/gedit-io-error-message-area.c:189
-#: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Hãy kiểm tra xem bạn đã gõ đúng địa chỉ chưa rồi thử lại."
 
@@ -1166,11 +1176,8 @@ msgid_plural "Changes made to the document in the last %ld minutes will be perma
 msgstr[0] "Các thay đổi trong tài liệu ở %ld phút chót sẽ hoàn toàn bị mất."
 
 #: ../gedit/gedit-commands-file.c:1184
-#: ../gedit/gedit-commands-file.c:1205
-#, c-format
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Các thay đổi trong tài liệu ở %d giờ sau chót sẽ hoàn toàn bị mất."
+msgstr "Các thay đổi trong tài liệu ở %d giờ sau chót sẽ hoàn toàn bị mất."
 
 #: ../gedit/gedit-commands-file.c:1190
 #, c-format
@@ -1181,6 +1188,13 @@ msgid_plural "Changes made to the document in the last hour and %d minutes will 
 "permanently lost."
 msgstr[0] "Các thay đổi trong tài liệu ở giờ sau chót và %d phút chót sẽ hoàn toàn bị "
 "mất."
+
+#: ../gedit/gedit-commands-file.c:1205
+#, c-format
+msgid ""
+"Changes made to the document in the last %d hour will be permanently lost."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Các thay đổi trong tài liệu ở %d giờ sau chót sẽ hoàn toàn bị mất."
 
 #: ../gedit/gedit-commands-file.c:1231
 msgid "_Revert"
@@ -1208,25 +1222,25 @@ msgstr "Đã tìm thấy và thay thế một lần"
 msgid "Phrase not found"
 msgstr "Không tìm thấy cụm từ"
 
-#: ../gedit/gedit-document.c:743
-#: ../gedit/gedit-document.c:837
+#: ../gedit/gedit-document.c:742
+#: ../gedit/gedit-document.c:836
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Tài liệu chưa lưu %d"
 
 #.bad bad luck...
-#: ../gedit/gedit-document-saver.c:552
+#: ../gedit/gedit-document-saver.c:568
 msgid "Could not obtain backup filename"
 msgstr "Không thể lấy tên tập tin sao lưu"
 
-#: ../gedit/gedit-documents-panel.c:85
-#: ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1798
-#: ../gedit/gedit-window.c:1803
+#: ../gedit/gedit-documents-panel.c:89
+#: ../gedit/gedit-documents-panel.c:103
+#: ../gedit/gedit-window.c:1931
+#: ../gedit/gedit-window.c:1936
 msgid "Read Only"
 msgstr "Chỉ đọc"
 
-#: ../gedit/gedit-documents-panel.c:633
+#: ../gedit/gedit-documents-panel.c:693
 msgid "Documents"
 msgstr "Tài liệu"
 
@@ -1276,13 +1290,11 @@ msgstr "Ki-rin"
 #: ../gedit/gedit-encodings.c:164
 #: ../gedit/gedit-encodings.c:242
 #: ../gedit/gedit-encodings.c:283
-#: ../plugins/spell/gedit-spell-checker.c:81
 msgid "Arabic"
 msgstr "Ả Rập"
 
 #: ../gedit/gedit-encodings.c:166
 #: ../gedit/gedit-encodings.c:277
-#: ../plugins/spell/gedit-spell-checker.c:95
 msgid "Greek"
 msgstr "Hy Lạp"
 
@@ -1293,14 +1305,12 @@ msgstr "Do thái trực quan"
 #: ../gedit/gedit-encodings.c:170
 #: ../gedit/gedit-encodings.c:240
 #: ../gedit/gedit-encodings.c:281
-#: ../plugins/spell/gedit-spell-checker.c:111
 msgid "Hebrew"
 msgstr "Do Thái"
 
 #: ../gedit/gedit-encodings.c:172
 #: ../gedit/gedit-encodings.c:238
 #: ../gedit/gedit-encodings.c:279
-#: ../plugins/spell/gedit-spell-checker.c:152
 msgid "Turkish"
 msgstr "Thổ Nhĩ Kỳ"
 
@@ -1313,7 +1323,6 @@ msgid "Celtic"
 msgstr "Xen-tơ"
 
 #: ../gedit/gedit-encodings.c:182
-#: ../plugins/spell/gedit-spell-checker.c:140
 msgid "Romanian"
 msgstr "Lỗ Má Ni"
 
@@ -1364,7 +1373,6 @@ msgstr "Ki-rin/U-cợ-rainh"
 #: ../gedit/gedit-encodings.c:262
 #: ../gedit/gedit-encodings.c:268
 #: ../gedit/gedit-encodings.c:287
-#: ../plugins/spell/gedit-spell-checker.c:155
 msgid "Vietnamese"
 msgstr "Việt Nam"
 
@@ -1406,238 +1414,248 @@ msgstr "Mọi tập tin văn bản"
 msgid "There was an error displaying help."
 msgstr "Gặp lỗi khi hiển thị trợ giúp."
 
-#: ../gedit/gedit-io-error-message-area.c:148
+#: ../gedit/gedit-io-error-message-area.c:171
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Không tìm thấy tập tin %s."
 
-#: ../gedit/gedit-io-error-message-area.c:155
-#: ../gedit/gedit-io-error-message-area.c:382
+#: ../gedit/gedit-io-error-message-area.c:173
+#: ../gedit/gedit-io-error-message-area.c:212
+#: ../gedit/gedit-io-error-message-area.c:228
+msgid "Please check that you typed the location correctly and try again."
+msgstr "Hãy kiểm tra xem bạn đã gõ đúng địa chỉ chưa rồi thử lại."
+
+#: ../gedit/gedit-io-error-message-area.c:178
+#: ../gedit/gedit-io-error-message-area.c:417
 msgid "The file contains corrupted data."
 msgstr "Tập tin chứa dữ liệu hỏng"
 
 #.Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:166
-#: ../gedit/gedit-io-error-message-area.c:393
+#: ../gedit/gedit-io-error-message-area.c:189
+#: ../gedit/gedit-io-error-message-area.c:428
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "gedit không thể xử lý địa chỉ kiểu %s."
 
-#: ../gedit/gedit-io-error-message-area.c:172
-#: ../gedit/gedit-io-error-message-area.c:399
+#: ../gedit/gedit-io-error-message-area.c:195
+#: ../gedit/gedit-io-error-message-area.c:434
 msgid "gedit cannot handle this location."
 msgstr "gedit không thể xử lý địa chỉ này."
 
-#: ../gedit/gedit-io-error-message-area.c:179
-#: ../gedit/gedit-io-error-message-area.c:406
+#: ../gedit/gedit-io-error-message-area.c:202
+#: ../gedit/gedit-io-error-message-area.c:441
 msgid "The file contains data in an invalid format."
 msgstr "Tập tin chứa dữ liệu ở dạng thức không hợp lệ."
 
-#: ../gedit/gedit-io-error-message-area.c:183
-#: ../gedit/gedit-io-error-message-area.c:410
+#: ../gedit/gedit-io-error-message-area.c:206
+#: ../gedit/gedit-io-error-message-area.c:445
 msgid "The file is too big."
 msgstr "Tập tin quá lớn."
 
-#: ../gedit/gedit-io-error-message-area.c:187
+#: ../gedit/gedit-io-error-message-area.c:210
 #, c-format
 msgid "%s is not a valid location."
 msgstr "%s không phải là một địa điểm hợp lệ."
 
-#: ../gedit/gedit-io-error-message-area.c:194
-#: ../gedit/gedit-io-error-message-area.c:414
+#: ../gedit/gedit-io-error-message-area.c:217
+#: ../gedit/gedit-io-error-message-area.c:449
 msgid "You do not have the permissions necessary to open the file."
 msgstr "Bạn không có quyền mở tập tin này."
 
-#: ../gedit/gedit-io-error-message-area.c:198
-#: ../gedit/gedit-io-error-message-area.c:418
-#: ../gedit/gedit-io-error-message-area.c:1166
+#: ../gedit/gedit-io-error-message-area.c:221
+#: ../gedit/gedit-io-error-message-area.c:453
+#: ../gedit/gedit-io-error-message-area.c:1206
 msgid ""
-"There are too many open files. Please, close some applications and try again."
-msgstr "Quá nhiều tập tin đã mở. Hãy đóng một số tập tin rồi thử lại."
+"There are too many open files. Please close some applications and try again."
+msgstr "Quá nhiều tập tin đã mở. Hãy đóng một số ứng dụng rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:203
-#: ../gedit/gedit-io-error-message-area.c:423
+#: ../gedit/gedit-io-error-message-area.c:226
+#: ../gedit/gedit-io-error-message-area.c:458
 #, c-format
 msgid "%s is a directory."
 msgstr "%s là thư mục."
 
-#: ../gedit/gedit-io-error-message-area.c:210
-#: ../gedit/gedit-io-error-message-area.c:428
+#: ../gedit/gedit-io-error-message-area.c:233
+#: ../gedit/gedit-io-error-message-area.c:463
 msgid ""
-"Not enough available memory to open the file. Please, close some running "
+"Not enough available memory to open the file. Please close some running "
 "applications and try again."
-msgstr "Không đủ bộ nhớ để mở tập tin này. Hãy đóng bớt vài ứng dụng đang chạy rồi "
-"thử lại."
+msgstr "Không đủ bộ nhớ để mở tập tin. Hãy đóng bớt vài ứng dụng đang chạy rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:238
-#: ../gedit/gedit-io-error-message-area.c:456
-#: ../gedit/gedit-io-error-message-area.c:1205
+#: ../gedit/gedit-io-error-message-area.c:261
+#: ../gedit/gedit-io-error-message-area.c:491
+#: ../gedit/gedit-io-error-message-area.c:1245
 #, c-format
 msgid ""
-"Host %s could not be found. Please, check that your proxy settings are "
+"Host %s could not be found. Please check that your proxy settings are "
 "correct and try again."
-msgstr "Không tìm thấy máy %s. Hãy kiểm tra lại các thiết lập ủy nhiệm rồi thử lại."
+msgstr "Không tìm thấy máy %s. Hãy kiểm tra lại các thiết lập ủy nhiệm là đúng chưa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:249
-#: ../gedit/gedit-io-error-message-area.c:260
-#: ../gedit/gedit-io-error-message-area.c:268
-#: ../gedit/gedit-io-error-message-area.c:467
-#: ../gedit/gedit-io-error-message-area.c:478
-#: ../gedit/gedit-io-error-message-area.c:1216
-#: ../gedit/gedit-io-error-message-area.c:1227
-#: ../gedit/gedit-io-error-message-area.c:1235
+#: ../gedit/gedit-io-error-message-area.c:272
+#: ../gedit/gedit-io-error-message-area.c:283
+#: ../gedit/gedit-io-error-message-area.c:291
+#: ../gedit/gedit-io-error-message-area.c:502
+#: ../gedit/gedit-io-error-message-area.c:513
+#: ../gedit/gedit-io-error-message-area.c:1256
+#: ../gedit/gedit-io-error-message-area.c:1267
+#: ../gedit/gedit-io-error-message-area.c:1275
 msgid ""
-"Host name was invalid. Please, check that you typed the location correctly "
+"Host name was invalid. Please check that you typed the location correctly "
 "and try again."
-msgstr "Tên máy không hợp lệ. Hãy kiểm tra xem bạn đã nhập địa điểm đúng chưa rồi "
-"thử lại."
+msgstr "Tên máy không hợp lệ. Hãy kiểm tra xem bạn đã nhập địa điểm đúng chưa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:274
-#: ../gedit/gedit-io-error-message-area.c:486
-#: ../gedit/gedit-io-error-message-area.c:1241
+#: ../gedit/gedit-io-error-message-area.c:297
+#: ../gedit/gedit-io-error-message-area.c:521
+#: ../gedit/gedit-io-error-message-area.c:1281
 msgid ""
-"Host name was empty. Please, check that your proxy settings are correct and "
+"Host name was empty. Please check that your proxy settings are correct and "
 "try again."
-msgstr "Tên máy rỗng. Hãy kiểm tra lại các thiết lập ủy nhiệm rồi thử lại."
+msgstr "Tên máy rỗng. Hãy kiểm tra lại các thiết lập ủy nhiệm là đúng chưa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:280
-#: ../gedit/gedit-io-error-message-area.c:1247
+#: ../gedit/gedit-io-error-message-area.c:303
+#: ../gedit/gedit-io-error-message-area.c:1287
 msgid ""
-"Attempt to log in failed. Please, check that you typed the location "
-"correctly and try again."
-msgstr "Không đăng nhập được. Hãy kiểm tra bạn đã nhập đúng địa điểm chưa và thử lại."
+"Attempt to log in failed. Please check that you typed the location correctly "
+"and try again."
+msgstr "Lỗi đăng nhập. Hãy kiểm tra bạn đã nhập đúng địa điểm chưa và thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:286
+#: ../gedit/gedit-io-error-message-area.c:309
 msgid "The file you are trying to open is not a regular file."
 msgstr "Tập tin bạn thử mở không phải là tập tin thường."
 
-#: ../gedit/gedit-io-error-message-area.c:325
-#: ../gedit/gedit-io-error-message-area.c:546
-#: ../gedit/gedit-io-error-message-area.c:1312
+#: ../gedit/gedit-io-error-message-area.c:313
+#: ../gedit/gedit-io-error-message-area.c:536
+#: ../gedit/gedit-io-error-message-area.c:1315
+msgid "Connection timed out. Please try again."
+msgstr "Kết nối quá thời. Hãy thử lại."
+
+#: ../gedit/gedit-io-error-message-area.c:352
+#: ../gedit/gedit-io-error-message-area.c:586
+#: ../gedit/gedit-io-error-message-area.c:1356
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Gặp lỗi bất ngờ: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:331
-#: ../gedit/gedit-io-error-message-area.c:712
+#: ../gedit/gedit-io-error-message-area.c:358
+#: ../gedit/gedit-io-error-message-area.c:752
 #, c-format
 msgid "Could not open the file %s."
 msgstr "Không thể mở tập tin %s."
 
-#: ../gedit/gedit-io-error-message-area.c:377
-msgid "gedit cannot find it. Perhaps, it has recently been deleted."
-msgstr "Trình gedit không tìm thấy nó. Có lẽ nó vừa mới bị xóa bỏ."
+#: ../gedit/gedit-io-error-message-area.c:367
+#: ../gedit/gedit-io-error-message-area.c:659
+msgid "_Retry"
+msgstr "Thử _lại"
 
-#: ../gedit/gedit-io-error-message-area.c:492
+#: ../gedit/gedit-io-error-message-area.c:412
+msgid "gedit cannot find it. Perhaps it has recently been deleted."
+msgstr "Trình gedit không tìm thấy nó. Có lẽ nó vừa mới bị xóa."
+
+#: ../gedit/gedit-io-error-message-area.c:527
 msgid "Attempt to log in failed."
 msgstr "Không đăng nhập được."
 
-#: ../gedit/gedit-io-error-message-area.c:496
+#: ../gedit/gedit-io-error-message-area.c:531
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s không phải là một tập tin chuẩn."
 
-#: ../gedit/gedit-io-error-message-area.c:552
+#: ../gedit/gedit-io-error-message-area.c:592
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Không thể hoàn nguyên tập tin %s."
 
-#: ../gedit/gedit-io-error-message-area.c:576
+#: ../gedit/gedit-io-error-message-area.c:616
 msgid "Ch_aracter Coding:"
 msgstr "_Mã ký tự :"
 
-#: ../gedit/gedit-io-error-message-area.c:619
-msgid "_Retry"
-msgstr "Thử _lại"
-
-#: ../gedit/gedit-io-error-message-area.c:714
+#: ../gedit/gedit-io-error-message-area.c:754
 msgid "gedit has not been able to detect the character coding."
 msgstr "Trình gedit chưa có thể phát hiện bảng mã ký tự."
 
-#: ../gedit/gedit-io-error-message-area.c:716
-#: ../gedit/gedit-io-error-message-area.c:725
+#: ../gedit/gedit-io-error-message-area.c:756
+#: ../gedit/gedit-io-error-message-area.c:765
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Hãy kiểm tra bạn không cố mở tập tin kiểu nhị phân."
 
-#: ../gedit/gedit-io-error-message-area.c:717
+#: ../gedit/gedit-io-error-message-area.c:757
 msgid "Select a character coding from the menu and try again."
 msgstr "Hãy chọn mã ký tự trong trình đơn rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:722
+#: ../gedit/gedit-io-error-message-area.c:762
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "Không thể mở tập tin %s bằng mã ký tự %s."
 
-#: ../gedit/gedit-io-error-message-area.c:726
-#: ../gedit/gedit-io-error-message-area.c:778
+#: ../gedit/gedit-io-error-message-area.c:766
+#: ../gedit/gedit-io-error-message-area.c:818
 msgid "Select a different character coding from the menu and try again."
 msgstr "Hãy chọn mã ký tự khác trong trình đơn rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:773
+#: ../gedit/gedit-io-error-message-area.c:813
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "Không thể lưu tập tin %s bằng mã ký tự %s."
 
-#: ../gedit/gedit-io-error-message-area.c:776
+#: ../gedit/gedit-io-error-message-area.c:816
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
 msgstr "Tài liệu này chứa một hay nhiều ký tự không thể được mã hóa bằng mã ký tự "
 "xác định."
 
-#: ../gedit/gedit-io-error-message-area.c:839
+#: ../gedit/gedit-io-error-message-area.c:879
 msgid "_Edit Anyway"
 msgstr "Vẫn _biên soạn"
 
-#: ../gedit/gedit-io-error-message-area.c:842
+#: ../gedit/gedit-io-error-message-area.c:882
 msgid "_Don't Edit"
 msgstr "_Không biên soạn"
 
-#: ../gedit/gedit-io-error-message-area.c:857
+#: ../gedit/gedit-io-error-message-area.c:897
 #, c-format
-msgid "This file (%s) is already opened in another gedit window."
+msgid "This file (%s) is already open in another gedit window."
 msgstr "Tập tin (%s) đã được mở trong cửa sổ gedit khác."
 
-#: ../gedit/gedit-io-error-message-area.c:872
+#: ../gedit/gedit-io-error-message-area.c:912
 msgid ""
-"gedit opened this instance of the file in non-editable way. Do you want to "
+"gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
-msgstr "Trình gedit đã mở thể hiện này của tập tin bằng cách không biên soạn được. "
-"Bạn vẫn muốn biên soạn nó không?"
+msgstr "Trình gedit đã mở thể hiện này của tập tin bằng cách không biên soạn được. Bạn vẫn muốn biên soạn nó không?"
 
-#: ../gedit/gedit-io-error-message-area.c:930
-#: ../gedit/gedit-io-error-message-area.c:1025
+#: ../gedit/gedit-io-error-message-area.c:970
+#: ../gedit/gedit-io-error-message-area.c:1065
 msgid "_Save Anyway"
 msgstr "_Vẫn lưu"
 
-#: ../gedit/gedit-io-error-message-area.c:934
-#: ../gedit/gedit-io-error-message-area.c:1029
+#: ../gedit/gedit-io-error-message-area.c:974
+#: ../gedit/gedit-io-error-message-area.c:1069
 msgid "_Don't Save"
 msgstr "_Không lưu"
 
 #.FIXME: review this message, it's not clear since for the user the "modification"
 #.could be interpreted as the changes he made in the document. beside "reading" is
 #.not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:952
+#: ../gedit/gedit-io-error-message-area.c:992
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Tập tin %s đã được sửa đổi từ lần đọc trước."
 
-#: ../gedit/gedit-io-error-message-area.c:968
+#: ../gedit/gedit-io-error-message-area.c:1008
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr "Nếu bạn lưu nó, các thay đổi bên ngoài có thể bị mất. Vẫn lưu nó không?"
 
-#: ../gedit/gedit-io-error-message-area.c:1047
+#: ../gedit/gedit-io-error-message-area.c:1087
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Không thể tạo tập tin sao lưu trong khi lưu %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1050
+#: ../gedit/gedit-io-error-message-area.c:1090
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Không thể tạo tập tin sao lưu tạm trong khi lưu %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1067
+#: ../gedit/gedit-io-error-message-area.c:1107
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1647,22 +1665,20 @@ msgstr "Trình gedit không thể lưu trữ bản sao cũ của tập tin này 
 "trong khi lưu, bạn có thể mất bản sao tập tin cũ. Vẫn lưu không?"
 
 #.Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1128
+#: ../gedit/gedit-io-error-message-area.c:1168
 #, c-format
 msgid ""
-"gedit cannot handle %s locations in write mode. Please, check that you typed "
+"gedit cannot handle %s locations in write mode. Please check that you typed "
 "the location correctly and try again."
-msgstr "Trình gedit không thể xử lý địa điểm kiểu %s trong chế độ ghi. Hãy kiểm tra "
-"bạn đã gõ đúng địa điểm chưa và thử lại."
+msgstr "Trình gedit không thể xử lý địa điểm kiểu %s trong chế độ ghi. Hãy kiểm tra bạn đã gõ đúng địa điểm chưa và thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1136
+#: ../gedit/gedit-io-error-message-area.c:1176
 msgid ""
-"gedit cannot handle this location  in write mode. Please, check that you "
-"typed the location correctly and try again."
-msgstr "Trình gedit không thể xử lý địa điểm này trong chế độ ghi. Hãy kiểm tra bạn "
-"đã gõ đúng địa điểm chưa và thử lại."
+"gedit cannot handle this location in write mode. Please check that you typed "
+"the location correctly and try again."
+msgstr "Trình gedit không thể xử lý địa điểm này trong chế độ ghi. Hãy kiểm tra bạn đã gõ đúng địa điểm chưa và thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1145
+#: ../gedit/gedit-io-error-message-area.c:1185
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1670,74 +1686,67 @@ msgid ""
 msgstr "Đĩa được dùng để lưu tập tin có giới hạn về kích thước tập tin. Hãy lưu một "
 "tập tin nhỏ hơn hoặc lưu tập tin này vào đĩa không đặt ra giới hạn trên."
 
-#: ../gedit/gedit-io-error-message-area.c:1152
+#: ../gedit/gedit-io-error-message-area.c:1192
 #, c-format
 msgid ""
-"%s is not a valid location. Please, check that you typed the location "
+"%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
-msgstr "%s không phải là địa điểm hợp lệ. Hãy kiểm tra xem bạn đã gõ địa điểm đúng "
-"chưa rồi thử lại."
+msgstr "%s không phải địa điểm hợp lệ. Hãy kiểm tra xem bạn đã gõ địa điểm đúng chưa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1159
+#: ../gedit/gedit-io-error-message-area.c:1199
 msgid ""
-"You do not have the permissions necessary to save the file. Please, check "
+"You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
-msgstr "Bạn không có quyền lưu tập tin này. Hãy kiểm tra bạn đã gõ đúng địa điểm "
-"chưa và thử lại."
+msgstr "Bạn không có quyền lưu tập tin này. Hãy kiểm tra bạn đã gõ địa điểm đúng chưa và thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1171
+#: ../gedit/gedit-io-error-message-area.c:1211
 #, c-format
 msgid ""
-"%s is a directory. Please, check that you typed the location correctly and "
+"%s is a directory. Please check that you typed the location correctly and "
 "try again."
-msgstr "%s là thư mục. Hãy kiểm tra xem bạn đã gõ đúng địa điểm chưa rồi thử lại."
+msgstr "%s là thư mục. Hãy kiểm tra xem bạn đã gõ địa điểm đúng chưa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1177
+#: ../gedit/gedit-io-error-message-area.c:1217
 msgid ""
-"Not enough available memory to save the file. Please, close some running "
+"Not enough available memory to save the file. Please close some running "
 "applications and try again."
-msgstr "Không đủ bộ nhớ để lưu tập tin này. Hãy đóng một số ứng dụng đang chạy rồi "
-"thử lại."
+msgstr "Không đủ bộ nhớ để lưu tập tin này. Hãy đóng bớt một số ứng dụng đang chạy rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1253
+#: ../gedit/gedit-io-error-message-area.c:1293
 msgid ""
-"There is not enough disk space to save the file. Please, free some disk "
-"space and try again."
-msgstr "Không đủ chỗ trên đĩa để lưu tập tin. Hãy giải phóng thêm chỗ trống trên đĩa "
-"rồi thử lại."
+"There is not enough disk space to save the file. Please free some disk space "
+"and try again."
+msgstr "Không đủ chỗ trên đĩa để lưu tập tin. Hãy giải phóng thêm chỗ trống trên đĩa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1259
+#: ../gedit/gedit-io-error-message-area.c:1299
 msgid ""
-"You are trying to save the file on a read-only disk. Please, check that you "
+"You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
-msgstr "Bạn đang cố lưu tập tin này vào đĩa chỉ đọc. Hãy kiểm tra xem bạn đã gõ địa "
-"điểm đúng chưa rồi thử lại."
+msgstr "Bạn đang cố lưu tập tin này vào đĩa chỉ đọc. Hãy kiểm tra xem bạn đã gõ địa điểm đúng chưa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1265
-msgid "A file with the same name already exists. Please, use a different name."
+#: ../gedit/gedit-io-error-message-area.c:1305
+msgid "A file with the same name already exists. Please use a different name."
 msgstr "Một tập tin cùng tên đã có. Hãy dùng tên khác."
 
-#: ../gedit/gedit-io-error-message-area.c:1270
+#: ../gedit/gedit-io-error-message-area.c:1310
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
-"the file names. Please, use a shorter name."
-msgstr "Đĩa được dùng để lưu tập tin có giới hạn về kích thước tên tập tin. Hãy dùng "
-"tên ngắn hơn."
+"the file names. Please use a shorter name."
+msgstr "Đĩa vào đó bạn cố lưu tập tin này có giới hạn về độ dài của tên tập tin. Hãy dùng tên ngắn hơn."
 
-#: ../gedit/gedit-io-error-message-area.c:1275
+#: ../gedit/gedit-io-error-message-area.c:1319
 #, c-format
 msgid ""
-"%s is not a regular file. Please, check that you typed the location "
-"correctly and try again."
-msgstr "%s không phải là một tập tin chuẩn. Hãy kiểm tra xem bạn đã gõ địa điểm đúng "
-"chưa rồi thử lại."
+"%s is not a regular file. Please check that you typed the location correctly "
+"and try again."
+msgstr "%s không phải tập tin chuẩn. Hãy kiểm tra xem bạn đã gõ địa điểm đúng chưa rồi thử lại."
 
-#: ../gedit/gedit-io-error-message-area.c:1318
+#: ../gedit/gedit-io-error-message-area.c:1362
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Không thể lưu tập tin %s."
 
-#: ../gedit/gedit-notebook.c:837
+#: ../gedit/gedit-notebook.c:845
 msgid "Close document"
 msgstr "Đóng tài liệu"
 
@@ -1751,39 +1760,39 @@ msgstr "Rỗng"
 msgid "Hide panel"
 msgstr "Ẩn bảng"
 
-#: ../gedit/gedit-plugin-manager.c:55
+#: ../gedit/gedit-plugin-manager.c:56
 msgid "Plugin"
 msgstr "Bổ sung"
 
-#: ../gedit/gedit-plugin-manager.c:56
+#: ../gedit/gedit-plugin-manager.c:57
 msgid "Enabled"
 msgstr "Bật"
 
-#: ../gedit/gedit-plugin-manager.c:502
+#: ../gedit/gedit-plugin-manager.c:515
 msgid "_About"
 msgstr "_Giới thiệu"
 
-#: ../gedit/gedit-plugin-manager.c:510
+#: ../gedit/gedit-plugin-manager.c:523
 msgid "C_onfigure"
 msgstr "Cấ_u hình"
 
-#: ../gedit/gedit-plugin-manager.c:520
+#: ../gedit/gedit-plugin-manager.c:533
 msgid "A_ctivate"
 msgstr "Kí_ch hoạt"
 
-#: ../gedit/gedit-plugin-manager.c:530
+#: ../gedit/gedit-plugin-manager.c:545
 msgid "Ac_tivate All"
 msgstr "Kích hoạ_t hết"
 
-#: ../gedit/gedit-plugin-manager.c:535
+#: ../gedit/gedit-plugin-manager.c:550
 msgid "_Deactivate All"
 msgstr "_Tắt hết"
 
-#: ../gedit/gedit-plugin-manager.c:776
+#: ../gedit/gedit-plugin-manager.c:795
 msgid "_About Plugin"
 msgstr "_Giới thiệu bổ sung"
 
-#: ../gedit/gedit-plugin-manager.c:780
+#: ../gedit/gedit-plugin-manager.c:799
 msgid "C_onfigure Plugin"
 msgstr "Cấ_u hình bổ sung"
 
@@ -1791,7 +1800,7 @@ msgstr "Cấ_u hình bổ sung"
 msgid "Cannot initialize preferences manager."
 msgstr "Không thể khởi động bộ quản lý tùy thích."
 
-#: ../gedit/gedit-prefs-manager.c:1407
+#: ../gedit/gedit-prefs-manager.c:1416
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Yêu cầu « %s », nhận được « %s » cho khóa %s"
@@ -1913,77 +1922,77 @@ msgstr[0] "Có %d thanh bị lỗi"
 
 #.Translators: the first %s is a file name (e.g. test.txt) the second one
 #.is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:641
+#: ../gedit/gedit-tab.c:664
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Đang hoàn nguyên %s từ %s..."
 
-#: ../gedit/gedit-tab.c:648
+#: ../gedit/gedit-tab.c:671
 #, c-format
 msgid "Reverting %s"
 msgstr "Đang hoàn nguyên %s..."
 
 #.Translators: the first %s is a file name (e.g. test.txt) the second one
 #.is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:664
+#: ../gedit/gedit-tab.c:687
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Đang tải %s từ %s..."
 
-#: ../gedit/gedit-tab.c:671
+#: ../gedit/gedit-tab.c:694
 #, c-format
 msgid "Loading %s"
 msgstr "Đang tải %s..."
 
 #.Translators: the first %s is a file name (e.g. test.txt) the second one
 #.is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:754
+#: ../gedit/gedit-tab.c:777
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Đang lưu %s vào %s..."
 
-#: ../gedit/gedit-tab.c:761
+#: ../gedit/gedit-tab.c:784
 #, c-format
 msgid "Saving %s"
 msgstr "Đang lưu %s..."
 
 #.Read only
-#: ../gedit/gedit-tab.c:1518
+#: ../gedit/gedit-tab.c:1541
 msgid "RO"
 msgstr "Chỉ đọc"
 
-#: ../gedit/gedit-tab.c:1563
+#: ../gedit/gedit-tab.c:1586
 #, c-format
 msgid "Error opening file %s"
 msgstr "Gặp lỗi khi mở tập tin %s"
 
-#: ../gedit/gedit-tab.c:1568
+#: ../gedit/gedit-tab.c:1591
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Gặp lỗi khi hoàn nguyên tập tin %s"
 
-#: ../gedit/gedit-tab.c:1573
+#: ../gedit/gedit-tab.c:1596
 #, c-format
 msgid "Error saving file %s"
 msgstr "Gặp lỗi khi lưu tập tin %s"
 
-#: ../gedit/gedit-tab.c:1591
+#: ../gedit/gedit-tab.c:1614
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1598
+#: ../gedit/gedit-tab.c:1621
 msgid "Name:"
 msgstr "Tên:"
 
-#: ../gedit/gedit-tab.c:1599
+#: ../gedit/gedit-tab.c:1622
 msgid "MIME Type:"
 msgstr "Kiểu MIME:"
 
-#: ../gedit/gedit-tab.c:1600
+#: ../gedit/gedit-tab.c:1623
 msgid "Encoding:"
 msgstr "Bảng mã:"
 
-#: ../gedit/gedit-tab.c:2036
+#: ../gedit/gedit-tab.c:2059
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Vẽ trang %d trên %d..."
@@ -2026,7 +2035,7 @@ msgid "_Open..."
 msgstr "_Mở..."
 
 #: ../gedit/gedit-ui.h:64
-#: ../gedit/gedit-window.c:1373
+#: ../gedit/gedit-window.c:1485
 msgid "Open a file"
 msgstr "Mở tập tin"
 
@@ -2191,12 +2200,12 @@ msgid "Go to a specific line"
 msgstr "Đi đến dòng xác định"
 
 #: ../gedit/gedit-ui.h:129
-msgid "Interactive search..."
-msgstr "Tìm kiếm tương tác..."
+msgid "Incremental search..."
+msgstr "Tìm kiếm dần..."
 
 #: ../gedit/gedit-ui.h:130
-msgid "Interactively search for text"
-msgstr "Tìm kiếm đoạn một cách tương tác"
+msgid "Incrementally search for text"
+msgstr "Tìm kiếm dần văn bản"
 
 #.Documents menu
 #: ../gedit/gedit-ui.h:133
@@ -2291,29 +2300,29 @@ msgid "Unable to find the required widgets inside file %s."
 msgstr "Không thể tìm thấy ô điều khiển yêu cầu trong %s."
 
 #.create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1337
+#: ../gedit/gedit-view.c:1330
 msgid "_Wrap Around"
 msgstr "_Cuộn vòng"
 
 #.create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1347
+#: ../gedit/gedit-view.c:1340
 msgid "Match _Entire Word Only"
 msgstr "Chỉ khớp với ng_uyên từ"
 
 #.create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1357
+#: ../gedit/gedit-view.c:1350
 msgid "_Match Case"
 msgstr "_Khớp chữ hoa/thường"
 
-#: ../gedit/gedit-view.c:1445
+#: ../gedit/gedit-view.c:1438
 msgid "String you want to search for"
 msgstr "Chuỗi cần tìm kiếm"
 
-#: ../gedit/gedit-view.c:1454
+#: ../gedit/gedit-view.c:1447
 msgid "Line you want to move the cursor to"
 msgstr "Dòng nơi bạn muốn chuyển con trỏ"
 
-#: ../gedit/gedit-window.c:800
+#: ../gedit/gedit-window.c:901
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Dùng chế độ tô sáng %s"
@@ -2321,37 +2330,37 @@ msgstr "Dùng chế độ tô sáng %s"
 #.add the "None" item before all the others
 #.Translators: "None" means that no highlight mode is selected in the
 #.* "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:855
+#: ../gedit/gedit-window.c:958
 msgid "None"
 msgstr "Không có"
 
-#: ../gedit/gedit-window.c:856
+#: ../gedit/gedit-window.c:959
 msgid "Disable syntax highlighting"
 msgstr "Tắt tô sáng cú pháp"
 
 #.Translators: %s is a URI
-#: ../gedit/gedit-window.c:1127
+#: ../gedit/gedit-window.c:1239
 #, c-format
 msgid "Open '%s'"
 msgstr "Mở '%s'"
 
-#: ../gedit/gedit-window.c:1246
+#: ../gedit/gedit-window.c:1358
 msgid "Save"
 msgstr "Lưu"
 
-#: ../gedit/gedit-window.c:1377
+#: ../gedit/gedit-window.c:1489
 msgid "Open a recently used file"
 msgstr "Mở tập tin vừa dùng"
 
-#: ../gedit/gedit-window.c:1384
+#: ../gedit/gedit-window.c:1496
 msgid "Open"
 msgstr "Mở"
 
-#: ../gedit/gedit-window.c:1473
-#: ../gedit/gedit-window.c:2114
+#.Translators: %s is a URI
+#: ../gedit/gedit-window.c:1546
 #, c-format
-msgid "Activate %s"
-msgstr "Kích hoạt %s"
+msgid "Activate '%s'"
+msgstr "Kích hoạt « %s »"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
@@ -2401,8 +2410,8 @@ msgstr "Chuyển đổi chữ đầu của mỗi từ đã chọn sang chữ hoa
 msgid ""
 "Analyzes the current document and reports the number of words, lines, "
 "characters and non-space characters in it."
-msgstr "Phân tích tài liệu hiện thời và xác định số từ, số hiệu dòng, số ký tự, và các ký "
-"tự không phải khoảng trắng trong tài liệu rồi hiển thị kết quả."
+msgstr "Phân tích tài liệu hiện thời và xác định số từ, số hiệu dòng, số ký tự, và "
+"các ký tự không phải khoảng trắng trong tài liệu rồi hiển thị kết quả."
 
 #: ../plugins/docinfo/docinfo.gedit-plugin.desktop.in.h:2
 #: ../plugins/docinfo/docinfo.glade2.h:8
@@ -2445,11 +2454,11 @@ msgstr "Từ"
 msgid "_Update"
 msgstr "_Cập nhật"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:400
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:411
 msgid "_Document Statistics"
 msgstr "Thống _kê tài liệu"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:402
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:413
 msgid "Get statistic info on current document"
 msgstr "Lấy thông tin thống kê về tài liệu hiện thời"
 
@@ -2461,125 +2470,123 @@ msgstr "Thực hiện lệnh bên ngoài và tập lệnh hệ vỏ."
 msgid "External Tools"
 msgstr "Công cụ bên ngoài"
 
-#: ../plugins/externaltools/tools/__init__.py:38
+#: ../plugins/externaltools/tools/__init__.py:129
 msgid "_External Tools..."
 msgstr "Công cụ _bên ngoài..."
 
-#: ../plugins/externaltools/tools/__init__.py:40
+#: ../plugins/externaltools/tools/__init__.py:131
 msgid "Opens the External Tools Manager"
 msgstr "Mở bộ quản lý công cụ bên ngoài"
 
-#: ../plugins/externaltools/tools/__init__.py:56
+#: ../plugins/externaltools/tools/__init__.py:161
 msgid "Shell Output"
 msgstr "Kết xuất trình bao"
 
-#: ../plugins/externaltools/tools/functions.py:241
+#: ../plugins/externaltools/tools/functions.py:108
 msgid "You must be inside a word to run this command"
 msgstr "Bạn phải ở trong từ để chạy lệnh này"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:165
 msgid "Running tool:"
 msgstr "Công cụ đang chạy:"
 
-#: ../plugins/externaltools/tools/functions.py:321
+#: ../plugins/externaltools/tools/functions.py:188
 msgid "Done."
 msgstr "Đã xong."
 
-#: ../plugins/externaltools/tools/functions.py:323
+#: ../plugins/externaltools/tools/functions.py:190
 msgid "Exited"
 msgstr "Đã thoát"
 
-#: ../plugins/externaltools/tools/manager.py:40
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Không gì"
 
-#: ../plugins/externaltools/tools/manager.py:41
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Tài liệu hiện có"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Vùng chọn hiện có"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Dòng hiện có"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Từ hiện có"
 
-#: ../plugins/externaltools/tools/manager.py:47
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Chèn vào bảng xuất"
 
-#: ../plugins/externaltools/tools/manager.py:48
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Tạo tài liệu mới"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Phụ thêm vào tài liệu hiện có"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Thay thế tài liệu hiện có"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Thay thế vùng chọn hiện có"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Chèn tại vị trí con trỏ"
 
-#: ../plugins/externaltools/tools/manager.py:55
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Mọi tài liệu"
 
-#: ../plugins/externaltools/tools/manager.py:56
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Mọi tài liệu từ các điều không tên"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Chỉ tập tin cục bộ"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Chỉ tập tin ở xa"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Chỉ tài liệu không tên"
 
-#: ../plugins/externaltools/tools/manager.py:189
-#: ../plugins/externaltools/tools/manager.py:206
-#: ../plugins/externaltools/tools/manager.py:245
+#: ../plugins/externaltools/tools/manager.py:200
+#: ../plugins/externaltools/tools/manager.py:228
+#: ../plugins/externaltools/tools/manager.py:276
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Sửa đổi công cụ <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:193
+#: ../plugins/externaltools/tools/manager.py:204
 msgid "A Brand New Tool"
 msgstr "Một Công cụ Mới Phát triển"
 
-#: ../plugins/externaltools/tools/manager.py:216
+#: ../plugins/externaltools/tools/manager.py:237
 msgid "New tool"
 msgstr "Công cụ mới"
 
-#: ../plugins/externaltools/tools/manager.py:279
+#: ../plugins/externaltools/tools/manager.py:312
 #, python-format
 msgid "This accelerator is already bound to %s"
 msgstr "Phím tổ hợp này đã được gán cho %s"
 
-#: ../plugins/externaltools/tools/manager.py:332
-#: ../plugins/snippets/snippets/SnippetsDialog.py:600
+#: ../plugins/externaltools/tools/manager.py:358
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Hãy gõ phím tắt mới, hoặc bấm phím Backspace để xóa"
 
-#: ../plugins/externaltools/tools/manager.py:334
-#: ../plugins/snippets/snippets/SnippetsDialog.py:602
+#: ../plugins/externaltools/tools/manager.py:360
 msgid "Type a new accelerator"
 msgstr "Gõ phím tắt mới"
 
@@ -2596,14 +2603,6 @@ msgid "Edit tool <i>make</i>:"
 msgstr "Sửa công cụ <i>make</i>:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:4
-msgid "External Tools Manager"
-msgstr "Bộ quản lý công cụ bên ngoài"
-
-#: ../plugins/externaltools/tools/tools.glade.h:5
-msgid "F7"
-msgstr "F7"
-
-#: ../plugins/externaltools/tools/tools.glade.h:6
 msgid ""
 "Nothing\n"
 "Current document\n"
@@ -2612,60 +2611,99 @@ msgstr "Không gì\n"
 "Các tài liệu hiện có\n"
 "Mọi tài liệu"
 
-#: ../plugins/externaltools/tools/tools.glade.h:9
-msgid "Run “make” in the document dir"
-msgstr "Chạy « make » trong thư mục tài liệu"
-
-#: ../plugins/externaltools/tools/tools.glade.h:10
-#: ../plugins/snippets/snippets/snippets.glade.h:4
-msgid "_Accelerator:"
-msgstr "_Phím tắt:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:11
+#: ../plugins/externaltools/tools/tools.glade.h:7
 msgid "_Applicability:"
 msgstr "Khả năng á_p dụng:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:12
+#: ../plugins/externaltools/tools/tools.glade.h:8
 msgid "_Description:"
 msgstr "_Mô tả:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:13
+#: ../plugins/externaltools/tools/tools.glade.h:9
 msgid "_Input:"
 msgstr "Kết _nhập:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:14
+#: ../plugins/externaltools/tools/tools.glade.h:10
 msgid "_Output:"
 msgstr "Kết _xuất:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:15
+#: ../plugins/externaltools/tools/tools.glade.h:11
 msgid "_Save:"
 msgstr "_Lưu :"
 
-#: ../plugins/externaltools/tools/tools.glade.h:16
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Shortcut Key:"
+msgstr "_Phím tắt:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
 msgid "_Tools:"
 msgstr "_Công cụ :"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:1
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "gtk-revert-to-saved"
+msgstr "gtk-revert-to-saved"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:1
+msgid "Build"
+msgstr "Xây dựng"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:2
+msgid "Run \"make\" in the document directory"
+msgstr "Chạy « make » trong thư mục tài liệu"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
+msgid "Open a terminal in the document location"
+msgstr "Mở cửa sổ kiểu dòng lệnh ở địa điểm tài liệu"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
+msgid "Open terminal here"
+msgstr "Mở dòng lệnh ở đây"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
+msgid "Remove trailing spaces"
+msgstr "Gỡ bỏ các dấu cách đi theo"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
+msgid "Remove useless trailing spaces in your file"
+msgstr "Gỡ bỏ các dấu cách đi theo vô ích trong tập tin"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:1
+msgid "Execute a custom command and put its output in a new document"
+msgstr "Thực hiện lệnh riêng mà xuất vào tài liệu mới"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:2
+msgid "Run command"
+msgstr "Chạy lệnh"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
+msgid "Easy file access from the side pane"
+msgstr "Dễ truy cập tập tin từ ô bên"
+
+#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
+msgid "File browser pane"
+msgstr "Ô duyệt tập tin"
+
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
 msgid "Enable Restore of Remote Locations"
 msgstr "Bật phục hồi vị trí ở xa"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:2
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:2
 msgid "File Browser Filter Mode"
 msgstr "Chế độ lọc của bộ duyệt tập tin"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:3
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:3
 msgid "File Browser Filter Pattern"
 msgstr "Mẫu lọc của bộ duyệt tập tin"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:4
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:4
 msgid "File Browser Root Directory"
 msgstr "Thư mục gốc của bộ duyệt tập tin"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:5
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:5
 msgid "File Browser Virtual Root Directory"
 msgstr "Thư mục gốc ảo của bộ duyệt tập tin"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:6
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:6
 msgid ""
 "If TRUE the file browser plugin will view the directory of the first opened "
 "document given that the file browser hasn't been used yet. (Thus this "
@@ -2675,32 +2713,32 @@ msgstr "Nếu ĐÚNG, bổ sung duyệt tập tin sẽ xem thư mục của tài
 "miễn là chưa dùng bộ duyệt tập tin. (Vì vậy điều kiện này thường áp dụng vào "
 "mở tài liệu trên dòng lệnh, hoặc mở nó bằn Nautilus, v.v.)"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:7
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:7
 msgid "Open With Tree View"
 msgstr "Mở trong ô xem cây"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:8
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:8
 msgid ""
 "Open the tree view when the file browser plugin gets loaded instead of the "
 "bookmarks view"
 msgstr "Mở ô xem cây khi bổ sung duyệt tập tin được tải, thay cho ô xem Đánh dấu"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:9
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:9
 msgid "Set Location To First Document"
 msgstr "Đặt vị trí là tài liệu thứ nhất"
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:10
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:10
 msgid "Sets whether to enable restoring of remote locations."
 msgstr "Đặt nếu bật khả năng phục hồi vị trí ở xa hay không."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:11
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:11
 msgid ""
 "The file browser root directory to use when loading the file browser plugin "
 "and onload/tree_view is TRUE."
 msgstr "Thư mục gốc của bộ duyệt tập tin, để dùng khi tải bổ sung duyệt tập tin và "
 "khi « onload/tree_view » là ĐÚNG."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:12
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:12
 msgid ""
 "The file browser virtual root directory to use when loading the file browser "
 "plugin when onload/tree_view is TRUE. The virtual root must always be below "
@@ -2709,14 +2747,14 @@ msgstr "Thư mục gốc ảo của bộ duyệt tập tin, để dùng khi tả
 "và khi « onload/tree_view » là ĐÚNG. Gốc ảo luôn luôn phải nằm bên dưới gốc "
 "thật."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:13
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:13
 msgid ""
 "The filter pattern to filter the file browser with. This filter works on top "
 "of the filter_mode."
 msgstr "Mẫu lọc cần dùng để lọc bộ duyệt tập tin. Mẫu lọc này hoạt động bên trên chế "
 "độ lọc (« filter_mode »)."
 
-#: ../plugins/filebrowser/filebrowser.schemas.in.h:14
+#: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:14
 msgid ""
 "This value determines what files get filtered from the file browser. Valid "
 "values are: none (filter nothing), hidden (filter hidden files), binary "
@@ -2729,79 +2767,71 @@ msgstr "Giá trị này quyết định những tập tin nào được lọc t�
 " • binary\t\t\t\tlọc tập tin _nhị phân_\n"
 " • hidden_and_binary\tlọc tập tin cả hai kiểu _bị ẩn và nhị phân_."
 
-#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
-msgid "Easy file access from the side pane"
-msgstr "Dễ truy cập tập tin từ ô bên"
-
-#: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-msgid "File browser pane"
-msgstr "Ô duyệt tập tin"
-
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:363
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:390
 msgid "_Set root to active document"
 msgstr "Đặt _gốc là tài liệu hoạt động"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:365
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:392
 msgid "Set the root to the active document location"
 msgstr "Đặt gốc là vị trí của tài liệu hoạt động"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:367
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:394
 msgid "_Open terminal here"
 msgstr "_Mở dòng lệnh ở đây"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:369
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:396
 msgid "Open a terminal at the currently opened directory"
 msgstr "Mở cửa sổ kiểu dòng lệnh tại thư mục được mở hiện thời"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:481
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:510
 msgid "File Browser"
 msgstr "Bộ duyệt tập tin"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:575
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:616
 msgid "An error occurred while creating a new directory"
 msgstr "Gặp lỗi khi tạo thư mục mới"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:578
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:619
 msgid "An error occurred while creating a new file"
 msgstr "Gặp lỗi khi tạo tập tin mới"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:583
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:624
 msgid "An error occurred while renaming a file or directory"
 msgstr "Gặp lỗi khi thay đổi tên của tập tin hay thư mục"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:588
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:629
 msgid "An error occurred while deleting a file or directory"
 msgstr "Gặp lỗi khi xoá bỏ tập tin hay thư mục"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:634
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Gặp lỗi khi mở thư mục trong bộ quản lý tập tin"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:597
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:638
 msgid "An error occurred while setting a root directory"
 msgstr "Gặp lỗi khi đặt thư mục gốc"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:601
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:642
 msgid "An error occurred while loading a directory"
 msgstr "Gặp lỗi khi tải thư mục"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:604
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:645
 msgid "An error occurred"
 msgstr "Gặp lỗi"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:833
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete immediately?"
 msgstr "Không thể di chuyển tập tin vào Rác;\n"
 "bạn có muốn xoá bỏ ngay nó không?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:836
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:879
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Không thể di chuyển tập tin « %s » vào Rác."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:872
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:915
 #, c-format
 msgid ""
 "Are you sure you want to\n"
@@ -2809,157 +2839,161 @@ msgid ""
 msgstr "Bạn có chắc muốn xoá bỏ\n"
 "hẳn « %s » không?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:919
 msgid "If you delete an item it is permanently lost."
 msgstr "Nếu bạn xoá bỏ mục nào, nó sẽ bị mất hoàn toàn."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2415
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2503
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1748
 msgid "Invalid uri"
 msgstr "URL không hợp lệ"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2773
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2861
 msgid "file"
 msgstr "tập tin"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2794
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2841
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2882
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2929
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
 msgstr "Tập tin hiện thời bị lọc ra. Bạn cần phải điều chỉnh thiết lập lọc để hiển "
 "thị nó."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2822
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2910
 msgid "directory"
 msgstr "tập tin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:719
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:714
 msgid "Bookmarks"
 msgstr "Đánh dấu"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
-msgid "_New Directory"
-msgstr "Thư mục _mới"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:720
+msgid "Recent Files"
+msgstr "Tập tin gần đây"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
-msgid "Add new empty directory"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
+msgid "_New Folder"
+msgstr "Thư mục mớ_i"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
+msgid "Add new empty folder"
 msgstr "Thêm thư mục rỗng mới"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
 msgid "New F_ile"
 msgstr "Tập tin mớ_i"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Add new empty file"
 msgstr "Thêm tập tin rỗng mới"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Up"
 msgstr "Lên"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Open the parent folder"
 msgstr "Mở thư mục mẹ"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
 msgid "_Rename"
 msgstr "Th_ay tên"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
-msgid "Rename selected file or directory"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+msgid "Rename selected file or folder"
 msgstr "Thay đổi tên của tập tin hay thư mục đã chọn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:817
 msgid "_Move To Trash"
 msgstr "Chuyển vào _Rác"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
-msgid "Move selected file or directory to trash"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+msgid "Move selected file or folder to trash"
 msgstr "Di chuyển vào Rác tập tin hay thư mục đã chọn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "_Delete"
 msgstr "_Xoá bỏ"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
-msgid "Delete selected file or directory"
-msgstr "Xóa bỏ tập tin hay thư mục đã chọn"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+msgid "Delete selected file or folder"
+msgstr "Xóa tập tin hay thư mục đã chọn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
 msgid "_Previous Location"
 msgstr "Vị trí _lùi"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
 msgid "Go to the previous visited location"
 msgstr "Trở về vị trí thăm trước"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
 msgid "_Next Location"
 msgstr "Vị trí _kế"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
 msgid "Go to the next visited location"
 msgstr "Tới vị trí thăm kế tiếp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "Re_fresh View"
 msgstr "Cậ_p nhật ô xem"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
 msgid "Refresh the view"
 msgstr "Cập nhật ô xem"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
-msgid "_View Directory"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "_View Folder"
 msgstr "_Xem thư mục"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
-msgid "View directory in file manager"
-msgstr "Xem thư mục đó trong bộ duyệt tập tin"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "View folder in file manager"
+msgstr "Xem thư mục trong bộ quản lý tập tin"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
 msgid "Show _Hidden"
 msgstr "_Hiện bị ẩn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
-msgid "Show hidden files and directories"
-msgstr "Hiển thị các tập tin và thư mục bị ẩn"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+msgid "Show hidden files and folders"
+msgstr "Hiện các tập tin và thư mục bị ẩn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
 msgid "Show _Binary"
 msgstr "Hiện nhị _phân"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
 msgid "Show binary files"
 msgstr "Hiển thị các tập tin kiểu nhị phân"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:949
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
 msgid "Previous location"
 msgstr "Vị trí lùi"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:936
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
 msgid "Go to previous location"
 msgstr "Trở về vị trí trước đó"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:942
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
 msgid "Go to a previously opened location"
 msgstr "Trở về một vị trí đã mở trước đó"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
 msgid "Next location"
 msgstr "Vị trí kế"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:968
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
 msgid "Go to next location"
 msgstr "Tới vị trí kế tiếp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1129
-msgid "Advanced filtering"
-msgstr "Lọc cấp cao"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1124
+msgid "_Advanced filtering"
+msgstr "Lọc cấp c_ao"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2998,6 +3032,7 @@ msgid "Interactive python console standing in the bottom panel"
 msgstr "Bàn giao tiếp python tương tác trong bảng dưới."
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+#: ../plugins/pythonconsole/pythonconsole/__init__.py:45
 msgid "Python Console"
 msgstr "Bàn giao tiếp Python"
 
@@ -3030,6 +3065,10 @@ msgid "<b>Activation</b>"
 msgstr "<b>Kích hoạt</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
+msgid "S_hortcut key:"
+msgstr "P_hím tắt:"
+
+#: ../plugins/snippets/snippets/snippets.glade.h:4
 msgid "Snippets Manager"
 msgstr "Bộ Quản Lý Đoạn"
 
@@ -3045,6 +3084,18 @@ msgstr "Đ_oạn:"
 #: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "_Tab trigger:"
 msgstr "_Tab gây ra:"
+
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:491
+#, python-format
+msgid ""
+"Execution of the python command (%s) exceeds the maximum time, execution "
+"aborted."
+msgstr "Việc thực hiện lệnh python (%s) vượt quá thời gian tối đa nên hủy bỏ."
+
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:499
+#, python-format
+msgid "Execution of the python command (%s) failed: %s"
+msgstr "Lỗi thực hiện lệnh python (%s): %s"
 
 #: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
 msgid "Manage _Snippets..."
@@ -3068,6 +3119,14 @@ msgid ""
 "single, non alphanumeric, character like {, [, etcetera."
 msgstr "Đây không phải là bộ gây nên tab hợp lệ. Bộ gây nên có thể chứa hoặc chữ "
 "hoặc một ký tự đơn không abc (v.d. [, {, )."
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:600
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr "Hãy gõ phím tắt mới, hoặc bấm phím Backspace để xóa trống"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:602
+msgid "Type a new shortcut"
+msgstr "Gõ phím tắt mới"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -3110,328 +3169,28 @@ msgstr "Đả_o thứ tự"
 msgid "_Sort"
 msgstr "_Sắp xếp"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:419
-#: ../plugins/spell/gedit-spell-checker-dialog.c:511
+#: ../plugins/spell/gedit-automatic-spell-checker.c:418
+#: ../plugins/spell/gedit-spell-checker-dialog.c:494
 msgid "(no suggested words)"
 msgstr "(không có từ để gợi ý)"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:443
+#: ../plugins/spell/gedit-automatic-spell-checker.c:442
 msgid "_More..."
 msgstr "Thê_m nữa..."
 
 #.Ignore all
-#: ../plugins/spell/gedit-automatic-spell-checker.c:496
+#: ../plugins/spell/gedit-automatic-spell-checker.c:495
 msgid "_Ignore All"
 msgstr "Bỏ _qua tất cả"
 
 #.+ Add to Dictionary
-#: ../plugins/spell/gedit-automatic-spell-checker.c:509
+#: ../plugins/spell/gedit-automatic-spell-checker.c:508
 msgid "_Add"
 msgstr "Thê_m"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:546
+#: ../plugins/spell/gedit-automatic-spell-checker.c:545
 msgid "_Spelling Suggestions..."
 msgstr "_Gợi ý chính tả..."
-
-#: ../plugins/spell/gedit-spell-checker.c:79
-msgid "Afrikaans"
-msgstr "Tiếng Hà Lan-Nam Phi"
-
-#: ../plugins/spell/gedit-spell-checker.c:80
-msgid "Amharic"
-msgstr "Tiếng Am-ha-ri"
-
-#: ../plugins/spell/gedit-spell-checker.c:82
-msgid "Arabic (Egypt)"
-msgstr "Ả Rập (Ai Cập)"
-
-#: ../plugins/spell/gedit-spell-checker.c:83
-msgid "Azerbaijani"
-msgstr "Tiếng Agiecbaigiăng"
-
-#: ../plugins/spell/gedit-spell-checker.c:84
-msgid "Belarusian"
-msgstr "Tiếng Be-la-ruxợ"
-
-#: ../plugins/spell/gedit-spell-checker.c:85
-msgid "Bulgarian"
-msgstr "Tiếng Bảo Gai Lơi"
-
-#: ../plugins/spell/gedit-spell-checker.c:86
-msgid "Bengali"
-msgstr "Tiếng Băng Gan"
-
-#: ../plugins/spell/gedit-spell-checker.c:87
-msgid "Breton"
-msgstr "Tiếng Boue-ton (Pháp)"
-
-#: ../plugins/spell/gedit-spell-checker.c:88
-msgid "Catalan"
-msgstr "Tiếng Ca-ta-lan"
-
-#: ../plugins/spell/gedit-spell-checker.c:89
-msgid "Czech"
-msgstr "Tiếng Séc"
-
-#: ../plugins/spell/gedit-spell-checker.c:90
-msgid "Welsh"
-msgstr "Tiếng Oue-l-s"
-
-#: ../plugins/spell/gedit-spell-checker.c:91
-msgid "Danish"
-msgstr "Tiếng Đan mạch"
-
-#: ../plugins/spell/gedit-spell-checker.c:92
-msgid "German (Austria)"
-msgstr "Tiếng Đức (Ao)"
-
-#: ../plugins/spell/gedit-spell-checker.c:93
-msgid "German (Germany)"
-msgstr "Tiếng Đức (Đức)"
-
-#: ../plugins/spell/gedit-spell-checker.c:94
-msgid "German (Swiss)"
-msgstr "Tiếng Đức (Thụy sĩ)"
-
-#: ../plugins/spell/gedit-spell-checker.c:96
-msgid "English (American)"
-msgstr "Tiếng Anh (Mỹ)"
-
-#: ../plugins/spell/gedit-spell-checker.c:97
-msgid "English (British)"
-msgstr "Tiếng Anh (quốc Anh)"
-
-#: ../plugins/spell/gedit-spell-checker.c:98
-msgid "English (Canadian)"
-msgstr "Tiếng Anh (Ca-na-đa)"
-
-#: ../plugins/spell/gedit-spell-checker.c:99
-msgid "Esperanto"
-msgstr "Tiếng Etpêrantô"
-
-#: ../plugins/spell/gedit-spell-checker.c:100
-msgid "Spanish"
-msgstr "Tiếng Tây Ban Nha"
-
-#: ../plugins/spell/gedit-spell-checker.c:101
-msgid "Estonian"
-msgstr "Tiếng Et-tô-ni-a"
-
-#: ../plugins/spell/gedit-spell-checker.c:102
-msgid "Persian"
-msgstr "Tiếng Ba Tư"
-
-#: ../plugins/spell/gedit-spell-checker.c:103
-msgid "Finnish"
-msgstr "Tiếng Phần Lan"
-
-#: ../plugins/spell/gedit-spell-checker.c:104
-msgid "Faroese"
-msgstr "Tiếng Pha-rô"
-
-#: ../plugins/spell/gedit-spell-checker.c:105
-msgid "French (France)"
-msgstr "Tiếng Pháp (Pháp)"
-
-#: ../plugins/spell/gedit-spell-checker.c:106
-msgid "French (Swiss)"
-msgstr "Tiếng Pháp (Thụy sĩ)"
-
-#: ../plugins/spell/gedit-spell-checker.c:107
-msgid "Irish"
-msgstr "Tiếng Ái Nhĩ Lan"
-
-#: ../plugins/spell/gedit-spell-checker.c:108
-msgid "Scottish Gaelic"
-msgstr "Tiếng Xen-tơ (Ê-cốt)"
-
-#: ../plugins/spell/gedit-spell-checker.c:109
-msgid "Gallegan"
-msgstr "Tiếng Ga-le-gan"
-
-#: ../plugins/spell/gedit-spell-checker.c:110
-msgid "Manx Gaelic"
-msgstr "Tiếng Xen-tơ (Mankh-x)"
-
-#: ../plugins/spell/gedit-spell-checker.c:112
-msgid "Hindi"
-msgstr "Tiếng Hin-đi"
-
-#: ../plugins/spell/gedit-spell-checker.c:113
-msgid "Croatian"
-msgstr "Tiếng Cợ-rô-a-ti-a"
-
-#: ../plugins/spell/gedit-spell-checker.c:114
-msgid "Upper Sorbian"
-msgstr "Tiếng Xoa-bi Cao"
-
-#: ../plugins/spell/gedit-spell-checker.c:115
-msgid "Hungarian"
-msgstr "Tiếng Hung Gia Lợi"
-
-#: ../plugins/spell/gedit-spell-checker.c:116
-msgid "Interlingua (IALA)"
-msgstr "Tiếng In-ter-lin-gu-a (IALA)"
-
-#: ../plugins/spell/gedit-spell-checker.c:117
-msgid "Indonesian"
-msgstr "Tiếng Nam Dương"
-
-#: ../plugins/spell/gedit-spell-checker.c:118
-msgid "Icelandic"
-msgstr "Tiếng Băng đảo"
-
-#: ../plugins/spell/gedit-spell-checker.c:119
-msgid "Italian"
-msgstr "Tiếng Ý"
-
-#: ../plugins/spell/gedit-spell-checker.c:120
-msgid "Kurdish"
-msgstr "Tiếng người Kurd"
-
-#: ../plugins/spell/gedit-spell-checker.c:121
-msgid "Latin"
-msgstr "Tiếng La-tinh"
-
-#: ../plugins/spell/gedit-spell-checker.c:122
-msgid "Lithuanian"
-msgstr "Tiếng Li-tu-a-ni"
-
-#: ../plugins/spell/gedit-spell-checker.c:123
-msgid "Latvian"
-msgstr "Tiếng Lát-vi-a"
-
-#: ../plugins/spell/gedit-spell-checker.c:124
-msgid "Malagasy"
-msgstr "Tiếng Ma-la-ga-si"
-
-#: ../plugins/spell/gedit-spell-checker.c:125
-msgid "Maori"
-msgstr "Tiếng Maori"
-
-#: ../plugins/spell/gedit-spell-checker.c:126
-msgid "Macedonian"
-msgstr "Tiếng Maxêđôni"
-
-#: ../plugins/spell/gedit-spell-checker.c:127
-msgid "Mongolian"
-msgstr "Tiếng Mông Cổ"
-
-#: ../plugins/spell/gedit-spell-checker.c:128
-msgid "Marathi"
-msgstr "Tiếng Ma-ra-ti"
-
-#: ../plugins/spell/gedit-spell-checker.c:129
-msgid "Malay"
-msgstr "Tiếng Mã lai"
-
-#: ../plugins/spell/gedit-spell-checker.c:130
-msgid "Maltese"
-msgstr "Tiếng Mantơ"
-
-#: ../plugins/spell/gedit-spell-checker.c:131
-msgid "Norwegian Bokmal"
-msgstr "Tiếng Na-uy (Bokh-man)"
-
-#: ../plugins/spell/gedit-spell-checker.c:132
-msgid "Dutch"
-msgstr "Tiếng Hoà lan"
-
-#: ../plugins/spell/gedit-spell-checker.c:133
-msgid "Norwegian Nynorsk"
-msgstr "Tiếng Na-uy (Nynorsk)"
-
-#: ../plugins/spell/gedit-spell-checker.c:134
-msgid "Norwegian"
-msgstr "Tiếng Na-uy"
-
-#: ../plugins/spell/gedit-spell-checker.c:135
-msgid "Nyanja"
-msgstr "Tiếng Nai-an-cha"
-
-#: ../plugins/spell/gedit-spell-checker.c:136
-msgid "Polish"
-msgstr "Tiếng Ba Lan"
-
-#: ../plugins/spell/gedit-spell-checker.c:137
-msgid "Portuguese (Portugal)"
-msgstr "Tiếng Bồ đào nha (Bồ đào nha)"
-
-#: ../plugins/spell/gedit-spell-checker.c:138
-msgid "Portuguese (Brazilian)"
-msgstr "Tiếng Bồ đào nha (Bra-xin)"
-
-#: ../plugins/spell/gedit-spell-checker.c:139
-msgid "Quechua"
-msgstr "Tiếng Cue-chu-a"
-
-#: ../plugins/spell/gedit-spell-checker.c:141
-msgid "Russian"
-msgstr "Tiếng Nga"
-
-#: ../plugins/spell/gedit-spell-checker.c:142
-msgid "Kinyarwanda"
-msgstr "Tiếng Kin-ia-ouanh-đa"
-
-#: ../plugins/spell/gedit-spell-checker.c:143
-msgid "Sardinian"
-msgstr "Tiếng Xa-đi-ni-a (Ý)"
-
-#: ../plugins/spell/gedit-spell-checker.c:144
-msgid "Slovak"
-msgstr "Tiếng Xlô-vác"
-
-#: ../plugins/spell/gedit-spell-checker.c:145
-msgid "Slovenian"
-msgstr "Tiếng Xlô-ven"
-
-#: ../plugins/spell/gedit-spell-checker.c:146
-msgid "Swedish"
-msgstr "Tiếng Thụy Điển"
-
-#: ../plugins/spell/gedit-spell-checker.c:147
-msgid "Swahili"
-msgstr "Tiếng Xoa-hi-li"
-
-#: ../plugins/spell/gedit-spell-checker.c:148
-msgid "Tamil"
-msgstr "Tiếng Ta-mil"
-
-#: ../plugins/spell/gedit-spell-checker.c:149
-msgid "Tetum"
-msgstr "Tiếng Te-tum"
-
-#: ../plugins/spell/gedit-spell-checker.c:150
-msgid "Tagalog"
-msgstr "Tiếng Ta-ga-lọc"
-
-#: ../plugins/spell/gedit-spell-checker.c:151
-msgid "Tswana"
-msgstr "Tiếng T-xoua-na"
-
-#: ../plugins/spell/gedit-spell-checker.c:153
-msgid "Ukrainian"
-msgstr "Tiếng U-cợ-rai-na"
-
-#: ../plugins/spell/gedit-spell-checker.c:154
-msgid "Uzbek"
-msgstr "Tiếng U-dơ-bếch"
-
-#: ../plugins/spell/gedit-spell-checker.c:156
-msgid "Walloon"
-msgstr "Tiếng Oua-lon"
-
-#: ../plugins/spell/gedit-spell-checker.c:157
-msgid "Yiddish"
-msgstr "Tiếng Y-đit"
-
-#: ../plugins/spell/gedit-spell-checker.c:158
-msgid "Zulu"
-msgstr "Tiếng Du-lu"
-
-#: ../plugins/spell/gedit-spell-checker.c:830
-msgid "Default"
-msgstr "Mặc định"
 
 #: ../plugins/spell/gedit-spell-checker-dialog.c:289
 msgid "Check Spelling"
@@ -3441,20 +3200,53 @@ msgstr "Kiểm tra chính tả"
 msgid "Suggestions"
 msgstr "Gợi ý"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:615
+#: ../plugins/spell/gedit-spell-checker-dialog.c:600
 msgid "(correct spelling)"
 msgstr "(đúng chính tả)"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:800
+#: ../plugins/spell/gedit-spell-checker-dialog.c:743
 msgid "Completed spell checking"
 msgstr "Hoàn thành kiểm tra chính tả"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:244
+#.Translators: The text before the "|" is context to help you decide on
+#.* the correct translation. You MUST OMIT it in the translated string.
+#.* Translators: the first %s is the language name, and the
+#.* second %s is the locale name. Example:
+#.* "French (France)"
+#.
+#.Translators: The text before the "|" is context to help you decide on
+#.* the correct translation. You MUST OMIT it in the translated string.
+#: ../plugins/spell/gedit-spell-checker-language.c:287
+#: ../plugins/spell/gedit-spell-checker-language.c:295
+#, c-format
+msgid "language|%s (%s)"
+msgstr "%s (%s)"
+
+#.Translators: The text before the "|" is context to help you decide on
+#.* the correct translation. You MUST OMIT it in the translated string.
+#.* Translators: this refers to an unknown language code
+#.* (one which isn't in our built-in list).
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:306
+#, c-format
+msgid "language|Unknown (%s)"
+msgstr "Không rõ (%s)"
+
+#.Translators: The text before the "|" is context to help you decide on
+#.* the correct translation. You MUST OMIT it in the translated string.
+#.* Translators: this refers the Default language used by the
+#.* spell checker
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:414
+msgid "language|Default"
+msgstr "Mặc định"
+
+#: ../plugins/spell/gedit-spell-language-dialog.c:237
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Không thể tìm thấy ô điều khiển yêu cầu trong %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:265
+#: ../plugins/spell/gedit-spell-language-dialog.c:258
 msgid "Languages"
 msgstr "Ngôn ngữ"
 
@@ -3482,11 +3274,11 @@ msgstr "Kiểm tr_a tự động chính tả"
 msgid "Automatically spell-check the current document"
 msgstr "Tự động kiểm tra chính tả tài liệu hiện thời"
 
-#: ../plugins/spell/gedit-spell-plugin.c:713
+#: ../plugins/spell/gedit-spell-plugin.c:714
 msgid "The document is empty."
 msgstr "Tài liệu trống."
 
-#: ../plugins/spell/gedit-spell-plugin.c:745
+#: ../plugins/spell/gedit-spell-plugin.c:746
 msgid "No misspelled words"
 msgstr "Không có từ sai chính tả"
 
@@ -3567,20 +3359,20 @@ msgstr "Kiểm tra chính tả của tài liệu hiện thời."
 msgid "Spell checker"
 msgstr "Bộ kiểm tra chính tả"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
 msgid "Select the group of tags you want to use"
 msgstr "Chọn nhóm các thẻ muốn dùng"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:627
 msgid "Available Tag Lists"
 msgstr "Danh sách thẻ hiện có"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:630
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:649
 msgid "Tags"
 msgstr "Thẻ"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:644
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Hãy nhấp đúp trên thẻ để chèn nó vào tài liệu hiện thời."
 
@@ -3628,997 +3420,1125 @@ msgstr "Địa chỉ Mạng neo"
 msgid "Applet class file code"
 msgstr "Mã tập tin hạng tiểu dụng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:12
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:13
+msgid "Applet class file code (deprecated)"
+msgstr "Mã tập tin hạng tiểu dụng (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
 msgstr "Mảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:13
+#: ../plugins/taglist/HTML.tags.xml.in.h:15
 msgid "Associated information"
 msgstr "Thông tin liên quan"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:14
+#: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "Author info"
 msgstr "Thông tin tác giả"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:15
+#: ../plugins/taglist/HTML.tags.xml.in.h:17
 msgid "Axis related headers"
 msgstr "Đầu trang liên quan đến trục"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:16
-msgid "BGSound"
-msgstr "Âm thanh nền"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:17
+#: ../plugins/taglist/HTML.tags.xml.in.h:18
 msgid "Background color"
 msgstr "Màu nền:"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:18
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:20
+msgid "Background color (deprecated)"
+msgstr "Màu nền (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Background texture tile"
 msgstr "Lát nền hoa tiết"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:19
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:23
+msgid "Background texture tile (deprecated)"
+msgstr "Lát nền hoa tiết (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Base URI"
 msgstr "Địa chỉ URI cơ bản"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:20
+#: ../plugins/taglist/HTML.tags.xml.in.h:25
 msgid "Base font"
 msgstr "Phông cơ bản"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:21
-msgid "Behavior"
-msgstr "Hành vi"
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:27
+msgid "Base font (deprecated)"
+msgstr "Phông cơ bản (bị phản đối)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:22
-msgid "Blinking text"
-msgstr "Chữ chớp"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:24
+#: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
 msgstr "Viền"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:25
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:31
+msgid "Border (deprecated)"
+msgstr "Biên (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
 msgstr "Màu viền"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:26
-msgid "Box"
-msgstr "Hộp"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:27
+#: ../plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Cell rowspan"
 msgstr "Ô theo hàng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
+#: ../plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Center"
 msgstr "Tâm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:29
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:36
+msgid "Center (deprecated)"
+msgstr "Trung tâm (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Character encoding of linked resource"
 msgstr "Bảng mã ký tự của tài nguyên đã liên kết"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:30
+#: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Checked (state)"
 msgstr "Đã kiểm tra (tính trạng)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:31
+#: ../plugins/taglist/HTML.tags.xml.in.h:39
+msgid "Checked state"
+msgstr "Tình trạng đã kiểm tra"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:40
 msgid "Citation"
 msgstr "Trích dẫn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:32
+#: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Cite reason for change"
 msgstr "Ghi lý do thay đổi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:33
+#: ../plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Class implementation ID"
 msgstr "Mã nhận biết thi công hạng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:34
+#: ../plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Class list"
 msgstr "Danh sách hạng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:35
+#: ../plugins/taglist/HTML.tags.xml.in.h:44
 msgid "Clear text flow control"
 msgstr "Điều khiển thông lượng chữ rõ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:36
+#: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "Code content type"
 msgstr "Kiểu nội dung mã"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:37
+#: ../plugins/taglist/HTML.tags.xml.in.h:46
 msgid "Color of selected links"
 msgstr "Màu liên kết được chọn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:38
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:48
+msgid "Color of selected links (deprecated)"
+msgstr "Màu liên kết được chọn (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
 msgstr "Ô theo cột"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:39
+#: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Columns"
 msgstr "Cột"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:40
+#: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Comment"
 msgstr "Chú thích"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:41
+#: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Computer code fragment"
 msgstr "Đoạn mã máy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:42
+#: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Content scheme"
 msgstr "Sơ đồ nội dung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:43
+#: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Content type"
 msgstr "Kiểu nội dung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:44
+#.The "type" attribute is deprecated for the "ol" tag only,
+#.since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:57
+msgid "Content type (deprecated)"
+msgstr "Kiểu nội dung (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Coordinates"
 msgstr "Toạ độ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:45
+#: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "DIV Style container"
 msgstr "Bao kiểu DIV"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:46
+#: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "DIV container"
 msgstr "Bao DIV"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:47
+#: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Date and time of change"
 msgstr "Ngày giờ thay đổi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:48
+#.NOTE: used in "object" tag
+#: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Declare flag"
 msgstr "Tuyên bố cờ"
 
 #.Translators: DEFER is an optional attribute of the <script> tag.
 #.It indicates that the script is not going to generate any document
 #.content. The browser can continue parsing and drawing the page.
-#: ../plugins/taglist/HTML.tags.xml.in.h:52
+#: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Defer attribute"
 msgstr "Hoãn thuộc tính"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:53
+#: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Definition description"
 msgstr "Mô tả định nghĩa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:54
+#: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Definition list"
 msgstr "Danh sách định nghĩa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:55
+#: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Definition term"
 msgstr "Từ định nghĩa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:56
+#: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Deleted text"
 msgstr "Đoạn đã xoá bỏ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Direction"
 msgstr "Hướng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:58
+#: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Directionality"
 msgstr "Tính hướng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:59
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:75
+msgid "Directionality (deprecated)"
+msgstr "Tính hướng (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
 msgstr "Danh sách chỉ dẫn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:60
+#: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Disabled"
 msgstr "Tắt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:61
+#: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Document base"
 msgstr "Cơ sở tài liệu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:62
+#: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Document body"
 msgstr "Thân tài liệu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:63
+#: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Document head"
 msgstr "Đầu tài liệu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:64
+#: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Document title"
 msgstr "Tên tài liệu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:65
+#: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Document type"
 msgstr "Kiểu tài liệu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:66
+#: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Element ID"
 msgstr "Mã nhận biệt phần tử"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:67
+#: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Embedded object"
 msgstr "Đối tượng nhúng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:68
+#: ../plugins/taglist/HTML.tags.xml.in.h:85
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Nhần mạnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:69
+#: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Encode type"
 msgstr "Kiểu biên mã"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:70
+#: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Figure"
 msgstr "Hình"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:71
+#: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Font face"
 msgstr "Mặt phông chữ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:72
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:90
+msgid "Font face (deprecated)"
+msgstr "Mặt phông chữ (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "For label"
 msgstr "Cho nhãn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:73
+#: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Forced line break"
 msgstr "Ngắt dòng ép buộc"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:74
+#: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Form"
 msgstr "Đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "Form action handler"
 msgstr "Bộ quản lý việc của đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:76
+#: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "Form control group"
 msgstr "Nhóm điều khiển đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:77
+#: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Form field label text"
 msgstr "Chữ nhãn trường đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:78
+#: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Form input"
 msgstr "Gõ vào đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:79
+#: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Form input type"
 msgstr "Kiểu gõ vào đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:80
+#: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Form method"
 msgstr "Phương pháp đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:81
+#: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Forward link"
 msgstr "Liên kết tiếp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:82
+#: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Frame"
 msgstr "Khung:"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:83
+#: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Frame render parts"
 msgstr "Phần vẽ khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:84
+#: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Frame source"
 msgstr "Nguồn khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:85
+#: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Frame target"
 msgstr "Đích khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:86
+#: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Frameborder"
 msgstr "Viền khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:87
+#: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Frameset"
 msgstr "Bộ khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:88
+#: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Frameset columns"
 msgstr "Cột bộ khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:89
+#: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Frameset rows"
 msgstr "Hàng bộ hàng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:90
+#: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Framespacing"
 msgstr "Khoảng cách khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:91
+#: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Generic embedded object"
 msgstr "Đối tượng nhúng chung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:92
+#: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Generic metainformation"
 msgstr "Thông tin về thông tin chung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:93
+#: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Generic span"
 msgstr "Thẻ span chung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:94
+#: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "HREF URI"
 msgstr "Địa chỉ Mạng HREF"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:95
+#: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "HTML - Special Characters"
 msgstr "Mã HTML - ký tự đặc biệt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:96
+#: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "HTML - Tags"
 msgstr "Mã HTML - thẻ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:97
+#: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "HTML root element"
 msgstr "Phần tử gốc HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:98
+#: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "HTML version"
 msgstr "Phiên bản HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:99
+#: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "HTTP header name"
 msgstr "Tên dòng đầu HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:100
+#: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Header cell ID's"
 msgstr "Mã nhận biết ô dòng đầu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:101
+#: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Heading"
 msgstr "Đề mục"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:102
+#: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Heading 1"
 msgstr "Đề mục: h1"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:103
+#: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Heading 2"
 msgstr "Đề mục: h2"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:104
+#: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Heading 3"
 msgstr "Đề mục: h3"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:105
+#: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Heading 4"
 msgstr "Đề mục: h4"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:106
+#: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Heading 5"
 msgstr "Đề mục: h5"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:107
+#: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Heading 6"
 msgstr "Đề mục: h6"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:108
+#: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Height"
 msgstr "Độ cao"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:109
+#: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Horizontal rule"
 msgstr "Đường ngang: hr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:110
+#: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Horizontal space"
 msgstr "Dấu cách ngang"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:111
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:131
+msgid "Horizontal space (deprecated)"
+msgstr "Dấu cách ngang (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:132
+msgid "HttP header name"
+msgstr "Tên dòng đầu HTTP"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "I18N BiDi over-ride"
 msgstr "I18N BiDi có quyền cao hơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:112
+#: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Image"
 msgstr "Ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:113
+#: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Image map"
 msgstr "Sơ đồ ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:114
+#: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Image map area"
 msgstr "Vùng sơ đồ ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:115
+#: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Image map name"
 msgstr "Tên sơ đồ ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:116
+#: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Image source"
 msgstr "Nguồn ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:117
+#: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Inline frame"
 msgstr "Khung trong dòng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:118
+#: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Inline layer"
 msgstr "Tầng trong dòng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:119
+#: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Inserted text"
 msgstr "Đoạn đã chèn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:120
+#: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Instance definition"
 msgstr "Bộ định nghĩa thể hiện"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:121
+#: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Italic text"
 msgstr "Nghiêng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:122
+#: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Java applet"
 msgstr "Tiểu dụng Java"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:123
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:146
+msgid "Java applet (deprecated)"
+msgstr "Tiểu dụng Java (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
 msgstr "Nhãn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:124
+#: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "Language code"
 msgstr "Mã ngôn ngữ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:125
+#: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "Large text style"
 msgstr "Kiểu chữ lớn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:126
+#: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "Layer"
 msgstr "Tầng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:127
+#: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "Link color"
 msgstr "Màu liên kết"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:128
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:153
+msgid "Link color (deprecated)"
+msgstr "Màu liên kết (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "List item"
 msgstr "Mục danh sách"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:129
+#: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "List of MIME types for file upload"
 msgstr "Danh sách kiểu MIME để tải tập tin lên"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:130
+#: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "List of supported character sets"
 msgstr "Danh sách bộ ký tự được hỗ trợ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Listing"
 msgstr "Danh sách"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Local change to font"
 msgstr "Thay đổi phông chữ cục bộ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:133
+#: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Long description link"
 msgstr "Liên kết mô tả dài"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:134
+#: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Long quotation"
 msgstr "Trích dẫn dài"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:135
+#: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "Mail link"
 msgstr "Liên kết thư"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:136
+#.Supported in XHTML 1.0 Frameset DTD only.
+#: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "Margin pixel height"
 msgstr "Độ cao lề theo điểm ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:137
+#.Supported in XHTML 1.0 Frameset DTD only.
+#: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "Margin pixel width"
 msgstr "Độ rộng lề theo điểm ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:138
+#: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "Marquee"
 msgstr "Bảng chữ chạy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:139
+#: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "Maximum length of text field"
 msgstr "Độ dài trường chữ tối đa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:140
+#.Here I take some liberties: There's no mandatory attributes,
+#.but those are most common, and will likely be used.
+#: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "Media-independent link"
 msgstr "Liên kết không phụ thuộc vào vật chứa"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:141
+#: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "Menu list"
 msgstr "Danh sách trình đơn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:142
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:173
+msgid "Menu list (deprecated)"
+msgstr "Danh sách trình đơn (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Multi-line text field"
 msgstr "Trường chữ đa dòng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:143
+#: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Multicolumn"
 msgstr "Đa cột"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:144
+#: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Multiple"
 msgstr "Nhiều"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:145
+#: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Name"
 msgstr "Tên:"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Named property value"
 msgstr "Giá trị tài sản có tên"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:147
+#: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Next ID"
 msgstr "Mã nhận biết kế"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:148
+#: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "No URI"
 msgstr "Không có địa chỉ Mạng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:149
+#: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "No embedded objects"
 msgstr "Không có đối tượng nhúng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:150
+#: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "No frames"
 msgstr "Không có khung"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:151
+#: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "No layers"
 msgstr "Không có tầng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:152
+#: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "No line break"
 msgstr "Không ngắt dòng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "No resize"
 msgstr "Không đổi cỡ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:154
+#: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "No script"
 msgstr "Không có tập lệnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:155
+#: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "No shade"
 msgstr "Không có bóng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:156
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:189
+msgid "No shade (deprecated)"
+msgstr "Không bóng (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "No word wrap"
 msgstr "Không ngắt từ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:157
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:192
+msgid "No word wrap (deprecated)"
+msgstr "Không ngắt từ (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:193
+msgid "Non-breaking space"
+msgstr "Dấu cách khác ngắt"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Note"
 msgstr "Ghi chú"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:158
+#: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Object applet file"
 msgstr "Tập tin tiểu dụng đối tượng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:159
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:197
+msgid "Object applet file (deprecated)"
+msgstr "Tập tin tiểu dụng đối tượng (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object data reference"
 msgstr "Tham chiếu dữ liệu đối tượng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:160
+#: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Offset for alignment character"
 msgstr "Hiệu số cho ký tự cảnh lề"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:161
+#: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "OnBlur event"
 msgstr "Sự kiện OnBlur (khi mờ)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:162
+#: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "OnChange event"
 msgstr "Sự kiện OnChange (khi đổi)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:163
+#: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "OnClick event"
 msgstr "Sự kiện OnClick (khi nhắp)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:164
+#: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "OnDblClick event"
 msgstr "Sự kiện OnDblClick (khi nhắp đôi)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:165
+#: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "OnFocus event"
 msgstr "Sự kiện OnFocus (khi được chú ý)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:166
+#: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "OnKeyDown event"
 msgstr "Sự kiện OnKeyDown (khi bấm giữ phím)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:167
+#: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "OnKeyPress event"
 msgstr "Sự kiện OnKeyPress (khi bấm phím)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:168
+#: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "OnKeyUp event"
 msgstr "Sự kiện OnKeyUp (khi buông phím)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:169
+#: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "OnLoad event"
 msgstr "Sự kiện OnLoad (khi tải)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:170
+#: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "OnMouseDown event"
 msgstr "Sự kiện OnMouseDown (khi di chuyển con chuột xuống)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:171
+#: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "OnMouseMove event"
 msgstr "Sự kiện OnMouseMove (khi di chuyển con chuột)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:172
+#: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "OnMouseOut event"
 msgstr "Sự kiện OnMouseOut"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:173
+#: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "OnMouseOver event"
 msgstr "Sự kiện OnMouseOver (khi di chuyển con chuột ở trên)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:174
+#: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "OnMouseUp event"
 msgstr "Sự kiện OnMouseUp (khi di chuyển con chuột lên)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:175
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "OnReset event"
 msgstr "Sự kiện OnReset (khi lập lại)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:176
+#: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "OnSelect event"
 msgstr "Sự kiện OnSelect (khi lựa chọn)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:177
+#: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "OnSubmit event"
 msgstr "Sự kiện OnSubmit (khi đóng góp)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:178
+#: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "OnUnload event"
 msgstr "Sự kiện OnUnload (khi bỏ tải)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:179
+#: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Option group"
 msgstr "Nhóm tùy chọn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:180
+#: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Option selector"
 msgstr "Bộ chọn tùy chọn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:181
+#: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Ordered list"
 msgstr "Danh sách đã sắp xếp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:182
+#: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Output media"
 msgstr "Vật chứa xuất"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:183
+#: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Paragraph"
 msgstr "Đoạn văn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:184
+#: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Paragraph class"
 msgstr "Hạng đoạn văn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:185
+#: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Paragraph style"
 msgstr "Kiểu đoạn văn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:186
+#: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Preformatted listing"
 msgstr "Danh sách có cấu hình trước"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:187
+#: ../plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Preformatted text"
 msgstr "Đoạn có cấu hình trước"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:188
+#: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Profile metainfo dictionary"
 msgstr "Từ điển thông tin về thông tin nét đại cương"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:189
+#: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Prompt message"
 msgstr "Thông điệp nhắc"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:190
+#: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Push button"
 msgstr "Nút bấm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:191
+#: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Quote"
 msgstr "Trích dẫn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Range"
 msgstr "Phạm vi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:193
+#: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "ReadOnly text and password"
 msgstr "Chữ và mật khẩu quyền chỉ đọc"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:194
+#: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Reduced spacing"
 msgstr "Khoảng cách đã giảm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:195
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:235
+msgid "Reduced spacing (deprecated)"
+msgstr "Khoảng cách đã giảm (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Reverse link"
 msgstr "Liên kết đảo ngược"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:196
+#: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Root"
 msgstr "Gốc"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:197
+#: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Rows"
 msgstr "Hàng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:198
+#: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Rulings between rows and columns"
 msgstr "Đường giữa hàng và cột"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:199
+#: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Sample program output, scripts"
 msgstr "Dữ liệu mẫu xuất trình, tập lệnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:200
+#: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Scope covered by header cells"
 msgstr "Phạm vi vùng các ô đầu bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:201
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Script language name"
 msgstr "Tên ngôn ngữ tập lệnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:202
+#: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Script statments"
 msgstr "Câu tập lệnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:203
+#: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Scrollbar"
 msgstr "Thanh cuộn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:204
+#: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Selectable option"
 msgstr "Tùy chọn có thể lựa chọn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:205
+#: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Selected"
 msgstr "Được lựa chọn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:206
+#: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Server-side image map"
 msgstr "Sơ đồ ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:207
+#: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Shape"
 msgstr "Hình dạng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:208
+#: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Short inline quotation"
 msgstr "Đoạn trích dẫn trong dòng ngắn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:209
+#: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Single line prompt"
 msgstr "Dấu nhắc đơn dòng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:210
+#: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Size"
 msgstr "Cỡ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:211
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:254
+msgid "Size (deprecated)"
+msgstr "Cỡ (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Small text style"
 msgstr "Kiểu đáng chữ nhỏ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:212
+#: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Soft line break"
 msgstr "Ngắt dòng mềm"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:213
+#: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Sound"
 msgstr "Âm thanh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
+#: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Source"
 msgstr "Mã nguồn"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:215
-msgid "Space"
-msgstr "Dấu cách"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:216
+#: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Space separated archive list"
 msgstr "Danh sách kho định giới bằng dấu cách"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:217
+#: ../plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Spacer"
 msgstr "Bộ cách"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:218
+#: ../plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Spacing between cells"
 msgstr "Dấu cách giữa ô"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:219
+#: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Spacing within cells"
 msgstr "Dấu cách ở trong ô"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:220
+#: ../plugins/taglist/HTML.tags.xml.in.h:263
 msgid "Span"
 msgstr "Span"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:221
+#: ../plugins/taglist/HTML.tags.xml.in.h:264
 msgid "Square root"
 msgstr "Căn bậc hai"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:222
+#: ../plugins/taglist/HTML.tags.xml.in.h:265
 msgid "Standby load msg"
 msgstr "Thông điệp tải trạng thái chờ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:223
+#: ../plugins/taglist/HTML.tags.xml.in.h:266
 msgid "Starting sequence number"
 msgstr "Số đầu dây"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:224
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:268
+msgid "Starting sequence number (deprecated)"
+msgstr "Số đầu dây (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:269
 msgid "Strike-through text"
 msgstr "Chữ gạch đè"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:225
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:271
+msgid "Strike-through text (deprecated)"
+msgstr "Chữ gạch đè (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:272
 msgid "Strike-through text style"
 msgstr "Kiểu dạng chữ gạch đè"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:226
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:274
+msgid "Strike-through text style (deprecated)"
+msgstr "Kiểu dáng chữ gạch đè (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:275
 msgid "Strong emphasis"
 msgstr "Nhần mạnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:227
+#: ../plugins/taglist/HTML.tags.xml.in.h:276
 msgid "Style info"
 msgstr "Thông tin kiểu dáng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:228
+#: ../plugins/taglist/HTML.tags.xml.in.h:277
 msgid "Subscript"
 msgstr "Thấp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:229
+#: ../plugins/taglist/HTML.tags.xml.in.h:278
 msgid "Superscript"
 msgstr "Cao"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:230
+#: ../plugins/taglist/HTML.tags.xml.in.h:279
 msgid "Tab order position"
 msgstr "Vị trí sắp xếp tab"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:231
+#: ../plugins/taglist/HTML.tags.xml.in.h:280
 msgid "Table"
 msgstr "Bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:232
+#: ../plugins/taglist/HTML.tags.xml.in.h:281
 msgid "Table body"
 msgstr "Thân bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:233
+#: ../plugins/taglist/HTML.tags.xml.in.h:282
 msgid "Table caption"
 msgstr "Phụ đề bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:234
+#: ../plugins/taglist/HTML.tags.xml.in.h:283
 msgid "Table column group properties"
 msgstr "Tài sản nhóm cột bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:235
+#: ../plugins/taglist/HTML.tags.xml.in.h:284
 msgid "Table column properties"
 msgstr "Tài sản cột bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:236
+#: ../plugins/taglist/HTML.tags.xml.in.h:285
 msgid "Table data cell"
 msgstr "Ô dữ liệu bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:237
+#: ../plugins/taglist/HTML.tags.xml.in.h:286
 msgid "Table footer"
 msgstr "Chân bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:238
+#: ../plugins/taglist/HTML.tags.xml.in.h:287
 msgid "Table header"
 msgstr "Đầu bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:239
+#: ../plugins/taglist/HTML.tags.xml.in.h:288
 msgid "Table header cell"
 msgstr "Ô đầu bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:240
+#: ../plugins/taglist/HTML.tags.xml.in.h:289
 msgid "Table row"
 msgstr "Hàng bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:241
+#: ../plugins/taglist/HTML.tags.xml.in.h:290
 msgid "Table summary"
 msgstr "Tóm tắt bảng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:242
+#: ../plugins/taglist/HTML.tags.xml.in.h:291
 msgid "Target - Blank"
 msgstr "Đích - trống"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:243
+#: ../plugins/taglist/HTML.tags.xml.in.h:292
 msgid "Target - Parent"
 msgstr "Đích - Mẹ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:244
+#: ../plugins/taglist/HTML.tags.xml.in.h:293
 msgid "Target - Self"
 msgstr "Đích - Mình"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:245
+#: ../plugins/taglist/HTML.tags.xml.in.h:294
 msgid "Target - Top"
 msgstr "Đích - Đầu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:246
+#: ../plugins/taglist/HTML.tags.xml.in.h:295
 msgid "Teletype or monospace text style"
 msgstr "Kiểu dáng chữ đơn cách hay tty"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:247
+#: ../plugins/taglist/HTML.tags.xml.in.h:296
 msgid "Text"
 msgstr "Văn bản"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:248
+#: ../plugins/taglist/HTML.tags.xml.in.h:297
 msgid "Text color"
 msgstr "Màu chữ"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:249
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:299
+msgid "Text color (deprecated)"
+msgstr "Màu chữ (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:300
 msgid "Text entered by user"
 msgstr "Màu đã gõ bởi người dùng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:250
+#: ../plugins/taglist/HTML.tags.xml.in.h:301
 msgid "Title"
 msgstr "Tựa đề"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:251
+#: ../plugins/taglist/HTML.tags.xml.in.h:302
 msgid "Topmargin in pixels"
 msgstr "Lề đỉnh thao điểm ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:252
+#: ../plugins/taglist/HTML.tags.xml.in.h:303
 msgid "URL"
 msgstr "Địa chỉ Mạng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:253
+#: ../plugins/taglist/HTML.tags.xml.in.h:304
 msgid "Underlined text style"
 msgstr "Kiểu dáng chữ gạch chân"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:254
+#: ../plugins/taglist/HTML.tags.xml.in.h:305
 msgid "Unordered list"
 msgstr "Danh sách chưa sắp xếp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:255
+#: ../plugins/taglist/HTML.tags.xml.in.h:306
 msgid "Use image map"
 msgstr "Dùng sơ đồ ảnh"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:256
+#: ../plugins/taglist/HTML.tags.xml.in.h:307
 msgid "Value"
 msgstr "Giá trị"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:257
+#: ../plugins/taglist/HTML.tags.xml.in.h:308
 msgid "Value interpretation"
 msgstr "Thông dịch giá trị"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:258
+#: ../plugins/taglist/HTML.tags.xml.in.h:309
 msgid "Variable or program argument"
 msgstr "Biến hay đối số chương trình"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:259
+#: ../plugins/taglist/HTML.tags.xml.in.h:310
 msgid "Vertical cell alignment"
 msgstr "Canh lề dọc"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:260
+#: ../plugins/taglist/HTML.tags.xml.in.h:311
 msgid "Vertical space"
 msgstr "Khoảng cách dọc"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:261
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:313
+msgid "Vertical space (deprecated)"
+msgstr "Khoảng cách dọc (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:314
 msgid "Visited link color"
 msgstr "Màu liên kết đã dùng"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:262
+#.Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:316
+msgid "Visited link color (deprecated)"
+msgstr "Màu liên kết đã dùng (bị phản đối)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:317
 msgid "Width"
 msgstr "Độ rộng"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:318
+msgid "XHTML 1.0 - Tags"
+msgstr "XHTML 1.0 - Thẻ"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography (cite)"
@@ -4986,6 +4906,10 @@ msgstr "chị đi trước"
 #: ../plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
 msgstr "mình"
+
+#: ../plugins/taglist/XUL.tags.xml.in.h:1
+msgid "XUL - Tags"
+msgstr "XUL - Thẻ"
 
 #: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
