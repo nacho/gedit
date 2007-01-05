@@ -1,35 +1,35 @@
 # translation of cs.po to Czech
 # translation of cs.po to
 # Czech translation of gnome-2.14.
-# Copyright (C) 2002,2003, 2006 Free Software Foundation, Inc.
+# Copyright (C) 2002,2003, 2006, 2007 Free Software Foundation, Inc.
 # Copyright (C) 2003, 2004, 2005, 2006 Miloslav Trmac <mitr@volny.cz>
 # Copyright (C) 2006 Lukas Novotny <lukasnov@cvs.gnome.org>
+#
 # Michal Bukovjan <michal.bukovjan@openone.cz>, 2002.
 # Michal Bukovjan <bukm@centrum.cz>, 2003.
 # Miloslav Trmac <mitr@volny.cz>, 2003 - 2006.
 # Lukas Novotny <lukasnov@cvs.gnome.org>, 2006.
 # Petr Tomeš <ptomes@gmail.com>, 2006.
-# Jakub Friedl <jfriedl@suse.cz>, 2006.
-#
+# Jakub Friedl <jfriedl@suse.cz>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-10-04 16:21+0200\n"
-"PO-Revision-Date: 2006-10-04 16:22+0200\n"
+"POT-Creation-Date: 2007-01-05 13:10+0100\n"
+"PO-Revision-Date: 2007-01-05 13:20+0100\n"
 "Last-Translator: Jakub Friedl <jfriedl@suse.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../data/gedit.desktop.in.in.h:1
 msgid "Edit text files"
 msgstr "Úprava textových souborů"
 
-#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:457
+#: ../data/gedit.desktop.in.in.h:2 ../gedit/gedit.c:463
 msgid "Text Editor"
 msgstr "Textový editor"
 
@@ -42,7 +42,7 @@ msgstr ""
 "bude mít vliv pouze v případě, že je vypnuta volba \"Používat standardní "
 "písmo\"."
 
-#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:747
+#: ../data/gedit.schemas.in.h:2 ../gedit/gedit-plugin-manager.c:766
 msgid "Active plugins"
 msgstr "Aktivní pluginy"
 
@@ -321,10 +321,11 @@ msgid "Side Pane is Visible"
 msgstr "Postranní panel je zobrazen"
 
 #: ../data/gedit.schemas.in.h:71
+#, fuzzy
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
-"file. \"CURRENT\" is the current locale encoding. Only recognized encodings "
-"are used."
+"file. \"CURRENT\" represents the current locale encoding. Only recognized "
+"encodings are used."
 msgstr ""
 "Setříděný seznam kódování používaný aplikací gedit pro automatickou detekci "
 "kódování souboru. \"CURRENT\" je aktuální kódování locale. Používají se jen "
@@ -573,10 +574,12 @@ msgstr ""
 "\"."
 
 #: ../data/gedit.schemas.in.h:110
+#, fuzzy
 msgid ""
-"Whether to use the system's default font for editing text instead of a font "
-"specific to gedit. If this option is turned off, then the font named in the "
-"\"Editor Font\" option will be used instead of the system font."
+"Whether to use the system's default fixed width font for editing text "
+"instead of a font specific to gedit. If this option is turned off, then the "
+"font named in the \"Editor Font\" option will be used instead of the system "
+"font."
 msgstr ""
 "Má-li být pro editovaný text použito standardní písmo systému místo písma "
 "specifického pro aplikaci GEdit. Je-li tato volba vypnuta, bude místo "
@@ -593,10 +596,19 @@ msgid "[ISO-8859-15]"
 msgstr "[ISO-8859-2,ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
-#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. for auto-detecting the encoding of a file. You may want to customize it adding
+#. encodings that are common in your country, for instance the GB18030 encoding
+#. for the Chinese	translation. You may also want to remove the ISO-8859-15 encoding
+#. (covering English and most Western European languages) if you think people
+#. in you country will rarely use it.
+#. "CURRENT" is a magic value used by gedit and it represents the encoding
+#. for the current locale, so please don't translate the "CURRENT" term.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:118
-msgid "[UTF-8,CURRENT,ISO-8859-15]"
+#. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
+#. a list of supported encodings
+#: ../data/gedit.schemas.in.h:126
+#, fuzzy
+msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
 msgstr "[UTF-8,CURRENT,ISO-8859-2,ISO-8859-15]"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
@@ -670,17 +682,9 @@ msgstr[2] ""
 "ztraceny."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
-#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
-#, c-format
+#, fuzzy
 msgid "If you don't save, changes from the last hour will be permanently lost."
-msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
-msgstr[0] "Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
-msgstr[1] ""
-"Pokud je neuložíte, budou změny provedené za poslední %d hodiny navždy "
-"ztraceny."
-msgstr[2] ""
-"Pokud je neuložíte, budou změny provedené za posledních %d hodin navždy "
-"ztraceny."
+msgstr "Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:457
 #, c-format
@@ -699,6 +703,18 @@ msgstr[1] ""
 msgstr[2] ""
 "Pokud je neuložíte, budou změny provedené za poslední hodinu a %d minut "
 "navždy ztraceny."
+
+#: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
+#, fuzzy, c-format
+msgid "If you don't save, changes from the last %d hour will be permanently lost."
+msgid_plural "If you don't save, changes from the last %d hours will be permanently lost."
+msgstr[0] "Pokud je neuložíte, budou změny provedené za poslední hodinu navždy ztraceny."
+msgstr[1] ""
+"Pokud je neuložíte, budou změny provedené za poslední %d hodiny navždy "
+"ztraceny."
+msgstr[2] ""
+"Pokud je neuložíte, budou změny provedené za posledních %d hodin navždy "
+"ztraceny."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:514
 #, c-format
@@ -769,7 +785,7 @@ msgstr "Kódování znaků"
 msgid "E_ncodings shown in menu:"
 msgstr "Kódování zobrazovaná v _menu:"
 
-#: ../gedit/dialogs/gedit-open-location-dialog.c:135
+#: ../gedit/dialogs/gedit-open-location-dialog.c:136
 #: ../gedit/dialogs/gedit-open-location-dialog.glade.h:3
 msgid "Open Location"
 msgstr "Otevřít umístění"
@@ -787,6 +803,7 @@ msgstr "Zadejte _umístění (URI) souboru, který chcete otevřít:"
 msgid "Page Setup"
 msgstr "Nastavení stránky"
 
+#. ex:ts=4:et:
 #: ../gedit/dialogs/gedit-page-setup-dialog.glade.h:1
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:1
 #: ../plugins/docinfo/docinfo.glade2.h:1
@@ -860,35 +877,40 @@ msgstr "_Obnovit standardní písma"
 msgid "lines"
 msgstr "řádků"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:651
+#: ../gedit/dialogs/gedit-preferences-dialog.c:652
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Chcete-li vybrat písmo, které bude editor používat, zmáčkněte toto tlačítko."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:653
+#: ../gedit/dialogs/gedit-preferences-dialog.c:654
 msgid "Push this button to configure text color"
 msgstr "Chcete-li nastavit barvu textu, zmáčkněte toto tlačítko."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:655
+#: ../gedit/dialogs/gedit-preferences-dialog.c:656
 msgid "Push this button to configure background color"
 msgstr "Chcete-li nastavit barvu pozadí, zmáčkněte toto tlačítko."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:657
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid ""
 "Push this button to configure the color in which the selected text should "
 "appear"
 msgstr "Chcete-li nastavit barvu pozadí vybraného textu, zmáčkněte toto tlačítko."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:660
+#: ../gedit/dialogs/gedit-preferences-dialog.c:661
 msgid ""
 "Push this button to configure the color in which the selected text should be "
 "marked"
 msgstr "Chcete-li nastavit barvu vybraného textu, zmáčkněte toto tlačítko."
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1169
+#: ../gedit/dialogs/gedit-preferences-dialog.c:670
+#, c-format
+msgid "_Use the system fixed width font (%s)"
+msgstr ""
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1178
 msgid "Elements"
 msgstr "Elementy"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1281
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1290
 msgid "gedit Preferences"
 msgstr "Nastavení gedit"
 
@@ -929,7 +951,7 @@ msgid "<span weight=\"bold\">Colors</span>"
 msgstr "<span weight=\"bold\">Barvy</span>"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:13
-#: ../plugins/taglist/HTML.tags.xml.in.h:23
+#: ../plugins/taglist/HTML.tags.xml.in.h:28
 msgid "Bold"
 msgstr "Tučné"
 
@@ -1078,27 +1100,23 @@ msgid "_Tab width:"
 msgstr "Šířka _tabelátorů:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
-msgid "_Use default theme font"
-msgstr "Používat _standardní písmo motivu"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:53
 msgid "_minutes"
 msgstr "_minut"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:302
-#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1261
+#: ../gedit/dialogs/gedit-search-dialog.glade.h:2 ../gedit/gedit-window.c:1362
 msgid "Replace"
 msgstr "Nahradit"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:314 ../gedit/gedit-window.c:1259
+#: ../gedit/dialogs/gedit-search-dialog.c:313 ../gedit/gedit-window.c:1360
 msgid "Find"
 msgstr "Hledat"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:366
+#: ../gedit/dialogs/gedit-search-dialog.c:390
 msgid "Replace _All"
 msgstr "Nahradit _vše"
 
-#: ../gedit/dialogs/gedit-search-dialog.c:367
+#: ../gedit/dialogs/gedit-search-dialog.c:391
 #: ../gedit/gedit-commands-file.c:661
 msgid "_Replace"
 msgstr "Nah_radit"
@@ -1131,7 +1149,7 @@ msgstr "_Hledat:"
 msgid "_Wrap around"
 msgstr "Přecházet přes _okraj"
 
-#: ../gedit/gedit.c:74
+#: ../gedit/gedit.c:73
 msgid ""
 "Set the character encoding to be used to open the files listed on the "
 "command line"
@@ -1139,30 +1157,30 @@ msgstr ""
 "Nastavit kódování znaků, které používat pro otevírání souborů vypsaných na "
 "příkazovém řádku"
 
-#: ../gedit/gedit.c:77
+#: ../gedit/gedit.c:76
 msgid "Create a new toplevel window in an existing instance of gedit"
 msgstr "Vytvořit nové top-level okno v existující instanci aplikace GEdit."
 
-#: ../gedit/gedit.c:80
+#: ../gedit/gedit.c:79
 msgid "Create a new document in an existing instance of gedit"
 msgstr "Vytvořit nový dokument v existující instanci aplikace GEdit."
 
-#: ../gedit/gedit.c:83
+#: ../gedit/gedit.c:82
 msgid "[FILE...]"
 msgstr "[SOUBOR...]"
 
-#: ../gedit/gedit.c:115
+#: ../gedit/gedit.c:114
 #, c-format
 msgid "%s: malformed file name or URI.\n"
 msgstr "%s: nesprávně utvořený název souboru nebo URI.\n"
 
-#: ../gedit/gedit.c:127
+#: ../gedit/gedit.c:126
 #, c-format
 msgid "%s: invalid encoding.\n"
 msgstr "%s:·neplatné kódování.\n"
 
 #. Setup command line options
-#: ../gedit/gedit.c:449
+#: ../gedit/gedit.c:455
 msgid "- Edit text files"
 msgstr "- Úprava textových souborů"
 
@@ -1188,9 +1206,6 @@ msgid "The entered location is not valid."
 msgstr "Zadané umístění není platné."
 
 #: ../gedit/gedit-commands-file.c:516
-#: ../gedit/gedit-io-error-message-area.c:150
-#: ../gedit/gedit-io-error-message-area.c:189
-#: ../gedit/gedit-io-error-message-area.c:205
 msgid "Please, check that you typed the location correctly and try again."
 msgstr "Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
 
@@ -1264,13 +1279,10 @@ msgstr[0] "Změny provedené v dokumentu za poslední %ld minutu budou navždy z
 msgstr[1] "Změny provedené v dokumentu za poslední %ld minuty budou navždy ztraceny."
 msgstr[2] "Změny provedené v dokumentu za posledních %ld minut budou navždy ztraceny."
 
-#: ../gedit/gedit-commands-file.c:1184 ../gedit/gedit-commands-file.c:1205
-#, c-format
+#: ../gedit/gedit-commands-file.c:1184
+#, fuzzy
 msgid "Changes made to the document in the last hour will be permanently lost."
-msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
-msgstr[0] "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
-msgstr[1] "Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
-msgstr[2] "Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
+msgstr "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
 
 #: ../gedit/gedit-commands-file.c:1190
 #, c-format
@@ -1289,6 +1301,14 @@ msgstr[1] ""
 msgstr[2] ""
 "Změny provedené v dokumentu za poslední hodinu a %d minut budou navždy "
 "ztraceny."
+
+#: ../gedit/gedit-commands-file.c:1205
+#, fuzzy, c-format
+msgid "Changes made to the document in the last %d hour will be permanently lost."
+msgid_plural "Changes made to the document in the last %d hours will be permanently lost."
+msgstr[0] "Změny provedené v dokumentu za poslední hodinu budou navždy ztraceny."
+msgstr[1] "Změny provedené v dokumentu za poslední %d hodiny budou navždy ztraceny."
+msgstr[2] "Změny provedené v dokumentu za posledních %d hodin budou navždy ztraceny."
 
 #: ../gedit/gedit-commands-file.c:1231
 msgid "_Revert"
@@ -1321,22 +1341,22 @@ msgstr "Nalezen a nahrazen jeden výskyt"
 msgid "Phrase not found"
 msgstr "Fráze nenalezena"
 
-#: ../gedit/gedit-document.c:743 ../gedit/gedit-document.c:837
+#: ../gedit/gedit-document.c:742 ../gedit/gedit-document.c:836
 #, c-format
 msgid "Unsaved Document %d"
 msgstr "Neuložený dokument %d"
 
 #. bad bad luck...
-#: ../gedit/gedit-document-saver.c:573
+#: ../gedit/gedit-document-saver.c:568
 msgid "Could not obtain backup filename"
 msgstr "Nemohu získat název záložního souboru"
 
-#: ../gedit/gedit-documents-panel.c:85 ../gedit/gedit-documents-panel.c:99
-#: ../gedit/gedit-window.c:1809 ../gedit/gedit-window.c:1814
+#: ../gedit/gedit-documents-panel.c:89 ../gedit/gedit-documents-panel.c:103
+#: ../gedit/gedit-window.c:1931 ../gedit/gedit-window.c:1936
 msgid "Read Only"
 msgstr "Pouze pro čtení"
 
-#: ../gedit/gedit-documents-panel.c:633
+#: ../gedit/gedit-documents-panel.c:693
 msgid "Documents"
 msgstr "Dokumenty"
 
@@ -1373,12 +1393,11 @@ msgid "Cyrillic"
 msgstr "Cyrilika"
 
 #: ../gedit/gedit-encodings.c:164 ../gedit/gedit-encodings.c:242
-#: ../gedit/gedit-encodings.c:283 ../plugins/spell/gedit-spell-checker.c:81
+#: ../gedit/gedit-encodings.c:283
 msgid "Arabic"
 msgstr "Arabské"
 
 #: ../gedit/gedit-encodings.c:166 ../gedit/gedit-encodings.c:277
-#: ../plugins/spell/gedit-spell-checker.c:95
 msgid "Greek"
 msgstr "Řecké"
 
@@ -1387,12 +1406,12 @@ msgid "Hebrew Visual"
 msgstr "Hebrejské vizuální"
 
 #: ../gedit/gedit-encodings.c:170 ../gedit/gedit-encodings.c:240
-#: ../gedit/gedit-encodings.c:281 ../plugins/spell/gedit-spell-checker.c:111
+#: ../gedit/gedit-encodings.c:281
 msgid "Hebrew"
 msgstr "Hebrejské"
 
 #: ../gedit/gedit-encodings.c:172 ../gedit/gedit-encodings.c:238
-#: ../gedit/gedit-encodings.c:279 ../plugins/spell/gedit-spell-checker.c:152
+#: ../gedit/gedit-encodings.c:279
 msgid "Turkish"
 msgstr "Turecké"
 
@@ -1404,7 +1423,7 @@ msgstr "Nordické"
 msgid "Celtic"
 msgstr "Keltské"
 
-#: ../gedit/gedit-encodings.c:182 ../plugins/spell/gedit-spell-checker.c:140
+#: ../gedit/gedit-encodings.c:182
 msgid "Romanian"
 msgstr "Rumunské"
 
@@ -1446,7 +1465,7 @@ msgid "Cyrillic/Ukrainian"
 msgstr "Cyrilika / Ukrajinské"
 
 #: ../gedit/gedit-encodings.c:262 ../gedit/gedit-encodings.c:268
-#: ../gedit/gedit-encodings.c:287 ../plugins/spell/gedit-spell-checker.c:155
+#: ../gedit/gedit-encodings.c:287
 msgid "Vietnamese"
 msgstr "Vietnamské"
 
@@ -1488,188 +1507,208 @@ msgstr "Všechny textové soubory"
 msgid "There was an error displaying help."
 msgstr "Při zobrazování nápovědy došlo k chybě."
 
-#: ../gedit/gedit-io-error-message-area.c:148
+#: ../gedit/gedit-io-error-message-area.c:171
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Nemohu najít soubor %s"
 
-#: ../gedit/gedit-io-error-message-area.c:155
-#: ../gedit/gedit-io-error-message-area.c:382
+#: ../gedit/gedit-io-error-message-area.c:173
+#: ../gedit/gedit-io-error-message-area.c:212
+#: ../gedit/gedit-io-error-message-area.c:228
+#, fuzzy
+msgid "Please check that you typed the location correctly and try again."
+msgstr "Zkontrolujte prosím, že jste umístění napsali správně, a zkuste to znovu."
+
+#: ../gedit/gedit-io-error-message-area.c:178
+#: ../gedit/gedit-io-error-message-area.c:417
 msgid "The file contains corrupted data."
 msgstr "Soubor obsahuje poškozená data."
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:166
-#: ../gedit/gedit-io-error-message-area.c:393
+#: ../gedit/gedit-io-error-message-area.c:189
+#: ../gedit/gedit-io-error-message-area.c:428
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "gedit nemůže zpracovat umístění %s."
 
-#: ../gedit/gedit-io-error-message-area.c:172
-#: ../gedit/gedit-io-error-message-area.c:399
+#: ../gedit/gedit-io-error-message-area.c:195
+#: ../gedit/gedit-io-error-message-area.c:434
 msgid "gedit cannot handle this location."
 msgstr "gedit nemůže zpracovat toto umístění."
 
-#: ../gedit/gedit-io-error-message-area.c:179
-#: ../gedit/gedit-io-error-message-area.c:406
+#: ../gedit/gedit-io-error-message-area.c:202
+#: ../gedit/gedit-io-error-message-area.c:441
 msgid "The file contains data in an invalid format."
 msgstr "Soubor obsahuje data v nesprávném formátu."
 
-#: ../gedit/gedit-io-error-message-area.c:183
-#: ../gedit/gedit-io-error-message-area.c:410
+#: ../gedit/gedit-io-error-message-area.c:206
+#: ../gedit/gedit-io-error-message-area.c:445
 msgid "The file is too big."
 msgstr "Soubor je příliš velký."
 
-#: ../gedit/gedit-io-error-message-area.c:187
+#: ../gedit/gedit-io-error-message-area.c:210
 #, c-format
 msgid "%s is not a valid location."
 msgstr "%s není platné umístění."
 
-#: ../gedit/gedit-io-error-message-area.c:194
-#: ../gedit/gedit-io-error-message-area.c:414
+#: ../gedit/gedit-io-error-message-area.c:217
+#: ../gedit/gedit-io-error-message-area.c:449
 msgid "You do not have the permissions necessary to open the file."
 msgstr "Nemáte oprávnění potřebná k otevření souboru."
 
-#: ../gedit/gedit-io-error-message-area.c:198
-#: ../gedit/gedit-io-error-message-area.c:418
-#: ../gedit/gedit-io-error-message-area.c:1166
-msgid "There are too many open files. Please, close some applications and try again."
+#: ../gedit/gedit-io-error-message-area.c:221
+#: ../gedit/gedit-io-error-message-area.c:453
+#: ../gedit/gedit-io-error-message-area.c:1206
+#, fuzzy
+msgid "There are too many open files. Please close some applications and try again."
 msgstr ""
 "Je otevřeno příliš mnoho souborů. Zavřete prosím některé otevřené soubory a "
 "zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:203
-#: ../gedit/gedit-io-error-message-area.c:423
+#: ../gedit/gedit-io-error-message-area.c:226
+#: ../gedit/gedit-io-error-message-area.c:458
 #, c-format
 msgid "%s is a directory."
 msgstr "%s je adresář."
 
-#: ../gedit/gedit-io-error-message-area.c:210
-#: ../gedit/gedit-io-error-message-area.c:428
+#: ../gedit/gedit-io-error-message-area.c:233
+#: ../gedit/gedit-io-error-message-area.c:463
+#, fuzzy
 msgid ""
-"Not enough available memory to open the file. Please, close some running "
+"Not enough available memory to open the file. Please close some running "
 "applications and try again."
 msgstr ""
 "Nedostatek paměti pro otevření souboru. Zavřete prosím některé běžící "
 "aplikace a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:238
-#: ../gedit/gedit-io-error-message-area.c:456
-#: ../gedit/gedit-io-error-message-area.c:1205
-#, c-format
+#: ../gedit/gedit-io-error-message-area.c:261
+#: ../gedit/gedit-io-error-message-area.c:491
+#: ../gedit/gedit-io-error-message-area.c:1245
+#, fuzzy, c-format
 msgid ""
-"Host %s could not be found. Please, check that your proxy settings are "
+"Host %s could not be found. Please check that your proxy settings are "
 "correct and try again."
 msgstr ""
 "Počítač \"%s\" nebyl nalezen. Zkontrolujte prosím, že je vaše nastavení "
 "proxy správné, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:249
-#: ../gedit/gedit-io-error-message-area.c:260
-#: ../gedit/gedit-io-error-message-area.c:268
-#: ../gedit/gedit-io-error-message-area.c:467
-#: ../gedit/gedit-io-error-message-area.c:478
-#: ../gedit/gedit-io-error-message-area.c:1216
-#: ../gedit/gedit-io-error-message-area.c:1227
-#: ../gedit/gedit-io-error-message-area.c:1235
+#: ../gedit/gedit-io-error-message-area.c:272
+#: ../gedit/gedit-io-error-message-area.c:283
+#: ../gedit/gedit-io-error-message-area.c:291
+#: ../gedit/gedit-io-error-message-area.c:502
+#: ../gedit/gedit-io-error-message-area.c:513
+#: ../gedit/gedit-io-error-message-area.c:1256
+#: ../gedit/gedit-io-error-message-area.c:1267
+#: ../gedit/gedit-io-error-message-area.c:1275
+#, fuzzy
 msgid ""
-"Host name was invalid. Please, check that you typed the location correctly "
+"Host name was invalid. Please check that you typed the location correctly "
 "and try again."
 msgstr ""
 "Název počítače nebyl platný. Zkontrolujte prosím, že jste umístění napsali "
 "správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:274
-#: ../gedit/gedit-io-error-message-area.c:486
-#: ../gedit/gedit-io-error-message-area.c:1241
+#: ../gedit/gedit-io-error-message-area.c:297
+#: ../gedit/gedit-io-error-message-area.c:521
+#: ../gedit/gedit-io-error-message-area.c:1281
+#, fuzzy
 msgid ""
-"Host name was empty. Please, check that your proxy settings are correct and "
+"Host name was empty. Please check that your proxy settings are correct and "
 "try again."
 msgstr ""
 "Název počítače byl prázdný. Zkontrolujte prosím, že je nastavení vaší proxy "
 "správné, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:280
-#: ../gedit/gedit-io-error-message-area.c:1247
+#: ../gedit/gedit-io-error-message-area.c:303
+#: ../gedit/gedit-io-error-message-area.c:1287
+#, fuzzy
 msgid ""
-"Attempt to log in failed. Please, check that you typed the location "
-"correctly and try again."
+"Attempt to log in failed. Please check that you typed the location correctly "
+"and try again."
 msgstr ""
 "Pokus přihlásit se selhal. Zkontrolujte prosím, že jste umístění napsali "
 "správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:286
+#: ../gedit/gedit-io-error-message-area.c:309
 msgid "The file you are trying to open is not a regular file."
 msgstr "Soubor, který se pokoušíte otevřít, není obyčejný soubor."
 
-#: ../gedit/gedit-io-error-message-area.c:325
-#: ../gedit/gedit-io-error-message-area.c:546
-#: ../gedit/gedit-io-error-message-area.c:1312
+#: ../gedit/gedit-io-error-message-area.c:313
+#: ../gedit/gedit-io-error-message-area.c:536
+#: ../gedit/gedit-io-error-message-area.c:1315
+msgid "Connection timed out. Please try again."
+msgstr ""
+
+#: ../gedit/gedit-io-error-message-area.c:352
+#: ../gedit/gedit-io-error-message-area.c:586
+#: ../gedit/gedit-io-error-message-area.c:1356
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Neočekávaná chyba: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:331
-#: ../gedit/gedit-io-error-message-area.c:712
+#: ../gedit/gedit-io-error-message-area.c:358
+#: ../gedit/gedit-io-error-message-area.c:752
 #, c-format
 msgid "Could not open the file %s."
 msgstr "Nemohu otevřít soubor %s."
 
-#: ../gedit/gedit-io-error-message-area.c:377
-msgid "gedit cannot find it. Perhaps, it has recently been deleted."
+#: ../gedit/gedit-io-error-message-area.c:367
+#: ../gedit/gedit-io-error-message-area.c:659
+msgid "_Retry"
+msgstr "_Znovu"
+
+#: ../gedit/gedit-io-error-message-area.c:412
+#, fuzzy
+msgid "gedit cannot find it. Perhaps it has recently been deleted."
 msgstr "gedit jej nemůže najít. Původní soubor byl možná nedávno smazán."
 
-#: ../gedit/gedit-io-error-message-area.c:492
+#: ../gedit/gedit-io-error-message-area.c:527
 msgid "Attempt to log in failed."
 msgstr "Pokus přihlásit se selhal."
 
-#: ../gedit/gedit-io-error-message-area.c:496
+#: ../gedit/gedit-io-error-message-area.c:531
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s není obyčejný soubor."
 
-#: ../gedit/gedit-io-error-message-area.c:552
+#: ../gedit/gedit-io-error-message-area.c:592
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Nemohu vrátit soubor %s do původního stavu"
 
-#: ../gedit/gedit-io-error-message-area.c:576
+#: ../gedit/gedit-io-error-message-area.c:616
 msgid "Ch_aracter Coding:"
 msgstr "_Kódování znaku:"
 
-#: ../gedit/gedit-io-error-message-area.c:619
-msgid "_Retry"
-msgstr "_Znovu"
-
-#: ../gedit/gedit-io-error-message-area.c:714
+#: ../gedit/gedit-io-error-message-area.c:754
 msgid "gedit has not been able to detect the character coding."
 msgstr "gedit nebyl schopný zjistit kódování znaků."
 
-#: ../gedit/gedit-io-error-message-area.c:716
-#: ../gedit/gedit-io-error-message-area.c:725
+#: ../gedit/gedit-io-error-message-area.c:756
+#: ../gedit/gedit-io-error-message-area.c:765
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Zkontrolujte·prosím,·že·jste·nesnažili otevřít binární soubor."
 
-#: ../gedit/gedit-io-error-message-area.c:717
+#: ../gedit/gedit-io-error-message-area.c:757
 msgid "Select a character coding from the menu and try again."
 msgstr "Vyberte kódování znaků z menu a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:722
+#: ../gedit/gedit-io-error-message-area.c:762
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "Nemohu otevřít soubor \"%s\" s kódováním znaků %s."
 
-#: ../gedit/gedit-io-error-message-area.c:726
-#: ../gedit/gedit-io-error-message-area.c:778
+#: ../gedit/gedit-io-error-message-area.c:766
+#: ../gedit/gedit-io-error-message-area.c:818
 msgid "Select a different character coding from the menu and try again."
 msgstr "Vyberte z menu jiné kódování znaků a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:773
+#: ../gedit/gedit-io-error-message-area.c:813
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "Nemohu uložit soubor %s s kódováním znaků %s."
 
-#: ../gedit/gedit-io-error-message-area.c:776
+#: ../gedit/gedit-io-error-message-area.c:816
 msgid ""
 "The document contains one or more characters that cannot be encoded using "
 "the specified character coding."
@@ -1677,62 +1716,63 @@ msgstr ""
 "Dokument obsahuje jeden nebo více znaků, které nelze zakódovat pomocí "
 "zadaného kódování znaků."
 
-#: ../gedit/gedit-io-error-message-area.c:839
+#: ../gedit/gedit-io-error-message-area.c:879
 msgid "_Edit Anyway"
 msgstr "_Přesto upravovat"
 
-#: ../gedit/gedit-io-error-message-area.c:842
+#: ../gedit/gedit-io-error-message-area.c:882
 msgid "_Don't Edit"
 msgstr "Ne_upravovat"
 
-#: ../gedit/gedit-io-error-message-area.c:857
-#, c-format
-msgid "This file (%s) is already opened in another gedit window."
+#: ../gedit/gedit-io-error-message-area.c:897
+#, fuzzy, c-format
+msgid "This file (%s) is already open in another gedit window."
 msgstr "Tento soubor (%s) je již otevřen v jiném okně geditu."
 
-#: ../gedit/gedit-io-error-message-area.c:872
+#: ../gedit/gedit-io-error-message-area.c:912
+#, fuzzy
 msgid ""
-"gedit opened this instance of the file in non-editable way. Do you want to "
+"gedit opened this instance of the file in a non-editable way. Do you want to "
 "edit it anyway?"
 msgstr ""
 "gedit otevřel tuto instanci souboru neupravovatelným způsobem. Chcete ji "
 "přesto upravovat?"
 
-#: ../gedit/gedit-io-error-message-area.c:930
-#: ../gedit/gedit-io-error-message-area.c:1025
+#: ../gedit/gedit-io-error-message-area.c:970
+#: ../gedit/gedit-io-error-message-area.c:1065
 msgid "_Save Anyway"
 msgstr "_Přesto uložit"
 
-#: ../gedit/gedit-io-error-message-area.c:934
-#: ../gedit/gedit-io-error-message-area.c:1029
+#: ../gedit/gedit-io-error-message-area.c:974
+#: ../gedit/gedit-io-error-message-area.c:1069
 msgid "_Don't Save"
 msgstr "Neuklá_dat"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:952
+#: ../gedit/gedit-io-error-message-area.c:992
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Soubor %s byl od jeho načtení změněn."
 
-#: ../gedit/gedit-io-error-message-area.c:968
+#: ../gedit/gedit-io-error-message-area.c:1008
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr ""
 "Pokud jej uložíte, všechny externí změny by mohly být ztraceny. Přesto jej "
 "uložit?"
 
-#: ../gedit/gedit-io-error-message-area.c:1047
+#: ../gedit/gedit-io-error-message-area.c:1087
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Nemohu vytvořit záložní soubor při ukládání souboru %s"
 
-#: ../gedit/gedit-io-error-message-area.c:1050
+#: ../gedit/gedit-io-error-message-area.c:1090
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Nemohu vytvořit dočasný záložní soubor při·ukládání·souboru·%s"
 
-#: ../gedit/gedit-io-error-message-area.c:1067
+#: ../gedit/gedit-io-error-message-area.c:1107
 msgid ""
 "gedit could not backup the old copy of the file before saving the new one. "
 "You can ignore this warning and save the file anyway, but if an error occurs "
@@ -1743,24 +1783,25 @@ msgstr ""
 "k chybě, mohli byste ztratit starou kopii souboru. Přesto uložit?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1128
-#, c-format
+#: ../gedit/gedit-io-error-message-area.c:1168
+#, fuzzy, c-format
 msgid ""
-"gedit cannot handle %s locations in write mode. Please, check that you typed "
+"gedit cannot handle %s locations in write mode. Please check that you typed "
 "the location correctly and try again."
 msgstr ""
 "gedit neumí používat umístění %s v režimu zápisu. Zkontrolujte prosím, že "
 "jste zadali umístění správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1136
+#: ../gedit/gedit-io-error-message-area.c:1176
+#, fuzzy
 msgid ""
-"gedit cannot handle this location  in write mode. Please, check that you "
-"typed the location correctly and try again."
+"gedit cannot handle this location in write mode. Please check that you typed "
+"the location correctly and try again."
 msgstr ""
 "gedit nemůže zpracovat umístění  v režimu pro zápis. Zkontrolujte prosím, že "
 "jste umístění napsali správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1145
+#: ../gedit/gedit-io-error-message-area.c:1185
 msgid ""
 "The disk where you are trying to save the file has a limitation on file "
 "sizes.  Please try saving a smaller file or saving it to a disk that does "
@@ -1770,83 +1811,89 @@ msgstr ""
 "souboru.  Zkuste prosím uložit menší soubor, nebo uložit tento soubor na "
 "disk, který nemá toto omezení."
 
-#: ../gedit/gedit-io-error-message-area.c:1152
-#, c-format
+#: ../gedit/gedit-io-error-message-area.c:1192
+#, fuzzy, c-format
 msgid ""
-"%s is not a valid location. Please, check that you typed the location "
+"%s is not a valid location. Please check that you typed the location "
 "correctly and try again."
 msgstr ""
 "%s·umístění není platné.·Zkontrolujte·prosím,"
 "·že·jste·umístění·napsali·správně,·a·zkuste·to·znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1159
+#: ../gedit/gedit-io-error-message-area.c:1199
+#, fuzzy
 msgid ""
-"You do not have the permissions necessary to save the file. Please, check "
+"You do not have the permissions necessary to save the file. Please check "
 "that you typed the location correctly and try again."
 msgstr ""
 "Nemáte oprávnění pro uložení souboru. Zkontrolujte prosím, že jste umístění "
 "napsali správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1171
-#, c-format
+#: ../gedit/gedit-io-error-message-area.c:1211
+#, fuzzy, c-format
 msgid ""
-"%s is a directory. Please, check that you typed the location correctly and "
+"%s is a directory. Please check that you typed the location correctly and "
 "try again."
 msgstr ""
 "%s·je adresář. Zkontrolujte prosím, že jste umístění napsali správně, a "
 "zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1177
+#: ../gedit/gedit-io-error-message-area.c:1217
+#, fuzzy
 msgid ""
-"Not enough available memory to save the file. Please, close some running "
+"Not enough available memory to save the file. Please close some running "
 "applications and try again."
 msgstr ""
 "Nedostatek paměti pro uložení souboru. Zavřete prosím některé běžící "
 "aplikace a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1253
+#: ../gedit/gedit-io-error-message-area.c:1293
+#, fuzzy
 msgid ""
-"There is not enough disk space to save the file. Please, free some disk "
-"space and try again."
+"There is not enough disk space to save the file. Please free some disk space "
+"and try again."
 msgstr ""
 "Pro uložení souboru není dostatek místa na disku.Uvolněte prosím nějaké "
 "místo a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1259
+#: ../gedit/gedit-io-error-message-area.c:1299
+#, fuzzy
 msgid ""
-"You are trying to save the file on a read-only disk. Please, check that you "
+"You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
 msgstr ""
 "Zkoušíte uložit soubor který je pouze pro čtení. Zkontrolujte prosím, že "
 "jste umístění napsali správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1265
-msgid "A file with the same name already exists. Please, use a different name."
+#: ../gedit/gedit-io-error-message-area.c:1305
+#, fuzzy
+msgid "A file with the same name already exists. Please use a different name."
 msgstr "Soubor se stejným názvem již existuje. Použijte prosím jiný název."
 
-#: ../gedit/gedit-io-error-message-area.c:1270
+#: ../gedit/gedit-io-error-message-area.c:1310
+#, fuzzy
 msgid ""
 "The disk where you are trying to save the file has a limitation on length of "
-"the file names. Please, use a shorter name."
+"the file names. Please use a shorter name."
 msgstr ""
 "Disk, kam se snažíte uložit tento soubor má nastaven limit délky názvu "
 "souboru. Použijte prosím kratší název."
 
-#: ../gedit/gedit-io-error-message-area.c:1275
-#, c-format
+#: ../gedit/gedit-io-error-message-area.c:1319
+#, fuzzy, c-format
 msgid ""
-"%s is not a regular file. Please, check that you typed the location "
-"correctly and try again."
+"%s is not a regular file. Please check that you typed the location correctly "
+"and try again."
 msgstr ""
 "%s není regulérní soubor. Zkontrolujte prosím, že jste umístění napsali "
 "správně, a zkuste to znovu."
 
-#: ../gedit/gedit-io-error-message-area.c:1318
+#: ../gedit/gedit-io-error-message-area.c:1362
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Nemohu uložit soubor %s."
 
-#: ../gedit/gedit-notebook.c:837
+#: ../gedit/gedit-notebook.c:845
 msgid "Close document"
 msgstr "Zavřít dokument"
 
@@ -1858,47 +1905,47 @@ msgstr "Prázdné"
 msgid "Hide panel"
 msgstr "Skrýt panel"
 
-#: ../gedit/gedit-plugin-manager.c:55
+#: ../gedit/gedit-plugin-manager.c:56
 msgid "Plugin"
 msgstr "Plugin"
 
-#: ../gedit/gedit-plugin-manager.c:56
+#: ../gedit/gedit-plugin-manager.c:57
 msgid "Enabled"
 msgstr "Povoleno"
 
-#: ../gedit/gedit-plugin-manager.c:502
+#: ../gedit/gedit-plugin-manager.c:515
 msgid "_About"
 msgstr "_O modulu"
 
-#: ../gedit/gedit-plugin-manager.c:510
+#: ../gedit/gedit-plugin-manager.c:523
 msgid "C_onfigure"
 msgstr "Na_stavit"
 
-#: ../gedit/gedit-plugin-manager.c:520
+#: ../gedit/gedit-plugin-manager.c:533
 msgid "A_ctivate"
 msgstr "A_ktivovat"
 
-#: ../gedit/gedit-plugin-manager.c:530
+#: ../gedit/gedit-plugin-manager.c:545
 msgid "Ac_tivate All"
 msgstr "Ak_tivovat vše"
 
-#: ../gedit/gedit-plugin-manager.c:535
+#: ../gedit/gedit-plugin-manager.c:550
 msgid "_Deactivate All"
 msgstr "_Deaktivovat vše"
 
-#: ../gedit/gedit-plugin-manager.c:776
+#: ../gedit/gedit-plugin-manager.c:795
 msgid "_About Plugin"
 msgstr "_O pluginu"
 
-#: ../gedit/gedit-plugin-manager.c:780
+#: ../gedit/gedit-plugin-manager.c:799
 msgid "C_onfigure Plugin"
 msgstr "Na_stavit plugin"
 
-#: ../gedit/gedit-prefs-manager.c:170
+#: ../gedit/gedit-prefs-manager.c:171
 msgid "Cannot initialize preferences manager."
 msgstr "Nemohu inicializovat správce nastavení."
 
-#: ../gedit/gedit-prefs-manager.c:1407
+#: ../gedit/gedit-prefs-manager.c:1406
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Očekával jsem '%s', ale obdržel jsem '%s' pro klíč %s"
@@ -2021,77 +2068,77 @@ msgstr[2] "V %d záložkách jsou chyby"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:641
+#: ../gedit/gedit-tab.c:664
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Vracím %s·z·%s"
 
-#: ../gedit/gedit-tab.c:648
+#: ../gedit/gedit-tab.c:671
 #, c-format
 msgid "Reverting %s"
 msgstr "Vracím %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:664
+#: ../gedit/gedit-tab.c:687
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Načítám %s·z %s"
 
-#: ../gedit/gedit-tab.c:671
+#: ../gedit/gedit-tab.c:694
 #, c-format
 msgid "Loading %s"
 msgstr "Načítám %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:754
+#: ../gedit/gedit-tab.c:777
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Ukládám %s do %s"
 
-#: ../gedit/gedit-tab.c:761
+#: ../gedit/gedit-tab.c:784
 #, c-format
 msgid "Saving %s"
 msgstr "Ukládám·%s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1518
+#: ../gedit/gedit-tab.c:1541
 msgid "RO"
 msgstr "RO"
 
-#: ../gedit/gedit-tab.c:1563
+#: ../gedit/gedit-tab.c:1586
 #, c-format
 msgid "Error opening file %s"
 msgstr "Chyba při otevírání souboru %s"
 
-#: ../gedit/gedit-tab.c:1568
+#: ../gedit/gedit-tab.c:1591
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Chyba při vrácení souboru %s do původního stavu"
 
-#: ../gedit/gedit-tab.c:1573
+#: ../gedit/gedit-tab.c:1596
 #, c-format
 msgid "Error saving file %s"
 msgstr "Chyba při ukládání souboru %s"
 
-#: ../gedit/gedit-tab.c:1591
+#: ../gedit/gedit-tab.c:1614
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1598
+#: ../gedit/gedit-tab.c:1621
 msgid "Name:"
 msgstr "Název:"
 
-#: ../gedit/gedit-tab.c:1599
+#: ../gedit/gedit-tab.c:1622
 msgid "MIME Type:"
 msgstr "Typ MIME:"
 
-#: ../gedit/gedit-tab.c:1600
+#: ../gedit/gedit-tab.c:1623
 msgid "Encoding:"
 msgstr "Kódování:"
 
-#: ../gedit/gedit-tab.c:2036
+#: ../gedit/gedit-tab.c:2059
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Vykresluji stránku %d z %d..."
@@ -2133,7 +2180,7 @@ msgstr "Vytvořit nový dokument"
 msgid "_Open..."
 msgstr "_Otevřít..."
 
-#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1384
+#: ../gedit/gedit-ui.h:64 ../gedit/gedit-window.c:1485
 msgid "Open a file"
 msgstr "Otevřít soubor"
 
@@ -2298,11 +2345,13 @@ msgid "Go to a specific line"
 msgstr "Jít na konkrétní řádek"
 
 #: ../gedit/gedit-ui.h:129
-msgid "Interactive search..."
+#, fuzzy
+msgid "Incremental search..."
 msgstr "Interaktivní hledání..."
 
 #: ../gedit/gedit-ui.h:130
-msgid "Interactively search for text"
+#, fuzzy
+msgid "Incrementally search for text"
 msgstr "Interaktivně hledat text"
 
 #. Documents menu
@@ -2382,44 +2431,44 @@ msgstr "_Spodní panel"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Zobrazit nebo skrýt spodní panel v aktuálním okně"
 
-#: ../gedit/gedit-utils.c:988
+#: ../gedit/gedit-utils.c:998
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Nemohu najít soubor %s."
 
-#: ../gedit/gedit-utils.c:992 ../gedit/gedit-utils.c:1021
+#: ../gedit/gedit-utils.c:1002 ../gedit/gedit-utils.c:1031
 msgid "Please check your installation."
 msgstr "Zkontrolujte prosím vaší instalaci."
 
-#: ../gedit/gedit-utils.c:1017
+#: ../gedit/gedit-utils.c:1027
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Nemohu najít požadované widgety v souboru %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1337
+#: ../gedit/gedit-view.c:1330
 msgid "_Wrap Around"
 msgstr "Přecházet·přes·_okraj"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1347
+#: ../gedit/gedit-view.c:1340
 msgid "Match _Entire Word Only"
 msgstr "Hledat pouze _celá slova"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1357
+#: ../gedit/gedit-view.c:1350
 msgid "_Match Case"
 msgstr "_Rozlišovat velikost písmen"
 
-#: ../gedit/gedit-view.c:1445
+#: ../gedit/gedit-view.c:1438
 msgid "String you want to search for"
 msgstr "Řetězec, který chcete hledat"
 
-#: ../gedit/gedit-view.c:1454
+#: ../gedit/gedit-view.c:1447
 msgid "Line you want to move the cursor to"
 msgstr "Řádek, na který chcete přesunout kurzor"
 
-#: ../gedit/gedit-window.c:811
+#: ../gedit/gedit-window.c:901
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Použít režim zvýrazňování %s"
@@ -2427,36 +2476,37 @@ msgstr "Použít režim zvýrazňování %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:866
+#: ../gedit/gedit-window.c:958
 msgid "None"
 msgstr "Žádný"
 
-#: ../gedit/gedit-window.c:867
+#: ../gedit/gedit-window.c:959
 msgid "Disable syntax highlighting"
 msgstr "Zakázat zvýrazňování syntaxe"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1138
+#: ../gedit/gedit-window.c:1239
 #, c-format
 msgid "Open '%s'"
 msgstr "Otevřít '%s'"
 
-#: ../gedit/gedit-window.c:1257
+#: ../gedit/gedit-window.c:1358
 msgid "Save"
 msgstr "Uložit"
 
-#: ../gedit/gedit-window.c:1388
+#: ../gedit/gedit-window.c:1489
 msgid "Open a recently used file"
 msgstr "Otevřít nedávno používaný soubor"
 
-#: ../gedit/gedit-window.c:1395
+#: ../gedit/gedit-window.c:1496
 msgid "Open"
 msgstr "Otevřít"
 
-#: ../gedit/gedit-window.c:1484 ../gedit/gedit-window.c:2125
+#. Translators: %s is a URI
+#: ../gedit/gedit-window.c:1546
 #, c-format
-msgid "Activate %s"
-msgstr "Aktivovat %s"
+msgid "Activate '%s'"
+msgstr "Aktivovat '%s'"
 
 #: ../plugins/changecase/changecase.gedit-plugin.desktop.in.h:1
 msgid "Change Case"
@@ -2551,11 +2601,11 @@ msgstr "Slov"
 msgid "_Update"
 msgstr "_Aktualizovat"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:400
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:411
 msgid "_Document Statistics"
 msgstr "_Statistika dokumentu"
 
-#: ../plugins/docinfo/gedit-docinfo-plugin.c:402
+#: ../plugins/docinfo/gedit-docinfo-plugin.c:413
 msgid "Get statistic info on current document"
 msgstr "Získá statistické informace o aktuálním dokumentu"
 
@@ -2567,125 +2617,123 @@ msgstr "Spouštět externí příkazy a skripty shellu."
 msgid "External Tools"
 msgstr "Externí nástroje"
 
-#: ../plugins/externaltools/tools/__init__.py:38
+#: ../plugins/externaltools/tools/__init__.py:129
 msgid "_External Tools..."
 msgstr "_Externí nástroje..."
 
-#: ../plugins/externaltools/tools/__init__.py:40
+#: ../plugins/externaltools/tools/__init__.py:131
 msgid "Opens the External Tools Manager"
 msgstr "Otevírá správce externích nástrojů"
 
-#: ../plugins/externaltools/tools/__init__.py:56
+#: ../plugins/externaltools/tools/__init__.py:161
 msgid "Shell Output"
 msgstr "Výstup shellu"
 
-#: ../plugins/externaltools/tools/functions.py:241
+#: ../plugins/externaltools/tools/functions.py:108
 msgid "You must be inside a word to run this command"
 msgstr "Pro spuštění tohoto příkazu musíte být uvnitř slova"
 
-#: ../plugins/externaltools/tools/functions.py:298
+#: ../plugins/externaltools/tools/functions.py:165
 msgid "Running tool:"
 msgstr "Spouštím nástroj:"
 
-#: ../plugins/externaltools/tools/functions.py:321
+#: ../plugins/externaltools/tools/functions.py:188
 msgid "Done."
 msgstr "Hotovo."
 
-#: ../plugins/externaltools/tools/functions.py:323
+#: ../plugins/externaltools/tools/functions.py:190
 msgid "Exited"
 msgstr "Skončil"
 
-#: ../plugins/externaltools/tools/manager.py:40
+#: ../plugins/externaltools/tools/manager.py:41
 msgid "Nothing"
 msgstr "Nic"
 
-#: ../plugins/externaltools/tools/manager.py:41
+#: ../plugins/externaltools/tools/manager.py:42
 msgid "Current document"
 msgstr "Aktuální dokument"
 
-#: ../plugins/externaltools/tools/manager.py:42
+#: ../plugins/externaltools/tools/manager.py:43
 msgid "Current selection"
 msgstr "Aktuální výběr"
 
-#: ../plugins/externaltools/tools/manager.py:43
+#: ../plugins/externaltools/tools/manager.py:44
 msgid "Current line"
 msgstr "Aktuální řádek"
 
-#: ../plugins/externaltools/tools/manager.py:44
+#: ../plugins/externaltools/tools/manager.py:45
 msgid "Current word"
 msgstr "Aktuální slovo"
 
-#: ../plugins/externaltools/tools/manager.py:47
+#: ../plugins/externaltools/tools/manager.py:48
 msgid "Insert in output panel"
 msgstr "Vložit do panelu výstupu"
 
-#: ../plugins/externaltools/tools/manager.py:48
+#: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
 msgstr "Vytvořit nový dokument"
 
-#: ../plugins/externaltools/tools/manager.py:49
+#: ../plugins/externaltools/tools/manager.py:50
 msgid "Append to current document"
 msgstr "Přidat do aktuálního dokumentu"
 
-#: ../plugins/externaltools/tools/manager.py:50
+#: ../plugins/externaltools/tools/manager.py:51
 msgid "Replace current document"
 msgstr "Nahradit aktuální dokument"
 
-#: ../plugins/externaltools/tools/manager.py:51
+#: ../plugins/externaltools/tools/manager.py:52
 msgid "Replace current selection"
 msgstr "Nahradit výběr"
 
-#: ../plugins/externaltools/tools/manager.py:52
+#: ../plugins/externaltools/tools/manager.py:53
 msgid "Insert at cursor position"
 msgstr "Vložit na pozici kurzoru"
 
-#: ../plugins/externaltools/tools/manager.py:55
+#: ../plugins/externaltools/tools/manager.py:56
 msgid "All documents"
 msgstr "Všechny dokumenty"
 
-#: ../plugins/externaltools/tools/manager.py:56
+#: ../plugins/externaltools/tools/manager.py:57
 msgid "All documents except untitled ones"
 msgstr "Všechny dokumenty kromě nepojmenovaných"
 
-#: ../plugins/externaltools/tools/manager.py:57
+#: ../plugins/externaltools/tools/manager.py:58
 msgid "Local files only"
 msgstr "Jen místní soubory"
 
-#: ../plugins/externaltools/tools/manager.py:58
+#: ../plugins/externaltools/tools/manager.py:59
 msgid "Remote files only"
 msgstr "Jen vzdálené soubory"
 
-#: ../plugins/externaltools/tools/manager.py:59
+#: ../plugins/externaltools/tools/manager.py:60
 msgid "Untitled documents only"
 msgstr "Jen nepojmenované dokumenty"
 
-#: ../plugins/externaltools/tools/manager.py:189
-#: ../plugins/externaltools/tools/manager.py:206
-#: ../plugins/externaltools/tools/manager.py:245
+#: ../plugins/externaltools/tools/manager.py:200
+#: ../plugins/externaltools/tools/manager.py:228
+#: ../plugins/externaltools/tools/manager.py:276
 #, python-format
 msgid "Edit tool <i>%s</i>:"
 msgstr "Upravit nástroj <i>%s</i>:"
 
-#: ../plugins/externaltools/tools/manager.py:193
+#: ../plugins/externaltools/tools/manager.py:204
 msgid "A Brand New Tool"
 msgstr "Úplně nový nástroj"
 
-#: ../plugins/externaltools/tools/manager.py:216
+#: ../plugins/externaltools/tools/manager.py:237
 msgid "New tool"
 msgstr "Nový nástroj"
 
-#: ../plugins/externaltools/tools/manager.py:279
+#: ../plugins/externaltools/tools/manager.py:312
 #, python-format
 msgid "This accelerator is already bound to %s"
 msgstr "Tato klávesová zkratka je již přiřazena k %s"
 
-#: ../plugins/externaltools/tools/manager.py:332
-#: ../plugins/snippets/snippets/SnippetsDialog.py:600
+#: ../plugins/externaltools/tools/manager.py:358
 msgid "Type a new accelerator, or press Backspace to clear"
 msgstr "Stiskněte novou klávesovou zkratku, nebo ji vymažte stisknutím Backspace"
 
-#: ../plugins/externaltools/tools/manager.py:334
-#: ../plugins/snippets/snippets/SnippetsDialog.py:602
+#: ../plugins/externaltools/tools/manager.py:360
 msgid "Type a new accelerator"
 msgstr "Stiskněte novou klávesovou zkratku"
 
@@ -2702,14 +2750,6 @@ msgid "Edit tool <i>make</i>:"
 msgstr "Upravit nástroj <i>make</i>:"
 
 #: ../plugins/externaltools/tools/tools.glade.h:4
-msgid "External Tools Manager"
-msgstr "Správce externích nástrojů"
-
-#: ../plugins/externaltools/tools/tools.glade.h:5
-msgid "F7"
-msgstr "F7"
-
-#: ../plugins/externaltools/tools/tools.glade.h:6
 msgid ""
 "Nothing\n"
 "Current document\n"
@@ -2719,38 +2759,74 @@ msgstr ""
 "Aktuální dokument\n"
 "Všechny dokumenty"
 
-#: ../plugins/externaltools/tools/tools.glade.h:9
-msgid "Run “make” in the document dir"
-msgstr "Spustit „make” v adresáři dokumentu"
-
-#: ../plugins/externaltools/tools/tools.glade.h:10
-#: ../plugins/snippets/snippets/snippets.glade.h:4
-msgid "_Accelerator:"
-msgstr "_Klávesová zkratka:"
-
-#: ../plugins/externaltools/tools/tools.glade.h:11
+#: ../plugins/externaltools/tools/tools.glade.h:7
 msgid "_Applicability:"
 msgstr "_Použitelnost:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:12
+#: ../plugins/externaltools/tools/tools.glade.h:8
 msgid "_Description:"
 msgstr "_Popis:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:13
+#: ../plugins/externaltools/tools/tools.glade.h:9
 msgid "_Input:"
 msgstr "V_stup:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:14
+#: ../plugins/externaltools/tools/tools.glade.h:10
 msgid "_Output:"
 msgstr "V_ýstup:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:15
+#: ../plugins/externaltools/tools/tools.glade.h:11
 msgid "_Save:"
 msgstr "_Uložit:"
 
-#: ../plugins/externaltools/tools/tools.glade.h:16
+#: ../plugins/externaltools/tools/tools.glade.h:12
+msgid "_Shortcut Key:"
+msgstr "_Klávesová zkratka:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:13
 msgid "_Tools:"
 msgstr "Nás_troje:"
+
+#: ../plugins/externaltools/tools/tools.glade.h:14
+msgid "gtk-revert-to-saved"
+msgstr "gtk-revert-to-saved"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:1
+#, fuzzy
+msgid "Build"
+msgstr "Tučné"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:2
+#, fuzzy
+msgid "Run \"make\" in the document directory"
+msgstr "Spustit „make” v adresáři dokumentu"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
+#, fuzzy
+msgid "Open a terminal in the document location"
+msgstr "Otevřít terminál v aktuálně otevřeném adresáři"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
+#, fuzzy
+msgid "Open terminal here"
+msgstr "_Otevřít zde terminál"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
+#, fuzzy
+msgid "Remove trailing spaces"
+msgstr "Odstranit _duplikáty"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
+msgid "Remove useless trailing spaces in your file"
+msgstr ""
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:1
+msgid "Execute a custom command and put its output in a new document"
+msgstr ""
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:2
+msgid "Run command"
+msgstr ""
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
@@ -2911,17 +2987,17 @@ msgstr ""
 msgid "If you delete an item it is permanently lost."
 msgstr "Pokud položku smažete, bude nenávratně ztracena."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2423
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1734
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2503
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1748
 msgid "Invalid uri"
 msgstr "Neplatné URI"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2781
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2861
 msgid "file"
 msgstr "soubor"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2802
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2849
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2882
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2929
 msgid ""
 "The new file is currently filtered out. You need to adjust your filter "
 "settings to make the file visible"
@@ -2929,135 +3005,144 @@ msgstr ""
 "Nový soubor je nyní odfiltrován. Aby byl viditelný, musíte upravit vaše "
 "nastavení filtrování."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2830
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2910
 msgid "directory"
 msgstr "adresář"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:719
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:714
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
-msgid "_New Directory"
-msgstr "_Nový adresář"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:720
+msgid "Recent Files"
+msgstr "Nedávné soubory"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
-msgid "Add new empty directory"
-msgstr "Přidat nový prázdný adresář"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
+msgid "_New Folder"
+msgstr "_Nová složka"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:811
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
+msgid "Add new empty folder"
+msgstr "Přidat novou prázdnou složku"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
 msgid "New F_ile"
 msgstr "Nový _soubor"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:812
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
 msgid "Add new empty file"
 msgstr "Přidat nový prázdný soubor"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:813
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
 msgid "Up"
 msgstr "Vyš"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
 msgid "Open the parent folder"
 msgstr "Otevřít rodičovskou složku"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:819
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
 msgid "_Rename"
 msgstr "_Přejmenovat"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
-msgid "Rename selected file or directory"
-msgstr "Přejmenovat vybraný soubor či adresář"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
+msgid "Rename selected file or folder"
+msgstr "Přejmenovat vybraný soubor či složku"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:822
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:817
 msgid "_Move To Trash"
 msgstr "Přesunout do _koše"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
-msgid "Move selected file or directory to trash"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+#, fuzzy
+msgid "Move selected file or folder to trash"
 msgstr "Přesunout vybraný soubor či adresář do koše"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:825
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "_Delete"
 msgstr "_Smazat"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:826
-msgid "Delete selected file or directory"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#, fuzzy
+msgid "Delete selected file or folder"
 msgstr "Smazat vybraný soubor či adresář"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
 msgid "_Previous Location"
 msgstr "_Předchozí umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
 msgid "Go to the previous visited location"
 msgstr "Jít na předchozí navštívené umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
 msgid "_Next Location"
 msgstr "_Další umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
 msgid "Go to the next visited location"
 msgstr "Jít na další navštívené umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:838
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "Re_fresh View"
 msgstr "_Obnovit pohled"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
 msgid "Refresh the view"
 msgstr "Obnovit pohled"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
-msgid "_View Directory"
-msgstr "_Zobrazit adresář"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+msgid "_View Folder"
+msgstr ""
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
-msgid "View directory in file manager"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#, fuzzy
+msgid "View folder in file manager"
 msgstr "Zobrazovat adresář ve správci souborů"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:848
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
 msgid "Show _Hidden"
 msgstr "Zobrazit _skryté"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
-msgid "Show hidden files and directories"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+#, fuzzy
+msgid "Show hidden files and folders"
 msgstr "Zobrazovat skryté soubory a adresáře"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:851
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
 msgid "Show _Binary"
 msgstr "Zobrazit _binární"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
 msgid "Show binary files"
 msgstr "Zobrazovat binární soubory"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:949
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
 msgid "Previous location"
 msgstr "Předchozí umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:936
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
 msgid "Go to previous location"
 msgstr "Jít na předchozí umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:942
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:974
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
 msgid "Go to a previously opened location"
 msgstr "Jít na předchozí otevřené umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:964
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
 msgid "Next location"
 msgstr "Další umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:968
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
 msgid "Go to next location"
 msgstr "Jít na další umístění"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1129
-msgid "Advanced filtering"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1124
+#, fuzzy
+msgid "_Advanced filtering"
 msgstr "Pokročilé filtrování"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
@@ -3097,6 +3182,7 @@ msgid "Interactive python console standing in the bottom panel"
 msgstr "Interaktivní konzole pythonu v dolním panelu"
 
 #: ../plugins/pythonconsole/pythonconsole.gedit-plugin.desktop.in.h:2
+#: ../plugins/pythonconsole/pythonconsole/__init__.py:45
 msgid "Python Console"
 msgstr "Konzola Pythonu"
 
@@ -3129,6 +3215,10 @@ msgid "<b>Activation</b>"
 msgstr "<b>Aktivace</b>"
 
 #: ../plugins/snippets/snippets/snippets.glade.h:3
+msgid "S_hortcut key:"
+msgstr ""
+
+#: ../plugins/snippets/snippets/snippets.glade.h:4
 msgid "Snippets Manager"
 msgstr "Správce úryvků"
 
@@ -3144,6 +3234,18 @@ msgstr "_Úryvky:"
 #: ../plugins/snippets/snippets/snippets.glade.h:8
 msgid "_Tab trigger:"
 msgstr "Spouštěč _tabulátoru:"
+
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:491
+#, python-format
+msgid ""
+"Execution of the python command (%s) exceeds the maximum time, execution "
+"aborted."
+msgstr ""
+
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:499
+#, python-format
+msgid "Execution of the python command (%s) failed: %s"
+msgstr ""
 
 #: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
 msgid "Manage _Snippets..."
@@ -3168,6 +3270,16 @@ msgid ""
 msgstr ""
 "Toto není platný spouštěč tabulátoru. Spouštěče mohou obsahovat buď písmena, "
 "nebo jeden nealfanumerický znak, jako např. { nebo [."
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:600
+#, fuzzy
+msgid "Type a new shortcut, or press Backspace to clear"
+msgstr "Stiskněte novou klávesovou zkratku, nebo ji vymažte stisknutím Backspace"
+
+#: ../plugins/snippets/snippets/SnippetsDialog.py:602
+#, fuzzy
+msgid "Type a new shortcut"
+msgstr "Stiskněte novou klávesovou zkratku"
 
 #: ../plugins/sort/gedit-sort-plugin.c:80
 msgid "S_ort..."
@@ -3210,328 +3322,28 @@ msgstr "_Obrácené pořadí"
 msgid "_Sort"
 msgstr "_Třídit"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:419
-#: ../plugins/spell/gedit-spell-checker-dialog.c:511
+#: ../plugins/spell/gedit-automatic-spell-checker.c:418
+#: ../plugins/spell/gedit-spell-checker-dialog.c:494
 msgid "(no suggested words)"
 msgstr "(žádná navrhovaná slova)"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:443
+#: ../plugins/spell/gedit-automatic-spell-checker.c:442
 msgid "_More..."
 msgstr "Ví_ce..."
 
 #. Ignore all
-#: ../plugins/spell/gedit-automatic-spell-checker.c:496
+#: ../plugins/spell/gedit-automatic-spell-checker.c:495
 msgid "_Ignore All"
 msgstr "_Ignorovat vše"
 
 #. + Add to Dictionary
-#: ../plugins/spell/gedit-automatic-spell-checker.c:509
+#: ../plugins/spell/gedit-automatic-spell-checker.c:508
 msgid "_Add"
 msgstr "Přid_at"
 
-#: ../plugins/spell/gedit-automatic-spell-checker.c:546
+#: ../plugins/spell/gedit-automatic-spell-checker.c:545
 msgid "_Spelling Suggestions..."
 msgstr "Návrhy pravopi_su..."
-
-#: ../plugins/spell/gedit-spell-checker.c:79
-msgid "Afrikaans"
-msgstr "Afrikánština"
-
-#: ../plugins/spell/gedit-spell-checker.c:80
-msgid "Amharic"
-msgstr "Amharština"
-
-#: ../plugins/spell/gedit-spell-checker.c:82
-msgid "Arabic (Egypt)"
-msgstr "Arabština (Egypt)"
-
-#: ../plugins/spell/gedit-spell-checker.c:83
-msgid "Azerbaijani"
-msgstr "Ázerbajdžánština"
-
-#: ../plugins/spell/gedit-spell-checker.c:84
-msgid "Belarusian"
-msgstr "Běloruština"
-
-#: ../plugins/spell/gedit-spell-checker.c:85
-msgid "Bulgarian"
-msgstr "Bulharština"
-
-#: ../plugins/spell/gedit-spell-checker.c:86
-msgid "Bengali"
-msgstr "Bengálština"
-
-#: ../plugins/spell/gedit-spell-checker.c:87
-msgid "Breton"
-msgstr "Bretonština"
-
-#: ../plugins/spell/gedit-spell-checker.c:88
-msgid "Catalan"
-msgstr "Katalánština"
-
-#: ../plugins/spell/gedit-spell-checker.c:89
-msgid "Czech"
-msgstr "Čeština"
-
-#: ../plugins/spell/gedit-spell-checker.c:90
-msgid "Welsh"
-msgstr "Velština"
-
-#: ../plugins/spell/gedit-spell-checker.c:91
-msgid "Danish"
-msgstr "Dánština"
-
-#: ../plugins/spell/gedit-spell-checker.c:92
-msgid "German (Austria)"
-msgstr "Němčina (Rakousko)"
-
-#: ../plugins/spell/gedit-spell-checker.c:93
-msgid "German (Germany)"
-msgstr "Němčina (Německo)"
-
-#: ../plugins/spell/gedit-spell-checker.c:94
-msgid "German (Swiss)"
-msgstr "Němčina (Švýcarsko)"
-
-#: ../plugins/spell/gedit-spell-checker.c:96
-msgid "English (American)"
-msgstr "Angličtina (Amerika)"
-
-#: ../plugins/spell/gedit-spell-checker.c:97
-msgid "English (British)"
-msgstr "Angličtina (Británie)"
-
-#: ../plugins/spell/gedit-spell-checker.c:98
-msgid "English (Canadian)"
-msgstr "Angličtina (Kanada)"
-
-#: ../plugins/spell/gedit-spell-checker.c:99
-msgid "Esperanto"
-msgstr "Esperanto"
-
-#: ../plugins/spell/gedit-spell-checker.c:100
-msgid "Spanish"
-msgstr "Španělština"
-
-#: ../plugins/spell/gedit-spell-checker.c:101
-msgid "Estonian"
-msgstr "Estonština"
-
-#: ../plugins/spell/gedit-spell-checker.c:102
-msgid "Persian"
-msgstr "Perština"
-
-#: ../plugins/spell/gedit-spell-checker.c:103
-msgid "Finnish"
-msgstr "Finština"
-
-#: ../plugins/spell/gedit-spell-checker.c:104
-msgid "Faroese"
-msgstr "Faerština"
-
-#: ../plugins/spell/gedit-spell-checker.c:105
-msgid "French (France)"
-msgstr "Francouzština (Francie)"
-
-#: ../plugins/spell/gedit-spell-checker.c:106
-msgid "French (Swiss)"
-msgstr "Francouzština (Švýcarsko)"
-
-#: ../plugins/spell/gedit-spell-checker.c:107
-msgid "Irish"
-msgstr "Irština"
-
-#: ../plugins/spell/gedit-spell-checker.c:108
-msgid "Scottish Gaelic"
-msgstr "Skotská galština"
-
-#: ../plugins/spell/gedit-spell-checker.c:109
-msgid "Gallegan"
-msgstr "Galicijština"
-
-#: ../plugins/spell/gedit-spell-checker.c:110
-msgid "Manx Gaelic"
-msgstr "Manština"
-
-#: ../plugins/spell/gedit-spell-checker.c:112
-msgid "Hindi"
-msgstr "Hindština"
-
-#: ../plugins/spell/gedit-spell-checker.c:113
-msgid "Croatian"
-msgstr "Chorvatština"
-
-#: ../plugins/spell/gedit-spell-checker.c:114
-msgid "Upper Sorbian"
-msgstr "Hornolužičtina"
-
-#: ../plugins/spell/gedit-spell-checker.c:115
-msgid "Hungarian"
-msgstr "Maďarština"
-
-#: ../plugins/spell/gedit-spell-checker.c:116
-msgid "Interlingua (IALA)"
-msgstr "Interlingua (IALA)"
-
-#: ../plugins/spell/gedit-spell-checker.c:117
-msgid "Indonesian"
-msgstr "Indonéština"
-
-#: ../plugins/spell/gedit-spell-checker.c:118
-msgid "Icelandic"
-msgstr "Islandština"
-
-#: ../plugins/spell/gedit-spell-checker.c:119
-msgid "Italian"
-msgstr "Italština"
-
-#: ../plugins/spell/gedit-spell-checker.c:120
-msgid "Kurdish"
-msgstr "Kurdština"
-
-#: ../plugins/spell/gedit-spell-checker.c:121
-msgid "Latin"
-msgstr "Latina"
-
-#: ../plugins/spell/gedit-spell-checker.c:122
-msgid "Lithuanian"
-msgstr "Litevština"
-
-#: ../plugins/spell/gedit-spell-checker.c:123
-msgid "Latvian"
-msgstr "Lotyština"
-
-#: ../plugins/spell/gedit-spell-checker.c:124
-msgid "Malagasy"
-msgstr "Malgaština"
-
-#: ../plugins/spell/gedit-spell-checker.c:125
-msgid "Maori"
-msgstr "Maorština"
-
-#: ../plugins/spell/gedit-spell-checker.c:126
-msgid "Macedonian"
-msgstr "Makedonština"
-
-#: ../plugins/spell/gedit-spell-checker.c:127
-msgid "Mongolian"
-msgstr "Mongolština"
-
-#: ../plugins/spell/gedit-spell-checker.c:128
-msgid "Marathi"
-msgstr "Maráthština"
-
-#: ../plugins/spell/gedit-spell-checker.c:129
-msgid "Malay"
-msgstr "Malajština"
-
-#: ../plugins/spell/gedit-spell-checker.c:130
-msgid "Maltese"
-msgstr "Maltézština"
-
-#: ../plugins/spell/gedit-spell-checker.c:131
-msgid "Norwegian Bokmal"
-msgstr "Norština Bokmal"
-
-#: ../plugins/spell/gedit-spell-checker.c:132
-msgid "Dutch"
-msgstr "Nizozemština"
-
-#: ../plugins/spell/gedit-spell-checker.c:133
-msgid "Norwegian Nynorsk"
-msgstr "Norština Nynorsk"
-
-#: ../plugins/spell/gedit-spell-checker.c:134
-msgid "Norwegian"
-msgstr "Norština"
-
-#: ../plugins/spell/gedit-spell-checker.c:135
-msgid "Nyanja"
-msgstr "Čičevština"
-
-#: ../plugins/spell/gedit-spell-checker.c:136
-msgid "Polish"
-msgstr "Polština"
-
-#: ../plugins/spell/gedit-spell-checker.c:137
-msgid "Portuguese (Portugal)"
-msgstr "Portugalština (portugalská)"
-
-#: ../plugins/spell/gedit-spell-checker.c:138
-msgid "Portuguese (Brazilian)"
-msgstr "Portugalština (brazilská)"
-
-#: ../plugins/spell/gedit-spell-checker.c:139
-msgid "Quechua"
-msgstr "Kečujština"
-
-#: ../plugins/spell/gedit-spell-checker.c:141
-msgid "Russian"
-msgstr "Ruština"
-
-#: ../plugins/spell/gedit-spell-checker.c:142
-msgid "Kinyarwanda"
-msgstr "Rwandština"
-
-#: ../plugins/spell/gedit-spell-checker.c:143
-msgid "Sardinian"
-msgstr "Sardinština"
-
-#: ../plugins/spell/gedit-spell-checker.c:144
-msgid "Slovak"
-msgstr "Slovenština"
-
-#: ../plugins/spell/gedit-spell-checker.c:145
-msgid "Slovenian"
-msgstr "Slovinština"
-
-#: ../plugins/spell/gedit-spell-checker.c:146
-msgid "Swedish"
-msgstr "Švédština"
-
-#: ../plugins/spell/gedit-spell-checker.c:147
-msgid "Swahili"
-msgstr "Svahilština"
-
-#: ../plugins/spell/gedit-spell-checker.c:148
-msgid "Tamil"
-msgstr "Tamilština"
-
-#: ../plugins/spell/gedit-spell-checker.c:149
-msgid "Tetum"
-msgstr "Tetum"
-
-#: ../plugins/spell/gedit-spell-checker.c:150
-msgid "Tagalog"
-msgstr "Tagalština"
-
-#: ../plugins/spell/gedit-spell-checker.c:151
-msgid "Tswana"
-msgstr "Čvanština"
-
-#: ../plugins/spell/gedit-spell-checker.c:153
-msgid "Ukrainian"
-msgstr "Ukrajinština"
-
-#: ../plugins/spell/gedit-spell-checker.c:154
-msgid "Uzbek"
-msgstr "Uzbečtina"
-
-#: ../plugins/spell/gedit-spell-checker.c:156
-msgid "Walloon"
-msgstr "Valonština"
-
-#: ../plugins/spell/gedit-spell-checker.c:157
-msgid "Yiddish"
-msgstr "Jidiš"
-
-#: ../plugins/spell/gedit-spell-checker.c:158
-msgid "Zulu"
-msgstr "Zulu"
-
-#: ../plugins/spell/gedit-spell-checker.c:830
-msgid "Default"
-msgstr "Výchozí"
 
 #: ../plugins/spell/gedit-spell-checker-dialog.c:289
 msgid "Check Spelling"
@@ -3541,20 +3353,54 @@ msgstr "Kontrolovat pravopis"
 msgid "Suggestions"
 msgstr "Návrhy"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:615
+#: ../plugins/spell/gedit-spell-checker-dialog.c:600
 msgid "(correct spelling)"
 msgstr "(správný tvar)"
 
-#: ../plugins/spell/gedit-spell-checker-dialog.c:800
+#: ../plugins/spell/gedit-spell-checker-dialog.c:743
 msgid "Completed spell checking"
 msgstr "Kontrola pravopisu dokončena"
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:244
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#. * Translators: the first %s is the language name, and the
+#. * second %s is the locale name. Example:
+#. * "French (France)"
+#.
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#: ../plugins/spell/gedit-spell-checker-language.c:287
+#: ../plugins/spell/gedit-spell-checker-language.c:295
+#, fuzzy, c-format
+msgid "language|%s (%s)"
+msgstr "Jazyky"
+
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#. * Translators: this refers to an unknown language code
+#. * (one which isn't in our built-in list).
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:306
+#, c-format
+msgid "language|Unknown (%s)"
+msgstr ""
+
+#. Translators: The text before the "|" is context to help you decide on
+#. * the correct translation. You MUST OMIT it in the translated string.
+#. * Translators: this refers the Default language used by the
+#. * spell checker
+#.
+#: ../plugins/spell/gedit-spell-checker-language.c:414
+#, fuzzy
+msgid "language|Default"
+msgstr "Výchozí"
+
+#: ../plugins/spell/gedit-spell-language-dialog.c:237
 #, c-format
 msgid "Could not find the required widgets inside %s."
 msgstr "Nemohu najít požadované widgety v %s."
 
-#: ../plugins/spell/gedit-spell-language-dialog.c:265
+#: ../plugins/spell/gedit-spell-language-dialog.c:258
 msgid "Languages"
 msgstr "Jazyky"
 
@@ -3582,11 +3428,11 @@ msgstr "_Automaticky kontrolovat pravopis"
 msgid "Automatically spell-check the current document"
 msgstr "Automatická kontrola pravopisu v aktuálním dokumentu"
 
-#: ../plugins/spell/gedit-spell-plugin.c:713
+#: ../plugins/spell/gedit-spell-plugin.c:714
 msgid "The document is empty."
 msgstr "Dokument je prázdný."
 
-#: ../plugins/spell/gedit-spell-plugin.c:745
+#: ../plugins/spell/gedit-spell-plugin.c:746
 msgid "No misspelled words"
 msgstr "Žádná chybná slova"
 
@@ -3666,20 +3512,20 @@ msgstr "Zkontroluje pravopis aktuálního dokumentu."
 msgid "Spell checker"
 msgstr "Kontrola pravopisu"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:478
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
 msgid "Select the group of tags you want to use"
 msgstr "Vyberte skupinu tagů, kterou chcete používat"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:494
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:627
 msgid "Available Tag Lists"
 msgstr "Dostupné seznamy tagů"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:497
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:525
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:630
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:649
 msgid "Tags"
 msgstr "Tagy"
 
-#: ../plugins/taglist/gedit-taglist-plugin-panel.c:510
+#: ../plugins/taglist/gedit-taglist-plugin-panel.c:644
 msgid "Double-click on a tag to insert it in the current document"
 msgstr "Vložte tag do aktuálního dokumentu dvojitým kliknutím na něj"
 
@@ -3727,997 +3573,1146 @@ msgstr "URI ukotvení"
 msgid "Applet class file code"
 msgstr "Kód souboru třídy apletu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:12
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:13
+#, fuzzy
+msgid "Applet class file code (deprecated)"
+msgstr "Kód souboru třídy apletu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:14
 msgid "Array"
 msgstr "Pole"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:13
+#: ../plugins/taglist/HTML.tags.xml.in.h:15
 msgid "Associated information"
 msgstr "Asociované informace"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:14
+#: ../plugins/taglist/HTML.tags.xml.in.h:16
 msgid "Author info"
 msgstr "Informace o autorovi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:15
+#: ../plugins/taglist/HTML.tags.xml.in.h:17
 msgid "Axis related headers"
 msgstr "Hlavičky související s osami"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:16
-msgid "BGSound"
-msgstr "BGSound"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:17
+#: ../plugins/taglist/HTML.tags.xml.in.h:18
 msgid "Background color"
 msgstr "Barva pozadí"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:18
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:20
+#, fuzzy
+msgid "Background color (deprecated)"
+msgstr "Barva pozadí"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:21
 msgid "Background texture tile"
 msgstr "Dlaždice textury pozadí"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:19
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:23
+#, fuzzy
+msgid "Background texture tile (deprecated)"
+msgstr "Dlaždice textury pozadí"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:24
 msgid "Base URI"
 msgstr "URI základu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:20
+#: ../plugins/taglist/HTML.tags.xml.in.h:25
 msgid "Base font"
 msgstr "Základní písmo"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:21
-msgid "Behavior"
-msgstr "Chování"
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:27
+msgid "Base font (deprecated)"
+msgstr ""
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:22
-msgid "Blinking text"
-msgstr "Blikající text"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:24
+#: ../plugins/taglist/HTML.tags.xml.in.h:29
 msgid "Border"
 msgstr "Okraj"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:25
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:31
+msgid "Border (deprecated)"
+msgstr ""
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:32
 msgid "Border color"
 msgstr "Barva okraje"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:26
-msgid "Box"
-msgstr "Obdélník"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:27
+#: ../plugins/taglist/HTML.tags.xml.in.h:33
 msgid "Cell rowspan"
 msgstr "Rozsah řádků buněk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:28
+#: ../plugins/taglist/HTML.tags.xml.in.h:34
 msgid "Center"
 msgstr "Vycentrovat"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:29
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:36
+msgid "Center (deprecated)"
+msgstr ""
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:37
 msgid "Character encoding of linked resource"
 msgstr "Kódování znaků odkazovaného zdroje"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:30
+#: ../plugins/taglist/HTML.tags.xml.in.h:38
 msgid "Checked (state)"
 msgstr "Zaškrtnuto (stav)"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:31
+#: ../plugins/taglist/HTML.tags.xml.in.h:39
+#, fuzzy
+msgid "Checked state"
+msgstr "Zaškrtnuto (stav)"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:40
 msgid "Citation"
 msgstr "Citát"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:32
+#: ../plugins/taglist/HTML.tags.xml.in.h:41
 msgid "Cite reason for change"
 msgstr "Citovaný důvod změny"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:33
+#: ../plugins/taglist/HTML.tags.xml.in.h:42
 msgid "Class implementation ID"
 msgstr "ID implementace třídy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:34
+#: ../plugins/taglist/HTML.tags.xml.in.h:43
 msgid "Class list"
 msgstr "Seznam tříd"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:35
+#: ../plugins/taglist/HTML.tags.xml.in.h:44
 msgid "Clear text flow control"
 msgstr "Zrušit řízení toku textu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:36
+#: ../plugins/taglist/HTML.tags.xml.in.h:45
 msgid "Code content type"
 msgstr "Typ obsahu kód"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:37
+#: ../plugins/taglist/HTML.tags.xml.in.h:46
 msgid "Color of selected links"
 msgstr "Barva vybraných odkazů"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:38
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:48
+#, fuzzy
+msgid "Color of selected links (deprecated)"
+msgstr "Barva vybraných odkazů"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:49
 msgid "Column span"
 msgstr "Rozsah sloupců"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:39
+#: ../plugins/taglist/HTML.tags.xml.in.h:50
 msgid "Columns"
 msgstr "Sloupce"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:40
+#: ../plugins/taglist/HTML.tags.xml.in.h:51
 msgid "Comment"
 msgstr "Poznámka"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:41
+#: ../plugins/taglist/HTML.tags.xml.in.h:52
 msgid "Computer code fragment"
 msgstr "Fragment počítačového kódu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:42
+#: ../plugins/taglist/HTML.tags.xml.in.h:53
 msgid "Content scheme"
 msgstr "Schéma obsahu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:43
+#: ../plugins/taglist/HTML.tags.xml.in.h:54
 msgid "Content type"
 msgstr "Typ obsahu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:44
+#. The "type" attribute is deprecated for the "ol" tag only,
+#. since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#, fuzzy
+msgid "Content type (deprecated)"
+msgstr "Typ obsahu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:58
 msgid "Coordinates"
 msgstr "Souřadnice"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:45
+#: ../plugins/taglist/HTML.tags.xml.in.h:59
 msgid "DIV Style container"
 msgstr "Kontejner DIV Style"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:46
+#: ../plugins/taglist/HTML.tags.xml.in.h:60
 msgid "DIV container"
 msgstr "Kontejner DIV"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:47
+#: ../plugins/taglist/HTML.tags.xml.in.h:61
 msgid "Date and time of change"
 msgstr "Datum a čas změny"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:48
+#. NOTE: used in "object" tag
+#: ../plugins/taglist/HTML.tags.xml.in.h:63
 msgid "Declare flag"
 msgstr "Příznak deklarace"
 
 #. Translators: DEFER is an optional attribute of the <script> tag.
 #. It indicates that the script is not going to generate any document
 #. content. The browser can continue parsing and drawing the page.
-#: ../plugins/taglist/HTML.tags.xml.in.h:52
+#: ../plugins/taglist/HTML.tags.xml.in.h:67
 msgid "Defer attribute"
 msgstr "Atribut defer"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:53
+#: ../plugins/taglist/HTML.tags.xml.in.h:68
 msgid "Definition description"
 msgstr "Popis definice"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:54
+#: ../plugins/taglist/HTML.tags.xml.in.h:69
 msgid "Definition list"
 msgstr "Seznam definic"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:55
+#: ../plugins/taglist/HTML.tags.xml.in.h:70
 msgid "Definition term"
 msgstr "Definovaný pojem"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:56
+#: ../plugins/taglist/HTML.tags.xml.in.h:71
 msgid "Deleted text"
 msgstr "Odstraněný text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:57
+#: ../plugins/taglist/HTML.tags.xml.in.h:72
 msgid "Direction"
 msgstr "Směr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:58
+#: ../plugins/taglist/HTML.tags.xml.in.h:73
 msgid "Directionality"
 msgstr "Směr"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:59
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#, fuzzy
+msgid "Directionality (deprecated)"
+msgstr "Směr"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:76
 msgid "Directory list"
 msgstr "Výpis adresáře"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:60
+#: ../plugins/taglist/HTML.tags.xml.in.h:77
 msgid "Disabled"
 msgstr "Zakázáno"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:61
+#: ../plugins/taglist/HTML.tags.xml.in.h:78
 msgid "Document base"
 msgstr "Základ dokumentu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:62
+#: ../plugins/taglist/HTML.tags.xml.in.h:79
 msgid "Document body"
 msgstr "Tělo dokumentu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:63
+#: ../plugins/taglist/HTML.tags.xml.in.h:80
 msgid "Document head"
 msgstr "Hlavička dokumentu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:64
+#: ../plugins/taglist/HTML.tags.xml.in.h:81
 msgid "Document title"
 msgstr "Název dokumentu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:65
+#: ../plugins/taglist/HTML.tags.xml.in.h:82
 msgid "Document type"
 msgstr "Typ dokumentu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:66
+#: ../plugins/taglist/HTML.tags.xml.in.h:83
 msgid "Element ID"
 msgstr "ID Elementu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:67
+#: ../plugins/taglist/HTML.tags.xml.in.h:84
 msgid "Embedded object"
 msgstr "Vložený objekt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:68
+#: ../plugins/taglist/HTML.tags.xml.in.h:85
 #: ../plugins/taglist/Latex.tags.xml.in.h:9
 msgid "Emphasis"
 msgstr "Zvýraznění"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:69
+#: ../plugins/taglist/HTML.tags.xml.in.h:86
 msgid "Encode type"
 msgstr "Typ kódování"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:70
+#: ../plugins/taglist/HTML.tags.xml.in.h:87
 msgid "Figure"
 msgstr "Obrázek"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:71
+#: ../plugins/taglist/HTML.tags.xml.in.h:88
 msgid "Font face"
 msgstr "Řez písma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:72
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:90
+msgid "Font face (deprecated)"
+msgstr ""
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:91
 msgid "For label"
 msgstr "Popisek For"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:73
+#: ../plugins/taglist/HTML.tags.xml.in.h:92
 msgid "Forced line break"
 msgstr "Vynucený konec řádku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:74
+#: ../plugins/taglist/HTML.tags.xml.in.h:93
 msgid "Form"
 msgstr "Formulář"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:75
+#: ../plugins/taglist/HTML.tags.xml.in.h:94
 msgid "Form action handler"
 msgstr "Obsluha akce formuláře"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:76
+#: ../plugins/taglist/HTML.tags.xml.in.h:95
 msgid "Form control group"
 msgstr "Skupina ovládacího prvku formuláře"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:77
+#: ../plugins/taglist/HTML.tags.xml.in.h:96
 msgid "Form field label text"
 msgstr "Text popisku pole formuláře"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:78
+#: ../plugins/taglist/HTML.tags.xml.in.h:97
 msgid "Form input"
 msgstr "Vstup formuláře"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:79
+#: ../plugins/taglist/HTML.tags.xml.in.h:98
 msgid "Form input type"
 msgstr "Typ vstupu formuláře"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:80
+#: ../plugins/taglist/HTML.tags.xml.in.h:99
 msgid "Form method"
 msgstr "Metoda formuláře"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:81
+#: ../plugins/taglist/HTML.tags.xml.in.h:100
 msgid "Forward link"
 msgstr "Odkaz vpřed"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:82
+#: ../plugins/taglist/HTML.tags.xml.in.h:101
 msgid "Frame"
 msgstr "Rám"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:83
+#: ../plugins/taglist/HTML.tags.xml.in.h:102
 msgid "Frame render parts"
 msgstr "Rám vykreslovat části"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:84
+#: ../plugins/taglist/HTML.tags.xml.in.h:103
 msgid "Frame source"
 msgstr "Zdroj rámu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:85
+#: ../plugins/taglist/HTML.tags.xml.in.h:104
 msgid "Frame target"
 msgstr "Cíl rámu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:86
+#: ../plugins/taglist/HTML.tags.xml.in.h:105
 msgid "Frameborder"
 msgstr "Okraj rámu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:87
+#: ../plugins/taglist/HTML.tags.xml.in.h:106
 msgid "Frameset"
 msgstr "Sada rámů"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:88
+#: ../plugins/taglist/HTML.tags.xml.in.h:107
 msgid "Frameset columns"
 msgstr "Sloupce sady rámů"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:89
+#: ../plugins/taglist/HTML.tags.xml.in.h:108
 msgid "Frameset rows"
 msgstr "Řádky sady rámů"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:90
+#: ../plugins/taglist/HTML.tags.xml.in.h:109
 msgid "Framespacing"
 msgstr "Rozestup rámů"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:91
+#: ../plugins/taglist/HTML.tags.xml.in.h:110
 msgid "Generic embedded object"
 msgstr "Obecný vložený objekt"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:92
+#: ../plugins/taglist/HTML.tags.xml.in.h:111
 msgid "Generic metainformation"
 msgstr "Obecné metainformace"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:93
+#: ../plugins/taglist/HTML.tags.xml.in.h:112
 msgid "Generic span"
 msgstr "Obecný rozsah"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:94
+#: ../plugins/taglist/HTML.tags.xml.in.h:113
 msgid "HREF URI"
 msgstr "URI HREF"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:95
+#: ../plugins/taglist/HTML.tags.xml.in.h:114
 msgid "HTML - Special Characters"
 msgstr "HTML - Speciální znaky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:96
+#: ../plugins/taglist/HTML.tags.xml.in.h:115
 msgid "HTML - Tags"
 msgstr "HTML - Tagy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:97
+#: ../plugins/taglist/HTML.tags.xml.in.h:116
 msgid "HTML root element"
 msgstr "Kořenový element HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:98
+#: ../plugins/taglist/HTML.tags.xml.in.h:117
 msgid "HTML version"
 msgstr "Verze HTML"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:99
+#: ../plugins/taglist/HTML.tags.xml.in.h:118
 msgid "HTTP header name"
 msgstr "Název hlavičky HTTP"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:100
+#: ../plugins/taglist/HTML.tags.xml.in.h:119
 msgid "Header cell ID's"
 msgstr "ID buněk hlavičky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:101
+#: ../plugins/taglist/HTML.tags.xml.in.h:120
 msgid "Heading"
 msgstr "Nadpis"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:102
+#: ../plugins/taglist/HTML.tags.xml.in.h:121
 msgid "Heading 1"
 msgstr "Nadpis 1"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:103
+#: ../plugins/taglist/HTML.tags.xml.in.h:122
 msgid "Heading 2"
 msgstr "Nadpis 2"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:104
+#: ../plugins/taglist/HTML.tags.xml.in.h:123
 msgid "Heading 3"
 msgstr "Nadpis 3"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:105
+#: ../plugins/taglist/HTML.tags.xml.in.h:124
 msgid "Heading 4"
 msgstr "Nadpis 4"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:106
+#: ../plugins/taglist/HTML.tags.xml.in.h:125
 msgid "Heading 5"
 msgstr "Nadpis 5"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:107
+#: ../plugins/taglist/HTML.tags.xml.in.h:126
 msgid "Heading 6"
 msgstr "Nadpis 6"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:108
+#: ../plugins/taglist/HTML.tags.xml.in.h:127
 msgid "Height"
 msgstr "Výška"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:109
+#: ../plugins/taglist/HTML.tags.xml.in.h:128
 msgid "Horizontal rule"
 msgstr "Vodorovné pravítko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:110
+#: ../plugins/taglist/HTML.tags.xml.in.h:129
 msgid "Horizontal space"
 msgstr "Vodorovné místo"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:111
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#, fuzzy
+msgid "Horizontal space (deprecated)"
+msgstr "Vodorovné místo"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#, fuzzy
+msgid "HttP header name"
+msgstr "Název hlavičky HTTP"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:133
 msgid "I18N BiDi over-ride"
 msgstr "Změna I18N BiDi"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:112
+#: ../plugins/taglist/HTML.tags.xml.in.h:134
 msgid "Image"
 msgstr "Obrázek"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:113
+#: ../plugins/taglist/HTML.tags.xml.in.h:135
 msgid "Image map"
 msgstr "Mapa obrázku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:114
+#: ../plugins/taglist/HTML.tags.xml.in.h:136
 msgid "Image map area"
 msgstr "Oblast mapy obrázku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:115
+#: ../plugins/taglist/HTML.tags.xml.in.h:137
 msgid "Image map name"
 msgstr "Název mapy obrázku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:116
+#: ../plugins/taglist/HTML.tags.xml.in.h:138
 msgid "Image source"
 msgstr "Zdroj obrázku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:117
+#: ../plugins/taglist/HTML.tags.xml.in.h:139
 msgid "Inline frame"
 msgstr "Vložený rám"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:118
+#: ../plugins/taglist/HTML.tags.xml.in.h:140
 msgid "Inline layer"
 msgstr "Vložená vrstva"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:119
+#: ../plugins/taglist/HTML.tags.xml.in.h:141
 msgid "Inserted text"
 msgstr "Vložený text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:120
+#: ../plugins/taglist/HTML.tags.xml.in.h:142
 msgid "Instance definition"
 msgstr "Definice instance"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:121
+#: ../plugins/taglist/HTML.tags.xml.in.h:143
 msgid "Italic text"
 msgstr "Text kurzívou"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:122
+#: ../plugins/taglist/HTML.tags.xml.in.h:144
 msgid "Java applet"
 msgstr "Aplet v Javě"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:123
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#, fuzzy
+msgid "Java applet (deprecated)"
+msgstr "Aplet v Javě"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:147
 msgid "Label"
 msgstr "Popisek"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:124
+#: ../plugins/taglist/HTML.tags.xml.in.h:148
 msgid "Language code"
 msgstr "Kód jazyka"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:125
+#: ../plugins/taglist/HTML.tags.xml.in.h:149
 msgid "Large text style"
 msgstr "Styl velkého textu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:126
+#: ../plugins/taglist/HTML.tags.xml.in.h:150
 msgid "Layer"
 msgstr "Vrstva"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:127
+#: ../plugins/taglist/HTML.tags.xml.in.h:151
 msgid "Link color"
 msgstr "Barva odkazu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:128
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#, fuzzy
+msgid "Link color (deprecated)"
+msgstr "Barva odkazu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:154
 msgid "List item"
 msgstr "Položka seznamu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:129
+#: ../plugins/taglist/HTML.tags.xml.in.h:155
 msgid "List of MIME types for file upload"
 msgstr "Seznam typů MIME pro odesílání souboru"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:130
+#: ../plugins/taglist/HTML.tags.xml.in.h:156
 msgid "List of supported character sets"
 msgstr "Seznam podporovaných znakových sad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:131
+#: ../plugins/taglist/HTML.tags.xml.in.h:157
 msgid "Listing"
 msgstr "Výpis"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:132
+#: ../plugins/taglist/HTML.tags.xml.in.h:158
 msgid "Local change to font"
 msgstr "Místní změna písma"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:133
+#: ../plugins/taglist/HTML.tags.xml.in.h:159
 msgid "Long description link"
 msgstr "Odkaz na dlouhý popis"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:134
+#: ../plugins/taglist/HTML.tags.xml.in.h:160
 msgid "Long quotation"
 msgstr "Dlouhý citát"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:135
+#: ../plugins/taglist/HTML.tags.xml.in.h:161
 msgid "Mail link"
 msgstr "Odkaz na poštu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:136
+#. Supported in XHTML 1.0 Frameset DTD only.
+#: ../plugins/taglist/HTML.tags.xml.in.h:163
 msgid "Margin pixel height"
 msgstr "Výška okraje v pixelech"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:137
+#. Supported in XHTML 1.0 Frameset DTD only.
+#: ../plugins/taglist/HTML.tags.xml.in.h:165
 msgid "Margin pixel width"
 msgstr "Šířka okraje v pixelech"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:138
+#: ../plugins/taglist/HTML.tags.xml.in.h:166
 msgid "Marquee"
 msgstr "Marquee"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:139
+#: ../plugins/taglist/HTML.tags.xml.in.h:167
 msgid "Maximum length of text field"
 msgstr "Maximální délka textového pole"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:140
+#. Here I take some liberties: There's no mandatory attributes,
+#. but those are most common, and will likely be used.
+#: ../plugins/taglist/HTML.tags.xml.in.h:170
 msgid "Media-independent link"
 msgstr "Odkaz nezávislý na médiu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:141
+#: ../plugins/taglist/HTML.tags.xml.in.h:171
 msgid "Menu list"
 msgstr "Seznam nabídek"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:142
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:173
+msgid "Menu list (deprecated)"
+msgstr ""
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:174
 msgid "Multi-line text field"
 msgstr "Víceřádkové textové pole"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:143
+#: ../plugins/taglist/HTML.tags.xml.in.h:175
 msgid "Multicolumn"
 msgstr "Vícesloupcový"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:144
+#: ../plugins/taglist/HTML.tags.xml.in.h:176
 msgid "Multiple"
 msgstr "Více"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:145
+#: ../plugins/taglist/HTML.tags.xml.in.h:177
 msgid "Name"
 msgstr "Název"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:146
+#: ../plugins/taglist/HTML.tags.xml.in.h:178
 msgid "Named property value"
 msgstr "Hodnota pojmenované vlastnosti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:147
+#: ../plugins/taglist/HTML.tags.xml.in.h:179
 msgid "Next ID"
 msgstr "Následující ID"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:148
+#: ../plugins/taglist/HTML.tags.xml.in.h:180
 msgid "No URI"
 msgstr "Žádné URI"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:149
+#: ../plugins/taglist/HTML.tags.xml.in.h:181
 msgid "No embedded objects"
 msgstr "Žádné vložené objekty"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:150
+#: ../plugins/taglist/HTML.tags.xml.in.h:182
 msgid "No frames"
 msgstr "Žádné rámy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:151
+#: ../plugins/taglist/HTML.tags.xml.in.h:183
 msgid "No layers"
 msgstr "Žádné vrstvy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:152
+#: ../plugins/taglist/HTML.tags.xml.in.h:184
 msgid "No line break"
 msgstr "Žádný konec řádku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:153
+#: ../plugins/taglist/HTML.tags.xml.in.h:185
 msgid "No resize"
 msgstr "Žádné resize"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:154
+#: ../plugins/taglist/HTML.tags.xml.in.h:186
 msgid "No script"
 msgstr "Žádný skript"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:155
+#: ../plugins/taglist/HTML.tags.xml.in.h:187
 msgid "No shade"
 msgstr "Žádný stín"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:156
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:189
+msgid "No shade (deprecated)"
+msgstr ""
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:190
 msgid "No word wrap"
 msgstr "Žádné lámání řádků"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:157
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#, fuzzy
+msgid "No word wrap (deprecated)"
+msgstr "Žádné lámání řádků"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:193
+msgid "Non-breaking space"
+msgstr ""
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:194
 msgid "Note"
 msgstr "Poznámka"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:158
+#: ../plugins/taglist/HTML.tags.xml.in.h:195
 msgid "Object applet file"
 msgstr "Soubor apletu objektu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:159
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:197
+#, fuzzy
+msgid "Object applet file (deprecated)"
+msgstr "Soubor apletu objektu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:198
 msgid "Object data reference"
 msgstr "Odkaz na data objektu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:160
+#: ../plugins/taglist/HTML.tags.xml.in.h:199
 msgid "Offset for alignment character"
 msgstr "Posun pro znak zarovnání"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:161
+#: ../plugins/taglist/HTML.tags.xml.in.h:200
 msgid "OnBlur event"
 msgstr "Událost OnBlur"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:162
+#: ../plugins/taglist/HTML.tags.xml.in.h:201
 msgid "OnChange event"
 msgstr "Událost OnClick"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:163
+#: ../plugins/taglist/HTML.tags.xml.in.h:202
 msgid "OnClick event"
 msgstr "Událost OnClick"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:164
+#: ../plugins/taglist/HTML.tags.xml.in.h:203
 msgid "OnDblClick event"
 msgstr "Událost OnDblClick"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:165
+#: ../plugins/taglist/HTML.tags.xml.in.h:204
 msgid "OnFocus event"
 msgstr "Událost OnFocus"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:166
+#: ../plugins/taglist/HTML.tags.xml.in.h:205
 msgid "OnKeyDown event"
 msgstr "Událost OnKeyDown"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:167
+#: ../plugins/taglist/HTML.tags.xml.in.h:206
 msgid "OnKeyPress event"
 msgstr "Událost OnKeyPress"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:168
+#: ../plugins/taglist/HTML.tags.xml.in.h:207
 msgid "OnKeyUp event"
 msgstr "Událost OnKeyUp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:169
+#: ../plugins/taglist/HTML.tags.xml.in.h:208
 msgid "OnLoad event"
 msgstr "Událost OnLoad"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:170
+#: ../plugins/taglist/HTML.tags.xml.in.h:209
 msgid "OnMouseDown event"
 msgstr "Událost OnMouseDown"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:171
+#: ../plugins/taglist/HTML.tags.xml.in.h:210
 msgid "OnMouseMove event"
 msgstr "Událost OnMouseMove"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:172
+#: ../plugins/taglist/HTML.tags.xml.in.h:211
 msgid "OnMouseOut event"
 msgstr "Událost OnMouseOut"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:173
+#: ../plugins/taglist/HTML.tags.xml.in.h:212
 msgid "OnMouseOver event"
 msgstr "Událost OnMouseOver"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:174
+#: ../plugins/taglist/HTML.tags.xml.in.h:213
 msgid "OnMouseUp event"
 msgstr "Událost OnMouseUp"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:175
+#: ../plugins/taglist/HTML.tags.xml.in.h:214
 msgid "OnReset event"
 msgstr "Událost OnReset"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:176
+#: ../plugins/taglist/HTML.tags.xml.in.h:215
 msgid "OnSelect event"
 msgstr "Událost OnSelect"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:177
+#: ../plugins/taglist/HTML.tags.xml.in.h:216
 msgid "OnSubmit event"
 msgstr "Událost OnSubmit"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:178
+#: ../plugins/taglist/HTML.tags.xml.in.h:217
 msgid "OnUnload event"
 msgstr "Událost OnUnload"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:179
+#: ../plugins/taglist/HTML.tags.xml.in.h:218
 msgid "Option group"
 msgstr "Skupina možností"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:180
+#: ../plugins/taglist/HTML.tags.xml.in.h:219
 msgid "Option selector"
 msgstr "Výběr možnosti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:181
+#: ../plugins/taglist/HTML.tags.xml.in.h:220
 msgid "Ordered list"
 msgstr "Seřazený seznam"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:182
+#: ../plugins/taglist/HTML.tags.xml.in.h:221
 msgid "Output media"
 msgstr "Výstupní médium"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:183
+#: ../plugins/taglist/HTML.tags.xml.in.h:222
 msgid "Paragraph"
 msgstr "Odstavec"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:184
+#: ../plugins/taglist/HTML.tags.xml.in.h:223
 msgid "Paragraph class"
 msgstr "Třída odstavce"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:185
+#: ../plugins/taglist/HTML.tags.xml.in.h:224
 msgid "Paragraph style"
 msgstr "Styl odstavce"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:186
+#: ../plugins/taglist/HTML.tags.xml.in.h:225
 msgid "Preformatted listing"
 msgstr "Předformátovaný výpis"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:187
+#: ../plugins/taglist/HTML.tags.xml.in.h:226
 msgid "Preformatted text"
 msgstr "Předformátovaný text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:188
+#: ../plugins/taglist/HTML.tags.xml.in.h:227
 msgid "Profile metainfo dictionary"
 msgstr "Slovník metainformací o profilu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:189
+#: ../plugins/taglist/HTML.tags.xml.in.h:228
 msgid "Prompt message"
 msgstr "Zpráva výzvy"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:190
+#: ../plugins/taglist/HTML.tags.xml.in.h:229
 msgid "Push button"
 msgstr "Tlačítko"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:191
+#: ../plugins/taglist/HTML.tags.xml.in.h:230
 msgid "Quote"
 msgstr "Citát"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:192
+#: ../plugins/taglist/HTML.tags.xml.in.h:231
 msgid "Range"
 msgstr "Rozsah"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:193
+#: ../plugins/taglist/HTML.tags.xml.in.h:232
 msgid "ReadOnly text and password"
 msgstr "Text a heslo jen pro čtení"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:194
+#: ../plugins/taglist/HTML.tags.xml.in.h:233
 msgid "Reduced spacing"
 msgstr "Zmenšené mezery"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:195
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:235
+#, fuzzy
+msgid "Reduced spacing (deprecated)"
+msgstr "Zmenšené mezery"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:236
 msgid "Reverse link"
 msgstr "Obrácený odkaz"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:196
+#: ../plugins/taglist/HTML.tags.xml.in.h:237
 msgid "Root"
 msgstr "Kořen"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:197
+#: ../plugins/taglist/HTML.tags.xml.in.h:238
 msgid "Rows"
 msgstr "Řádků"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:198
+#: ../plugins/taglist/HTML.tags.xml.in.h:239
 msgid "Rulings between rows and columns"
 msgstr "Čáry mezi řádky a sloupci"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:199
+#: ../plugins/taglist/HTML.tags.xml.in.h:240
 msgid "Sample program output, scripts"
 msgstr "Ukázkový výstup programu, skripty"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:200
+#: ../plugins/taglist/HTML.tags.xml.in.h:241
 msgid "Scope covered by header cells"
 msgstr "Rozsah pokrytý buňkami hlavičky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:201
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:243
 msgid "Script language name"
 msgstr "Název skriptovacího jazyka"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:202
+#: ../plugins/taglist/HTML.tags.xml.in.h:244
 msgid "Script statments"
 msgstr "Příkazy skriptu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:203
+#: ../plugins/taglist/HTML.tags.xml.in.h:245
 msgid "Scrollbar"
 msgstr "Posuvná lišta"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:204
+#: ../plugins/taglist/HTML.tags.xml.in.h:246
 msgid "Selectable option"
 msgstr "Vybratelná možnost"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:205
+#: ../plugins/taglist/HTML.tags.xml.in.h:247
 msgid "Selected"
 msgstr "Vybráno"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:206
+#: ../plugins/taglist/HTML.tags.xml.in.h:248
 msgid "Server-side image map"
 msgstr "Mapa obrázku na straně serveru"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:207
+#: ../plugins/taglist/HTML.tags.xml.in.h:249
 msgid "Shape"
 msgstr "Tvar"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:208
+#: ../plugins/taglist/HTML.tags.xml.in.h:250
 msgid "Short inline quotation"
 msgstr "Krátký vložený citát"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:209
+#: ../plugins/taglist/HTML.tags.xml.in.h:251
 msgid "Single line prompt"
 msgstr "Výzva na jednom řádku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:210
+#: ../plugins/taglist/HTML.tags.xml.in.h:252
 msgid "Size"
 msgstr "Velikost"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:211
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:254
+msgid "Size (deprecated)"
+msgstr ""
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:255
 msgid "Small text style"
 msgstr "Styl malého textu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:212
+#: ../plugins/taglist/HTML.tags.xml.in.h:256
 msgid "Soft line break"
 msgstr "Měkký konec řádku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:213
+#: ../plugins/taglist/HTML.tags.xml.in.h:257
 msgid "Sound"
 msgstr "Zvuk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:214
+#: ../plugins/taglist/HTML.tags.xml.in.h:258
 msgid "Source"
 msgstr "Zdroj"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:215
-msgid "Space"
-msgstr "Mezera"
-
-#: ../plugins/taglist/HTML.tags.xml.in.h:216
+#: ../plugins/taglist/HTML.tags.xml.in.h:259
 msgid "Space separated archive list"
 msgstr "Mezerami oddělený seznam archívu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:217
+#: ../plugins/taglist/HTML.tags.xml.in.h:260
 msgid "Spacer"
 msgstr "Rozestup"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:218
+#: ../plugins/taglist/HTML.tags.xml.in.h:261
 msgid "Spacing between cells"
 msgstr "Rozestup mezi buňkami"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:219
+#: ../plugins/taglist/HTML.tags.xml.in.h:262
 msgid "Spacing within cells"
 msgstr "Rozestup v buňkách"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:220
+#: ../plugins/taglist/HTML.tags.xml.in.h:263
 msgid "Span"
 msgstr "Rozsah"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:221
+#: ../plugins/taglist/HTML.tags.xml.in.h:264
 msgid "Square root"
 msgstr "Odmocnina"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:222
+#: ../plugins/taglist/HTML.tags.xml.in.h:265
 msgid "Standby load msg"
 msgstr "Zpráva při čekání na načtení"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:223
+#: ../plugins/taglist/HTML.tags.xml.in.h:266
 msgid "Starting sequence number"
 msgstr "Počáteční číslo posloupnosti"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:224
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:268
+#, fuzzy
+msgid "Starting sequence number (deprecated)"
+msgstr "Počáteční číslo posloupnosti"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:269
 msgid "Strike-through text"
 msgstr "Přeškrtnutý text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:225
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:271
+#, fuzzy
+msgid "Strike-through text (deprecated)"
+msgstr "Styl přeškrtnutého textu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:272
 msgid "Strike-through text style"
 msgstr "Styl přeškrtnutého textu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:226
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:274
+#, fuzzy
+msgid "Strike-through text style (deprecated)"
+msgstr "Styl přeškrtnutého textu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:275
 msgid "Strong emphasis"
 msgstr "Silné zdůraznění"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:227
+#: ../plugins/taglist/HTML.tags.xml.in.h:276
 msgid "Style info"
 msgstr "Informace o stylu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:228
+#: ../plugins/taglist/HTML.tags.xml.in.h:277
 msgid "Subscript"
 msgstr "Dolní index"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:229
+#: ../plugins/taglist/HTML.tags.xml.in.h:278
 msgid "Superscript"
 msgstr "Horní index"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:230
+#: ../plugins/taglist/HTML.tags.xml.in.h:279
 msgid "Tab order position"
 msgstr "Pozice v pořadí Tab"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:231
+#: ../plugins/taglist/HTML.tags.xml.in.h:280
 msgid "Table"
 msgstr "Tabulka"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:232
+#: ../plugins/taglist/HTML.tags.xml.in.h:281
 msgid "Table body"
 msgstr "Tělo tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:233
+#: ../plugins/taglist/HTML.tags.xml.in.h:282
 msgid "Table caption"
 msgstr "Nadpis tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:234
+#: ../plugins/taglist/HTML.tags.xml.in.h:283
 msgid "Table column group properties"
 msgstr "Vlastnosti skupiny sloupců tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:235
+#: ../plugins/taglist/HTML.tags.xml.in.h:284
 msgid "Table column properties"
 msgstr "Vlastnosti sloupce tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:236
+#: ../plugins/taglist/HTML.tags.xml.in.h:285
 msgid "Table data cell"
 msgstr "Buňka dat tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:237
+#: ../plugins/taglist/HTML.tags.xml.in.h:286
 msgid "Table footer"
 msgstr "Patička tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:238
+#: ../plugins/taglist/HTML.tags.xml.in.h:287
 msgid "Table header"
 msgstr "Hlavička tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:239
+#: ../plugins/taglist/HTML.tags.xml.in.h:288
 msgid "Table header cell"
 msgstr "Buňka hlavičky tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:240
+#: ../plugins/taglist/HTML.tags.xml.in.h:289
 msgid "Table row"
 msgstr "Řádek tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:241
+#: ../plugins/taglist/HTML.tags.xml.in.h:290
 msgid "Table summary"
 msgstr "Souhrn tabulky"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:242
+#: ../plugins/taglist/HTML.tags.xml.in.h:291
 msgid "Target - Blank"
 msgstr "Cíl - prázdný"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:243
+#: ../plugins/taglist/HTML.tags.xml.in.h:292
 msgid "Target - Parent"
 msgstr "Cíl - rodič"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:244
+#: ../plugins/taglist/HTML.tags.xml.in.h:293
 msgid "Target - Self"
 msgstr "Cíl - tentýž"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:245
+#: ../plugins/taglist/HTML.tags.xml.in.h:294
 msgid "Target - Top"
 msgstr "Cíl - vršek"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:246
+#: ../plugins/taglist/HTML.tags.xml.in.h:295
 msgid "Teletype or monospace text style"
 msgstr "Dálnopis nebo neproporcionální styl textu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:247
+#: ../plugins/taglist/HTML.tags.xml.in.h:296
 msgid "Text"
 msgstr "Text"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:248
+#: ../plugins/taglist/HTML.tags.xml.in.h:297
 msgid "Text color"
 msgstr "Barva textu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:249
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:299
+#, fuzzy
+msgid "Text color (deprecated)"
+msgstr "Barva textu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:300
 msgid "Text entered by user"
 msgstr "Text zadaný uživatelem"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:250
+#: ../plugins/taglist/HTML.tags.xml.in.h:301
 msgid "Title"
 msgstr "Nadpis"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:251
+#: ../plugins/taglist/HTML.tags.xml.in.h:302
 msgid "Topmargin in pixels"
 msgstr "Horní okraj v pixelech"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:252
+#: ../plugins/taglist/HTML.tags.xml.in.h:303
 msgid "URL"
 msgstr "URL"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:253
+#: ../plugins/taglist/HTML.tags.xml.in.h:304
 msgid "Underlined text style"
 msgstr "Styl podtrženého textu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:254
+#: ../plugins/taglist/HTML.tags.xml.in.h:305
 msgid "Unordered list"
 msgstr "Neseřazený seznam"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:255
+#: ../plugins/taglist/HTML.tags.xml.in.h:306
 msgid "Use image map"
 msgstr "Používat mapu obrázku"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:256
+#: ../plugins/taglist/HTML.tags.xml.in.h:307
 msgid "Value"
 msgstr "Hodnota"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:257
+#: ../plugins/taglist/HTML.tags.xml.in.h:308
 msgid "Value interpretation"
 msgstr "Interpretace hodnoty"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:258
+#: ../plugins/taglist/HTML.tags.xml.in.h:309
 msgid "Variable or program argument"
 msgstr "Proměnná nebo parametr programu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:259
+#: ../plugins/taglist/HTML.tags.xml.in.h:310
 msgid "Vertical cell alignment"
 msgstr "Svislé zarovnání buněk"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:260
+#: ../plugins/taglist/HTML.tags.xml.in.h:311
 msgid "Vertical space"
 msgstr "Svislé místo"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:261
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:313
+#, fuzzy
+msgid "Vertical space (deprecated)"
+msgstr "Svislé místo"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:314
 msgid "Visited link color"
 msgstr "Barva navštíveného odkazu"
 
-#: ../plugins/taglist/HTML.tags.xml.in.h:262
+#. Deprecated since HTML 4.01, not supported in XHTML 1.0 Strict DTD.
+#: ../plugins/taglist/HTML.tags.xml.in.h:316
+#, fuzzy
+msgid "Visited link color (deprecated)"
+msgstr "Barva navštíveného odkazu"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:317
 msgid "Width"
 msgstr "Šířka"
+
+#: ../plugins/taglist/HTML.tags.xml.in.h:318
+#, fuzzy
+msgid "XHTML 1.0 - Tags"
+msgstr "HTML - Tagy"
 
 #: ../plugins/taglist/Latex.tags.xml.in.h:1
 msgid "Bibliography (cite)"
@@ -5086,6 +5081,11 @@ msgstr "předcházející-sourozenec"
 #: ../plugins/taglist/XSLT.tags.xml.in.h:16
 msgid "self"
 msgstr "self"
+
+#: ../plugins/taglist/XUL.tags.xml.in.h:1
+#, fuzzy
+msgid "XUL - Tags"
+msgstr "HTML - Tagy"
 
 #: ../plugins/time/gedit-time-plugin.c:183
 msgid "In_sert Date and Time..."
