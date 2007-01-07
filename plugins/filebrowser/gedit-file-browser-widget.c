@@ -1177,7 +1177,7 @@ create_filter (GeditFileBrowserWidget * obj)
 	GtkWidget *vbox;
 	GtkWidget *entry;
 
-	expander = gtk_expander_new_with_mnemonic (_("_Advanced filtering"));
+	expander = gtk_expander_new_with_mnemonic (_("_Match Filename"));
 	gtk_widget_show (expander);
 	gtk_box_pack_start (GTK_BOX (obj), expander, FALSE, FALSE, 0);
 
