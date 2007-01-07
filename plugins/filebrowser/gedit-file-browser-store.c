@@ -1946,7 +1946,7 @@ model_fill (GeditFileBrowserStore * model, FileBrowserNode * node,
 	    GtkTreePath * path)
 {
 	gboolean free_path = FALSE;
-	GtkTreeIter iter;
+	GtkTreeIter iter = {0,};
 	GSList *item;
 	FileBrowserNode *child;
 
@@ -2258,25 +2258,82 @@ model_find_node (GeditFileBrowserStore *model,
 	return NULL;
 }
 
-static int
-progress_sync_callback (GnomeVFSXferProgressInfo * progress_info,
-			gpointer data)
+typedef struct {
+	GeditFileBrowserStore *model;
+	gchar *uri;
+} IdleDelete;
+
+static void
+idle_delete_free (IdleDelete *data)
 {
+	g_free (data->uri);
+	g_free (data);
+}
+
+static gboolean
+uri_deleted (IdleDelete *data)
+{
+	GnomeVFSURI *guri;
 	FileBrowserNode *node;
+
+	guri = gnome_vfs_uri_new (data->uri);
+	node = model_find_node (data->model, NULL, guri);
+	    	
+	if (node)
+		model_remove_node (data->model, node, NULL, TRUE);
+		
+	gnome_vfs_uri_unref (guri);
+	
+	return FALSE;
+}
+
+static int
+progress_sync_callback_trash (GnomeVFSXferProgressInfo * progress_info,
+			      gpointer data)
+{
 	AsyncHandle *ahandle = (AsyncHandle *) (data);
-	GnomeVFSURI *uri;
+	IdleDelete *delete;
 
 	if (!ahandle->alive)
 		return 1;
 
 	if (progress_info->status == GNOME_VFS_XFER_PROGRESS_STATUS_OK && 
-	    (progress_info->phase == GNOME_VFS_XFER_PHASE_MOVING || 
-	     progress_info->phase == GNOME_VFS_XFER_PHASE_DELETESOURCE)) {
-	    	uri = gnome_vfs_uri_new (progress_info->source_name);
-	    	node = model_find_node (ahandle->model, NULL, uri);
-	    	
-	    	if (node)
-			model_remove_node (ahandle->model, node, NULL, TRUE);
+	    (progress_info->phase == GNOME_VFS_XFER_PHASE_DELETESOURCE ||
+	    progress_info->phase == GNOME_VFS_XFER_PHASE_MOVING)) {
+	    	delete = g_new(IdleDelete, 1);
+	    	delete->model = ahandle->model;
+	    	delete->uri = g_strdup (progress_info->source_name);
+
+		g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, 
+				 (GSourceFunc)uri_deleted,
+				 delete,
+				 (GDestroyNotify)idle_delete_free);
+	}
+
+	return 1;
+}
+
+
+static int
+progress_sync_callback_delete (GnomeVFSXferProgressInfo * progress_info,
+			       gpointer data)
+{
+	AsyncHandle *ahandle = (AsyncHandle *) (data);
+	IdleDelete *delete;
+
+	if (!ahandle->alive)
+		return 1;
+
+	if (progress_info->status == GNOME_VFS_XFER_PROGRESS_STATUS_OK && 
+	    progress_info->phase == GNOME_VFS_XFER_PHASE_DELETESOURCE) {
+	    	delete = g_new(IdleDelete, 1);
+	    	delete->model = ahandle->model;
+	    	delete->uri = g_strdup (progress_info->source_name);
+
+		g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, 
+				 (GSourceFunc)uri_deleted,
+				 delete,
+				 (GDestroyNotify)idle_delete_free);
 	}
 
 	return 1;
@@ -2840,6 +2897,7 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 	GeditFileBrowserStoreResult result = GEDIT_FILE_BROWSER_STORE_RESULT_OK;
 	GtkTreePath *prev = NULL;
 	GtkTreePath *path;
+	GnomeVFSXferProgressCallback sync_cb;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
 	
@@ -2911,11 +2969,13 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 	
 	if (trash) {
 		options =
-		    GNOME_VFS_XFER_RECURSIVE |
-		    GNOME_VFS_XFER_REMOVESOURCE;
+			GNOME_VFS_XFER_RECURSIVE |
+			GNOME_VFS_XFER_REMOVESOURCE;
+		sync_cb = progress_sync_callback_trash;
 	} else {
 		options =
 			GNOME_VFS_XFER_DELETE_ITEMS | GNOME_VFS_XFER_RECURSIVE;
+		sync_cb = progress_sync_callback_delete;
 	}
 
 	gnome_vfs_async_xfer (&(handle->handle), uris, target,
@@ -2924,7 +2984,7 @@ gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
 			      GNOME_VFS_XFER_OVERWRITE_MODE_REPLACE,
 			      GNOME_VFS_PRIORITY_DEFAULT,
 			      progress_update_callback,
-			      handle, progress_sync_callback, handle);
+			      handle, sync_cb, handle);
 
 	model->priv->async_handles =
 	    g_slist_prepend (model->priv->async_handles, handle);
