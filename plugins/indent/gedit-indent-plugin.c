@@ -271,7 +271,7 @@ impl_activate (GeditPlugin *plugin,
 			       "Indent", 
 			       "Indent",
 			       GTK_UI_MANAGER_MENUITEM, 
-			       TRUE);
+			       FALSE);
 
 	gtk_ui_manager_add_ui (manager, 
 			       data->ui_id, 
