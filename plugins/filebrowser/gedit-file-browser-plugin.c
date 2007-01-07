@@ -41,6 +41,8 @@
 #define FILE_BROWSER_BASE_KEY 		"/apps/gedit-2/plugins/filebrowser"
 #define NAUTILUS_CLICK_POLICY_BASE_KEY 	"/apps/nautilus/preferences"
 #define NAUTILUS_CLICK_POLICY_KEY	"click_policy"
+#define NAUTILUS_ENABLE_DELETE_KEY	"enable_delete"
+#define NAUTILUS_CONFIRM_TRASH_KEY	"confirm_trash"
 
 #define GEDIT_FILE_BROWSER_PLUGIN_GET_PRIVATE(object)	(G_TYPE_INSTANCE_GET_PRIVATE ((object), GEDIT_TYPE_FILE_BROWSER_PLUGIN, GeditFileBrowserPluginPrivate))
 
@@ -57,8 +59,11 @@ typedef struct _GeditFileBrowserPluginData
 	GtkActionGroup	       * single_selection_action_group;
 	gboolean	         auto_root;
 	gulong                   end_loading_handle;
-	
+	gboolean		 confirm_trash;
+
 	guint			 click_policy_handle;
+	guint			 enable_delete_handle;
+	guint			 confirm_trash_handle;
 } GeditFileBrowserPluginData;
 
 static void on_uri_activated_cb          (GeditFileBrowserWidget * widget,
@@ -294,10 +299,49 @@ on_click_policy_changed (GConfClient *client,
 }
 
 static void
-install_click_policy (GeditFileBrowserPluginData *data)
+on_enable_delete_changed (GConfClient *client,
+		 	  guint cnxn_id,
+			  GConfEntry *entry,
+			  gpointer user_data)
+{
+	GConfValue *value;
+	GeditFileBrowserPluginData *data;
+	gboolean enable = FALSE;
+
+	data = (GeditFileBrowserPluginData *)(user_data);	
+	value = gconf_entry_get_value (entry);
+	
+	if (value && value->type == GCONF_VALUE_BOOL)
+		enable = gconf_value_get_bool (value);
+
+	g_object_set (G_OBJECT (data->tree_widget), "enable-delete", enable, NULL);
+}
+
+static void
+on_confirm_trash_changed (GConfClient *client,
+		 	  guint cnxn_id,
+			  GConfEntry *entry,
+			  gpointer user_data)
+{
+	GConfValue *value;
+	GeditFileBrowserPluginData *data;
+	gboolean enable = FALSE;
+
+	data = (GeditFileBrowserPluginData *)(user_data);	
+	value = gconf_entry_get_value (entry);
+	
+	if (value && value->type == GCONF_VALUE_BOOL)
+		enable = gconf_value_get_bool (value);
+
+	data->confirm_trash = enable;
+}
+
+static void
+install_nautilus_prefs (GeditFileBrowserPluginData *data)
 {
 	GConfClient * client;
-	gchar *click_policy;
+	gchar *pref;
+	gboolean prefb;
 	client = gconf_client_get_default ();
 	GeditFileBrowserViewClickPolicy policy;
 	GeditFileBrowserView *view;
@@ -305,22 +349,22 @@ install_click_policy (GeditFileBrowserPluginData *data)
 	if (!client)
 		return;
 
-	/* Get filter_mode */
-	click_policy = gconf_client_get_string (client,
-	                                       NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_CLICK_POLICY_KEY,
-	                                       NULL);
+	gconf_client_add_dir (client, 
+			      NAUTILUS_CLICK_POLICY_BASE_KEY,
+			      GCONF_CLIENT_PRELOAD_NONE,
+			      NULL);
+
+	/* Get click_policy */
+	pref = gconf_client_get_string (client,
+	                                NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_CLICK_POLICY_KEY,
+	                                NULL);
 	
-	policy = click_policy_from_string (click_policy);
+	policy = click_policy_from_string (pref);
 	
 	view = gedit_file_browser_widget_get_browser_view (data->tree_widget);
 	gedit_file_browser_view_set_click_policy (view, policy);
 	
-	if (click_policy) {
-		gconf_client_add_dir (client, 
-				      NAUTILUS_CLICK_POLICY_BASE_KEY,
-				      GCONF_CLIENT_PRELOAD_NONE,
-				      NULL);
-
+	if (pref) {
 		data->click_policy_handle = 
 			gconf_client_notify_add (client, 
 						 NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_CLICK_POLICY_KEY,
@@ -328,10 +372,39 @@ install_click_policy (GeditFileBrowserPluginData *data)
 						 data,
 						 NULL,
 						 NULL);
+		g_free (pref);
 	}
 	
+	/* Get enable_delete */
+	prefb = gconf_client_get_bool (client,
+	                               NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_ENABLE_DELETE_KEY,
+	                               NULL);
+	
+	g_object_set (G_OBJECT (data->tree_widget), "enable-delete", prefb, NULL);
+
+	data->enable_delete_handle = 
+			gconf_client_notify_add (client, 
+						 NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_ENABLE_DELETE_KEY,
+						 on_enable_delete_changed,
+						 data,
+						 NULL,
+						 NULL);
+
+	/* Get confirm_trash */
+	prefb = gconf_client_get_bool (client,
+	                               NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_CONFIRM_TRASH_KEY,
+	                               NULL);
+	
+	data->confirm_trash = prefb;
+
+	data->confirm_trash_handle = 
+			gconf_client_notify_add (client, 
+						 NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_CONFIRM_TRASH_KEY,
+						 on_confirm_trash_changed,
+						 data,
+						 NULL,
+						 NULL);
 	g_object_unref (client);
-	g_free (click_policy);
 }
 
 static void
@@ -669,8 +742,8 @@ impl_activate (GeditPlugin * plugin, GeditWindow * window)
 	/* Restore filter options */
 	restore_filter (data);
 	
-	/* Install click policy */
-	install_click_policy (data);
+	/* Install nautilus preferences */
+	install_nautilus_prefs (data);
 	
 	/* Connect signals to store the last visited location */
 	g_signal_connect (gedit_file_browser_widget_get_browser_view (data->tree_widget),
@@ -711,13 +784,19 @@ impl_deactivate (GeditPlugin * plugin, GeditWindow * window)
 	                                      G_CALLBACK (on_tab_added_cb),
 	                                      data);
 
-	if (data->click_policy_handle) {
-		client = gconf_client_get_default ();
+	client = gconf_client_get_default ();
+	gconf_client_remove_dir (client, NAUTILUS_CLICK_POLICY_BASE_KEY, NULL);
+	
+	if (data->click_policy_handle)
 		gconf_client_notify_remove (client, data->click_policy_handle);
-		gconf_client_remove_dir (client, NAUTILUS_CLICK_POLICY_BASE_KEY, NULL);
-		g_object_unref (client);
-	} 
 
+	if (data->enable_delete_handle)
+		gconf_client_notify_remove (client, data->enable_delete_handle);
+
+	if (data->confirm_trash_handle)
+		gconf_client_notify_remove (client, data->confirm_trash_handle);
+
+	g_object_unref (client);
 	remove_popup_ui (window);
 
 	panel = gedit_window_get_side_panel (window);
@@ -1064,6 +1143,9 @@ on_confirm_delete_cb (GeditFileBrowserWidget * widget,
 	GeditFileBrowserPluginData *data;
 	
 	data = get_plugin_data (window);
+
+	if (!data->confirm_trash)
+		return TRUE;
 	
 	if (paths->next == NULL) {
 		normal = get_filename_from_path (GTK_TREE_MODEL (store), (GtkTreePath *)(paths->data));

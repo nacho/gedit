@@ -68,7 +68,8 @@ enum
 {
 	PROP_0,
 	
-	PROP_FILTER_PATTERN
+	PROP_FILTER_PATTERN,
+	PROP_ENABLE_DELETE
 };
 
 /* Signals */
@@ -143,8 +144,12 @@ struct _GeditFileBrowserWidgetPrivate
 	GtkWidget *location_previous_menu;
 	GtkWidget *location_next_menu;
 	GtkWidget *current_location_menu_item;
+	
+	gboolean enable_delete;
 };
 
+static void set_enable_delete		       (GeditFileBrowserWidget *obj,
+						gboolean enable);
 static void on_model_set                       (GObject * gobject, 
 						GParamSpec * arg1,
 						GeditFileBrowserWidget * obj);
@@ -336,6 +341,9 @@ gedit_file_browser_widget_get_property (GObject    *object,
 		case PROP_FILTER_PATTERN:
 			g_value_set_string (value, obj->priv->filter_pattern_str);
 			break;
+		case PROP_ENABLE_DELETE:
+			g_value_set_boolean (value, obj->priv->enable_delete);
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -355,6 +363,10 @@ gedit_file_browser_widget_set_property (GObject      *object,
 		case PROP_FILTER_PATTERN:
 			gedit_file_browser_widget_set_filter_pattern (obj,
 			                                              g_value_get_string (value));
+			break;
+		case PROP_ENABLE_DELETE:
+			set_enable_delete (obj, g_value_get_boolean (value));
+			break;
 		default:
 			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 			break;
@@ -377,6 +389,13 @@ gedit_file_browser_widget_class_init (GeditFileBrowserWidgetClass * klass)
 					 		      "The filter pattern",
 					 		      NULL,
 					 		      G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_ENABLE_DELETE,
+					 g_param_spec_boolean ("enable-delete",
+					 		       "Enable delete",
+					 		       "Enable permanently deleting items",
+					 		       TRUE,
+					 		       G_PARAM_READWRITE |
+					 		       G_PARAM_CONSTRUCT));
 
 	signals[URI_ACTIVATED] =
 	    g_signal_new ("uri-activated",
@@ -1004,6 +1023,20 @@ create_toolbar (GeditFileBrowserWidget * obj)
 
 	gtk_box_pack_start (GTK_BOX (obj), toolbar, FALSE, FALSE, 0);
 	gtk_widget_show (toolbar);
+}
+
+static void 
+set_enable_delete (GeditFileBrowserWidget *obj,
+		   gboolean enable)
+{
+	GtkAction *action;
+	obj->priv->enable_delete = enable;
+	
+	action =
+	    gtk_action_group_get_action (obj->priv->action_group_selection,
+					 "FileDelete");
+	
+	g_object_set (action, "visible", enable, "sensitive", enable, NULL);
 }
 
 static gboolean
@@ -1928,6 +1961,9 @@ gedit_file_browser_widget_get_num_selected_files_or_directories(GeditFileBrowser
 			++result;
 	}
 	
+	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
+	g_list_free (rows);
+	
 	return result;
 }
 
@@ -2299,8 +2335,10 @@ on_treeview_key_press_event (GeditFileBrowserView * treeview,
 	    || event->keyval == GDK_KP_Delete) {
 
 		if ((event->state & modifiers) == GDK_SHIFT_MASK) {
-			delete_selected_files (obj, FALSE);
-			return TRUE;
+			if (obj->priv->enable_delete) {
+				delete_selected_files (obj, FALSE);
+				return TRUE;
+			}
 		} else if ((event->state & modifiers) == 0) {
 			delete_selected_files (obj, TRUE);
 			return TRUE;

@@ -1,5 +1,15 @@
 2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl>
 	
+	* plugins/filebrowser/gedit-file-browser-widget.c: fixed leaking 
+	a GList and GtkTreePaths
+	
+	* plugins/filebrowser/gedit-file-browser-widget.c:
+	* plugins/filebrowser/gedit-file-browser-plugin.c:
+	
+	Added support for nautilus' enable_delete and confirm_trash preferences
+	
+2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl>
+	
 	* plugins/filebrowser/gedit-file-browser-store.c: fixed problem
 	with async delete
 
