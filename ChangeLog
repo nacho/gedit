@@ -1,3 +1,19 @@
+2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* gedit/plugins/filebrowser/gedit-file-browser-view.c:
+	* gedit/plugins/filebrowser/gedit-file-browser-view.h:
+	* gedit/plugins/filebrowser/gedit-file-browser-marshal.list:
+	* gedit/plugins/filebrowser/gedit-file-browser-widget.c:
+	* gedit/plugins/filebrowser/gedit-file-browser-widget.h:
+	* gedit/plugins/filebrowser/gedit-file-browser-store.c:
+	* gedit/plugins/filebrowser/gedit-file-browser-plugin.c:
+	* gedit/plugins/filebrowser/gedit-file-browser-store.h:
+	
+	Moved implementation of activating files and directories to 
+	gedit-file-browser-view (was implemented in gedit-file-browser-widget
+	before). Added support for nautilus click behavior (single/double).
+	Added support for selecting multiple files.
+
 2007-01-04  Paolo Borelli  <pborelli@katamail.com>
 
 	* gedit/gedit-languages-manager.c:
