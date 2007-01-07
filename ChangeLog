@@ -1,4 +1,10 @@
-2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl
+2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/snippets/snippets/SnippetPlaceholders.py: add warning when
+	no value is returned in a python snippet. Also added safeguard for 
+	returning other types than strings in a python snippet (fixes #354648)
+
+2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl>
 
 	* plugins/snippets/snippets/SnippetPlaceholders.py: fix little bug with 
 	having no default value
