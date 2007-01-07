@@ -1,4 +1,18 @@
 2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl>
+
+	* plugins/snippets/snippets/SnippetPlaceholders.py:
+	* plugins/snippets/snippets/Snippet.py:
+	
+	Add support for default alternatives by the following syntax:
+	${1:ENV_VAR:alternative}. The list of defaults (colon separated) is
+	being traversed as long as the default is empty (useful for having
+	alternatives for empty environment variables). (fixes #354643)
+	
+	Add support for tabstops for python and shell placeholders. Python
+	and shell placeholders that don't depend (either explicit or implicit)
+	on other placeholders can now be reached via <tab> (fixes #354643)
+	
+2007-01-07  Jesse van den Kieboom  <jesse@icecrew.nl>
 	
 	* plugins/filebrowser/gedit-file-browser-widget.c: fixed leaking 
 	a GList and GtkTreePaths

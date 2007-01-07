@@ -169,7 +169,7 @@ class Snippet:
                 return text, index, match
 
         def parse_placeholder(self, s):
-                result = re.match('\\${([0-9]+)(:((\\\\:|\\\\}|[^:])+?))?}', s) or \
+                result = re.match('\\${([0-9]+)(:(.+?))?}', s) or \
                                 re.match('\\$([0-9]+)', s)
                 
                 return result and (result, SnippetPlaceholder)
@@ -181,10 +181,31 @@ class Snippet:
                 return result and (result, SnippetPlaceholderShell)
         
         def parse_eval(self, s):
-                result = re.match('\\$<(([0-9, ]+):)?((\\\\>|[^>])+?)>', s)
+                result = re.match('\\$<(([0-9]+):)?(([0-9, ]+):)?((\\\\>|[^>])+?)>', s)
                 
                 return result and (result, SnippetPlaceholderEval)
 
+        def parse_default(self, s):
+                index = 0
+                previndex = 0
+                defaults = []
+
+                while index < len(s):
+                        c = s[index]
+                        
+                        if c == '\\':
+                                index += 1
+                        elif c == ':':
+                                defaults.append(re.sub('\\\\(.)', '\\1', s[previndex:index]))
+                                previndex = index + 1
+                        
+                        index += 1
+                                
+                if previndex < index:
+                        defaults.append(re.sub('\\\\(.)', '\\1', s[previndex:index]))
+                
+                return defaults
+        
         def parse_text(self, view, marks):
                 placeholders = {}
                 lastInsert = 0
@@ -200,7 +221,7 @@ class Snippet:
                 while index < len(text):
                         c = text[index]
                         match = None
-                        s = text[index:]	
+                        s = text[index:]        
                                         
                         if c == '\\':
                                 # Skip escapements
@@ -224,25 +245,27 @@ class Snippet:
                                         begin = buf.get_iter_at_mark(marks[1])
 
                                         if match[1] == SnippetPlaceholderEval:
-                                                refs = (match[0].group(2) and \
-                                                                match[0].group(2).split(','))
+                                                tabstop = (match[0].group(2) and \
+                                                                int(match[0].group(2))) or -1
+                                                refs = (match[0].group(4) and \
+                                                                match[0].group(4).split(','))
                                                 placeholder = SnippetPlaceholderEval(view, \
-                                                                refs, begin, match[0].group(3), \
+                                                                tabstop, refs, begin, match[0].group(5), \
                                                                 utils.namespace)
                                         elif match[1] == SnippetPlaceholderShell:
                                                 tabstop = (match[0].group(2) and \
                                                                 int(match[0].group(2))) or -1
                                                 placeholder = SnippetPlaceholderShell(view, \
-                                                                tabstop, begin, match[0].group(3))						
+                                                                tabstop, begin, match[0].group(3))                                                
                                         else:
                                                 tabstop = int(match[0].group(1))
-                                                default = match[0].lastindex >= 2 and \
-                                                                re.sub('\\\\(.)', '\\1', match[0].group(3))
+                                                defaults = match[0].lastindex >= 2 and \
+                                                                self.parse_default(match[0].group(3))
                                                 
                                                 if tabstop == 0:
                                                         # End placeholder
                                                         placeholder = SnippetPlaceholderEnd(view, begin,
-                                                                        default)
+                                                                        defaults)
                                                 elif placeholders.has_key(tabstop):
                                                         # Mirror placeholder
                                                         placeholder = SnippetPlaceholderMirror(view, \
@@ -250,7 +273,7 @@ class Snippet:
                                                 else:
                                                         # Default placeholder
                                                         placeholder = SnippetPlaceholder(view, tabstop, \
-                                                                        default, begin)
+                                                                        defaults, begin)
                                                 
                                         
                                         self.add_placeholder(placeholders, placeholder)
@@ -290,16 +313,18 @@ class Snippet:
                                                                 placeholder)]
                                         else:
                                                 del placeholders[placeholder.tabstop]
-                
+
                 # Remove all the Expand placeholders which have a tabstop because
                 # they can be used to mirror, but they shouldn't be real tabstops
-                # This is problably a bit of a dirty hack :)
+                # (if they have mirrors installed). This is problably a bit of 
+                # a dirty hack :)
                 if not placeholders.has_key(-1):
                         placeholders[-1] = []
 
                 for tabstop in placeholders.copy():
                         if tabstop != -1:
-                                if isinstance(placeholders[tabstop], SnippetPlaceholderExpand):
+                                if isinstance(placeholders[tabstop], SnippetPlaceholderExpand) and \
+                                                placeholders[tabstop].has_references:
                                         placeholders[-1].append(placeholders[tabstop])
                                         del placeholders[tabstop]
                 
@@ -358,3 +383,5 @@ class Snippet:
                 buf.move_mark(marks[1], lastIter)
                 
                 return (marks[0], marks[1], marks[2], placeholders)
+
+# ex:ts=8:et:
