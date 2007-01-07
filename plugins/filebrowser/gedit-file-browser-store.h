@@ -171,6 +171,11 @@ GeditFileBrowserStoreResult
 gedit_file_browser_store_delete                       (GeditFileBrowserStore * model,
                                                        GtkTreeIter * iter, 
                                                        gboolean trash);
+GeditFileBrowserStoreResult
+gedit_file_browser_store_delete_all                   (GeditFileBrowserStore * model,
+                                                       GList *rows, 
+                                                       gboolean trash);
+
 gboolean gedit_file_browser_store_new_file            (GeditFileBrowserStore * model,
                                                        GtkTreeIter * parent,
                                                        GtkTreeIter * iter);

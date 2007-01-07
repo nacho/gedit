@@ -66,10 +66,10 @@ struct _GeditFileBrowserWidgetClass
 		                      gchar const *message);
 	gboolean (*confirm_delete)   (GeditFileBrowserWidget * widget,
 	                              GeditFileBrowserStore * model,
-	                              GtkTreeIter * iter);
+	                              GList *list);
 	gboolean (*confirm_no_trash) (GeditFileBrowserWidget * widget,
                                       GeditFileBrowserStore * model,
-	                              GtkTreeIter * iter);
+	                              GList *list);
 };
 
 GType gedit_file_browser_widget_get_type            (void) G_GNUC_CONST;
@@ -89,6 +89,9 @@ gedit_file_browser_widget_set_root_and_virtual_root (GeditFileBrowserWidget * ob
 gboolean
 gedit_file_browser_widget_get_selected_directory    (GeditFileBrowserWidget * obj, 
                                                      GtkTreeIter * iter);
+guint
+gedit_file_browser_widget_get_num_selected_files_or_directories (GeditFileBrowserWidget *obj);
+
 GeditFileBrowserStore * 
 gedit_file_browser_widget_get_browser_store         (GeditFileBrowserWidget * obj);
 GeditFileBookmarksStore * 

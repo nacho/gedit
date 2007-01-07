@@ -37,6 +37,11 @@ typedef struct _GeditFileBrowserView        GeditFileBrowserView;
 typedef struct _GeditFileBrowserViewClass   GeditFileBrowserViewClass;
 typedef struct _GeditFileBrowserViewPrivate GeditFileBrowserViewPrivate;
 
+typedef enum {
+	GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_DOUBLE,
+	GEDIT_FILE_BROWSER_VIEW_CLICK_POLICY_SINGLE	
+} GeditFileBrowserViewClickPolicy;
+
 struct _GeditFileBrowserView 
 {
 	GtkTreeView parent;
@@ -52,16 +57,24 @@ struct _GeditFileBrowserViewClass
 	void (*error) (GeditFileBrowserView * filetree, 
 	               guint code,
 		       gchar const *message);
+	void (*file_activated) (GeditFileBrowserView * filetree,
+				    GtkTreeIter *iter);
+	void (*directory_activated) (GeditFileBrowserView * filetree,
+				    GtkTreeIter *iter);
+	void (*bookmark_activated) (GeditFileBrowserView * filetree,
+				    GtkTreeIter *iter);
 };
 
-GType gedit_file_browser_view_get_type      (void) G_GNUC_CONST;
-GType gedit_file_browser_view_register_type (GTypeModule * module);
+GType gedit_file_browser_view_get_type        (void) G_GNUC_CONST;
+GType gedit_file_browser_view_register_type   (GTypeModule * module);
 
-GtkWidget *gedit_file_browser_view_new      (void);
-void gedit_file_browser_view_set_model      (GeditFileBrowserView * tree_view,
-					     GtkTreeModel * model);
-void gedit_file_browser_view_start_rename   (GeditFileBrowserView * tree_view, 
-                                             GtkTreeIter * iter);
+GtkWidget *gedit_file_browser_view_new        (void);
+void gedit_file_browser_view_set_model        (GeditFileBrowserView * tree_view,
+					       GtkTreeModel * model);
+void gedit_file_browser_view_start_rename     (GeditFileBrowserView * tree_view, 
+                                               GtkTreeIter * iter);
+void gedit_file_browser_view_set_click_policy (GeditFileBrowserView * tree_view,
+                                               GeditFileBrowserViewClickPolicy policy);
 
 G_END_DECLS
 #endif				/* __GEDIT_FILE_BROWSER_VIEW_H__ */

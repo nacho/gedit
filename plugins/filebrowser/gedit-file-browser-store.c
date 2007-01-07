@@ -98,6 +98,9 @@ struct _GeditFileBrowserStorePrivate
 	GSList *async_handles;
 };
 
+static FileBrowserNode *model_find_node 		    (GeditFileBrowserStore *model,
+							     FileBrowserNode *node,
+							     GnomeVFSURI *uri);
 static void model_remove_node                               (GeditFileBrowserStore * model,
 							     FileBrowserNode * node, 
 							     GtkTreePath * path,
@@ -2193,12 +2196,6 @@ progress_update_callback (GnomeVFSAsyncHandle * handle,
 		switch (progress_info->phase) {
 		case GNOME_VFS_XFER_PHASE_COMPLETED:
 			if (ahandle->alive) {
-				/* Delete the file */
-				model_remove_node (ahandle->model,
-						   (FileBrowserNode
-						    *) (ahandle->
-							user_data), NULL,
-						   TRUE);
 				ahandle->model->priv->async_handles =
 				    g_slist_remove (ahandle->model->priv->
 						    async_handles,
@@ -2217,10 +2214,71 @@ progress_update_callback (GnomeVFSAsyncHandle * handle,
 	return 1;
 }
 
+static FileBrowserNode *
+model_find_node_children (GeditFileBrowserStore *model,
+			  FileBrowserNode *parent,
+			  GnomeVFSURI *uri)
+{
+	FileBrowserNodeDir *dir;
+	FileBrowserNode *child;
+	FileBrowserNode *result;
+	GSList *children;
+	
+	if (!NODE_IS_DIR (parent))
+		return NULL;
+	
+	dir = FILE_BROWSER_NODE_DIR (parent);
+	
+	for (children = dir->children; children; children = children->next) {
+		child = (FileBrowserNode *)(children->data);
+		
+		result = model_find_node (model, child, uri);
+		
+		if (result)
+			return result;
+	}
+	
+	return NULL;
+}
+
+static FileBrowserNode *
+model_find_node (GeditFileBrowserStore *model,
+		 FileBrowserNode *node,
+		 GnomeVFSURI *uri)
+{
+	if (node == NULL)
+		node = model->priv->root;
+
+	if (node->uri && gnome_vfs_uri_equal (node->uri, uri))
+		return node;
+	
+	if (NODE_IS_DIR (node) && gnome_vfs_uri_is_parent (node->uri, uri, TRUE))
+		return model_find_node_children (model, node, uri);
+	
+	return NULL;
+}
+
 static int
 progress_sync_callback (GnomeVFSXferProgressInfo * progress_info,
 			gpointer data)
 {
+	FileBrowserNode *node;
+	AsyncHandle *ahandle = (AsyncHandle *) (data);
+	GnomeVFSURI *uri;
+
+	if (!ahandle->alive)
+		return 1;
+
+	if (progress_info->status == GNOME_VFS_XFER_PROGRESS_STATUS_OK && 
+	    (progress_info->phase == GNOME_VFS_XFER_PHASE_MOVING || 
+	     progress_info->phase == GNOME_VFS_XFER_PHASE_DELETESOURCE)) {
+	    	uri = gnome_vfs_uri_new (progress_info->source_name);
+	    	node = model_find_node (ahandle->model, NULL, uri);
+	    	
+	    	if (node)
+			model_remove_node (ahandle->model, node, NULL, TRUE);
+	}
+
 	return 1;
 }
 
@@ -2767,58 +2825,97 @@ gedit_file_browser_store_rename (GeditFileBrowserStore * model,
 }
 
 GeditFileBrowserStoreResult
-gedit_file_browser_store_delete (GeditFileBrowserStore * model,
-				 GtkTreeIter * iter, gboolean trash)
+gedit_file_browser_store_delete_all (GeditFileBrowserStore *model,
+				     GList *rows, gboolean trash)
 {
 	FileBrowserNode *node;
 	AsyncHandle *handle;
-	GList *uris;
+	GList *uris = NULL;
+	GList *row;
 	GList *target = NULL;
 	GnomeVFSURI *trash_uri;
 	GnomeVFSResult ret;
 	GnomeVFSXferOptions options;
+	GtkTreeIter iter;
+	GeditFileBrowserStoreResult result = GEDIT_FILE_BROWSER_STORE_RESULT_OK;
+	GtkTreePath *prev = NULL;
+	GtkTreePath *path;
 
 	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
-	g_return_val_if_fail (iter != NULL, GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
-	g_return_val_if_fail (iter->user_data != NULL, GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
-
-	node = (FileBrowserNode *) (iter->user_data);
-
-	if (NODE_IS_DUMMY (node))
+	
+	if (rows == NULL)
 		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
 
-	uris = g_list_append (NULL, node->uri);
 	handle = g_new (AsyncHandle, 1);
 	handle->model = model;
-	handle->user_data = node;
 	handle->alive = TRUE;
 
-	if (trash) {
-		/* Find the trash */
-		ret =
-		    gnome_vfs_find_directory (node->uri,
+	/* First we sort the paths so that we can later on remove any
+	   files/directories that are actually subfiles/directories of
+	   a directory that's also deleted */
+	rows = g_list_sort (g_list_copy (rows), (GCompareFunc)gtk_tree_path_compare);
+
+	for (row = rows; row; row = row->next) {
+		path = (GtkTreePath *)(row->data);
+
+		if (!gtk_tree_model_get_iter (GTK_TREE_MODEL (model), &iter, path))
+			continue;
+		
+		/* Skip if the current path is actually a descendant of the
+		   previous path */
+		if (prev != NULL && gtk_tree_path_is_descendant (path, prev))
+			continue;
+		
+		prev = path;
+		node = (FileBrowserNode *)(iter.user_data);
+		
+		if (trash) {
+			/* Find the trash */
+			ret =
+		    		gnome_vfs_find_directory (node->uri,
 					      GNOME_VFS_DIRECTORY_KIND_TRASH,
 					      &trash_uri, FALSE, TRUE,
 					      0777);
 
-		if (ret == GNOME_VFS_ERROR_NOT_FOUND || trash_uri == NULL) {
-			g_list_free (uris);
-			g_free (handle);
-			return GEDIT_FILE_BROWSER_STORE_RESULT_NO_TRASH;
+			if (ret == GNOME_VFS_ERROR_NOT_FOUND || trash_uri == NULL) {
+				if (trash_uri != NULL)
+					gnome_vfs_uri_unref (trash_uri);
+					
+				result = GEDIT_FILE_BROWSER_STORE_RESULT_NO_TRASH;
+				break;
+			} else {
+				uris = g_list_append (uris, node->uri);
+				target =
+				    g_list_append (target,
+						   append_basename (trash_uri,
+								    node->uri));
+				gnome_vfs_uri_unref (trash_uri);
+			}
 		} else {
-			target =
-			    g_list_append (NULL,
-					   append_basename (trash_uri,
-							    node->uri));
-			gnome_vfs_uri_unref (trash_uri);
-
-			options =
-			    GNOME_VFS_XFER_RECURSIVE |
-			    GNOME_VFS_XFER_REMOVESOURCE;
+			uris = g_list_append (uris, node->uri);
 		}
+	}
+	
+	if (result != GEDIT_FILE_BROWSER_STORE_RESULT_OK) {
+		if (target) {
+			g_list_foreach (target, (GFunc)gnome_vfs_uri_unref, NULL);
+			g_list_free (target);
+		}
+		
+		g_list_free (uris);
+		g_free (handle);
+		g_list_free (rows);
+
+		return result;
+	}
+	
+	if (trash) {
+		options =
+		    GNOME_VFS_XFER_RECURSIVE |
+		    GNOME_VFS_XFER_REMOVESOURCE;
 	} else {
 		options =
-		    GNOME_VFS_XFER_DELETE_ITEMS | GNOME_VFS_XFER_RECURSIVE;
+			GNOME_VFS_XFER_DELETE_ITEMS | GNOME_VFS_XFER_RECURSIVE;
 	}
 
 	gnome_vfs_async_xfer (&(handle->handle), uris, target,
@@ -2834,7 +2931,40 @@ gedit_file_browser_store_delete (GeditFileBrowserStore * model,
 
 	g_list_free (uris);
 	
+	if (target) {
+		g_list_foreach (target, (GFunc)gnome_vfs_uri_unref, NULL);
+		g_list_free (target);
+	}
+	
+	g_list_free (rows);
+	
 	return GEDIT_FILE_BROWSER_STORE_RESULT_OK;
+}
+
+GeditFileBrowserStoreResult
+gedit_file_browser_store_delete (GeditFileBrowserStore * model,
+				 GtkTreeIter * iter, gboolean trash)
+{
+	FileBrowserNode *node;
+	GList *rows = NULL;
+	GeditFileBrowserStoreResult result;
+
+	g_return_val_if_fail (GEDIT_IS_FILE_BROWSER_STORE (model), GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
+	g_return_val_if_fail (iter != NULL, GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
+	g_return_val_if_fail (iter->user_data != NULL, GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE);
+
+	node = (FileBrowserNode *) (iter->user_data);
+
+	if (NODE_IS_DUMMY (node))
+		return GEDIT_FILE_BROWSER_STORE_RESULT_NO_CHANGE;
+
+	rows = g_list_append(NULL, gedit_file_browser_store_get_path_real (model, node));
+	result = gedit_file_browser_store_delete_all (model, rows, trash);
+	
+	g_list_foreach (rows, (GFunc)gtk_tree_path_free, NULL);
+	g_list_free (rows);
+	
+	return result;
 }
 
 gboolean
