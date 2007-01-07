@@ -529,7 +529,7 @@ class SnippetPlaceholderEval(SnippetPlaceholderExpand):
                                 return False
 
                         if result == None:
-                                sys.stderr.print "%s:\n>> %s" % (_('The following python code, run in a snippet, does not return a value'), "\n>> ".join(self.command.split("\n")))
+                                sys.stderr.write("%s:\n>> %s\n" % (_('The following python code, run in a snippet, does not return a value'), "\n>> ".join(self.command.split("\n"))))
                                 result = ''
 
                         self.set_text(str(result))

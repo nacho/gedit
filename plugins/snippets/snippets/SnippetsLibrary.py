@@ -343,6 +343,7 @@ class SnippetsSystemFile:
                 self.loaded = False
                 self.language = None
                 self.ok = True
+                self.need_id = True
                 
         def load_error(self, message):
                 sys.stderr.write("An error occurred loading " + self.path + ":\n")
@@ -350,7 +351,8 @@ class SnippetsSystemFile:
                                 "available, please correct or remove the file.\n")
 
         def _add_snippet(self, element):
-                self.loading_elements.append(element)
+        	if not self.need_id or element.attrib.get('id'):
+                	self.loading_elements.append(element)
 
         def set_language(self, element):
                 self.language = element.attrib.get('language')
@@ -479,6 +481,7 @@ class SnippetsUserFile(SnippetsSystemFile):
         def __init__(self, path=None):
                 SnippetsSystemFile.__init__(self, path)
                 self.tainted = False
+                self.need_id = False
                 
         def _set_root(self, element):
                 SnippetsSystemFile._set_root(self, element)
