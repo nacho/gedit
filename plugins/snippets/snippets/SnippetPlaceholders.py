@@ -47,7 +47,7 @@ class SnippetPlaceholder:
                 self.end = None
         
         def set_default(self, defaults):
-                if defaults == None:
+                if not defaults:
                         self.default = None
                         return
 
