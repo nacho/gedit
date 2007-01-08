@@ -522,8 +522,9 @@ get_from_bookmark_uri (GeditFileBrowserWidget * obj, GnomeVFSURI * guri,
 		return FALSE;
 	
 	item = (NameIcon *)data;
-	*name = item->name;
-	*icon = item->icon;
+
+	*name = g_strdup (item->name);
+	*icon = g_object_ref (item->icon);
 
 	return TRUE;
 }
@@ -575,10 +576,8 @@ insert_path_item (GeditFileBrowserWidget * obj,
 
 		g_free (str);
 		g_free (str2);
-	} else {
-		unescape = g_strdup (unescape);
 	}
-	
+
 	gtk_tree_store_insert_after (obj->priv->combo_model, iter, NULL,
 				     after);
 	gtk_tree_store_set (obj->priv->combo_model, 
@@ -589,6 +588,9 @@ insert_path_item (GeditFileBrowserWidget * obj,
 	                    COLUMN_OBJECT, gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE),
 			    COLUMN_ID, PATH_ID, 
 			    -1);
+
+	if (icon)
+		g_object_unref (icon);
 
 	g_free (unescape);
 }
@@ -724,21 +726,29 @@ fill_combo_model (GeditFileBrowserWidget * obj)
 {
 	GtkTreeStore *store = obj->priv->combo_model;
 	GtkTreeIter iter;
+	GdkPixbuf *icon;
+
+	icon = gedit_file_browser_utils_pixbuf_from_theme (GTK_STOCK_HOME, GTK_ICON_SIZE_MENU);
 
 	gtk_tree_store_append (store, &iter, NULL);
 	gtk_tree_store_set (store, &iter,
-			    COLUMN_ICON, gedit_file_browser_utils_pixbuf_from_theme (GTK_STOCK_HOME, GTK_ICON_SIZE_MENU),
+			    COLUMN_ICON, icon,
 			    COLUMN_NAME, _("Bookmarks"),
 			    COLUMN_ID, BOOKMARKS_ID, -1);
+	g_object_unref (icon);
+
 #if 0
+	icon = gedit_file_browser_utils_pixbuf_from_theme (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
+
 	gtk_tree_store_append (store, &iter, NULL);
 	gtk_tree_store_set (store, &iter,
-			    COLUMN_ICON, gedit_file_browser_utils_pixbuf_from_theme (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU),
+			    COLUMN_ICON, icon,
 			    COLUMN_NAME, _("Recent Files"),
 			    COLUMN_ID, RECENTS_ID, -1);
+	g_object_unref (icon);
 #endif
-	gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX
-					      (obj->priv->combo),
+
+	gtk_combo_box_set_row_separator_func (GTK_COMBO_BOX (obj->priv->combo),
 					      separator_func, obj, NULL);
 	gtk_combo_box_set_active (GTK_COMBO_BOX (obj->priv->combo), 0);
 }
@@ -1092,7 +1102,10 @@ add_bookmark_hash (GeditFileBrowserWidget * obj,
 	item->name = name;
 	item->icon = pixbuf;
 
-	g_hash_table_insert (obj->priv->bookmarks_hash, GUINT_TO_POINTER (gnome_vfs_uri_hash (guri)), item);
+	g_hash_table_insert (obj->priv->bookmarks_hash,
+			     GUINT_TO_POINTER (gnome_vfs_uri_hash (guri)),
+			     item);
+
 	gnome_vfs_uri_unref (guri);
 }
 
@@ -1461,18 +1474,20 @@ get_topmost_uri (GnomeVFSURI const *uri)
 
 static GtkWidget *
 create_goto_menu_item (GeditFileBrowserWidget * obj, GList * item,
-		       GdkPixbuf * pixbuf)
+		       GdkPixbuf * icon)
 {
 	GtkWidget *result;
 	GtkWidget *image;
 	gchar *base;
 	gchar *unescape;
+	GdkPixbuf *pixbuf;
 	Location *loc;
 
 	loc = (Location *) (item->data);
 
-	if (!get_from_bookmark
-	    (obj, loc->virtual_root, &unescape, &pixbuf)) {
+	if (!get_from_bookmark (obj, loc->virtual_root,
+				&unescape, &pixbuf)) {
+
 		if (gedit_utils_uri_has_file_scheme (loc->virtual_root)) {
 			unescape =
 			    gnome_vfs_get_local_path_from_uri (loc->
@@ -1485,11 +1500,13 @@ create_goto_menu_item (GeditFileBrowserWidget * obj, GList * item,
 
 		unescape = gnome_vfs_unescape_string_for_display (base);
 		g_free (base);
-	} else {
-		unescape = g_strdup (unescape);
+
+		pixbuf = g_object_ref (icon);
 	}
 
 	image = gtk_image_new_from_pixbuf (pixbuf);
+	g_object_unref (pixbuf);
+
 	gtk_widget_show (image);
 
 	result = gtk_image_menu_item_new_with_label (unescape);

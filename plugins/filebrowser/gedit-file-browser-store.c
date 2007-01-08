@@ -2356,10 +2356,11 @@ static GnomeVFSURI *
 unique_new_name (GnomeVFSURI * uri, gchar const *name)
 {
 	GnomeVFSURI *newuri = NULL;
-	gchar *newname;
 	guint num = 0;
 
 	while (newuri == NULL || gnome_vfs_uri_exists (newuri)) {
+		gchar *newname;
+
 		if (newuri != NULL)
 			gnome_vfs_uri_unref (newuri);
 
@@ -2369,6 +2370,8 @@ unique_new_name (GnomeVFSURI * uri, gchar const *name)
 			newname = g_strdup_printf ("%s(%d)", name, num);
 
 		newuri = gnome_vfs_uri_append_file_name (uri, newname);
+
+		g_free (newname);
 
 		++num;
 	}

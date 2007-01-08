@@ -176,6 +176,9 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 
 	add_node (model, pixbuf, name, uri, flags, iter);
 
+	if (pixbuf)
+		g_object_unref (pixbuf);
+
 	if (free_name)
 		g_free (name);
 	
@@ -254,11 +257,13 @@ add_volume (GeditFileBookmarksStore * model, GnomeVFSVolume * volume,
 
 	icon = gnome_vfs_volume_get_icon (volume);
 	pixbuf = pixbuf_from_stock (icon);
+	g_free (icon);
 
 	add_node (model, pixbuf, name, volume,
 		  flags | GEDIT_FILE_BOOKMARKS_STORE_IS_VOLUME, iter);
 
-	g_free (icon);
+	if (pixbuf)
+		g_object_unref (pixbuf);
 
 	flags = flags & (GEDIT_FILE_BOOKMARKS_STORE_IS_DRIVE |
 			 GEDIT_FILE_BOOKMARKS_STORE_IS_MOUNT |
