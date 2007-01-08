@@ -1,2 +1,2 @@
-EXTRA_DIST = gedit-tool-merge.py
+EXTRA_DIST = gedit-tool-merge.pl
 
