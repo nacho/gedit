@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-01 22:26+0000\n"
-"PO-Revision-Date: 2007-01-01 22:27-0000\n"
+"POT-Creation-Date: 2007-01-08 07:19+0000\n"
+"PO-Revision-Date: 2007-01-08 07:19-0000\n"
 "Last-Translator: David Lodge <dave@cirt.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,7 @@ msgid "A custom font that will be used for the editing area. This will only take
 msgstr "A custom font that will be used for the editing area. This will only take effect if the \"Use Default Font\" option is turned off."
 
 #: ../data/gedit.schemas.in.h:2
-#: ../gedit/gedit-plugin-manager.c:747
+#: ../gedit/gedit-plugin-manager.c:766
 msgid "Active plugins"
 msgstr "Active plugins"
 
@@ -412,8 +412,8 @@ msgid "Whether to use the system's default colors for the editing area. If this 
 msgstr "Whether to use the system's default colours for the editing area. If this option is turned off, then the colours of the editing area will be those specified in the \"Background Colour\", \"Text Colour\", \"Selected Text Colour\", and \"Selection Colour\" options."
 
 #: ../data/gedit.schemas.in.h:110
-msgid "Whether to use the system's default font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the \"Editor Font\" option will be used instead of the system font."
-msgstr "Whether to use the system's default font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the \"Editor Font\" option will be used instead of the system font."
+msgid "Whether to use the system's default fixed width font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the \"Editor Font\" option will be used instead of the system font."
+msgstr "Whether to use the system's default fixed width font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the \"Editor Font\" option will be used instead of the system font."
 
 #: ../data/gedit.schemas.in.h:111
 msgid "Writable VFS schemes"
@@ -659,31 +659,36 @@ msgstr "_Restore Default Fonts"
 msgid "lines"
 msgstr "lines"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:651
+#: ../gedit/dialogs/gedit-preferences-dialog.c:652
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Push this button to select the font to be used by the editor"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:653
+#: ../gedit/dialogs/gedit-preferences-dialog.c:654
 msgid "Push this button to configure text color"
 msgstr "Push this button to configure text colour"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:655
+#: ../gedit/dialogs/gedit-preferences-dialog.c:656
 msgid "Push this button to configure background color"
 msgstr "Push this button to configure background colour"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:657
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid "Push this button to configure the color in which the selected text should appear"
 msgstr "Push this button to configure the colour in which the selected text should appear"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:660
+#: ../gedit/dialogs/gedit-preferences-dialog.c:661
 msgid "Push this button to configure the color in which the selected text should be marked"
 msgstr "Push this button to configure the colour in which the selected text should be marked"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1169
+#: ../gedit/dialogs/gedit-preferences-dialog.c:670
+#, c-format
+msgid "_Use the system fixed width font (%s)"
+msgstr "_Use the system fixed width font (%s)"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1178
 msgid "Elements"
 msgstr "Elements"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1281
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1290
 msgid "gedit Preferences"
 msgstr "gedit Preferences"
 
@@ -873,10 +878,6 @@ msgid "_Tab width:"
 msgstr "_Tab width:"
 
 #: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
-msgid "_Use default theme font"
-msgstr "_Use default theme font"
-
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:53
 msgid "_minutes"
 msgstr "_minutes"
 
@@ -1580,47 +1581,47 @@ msgstr "Empty"
 msgid "Hide panel"
 msgstr "Hide panel"
 
-#: ../gedit/gedit-plugin-manager.c:55
+#: ../gedit/gedit-plugin-manager.c:56
 msgid "Plugin"
 msgstr "Plugin"
 
-#: ../gedit/gedit-plugin-manager.c:56
+#: ../gedit/gedit-plugin-manager.c:57
 msgid "Enabled"
 msgstr "Enabled"
 
-#: ../gedit/gedit-plugin-manager.c:502
+#: ../gedit/gedit-plugin-manager.c:515
 msgid "_About"
 msgstr "_About"
 
-#: ../gedit/gedit-plugin-manager.c:510
+#: ../gedit/gedit-plugin-manager.c:523
 msgid "C_onfigure"
 msgstr "C_onfigure"
 
-#: ../gedit/gedit-plugin-manager.c:520
+#: ../gedit/gedit-plugin-manager.c:533
 msgid "A_ctivate"
 msgstr "A_ctivate"
 
-#: ../gedit/gedit-plugin-manager.c:530
+#: ../gedit/gedit-plugin-manager.c:545
 msgid "Ac_tivate All"
 msgstr "Ac_tivate All"
 
-#: ../gedit/gedit-plugin-manager.c:535
+#: ../gedit/gedit-plugin-manager.c:550
 msgid "_Deactivate All"
 msgstr "_Deactivate All"
 
-#: ../gedit/gedit-plugin-manager.c:776
+#: ../gedit/gedit-plugin-manager.c:795
 msgid "_About Plugin"
 msgstr "_About Plugin"
 
-#: ../gedit/gedit-plugin-manager.c:780
+#: ../gedit/gedit-plugin-manager.c:799
 msgid "C_onfigure Plugin"
 msgstr "C_onfigure Plugin"
 
-#: ../gedit/gedit-prefs-manager.c:170
+#: ../gedit/gedit-prefs-manager.c:171
 msgid "Cannot initialize preferences manager."
 msgstr "Cannot initialise preferences manager."
 
-#: ../gedit/gedit-prefs-manager.c:1407
+#: ../gedit/gedit-prefs-manager.c:1406
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "Expected `%s' got `%s' for key %s"
@@ -2105,41 +2106,41 @@ msgstr "_Bottom Pane"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Show or hide the bottom pane in the current window"
 
-#: ../gedit/gedit-utils.c:988
+#: ../gedit/gedit-utils.c:998
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Unable to find file %s."
 
-#: ../gedit/gedit-utils.c:992
-#: ../gedit/gedit-utils.c:1021
+#: ../gedit/gedit-utils.c:1002
+#: ../gedit/gedit-utils.c:1031
 msgid "Please check your installation."
 msgstr "Please check your installation."
 
-#: ../gedit/gedit-utils.c:1017
+#: ../gedit/gedit-utils.c:1027
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Unable to find the required widgets inside file %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1339
+#: ../gedit/gedit-view.c:1330
 msgid "_Wrap Around"
 msgstr "_Wrap Around"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1349
+#: ../gedit/gedit-view.c:1340
 msgid "Match _Entire Word Only"
 msgstr "Match _Entire Word Only"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1359
+#: ../gedit/gedit-view.c:1350
 msgid "_Match Case"
 msgstr "_Match Case"
 
-#: ../gedit/gedit-view.c:1447
+#: ../gedit/gedit-view.c:1438
 msgid "String you want to search for"
 msgstr "String you want to search for"
 
-#: ../gedit/gedit-view.c:1456
+#: ../gedit/gedit-view.c:1447
 msgid "Line you want to move the cursor to"
 msgstr "Line you want to move the cursor to"
 
@@ -2499,8 +2500,8 @@ msgid "Easy file access from the side pane"
 msgstr "Easy file access from the side pane"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-msgid "File browser pane"
-msgstr "File browser pane"
+msgid "File Browser Pane"
+msgstr "File Browser Pane"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
 msgid "Enable Restore of Remote Locations"
@@ -2558,72 +2559,76 @@ msgstr "The filter pattern to filter the file browser with. This filter works on
 msgid "This value determines what files get filtered from the file browser. Valid values are: none (filter nothing), hidden (filter hidden files), binary (filter binary files) and hidden_and_binary (filter both hidden and binary files)."
 msgstr "This value determines what files get filtered from the file browser. Valid values are: none (filter nothing), hidden (filter hidden files), binary (filter binary files) and hidden_and_binary (filter both hidden and binary files)."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:390
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:591
 msgid "_Set root to active document"
 msgstr "_Set root to active document"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:392
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
 msgid "Set the root to the active document location"
 msgstr "Set the root to the active document location"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:394
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
 msgid "_Open terminal here"
 msgstr "_Open terminal here"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:396
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
 msgid "Open a terminal at the currently opened directory"
 msgstr "Open a terminal at the currently opened directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:510
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:732
 msgid "File Browser"
 msgstr "File Browser"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:616
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:855
 msgid "An error occurred while creating a new directory"
 msgstr "An error occurred while creating a new directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:619
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:858
 msgid "An error occurred while creating a new file"
 msgstr "An error occurred while creating a new file"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:624
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:863
 msgid "An error occurred while renaming a file or directory"
 msgstr "An error occurred while renaming a file or directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:629
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
 msgid "An error occurred while deleting a file or directory"
 msgstr "An error occurred while deleting a file or directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:634
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:873
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "An error occurred while opening a directory in the file manager"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:638
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
 msgid "An error occurred while setting a root directory"
 msgstr "An error occurred while setting a root directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:642
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:881
 msgid "An error occurred while loading a directory"
 msgstr "An error occurred while loading a directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:645
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:884
 msgid "An error occurred"
 msgstr "An error occurred"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1112
 msgid ""
 "Cannot move file to trash, do you\n"
-"want to delete immediately?"
+"want to delete permanently?"
 msgstr ""
 "Cannot move file to the wastebasket, do you\n"
-"want to delete immediately?"
+"want to delete permanently?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:879
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1116
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "The file \"%s\" cannot be moved to the wastebasket."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:915
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1119
+msgid "The selected files cannot be moved to the trash."
+msgstr "The selected files cannot be moved to the wastebasket."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1152
 #, c-format
 msgid ""
 "Are you sure you want to\n"
@@ -2632,158 +2637,166 @@ msgstr ""
 "Are you sure you want to\n"
 "permanently delete \"%s\"?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:919
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1155
+msgid ""
+"Are you sure you want to\n"
+"permanently delete the selected files?."
+msgstr ""
+"Are you sure you want to\n"
+"permanently delete the selected files?."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1158
 msgid "If you delete an item it is permanently lost."
 msgstr "If you delete an item it is permanently lost."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2503
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1748
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2618
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1815
 msgid "Invalid uri"
 msgstr "Invalid uri"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2861
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3051
 msgid "file"
 msgstr "file"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2882
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2929
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3072
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3119
 msgid "The new file is currently filtered out. You need to adjust your filter settings to make the file visible"
 msgstr "The new file is currently filtered out. You need to adjust your filter settings to make the file visible"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2910
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3100
 msgid "directory"
 msgstr "directory"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:714
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:731
 msgid "Bookmarks"
 msgstr "Bookmarks"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:720
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:737
 msgid "Recent Files"
 msgstr "Recent Files"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
-msgid "_New Folder"
-msgstr "_New Folder"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
-msgid "Add new empty folder"
-msgstr "Add new empty folder"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
-msgid "New F_ile"
-msgstr "New F_ile"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
-msgid "Add new empty file"
-msgstr "Add new empty file"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
-msgid "Up"
-msgstr "Up"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
-msgid "Open the parent folder"
-msgstr "Open the parent folder"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
-msgid "_Rename"
-msgstr "_Rename"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
-msgid "Rename selected file or folder"
-msgstr "Rename selected file or folder"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:817
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
 msgid "_Move To Trash"
 msgstr "_Move To Trash"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
 msgid "Move selected file or folder to trash"
 msgstr "Move selected file or folder to the wastebasket."
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:823
 msgid "_Delete"
 msgstr "_Delete"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:824
 msgid "Delete selected file or folder"
 msgstr "Delete selected file or folder"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
+msgid "Up"
+msgstr "Up"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
+msgid "Open the parent folder"
+msgstr "Open the parent folder"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+msgid "_New Folder"
+msgstr "_New Folder"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:837
+msgid "Add new empty folder"
+msgstr "Add new empty folder"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:839
+msgid "New F_ile"
+msgstr "New F_ile"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
+msgid "Add new empty file"
+msgstr "Add new empty file"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:845
+msgid "_Rename"
+msgstr "_Rename"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
+msgid "Rename selected file or folder"
+msgstr "Rename selected file or folder"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:852
 msgid "_Previous Location"
 msgstr "_Previous Location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:854
 msgid "Go to the previous visited location"
 msgstr "Go to the previous visited location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:856
 msgid "_Next Location"
 msgstr "_Next Location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:857
 msgid "Go to the next visited location"
 msgstr "Go to the next visited location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:858
 msgid "Re_fresh View"
 msgstr "Re_fresh View"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:859
 msgid "Refresh the view"
 msgstr "Refresh the view"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:860
 msgid "_View Folder"
 msgstr "_View Folder"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:861
 msgid "View folder in file manager"
 msgstr "View folder in file manager"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
 msgid "Show _Hidden"
 msgstr "Show _Hidden"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
 msgid "Show hidden files and folders"
 msgstr "Show hidden files and folders"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
 msgid "Show _Binary"
 msgstr "Show _Binary"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:872
 msgid "Show binary files"
 msgstr "Show binary files"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:971
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:987
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1019
 msgid "Previous location"
 msgstr "Previous location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:975
 msgid "Go to previous location"
 msgstr "Go to previous location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:980
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1012
 msgid "Go to a previously opened location"
 msgstr "Go to a previously opened location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1002
 msgid "Next location"
 msgstr "Next location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1006
 msgid "Go to next location"
 msgstr "Go to next location"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1124
-msgid "_Advanced filtering"
-msgstr "_Advanced filtering"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1180
+msgid "_Match Filename"
+msgstr "_Match Filename"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2802,8 +2815,8 @@ msgid "Unindent selected lines"
 msgstr "Unindent selected lines"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:1
-msgid "Indent lines"
-msgstr "Indent lines"
+msgid "Indent Lines"
+msgstr "Indent Lines"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:2
 msgid "Indents or un-indents selected lines."
@@ -2875,15 +2888,19 @@ msgstr "_Snippets:"
 msgid "_Tab trigger:"
 msgstr "_Tab trigger:"
 
-#: ../plugins/snippets/snippets/SnippetPlaceholders.py:491
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:518
 #, python-format
 msgid "Execution of the python command (%s) exceeds the maximum time, execution aborted."
 msgstr "Execution of the python command (%s) exceeds the maximum time, execution aborted."
 
-#: ../plugins/snippets/snippets/SnippetPlaceholders.py:499
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:526
 #, python-format
 msgid "Execution of the python command (%s) failed: %s"
 msgstr "Execution of the python command (%s) failed: %s"
+
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:532
+msgid "The following python code, run in a snippet, does not return a value"
+msgstr "The following python code, run in a snippet, does not return a value"
 
 #: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
 msgid "Manage _Snippets..."
@@ -3141,8 +3158,8 @@ msgid "Checks the spelling of the current document."
 msgstr "Checks the spelling of the current document."
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
-msgid "Spell checker"
-msgstr "Spell checker"
+msgid "Spell Checker"
+msgstr "Spell Checker"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
 msgid "Select the group of tags you want to use"
@@ -4749,6 +4766,10 @@ msgstr "_Prompt for a format"
 msgid "_Use custom format"
 msgstr "_Use custom format"
 
+#~ msgid "_Use default theme font"
+#~ msgstr "_Use default theme font"
+#~ msgid "_Advanced filtering"
+#~ msgstr "_Advanced filtering"
 #~ msgid "External Tools Manager"
 #~ msgstr "External Tools Manager"
 #~ msgid "F7"
