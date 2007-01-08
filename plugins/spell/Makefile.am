@@ -34,7 +34,7 @@ libspell_la_SOURCES = \
 	$(BUILT_SOURCES)			
 
 libspell_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS) 
-libspell_la_LIBADD =  $(ENCHANT_LIBS)
+libspell_la_LIBADD  = $(GEDIT_LIBS) $(ENCHANT_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = spell-checker.glade2 languages-dialog.glade2

@@ -40,6 +40,7 @@ libfilebrowser_la_SOURCES = \
 	$(NOINST_H_FILES)
 
 libfilebrowser_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libfilebrowser_la_LIBADD = $(GEDIT_LIBS)
 
 # Glade files (if you use glade for your plugin, list those files here)
 gladedir = $(datadir)/gedit-2/glade

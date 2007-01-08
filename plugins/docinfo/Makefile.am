@@ -17,6 +17,7 @@ libdocinfo_la_SOURCES = \
 	gedit-docinfo-plugin.c
 
 libdocinfo_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libdocinfo_la_LIBADD  = $(GEDIT_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = docinfo.glade2

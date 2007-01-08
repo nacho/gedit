@@ -17,6 +17,7 @@ libtime_la_SOURCES = \
 	gedit-time-plugin.c
 
 libtime_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libtime_la_LIBADD  = $(GEDIT_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = time.glade2

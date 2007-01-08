@@ -32,6 +32,7 @@ libtaglist_la_SOURCES = \
 	gedit-taglist-plugin.h
 
 libtaglist_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libtaglist_la_LIBADD  = $(GEDIT_LIBS)
 
 plugin_in_files = taglist.gedit-plugin.desktop.in
 

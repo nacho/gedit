@@ -17,6 +17,7 @@ libsort_la_SOURCES = \
 	gedit-sort-plugin.c
 
 libsort_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libsort_la_LIBADD  = $(GEDIT_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA = sort.glade2

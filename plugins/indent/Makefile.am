@@ -17,6 +17,7 @@ libindent_la_SOURCES = \
 	gedit-indent-plugin.c
 
 libindent_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+libindent_la_LIBADD  = $(GEDIT_LIBS)
 
 gladedir = $(datadir)/gedit-2/glade
 glade_DATA =
