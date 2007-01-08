@@ -75,11 +75,12 @@ is_recoverable_error (const GError *error)
 	return is_recoverable;
 }
 
-static GtkWidget *
-create_io_loading_error_message_area (const gchar *primary_text,
-				      const gchar *secondary_text)
+static void
+set_message_area_text_and_icon (GeditMessageArea *message_area,
+				const gchar      *icon_stock_id,
+				const gchar      *primary_text,
+				const gchar      *secondary_text)
 {
-	GtkWidget *message_area;
 	GtkWidget *hbox_content;
 	GtkWidget *image;
 	GtkWidget *vbox;
@@ -87,19 +88,15 @@ create_io_loading_error_message_area (const gchar *primary_text,
 	gchar *secondary_markup;
 	GtkWidget *primary_label;
 	GtkWidget *secondary_label;
-	
-	message_area = gedit_message_area_new_with_buttons (
-					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					NULL);
 
 	hbox_content = gtk_hbox_new (FALSE, 8);
 	gtk_widget_show (hbox_content);
 
-	image = gtk_image_new_from_stock ("gtk-dialog-error", GTK_ICON_SIZE_DIALOG);
+	image = gtk_image_new_from_stock (icon_stock_id, GTK_ICON_SIZE_DIALOG);
 	gtk_widget_show (image);
 	gtk_box_pack_start (GTK_BOX (hbox_content), image, FALSE, FALSE, 0);
 	gtk_misc_set_alignment (GTK_MISC (image), 0.5, 0);
-  
+
 	vbox = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (hbox_content), vbox, TRUE, TRUE, 0);
@@ -114,7 +111,7 @@ create_io_loading_error_message_area (const gchar *primary_text,
 	gtk_misc_set_alignment (GTK_MISC (primary_label), 0, 0.5);
 	GTK_WIDGET_SET_FLAGS (primary_label, GTK_CAN_FOCUS);
 	gtk_label_set_selectable (GTK_LABEL (primary_label), TRUE);
-  
+
   	if (secondary_text != NULL)
   	{
   		secondary_markup = g_strdup_printf ("<small>%s</small>",
@@ -132,6 +129,24 @@ create_io_loading_error_message_area (const gchar *primary_text,
 
 	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (message_area),
 					 hbox_content);
+	return message_area;
+}
+
+static GtkWidget *
+create_io_loading_error_message_area (const gchar *primary_text,
+				      const gchar *secondary_text)
+{
+	GtkWidget *message_area;
+
+	message_area = gedit_message_area_new_with_buttons (
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					NULL);
+
+	set_message_area_text_and_icon (GEDIT_MESSAGE_AREA (message_area),
+					"gtk-dialog-error",
+					primary_text,
+					secondary_text);
+
 	return message_area;
 }
 
@@ -1368,6 +1383,63 @@ gedit_unrecoverable_saving_error_message_area_new (const gchar  *uri,
 	g_free (uri_for_display);
 	g_free (error_message);
 	g_free (message_details);
+
+	return message_area;
+}
+
+GtkWidget *
+gedit_externally_modified_message_area_new (const gchar *uri,
+					    gboolean     document_modified)
+{
+       	gchar *full_formatted_uri;
+       	gchar *uri_for_display;
+       	gchar *temp_uri_for_display;
+	const gchar *primary_text;
+	const gchar *secondary_text;
+	GtkWidget *message_area;
+
+	g_return_val_if_fail (uri != NULL, NULL);
+
+	full_formatted_uri = gedit_utils_format_uri_for_display (uri);
+
+	/* Truncate the URI so it doesn't get insanely wide. Note that even
+	 * though the dialog uses wrapped text, if the URI doesn't contain
+	 * white space then the text-wrapping code is too stupid to wrap it.
+	 */
+	temp_uri_for_display = gedit_utils_str_middle_truncate (full_formatted_uri, 
+								MAX_URI_IN_DIALOG_LENGTH);								
+	g_free (full_formatted_uri);
+
+	uri_for_display = g_markup_printf_escaped ("<i>%s</i>", temp_uri_for_display);
+	g_free (temp_uri_for_display);
+
+	// FIXME: review this message, it's not clear since for the user the "modification"
+	// could be interpreted as the changes he made in the document. beside "reading" is
+	// not accurate (since last load/save)
+	primary_text = g_strdup_printf (_("The file %s changed on disk."),
+					uri_for_display);
+	g_free (uri_for_display);
+
+	if (document_modified)
+		secondary_text = _("Do you want to drop your changes and reload the file?");
+	else
+		secondary_text = _("Do you want to reload the file?");
+
+	message_area = gedit_message_area_new ();
+
+	set_message_area_text_and_icon (GEDIT_MESSAGE_AREA (message_area),
+					"gtk-dialog-warning",
+					primary_text,
+					secondary_text);
+
+	gedit_message_area_add_stock_button_with_text (GEDIT_MESSAGE_AREA (message_area),
+						       _("_Reload"),
+						       GTK_STOCK_REFRESH,
+						       GTK_RESPONSE_OK);
+
+	gedit_message_area_add_button (GEDIT_MESSAGE_AREA (message_area),
+				       GTK_STOCK_CANCEL,
+				       GTK_RESPONSE_CANCEL);
 
 	return message_area;
 }

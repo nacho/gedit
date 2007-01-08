@@ -82,6 +82,8 @@ struct _GeditTabPrivate
         
 	gint	                not_editable : 1;
 	gint                    auto_save : 1;
+
+	gint                    ask_if_externally_modified : 1;
 };
 
 G_DEFINE_TYPE(GeditTab, gedit_tab, GTK_TYPE_VBOX)
@@ -165,7 +167,6 @@ remove_auto_save_timeout (GeditTab *tab)
 	g_source_remove (tab->priv->auto_save_timeout);
 	tab->priv->auto_save_timeout = 0;
 }
-
 
 static void
 gedit_tab_get_property (GObject    *object,
@@ -293,7 +294,6 @@ gedit_tab_class_init (GeditTabClass *klass)
 	g_type_class_add_private (object_class, sizeof (GeditTabPrivate));
 }
 
-
 GeditTabState
 gedit_tab_get_state (GeditTab *tab)
 {
@@ -404,8 +404,6 @@ gedit_tab_set_state (GeditTab      *tab,
 
 	g_object_notify (G_OBJECT (tab), "state");		
 }
-
-
 
 static void 
 document_uri_notify_handler (GeditDocument *document,
@@ -1062,6 +1060,8 @@ document_loaded (GeditDocument *document,
 		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
 		
 		install_auto_save_timeout_if_needed (tab);
+
+		tab->priv->ask_if_externally_modified = TRUE;
 	}
 
  end:
@@ -1381,10 +1381,107 @@ document_saved (GeditDocument *document,
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW);
 		else
 			gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
+
+		tab->priv->ask_if_externally_modified = TRUE;
 			
 		end_saving (tab);
 	}
+}
 
+static void 
+externally_modified_notification_message_area_response (GeditMessageArea *message_area,
+							gint              response_id,
+							GeditTab         *tab)
+{
+	GeditView *view;
+
+	set_message_area (tab, NULL);
+	view = gedit_tab_get_view (tab);
+
+	if (response_id == GTK_RESPONSE_OK)
+	{
+		_gedit_tab_revert (tab);
+	}
+	else
+	{
+		tab->priv->ask_if_externally_modified = FALSE;
+
+		/* go back to normal state */
+		gedit_tab_set_state (tab, GEDIT_TAB_STATE_NORMAL);
+	}
+
+	gtk_widget_grab_focus (GTK_WIDGET (view));
+}
+
+static void
+display_externally_modified_notification (GeditTab *tab)
+{
+	GtkWidget *message_area;
+	GeditDocument *doc;
+	gchar *uri;
+	gboolean document_modified;
+
+	doc = gedit_tab_get_document (tab);
+	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
+
+	/* uri cannot be NULL, we're here because
+	 * the file we're editing changed on disk */
+	uri = gedit_document_get_uri (doc);
+	g_return_if_fail (uri != NULL);
+
+	document_modified = gtk_text_buffer_get_modified (GTK_TEXT_BUFFER(doc));
+	message_area = gedit_externally_modified_message_area_new (uri, document_modified);
+	g_free (uri);
+
+	tab->priv->message_area = NULL;
+	set_message_area (tab, message_area);
+	gtk_widget_show (message_area);
+
+	g_signal_connect (message_area,
+			  "response",
+			  G_CALLBACK (externally_modified_notification_message_area_response),
+			  tab);
+}
+
+static gboolean
+view_focused_in (GtkWidget     *widget,
+                 GdkEventFocus *event,
+                 GeditTab      *tab)
+{
+	GeditDocument *doc;
+
+	g_return_val_if_fail (GEDIT_IS_TAB (tab), FALSE);
+
+	/* we try to detect file changes only in the normal state */
+	if (tab->priv->state != GEDIT_TAB_STATE_NORMAL)
+	{
+		return FALSE;
+	}
+
+	/* we already asked, don't bug the user again */
+	if (!tab->priv->ask_if_externally_modified)
+	{
+		return FALSE;
+	}
+
+	doc = gedit_tab_get_document (tab);
+
+	/* If file was never saved or is remote we do not check */
+	if (!gedit_document_is_local (doc))
+	{
+		return FALSE;
+	}
+
+	if (_gedit_document_check_externally_modified (doc))
+	{
+		gedit_tab_set_state (tab, GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION);
+
+		display_externally_modified_notification (tab);
+
+		return FALSE;
+	}
+
+	return FALSE;
 }
 
 static void
@@ -1401,6 +1498,8 @@ gedit_tab_init (GeditTab *tab)
 	tab->priv->not_editable = FALSE;
 
 	tab->priv->save_flags = 0;
+
+	tab->priv->ask_if_externally_modified = TRUE;
 	
 	/* Create the scrolled window */
 	sw = gtk_scrolled_window_new (NULL, NULL);
@@ -1459,11 +1558,16 @@ gedit_tab_init (GeditTab *tab)
 			  "saved",
 			  G_CALLBACK (document_saved),
 			  tab);
-			  
-	g_signal_connect_after(tab->priv->view,
-			       "realize",
-			       G_CALLBACK (view_realized),
-			       tab);
+
+	g_signal_connect_after (tab->priv->view,
+				"focus-in-event",
+				G_CALLBACK (view_focused_in),
+				tab);
+
+	g_signal_connect_after (tab->priv->view,
+				"realize",
+				G_CALLBACK (view_realized),
+				tab);
 }
 
 GtkWidget *
@@ -1836,7 +1940,8 @@ _gedit_tab_revert (GeditTab *tab)
 	gchar *uri;
 
 	g_return_if_fail (GEDIT_IS_TAB (tab));
-	g_return_if_fail (tab->priv->state == GEDIT_TAB_STATE_NORMAL);
+	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) ||
+			  (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION));
 
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
@@ -1865,9 +1970,11 @@ void
 _gedit_tab_save (GeditTab *tab)
 {
 	GeditDocument *doc;
+	GeditDocumentSaveFlags save_flags;
 
 	g_return_if_fail (GEDIT_IS_TAB (tab));
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) ||
+			  (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) ||
 			  (tab->priv->state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW));
 	g_return_if_fail (tab->priv->tmp_save_uri == NULL);
 	g_return_if_fail (tab->priv->tmp_encoding == NULL);
@@ -1875,6 +1982,21 @@ _gedit_tab_save (GeditTab *tab)
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 	g_return_if_fail (!gedit_document_is_untitled (doc));
+
+	if (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
+	{
+		/* We already told the user about the external
+		 * modification: hide the message area and set
+		 * the save flag.
+		 */
+
+		set_message_area (tab, NULL);
+		save_flags = tab->priv->save_flags | GEDIT_DOCUMENT_SAVE_IGNORE_MTIME;
+	}
+	else
+	{
+		save_flags = tab->priv->save_flags;
+	}
 
 	gedit_tab_set_state (tab, GEDIT_TAB_STATE_SAVING);
 
@@ -1885,7 +2007,7 @@ _gedit_tab_save (GeditTab *tab)
 	if (tab->priv->auto_save_timeout > 0)
 		remove_auto_save_timeout (tab);
 		
-	gedit_document_save (doc, tab->priv->save_flags);
+	gedit_document_save (doc, save_flags);
 }
 
 static gboolean

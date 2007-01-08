@@ -178,11 +178,9 @@ void		 gedit_document_save_as 	(GeditDocument       *doc,
 gboolean	 gedit_document_is_untouched 	(GeditDocument       *doc);
 gboolean	 gedit_document_is_untitled 	(GeditDocument       *doc);
 
+gboolean	 gedit_document_is_local	(GeditDocument       *doc);
+
 gboolean	 gedit_document_get_deleted	(GeditDocument       *doc);
-/* Ancora da discutere
-gboolean	 gedit_document_get_externally_modified
-						(GeditDocument       *doc);
-*/
 
 gboolean	 gedit_document_goto_line 	(GeditDocument       *doc, 
 						 gint                 line);
@@ -234,8 +232,11 @@ gboolean	 gedit_document_get_enable_search_highlighting
  */
 gboolean	_gedit_document_is_saving_as	(GeditDocument       *doc);
 
-// CHECK: va bene un gint?
 glong		 _gedit_document_get_seconds_since_last_save_or_load 
+						(GeditDocument       *doc);
+
+/* Note: this is a sync stat: use only on local files */
+gboolean	_gedit_document_check_externally_modified
 						(GeditDocument       *doc);
 
 void		_gedit_document_search_region   (GeditDocument       *doc,

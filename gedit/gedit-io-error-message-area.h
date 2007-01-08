@@ -63,6 +63,9 @@ GtkWidget	*gedit_no_backup_saving_error_message_area_new		 (const gchar         
 GtkWidget	*gedit_unrecoverable_saving_error_message_area_new	 (const gchar         *uri,
 									  const GError        *error);
 
+GtkWidget	*gedit_externally_modified_message_area_new		 (const gchar         *uri,
+									  gboolean             document_modified);
+
 G_END_DECLS
 
 #endif  /* __GEDIT_IO_ERROR_MESSAGE_AREA_H__  */

@@ -673,6 +673,7 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "FileSave");
 	gtk_action_set_sensitive (action,
 				  (state_normal ||
+				   (state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) ||
 				   (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
 				  !gedit_document_get_readonly (doc) &&
 				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
@@ -681,14 +682,16 @@ set_sensitivity_according_to_tab (GeditWindow *window,
 					      "FileSaveAs");
 	gtk_action_set_sensitive (action,
 				  (state_normal ||
-				  (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
+				   (state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION) ||
+				   (state == GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW)) &&
 				  !(lockdown & GEDIT_LOCKDOWN_SAVE_TO_DISK));
-				  	
+
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FileRevert");
-	gtk_action_set_sensitive (action, 
-				  !gedit_document_is_untitled (doc) &&
-				  state_normal);
+	gtk_action_set_sensitive (action,
+				  (state_normal ||
+				   (state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)) &&
+				  !gedit_document_is_untitled (doc));
 
 	action = gtk_action_group_get_action (window->priv->action_group,
 					      "FilePrintPreview");

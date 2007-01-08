@@ -303,6 +303,12 @@
   (return-type "gboolean")
 )
 
+(define-method is_local
+  (of-object "GeditDocument")
+  (c-name "gedit_document_is_local")
+  (return-type "gboolean")
+)
+
 (define-method get_deleted
   (of-object "GeditDocument")
   (c-name "gedit_document_get_deleted")

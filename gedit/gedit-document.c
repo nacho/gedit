@@ -887,6 +887,40 @@ gedit_document_get_readonly (GeditDocument *doc)
 	return doc->priv->readonly;
 }
 
+gboolean
+_gedit_document_check_externally_modified (GeditDocument *doc)
+{
+	GnomeVFSFileInfo *info;
+	GnomeVFSResult result;
+	gint file_mtime;
+
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+
+	if (doc->priv->uri == NULL)
+	{
+		return FALSE;
+	}
+
+	info = gnome_vfs_file_info_new ();
+
+	result = gnome_vfs_get_file_info_uri (doc->priv->vfs_uri,
+					      info,
+					      GNOME_VFS_FILE_INFO_DEFAULT|
+					      GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+	if (result != GNOME_VFS_OK)
+	{
+		gnome_vfs_file_info_unref (info);
+
+		return FALSE;
+	}
+
+	file_mtime = info->mtime;
+
+	gnome_vfs_file_info_unref (info);
+
+	return (file_mtime > doc->priv->mtime);
+}
+
 static void
 reset_temp_loading_data (GeditDocument       *doc)
 {
@@ -1202,6 +1236,18 @@ gedit_document_is_untitled (GeditDocument *doc)
 	return (doc->priv->uri == NULL);
 }
 
+gboolean
+gedit_document_is_local (GeditDocument *doc)
+{
+	g_return_val_if_fail (GEDIT_IS_DOCUMENT (doc), FALSE);
+
+	if (doc->priv->uri == NULL)
+	{
+		return FALSE;
+	}
+
+	return gedit_utils_uri_has_file_scheme (doc->priv->uri);
+}
 
 gboolean
 gedit_document_get_deleted (GeditDocument *doc)
