@@ -23,6 +23,11 @@ EXTRA_DIST = \
 	$(desktop_in_files) \
 	$(tools_in_files)
 
-CLEAN_FILES = \
+CLEANFILES = \
 	$(desktop_files) \
 	$(tools_SCRIPTS)
+
+DISTCLEANFILES = \
+	$(desktop_files) \
+	$(tools_SCRIPTS)
+
