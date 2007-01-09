@@ -6,14 +6,14 @@
 # Andreas Hyden <a.hyden@cyberpoint.se>, 2000.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003, 2004, 2005.
 #
-# $Id$
+# $Id: sv.po,v 1.176 2006/12/25 13:06:05 dnylande Exp $
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gedit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-25 10:36+0100\n"
-"PO-Revision-Date: 2006-12-25 13:31+0100\n"
+"POT-Creation-Date: 2007-01-09 03:32+0000\n"
+"PO-Revision-Date: 2007-01-09 16:55+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgid "A custom font that will be used for the editing area. This will only take
 msgstr "Ett anpassat typsnitt som används för redigeringsytan. Detta kommer endast att ha effekt om alternativet \"Använd standardtypsnitt\" är frånslaget."
 
 #: ../data/gedit.schemas.in.h:2
-#: ../gedit/gedit-plugin-manager.c:747
+#: ../gedit/gedit-plugin-manager.c:766
 msgid "Active plugins"
 msgstr "Aktiva insticksmoduler"
 
@@ -262,8 +262,8 @@ msgid "Side Pane is Visible"
 msgstr "Sidopanelen är synlig"
 
 #: ../data/gedit.schemas.in.h:71
-msgid "Sorted list of encodings used by gedit for auto-detecting the encoding of a file. \"CURRENT\" is the current locale encoding. Only recognized encodings are used."
-msgstr "Sorterad lista med kodningar som används av gedit för automatisk detektering av kodningen för en fil. \"CURRENT\" är kodningen för den aktuella lokalen. Endast kända kodningar används."
+msgid "Sorted list of encodings used by gedit for auto-detecting the encoding of a file. \"CURRENT\" represents the current locale encoding. Only recognized encodings are used."
+msgstr "Sorterad lista över teckenkodningar som används av gedit för automatisk detektering av kodningen för en fil. \"CURRENT\" är kodningen för den aktuella lokalen. Endast kända kodningar används."
 
 #: ../data/gedit.schemas.in.h:72
 msgid "Specifies how to wrap long lines for printing. Use \"GTK_WRAP_NONE\" for no wrapping, \"GTK_WRAP_WORD\" for wrapping at word boundaries, and \"GTK_WRAP_CHAR\" for wrapping at individual character boundaries. Note that the values are case-sensitive, so make sure they appear exactly as mentioned here."
@@ -418,8 +418,8 @@ msgid "Whether to use the system's default colors for the editing area. If this 
 msgstr "Huruvida systemets standardfärger ska användas för redigeringsytan. Om detta alternativ är frånslaget kommer färgerna i redigeringsytan att vara de som är angivna i alternativen \"Bakgrundsfärg\", \"Textfärg\", \"Färg på markerad text\" och \"Markeringsfärg\"."
 
 #: ../data/gedit.schemas.in.h:110
-msgid "Whether to use the system's default font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the \"Editor Font\" option will be used instead of the system font."
-msgstr "Huruvida systemets standardtypsnitt ska användas för redigering av text istället för ett typsnitt som är specifikt för gedit. Om detta alternativ är frånslaget kommer typsnittet som är angivet i alternativet \"Redigerartypsnitt\" att användas istället för systemtypsnittet."
+msgid "Whether to use the system's default fixed width font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the \"Editor Font\" option will be used instead of the system font."
+msgstr "Huruvida systemets standardtypsnitt med fast breddsteg ska användas för redigering av text istället för ett typsnitt som är specifikt för gedit. Om detta alternativ är inaktiverat, kommer typsnittet som är angivet i alternativet \"Redigerartypsnitt\" att användas istället för systemtypsnittet."
 
 #: ../data/gedit.schemas.in.h:111
 msgid "Writable VFS schemes"
@@ -433,11 +433,19 @@ msgid "[ISO-8859-15]"
 msgstr "[UTF-8,ISO-8859-15]"
 
 #. Translators: This is the sorted list of encodings used by gedit
-#. for auto-detecting the encoding of a file. "CURRENT" is the current locale encoding.
+#. for auto-detecting the encoding of a file. You may want to customize it adding
+#. encodings that are common in your country, for instance the GB18030 encoding
+#. for the Chinese	translation. You may also want to remove the ISO-8859-15 encoding
+#. (covering English and most Western European languages) if you think people
+#. in you country will rarely use it.
+#. "CURRENT" is a magic value used by gedit and it represents the encoding
+#. for the current locale, so please don't translate the "CURRENT" term.
 #. Only recognized encodings are used.
-#: ../data/gedit.schemas.in.h:118
-msgid "[UTF-8,CURRENT,ISO-8859-15]"
-msgstr "[UTF-8,CURRENT,ISO-8859-15]"
+#. See http://svn.gnome.org/viewcvs/gedit/trunk/gedit/gedit-encodings.c?view=markup for
+#. a list of supported encodings
+#: ../data/gedit.schemas.in.h:126
+msgid "[UTF-8,CURRENT,ISO-8859-15,UTF-16]"
+msgstr "[UTF-8,CURRENT,ISO-8859-1,ISO-8859-15]"
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:140
 msgid "Logout _without Saving"
@@ -657,31 +665,36 @@ msgstr "_Återställ standardtypsnitt"
 msgid "lines"
 msgstr "rad"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:651
+#: ../gedit/dialogs/gedit-preferences-dialog.c:652
 msgid "Push this button to select the font to be used by the editor"
 msgstr "Tryck på denna knapp för att välja det typsnitt som används av redigeraren"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:653
+#: ../gedit/dialogs/gedit-preferences-dialog.c:654
 msgid "Push this button to configure text color"
 msgstr "Tryck på denna knapp för att konfigurera textfärg"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:655
+#: ../gedit/dialogs/gedit-preferences-dialog.c:656
 msgid "Push this button to configure background color"
 msgstr "Tryck på denna knapp för att konfigurera bakgrundsfärg"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:657
+#: ../gedit/dialogs/gedit-preferences-dialog.c:658
 msgid "Push this button to configure the color in which the selected text should appear"
 msgstr "Tryck på denna knapp för att konfigurera den färg som markerad text ska visas med"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:660
+#: ../gedit/dialogs/gedit-preferences-dialog.c:661
 msgid "Push this button to configure the color in which the selected text should be marked"
 msgstr "Tryck på denna knapp för att konfigurera den färg som markerad text ska vara markerad med"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1169
+#: ../gedit/dialogs/gedit-preferences-dialog.c:670
+#, c-format
+msgid "_Use the system fixed width font (%s)"
+msgstr "_Använd systemets typsnitt med fast breddsteg (%s)"
+
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1178
 msgid "Elements"
 msgstr "Element"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.c:1281
+#: ../gedit/dialogs/gedit-preferences-dialog.c:1290
 msgid "gedit Preferences"
 msgstr "Inställningar för gedit"
 
@@ -870,23 +883,19 @@ msgstr "_Högermarginal vid kolumn:"
 msgid "_Tab width:"
 msgstr "_Tabulatorbredd:"
 
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
-msgid "_Use default theme font"
-msgstr "_Använd standardtypsnitt i tema"
-
 # Antar att detta är i "... var [ ] minut", alltså inte plural på svenska
-#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:53
+#: ../gedit/dialogs/gedit-preferences-dialog.glade.h:52
 msgid "_minutes"
 msgstr "_minut"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:302
 #: ../gedit/dialogs/gedit-search-dialog.glade.h:2
-#: ../gedit/gedit-window.c:1362
+#: ../gedit/gedit-window.c:1365
 msgid "Replace"
 msgstr "Ersätt"
 
 #: ../gedit/dialogs/gedit-search-dialog.c:313
-#: ../gedit/gedit-window.c:1360
+#: ../gedit/gedit-window.c:1363
 msgid "Find"
 msgstr "Sök"
 
@@ -1103,8 +1112,8 @@ msgstr "Kunde inte få tag på filnamn för säkerhetskopia"
 
 #: ../gedit/gedit-documents-panel.c:89
 #: ../gedit/gedit-documents-panel.c:103
-#: ../gedit/gedit-window.c:1931
-#: ../gedit/gedit-window.c:1936
+#: ../gedit/gedit-window.c:1934
+#: ../gedit/gedit-window.c:1939
 msgid "Read Only"
 msgstr "Skrivskyddad"
 
@@ -1282,292 +1291,312 @@ msgstr "Alla textfiler"
 msgid "There was an error displaying help."
 msgstr "Ett fel inträffade vid visning av hjälp."
 
-#: ../gedit/gedit-io-error-message-area.c:171
+#: ../gedit/gedit-io-error-message-area.c:186
 #, c-format
 msgid "Could not find the file %s."
 msgstr "Kunde inte hitta filen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:173
-#: ../gedit/gedit-io-error-message-area.c:212
-#: ../gedit/gedit-io-error-message-area.c:228
+#: ../gedit/gedit-io-error-message-area.c:188
+#: ../gedit/gedit-io-error-message-area.c:227
+#: ../gedit/gedit-io-error-message-area.c:243
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:178
-#: ../gedit/gedit-io-error-message-area.c:417
+#: ../gedit/gedit-io-error-message-area.c:193
+#: ../gedit/gedit-io-error-message-area.c:432
 msgid "The file contains corrupted data."
 msgstr "Filen innehåller trasiga data."
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:189
-#: ../gedit/gedit-io-error-message-area.c:428
+#: ../gedit/gedit-io-error-message-area.c:204
+#: ../gedit/gedit-io-error-message-area.c:443
 #, c-format
 msgid "gedit cannot handle %s locations."
 msgstr "gedit kan inte hantera %s-platser."
 
-#: ../gedit/gedit-io-error-message-area.c:195
-#: ../gedit/gedit-io-error-message-area.c:434
+#: ../gedit/gedit-io-error-message-area.c:210
+#: ../gedit/gedit-io-error-message-area.c:449
 msgid "gedit cannot handle this location."
 msgstr "gedit kan inte hantera denna plats."
 
-#: ../gedit/gedit-io-error-message-area.c:202
-#: ../gedit/gedit-io-error-message-area.c:441
+#: ../gedit/gedit-io-error-message-area.c:217
+#: ../gedit/gedit-io-error-message-area.c:456
 msgid "The file contains data in an invalid format."
 msgstr "Filen innehåller data i ett ogiltigt format."
 
-#: ../gedit/gedit-io-error-message-area.c:206
-#: ../gedit/gedit-io-error-message-area.c:445
+#: ../gedit/gedit-io-error-message-area.c:221
+#: ../gedit/gedit-io-error-message-area.c:460
 msgid "The file is too big."
 msgstr "Filen är för stor."
 
-#: ../gedit/gedit-io-error-message-area.c:210
+#: ../gedit/gedit-io-error-message-area.c:225
 #, c-format
 msgid "%s is not a valid location."
 msgstr "%s är inte en giltig plats."
 
-#: ../gedit/gedit-io-error-message-area.c:217
-#: ../gedit/gedit-io-error-message-area.c:449
+#: ../gedit/gedit-io-error-message-area.c:232
+#: ../gedit/gedit-io-error-message-area.c:464
 msgid "You do not have the permissions necessary to open the file."
 msgstr "Du har inte tillräckliga rättigheter för att öppna filen."
 
-#: ../gedit/gedit-io-error-message-area.c:221
-#: ../gedit/gedit-io-error-message-area.c:453
-#: ../gedit/gedit-io-error-message-area.c:1206
+#: ../gedit/gedit-io-error-message-area.c:236
+#: ../gedit/gedit-io-error-message-area.c:468
+#: ../gedit/gedit-io-error-message-area.c:1221
 msgid "There are too many open files. Please close some applications and try again."
 msgstr "Det finns för många öppna filer. Stäng några program och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:226
-#: ../gedit/gedit-io-error-message-area.c:458
+#: ../gedit/gedit-io-error-message-area.c:241
+#: ../gedit/gedit-io-error-message-area.c:473
 #, c-format
 msgid "%s is a directory."
 msgstr "%s är en katalog."
 
-#: ../gedit/gedit-io-error-message-area.c:233
-#: ../gedit/gedit-io-error-message-area.c:463
+#: ../gedit/gedit-io-error-message-area.c:248
+#: ../gedit/gedit-io-error-message-area.c:478
 msgid "Not enough available memory to open the file. Please close some running applications and try again."
 msgstr "Det finns inte tillräckligt med tillgängligt minne för att öppna filen. Stäng några körande program och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:261
-#: ../gedit/gedit-io-error-message-area.c:491
-#: ../gedit/gedit-io-error-message-area.c:1245
+#: ../gedit/gedit-io-error-message-area.c:276
+#: ../gedit/gedit-io-error-message-area.c:506
+#: ../gedit/gedit-io-error-message-area.c:1260
 #, c-format
 msgid "Host %s could not be found. Please check that your proxy settings are correct and try again."
 msgstr "Värden %s kunde inte hittas. Kontrollera att dina proxyinställningar är korrekta och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:272
-#: ../gedit/gedit-io-error-message-area.c:283
-#: ../gedit/gedit-io-error-message-area.c:291
-#: ../gedit/gedit-io-error-message-area.c:502
-#: ../gedit/gedit-io-error-message-area.c:513
-#: ../gedit/gedit-io-error-message-area.c:1256
-#: ../gedit/gedit-io-error-message-area.c:1267
-#: ../gedit/gedit-io-error-message-area.c:1275
+#: ../gedit/gedit-io-error-message-area.c:287
+#: ../gedit/gedit-io-error-message-area.c:298
+#: ../gedit/gedit-io-error-message-area.c:306
+#: ../gedit/gedit-io-error-message-area.c:517
+#: ../gedit/gedit-io-error-message-area.c:528
+#: ../gedit/gedit-io-error-message-area.c:1271
+#: ../gedit/gedit-io-error-message-area.c:1282
+#: ../gedit/gedit-io-error-message-area.c:1290
 msgid "Host name was invalid. Please check that you typed the location correctly and try again."
 msgstr "Värdnamnet var ogiltigt. Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:297
-#: ../gedit/gedit-io-error-message-area.c:521
-#: ../gedit/gedit-io-error-message-area.c:1281
+#: ../gedit/gedit-io-error-message-area.c:312
+#: ../gedit/gedit-io-error-message-area.c:536
+#: ../gedit/gedit-io-error-message-area.c:1296
 msgid "Host name was empty. Please check that your proxy settings are correct and try again."
 msgstr "Värdnamnet var tomt. Kontrollera att dina proxyserverinställningar är korrekta och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:303
-#: ../gedit/gedit-io-error-message-area.c:1287
+#: ../gedit/gedit-io-error-message-area.c:318
+#: ../gedit/gedit-io-error-message-area.c:1302
 msgid "Attempt to log in failed. Please check that you typed the location correctly and try again."
 msgstr "Inloggningsförsöket misslyckades. Kontrollera att du har angivit platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:309
+#: ../gedit/gedit-io-error-message-area.c:324
 msgid "The file you are trying to open is not a regular file."
 msgstr "Filen du försöker öppna är inte en vanlig fil."
 
-#: ../gedit/gedit-io-error-message-area.c:313
-#: ../gedit/gedit-io-error-message-area.c:536
-#: ../gedit/gedit-io-error-message-area.c:1315
+#: ../gedit/gedit-io-error-message-area.c:328
+#: ../gedit/gedit-io-error-message-area.c:551
+#: ../gedit/gedit-io-error-message-area.c:1330
 msgid "Connection timed out. Please try again."
 msgstr "Anslutningen gjorde time-out. Försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:352
-#: ../gedit/gedit-io-error-message-area.c:586
-#: ../gedit/gedit-io-error-message-area.c:1356
+#: ../gedit/gedit-io-error-message-area.c:367
+#: ../gedit/gedit-io-error-message-area.c:601
+#: ../gedit/gedit-io-error-message-area.c:1371
 #, c-format
 msgid "Unexpected error: %s"
 msgstr "Oväntat fel: %s"
 
-#: ../gedit/gedit-io-error-message-area.c:358
-#: ../gedit/gedit-io-error-message-area.c:752
+#: ../gedit/gedit-io-error-message-area.c:373
+#: ../gedit/gedit-io-error-message-area.c:767
 #, c-format
 msgid "Could not open the file %s."
 msgstr "Kunde inte öppna filen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:367
-#: ../gedit/gedit-io-error-message-area.c:659
+#: ../gedit/gedit-io-error-message-area.c:382
+#: ../gedit/gedit-io-error-message-area.c:674
 msgid "_Retry"
 msgstr "_Försök igen"
 
-#: ../gedit/gedit-io-error-message-area.c:412
+#: ../gedit/gedit-io-error-message-area.c:427
 msgid "gedit cannot find it. Perhaps it has recently been deleted."
 msgstr "gedit kan inte hitta den. Den har kanske nyligen tagits bort."
 
-#: ../gedit/gedit-io-error-message-area.c:527
+#: ../gedit/gedit-io-error-message-area.c:542
 msgid "Attempt to log in failed."
 msgstr "Inloggningsförsök misslyckades."
 
-#: ../gedit/gedit-io-error-message-area.c:531
+#: ../gedit/gedit-io-error-message-area.c:546
 #, c-format
 msgid "%s is not a regular file."
 msgstr "%s är inte en vanlig fil."
 
-#: ../gedit/gedit-io-error-message-area.c:592
+#: ../gedit/gedit-io-error-message-area.c:607
 #, c-format
 msgid "Could not revert the file %s."
 msgstr "Kunde inte återställa filen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:616
+#: ../gedit/gedit-io-error-message-area.c:631
 msgid "Ch_aracter Coding:"
 msgstr "T_eckenkodning:"
 
-#: ../gedit/gedit-io-error-message-area.c:754
+#: ../gedit/gedit-io-error-message-area.c:769
 msgid "gedit has not been able to detect the character coding."
 msgstr "Gedit kunde inte identifiera teckenkodningen."
 
-#: ../gedit/gedit-io-error-message-area.c:756
-#: ../gedit/gedit-io-error-message-area.c:765
+#: ../gedit/gedit-io-error-message-area.c:771
+#: ../gedit/gedit-io-error-message-area.c:780
 msgid "Please check that you are not trying to open a binary file."
 msgstr "Kontrollera att du inte försöker öppna en binär fil."
 
-#: ../gedit/gedit-io-error-message-area.c:757
+#: ../gedit/gedit-io-error-message-area.c:772
 msgid "Select a character coding from the menu and try again."
 msgstr "Välj en teckenkodning från menyn och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:762
+#: ../gedit/gedit-io-error-message-area.c:777
 #, c-format
 msgid "Could not open the file %s using the %s character coding."
 msgstr "Kunde inte öppna filen %s med teckenkodningen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:766
-#: ../gedit/gedit-io-error-message-area.c:818
+#: ../gedit/gedit-io-error-message-area.c:781
+#: ../gedit/gedit-io-error-message-area.c:833
 msgid "Select a different character coding from the menu and try again."
 msgstr "Välj en annan teckenkodning från menyn och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:813
+#: ../gedit/gedit-io-error-message-area.c:828
 #, c-format
 msgid "Could not save the file %s using the %s character coding."
 msgstr "Kunde inte spara filen %s med teckenkodningen %s."
 
-#: ../gedit/gedit-io-error-message-area.c:816
+#: ../gedit/gedit-io-error-message-area.c:831
 msgid "The document contains one or more characters that cannot be encoded using the specified character coding."
 msgstr "Detta dokument innehåller ett eller flera tecken som inte kan kodas med den angivna teckenkodningen."
 
-#: ../gedit/gedit-io-error-message-area.c:879
+#: ../gedit/gedit-io-error-message-area.c:894
 msgid "_Edit Anyway"
 msgstr "_Redigera ändå"
 
-#: ../gedit/gedit-io-error-message-area.c:882
+#: ../gedit/gedit-io-error-message-area.c:897
 msgid "_Don't Edit"
 msgstr "Redigera in_te"
 
-#: ../gedit/gedit-io-error-message-area.c:897
+#: ../gedit/gedit-io-error-message-area.c:912
 #, c-format
 msgid "This file (%s) is already open in another gedit window."
 msgstr "Denna fil (%s) är redan öppnad i ett annat gedit-fönster."
 
-#: ../gedit/gedit-io-error-message-area.c:912
+#: ../gedit/gedit-io-error-message-area.c:927
 msgid "gedit opened this instance of the file in a non-editable way. Do you want to edit it anyway?"
 msgstr "Gedit öppnade denna instans av filen på ett icke-redigerbart sätt. Vill du redigera den ändå?"
 
-#: ../gedit/gedit-io-error-message-area.c:970
-#: ../gedit/gedit-io-error-message-area.c:1065
+#: ../gedit/gedit-io-error-message-area.c:985
+#: ../gedit/gedit-io-error-message-area.c:1080
 msgid "_Save Anyway"
 msgstr "_Spara ändå"
 
-#: ../gedit/gedit-io-error-message-area.c:974
-#: ../gedit/gedit-io-error-message-area.c:1069
+#: ../gedit/gedit-io-error-message-area.c:989
+#: ../gedit/gedit-io-error-message-area.c:1084
 msgid "_Don't Save"
 msgstr "Spara i_nte"
 
 #. FIXME: review this message, it's not clear since for the user the "modification"
 #. could be interpreted as the changes he made in the document. beside "reading" is
 #. not accurate (since last load/save)
-#: ../gedit/gedit-io-error-message-area.c:992
+#: ../gedit/gedit-io-error-message-area.c:1007
 #, c-format
 msgid "The file %s has been modified since reading it."
 msgstr "Filen %s har ändrats sedan den lästes in."
 
-#: ../gedit/gedit-io-error-message-area.c:1008
+#: ../gedit/gedit-io-error-message-area.c:1023
 msgid "If you save it, all the external changes could be lost. Save it anyway?"
 msgstr "Om du sparar det, kan alla externa ändringar går förlorade. Spara det ändå?"
 
-#: ../gedit/gedit-io-error-message-area.c:1087
+#: ../gedit/gedit-io-error-message-area.c:1102
 #, c-format
 msgid "Could not create a backup file while saving %s"
 msgstr "Kunde inte skapa en säkerhetskopia när %s sparades"
 
-#: ../gedit/gedit-io-error-message-area.c:1090
+#: ../gedit/gedit-io-error-message-area.c:1105
 #, c-format
 msgid "Could not create a temporary backup file while saving %s"
 msgstr "Kunde inte skapa en temporär säkerhetskopia när %s sparades"
 
-#: ../gedit/gedit-io-error-message-area.c:1107
+#: ../gedit/gedit-io-error-message-area.c:1122
 msgid "gedit could not backup the old copy of the file before saving the new one. You can ignore this warning and save the file anyway, but if an error occurs while saving, you could lose the old copy of the file. Save anyway?"
 msgstr "Gedit kunde inte säkerhetskopiera den gamla kopian på filen före den nya sparades. Du kan ignorera denna varning och spara filen ändå, men om ett fel inträffar när den sparas, kan du förlora den gamla kopian av filen. Spara ändå?"
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
-#: ../gedit/gedit-io-error-message-area.c:1168
+#: ../gedit/gedit-io-error-message-area.c:1183
 #, c-format
 msgid "gedit cannot handle %s locations in write mode. Please check that you typed the location correctly and try again."
 msgstr "Gedit kan inte hantera %s-platser i skrivläget. Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1176
+#: ../gedit/gedit-io-error-message-area.c:1191
 msgid "gedit cannot handle this location in write mode. Please check that you typed the location correctly and try again."
 msgstr "Gedit kan inte hantera denna plats i skrivläget. Kontrollera att du har angivit platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1185
+#: ../gedit/gedit-io-error-message-area.c:1200
 msgid "The disk where you are trying to save the file has a limitation on file sizes.  Please try saving a smaller file or saving it to a disk that does not have this limitation."
 msgstr "Disken där du försöker spara filen har en begränsning på filstorlekar. Försök att spara en mindre fil eller spara den på en disk som inte har denna begränsning."
 
-#: ../gedit/gedit-io-error-message-area.c:1192
+#: ../gedit/gedit-io-error-message-area.c:1207
 #, c-format
 msgid "%s is not a valid location. Please check that you typed the location correctly and try again."
 msgstr "%s är inte en giltig plats. Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1199
+#: ../gedit/gedit-io-error-message-area.c:1214
 msgid "You do not have the permissions necessary to save the file. Please check that you typed the location correctly and try again."
 msgstr "Du har inte de nödvändiga rättigheterna för att spara filen. Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1211
+#: ../gedit/gedit-io-error-message-area.c:1226
 #, c-format
 msgid "%s is a directory. Please check that you typed the location correctly and try again."
 msgstr "%s är en katalog. Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1217
+#: ../gedit/gedit-io-error-message-area.c:1232
 msgid "Not enough available memory to save the file. Please close some running applications and try again."
 msgstr "Det finns inte tillräckligt med tillgängligt minne för att spara filen. Stäng några körande program och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1293
+#: ../gedit/gedit-io-error-message-area.c:1308
 msgid "There is not enough disk space to save the file. Please free some disk space and try again."
 msgstr "Det finns inte tillräckligt med diskutrymme för att spara filen. Frigör en del utrymme på disken och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1299
+#: ../gedit/gedit-io-error-message-area.c:1314
 msgid "You are trying to save the file on a read-only disk. Please check that you typed the location correctly and try again."
 msgstr "Du försöker att spara filen på en skrivskyddad disk. Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1305
+#: ../gedit/gedit-io-error-message-area.c:1320
 msgid "A file with the same name already exists. Please use a different name."
 msgstr "En fil med samma namn finns redan. Använd ett annat namn."
 
-#: ../gedit/gedit-io-error-message-area.c:1310
+#: ../gedit/gedit-io-error-message-area.c:1325
 msgid "The disk where you are trying to save the file has a limitation on length of the file names. Please use a shorter name."
 msgstr "Disken där du försöker att spara filen har en begränsning för längden på filnamn. Använd ett kortare namn."
 
-#: ../gedit/gedit-io-error-message-area.c:1319
+#: ../gedit/gedit-io-error-message-area.c:1334
 #, c-format
 msgid "%s is not a regular file. Please check that you typed the location correctly and try again."
 msgstr "%s är inte en vanlig fil. Kontrollera att du angav platsen korrekt och försök igen."
 
-#: ../gedit/gedit-io-error-message-area.c:1362
+#: ../gedit/gedit-io-error-message-area.c:1377
 #, c-format
 msgid "Could not save the file %s."
 msgstr "Kunde inte spara filen %s."
+
+#. FIXME: review this message, it's not clear since for the user the "modification"
+#. could be interpreted as the changes he made in the document. beside "reading" is
+#. not accurate (since last load/save)
+#: ../gedit/gedit-io-error-message-area.c:1419
+#, c-format
+msgid "The file %s changed on disk."
+msgstr "Filen %s har ändrats på disken."
+
+#: ../gedit/gedit-io-error-message-area.c:1424
+msgid "Do you want to drop your changes and reload the file?"
+msgstr "Vill du förkasta dina ändringar och läsa om filen?"
+
+#: ../gedit/gedit-io-error-message-area.c:1426
+msgid "Do you want to reload the file?"
+msgstr "Vill du läsa om filen?"
+
+#: ../gedit/gedit-io-error-message-area.c:1436
+msgid "_Reload"
+msgstr "_Läs om"
 
 #: ../gedit/gedit-notebook.c:845
 msgid "Close document"
@@ -1583,47 +1612,47 @@ msgstr "Tom"
 msgid "Hide panel"
 msgstr "Dölj panel"
 
-#: ../gedit/gedit-plugin-manager.c:55
+#: ../gedit/gedit-plugin-manager.c:56
 msgid "Plugin"
 msgstr "Insticksmodul"
 
-#: ../gedit/gedit-plugin-manager.c:56
+#: ../gedit/gedit-plugin-manager.c:57
 msgid "Enabled"
 msgstr "Aktiverad"
 
-#: ../gedit/gedit-plugin-manager.c:502
+#: ../gedit/gedit-plugin-manager.c:515
 msgid "_About"
 msgstr "_Om"
 
-#: ../gedit/gedit-plugin-manager.c:510
+#: ../gedit/gedit-plugin-manager.c:523
 msgid "C_onfigure"
 msgstr "K_onfigurera"
 
-#: ../gedit/gedit-plugin-manager.c:520
+#: ../gedit/gedit-plugin-manager.c:533
 msgid "A_ctivate"
 msgstr "A_ktivera"
 
-#: ../gedit/gedit-plugin-manager.c:530
+#: ../gedit/gedit-plugin-manager.c:545
 msgid "Ac_tivate All"
 msgstr "Ak_tivera alla"
 
-#: ../gedit/gedit-plugin-manager.c:535
+#: ../gedit/gedit-plugin-manager.c:550
 msgid "_Deactivate All"
 msgstr "_Inaktivera alla"
 
-#: ../gedit/gedit-plugin-manager.c:776
+#: ../gedit/gedit-plugin-manager.c:795
 msgid "_About Plugin"
 msgstr "_Om insticksmodul"
 
-#: ../gedit/gedit-plugin-manager.c:780
+#: ../gedit/gedit-plugin-manager.c:799
 msgid "C_onfigure Plugin"
 msgstr "K_onfigurera insticksmodul"
 
-#: ../gedit/gedit-prefs-manager.c:170
+#: ../gedit/gedit-prefs-manager.c:171
 msgid "Cannot initialize preferences manager."
 msgstr "Kan inte initiera inställningshanteraren."
 
-#: ../gedit/gedit-prefs-manager.c:1407
+#: ../gedit/gedit-prefs-manager.c:1406
 #, c-format
 msgid "Expected `%s' got `%s' for key %s"
 msgstr "\"%s\" förväntades men \"%s\" mottogs för nyckeln %s"
@@ -1746,77 +1775,77 @@ msgstr[1] "Det finns %d flikar med fel"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:664
+#: ../gedit/gedit-tab.c:662
 #, c-format
 msgid "Reverting %s from %s"
 msgstr "Återställer %s från %s"
 
-#: ../gedit/gedit-tab.c:671
+#: ../gedit/gedit-tab.c:669
 #, c-format
 msgid "Reverting %s"
 msgstr "Återställer %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:687
+#: ../gedit/gedit-tab.c:685
 #, c-format
 msgid "Loading %s from %s"
 msgstr "Läser in %s från %s"
 
-#: ../gedit/gedit-tab.c:694
+#: ../gedit/gedit-tab.c:692
 #, c-format
 msgid "Loading %s"
 msgstr "Läser in %s"
 
 #. Translators: the first %s is a file name (e.g. test.txt) the second one
 #. is a directory (e.g. ssh://master.gnome.org/home/users/paolo)
-#: ../gedit/gedit-tab.c:777
+#: ../gedit/gedit-tab.c:775
 #, c-format
 msgid "Saving %s to %s"
 msgstr "Sparar %s till %s"
 
-#: ../gedit/gedit-tab.c:784
+#: ../gedit/gedit-tab.c:782
 #, c-format
 msgid "Saving %s"
 msgstr "Sparar %s"
 
 #. Read only
-#: ../gedit/gedit-tab.c:1541
+#: ../gedit/gedit-tab.c:1645
 msgid "RO"
 msgstr "SKRIVSK"
 
-#: ../gedit/gedit-tab.c:1586
+#: ../gedit/gedit-tab.c:1690
 #, c-format
 msgid "Error opening file %s"
 msgstr "Fel vid öppning av filen %s"
 
-#: ../gedit/gedit-tab.c:1591
+#: ../gedit/gedit-tab.c:1695
 #, c-format
 msgid "Error reverting file %s"
 msgstr "Fel vid återställning av filen %s"
 
-#: ../gedit/gedit-tab.c:1596
+#: ../gedit/gedit-tab.c:1700
 #, c-format
 msgid "Error saving file %s"
 msgstr "Fel vid sparande av filen %s"
 
-#: ../gedit/gedit-tab.c:1614
+#: ../gedit/gedit-tab.c:1718
 msgid "Unicode (UTF-8)"
 msgstr "Unicode (UTF-8)"
 
-#: ../gedit/gedit-tab.c:1621
+#: ../gedit/gedit-tab.c:1725
 msgid "Name:"
 msgstr "Namn:"
 
-#: ../gedit/gedit-tab.c:1622
+#: ../gedit/gedit-tab.c:1726
 msgid "MIME Type:"
 msgstr "MIME-typ:"
 
-#: ../gedit/gedit-tab.c:1623
+#: ../gedit/gedit-tab.c:1727
 msgid "Encoding:"
 msgstr "Kodning:"
 
-#: ../gedit/gedit-tab.c:2059
+#: ../gedit/gedit-tab.c:2181
 #, c-format
 msgid "Rendering page %d of %d..."
 msgstr "Renderar sida %d av %d..."
@@ -1859,7 +1888,7 @@ msgid "_Open..."
 msgstr "_Öppna..."
 
 #: ../gedit/gedit-ui.h:64
-#: ../gedit/gedit-window.c:1485
+#: ../gedit/gedit-window.c:1488
 msgid "Open a file"
 msgstr "Öppna en fil"
 
@@ -2108,45 +2137,45 @@ msgstr "_Underpanel"
 msgid "Show or hide the bottom pane in the current window"
 msgstr "Visa eller dölj underpanelen i det aktuella fönstret"
 
-#: ../gedit/gedit-utils.c:988
+#: ../gedit/gedit-utils.c:998
 #, c-format
 msgid "Unable to find file %s."
 msgstr "Kunde inte hitta filen %s."
 
-#: ../gedit/gedit-utils.c:992
-#: ../gedit/gedit-utils.c:1021
+#: ../gedit/gedit-utils.c:1002
+#: ../gedit/gedit-utils.c:1031
 msgid "Please check your installation."
 msgstr "Kontrollera din installation."
 
-#: ../gedit/gedit-utils.c:1017
+#: ../gedit/gedit-utils.c:1027
 #, c-format
 msgid "Unable to find the required widgets inside file %s."
 msgstr "Kunde inte hitta de nödvändiga widgetarna i filen %s."
 
 #. create "Wrap Around" menu item.
-#: ../gedit/gedit-view.c:1337
+#: ../gedit/gedit-view.c:1330
 msgid "_Wrap Around"
 msgstr "_Radbrytningsläge"
 
 #. create "Match Entire Word Only" menu item.
-#: ../gedit/gedit-view.c:1347
+#: ../gedit/gedit-view.c:1340
 msgid "Match _Entire Word Only"
 msgstr "Matcha endast _hela ord"
 
 #. create "Match Case" menu item.
-#: ../gedit/gedit-view.c:1357
+#: ../gedit/gedit-view.c:1350
 msgid "_Match Case"
 msgstr "_Gör skillnad på skiftläge"
 
-#: ../gedit/gedit-view.c:1445
+#: ../gedit/gedit-view.c:1438
 msgid "String you want to search for"
 msgstr "Sträng du vill söka efter"
 
-#: ../gedit/gedit-view.c:1454
+#: ../gedit/gedit-view.c:1447
 msgid "Line you want to move the cursor to"
 msgstr "Rad du vill flytta markören till"
 
-#: ../gedit/gedit-window.c:901
+#: ../gedit/gedit-window.c:904
 #, c-format
 msgid "Use %s highlight mode"
 msgstr "Använd färgmarkeringsläge för %s"
@@ -2154,34 +2183,34 @@ msgstr "Använd färgmarkeringsläge för %s"
 #. add the "None" item before all the others
 #. Translators: "None" means that no highlight mode is selected in the
 #. * "View->Highlight Mode" submenu and so syntax highlighting is disabled
-#: ../gedit/gedit-window.c:958
+#: ../gedit/gedit-window.c:961
 msgid "None"
 msgstr "Ingen"
 
-#: ../gedit/gedit-window.c:959
+#: ../gedit/gedit-window.c:962
 msgid "Disable syntax highlighting"
 msgstr "Inaktivera syntaxmarkering"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1239
+#: ../gedit/gedit-window.c:1242
 #, c-format
 msgid "Open '%s'"
 msgstr "Öppna \"%s\""
 
-#: ../gedit/gedit-window.c:1358
+#: ../gedit/gedit-window.c:1361
 msgid "Save"
 msgstr "Spara"
 
-#: ../gedit/gedit-window.c:1489
+#: ../gedit/gedit-window.c:1492
 msgid "Open a recently used file"
 msgstr "Öppna en nyligen använd fil"
 
-#: ../gedit/gedit-window.c:1496
+#: ../gedit/gedit-window.c:1499
 msgid "Open"
 msgstr "Öppna"
 
 #. Translators: %s is a URI
-#: ../gedit/gedit-window.c:1546
+#: ../gedit/gedit-window.c:1549
 #, c-format
 msgid "Activate '%s'"
 msgstr "Aktivera \"%s\""
@@ -2469,12 +2498,44 @@ msgstr "Verkty_g:"
 msgid "gtk-revert-to-saved"
 msgstr "gtk-revert-to-saved"
 
+#: ../plugins/externaltools/data/build.desktop.in.h:1
+msgid "Build"
+msgstr "Bygg"
+
+#: ../plugins/externaltools/data/build.desktop.in.h:2
+msgid "Run \"make\" in the document directory"
+msgstr "Kör \"make\" i dokumentkatalogen"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:1
+msgid "Open a terminal in the document location"
+msgstr "Öppna en terminal i dokumentkatalogen"
+
+#: ../plugins/externaltools/data/open-terminal-here.desktop.in.h:2
+msgid "Open terminal here"
+msgstr "Öppna en terminal här"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:1
+msgid "Remove trailing spaces"
+msgstr "Ta bort eftersläpande blanksteg"
+
+#: ../plugins/externaltools/data/remove-trailing-spaces.desktop.in.h:2
+msgid "Remove useless trailing spaces in your file"
+msgstr "Ta bort oanvändbara eftersläpande blanksteg i din fil"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:1
+msgid "Execute a custom command and put its output in a new document"
+msgstr "Kör ett anpassat kommando och lägg in dess utdata i ett nytt dokument"
+
+#: ../plugins/externaltools/data/run-command.desktop.in.h:2
+msgid "Run command"
+msgstr "Kör kommando"
+
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:1
 msgid "Easy file access from the side pane"
 msgstr "Enkel filåtkomst från sidopanelen"
 
 #: ../plugins/filebrowser/filebrowser.gedit-plugin.desktop.in.h:2
-msgid "File browser pane"
+msgid "File Browser Pane"
 msgstr "Filbläddrarpanel"
 
 #: ../plugins/filebrowser/gedit-file-browser.schemas.in.h:1
@@ -2533,72 +2594,76 @@ msgstr "Filtermönstret att filtrera med i filbläddraren. Detta filter fungerar
 msgid "This value determines what files get filtered from the file browser. Valid values are: none (filter nothing), hidden (filter hidden files), binary (filter binary files) and hidden_and_binary (filter both hidden and binary files)."
 msgstr "Detta värde fastställer vilka filer som blir filtrerade från filbläddraren. Giltiga värden är: none (filtrera ingenting), hidden (filtrera dolda filer), binary (filtrera binära filer) och hidden_and_binary (filtrera både dolda och binära filer)."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:390
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:591
 msgid "_Set root to active document"
 msgstr "_Ställ in rot till aktivt dokument"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:392
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:593
 msgid "Set the root to the active document location"
 msgstr "Ställ in roten till platsen för det aktiva dokumentet"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:394
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:598
 msgid "_Open terminal here"
 msgstr "_Öppna en terminal här"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:396
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:600
 msgid "Open a terminal at the currently opened directory"
 msgstr "Öppna en terminal vid för närvarande öppnad katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:510
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:732
 msgid "File Browser"
 msgstr "Filbläddrare"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:616
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:855
 msgid "An error occurred while creating a new directory"
 msgstr "Ett fel uppstod vid skapandet av en ny katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:619
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:858
 msgid "An error occurred while creating a new file"
 msgstr "Ett fel uppstod vid skapandet av en ny fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:624
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:863
 msgid "An error occurred while renaming a file or directory"
 msgstr "Ett fel uppstod vid namnbyte av en fil eller katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:629
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:868
 msgid "An error occurred while deleting a file or directory"
 msgstr "Ett fel uppstod vid borttagning av en fil eller katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:634
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:873
 msgid "An error occurred while opening a directory in the file manager"
 msgstr "Ett fel uppstod vid öppnandet av en katalog i filhanteraren"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:638
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:877
 msgid "An error occurred while setting a root directory"
 msgstr "Ett fel uppstod vid inställning av en rotkatalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:642
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:881
 msgid "An error occurred while loading a directory"
 msgstr "Ett fel uppstod vid inläsning av en katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:645
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:884
 msgid "An error occurred"
 msgstr "Ett fel inträffade"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:876
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1112
 msgid ""
 "Cannot move file to trash, do you\n"
-"want to delete immediately?"
+"want to delete permanently?"
 msgstr ""
-"Kan inte flytta filen till papperskorgen,\n"
-"vill du ta bort den omedelbart?"
+"Kan inte flytta filen till papperskorgen.\n"
+"Vill du ta bort den permanent?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:879
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1116
 #, c-format
 msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Filen (%s) kan inte flyttas till papperskorgen."
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:915
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1119
+msgid "The selected files cannot be moved to the trash."
+msgstr "De markerade filerna kan inte flyttas till papperskorgen."
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1152
 #, c-format
 msgid ""
 "Are you sure you want to\n"
@@ -2607,158 +2672,166 @@ msgstr ""
 "Är du säker på att du vill ta\n"
 "bort \"%s\" permanent?"
 
-#: ../plugins/filebrowser/gedit-file-browser-plugin.c:919
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1155
+msgid ""
+"Are you sure you want to\n"
+"permanently delete the selected files?."
+msgstr ""
+"Är du säker på att du vill ta bort\n"
+"de markerade filerna permanent?"
+
+#: ../plugins/filebrowser/gedit-file-browser-plugin.c:1158
 msgid "If you delete an item it is permanently lost."
 msgstr "Om du tar bort ett objekt är det permanent borta."
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2503
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1728
+#: ../plugins/filebrowser/gedit-file-browser-store.c:2621
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1832
 msgid "Invalid uri"
 msgstr "Ogiltig uri"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2861
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3054
 msgid "file"
 msgstr "fil"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2882
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2929
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3075
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3122
 msgid "The new file is currently filtered out. You need to adjust your filter settings to make the file visible"
 msgstr "Den nya filen är för närvarande bortfiltrerad. Du behöver justera dina filterinställningar för att göra filen synlig"
 
-#: ../plugins/filebrowser/gedit-file-browser-store.c:2910
+#: ../plugins/filebrowser/gedit-file-browser-store.c:3103
 msgid "directory"
 msgstr "katalog"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:714
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:736
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:720
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:746
 msgid "Recent Files"
 msgstr "Senaste filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:803
-msgid "_New Folder"
-msgstr "_Ny mapp"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:804
-msgid "Add new empty folder"
-msgstr "Lägg till ny tom mapp"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:806
-msgid "New F_ile"
-msgstr "Ny f_il"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:807
-msgid "Add new empty file"
-msgstr "Lägg till en ny tom fil"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:808
-msgid "Up"
-msgstr "Upp"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:809
-msgid "Open the parent folder"
-msgstr "Öppna föräldramappen"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:814
-msgid "_Rename"
-msgstr "_Byt namn"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:815
-msgid "Rename selected file or folder"
-msgstr "Byt namn på markerad fil eller mapp"
-
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:817
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:830
 msgid "_Move To Trash"
 msgstr "_Flytta till papperskorg"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:818
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
 msgid "Move selected file or folder to trash"
 msgstr "Flytta markerad fil eller mapp till papperskorgen"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:820
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:821
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
 msgid "Delete selected file or folder"
 msgstr "Ta bort markerad fil eller mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:827
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:840
+msgid "Up"
+msgstr "Upp"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:841
+msgid "Open the parent folder"
+msgstr "Öppna föräldramappen"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
+msgid "_New Folder"
+msgstr "_Ny mapp"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+msgid "Add new empty folder"
+msgstr "Lägg till ny tom mapp"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:849
+msgid "New F_ile"
+msgstr "Ny f_il"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:850
+msgid "Add new empty file"
+msgstr "Lägg till en ny tom fil"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:855
+msgid "_Rename"
+msgstr "_Byt namn"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:856
+msgid "Rename selected file or folder"
+msgstr "Byt namn på markerad fil eller mapp"
+
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:862
 msgid "_Previous Location"
 msgstr "_Föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:829
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:864
 msgid "Go to the previous visited location"
 msgstr "Gå till föregående besökt plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:831
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:866
 msgid "_Next Location"
 msgstr "_Nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:832
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:867
 msgid "Go to the next visited location"
 msgstr "Gå till nästa besökta plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:833
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:868
 msgid "Re_fresh View"
 msgstr "Upp_datera vy"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:834
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:869
 msgid "Refresh the view"
 msgstr "Uppdatera vyn"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:835
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:870
 msgid "_View Folder"
 msgstr "_Visa mapp"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:836
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:871
 msgid "View folder in file manager"
 msgstr "Visa mapp i filhanterare"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:843
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:878
 msgid "Show _Hidden"
 msgstr "Visa _dolda"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:844
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:879
 msgid "Show hidden files and folders"
 msgstr "Visa dolda filer och mappar"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:846
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:881
 msgid "Show _Binary"
 msgstr "Visa _binära"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:847
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:882
 msgid "Show binary files"
 msgstr "Visa binära filer"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:928
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:944
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:976
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:981
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:997
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1029
 msgid "Previous location"
 msgstr "Föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:932
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:985
 msgid "Go to previous location"
 msgstr "Gå till föregående plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:937
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:969
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:990
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1022
 msgid "Go to a previously opened location"
 msgstr "Gå till en tidigare öppnad plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:959
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1012
 msgid "Next location"
 msgstr "Nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:963
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1016
 msgid "Go to next location"
 msgstr "Gå till nästa plats"
 
-#: ../plugins/filebrowser/gedit-file-browser-widget.c:1124
-msgid "_Advanced filtering"
-msgstr "_Avancerad filtrering"
+#: ../plugins/filebrowser/gedit-file-browser-widget.c:1193
+msgid "_Match Filename"
+msgstr "_Matcha filnamn"
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -2777,7 +2850,7 @@ msgid "Unindent selected lines"
 msgstr "Dra ut de markerade raderna"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:1
-msgid "Indent lines"
+msgid "Indent Lines"
 msgstr "Dra in rader"
 
 #: ../plugins/indent/indent.gedit-plugin.desktop.in.h:2
@@ -2850,15 +2923,19 @@ msgstr "_Textsnuttar:"
 msgid "_Tab trigger:"
 msgstr "_Tabulatorutlösare:"
 
-#: ../plugins/snippets/snippets/SnippetPlaceholders.py:491
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:518
 #, python-format
 msgid "Execution of the python command (%s) exceeds the maximum time, execution aborted."
 msgstr "Körning av python-kommandot (%s) överstigen den maximala tiden, körning avbruten."
 
-#: ../plugins/snippets/snippets/SnippetPlaceholders.py:499
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:526
 #, python-format
 msgid "Execution of the python command (%s) failed: %s"
 msgstr "Körning av python-kommandot (%s) misslyckades: %s"
+
+#: ../plugins/snippets/snippets/SnippetPlaceholders.py:532
+msgid "The following python code, run in a snippet, does not return a value"
+msgstr "Följande python-kod, som kör i en kodsnutt, returnerade inget värde"
 
 #: ../plugins/snippets/snippets/SnippetPluginInstance.py:73
 msgid "Manage _Snippets..."
@@ -3116,7 +3193,7 @@ msgid "Checks the spelling of the current document."
 msgstr "Kontrollerar stavningen i det aktuella dokumentet."
 
 #: ../plugins/spell/spell.gedit-plugin.desktop.in.h:2
-msgid "Spell checker"
+msgid "Spell Checker"
 msgstr "Stavningskontroll"
 
 #: ../plugins/taglist/gedit-taglist-plugin-panel.c:536
@@ -4725,14 +4802,16 @@ msgstr "_Fråga efter ett format"
 msgid "_Use custom format"
 msgstr "_Använd anpassat format"
 
+#~ msgid "_Use default theme font"
+#~ msgstr "_Använd standardtypsnitt i tema"
+#~ msgid "_Advanced filtering"
+#~ msgstr "_Avancerad filtrering"
 #~ msgid "_Accelerator:"
 #~ msgstr "_Snabbtangent:"
 #~ msgid "External Tools Manager"
 #~ msgstr "Hantera externa verktyg"
 #~ msgid "F7"
 #~ msgstr "F7"
-#~ msgid "Run “make” in the document dir"
-#~ msgstr "Kör \"make\" i dokumentkatalogen"
 #~ msgid "_New Directory"
 #~ msgstr "_Ny katalog"
 #~ msgid "Add new empty directory"
