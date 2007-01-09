@@ -129,7 +129,6 @@ set_message_area_text_and_icon (GeditMessageArea *message_area,
 
 	gedit_message_area_set_contents (GEDIT_MESSAGE_AREA (message_area),
 					 hbox_content);
-	return message_area;
 }
 
 static GtkWidget *

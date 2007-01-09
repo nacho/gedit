@@ -1943,6 +1943,11 @@ _gedit_tab_revert (GeditTab *tab)
 	g_return_if_fail ((tab->priv->state == GEDIT_TAB_STATE_NORMAL) ||
 			  (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION));
 
+	if (tab->priv->state == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
+	{
+		set_message_area (tab, NULL);
+	}
+
 	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (GEDIT_IS_DOCUMENT (doc));
 

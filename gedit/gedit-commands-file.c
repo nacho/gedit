@@ -1081,9 +1081,31 @@ _gedit_cmd_file_save_all (GtkAction   *action,
 
 /* File revert */
 static void
-revert_dialog_response_cb (GtkDialog     *dialog,
-			   gint           response_id,
-			   GeditWindow   *window)
+do_revert (GeditWindow *window,
+	   GeditTab    *tab)
+{
+	GeditDocument *doc;
+	gchar *docname;
+
+	gedit_debug (DEBUG_COMMANDS);
+
+	doc = gedit_tab_get_document (tab);
+	docname = gedit_document_get_short_name_for_display (doc);
+
+	gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
+				        window->priv->generic_message_cid,
+				       _("Reverting the document '%s'\342\200\246"),
+				       docname);
+
+	g_free (docname);
+
+	_gedit_tab_revert (tab);
+}
+
+static void
+revert_dialog_response_cb (GtkDialog   *dialog,
+			   gint         response_id,
+			   GeditWindow *window)
 {
 	GeditTab *tab;
 	GeditDocument *doc;
@@ -1098,25 +1120,12 @@ revert_dialog_response_cb (GtkDialog     *dialog,
 	if (tab == NULL)
 		return;
 
-	if (response_id != GTK_RESPONSE_OK)
-	{
-		gtk_widget_destroy (GTK_WIDGET (dialog));
-
-		return;
-	}
-
-	doc = gedit_tab_get_document (tab);
-	docname = gedit_document_get_short_name_for_display (doc);
-
-	gedit_statusbar_flash_message (GEDIT_STATUSBAR (window->priv->statusbar),
-				        window->priv->generic_message_cid,
-				       _("Reverting the document '%s'\342\200\246"),
-				       docname);
-
-	g_free (docname);
 	gtk_widget_destroy (GTK_WIDGET (dialog));
 
-	_gedit_tab_revert (tab);
+	if (response_id == GTK_RESPONSE_OK)
+	{
+		do_revert (window, tab);
+	}
 }
 
 static GtkWidget *
@@ -1242,13 +1251,26 @@ void
 _gedit_cmd_file_revert (GtkAction   *action,
 		       GeditWindow *window)
 {
+	GeditTab       *tab;
 	GeditDocument  *doc;
 	GtkWidget      *dialog;
 	GtkWindowGroup *wg;
 
 	gedit_debug (DEBUG_COMMANDS);
 
-	doc = gedit_window_get_active_document (window);
+	tab = gedit_window_get_active_tab (window);
+	g_return_if_fail (tab != NULL);
+
+	/* If we are already displaying a notification
+	 * reverting will drop local modifications, do
+	 * not bug the user further */
+	if (gedit_tab_get_state (tab) == GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION)
+	{
+		do_revert (window, tab);
+		return;
+	}
+
+	doc = gedit_tab_get_document (tab);
 	g_return_if_fail (doc != NULL);
 	g_return_if_fail (!gedit_document_is_untitled (doc));
 
