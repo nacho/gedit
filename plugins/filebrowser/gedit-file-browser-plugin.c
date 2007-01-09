@@ -339,13 +339,13 @@ on_confirm_trash_changed (GConfClient *client,
 static void
 install_nautilus_prefs (GeditFileBrowserPluginData *data)
 {
-	GConfClient * client;
+	GConfClient *client;
 	gchar *pref;
 	gboolean prefb;
-	client = gconf_client_get_default ();
 	GeditFileBrowserViewClickPolicy policy;
 	GeditFileBrowserView *view;
 
+	client = gconf_client_get_default ();
 	if (!client)
 		return;
 
@@ -358,12 +358,12 @@ install_nautilus_prefs (GeditFileBrowserPluginData *data)
 	pref = gconf_client_get_string (client,
 	                                NAUTILUS_CLICK_POLICY_BASE_KEY "/" NAUTILUS_CLICK_POLICY_KEY,
 	                                NULL);
-	
+
 	policy = click_policy_from_string (pref);
-	
+
 	view = gedit_file_browser_widget_get_browser_view (data->tree_widget);
 	gedit_file_browser_view_set_click_policy (view, policy);
-	
+
 	if (pref) {
 		data->click_policy_handle = 
 			gconf_client_notify_add (client, 

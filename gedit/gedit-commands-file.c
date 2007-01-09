@@ -1108,8 +1108,6 @@ revert_dialog_response_cb (GtkDialog   *dialog,
 			   GeditWindow *window)
 {
 	GeditTab *tab;
-	GeditDocument *doc;
-	gchar *docname;
 
 	gedit_debug (DEBUG_COMMANDS);
 
