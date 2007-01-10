@@ -45,7 +45,7 @@ class Manager(object):
             ('word'     , _('Current word'))
         ),
         'output': (
-            ('output-panel'     , _('Insert in output panel')),
+            ('output-panel'     , _('Display in bottom pane')),
             ('new-document'     , _('Create new document')),
             ('append-document'  , _('Append to current document')),
             ('replace-document' , _('Replace current document')),
