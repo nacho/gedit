@@ -132,6 +132,9 @@
 #define GPM_BOTTOM_PANEL_SIZE		GPM_WINDOW_DIR "/bottom_panel_size"
 #define GPM_BOTTOM_PANEL_ACTIVE_PAGE	GPM_WINDOW_DIR "/bottom_panel_active_page"
 
+#define GPM_FILE_FILTER			"/gedit-2/filefilter"
+#define GPM_ACTIVE_FILE_FILTER		GPM_FILE_FILTER "/id"
+
 /* Encodings */
 #define GPM_ENCODINGS_DIR		GPM_PREFS_DIR "/encodings"
 #define GPM_AUTO_DETECTED_ENCODINGS	GPM_ENCODINGS_DIR "/auto_detected"

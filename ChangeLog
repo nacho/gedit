@@ -1,3 +1,19 @@
+2007-01-10  Paolo Maggi  <paolo@gnome.org>
+
+	Fixes bug #357529 – Open dialog doesn't retain text settings filter
+	
+	* gedit/gedit-prefs-manager-app.c
+	(gedit_prefs_manager_get_active_file_filter),
+	(gedit_prefs_manager_set_active_file_filter),
+	(gedit_prefs_manager_active_file_filter_can_set):
+	* gedit/gedit-prefs-manager-app.h:
+	* gedit/gedit-prefs-manager.h: new functions to remember the last used
+	file filter
+
+	* gedit/gedit-file-chooser-dialog.c (filter_changed) 
+	(gedit_file_chooser_dialog_new_valist): remember the last used filter
+	(all_text_files_filter): improved filter for text files
+
 2007-01-09  Paolo Borelli  <pborelli@katamail.com>
 
 	* plugins/gedit-file-browser-plugin.c: fix build with

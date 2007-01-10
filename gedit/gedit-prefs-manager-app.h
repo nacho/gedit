@@ -75,5 +75,10 @@ gint		 gedit_prefs_manager_get_bottom_panel_active_page (void);
 void 		 gedit_prefs_manager_set_bottom_panel_active_page (gint id);
 gboolean	 gedit_prefs_manager_bottom_panel_active_page_can_set (void);
 
+/* File filter */
+gint		 gedit_prefs_manager_get_active_file_filter	(void);
+void 		 gedit_prefs_manager_set_active_file_filter	(gint id);
+gboolean	 gedit_prefs_manager_active_file_filter_can_set	(void);
+
 
 #endif /* __GEDIT_PREFS_MANAGER_APP_H__ */

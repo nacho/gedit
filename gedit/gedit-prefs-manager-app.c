@@ -137,6 +137,8 @@ static gint bottom_panel_size = -1;
 static gint side_panel_active_page = 0;
 static gint bottom_panel_active_page = 0;
 
+static gint active_file_filter = -1;
+
 gboolean
 gedit_prefs_manager_app_init (void)
 {
@@ -442,6 +444,33 @@ gedit_prefs_manager_bottom_panel_active_page_can_set (void)
 	return TRUE;
 }
 
+/* File filter */
+gint
+gedit_prefs_manager_get_active_file_filter (void)
+{
+	if (active_file_filter == -1)
+		active_file_filter = gnome_config_get_int (GPM_ACTIVE_FILE_FILTER "=0");
+
+	return active_file_filter;
+}
+
+void
+gedit_prefs_manager_set_active_file_filter (gint id)
+{
+	g_return_if_fail (id >= 0);
+	
+	if (active_file_filter == id)
+		return;
+
+	active_file_filter = id;
+	gnome_config_set_int (GPM_ACTIVE_FILE_FILTER, id);
+}
+
+gboolean 
+gedit_prefs_manager_active_file_filter_can_set (void)
+{
+	return TRUE;
+}
 static void 
 gedit_prefs_manager_editor_font_changed (GConfClient *client,
 					 guint        cnxn_id, 
