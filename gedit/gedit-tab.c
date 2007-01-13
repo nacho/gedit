@@ -1840,21 +1840,25 @@ _gedit_tab_get_icon (GeditTab *tab)
 						 GTK_STOCK_OPEN, 
 						 icon_size);
 			break;
+
 		case GEDIT_TAB_STATE_REVERTING:
 			pixbuf = get_stock_icon (theme, 
 						 GTK_STOCK_REVERT_TO_SAVED, 
 						 icon_size);						 
 			break;
+
 		case GEDIT_TAB_STATE_SAVING:
 			pixbuf = get_stock_icon (theme, 
 						 GTK_STOCK_SAVE, 
 						 icon_size);
 			break;
+
 		case GEDIT_TAB_STATE_PRINTING:
 			pixbuf = get_stock_icon (theme, 
 						 GTK_STOCK_PRINT, 
 						 icon_size);
 			break;
+
 		case GEDIT_TAB_STATE_PRINT_PREVIEWING:
 		case GEDIT_TAB_STATE_SHOWING_PRINT_PREVIEW:		
 			pixbuf = get_stock_icon (theme, 
@@ -1863,13 +1867,20 @@ _gedit_tab_get_icon (GeditTab *tab)
 			break;
 
 		case GEDIT_TAB_STATE_LOADING_ERROR:
-		case GEDIT_TAB_STATE_REVERTING_ERROR:		
+		case GEDIT_TAB_STATE_REVERTING_ERROR:
 		case GEDIT_TAB_STATE_SAVING_ERROR:
 		case GEDIT_TAB_STATE_GENERIC_ERROR:
 			pixbuf = get_stock_icon (theme, 
 						 GTK_STOCK_DIALOG_ERROR, 
 						 icon_size);
 			break;
+
+		case GEDIT_TAB_STATE_EXTERNALLY_MODIFIED_NOTIFICATION:
+			pixbuf = get_stock_icon (theme,
+						 GTK_STOCK_DIALOG_WARNING,
+						 icon_size);
+			break;
+
 		default:
 		{
 			gchar *raw_uri;

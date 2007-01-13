@@ -990,22 +990,21 @@ remove_tab (GeditTab      *tab,
 {
 	GtkWidget *label, *ebox;
 	gint position;
-	
+
 	position = gtk_notebook_page_num (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
-	
+
 	label = gtk_notebook_get_tab_label (GTK_NOTEBOOK (nb), GTK_WIDGET (tab));
 	ebox = GTK_WIDGET (g_object_get_data (G_OBJECT (label), "label-ebox"));
 	gedit_tooltips_set_tip (GEDIT_TOOLTIPS (nb->priv->title_tips), 
 			        ebox, 
 			        NULL, 
 			        NULL);
-					      
+
 	g_signal_handlers_disconnect_by_func (tab,
 					      G_CALLBACK (sync_name), 
 					      label);
 
-	/**
-	 * we ref the tab so that it's still alive while the tabs_removed
+	/* we ref the tab so that it's still alive while the tabs_removed
 	 * signal is processed.
 	 */
 	g_object_ref (tab);
