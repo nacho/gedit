@@ -1428,10 +1428,11 @@ static void
 customize_for_search_mode (GeditView *view)
 {
 	GtkWidget *icon;
-	
+
 	if (view->priv->search_mode == SEARCH)
-	{	
-		icon = gtk_image_new_from_stock (GTK_STOCK_FIND, GTK_ICON_SIZE_MENU);
+	{
+		icon = gtk_image_new_from_stock (GTK_STOCK_FIND,
+						 GTK_ICON_SIZE_MENU);
 		
 		gtk_tooltips_set_tip (view->priv->tooltips,
 				      view->priv->search_entry,
@@ -1440,18 +1441,21 @@ customize_for_search_mode (GeditView *view)
 	}
 	else
 	{
-		icon = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO, GTK_ICON_SIZE_MENU);
+		icon = gtk_image_new_from_stock (GTK_STOCK_JUMP_TO,
+						 GTK_ICON_SIZE_MENU);
 		
 		gtk_tooltips_set_tip (view->priv->tooltips,
 				      view->priv->search_entry,
 				      _("Line you want to move the cursor to"),
 				      NULL);
 	}
-	
+
 	gtk_widget_show (icon);
 	sexy_icon_entry_set_icon (SEXY_ICON_ENTRY(view->priv->search_entry),
 				  SEXY_ICON_ENTRY_PRIMARY,
 				  GTK_IMAGE (icon));
+
+	g_object_unref (icon);
 }
 
 static gboolean
