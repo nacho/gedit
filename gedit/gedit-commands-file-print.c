@@ -119,6 +119,25 @@ print_dialog_response_cb (GtkWidget *dialog,
 							   &line_start,
 							   &line_end);
 
+			/* The print dialog should ensure to set the
+			 * sensitivity of the spin buttons so that
+			 * the start and end lines are in ascending
+			 * order, but it doesn't.
+			 * We reorder them if needed */
+			if (line_start > line_end)
+			{
+				gint tmp;
+
+				gedit_debug_message (DEBUG_PRINT,
+						     "line start: %d, line end: %d. Swapping.",
+						     line_start,
+						     line_end);
+
+				tmp = line_start;
+				line_start = line_end;
+				line_end = tmp;
+			}
+
 			gtk_text_iter_set_line (&start, line_start - 1);
 			gtk_text_iter_set_line (&end, line_end - 1);
 
