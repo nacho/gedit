@@ -495,10 +495,12 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 		else
 			def = GPM_DEFAULT_USE_DEFAULT_FONT;
 		
-		font = NULL;
+		if (def)
+			font = gedit_prefs_manager_get_system_font ();
+		else
+			font = gedit_prefs_manager_get_editor_font ();
 	}
-	else
-	if (strcmp (entry->key, GPM_EDITOR_FONT) == 0)
+	else if (strcmp (entry->key, GPM_EDITOR_FONT) == 0)
 	{
 		if (entry->value->type == GCONF_VALUE_STRING)
 			font = g_strdup (gconf_value_get_string (entry->value));
@@ -510,11 +512,8 @@ gedit_prefs_manager_editor_font_changed (GConfClient *client,
 	else
 		return;
 
-	if ((font == NULL) && !def)
-		font = gedit_prefs_manager_get_editor_font ();
-	else
-		font = gedit_prefs_manager_get_system_font ();
-
+	g_return_if_fail (font != NULL);
+	
 	ts = gedit_prefs_manager_get_tabs_size ();
 
 	views = gedit_app_get_views (gedit_app_get_default ());
