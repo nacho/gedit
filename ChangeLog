@@ -1,3 +1,29 @@
+2007-01-19  Steve Frécinaux  <code@istique.net>
+
+	Fix bug #346598 – modeline plugin takes too much memory.
+	
+	The modeline plugin was the only python plugin loaded by default, and
+	that had serious consequencies on gedit startup time and memory
+	comsumption.
+
+	* plugins/modelines/gedit-modeline-plugin.[ch]:
+	* plugins/modelines/modeline-parser.[ch]:
+
+	Reimplement the modeline plugin in C. (bug #346598). Also fix some
+	mistakes in the handling of vim modelines and don't parse the same
+	line twice.
+
+	* plugins/modelines/Makefile.am: replace python files with C ones.
+
+	* plugins/modelines/modelines.gedit-plugin.desktop.in: remove the
+	reference to the python loader.
+	
+	* plugins/modelines/modelines.py: deleted.
+
+	Note: the parsers are lazy and don't check whether the modeline is
+	correct wrt how the different editors define them. This was already the
+	case previously.
+
 2007-01-20  Paolo Maggi  <paolo@gnome.org>
 
 	Fixes bug #398343 – Text Editor: gedit is not accpecting sett...
