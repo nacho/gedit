@@ -844,8 +844,8 @@ remote_get_info_cb (GnomeVFSAsyncHandle *handle,
 	{
 		g_set_error (&loader->priv->error,
 			     GEDIT_DOCUMENT_ERROR,
-			     GNOME_VFS_ERROR_GENERIC, // FIXME
-			     gnome_vfs_result_to_string (GNOME_VFS_ERROR_GENERIC));
+			     GEDIT_DOCUMENT_ERROR_NOT_REGULAR_FILE,
+			     "Not a regular file");
 
 		remote_load_completed_or_failed (loader);
 
