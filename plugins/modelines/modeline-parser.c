@@ -382,7 +382,7 @@ apply_modeline (GtkSourceView *view)
 		gtk_text_buffer_get_end_iter (buffer, &iter);
 		gtk_text_iter_backward_lines (&iter,
 					      MIN (10, remaining_lines));
-		line_number = line_count - 10;
+		line_number = line_count - 11;
 	}
 
 	while (line_number < line_count)
