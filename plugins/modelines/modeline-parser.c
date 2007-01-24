@@ -365,8 +365,7 @@ apply_modeline (GtkSourceView *view)
 	while (line_number < 10 && line_number < line_count)
 	{
 		liter = iter;
-		if (!gtk_text_iter_forward_to_line_end (&iter))
-			break;
+		gtk_text_iter_forward_to_line_end (&iter);
 		line = gtk_text_buffer_get_text (buffer, &liter, &iter, TRUE);
 
 		parse_modeline (line, line_number, line_count, &options);
