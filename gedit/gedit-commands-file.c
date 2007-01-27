@@ -134,15 +134,15 @@ load_file_list (GeditWindow         *window,
 	GList         *win_docs;
 	GSList        *uris_to_load = NULL;
 	const GSList  *l;
-	
+
 	gedit_debug (DEBUG_COMMANDS);
 
 	g_return_val_if_fail ((uris != NULL) && (uris->data != NULL), 0);
 
 	win_docs = gedit_window_get_documents (window);
 
-	/* Remove the uris corresponding to documents already open in "window".
-	   Add remove duplicates from "uris" list */
+	/* Remove the uris corresponding to documents already open
+	 * in "window" and remove duplicates from "uris" list */
 	l = uris;
 	while (uris != NULL)
 	{
@@ -155,8 +155,20 @@ load_file_list (GeditWindow         *window,
 				{
 					gedit_window_set_active_tab (window, tab);
 					jump_to = FALSE;
+
+					if (line_pos > 0)
+					{
+						GeditDocument *doc;
+						GeditView *view;
+
+						doc = gedit_tab_get_document (tab);
+						view = gedit_tab_get_view (tab);
+
+						gedit_document_goto_line (doc, line_pos);
+						gedit_view_scroll_to_cursor (view);
+					}
 				}
-				
+
 				++loaded_files;
 			}
 			else
@@ -165,7 +177,7 @@ load_file_list (GeditWindow         *window,
 								uris->data);
 			}
 		}
-				
+
 		uris = g_slist_next (uris);
 	}
 
@@ -173,7 +185,7 @@ load_file_list (GeditWindow         *window,
 
 	if (uris_to_load == NULL)
 		return loaded_files;
-		
+	
 	uris_to_load = g_slist_reverse (uris_to_load);
 	l = uris_to_load;
 
