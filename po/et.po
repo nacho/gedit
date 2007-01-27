@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: gedit2 HEAD\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-01-13 01:30+0000\n"
-"PO-Revision-Date: 2007-01-22 22:50+0200\n"
+"PO-Revision-Date: 2007-01-27 20:08+0200\n"
 "Last-Translator: Ivar Smolin <okul@linux.ee>\n"
 "Language-Team: Estonian <gnome-et@linux.ee>\n"
 "MIME-Version: 1.0\n"
@@ -314,14 +314,13 @@ msgid "Side Pane is Visible"
 msgstr "Külgpaan on nähtav"
 
 #: ../data/gedit.schemas.in.h:71
-#, fuzzy
 msgid ""
 "Sorted list of encodings used by gedit for auto-detecting the encoding of a "
 "file. \"CURRENT\" represents the current locale encoding. Only recognized "
 "encodings are used."
 msgstr ""
 "Gediti poolt faili kooditabeli tuvastamiseks kasutatavate kooditabelite "
-"sorditud loetelu. \"CURRENT\" on praegune lokaadist tulenev kooditabel. "
+"sorditud loetelu. \"CURRENT\" on praegusest lokaadist tulenev kooditabel. "
 "Kasutatakse ainult teadaolevaid kooditabeleid."
 
 #: ../data/gedit.schemas.in.h:72
@@ -560,7 +559,6 @@ msgstr ""
 "\"Teksti värv\", \"Valitud teksti värv\" ja \"Valiku värv\"."
 
 #: ../data/gedit.schemas.in.h:110
-#, fuzzy
 msgid ""
 "Whether to use the system's default fixed width font for editing text "
 "instead of a font specific to gedit. If this option is turned off, then the "
@@ -663,7 +661,6 @@ msgstr[1] ""
 "muudatused jäädavalt kaotsi."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:451
-#, fuzzy
 msgid "If you don't save, changes from the last hour will be permanently lost."
 msgstr ""
 "Kui sa ei salvesta, siis lähevad viimase %d tunni jooksul tehtud muudatused "
@@ -685,13 +682,13 @@ msgstr[1] ""
 "muudatused jäädavalt kaotsi."
 
 #: ../gedit/dialogs/gedit-close-confirmation-dialog.c:472
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "If you don't save, changes from the last %d hour will be permanently lost."
 msgid_plural ""
 "If you don't save, changes from the last %d hours will be permanently lost."
 msgstr[0] ""
-"Kui sa ei salvesta, siis lähevad viimase %d tunni jooksul tehtud muudatused "
+"Kui sa ei salvesta, siis lähevad viimase tunni jooksul tehtud muudatused "
 "jäädavalt kaotsi."
 msgstr[1] ""
 "Kui sa ei salvesta, siis lähevad viimase %d tunni jooksul tehtud muudatused "
@@ -1269,7 +1266,6 @@ msgstr[1] ""
 "kaotsi."
 
 #: ../gedit/gedit-commands-file.c:1191
-#, fuzzy
 msgid "Changes made to the document in the last hour will be permanently lost."
 msgstr ""
 "Dokumendile viimase tunni jooksul tehtud muudatused lähevad jäädavalt kaotsi."
@@ -1290,7 +1286,7 @@ msgstr[1] ""
 "jäädavalt kaotsi."
 
 #: ../gedit/gedit-commands-file.c:1212
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Changes made to the document in the last %d hour will be permanently lost."
 msgid_plural ""
@@ -1506,7 +1502,6 @@ msgstr "Faili %s pole võimalik leida."
 #: ../gedit/gedit-io-error-message-area.c:187
 #: ../gedit/gedit-io-error-message-area.c:226
 #: ../gedit/gedit-io-error-message-area.c:242
-#, fuzzy
 msgid "Please check that you typed the location correctly and try again."
 msgstr "Palun kontrolli, kas sisestasid asukoha õigesti ja proovi uuesti."
 
@@ -1590,28 +1585,25 @@ msgstr ""
 #: ../gedit/gedit-io-error-message-area.c:1270
 #: ../gedit/gedit-io-error-message-area.c:1281
 #: ../gedit/gedit-io-error-message-area.c:1289
-#, fuzzy
 msgid ""
 "Host name was invalid. Please check that you typed the location correctly "
 "and try again."
 msgstr ""
-"Hostinimi on vigane. Palun veendu, et sa sisestasid asukoha õigesti ja "
+"Hosti nimi on vigane. Palun veendu, et sa sisestasid asukoha õigesti ja "
 "proovi uuesti."
 
 #: ../gedit/gedit-io-error-message-area.c:311
 #: ../gedit/gedit-io-error-message-area.c:535
 #: ../gedit/gedit-io-error-message-area.c:1295
-#, fuzzy
 msgid ""
 "Host name was empty. Please check that your proxy settings are correct and "
 "try again."
 msgstr ""
-"Hostinimi on tühi. Palun veendu, et su proksi on õigesti seadistatud ja "
+"Hosti nimi on tühi. Palun veendu, et su proksi on õigesti seadistatud ja "
 "proovi uuesti."
 
 #: ../gedit/gedit-io-error-message-area.c:317
 #: ../gedit/gedit-io-error-message-area.c:1301
-#, fuzzy
 msgid ""
 "Attempt to log in failed. Please check that you typed the location correctly "
 "and try again."
@@ -1772,7 +1764,7 @@ msgstr ""
 
 #. Translators: %s is a URI scheme (like for example http:, ftp:, etc.)
 #: ../gedit/gedit-io-error-message-area.c:1182
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "gedit cannot handle %s locations in write mode. Please check that you typed "
 "the location correctly and try again."
@@ -1781,12 +1773,11 @@ msgstr ""
 "sisestasid asukoha õigesti ja proovi uuesti."
 
 #: ../gedit/gedit-io-error-message-area.c:1190
-#, fuzzy
 msgid ""
 "gedit cannot handle this location in write mode. Please check that you typed "
 "the location correctly and try again."
 msgstr ""
-"gedit ei suuda seda asukohta kirjutamiseks kasutada. Palun kontrolli, kas Sa "
+"gedit ei suuda seda asukohta kirjutamiseks kasutada. Palun kontrolli, kas "
 "sisestasid faili asukoha õigesti ja proovi uuesti."
 
 #: ../gedit/gedit-io-error-message-area.c:1199
@@ -1842,7 +1833,6 @@ msgstr ""
 "kettaruumi ja proovi uuesti."
 
 #: ../gedit/gedit-io-error-message-area.c:1313
-#, fuzzy
 msgid ""
 "You are trying to save the file on a read-only disk. Please check that you "
 "typed the location correctly and try again."
@@ -2347,14 +2337,12 @@ msgid "Go to a specific line"
 msgstr "Liikumine määratud reale"
 
 #: ../gedit/gedit-ui.h:129
-#, fuzzy
 msgid "Incremental search..."
-msgstr "Interaktiivne otsing..."
+msgstr ""
 
 #: ../gedit/gedit-ui.h:130
-#, fuzzy
 msgid "Incrementally search for text"
-msgstr "Teksti interaktiivne otsimine"
+msgstr ""
 
 #. Documents menu
 #: ../gedit/gedit-ui.h:133
@@ -2506,7 +2494,7 @@ msgstr "Ava"
 
 #. Translators: %s is a URI
 #: ../gedit/gedit-window.c:1549
-#, fuzzy, c-format
+#, c-format
 msgid "Activate '%s'"
 msgstr "'%s' aktiveerimine"
 
@@ -2668,9 +2656,8 @@ msgid "Current word"
 msgstr "Käesolev sõna"
 
 #: ../plugins/externaltools/tools/manager.py:48
-#, fuzzy
 msgid "Display in bottom pane"
-msgstr "Reanumbrite kuvamine"
+msgstr ""
 
 #: ../plugins/externaltools/tools/manager.py:49
 msgid "Create new document"
@@ -2961,7 +2948,6 @@ msgid "An error occurred"
 msgstr "Tekkis viga"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1112
-#, fuzzy
 msgid ""
 "Cannot move file to trash, do you\n"
 "want to delete permanently?"
@@ -2975,9 +2961,8 @@ msgid "The file \"%s\" cannot be moved to the trash."
 msgstr "Faili \"%s\" pole võimalik prügikasti tõsta."
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1119
-#, fuzzy
 msgid "The selected files cannot be moved to the trash."
-msgstr "Faili \"%s\" pole võimalik prügikasti tõsta."
+msgstr "Valitud faile pole võimalik prügikasti tõsta."
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1152
 #, c-format
@@ -2985,17 +2970,14 @@ msgid ""
 "Are you sure you want to\n"
 "permanently delete \"%s\"?"
 msgstr ""
-"Oled sa kindel, et soovid\n"
-"\"%s\" jäädavalt kustutada?"
+"Kas soovid \"%s\" jäädavalt kustutada?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1155
-#, fuzzy
 msgid ""
 "Are you sure you want to\n"
 "permanently delete the selected files?."
 msgstr ""
-"Oled sa kindel, et soovid\n"
-"\"%s\" jäädavalt kustutada?"
+"Kas soovid valitud faile jäädavalt kustutada?"
 
 #: ../plugins/filebrowser/gedit-file-browser-plugin.c:1158
 msgid "If you delete an item it is permanently lost."
@@ -3039,9 +3021,8 @@ msgid "_Move To Trash"
 msgstr "_Tõsta prügikasti"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:831
-#, fuzzy
 msgid "Move selected file or folder to trash"
-msgstr "Valitud faili või kataloogi tõstmine prügikasti"
+msgstr "Valitud faili või kataloogi prügikasti tõstmine"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:833
 msgid "_Delete"
@@ -3155,9 +3136,8 @@ msgid "Go to next location"
 msgstr "Järgmisele asukohale siirdumine"
 
 #: ../plugins/filebrowser/gedit-file-browser-widget.c:1193
-#, fuzzy
 msgid "_Match Filename"
-msgstr "_Tõstutundlik"
+msgstr ""
 
 #: ../plugins/indent/gedit-indent-plugin.c:56
 msgid "_Indent"
@@ -3288,12 +3268,10 @@ msgid ""
 msgstr ""
 
 #: ../plugins/snippets/snippets/SnippetsDialog.py:600
-#, fuzzy
 msgid "Type a new shortcut, or press Backspace to clear"
 msgstr "Sisesta uus kiirklahv. Nullimiseks vajuta Backspace"
 
 #: ../plugins/snippets/snippets/SnippetsDialog.py:602
-#, fuzzy
 msgid "Type a new shortcut"
 msgstr "Sisesta uus kiirklahv"
 
