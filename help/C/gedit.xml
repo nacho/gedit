@@ -54,7 +54,12 @@
 		  <affiliation>
 			 <orgname>GNOME</orgname>
 		  </affiliation>
-		</author>	 
+		</author>
+		<author>
+			<firstname>Hal</firstname> 
+			<surname>Canary</surname>
+			<contrib>Added the Shortcut Keys Table</contrib>
+		</author>		
 		<author>
 		  <firstname>Sun Java Desktop System Documentation Team</firstname>
 		  <surname></surname>
@@ -833,6 +838,302 @@
 		<para>Alternatively, you can use the <application>External tools</application> plugin to pipe command output to the current file. <!-- fixme: xref needed! --></para>
 	 </sect2>
   </sect1>
+
+<!-- ================ Shortcut Keys ============================= -->
+<sect1 id="gedit-shortcutkeys"> 
+  <title>Shortcut Keys</title>
+  <para>Use shortcut keys to perform common tasks more quickly than with the mouse and menus. The following tables list all of <application>&app;</application>'s shortcut keys.</para>
+  <para>For more on shortcut keys, see the <ulink type="help" url="ghelp:user-guide?keyboard-skills">Desktop User Guide</ulink>.</para>
+
+  <!-- ============= Tabs ======================== -->
+	<bridgehead>Tabs</bridgehead>
+	<para>Shortcuts for tabs:</para>
+  <informaltable frame="all">
+    <tgroup cols="2" colsep="1" rowsep="1">
+      <colspec colname="COLSPEC0" colwidth="50*"/>
+      <colspec colname="COLSPEC1" colwidth="50*"/>
+      <thead>
+        <row valign="top">
+          <entry colname="COLSPEC0">
+            <para>Shortcut Key</para></entry>
+          <entry colname="COLSPEC1" align="left"> 
+            <para>Command</para></entry>
+        </row>
+      </thead>
+      <tbody>
+        <row valign="top">               
+          <entry><para>Ctrl + Alt + PageDown</para></entry>
+          <entry><para>Switches to the next tab to the left.</para></entry>
+        </row>
+        <row valign="top">               
+          <entry><para>Ctrl + Alt + PageDown</para></entry>
+          <entry><para>Switches to the next tab to the right.</para></entry>
+        </row>
+        <row valign="top">               
+          <entry><para>Ctrl + W</para></entry>
+          <entry><para>Close tab.</para></entry>
+        </row>
+        <row valign="top">               
+          <entry><para>Ctrl + Shift + L</para></entry>
+          <entry><para>Save all tabs.</para></entry>
+        </row>
+        <row valign="top">               
+          <entry><para>Ctrl + Shift + W</para></entry>
+          <entry><para>Close all tabs. </para></entry>
+        </row>
+        <row valign="top">               
+          <entry><para>Alt + n</para></entry>
+          <entry><para>Jump to nth tab.</para></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+
+  <!-- ============= Files ======================== -->
+	<bridgehead>Files</bridgehead>
+	<para>Shortcuts for working with files:</para>
+  <informaltable frame="all">
+                  <tgroup cols="2" colsep="1" rowsep="1">
+                    <colspec colname="COLSPEC0" colwidth="50*"/>
+                    <colspec colname="COLSPEC1" colwidth="50*"/>
+                    <thead>
+                      <row valign="top">
+                        <entry colname="COLSPEC0">
+                          <para>Shortcut Key</para></entry>
+                        <entry colname="COLSPEC1" align="left"> 
+                          <para>Command</para></entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row valign="top">               
+                        <entry><para>Ctrl + N</para></entry>
+                        <entry><para>Create a new document.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + O</para></entry>
+                        <entry><para>Open a document.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + L</para></entry>
+                        <entry><para>Open a location.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + S</para></entry>
+                        <entry><para>Save the current document to disk.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Shift + S</para></entry>
+                        <entry><para>Save the current document with a new filename.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + P</para></entry>
+                        <entry><para>Print the current document.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Shift + P</para></entry>
+                        <entry><para>Print preview.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + W</para></entry>
+                        <entry><para>Close the current document.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Q</para></entry>
+                        <entry><para>Quit Gedit.</para></entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </informaltable>
+
+  <!-- ============= Edit ======================= -->
+	<bridgehead>Edit</bridgehead>
+	<para>Shortcuts for editing documents:</para>	
+	  <informaltable frame="all">
+                  <tgroup cols="2" colsep="1" rowsep="1">
+                    <colspec colname="COLSPEC0" colwidth="50*"/>
+                    <colspec colname="COLSPEC1" colwidth="50*"/>
+                    <thead>
+                      <row valign="top">
+                        <entry colname="COLSPEC0">
+                          <para>Shortcut Key</para></entry>
+                        <entry colname="COLSPEC1" align="left"> 
+                          <para>Command</para></entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Z</para></entry>
+                        <entry><para>Undo the last action.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Shift + Z</para></entry>
+                        <entry><para>Redo the last undone action .</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + X</para></entry>
+                        <entry><para>Cut the selected text or region and place it on the clipboard.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + C</para></entry>
+                        <entry><para>Copy the selected text or region onto the clipboard.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + V</para></entry>
+                        <entry><para>Paste the contents of the clipboard.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + A</para></entry>
+                        <entry><para>Select all.</para></entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </informaltable>
+
+  <!-- ============= Panes ======================= -->
+	<bridgehead>Panes</bridgehead>
+	<para>Shortcuts for showing and hiding panes:</para>	
+	  <informaltable frame="all">
+                  <tgroup cols="2" colsep="1" rowsep="1">
+                    <colspec colname="COLSPEC0" colwidth="50*"/>
+                    <colspec colname="COLSPEC1" colwidth="50*"/>
+                    <thead>
+                      <row valign="top">
+                        <entry colname="COLSPEC0">
+                          <para>Shortcut Key</para></entry>
+                        <entry colname="COLSPEC1" align="left"> 
+                          <para>Command</para></entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row valign="top">               
+                        <entry><para>F9</para></entry>
+                        <entry><para>Show/hide the side pane.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + F9</para></entry>
+                        <entry><para>Show/hide the bottom pane.</para></entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </informaltable>
+
+  <!-- ============= Search ======================= -->
+	<bridgehead>Search</bridgehead>
+	<para>Shortcuts for searching:</para>	
+	  <informaltable frame="all">
+                  <tgroup cols="2" colsep="1" rowsep="1">
+                    <colspec colname="COLSPEC0" colwidth="50*"/>
+                    <colspec colname="COLSPEC1" colwidth="50*"/>
+                    <thead>
+                      <row valign="top">
+                        <entry colname="COLSPEC0">
+                          <para>Shortcut Key</para></entry>
+                        <entry colname="COLSPEC1" align="left"> 
+                          <para>Command</para></entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row valign="top">               
+                        <entry><para>Ctrl + F</para></entry>
+                        <entry><para>Find a string.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + G</para></entry>
+                        <entry><para>Find the next instance of the string.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Shift + G</para></entry>
+                        <entry><para>Find the previous instance of the string.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + K</para></entry>
+                        <entry><para>Interactive search.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + H</para></entry>
+                        <entry><para>Search and replace.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Shift + K</para></entry>
+                        <entry><para>Clear highlight.</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + I</para></entry>
+                        <entry><para>Goto line.</para></entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </informaltable>
+  <!-- ============= Tools ======================= -->
+	<bridgehead>Tools</bridgehead>
+	<para>Shortcuts for tools:</para>	
+	  <informaltable frame="all">
+                  <tgroup cols="2" colsep="1" rowsep="1">
+                    <colspec colname="COLSPEC0" colwidth="50*"/>
+                    <colspec colname="COLSPEC1" colwidth="50*"/>
+                    <thead>
+                      <row valign="top">
+                        <entry colname="COLSPEC0">
+                          <para>Shortcut Key</para></entry>
+                        <entry colname="COLSPEC1" align="left"> 
+                          <para>Command</para></entry>
+                      </row>
+                    </thead>
+                    <tbody>
+                      <row valign="top">               
+                        <entry><para>F7</para></entry>
+                        <entry><para>Check spelling (with plugin).</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Alt + F12</para></entry>
+                        <entry><para>Remove trailing spaces (with plugin).</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + T</para></entry>
+                        <entry><para>Indent (with plugin).</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Shift + T</para></entry>
+                        <entry><para>Remove Indent (with plugin).</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>F8</para></entry>
+                        <entry><para>Run "make" in current directory (with plugin).</para></entry>
+                      </row>
+                      <row valign="top">               
+                        <entry><para>Ctrl + Shift + D</para></entry>
+                        <entry><para>Directory listing (with plugin).</para></entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </informaltable>
+  <!-- ============= Help ======================= -->
+	<bridgehead>Help</bridgehead>
+	<para>Shortcuts for help:</para>
+  <informaltable frame="all">
+    <tgroup cols="2" colsep="1" rowsep="1">
+      <colspec colname="COLSPEC0" colwidth="50*"/>
+      <colspec colname="COLSPEC1" colwidth="50*"/>
+      <thead>
+        <row valign="top">
+          <entry colname="COLSPEC0">
+            <para>Shortcut Key</para></entry>
+          <entry colname="COLSPEC1" align="left"> 
+            <para>Command</para></entry>
+        </row>
+      </thead>
+      <tbody>
+        <row valign="top">               
+          <entry><para>F1</para></entry>
+          <entry><para>Open <application>&app;</application>'s user manual.</para></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+
+</sect1>
+
+
 
 <!-- ============= Preferences ============================= -->
   <sect1 id="gedit-prefs">
