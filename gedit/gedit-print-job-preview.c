@@ -848,8 +848,8 @@ create_toplevel (GeditPrintJobPreview *mp)
 	i = gtk_separator_tool_item_new ();
 	gtk_widget_show (GTK_WIDGET (i));
 	gtk_toolbar_insert (GTK_TOOLBAR (tb), i, -1);
-		
-	i = gtk_tool_button_new (NULL, "_Close Preview");
+
+	i = gtk_tool_button_new (NULL, _("_Close Preview"));
 	gtk_tool_button_set_use_underline (GTK_TOOL_BUTTON (i), TRUE);
 	gtk_tool_item_set_is_important (i, TRUE);
 	gtk_tool_item_set_tooltip (i, GTK_TOOLBAR (tb)->tooltips, 
