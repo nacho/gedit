@@ -616,6 +616,7 @@ load_local_file_real (GeditDocumentLoader *loader)
 				   strerror (errno));
 	}
 
+ done:
 	ret = close (loader->priv->fd);
 
 	if (ret != 0)
@@ -625,7 +626,6 @@ load_local_file_real (GeditDocumentLoader *loader)
 
 	loader->priv->fd = -1;
 
- done:
 	load_completed_or_failed (loader);
 	
 	return FALSE;
