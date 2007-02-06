@@ -186,7 +186,7 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 		if (local)
 			name = tmp;
 		else {
-			name = g_strconcat(tmp, " ", _("at"), " ", gnome_vfs_uri_get_host_name (uri), NULL);
+			name = g_strconcat(tmp, " ", _("on"), " ", gnome_vfs_uri_get_host_name (uri), NULL);
 			g_free (tmp);
 		}
 		
