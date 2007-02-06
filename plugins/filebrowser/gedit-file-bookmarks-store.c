@@ -21,7 +21,10 @@
 
 #include <libgnomevfs/gnome-vfs.h>
 #include <libgnomeui/libgnomeui.h>
+#include <gedit/gedit-utils.h>
 #include <gedit/gedit-plugin.h>
+#include <glib/gi18n.h>
+
 #include "gedit-file-bookmarks-store.h"
 #include "gedit-file-browser-utils.h"
 
@@ -145,11 +148,16 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 	GdkPixbuf *pixbuf = NULL;
 	gchar *mime;
 	gchar *path;
+	gchar *tmp;
 	gboolean free_name = FALSE;
-
-	/* CHECK: how bad is this? */
-	if (!gnome_vfs_uri_exists (uri)) {
+	gboolean local;
+	
+	path = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
+	local = gedit_utils_uri_has_file_scheme (path);
+	
+	if (local && !gnome_vfs_uri_exists (uri)) {
 		gnome_vfs_uri_unref (uri);
+		g_free (path);
 		return FALSE;
 	}
 
@@ -159,18 +167,29 @@ add_uri (GeditFileBookmarksStore * model, GnomeVFSURI * uri,
 		pixbuf = pixbuf_from_stock ("gnome-fs-desktop");
 
 	if (pixbuf == NULL) {
-		path = gnome_vfs_uri_to_string (uri, GNOME_VFS_URI_HIDE_NONE);
-		mime = gnome_vfs_get_mime_type (path);
+		if (local)
+			mime = gnome_vfs_get_mime_type (path);
+		else
+			mime = g_strdup ("x-directory/normal");
 
 		pixbuf = gedit_file_browser_utils_pixbuf_from_mime_type (path, 
 		                                                         mime, 
 		                                                         GTK_ICON_SIZE_MENU);
-		g_free (path);
 		g_free (mime);
 	}
 
+	g_free (path);
+	
 	if (name == NULL) {
-		name = gedit_file_browser_utils_uri_basename (gnome_vfs_uri_get_path (uri));
+		tmp = gedit_file_browser_utils_uri_basename (gnome_vfs_uri_get_path (uri));
+		
+		if (local)
+			name = tmp;
+		else {
+			name = g_strconcat(tmp, " ", _("at"), " ", gnome_vfs_uri_get_host_name (uri), NULL);
+			g_free (tmp);
+		}
+		
 		free_name = TRUE;
 	}
 
