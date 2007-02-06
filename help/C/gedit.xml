@@ -320,8 +320,8 @@
 		<title>Running &app; from a Command Line</title>
 		<para>You can run <application>&app;</application> from a command line and open a single file or multiple files. To open multiple files from a command line, type the following command, then press <keycap>Return</keycap>:</para>
 		<para><command>gedit <replaceable>file1.txt file2.txt file3.txt</replaceable></command></para>
-		<para>When the application starts, the files that you specify are displayed in the <application>&app;</application> window.</para>
-                <para>For more information on how to run <application>&app;</application> from a command line, see the unix manual page for &app;, <ulink url="man:gedit" type="man"><citerefentry><refentrytitle>&app;</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.</para>
+		<para>Alternatively, you can specify a URI instead of a filename.</para>
+    <para>For more information on how to run <application>&app;</application> from a command line, see the unix manual page for &app;, <ulink url="man:gedit" type="man"><citerefentry><refentrytitle>&app;</refentrytitle><manvolnum>1</manvolnum></citerefentry></ulink>.</para>
 	 </sect2>
   </sect1>
 <!-- ================ Usage ================================ -->
@@ -378,8 +378,9 @@
 		<para>Click <guibutton>Open</guibutton>.</para>
 		</listitem>
 		</orderedlist>
-		<para>Alternatively, type <command>gedit <replaceable>URI</replaceable></command> at a command line, where <replaceable>URI</replaceable> is the URI of the file that you want to open, then press <keycap>Return</keycap>. Valid types of <replaceable>URI</replaceable> include <literal>http:</literal>, <literal>ftp:</literal>, <literal>file:</literal>, and all of the methods supported by <literal>gnome-vfs</literal>.</para>
-		<para>The application opens the file located at the URI in read-only mode.</para>
+		<para>Valid types of <replaceable>URI</replaceable> include <literal>http:</literal>, <literal>ftp:</literal>, <literal>file:</literal>, and all of the methods supported by <literal>gnome-vfs</literal>.</para>
+		<para>Files from some types of URI are opened as read-only, and any changes you make must be saved to a different location. HTTP only allows files to be read. Files opened from FTP are read-only because because not all FTP servers may correctly work with saving remote files.</para>
+		<warning><para>Saving to FTP servers can be enabled with <ulink type="help" url="ghelp:gconf-editor"><application>Configuration Editor</application></ulink>, setting the key <systemitem>/apps/gedit-2/preferences/editor/save/writable_vfs_schemes</systemitem>, but this may cause errors.</para></warning>
 	 </sect2>
 
 <!-- ============= Working with tabs ======================== -->
